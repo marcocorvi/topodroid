@@ -17,7 +17,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="desc_points">Points</string -->
     <!-- UNUSED string name="desc_lines">Lines</string -->
     <!-- UNUSED string name="desc_areas">Areas</string -->
-    <!-- TODO string name="desc_menu">Menu</string -->
+    <string name="desc_menu">Menu</string>
 
     <!-- OK string name="app_name">TopoDroid</string -->
     <string name="tdm_title">TopoDroid Manager</string>
@@ -28,12 +28,12 @@ Translation with more than 70 lint errors are dropped from the app.
 
   <string name="r_title">Avis important concernant Android R</string -->
   <string name="r_dialog">
-Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid ne l'a pas trouvé et a créé ce dossier.\nVous pouvez importer les archives zip de vos anciennes topographies.\nVeuillez noter que les fichiers du nouveau dossier TopoDroid sont supprimés lorsque vous désinstallez TopoDroid.\n\n
+Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid ne l\'a pas trouvé et a créé ce dossier.\nVous pouvez importer les archives zip de vos anciennes topographies.\nVeuillez noter que les fichiers du nouveau dossier TopoDroid sont supprimés lorsque vous désinstallez TopoDroid.\n\n
 Consultez les pages du site Web pour plus de détails.\n
   </string -->
   <string name="r_checkboxes">Vous devez confirmer les cases cochées.</string -->
-  <string name="r_i_understood">J'ai bien compris cet avis.</string -->
-  <!-- UNUSED string name="r_disclaimer">J'accepte que le ou les auteurs de l'application ne soient pas responsables de tout dommage ou perte de données.</string -->
+  <string name="r_i_understood">J\'ai bien compris cet avis.</string -->
+  <!-- UNUSED string name="r_disclaimer">J\'accepte que le ou les auteurs de l\'application ne soient pas responsables de tout dommage ou perte de données.</string -->
   <string name="r_continue">CONTINUER</string -->
 
     <!-- OK string name="app_name" translatable="false">TopoDroid</string -->
@@ -214,7 +214,7 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="import_title">Import fichier</string>
     <string name="export_data_title">Exportation de données</string -->
     <string name="export_plot_title">Exportation de croquis</string -->
-    <string name="export_overview_title">Aperçu de l'exportation</string -->
+    <string name="export_overview_title">Aperçu de l\'exportation</string -->
     <string name="export_model_title">Exportation de modèle 3D</string -->
     <string name="export_tdconfig_title">Exportation de projet</string -->
 
@@ -325,7 +325,7 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="splays_on_off">Visées d\'habillage ON OFF</string>
 <string name="splays">Visées d\'habillage</string>
     <string name="legs">Visées de cheminement</string>
-    <!-- TODO string name="stations">Station</string -->
+    <string name="stations">Station</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitude %1$s</string>
@@ -354,7 +354,7 @@ Consultez les pages du site Web pour plus de détails.\n
 <string name="no_device_address">Adresse de périphérique non sélectionnée</string>
 <string name="no_device_found">Pas de périphérique trouvé</string>
 <string name="no_feature_audio">Audio non supporté</string>
-    <!-- TODO string name="no_feature_pdf">PDF not supported</string -->
+    <string name="no_feature_pdf">PDF non supporté</string>
 <string name="no_gms">L\'étalonnage ne contient pas de données.\nUtiliser le bouton Télécharger</string>
 <string name="no_geo_station">Échec : pas de station géolocalisée</string>
     <string name="no_leg_first">La sélection ne commence pas par une visée de cheminement</string>
@@ -368,11 +368,11 @@ Consultez les pages du site Web pour plus de détails.\n
 <string name="no_sensors">Le relevé ne contient aucune mesure</string>
 <!-- UNUSED string name="no_shots">Le relevé ne contient aucune visées.\n Utilisez le menu Télécharger pour en obtenir.</string -->
 <string name="no_survey">Aucun relevé sélectionné.</string>
-    <!-- TODO string name="no_symbols">No symbol palette.</string -->
+<string name="no_symbols">Pas de palette symboles.</string>
 <!-- UNUSED string name="no_thmanager">ThManager non installé</string -->
 <!-- UNUSED string name="no_db_viewer">DB_viewer app pas trouvée</string -->
 <string name="no_undelete">Aucun élément à récupérer</string>
-    <!-- TODO string name="no_undelete_paste">No item to recover/paste</string -->
+    <string name="no_undelete_paste">Aucun éléments à récupérer/coller</string>
 <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Azimut %5$.1f"</string>
 <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Pente %5$.1f"</string>
     <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
@@ -398,7 +398,7 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="menu_export">EXPORTER</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">RECUPÉRER</string>
-    <!-- TODO string name="menu_recover_paste">RECOVER/PASTE</string -->
+    <string name="menu_recover_paste">RECUPERER/COLLER</string>
     <string name="menu_reload">RECHARGER</string>
     <string name="menu_rename_delete">RENOMMER/SUPPR.</string>
     <string name="menu_rename">RENOMMER</string>
@@ -454,11 +454,11 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="popup_curve_pt">Lisser le segment</string>
     <string name="popup_remove_pt">Supprimer le point</string>
     <string name="popup_append_line">Ajouter à la ligne</string>
-    <!-- TODO string name="popup_multiselect">Multiselection</string -->
-    <!-- TODO string name="popup_finish">Finish</string -->
-    <!-- TODO string name="popup_delete">Delete</string -->
+    <string name="popup_multiselect">Multiselection</string>
+    <string name="popup_finish">Terminer</string>
+    <string name="popup_delete">Supprimer</string>
     <!-- TODO string name="popup_decimate">Decimate</string -->
-    <!-- TODO string name="popup_join">Join</string -->
+    <string name="popup_join">Joindre</string>
 
     <string name="popup_erase_all">Tout suppr.</string>
     <string name="popup_erase_point">Suppr. points</string>
@@ -504,7 +504,7 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="item_delete">Supprimer l\'objet %1$s ?</string>
     <string name="splay_delete">Supprimer le cheminement %1$s ?</string>
     <string name="plot_duplicate_name">Dupliquer le nom du relevé</string>
-    <!-- TODO string name="plot_dangling">Dangling croquis</string -->
+    <string name="plot_dangling">Coupe projetée</string>
     <!-- UNUSED string name="plot_name">Nom du croquis</string -->
     <string name="plot_new">Nouveau croquis</string>
     <string name="plot_not_found">Dessin introuvable</string>
@@ -531,8 +531,8 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="section_name">Commentaires section</string>
     <string name="scrap_outline">Contour Esquisse</string>
     <string name="scrap_string">Scrap du croquis %1$d / %2$d</string>
-    <!-- TODO string name="section_point_not_allowed">section point not allowed</string -->
-    <!-- TODO string name="section_line_not_allowed">section line not allowed</string -->
+    <string name="section_point_not_allowed">point de section non autorisé</string>
+    <string name="section_line_not_allowed">ligne de section non autorisée</string -->
 
     <!-- UNUSED string name="sensor">capteur</string -->
     <string name="sensor_gravity">gravité</string>
@@ -547,8 +547,8 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="sensor_value">valeur</string>
     <string name="sensor_comment">commentaire</string>
     <!-- UNUSED string name="insufficient_data">Données capteur insuffisantes</string -->
-    <!-- TODO string name="sensor_no_readings">No sensor readings</string -->
-    <!-- TODO string name="sensor_failure">Sensor failure: %1$d</string -->
+    <string name="sensor_no_readings">Aucune données du capteur</string>
+    <string name="sensor_failure">Erreur du capteur : %1$d</string>
 
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">compass</string -->
@@ -560,7 +560,7 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="shot_check">Marquer la visée comme visée de contrôle ?</string>
     <string name="shot_from">DEPUIS ou DE</string>
     <string name="shot_info">Saisir les infos de visée</string>
-    <!-- TODO string name="shot_name">Shot %1$s</string -->
+    <string name="shot_name">Visée %1$s</string -->
     <!-- UNUSED string name="shot_length">longueur</string -->
     <string name="shot_note">Note</string>
     <string name="shot_reverse">Inverse</string>
@@ -588,8 +588,8 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="toporobot_warning">La stratégie TopoRobot est dispo. en mode expérimental !</string>
     <string name="anomaly_warning">La compensation des anomalies magnétiques est dispo. en mode expert !</string>
     <string name="tripod_warning">La stratégie Tripod est dispo. en mode avancé !</string>
-    <!-- TODO string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string -->
-    <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
+    <string name="coverage_warning">Angle de couverture en en dessous de %1$d %%\nEcrire les coefficients ?</string>
+    <string name="delta_warning">Erreur moyenne supérieure à %1$.1f\nEcrire les coefficients ?</string>
     <!-- UNUSED string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
 
     <string name="cover_data">Répartition des données brutes Raw : %1$.2f %%</string>
@@ -598,9 +598,9 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="cover_m">M répartition: %1$.2f %%</string>
     <string name="cover_r">Roulis répartition: %1$.2f %%</string>
 
-    <!-- TODO string name="accuracy_low">Low accuracy. Calibration needed</string -->
-    <!-- TODO string name="accuracy_medium">Low accuracy</string -->
-    <!-- TODO string name="accuracy_unreliable">Unreliable sensors</string -->
+    <string name="accuracy_low">Faible précision. Etalonnage nécessaire.</string>
+    <string name="accuracy_medium">Précision faible</string>
+    <string name="accuracy_unreliable">Capteur douteux</string>
 
     <string name="cannot_rename">Impossible de renommer le relevé</string>
     <string name="declination">Déclinaison magnétique</string>
@@ -614,7 +614,7 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="toggle_failed">Échec du changement de mode du DistoX</string>
     <string name="toggle_ok">DistoX en mode étalonnage</string>
     <string name="undelete_text">Sélectionner un élément pour le récupérer</string>
-    <!-- TODO string name="undelete_paste_text">Recover/paste items</string -->
+    <string name="undelete_paste_text">Récupérer/copier éléments</string>
     <string name="undelete_shot">Visées</string>
     <string name="undelete_overshoot">Dépassements</string>
     <string name="undelete_check">Contrôles</string>
@@ -672,9 +672,9 @@ Consultez les pages du site Web pour plus de détails.\n
     <!-- UNUSED string name="plan">PLAN</string -->
     <string name="extended">DEVELOPPEE</string>
     <string name="profile">COUPE</string>
-    <!-- TODO string name="fmt_plan">%1$s: PLAN</string -->
-    <!-- TODO string name="fmt_extended">%1$s: PROFILE</string -->
-    <!-- TODO string name="fmt_profile">%1$s: PROJECTED</string -->
+    <string name="fmt_plan">%1$s: PLAN</string>
+    <string name="fmt_extended">%1$s: PROFIL</string>
+    <string name="fmt_profile">%1$s: PROJECTEE</string>
 
     <string name="extended_profile">COUPE Développée</string>
     <!-- UNUSED string name="x_section">SECTION Transverse</string -->
@@ -704,9 +704,9 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="button_close"     >Fermer     </string>
     <!-- UNUSED string name="button_create"    >Créer    </string -->
     <string name="button_color"     >Couleur  </string>
-    <!-- TODO string name="button_compute"   >Compute</string -->
+    <string name="button_compute"   >Calculer</string>
     <string name="button_convert"   >Convertir   </string>
-    <!-- TODO string name="button_copy"      >Copy</string -->
+    <string name="button_copy"      >Copier</string>
     <string name="button_current"   >Courant   </string>
     <string name="button_delete"    >Supprimer    </string>
     <string name="button_duplicate" >Dupliquer </string>
@@ -776,8 +776,8 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="button_write"     >Uploader</string>
     <string name="button_xsection"  >X-Section</string>
     <string name="xsection">Section Transverse</string>
-    <!-- TODO string name="buffer_size">Buffer: %1$d data</string -->
-    <!-- TODO string name="buffer_unsorted">unsorted</string -->
+    <string name="buffer_size">Mémoire tampon: %1$d données</string>
+    <string name="buffer_unsorted">non-trié</string>
 
     <string name="mode_leg">Cheminements</string>
     <string name="mode_splay">Visées latérales d\'habillage</string>
@@ -802,7 +802,7 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="remote_off">Laser INACTIF</string>
     <!-- UNUSED string name="remote_measure">Mesure</string -->
     <string name="remote_reset">Reset Bluetooth</string>
-    <!-- UNUSED string name="download">Telecharger</string -->
+    <!-- UNUSED string name="download">Télécharger</string -->
 
     <string name="popup_do_splay">Visée latérale</string>
     <string name="popup_do_leg">Cheminement auto</string>
@@ -811,7 +811,7 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="popup_do_scan">Scan</string>
     <string name="popup_do_shot">Visée</string>
     <string name="popup_do_clear">Effacer</string>
-    <!-- TODO string name="popup_do_off">Off</string -->
+    <string name="popup_do_off">Eteindre (le laser ?????)</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_export">Export</string>
@@ -829,36 +829,36 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="symbol_speleo">Spéléo</string>
     <string name="symbol_extra">Spéléo (2)</string>
     <string name="symbol_reload">Outils de dessin</string>
-    <!-- TODO string name="warning_no_palette">Warning: palette not yet loaded</string -->
+    <string name="warning_no_palette">Attention : la palette n\'est pas chargée</string>
 
 
     <!-- UNUSED string name="length">Longueur [m]</string -->
     <!-- UNUSED string name="azimuth">Azimut [deg]</string -->
     <!-- OK string name="clino">Clino [deg]</string -->
 
-    <!-- TODO string name="hint_notes">notes</string -->
-    <!-- TODO string name="hint_label">label</string -->
-    <!-- TODO string name="hint_comment">comment</string -->
-    <!-- TODO string name="hint_text">text</string -->
-    <!-- TODO string name="hint_options">options</string -->
-    <!-- TODO string name="hint_name">name</string -->
-    <!-- TODO string name="hint_from">from</string -->
-    <!-- TODO string name="hint_to">to</string -->
-    <!-- TODO string name="hint_azimuth">azimuth</string -->
-    <!-- TODO string name="hint_clino">clino</string -->
-    <!-- TODO string name="hint_roll">roll</string -->
-    <!-- TODO string name="hint_year">year</string -->
-    <!-- TODO string name="hint_month">month</string -->
-    <!-- TODO string name="hint_day">day</string -->
-    <!-- TODO string name="hint_hour">hour</string -->
-    <!-- TODO string name="hint_minute">minute</string -->
-    <!-- TODO string name="hint_second">second</string -->
+    <string name="hint_notes">notes</string>
+    <string name="hint_label">étiquette</string>
+    <string name="hint_comment">commentaire</string>
+    <string name="hint_text">texte</string>
+    <string name="hint_options">options</string>
+    <string name="hint_name">nom</string>
+    <string name="hint_from">de</string>
+    <string name="hint_to">vers</string>
+    <string name="hint_azimuth">azimut</string>
+    <string name="hint_clino">inclinaison</string>
+    <string name="hint_roll">roulis</string>
+    <string name="hint_year">année</string>
+    <string name="hint_month">mois</string>
+    <string name="hint_day">jour</string>
+    <string name="hint_hour">heure</string>
+    <string name="hint_minute">minute</string>
+    <string name="hint_second">seconde</string>
     <!-- UNUSED string name="hint_latitude">latitude</string -->
     <!-- UNUSED string name="hint_longitude">longitude</string -->
     <!-- UNUSED string name="hint_altitude">altitude</string -->
     <!-- UNUSED string name="hint_altitude_asl">altitude (asl)</string -->
     <!-- UNUSED string name="hint_declination">declination</string -->
-    <!-- TODO string name="hint_station">station</string -->
+    <string name="hint_station">station</string>
 
     <!-- OK string name="orientation">orientation</string -->
     <string name="contents">Contenus</string>
@@ -885,7 +885,7 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="man_xsection">11. Sections transverses</string>
     <string name="man_overview">12. Fenêtre d\'aperçu</string>
     <string name="man_export">13. Import/export</string>
-    <!-- TODO string name="man_project">14. Cave projects</string -->
+    <string name="man_project">14. Projets de cavité</string>
     <string name="man_threed">15. 3D viewer</string>
     <string name="man_index">16. Index</string>
     <string name="man_website">* Site Web</string>
@@ -900,7 +900,7 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="help_backups">Supprimer des sauvegardes d\'esquisse</string>
     <string name="help_calib_check">Visées de contrôle d\'étalonnage</string>
     <string name="help_close">Fermer fenêtre</string>
-    <!-- TODO string name="help_close_app">Close app</string -->
+    <string name="help_close_app">Fermer l\'app</string>
     <string name="help_coeff">Montrer les coefficients d\'étalonnage</string>
     <string name="help_color">Efface la couleur des visées</string>
     <string name="help_continue">Continuer une ligne</string>
@@ -1009,31 +1009,31 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="help_equates">Lister les égalités entre les topographies</string>
 
     <string name="export_bgcolor">Couleur d\'arrière-plan</string>
-    <!-- TODO string name="export_config">Config commands</string -->
+    <string name="export_config">Commandes de configuration</string>
     <string name="export_csv_rawdata">Données brutes</string>
     <string name="export_dxf_blocks">Blocs DXF</string>
     <string name="export_georeference">Géoréférence</string>
     <string name="export_grid">Grille</string>
-    <!-- TODO string name="export_linedir">Line direction</string -->
+    <string name="export_linedir">Direction lignes</string>
     <string name="export_lrud">LRUD</string>
     <string name="export_lrud_from">GDHB liées à la station DEPUIS</string>
     <string name="export_maps">Les cartes avant les données</string>
     <string name="export_prefix">Préfixe de la cavité inclus dans les noms de stations</string>
-    <!-- TODO string name="export_prefix_hint">prefix</string -->
-    <!-- TODO string name="export_suffix_hint">suffix</string -->
-    <!-- TODO string name="export_roundtrip">Roundtrip</string -->
+    <string name="export_prefix_hint">préfixe</string>
+    <string name="export_suffix_hint">suffixe</string>
+    <string name="export_roundtrip">Aller-retour</string>
     <string name="export_scale_png">Résolution</string>
     <string name="export_scale_th">Echelle 1 :</string>
     <string name="export_splays">Visées latérales d\'habillage</string>
     <!-- TODO string name="export_splays_named">Named splays</string -->
     <string name="export_stations">Stations</string>
-    <!-- TODO string name="export_surface">Surface</string -->
+    <string name="export_surface">Surface</string>
     <string name="export_swap_lr">Échanger G/D</string>
-    <!-- TODO string name="export_trox">Trox format</string -->
-    <!-- TODO string name="export_walls">Walls</string -->
+    <string name="export_trox">Format Trox</string>
+    <string name="export_walls">Murs</string>
     <string name="export_xvi">Images Xvi</string>
     <string name="export_with_xsections">Inclure les sections transverses</string>
-    <!-- TODO string name="export_with_reference">Include XY reference</string -->
+    <string name="export_with_reference">Inclure les références XY</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
     <!-- UNUSED string name="export_station_stroke">Station stroke</string -->
@@ -1053,7 +1053,7 @@ Consultez les pages du site Web pour plus de détails.\n
     <!-- UNUSED string name="playing">Ecouter %1$s</string -->
   
     <string name="import_functional">Importer uniquement les paramètres fonctionnels</string>
-    <!-- TODO string name="import_trox">Trox file format</string -->
+    <string name="import_trox">Format de fichier Trox</string>
     <string name="import_lrud">Importer LRUD</string>
     <string name="import_leg_first">Import du cheminement avant les visées d\'habillage LRUD</string>
     <string name="import_diving_datamode">Mode de données plongée</string>
@@ -1070,7 +1070,7 @@ Consultez les pages du site Web pour plus de détails.\n
     <!-- UNUSED string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Entrer les Coordonnées du point</string -->
     <string name="title_current_station">Stations sauvegardées</string>
-    <!-- TODO string name="title_search">Station/Leg search</string -->
+    <string name="title_search">Recherche Station/cheminement</string>
     <string name="title_dangling">Visée non reliée</string>
     <string name="title_device">Périphériques DistoX</string>
     <string name="title_device_select">Sélectionner le DistoX</string>
@@ -1096,7 +1096,7 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="title_packet_dialog">Paquets de données</string>
     <string name="title_photo">Photo/Mesures</string>
     <string name="title_photo_comment">Commentaire photo</string>
-    <!-- TODO string name="title_photo_list">Photos</string -->
+    <string name="title_photo_list">Photos</string>
     <string name="title_plot_save">Enregistrer le croquis sous</string>
     <!-- UNUSED string name="title_plot_merge">Fusionner Esquisse</string -->
     <!-- UNUSED string name="title_plot_reload">Recharger le croquis</string -->
@@ -1140,9 +1140,9 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="title_settings_edit">TopoDroid : paramétrage de l\'édition</string>
     <string name="title_settings_device">TopoDroid : paramétrage du périphérique</string>
     <string name="title_settings_calib">TopoDroid : paramétrage de l\'étalonnage</string>
-    <!-- TODO string name="title_settings_3d">TopoDroid 3d viewer settings</string -->
-    <!-- TODO string name="title_settings_dem">TopoDroid DEM settings</string -->
-    <!-- TODO string name="title_settings_walls3d">TopoDroid 3d model settings</string -->
+    <string name="title_settings_3d">Paramètres de la visionneuse TopoDroid 3d</string>
+    <string name="title_settings_dem">Paramètres DEM TopoDroid</string>
+    <string name="title_settings_walls3d">Paramètres des modèles TopoDroid 3d</string>
     <string name="title_settings_geek">TopoDroid : paramétrage des fanions</string>
     <!-- TODO string name="title_settings_geek_survey">Geek survey settings</string -->
     <!-- TODO string name="title_settings_geek_splay">Geek splay ettings</string -->
@@ -1168,18 +1168,18 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="title_calib_export">Exporter l\'étalonnage sous</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-    <!-- TODO string name="title_import_shot">Survey import</string -->
-    <!-- TODO string name="title_import_gps">GPS point import</string -->
+    <string name="title_import_shot">Importation relevé</string>
+    <string name="title_import_gps">Importation point GPS</string>
 
   <string name="pref_export_settings">Paramétrages d\'Export</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
-  <!-- TODO string name="pref_export_plot_title">Sketch export format</string -->
-  <!-- TODO string name="pref_export_plot_summary">Default sketch export format</string -->
-  <!-- TODO string name="pref_export_shots_title">Data export format</string -->
-  <!-- TODO string name="pref_export_shots_summary">Default data export format</string -->
-  <!-- TODO string name="pref_auto_plot_export_title">Sketch auto export format</string -->
-  <!-- TODO string name="pref_auto_plot_export_summary">Format of sketch automatic exports</string -->
+  <string name="pref_export_plot_title">Format d\'export dessin</string>
+  <string name="pref_export_plot_summary">Format par défaut d\'export dessin </string>
+  <string name="pref_export_shots_title">Format d\'export données</string>
+  <string name="pref_export_shots_summary">Format par défaut d\'export données</string>
+  <string name="pref_auto_plot_export_title">Format d\'export auto dessin</string>
+  <string name="pref_auto_plot_export_summary">Format d\'export automatique des dessins</string>
 
   <string name="pref_cat_survey">OPTIONS DU RELEVÉ</string>
   <!-- TODO string name="pref_cat_splay">SPLAY DATA</string -->
@@ -1198,7 +1198,7 @@ Consultez les pages du site Web pour plus de détails.\n
 
   <string name="pref_cat_calib">OPTIONS D\'ETALONNAGE</string>
   <string name="pref_cat_device">OPTIONS DU DISTOX</string>
-  <!-- TODO string name="pref_cat_cave3d">3D VIEWER</string -->
+  <string name="pref_cat_cave3d">3D VIEWER</string>
   <string name="pref_cat_geek">MARQUEURS</string>
   <!-- UNUSED string name="pref_cat_sketch">OPTIONS 3D</string -->
   <!-- UNUSED string name="pref_cat_log">OPTIONS JOURNALISATION</string -->
@@ -1221,8 +1221,8 @@ Consultez les pages du site Web pour plus de détails.\n
   <!-- UNUSED string name="pref_cosurvey_title">Co-relevé topographique</string -->
   <!-- UNUSED string name="pref_cosurvey_summary">Activer/désactiver co-relevé topographique</string -->
 
-  <!-- TODO string name="pref_therion_config_title">Therion config commands</string -->
-  <!-- TODO string name="pref_therion_config_summary">Create Therion config commands</string -->
+  <string name="pref_therion_config_title">Commandes de config. Therion</string>
+  <string name="pref_therion_config_summary">Créer commandes de configuration Therion</string>
   <string name="pref_therion_maps_title">Topographies Therion en premier</string>
   <string name="pref_therion_maps_summary">Export des topographies Therion avant les données</string>
   <string name="pref_extra_buttons_title">Niveau d\'utilisation</string>
@@ -1258,8 +1258,8 @@ Consultez les pages du site Web pour plus de détails.\n
   <string name="pref_vtopo_splays_summary">Exporter les visées latérales d\'habillage dans le fichier VisualTopo</string>
   <string name="pref_vtopo_lrud_title">LRUD à la station DEPUIS</string>
   <string name="pref_vtopo_lrud_summary">Visées LRUD associées à la sation DEPUIS dans VisualTopo</string>
-  <!-- TODO string name="pref_vtopo_trox_title">Trox format</string -->
-  <!-- TODO string name="pref_vtopo_trox_summary">Export VisualTopo in trox format</string -->
+  <string name="pref_vtopo_trox_title">Format Trox</string>
+  <string name="pref_vtopo_trox_summary">Exporter  VisualTopo en format Trox</string>
   <!-- UNUSED string name="pref_trobot_names_title">Noms stations TopoRobot</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Les noms de station sont de style TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Angle visée chem. LRUD</string>
@@ -1300,8 +1300,8 @@ Consultez les pages du site Web pour plus de détails.\n
   <string name="pref_svg_line_dir_summary">Ajouter des coches d\'orientation aux lignes pour l\'exportation SVG</string>
   <string name="pref_svg_stationsize_title">Taille Station</string>
   <string name="pref_svg_stationsize_summary">Taille du nom des stations</string>
-  <!-- TODO string name="pref_svg_labelsize_title">Label size</string -->
-  <!-- TODO string name="pref_svg_labelsize_summary">Label text size</string -->
+  <string name="pref_svg_labelsize_title">Taille étiquette</string>
+  <string name="pref_svg_labelsize_summary">Taille du texte pour les étiquettes</string>
   <string name="pref_kml_stations_title">Stations KML</string>
   <string name="pref_kml_stations_summary">Ajouter les stations à l\'export KML</string>
   <string name="pref_kml_splays_title">Visée latérales KML</string>
@@ -1386,10 +1386,10 @@ Consultez les pages du site Web pour plus de détails.\n
   <string name="pref_horiz_splay_message">Les visées latérales d\'habillage avec azimut supérieur à ce seuil sont en pointillés</string>
   <string name="pref_section_splay_title"><em>Seuil de l\'angle du tiret</em></string>
   <string name="pref_section_splay_message">Les visées latérales d\'habillage des sections transverses avec angle inférieur à ce seuil sont en pointillés</string>
-  <!-- TODO string name="pref_splay_dash_color_title">Splay dash color</string -->
-  <!-- TODO string name="pref_splay_dash_color_summary">Color of dashed lines</string -->
-  <!-- TODO string name="pref_splay_dot_color_title">Splay dot color</string -->
-  <!-- TODO string name="pref_splay_dot_color_summary">Color of dotted lines</string -->
+  <string name="pref_splay_dash_color_title">Couleur visées habillage tiret</string>
+  <string name="pref_splay_dash_color_summary">Couleur des lignes en tirets</string>
+  <string name="pref_splay_dot_color_title">Couleur visées habillage pointillé</string>
+  <string name="pref_splay_dot_color_summary">Couleur des lignes pointillé</string>
 
   <!-- UNUSED string name="pref_data_backup_title">Auto-export des données</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Export automatique des données (nécessite le format par défaut)</string -->
