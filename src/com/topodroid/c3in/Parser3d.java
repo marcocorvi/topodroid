@@ -118,7 +118,7 @@ public class Parser3d extends TglParser
     if ( ( flag & LINE_SPLAY ) == LINE_SPLAY ) {
       if ( mSplayUse > SPLAY_USE_SKIP ) {
         to = getStationAt( x, y, z );
-        Cave3DShot splay = new Cave3DShot( from0, null, len, ber, cln, 0, 0 );
+        Cave3DShot splay = new Cave3DShot( from0, null, len, ber, cln, 0, 0, mColor );
         splays.add( splay );
         splay.mSurvey = survey;
         splay.mSurveyNr = survey.number;
@@ -135,7 +135,7 @@ public class Parser3d extends TglParser
         survey.addStation( to );
         stations.add( to );
       }
-      Cave3DShot shot = new Cave3DShot( from0, to, len, ber, cln, fl, 0 );
+      Cave3DShot shot = new Cave3DShot( from0, to, len, ber, cln, fl, 0, mColor );
       shots.add( shot );
       shot.mSurvey = survey;
       shot.mSurveyNr = survey.number;

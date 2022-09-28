@@ -75,6 +75,7 @@ public class TglParser
   public static int mSplayUse = SPLAY_USE_NORMAL;
 
   protected static int linenr;
+  protected int mColor; // survey color (random)
 
   boolean do_render; // whether ready to render
   protected TopoGL mApp;
@@ -434,7 +435,7 @@ public class TglParser
         if ( reverse ) {
           double b = shot.ber + Math.PI;
           if ( b > 2*Math.PI ) b -= 2*Math.PI;
-          ret.add( new Cave3DShot( station, shot.from_station, shot.len, b, -shot.cln, shot.mFlag, shot.mMillis) );
+          ret.add( new Cave3DShot( station, shot.from_station, shot.len, b, -shot.cln, shot.mFlag, shot.mMillis, mColor) );
         } else {
           ret.add( shot );
         }
@@ -462,14 +463,14 @@ public class TglParser
           // TDLog.v( "add other shot " + shot.to + "-" + shot.from );
           double b = shot.ber + Math.PI;
           if ( b > 2*Math.PI ) b -= 2*Math.PI;
-          ret.add( new Cave3DShot( null, station, shot.len, b, -shot.cln, shot.mFlag, shot.mMillis) ); // stations not important
+          ret.add( new Cave3DShot( null, station, shot.len, b, -shot.cln, shot.mFlag, shot.mMillis, mColor) ); // stations not important
         }
       } else if ( shot.to_station == station ) {
         if ( shot.from_station == other ) {
           // TDLog.v( "add reversed shot " + shot.to + "-" + shot.from );
           double b = shot.ber + Math.PI;
           if ( b > 2*Math.PI ) b -= 2*Math.PI;
-          ret.add( new Cave3DShot( null, station, shot.len, b, -shot.cln, shot.mFlag, shot.mMillis) ); // stations not important
+          ret.add( new Cave3DShot( null, station, shot.len, b, -shot.cln, shot.mFlag, shot.mMillis, mColor) ); // stations not important
         } else {
           // TDLog.v( "add other shot " + shot.from + "-" + shot.to );
           ret.add( shot );
@@ -495,7 +496,7 @@ public class TglParser
           // TDLog.v( "add reversed shot " + shot.to + "-" + shot.from );
           double b = shot.ber + Math.PI;
           if ( b > 2*Math.PI ) b -= 2*Math.PI;
-          ret.add( new Cave3DShot( null, station, shot.len, b, -shot.cln, shot.mFlag, shot.mMillis) ); // stations not important
+          ret.add( new Cave3DShot( null, station, shot.len, b, -shot.cln, shot.mFlag, shot.mMillis, mColor) ); // stations not important
         } 
       }
     }
@@ -517,7 +518,7 @@ public class TglParser
         } else if ( shot.to_station == station ) {
           double b = shot.ber + Math.PI;
           if ( b > 2*Math.PI ) b -= 2*Math.PI;
-          ret.add( new Cave3DShot( station, null, shot.len, b, -shot.cln, shot.mFlag, shot.mMillis ) ); // stations not important
+          ret.add( new Cave3DShot( station, null, shot.len, b, -shot.cln, shot.mFlag, shot.mMillis, mColor ) ); // stations not important
         }
       }
     }
@@ -539,7 +540,7 @@ public class TglParser
   //        in the first case the name is the part after the last '/' and before the '.'
   public TglParser( TopoGL app, String filename )
   {
-    // TDLog.v("TglParser parsing " + filename );
+    // TDLog.v("Tgl Parser parsing " + filename );
     int pos = filename.lastIndexOf('/');
     if ( pos > 0 ) {
       mName = filename.substring(pos+1);
@@ -548,6 +549,7 @@ public class TglParser
     } else {
       mName = filename;
     }
+    mColor = TglColor.getSurveyColor();
     init( app, mName );
   }
 
@@ -557,7 +559,7 @@ public class TglParser
    */
   private void init( TopoGL app, String name )
   {
-    // TDLog.v("TglParser init " + name );
+    // TDLog.v("Tgl Parser init " + name );
     mApp      = app;
     do_render = false;
     mOrigin   = null;

@@ -64,9 +64,18 @@ public class TglColor
   //-------------------------------------------------------
   //  0xff004949, 0xff009292, 0xffff6d36, 0xffffb677, 0xff490092, 0xff006ddb,
   static final int[] surveyColor = 
-    { 0xffff6d36, 0xffffb677, 0xff490092, 0xff006ddb, 0xffb66dff,
-      0xff6db6ff, 0xffb6dbff, 0xff920000, 0xff924900, 0xffdbd100,
-      0xff24cc64, 0xffffff6d 
+    { 0xfff5af6d, // RED
+      0xffffb677,
+      0xffff6d36,
+      0xff6db6ff, // VIOLET
+      0xffb6dbff,
+      0xffb63dff,
+      0xff49ff92, // GREEN
+      0xff30ffdb, 
+      0xff49ffce,
+      0xff9224f2, // BLUE
+      0xff24cff2,
+      0xff40d1f2
     };
                                 // red         green       blue        blue        violet
   static final int[] axisColor = { 0xffff0000, 0xff00ff00, 0xff0000ff, 0xff0033ff, 0xffff00cc }; // Up, East, North, Dem-proj, plan/profile-proj

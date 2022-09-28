@@ -107,7 +107,7 @@ public class ParserLox extends TglParser
       for ( int j = i+1; j< nst; ++j ) {
         Cave3DStation st2 = stations.get(j);
         if ( Math.abs( st1.x - st2.x ) < 0.01 && Math.abs( st1.y - st2.y ) < 0.01 && Math.abs( st1.z - st2.z ) < 0.01 ) {
-          Cave3DShot shot = new Cave3DShot( st1.getFullName(), st2.getFullName(), 0, 0, 0, 0, 0 );
+          Cave3DShot shot = new Cave3DShot( st1.getFullName(), st2.getFullName(), 0, 0, 0, 0, 0, mColor );
           shot.from_station = st1;
           shot.to_station   = st2;
           shot.setUsed();
@@ -128,7 +128,7 @@ public class ParserLox extends TglParser
         if ( ber < 0 ) ber += 360;
         double dh = Math.sqrt( de*de + dn*dn );
         double cln = Math.atan2( dz, dh ) * TDMath.RAD2DEG;
-        Cave3DShot shot = new Cave3DShot( f.getFullName(), t.getFullName(), len, ber, cln, sh.Flag(), 0 );
+        Cave3DShot shot = new Cave3DShot( f.getFullName(), t.getFullName(), len, ber, cln, sh.Flag(), 0, mColor );
         // Log.v("TopoGL", "shot " + f.name + " " + t.name + " : " + len + " " + ber + " " + cln );
         shot.from_station = f;
         shot.to_station   = t;

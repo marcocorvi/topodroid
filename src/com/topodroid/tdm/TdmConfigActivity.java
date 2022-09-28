@@ -470,6 +470,7 @@ public class TdmConfigActivity extends Activity
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // EQUATES
       (new TdmEquatesDialog( this, mTdmConfig, null )).show();
     } else if ( TDLevel.overNormal && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // 3D
+      mTdmConfig.writeTdmConfig( true );
       try {
         // TDLog.v( "Cave3D of " + mTdmConfig.getFilepath() );
         // Intent intent = new Intent( "Cave3D.intent.action.Launch" );

@@ -212,18 +212,18 @@ public class ParserTrox extends TglParser
           if ( ! inVisee ) {
             if ( isSplay ) {
               if ( mSplayUse > SPLAY_USE_SKIP ) {
-                splays.add( new Cave3DShot( mFrom, mFrom + cnt_splay, mLength, mBearing, mClino, 0, millis ) );
+                splays.add( new Cave3DShot( mFrom, mFrom + cnt_splay, mLength, mBearing, mClino, 0, millis, mColor ) );
                 ++ cnt_splay;
               }
             } else {
-              shots.add( new Cave3DShot( mFrom, mTo, mLength, mBearing, mClino, 0, millis ) );
+              shots.add( new Cave3DShot( mFrom, mTo, mLength, mBearing, mClino, 0, millis, mColor ) );
               ++ cnt_shot;
               if ( mSplayUse > SPLAY_USE_SKIP ) {
                 String station = (splayAtFrom || isSplay)? mFrom : mTo;
-	        if ( mLeft  > 0 ) splays.add( new Cave3DShot( station, station+"-L", mLeft,  mBearing-90, 0, 0, millis ) );
-	        if ( mRight > 0 ) splays.add( new Cave3DShot( station, station+"-R", mRight, mBearing+90, 0, 0, millis ) );
-	        if ( mUp    > 0 ) splays.add( new Cave3DShot( station, station+"-U", mUp,    mBearing,   90, 0, millis ) );
-	        if ( mDown  > 0 ) splays.add( new Cave3DShot( station, station+"-D", mDown,  mBearing,  -90, 0, millis ) );
+	        if ( mLeft  > 0 ) splays.add( new Cave3DShot( station, station+"-L", mLeft,  mBearing-90, 0, 0, millis, mColor ) );
+	        if ( mRight > 0 ) splays.add( new Cave3DShot( station, station+"-R", mRight, mBearing+90, 0, 0, millis, mColor ) );
+	        if ( mUp    > 0 ) splays.add( new Cave3DShot( station, station+"-U", mUp,    mBearing,   90, 0, millis, mColor ) );
+	        if ( mDown  > 0 ) splays.add( new Cave3DShot( station, station+"-D", mDown,  mBearing,  -90, 0, millis, mColor ) );
               }
             }
           }
@@ -231,18 +231,18 @@ public class ParserTrox extends TglParser
           if ( inVisee ) {
             if ( isSplay ) {
               if ( mSplayUse > SPLAY_USE_SKIP ) {
-                splays.add( new Cave3DShot( mFrom, mFrom + cnt_splay, mLength, mBearing, mClino, 0, millis ) );
+                splays.add( new Cave3DShot( mFrom, mFrom + cnt_splay, mLength, mBearing, mClino, 0, millis, mColor ) );
                 ++ cnt_splay;
               }
             } else {
-              shots.add( new Cave3DShot( mFrom, mTo, mLength, mBearing, mClino, 0, millis ) );
+              shots.add( new Cave3DShot( mFrom, mTo, mLength, mBearing, mClino, 0, millis, mColor ) );
               ++ cnt_shot;
               if ( mSplayUse > SPLAY_USE_SKIP ) {
                 String station = (splayAtFrom || isSplay)? mFrom : mTo;
-	        if ( mLeft  > 0 ) splays.add( new Cave3DShot( station, station+"-L", mLeft,  mBearing-90, 0, 0, millis ) );
-	        if ( mRight > 0 ) splays.add( new Cave3DShot( station, station+"-R", mRight, mBearing+90, 0, 0, millis ) );
-	        if ( mUp    > 0 ) splays.add( new Cave3DShot( station, station+"-U", mUp,    mBearing,   90, 0, millis ) );
-	        if ( mDown  > 0 ) splays.add( new Cave3DShot( station, station+"-D", mDown,  mBearing,  -90, 0, millis ) );
+	        if ( mLeft  > 0 ) splays.add( new Cave3DShot( station, station+"-L", mLeft,  mBearing-90, 0, 0, millis, mColor ) );
+	        if ( mRight > 0 ) splays.add( new Cave3DShot( station, station+"-R", mRight, mBearing+90, 0, 0, millis, mColor ) );
+	        if ( mUp    > 0 ) splays.add( new Cave3DShot( station, station+"-U", mUp,    mBearing,   90, 0, millis, mColor ) );
+	        if ( mDown  > 0 ) splays.add( new Cave3DShot( station, station+"-D", mDown,  mBearing,  -90, 0, millis, mColor ) );
               }
             }
           }

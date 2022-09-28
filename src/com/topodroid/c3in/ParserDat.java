@@ -260,7 +260,7 @@ public class ParserDat extends TglParser
                 else if ( bearing < 0 ) bearing += 360;
 
                 bearing += declination;
-                Cave3DShot shot = new Cave3DShot( from, to, length, bearing, clino, 0, 0 );
+                Cave3DShot shot = new Cave3DShot( from, to, length, bearing, clino, 0, 0, mColor );
                 temp_shots.add( shot );
                 shots.add( shot );
                 ++ cnt_shot;
@@ -270,22 +270,22 @@ public class ParserDat extends TglParser
                   double b_left = bearing - 90; if ( b_left < 0 ) b_left += 360;
                   double b_right = bearing + 90; if ( b_right >= 360  ) b_right -= 360;
 		  if ( left > 0 ) {
-                    splay = new Cave3DShot( from, f0+"-L"+survey, left,  b_left,     0, 0, 0 );
+                    splay = new Cave3DShot( from, f0+"-L"+survey, left,  b_left,     0, 0, 0, mColor );
                     temp_splays.add( splay );
                     splays.add( splay );
                   }
 		  if ( up > 0 ) {
-                    splay = new Cave3DShot( from, f0+"-U"+survey, up,    bearing,  90, 0, 0 );
+                    splay = new Cave3DShot( from, f0+"-U"+survey, up,    bearing,  90, 0, 0, mColor );
                     temp_splays.add( splay );
                     splays.add( splay );
                   }
 		  if ( down > 0 ) {
-                    splay = new Cave3DShot( from, f0+"-D"+survey, down,  bearing, -90, 0, 0 );
+                    splay = new Cave3DShot( from, f0+"-D"+survey, down,  bearing, -90, 0, 0, mColor );
                     temp_splays.add( splay );
                     splays.add( splay );
                   }
 		  if ( right > 0 ) {
-                    splay = new Cave3DShot( from, f0+"-R"+survey, right, b_right,    0, 0, 0 );
+                    splay = new Cave3DShot( from, f0+"-R"+survey, right, b_right,    0, 0, 0, mColor );
                     temp_splays.add( splay );
                     splays.add( splay );
                   }

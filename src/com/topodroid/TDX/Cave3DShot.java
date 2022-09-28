@@ -76,7 +76,7 @@ public class Cave3DShot
     dos.writeDouble( cln );
     dos.writeLong( mFlag );
     dos.writeLong( mMillis );
-    // dos.writeInt( mColor );
+    dos.writeInt( mColor );
     // TDLog.v("ser. shot <" + from + "=" + to + "> " + len + " " + ber + " " + cln );
   }
 
@@ -90,41 +90,42 @@ public class Cave3DShot
     double cln  = dis.readDouble( );
     long flag   = dis.readLong( );
     long millis = dis.readLong( );
+    int  color  = dis.readInt( );
     // int  color  = (version > 601054)? dis.readInt( ) : 0;
     // TDLog.v("deserialized shot <" + from + "=" + to + "> " + len + " " + ber + " " + cln );
-    Cave3DShot shot = new Cave3DShot( from, to, len, ber, cln, flag, millis );
+    Cave3DShot shot = new Cave3DShot( from, to, len, ber, cln, flag, millis, color );
     shot.mSurveyId = id;
     return shot;
   }
 
 
-  /** cstr - b/c in degrees
-   * @param f    from station name
-   * @param t    to station name
-   * @param l    length
-   * @param b    azimuth
-   * @param c    clino
-   * @param flag flag
-   * @param millis timestamp
-   */
-  public Cave3DShot( String f, String t, double l, double b, double c, long flag, long millis )
-  {
-    from = f;
-    to   = t;
-    len = l;
-    ber = b * DEG2RAD;
-    cln = c * DEG2RAD;
-    used = false;
-    from_station = null;
-    to_station   = null;
-    mSurvey = null; // survey and surveyNr are updated when the shot is added to a survey
-    mSurveyNr = 0;
-    mSurveyId = -1;
-    mFlag = flag;
-    mMillis = millis;
-  }
+  // /** cstr - b/c in degrees
+  //  * @param f    from station name
+  //  * @param t    to station name
+  //  * @param l    length
+  //  * @param b    azimuth
+  //  * @param c    clino
+  //  * @param flag flag
+  //  * @param millis timestamp
+  //  */
+  // public Cave3DShot( String f, String t, double l, double b, double c, long flag, long millis )
+  // {
+  //   from = f;
+  //   to   = t;
+  //   len = l;
+  //   ber = b * DEG2RAD;
+  //   cln = c * DEG2RAD;
+  //   used = false;
+  //   from_station = null;
+  //   to_station   = null;
+  //   mSurvey = null; // survey and surveyNr are updated when the shot is added to a survey
+  //   mSurveyNr = 0;
+  //   mSurveyId = -1;
+  //   mFlag = flag;
+  //   mMillis = millis;
+  // }
 
-  /** cstr - used by tdconfig parser, b/c in degrees
+  /** cstr - b/c in degrees
    * @param f    from station name
    * @param t    to station name
    * @param l    length
@@ -160,7 +161,7 @@ public class Cave3DShot
    * @param flag flag
    * @param millis timestamp
    */
-  public Cave3DShot( Cave3DStation f, Cave3DStation t, double l, double b, double c, long flag, long millis )
+  public Cave3DShot( Cave3DStation f, Cave3DStation t, double l, double b, double c, long flag, long millis, int color )
   {
     from = (f!=null)? f.getFullName() : null;
     to   = (t!=null)? t.getFullName() : null;
@@ -175,6 +176,7 @@ public class Cave3DShot
     mSurveyId = -1;
     mFlag = flag;
     mMillis = millis;
+    mColor = color;
   }
 
   /** @return true if the station has a survey

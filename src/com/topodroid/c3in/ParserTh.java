@@ -598,7 +598,7 @@ public class ParserTh extends TglParser
                               if ( mSplayUse > SPLAY_USE_SKIP ) {
                                 from = makeName( from, path );
                                 to = null;
-                                splays.add( new Cave3DShot( from, to, len, ber, cln, flags, millis ) );
+                                splays.add( new Cave3DShot( from, to, len, ber, cln, flags, millis, mColor ) );
                               }
                             } else {
                               from = makeName( from, path );
@@ -607,7 +607,7 @@ public class ParserTh extends TglParser
                               // PrintWriter pw = new PrintWriter( sw );
                               // pw.format(Locale.US, "%s %s %.2f %.1f %.1f", from, to, len, ber, cln );
                               // TDLog.v( "Th " + sw.getBuffer().toString() );
-                              shots.add( new Cave3DShot( from, to, len, ber, cln, flags, millis ) );
+                              shots.add( new Cave3DShot( from, to, len, ber, cln, flags, millis, mColor ) );
                             }
                           }
                         }
@@ -761,7 +761,7 @@ public class ParserTh extends TglParser
                     // pw.format(Locale.US, "EQUATE %s %s 0.00 0.0 0.0", from, to );
                     // TDLog.v( "Th " + sw.getBuffer().toString() );
                     // TDLog.v( "Th Equate " + from + " " + to );
-                    shots.add( new Cave3DShot( from, to, 0.0f, 0.0f, 0.0f, 0, 0 ) );
+                    shots.add( new Cave3DShot( from, to, 0.0f, 0.0f, 0.0f, 0, 0, mColor ) );
                   }
                 }
               }

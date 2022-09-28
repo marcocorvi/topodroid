@@ -238,30 +238,30 @@ public class ParserTro extends TglParser
                 double cln = angle( Double.parseDouble(vals[idx]), uc, dmc); 
                 if ( splay ) {
                   if ( mSplayUse > SPLAY_USE_SKIP ) {
-                    splays.add( new Cave3DShot( from, from + cnt_splay, len, ber, cln, 0, millis ) );
+                    splays.add( new Cave3DShot( from, from + cnt_splay, len, ber, cln, 0, millis, mColor ) );
                     ++ cnt_splay;
                   }
                 } else {
                   String station = ( (splayAtFrom || splay )? from : to );
-                  shots.add( new Cave3DShot( from, to, len, ber, cln, 0, millis ) );
+                  shots.add( new Cave3DShot( from, to, len, ber, cln, 0, millis, mColor ) );
                   ++ cnt_shot;
 
                   if ( mSplayUse > SPLAY_USE_SKIP ) {
                     idx = nextIndex( vals, idx );
 	            len = vals[idx].equals("*")? -1 : Double.parseDouble(vals[idx]) * ul; 
-	            if ( len > 0 ) splays.add( new Cave3DShot( station, station+"-L", len, ber-90, 0, 0, millis ) );
+	            if ( len > 0 ) splays.add( new Cave3DShot( station, station+"-L", len, ber-90, 0, 0, millis, mColor ) );
                     
                     idx = nextIndex( vals, idx );
 	            len = vals[idx].equals("*")? -1 : Double.parseDouble(vals[idx]) * ul; 
-	            if ( len > 0 ) splays.add( new Cave3DShot( station, station+"-R", len, ber+90, 0, 0, millis ) );
+	            if ( len > 0 ) splays.add( new Cave3DShot( station, station+"-R", len, ber+90, 0, 0, millis, mColor ) );
 
                     idx = nextIndex( vals, idx );
 	            len = vals[idx].equals("*")? -1 : Double.parseDouble(vals[idx]) * ul; 
-	            if ( len > 0 ) splays.add( new Cave3DShot( station, station+"-U", len, ber, 90, 0, millis ) );
+	            if ( len > 0 ) splays.add( new Cave3DShot( station, station+"-U", len, ber, 90, 0, millis, mColor ) );
                     
                     idx = nextIndex( vals, idx );
 	            len = vals[idx].equals("*")? -1 : Double.parseDouble(vals[idx]) * ul; 
-	            if ( len > 0 ) splays.add( new Cave3DShot( station, station+"-D", len, ber, -90, 0, millis ) );
+	            if ( len > 0 ) splays.add( new Cave3DShot( station, station+"-D", len, ber, -90, 0, millis, mColor ) );
                   }
                 }
               } catch ( NumberFormatException e ) {
