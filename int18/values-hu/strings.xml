@@ -987,7 +987,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="help_remote">DistoX távirányítása</string>
     <string name="help_add_shot">Mérés hozzáadása az adatok beírásával</string>
     <string name="help_info_shot">Felmérési statisztikák</string>
-    <string name="help_gps_surveys">Mérés információk</string>
+    <string name="help_gps_surveys">Mérések GNSS pontjai</string>
     <string name="help_survey_info">Felmérési információk</string>
     <string name="help_undelete">Törölt elemek visszaállítása</string>
 	<!-- UPDATES string name="help_updates">Check for app version updates</string -->
@@ -1238,7 +1238,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="title_import_shot">Felmérés import</string>
     <string name="title_import_gps">GPS pont import</string>
     <string name="title_import_th2">Therion th2 fájl</string>
-    <string name="title_infos">Mérés infó</string>
+    <string name="title_infos">Mérések geo-pontjai</string>
     <string name="title_graph_paper">Grafikon papír 1:100 skála</string>
     <string name="graph_paper_scale">Igazítsd a vonalat 5cm hosszúra</string>
 
