@@ -983,7 +983,7 @@
     <string name="help_remote">DistoX遥控</string>
     <string name="help_add_shot">手动添加一个测量数据</string>
     <string name="help_info_shot">测量统计</string>
-    <!-- TODO string name="help_info_surveys">Surveys informations</string -->
+    <!-- TODO string name="help_gps_surveys">Surveys informations</string -->
     <string name="help_survey_info">测量项目信息</string>
     <string name="help_undelete">恢复删除的项目</string>
     <!-- UPDATES string name="help_updates">Check for app version updates</string -->

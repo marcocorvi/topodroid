@@ -77,7 +77,7 @@ public class Parser3d extends TglParser
     String survey_name = mLabel.toString();
     Cave3DSurvey survey = getSurvey( survey_name );
     if ( survey == null ) {
-      survey = new Cave3DSurvey( survey_name );
+      survey = new Cave3DSurvey( survey_name, 0 );
       surveys.add( survey );
     }
 
@@ -109,7 +109,7 @@ public class Parser3d extends TglParser
     String survey_name = mLabel.toString();
     Cave3DSurvey survey = getSurvey( survey_name );
     if ( survey == null ) {
-      survey = new Cave3DSurvey( survey_name );
+      survey = new Cave3DSurvey( survey_name, 0 );
       surveys.add( survey );
     }
 
@@ -154,7 +154,7 @@ public class Parser3d extends TglParser
       String survey_name  = (pos > 0)? mLabel.substring( 0, pos ) : " "; // default survey-name is " " (empty space)
       Cave3DSurvey survey = getSurvey( survey_name );
       if ( survey == null ) {
-        survey = new Cave3DSurvey( survey_name );
+        survey = new Cave3DSurvey( survey_name, 0 );
         surveys.add( survey );
       }
       String fullname = station_name + "@" + survey_name;

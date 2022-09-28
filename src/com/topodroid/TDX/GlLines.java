@@ -61,8 +61,8 @@ public class GlLines extends GlShape
   {
     Vector3D v1;
     Vector3D v2;
-    int      color; // color index 
-    int      survey; // survey index in Parser survey list
+    int      mCol;    // color value (survey) / index (axis)
+    int      survey;   // survey index in Parser survey list
     boolean  isSurvey; // survey or axis
 
     /** cstr
@@ -76,7 +76,7 @@ public class GlLines extends GlShape
     { 
        v1 = new Vector3D( w1.x, w1.z, -w1.y );
        v2 = new Vector3D( w2.x, w2.z, -w2.y );
-       color  = c;
+       mCol  = c;
        survey = s;
        isSurvey = is;
     }
@@ -93,12 +93,28 @@ public class GlLines extends GlShape
      */
     Line3D( Vector3D w1, Vector3D w2, int c, int s, boolean is, double xmed, double ymed, double zmed ) 
     { 
-       v1 = new Vector3D( w1.x-xmed, w1.z-ymed, -w1.y-zmed );
-       v2 = new Vector3D( w2.x-xmed, w2.z-ymed, -w2.y-zmed );
-       color  = c;
-       survey = s;
-       isSurvey = is;
-     }
+      v1 = new Vector3D( w1.x-xmed, w1.z-ymed, -w1.y-zmed );
+      v2 = new Vector3D( w2.x-xmed, w2.z-ymed, -w2.y-zmed );
+      mCol  = c;
+      survey = s;
+      isSurvey = is;
+    }
+
+    /** @return the color (as 4-vector) of this line
+     */
+    void getLineColor( float[] acolor )
+    {
+      // TDLog.v("Line3D is survey " + isSurvey + " (" + survey + ") color " + mCol );
+      if ( isSurvey ) { 
+        if ( mCol < 0 || mCol >= TglColor.SURVEY_COLOR_NR ) {
+          TglColor.colorToSurveyColor( mCol, acolor );
+        } else {
+          TglColor.indexToSurveyColor( mCol, acolor );
+        }
+      } else {
+        TglColor.getAxisColor( mCol, acolor );
+      }
+    }
 
     /** reduce the segment endpoints to the center
      * @param x0  center X (in OpenGL)
@@ -303,8 +319,8 @@ public class GlLines extends GlShape
   /** add a line-segment
    * @param w1         first 3D vector
    * @param w2         second 3D vector
-   * @param color      color index: [0-12) for survey, [0-5) for fixed
-   * @param survey     survey or fixed (axis) color
+   * @param color      color index: [0-5) for fixed, value for survey
+   * @param survey     index of survey in Cave3DSurvey list
    * @param is_survey  whether the line is a survey line
    */
   void addLine( Vector3D w1, Vector3D w2, int color, int survey, boolean is_survey ) 
@@ -335,7 +351,7 @@ public class GlLines extends GlShape
   /** add a line-segment
    * @param w1         first 3D vector (in survey frame)
    * @param w2         second 3D vector (in survey frame)
-   * @param color      color index: [0-12) for survey, [0-5) for fixed
+   * @param color      color index: [0-5) for fixed / value for survey
    * @param survey     index of survey in Cave3DSurvey list
    * @param is_survey  whether the line is a survey line
    * @param xmed       mean X (in OpenGL)
@@ -487,32 +503,28 @@ public class GlLines extends GlShape
 
     // mData for GLTF export
     mData  = new float[ vertexCount * STRIDE ];
-    float[] color = new float[ COORDS_PER_COLOR ];
-    TglColor.getSurveyColor( lines.get(0).color, color );
-    // TDLog.v("Lines prepare " + lineCount + " color " + color[0] + " " + color[1] + " " + color[2] + " " + color[3] );
+    float[] acolor = new float[ COORDS_PER_COLOR ];
+    // lines.get(0).getLineColor( acolor );
+    // TDLog.v("Lines prepare " + lineCount + " acolor " + acolor[0] + " " + acolor[1] + " " + acolor[2] + " " + acolor[3] );
     // TDLog.v("Lines prepare " + lineCount + " zmin " + zmin );
     int k = 0;
     for ( Line3D line : lines ) {
       Vector3D w1 = line.v1;
       Vector3D w2 = line.v2;
-      if ( line.isSurvey ) {
-        TglColor.getSurveyColor( line.color, color );
-      } else {
-        TglColor.getAxisColor( line.color, color );
-      }
+      line.getLineColor( acolor );
       mData[k++] = (float)w1.x; 
       mData[k++] = (float)w1.y;
       mData[k++] = (float)w1.z;
-      mData[k++] = color[0];
-      mData[k++] = color[1];
-      mData[k++] = color[2];
+      mData[k++] = acolor[0];
+      mData[k++] = acolor[1];
+      mData[k++] = acolor[2];
       mData[k++] = 1.0f; // alpha;
       mData[k++] = (float)w2.x;
       mData[k++] = (float)w2.y;
       mData[k++] = (float)w2.z;
-      mData[k++] = color[0];
-      mData[k++] = color[1];
-      mData[k++] = color[2];
+      mData[k++] = acolor[0];
+      mData[k++] = acolor[1];
+      mData[k++] = acolor[2];
       mData[k++] = 1.0f; // alpha;
     }
     return mData; 
@@ -565,9 +577,9 @@ public class GlLines extends GlShape
    * @param mvpMatrix   model-view-project matrix
    * @param draw_mode   drawing mode
    * @param points      whether to draw the endpoints
-   * @param color       color 4-vector
+   * @param acolor       color 4-vector
    */
-  void draw( float[] mvpMatrix, int draw_mode, boolean points, float[] color )
+  void draw( float[] mvpMatrix, int draw_mode, boolean points, float[] acolor )
   {
     if ( draw_mode == GlModel.DRAW_NONE || lineCount == 0 ) {
       // TDLog.v("Lines draw none " + lineCount );
@@ -576,20 +588,20 @@ public class GlLines extends GlShape
     if ( mColorMode == COLOR_NONE   ) {
       // TDLog.v("Lines draw [1] " + lineCount ); // <-- this is the branch that is followed for less
       GL.useProgram( mProgramUColor );
-      bindDataUColor( mvpMatrix, color );
+      bindDataUColor( mvpMatrix, acolor );
     } else if ( mColorMode == COLOR_SURVEY ) {
       GL.useProgram( mProgramAColor );
       bindDataAColor( mvpMatrix );
     } else if ( mColorMode == COLOR_DEPTH  ) {
       GL.useProgram( mProgramZColor );
-      bindDataZColor( mvpMatrix, color );
+      bindDataZColor( mvpMatrix, acolor );
     } else if ( mColorMode == COLOR_SURFACE  ) {
       if ( depthBuffer != null ) {
         GL.useProgram( mProgramSColor );
         bindDataSColor( mvpMatrix, depthBuffer );
       } else {
         GL.useProgram( mProgramUColor );
-        bindDataUColor( mvpMatrix, color );
+        bindDataUColor( mvpMatrix, acolor );
       }
     // } else if ( mColorMode == COLOR_TEMP  ) { // TEMPERATURE
     //   if ( tempBuffer != null ) {
@@ -597,7 +609,7 @@ public class GlLines extends GlShape
     //     bindDataSColor( mvpMatrix, tempBuffer );
     //   } else {
     //     GL.useProgram( mProgramUColor );
-    //     bindDataUColor( mvpMatrix, color );
+    //     bindDataUColor( mvpMatrix, acolor );
     //   }
     } else { 
       TDLog.Error("Lines unexpected color mode " + mColorMode );
@@ -663,21 +675,21 @@ public class GlLines extends GlShape
 
   /** bind station data
    * @param mvpMatrix   model-view-project matrix
-   * @param color       color 4-vector
+   * @param acolor       color 4-vector
    */
-  private void bindDataStation( float[] mvpMatrix, float[] color ) // Station is the same as UColor, just with a different color
+  private void bindDataStation( float[] mvpMatrix, float[] acolor ) // Station is the same as UColor, just with a different acolor
   {
     GL.setUniformMatrix( mstUMVPMatrix, mvpMatrix );
     GL.setUniform( mstUPointSize, mPointSize );
     GL.setAttributePointer( mstAPosition, dataBuffer, OFFSET_VERTEX, COORDS_PER_VERTEX, BYTE_STRIDE );
-    GL.setUniform( mstUColor, color[0], color[1], color[2], color[3] );
+    GL.setUniform( mstUColor, acolor[0], acolor[1], acolor[2], acolor[3] );
   }
 
   /** bind data - uniform color
    * @param mvpMatrix   model-view-project matrix
-   * @param color       color 4-vector
+   * @param acolor       color 4-vector
    */
-  private void bindDataUColor( float[] mvpMatrix, float[] color )
+  private void bindDataUColor( float[] mvpMatrix, float[] acolor )
   {
     GL.setUniformMatrix( muUMVPMatrix, mvpMatrix );
     GL.setUniform( muUPointSize, mPointSize );
@@ -690,7 +702,7 @@ public class GlLines extends GlShape
     //   GL.setAttributePointer( muAPosition, buffer, OFFSET_VERTEX, COORDS_PER_VERTEX, BYTE_STRIDE );
     //   GL.setAttributePointer( muAColor,    buffer, OFFSET_COLOR,  COORDS_PER_COLOR,  BYTE_STRIDE );
     // }
-    GL.setUniform( muUColor, color[0], color[1], color[2], color[3] );
+    GL.setUniform( muUColor, acolor[0], acolor[1], acolor[2], acolor[3] );
   }
 
   /** bind data - attribute color
@@ -707,9 +719,9 @@ public class GlLines extends GlShape
 
   /** bind data - depth color
    * @param mvpMatrix   model-view-project matrix
-   * @param color       color 4-vector
+   * @param acolor       color 4-vector
    */
-  private void bindDataZColor( float[] mvpMatrix, float[] color )
+  private void bindDataZColor( float[] mvpMatrix, float[] acolor )
   {
     GL.setUniformMatrix( mzUMVPMatrix, mvpMatrix );
     GL.setUniform( mzUPointSize, mPointSize );
@@ -717,7 +729,7 @@ public class GlLines extends GlShape
     GL.setAttributePointer( mzAColor,    dataBuffer, OFFSET_COLOR,  COORDS_PER_COLOR,  BYTE_STRIDE );
     GL.setUniform( mzUZMin,   (float)GlModel.mZMin );
     GL.setUniform( mzUZDelta, (float)GlModel.mZDelta );
-    GL.setUniform( mzUColor, color[0], color[1], color[2], color[3] );
+    GL.setUniform( mzUColor, acolor[0], acolor[1], acolor[2], acolor[3] );
   }
 
   /** bind data - ...

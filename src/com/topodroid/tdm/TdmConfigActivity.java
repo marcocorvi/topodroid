@@ -77,7 +77,7 @@ public class TdmConfigActivity extends Activity
     R.drawable.iz_add,
     R.drawable.iz_drop,
     R.drawable.iz_view,
-    R.drawable.iz_info,
+    R.drawable.iz_gps,
     R.drawable.iz_equates,
     R.drawable.iz_3d
   };
@@ -85,7 +85,7 @@ public class TdmConfigActivity extends Activity
     R.string.help_add_surveys,
     R.string.help_drop_surveys,
     R.string.help_view_surveys,
-    R.string.help_info_surveys,
+    R.string.help_gps_surveys,
     R.string.help_view_equates,
     R.string.help_3d
   };
@@ -304,8 +304,11 @@ public class TdmConfigActivity extends Activity
     for ( TdmInput input : mTdmConfig.getInputs() ) {
       if ( input.isChecked() ) {
         // DataHelper mAppData = TopoDroidApp.mData;
-        input.loadSurveyData ( TopoDroidApp.mData );
-        mySurvey.addSurvey( input );
+        if ( input.loadSurveyData ( TopoDroidApp.mData ) ) {
+          mySurvey.addSurvey( input );
+        } else {
+          TDToast.makeWarn( String.format( getResources().getString( R.string.error_survey_read ), input.getSurveyName() ) );
+        }
         // TDLog.v( "parse file " + input.getSurveyName() );
         // TdParser parser = new TdParser( mAppData, input.getSurveyName(), mySurvey );
       }

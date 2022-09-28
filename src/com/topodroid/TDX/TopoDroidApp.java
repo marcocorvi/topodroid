@@ -2887,6 +2887,7 @@ public class TopoDroidApp extends Application
   {
     if ( exportIndex < 0 ) return false; // extra safety
     if ( exportIndex == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
+      TDLog.v("APP URI export zip");
       // this is SurveyWindow.doArchive
       while ( ! TopoDroidApp.mEnableZip ) Thread.yield();
       (new ExportZipTask( context, this, uri )).execute();
@@ -2914,7 +2915,12 @@ public class TopoDroidApp extends Application
   {
     if ( exportIndex < 0 ) return false; // extra safety
     if ( exportIndex == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
-      return false;
+      // String filepath = TDPath.getOutFile( filename );
+      TDLog.v("APP file export zip " + filename );
+      while ( ! TopoDroidApp.mEnableZip ) Thread.yield();
+      (new ExportZipTask( context, this, null )).execute();
+      // return false;
+      return true;
     } else {
       SurveyInfo info = getSurveyInfo( );
       if ( info == null ) return false;

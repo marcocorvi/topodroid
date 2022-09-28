@@ -526,6 +526,7 @@ public class GlModel
         }
       // }
 	  
+      // TDLog.v("MODEL path init data");
       gl_path.initData();
       // gl_path.logMinMax();
       synchronized( this ) { glPath = gl_path; }
@@ -569,6 +570,7 @@ public class GlModel
         walls.addTriangle( v1, v2, v3 );
       }
     }
+    // TDLog.v("MODEL walls (1) init data");
     walls.initData();
     synchronized( this ) { glWalls = walls; }
     // TDLog.v("Model CW-Hull triangles " + walls.triangleCount );
@@ -589,6 +591,7 @@ public class GlModel
       // walls.addTriangle( v1, v2, v3 );
       walls.addTriangle( tr, mXmed, mYmed, mZmed );
     }
+    // TDLog.v("MODEL walls (2) init data");
     walls.initData();
     synchronized( this ) { glWalls = walls; }
     // TDLog.v("Model powercrust triangles " + walls.triangleCount );
@@ -612,6 +615,7 @@ public class GlModel
       // walls.addTriangle( v1, v2, v3 );
       walls.addTriangle( tr, mXmed, mYmed, mZmed );
     }
+    // TDLog.v("MODEL walls (3) init data");
     walls.initData();
     synchronized( this ) { glWalls = walls; }
     // TDLog.v("powercrust triangles " + walls.triangleCount );
@@ -636,6 +640,7 @@ public class GlModel
           }
         }
       }
+      // TDLog.v("MODEL plan init data");
       plan.initData();
       synchronized( this ) { glPlan = plan; }
     }
@@ -645,6 +650,7 @@ public class GlModel
       for ( PCSegment sgm : computer.getProfilearcs() ) {
         profile.addLine( sgm.getV1(), sgm.getV2(), 4, -1, false, mXmed, mYmed, mZmed );
       }
+      // TDLog.v("MODEL profile init data");
       profile.initData();
       synchronized( this ) { glProfile = profile; }
     }
@@ -668,6 +674,7 @@ public class GlModel
     mSurfaceBounds = dem.getBounds();
     // TDLog.v("Model prepare DEM");
     GlSurface surface = new GlSurface( mContext );
+    // TDLog.v("MODEL surface DEM  init data");
     surface.initData( dem, mXmed, mYmed, mZmed );
     synchronized( this ) { glSurface = surface; }
 
@@ -697,6 +704,7 @@ public class GlModel
     }
     surface_legs.computeBBox();
     // surface_legs.logMinMax();
+    // TDLog.v("MODEL surface legs init data");
     surface_legs.initData();
     synchronized( this ) { glSurfaceLegs = surface_legs; }
 
@@ -720,6 +728,7 @@ public class GlModel
     dropSketch( psketch.mName );
     GlSketch gl_sketch = new GlSketch( mContext, psketch.mName, psketch.mType, psketch.mPoints, psketch.mLines, psketch.mAreas );
     // gl_sketch.logMinMax();
+    // TDLog.v("MODEL sketch init data");
     gl_sketch.initData( mXmed, mYmed, mZmed, psketch.xoff, psketch.yoff, psketch.zoff );
     addSketch( gl_sketch );
   }
@@ -815,6 +824,7 @@ public class GlModel
     // FIXME INCREMENTAL : , 0 );
     glGrid = new GlLines( mContext, GlLines.COLOR_SURVEY, 0 );
     glGrid.setAlpha( 0.5f );
+    // TDLog.v("MODEL grid init data");
     glGrid.initData( data, count ); // , R.raw.line_acolor_vertex, R.raw.line_fragment );
   }
       
@@ -855,6 +865,7 @@ public class GlModel
     // FIXME INCREMENTAL : , 0 );
     glFrame = new GlLines( mContext, GlLines.COLOR_SURVEY, 0);
     glFrame.setAlpha( 0.9f );
+    // TDLog.v("MODEL frame init data");
     glFrame.initData( data, 3 ); // , R.raw.line_acolor_vertex, R.raw.line_fragment );
   }
 
@@ -890,21 +901,23 @@ public class GlModel
     // TDLog.v("Model create. shots " + parser.getShotNumber() + "/" + parser.getSplayNumber() + " stations " + parser.getStationNumber() );
     for ( Cave3DShot leg : parser.getShots() ) {
       if ( leg.from_station == null || leg.to_station == null ) continue; // skip fake-legs
+      int survey_nr = leg.mSurveyNr;
+      int color = mParser.getSurveyFromIndex( survey_nr ).getColor();
       if ( leg.isSurvey() ) {
         legsSurvey.add( leg );
-        legs.addLine( leg.from_station, leg.to_station, leg.mSurveyNr, leg.mSurveyNr, true ); // leg.mSurveyNr = color-index
+        legs.addLine(  leg.from_station, leg.to_station, color, survey_nr, true ); 
       } else if ( leg.isSurface() ) {
         legsSurface.add( leg );
-        legsS.addLine( leg.from_station, leg.to_station, leg.mSurveyNr, leg.mSurveyNr, true );
+        legsS.addLine( leg.from_station, leg.to_station, color, survey_nr, true );
       } else if ( leg.isDuplicate() ) {
         legsDuplicate.add( leg );
-        legsD.addLine( leg.from_station, leg.to_station, leg.mSurveyNr, leg.mSurveyNr, true );
+        legsD.addLine( leg.from_station, leg.to_station, color, survey_nr, true );
       } else if ( leg.isCommented() ) {
         legsCommented.add( leg );
-        legsC.addLine( leg.from_station, leg.to_station, leg.mSurveyNr, leg.mSurveyNr, true );
+        legsC.addLine( leg.from_station, leg.to_station, color, survey_nr, true );
       } else {
         legsSurvey.add( leg );
-        legs.addLine( leg.from_station, leg.to_station, leg.mSurveyNr, leg.mSurveyNr, true ); 
+        legs.addLine(  leg.from_station, leg.to_station, color, survey_nr, true ); 
       }
     }
     // legs.logMinMax();
@@ -923,12 +936,13 @@ public class GlModel
 
     // TDLog.v("Model center " + mXmed + " " + mYmed + " " + mZmed );
     // legs.logMinMax();
-    
     for ( Cave3DShot splay : parser.getSplays() ) {
+      int survey_nr = splay.mSurveyNr;
+      int color = mParser.getSurveyFromIndex( survey_nr ).getColor();
       if ( splay.from_station != null ) {
-        splays.addLine( splay.from_station, splay.toPoint3D(), splay.mSurveyNr, splay.mSurveyNr, true, mXmed, mYmed, mZmed );
+        splays.addLine( splay.from_station, splay.toPoint3D(), color, survey_nr, true, mXmed, mYmed, mZmed );
       } else if ( splay.to_station != null ) {
-        splays.addLine( splay.to_station, splay.toPoint3D(), splay.mSurveyNr, splay.mSurveyNr, true, mXmed, mYmed, mZmed );
+        splays.addLine( splay.to_station, splay.toPoint3D(), color, survey_nr, true, mXmed, mYmed, mZmed );
       }
     }
     splays.computeBBox();
@@ -956,6 +970,7 @@ public class GlModel
       mSurfaceBounds = surface.getBounds();
       // TDLog.v("Model parser has surface");
       GlSurface gl_surface = new GlSurface( mContext );
+      // TDLog.v("MODEL surface init data");
       valid_surface = gl_surface.initData( surface, mXmed, mYmed, mZmed, parser.surfaceFlipped() );
       if ( valid_surface ) {
         if ( parser != null && parser.mBitmap != null ) {
@@ -969,11 +984,17 @@ public class GlModel
       }
     }
 
+    // TDLog.v("MODEL leg surface init data");
     legsS.initData( );
+    // TDLog.v("MODEL leg duplicate init data");
     legsD.initData( );
+    // TDLog.v("MODEL leg commented init data");
     legsC.initData( );
+    // TDLog.v("MODEL legs init data");
     legs.initData( );
+    // TDLog.v("MODEL splays init data");
     splays.initData( );
+    // TDLog.v("MODEL names init data");
     names.initData( );
     float grid_size = (float)parser.getGridSize();
     prepareGridAndFrame( legs, grid_size, mGridExtent*grid_size );

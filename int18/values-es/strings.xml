@@ -980,7 +980,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="help_remote">Control remoto DistoX</string>
     <string name="help_add_shot">Introducir una toma manualmente</string>
     <string name="help_info_shot">Estadísticas de topografía</string>
-    <!-- TODO string name="help_info_surveys">Surveys informations</string -->
+    <!-- TODO string name="help_gps_surveys">Surveys informations</string -->
     <string name="help_survey_info">Información topografía</string>
     <string name="help_undelete">Recuperar datos eliminados</string>
     <string name="help_photo">Ajustes de Fotos</string>

@@ -980,7 +980,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="help_remote">Coltrollo DistoX remoto</string>
     <string name="help_add_shot">Aggiungi un tiro manualmente</string>
     <string name="help_info_shot">Statistiche del rilievo</string>
-    <!-- TODO string name="help_info_surveys">Surveys informations</string -->
+    <!-- TODO string name="help_gps_surveys">Surveys informations</string -->
     <string name="help_survey_info">Dati generali del rilievo</string>
     <string name="help_undelete">Recupera oggetti eliminati</string>
     <string name="help_photo">Foto</string>

@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
 
 import java.util.List;
@@ -30,6 +30,7 @@ public class Cave3DSurvey
   int mPid;   // parent Id
   String name;
   boolean visible;
+  int color;
 
   ArrayList< Cave3DShot > mShots;
   ArrayList< Cave3DShot > mSplays;
@@ -47,41 +48,61 @@ public class Cave3DSurvey
   {
     dos.writeInt( mId );
     dos.writeUTF( name );
+    dos.writeInt( color );
   }
+
+  /** @return survey color (int) value
+   */
+  int getColor() { return color; }
+
+  /** set the survey color
+   * @param col color
+   * @note used by parser tdconfig
+   */
+  public void setColor( int col ) { color = col; }
+
 
   /** serialize a 3D survey
    * @param dis   input stream
    * @param version  stream version
    * @return deserialized 3D survey
    */
-  static Cave3DSurvey deserialize( DataInputStream dis, int version ) throws IOException
+  static Cave3DSurvey deserialize( DataInputStream dis, int version )
   {
-    int id = dis.readInt();
-    String name = dis.readUTF();
-    // TDLog.v("Cave3D survey deserialized " + id + " " + name );
-    return new Cave3DSurvey( name, id, -1 );
+    int id    = 0;
+    String nm = "survey";
+    int col   = 0;
+    try {
+      id = dis.readInt();
+      nm = dis.readUTF();
+      col = dis.readInt();
+    } catch ( IOException e ) { }
+    // TDLog.v("Cave3D survey deserialized " + id + " " + nm + " color " + col );
+    return new Cave3DSurvey( nm, id, -1, col );
   }
 
   // ------------------------------------------------------ 
 
   /** cstr
-   * @param n   name
+   * @param nm   name
+   * @param col  color
    */
-  public Cave3DSurvey( String n )
+  public Cave3DSurvey( String nm, int col )
   {
     number = count; ++ count;
-    init( n, -1, -1 );
+    init( nm, -1, -1, col );
   }
 
   /** cstr
    * @param n   name
    * @param id  id
    * @param pid parent id
+   * @param col  color
    */
-  public Cave3DSurvey( String n, int id, int pid )
+  public Cave3DSurvey( String n, int id, int pid, int col )
   {
     number = count; ++ count;
-    init( n, id, pid );
+    init( n, id, pid, col );
   }
 
   /** @return true if the 3D station has a specified name
@@ -262,16 +283,20 @@ public class Cave3DSurvey
 
   // ---------------------------- INIT
   /** initialize
-   * @param n   name
+   * @param nm  name
    * @param id  id
    * @param pid parent id
+   * @param col  color
    */
-  private void init( String n, int id, int pid )
+  private void init( String nm, int id, int pid, int col )
   {
+    // TDLog.v("Cave3DSurvey init color " + (col & 0xffffff) );
     mId  = id;
     mPid = pid;
-    name = n;
+    name = nm;
     visible = true;
+    color   = col;
+    if ( color == 0 ) color = TglColor.getSurveyColor(); // random survey color
     // mNrShots  = 0;
     // mNrSplays = 0;
     mShots    = new ArrayList< Cave3DShot >();

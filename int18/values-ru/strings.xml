@@ -981,7 +981,7 @@
     <string name="help_remote">Дистанционное управление DistoX</string>
     <string name="help_add_shot">Добавить измерение вручную</string>
     <string name="help_info_shot">Статистика съёмки</string>
-    <!-- TODO string name="help_info_surveys">Surveys informations</string -->
+    <!-- TODO string name="help_gps_surveys">Surveys informations</string -->
     <string name="help_survey_info">Информация о съёмке</string>
     <string name="help_undelete">Восстановить удаленные элементы</string>
     <string name="help_photo">Фотографии в съёмке</string>
