@@ -156,7 +156,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="calib_precision">Precizitás</string>
     <string name="calib_iter">Iterációk száma: %1$d</string>
     <string name="calib_reset">Visszaállítja a DistoX kalibrációját?</string>
-    <!-- TODO string name="calib_min_error">Minimum error</string -->
+    <string name="calib_min_error">Minimális hiba</string>
     
     <string name="algorithm">Algoritmus:</string>
     <string name="auto">automatikus</string>
@@ -389,7 +389,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="no_proj4">Proj4 nincs telepítve</string>
     <string name="no_sensors">A felmérésben nincsennek mérések</string>
     <!-- UNUSED string name="no_shots">Mérésben nincs poligon.\nhasználd a letöltés gombot</string -->
-    <!-- TODO string name="no_search_result">No search_result.</string -->
+    <string name="no_search_result">Nincs a keresésnek eredménye.</string>
     <string name="no_survey">Nincs kiválasztva felmérés</string>
     <string name="no_symbols">Nincs szimbólum paletta.</string>
     <!-- UNUSED string name="no_thmanager">A Thmanager alkalmazás nincs telepítve</string -->
@@ -1663,8 +1663,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_full_affine_summary">Vázlat affin transformáció engedélyezése</string>
   <string name="pref_loopClosure_title">Hurokzárás</string>
   <string name="pref_loopClosure_summary">Hurokzárási hiba kiegyenlítése</string>
-  <!-- TODO string name="pref_loop_thr_title">Loop threshold</string -->
-  <!-- TODO string name="pref_loop_thr_summary">Loop compensation threshold</string -->
+  <string name="pref_loop_thr_title">Hurok küszöb</string>
+  <string name="pref_loop_thr_summary">Hurokkompenzációs küszöb</string>
   <!-- UNUSED string name="pref_splayExtend_title">Becsült sün hosszabbítás</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Becsült sün hosszabbítás</string -->
   <string name="pref_swapLR_title">Bal-Jobb a Compass-ban</string>
