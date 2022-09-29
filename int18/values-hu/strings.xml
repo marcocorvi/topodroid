@@ -728,7 +728,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="ask_close_app">Bezárod a TopoDroid-ot?</string>
     <!-- UNUSED string name="ask_reset">Visszaállítja a DistoX memóriáját? (Reset)</string -->
     <!-- UNUSED string name="ask_close_survey">Bezárod a felmérést?</string -->
-    <string name="ask_gps_service">Bekapcsolja a GPS-t?</string>
+    <string name="ask_gps_service">Bekapcsolja a GNSS-t?</string>
     <!-- UNUSED string name="ask_backups_clear">Törli a vázlat mentéseket?</string -->
     <string name="ask_manual_update">Felülírja a felhasználói kézikönyv fordítását?\nJelenlegi v. %1$d Installált v. %2$d</string>
 
@@ -755,7 +755,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="button_evalm"     >M</string>
     <string name="button_evalroll"  >Forgás</string>
     <string name="button_eval_cal"  >Kalibrált</string>
-    <string name="button_gps_start" >GPS</string>
+    <string name="button_gps_start" >GNSS</string>
     <!-- UNUSED string name="button_gps_stop"  >Állj      </string -->
     <!-- DONT TRANSLATE string name="button_help">Súgó</string -->
     <string name="button_manual"    >Felhasználói Kézikönyv</string>
@@ -987,7 +987,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="help_remote">DistoX távirányítása</string>
     <string name="help_add_shot">Mérés hozzáadása az adatok beírásával</string>
     <string name="help_info_shot">Felmérési statisztikák</string>
-    <string name="help_gps_surveys">Mérés információk</string>
+    <string name="help_gps_surveys">Mérések GNSS pontjai</string>
     <string name="help_survey_info">Felmérési információk</string>
     <string name="help_undelete">Törölt elemek visszaállítása</string>
 	<!-- UPDATES string name="help_updates">Check for app version updates</string -->
@@ -1040,7 +1040,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="help_save">Változtatások mentése a mérési informácókba</string -->
     <string name="help_save_calib">Változtatások mentése a kalibrációs információkhoz</string>
     <string name="help_export_survey">Felmérés exportálása</string>
-    <string name="help_loc">GPS koordináta</string>
+    <string name="help_loc">GNSS koordináta</string>
     <string name="help_delete_survey">Felmérés törlése</string>
     <string name="help_delete_calib">Kalibráció törlése</string>
     <string name="help_detach">Jelenleg használt DistoX leválasztása</string>
@@ -1152,7 +1152,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="title_fixed">Helymeghatározások</string>
     <string name="title_fixed_edit">Helymeghatározás szerkesztése</string>
     <string name="title_fixed_import">Helymeghatározás importálása</string>
-    <string name="title_fixed_gps">GPS helymeghatározás</string>
+    <string name="title_fixed_gps">GNSS helymeghatározás</string>
     <string name="title_fixed_add">Helymeghatározás beillesztése</string>
     <string name="title_manual">Topodroid Felhasználói Kézikönyv</string>
     <string name="title_mode">Megjelenítési mód</string>
@@ -1236,9 +1236,9 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
     <string name="title_import_shot">Felmérés import</string>
-    <string name="title_import_gps">GPS pont import</string>
+    <string name="title_import_gps">GNSS pont import</string>
     <string name="title_import_th2">Therion th2 fájl</string>
-    <string name="title_infos">Mérés infó</string>
+    <string name="title_infos">Mérések geo-pontjai</string>
     <string name="title_graph_paper">Grafikon papír 1:100 skála</string>
     <string name="graph_paper_scale">Igazítsd a vonalat 5cm hosszúra</string>
 
@@ -1437,8 +1437,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_firmware_sanity_summary">Firmware biztonsági ellenőrzés végrehajtva</string>
   <string name="pref_crs_title">Koordinátarendszer</string>
   <string name="pref_crs_summary">Írd be a koordinátarendszer nevét Proj.4 szerint</string>
-  <!-- UNUSED string name="pref_gps_averaging_title">GPS átlagolás</string -->
-  <!-- UNUSED string name="pref_gps_averaging_summary">GPSátlagolás használata</string -->
+  <!-- UNUSED string name="pref_gps_averaging_title">GNSS átlagolás</string -->
+  <!-- UNUSED string name="pref_gps_averaging_summary">GNSS átlagolás használata</string -->
   <string name="pref_bric_mode_title">BRIC mód</string>
   <string name="pref_bric_mode_summary">BRIC működési mód</string>
   <string name="pref_bric_zero_length_title">BRIC nulla mérés</string>
@@ -1964,7 +1964,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="style_fill">Kitöltés</string -->
     <string name="surface_projection">Felszínre vetítés</string>
     <string name="surface_texture">Felszín textúra</string>
-    <string name="surface_gps">GPS nyomvonal</string>
+    <string name="surface_gps">GNSS nyomvonal</string>
     <string name="surface_east">Kelet</string>
     <string name="surface_north">Észak</string>
     <!-- NO string name="dem_file">%1$s</string -->
