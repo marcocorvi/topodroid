@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
 THIS TRANSLATION IS TOO INCOMPLETE
 In order to bring it back in the app you need to:
   [1] translate all the untranslated strings
@@ -6,7 +8,70 @@ In order to bring it back in the app you need to:
 Translation with more than 20 lint errors are not accepted.
 Translation with more than 70 lint errors are dropped from the app.
 
-<?xml version="1.0" encoding="utf-8"?>
+Build errors:
+     [aapt] warning: string 'algo_minimum' has no default translation.
+     [aapt] warning: string 'ask_backups_clear' has no default translation.
+     [aapt] warning: string 'button_change' has no default translation.
+     [aapt] warning: string 'clear' has no default translation.
+     [aapt] warning: string 'connecting' has no default translation.
+     [aapt] warning: string 'connection_error' has no default translation.
+     [aapt] warning: string 'distox_label' has no default translation.
+     [aapt] warning: string 'equate_no_station' has no default translation.
+     [aapt] warning: string 'error_file_not_found' has no default translation.
+     [aapt] warning: string 'error_io_exception' has no default translation.
+     [aapt] warning: string 'export_bgcolor' has no default translation.
+     [aapt] warning: string 'export_overview_title' has no default translation.
+     [aapt] warning: string 'export_plot_title' has no default translation.
+     [aapt] warning: string 'export_scale_png' has no default translation.
+     [aapt] warning: string 'extended_profile' has no default translation.
+     [aapt] warning: string 'file_create_fail' has no default translation.
+     [aapt] warning: string 'file_exists' has no default translation.
+     [aapt] warning: string 'found_groups' has no default translation.
+     [aapt] warning: string 'help_backups' has no default translation.
+     [aapt] warning: string 'help_log' has no default translation.
+     [aapt] warning: string 'info_axes' has no default translation.
+     [aapt] warning: string 'info_title' has no default translation.
+     [aapt] warning: string 'menu_backups' has no default translation.
+     [aapt] warning: string 'menu_logs' has no default translation.
+     [aapt] warning: string 'menu_pair' has no default translation.
+     [aapt] warning: string 'no_capture_app' has no default translation.
+     [aapt] warning: string 'no_device_found' has no default translation.
+     [aapt] warning: string 'no_paired_device' has no default translation.
+     [aapt] warning: string 'not_available' has no default translation.
+     [aapt] warning: string 'oom' has no default translation.
+     [aapt] warning: string 'overwrite' has no default translation.
+     [aapt] warning: string 'powercrust_failed' has no default translation.
+     [aapt] warning: string 'powercrust_few_splays' has no default translation.
+     [aapt] warning: string 'powercrust_successful' has no default translation.
+     [aapt] warning: string 'pref_algo_min_alpha_summary' has no default translation.
+     [aapt] warning: string 'pref_algo_min_alpha_title' has no default translation.
+     [aapt] warning: string 'pref_algo_min_beta_summary' has no default translation.
+     [aapt] warning: string 'pref_algo_min_beta_title' has no default translation.
+     [aapt] warning: string 'pref_algo_min_delta_summary' has no default translation.
+     [aapt] warning: string 'pref_algo_min_delta_title' has no default translation.
+     [aapt] warning: string 'pref_algo_min_gamma_summary' has no default translation.
+     [aapt] warning: string 'pref_algo_min_gamma_title' has no default translation.
+     [aapt] warning: string 'pref_backups_clear_summary' has no default translation.
+     [aapt] warning: string 'pref_backups_clear_title' has no default translation.
+     [aapt] warning: string 'pref_bitmap_bgcolor_summary' has no default translation.
+     [aapt] warning: string 'pref_bitmap_bgcolor_title' has no default translation.
+     [aapt] warning: string 'pref_bitmap_scale_summary' has no default translation.
+     [aapt] warning: string 'pref_bitmap_scale_title' has no default translation.
+     [aapt] warning: string 'query' has no default translation.
+     [aapt] warning: string 'r_checkboxes' has no default translation.
+     [aapt] warning: string 'r_continue' has no default translation.
+     [aapt] warning: string 'r_dialog' has no default translation.
+     [aapt] warning: string 'r_i_understood' has no default translation.
+     [aapt] warning: string 'r_title' has no default translation.
+     [aapt] warning: string 'start_scan' has no default translation.
+     [aapt] warning: string 'stop_scan' has no default translation.
+     [aapt] warning: string 'survey_not_attached_extend' has no default translation.
+     [aapt] warning: string 'title_scan' has no default translation.
+     [aapt] warning: string 'title_settings_splay' has no default translation.
+     [aapt] warning: string 'view_point' has no default translation.
+     [aapt] warning: string 'warning_not_overwrite' has no default translation.
+-->
+
 <resources>
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string --> 
     <string name="no_manual">Impossible de récupérer le manuel depuis Internet</string>
@@ -26,15 +91,15 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="new_survey_label">Nouveau relevé</string>
     <string name="distox_label">DistoX</string>
 
-  <string name="r_title">Avis important concernant Android R</string -->
+  <string name="r_title">Avis important concernant Android R</string>
   <string name="r_dialog">
 Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid ne l\'a pas trouvé et a créé ce dossier.\nVous pouvez importer les archives zip de vos anciennes topographies.\nVeuillez noter que les fichiers du nouveau dossier TopoDroid sont supprimés lorsque vous désinstallez TopoDroid.\n\n
 Consultez les pages du site Web pour plus de détails.\n
-  </string -->
-  <string name="r_checkboxes">Vous devez confirmer les cases cochées.</string -->
-  <string name="r_i_understood">J\'ai bien compris cet avis.</string -->
+  </string>
+  <string name="r_checkboxes">Vous devez confirmer les cases cochées.</string>
+  <string name="r_i_understood">J\'ai bien compris cet avis.</string>
   <!-- UNUSED string name="r_disclaimer">J\'accepte que le ou les auteurs de l\'application ne soient pas responsables de tout dommage ou perte de données.</string -->
-  <string name="r_continue">CONTINUER</string -->
+  <string name="r_continue">CONTINUER</string>
 
     <!-- OK string name="app_name" translatable="false">TopoDroid</string -->
     <!-- UNUSED string name="version_ask">Vous être en train de mettre à jour vers une nouvelle version de TopoDroid.\n Voulez-vous réinstaller les symboles de dessins ?</string -->
@@ -92,7 +157,7 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="missing_station">Station manquante</string>
     <string name="station_not_found">Station introuvable</string>
     <string name="shot_not_found">Visée non trouvée</string>
-    <string name="bad_sibling">Mauvaise visée parente</string -->
+    <string name="bad_sibling">Mauvaise visée parente</string>
     <!-- UNUSED string name="missing_area">ZONE</string -->
     <!-- UNUSED string name="missing_hint">Merci d\'installer les symboles avec TdSymbol</string -->
     <!-- UNUSED string name="missing_line">LIGNE</string -->
@@ -153,6 +218,7 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="calib_precision">Précision</string>
     <string name="calib_iter">Itérations : %1$d</string>
     <string name="calib_reset">Réinitialiser l\'étalonnage du DistoX ?</string>
+    <!-- TODO string name="calib_min_error">Minimum error</string -->
 
     <string name="algorithm">algorithme:</string>
     <string name="auto">automatique</string>
@@ -212,11 +278,11 @@ Consultez les pages du site Web pour plus de détails.\n
 
     <string name="calib_import_title">Import de l\'étalonnage</string>
     <string name="import_title">Import fichier</string>
-    <string name="export_data_title">Exportation de données</string -->
-    <string name="export_plot_title">Exportation de croquis</string -->
-    <string name="export_overview_title">Aperçu de l\'exportation</string -->
-    <string name="export_model_title">Exportation de modèle 3D</string -->
-    <string name="export_tdconfig_title">Exportation de projet</string -->
+    <string name="export_data_title">Exportation de données</string>
+    <string name="export_plot_title">Exportation de croquis</string>
+    <string name="export_overview_title">Aperçu de l\'exportation</string>
+    <string name="export_model_title">Exportation de modèle 3D</string>
+    <string name="export_tdconfig_title">Exportation de projet</string>
 
     <!-- UNUSED string name="import_wait">Importation de fichier&#8230; Patientez&#8230;</string -->
     <string name="import_already">Relevé déjà importé</string>
@@ -235,8 +301,8 @@ Consultez les pages du site Web pour plus de détails.\n
     <!-- UNUSED string name="import_zip_wait">L\'importation du fichier zip peut être longue… Patientez…</string -->
     <!-- UNUSED string name="sketch_saving">Exportation de dessin &#8230; Patientez &#8230;</string -->
     <string name="MT_points_none">Pas de point Mobile Topographer</string>
-    <string name="MT_bad_file">Mauvais fichier MobileTopographer</string -->
-    <string name="bad_manifest">Mauvais fichier Manifest</string -->
+    <string name="MT_bad_file">Mauvais fichier MobileTopographer</string>
+    <string name="bad_manifest">Mauvais fichier Manifest</string>
 
     <string name="pleasewait">Attendre SVP</string>
     <string name="processing">Travail en cours &#8230;</string>
@@ -249,8 +315,8 @@ Consultez les pages du site Web pour plus de détails.\n
 <string name="illegal_data_value">Valeur de donnée incorrecte</string>
 <string name="photo_title">PHOTO</string>
 <string name="photo_text">Saisir un commentaire</string>
-<string name="photo_failed">Échec de la photo</string -->
-<string name="photo_max_captures">Limite de capture maximale atteinte</string -->
+<string name="photo_failed">Échec de la photo</string>
+<string name="photo_max_captures">Limite de capture maximale atteinte</string>
 <string name="label_title">ÉTIQUETTE</string>
 <string name="label_text">Saisissez le texte</string>
 <!-- UNUSED string name="altitude">Alt. </string -->
@@ -290,8 +356,8 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="error_name_exists">Projet déjà existant</string>
     <string name="error_name_invalid">Nom de projet invelide</string>
 <string name="error_name_required">Nom nécessaire</string>
-    <string name="error_name_duplicate">Nom en double</string -->
-    <string name="error_no_section_in_section">Xsection dans xsection non autorisée</string -->
+    <string name="error_name_duplicate">Nom en double</string>
+    <string name="error_no_section_in_section">Xsection dans xsection non autorisée</string>
 
 <!-- UNUSED string name="error_dir_exists">Le répertoire existe déjà</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -330,7 +396,7 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitude %1$s</string>
     <string name="fmt_longitude">Longitude %1$s</string>
-    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
+    <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string -->
 <string name="fixed">Fixé</string>
 <string name="painted">Dessiné</string>
 
@@ -367,6 +433,7 @@ Consultez les pages du site Web pour plus de détails.\n
 <string name="no_proj4">*Proj$* non installé</string>
 <string name="no_sensors">Le relevé ne contient aucune mesure</string>
 <!-- UNUSED string name="no_shots">Le relevé ne contient aucune visées.\n Utilisez le menu Télécharger pour en obtenir.</string -->
+    <!-- TODO string name="no_search_result">No search_result.</string -->
 <string name="no_survey">Aucun relevé sélectionné.</string>
 <string name="no_symbols">Pas de palette symboles.</string>
 <!-- UNUSED string name="no_thmanager">ThManager non installé</string -->
@@ -532,7 +599,7 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="scrap_outline">Contour Esquisse</string>
     <string name="scrap_string">Scrap du croquis %1$d / %2$d</string>
     <string name="section_point_not_allowed">point de section non autorisé</string>
-    <string name="section_line_not_allowed">ligne de section non autorisée</string -->
+    <string name="section_line_not_allowed">ligne de section non autorisée</string>
 
     <!-- UNUSED string name="sensor">capteur</string -->
     <string name="sensor_gravity">gravité</string>
@@ -560,7 +627,7 @@ Consultez les pages du site Web pour plus de détails.\n
     <string name="shot_check">Marquer la visée comme visée de contrôle ?</string>
     <string name="shot_from">DEPUIS ou DE</string>
     <string name="shot_info">Saisir les infos de visée</string>
-    <string name="shot_name">Visée %1$s</string -->
+    <string name="shot_name">Visée %1$s</string>
     <!-- UNUSED string name="shot_length">longueur</string -->
     <string name="shot_note">Note</string>
     <string name="shot_reverse">Inverse</string>
@@ -1563,6 +1630,8 @@ Consultez les pages du site Web pour plus de détails.\n
   <string name="pref_legonly_update_summary">Redessiner la polygonale de cheminement uniquement sur les visées téléchargées</string>
   <string name="pref_loopClosure_title">Bouclage</string>
   <string name="pref_loopClosure_summary">Compensation d\'erreur de bouclage</string>
+  <!-- TODO string name="pref_loop_thr_title">Loop threshold</string -->
+  <!-- TODO string name="pref_loop_thr_summary">Loop compensation threshold</string -->
   <!-- UNUSED string name="pref_splayExtend_title">Splay extend</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Whether to estimate the extend of splays</string -->
   <string name="pref_swapLR_title">Inverser D/G dans la boussole</string>

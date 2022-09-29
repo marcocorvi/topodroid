@@ -291,7 +291,7 @@
      <item name="nonlinear">Non-linéaire</item>
   </string-array>
 
-  <FIXME string-array name="rawCData">
+  <string-array name="rawCData">
      <item name="none">Aucune</item>
      <item name="dec">Décimale</item>
      <item name="hex">Hexadécimale</item>
@@ -312,6 +312,6 @@
      <item name="skip">Sauter</item>
      <item name="normal">Normal</item>
      <item name="xsection">X-Section</item>
-  </string-array -->
+  </string-array>
 
 </resources>

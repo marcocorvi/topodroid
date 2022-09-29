@@ -156,6 +156,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="calib_precision">Precizitás</string>
     <string name="calib_iter">Iterációk száma: %1$d</string>
     <string name="calib_reset">Visszaállítja a DistoX kalibrációját?</string>
+    <!-- TODO string name="calib_min_error">Minimum error</string -->
     
     <string name="algorithm">Algoritmus:</string>
     <string name="auto">automatikus</string>
@@ -337,7 +338,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="hidden_show">Fixpont előtti mérések mutatása</string>
     <!-- UNUSED string name="splays_toggle">Mutassa a fix pontokat </string -->
     <string name="splays_on_off">Segédmérések</string>
-    <string name="including_splays">segédmérések is</string>
+    <!-- UNUSED string name="including_splays">segédmérések is</string -->
     <string name="with_splays">sünökkel</string>
     <string name="cell_size">Cella méret [m]</string>
 
@@ -348,7 +349,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="fmt_id">Azonosító %1$s</string>
     <string name="fmt_latitude">Szélesség %1$s</string>
     <string name="fmt_longitude">Hosszúság %1$s</string>
-    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
+    <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string -->
 	
     <string name="fixed">csavar</string>
     <string name="painted">festett</string>
@@ -388,6 +389,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="no_proj4">Proj4 nincs telepítve</string>
     <string name="no_sensors">A felmérésben nincsennek mérések</string>
     <!-- UNUSED string name="no_shots">Mérésben nincs poligon.\nhasználd a letöltés gombot</string -->
+    <!-- TODO string name="no_search_result">No search_result.</string -->
     <string name="no_survey">Nincs kiválasztva felmérés</string>
     <string name="no_symbols">Nincs szimbólum paletta.</string>
     <!-- UNUSED string name="no_thmanager">A Thmanager alkalmazás nincs telepítve</string -->
@@ -799,7 +801,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="button_leg_station">Poligon pontok</string>
     <string name="button_all_station">Minden pont</string>
     <string name="button_leg_search">Poligon keresés</string>
-    <!-- UNUSED string name="button_search"    >Keres    </string -->
+    <string name="button_search"    >Keres    </string>
     <string name="button_merge"     >Egyesít     </string>
     <string name="button_saved"     >Mentett pont</string>
     <string name="button_split"     >Megoszt     </string>
@@ -1127,7 +1129,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="title_audio_list">Hang felvétel</string>
     <string name="title_calib">Kalibrációk</string>
     <string name="title_calib_check">Kalir. ell. mérések</string>
-    <string name="title_check">Kalibrációs ellenőrzés</string>
+    <!-- UNUSED string name="title_check">Kalibrációs ellenőrzés</string -->
     <string name="title_coverage">Kalibrációs adatok eloszlása</string>
     <string name="title_coeff">Kalibrációs együtthatók</string>
     <string name="title_color_picker">Válassz színt</string>
@@ -1661,6 +1663,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_full_affine_summary">Vázlat affin transformáció engedélyezése</string>
   <string name="pref_loopClosure_title">Hurokzárás</string>
   <string name="pref_loopClosure_summary">Hurokzárási hiba kiegyenlítése</string>
+  <!-- TODO string name="pref_loop_thr_title">Loop threshold</string -->
+  <!-- TODO string name="pref_loop_thr_summary">Loop compensation threshold</string -->
   <!-- UNUSED string name="pref_splayExtend_title">Becsült sün hosszabbítás</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Becsült sün hosszabbítás</string -->
   <string name="pref_swapLR_title">Bal-Jobb a Compass-ban</string>

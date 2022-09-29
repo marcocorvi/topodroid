@@ -154,6 +154,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="calib_precision">Precisione</string>
     <string name="calib_iter">Iterazioni: %1$d</string>
     <string name="calib_reset">Resetta calibrazione sul DistoX?</string>
+    <!-- TODO string name="calib_min_error">Minimum error</string -->
 
     <string name="algorithm">Algoritmo:</string>
     <string name="auto">auto</string>
@@ -333,7 +334,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="hidden_show">Mostra battute oltre il caposaldo</string>
     <!-- UNUSED string name="splays_toggle">Mostra o Nascondi gli splay</string -->
     <string name="splays_on_off">Splays</string>
-    <string name="including_splays">inclusi splay</string>
+    <!-- UNUSED string name="including_splays">inclusi splay</string -->
     <string name="with_splays">con splays</string>
     <string name="cell_size">Lato cella [m]</string>
 
@@ -344,7 +345,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitudine %1$s</string>
     <string name="fmt_longitude">Longitudine %1$s</string>
-    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
+    <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string -->
     <string name="fixed">fisso</string>
     <string name="painted">colorato</string>
 
@@ -383,6 +384,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="no_proj4">Proj4 non installato</string>
     <string name="no_sensors">Rilievo senza misurazioni</string>
     <!-- UNUSED string name="no_shots">Rilievo senza dati</string -->
+    <!-- TODO string name="no_search_result">No search_result.</string -->
     <string name="no_survey">Rilievo non selezionato</string>
     <string name="no_symbols">Nessuna palette di strumenti</string>
     <!-- UNUSED string name="no_thmanager">ThManager non installato</string -->
@@ -792,7 +794,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- TODO string name="button_leg_station">Leg stations</string -->
     <!-- TODO string name="button_all_station">All stations</string -->
     <!-- TODO string name="button_leg_search">Leg search</string -->
-    <!-- UNUSED string name="button_search"    >Cerca     </string -->
+    <string name="button_search"    >Cerca     </string>
     <string name="button_merge"     >Unisci    </string>
     <string name="button_saved"     >Caposaldo salvato</string>
     <string name="button_split"     >Dividi    </string>
@@ -1649,6 +1651,8 @@ Fai riferimento alle pagine web per i dettagli.\n
   <string name="pref_full_affine_summary">Abilita trasformazione affine dei disegni</string>
   <string name="pref_loopClosure_title">Chiusura anelli</string>
   <string name="pref_loopClosure_summary">Compensazione errore nella chiusura anelli</string>
+  <!-- TODO string name="pref_loop_thr_title">Loop threshold</string -->
+  <!-- TODO string name="pref_loop_thr_summary">Loop compensation threshold</string -->
   <!-- UNUSED string name="pref_splayExtend_title">Stima extend per splay</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Stima del extend degli splay</string -->
   <string name="pref_swapLR_title">Scambia LR in Compass</string>

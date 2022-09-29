@@ -155,6 +155,7 @@
     <string name="calib_precision">Точность</string>
     <string name="calib_iter">Итераций: %1$d</string>
     <string name="calib_reset">Сбросить калибровку DistoX ?</string>
+    <!-- TODO string name="calib_min_error">Minimum error</string -->
 
     <string name="algorithm">Алгоритм расчета:</string>
     <string name="auto">авто</string>
@@ -336,7 +337,7 @@
     <string name="hidden_show">Показать нитку хода после этого пикета</string>
     <!-- UNUSED string name="splays_toggle">Показать/скрыть сплеи</string -->
     <string name="splays_on_off">Вкл/Выкл бок. замер</string>
-    <string name="including_splays">бок. замеры</string>
+    <!-- UNUSED string name="including_splays">бок. замеры</string -->
     <string name="with_splays">со сплеями</string>
     <string name="cell_size">Размер сетки [m]</string>
 
@@ -347,7 +348,7 @@
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Широта %1$s</string>
     <string name="fmt_longitude">Долгота %1$s</string>
-    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
+    <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string -->
     <string name="fixed">фиксированный репер</string>
     <string name="painted">нарисованный</string>
 
@@ -386,6 +387,7 @@
     <string name="no_proj4">Proj4 не установлен</string>
     <string name="no_sensors">В съёмке отсутствуют измерения</string>
     <!-- UNUSED string name="no_shots">В съёмке отсутствуют пикеты.\nИспользуйте кнопку Скачать для их создания</string -->
+    <!-- TODO string name="no_search_result">No search_result.</string -->
     <string name="no_survey">Съёмка не выбрана.</string>
     <string name="no_symbols">Нет палитры для символа.</string>
     <!-- UNUSED string name="no_thmanager">ThManager не установлен</string -->
@@ -793,7 +795,7 @@
     <string name="button_leg_station">Пикеты замера</string>
     <string name="button_all_station">Все пикеты</string>
     <string name="button_leg_search">Поиск замера</string>
-    <!-- UNUSED string name="button_search"    >Поиск    </string -->
+    <string name="button_search"    >Поиск    </string>
     <string name="button_merge"     >Объединить     </string>
     <string name="button_saved"     >Сохраненный пикет</string>
     <string name="button_split"     >Разделить     </string>
@@ -1653,6 +1655,8 @@
   <string name="pref_full_affine_summary">Включить аффинное преобразование абриса</string>
   <string name="pref_loopClosure_title">Закрывать кольца</string>
   <string name="pref_loopClosure_summary">Автоматически компенсировать невязки при закрытии колец</string>
+  <!-- TODO string name="pref_loop_thr_title">Loop threshold</string -->
+  <!-- TODO string name="pref_loop_thr_summary">Loop compensation threshold</string -->
   <!-- UNUSED string name="pref_splayExtend_title">Развертка бокового замера</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Расчитывать развертку бокового замера</string -->
   <string name="pref_swapLR_title">Развернуть ЛП в Compass</string>

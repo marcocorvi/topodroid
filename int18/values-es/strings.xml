@@ -154,6 +154,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="calib_precision">Precisión</string>
     <string name="calib_iter">Iteraciones: %1$d</string>
     <string name="calib_reset">¿Quiere restablecer la calibración DistoX?</string>
+    <!-- TODO string name="calib_min_error">Minimum error</string -->
 
     <string name="algorithm">Algoritmo:</string>
     <string name="auto">Auto</string>
@@ -333,7 +334,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="hidden_show">Mostrar tomas más allá de la estación</string>
     <!-- UNUSED string name="splays_toggle">Cambiar a tomas laterales</string -->
     <string name="splays_on_off">Tomas laterales</string>
-    <string name="including_splays">incluyendo tomas laterales</string>
+    <!-- UNUSED string name="including_splays">incluyendo tomas laterales</string -->
     <string name="with_splays">con tomas laterales</string>
     <string name="cell_size">Tamaño de la celda [m]</string>
 
@@ -344,7 +345,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitud %1$s</string>
     <string name="fmt_longitude">Longitud %1$s</string>
-    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
+    <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string -->
     <string name="fixed">Fijo</string>
     <string name="painted">Dibujado</string>
 
@@ -383,6 +384,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="no_proj4">Proj4 no instalado</string>
     <string name="no_sensors">Topografía sin mediciones</string>
     <!-- UNUSED string name="no_shots">Topografía sin mediciones.\nPulse el botón para descargar mediciones</string -->
+    <!-- TODO string name="no_search_result">No search_result.</string -->
     <string name="no_survey">Topografía no seleccionada</string>
     <string name="no_symbols">Sin paleta de símbolos.</string>
     <!-- UNUSED string name="no_thmanager">ThManager no instalado</string -->
@@ -792,7 +794,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- TODO string name="button_leg_station">Leg stations</string -->
     <!-- TODO string name="button_all_station">All stations</string -->
     <!-- TODO string name="button_leg_search">Leg search</string -->
-    <!-- UNUSED string name="button_search"    >Buscar    </string -->
+    <string name="button_search"    >Buscar    </string>
     <string name="button_merge"     >Unir     </string>
     <string name="button_saved"     >Estación guardada</string>
     <string name="button_split"     >Dividir     </string>
@@ -1650,6 +1652,8 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_full_affine_summary">Habilitar transformación afín de dibujos</string>
   <string name="pref_loopClosure_title">Cierre de bucle</string>
   <string name="pref_loopClosure_summary">Error en cierre de bucle</string>
+  <!-- TODO string name="pref_loop_thr_title">Loop threshold</string -->
+  <!-- TODO string name="pref_loop_thr_summary">Loop compensation threshold</string -->
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Estimate splay extend</string -->
   <string name="pref_swapLR_title">Cambiar LR en Compass</string>

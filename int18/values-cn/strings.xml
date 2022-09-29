@@ -156,6 +156,7 @@
     <string name="calib_precision">精度</string>
     <string name="calib_iter">迭代次数: %1$d</string>
     <string name="calib_reset">重置DistoX校准 ?</string>
+    <!-- TODO string name="calib_min_error">Minimum error</string -->
     
     <string name="algorithm">算法:</string>
     <string name="auto">自动</string>
@@ -335,7 +336,7 @@
     <string name="hidden_show">显示测点之外的测量</string>
     <!-- UNUSED string name="splays_toggle">Toggle splays display</string -->
     <string name="splays_on_off">副线开关</string>
-    <string name="including_splays">副线</string>
+    <!-- UNUSED string name="including_splays">副线</string -->
     <string name="with_splays">侧线跟随</string>
     <string name="cell_size">单元尺寸 [m]</string>
 
@@ -346,7 +347,7 @@
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">纬度 %1$s</string>
     <string name="fmt_longitude">经度 %1$s</string>
-    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
+    <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string -->
 
     <string name="fixed">修复</string>
     <string name="painted">画图</string>
@@ -386,6 +387,7 @@
     <string name="no_proj4">Proj4未安装</string>
     <string name="no_sensors">测量无数据</string>
     <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
+    <!-- TODO string name="no_search_result">No search_result.</string -->
     <string name="no_survey">未选定测量.</string>
     <string name="no_symbols">没有符号面板.</string>
     <!-- UNUSED string name="no_thmanager">ThManager应用未安装</string -->
@@ -796,7 +798,7 @@
     <string name="button_leg_station">主线站点</string>
     <string name="button_all_station">所有站点</string>
     <string name="button_leg_search">主线搜索</string>
-    <!-- UNUSED string name="button_search"    >搜索    </string -->
+    <string name="button_search"    >搜索    </string>
     <string name="button_merge"     >合并     </string>
     <string name="button_saved"     >保存站点</string>
     <string name="button_split"     >分割     </string>
@@ -1656,6 +1658,8 @@
   <string name="pref_full_affine_summary">启用草图仿射转换</string>
   <string name="pref_loopClosure_title">圈测闭合</string>
   <string name="pref_loopClosure_summary">圈测闭合错误补偿</string>
+  <!-- TODO string name="pref_loop_thr_title">Loop threshold</string -->
+  <!-- TODO string name="pref_loop_thr_summary">Loop compensation threshold</string -->
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Estimate splay extend</string -->
   <string name="pref_swapLR_title">罗盘角转换左右</string>
