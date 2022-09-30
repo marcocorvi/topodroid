@@ -354,38 +354,38 @@ public class DrawingPath extends RectF
     mPath.offset( off_x, off_y );
   }
 
-  /** add a straight segment ending at (x,y) to the path
-   * @param x     X coord of the endpoint
-   * @param y     Y coord of the endpoint
-   */
-  void pathAddLineTo( float x, float y )
-  {
-    mPath.lineTo( x, y );
-    mPath.moveTo( x+5, y+5 );
-    mPath.lineTo( x-5, y-5 );
-    mPath.moveTo( x+5, y-5 );
-    mPath.lineTo( x-5, y+5 );
-    mPath.moveTo( x, y );
-    setEndPoints( x1, y1, x, y );
-  }
+  // /** add a straight segment ending at (x,y) to the path - UNUSED
+  //  * @param x     X coord of the endpoint
+  //  * @param y     Y coord of the endpoint
+  //  */
+  // void pathAddLineTo( float x, float y )
+  // {
+  //   mPath.lineTo( x, y );
+  //   mPath.moveTo( x+5, y+5 );
+  //   mPath.lineTo( x-5, y-5 );
+  //   mPath.moveTo( x+5, y-5 );
+  //   mPath.lineTo( x-5, y+5 );
+  //   mPath.moveTo( x, y );
+  //   setEndPoints( x1, y1, x, y );
+  // }
 
-  /** make a triangular path centered at (x1,y1) with side 2*r
-   * @param x     X coord - not used
-   * @param y     Y coord - not used
-   * @param r     half-side
-   * @param off_x X offset [scene frame ?]
-   * @param off_y Y offset
-   */
-  void makeTrianglePath( float x, float y, float r, float off_x, float off_y )
-  {
-    float r2 = r * 1.732f;
-    mPath = new Path();
-    mPath.moveTo( x1-r, y1 );
-    mPath.lineTo( x1+r, y1 );
-    mPath.lineTo( x1, y1-r2 );
-    mPath.lineTo( x1-r, y1 );
-    mPath.offset( off_x, off_y );
-  }
+  // /** make a triangular path centered at (x1,y1) with side 2*r - UNUSED
+  //  * @param x     X coord - not used
+  //  * @param y     Y coord - not used
+  //  * @param r     half-side
+  //  * @param off_x X offset [scene frame ?]
+  //  * @param off_y Y offset
+  //  */
+  // void makeTrianglePath( float x, float y, float r, float off_x, float off_y )
+  // {
+  //   float r2 = r * 1.732f;
+  //   mPath = new Path();
+  //   mPath.moveTo( x1-r, y1 );
+  //   mPath.lineTo( x1+r, y1 );
+  //   mPath.lineTo( x1, y1-r2 );
+  //   mPath.lineTo( x1-r, y1 );
+  //   mPath.offset( off_x, off_y );
+  // }
 
   /** set the path paint
    * @param paint   new path paint
@@ -653,7 +653,7 @@ public class DrawingPath extends RectF
     return mBlock != null && mBlock.isRecent();
   }
 
-  /** @Return the (int) "extend" of the block of this path (0 if the path has no block)
+  /** @return the (int) "extend" of the block of this path (0 if the path has no block)
    * @note used in executeAll to draw yellow extend control segment
    */
   int getBlockExtend( )

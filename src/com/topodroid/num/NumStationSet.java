@@ -41,7 +41,7 @@ class NumStationSet
   // stations are put on a list 
   // but they have references for the parent and the left/right children (that form an RB tree)
   //
-  private class NumStationNode
+  private static class NumStationNode
   {
     NumStationNode parent;
     NumStationNode left;

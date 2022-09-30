@@ -23,7 +23,7 @@ public class LegType
   public static final int SCAN    = 6; // scan splay
   // public static final int BLUNDER = 7; // blunder leg
 
-  /** @return the next splay type in cycle fashon
+  /** @return the next splay type in cycle fashion
    * @param type current type
    * @note scan-splay do not enter the cycle
    */

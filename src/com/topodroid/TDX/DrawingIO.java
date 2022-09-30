@@ -27,7 +27,7 @@ import com.topodroid.math.TDVector;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
-import java.io.BufferedReader;
+// import java.io.BufferedReader;
 // import java.io.BufferedInputStream;
 // import java.io.BufferedOutputStream;
 // import java.io.FileInputStream;
@@ -51,20 +51,22 @@ import android.graphics.RectF;
 
 public class DrawingIO
 {
-  private static String readLine( BufferedReader br )
-  {
-    String line = null;
-    try {
-      line = br.readLine();
-    } catch ( IOException e ) {
-      e.printStackTrace();
-    }
-    if ( line != null ) {
-      line = TDString.spacesToSpace( line.trim() );
-      // TDString.splitOnSpaces( line ); // FIXME
-    }
-    return line;
-  } 
+  // UNUSED 
+  // this should go in utils
+  // private static String readLine( BufferedReader br )
+  // {
+  //   String line = null;
+  //   try {
+  //     line = br.readLine();
+  //   } catch ( IOException e ) {
+  //     e.printStackTrace();
+  //   }
+  //   if ( line != null ) {
+  //     line = TDString.spacesToSpace( line.trim() );
+  //     // TDString.splitOnSpaces( line ); // FIXME
+  //   }
+  //   return line;
+  // } 
 
   /* NOTE therion th2 files can no longer be supported because therionscale is not fixed
    */
@@ -654,7 +656,7 @@ public class DrawingIO
   static boolean doLoadDataStream( DrawingSurface surface,
                                    String filename,
                                    float dx, float dy,
-                                   // FIXME-MISISNG SymbolsPalette missingSymbols,
+                                   // FIXME-MISSING SymbolsPalette missingSymbols,
                                    SymbolsPalette localPalette,
                                    RectF bbox,
 				   boolean complete,
@@ -1422,9 +1424,9 @@ public class DrawingIO
           try { 
             DataInputStream dis = TDFile.getTopoDroidFileInputStream( TDPath.getTdrFileWithExt( xsection.name ) );
             if ( dis != null ) {
-              dataStreamToTherion( dis, out, null, null, false, true, xsection.x, xsection.y );
+              dataStreamToTherion(dis, out, null, null, false, true, xsection.x, xsection.y);
+              dis.close();
             }
-            dis.close();
           } catch ( IOException e ) { 
             e.printStackTrace();
           }
@@ -1697,7 +1699,7 @@ public class DrawingIO
    * @param dis         tdr data input
    * @param out         therion output writer
    * @param file_name   filename without extension
-   * @param bbox        clipping rectanggle (read in if not null)
+   * @param bbox        clipping rectangle (read in if not null)
    * @param beginheader whether to write the initial header
    * @param endscrap    whether to write the scrap termination
    * @param xoff        X offset

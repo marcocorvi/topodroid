@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 class NumCycle
 {
-  class NumCycleBranch
+  static class NumCycleBranch
   {
     NumBranch mBranch;
     // NumNode   mNode;
@@ -120,9 +120,7 @@ class NumCycle
   {
     NumCycle ret = new NumCycle( 0 ); // sz = 0 (it is unused)
     ArrayList< NumCycleBranch > branches2 = new ArrayList<>();
-    for ( NumCycleBranch cb2 : cy.branches ) {
-      branches2.add( cb2 );
-    }
+    branches2.addAll( cy.branches ); // for ( NumCycleBranch cb2 : cy.branches ) branches2.add( cb2 );
     for ( NumCycleBranch cb1 : branches ) {
       NumBranch b1 = cb1.mBranch;
       int d1 = cb1.mDir;
@@ -216,7 +214,7 @@ class NumCycle
 
   /** add a branch
    * @param ncb   cycle-branch
-   * @mote this is used to make composite cycles (combinations of cycles with integer coefficients)
+   * @note this is used to make composite cycles (combinations of cycles with integer coefficients)
    */
   void addBranch( NumCycleBranch ncb ) { branches.add( ncb ); }
 

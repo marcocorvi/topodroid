@@ -164,7 +164,7 @@ public class ParserTro extends TglParser
                   dmb = true;
                 } else if ( vals[k].equals("Gra" ) ) {
                   ub = 0.9f; // 360/400
-                } else { // if ( vals[k].equals("Degd" ) 
+                } else { // if ( vals[k].equals("Degd" )
                   /* nothing: dmb = false */
                 }
               }
@@ -176,7 +176,7 @@ public class ParserTro extends TglParser
                   dmc = true;
                 } else if ( vals[k].equals("Gra" ) ) {
                   uc = 0.9f; // 360/400
-                } else { // if ( vals[k].equals("Degd" ) 
+                } else { // if ( vals[k].equals("Degd" )
                   /* nothing */
                 }
               }

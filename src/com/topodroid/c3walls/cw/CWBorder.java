@@ -59,8 +59,8 @@ public class CWBorder
     return mVolume;
   }
 
-
-  int size() { return mInts.size(); }
+  // UNUSED
+  // int size() { return mInts.size(); }
   
   boolean makeBorder()
   {
@@ -203,7 +203,7 @@ public class CWBorder
   
   /**
    * compute the volume (*6) of the intersection
-   * @param eps
+   * @param eps epsilon
    * @return volume (*6)
    */
   private double computeVolume( double eps )

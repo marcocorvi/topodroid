@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 class GlWalls extends GlShape
 {
-  private class GlTriangle3D
+  private static class GlTriangle3D
   {
     Vector3D v1, v2, v3;
     Vector3D normal;

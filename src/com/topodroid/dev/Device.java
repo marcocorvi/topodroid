@@ -155,7 +155,7 @@ public class Device
 
   // public void dump( )
   // {
-  //   tdlog.v( "Device addr " + mAddress + " model " + mModel + " type " + mType + " name " + mName + " nick " + ((mNickname == null)? "null" : mNickname ) );
+  //   TDLog.v( "Device addr " + mAddress + " model " + mModel + " type " + mType + " name " + mName + " nick " + ((mNickname == null)? "null" : mNickname ) );
   // }
 
   private String fromName( String name )

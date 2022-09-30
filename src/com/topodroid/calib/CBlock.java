@@ -78,7 +78,7 @@ public class CBlock
     return ( gx == 0 && gy == 0 && gz == 0 );
   }
 
-  /** set the block off-group
+  /** set the block off-group -- UNUSED
    * @param b  whether the block is off-group
    */
   public void setOffGroup( boolean b ) { mOffGroup = b; }
@@ -120,6 +120,7 @@ public class CBlock
     mFarness = false;
   }
 
+  // UNUSED
   /** @return true if the block is far from a given direction
    * @param b0  direction azimuth
    * @param c0  direction clino

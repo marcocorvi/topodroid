@@ -29,7 +29,7 @@ public class TglColor
   }
 
   /** cstr
-   * @param c   array of the colot four (float) components (RGBA)
+   * @param c   array of the color four (float) components (RGBA)
    * @note set the color-array in this object to point the passed array
    */
   TglColor( float[] c ) 

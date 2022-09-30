@@ -264,7 +264,7 @@ public class BezierInterpolator
     /*  If error not too large, try some re-parametrization and iteration */
     if (maxError < iterationError) {
       for (int i = 0; i < maxIterations; i++) {
-        bezCurve.reparameterize(d, first, last, u);
+        bezCurve.reparametrize(d, first, last, u);
         bezCurve = generateBezier(d, first, last, u, tHat1, tHat2);
         maxError = bezCurve.computeMaxError(d, first, last, u );
         if (maxError < error) {

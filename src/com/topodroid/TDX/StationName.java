@@ -339,7 +339,7 @@ class StationName
     blk.setVisible( View.GONE );
   }
 
-  /** clear the blunder status of the block record in the datebase
+  /** clear the blunder status of the block record in the database
    */
   protected void clearBlunder( DBlock blk ) 
   {

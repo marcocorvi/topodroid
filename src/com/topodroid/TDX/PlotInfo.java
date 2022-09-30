@@ -67,7 +67,7 @@ public class PlotInfo
        
   // void dump( )
   // {
-  //   tdlog.v( "PLOT " + surveyId + "-" + id + " " + name + " type " + type + " start " + start );
+  //   TDLog.v( "PLOT " + surveyId + "-" + id + " " + name + " type " + type + " start " + start );
   // }
 
   /** set the plot ID

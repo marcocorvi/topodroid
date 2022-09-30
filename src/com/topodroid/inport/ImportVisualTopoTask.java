@@ -23,7 +23,7 @@ import android.os.ParcelFileDescriptor;
 // import java.lang.ref.WeakReference;
 
 import java.util.ArrayList;
-import java.io.InputStreamReader;
+// import java.io.InputStreamReader;
 
 public class ImportVisualTopoTask extends ImportTask
 {

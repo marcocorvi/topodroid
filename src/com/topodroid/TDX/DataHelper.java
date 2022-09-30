@@ -45,7 +45,7 @@ import android.database.SQLException;
 import android.database.DataSetObservable;
 import android.database.DatabaseUtils.InsertHelper;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+// import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteDiskIOException;
@@ -224,7 +224,7 @@ public class DataHelper extends DataSetObservable
   /** open or create the default database
    * @param context context
    *
-   * open the databse, if successful check if it needs to be updated
+   * open the database, if successful check if it needs to be updated
    * otherwise create the database
    */
   void openDatabase( Context context )
@@ -428,7 +428,7 @@ public class DataHelper extends DataSetObservable
 
   /** @return the (at-station) xsections mode 
    * @param sid   survey ID
-   * @note at-station xsextions mode can be
+   * @note at-station xsections mode can be
    *   0 : shared
    *   1 : private
    */
@@ -955,7 +955,7 @@ public class DataHelper extends DataSetObservable
    * @param decl         declination
    * @param comment      survey comment
    * @param init_station initial station
-   * @param xections     xsection mode (private or shared)
+   * @param xsections     xsection mode (private or shared)
    */
   private ContentValues makeSurveyInfoCcontentValues( String date, String team, double decl, String comment,
                                 String init_station, int xsections ) // datamode cannot be updated
@@ -976,7 +976,7 @@ public class DataHelper extends DataSetObservable
    * @param decl         declination
    * @param comment      survey comment
    * @param init_station initial station
-   * @param xections     xsection mode (private or shared)
+   * @param xsections     xsection mode (private or shared)
    */
   void updateSurveyInfo( long sid, String date, String team, double decl, String comment,
                          String init_station, int xsections )
@@ -1898,7 +1898,7 @@ public class DataHelper extends DataSetObservable
   /** transfer shots from a survey to another
    * @param sid     target survey ID
    * @param old_sid source survey ID
-   * @param old_id  ID of first shot of the source survey that is transferrred
+   * @param old_id  ID of first shot of the source survey that is transferred
    */
   void transferShots( long sid, long old_sid, long old_id )
   {
@@ -1911,7 +1911,7 @@ public class DataHelper extends DataSetObservable
     // // transfer shots could be as simple as 
     // long delta_id =  maxId( SHOT_TABLE, sid ) + 1 - old_id;
     // transferShotStmt = myDB.compileStatement( "UPDATE shots SET surveyId=" + sid + ", id=(id+" + delta_id + ") where surveyId=" + old_sid + " and idi>=" + old_id );
-    // // however care must be taken about fxeds, photos, audios and plots
+    // // however care must be taken about fixeds, photos, audios and plots
 
     ContentValues vals0 = new ContentValues();
     vals0.put( "surveyId", sid );
@@ -1934,7 +1934,7 @@ public class DataHelper extends DataSetObservable
           // TDLog.v("compile transfer stmt");
           transferShotStmt = myDB.compileStatement( "UPDATE shots SET surveyId=?, id=? where surveyId=? and id=?" );
         }
-        // TDLog.v("trasfer shot ID " + old_id + " to " + myNextId );
+        // TDLog.v("transfer shot ID " + old_id + " to " + myNextId );
         transferShotStmt.bindLong(1, sid);
         transferShotStmt.bindLong(2, myNextId);
         transferShotStmt.bindLong(3, old_sid);
@@ -2242,7 +2242,7 @@ public class DataHelper extends DataSetObservable
     // doStatement( updatePlotViewStmt, "plt view" );
   }
 
-  // for leg xsections store the value of incercept TT
+  // for leg xsections store the value of intercept TT
   void updatePlotIntercept( long pid, long sid, float intercept )
   {
     if ( myDB == null ) return; // false;
@@ -2252,7 +2252,7 @@ public class DataHelper extends DataSetObservable
     doExecSQL( sw, "plt intercept" );
   }
 
-  // for multileg xsections stores the value of incercept TT=2 and center
+  // for multileg xsections stores the value of intercept TT=2 and center
   void updatePlotCenter( long pid, long sid, Vector3D center )
   {
     if ( myDB == null ) return; // false;
@@ -3082,7 +3082,7 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
-  /** @return the name of the TO station of the shot with the givel FROM station (or null if the shot was not found)
+  /** @return the name of the TO station of the shot with the given FROM station (or null if the shot was not found)
    * @param sid    survey ID
    * @param fStation FROM station
    * @note the returned TO station can be empty
@@ -3523,7 +3523,7 @@ public class DataHelper extends DataSetObservable
   /** select all the shots at one or two stations
    * @param sid        survey id
    * @param stations   stations names (must be unique)
-   * @param with_leg   whether to include legs or not
+   * @param with_legs   whether to include legs or not
    * @return list of shots
    */
   List< DBlock > selectAllShotsAtStations( long sid, List< String > stations, boolean with_legs )
@@ -3916,7 +3916,7 @@ public class DataHelper extends DataSetObservable
         value = cursor.getString( 0 );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch ( SQLiteException e ) { logError( "config update " + key + " " + value, e );
+    } catch ( SQLiteException e ) { logError( "config get " + key, e );
     // } catch ( android.database.CursorWindowAllocationException e ) {
     } finally {
       if ( cursor != null && ! cursor.isClosed()) cursor.close();
@@ -6200,7 +6200,7 @@ public class DataHelper extends DataSetObservable
             +   " type INTEGER, "     // DISTOX MANUAL
             +   " millis INTEGER, "   // timestamp
             +   " color INTEGER, "     // custom color
-            +   " stretch REAL default 0, " // extend strech, default ExtendType.STRETCH_NONE
+            +   " stretch REAL default 0, " // extend stretch, default ExtendType.STRETCH_NONE
             +   " address TEXT default \"\" " // distox address
             // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
             // +   " ON DELETE CASCADE "

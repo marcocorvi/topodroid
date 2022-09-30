@@ -117,7 +117,7 @@ public class GlRenderer implements Renderer
   private float[] mMVPMatrixInv    = new float[16];
 
   private final float[] mPerspectiveMatrix  = new float[16];
-  private final float[] mOrtograohicMatrix = new float[16];
+  private final float[] mOrtographicMatrix = new float[16];
   private final float[] mViewMatrix       = new float[16];
   private final float[] mModelMatrix      = new float[16];
   private final float[] mModelViewMatrix  = new float[16];
@@ -349,7 +349,7 @@ public class GlRenderer implements Renderer
   void makeOrthographicMatrix( )
   {
     // TDLog.v("Renderer ortographic " + SIDE + " " + NEAR_O + " " + FAR_O );
-    Matrix.orthoM( mOrtograohicMatrix, 0, -SIDE*ratio, SIDE*ratio, -SIDE, SIDE, NEAR_O, FAR_O );
+    Matrix.orthoM( mOrtographicMatrix, 0, -SIDE*ratio, SIDE*ratio, -SIDE, SIDE, NEAR_O, FAR_O );
   }
 
   /** @return the X angle
@@ -422,11 +422,13 @@ public class GlRenderer implements Renderer
   public void setXYAngle( float dxangle, float dyangle )
   {
     if ( mMode == MODE_ROTATE ) {
-      mXAngle -= dxangle;
-      mYAngle += dyangle;
-      // if ( mXAngle < -90)  { mXAngle = -90;  } else if ( mXAngle > 90 ) { mXAngle = 90; }
-      if ( mXAngle < -90)  { mXAngle = -90;  } else if ( mXAngle > mMinClino ) { mXAngle = mMinClino; }
-      if ( mYAngle > 360 ) { mYAngle -= 360; } else if ( mYAngle < 0 )  { mYAngle += 360; }
+      float xangle = mXAngle - dxangle;
+      float yangle = mYAngle + dyangle;
+      // if ( xangle < -90)  { xangle = -90;  } else if ( xangle > 90 ) { xangle = 90; }
+      if ( xangle < -90)  { xangle = -90;  } else if ( xangle > mMinClino ) { xangle = mMinClino; }
+      if ( yangle > 360 ) { yangle -= 360; } else if ( yangle < 0 )  { yangle += 360; }
+      mXAngle = xangle;
+      mYAngle = yangle;
       makeModelMatrix();
       // setXYLight( dxangle, dyangle );
     } else {
@@ -440,17 +442,20 @@ public class GlRenderer implements Renderer
   {
     // perspective
     float df = 25 * FOCAL / mHalfHeight; 
-    mDXP -= dy * df;
-    mDYP -= dx * df;
+    float dxp = mDXP - dy * df;
+    float dyp = mDYP - dx * df;
 
-    mScaleP *= scale;
-    if ( mScaleP < 0.05f ) {
-      mScaleP = 0.05f; 
+    float scalep = mScaleP * scale;
+    if ( scalep < 0.05f ) {
+      scalep = 0.05f;
     } else {
-      // if ( mScaleP > 100.0f ) { mScaleP = 100.0f;
-      mDXP *= scale;
-      mDYP *= scale;
+      // if ( scalep > 100.0f ) { scalep = 100.0f;
+      dxp *= scale;
+      dyp *= scale;
     }
+    mDXP = dxp;
+    mDYP = dyp;
+    mScaleP = scalep;
 
     // orthogonal
     // TDLog.v("Renderer scale " + mScaleO + " " + scale + " at " + mDXO + " " + mDYO );
@@ -458,22 +463,25 @@ public class GlRenderer implements Renderer
     // mDZO -= dh * (float)Math.cos(mYAngle * Math.PI/180f);
     // mDYO -= dh * (float)Math.sin(mYAngle * Math.PI/180f);
 
-    mDXO -= dy / (mHalfHeight);
-    mDYO -= dx / (mHalfHeight);
+    float dxo = mDXO - dy / (mHalfHeight);
+    float dyo = mDYO - dx / (mHalfHeight);
 
     if ( mCenter != null ) {
       mOffset[0] -= dy / (mHalfHeight);
       mOffset[1] -= dx / (mHalfHeight);
     }
 
-    mScaleO *= scale;
-    if ( mScaleO < 0.05f ) {
-      mScaleO = 0.05f;
+    float scaleo = mScaleO * scale;
+    if ( scaleo < 0.05f ) {
+      scaleo = 0.05f;
     } else {
-      // if ( mScaleO > 100.0f ) { mScaleO = 100.0f; 
-      mDXO *= scale;
-      mDYO *= scale;
+      // if ( scaleo > 100.0f ) { scaleo = 100.0f;
+      dxo *= scale;
+      dyo *= scale;
     }
+    mDXO = dxo;
+    mDYO = dyo;
+    mScaleO = scaleo;
     makeModelMatrix();
   }
 
@@ -586,7 +594,7 @@ public class GlRenderer implements Renderer
     if ( projectionMode == PROJ_PERSPECTIVE ) {
       Matrix.multiplyMM( mMVPMatrix, 0, mPerspectiveMatrix, 0, mModelViewMatrix, 0);
     } else {
-      Matrix.multiplyMM( mMVPMatrix, 0, mOrtograohicMatrix, 0, mModelViewMatrix, 0);
+      Matrix.multiplyMM( mMVPMatrix, 0, mOrtographicMatrix, 0, mModelViewMatrix, 0);
     }
     Matrix.invertM( mMVPMatrixInv, 0, mMVPMatrix, 0 );
     Matrix.invertM( matrix2, 0, mModelViewMatrix, 0 );

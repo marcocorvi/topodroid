@@ -59,7 +59,7 @@ import com.topodroid.io.th.DrawingTh; // TH2EDIT
 import java.io.File;
 import java.io.FileReader; // TH2EDIT
 import java.io.FileWriter; // TH2EDIT
-import java.io.FileOutputStream;
+// import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -75,7 +75,7 @@ import java.util.concurrent.RejectedExecutionException;
 import android.app.Activity;
 
 import android.content.Context;
-import android.content.ActivityNotFoundException;
+// import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -506,8 +506,8 @@ public class DrawingWindow extends ItemDrawer
   private int mEraseScale  = 0;
   private int mSelectScale = 0;
 
-  private float mEraseSize  = 1.0f * TDSetting.mEraseness;
-  private float mSelectSize = 1.0f * TDSetting.mSelectness;
+  private float mEraseSize  = TDSetting.mEraseness;
+  private float mSelectSize = TDSetting.mSelectness;
 
   // protected static int mEditRadius = 0; 
   private int mDoEditRange = SelectionRange.RANGE_POINT; // 0 no, 1 smooth, 2 boxed
@@ -813,7 +813,7 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  /** change the origuin of the plot
+  /** change the origin of the plot
    * @param station   name of the new origin
    */
   void setPlotOrigin( String station )
@@ -948,7 +948,7 @@ public class DrawingWindow extends ItemDrawer
   
   /** set zoom fixed
    * @param fixed_zoom    fixed value: 0 = not-fixed, 1 .. 5 fixed-zoom value
-   * @note called by PlotZoomFitDualog
+   * @note called by PlotZoomFitDialog
    */
   void setFixedZoom( int fixed_zoom )
   {
@@ -1397,7 +1397,7 @@ public class DrawingWindow extends ItemDrawer
   /** prepare struct and forwards to doStartSaveTdrTask
    * @param type      plot type (-1 to save both plan and profile)
    * @param save_mode plot save mode (see PlotSave) - called only with TOGGLE, SAVE, MODIFIED
-   * @param maxTasks
+   * @param maxTasks  max number of tasks (?)
    * @param rotate    backup_rotate
    * @note called by doSaveTdr and doSaveTh2
    */
@@ -1427,7 +1427,7 @@ public class DrawingWindow extends ItemDrawer
    * @param psd1      plan plot save data
    * @param psd2      profile plot save data
    * @param save_mode plot save mode (see PlotSave) - called only with TOGGLE, SAVE, MODIFIED
-   * @param maxTasks
+   * @param maxTasks  max number of tasks (?)
    * @param rotate    backup_rotate
    */
   private void doStartSaveTdrTask( final PlotSaveData psd1, final PlotSaveData psd2, int save_mode, int maxTasks, int rotate )
@@ -1514,7 +1514,7 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  /** movo to a station
+  /** move to a station
    * @param type    plot type
    * @param move_to station name
    * @param set_zoom whether to set zoom
@@ -1946,7 +1946,7 @@ public class DrawingWindow extends ItemDrawer
         setButton5( BTN_ERASE_SIZE, mBMsmall );
         break;
       case Drawing.SCALE_MEDIUM:
-        mEraseSize = 1.0f * TDSetting.mEraseness;
+        mEraseSize = TDSetting.mEraseness;
         setButton5( BTN_ERASE_SIZE, mBMmedium );
         break;
       case Drawing.SCALE_LARGE:
@@ -1976,7 +1976,7 @@ public class DrawingWindow extends ItemDrawer
         setButton3( BTN_SELECT_NEXT, mBMsmall );
         break;
       case Drawing.SCALE_MEDIUM:
-        mSelectSize = 1.0f * TDSetting.mSelectness;
+        mSelectSize = TDSetting.mSelectness;
         setButton3( BTN_SELECT_NEXT, mBMmedium );
         break;
       case Drawing.SCALE_LARGE:
@@ -2634,7 +2634,7 @@ public class DrawingWindow extends ItemDrawer
 
   /** switch to another plot
    * @param name   the other plot name
-   * @param type   the other plot type
+   * @param tt   the other plot type
    * @note called by PlotListDialog
    */
   void switchNameAndType( String name, long tt ) // SWITCH
@@ -2866,7 +2866,7 @@ public class DrawingWindow extends ItemDrawer
       }
     }
     List< DBlock > list0 = mApp_mData.selectAllSplaysAtStations( mSid, stations );
-    for ( DBlock blk0 : list0 ) list.add( blk0 );
+    list.addAll( list0 ); // for ( DBlock blk0 : list0 ) list.add( blk0 );
     // TDLog.v("PLOT multileg list size " + list.size() + " stations " + stations.size() + " splays " + list0.size() + " froms " + mFroms.size() + " tos " + mTos.size() );
     return list;
   }
@@ -5163,7 +5163,7 @@ public class DrawingWindow extends ItemDrawer
   }
 
   /** delete an audio record
-   * @param id   audio ID
+   * @param audio_id   audio ID
    * @note from IAudioInserter
    */
   public void deletedAudio( long audio_id )
@@ -5183,7 +5183,7 @@ public class DrawingWindow extends ItemDrawer
   /** stop recording an audio 
    * @param audio_id    ID of the recording audio
    *
-   * @from IAudioInserter
+   * @note from IAudioInserter
    */
   public void stopRecordAudio( long audio_id )
   {
@@ -6127,7 +6127,7 @@ public class DrawingWindow extends ItemDrawer
     }
 
     /** set the plot as of type 3
-     * @param params   whether to update XY-zomm values by the plot
+     * @param params   whether to update XY-zoom values by the plot
      * @note called by doRecover and setPlotType
      */
     private void setPlotType3( boolean params )
@@ -6837,7 +6837,7 @@ public class DrawingWindow extends ItemDrawer
   void openXSectionDraw( String scrapname )
   { 
     // remove survey name from scrap-name (if necessary)
-    int pos = TDInstance.survey.length() + 1; // TDInstance.survey + "-" (at the begenning)
+    int pos = TDInstance.survey.length() + 1; // TDInstance.survey + "-" (at the beginning)
     String name = scrapname.substring( pos );
     // TDLog.v( "PLOT open xsection: scrapname " + scrapname + " plot name " + name );
     // TDLog.v( "PLOT open section: current line " + mCurrentLine );
@@ -7055,7 +7055,7 @@ public class DrawingWindow extends ItemDrawer
   // CSX ------------------------------------------------------------------
   /** save as cSurvey - used also by SavePlotFileTask
    * @param uri     export URI or null (to export in private folder)
-   * @param origin
+   * @param origin  origin station (?)
    * @param psd1    plan plot save-data
    * @param psd2    profile plot save-data
    * @param toast   whether to toast
@@ -7137,7 +7137,7 @@ public class DrawingWindow extends ItemDrawer
       String origin = num.getOriginStation();
       station = TDExporter.getGeolocalizedStation( mSid, mApp_mData, 1.0f, true, origin );
     } else if ( ext.equals("c3d") ) {
-      // c3d export uses pplot and fixed instead of station 
+      // c3d export uses plot and fixed instead of station
       plot  = PlotType.isAnySection(type) ? mPlot3 : PlotType.isProfile( type )? mPlot2 : mPlot1;
       List<FixedInfo> fixeds = mApp_mData.selectAllFixed( mSid, TDStatus.NORMAL );
       if ( fixeds != null && fixeds.size() > 0 ) fixed = fixeds.get( 0 );
@@ -7152,7 +7152,7 @@ public class DrawingWindow extends ItemDrawer
 
   /** save in therion format (.th2)
    * @param uri     output URI
-   * @param type
+   * @param type    type of ?
    * @param toast   whether to toast
    *
    * called (indirectly) only by ExportDialogPlot: save as th2 even if there are missing symbols
@@ -7606,7 +7606,7 @@ public class DrawingWindow extends ItemDrawer
           selectFromProvider( TDConst.SURVEY_FORMAT_TH2, TDRequest.REQUEST_GET_EXPORT, Intent.ACTION_CREATE_DOCUMENT );
         } else {
           String plotname = TDInstance.survey + "-" + mName;
-          new ExportDialogPlot( mActivity, this, TDConst.mPlotExportTypes, R.string.title_plot_save, 0, plotname ).show();
+          new ExportDialogPlot( mActivity, this, TDConst.mPlotExportTypes, R.string.title_plot_save, plotname ).show();
         }
       } else if ( ( ! mTh2Edit ) && p++ == pos ) { // TH2EDIT INFO - AREA
         if ( PlotType.isAnySection( mType ) ) {
@@ -7719,7 +7719,7 @@ public class DrawingWindow extends ItemDrawer
   static private String mExportExt;
 
   /**
-   * @param type         export type
+   * @param export_type         export type
    * @param filename     export filename
    * @param prefix       station names export-prefix (not used)
    */
@@ -8654,7 +8654,7 @@ public class DrawingWindow extends ItemDrawer
 
   /** prepare for the dialog about the scrap outline:
    * select the plots with same type as the current plot and open the dialog
-   * @note apparenty there is not difference whether the type is PLAN or PROFILE
+   * @note apparently there is not difference whether the type is PLAN or PROFILE
    */
   void scrapOutlineDialog()
   {
@@ -8734,7 +8734,7 @@ public class DrawingWindow extends ItemDrawer
    * @param name    xsection name
    * @param on_off  whether to add or to drop
    * @param x       X coordinate of the point where to put the xsection (canvas frame)
-   * @param y
+   * @param y       y coordinate
    */
   void setXSectionOutline( String name, boolean on_off, float x, float y )
   { 
@@ -9181,7 +9181,7 @@ public class DrawingWindow extends ItemDrawer
     return true;
   }
 
-  /** set the recent symbols buttons, after the recent symbols ahave been loaded
+  /** set the recent symbols buttons, after the recent symbols have been loaded
    */
   @Override
   public void onRecentSymbolsLoaded()

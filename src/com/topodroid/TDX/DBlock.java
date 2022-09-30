@@ -184,9 +184,9 @@ public class DBlock
    */
   static final int[] blockOfSplayLegType = {
     BLOCK_SPLAY,
-    -1, // BLOCK_SEC_LEG, // should never occor
+    -1, // BLOCK_SEC_LEG, // should never occur
     BLOCK_X_SPLAY,
-    -1, //  BLOCK_BACK_LEG, // should never occor
+    -1, //  BLOCK_BACK_LEG, // should never occur
     BLOCK_H_SPLAY,
     BLOCK_V_SPLAY,
     BLOCK_SCAN,
@@ -214,7 +214,7 @@ public class DBlock
    */
   int getBlockType() { return mBlockType; }
 
-  /** set the type "BALNK_LEG" - only if the type was BLANK
+  /** set the type "BLANK_LEG" - only if the type was BLANK
    */
   void setTypeBlankLeg( ) { if ( mBlockType == BLOCK_BLANK ) mBlockType = BLOCK_BLANK_LEG; }
 
@@ -384,9 +384,10 @@ public class DBlock
   public boolean hasStretch( float stretch ) { return Math.abs( mStretch - stretch ) < 0.01f; }
   public boolean hasStretch( ) { return Math.abs( mStretch ) < 0.01f; }
 
-  // void setStretch( float stretch ) { mStretch = stretch; } // ununsed
+  // void setStretch( float stretch ) { mStretch = stretch; } // UNUSED
   public float getStretch() { return mStretch; }
-  public float getStretchedExtend() { return mExtend + mStretch; }
+
+  public float getStretchedExtend() { return mExtend + mStretch; } // UNUSED
 
   /** flip the block extend and stretch
    * @note called only by ShotWindow
@@ -419,7 +420,7 @@ public class DBlock
   }
 
   /** @return true if this block differs from a given time more recent than the "recent time interval" setting
-   *               and is more recet than the second-last shot
+   *               and is more recent than the second-last shot
    * @param time   timestamp
    */
   private boolean isTimeRecent( long time )
@@ -509,7 +510,7 @@ public class DBlock
    * @param c      clino [deg]
    * @param r      roll
    * @param e      extend
-   * @param t      block type
+   * @param type   block type
    * @param shot_type shot type
    * @note used by PocketTopo parser only
    */
@@ -594,9 +595,9 @@ public class DBlock
    */
   void setShotType( int type ) { mShotType = type; }
 
-  /** @return the type of the shot
-   */
-  int  getShotType( ) { return mShotType; }
+  // /** @return the type of the shot - UNUSED
+  //  */
+  // int  getShotType( ) { return mShotType; }
 
   /** @return true if the shot type is "DistoX"
    */
@@ -628,7 +629,7 @@ public class DBlock
     mSurveyId = survey_id;
   }
 
-  /** set the block name (for forward leg)
+  /** set the block name (for forward leg) - UNUSED
    * @param from       FROM station name
    * @param to         TO station name
    */
@@ -662,7 +663,7 @@ public class DBlock
     }
   }
 
-  /** @return the block name, namey "FROM-TO"
+  /** @return the block name, namely "FROM-TO"
    */
   public String Name() { return mFrom + "-" + mTo; }
   
@@ -909,7 +910,7 @@ public class DBlock
   //   );
   // }
   
-  /** write a closin square bracket, followed by the flag if there is any
+  /** write a closing square bracket, followed by the flag if there is any
    * @param pw   output writer
    */
   private void formatFlagPhoto( PrintWriter pw )
@@ -943,7 +944,7 @@ public class DBlock
     pw.format(" %s", mComment);
   }
 
-  /** @return the unit vector alogned with this block
+  /** @return the unit vector aligned with this block
    */
   TDVector getUnitVector() { return new TDVector( mBearing * TDMath.DEG2RAD, mClino * TDMath.DEG2RAD ); }
 

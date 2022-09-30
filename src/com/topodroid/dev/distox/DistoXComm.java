@@ -17,7 +17,7 @@ import com.topodroid.prefs.TDSetting;
 // import com.topodroid.TDX.DataDownloader;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TopoDroidApp;
-import com.topodroid.TDX.TDToast;
+// import com.topodroid.TDX.TDToast;
 
 import com.topodroid.dev.Device;
 import com.topodroid.dev.DeviceUtil;
@@ -521,7 +521,7 @@ public class DistoXComm extends TopoDroidComm
   //   return false;
   // }
 
-  /** dsiconnect the remote DistoX device
+  /** disconnect the remote DistoX device
    */
   public void disconnectRemoteDevice( )
   {
@@ -602,7 +602,7 @@ public class DistoXComm extends TopoDroidComm
 
   /** low-level memory read
    * @param address    device address
-   * @param addr       mmeory address to read
+   * @param addr       memory address to read
    * @note called by TopoDroidApp.readMemory
    */
   public byte[] readMemory( String address, int addr )
@@ -682,12 +682,12 @@ public class DistoXComm extends TopoDroidComm
         // TDLog.v( "download data HT: A3 " + a3 + " to-read " + to_read );
         if ( to_read == 0 ) {
           ret = to_read;
-	} else if ( to_read < 0 ) {
-	  int error_code = (protocol == null)? DistoX.DISTOX_ERR_PROTOCOL
-                         : protocol.getErrorCode();
-	  if ( error_code < 0 ) {
+	    } else if ( to_read < 0 ) {
+	      int error_code = /* (protocol == null)? DistoX.DISTOX_ERR_PROTOCOL : */ // protocol always not null
+                           protocol.getErrorCode();
+	      if ( error_code < 0 ) {
             ret = error_code;
-	  } else { // read with timeout
+	      } else { // read with timeout
             startCommThread( -1, lister, data_type );
             while ( mCommThread != null ) {
               TDUtil.slowDown( 100 );

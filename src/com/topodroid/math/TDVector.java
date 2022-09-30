@@ -322,7 +322,8 @@ public class TDVector
     return (float)Math.sqrt( a*a + b*b + c*c );
   }
 
-  /** @return Therion string presentation
+  /** write Therion string presentation
+   * @param pw  writer
    * @note since 3D point (X,Y,Z) are east, south, vert(down) Y and Z are reversed in Therion
    */
   public void toTherion( PrintWriter pw )

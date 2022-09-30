@@ -15,6 +15,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.TDX.TglColor;
 
 // import java.io.File;
 import java.io.IOException;
@@ -115,7 +116,7 @@ class TdmConfig extends TdmFile
   }
     
   /** @return true if the cave-project has a given input
-   * @param input   input survey name
+   * @param name   input survey name
    */
   boolean hasInput( String name )
   {
@@ -324,7 +325,7 @@ class TdmConfig extends TdmFile
               for (int k=1; k<vals.length; ++k ) {
                 if ( vals[k].length() > 0 ) {
                   String surveyname = vals[k];
-                  int color = 0xffcc9933;
+                  int color = TglColor.getSurveyColor(); // random color
                   for ( ++k; k<vals.length; ++k ) {
                     if ( vals[k].length() > 0 ) {
                       if ( vals[k].equals("-color") ) continue;

@@ -26,7 +26,7 @@
   <string-array name="feedbackMode">
      <item name="none">нет</item>
      <item name="sound">звук</item>
-     <item name="heptic">вибрация</item>
+     <item name="haptic">вибрация</item>
   </string-array>
 
   <string-array name="canvasLevels">

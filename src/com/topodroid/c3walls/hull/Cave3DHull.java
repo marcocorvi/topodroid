@@ -220,7 +220,7 @@ class Cave3DHull
    * @param rays    rays (splays) at the station
    * @param projs   result projections (array)
    * @param st      station
-   * @param dir     outside direction (-1 at FROM, 1 at TO)
+   * FIXME param dir     outside direction (-1 at FROM, 1 at TO)
    */
   private void computeHullProjs( ArrayList< Cave3DShot > rays, ArrayList< HullProjection > projs, Cave3DStation st, HullAngle angles )
   {
@@ -284,7 +284,7 @@ class Cave3DHull
   }
 
   /** ...
-   * @param proj   list of projections
+   * @param projs   list of projections
    * @pre projections are sorted by the angle
    * TODO it might be useful to allow a bit of concavity 
    */

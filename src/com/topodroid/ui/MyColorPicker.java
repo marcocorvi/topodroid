@@ -257,7 +257,7 @@ public class MyColorPicker extends MyDialog
 
     /** color call button
      */
-    private class MyColorCell extends Button
+    private static class MyColorCell extends Button
     {
       private int idx; // index of the color in TDColor.mTDColors
 

@@ -17,7 +17,7 @@ public class StringPair
   String second;
 
   /** cstr
-   * @param f  fisrt string
+   * @param f  first string
    * @param s  second string
    */
   public StringPair( String f, String s ) 
@@ -37,7 +37,7 @@ public class StringPair
   public boolean equals( StringPair sp ) { return first.equals( sp.first ) && second.equals( sp.second ); }
 
   /** @return true if the string pair is equal to the given strings
-   * @param f  fisrt string
+   * @param f  first string
    * @param s  second string
    */
   public boolean equals( String f, String s ) 

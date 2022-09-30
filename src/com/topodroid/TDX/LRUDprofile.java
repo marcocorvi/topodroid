@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 class LRUDprofile extends LRUD
 {
-  private class Profile
+  private static class Profile
   {
     float clino;
     float distance;

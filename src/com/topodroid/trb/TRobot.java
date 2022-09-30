@@ -46,8 +46,8 @@ public class TRobot
     int nsf, npf, nst, npt;
     for ( DBlock blk : blks ) {
       if ( ! blk.isLeg() ) continue;
-      String[] valf = blk.mFrom.split(".");
-      String[] valt = blk.mTo.split(".");
+      String[] valf = blk.mFrom.split("\\.");
+      String[] valt = blk.mTo.split("\\.");
       if ( valf.length != 2 || valt.length != 2 ) continue;
       try {
         nsf = Integer.parseInt(valf[0]);
@@ -192,9 +192,9 @@ public class TRobot
 
   // void dump( )
   // {
-  //   tdlog.v( "TRobot S: " + mSeries.size() + " P: " + mPoints.size() );
+  //   TDLog.v( "TRobot S: " + mSeries.size() + " P: " + mPoints.size() );
   //   for ( TRobotSeries series : mSeries ) series.dump();
-  //   tdlog.v( "Points");
+  //   TDLog.v( "Points");
   //   for (TRobotPoint pt : mPoints ) pt.dump();
   // }
 

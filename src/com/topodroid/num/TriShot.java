@@ -42,7 +42,7 @@ class TriShot
 
   // void dump( )
   // {
-  //   tdlog.v( from + "-" + to + " " + (used?"u":"-") + (duplicate?"d":"-") + (surface?"s":"-") + (commented?"c ":"- ") + backshot + " blks " + blocks.size() );
+  //   TDLog.v( from + "-" + to + " " + (used?"u":"-") + (duplicate?"d":"-") + (surface?"s":"-") + (commented?"c ":"- ") + backshot + " blks " + blocks.size() );
   // }
 
   TriShot( DBlock blk, String f, String t, int e, float s, int r )

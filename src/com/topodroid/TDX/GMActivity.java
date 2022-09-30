@@ -49,9 +49,9 @@ import com.topodroid.calib.GMSearchDialog;
 
 
 import java.util.List;
-import java.util.LinkedList;
+// import java.util.LinkedList;
 import java.util.ArrayList;
-import java.util.Locale;
+// import java.util.Locale;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -63,7 +63,7 @@ import android.content.res.Configuration;
 import android.content.DialogInterface;
 
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
+// import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.Button;
 import android.view.View;
@@ -72,7 +72,7 @@ import android.view.View.OnLongClickListener;
 import android.view.KeyEvent;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.LinearLayout;
+// import android.widget.LinearLayout;
 
 import android.graphics.drawable.BitmapDrawable;
 

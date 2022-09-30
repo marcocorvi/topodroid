@@ -49,8 +49,8 @@ public class BricConst
   public final static int CMD_LASER = 4;
   public final static int CMD_CLEAR = 5;
 
-  public final static int CMD_SPLAY = 11;
-  public final static int CMD_LEG   = 12;
+  // public final static int CMD_SPLAY = 11;
+  // public final static int CMD_LEG   = 12;
 
   static float getDistance( byte[] bytes ) { return BleUtils.getFloat( bytes,  8 ); }
   static float getAzimuth( byte[] bytes )  { return BleUtils.getFloat( bytes, 12 ); }
@@ -58,7 +58,7 @@ public class BricConst
   static int   getIndex( byte[] bytes )    { return BleUtils.getInt(   bytes,  0 ); }
   static float getDip( byte[] bytes )      { return BleUtils.getFloat( bytes,  4 ); }
   static float getRoll( byte[] bytes )     { return BleUtils.getFloat( bytes,  8 ); }
-  static float getTemp( byte[] bytes )     { return BleUtils.getFloat( bytes, 12 ); }  // internal temperature
+  // static float getTemp( byte[] bytes )     { return BleUtils.getFloat( bytes, 12 ); }  // internal temperature
   static short getSamples( byte[] bytes )  { return BleUtils.getShort( bytes, 16 ); }  // measurement samples
   static int   getType( byte[] bytes )     { return BleUtils.getChar(  bytes, 18 ); }  // measurement type
 
@@ -96,12 +96,12 @@ public class BricConst
     return sb.toString();
   }
 
-  static byte[] makeTimeBytes( short year, char month, char day, char hour, char minute, char second, char centisecond )
-  {
-    byte[] ret = new byte[8];
-    setTimeBytes( ret, year, month, day, hour, minute, second, centisecond );
-    return ret;
-  }
+  // static byte[] makeTimeBytes( short year, char month, char day, char hour, char minute, char second, char centisecond )
+  // {
+  //   byte[] ret = new byte[8];
+  //   setTimeBytes( ret, year, month, day, hour, minute, second, centisecond );
+  //   return ret;
+  // }
 
   static void setTimeBytes( byte[] ret, short year, char month, char day, char hour, char minute, char second, char centisecond )
   {
@@ -160,8 +160,8 @@ public class BricConst
   static int secondErrorCode( byte[] bytes ) { return getErrorCode( bytes, 9 ); }
   static float firstErrorValue( byte[] bytes, int code ) { return getErrorValue( bytes, code, 1 ); }
   static float secondErrorValue( byte[] bytes, int code ) { return getErrorValue( bytes, code, 10 ); }
-  static float firstErrorSecondValue( byte[] bytes, int code ) { return getErrorSecondValue( bytes, code, 5 ); }
-  static float secondErrorSecondValue( byte[] bytes, int code ) { return getErrorSecondValue( bytes, code, 14 ); }
+  // static float firstErrorSecondValue( byte[] bytes, int code ) { return getErrorSecondValue( bytes, code, 5 ); }
+  // static float secondErrorSecondValue( byte[] bytes, int code ) { return getErrorSecondValue( bytes, code, 14 ); }
 
   static String errorString( byte[] bytes )
   {

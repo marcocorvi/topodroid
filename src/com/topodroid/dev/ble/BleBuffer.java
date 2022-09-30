@@ -30,12 +30,12 @@ public class BleBuffer
     next = null;
   }
 
-  /** @return size of the data array, (-1 if data is null)
-   */
-  public int length()
-  {
-    return (data == null)? -1 : data.length;
-  }
+  // /** @return size of the data array, (-1 if data is null)
+  //  */
+  // public int length()
+  // {
+  //   return (data == null)? -1 : data.length;
+  // }
 
 }
 

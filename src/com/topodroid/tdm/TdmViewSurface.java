@@ -190,7 +190,7 @@ public class TdmViewSurface extends SurfaceView
         }
       }
       synchronized( mEquates ) {
-        for ( TdmViewEquate equate : tmp_equates ) mEquates.add( equate );
+        mEquates.addAll( tmp_equates ); // for ( TdmViewEquate equate : tmp_equates ) mEquates.add( equate );
       }
     }
 

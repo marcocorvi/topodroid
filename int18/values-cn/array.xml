@@ -26,7 +26,7 @@
   <string-array name="feedbackMode">
      <item name="none">无</item>
      <item name="sound">声音</item>
-     <item name="heptic">视觉</item>
+     <item name="haptic">视觉</item>
   </string-array>
 
   <string-array name="canvasLevels">

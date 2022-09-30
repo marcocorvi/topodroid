@@ -192,7 +192,6 @@ public class Parser3d extends TglParser
       // BufferedInputStream bis = new BufferedInputStream( dis );
 
       String line = readline( dis );
-      line.trim();
       // TDLog.v("3d " + line ); // Survey 3D Image File
       line = readline( dis );
       // TDLog.v("3d <ver.> " + line ); // v8

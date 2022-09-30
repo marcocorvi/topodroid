@@ -39,7 +39,7 @@ public class NumBranch
   //   StringBuilder sb = new StringBuilder();
   //   sb.append("Branch ");
   //   for ( NumShot sh : shots ) sb.append( sh.from.name ).append("-").append( sh.to.name ).append(" ");
-  //   tdlog.v( sb.toString() );
+  //   TDLog.v( sb.toString() );
   // }
 
   NumBranch( int t, NumNode n )

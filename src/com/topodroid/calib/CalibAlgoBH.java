@@ -179,7 +179,7 @@ public class CalibAlgoBH extends CalibAlgo
     // Beat's NLCalibration.cs uses TDMatrix.Inverse( TDMatrix m ) which is
     //    m = Transposed(m);
     //    TDMatrix ad = new TDMatrix( m.y % m.z, m.z % m.x, m.x % m.y ); // Vector.operator% is the cross-product
-    //    return ad * ( 1 / m.x * ad.x ); // adjugate * 1/determinant
+    //    return ad * ( 1 / m.x * ad.x ); // adjoint * 1/determinant
     // which is InverseM 
 
     TDVector avG = sumG.times( invNum );  // average G
@@ -208,7 +208,7 @@ public class CalibAlgoBH extends CalibAlgo
     do {
       for ( int i=0; i<nn; ++i ) {
         if ( group[i] > 0 ) {
-          if ( mNonLinear ) {
+          if ( mNonLinear && gl != null ) {
             gr[i] = bG.plus( aG.timesV(gl[i]) ); // NON_LINEAR: gl instead of g
           } else {
             gr[i] = bG.plus( aG.timesV(g[i]) );

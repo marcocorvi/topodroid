@@ -47,7 +47,7 @@ class SurveyAdapter extends ArrayAdapter< Cave3DSurvey >
     return ( pos < 0 || pos >= mItems.size() )? null : mItems.get(pos);
   }
 
-  private class ViewHolder implements OnClickListener
+  private static class ViewHolder implements OnClickListener
   { 
     int      pos;
     Cave3DSurvey mSurvey;   // used to make sure blocks do not hold ref to a view, that does not belong to them REVISE_RECENT

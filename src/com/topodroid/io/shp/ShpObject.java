@@ -88,7 +88,7 @@ class ShpObject
   // @param dd day [1..31]
 
   /** cstr
-   * @param typ
+   * @param typ    type (?)
    * @param dir    dirname (relative to the CWD)
    * @param pth    filename
    * @param files  array of file names for the files that must be included in the ZIP

@@ -35,7 +35,7 @@ class SwapHotBitTask extends AsyncTask<Void, Integer, Integer>
    * @param type     device type
    * @param address  device bluetooth address
    * @param ht       head_tail - head at index 0, tail at index 1
-   * @param on_off
+   * @param on_off   whether to set hot bit on or off
    */
   SwapHotBitTask( TopoDroidApp app, int type, String address, int[] ht, boolean on_off )
   {

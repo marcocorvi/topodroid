@@ -579,9 +579,9 @@ public class CWConvexHull
     if ( t2.s1 == s3 )      { s4 = t2.s2; s5 = t2.s3; }
     else if ( t2.s2 == s3 ) { s4 = t2.s3; s5 = t2.s1; }
     else if ( t2.s3 == s3 ) { s4 = t2.s1; s5 = t2.s2; }
-	  
+    else { return; } // cannot pick s4 and s5
+
     CWPoint p4 = s4.otherPoint(p1);
-	  
     CWTriangle t3 = s5.otherTriangle(t2);
     // TDLog.v( "CW-Hull  T2/3 " + t2.mCnt + " " + t3.mCnt +  " TN " + tn.mCnt
     //    + " S4/5 " + s4.mCnt + " " + s5.mCnt + " P4 " + p4.mCnt );
@@ -841,7 +841,7 @@ public class CWConvexHull
 
   /** check if a point is inside this CW
    * @param p   point
-   * @param eps
+   * @param eps epsilon
    */
   boolean isPointInside( Vector3D p, double eps ) { return solidAngle(p, eps) > 0.4f; }
 
@@ -1112,7 +1112,7 @@ public class CWConvexHull
       //   // TDLog.v( "CW-Hull  split with 2 vertex inside. apposite-side points " + pts2.size() );
       // }
     }
-    for ( CWTriangle t : mSplits ) mFace.add( t );
+    mFace.addAll(mSplits); // for ( CWTriangle t : mSplits ) mFace.add( t );
     mSplits.clear();
   }
 

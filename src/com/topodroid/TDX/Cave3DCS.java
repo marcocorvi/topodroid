@@ -26,10 +26,11 @@ public class Cave3DCS
    */
   public Cave3DCS( String nm ) { name = nm; }
 
-  /** check if the CS name is not null
-   * @return true if the name of the CS is not null
-   */
-  public boolean hasName() { return ( name != null ) && ( name.length() > 0 ); }
+  // UNUSED
+  // /** check if the CS name is not null
+  //  * @return true if the name of the CS is not null
+  //  */
+  // public boolean hasName() { return ( name != null ) && ( name.length() > 0 ); }
 
   /** check if the CS name is equal to a given name
    * @param cs_name   name

@@ -123,7 +123,7 @@ public class DeviceActivity extends Activity
 
   // public static final int MODE_NORMAL = 0;
   // public static final int MODE_SELECT = 1;
-  // private int mMode = MODE_NORMAL; // modw of work of the activity
+  // private int mMode = MODE_NORMAL; // mode of work of the activity
   
   public static boolean mDeviceActivityVisible = false;
 
@@ -306,13 +306,13 @@ public class DeviceActivity extends Activity
     // if ( extras != null ) {
     //   try { 
     //     String mode = extras.getString( TDTag.TOPODROID_DEVICE_MODE );
-    //     if ( mode != null ) mReferrer = Interger.parseInt( mode );
+    //     if ( mode != null ) mReferrer = Integer.parseInt( mode );
     //   } catch ( Exception e ) { }
     // }
     // TDLog.v( "device mode " + mReferrer );
     
     // Uri referrer = getReferrer(); // API 22 (5.1)
-    // TDLog.v( "device referre " + referrer.toString() );
+    // TDLog.v( "device referrer " + referrer.toString() );
     
     // mMode = MODE_NORMAL;
     // Bundle extras = getIntent().getExtras();
@@ -419,7 +419,7 @@ public class DeviceActivity extends Activity
           try {
             model = device.getName();
           } catch( SecurityException e ) {
-            TDLog.Error("SECUTITY " + e.getMessage() );
+            TDLog.Error("SECURITY " + e.getMessage() );
           }
           if ( model == null ) {
             TDLog.Error( "WARNING. Null name for device " + addr );
@@ -465,10 +465,10 @@ public class DeviceActivity extends Activity
   }
     
   /** react on user tap on an item in the list
-   * @param parent
-   * @param view
-   * @param pos
-   * @param id
+   * @param parent  adapter parent
+   * @param view    item view
+   * @param pos     item position
+   * @param id      view id
    */
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
@@ -503,7 +503,7 @@ public class DeviceActivity extends Activity
 
       // if ( vals.length != 3 ) { TODO } // FIXME
       // TDLog.v( "Addr/Name <" + vals[2] + ">");
-      if ( currDeviceA() == null || ! address.equals( currDeviceA().hasAddressOrNickname( address ) ) ) {
+      if ( currDeviceA() == null || ! currDeviceA().hasAddressOrNickname( address ) ) {
         mApp.setDevicePrimary( address, model, name, null );
         // mCurrDevice = TDInstance.getDeviceA();
         mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
@@ -795,7 +795,7 @@ public class DeviceActivity extends Activity
   }
 
   /** check a block of DistoX A3 memory
-   * @param head_tail  memory block bounds [addesses]
+   * @param ht  memory block bounds [addresses]
    * @return true on success
    * @note when is this used ?
    */
@@ -809,7 +809,7 @@ public class DeviceActivity extends Activity
   }
 
   /** reset data from stored-tail (inclusive) to current-tail (exclusive)
-   * @param head_tail  memory block bounds [addesses]
+   * @param head_tail  memory block bounds [addresses]
    * @param on_off true: set, false: clear
    */
   private void doResetA3DeviceHeadTail( int[] head_tail, boolean on_off )
@@ -926,7 +926,7 @@ public class DeviceActivity extends Activity
     try {
       name = device.getName();
     } catch( SecurityException e ) {
-      TDLog.e("SECUTITY " + e.getMessage() );
+      TDLog.e("SECURITY " + e.getMessage() );
     }
     // if ( currDeviceA() == null || ! address.equals( currDeviceA().getAddress() ) ) { // N.B. address != null
       mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
@@ -983,7 +983,7 @@ public class DeviceActivity extends Activity
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         super.onBackPressed();
         return true;
-      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+      case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( this, getResources().getString( HELP_PAGE ) );
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
@@ -1001,19 +1001,19 @@ public class DeviceActivity extends Activity
    */
   private void setMenuAdapter( Resources res )
   {
-    ArrayAdapter< String > nemu_adapter = new ArrayAdapter<>(this, R.layout.menu );
+    ArrayAdapter< String > menu_adapter = new ArrayAdapter<>(this, R.layout.menu );
 
     int k = -1;
     // ++k; if ( TDLevel.overBasic    ) nemu_adapter.add( res.getString( menus[k] ) );         // BT_SCAN
     // ++k; if ( TDLevel.overExpert && mHasBLE ) nemu_adapter.add( res.getString( menus[k] ) ); // FIXME_SCAN_BRIC BLE_SCAN
     // ++k; if ( TDLevel.overBasic    ) nemu_adapter.add( res.getString( menus[k] ) );
-    ++k; if ( TDLevel.overNormal   ) nemu_adapter.add( res.getString( menus[k] ) );
-    ++k; if ( TDLevel.overAdvanced ) nemu_adapter.add( res.getString( menus[k] ) );
-    ++k; if ( TDLevel.overExpert && TDSetting.mPacketLog ) nemu_adapter.add( res.getString( menus[k] ) ); // PACKET_LOG
-    ++k; nemu_adapter.add( res.getString( menus[k] ) );
-    ++k; nemu_adapter.add( res.getString( menus[k] ) );
+    ++k; if ( TDLevel.overNormal   ) menu_adapter.add( res.getString( menus[k] ) );
+    ++k; if ( TDLevel.overAdvanced ) menu_adapter.add( res.getString( menus[k] ) );
+    ++k; if ( TDLevel.overExpert && TDSetting.mPacketLog ) menu_adapter.add( res.getString( menus[k] ) ); // PACKET_LOG
+    ++k; menu_adapter.add( res.getString( menus[k] ) );
+    ++k; menu_adapter.add( res.getString( menus[k] ) );
     // ++k; if ( TDLevel.overTester ) nemu_adapter.add( res.getString( menus[8] ) ); // CALIB_RESET
-    mMenu.setAdapter( nemu_adapter );
+    mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
   }
 
@@ -1210,7 +1210,7 @@ public class DeviceActivity extends Activity
     }
   }
 
-  // from ScanBLEDialoag
+  // from ScanBLEDialog
   public void setBLEDevice( BluetoothDevice bt_device )
   {
     // TDLog.v("BLE " + "Device Activity: TODO set bluetooth LE device");

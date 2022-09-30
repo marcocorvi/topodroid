@@ -18,7 +18,7 @@ import com.topodroid.c3in.SketchPoint;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDUtil;
+// import com.topodroid.utils.TDUtil;
 
 import java.nio.FloatBuffer;
 // import java.nio.ShortBuffer;
@@ -358,7 +358,7 @@ public class GlSketch extends GlShape
   // ------------------------------------------------------------------------------
   /** 2D point
    */
-  class Point2D
+  static class Point2D
   {
     double x, y;
     int idx;    // index in the area boundary

@@ -362,7 +362,7 @@ public class SymbolLibrary
 
   /** symbol node in the RB-tree of symbols
    */
-  private class SymbolNode
+  private static class SymbolNode
   {
     SymbolNode parent;
     SymbolNode left;

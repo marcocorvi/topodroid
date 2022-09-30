@@ -108,7 +108,7 @@ public class DeviceHelper extends DataSetObservable
     myDB = null;
   }
 
-  /** open the "devuice10.sqlite" database
+  /** open the "device10.sqlite" database
    */
   private void openDatabase()
   {
@@ -570,7 +570,7 @@ public class DeviceHelper extends DataSetObservable
   }
    
   // ----------------------------------------------------------------------
-  // SELECT: LIST SURVEY / CABIL NAMES
+  // SELECT: LIST SURVEY / CALIB NAMES
 
   /** @return the list of names in a table
    * @param table   table
@@ -1045,7 +1045,7 @@ public class DeviceHelper extends DataSetObservable
     return ret;
   }
 
-  /** get a device haed-tail indices (useful only for DistoX v. 1)
+  /** get a device head-tail indices (useful only for DistoX v. 1)
    * @param address       device address
    * @param head_tail  (output) head-tail pair
    */
@@ -1164,8 +1164,8 @@ public class DeviceHelper extends DataSetObservable
    */
   boolean updateDeviceHeadTail( String address, int[] head_tail )
   {
+    if ( myDB == null ) return false; // DB_NOTE should not happen
     boolean ret = false;
-    if ( myDB == null ) return ret; // DB_NOTE should not happen
     // if ( updateDeviceHeadTailStmt == null )
     //     updateDeviceHeadTailStmt = myDB.compileStatement( "UPDATE devices set head=?, tail=? WHERE address=?" );
     Cursor cursor = null;
@@ -1279,7 +1279,7 @@ public class DeviceHelper extends DataSetObservable
      // // return true;
    }
 
-   /** update the calibration coefficinets
+   /** update the calibration coefficients
     * @param id      calibration ID
     * @param coeff   calibration coefficients (as a string)
     */

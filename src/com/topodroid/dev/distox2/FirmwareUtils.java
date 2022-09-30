@@ -49,7 +49,7 @@ public class FirmwareUtils
 
   /** say if the file fw code is compatible with some known hardware
    * the real hardware is not known at this point - therefore can only check the firmware file signature
-   * @return true if the hardwrae type is known
+   * @return true if the hardware type is known
    */
   static boolean isCompatible( int fw )
   {

@@ -68,7 +68,7 @@ public class TDString
     return (str == null)? null : str.replaceAll("\\s+", " ");
   }
 
-  /** @return string tokenisation on multiple spaces
+  /** @return string tokenization on multiple spaces
    * @param str input string
    */
   public static String[] splitOnSpaces( String str )
@@ -154,7 +154,7 @@ public class TDString
     nullTerminate();
   }
 
-  /** @return true if this striung is equal to the given string
+  /** @return true if this string is equal to the given string
    * @param str    string to compare with
    */
   public boolean equals( TDString str )
@@ -164,8 +164,8 @@ public class TDString
     return true;
   }
     
-  /** @return -1 if this string is lexicographicalle smaller than the given string
-   *          +1 if this string is lexicographicalle larger than the givaen string
+  /** @return -1 if this string is lexicographically smaller than the given string
+   *          +1 if this string is lexicographically larger than the given string
    *           0 if they are equal
    * @param str given string
    */
@@ -412,8 +412,7 @@ public class TDString
     return this;
   }
 
-  /** @return this string tokenisation on multiple spaces
-   * @param str input string
+  /** @return this string tokenization on multiple spaces
    */
   public List<String> splitOnSpaces( )
   {

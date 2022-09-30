@@ -103,7 +103,7 @@ Multi-shot selection buttons:<br>
 <li>set shots extend to <i>right</i></li>
 <li>special actions [T]</li>
 <li><i>cut</i> the shots and put them in the shot-buffer</li>
-<li><i>copy</i> the shotsi into the shot-buffer</li>
+<li><i>copy</i> the shots into the shot-buffer</li>
 <li><i>close</i> the multi-shot selection</li>
 </ul><br><p>
 
@@ -180,9 +180,9 @@ It is advisable not to do the compensation, as this allows to see graphically th
 This is the default behaviour.<br><p>
 
 Nevertheless TopoDroid implements a few "loop error compensation" policies.<br>
-The <i>normal</i> policy [E] distributes the lopp closure errors on the network branches that make the loops.<br>
+The <i>normal</i> policy [E] distributes the loop closure errors on the network branches that make the loops.<br>
 In the <i>weighted</i> policy [E] the misclusures of the loops are weighted according to the "branch relevance".<br>
-<!-- i don't recall exacty how this works -->
+<!-- i don't recall exactly how this works -->
 The "selective" [T] compensation applies only the corrections of loops with misclosure smaller than a certain percent
 (the "loop threshold" setting) of the loop length.<br>
 Finally, the special loop compensation based on "triangles" is for <a href="page_trilateration.htm">trilateration</a> [T].

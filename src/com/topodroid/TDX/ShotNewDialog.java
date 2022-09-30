@@ -327,7 +327,7 @@ class ShotNewDialog extends MyDialog
     mETdistance.requestFocus( );  // try to get focus to distance/depth field
   }
 
-  /** @implements: set azimuth/clino and orientation
+  /** @note implements: set azimuth/clino and orientation
    * @param b  azimuth [degrees]
    * @param c  clino [degrees]
    * @param o  camera orientation [degrees]
@@ -342,7 +342,7 @@ class ShotNewDialog extends MyDialog
     mETclino.setText( String.format(Locale.US, "%.1f", c ) );
   } 
  
-  /** @implements: store the image JPEG data
+  /** @note implements: store the image JPEG data
    * @param data   image data
    * @return true if the JPEG data are not null
    */

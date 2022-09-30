@@ -544,7 +544,7 @@ public class TdmConfigActivity extends Activity
   }
 
   // FIXME_URI
-  /** start a request to get an export resuorce
+  /** start a request to get an export resource
    * @param index    export type 
    * @param filename name of the export file (used as "title" in the request)
    */

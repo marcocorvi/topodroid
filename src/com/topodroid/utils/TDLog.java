@@ -12,7 +12,7 @@
 package com.topodroid.utils;
 
 import com.topodroid.prefs.TDPrefHelper;
-import com.topodroid.prefs.TDPrefKey;
+// import com.topodroid.prefs.TDPrefKey;
 // import com.topodroid.TDX.TDPath;
 
 import java.io.File;
@@ -21,7 +21,7 @@ import java.io.PrintWriter;
 import java.io.FileWriter;
 // import java.io.FileNotFoundException;
 
-import android.content.SharedPreferences;
+// import android.content.SharedPreferences;
 
 import android.util.Log;
 

@@ -12,9 +12,9 @@
 package com.topodroid.dev.ble;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.TDX.TDToast;
+// import com.topodroid.TDX.TDToast;
 
-import android.bluetooth.BluetoothDevice;
+// import android.bluetooth.BluetoothDevice;
 // import android.bluetooth.BluetoothProfile;
 // import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattDescriptor;
@@ -37,6 +37,9 @@ public class BleUtils
 
   public final static UUID CCCD_UUID = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb");
   
+  // ------------------------------------------------------------------------------
+  /* DEBUG
+  
   public static String deviceToString( BluetoothDevice device )
   {
     String name = null;
@@ -51,20 +54,16 @@ public class BleUtils
     return name + " " + device.getAddress();
   }
 
-  // ------------------------------------------------------------------------------
-  // DEBUG
   public static String chrtPropString( BluetoothGattCharacteristic chrt )
   {
     int prop = chrt.getProperties();
     String B = isChrtPBcast(prop)? "B" : ".";
     String I = isChrtPIndicate(prop)? "I" : ".";
     String N = isChrtPNotify(prop)? "N" : ".";
-
     String r = isChrtPRead(prop)? "R" : ".";
     String w = isChrtPWrite(prop)? "W" : ".";
     String s = isChrtPWriteSign(prop)? "Ws" : ".";
     String n = isChrtPWriteNoResp(prop)? "Wn" : ".";
-
     String write_type = "";
     if ( canChrtPWrite( chrt ) ) {
       int type = chrt.getWriteType();
@@ -96,6 +95,14 @@ public class BleUtils
     for ( byte b : bytes ) sb.append( (int)b ).append(" ");
     return sb.toString();
   }
+  
+  public static String bytesToHexString( byte[] bytes )
+  {
+    StringBuilder sb = new StringBuilder();
+    for ( int k=0; k<bytes.length; ++k ) sb.append( String.format(" %02x", bytes[k] ) );
+    return sb.toString();
+  }
+  */
 
   public static String bytesToAscii( byte[] bytes )
   {
@@ -106,14 +113,6 @@ public class BleUtils
     }
     return sb.toString();
   }
-  
-  public static String bytesToHexString( byte[] bytes )
-  {
-    StringBuilder sb = new StringBuilder();
-    for ( int k=0; k<bytes.length; ++k ) sb.append( String.format(" %02x", bytes[k] ) );
-    return sb.toString();
-  }
-
 
   // ------------------------------------------------------------------------------
   public static boolean isChrtPBcast( int prop )       { return (prop & BluetoothGattCharacteristic.PROPERTY_BROADCAST) != 0; }
@@ -124,11 +123,11 @@ public class BleUtils
   public static boolean isChrtPWriteSign( int prop )   { return (prop & BluetoothGattCharacteristic.PROPERTY_SIGNED_WRITE) != 0; }
   public static boolean isChrtPWriteNoResp( int prop ) { return (prop & BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE) != 0; }
 
-  public static boolean canChrtPIndicate( BluetoothGattCharacteristic chrt )
-  { 
-    int prop = chrt.getProperties();
-    return isChrtPIndicate( prop );
-  }
+  // // public static boolean canChrtPIndicate( BluetoothGattCharacteristic chrt )
+  // // { 
+  // //   int prop = chrt.getProperties();
+  // //   return isChrtPIndicate( prop );
+  // // }
 
   public static boolean canChrtPNotify( BluetoothGattCharacteristic chrt )
   { 
@@ -177,7 +176,7 @@ public class BleUtils
 
   public static boolean isChrtRead( int perm )          { return (perm & BluetoothGattCharacteristic.PERMISSION_READ) != 0; }
   public static boolean isChrtWrite( int perm )         { return (perm & BluetoothGattCharacteristic.PERMISSION_WRITE) != 0; }
-  public static boolean isChrtReadWrite( int perm )     { return isChrtRead( perm ) && isChrtWrite( perm ); }
+  // public static boolean isChrtReadWrite( int perm )     { return isChrtRead( perm ) && isChrtWrite( perm ); }
   public static boolean isChrtReadEnc( int perm )       { return (perm & BluetoothGattCharacteristic.PERMISSION_READ_ENCRYPTED) != 0; }
   public static boolean isChrtWriteEnc( int perm )      { return (perm & BluetoothGattCharacteristic.PERMISSION_WRITE_ENCRYPTED) != 0; }
   public static boolean isChrtWriteSign( int perm )     { return (perm & BluetoothGattCharacteristic.PERMISSION_WRITE_SIGNED) != 0; }
@@ -199,7 +198,7 @@ public class BleUtils
 
   public static boolean isDescRead( int perm )          { return (perm & BluetoothGattDescriptor.PERMISSION_READ) != 0; }
   public static boolean isDescWrite( int perm )         { return (perm & BluetoothGattDescriptor.PERMISSION_WRITE) != 0; }
-  public static boolean isDescReadWrite( int perm )     { return isDescRead( perm ) && isDescWrite( perm ); }
+  // public static boolean isDescReadWrite( int perm )     { return isDescRead( perm ) && isDescWrite( perm ); }
   public static boolean isDescReadEnc( int perm )       { return (perm & BluetoothGattDescriptor.PERMISSION_READ_ENCRYPTED) != 0; }
   public static boolean isDescWriteEnc( int perm )      { return (perm & BluetoothGattDescriptor.PERMISSION_WRITE_ENCRYPTED) != 0; }
   public static boolean isDescWriteSign( int perm )     { return (perm & BluetoothGattDescriptor.PERMISSION_WRITE_SIGNED) != 0; }

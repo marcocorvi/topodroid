@@ -127,7 +127,7 @@ public class TDMatrix
     return new TDMatrix( x.times(b), y.times(b), z.times(b) );
   }
 
-  /** return the vector ovtaimen by multiplying this matrix with a vector
+  /** return the vector obtained by multiplying this matrix with a vector
    * @param b  vector
    * @note the result is
    *     -- X --     b.x
@@ -202,7 +202,7 @@ public class TDMatrix
     return ret;
   }
 
-  /** @returns the maximum difference of elemnts between this matrix and another one
+  /** @return the maximum difference of elements between this matrix and another one
    * @param b  the other matrix
    */
   public float MaxDiff( TDMatrix b )

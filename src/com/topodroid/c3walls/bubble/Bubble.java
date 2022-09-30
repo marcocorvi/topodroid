@@ -72,7 +72,7 @@ public class Bubble
   public void reduce( ArrayList<Triangle3S> tri2, ArrayList<Triangle3S> tri3 )
   {
     for ( Triangle3S tr : tri2 ) mTri.remove( tr );
-    for ( Triangle3S tr : tri3 ) mTri.add( tr );
+    mTri.addAll(tri3);  // for ( Triangle3S tr : tri3 ) mTri.add( tr );
   }
 
   public ArrayList<Triangle3S> computeReducedTriangles( ArrayList<Triangle3S> tri2, Bubble bb )

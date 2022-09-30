@@ -33,7 +33,7 @@ import android.inputmethodservice.KeyboardView;
 
 import android.widget.EditText;
 import android.widget.Button;
-import android.widget.CheckBox;
+// import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
 class SearchDialog extends MyDialog
@@ -144,8 +144,8 @@ class SearchDialog extends MyDialog
   }
 
   /**
-   * @param args
-   * @param nr   expebcted number of strings
+   * @param args args
+   * @param nr   expected number of strings
    */
   private boolean checkArgsName( String args, int nr )
   {

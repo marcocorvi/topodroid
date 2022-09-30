@@ -197,7 +197,7 @@ public class CutNPaste
     return button;
   }
 
-  /** bluetooth popyp
+  /** bluetooth popup
    */
   static private PopupWindow mPopupBT = null;
 

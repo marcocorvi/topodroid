@@ -123,13 +123,13 @@ public class DrawingTunnel extends DrawingSvgBase
             int nf = -1;
             int nt = -1;
             if ( map.containsKey( from ) ) {
-              nf = map.get( from ).intValue();
+              nf = map.get( from ).intValue(); // may produce null-pointer exception
             } else {
               nf = nr++;
               map.put( from, nf );
             }
             if ( map.containsKey( to ) ) {
-              nt = map.get( from ).intValue();
+              nt = map.get( from ).intValue(); // may produce null-pointer exception
             } else {
               nt = nr++;
               map.put( to, nt );
@@ -196,7 +196,7 @@ public class DrawingTunnel extends DrawingSvgBase
             NumStation st = num.getClosestStation( type, xx/FACTOR, yy/FACTOR ); // st.name st.e, s, v
             if ( st != null ) {
               if ( map.containsKey( st.name ) ) {
-                int nf = map.get( st.name ).intValue();
+                int nf = map.get( st.name ).intValue(); // may produce null-pointer exception
                 int nt = nr++;
                 pw5.format(Locale.US, skpathConnective, nf, nt );
                 pw5.format( pathcodes );
@@ -303,7 +303,7 @@ public class DrawingTunnel extends DrawingSvgBase
     NumStation st = num.getClosestStation( type, x/FACTOR, y/FACTOR ); // st.name st.e, s, v
     if ( st != null ) {
       if ( map.containsKey( st.name ) ) {
-        int nt = map.get( st.name ).intValue();
+        int nt = map.get( st.name ).intValue(); // may produce null-pointer exception
         pw.format(Locale.US, skpathConnective, nn, nt );
         pw.format(Locale.US, formatPTxy, x, y );
         if ( PlotType.isPlan( type ) ) { 

@@ -12,7 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDFile;
+// import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFeedback;
 import com.topodroid.utils.TDTag;
@@ -86,9 +86,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
-import android.net.Uri;
+// import android.net.Uri;
 
-import java.io.File;
+// import java.io.File;
 import java.util.TreeSet;
 
 // FIXME-28
@@ -427,7 +427,7 @@ public class ShotWindow extends Activity
   }
 
   /** @return true if the "current station" name is the specified name
-   * @param name   specified name
+   * @param st   specified name
    */
   boolean isCurrentStationName( String st ) { return mApp.isCurrentStationName( st ); }
 
@@ -1944,7 +1944,7 @@ public class ShotWindow extends Activity
   }
 
   /** update the (depth) data of a shot 
-   * @param @note the params order is depth-azimuth-length
+   * @note the params order is depth-azimuth-length
    * @param p    depth
    * @param b    azimuth
    * @param d    length
@@ -2805,7 +2805,7 @@ public class ShotWindow extends Activity
   }
 
   /** react to a change in the configuration
-   * @param cfg   new configuration
+   * @param new_cfg   new configuration
    */
   @Override
   public void onConfigurationChanged( Configuration new_cfg )

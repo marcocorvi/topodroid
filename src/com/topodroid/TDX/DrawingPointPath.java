@@ -59,7 +59,7 @@ public class DrawingPointPath extends DrawingPath
   // }
 
   // FIXME SECTION_RENAME
-  /** fix the scrap name in the option string repracing the survey-prefix
+  /** fix the scrap name in the option string replacing the survey-prefix
    * @param survey_name   name of the new survey
    * @return this point path
    * @note only for section point
@@ -556,15 +556,15 @@ public class DrawingPointPath extends DrawingPath
     mPointText = text;
   }
 
-  /** move the point to a new position
-   * @param x   X coord (in the scene)
-   * @param y   Y coord (in the scene)
-   */
-  void shiftTo( float x, float y ) // x,y scene coords
-  {
-    mPath.offset( x-cx, y-cy );
-    setCenter( x, y );
-  }
+  // /** move the point to a new position - UNUSED
+  //  * @param x   X coord (in the scene)
+  //  * @param y   Y coord (in the scene)
+  //  */
+  // void shiftTo( float x, float y ) // x,y scene coords
+  // {
+  //   mPath.offset( x-cx, y-cy );
+  //   setCenter( x, y );
+  // }
 
 //   @Override
 //   void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )

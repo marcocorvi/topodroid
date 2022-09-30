@@ -36,7 +36,7 @@ class DrawingAreaDialog extends MyDialog
 {
   private DrawingWindow mParent;
   private DrawingAreaPath mArea;  // area item
-  private int mAreaType;          // area type initualized from area item's type
+  private int mAreaType;          // area type initialized from area item's type
   private boolean mOrientable;    // whether the area type is orientable
   // private boolean mDoOptions; // areas do not have options
 

@@ -17,7 +17,7 @@ package com.topodroid.dev.ble;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.dev.ConnectionState;
-import com.topodroid.TDX.TDToast;
+// import com.topodroid.TDX.TDToast;
 
 import android.os.Build;
 // import android.os.Looper;
@@ -418,7 +418,7 @@ public class BleCallback extends BluetoothGattCallback
       return chrt != null && mGatt.readCharacteristic( chrt );
     } catch ( SecurityException e ) {
       TDLog.e("SECURITY read characteristic " + e.getMessage());
-      // TDToast.makeBad("Security error: read charcteristic");
+      // TDToast.makeBad("Security error: read characteristic");
       // TODO closeGatt() ?
     }
     return false;
@@ -442,7 +442,7 @@ public class BleCallback extends BluetoothGattCallback
       return mGatt.writeCharacteristic( chrt );
     } catch ( SecurityException e ) {
       TDLog.e("SECURITY write characteristic " + e.getMessage());
-      // TDToast.makeBad("Security error: write charcteristic");
+      // TDToast.makeBad("Security error: write characteristic");
       // TODO closeGatt() ?
     }
     return false;
@@ -476,24 +476,25 @@ public class BleCallback extends BluetoothGattCallback
   }
 
   // -------------------------------------------------------------------------
-  private BluetoothGattCharacteristic getNotifyChrt( UUID srvUuid, UUID chrtUuid )
-  {
-    if ( mGatt == null ) {
-      return null;
-    }
-    BluetoothGattService srv = mGatt.getService( srvUuid );
-    if ( srv  == null ) {
-      return null;
-    }
-    BluetoothGattCharacteristic chrt = srv.getCharacteristic( chrtUuid );
-    if ( chrt == null ) {
-      return null;
-    }
-    if ( ! BleUtils.canChrtPNotify( chrt ) ) {
-      return null;
-    }
-    return chrt;
-  }
+  // UNUSED
+  // private BluetoothGattCharacteristic getNotifyChrt( UUID srvUuid, UUID chrtUuid )
+  // {
+  //   if ( mGatt == null ) {
+  //     return null;
+  //   }
+  //   BluetoothGattService srv = mGatt.getService( srvUuid );
+  //   if ( srv  == null ) {
+  //     return null;
+  //   }
+  //   BluetoothGattCharacteristic chrt = srv.getCharacteristic( chrtUuid );
+  //   if ( chrt == null ) {
+  //     return null;
+  //   }
+  //   if ( ! BleUtils.canChrtPNotify( chrt ) ) {
+  //     return null;
+  //   }
+  //   return chrt;
+  // }
 
   public BluetoothGattCharacteristic getReadChrt( UUID srvUuid, UUID chrtUuid )
   {

@@ -22,7 +22,7 @@ import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.dev.ConnectionState;
-import com.topodroid.dev.DataType;
+// import com.topodroid.dev.DataType;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.TopoDroidComm;
 import com.topodroid.dev.ble.BleCallback;
@@ -36,7 +36,7 @@ import com.topodroid.dev.ble.BleBuffer;
 import com.topodroid.dev.ble.BleQueue;
 import com.topodroid.dev.distox.DistoX;
 import com.topodroid.packetX.MemoryOctet;
-import com.topodroid.prefs.TDSetting;
+// import com.topodroid.prefs.TDSetting;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
 
@@ -79,7 +79,7 @@ public class DistoXBLEComm extends TopoDroidComm
   private int mPacketToRead = 0; // number of packet to read with laser-commands
   Thread mConsumer = null;
 
-  Object mNewDataFlag;
+  final Object mNewDataFlag = new Object();
   private BleQueue mQueue;
 
   boolean mThreadConsumerWorking = false;
@@ -96,7 +96,7 @@ public class DistoXBLEComm extends TopoDroidComm
     // mRemoteAddress = address;
     mRemoteBtDevice  = bt_device;
     mContext = ctx;
-    mNewDataFlag = new Object();
+    // mNewDataFlag = new Object();
     mQueue = new BleQueue();
     mConsumer = new Thread() {
       @Override public void run() {

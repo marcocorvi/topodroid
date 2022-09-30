@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 import android.os.ParcelFileDescriptor;
 
-import java.io.InputStreamReader;
+// import java.io.InputStreamReader;
  
 public class ImportCompassTask extends ImportTask
 {

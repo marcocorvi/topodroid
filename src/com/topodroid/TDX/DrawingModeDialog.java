@@ -170,7 +170,7 @@ class DrawingModeDialog extends MyDialog
         }
         if ( TDSetting.mWithLevels > 0 ) setLevels();
       } else if ( vid == R.id.button_back ) {
-          /* nothing */
+      //   /* nothing */
       // } else if ( vid == R.id.button_mode_cancel ) {
       //   /* nothing */
       }

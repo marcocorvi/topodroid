@@ -16,7 +16,7 @@
 package com.topodroid.calib;
 
 // import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDString;
+// import com.topodroid.utils.TDString;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
@@ -36,8 +36,8 @@ import android.inputmethodservice.KeyboardView;
 
 import android.widget.EditText;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
+// import android.widget.CheckBox;
+// import android.widget.LinearLayout;
 
 public class GMSearchDialog extends MyDialog
                            implements View.OnClickListener

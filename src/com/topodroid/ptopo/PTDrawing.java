@@ -85,7 +85,7 @@ public class PTDrawing
 
     // void print( )
     // {
-    //   tdlog.v( "PT drawing: size " + _elements.size() );
+    //   TDLog.v( "PT drawing: size " + _elements.size() );
     //   _mapping.print();
     //   for ( PTElement el : _elements ) el.print();
     // }

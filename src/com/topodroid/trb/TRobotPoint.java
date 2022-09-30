@@ -36,6 +36,6 @@ public class TRobotPoint
 
   // void dump( )
   // {
-  //   tdlog.v( "P " + mSeries.mNumber + "." + mNumber + " <" + mName + ">" );
+  //   TDLog.v( "P " + mSeries.mNumber + "." + mNumber + " <" + mName + ">" );
   // }
 }

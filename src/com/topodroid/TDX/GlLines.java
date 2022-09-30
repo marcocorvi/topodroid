@@ -57,7 +57,7 @@ public class GlLines extends GlShape
 
   /** 3D segment
    */
-  private class Line3D
+  private static class Line3D
   {
     Vector3D v1;
     Vector3D v2;
@@ -100,7 +100,8 @@ public class GlLines extends GlShape
       isSurvey = is;
     }
 
-    /** @return the color (as 4-vector) of this line
+    /** set the color (as 4-vector) of this line
+     * @param acolor color 4-vector (to be assigned)
      */
     void getLineColor( float[] acolor )
     {

@@ -20,7 +20,7 @@ class PCSite extends Vector3D
   Angle angle; // head of list of disjoint angles at the site
   PCPolygon poly;
 
-  class Angle // angle (between two sites) at a site
+  static class Angle // angle (between two sites) at a site
   {
     PCSite v1; // angle side vertices
     PCSite v2;

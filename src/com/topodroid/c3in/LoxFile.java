@@ -29,7 +29,7 @@ import com.topodroid.utils.TDLog;
 
 class LoxFile
 {
-  private class Chunk_t
+  private static class Chunk_t
   {
     int type;
     int rec_size;
@@ -100,7 +100,7 @@ class LoxFile
   // static private final int SIZE_SURVEY  = ( ( 6 * Endian.SIZE32 + 0 * Endian.SIZEDBL ) );
   static private final int SIZE_STATION = ( ( 7 * Endian.SIZE32 + 3 * Endian.SIZEDBL ) ); // 52 bytes
   static private final int SIZE_SHOT    = ( ( 5 * Endian.SIZE32 + 9 * Endian.SIZEDBL ) );
-  static private final int SIZE_SCRAP   = ( ( 8 * Endian.SIZE32 + 0 * Endian.SIZEDBL ) );
+  static private final int SIZE_SCRAP   = ( ( 8 * Endian.SIZE32     * Endian.SIZEDBL ) );
   // static private final int SIZE_SURFACE = ( ( 5 * Endian.SIZE32 + 6 * Endian.SIZEDBL ) );
 
   private void readChunks( DataInputStream dis, String filename ) throws ParserException
@@ -182,7 +182,7 @@ class LoxFile
     String name  = null;
     String title = null;
     for ( int i=0; i<n0; ++i ) {
-      int id = Endian.toIntLEndian( recs, 4*(6*i + 0) );
+      int id = Endian.toIntLEndian( recs, 4*(6*i    ) );
       int np = Endian.toIntLEndian( recs, 4*(6*i + 1) );
       int ns = Endian.toIntLEndian( recs, 4*(6*i + 2) );
       int pnt= Endian.toIntLEndian( recs, 4*(6*i + 3) );

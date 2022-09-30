@@ -406,7 +406,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     EditText tvFrom;
     EditText tvTo;
     TextView tvLength;
-    DBlock   mBlock;   // used to make sure blocks do not hold ref to a view, that does not belog to them REVISE_RECENT
+    DBlock   mBlock;   // used to make sure blocks do not hold ref to a view, that does not belong to them REVISE_RECENT
 
     ViewHolder( TextView id, EditText from, EditText to, TextView len )
     {
@@ -548,7 +548,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       setColor( b );
    }
 
-   /** set the color of a bleck 
+   /** set the color of a block
     * @param b  block
     * @note this implements the TopoDroid data coloring policy
     */
@@ -674,7 +674,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       DBlock b = (DBlock)( getItem( pos ) );
       if ( b.mId == blk_id ) { // use block id instead of block itself
         View v = b.getView();
-        // TDLog.v( "DBlock adapter " + b.mId + " get tupe: view is " + ((v == null)? "null" : "non-null") );
+        // TDLog.v( "DBlock adapter " + b.mId + " get type: view is " + ((v == null)? "null" : "non-null") );
         if ( v != null ) {
           ViewHolder holder = (ViewHolder) v.getTag();
           if ( holder != null ) {

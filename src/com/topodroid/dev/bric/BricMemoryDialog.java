@@ -1,4 +1,13 @@
 /** @file BricMemoryDialog.java
+ *
+ * @author marco corvi
+ * @date 2021 (?)
+ *
+ * @brief BRIC4 memory dialog
+ * --------------------------------------------------------
+ *  Copyright This software is distributed under GPL-3.0 or later
+ *  See the file COPYING.
+ * --------------------------------------------------------
  */
 package com.topodroid.dev.bric;
 

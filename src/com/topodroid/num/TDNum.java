@@ -54,13 +54,13 @@ public class TDNum
 
   // public void dump( )
   // {
-  //   tdlog.v( "Num Stations:" );
+  //   TDLog.v( "Num Stations:" );
   //   for ( NumStation st : mStations ) {
-  //     tdlog.v( "   " + st.name + " S: " + st.s + " E: " + st.e );
+  //     TDLog.v( "   " + st.name + " S: " + st.s + " E: " + st.e );
   //   }
-  //   tdlog.v( "Shots:" );
+  //   TDLog.v( "Shots:" );
   //   for ( NumShot sh : mShots ) {
-  //     tdlog.v( "   From: " + sh.from.name + " To: " + sh.to.name );
+  //     TDLog.v( "   From: " + sh.from.name + " To: " + sh.to.name );
   //   }
   // } 
 
@@ -126,7 +126,7 @@ public class TDNum
   private double mUnattachedLength;
   private int mDupNr;  // number of duplicate shots
   private int mSurfNr; // number of surface shots
-  private double mInLegErrSum0; // angular error distribution of the data withn the legs - accumulators
+  private double mInLegErrSum0; // angular error distribution of the data within the legs - accumulators
   private double mInLegErrSum1;
   private double mInLegErrSum2;
   private double mInLegErr1;    // statistics
@@ -564,7 +564,7 @@ public class TDNum
 
   // ==========================================================================
   // latest data circular buffer
-  private class DBlockBuffer
+  private static class DBlockBuffer
   {
     int N;
     int pos;
@@ -896,7 +896,7 @@ public class TDNum
         if ( from.equals( ts2.from ) && to.equals( ts2.to ) ) { // TDLog.v( "chain a positive sibling" );
           ts1.sibling = ts2;
           ts1 = ts2;
-          ts2.backshot = +1;
+          ts2.backshot = 1;
 	  ++ nrSiblings;
         } else if ( from.equals( ts2.to ) && to.equals( ts2.from ) ) { // TDLog.v( "chain a negative sibling" );
           ts1.sibling = ts2;
@@ -1176,7 +1176,7 @@ public class TDNum
   }
 
   /** insert a tri-splay into the list of splays
-   * @parm ts   tri-splay
+   * @param ts   tri-splay
    */
   private boolean insertSplay( TriSplay ts )
   {
@@ -1302,7 +1302,7 @@ public class TDNum
 
   /** a cycle step: a branch from a node
    */
-  class NumStep
+  static class NumStep
   { 
     NumBranch b; // branch of this step
     NumNode n;   // ???

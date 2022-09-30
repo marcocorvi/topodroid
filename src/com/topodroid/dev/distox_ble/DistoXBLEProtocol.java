@@ -12,7 +12,7 @@
 package com.topodroid.dev.distox_ble;
 
 import com.topodroid.TDX.TopoDroidApp;
-import com.topodroid.dev.DataType;
+// import com.topodroid.dev.DataType;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.TopoDroidProtocol;
 import com.topodroid.packetX.MemoryOctet;
@@ -21,7 +21,7 @@ import com.topodroid.utils.TDLog;
 import android.content.Context;
 import android.os.Handler;
 
-import java.io.IOException;
+// import java.io.IOException;
 
 public class DistoXBLEProtocol extends TopoDroidProtocol
 {
@@ -86,7 +86,7 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
    *                   5 for flash checksum (0x3b)
    *                   3 for hw signature (0x3c)
    *        offset  0 is command: it can be 0x3a 0x3b 0x3c 0x3d 0x3e
-   *        offsets 1,2 contain adddres (0x3d 0x3e), reply (0x3c)
+   *        offsets 1,2 contain address (0x3d 0x3e), reply (0x3c)
    *        offset  3 payload length (0x3d 0x3e)
    * @return packet type
    */

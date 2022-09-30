@@ -33,7 +33,7 @@ public class OsmFactory
 {
   /** a 2D line path: a line-path is an array of 2D nodes
    */
-  class Path
+  static class Path
   {
     ArrayList< DPoint2D > nodes;  // nodes of the path
     

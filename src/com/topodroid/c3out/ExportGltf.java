@@ -126,7 +126,7 @@ public class ExportGltf
     return true;
   }
 
-  private class MinMax
+  private static class MinMax
   {
     float xmin, xmax;
     float ymin, ymax;

@@ -298,7 +298,7 @@ public class TdmViewActivity extends Activity
     //     if ( i+1 < ev.getPointerCount() ) sb.append( ":" );
     //   }
     //   sb.append( "]" );
-    //   tdlog.v( "Tdm View " + sb.toString() );
+    //   TDLog.v( "Tdm View " + sb.toString() );
     // }
     
 

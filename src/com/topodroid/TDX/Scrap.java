@@ -68,7 +68,7 @@ public class Scrap
   boolean hasPlotName( String plot_name ) { return mPlotName != null && mPlotName.equals( plot_name ); }
 
   // ----------------------------------------------------------
-  /** "merge" a second rectangle into a first rectanle
+  /** "merge" a second rectangle into a first rectangle
    * @param b0   first rectangle
    * @param b1   second rectangle
    */
@@ -306,7 +306,7 @@ public class Scrap
   /** remove a section line
    * @param line     section line to remove
    * @param scrap    ?
-   * @param eraseCmd erase command (for UNDO)
+   * @param cmd erase command (for UNDO)
    * @note deleting a section line automatically deletes the associated section point(s)
    */
   void deleteSectionLine( DrawingPath line, String scrap, EraseCommand cmd )
@@ -334,7 +334,7 @@ public class Scrap
 
   /** remove a section point
    * @param scrap_name ?
-   * @param eraseCmd   erase command (for UNDO)
+   * @param cmd   erase command (for UNDO)
    */
   void deleteSectionPoint( String scrap_name, EraseCommand cmd )
   {
@@ -1058,52 +1058,53 @@ public class Scrap
       }
     }
   }
-
-  /* Check if any line overlaps another of the same type
-   * In case of overlap the overlapped line is removed
-   */
-  void checkLines()
-  {
-    synchronized( TDPath.mCommandsLock ) {
-      int size = mCurrentStack.size();
-      for ( int i1 = 0; i1 < size; ++i1 ) {
-        ICanvasCommand cmd1 = mCurrentStack.get( i1 );
-        if ( cmd1.commandType() != 0 ) continue;
-        DrawingPath path1 = (DrawingPath)cmd1;
-        if ( ! path1.isLine() ) continue; // !(path1 instanceof DrawingLinePath)
-        DrawingLinePath line1 = (DrawingLinePath)path1;
-        for ( int i2 = 0; i2 < size; ++i2 ) {
-          if ( i2 == i1 ) continue;
-          ICanvasCommand cmd2 = mCurrentStack.get( i2 );
-          if ( cmd2.commandType() != 0 ) continue;
-          DrawingPath path2 = (DrawingPath)cmd2;
-          if ( ! path2.isLine() ) continue; // !(path2 instanceof DrawingLinePath)
-          DrawingLinePath line2 = (DrawingLinePath)path2;
-          // if every point in line2 overlaps a point in line1 
-          if ( line1.overlap( line1 ) == line2.size() ) {
-            TDLog.Error("LINE OVERLAP " + i1 + "-" + i2 + " total nr. " + size );
-            // for ( int i=0; i<size; ++i ) {
-            //   ICanvasCommand cmd = mCurrentStack.get( i );
-            //   if ( cmd.commandType() != 0 ) continue;
-            //   DrawingPath path = (DrawingPath)cmd;
-            //   if ( ! path.isLine() ) continue; // !(path instanceof DrawingLinePath)
-            //   DrawingLinePath line = (DrawingLinePath)path;
-            //   line.dump();
-            // }
-            // TDLog.v( "LINE1 ");
-            // line1.dump();
-            // TDLog.v( "LINE2 ");
-            // line2.dump();
-            doDeletePath( line2 );
-            -- size;
-            -- i2;
-            // throw new RuntimeException();
-            if ( i2 < i1 ) --i1;
-          }
-        }
-      }
-    }
-  }
+  
+  // UNUSED
+  // /* Check if any line overlaps another of the same type
+  //  * In case of overlap the overlapped line is removed
+  //  */
+  // void checkLines()
+  // {
+  //   synchronized( TDPath.mCommandsLock ) {
+  //     int size = mCurrentStack.size();
+  //     for ( int i1 = 0; i1 < size; ++i1 ) {
+  //       ICanvasCommand cmd1 = mCurrentStack.get( i1 );
+  //       if ( cmd1.commandType() != 0 ) continue;
+  //       DrawingPath path1 = (DrawingPath)cmd1;
+  //       if ( ! path1.isLine() ) continue; // !(path1 instanceof DrawingLinePath)
+  //       DrawingLinePath line1 = (DrawingLinePath)path1;
+  //       for ( int i2 = 0; i2 < size; ++i2 ) {
+  //         if ( i2 == i1 ) continue;
+  //         ICanvasCommand cmd2 = mCurrentStack.get( i2 );
+  //         if ( cmd2.commandType() != 0 ) continue;
+  //         DrawingPath path2 = (DrawingPath)cmd2;
+  //         if ( ! path2.isLine() ) continue; // !(path2 instanceof DrawingLinePath)
+  //         DrawingLinePath line2 = (DrawingLinePath)path2;
+  //         // if every point in line2 overlaps a point in line1 
+  //         if ( line1.overlap( line1 ) == line2.size() ) {
+  //           TDLog.Error("LINE OVERLAP " + i1 + "-" + i2 + " total nr. " + size );
+  //           // for ( int i=0; i<size; ++i ) {
+  //           //   ICanvasCommand cmd = mCurrentStack.get( i );
+  //           //   if ( cmd.commandType() != 0 ) continue;
+  //           //   DrawingPath path = (DrawingPath)cmd;
+  //           //   if ( ! path.isLine() ) continue; // !(path instanceof DrawingLinePath)
+  //           //   DrawingLinePath line = (DrawingLinePath)path;
+  //           //   line.dump();
+  //           // }
+  //           // TDLog.v( "LINE1 ");
+  //           // line1.dump();
+  //           // TDLog.v( "LINE2 ");
+  //           // line2.dump();
+  //           doDeletePath( line2 );
+  //           -- size;
+  //           -- i2;
+  //           // throw new RuntimeException();
+  //           if ( i2 < i1 ) --i1;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
   /** flip horizontally
    * @param z   ???
@@ -1341,7 +1342,7 @@ public class Scrap
     return true;
   }
 
-  class NearbySplay
+  static class NearbySplay
   {
     final float dx, dy;
     final float d; // distance from point

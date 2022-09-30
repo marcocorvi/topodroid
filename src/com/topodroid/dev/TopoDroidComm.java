@@ -77,7 +77,7 @@ public class TopoDroidComm
 
   /** handle a BRIC packet
    * @param index      bric shot index
-   * @param lister
+   * @param lister     data lister
    * @param data_type bric datatype (0: normal, 1: scan )
    * @param clino_error    error between clino readings
    * @param azimuth_error  error between azimuth readings
@@ -278,7 +278,8 @@ public class TopoDroidComm
    */
   void doneCommThread() { mCommThread = null; }
 
-  /** @return true if the last-received packet was G type
+  /** set whether the data has G shot
+   * @param has_g  whether the data has G shot
    */
   public void setHasG( boolean has_g ) { mHasG = has_g; }
 
@@ -304,14 +305,14 @@ public class TopoDroidComm
     cancelCommThread();
   }
 
-  /** resume work - nothing for deafault
+  /** resume work - nothing for default
    */
   public void resume()
   {
     // if ( mCommThread != null ) { mCommThread.resume(); }
   }
 
-  /** supend work - nothing for deafault
+  /** suspend work - nothing for default
    */
   public void suspend()
   {
@@ -420,7 +421,7 @@ public class TopoDroidComm
   // CONTINUOUS DATA DOWNLOAD
 
   /** connect to a device 
-   * @param address   devuce address
+   * @param address   device address
    * @param lister    data lister
    * @param data_type ???
    * @return always false (ie, failure) by default
@@ -439,7 +440,7 @@ public class TopoDroidComm
   // ON-DEMAND DATA DOWNLOAD
 
   /** download data from the remote device
-   * @param address   devuce address
+   * @param address   device address
    * @param lister    data lister
    * @param data_type packet datatype, either shot or calib (or all) (not used)
    * @return always -1: number of packet received - must be overridden
@@ -451,7 +452,7 @@ public class TopoDroidComm
   }
 
   /** read a number of packets
-   * @param to_read    nyumber of packets to read
+   * @param to_read    number of packets to read
    * @param data_type  ???
    * @return ???
    */

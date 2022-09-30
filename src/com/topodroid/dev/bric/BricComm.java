@@ -1,6 +1,7 @@
 /* @file BricComm.java
  *
  * @author marco corvi
+ * @date jan 2021
  *
  * @brief BRIC4 communication 
  * --------------------------------------------------------
@@ -23,7 +24,6 @@ import com.topodroid.dev.ble.BleOperation;
 import com.topodroid.dev.ble.BleOpConnect;
 import com.topodroid.dev.ble.BleOpDisconnect;
 import com.topodroid.dev.ble.BleOpNotify;
-// import com.topodroid.dev.ble.BleOpIndicate;
 import com.topodroid.dev.ble.BleOpChrtRead;
 import com.topodroid.dev.ble.BleOpChrtWrite;
 import com.topodroid.dev.ble.BleUtils;
@@ -34,7 +34,7 @@ import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.R;
-import com.topodroid.utils.TDUtil;
+// import com.topodroid.utils.TDUtil;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 
@@ -340,10 +340,11 @@ public class BricComm extends TopoDroidComm
   // callback action completions - these methods must clear the pending action by calling
   // clearPending() which starts a new action if there is one waiting
 
-  void subscribe( UUID service, UUID characteristic )
-  {
-     enqueueOp( new BleOpNotify( mContext, this, service, characteristic, true ) );
-  }
+  // UNUSED
+  // void subscribe( UUID service, UUID characteristic )
+  // {
+  //    enqueueOp( new BleOpNotify( mContext, this, service, characteristic, true ) );
+  // }
 
   /** react to service discovery
    * @param gatt   bluetooth GATT
@@ -751,33 +752,35 @@ public class BricComm extends TopoDroidComm
     return true;
   }
 
-  private void enqueueShot( final BleComm comm )
-  {
-    (new Thread() {
-      public void run() {
-        // TDLog.Log( TDLog.LOG_BT, "BRIC comm: enqueue LASER cmd");
-        byte[] cmd1 = Arrays.copyOfRange( BricConst.COMMAND_LASER, 0, 5 );
-        enqueueOp( new BleOpChrtWrite( mContext, comm, BricConst.CTRL_SRV_UUID, BricConst.CTRL_CHRT_UUID, cmd1 ) );
-        doNextOp();
-        TDUtil.slowDown( 600 );
-        // TDLog.Log( TDLog.LOG_BT, "BRIC comm: enqueue SHOT cmd");
-        byte[] cmd2 = Arrays.copyOfRange( BricConst.COMMAND_SHOT, 0, 4 );
-        enqueueOp( new BleOpChrtWrite( mContext, comm, BricConst.CTRL_SRV_UUID, BricConst.CTRL_CHRT_UUID, cmd2 ) );
-        doNextOp();
-        TDUtil.slowDown( 800 );
-      }
-    } ).start();
-  }
+  // UNUSED
+  // private void enqueueShot( final BleComm comm )
+  // {
+  //   (new Thread() {
+  //     public void run() {
+  //       // TDLog.Log( TDLog.LOG_BT, "BRIC comm: enqueue LASER cmd");
+  //       byte[] cmd1 = Arrays.copyOfRange( BricConst.COMMAND_LASER, 0, 5 );
+  //       enqueueOp( new BleOpChrtWrite( mContext, comm, BricConst.CTRL_SRV_UUID, BricConst.CTRL_CHRT_UUID, cmd1 ) );
+  //       doNextOp();
+  //       TDUtil.slowDown( 600 );
+  //       // TDLog.Log( TDLog.LOG_BT, "BRIC comm: enqueue SHOT cmd");
+  //       byte[] cmd2 = Arrays.copyOfRange( BricConst.COMMAND_SHOT, 0, 4 );
+  //       enqueueOp( new BleOpChrtWrite( mContext, comm, BricConst.CTRL_SRV_UUID, BricConst.CTRL_CHRT_UUID, cmd2 ) );
+  //       doNextOp();
+  //       TDUtil.slowDown( 800 );
+  //     }
+  //   } ).start();
+  // }
 
-  private boolean sendLastTime( )
-  {
-    byte[] last_time = ((BricProto)mProtocol).getLastTime();
-    // TDLog.v( "BRIC comm send last time: " + BleUtils.bytesToString( last_time ) );
-    if ( last_time == null ) return false;
-    enqueueOp( new BleOpChrtWrite( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.LAST_TIME_UUID, last_time ) );
-    doNextOp();
-    return true;
-  } 
+  // UNUSED
+  // private boolean sendLastTime( )
+  // {
+  //   byte[] last_time = ((BricProto)mProtocol).getLastTime();
+  //   // TDLog.v( "BRIC comm send last time: " + BleUtils.bytesToString( last_time ) );
+  //   if ( last_time == null ) return false;
+  //   enqueueOp( new BleOpChrtWrite( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.LAST_TIME_UUID, last_time ) );
+  //   doNextOp();
+  //   return true;
+  // } 
 
   // --------------------------------------------------------------------------
   private BleOperation mPendingOp = null;

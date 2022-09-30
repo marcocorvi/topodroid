@@ -182,7 +182,7 @@ class StationNameTRobot extends StationName
                 if ( mCurrentStationName != null ) {
                   ++series;
                   from = mCurrentStationName;
-                  to   = getTRobotStation( series, 1 ); // to = serise.1
+                  to   = getTRobotStation( series, 1 ); // to = series.1
                 }
                 nrLegShots = 2; // prev and this shot
               } else {

@@ -30,14 +30,13 @@ class TdmInput extends TdmSurvey
   }
 
   /** cstr
-   * @param name   db survey name
+   * @param name  db survey name
    * @param color input color
    */
   TdmInput( String name, int color )
   {
-    super( name );
+    super( name, color );
     mChecked = false;
-    mColor   = color;
   }
 
   /** @return the survey name

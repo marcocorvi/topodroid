@@ -419,7 +419,7 @@ class DrawingStationDialog extends MyDialog
       dismiss();
     }
 
-  /** @implement set the JPEG data - use default (comment wen minsdk = 24)
+  /** implement set the JPEG data - use default (comment wen minsdk = 24)
    * @param data   JPEG data
    * @return false: the JPEG data are not stored
    */

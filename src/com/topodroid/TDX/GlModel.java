@@ -759,7 +759,7 @@ public class GlModel
     List< GlSketch > sketches = new ArrayList< GlSketch >();
     if ( glSketches == null ) return sketches;
     synchronized( glSketches ) {
-      for ( GlSketch sketch : glSketches ) sketches.add( sketch );
+      sketches.addAll( glSketches ); // for ( GlSketch sketch : glSketches ) sketches.add( sketch );
     }
     return sketches;
   }

@@ -26,7 +26,7 @@ class FractalResult
   DialogFractal   mDialog;
   FractalComputer mComputer = null;
 
-  /** @return the array of computed dimensions
+  /** the array of computed dimensions
    */
   double[] mCount = null;
 
@@ -113,7 +113,7 @@ class FractalResult
     for ( int j=0; j<hh; ++j ) for ( int i=0; i<ww; ++i ) bitmap.setPixel( i, j, 0 );
     // for ( int j=uy; j<hh; j+=uy ) for ( int i=0; i<ww; ++i ) bitmap.setPixel( i, j, 0xff999999 );
     for ( int i=0; i<ww; ++i ) bitmap.setPixel( i, hh-zero, 0xffffffff );
-    for ( int i=0; i<ww; ++i ) bitmap.setPixel( i, hh-1*uy-zero, 0xffcccccc );
+    for ( int i=0; i<ww; ++i ) bitmap.setPixel( i, hh-  uy-zero, 0xffcccccc );
     for ( int i=0; i<ww; ++i ) bitmap.setPixel( i, hh-2*uy-zero, 0xff999999 );
     for ( int i=0; i<ww; ++i ) bitmap.setPixel( i, hh-3*uy-zero, 0xff666666 );
     if ( mComputer != null ) {

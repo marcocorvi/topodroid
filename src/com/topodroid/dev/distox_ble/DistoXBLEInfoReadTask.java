@@ -1,4 +1,4 @@
-/* @file DistoXBLEInfoReadTast.java
+/* @file DistoXBLEInfoReadTask.java
  *
  * @author Siwei Tian
  * @date Jul 2022

@@ -23,7 +23,7 @@ import com.topodroid.utils.TDUtil;
 import com.topodroid.help.UserManDownload;
 import com.topodroid.TDX.TDLevel;
 import com.topodroid.TDX.TDandroid;
-import com.topodroid.TDX.TDPath;
+// import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.TDAzimuth;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TopoDroidApp;
@@ -3764,7 +3764,7 @@ public class TDSetting
     return ret;
   }
 
-  /** set the lintpoint spacing (Bezier step)
+  /** set the linepoint spacing (Bezier step)
    * @param step    point spacing [m]
    */
   public static String setBezierStep( float step )

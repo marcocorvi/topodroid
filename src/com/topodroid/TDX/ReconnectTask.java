@@ -39,7 +39,7 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
 
   /** execute the task in background
    * @param statuses   unused
-   * @return
+   * @return result (?)
    */
   @Override
   protected Integer doInBackground( String... statuses )

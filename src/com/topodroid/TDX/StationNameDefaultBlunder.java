@@ -13,8 +13,8 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDStatus;
-import com.topodroid.common.LegType;
+// import com.topodroid.utils.TDStatus;
+// import com.topodroid.common.LegType;
 import com.topodroid.prefs.TDSetting;
 
 import java.util.List;
@@ -22,7 +22,7 @@ import java.util.Set;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.view.View;
+// import android.view.View;
 
 class StationNameDefaultBlunder extends StationName
 {
@@ -47,7 +47,7 @@ class StationNameDefaultBlunder extends StationName
 
   // ------------------------------------------------------------------------------------------------
 
-  /** reset shot refereneces
+  /** reset shot references
    * @param reset_leg whether to reset the leg reference and leg number
    */
   private void resetRefs( boolean reset_leg, boolean reset_prev )
@@ -96,7 +96,7 @@ class StationNameDefaultBlunder extends StationName
   {
     if ( leg == null ) return; // safety protection
     if ( leg.isLeg() ) {
-      if ( TDLog.isStreamFile() ) TDLog.f( "mark leg " + name(leg) + " is altready leg" );
+      if ( TDLog.isStreamFile() ) TDLog.f( "mark leg " + name(leg) + " is already leg" );
       return;
     }
     if ( TDLog.isStreamFile() ) TDLog.f( "mark leg " + id(leg) + " : " + from + "-" + to );
@@ -157,7 +157,7 @@ class StationNameDefaultBlunder extends StationName
     if ( nrLegShots > 0 ) {
       StringBuilder sb = new StringBuilder();
       sb.append( ": " + id(leg) + "." + id(prev) + "." + id(blunder) + " (" );
-      for ( DBlock b : sec_legs ) sb.append( " " + id(b) );
+      for ( DBlock b : sec_legs ) sb.append( " " ).append( id(b) );
       if ( TDLog.isStreamFile() ) TDLog.f( msg + " flush at " + id(blk) + " legs " + nrLegShots + "/" + sec_legs.size() + " " + sb.toString() + " ) reset legs " + reset_leg );
       if ( nrLegShots < TDSetting.mMinNrLegShots ) {
         // if ( prev_prev != null ) markSplay( prev_prev );
@@ -246,7 +246,7 @@ class StationNameDefaultBlunder extends StationName
   /** assign station names to shots
    * @param list         list of dblock, including those to assign
    * @param sts          station names already in use
-   * DistoX backshot-mode is handled separatedly
+   * DistoX backshot-mode is handled separately
    * @return true if a leg has been assigned
    */
   @Override
@@ -273,7 +273,7 @@ class StationNameDefaultBlunder extends StationName
 
     if ( TDLog.isStreamFile() ) {
       StringBuilder sb = new StringBuilder();
-      for ( DBlock b : list ) sb.append( name(b) + " " );
+      for ( DBlock b : list ) sb.append( name(b) ).append( " " );
       TDLog.f( "{F " + from + " T " + to + " S} " + station + " List " + sb.toString() );
     }
 
@@ -306,7 +306,7 @@ class StationNameDefaultBlunder extends StationName
           // if ( leg == null ) setLeg( "from pref", prev, 0 );
           increaseNrLegShots( blk, sts, "[close to prev]" );
         } else if ( prev_prev != null && prev_prev.isRelativeDistance( blk ) ) {
-          setLeg( "fron prev_prev", prev_prev, 0 ); // nrLegShots = 0; it will be set in increaseNrLegShots
+          setLeg( "from prev_prev", prev_prev, 0 ); // nrLegShots = 0; it will be set in increaseNrLegShots
           blunder = prev;
           increaseNrLegShots(  blk, sts, "[close to prev_prev]" );
           prev = blk;
@@ -476,7 +476,7 @@ class StationNameDefaultBlunder extends StationName
 //       }
 //     }
 //    
-//     // processing skipped ahots ...
+//     // processing skipped shots ...
 //     if ( sec_legs.size() > 0 ) {
 //       mRet |= assignStations( sec_legs, sts );
 //     } else {

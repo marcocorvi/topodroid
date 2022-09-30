@@ -415,12 +415,12 @@ public class BrushManager
    */
   static public void setSplayDashColor( int color )
   {
-    if ( paintSplayXBdash != null ) {
+    // if ( paintSplayXBdash != null ) { // always true
       paintSplayXBdash.setColor( color );
       paintSplayXBdash.setAlpha( mAlpha );
-    } else {
-      TDLog.v("Warning: null splay dash paint");
-    }
+    // } else {
+    //   TDLog.v("Warning: null splay dash paint");
+    // }
   }
 
   /** set the color of splay dot lines
@@ -428,12 +428,12 @@ public class BrushManager
    */
   static public void setSplayDotColor( int color )
   {
-    if ( paintSplayXBdot != null ) {
+    // if ( paintSplayXBdot != null ) { // always true
       paintSplayXBdot.setColor( color );
       paintSplayXBdot.setAlpha( mAlpha );
-    } else {
-      TDLog.v("Warning: null splay dot paint");
-    }
+    // } else {
+    //   TDLog.v("Warning: null splay dot paint");
+    // }
   }
 
 
@@ -444,14 +444,14 @@ public class BrushManager
   public static void setSplayAlpha( int alpha )
   {
     mAlpha = (alpha * 255)/100;
-    if ( paintSplayLRUD    != null ) paintSplayLRUD.setAlpha( mAlpha );
-    if ( paintSplayXB      != null ) paintSplayXB.setAlpha( mAlpha );
-    if ( paintSplayComment != null ) paintSplayComment.setAlpha( mAlpha );  // commented splay
-    if ( paintSplayXViewed != null ) paintSplayXViewed.setAlpha( mAlpha );  // cross-section splay2 (at viewed station)
-    if ( paintSplayXBdash  != null ) paintSplayXBdash.setAlpha( mAlpha );  // dash splay
-    if ( paintSplayXBdot   != null ) paintSplayXBdot.setAlpha( mAlpha );  // dot splay
-    if ( paintSplayXVdash  != null ) paintSplayXVdash.setAlpha( mAlpha );  // blue dash splay
-    if ( paintSplayXVdot   != null ) paintSplayXVdot.setAlpha( mAlpha );  // blue dot splay
+    /* if ( paintSplayLRUD    != null ) */ paintSplayLRUD.setAlpha( mAlpha );
+    /* if ( paintSplayXB      != null ) */ paintSplayXB.setAlpha( mAlpha );
+    /* if ( paintSplayComment != null ) */ paintSplayComment.setAlpha( mAlpha );  // commented splay
+    /* if ( paintSplayXViewed != null ) */ paintSplayXViewed.setAlpha( mAlpha );  // cross-section splay2 (at viewed station)
+    /* if ( paintSplayXBdash  != null ) */ paintSplayXBdash.setAlpha( mAlpha );  // dash splay
+    /* if ( paintSplayXBdot   != null ) */ paintSplayXBdot.setAlpha( mAlpha );  // dot splay
+    /* if ( paintSplayXVdash  != null ) */ paintSplayXVdash.setAlpha( mAlpha );  // blue dash splay
+    /* if ( paintSplayXVdot   != null ) */ paintSplayXVdot.setAlpha( mAlpha );  // blue dot splay
   }
 
   /** guard for doMakePaths()
@@ -513,13 +513,13 @@ public class BrushManager
    */
   public static void setStrokeWidths()
   {
-    if (fixedShotPaint != null)    fixedShotPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
-    if (fixedBluePaint != null)    fixedBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
-    if (lightBluePaint != null)    lightBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
-    if (darkBluePaint != null)     darkBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
-    if (deepBluePaint != null)     deepBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
-    if (paintSplayXB != null)      paintSplayXB.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
-    if (paintSplayXViewed != null) paintSplayXViewed.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    /* if (fixedShotPaint != null)    */ fixedShotPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    /* if (fixedBluePaint != null)    */ fixedBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    /* if (lightBluePaint != null)    */ lightBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    /* if (darkBluePaint != null)     */ darkBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    /* if (deepBluePaint != null)     */ deepBluePaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    /* if (paintSplayXB != null)      */ paintSplayXB.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
+    /* if (paintSplayXViewed != null) */ paintSplayXViewed.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
   }
 
   /** set the text size of certain paints according to the relevant settings
@@ -532,8 +532,8 @@ public class BrushManager
     if ( fixedStationActivePaint != null )  fixedStationActivePaint.setTextSize( TDSetting.mStationSize );
     if ( fixedStationBarrierPaint != null ) fixedStationBarrierPaint.setTextSize( TDSetting.mStationSize );
     if ( fixedStationHiddenPaint != null )  fixedStationHiddenPaint.setTextSize( TDSetting.mStationSize );
-    if ( duplicateStationPaint != null )    duplicateStationPaint.setTextSize( TDSetting.mStationSize );
-    if ( referencePaint != null )           referencePaint.setTextSize( TDSetting.mStationSize );
+    /* if ( duplicateStationPaint != null )    */ duplicateStationPaint.setTextSize( TDSetting.mStationSize );
+    /* if ( referencePaint != null )           */ referencePaint.setTextSize( TDSetting.mStationSize );
   }
 
   /** prepare the symbols palette

@@ -37,8 +37,8 @@ public class TdmConfigDialog extends MyDialog
     private TdManagerActivity mActivity;
 
     /** cstr
-     * @param contex    context
-     * @param actcivity parent activity
+     * @param context    context
+     * @param activity parent activity
      */
     public TdmConfigDialog( Context context, TdManagerActivity activity )
     {

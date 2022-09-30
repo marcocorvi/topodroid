@@ -12,14 +12,14 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDColor;
+// import com.topodroid.utils.TDString;
+// import com.topodroid.utils.TDColor;
 import com.topodroid.utils.StringPair;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.prefs.TDSetting;
 
-import java.lang.ref.WeakReference;
-import java.util.Locale;
+// import java.lang.ref.WeakReference;
+// import java.util.Locale;
 import java.util.List;
 
 import android.os.Bundle;
@@ -28,10 +28,10 @@ import android.content.Context;
 
 import android.widget.TextView;
 import android.widget.Button;
-import android.widget.ImageView;
+// import android.widget.ImageView;
 import android.view.View;
 
-import android.graphics.Bitmap;
+// import android.graphics.Bitmap;
 
 public class ReductionErrorsDialog extends MyDialog
                        implements View.OnClickListener

@@ -25,7 +25,7 @@ class Cave3DDelaunay
   int color; // DEBUG
 
   // normalized 3D vector
-  class DelaunayPoint extends Vector3D
+  static class DelaunayPoint extends Vector3D
   {
     // int index; // debug
     Vector3D orig; // original vector

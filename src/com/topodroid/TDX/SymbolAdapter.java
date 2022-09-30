@@ -63,7 +63,7 @@ class SymbolAdapter extends ArrayAdapter< EnableSymbol >
     mItems.add( sym );
   }
 
-  private class ViewHolder
+  private static class ViewHolder
   { 
     CheckBox     mCheckBox;
     ItemButton   mButton;

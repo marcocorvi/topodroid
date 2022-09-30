@@ -55,7 +55,7 @@ class DrawingLineDialog extends MyDialog
   // private Button mBtnCancel;
 
   private MyCheckBox mReversed;
-  private MyCheckBox mBtnSharp;  // sharp reduce and rock are mutully exclusive
+  private MyCheckBox mBtnSharp;  // sharp reduce and rock are mutually exclusive
   private MyStateBox mBtnReduce;
   private MyCheckBox mBtnRock = null;
   private MyCheckBox mBtnClose;

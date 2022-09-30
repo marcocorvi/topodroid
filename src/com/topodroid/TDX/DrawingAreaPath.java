@@ -524,7 +524,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
     for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) {
       pt.toCave3D( pw, type, cmd, num );
     }
-    mFirst.toCave3D( pw, type, cmd, num );
+    if ( mFirst != null ) mFirst.toCave3D( pw, type, cmd, num );
     pw.format( Locale.US, "ENDAREA\n" );
   }
 

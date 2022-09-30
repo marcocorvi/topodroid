@@ -126,7 +126,7 @@ public class Cave3DXSection
     }
     // normal = leastEigenvector( A );
 
-    // compute the smallest eigenvalue of A (A is pos. semidef. therefore eigenval >= 0)
+    // compute the smallest eigenvalue of A (A is positive semidefinite therefore eigenvalue >= 0)
     // L^3 - Tr(A) L^2 + ( Axx Ayy + Ayy Azz + Azz Axx - Axy^2 - Axz^2 - Azy^2 ) L + det(A)
     // 
     double b2 = - ( A[0] + A[4] + A[8] ); // trace
@@ -230,7 +230,7 @@ public class Cave3DXSection
 
   /** @return the angle between two 3D vectors, in [0, 2 PI)
    * @param v0   normal
-   * @param v1   zero-refrence
+   * @param v1   zero-reference
    * @param v2   test vector
    */
   private double computeAngle( Vector3D v0, Vector3D v1, Vector3D v2 ) 

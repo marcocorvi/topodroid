@@ -13,14 +13,14 @@ package com.topodroid.tdm;
 
 import com.topodroid.ui.MyDialog;
 import com.topodroid.TDX.TopoDroidApp;
-import com.topodroid.TDX.TopoDroidAlertDialog;
+// import com.topodroid.TDX.TopoDroidAlertDialog;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;
 
 import java.util.ArrayList;
 // import java.io.File;
 
-import android.content.DialogInterface;
+// import android.content.DialogInterface;
 // import android.app.Dialog;
 
 import android.view.View;
@@ -29,8 +29,8 @@ import android.view.View.OnClickListener;
 
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+// import android.widget.AdapterView;
+// import android.widget.AdapterView.OnItemClickListener;
 
 import android.content.Context;
 // import android.content.Intent;

@@ -4,7 +4,7 @@
  * @date jan 2021
  *
  * @brief BRIC4 protocol
- * @mote the methods of the BRIC procolor are run on the queue consumer thread
+ * @mote the methods of the BRIC protocol are run on the queue consumer thread
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -240,15 +240,15 @@ public class BricProto extends TopoDroidProtocol
     mLastTime = Arrays.copyOfRange( bytes, 0, bytes.length );
   }
 
-  /** reset the last time byte array to null
-   */
-  void clearLastTime() { mLastTime = null; }
+  // UNUSED
+  // /** reset the last time byte array to null
+  //  */
+  // void clearLastTime() { mLastTime = null; }
 
-  /** @return the last time byte array
-   */
-  byte[] getLastTime() { return mLastTime; }
-
-  
+  // UNUSED
+  // /** @return the last time byte array
+  //  */
+  // byte[] getLastTime() { return mLastTime; }
 
 }
 

@@ -92,12 +92,12 @@ class CurrentStationDialog extends MyDialog
     doInit( landscape );
   }
   
-  /** initilaize the dialog screen presentation
-   * @param landscape  wheter the app is in landscape mode
+  /** initialize the dialog screen presentation
+   * @param landscape  whether the app is in landscape mode
    */
   public void doInit( boolean landscape )
   {
-    // TDLog.v("Do INIT landcsape " + landscape );
+    // TDLog.v("Do INIT landscape " + landscape );
     if ( landscape ) {
       initLayout( R.layout.current_station_dialog_landscape, R.string.title_current_station );
     } else {
@@ -152,7 +152,7 @@ class CurrentStationDialog extends MyDialog
     findViewById( R.id.current_station ).invalidate();
   }
 
-  /** uodate the list of station infos
+  /** update the list of station infos
    */
   private void updateList()
   {

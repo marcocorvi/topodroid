@@ -226,11 +226,11 @@ public class PowercrustComputer
     mProfilearcs = null;
     int nst = mStations.size();
     int nsh = mShots.size();
-    DPoint2D[] F = new DPoint2D[ nsh ]; // P - from point of shot k
-    DPoint2D[] T = new DPoint2D[ nsh ]; // P - to point of shot k
-    DPoint2D[] P = new DPoint2D[ nsh ]; // point on intersection of bi-secants
+    DPoint2D[] F = new DPoint2D[ nsh ]; // P - from point of shot k - FIXME written but never read
+    DPoint2D[] T = new DPoint2D[ nsh ]; // P - to point of shot k - FIXME written but never read
+    DPoint2D[] P = new DPoint2D[ nsh ]; // point on intersection of bi-secants - FIXME written but never read
     DPoint2D[] B = new DPoint2D[ nst ]; // bi-secant at station j
-    DPoint2D[] M = new DPoint2D[ nsh ]; // midpoint of shot k
+    DPoint2D[] M = new DPoint2D[ nsh ]; // midpoint of shot k - FIXME written but never read
 
     // find bi-secant of shots at st:
     //      ... -- sh1 ----(st)--- sh2 -- ...

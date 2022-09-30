@@ -19,16 +19,16 @@ import com.topodroid.prefs.TDSetting;
 // import com.topodroid.prefs.TDPrefActivity;
 import com.topodroid.help.UserManualActivity;
 
-import android.content.Context;
+// import android.content.Context;
 
-import android.graphics.PointF;
+// import android.graphics.PointF;
 // import android.graphics.Path;
 
 import android.os.Bundle;
 import android.content.Intent;
 import android.app.Activity;
 
-import android.view.MotionEvent;
+// import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;

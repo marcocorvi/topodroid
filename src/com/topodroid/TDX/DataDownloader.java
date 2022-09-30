@@ -34,10 +34,14 @@ public class DataDownloader
   private int mConnected = ConnectionState.CONN_DISCONNECTED;  // whether it is "connected": 0 unconnected, 1 connecting, 2 connected
   private boolean mDownload  = false;  // whether it is "downloading"
 
-  boolean isConnected() { return mConnected == ConnectionState.CONN_CONNECTED; }
+  // boolean isConnected() { return mConnected == ConnectionState.CONN_CONNECTED; }
+
   boolean isDownloading() { return mDownload; }
+
   boolean needReconnect() { return mDownload && mConnected != ConnectionState.CONN_CONNECTED; }
+
   public void setConnected( int connected ) { mConnected = connected; }
+
   void setDownload( boolean download ) { mDownload = download; }
 
   /** update the "connected" state

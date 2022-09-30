@@ -12,7 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.dev.distox_ble.DistoXBLEComm; // SIWEI_TIAN
-import com.topodroid.dev.distox_ble.DistoXBLEConst;
+// import com.topodroid.dev.distox_ble.DistoXBLEConst;
 import com.topodroid.dev.distox_ble.DistoXBLEInfoDialog;
 
 import com.topodroid.utils.TDMath;
@@ -752,7 +752,7 @@ public class TopoDroidApp extends Application
 
   /** read head-tail from a DistoX A3
    * @param address    device address
-   * @param command
+   * @param command    command byte array
    * @param head_tail  return array with positions of head and tail
    * @return head-tail string, null on failure
    */
@@ -1008,7 +1008,7 @@ public class TopoDroidApp extends Application
   static boolean done_init_env_second = false;
 
   /** second step of environment initialization
-   * @param with_dialog_r
+   * @param with_dialog_r   whether the app has dialog R
    * @return true if successful - can fail if cannot open the database
    */
   static  boolean initEnvironmentSecond( boolean with_dialog_r )
@@ -1720,7 +1720,7 @@ public class TopoDroidApp extends Application
   // void resetCurrentStationName( String name ) { StationName.resetCurrentStationName( name ); }
 
   /** set the name of the "current station" or unset it
-   * @param st   "current station" name
+   * @param name  "current station" name
    * @return true if the "current station" is set
    * @note if the given name equals the "current station" this is unset
    */

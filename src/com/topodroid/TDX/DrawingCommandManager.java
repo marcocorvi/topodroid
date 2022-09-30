@@ -26,7 +26,7 @@ import android.app.Activity;
 
 import android.graphics.Canvas;
 import android.graphics.Matrix;
-import android.graphics.Bitmap;
+// import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Paint;
@@ -45,6 +45,9 @@ import java.io.DataOutputStream;
 
 public class DrawingCommandManager
 {
+  private final static Object mSyncScrap = new Object();
+  private final static Object mSyncOutline = new Object();
+
   // FIXED_ZOOM 
   private int mFixedZoom = 0;
 
@@ -255,7 +258,7 @@ public class DrawingCommandManager
   public List< DrawingPath > getCommands()
   { 
     ArrayList< DrawingPath > ret = new ArrayList<>();
-    synchronized( mScraps ) {
+    synchronized( mSyncScrap ) {
       for ( Scrap scrap : mScraps ) scrap.addCommandsToList( ret );
     }
     return ret;
@@ -270,7 +273,7 @@ public class DrawingCommandManager
   public List< DrawingStationUser > getUserStations() 
   {
     ArrayList< DrawingStationUser > ret = new ArrayList<>();
-    synchronized( mScraps ) {
+    synchronized( mSyncScrap ) {
       for ( Scrap scrap : mScraps ) scrap.addUserStationsToList( ret ); 
     }
     return ret;
@@ -279,7 +282,7 @@ public class DrawingCommandManager
   public boolean hasUserStations() 
   {
     boolean ret = false;
-    synchronized( mScraps ) {
+    synchronized( mSyncScrap ) {
       for ( Scrap scrap : mScraps ) if ( scrap.hasUserStations() ) { ret = true; break; }
     }
     return ret;
@@ -405,10 +408,12 @@ public class DrawingCommandManager
     }
   }
 
-  /** Check if any line overlaps another of the same type - in the current scrap
-   * @note in case of overlap the overlapped line is removed
-   */
-  void checkLines() { mCurrentScrap.checkLines(); }
+  // UNUSED
+  // /** Check if any line overlaps another of the same type - in the current scrap
+  //  * @note in case of overlap the overlapped line is removed 
+  //  * this is a FIX method: it fixes "double" drawings which should not occur anyways
+  //  */
+  // void checkLines() { mCurrentScrap.checkLines(); }
 
   /** Flip the X-axis: flip the sketch horizontally)
    * @param paths    list of sketch items
@@ -449,14 +454,14 @@ public class DrawingCommandManager
       flipSplayXAxes( mSplaysStack );
     }
     // FIXME 
-    synchronized( mPlotOutline ) { mPlotOutline.clear(); }
+    synchronized( mSyncOutline ) { mPlotOutline.clear(); }
     synchronized( TDPath.mXSectionsLock ) { mXSectionOutlines.clear(); }
  
     synchronized( TDPath.mStationsLock ) {
       for ( DrawingStationName st : mStations ) st.flipXAxis(z);
       // for ( DrawingFixedName   fx : mFixeds )   fx.flipXAxis(z);
     }
-    synchronized( mScraps ) {
+    synchronized( mSyncScrap ) {
       for ( Scrap scrap : mScraps ) scrap.flipXAxis( z );
     }
   }
@@ -473,7 +478,7 @@ public class DrawingCommandManager
     //     for ( DrawingFixedName fx : mFixeds ) fx.shiftBy( x, y );
     //   }
     // }
-    synchronized( mScraps ) {
+    synchronized( mSyncScrap ) {
       for ( Scrap scrap : mScraps ) scrap.shiftDrawing( x, y );
     }
   }
@@ -491,7 +496,7 @@ public class DrawingCommandManager
     // }
     Matrix m = new Matrix();
     m.postScale(z,z);
-    synchronized( mScraps ) {
+    synchronized( mSyncScrap ) {
       for ( Scrap scrap : mScraps ) scrap.scaleDrawing( z, m );
     }
   }
@@ -516,7 +521,7 @@ public class DrawingCommandManager
     mm[3] = d; mm[4] = e; mm[5] = f;
     mm[6] = 0; mm[7] = 0; mm[8] = 1;
     m.setValues( mm );
-    synchronized( mScraps ) {
+    synchronized( mSyncScrap ) {
       for ( Scrap scrap : mScraps ) scrap.affineTransformDrawing( mm, m );
     }
   }
@@ -548,7 +553,7 @@ public class DrawingCommandManager
   void syncClearSelected()
   { 
     synchronized( TDPath.mSelectionLock ) { 
-      synchronized( mScraps ) {
+      synchronized( mSyncScrap ) {
         for ( Scrap scrap : mScraps ) scrap.clearSelected();
       }
    }
@@ -560,7 +565,7 @@ public class DrawingCommandManager
   {
     synchronized( TDPath.mSelectionLock ) { 
       mSelectionFixed.clearReferencePoints();
-      // FIXME-HIDE synchronized( mScraps ) for ( Scrap scrap : mScraps ) scrap.clearShotsAndStations();
+      // FIXME-HIDE synchronized( mSyncScrap ) for ( Scrap scrap : mScraps ) scrap.clearShotsAndStations();
     }
   }
 
@@ -584,7 +589,7 @@ public class DrawingCommandManager
       mSplaysStack.clear();
       
     }
-    synchronized( mPlotOutline )            { mPlotOutline.clear(); }
+    synchronized( mSyncOutline )            { mPlotOutline.clear(); }
     synchronized( TDPath.mXSectionsLock   ) { mXSectionOutlines.clear(); }
     synchronized( TDPath.mStationsLock )    { mStations.clear(); }
     // synchronized( TDPath.mFixedsLock   )    { mFixeds.clear(); }
@@ -615,7 +620,7 @@ public class DrawingCommandManager
     // mTmpXSectionOutlines = Collections.synchronizedList(new ArrayList< DrawingOutlinePath >());
     // mFixeds       = Collections.synchronizedList(new ArrayList< DrawingFixedName >());
 
-    synchronized( mPlotOutline )            { mPlotOutline.clear(); }
+    synchronized( mSyncOutline )            { mPlotOutline.clear(); }
     synchronized( TDPath.mXSectionsLock   ) { mXSectionOutlines.clear(); }
     // synchronized( TDPath.mFixedsLock   )    { mTmpFixeds.clear(); }
 
@@ -659,7 +664,7 @@ public class DrawingCommandManager
    */
   private void clearSketchItems()
   {
-    synchronized( mScraps ) {
+    synchronized( mSyncScrap ) {
       for ( Scrap scrap : mScraps ) scrap.clearSketchItems();
     }
     // FIXME: two lines added 20220916
@@ -838,7 +843,7 @@ public class DrawingCommandManager
     mOffx = dx * s;
     mOffy = dy * s;
 
-    synchronized( mScraps ) {
+    synchronized( mSyncScrap ) {
       for ( Scrap scrap : mScraps ) scrap.shiftAreaShaders( dx, dy, s, landscape );
     }
 
@@ -934,7 +939,7 @@ public class DrawingCommandManager
     }
     synchronized( TDPath.mSelectionLock ) {
       mSelectionFixed.removePoint( sp );
-      // FIXME-HIDE synchronized( mScraps ) for ( Scrap scrap : mScraps ) scrap.deleteSplay( sp );
+      // FIXME-HIDE synchronized( mSyncScrap ) for ( Scrap scrap : mScraps ) scrap.deleteSplay( sp );
     }
   }
 
@@ -1019,7 +1024,7 @@ public class DrawingCommandManager
     if ( selectable ) {
       synchronized( TDPath.mSelectionLock ) {
         mSelectionFixed.insertPath( path );
-        // FIXME-HIDE synchronized( mScraps ) for ( Scrap scrap : mScraps ) scrap.insertPathInSelection( path );
+        // FIXME-HIDE synchronized( mSyncScrap ) for ( Scrap scrap : mScraps ) scrap.insertPathInSelection( path );
       }
     }
   }  
@@ -1031,7 +1036,7 @@ public class DrawingCommandManager
     if ( selectable ) {
       synchronized( TDPath.mSelectionLock ) {
         mSelectionFixed.insertPath( path );
-        // FIXME-HIDE synchronized( mScraps ) for ( Scrap scrap : mScraps ) scrap.insertPathInSelection( path );
+        // FIXME-HIDE synchronized( mSyncScrap ) for ( Scrap scrap : mScraps ) scrap.insertPathInSelection( path );
       }
     }
   }  
@@ -1044,7 +1049,7 @@ public class DrawingCommandManager
     if ( selectable ) {
       synchronized( TDPath.mSelectionLock ) {
         mSelectionFixed.insertStationName( st );
-        // FIXME-HIDE synchronized( mScraps ) for ( Scrap scrap : mScraps ) scrap.addStationToSelection( st );
+        // FIXME-HIDE synchronized( mSyncScrap ) for ( Scrap scrap : mScraps ) scrap.addStationToSelection( st );
       }
     }
   }
@@ -1142,7 +1147,7 @@ public class DrawingCommandManager
   DrawingStationUser getUserStation( String name ) { return mCurrentScrap.getUserStation( name ); }
 
   /** remove the user station (from the current scrap) for a given station name (or ull)
-   * @param name    station name
+   * @param path    station name
    */
   void removeUserStation( DrawingStationUser path ) { mCurrentScrap.removeUserStation( path ); }
 
@@ -1167,8 +1172,8 @@ public class DrawingCommandManager
   }
 
   /** delete a point "section"
-   * @param scrap_name
-   * @param cmd
+   * @param scrap_name  name of the scrap (?)
+   * @param cmd         erase command
    */
   void deleteSectionPoint( String scrap_name, EraseCommand cmd ) { mCurrentScrap.deleteSectionPoint( scrap_name, cmd ); }
 
@@ -1196,7 +1201,7 @@ public class DrawingCommandManager
         }
       }
     }
-    synchronized( mScraps ) {
+    synchronized( mSyncScrap ) {
       for ( Scrap scrap : mScraps ) scrap.getBitmapBounds( bounds );
     }
     // TDLog.v( "bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
@@ -1304,7 +1309,7 @@ public class DrawingCommandManager
   //       // }
   //     }
   //   }
-  //   synchronized( mScraps ) {
+  //   synchronized( mSyncScrap ) {
   //     for ( Scrap scrap : mScraps ) scrap.draw( c, mat, scale );
   //   }
   //   // checkLines();
@@ -1512,7 +1517,7 @@ public class DrawingCommandManager
     }
     if ( mMode < DrawingSurface.DRAWING_SECTION ) {
       if ( mPlotOutline != null && mPlotOutline.size() > 0 ) {
-        synchronized( mPlotOutline )  {
+        synchronized( mSyncOutline )  {
           for (DrawingLinePath path : mPlotOutline ) path.draw( canvas, mm, null /* bbox */ );
         }
       }
@@ -1546,11 +1551,11 @@ public class DrawingCommandManager
 
     if ( mMode == DrawingSurface.DRAWING_OVERVIEW ) {
       if ( outline ) {
-        synchronized( mScraps ) {
+        synchronized( mSyncScrap ) {
           for ( Scrap scrap : mScraps ) scrap.drawOutline( canvas, mm, bbox );
         }
       } else {
-        synchronized( mScraps ) {
+        synchronized( mSyncScrap ) {
           if ( inverted_colors ) {
             for ( Scrap scrap : mScraps ) scrap.drawAll( canvas, mm, scale, bbox, 0xffffff );
           } else {
@@ -1560,7 +1565,7 @@ public class DrawingCommandManager
       }
     } else { // not DRAWING_OVERVIEW
       if ( mCurrentScrap != null ) { 
-        synchronized( mScraps ) {
+        synchronized( mSyncScrap ) {
           for ( Scrap scrap : mScraps ) {
             if ( scrap == mCurrentScrap ) continue;
             scrap.drawGreyOutline( canvas, mm, bbox );
@@ -1709,7 +1714,7 @@ public class DrawingCommandManager
     boolean splays = (mDisplayMode & DisplayMode.DISPLAY_SPLAY ) != 0;
     // boolean latest = (mDisplayMode & DisplayMode.DISPLAY_LATEST ) != 0;
     boolean stations = (mDisplayMode & DisplayMode.DISPLAY_STATION ) != 0;
-    // TDLog.v( "Setect: getItemAt " + x + " " + y + " mode " + mode );
+    // TDLog.v( "Select: getItemAt " + x + " " + y + " mode " + mode );
     return mCurrentScrap.getItemsAt( x, y, radius, mode, legs, splays, stations, station_splay, mSelectionFixed ); // FIXME-HIDE
   }
     
@@ -1800,7 +1805,7 @@ public class DrawingCommandManager
   public RectF getBoundingBox( )
   {
     RectF bbox = new RectF( 0, 0, 0, 0 );
-    synchronized( mScraps ) {
+    synchronized( mSyncScrap ) {
       for ( Scrap scrap : mScraps ) bbox.union( scrap.computeBBox() );
     }
     return bbox;
@@ -1811,7 +1816,7 @@ public class DrawingCommandManager
   // @param out         output writer
   // @param full_name   file name without extension, which is also scrap_name for single scrap 
   // @param proj_name   
-  // @param proj_dir    directoin of projected profile (if applicable)
+  // @param proj_dir    direction of projected profile (if applicable)
   // @param multiscrap  whether the sketch has several scraps
   // @param th2_edit    therion th2 editing TH2EDIT
   void exportTherion( int type, BufferedWriter out, String full_name, String proj_name, int proj_dir, boolean multisketch, boolean th2_edit ) 
@@ -1885,12 +1890,12 @@ public class DrawingCommandManager
 
   /** clear the scrap outlines
    */
-  void clearScrapOutline() { synchronized( mPlotOutline ) { mPlotOutline.clear(); } }
+  void clearScrapOutline() { synchronized( mSyncOutline ) { mPlotOutline.clear(); } }
 
   /** add an outline path to the set of outlines
    * @param path    outline path
    */
-  void addScrapOutlinePath( DrawingLinePath path ) { synchronized( mPlotOutline ) { mPlotOutline.add( path ); } }
+  void addScrapOutlinePath( DrawingLinePath path ) { synchronized( mSyncOutline ) { mPlotOutline.add( path ); } }
 
   // void addScrapDataStream( String tdr, float xdelta, float ydelta )
   // {
@@ -1986,6 +1991,7 @@ public class DrawingCommandManager
       }
     }
     // now get V for smin abscissa of the best leg
+    if ( best == null ) return null;
     return num.getCave3Dz( smin, best.mBlock );
   }
 

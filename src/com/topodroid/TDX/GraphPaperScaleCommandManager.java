@@ -17,7 +17,7 @@ import com.topodroid.prefs.TDSetting;
 
 import android.graphics.Canvas;
 import android.graphics.Matrix;
-import android.graphics.RectF;
+// import android.graphics.RectF;
 import android.graphics.Paint;
 
 class GraphPaperScaleCommandManager

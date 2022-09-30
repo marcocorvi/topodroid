@@ -260,7 +260,7 @@ class QCamCompass extends Dialog
   //   return TDMath.atan2d( zv, zh );
   // }
 
-  /** @implements
+  /** @note implements
    * @param b   azimuth
    * @param c   clino
    * @param o   orientation: 0 up, 90 right, 180 down, 270 left
@@ -453,7 +453,7 @@ class QCamCompass extends Dialog
     return false;
   }
 
-  /** @implement from OnZoomListener: called when zoom controls visibility changes.
+  /** @note implement from OnZoomListener: called when zoom controls visibility changes.
    * @param visible whether controls are visible
    */
   @Override
@@ -508,7 +508,7 @@ class QCamCompass extends Dialog
   // int mDeltaZoom = 1;
   long mZoomTime = 0;
 
-  /** @implements from OnZoomListener: view needs to be zoomed
+  /** @note implements from OnZoomListener: view needs to be zoomed
    * @param zoomin whether it is a zoom-in
    */
   @Override
@@ -531,7 +531,7 @@ class QCamCompass extends Dialog
     mZoomTime = time;
   }
 
-  /** @implement set the JPEG data - use default (comment wen minsdk = 24)
+  /** @note implement set the JPEG data - use default (comment wen minsdk = 24)
    * @param data   JPEG image data
    * @return true on success
    */

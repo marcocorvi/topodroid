@@ -82,9 +82,9 @@ class TdmViewEquate
 
   // void dump( )
   // {
-  //   tdlog.v("equate (size " + mStations.size() + ")" );
+  //   TDLog.v("equate (size " + mStations.size() + ")" );
   //   for ( TdmViewStation vst : mStations )
-  //     tdlog.v("  station: " + vst.mStation.mName + " " + vst.mCommand.name() );
+  //     TDLog.v("  station: " + vst.mStation.mName + " " + vst.mCommand.name() );
   // }
 
   /** draw the equate-view on the display

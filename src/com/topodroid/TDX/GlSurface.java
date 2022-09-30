@@ -163,7 +163,7 @@ public class GlSurface extends GlShape
   //   //   mBitmapBounded = true;
   //   //   // TDLog.v("GL SURFACE rebind texture bitmap: " + mTexId );
   //   // } else {
-  //   //   // TDLog.v("GL SURFACE rebind texture bitmap: " + mTexId + " aleady bound " + mBitmapBounded );
+  //   //   // TDLog.v("GL SURFACE rebind texture bitmap: " + mTexId + " already bound " + mBitmapBounded );
   //   // }
   // }
 
@@ -293,7 +293,7 @@ public class GlSurface extends GlShape
   {
     int doff = (j * nx + i) * COORDS_PER_VERTEX;
     int boff = k * STRIDE + OFFSET_VERTEX;
-    buffer[boff+0] = x;
+    buffer[boff  ] = x;
     buffer[boff+1] = data[j * nx + i] - ymed;
     buffer[boff+2] = -z;
   }
@@ -307,7 +307,7 @@ public class GlSurface extends GlShape
   private void putTexel( float[] buffer, int k, float s0, float t0 ) 
   {
     int boff = k * STRIDE + OFFSET_TEXEL;
-    buffer[boff+0] = s0;
+    buffer[boff  ] = s0;
     buffer[boff+1] = t0;
   }
 
@@ -335,7 +335,7 @@ public class GlSurface extends GlShape
     float y =   dz * dx;
     float z =   dx * dyz;
     float d = (float)(Math.sqrt( x*x + y*y + z*z ));
-    buffer[boff+0] = x/d;
+    buffer[boff  ] = x/d;
     buffer[boff+1] = y/d;
     buffer[boff+2] = z/d;
   }

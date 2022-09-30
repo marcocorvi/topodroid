@@ -126,11 +126,11 @@ public class PTId
   // void print( ) 
   // { 
   //   if ( (int)_id == ID_UNDEFINED ) {
-  //     tdlog.v( "ID undef" );
+  //     TDLog.v( "ID undef" );
   //   } else if ( _id < 0 ) {
-  //     tdlog.v( "ID number " + (_id + 0x80000001 ) );
+  //     TDLog.v( "ID number " + (_id + 0x80000001 ) );
   //   } else {
-  //     tdlog.v( "ID major " + (_id>>16) + " minor " + (_id & 0xffff) );
+  //     TDLog.v( "ID major " + (_id>>16) + " minor " + (_id & 0xffff) );
   //   }
   // }
 

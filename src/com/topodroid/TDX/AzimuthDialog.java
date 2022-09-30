@@ -222,7 +222,7 @@ class AzimuthDialog extends MyDialog
   /** react to a user tap
    * @param v    tapped view - it can be
    *   - CANCEL
-   *   - SENSOR: start the timer to measure animuth and clino
+   *   - SENSOR: start the timer to measure azimuth and clino
    *   - OK: set azimuth and clino
    *   - LEFT: set fixed "left"
    *   - RIGHT: set fixed "right"

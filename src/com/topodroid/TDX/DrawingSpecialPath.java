@@ -182,11 +182,12 @@ public class DrawingSpecialPath extends DrawingPath
   //   }
   // }
 
-  public void shiftTo( float x, float y ) // x,y scene coords
-  {
-    mPath.offset( x-cx, y-cy );
-    setCenter( x, y );
-  }
+  // UNUSED
+  // public void shiftTo( float x, float y ) // x,y scene coords
+  // {
+  //   mPath.offset( x-cx, y-cy );
+  //   setCenter( x, y );
+  // }
 
   private void resetPath()
   {

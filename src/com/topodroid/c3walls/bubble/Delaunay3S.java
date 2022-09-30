@@ -31,7 +31,7 @@ public class Delaunay3S
       for ( Triangle3S tr : trs2 ) trs.remove( tr );
       ArrayList<Triangle3S> trs3 = getPointTriangles( hsd2, pt );
       linkTriangles( trs3, hsd2 );
-      for ( Triangle3S tr : trs3 ) trs.add( tr );
+      trs.addAll( trs3 ); // for ( Triangle3S tr : trs3 ) trs.add( tr );
     }
     return trs;
   }

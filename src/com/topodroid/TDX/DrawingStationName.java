@@ -112,12 +112,12 @@ public class DrawingStationName extends DrawingPointPath
   public NumStation getNumStation() { return mStation; }
 
   /** @return X scene coord of the linked item
-   * @implements IDrawingLink
+   * @note implements IDrawingLink
    */
   public float getLinkX() { return cx; }
 
   /** @return Y scene coord of the linked item
-   * @implements IDrawingLink
+   * @note implements IDrawingLink
    */
   public float getLinkY() { return cy; }
   // public Point2D getLink() { return new Point2D(cx,cy); }
