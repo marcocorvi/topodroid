@@ -1655,7 +1655,7 @@
   <string name="pref_full_affine_summary">Включить аффинное преобразование абриса</string>
   <string name="pref_loopClosure_title">Закрывать кольца</string>
   <string name="pref_loopClosure_summary">Автоматически компенсировать невязки при закрытии колец</string>
-  <string name="pref_loop_thr_title">Маск. невязка</string\>
+  <string name="pref_loop_thr_title">Маск. невязка</string>
   <string name="pref_loop_thr_summary">Максимально допустимая для компенсации невязка в петле</string>
   <!-- UNUSED string name="pref_splayExtend_title">Развертка бокового замера</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Расчитывать развертку бокового замера</string -->

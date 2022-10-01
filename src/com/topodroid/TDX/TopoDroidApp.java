@@ -1073,6 +1073,7 @@ public class TopoDroidApp extends Application
         installSymbols( true );
       }
       String firmware_version = mDData.getValue( "firmware_version" );
+      TDLog.v("APP current firmware version " + firmware_version );
       if ( firmware_version == null || ( ! firmware_version.equals( TDVersion.FIRMWARE_VERSION ) ) ) {
         installFirmware( false ); // false = do not overwrite
       }

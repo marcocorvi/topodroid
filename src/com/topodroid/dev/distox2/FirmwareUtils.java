@@ -144,6 +144,7 @@ public class FirmwareUtils
    */
   public static boolean firmwareChecksum( int fw_version, File fp )
   {
+    TDLog.v( "FW check version " + fw_version );
     int len = 0;
     switch ( fw_version ) {
       case 2100: len = 15220; break;
@@ -157,14 +158,14 @@ public class FirmwareUtils
       case 2610: len = 25040; break;
       case 2630: len = 25568; break;
       case 2640: len = 25604; break;
-      case 2700: len = 15632; break;
+      case 2700: len = 15576; break; // 15632; break; // 15576
     }
     if ( len == 0 ) return false; // bad firmware version
     len /= 4; // number of int to read
 
     int checksum = 0;
     try {
-      // TDLog.Log( TDLog.LOG_IO, "read firmware file " + file.getPath() );
+      TDLog.v( "FW read firmware file " + fp.getPath() );
       FileInputStream fis = new FileInputStream( fp );
       DataInputStream dis = new DataInputStream( fis );
       for ( ; len > 0; --len ) {
@@ -172,10 +173,10 @@ public class FirmwareUtils
       }
       fis.close();
     } catch ( IOException e ) {
-      // TDLog.v( "check " + fw_version + ": IO exception " + e.getMessage() );
+      TDLog.v( "check " + fw_version + ": IO exception " + e.getMessage() );
       return false;
     }
-    // TDLog.v( "check " + fw_version + ": " + String.format("%08x", checksum) );
+    TDLog.v( "FW check " + fw_version + " checksum: " + String.format("%08x", checksum) );
     switch ( fw_version ) {
       case 2100: return ( checksum == 0xf58b194b );
       case 2200: return ( checksum == 0x4d66d466 );
@@ -188,7 +189,7 @@ public class FirmwareUtils
       case 2610: return ( checksum == 0xcae98256 );
       case 2630: return ( checksum == 0x1b1488c5 );
       case 2640: return ( checksum == 0xee2d70ff ); // fixed error in magnetic calib matrix
-      case 2700: return ( checksum == 0xf463405e );
+      case 2700: return ( checksum == 0xc637eb7c ); // ( checksum == 0xf463405e );
     }
     return false;
   }
