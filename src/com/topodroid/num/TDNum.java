@@ -1902,8 +1902,9 @@ public class TDNum
           // compute azimuth (p2-p1)
           double dx = p2.x - p1.x; // east
           double dy = p2.y - p1.y; // north
-          double a = Math.atan2( dy, dx ) * 180 / Math.PI;
+          double a = Math.atan2( dx, dy ) * 180 / Math.PI;
           if ( a < 0 ) a += 360;
+          TDLog.v("TRI leg " + p1.name + " " + p2.name + " angle " + a );
           leg.shot.mAvgLeg.mDecl = (float)(a - leg.a); // per shot declination
         }
       }

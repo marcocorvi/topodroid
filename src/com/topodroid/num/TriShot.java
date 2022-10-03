@@ -45,6 +45,14 @@ class TriShot
   //   TDLog.v( from + "-" + to + " " + (used?"u":"-") + (duplicate?"d":"-") + (surface?"s":"-") + (commented?"c ":"- ") + backshot + " blks " + blocks.size() );
   // }
 
+  /** cstr
+   * @param blk   DBlock
+   * @param f     FROM station
+   * @param t     TO station
+   * @param e     extend
+   * @param s     stretch
+   * @param r     ???
+   */
   TriShot( DBlock blk, String f, String t, int e, float s, int r )
   { 
     used = false;

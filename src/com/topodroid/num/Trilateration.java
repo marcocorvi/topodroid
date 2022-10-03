@@ -12,6 +12,7 @@
 package com.topodroid.num;
 
 import com.topodroid.math.Point2D;
+import com.topodroid.utils.TDLog;
 
 import java.util.ArrayList;
 // import java.util.List;
@@ -23,6 +24,9 @@ class Trilateration
   private double error;
   private int iter;
 
+  /** @return a point
+   * @param n   point name
+   */
   private TriPoint getPoint( String n )
   {
     for ( TriPoint p : points ) if ( n.equals(p.name) ) return p;
@@ -33,7 +37,9 @@ class Trilateration
 
   int getIterations() { return iter; }
 
-
+  /** cstr
+   * @param cl  cluster
+   */
   Trilateration( TriCluster cl )
   {
     legs   = new ArrayList<>();
@@ -71,12 +77,14 @@ class Trilateration
             pj.used = true;
             pj.x = pi.x + d * Math.sin( a );
             pj.y = pi.y + d * Math.cos( a );
+            // TDLog.v("TRI point " + pi.name + " -> " + pj.name + " x " + pj.x + " y " + pj.y + " angle [deg] " + leg.a );
             leg.used = true;
             repeat = true;
           } else if ( pj.used && ! pi.used ) {
             pi.used = true;
             pi.x = pj.x - d * Math.sin( a );
             pi.y = pj.y - d * Math.cos( a );
+            // TDLog.v("TRI point " + pj.name + " -> " + pi.name + " x " + pi.x + " y " + pi.y + " angle [deg] " + leg.a );
             leg.used = true;
             repeat = true;
           }
@@ -180,7 +188,9 @@ class Trilateration
     double err0 = computeError1( n_pts );
     // TDLog.v( "initial error " + err0 );
     Point2D[] dp = new Point2D[ n_pts ]; // gradient of points (x,y)
+    for ( TriPoint p : points ) TDLog.v("TRI p " + p.name + " x " + p.x + " y " + p.y );
     for ( iter =0 ; iter < iter_max; ++ iter ) {
+      // TDLog.v("TRI iter " + iter );
       for ( int i=0; i<n_pts; ++i ) {
         TriPoint pi = points.get(i);
         double dx = 0;
@@ -222,9 +232,11 @@ class Trilateration
           break;
         }
       }
+      // for ( TriPoint p : points ) TDLog.v("TRI p " + p.name + " x " + p.x + " y " + p.y );
       if ( err0 < eps || delta < 0.000001 ) break;
     }
     // TDLog.v( "minimize error " + err0 + " iter " + iter + " final delta " + delta );
+    for ( TriPoint p : points ) TDLog.v("TRI p " + p.name + " x " + p.x + " y " + p.y );
     return err0;
   }
 

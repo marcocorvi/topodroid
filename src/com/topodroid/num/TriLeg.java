@@ -14,12 +14,17 @@ package com.topodroid.num;
 class TriLeg
 {
   TriShot shot;
-  double d; // distance [m]
+  double d; // horizontal distance [m]
   double a; // angle [degrees]
   boolean used; // work flag
-  TriPoint pi;
-  TriPoint pj;
+  TriPoint pi;  // FROM point of the shot
+  TriPoint pj;  // TO point of the shot
   
+  /** cstr
+   * @param sh   shot
+   * @param p1   first point
+   * @param p2   second point
+   */
   TriLeg( TriShot sh, TriPoint p1, TriPoint p2 )
   {
     shot = sh;

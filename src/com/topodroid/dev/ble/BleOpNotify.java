@@ -50,7 +50,7 @@ public class BleOpNotify extends BleOperation
   @Override 
   public void execute()
   {
-    // TDLog.v( "BleOp exec notify " + mEnable + " " + mChrtUuid.toString() );
+    TDLog.v( "BleOp exec notify " + mEnable + " " + mChrtUuid.toString() );
     if ( mPipe == null ) { 
       TDLog.e("BleOp notify error: null pipe " + mChrtUuid.toString() );
       return;

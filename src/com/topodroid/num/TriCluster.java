@@ -24,20 +24,34 @@ class TriCluster
     stations = new ArrayList<>();
   }
 
+  /** @return the number of shots in the cluster
+   */
   int nrShots() { return shots.size(); }
+
+  /** @return the number of stations in the cluster
+   */
   int nrStations() { return stations.size(); }
 
+  /** add a shot
+   * @param ts   shot to add
+   */
   void addTmpShot( TriShot ts )
   {
     shots.add( ts );
     ts.cluster = this;
   }
 
+  /** add a station to the cluster
+   * @param st   station (name)
+   */
   void addStation( String st )
   {
     if ( ! containsStation( st ) ) stations.add( st );
   }
 
+  /** @return true if the cluster contains the given station
+   * @param st  given station (name)
+   */
   boolean containsStation( String st )
   {
     if ( st == null ) return true;

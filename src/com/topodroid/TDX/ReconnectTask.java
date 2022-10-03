@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 // import com.topodroid.dev.ConnectionState;
 
@@ -48,7 +48,10 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
     if ( TDSetting.mAutoReconnect && TDInstance.isContinuousMode() ) {
       while ( mDownloader.needReconnect() ) {
         try {
-          if ( mDelay > 0 ) Thread.sleep( mDelay );
+          if ( mDelay > 0 ) {
+            // TDLog.v("SLEEP reconnect " + mDelay );
+            Thread.sleep( mDelay );
+          }
           // TDLog.v( "notify disconnected: try reconnect status " + mDownloader.isDownloading() );
           mDownloader.tryConnect( mDataType ); 
         } catch ( InterruptedException e ) { }

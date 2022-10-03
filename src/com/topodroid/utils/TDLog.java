@@ -187,7 +187,7 @@ public class TDLog
    */
   static public void e( String msg )
   {
-    if ( mLogStream == LOG_FILE ) {
+    if ( mLogStream != LOG_FILE ) {
       mLogStream = LOG_FILE;
       if ( mLog == null ) setLogTarget();
     }

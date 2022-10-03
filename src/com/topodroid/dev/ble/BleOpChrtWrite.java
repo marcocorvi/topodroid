@@ -39,6 +39,7 @@ public class BleOpChrtWrite extends BleOperation
   @Override 
   public void execute()
   {
+    TDLog.v( "BleOp exec chrt write " );
     if ( mPipe == null ) { 
       TDLog.e( "BleOp chrt write error: null pipe" );
       return;
