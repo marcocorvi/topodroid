@@ -29,6 +29,8 @@ import java.util.concurrent.TimeUnit;
 // import android.Manifest;
 // import android.annotation.TargetApi;
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 // import android.content.pm.PackageManager;
 import android.content.pm.PackageManager;
@@ -76,7 +78,10 @@ import android.util.Size;
 /** this is the camera preview class
  *  It access the camera via the QCamPreview
  *  @note this class must be public
+ *
+ *  @note QCamDrawingTexture is used only with API at least 21
  */
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class QCamDrawingTexture extends TextureView {
   private static final int MAX_PREVIEW_WIDTH = 1920; // expect landscape image
   private static final int MAX_PREVIEW_HEIGHT = 1080;
@@ -176,6 +181,7 @@ public class QCamDrawingTexture extends TextureView {
   // ------------------------------------------------------------------------
   /** camera state callback
    */
+  // if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
   private final StateCallback mStateCallback = new StateCallback() {
     @Override
     public void onOpened(CameraDevice camera) // called when camera is opened - start preview here
@@ -204,6 +210,7 @@ public class QCamDrawingTexture extends TextureView {
       mQCam.dismiss(); // finish
     }
   };
+  // }
 
   // ------------------------------------------------------------------------
   final static int STATE_PREVIEW = 0;
@@ -215,6 +222,7 @@ public class QCamDrawingTexture extends TextureView {
 
   int mState = STATE_PREVIEW;
 
+  // if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
   final CameraCaptureSession.CaptureCallback mCaptureCallback = new CameraCaptureSession.CaptureCallback() {
     @Override
     public void onCaptureBufferLost(CameraCaptureSession session, CaptureRequest request, Surface target, long frameNumber) {
@@ -224,7 +232,7 @@ public class QCamDrawingTexture extends TextureView {
     @Override
     public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
       // TDLog.v("CAM2 capture completed");
-      if (Build.VERSION.SDK_INT < 21) return;
+      // if (Build.VERSION.SDK_INT < 21) return;
       process(result);
     }
 
@@ -235,7 +243,7 @@ public class QCamDrawingTexture extends TextureView {
 
     @Override
     public void onCaptureProgressed(CameraCaptureSession session, CaptureRequest request, CaptureResult partialResult) {
-      if (Build.VERSION.SDK_INT < 21) return;
+      // if (Build.VERSION.SDK_INT < 21) return;
       process(partialResult);
     }
 
@@ -254,7 +262,7 @@ public class QCamDrawingTexture extends TextureView {
 
     private void process(CaptureResult result) {
       // TDLog.v("CAM2 process state " + mState );
-      if (Build.VERSION.SDK_INT < 21) return;
+      // if (Build.VERSION.SDK_INT < 21) return;
       switch (mState) {
         case STATE_PREVIEW: // nothing
           break;
@@ -295,8 +303,9 @@ public class QCamDrawingTexture extends TextureView {
           break;
       }
     }
-
   };
+  // }
+
   // ------------------------------------------------------------------------
 
   /** cstr
@@ -314,15 +323,16 @@ public class QCamDrawingTexture extends TextureView {
    */
   public void start(QCamCompass qcam) {
     // TDLog.v("CAM2 start camera");
-    if (Build.VERSION.SDK_INT < 21) return;
-    mQCam = qcam;
-    mBackgroundThread = TDThread.startThread("camera thread");
-    mBackgroundHandler = TDThread.getHandler(mBackgroundThread);
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+      mQCam = qcam;
+      mBackgroundThread = TDThread.startThread("camera thread");
+      mBackgroundHandler = TDThread.getHandler(mBackgroundThread);
 
-    if (isAvailable()) { // already available: open immediately the camera
-      openCamera(getWidth(), getHeight());
-    } else { // npt yet available: set a listener
-      setSurfaceTextureListener(mSurfaceTextureListener);
+      if (isAvailable()) { // already available: open immediately the camera
+        openCamera(getWidth(), getHeight());
+      } else { // npt yet available: set a listener
+        setSurfaceTextureListener(mSurfaceTextureListener);
+      }
     }
   }
 
@@ -330,12 +340,13 @@ public class QCamDrawingTexture extends TextureView {
    */
   public void stop() {
     // TDLog.v("CAM2 stop camera");
-    if (Build.VERSION.SDK_INT < 21) return;
-    closeCamera();
-    if (TDThread.stopThread(mBackgroundThread)) {
-      mBackgroundThread = null;
-      mBackgroundHandler = null;
-    } else { // interrupted
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+      closeCamera();
+      if (TDThread.stopThread(mBackgroundThread)) {
+        mBackgroundThread = null;
+        mBackgroundHandler = null;
+      } else { // interrupted
+      }
     }
   }
 
@@ -344,30 +355,32 @@ public class QCamDrawingTexture extends TextureView {
    * @param h   height
    * @return true if success
    * @note called by start() and onSurfaceTextureAvailable()
+   * @note permissions has been checked upstream
    */
+  @SuppressLint("MissingPermission")
   private boolean openCamera(int w, int h) {
     // TDLog.v("CAM2 open camera");
-    if (Build.VERSION.SDK_INT < 21) return false;
-    // TODO check permissions
-    CameraManager manager = (CameraManager) (mContext.getSystemService(Context.CAMERA_SERVICE));
-    setupCameraOutput(manager, w, h);
-    configureTransform(w, h);
-    try {
-      if (!mLock.tryAcquire(2500, TimeUnit.MILLISECONDS)) {
-        return false; // throw
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+      CameraManager manager = (CameraManager) (mContext.getSystemService(Context.CAMERA_SERVICE));
+      setupCameraOutput(manager, w, h);
+      configureTransform(w, h);
+      try {
+        if (!mLock.tryAcquire(2500, TimeUnit.MILLISECONDS)) {
+          return false; // throw
+        }
+        if ( ! TDandroid.checkCamera(mContext) ) {
+          TDLog.Error("No CAMERA permission");
+          return false;
+        }
+        manager.openCamera(mCameraId, mStateCallback, mBackgroundHandler);
+        return true;
+      } catch ( CameraAccessException e ) {
+        TDLog.Error("CAM2 " + e.getMessage() );
+        // e.printStackTrace();
+      } catch ( InterruptedException e ) {
+        TDLog.Error("CAM2 " + e.getMessage() );
+        // TODO throw
       }
-      if ( ! TDandroid.checkCamera(mContext) ) {
-        TDLog.Error("No CAMERA permission");
-        return false;
-      }
-      manager.openCamera(mCameraId, mStateCallback, mBackgroundHandler);
-      return true;
-    } catch ( CameraAccessException e ) {
-      TDLog.Error("CAM2 " + e.getMessage() );
-      // e.printStackTrace();
-    } catch ( InterruptedException e ) {
-      TDLog.Error("CAM2 " + e.getMessage() );
-      // TODO throw
     }
     return false;
   }
@@ -378,17 +391,18 @@ public class QCamDrawingTexture extends TextureView {
   private void closeCamera()
   {
     // TDLog.v("CAM2 close camera");
-    if ( Build.VERSION.SDK_INT < 21 ) return;
-    try {
-      mLock.acquire();
-      if ( mCaptureSession != null ) { mCaptureSession.close(); mCaptureSession = null; }
-      if ( mCamera         != null ) { mCamera.close();         mCamera = null; }
-      if ( mImageReader    != null ) { mImageReader.close();    mImageReader    = null; }
-    } catch ( InterruptedException e ) {
-      TDLog.Error("CAM2 " + e.getMessage() );
-      // TODO
-    } finally {
-      mLock.release();
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+      try {
+        mLock.acquire();
+        if ( mCaptureSession != null ) { mCaptureSession.close(); mCaptureSession = null; }
+        if ( mCamera         != null ) { mCamera.close();         mCamera = null; }
+        if ( mImageReader    != null ) { mImageReader.close();    mImageReader    = null; }
+      } catch ( InterruptedException e ) {
+        TDLog.Error("CAM2 " + e.getMessage() );
+        // TODO
+      } finally {
+        mLock.release();
+      }
     }
   }
 
@@ -401,79 +415,79 @@ public class QCamDrawingTexture extends TextureView {
   private void setupCameraOutput( CameraManager manager, int w, int h )
   {
     // TDLog.v("CAM2 setup camera output");
-    if ( Build.VERSION.SDK_INT < 21 ) return;
-    try {
-      for ( String id : manager.getCameraIdList() ) {
-        CameraCharacteristics chr = manager.getCameraCharacteristics( id );
-        Integer facing = chr.get( CameraCharacteristics.LENS_FACING );
-        if ( facing != null && facing == CameraCharacteristics.LENS_FACING_FRONT ) continue;
-        StreamConfigurationMap map = chr.get( CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP );
-        if ( map == null ) continue;
-        Size largest = Collections.max( Arrays.asList( map.getOutputSizes( ImageFormat.JPEG ) ), new CompareSizeByArea() );
-        mImageReader = ImageReader.newInstance( largest.getWidth(), largest.getHeight(), ImageFormat.JPEG, MAX_CAPTURES );
-        mImageReader.setOnImageAvailableListener( mImageAvailable, mBackgroundHandler );
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+      try {
+        for ( String id : manager.getCameraIdList() ) {
+          CameraCharacteristics chr = manager.getCameraCharacteristics( id );
+          Integer facing = chr.get( CameraCharacteristics.LENS_FACING );
+          if ( facing != null && facing == CameraCharacteristics.LENS_FACING_FRONT ) continue;
+          StreamConfigurationMap map = chr.get( CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP );
+          if ( map == null ) continue;
+          Size largest = Collections.max( Arrays.asList( map.getOutputSizes( ImageFormat.JPEG ) ), new CompareSizeByArea() );
+          mImageReader = ImageReader.newInstance( largest.getWidth(), largest.getHeight(), ImageFormat.JPEG, MAX_CAPTURES );
+          mImageReader.setOnImageAvailableListener( mImageAvailable, mBackgroundHandler );
 
-        mOrientation = chr.get( CameraCharacteristics.SENSOR_ORIENTATION ); // 0, 90, 180, or 270
+          mOrientation = chr.get( CameraCharacteristics.SENSOR_ORIENTATION ); // 0, 90, 180, or 270
+          Point displaySize = new Point();
+          int rot = 0;
+          try {
+            DisplayManager dm = (DisplayManager)( mContext.getSystemService( Context.DISPLAY_SERVICE ) );
+            mDisplay = dm.getDisplay( Display.DEFAULT_DISPLAY );
+            mDisplay.getSize( displaySize );
+            rot = mDisplay.getRotation();
+          } catch ( ClassCastException e ) {
+            TDLog.Error("CAM2 class cast " + e.getMessage() );
+          }
+          boolean swapped = false; // whether the swap width and height
+          switch ( rot ) {
+            case Surface.ROTATION_0:   // 0 display is portrait
+            case Surface.ROTATION_180: // 2
+              if ( mOrientation == 90 || mOrientation == 270 ) swapped = true; // sensor is right or left
+              break;
+            case Surface.ROTATION_90:  // 1 display is landscape
+            case Surface.ROTATION_270: // 3
+              if ( mOrientation == 0 || mOrientation == 180 ) swapped = true; // sensor is up or down
+              break;
+            default:
+              TDLog.Error("CAM2 invalid rotation " + rot );
+          }
 
-        Point displaySize = new Point();
-        int rot = 0;
-        try {
-          DisplayManager dm = (DisplayManager)( mContext.getSystemService( Context.DISPLAY_SERVICE ) );
-          mDisplay = dm.getDisplay( Display.DEFAULT_DISPLAY );
-          mDisplay.getSize( displaySize );
-          rot = mDisplay.getRotation();
-        } catch ( ClassCastException e ) {
-          TDLog.Error("CAM2 class cast " + e.getMessage() );
-        }
-        boolean swapped = false; // whether the swap width and height
-        switch ( rot ) {
-          case Surface.ROTATION_0:   // 0 display is portrait
-          case Surface.ROTATION_180: // 2
-            if ( mOrientation == 90 || mOrientation == 270 ) swapped = true; // sensor is right or left
-            break;
-          case Surface.ROTATION_90:  // 1 display is landscape
-          case Surface.ROTATION_270: // 3
-            if ( mOrientation == 0 || mOrientation == 180 ) swapped = true; // sensor is up or down
-            break;
-          default:
-            TDLog.Error("CAM2 invalid rotation " + rot );
-        }
+          int rot_w = w;
+          int rot_h = h;
+          int max_w = displaySize.x;
+          int max_h = displaySize.y;
+          if ( swapped ) { // if sensor orientation and display do not agree swap width and height
+            rot_w = h;
+            rot_h = w;
+            max_w = displaySize.y;
+            max_h = displaySize.x;
+          }
+          // TDLog.v("CAM2 rot " + rot_w + "x" + rot_h + " max " + max_w + "x" + max_h + " swapped " + swapped + " rotation " + rot + " sensor orient " + mOrientation );
+          if ( max_w > MAX_PREVIEW_WIDTH  ) max_w = MAX_PREVIEW_WIDTH;
+          if ( max_h > MAX_PREVIEW_HEIGHT ) max_h = MAX_PREVIEW_HEIGHT;
+          mPreviewSize = optimalSize( map.getOutputSizes( SurfaceTexture.class ), rot_w, rot_h, max_w, max_h, largest );
+       
+          int orientation = mContext.getResources().getConfiguration().orientation; 
+          if ( orientation == Configuration.ORIENTATION_LANDSCAPE ) {
+            setAspectRatio( mPreviewSize.getWidth(), mPreviewSize.getHeight() );
+          } else {
+            setAspectRatio( mPreviewSize.getHeight(), mPreviewSize.getWidth() );
+          }
+          Boolean flash = chr.get( CameraCharacteristics.FLASH_INFO_AVAILABLE );
+          mHasFlash = ( flash == null )? false : flash;
 
-        int rot_w = w;
-        int rot_h = h;
-        int max_w = displaySize.x;
-        int max_h = displaySize.y;
-        if ( swapped ) { // if sensor orientation and display do not agree swap width and height
-          rot_w = h;
-          rot_h = w;
-          max_w = displaySize.y;
-          max_h = displaySize.x;
+          mCameraId = id;
+          // TDLog.v("CAM2 preview size " + mPreviewSize.getWidth() + "x" + mPreviewSize.getHeight() + " config orient " + orientation + " rotation " + rot + " flash " + mHasFlash );
+          return;
         }
-        // TDLog.v("CAM2 rot " + rot_w + "x" + rot_h + " max " + max_w + "x" + max_h + " swapped " + swapped + " rotation " + rot + " sensor orient " + mOrientation );
-        if ( max_w > MAX_PREVIEW_WIDTH  ) max_w = MAX_PREVIEW_WIDTH;
-        if ( max_h > MAX_PREVIEW_HEIGHT ) max_h = MAX_PREVIEW_HEIGHT;
-        mPreviewSize = optimalSize( map.getOutputSizes( SurfaceTexture.class ), rot_w, rot_h, max_w, max_h, largest );
-     
-        int orientation = mContext.getResources().getConfiguration().orientation; 
-        if ( orientation == Configuration.ORIENTATION_LANDSCAPE ) {
-          setAspectRatio( mPreviewSize.getWidth(), mPreviewSize.getHeight() );
-        } else {
-          setAspectRatio( mPreviewSize.getHeight(), mPreviewSize.getWidth() );
-        }
-        Boolean flash = chr.get( CameraCharacteristics.FLASH_INFO_AVAILABLE );
-        mHasFlash = ( flash == null )? false : flash;
-
-        mCameraId = id;
-        // TDLog.v("CAM2 preview size " + mPreviewSize.getWidth() + "x" + mPreviewSize.getHeight() + " config orient " + orientation + " rotation " + rot + " flash " + mHasFlash );
-        return;
+      } catch ( CameraAccessException e ) {
+        TDLog.Error("CAM2 access " + e.getMessage() );
+        e.printStackTrace();
+      } catch ( NullPointerException e ) {
+        TDLog.Error("CAM2 null ptr " + e.getMessage() );
+        // camera2 API used but not supported
+        e.printStackTrace();
       }
-    } catch ( CameraAccessException e ) {
-      TDLog.Error("CAM2 access " + e.getMessage() );
-      e.printStackTrace();
-    } catch ( NullPointerException e ) {
-      TDLog.Error("CAM2 null ptr " + e.getMessage() );
-      // camera2 API used but not supported
-      e.printStackTrace();
     }
   }
 
@@ -485,45 +499,46 @@ public class QCamDrawingTexture extends TextureView {
   private void createCameraPreviewSession()
   {
     // TDLog.v("CAM2 create camera preview session");
-    if ( Build.VERSION.SDK_INT < 21 ) return;
-    try {
-      SurfaceTexture texture = getSurfaceTexture();
-      if ( texture == null ) {
-        TDLog.Error("CAM2 null surface texture");
-        return; // or throw
-      }
-      texture.setDefaultBufferSize( mPreviewSize.getWidth(), mPreviewSize.getHeight() );
-      Surface surface = new Surface( texture );
-      mPreviewRequestBuilder = mCamera.createCaptureRequest( CameraDevice.TEMPLATE_PREVIEW );
-      mPreviewRequestBuilder.addTarget( surface );
-      mCamera.createCaptureSession( Arrays.asList( surface, mImageReader.getSurface() ), 
-        new CameraCaptureSession.StateCallback() 
-        {
-          @Override
-          public void onConfigured( CameraCaptureSession session ) 
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+      try {
+        SurfaceTexture texture = getSurfaceTexture();
+        if ( texture == null ) {
+          TDLog.Error("CAM2 null surface texture");
+          return; // or throw
+        }
+        texture.setDefaultBufferSize( mPreviewSize.getWidth(), mPreviewSize.getHeight() );
+        Surface surface = new Surface( texture );
+        mPreviewRequestBuilder = mCamera.createCaptureRequest( CameraDevice.TEMPLATE_PREVIEW );
+        mPreviewRequestBuilder.addTarget( surface );
+        mCamera.createCaptureSession( Arrays.asList( surface, mImageReader.getSurface() ),
+          new CameraCaptureSession.StateCallback()
           {
-            if ( mCamera == null ) {
-              // TDLog.v("CAM2 capture session on configured: null camera");
-              return;
+            @Override
+            public void onConfigured( CameraCaptureSession session )
+            {
+              if ( mCamera == null ) {
+                // TDLog.v("CAM2 capture session on configured: null camera");
+                return;
+              }
+              // TDLog.v("CAM2 capture session on configured");
+              mCaptureSession = session;
+              // called in startPreview()
+              // mPreviewRequestBuilder.set( CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE ); // autofocus
+              // setAutoFlash( mPreviewRequestBuilder );
+              // mPreviewRequest = mPreviewRequestBuilder.build();
+              startPreview();
             }
-            // TDLog.v("CAM2 capture session on configured");
-            mCaptureSession = session;
-            // called in startPreview()
-            // mPreviewRequestBuilder.set( CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE ); // autofocus
-            // setAutoFlash( mPreviewRequestBuilder );
-            // mPreviewRequest = mPreviewRequestBuilder.build();
-            startPreview();
-          }
-          @Override
-          public void onConfigureFailed( CameraCaptureSession session )
-          {
-            TDLog.Error("CAM2 failed configure");
-            // TDToast
-          }
-        }, null );
-    } catch ( CameraAccessException e ) {
-      TDLog.Error("CAM2 access " + e.getMessage() );
-      e.printStackTrace();
+            @Override
+            public void onConfigureFailed( CameraCaptureSession session )
+            {
+              TDLog.Error("CAM2 failed configure");
+              // TDToast
+            }
+          }, null );
+      } catch ( CameraAccessException e ) {
+        TDLog.Error("CAM2 access " + e.getMessage() );
+        e.printStackTrace();
+      }
     }
   }
 
@@ -702,14 +717,15 @@ public class QCamDrawingTexture extends TextureView {
   private void runPrecaptureSequence()
   {
     // TDLog.v("CAM2 run precapture sequence");
-    if ( Build.VERSION.SDK_INT < 21 ) return;
-    try {
-      mPreviewRequestBuilder.set( CaptureRequest.CONTROL_AE_PRECAPTURE_TRIGGER, CameraMetadata.CONTROL_AE_PRECAPTURE_TRIGGER_START );
-      mState = STATE_WAITING_PRECAPTURE;
-      // TDLog.v("CAM2 state --> WAITING PRECATURE");
-      mCaptureSession.capture( mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler );
-    } catch ( CameraAccessException e ) {
-      TDLog.Error("CAM2 access " + e.getMessage() );
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+      try {
+        mPreviewRequestBuilder.set( CaptureRequest.CONTROL_AE_PRECAPTURE_TRIGGER, CameraMetadata.CONTROL_AE_PRECAPTURE_TRIGGER_START );
+        mState = STATE_WAITING_PRECAPTURE;
+        // TDLog.v("CAM2 state --> WAITING PRECATURE");
+        mCaptureSession.capture( mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler );
+      } catch ( CameraAccessException e ) {
+        TDLog.Error("CAM2 access " + e.getMessage() );
+      }
     }
   }
 
@@ -717,27 +733,28 @@ public class QCamDrawingTexture extends TextureView {
    */
   private void capturePicture()
   {
-    if ( Build.VERSION.SDK_INT < 21 ) return;
     if ( mCamera == null ) return;
-    // TDLog.v("CAM2 capture picture");
-    try {
-      final CaptureRequest.Builder captureBuilder = mCamera.createCaptureRequest( CameraDevice.TEMPLATE_STILL_CAPTURE );
-      captureBuilder.addTarget( mImageReader.getSurface() );
-      captureBuilder.set( CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE );
-      setAutoFlash( captureBuilder );
-      int r = mDisplay.getRotation();
-      captureBuilder.set( CaptureRequest.JPEG_ORIENTATION, getOrientation( r ) );
-      CameraCaptureSession.CaptureCallback captureCallback = new CameraCaptureSession.CaptureCallback() {
-        @Override
-        public void onCaptureCompleted( CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result ) {
-          unlockFocus();
-        }
-      };
-      mCaptureSession.stopRepeating(); 
-      mCaptureSession.abortCaptures(); 
-      mCaptureSession.capture( captureBuilder.build(), captureCallback, null );
-    } catch ( CameraAccessException e ) {
-      TDLog.Error("CAM2 access " + e.getMessage() );
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+      // TDLog.v("CAM2 capture picture");
+      try {
+        final CaptureRequest.Builder captureBuilder = mCamera.createCaptureRequest( CameraDevice.TEMPLATE_STILL_CAPTURE );
+        captureBuilder.addTarget( mImageReader.getSurface() );
+        captureBuilder.set( CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE );
+        setAutoFlash( captureBuilder );
+        int r = mDisplay.getRotation();
+        captureBuilder.set( CaptureRequest.JPEG_ORIENTATION, getOrientation( r ) );
+        CameraCaptureSession.CaptureCallback captureCallback = new CameraCaptureSession.CaptureCallback() {
+          @Override
+          public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result ) {
+            unlockFocus();
+          }
+        };
+        mCaptureSession.stopRepeating(); 
+        mCaptureSession.abortCaptures(); 
+        mCaptureSession.capture( captureBuilder.build(), captureCallback, null );
+      } catch ( CameraAccessException e ) {
+        TDLog.Error("CAM2 access " + e.getMessage() );
+      }
     }
   }
 
@@ -910,6 +927,5 @@ public class QCamDrawingTexture extends TextureView {
       }
     }
   }
-
 
 }

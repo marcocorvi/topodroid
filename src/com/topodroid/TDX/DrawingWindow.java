@@ -827,6 +827,7 @@ public class DrawingWindow extends ItemDrawer
     mPlot2.start = station;
     mMultiBad = new ArrayList< StringPair >();
     mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
+    if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( mNum.nrInaccurateLoops > 0 );
     computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, false );
     computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, false );
     NumStation st = mNum.getStation( old_station );
@@ -1015,16 +1016,19 @@ public class DrawingWindow extends ItemDrawer
    * @param splay   whether the shot is a splay
    * @param selectable whether the shot is selectable
    */
-  private void addFixedLine( long type, DBlock blk, double x1, double y1, double x2, double y2,
+  private DrawingPath addFixedLine( long type, DBlock blk, double x1, double y1, double x2, double y2,
                              float cosine, boolean splay, boolean selectable )
   {
-    if ( splay ) {
+    DrawingPath path = null;
+    if ( splay ) { 
       DrawingSplayPath dpath = makeFixedSplay( type, blk, (float)x1, (float)y1, (float)x2, (float)y2, cosine );
       mDrawingSurface.addFixedSplayPath( dpath, selectable );
-    } else {
-      DrawingPath dpath = makeFixedLeg( type, blk, (float)x1, (float)y1, (float)x2, (float)y2 );
-      mDrawingSurface.addFixedLegPath( dpath, selectable );
+      path = dpath; // not needed UNUSED
+    } else { // DrawingPath
+      path = makeFixedLeg( type, blk, (float)x1, (float)y1, (float)x2, (float)y2 );
+      mDrawingSurface.addFixedLegPath( path, selectable );
     }
+    return path;
   }
 
   /** used to append legs and splays to the respective list
@@ -1036,17 +1040,20 @@ public class DrawingWindow extends ItemDrawer
    * @param splay   whether the shot is a splay
    * @param selectable whether the shot is selectable
    */
-  private void appendFixedLine( long type, DBlock blk, double x1, double y1, double x2, double y2,
+  private DrawingPath appendFixedLine( long type, DBlock blk, double x1, double y1, double x2, double y2,
                                 float cosine, boolean splay, boolean selectable )
   {
+    DrawingPath path = null;
     int typ = PlotType.isPlan( type )? DrawingSurface.DRAWING_PLAN : DrawingSurface.DRAWING_PROFILE;
-    if ( splay ) {
+    if ( splay ) { 
       DrawingSplayPath dpath = makeFixedSplay( type, blk, (float)x1, (float)y1, (float)x2, (float)y2, cosine );
       mDrawingSurface.appendFixedSplayPath( typ, dpath, selectable );
-    } else {
-      DrawingPath dpath = makeFixedLeg( type, blk, (float)x1, (float)y1, (float)x2, (float)y2 );
-      mDrawingSurface.appendFixedLegPath( typ, dpath, selectable );
+      path = dpath; // not needed UNUSED
+    } else { // DrawingPath
+      path = makeFixedLeg( type, blk, (float)x1, (float)y1, (float)x2, (float)y2 );
+      mDrawingSurface.appendFixedLegPath( typ, path, selectable );
     }
+    return path;
   }
 
   /** @return a drawing splay path
@@ -1621,7 +1628,11 @@ public class DrawingWindow extends ItemDrawer
         NumStation st1 = sh.from;
         NumStation st2 = sh.to;
         if ( st1.show() && st2.show() ) {
-          addFixedLine( type, sh.getFirstBlock(), st1.e, st1.s, st2.e, st2.s, sh.getReducedExtend(), false, true );
+          DBlock blk = sh.getFirstBlock();
+          DrawingPath path = addFixedLine( type, blk, st1.e, st1.s, st2.e, st2.s, sh.getReducedExtend(), false, true );
+          if ( sh.isBadLoop() ) {
+            path.setPathPaint( BrushManager.badLoopPaint );
+          }
         }
       }
       for ( NumSplay sp : splays ) {
@@ -1656,7 +1667,10 @@ public class DrawingWindow extends ItemDrawer
           NumStation st2 = sh.to;
 	  DBlock blk = sh.getFirstBlock();
           if ( blk != null && st1.hasExtend() && st2.hasExtend() && st1.show() && st2.show() ) {
-            addFixedLine( type, blk, st1.h, st1.v, st2.h, st2.v, sh.getReducedExtend(), false, true );
+            DrawingPath path = addFixedLine( type, blk, st1.h, st1.v, st2.h, st2.v, sh.getReducedExtend(), false, true );
+            if ( sh.isBadLoop() ) {
+              path.setPathPaint( BrushManager.badLoopPaint );
+            }
           }
         }
       } 
@@ -1687,7 +1701,10 @@ public class DrawingWindow extends ItemDrawer
         if ( st1.show() && st2.show() ) {
           h1 = st1.e * cosp + st1.s * sinp;
           h2 = st2.e * cosp + st2.s * sinp;
-          addFixedLine( type, sh.getFirstBlock(), h1, st1.v, h2, st2.v, sh.getReducedExtend(), false, true );
+          DrawingPath path = addFixedLine( type, sh.getFirstBlock(), h1, st1.v, h2, st2.v, sh.getReducedExtend(), false, true );
+          if ( sh.isBadLoop() ) {
+            path.setPathPaint( BrushManager.badLoopPaint );
+          }
         }
       } 
       for ( NumSplay sp : splays ) {
@@ -3356,6 +3373,7 @@ public class DrawingWindow extends ItemDrawer
         // TDLog.v( "data reduction " + list.size() + " start at " + mPlot1.start );
         mMultiBad = new ArrayList< StringPair >();
         mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
+        if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( mNum.nrInaccurateLoops > 0 );
       } else {
         mNum = null;
         // TDToast.makeBad( R.string.few_data );
@@ -3649,13 +3667,12 @@ public class DrawingWindow extends ItemDrawer
       List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
       mMultiBad = new ArrayList< StringPair >();
       mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
-      // if ( mNum != null ) { // always true
-        mDrawingSurface.clearShotsAndStations( (int)mType );
-        computeReferences( mNum, (int)mType, mName, TopoDroidApp.mScaleFactor, false );
-        // TDLog.v( "PLOT profile ref " + mOffset.x + " " + mOffset.y + " " + mZoom );
-        mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
-        modified();
-      // }
+      if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( mNum.nrInaccurateLoops > 0 );
+      mDrawingSurface.clearShotsAndStations( (int)mType );
+      computeReferences( mNum, (int)mType, mName, TopoDroidApp.mScaleFactor, false );
+      // TDLog.v( "PLOT profile ref " + mOffset.x + " " + mOffset.y + " " + mZoom );
+      mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
+      modified();
     } 
   }
 
@@ -6375,11 +6392,12 @@ public class DrawingWindow extends ItemDrawer
       }
     } else if ( b == mMenuImage ) { // MENU long click
       // TDLog.v("MENU LONG CLICK");
-      if ( mMultiBad.size() == 0 /* && nr_magnetic_bad == 0 */ && mNum.surveyExtend && mNum.surveyAttached ) { // nr_multi_bad
+      int bad_loops = mNum.nrInaccurateLoops;
+      if ( mMultiBad.size() == 0 /* && nr_magnetic_bad == 0 */ && mNum.surveyExtend && mNum.surveyAttached && (bad_loops == 0) ) { // nr_multi_bad
         onClick( view );
       } else {
         // onClick( view );
-        new ReductionErrorsDialog( this, /* this, */ mMultiBad, nr_magnetic_bad, ! mNum.surveyExtend, ! mNum.surveyAttached ).show();
+        new ReductionErrorsDialog( this, /* this, */ mMultiBad, nr_magnetic_bad, mNum ).show();
       }
     } else if ( TDLevel.overNormal && b == mButton2[0] ) { // drawing properties
       Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
@@ -7243,6 +7261,7 @@ public class DrawingWindow extends ItemDrawer
     List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
     mMultiBad = new ArrayList< StringPair >();
     mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
+    if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( mNum.nrInaccurateLoops > 0 );
     if ( mType == (int)PlotType.PLOT_PLAN ) {
       computeReferences( mNum, mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true );
       computeReferences( mNum, mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, false );
@@ -7292,6 +7311,7 @@ public class DrawingWindow extends ItemDrawer
       List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
       mMultiBad = new ArrayList< StringPair >();
       TDNum num = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
+      if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( num.nrInaccurateLoops > 0 );
       recomputeReferences( num, TopoDroidApp.mScaleFactor );
       mNum = num;
     }
@@ -7308,6 +7328,7 @@ public class DrawingWindow extends ItemDrawer
       List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
       mMultiBad = new ArrayList< StringPair >();
       TDNum num = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
+      if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) setMenuImageRed( num.nrInaccurateLoops > 0 );
       recomputeReferences( num, TopoDroidApp.mScaleFactor );
       mNum = num;
     } else {

@@ -169,6 +169,16 @@ public class DrawingPath extends RectF
    */
   void setPaintAlpha( boolean on ) { mPaint.setAlpha( (on ? 0xff : 0) ); }
 
+  /** set the path paint
+   * @param paint   new path paint
+   */
+  void setPathPaint( Paint paint ) { mPaint = paint; }
+
+  /** get the path color (or white)
+   * @return the color of the path
+   */
+  public int color() { return ( mPaint != null )? mPaint.getColor() : 0xffffffff; }
+
   /** @return true if the path type is a "reference" 
    * @param type   path type
    */
@@ -280,11 +290,6 @@ public class DrawingPath extends RectF
     }
   }
 
-  /** get the path color (or white)
-   * @return the color of the path
-   */
-  public int color() { return ( mPaint != null )? mPaint.getColor() : 0xffffffff; }
-
   // void log()
   // {
   //   // TDLog.v("PATH " + "Path " + x1 + " " + y1 + "   " + x2 + " " + y2 );
@@ -386,11 +391,6 @@ public class DrawingPath extends RectF
   //   mPath.lineTo( x1-r, y1 );
   //   mPath.offset( off_x, off_y );
   // }
-
-  /** set the path paint
-   * @param paint   new path paint
-   */
-  void setPathPaint( Paint paint ) { mPaint = paint; }
 
   /** set the path endpoints
    * @param x10 first endpoint scene X coords
@@ -671,8 +671,7 @@ public class DrawingPath extends RectF
    */
   void drawPath( Path path, Canvas canvas )
   {
-    if (    mType == DRAWING_PATH_SPLAY  // FIXME_X_SPLAY
-         && mBlock != null ) {
+    if ( mBlock != null && mType == DRAWING_PATH_SPLAY ) { // FIXME_X_SPLAY
       if ( TDSetting.mSplayColor ) {
         if ( mBlock.isRecent( ) ) { 
           canvas.drawPath( path, BrushManager.lightBluePaint );

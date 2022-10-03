@@ -287,6 +287,7 @@ public class TDNum
   private ArrayList< NumClosure > mClosures;
   private ArrayList< NumNode >    mNodes;
   private ArrayList< DBlock >     mUnattachedShots;
+  private ArrayList< NumCycle >   mBadLoops;
 
   public String getOriginStation() { return (mStartStation == null)? null : mStartStation.name; }
   public NumStation getOrigin()    { return mStartStation; }
@@ -300,6 +301,7 @@ public class TDNum
   public List< NumSplay >   getSplays()   { return mSplays; }
   public List< NumClosure > getClosures() { return mClosures; }
   public List< DBlock >     getUnattached() { return mUnattachedShots; }
+  public List< NumCycle >   getBadLoops() { return mBadLoops; }
 
   /** @return the list of splays at a given station
    * @param st    station
@@ -862,6 +864,7 @@ public class TDNum
     mClosures = new ArrayList<>();
     mNodes    = new ArrayList<>();
     mUnattachedShots = new ArrayList<>();
+    mBadLoops = new ArrayList<>();
 
     List< TriShot > tmpshots   = new ArrayList<>();
     List< TriSplay > tmpsplays = new ArrayList<>();
@@ -1024,7 +1027,7 @@ public class TDNum
     if ( TDSetting.mLoopClosure == TDSetting.LOOP_CYCLES
       || TDSetting.mLoopClosure == TDSetting.LOOP_WEIGHTED 
       || TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) {
-      // TDLog.v( "NUM loop closure compensation");
+      // TDLog.v( "NUM loop closure compensation " + TDSetting.mLoopClosure );
       compensateLoopClosure( mNodes, mShots );
   
       // recompute station positions
@@ -1692,89 +1695,26 @@ public class TDNum
       ArrayList< NumCycle > tmp_cycles = new ArrayList<>();
       for ( int k1 = 0; k1 < ls; ++k1 ) {
         NumCycle c1 = cycles.get( k1 );
-        // TDLog.v("LOOP " + k1 + " error " + c1.error() + " " + c1.toString() );
-        tmp_cycles.add( c1 );
-        for ( int k2 = k1+1; k2 < ls; ++k2 ) {
-          NumCycle c2 = cycles.get( k2 );
-          // TDLog.v("LOOP " + k2 + " error " + c2.error() + " " + c2.toString() );
-          if ( c1.overlap( c2 ) ) {
-            NumCycle c12a = c1.compose( c2, 1 );
-            c12a.computeError();
-            NumCycle c12b = c1.compose( c2, -1 );
-            c12b.computeError();
-            tmp_cycles.add( c12a );
-            tmp_cycles.add( c12b );
-            // TDLog.v("LOOP " + k1 + "+" + k2 + " error A " + c12a.error() + " B " + c12b.error() );
-            for ( int k3 = k2+1; k3 < ls; ++k3 ) {
-              NumCycle c3 = cycles.get( k3 ); 
-              if ( c12a.overlap( c3 ) ) {
-                NumCycle c12a3a = c12a.compose( c3, 1 );
-                c12a3a.computeError();
-                NumCycle c12a3b = c12a.compose( c3, -1 );
-                c12a3b.computeError();
-                tmp_cycles.add( c12a3a );
-                tmp_cycles.add( c12a3b );
-              }
-              if ( c12b.overlap( c3 ) ) {
-                NumCycle c12b3a = c12a.compose( c3, 1 );
-                c12b3a.computeError();
-                NumCycle c12b3b = c12a.compose( c3, -1 );
-                c12b3b.computeError();
-                tmp_cycles.add( c12b3a );
-                tmp_cycles.add( c12b3b );
-              }
-            }
-          }
-        }
-      }
-      int tls = tmp_cycles.size();
-      // TDLog.v("LOOP composite " + tls );
-      // sort tmp_cycles by the (square) error - only first ls cycles
-      for ( int k = 0; k<ls; ++k ) {
-        NumCycle ck = tmp_cycles.get( k );
-        double ckse = ck.error();
-        for ( int j = k+1; j < tls; ++j ) {
-          NumCycle cj = tmp_cycles.get( j );
-          double cjse = cj.error();
-          if ( ckse > cjse ) { // try to swap
-            boolean swap = true;
-            for ( int i = 0; i < k; ++ i ) {
-              NumCycle ci = tmp_cycles.get( i );
-              int overlap_cnt = ci.overlapCount( cj );
-              if ( Math.abs(overlap_cnt) == ci.size() ) {
-                swap = false;
-                // TDLog.v("LOOP " + i + " " + ci.size() + " overlap " + j + ": " + overlap_cnt );
-                break;
-              }
-            }
-            if ( swap ) {
-              // TDLog.v("LOOP swap " + j + " " + cjse + " with " + k + " " + ckse );
-              tmp_cycles.set( k, cj );
-              tmp_cycles.set( j, ck );
-              ck = cj;
-              ckse = cjse;
-            }
-          // } else {
-          //   // TDLog.v("LOOP " + k + " " + ckse + " <= " + j + " " + cjse );
-          }
-        }
-      }
-      cycles = new ArrayList<>(); // indep_cycles
-      for ( int k = 0; k < ls; ++k ) {
-        NumCycle ck = tmp_cycles.get( k );
-        if ( ck.error() < ck.length() * TDSetting.mLoopThr / 100 ) {
-          // TDLog.v("LOOP " + k + " using " + ck.length() + " " + ck.error() + " " + ck.toString() );
-          cycles.add( tmp_cycles.get(k) ); // indep_cycles
+        if ( c1.error() < c1.length() * TDSetting.mLoopThr / 100.0f ) {
+          tmp_cycles.add( c1 );
         } else {
           ++ nrInaccurateLoops;
+          mBadLoops.add( c1 );
+          c1.setBadLoopShots();
         }
       }
+      cycles = tmp_cycles;
       ls = cycles.size(); // indep_cycles
-    // } else {
-    //   indep_cycles = cycles;
+      // TDLog.v("LOOP accurate " + ls + " inaccurate " + nrInaccurateLoops );
+    }
+
+    if ( ls == 0 ) {
+      // TDLog.v("LOOP no loop ");
+      return;
     }
 
     // cycle-branch incidence matrix
+    // TDLog.v("LOOP cycles " + ls + " branches " + bs );
     int[] alpha = new int[ bs * ls ]; // cycle = row-index, branch = col-index
     for (int y=0; y<ls; ++y ) {  // branch-cycle matrix
       NumCycle cy = cycles.get(y); // indep_cycles
@@ -1820,6 +1760,7 @@ public class TDNum
       }
 
     } else { // TDSetting.mLoopClosure == TDSetting.LOOP_CYCLES || TDSetting.LOOP_SELECTIVE 
+      TDLog.v("LOOP compensating ..." );
       double[] aa = new double[ ls * ls ];    // 
       for (int y1=0; y1<ls; ++y1 ) { // cycle-cycle matrix
         for (int y2=0; y2<ls; ++y2 ) {

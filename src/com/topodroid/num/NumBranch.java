@@ -16,6 +16,7 @@ import com.topodroid.utils.TDMath;
 
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 public class NumBranch
 {
@@ -145,6 +146,29 @@ public class NumBranch
   //   sb.append("]");
   //   return sb.toString();
   // }
+
+  String toString( int dir )
+  {
+    StringBuilder sb = new StringBuilder();
+    if ( dir > 0 ) {
+      for ( NumShot sh : shots ) sb.append( sh.toString() ).append(" ");
+    } else {
+      for ( int k = shots.size()-1; k>=0; --k ) {
+        sb.append( shots.get(k).toString() ). append(" ");
+      }
+      // ListIterator it = shots.listIterator( shots.size() );
+      // while ( it.hasPrevious() ) {
+      //   sb.append( it.previous().toString() ).append(" ");
+      // }
+    }
+    return sb.toString();
+  }
   
+  /** set the bad-loop flag to the branch shots
+   */
+  void setBadLoopShots()
+  {
+    for ( NumShot sh : shots ) sh.setBadLoop( true );
+  }
 }
 

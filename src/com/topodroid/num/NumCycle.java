@@ -15,7 +15,7 @@ package com.topodroid.num;
 
 import java.util.ArrayList;
 
-class NumCycle
+public class NumCycle
 {
   static class NumCycleBranch
   {
@@ -277,15 +277,26 @@ class NumCycle
     return true;
   }
 
-  // DEBUG
-  // public String toString()
-  // {
-  //   StringBuilder sb = new StringBuilder();
-  //   for ( NumCycleBranch branch : branches ) {
-  //     sb.append( branch.mBranch.toString() ).append(" (").append( branch.mDir ).append(") ");
-  //   }
-  //   return sb.toString();
-  // }
+  /** @return string description of the loop
+   */
+  public String toString()
+  {
+    StringBuilder sb = new StringBuilder();
+    for ( NumCycleBranch branch : branches ) {
+      // sb.append( branch.mBranch.toString() ).append(" (").append( branch.mDir ).append(") ");
+      sb.append( branch.mBranch.toString( branch.mDir) ).append(" ");
+    }
+    return sb.toString();
+  }
+
+  /** set the bad-loop flag to the cycle shots
+   */
+  void setBadLoopShots()
+  {
+    for ( NumCycleBranch branch : branches ) {
+      branch.mBranch.setBadLoopShots();
+    }
+  }
 
 }
 

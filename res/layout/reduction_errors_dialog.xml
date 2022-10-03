@@ -5,7 +5,7 @@
     >
   <LinearLayout 
     style="@style/base_padding"
-    android:layout_width="wrap_content" 
+    android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="vertical"
     >
@@ -32,6 +32,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
         android:text="@string/survey_not_attached"
+        />
+    <TextView android:id="@+id/loops_bad"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text=""
+        />
+
+    <ListView android:id="@+id/loop_list"
+        style="@style/list_top"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:isScrollContainer="true"
         />
 
     <LinearLayout android:id="@+id/help"

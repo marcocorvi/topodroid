@@ -38,6 +38,7 @@ public class NumShot
   // float mClino;
   private AverageLeg mAvgLeg;
   private float mAnomaly;  // local magnetic anomaly
+  private boolean mBadLoop = false; // whether the shot belons to a bad loop
 
   float length()  { return mAvgLeg.length(); }
   float bearing() { return mAvgLeg.bearing(); }
@@ -50,7 +51,19 @@ public class NumShot
 
   public float getReducedExtend() { return firstBlock.getReducedExtend(); }
   public int getReducedFlag()     { return firstBlock.getReducedFlag(); }
+
+  /** @return the shot comment string
+   */
   public String getComment()      { return firstBlock.mComment; }
+
+  /** set whether the shot belongs to a bad loop
+   * @param bad_loop whether the shot belongs to a bad loop
+   */
+  void setBadLoop( boolean bad_loop ) { mBadLoop = bad_loop; }
+
+  /** @return true if the shot belongs to a bad loop
+   */
+  public boolean isBadLoop() { return mBadLoop; }
 
   NumShot( NumStation f, NumStation t, DBlock blk, int dir, float anomaly, float decl )
   {
@@ -127,23 +140,22 @@ public class NumShot
   //   return sh.from == from || sh.to == from || sh.from == to || sh.to == to;
   // }
 
-  // DEBUG
-  // public String toString()
-  // { 
-  //   if ( from != null ) {
-  //     if ( to != null ) {
-  //       return from.name + "-" + to.name;
-  //     } else {
-  //       return from.name + "-";
-  //     }
-  //   } else {
-  //     if ( to != null ) {
-  //       return "-" + to.name;
-  //     } else {
-  //       return "-";
-  //     }
-  //   }
-  // }
+  public String toString()
+  { 
+    if ( from != null ) {
+      if ( to != null ) {
+        return from.name + "-" + to.name;
+      } else {
+        return from.name + "-";
+      }
+    } else {
+      if ( to != null ) {
+        return "-" + to.name;
+      } else {
+        return "-";
+      }
+    }
+  }
 
 }
 

@@ -34,9 +34,9 @@ import android.graphics.Paint; // custom paint
 public class DBlock
 {
 
-  private View mView;           // view of this dblock in the list
-  // private int    mPos;     // position in the list
-  private int mVisible;       // whether this data is visible in the list
+  private View mView;     // view of this dblock in the list
+  // private int    mPos; // position in the list
+  private int mVisible;   // whether this data is visible in the list: one of View.VISIBLE, View.GONE, View.INVISIBLE
   boolean mMultiSelected; // whether the block is in multiselect list
   private Paint mPaint;   // user-set block color
 

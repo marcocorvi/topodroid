@@ -298,6 +298,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="error_name_exists">Proyecto existente</string>
     <string name="error_name_invalid">Nombre de proyecto no válido</string>
     <string name="error_name_required">Introducir nombre</string>
+    <!-- TODO string name="error_text_required">Text required</string -->
     <!-- TODO string name="error_station_number">Wrong number of stations</string -->
     <string name="error_name_duplicate">Nombre duplicado</string>
     <string name="error_no_section_in_section">No X-seccion en X-seccion</string>
@@ -2056,6 +2057,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="warning_not_stl">Advertencia: No hay archivo stl %1$s</string -->
     <string name="warning_no_cwd">Advertencia: la carpeta base no existe</string>
     <string name="warning_no_parent">Advertencia: no es posible subir una carpeta</string>
+    <!-- TODO string name="warning_nogrant_camera">Camera permission has not been granted</string -->
     <string name="no_permissions">La aplicación no puede ejecutarse sin los permisos requeridos</string>
 
     <!-- UNUSED string name="done_fractals">Tamaño de fractal calculado</string -->

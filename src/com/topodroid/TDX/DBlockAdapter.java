@@ -16,6 +16,7 @@ import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDString;
 import com.topodroid.prefs.TDSetting;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import android.widget.ArrayAdapter;
@@ -611,6 +612,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
    * @param parent      parent view-group
    */
   // @RecentlyNonNull
+  @SuppressLint("WrongConstant")
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )
   {
@@ -667,6 +669,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   /** called by ShotWindow::updateShot()
    * @param blk_id  block id
    */
+  @SuppressLint("WrongConstant")
   DBlock updateBlockView( long blk_id ) 
   {
     int size = getCount();
@@ -693,6 +696,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   /** update block name and text-color
    * @param set   whether to set green or normal color
    */
+  @SuppressLint("WrongConstant")
   private void updateBlocksName( boolean set )
   {
     int size = getCount();

@@ -183,9 +183,11 @@ Nevertheless TopoDroid implements a few "loop error compensation" policies.<br>
 The <i>normal</i> policy [E] distributes the loop closure errors on the network branches that make the loops.<br>
 In the <i>weighted</i> policy [E] the misclusures of the loops are weighted according to the "branch relevance".<br>
 <!-- i don't recall exactly how this works -->
-The "selective" [T] compensation applies only the corrections of loops with misclosure smaller than a certain percent
-(the "loop threshold" setting) of the loop length.<br>
-Finally, the special loop compensation based on "triangles" is for <a href="page_trilateration.htm">trilateration</a> [T].
+The <i>selective</i> [T] compensation applies only the corrections of loops with misclosure smaller than a certain percent
+(the "loop threshold" setting) of the loop length.
+The loops above threshold are displayed violet.
+<br>
+Finally, the special loop compensation based on <i>triangles</i> is for <a href="page_trilateration.htm">trilateration</a> [T].
 <br><p>
 
 <a href="manual05.htm">&lt; Calibration data</a> |
