@@ -45,6 +45,10 @@ public class BleCallback extends BluetoothGattCallback
   private BluetoothGatt mGatt = null;
   private boolean mAutoConnect = false;
 
+  /** cstr
+   * @param comm    communication object
+   * @param auto_connect whether to auto (re)connect
+   */
   public BleCallback( BleComm comm, boolean auto_connect )
   {
     mComm        = comm;
@@ -59,19 +63,27 @@ public class BleCallback extends BluetoothGattCallback
   //   mAutoConnect = auto_connect;
   // }
 
-
+  /** react to a characteristic change
+   * @param gatt   GATT
+   * @param chrt   charcateristic
+   */ 
   @Override
   public void onCharacteristicChanged( BluetoothGatt gatt, BluetoothGattCharacteristic chrt )
   {
     // if ( mChrtChanged != null ) { mChrtChanged.changedChrt( chrt ); } else { mComm.changedChrt( chrt ); }
-    TDLog.f("BLE on chrt changed");
+    // TDLog.f("BLE on chrt changed");
     mComm.changedChrt( chrt );
   }
 
+  /** react to a characteristic read
+   * @param gatt   GATT
+   * @param chrt   charcateristic
+   * @param status status
+   */ 
   @Override
   public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic chrt, int status)
   {
-    TDLog.f("BLE on chrt read: " + status );
+    // TDLog.f("BLE on chrt read: " + status );
     if ( isSuccess( status, "onCharacteristicRead" ) ) {
       String uuid_str = chrt.getUuid().toString();
       mComm.readedChrt( uuid_str, chrt.getValue() );
@@ -84,10 +96,15 @@ public class BleCallback extends BluetoothGattCallback
     }
   }
 
+  /** react to a characteristic write
+   * @param gatt   GATT
+   * @param chrt   charcateristic
+   * @param status status
+   */ 
   @Override
   public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic chrt, int status)
   {
-    TDLog.f("BLE on chrt write: " + status );
+    // TDLog.f("BLE on chrt write: " + status );
     if ( isSuccess( status, "onCharacteristicWrite" ) ) {
       String uuid_str = chrt.getUuid().toString();
       mComm.writtenChrt( uuid_str, chrt.getValue() );
@@ -100,12 +117,17 @@ public class BleCallback extends BluetoothGattCallback
     }
   }
   
+  /** react to a connection state change
+   * @param gatt   GATT
+   * @param status status
+   * @param state  new state
+   */ 
   @Override
-  public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState)
+  public void onConnectionStateChange(BluetoothGatt gatt, int status, int state)
   {
-    TDLog.f("BLE on connection state change: " + status );
+    // TDLog.f("BLE on connection state change: " + status );
     if ( isSuccess( status, "onConnectionStateChange" ) ) {
-      if ( newState == BluetoothProfile.STATE_CONNECTED ) {
+      if ( state == BluetoothProfile.STATE_CONNECTED ) {
         // TO CHECK THIS
         // mGatt = gatt;
         // (new Handler( Looper.getMainLooper() )).post( new Runnable() {
@@ -124,11 +146,11 @@ public class BleCallback extends BluetoothGattCallback
           return;
         }
 
-      } else if ( newState == BluetoothProfile.STATE_DISCONNECTED ) {
+      } else if ( state == BluetoothProfile.STATE_DISCONNECTED ) {
         closeGatt();
         mComm.disconnected(); // this calls notifyStatus( CONN_DISCONNECTED );
       // } else {
-        // TDLog.f( "BLE callback: on Connection State Change new state " + newState );
+        // TDLog.f( "BLE callback: on Connection State Change new state " + state );
       }
     } else {
       mComm.notifyStatus( ConnectionState.CONN_WAITING );
@@ -149,11 +171,15 @@ public class BleCallback extends BluetoothGattCallback
     }
   }
 
+  /** react to the peripheral services discovered
+   * @param gatt   GATT
+   * @param status status
+   */
   @Override
   public void onServicesDiscovered(BluetoothGatt gatt, int status)
   {
     // super.onServicesDiscovered( gatt, status );
-    TDLog.f( "BLE on services discovered " + status );
+    // TDLog.f( "BLE on services discovered " + status );
     if ( isSuccess( status, "onServicesDiscovered" ) ) {
       int ret = mComm.servicesDiscovered( gatt ); // calls notifyStatus( ... CONNECTED )
       if ( ret == 0 ) {
@@ -168,10 +194,15 @@ public class BleCallback extends BluetoothGattCallback
     }
   }
 
+  /** react to a descriptor read
+   * @param gatt   GATT
+   * @param desc   descriptor
+   * @param status status
+   */
   @Override
   public void onDescriptorRead(BluetoothGatt gatt, BluetoothGattDescriptor desc, int status)
   {
-    TDLog.f( "BLE on desc read " + status );
+    // TDLog.f( "BLE on desc read " + status );
     if ( isSuccess( status, "onDescriptorRead" ) ) {
       String uuid_str = desc.getUuid().toString();
       String uuid_chrt_str = desc.getCharacteristic().getUuid().toString();
@@ -182,10 +213,15 @@ public class BleCallback extends BluetoothGattCallback
     }
   }
 
+  /** react to a descriptor write
+   * @param gatt   GATT
+   * @param desc   descriptor
+   * @param status status
+   */
   @Override
   public void onDescriptorWrite(BluetoothGatt gatt, BluetoothGattDescriptor desc, int status)
   {
-    TDLog.f( "BLE on desc write " + status );
+    // TDLog.f( "BLE on desc write " + status );
     if ( isSuccess( status, "onDescriptorWrite" ) ) {
       String uuid_str = desc.getUuid().toString();
       String uuid_chrt_str = desc.getCharacteristic().getUuid().toString();
@@ -196,10 +232,15 @@ public class BleCallback extends BluetoothGattCallback
     }
   }
 
+  /** react to a MTU change
+   * @param gatt   GATT
+   * @param mtu    MTU value
+   * @param status status
+   */
   @Override
   public void onMtuChanged(BluetoothGatt gatt, int mtu, int status)
   { 
-    TDLog.f( "BLE on MTU change " + status );
+    // TDLog.f( "BLE on MTU change " + status );
     if ( isSuccess( status, "onMtuChanged" ) ) {
       mComm.changedMtu( mtu );
     } else {
@@ -208,10 +249,15 @@ public class BleCallback extends BluetoothGattCallback
     }
   }
 
+  /** react to a remote RSSI read
+   * @param gatt   GATT
+   * @param rssi   RSSI value
+   * @param status status
+   */
   @Override
   public void onReadRemoteRssi(BluetoothGatt gatt, int rssi, int status)
   { 
-    TDLog.f( "BLE on read RSSI " + status );
+    // TDLog.f( "BLE on read RSSI " + status );
     if ( isSuccess( status, "onReadRemoteRssi" ) ) {
       mComm.readedRemoteRssi( rssi );
     } else {
@@ -220,10 +266,14 @@ public class BleCallback extends BluetoothGattCallback
     }
   }
 
+  /** react to a reliable write completion
+   * @param gatt   GATT
+   * @param status status
+   */
   @Override
   public void onReliableWriteCompleted(BluetoothGatt gatt, int status)
   { 
-    TDLog.f( "BLE on reliable write " + status );
+    // TDLog.f( "BLE on reliable write " + status );
     if ( isSuccess( status, "onReliableWriteCompleted" ) ) {
       mComm.completedReliableWrite();
     } else {
@@ -232,6 +282,8 @@ public class BleCallback extends BluetoothGattCallback
     }
   }
 
+  /** close the GATT
+   */
   public void closeGatt()
   { 
     if ( mGatt != null ) {
@@ -246,10 +298,14 @@ public class BleCallback extends BluetoothGattCallback
     }
   }
 
+  /** connect the GATT
+   * @param ctx    context
+   * @param device bluetooth device
+   */
   public void connectGatt( Context ctx, BluetoothDevice device )
   {
     closeGatt();
-    TDLog.f( "BLE connect gatt");
+    // TDLog.f( "BLE connect gatt");
     // device.connectGatt( ctx, mAutoConnect, this );
     try { 
       if ( Build.VERSION.SDK_INT < 23 ) {
@@ -263,10 +319,12 @@ public class BleCallback extends BluetoothGattCallback
     }
   }
 
-  // FROM SapCallback
+  /** disconnect and close the GATT
+   * @note FROM SapCallback
+   */
   public void disconnectCloseGatt( )
   { 
-    TDLog.f( "BLE disconnect close GATT");
+    // TDLog.f( "BLE disconnect close GATT");
     // mWriteInitialized = false; 
     // mReadInitialized  = false; 
     if ( mGatt != null ) {
@@ -281,9 +339,11 @@ public class BleCallback extends BluetoothGattCallback
     }
   }
 
+  /** disconnect the GATT
+   */
   public void disconnectGatt()
   {
-    TDLog.f( "BLE disconnect GATT");
+    // TDLog.f( "BLE disconnect GATT");
     // mWriteInitialized = false; 
     // mReadInitialized  = false; 
     if ( mGatt != null ) {
@@ -300,6 +360,11 @@ public class BleCallback extends BluetoothGattCallback
   }
   // ---------------------------------------------------------------------
 
+  /** set the notification
+   * @param chrt   characteristic
+   * @param value  ???
+   * @return ???
+   */
   private boolean setNotification( BluetoothGattCharacteristic chrt, byte [] value )
   {
     try {
@@ -344,6 +409,11 @@ public class BleCallback extends BluetoothGattCallback
   }
   */
 
+  /** enable P notify
+   * @param srvUuid     service UUID 
+   * @param chrtUuid    characteristics UUID
+   * @return true on success
+   */
   public boolean enablePNotify( UUID srvUuid, UUID chrtUuid ) 
   {
     BluetoothGattService srv = mGatt.getService( srvUuid );
@@ -381,6 +451,11 @@ public class BleCallback extends BluetoothGattCallback
   //   return setNotification( chrt, BluetoothGattDescriptor.DISABLE_NOTIFICATION_VALUE );
   // }
 
+  /** enable P indicate
+   * @param srvUuid     service UUID 
+   * @param chrtUuid    characteristics UUID
+   * @return true on success
+   */
   public boolean enablePIndicate( UUID srvUuid, UUID chrtUuid ) 
   {
     BluetoothGattService srv = mGatt.getService( srvUuid );
@@ -416,7 +491,7 @@ public class BleCallback extends BluetoothGattCallback
 
   public boolean readChrt( UUID srvUuid, UUID chrtUuid )
   {
-    TDLog.f( "BLE read chrt");
+    // TDLog.f( "BLE read chrt");
     BluetoothGattCharacteristic chrt = getReadChrt( srvUuid, chrtUuid );
     try {
       return chrt != null && mGatt.readCharacteristic( chrt );
@@ -430,7 +505,7 @@ public class BleCallback extends BluetoothGattCallback
 
   public boolean writeChrt(  UUID srvUuid, UUID chrtUuid, byte[] bytes )
   {
-    TDLog.f( "BLE write chrt");
+    // TDLog.f( "BLE write chrt");
     BluetoothGattCharacteristic chrt = getWriteChrt( srvUuid, chrtUuid );
     if ( chrt == null ) {
       // TDLog.v( "BLE callback writeChrt null chrt ");
@@ -503,7 +578,7 @@ public class BleCallback extends BluetoothGattCallback
 
   public BluetoothGattCharacteristic getReadChrt( UUID srvUuid, UUID chrtUuid )
   {
-    TDLog.f( "BLE get read chrt");
+    // TDLog.f( "BLE get read chrt");
     if ( mGatt == null ) {
       // TDLog.v( "BLE callback: null gatt");
       return null;
@@ -527,7 +602,7 @@ public class BleCallback extends BluetoothGattCallback
 
   public BluetoothGattCharacteristic getWriteChrt( UUID srvUuid, UUID chrtUuid )
   {
-    TDLog.f( "BLE get write chrt");
+    // TDLog.f( "BLE get write chrt");
     if ( mGatt == null ) return null;
     BluetoothGattService srv = mGatt.getService( srvUuid );
     if ( srv  == null ) return null;

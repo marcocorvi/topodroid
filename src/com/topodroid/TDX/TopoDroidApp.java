@@ -891,6 +891,10 @@ public class TopoDroidApp extends Application
     doBluetoothReset( lister );
   }
 
+  /** @return true if the data downloader is downoading
+   */
+  public boolean isDownloading() { return  mDataDownloader.isDownloading(); }
+
   /** reset the bluetooth
    * @param lister  data lister
    */
@@ -1696,14 +1700,13 @@ public class TopoDroidApp extends Application
    */
   int downloadDataBatch( Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {
-    // TDLog.v( "App: download data batch");
+    // TDLog.v( "APP: batch download");
     TDInstance.secondLastShotId = lastShotId();
     int ret = 0;
     if ( mComm == null || TDInstance.getDeviceA() == null ) {
       TDLog.e( "Comm or Device null ");
     } else {
-      // TDLog.Log( TDLog.LOG_DATA, "Download Data Batch() device " + TDInstance.deviceAddress() + " comm " + mComm.toString() );
-      // TDLog.v( "App: Download Data Batch() device " + TDInstance.deviceAddress() + " " + TDInstance.getDeviceA().getAddress() + " comm " + mComm.toString() );
+      // TDLog.v( "APP: batch download, device " + TDInstance.deviceAddress() + " " + TDInstance.getDeviceA().getAddress() + " comm " + mComm.toString() );
       ret = mComm.downloadData( TDInstance.getDeviceA().getAddress(), lister, data_type );
       // FIXME BATCH
       // if ( ret > 0 && TDSetting.mSurveyStations > 0 ) {

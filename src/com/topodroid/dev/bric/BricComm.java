@@ -626,7 +626,7 @@ public class BricComm extends TopoDroidComm
   public boolean connectDevice( String address, Handler /* ILister */ lister, int data_type )
   {
     // TDLog.Log( TDLog.LOG_COMM, "BRIC comm ***** connect Device");
-    mNrPacketsRead = 0;
+    mNrReadPackets = 0;
     mDataType      = data_type;
     return connectBricDevice( TDInstance.getDeviceA(), lister, data_type );
   }

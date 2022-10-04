@@ -97,18 +97,23 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
       return PACKET_NONE;
     }
     if ( (databuf[0] == MemoryOctet.BYTE_PACKET_DATA || databuf[0] == MemoryOctet.BYTE_PACKET_G ) && databuf.length == 17 ) { // shot / calib data
-      System.arraycopy( databuf, 1, mMeasureDataPacket1, 0, 8);
-      System.arraycopy( databuf, 9, mMeasureDataPacket2, 0, 8);
-      int res1 = handlePacket(mMeasureDataPacket1);
-      int res2 = handlePacket(mMeasureDataPacket2);
-      TDLog.v("XBLE proto 17-length data - type " + databuf[0] + " res " + res1 + " " + res2 );
-      if ( res1 != PACKET_NONE && res2 != PACKET_NONE ) {
-        mComm.sendCommand(( mMeasureDataPacket1[0] & 0x80 ) | 0x55);
-        mComm.handleRegularPacket(res1, mLister, 0);
-        mComm.handleRegularPacket(res2, mLister, 0);
-        return PACKET_MEASURE_DATA; // with ( PACKET_MEASURE_DATA | databuf[0]) shots would be distinguished from calib
-      // } else {
-      //   return PACKET_ERROR;
+      if ( mComm.isDownloading() ) {
+        System.arraycopy( databuf, 1, mMeasureDataPacket1, 0, 8);
+        System.arraycopy( databuf, 9, mMeasureDataPacket2, 0, 8);
+        int res1 = handlePacket(mMeasureDataPacket1);
+        int res2 = handlePacket(mMeasureDataPacket2);
+        TDLog.v("XBLE proto 17-length data - type " + databuf[0] + " res " + res1 + " " + res2 );
+        if ( res1 != PACKET_NONE && res2 != PACKET_NONE ) {
+          mComm.sendCommand(( mMeasureDataPacket1[0] & 0x80 ) | 0x55);
+          mComm.handleRegularPacket(res1, mLister, 0);
+          mComm.handleRegularPacket(res2, mLister, 0);
+          return PACKET_MEASURE_DATA; // with ( PACKET_MEASURE_DATA | databuf[0]) shots would be distinguished from calib
+        // } else {
+        //   return PACKET_ERROR;
+        }
+      } else {
+        TDLog.v("XBLE not downloading");
+        return PACKET_NONE;
       }
     } else { // command packet
       byte command = databuf[0];

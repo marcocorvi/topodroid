@@ -95,7 +95,7 @@ public class DataDownloader
     mDownload = ! mDownload;
     mConnected = mDownload ? ConnectionState.CONN_WAITING : ConnectionState.CONN_DISCONNECTED;
     return mDownload;
-    // TDLog.v( "toggle download to " + mDownload );
+    // TDLog.v( "DOWNLOAD toggle to " + mDownload );
   }
 
   /** download data
@@ -103,7 +103,7 @@ public class DataDownloader
    */
   void doDataDownload( int data_type )
   {
-    // TDLog.v( "Data Downloader: do Data Download() - nr " + mDownload + " connected " + mConnected );
+    // TDLog.v( "DOWNLOAD: do Data Download() - nr " + mDownload + " connected " + mConnected );
     if ( mDownload ) {
       startDownloadData( data_type );
     } else {
@@ -117,10 +117,10 @@ public class DataDownloader
    */
   private void startDownloadData( int data_type )
   {
-    // TDLog.Log( TDLog.LOG_COMM, "**** download data. status: " + mStatus );
+    // TDLog.v( "DOWNLOAD data. status: " + mStatus );
     if ( TDInstance.isContinuousMode() ) {
       if ( TDSetting.mAutoReconnect ) {
-        // TDLog.v( "Data Downloader: start download continuous - autoreconnect ");
+        // TDLog.v( "DOWNLOAD: start download continuous - autoreconnect ");
         TDInstance.secondLastShotId = TopoDroidApp.lastShotId( ); // FIXME-LATEST
         new ReconnectTask( this, data_type, 0 ).execute();
       } else {
@@ -208,8 +208,7 @@ public class DataDownloader
     TDInstance.secondLastShotId = TopoDroidApp.lastShotId( ); // FIXME-LATEST
     if ( TDInstance.getDeviceA() != null && DeviceUtil.isAdapterEnabled() ) {
       notifyConnectionStatus( ConnectionState.CONN_WAITING );
-      // TDLog.Log( TDLog.LOG_COMM, "shot menu DOWNLOAD" );
-      // TDLog.v( "DataDownloader: try Download Data() - type " + data_type );
+      // TDLog.v( "DOWNLOAD: try Download Data() - type " + data_type );
       new DataDownloadTask( mApp, mApp.mListerSet, null, data_type ).execute();
     } else {
       mDownload = false;

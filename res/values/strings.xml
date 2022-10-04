@@ -1847,7 +1847,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
    <string name="firmware_file_exists">Existing firmware file</string>
    <string name="firmware_file_missing">Missing firmware file</string>
    <string name="ask_dump">Dump firmware? (be patient)</string>
-   <string name="ask_upload">Upload firmware?i (be patient)</string>
+   <string name="ask_upload">Upload firmware? (be patient)</string>
    <string name="ask_upload_not_compatible">Firmware file does not look correct.\nUpload anyway? (be patient)</string>
    <string name="firmware_upload_no_sign">Failed to check the DistoX hardware</string>
    <string name="firmware_upload_bad_sign">Incompatible DistoX hardware</string>

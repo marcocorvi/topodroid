@@ -222,7 +222,7 @@ public class SapComm extends TopoDroidComm
     mLister = lister;
     mDataType = data_type;
     mConnectionMode = 1;
-    mNrPacketsRead = 0;
+    mNrReadPackets = 0;
     connectSapDevice( TDInstance.getDeviceA(), mApp, mDataType );
     return true;
   }
@@ -268,7 +268,7 @@ public class SapComm extends TopoDroidComm
     // TDLog.v( "SAP comm: batch data download");
     mConnectionMode = 0;
     mLister = lister;
-    mNrPacketsRead = 0;
+    mNrReadPackets = 0;
     connectSapDevice( TDInstance.getDeviceA(), mApp, data_type );
     // start a thread that keeps track of read packets
     // when read done stop it and return
@@ -385,7 +385,7 @@ public class SapComm extends TopoDroidComm
     if ( ! uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_STR ) ) { error(-2, uuid_str); return; }
     int res = mSapProto.handleRead( bytes ); 
     if ( res != DataType.PACKET_DATA ) { error(-3, uuid_str); return; }
-    ++ mNrPacketsRead; // FIXME NON_ATOMIC_ON_VOLATILE
+    ++mNrReadPackets; // FIXME NON_ATOMIC_ON_VOLATILE
     handleRegularPacket( res, mLister, DataType.DATA_SHOT );
   }
 

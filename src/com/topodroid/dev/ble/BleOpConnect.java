@@ -32,7 +32,7 @@ public class BleOpConnect extends BleOperation
   @Override 
   public void execute()
   {
-    TDLog.v( "BleOp exec connect");
+    // TDLog.v( "BleOp exec connect");
     if ( mPipe == null ) { 
       TDLog.e("BleOp connect error: null pipe" );
       return;

@@ -93,13 +93,13 @@ public class DistoXBLEComm extends TopoDroidComm
   public DistoXBLEComm(Context ctx,TopoDroidApp app, String address, BluetoothDevice bt_device )
   {
     super( app );
-    TDLog.v( "XBLE cstr" );
+    // TDLog.v( "XBLE cstr" );
     // mRemoteAddress = address;
     mRemoteBtDevice  = bt_device;
     mContext = ctx;
     // mNewDataFlag = new Object();
     mQueue = new BleQueue();
-    mConsumer = new Thread() {
+    mConsumer = new Thread() { // this is the thread that consumes data on the queue
       @Override public void run() {
         //mThreadConsumerWorking = true;
         while ( true ) {
@@ -107,8 +107,12 @@ public class DistoXBLEComm extends TopoDroidComm
           BleBuffer buffer = mQueue.get();
           if ( buffer == null ) continue;
           if ( buffer.type == DATA_PRIM ) {
-            TDLog.v( "XBLE comm: buffer PRIM");
-            if ( buffer.data == null) continue;
+            if ( buffer.data == null) {
+              TDLog.Error( "XBLE comm: buffer PRIM with null data");
+              continue;
+            }
+            // ++mNrReadPackets; this is incremented once for DATA and once for VECTOR by TopoDroidComm
+            TDLog.v( "XBLE comm: buffer PRIM " + mNrReadPackets );
             int res = ((DistoXBLEProtocol)mProtocol).packetProcess( buffer.data );
             if ( res == DistoXBLEProtocol.PACKET_FLASH_BYTES_1 ) continue;   // first-half of firmware block received
             synchronized (mNewDataFlag) {
@@ -129,6 +133,9 @@ public class DistoXBLEComm extends TopoDroidComm
     // clearPending();
   }
 
+  /** @return true if it is downloading
+   */
+  boolean isDownloading() { return mApp.isDownloading(); }
 
   /* terminate the consumer thread - put a "quit" buffer on the queue
    * @note this method has still to be used
@@ -136,7 +143,7 @@ public class DistoXBLEComm extends TopoDroidComm
   @Override
   public void terminate()
   {
-    TDLog.v("BRIC comm terminate");
+    // TDLog.v("XBLE comm terminate");
     if ( mConsumer != null ) {
       // put a DATA_QUIT buffer on the queue
       mQueue.put( DATA_QUIT, new byte[0] );
@@ -176,9 +183,9 @@ public class DistoXBLEComm extends TopoDroidComm
     // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
     // clearPending();
 
-    TDLog.v( "XBLE comm connect device = [3a] status WAITING" );
+    // TDLog.v( "XBLE comm connect device = [3a] status WAITING" );
     int ret = enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
-    TDLog.v( "XBLE connects ... " + ret);
+    // TDLog.v( "XBLE connects ... " + ret);
     clearPending();
     return true;
   }
@@ -189,7 +196,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void connectGatt( Context ctx, BluetoothDevice bt_device ) // called from BleOpConnect
   {
-    TDLog.v( "XBLE comm ***** connect GATT");
+    // TDLog.v( "XBLE comm ***** connect GATT");
     mContext = ctx;
     mCallback.connectGatt( mContext, bt_device );
     // setupNotifications(); // FIXME_XBLE
@@ -204,8 +211,8 @@ public class DistoXBLEComm extends TopoDroidComm
   @Override
   public boolean connectDevice(String address, Handler /* ILister */ lister, int data_type ) // FIXME XBLE_DATA_TYPE ?
   {
-    TDLog.v( "XBLE comm ***** connect Device");
-    mNrPacketsRead = 0;
+    // TDLog.v( "XBLE comm ***** connect Device");
+    mNrReadPackets = 0;
     mDataType      = data_type;
     return connectDistoXBLEDevice( TDInstance.getDeviceA(), lister /*, data_type */ );
   }
@@ -217,7 +224,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void disconnected()
   {
-    TDLog.v( "XBLE comm disconnected" );
+    // TDLog.v( "XBLE comm disconnected" );
     clearPending();
     mOps.clear();
     // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
@@ -227,13 +234,13 @@ public class DistoXBLEComm extends TopoDroidComm
 
   public void connected()
   {
-    TDLog.v( "XBLE comm connected" );
+    // TDLog.v( "XBLE comm connected" );
     clearPending();
   }
 
   public void disconnectGatt()  // called from BleOpDisconnect
   {
-    TDLog.v( "XBLE comm ***** disconnect GATT" );
+    // TDLog.v( "XBLE comm ***** disconnect GATT" );
     notifyStatus( ConnectionState.CONN_DISCONNECTED );
     mCallback.closeGatt();
   }
@@ -241,7 +248,7 @@ public class DistoXBLEComm extends TopoDroidComm
   @Override
   public boolean disconnectDevice()
   {
-    TDLog.v( "XBLE comm ***** disconnect device = connected:" + mBTConnected );
+    // TDLog.v( "XBLE comm ***** disconnect device = connected:" + mBTConnected );
     return closeDevice();
   }
 
@@ -256,7 +263,7 @@ public class DistoXBLEComm extends TopoDroidComm
       // TDLog.v( "XBLE comm ***** close device");
       int ret = enqueueOp( new BleOpDisconnect( mContext, this ) ); // exec disconnectGatt
       doNextOp();
-      TDLog.v( "XBLE comm: close Device - disconnect ... ops " + ret );
+      // TDLog.v( "XBLE comm: close Device - disconnect ... ops " + ret );
     }
     return true;
   }
@@ -290,11 +297,11 @@ public class DistoXBLEComm extends TopoDroidComm
   private void doNextOp()
   {
     if ( mPendingOp != null ) {
-      TDLog.v( "XBLE comm: next op with pending not null, ops " + mOps.size() );
+      // TDLog.v( "XBLE comm: next op with pending not null, ops " + mOps.size() );
       return;
     }
     mPendingOp = mOps.poll();
-    TDLog.v( "XBLE comm: polled, ops " + mOps.size() );
+    // TDLog.v( "XBLE comm: polled, ops " + mOps.size() );
     if ( mPendingOp != null ) {
       mPendingOp.execute();
     }
@@ -311,7 +318,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void changedMtu( int mtu )
   {
-    TDLog.v("XBLE on MTU changed");
+    // TDLog.v("XBLE on MTU changed");
     clearPending();
   }
 
@@ -320,7 +327,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void readedRemoteRssi( int rssi )
   {
-    TDLog.v("XBLE readed remote RSSI");
+    // TDLog.v("XBLE readed remote RSSI");
     clearPending();
   }
 
@@ -331,13 +338,13 @@ public class DistoXBLEComm extends TopoDroidComm
   {
     String uuid_str = chrt.getUuid().toString();
     if ( uuid_str.equals( DistoXBLEConst.DISTOXBLE_CHRT_READ_UUID_STR ) ) {
-      TDLog.v( "XBLE comm: changed read chrt" );
+      // TDLog.v( "XBLE comm: changed read chrt" );
       // TODO set buffer type according to the read value[]
       mQueue.put( DATA_PRIM, chrt.getValue() );
     } else if ( uuid_str.equals( DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID_STR ) ) {
-      TDLog.v( "XBLE comm: changed write chrt" );
+      // TDLog.v( "XBLE comm: changed write chrt" );
     } else {
-      TDLog.v( "XBLE comm: changed unknown chrt" );
+      // TDLog.v( "XBLE comm: changed unknown chrt" );
     }
   }
 
@@ -347,7 +354,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void readedChrt( String uuid_str, byte[] bytes )
   {
-    TDLog.v( "XBLE comm: readed chrt " + bytes.length );
+    // TDLog.v( "XBLE comm: readed chrt " + bytes.length );
   }
 
   /** notified that bytes have been written to the write characteristics
@@ -356,7 +363,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void writtenChrt( String uuid_str, byte[] bytes )
   {
-    TDLog.v( "XBLE comm: written chrt " + bytes.length );
+    // TDLog.v( "XBLE comm: written chrt " + bytes.length );
     clearPending();
   }
 
@@ -367,7 +374,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void readedDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
-    TDLog.v( "XBLE comm: readed desc - bytes " + bytes.length );
+    // TDLog.v( "XBLE comm: readed desc - bytes " + bytes.length );
   }
 
   /** notified that bytes have been written
@@ -377,7 +384,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
-    TDLog.v( "XBLE comm: written desc - bytes " + bytes.length + " UUID " + uuid_str + " chrt " + uuid_chrt_str );
+    // TDLog.v( "XBLE comm: written desc - bytes " + bytes.length + " UUID " + uuid_str + " chrt " + uuid_chrt_str );
     clearPending();
   }
 
@@ -385,7 +392,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void completedReliableWrite()
   {
-    TDLog.v( "DistoXBLE comm: reliable write" );
+    // TDLog.v( "DistoXBLE comm: reliable write" );
   }
 
   /** read a characteristics
@@ -396,7 +403,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public boolean readChrt(UUID srvUuid, UUID chrtUuid )
   {
-    TDLog.v( "XBLE comm: read chrt " + chrtUuid.toString() );
+    // TDLog.v( "XBLE comm: read chrt " + chrtUuid.toString() );
     return mCallback.readChrt( srvUuid, chrtUuid );
   }
 
@@ -409,7 +416,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public boolean writeChrt( UUID srvUuid, UUID chrtUuid, byte[] bytes )
   {
-    TDLog.v( "XBLE comm: write chrt " + chrtUuid.toString() );
+    // TDLog.v( "XBLE comm: write chrt " + chrtUuid.toString() );
     return mCallback.writeChrt( srvUuid, chrtUuid, bytes );
   }
 
@@ -433,7 +440,7 @@ public class DistoXBLEComm extends TopoDroidComm
         mThreadConsumerWorking = true;
         mConsumer.start();
     }*/
-    TDLog.v( "XBLE comm discovered services status CONNECTED" );
+    // TDLog.v( "XBLE comm discovered services status CONNECTED" );
     notifyStatus( ConnectionState.CONN_CONNECTED );
     // TODO write a resend-interrupt to the DistoXBLE
     return 0;
@@ -446,7 +453,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public boolean enablePNotify( UUID srvUuid, UUID chrtUuid )
   {
-    TDLog.v("XBLE enable P notify");
+    // TDLog.v("XBLE enable P notify");
     return mCallback.enablePNotify( srvUuid, chrtUuid );
   }
 
@@ -457,7 +464,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public boolean enablePIndicate( UUID srvUuid, UUID chrtUuid )
   {
-    TDLog.v("XBLE enable P indicate");
+    // TDLog.v("XBLE enable P indicate");
     return mCallback.enablePIndicate( srvUuid, chrtUuid );
   }
 
@@ -505,13 +512,13 @@ public class DistoXBLEComm extends TopoDroidComm
     clearPending();
     mCallback.closeGatt();
     if ( mReconnect ) {
-      TDLog.v( "XBLE comm ***** reconnect yes Device = [4a] status WAITING" );
+      // TDLog.v( "XBLE comm ***** reconnect yes Device = [4a] status WAITING" );
       notifyStatus( ConnectionState.CONN_WAITING );
       enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
       doNextOp();
       mBTConnected = true;
     } else {
-      TDLog.v( "XBLE comm ***** reconnect no Device = [4b] status DISCONNECTED" );
+      // TDLog.v( "XBLE comm ***** reconnect no Device = [4b] status DISCONNECTED" );
       notifyStatus( ConnectionState.CONN_DISCONNECTED );
     }
   }
@@ -524,7 +531,7 @@ public class DistoXBLEComm extends TopoDroidComm
   {
     // notifyStatus( ConnectionState.CONN_DISCONNECTED ); // this will be called by disconnected
     clearPending();
-    TDLog.v( "XBLE comm Failure: disconnecting ...");
+    // TDLog.v( "XBLE comm Failure: disconnecting ...");
     closeDevice();
   }
 
@@ -584,7 +591,7 @@ public class DistoXBLEComm extends TopoDroidComm
   public void GetXBLEInfo()
   {
     if ( mDistoXBLEInfoDialog == null ) return;
-    TDLog.v("XBLE comm get XBLE info");
+    // TDLog.v("XBLE comm get XBLE info");
     if ( readMemory(DistoXBLEDetails.FIRMWARE_ADDRESS, 4) != null ) { // ?? there was not 4
       mDistoXBLEInfoDialog.SetVal( mPacketType, ((DistoXBLEProtocol)mProtocol).mFirmVer);
     }
@@ -639,7 +646,8 @@ public class DistoXBLEComm extends TopoDroidComm
         try {
           while ( mPacketToRead > 0 ) mNewDataFlag.wait( 200 ); // 0.2 seconds
         } catch ( InterruptedException e ) { 
-          e.printStackTrace();
+          TDLog.v("XBLE interrupted setXBLELaser");
+          // e.printStackTrace();
         }
       }
       TDLog.v("XBLE laser disconnect device");
@@ -656,7 +664,7 @@ public class DistoXBLEComm extends TopoDroidComm
   {
     if ( ! isConnected() ) return false;
     if ( cmd == 0 ) return false;
-    TDLog.v( "XBLE comm send cmd " + cmd );
+    TDLog.v( String.format( "XBLE comm send cmd 0x%02x", cmd ) );
     enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, new byte[] {(byte)cmd}, true);
     return true;
   }
@@ -677,17 +685,18 @@ public class DistoXBLEComm extends TopoDroidComm
     cmd[2] = (byte)((addr >> 8) & 0xFF);
     mPacketType = DistoXBLEProtocol.PACKET_NONE;
     enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, cmd, true );
-    synchronized ( mNewDataFlag ) {
-      try {
-        long start = System.currentTimeMillis();
-        mNewDataFlag.wait( 2000 ); // 2 seconds
-        // here if the thread gets notified
-        long millis = System.currentTimeMillis() - start;
-        TDLog.v("XBLE read-memory waited " + millis + " msec, packet type " + mPacketType );
-      } catch ( InterruptedException e ) { 
-        e.printStackTrace();
-      }
-    }
+    syncWait( 2000, "read memory" );
+    // synchronized ( mNewDataFlag ) {
+    //   try {
+    //     long start = System.currentTimeMillis();
+    //     mNewDataFlag.wait( 2000 ); // 2 seconds
+    //     // here if the thread gets notified
+    //     long millis = System.currentTimeMillis() - start;
+    //     TDLog.v("XBLE read-memory waited " + millis + " msec, packet type " + mPacketType );
+    //   } catch ( InterruptedException e ) { 
+    //     e.printStackTrace();
+    //   }
+    // }
     if ( (mPacketType & DistoXBLEProtocol.PACKET_REPLY) == DistoXBLEProtocol.PACKET_REPLY ) {
       return ( (DistoXBLEProtocol) mProtocol).mRepliedData;
     }
@@ -710,17 +719,18 @@ public class DistoXBLEComm extends TopoDroidComm
     cmd[3] = (byte)(len);
     mPacketType = DistoXBLEProtocol.PACKET_NONE;
     enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, cmd, true );
-    synchronized ( mNewDataFlag ) {
-      try {
-        long start = System.currentTimeMillis();
-        mNewDataFlag.wait( 2000 );
-        // here if the thread gets notified
-        long millis = System.currentTimeMillis() - start;
-        TDLog.v("XBLE read-memory (len " + len + ") waited " + millis + " msec, packet type " + mPacketType );
-      } catch ( InterruptedException e ) {
-        e.printStackTrace();
-      }
-    }
+    syncWait( 2000, "read memory" );
+    // synchronized ( mNewDataFlag ) {
+    //   try {
+    //     long start = System.currentTimeMillis();
+    //     mNewDataFlag.wait( 2000 );
+    //     // here if the thread gets notified
+    //     long millis = System.currentTimeMillis() - start;
+    //     TDLog.v("XBLE read-memory (len " + len + ") waited " + millis + " msec, packet type " + mPacketType );
+    //   } catch ( InterruptedException e ) {
+    //     e.printStackTrace();
+    //   }
+    // }
     if ( (mPacketType & DistoXBLEProtocol.PACKET_REPLY) == DistoXBLEProtocol.PACKET_REPLY ) {
       byte[] replydata = ( (DistoXBLEProtocol) mProtocol).mRepliedData;
       if(replydata.length == len)
@@ -749,16 +759,18 @@ public class DistoXBLEComm extends TopoDroidComm
     cmd[6] = data[3];
     mPacketType = DistoXBLEProtocol.PACKET_NONE;
     enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, cmd, true );
-    synchronized ( mNewDataFlag ) {
-      try {
-        long start = System.currentTimeMillis();
-        mNewDataFlag.wait(2000);
-        long millis = System.currentTimeMillis() - start;
-        TDLog.v("XBLE write-memory (len 4) waited " + millis + " msec, packet type " + mPacketType );
-      } catch ( InterruptedException e ) {
-        e.printStackTrace();
-      }
-    }
+    syncWait( 2000, "write memory" );
+    // synchronized ( mNewDataFlag ) {
+    //   try {
+    //     long start = System.currentTimeMillis();
+    //     mNewDataFlag.wait(2000);
+    //     long millis = System.currentTimeMillis() - start;
+    //     TDLog.v("XBLE write-memory (len 4) waited " + millis + " msec, packet type " + mPacketType );
+    //   } catch ( InterruptedException e ) {
+    //     // TDLog.v( "XBLE interrupted" );
+    //     // e.printStackTrace();
+    //   }
+    // }
     if ( (mPacketType & DistoXBLEProtocol.PACKET_REPLY) == DistoXBLEProtocol.PACKET_REPLY ) {
       byte[] repliedbytes = ((DistoXBLEProtocol) mProtocol).mRepliedData;
       return Arrays.equals(data,repliedbytes);
@@ -787,16 +799,17 @@ public class DistoXBLEComm extends TopoDroidComm
       cmd[i+4] = data[i];
     mPacketType = DistoXBLEProtocol.PACKET_NONE;
     enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, cmd, true );
-    synchronized ( mNewDataFlag ) {
-      try {
-        long start = System.currentTimeMillis();
-        mNewDataFlag.wait(2000);
-        long millis = System.currentTimeMillis() - start;
-        TDLog.v("XBLE write-memory (len 4) waited " + millis + " msec, packet type " + mPacketType );
-      } catch ( InterruptedException e ) {
-        e.printStackTrace();
-      }
-    }
+    syncWait( 2000, "write memory" );
+    // synchronized ( mNewDataFlag ) {
+    //   try {
+    //     long start = System.currentTimeMillis();
+    //     mNewDataFlag.wait(2000);
+    //     long millis = System.currentTimeMillis() - start;
+    //     TDLog.v("XBLE write-memory (len 4) waited " + millis + " msec, packet type " + mPacketType );
+    //   } catch ( InterruptedException e ) {
+    //     e.printStackTrace();
+    //   }
+    // }
     if ( (mPacketType & DistoXBLEProtocol.PACKET_REPLY) == DistoXBLEProtocol.PACKET_REPLY ) {
       byte[] repliedbytes = ((DistoXBLEProtocol) mProtocol).mRepliedData;
       return Arrays.equals(data,repliedbytes);
@@ -820,7 +833,7 @@ public class DistoXBLEComm extends TopoDroidComm
 
   public boolean toggleCalibMode( String address, int type )
   {
-    TDLog.v("XBLE toggle calib");
+    // TDLog.v("XBLE toggle calib");
     boolean ret = false;
     if ( ! tryConnectDevice( address, null, 0 ) ) return false;
     byte[] result = readMemory( DistoXBLEDetails.STATUS_ADDRESS ,4);
@@ -839,47 +852,65 @@ public class DistoXBLEComm extends TopoDroidComm
    *
    * @param turn_on   whether to turn on or off the DistoX calibration mode
    * @return true if success
+   * @note commands: 0x31 calin-ON 0x30 calib-OFF
    */
   protected boolean setCalibMode( boolean turn_on )
   {
-    TDLog.v("XBLE set calib " + turn_on );
-    // return sendCommand( turn_on? 0x31 : 0x30 );
+    // TDLog.v("XBLE set calib " + turn_on );
     return sendCommand( turn_on? DistoX.CALIB_ON : DistoX.CALIB_OFF );
   }
 
+  /** batch data download
+   * @param address
+   * @param lister
+   * @param data_type  expected type of data (not really used)
+   * @return number of downloaded data (neg on error)
+   *   -1 failed connect
+   */
   public int downloadData( String address, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {
-    TDLog.v("XBLE comm download data " + address );
+    TDLog.v("XBLE comm batch download " + address );
     // mConnectionMode = 0;
     mDataType = data_type;
-    int ret = 0; // packet counter
     if ( ! tryConnectDevice( address, lister, 0 ) ) return -1; 
+    mNrReadPackets = 0;
 
     //sendCommand( 0x40 );     // start send measure packet ???
     TDUtil.yieldDown( 500 );
     // ??? start a thread that keeps track of read packets - when read done stop it and return
-    int timeout = 50;
     mPacketType = DistoXBLEProtocol.PACKET_NONE;
     synchronized ( mNewDataFlag ) {
       while( true ) {
-        long start = System.currentTimeMillis();
-        try {
-          mNewDataFlag.wait(5000);
+        if ( syncWait( 2000, "data download" ) ) {
           if ( mPacketType == DistoXBLEProtocol.PACKET_MEASURE_DATA ) {
             mPacketType = DistoXBLEProtocol.PACKET_NONE; // reset
-            ret++; // increment counter
+            TDLog.v("XBLE got packet " + mNrReadPackets );
           } else {
+            TDLog.v("XBLE no packet " );
             break;
           }
-        } catch (InterruptedException e) {
-          e.printStackTrace();
         }
-        long millis = System.currentTimeMillis() - start;
-        TDLog.v("XBLE download data took " + millis + " msec" );
+        // long start = System.currentTimeMillis();
+        // try {
+        //   mNewDataFlag.wait(2000); // was 5000
+        //   if ( mPacketType == DistoXBLEProtocol.PACKET_MEASURE_DATA ) {
+        //     mPacketType = DistoXBLEProtocol.PACKET_NONE; // reset
+        //     ret++; // increment counter
+        //     TDLog.v("XBLE got packet " + ret );
+        //   } else {
+        //     TDLog.v("XBLE no packet " );
+        //     break;
+        //   }
+        // } catch (InterruptedException e) {
+        //   TDLog.v("XBLE interrupted");
+        //   // e.printStackTrace();
+        // }
+        // long millis = System.currentTimeMillis() - start;
+        // TDLog.v("XBLE download one data took " + millis + " msec" );
       }
     }
     disconnectDevice();
-    return ret;
+    return (mNrReadPackets / 2); // each data has two packets: DATA and VECTOR
   }
 
   /** try to connect to the XBLE device
@@ -890,7 +921,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public boolean tryConnectDevice( String address, Handler lister, int data_type )
   {
-    TDLog.v("XBLE comm try connect " + address );
+    // TDLog.v("XBLE comm try connect " + address );
     if ( ! mBTConnected ) {
       if ( ! connectDevice( address, lister, data_type ) ) {
         return false;
@@ -914,7 +945,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public boolean readCoeff( String address, byte[] coeff )
   {
-    TDLog.v("XBLE comm read coeff " + address );
+    // TDLog.v("XBLE comm read coeff " + address );
     if ( coeff == null ) return false;
     int  len  = coeff.length;
     if ( len > 52 ) len = 52; // FIXME force max length of calib coeffs
@@ -938,7 +969,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public boolean writeCoeff( String address, byte[] coeff )
   {
-    TDLog.v("XBLE comm write coeff " + address );
+    // TDLog.v("XBLE comm write coeff " + address );
     if ( coeff == null ) return false;
     int  len  = coeff.length;
     if( ! tryConnectDevice( address, null, 0 )) return false;
@@ -1000,16 +1031,17 @@ public class DistoXBLEComm extends TopoDroidComm
           enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, seperated_buf, true);
           //TDUtil.yieldDown(1000);
           mPacketType = DistoXBLEProtocol.PACKET_NONE;
-          synchronized ( mNewDataFlag ) {
-            try {
-              long start = System.currentTimeMillis();
-              mNewDataFlag.wait(5000);
-              long millis = System.currentTimeMillis() - start;
-              TDLog.v("XBLE write firmware block waited " + millis + " msec" );
-            } catch (InterruptedException e) {
-              e.printStackTrace();
-            }
-          }
+          syncWait( 5000, "write firmware block" );
+          // synchronized ( mNewDataFlag ) {
+          //   try {
+          //     long start = System.currentTimeMillis();
+          //     mNewDataFlag.wait(5000); // allow long wait for firmware
+          //     long millis = System.currentTimeMillis() - start;
+          //     TDLog.v("XBLE write firmware block waited " + millis + " msec" );
+          //   } catch (InterruptedException e) {
+          //     e.printStackTrace();
+          //   }
+          // }
           if ( mPacketType == DistoXBLEProtocol.PACKET_FLASH_CHECKSUM ) {
             int checksum = 0;
             for (int i = 0; i < 256; i++) checksum += (buf[i] & 0xff);
@@ -1055,16 +1087,17 @@ public class DistoXBLEComm extends TopoDroidComm
     try {
       enlistWrite(DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, buf, true);
       mPacketType = DistoXBLEProtocol.PACKET_NONE;
-      synchronized (mNewDataFlag) {
-        try {
-          long start = System.currentTimeMillis();
-          mNewDataFlag.wait(5000);
-          long millis = System.currentTimeMillis() - start;
-          TDLog.v("XBLE read firmware block waited " + millis + " msec" );
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
-      }
+      syncWait( 5000, "read firmware block" );
+      // synchronized (mNewDataFlag) {
+      //   try {
+      //     long start = System.currentTimeMillis();
+      //     mNewDataFlag.wait(5000); // allow long wait for firmware
+      //     long millis = System.currentTimeMillis() - start;
+      //     TDLog.v("XBLE read firmware block waited " + millis + " msec" );
+      //   } catch (InterruptedException e) {
+      //     e.printStackTrace();
+      //   }
+      // }
       if (mPacketType == DistoXBLEProtocol.PACKET_FLASH_BYTES_2) {
         buf = ((DistoXBLEProtocol) mProtocol).mFlashBytes;
         return buf;
@@ -1131,16 +1164,17 @@ public class DistoXBLEComm extends TopoDroidComm
     buf[0] = (byte)0x3c;
     enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, buf, true);
     mPacketType = DistoXBLEProtocol.PACKET_NONE;
-    synchronized (mNewDataFlag) {
-      try {
-        long start = System.currentTimeMillis();
-        mNewDataFlag.wait(5000);
-        long millis = System.currentTimeMillis() - start;
-        TDLog.v("XBLE read firmware signature waited " + millis + " msec" );
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-    }
+    syncWait( 5000, "read firmware signature" );
+    // synchronized (mNewDataFlag) {
+    //   try {
+    //     long start = System.currentTimeMillis();
+    //     mNewDataFlag.wait(5000); // allow long wait for firmware
+    //     long millis = System.currentTimeMillis() - start;
+    //     TDLog.v("XBLE read firmware signature waited " + millis + " msec" );
+    //   } catch (InterruptedException e) {
+    //     e.printStackTrace();
+    //   }
+    // }
     boolean bisSuccess = false;
     if ( mPacketType == DistoXBLEProtocol.PACKET_SIGNATURE ) {
       buf = ((DistoXBLEProtocol) mProtocol).mRepliedData;
@@ -1148,6 +1182,29 @@ public class DistoXBLEComm extends TopoDroidComm
     }
     closeDevice();
     return (bisSuccess)?  buf : null;
+  }
+
+  /** synchronized wait
+   * @param msec  wait timeout [msec]
+   * @param msg   log messsage
+   * @return true if ok, false if interrupted
+   */
+  private boolean syncWait( long msec, String msg )
+  {
+    TDLog.v("XBLE sync wait " + msec );
+    synchronized ( mNewDataFlag ) {
+      try {
+        long start = System.currentTimeMillis();
+        mNewDataFlag.wait( msec );
+        long millis = System.currentTimeMillis() - start;
+        TDLog.v("XBLE " + msg + " msec " + millis );
+        return true;
+      } catch ( InterruptedException e ) {
+        TDLog.v( "XBLE interrupted wait " + msg );
+        // e.printStackTrace();
+        return false;
+      }
+    }
   }
 }
 
