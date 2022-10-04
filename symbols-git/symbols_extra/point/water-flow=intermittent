@@ -14,7 +14,7 @@ name-ua водотік
 name-sl vodotok
 name-hu vízfolyás
 name-sk vodný-tok
-name-ro curs-de-apă
+name-ro curs_de_apă
 th_name water-flow:intermittent
 group water-flow
 orientation yes

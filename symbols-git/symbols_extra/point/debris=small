@@ -2,6 +2,7 @@ encoding utf-8
 symbol point
 name debris_small
 name-hu kis-törmelék
+name-ro sfărâmături_mici
 th_name debris:small
 orientation no
 color 0xffcc66

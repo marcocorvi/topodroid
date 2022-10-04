@@ -3,7 +3,7 @@ symbol point
 name walkway_soil
 name-pt passarela_de_terra
 name-ru земляная_дорожка
-name-ro trotuar-sol
+name-ro trotuar_sol
 name-hu járda_földes
 th_name walkway:soil
 group trail

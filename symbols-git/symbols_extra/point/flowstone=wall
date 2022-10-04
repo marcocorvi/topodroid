@@ -13,7 +13,7 @@ name-ua натік
 name-fa فلاوستون
 name-hu cseppkőlefolyás
 name-sk zasintrené
-name-ro cruste-perete
+name-ro cruste_perete
 th_name flowstone:wall
 group flowstone
 orientation yes
