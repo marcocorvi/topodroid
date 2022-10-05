@@ -12,7 +12,7 @@ name-ua стіна_із_блоків
 name-fa دیوار_بلوکی
 name-hu fal_kőzettömbökből
 name-sk steny_z_blokov
-name-ro blocuri_perete
+name-ro perete_blocuri
 th_name wall:blocks
 group wall
 color 0xff0000 0xff

@@ -2,6 +2,7 @@ encoding utf-8
 symbol point
 name fireplace
 name-hu tűzrakóhely
+name-ro loc_pentru_foc
 th_name fireplace
 group archeo
 orientation no

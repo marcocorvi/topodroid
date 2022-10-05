@@ -301,7 +301,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="error_name_exists">Létező projekt</string>
     <string name="error_name_invalid">Érvénytelen projekt név</string>
     <string name="error_name_required">Név szükséges</string>
-    <!-- TODO string name="error_text_required">Text required</string -->
+    <string name="error_text_required">Szöveg szükséges</string>
     <string name="error_station_number">Rossz pont számok</string>
     <string name="error_name_duplicate">Duplikált név</string>
     <string name="error_no_section_in_section">Metszetben metszet nem megengedett</string>
@@ -2074,7 +2074,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="warning_no_file">Figyelem: nem talál 3d fájlt</string -->
     <!-- UNUSED string name="warning_empty_cwd">Figyelem: üres alap könyvtár</string -->
     <string name="warning_no_parent">Figyelem: nem tud felsőbb könyvtárba lépni</string>
-    <!-- TODO string name="warning_nogrant_camera">Camera permission has not been granted</string -->
+    <string name="warning_nogrant_camera">A kamera engedély nincs megadva</string>
     <string name="no_permissions">Az alkalmazás nem tud futni szükséges hozzáférések nélkül</string>
 
     <!-- UNUSED string name="done_fractals">Kész fraktál dimenziók</string -->

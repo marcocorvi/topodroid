@@ -12,7 +12,7 @@ name-ru стена_из_глины
 name-ua стіна_в_глині
 name-hu fal_agyagból
 name-sk hlinené_steny
-name-ro argilă_perete
+name-ro perete_argilă
 th_name wall:clay
 group wall
 color 0xff0000 0xff
