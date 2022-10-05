@@ -3,7 +3,7 @@ symbol line
 name low-ceiling
 name-pt teto_baixo
 name-ru низкий_потолок
-name-ro tavan-jos
+name-ro tavan_jos
 name-hu alacsony_plafon
 th_name low-ceiling
 group ceiling
