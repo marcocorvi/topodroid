@@ -66,7 +66,6 @@ public class DistoXBLEComm extends TopoDroidComm
   BleCallback mCallback;
   // private String          mRemoteAddress;
   private BluetoothDevice mRemoteBtDevice;
-  private DistoXBLEInfoDialog mDistoXBLEInfoDialog = null;
   private ListerHandler mLister = null;
 
   BluetoothGattCharacteristic mReadChrt  = null;
@@ -598,16 +597,17 @@ public class DistoXBLEComm extends TopoDroidComm
   }
 
   /** get DistoX-BLE hw/fw info, and display that on the Info dialog
+   * @param info     XBLE info dialog
    */
-  public void GetXBLEInfo()
+  public void getXBLEInfo( DistoXBLEInfoDialog info )
   {
-    if ( mDistoXBLEInfoDialog == null ) return;
+    if ( info == null ) return;
     // TDLog.v("XBLE comm get XBLE info");
-    if ( readMemory(DistoXBLEDetails.FIRMWARE_ADDRESS, 4) != null ) { // ?? there was not 4
-      mDistoXBLEInfoDialog.SetVal( mPacketType, ((DistoXBLEProtocol)mProtocol).mFirmVer);
+    if ( readMemory( DistoXBLEDetails.FIRMWARE_ADDRESS, 4 ) != null ) { // ?? there was not 4
+      info.SetVal( mPacketType, ((DistoXBLEProtocol)mProtocol).mFirmVer);
     }
-    if ( readMemory(DistoXBLEDetails.HARDWARE_ADDRESS, 4) != null ) {
-      mDistoXBLEInfoDialog.SetVal( mPacketType, ((DistoXBLEProtocol)mProtocol).mHardVer);
+    if ( readMemory( DistoXBLEDetails.HARDWARE_ADDRESS, 4 ) != null ) {
+      info.SetVal( mPacketType, ((DistoXBLEProtocol)mProtocol).mHardVer);
     }
   }
 
@@ -694,16 +694,14 @@ public class DistoXBLEComm extends TopoDroidComm
     return true;
   }
 
-  public void registerInfo( DistoXBLEInfoDialog info ) { mDistoXBLEInfoDialog = info; }
-
   /** 0x38: read 4 bytes from memory synchronously
    * @param addr memory address
    * @return array of read bytes, or null on failure
-   * @note the thread waits up to 2 seconds for the reply
+   * @note the thread waits up to 2 seconds for the reply - reading from memory takes about 1 sec
    */
   public byte[] readMemory( int addr )
   {
-    // TDLog.v("XBLE read memory " + addr );
+    // TDLog.v( String.format("XBLE read memory 0x%08x", addr) );
     byte[] cmd = new byte[3];
     cmd[0] = MemoryOctet.BYTE_PACKET_REPLY; // 0x38;
     cmd[1] = (byte)(addr & 0xFF);
@@ -724,6 +722,8 @@ public class DistoXBLEComm extends TopoDroidComm
     // }
     if ( (mPacketType & DistoXBLEProtocol.PACKET_REPLY) == DistoXBLEProtocol.PACKET_REPLY ) {
       return ( (DistoXBLEProtocol) mProtocol).mRepliedData;
+    } else {
+      TDLog.Error("XBLE read memory: no reply");
     }
     return null;
   }

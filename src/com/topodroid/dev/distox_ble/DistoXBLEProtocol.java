@@ -127,6 +127,7 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
           mRepliedData[i] = databuf[i + 4];
         if (addr == DistoXBLEDetails.FIRMWARE_ADDRESS) {
           mFirmVer = Integer.toString(databuf[4]) + "." + Integer.toString(databuf[5]) + "." + Integer.toString(databuf[6]);
+          TDLog.v("XBLE fw " + mFirmVer );
           return PACKET_INFO_FIRMWARE;
         } else if (addr == DistoXBLEDetails.HARDWARE_ADDRESS) {
           float HardVer = ((float) databuf[4]) / 10;

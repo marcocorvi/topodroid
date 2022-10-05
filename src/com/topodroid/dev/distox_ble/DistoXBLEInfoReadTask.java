@@ -38,7 +38,7 @@ public class DistoXBLEInfoReadTask extends AsyncTask<Void, Integer, Boolean>
   protected Boolean doInBackground( Void... v )
   {
     if ( mApp.get() == null ) return false;
-    return mApp.get().getDistoXBLEInfo(mDialog.get());
+    return mApp.get().getDistoXBLEInfo( mDialog.get() );
   }
 
   // @Override

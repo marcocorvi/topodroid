@@ -56,12 +56,19 @@ public class NumBranch
     len = 0;
   }
 
+  /** add a shot to the branch
+   * @param shot  shot to add
+   */
   void addShot( NumShot shot )
   {
     shots.add( shot );
     // double d = shot.length();
     // len += d;
   }
+
+  /** @return the length of the branch
+   */
+  double length() { return len; }
 
   // compute the displacement vector (e,s,v) of the branch
   void computeError()

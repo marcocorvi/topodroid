@@ -197,7 +197,7 @@ public class NumCycle
 
   /** add a branch to this cycle
    * @param branch   branch to add
-   * @param node     ...
+   * @param node     node to determine the direction of the branch in the cycle
    */
   void addBranch( NumBranch branch, NumNode node )
   {

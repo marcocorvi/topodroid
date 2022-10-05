@@ -231,5 +231,9 @@ public class NumStation extends NumSurveyPoint
     // }
     return e;
   }
+
+  /** @return string presenttation of the station (ie, the name)
+   */
+  public String toString() { return name; }
     
 }

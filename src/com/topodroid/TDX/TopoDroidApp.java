@@ -2428,14 +2428,12 @@ public class TopoDroidApp extends Application
           return false;
         }
       }*/
-      comm.tryConnectDevice(TDInstance.deviceAddress(),null,DataType.DATA_ALL);
-      comm.registerInfo( info );
-      // comm.writeGetInfoCmd();
-	  comm.GetXBLEInfo();
+      comm.tryConnectDevice( TDInstance.deviceAddress(), null, DataType.DATA_ALL );
+      comm.getXBLEInfo( info );
 	  
       if ( comm.isConnected() ) {
-          TDUtil.yieldDown( 1000 ); // 500
-          disconnectComm();
+        TDUtil.yieldDown( 1000 ); // 500
+        disconnectComm();
       }
       return true;
     }

@@ -43,5 +43,12 @@ class NumNode
 
   void addShot( NumShot sh ) { shots.add( sh ); }
 
+  /** @return string presentation of the node: station and size of shots
+   */
+  public String toString()
+  {
+    return station.toString() + " [" + shots.size() + "]";
+  }
+
 }
 
