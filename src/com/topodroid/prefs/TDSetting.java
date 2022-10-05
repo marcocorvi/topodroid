@@ -339,8 +339,8 @@ public class TDSetting
   public static int mCommRetry = 1; 
   // public static int mCommType  = 0; // 0: on-demand, 1: continuous, 2: multi REPLACED BY mConnectionMode
 
-  public static int mWaitLaser = 1000;
-  public static int mWaitShot  = 4000;
+  public static int mWaitLaser = 2000;
+  public static int mWaitShot  = 2000;
   public static int mWaitData  =  100;  // delay between data
   public static int mWaitConn  =  500;  // delay waiting a connection
   public static int mWaitCommand = 100;

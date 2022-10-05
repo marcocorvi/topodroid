@@ -410,7 +410,6 @@ public class ShotWindow extends Activity
     }
   }
 
-
   public void setTheTitle()
   {
     StringBuilder sb = new StringBuilder();
@@ -1366,6 +1365,10 @@ public class ShotWindow extends Activity
     }
     setRefAzimuthButton( );
   }
+
+  /** @return the name (ILister interface)
+   */
+  public String name() { return "ShotWindow"; };
 
   // --------------------------------------------------------------
 
@@ -2551,7 +2554,9 @@ public class ShotWindow extends Activity
     return false;
   }
 
-
+  /** update the connection status feedbacks
+   * @param status  new status
+   */
   public void setConnectionStatus( int status )
   { 
     if ( TDInstance.isDivingMode() ) return;
@@ -2561,7 +2566,7 @@ public class ShotWindow extends Activity
       TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_no );
       TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth_no );
     } else {
-      // TDLog.v( "set button, status " + mBTstatus + " -> " + status );
+      // TDLog.v( "SHOT set button, status " + mBTstatus + " -> " + status );
       if ( status != mBTstatus ) {
         mBTstatus = status;
         // mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );

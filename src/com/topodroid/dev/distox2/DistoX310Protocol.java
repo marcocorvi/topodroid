@@ -289,7 +289,7 @@ public class DistoX310Protocol extends DistoXProtocol
   public int uploadFirmwareDryRun( File fp )
   {
     int len = (int)( fp.length() );
-    TDLog.v( "Protocol Firmware upload: file " + fp.getPath() + " dry run - length " + len );
+    TDLog.v( "X310-proto fw upload: file " + fp.getPath() + " dry run - length " + len );
     return len;
   }
 
@@ -298,7 +298,7 @@ public class DistoX310Protocol extends DistoXProtocol
   public int uploadFirmware( File fp )
   {
     // TDLog.f( "Firmware upload: protocol starts. file " + fp.getPath() );
-    TDLog.v( "Firmware upload: protocol starts. file " + fp.getPath() );
+    TDLog.v( "X310-proto fw upload: starts. file " + fp.getPath() );
     byte[] buf = new byte[259];
     buf[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte)0x3b;
     buf[1] = (byte)0;
@@ -314,12 +314,12 @@ public class DistoX310Protocol extends DistoXProtocol
 
       try {
         for ( int addr = 0; /* addr < end_addr */; ++ addr ) {
-          TDLog.f( "Firmware upload: addr " + addr + " count " + cnt );
+          TDLog.f( "X310-proto fw upload: addr " + addr + " count " + cnt );
           // memset(buf+3, 0, 256)
           for (int k=0; k<256; ++k) buf[3+k] = (byte)0xff;
           int nr = dis.read( buf, 3, 256 );
           if ( nr <= 0 ) {
-            TDLog.f( "Firmware upload: file read failure. Result " + nr );
+            TDLog.f( "X310-proto fw upload: file read failure. Result " + nr );
             break;
           }
           cnt += nr;
@@ -336,28 +336,28 @@ public class DistoX310Protocol extends DistoXProtocol
 
             int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
             if ( mBuffer[0] != MemoryOctet.BYTE_PACKET_FW_WRITE || addr != reply_addr ) {
-              TDLog.f( "Firmware upload: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
+              TDLog.f( "X310-proto fw upload: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
               ok = false;
               break;
             } else {
-              TDLog.f( "Firmware upload: reply address ok");
+              TDLog.f( "X310-proto fw upload: reply address ok");
             }
           } else {
-            TDLog.f( "Firmware upload: skip address " + addr );
+            TDLog.f( "X310-proto fw upload: skip address " + addr );
           }
         }
         fis.close();
       } catch ( EOFException e ) { // OK
-        TDLog.f( "Firmware update: EOF " + e.getMessage() );
+        TDLog.f( "X310-proto fw update: EOF " + e.getMessage() );
       } catch ( IOException e ) { 
-        TDLog.f( "Firmware update: IO error " + e.getMessage() );
+        TDLog.f( "X310-proto fw update: IO error " + e.getMessage() );
         ok = false;
       }
     } catch ( FileNotFoundException e ) {
-      TDLog.f( "Firmware update: Not Found error " + e.getMessage() );
+      TDLog.f( "X310-proto fw update: Not Found error " + e.getMessage() );
       return 0;
     }
-    TDLog.f( "Firmware update: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
+    TDLog.f( "X310-proto fw update: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
     return ( ok ? cnt : -cnt );
   }
 
@@ -366,7 +366,7 @@ public class DistoX310Protocol extends DistoXProtocol
   public int dumpFirmware( File fp )
   {
     // TDLog.f( "Proto Firmware dump: output filepath " + fp.getPath() );
-    TDLog.v( "Proto Firmware dump: output filepath " + fp.getPath() );
+    TDLog.v( "X310-proto fw dump: output file " + fp.getPath() );
     byte[] buf = new byte[256];
 
     boolean ok = true;
@@ -391,7 +391,7 @@ public class DistoX310Protocol extends DistoXProtocol
 
           int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
           if ( mBuffer[0] != MemoryOctet.BYTE_PACKET_FW_READ || addr != reply_addr ) {
-            TDLog.f( "Proto Firmware dump: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr + " addr " + addr );
+            TDLog.f( "X310-proto fw dump: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr + " addr " + addr );
             ok = false;
             break;
           // } else {
@@ -426,7 +426,7 @@ public class DistoX310Protocol extends DistoXProtocol
       return 0;
     }
     // TDLog.f( "Proto Firmware dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
-    TDLog.v( "Proto Firmware dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
+    TDLog.v( "X310-proto fw dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
     return ( ok ? cnt : -cnt );
   }
 

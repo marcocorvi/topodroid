@@ -137,7 +137,7 @@ public class TopoDroidComm
   public void handleZeroPacket( long index, ListerHandler lister, int data_type )
   {
     ++mNrReadPackets; // FIXME NON_ATOMIC_ON_VOLATILE incrementNrPacketsRead();
-      TDLog.v( "TD comm: packet ZERO " + mNrReadPackets );
+    TDLog.v( "TD comm: packet ZERO " + mNrReadPackets );
     double r = mProtocol.mRoll;
     long status = TDStatus.NORMAL;
     mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, index, 0, 0, 0, r, ExtendType.EXTEND_IGNORE, status, TDInstance.deviceAddress() );
@@ -164,7 +164,7 @@ public class TopoDroidComm
   {
     if ( res == DataType.PACKET_DATA ) {
       ++mNrReadPackets; // FIXME NON_ATOMIC_ON_VOLATILE incrementNrPacketsRead();
-      TDLog.v( "TD comm: packet DATA " + mNrReadPackets );
+      // TDLog.v( "TD comm: packet DATA " + mNrReadPackets );
       double d = mProtocol.mDistance;
       double b = mProtocol.mBearing;
       double c = mProtocol.mClino;
@@ -199,11 +199,11 @@ public class TopoDroidComm
       // }
     } else if ( res == DataType.PACKET_G ) {
       ++mNrReadPackets; // FIXME NON_ATOMIC_ON_VOLATILE incrementNrPacketsRead();
-      TDLog.v( "TD comm: packet G " + mNrReadPackets );
+      // TDLog.v( "TD comm: packet G " + mNrReadPackets );
       setHasG( true );
     } else if ( res == DataType.PACKET_M ) {
       ++mNrReadPackets; // FIXME NON_ATOMIC_ON_VOLATILE incrementNrPacketsRead();
-      TDLog.v( "TD comm: packet M " + mNrReadPackets );
+      // TDLog.v( "TD comm: packet M " + mNrReadPackets );
       // get G and M from mProtocol and save them to store
       // TDLog.v( "G " + mProtocol.mGX + " " + mProtocol.mGY + " " + mProtocol.mGZ + " M " + mProtocol.mMX + " " + mProtocol.mMY + " " + mProtocol.mMZ );
       long c_blk = TopoDroidApp.mDData.insertGM( TDInstance.cid, mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ );
@@ -253,7 +253,7 @@ public class TopoDroidComm
     } else if ( res == DataType.PACKET_VECTOR ) {
       // vector packet do count
       ++mNrReadPackets; // FIXME NON_ATOMIC_ON_VOLATILE
-      TDLog.v( "TD comm: packet VECTOR " + mNrReadPackets );
+      // TDLog.v( "TD comm: packet VECTOR " + mNrReadPackets );
       double acc  = mProtocol.mAcceleration;
       double mag  = mProtocol.mMagnetic;
       double dip  = mProtocol.mDip;
@@ -302,7 +302,7 @@ public class TopoDroidComm
    */
   public void terminate()
   {
-    TDLog.v("TD comm terminate");
+    // TDLog.v("TD comm terminate");
     cancelCommThread();
   }
 
@@ -324,7 +324,7 @@ public class TopoDroidComm
    */
   protected void cancelCommThread()
   {
-    TDLog.v( "TD comm cancel Comm thread");
+    // TDLog.v( "TD comm cancel Comm thread");
     if ( mCommThread != null ) { // FIXME check that comm-thread is really alive
       // TDLog.Log( TDLog.LOG_COMM, "cancel Comm thread: thread is active");
       mCommThread.cancelWork();

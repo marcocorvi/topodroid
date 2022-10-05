@@ -67,7 +67,7 @@ public class CommThread extends Thread
     doWork = true;
     mComm.setHasG( false );
 
-    TDLog.v("RF Comm Thread start");
+    // TDLog.v("RF Comm Thread start");
 
     // TDLog.v( "DistoX-BLE", "TD comm: RF thread ... to_read " + toRead );
     if ( mType == TopoDroidComm.COMM_RFCOMM ) {
@@ -108,6 +108,6 @@ public class CommThread extends Thread
 
     // FIXME_COMM
     // mApp.notifyConnState( );
-    TDLog.v("RF Comm Thread exit");
+    // TDLog.v("RF Comm Thread exit");
   }
 }

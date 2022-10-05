@@ -13,6 +13,10 @@ package com.topodroid.TDX;
 
 public interface ILister 
 {
+  /** @return the name of the lister (DEBUG)
+   */
+  String name();
+
   /**
    * @param nr    number of new shots
    * @param toast whether to toast feedbacks

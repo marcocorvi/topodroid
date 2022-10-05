@@ -103,7 +103,7 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
         System.arraycopy( databuf, 9, mMeasureDataPacket2, 0, 8);
         int res1 = handlePacket(mMeasureDataPacket1);
         int res2 = handlePacket(mMeasureDataPacket2);
-        TDLog.v("XBLE proto 17-length data - type " + databuf[0] + " res " + res1 + " " + res2 );
+        // TDLog.v("XBLE proto 17-length data - type " + databuf[0] + " res " + res1 + " " + res2 );
         if ( res1 != PACKET_NONE && res2 != PACKET_NONE ) {
           mComm.sendCommand(( mMeasureDataPacket1[0] & 0x80 ) | 0x55);
           mComm.handleRegularPacket(res1, mLister, 0);
@@ -113,7 +113,7 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
         //   return PACKET_ERROR;
         }
       } else {
-        TDLog.v("XBLE not downloading");
+        TDLog.Error("XBLE not downloading");
         return PACKET_NONE;
       }
     } else { // command packet
@@ -122,7 +122,7 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
         int addr = (databuf[2] << 8 | (databuf[1] & 0xff)) & 0xFFFF;
         int len = databuf[3];
         mRepliedData = new byte[len];
-        TDLog.v("XBLE command packet " + command + " length " + len );
+        // TDLog.v("XBLE command packet " + command + " length " + len );
         for (int i = 0; i < len; i++)
           mRepliedData[i] = databuf[i + 4];
         if (addr == DistoXBLEDetails.FIRMWARE_ADDRESS) {
@@ -143,20 +143,20 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
         }
       } else if ( command == MemoryOctet.BYTE_PACKET_HW_CODE ) { // 0x3c: signature: hardware ver. - 0x3d 0x3e only works in App mode not in the bootloader mode.
         // 0x3a 0x3b 0x3c are commands work in bootloader mode
-        TDLog.v("XBLE command packet " + command + " (signature) length " + databuf.length );
+        // TDLog.v("XBLE command packet " + command + " (signature) length " + databuf.length );
         if ( databuf.length == 3 ) { 
           mRepliedData[0] = databuf[1];
           mRepliedData[1] = databuf[2];
           return PACKET_SIGNATURE;
         }
       } else if ( databuf[0] == MemoryOctet.BYTE_PACKET_FW_WRITE ) { // 0x3b
-        TDLog.v("XBLE command packet " + command + " (checksum) length " + databuf.length );
+        // TDLog.v("XBLE command packet " + command + " (checksum) length " + databuf.length );
         if ( databuf.length == 5 ) {
           mCheckSum = ((databuf[4] << 8) | (databuf[3] & 0xff)) & 0xffff;
           return PACKET_FLASH_CHECKSUM;
         }
       } else if ( command == MemoryOctet.BYTE_PACKET_FW_READ && databuf.length == 131) {   // 0x3a: 3 headers + 128 payloadsda
-        TDLog.v("XBLE command packet " + command + " (firmware) length " + databuf.length );
+        // TDLog.v("XBLE command packet " + command + " (firmware) length " + databuf.length );
         if ( databuf[2] == 0x00 ) {        // firmware first packet (MTU=247)
           for ( int i=3; i<131; i++) mFlashBytes[i-3] = databuf[i]; // databuf is copied from offset 3
           return PACKET_FLASH_BYTES_1;

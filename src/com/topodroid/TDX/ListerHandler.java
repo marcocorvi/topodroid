@@ -29,6 +29,8 @@ public class ListerHandler extends Handler
     mLister = lister;
   }
 
+  public String name() { return mLister.name(); }
+
   /** refresh display
    * @param nr    number of data
    * @param toast whether to toast

@@ -1864,7 +1864,7 @@ public class TDPrefKey
     FALSE,
     "250",
     "500",
-    "1000",
+    "2000",
     "2000",
     TRUE,
     TDString.THREE,

@@ -728,6 +728,10 @@ public class DrawingWindow extends ItemDrawer
   private void setButton3( int k, BitmapDrawable bm ) { if ( k < mNrButton3 ) TDandroid.setButtonBackground( mButton3[ k ], bm ); }
   private void setButton5( int k, BitmapDrawable bm ) { if ( k < mNrButton5 ) TDandroid.setButtonBackground( mButton5[ k ], bm ); }
 
+  /** @return the name (ILister interface)
+   */
+  public String name() { return "DrawingWindow"; };
+
   // ----------------------------------------------------------
 
   /** @return the set of station names

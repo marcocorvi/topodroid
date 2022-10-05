@@ -104,7 +104,7 @@ public class DataDownloader
    */
   void doDataDownload( ListerHandler lister, int data_type )
   {
-    // TDLog.v( "DOWNLOAD: do Data Download() - nr " + mDownload + " connected " + mConnected );
+    TDLog.v( "DOWNLOAD: do Data Download() - nr " + mDownload + " connected " + mConnected + " data type " + data_type );
     if ( mDownload ) {
       mLister = lister;
       startDownloadData( lister, data_type );
@@ -202,8 +202,8 @@ public class DataDownloader
    */
   void notifyConnectionStatus( ListerHandler lister, int connected )
   {
-    TDLog.v( "DOWNLOADER: notify this thread connected " + connected );
     mConnected = connected;
+    TDLog.v( "DOWNLOADER: notify this thread connected " + connected + " status " + getStatus() );
     mApp.notifyListerStatus( lister, getStatus() ); // this is run on UI thread
   }
 
