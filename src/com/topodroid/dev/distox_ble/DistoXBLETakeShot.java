@@ -20,6 +20,7 @@ import com.topodroid.dev.DataType;
 import com.topodroid.dev.Device;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.utils.TDLog;
 
 public class DistoXBLETakeShot extends AsyncTask<Integer, Integer, Integer >
 {
@@ -58,7 +59,7 @@ public class DistoXBLETakeShot extends AsyncTask<Integer, Integer, Integer >
       TDUtil.slowDown( TDSetting.mWaitShot );
     }
     for ( ; i>1; --i ) {
-      // TDLog.v( "take shot " + i + " wait " + TDSetting.mWaitLaser + "/" + TDSetting.mWaitShot );
+      TDLog.f( "take shot " + i + " wait " + TDSetting.mWaitLaser + "/" + TDSetting.mWaitShot );
       mApp.setXBLELaser( Device.LASER_ON, 0, mLister, mDataType, false );
       TDUtil.slowDown( TDSetting.mWaitLaser ); 
       mApp.setXBLELaser( Device.MEASURE, 0, mLister, mDataType, false);
@@ -66,8 +67,6 @@ public class DistoXBLETakeShot extends AsyncTask<Integer, Integer, Integer >
     }
     mApp.setXBLELaser( Device.LASER_ON, 0, mLister, mDataType, false );
     TDUtil.slowDown( TDSetting.mWaitLaser );
-
-    // TDUtil.slowDown( TDSetting.mWaitLaser ); 
     return 0;
   }
 

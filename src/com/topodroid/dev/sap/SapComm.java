@@ -20,6 +20,7 @@ package com.topodroid.dev.sap;
 import com.topodroid.utils.TDLog;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.TDInstance;
+import com.topodroid.TDX.ListerHandler;
 // import com.topodroid.TDX.DataDownloader;
 import com.topodroid.TDX.TopoDroidApp;
 // import com.topodroid.TDX.TDToast;
@@ -36,7 +37,7 @@ import com.topodroid.dev.ble.BleOpConnect;
 import com.topodroid.dev.ble.BleOpDisconnect;
 import com.topodroid.dev.ble.BleOpChrtRead;
 
-import android.os.Handler;
+// import android.os.Handler;
 // import android.os.Looper;
 // import android.os.Build;
 import android.content.Context;
@@ -71,7 +72,7 @@ public class SapComm extends TopoDroidComm
   // private int mDataType = DataType.DATA_SHOT;
   private int mDataType;
 
-  private Handler mLister;
+  private ListerHandler mLister;
   private int mConnectionMode = -1;
   private boolean mDisconnecting = false;
   private BleOperation mPendingOp = null;
@@ -216,7 +217,7 @@ public class SapComm extends TopoDroidComm
    * @param data_type expected type of data
    */
   @Override
-  public boolean connectDevice( String address, Handler /* ILister */ lister, int data_type )
+  public boolean connectDevice( String address, ListerHandler lister, int data_type )
   {
     // TDLog.v( "SAP comm: connect device (continuous data download)");
     mLister = lister;
@@ -263,7 +264,7 @@ public class SapComm extends TopoDroidComm
    * @param data_type  packet datatype
    * @return always 0
    */
-  public int downloadData( String address, Handler /* ILister */ lister, int data_type )
+  public int downloadData( String address, ListerHandler lister, int data_type )
   {
     // TDLog.v( "SAP comm: batch data download");
     mConnectionMode = 0;
@@ -275,7 +276,7 @@ public class SapComm extends TopoDroidComm
     return 0;
   }
 
-  // protected boolean startCommThread( int to_read, Handler /* ILister */ lister, int data_type ) 
+  // protected boolean startCommThread( int to_read, ListerHandler lister, int data_type ) 
   // {
   //   if ( mCommThread != null ) {
   //     TDLog.e( "SAP comm start Comm Thread already running");
@@ -602,7 +603,7 @@ public class SapComm extends TopoDroidComm
    */
   public void notifyStatus( int status )
   {
-    mApp.notifyStatus( status );
+    mApp.notifyListerStatus( mApp.mListerSet, status );
   }
 
 }

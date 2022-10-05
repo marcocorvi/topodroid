@@ -17,6 +17,7 @@ import com.topodroid.prefs.TDSetting;
 // import com.topodroid.TDX.DataDownloader;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.ListerHandler;
 // import com.topodroid.TDX.TDToast;
 
 import com.topodroid.dev.Device;
@@ -46,7 +47,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
 
 // import android.os.Bundle;
-import android.os.Handler;
+// import android.os.Handler;
 // import android.os.Message;
 
 // import android.os.Parcelable;
@@ -114,22 +115,22 @@ public class DistoXComm extends TopoDroidComm
           // TDLog.v( "on receive");
           if ( DeviceUtil.ACTION_ACL_CONNECTED.equals( action ) ) {
             // TDLog.v( "[C] ACL_CONNECTED " + device + " addr " + mAddress );
-            // TDLog.v( "***** Disto comm: on Receive() CONNECTED" );
-            mApp.notifyStatus( ConnectionState.CONN_CONNECTED );
+            // TDLog.v( "DISTOX comm: on Receive() CONNECTED" );
+            mApp.notifyListerStatus( mApp.mListerSet, ConnectionState.CONN_CONNECTED );
             mApp.mDataDownloader.updateConnected( true );
           } else if ( DeviceUtil.ACTION_ACL_DISCONNECT_REQUESTED.equals( action ) ) {
             // TDLog.v( "[C] ACL_DISCONNECT_REQUESTED " + device + " addr " + mAddress );
-            // TDLog.v( "***** Disto comm: on Receive() DISCONNECT REQUEST" );
-            mApp.notifyStatus( ConnectionState.CONN_DISCONNECTED );
+            // TDLog.v( "DISTOX comm: on Receive() DISCONNECT REQUEST" );
+            mApp.notifyListerStatus( mApp.mListerSet, ConnectionState.CONN_DISCONNECTED );
             mApp.mDataDownloader.updateConnected( false );
             closeSocket( );
           } else if ( DeviceUtil.ACTION_ACL_DISCONNECTED.equals( action ) ) {
             // TDLog.v( "[C] ACL_DISCONNECTED " + device + " addr " + mAddress );
-            // TDLog.v( "***** Disto comm: on Receive() DISCONNECTED" );
-            mApp.notifyStatus( ConnectionState.CONN_WAITING );
+            // TDLog.v( "DISTOX comm: on Receive() DISCONNECTED" );
+            mApp.notifyListerStatus( mApp.mListerSet, ConnectionState.CONN_WAITING );
             mApp.mDataDownloader.updateConnected( false );
             closeSocket( );
-            mApp.notifyDisconnected( data_type ); // run reconnect-task
+            mApp.notifyDisconnected( mApp.mListerSet, data_type ); // run reconnect-task
           }
         } else if ( DeviceUtil.ACTION_BOND_STATE_CHANGED.equals( action ) ) { // NOT USED
           // TDLog.v( "***** Disto comm: on Receive() BOND STATE CHANGED" );
@@ -142,11 +143,11 @@ public class DistoXComm extends TopoDroidComm
           } else if (state == DeviceUtil.BOND_BONDING && prevState == DeviceUtil.BOND_BONDED) {
             TDLog.v( "BOND STATE CHANGED unpaired (BONDED --> BONDING) " + device );
             if ( mBTSocket != null ) {
-              // TDLog.e( "[*] socket is not null: close and retry connect ");
-              mApp.notifyStatus( ConnectionState.CONN_WAITING );
+              TDLog.v( "DISTOX [*] socket is not null: close and retry connect ");
+              mApp.notifyListerStatus( mApp.mListerSet, ConnectionState.CONN_WAITING );
               mApp.mDataDownloader.setConnected( ConnectionState.CONN_WAITING );
               closeSocket( );
-              mApp.notifyDisconnected( data_type ); // run reconnect-task
+              mApp.notifyDisconnected( mApp.mListerSet, data_type ); // run reconnect-task
               connectSocket( mAddress, data_type ); // returns immediately if mAddress == null
             }
           } else {
@@ -484,7 +485,7 @@ public class DistoXComm extends TopoDroidComm
    * @param data_type packet datatype (either shot of calib)
    * @return true on success
    */
-  protected boolean startCommThread( int to_read, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
+  protected boolean startCommThread( int to_read, ListerHandler lister, int data_type ) // FIXME_LISTER
   {
     // TDLog.Log( TDLog.LOG_COMM, "start RFcomm thread: to_read " + to_read );
     // TDLog.v( "DistoX comm: start comm thread: to read " + to_read );
@@ -506,7 +507,7 @@ public class DistoXComm extends TopoDroidComm
 
   // -------------------------------------------------------- 
   
-  // public boolean connectRemoteDevice( String address, Handler /* ArrayList< ILister > */ lister ) // FIXME_LISTER
+  // public boolean connectRemoteDevice( String address, ListerHandler /* ArrayList< ILister > */ lister ) // FIXME_LISTER
   // {
   //   // TDLog.Log( TDLog.LOG_COMM, "connect remote device: address " + address );
   //   if ( connectSocket( address ) ) {
@@ -626,7 +627,7 @@ public class DistoXComm extends TopoDroidComm
    * @param data_type  packet datatype
    * @return true if successful
    */
-  public boolean connectDevice( String address, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
+  public boolean connectDevice( String address, ListerHandler lister, int data_type ) // FIXME_LISTER
   {
     if ( mCommThread != null ) {
       // TDLog.v( "DistoX Comm connect: already connected");
@@ -662,7 +663,7 @@ public class DistoXComm extends TopoDroidComm
    * @param data_type  packet datatype
    * @return number of packets (-1 failure)
    */
-  public int downloadData( String address, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
+  public int downloadData( String address, ListerHandler lister, int data_type ) // FIXME_LISTER
   {
     if ( ! isCommThreadNull() ) {
       TDLog.e( "download data: RFcomm thread not null");

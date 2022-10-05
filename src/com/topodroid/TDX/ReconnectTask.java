@@ -21,17 +21,20 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
 {
   private DataDownloader mDownloader;
   private ReconnectTask  running;
+  private ListerHandler  mLister;
   private int mDataType; // data type, passed to data_downloader try_connect()
   private int mDelay = 0;
 
   /** cstr
    * @param downloader   data downloader
+   * @param lister       data lister
    * @param data_type    type of data to download
    * @param delay        ...
    */
-  ReconnectTask( DataDownloader downloader, int data_type, int delay )
+  ReconnectTask( DataDownloader downloader, ListerHandler lister, int data_type, int delay )
   {
     mDownloader = downloader;
+    mLister     = lister;
     mDataType = data_type;
     mDelay = delay;
     running = null;
@@ -53,7 +56,7 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
             Thread.sleep( mDelay );
           }
           // TDLog.v( "notify disconnected: try reconnect status " + mDownloader.isDownloading() );
-          mDownloader.tryConnect( mDataType ); 
+          mDownloader.tryConnect( mLister, mDataType ); 
         } catch ( InterruptedException e ) { }
       }
     }

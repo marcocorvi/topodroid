@@ -65,9 +65,12 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
         app.updateCalibAlgo( algo );
         gm.setAlgo( algo );
       }
+      // app.setGMdownload( true ); // GM_DOWNLOAD
     }
     if ( ! lock() ) return null;
-    return ( app == null )? 0 : app.downloadDataBatch( mLister, mDataType );
+    int ret = ( app == null )? 0 : app.downloadDataBatch( mLister, mDataType );
+    // app.setGMdownload( false ); // GM_DOWNLOAD
+    return ret;
   }
 
   // @Override
@@ -93,7 +96,7 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
         unlock();
       }
       app.mDataDownloader.setDownload( false );
-      app.mDataDownloader.notifyConnectionStatus( ConnectionState.CONN_DISCONNECTED );
+      app.mDataDownloader.notifyConnectionStatus( mLister, ConnectionState.CONN_DISCONNECTED );
     }
   }
 

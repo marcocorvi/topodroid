@@ -19,6 +19,7 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.Lister;
+import com.topodroid.TDX.ListerHandler;
 // import com.topodroid.TDX.DBlock;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.LegType;
@@ -29,7 +30,7 @@ import java.util.UUID;
 // import java.util.concurrent.atomic.AtomicInteger; // FIXME_ATOMIC_INT
 
 import android.os.Bundle;
-import android.os.Handler;
+// import android.os.Handler;
 import android.os.Message;
 
 // import android.content.Context;
@@ -94,7 +95,7 @@ public class TopoDroidComm
    * @param comment        device data comment (?)
    * @return ...
    */
-  public boolean handleBricPacket( long index, Handler lister, int data_type, float clino_error, float azimuth_error, String comment )
+  public boolean handleBricPacket( long index, ListerHandler lister, int data_type, float clino_error, float azimuth_error, String comment )
   {
     // TDLog.v( "TD comm: packet DATA");
     ++mNrReadPackets; // FIXME NON_ATOMIC_ON_VOLATILE incrementNrPacketsRead();
@@ -133,7 +134,7 @@ public class TopoDroidComm
    * @param lister     data lister
    * @param data_type  packet expected data type (unused)
    */
-  public void handleZeroPacket( long index, Handler lister, int data_type )
+  public void handleZeroPacket( long index, ListerHandler lister, int data_type )
   {
     ++mNrReadPackets; // FIXME NON_ATOMIC_ON_VOLATILE incrementNrPacketsRead();
       TDLog.v( "TD comm: packet ZERO " + mNrReadPackets );
@@ -159,7 +160,7 @@ public class TopoDroidComm
    * @param lister data lister
    * @param data_type unused
    */
-  public void handleRegularPacket( int res, Handler lister, int data_type )
+  public void handleRegularPacket( int res, ListerHandler lister, int data_type )
   {
     if ( res == DataType.PACKET_DATA ) {
       ++mNrReadPackets; // FIXME NON_ATOMIC_ON_VOLATILE incrementNrPacketsRead();
@@ -356,7 +357,7 @@ public class TopoDroidComm
    * @param data_type expected data type (?)
    * @return always false (ie, thread not started) by default
    */
-  protected boolean startCommThread( int to_read, Handler /* ILister */ lister, int data_type ) 
+  protected boolean startCommThread( int to_read, ListerHandler lister, int data_type ) 
   {
     return false;
   }
@@ -426,7 +427,7 @@ public class TopoDroidComm
    * @param data_type ???
    * @return always false (ie, failure) by default
    */
-  public boolean connectDevice( String address, Handler /* ILister */ lister, int data_type )
+  public boolean connectDevice( String address, ListerHandler lister, int data_type )
   {
     return false;
   }
@@ -445,7 +446,7 @@ public class TopoDroidComm
    * @param data_type packet datatype, either shot or calib (or all) (not used)
    * @return always -1: number of packet received - must be overridden
    */
-  public int downloadData( String address, Handler /* ILister */ lister, int data_type )
+  public int downloadData( String address, ListerHandler lister, int data_type )
   {
     TDLog.e("TD comm: generic download data always fails");
     return -1;

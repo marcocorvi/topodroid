@@ -2463,7 +2463,7 @@ public class TopoGL extends Activity
       //   mBluetoothState = BLUETOOTH_READY;
       //   // (new AsyncTask<Void, Void, Boolean>() {
       //   //   @Override public Boolean doInBackground(Void ... v ) {
-      //       boolean ret = mBluetoothComm.connectDevice();
+      //       boolean ret = mBluetoothComm.connectDevice( lister ? );
       //       setBluetoothParser( mBtRemoteName );
       //   //     return ret;
       //   //   }
@@ -2566,7 +2566,7 @@ public class TopoGL extends Activity
     if ( mBluetoothComm != null ) {
       (new AsyncTask<Void, Void, Void>() {
         @Override public Void doInBackground(Void ... v ) {
-          mBluetoothComm.connectDevice();
+          mBluetoothComm.connectDevice( lister ? );
           return null;
         }
       } ).execute();
@@ -2655,7 +2655,7 @@ public class TopoGL extends Activity
           stopBluetooth();
           break;
         case BLUETOOTH_WAIT: 
-          doDisconnectDevice();
+          doDisconnectDevice( new ListerHandler(this) ); // requires this to be ILister
           setBluetoothState( BLUETOOTH_ON );
           break;
         case BLUETOOTH_READY: 

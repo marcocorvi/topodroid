@@ -12,6 +12,7 @@
 package com.topodroid.dev.distox_ble;
 
 import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.ListerHandler;
 // import com.topodroid.dev.DataType;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.TopoDroidProtocol;
@@ -19,7 +20,7 @@ import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.utils.TDLog;
 
 import android.content.Context;
-import android.os.Handler;
+// import android.os.Handler;
 
 // import java.io.IOException;
 
@@ -27,7 +28,7 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
 {
 
   private final DistoXBLEComm mComm;
-  private final Handler mLister;
+  private final ListerHandler mLister;
 
 
   public static final int PACKET_REPLY          = 0x10;
@@ -69,7 +70,7 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
    * @param device   BT device
    * @param comm     DistoX BLE comm object
    */
-  public DistoXBLEProtocol(Context ctx, TopoDroidApp app, Handler lister, Device device, DistoXBLEComm comm )
+  public DistoXBLEProtocol(Context ctx, TopoDroidApp app, ListerHandler lister, Device device, DistoXBLEComm comm )
   {
     super( device, ctx );
     mLister = lister;

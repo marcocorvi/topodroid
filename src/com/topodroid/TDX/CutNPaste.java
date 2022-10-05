@@ -388,7 +388,8 @@ public class CutNPaste
                 new View.OnClickListener( ) {
                   public void onClick(View v) {
                     // i_lister.enableBluetoothButton(false);
-                    new DistoXBLETakeShot( i_lister, (TDSetting.isConnectionModeContinuous() ? lister : null), app, 1, DataType.DATA_SHOT ).execute();
+                    // new DistoXBLETakeShot( i_lister, (TDSetting.isConnectionModeContinuous() ? lister : null), app, 1, DataType.DATA_SHOT ).execute();
+                    new DistoXBLETakeShot( i_lister, lister, app, 1, DataType.DATA_SHOT ).execute();
                     dismissPopupBT();
                   }
                 } );
@@ -401,7 +402,8 @@ public class CutNPaste
                 new View.OnClickListener( ) {
                   public void onClick(View v) {
                     // i_lister.enableBluetoothButton(false);
-                    new DistoXBLETakeShot( i_lister, (TDSetting.isConnectionModeContinuous()? lister : null), app, TDSetting.mMinNrLegShots, DataType.DATA_SHOT ).execute();
+                    // new DistoXBLETakeShot( i_lister, (TDSetting.isConnectionModeContinuous()? lister : null), app, TDSetting.mMinNrLegShots, DataType.DATA_SHOT ).execute();
+                    new DistoXBLETakeShot( i_lister, lister, app, TDSetting.mMinNrLegShots, DataType.DATA_SHOT ).execute();
                     dismissPopupBT();
                   }
                 } );

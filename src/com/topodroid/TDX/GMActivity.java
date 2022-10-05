@@ -622,6 +622,7 @@ public class GMActivity extends Activity
     // TDLog.v( "refreshDisplay nr " + nr );
     resetTitle( );
     if ( nr >= 0 ) {
+      if ( TDInstance.isDeviceXBLE() ) nr *= 2; // GM_DOWNLOAD
       if ( nr > 0 ) updateDisplay( );
       if ( toast ) {
         TDToast.make( getResources().getQuantityString(R.plurals.read_calib_data, nr/2, nr/2, nr ) );
@@ -1033,7 +1034,14 @@ public class GMActivity extends Activity
         enableWrite( false );
         setTitleColor( TDColor.CONNECTED );
         ListerHandler handler = new ListerHandler( this ); // FIXME_LISTER
-        new DataDownloadTask( mApp, handler, this, DataType.DATA_CALIB ).execute();
+        // new DataDownloadTask( mApp, handler, this, DataType.DATA_CALIB ).execute();
+
+        // THIS HAS A PROBLEM need to set the lister to the download task
+        boolean downloading = mApp.mDataDownloader.toggleDownload();
+        // mApp.notifyListerStatus( handler, downloading ? ConnectionState.CONN_WAITING : ConnectionState.CONN_DISCONNECTED );
+        mApp.mDataDownloader.doDataDownload( handler, DataType.DATA_CALIB );
+
+        TDLog.v("GM set button DOWNLOAD on");
         TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMdownload_on );
         enableButtons( false );
       }

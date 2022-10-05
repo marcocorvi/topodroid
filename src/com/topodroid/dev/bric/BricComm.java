@@ -33,13 +33,14 @@ import com.topodroid.dev.ble.BleQueue;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.ListerHandler;
 import com.topodroid.TDX.R;
 // import com.topodroid.utils.TDUtil;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 
 // import android.os.Looper;
-import android.os.Handler;
+// import android.os.Handler;
 import android.content.Context;
 
 import android.bluetooth.BluetoothDevice;
@@ -586,7 +587,7 @@ public class BricComm extends TopoDroidComm
     
   // ----------------- CONNECT -------------------------------
 
-  private boolean connectBricDevice( Device device, Handler lister, int data_type ) // FIXME BLEX_DATA_TYPE
+  private boolean connectBricDevice( Device device, ListerHandler lister, int data_type ) // FIXME BLEX_DATA_TYPE
   {
     if ( mRemoteBtDevice == null ) {
       TDToast.makeBad( R.string.ble_no_remote );
@@ -623,7 +624,7 @@ public class BricComm extends TopoDroidComm
   }
 
   @Override
-  public boolean connectDevice( String address, Handler /* ILister */ lister, int data_type )
+  public boolean connectDevice( String address, ListerHandler lister, int data_type )
   {
     // TDLog.Log( TDLog.LOG_COMM, "BRIC comm ***** connect Device");
     mNrReadPackets = 0;
@@ -842,7 +843,7 @@ public class BricComm extends TopoDroidComm
 
   public void notifyStatus( int status )
   {
-    mApp.notifyStatus( status );
+    mApp.notifyListerStatus( mApp.mListerSet, status );
   }
 
 

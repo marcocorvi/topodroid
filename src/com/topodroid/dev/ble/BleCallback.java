@@ -125,7 +125,7 @@ public class BleCallback extends BluetoothGattCallback
   @Override
   public void onConnectionStateChange(BluetoothGatt gatt, int status, int state)
   {
-    // TDLog.f("BLE on connection state change: " + status );
+    // TDLog.v("BLE on connection state change: " + status );
     if ( isSuccess( status, "onConnectionStateChange" ) ) {
       if ( state == BluetoothProfile.STATE_CONNECTED ) {
         // TO CHECK THIS
@@ -153,6 +153,7 @@ public class BleCallback extends BluetoothGattCallback
         // TDLog.f( "BLE callback: on Connection State Change new state " + state );
       }
     } else {
+      // TDLog.v("BLE notify status WAITING");
       mComm.notifyStatus( ConnectionState.CONN_WAITING );
       if ( status == BluetoothGatt.GATT_INSUFFICIENT_ENCRYPTION 
         || status == BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION 
@@ -179,7 +180,7 @@ public class BleCallback extends BluetoothGattCallback
   public void onServicesDiscovered(BluetoothGatt gatt, int status)
   {
     // super.onServicesDiscovered( gatt, status );
-    // TDLog.f( "BLE on services discovered " + status );
+    // TDLog.v( "BLE on services discovered " + status );
     if ( isSuccess( status, "onServicesDiscovered" ) ) {
       int ret = mComm.servicesDiscovered( gatt ); // calls notifyStatus( ... CONNECTED )
       if ( ret == 0 ) {

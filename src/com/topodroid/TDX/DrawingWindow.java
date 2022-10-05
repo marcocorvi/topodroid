@@ -6312,7 +6312,7 @@ public class DrawingWindow extends ItemDrawer
         } else {
           mDataDownloader.toggleDownload();
           setConnectionStatus( mDataDownloader.getStatus() );
-          mDataDownloader.doDataDownload( DataType.DATA_SHOT );
+          mDataDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_SHOT );
         }
       }
     } else if ( TDLevel.overAdvanced && b == mButton1[ BTN_DIAL ] ) {
@@ -6665,7 +6665,7 @@ public class DrawingWindow extends ItemDrawer
         } else {
           mDataDownloader.toggleDownload();
           // setConnectionStatus( mDataDownloader.getStatus() ); // FIXME DistoXDOWN was not commented
-          mDataDownloader.doDataDownload( DataType.DATA_SHOT );
+          mDataDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_SHOT );
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BLUETOOTH
         doBluetooth( b, dismiss );
