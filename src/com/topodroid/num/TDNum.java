@@ -1387,6 +1387,9 @@ public class TDNum
   {
     ArrayList< NumCycle > cycles = new ArrayList<>();
     int bs = branches.size();
+    // TDLog.v("NUM make indep. cycles - branches " + + bs );
+    if ( bs == 0 ) return cycles;
+
     // TDLog.v("Indep. cycles on " + bs + " branches ");
     // StringBuilder sb = new StringBuilder();
     // for ( int k0 = 0; k0 < bs; ++k0 ) {
@@ -1398,6 +1401,7 @@ public class TDNum
     // }
     // TDLog.v( sb.toString() );
     
+    int cnt = 0;
     NumStack stack = new NumStack( bs );
     for ( int k0 = 0; k0 < bs; ++k0 ) {
       NumBranch b0 = branches.get(k0);
@@ -1405,28 +1409,34 @@ public class TDNum
       NumNode n0 = b0.n1; // start-node for the cycle
       b0.use = 1;         // start-branch is used
       n0.use = 0;         // but start-node is not used
-      stack.push( new NumStep(b0, b0.n2, k0 ) ); // step with b0 to the second node (k0 = where start scan branches, index in array branches
+      // TDLog.v("STACK push [" + k0 + "] " + b0.toString() );
+      stack.push( new NumStep(b0, b0.n2, k0 ) ); // step: n1 <--- b0 (k0) --> n2
       while ( ! stack.empty() ) {
+        // TDLog.v("BRANCH stack " + stack.size() );
         NumStep s1 = stack.top();
         NumNode n1 = s1.n;
-        // s1.k ++; // allow isolated loops
-        int k1 = s1.k;
-        if ( n1 == n0 ) {
-          cycles.add( buildCycle( stack ) );
-          // TDLog.v( "found cycle " + cycles.size() + " at " + n1.station.name );
+        // s1.k ++; // increase branch index
+        if ( n1 == n0 ) { // got a cycle
+          NumCycle cycle = buildCycle( stack );
+          cycles.add( cycle );
+          // TDLog.v( "found cycle " + cycles.size() + " at " + n1.station.name + ": " + cycle.toString() );
           s1.b.use = 2; // mark the last edge as no more usable
           s1.n.use = 0;
           stack.pop();
+          // TDLog.v("STACK pop");
         } else {
+          s1.k ++; // increase branch index
           int k2 = s1.k;
           for ( ; k2<bs; ++k2 ) {
             NumBranch b2 = branches.get(k2);
+            // TDLog.v("BRANCH ["+ k2 + "] use " + b2.use );
             if ( b2.use != 0 ) continue;
             NumNode n2 = b2.otherNode( n1 );
             if ( n2 != null && n2.use == 0 ) {
               b2.use = 1;
               n2.use = 1;
-              stack.push( new NumStep( b2, n2, k0 ) );
+              // TDLog.v("STACK push [" + k2 + "] " + b2.toString() );
+              stack.push( new NumStep( b2, n2, k0 ) );  // restart branch scan from k0
               s1.k = k2;
               break;
             }
@@ -1490,21 +1500,23 @@ public class TDNum
    */
   private void compensateSingleLoops( ArrayList< NumBranch > branches )
   {
+    // TDLog.v("NUM compensate single loops " + branches.size() );
     for ( NumBranch br : branches ) {
       br.computeError();
       if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) { // find the basis of loops with smallest error
         double error  = Math.sqrt( br.e * br.e + br.s * br.s + br.v * br.v);
         double length = br.length();
         if ( error > length * TDSetting.mLoopThr / 100.0 ) {
-          // TDLog.v("SELECTIVE skip singlo loop");
+          // TDLog.v("SELECTIVE skip single loop " + br.toString() );
           ++ nrInaccurateLoops;
           NumCycle c1 = new NumCycle(1);
           c1.addBranch( br, br.n2 ); // single loop base at branch node-2 so that branch is pos. directed
           mBadLoops.add( c1 );
           c1.setBadLoopShots();
-          return;
+          continue;
         }
       }
+      // TDLog.v("LOOP compensate " + br.toString() );
       br.compensateError( -br.e, -br.s, -br.v );
     }
   }
@@ -1678,13 +1690,29 @@ public class TDNum
   //
   private void compensateLoopClosure( ArrayList< NumNode > nodes, ArrayList< NumShot > shots )
   {
+    // TDLog.v("NUM loop compensation");
     ArrayList< NumBranch > branches = makeBranches( nodes, false );
+
+    // TDLog.v("NUM branches " + branches.size() );
 
     ArrayList< NumBranch > singleBranches = new ArrayList<>();
     makeSingleLoops( singleBranches, shots ); // check all shots without branch
+    // TDLog.v("NUM single loops " + singleBranches.size() );
     compensateSingleLoops( singleBranches );
+    // TDLog.v("NUM single loop compensated");
+
+    int bs = branches.size();
+    if ( bs == 0 ) {
+      // TDLog.v("NUM loop compensation no branch"); 
+      return;
+    }
+    // for ( NumBranch b : branches ) {
+    //   // TDLog.v("BRANCH: " + b.toString() );
+    // }
 
     ArrayList< NumCycle > cycles = makeIndependentCycles( branches );
+    // TDLog.v("NUM indep. loops " + cycles.size() );
+
     // TDLog.v("Branches " + branches.size() + " single " + singleBranches.size() + " cycles " + cycles.size() );
     // This is not necessary as the cycles are already independent
     // if ( TDSetting.mLoopClosure == ? ) {
@@ -1695,9 +1723,11 @@ public class TDNum
     //     }
     //   }
     // }
-
     int ls = cycles.size();
-    int bs = branches.size();
+    if ( ls == 0 ) {
+      // TDLog.v("NUM loop compensation no cycle"); 
+      return;
+    }
 
     double[] CE = new double[ ls ]; // closure errors : mLoopClosure = NEW
     double[] CS = new double[ ls ];
