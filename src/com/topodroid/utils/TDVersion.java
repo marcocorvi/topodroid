@@ -31,7 +31,7 @@ public class TDVersion
   public static final String SYMBOL_VERSION = "37";
 
   // last version of DistoX2 firmware
-  public static final String FIRMWARE_VERSION = "26";
+  public static final String FIRMWARE_VERSION = "27";
   
   // database version
   public static final String DB_VERSION = "46"; // NOTE agrees with Cave3DThParser values

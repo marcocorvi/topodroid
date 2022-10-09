@@ -158,7 +158,7 @@ public class FirmwareUtils
       case 2610: len = 25040; break;
       case 2630: len = 25568; break;
       case 2640: len = 25604; break;
-      case 2700: len = 15632; break; // 15632 15576 15632
+      case 2700: len = 15636; break; // 15632 15576 15632 15636
     }
     if ( len == 0 ) return false; // bad firmware version
     len /= 4; // number of int to read
@@ -189,7 +189,7 @@ public class FirmwareUtils
       case 2610: return ( checksum == 0xcae98256 );
       case 2630: return ( checksum == 0x1b1488c5 );
       case 2640: return ( checksum == 0xee2d70ff ); // fixed error in magnetic calib matrix
-      case 2700: return ( checksum == 0xeb6bad67 ); // 0xf463405e 0xc637eb7c 0xeb6bad67
+      case 2700: return ( checksum == 0xc64bfb72 ); // 0xf463405e 0xc637eb7c 0xeb6bad67 0xc64bfb72
     }
     return false;
   }
@@ -440,12 +440,9 @@ public class FirmwareUtils
    */
   private static int readFirmwareTian( byte[] buf )
   {
-    if ( buf[7] == (byte)0xfb ) {
-      if ( buf[6] == (byte)0xD8 ) {
-        return 2700;
-      }
-    }
-    return 2700;  //only for debug
-    //return -99; // failed on byte[7]
+    // TDLog.v( String.format( " %02x %02x %02x %02x", buf[4], buf[5], buf[6], buf[7] ) ); //  03 f0 d8 fb
+    // TDLog.v( String.format( " %02x %02x %02x %02x %02x", buf[12], buf[13], buf[14], buf[15], buf[16] ) ); // d5 08 00 08 20
+    if ( buf[4] == (byte)0x03 && buf[5] == (byte)0xf0 && buf[6] == (byte)0xd8 && buf[7] == (byte)0xfb ) return 2700;
+    return -99; // failed on byte[7]
   }
 }
