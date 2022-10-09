@@ -301,7 +301,7 @@
     <string name="error_name_exists">Такой проект уже существует</string>
     <string name="error_name_invalid">Недопустимое название проекта</string>
     <string name="error_name_required">Требуется название</string>
-    <!-- TODO string name="error_text_required">Text required</string -->
+    <string name="error_text_required">Требуется ввести текст</string>
     <string name="error_station_number">Неверное кол-во пикетов</string>
     <string name="error_name_duplicate">Повторяющееся имя</string>
     <string name="error_no_section_in_section">Сечение внутри поперечного сечения недопустимо</string>
@@ -2051,7 +2051,7 @@
     <!-- UNUSED string name="warning_no_file">Внимание: 3d файл не обнаружен</string -->
     <!-- UNUSED string name="warning_empty_cwd">Внимание: не задан рабочий каталог</string -->
     <string name="warning_no_parent">Внимание: невозможно перейти на каталог выше</string>
-    <!-- TODO string name="warning_nogrant_camera">Camera permission has not been granted</string -->
+    <string name="warning_nogrant_camera">Разрешение камеры не было предоставлено</string>
     <string name="no_permissions">Приложение не может работать без необходимых разрешений</string>
 
     <!-- UNUSED string name="done_fractals">Завершено fractals dims</string -->
