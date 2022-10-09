@@ -692,7 +692,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="stat_angle_error">Szöghibák %1$.2f ± %2$.2f</string>
     <string name="shot_title">MÉRÉS %1$s - %2$s</string>
     <string name="shot_data">H %1$.2f  I %2$.1f  L %3$.1f</string>
-    <string name="survey_split_move_title">Mérés elvág/mozgat</string>
+    <string name="survey_split_move_title">Mérést feloszt/mozgat</string>
 
     <string name="survey_stat_duplicate">Kettőzött mérés %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Segédpontok %1$d</string>
@@ -805,7 +805,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="button_search"    >Keres    </string>
     <string name="button_merge"     >Egyesít     </string>
     <string name="button_saved"     >Mentett pont</string>
-    <string name="button_split"     >Megoszt     </string>
+    <string name="button_split"     >Feloszt     </string>
     <string name="button_station"   >Központ:</string>
     <string name="button_store"     >Tárol</string>
     <string name="button_swap"      >Csere      </string>
