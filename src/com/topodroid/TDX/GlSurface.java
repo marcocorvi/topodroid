@@ -171,6 +171,7 @@ public class GlSurface extends GlShape
    */
   private synchronized void bindBitmap()
   {
+    if ( mBitmap == null ) return;
     if ( mBitmapBounded ) return;
     mTexId = GL.bindTexture( mBitmap );
     // mBitmap.recycle();

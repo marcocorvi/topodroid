@@ -389,13 +389,20 @@ class GL
   static void unbindTexture( int id )     { unbindBitmap( GLES20.GL_TEXTURE_2D, id ); }
   static void unbindTextTexture( int id ) { unbindBitmap( GLES20.GL_TEXTURE_2D, id ); }
 
+
+  // @note bitmap not-null
   private static int bindBitmap( int target, Bitmap bitmap, int wrap, boolean one_byte )
   {
+    // if ( bitmap == null ) {
+    //   TDLog.Error("GL bind null bitmap");
+    //   return 0;
+    // }
     final int[] texId = new int[1];
     GLES20.glGenTextures( 1, texId, 0 ); // 1 = number, 0 = offset
     if ( texId[0] == 0 ) {
       return 0;
     }
+    TDLog.v("GL bind bitmap target " + target + " texIT " + texId[0] );
     GLES20.glBindTexture( target, texId[0] );
     GLES20.glTexParameteri( target, GLES20.GL_TEXTURE_WRAP_S, wrap );
     GLES20.glTexParameteri( target, GLES20.GL_TEXTURE_WRAP_T, wrap );
