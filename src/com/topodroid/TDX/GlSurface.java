@@ -32,22 +32,22 @@ public class GlSurface extends GlShape
 
   static int   mStyle = STYLE_FILL; // TODO to be used
 
-  final static int COORDS_PER_VERTEX = 3;
-  final static int COORDS_PER_NORMAL = 3;
-  final static int COORDS_PER_TEXEL  = 2;
+  final static int COORDS_PER_VERTEX = 3;  // XYZ coords
+  final static int COORDS_PER_NORMAL = 3;  // XYZ normal
+  final static int COORDS_PER_TEXEL  = 2;  // texture bitmap
   final static int OFFSET_VERTEX = 0;
   final static int OFFSET_NORMAL = COORDS_PER_VERTEX;
   final static int OFFSET_TEXEL  = COORDS_PER_VERTEX + COORDS_PER_NORMAL;
 
-  final static int STRIDE = COORDS_PER_VERTEX + COORDS_PER_NORMAL + COORDS_PER_TEXEL;
+  final static int STRIDE = COORDS_PER_VERTEX + COORDS_PER_NORMAL + COORDS_PER_TEXEL; // 8 floats
   final static int BYTE_STRIDE = STRIDE * 4; // 4 = Float.BYTES;
 
   private int mTexId = -1; // loaded texture id (neg. for gray)
 
   private int mUPointSize;
 
-  private int vertexCount = 0;
-  private int triangleCount = 0;
+  private int vertexCount   = 0; // number of vertices = 3 * triangleCount
+  private int triangleCount = 0; // number of triangles
 
   final static float[] mColor = { 1, 1, 1, 1.0f };
   static float mAlpha = 1.0f;
@@ -76,7 +76,13 @@ public class GlSurface extends GlShape
   // ------------------------------------------------------
   // PROGRAM
 
-  // DEM data in survey frame, XYZ med in OpenGL
+  /** initialize the surface with the DEM read from file
+   * @param dem   parser with the data of the DEM
+   * @param xmed  ...
+   * @param ymed  survey data medium elevation
+   * @param zmed  ...
+   * @note DEM data in survey frame, XYZ med in OpenGL
+   */
   boolean initData( ParserDEM dem, double xmed, double ymed, double zmed )
   {
     int nx = dem.dimX();
@@ -92,9 +98,16 @@ public class GlSurface extends GlShape
     return isValid;
   }
 
-  // Lox/Therion DEM data in survey frame, XYZ med in OpenGL
-  // therion grid data are for ( east .. west ) for ( north .. south ) 
-  // N.B. value are already in E-N frame, therefore "add" zmed (which is south)
+  /** initialize the surface with the DEM read from model
+   * @param surface DEM data
+   * @param xmed  ...
+   * @param ymed  survey data medium elevation
+   * @param zmed  ...
+   * @param flip  ...
+   * Lox/Therion DEM data in survey frame, XYZ med in OpenGL
+   * therion grid data are for ( east .. west ) for ( north .. south ) 
+   * N.B. value are already in E-N frame, therefore "add" zmed (which is south)
+   */
   boolean  initData( DEMsurface surface, double xmed, double ymed, double zmed, boolean flip )
   {
     int nx = surface.mNr1;
@@ -341,6 +354,17 @@ public class GlSurface extends GlShape
     buffer[boff+2] = z/d;
   }
 
+  /** initialize the GL buffer
+   * @param data   data buffer with DEM values
+   * @param nx     number in west-east cells
+   * @param nz     number in north-south cells
+   * @param dx     X step
+   * @param dz     Z step
+   * @param xx     offset of X coord
+   * @param zz     offset of Z coord
+   * @param ymed   reference Y (altitude)
+   * @return true if success
+   */
   private boolean initDataBuffer( float[] data, int nx, int nz, float dx, float dz, float xx, float zz, float ymed )
   {
     triangleCount = vertexCount = 0;

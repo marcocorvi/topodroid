@@ -440,6 +440,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public int servicesDiscovered( BluetoothGatt gatt )
   {
+    TDLog.v( "XBLE comm discovered services");
     enqueueOp( new BleOpNotify( mContext, this, DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_READ_UUID, true ) );
     doNextOp();
     mBTConnected  = true;
@@ -520,7 +521,7 @@ public class DistoXBLEComm extends TopoDroidComm
     clearPending();
     mCallback.closeGatt();
     if ( mReconnect ) {
-      // TDLog.v( "XBLE comm ***** reconnect yes Device = [4a] status WAITING" );
+      TDLog.v( "XBLE comm ***** reconnect yes Device = [4a] status WAITING" );
       notifyStatus( ConnectionState.CONN_WAITING );
       enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
       doNextOp();
@@ -557,10 +558,10 @@ public class DistoXBLEComm extends TopoDroidComm
    * @param srvUuid   service UUID
    * @param chrtUuid  chracteristic UUID
    * @param bytes     data array byte
-   * @param addHeader whether to add a (6-byte) header "data:#"
+   * @param addHeader whether to add a (6-byte) header "data:#" and 2-byte footer "\r\n"
    * @return ...
    */
-  public boolean enlistWrite( UUID srvUuid, UUID chrtUuid, byte[] bytes, boolean addHeader )
+  private boolean enlistWrite( UUID srvUuid, UUID chrtUuid, byte[] bytes, boolean addHeader )
   {
     BluetoothGattCharacteristic chrt = mCallback.getWriteChrt( srvUuid, chrtUuid );
     if ( chrt == null ) {
@@ -681,9 +682,11 @@ public class DistoXBLEComm extends TopoDroidComm
   }
 
   // ----------------- SEND COMMAND -------------------------------
+
   /** send a command to the DistoXBLE
    * @param cmd    command code
    * @return true if the command was scheduled
+   * @note used by the protocol to send ack
    */
   public boolean sendCommand( int cmd )
   {
@@ -860,7 +863,7 @@ public class DistoXBLEComm extends TopoDroidComm
     // TDLog.v("XBLE toggle calib");
     boolean ret = false;
     if ( ! tryConnectDevice( address, null, 0 ) ) return false;
-    byte[] result = readMemory( DistoXBLEDetails.STATUS_ADDRESS ,4);
+    byte[] result = readMemory( DistoXBLEDetails.STATUS_ADDRESS, 4);
     if ( result == null ) {
       closeDevice( false );
       return false;

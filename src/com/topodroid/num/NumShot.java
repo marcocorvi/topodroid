@@ -28,9 +28,9 @@ public class NumShot
 
   public int mBranchDir; // branch direction
   public int mDirection; // direction of the block (1 same, -1 opposite)
-                  // this is used only to decide between barrier and hidden
-  NumBranch branch;
-  boolean mUsed;  // whether the shot has been used in the station coords re-computation after loop-closure
+                         // this is used only to decide between barrier and hidden
+  NumBranch branch; // branch to which this shot belongs (if any)
+  boolean mUsed;    // whether the shot has been used in the station coords re-computation after loop-closure
   public boolean mIgnoreExtend;
   // int mExtend;
   // float mLength;
@@ -40,16 +40,35 @@ public class NumShot
   private float mAnomaly;  // local magnetic anomaly
   private boolean mBadLoop = false; // whether the shot belons to a bad loop
 
+  /** @return the shot length
+   */
   float length()  { return mAvgLeg.length(); }
+
+  /** @return the shot azimuth
+   */
   float bearing() { return mAvgLeg.bearing(); }
+
+  /** @return the shot clino
+   */
   float clino()   { return mAvgLeg.clino(); }
 
-  // reset the average leg values
+  /** reset the average leg values
+   * @param d   length
+   * @param b   azimuth
+   * @param c   clino
+   */
   void reset( float d, float b, float c ) { mAvgLeg.set( d, b, c ); }
 
+  /** @return the shot first block
+   */
   public DBlock getFirstBlock() { return firstBlock; /* blocks.get(0); */ }
 
+  /** @return the shot reduced extend
+   */
   public float getReducedExtend() { return firstBlock.getReducedExtend(); }
+
+  /** @return the shot reduced flag
+   */
   public int getReducedFlag()     { return firstBlock.getReducedFlag(); }
 
   /** @return the shot comment string
@@ -112,8 +131,11 @@ public class NumShot
     // }
   }
 
-  // compute the coords of "st" from those of "sf"
-  // N.B. this uses the "reduced extend" which is 0 if the DBlock extend is not set (ie > 1)
+  /** compute the coords of "st" from those of "sf"
+   * @param st   station of which to compute the coordinates
+   * @param sf   station with known coords
+   * N.B. this uses the "reduced extend" which is 0 if the DBlock extend is not set (ie %gt; 1)
+   */
   private void compute( NumStation st, NumStation sf )
   {
     float l = length();
@@ -140,6 +162,8 @@ public class NumShot
   //   return sh.from == from || sh.to == from || sh.from == to || sh.to == to;
   // }
 
+  /** @return the string presenttaion of the shot (debug)
+   */
   public String toString()
   { 
     if ( from != null ) {

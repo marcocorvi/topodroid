@@ -52,7 +52,7 @@ public class FirmwareDialog extends MyDialog
   private RadioButton mBtnDump;
   private RadioButton mBtnUpload;
   private Button mBtnOK;
-  // private Button mBtnClose;
+  private Button mBtnClose;
 
   private EditText mETfile;
 
@@ -81,8 +81,8 @@ public class FirmwareDialog extends MyDialog
 
     mBtnUpload = (RadioButton) findViewById(R.id.firmware_upload );
     mBtnDump   = (RadioButton) findViewById(R.id.firmware_dump );
-    mBtnOK = (Button) findViewById(R.id.firmware_ok);
-    // mBtnClose = (Button) findViewById(R.id.firmware_close);
+    mBtnOK     = (Button) findViewById(R.id.firmware_ok);
+    mBtnClose  = (Button) findViewById(R.id.firmware_close);
 
     mETkeyListener = mETfile.getKeyListener();
     mETfile.setOnClickListener( this );
@@ -95,7 +95,7 @@ public class FirmwareDialog extends MyDialog
     mBtnUpload.setOnClickListener( this );
     mBtnDump.setOnClickListener( this );
     mBtnOK.setOnClickListener( this );
-    // mBtnClose.setOnClickListener( this );
+    mBtnClose.setOnClickListener( this );
     
   }
 
@@ -163,6 +163,8 @@ public class FirmwareDialog extends MyDialog
         TDLog.v( "Detected Firmware version " + fw + " check " + check );
         askUpload( filename, fw, check );
       }
+    } else if ( vid == R.id.firmware_close ) {
+      dismiss();
     }
   }
 

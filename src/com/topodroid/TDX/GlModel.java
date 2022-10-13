@@ -105,7 +105,7 @@ public class GlModel
 
   /** @return true if the rendered has a DEM surface
    */
-  boolean hasSurface() { return  surfaceMode && glSurface != null; }
+  boolean hasSurface() { return /* surfaceMode && */ glSurface != null; }
 
   // /** rebind textures - empty: unused
   //  */

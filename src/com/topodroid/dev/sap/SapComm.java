@@ -276,13 +276,13 @@ public class SapComm extends TopoDroidComm
     return 0;
   }
 
-  // protected boolean startCommThread( int to_read, ListerHandler lister, int data_type ) 
+  // protected boolean startCommThread( int to_read, ListerHandler lister, int data_type, int timeout ) 
   // {
   //   if ( mCommThread != null ) {
   //     TDLog.e( "SAP comm start Comm Thread already running");
   //   }
   //   // TDLog.v( "SAP comm start comm thread");
-  //   mCommThread = new CommThread( TopoDroidComm.COMM_GATT, mProtocol, to_read, lister, data_type );
+  //   mCommThread = new CommThread( TopoDroidComm.COMM_GATT, to_read, lister, data_type, timeout );
   //   mCommThread.start();
   //   return true;
   // }

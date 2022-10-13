@@ -79,21 +79,26 @@ class DialogSurface extends MyDialog
     mEast  = (EditText) findViewById( R.id.east );
     mNorth = (EditText) findViewById( R.id.north );
 
+    Button btn_dem = (Button)findViewById( R.id.dem_load );
     TextView mTextureFile = (TextView) findViewById( R.id.texture_file );
     Button btn_texture = (Button)findViewById( R.id.texture_load );
+    // TDLog.v("GL has surface " + mTopoGl.hasSurface() );
     if ( mTopoGl.hasSurface() ) {
       if ( mTopoGl.mTextureName != null ) {
         mTextureFile.setText( String.format( mContext.getResources().getString( R.string.texture_file ), mTopoGl.mTextureName ) );
+        btn_texture.setText( R.string.texture );
       } else {
         mTextureFile.setVisibility( View.GONE );
       }
       btn_texture.setOnClickListener( this );
+      btn_dem.setText( R.string.dem );
     } else {
       mTextureFile.setVisibility( View.GONE );
       btn_texture.setVisibility( View.GONE );
       mCBgps.setVisibility( View.GONE ); // WITH-GPS
       mEast.setVisibility( View.GONE );
       mNorth.setVisibility( View.GONE );
+      // btn_dem.setText( R.string.dem_load );
     }
 
     mCBproj.setChecked( GlModel.surfaceLegsMode );

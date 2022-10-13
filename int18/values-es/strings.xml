@@ -1957,13 +1957,16 @@ debe ajustarlos a sus necesidades./n/n
     <string name="surface_north">Norte</string>
     <!-- NO string name="dem_file">DEM %1$s</string -->
     <string name="dem_load">cargar</string>
+    <!-- TODO string name="dem_loading">Loading surface ... please wait</string -->
 
     <string name="dem_failed">ERROR: DEM cargando</string>
     <string name="dem_ok">Lectura DEM</string>
+    <string name="dem">DEM</string>
     <!-- NO string name="texture_file">%1$s</string -->
     <string name="texture_load">cargando texturas</string>
     <string name="texture_failed">ERROR: carga de textura</string>
     <string name="texture_ok">Leyendo archivo de textura</string>
+    <!-- TODO string name="texture">DTM</string -->
     <string name="sketch_load">cargar</string>
     <string name="sketch_failed">ERROR: cargando dibujo</string>
     <string name="sketch_ok">Dibujo de lectura</string>

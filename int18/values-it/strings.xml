@@ -1955,14 +1955,16 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="surface_east">Est</string>
     <string name="surface_north">Nord</string>
     <!-- NO string name="dem_file">DEM %1$s</string -->
-    <string name="dem_load">carica</string>
-
+    <string name="dem_load">carica DEM</string>
+    <string name="dem_loading">Caricamento file ... attendi</string>
     <string name="dem_failed">ERRORE: caricamento DEM</string>
-    <string name="dem_ok">Lettura DEM</string>
+    <string name="dem_ok">Caricato file DEM</string>
+    <string name="dem">DEM</string>
     <!-- NO string name="texture_file">%1$s</string -->
-    <string name="texture_load">caricamento trama</string>
-    <string name="texture_failed">ERRORE: caricamento trama</string>
-    <string name="texture_ok">Lettura file trama</string>
+    <string name="texture_load">caricamento DTM</string>
+    <string name="texture_failed">ERRORE: caricamento DTM</string>
+    <string name="texture_ok">Caricato file DTM</string>
+    <string name="texture">DTM</string>
     <string name="sketch_load">carica</string>
     <string name="sketch_failed">ERRORE: caricamento disegno</string>
     <string name="sketch_ok">Lettura disegno</string>

@@ -354,10 +354,11 @@ public class TopoDroidComm
   /** start the Comm thread
    * @param to_read   number of packets to read
    * @param lister    data lister
-   * @param data_type expected data type (?)
+   * @param data_type expected data type (?)A
+   * @param timeout   closing the thread if no data raceived within the timeout (UNUSED)
    * @return always false (ie, thread not started) by default
    */
-  protected boolean startCommThread( int to_read, ListerHandler lister, int data_type ) 
+  protected boolean startCommThread( int to_read, ListerHandler lister, int data_type, int timeout ) 
   {
     return false;
   }

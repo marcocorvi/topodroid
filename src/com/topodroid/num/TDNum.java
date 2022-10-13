@@ -1500,6 +1500,7 @@ public class TDNum
    */
   private void compensateSingleLoops( ArrayList< NumBranch > branches )
   {
+    if ( branches.size() == 0 ) return;
     // TDLog.v("NUM compensate single loops " + branches.size() );
     for ( NumBranch br : branches ) {
       br.computeError();
@@ -1575,11 +1576,9 @@ public class TDNum
     ArrayList< NumBranch > branches = new ArrayList<>();
     if ( nodes.size() > 0 ) {
       for ( NumNode node : nodes ) {
-        // TDLog.v("node " + node.toString() );
         for ( NumShot shot : node.shots ) {
           if ( shot.branch != null ) continue;
           NumBranch branch = new NumBranch( NumBranch.BRANCH_CROSS_CROSS, node );
-          // TDLog.v("shot " + shot.toString() ); 
           NumStation sf0 = node.station;
           NumShot sh0    = shot;
           NumStation st0 = sh0.to;
@@ -1590,21 +1589,16 @@ public class TDNum
             sh0.mBranchDir = -1; // swap stations
             st0 = sh0.from;
           }
-          // TDLog.v( "start branch at " + sf0.name + " - " + st0.name );
           while ( st0 != sf0 ) { // follow the shot 
-            // TDLog.v("add shot " + sh0.toString() );
             branch.addShot( sh0 ); // add shot to branch and find next shot
             sh0.branch = branch;
             if ( st0.node != null ) { // end-of-branch
-              // TDLog.v( "end of branch at " + st0.node.station.name );
               branch.setLastNode( st0.node );
               branches.add( branch );
               break;
-            } else {
-              // TDLog.v("nodeless station " + st0.toString() );
             }
-            NumShot sh1 = st0.s1;
-            if ( sh1 == sh0 ) { sh1 = st0.s2; }
+            NumShot sh1 = st0.s1; // try station first node
+            if ( sh1 == sh0 ) { sh1 = st0.s2; } // use station second node
             if ( sh1 == null ) { // dangling station: BRANCH_CROSS_END branch --> drop
               // TDLog.v("BRANCH_CROSS_END branch");
               // mEndBranches.add( branch );
@@ -1614,18 +1608,16 @@ public class TDNum
               }
               break;
             }
-            if ( sh1.from == st0 ) { // move forward
+            if ( sh1.from == st0 ) { // forward shot: next station is TO
               sh1.mBranchDir = 1;
               st0 = sh1.to; 
             } else {  
-              sh1.mBranchDir = -1; // swap
+              sh1.mBranchDir = -1; // backward shot: next station is FROM
               st0 = sh1.from;
             }
-            // TDLog.v( " move to " + st0.name );
             sh0 = sh1;
           }
           if ( st0 == sf0 ) { // closed-loop: this is not an error (just a very wierd case)
-            // TDLog.v("add shot " + sh0.toString() );
             branch.addShot( sh0 ); // add shot to branch and find next shot
             sh0.branch = branch;
             branch.setLastNode( st0.node );
@@ -1698,9 +1690,18 @@ public class TDNum
     ArrayList< NumBranch > singleBranches = new ArrayList<>();
     makeSingleLoops( singleBranches, shots ); // check all shots without branch
     // TDLog.v("NUM single loops " + singleBranches.size() );
-    compensateSingleLoops( singleBranches );
-    // TDLog.v("NUM single loop compensated");
 
+    // can use a global multiloop compensation
+    // for ( NumBranch br : branches ) singleBranches.add( br );
+    // compensateMultiLoops( singleBranches );
+
+    // of separate multiloop followed by singleloop
+    compensateSingleLoops( singleBranches );
+    compensateMultiLoops( branches );
+  }
+
+  private void compensateMultiLoops( ArrayList< NumBranch > branches )
+  {
     int bs = branches.size();
     if ( bs == 0 ) {
       // TDLog.v("NUM loop compensation no branch"); 

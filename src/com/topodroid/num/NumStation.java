@@ -46,15 +46,32 @@ public class NumStation extends NumSurveyPoint
   public boolean barrier() { return mBarrierAndHidden || mHidden < 0; }
   public boolean hidden()  { return mBarrierAndHidden || mHidden > 0; }
 
+  /** @return true if the station has 3D coords
+   */
   public boolean has3DCoords() { return mHas3DCoords; }
+
+  /** clear the station 3D coords flag
+   */
   public void clearHas3DCoords( ) { mHas3DCoords = false; }
+
+  /** set the station 3D coords flag to true
+   */
   public void setHas3DCoords( ) { mHas3DCoords = true; }
 
+  /** @return true if the station has "extend" flag
+   */
   public boolean hasExtend() { return mHasExtend; }
+
+  /** set the station has "extend" flag
+   * @param has_extend   "extend" flag
+   */
   public void setHasExtend( boolean has_extend ) { mHasExtend = has_extend; }
 
   private ArrayList< NumAzimuth > mLegs; // ordered list of legs at the shot (used to compute extends)
 
+  /** cstr
+   * @param id  station name
+   */
   public NumStation( String id )
   {
     super();
@@ -72,6 +89,15 @@ public class NumStation extends NumSurveyPoint
     mLegs = new ArrayList<>();
   }
 
+  /** cstr
+   * @param id    station name
+   * @param from  FROM station
+   * @param d     distance FROM-this
+   * @param b     azimuth FROM-this
+   * @param c     clino FROM-this
+   * @param extend extend value
+   * @param has_extend whether the station has extend
+   */
   NumStation( String id, NumStation from, float d, float b, float c, float extend, boolean has_extend )
   {
     super();
@@ -98,8 +124,10 @@ public class NumStation extends NumSurveyPoint
     // TDLog.v( "NumStation cstr " + id + " from " + from.name + " has coords " + mHasExtend + " " + from.mHasExtend );
   }
 
-  // azimuth [degrees]
-  // extend  [-1,0,+1]
+  /** set the station azimuth
+   # @param azimuth  azimuth [degrees]
+   * @param extend   extend  [-1,0,+1]
+   */
   void addAzimuth( float azimuth, float extend ) 
   {
     // TDLog.v( "Station " + name + " add azimuth " + azimuth + " extend " + extend );
@@ -114,6 +142,8 @@ public class NumStation extends NumSurveyPoint
     mLegs.add( leg );
   }
 
+  /** compute the azimuths of the legs at this station
+   */
   void setAzimuths()
   {
     int sz = mLegs.size();
@@ -178,9 +208,11 @@ public class NumStation extends NumSurveyPoint
     // }
   }
 
-  // called by TDNum.computeNum for splays
-  // @param b bearing [degrees]
-  // @param e original splay extend
+  /** compute the station extend
+   * @param b bearing [degrees]
+   * @param e original splay extend
+   * @note called by TDNum.computeNum for splays
+   */
   float computeExtend( float b, float e )
   {
     // if ( e >= ExtendType.EXTEND_UNSET ) { 

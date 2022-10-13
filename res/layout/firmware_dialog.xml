@@ -50,9 +50,13 @@
       android:layout_height="wrap_content"
       android:gravity="end"
       >
-      <Button
+      <Button android:id="@+id/firmware_close"
         style="@style/button_default"
-        android:id="@+id/firmware_ok"
+        android:layout_marginRight="@dimen/marginh"
+        android:text="@string/button_close"
+      />
+      <Button android:id="@+id/firmware_ok"
+        style="@style/button_default"
         android:text="@string/button_ok"
       />
     </LinearLayout>

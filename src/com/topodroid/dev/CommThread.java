@@ -24,8 +24,8 @@ public class CommThread extends Thread
   int mType;
 
   private TopoDroidComm     mComm;
-  // private TopoDroidProtocol mProtocol;
   private int toRead; // number of packet to read
+  private int mTimeout; // data receiving timeout
   // private ILister mLister;
   ListerHandler mLister; // = null; // FIXME_LISTER
   // private long mLastShotId;   // last shot id
@@ -45,15 +45,16 @@ public class CommThread extends Thread
    * @param to_read     number of data to read (use -1 to read forever until timeout or an exception)
    * @param lister      optional data lister
    * @param data_type   packet datatype (either shot or calib)
+   * @param timeout     data receiving timeout (UNUSED)
    */
-  public CommThread( int type, TopoDroidComm comm, /* TopoDroidProtocol protocol, */ int to_read, ListerHandler lister, int data_type ) // FIXME_LISTER
+  public CommThread( int type, TopoDroidComm comm, int to_read, ListerHandler lister, int data_type, int timeout ) // FIXME_LISTER
   {
     mType  = type;
     toRead = to_read;
     mComm  = comm;
-    // mProtocol = protocol;
     mLister   = lister;
     mDataType = data_type;
+    mTimeout  = timeout; 
     // reset nr of read packets 
     mComm.setNrReadPackets( 0 );
     // mLastShotId = 0;
@@ -66,6 +67,7 @@ public class CommThread extends Thread
   {
     doWork = true;
     mComm.setHasG( false );
+    // TODO use mTimeout
 
     // TDLog.v("RF Comm Thread start");
 
@@ -74,7 +76,6 @@ public class CommThread extends Thread
       while ( doWork && mComm.getNrReadPackets() != toRead ) {
         // TDLog.v( "RF comm loop: read " + mComm.getNrReadPackets() + " to-read " + toRead );
         
-        // int res = mProtocol.readPacket( (toRead >= 0), mDataType );
         int res = mComm.readingPacket( (toRead >= 0), mDataType );
         // TDLog.v( "RF comm read_packet returns " + res );
         if ( res == DataType.PACKET_NONE ) {
@@ -99,7 +100,6 @@ public class CommThread extends Thread
       }
     } else { // if ( mType == COMM_GATT ) 
       // Log.v("XBLE TD comm: proto read_packets");
-      // mProtocol.readPacket( true, mDataType ); // start reading a packet
       mComm.readingPacket( true, mDataType );
     }
     // TDLog.Log( TDLog.LOG_COMM, "RF comm thread run() exiting");

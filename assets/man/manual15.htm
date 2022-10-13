@@ -132,10 +132,12 @@ If the (Therion or Loch) model contains surface data (Digital Elevation Model), 
 with the texture (if available).<br>
 The surface dialog has a button to load a DEM from a file. The supported formats are ascii (.asc or .ascii) and Therion grid (.grid). 
 Only the relevant portion of the DEM file is loaded.<br>
-The survey and the DEM data file must be in the same Cartographic Coordinate Reference System.
+The survey and the DEM data file must be in the same (cartographic) Coordinate Reference System.
 If the survey fixed point coordinates have been transformed into another reference system,
-the transformed coordinates are used to reference the model.
-if it has only long-lat (WGS84) coordinates, the WGS-84 system is used.<br><p>
+the transformed coordinates are used to reference the model and the DEM data must be
+in that model.
+If the survey has only long-lat (WGS84) coordinates, the WGS-84 system is used.<br>
+The DEM extent must cover the area of the model.<br><p>
 
 The transparency of the surface is adjustable. If fully opaque the portions of surface behind others are hidden.<br>
 The projection of the survey centerline on the surface can be displayed (blue).<br>

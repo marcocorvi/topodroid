@@ -721,7 +721,11 @@ public class TopoGL extends Activity
       }
     } else if ( p++ == pos ) { // SURFACE ALPHA
       if ( mParser != null ) {
-        new DialogSurface( this, this ).show();
+        if ( onDEMloading ) {
+          Toast.makeText( this, R.string.dem_loading, Toast.LENGTH_SHORT ).show();
+        } else {
+          new DialogSurface( this, this ).show();
+        }
       } else {
         Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
       }
@@ -1528,6 +1532,7 @@ public class TopoGL extends Activity
           mDEMname = null; // failed
           TDToast.make( R.string.dem_failed );
         }
+        onDEMloading = false;
       }
     }).execute( uri );
   }
@@ -2846,14 +2851,23 @@ public class TopoGL extends Activity
   // final static private int REQUEST_TEMPERATURE_FILE  = 105;
 
   private ExportData mExport = null; // type; FLAGS: splays, walls, surface, station; mime
+  boolean onDEMloading = false;
 
   /** request selection of a DEM file
    */
-  void selectDEMFile( )     { selectFile( REQUEST_DEM_FILE,     Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_dem_file,     null ); }
+  void selectDEMFile( )
+  {
+    onDEMloading = true;
+    selectFile( REQUEST_DEM_FILE, Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_dem_file, null ); 
+  }
 
   /** request selection of a texture file
    */
-  void selectTextureFile( ) { selectFile( REQUEST_TEXTURE_FILE, Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_texture_file, null ); }
+  void selectTextureFile( )
+  {
+    onDEMloading = true;
+    selectFile( REQUEST_TEXTURE_FILE, Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_texture_file, null ); 
+  }
 
   /** request selection of an import file
    */
@@ -2908,10 +2922,18 @@ public class TopoGL extends Activity
     Uri uri = intent.getData();
     switch ( request ) {
       case REQUEST_DEM_FILE:
-        if ( uri != null ) openDEM( uri );
+        if ( uri != null ) {
+          openDEM( uri );
+        } else {
+          onDEMloading = false;
+        }
         break;
       case REQUEST_TEXTURE_FILE:
-        if ( uri != null ) openTexture( uri );
+        if ( uri != null ) {
+          openTexture( uri );
+        } else {
+          onDEMloading = false;
+        }
         break;
       // case REQUEST_TEMPERATURE_FILE:
       //   if ( uri != null ) openTemperature( uri );

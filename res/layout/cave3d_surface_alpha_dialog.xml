@@ -20,14 +20,14 @@
       >
       <Button android:id="@+id/dem_load"
         android:layout_width="0dp" 
-        android:layout_weight="50" 
+        android:layout_weight="20" 
         android:layout_height="wrap_content" 
         android:gravity="start"
         android:text="@string/dem_load"
         />
       <TextView android:id="@+id/dem_file"
         android:layout_width="0dp" 
-        android:layout_weight="50" 
+        android:layout_weight="80" 
         android:layout_height="wrap_content" 
         android:gravity="start"
         />
@@ -45,14 +45,14 @@
       >
       <Button android:id="@+id/texture_load"
         android:layout_width="0dp" 
-        android:layout_weight="50" 
+        android:layout_weight="20" 
         android:layout_height="wrap_content" 
         android:gravity="start"
         android:text="@string/texture_load"
         />
       <TextView android:id="@+id/texture_file"
         android:layout_width="0dp" 
-        android:layout_weight="50" 
+        android:layout_weight="80" 
         android:layout_height="wrap_content" 
         android:gravity="start"
         />

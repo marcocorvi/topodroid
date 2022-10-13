@@ -103,7 +103,7 @@ public class DistoX310Comm extends DistoXComm
           if ( mCommThread == null ) {
             if ( to_read > 0 ) {
               // TDLog.v( "X310 comm: RF comm thread start ... ");
-              startCommThread( 2*to_read, lister, data_type );  // each data has two packets
+              startCommThread( 2*to_read, lister, data_type, 0 );  // each data has two packets - (0 no timeout)
               while ( mCommThread != null ) {
                 TDUtil.slowDown( 100 );
               }
