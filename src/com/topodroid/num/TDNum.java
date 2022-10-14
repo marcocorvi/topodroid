@@ -24,6 +24,7 @@ import com.topodroid.TDX.SurveyInfo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import java.util.Comparator;
 // import java.util.Locale;
 import java.util.HashMap;
 
@@ -1696,8 +1697,8 @@ public class TDNum
     // compensateMultiLoops( singleBranches );
 
     // of separate multiloop followed by singleloop
-    compensateSingleLoops( singleBranches );
     compensateMultiLoops( branches );
+    compensateSingleLoops( singleBranches );
   }
 
   private void compensateMultiLoops( ArrayList< NumBranch > branches )
@@ -1707,12 +1708,18 @@ public class TDNum
       // TDLog.v("NUM loop compensation no branch"); 
       return;
     }
-    // for ( NumBranch b : branches ) {
-    //   // TDLog.v("BRANCH: " + b.toString() );
-    // }
+    branches.sort( new Comparator< NumBranch >() {
+      public int compare( NumBranch b1, NumBranch b2 ) { return ( b1.length() <= b2.length() )? -1 : 1; }
+    } );
+    for ( NumBranch b : branches ) {
+      TDLog.v("BRANCH: " + b.toString( 1 ) );
+    }
 
     ArrayList< NumCycle > cycles = makeIndependentCycles( branches );
-    // TDLog.v("NUM indep. loops " + cycles.size() );
+    TDLog.v("NUM indep. loops " + cycles.size() );
+    for ( NumCycle cy : cycles ) {
+      TDLog.v("CYCLE: " + cy.toString() );
+    }
 
     // TDLog.v("Branches " + branches.size() + " single " + singleBranches.size() + " cycles " + cycles.size() );
     // This is not necessary as the cycles are already independent

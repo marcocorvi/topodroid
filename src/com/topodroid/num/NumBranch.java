@@ -43,6 +43,10 @@ public class NumBranch
   //   TDLog.v( sb.toString() );
   // }
 
+  /** cstr
+   * @param t    branch type
+   * @param n    initial node
+   */
   NumBranch( int t, NumNode n )
   {
     type = t;
@@ -62,8 +66,8 @@ public class NumBranch
   void addShot( NumShot shot )
   {
     shots.add( shot );
-    // double d = shot.length();
-    // len += d;
+    double d = shot.length();
+    len += d;
   }
 
   /** @return the length of the branch
@@ -75,12 +79,12 @@ public class NumBranch
   {
     e  = 0.0;  s  = 0.0;  v  = 0.0;
     we = 0.0;  ws = 0.0;  wv = 0.0;
-    len = 0.0;
+    // len = 0.0;
     for ( NumShot sh : shots ) {
       float d = sh.length();
       float b = sh.bearing(); // degrees
       float c = sh.clino(); // degrees
-      len += d;
+      // len += d;
       // d *= sh.mDirection * sh.mBranchDir; // FIXME DIRECTION
       d *= sh.mBranchDir;
       double v0 = d * TDMath.sinDd( c );
@@ -103,6 +107,14 @@ public class NumBranch
   double eWeight() { return we; }
   double sWeight() { return ws; }
   double vWeight() { return wv; }
+
+  /** recompute the branch length
+   */
+  void recomputeLength() 
+  {
+    len = 0;
+    for ( NumShot sh : shots ) len += sh.length();
+  }
 
   void compensateError( double e0, double s0, double v0 )
   {
@@ -154,7 +166,7 @@ public class NumBranch
   //   return sb.toString();
   // }
 
-  String toString( int dir )
+  public String toString( int dir )
   {
     StringBuilder sb = new StringBuilder();
     if ( dir > 0 ) {
@@ -168,6 +180,7 @@ public class NumBranch
       //   sb.append( it.previous().toString() ).append(" ");
       // }
     }
+    sb.append( String.format("%.2f", len ) );
     return sb.toString();
   }
   
