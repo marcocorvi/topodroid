@@ -12,9 +12,9 @@
 package com.topodroid.dev.ble;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.TDX.TDToast;
+// import com.topodroid.TDX.TDToast;
 
-import android.bluetooth.BluetoothDevice;
+// import android.bluetooth.BluetoothDevice;
 // import android.bluetooth.BluetoothProfile;
 // import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattDescriptor;
@@ -37,6 +37,9 @@ public class BleUtils
 
   public final static UUID CCCD_UUID = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb");
   
+  // ------------------------------------------------------------------------------
+  /* DEBUG
+  
   public static String deviceToString( BluetoothDevice device )
   {
     String name = null;
@@ -51,20 +54,16 @@ public class BleUtils
     return name + " " + device.getAddress();
   }
 
-  // ------------------------------------------------------------------------------
-  // DEBUG
   public static String chrtPropString( BluetoothGattCharacteristic chrt )
   {
     int prop = chrt.getProperties();
     String B = isChrtPBcast(prop)? "B" : ".";
     String I = isChrtPIndicate(prop)? "I" : ".";
     String N = isChrtPNotify(prop)? "N" : ".";
-
     String r = isChrtPRead(prop)? "R" : ".";
     String w = isChrtPWrite(prop)? "W" : ".";
     String s = isChrtPWriteSign(prop)? "Ws" : ".";
     String n = isChrtPWriteNoResp(prop)? "Wn" : ".";
-
     String write_type = "";
     if ( canChrtPWrite( chrt ) ) {
       int type = chrt.getWriteType();
@@ -96,7 +95,18 @@ public class BleUtils
     for ( byte b : bytes ) sb.append( (int)b ).append(" ");
     return sb.toString();
   }
+  
+  public static String bytesToHexString( byte[] bytes )
+  {
+    StringBuilder sb = new StringBuilder();
+    for ( int k=0; k<bytes.length; ++k ) sb.append( String.format(" %02x", bytes[k] ) );
+    return sb.toString();
+  }
+  */
 
+  /** @return string presentation of a byte array
+   * @param bytes  byte array
+   */
   public static String bytesToAscii( byte[] bytes )
   {
     if ( bytes == null ) return null;
@@ -106,36 +116,61 @@ public class BleUtils
     }
     return sb.toString();
   }
-  
-  public static String bytesToHexString( byte[] bytes )
-  {
-    StringBuilder sb = new StringBuilder();
-    for ( int k=0; k<bytes.length; ++k ) sb.append( String.format(" %02x", bytes[k] ) );
-    return sb.toString();
-  }
-
 
   // ------------------------------------------------------------------------------
+  /** @return true if the property has flag "broadcast"
+   * @param prop   property
+   */
   public static boolean isChrtPBcast( int prop )       { return (prop & BluetoothGattCharacteristic.PROPERTY_BROADCAST) != 0; }
+
+  /** @return true if the property has flag "indicate"
+   * @param prop   property
+   */
   public static boolean isChrtPIndicate( int prop )    { return (prop & BluetoothGattCharacteristic.PROPERTY_INDICATE) != 0; }
+
+  /** @return true if the property has flag "notify"
+   * @param prop   property
+   */
   public static boolean isChrtPNotify( int prop )      { return (prop & BluetoothGattCharacteristic.PROPERTY_NOTIFY) != 0; }
+
+  /** @return true if the property has flag "read"
+   * @param prop   property
+   */
   public static boolean isChrtPRead( int prop )        { return (prop & BluetoothGattCharacteristic.PROPERTY_READ) != 0; }
+
+  /** @return true if the property has flag "write"
+   * @param prop   property
+   */
   public static boolean isChrtPWrite( int prop )       { return (prop & BluetoothGattCharacteristic.PROPERTY_WRITE) != 0; }
+
+  /** @return true if the property has flag "signed write"
+   * @param prop   property
+   */
   public static boolean isChrtPWriteSign( int prop )   { return (prop & BluetoothGattCharacteristic.PROPERTY_SIGNED_WRITE) != 0; }
+
+  /** @return true if the property has flag "write-no-response"
+   * @param prop   property
+   */
   public static boolean isChrtPWriteNoResp( int prop ) { return (prop & BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE) != 0; }
 
-  public static boolean canChrtPIndicate( BluetoothGattCharacteristic chrt )
-  { 
-    int prop = chrt.getProperties();
-    return isChrtPIndicate( prop );
-  }
+  // // public static boolean canChrtPIndicate( BluetoothGattCharacteristic chrt )
+  // // { 
+  // //   int prop = chrt.getProperties();
+  // //   return isChrtPIndicate( prop );
+  // // }
 
+  /** @return true if the characteristic supports notify or indicate
+   * @param chrt  characteristic
+   */
   public static boolean canChrtPNotify( BluetoothGattCharacteristic chrt )
   { 
     int prop = chrt.getProperties();
     return ( isChrtPIndicate( prop ) || isChrtPNotify( prop ) );
   }
 
+  /** @return the notification/indication value on the characteristic
+   * @param chrt   characteristic
+   */
   public static byte[] getChrtPNotify( BluetoothGattCharacteristic chrt )
   { 
     int prop = chrt.getProperties();
@@ -144,6 +179,9 @@ public class BleUtils
     return null;
   }
 
+  /** @return the indication value on the characteristic
+   * @param chrt   characteristic
+   */
   public static byte[] getChrtPIndicate( BluetoothGattCharacteristic chrt )
   {
     int prop = chrt.getProperties();
@@ -152,17 +190,26 @@ public class BleUtils
     return null;
   }
 
+  /** @return true if the characteristic supports reading
+   * @param chrt   characteristic
+   */
   public static boolean canChrtPRead( BluetoothGattCharacteristic chrt )
   { 
     return isChrtPRead( chrt.getProperties() );
   }
 
+  /** @return true if the characteristic supports any writing
+   * @param chrt   characteristic
+   */
   public static boolean canChrtPWrite( BluetoothGattCharacteristic chrt )
   { 
     int prop = chrt.getProperties();
     return isChrtPWrite(prop) || isChrtPWriteSign(prop) || isChrtPWriteNoResp(prop);
   }
 
+  /** @return the characteristic writing type (either default of no-response)
+   * @param chrt   characteristic
+   */
   public static int getChrtWriteType( BluetoothGattCharacteristic chrt )
   {
     int prop = chrt.getProperties();
@@ -177,7 +224,7 @@ public class BleUtils
 
   public static boolean isChrtRead( int perm )          { return (perm & BluetoothGattCharacteristic.PERMISSION_READ) != 0; }
   public static boolean isChrtWrite( int perm )         { return (perm & BluetoothGattCharacteristic.PERMISSION_WRITE) != 0; }
-  public static boolean isChrtReadWrite( int perm )     { return isChrtRead( perm ) && isChrtWrite( perm ); }
+  // public static boolean isChrtReadWrite( int perm )     { return isChrtRead( perm ) && isChrtWrite( perm ); }
   public static boolean isChrtReadEnc( int perm )       { return (perm & BluetoothGattCharacteristic.PERMISSION_READ_ENCRYPTED) != 0; }
   public static boolean isChrtWriteEnc( int perm )      { return (perm & BluetoothGattCharacteristic.PERMISSION_WRITE_ENCRYPTED) != 0; }
   public static boolean isChrtWriteSign( int perm )     { return (perm & BluetoothGattCharacteristic.PERMISSION_WRITE_SIGNED) != 0; }
@@ -199,7 +246,7 @@ public class BleUtils
 
   public static boolean isDescRead( int perm )          { return (perm & BluetoothGattDescriptor.PERMISSION_READ) != 0; }
   public static boolean isDescWrite( int perm )         { return (perm & BluetoothGattDescriptor.PERMISSION_WRITE) != 0; }
-  public static boolean isDescReadWrite( int perm )     { return isDescRead( perm ) && isDescWrite( perm ); }
+  // public static boolean isDescReadWrite( int perm )     { return isDescRead( perm ) && isDescWrite( perm ); }
   public static boolean isDescReadEnc( int perm )       { return (perm & BluetoothGattDescriptor.PERMISSION_READ_ENCRYPTED) != 0; }
   public static boolean isDescWriteEnc( int perm )      { return (perm & BluetoothGattDescriptor.PERMISSION_WRITE_ENCRYPTED) != 0; }
   public static boolean isDescWriteSign( int perm )     { return (perm & BluetoothGattDescriptor.PERMISSION_WRITE_SIGNED) != 0; }
@@ -220,24 +267,40 @@ public class BleUtils
   }
 
   // ---------------------------------------------------------------------------------
+  /** @return the float (little-endian) encoded in a byte array at a given offset
+   * @param bytes  byte array
+   * @param offset offset
+   */
   public static float getFloat( byte[] bytes, int offset )
   {
     if ( offset+4 > bytes.length ) return 0;
     return ByteBuffer.wrap( bytes ).order(ByteOrder.LITTLE_ENDIAN).getFloat( offset );
   }
 
+  /** @return the int (little-endian) encoded in a byte array at a given offset
+   * @param bytes  byte array
+   * @param offset offset
+   */
   public static int getInt( byte[] bytes, int offset )
   {
     if ( offset+4 > bytes.length ) return 0;
     return ByteBuffer.wrap( bytes ).order(ByteOrder.LITTLE_ENDIAN).getInt( offset );
   }
 
+  /** @return the short (little-endian) encoded in a byte array at a given offset
+   * @param bytes  byte array
+   * @param offset offset
+   */
   public static short getShort( byte[] bytes, int offset )
   {
     if ( offset+2 > bytes.length ) return 0;
     return ByteBuffer.wrap( bytes ).order(ByteOrder.LITTLE_ENDIAN).getShort( offset );
   }
 
+  /** @return the char in a byte array at a given offset
+   * @param bytes  byte array
+   * @param offset offset
+   */
   public static int getChar( byte[] bytes, int offset )
   {
     if ( offset >= bytes.length ) return 0;
@@ -245,6 +308,11 @@ public class BleUtils
     return ( i < 0 )? i+256 : i;
   }
 
+  /** put short (little-endian) encoded in a byte array at a given offset
+   * @param bytes  byte array
+   * @param offset offset
+   * @param s      short value
+   */
   public static void putShort( byte[] bytes, int offset, short s )
   {
     if ( offset+2 > bytes.length ) return;
@@ -252,9 +320,15 @@ public class BleUtils
     bytes[offset+1] = (byte)( (s>>8) & 0xff );
   }
 
+  /** put a char in a byte array at a given offset
+   * @param bytes  byte array
+   * @param offset offset
+   * @param c      char value
+   */
   public static void putChar( byte[] bytes, int offset, int c )
   {
     if ( offset >= bytes.length ) return;
     bytes[offset] = (byte)c;
   }
+
 }

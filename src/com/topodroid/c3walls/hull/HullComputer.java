@@ -67,7 +67,7 @@ public class HullComputer implements WallComputer
 
     triangles = new ArrayList< Triangle3D >();
     for ( Cave3DHull h : hulls ) {
-      for ( Triangle3D t : h.triangles ) triangles.add( t );
+      triangles.addAll( h.triangles ); // for ( Triangle3D t : h.triangles ) triangles.add( t );
     }
     return ( triangles.size() > 0 );
   }

@@ -146,7 +146,7 @@ public class DrawingPointLinePath extends DrawingPath
   //   for (LinePoint l1 = mFirst; l1 != null; l1=l1.mNext ) {
   //     // if ( k < 2 || k > mSize-2 ) 
   //     {
-  //       tdlog.v("PATH " + k + ": " + l1.x + " " + l1.y );
+  //       TDLog.v("PATH " + k + ": " + l1.x + " " + l1.y );
   //     }
   //     ++k;
   //   }
@@ -573,23 +573,23 @@ public class DrawingPointLinePath extends DrawingPath
   }
   // ----------------------------------------------
 
-  /** append another path to this path
-   * @param line   path to append
-   */
-  void append( DrawingPointLinePath line )
-  {
-    if ( line.mSize ==  0 ) return;
-    LinePoint lp = line.mFirst;
-    addPoint( lp.x, lp.y );
-    for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
-      if ( lp.has_cp ) {
-        addPoint3( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
-      } else {
-        addPoint( lp.x, lp.y );
-      }
-    }
-    // computeUnitNormal();
-  }
+  // /** append another path to this path - UNUSED
+  //  * @param line   path to append
+  //  */
+  // void append( DrawingPointLinePath line )
+  // {
+  //   if ( line.mSize ==  0 ) return;
+  //   LinePoint lp = line.mFirst;
+  //   addPoint( lp.x, lp.y );
+  //   for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
+  //     if ( lp.has_cp ) {
+  //       addPoint3( lp.x1, lp.y1, lp.x2, lp.y2, lp.x, lp.y );
+  //     } else {
+  //       addPoint( lp.x, lp.y );
+  //     }
+  //   }
+  //   // computeUnitNormal();
+  // }
 
   /** reset the path from the given list of points
    * @param pts   list of points
@@ -683,32 +683,32 @@ public class DrawingPointLinePath extends DrawingPath
     computeUnitNormal();
   }
 
-  /** reverse the path
-   */
-  void reversePath()
-  {
-    if ( mSize == 0 ) return;
-    LinePoint lf = mFirst;
-    LinePoint ll = mLast;
-    clear();
-    // mPath = new Path();
-    // mFirst = null;
-    // mLast  = null;
-    LinePoint lp = ll;
-    addStartPoint( lp.x, lp.y );
-    LinePoint prev = lp.mPrev;
-    while ( prev != null ) {
-      if ( lp.has_cp ) {
-        addPoint3( lp.x2, lp.y2, lp.x1, lp.y1, prev.x, prev.y );
-      } else {
-        addPoint( prev.x, prev.y );
-      }
-      lp = prev;
-      prev = prev.mPrev;
-    }
-    if ( mClosed ) mPath.close();
-    computeUnitNormal(); // FIXME 
-  }
+  // /** reverse the path - UNUSED
+  //  */
+  // void reversePath()
+  // {
+  //   if ( mSize == 0 ) return;
+  //   LinePoint lf = mFirst;
+  //   LinePoint ll = mLast;
+  //   clear();
+  //   // mPath = new Path();
+  //   // mFirst = null;
+  //   // mLast  = null;
+  //   LinePoint lp = ll;
+  //   addStartPoint( lp.x, lp.y );
+  //   LinePoint prev = lp.mPrev;
+  //   while ( prev != null ) {
+  //     if ( lp.has_cp ) {
+  //       addPoint3( lp.x2, lp.y2, lp.x1, lp.y1, prev.x, prev.y );
+  //     } else {
+  //       addPoint( prev.x, prev.y );
+  //     }
+  //     lp = prev;
+  //     prev = prev.mPrev;
+  //   }
+  //   if ( mClosed ) mPath.close();
+  //   computeUnitNormal(); // FIXME 
+  // }
 
   /** compute the distance from the path to a point
    * @param x   X-coord of the point

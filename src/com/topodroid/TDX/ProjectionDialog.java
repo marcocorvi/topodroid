@@ -531,7 +531,7 @@ class ProjectionDialog extends MyDialog
      }
   }
 
-  /** shitf the drawing 
+  /** shift the drawing
    * @param ev   touch event 
    */ 
   private void shiftByEvent( MotionEventWrap ev )
@@ -676,7 +676,7 @@ class ProjectionDialog extends MyDialog
      return true;
   }
 
-  /** reac t to a user tap
+  /** react to a user tap
    * @param view tapped view
    *   - button OK: tell the parent to create the projection profile with the current azimuth
    *   - button PLUS: increase azimuth

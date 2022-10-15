@@ -23,7 +23,7 @@ class Weeder
 {
   /** point 2D with the line-abscissa
    */
-  class WeedPoint extends Point2D
+  static class WeedPoint extends Point2D
   {
     float s;  // line abscissa
     WeedPoint( float xx, float yy ) { super(xx,yy); }

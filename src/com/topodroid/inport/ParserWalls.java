@@ -38,7 +38,7 @@ import java.util.Locale;
 
 class ParserWalls extends ImportParser
 {
-  class Fix 
+  static class Fix
   {
     String station;  // fix station
     double lng, lat; // WGS84 longitude and latitude

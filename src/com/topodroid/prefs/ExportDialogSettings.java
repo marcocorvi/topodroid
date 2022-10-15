@@ -41,7 +41,7 @@ public class ExportDialogSettings extends MyDialog
   /** cstr
    * @param context context
    * @param parent  parent activity
-   * @param prefs   shared prefrences
+   * @param prefs   shared preferences
    * @param title   title resource index
    */
   public ExportDialogSettings( Context context, TDPrefActivity parent, SharedPreferences prefs, int title )

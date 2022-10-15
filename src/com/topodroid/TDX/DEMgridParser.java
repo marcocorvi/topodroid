@@ -52,7 +52,7 @@ class DEMgridParser extends ParserDEM
   boolean readData( double xwest, double xeast, double ysouth, double ynorth ) 
   {
     // TDLog.v("DEM read data dim " + cols + "x" + rows + " LLcorner " + xll + " " + yll + " cell " + mDim1 + " " + mDim2 + " flip " + flip_vert + " " + flip_horz );
-    if ( ! mValid ) return mValid;
+    if ( ! mValid ) return false; // return mValid;
     if ( mBr == null ) return false;
     int dj = (flip_vert ? 1 : -1);
     int di = (flip_horz ? -1 : 1);

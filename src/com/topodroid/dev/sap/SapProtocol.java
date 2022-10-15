@@ -64,7 +64,7 @@ class SapProtocol extends TopoDroidProtocol
     }
   }
 
-  /** remove a byte array from the write wueue
+  /** remove a byte array from the write queue
    */
   public byte[] handleWrite( )
   {

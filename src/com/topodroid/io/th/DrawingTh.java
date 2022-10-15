@@ -20,16 +20,16 @@ import com.topodroid.utils.TDUtil;
 // import com.topodroid.num.NumStation;
 // import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.PlotType;
+// import com.topodroid.common.PlotType;
 import com.topodroid.common.PointScale;
 // import com.topodroid.math.TDVector;
 import com.topodroid.TDX.BrushManager;
 import com.topodroid.TDX.DrawingSurface;
 import com.topodroid.TDX.DrawingStationUser;
-import com.topodroid.TDX.DrawingStationName;
+// import com.topodroid.TDX.DrawingStationName;
 import com.topodroid.TDX.DrawingPointPath;
 import com.topodroid.TDX.DrawingLabelPath;
-import com.topodroid.TDX.DrawingPointLinePath;
+// import com.topodroid.TDX.DrawingPointLinePath;
 import com.topodroid.TDX.DrawingLinePath;
 import com.topodroid.TDX.DrawingAreaPath;
 // import com.topodroid.TDX.Scrap;
@@ -37,7 +37,7 @@ import com.topodroid.TDX.SymbolLibrary;
 import com.topodroid.TDX.TDToast;
 
 
-import java.io.File;
+// import java.io.File;
 // import java.io.FileWriter;
 // import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -52,7 +52,7 @@ import java.io.BufferedReader;
 // import java.io.PrintWriter;
 // import java.nio.channels.FileChannel;
 
-import java.io.FileNotFoundException;
+// import java.io.FileNotFoundException;
 import java.io.IOException;
 // import java.io.EOFException;
 
@@ -61,26 +61,39 @@ import java.util.ArrayList;
 // import android.util.ArraySet; // REQUIRES API-23
 // import java.util.Locale;
 
-import android.graphics.RectF;
+// import android.graphics.RectF;
 
 public class DrawingTh
 {
 
+  /** read a line or a multi-line
+   * @param br   buffered reader
+   * @return read line(s) or null
+   */
   private static String readLine( BufferedReader br )
   {
-    String line = null;
+    StringBuilder sb = new StringBuilder();
     try {
-      line = br.readLine();
+      while (true) {
+        String line = br.readLine();
+        if ( line == null ) return null;
+        sb.append( line.trim() );
+        if ( line.endsWith( "\\" ) ) { // continuation
+          sb.append( " " );
+        } else {
+          break;
+        }
+      }
     } catch ( IOException e ) {
       e.printStackTrace();
     }
-    return ( line != null )? line.trim() : null;
+    return sb.toString();
   } 
 
   /* NOTE therion th2 files can no longer be supported because therionscale is not fixed
    * @param surface  drawing surface
    * @param fr       input th2 file reader
-   * @paran dx       X offset
+   * @param dx       X offset
    * @param dy       Y offset
    * @return scrap options
    */

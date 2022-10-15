@@ -12,7 +12,7 @@
 package com.topodroid.utils;
 
 import com.topodroid.prefs.TDPrefHelper;
-import com.topodroid.prefs.TDPrefKey;
+// import com.topodroid.prefs.TDPrefKey;
 // import com.topodroid.TDX.TDPath;
 
 import java.io.File;
@@ -21,7 +21,7 @@ import java.io.PrintWriter;
 import java.io.FileWriter;
 // import java.io.FileNotFoundException;
 
-import android.content.SharedPreferences;
+// import android.content.SharedPreferences;
 
 import android.util.Log;
 
@@ -187,7 +187,7 @@ public class TDLog
    */
   static public void e( String msg )
   {
-    if ( mLogStream == LOG_FILE ) {
+    if ( mLogStream != LOG_FILE ) {
       mLogStream = LOG_FILE;
       if ( mLog == null ) setLogTarget();
     }

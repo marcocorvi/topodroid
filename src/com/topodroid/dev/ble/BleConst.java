@@ -35,18 +35,18 @@ public class BleConst
 
   public final static UUID DEVICE_SRV_UUID  = UUID.fromString( DEVICE_SRV );
   public final static UUID DEVICE_00_UUID   = UUID.fromString( DEVICE_00 );
-  public final static UUID DEVICE_01_UUID   = UUID.fromString( DEVICE_01 );
-  public final static UUID DEVICE_04_UUID   = UUID.fromString( DEVICE_04 );
-  public final static UUID DEVICE_06_UUID   = UUID.fromString( DEVICE_06 );
+  // public final static UUID DEVICE_01_UUID   = UUID.fromString( DEVICE_01 );
+  // public final static UUID DEVICE_04_UUID   = UUID.fromString( DEVICE_04 );
+  // public final static UUID DEVICE_06_UUID   = UUID.fromString( DEVICE_06 );
 
   public final static UUID INFO_SRV_UUID  = UUID.fromString( INFO_SRV );
-  public final static UUID INFO_23_UUID   = UUID.fromString( INFO_23 );
-  public final static UUID INFO_24_UUID   = UUID.fromString( INFO_24 );
-  public final static UUID INFO_25_UUID   = UUID.fromString( INFO_25 );
+  // public final static UUID INFO_23_UUID   = UUID.fromString( INFO_23 );
+  // public final static UUID INFO_24_UUID   = UUID.fromString( INFO_24 );
+  // public final static UUID INFO_25_UUID   = UUID.fromString( INFO_25 );
   public final static UUID INFO_26_UUID   = UUID.fromString( INFO_26 );
   public final static UUID INFO_27_UUID   = UUID.fromString( INFO_27 );
   public final static UUID INFO_28_UUID   = UUID.fromString( INFO_28 );
-  public final static UUID INFO_29_UUID   = UUID.fromString( INFO_29 );
+  // public final static UUID INFO_29_UUID   = UUID.fromString( INFO_29 );
 
   public final static UUID BATTERY_SRV_UUID  = UUID.fromString( BATTERY_SRV );
   public final static UUID BATTERY_LVL_UUID  = UUID.fromString( BATTERY_LVL );

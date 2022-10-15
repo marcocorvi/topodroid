@@ -1162,7 +1162,7 @@ public class TDExporter
   // POCKETTOPO EXPORT PocketTopo
   //   NOTE shot flags are ignored
 
-  /** export data in PockeTopo format (.top)
+  /** export data in PocketTopo format (.top)
    * @param os    output stream
    * @param sid   survey ID
    * @param data  database helper object
@@ -1263,7 +1263,7 @@ public class TDExporter
   /** write the extend of a splay
    * @param pw    print stream
    * @param item  splay data-block
-   * @param splay_extend
+   * @param splay_extend (?)
    * @param extend  current extend value
    * @return if this return 1, the variable extend must be updated
    *         if this return 0 or 1, splay_extend must be updated false or true, respectively
@@ -1754,8 +1754,8 @@ public class TDExporter
 
   /** write an data line in the survex file
    * @param pw     output writer
-   * @param first
-   * @param dup    
+   * @param first  whether first shot of a leg
+   * @param dup    whether leg is duplicate
    * @param leg    leg average values
    * @param blk    data block
    * @param ul     unit of length
@@ -2548,7 +2548,7 @@ public class TDExporter
 
   /** Centerline data are exported in Compass format as follows
    *    SURVEY NAME: survey_name
-   *    SURVEY DATE: mm dd yyyy COMMENT: desription
+   *    SURVEY DATE: mm dd yyyy COMMENT: description
    *    SURVEY TEAM:
    *    team_line
    *    DECLINATION: declination  FORMAT: DMMDLUDRLADN  CORRECTIONS:  0.00 0.00 0.00
@@ -2710,7 +2710,7 @@ public class TDExporter
           }
         } else { // with FROM station
           if ( TDString.isNullOrEmpty( to ) ) { // splay shot
-            if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
+            if ( leg.mCnt > 0 && ref_item != null ) { // write previous leg shot
               lrud = computeLRUD( ref_item, list, true );
               writeDatFromTo( pw, prefix, ref_item.mFrom, ref_item.mTo );
               printShotToDat( pw, leg, lrud, duplicate, ref_item.mComment );
@@ -2926,7 +2926,7 @@ public class TDExporter
           //     s, -1, 1, 1, 1, start_sr[s], start_st[s], s, end_st[s], nr_st[s], 0, 0 );
           // }
           if ( TDString.isNullOrEmpty( to ) ) { // splay shot
-            if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
+            if ( leg.mCnt > 0 && ref_item != null ) { // write previous leg shot
               int srt = getTrbSeries( ref_item.mTo );
               int stt = getTrbStation( ref_item.mTo );
               lrud = computeLRUD( ref_item, list, true );
@@ -3103,7 +3103,7 @@ public class TDExporter
           }
         } else { // with FROM station
           if ( TDString.isNullOrEmpty( to ) ) { // splay shot
-            if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
+            if ( leg.mCnt > 0 && ref_item != null ) { // write previous leg shot
               lrud = computeLRUD( ref_item, list, true );
               writeSurFromTo( pw, prefix, ref_item.mFrom, ref_item.mTo, duplicate );
               printShotToSur( pw, leg, lrud, ref_item.mComment );
@@ -3172,7 +3172,7 @@ public class TDExporter
       pw.format("/>\n");
       pw.format("</General>\n");
 
-      // optional - TopoDroid generates only one default namspace
+      // optional - TopoDroid generates only one default namespace
       pw.format("<Namespaces>\n");
       pw.format("<Namespace");
       pw.format(" Name=\"\"");
@@ -3184,10 +3184,10 @@ public class TDExporter
       pw.format("/>\n");
       pw.format("</Namespaces>\n");
 
-      // optional - N.B. do not generate section <Filtres>
+      // optional - N.B. do not generate section <Filters>
       // pw.format("<Filters>\n");
       // pw.format("<Filters");
-      // pw.format(" Filtre=\"\"");
+      // pw.format(" Filter=\"\"");
       // pw.format(" Numero=\"\"");
       // pw.format(" Name=\"\"");
       // pw.format(" Expression=\"\"");
@@ -3258,7 +3258,7 @@ public class TDExporter
       // optional - TopoDroid should not generate it
       // pw.format("<Networks>\n");
       // pw.format("<Network");
-      // pw.format(" Name=\"%s\"", info.name ); // name of netwrok
+      // pw.format(" Name=\"%s\"", info.name ); // name of network
       // pw.format(" Type=\"0\"");              // for future use - set to 0
       // pw.format(" ColorB=\"0\"");
       // pw.format(" ColorG=\"0\"");
@@ -3279,9 +3279,9 @@ public class TDExporter
       pw.format(" AngleLimite=\"0.0\" ");     // TOPOROBOT angle limite - Set to 0.00 always
       pw.format(" PsiL=\"0.05\"");            // length tolerance [m]
       pw.format(" PsiP=\"1.0\"");             // clino tolerance [clino units]
-      pw.format(" PsiAz=\"1.0\"");            // azimuth tiolerance
-      pw.format(" Comments=\"\"");            // optionsl
-      pw.format(" ErrorTourillon=\"0\"");     // Parameterts for Compass and clino correction functions: set to 0
+      pw.format(" PsiAz=\"1.0\"");            // azimuth tolerance
+      pw.format(" Comments=\"\"");            // optional
+      pw.format(" ErrorTourillon=\"0\"");     // Parameters for Compass and clino correction functions: set to 0
       pw.format(" DiamBoule1=\"0\"");
       pw.format(" DiamBoule2=\"0\"");
       pw.format(" FuncCorrAzCo=\"0\"");
@@ -3354,8 +3354,8 @@ public class TDExporter
             pw.format(" Secteur=\"0\"");       // Index of 'Seecteur' (subnetwork) - Typically = 0
             // pw.format(Locale.US, " Label=\"\"");       // Label ID terrain (eg: AB123) - optional
             pw.format(" Horodate=\"%s 00:00:00.00\"", date ); // horodating YYYY-MM-DD HH:MN:SS.MSd. If unknown now() or empty string
-            pw.format(" Humidity=\"0.00\"");                  // Humidity ; If unknown or unsuported, set to 0.00
-            pw.format(" Tempertaure=\"0.00\"");               // Temperature. If unknown or unsuported, set to 0.00
+            pw.format(" Humidity=\"0.00\"");                  // Humidity ; If unknown or unsupported, set to 0.00
+            pw.format(" Temperature=\"0.00\"");               // Temperature. If unknown or unsupported, set to 0.00
             pw.format(" Comments=\"%s\"", blk.mComment );     // optional
             pw.format(" TypeShot=\"%d\"", ( blk.isSurface() ? 7 : 0 ) ); // Type of shot; 0 Default; 1 Natural cave; 7 Surface shot. Typically = 0
             pw.format(Locale.US, " Length=\"%.3f\"", len );
@@ -3907,7 +3907,7 @@ public class TDExporter
           }
         } else { // with FROM station
           if ( TDString.isNullOrEmpty( to ) ) { // splay shot
-            if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
+            if ( leg.mCnt > 0 && ref_item != null ) { // write previous leg shot
               flag = printFlagToCav( pw, flag, ref_item.getFlag(), eol );
               printShotToCav( pw, leg, ref_item, eol, ents );
               ref_item = null; 
@@ -4000,7 +4000,7 @@ public class TDExporter
       pw.format("Project code: 9999");              printPolygonEOL( pw );
       pw.format("Made by: TopoDroid %s", TDVersion.string() );   printPolygonEOL( pw );
       pw.format(Locale.US, "Made date: %f", TDUtil.getDatePlg() ); printPolygonEOL( pw );
-      pw.format("Last modi: 0");   printPolygonEOL( pw );
+      pw.format("Last modi: 0");   printPolygonEOL( pw ); // modi ???
       pw.format("AutoCorrect: 1"); printPolygonEOL( pw );
       pw.format("AutoSize: 20.0"); printPolygonEOL( pw ); printPolygonEOL( pw );
 
@@ -4104,7 +4104,7 @@ public class TDExporter
           }
         } else { // with FROM station
           if ( TDString.isNullOrEmpty( to ) ) { // splay shot
-            if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
+            if ( leg.mCnt > 0 && ref_item != null ) { // write previous leg shot
               lrud = computeLRUD( ref_item, list, true );
               // FIXME_P pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
               // FIXME_P printShotToPlg( pw, leg, lrud, ref_item.mComment );
@@ -4463,7 +4463,7 @@ public class TDExporter
     if ( item.mComment != null && item.mComment.length() > 0 ) {
       pw.format("<Commentaire>%s</Commentaire>", item.mComment );
     }
-    pw.format("</Visee>\r\n", item.mComment );
+    pw.format("</Visee>\r\n");
   }
 
   static private void printSplayToTro( PrintWriter pw, DBlock item, boolean direct, String suffix )

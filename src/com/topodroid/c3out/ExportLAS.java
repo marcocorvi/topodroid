@@ -224,8 +224,8 @@ public class ExportLAS
     Calendar calendar = Calendar.getInstance();
     short day  = (short)calendar.get(Calendar.DAY_OF_YEAR);
     short year = (short)calendar.get(Calendar.YEAR);
-    int[] rets = new int[5];
-    rets[0] = rets[1] = rets[2] = rets[3] = rets[4] = 0;
+    // int[] rets = new int[5]; // UNUSED
+    // rets[0] = rets[1] = rets[2] = rets[3] = rets[4] = 0;
     // long[] rets2 = new long[15];
     // for ( int k=0; k<15; ++k ) rets2[k] = 0;
 

@@ -86,9 +86,9 @@ public class UserManDownload extends AsyncTask< String, Integer, Integer >
                 }
                 fos.close();
                 // if ( file.getPath().endsWith("png") ) TDLog.v( "file " + file.getPath() + " " + size );
-	      }
+	          }
             } else { // ze directory: not really an error
-              // TDLog.Log( TDLog.LOG_PREFS, "Zip dir entry \"" + name + "\"" );
+              // TDLog.v( "Zip dir entry \"" + name + "\"" );
 	    }
 	  }
           ret = 1;

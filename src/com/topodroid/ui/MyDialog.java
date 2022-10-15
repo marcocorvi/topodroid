@@ -18,7 +18,7 @@ import com.topodroid.utils.TDLog;
 
 // import android.app.Activity;
 import android.app.Dialog;
-import android.os.Bundle;
+// import android.os.Bundle;
 import android.content.Context;
 // import android.content.Intent;
 
@@ -98,7 +98,7 @@ public class MyDialog extends Dialog
     }
   }
 
-  /** inituialize the layout - utility method for derived classes
+  /** initialize the layout - utility method for derived classes
    * @param layout_resource layout resource id
    * @param title_resource  title resource id
    */
@@ -115,7 +115,7 @@ public class MyDialog extends Dialog
     setHelpLayout();
   }
 
-  /** inituialize the layout - utility method for derived classes
+  /** initialize the layout - utility method for derived classes
    * @param layout_resource layout resource id
    * @param title           title string
    */
@@ -132,7 +132,7 @@ public class MyDialog extends Dialog
     setHelpLayout();
   }
 
-  /** inituialize the layout - utility method for derived classes
+  /** initialize the layout - utility method for derived classes
    * @param v               view of the content
    * @param title_resource  title resource id
    */

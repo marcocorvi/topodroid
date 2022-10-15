@@ -62,10 +62,10 @@ public class DrawingSplayPath extends DrawingPath
     return mSplayMode;
   }
 
-  /** test whether to display splays as dots
-   * @return true if splays as dots
-   */
-  static public boolean splaysAsDots() { return mSplayMode == SPLAY_MODE_POINT; }
+  // /** test whether to display splays as dots - UNUSED
+  //  * @return true if splays as dots
+  //  */
+  // static public boolean splaysAsDots() { return mSplayMode == SPLAY_MODE_POINT; }
 
   // Path mPathB = null;
 

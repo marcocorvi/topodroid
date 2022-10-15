@@ -344,18 +344,18 @@ public class PTFile
 
     // void print( )
     // { 
-    //   tdlog.v( "FILE trips " + _trips.size() + " shots " + _shots.size() + " refs " + _references.size() );
-    //   tdlog.v( "TRIPS");
+    //   TDLog.v( "FILE trips " + _trips.size() + " shots " + _shots.size() + " refs " + _references.size() );
+    //   TDLog.v( "TRIPS");
     //   for ( PTTrip t : _trips ) t.print();
-    //   tdlog.v( "SHOTS");
+    //   TDLog.v( "SHOTS");
     //   for ( PTShot s : _shots ) s.print();
-    //   tdlog.v( "REFERENCES");
+    //   TDLog.v( "REFERENCES");
     //   for ( PTReference r : _references ) r.print();
-    //   tdlog.v( "OVERVIEW");
+    //   TDLog.v( "OVERVIEW");
     //   _overview.print();
-    //   tdlog.v( "OUTLINE");
+    //   TDLog.v( "OUTLINE");
     //   _outline.print();
-    //   tdlog.v( "SIDEVIEW");
+    //   TDLog.v( "SIDEVIEW");
     //   _sideview.print();
     // }
 

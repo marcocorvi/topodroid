@@ -20,9 +20,10 @@ package com.topodroid.dev.sap;
 import com.topodroid.utils.TDLog;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.TDInstance;
+import com.topodroid.TDX.ListerHandler;
 // import com.topodroid.TDX.DataDownloader;
 import com.topodroid.TDX.TopoDroidApp;
-import com.topodroid.TDX.TDToast;
+// import com.topodroid.TDX.TDToast;
 import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.DataType;
 import com.topodroid.dev.Device;
@@ -36,7 +37,7 @@ import com.topodroid.dev.ble.BleOpConnect;
 import com.topodroid.dev.ble.BleOpDisconnect;
 import com.topodroid.dev.ble.BleOpChrtRead;
 
-import android.os.Handler;
+// import android.os.Handler;
 // import android.os.Looper;
 // import android.os.Build;
 import android.content.Context;
@@ -71,7 +72,7 @@ public class SapComm extends TopoDroidComm
   // private int mDataType = DataType.DATA_SHOT;
   private int mDataType;
 
-  private Handler mLister;
+  private ListerHandler mLister;
   private int mConnectionMode = -1;
   private boolean mDisconnecting = false;
   private BleOperation mPendingOp = null;
@@ -112,7 +113,7 @@ public class SapComm extends TopoDroidComm
   /** connect the SAP device
    * @param device    SAP device
    * @param context   context
-   * @param data_type expe ted type of data
+   * @param data_type expected type of data
    * Device has mAddress, mModel, mName, mNickname, mType
    * the only thing that coincide with the remote_device is the address
    */
@@ -216,13 +217,13 @@ public class SapComm extends TopoDroidComm
    * @param data_type expected type of data
    */
   @Override
-  public boolean connectDevice( String address, Handler /* ILister */ lister, int data_type )
+  public boolean connectDevice( String address, ListerHandler lister, int data_type )
   {
     // TDLog.v( "SAP comm: connect device (continuous data download)");
     mLister = lister;
     mDataType = data_type;
     mConnectionMode = 1;
-    mNrPacketsRead = 0;
+    mNrReadPackets = 0;
     connectSapDevice( TDInstance.getDeviceA(), mApp, mDataType );
     return true;
   }
@@ -263,19 +264,19 @@ public class SapComm extends TopoDroidComm
    * @param data_type  packet datatype
    * @return always 0
    */
-  public int downloadData( String address, Handler /* ILister */ lister, int data_type )
+  public int downloadData( String address, ListerHandler lister, int data_type )
   {
     // TDLog.v( "SAP comm: batch data download");
     mConnectionMode = 0;
     mLister = lister;
-    mNrPacketsRead = 0;
+    mNrReadPackets = 0;
     connectSapDevice( TDInstance.getDeviceA(), mApp, data_type );
     // start a thread that keeps track of read packets
     // when read done stop it and return
     return 0;
   }
 
-  // protected boolean startCommThread( int to_read, Handler /* ILister */ lister, int data_type ) 
+  // protected boolean startCommThread( int to_read, ListerHandler lister, int data_type ) 
   // {
   //   if ( mCommThread != null ) {
   //     TDLog.e( "SAP comm start Comm Thread already running");
@@ -341,7 +342,7 @@ public class SapComm extends TopoDroidComm
   // -------------------------------------------------------------------------------
   // BleComm interface
 
-  /** react to a chnage in the MTU (empty)
+  /** react to a change in the MTU (empty)
    * @param mtu   MTU
    */
   public void changedMtu( int mtu ) { }
@@ -351,8 +352,8 @@ public class SapComm extends TopoDroidComm
    */
   public void readedRemoteRssi( int rssi ) { }
 
-  /** react to the notification that a characterostic has changed
-   * @param chrt   changed charcateristic (either the read or the write characteristic)
+  /** react to the notification that a characteristic has changed
+   * @param chrt   changed characteristic (either the read or the write characteristic)
    */
   public void changedChrt( BluetoothGattCharacteristic chrt )
   {
@@ -373,8 +374,8 @@ public class SapComm extends TopoDroidComm
     }
   }
 
-  /** react to notifictaion that the read charcateristics has been read
-   * @param uuid_str   charcateristic short UUID (?) (unused)
+  /** react to notification that the read characteristics has been read
+   * @param uuid_str   characteristic short UUID (?) (unused)
    * @param bytes      array of read bytes (unused)
    * this method calls the protocol with the read bytes (a packet), and handle the packet
    */
@@ -385,12 +386,12 @@ public class SapComm extends TopoDroidComm
     if ( ! uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_STR ) ) { error(-2, uuid_str); return; }
     int res = mSapProto.handleRead( bytes ); 
     if ( res != DataType.PACKET_DATA ) { error(-3, uuid_str); return; }
-    ++ mNrPacketsRead; // FIXME NON_ATOMIC_ON_VOLATILE
+    ++mNrReadPackets; // FIXME NON_ATOMIC_ON_VOLATILE
     handleRegularPacket( res, mLister, DataType.DATA_SHOT );
   }
 
-  /** react to notifictaion that the write charcateristics has been written
-   * @param uuid_str   charcateristic short UUID (?) (unused)
+  /** react to notifictaion that the write characteristics has been written
+   * @param uuid_str   characteristic short UUID (?) (unused)
    * @param bytes      array of written bytes (unused)
    */
   public void writtenChrt( String uuid_str, byte[] bytes )
@@ -402,7 +403,7 @@ public class SapComm extends TopoDroidComm
 
   /** react to the descriptor has been read (empty)
    * @param uuid_str       ??? UUID
-   * @param uuid_chrt_str  charcateristic UUID
+   * @param uuid_chrt_str  characteristic UUID
    * @param bytes          array of read bytes
    */
   public void readedDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
@@ -412,7 +413,7 @@ public class SapComm extends TopoDroidComm
 
   /** react to the descriptor has been written
    * @param uuid_str       ??? UUID
-   * @param uuid_chrt_str  charcateristic UUID
+   * @param uuid_chrt_str  characteristic UUID
    * @param bytes          array of written bytes
    * @note this method marks that the SAP has been connected
    */
@@ -462,7 +463,7 @@ public class SapComm extends TopoDroidComm
       mWriteInitialized = gatt.setCharacteristicNotification( mWriteChrt, true );
       mReadInitialized  = gatt.setCharacteristicNotification( mReadChrt,  true );
     } catch ( SecurityException e ) {
-      TDLog.e("SECURITY CHRT notiofication " + e.getMessage() );
+      TDLog.e("SECURITY CHRT notification " + e.getMessage() );
       // TDToast.makeBad("Security error: CHRT notification");
       // TODO closeGatt() ?
       return -1;
@@ -497,9 +498,9 @@ public class SapComm extends TopoDroidComm
     return 0;
   } 
 
-  /** write to a charcateristic
+  /** write to a characteristic
    * @param srv_uuid   service UUID
-   * @param chrt_uuid  chracteristic UUID
+   * @param chrt_uuid  characteristic UUID
    * @param bytes      array of bytes to write
    * @return ...
    */
@@ -510,9 +511,9 @@ public class SapComm extends TopoDroidComm
     return mCallback.writeChrt( srv_uuid, chrt_uuid, bytes );
   }
 
-  /** read from a charcateristic
+  /** read from a characteristic
    * @param srv_uuid   service UUID
-   * @param chrt_uuid  chracteristic UUID
+   * @param chrt_uuid  characteristic UUID
    * @return ...
    */
   public boolean readChrt( UUID srv_uuid, UUID chrt_uuid )
@@ -602,7 +603,7 @@ public class SapComm extends TopoDroidComm
    */
   public void notifyStatus( int status )
   {
-    mApp.notifyStatus( status );
+    mApp.notifyListerStatus( mApp.mListerSet, status );
   }
 
 }

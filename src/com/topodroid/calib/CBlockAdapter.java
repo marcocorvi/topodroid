@@ -15,7 +15,7 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.TDX.TopoDroidApp;
+// import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.GMActivity;
 import com.topodroid.TDX.R;
 
@@ -34,7 +34,7 @@ import android.graphics.Rect;
 // import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+// import java.util.LinkedList;
 
 public class CBlockAdapter extends ArrayAdapter< CBlock >
 {
@@ -91,7 +91,7 @@ public class CBlockAdapter extends ArrayAdapter< CBlock >
 
   class ViewHolder implements OnClickListener
   {
-    CBlockAdapter mParent; // could be the GMActovity
+    CBlockAdapter mParent; // could be the GMActivity
     int pos;
     CBlock mBlock = null;
     View   mView  = null;

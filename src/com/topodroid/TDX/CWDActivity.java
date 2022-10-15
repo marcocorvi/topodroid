@@ -104,7 +104,7 @@ public class CWDActivity extends Activity
       dir_name = "TopoDroid" + dir_name.substring(9);
     }
 
-    // return the result to TDPrefActivuity
+    // return the result to TDPrefActivity
     if ( TDPath.checkBasePath( dir_name /*, base_name */ ) ) {
       // TDLog.Log( TDLog.LOG_PATH, "CWD set dir <" + dir_name + /* "> base <" + base_name + */ ">" );
       TopoDroidApp.setCWDPreference( dir_name /* , base_name */ );

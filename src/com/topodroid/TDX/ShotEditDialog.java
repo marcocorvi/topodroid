@@ -846,8 +846,8 @@ class ShotEditDialog extends MyDialog
         // TDLog.Log( TDLog.LOG_SHOT, "PREV " + mPrevBlk.toString(true ) );
         loadDBlock( mPrevBlk, prevBlock, mBlk );
         // updateView();
-      } else {
-        // TDLog.Log( TDLog.LOG_SHOT, "PREV is null" );
+      // } else {
+        // TDLog.v( "PREV is null" );
       }
 
     } else if ( b == mButtonNext ) {
@@ -862,8 +862,8 @@ class ShotEditDialog extends MyDialog
         // TDLog.Log( TDLog.LOG_SHOT, "NEXT " + mNextBlk.toString(true ) );
         loadDBlock( mNextBlk, mBlk, next );
         // updateView();
-      } else {
-        // TDLog.Log( TDLog.LOG_SHOT, "NEXT is null" );
+      // } else {
+        // TDLog.v( "NEXT is null" );
       }
 
     } else if ( b == mButtonReverse ) {

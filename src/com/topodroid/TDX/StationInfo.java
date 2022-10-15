@@ -56,7 +56,7 @@ public class StationInfo
   }
 
   /** @return string presentation of the station info
-   * @note the name must be followed by a space because CurrentStationDalog tokenizes on space
+   * @note the name must be followed by a space because CurrentStationDialog tokenizes on space
    */
   // @RecentlyNonNull
   public String toString()

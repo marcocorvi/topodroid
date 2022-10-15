@@ -17,7 +17,7 @@ import com.topodroid.prefs.TDSetting;
 
 import java.util.List;
 import java.util.Set;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.Locale;
 
 public class DistoXStationName

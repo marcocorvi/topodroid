@@ -23,7 +23,7 @@ import android.os.ParcelFileDescriptor;
 
 import java.util.ArrayList;
 
-import java.io.InputStreamReader;
+// import java.io.InputStreamReader;
   
 // NOTE survey name must be guaranteed not be in the db
 public class ImportSurvexTask extends ImportTask

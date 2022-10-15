@@ -26,7 +26,7 @@
   <string-array name="feedbackMode">
      <item name="none">нет</item>
      <item name="sound">звук</item>
-     <item name="heptic">вибрация</item>
+     <item name="haptic">вибрация</item>
   </string-array>
 
   <string-array name="canvasLevels">
@@ -61,16 +61,14 @@
      <item name="tf">футы</item>
   </string-array>
 
-  <!-- TODO
-  <string-array name="loopClosure">
+    <string-array name="loopClosure">
      <item name="none">Выкл.</item>
      <item name="normal">Обычное</item>
      <item name="weighted">Взвешенный</item>
-     <item name="selective">Selective</item>
+     <item name="selective">Выблорочно</item>
      <item name="triangles">Триангуляция</item>
   </string-array>
-  -->
-
+  
   <!-- UNUSED string-array name="wallsType">
      <item name="none">Нет</item>
      <item name="convex">Выпуклые</item>

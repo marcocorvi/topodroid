@@ -66,7 +66,7 @@ class UndeleteAdapter extends ArrayAdapter< UndeleteItem >
 
   /** inner class holding the view for the items
    */
-  private class ViewHolder implements OnClickListener
+  private static class ViewHolder implements OnClickListener
   { 
     int      pos;
     CheckBox mCB;

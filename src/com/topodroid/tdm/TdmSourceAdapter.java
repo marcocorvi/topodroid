@@ -79,7 +79,7 @@ class TdmSourceAdapter extends ArrayAdapter< TdmSource >
 
   /** private view holder class
    */
-  private class ViewHolder
+  private static class ViewHolder
   { 
     CheckBox checkBox;
     TextView textView;

@@ -27,6 +27,7 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.DataType;
+import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.distox2.DeviceX310TakeShot;
 import com.topodroid.calib.CBlock;
 import com.topodroid.calib.CBlockAdapter;
@@ -49,9 +50,9 @@ import com.topodroid.calib.GMSearchDialog;
 
 
 import java.util.List;
-import java.util.LinkedList;
+// import java.util.LinkedList;
 import java.util.ArrayList;
-import java.util.Locale;
+// import java.util.Locale;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -63,7 +64,7 @@ import android.content.res.Configuration;
 import android.content.DialogInterface;
 
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
+// import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.Button;
 import android.view.View;
@@ -72,7 +73,7 @@ import android.view.View.OnLongClickListener;
 import android.view.KeyEvent;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.LinearLayout;
+// import android.widget.LinearLayout;
 
 import android.graphics.drawable.BitmapDrawable;
 
@@ -114,15 +115,15 @@ public class GMActivity extends Activity
                         R.drawable.iz_search
                         // R.drawable.iz_empty // EMPTY
                      };
-  final static private int BTN_TOGGLE   = 0;
-  final static private int BTN_BT       = 1;
-  final static private int BTN_DOWNLOAD = 2;
-  final static private int BTN_GROUP    = 3;
-  final static private int BTN_COMPUTE  = 4;
-  final static private int BTN_COVER    = 5;
-  final static private int BTN_READ     = 6;
-  final static private int BTN_WRITE    = 7;
-  final static private int BTN_SEARCH   = 8;
+  final static private int BTN_TOGGLE    = 0;
+  final static private int BTN_BLUETOOTH = 1;
+  final static private int BTN_DOWNLOAD  = 2;
+  final static private int BTN_GROUP     = 3;
+  final static private int BTN_COMPUTE   = 4;
+  final static private int BTN_COVER     = 5;
+  final static private int BTN_READ      = 6;
+  final static private int BTN_WRITE     = 7;
+  final static private int BTN_SEARCH    = 8;
 
   static final private int[] izonsno = {
                         R.drawable.iz_toggle_no,
@@ -183,12 +184,17 @@ public class GMActivity extends Activity
   private BitmapDrawable mBMwrite_no = null;
   private BitmapDrawable mBMdownload;
   private BitmapDrawable mBMdownload_on;
+  private BitmapDrawable mBMdownload_wait;
   private BitmapDrawable mBMbluetooth;
   private BitmapDrawable mBMbluetooth_no;
 
   /** set the window title (empty method)
    */
   public void setTheTitle() { }
+
+  /** @return the name (ILister interface)
+   */
+  public String name() { return "ShotWindow"; };
 
   // -------------------------------------------------------------------
   // forward survey name to DeviceHelper
@@ -622,6 +628,7 @@ public class GMActivity extends Activity
     // TDLog.v( "refreshDisplay nr " + nr );
     resetTitle( );
     if ( nr >= 0 ) {
+      if ( TDInstance.isDeviceXBLE() ) nr *= 2; // GM_DOWNLOAD
       if ( nr > 0 ) updateDisplay( );
       if ( toast ) {
         TDToast.make( getResources().getQuantityString(R.plurals.read_calib_data, nr/2, nr/2, nr ) );
@@ -633,8 +640,8 @@ public class GMActivity extends Activity
       }
     }
     TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload );
-    // TDandroid.setButtonBackground( mButton1[BTN_BT], mBMbluetooth );
-    // mButton1[BTN_BT].setEnabled( true );
+    // TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth );
+    // mButton1[BTN_BLUETOOTH].setEnabled( true );
     // mButton1[BTN_TOGGLE].setEnabled( true );
     enableButtons( true );
   }
@@ -670,7 +677,22 @@ public class GMActivity extends Activity
   @Override
   public void setConnectionStatus( int status )
   {
-    /* nothing : GM data are downloaded only on-demand */
+    switch ( status ) {
+      case ConnectionState.CONN_CONNECTED:
+        TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_on );
+        TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], (TDInstance.isDeviceBric() ? mBMbluetooth : mBMbluetooth_no ) );
+        enableButtons( false );
+        break;
+      case ConnectionState.CONN_WAITING:
+        TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_wait );
+        TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], (TDInstance.isDeviceBric() ? mBMbluetooth : mBMbluetooth_no ) );
+        enableButtons( false );
+        break;
+      default:
+        TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload );
+        TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth );
+        enableButtons( true );
+    }
   }
 
   // --------------------------------------------------------------
@@ -837,16 +859,17 @@ public class GMActivity extends Activity
     }
     mButton1[mNrButton1] = MyButton.getButton( this, null, R.drawable.iz_empty );
     if ( TDLevel.overAdvanced ) {
-      if ( TDInstance.deviceType() == Device.DISTO_X310 ) mButton1[ BTN_BT ].setOnLongClickListener( this );
+      if ( TDInstance.deviceType() == Device.DISTO_X310 ) mButton1[ BTN_BLUETOOTH ].setOnLongClickListener( this );
       mButton1[ BTN_SEARCH ].setOnLongClickListener( this );
     }
 
-    mBMdownload     = MyButton.getButtonBackground( mApp, res, izons[BTN_DOWNLOAD] ); 
-    mBMdownload_on  = MyButton.getButtonBackground( mApp, res, izonsno[BTN_DOWNLOAD] );
-    mBMbluetooth    = MyButton.getButtonBackground( mApp, res, izons[BTN_BT] );
-    mBMbluetooth_no = MyButton.getButtonBackground( mApp, res, izonsno[BTN_BT] );
-    mBMtoggle       = MyButton.getButtonBackground( mApp, res, izons[BTN_TOGGLE] );
-    mBMtoggle_no    = MyButton.getButtonBackground( mApp, res, izonsno[BTN_TOGGLE] );
+    mBMdownload      = MyButton.getButtonBackground( mApp, res, izons[BTN_DOWNLOAD] ); 
+    mBMdownload_on   = MyButton.getButtonBackground( mApp, res, izonsno[BTN_DOWNLOAD] );
+    mBMdownload_wait = MyButton.getButtonBackground( mApp, res, R.drawable.iz_download_wait );
+    mBMbluetooth     = MyButton.getButtonBackground( mApp, res, izons[BTN_BLUETOOTH] );
+    mBMbluetooth_no  = MyButton.getButtonBackground( mApp, res, izonsno[BTN_BLUETOOTH] );
+    mBMtoggle        = MyButton.getButtonBackground( mApp, res, izons[BTN_TOGGLE] );
+    mBMtoggle_no     = MyButton.getButtonBackground( mApp, res, izonsno[BTN_TOGGLE] );
     if ( TDLevel.overBasic ) {
       mBMcover        = MyButton.getButtonBackground( mApp, res, izons[BTN_COVER] );
       // mBMcover_no     = MyButton.getButtonBackground( mApp, res, izonsno[BTN_COVER] );
@@ -927,7 +950,7 @@ public class GMActivity extends Activity
     boolean enable2 = enable && mEnableWrite;
 
     mButton1[BTN_TOGGLE].setEnabled( enable );
-    mButton1[BTN_BT].setEnabled( enable );
+    mButton1[BTN_BLUETOOTH].setEnabled( enable );
     // if ( TDLevel.overBasic ) {
     //   mButton1[BTN_COVER].setEnabled( enable2 );
     //   TDandroid.setButtonBackground( mButton1[BTN_COVER], ( enable2 ? mBMcover : mBMcover_no ) );
@@ -941,11 +964,11 @@ public class GMActivity extends Activity
     if ( enable ) {
       setTitleColor( TDColor.TITLE_NORMAL );
       TDandroid.setButtonBackground( mButton1[BTN_TOGGLE], mBMtoggle );
-      TDandroid.setButtonBackground( mButton1[BTN_BT], mBMbluetooth );
+      TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth );
     } else {
       setTitleColor( TDColor.CONNECTED );
       TDandroid.setButtonBackground( mButton1[BTN_TOGGLE], mBMtoggle_no );
-      TDandroid.setButtonBackground( mButton1[BTN_BT], mBMbluetooth_no );
+      TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth_no );
     }
   }
 
@@ -970,8 +993,8 @@ public class GMActivity extends Activity
   {
     // if ( diving ) return;
     // if ( TDInstance.isBleDevice() ) enable = true; // always enabled for BLE
-    TDandroid.setButtonBackground( mButton1[BTN_BT], enable ? mBMbluetooth : mBMbluetooth_no );
-    mButton1[BTN_BT].setEnabled( enable );
+    TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], enable ? mBMbluetooth : mBMbluetooth_no );
+    mButton1[BTN_BLUETOOTH].setEnabled( enable );
   }
 
   /** implements the long tap listener
@@ -985,7 +1008,7 @@ public class GMActivity extends Activity
     CutNPaste.dismissPopupBT();
 
     Button b = (Button)view;
-    if ( b == mButton1[ BTN_BT ] ) {
+    if ( b == mButton1[ BTN_BLUETOOTH ] ) {
       // TDLog.v( "BT button long click");
       // enableBluetoothButton(false);
       new DeviceX310TakeShot( this, (TDSetting.mCalibShotDownload ? new ListerHandler(this) : null), mApp, 1, DataType.DATA_CALIB ).execute();
@@ -1023,7 +1046,7 @@ public class GMActivity extends Activity
       enableButtons( false );
       new CalibToggleTask( this, mApp ).execute();
 
-    } else if ( b == mButton1[BTN_BT] ) { // BLUETOOTH
+    } else if ( b == mButton1[BTN_BLUETOOTH] ) { // BLUETOOTH
       doBluetooth( b );
 
     } else if ( b == mButton1[BTN_DOWNLOAD] ) { // DOWNLOAD
@@ -1033,9 +1056,16 @@ public class GMActivity extends Activity
         enableWrite( false );
         setTitleColor( TDColor.CONNECTED );
         ListerHandler handler = new ListerHandler( this ); // FIXME_LISTER
-        new DataDownloadTask( mApp, handler, this, DataType.DATA_CALIB ).execute();
-        TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMdownload_on );
-        enableButtons( false );
+        // new DataDownloadTask( mApp, handler, this, DataType.DATA_CALIB ).execute();
+
+        boolean downloading = mApp.mDataDownloader.toggleDownload();
+        TDLog.v("GM downloading " + downloading );
+        // mApp.notifyListerStatus( handler, downloading ? ConnectionState.CONN_WAITING : ConnectionState.CONN_DISCONNECTED );
+        mApp.mDataDownloader.doDataDownload( handler, DataType.DATA_CALIB );
+
+        // TDLog.v("GM set button DOWNLOAD on");
+        // TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMdownload_on );
+        // enableButtons( false );
       }
 
     } else if ( b == mButton1[BTN_GROUP] ) { // GROUP

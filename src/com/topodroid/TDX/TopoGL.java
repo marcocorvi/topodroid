@@ -14,7 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDLocale;
-import com.topodroid.utils.TDString;
+// import com.topodroid.utils.TDString;
 // import com.topodroid.utils.TDVersion;
 
 // import com.topodroid.TDX.TDandroid;
@@ -73,17 +73,17 @@ import android.os.Build; // FINERPRINT and MODEL
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.AsyncTask;
-import android.os.Message;
+// import android.os.Message;
 import android.os.ParcelFileDescriptor;
 
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.preference.PreferenceManager;
 
-import android.content.ActivityNotFoundException;
+// import android.content.ActivityNotFoundException;
 import android.content.SharedPreferences;
 // import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.content.SharedPreferences.Editor;
+// import android.content.SharedPreferences.Editor;
 import android.content.Intent;
 import android.content.Context;
 import android.content.res.Resources;
@@ -2463,7 +2463,7 @@ public class TopoGL extends Activity
       //   mBluetoothState = BLUETOOTH_READY;
       //   // (new AsyncTask<Void, Void, Boolean>() {
       //   //   @Override public Boolean doInBackground(Void ... v ) {
-      //       boolean ret = mBluetoothComm.connectDevice();
+      //       boolean ret = mBluetoothComm.connectDevice( lister ? );
       //       setBluetoothParser( mBtRemoteName );
       //   //     return ret;
       //   //   }
@@ -2566,7 +2566,7 @@ public class TopoGL extends Activity
     if ( mBluetoothComm != null ) {
       (new AsyncTask<Void, Void, Void>() {
         @Override public Void doInBackground(Void ... v ) {
-          mBluetoothComm.connectDevice();
+          mBluetoothComm.connectDevice( lister ? );
           return null;
         }
       } ).execute();
@@ -2655,7 +2655,7 @@ public class TopoGL extends Activity
           stopBluetooth();
           break;
         case BLUETOOTH_WAIT: 
-          doDisconnectDevice();
+          doDisconnectDevice( new ListerHandler(this) ); // requires this to be ILister
           setBluetoothState( BLUETOOTH_ON );
           break;
         case BLUETOOTH_READY: 

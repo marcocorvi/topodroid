@@ -73,7 +73,7 @@ class FractalComputer
   //
   /** box
    */
-  class Box
+  static class Box
   {
     double x0, y0, z0; // min coords
     double x1, y1, z1; // max coords
@@ -280,7 +280,7 @@ class FractalComputer
       } else if ( t0y > 1 ) {
         if ( t1y > 1 ) {
           return false;
-        } else if ( t1y > 1 ) { // P1 intersection of segment (p0x, p0y, p0z)-(p1x, p1y, p1z) with plane Y = b.y0
+        } else if ( t1y < 0 ) { // P1 intersection of segment (p0x, p0y, p0z)-(p1x, p1y, p1z) with plane Y = b.y0
           double t = (b.y0 - p0y)/(p1y - p0y);
           p0x = p0x + t * (p1x - p0x);
           p0y = b.y0;
@@ -368,7 +368,7 @@ class FractalComputer
       } else if ( t0y > 1 ) {
         if ( t1y > 1 ) {
           return 0.0;
-        } else if ( t1y > 1 ) { // P1 intersection of segment (p0x, p0y, p0z)-(p1x, p1y, p1z) with plane Y = b.y0
+        } else if ( t1y < 0 ) { // P1 intersection of segment (p0x, p0y, p0z)-(p1x, p1y, p1z) with plane Y = b.y0
           double t = (b.y0 - p0y)/(p1y - p0y);
           p0x = p0x + t * (p1x - p0x);
           p0y = b.y0;
@@ -420,7 +420,7 @@ class FractalComputer
 
   /** array of boxes all of the same side (stored on a tree-set)
    */
-  class SingleBox
+  static class SingleBox
   {
     int nx, ny, nz;  // number of boxes in direction X, Y, and Z
     private int nn;  // total number of boxes
@@ -761,7 +761,7 @@ class FractalComputer
     double dz = (zmax - zmin);
     // TDLog.v( "FRACTAL dx " + dx + " dy " + dy + " dz " + dz );
 
-    // dims: make shure tey are multiple of max_side
+    // dims: make sure tey are multiple of max_side
     int max_side = 1<<DIM_ONE;
     // 1 2 4 8 16 32 64 128
     int nx = (int)(dx/one) + 1; nx = max_side*( (nx + max_side-1)/max_side );
@@ -815,8 +815,8 @@ class FractalComputer
   }
 
   /** intersection of a box and a segment
-   * @param box   box
-   * @param line  segment
+   * @param b  box
+   * @param ln segment
    * @return true if the box intersects the segment
    */
   private boolean intersection( Box b, Line ln )

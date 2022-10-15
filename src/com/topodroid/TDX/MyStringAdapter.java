@@ -46,7 +46,7 @@ class MyStringAdapter extends BaseAdapter
 
   void remove( String str ) { mStr.remove( str ); }
 
-  class Holder { TextView tv; }
+  static class Holder { TextView tv; }
 
   void clear() { mStr.clear(); }
 

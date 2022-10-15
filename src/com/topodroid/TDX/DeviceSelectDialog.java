@@ -132,7 +132,7 @@ class DeviceSelectDialog extends MyDialog
     mLister.setTheTitle();
     mDownloader.toggleDownload();
     mLister.setConnectionStatus( mDownloader.getStatus() );
-    mDownloader.doDataDownload( DataType.DATA_ALL );
+    mDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_ALL );
   }
 
   /** respond to a user tap - dismiss the dialog

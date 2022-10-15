@@ -16,6 +16,7 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.TDX.DBlock;
 import com.topodroid.TDX.DataHelper;
 import com.topodroid.TDX.SurveyInfo;
+import com.topodroid.TDX.TglColor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class TdmSurvey
   SurveyInfo mInfo = null;
   private int mLoadedData = -1; // -1 to do, 0 failed, 1 loaded
   float      mDeclination; // declination [radians]
-  int        mColor = 0xffcc9933;
+  int        mColor; // = 0xffcc9933;
 
   ArrayList< TdmShot >    mShots;
   ArrayList< TdmStation > mStations;
@@ -52,24 +53,43 @@ public class TdmSurvey
     mSurveys  = new ArrayList< TdmSurvey >();
     mEquates  = new ArrayList< TdmEquate >();
     // mFixes    = new ArrayList< TdFix >();
+    mColor = TglColor.getSurveyColor();
     mDeclination = 0;
   }
 
   /** cstr
    * @param name    survey name
-   * @param parent  survey parent
+   * @param color   survey color
    */
-  TdmSurvey( String name, TdmSurvey parent )
+  TdmSurvey( String name, int color )
   {
     mName   = name;
-    mParent = parent;
+    mParent = null;
     mShots    = new ArrayList< TdmShot >();
     mStations = null;
     mSurveys  = new ArrayList< TdmSurvey >();
     mEquates  = new ArrayList< TdmEquate >();
     // mFixes    = new ArrayList< TdFix >();
+    mColor = color;
     mDeclination = 0;
   }
+
+  // /** cstr
+  //  * @param name    survey name
+  //  * @param parent  survey parent
+  //  */
+  // TdmSurvey( String name, TdmSurvey parent )
+  // {
+  //   mName   = name;
+  //   mParent = parent;
+  //   mShots    = new ArrayList< TdmShot >();
+  //   mStations = null;
+  //   mSurveys  = new ArrayList< TdmSurvey >();
+  //   mEquates  = new ArrayList< TdmEquate >();
+  //   // mFixes    = new ArrayList< TdFix >();
+  //   mColor = TglColor.getSurveyColor();
+  //   mDeclination = 0;
+  // }
 
   /** get a child survey
    * @param ns     survey namespace
@@ -283,8 +303,8 @@ public class TdmSurvey
               mStations.add( ts );
               repeat = true;
             } else {
-	      // skip: both shot stations exist
-	    }
+	          // skip: both shot stations exist
+	        }
             sh.setTdmStations( fs, ts );
           } else if ( ts != null ) { // FROM does not exist, but TO exists
             float h = (float)Math.cos( sh.mClino ) * sh.mLength;

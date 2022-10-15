@@ -394,7 +394,7 @@ public class DrawingSvgBase
         pw.format( end_grp );
       } else {
         printPointWithCXCY( pw, "<circle", xoff+point.cx, yoff+point.cy );
-        pw.format(Locale.US, " r=\"%d\" ", POINT_RADIUS * scale );
+        pw.format(Locale.US, " r=\"%.2f\" ", POINT_RADIUS * scale );
         pw.format(Locale.US, " style=\"fill:none;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgPointStroke );
       }
     }

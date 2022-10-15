@@ -160,7 +160,7 @@ public class PlotReloadWindow extends ItemDrawer
   // public void zoomOne() { resetZoom( ); }
 
   // --------------------------------------------------------------------------------------
-  class PlotBackup
+  static class PlotBackup
   {
     String tdr;
     String desc; // (bck) age [size]

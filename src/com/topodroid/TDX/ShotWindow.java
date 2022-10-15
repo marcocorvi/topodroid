@@ -12,7 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDFile;
+// import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFeedback;
 import com.topodroid.utils.TDTag;
@@ -86,9 +86,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
-import android.net.Uri;
+// import android.net.Uri;
 
-import java.io.File;
+// import java.io.File;
 import java.util.TreeSet;
 
 // FIXME-28
@@ -410,7 +410,6 @@ public class ShotWindow extends Activity
     }
   }
 
-
   public void setTheTitle()
   {
     StringBuilder sb = new StringBuilder();
@@ -427,7 +426,7 @@ public class ShotWindow extends Activity
   }
 
   /** @return true if the "current station" name is the specified name
-   * @param name   specified name
+   * @param st   specified name
    */
   boolean isCurrentStationName( String st ) { return mApp.isCurrentStationName( st ); }
 
@@ -1367,6 +1366,10 @@ public class ShotWindow extends Activity
     setRefAzimuthButton( );
   }
 
+  /** @return the name (ILister interface)
+   */
+  public String name() { return "ShotWindow"; };
+
   // --------------------------------------------------------------
 
   private boolean doubleBack = false;
@@ -1492,11 +1495,11 @@ public class ShotWindow extends Activity
             }
           } else {
             mDataDownloader.toggleDownload();
-            mDataDownloader.doDataDownload( DataType.DATA_SHOT );
+            mDataDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_SHOT );
           }
         } else { // TODO something cleverer than falling back to short click
           mDataDownloader.toggleDownload();
-          mDataDownloader.doDataDownload( DataType.DATA_SHOT );
+          mDataDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_SHOT );
         }
         ret = true;
       } else if ( isButton1( b, BTN_PLOT ) ) {
@@ -1554,10 +1557,11 @@ public class ShotWindow extends Activity
             // toggle must come first in the test
             boolean downloading = mDataDownloader.toggleDownload();
             TDFeedback.notifyFeedback( this, downloading && mBTstatus == ConnectionState.CONN_DISCONNECTED );
-            mApp.notifyStatus( downloading ? ConnectionState.CONN_WAITING : ConnectionState.CONN_DISCONNECTED );
+            // TDLog.v("SHOT download button");
+            mApp.notifyListerStatus( mApp.mListerSet, downloading ? ConnectionState.CONN_WAITING : ConnectionState.CONN_DISCONNECTED );
             // TDLog.v( "Download, conn mode " + TDSetting.mConnectionMode + " download status " + mDataDownloader.getStatus() );
             // setConnectionStatus( mDataDownloader.getStatus() );
-            mDataDownloader.doDataDownload( DataType.DATA_SHOT );
+            mDataDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_SHOT );
           } else {
             TDLog.Error("Shot Window: null device A");
           }
@@ -1944,7 +1948,7 @@ public class ShotWindow extends Activity
   }
 
   /** update the (depth) data of a shot 
-   * @param @note the params order is depth-azimuth-length
+   * @note the params order is depth-azimuth-length
    * @param p    depth
    * @param b    azimuth
    * @param d    length
@@ -1974,7 +1978,7 @@ public class ShotWindow extends Activity
    */
   void updateShotNameAndFlags( String from, String to, int extend, float stretch, long flag, long leg, String comment, DBlock blk, final boolean renumber )
   {
-    TDLog.v("update shot " + from + "-" + to + " leg " + leg + "/" + blk.getLegType() + " blk type " + blk.getBlockType() + " comment " + comment );
+    // TDLog.v("update shot " + from + "-" + to + " leg " + leg + "/" + blk.getLegType() + " blk type " + blk.getBlockType() + " comment " + comment );
     String sts = checkXSections( blk, from, to );
     if ( sts == null ) {
       doUpdateShotNameAndFlags( from, to, extend, stretch, flag, leg, comment, blk );
@@ -2106,7 +2110,7 @@ public class ShotWindow extends Activity
    */
   void updateDBlockName( DBlock blk, String from, String to )
   {
-    TDLog.v("update Block Name ");
+    // TDLog.v("update Block Name ");
     String sts = checkXSections( blk, from, to );
     if ( sts == null ) {
       updateShotName( blk.mId, from, to );
@@ -2219,7 +2223,7 @@ public class ShotWindow extends Activity
    */
   void renumberBlocks( List< DBlock > blks, String from, String to )  // RENUMBER SELECTED BLOCKS
   {
-    TDLog.v("renumber Blocks " + blks.size() );
+    // TDLog.v("renumber Blocks " + blks.size() );
     String sts = checkXSections( blks, from, to );
     if ( sts == null ) {
       doRenumberBlocks( blks, from, to );
@@ -2250,7 +2254,7 @@ public class ShotWindow extends Activity
    */
   private void doRenumberBlocks( List< DBlock > blks, String from, String to )  // RENUMBER SELECTED BLOCKS
   {
-    TDLog.v("do Renumber Blocks - size " + blks.size() );
+    // TDLog.v("do Renumber Blocks - size " + blks.size() );
     if ( from.length() == 0 && to.length() == 0 ) {
       for ( DBlock b : blks ) {
         b.setBlockName( from, to );
@@ -2550,7 +2554,9 @@ public class ShotWindow extends Activity
     return false;
   }
 
-
+  /** update the connection status feedbacks
+   * @param status  new status
+   */
   public void setConnectionStatus( int status )
   { 
     if ( TDInstance.isDivingMode() ) return;
@@ -2560,9 +2566,9 @@ public class ShotWindow extends Activity
       TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_no );
       TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], mBMbluetooth_no );
     } else {
+      // TDLog.v( "SHOT set button, status " + mBTstatus + " -> " + status );
       if ( status != mBTstatus ) {
         mBTstatus = status;
-        // TDLog.v( "set button, status " + status );
         // mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
         switch ( status ) {
           case ConnectionState.CONN_CONNECTED:
@@ -2805,7 +2811,7 @@ public class ShotWindow extends Activity
   }
 
   /** react to a change in the configuration
-   * @param cfg   new configuration
+   * @param new_cfg   new configuration
    */
   @Override
   public void onConfigurationChanged( Configuration new_cfg )

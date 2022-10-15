@@ -56,7 +56,7 @@ public class GraphPaperScaleSurface extends SurfaceView
 
     /** change the graph paper density
      * @param change   change to the density
-     * @note the default scale is  (1600 * 2.54 / TopoDroidApp.getDensity)  (fized_zoom = 1 ie 1:100)
+     * @note the default scale is  (1600 * 2.54 / TopoDroidApp.getDensity)  (fixed_zoom = 1 ie 1:100)
      *       the user-selected scale is 1600 * 2.54 / density where density = TopoDroidApp.getDensity + change
      */
     void changeDensity( int change ) { mCommandManager.changeDensity( change ); }

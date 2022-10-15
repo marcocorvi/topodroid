@@ -245,7 +245,7 @@ class SymbolEnableDialog extends MyDialog
     dismiss();
   }
 
-  private class SaveSymbols extends AsyncTask< Void, Void, Void > // FIXME static or LEAK
+  private static class SaveSymbols extends AsyncTask< Void, Void, Void > // FIXME static or LEAK
   {
     boolean run = false;
     SymbolAdapter mPtAdapter = null;

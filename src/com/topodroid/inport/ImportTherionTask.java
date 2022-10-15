@@ -18,7 +18,7 @@ import com.topodroid.TDX.SurveyInfo;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.MainWindow;
 
-import java.io.InputStreamReader;
+// import java.io.InputStreamReader;
 
 import android.os.ParcelFileDescriptor;
 

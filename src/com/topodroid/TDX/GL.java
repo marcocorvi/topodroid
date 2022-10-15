@@ -116,7 +116,7 @@ class GL
   // private static int makeProgram( int vertexShader, int fragmentShader ) { return linkProgram( vertexShader, fragmentShader ); }
 
   // ------------------------------------------------------------------------
-  // UNIFORM and ATTIBUTES
+  // UNIFORM and ATTRIBUTES
 
   public static int getUniform( int program, String name ) { return GLES20.glGetUniformLocation( program, name ); }
   public static int getAttribute( int program, String name ) { return GLES20.glGetAttribLocation( program, name ); }
@@ -190,7 +190,7 @@ class GL
   //      0     2/(T-B)     0      -(T+B)/(T-B)
   //      0        0    -2/(F-N)    (F+N)/(F-N)
   //      0        0        0            1
-  // masps
+  // maps
   //   R ->  1   L -> -1
   //   T ->  1   B -> -1
   //   F -> -1   N ->  1

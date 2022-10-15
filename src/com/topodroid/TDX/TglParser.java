@@ -635,7 +635,7 @@ public class TglParser
         } else if ( powercrustcomputer != null && powercrustcomputer.hasTriangles() ) {
           stl.mTriangles = powercrustcomputer.getTriangles();
           stl.mVertex    = powercrustcomputer.getVertices();
-        } else { 
+        } else {
           // TDLog.v("TODO other walls models"); // TODO
         }
       }
@@ -800,7 +800,7 @@ public class TglParser
           }
         }).execute();
       } else {
-        // TDToast.makeBad( "failed to create convex hull object" );
+        TDLog.Error( "failed to create convex hull object" );
       }
     }
     // TDToast.make( "computing convex hull walls" );
@@ -823,7 +823,7 @@ public class TglParser
           }
         }).execute();
       } else {
-        // TDToast.makeBad( "failed to create hull object" );
+        TDLog.Error( "failed to create hull object" );
       }
     }
   }
@@ -852,7 +852,7 @@ public class TglParser
           }
         }).execute();
       } else {
-        // TDToast.makeBad( "failed to create hull object" );
+        TDLog.Error( "failed to create hull object" );
       }
     }
   }
@@ -874,7 +874,7 @@ public class TglParser
           }
         }).execute();
       } else {
-        // TDToast.makeBad( "failed to create hull object" );
+        TDLog.Error( "failed to create hull object" );
       }
     }
   }
@@ -1034,12 +1034,10 @@ public class TglParser
 
   public void deserialize( DataInputStream dis, int version ) throws IOException
   {
-    int what = 0;
     boolean done = false;
     while ( ! done ) {
       int nr = 0;
-      what = dis.read();
-      switch ( what ) {
+      switch( dis.read() ) {
         case 'C':
           nr = dis.readInt( );
           surveys.clear();

@@ -17,6 +17,10 @@ class DrawingOutlinePath
   private String mScrapName;  // scrap name
   DrawingLinePath mPath;
 
+  /** cstr
+   * @param name   scrap name
+   * @param path   outline path
+   */ 
   DrawingOutlinePath( String name, DrawingLinePath path )
   {
     mScrapName = name;
@@ -24,8 +28,11 @@ class DrawingOutlinePath
   }
 
   // DEBUG
-  String getScrapName() { return (mScrapName != null )? mScrapName : "none"; }
+  // String getScrapName() { return (mScrapName != null )? mScrapName : "none"; }
 
+  /** @return true if the given name is the scrap name
+   * @param name   given name
+   */
   boolean isScrapName( String name ) { return mScrapName.equals( name ); }
 
 }

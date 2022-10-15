@@ -244,7 +244,8 @@ public class Archiver
     //   TDLog.Error( "ZIP 5 IO error " + e.getMessage() );
     //   FIXME
     // } finally {
-      if ( zos != null ) try { zos.close(); } catch ( IOException e ) { 
+      // if ( zos != null ) // always true
+      try { zos.close(); } catch ( IOException e ) {
         ret = false;
         // TDLog.Error("ZIP compress close error");
       }
@@ -456,7 +457,7 @@ public class Archiver
    * @param zin    zip input stream
    * @param ze     zip entry
    * @param fout   entry output stream
-   * @note the zip inputstream must be aligned to the entry
+   * @note the zip input stream must be aligned to the entry
    * @return ...
    */
   private static int decompressEntry( InputStream zin, ZipEntry ze, FileOutputStream fout )
@@ -539,7 +540,7 @@ public class Archiver
       }
       
       if ( ! ( mManifestDbVersion >= TDVersion.DATABASE_VERSION_MIN ) ) {
-        TDLog.Error( "MANIFEST DB version mismatch: found " + mManifestDbVersion + " min " + + TDVersion.DATABASE_VERSION_MIN );
+        TDLog.Error( "MANIFEST DB version mismatch: found " + mManifestDbVersion + " min " + TDVersion.DATABASE_VERSION_MIN );
         return -3;
       }
       if ( ! ( mManifestDbVersion <= TDVersion.DATABASE_VERSION ) ) {
@@ -693,7 +694,7 @@ public class Archiver
       // byte[] buffer = new byte[4096];
       // int nr_entry = 0;
       Enumeration<ZipEntry> entries = (Enumeration<ZipEntry>)zip.entries(); // FIXME "unchecked cast"
-      for ( ; entries.hasMoreElements(); ) {
+      while ( entries.hasMoreElements() ) {
         ze = entries.nextElement();
         // TDLog.v("ZIP 7 entry " + ze.getName() );
         // ++ nr_entry;

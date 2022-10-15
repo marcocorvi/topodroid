@@ -13,7 +13,7 @@ package com.topodroid.tdm;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
-import com.topodroid.utils.TDString;
+// import com.topodroid.utils.TDString;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.FixedInfo;
@@ -78,7 +78,7 @@ class TdmInfoAdapter extends ArrayAdapter< FixedInfo >
     return ( pos < 0 || pos >= getCount() )? null : (FixedInfo)( getItem( pos ) );
   }
 
-  private class ViewHolder 
+  private static class ViewHolder
   { 
     int      pos;
     TextView tvName;

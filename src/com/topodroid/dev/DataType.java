@@ -24,17 +24,18 @@ public class DataType
   public final static int DATA_MEM   = 3;   // memory packet
   public final static int DATA_SCAN  = 4;   // scan data packets
 
-  static int of( byte b ) 
-  {
-    switch ( b & 0x07 ) { // packet-data bitmask 0000.0111
-      case 1: return DATA_SHOT;
-      case 2: 
-      case 3: return DATA_CALIB;
-      case 4: return DATA_SHOT;
-    } 
-    if ( b == 0x38 ) return DATA_MEM; // packer-memory bitmask 0011.1000
-    return DATA_ALL;
-  }
+  // UNUSED
+  // static int of( byte b ) 
+  // {
+  //   switch ( b & 0x07 ) { // packet-data bitmask 0000.0111
+  //     case 1: return DATA_SHOT;
+  //     case 2: 
+  //     case 3: return DATA_CALIB;
+  //     case 4: return DATA_SHOT;
+  //   } 
+  //   if ( b == 0x38 ) return DATA_MEM; // packer-memory bitmask 0011.1000
+  //   return DATA_ALL;
+  // }
 
   // protocol packet types
   public static final int PACKET_NONE   = 0;

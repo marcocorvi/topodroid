@@ -15,9 +15,9 @@ package com.topodroid.num;
 
 import java.util.ArrayList;
 
-class NumCycle
+public class NumCycle
 {
-  class NumCycleBranch
+  static class NumCycleBranch
   {
     NumBranch mBranch;
     // NumNode   mNode;
@@ -120,9 +120,7 @@ class NumCycle
   {
     NumCycle ret = new NumCycle( 0 ); // sz = 0 (it is unused)
     ArrayList< NumCycleBranch > branches2 = new ArrayList<>();
-    for ( NumCycleBranch cb2 : cy.branches ) {
-      branches2.add( cb2 );
-    }
+    branches2.addAll( cy.branches ); // for ( NumCycleBranch cb2 : cy.branches ) branches2.add( cb2 );
     for ( NumCycleBranch cb1 : branches ) {
       NumBranch b1 = cb1.mBranch;
       int d1 = cb1.mDir;
@@ -199,7 +197,7 @@ class NumCycle
 
   /** add a branch to this cycle
    * @param branch   branch to add
-   * @param node     ...
+   * @param node     node to determine the direction of the branch in the cycle
    */
   void addBranch( NumBranch branch, NumNode node )
   {
@@ -216,7 +214,7 @@ class NumCycle
 
   /** add a branch
    * @param ncb   cycle-branch
-   * @mote this is used to make composite cycles (combinations of cycles with integer coefficients)
+   * @note this is used to make composite cycles (combinations of cycles with integer coefficients)
    */
   void addBranch( NumCycleBranch ncb ) { branches.add( ncb ); }
 
@@ -279,15 +277,26 @@ class NumCycle
     return true;
   }
 
-  // DEBUG
-  // public String toString()
-  // {
-  //   StringBuilder sb = new StringBuilder();
-  //   for ( NumCycleBranch branch : branches ) {
-  //     sb.append( branch.mBranch.toString() ).append(" (").append( branch.mDir ).append(") ");
-  //   }
-  //   return sb.toString();
-  // }
+  /** @return string description of the loop
+   */
+  public String toString()
+  {
+    StringBuilder sb = new StringBuilder();
+    for ( NumCycleBranch branch : branches ) {
+      // sb.append( branch.mBranch.toString() ).append(" (").append( branch.mDir ).append(") ");
+      sb.append( branch.mBranch.toString( branch.mDir) ).append(" ");
+    }
+    return sb.toString();
+  }
+
+  /** set the bad-loop flag to the cycle shots
+   */
+  void setBadLoopShots()
+  {
+    for ( NumCycleBranch branch : branches ) {
+      branch.mBranch.setBadLoopShots();
+    }
+  }
 
 }
 

@@ -2,7 +2,7 @@ encoding utf-8
 symbol point
 name no-wheelchair
 name-pt cadeira_de_rodas_(não_acessível)
-name-ro fără-scaun-cu-rotile
+name-ro fără_scaun_cu_rotile
 name-hu kerekesszék_nélkül
 th_name no-wheelchair
 orientation no

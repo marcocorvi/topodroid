@@ -65,7 +65,7 @@ public class GlNames extends GlShape
 
   // ----------------------------------------
  
-  private class GlName
+  private static class GlName
   {
     Vector3D pos; // XYZ OpenGL
     String   name;
@@ -186,7 +186,7 @@ public class GlNames extends GlShape
     if ( mDataBuffer != null ) {
       float[] val = new float[ 3 * NN ];
       for (int j=0; j<NN; ++j ) {
-        val[ 3*j+0 ] = (float)p.x;
+        val[ 3*j   ] = (float)p.x;
         val[ 3*j+1 ] = (float)p.y;
         val[ 3*j+2 ] = (float)p.z;
       }
@@ -471,7 +471,7 @@ public class GlNames extends GlShape
     for ( int i=0; i<nameCount; ++ i) {
       Vector3D vv = mNames.get( i ).pos;
       int off4 = 4 * i;
-      mData[off4+0] = (float)vv.x; // save data vectors for the check 
+      mData[off4  ] = (float)vv.x; // save data vectors for the check
       mData[off4+1] = (float)vv.y;
       mData[off4+2] = (float)vv.z;
       mData[off4+3] = 1;
@@ -552,13 +552,13 @@ public class GlNames extends GlShape
         // TDLog.v("NAMES " + name + " S " + s1 + " " + s2 + " T " + t1 + " " + t2 + " X2 " + x2 + " Y2 " + y2 );
 
         int off = i*4 * NN;
-        pos[off+0] =-x2; pos[off+1] =-y2; pos[off+2] = s1; pos[off+3] = t1; off += 4;
-        pos[off+0] =-x2; pos[off+1] = y2; pos[off+2] = s1; pos[off+3] = t2; off += 4;
-        pos[off+0] = x2; pos[off+1] = y2; pos[off+2] = s2; pos[off+3] = t2; off += 4;
+        pos[off  ] =-x2; pos[off+1] =-y2; pos[off+2] = s1; pos[off+3] = t1; off += 4;
+        pos[off  ] =-x2; pos[off+1] = y2; pos[off+2] = s1; pos[off+3] = t2; off += 4;
+        pos[off  ] = x2; pos[off+1] = y2; pos[off+2] = s2; pos[off+3] = t2; off += 4;
         
-        pos[off+0] =-x2; pos[off+1] =-y2; pos[off+2] = s1; pos[off+3] = t1; off += 4;
-        pos[off+0] = x2; pos[off+1] = y2; pos[off+2] = s2; pos[off+3] = t2; off += 4;
-        pos[off+0] = x2; pos[off+1] =-y2; pos[off+2] = s2; pos[off+3] = t1; off += 4;
+        pos[off  ] =-x2; pos[off+1] =-y2; pos[off+2] = s1; pos[off+3] = t1; off += 4;
+        pos[off  ] = x2; pos[off+1] = y2; pos[off+2] = s2; pos[off+3] = t2; off += 4;
+        pos[off  ] = x2; pos[off+1] =-y2; pos[off+2] = s2; pos[off+3] = t1; off += 4;
       }
       // TDLog.v("I " + i + " count " + nameCount );
       done = ( i == nameCount );

@@ -50,7 +50,7 @@ import com.topodroid.mag.WorldMagneticModel;
 
 // import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStreamReader;
+// import java.io.InputStreamReader;
 // import java.io.FileFilter;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -386,7 +386,7 @@ public class MainWindow extends Activity
     }
   }
 
-  /** react to a user long tap on an item in the survey list or on a manu
+  /** react to a user long tap on an item in the survey list or on a menu
    * @param parent   view container
    * @param view     tapped view
    * @param pos      entry position
@@ -448,7 +448,7 @@ public class MainWindow extends Activity
     // }
   }
 
-  /** start the shot window actuvity
+  /** start the shot window activity
    * @param item   survey name
    */
   public void startShowWindow( CharSequence item )
@@ -458,7 +458,7 @@ public class MainWindow extends Activity
     startActivity( openIntent );
   }
 
-  /** deafult window title: current work directory
+  /** default window title: current work directory
    */
   public void setTheTitle()
   {

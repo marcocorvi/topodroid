@@ -29,15 +29,19 @@ public class DataDownloader
   // private Context mContext; // UNUSED
   // private BroadcastReceiver mBTReceiver = null;
   private final TopoDroidApp mApp;
-
+  private ListerHandler mLister = null;
 
   private int mConnected = ConnectionState.CONN_DISCONNECTED;  // whether it is "connected": 0 unconnected, 1 connecting, 2 connected
   private boolean mDownload  = false;  // whether it is "downloading"
 
-  boolean isConnected() { return mConnected == ConnectionState.CONN_CONNECTED; }
+  // boolean isConnected() { return mConnected == ConnectionState.CONN_CONNECTED; }
+
   boolean isDownloading() { return mDownload; }
+
   boolean needReconnect() { return mDownload && mConnected != ConnectionState.CONN_CONNECTED; }
+
   public void setConnected( int connected ) { mConnected = connected; }
+
   void setDownload( boolean download ) { mDownload = download; }
 
   /** update the "connected" state
@@ -91,54 +95,58 @@ public class DataDownloader
     mDownload = ! mDownload;
     mConnected = mDownload ? ConnectionState.CONN_WAITING : ConnectionState.CONN_DISCONNECTED;
     return mDownload;
-    // TDLog.v( "toggle download to " + mDownload );
+    // TDLog.v( "DOWNLOAD toggle to " + mDownload );
   }
 
   /** download data
+   * @param lister       ...
    * @param data_type    expected type of the data
    */
-  void doDataDownload( int data_type )
+  void doDataDownload( ListerHandler lister, int data_type )
   {
-    // TDLog.v( "Data Downloader: do Data Download() - nr " + mDownload + " connected " + mConnected );
+    TDLog.v( "DOWNLOAD: do Data Download() - nr " + mDownload + " connected " + mConnected + " data type " + data_type );
     if ( mDownload ) {
-      startDownloadData( data_type );
+      mLister = lister;
+      startDownloadData( lister, data_type );
     } else {
-      stopDownloadData();
+      stopDownloadData( lister );
     }
   }
 
   /** start to download data
-   * @param data_type    expected type of the data
+   * @param lister      data lister
+   * @param data_type   expected type of the data
    * @note called with mDownload == true
    */
-  private void startDownloadData( int data_type )
+  private void startDownloadData( ListerHandler lister, int data_type )
   {
-    // TDLog.Log( TDLog.LOG_COMM, "**** download data. status: " + mStatus );
+    // TDLog.v( "DOWNLOAD data. status: " + mStatus );
     if ( TDInstance.isContinuousMode() ) {
       if ( TDSetting.mAutoReconnect ) {
-        // TDLog.v( "Data Downloader: start download continuous - autoreconnect ");
+        // TDLog.v( "DOWNLOAD: start download continuous - autoreconnect ");
         TDInstance.secondLastShotId = TopoDroidApp.lastShotId( ); // FIXME-LATEST
-        new ReconnectTask( this, data_type, 0 ).execute();
+        new ReconnectTask( this, lister, data_type, 0 ).execute();
       } else {
-        notifyConnectionStatus( ConnectionState.CONN_WAITING );
-        tryConnect( data_type );
+        notifyConnectionStatus( lister, ConnectionState.CONN_WAITING );
+        tryConnect( lister, data_type );
       }
     } else if ( TDSetting.isConnectionModeBatch() ) {
-      tryDownloadData( data_type );
+      tryDownloadData( lister, data_type );
     } else if ( TDSetting.isConnectionModeMulti() ) {
-      tryDownloadData( data_type );
+      tryDownloadData( lister, data_type );
     }
   }
 
   /** stop to download data
+   * @param lister      data lister
    */
-  void stopDownloadData()
+  void stopDownloadData( ListerHandler lister )
   {
     // TDLog.v( "stop Download Data() connected " + mConnected );
     // if ( ! mConnected ) return;
     // if ( TDSetting.isConnectionModeBatch() ) {
       if ( mApp.disconnectComm() ) {
-        notifyConnectionStatus( ConnectionState.CONN_DISCONNECTED );
+        notifyConnectionStatus( lister, ConnectionState.CONN_DISCONNECTED );
       }
     // }
   }
@@ -147,7 +155,7 @@ public class DataDownloader
    * @param data_type    expected type of the data
    * @note called also by ReconnectTask
    */
-  void tryConnect( int data_type )
+  void tryConnect( ListerHandler lister, int data_type )
   {
     // TDLog.v( "Data Downloader: try Connect() download " + mDownload + " connected " + mConnected );
     if ( TDInstance.getDeviceA() != null && DeviceUtil.isAdapterEnabled() ) {
@@ -162,16 +170,17 @@ public class DataDownloader
       } else {
         // if this runs the RFcomm thread, it returns true
         int connected = TDSetting.mAutoReconnect ? ConnectionState.CONN_WAITING : ConnectionState.CONN_DISCONNECTED;
-
-        if ( mApp.connectDevice( TDInstance.deviceAddress(), data_type ) ) {
+        if ( mApp.connectDevice( lister, TDInstance.deviceAddress(), data_type ) ) {
           connected = ConnectionState.CONN_CONNECTED;
         }
-        // TDLog.v( "Data Downloader: **** connect device returns " + connected );
+        mLister = lister;
+        // TDLog.v( "DOWNLOADER: connect device returns " + connected );
         if ( TDInstance.isDeviceBLE() && connected == ConnectionState.CONN_CONNECTED ) {
+          TDLog.v( "DOWNLOADER: notify connected " + connected );
           mConnected = connected;
-          mApp.notifyStatus( ConnectionState.CONN_WAITING );
+          mApp.notifyListerStatus( lister, ConnectionState.CONN_WAITING );
         } else {
-          notifyUiThreadConnectionStatus( connected );
+          notifyUiThreadConnectionStatus( lister, connected );
         }
       }
     }
@@ -180,36 +189,40 @@ public class DataDownloader
   /** set the "connected" status and notify the UI 
    * @param connected  new connected status
    */
-  private void notifyUiThreadConnectionStatus( int connected )
+  private void notifyUiThreadConnectionStatus( ListerHandler lister, int connected )
   {
+    TDLog.v( "DOWNLOADER: notify UI thread connected " + connected );
     mConnected = connected;
-    mApp.notifyStatus( getStatus() ); // this is run on UI thread
+    mApp.notifyListerStatus( lister, getStatus() ); // this is run on UI thread
   }
 
   /** set the "connected" status and notify the UI 
    * @param connected  new connected status
    * @note this must be called on UI thread (onPostExecute)
    */
-  void notifyConnectionStatus( int connected )
+  void notifyConnectionStatus( ListerHandler lister, int connected )
   {
     mConnected = connected;
-    mApp.notifyStatus( getStatus() ); // this is run on UI thread
+    TDLog.v( "DOWNLOADER: notify this thread connected " + connected + " status " + getStatus() );
+    mApp.notifyListerStatus( lister, getStatus() ); // this is run on UI thread
   }
 
   /** batch on-demand download
+   * @param lister      ...
    * @param data_type   packet datatype
+   * @note the listers are taken from the app lister-set
    */
-  private void tryDownloadData( int data_type )
+  private void tryDownloadData( ListerHandler lister, int data_type )
   {
     TDInstance.secondLastShotId = TopoDroidApp.lastShotId( ); // FIXME-LATEST
     if ( TDInstance.getDeviceA() != null && DeviceUtil.isAdapterEnabled() ) {
-      notifyConnectionStatus( ConnectionState.CONN_WAITING );
-      // TDLog.Log( TDLog.LOG_COMM, "shot menu DOWNLOAD" );
-      // TDLog.v( "DataDownloader: try Download Data() - type " + data_type );
-      new DataDownloadTask( mApp, mApp.mListerSet, null, data_type ).execute();
+      notifyConnectionStatus( lister, ConnectionState.CONN_WAITING );
+      // TDLog.v( "DOWNLOAD: try Download Data() - type " + data_type );
+      // new DataDownloadTask( mApp, mApp.mListerSet, null, data_type ).execute();
+      new DataDownloadTask( mApp, lister, null, data_type ).execute();
     } else {
       mDownload = false;
-      notifyConnectionStatus( ConnectionState.CONN_DISCONNECTED );
+      notifyConnectionStatus( lister, ConnectionState.CONN_DISCONNECTED );
       TDLog.e( "download data: no device selected" );
       // if ( TDInstance.sid < 0 ) {
       //   TDLog.e( "download data: no survey selected" );
@@ -229,7 +242,7 @@ public class DataDownloader
     // TDLog.v( "DataDownloader onStop()");
     mDownload = false;
     if ( mConnected  > ConnectionState.CONN_DISCONNECTED ) { // mConnected == ConnectionState.CONN_CONNECTED || mConnected == ConnectionState.CONN_WAITING
-      stopDownloadData();
+      stopDownloadData( mLister );
       mConnected = ConnectionState.CONN_DISCONNECTED;
     }
   }

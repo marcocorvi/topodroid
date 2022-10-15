@@ -14,11 +14,14 @@ package com.topodroid.num;
 class TriPoint
 {
   String name;
-  // int n;       // nr legs with this point
-  double x, y; // coords x = East, y = North
+  // int n;      // nr legs with this point
+  double x, y;   // coords x = East, y = North
   double dx, dy; // coords variations
-  boolean used;    // work flag
+  boolean used;  // work flag
 
+  /** cstr
+   * @param n   name
+   */
   TriPoint( String n )
   { 
     name = n;

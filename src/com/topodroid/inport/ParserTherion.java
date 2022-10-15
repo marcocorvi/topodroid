@@ -38,7 +38,7 @@ class ParserTherion extends ImportParser
   /** fix station:
    * fix stations are supposed to be referred to the same coord system
    */
-  class Fix 
+  static class Fix
   {
     // private CS cs;
     String name;
@@ -53,7 +53,7 @@ class ParserTherion extends ImportParser
     }
   }
 
-  class Station
+  static class Station
   {
     String name;
     String comment;
@@ -87,9 +87,17 @@ class ParserTherion extends ImportParser
   //   return TDString.ZERO;
   // }
 
+  /** @return the declination value [deg ?]
+   */
   float surveyDeclination( ) { return mDeclination; }
+
   // ---------------------------------------------------------
 
+  /** cstr
+   * @param isr    input reader
+   * @param name   filename or surveyname ?
+   * @param apply_declination whether to apply the declination correction
+   */
   ParserTherion( InputStreamReader isr, String name, boolean apply_declination ) throws ParserException
   {
     super( apply_declination );
@@ -119,11 +127,14 @@ class ParserTherion extends ImportParser
   //   return ret.toString();
   // }
 
+  /** @return the name of the station from a fullname 
+   * @param fullname   fullname
+   */
   private String extractStationName( String fullname )
   {
     int idx = fullname.indexOf('@');
     if ( idx > 0 ) {
-       return fullname.substring(0,idx); // + "@" + path + "." + vals[1].substring(idx+1);
+       return fullname.substring( 0, idx ); // + "@" + path + "." + vals[1].substring(idx+1);
     }
     return fullname;
   }
@@ -248,7 +259,7 @@ class ParserTherion extends ImportParser
               // TDLog.v("Theron end surface");
             } else if ( state.in_map || state.in_surface || state.in_scrap || state.in_line || state.in_area ) {
               // ignore
-              // TDLog.v("Warninng: theron ignored " + line);
+              // TDLog.v("Warning: theron ignored " + line);
 
             } else if ( cmd.equals("survey") ) {
               survey_pos[ks] = path.length(); // set current survey pos in pathname
@@ -530,14 +541,14 @@ class ParserTherion extends ImportParser
                   String from, to;
                   int idx = vals[1].indexOf('@');
                   if ( idx > 0 ) {
-                    from = vals[1].substring(0,idx); // + "@" + path + "." + vals[1].substring(idx+1);
+                    from = vals[1].substring( 0, idx ); // + "@" + path + "." + vals[1].substring(idx+1);
                   } else {
                     from = vals[1]; // + "@" + path;
                   }
                   for ( int j=2; j<vals_len; ++j ) {
                     idx = vals[j].indexOf('@');
                     if ( idx > 0 ) {
-                      to = vals[j].substring(0,idx); // + "@" + path + "." + vals[j].substring(idx+1);
+                      to = vals[j].substring( 0, idx ); // + "@" + path + "." + vals[j].substring(idx+1);
                     } else {
                       to = vals[j]; // + "@" + path;
                     }

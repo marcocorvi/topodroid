@@ -84,7 +84,7 @@ class GlPoint extends GlShape
   {
     if ( mCount < MAX_COUNT ) mCount ++;
     for ( int k = mCount - 1; k>0; -- k ) {
-      mLoc[k*3 + 0] = mLoc[k*3 - 3];
+      mLoc[k*3    ] = mLoc[k*3 - 3];
       mLoc[k*3 + 1] = mLoc[k*3 - 2];
       mLoc[k*3 + 2] = mLoc[k*3 - 1];
     }

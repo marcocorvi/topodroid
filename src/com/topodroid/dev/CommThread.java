@@ -15,8 +15,9 @@ import com.topodroid.dev.distox.DistoX;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.utils.TDLog;
+import com.topodroid.TDX.ListerHandler;
 
-import android.os.Handler;
+// import android.os.Handler;
 
 public class CommThread extends Thread
 {
@@ -26,7 +27,7 @@ public class CommThread extends Thread
   // private TopoDroidProtocol mProtocol;
   private int toRead; // number of packet to read
   // private ILister mLister;
-  Handler mLister; // = null; // FIXME_LISTER
+  ListerHandler mLister; // = null; // FIXME_LISTER
   // private long mLastShotId;   // last shot id
 
   private volatile boolean doWork = true;
@@ -45,7 +46,7 @@ public class CommThread extends Thread
    * @param lister      optional data lister
    * @param data_type   packet datatype (either shot or calib)
    */
-  public CommThread( int type, TopoDroidComm comm, /* TopoDroidProtocol protocol, */ int to_read, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
+  public CommThread( int type, TopoDroidComm comm, /* TopoDroidProtocol protocol, */ int to_read, ListerHandler lister, int data_type ) // FIXME_LISTER
   {
     mType  = type;
     toRead = to_read;
@@ -66,7 +67,7 @@ public class CommThread extends Thread
     doWork = true;
     mComm.setHasG( false );
 
-    TDLog.v("RF Comm Thread start");
+    // TDLog.v("RF Comm Thread start");
 
     // TDLog.v( "DistoX-BLE", "TD comm: RF thread ... to_read " + toRead );
     if ( mType == TopoDroidComm.COMM_RFCOMM ) {
@@ -97,7 +98,7 @@ public class CommThread extends Thread
         }
       }
     } else { // if ( mType == COMM_GATT ) 
-      // Log.v("DistoX-BLEC", "TD comm: proto read_packets");
+      // Log.v("XBLE TD comm: proto read_packets");
       // mProtocol.readPacket( true, mDataType ); // start reading a packet
       mComm.readingPacket( true, mDataType );
     }
@@ -107,6 +108,6 @@ public class CommThread extends Thread
 
     // FIXME_COMM
     // mApp.notifyConnState( );
-    TDLog.v("RF Comm Thread exit");
+    // TDLog.v("RF Comm Thread exit");
   }
 }

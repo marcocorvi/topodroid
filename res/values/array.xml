@@ -55,12 +55,12 @@
   <string-array name="feedbackMode">
      <item name="none">none</item>
      <item name="sound">sound</item>
-     <item name="heptic">haptic</item>
+     <item name="haptic">haptic</item>
   </string-array>
   <string-array name="feedbackModeValue">
      <item name="none">0</item>
      <item name="sound">1</item>
-     <item name="heptic">2</item>
+     <item name="haptic">2</item>
   </string-array>
   
   <string-array name="canvasLevels">
@@ -499,7 +499,7 @@
 
   <!--
        the order of options must be increasing with the enabling level
-       and consistent thru all the arrays on the names
+       and consistent throuh all the arrays on the names
   -->
   <string-array name="surveyStations">
      <item name="no">No</item>

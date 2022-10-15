@@ -31,7 +31,7 @@ class TubeComputer implements WallComputer
     shots = s;
   }
 
-  /** @return the list of truiangles
+  /** @return the list of triangles
    */
   public ArrayList< Triangle3D > getTriangles() { return triangles; }
 
@@ -63,7 +63,7 @@ class TubeComputer implements WallComputer
 
     triangles = new ArrayList< Triangle3D >();
     for ( Cave3DTube h : tubes ) {
-      for ( Triangle3D t : h.triangles ) triangles.add( t );
+      triangles.addAll( h.triangles ); // for ( Triangle3D t : h.triangles ) triangles.add( t );
     }
     return ( triangles.size() > 0 );
   }

@@ -32,6 +32,7 @@ public class BleOpDisconnect extends BleOperation
       TDLog.e("BleOp disconnect error: null pipe" );
       return;
     }
-    if ( mPipe != null ) mPipe.disconnectGatt();
+    // if ( mPipe != null ) // always true
+    mPipe.disconnectGatt();
   }
 }

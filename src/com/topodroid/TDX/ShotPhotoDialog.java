@@ -44,7 +44,7 @@ class ShotPhotoDialog extends MyDialog
   private long     mSid;           // shot id
   private String   mName;          // shot name
   // private Button   mButtonCancel;
-  private boolean  cameraCheck;
+  private boolean  cameraAPI;
 
   /**
    * @param context   context
@@ -67,41 +67,48 @@ class ShotPhotoDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
 
-    cameraCheck = TDandroid.AT_LEAST_API_21 && TDandroid.checkCamera( mContext );
-    // TDLog.Log(  TDLog.LOG_PHOTO, "PhotoComment onCreate" );
-    initLayout(R.layout.photo_comment_dialog, R.string.title_photo_comment );
-    
-    TextView tv = (TextView) findViewById(R.id.photo_shot_name );
-    tv.setText( String.format( mContext.getResources().getString( R.string.shot_name ), mName ) );
-    mETcomment = (EditText) findViewById(R.id.photo_comment_comment);
-    mButtonOK  = (Button) findViewById(R.id.photo_comment_ok );
-    mCamera    = (CheckBox) findViewById(R.id.photo_camera );
-    if ( ! cameraCheck ) {
-      mCamera.setVisibility( View.GONE );
+    if ( ! TDandroid.checkCamera( mContext ) ) {
+      TDToast.makeWarn( R.string.warning_nogrant_camera );
+      dismiss();
     } else {
-      mCamera.setChecked( true );
-    }
+      cameraAPI = TDandroid.BELOW_API_21;
+      // TDLog.Log(  TDLog.LOG_PHOTO, "PhotoComment onCreate" );
+      initLayout(R.layout.photo_comment_dialog, R.string.title_photo_comment );
+      
+      TextView tv = (TextView) findViewById(R.id.photo_shot_name );
+      tv.setText( String.format( mContext.getResources().getString( R.string.shot_name ), mName ) );
+      mETcomment = (EditText) findViewById(R.id.photo_comment_comment);
+      mButtonOK  = (Button) findViewById(R.id.photo_comment_ok );
+      mCamera    = (CheckBox) findViewById(R.id.photo_camera );
+      if ( cameraAPI ) { // use old Camera API
+        mCamera.setVisibility( View.GONE );
+      } else {
+        mCamera.setChecked( true );  // checked = use old Camera API
+      }
 
-    mButtonOK.setOnClickListener( this );
-    // mButtonCancel = (Button) findViewById(R.id.photo_comment_cancel );
-    // mButtonCancel.setOnClickListener( this );
-    ( (Button) findViewById(R.id.photo_comment_cancel ) ).setOnClickListener( this );
+      mButtonOK.setOnClickListener( this );
+      // mButtonCancel = (Button) findViewById(R.id.photo_comment_cancel );
+      // mButtonCancel.setOnClickListener( this );
+      ( (Button) findViewById(R.id.photo_comment_cancel ) ).setOnClickListener( this );
+    }
   }
 
   @Override
   public void onClick(View v) 
   {
     Button b = (Button) v;
-    // TDLog.Log(  TDLog.LOG_INPUT, "PhotoComment onClick() " + b.getText().toString() );
-
-    if ( b == mButtonOK && mETcomment.getText() != null ) {
-      // TDLog.Log( TDLog.LOG_PHOTO, "set photo comment " + mETcomment.getText().toString() );
-      // mParent.insertPhoto( mETcomment.getText().toString() );
-      // int camera = ( cameraCheck && mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_INTENT;
-      int camera = ( cameraCheck && mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_TOPODROID_2;
-      // TDLog.v("camera " + camera + " check " + cameraCheck + " is checked " + mCamera.isChecked() );
+    if ( b == mButtonOK ) {
+      String comment = "";
+      if ( mETcomment.getText() != null ) comment = mETcomment.getText().toString().trim();
+      if ( comment.length() == 0 ) {
+        mETcomment.setError(  mContext.getResources().getString( R.string.error_text_required ) );
+        return;
+      }
+      // TDLog.v( "PHOTO comment " + comment );
+      int camera = ( cameraAPI || mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_TOPODROID_2;
+      // TDLog.v("camera " + camera + " old-API " + cameraAPI + ", checked " + mCamera.isChecked() );
       // int camera = PhotoInfo.CAMERA_TOPODROID;
-      mParent.doTakePhoto( mSid, mETcomment.getText().toString(), camera );
+      mParent.doTakePhoto( mSid, comment, camera );
     // } else if ( b == mButtonCancel ) {
       /* nothing */
     }

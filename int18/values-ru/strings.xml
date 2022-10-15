@@ -155,7 +155,7 @@
     <string name="calib_precision">Точность</string>
     <string name="calib_iter">Итераций: %1$d</string>
     <string name="calib_reset">Сбросить калибровку DistoX ?</string>
-    <!-- TODO string name="calib_min_error">Minimum error</string -->
+    <string name="calib_min_error">Минимальная ошибка</string>
 
     <string name="algorithm">Алгоритм расчета:</string>
     <string name="auto">авто</string>
@@ -301,6 +301,7 @@
     <string name="error_name_exists">Такой проект уже существует</string>
     <string name="error_name_invalid">Недопустимое название проекта</string>
     <string name="error_name_required">Требуется название</string>
+    <string name="error_text_required">Требуется ввести текст</string>
     <string name="error_station_number">Неверное кол-во пикетов</string>
     <string name="error_name_duplicate">Повторяющееся имя</string>
     <string name="error_no_section_in_section">Сечение внутри поперечного сечения недопустимо</string>
@@ -387,7 +388,7 @@
     <string name="no_proj4">Proj4 не установлен</string>
     <string name="no_sensors">В съёмке отсутствуют измерения</string>
     <!-- UNUSED string name="no_shots">В съёмке отсутствуют пикеты.\nИспользуйте кнопку Скачать для их создания</string -->
-    <!-- TODO string name="no_search_result">No search_result.</string -->
+    <string name="no_search_result">Поиск не дал результатов.</string>
     <string name="no_survey">Съёмка не выбрана.</string>
     <string name="no_symbols">Нет палитры для символа.</string>
     <!-- UNUSED string name="no_thmanager">ThManager не установлен</string -->
@@ -1655,8 +1656,8 @@
   <string name="pref_full_affine_summary">Включить аффинное преобразование абриса</string>
   <string name="pref_loopClosure_title">Закрывать кольца</string>
   <string name="pref_loopClosure_summary">Автоматически компенсировать невязки при закрытии колец</string>
-  <!-- TODO string name="pref_loop_thr_title">Loop threshold</string -->
-  <!-- TODO string name="pref_loop_thr_summary">Loop compensation threshold</string -->
+  <string name="pref_loop_thr_title">Маск. невязка</string>
+  <string name="pref_loop_thr_summary">Максимально допустимая для компенсации невязка в петле</string>
   <!-- UNUSED string name="pref_splayExtend_title">Развертка бокового замера</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Расчитывать развертку бокового замера</string -->
   <string name="pref_swapLR_title">Развернуть ЛП в Compass</string>
@@ -2050,6 +2051,7 @@
     <!-- UNUSED string name="warning_no_file">Внимание: 3d файл не обнаружен</string -->
     <!-- UNUSED string name="warning_empty_cwd">Внимание: не задан рабочий каталог</string -->
     <string name="warning_no_parent">Внимание: невозможно перейти на каталог выше</string>
+    <string name="warning_nogrant_camera">Разрешение камеры не было предоставлено</string>
     <string name="no_permissions">Приложение не может работать без необходимых разрешений</string>
 
     <!-- UNUSED string name="done_fractals">Завершено fractals dims</string -->

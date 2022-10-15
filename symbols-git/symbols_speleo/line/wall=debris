@@ -12,7 +12,7 @@ name-ru стена_из_щебень
 name-ua стіна_щебінь_опади
 name-hu fal_kőtörmelékből
 name-sk sutinové_steny
-name-ro prăbușiri-perete
+name-ro perete_prăbușiri
 th_name wall:debris
 group wall
 color 0xff0000 0xff

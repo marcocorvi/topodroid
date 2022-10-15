@@ -197,7 +197,7 @@ public class CutNPaste
     return button;
   }
 
-  /** bluetooth popyp
+  /** bluetooth popup
    */
   static private PopupWindow mPopupBT = null;
 
@@ -246,7 +246,7 @@ public class CutNPaste
       textview1 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
-            app.setX310Laser( Device.LASER_ON, 0, null, DataType.DATA_ALL );
+            app.setX310Laser( Device.LASER_ON, 0, lister, DataType.DATA_ALL );
             dismissPopupBT();
           }
         } );
@@ -259,7 +259,7 @@ public class CutNPaste
       textview2 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
-            app.setX310Laser( Device.LASER_OFF, 0, null, DataType.DATA_ALL );
+            app.setX310Laser( Device.LASER_OFF, 0, lister, DataType.DATA_ALL );
             dismissPopupBT();
           }
         } );
@@ -274,7 +274,8 @@ public class CutNPaste
           new View.OnClickListener( ) {
             public void onClick(View v) {
               // i_lister.enableBluetoothButton(false);
-              new DeviceX310TakeShot( i_lister, (TDSetting.mCalibShotDownload ? lister : null), app, 1, DataType.DATA_CALIB ).execute();
+              // new DeviceX310TakeShot( i_lister, (TDSetting.mCalibShotDownload ? lister : null), app, 1, DataType.DATA_CALIB ).execute();
+              new DeviceX310TakeShot( i_lister, lister, app, 1, DataType.DATA_CALIB ).execute();
               dismissPopupBT();
             }
           } );
@@ -305,7 +306,8 @@ public class CutNPaste
           new View.OnClickListener( ) {
             public void onClick(View v) {
               // i_lister.enableBluetoothButton(false);
-              new DeviceX310TakeShot( i_lister, (TDSetting.isConnectionModeContinuous() ? lister : null), app, 1, DataType.DATA_SHOT ).execute();
+              // new DeviceX310TakeShot( i_lister, (TDSetting.isConnectionModeContinuous() ? lister : null), app, 1, DataType.DATA_SHOT ).execute();
+              new DeviceX310TakeShot( i_lister, lister, app, 1, DataType.DATA_SHOT ).execute();
               dismissPopupBT();
             }
           } );
@@ -319,7 +321,8 @@ public class CutNPaste
           new View.OnClickListener( ) {
             public void onClick(View v) {
               // i_lister.enableBluetoothButton(false);
-              new DeviceX310TakeShot( i_lister, (TDSetting.isConnectionModeContinuous()? lister : null), app, TDSetting.mMinNrLegShots, DataType.DATA_SHOT ).execute();
+              // new DeviceX310TakeShot( i_lister, (TDSetting.isConnectionModeContinuous()? lister : null), app, TDSetting.mMinNrLegShots, DataType.DATA_SHOT ).execute();
+              new DeviceX310TakeShot( i_lister, lister, app, TDSetting.mMinNrLegShots, DataType.DATA_SHOT ).execute();
               dismissPopupBT();
             }
           } );
@@ -332,7 +335,7 @@ public class CutNPaste
       textview1 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           @Override public void onClick(View v) {
-            app.setXBLELaser( Device.LASER_ON, 0, null, DataType.DATA_ALL, true );
+            app.setXBLELaser( Device.LASER_ON, 0, lister, DataType.DATA_ALL, true );
             dismissPopupBT();
           }
         }
@@ -345,7 +348,7 @@ public class CutNPaste
       textview2 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
               new View.OnClickListener( ) {
                 @Override public void onClick(View v) {
-                  app.setXBLELaser( Device.LASER_OFF, 0, null, DataType.DATA_ALL,true );
+                  app.setXBLELaser( Device.LASER_OFF, 0, lister, DataType.DATA_ALL,true );
                   dismissPopupBT();
                 }
               } );
@@ -359,6 +362,7 @@ public class CutNPaste
                 new View.OnClickListener( ) {
                   @Override public void onClick(View v) {
                     // i_lister.enableBluetoothButton(false);
+                    // new DistoXBLETakeShot( i_lister, (TDSetting.mCalibShotDownload ? lister : null), app, 1, DataType.DATA_CALIB ).execute();
                     new DistoXBLETakeShot( i_lister, (TDSetting.mCalibShotDownload ? lister : null), app, 1, DataType.DATA_CALIB ).execute();
                     dismissPopupBT();
                   }
@@ -388,7 +392,8 @@ public class CutNPaste
                 new View.OnClickListener( ) {
                   public void onClick(View v) {
                     // i_lister.enableBluetoothButton(false);
-                    new DistoXBLETakeShot( i_lister, (TDSetting.isConnectionModeContinuous() ? lister : null), app, 1, DataType.DATA_SHOT ).execute();
+                    // new DistoXBLETakeShot( i_lister, (TDSetting.isConnectionModeContinuous() ? lister : null), app, 1, DataType.DATA_SHOT ).execute();
+                    new DistoXBLETakeShot( i_lister, lister, app, 1, DataType.DATA_SHOT ).execute();
                     dismissPopupBT();
                   }
                 } );
@@ -401,7 +406,8 @@ public class CutNPaste
                 new View.OnClickListener( ) {
                   public void onClick(View v) {
                     // i_lister.enableBluetoothButton(false);
-                    new DistoXBLETakeShot( i_lister, (TDSetting.isConnectionModeContinuous()? lister : null), app, TDSetting.mMinNrLegShots, DataType.DATA_SHOT ).execute();
+                    // new DistoXBLETakeShot( i_lister, (TDSetting.isConnectionModeContinuous()? lister : null), app, TDSetting.mMinNrLegShots, DataType.DATA_SHOT ).execute();
+                    new DistoXBLETakeShot( i_lister, lister, app, TDSetting.mMinNrLegShots, DataType.DATA_SHOT ).execute();
                     dismissPopupBT();
                   }
                 } );

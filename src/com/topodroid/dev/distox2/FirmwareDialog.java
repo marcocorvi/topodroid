@@ -159,8 +159,8 @@ public class FirmwareDialog extends MyDialog
         }
         int fw = FirmwareUtils.readFirmwareFirmware( fp ); // guess firmware version
         // TDLog.f( "Detected Firmware version " + fw );
-        TDLog.v( "Detected Firmware version " + fw );
         boolean check = (fw > 0) && FirmwareUtils.firmwareChecksum( fw, fp );
+        TDLog.v( "Detected Firmware version " + fw + " check " + check );
         askUpload( filename, fw, check );
       }
     }

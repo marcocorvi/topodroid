@@ -54,13 +54,13 @@ public class TDNum
 
   // public void dump( )
   // {
-  //   tdlog.v( "Num Stations:" );
+  //   TDLog.v( "Num Stations:" );
   //   for ( NumStation st : mStations ) {
-  //     tdlog.v( "   " + st.name + " S: " + st.s + " E: " + st.e );
+  //     TDLog.v( "   " + st.name + " S: " + st.s + " E: " + st.e );
   //   }
-  //   tdlog.v( "Shots:" );
+  //   TDLog.v( "Shots:" );
   //   for ( NumShot sh : mShots ) {
-  //     tdlog.v( "   From: " + sh.from.name + " To: " + sh.to.name );
+  //     TDLog.v( "   From: " + sh.from.name + " To: " + sh.to.name );
   //   }
   // } 
 
@@ -126,7 +126,7 @@ public class TDNum
   private double mUnattachedLength;
   private int mDupNr;  // number of duplicate shots
   private int mSurfNr; // number of surface shots
-  private double mInLegErrSum0; // angular error distribution of the data withn the legs - accumulators
+  private double mInLegErrSum0; // angular error distribution of the data within the legs - accumulators
   private double mInLegErrSum1;
   private double mInLegErrSum2;
   private double mInLegErr1;    // statistics
@@ -287,6 +287,7 @@ public class TDNum
   private ArrayList< NumClosure > mClosures;
   private ArrayList< NumNode >    mNodes;
   private ArrayList< DBlock >     mUnattachedShots;
+  private ArrayList< NumCycle >   mBadLoops;
 
   public String getOriginStation() { return (mStartStation == null)? null : mStartStation.name; }
   public NumStation getOrigin()    { return mStartStation; }
@@ -300,6 +301,7 @@ public class TDNum
   public List< NumSplay >   getSplays()   { return mSplays; }
   public List< NumClosure > getClosures() { return mClosures; }
   public List< DBlock >     getUnattached() { return mUnattachedShots; }
+  public List< NumCycle >   getBadLoops() { return mBadLoops; }
 
   /** @return the list of splays at a given station
    * @param st    station
@@ -564,7 +566,7 @@ public class TDNum
 
   // ==========================================================================
   // latest data circular buffer
-  private class DBlockBuffer
+  private static class DBlockBuffer
   {
     int N;
     int pos;
@@ -862,6 +864,7 @@ public class TDNum
     mClosures = new ArrayList<>();
     mNodes    = new ArrayList<>();
     mUnattachedShots = new ArrayList<>();
+    mBadLoops = new ArrayList<>();
 
     List< TriShot > tmpshots   = new ArrayList<>();
     List< TriSplay > tmpsplays = new ArrayList<>();
@@ -896,7 +899,7 @@ public class TDNum
         if ( from.equals( ts2.from ) && to.equals( ts2.to ) ) { // TDLog.v( "chain a positive sibling" );
           ts1.sibling = ts2;
           ts1 = ts2;
-          ts2.backshot = +1;
+          ts2.backshot = 1;
 	  ++ nrSiblings;
         } else if ( from.equals( ts2.to ) && to.equals( ts2.from ) ) { // TDLog.v( "chain a negative sibling" );
           ts1.sibling = ts2;
@@ -1024,7 +1027,7 @@ public class TDNum
     if ( TDSetting.mLoopClosure == TDSetting.LOOP_CYCLES
       || TDSetting.mLoopClosure == TDSetting.LOOP_WEIGHTED 
       || TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) {
-      // TDLog.v( "NUM loop closure compensation");
+      // TDLog.v( "NUM loop closure compensation " + TDSetting.mLoopClosure );
       compensateLoopClosure( mNodes, mShots );
   
       // recompute station positions
@@ -1176,7 +1179,7 @@ public class TDNum
   }
 
   /** insert a tri-splay into the list of splays
-   * @parm ts   tri-splay
+   * @param ts   tri-splay
    */
   private boolean insertSplay( TriSplay ts )
   {
@@ -1302,7 +1305,7 @@ public class TDNum
 
   /** a cycle step: a branch from a node
    */
-  class NumStep
+  static class NumStep
   { 
     NumBranch b; // branch of this step
     NumNode n;   // ???
@@ -1384,6 +1387,10 @@ public class TDNum
   {
     ArrayList< NumCycle > cycles = new ArrayList<>();
     int bs = branches.size();
+    // TDLog.v("NUM make indep. cycles - branches " + + bs );
+    if ( bs == 0 ) return cycles;
+
+    // TDLog.v("Indep. cycles on " + bs + " branches ");
     // StringBuilder sb = new StringBuilder();
     // for ( int k0 = 0; k0 < bs; ++k0 ) {
     //   NumBranch b0 = branches.get(k0);
@@ -1394,6 +1401,7 @@ public class TDNum
     // }
     // TDLog.v( sb.toString() );
     
+    int cnt = 0;
     NumStack stack = new NumStack( bs );
     for ( int k0 = 0; k0 < bs; ++k0 ) {
       NumBranch b0 = branches.get(k0);
@@ -1401,28 +1409,34 @@ public class TDNum
       NumNode n0 = b0.n1; // start-node for the cycle
       b0.use = 1;         // start-branch is used
       n0.use = 0;         // but start-node is not used
-      stack.push( new NumStep(b0, b0.n2, k0 ) ); // step with b0 to the second node (k0 = where start scan branches
+      // TDLog.v("STACK push [" + k0 + "] " + b0.toString() );
+      stack.push( new NumStep(b0, b0.n2, k0 ) ); // step: n1 <--- b0 (k0) --> n2
       while ( ! stack.empty() ) {
+        // TDLog.v("BRANCH stack " + stack.size() );
         NumStep s1 = stack.top();
         NumNode n1 = s1.n;
-        s1.k ++;
-        int k1 = s1.k;
-        if ( n1 == n0 ) {
-          cycles.add( buildCycle( stack ) );
-          // TDLog.v( "found cycle " + cycles.size() + " at " + n1.station.name );
+        // s1.k ++; // increase branch index
+        if ( n1 == n0 ) { // got a cycle
+          NumCycle cycle = buildCycle( stack );
+          cycles.add( cycle );
+          // TDLog.v( "found cycle " + cycles.size() + " at " + n1.station.name + ": " + cycle.toString() );
           s1.b.use = 2; // mark the last edge as no more usable
           s1.n.use = 0;
           stack.pop();
+          // TDLog.v("STACK pop");
         } else {
+          s1.k ++; // increase branch index
           int k2 = s1.k;
           for ( ; k2<bs; ++k2 ) {
             NumBranch b2 = branches.get(k2);
+            // TDLog.v("BRANCH ["+ k2 + "] use " + b2.use );
             if ( b2.use != 0 ) continue;
             NumNode n2 = b2.otherNode( n1 );
             if ( n2 != null && n2.use == 0 ) {
               b2.use = 1;
               n2.use = 1;
-              stack.push( new NumStep( b2, n2, k0 ) );
+              // TDLog.v("STACK push [" + k2 + "] " + b2.toString() );
+              stack.push( new NumStep( b2, n2, k0 ) );  // restart branch scan from k0
               s1.k = k2;
               break;
             }
@@ -1486,8 +1500,23 @@ public class TDNum
    */
   private void compensateSingleLoops( ArrayList< NumBranch > branches )
   {
+    // TDLog.v("NUM compensate single loops " + branches.size() );
     for ( NumBranch br : branches ) {
       br.computeError();
+      if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) { // find the basis of loops with smallest error
+        double error  = Math.sqrt( br.e * br.e + br.s * br.s + br.v * br.v);
+        double length = br.length();
+        if ( error > length * TDSetting.mLoopThr / 100.0 ) {
+          // TDLog.v("SELECTIVE skip single loop " + br.toString() );
+          ++ nrInaccurateLoops;
+          NumCycle c1 = new NumCycle(1);
+          c1.addBranch( br, br.n2 ); // single loop base at branch node-2 so that branch is pos. directed
+          mBadLoops.add( c1 );
+          c1.setBadLoopShots();
+          continue;
+        }
+      }
+      // TDLog.v("LOOP compensate " + br.toString() );
       br.compensateError( -br.e, -br.s, -br.v );
     }
   }
@@ -1542,12 +1571,15 @@ public class TDNum
    */
   private ArrayList< NumBranch > makeBranches( ArrayList< NumNode > nodes, boolean also_cross_end )
   {
+    // TDLog.v("make branches - nodes " + nodes.size() );
     ArrayList< NumBranch > branches = new ArrayList<>();
     if ( nodes.size() > 0 ) {
       for ( NumNode node : nodes ) {
+        // TDLog.v("node " + node.toString() );
         for ( NumShot shot : node.shots ) {
           if ( shot.branch != null ) continue;
           NumBranch branch = new NumBranch( NumBranch.BRANCH_CROSS_CROSS, node );
+          // TDLog.v("shot " + shot.toString() ); 
           NumStation sf0 = node.station;
           NumShot sh0    = shot;
           NumStation st0 = sh0.to;
@@ -1560,6 +1592,7 @@ public class TDNum
           }
           // TDLog.v( "start branch at " + sf0.name + " - " + st0.name );
           while ( st0 != sf0 ) { // follow the shot 
+            // TDLog.v("add shot " + sh0.toString() );
             branch.addShot( sh0 ); // add shot to branch and find next shot
             sh0.branch = branch;
             if ( st0.node != null ) { // end-of-branch
@@ -1567,10 +1600,13 @@ public class TDNum
               branch.setLastNode( st0.node );
               branches.add( branch );
               break;
+            } else {
+              // TDLog.v("nodeless station " + st0.toString() );
             }
             NumShot sh1 = st0.s1;
             if ( sh1 == sh0 ) { sh1 = st0.s2; }
             if ( sh1 == null ) { // dangling station: BRANCH_CROSS_END branch --> drop
+              // TDLog.v("BRANCH_CROSS_END branch");
               // mEndBranches.add( branch );
               if ( also_cross_end ) {
                 branch.setLastNode( st0.node ); // st0.node always null
@@ -1588,12 +1624,16 @@ public class TDNum
             // TDLog.v( " move to " + st0.name );
             sh0 = sh1;
           }
-          if ( st0 == sf0 ) { // closed-loop ???
-            // TDLog.Error( "ERROR closed loop in num branches");
-            if ( also_cross_end ) {
-              branch.setLastNode( st0.node );
-              branches.add( branch );
-            }
+          if ( st0 == sf0 ) { // closed-loop: this is not an error (just a very wierd case)
+            // TDLog.v("add shot " + sh0.toString() );
+            branch.addShot( sh0 ); // add shot to branch and find next shot
+            sh0.branch = branch;
+            branch.setLastNode( st0.node );
+            branches.add( branch );
+            // if ( also_cross_end ) {
+            //   branch.setLastNode( st0.node );
+            //   branches.add( branch );
+            // }
           }
         }
       }
@@ -1650,13 +1690,30 @@ public class TDNum
   //
   private void compensateLoopClosure( ArrayList< NumNode > nodes, ArrayList< NumShot > shots )
   {
+    // TDLog.v("NUM loop compensation");
     ArrayList< NumBranch > branches = makeBranches( nodes, false );
+
+    // TDLog.v("NUM branches " + branches.size() );
 
     ArrayList< NumBranch > singleBranches = new ArrayList<>();
     makeSingleLoops( singleBranches, shots ); // check all shots without branch
+    // TDLog.v("NUM single loops " + singleBranches.size() );
     compensateSingleLoops( singleBranches );
+    // TDLog.v("NUM single loop compensated");
+
+    int bs = branches.size();
+    if ( bs == 0 ) {
+      // TDLog.v("NUM loop compensation no branch"); 
+      return;
+    }
+    // for ( NumBranch b : branches ) {
+    //   // TDLog.v("BRANCH: " + b.toString() );
+    // }
 
     ArrayList< NumCycle > cycles = makeIndependentCycles( branches );
+    // TDLog.v("NUM indep. loops " + cycles.size() );
+
+    // TDLog.v("Branches " + branches.size() + " single " + singleBranches.size() + " cycles " + cycles.size() );
     // This is not necessary as the cycles are already independent
     // if ( TDSetting.mLoopClosure == ? ) {
     //   indep_cycles = new ArrayList<>(); // independent cycles
@@ -1666,9 +1723,11 @@ public class TDNum
     //     }
     //   }
     // }
-
     int ls = cycles.size();
-    int bs = branches.size();
+    if ( ls == 0 ) {
+      // TDLog.v("NUM loop compensation no cycle"); 
+      return;
+    }
 
     double[] CE = new double[ ls ]; // closure errors : mLoopClosure = NEW
     double[] CS = new double[ ls ];
@@ -1692,89 +1751,27 @@ public class TDNum
       ArrayList< NumCycle > tmp_cycles = new ArrayList<>();
       for ( int k1 = 0; k1 < ls; ++k1 ) {
         NumCycle c1 = cycles.get( k1 );
-        // TDLog.v("LOOP " + k1 + " error " + c1.error() + " " + c1.toString() );
-        tmp_cycles.add( c1 );
-        for ( int k2 = k1+1; k2 < ls; ++k2 ) {
-          NumCycle c2 = cycles.get( k2 );
-          // TDLog.v("LOOP " + k2 + " error " + c2.error() + " " + c2.toString() );
-          if ( c1.overlap( c2 ) ) {
-            NumCycle c12a = c1.compose( c2, 1 );
-            c12a.computeError();
-            NumCycle c12b = c1.compose( c2, -1 );
-            c12b.computeError();
-            tmp_cycles.add( c12a );
-            tmp_cycles.add( c12b );
-            // TDLog.v("LOOP " + k1 + "+" + k2 + " error A " + c12a.error() + " B " + c12b.error() );
-            for ( int k3 = k2+1; k3 < ls; ++k3 ) {
-              NumCycle c3 = cycles.get( k3 ); 
-              if ( c12a.overlap( c3 ) ) {
-                NumCycle c12a3a = c12a.compose( c3, 1 );
-                c12a3a.computeError();
-                NumCycle c12a3b = c12a.compose( c3, -1 );
-                c12a3b.computeError();
-                tmp_cycles.add( c12a3a );
-                tmp_cycles.add( c12a3b );
-              }
-              if ( c12b.overlap( c3 ) ) {
-                NumCycle c12b3a = c12a.compose( c3, 1 );
-                c12b3a.computeError();
-                NumCycle c12b3b = c12a.compose( c3, -1 );
-                c12b3b.computeError();
-                tmp_cycles.add( c12b3a );
-                tmp_cycles.add( c12b3b );
-              }
-            }
-          }
-        }
-      }
-      int tls = tmp_cycles.size();
-      // TDLog.v("LOOP composite " + tls );
-      // sort tmp_cycles by the (square) error - only first ls cycles
-      for ( int k = 0; k<ls; ++k ) {
-        NumCycle ck = tmp_cycles.get( k );
-        double ckse = ck.error();
-        for ( int j = k+1; j < tls; ++j ) {
-          NumCycle cj = tmp_cycles.get( j );
-          double cjse = cj.error();
-          if ( ckse > cjse ) { // try to swap
-            boolean swap = true;
-            for ( int i = 0; i < k; ++ i ) {
-              NumCycle ci = tmp_cycles.get( i );
-              int overlap_cnt = ci.overlapCount( cj );
-              if ( Math.abs(overlap_cnt) == ci.size() ) {
-                swap = false;
-                // TDLog.v("LOOP " + i + " " + ci.size() + " overlap " + j + ": " + overlap_cnt );
-                break;
-              }
-            }
-            if ( swap ) {
-              // TDLog.v("LOOP swap " + j + " " + cjse + " with " + k + " " + ckse );
-              tmp_cycles.set( k, cj );
-              tmp_cycles.set( j, ck );
-              ck = cj;
-              ckse = cjse;
-            }
-          // } else {
-          //   // TDLog.v("LOOP " + k + " " + ckse + " <= " + j + " " + cjse );
-          }
-        }
-      }
-      cycles = new ArrayList<>(); // indep_cycles
-      for ( int k = 0; k < ls; ++k ) {
-        NumCycle ck = tmp_cycles.get( k );
-        if ( ck.error() < ck.length() * TDSetting.mLoopThr / 100 ) {
-          // TDLog.v("LOOP " + k + " using " + ck.length() + " " + ck.error() + " " + ck.toString() );
-          cycles.add( tmp_cycles.get(k) ); // indep_cycles
+        // TDLog.v("Cycle error " + c1.error() + " len " + c1.length() );
+        if ( c1.error() < c1.length() * TDSetting.mLoopThr / 100.0f ) {
+          tmp_cycles.add( c1 );
         } else {
           ++ nrInaccurateLoops;
+          mBadLoops.add( c1 );
+          c1.setBadLoopShots();
         }
       }
+      cycles = tmp_cycles;
       ls = cycles.size(); // indep_cycles
-    // } else {
-    //   indep_cycles = cycles;
+      // TDLog.v("LOOP accurate " + ls + " inaccurate " + nrInaccurateLoops );
+    }
+
+    if ( ls == 0 ) {
+      // TDLog.v("LOOP no loop to correct");
+      return;
     }
 
     // cycle-branch incidence matrix
+    // TDLog.v("LOOP cycles " + ls + " branches " + bs );
     int[] alpha = new int[ bs * ls ]; // cycle = row-index, branch = col-index
     for (int y=0; y<ls; ++y ) {  // branch-cycle matrix
       NumCycle cy = cycles.get(y); // indep_cycles
@@ -1820,6 +1817,7 @@ public class TDNum
       }
 
     } else { // TDSetting.mLoopClosure == TDSetting.LOOP_CYCLES || TDSetting.LOOP_SELECTIVE 
+      // TDLog.v("LOOP compensating ..." );
       double[] aa = new double[ ls * ls ];    // 
       for (int y1=0; y1<ls; ++y1 ) { // cycle-cycle matrix
         for (int y2=0; y2<ls; ++y2 ) {
@@ -1961,8 +1959,9 @@ public class TDNum
           // compute azimuth (p2-p1)
           double dx = p2.x - p1.x; // east
           double dy = p2.y - p1.y; // north
-          double a = Math.atan2( dy, dx ) * 180 / Math.PI;
+          double a = Math.atan2( dx, dy ) * 180 / Math.PI;
           if ( a < 0 ) a += 360;
+          TDLog.v("TRI leg " + p1.name + " " + p2.name + " angle " + a );
           leg.shot.mAvgLeg.mDecl = (float)(a - leg.a); // per shot declination
         }
       }

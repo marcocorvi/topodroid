@@ -23,7 +23,7 @@
   <string-array name="feedbackMode">
      <item name="none">nincs</item>
      <item name="sound">hang</item>
-     <item name="heptic">rezgés</item>
+     <item name="haptic">rezgés</item>
   </string-array>
 
   <string-array name="canvasLevels">

@@ -29,11 +29,28 @@ public class ListerHandler extends Handler
     mLister = lister;
   }
 
+  public String name() { return mLister.name(); }
+
+  /** refresh display
+   * @param nr    number of data
+   * @param toast whether to toast
+   */
   public void refreshDisplay( int nr, boolean toast )
   {
     if ( mLister != null ) mLister.refreshDisplay( nr, toast );
   }
 
+  /** set the connection status
+   * @param status status
+   */
+  public void setConnectionStatus( int status ) 
+  {
+    if ( mLister != null ) mLister.setConnectionStatus( status );
+  }
+
+  /** handle a message
+   * @param msg  message
+   */
   @Override
   public void handleMessage( Message msg )
   {

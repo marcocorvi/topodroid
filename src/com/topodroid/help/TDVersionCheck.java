@@ -36,7 +36,6 @@ public class TDVersionCheck extends AsyncTask< Void, Integer, Integer >
   private static boolean running = false; 
 
   /** cstr
-   * @param url   URL from which to download the man pages
    */
   public TDVersionCheck( /* Context context, */ )
   {
@@ -45,7 +44,7 @@ public class TDVersionCheck extends AsyncTask< Void, Integer, Integer >
 
   // -------------------------------------------------------------------
   /** execute tha man pages download in background
-   * @param statuses ...
+   * @param args ...
    */
   @Override
   protected Integer doInBackground( Void... args )

@@ -98,7 +98,7 @@ class TdmViewStation
     return ret;
   }
 
-  /** set the chckbox in the station view
+  /** set the checkbox in the station view
    * @param cb  checkbox
    */
   void setCheckBox( CheckBox cb ) 

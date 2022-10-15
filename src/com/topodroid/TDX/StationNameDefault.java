@@ -13,8 +13,8 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDStatus;
-import com.topodroid.common.LegType;
+// import com.topodroid.utils.TDStatus;
+// import com.topodroid.common.LegType;
 import com.topodroid.prefs.TDSetting;
 
 import java.util.List;
@@ -22,7 +22,7 @@ import java.util.Set;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.view.View;
+// import android.view.View;
 
 class StationNameDefault extends StationName
 {
@@ -147,7 +147,7 @@ class StationNameDefault extends StationName
       }
     }
    
-    // processing skipped ahots ...
+    // processing skipped shots ...
     if ( sec_legs.size() > 0 ) {
       ret |= assignStations( sec_legs, sts );
     } else {
@@ -175,7 +175,7 @@ class StationNameDefault extends StationName
   /** assign station names to shots
    * @param list         list of dblock, including those to assign
    * @param sts          station names already in use
-   * DistoX backshot-mode is handled separatedly
+   * DistoX backshot-mode is handled separately
    * @return true if a leg has been assigned
    */
   @Override
@@ -207,7 +207,7 @@ class StationNameDefault extends StationName
     if ( TDLog.isStreamFile() ) {
       TDLog.f("ASSIGN " + TDLog.threadId() + " shots " + list.size() + " stations " + (sts!=null? sts.size():"-") );
       StringBuilder sb = new StringBuilder();
-      for ( DBlock b : list ) sb.append( name(b) + " " );
+      for ( DBlock b : list ) sb.append( name(b) ).append(" ");
       TDLog.f( "  {" + from + " " + to + " " + station + "} List " + sb.toString() );
     }
 

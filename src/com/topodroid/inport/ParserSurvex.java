@@ -250,7 +250,7 @@ class ParserSurvex extends ImportParser
 		// set decimal ,
                 // TODO
               } else if ( cmd.equals("default") ) {
-                // deafult calibrate|data|units|all
+                // default calibrate|data|units|all
 		if ( vals_len > 1 ) {
 		  String what = vals[1].toLowerCase( Locale.getDefault() );
 		  if ( what.equals("calibrate") ) {

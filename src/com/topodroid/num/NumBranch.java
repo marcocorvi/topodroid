@@ -16,6 +16,7 @@ import com.topodroid.utils.TDMath;
 
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 public class NumBranch
 {
@@ -39,7 +40,7 @@ public class NumBranch
   //   StringBuilder sb = new StringBuilder();
   //   sb.append("Branch ");
   //   for ( NumShot sh : shots ) sb.append( sh.from.name ).append("-").append( sh.to.name ).append(" ");
-  //   tdlog.v( sb.toString() );
+  //   TDLog.v( sb.toString() );
   // }
 
   NumBranch( int t, NumNode n )
@@ -55,12 +56,19 @@ public class NumBranch
     len = 0;
   }
 
+  /** add a shot to the branch
+   * @param shot  shot to add
+   */
   void addShot( NumShot shot )
   {
     shots.add( shot );
     // double d = shot.length();
     // len += d;
   }
+
+  /** @return the length of the branch
+   */
+  double length() { return len; }
 
   // compute the displacement vector (e,s,v) of the branch
   void computeError()
@@ -145,6 +153,29 @@ public class NumBranch
   //   sb.append("]");
   //   return sb.toString();
   // }
+
+  String toString( int dir )
+  {
+    StringBuilder sb = new StringBuilder();
+    if ( dir > 0 ) {
+      for ( NumShot sh : shots ) sb.append( sh.toString() ).append(" ");
+    } else {
+      for ( int k = shots.size()-1; k>=0; --k ) {
+        sb.append( shots.get(k).toString() ). append(" ");
+      }
+      // ListIterator it = shots.listIterator( shots.size() );
+      // while ( it.hasPrevious() ) {
+      //   sb.append( it.previous().toString() ).append(" ");
+      // }
+    }
+    return sb.toString();
+  }
   
+  /** set the bad-loop flag to the branch shots
+   */
+  void setBadLoopShots()
+  {
+    for ( NumShot sh : shots ) sh.setBadLoop( true );
+  }
 }
 

@@ -23,7 +23,7 @@
   <string-array name="feedbackMode">
      <item name="none">nada</item>
      <item name="sound">sonido</item>
-     <item name="heptic">táctil</item>
+     <item name="haptic">táctil</item>
   </string-array>
 
   <string-array name="canvasLevels">

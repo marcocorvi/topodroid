@@ -88,7 +88,7 @@ class TdmViewStationAdapter extends ArrayAdapter< TdmViewStation >
 
   /** helper class view-holder
    */
-  private class ViewHolder
+  private static class ViewHolder
   { 
     CheckBox cb;
     TdmViewStation st;
@@ -146,7 +146,7 @@ class TdmViewStationAdapter extends ArrayAdapter< TdmViewStation >
     CheckBox cb = (CheckBox)v;
     CharSequence item = cb.getText();
     for ( TdmViewStation station : mItems ) {
-      if ( station.name().equals( item ) ) {
+      if ( station.name().equals( item.toString() ) ) {
         station.setChecked( true );
         if ( mTextView != null ) mTextView.setText( station.name() + "@" + mCommand.name() );
       } else {

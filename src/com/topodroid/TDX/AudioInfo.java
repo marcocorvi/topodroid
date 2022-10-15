@@ -34,9 +34,9 @@ class AudioInfo
     mDate   = dt;
   }
 
-  /** @return the shot ID
-   */
-  int getFileNumber() { return (int)fileIdx; }
+  // /** @return the shot ID
+  //  */
+  // int getFileNumber() { return (int)fileIdx; }
 
   // String getAudioName() 
   // {

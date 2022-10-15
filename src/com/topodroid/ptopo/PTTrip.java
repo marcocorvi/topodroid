@@ -157,7 +157,7 @@ public class PTTrip
     // {
     //   float declination = ((float)_declination) * PTFile.INT16_2_DEG;
     //   if ( declination > 180.0f ) declination -= 360.0f;
-    //   tdlog.v( "trip: date " + _year + "-" + _month + "-" + _day + " decl. " + declination );
+    //   TDLog.v( "trip: date " + _year + "-" + _month + "-" + _day + " decl. " + declination );
     //   _comment.print();
     // }
 

@@ -86,7 +86,7 @@ class DialogRose extends MyDialog
     mImage.setImageBitmap( mBitmap );
   }
 
-  /** compute the rose diagram (this is colled in the cstr)
+  /** compute the rose diagram (this is called in the cstr)
    * @param parser   3D mode data
    */
   private void evalRoseDiagram( TglParser parser )

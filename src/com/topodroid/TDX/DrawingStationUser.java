@@ -106,12 +106,12 @@ public class DrawingStationUser extends DrawingPath
   public String name() { return mName; }
 
   /** @return X scene coord of the linked item
-   * @implements IDrawingLink
+   * @note implements IDrawingLink
    */
   public float getLinkX() { return cx; }
 
   /** @return Y scene coord of the linked item
-   * @implements IDrawingLink
+   * @note implements IDrawingLink
    */
   public float getLinkY() { return cy; }
 

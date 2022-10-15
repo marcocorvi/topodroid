@@ -13,7 +13,7 @@ package com.topodroid.dev;
 
 // import androidx.annotation.RecentlyNonNull;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 
 // SIWEI_TIAN changed on Jun 2022
 public class Device
@@ -84,14 +84,17 @@ public class Device
   public boolean canSendCommand() { return mType == DISTO_X310 || mType == DISTO_BRIC4; }
   public static boolean canSendCommand( int type ) { return type == DISTO_X310 || type == DISTO_BRIC4; }
 
+  /** @return the device name given the model string
+   * @param model   model string
+   */
   public static String modelToName( String model )
   {
-    // Log.v("BRIC", "model to name <" + model + ">");
+    // TDLog.v("DEVICE model to name <" + model + ">");
     if ( model.startsWith("DistoX-") ) {
       return model.replace("DistoX-", "" );
     } 
     if ( model.startsWith("Shetland") ) {
-      return model.replace("Shetland_", "SAP-" );
+      return model.replace("Shetland_", "" );
     }
     if ( model.startsWith("BRIC4_") ) {
       return model.replace("BRIC4_", "" );
@@ -105,10 +108,13 @@ public class Device
     return "--";
   }
 
+  /** @return the integer code given the model string
+   * @param model   model string
+   */
   public static int modelToType( String model ) 
   {
     if ( model != null ) {
-      // TDLog.Log( TDLog.LOG_DEBUG, "modelToType " + model );
+      // TDLog.v( "DEVICE modelToType " + model );
       if ( model.equals( "XBLE" )  || model.startsWith( "DistoXBLE-" ) )  return DISTO_XBLE; // SIWEI_TIAN
       if ( model.equals( "X310" )  || model.startsWith( "DistoX-" ) )   return DISTO_X310;
       if ( model.equals( "A3" )    || model.equals( "DistoX" ) )        return DISTO_A3;
@@ -120,6 +126,9 @@ public class Device
     return DISTO_NONE;
   }
 
+  /** @return the string presentation of the device type
+   * @param model   model string
+   */
   public static String modelToString( String model ) 
   {
     return typeString[ modelToType( model ) ];
@@ -127,7 +136,14 @@ public class Device
 
   // -------------------------------------------------------------------------------
 
-  // nickname can be null
+  /** cstr
+   * @param addr     bluetooth address
+   * @param model    model string
+   * @param h        head (only for A3) 
+   * @param t        tail (only for A3)
+   * @param name     ???
+   * @param nickname device nickname (can be null)
+   */
   public Device( String addr, String model, int h, int t, String name, String nickname )
   {
     // TDLog.v( "[1] Device: " + addr + " " + model + " " + name + " addr " + addr );
@@ -140,7 +156,12 @@ public class Device
     mTail = t;
   }
 
-  // nickname can be null
+  /** cstr
+   * @param addr     bluetooth address
+   * @param model    model string
+   * @param name     ???
+   * @param nickname device nickname (can be null)
+   */
   public Device( String addr, String model, String name, String nickname )
   {
     // TDLog.v( "[2] Device: " + addr + " " + model + " " + name + " addr " + addr );
@@ -155,33 +176,39 @@ public class Device
 
   // public void dump( )
   // {
-  //   tdlog.v( "Device addr " + mAddress + " model " + mModel + " type " + mType + " name " + mName + " nick " + ((mNickname == null)? "null" : mNickname ) );
+  //   TDLog.v( "Device addr " + mAddress + " model " + mModel + " type " + mType + " name " + mName + " nick " + ((mNickname == null)? "null" : mNickname ) );
   // }
 
   private String fromName( String name )
   {
-    // TDLog.v( "from name <" + name + "> model <" + mModel + ">" );
+    // TDLog.v( "DEVICE from name <" + name + "> model <" + mModel + ">" );
     if ( name != null ) name = name.trim();
     if ( name == null || name.length() == 0 || name.equals("null") ){
       name = mModel;
     }
     if ( name.startsWith("DistoXBLE-") ) return name.replace("DistoXBLE-", ""); // SIWEI_TIAN
     if ( name.startsWith("DistoX-") ) return name.replace("DistoX-", "");
-    if ( name.startsWith("SAP5_" ) ) return name.replace("SAP5_", "");
+    if ( name.startsWith("SAP-" ) ) return name.replace("SAP-", "");
     if ( name.startsWith("BRIC-" ) ) return name.replace("BRIC-", "");
     return name;
   }
 
+  /** @return the device nickname, if not null, or the name, otherwise
+   */
   public String getNickname()
   {
     if ( mNickname != null && mNickname.length() > 0 ) return mNickname;
     return mName;
   }
 
-  // X310 is the only device that has firmware support 
-  public boolean hasFirmwareSupport() { return mType == DISTO_X310; }
+  /** @return true if the device supports firmware
+   *
+   * @note X310 is the only device that has firmware support 
+   */
+  public boolean hasFirmwareSupport() { return mType == DISTO_X310 || mType == DISTO_XBLE; }
 
-
+  /** @return string presentation
+   */
   // @RecentlyNonNull
   public String toString()
   { 
@@ -192,6 +219,8 @@ public class Device
     return typeString[ mType ] + " " + mName + " " + mAddress;
   }
 
+  /** @return simple string presentation
+   */
   public String toSimpleString() { return typeSimpleString[ mType ] + " " + mName; }
   
 }

@@ -47,14 +47,14 @@ class DialogSketch extends MyDialog
   private MyFileAdapter mArrayAdapter;
   private ListView mList;
 
-  class MyFilenameFilter implements FilenameFilter
+  static class MyFilenameFilter implements FilenameFilter
   {
     public boolean accept( File dir, String name ) {
       return ( name.toLowerCase( Locale.getDefault() ).endsWith( ".c3d" ) );  // Cave3D sketch file
     }
   }
 
-  class MyDirnameFilter implements FilenameFilter
+  static class MyDirnameFilter implements FilenameFilter
   {
     public boolean accept( File dir, String name ) {
       File file = new File( dir, name );

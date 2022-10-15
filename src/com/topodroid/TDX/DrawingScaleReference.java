@@ -45,16 +45,16 @@ class DrawingScaleReference
   private final static float[] mValues = { 0, 0.01f, 0.05f, 0.1f, 0.5f, 1, 2, 5, 10, 20, 50, 100, 200, 500 };
 
 
-  /** cstr
-   * @param loc bottom-right location of the scale reference on the screen
-   *            (negative values are allowed with the meaning of negative offset from screen bottom-right)
-   * @param widthPercent maximum width of scale reference in percentage of screen width
-   *                     (valid value are in range [0.2, 1.0]
-   */
-  DrawingScaleReference( Point loc, float widthPercent ) // boolean with_azimuth 
-  {
-    this( null, loc, widthPercent ); //  with_azimuth 
-  }
+  // /** cstr - UNUSED
+  //  * @param loc bottom-right location of the scale reference on the screen
+  //  *            (negative values are allowed with the meaning of negative offset from screen bottom-right)
+  //  * @param widthPercent maximum width of scale reference in percentage of screen width
+  //  *                     (valid value are in range [0.2, 1.0]
+  //  */
+  // DrawingScaleReference( Point loc, float widthPercent ) // boolean with_azimuth 
+  // {
+  //   this( null, loc, widthPercent ); //  with_azimuth 
+  // }
 
   /** cstr
    * @param p   paint used to draw the scale reference. If null, a default painter will be used
@@ -97,26 +97,26 @@ class DrawingScaleReference
           : " dm";                 // 0.1 m
   }
 
-  /** @return scale reference current color (or white)
-   */
-  int color() { return mPaint.getColor(); }
+  // /** @return scale reference current color (or white) - UNUSED
+  //  */
+  // int color() { return mPaint.getColor(); }
 
-  /** * Set new paint to be used to draw the scale reference.
-   * @param paint the new paint to be used. If null, the setting is ignored.
-   */
-  void setPaint( Paint paint ) {
-    if ( paint != null ) {
-      mPaint = paint;
-    }
-  }
+  // /** set new paint to be used to draw the scale reference. - UNUSED
+  //  * @param paint the new paint to be used. If null, the setting is ignored.
+  //  */
+  // void setPaint( Paint paint ) {
+  //   if ( paint != null ) {
+  //     mPaint = paint;
+  //   }
+  // }
 
-  /** set text size
-   * @param size   text size
-   */
-  void setTextSize( int size )
-  {
-    if ( size > 0 ) mPaint.setTextSize( size );
-  }
+  // /** set text size - UNUSED
+  //  * @param size   text size
+  //  */
+  // void setTextSize( int size )
+  // {
+  //   if ( size > 0 ) mPaint.setTextSize( size );
+  // }
 
   /** Calculate reference scale
    * @param width canvas width

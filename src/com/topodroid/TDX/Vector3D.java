@@ -98,13 +98,13 @@ public class Vector3D
 
   public static double lengthSquare( Vector3D v ) { return v.lengthSquare(); }
 
-  public static double lengthSquare( float[] v, int off ) { return v[off+0]*v[off+0] + v[off+1]*v[off+1] + v[off+2]*v[off+2]; }
+  public static double lengthSquare( float[] v, int off ) { return v[off]*v[off] + v[off+1]*v[off+1] + v[off+2]*v[off+2]; }
 
   public double length() { return Math.sqrt( lengthSquare() ); }
 
   public static double length( Vector3D v ) { return Math.sqrt( v.lengthSquare() ); }
 
-  public static double length( float[] v, int off ) { return Math.sqrt( v[off+0]*v[off+0] + v[off+1]*v[off+1] + v[off+2]*v[off+2] ); }
+  public static double length( float[] v, int off ) { return Math.sqrt( v[off]*v[off] + v[off+1]*v[off+1] + v[off+2]*v[off+2] ); }
 
   // ------------------- DISTANCE
   public double squareDistance3D( Vector3D v )
@@ -167,7 +167,7 @@ public class Vector3D
   // subtract v2 from v1 - result in v1
   public static void difference( float[] v1, int off1, float[] v2, int off2 ) // minus
   {
-    v1[off1+0] -= v2[off2+0];
+    v1[off1  ] -= v2[off2  ];
     v1[off1+1] -= v2[off2+1];
     v1[off1+2] -= v2[off2+2];
   }
@@ -206,7 +206,7 @@ public class Vector3D
 
   public static void difference( float[] v, int off, float[] v1, int off1, float[] v2, int off2 )
   {
-    v[off+0] = v1[off1+0] - v2[off2+0];
+    v[off  ] = v1[off1  ] - v2[off2  ];
     v[off+1] = v1[off1+1] - v2[off2+1];
     v[off+2] = v1[off1+2] - v2[off2+2];
   }
@@ -248,7 +248,7 @@ public class Vector3D
 
   public static void sum( float[] v, int off, float[] v1, int off1, float[] v2, int off2 )
   {
-    v[off+0] = v1[off1+0] + v2[off2+0];
+    v[off  ] = v1[off1  ] + v2[off2  ];
     v[off+1] = v1[off1+1] + v2[off2+1];
     v[off+2] = v1[off1+2] + v2[off2+2];
   }
@@ -273,16 +273,16 @@ public class Vector3D
   public static double crossProductLengthSquare( float[] v1, int off1, float[] v2, int off2 )
   {
     double x = v1[off1+1] * v2[off2+2] - v1[off1+2] * v2[off2+1];
-    double y = v1[off1+2] * v2[off2+0] - v1[off1+0] * v2[off2+2];
-    double z = v1[off1+0] * v2[off2+1] - v1[off1+1] * v2[off2+0];
+    double y = v1[off1+2] * v2[off2  ] - v1[off1  ] * v2[off2+2];
+    double z = v1[off1  ] * v2[off2+1] - v1[off1+1] * v2[off2  ];
     return ( x*x + y*y + z*z );
   }
 
   public static void crossProduct( float[] v, int off, float[] v1, int off1, float[] v2, int off2 )
   {
-    v[off+0] = v1[off1+1] * v2[off2+2] - v1[off1+2] * v2[off2+1];
-    v[off+1] = v1[off1+2] * v2[off2+0] - v1[off1+0] * v2[off2+2];
-    v[off+2] = v1[off1+0] * v2[off2+1] - v1[off1+1] * v2[off2+0];
+    v[off  ] = v1[off1+1] * v2[off2+2] - v1[off1+2] * v2[off2+1];
+    v[off+1] = v1[off1+2] * v2[off2  ] - v1[off1  ] * v2[off2+2];
+    v[off+2] = v1[off1  ] * v2[off2+1] - v1[off1+1] * v2[off2  ];
   }
 
   public static Vector3D crossProduct( Vector3D v1, Vector3D v2 ) 
@@ -331,7 +331,7 @@ public class Vector3D
 
   // void dump( ) 
   // {
-  //   tdlog.v("TopoGL " + x + " " + y + " " + z );
+  //   TDLog.v("TopoGL " + x + " " + y + " " + z );
   // } 
 }
 

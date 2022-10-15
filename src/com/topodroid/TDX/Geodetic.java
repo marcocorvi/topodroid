@@ -73,7 +73,7 @@ public class Geodetic
   /*
    * The following functions are from
    *   K.M. Borokowski
-   *   "Accurate algoritms to transform geocentric to geodetic coordinates" 
+   *   "Accurate algorithms to transform geocentric to geodetic coordinates"
    *   Bull. Geod. 63 (1989) 50-56
    * 
    * R = A cos(psi) + H cos(phi)

@@ -3,7 +3,7 @@ symbol point
 name flowstone-floor
 name-pt chão_de_escorrimento
 name-ru натечный_пол
-name-ro cruste-podea
+name-ro cruste_podea
 name-de Sinterboden
 name-hu cseppköves_talaj
 th_name flowstone:floor

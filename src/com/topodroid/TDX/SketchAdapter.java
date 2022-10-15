@@ -59,7 +59,7 @@ class SketchAdapter extends ArrayAdapter< GlSketch >
 
   /** sketch view holder
    */
-  private class ViewHolder implements OnClickListener
+  private static class ViewHolder implements OnClickListener
   { 
     int      pos;
     GlSketch mSketch;   // used to make sure blocks do not hold ref to a view, that does not belong to them REVISE_RECENT

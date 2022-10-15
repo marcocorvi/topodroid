@@ -46,7 +46,7 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
   }
 
 // -------------------------------------------------------------------
-  /** task bakground execution
+  /** task background execution
    * @param statuses   (unused)
    * @return the number of downloaded packets - ( 0 if there is no app )
    */
@@ -59,15 +59,18 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
       int algo = gm.getAlgo();
       if ( algo == CalibInfo.ALGO_AUTO ) { 
         algo = app.getCalibAlgoFromDevice();
-        if ( algo < CalibInfo.ALGO_AUTO ) { // could not get the algo from the devuice type
+        if ( algo < CalibInfo.ALGO_AUTO ) { // could not get the algo from the device type
           algo = CalibInfo.ALGO_LINEAR; 
         }
         app.updateCalibAlgo( algo );
         gm.setAlgo( algo );
       }
+      // app.setGMdownload( true ); // GM_DOWNLOAD
     }
     if ( ! lock() ) return null;
-    return ( app == null )? 0 : app.downloadDataBatch( mLister, mDataType );
+    int ret = ( app == null )? 0 : app.downloadDataBatch( mLister, mDataType );
+    // app.setGMdownload( false ); // GM_DOWNLOAD
+    return ret;
   }
 
   // @Override
@@ -93,12 +96,12 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
         unlock();
       }
       app.mDataDownloader.setDownload( false );
-      app.mDataDownloader.notifyConnectionStatus( ConnectionState.CONN_DISCONNECTED );
+      app.mDataDownloader.notifyConnectionStatus( mLister, ConnectionState.CONN_DISCONNECTED );
     }
   }
 
   /** lock the static reference
-   * @return true if successfull, false if already locked
+   * @return true if successful, false if already locked
    */
   private synchronized boolean lock()
   {

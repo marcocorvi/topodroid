@@ -264,15 +264,13 @@ public class TopoDroidProtocol
         if ( mDeviceType == Device.DISTO_X310 || mDeviceType == Device.DISTO_XBLE || mDeviceType == Device.DISTO_A3 ) { // SIWEI FIXME
           mAddress[0] = buffer[1];
           mAddress[1] = buffer[2];
-          {
-            byte[] mReplyBuffer = new byte[4];
-            mReplyBuffer[0] = buffer[3];
-            mReplyBuffer[1] = buffer[4];
-            mReplyBuffer[2] = buffer[5];
-            mReplyBuffer[3] = buffer[6];
-            // TDLog.Log( TDLog.LOG_PROTO, "handle Packet mReplyBuffer" );
-            // TODO
-          }
+          // byte[] mReplyBuffer = new byte[4]; // DEBUG-LOG
+          // mReplyBuffer[0] = buffer[3];
+          // mReplyBuffer[1] = buffer[4];
+          // mReplyBuffer[2] = buffer[5];
+          // mReplyBuffer[3] = buffer[6];
+          // TDLog.v( "PROTO handle Packet mReplyBuffer" );
+          // TODO
           return DataType.PACKET_REPLY;
         } 
         break;

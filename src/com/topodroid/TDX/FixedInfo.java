@@ -143,7 +143,7 @@ public class FixedInfo extends MagLatLong
     switch ( (int)source ) {
       case 1: return "TopoDroid";
       case 2: return "manual";
-      case 3: return "Mobile-Topogra[her";
+      case 3: return "Mobile-Topographer";
     }
     return "unknown";
   }

@@ -12,22 +12,23 @@
 package com.topodroid.dev.distox_ble;
 
 import com.topodroid.TDX.TopoDroidApp;
-import com.topodroid.dev.DataType;
+import com.topodroid.TDX.ListerHandler;
+// import com.topodroid.dev.DataType;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.TopoDroidProtocol;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.utils.TDLog;
 
 import android.content.Context;
-import android.os.Handler;
+// import android.os.Handler;
 
-import java.io.IOException;
+// import java.io.IOException;
 
 public class DistoXBLEProtocol extends TopoDroidProtocol
 {
 
   private final DistoXBLEComm mComm;
-  private final Handler mLister;
+  private final ListerHandler mLister;
 
 
   public static final int PACKET_REPLY          = 0x10;
@@ -69,7 +70,7 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
    * @param device   BT device
    * @param comm     DistoX BLE comm object
    */
-  public DistoXBLEProtocol(Context ctx, TopoDroidApp app, Handler lister, Device device, DistoXBLEComm comm )
+  public DistoXBLEProtocol(Context ctx, TopoDroidApp app, ListerHandler lister, Device device, DistoXBLEComm comm )
   {
     super( device, ctx );
     mLister = lister;
@@ -86,7 +87,7 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
    *                   5 for flash checksum (0x3b)
    *                   3 for hw signature (0x3c)
    *        offset  0 is command: it can be 0x3a 0x3b 0x3c 0x3d 0x3e
-   *        offsets 1,2 contain adddres (0x3d 0x3e), reply (0x3c)
+   *        offsets 1,2 contain address (0x3d 0x3e), reply (0x3c)
    *        offset  3 payload length (0x3d 0x3e)
    * @return packet type
    */
@@ -97,18 +98,23 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
       return PACKET_NONE;
     }
     if ( (databuf[0] == MemoryOctet.BYTE_PACKET_DATA || databuf[0] == MemoryOctet.BYTE_PACKET_G ) && databuf.length == 17 ) { // shot / calib data
-      System.arraycopy( databuf, 1, mMeasureDataPacket1, 0, 8);
-      System.arraycopy( databuf, 9, mMeasureDataPacket2, 0, 8);
-      int res1 = handlePacket(mMeasureDataPacket1);
-      int res2 = handlePacket(mMeasureDataPacket2);
-      TDLog.v("XBLE proto 17-length data - type " + databuf[0] + " res " + res1 + " " + res2 );
-      if ( res1 != PACKET_NONE && res2 != PACKET_NONE ) {
-        mComm.sendCommand(( mMeasureDataPacket1[0] & 0x80 ) | 0x55);
-        mComm.handleRegularPacket(res1, mLister, 0);
-        mComm.handleRegularPacket(res2, mLister, 0);
-        return PACKET_MEASURE_DATA; // with ( PACKET_MEASURE_DATA | databuf[0]) shots would be distinguished from calib
-      // } else {
-      //   return PACKET_ERROR;
+      if ( mComm.isDownloading() ) {
+        System.arraycopy( databuf, 1, mMeasureDataPacket1, 0, 8);
+        System.arraycopy( databuf, 9, mMeasureDataPacket2, 0, 8);
+        int res1 = handlePacket(mMeasureDataPacket1);
+        int res2 = handlePacket(mMeasureDataPacket2);
+        // TDLog.v("XBLE proto 17-length data - type " + databuf[0] + " res " + res1 + " " + res2 );
+        if ( res1 != PACKET_NONE && res2 != PACKET_NONE ) {
+          mComm.sendCommand(( mMeasureDataPacket1[0] & 0x80 ) | 0x55);
+          mComm.handleRegularPacket(res1, mLister, 0);
+          mComm.handleRegularPacket(res2, mLister, 0);
+          return PACKET_MEASURE_DATA; // with ( PACKET_MEASURE_DATA | databuf[0]) shots would be distinguished from calib
+        // } else {
+        //   return PACKET_ERROR;
+        }
+      } else {
+        TDLog.Error("XBLE not downloading");
+        return PACKET_NONE;
       }
     } else { // command packet
       byte command = databuf[0];
@@ -116,11 +122,12 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
         int addr = (databuf[2] << 8 | (databuf[1] & 0xff)) & 0xFFFF;
         int len = databuf[3];
         mRepliedData = new byte[len];
-        TDLog.v("XBLE command packet " + command + " length " + len );
+        // TDLog.v("XBLE command packet " + command + " length " + len );
         for (int i = 0; i < len; i++)
           mRepliedData[i] = databuf[i + 4];
         if (addr == DistoXBLEDetails.FIRMWARE_ADDRESS) {
-          mFirmVer = Integer.toString(databuf[4]) + "." + Integer.toString(databuf[5]);
+          mFirmVer = Integer.toString(databuf[4]) + "." + Integer.toString(databuf[5]) + "." + Integer.toString(databuf[6]);
+          TDLog.v("XBLE fw " + mFirmVer );
           return PACKET_INFO_FIRMWARE;
         } else if (addr == DistoXBLEDetails.HARDWARE_ADDRESS) {
           float HardVer = ((float) databuf[4]) / 10;
@@ -137,20 +144,20 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
         }
       } else if ( command == MemoryOctet.BYTE_PACKET_HW_CODE ) { // 0x3c: signature: hardware ver. - 0x3d 0x3e only works in App mode not in the bootloader mode.
         // 0x3a 0x3b 0x3c are commands work in bootloader mode
-        TDLog.v("XBLE command packet " + command + " (signature) length " + databuf.length );
+        // TDLog.v("XBLE command packet " + command + " (signature) length " + databuf.length );
         if ( databuf.length == 3 ) { 
           mRepliedData[0] = databuf[1];
           mRepliedData[1] = databuf[2];
           return PACKET_SIGNATURE;
         }
       } else if ( databuf[0] == MemoryOctet.BYTE_PACKET_FW_WRITE ) { // 0x3b
-        TDLog.v("XBLE command packet " + command + " (checksum) length " + databuf.length );
+        // TDLog.v("XBLE command packet " + command + " (checksum) length " + databuf.length );
         if ( databuf.length == 5 ) {
           mCheckSum = ((databuf[4] << 8) | (databuf[3] & 0xff)) & 0xffff;
           return PACKET_FLASH_CHECKSUM;
         }
       } else if ( command == MemoryOctet.BYTE_PACKET_FW_READ && databuf.length == 131) {   // 0x3a: 3 headers + 128 payloadsda
-        TDLog.v("XBLE command packet " + command + " (firmware) length " + databuf.length );
+        // TDLog.v("XBLE command packet " + command + " (firmware) length " + databuf.length );
         if ( databuf[2] == 0x00 ) {        // firmware first packet (MTU=247)
           for ( int i=3; i<131; i++) mFlashBytes[i-3] = databuf[i]; // databuf is copied from offset 3
           return PACKET_FLASH_BYTES_1;

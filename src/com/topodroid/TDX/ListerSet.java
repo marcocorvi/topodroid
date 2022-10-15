@@ -26,6 +26,10 @@ class ListerSet implements ILister
     mLister = new ArrayList<>();
   }
 
+  /** @return the name (ILister interface)
+   */
+  public String name() { return "ListerSst:" + mLister.size(); };
+
   /** @return the number of listers in this set
    */
   int size() { return mLister.size(); }

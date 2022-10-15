@@ -61,6 +61,7 @@ public class TDandroid
 
   // final static public boolean ABOVE_API_16 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLYBEAN );
   final static public boolean ABOVE_API_21 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP );
+  final static public boolean ABOVE_API_23 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.M ); 
   final static public boolean ABOVE_API_24 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.N ); // Android-6 Nougat
   final static public boolean ABOVE_API_26 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.O ); // Android-8 Oreo
   final static public boolean ABOVE_API_29 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.Q ); // Android-10
@@ -389,7 +390,7 @@ public class TDandroid
           // TDLog.v("PERM Check permission " + permNames[k] + " not granted ");
           // TDToast.make( mActivity, "TopoDroid must have " + perms[k] );
           return -1;
-        } else {
+        // } else {
           // TDLog.v("PERM Check permission " + permNames[k] + " granted ");
         }
       }
@@ -404,7 +405,7 @@ public class TDandroid
           // TDLog.v("PERM Check permission " + permNames[k] + " not granted ");
           // TDToast.make( mActivity, "TopoDroid may need " + perms[k] );
           ret += flag;
-        } else {
+        // } else {
           // TDLog.v("PERM Check permission " + permNames[k] + " granted ");
         }
       }
@@ -415,7 +416,7 @@ public class TDandroid
   }
 
   /** @return true if location access is granted
-   * @return context  context
+   * @param context  context
    */
   public static boolean checkLocation( Context context )
   {
@@ -427,7 +428,7 @@ public class TDandroid
   }
 
   /** @return true if camera is granted
-   * @return context  context
+   * @param context  context
    */
   public static boolean checkCamera( Context context )
   {
@@ -440,7 +441,7 @@ public class TDandroid
   }
 
   /** @return true if the display is multitouch
-   * @return context  context
+   * @param context  context
    */
   public static boolean checkMultitouch( Context context )
   {
@@ -449,7 +450,7 @@ public class TDandroid
   }
 
   /** @return true if audio is granted
-   * @return context  context
+   * @param context  context
    */
   public static boolean checkMicrophone( Context context )
   {
@@ -459,7 +460,7 @@ public class TDandroid
   }
 
   /** @return true if bluetooth is granted
-   * @return context  context
+   * @param context  context
    */
   public static boolean checkBluetooth( Context context )
   {
@@ -474,7 +475,7 @@ public class TDandroid
   }
 
   /** @return true if internet access is granted
-   * @return context  context
+   * @param context  context
    */
   public static boolean checkInternet( Context context )
   {
@@ -483,7 +484,7 @@ public class TDandroid
   }
 
   /** @return true if bluetooth LE is available
-   * @return context  context
+   * @param context  context
    * @note REQUIRES API-18
    */
   static boolean checkBluetoothLE( Context context )

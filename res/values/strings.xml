@@ -279,6 +279,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="longitude_hint">Longitude dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Loop closure errors</string>
     <string name="loop_none">no loop</string>
+    <string name="loops_bad">Inaccurate loops: %1$d</string>
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
     <!-- UNUSED string name="multistation_plane">Multiple-station plane</string -->
 
@@ -307,6 +308,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="error_name_exists">Project name already used</string>
     <string name="error_name_invalid">Invalid project name</string>
     <string name="error_name_required">Name required</string>
+    <string name="error_text_required">Text required</string>
     <string name="error_station_number">Wrong number of stations</string>
     <string name="error_name_duplicate">Duplicate name</string>
     <string name="error_no_section_in_section">Xsection in xsection not allowed</string>
@@ -1833,7 +1835,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
 \n[4] Put the DistoX2 in bootloader mode: press PLUS and MINUS while switching on with DIST key.
 \n[5] Tap the OK button.
 \n[6] Read the message before you confirm to continue.
-\n[7] Wait till the process is done.
+\n[7] Wait till the process is done. It takes a while.
 \n[8] Turn off the DistoX2 with the CLR key.
 \n
    </string>
@@ -1844,9 +1846,9 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
    <string name="firmware_file">firmware file</string>
    <string name="firmware_file_exists">Existing firmware file</string>
    <string name="firmware_file_missing">Missing firmware file</string>
-   <string name="ask_dump">Dump firmware?</string>
-   <string name="ask_upload">Upload firmware?</string>
-   <string name="ask_upload_not_compatible">Firmware file does not look correct.\nUpload anyway?</string>
+   <string name="ask_dump">Dump firmware? (be patient)</string>
+   <string name="ask_upload">Upload firmware? (be patient)</string>
+   <string name="ask_upload_not_compatible">Firmware file does not look correct.\nUpload anyway? (be patient)</string>
    <string name="firmware_upload_no_sign">Failed to check the DistoX hardware</string>
    <string name="firmware_upload_bad_sign">Incompatible DistoX hardware</string>
    <string name="firmware_file_dumped">Saved firmware file %1$s size %2$d</string>
@@ -2086,6 +2088,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="warning_no_file">Warning: no 3d file found</string -->
     <!-- UNUSED string name="warning_empty_cwd">Warning: empty base path</string -->
     <string name="warning_no_parent">Warning: cannot go to parent folder</string>
+    <string name="warning_nogrant_camera">Camera permission has not been granted</string>
     <string name="no_permissions">The app cannot run without the required permissions</string>
 
     <string name="done_fractals" translatable="false">Done fractals dims</string>

@@ -12,7 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.dev.distox_ble.DistoXBLEComm; // SIWEI_TIAN
-import com.topodroid.dev.distox_ble.DistoXBLEConst;
+// import com.topodroid.dev.distox_ble.DistoXBLEConst;
 import com.topodroid.dev.distox_ble.DistoXBLEInfoDialog;
 
 import com.topodroid.utils.TDMath;
@@ -178,7 +178,7 @@ public class TopoDroidApp extends Application
   // ----------------------------------------------------------------------
   // data lister
   // ListerSet mListerSet;
-  ListerSetHandler mListerSet; // FIXME_LISTER
+  public ListerSetHandler mListerSet; // FIXME_LISTER
 
   /** register a lister in the lister-set
    * @param lister   data lister to register
@@ -191,15 +191,19 @@ public class TopoDroidApp extends Application
   void unregisterLister( ILister lister ) { if ( lister != null ) mListerSet.unregisterLister( lister ); }
 
   /** notify a new status to the data listers
+   * @param lister  data lister
    * @param status new status
    */
-  public void notifyStatus( final int status )
+  public void notifyListerStatus( ListerHandler lister, final int status )
   { 
     // TDLog.v( "App: notify status " + status );
+    if ( lister == null ) return;
     if ( mMainActivity == null ) return;
     mMainActivity.runOnUiThread( new Runnable() { 
       public void run () { 
-        mListerSet.setConnectionStatus( status );
+        // TDLog.v("APP notify " + status + " to listers " + mListerSet.size() );
+        // mListerSet.setConnectionStatus( status );
+        lister.setConnectionStatus( status );
       }
     } );
   }
@@ -207,11 +211,11 @@ public class TopoDroidApp extends Application
   /** receive a disconnection notification
    * @param data_type   type of data that are downloaded
    */
-  public void notifyDisconnected( int data_type )
+  public void notifyDisconnected( ListerHandler lister, int data_type )
   {
     if ( mListerSet.size() > 0 ) {
       try {
-        new ReconnectTask( mDataDownloader, data_type, 500 ).execute();
+        new ReconnectTask( mDataDownloader, lister, data_type, 500 ).execute();
       } catch ( RuntimeException e ) {
         TDLog.e("reconnect error: " + e.getMessage() );
       }
@@ -662,10 +666,12 @@ public class TopoDroidApp extends Application
   // FIXME_COMM
   // @param address   device address
   // @param data_type data type ...
-  public boolean connectDevice( String address, int data_type ) 
+  public boolean connectDevice( ListerHandler lister, String address, int data_type ) 
   {
     // TDLog.v( "App: connect address " + address + " comm is " + ((mComm==null)? "null" : "non-null") );
-    return mComm != null && mComm.connectDevice( address, mListerSet, data_type ); // FIXME_LISTER
+    // return mComm != null && mComm.connectDevice( address, mListerSet, data_type ); // FIXME_LISTER
+    if ( lister == null ) lister = mListerSet;
+    return mComm != null && mComm.connectDevice( address, lister, data_type ); // FIXME_LISTER
   }
 
   public boolean disconnectComm()
@@ -752,7 +758,7 @@ public class TopoDroidApp extends Application
 
   /** read head-tail from a DistoX A3
    * @param address    device address
-   * @param command
+   * @param command    command byte array
    * @param head_tail  return array with positions of head and tail
    * @return head-tail string, null on failure
    */
@@ -877,7 +883,7 @@ public class TopoDroidApp extends Application
         /* nothing */
       } else { // DistoX
         // TDLog.v( "bt button over advanced : DistoX");
-        if ( ! mDataDownloader.isDownloading() ) {
+        if ( ! isDownloading() ) {
           if ( TDInstance.hasDeviceRemoteControl() && ! TDSetting.isConnectionModeMulti()) {
             CutNPaste.showPopupBT( ctx, lister, this, b, false, (nr_shots == 0) );
             return;
@@ -891,13 +897,28 @@ public class TopoDroidApp extends Application
     doBluetoothReset( lister );
   }
 
+  // GM download flag - kludge for DixtoXBLE calib data
+  // private static boolean mGMdownload = false;
+
+  // /** set the GM download flag
+  //  * @param value   new flag value
+  //  */
+  // void setGMdownload( boolean value ) { mGMdownload = value; }
+
+  /** @return true if the data downloader is downoading
+   */
+  public boolean isDownloading() 
+  { 
+    return /* mGMdownload || */ mDataDownloader.isDownloading(); 
+  }
+
   /** reset the bluetooth
    * @param lister  data lister
    */
   private void doBluetoothReset( ILister lister )
   {
     mDataDownloader.setDownload( false );
-    mDataDownloader.stopDownloadData();
+    mDataDownloader.stopDownloadData( new ListerHandler(lister) );
     lister.setConnectionStatus( mDataDownloader.getStatus() );
     this.resetComm();
     TDToast.make(R.string.bt_reset );
@@ -1008,7 +1029,7 @@ public class TopoDroidApp extends Application
   static boolean done_init_env_second = false;
 
   /** second step of environment initialization
-   * @param with_dialog_r
+   * @param with_dialog_r   whether the app has dialog R
    * @return true if successful - can fail if cannot open the database
    */
   static  boolean initEnvironmentSecond( boolean with_dialog_r )
@@ -1073,6 +1094,7 @@ public class TopoDroidApp extends Application
         installSymbols( true );
       }
       String firmware_version = mDData.getValue( "firmware_version" );
+      TDLog.v("APP current firmware version " + firmware_version );
       if ( firmware_version == null || ( ! firmware_version.equals( TDVersion.FIRMWARE_VERSION ) ) ) {
         installFirmware( false ); // false = do not overwrite
       }
@@ -1693,16 +1715,15 @@ public class TopoDroidApp extends Application
    *
    * NOTE called only by DataDownloadTask
    */
-  int downloadDataBatch( Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
+  int downloadDataBatch( ListerHandler lister, int data_type ) // FIXME_LISTER
   {
-    // TDLog.v( "App: download data batch");
+    // TDLog.v( "APP: batch download");
     TDInstance.secondLastShotId = lastShotId();
     int ret = 0;
     if ( mComm == null || TDInstance.getDeviceA() == null ) {
       TDLog.e( "Comm or Device null ");
     } else {
-      // TDLog.Log( TDLog.LOG_DATA, "Download Data Batch() device " + TDInstance.deviceAddress() + " comm " + mComm.toString() );
-      // TDLog.v( "App: Download Data Batch() device " + TDInstance.deviceAddress() + " " + TDInstance.getDeviceA().getAddress() + " comm " + mComm.toString() );
+      // TDLog.v( "APP: batch download, device " + TDInstance.deviceAddress() + " " + TDInstance.getDeviceA().getAddress() + " comm " + mComm.toString() );
       ret = mComm.downloadData( TDInstance.getDeviceA().getAddress(), lister, data_type );
       // FIXME BATCH
       // if ( ret > 0 && TDSetting.mSurveyStations > 0 ) {
@@ -1720,7 +1741,7 @@ public class TopoDroidApp extends Application
   // void resetCurrentStationName( String name ) { StationName.resetCurrentStationName( name ); }
 
   /** set the name of the "current station" or unset it
-   * @param st   "current station" name
+   * @param name  "current station" name
    * @return true if the "current station" is set
    * @note if the given name equals the "current station" this is unset
    */
@@ -2393,7 +2414,7 @@ public class TopoDroidApp extends Application
       DistoXBLEComm comm = (DistoXBLEComm)mComm;
       /*boolean bisconnect = comm.isConnected();
       if ( ! comm.isConnected() ) {
-        connectDevice( TDInstance.deviceAddress(), DataType.DATA_ALL );
+        connectDevice( lister?, TDInstance.deviceAddress(), DataType.DATA_ALL );
         // TDLog.v("BRIC info: wait 4 secs");
         TDUtil.yieldDown( 1000 ); // FIXME was 4000
       }
@@ -2407,14 +2428,12 @@ public class TopoDroidApp extends Application
           return false;
         }
       }*/
-      comm.tryConnectDevice(TDInstance.deviceAddress(),null,DataType.DATA_ALL);
-      comm.registerInfo( info );
-      // comm.writeGetInfoCmd();
-	  comm.GetXBLEInfo();
+      comm.tryConnectDevice( TDInstance.deviceAddress(), null, DataType.DATA_ALL );
+      comm.getXBLEInfo( info );
 	  
       if ( comm.isConnected() ) {
-          TDUtil.yieldDown( 1000 ); // 500
-          disconnectComm();
+        TDUtil.yieldDown( 1000 ); // 500
+        disconnectComm();
       }
       return true;
     }
@@ -2449,7 +2468,7 @@ public class TopoDroidApp extends Application
       BricComm comm = (BricComm)mComm;
       boolean disconnect = comm.isConnected();
       if ( ! disconnect ) {
-        connectDevice( TDInstance.deviceAddress(), DataType.DATA_ALL );
+        connectDevice( null, TDInstance.deviceAddress(), DataType.DATA_ALL ); // null lister
         // TDLog.v("BRIC info: wait 4 secs");
         TDUtil.yieldDown(4000); // FIXME was 4000
       }
@@ -2477,7 +2496,7 @@ public class TopoDroidApp extends Application
       BricComm comm = (BricComm)mComm;
       boolean disconnect = comm.isConnected();
       if ( ! disconnect ) {
-        connectDevice( TDInstance.deviceAddress(), DataType.DATA_ALL );
+        connectDevice( null, TDInstance.deviceAddress(), DataType.DATA_ALL );
         // TDLog.v("BRIC memory: wait 4 secs");
         TDUtil.yieldDown(4000);
       }
@@ -2499,7 +2518,7 @@ public class TopoDroidApp extends Application
    # @param lister    optional lister
    * @param data_type type of expected data
    */
-  public void setX310Laser( int what, int nr, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
+  public void setX310Laser( int what, int nr, ListerHandler lister, int data_type ) // FIXME_LISTER
   {
     if ( mComm == null || TDInstance.getDeviceA() == null ) return;
     if ( mComm instanceof DistoX310Comm ) {
@@ -2518,7 +2537,7 @@ public class TopoDroidApp extends Application
    # @param closeBT   whether to close the connection at the end 
    *                  SIWEI TIAN added on Jul
    */
-  public void setXBLELaser( int what, int nr, Handler /* ILister */ lister, int data_type, boolean closeBT ) // FIXME_LISTER
+  public void setXBLELaser( int what, int nr, ListerHandler lister, int data_type, boolean closeBT ) // FIXME_LISTER
   {
     if ( mComm == null || TDInstance.getDeviceA() == null ) return;
     if ( mComm instanceof DistoXBLEComm ) {

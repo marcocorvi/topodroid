@@ -89,7 +89,7 @@ public class TDFeedback
     }
   }
 
-  // HEPTIC FEEDBACK ------------------------------------------
+  // HAPTIC FEEDBACK ------------------------------------------
 
   private static void ringTheBell( int duration )
   {

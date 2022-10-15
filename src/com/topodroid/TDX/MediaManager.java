@@ -58,7 +58,7 @@ class MediaManager
 
   /** return the next negative audio index (ID)
    * @param sid        shot id
-   * @param comment    
+   * @param comment    audio comment
    */
   long prepareNextAudioNeg( long sid, String comment )
   {

@@ -85,7 +85,7 @@ public class Point2D // extends PointF
    */
   public Point2D add( float x0, float y0 ) { return new Point2D( x + x0, y + y0 ); } // this + (x0,y0)
 
-  /** @return the addition of two points
+  /** set this point to be the addition of two points
    * @param a   first point
    * @param b   second point
    */
@@ -144,7 +144,7 @@ public class Point2D // extends PointF
    */
   public float squareLength() { return x*x + y*y; }
 
-  /** @return the Eucidean distance betwwen this point and another
+  /** @return the Euclidean distance betwween this point and another
    * @param p  the other point
    */
   public float distance( Point2D p ) // { return distance( p.x, p.y ); }
@@ -155,7 +155,7 @@ public class Point2D // extends PointF
     return ( d > 0 )? (float)Math.sqrt(d) : 0;
   }
 
-  /** @return the Eucidean distance betwwen this point and another
+  /** @return the Euclidean distance between this point and another
    * @param x0  the other point X value
    * @param y0  the other point Y value
    */

@@ -246,9 +246,9 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    */
   public int width()  { return mWidth; }
 
-  /** @return the canvas height
-   */
-  public int height() { return mHeight; }
+  // /** @return the canvas height - UNUSED
+  //  */
+  // public int height() { return mHeight; }
 
   /** @return the sketch drawing scale
    */
@@ -257,10 +257,10 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   // private Timer mTimer;
   // private TimerTask mTask;
 
-  /** test if the surface is selectable
-   * @return true if the surface items are selectable
-   */
-  boolean isSelectable() { return commandManager != null && commandManager.isSelectable(); }
+  // /** test if the surface is selectable - UNUSED
+  //  * @return true if the surface items are selectable
+  //  */
+  // boolean isSelectable() { return commandManager != null && commandManager.isSelectable(); }
 
   /** set the zoomer
    * @param zoomer   zoomer
@@ -509,19 +509,19 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
     mCommandManager2.clearShotsAndStations();
   }
 
-  /** clear the reference
-   * @param type   plot type
-   */
-  void clearReferences( int type ) 
-  {
-    if ( PlotType.isProfile( type ) ) {
-      mCommandManager2.clearReferences();
-    } else if ( type == PlotType.PLOT_PLAN ) {
-      mCommandManager1.clearReferences();
-    } else {
-      mCommandManager3.clearReferences();
-    }
-  }
+  // /** clear the reference - UNUSED
+  //  * @param type   plot type
+  //  */
+  // void clearReferences( int type ) 
+  // {
+  //   if ( PlotType.isProfile( type ) ) {
+  //     mCommandManager2.clearReferences();
+  //   } else if ( type == PlotType.PLOT_PLAN ) {
+  //     mCommandManager1.clearReferences();
+  //   } else {
+  //     mCommandManager3.clearReferences();
+  //   }
+  // }
 
   /** flip the profile - only profile manager
    * @param z   ???
@@ -759,8 +759,8 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    */
   boolean isFixedZoom() { return commandManager.isFixedZoom(); }
 
-  // only for X-Sections autowalls
-  List< DrawingSplayPath > getSplays() { return commandManager.getSplays(); }
+  // UNUSED : only for X-Sections autowalls
+  // List< DrawingSplayPath > getSplays() { return commandManager.getSplays(); }
 
   // called by DrawingActivity::addFixedLine
   void addFixedSplayPath( DrawingSplayPath path, boolean selectable )
@@ -852,8 +852,9 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   boolean hasMoreRedo()
   { return commandManager!= null && commandManager.hasMoreRedo(); }
 
-  boolean hasMoreUndo()
-  { return commandManager!= null && commandManager.hasMoreUndo(); }
+  // UNUSED
+  // boolean hasMoreUndo()
+  // { return commandManager!= null && commandManager.hasMoreUndo(); }
 
   // public boolean hasStationName( String name ) { return commandManager.hasUserStation( name ); }
 
@@ -906,10 +907,12 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   // public SelectionPoint getAreaAt( float x, float y ) { return commandManager.getAreaAt( x, y ); }
   // public SelectionPoint getShotAt( float x, float y ) { return commandManager.getShotAt( x, y ); }
 
+  // UNUSED
   // x,y canvas coords
-  DrawingStationName getStationAt( float x, float y, float size ) { return commandManager.getStationAt( x, y, size ); }
+  // DrawingStationName getStationAt( float x, float y, float size ) { return commandManager.getStationAt( x, y, size ); }
 
-  DrawingStationName getStation( String name ) { return commandManager.getStation( name ); }
+  // UNUSED
+  // DrawingStationName getStation( String name ) { return commandManager.getStation( name ); }
 
   SelectionSet getItemsAt( float x, float y, float zoom, int mode, float size ) 
   { 

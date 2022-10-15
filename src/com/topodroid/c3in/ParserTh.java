@@ -264,12 +264,12 @@ public class ParserTh extends TglParser
       declination = sd;
     }
 
-    int[] survey_pos = new int[50]; // FIXME max 50 levels
-    int ks = 0;
+    // int[] survey_pos = new int[50]; // FIXME max 50 levels - UNUSED
+    // int ks = 0;
     String path = basepath;
-    survey_pos[ks] = path.length();
+    // survey_pos[ks] = path.length();
     path = path + "." + surveyname;
-    ++ks;
+    // ++ks;
 
     for ( DBlock blk : blks ) {
       if ( blk.mFrom.length() > 0 ) {

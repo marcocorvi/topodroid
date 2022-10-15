@@ -16,7 +16,9 @@ import com.topodroid.utils.TDUtil;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.ListerHandler;
 import com.topodroid.dev.Device;
+import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.distox.DistoX;
 import com.topodroid.dev.distox.DistoXComm;
 import com.topodroid.dev.distox.DistoXProtocol;
@@ -28,11 +30,12 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.util.List;
 
-import android.os.Handler;
+// import android.os.Handler;
 
 public class DistoX310Comm extends DistoXComm
 {
   private static boolean mCalibMode = false;   //!< whether the device is in calib-mode
+  // private boolean mSkipNotify = false;  // TODO
 
   public DistoX310Comm( TopoDroidApp app )
   {
@@ -51,6 +54,14 @@ public class DistoX310Comm extends DistoXComm
     return (new DistoX310Protocol( in, out, TDInstance.getDeviceA(), mApp ));
   }
 
+  /** @return true if it is downloading or in skip-notify mode
+   */
+  boolean isDownloading() 
+  { 
+    // TDLog.v("X310 comm is downloading - skip " + mSkipNotify );
+    return mApp.isDownloading(); //  || mSkipNotify;
+  }
+
   // -------------------------------------------------------- 
   /**
    * nothing to read (only write) --> no AsyncTask
@@ -59,43 +70,55 @@ public class DistoX310Comm extends DistoXComm
    * @param lister    callback handler
    * @param data_type packet datatype 
    */
-  public void setX310Laser( String address, int what, int to_read, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
+  public void setX310Laser( String address, int what, int to_read, ListerHandler lister, int data_type ) // FIXME_LISTER
   {
-    if ( connectSocket( address, data_type ) ) {
-      switch ( what ) {
-        case DistoX.DISTOX_OFF:
-          sendCommand( (byte)DistoX.DISTOX_OFF );
-          break;
-        case Device.LASER_ON:
-          sendCommand( (byte)DistoX.LASER_ON );
-          break;
-        case Device.LASER_OFF:
-          sendCommand( (byte)DistoX.LASER_OFF );
-          break;
-        case Device.MEASURE:
-          // sendCommand( (byte)DistoX.MEASURE );
-          // break;
-        case Device.MEASURE_DOWNLOAD:
-          sendCommand( (byte)DistoX.MEASURE );
-          break;
-        case DistoX.CALIB_OFF:
-          sendCommand( (byte)DistoX.CALIB_OFF );
-          break;
-        case DistoX.CALIB_ON:
-          sendCommand( (byte)DistoX.CALIB_ON );
-          break;
-      }
-      if ( mCommThread == null && to_read > 0 ) {
-        // TDLog.v( "DistoX310 comm: RF comm thread start ... ");
-        startCommThread( 2*to_read, lister, data_type );  // each data has two packets
-        while ( mCommThread != null ) {
-          TDUtil.slowDown( 100 );
+    // TDLog.v("X310 laser " + what + " to read " + to_read );
+    // mSkipNotify = true;
+    Thread laserThread = new Thread() {
+      @Override public void run() {
+        if ( connectSocket( address, data_type ) ) {
+          switch ( what ) {
+            case DistoX.DISTOX_OFF:
+              sendCommand( (byte)DistoX.DISTOX_OFF );
+              break;
+            case Device.LASER_ON:
+              sendCommand( (byte)DistoX.LASER_ON );
+              break;
+            case Device.LASER_OFF:
+              sendCommand( (byte)DistoX.LASER_OFF );
+              break;
+            case Device.MEASURE:
+              // sendCommand( (byte)DistoX.MEASURE );
+              // break;
+            case Device.MEASURE_DOWNLOAD:
+              sendCommand( (byte)DistoX.MEASURE );
+              break;
+            case DistoX.CALIB_OFF:
+              sendCommand( (byte)DistoX.CALIB_OFF );
+              break;
+            case DistoX.CALIB_ON:
+              sendCommand( (byte)DistoX.CALIB_ON );
+              break;
+          }
+          if ( mCommThread == null ) {
+            if ( to_read > 0 ) {
+              // TDLog.v( "X310 comm: RF comm thread start ... ");
+              startCommThread( 2*to_read, lister, data_type );  // each data has two packets
+              while ( mCommThread != null ) {
+                TDUtil.slowDown( 100 );
+              }
+            }
+          }
         }
-      // } else {
-      //   TDLog.Log( TDLog.LOG_BT, "DistoX310 comm: RF comm thread not null ");
+        // mSkipNotify = false;
+        // TDLog.v("X310 destry socket");
+        destroySocket( ); // this cancel the comm thread
+        TDUtil.slowDown( 1000 );
+        // TDLog.v("X310 notify lister " + ( (lister != null)? lister.name() : "null") );
+        mApp.notifyListerStatus( lister, ConnectionState.CONN_DISCONNECTED );
       }
-    }
-    destroySocket( );
+    };
+    laserThread.start();
   }
 
   /* send the set/unset calib-mode command
@@ -207,7 +230,7 @@ public class DistoX310Comm extends DistoXComm
   // public int dumpFirmware( String address, String filepath )
   public int dumpFirmware( String address, File file )
   {
-    TDLog.v( "Comm dump firmware " + file.getPath() );
+    TDLog.v( "X310 dump firmware " + file.getPath() );
     int ret = 0;
     if ( connectSocketAny( address ) ) {
       if ( mProtocol instanceof DistoX310Protocol ) {
@@ -226,7 +249,7 @@ public class DistoX310Comm extends DistoXComm
   // public int uploadFirmware( String address, String filepath )
   public int uploadFirmware( String address, File file )
   {
-    TDLog.v( "Comm upload firmware " + file.getPath() );
+    TDLog.v( "X310 upload firmware " + file.getPath() );
     int ret = 0;
     if ( connectSocketAny( address ) ) {
       if ( mProtocol instanceof DistoX310Protocol ) {
@@ -241,17 +264,17 @@ public class DistoX310Comm extends DistoXComm
         // FIXME DRY_RUN
         if ( DRY_RUN ) {
           ret = ((DistoX310Protocol)mProtocol).uploadFirmwareDryRun( file );
-          TDLog.v( "Comm Firmware upload dry run: " + ret );
+          TDLog.v( "X310 Firmware upload dry run: " + ret );
         } else {
           // ret = ((DistoX310Protocol)mProtocol).uploadFirmware( filepath );
           ret = ((DistoX310Protocol)mProtocol).uploadFirmware( file );
-          TDLog.v( "Comm Firmware upload: " + ret );
+          TDLog.v( "X310 Firmware upload: " + ret );
         }
       } else {
         ret = -1;
       }
     } else {
-      TDLog.e( "Comm Firmware upload socket failure");
+      TDLog.e( "X310 Firmware upload socket failure");
     }
     destroySocket( );
     return ret;

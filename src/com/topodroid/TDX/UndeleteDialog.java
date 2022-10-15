@@ -73,7 +73,7 @@ class UndeleteDialog extends MyDialog
    * @param data      data database
    * @param sid       survey ID
    * @param shots1    deleted shots
-   * @param shots2    overshhoted shots
+   * @param shots2    overshooted shots
    * @param shots3    check shots
    * @param shots4    blunder shots
    * @param plots     deleted plots (plan-profile pairs)
@@ -154,7 +154,7 @@ class UndeleteDialog extends MyDialog
         mDBlockBuffer.clear();
       }
     } else {
-      // TDLog.Log( TDLog.LOG_INPUT, "UndeleteDialog onClick()" );
+      // TDLog.v( "UndeleteDialog onClick()" );
     }
     dismiss();
   }
@@ -292,7 +292,7 @@ class UndeleteDialog extends MyDialog
     incrementStatus(); // calls updateList();
   }
 
-  /** update the list of undeleteable items: switch adapter according to the status
+  /** update the list of undeletable items: switch adapter according to the status
    */
   private void updateList()
   {

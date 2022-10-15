@@ -41,6 +41,9 @@ public class ExportDialogPlot extends MyDialog
                    implements AdapterView.OnItemSelectedListener
                    , View.OnClickListener
 {
+  private final static int PARENT_DRAWING  = 0; // parent types
+  private final static int PARENT_OVERVIEW = 1;
+
   private Button   mBtnOk;
   // private Button   mBtnBack;
 
@@ -49,7 +52,7 @@ public class ExportDialogPlot extends MyDialog
   private String    mSelected;
   private final int mTitle;
   private int mSelectedPos;
-  private int mParentType;
+  private int mParentType; // parent type
   private String mPlotName;
 
   private LinearLayout mLayoutTherion;
@@ -68,14 +71,14 @@ public class ExportDialogPlot extends MyDialog
    * @param parent_type 0: drawing, 1: overview
    * @param plotname    name of the plot
    */
-  public ExportDialogPlot( Context context, IExporter parent, String[] types, int title, int parent_type, String plotname )
+  public ExportDialogPlot( Context context, IExporter parent, String[] types, int title, String plotname )
   {
     super( context, null, R.string.ExportDialog ); // null app
     mParent = parent;
     mTypes  = types;
     mSelected = null;
     mTitle = title;
-    mParentType = parent_type;
+    mParentType = ( parent instanceof OverviewWindow ) ? PARENT_OVERVIEW : PARENT_DRAWING;
     mPlotName = plotname;
   }
 
@@ -181,7 +184,7 @@ public class ExportDialogPlot extends MyDialog
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
       setOptions();
-      if ( mParentType == 0 ) { // plot
+      if ( mParentType == PARENT_DRAWING ) { // plot
         mParent.doExport( mSelected, TDConst.getPlotFilename( mSelectedPos, mPlotName ), null );  // null prefix
       } else { // overview
         mParent.doExport( mSelected, TDConst.getOverviewFilename( mSelectedPos, mPlotName ), null ); // null prefix
@@ -203,7 +206,7 @@ public class ExportDialogPlot extends MyDialog
     mLayoutShp.setVisibility( View.GONE );
     // mLayoutPng.setVisibility( View.GONE ); // NO_PNG
     mLayoutPdf.setVisibility( View.GONE );
-    if ( mParentType == 0 ) { // SketchWindow
+    if ( mParentType == PARENT_DRAWING ) { // SketchWindow
       switch ( mSelectedPos ) {
         case 0: mLayoutTherion.setVisibility( View.VISIBLE ); break;
         case 1: mLayoutCSurvey.setVisibility( View.VISIBLE ); break;
@@ -213,7 +216,7 @@ public class ExportDialogPlot extends MyDialog
         // case 5: mLayoutPng.setVisibility( View.VISIBLE ); break; // NO_PNG
         case 5: mLayoutPdf.setVisibility( View.VISIBLE ); break;
       }
-    } else { // mParentType == 1 // OverviewWindow
+    } else { // mParentType == PARENT_OVERVIEW // OverviewWindow
       switch ( mSelectedPos ) {
         case 0: mLayoutTherion.setVisibility( View.VISIBLE ); break;
         // case 1: mLayoutCSurvey.setVisibility( View.VISIBLE ); break;
@@ -227,13 +230,16 @@ public class ExportDialogPlot extends MyDialog
   }
 
   /** set the options for the selected export
+   * indices:    0   1   2   3   4   5   6   7   8
+   * DRAWING:   th2 csx dxf svg shp pdf xvi tnl c3d
+   * OVERVIEW:  th2     dxf svg shp pdf xvi
    */
   private void setOptions()
   {
     int selected = mSelectedPos;
-    if ( mParentType == 1 ) {
-      if ( selected > 0 ) ++selected;
-      if ( selected == 1 || selected > 4 ) return;
+    if ( mParentType == PARENT_OVERVIEW ) {
+      if ( selected > 0 ) ++selected;  // shift indices dxf .. xvi up
+      if ( selected == 1 || selected > 4 ) return; // no options for pdf xvi tnl c3d
     }
     switch ( selected ) {
       case 0: // Therion

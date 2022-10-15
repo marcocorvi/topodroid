@@ -16,7 +16,7 @@ import com.topodroid.TDX.BrushManager;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Paint.Style;
+// import android.graphics.Paint.Style;
 // import android.graphics.PointF;
 // import android.graphics.Path;
 // import android.graphics.Path.Direction;
@@ -178,7 +178,7 @@ public class TdmViewCommand
     }
   }
 
-  /** fint the stations close to a canvas point (closest than 40 [scene]) 
+  /** find the stations close to a canvas point (closest than 40 [scene])
    * @param x   X coord [scene ?]
    * @param y   Y coord [scene ?]
    * @return the (rescaled) station(s) closest distance from the point - 80 if no station is found

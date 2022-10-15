@@ -23,7 +23,7 @@ import com.topodroid.math.TDVector;
 
 import java.lang.Math;
 
-import java.util.Locale;
+// import java.util.Locale;
 
 // used by logCoeff
 
@@ -138,17 +138,17 @@ public class CalibAlgo
 
   // void dump( )
   // {
-  //   tdlog.v( String.format(Locale.US, "G %8.4f %8.4f %8.4f", bG.x, bG.y, bG.z ) );
-  //   tdlog.v( "aG " + aG.x.x + " " + aG.x.y + " " + aG.x.z );
-  //   tdlog.v( "   " + aG.y.x + " " + aG.y.y + " " + aG.y.z );
-  //   tdlog.v( "   " + aG.z.x + " " + aG.z.y + " " + aG.z.z );
+  //   TDLog.v( String.format(Locale.US, "G %8.4f %8.4f %8.4f", bG.x, bG.y, bG.z ) );
+  //   TDLog.v( "aG " + aG.x.x + " " + aG.x.y + " " + aG.x.z );
+  //   TDLog.v( "   " + aG.y.x + " " + aG.y.y + " " + aG.y.z );
+  //   TDLog.v( "   " + aG.z.x + " " + aG.z.y + " " + aG.z.z );
   //
-  //   tdlog.v( String.format(Locale.US, "M %8.4f %8.4f %8.4f", bM.x, bM.y, bM.z ) );
-  //   tdlog.v( "aM " + aM.x.x + " " + aM.x.y + " " + aM.x.z );
-  //   tdlog.v( "   " + aM.y.x + " " + aM.y.y + " " + aM.y.z );
-  //   tdlog.v( "   " + aM.z.x + " " + aM.z.y + " " + aM.z.z );
+  //   TDLog.v( String.format(Locale.US, "M %8.4f %8.4f %8.4f", bM.x, bM.y, bM.z ) );
+  //   TDLog.v( "aM " + aM.x.x + " " + aM.x.y + " " + aM.x.z );
+  //   TDLog.v( "   " + aM.y.x + " " + aM.y.y + " " + aM.y.z );
+  //   TDLog.v( "   " + aM.z.x + " " + aM.z.y + " " + aM.z.z );
   //
-  //   tdlog.v( String.format(Locale.US, "NL %8.4f %8.4f %8.4f", nL.x, nL.y, nL.z ) );
+  //   TDLog.v( String.format(Locale.US, "NL %8.4f %8.4f %8.4f", nL.x, nL.y, nL.z ) );
   // }
 
   // @param N         number of data
@@ -165,7 +165,7 @@ public class CalibAlgo
   public float DeltaBH()      { return mDeltaBH; }
   public float Delta()        { return mDelta; }
   public float Delta2()       { return mDelta2; }
-  public float Error( int k ) { return err[k]; }
+  // public float Error( int k ) { return err[k]; }
   public float[] Errors()     { return err; }
   public float MaxError( )    { return mMaxError; }
 
@@ -494,7 +494,7 @@ public class CalibAlgo
     idx ++;
   }
 
-  public int Size() { return idx; }
+  // public int Size() { return idx; }
 
   public void Reset( int N )
   {

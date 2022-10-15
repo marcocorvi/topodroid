@@ -84,6 +84,23 @@ class QCamCompass extends Dialog
   private boolean mHasShot;
   private int mCamera;
 
+  /** cstr
+   * @param context    context
+   * @param callback   callback object that stores azimuth and clino
+   * @param inserter   photo inserter
+   * @param with_box   ...
+   * @param with_delay ...
+   * @param cam        camera API (1 or 2)
+   *
+   * @note QCamCompass is used by
+   *   - DrawingWindow to take photo (with old Camera API)
+   *   - ShotNewDialog (with old Camera API)
+   *   - ShotWindow
+   * @note camera determines which camera API to use
+   *   - 1: old Camera: QCamDrawingSurface
+   *   - 2: Camera2: QCamDrawingTexture
+   *   - 3: Android camera (intent) UNUSED
+   */
   QCamCompass( Context context, Activity parent, IBearingAndClino callback, IPhotoInserter inserter, boolean with_box, boolean with_delay, int camera )
   {
     super( context );
@@ -260,7 +277,7 @@ class QCamCompass extends Dialog
   //   return TDMath.atan2d( zv, zh );
   // }
 
-  /** @implements
+  /** @note implements
    * @param b   azimuth
    * @param c   clino
    * @param o   orientation: 0 up, 90 right, 180 down, 270 left
@@ -453,7 +470,7 @@ class QCamCompass extends Dialog
     return false;
   }
 
-  /** @implement from OnZoomListener: called when zoom controls visibility changes.
+  /** @note implement from OnZoomListener: called when zoom controls visibility changes.
    * @param visible whether controls are visible
    */
   @Override
@@ -508,7 +525,7 @@ class QCamCompass extends Dialog
   // int mDeltaZoom = 1;
   long mZoomTime = 0;
 
-  /** @implements from OnZoomListener: view needs to be zoomed
+  /** @note implements from OnZoomListener: view needs to be zoomed
    * @param zoomin whether it is a zoom-in
    */
   @Override
@@ -531,7 +548,7 @@ class QCamCompass extends Dialog
     mZoomTime = time;
   }
 
-  /** @implement set the JPEG data - use default (comment wen minsdk = 24)
+  /** @note implement set the JPEG data - use default (comment wen minsdk = 24)
    * @param data   JPEG image data
    * @return true on success
    */

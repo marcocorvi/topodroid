@@ -23,7 +23,7 @@ import com.topodroid.utils.TDUtil;
 import com.topodroid.help.UserManDownload;
 import com.topodroid.TDX.TDLevel;
 import com.topodroid.TDX.TDandroid;
-import com.topodroid.TDX.TDPath;
+// import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.TDAzimuth;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TopoDroidApp;
@@ -339,8 +339,8 @@ public class TDSetting
   public static int mCommRetry = 1; 
   // public static int mCommType  = 0; // 0: on-demand, 1: continuous, 2: multi REPLACED BY mConnectionMode
 
-  public static int mWaitLaser = 1000;
-  public static int mWaitShot  = 4000;
+  public static int mWaitLaser = 2000;
+  public static int mWaitShot  = 2000;
   public static int mWaitData  =  100;  // delay between data
   public static int mWaitConn  =  500;  // delay waiting a connection
   public static int mWaitCommand = 100;
@@ -3764,7 +3764,7 @@ public class TDSetting
     return ret;
   }
 
-  /** set the lintpoint spacing (Bezier step)
+  /** set the linepoint spacing (Bezier step)
    * @param step    point spacing [m]
    */
   public static String setBezierStep( float step )

@@ -63,7 +63,7 @@ public class ExifInfo
   public float clino()     { return mClino; }
 
   /** @return the date (format yyyy.MM.dd) 
-   * @see TDUtils.currentDateTime
+   * @see TDUtil currentDateTime()
    */
   public String date()     { return mDate; }
 

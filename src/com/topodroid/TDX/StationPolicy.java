@@ -50,7 +50,7 @@ public class StationPolicy
 
   // static void dump( )
   // {
-  //   tdlog.v("Policy " + mSavedPolicy + " " + mSurveyStations + "/" + (mShotAfterSplays?"a ":"b ")
+  //   TDLog.v("Policy " + mSavedPolicy + " " + mSurveyStations + "/" + (mShotAfterSplays?"a ":"b ")
   //       	    + (mBacksightShot?"B":"-")
   //       	    + (mTripodShot?"T":"-")
   //       	    + (mMagAnomaly?"M":"-")

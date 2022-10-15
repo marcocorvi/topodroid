@@ -38,7 +38,7 @@ import android.os.Handler;
 import android.os.ParcelFileDescriptor;
 import android.net.Uri;
 
-import android.graphics.Bitmap;
+// import android.graphics.Bitmap;
 // import android.graphics.Bitmap.CompressFormat;
 
 class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
@@ -64,7 +64,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   private boolean mTh2Edit = false; // TH2EDIT
 
   /**
-   * @param context
+   * @param context  context
    * @param uri      output URI
    * @param parent   parent window
    * @param handler  result handler (to toast a feedback to the user)
@@ -149,7 +149,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       // DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
       ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( mUri );
       if ( pfd == null ) return false;
-      float point_spacing = TDSetting.mBezierStep; // TH2EDIT save params that are temporarely changed
+      float point_spacing = TDSetting.mBezierStep; // TH2EDIT save params that are temporarily changed
       try {
         if ( mTh2Edit ) { // TH2EDIT special params values:
           TDSetting.mBezierStep = 0.0f;

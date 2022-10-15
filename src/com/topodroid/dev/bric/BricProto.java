@@ -4,7 +4,7 @@
  * @date jan 2021
  *
  * @brief BRIC4 protocol
- * @mote the methods of the BRIC procolor are run on the queue consumer thread
+ * @mote the methods of the BRIC protocol are run on the queue consumer thread
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -20,11 +20,12 @@ import com.topodroid.dev.ble.BleCallback;
 // import com.topodroid.dev.ble.BleUtils;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.ListerHandler;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 
 // import android.os.Looper;
-import android.os.Handler;
+// import android.os.Handler;
 import android.content.Context;
 
 // import android.bluetooth.BluetoothDevice;
@@ -45,7 +46,7 @@ public class BricProto extends TopoDroidProtocol
   private Device mDevice; // device of this communication
   private ConcurrentLinkedQueue< BleOperation > mOps;
   private final BricComm mComm;
-  private final Handler mLister;
+  private final ListerHandler mLister;
   private byte[] mLastTime;       // content of LastTime payload
   private byte[] mLastPrim;   // used to check if the coming Prim is new
   private boolean mPrimToDo = false;
@@ -82,7 +83,7 @@ public class BricProto extends TopoDroidProtocol
    * @param device  bluetooth device
    * @param comm    BRIC comm object
    */
-  public BricProto( Context ctx, TopoDroidApp app, Handler lister, Device device, BricComm comm )
+  public BricProto( Context ctx, TopoDroidApp app, ListerHandler lister, Device device, BricComm comm )
   {
     super( device, ctx );
     mLister = lister;
@@ -240,15 +241,15 @@ public class BricProto extends TopoDroidProtocol
     mLastTime = Arrays.copyOfRange( bytes, 0, bytes.length );
   }
 
-  /** reset the last time byte array to null
-   */
-  void clearLastTime() { mLastTime = null; }
+  // UNUSED
+  // /** reset the last time byte array to null
+  //  */
+  // void clearLastTime() { mLastTime = null; }
 
-  /** @return the last time byte array
-   */
-  byte[] getLastTime() { return mLastTime; }
-
-  
+  // UNUSED
+  // /** @return the last time byte array
+  //  */
+  // byte[] getLastTime() { return mLastTime; }
 
 }
 

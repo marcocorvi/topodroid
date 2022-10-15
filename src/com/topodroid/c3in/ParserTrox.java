@@ -480,7 +480,7 @@ public class ParserTrox extends TglParser
             mCaveLength += sh.length();
             repeat = true;
           } else {
-            // TDLog.v( "TRO unused shot " + sh.from + " " + sh.to + " : null null" );
+            // TDLog.v( "TROX unused shot " + sh.from + " " + sh.to + " : null null" );
           }
         }
       }

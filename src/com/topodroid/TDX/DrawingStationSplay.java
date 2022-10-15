@@ -30,13 +30,13 @@ class DrawingStationSplay
     mSplaysOff = new ArrayList<>();
   }
 
-  /** clear structures
-   */
-  void reset()
-  {
-    mSplaysOn.clear();
-    mSplaysOff.clear();
-  }
+  // /** clear structures - UNUSED
+  //  */
+  // void reset()
+  // {
+  //   mSplaysOn.clear();
+  //   mSplaysOff.clear();
+  // }
 
   /** @return true if there is at least one splay ON
    */
