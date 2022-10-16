@@ -55,7 +55,8 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
   public String mFirmVer;
   public String mHardVer;
   public byte[] mRepliedData;
-  public int mCheckSum;
+  public int mCheckCRC;
+  public int mFwOpReturnCode;    //0: OK  1: Flash Error 2: Addr or CRC error
 
   public byte[] mMeasureDataPacket1;
   public byte[] mMeasureDataPacket2;
@@ -152,17 +153,19 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
         }
       } else if ( databuf[0] == MemoryOctet.BYTE_PACKET_FW_WRITE ) { // 0x3b
         // TDLog.v("XBLE command packet " + command + " (checksum) length " + databuf.length );
-        if ( databuf.length == 5 ) {
-          mCheckSum = ((databuf[4] << 8) | (databuf[3] & 0xff)) & 0xffff;
+        if ( databuf.length == 6 ) {
+          mFwOpReturnCode = databuf[3];
+          mCheckCRC = ((databuf[5] << 8) | (databuf[4] & 0xff)) & 0xffff;
           return PACKET_FLASH_CHECKSUM;
         }
-      } else if ( command == MemoryOctet.BYTE_PACKET_FW_READ && databuf.length == 131) {   // 0x3a: 3 headers + 128 payloadsda
+      } else if ( command == MemoryOctet.BYTE_PACKET_FW_READ && (databuf.length == 131 || databuf.length == 133)) {   // 0x3a: 3 headers + 128 payloadsda
         // TDLog.v("XBLE command packet " + command + " (firmware) length " + databuf.length );
         if ( databuf[2] == 0x00 ) {        // firmware first packet (MTU=247)
           for ( int i=3; i<131; i++) mFlashBytes[i-3] = databuf[i]; // databuf is copied from offset 3
           return PACKET_FLASH_BYTES_1;
-        } else if ( databuf[2] == 0x01 ) {   // firmware second packet
-          for ( int i=3; i<131; i++) mFlashBytes[i+128-3] = databuf[i]; 
+        } else if ( databuf[2] == 0x01 && databuf.length == 133) {   // firmware second packet, with 2 bytes CRC at the end
+          for ( int i=3; i<131; i++) mFlashBytes[i+128-3] = databuf[i];
+          mCheckCRC = ((databuf[132] << 8) | (databuf[131] & 0xff)) & 0xffff;
           return PACKET_FLASH_BYTES_2;
         // } else {
         //   // TDLog.Error("XBLE ...");

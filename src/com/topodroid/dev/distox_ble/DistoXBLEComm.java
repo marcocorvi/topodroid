@@ -1004,6 +1004,31 @@ public class DistoXBLEComm extends TopoDroidComm
     return ret;
   }
 
+    /**
+     * cal CRC-16
+     *
+     * @param bytes
+     * @return
+     */
+    public int calCRC16(byte[] bytes, int length) {
+        int CRC = 0x0000ffff;
+        int POLYNOMIAL = 0x0000a001;
+
+        int i, j;
+        for (i = 0; i < length; i++) {
+            CRC ^= ((int) bytes[i] & 0x000000ff);
+            for (j = 0; j < 8; j++) {
+                if ((CRC & 0x00000001) != 0) {
+                    CRC >>= 1;
+                    CRC ^= POLYNOMIAL;
+                } else {
+                    CRC >>= 1;
+                }
+            }
+        }
+        return CRC;
+    }
+
   /** upload a firmware to the device
    * @param address   device address
    * @param file      firmware file
@@ -1033,6 +1058,8 @@ public class DistoXBLEComm extends TopoDroidComm
           TDLog.v("XBLE fw upload: addr " + addr + " count " + cnt);
           for (int k = 0; k < 256; ++k) buf[k] = (byte) 0xff;
           int nr = dis.read(buf, 0, 256);
+          int crc16 = calCRC16(buf,256);
+          //for (int k = 0; k < 256; ++k) buf[k] = (byte) 0xff;  //for simulating the bug
           if (nr <= 0) {
             TDLog.v("XBLE fw upload: file read failure. Result " + nr);
             break;
@@ -1047,11 +1074,13 @@ public class DistoXBLEComm extends TopoDroidComm
           seperated_buf[2] = 0; //packet index
           System.arraycopy(buf, 0, seperated_buf, 3, 128);
           enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, seperated_buf, true);
-          seperated_buf = new byte[131];
+          seperated_buf = new byte[133];
           seperated_buf[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte) 0x3b;
           seperated_buf[1] = (byte) (flashaddr & 0xff);
           seperated_buf[2] = 1;
           System.arraycopy(buf, 128, seperated_buf, 3, 128);
+          seperated_buf[131] = (byte) (crc16 & 0x00FF);
+          seperated_buf[132] = (byte) ((crc16 >> 8) & 0x00FF);
           enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, seperated_buf, true);
           //TDUtil.yieldDown(1000);
           mPacketType = DistoXBLEProtocol.PACKET_NONE;
@@ -1067,14 +1096,14 @@ public class DistoXBLEComm extends TopoDroidComm
           //   }
           // }
           if ( mPacketType == DistoXBLEProtocol.PACKET_FLASH_CHECKSUM ) {
-            int checksum = 0;
-            for (int i = 0; i < 256; i++) checksum += (buf[i] & 0xff);
-            if ( ((DistoXBLEProtocol) mProtocol).mCheckSum != checksum ) {
-              TDLog.v("XBLE fw upload: fail at " + cnt + " buffer[0]: " + buf[0] + " reply_addr " + addr);
+            //int checksum = 0;
+            //for (int i = 0; i < 256; i++) checksum += (buf[i] & 0xff);
+            if ( ((DistoXBLEProtocol) mProtocol).mCheckCRC != crc16 || ((DistoXBLEProtocol) mProtocol).mFwOpReturnCode != 0) {
+              TDLog.v("XBLE fw upload: fail at " + cnt + " buffer[0]: " + buf[0] + " reply_addr:" + addr + " return_code:" + ((DistoXBLEProtocol) mProtocol).mFwOpReturnCode + " return CRC:" + ((DistoXBLEProtocol) mProtocol).mCheckCRC);
               ok = false;
               break;
             } else {
-              TDLog.v("XBLE fw upload: reply address ok");
+              TDLog.v("XBLE fw upload: reply CRC and return code ok");
             }
           } else {
             ok = false;
@@ -1124,6 +1153,9 @@ public class DistoXBLEComm extends TopoDroidComm
       // }
       if (mPacketType == DistoXBLEProtocol.PACKET_FLASH_BYTES_2) {
         buf = ((DistoXBLEProtocol) mProtocol).mFlashBytes;
+        int crc = calCRC16(buf,256);
+        if(crc != ((DistoXBLEProtocol) mProtocol).mCheckCRC)
+            return null;
         return buf;
       }
     }catch (Exception e){
