@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<resources>
+<resources
+  xmlns:tools="http://schemas.android.com/tools"
+  >
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string --> 
     <string name="no_manual">Impossible de récupérer le manuel depuis Internet</string>
     <string name="user_man_ok">Traduction du manuel utilisateur installée</string>
     <string name="user_man_fail">Échec de l\'installation de la traduction du manuel</string>
+	
+	<!-- UNUSED string name="string_false">false</string -->
+    <!-- UNUSED string name="string_true">true</string -->	
+	
+    <string name="tdx_stale" translatable="false">TopoDroid ne peut pas accéder à son ancien dossier. Fermez l'application et accordez l'accès aux fichiers à l'aide du menu Paramètres app.\n\nVoir http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string>
+    <!-- UNUSED string name="target_sdk" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nFinish ?</string -->
+    <!-- UNUSED string name="target_sdk_stale" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nThis version cannot access the old folder and must stop.\nSee http://marcocorvi.altervista.org/TopoDroidAndAndroid11.html.</string -->
 
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
@@ -12,26 +20,34 @@
     <!-- UNUSED string name="desc_areas">Areas</string -->
     <string name="desc_menu">Menu</string>
 
-    <!-- OK string name="app_name">TopoDroid</string -->
-    <string name="tdm_title">TopoDroid Manager</string>
-    <string name="double_back">Appuyez RETOUR une nouvelle fois pour sortir</string>
-
-    <string name="new_survey_label">Nouveau relevé</string>
-    <!-- UNUSED  <!-- UNUSED  <string name="distox_label">DistoX</string> --> -->
-
-  <!-- UNUSED  <!-- UNUSED  <string name="r_title">Avis important concernant Android R</string> --> -->
+  <!-- UNUSED string name="r_title">Important notice for Android-11+</string -->
+  <!-- UNUSED string name="r_dialog">
+On Android-11+ storage access must be granted to TopoDroid.\nYou can do this with the PC program "adb".\nOn Android: enable developer settings and usb-debug.\nConnect Android to the PC with a USB cable.\nOn the PC type "adb shell appops set com.topodroid.TDX MANAGE_EXTERNAL_STORAGE allow".
+  </string -->
+  <!-- UNUSED string name="r_old_dialog">
+With Android-R TopoDroid must use its folder under "Android/data". TopoDroid has not found it and has created its folder.\nYou can import the zip archives of your old surveys.\n\nBeware that the files in the new TopoDroid folder are deleted when you uninstall TopoDroid.\n\n
+Refer to the web pages for details.\n
+  </string -->
+  <!-- UNUSED string name="r_checkboxes">You must confirm the checkbox to continue.</string -->
+  <!-- UNUSED string name="r_i_understood">I fully understood this notice</string -->
+  <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
+  <!-- UNUSED string name="r_continue">CONTINUE</string -->
   
-  <!-- UNUSED  <!-- UNUSED  <string name="r_dialog">
-Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid ne l\'a pas trouvé et a créé ce dossier.\nVous pouvez importer les archives zip de vos anciennes topographies.\nVeuillez noter que les fichiers du nouveau dossier TopoDroid sont supprimés lorsque vous désinstallez TopoDroid.\n\nConsultez les pages du site Web pour plus de détails.\n 
-</string -->
-  <!-- UNUSED  <string name="r_checkboxes">Vous devez confirmer les cases cochées.</string> --> -->
-  <!-- UNUSED  <string name="r_i_understood">J\'ai bien compris cet avis.</string> --> -->
-  <!-- UNUSED string name="r_disclaimer">J\'accepte que le ou les auteurs de l\'application ne soient pas responsables de tout dommage ou perte de données.</string -->
-  <!-- UNUSED  <!-- UNUSED  <string name="r_continue">CONTINUER</string> --> -->
+    <string name="app_name" translatable="false">TopoDroid-X</string>
+    <string name="tdm_title">TopoDroid Manager</string>
+    <string name="tdm_config_project">project.tdconfig</string>
+    <string name="double_back">Cliquez à nouveau sur RETOUR pour quitter</string>
 
-    <string name="app_name" translatable="false">TopoDroid</string>
+    <string name="new_survey_label">Nouveau relevé tpographique</string>
+    <string name="distox_label" translatable="false">DistoX</string>
+    <string name="cave3d_label" translatable="false">Cave3D</string>  
+
     <!-- UNUSED string name="version_ask">Vous être en train de mettre à jour vers une nouvelle version de TopoDroid.\n Voulez-vous réinstaller les symboles de dessins ?</string -->
     <string name="symbols_ask">Installer les outils de dessin v.%1$s?\n ? (v. actuelle: v.%2$s) </string>
+	<!-- UNUSED string name="version_check">Last version</string -->
+	<!-- UNUSED string name="version_check_failed">Failed version check</string -->
+    <!-- UNUSED string name="version_check_latest">Version already at latest</string -->
+    <string name="version_check_newer">Une version plus récente est disponible : %1$d</string>	
 
     <string name="setup_textsize_title">Configuration de TopoDroid. Taille du texte</string>
     <string name="setup_buttonsize_title">Configuration de TopoDroid. Taille des boutons</string>
@@ -43,11 +59,10 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="setup_buttonsize">Détermine la taille des boutons.\nVous pourrez aussi la changer plus tard via le menu configuration de la fenêtre principale.</string>
     <string name="setup_drawingunit">Détermine la taille des icônes.\nVous pourrez aussi la changer plus tard via le menu configuration de la fenêtre principale.</string>
     <string name="setup_done">La configuration de base est terminée.\n\n
-	    Si vous rencontrez des problèmes avec la connexion du DistoX, essayez de choisir le mode non sécurisé.\n\n
-	    D\'autres paramètres concernent la présentation dans la fenêtre d\'esquisse (taille des icônes, taille des étiquettes, largeur des lignes, etc.).
-	    vous devriez les adapter à vos besoins./n/n
+Si vous rencontrez des problèmes avec la connexion du DistoX, essayez de choisir le mode non sécurisé.\n\n
+D\'autres paramètres concernent la présentation dans la fenêtre de croquis (taille des icônes, taille des étiquettes, largeur des lignes, etc.); vous devriez les adapter à vos besoins./n/n
     </string>
-    <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
+    <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string>
 
     <string name="POINT">POINT</string>
     <string name="LINE">LIGNE</string>
@@ -68,6 +83,7 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
 
     <string name="memoryA3">Mémoire du DistoX A3</string>
     <string name="memoryX310">Mémoire du DistoX X310</string>
+	<string name="memoryXBLE">Mémoire du DistoX-BLE (BT Low Energy)</string>
     <!-- UNUSED string name="memory_data">Données du DistoX</string -->
 
     <string name="thp_user">Utilisateur</string>
@@ -83,6 +99,7 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
 
     <!-- UNUSED string name="make_walls">Parois</string -->
     <string name="missing_station">Station manquante</string>
+	<string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <string name="station_not_found">Station introuvable</string>
     <string name="shot_not_found">Visée non trouvée</string>
     <string name="bad_sibling">Mauvaise visée parente</string>
@@ -124,8 +141,7 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="calib_delete">Supprimer cet étalonnage</string>
     <string name="calib_device_mismatch">ATTENTION : Étalonnage et Appareil ne correspondent pas</string>
     <string name="calib_no_name">Vous devez nommer cet étalonnage</string>
-    <string name="calib_no_coeff">Coefficient d\'étalonnage non défini</string>
-    <!-- REMOVE string name="calib_gm_policy">Politique</string -->
+    <string name="calib_no_coeff">Coefficient d\'étalonnage non défini</string>    
     <string name="calib_gm_policy">Politique de groupe</string>
     <string name="calib_gm_undelete">Récupérer ces données d\'étalonnage ?</string>
     <!-- UNUSED string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
@@ -140,19 +156,20 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <!-- UNUSED string name="data"> données</string -->
     <string name="using">Utilisation de %1$s</string>
     <string name="calib_error">Erreur moyenne : %1$.2f degrés (BH delta %2$.2f)</string>
-    <string name="calib_stddev">Ecart type : %1$.4f degrés</string>
+    <string name="calib_validate_error">Erreur moyenne : %1$.2f &#xb0;</string>
+	<string name="calib_stddev">Ecart type : %1$.4f degrés</string>
     <string name="calib_max_error">Erreur max : %1$.4f degrés</string>
     <string name="calib_ave_std">Précision : %1$.4f %2$.4f degrés</string>
     <string name="calib_precision">Précision</string>
     <string name="calib_iter">Itérations : %1$d</string>
     <string name="calib_reset">Réinitialiser l\'étalonnage du DistoX ?</string>
-    <!-- TODO string name="calib_min_error">Minimum error</string -->
+    <string name="calib_min_error">Erreur Minimum</string>
 
     <string name="algorithm">algorithme:</string>
     <string name="auto">automatique</string>
     <string name="linear">linéaire</string>
     <string name="non_linear">non-linéaire</string>
-    <!-- UNUSED  <!-- UNUSED  <string name="algo_minimum">minimum</string> --> -->
+    <string name="algo_minimum" translatable="false">minimum</string>
 
     <!-- UNUSED string name="device_algo_failed">Échec de détermination automatique de l\'algorithme depuis l\'appareil\n. Utilisation de l\'algorithme linéraire</string -->
     <string name="device_address">Addresse %1$s</string>
@@ -167,6 +184,7 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="device_code">DistoX code %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
     <string name="device_hardware">Hardware  %1$d.%2$d</string>
+	<!-- UNUSED string name="device_memory">Memory  %1$02x.%2$02x</string -->
     <string name="device_status_angle_grad">Unités d\'angle : grade</string>
     <string name="device_status_angle_degree">Unités d\'angle : degré</string>
     <string name="device_status_compass_on">Boussole/clino : on</string>
@@ -198,20 +216,20 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="few_data">Pas assez de données</string>
     <string name="few_iter">Échec de l\'itération</string>
     <string name="few_groups">Pas assez de données dans le groupe</string>
-    <!-- UNUSED  <string name="found_groups">Trouvé %1$d groupes</string> -->
+    <!-- UNUSED string name="found_groups" tools:ignore="PluralsCandidate">Found %1$d groups</string -->
     <string name="regroup">Pas de regrouprement</string>
     <!-- UNUSED string name="few_plots">Pas assez de Points</string -->
     <string name="few_calibs">Pas assez d\'étalonnage</string>
-    <string name="getting_info">Obtenir des informations DistoX &#8230;</string>
+    <string name="getting_info">Obtenir des infos DistoX &#8230;</string>
+	<string name="gettingble_info">Obtenir des infos DistoX-BLE (BT Low Energy) &#8230;</string>
 
     <string name="calib_import_title">Import de l\'étalonnage</string>
     <string name="import_title">Import fichier</string>
     <string name="export_data_title">Exportation de données</string>
-    <!-- UNUSED  <string name="export_plot_title">Exportation de croquis</string> -->
-    <!-- UNUSED  <string name="export_overview_title">Aperçu de l\'exportation</string> -->
+    <!-- UNUSED string name="export_plot_title">Sketch export</string -->
+    <!-- UNUSED string name="export_overview_title">Overview export</string -->
     <string name="export_model_title">Exportation de modèle 3D</string>
     <string name="export_tdconfig_title">Exportation de projet</string>
-
     <!-- UNUSED string name="import_wait">Importation de fichier&#8230; Patientez&#8230;</string -->
     <string name="import_already">Relevé déjà importé</string>
     <string name="import_bad">Fichier d\'import invalide</string>
@@ -239,147 +257,164 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="head_tail_failed">Échec de lecture de la mémoire du DistoX</string>
     <string name="head_tail_store_failed">Échec de l\'enregistrement des index de mémoire du DistoX</string>
     <!-- UNUSED string name="pairing_failed">Echec de connexion au DistoX</string -->
-
-<string name="illegal_data_value">Valeur de donnée incorrecte</string>
-<string name="photo_title">PHOTO</string>
-<string name="photo_text">Saisir un commentaire</string>
-<string name="photo_failed">Échec de la photo</string>
-<string name="photo_max_captures">Limite de capture maximale atteinte</string>
-<string name="label_title">ÉTIQUETTE</string>
-<string name="label_text">Saisissez le texte</string>
-<!-- UNUSED string name="altitude">Alt. </string -->
-<string name="h_ellipsoid">H ellip. </string>
-<string name="h_geoid">H géoïde </string>
-<string name="latitude">Lat. </string>
-<string name="longitude">Long. </string>
-<string name="h_ellipsoid_hint">H ellip. [mètres]</string>
-<string name="h_geoid_hint">H géoïde [mètres]</string>
-<string name="latitude_hint">Lat. dd:mm:ss.sss</string>
-<string name="longitude_hint">Long. dd:mm:ss.sss</string>
-<string name="loop_closure_errors">Erreurs de bouclage</string>
-<string name="loop_none">Pas de bouclage</string>
-<!-- UNUSED string name="long_lat">Long-Lat</string -->
+	
+	<string name="datamode_normal">Normal data-mode</string>
+    <string name="datamode_diving">Diving data-mode</string>
+	<string name="illegal_data_value">Valeur de donnée incorrecte</string>
+	
+	<string name="photo_title">Photo</string>
+	<string name="photo_text">Saisir un commentaire pour la photo</string>
+	<string name="photo_failed">Échec de la photo</string>
+	<string name="photo_max_captures">Limite de capture maximale atteinte</string>
+	<string name="label_title">ÉTIQUETTE</string>
+	<string name="label_text">Saisissez le texte de l\'étiquette</string>
+	<!-- UNUSED string name="altitude">Alt. </string -->
+	<string name="h_ellipsoid">H. ellip. </string>
+	<string name="h_geoid">H. géoïde </string>
+	<string name="latitude">Lat. </string>
+	<string name="longitude">Long. </string>
+	<string name="h_ellipsoid_hint">H. ellipsoïde [meters]</string>
+	<string name="h_geoid_hint">H. géoïde [meters]</string>
+	<string name="latitude_hint">Lat. dd:mm:ss.sss</string>
+	<string name="longitude_hint">Long. dd:mm:ss.sss</string>
+	<string name="loop_closure_errors">Erreurs de bouclage</string>
+	<string name="loop_none">Pas de bouclage</string>
+	<string name="loops_bad">Boucles imprécises : %1$d</string>
+	<!-- UNUSED string name="long_lat">Long-Lat</string -->
+	<!-- UNUSED string name="multistation_plane">Multiple-station plane</string -->
 
     <string name="error_m">Erreur [m]</string>
     <string name="fmt_error_m">Erreur %1$.1f m</string>
-    <string name="fmt_h_geoid">Erreur %1$.0f m</string>
-    <string name="fmt_h_ellipsoid">Erreur %1$.0f m</string>
+    <string name="fmt_h_geoid">Alt. géoïde %1$.0f m</string>
+    <string name="fmt_h_ellipsoid">Alt. ellipsoïde %1$.0f m</string>
     <!-- UNUSED string name="depth_error">Attention. Erreur de profondeur de données</string -->
 
-<string name="error_azimuth_required">Azimut nécessaire</string>
-<string name="error_length_required">Longueur nécessaire</string>
-<string name="error_clino_required">Pente nécessaire</string>
-<string name="error_comment_required">Commentaire nécessaire</string>
-<string name="error_begin_required">Adresse de début nécessaire</string>
-<string name="error_declination_number">Déclinaison doit être un nombre</string>
-<string name="error_end_required">Adresse de fin nécessaire</string>
-<string name="error_from_required">Première station nécessaire</string>
-<string name="error_group_required">Numéro de groupe nécessaire</string>
-<string name="error_group_non_integer">Groupe doit être un chiffre rond</string>
-<string name="error_alt_required">Altitude nécessaire</string>
-<string name="error_invalid_number">Nombre invalide</string>
-<!-- UNUSED string name="error_invalid_name">Nom invalide</string -->
-<string name="error_lat_required">Latitude nécessaire</string>
-<string name="error_long_required">Longitude nécessaire</string>
+	<string name="error_azimuth_required">Azimut nécessaire</string>
+	<string name="error_length_required">Longueur nécessaire</string>
+	<string name="error_depth_required">Profondeur nécessaire</string>
+	<string name="error_clino_required">Pente nécessaire</string>
+	<string name="error_comment_required">Commentaire nécessaire</string>
+	<string name="error_begin_required">Adresse de début nécessaire</string>
+	<string name="error_declination_number">Déclinaison doit être un nombre</string>
+	<string name="error_end_required">Adresse de fin nécessaire</string>
+	<string name="error_from_required">Première station nécessaire</string>
+	<string name="error_group_required">Numéro de groupe nécessaire</string>
+	<string name="error_group_non_integer">Groupe doit être un chiffre rond</string>
+	<string name="error_alt_required">Altitude nécessaire</string>
+	<string name="error_invalid_number">Nombre invalide</string>
+	<!-- UNUSED string name="error_invalid_name">Nom invalide</string -->
+	<string name="error_lat_required">Latitude nécessaire</string>
+	<string name="error_long_required">Longitude nécessaire</string>
     <string name="error_name_exists">Projet déjà existant</string>
-    <string name="error_name_invalid">Nom de projet invelide</string>
-<string name="error_name_required">Nom nécessaire</string>
-    <string name="error_name_duplicate">Nom en double</string>
-    <string name="error_no_section_in_section">Xsection dans xsection non autorisée</string>
-
-<!-- UNUSED string name="error_dir_exists">Le répertoire existe déjà</string -->
+    <string name="error_name_invalid">Nom de projet invalide</string>
+	<string name="error_name_required">Nom nécessaire</string>
+	<string name="error_text_required">Texte nécessaire</string>
+    <string name="error_station_number">Nombre de stations incorrect</string>
+    <string name="error_name_duplicate">Nom en doublon</string>
+    <string name="error_no_section_in_section">Sections transverses dans section transverses non autorisé</string>
+	<string name="error_team_required">Équipe nécessaire</string>
+	
+	<!-- UNUSED string name="error_dir_exists">Le répertoire existe déjà</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
-<string name="error_start_required">Station de référence nécessaire</string>
-<!-- UNUSED string name="error_station_already_fixed">cette Station a deja des coordonées</string -->
-<string name="error_station_required">Station nécessaire</string>
-<string name="error_station_non_existing">Cette station n\'existe pas</string>
-<string name="error_sensor_required">Capteur nécessaire</string>
-<string name="error_value_required">Valeur nécessaire</string>
+	<string name="error_start_required">Station de référence nécessaire</string>
+	<!-- UNUSED string name="error_station_already_fixed">cette Station a deja des coordonées</string -->
+	<string name="error_station_required">Station nécessaire</string>
+	<string name="error_station_non_existing">Cette station n\'existe pas</string>
+	<string name="error_sensor_required">Capteur nécessaire</string>
+	<string name="error_value_required">Valeur nécessaire</string>
+	<string name="error_bad_fixes">Corriger les points qui ne figurent pas dans le relevé</string>
 
-<string name="group_title">Définir les groupes de données pour l\'étalonnage </string>
-<!-- UNUSED string name="group_policy_four">Règle : grouper par 4</string -->
-<!-- UNUSED string name="group_policy_sixteen">Règle : 4 groupes de 4, les autres seuls</string -->
-<!-- UNUSED string name="group_policy_distance">Règle : grouper par distance angulaire</string -->
-<string name="group_reset">Remise à zéro des groupes</string>
+	<string name="group_title">Définir les groupes de données pour l\'étalonnage </string>
+	<!-- UNUSED string name="group_policy_four">Règle : grouper par 4</string -->
+	<!-- UNUSED string name="group_policy_sixteen">Règle : 4 groupes de 4, les autres seuls</string -->
+	<!-- UNUSED string name="group_policy_distance">Règle : grouper par distance angulaire</string -->
+	<string name="group_reset">Remise à zéro des groupes</string>
 
-<!-- UNUSED string name="scale">échelle</string -->
-<!-- UNUSED string name="reversed">inverser</string -->
-<string name="options">options</string>
-<string name="outline">contours</string>
-<string name="out">externe</string>
-<string name="in">interne</string>
-<!-- UNUSED string name="none">aucun</string -->
-<!-- UNUSED string name="barrier_add">Cacher les visées suivantes</string -->
-    <string name="hide_from">Masquer depuis…</string>
-<!-- UNUSED string name="barrier_del">Afficher les visées suivantes</string -->
-<!-- UNUSED string name="hidden_add">Cacher les visées precedentes</string -->
-<!-- UNUSED string name="hidden_del">Afficher les visées précédentes</string -->
-<string name="hidden_show">Montrer les visées après la station</string>
-<!-- UNUSED string name="splays_toggle">Basculer les visées d\'habillage - Splays</string -->
-    <string name="splays_on_off">Visées d\'habillage ON OFF</string>
-<string name="splays">Visées d\'habillage</string>
+	<!-- UNUSED string name="scale">échelle</string -->
+	<!-- UNUSED string name="reversed">inverser</string -->
+	<string name="options">options</string>
+	<string name="outline">contours</string>
+	<string name="out">externe</string>
+	<string name="in">interne</string>
+	<!-- UNUSED string name="none">aucun</string -->
+	<!-- UNUSED string name="barrier_add">Cacher les visées suivantes</string -->    
+	<string name="hide_from">Masquer depuis…</string>
+	<!-- UNUSED string name="barrier_del">Afficher les visées suivantes</string -->
+	<!-- UNUSED string name="hidden_add">Cacher les visées precedentes</string -->
+	<!-- UNUSED string name="hidden_del">Afficher les visées précédentes</string -->
+	<string name="hidden_show">Montrer les visées après la station</string>
+	<!-- UNUSED string name="splays_toggle">Basculer les visées d\'habillage - Splays</string -->
+   	<string name="splays_on_off">Visées d\'habillage</string>
+	<!-- UNUSED string name="including_splays">including splays</string -->
+	<string name="with_splays">Avec Visées d\'habillage</string>
+    <string name="cell_size">Taille de cellule [m]</string>
+
     <string name="legs">Visées de cheminement</string>
     <string name="stations">Station</string>
+	<string name="splays">Visées d\'habillage</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitude %1$s</string>
     <string name="fmt_longitude">Longitude %1$s</string>
     <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string -->
-<string name="fixed">Fixé</string>
-<string name="painted">Dessiné</string>
+	
+	<string name="fixed">Fixé</string>
+	<string name="painted">Dessiné</string>
 
-<!-- UNUSED string name="cbd_title">Répertoire de base</string -->
-<string name="cwd">Répertoire du projet TopoDroid</string>
-<string name="empty_cwd">Nom du projet vide</string>
-<!-- UNUSED string name="bad_cbd">Répertoire de base inexistant ou impossible à créer</string -->
-<string name="bad_cwd">Le nom du projet ne peut être son propre chemin d\'accès</string>
-<string name="bad_line">Mauvais type de ligne</string>
-<string name="bad_point">Mauvais type de point</string>
+	<!-- UNUSED string name="cbd_title">Répertoire de base</string -->
+	<string name="cwd">Répertoire du projet TopoDroid</string>
+	<string name="empty_cwd">Nom du projet vide</string>
+	<!-- UNUSED string name="bad_cbd">Répertoire de base inexistant ou impossible à créer</string -->
+	<string name="bad_cwd">Le nom du projet ne peut être son propre chemin d\'accès</string>
+	<string name="bad_line">Mauvais type de ligne</string>
+	<string name="bad_point">Mauvais type de point</string>
+	<string name="index_oob">Index en dehors des limites %1$d</string>
 
     <string name="no_audio">Pas d\'enregistrement audio</string>
-<string name="no_bt">Pas de Bluetooth</string>
-<string name="no_calib">Pas d\'étalonnage</string>
-<string name="no_calib_check">Pas de visée de contrôle d\'étalonnage</string>
-<string name="no_calibration">Aucun étalonnage sélectionné</string>
-<!-- UNUSED  <string name="no_capture_app">Aucune application de capture d\'image</string> -->
-<string name="no_cave3d">Cave3D n\'est pas installé</string>
+	<string name="no_bt">Pas de Bluetooth</string>
+	<string name="no_calib">Pas d\'étalonnage</string>
+	<string name="no_calib_check">Pas de visée de contrôle d\'étalonnage</string>
+	<string name="no_calibration">Aucun étalonnage sélectionné</string>
+	<!-- UNUSED string name="no_capture_app">No image capture app</string -->
+	<string name="no_cave3d">Cave3D n\'est pas installé</string>
     <string name="no_data_reduction">Pas de réduction des données</string>
-<string name="no_db">Pas de base de données</string>
-<string name="no_device_address">Adresse de périphérique non sélectionnée</string>
-<!-- UNUSED  <string name="no_device_found">Pas de périphérique trouvé</string> -->
-<string name="no_feature_audio">Audio non supporté</string>
+	<string name="no_db">Pas de base de données</string>
+	<string name="no_device_address">Adresse de périphérique non sélectionnée</string>
+	<string name="no_device_window">La fenêtre du périphérique n\'est pas disponible pendant le téléchargement</string>
+	<!-- UNUSED string name="no_device_found">Found no device</string -->
+	<string name="no_feature_audio">Audio non supporté</string>
     <string name="no_feature_pdf">PDF non supporté</string>
-<string name="no_gms">L\'étalonnage ne contient pas de données.\nUtiliser le bouton Télécharger</string>
-<string name="no_geo_station">Échec : pas de station géolocalisée</string>
+	<string name="no_gms">L\'étalonnage ne contient pas de données.\nUtiliser le bouton Télécharger</string>
+	<string name="no_geo_station">Échec : pas de station géolocalisée</string>
     <string name="no_leg_first">La sélection ne commence pas par une visée de cheminement</string>
-<string name="no_leg_intersection">La ligne de section transverse ne coupe aucune ligne de cheminement</string>
-<string name="no_location_data">Aucune donnée de géolocalisation</string>
-<!-- UNUSED  <string name="no_paired_device">Aucun périphérique appairé.\nRecherchez et appairez un DistoX</string> -->
-<string name="no_photos">Le relevé ne contient pas de photo</string>
-<string name="no_plots">Le relevé ne contient pas de croquis.\nUtilisez le bouton Ajouter pour en créer un.</string>
-<string name="no_profile_overview">Pas d\'apercu pour les coupes projetées</string>
-<string name="no_proj4">*Proj$* non installé</string>
-<string name="no_sensors">Le relevé ne contient aucune mesure</string>
-<!-- UNUSED string name="no_shots">Le relevé ne contient aucune visées.\n Utilisez le menu Télécharger pour en obtenir.</string -->
-<string name="no_search_result">La recherche ne renvoi aucun résultats</string -->
-<string name="no_survey">Aucun relevé sélectionné.</string>
-<string name="no_symbols">Pas de palette symboles.</string>
-<!-- UNUSED string name="no_thmanager">ThManager non installé</string -->
-<!-- UNUSED string name="no_db_viewer">DB_viewer app pas trouvée</string -->
-<string name="no_undelete">Aucun élément à récupérer</string>
+	<string name="no_leg_intersection">La ligne de section transverse ne coupe aucune ligne de cheminement</string>
+	<string name="no_location_data">Aucune donnée de géolocalisation</string>
+	<!-- UNUSED string name="no_paired_device">No paired device.\nScan and pair a DistoX</string -->
+	<string name="no_photos">Le relevé ne contient pas de photo</string>
+	<string name="no_plots">Le relevé ne contient pas de croquis.\nUtilisez le bouton Ajouter pour en créer un.</string>
+	<string name="no_profile_overview">Pas d\'apercu pour les coupes projetées</string>
+	<string name="no_proj4">*Proj$* non installé</string>
+	<string name="no_sensors">Le relevé ne contient aucune mesure</string>
+	<!-- UNUSED string name="no_shots">Le relevé ne contient aucune visées.\n Utilisez le menu Télécharger pour en obtenir.</string -->
+    <string name="no_search_result">Aucun résultat de recherche.</string>
+	<string name="no_survey">Aucun relevé sélectionné.</string>
+	<string name="no_symbols">Pas de palette symboles.</string>
+	<!-- UNUSED string name="no_thmanager">ThManager non installé</string -->
+	<!-- UNUSED string name="no_db_viewer">DB_viewer app pas trouvée</string -->
+	<string name="no_undelete">Aucun élément à récupérer</string>
     <string name="no_undelete_paste">Aucun éléments à récupérer/coller</string>
-<string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Azimut %5$.1f"</string>
-<string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Pente %5$.1f"</string>
-    <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
+	<string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Azimut %5$.1f"</string>
+	<string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Pente %5$.1f"</string>
+	<string name="format_closure" translatable="false">%1$s-%2$s: [%3$d] %4$.1f/%5$.1f (%6$.1f %7$.1f) %8$.1f%% (%9$.1f\u00b0)</string>
 
-<string name="menu_3d">3D</string>
-<string name="menu_about">A PROPOS</string>
-<string name="menu_area">ZONE</string>
+	<string name="menu_3d">3D</string>
+	<string name="menu_about">A PROPOS</string>
+	<string name="menu_area">ZONE</string>
     <string name="menu_audio">AUDIO</string>
-<!-- UNUSED string name="menu_attach">CONNECTER</string -->
-<!-- UNUSED string name="menu_attached">Connecté</string -->
-<!-- UNUSED string name="menu_ready">Prêt</string -->
-    <!-- UNUSED  <string name="menu_backups">EFFACER SAUVEGARDES</string> -->
+	<!-- UNUSED string name="menu_attach">CONNECTER</string -->
+	<!-- UNUSED string name="menu_attached">Connecté</string -->
+	<!-- UNUSED string name="menu_ready">Prêt</string -->
+	<!-- UNUSED string name="menu_backups">CLEAR BACKUPS</string -->
     <string name="menu_calib_check">VERIF. ÉTALONNAGE</string>
     <string name="menu_close">FERMER</string>
     <!-- UNUSED string name="menu_clear">EFFACER</string -->
@@ -393,20 +428,20 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="menu_export">EXPORTER</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">RECUPÉRER</string>
-    <string name="menu_recover_paste">RECUPÉRER/COLLER</string>
+    <string name="menu_recover_paste">RECUPERER/COLLER</string>
     <string name="menu_reload">RECHARGER</string>
     <string name="menu_rename_delete">RENOMMER/SUPPR.</string>
     <string name="menu_rename">RENOMMER</string>
     <string name="menu_plot_scrap">SCRAPS</string>
     <string name="menu_switch">BASCULER/FERMER</string>
     <string name="menu_help">AIDE</string>
-    <!-- UNUSED string name="menu_join_survey">CO-RELEVÉ-TOPO</string -->
-    <!-- UNUSED  <string name="menu_logs">JOURNALISATION</string> -->
+    <!-- UNUSED string name="menu_join_survey">CO-SURVEY</string -->
+    <!-- UNUSED string name="menu_logs">LOGS</string -->
     <string name="menu_manual_calibration">ÉTALONNAGE</string>
     <string name="menu_options">OPTIONS</string>
     <string name="menu_overview">APERÇU</string>
     <string name="menu_packets">PAQUETS</string>
-    <!-- UNUSED  <string name="menu_pair">APPAIRER</string> -->
+    <!-- UNUSED string name="menu_pair">PAIR</string -->
     <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">PHOTO</string>
     <string name="menu_sensor">CAPTEUR</string>
@@ -423,11 +458,11 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Papier millimétré</string>
 
-    <!-- UNUSED  <string name="start_scan">Lancer le scan</string> -->
-    <!-- UNUSED  <string name="stop_scan">Arrêter le scan</string> -->
-    <!-- UNUSED  <string name="title_scan">Scan BLE</string> -->
-    <!-- UNUSED string name="ble_scan_failed">Echec du scan BLE</string -->
-    <!-- UNUSED string name="ble_gatt_failure">Défaillance du BLE</string -->
+    <!-- UNUSED string name="start_scan">Start scan</string -->
+    <!-- UNUSED string name="stop_scan">Stop scan</string -->
+    <!-- UNUSED string name="title_scan">BLE scan</string -->
+    <!-- UNUSED string name="ble_scan_failed">Failed BLE scan</string -->
+    <!-- UNUSED string name="ble_gatt_failure">BLE failure</string -->
     <string name="ble_no_remote">Pas d\'appareil distant détecté</string>
     <!-- UNUSED string name="ble_control">Contrôle</string -->
     <!-- UNUSED string name="ble_connect">Connexion</string -->
@@ -452,7 +487,7 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="popup_multiselect">Multiselection</string>
     <string name="popup_finish">Terminer</string>
     <string name="popup_delete">Supprimer</string>
-    <!-- TODO string name="popup_decimate">Decimate</string -->
+    <string name="popup_decimate">Réduire</string>
     <string name="popup_join">Joindre</string>
 
     <string name="popup_erase_all">Tout suppr.</string>
@@ -473,17 +508,17 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="popup_cont_both">Les deux points</string>
     <string name="popup_cont_continue">Continue</string>
 
-    <!-- UNUSED  <string name="connection_error">Erreur de connexion</string> -->
-    <!-- UNUSED  <string name="connecting">Connecxion &#8230;</string> -->
-    <!-- UNUSED string name="connected_none">Non connecté</string -->
-    <!-- UNUSED string name="connected_already">Déjà Connecté</string -->
+    <!-- UNUSED string name="connection_error">Connection error</string -->
+    <!-- UNUSED string name="connecting">Connecting &#8230;</string -->
+    <!-- UNUSED string name="connected_none">Not connected</string -->
+    <!-- UNUSED string name="connected_already">Already connected</string -->
 
-    <!-- UNUSED  <string name="not_available">Bluetooth indisponible</string> -->
+    <!-- UNUSED string name="not_available">BT not available</string -->
     <string name="not_enabled">Bluetooth désactivé</string>
 
     <!-- UNUSED string name="not_implemented">Pas encore implémenté</string -->
     <string name="null_bitmap">Création d\'image impossible</string>
-    <!-- UNUSED string name="photo">photo</string -->
+    <string name="photo">photo</string>
     <string name="photo_camera">Appareil photo TopoDroid</string>
     <string name="photo_comment_prompt">Saisissez un commentaire pour la photo</string>
     <string name="photo_azimuth_clino">Azimut: %1$.1f Clino %2$.1f</string>
@@ -499,19 +534,20 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="item_delete">Supprimer l\'objet %1$s ?</string>
     <string name="splay_delete">Supprimer le cheminement %1$s ?</string>
     <string name="plot_duplicate_name">Dupliquer le nom du relevé</string>
-    <string name="plot_dangling">Croquis non référencé</string>
+    <string name="plot_dangling">Coupe projetée</string>
     <!-- UNUSED string name="plot_name">Nom du croquis</string -->
     <string name="plot_new">Nouveau croquis</string>
-    <string name="plot_not_found">Croquis introuvable</string>
+    <string name="plot_not_found">Dessin introuvable</string>
     <!-- UNUSED string name="plot_null_name">Nom relevé manquant</string -->
     <!-- UNUSED string name="plot_null_start">Station de base manquante</string -->
     <!-- UNUSED string name="plot_recover">Recuperer relevé de la sauvegarde?</string -->
     <string name="plot_start">Station d\'origne</string>
     <!-- UNUSED string name="plot_view">Station consulté</string -->
-    <!-- UNUSED string name="read_fail_with_code">Echec de lecture : code d\'erreur </string -->
+    <string name="read_fail_with_code">Echec de lecture : code d\'erreur </string>
     <string name="read_failed">Échec lors de la lecture du DistoX</string>
-    <!-- UNUSED string name="reading_file_failed">Echec lors de la lecture du fichier</string -->
+    <string name="reading_file_failed">Echec lors de la lecture du fichier</string>
     <!-- UNUSED string name="saved_file_">Fichier enregistré\ </string -->
+	
     <string name="saved_file_1">Fichier enregistré %1$s</string>
     <string name="saved_file_2">Fichier enregistré %1$s Échelle %2$.2f</string>
     <!-- UNUSED string name="saving_">Enregistrement</string -->
@@ -524,7 +560,7 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <!-- UNUSED string name="convert_tdr2th2">Écraser le fichier th2 ?</string -->
     <string name="section_area">Zone section : %1$.1f</string>
     <string name="section_name">Commentaires section</string>
-    <string name="scrap_outline">Contour Esquisse</string>
+    <string name="scrap_outline">Contour croquis</string>
     <string name="scrap_string">Scrap du croquis %1$d / %2$d</string>
     <string name="section_point_not_allowed">point de section non autorisé</string>
     <string name="section_line_not_allowed">ligne de section non autorisée</string>
@@ -549,9 +585,9 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <!-- UNUSED string name="shot_compass">compass</string -->
     <string name="shot_delete">Supprimer la visée ?</string>
     <string name="shots_delete">Supprimer les visées ?</string>
-    <!-- TODO string name="shots_delete_unsafe">Stations referenced by xsections.\nDelete shots ?</string -->
-    <!-- TODO string name="shot_rename_unsafe">Stations referenced by xsections.\nRename shot ?</string -->
-    <!-- TODO string name="shots_rename_unsafe">Stations referenced by xsections.\nRename shots ?</string -->
+    <string name="shots_delete_unsafe">Stations référencées par sections transverses.\nSupprimer les visées ?</string>
+    <string name="shot_rename_unsafe">Stations référencées par sections transverses.\nRenommer la visée ?</string>
+    <string name="shots_rename_unsafe">Stations referenced by xsections.\nRenommer les visées ?</string -->
     <string name="shot_check">Marquer la visée comme visée de contrôle ?</string>
     <string name="shot_from">DEPUIS ou DE</string>
     <string name="shot_info">Saisir les infos de visée</string>
@@ -575,29 +611,37 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="survey_split">Diviser le relevé ?</string>
     <string name ="survey_not_attached">ATTENTION : visées non reliées !</string>
     <string name="survey_not_extend">ATTENTION : direction d\'extension des visées non définies !</string>
-    <!-- UNUSED  <string name="survey_not_attached_extend">ATTENTION : visées non reliées et dir. ext. non définies</string> -->
+	<!-- UNUSED string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string -->
+	<string name="survey_no_data_reduction">ATTENTION : pas de compression des données</string>
+    <string name="survey_not_saved">ATTENTION : informations du relevé topo non sauvegardées</string>
+    <string name="survey_bad_siblings">ATTENTION : mauvaise visée parente : %1$s</string>
+    <string name="survey_bad_magnetic">ATTENTION : cheminement magnétique imprécis</string>   
     <string name="saturated_coeffs">ATTENTION : coefficients d\'étalonnage saturés</string>
     <string name="out_of_memory">ATTENTION : mémoire pleine !</string>
-    <string name="disk_io_error">PANNE CRITIQUE : erreur écriture lecture disque !</string>
+    <string name="disk_io_error">PANNE CRITIQUE : erreur lecture écriture disque !</string>
     
-    <string name="toporobot_warning">La stratégie TopoRobot est dispo. en mode expérimental !</string>
+    <string name="toporobot_warning">La stratégie TopoRobot est en mode expérimental !</string>
     <string name="anomaly_warning">La compensation des anomalies magnétiques est dispo. en mode expert !</string>
     <string name="tripod_warning">La stratégie Tripod est dispo. en mode avancé !</string>
-    <string name="coverage_warning">Angle de couverture en en dessous de %1$d %%\nEcrire les coefficients ?</string>
+    <string name="coverage_warning">Angle de couverture inférieur à %1$d %%\nEcrire les coefficients ?</string>
     <string name="delta_warning">Erreur moyenne supérieure à %1$.1f\nEcrire les coefficients ?</string>
     <!-- UNUSED string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
+	
 
     <string name="cover_data">Répartition des données brutes Raw : %1$.2f %%</string>
     <string name="cover_calib">Répartition des données d\'étalonnage %1$.2f %%</string>
+	
     <string name="cover_g">G répartition: %1$.2f %%</string>
     <string name="cover_m">M répartition: %1$.2f %%</string>
     <string name="cover_r">Roulis répartition: %1$.2f %%</string>
 
-    <string name="accuracy_low">Faible précision. Etalonnage nécessaire.</string>
+    <string name="accuracy_low">Faible précision. Étalonnage nécessaire.</string>
     <string name="accuracy_medium">Précision faible</string>
-    <string name="accuracy_unreliable">Capteur peu fiable</string>
+	<!-- UNUSED string name="accuracy_high">Good accuracy</string -->
+    <string name="accuracy_unreliable">Capteur douteux</string>
 
-    <string name="cannot_rename">Impossible de renommer le relevé</string>
+    <string name="empty_clipboard">Empty clipboard</string>
+	<string name="cannot_rename">Impossible de renommer le relevé</string>
     <string name="declination">Déclinaison magnétique</string>
     <string name="description">Description</string>
     <string name="name">Nom</string>
@@ -613,7 +657,8 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="undelete_shot">Visées</string>
     <string name="undelete_overshoot">Dépassements</string>
     <string name="undelete_check">Contrôles</string>
-    <string name="undelete_plot">Croquis</string>
+    <string name="undelete_blunder">Visées fausses</string>
+	<string name="undelete_plot">Croquis</string>
     <string name="delete_whole_leg">Suppr. cheminement complet</string>
     <string name="visible_border">Bordure visible</string>
     <!-- UNUSED string name="vthreshold">Seuil vertical</string -->
@@ -628,6 +673,7 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="unzip_fail_db">Échec : version de base de données incorrecte</string>
     <string name="unzip_fail_td">Échec : version de TopoDroid incorrecte</string>
     <!-- UNUSED string name="zoom_in_out">Zoom +/-</string -->
+	
 
     <string name="survey_info">Information sur le relevé</string>
     <string name="stat_stddev_m">Ecart type M %1$.1f %%</string>
@@ -636,17 +682,18 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="stat_component">Composants %1$d</string>
     <string name="stat_depth">Profondeur %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Visées dupliquées %1$d # %2$d %3$.1f %4$s</string>
-    <string name="stat_leg">Cheminements %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
+	<string name="stat_leg" tools:ignore="PluralsCandidate">Visées %1$d Longueur %2$.1f %3$.1f H-longueur %4$.1f %5$s</string>    
     <string name="stat_length">Longueur %1$.1f %2$s</string>
     <string name="stat_extlen">Longueur 3D %1$.1f %2$s</string>
-    <string name="stat_projlen">Longeur plan %1$.1f %2$s</string>
-    <string name="stat_loop">Boucle %1$d</string>
+   	<string name="stat_projlen">Longeur en plan %1$.1f %2$s</string>
+    <string name="stat_cycle">Cycles %1$d</string>
+	<string name="stat_loop">Boucle %1$d</string>
     <string name="stat_origin">0 - Station Origine: %1$s</string>
     <string name="stat_azimuth">Azimut de la coupe projetée : %1$.1f</string>
     <!-- UNUSED string name="stat_shot">Visées  %1$d,   Dupliquées %2$d,   Surface %3$d</string -->
     <string name="stat_splay">Visées latérales d\'habillage %1$d # %2$d</string>
     <string name="stat_station">Stations %1$d # %2$d</string>
-    <string name="stat_dangling">Visées non référencées %1$d %2$.1f %3$s</string>
+    <string name="stat_dangling">Visées non connectées %1$d %2$.1f %3$s</string>
     <string name="stat_surface">Visées de surface %1$d # %2$d %3$.1f %4$s</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]"</string>
     <string name="stat_angle_error">Erreurs d\'angle %1$.2f ± %2$.2f</string>
@@ -664,43 +711,50 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="hide_ids">ID de visées</string>
     <string name="hide_splay">Visées latérales d\'habillage</string>
 
+    <!-- THESE MUST AGREE WITH THE FMT STRINGS -->
     <!-- UNUSED string name="plan">PLAN</string -->
-    <string name="extended">DEVELOPPEE</string>
-    <string name="profile">COUPE</string>
+    <string name="extended">COUPE</string>
+    <string name="profile">PROJETÉE</string>
     <string name="fmt_plan">%1$s: PLAN</string>
-    <string name="fmt_extended">%1$s: PROFIL</string>
-    <string name="fmt_profile">%1$s: PROJECTEE</string>
+    <string name="fmt_extended">%1$s: COUPE</string>
+    <string name="fmt_profile">%1$s: PROJETÉE</string>
 
-    <!-- UNUSED  <string name="extended_profile">COUPE Développée</string> -->
+    <!-- UNUSED string name="extended_profile">Extended profile</string -->
+    <string name="projected_profile">Coupe projetée</string>
     <!-- UNUSED string name="x_section">SECTION Transverse</string -->
     <!-- UNUSED string name="v_section">SECTION V</string -->
     <!-- UNUSED string name="h_section">SECTION H</string -->
     <!-- UNUSED string name="landscape">Paysage</string -->
+	
+    <string name="display_view">Afficher</string>
+    <string name="plan_view">plan</string>
+    <string name="profile_view">coupe</string>
 
     <string name="distox_err_ok">OK</string>
-
-    <string name="distox_err_headtail">Échec de lecture de la mémoire du DistoX</string>
+	<string name="distox_err_headtail">Échec de lecture de la mémoire du DistoX</string>
     <string name="distox_err_headtail_io">Erreur E/S mémoire DistoX</string>
     <string name="distox_err_headtail_eof">Erreur EOF mémoire DistoX</string>
     <string name="distox_err_connected">Périphérique déjà connecté</string>
 
-     <string name="ask_close_app">Quitter TopoDroid?</string>
+     <string name="ask_close_app">Quitter TopoDroid ?</string>
      <!-- UNUSED string name="ask_reset">Réinitialiser la mémoire du DistoX ?</string -->
      <!-- UNUSED string name="ask_close_survey">Quitter le relevé ?</string -->
     <string name="ask_gps_service">Activer le service GPS ?</string>
-    <!-- UNUSED  <string name="ask_backups_clear">Supprimer des sauvegardes d\'esquisses ?</string> -->
+    <!-- UNUSED string name="ask_backups_clear">Delete sketch backups?</string -->
     <string name="ask_manual_update">Mise à jour de la traduction du manuel d\'utilisation ?\nCourant v. %1$d Installé v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Ajouter       </string -->
     <string name="button_apply"     >Appliquer</string>
     <string name="button_back"      >Retour     </string>
     <string name="button_cancel"    >Annuler    </string>
-    <!-- UNUSED  <string name="button_change"    >Changer    </string> -->
-    <string name="button_close"     >Fermer     </string>
+    <!-- UNUSED string name="button_change"    >Change</string -->
+    <string name="button_clipboard" >Presse-papiers</string>
+	<string name="button_close"     >Fermer     </string>
     <!-- UNUSED string name="button_create"    >Créer    </string -->
     <string name="button_color"     >Couleur  </string>
     <string name="button_compute"   >Calculer</string>
-    <string name="button_convert"   >Convertir   </string>
+    <string name="button_clear_convert">Effacer convertir</string>
+	<string name="button_convert"   >Convertir   </string>
     <string name="button_copy"      >Copier</string>
     <string name="button_current"   >Courant   </string>
     <string name="button_delete"    >Supprimer    </string>
@@ -714,14 +768,14 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="button_eval_cal"  >Évaluation avec étalonnage</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
-    <!-- DONT TRANSLATE string name="button_help">?</string -->
+    <string name="button_help" translatable="false">\?</string>
     <string name="button_manual"    >Manuel</string>
     <!-- UNUSED string name="button_measure"   >Mesure   </string -->
     <!-- UNUSED string name="button_photo"   >Photos</string -->
     <!-- UNUSED string name="button_sensor"  >Capteurs</string -->
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
-    <string name="button_plot"    >Croquis</string>
+    <string name="button_plot"    >Dessin</string>
     <string name="button_more"    >Plus</string>
     <string name="button_move"    >Déplacer</string>
     <string name="button_next"    >Suivant</string>
@@ -735,7 +789,9 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="button_on"        >On</string>
     <string name="button_open"      >Ouvrir    </string>
     <string name="button_read"      >Lecture      </string>
-    <!-- UNUSED string name="button_redo"      >Redo      </string -->
+    <string name="button_recover"   >Récupérer</string>
+    <string name="button_reverse"   >Inverser</string>
+	<!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Regrouper   </string -->
     <string name="button_dump"      >Déchargement mémoire    </string>
     <!-- UNUSED string name="button_rename"    >Renommer    </string -->
@@ -751,7 +807,10 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="button_clear_memory">Effacer la mémoire</string>
     <string name="button_save"      >ENREGISTRER      </string>
     <!-- UNUSED string name="button_select"    >Sélectionner    </string -->
-    <string name="button_search"    >Chercher    </string>
+    <string name="button_leg_station">Stations du cheminement</string>
+    <string name="button_all_station">Toutes stations</string>
+    <string name="button_leg_search">Chercher visées de cheminement</string>
+	<string name="button_search"    >Chercher    </string>
     <string name="button_merge"     >Fusionner     </string>
     <string name="button_saved"     >Station sauvegardée</string>
     <string name="button_split"     >Diviser     </string>
@@ -802,11 +861,12 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="popup_do_splay">Visée latérale</string>
     <string name="popup_do_leg">Cheminement auto</string>
     <string name="popup_do_gm_data">Visée d\'étalon.</string>
-    <string name="popup_do_laser">Laser</string>
+    <string name="popup_do_gm_group">Groupe d\'étalon.</string>
+	<string name="popup_do_laser">Laser</string>
     <string name="popup_do_scan">Scan</string>
     <string name="popup_do_shot">Visée</string>
     <string name="popup_do_clear">Effacer</string>
-    <string name="popup_do_off">Eteindre (le laser ?????)</string>
+    <string name="popup_do_off">Éteindre</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_export">Export</string>
@@ -830,6 +890,17 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <!-- UNUSED string name="length">Longueur [m]</string -->
     <!-- UNUSED string name="azimuth">Azimut [deg]</string -->
     <!-- OK string name="clino">Clino [deg]</string -->
+	
+	<string name="hint_cellsize">taille cellule</string>
+    <string name="hint_cwd">dossier de travail</string>
+    <string name="hint_distance">distance</string>
+    <string name="hint_length">longueur</string>
+    <string name="hint_line">ligne</string>
+    <string name="hint_origin">station d\'origine</string>
+    <string name="hint_point">point</string>
+    <string name="hint_textsize">taille du texte</string>
+    <string name="hint_units">taille des symboles</string>
+    <string name="hint_value">valeur</string>
 
     <string name="hint_notes">notes</string>
     <string name="hint_label">étiquette</string>
@@ -865,6 +936,7 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="split_nothing">Rien à diviser</string>
     <string name="flip_shots">Inverser les points</string>
     <string name="copy_items">Copie des données</string>
+	<string name="current_station_format">%1$s: E %2$.1f N %3$.1f H %4$.1f</string>
 
     <string name="man_preface">Préface</string>
     <string name="man_intro">1. Introduction</string>
@@ -892,14 +964,15 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="help_measure_undo">Abandonner le dernier point de la polyligne</string>
 
     <string name="help_audio">Liste des enregistrements audio</string>
-    <!-- UNUSED  <string name="help_backups">Supprimer des sauvegardes d\'esquisse</string> -->
+    <!-- UNUSED string name="help_backups">Delete sketch backups</string -->
     <string name="help_calib_check">Visées de contrôle d\'étalonnage</string>
     <string name="help_close">Fermer fenêtre</string>
     <string name="help_close_app">Fermer l\'app</string>
     <string name="help_coeff">Montrer les coefficients d\'étalonnage</string>
     <string name="help_color">Efface la couleur des visées</string>
     <string name="help_continue">Continuer une ligne</string>
-    <string name="help_current_station">Stations enregistrées</string>
+    <!-- UNUSED string name="help_contour">Contour editing</string -->
+	<string name="help_current_station">Stations enregistrées</string>
     <string name="help_azimuth">Azimuth Référence Etendue</string>
     <string name="help_refresh">Rafraîchir l\'affichage</string>
     <string name="help_device">Périphériques DistoX</string>
@@ -907,18 +980,20 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="help_import">Importe une archive Zip ou un fichier Therion</string>
     <string name="help_symbol">Active/désactive des symboles de dessin</string>
     <string name="help_therion">Cave project manager</string>
+	<string name="help_cave3d">Cave3D, visionneuse 3D</string>
     <!-- UNUSED string name="help_database">Application Database viewer (SQliteViewer)</string -->
     <string name="help_prefs">Modifie les préférences</string>
-    <!-- UNUSED  <string name="help_log">Active/désactive les options de journalisation</string> -->
+    <string name="help_log">Active/désactive les options de journalisation</string>
     <!-- UNUSED string name="help_join_survey">Joindre les relevés</string -->
-    <string name="help_info_topodroid">Infos TopoDroid</string>
+    <!-- UNUSED string name="help_join_survey">Joint surveying</string --> 
+	<string name="help_info_topodroid">Infos TopoDroid</string>
     <string name="help_download">Télécharge les données</string>
     <!-- UNUSED string name="help_splay">Affecte automatiquement les stations aux visées latérales</string -->
     <string name="help_display">Choisit un mode d\'affichage</string>
     <string name="help_display_calib">Basculer affichage des visées supprimées</string>
     <string name="help_validate">Valider l\'étalonnage</string>
     <string name="help_overview">Résumé d\'activité</string>
-    <!-- TODO string name="help_packets">DistoX packets dialog</string -->
+    <string name="help_packets">Dialogue des paquets DistoX</string>
     <string name="help_plot">Passe en mode croquis</string>
     <string name="help_note">Modifie les notes du relevé</string>
     <string name="help_bluetooth">Réinitialise la connexion Bluetooth</string>
@@ -927,13 +1002,15 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="help_info_shot">Informations statistique de visée</string>
     <string name="help_survey_info">Informations supplémentaires du relevé</string>
     <string name="help_undelete">Récupère les éléments supprimés</string>
-    <string name="help_photo">Photos</string>
+    <!-- UPDATES string name="help_updates">Check for app version updates</string -->
+	<string name="help_photo">Photos</string>
     <string name="help_sensor">Mesures</string>
-    <string name="help_3d">Visionneuse 3D (Application Cave3D)</string>
+    <string name="help_3d">Visionneuse 3D (Cave3D)</string>
     <!-- UNUSED string name="help_move">DÉPLACER /mode ZOOM</string -->
-    <string name="help_draw">Mode croquis</string>
+    <string name="help_draw">Mode dessin</string>
+    <string name="help_drawing">Dessiner</string>
     <string name="help_edit">Mode d\'édition</string>
-    <string name="help_refs">Choix des références de croquis</string>
+    <string name="help_refs">Choix des références de dessin</string>
     <string name="help_rename">Change le nom de la topographie</string>
     <string name="help_plot_rename">Renommer/suppr croquis</string>
     <string name="help_plot_scrap">Scraps de croquis</string>
@@ -957,18 +1034,19 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="help_select_size">Sélectionner la taille de l\'outil [S/M/L]</string>
     <string name="help_previous">Sélectionne l\'élément précédent dans la sélection</string>
     <string name="help_next">Sélectionne l\'élément suivant dans la sélection</string>
-    <string name="help_recover">Récupérer la sauvegarde de l\'esquisse</string>
+    <string name="help_recover">Récupérer la sauvegarde du croquis</string>
     <string name="help_reload_prev">Afficher une sauvegarde plus récente</string>
     <string name="help_reload_next">Afficher une sauvegarde plus ancienne</string>
-    <string name="help_reload_plot">Recharger la sauvegarde de l\'esquisse</string>
+    <string name="help_reload_plot">Recharger la sauvegarde du croquis</string>
+	<string name="help_zoom_fit">Adapter le croquis à l\'écran</string>
 
     <string name="help_line_point">Actions sur les points d\'une ligne : joindre, partager, couper, supprimer</string>
-<!--
-    <string name="help_to_point">Move selected point to join with the nearest point</string>
-    <string name="help_split_point">Split the point into two [line/area]</string>
-    <string name="help_split_line">Split the line into two at the point</string>
-    <string name="help_kink">Use a straight line at the point [line/area]</string>
--->
+
+    <!-- UNUSED string name="help_to_point">Move selected point to join with the nearest point</string -->
+    <!-- UNUSED string name="help_split_point">Split the point into two [line/area]</string -->
+    <!-- UNUSED string name="help_split_line">Split the line into two at the point</string -->
+    <!-- UNUSED string name="help_kink">Use a straight line at the point [line/area]</string -->
+	
     <string name="help_manual_calibration">Étalonnage manuel de l\'instrument</string>
     <string name="help_note_plot">Édite les propriétés de l\'élément dessiné</string>
     <!-- UNUSED string name="help_save">Enregistre les modifications d\'infosdu relevé</string -->
@@ -992,6 +1070,7 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="help_cover">Affiche la distribution des données d\'étalonnage</string>
     <string name="help_compute">Calcule l\'étalonnage</string>
     <string name="help_write">Écrit les coefficients d\'étalonnage sur le DistoX</string>
+	<string name="help_splays">Visées d\'habillage en ligne ou pointillés</string>
 
     <string name="help_add_project">Ajouter un projet</string>
     <string name="help_add_surveys">Ajouter des topographies au projet</string>
@@ -1003,10 +1082,11 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="help_add_equate">Ajouter des égalités</string>
     <string name="help_equates">Lister les égalités entre les topographies</string>
 
-    <!-- UNUSED  <string name="export_bgcolor">Couleur d\'arrière-plan</string> -->
+    <!-- UNUSED string name="export_bgcolor">White background</string -->
     <string name="export_config">Commandes de configuration</string>
     <string name="export_csv_rawdata">Données brutes</string>
     <string name="export_dxf_blocks">Blocs DXF</string>
+	<string name="export_dxf_version">Version</string>
     <string name="export_georeference">Géoréférence</string>
     <string name="export_grid">Grille</string>
     <string name="export_linedir">Direction lignes</string>
@@ -1017,10 +1097,11 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="export_prefix_hint">préfixe</string>
     <string name="export_suffix_hint">suffixe</string>
     <string name="export_roundtrip">Aller-retour</string>
-    <!-- UNUSED  <string name="export_scale_png">Résolution</string> -->
-    <string name="export_scale_th">Echelle 1 :</string>
-    <string name="export_splays">Visées latérales d\'habillage</string>
-    <string name="export_splays_named">Visées d'habillage nommées</string>
+    <!-- UNUSED string name="export_scale_png">Resolution</string -->
+	<string name="export_scale_th">Echelle 1 :</string>
+    <string name="export_spacing_th">Espacement des points</string>
+	<string name="export_splays">Visées latérales d\'habillage</string>
+    <string name="export_splays_named">Visées d\'habillage nommées</string>
     <string name="export_stations">Stations</string>
     <string name="export_surface">Surface</string>
     <string name="export_swap_lr">Échanger G/D</string>
@@ -1066,6 +1147,7 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <!-- UNUSED string name="title_coord">Entrer les Coordonnées du point</string -->
     <string name="title_current_station">Stations sauvegardées</string>
     <string name="title_search">Recherche Station/cheminement</string>
+	<string name="title_gm_search">Recherche des données d'étalonnage</string>
     <string name="title_dangling">Visée non reliée</string>
     <string name="title_device">Périphériques DistoX</string>
     <string name="title_device_select">Sélectionner le DistoX</string>
@@ -1092,15 +1174,17 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="title_photo">Photo/Mesures</string>
     <string name="title_photo_comment">Commentaire photo</string>
     <string name="title_photo_list">Photos</string>
-    <string name="title_plot_save">Enregistrer le croquis sous</string>
+    <string name="title_photo_view">Photo</string>
+	<string name="title_plot_save">Enregistrer le croquis sous</string>
     <!-- UNUSED string name="title_plot_merge">Fusionner Esquisse</string -->
     <!-- UNUSED string name="title_plot_reload">Recharger le croquis</string -->
-    <string name="title_plot_scraps">Scraps d\'esquisses</string>
+    <string name="title_plot_scraps">Scraps de croquis</string>
     <string name="title_profile_flip">Basculer la coupe ?</string>
     <string name="title_projection">Azimut coupe projetée %1$d</string>
-    <string name="title_refs">Références du croquis</string>
+    <string name="title_reduction_errors">Anomalies compression des données</string>
+	<string name="title_refs">Références du dessin</string>
     <string name="title_scraps">Croquis du relevé</string>
-    <string name="title_scraps_outline">Contours Esquisse</string>
+    <string name="title_scraps_outline">Contours croquis</string>
     <!-- UNUSED string name="title_select">Sélectionner</string -->
 
     <string name="title_settings_main">Paramètres principaux de TopoDroid</string>
@@ -1118,9 +1202,9 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="title_settings_png">Paramètres d\'exportation PNG</string>
     <string name="title_settings_kml">Paramètres d\'exportation KML</string>
 
-    <string name="title_settings_sketch">TopoDroid : paramétrage de l\'esquisse 3D</string>
+    <string name="title_settings_sketch">TopoDroid : paramétrage de croquis 3D</string>
     <string name="title_settings_survey">TopoDroid : paramétrage du relevé topo</string>
-    <!-- UNUSED  <string name="title_settings_splay">TopoDroid : paramétrage des visées latérales d\'habillage</string> -->
+    <!-- UNUSED string name="title_settings_splay">STopoDroid : paramétrage des visées latérales d\'habillage</string -->
     <string name="title_settings_shot">TopoDroid : paramétrage des visées</string>
     <string name="title_settings_units">TopoDroid : paramétrage des unités</string>
     <string name="title_settings_location">TopoDroid : paramétrage de la localisation</string>
@@ -1130,7 +1214,7 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="title_settings_point">TopoDroid : paramétrage des points</string>
     <string name="title_settings_line">TopoDroid : paramétrage des lignes</string>
     <!-- UNUSED string name="title_settings_walls">TopoDroid : paramétrage des parois autos</string -->
-    <string name="title_settings_draw">TopoDroid : paramétrage des croquis</string>
+    <string name="title_settings_draw">TopoDroid : paramétrage des dessins</string>
     <string name="title_settings_erase">TopoDroid : paramétrage de l\'effacement</string>
     <string name="title_settings_edit">TopoDroid : paramétrage de l\'édition</string>
     <string name="title_settings_device">TopoDroid : paramétrage du périphérique</string>
@@ -1139,18 +1223,18 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="title_settings_dem">Paramètres DEM TopoDroid</string>
     <string name="title_settings_walls3d">Paramètres des modèles TopoDroid 3d</string>
     <string name="title_settings_geek">TopoDroid : paramétrage des fanions</string>
-    <!-- TODO string name="title_settings_geek_survey">Geek survey settings</string -->
-    <!-- TODO string name="title_settings_geek_splay">Geek splay ettings</string -->
-    <!-- TODO string name="title_settings_geek_plot">Geek sketch settings</string -->
-    <!-- TODO string name="title_settings_geek_line">Geek lines settings</string -->
-    <!-- TODO string name="title_settings_geek_device">Geek device settings</string -->
-    <!-- TODO string name="title_settings_geek_import">Geek import settings</string -->
+    <string name="title_settings_geek_survey">Paramètres du relevé mode Geek</string>
+    <string name="title_settings_geek_splay">Paramètres des visées d\'habillage mode Geek</string>
+    <string name="title_settings_geek_plot">Paramètres des croquis mode Geek</string>
+    <string name="title_settings_geek_line">Paramètres des lignes mode Geek</string>
+    <string name="title_settings_geek_device">Paramètres des périphériques mode Geek</string>
+    <string name="title_settings_geek_import">Paramètres d\'importation mode Geek</string>
     <string name="title_settings_log">TopoDroid : paramétrage de la journalisation</string>
 
     <string name="title_shift">Décaler</string>
     <string name="title_shot_delete">Supprimer la visée ?</string>
     <string name="title_sensor_edit">Capteur</string>
-    <string name="title_split">Diviser l\'esquisse</string>
+    <string name="title_split">Diviser le croquis</string>
 
     <string name="title_stats">Statistiques</string>
     <!-- UNUSED string name="title_step">Étape</string -->
@@ -1165,42 +1249,52 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
 
     <string name="title_import_shot">Importation relevé</string>
     <string name="title_import_gps">Importation point GPS</string>
-
-  <string name="pref_export_settings">Paramétrages d\'Export</string>
+	<string name="title_import_th2">Fichier Therion th2</string>
+    <string name="title_infos">Points géolocalisés du relevé</string>
+    <string name="title_graph_paper">Papier millimétré à l\'échelle 1:100</string>
+    <string name="graph_paper_scale">Ajuster la ligne à 5 cm de longueur</string>
+	
+	<string name="exported_settings">Paramètres exportés %1$s</string>
+	<string name="imported_settings">Paramètres importés</string>
+	<string name="imported_settings_failed">Échec de l\'importation des paramètres</string>
+	<string name="export_settings_failed">Échec de l\'exportation des paramètres</string>
+	<string name="pref_export_settings">Import/export des paramètres</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
-  <string name="pref_export_plot_title">Format d\'export croquis</string>
-  <string name="pref_export_plot_summary">Format par défaut d\'export croquis</string>
+  <string name="pref_export_plot_title">Format d\'export dessin</string>
+  <string name="pref_export_plot_summary">Format par défaut d\'export dessin </string>
   <string name="pref_export_shots_title">Format d\'export données</string>
   <string name="pref_export_shots_summary">Format par défaut d\'export données</string>
-  <string name="pref_auto_plot_export_title">Format d\'export auto croquis</string>
-  <string name="pref_auto_plot_export_summary">Format d\'export automatique des croquis</string>
+  <string name="pref_auto_plot_export_title">Format d\'export auto dessin</string>
+  <string name="pref_auto_plot_export_summary">Format d\'export automatique des dessins</string>
 
   <string name="pref_cat_survey">OPTIONS DU RELEVÉ</string>
-  <string name="pref_cat_splay">DONNÉES DES VISÉES D'HABILLAGE</string>
-  <string name="pref_cat_drawing">OPTIONS DE CROQUIS</string>
+  <string name="pref_cat_splay">DONNÉES VISÉES D\'HABILLAGE</string>
+  <string name="pref_cat_drawing">OPTIONS DE DESSIN</string>
   <string name="pref_cat_import_export">IMPORT - EXPORT</string>
   <string name="pref_cat_exportimport">IMPORT</string>
-  <!-- OK string name="pref_cat_exportth">Therion</string -->
-  <!-- OK string name="pref_cat_exportdat">Compass</string -->
-  <!-- OK string name="pref_cat_exporttro">VisualTopo</string -->
-  <!-- OK string name="pref_cat_exportsvg">SVG</string -->
-  <!-- OK string name="pref_cat_exportdxf">DXF</string -->
-  <!-- OK string name="pref_cat_exportshp">Shapefile</string -->
-  <!-- OK string name="pref_cat_exportpng">PNG</string -->
-  <!-- OK string name="pref_cat_exportkml">KML/GeoJSON</string -->
-  <!-- OK string name="pref_cat_exportcsv">CSV</string -->
+  <string name="pref_cat_exportsvx" translatable="false">Survex</string>
+  <string name="pref_cat_exportth"  translatable="false">Therion</string>
+  <string name="pref_cat_exportdat" translatable="false">Compass</string>
+  <string name="pref_cat_exporttro" translatable="false">VisualTopo</string>
+  <string name="pref_cat_exportsvg" translatable="false">SVG</string>
+  <string name="pref_cat_exportdxf" translatable="false">DXF</string>
+  <string name="pref_cat_exportshp" translatable="false">Shapefile</string>
+  <!-- UNUSED string name="pref_cat_exportpng" translatable="false">PNG</string NO_PNG -->
+  <string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string>
+  <string name="pref_cat_exportcsx" translatable="false">cSurvey</string>
+  <string name="pref_cat_exportcsv" translatable="false">CSV</string>
 
-  <string name="pref_cat_calib">OPTIONS D\'ETALONNAGE</string>
-  <string name="pref_cat_device">OPTIONS DU DISTOX</string>
+  <string name="pref_cat_calib">OPTIONS D\'ÉTALONNAGE</string>
+  <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
+  <string name="pref_cat_device">OPTIONS PÉRIPHÉRIQUE</string>
   <string name="pref_cat_cave3d">3D VIEWER</string>
-  <string name="pref_cat_geek">MARQUEURS</string>
-  <!-- UNUSED string name="pref_cat_sketch">OPTIONS 3D</string -->
-  <!-- UNUSED string name="pref_cat_log">OPTIONS JOURNALISATION</string -->
+  <string name="pref_cat_geek">PARAMÈTRES PERSONNALISÉS</string>
+ <!-- UNUSED string name="pref_cat_log">LOGS</string -->
 
   <string name="pref_locale_title">Langue</string>
-  <string name="pref_locale_summary">Langue</string>
-  <string name="pref_orientation_title">Orientation de l\'écran</string>
+  <string name="pref_locale_summary">Langue de l\'application</string>
+  <string name="pref_orientation_title">Orientation écran</string>
   <string name="pref_orientation_summary">Orientation de l\'écran de l\'application</string>
 
   <string name="pref_raw_data_title">Données brutes</string>
@@ -1211,10 +1305,14 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
   <!-- UNUSED string name="pref_bootloader_summary">Activer le chargeur de démarrage</string -->
   <string name="pref_mkeyboard_title">Clavier</string>
   <string name="pref_mkeyboard_summary">Activer/Désactiver le clavier optionnel</string>
+  <string name="pref_no_cursor_title">Pas de curseur sur le clavier</string>
+  <string name="pref_no_cursor_summary">Désactiver le curseur du clavier personnalisé</string>
   <string name="pref_local_help_title">Manuel traduit</string>
   <string name="pref_local_help_summary">Activer la traduction du manuel</string>
   <!-- UNUSED string name="pref_cosurvey_title">Co-relevé topographique</string -->
   <!-- UNUSED string name="pref_cosurvey_summary">Activer/désactiver co-relevé topographique</string -->
+  <string name="pref_import_datamode_title">Format importation</string>
+  <string name="pref_import_datamode_summary">Format des données d\'importation des relevés topos</string>
 
   <string name="pref_therion_config_title">Commandes de config. Therion</string>
   <string name="pref_therion_config_summary">Créer commandes de configuration Therion</string>
@@ -1226,14 +1324,26 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
   <string name="pref_size_buttons_summary">Taille de la barre d\'action des boutons [pixels]</string>
   <string name="pref_with_sensors_title">Capteurs</string>
   <string name="pref_with_sensors_summary">Activer les données des "capteurs"</string>
+  <!-- UNUSED string name="pref_tdmanager_title">TdManager</string -->
+  <!-- UNUSED string name="pref_tdmanager_summary">Use TdManager</string -->
   <string name="pref_with_android_azimuth_title">Boussole Android</string>
   <string name="pref_with_android_azimuth_summary">Activer boussole/clino du périphérique Android</string>
+  <string name="pref_blunder_shot_title">Viséee erronées</string>
+  <string name="pref_blunder_shot_summary">Sauter les visées de cheminement erronées</string>
+  <string name="pref_splay_station_title">Réaffectation stations/habillage</string>
+  <string name="pref_splay_station_summary">Réaffectation des stations aux visées d\'habillage</string>
+  <string name="pref_splay_group_title">Réaffectation groupe de visées d\'habillage</string>
+  <string name="pref_splay_group_summary">Réaffectater uniquement les visées d\'habillage suivantes</string>
   <string name="pref_with_levels_title">Calques</string>
   <string name="pref_with_levels_summary">Utiliser des couches de calque</string>
+  <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->
+  <!-- UNUSED string name="pref_with_rename_summary">Enable "survey renaming" menu</string -->
   <string name="pref_palettes_title">Palettes</string>
   <string name="pref_palettes_summary">Activer des palettes supplémentaires</string>
   <string name="pref_packet_logger_title">Journalisation des paquets</string>
   <string name="pref_packet_logger_summary">Activer la journalisation des paquets de données</string>
+  <string name="pref_th2_edit_title" translatable="false">Édition croquis</string>
+  <string name="pref_th2_edit_summary" translatable="false">Activer l\'édition de croquis</string>
 
   <string name="pref_bezier_step_title">Espacement des points</string>
   <string name="pref_bezier_step_summary">Distance entre les points lors de l\'export ligne [m]</string>
@@ -1308,15 +1418,13 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
   <string name="pref_csv_eol_title">CSV fin de ligne</string>
   <string name="pref_csv_eol_summary">Séparateur d\'enregistrements CSV</string>
 
-  <!-- UNUSED string name="pref_csv_length_title">Unité de long. CSV</string -->
-  <!-- UNUSED string name="pref_csv_length_summary">Unité de long. export CSV</string -->
-
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Créer un socket</string>
   <!-- UNUSED string name="pref_device_type_title">Type de Disto</string -->
   <!-- UNUSED string name="pref_device_type_summary">Modele de DistoX</string -->
   <!-- UNUSED string name="pref_comm_retry_title">Tentative de communication</string -->
   <!-- UNUSED string name="pref_comm_retry_summary">Nombre max. de tentatives</string -->
+  <!-- UNUSED string name="pref_comm_retry_dialogtitle">Connection retries number</string -->
   <string name="pref_wait_laser_title">Pause laser [ms]</string>
   <string name="pref_wait_laser_summary">Temporisation après allumage du laser [ms]</string>
   <string name="pref_wait_shot_title">Pause visée [ms]</string>
@@ -1343,7 +1451,6 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
   <string name="pref_firmware_sanity_summary">Appliquer les tests de validité du firmware</string>
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">Nom du Système de Coordonnées de Référence (UTM, WGS84&#8230;)</string>
-  <!-- FIXME string name="pref_crs_message">Saisissez le nom CRS tel que dans Proj4</string -->
   <!-- UNUSED string name="pref_gps_averaging_title">Utilizer GPSAveraging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Utiliser GPSAveraging</string -->
   <string name="pref_bric_mode_title">BRIC mode</string>
@@ -1351,7 +1458,7 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
   <string name="pref_bric_zero_length_title">BRIC visée nulle</string>
   <string name="pref_bric_zero_length_summary">BRIC enregistrer la visée de longueur nulle</string>
 
-  <string name="pref_plot_screen_title">OPTIONS ÉCRAN CROQUIS</string>
+  <string name="pref_plot_screen_title">OPTIONS ÉCRAN DESSIN</string>
   <string name="pref_tool_line_title">OUTILS LIGNES</string>
   <string name="pref_tool_point_title">OUTILS POINTS</string>
   <string name="pref_location_title">OPTIONS GÉOLOCALISATION</string>
@@ -1377,7 +1484,6 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
   <string name="pref_vert_splay_title">Seuil incl. visées lat. pointillés</string>
   <string name="pref_vert_splay_message">Seuil d\'inclinaison des visées latérales d\'habillage en pointillés</string>
   <string name="pref_horiz_splay_title">Seuil azimut visées lat. pointillés</string>
-
   <string name="pref_horiz_splay_message">Les visées latérales d\'habillage avec azimut supérieur à ce seuil sont en pointillés</string>
   <string name="pref_section_splay_title"><em>Seuil de l\'angle du tiret</em></string>
   <string name="pref_section_splay_message">Les visées latérales d\'habillage des sections transverses avec angle inférieur à ce seuil sont en pointillés</string>
@@ -1388,12 +1494,14 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
 
   <!-- UNUSED string name="pref_data_backup_title">Auto-export des données</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Export automatique des données (nécessite le format par défaut)</string -->
+  <string name="pref_editable_stations_title">Stations modifiables</string>
+  <string name="pref_editable_stations_summary">Noms des stations modifiables dans la liste des visées</string>
   <string name="pref_zipped_symbols_title">Fichiers de symboles zippés</string>
   <string name="pref_zipped_symbols_summary">Stocker/télécharger des fichiers de symboles vers/depuis une archive zip</string>
-  <string name="pref_fixed_origin_title">Origine du croquis</string>
-  <string name="pref_fixed_origin_summary">Origine d\'esquisse fixe</string>
+  <string name="pref_fixed_origin_title">Origine croquis</string>
+  <string name="pref_fixed_origin_summary">Origine de croquis fixe</string>
   <string name="pref_shared_xsections_title">Partage des sections transverses</string>
-  <string name="pref_shared_xsections_summary">A la station VERS les sections transverses sont partagées entre les différentes esquisses</string>
+  <string name="pref_shared_xsections_summary">A la station VERS les sections transverses sont partagées entre les différents croquis</string>
   <string name="xsections_shared">Sections transverses partagées</string>
   <string name="xsections_private">Sections transverses privées</string>
   <string name="pref_reduce_angle_title">Angle redressement</string>
@@ -1406,6 +1514,8 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
   <string name="pref_mag_thr_summary">Tolérance des visées : champ magnétique</string>
   <string name="pref_dip_thr_title">Tolérance inclinaison</string>
   <string name="pref_dip_thr_summary">Tolérance des visées : inclinaison</string>
+  <string name="pref_sibling_thr_title">Seuil parenté</string>
+  <string name="pref_sibling_thr_summary">Seuil pour les visées parentes [&#37;]</string>
 
   <string name="pref_leg_title">Tolérance du cheminement</string>
   <string name="pref_leg_summary">Tolérance le long des visées de cheminement</string>
@@ -1441,23 +1551,22 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
 
   <string name="pref_hthr_title">Seuil horiz. section transverse</string>
   <string name="pref_hthr_summary">Seuil pour les sections transverses horizontales</string>
-  <!-- UNUSED  <string name="pref_bitmap_scale_title">Échelle PNG</string> -->
-  <!-- UNUSED  <string name="pref_bitmap_scale_summary">Facteur d\'échelle pour un export PNG</string> -->
-  <!-- UNUSED  <string name="pref_bitmap_bgcolor_title">Couleur de fond PNG</string> -->
-  <!-- UNUSED  <string name="pref_bitmap_bgcolor_summary">Couleur de fond du dessin PNG</string> -->
-  <string name="pref_acad_version_title">Version de DXF</string>
+  <!-- UNUSED string name="pref_bitmap_scale_title">Resolution</string NO_PNG -->
+  <!-- UNUSED string name="pref_bitmap_scale_summary">Resolution of PNG image of sketches</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_title">Background color</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_summary">Background color of PNG image of sketches</string -->
+  <string name="pref_acad_version_title">Version DXF</string>
   <string name="pref_acad_version_summary">Version de DXF</string>
-  <string name="pref_acad_spline_title">Courbes DXF</string>
-  <string name="pref_acad_spline_summary">Cubiques interpolés DXF</string>
-  <string name="pref_dxf_reference_title">Références DXF</string>	
-  <!-- TODO string name="pref_dxf_reference_summary">X-Y axes is DXF sketch export</string -->
+  <string name="pref_acad_spline_title">Splines DXF</string>
+  <string name="pref_acad_spline_summary">Interpolation cubique DXF</string>
+  <string name="pref_dxf_reference_title">Référence DXF</string>
+  <string name="pref_dxf_reference_summary">Axes X-Y exportés comme croquis DXF.</string>
   <!-- UNUSED string name="pref_dxf_scale_title">Échelle de dessin DXF</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Facteur de l\'échelle du dessin DXF</string -->
   <string name="pref_dxf_blocks_title">Fin des visées latérales d\'habillage DXF</string>
   <string name="pref_dxf_blocks_summary">Fin des visées latérales d\'habillage DXF</string>
   <string name="pref_shp_georef_title">Exportation des croquis de plans géoréférencés</string>
-  <string name="pref_shp_georef_summary">Croquis de plan exporté en long.-lat. WGS84</string>
-  <string name="imported_settings">Paramètres de réglage importés</string>
+  <string name="pref_shp_georef_summary">Croquis de plan exporté en long.-lat. WGS84</string> 
   <string name="pref_thumbnail_title">Taille des miniatures</string>
   <string name="pref_thumbnail_summary">Taille des images miniatures</string>
   <string name="pref_shot_timer_title">Minuteur du compas (timer)</string>
@@ -1482,24 +1591,28 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
   <string name="pref_lineacc_summary">Précision de l\'interpolation cubique des courbes de Bézier</string>
   <string name="pref_linecorner_title">Angle Bézier</string>
   <string name="pref_linecorner_summary">Seuil de détection d\'angle de courbe de Bézier</string>
-  <!-- TODO string name="pref_weeddistance_title">Weeding point distance</string -->
-  <!-- TODO string name="pref_weeddistance_summary">Max distance from segment to weed points [m]</string -->
-  <!-- TODO string name="pref_weedlength_title">Point weeding segment length</string -->
+  <string name="pref_graph_paper_scale_title">Échelle papier millimétré</string>
+  <string name="pref_graph_paper_scale_summary">Ajustement de l\'échelle du papier millimétré</string>
+  <string name="pref_weeddistance_title">Distance des points superflus</string>
+  <string name="pref_weeddistance_summary">Distance maximale entre le segment et les points superflus [m]</string>
+  <string name="pref_weedlength_title">Longueur maximale du segment de ligne</string>
   <string name="pref_weedlength_summary">Longueur maximale d\'un segment de ligne</string>
+  <string name="pref_weedbuffer_title">Weeding segment buffer</string>
+  <string name="pref_weedbuffer_summary">Mémoire tampon autour d\'un segment de ligne [pxl]</string>
   <string name="pref_calib_algo_title">Algorithme</string>
   <string name="pref_calib_algo_summary">Algorithme d\'étalonnage</string>
-  <string name="pref_group_by_title">Politique de groupage</string>
-  <string name="pref_group_by_summary">Politique de groupage de données d\'étalonnage</string>
+  <string name="pref_group_by_title">Principe de groupage</string>
+  <string name="pref_group_by_summary">Principe de groupage des données d\'étalonnage</string>
   <string name="pref_group_title">Groupe de tolérance</string>
   <string name="pref_group_summary">Tolérance au long des visées du même groupe</string>
   <string name="pref_error_title">Erreur</string>
   <string name="pref_error_summary">Erreur d\'étalonnage mini</string>
   <string name="pref_iter_title">Répétitions</string>
-  <string name="pref_iter_summary">Nombre de répétitions max</string>
-  <string name="pref_label_size_title">Taille des étiquettes</string>
+  <string name="pref_iter_summary">Nombre de répétitions maxi</string>
+  <string name="pref_label_size_title">Taille étiquettes</string>
   <string name="pref_label_size_summary">Taille des étiquettes</string>
   <string name="pref_arrow_length_title">Ligne de section pointillé</string>
-  <string name="pref_arrow_length_message">Épaisseur ligne de section en pointillé</string>
+  <string name="pref_arrow_length_message">Épaisseur ligne de section en pointillés</string>
   <string name="pref_dot_radius_title">Points mode édition</string>
   <string name="pref_dot_radius_message">Taille des points</string>
   <string name="pref_line_thickness_title">Épaisseur de ligne</string>
@@ -1518,8 +1631,8 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
   <string name="pref_composite_actions_summary">Permettre des appuis longs sur les lignes et les zones.</string>
   <string name="pref_plane_interpolation_title">Interpolation de plan</string>
   <string name="pref_plane_interpolation_summary">Active l\'interpolation de plan</string>
-  <string name="pref_plot_split_title">Esquisse fractionner / fusionner</string>
-  <string name="pref_plot_split_summary">Action de fractionner ou de fusionner les esquisses</string>
+  <string name="pref_plot_split_title">Croquis fractionner / fusionner</string>
+  <string name="pref_plot_split_summary">Action de fractionner ou de fusionner les croquis</string>
   <string name="pref_stylus_size_title">Taille du stylet</string>
   <string name="pref_stylus_size_summary">Taille du stylet [0: aucun]</string>
   <string name="pref_fixed_thickness_title">Épaisseur ligne croquis</string>
@@ -1532,14 +1645,14 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
   <string name="pref_checkAttached_summary">Vérifier si les stations sont reliées</string>
   <string name="pref_checkExtend_title">Test extension de cheminement</string>
   <string name="pref_checkExtend_summary">Vérifier si l\'extension du cheminement est définie</string>
-  <string name="pref_toolbarSize_title">Taille barre d\'outils</string>
-  <string name="pref_toolbarSize_summary">Taille de la barred d\'outil de dessin</string>
+  <string name="pref_toolbarSize_title">Taille de la barre d\'outils</string>
+  <string name="pref_toolbarSize_summary">Taille de la barre d\'outils des éléments de dessin</string>
   <string name="pref_backup_number_title">Nombre de  sauv.</string>
   <string name="pref_backup_number_summary">Nombre de sauvegardes de croquis</string>
   <string name="pref_backup_interval_title">Intervalle sauvegarde</string>
   <string name="pref_backup_interval_summary">Intervalle minimum entre deux sauvegardes [s]</string>
-  <!-- UNUSED  <string name="pref_backups_clear_title">Effacement Sauvegardes</string> -->
-  <!-- UNUSED  <string name="pref_backups_clear_summary">Activer le menu de nettoyage des sauvegardes de croquis</string> -->
+  <string name="pref_backups_clear_title">Effacement Sauvegardes</string>
+  <string name="pref_backups_clear_summary">Activer le menu de nettoyage des sauvegardes de croquis</string>
   <!-- UNUSED string name="pref_xtherion_areas_title">Aire Xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Sauver les Aires Xtherion</string -->
   <string name="pref_therion_splays_title">Visées latérales d\'habillage Therion</string>
@@ -1558,8 +1671,8 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
   <string name="pref_legonly_update_summary">Redessiner la polygonale de cheminement uniquement sur les visées téléchargées</string>
   <string name="pref_loopClosure_title">Bouclage</string>
   <string name="pref_loopClosure_summary">Compensation d\'erreur de bouclage</string>
-  <string name="pref_loop_thr_title">Seuil boucle</string>
-  <string name="pref_loop_thr_summary">Seuil de boucle de compensation</string>
+  <string name="pref_loop_thr_title">Seuil de bouclage</string>
+  <string name="pref_loop_thr_summary">Seuil de compensation de bouclage</string>
   <!-- UNUSED string name="pref_splayExtend_title">Splay extend</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Whether to estimate the extend of splays</string -->
   <string name="pref_swapLR_title">Inverser D/G dans la boussole</string>
@@ -1572,8 +1685,8 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
   <string name="pref_splay_classes_summary">Activer les différentes catégories de visées latérales d\'habillage</string>
   <string name="pref_splay_color_title">Couleurs visées lat. d\'habillage</string>
   <string name="pref_splay_color_summary">Activer les différentes couleurs de visées latérales d\'habillage</string>
-  <string name="pref_plot_shift_title">Esquisse changement d\'échelle</string>
-  <string name="pref_plot_shift_summary">Activer le changement d\'échelle de l\'esquisse</string>
+  <string name="pref_plot_shift_title">Croquis changement d\'échelle</string>
+  <string name="pref_plot_shift_summary">Activer le changement d\'échelle du croquis</string>
   <string name="pref_splay_alpha_title">Transparence des visées d\'habillage</string>
   <string name="pref_splay_alpha_summary">Transparence des visées d\'habillage [0: transparent, 100: opaque]</string>
 
@@ -1623,14 +1736,14 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
   <string name="pref_walls_xstep_summary">Distance minimum entres les points formant une ligne de paroi [m]</string>
 -->
 
-  <!-- UNUSED  <string name="pref_algo_min_alpha_title">Min-algo alpha</string> -->
-  <!-- UNUSED  <string name="pref_algo_min_alpha_summary">Min-algo facteur d\'ajustment (par[0,1])</string> -->
-  <!-- UNUSED  <string name="pref_algo_min_beta_title">Min-algo beta</string> -->
-  <!-- UNUSED  <string name="pref_algo_min_beta_summary">Min-algo M dip weight</string> -->
-  <!-- UNUSED  <string name="pref_algo_min_gamma_title">Min-algo gamma</string> -->
-  <!-- UNUSED  <string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string> -->
-  <!-- UNUSED  <string name="pref_algo_min_delta_title">Min-algo delta</string> -->
-  <!-- UNUSED  <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string> -->
+  <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
+  <string name="pref_algo_min_alpha_summary">Min-algo facteur d\'ajustment (par[0,1])</string>
+  <string name="pref_algo_min_beta_title">Min-algo beta</string>
+  <string name="pref_algo_min_beta_summary">Min-algo M dip weight</string>
+  <string name="pref_algo_min_gamma_title">Min-algo gamma</string>
+  <string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string>
+  <string name="pref_algo_min_delta_title">Min-algo delta</string>
+  <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string>
 
 <!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Flux de journalisation</string>
@@ -1642,7 +1755,6 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
   <string name="pref_log_csurvey">cSurvey</string>
   <string name="pref_log_data">Données</string>
   <string name="pref_log_db">Base de données</string>
-
   <string name="pref_log_debug">Debug</string>
   <string name="pref_log_device">Périphériques</string>
   <string name="pref_log_distox">DistoX</string>
@@ -1698,6 +1810,7 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
 \nMise à jour le 29-11-2015 par F. Martin : frankm@gmail.com
 \nMise à jour le 23-05-2017 par G. Chardin
 \nMise à jour le 25-04-2018 par D. Ros : souterweb@free.fr  
+\nMise à jour 10-2022 par D. Ros et G. Chardin
     </string>
 
 <!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED : mark OK untranslated strings -->
@@ -1739,22 +1852,22 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="no_surveys">Pas de topographie</string>
     <string name="no_tdconfig">Fichier tdconfig manquant</string>
     <string name="no_th_file">Pas de fichier Therion</string>
-    <!-- UNUSED  <string name="file_exists">Le fichier existe déjà</string> -->
-    <!-- UNUSED  <string name="file_create_fail">Échec de la création du fichier</string> -->
-    <!-- UNUSED  <string name="oom">Attention. Mémoire pleine</string> -->
+    <string name="file_exists">Le fichier existe déjà</string>
+    <string name="file_create_fail">Échec de la création du fichier</string>
+    <string name="oom">Attention. Mémoire pleine</string>
 
     <string name="ask_delete_tdconfig">Supprimer le fichier TdConfig</string>
     <string name="ask_remove_equate">Supprimer l\'égalité %1$s ?</string>
-    <!-- UNUSED  <string name="equate_no_station">Aucune station sélectionnée</string> -->
+    <string name="equate_no_station">Aucune station sélectionnée</string>
     <string name="equate_no_stations">Trop peu de stations</string>
     <string name="equate_no_nearby">Pas de station à proximité</string>
 
     <!-- UNUSED string name="menu_new">NOUVEAU</string -->
-    <!-- UNUSED string name="menu_equate">AJOUT EGALITĖ</string -->
-    <!-- UNUSED string name="menu_equates">EGALITĖS</string -->
+    <!-- UNUSED string name="menu_equate">AJOUT EGALITE</string -->
+    <!-- UNUSED string name="menu_equates">EGALITES</string -->
     <!-- UNUSED string name="menu_save">ENREGISTRER</string -->
 
-    <!-- UNUSED  <string name="overwrite">écraser</string> -->
+    <string name="overwrite">écraser</string>
 
     <string name="title_export_settings">Paramétrages d\'import/export</string>
     <string name="title_export">Exporter le projet sous &#8230;</string>
@@ -1775,7 +1888,7 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="cmenu_reset">Reset</string>
     <!-- UNUSED string name="menu_zoom_one">Zoom 1</string -->
 
-    <string name="cmenu_alpha">Opacité du MNT</string>
+    <string name="cmenu_alpha">Opacité  MNE</string>
     <string name="cmenu_viewpoint">Point de vue</string>
     <!-- UNUSED string name="cmenu_files">Fichier</string -->
     <!-- UNUSED string name="cmenu_frame">Fenêtre</string -->
@@ -1786,10 +1899,10 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="cmenu_wall">Menu parois</string>
     <!-- UNUSED string name="cmenu_fractal">Fractal counts</string -->
 
-    <string name="fractal_title">Comptes fractales</string>
-    <!-- UNUSED  <string name="info_title">Information</string> -->
-    <string name="info_surveys">RELEVĖS</string>
-    <!-- UNUSED  <string name="info_axes">Axes: bleu Nord, vert Est</string> -->
+    <string name="fractal_title">Nombre de fractales</string>
+    <string name="info_title">Information</string>
+    <string name="info_surveys">TOPOGRAPHIES</string>
+    <string name="info_axes">Axes: bleu Nord, vert Est</string>
     <string name="info_grid">Grille quadrillage (m)</string>
     <string name="info_view">Point de vue</string>
     <string name="info_surveys">Topographie</string>
@@ -1802,25 +1915,25 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="info_east">Est</string>
     <string name="info_north">Nord</string>
     <string name="info_z">Altitude</string>
-    <string name="info_grid_value">%1$.0f m</string>
-    <string name="info_view_value">A. %1$.0f C. %2$.0f</string>
-    <string name="info_survey_value">%1$d</string>
-    <string name="info_shot_value">Cheminements %1$d, Splays %2$d</string>
-    <string name="info_station_value">%1$d</string>
-    <string name="info_length_value">%1$.1f m</string>
-    <string name="info_depth_value">%1$.1f m</string>
-    <string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string>
-    <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
-    <string name="info_east_value">O %1$.1f E %2$.1f</string>
-    <string name="info_north_value">S %1$.1f N %2$.1f</string>
-    <string name="info_z_value">%1$.1f  %2$.1f</string>
+    <!-- TODO string name="info_grid_value">%1$.0f m</string -->
+    <!-- TODO string name="info_view_value">A. %1$.0f C. %2$.0f</string -->
+    <!-- TODO string name="info_survey_value">%1$d</string -->
+    <!-- TODO string name="info_shot_value">Legs %1$d, Splays %2$d</string -->
+    <!-- TODO string name="info_station_value">%1$d</string -->
+    <!-- TODO string name="info_length_value">%1$.1f m</string -->
+    <!-- TODO string name="info_depth_value">%1$.1f m</string -->
+    <!-- string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
+    <!-- TODO string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string -->
+    <!-- TODO string name="info_east_value">W %1$.1f E %2$.1f</string -->
+    <!-- TODO string name="info_north_value">S %1$.1f N %2$.1f</string -->
+    <!-- TODO string name="info_z_value">%1$.1f  %2$.1f</string -->
 
-    <!-- UNUSED  <string name="query" formatted="false">Topographie: %d Visées: %d Station: %d\nLongueur : %d Profondeur : %d</string> -->
+    <string name="query" formatted="false">Topographie: %d Visées: %d Station: %d\nLongueur : %d Profondeur : %d</string>
     <!-- UNUSED string name="cno_files">Pas de fichier archive</string -->
-    <!-- UNUSED  <string name="clear">Effacer</string> -->
+    <string name="clear">Effacer</string>
 
     <string name="plan_proj">Plan</string>
-    <string name="profile_proj">Profil</string>
+    <string name="profile_proj">Coupe</string>
     <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
     <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Cavité %9$.1f</string>
     <string name="measure">mesure</string>
@@ -1828,49 +1941,49 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <!-- UNUSED string name="style_stroke">Stroke</string -->
     <!-- UNUSED string name="style_stroke_fill">Fill &amp; Stroke</string -->
     <!-- UNUSED string name="style_fill">Fill</string -->
-    <string name="surface_projection">Projection sur DNT</string>
-    <string name="dem_file">MNT %1$s</string>
-    <string name="dem_load">charger</string>
+    <string name="surface_projection">Projection sur MNE</string>
+    <!-- OK string name="dem_file">DEM %1$s</string -->
+    <string name="dem_load">chargé</string>
 
-    <string name="dem_failed">Ėchec du chargement du MNT</string>
-    <string name="dem_ok">Lecture des données du MNT</string>
+    <string name="dem_failed">Échec du chargement du MNE</string>
+    <string name="dem_ok">Lecture des données MNE</string>
     <!-- OK string name="texture_file">%1$s</string -->
-    <string name="texture_load">Chargement des textures</string>
-    <string name="texture_failed">Ėchec du chargement des textures</string>
-    <string name="texture_ok">Lecture du fichier de textures</string>
+    <string name="texture_load">Chargement de la texture</string>
+    <string name="texture_failed">Échec du chargement de la texture</string>
+    <string name="texture_ok">Lecture du fichier de texture</string>
     <string name="sketch_load">Chargement</string>
-    <string name="sketch_failed">Ėchec du chargement du croquis</string>
+    <string name="sketch_failed">Échec du chargement du croquis</string>
     <string name="sketch_ok">Lecture des données du croquis</string>
 
     <string name="ctitle">%1$s  Pente: %2$.0f  Azimut: %3$.0f</string>
-    <string name="ctitle_surface_alpha">Opacité surface</string>
+    <string name="ctitle_surface_alpha">Opacité de surface</string>
     <!-- UNUSED string name="ctitle_sketches">Sketches</string -->
     <!-- UNUSED string name="ctitle_legs">Legs visibility</string -->
     <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
     <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
 
-    <string name="survey_legs"> Visées : </string>
-    <string name="survey_legs_length"> Longueur des visées : </string>
-    <string name="survey_splays"> Visées latérales : </string>
-    <string name="survey_splays_length"> Longueur des visées latérales : </string>
+    <string name="survey_legs">Visées : </string>
+    <string name="survey_legs_length">Longueur des visées : </string>
+    <string name="survey_splays">Visées latérales : </string>
+    <string name="survey_splays_length">Longueur des visées latérales : </string>
 
     <string name="cave_east"> E: %1$.1f</string>
     <string name="cave_north"> N: %1$.1f</string>
     <string name="cave_vert"> Z: %1$.1f</string>
 
-    <string name="cave_distance"> Distance 3D : %1$.2f</string>
-    <string name="horz_distance">Distance horizontale 2D: %1$.1f</string>
+    <string name="cave_distance">Distance 3D : %1$.2f</string>
+    <string name="horz_distance">Distance horizontale 2D : %1$.1f</string>
     <string name="cave_length">Longueur de la cavité : %1$.2f %2$.1f %3$.1f</string>
-    <string name="cave_angle">Azimut: %1$.0f  Pente: %2$.0f</string>
+    <string name="cave_angle"> Azimut : %1$.0f  Pente : %2$.0f</string>
 
     <!-- UNUSED string name="SURVEYS">T o p o g r a p h i e</string -->
-    <string name="INFO">I n f o r m a t i o n</string>
-    <string name="STATIONS">S t a t i o n</string>
-    <string name="STATIONS_DISTANCE">Distance station</string>
+    <string name="INFO">INFO</string>
+    <string name="STATIONS">STATIONS</string>
+    <string name="STATIONS_DISTANCE">DISTANCE STATIONS</string>
     <!-- UNUSED string name="DISTANCE">Distance</string -->
     <!-- UNUSED string name="CENTER">CENTER</string -->
-    <string name="select_dem_file">Sélection fichier MNT:</string>
-    <string name="select_texture_file">Sélection fichier textures:</string>
+    <string name="select_dem_file">Select a Fichier MNE :</string>
+    <string name="select_texture_file">Sélectionner un fichier de texture :</string>
 
     <string name="view_title">POINTS DE VUE</string>
     <string name="view_top">Partie supérieure</string>
@@ -1878,7 +1991,7 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="view_north">Nord</string>
     <string name="view_west">Ouest</string>
     <string name="view_south">Sud</string>
-    <!-- UNUSED  <string name="view_point">Point de vue</string> -->
+    <string name="view_point">Point de vue</string>
     <string name="view_zoom">Zoom 1</string>
 
     <string name="walls_title">Parois</string>
@@ -1889,43 +2002,43 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="walls_tube">Tube</string>
     <!-- OK string name="walls_delaunay">Enveloppe Delaunay</string -->
 
-    <!-- UNUSED  <string name="powercrust_few_splays">Enveloppe Powercrust : très peu de visées latérales</string> -->
-    <!-- UNUSED  <string name="powercrust_failed">Enveloppe Powercrust en échec</string> -->
-    <!-- UNUSED  <string name="powercrust_successful">Enveloppe Powercrust appliquée avec succès : %1$d / %2$d</string> -->
-    <string name="powercrust_dxf_not_supported">Export dxf powercrust non supporté</string>
+    <string name="powercrust_few_splays">Enveloppe Powercrust : très peu de visées latérales</string>
+    <string name="powercrust_failed">Enveloppe Powercrust en échec</string>
+    <string name="powercrust_successful">Enveloppe Powercrust appliquée avec succès : %1$d / %2$d</string>
+    <string name="powercrust_dxf_not_supported">Export dxf de Powercrust non supportée</string>
 
     <string name="ok_export">OK. Exporté %1$s</string>
 
     <!-- UNUSED string name="no_planview">No plan view</string -->
     <!-- UNUSED string name="no_surface">No surface DEM</string -->
 
-    <!-- UNUSED  <string name="error_file_not_found">Erreur : archive  non trouvée</string> -->
+    <string name="error_file_not_found">Erreur : archive  non trouvée</string>
     <string name="error_file_not_readable">Erreur : fichier illisible</string>
-    <!-- UNUSED  <string name="error_io_exception">Erreur : IO exception</string> -->
+    <string name="error_io_exception">Erreur : IO exception</string>
     <string name="error_parser_error">Erreur : erreur de l\'analyseur %1$s</string>
     <string name="error_export_failed">Erreur : exportation défaillante %1$s</string>
 
-    <!-- UNUSED  <string name="warning_not_overwrite">Avertissement : ne pas écraser l\'archive existante %1$s</string> -->
+    <string name="warning_not_overwrite">Avertissement : ne pas écraser l\'archive existante %1$s</string>
     <!-- UNUSED string name="warning_not_txt">Avertissement : pas d'archive txt %1$s</string -->
     <!-- UNUSED string name="warning_not_kml">Avertissement : pas d'archive Kml %1$s</string -->
     <!-- UNUSED string name="warning_not_las">Avertissement : pas d'archive %1$s</string -->
     <!-- UNUSED string name="warning_not_cgal">Avertissement : pas d'archive de texte CGAL %1$s</string -->
     <!-- UNUSED string name="warning_not_stl">Avertissement : pas d'archive stl %1$s</string -->
     <string name="warning_no_cwd">Avertissement : répertoire initial absent</string>
-    <string name="warning_no_parent">Attention: impossible d\'aller au répertoire parent</string>
+    <string name="warning_no_parent">Avertissement : impossible d\'associer au dossier parent</string>
 
-    <string name="done_fractals">dims fractales terminé</string>
-    <string name="done_convexhull">Parois convex-hull terminé</string>
-    <string name="fail_convexhull">Ėchec des parois convex-hull</string>
-    <string name="done_powercrust">Parois powercrust terminé</string>
-    <string name="fail_powercrust">Ėchec des parois powercrust</string>
-    <string name="done_hull">Parois simple-hull terminé</string>
-    <string name="fail_hull">Ėchec des partois simple-hull</string>
+    <string name="done_fractals">Dimension fractale calculée</string>
+    <string name="done_convexhull">Parois enveloppe convexe terminées</string>
+    <string name="fail_convexhull">Erreur parois enveloppe convexe</string>
+    <string name="done_powercrust">Parois powercrust terminées</string>
+    <string name="fail_powercrust">Erreur parois powercrust</string>
+    <string name="done_hull">Parois d\'enveloppe simple terminées</string>
+    <string name="fail_hull">Erreur parois d\'enveloppe simple</string>
 
-    <string name="no_database">Aucune base de données\n</string>
-    <string name="no_survey">Pas de croquis %1$s\n</string>
+    <string name="no_database">Pas de base de données\n</string>
+    <string name="no_survey">Pas de relevé topographique %1$s\n</string>
     <string name="no_file">Pas de fichier %1$s\n</string>
-    <string name="empty_survey">Relevé vide %1$s\n</string>
+    <string name="empty_survey">Relevé topographiqe vide %1$s\n</string>
 
     <!-- UNUSED string name="cpref_base_path_title">Dossier de la base de données</string -->
     <!-- UNUSED string name="cpref_base_path_summary">Dossier Therion</string -->
@@ -1936,35 +2049,35 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
     <string name="cpref_selection_radius_title">Selection rayon</string>
     <string name="cpref_selection_radius_summary">Selectionn rayon</string>
 
-    <string name="cpref_station_toast_title">Dialogue station</string>
-    <string name="cpref_station_toast_summary">Dialogue station au lieu de cases à cocher [n]</string>
+    <string name="cpref_station_toast_title">Dialogue des stations</string>
+    <string name="cpref_station_toast_summary">Dialogue sur les données de la station au lieu de la boîte [n]</string>
     <string name="cpref_station_points_title">Points de station</string>
-    <string name="cpref_station_points_summary">Toujours afficher les stations [n]</string>
-    <string name="cpref_station_size_title">Taille du point station</string>
-    <string name="cpref_station_size_summary">Taille des poins de stations [8 pxl]</string>
-    <string name="cpref_measure_dialog_title">Message distance</string>
-    <string name="cpref_measure_dialog_summary">Message distance au lieu de dialogue [n]</string>
+    <string name="cpref_station_points_summary">Afficher toujours les stations [n]</string>
+    <string name="cpref_station_size_title">Taille points de station</string>
+    <string name="cpref_station_size_summary">Taille des points de station [8 pxl]</string>
+    <string name="cpref_measure_dialog_title">Message de distance</string>
+    <string name="cpref_measure_dialog_summary">Message de distance au lieu d\'une boîte de dialogue [n]</string>
  
     <string name="cpref_grid_above_title">Situation de la grille quadrillée</string>
     <string name="cpref_grid_above_summary">Placer la grille dans la partie supérieure</string>
-    <string name="cpref_grid_extent_title">Extention grille</string>
-    <string name="cpref_grid_extend_summary">Extention grille autour du relevé</string>
-    <string name="cpref_neg_clino_title">Vue sous l\'horizon</string>
-    <string name="cpref_neg_clino_summary">Permettre point de vue sous horizon</string>
-    <string name="cpref_dem_buffer_title">Tampon MNT</string>
-    <string name="cpref_dem_buffer_summary">Extendre MNT autour du relevé</string>
-   
-    <string name="cpref_dem_maxsize_title">Taille max MNT</string>
-    <string name="cpref_dem_maxsize_summary">Nombre max de cellules [400]</string>
-    <string name="cpref_dem_reduce_title">Réduction MNT</string>
-    <string name="cpref_dem_reduce_summary">Mode de réduction MNT [shrink]</string>
+    <string name="cpref_grid_extent_title">Étendue de la grille</string>
+    <string name="cpref_grid_extend_summary">Extension de la grille autour de la topographie</string>
+    <string name="cpref_neg_clino_title">Vue sous horizon</string>
+    <string name="cpref_neg_clino_summary">Permettre point de vue sous l\'horizon</string>
+    <string name="cpref_dem_buffer_title">Tampon MNE</string>
+    <string name="cpref_dem_buffer_summary">Extension du MNE autour de la topographie</string>   
+	
+    <string name="cpref_dem_maxsize_title">Taille maxi MNE</string>
+    <string name="cpref_dem_maxsize_summary">Nombre maximum de cellules [400]</string>
+    <string name="cpref_dem_reduce_title">Réduction MNE</string>
+    <string name="cpref_dem_reduce_summary">Mode de réduction du MNE [shrink]</string>
   
     <string name="cpref_all_splay_title">Toutes visées latérales</string>
     <string name="cpref_all_splay_summary">Toutes visées latérales pour parois</string>
-    <string name="cpref_splay_proj_title">Visées d\'habillage projectées</string>
-    <string name="cpref_splay_proj_summary">Utilisation des visées d'habillage projetées sur le plan normal [n]</string>
-    <string name="cpref_splay_thr_title">Limite visée d\'habillage</string>
-    <string name="cpref_splay_thr_summary">Visées d\habillage externes à conserver[0.5]</string>
+    <string name="cpref_splay_proj_title">Projection visées d\'habillage</string>
+    <string name="cpref_splay_proj_summary">Utilisation ou non des visées d\'habillage projetées sur un plan normal [n]</string>
+    <string name="cpref_splay_thr_title">Seuil des visées d\'habillage</string>
+    <string name="cpref_splay_thr_summary">Visées latérales d\'habillage à conserver [0.5]</string>
 
     <string name="cpref_split_triangles_title">Diviser triangles</string>
     <string name="cpref_split_triangles_summary">Diviser les parois en triangles</string>
@@ -1984,30 +2097,103 @@ Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid
 -->
 
     <!-- UNUSED string name="TopoGLPerms">Permissions</string -->
-    <string name="cperms_mandatory">Cave3D ne peut pas s\'exécuter sans ces permissions:</string>
+    <string name="cperms_mandatory">Cave3D ne peut pas fonctionner sans ces permissions :</string>
     <!-- UNUSED string name="cperms_optional">Cave3D may fail without these permissions:</string -->
     <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
 
     <string name="help_open_3d">Ouvrir fichier 3D</string>
     <string name="help_export_3d">Export fichier 3D</string>
-    <string name="help_info_3d">info 3D</string>
-    <string name="help_ico_3d">Distribution cheminement 3D</string>
-    <string name="help_rose_3d">Diagrame en rose </string>
-    <string name="help_reset_3d">Réinitialiser vue 3D</string>
+    <string name="help_info_3d">3D info</string>
+    <string name="help_ico_3d">Distributioin 3D des visées de cheminement</string>
+    <string name="help_rose_3d">Diagramme en rosace</string>
+    <string name="help_reset_3d">Réinitialiser la vue 3D</string>
     <string name="help_viewpoint_3d">Point de vue 3D</string>
-    <string name="help_alpha_3d">M.N.T.</string>
+    <string name="help_alpha_3d">M.N.E.</string>
     <string name="help_wall_3d">Modèle 3D</string>
-    <!-- UNUSED string name="help_temperature">Tempertaure</string -->
-    <string name="help_sketch_3d">Lissage croquis 3D</string>
-    <!-- UNUSED string name="help_fractal">Fractal analysis</string -->
+    <string name="help_temperature">Tempérture</string>
+    <string name="help_sketch_3d">Levage de croquis en 3D</string>
+    <string name="help_fractal">Analyse fractale</string>
 
-    <string name="help_light_3d">Agrandir et éclaircir</string>
+    <string name="help_light_3d">Panoramique et lumière</string>
     <string name="help_projection_3d">Projection 3D</string>
-    <string name="help_stations_3d">Stations</string>
-    <string name="help_splays_3d">Visées d\'habillage</string>
+    <tring name="help_stations_3d">Stations</string>
+    <string name="help_splays_3d">Visées latérales d\'habillage</string>
     <string name="help_walls_3d">Parois</string>
     <string name="help_surface_3d">Terrain</string>
+
     <string name="help_color_3d">Couleurs</string>
-    <string name="help_frame_3d">Trames</string>
+    <string name="help_frame_3d">Cadre</string>
    
 </resources>
+
+<!--
+THIS TRANSLATION IS TOO INCOMPLETE
+In order to bring it back in the app you need to:
+  [1] translate all the untranslated strings
+  [2] copy the missing strings from the English strings.xml file and translate them
+  [3] send an email informing that the translation is ready for inclusion
+Translation with more than 20 lint errors are not accepted.
+Translation with more than 70 lint errors are dropped from the app.
+Build errors:
+     [aapt] warning: string 'algo_minimum' has no default translation. FAIT
+     [aapt] warning: string 'ask_backups_clear' has no default translation. FAIT
+     [aapt] warning: string 'button_change' has no default translation. FAIT
+     [aapt] warning: string 'clear' has no default translation.
+     [aapt] warning: string 'connecting' has no default translation. FAIT
+     [aapt] warning: string 'connection_error' has no default translation. FAIT
+     [aapt] warning: string 'distox_label' has no default translation.
+     [aapt] warning: string 'equate_no_station' has no default translation.
+     [aapt] warning: string 'error_file_not_found' has no default translation.
+     [aapt] warning: string 'error_io_exception' has no default translation.
+     [aapt] warning: string 'export_bgcolor' has no default translation.
+     [aapt] warning: string 'export_overview_title' has no default translation.
+     [aapt] warning: string 'export_plot_title' has no default translation.
+     [aapt] warning: string 'export_scale_png' has no default translation.
+     [aapt] warning: string 'extended_profile' has no default translation.
+     [aapt] warning: string 'file_create_fail' has no default translation.
+     [aapt] warning: string 'file_exists' has no default translation.
+     [aapt] warning: string 'found_groups' has no default translation.
+     [aapt] warning: string 'help_backups' has no default translation.
+     [aapt] warning: string 'help_log' has no default translation.
+     [aapt] warning: string 'info_axes' has no default translation.
+     [aapt] warning: string 'info_title' has no default translation.
+     [aapt] warning: string 'menu_backups' has no default translation.
+     [aapt] warning: string 'menu_logs' has no default translation.
+     [aapt] warning: string 'menu_pair' has no default translation.
+     [aapt] warning: string 'no_capture_app' has no default translation.
+     [aapt] warning: string 'no_device_found' has no default translation.
+     [aapt] warning: string 'no_paired_device' has no default translation.
+     [aapt] warning: string 'not_available' has no default translation.
+     [aapt] warning: string 'oom' has no default translation.
+     [aapt] warning: string 'overwrite' has no default translation.
+     [aapt] warning: string 'powercrust_failed' has no default translation.
+     [aapt] warning: string 'powercrust_few_splays' has no default translation.
+     [aapt] warning: string 'powercrust_successful' has no default translation.
+     [aapt] warning: string 'pref_algo_min_alpha_summary' has no default translation.
+     [aapt] warning: string 'pref_algo_min_alpha_title' has no default translation.
+     [aapt] warning: string 'pref_algo_min_beta_summary' has no default translation.
+     [aapt] warning: string 'pref_algo_min_beta_title' has no default translation.
+     [aapt] warning: string 'pref_algo_min_delta_summary' has no default translation.
+     [aapt] warning: string 'pref_algo_min_delta_title' has no default translation.
+     [aapt] warning: string 'pref_algo_min_gamma_summary' has no default translation.
+     [aapt] warning: string 'pref_algo_min_gamma_title' has no default translation.
+     [aapt] warning: string 'pref_backups_clear_summary' has no default translation.
+     [aapt] warning: string 'pref_backups_clear_title' has no default translation.
+     [aapt] warning: string 'pref_bitmap_bgcolor_summary' has no default translation.
+     [aapt] warning: string 'pref_bitmap_bgcolor_title' has no default translation.
+     [aapt] warning: string 'pref_bitmap_scale_summary' has no default translation.
+     [aapt] warning: string 'pref_bitmap_scale_title' has no default translation.
+     [aapt] warning: string 'query' has no default translation.
+     [aapt] warning: string 'r_checkboxes' has no default translation.
+     [aapt] warning: string 'r_continue' has no default translation.
+     [aapt] warning: string 'r_dialog' has no default translation.
+     [aapt] warning: string 'r_i_understood' has no default translation.
+     [aapt] warning: string 'r_title' has no default translation.
+     [aapt] warning: string 'start_scan' has no default translation.
+     [aapt] warning: string 'stop_scan' has no default translation.
+     [aapt] warning: string 'survey_not_attached_extend' has no default translation.
+     [aapt] warning: string 'title_scan' has no default translation.
+     [aapt] warning: string 'title_settings_splay' has no default translation.
+     [aapt] warning: string 'view_point' has no default translation.
+     [aapt] warning: string 'warning_not_overwrite' has no default translation.
+-->
