@@ -3,9 +3,16 @@ res/values/array.xml:31: Warning: Array splayDash has an inconsistent number of 
   ^
     res/values-cn/array.xml:13: Declaration with array size (4)
     res/values-es/array.xml:10: Declaration with array size (4)
+    res/values-fr/array.xml:10: Declaration with array size (4)
     res/values-hu/array.xml:10: Declaration with array size (4)
     res/values-it/array.xml:10: Declaration with array size (4)
     res/values-ru/array.xml:11: Declaration with array size (5)
+res/values/array.xml:127: Warning: Array loopClosure has an inconsistent number of items (5 in values-hu/array.xml, 4 in values-fr/array.xml) [InconsistentArrays]
+  <string-array name="loopClosure">
+  ^
+    res/values-fr/array.xml:61: Declaration with array size (4)
+    res/values-hu/array.xml:61: Declaration with array size (5)
+    res/values-ru/array.xml:64: Declaration with array size (5)
 src/com/topodroid/num/NumBranch.java:183: Warning: Implicitly using the default locale is a common source of bugs: Use String.format(Locale, ...) instead [DefaultLocale]
     sb.append( String.format("%.2f", len ) );
                ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -15,6 +22,15 @@ res/layout/dblock_row_noedit.xml:31: Warning: android:editable is deprecated: Us
 res/layout/dblock_row_noedit.xml:54: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
     android:editable="false"
     ~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-fr/plurals.xml:3: Error: For locale "fr" (French) the following quantities should also be defined: many [MissingQuantity]
+  <plurals name="calib_saturated_values">
+  ^
+res/values-fr/plurals.xml:9: Error: For locale "fr" (French) the following quantities should also be defined: many [MissingQuantity]
+  <plurals name="read_data">
+  ^
+res/values-fr/plurals.xml:15: Error: For locale "fr" (French) the following quantities should also be defined: many [MissingQuantity]
+  <plurals name="read_calib_data">
+  ^
 res/values/strings.xml:6: Error: "no_manual" is not translated in "fr" (French) [MissingTranslation]
     <string name="no_manual">Cannot retrieve user manual from the web</string>
             ~~~~~~~~~~~~~~~~
@@ -4548,6 +4564,18 @@ res/values/strings.xml:2199: Error: "help_color_3d" is not translated in "fr" (F
 res/values/strings.xml:2200: Error: "help_frame_3d" is not translated in "fr" (French) [MissingTranslation]
     <string name="help_frame_3d">Frame</string>
             ~~~~~~~~~~~~~~~~~~~~
+res/values-fr/plurals.xml:5: Error: The quantity 'one' matches more than one specific number in this locale (0, 1), but the message did not include a formatting argument (such as %d). This is usually an internationalization error. See full issue explanation for more. [ImpliedQuantity]
+    <item quantity="one">ATTENTION. Une donnée saturée</item>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-fr/plurals.xml:11: Error: The quantity 'one' matches more than one specific number in this locale (0, 1), but the message did not include a formatting argument (such as %d). This is usually an internationalization error. See full issue explanation for more. [ImpliedQuantity]
+ <item quantity="one">Une donnée lue</item>
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-fr/plurals.xml:9: Warning: For language "fr" (French) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="read_data">
+  ^
+res/values-fr/plurals.xml:15: Warning: For language "fr" (French) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="read_calib_data">
+  ^
 res/layout/survey_stat_dialog.xml:51: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
     <LinearLayout 
      ~~~~~~~~~~~~
@@ -4567,6 +4595,9 @@ res/mipmap-anydpi-v26/ic_launcher_round.xml:2: Warning: The resource R.mipmap.ic
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
 ^
 res/raw/name_pos_hl_geometry.glsl: Warning: The resource R.raw.name_pos_hl_geometry appears to be unused [UnusedResources]
+res/layout/progress_dialog.xml:44: Warning: This LinearLayout layout or its LinearLayout parent is unnecessary [UselessParent]
+    <LinearLayout
+     ~~~~~~~~~~~~
 res/values-it/strings.xml:1959: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
     <string name="dem_loading">Caricamento file ... attendi</string>
                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4577,4 +4608,7 @@ res/mipmap-xhdpi/ic_launcher.png: Warning: The following unrelated icon files ha
 res/layout/gm_search_dialog.xml:33: Warning: Hardcoded string "1.0", should use @string resource [HardcodedText]
         android:hint="1.0"
         ~~~~~~~~~~~~~~~~~~
-1511 errors, 15 warnings
+res/layout/progress_dialog.xml:18: Warning: Hardcoded string "message", should use @string resource [HardcodedText]
+      android:text="message"
+      ~~~~~~~~~~~~~~~~~~~~~~
+1516 errors, 20 warnings
