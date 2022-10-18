@@ -817,7 +817,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="button_landscape" >Fekvő </string -->
     <!-- UNUSED string name="button_portrait"  >Álló  </string -->
     <string name="button_splays">Segédmérések</string>
-    <!-- TODO string name="button_wait">Wait</string -->
+    <string name="button_wait">Várj</string>
 
 
     <string name="button_write"     >Feltölt</string>
@@ -1843,7 +1843,7 @@ A részletekért keresse fel a weboldalakat.\n
    <string name="firmware_file_dump_fail">Firmware letöltés sikertelen</string>
    <string name="firmware_file_upload_fail">Firmware feltöltés sikertelen</string>
    <string name="firmware_not_supported">A műszer nem támogatja a firmware funkciókat</string>
-   <!-- TODO string name="firmware_uploaded">%1$s firmware: uploaded %2$d</string -->
+   <string name="firmware_uploaded">%1$s firmware: feltöltve %2$d</string>
 
     <string name="project">Projekt %1$s</string>
     <string name="no_editor">Nincs szövegszerkesztő</string>
