@@ -36,6 +36,7 @@ import android.content.Context;
 
 public class TopoDroidProtocol
 {
+  protected Context mContext;
   protected int    mDeviceType;
   protected String mDeviceAddress;
   protected PacketLogger mPacketLogger;
@@ -81,6 +82,7 @@ public class TopoDroidProtocol
     // allocated buffers
     // mBuffer        = new byte[8];
     mAddress       = new byte[2];
+    mContext       = context;
     // mReplyBuffer   = new byte[4];
     // mRequest_Buffer = new byte[8];
   }

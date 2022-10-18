@@ -17,6 +17,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.DeviceActivity;
 import com.topodroid.TDX.TopoDroidAlertDialog;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.TDPath;
@@ -49,6 +50,7 @@ import android.text.method.KeyListener;
 public class FirmwareDialog extends MyDialog
                             implements View.OnClickListener
 {
+  private DeviceActivity mParent;
   private RadioButton mBtnDump;
   private RadioButton mBtnUpload;
   private Button mBtnOK;
@@ -64,10 +66,11 @@ public class FirmwareDialog extends MyDialog
    * @param res      resources
    * @param app      application
    */
-  public FirmwareDialog( Context context, Resources res, TopoDroidApp app )
+  public FirmwareDialog( Context context, DeviceActivity parent, Resources res, TopoDroidApp app )
   {
     super( context, app, R.string.FirmwareDialog );
-    mRes     = res;
+    mParent = parent;
+    mRes    = res;
   }
 
   @Override
@@ -220,40 +223,26 @@ public class FirmwareDialog extends MyDialog
     byte[] signature = mApp.readFirmwareSignature( hw );
 
     if ( signature == null ) { // could not get firmware signature
-      TDToast.makeLong( R.string.firmware_upload_no_sign );
+      TDToast.makeWarn( R.string.firmware_upload_no_sign );
       if ( TDSetting.mFirmwareSanity ) return;    
     } else if ( hw != FirmwareUtils.getDeviceHardwareSignature( signature ) ) {
-      TDToast.makeLong( R.string.firmware_upload_bad_sign );
+      TDToast.makeWarn( R.string.firmware_upload_bad_sign );
       if ( TDSetting.mFirmwareSanity ) return;    
     }
     String title = mRes.getString( compatible? R.string.ask_upload : R.string.ask_upload_not_compatible );
-
+    dismiss();
+    mParent.askFirmwareUpload( filename, title );
+/*
     TopoDroidAlertDialog.makeAlert( mContext, mRes, title,
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
-          // String pathname = TDPath.getBinFile( filename );
-          // FIXME ASYNC_FIRMWARE_TASK
-          // TDToast.makeLong( R.string.firmware_wait_upload );
-          // mApp.uploadFirmware( filename );
-          // File file = new File( pathname ); // file must exists
-          File file = TDPath.getBinFile( filename );
-          // TDLog.f( "Firmware uploading from " + file.getPath() );
-          TDLog.v( "Firmware uploading from " + file.getPath() );
-          long len = file.length();
-          int ret  = mApp.uploadFirmware( filename );
-          // TDLog.f( "Firmware upload result: written " + ret + " bytes of " + len );
-          TDLog.v( "Dialog Firmware upload result: written " + ret + " bytes of " + len );
-          if ( ret > 0 ) {
-            TDToast.makeLong( String.format( mRes.getString(R.string.firmware_file_uploaded), filename, ret, len ) );
-          } else {
-            TDToast.makeLong( R.string.firmware_file_upload_fail );
-          }
-
+          mParent.doFirmwareUpload( filename, title );
           // finish(); 
         }
       }
     );
+*/
   }
 
 }

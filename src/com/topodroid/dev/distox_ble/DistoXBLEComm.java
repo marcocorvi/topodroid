@@ -22,6 +22,7 @@ import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.ListerHandler;
 import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.TopoDroidAlertDialog;
 import com.topodroid.dev.ConnectionState;
 // import com.topodroid.dev.DataType;
 import com.topodroid.dev.Device;
@@ -40,6 +41,7 @@ import com.topodroid.packetX.MemoryOctet;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.ui.TDProgress;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -54,6 +56,10 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import java.util.ArrayList;
+
+import android.os.Handler;
+import android.os.Message;
+import android.content.res.Resources;
 
 public class DistoXBLEComm extends TopoDroidComm
         implements BleComm
@@ -1035,99 +1041,153 @@ public class DistoXBLEComm extends TopoDroidComm
   /** upload a firmware to the device
    * @param address   device address
    * @param file      firmware file
-   * @return ...
+   * @param progress  progress dialog
    */
-  public int uploadFirmware( String address, File file )
+  public void uploadFirmware( String address, File file, TDProgress progress )
   {
-    // TDLog.v( "XBLE upload firmware " + file.getPath() );
+    final boolean DRY_RUN = false; // DEBUG
+
+    TDLog.v( "XBLE upload firmware " + file.getPath() );
     boolean is_log_file = TDLog.isStreamFile();
     if ( ! is_log_file ) TDLog.setLogStream( TDLog.LOG_FILE ); // set log to file if necessary
-    int ret = 0;
+    // int ret = 0;
 
-    byte[] buf = new byte[259];
-    buf[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte)0x3b;
-    buf[1] = (byte)0;
-    buf[2] = (byte)0;
-    boolean ok = true;
-    int cnt = 0;
-    try {
-      // File fp = new File( filepath );
-      if ( ! tryConnectDevice( address, null, 0 ) ) return 0;
+    long len        = file.length();
+    String filename = file.getName();
+    Resources res   = mContext.getResources();
+    Handler handler = new Handler();
 
-      FileInputStream fis = new FileInputStream(file);
-      DataInputStream dis = new DataInputStream(fis);
-      try{
-        for ( int addr = 0; /* addr < end_addr */ ; /*++addr*/) {
-          TDLog.v("XBLE fw upload: addr " + addr + " count " + cnt);
-          for (int k = 0; k < 256; ++k) buf[k] = (byte) 0xff;
-          int nr = dis.read(buf, 0, 256);
-          int crc16 = calCRC16(buf,256);
-          //for (int k = 0; k < 256; ++k) buf[k] = (byte) 0xff;  //for simulating the bug
-          if (nr <= 0) {
-            TDLog.v("XBLE fw upload: file read failure. Result " + nr);
-            break;
+    new Thread( new Runnable() {
+      public void run() {
+        boolean ok = true;
+        int cnt = 0;
+        String msg;
+        byte[] buf = new byte[259];
+        buf[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte)0x3b;
+        buf[1] = (byte)0;
+        buf[2] = (byte)0;
+
+        try {
+          // File fp = new File( filepath );
+          if ( ! DRY_RUN ) {
+            if ( ! tryConnectDevice( address, null, 0 ) ) ok = false; // return 0;
           }
-          cnt += nr;
-          //if(addr < 8) continue;
-          int flashaddr = addr + 8;
-          addr++;
-          byte[] seperated_buf = new byte[131]; // 131 = 3 (cmd, addr, index) + 128 (payload) 
-          seperated_buf[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte) 0x3b;
-          seperated_buf[1] = (byte) (flashaddr & 0xff);
-          seperated_buf[2] = 0; //packet index
-          System.arraycopy(buf, 0, seperated_buf, 3, 128);
-          enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, seperated_buf, true);
-          seperated_buf = new byte[133];
-          seperated_buf[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte) 0x3b;
-          seperated_buf[1] = (byte) (flashaddr & 0xff);
-          seperated_buf[2] = 1;
-          System.arraycopy(buf, 128, seperated_buf, 3, 128);
-          seperated_buf[131] = (byte) (crc16 & 0x00FF);
-          seperated_buf[132] = (byte) ((crc16 >> 8) & 0x00FF);
-          enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, seperated_buf, true);
-          //TDUtil.yieldDown(1000);
-          mPacketType = DistoXBLEProtocol.PACKET_NONE;
-          syncWait( 5000, "write firmware block" );
-          // synchronized ( mNewDataFlag ) {
-          //   try {
-          //     long start = System.currentTimeMillis();
-          //     mNewDataFlag.wait(5000); // allow long wait for firmware
-          //     long millis = System.currentTimeMillis() - start;
-          //     TDLog.v("XBLE write firmware block waited " + millis + " msec" );
-          //   } catch (InterruptedException e) {
-          //     e.printStackTrace();
-          //   }
-          // }
-          if ( mPacketType == DistoXBLEProtocol.PACKET_FLASH_CHECKSUM ) {
-            //int checksum = 0;
-            //for (int i = 0; i < 256; i++) checksum += (buf[i] & 0xff);
-            if ( ((DistoXBLEProtocol) mProtocol).mCheckCRC != crc16 || ((DistoXBLEProtocol) mProtocol).mFwOpReturnCode != 0) {
-              TDLog.v("XBLE fw upload: fail at " + cnt + " buffer[0]: " + buf[0] + " reply_addr:" + addr + " return_code:" + ((DistoXBLEProtocol) mProtocol).mFwOpReturnCode + " return CRC:" + ((DistoXBLEProtocol) mProtocol).mCheckCRC);
-              ok = false;
-              break;
-            } else {
-              TDLog.v("XBLE fw upload: reply CRC and return code ok");
+
+          FileInputStream fis = new FileInputStream(file);
+          DataInputStream dis = new DataInputStream(fis);
+          try{
+            for ( int addr = 0; ok /* && addr < end_addr */ ; /*++addr*/) {
+              // TDLog.v("XBLE fw upload: addr " + addr + " count " + cnt);
+              for (int k = 0; k < 256; ++k) buf[k] = (byte) 0xff;
+              int nr = dis.read(buf, 0, 256);
+              int crc16 = calCRC16(buf,256);
+              //for (int k = 0; k < 256; ++k) buf[k] = (byte) 0xff;  //for simulating the bug
+              if (nr <= 0) { // EOF ?
+                // TDLog.v("XBLE fw upload: file read failure. Result " + nr);
+                break;
+              }
+              cnt += nr;
+              //if(addr < 8) continue;
+              int flashaddr = addr + 8;
+              addr++;
+              byte[] seperated_buf = new byte[131]; // 131 = 3 (cmd, addr, index) + 128 (payload) 
+              seperated_buf[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte) 0x3b;
+              seperated_buf[1] = (byte) (flashaddr & 0xff);
+              seperated_buf[2] = 0; //packet index
+              System.arraycopy(buf, 0, seperated_buf, 3, 128);
+              if ( DRY_RUN ) {
+                TDUtil.slowDown( 100 );
+              } else {
+                enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, seperated_buf, true);
+              }
+              seperated_buf = new byte[133];
+              seperated_buf[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte) 0x3b;
+              seperated_buf[1] = (byte) (flashaddr & 0xff);
+              seperated_buf[2] = 1;
+              System.arraycopy(buf, 128, seperated_buf, 3, 128);
+              seperated_buf[131] = (byte) (crc16 & 0x00FF);
+              seperated_buf[132] = (byte) ((crc16 >> 8) & 0x00FF);
+              if ( DRY_RUN ) {
+                TDUtil.slowDown( 100 );
+                mPacketType = DistoXBLEProtocol.PACKET_FLASH_CHECKSUM;
+                ((DistoXBLEProtocol) mProtocol).mCheckCRC = crc16;
+              } else {
+                enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, seperated_buf, true);
+                //TDUtil.yieldDown(1000);
+                mPacketType = DistoXBLEProtocol.PACKET_NONE;
+                syncWait( 5000, "write firmware block" );
+                // synchronized ( mNewDataFlag ) {
+                //   try {
+                //     long start = System.currentTimeMillis();
+                //     mNewDataFlag.wait(5000); // allow long wait for firmware
+                //     long millis = System.currentTimeMillis() - start;
+                //     TDLog.v("XBLE write firmware block waited " + millis + " msec" );
+                //   } catch (InterruptedException e) {
+                //     e.printStackTrace();
+                //   }
+                // }
+              }
+              if ( mPacketType == DistoXBLEProtocol.PACKET_FLASH_CHECKSUM ) {
+                //int checksum = 0;
+                //for (int i = 0; i < 256; i++) checksum += (buf[i] & 0xff);
+                if ( ((DistoXBLEProtocol) mProtocol).mCheckCRC != crc16 || ((DistoXBLEProtocol) mProtocol).mFwOpReturnCode != 0) {
+                  msg = "XBLE fw upload: fail at " + cnt + " buffer[0]: " + buf[0] + " reply_addr:" + addr + " return_code:" + ((DistoXBLEProtocol) mProtocol).mFwOpReturnCode + " return CRC:" + ((DistoXBLEProtocol) mProtocol).mCheckCRC;
+                  TDLog.v( msg );
+                  ok = false;
+                  break;
+                } else {
+                  String msg1 = String.format( mContext.getResources().getString( R.string.firmware_uploaded ), "XBLE", cnt );
+                  int cnt1 = cnt;
+                  TDLog.v( msg1 );
+                  if ( progress != null ) {
+                    handler.post( new Runnable() {
+                      public void run() {
+                        progress.setProgress( cnt1 );
+                        progress.setText( msg1 );
+                      }
+                    } );
+                  }
+                }
+              } else {
+                msg = "XBLE fw upload (OK): failed " + cnt;
+                TDLog.v( msg );
+                ok = false;
+                break;
+              }
             }
-          } else {
+            fis.close();
+          } catch ( EOFException e ) { // OK
+            TDLog.v("XBLE fw update: EOF " + e.getMessage());
+          } catch ( FileNotFoundException e ) {
+            TDLog.v( "XBLE fw update: Not Found error " + e.getMessage() );
             ok = false;
-            break;
           }
+        } catch ( IOException e ) {
+          TDLog.v( "XBLE fw update: IO error " + e.getMessage() );
+          ok = false;
         }
-        fis.close();
-      } catch ( EOFException e ) { // OK
-        TDLog.v("XBLE fw update: EOF " + e.getMessage());
-      } catch ( FileNotFoundException e ) {
-        TDLog.v( "XBLE fw update: Not Found error " + e.getMessage() );
-        return 0;
+        closeDevice( false );     //close ble here
+        msg = "XBLE Firmware update: result is " + (ok? "OK" : "FAIL") + " count " + cnt;
+        TDLog.v( msg );
+        int ret = ( ok ? cnt : -cnt );
+        TDLog.v( "Dialog Firmware upload result: written " + ret + " bytes of " + len );
+
+        String msg2 = ( ret > 0 )? String.format( res.getString(R.string.firmware_file_uploaded), filename, ret, len )
+                                 : res.getString(R.string.firmware_file_upload_fail);
+        if ( progress != null ) {
+          handler.post( new Runnable() {
+            public void run() {
+              progress.setDone( msg2  );
+            }
+          } );
+        } else { // run on UI thread
+          handler.post( new Runnable() { 
+            public void run () { TDToast.makeLong( msg2 ); }
+          } );
+        }
       }
-    } catch ( IOException e ) {
-      TDLog.v( "XBLE fw update: IO error " + e.getMessage() );
-      ok = false;
-    }
-    closeDevice( false );     //close ble here
-    TDLog.v( "XBLE fw update: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
+    } ).start();
     if ( ! is_log_file ) TDLog.setLogStream( TDLog.LOG_SYSLOG ); // reset log stream if necessary
-    return ( ok ? cnt : -cnt );
   }
 
   /** read a 256-byte firmware block

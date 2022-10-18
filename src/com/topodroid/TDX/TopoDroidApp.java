@@ -25,6 +25,7 @@ import com.topodroid.utils.TDUtil;
 // import com.topodroid.utils.TDStatus;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyDialog;
+import com.topodroid.ui.TDProgress;
 // import com.topodroid.prefs.TDPrefActivity;
 import com.topodroid.prefs.TDPrefHelper;
 import com.topodroid.prefs.TDSetting;
@@ -2598,37 +2599,49 @@ public class TopoDroidApp extends Application
     return -1;
   }
 
+  // /** read a firmware reading it from a file - only X310
+  //  * @param name   filename including ".bin" extension
+  //  */
+  // public void uploadFirmware( String name )
+  // {
+  //   TDLog.v("APP FW upload " + name );
+  //   if ( mComm == null || TDInstance.getDeviceA() == null ) return -1;
+  //   if ( ! (mComm instanceof DistoX310Comm) && ! (mComm instanceof DistoXBLEComm)) return -1;     //SIWEI TIAN
+  //   File file = TDPath.getBinFile( name ); // PRIVATE FILE
+  //   // TDLog.v( "Firmware upload address " + TDInstance.deviceAddress() + " file " + file.getPath() );
+  //   // TDLog.v( "Firmware upload file " + file.getPath() );
+  //   TDLog.v("APP FW upload file " + file.getPath() );
+  //   // return ((DistoX310Comm)mComm).uploadFirmware( TDInstance.deviceAddress(), pathname );
+  //   //SIWEI TIAN
+  //   if ( mComm instanceof DistoX310Comm ) {
+  //     ((DistoX310Comm)mComm).uploadFirmware( TDInstance.deviceAddress(), file );
+  //   } else if ( mComm instanceof DistoXBLEComm ) {
+  //     ((DistoXBLEComm)mComm).uploadFirmware( TDInstance.deviceAddress(), file );
+  //   } else {
+  //     TDLog.e("DistoX device with no firmware upload");
+  //   }
+  // }
+
   /** read a firmware reading it from a file - only X310
-   * @param name   filename including ".bin" extension
-   * @return ... (-1 on error)
+   * @param name     filename including ".bin" extension
+   * @param progress progress dialog
    */
-  public int uploadFirmware( String name )
+  public void uploadFirmware( String name, TDProgress progress )
   {
     TDLog.v("APP FW upload " + name );
-    // FIXME ASYNC_FIRMWARE_TASK
-    // if ( mComm == null || TDInstance.getDeviceA() == null ) return;
-    // if ( ! (mComm instanceof DistoX310Comm) ) return;
-    // String pathname = TDPath.getBinFilename( name );
-    // TDLog.v( "Firmware upload address " + TDInstance.deviceAddress() );
-    // TDLog.v( "Firmware upload file " + pathname );
-    // (new FirmwareTask( (DistoX310Comm)mComm, FirmwareTask.FIRMWARE_WRITE, name )).execute( ); 
-
-    if ( mComm == null || TDInstance.getDeviceA() == null ) return -1;
-    if ( ! (mComm instanceof DistoX310Comm) && ! (mComm instanceof DistoXBLEComm)) return -1;     //SIWEI TIAN
+    if ( mComm == null || TDInstance.getDeviceA() == null ) {
+      TDLog.Error("Firmware upload: null device");
+      return;
+    }
     File file = TDPath.getBinFile( name ); // PRIVATE FILE
-    // TDLog.v( "Firmware upload address " + TDInstance.deviceAddress() + " file " + file.getPath() );
-    // TDLog.v( "Firmware upload file " + file.getPath() );
     TDLog.v("APP FW upload file " + file.getPath() );
-    // return ((DistoX310Comm)mComm).uploadFirmware( TDInstance.deviceAddress(), pathname );
-    //SIWEI TIAN
     if ( mComm instanceof DistoX310Comm ) {
-      return ((DistoX310Comm)mComm).uploadFirmware( TDInstance.deviceAddress(), file );
+      ((DistoX310Comm)mComm).uploadFirmware( TDInstance.deviceAddress(), file, progress );
     } else if ( mComm instanceof DistoXBLEComm ) {
-      return ((DistoXBLEComm)mComm).uploadFirmware( TDInstance.deviceAddress(), file );
+      ((DistoXBLEComm)mComm).uploadFirmware( TDInstance.deviceAddress(), file, progress );
     } else {
       TDLog.e("DistoX device with no firmware upload");
     }
-    return -1;
   }
 
   // ----------------------------------------------------------------------

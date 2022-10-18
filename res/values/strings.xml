@@ -824,6 +824,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="button_landscape" >Landscape</string --> 
     <!-- UNUSED string name="button_portrait"  >Portrait</string -->
     <string name="button_splays">Splays</string>
+    <string name="button_wait">Wait</string>
 
 
     <string name="button_write"     >Upload</string>
@@ -1856,6 +1857,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
    <string name="firmware_file_dump_fail">Failed firmware dump</string>
    <string name="firmware_file_upload_fail">Failed firmware upload</string>
    <string name="firmware_not_supported">Device does not support firmware functions</string>
+   <string name="firmware_uploaded">%1$s firmware: uploaded %2$d</string>
 
     <string name="project">Project %1$s</string>
     <string name="no_editor">Editor not found</string>

@@ -18,9 +18,25 @@ import android.content.Context;
 import android.content.res.Resources;
 
 // import android.widget.TextView;
+import android.widget.Button;
 
 public class TopoDroidAlertDialog 
 {
+  private static AlertDialog mAlert = null;
+
+  public static void setOkButton( String text )
+  {
+    if ( mAlert == null ) return;
+    Button btn = mAlert.getButton( DialogInterface.BUTTON_NEGATIVE );
+    btn.setText( text );
+  }
+
+  public static void setMessage( String text )
+  {
+    if ( mAlert == null ) return;
+    mAlert.setMessage( text );
+  }
+
   /** make alert dialog with OK / CANCEL buttons
    * @param context   context
    * @param res       resources
@@ -112,6 +128,7 @@ public class TopoDroidAlertDialog
       }
 
       alert.show();
+      mAlert = alert;
   }
 
   /** make alert dialog with OK / CANCEL buttons
@@ -157,6 +174,7 @@ public class TopoDroidAlertDialog
         alert.getWindow().setBackgroundDrawableResource( R.color.alert_background );
       }
       alert.show();
+      mAlert = alert;
   }
 
 }

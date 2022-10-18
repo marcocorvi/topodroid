@@ -810,6 +810,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="button_landscape" >Panorama  </string -->
     <!-- UNUSED string name="button_portrait"  >Ritratto  </string -->
     <string name="button_splays">Splay</string>
+    <string name="button_wait">Attendi</string>
 
 
     <string name="button_write"     >Installa</string>
@@ -1824,6 +1825,7 @@ Fai riferimento alle pagine web per i dettagli.\n
    <string name="firmware_file_dump_fail">Errore nello scarico del firmware</string>
    <string name="firmware_file_upload_fail">Errore caricamento firmware</string>
    <string name="firmware_not_supported">Dispositivo senza funzioni firmware</string>
+   <!-- TODO string name="firmware_uploaded">%1$s firmware: uploaded %2$d</string -->
 
     <string name="project">Progetto %1$s</string>
     <string name="no_editor">Editor non trovato</string>

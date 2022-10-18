@@ -810,6 +810,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="button_landscape" >Paisaje </string -->
     <!-- UNUSED string name="button_portrait"  >Retrato  </string -->
     <string name="button_splays">Tomas</string>
+    <!-- TODO string name="button_wait">Wait</string -->
 
 
     <string name="button_write"     >Enviar calibración a distoX</string>
@@ -1825,6 +1826,7 @@ debe ajustarlos a sus necesidades./n/n
    <string name="firmware_file_dump_fail">Error al descargar el firmware</string>
    <string name="firmware_file_upload_fail">Error al cargar el firmware</string>
    <string name="firmware_not_supported">El dispositivo no admite funciones de firmware</string>
+   <!-- TODO string name="firmware_uploaded">%1$s firmware: uploaded %2$d</string -->
 
     <string name="project">Proyecto %1$s</string>
     <string name="no_editor">Editor no encontrado</string>

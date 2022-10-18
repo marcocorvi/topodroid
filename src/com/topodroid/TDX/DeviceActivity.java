@@ -16,6 +16,8 @@ import com.topodroid.dev.distox_ble.DistoXBLEInfoReadTask;
 import com.topodroid.dev.distox_ble.DistoXBLEMemoryDialog;
 // import com.topodroid.dev.distox_ble.XBLEFirmwareDialog;
 
+import com.topodroid.ui.TDProgress;
+
 import com.topodroid.utils.TDLog;
 // import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDTag;
@@ -1053,12 +1055,12 @@ public class DeviceActivity extends Activity
         //   TDToast.makeLong( "Connection mode must be \"on-demand\"" );
         // } else {
           mApp.resetComm();
-          (new FirmwareDialog( this, getResources(), mApp )).show();
+          (new FirmwareDialog( this, this, getResources(), mApp )).show();
         // }
       } else if ( TDInstance.deviceType() == Device.DISTO_XBLE ) { // SIWEI TIAN
         mApp.resetComm();
         // (new XBLEFirmwareDialog( this, getResources(), mApp )).show();
-        (new FirmwareDialog( this, getResources(), mApp )).show();
+        (new FirmwareDialog( this, this, getResources(), mApp )).show();
       } else {
         TDToast.makeLong( R.string.firmware_not_supported );
       }
@@ -1226,6 +1228,19 @@ public class DeviceActivity extends Activity
   {
     super.onConfigurationChanged( new_cfg );
     TDLocale.resetTheLocale();
+  }
+
+  /** open a progress dialog to ask whether to upload the firmware
+   * @param filename   filename
+   * @param msg        dialog message
+   */
+  public void askFirmwareUpload( String filename, String msg )
+  {
+    File file = TDPath.getBinFile( filename );
+    long len = file.length();
+    TDProgress progress = new TDProgress( this, mApp, filename, len, msg );
+    // progress.setText( msg );
+    progress.show();
   }
 
 }

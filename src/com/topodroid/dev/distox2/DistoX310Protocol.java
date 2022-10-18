@@ -14,11 +14,15 @@
 package com.topodroid.dev.distox2;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.ui.TDProgress;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.distox.DistoXProtocol;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.packetX.MemoryOctet;
 // import com.topodroid.TDX.TDPath;
+import com.topodroid.TDX.TDInstance;
+import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.R;
 
 // import java.lang.ref.WeakReference;
 
@@ -37,8 +41,10 @@ import java.util.List;
 // import java.net.Socket;
 
 // import android.os.CountDownTimer;
+import android.os.Handler;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 // import java.nio.channels.ClosedByInterruptException;
 // import java.nio.ByteBuffer;
@@ -285,80 +291,119 @@ public class DistoX310Protocol extends DistoXProtocol
   // }
 
   // DRY_RUN
-  // public int uploadFirmwareDryRun( String filepath )
-  public int uploadFirmwareDryRun( File fp )
+  public void uploadFirmwareDryRun( File fp, TDProgress progress )
   {
     int len = (int)( fp.length() );
     TDLog.v( "X310-proto fw upload: file " + fp.getPath() + " dry run - length " + len );
-    return len;
   }
 
   // @Override
-  // public int uploadFirmware( String filepath )
-  public int uploadFirmware( File fp )
+  public void uploadFirmware( File fp, TDProgress progress )
   {
     // TDLog.f( "Firmware upload: protocol starts. file " + fp.getPath() );
     TDLog.v( "X310-proto fw upload: starts. file " + fp.getPath() );
-    byte[] buf = new byte[259];
-    buf[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte)0x3b;
-    buf[1] = (byte)0;
-    buf[2] = (byte)0;
+    boolean is_log_file = TDLog.isStreamFile();
+    if ( ! is_log_file ) TDLog.setLogStream( TDLog.LOG_FILE ); // set log to file if necessary
 
-    boolean ok = true;
-    int cnt = 0;
-    try {
-      // File fp = new File( filepath );
-      FileInputStream fis = new FileInputStream( fp );
-      DataInputStream dis = new DataInputStream( fis );
-      // int end_addr = (fp.size() + 255)/256;
+    long len        = fp.length();
+    String filename = fp.getName();
+    Resources res   = TDInstance.getResources();
+    Handler handler = new Handler();
 
-      try {
-        for ( int addr = 0; /* addr < end_addr */; ++ addr ) {
-          TDLog.f( "X310-proto fw upload: addr " + addr + " count " + cnt );
-          // memset(buf+3, 0, 256)
-          for (int k=0; k<256; ++k) buf[3+k] = (byte)0xff;
-          int nr = dis.read( buf, 3, 256 );
-          if ( nr <= 0 ) {
-            TDLog.f( "X310-proto fw upload: file read failure. Result " + nr );
-            break;
-          }
-          cnt += nr;
-          if ( addr >= 0x08 ) {
-            buf[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte)0x3b;
-            buf[1] = (byte)( addr & 0xff );
-            buf[2] = 0; // not necessary
-            mOut.write( buf, 0, 259 );
-            // if ( TDSetting.mPacketLog ) logPacket8( 1L, buf );
+    (new Thread() {
+      public void run() {
+        byte[] buf = new byte[259];
+        buf[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte)0x3b;
+        buf[1] = (byte)0;
+        buf[2] = (byte)0;
 
-            mIn.readFully( mBuffer, 0, 8 );
-            // if ( TDSetting.mPacketLog ) logPacket( 0L );
-            // TDLog.v( "X310 upload firmware: " + String.format(" %02x", mBuffer[0] ) );
+        String msg; // feedback message
+        boolean ok = true;
+        int cnt = 0;
+        try {
+          // File fp = new File( filepath );
+          FileInputStream fis = new FileInputStream( fp );
+          DataInputStream dis = new DataInputStream( fis );
+          // int end_addr = (fp.size() + 255)/256;
 
-            int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
-            if ( mBuffer[0] != MemoryOctet.BYTE_PACKET_FW_WRITE || addr != reply_addr ) {
-              TDLog.f( "X310-proto fw upload: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
-              ok = false;
-              break;
-            } else {
-              TDLog.f( "X310-proto fw upload: reply address ok");
+          try {
+            for ( int addr = 0; /* addr < end_addr */; ++ addr ) {
+              TDLog.f( "X310-proto fw upload: addr " + addr + " count " + cnt );
+              // memset(buf+3, 0, 256)
+              for (int k=0; k<256; ++k) buf[3+k] = (byte)0xff;
+              int nr = dis.read( buf, 3, 256 );
+              if ( nr <= 0 ) {
+                TDLog.f( "X310-proto fw upload: file read failure. Result " + nr );
+                break;
+              }
+              cnt += nr;
+              if ( addr >= 0x08 ) {
+                buf[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte)0x3b;
+                buf[1] = (byte)( addr & 0xff );
+                buf[2] = 0; // not necessary
+                mOut.write( buf, 0, 259 );
+                // if ( TDSetting.mPacketLog ) logPacket8( 1L, buf );
+
+                mIn.readFully( mBuffer, 0, 8 );
+                // if ( TDSetting.mPacketLog ) logPacket( 0L );
+                // TDLog.v( "X310 upload firmware: " + String.format(" %02x", mBuffer[0] ) );
+
+                int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
+                if ( mBuffer[0] != MemoryOctet.BYTE_PACKET_FW_WRITE || addr != reply_addr ) {
+                  msg = "X310-proto fw upload: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr;
+                  TDLog.f( msg );
+                  ok = false;
+                  break;
+                } else {
+                  String msg1 = String.format( mContext.getResources().getString( R.string.firmware_uploaded ), "XBLE", cnt );
+                  TDLog.f( msg1 );
+                  int cnt1 = cnt;
+                  if ( progress != null ) {
+                    handler.post( new Runnable() {
+                      public void run() {
+                        progress.setProgress( cnt1 );
+                        progress.setText( msg1 );
+                      }
+                    } );
+                  }
+                }
+              } else {
+                msg = "X310-proto fw upload: skip " + cnt;
+                TDLog.f( msg );
+              }
             }
-          } else {
-            TDLog.f( "X310-proto fw upload: skip address " + addr );
+            fis.close();
+          } catch ( EOFException e ) { // OK
+            TDLog.f( "X310-proto fw update: EOF " + e.getMessage() );
+          } catch ( IOException e ) { 
+            TDLog.f( "X310-proto fw update: IO error " + e.getMessage() );
+            ok = false;
           }
+        } catch ( FileNotFoundException e ) {
+          TDLog.f( "X310-proto fw update: Not Found error " + e.getMessage() );
+          ok = false;
         }
-        fis.close();
-      } catch ( EOFException e ) { // OK
-        TDLog.f( "X310-proto fw update: EOF " + e.getMessage() );
-      } catch ( IOException e ) { 
-        TDLog.f( "X310-proto fw update: IO error " + e.getMessage() );
-        ok = false;
+        msg = "X310-proto fw update: result is " + (ok? "OK" : "FAIL") + " count " + cnt;
+        TDLog.f( msg );
+        int ret = ( ok ? cnt : -cnt );
+        TDLog.v( "Dialog Firmware upload result: written " + ret + " bytes of " + len );
+
+        String msg2 = ( ret > 0 )? String.format( res.getString(R.string.firmware_file_uploaded), filename, ret, len )
+                                 : res.getString(R.string.firmware_file_upload_fail);
+        if ( progress != null ) {
+          handler.post( new Runnable() {
+            public void run() {
+              progress.setDone( msg2  );
+            }
+          } );
+        } else { // run on UI thread
+          handler.post( new Runnable() { 
+            public void run () { TDToast.makeLong( msg2 ); }
+          } );
+        }
       }
-    } catch ( FileNotFoundException e ) {
-      TDLog.f( "X310-proto fw update: Not Found error " + e.getMessage() );
-      return 0;
-    }
-    TDLog.f( "X310-proto fw update: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
-    return ( ok ? cnt : -cnt );
+    } ).start();
+    if ( ! is_log_file ) TDLog.setLogStream( TDLog.LOG_SYSLOG ); // reset log stream if necessary
   }
 
   // @Override

@@ -13,6 +13,7 @@ package com.topodroid.dev.distox2;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.ui.TDProgress;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TopoDroidApp;
@@ -246,38 +247,32 @@ public class DistoX310Comm extends DistoXComm
 
   final static private boolean DRY_RUN = false;
 
-  // public int uploadFirmware( String address, String filepath )
-  public int uploadFirmware( String address, File file )
+  public void uploadFirmware( String address, File file, TDProgress progress )
   {
     TDLog.v( "X310 upload firmware " + file.getPath() );
-    int ret = 0;
-    if ( connectSocketAny( address ) ) {
+    if ( connectSocketAny( address ) ) { // FIXME this may block waiting for the socket
       if ( mProtocol instanceof DistoX310Protocol ) {
         // TODO check that the signature of the current firmware hw-agree with that of the file firmware
         // byte[] signature = ((DistoX310Protocol)mProtocol).readFirmwareBlock( 8 ); 
         // if ( FirmwareUtil.checkSignature( signature, filepath ) ) {
-        //   ret = ((DistoX310Protocol)mProtocol).uploadFirmware( filepath );
+        //   ((DistoX310Protocol)mProtocol).uploadFirmware( filepath );
         // } else { 
-        //   ret = -1;
+        //   return;
         // }
 
         // FIXME DRY_RUN
         if ( DRY_RUN ) {
-          ret = ((DistoX310Protocol)mProtocol).uploadFirmwareDryRun( file );
-          TDLog.v( "X310 Firmware upload dry run: " + ret );
+          TDLog.v( "X310 Firmware upload dry run" );
+          ((DistoX310Protocol)mProtocol).uploadFirmwareDryRun( file, progress );
         } else {
-          // ret = ((DistoX310Protocol)mProtocol).uploadFirmware( filepath );
-          ret = ((DistoX310Protocol)mProtocol).uploadFirmware( file );
-          TDLog.v( "X310 Firmware upload: " + ret );
+          TDLog.v( "X310 Firmware upload" );
+          ((DistoX310Protocol)mProtocol).uploadFirmware( file, progress );
         }
-      } else {
-        ret = -1;
       }
     } else {
       TDLog.e( "X310 Firmware upload socket failure");
     }
     destroySocket( );
-    return ret;
   }
 
 }
