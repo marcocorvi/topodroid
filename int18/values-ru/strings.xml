@@ -1958,7 +1958,7 @@
     <string name="surface_north">Север</string>
     <!-- NO string name="dem_file">DEM %1$s</string -->
     <string name="dem_load">загрузить</string>
-    <!-- TODO string name="dem_loading">Loading surface ... please wait</string -->
+    <string name="dem_loading">Загрузка поверхности... ожидайте</string>
     <string name="dem_failed">Ошибка загрузки DEM</string>
     <string name="dem_ok">Прочитать данные DEM</string>
     <string name="dem">DEM</string>
@@ -1966,7 +1966,7 @@
     <string name="texture_load">загрузить текстуру</string>
     <string name="texture_failed">Ошибка загрузки текстуры</string>
     <string name="texture_ok">Прочитать файл текстуры</string>
-    <!-- TODO string name="texture">DTM</string -->
+    <string name="texture">DTM</string>
     <string name="sketch_load">Загрузка</string>
     <string name="sketch_failed">Ошибка загрузки абрисов</string>
     <string name="sketch_ok">Прочитаны данные абрисов</string>

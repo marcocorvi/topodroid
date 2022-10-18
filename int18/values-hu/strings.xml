@@ -1976,7 +1976,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="surface_north">Észak</string>
     <!-- NO string name="dem_file">%1$s</string -->
     <string name="dem_load">DEM betöltés</string>
-    <!-- TODO string name="dem_loading">Loading surface ... please wait</string -->
+    <string name="dem_loading">Felszín betöltése ... kérlek várjál</string>
     <string name="dem_failed">DEM betöltés hiba</string>
     <string name="dem_ok">DEM adat olvasás</string>
     <string name="dem">DEM</string>
@@ -1984,7 +1984,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="texture_load">Textúra betöltés</string>
     <string name="texture_failed">Textúra betöltés hiba</string>
     <string name="texture_ok">Textúra fájl olvasás</string>
-    <!-- TODO string name="texture">DTM</string -->
+    <string name="texture">DTM</string>
     <string name="sketch_load">Beolvasás</string>
     <string name="sketch_failed">Vázlat beolvasás hiba</string>
     <string name="sketch_ok">Vázlat adat olvasás</string>
