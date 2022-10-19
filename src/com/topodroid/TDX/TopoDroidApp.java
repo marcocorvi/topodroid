@@ -667,12 +667,12 @@ public class TopoDroidApp extends Application
   // FIXME_COMM
   // @param address   device address
   // @param data_type data type ...
-  public boolean connectDevice( ListerHandler lister, String address, int data_type ) 
+  public boolean connectDevice( ListerHandler lister, String address, int data_type, int timeout ) 
   {
     // TDLog.v( "App: connect address " + address + " comm is " + ((mComm==null)? "null" : "non-null") );
-    // return mComm != null && mComm.connectDevice( address, mListerSet, data_type ); // FIXME_LISTER
+    // return mComm != null && mComm.connectDevice( address, mListerSet, data_type, timeout ); // FIXME_LISTER
     if ( lister == null ) lister = mListerSet;
-    return mComm != null && mComm.connectDevice( address, lister, data_type ); // FIXME_LISTER
+    return mComm != null && mComm.connectDevice( address, lister, data_type, timeout ); // FIXME_LISTER
   }
 
   public boolean disconnectComm()
@@ -1725,7 +1725,8 @@ public class TopoDroidApp extends Application
       TDLog.e( "Comm or Device null ");
     } else {
       // TDLog.v( "APP: batch download, device " + TDInstance.deviceAddress() + " " + TDInstance.getDeviceA().getAddress() + " comm " + mComm.toString() );
-      ret = mComm.downloadData( TDInstance.getDeviceA().getAddress(), lister, data_type );
+      int timeout = 10; // 10 seconds
+      ret = mComm.downloadData( TDInstance.getDeviceA().getAddress(), lister, data_type, timeout );
       // FIXME BATCH
       // if ( ret > 0 && TDSetting.mSurveyStations > 0 ) {
       //   // FIXME TODO select only shots after the last leg shots
@@ -2415,7 +2416,7 @@ public class TopoDroidApp extends Application
       DistoXBLEComm comm = (DistoXBLEComm)mComm;
       /*boolean bisconnect = comm.isConnected();
       if ( ! comm.isConnected() ) {
-        connectDevice( lister?, TDInstance.deviceAddress(), DataType.DATA_ALL );
+        connectDevice( lister?, TDInstance.deviceAddress(), DataType.DATA_ALL, timeout );
         // TDLog.v("BRIC info: wait 4 secs");
         TDUtil.yieldDown( 1000 ); // FIXME was 4000
       }
@@ -2469,7 +2470,8 @@ public class TopoDroidApp extends Application
       BricComm comm = (BricComm)mComm;
       boolean disconnect = comm.isConnected();
       if ( ! disconnect ) {
-        connectDevice( null, TDInstance.deviceAddress(), DataType.DATA_ALL ); // null lister
+        int timeout = 10; // unused
+        connectDevice( null, TDInstance.deviceAddress(), DataType.DATA_ALL, timeout ); // null lister
         // TDLog.v("BRIC info: wait 4 secs");
         TDUtil.yieldDown(4000); // FIXME was 4000
       }
@@ -2497,7 +2499,8 @@ public class TopoDroidApp extends Application
       BricComm comm = (BricComm)mComm;
       boolean disconnect = comm.isConnected();
       if ( ! disconnect ) {
-        connectDevice( null, TDInstance.deviceAddress(), DataType.DATA_ALL );
+        int timeout = 10; // unused
+        connectDevice( null, TDInstance.deviceAddress(), DataType.DATA_ALL, timeout );
         // TDLog.v("BRIC memory: wait 4 secs");
         TDUtil.yieldDown(4000);
       }

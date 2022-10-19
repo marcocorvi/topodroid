@@ -219,10 +219,11 @@ public class DistoXBLEComm extends TopoDroidComm
    * @param address   device address (unused)
    * @param lister    data lister
    * @param data_type expected type of data (unused)
+   * @param timeout   ...
    * @return true if success
    */
   @Override
-  public boolean connectDevice(String address, ListerHandler lister, int data_type ) // FIXME XBLE_DATA_TYPE ?
+  public boolean connectDevice(String address, ListerHandler lister, int data_type, int timeout ) // FIXME XBLE_DATA_TYPE ?
   {
     // TDLog.v( "XBLE comm connect Device");
     mNrReadPackets = 0;
@@ -897,10 +898,11 @@ public class DistoXBLEComm extends TopoDroidComm
    * @param address
    * @param lister
    * @param data_type  expected type of data (not really used)
+   * @param timeout    (unused)
    * @return number of downloaded data (neg on error)
    *   -1 failed connect
    */
-  public int downloadData( String address, ListerHandler lister, int data_type ) // FIXME_LISTER
+  public int downloadData( String address, ListerHandler lister, int data_type, int timeout ) // FIXME_LISTER
   {
     // TDLog.v("XBLE comm batch download " + address );
     // mConnectionMode = 0;
@@ -956,7 +958,8 @@ public class DistoXBLEComm extends TopoDroidComm
   {
     // TDLog.v("XBLE comm try connect " + address );
     if ( ! mBTConnected ) {
-      if ( ! connectDevice( address, lister, data_type ) ) {
+      int timeout = 10;
+      if ( ! connectDevice( address, lister, data_type, timeout ) ) {
         return false;
       }
     }

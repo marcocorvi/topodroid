@@ -624,7 +624,7 @@ public class BricComm extends TopoDroidComm
   }
 
   @Override
-  public boolean connectDevice( String address, ListerHandler lister, int data_type )
+  public boolean connectDevice( String address, ListerHandler lister, int data_type, int timeout )
   {
     // TDLog.Log( TDLog.LOG_COMM, "BRIC comm ***** connect Device");
     mNrReadPackets = 0;

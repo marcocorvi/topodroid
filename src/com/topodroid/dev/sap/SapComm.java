@@ -215,9 +215,11 @@ public class SapComm extends TopoDroidComm
    * @param address   SAP address
    * @param lister    data lister
    * @param data_type expected type of data
+   * @param timeout   ...
+   * @return ...
    */
   @Override
-  public boolean connectDevice( String address, ListerHandler lister, int data_type )
+  public boolean connectDevice( String address, ListerHandler lister, int data_type, int timeout )
   {
     // TDLog.v( "SAP comm: connect device (continuous data download)");
     mLister = lister;
@@ -262,9 +264,10 @@ public class SapComm extends TopoDroidComm
    * @param address    device address
    * @param lister     data lister
    * @param data_type  packet datatype
+   * @param timeout    (unused)
    * @return always 0
    */
-  public int downloadData( String address, ListerHandler lister, int data_type )
+  public int downloadData( String address, ListerHandler lister, int data_type, int timeout )
   {
     // TDLog.v( "SAP comm: batch data download");
     mConnectionMode = 0;

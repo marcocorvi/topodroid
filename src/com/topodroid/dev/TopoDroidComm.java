@@ -426,10 +426,12 @@ public class TopoDroidComm
    * @param address   device address
    * @param lister    data lister
    * @param data_type ???
+   * @param timeout   timeout (unused)
    * @return always false (ie, failure) by default
    */
-  public boolean connectDevice( String address, ListerHandler lister, int data_type )
+  public boolean connectDevice( String address, ListerHandler lister, int data_type, int timeout )
   {
+    TDLog.v("TD comm: generic comnnect device always false");
     return false;
   }
 
@@ -445,9 +447,10 @@ public class TopoDroidComm
    * @param address   device address
    * @param lister    data lister
    * @param data_type packet datatype, either shot or calib (or all) (not used)
+   * @param timeout   timeout (unused)
    * @return always -1: number of packet received - must be overridden
    */
-  public int downloadData( String address, ListerHandler lister, int data_type )
+  public int downloadData( String address, ListerHandler lister, int data_type, int timeout )
   {
     TDLog.e("TD comm: generic download data always fails");
     return -1;
