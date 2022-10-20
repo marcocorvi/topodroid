@@ -155,6 +155,7 @@
     <string name="calib_ave_std">精确度: %1$.4f ± %2$.4f 度</string>
     <string name="calib_precision">精度</string>
     <string name="calib_iter">迭代次数: %1$d</string>
+    <!-- TODO string name="calib_dip">Magn. dip: %1$.1f</string -->
     <string name="calib_reset">重置DistoX校准 ?</string>
     <!-- TODO string name="calib_min_error">Minimum error</string -->
     

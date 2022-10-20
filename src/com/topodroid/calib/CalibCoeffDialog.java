@@ -62,13 +62,14 @@ public class CalibCoeffDialog extends MyDialog
   private final String delta02;
   private final String error0;
   private final String iter0;
+  private final String dip0;
   private final byte[] mCoeff;
   private final float mDelta;
   // private boolean mSaturated;
 
   public CalibCoeffDialog( Context context, GMActivity parent,
                     TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nl, float[] errors,
-                    float delta_bh, float delta, float delta2, float error, long iter, byte[] coeff /*, boolean saturated */ )
+                    float delta_bh, float delta, float delta2, float error, long iter, float dip, byte[] coeff /*, boolean saturated */ )
   {
     super( context, null, R.string.CalibCoeffDialog ); // null app
     mParent = new WeakReference<GMActivity>( parent );
@@ -95,6 +96,7 @@ public class CalibCoeffDialog extends MyDialog
     delta02 = String.format( mContext.getResources().getString( R.string.calib_stddev ), delta2 );
     error0  = String.format( mContext.getResources().getString( R.string.calib_max_error ), error );
     iter0   = String.format( mContext.getResources().getString( R.string.calib_iter ), iter );
+    dip0    = String.format( mContext.getResources().getString( R.string.calib_dip ), dip );
 
     if ( errors != null ) {
       mBitmap = makeHistogramBitmap( errors, WIDTH, HEIGHT, 20, 5, TDColor.BLUE );
@@ -204,6 +206,7 @@ public class CalibCoeffDialog extends MyDialog
     TextView textDelta2   = (TextView) findViewById(R.id.coeff_delta2);
     TextView textMaxError = (TextView) findViewById(R.id.coeff_max_error);
     TextView textIter     = (TextView) findViewById(R.id.coeff_iter);
+    TextView textDip      = (TextView) findViewById(R.id.coeff_dip);
     mButtonWrite  = (Button) findViewById( R.id.button_coeff_write );
     Button button_back  = (Button) findViewById( R.id.button_coeff_back );
     button_back.setOnClickListener( this );
@@ -223,6 +226,7 @@ public class CalibCoeffDialog extends MyDialog
       textDelta2.setText( delta02 );
       textMaxError.setText( error0 );
       textIter.setText( iter0 );
+      textDip.setText( dip0 );
       mButtonWrite.setOnClickListener( this );
       // if ( mSaturated ) {
       //   mButtonWrite.setEnabled( false );
@@ -235,6 +239,7 @@ public class CalibCoeffDialog extends MyDialog
       textDelta2.setVisibility( View.GONE );
       textMaxError.setVisibility( View.GONE );
       textIter.setVisibility( View.GONE );
+      textDip.setVisibility( View.GONE );
       mButtonWrite.setVisibility( View.GONE );
     }
   }

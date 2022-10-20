@@ -154,6 +154,7 @@
     <string name="calib_ave_std">Точность: %1$.4f +- %2$.4f градуса</string>
     <string name="calib_precision">Точность</string>
     <string name="calib_iter">Итераций: %1$d</string>
+    <!-- TODO string name="calib_dip">Magn. dip: %1$.1f</string -->
     <string name="calib_reset">Сбросить калибровку DistoX ?</string>
     <string name="calib_min_error">Минимальная ошибка</string>
 

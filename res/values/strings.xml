@@ -162,6 +162,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="calib_ave_std">Accuracy: %1$.2f ± %2$.2f &#xb0;</string>
     <string name="calib_precision">Precision</string>
     <string name="calib_iter">Iterations: %1$d</string>
+    <string name="calib_dip">Magn. dip: %1$.1f</string>
     <string name="calib_reset">Reset DistoX calibration ?</string>
     <string name="calib_min_error">Minimum error</string>
     

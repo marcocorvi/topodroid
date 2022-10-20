@@ -607,6 +607,7 @@ public class DistoXComm extends TopoDroidComm
    * @param addr       memory address to read
    * @note called by TopoDroidApp.readMemory
    */
+  @Override
   public byte[] readMemory( String address, int addr )
   {
     byte[] ret = null;
@@ -629,6 +630,7 @@ public class DistoXComm extends TopoDroidComm
    * @param timeout    data receiving timeout (UNUSED)
    * @return true if successful
    */
+  @Override
   public boolean connectDevice( String address, ListerHandler lister, int data_type, int timeout ) // FIXME_LISTER
   {
     if ( mCommThread != null ) {
@@ -666,6 +668,7 @@ public class DistoXComm extends TopoDroidComm
    * @param timeout    data receivin timeout
    * @return number of packets (-1 failure)
    */
+  @Override
   public int downloadData( String address, ListerHandler lister, int data_type, int timeout ) // FIXME_LISTER
   {
     if ( ! isCommThreadNull() ) {

@@ -147,7 +147,7 @@ public class CalibAlgoBH extends CalibAlgo
     TDMatrix sumG2 = new TDMatrix();
     TDMatrix sumM2 = new TDMatrix();
 
-    float sa = 0.0f;
+    float sa = .0f;
     float ca = 0.0f;
     float invNum = 0.0f;
     for (int i=0; i<nn; ++i ) {
@@ -202,7 +202,7 @@ public class CalibAlgoBH extends CalibAlgo
     float c = ca / da;
     // LogSC( "sin/cos", s, c ); // this is OK
 // FIXME NL
-    // float alpha = TDMath.atan2( sa, ca );
+    // float alpha = TDMath.atan2( s, c );
 
 
     do {
@@ -357,7 +357,8 @@ public class CalibAlgoBH extends CalibAlgo
     mDelta    = 0.0f;
     mDelta2   = 0.0f;
     mMaxError = 0.0f;
-    // TDLog.v( "compute errors...");
+    mDip      = 90 - TDMath.atan2d( s, c );
+    TDLog.v( "Dip " + mDip + " compute errors...");
     for ( int i=0; i<nn; ) {
       if ( group[i] <= 0 ) {
         ++i;

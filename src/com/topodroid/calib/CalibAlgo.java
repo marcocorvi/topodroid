@@ -51,6 +51,7 @@ public class CalibAlgo
   protected float mDelta2   = 0.0f; // std-dev data error [degrees]
   protected float mMaxError = 0.0f; // max error [degrees]
   protected float mDeltaBH  = 0.0f; // original delta BH algo
+  protected float mDip      = 0.0f; // magnetic dip angle [degrees]
 
   // ==============================================================
 
@@ -151,8 +152,10 @@ public class CalibAlgo
   //   TDLog.v( String.format(Locale.US, "NL %8.4f %8.4f %8.4f", nL.x, nL.y, nL.z ) );
   // }
 
-  // @param N         number of data
-  // @param nonLinear whether to use non-linear algo
+  /** cstr
+   * @param N         number of data
+   * @param nonLinear whether to use non-linear algo
+   */
   public CalibAlgo( int N, boolean nonLinear )
   {
     num = 0;
@@ -162,12 +165,22 @@ public class CalibAlgo
 
   // void setAlgorithm( boolean nonLinear ) { mNonLinear = nonLinear; }
 
+  /** @return the BH delta value
+   */
   public float DeltaBH()      { return mDeltaBH; }
+
   public float Delta()        { return mDelta; }
   public float Delta2()       { return mDelta2; }
   // public float Error( int k ) { return err[k]; }
   public float[] Errors()     { return err; }
+
+  /** @return the maximum error
+   */
   public float MaxError( )    { return mMaxError; }
+
+  /** @return the dip angle [degrees]
+   */
+  public float Dip() { return mDip; }
 
   public TDMatrix GetAG() { return aG; }
   public TDMatrix GetAM() { return aM; }

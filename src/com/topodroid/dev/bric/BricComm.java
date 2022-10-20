@@ -623,6 +623,13 @@ public class BricComm extends TopoDroidComm
     // setupNotifications(); // FIXME_BRIC
   }
 
+  /** connect to a BRIC device 
+   * @param address   device address
+   * @param lister    data lister
+   * @param data_type ???
+   * @param timeout   timeout (unused)
+   * @return true if successful
+   */
   @Override
   public boolean connectDevice( String address, ListerHandler lister, int data_type, int timeout )
   {
@@ -678,6 +685,8 @@ public class BricComm extends TopoDroidComm
     mCallback.closeGatt();
   }
 
+  /** disconnect from the remote device
+   */
   @Override
   public boolean disconnectDevice()
   {

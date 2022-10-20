@@ -438,7 +438,11 @@ public class TopoDroidComm
   /** disconnect from the remote device
    * @return always true, ie disconnected, by default
    */
-  public boolean disconnectDevice() { return true; }
+  public boolean disconnectDevice() 
+  { 
+    TDLog.v("TD comm: generic discomnnect device always true");
+    return true;
+  }
 
   // -------------------------------------------------------------------------------------
   // ON-DEMAND DATA DOWNLOAD

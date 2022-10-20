@@ -267,6 +267,7 @@ public class SapComm extends TopoDroidComm
    * @param timeout    (unused)
    * @return always 0
    */
+  @Override
   public int downloadData( String address, ListerHandler lister, int data_type, int timeout )
   {
     // TDLog.v( "SAP comm: batch data download");

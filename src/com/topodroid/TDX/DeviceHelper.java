@@ -40,8 +40,8 @@ import java.util.List;
 public class DeviceHelper extends DataSetObservable
 {
 
-  // static final private String DEVICE_DB_VERSION = "27";
-  // static final private int DEVICE_DATABASE_VERSION = 27;
+  // static final private String DEVICE_DB_VERSION = "28";
+  // static final private int DEVICE_DATABASE_VERSION = 28;
   // static final private int DEVICE_DATABASE_VERSION_MIN = 21;
 
   static final String ERROR_NULL_DB = "null device DB ";
@@ -519,7 +519,7 @@ public class DeviceHelper extends DataSetObservable
     Cursor cursor = null;
     try {
       cursor = myDB.query( CALIB_TABLE,
-                           new String[] { "error", "max_error", "iterations", "stddev", "delta_bh" }, // columns
+                           new String[] { "error", "max_error", "iterations", "stddev", "delta_bh", "dip" }, // columns
                            "id=?",
                            new String[] { Long.toString(cid) },
                            null, null, null );
@@ -536,6 +536,8 @@ public class DeviceHelper extends DataSetObservable
           if ( str != null ) res.stddev = Float.parseFloat( str );
           str = cursor.getString(4);
           if ( str != null ) res.delta_bh = Float.parseFloat( str );
+          str = cursor.getString(5);
+          if ( str != null ) res.dip = Float.parseFloat( str );
         } catch ( NumberFormatException e ) {
           TDLog.Error( "selectCalibError parse Float error: calib ID " + cid );
         }
@@ -1308,9 +1310,10 @@ public class DeviceHelper extends DataSetObservable
     * @param error      calibration data mean error
     * @param stddev     calibration data error std. deviation
     * @param max_error  calibration data maximum error
+    * @param dip        magnetic dip [degrees]
     * @param iterations calibration iterations
     */
-   void updateCalibError( long id, double delta_bh, double error, double stddev, double max_error, int iterations )
+   void updateCalibError( long id, double delta_bh, double error, double stddev, double max_error, double dip, int iterations )
    {
      ContentValues cv = new ContentValues();
      cv.put( "delta_bh", delta_bh );
@@ -1318,6 +1321,7 @@ public class DeviceHelper extends DataSetObservable
      cv.put( "stddev", stddev );
      cv.put( "max_error", max_error );
      cv.put( "iterations", iterations );
+     cv.put( "dip", dip );
      doUpdate( "calibs", cv, WHERE_ID, new String[] { Long.toString(id) }, "error" );
 
      // // TDLog.Log( TDLog.LOG_DB, "updateCalibCoeff id " + id + " coeff. " + coeff );
@@ -1411,7 +1415,8 @@ public class DeviceHelper extends DataSetObservable
              +   " coeff BLOB, "
              +   " algo INTEGER default 0, "
              +   " stddev REAL default 0, "
-             +   " delta_bh REAL default 0 "
+             +   " delta_bh REAL default 0, "
+             +   " dip REAL default 0 "
              +   ")"
            );
 
@@ -1457,7 +1462,7 @@ public class DeviceHelper extends DataSetObservable
       public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
       {  
          // FIXME this is called at each start when the database file exists
-         // TDLog.Log( TDLog.LOG_DB, "onUpgrade old " + oldVersion + " new " + newVersion );
+         TDLog.v( "UPGRADE DB old " + oldVersion + " new " + newVersion );
          switch ( oldVersion ) {
            case 14: 
              db.execSQL( "ALTER TABLE gms ADD COLUMN status INTEGER default 0" );
@@ -1477,8 +1482,13 @@ public class DeviceHelper extends DataSetObservable
              db.execSQL( "ALTER TABLE calibs ADD COLUMN stddev REAL default 0" );
            case 25:
            case 26:
+             TDLog.v("UPGRADE DB 26");
              db.execSQL( "ALTER TABLE calibs ADD COLUMN delta_bh REAL default 0" );
            case 27:
+             TDLog.v("UPGRADE DB 27");
+             db.execSQL( "ALTER TABLE calibs ADD COLUMN dip REAL default 0" );
+           case 28:
+             TDLog.v("CURRENT DB 28");
              /* current version */
            default:
              break;

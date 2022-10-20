@@ -283,6 +283,7 @@ public class GMActivity extends Activity
              mCalibration.Delta(),
              mCalibration.Delta2(),
              mCalibration.MaxError(),
+             mCalibration.Dip(),
              iter );
 
       // DEBUG:
@@ -493,7 +494,7 @@ public class GMActivity extends Activity
 
           (new CalibCoeffDialog( this, this, bg, ag, bm, am, nL, errors,
                                  mCalibration.DeltaBH(), mCalibration.Delta(), mCalibration.Delta2(), mCalibration.MaxError(), 
-                                 result, coeff /* , saturated */ ) ).show();
+                                 result, mCalibration.Dip(), coeff /* , saturated */ ) ).show();
         } else if ( result == 0 ) {
           TDToast.makeBad( R.string.few_iter );
           return;
@@ -677,6 +678,7 @@ public class GMActivity extends Activity
   @Override
   public void setConnectionStatus( int status )
   {
+    TDLog.v("GM set connection status: " + ConnectionState.statusStr[ status ] ); 
     switch ( status ) {
       case ConnectionState.CONN_CONNECTED:
         TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_on );
@@ -939,7 +941,7 @@ public class GMActivity extends Activity
    */
   public void displayCoeff( TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nL )
   {
-    (new CalibCoeffDialog( this, null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
+    (new CalibCoeffDialog( this, null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0.0f, 0, 0.0f, null /*, false */ ) ).show();
   }
 
   /** enable or disable the buttons

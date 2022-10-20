@@ -18,6 +18,7 @@ public class CalibResult
   public float stddev; // error stddev [deg]
   public float max_error;      // [deg]
   public int iterations;  
+  public float dip; // dip [degrees]
 
   public CalibResult()
   {
@@ -26,6 +27,7 @@ public class CalibResult
     stddev     = 0.0f;
     max_error  = 0.0f;
     iterations = 0;
+    dip        = 0.0f;
   }
 }
 

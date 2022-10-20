@@ -38,7 +38,7 @@ public class TDVersion
   public static final int DATABASE_VERSION = 46;
   public static final int DATABASE_VERSION_MIN = 21; // was 14
 
-  public static final int DEVICE_DATABASE_VERSION = 27;
+  public static final int DEVICE_DATABASE_VERSION = 28;
   // public static final int DEVICE_DATABASE_VERSION_MIN = 21; // was 14
 
   public static final int PACKET_DATABASE_VERSION = 1;

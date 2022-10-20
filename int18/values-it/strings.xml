@@ -153,6 +153,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="calib_ave_std">Accuratezza: %1$.4f %2$.4f &#xb0;</string>
     <string name="calib_precision">Precisione</string>
     <string name="calib_iter">Iterazioni: %1$d</string>
+    <!-- TODO string name="calib_dip">Magn. dip: %1$.1f</string -->
     <string name="calib_reset">Resetta calibrazione sul DistoX?</string>
     <!-- TODO string name="calib_min_error">Minimum error</string -->
 

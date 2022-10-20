@@ -215,7 +215,7 @@ public class DistoXBLEComm extends TopoDroidComm
     // setupNotifications(); // FIXME_XBLE
   }
 
-  /** connect to the remote device
+  /** connect to the remote XBLE device
    * @param address   device address (unused)
    * @param lister    data lister
    * @param data_type expected type of data (unused)
@@ -259,6 +259,8 @@ public class DistoXBLEComm extends TopoDroidComm
     mCallback.closeGatt();
   }
 
+  /** disconnect from the remote device
+   */
   @Override
   public boolean disconnectDevice()
   {
@@ -704,6 +706,12 @@ public class DistoXBLEComm extends TopoDroidComm
     return true;
   }
 
+  public byte[] readMemory( String address, int addr )
+  {
+    TDLog.Error("XBLE readMemory( String address, int addr ) not implemented");
+    return null;
+  }
+
   /** 0x38: read 4 bytes from memory synchronously
    * @param addr memory address
    * @return array of read bytes, or null on failure
@@ -902,6 +910,7 @@ public class DistoXBLEComm extends TopoDroidComm
    * @return number of downloaded data (neg on error)
    *   -1 failed connect
    */
+  @Override
   public int downloadData( String address, ListerHandler lister, int data_type, int timeout ) // FIXME_LISTER
   {
     // TDLog.v("XBLE comm batch download " + address );
@@ -979,6 +988,7 @@ public class DistoXBLEComm extends TopoDroidComm
    * @param coeff     array of 52 calibration coeffs (filled by the read)
    * @return true if success
    */
+  @Override
   public boolean readCoeff( String address, byte[] coeff )
   {
     // TDLog.v("XBLE comm read coeff " + address );
