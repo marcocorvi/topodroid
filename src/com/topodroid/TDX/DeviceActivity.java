@@ -411,7 +411,7 @@ public class DeviceActivity extends Activity
     Set<BluetoothDevice> device_set = DeviceUtil.getBondedDevices(); // get paired devices
     if ( device_set == null || device_set.isEmpty() ) {
       // TDToast.make(R.string.no_paired_device );
-    } else {
+    } else { 
       setTitle( R.string.title_device );
       for ( BluetoothDevice device : device_set ) {
         String addr = device.getAddress();
@@ -751,6 +751,8 @@ public class DeviceActivity extends Activity
     super.onResume();
     // TDLog.Debug("device activity on resume" );
     registerReceiver( mPairReceiver, new IntentFilter( DeviceUtil.ACTION_BOND_STATE_CHANGED ) );
+    if ( mApp == null ) mApp = (TopoDroidApp) getApplication();
+    if ( mApp_mDData == null ) mApp_mDData = TopoDroidApp.mDData;
     mApp.resumeComm();
     mDeviceActivityVisible = true;
     // mCurrDevice  = TDInstance.getDeviceA();

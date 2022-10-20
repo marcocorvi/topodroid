@@ -601,13 +601,4 @@ public class SapComm extends TopoDroidComm
     mDisconnecting = false;
   }
 
-  /** notify the application of the connection status
-   * @param status   connection status
-   * @note to be used when the connection status changes
-   */
-  public void notifyStatus( int status )
-  {
-    mApp.notifyListerStatus( mApp.mListerSet, status );
-  }
-
 }

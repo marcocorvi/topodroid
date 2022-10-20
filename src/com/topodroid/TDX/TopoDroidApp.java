@@ -1719,7 +1719,7 @@ public class TopoDroidApp extends Application
   int downloadDataBatch( ListerHandler lister, int data_type ) // FIXME_LISTER
   {
     // TDLog.v( "APP: batch download");
-    TDInstance.secondLastShotId = lastShotId();
+    TDInstance.secondLastShotId = lastShotId(); // if data_type == CALIB this can be skipped
     int ret = 0;
     if ( mComm == null || TDInstance.getDeviceA() == null ) {
       TDLog.e( "Comm or Device null ");

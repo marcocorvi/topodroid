@@ -555,7 +555,9 @@ public class DistoXBLEComm extends TopoDroidComm
 
   /** forward status notification to the application
    * @param status   new status
+   * @note the notification is delivered to this class' lister
    */
+  @Override
   public void notifyStatus( int status )
   {
     // TDLog.v("XBLE notify status " + status + " skip " + mSkipNotify );
@@ -697,6 +699,7 @@ public class DistoXBLEComm extends TopoDroidComm
    * @return true if the command was scheduled
    * @note used by the protocol to send ack
    */
+  @Override
   public boolean sendCommand( int cmd )
   {
     if ( ! isConnected() ) return false;
@@ -706,6 +709,7 @@ public class DistoXBLEComm extends TopoDroidComm
     return true;
   }
 
+  @Override
   public byte[] readMemory( String address, int addr )
   {
     TDLog.Error("XBLE readMemory( String address, int addr ) not implemented");
@@ -873,6 +877,7 @@ public class DistoXBLEComm extends TopoDroidComm
     return -1;
   }
 
+  @Override
   public boolean toggleCalibMode( String address, int type )
   {
     // TDLog.v("XBLE toggle calib");
@@ -896,7 +901,7 @@ public class DistoXBLEComm extends TopoDroidComm
    * @return true if success
    * @note commands: 0x31 calin-ON 0x30 calib-OFF
    */
-  protected boolean setCalibMode( boolean turn_on )
+  private boolean setCalibMode( boolean turn_on )
   {
     // TDLog.v("XBLE set calib " + turn_on );
     return sendCommand( turn_on? DistoX.CALIB_ON : DistoX.CALIB_OFF );
@@ -1013,6 +1018,7 @@ public class DistoXBLEComm extends TopoDroidComm
    * @param coeff     array of 52 calibration coeffs
    * @return true if success
    */
+  @Override
   public boolean writeCoeff( String address, byte[] coeff )
   {
     // TDLog.v("XBLE comm write coeff " + address );

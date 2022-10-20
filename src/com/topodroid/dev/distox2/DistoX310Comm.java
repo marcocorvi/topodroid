@@ -38,6 +38,9 @@ public class DistoX310Comm extends DistoXComm
   private static boolean mCalibMode = false;   //!< whether the device is in calib-mode
   // private boolean mSkipNotify = false;  // TODO
 
+  /** cstr
+   * @param app   application
+   */
   public DistoX310Comm( TopoDroidApp app )
   {
     super( app );
@@ -116,7 +119,7 @@ public class DistoX310Comm extends DistoXComm
         destroySocket( ); // this cancel the comm thread
         TDUtil.slowDown( 1000 );
         // TDLog.v("X310 notify lister " + ( (lister != null)? lister.name() : "null") );
-        mApp.notifyListerStatus( lister, ConnectionState.CONN_DISCONNECTED );
+        notifyStatus( lister, ConnectionState.CONN_DISCONNECTED );
       }
     };
     laserThread.start();

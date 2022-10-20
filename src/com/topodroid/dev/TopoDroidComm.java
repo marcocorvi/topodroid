@@ -375,6 +375,11 @@ public class TopoDroidComm
   /** send a command 
    * @param cmd   command code
    * @return ???
+   * 
+   * The command code is the app-code of the command.
+   * This method invokes the protocol' sendCmd() which should translate the app-code to the
+   * device code of the command (or whatever) and invoke the comm class to send it to the
+   * device.
    */
   public boolean sendCommand( int cmd )
   {
@@ -417,7 +422,11 @@ public class TopoDroidComm
    * @param addr      memory address
    * @return array of read bytes
    */
-  public byte[] readMemory( String address, int addr ) { return null; }
+  public byte[] readMemory( String address, int addr ) 
+  {
+    TDLog.Error("TD Comm read memory returns null");
+    return null;
+  }
 
   // ------------------------------------------------------------------------------------
   // CONTINUOUS DATA DOWNLOAD
@@ -475,6 +484,26 @@ public class TopoDroidComm
   void cancelWork() 
   {
     if ( mProtocol != null ) mProtocol.mMaxTimeout = 0;
+  }
+
+
+  /** notify the application of the connection status
+   * @param status   connection status
+   * @note to be used when the connection status changes
+   */
+  public void notifyStatus( int status )
+  {
+    mApp.notifyListerStatus( mApp.mListerSet, status );
+  }
+
+  /** notify the lister of the connection status
+   * @param lister   lister handler
+   * @param status   connection status
+   * @note to be used when the connection status changes
+   */
+  protected void notifyStatus( ListerHandler lister, int status )
+  {
+    mApp.notifyListerStatus( lister, status );
   }
 
 }

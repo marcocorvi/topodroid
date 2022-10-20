@@ -731,6 +731,7 @@ public class BricComm extends TopoDroidComm
   }
 
   // ----------------- SEND COMMAND -------------------------------
+  @Override
   public boolean sendCommand( int cmd )
   {
     if ( ! isConnected() ) return false;
@@ -848,12 +849,4 @@ public class BricComm extends TopoDroidComm
   }
   */
     
-  // ---------------------------------------------------------------------------------
-
-  public void notifyStatus( int status )
-  {
-    mApp.notifyListerStatus( mApp.mListerSet, status );
-  }
-
-
 }
