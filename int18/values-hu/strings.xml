@@ -155,7 +155,7 @@ A részletekért keresse fel a weboldalakat.\n
 
     <string name="calib_precision">Precizitás</string>
     <string name="calib_iter">Iterációk száma: %1$d</string>
-    <!-- TODO string name="calib_dip">Magn. dip: %1$.1f</string -->
+    <string name="calib_dip">Mágn. leh.: %1$.1f</string>
     <string name="calib_reset">Visszaállítja a DistoX kalibrációját?</string>
     <string name="calib_min_error">Minimális hiba</string>
     
