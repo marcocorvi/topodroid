@@ -23,6 +23,8 @@ import java.util.Locale;
 
 class SurveyAccuracy
 {
+  private final static int MIN_COUNT = 5;
+
   private float mAccelerationMean = 0.0f; // mean acceleration value
   private float mMagneticMean     = 0.0f; // mean magnetic field value
   private float mDipMean          = 0.0f; // mean magnetic dip [degrees]
@@ -49,6 +51,7 @@ class SurveyAccuracy
    */
   boolean isBlockAMDBad( DBlock blk )
   {
+    // if ( mCount < MIN_COUNT ) return false;
     if ( blk == null || blk.mAcceleration < 10.0f || blk.mMagnetic < 10.0f ) return false; // block without G,M,Dip
     return deltaMag( blk.mMagnetic )     > TDSetting.mMagneticThr
         || deltaAcc( blk.mAcceleration ) > TDSetting.mAccelerationThr
@@ -61,9 +64,9 @@ class SurveyAccuracy
   String getBlockExtraString( DBlock blk )
   {
     if ( blk == null ) return TDString.EMPTY;
-    return String.format(Locale.US, "A %.1f  M %.1f  D %.1f", 
-      deltaAcc( blk.mAcceleration ), 
-      deltaMag( blk.mMagnetic ), 
+    return String.format(Locale.US, TDInstance.getResourceString( R.string.accuracy_amd ),
+      deltaAcc( blk.mAcceleration ) * 100, 
+      deltaMag( blk.mMagnetic ) * 100, 
       deltaDip( blk.mDip ) * TDSetting.mUnitAngle
     );
   }

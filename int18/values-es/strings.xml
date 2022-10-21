@@ -156,6 +156,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- TODO string name="calib_dip">Magn. dip: %1$.1f</string -->
     <string name="calib_reset">¿Quiere restablecer la calibración DistoX?</string>
     <!-- TODO string name="calib_min_error">Minimum error</string -->
+    <!-- TODO string name="magn_dip">Magn. dip &#8230;</string -->
 
     <string name="algorithm">Algoritmo:</string>
     <string name="auto">Auto</string>

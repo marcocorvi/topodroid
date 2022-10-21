@@ -157,6 +157,7 @@
     <!-- TODO string name="calib_dip">Magn. dip: %1$.1f</string -->
     <string name="calib_reset">Сбросить калибровку DistoX ?</string>
     <string name="calib_min_error">Минимальная ошибка</string>
+    <!-- TODO string name="magn_dip">Magn. dip &#8230;</string -->
 
     <string name="algorithm">Алгоритм расчета:</string>
     <string name="auto">авто</string>
@@ -1959,7 +1960,7 @@
     <string name="surface_north">Север</string>
     <!-- NO string name="dem_file">DEM %1$s</string -->
     <string name="dem_load">загрузить</string>
-    <string name="dem_loading">Загрузка поверхности... ожидайте</string>
+    <string name="dem_loading">Загрузка поверхности &#8230; ожидайте</string>
     <string name="dem_failed">Ошибка загрузки DEM</string>
     <string name="dem_ok">Прочитать данные DEM</string>
     <string name="dem">DEM</string>

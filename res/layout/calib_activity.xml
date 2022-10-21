@@ -90,10 +90,18 @@
       android:importantForAutofill="no"
     />
 
+    <TextView android:id="@+id/calib_dip"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/magn_dip"
+      android:layout_marginTop="@dimen/marginv"
+    />
+
     <TextView 
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/algorithm"
+      android:layout_marginTop="@dimen/marginv"
     />
     <RadioGroup 
       android:id="@+id/calib_algo"

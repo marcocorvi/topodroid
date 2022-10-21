@@ -488,7 +488,7 @@ public class DeviceHelper extends DataSetObservable
     Cursor cursor = null;
     try {
       cursor = myDB.query( CALIB_TABLE,
-                           new String[] { "name", "day", "device", "comment", "algo" }, // columns
+                           new String[] { "name", "day", "device", "comment", "algo", "dip" }, // columns
                            "id=?",
                            new String[] { Long.toString(cid) },
                            null, null, null ); 
@@ -499,7 +499,8 @@ public class DeviceHelper extends DataSetObservable
                 cursor.getString( 1 ),
                 cursor.getString( 2 ),
                 cursor.getString( 3 ),
-                (int)cursor.getLong( 4 ) );
+                (int)cursor.getLong( 4 ),
+                (float)cursor.getDouble( 5 ) );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
@@ -645,7 +646,7 @@ public class DeviceHelper extends DataSetObservable
     Cursor cursor = null;
     try {
       cursor = myDB.query( CALIB_TABLE,
-                           new String[] { "id", "name", "day", "comment", "algo" }, // columns
+                           new String[] { "id", "name", "day", "comment", "algo", "dip" }, // columns
                            "device=?",
                            new String[] { device },
                            null, null, null );
@@ -657,7 +658,8 @@ public class DeviceHelper extends DataSetObservable
             cursor.getString(2),
             device,
             cursor.getString(3),
-            (int)cursor.getLong(4) ) );
+            (int)cursor.getLong(4),
+            (float)cursor.getDouble(5) ) );
         } while (cursor.moveToNext());
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -1416,7 +1418,7 @@ public class DeviceHelper extends DataSetObservable
              +   " algo INTEGER default 0, "
              +   " stddev REAL default 0, "
              +   " delta_bh REAL default 0, "
-             +   " dip REAL default 0 "
+             +   " dip REAL default 999 "
              +   ")"
            );
 
@@ -1486,7 +1488,7 @@ public class DeviceHelper extends DataSetObservable
              db.execSQL( "ALTER TABLE calibs ADD COLUMN delta_bh REAL default 0" );
            case 27:
              TDLog.v("UPGRADE DB 27");
-             db.execSQL( "ALTER TABLE calibs ADD COLUMN dip REAL default 0" );
+             db.execSQL( "ALTER TABLE calibs ADD COLUMN dip REAL default 999" );
            case 28:
              TDLog.v("CURRENT DB 28");
              /* current version */

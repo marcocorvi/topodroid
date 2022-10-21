@@ -156,6 +156,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- TODO string name="calib_dip">Magn. dip: %1$.1f</string -->
     <string name="calib_reset">Resetta calibrazione sul DistoX?</string>
     <!-- TODO string name="calib_min_error">Minimum error</string -->
+    <!-- TODO string name="magn_dip">Magn. dip &#8230;</string -->
 
     <string name="algorithm">Algoritmo:</string>
     <string name="auto">auto</string>
@@ -1959,7 +1960,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="surface_north">Nord</string>
     <!-- NO string name="dem_file">DEM %1$s</string -->
     <string name="dem_load">carica DEM</string>
-    <string name="dem_loading">Caricamento file ... attendi</string>
+    <string name="dem_loading">Caricamento file &#8230; attendi</string>
     <string name="dem_failed">ERRORE: caricamento DEM</string>
     <string name="dem_ok">Caricato file DEM</string>
     <string name="dem">DEM</string>

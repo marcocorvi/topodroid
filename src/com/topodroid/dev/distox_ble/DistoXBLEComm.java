@@ -1032,30 +1032,30 @@ public class DistoXBLEComm extends TopoDroidComm
     return ret;
   }
 
-    /**
-     * cal CRC-16
-     *
-     * @param bytes
-     * @return
-     */
-    public int calCRC16(byte[] bytes, int length) {
-        int CRC = 0x0000ffff;
-        int POLYNOMIAL = 0x0000a001;
-
-        int i, j;
-        for (i = 0; i < length; i++) {
-            CRC ^= ((int) bytes[i] & 0x000000ff);
-            for (j = 0; j < 8; j++) {
-                if ((CRC & 0x00000001) != 0) {
-                    CRC >>= 1;
-                    CRC ^= POLYNOMIAL;
-                } else {
-                    CRC >>= 1;
-                }
-            }
+  /**
+   * calculate CRC-16 (polynomial 1 + x^2 + x^15 + (x^16))
+   *
+   * @param bytes  array of bytes containing the data
+   * @param length length of the data (in the array, starting at index 0)
+   * @return crc of the byte array
+   */
+  private int calCRC16( byte[] bytes, int length )
+  {
+    int CRC = 0x0000ffff;
+    int POLYNOMIAL = 0x0000a001;
+    for ( int i = 0; i < length; i++) {
+      CRC ^= ((int) bytes[i] & 0x000000ff);
+      for ( int j = 0; j < 8; j++) {
+        if ((CRC & 0x00000001) != 0) {
+          CRC >>= 1;
+          CRC ^= POLYNOMIAL;
+        } else {
+          CRC >>= 1;
         }
-        return CRC;
+      }
     }
+    return CRC;
+  }
 
   /** upload a firmware to the device
    * @param address   device address
@@ -1098,8 +1098,8 @@ public class DistoXBLEComm extends TopoDroidComm
             for ( int addr = 0; ok /* && addr < end_addr */ ; /*++addr*/) {
               // TDLog.v("XBLE fw upload: addr " + addr + " count " + cnt);
               for (int k = 0; k < 256; ++k) buf[k] = (byte) 0xff;
-              int nr = dis.read(buf, 0, 256);
-              int crc16 = calCRC16(buf,256);
+              int nr = dis.read( buf, 0, 256 );
+              int crc16 = calCRC16( buf, 256 );
               //for (int k = 0; k < 256; ++k) buf[k] = (byte) 0xff;  //for simulating the bug
               if (nr <= 0) { // EOF ?
                 // TDLog.v("XBLE fw upload: file read failure. Result " + nr);
@@ -1242,20 +1242,30 @@ public class DistoXBLEComm extends TopoDroidComm
       //     e.printStackTrace();
       //   }
       // }
-      if (mPacketType == DistoXBLEProtocol.PACKET_FLASH_BYTES_2) {
+      if ( mPacketType == DistoXBLEProtocol.PACKET_FLASH_BYTES_2 ) {
         buf = ((DistoXBLEProtocol) mProtocol).mFlashBytes;
-        int crc = calCRC16(buf,256);
-        if(crc != ((DistoXBLEProtocol) mProtocol).mCheckCRC)
-            return null;
+        int crc16 = calCRC16( buf, 256 );
+        if ( crc16 != ((DistoXBLEProtocol) mProtocol).mCheckCRC ) {
+          TDLog.Error("XBLE CRC-16 mismatch: got " + crc16 + " expected " + ((DistoXBLEProtocol) mProtocol).mCheckCRC );
+          return null;
+        }
         return buf;
       }
-    }catch (Exception e){
+    } catch (Exception e) {
+      TDLog.Error("XBLE error " + e.getMessage() );
       return null;
     }
+    TDLog.v("XBLE packet not FLASH_BYTES_2");
     return null;
   }
 
-  public int dumpFirmware( String address, File file ){
+  /** read the firmware from the device and save it to file
+   * @param address   device address (passed to tryConnect)
+   * @param file      output file
+   * @return ???
+   */
+  public int dumpFirmware( String address, File file )
+  {
     TDLog.v( "XBLE fw dump: output filepath " + file.getPath() );
     byte[] buf = new byte[256];
 
@@ -1300,13 +1310,13 @@ public class DistoXBLEComm extends TopoDroidComm
   }
 
   /** 0x3c: read the hardware code
-   * @param deviceAddress device address
-   * @param hw            (unused)
+   * @param address device address
+   * @param hw      (unused)
    * @return 2-byte hw code
    */
-  public byte[] readFirmwareSignature(String deviceAddress, int hw ) 
+  public byte[] readFirmwareSignature( String address, int hw ) 
   {
-    if ( ! tryConnectDevice( deviceAddress, null, 0 ) ) return null;
+    if ( ! tryConnectDevice( address, null, 0 ) ) return null;
     byte[] buf = new byte[1];
     buf[0] = (byte)0x3c;
     enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, buf, true);

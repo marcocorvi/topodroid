@@ -158,6 +158,7 @@
     <!-- TODO string name="calib_dip">Magn. dip: %1$.1f</string -->
     <string name="calib_reset">重置DistoX校准 ?</string>
     <!-- TODO string name="calib_min_error">Minimum error</string -->
+    <!-- TODO string name="magn_dip">Magn. dip &#8230;</string -->
     
     <string name="algorithm">算法:</string>
     <string name="auto">自动</string>

@@ -158,6 +158,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- TODO string name="calib_dip">Magn. dip: %1$.1f</string -->
     <string name="calib_reset">Visszaállítja a DistoX kalibrációját?</string>
     <string name="calib_min_error">Minimális hiba</string>
+    <!-- TODO string name="magn_dip">Magn. dip &#8230;</string -->
     
     <string name="algorithm">Algoritmus:</string>
     <string name="auto">automatikus</string>
@@ -1977,7 +1978,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="surface_north">Észak</string>
     <!-- NO string name="dem_file">%1$s</string -->
     <string name="dem_load">DEM betöltés</string>
-    <string name="dem_loading">Felszín betöltése ... kérlek várjál</string>
+    <string name="dem_loading">Felszín betöltése &#8230; kérlek várjál</string>
     <string name="dem_failed">DEM betöltés hiba</string>
     <string name="dem_ok">DEM adat olvasás</string>
     <string name="dem">DEM</string>

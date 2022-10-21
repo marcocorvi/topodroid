@@ -118,7 +118,7 @@ public class CutNPaste
           dismissPopup();
         }
       } );
-    float ww = btn_copy.getPaint().measureText( cut );
+    float ww = btn_copy.getPaint().measureText( copy );
     if ( ww > w ) w = ww;
 
     Button btn_paste = makePopupButton( context, paste, layout, lWidth, lHeight,
@@ -133,7 +133,7 @@ public class CutNPaste
           dismissPopup();
         }
       } );
-    ww = btn_paste.getPaint().measureText( cut );
+    ww = btn_paste.getPaint().measureText( paste );
     if ( ww > w ) w = ww;
     int iw = (int)(w + 10);
     btn_cut.setWidth( iw );

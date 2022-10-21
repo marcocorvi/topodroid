@@ -29,6 +29,7 @@ import com.topodroid.calib.CalibResult;
 import com.topodroid.calib.CalibCoeffDialog;
 
 // import java.util.ArrayList;
+import java.util.Locale;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -40,7 +41,7 @@ import android.content.DialogInterface;
 import android.content.res.Configuration;
 
 import android.widget.EditText;
-// import android.widget.TextView;
+import android.widget.TextView;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.AdapterView;
@@ -105,6 +106,7 @@ public class CalibActivity extends Activity
   // private TextView mEditDevice;
   private String mDeviceAddress;
   private EditText mEditComment;
+  private TextView mTVdip;
 
   private MyDateSetListener mDateListener;
 
@@ -159,6 +161,7 @@ public class CalibActivity extends Activity
     mEditDate    = (Button) findViewById(R.id.calib_date);
     // mEditDevice  = (TextView) findViewById(R.id.calib_device);
     mEditComment = (EditText) findViewById(R.id.calib_comment);
+    mTVdip  = (TextView) findViewById(R.id.calib_dip);
 
     mDateListener = new MyDateSetListener( mEditDate );
     mEditDate.setOnClickListener( this );
@@ -217,6 +220,9 @@ public class CalibActivity extends Activity
         case 2: mCBAlgoNonLinear.setChecked( true ); break;
         case 3: mCBAlgoMinimum.setChecked( true ); break;
         default: mCBAlgoAuto.setChecked( true ); break;
+      }
+      if ( info.dip < 180 ) {
+        mTVdip.setText( String.format(Locale.US, getResources().getString( R.string.calib_dip), info.dip ) );
       }
     } else {
       mEditName.setHint( R.string.name );

@@ -26,8 +26,9 @@ public class CalibInfo
   public String device;     //!< device address
   public String comment;    //!< comment
   public int    algo;       //!< calibration algo
+  public float  dip;        //!< magnetic dip [deg]
 
-  public CalibInfo( Long _id, String _name, String _date, String _device, String _comment, int _algo ) 
+  public CalibInfo( Long _id, String _name, String _date, String _device, String _comment, int _algo, float _dip ) 
   {
     id = _id;
     name = _name;
@@ -35,6 +36,7 @@ public class CalibInfo
     device = _device;
     comment = _comment;
     algo = _algo;
+    dip  = _dip;
   }
 
   // void debug()

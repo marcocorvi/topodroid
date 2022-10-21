@@ -17,6 +17,7 @@ import com.topodroid.utils.TDMath;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
+import java.util.Locale;
 
 public class NumBranch
 {
@@ -180,7 +181,7 @@ public class NumBranch
       //   sb.append( it.previous().toString() ).append(" ");
       // }
     }
-    sb.append( String.format("%.2f", len ) );
+    sb.append( String.format(Locale.US, "%.2f", len ) );
     return sb.toString();
   }
   

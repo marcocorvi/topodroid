@@ -737,9 +737,16 @@ class ShotEditDialog extends MyDialog
   }
 
 
+  /** display the CutCopyPaste popup for the given edit text
+   * @param v   edit text view
+   * 
+   * This is used for the stations edit texts.
+   * FIXME The popup remains open when the user change focus to the other station.
+   */
   @Override
   public boolean onLongClick(View v) 
   {
+    CutNPaste.dismissPopup();
     CutNPaste.makePopup( mContext, (EditText)v );
     return true;
   }

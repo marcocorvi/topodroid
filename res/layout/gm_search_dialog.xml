@@ -30,7 +30,7 @@
       <EditText android:id="@+id/error"
         style="@style/edit_decimal"
         android:layout_width="match_parent"
-        android:hint="1.0"
+        android:hint="@string/one"
         android:layout_marginTop="@dimen/marginv"
         android:importantForAutofill="no"
       />
