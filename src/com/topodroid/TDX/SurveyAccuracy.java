@@ -65,8 +65,8 @@ class SurveyAccuracy
   {
     if ( blk == null ) return TDString.EMPTY;
     return String.format(Locale.US, TDInstance.getResourceString( R.string.accuracy_amd ),
-      deltaAcc( blk.mAcceleration ) * 100, 
-      deltaMag( blk.mMagnetic ) * 100, 
+      deltaAcc( blk.mAcceleration ), 
+      deltaMag( blk.mMagnetic ), 
       deltaDip( blk.mDip ) * TDSetting.mUnitAngle
     );
   }
