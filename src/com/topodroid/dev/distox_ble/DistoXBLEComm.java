@@ -449,7 +449,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public int servicesDiscovered( BluetoothGatt gatt )
   {
-    TDLog.v( "XBLE comm discovered services");
+    // TDLog.v( "XBLE comm discovered services");
     enqueueOp( new BleOpNotify( mContext, this, DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_READ_UUID, true ) );
     doNextOp();
     mBTConnected  = true;

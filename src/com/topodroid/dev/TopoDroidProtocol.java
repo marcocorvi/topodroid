@@ -23,7 +23,7 @@ import com.topodroid.packetX.PacketLogger;
 
 import java.util.UUID;
 import java.util.List;
-// import java.util.Locale;
+import java.util.Locale;
 // import java.lang.reflect.Field;
 
 // import android.os.CountDownTimer;
@@ -153,11 +153,7 @@ public class TopoDroidProtocol
   {
     if ( TDSetting.mPacketLog ) logPacket( 0L, buffer );
     byte type = (byte)(buffer[0] & 0x3f);
-    // if ( TDLog.LOG_PROTO ) {
-    //   TDLog.DoLog( "handle packet type " + type + " " + 
-    //     String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buffer[0], buffer[1], buffer[2],
-    //     buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
-    // }
+    // TDLog.v( "TD proto: handle packet: type " + type );
     // TDLog.v( "TD proto: handle packet type " + type + " " + 
     //     String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buffer[0], buffer[1], buffer[2],
     //     buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
@@ -255,9 +251,6 @@ public class TopoDroidProtocol
           mDip = dip * 90.0  / 16384.0; // 90/0x4000;
           if ( dip >= 32768 ) { mDip = (65536 - dip) * (-90.0) / 16384.0; }
           mRoll  = rh * 180.0 / 32768.0; // 180/0x8000;
-          // if ( TDLog.LOG_PROTO ) {
-          //   TDLog.DoLog( "Proto packet V " + String.format(Locale.US, " %.2f %.2f %.2f roll %.1f", mAcceleration, mMagnetic, mDip, mRoll ) );
-	  // }
           // TDLog.v( "Proto packet V " + String.format(Locale.US, " %.2f %.2f %.2f roll %.1f", mAcceleration, mMagnetic, mDip, mRoll ) );
           return DataType.PACKET_VECTOR;
         }
