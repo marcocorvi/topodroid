@@ -43,7 +43,8 @@ public class FirmwareUtils
   {
     if ( fw == 2100 || fw == 2200 || fw == 2300 || fw == 2400 || fw == 2500 || fw == 2412 || fw == 2501 || fw == 2512 ) return HW_HEEB;
     if ( fw == 2610 || fw == 2630 || fw == 2640 ) return HW_LANDOLT;
-    if ( fw == 2701 || fw == 2702 || fw == 2703 || fw == 2704 ) return HW_TIAN;
+    // if ( fw == 2701 || fw == 2702 || fw == 2703 || fw == 2704 ) return HW_TIAN;
+    if ( fw == 2700 ) return HW_TIAN;
     return HW_NONE;
   }
 
@@ -158,10 +159,7 @@ public class FirmwareUtils
       case 2610: len = 25040; break;
       case 2630: len = 25568; break;
       case 2640: len = 25604; break;
-      case 2701: len = 15576; break; // 20220930
-      case 2702: len = 15632; break; // 20221004
-      case 2703: len = 15636; break; // 20221007
-      case 2704: len = 15680; break; // 20221013
+      case 2700: len = 15732; break; // 20221016
     }
     if ( len == 0 ) return false; // bad firmware version
     len /= 4; // number of int to read
@@ -192,10 +190,7 @@ public class FirmwareUtils
       case 2610: return ( checksum == 0xcae98256 );
       case 2630: return ( checksum == 0x1b1488c5 );
       case 2640: return ( checksum == 0xee2d70ff ); // fixed error in magnetic calib matrix
-      case 2701: return ( checksum == 0xc637eb7c ); // 20220930
-      case 2702: return ( checksum == 0xeb6bad67 ); // 20221004
-      case 2703: return ( checksum == 0xc64bfb72 ); // 20221007
-      case 2704: return ( checksum == 0x29098285 ); // 20221013
+      case 2700: return ( checksum == 0x4ec030fa ); // 20221016
     }
     return false;
   }
@@ -449,12 +444,8 @@ public class FirmwareUtils
    */
   private static int readFirmwareTian( byte[] buf )
   {
-    // TDLog.v( String.format( " %02x %02x %02x %02x", buf[4], buf[5], buf[6], buf[7] ) ); //  03 f0 d8 fb
-    // TDLog.v( String.format( " %02x %02x %02x %02x %02x", buf[12], buf[13], buf[14], buf[15], buf[16] ) ); // d5 08 00 08 20
-    if ( buf[4] == (byte)0x03 && buf[5] == (byte)0xf0 && buf[6] == (byte)0xbc && buf[7] == (byte)0xfb ) return 2701; // 20220930
-    if ( buf[4] == (byte)0x03 && buf[5] == (byte)0xf0 && buf[6] == (byte)0xd6 && buf[7] == (byte)0xfb ) return 2702; // 20221004
-    if ( buf[4] == (byte)0x03 && buf[5] == (byte)0xf0 && buf[6] == (byte)0xd8 && buf[7] == (byte)0xfb ) return 2703; // 20221007
-    if ( buf[4] == (byte)0x03 && buf[5] == (byte)0xf0 && buf[6] == (byte)0xee && buf[7] == (byte)0xfb ) return 2704; // 20221013
+    // 20221016: 4803 4685 f003 fc08 4800 4700 08d5 0800
+    if ( buf[4] == (byte)0x03 && buf[5] == (byte)0xf0 && buf[6] == (byte)0x08 && buf[7] == (byte)0xfc ) return 2700; // 20221016
     return -99; // failed on byte[7]
   }
 }

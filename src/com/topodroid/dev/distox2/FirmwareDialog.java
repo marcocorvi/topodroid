@@ -193,6 +193,7 @@ public class FirmwareDialog extends MyDialog
             TDToast.makeLong( String.format( mRes.getString(R.string.firmware_file_dumped), filename, ret ) );
           } else {
             TDToast.makeLong( R.string.firmware_file_dump_fail );
+            TDPath.deleteBinFile( filename );
           }
 
           // finish(); 

@@ -466,6 +466,12 @@ public class TDPath
    */
   public static File getBinFile( String filename )   { return TDFile.getPrivateFile( DIR_BIN, filename ); }
 
+
+  /** delete a bin file
+   * @param filename  file name
+   */
+  public static void deleteBinFile( String filename ) { TDFile.deletePrivateFile( DIR_BIN, filename ); }
+
   /** @return calibration export file
    * @param filename  file name
    */
