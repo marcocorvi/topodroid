@@ -73,6 +73,8 @@ public class DistoXBLEComm extends TopoDroidComm
   // private String          mRemoteAddress;
   private BluetoothDevice mRemoteBtDevice;
   private ListerHandler mLister = null;
+  private String mAddress;
+  private int    mTimeout;
 
   BluetoothGattCharacteristic mReadChrt  = null;
   BluetoothGattCharacteristic mWriteChrt = null;
@@ -226,8 +228,11 @@ public class DistoXBLEComm extends TopoDroidComm
   public boolean connectDevice(String address, ListerHandler lister, int data_type, int timeout ) // FIXME XBLE_DATA_TYPE ?
   {
     // TDLog.v( "XBLE comm connect Device");
+    mAddress       = address; // saved
     mNrReadPackets = 0;
     mDataType      = data_type;
+    mLister        = lister;  // saved
+    mTimeout       = timeout; // saved
     return connectDistoXBLEDevice( TDInstance.getDeviceA(), lister /*, data_type */ );
   }
 
@@ -509,10 +514,16 @@ public class DistoXBLEComm extends TopoDroidComm
         TDLog.Error("XBLE COMM: insufficient auth " + extra );
         break;
       case BleCallback.CONNECTION_TIMEOUT:
-      case BleCallback.CONNECTION_133: // unfortunately this happens
-        // TDLog.v( "XBLE comm: connection timeout or 133");
-        // notifyStatus( ConnectionState.CONN_WAITING );
+        TDLog.v( "XBLE comm: connection timeout reconnect ...");
         reconnectDevice();
+        break;
+      case BleCallback.CONNECTION_133: // unfortunately this happens
+        TDLog.v( "XBLE comm: connection 133 - disconnect ...");
+        disconnectDevice();
+        notifyStatus( ConnectionState.CONN_WAITING );
+        TDUtil.slowDown( 600 ); // wait at least 500 msec (let xble BT initialize)
+        TDLog.v( "XBLE comm: connection 133 - connect ...");
+        connectDevice( mAddress, mLister, mDataType, mTimeout );
         break;
       default:
         TDLog.Error("XBLE comm ***** ERROR " + status + ": reconnecting ...");

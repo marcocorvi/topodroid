@@ -153,7 +153,7 @@ public class BleCallback extends BluetoothGattCallback
         // TDLog.f( "BLE callback: on Connection State Change new state " + state );
       }
     } else {
-      // TDLog.v("BLE notify status WAITING");
+      TDLog.Error("BLE callack onConnectionStateChange error - status " + status );
       mComm.notifyStatus( ConnectionState.CONN_WAITING );
       if ( status == BluetoothGatt.GATT_INSUFFICIENT_ENCRYPTION 
         || status == BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION 
@@ -228,7 +228,7 @@ public class BleCallback extends BluetoothGattCallback
       String uuid_chrt_str = desc.getCharacteristic().getUuid().toString();
       mComm.writtenDesc( uuid_str, uuid_chrt_str, desc.getValue() );
     } else {
-      // TDLog.v( "BLE callback: desc write error");
+      TDLog.Error( "BLE callback: desc write error - status " + status );
       mComm.error( status, desc.getUuid().toString() );
     }
   }
