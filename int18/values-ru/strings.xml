@@ -154,10 +154,10 @@
     <string name="calib_ave_std">Точность: %1$.4f +- %2$.4f градуса</string>
     <string name="calib_precision">Точность</string>
     <string name="calib_iter">Итераций: %1$d</string>
-    <!-- TODO string name="calib_dip">Magn. dip: %1$.1f</string -->
+    <string name="calib_dip">Магн. наклон: %1$.1f</string>
     <string name="calib_reset">Сбросить калибровку DistoX ?</string>
     <string name="calib_min_error">Минимальная ошибка</string>
-    <!-- TODO string name="magn_dip">Magn. dip &#8230;</string -->
+    <string name="magn_dip">Магн. наклон &#8230;</string>
 
     <string name="algorithm">Алгоритм расчета:</string>
     <string name="auto">авто</string>
@@ -813,7 +813,7 @@
     <!-- UNUSED string name="button_landscape" >Альбомная </string -->
     <!-- UNUSED string name="button_portrait"  >Портретная</string -->
     <string name="button_splays">Бок. замеры</string>
-    <!-- TODO string name="button_wait">Wait</string -->
+    <string name="button_wait">Ожидайте</string>
 
 
     <string name="button_write"     >Передать в Disto</string>
@@ -1828,7 +1828,7 @@
    <string name="firmware_file_dump_fail">Не удалось выполнить дамп прошивки</string>
    <string name="firmware_file_upload_fail">Ошибка загрузки прошивки</string>
    <string name="firmware_not_supported">Устройство не поддерживает функции данной прошивки</string>
-   <!-- TODO string name="firmware_uploaded">%1$s firmware: uploaded %2$d</string -->
+   <string name="firmware_uploaded">%1$s прошивка: загружено %2$d</string>
 
     <string name="project">Проект %1$s</string>
     <string name="no_editor">Редактор не найден</string>
