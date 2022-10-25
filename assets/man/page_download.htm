@@ -20,18 +20,24 @@ the connection is maintained and the data are downloaded (and displayed in the s
 
 For the <i>Sap5</i> and <i>Bric4</i> data are always downloaded in <i>continuous</i> mode.<br><p>
 
+<b>DistoX-BLE</b><p>
+
+The connection to DistoXBle may fail the first time immediately after the Android Bluetooth has been enabled (ie, turned on).
+In this case a second attempt to connect usually succeed.<br><p>
+
 <b>Bric4</b><br>
 
 The data download from the <i>Bric4</i> can be limited to only the essential values (distance, azimuth, clino, and little more), or
-complete, with all the information transferred by the Bric4 protocol.<br>
-The complete protocol includes the "index" of the shot. By default TopoDroid uses the <i>Bric4</i> index as data index
+complete, with all the information transferred by the Bric4 protocol.<br><p>
+
+The complete protocol includes the "index" of the shot. By default TopoDroid uses the <i>Bric4 index</i> as data index
 in the database table, if it receives it. Since the data index must be unique, if TopoDroid receives a shot with an index that
-is already in the database, a novel value is used instead of the <i>Bric4</i> index.<br><p>
+is already in the database, a novel value is used instead of the <i>Bric4 index</i>.<br>
 
-The Bric4 index can be reset with the <i>Advanced menu | Memory clear</i> BRIC4 command.<br><p>
+The Bric4 index can be reset with the <i>Advanced menu | Memory clear</i> BRIC4 command.<br>
 
-It is possible to disable the use of the <i>Bric4</i> index [G], and let TopoDroid assign incremental values to the data index.<br><p> 
+It is possible to disable the use of the <i>Bric4 index</i> [G], and let TopoDroid assign incremental values to the data index.<br><p> 
 
-<u>WARNING</u>. The first shot after a Bric4 "memory clear" does not arrive to TopoDroid.<br><p>
+<!-- u>WARNING</u>. The first shot after a Bric4 "memory clear" does not arrive to TopoDroid.<br><p -->
 
 </body></html>

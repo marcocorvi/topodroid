@@ -17,7 +17,8 @@ public class ConnectionState
   public static final int CONN_DISCONNECTED = 0;
   public static final int CONN_CONNECTED    = 1;
   public static final int CONN_WAITING      = 2;
+  public static final int CONN_RESET        = 3;
 
   // LOG
-  public static final String[] statusStr = { "disconnected", "connected", "waiting" };
+  public static final String[] statusStr = { "disconnected", "connected", "waiting", "reset" };
 }

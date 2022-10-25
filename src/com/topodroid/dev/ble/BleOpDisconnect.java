@@ -22,7 +22,7 @@ public class BleOpDisconnect extends BleOperation
     super( ctx, pipe );
   }
 
-  // public String name() { return "Disconnect"; }
+  public String name() { return "Disconnect"; }
 
   @Override 
   public void execute()

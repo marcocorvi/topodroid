@@ -633,7 +633,7 @@ public class TopoDroidApp extends Application
     return mComm != null && mComm.isConnected() && ! mComm.isCommThreadNull(); // FIXME BLE5 to check
   }
 
-  void disconnectRemoteDevice( boolean force )
+  public void disconnectRemoteDevice( boolean force )
   {
     // TDLog.v( "App: disconnect remote device. force " + force );
     // TDLog.Log( TDLog.LOG_COMM, "App disconnect RemoteDevice listers " + mListerSet.size() + " force " + force );

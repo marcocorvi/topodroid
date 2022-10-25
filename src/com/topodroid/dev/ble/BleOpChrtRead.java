@@ -31,7 +31,7 @@ public class BleOpChrtRead extends BleOperation
     mChrtUuid = chrt_uuid;
   }
 
-  // public String name() { return "ChrtRead"; }
+  public String name() { return "ChrtRead"; }
 
   @Override 
   public void execute()

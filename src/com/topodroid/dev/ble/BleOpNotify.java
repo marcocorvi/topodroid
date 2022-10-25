@@ -45,7 +45,7 @@ public class BleOpNotify extends BleOperation
     mEnable   = enable;
   }
 
-  // public String name() { return "Notify"; }
+  public String name() { return "Notify"; }
 
   @Override 
   public void execute()

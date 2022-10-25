@@ -678,8 +678,7 @@ public class OverviewWindow extends ItemDrawer
   {
     TDNum num = mNum;
     final String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
-    // TDLog.Log( TDLog.LOG_IO, "export plot type " + mType + " with extension " + ext );
-    // TDLog.v( "export th2 file " + fullname );
+    TDLog.v( "OVERVIEW export plot type " + mType + " with extension " + ext );
     DrawingCommandManager manager = mOverviewSurface.getManager( DrawingSurface.DRAWING_OVERVIEW );
 
     // APP_OUT_DIR
@@ -688,30 +687,34 @@ public class OverviewWindow extends ItemDrawer
     Uri uri = Uri.fromFile( new File( TDPath.getOutFile( filename ) ) );
     // TDLog.v("EXPORT " + TDPath.getOutFile( filename ) );
 
-    if ( ext.equals("th2") ) {
-      Handler th2Handler = new Handler() {
-         @Override public void handleMessage(Message msg) {
-           if (msg.what == 661 ) {
-             TDToast.make( String.format( getString(R.string.saved_file_1), fullname ) ); 
-           } else {
-             TDToast.makeBad( R.string.saving_file_failed );
-           }
-         }
-      };
-      // parent is null because this is user-requested EXPORT
-      // fullname is null
-      // azimuth = 0
-      // rotate  = 0
-      (new SavePlotFileTask( this, uri, null, th2Handler, mNum, manager, null, fullname, mType, 0, PlotSave.OVERVIEW, 0, false )).execute(); // TH2EDIT false
+    if ( "pdf".equals( ext ) ) {
+      savePdf( uri );
     } else {
-      GeoReference station = null;
-      if ( mType == PlotType.PLOT_PLAN && ext.equals("shp") ) {
-       String origin = mNum.getOriginStation();
-       station = TDExporter.getGeolocalizedStation( mSid, mData, 1.0f, true, origin );
+      if ( ext.equals("th2") ) {
+        Handler th2Handler = new Handler() {
+           @Override public void handleMessage(Message msg) {
+             if (msg.what == 661 ) {
+               TDToast.make( String.format( getString(R.string.saved_file_1), fullname ) ); 
+             } else {
+               TDToast.makeBad( R.string.saving_file_failed );
+             }
+           }
+        };
+        // parent is null because this is user-requested EXPORT
+        // fullname is null
+        // azimuth = 0
+        // rotate  = 0
+        (new SavePlotFileTask( this, uri, null, th2Handler, mNum, manager, null, fullname, mType, 0, PlotSave.OVERVIEW, 0, false )).execute(); // TH2EDIT false
+      } else {
+        GeoReference station = null;
+        if ( mType == PlotType.PLOT_PLAN && ext.equals("shz") ) {
+         String origin = mNum.getOriginStation();
+         station = TDExporter.getGeolocalizedStation( mSid, mData, 1.0f, true, origin );
+        }
+        SurveyInfo info = mData.selectSurveyInfo( mSid );
+        // null PlotInfo, null FixedInfo, true toast
+        (new ExportPlotToFile( this, uri, info, null, null, mNum, manager, mType, fullname, ext, true, station )).execute();
       }
-      SurveyInfo info = mData.selectSurveyInfo( mSid );
-      // null PlotInfo, null FixedInfo, true toast
-      (new ExportPlotToFile( this, uri, info, null, null, mNum, manager, mType, fullname, ext, true, station )).execute();
     }
   }
 
@@ -784,7 +787,7 @@ public class OverviewWindow extends ItemDrawer
   //     case TDConst.SURVEY_FORMAT_TH2: saveWithExt( uri, "th2" ); break;
   //     case TDConst.SURVEY_FORMAT_DXF: saveWithExt( uri, "dxf" ); break; 
   //     case TDConst.SURVEY_FORMAT_SVG: saveWithExt( uri, "svg" ); break;
-  //     case TDConst.SURVEY_FORMAT_SHP: saveWithExt( uri, "shp" ); break;
+  //     case TDConst.SURVEY_FORMAT_SHP: saveWithExt( uri, "shz" ); break;
   //     case TDConst.SURVEY_FORMAT_XVI: saveWithExt( uri, "xvi" ); break;
   //     case TDConst.SURVEY_FORMAT_PDF: savePdf( uri ); break;
   //     default:

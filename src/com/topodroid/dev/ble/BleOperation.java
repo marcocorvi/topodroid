@@ -26,7 +26,7 @@ abstract public class BleOperation
     mPipe    = pipe;
   }
 
-  // public String name() { return "Op"; }
+  public String name() { return "Op"; }
 
   abstract public void execute();
 }

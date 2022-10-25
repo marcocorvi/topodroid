@@ -36,13 +36,32 @@ public class DataDownloader
 
   // boolean isConnected() { return mConnected == ConnectionState.CONN_CONNECTED; }
 
+  /** @return true if it is downloading
+   */
   boolean isDownloading() { return mDownload; }
 
+  /** @return true if it needs to re-connect, ie, it is odwnloading but not CONNECTED
+   */
   boolean needReconnect() { return mDownload && mConnected != ConnectionState.CONN_CONNECTED; }
 
+  /** set the "connection" status
+   * @param connected   connection status: DISCONNECTED, WAITING, or CONNECTED
+   */
   public void setConnected( int connected ) { mConnected = connected; }
 
+  /** set the "download" flag
+   * @param download   value of the download flag
+   */
   void setDownload( boolean download ) { mDownload = download; }
+
+  // /** reset the downloader: not downloading, not connected - UNUSED
+  //  * @note used only bt DistoXBLEComm
+  //  */
+  // void reset()
+  // {
+  //   mDownload = false;
+  //   mConnected = ConnectionState.CONN_DISCONNECTED;
+  // }
 
   /** update the "connected" state
    * @param on_off   whether the downloader is connected

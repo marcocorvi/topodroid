@@ -76,4 +76,18 @@ public class BleQueue
     }
   }
 
+  // /** flush queue buffers - UNUSED
+  //  */
+  // public void flush()
+  // {
+  //   mLock.lock();
+  //   try {
+  //     mHead = null;
+  //     mTail = null;
+  //     size  = 0;
+  //   } finally {
+  //     mLock.unlock();
+  //   }
+  // }
+
 } 

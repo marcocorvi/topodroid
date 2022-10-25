@@ -218,9 +218,9 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
             }
             break;
           case TDConst.SURVEY_FORMAT_SHP:
-            // TDLog.v("EXPORT AUTO shp " + mFullName );
+            // TDLog.v("EXPORT AUTO shz " + mFullName );
             if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) {
-              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "shp", false );
+              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "shz", false );
             }
             break;
           case TDConst.SURVEY_FORMAT_XVI:

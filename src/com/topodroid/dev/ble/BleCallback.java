@@ -39,6 +39,7 @@ public class BleCallback extends BluetoothGattCallback
 {
   public final static int CONNECTION_TIMEOUT =   8;
   public final static int CONNECTION_133     = 133;
+  public final static int CONNECTION_19      =  19;
 
   private BleComm mComm;
   // private BleChrtChanged mChrtChanged;
@@ -158,7 +159,8 @@ public class BleCallback extends BluetoothGattCallback
       if ( status == BluetoothGatt.GATT_INSUFFICIENT_ENCRYPTION 
         || status == BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION 
         || status == CONNECTION_TIMEOUT 
-        || status == CONNECTION_133 ) {
+        || status == CONNECTION_133 
+        || status == CONNECTION_19 ) {
         // TODO
         // device.createBond();
         // device.connectGatt();
@@ -289,6 +291,7 @@ public class BleCallback extends BluetoothGattCallback
   { 
     if ( mGatt != null ) {
       try {
+        TDLog.v("BLE close GATT");
         // mGatt.disconnect();
         mGatt.close();
       } catch ( SecurityException e ) {
@@ -390,7 +393,7 @@ public class BleCallback extends BluetoothGattCallback
       TDLog.e("BLE callback: failed descriptor set value" );
       return false;
     }
-    // TDLog.v( "BLE callback: set notification: " + chrt.getUuid().toString() + " " + value );
+    TDLog.v( "BLE callback: set notification: " + chrt.getUuid().toString() + " " + value );
     try {
       return mGatt.writeDescriptor( desc );
     } catch ( SecurityException e ) {
@@ -432,7 +435,7 @@ public class BleCallback extends BluetoothGattCallback
    */
   public boolean enablePNotify( UUID srvUuid, BluetoothGattCharacteristic chrt )
   {
-    // TDLog.v( "BLE callback enable P notify " + srvUuid + " " + chrt.getUuid() );
+    TDLog.v( "BLE callback enable P notify " + srvUuid + " " + chrt.getUuid() );
     if ( chrt == null ) {
       TDLog.e("BLE callback: enable notify null chrt");
       return false;

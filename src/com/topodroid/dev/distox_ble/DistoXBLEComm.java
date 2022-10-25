@@ -259,7 +259,7 @@ public class DistoXBLEComm extends TopoDroidComm
 
   public void disconnectGatt()  // called from BleOpDisconnect
   {
-    // TDLog.v( "XBLE comm disconnect GATT status DISCONNECTED ");
+    TDLog.v( "XBLE comm disconnect GATT status DISCONNECTED ");
     notifyStatus( ConnectionState.CONN_DISCONNECTED );
     mCallback.closeGatt();
   }
@@ -278,7 +278,7 @@ public class DistoXBLEComm extends TopoDroidComm
   {
     mReconnect = false;
     if ( mBTConnected || force ) {
-      // TDLog.v( "XBLE close device - connected " + mBTConnected + " force " + force );
+      TDLog.v( "XBLE close device - connected " + mBTConnected + " force " + force );
       //mThreadConsumerWorking = false;
       mBTConnected = false;
       notifyStatus( ConnectionState.CONN_DISCONNECTED ); // not necessary
@@ -319,12 +319,12 @@ public class DistoXBLEComm extends TopoDroidComm
   private void doNextOp()
   {
     if ( mPendingOp != null ) {
-      // TDLog.v( "XBLE comm: next op with pending not null, ops " + mOps.size() );
+      TDLog.v( "XBLE comm: next op with pending " + mPendingOp.name() + " not null, ops " + mOps.size() );
       return;
     }
     mPendingOp = mOps.poll();
-    // TDLog.v( "XBLE comm: polled, ops " + mOps.size() );
     if ( mPendingOp != null ) {
+      TDLog.v( "XBLE comm: polled, ops " + mOps.size() + " exec " + mPendingOp.name() );
       mPendingOp.execute();
     }
     // else if ( mPendingCommands > 0 ) {
@@ -476,8 +476,13 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public boolean enablePNotify( UUID srvUuid, UUID chrtUuid )
   {
-    // TDLog.v("XBLE enable P notify");
-    return mCallback.enablePNotify( srvUuid, chrtUuid );
+    TDLog.v("XBLE enable P notify");
+    boolean ret = mCallback.enablePNotify( srvUuid, chrtUuid );
+    if ( ! ret ) {
+      TDLog.Error("XBLE failed enable PNotify");
+      closeDevice( true );
+    }
+    return ret;
   }
 
   /** enable P-indicate
@@ -518,12 +523,22 @@ public class DistoXBLEComm extends TopoDroidComm
         reconnectDevice();
         break;
       case BleCallback.CONNECTION_133: // unfortunately this happens
-        TDLog.v( "XBLE comm: connection 133 - disconnect ...");
-        disconnectDevice();
+        TDLog.v( "XBLE comm: connection " + status + " - disconnect ... connect");
+        closeDevice( true );
         notifyStatus( ConnectionState.CONN_WAITING );
         TDUtil.slowDown( 600 ); // wait at least 500 msec (let xble BT initialize)
-        TDLog.v( "XBLE comm: connection 133 - connect ...");
         connectDevice( mAddress, mLister, mDataType, mTimeout );
+        // reconnectDevice( );
+        break;
+      case BleCallback.CONNECTION_19: // unfortunately this happens
+        TDLog.v( "XBLE comm: connection " + status + " - disconnect");
+        mOps.clear();
+        mPendingOp = null;
+        TDUtil.slowDown( 600 ); // wait at least 500 msec (let xble BT initialize)
+        closeDevice( true );
+        notifyStatus( ConnectionState.CONN_DISCONNECTED );
+        connectDevice( mAddress, mLister, mDataType, mTimeout );
+        // reconnectDevice();
         break;
       default:
         TDLog.Error("XBLE comm ***** ERROR " + status + ": reconnecting ...");

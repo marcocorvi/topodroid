@@ -1547,6 +1547,7 @@ public class ShotWindow extends Activity
       // int k2 = 0;
       if ( ! TDInstance.isDivingMode() ) {
         if ( k1 < mNrButton1 && b == mButton1[k1++] ) {        // DOWNLOAD
+          TDLog.v("SHOT pressed download button");
           if ( TDInstance.getDeviceA() != null ) {
             // mSearch = null; // invalidate search
             // if ( mBTstatus == ConnectionState.CONN_DISCONNECTED ) {

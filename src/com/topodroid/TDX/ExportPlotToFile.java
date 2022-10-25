@@ -67,7 +67,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
                       TDNum num, DrawingCommandManager command,
                       long type, String name, String ext, boolean toast, GeoReference station )
     {
-      // TDLog.v("EXPORT plot to file cstr. Type: " + type + " fullname: " + name + " ext: " + ext );
+      TDLog.v("EXPORT plot to file cstr. Type: " + type + " fullname: " + name + " ext: " + ext );
       // FIXME assert( ext != null );
       /* if ( TDSetting.mExportUri ) */ mUri = uri; // FIXME_URI
       mFormat    = context.getResources().getString(R.string.saved_file_1);
@@ -89,7 +89,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     @Override
     protected Boolean doInBackground(Void... arg0)
     {
-      // TDLog.v("export plot to file in bkgr. ext " + mExt );
+      TDLog.v("EXPORT plot to file in bkgr. ext " + mExt );
       // String dirname = null;
       ParcelFileDescriptor pfd = null; 
       if ( mUri != null ) {
@@ -99,17 +99,18 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
       try {
 	String file_name = mFullName + "." + mExt; // file-name
         String file_path = TDPath.getOutFile( file_name );
-        // TDLog.v("EXPORT plot to file " + file_name + " path " + file_path );
+        TDLog.v("EXPORT plot to file " + file_name + " path " + file_path );
         boolean ret = true;
         synchronized ( TDFile.mFilesLock ) {
           // final FileOutputStream out = TDFile.getFileOutputStream( filename );
-          if ( mExt.equals("shp") ) { 
+          if ( mExt.equals("shz") ) { 
             FileOutputStream fos = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : TDFile.getFileOutputStream( file_path );
             // FileOutputStream fos = TDsafUri.docFileOutputStream( pfd );
             String dirpath = TDPath.getShpTempRelativeDir();
+            TDLog.v("EXPORT shp - dir " + dirpath );
 	    DrawingShp.writeShp( fos, dirpath, mCommand, mType, mStation );
 	    // DrawingShp.writeShp( fos, mFullName, mCommand, mType, mStation );
-            TDFile.deleteDir( dirpath );
+            // TDFile.deleteDir( dirpath );
             fos.close();
 	  } else {
             BufferedWriter bw = null;
@@ -139,7 +140,9 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
               bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
               // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
               ret = DrawingIO.exportCave3D( bw, mCommand, mNum, mPlotInfo, mFixedInfo, mFullName );
-            }
+            } else {
+              TDLog.Error("EXPORT unsupported extension " + mExt );
+            } 
             if ( bw != null ) {
               bw.flush();
               bw.close();

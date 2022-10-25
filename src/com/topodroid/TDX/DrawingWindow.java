@@ -7155,7 +7155,7 @@ public class DrawingWindow extends ItemDrawer
     FixedInfo  fixed = null;
     GeoReference station = null;
 
-    if ( type == PlotType.PLOT_PLAN && ext.equals("shp") ) {
+    if ( type == PlotType.PLOT_PLAN && ext.equals("shz") ) {
       String origin = num.getOriginStation();
       station = TDExporter.getGeolocalizedStation( mSid, mApp_mData, 1.0f, true, origin );
     } else if ( ext.equals("c3d") ) {
@@ -7816,7 +7816,7 @@ public class DrawingWindow extends ItemDrawer
       // case TDConst.SURVEY_FORMAT_PNM: savePnm( uri, mType ); break; // NO_PNM
       case TDConst.SURVEY_FORMAT_DXF: saveWithExt( uri, mType, "dxf" ); break;
       case TDConst.SURVEY_FORMAT_SVG: saveWithExt( uri, mType, "svg" ); break;
-      case TDConst.SURVEY_FORMAT_SHP: saveWithExt( uri, mType, "shp" ); break;
+      case TDConst.SURVEY_FORMAT_SHP: saveWithExt( uri, mType, "shz" ); break;
       case TDConst.SURVEY_FORMAT_XVI: saveWithExt( uri, mType, "xvi" ); break;
       case TDConst.SURVEY_FORMAT_TNL: saveWithExt( uri, mType, "xml" ); break;
       case TDConst.SURVEY_FORMAT_C3D: 

@@ -34,7 +34,7 @@ public class BleOpChrtWrite extends BleOperation
     bytes = Arrays.copyOf( b, b.length );
   }
 
-  // public String name() { return "ChrtWrite"; }
+  public String name() { return "ChrtWrite"; }
 
   @Override 
   public void execute()

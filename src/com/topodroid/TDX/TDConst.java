@@ -359,7 +359,7 @@ public class TDConst
     "th2",
     "dxf",
     "svg",
-    "shp",
+    "shz",
     "pdf",
     "xvi"
   };

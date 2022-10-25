@@ -27,7 +27,7 @@ public class BleOpConnect extends BleOperation
     mDevice = device;
   }
 
-  // public String name() { return "Connect"; }
+  public String name() { return "Connect"; }
 
   @Override 
   public void execute()
