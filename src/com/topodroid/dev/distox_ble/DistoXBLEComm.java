@@ -211,7 +211,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void connectGatt( Context ctx, BluetoothDevice bt_device ) // called from BleOpConnect
   {
-    // TDLog.v( "XBLE comm ***** connect GATT");
+    TDLog.v( "XBLE comm ***** connect GATT");
     mContext = ctx;
     mCallback.connectGatt( mContext, bt_device );
     // setupNotifications(); // FIXME_XBLE
@@ -227,7 +227,7 @@ public class DistoXBLEComm extends TopoDroidComm
   @Override
   public boolean connectDevice(String address, ListerHandler lister, int data_type, int timeout ) // FIXME XBLE_DATA_TYPE ?
   {
-    // TDLog.v( "XBLE comm connect Device");
+    TDLog.v( "XBLE comm connect Device");
     mAddress       = address; // saved
     mNrReadPackets = 0;
     mDataType      = data_type;
@@ -247,19 +247,19 @@ public class DistoXBLEComm extends TopoDroidComm
     mOps.clear();
     // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
     mBTConnected = false;
-    // TDLog.v( "XBLE comm disconnected status DISCONNECTED ");
+    TDLog.v( "XBLE comm disconnected status DISCONNECTED ");
     notifyStatus( ConnectionState.CONN_DISCONNECTED );
   }
 
   public void connected()
   {
-    // TDLog.v( "XBLE comm connected" );
+    TDLog.v( "XBLE comm connected" );
     clearPending();
   }
 
   public void disconnectGatt()  // called from BleOpDisconnect
   {
-    TDLog.v( "XBLE comm disconnect GATT status DISCONNECTED ");
+    TDLog.v( "XBLE comm disconnect GATT - status DISCONNECTED ");
     notifyStatus( ConnectionState.CONN_DISCONNECTED );
     mCallback.closeGatt();
   }
@@ -269,7 +269,7 @@ public class DistoXBLEComm extends TopoDroidComm
   @Override
   public boolean disconnectDevice()
   {
-    // TDLog.v( "XBLE comm ***** disconnect device = connected:" + mBTConnected );
+    TDLog.v( "XBLE comm ***** disconnect device = connected:" + mBTConnected );
     return closeDevice( false );
   }
 
@@ -366,7 +366,7 @@ public class DistoXBLEComm extends TopoDroidComm
     } else if ( uuid_str.equals( DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID_STR ) ) {
       // TDLog.v( "XBLE comm: changed write chrt" );
     } else {
-      // TDLog.v( "XBLE comm: changed unknown chrt" );
+      TDLog.Error( "XBLE comm: changed unknown chrt" );
     }
   }
 
@@ -385,7 +385,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void writtenChrt( String uuid_str, byte[] bytes )
   {
-    // TDLog.v( "XBLE comm: written chrt " + bytes.length );
+    TDLog.v( "XBLE comm: written chrt " + bytes.length );
     clearPending();
   }
 
@@ -406,7 +406,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
-    // TDLog.v( "XBLE comm: written desc - bytes " + bytes.length + " UUID " + uuid_str + " chrt " + uuid_chrt_str );
+    TDLog.v( "XBLE comm: written desc - bytes " + bytes.length + " UUID " + uuid_str + " chrt " + uuid_chrt_str );
     clearPending();
   }
 
@@ -454,7 +454,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public int servicesDiscovered( BluetoothGatt gatt )
   {
-    // TDLog.v( "XBLE comm discovered services");
+    TDLog.v( "XBLE comm discovered services");
     enqueueOp( new BleOpNotify( mContext, this, DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_READ_UUID, true ) );
     doNextOp();
     mBTConnected  = true;
@@ -524,21 +524,21 @@ public class DistoXBLEComm extends TopoDroidComm
         break;
       case BleCallback.CONNECTION_133: // unfortunately this happens
         TDLog.v( "XBLE comm: connection " + status + " - disconnect ... connect");
-        closeDevice( true );
-        notifyStatus( ConnectionState.CONN_WAITING );
-        TDUtil.slowDown( 600 ); // wait at least 500 msec (let xble BT initialize)
-        connectDevice( mAddress, mLister, mDataType, mTimeout );
-        // reconnectDevice( );
+        // closeDevice( true );
+        // notifyStatus( ConnectionState.CONN_WAITING );
+        // TDUtil.slowDown( 600 ); // wait at least 500 msec (let xble BT initialize)
+        // connectDevice( mAddress, mLister, mDataType, mTimeout );
+        reconnectDevice( );
         break;
       case BleCallback.CONNECTION_19: // unfortunately this happens
         TDLog.v( "XBLE comm: connection " + status + " - disconnect");
-        mOps.clear();
-        mPendingOp = null;
-        TDUtil.slowDown( 600 ); // wait at least 500 msec (let xble BT initialize)
-        closeDevice( true );
-        notifyStatus( ConnectionState.CONN_DISCONNECTED );
-        connectDevice( mAddress, mLister, mDataType, mTimeout );
-        // reconnectDevice();
+        // mOps.clear();
+        // mPendingOp = null;
+        // closeDevice( true );
+        // TDUtil.slowDown( 600 ); // wait at least 500 msec (let xble BT initialize)
+        // notifyStatus( ConnectionState.CONN_DISCONNECTED );
+        // connectDevice( mAddress, mLister, mDataType, mTimeout );
+        reconnectDevice();
         break;
       default:
         TDLog.Error("XBLE comm ***** ERROR " + status + ": reconnecting ...");
