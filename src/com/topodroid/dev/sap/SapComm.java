@@ -386,10 +386,10 @@ public class SapComm extends TopoDroidComm
   public void readedChrt( String uuid_str, byte[] bytes )
   {
     // TDLog.v( "SAP comm: readedChrt" );
-    if ( ! mReadInitialized ) { error(-1, uuid_str); return; }
-    if ( ! uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_STR ) ) { error(-2, uuid_str); return; }
+    if ( ! mReadInitialized ) { error(-1, uuid_str, "readInit"); return; }
+    if ( ! uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_STR ) ) { error(-2, uuid_str, "readUUID"); return; }
     int res = mSapProto.handleRead( bytes ); 
-    if ( res != DataType.PACKET_DATA ) { error(-3, uuid_str); return; }
+    if ( res != DataType.PACKET_DATA ) { error(-3, uuid_str, "dataType"); return; }
     ++mNrReadPackets; // FIXME NON_ATOMIC_ON_VOLATILE
     handleRegularPacket( res, mLister, DataType.DATA_SHOT );
   }
@@ -401,7 +401,7 @@ public class SapComm extends TopoDroidComm
   public void writtenChrt( String uuid_str, byte[] bytes )
   {
     // TDLog.v( "SAP comm: written chrt ...");
-    if ( ! mWriteInitialized ) { error(-4, uuid_str); return; }
+    if ( ! mWriteInitialized ) { error(-4, uuid_str, "writeInit"); return; }
     writeChrt( ); // try to write again
   }
 
@@ -530,17 +530,19 @@ public class SapComm extends TopoDroidComm
   /** handle an error
    * @param status   error status code
    * @param extra    error message
+   * @param what     error source
    */
-  public void error( int status, String extra )
+  public void error( int status, String extra, String what )
   {
-    TDLog.e("SAP comm: error " + status + " " + extra );
+    TDLog.e("SAP comm: error " + status + ": " + extra + " what: " + what );
   }
 
   /** handle a failure error
    * @param status   error status code
    * @param extra    failure message
+   * @param what     failure source (unused)
    */
-  public void failure( int status, String extra )
+  public void failure( int status, String extra, String what )
   {
     TDLog.e("SAP comm: failure " + status + " " + extra );
     switch ( status ) {

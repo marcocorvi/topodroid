@@ -546,7 +546,10 @@ public class BricComm extends TopoDroidComm
 
   // general error condition
   // the action may depend on the error status TODO
-  public void error( int status, String extra )
+  // @param status error code
+  // @param extra  error message
+  // @param what   error source (unused)
+  public void error( int status, String extra, String what )
   {
     switch ( status ) {
       case BluetoothGatt.GATT_INVALID_ATTRIBUTE_LENGTH: 
@@ -577,7 +580,12 @@ public class BricComm extends TopoDroidComm
     clearPending();
   }
 
-  public void failure( int status, String extra )
+  /** handle a failure error
+   * @param status   error status code
+   * @param extra    failure message
+   * @param what     failure source (unused)
+   */
+  public void failure( int status, String extra, String what )
   {
     // notifyStatus( ConnectionState.CONN_DISCONNECTED ); // this will be called by disconnected
     clearPending();

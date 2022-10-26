@@ -64,6 +64,8 @@ import android.content.res.Resources;
 public class DistoXBLEComm extends TopoDroidComm
         implements BleComm
 {
+  private final static boolean LOG = true; 
+
   final static int DATA_PRIM = 1;   // same as Bric DATA_PRIM
   final static int DATA_QUIT = -1;  // same as Bric 
 
@@ -131,7 +133,7 @@ public class DistoXBLEComm extends TopoDroidComm
               mNewDataFlag.notifyAll(); // wake sleeping threads
             }
           } else if ( buffer.type == DATA_QUIT ) {
-            TDLog.v( "XBLE comm: buffer QUIT");
+            if ( LOG ) TDLog.v( "XBLE comm: buffer QUIT");
             break;
           }
         }
@@ -211,7 +213,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void connectGatt( Context ctx, BluetoothDevice bt_device ) // called from BleOpConnect
   {
-    TDLog.v( "XBLE comm ***** connect GATT");
+    if ( LOG ) TDLog.v( "XBLE comm ***** connect GATT");
     mContext = ctx;
     mCallback.connectGatt( mContext, bt_device );
     // setupNotifications(); // FIXME_XBLE
@@ -227,7 +229,7 @@ public class DistoXBLEComm extends TopoDroidComm
   @Override
   public boolean connectDevice(String address, ListerHandler lister, int data_type, int timeout ) // FIXME XBLE_DATA_TYPE ?
   {
-    TDLog.v( "XBLE comm connect Device");
+    if ( LOG ) TDLog.v( "XBLE comm connect Device");
     mAddress       = address; // saved
     mNrReadPackets = 0;
     mDataType      = data_type;
@@ -247,19 +249,19 @@ public class DistoXBLEComm extends TopoDroidComm
     mOps.clear();
     // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
     mBTConnected = false;
-    TDLog.v( "XBLE comm disconnected status DISCONNECTED ");
+    if ( LOG ) TDLog.v( "XBLE comm disconnected status DISCONNECTED ");
     notifyStatus( ConnectionState.CONN_DISCONNECTED );
   }
 
   public void connected()
   {
-    TDLog.v( "XBLE comm connected" );
+    if ( LOG ) TDLog.v( "XBLE comm connected" );
     clearPending();
   }
 
   public void disconnectGatt()  // called from BleOpDisconnect
   {
-    TDLog.v( "XBLE comm disconnect GATT - status DISCONNECTED ");
+    if ( LOG ) TDLog.v( "XBLE comm disconnect GATT - status DISCONNECTED - close GATT");
     notifyStatus( ConnectionState.CONN_DISCONNECTED );
     mCallback.closeGatt();
   }
@@ -269,7 +271,7 @@ public class DistoXBLEComm extends TopoDroidComm
   @Override
   public boolean disconnectDevice()
   {
-    TDLog.v( "XBLE comm ***** disconnect device = connected:" + mBTConnected );
+    if ( LOG ) TDLog.v( "XBLE comm ***** disconnect device = connected:" + mBTConnected );
     return closeDevice( false );
   }
 
@@ -278,7 +280,7 @@ public class DistoXBLEComm extends TopoDroidComm
   {
     mReconnect = false;
     if ( mBTConnected || force ) {
-      TDLog.v( "XBLE close device - connected " + mBTConnected + " force " + force );
+      if ( LOG ) TDLog.v( "XBLE close device - connected " + mBTConnected + " force " + force );
       //mThreadConsumerWorking = false;
       mBTConnected = false;
       notifyStatus( ConnectionState.CONN_DISCONNECTED ); // not necessary
@@ -319,12 +321,12 @@ public class DistoXBLEComm extends TopoDroidComm
   private void doNextOp()
   {
     if ( mPendingOp != null ) {
-      TDLog.v( "XBLE comm: next op with pending " + mPendingOp.name() + " not null, ops " + mOps.size() );
+      if ( LOG ) TDLog.v( "XBLE comm: next op with pending " + mPendingOp.name() + " not null, ops " + mOps.size() );
       return;
     }
     mPendingOp = mOps.poll();
     if ( mPendingOp != null ) {
-      TDLog.v( "XBLE comm: polled, ops " + mOps.size() + " exec " + mPendingOp.name() );
+      if ( LOG ) TDLog.v( "XBLE comm: polled, ops " + mOps.size() + " exec " + mPendingOp.name() );
       mPendingOp.execute();
     }
     // else if ( mPendingCommands > 0 ) {
@@ -385,7 +387,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void writtenChrt( String uuid_str, byte[] bytes )
   {
-    TDLog.v( "XBLE comm: written chrt " + bytes.length );
+    if ( LOG ) TDLog.v( "XBLE comm: written chrt " + bytes.length );
     clearPending();
   }
 
@@ -406,7 +408,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
-    TDLog.v( "XBLE comm: written desc - bytes " + bytes.length + " UUID " + uuid_str + " chrt " + uuid_chrt_str );
+    if ( LOG ) TDLog.v( "XBLE comm: written desc - bytes " + bytes.length + " UUID " + uuid_str + " chrt " + uuid_chrt_str );
     clearPending();
   }
 
@@ -454,33 +456,34 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public int servicesDiscovered( BluetoothGatt gatt )
   {
-    TDLog.v( "XBLE comm discovered services");
+    if ( LOG ) TDLog.v( "XBLE comm discovered services");
+    TDUtil.slowDown( 600 );
     enqueueOp( new BleOpNotify( mContext, this, DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_READ_UUID, true ) );
     doNextOp();
-    mBTConnected  = true;
-    // mPacketToRead = 0;
-    /*if(!mThreadConsumerWorking) {
-        mThreadConsumerWorking = true;
-        mConsumer.start();
-    }*/
-    // TDLog.v( "XBLE comm discovered services status CONNECTED" );
-    notifyStatus( ConnectionState.CONN_CONNECTED );
-    // TODO write a resend-interrupt to the DistoXBLE
+
+    // 20221026 MOVED TO enablePNotify
+    // mBTConnected  = true;
+    // notifyStatus( ConnectionState.CONN_CONNECTED );
+    // // TODO write a resend-interrupt to the DistoXBLE
     return 0;
   }
 
   /** enable P-notify
    * @param srvUuid  service UUID
    * @param chrtUuid characteristics UUID
-   * @return ???
+   * @return true if success, false if failure
    */
   public boolean enablePNotify( UUID srvUuid, UUID chrtUuid )
   {
-    TDLog.v("XBLE enable P notify");
     boolean ret = mCallback.enablePNotify( srvUuid, chrtUuid );
     if ( ! ret ) {
-      TDLog.Error("XBLE failed enable PNotify");
-      closeDevice( true );
+      TDLog.Error("XBLE enable PNotify failed ");
+      // closeDevice( true );
+    } else {
+      if ( LOG ) TDLog.v("XBLE enable PNotify success");
+      mBTConnected  = true;
+      notifyStatus( ConnectionState.CONN_CONNECTED );
+      // TODO write a resend-interrupt to the DistoXBLE
     }
     return ret;
   }
@@ -488,7 +491,7 @@ public class DistoXBLEComm extends TopoDroidComm
   /** enable P-indicate
    * @param srvUuid  service UUID
    * @param chrtUuid characteristics UUID
-   * @return ???
+   * @return true if success, false if failure
    */
   public boolean enablePIndicate( UUID srvUuid, UUID chrtUuid )
   {
@@ -499,8 +502,9 @@ public class DistoXBLEComm extends TopoDroidComm
   /** react to an error
    * @param status   GATT error status
    * @param extra    error extra message
+   * @param what     error source
    */
-  public void error( int status, String extra )
+  public void error( int status, String extra, String what )
   {
     switch ( status ) {
       case BluetoothGatt.GATT_INVALID_ATTRIBUTE_LENGTH:
@@ -519,25 +523,24 @@ public class DistoXBLEComm extends TopoDroidComm
         TDLog.Error("XBLE COMM: insufficient auth " + extra );
         break;
       case BleCallback.CONNECTION_TIMEOUT:
-        TDLog.v( "XBLE comm: connection timeout reconnect ...");
+        if ( LOG ) TDLog.v( "XBLE comm: connection timeout reconnect ...");
         reconnectDevice();
         break;
       case BleCallback.CONNECTION_133: // unfortunately this happens
-        TDLog.v( "XBLE comm: connection " + status + " - disconnect ... connect");
-        // closeDevice( true );
-        // notifyStatus( ConnectionState.CONN_WAITING );
-        // TDUtil.slowDown( 600 ); // wait at least 500 msec (let xble BT initialize)
-        // connectDevice( mAddress, mLister, mDataType, mTimeout );
+        if ( LOG ) TDLog.v( "XBLE comm: connection " + status + " - disconnect");
+        TDUtil.slowDown( 500 ); // wait at least 500 msec (let xble BT initialize)
         reconnectDevice( );
         break;
-      case BleCallback.CONNECTION_19: // unfortunately this happens
-        TDLog.v( "XBLE comm: connection " + status + " - disconnect");
+      case BleCallback.CONNECTION_19: // unfortunately this too happens
+        TDLog.Error( "XBLE comm: connection " + status + " - disconnect");
         // mOps.clear();
-        // mPendingOp = null;
+        // clearPending();
         // closeDevice( true );
-        // TDUtil.slowDown( 600 ); // wait at least 500 msec (let xble BT initialize)
+        // TDUtil.slowDown( 500 ); // wait at least 500 msec (let xble BT initialize)
+        // mApp.mDataDownloader.setDownload( false );
         // notifyStatus( ConnectionState.CONN_DISCONNECTED );
         // connectDevice( mAddress, mLister, mDataType, mTimeout );
+        TDUtil.slowDown( 500 ); // wait at least 500 msec (let xble BT initialize)
         reconnectDevice();
         break;
       default:
@@ -551,18 +554,19 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   private void reconnectDevice()
   {
+    if ( LOG ) TDLog.v("XBLE reconnect device - close GATT" );
     mOps.clear();
     // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
     clearPending();
     mCallback.closeGatt();
     if ( mReconnect ) {
-      TDLog.v( "XBLE comm ***** reconnect yes Device = [4a] status WAITING" );
+      if ( LOG ) TDLog.v( "XBLE reconnect device - reconnecting ... ");
       notifyStatus( ConnectionState.CONN_WAITING );
       enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
       doNextOp();
       mBTConnected = true;
     } else {
-      // TDLog.v( "XBLE comm ***** reconnect no Device = [4b] status DISCONNECTED" );
+      if ( LOG ) TDLog.v( "XBLE reconnect device - disconnected" );
       notifyStatus( ConnectionState.CONN_DISCONNECTED );
     }
   }
@@ -570,8 +574,9 @@ public class DistoXBLEComm extends TopoDroidComm
   /** react to a failure (unrecoverable error): clear pending op and close the connection to the remote device
    * @param status   GATT error status (unused)
    * @param extra    failure extra message (unused)
+   * @param what     failure source (unused)
    */
-  public void failure( int status, String extra )
+  public void failure( int status, String extra, String what )
   {
     // notifyStatus( ConnectionState.CONN_DISCONNECTED ); // this will be called by disconnected
     clearPending();
@@ -961,7 +966,7 @@ public class DistoXBLEComm extends TopoDroidComm
             mPacketType = DistoXBLEProtocol.PACKET_NONE; // reset
             // TDLog.v("XBLE got packet " + mNrReadPackets );
           } else {
-            TDLog.v("XBLE no packet " );
+            if ( LOG ) TDLog.v("XBLE no packet " );
             break;
           }
         }
@@ -971,13 +976,13 @@ public class DistoXBLEComm extends TopoDroidComm
         //   if ( mPacketType == DistoXBLEProtocol.PACKET_MEASURE_DATA ) {
         //     mPacketType = DistoXBLEProtocol.PACKET_NONE; // reset
         //     ret++; // increment counter
-        //     TDLog.v("XBLE got packet " + ret );
+        //     if ( LOG ) TDLog.v("XBLE got packet " + ret );
         //   } else {
-        //     TDLog.v("XBLE no packet " );
+        //     if ( LOG ) TDLog.v("XBLE no packet " );
         //     break;
         //   }
         // } catch (InterruptedException e) {
-        //   TDLog.v("XBLE interrupted");
+        //   if ( LOG ) TDLog.v("XBLE interrupted");
         //   // e.printStackTrace();
         // }
         // long millis = System.currentTimeMillis() - start;
@@ -1199,7 +1204,7 @@ public class DistoXBLEComm extends TopoDroidComm
                     repeat = 0; // then the for-loop breaks with repeat = -1
                   }
                 } else {
-                  TDLog.v( "XBLE fw upload: fail at " + cnt ); // repeat
+                  TDLog.Error( "XBLE fw upload: fail at " + cnt ); // repeat
                   // ok = false; // without repeat-for uncomment these
                   // break;
                 }
@@ -1213,11 +1218,11 @@ public class DistoXBLEComm extends TopoDroidComm
           } catch ( EOFException e ) { // OK
             TDLog.v("XBLE fw update: EOF " + e.getMessage());
           } catch ( FileNotFoundException e ) {
-            TDLog.v( "XBLE fw update: Not Found error " + e.getMessage() );
+            TDLog.Error( "XBLE fw update: Not Found error " + e.getMessage() );
             ok = false;
           }
         } catch ( IOException e ) {
-          TDLog.v( "XBLE fw update: IO error " + e.getMessage() );
+          TDLog.Error( "XBLE fw update: IO error " + e.getMessage() );
           ok = false;
         }
         closeDevice( false );     //close ble here
@@ -1281,7 +1286,7 @@ public class DistoXBLEComm extends TopoDroidComm
       TDLog.Error("XBLE error " + e.getMessage() );
       return null;
     }
-    TDLog.v("XBLE packet not FLASH_BYTES_2");
+    TDLog.Error("XBLE packet not FLASH_BYTES_2");
     return null;
   }
 
@@ -1380,10 +1385,10 @@ public class DistoXBLEComm extends TopoDroidComm
         long start = System.currentTimeMillis();
         mNewDataFlag.wait( msec );
         long millis = System.currentTimeMillis() - start;
-        TDLog.v("XBLE " + msg + " msec " + millis );
+        if ( LOG ) TDLog.v("XBLE " + msg + " msec " + millis );
         return true;
       } catch ( InterruptedException e ) {
-        TDLog.v( "XBLE interrupted wait " + msg );
+        if ( LOG ) TDLog.v( "XBLE interrupted wait " + msg );
         // e.printStackTrace();
         return false;
       }

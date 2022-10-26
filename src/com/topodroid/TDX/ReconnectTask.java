@@ -49,18 +49,19 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
   {
     if ( ! lock() ) return null;
     if ( TDSetting.mAutoReconnect && TDInstance.isContinuousMode() ) {
+      // TDLog.v( "RECONNECT TASK running ...");
       while ( mDownloader.needReconnect() ) {
         try {
           if ( mDelay > 0 ) {
             // TDLog.v("SLEEP reconnect " + mDelay );
             Thread.sleep( mDelay );
           }
-          // TDLog.v( "notify disconnected: try reconnect status " + mDownloader.isDownloading() );
+          // TDLog.v( "RECONNECT TASK status " + mDownloader.isDownloading() );
           mDownloader.tryConnect( mLister, mDataType ); 
         } catch ( InterruptedException e ) { }
       }
     }
-    // TDLog.v( "reconnect task exits");
+    // TDLog.v( "RECONNECT TASK exits");
     return 0;
   }
 

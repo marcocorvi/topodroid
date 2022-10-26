@@ -52,7 +52,7 @@ public class DataDownloader
   /** set the "download" flag
    * @param download   value of the download flag
    */
-  void setDownload( boolean download ) { mDownload = download; }
+  public void setDownload( boolean download ) { mDownload = download; }
 
   // /** reset the downloader: not downloading, not connected - UNUSED
   //  * @note used only bt DistoXBLEComm
@@ -109,7 +109,7 @@ public class DataDownloader
   /** toggle the "download" status
    * @return the new download status
    */
-  boolean toggleDownload()
+  public boolean toggleDownload()
   {
     mDownload = ! mDownload;
     mConnected = mDownload ? ConnectionState.CONN_WAITING : ConnectionState.CONN_DISCONNECTED;

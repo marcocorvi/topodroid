@@ -51,10 +51,10 @@ public interface BleComm // extends BleChrtChanged
   void disconnectGatt();
 
   // recoverable error
-  void error( int status, String extra );
+  void error( int status, String extra, String what );
 
   // unrecoverable error
-  void failure( int status, String extra );
+  void failure( int status, String extra, String what );
 
   // void addService( BluetoothGattService srv );
   // void addChrt( UUID srv_uuid, BluetoothGattCharacteristic chrt );

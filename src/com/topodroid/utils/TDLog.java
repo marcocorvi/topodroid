@@ -189,7 +189,10 @@ public class TDLog
   {
     if ( mLogStream != LOG_FILE ) {
       mLogStream = LOG_FILE;
-      if ( mLog == null ) setLogTarget();
+      if ( mLog == null ) {
+        Log.v( TAG, "e( " + msg + " ) set log target");
+        setLogTarget();
+      }
     }
     mMillis = System.currentTimeMillis() % 600000;
     if ( mLogStream == LOG_SYSLOG || mLog == null ) {
@@ -303,6 +306,7 @@ public class TDLog
   {
     // mLogStream  = Integer.parseInt( prefs.getString("DISTOX_LOG_STREAM", "0") );
     // mLogAppend = prefs.getBoolean( "DISTOX_LOG_APPEND", false );
+    Log.v( TAG, "LOG load log prefs");
     setLogTarget();
   //   int lk = 2;
   //   final String[] log_key = TDPrefKey.LOG;
