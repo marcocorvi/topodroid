@@ -9,15 +9,16 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  * TopoDroid implementation of BLE callback follows the guidelines of 
- *   Chee Yi Ong,
- *   "The ultimate guide to Android bluetooth low energy"
- *   May 15, 2020
+ *   Chee Yi Ong, "The ultimate guide to Android bluetooth low energy", May 15, 2020
+ *   Martin van Welie, "Making Android BLE work", March 23, 2019
  */
 package com.topodroid.dev.ble;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.dev.ConnectionState;
 // import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.TDandroid;
 
 import android.os.Build;
 // import android.os.Looper;
@@ -35,9 +36,12 @@ import android.bluetooth.BluetoothGattService;
 // import java.util.List;
 import java.util.UUID;
 
+import java.lang.reflect.Method;
+
 public class BleCallback extends BluetoothGattCallback
 {
   private final static boolean LOG = false;
+  private BluetoothDevice mDevice = null;
 
   public final static int CONNECTION_TIMEOUT =   8;
   public final static int CONNECTION_133     = 133;
@@ -46,7 +50,7 @@ public class BleCallback extends BluetoothGattCallback
   private BleComm mComm;
   // private BleChrtChanged mChrtChanged;
   private BluetoothGatt mGatt = null;
-  private boolean mAutoConnect = false;
+  private boolean mAutoConnect = false; // connectGatt with this false times out in 30 s and gives error 133
 
   /** cstr
    * @param comm    communication object
@@ -74,7 +78,7 @@ public class BleCallback extends BluetoothGattCallback
   public void onCharacteristicChanged( BluetoothGatt gatt, BluetoothGattCharacteristic chrt )
   {
     // if ( mChrtChanged != null ) { mChrtChanged.changedChrt( chrt ); } else { mComm.changedChrt( chrt ); }
-    TDLog.f("BLE on chrt changed");
+    if ( LOG ) TDLog.v("BLE on chrt changed");
     mComm.changedChrt( chrt );
   }
 
@@ -93,6 +97,9 @@ public class BleCallback extends BluetoothGattCallback
     } else if ( status == BluetoothGatt.GATT_READ_NOT_PERMITTED ) {
       if ( LOG ) TDLog.v("BLE callback on char read NOT PERMITTED - perms " + BleUtils.isChrtRead( chrt ) + " " + chrt.getPermissions() );
       mComm.error( status, chrt.getUuid().toString(), "onCharacteristicRead" );
+    } else if ( status == BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION ) {
+      TDLog.v("BLE callback on char read insuff. auth.");
+      mComm.failure( status, chrt.getUuid().toString(), "onCharacteristicRead" );
     } else {
       if ( LOG ) TDLog.v("BLE callback on char read generic error");
       mComm.error( status, chrt.getUuid().toString(), "onCharacteristicRead" );
@@ -111,10 +118,11 @@ public class BleCallback extends BluetoothGattCallback
     if ( isSuccess( status, "onCharacteristicWrite" ) ) {
       String uuid_str = chrt.getUuid().toString();
       mComm.writtenChrt( uuid_str, chrt.getValue() );
-    } else 
-    if ( status == BluetoothGatt.GATT_INVALID_ATTRIBUTE_LENGTH 
-      || status == BluetoothGatt.GATT_WRITE_NOT_PERMITTED ) {
+    } else if ( status == BluetoothGatt.GATT_INVALID_ATTRIBUTE_LENGTH || status == BluetoothGatt.GATT_WRITE_NOT_PERMITTED ) {
       mComm.error( status, chrt.getUuid().toString(), "onCharacteristicWrite" );
+    } else if ( status == BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION ) {
+      TDLog.v("BLE callback on char write insuff. auth.");
+      mComm.failure( status, chrt.getUuid().toString(), "onCharacteristicWrite" );
     } else {
       mComm.failure( status, chrt.getUuid().toString(), "onCharacteristicWrite" );
     }
@@ -122,30 +130,30 @@ public class BleCallback extends BluetoothGattCallback
   
   /** react to a connection state change
    * @param gatt   GATT
-   * @param status status
+   * @param status status (error code)
    * @param state  new state
    */ 
   @Override
-  public void onConnectionStateChange(BluetoothGatt gatt, int status, int state)
+  public void onConnectionStateChange( BluetoothGatt gatt, int status, int state )
   {
     if ( LOG ) TDLog.v("BLE on connection state change: " + status );
     if ( isSuccess( status, "onConnectionStateChange" ) ) {
       if ( state == BluetoothProfile.STATE_CONNECTED ) {
-        // TO CHECK THIS
-        // mGatt = gatt;
-        // (new Handler( Looper.getMainLooper() )).post( new Runnable() {
-        //   public void run() { gatt.discoverServices(); }
-        // } );
-
-        // if ( mGatt != null ) mGatt.close(); // FIXME_BRIC
-        // mGatt = gatt;
         mComm.connected();
         try {
-          gatt.discoverServices();
+          int bondstate = mDevice.getBondState();
+          if ( bondstate == BluetoothDevice.BOND_NONE ) {
+            gatt.discoverServices();
+          } else if ( bondstate == BluetoothDevice.BOND_BONDING ) {
+            TDLog.v("BLE waiting for bonding to complete");
+          } else if ( bondstate == BluetoothDevice.BOND_BONDED ) { 
+            if ( TDandroid.BELOW_API_26 ) TDUtil.slowDown( 1000 ); // TODO use a Runnable to (wait and then) discover
+            gatt.discoverServices();
+          }
         } catch ( SecurityException e ) {
           TDLog.e("SECURITY discover services " + e.getMessage() );
           // TDToast.makeBad("Security error: discover services");
-          // TODO closeGatt() ?
+          // ??? closeGatt(); 
           return;
         }
 
@@ -153,22 +161,24 @@ public class BleCallback extends BluetoothGattCallback
         if ( LOG ) TDLog.v("BLE on connection state change - disconnected .. close GATT" );
         closeGatt();
         mComm.disconnected(); // this calls notifyStatus( CONN_DISCONNECTED );
-      // } else {
-        // TDLog.f( "BLE callback: on Connection State Change new state " + state );
+      } else { // state == BluetoothProfile.STATE_DISCONNECTING || state == BluetoothProfile.STATE_CONNECTING
+        TDLog.v( "BLE callback: on Connection State Change new state " + state );
+        // TODO
       }
+        
     } else {
       TDLog.Error("BLE callack onConnectionStateChange error - status " + status );
       mComm.notifyStatus( ConnectionState.CONN_WAITING );
-      if ( status == BluetoothGatt.GATT_INSUFFICIENT_ENCRYPTION 
-        || status == BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION 
-        || status == CONNECTION_TIMEOUT 
-        || status == CONNECTION_133 
-        || status == CONNECTION_19 ) {
+      if ( status == CONNECTION_TIMEOUT  // 8
+        || status == CONNECTION_133      // low level error
+        || status == CONNECTION_19 ) {   // device disconnected
         // TODO
         // device.createBond();
         // device.connectGatt();
         mComm.error( status, "onConnectionStateChange", "onConnectionStateChange" );
         // mComm.reconnectDevice();
+      } else if ( status == BluetoothGatt.GATT_INSUFFICIENT_ENCRYPTION || status == BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION ) {
+        mComm.failure( status, "onConnectionStateChange", "onConnectionStateChange" );
       } else { // status == BluetoothGatt.GATT_FAILURE
         mComm.failure( status, "onConnectionStateChange", "onConnectionStateChange" );
         // mComm.notifyStatus( ConnectionState.CONN_DISCONNECTED );
@@ -192,7 +202,7 @@ public class BleCallback extends BluetoothGattCallback
         mGatt = gatt;
       } else {
         if ( LOG ) TDLog.v( "BLE on services discovered - failure .. ret " + ret );
-        closeGatt();
+        // closeGatt(); moved to comm failure() method
         mComm.failure( ret, "onServicesDiscovered", "onServicesDiscovered" );
       }
     } else {
@@ -315,6 +325,7 @@ public class BleCallback extends BluetoothGattCallback
     closeGatt();
     TDLog.f( "BLE connect gatt");
     // device.connectGatt( ctx, mAutoConnect, this );
+    mDevice = device;
     try { 
       if ( Build.VERSION.SDK_INT < 23 ) {
         mGatt = device.connectGatt( ctx, mAutoConnect, this );
@@ -515,6 +526,11 @@ public class BleCallback extends BluetoothGattCallback
     return false;
   }
 
+  /**
+   * @note writeType can be DEFAULT, NO_RESPONSE, SIGNED
+   * if a characteristics supports both NO_RESPONSE and DEFAILT Android picks NO_RESPONSE
+   * FIXME do not rely on Android and set what yoy want
+   */
   public boolean writeChrt(  UUID srvUuid, UUID chrtUuid, byte[] bytes )
   {
     // TDLog.f( "BLE write chrt");
@@ -554,9 +570,11 @@ public class BleCallback extends BluetoothGattCallback
   //   5 GATT_INSUFFICIENT_AUTHENTICATION
   //   6 GATT_REQUEST_NOT_SUPPORTED
   //   7 GATT_INVALID_OFFSET
-  //   8 ???
+  //   8 DEVICE OUT OF RANGE // GATT_CONN_TIMEOUT // conn timed out and device disconnected // conn timed out and device disconnected
   //  13 GATT_INVALID_ATTRIBUTE_LENGTH
   //  15 GATT_INSUFFICIENT_ENCRYPTION
+  //  19 GATT_CONN_TERMINATE_PEER_USER // device disconnected itself on purpose
+  //  22 BOND ISSUE
   // 133 GATT_ERROR
   // 143 GATT_CONNECTION_CONGESTED
   // 257 GATT_FAILURE  
@@ -628,6 +646,26 @@ public class BleCallback extends BluetoothGattCallback
       return null;
     }
     return chrt;
+  }
+
+  /** clear the gatt service cache - NB asynchronous
+   * @return true on success
+   * from "Making Android BLE work". M. van Welie
+   */
+  public boolean clearServiceCache( )
+  { 
+    boolean ret = false;
+    if ( mGatt != null ) {
+      try { 
+        Method refresh = mGatt.getClass().getMethod( "refresh" );
+        if ( refresh != null ) {
+          ret = (boolean)refresh.invoke( mGatt );
+        }
+      } catch ( Exception e ) {
+        TDLog.Error("BLE failed refresh" );
+      }
+    }
+    return ret;
   }
 
 }

@@ -416,7 +416,7 @@ public class SapComm extends TopoDroidComm
   }
 
   /** react to the descriptor has been written
-   * @param uuid_str       ??? UUID
+   * @param uuid_str       descriptor UUID
    * @param uuid_chrt_str  characteristic UUID
    * @param bytes          array of written bytes
    * @note this method marks that the SAP has been connected
@@ -537,7 +537,7 @@ public class SapComm extends TopoDroidComm
     TDLog.e("SAP comm: error " + status + ": " + extra + " what: " + what );
   }
 
-  /** handle a failure error
+  /** handle a failure error: close GATT
    * @param status   error status code
    * @param extra    failure message
    * @param what     failure source (unused)
@@ -557,6 +557,7 @@ public class SapComm extends TopoDroidComm
         break;
       default:
     }
+    mCallback.closeGatt();
   }
 
   /** enable notify on a characteristic - it does nothing

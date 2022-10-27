@@ -36,6 +36,7 @@ import com.topodroid.dev.ble.BleOpNotify;
 import com.topodroid.dev.ble.BleOperation;
 import com.topodroid.dev.ble.BleBuffer;
 import com.topodroid.dev.ble.BleQueue;
+import com.topodroid.dev.ble.BleUtils;
 import com.topodroid.dev.distox.DistoX;
 import com.topodroid.packetX.MemoryOctet;
 // import com.topodroid.prefs.TDSetting;
@@ -249,8 +250,9 @@ public class DistoXBLEComm extends TopoDroidComm
     mOps.clear();
     // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
     mBTConnected = false;
-    if ( LOG ) TDLog.v( "XBLE comm disconnected status DISCONNECTED ");
+    if ( LOG ) TDLog.v( "XBLE comm disconnected status DISCONNECTED - notify");
     notifyStatus( ConnectionState.CONN_DISCONNECTED );
+    // mCallback.closeGatt();
   }
 
   public void connected()
@@ -357,16 +359,17 @@ public class DistoXBLEComm extends TopoDroidComm
 
   /** notifies that a characteristics has changed
    * @param chrt    changed characteristics
+   * @note queue.put() stores a buffer with a copy of the byte values in the characteristic
    */
   public void changedChrt( BluetoothGattCharacteristic chrt )
   {
     String uuid_str = chrt.getUuid().toString();
     if ( uuid_str.equals( DistoXBLEConst.DISTOXBLE_CHRT_READ_UUID_STR ) ) {
-      // TDLog.v( "XBLE comm: changed read chrt" );
+      if ( LOG ) TDLog.v( "XBLE comm: changed read chrt" );
       // TODO set buffer type according to the read value[]
       mQueue.put( DATA_PRIM, chrt.getValue() );
     } else if ( uuid_str.equals( DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID_STR ) ) {
-      // TDLog.v( "XBLE comm: changed write chrt" );
+      if ( LOG ) TDLog.v( "XBLE comm: changed write chrt" );
     } else {
       TDLog.Error( "XBLE comm: changed unknown chrt" );
     }
@@ -378,12 +381,12 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void readedChrt( String uuid_str, byte[] bytes )
   {
-    // TDLog.v( "XBLE comm: readed chrt " + bytes.length );
+    if ( LOG ) TDLog.v( "XBLE comm: readed chrt " + bytes.length );
   }
 
   /** notified that bytes have been written to the write characteristics
    * @param uuid_str  service UUID string
-   * @param bytes    array of written bytes 
+   * @param bytes     array of written bytes
    */
   public void writtenChrt( String uuid_str, byte[] bytes )
   {
@@ -402,13 +405,29 @@ public class DistoXBLEComm extends TopoDroidComm
   }
 
   /** notified that bytes have been written
-   * @param uuid_str  service UUID string
+   * @param uuid_str  descriptor UUID string
    * @param uuid_chrt_str characteristics UUID string
    * @param bytes    array of written bytes 
+   *
+   * TODO distinguish CCC descriiptor (BleUtils.CCCD_UUID) from other descriptors
    */
   public void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
-    if ( LOG ) TDLog.v( "XBLE comm: written desc - bytes " + bytes.length + " UUID " + uuid_str + " chrt " + uuid_chrt_str );
+    if ( uuid_str.equals( BleUtils.CCCD_UUID ) ) { // a notify op
+      if ( bytes != null ) {
+        if ( bytes[0] != 0 ) { // set notify/indicate
+          if ( LOG ) TDLog.v("XBLE CCC set notify " + bytes[0] + " chrt " + uuid_chrt_str );
+          // here we may save the UUID of notifying characteristics
+        } else { 
+          if ( LOG ) TDLog.v("XBLE CCC clear notify chrt " + uuid_chrt_str );
+          // here we may clear the UUID of the notifying characteristics
+        }
+      } else {
+        TDLog.Error( "XBLE comm: written null-bytes CCC chrt " + uuid_chrt_str );
+      }
+    } else {
+      if ( LOG ) TDLog.v( "XBLE comm: written normal desc - bytes " + bytes.length + " UUID " + uuid_str + " chrt " + uuid_chrt_str );
+    }
     clearPending();
   }
 
@@ -516,31 +535,25 @@ public class DistoXBLEComm extends TopoDroidComm
       case BluetoothGatt.GATT_READ_NOT_PERMITTED:
         TDLog.Error("XBLE COMM: read not permitted " + extra );
         break;
-      case BluetoothGatt.GATT_INSUFFICIENT_ENCRYPTION:
-        TDLog.Error("XBLE COMM: insufficient encrypt " + extra );
-        break;
-      case BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION:
-        TDLog.Error("XBLE COMM: insufficient auth " + extra );
-        break;
+      // case BluetoothGatt.GATT_INSUFFICIENT_ENCRYPTION: // 20221026 moved to failure()
+      //   TDLog.Error("XBLE COMM: insufficient encrypt " + extra );
+      //   break;
+      // case BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION:
+      //   TDLog.Error("XBLE COMM: insufficient auth " + extra );
+      //   break;
       case BleCallback.CONNECTION_TIMEOUT:
         if ( LOG ) TDLog.v( "XBLE comm: connection timeout reconnect ...");
         reconnectDevice();
         break;
       case BleCallback.CONNECTION_133: // unfortunately this happens
         if ( LOG ) TDLog.v( "XBLE comm: connection " + status + " - disconnect");
-        TDUtil.slowDown( 500 ); // wait at least 500 msec (let xble BT initialize)
+        TDUtil.slowDown( 500 ); // wait at least 500 msec
         reconnectDevice( );
         break;
-      case BleCallback.CONNECTION_19: // unfortunately this too happens
-        TDLog.Error( "XBLE comm: connection " + status + " - disconnect");
-        // mOps.clear();
-        // clearPending();
-        // closeDevice( true );
-        // TDUtil.slowDown( 500 ); // wait at least 500 msec (let xble BT initialize)
-        // mApp.mDataDownloader.setDownload( false );
-        // notifyStatus( ConnectionState.CONN_DISCONNECTED );
-        // connectDevice( mAddress, mLister, mDataType, mTimeout );
+      case BleCallback.CONNECTION_19: // unfortunately this too happens (when device is slow respond?)
+        // mCallback.clearServiceCache(); // TODO not sure there is a need to clear the service cache
         TDUtil.slowDown( 500 ); // wait at least 500 msec (let xble BT initialize)
+        TDLog.Error( "XBLE comm: connection " + status + " - reconnect");
         reconnectDevice();
         break;
       default:
@@ -560,6 +573,7 @@ public class DistoXBLEComm extends TopoDroidComm
     clearPending();
     mCallback.closeGatt();
     if ( mReconnect ) {
+      // TDUtil.slowDown( 100 );
       if ( LOG ) TDLog.v( "XBLE reconnect device - reconnecting ... ");
       notifyStatus( ConnectionState.CONN_WAITING );
       enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
@@ -571,17 +585,21 @@ public class DistoXBLEComm extends TopoDroidComm
     }
   }
 
-  /** react to a failure (unrecoverable error): clear pending op and close the connection to the remote device
+  /** react to a failure (unrecoverable error):
+   *    clear pending op 
+   *    close the connection to the remote device
+   *    close the GATT
    * @param status   GATT error status (unused)
    * @param extra    failure extra message (unused)
    * @param what     failure source (unused)
    */
   public void failure( int status, String extra, String what )
   {
+    // TDLog.v( "XBLE comm Failure: disconnect and close GATT ...");
     // notifyStatus( ConnectionState.CONN_DISCONNECTED ); // this will be called by disconnected
     clearPending();
-    // TDLog.v( "XBLE comm Failure: disconnecting ...");
     closeDevice( false );
+    mCallback.closeGatt();
   }
 
   /** forward status notification to the application
@@ -1394,6 +1412,7 @@ public class DistoXBLEComm extends TopoDroidComm
       }
     }
   }
+
 }
 
 

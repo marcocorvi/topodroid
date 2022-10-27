@@ -215,10 +215,10 @@ public class BricComm extends TopoDroidComm
   public boolean setMemory( byte[] bytes )
   {
     if ( bytes == null ) { // CLEAR
-      // TDLog.Log( TDLog.LOG_BT, "BRIC clear memory");
+      // TDLog.v( "BRIC clear memory");
       return sendCommand( BricConst.CMD_CLEAR );
     } else { // LAST TIME
-      // TDLog.Log( TDLog.LOG_BT, "BRIC reset memory ... ");
+      // TDLog.v( "BRIC reset memory ... ");
       enqueueOp( new BleOpChrtWrite( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.LAST_TIME_UUID, bytes ) );
       clearPending();
       return true;
@@ -302,7 +302,7 @@ public class BricComm extends TopoDroidComm
   private void addService( BluetoothGattService srv ) 
   { 
     String srv_uuid = srv.getUuid().toString();
-    // TDLog.v( "Bric comm add S: " + srv_uuid );
+    // TDLog.v( "BRIC comm add S: " + srv_uuid );
   }
   */
 
@@ -314,7 +314,7 @@ public class BricComm extends TopoDroidComm
     int ret;
     UUID chrtUuid = chrt.getUuid();
     String chrt_uuid = chrtUuid.toString();
-    // TDLog.v( "Bric comm ***** add chrt " + chrtUuid );
+    // TDLog.v( "BRIC comm ***** add chrt " + chrtUuid );
     if ( chrt_uuid.equals( BricConst.MEAS_PRIM ) ) {
       ret = enqueueOp( new BleOpNotify( mContext, this, srvUuid, chrt, true ) );
     } else if ( chrt_uuid.equals( BricConst.MEAS_META ) ) {
@@ -324,7 +324,7 @@ public class BricComm extends TopoDroidComm
     } else if ( chrt_uuid.equals( BricConst.LAST_TIME ) ) { // LAST_TIME is not notified
       ret = enqueueOp( new BleOpNotify( mContext, this, srvUuid, chrt, true ) );
     } else {
-      // TDLog.v( "Bric comm add: unknown chrt " + chrt_uuid );
+      // TDLog.v( "BRIC comm add: unknown chrt " + chrt_uuid );
     }
   }
   */
@@ -333,7 +333,7 @@ public class BricComm extends TopoDroidComm
   private void addDesc( UUID srv_uuid, UUID chrt_uuid, BluetoothGattDescriptor desc ) 
   {
     String desc_uuid = desc.getUuid().toString();
-    // TDLog.v( "Bric comm add     +D: " + desc_uuid );
+    // TDLog.v( "BRIC comm add     +D: " + desc_uuid );
   }
   */
 
@@ -481,8 +481,8 @@ public class BricComm extends TopoDroidComm
   }
 
   /** react after a descriptor has been written
-   * @param uuid_str       characteristics string UUID
-   * @param uuid_chrt_str  descriptor string UUID
+   * @param uuid_str       descriptor string UUID
+   * @param uuid_chrt_str  characteristics string UUID
    * @param bytes          read bytes
    * @note from onDescriptorWrite
    */
@@ -495,14 +495,14 @@ public class BricComm extends TopoDroidComm
   // from onMtuChanged
   public void changedMtu( int mtu )
   {
-    // TDLog.Log( TDLog.LOG_BT, "BRIC comm changed MTU " + mtu );
+    // TDLog.v( "BRIC comm changed MTU " + mtu );
     clearPending();
   }
 
   // from onReadRemoteRssi
   public void readedRemoteRssi( int rssi )
   {
-    // TDLog.Log( TDLog.LOG_BT, "BRIC comm readed RSSI " + rssi );
+    // TDLog.v( "BRIC comm readed RSSI " + rssi );
     clearPending();
   }
 
@@ -526,7 +526,7 @@ public class BricComm extends TopoDroidComm
       TDLog.v( "BRIC comm changed char ERR" ); 
       mQueue.put( DATA_ERR, chrt.getValue() );
     } else if ( chrt_uuid.equals( BricConst.LAST_TIME  ) ) {
-      // TDLog.Log( TDLog.LOG_BT, "BRIC comm changed char TIME " + BleUtils.bytesToString( chrt.getValue() ) );
+      // TDLog.v( "BRIC comm changed char TIME " + BleUtils.bytesToString( chrt.getValue() ) );
       // mQueue.put( DATA_TIME, chrt.getValue() ); 
       // // TDLog.v( "BRIC comm last time " + BleUtils.bytesToString( chrt.getValue() ) );
     } else {
@@ -580,17 +580,18 @@ public class BricComm extends TopoDroidComm
     clearPending();
   }
 
-  /** handle a failure error
+  /** handle a failure error: clear ops, disconnect, close GATT
    * @param status   error status code
    * @param extra    failure message
    * @param what     failure source (unused)
    */
   public void failure( int status, String extra, String what )
   {
+    // TDLog.v( "BRIC comm Failure: disconnect and close GATT ...");
     // notifyStatus( ConnectionState.CONN_DISCONNECTED ); // this will be called by disconnected
     clearPending();
-    // TDLog.v( "BRIC comm Failure: disconnecting ...");
     closeDevice();
+    mCallback.closeGatt();
   }
     
   // ----------------- CONNECT -------------------------------
@@ -721,7 +722,7 @@ public class BricComm extends TopoDroidComm
     if ( System.currentTimeMillis() < onData ) {
       if ( mBTConnected ) notifyStatus( ConnectionState.CONN_WAITING );
       if ( mTimer == null ) {
-        // TDLog.Log( TDLog.LOG_BT, "schedule a disconnect Device" );
+        // TDLog.v( "BRIC schedule a delayed closeDevice" );
         mTimer = new Timer();
         mTimer.schedule(  new TimerTask() { @Override public void run() { disconnectDevice(); } }, 1000 );
       }
@@ -752,11 +753,11 @@ public class BricComm extends TopoDroidComm
       case BricConst.CMD_OFF:   command = Arrays.copyOfRange( BricConst.COMMAND_OFF,   0,  9 ); break;
 /*
       case BricConst.CMD_SPLAY: 
-        // TDLog.Log( TDLog.LOG_BT, "BRIC comm send cmd SPLAY");
+        // TDLog.v( "BRIC comm send cmd SPLAY");
         mPendingCommands += 1;
         break;
       case BricConst.CMD_LEG: 
-        // TDLog.Log( TDLog.LOG_BT, "BRIC comm send cmd LEG");
+        // TDLog.v( "BRIC comm send cmd LEG");
         mPendingCommands += 3;
         break;
 */
@@ -776,12 +777,12 @@ public class BricComm extends TopoDroidComm
   // {
   //   (new Thread() {
   //     public void run() {
-  //       // TDLog.Log( TDLog.LOG_BT, "BRIC comm: enqueue LASER cmd");
+  //       // TDLog.v( "BRIC comm: enqueue LASER cmd");
   //       byte[] cmd1 = Arrays.copyOfRange( BricConst.COMMAND_LASER, 0, 5 );
   //       enqueueOp( new BleOpChrtWrite( mContext, comm, BricConst.CTRL_SRV_UUID, BricConst.CTRL_CHRT_UUID, cmd1 ) );
   //       doNextOp();
   //       TDUtil.slowDown( 600 );
-  //       // TDLog.Log( TDLog.LOG_BT, "BRIC comm: enqueue SHOT cmd");
+  //       // TDLog.v( "BRIC comm: enqueue SHOT cmd");
   //       byte[] cmd2 = Arrays.copyOfRange( BricConst.COMMAND_SHOT, 0, 4 );
   //       enqueueOp( new BleOpChrtWrite( mContext, comm, BricConst.CTRL_SRV_UUID, BricConst.CTRL_CHRT_UUID, cmd2 ) );
   //       doNextOp();
@@ -853,7 +854,7 @@ public class BricComm extends TopoDroidComm
     StringBuilder sb = new StringBuilder();
     sb.append( "BRIC comm Ops: ");
     for ( BleOperation op : mOps ) sb.append( op.name() ).append(" ");
-    TDLog.Log( TDLog.LOG_BT, sb.toString() );
+    TDLog.v( sb.toString() );
   }
   */
     
