@@ -26,6 +26,7 @@ import android.content.Context;
 
 public class DistoXBLEProtocol extends TopoDroidProtocol
 {
+  private final static int DATA_LEN = 17;
 
   private final DistoXBLEComm mComm;
   private final ListerHandler mLister;
@@ -64,6 +65,8 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
   public byte[] mFlashBytes;
   //public int mPacketType;
 
+  private byte[] mPacketBytes;
+
   /** cstr
    * @param ctx      context
    * @param app      application
@@ -79,7 +82,9 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
     mRepliedData = new byte[4];
     mMeasureDataPacket1 = new byte[8];
     mMeasureDataPacket2 = new byte[8];
-    mFlashBytes = new byte[256];
+    mFlashBytes  = new byte[256];
+    mPacketBytes = new byte[DATA_LEN];
+    for ( int k=0; k<DATA_LEN; ++k ) mPacketBytes[k] = (byte)0xa5;
   }
 
   /** process a data array
@@ -98,20 +103,27 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
       TDLog.v("XBLE proto 0-length data");
       return PACKET_NONE;
     }
-    if ( (databuf[0] == MemoryOctet.BYTE_PACKET_DATA || databuf[0] == MemoryOctet.BYTE_PACKET_G ) && databuf.length == 17 ) { // shot / calib data
+    if ( (databuf[0] == MemoryOctet.BYTE_PACKET_DATA || databuf[0] == MemoryOctet.BYTE_PACKET_G ) && databuf.length == DATA_LEN ) { // shot / calib data
       if ( mComm.isDownloading() ) {
-        System.arraycopy( databuf, 1, mMeasureDataPacket1, 0, 8);
-        System.arraycopy( databuf, 9, mMeasureDataPacket2, 0, 8);
-        int res1 = handlePacket(mMeasureDataPacket1);
-        int res2 = handlePacket(mMeasureDataPacket2);
-        // TDLog.v("XBLE proto 17-length data - type " + databuf[0] + " res " + res1 + " " + res2 );
-        if ( res1 != PACKET_NONE && res2 != PACKET_NONE ) {
-          mComm.sendCommand(( mMeasureDataPacket1[0] & 0x80 ) | 0x55);
-          mComm.handleRegularPacket(res1, mLister, 0);
-          mComm.handleRegularPacket(res2, mLister, 0);
-          return PACKET_MEASURE_DATA; // with ( PACKET_MEASURE_DATA | databuf[0]) shots would be distinguished from calib
-        // } else {
-        //   return PACKET_ERROR;
+        for ( int kk=0; kk<DATA_LEN; ++kk ) {
+          if ( mPacketBytes[kk] != databuf[kk] ) { // new packet data: send ack depends on handling packets
+            System.arraycopy( databuf, 0, mPacketBytes, 0, DATA_LEN );
+            // System.arraycopy( databuf, 1, mMeasureDataPacket1, 0, 8);
+            // System.arraycopy( databuf, 9, mMeasureDataPacket2, 0, 8);
+            System.arraycopy( mPacketBytes, 1, mMeasureDataPacket1, 0, 8);
+            System.arraycopy( mPacketBytes, 9, mMeasureDataPacket2, 0, 8);
+            int res1 = handlePacket(mMeasureDataPacket1);
+            int res2 = handlePacket(mMeasureDataPacket2);
+            // TDLog.v("XBLE proto 17-length data - type " + databuf[0] + " res " + res1 + " " + res2 );
+            if ( res1 != PACKET_NONE && res2 != PACKET_NONE ) {
+              mComm.sendCommand(( mMeasureDataPacket1[0] & 0x80 ) | 0x55);
+              mComm.handleRegularPacket(res1, mLister, 0);
+              mComm.handleRegularPacket(res2, mLister, 0);
+              return PACKET_MEASURE_DATA; // with ( PACKET_MEASURE_DATA | databuf[0]) shots would be distinguished from calib
+            } else {
+              return PACKET_ERROR; // break for loop
+            }
+          }
         }
       } else {
         TDLog.Error("XBLE not downloading");

@@ -623,9 +623,13 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   private boolean enlistWrite( UUID srvUuid, UUID chrtUuid, byte[] bytes, boolean addHeader )
   {
-    BluetoothGattCharacteristic chrt = mCallback.getWriteChrt( srvUuid, chrtUuid );
+    BluetoothGattCharacteristic chrt = null;
+    for ( int repeat = 3; repeat > 0; --repeat ) {
+      if ( (chrt = mCallback.getWriteChrt( srvUuid, chrtUuid )) != null ) break;
+      TDUtil.slowDown( 300 );
+    }
     if ( chrt == null ) {
-      TDLog.Error("XLE comm enlist write: null write chrt");
+      TDLog.Error("XBLE comm enlist write: null write chrt");
       return false;
     }
     //Chrt.getPermission() always returns 0, I don't know why. Siwei Tian deleted
@@ -665,10 +669,12 @@ public class DistoXBLEComm extends TopoDroidComm
     if ( info == null ) return;
     // TDLog.v("XBLE comm get XBLE info");
     if ( readMemory( DistoXBLEDetails.FIRMWARE_ADDRESS, 4 ) != null ) { // ?? there was not 4
-      info.SetVal( mPacketType, ((DistoXBLEProtocol)mProtocol).mFirmVer);
+      // info.SetVal( mPacketType, ((DistoXBLEProtocol)mProtocol).mFirmVer);
+      info.SetVal( DistoXBLEProtocol.PACKET_INFO_FIRMWARE, ((DistoXBLEProtocol)mProtocol).mFirmVer);
     }
     if ( readMemory( DistoXBLEDetails.HARDWARE_ADDRESS, 4 ) != null ) {
-      info.SetVal( mPacketType, ((DistoXBLEProtocol)mProtocol).mHardVer);
+      // info.SetVal( mPacketType, ((DistoXBLEProtocol)mProtocol).mHardVer);
+      info.SetVal( DistoXBLEProtocol.PACKET_INFO_HARDWARE, ((DistoXBLEProtocol)mProtocol).mHardVer);
     }
   }
 
@@ -828,10 +834,11 @@ public class DistoXBLEComm extends TopoDroidComm
     //   }
     // }
     if ( (mPacketType & DistoXBLEProtocol.PACKET_REPLY) == DistoXBLEProtocol.PACKET_REPLY ) {
-      byte[] replydata = ( (DistoXBLEProtocol) mProtocol).mRepliedData;
-      if(replydata.length == len)
-        return replydata;
-      else return null;
+      int length = ((DistoXBLEProtocol) mProtocol).mRepliedData.length;
+      if ( length != len ) return null;
+      byte[] replydata = new byte[len];
+      System.arraycopy( ((DistoXBLEProtocol) mProtocol).mRepliedData, 0, replydata, 0, len );
+      return replydata;
     }
     return null;
   }
@@ -1113,11 +1120,11 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void uploadFirmware( String address, File file, TDProgress progress )
   {
-    final boolean DRY_RUN = false; // DEBUG
+    final boolean DRY_RUN = true; // DEBUG
 
     TDLog.v( "XBLE upload firmware " + file.getPath() );
-    boolean is_log_file = TDLog.isStreamFile();
-    if ( ! is_log_file ) TDLog.setLogStream( TDLog.LOG_FILE ); // set log to file if necessary
+    // boolean is_log_file = TDLog.isStreamFile();
+    // if ( ! is_log_file ) TDLog.setLogStream( TDLog.LOG_FILE ); // set log to file if necessary
     // int ret = 0;
 
     long len        = file.length();
@@ -1137,23 +1144,24 @@ public class DistoXBLEComm extends TopoDroidComm
 
         try {
           // File fp = new File( filepath );
-          if ( ! DRY_RUN ) {
-            if ( ! tryConnectDevice( address, null, 0 ) ) ok = false; // return 0;
+          if ( ! tryConnectDevice( address, null, 0 ) ) {
+            TDLog.Error("XBLE fw upload - failed connect");
+            ok = false; // return 0;
           }
 
           FileInputStream fis = new FileInputStream(file);
           DataInputStream dis = new DataInputStream(fis);
           try{
             for ( int addr = 0; ok /* && addr < end_addr */ ; /*++addr*/) {
-              // TDLog.v("XBLE fw upload: addr " + addr + " count " + cnt);
               for (int k = 0; k < 256; ++k) buf[k] = (byte) 0xff;
               int nr = dis.read( buf, 0, 256 );
               int crc16 = calCRC16( buf, 256 );
               //for (int k = 0; k < 256; ++k) buf[k] = (byte) 0xff;  //for simulating the bug
               if (nr <= 0) { // EOF ?
-                // TDLog.v("XBLE fw upload: file read failure. Result " + nr);
+                TDLog.v("XBLE fw upload: file read " + nr + " - break");
                 break;
               }
+              TDLog.v("XBLE fw upload: addr " + addr + " count " + cnt + " crc16 " + crc16 );
               //if(addr < 8) continue;
               int flashaddr = addr + 8;
               cnt += nr;
@@ -1219,15 +1227,16 @@ public class DistoXBLEComm extends TopoDroidComm
                         }
                       } );
                     }
-                    repeat = 0; // then the for-loop breaks with repeat = -1
+                    repeat = 0; // then the for-loop breaks with repeat = -1 (ie. success)
                   }
                 } else {
-                  TDLog.Error( "XBLE fw upload: fail at " + cnt ); // repeat
-                  // ok = false; // without repeat-for uncomment these
+                  TDLog.Error( "XBLE fw upload: fail at " + cnt + " repeat " + repeat + " packet " + mPacketType );
+                  // ok = false; // without repeat-for uncomment these two lines
                   // break;
                 }
               }
               if ( repeat == 0 ) {
+                TDLog.Error( "XBLE fw upload: fail after 3 repeats at " + cnt );
                 ok = false;
                 break;
               }
@@ -1264,7 +1273,7 @@ public class DistoXBLEComm extends TopoDroidComm
         }
       }
     } ).start();
-    if ( ! is_log_file ) TDLog.setLogStream( TDLog.LOG_SYSLOG ); // reset log stream if necessary
+    // if ( ! is_log_file ) TDLog.setLogStream( TDLog.LOG_SYSLOG ); // reset log stream if necessary
   }
 
   /** read a 256-byte firmware block
@@ -1273,6 +1282,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   private byte[] readFirmwareBlock(int addr)
   {
+    TDLog.v("XBLE fw read block at addr " + addr );
     byte[] buf = new byte[3];
     buf[0] = MemoryOctet.BYTE_PACKET_FW_READ; // (byte)0x3a;
     buf[1] = (byte)( addr & 0xff );
@@ -1330,6 +1340,7 @@ public class DistoXBLEComm extends TopoDroidComm
           for ( int addr = 8; ; addr++ ) {
             buf = readFirmwareBlock(addr);
             if ( buf == null || buf.length < 256 ) {
+              TDLog.Error("XBLE fw read - failed at addr " + addr + " cnt " + cnt );
               ok = false;
               break;
             }
@@ -1352,7 +1363,7 @@ public class DistoXBLEComm extends TopoDroidComm
       } else {
         ok = false;
       }
-    }catch ( FileNotFoundException e ) {
+    } catch ( FileNotFoundException e ) {
       return 0;
     }
     return ( ok ? cnt : -cnt );
