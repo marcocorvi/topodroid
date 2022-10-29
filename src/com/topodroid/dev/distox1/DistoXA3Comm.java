@@ -18,6 +18,7 @@ import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.distox.DistoXComm;
 import com.topodroid.dev.distox.DistoXProtocol;
+import com.topodroid.dev.distox.IMemoryDialog;
 
 // import java.nio.ByteBuffer;
 
@@ -109,7 +110,7 @@ public class DistoXA3Comm extends DistoXComm
     return res;
   }
   
-  public int readA3Memory( String address, int from, int to, List< MemoryOctet > memory )
+  public int readA3Memory( String address, int from, int to, List< MemoryOctet > memory, IMemoryDialog dialog )
   {
     if ( ! isCommThreadNull() ) return -1;
     from &= 0xfff8; // was 0x7ff8
@@ -122,7 +123,7 @@ public class DistoXA3Comm extends DistoXComm
     if ( from < to ) {
       if ( connectSocketAny( address ) ) {
         if ( mProtocol instanceof DistoXA3Protocol ) {
-          n = ((DistoXA3Protocol)mProtocol).readMemory( from, to, memory );
+          n = ((DistoXA3Protocol)mProtocol).readMemory( from, to, memory, dialog );
           // FIXME ASYNC new CommandThread( mProtocol, READ_MEMORY, memory ) Note...
         } else {
           n = -1;

@@ -18,6 +18,7 @@
 package com.topodroid.dev.sap;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.ListerHandler;
@@ -125,7 +126,7 @@ public class SapComm extends TopoDroidComm
       TDLog.e("SAP comm: error: null remote device");
     } else {
       // check that device.mAddress.equals( mRemoteBtDevice.getAddress() 
-      // TDLog.v( "SAP comm: connect remote addr " + mRemoteBtDevice.getAddress() + " " + device.mAddress );
+      TDLog.v( "SAP comm: connect remote addr " + mRemoteBtDevice.getAddress() );
       notifyStatus( ConnectionState.CONN_WAITING );
       mSapProto = new SapProtocol( this, device, context );
       mCallback = new BleCallback( this, true ); // auto_connect true
@@ -141,7 +142,7 @@ public class SapComm extends TopoDroidComm
    */
   void doDisconnectGatt()
   {
-    // TDLog.v( "SAP comm: do disconnect GATT - disconnecting " + mDisconnecting );
+    TDLog.v( "SAP comm: do disconnect GATT - disconnecting " + mDisconnecting );
     if ( mDisconnecting ) return;
     mDisconnecting = true;
     enqueueOp( new BleOpDisconnect( mContext, this ) );
@@ -156,7 +157,7 @@ public class SapComm extends TopoDroidComm
    */
   void doConnectGatt()
   {
-    // TDLog.v( "SAP comm: do connect GATT");
+    TDLog.v( "SAP comm: do connect GATT");
     notifyStatus( ConnectionState.CONN_WAITING );
     enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) );
     doNextOp();
@@ -167,7 +168,7 @@ public class SapComm extends TopoDroidComm
    */
   void connected( boolean is_connected )
   {
-    // TDLog.v( "SAP comm: connected ...");
+    TDLog.v( "SAP comm: connected ... " + is_connected );
     mBTConnected = is_connected;
     if (is_connected ) {
       notifyStatus( ConnectionState.CONN_CONNECTED );
@@ -181,13 +182,17 @@ public class SapComm extends TopoDroidComm
 
   /** react to notification of becoming connected 
    */
-  public void connected() { connected( true ); }
+  public void connected() 
+  { 
+    TDLog.v( "SAP comm: connected ...");
+    connected( true );
+  }
 
   /** re-connect to the SAP
    */
   void reconnectDevice()
   {
-    // TDLog.v( "SAP comm: reconnect ...");
+    TDLog.v( "SAP comm: reconnect ...");
     doDisconnectGatt();
     doConnectGatt();
     // mCallback.connectGatt( mContext, mRemoteBtDevice );
@@ -198,7 +203,7 @@ public class SapComm extends TopoDroidComm
    */
   private boolean readSapPacket( )
   { 
-    // TDLog.v( "SAP comm: reading packet");
+    TDLog.v( "SAP comm: reading packet");
     // BluetoothGattService srv = mGatt.getService( SapConst.SAP5_SERVICE_UUID );
     // BluetoothGattCharacteristic chrt = srv.getCharacteristic( SapConst.SAP5_CHRT_READ_UUID );
     // return mGatt.readCharacteristic( chrt );
@@ -221,7 +226,7 @@ public class SapComm extends TopoDroidComm
   @Override
   public boolean connectDevice( String address, ListerHandler lister, int data_type, int timeout )
   {
-    // TDLog.v( "SAP comm: connect device (continuous data download)");
+    TDLog.v( "SAP comm: connect device (continuous data download)");
     mLister = lister;
     mDataType = data_type;
     mConnectionMode = 1;
@@ -235,7 +240,7 @@ public class SapComm extends TopoDroidComm
   @Override
   public boolean disconnectDevice() 
   {
-    // TDLog.v( "SAP comm: disconnect device");
+    TDLog.v( "SAP comm: disconnect device");
     if ( mDisconnecting ) return true;
     if ( ! mBTConnected ) return true;
     mDisconnecting = true;
@@ -253,6 +258,7 @@ public class SapComm extends TopoDroidComm
    */
   private void closeChrt()
   {
+    TDLog.v( "SAP comm: close chrts");
     mWriteInitialized = false; 
     mReadInitialized  = false; 
   }
@@ -270,7 +276,7 @@ public class SapComm extends TopoDroidComm
   @Override
   public int downloadData( String address, ListerHandler lister, int data_type, int timeout )
   {
-    // TDLog.v( "SAP comm: batch data download");
+    TDLog.v( "SAP comm: batch data download");
     mConnectionMode = 0;
     mLister = lister;
     mNrReadPackets = 0;
@@ -303,9 +309,12 @@ public class SapComm extends TopoDroidComm
   {
     byte[] bytes = mSapProto.handleWrite( );
     if ( bytes != null ) {
+      TDLog.v( "SAP comm: write chrt - bytes " + bytes.length );
       // mCallback.writeCharacteristic( mWriteChrt );
       mCallback.writeChrt( SapConst.SAP5_SERVICE_UUID, SapConst.SAP5_CHRT_WRITE_UUID, bytes );
-    } // else // done with the buffer writing
+    } else { // done with the buffer writing
+      TDLog.v( "SAP comm: write chrt - bytes null");
+    }
   }
 
   // -------------------------------------------------------------------------------
@@ -324,6 +333,7 @@ public class SapComm extends TopoDroidComm
    */
   private int enqueueOp( BleOperation op ) 
   {
+    TDLog.v("SAP enqueue op " + op.name() );
     mOps.add( op );
     return mOps.size();
   }
@@ -334,34 +344,39 @@ public class SapComm extends TopoDroidComm
   private void doNextOp() 
   {
     if ( mPendingOp != null ) {
-      // TDLog.v( "SAP comm: next op with pending not null, ops " + mOps.size() ); 
+      TDLog.v( "SAP comm: next op with pending not null: " + mPendingOp.name() + ", ops " + mOps.size() ); 
       return;
     }
     mPendingOp = mOps.poll();
-    // TDLog.v( "SAP comm: polled, ops " + mOps.size() );
     if ( mPendingOp != null ) {
+      TDLog.v( "SAP comm: polled, exec pending " + mPendingOp.name() + ", ops " + mOps.size() );
       mPendingOp.execute();
-    } 
+    } else {
+      TDLog.v( "SAP comm: polled, no pending, ops " + mOps.size() );
+    }
   }
   // -------------------------------------------------------------------------------
   // BleComm interface
 
   /** react to a change in the MTU (empty)
    * @param mtu   MTU
+   * @note from the BleCallback
    */
   public void changedMtu( int mtu ) { }
 
   /** react to the remote RSSI being read (empty)
    * @param rssi remote RSSI
+   * @note from the BleCallback
    */
   public void readedRemoteRssi( int rssi ) { }
 
   /** react to the notification that a characteristic has changed
    * @param chrt   changed characteristic (either the read or the write characteristic)
+   * @note from the BleCallback
    */
   public void changedChrt( BluetoothGattCharacteristic chrt )
   {
-    // TDLog.v( "SAP comm: changedChrt" );
+    TDLog.v( "SAP comm: changedChrt" );
     String uuid_str = chrt.getUuid().toString();
     if ( uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_STR ) ) {
       int res = mSapProto.handleReadNotify( chrt );
@@ -382,10 +397,11 @@ public class SapComm extends TopoDroidComm
    * @param uuid_str   characteristic short UUID (?) (unused)
    * @param bytes      array of read bytes (unused)
    * this method calls the protocol with the read bytes (a packet), and handle the packet
+   * @note from the BleCallback
    */
   public void readedChrt( String uuid_str, byte[] bytes )
   {
-    // TDLog.v( "SAP comm: readedChrt" );
+    TDLog.v( "SAP comm: readedChrt" );
     if ( ! mReadInitialized ) { error(-1, uuid_str, "readInit"); return; }
     if ( ! uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_STR ) ) { error(-2, uuid_str, "readUUID"); return; }
     int res = mSapProto.handleRead( bytes ); 
@@ -397,10 +413,11 @@ public class SapComm extends TopoDroidComm
   /** react to notifictaion that the write characteristics has been written
    * @param uuid_str   characteristic short UUID (?) (unused)
    * @param bytes      array of written bytes (unused)
+   * @note from the BleCallback
    */
   public void writtenChrt( String uuid_str, byte[] bytes )
   {
-    // TDLog.v( "SAP comm: written chrt ...");
+    TDLog.v( "SAP comm: written chrt ...");
     if ( ! mWriteInitialized ) { error(-4, uuid_str, "writeInit"); return; }
     writeChrt( ); // try to write again
   }
@@ -409,6 +426,7 @@ public class SapComm extends TopoDroidComm
    * @param uuid_str       ??? UUID
    * @param uuid_chrt_str  characteristic UUID
    * @param bytes          array of read bytes
+   * @note from the BleCallback
    */
   public void readedDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
@@ -420,25 +438,29 @@ public class SapComm extends TopoDroidComm
    * @param uuid_chrt_str  characteristic UUID
    * @param bytes          array of written bytes
    * @note this method marks that the SAP has been connected
+   * @note from the BleCallback
    */
   public void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
-    // TDLog.v( "SAP comm: ====== written desc " + uuid_str + " " + uuid_chrt_str );
+    TDLog.v( "SAP comm: ====== written desc " + uuid_str + " " + uuid_chrt_str );
     connected( true );
   }
 
   /** react to the completion of a reliable write (empty)
+   * @note from the BleCallback
    */
   public void completedReliableWrite()
   {
     TDLog.v( "SAP comm: reliable write" );
   }
 
-  /** disconnect the communication
+  /** communication disconnected
+   * @note from the BleCallback
    */
   public void disconnected()
   {
-    // TDLog.v( "SAP comm: disconnected ...");
+    TDLog.v( "SAP comm: disconnected ...");
+    clearPending();
     // if ( mDisconnecting ) return;
     mDisconnecting = false;
     mConnectionMode = -1;
@@ -449,10 +471,11 @@ public class SapComm extends TopoDroidComm
   /** react to the discovery of a service
    * @param gatt  service GATT
    * @return ...
+   * @note from the BleCallback
    */
   public int servicesDiscovered( BluetoothGatt gatt )
   {
-    // TDLog.v( "SAP comm: service discovered" );
+    TDLog.v( "SAP comm: service discovered" );
     BluetoothGattService srv = gatt.getService( SapConst.SAP5_SERVICE_UUID );
 
     mReadChrt  = srv.getCharacteristic( SapConst.SAP5_CHRT_READ_UUID );
@@ -479,7 +502,9 @@ public class SapComm extends TopoDroidComm
     }
 
     // boolean read_has_write  = BleUtils.isChrtPWrite( mReadChrt.getProperties() );
-     // TDLog.v( "SAP callback R-chrt has write " + read_has_write );
+    // TDLog.v( "SAP callback R-chrt has write " + read_has_write );
+
+    clearPending(); // clear "connect" op
 
     byte[] notify = BleUtils.getChrtPNotify( mReadChrt );
     if ( notify == null ) {
@@ -510,7 +535,7 @@ public class SapComm extends TopoDroidComm
    */
   public boolean writeChrt( UUID srv_uuid, UUID chrt_uuid, byte[] bytes )
   {
-    // TDLog.v( "SAP comm: ##### writeChrt TODO ..." );
+    TDLog.v( "SAP comm: ##### writeChrt TODO ..." );
     // return mCallback.writeCharacteristic( mWriteChrt );
     return mCallback.writeChrt( srv_uuid, chrt_uuid, bytes );
   }
@@ -522,7 +547,7 @@ public class SapComm extends TopoDroidComm
    */
   public boolean readChrt( UUID srv_uuid, UUID chrt_uuid )
   {
-    // TDLog.v( "SAP comm: ##### readChrt" );
+    TDLog.v( "SAP comm: ##### readChrt" );
     // return mCallback.readCharacteristic( mReadChrt );
     return mCallback.readChrt( srv_uuid, chrt_uuid );
   }
@@ -534,7 +559,10 @@ public class SapComm extends TopoDroidComm
    */
   public void error( int status, String extra, String what )
   {
-    TDLog.e("SAP comm: error " + status + ": " + extra + " what: " + what );
+    TDLog.Error("SAP comm: error " + status + ": " + extra + " what: " + what );
+    if ( status == 8 ) { // (timeout) is ok
+      reconnectDevice();
+    }
   }
 
   /** handle a failure error: close GATT
@@ -544,7 +572,7 @@ public class SapComm extends TopoDroidComm
    */
   public void failure( int status, String extra, String what )
   {
-    TDLog.e("SAP comm: failure " + status + " " + extra );
+    TDLog.Error("SAP comm: failure " + status + " " + extra );
     switch ( status ) {
       case -1:
         // TDLog.e("SAP comm: FAIL no R-desc CCCD ");
@@ -588,7 +616,7 @@ public class SapComm extends TopoDroidComm
    */
   public void connectGatt( Context ctx, BluetoothDevice device )
   {
-    // TDLog.v( "SAP connect Gatt" );
+    TDLog.v( "SAP connect Gatt" );
     closeChrt();
     mCallback.connectGatt( ctx, device );
   }
@@ -597,11 +625,13 @@ public class SapComm extends TopoDroidComm
    */
   public void disconnectGatt()
   {
-    // TDLog.v( "SAP comm: disconnect Gatt" );
+    TDLog.v( "SAP comm: disconnect Gatt" );
     closeChrt();
     mCallback.disconnectGatt();
     notifyStatus( ConnectionState.CONN_WAITING );
     mDisconnecting = false;
+    TDUtil.slowDown(500);
+    clearPending(); // FIXME 20221028
   }
 
 }

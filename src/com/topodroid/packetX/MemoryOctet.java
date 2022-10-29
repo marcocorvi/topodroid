@@ -40,6 +40,8 @@ public class MemoryOctet
   public static final byte BYTE_PACKET_3D     = 0x3d;
   public static final byte BYTE_PACKET_3E     = 0x3e;
 
+  public static final int SIZE = 8;
+
   // ------------------------------------------------------------
 
   private static double toDistance( byte b0, byte b1, byte b2 )
@@ -86,7 +88,7 @@ public class MemoryOctet
   public MemoryOctet( int idx )
   {
     index = idx;
-    data  = new byte[8];
+    data  = new byte[SIZE];
   }
 
   public void printHexString( PrintWriter pw )

@@ -134,5 +134,14 @@ public class DistoXBLEMemoryDialog extends MyDialog
     }
   }
 
+  /** set the value in the FROM field
+   * @param index   value
+   * @implements IMemoryDialog
+   */
+  public void setIndex( int index ) 
+  {
+    mETdumpfrom.setText( Integer.toString( index ) );
+  }
+
 }
 

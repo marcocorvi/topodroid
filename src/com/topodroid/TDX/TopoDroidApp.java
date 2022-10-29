@@ -34,6 +34,7 @@ import com.topodroid.dev.Device;
 // import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.TopoDroidComm;
 import com.topodroid.dev.DataType;
+import com.topodroid.dev.distox.IMemoryDialog;
 import com.topodroid.dev.distox1.DistoXA3Comm;
 import com.topodroid.dev.distox1.DeviceA3Info;
 import com.topodroid.dev.distox2.DistoX310Comm;
@@ -669,7 +670,7 @@ public class TopoDroidApp extends Application
   // @param data_type data type ...
   public boolean connectDevice( ListerHandler lister, String address, int data_type, int timeout ) 
   {
-    // TDLog.v( "App: connect address " + address + " comm is " + ((mComm==null)? "null" : "non-null") );
+    TDLog.v( "App: connect address " + address + " comm is " + ((mComm==null)? "null" : "non-null") );
     // return mComm != null && mComm.connectDevice( address, mListerSet, data_type, timeout ); // FIXME_LISTER
     if ( lister == null ) lister = mListerSet;
     return mComm != null && mComm.connectDevice( address, lister, data_type, timeout ); // FIXME_LISTER
@@ -1267,17 +1268,18 @@ public class TopoDroidApp extends Application
 
   /** read the DistoX2 (X310) memory
    * @param address   device address
-   * @param h0        ?
-   * @param h1        ?
+   * @param h0        from index
+   * @param h1        to index
    * @param memory    array of octets to be filled by the memory-read
+   * @param dialog    feedback receiver
    * @return number of octets that have been read (-1 on error)
    */
-  public int readX310Memory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
+  public int readX310Memory( String address, int h0, int h1, ArrayList< MemoryOctet > memory, IMemoryDialog dialog )
   {
     if ( mComm == null || isCommConnected() ) return -1;
     if ( mComm instanceof DistoX310Comm ) {
       DistoX310Comm comm = (DistoX310Comm)mComm;
-      int ret = comm.readX310Memory( address, h0, h1, memory );
+      int ret = comm.readX310Memory( address, h0, h1, memory, dialog );
       resetComm();
       return ret;
     } else {
@@ -1288,17 +1290,18 @@ public class TopoDroidApp extends Application
 
   /** read the DistoX-BLE memory
    * @param address   device address
-   * @param h0        from address (?)
-   * @param h1        to address (?)
+   * @param h0        from index
+   * @param h1        to index
    * @param memory    array of octets to be filled by the memory-read
+   * @param dialog    feedback receiver
    * @return number of octets that have been read (-1 on error)
    */
-  public int readXBLEMemory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
+  public int readXBLEMemory( String address, int h0, int h1, ArrayList< MemoryOctet > memory, IMemoryDialog dialog )
   {
     if ( mComm == null || isCommConnected() ) return -1;
     if ( mComm instanceof DistoXBLEComm ) {
       DistoXBLEComm comm = (DistoXBLEComm)mComm;
-      int ret = comm.readXBLEMemory( address, h0, h1, memory );
+      int ret = comm.readXBLEMemory( address, h0, h1, memory, dialog );
       resetComm();
       return ret;
     } else {
@@ -1312,14 +1315,15 @@ public class TopoDroidApp extends Application
    * @param h0        ?
    * @param h1        ?
    * @param memory    array of octets to be filled by the memory-read
+   * @param dialog    feedback receiver
    * @return number of octets that have been read (-1 on error)
    */
-  public int readA3Memory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
+  public int readA3Memory( String address, int h0, int h1, ArrayList< MemoryOctet > memory, IMemoryDialog dialog )
   {
     if ( mComm == null || isCommConnected() ) return -1;
     if ( mComm instanceof DistoXA3Comm ) {
       DistoXA3Comm comm = (DistoXA3Comm)mComm;
-      int ret = comm.readA3Memory( address, h0, h1, memory );
+      int ret = comm.readA3Memory( address, h0, h1, memory, dialog );
       resetComm();
       return ret;
     } else {
@@ -2583,7 +2587,7 @@ public class TopoDroidApp extends Application
    * @param name   filename including ".bin" extension
    * @return -1 on error; ...
    */
-  public int dumpFirmware( String name )
+  public void dumpFirmware( String name, TDProgress progress )
   {
     TDLog.v("APP FW dump " + name );
     // FIXME ASYNC_FIRMWARE_TASK
@@ -2591,15 +2595,14 @@ public class TopoDroidApp extends Application
     // if ( ! (mComm instanceof DistoX310Comm) ) return;
     // (new FirmwareTask( (DistoX310Comm)mComm, FirmwareTask.FIRMWARE_READ, filename )).execute( );
 
-    if ( mComm == null || TDInstance.getDeviceA() == null ) return -1;
+    if ( mComm == null || TDInstance.getDeviceA() == null ) return;
     if ( mComm instanceof DistoX310Comm ) {
-      return ((DistoX310Comm) mComm).dumpFirmware(TDInstance.deviceAddress(), TDPath.getBinFile(name));
+      ((DistoX310Comm) mComm).dumpFirmware(TDInstance.deviceAddress(), TDPath.getBinFile(name), progress );
     } else if ( mComm instanceof DistoXBLEComm ) {
-      return ((DistoXBLEComm)mComm).dumpFirmware( TDInstance.deviceAddress(), TDPath.getBinFile(name));
+      ((DistoXBLEComm)mComm).dumpFirmware( TDInstance.deviceAddress(), TDPath.getBinFile(name), progress );
     } else {
       TDLog.e("DistoX device with no firmware upload");
     }
-    return -1;
   }
 
   // /** read a firmware reading it from a file - only X310

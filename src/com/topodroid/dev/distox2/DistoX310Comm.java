@@ -23,6 +23,7 @@ import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.distox.DistoX;
 import com.topodroid.dev.distox.DistoXComm;
 import com.topodroid.dev.distox.DistoXProtocol;
+import com.topodroid.dev.distox.IMemoryDialog;
 
 // import java.nio.ByteBuffer;
 
@@ -194,13 +195,20 @@ public class DistoX310Comm extends DistoXComm
   //   return n;
   // }
 
-  public int readX310Memory( String address, int from, int to, List< MemoryOctet > memory )
+  /** read a portion of X310 memory
+   * @param address   device address
+   * @param from      memory FROM index
+   * @param to        memory TO index
+   * @param memory    list of octets, to be filled
+   * @return number of octets that have been read (-1 on error)
+   */
+  public int readX310Memory( String address, int from, int to, List< MemoryOctet > memory, IMemoryDialog dialog )
   {
     if ( ! isCommThreadNull() ) return -1;
     int n = 0;
     if ( connectSocketAny( address ) ) {
       if ( mProtocol instanceof DistoX310Protocol ) {
-        n = ((DistoX310Protocol)mProtocol).readX310Memory( from, to, memory );
+        n = ((DistoX310Protocol)mProtocol).readX310Memory( from, to, memory, dialog );
         // FIXME ASYNC new CommandThread( mProtocol, READ_X310_MEMORY, memory ) Note...
       } else { 
         n= -1;
@@ -231,21 +239,15 @@ public class DistoX310Comm extends DistoXComm
     return ret;
   }
 
-  // public int dumpFirmware( String address, String filepath )
-  public int dumpFirmware( String address, File file )
+  public void dumpFirmware( String address, File file, TDProgress progress )
   {
     TDLog.v( "X310 dump firmware " + file.getPath() );
-    int ret = 0;
     if ( connectSocketAny( address ) ) {
       if ( mProtocol instanceof DistoX310Protocol ) {
-        // ret = ((DistoX310Protocol)mProtocol).dumpFirmware( filepath );
-        ret = ((DistoX310Protocol)mProtocol).dumpFirmware( file );
-      } else {
-        ret = -1;
+        ((DistoX310Protocol)mProtocol).dumpFirmware( file, progress );
       }
     }
     destroySocket( );
-    return ret;
   }
 
   final static private boolean DRY_RUN = false;

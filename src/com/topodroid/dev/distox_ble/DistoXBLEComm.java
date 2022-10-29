@@ -38,6 +38,7 @@ import com.topodroid.dev.ble.BleBuffer;
 import com.topodroid.dev.ble.BleQueue;
 import com.topodroid.dev.ble.BleUtils;
 import com.topodroid.dev.distox.DistoX;
+import com.topodroid.dev.distox.IMemoryDialog;
 import com.topodroid.packetX.MemoryOctet;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.utils.TDLog;
@@ -60,6 +61,7 @@ import java.util.ArrayList;
 
 import android.os.Handler;
 import android.os.Message;
+import android.os.Looper;
 import android.content.res.Resources;
 
 public class DistoXBLEComm extends TopoDroidComm
@@ -476,7 +478,7 @@ public class DistoXBLEComm extends TopoDroidComm
   public int servicesDiscovered( BluetoothGatt gatt )
   {
     if ( LOG ) TDLog.v( "XBLE comm discovered services");
-    TDUtil.slowDown( 600 );
+    // TDUtil.slowDown( 600 );
     enqueueOp( new BleOpNotify( mContext, this, DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_READ_UUID, true ) );
     doNextOp();
 
@@ -922,17 +924,57 @@ public class DistoXBLEComm extends TopoDroidComm
 
   /** read the DistoX-BLE memory
    * @param address   device address
-   * @param h0        from address (?)
-   * @param h1        to address (?)
-   * @param memory    array of octets to be filled by the memory-read
+   * @param start     from index
+   * @param end       to index
+   * @param data      array of octets to be filled by the memory-read
    * @return number of octets that have been read (-1 on error)
    */
-  public int readXBLEMemory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
+  public int readXBLEMemory( String address, int start, int end, ArrayList< MemoryOctet > data, IMemoryDialog dialog )
   { 
-    TDLog.Error("XBLE read XBLE memory TODO");
-    return -1;
+    TDLog.Error("XBLE read XBLE memory ...");
+    if ( ! tryConnectDevice( address, null, 0 ) ) return -1;
+    Handler handler = new Handler( Looper.getMainLooper() );
+    int cnt = 0; // number of memory location that have been read
+    for ( int k = start; k < end; ++k ) {
+      MemoryOctet result = new MemoryOctet( k );
+      int addr = index2addrXBLE( k );
+      // XBLE can read memory in one shot
+      byte[] res_buf = readMemory( addr, BYTE_PER_OCTET );
+      if ( res_buf == null || res_buf.length != BYTE_PER_OCTET ) {
+        TDLog.v("XBLE fail read memory - index " + k );
+        break;
+      } else {
+        TDLog.v("XBLE read memory - index " + k );
+        System.arraycopy( res_buf, 0, result.data, 0, BYTE_PER_OCTET );
+        data.add( result );
+        ++ cnt;
+        if ( dialog != null ) {
+          int k1 = k;
+          handler.post( new Runnable() {
+            public void run() {
+              dialog.setIndex( k1 );
+            }
+          } );
+        }
+      }
+    }
+    disconnectDevice();
+    if ( dialog != null ) {
+      int k1 = start;
+      handler.post( new Runnable() {
+        public void run() {
+          dialog.setIndex( k1 );
+        }
+      } );
+    }
+    return cnt;
   }
 
+  /** toggle calibration mode
+   * @param address  device address
+   * @param type     ...
+   * @return true on success
+   */
   @Override
   public boolean toggleCalibMode( String address, int type )
   {
@@ -1120,7 +1162,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void uploadFirmware( String address, File file, TDProgress progress )
   {
-    final boolean DRY_RUN = true; // DEBUG
+    final boolean DRY_RUN = false; // DEBUG
 
     TDLog.v( "XBLE upload firmware " + file.getPath() );
     // boolean is_log_file = TDLog.isStreamFile();
@@ -1258,12 +1300,13 @@ public class DistoXBLEComm extends TopoDroidComm
         int ret = ( ok ? cnt : -cnt );
         TDLog.v( "Dialog Firmware upload result: written " + ret + " bytes of " + len );
 
+        boolean ok2 = ok;
         String msg2 = ( ret > 0 )? String.format( res.getString(R.string.firmware_file_uploaded), filename, ret, len )
                                  : res.getString(R.string.firmware_file_upload_fail);
         if ( progress != null ) {
           handler.post( new Runnable() {
             public void run() {
-              progress.setDone( msg2  );
+              progress.setDone( ok2, msg2  );
             }
           } );
         } else { // run on UI thread
@@ -1283,38 +1326,41 @@ public class DistoXBLEComm extends TopoDroidComm
   private byte[] readFirmwareBlock(int addr)
   {
     TDLog.v("XBLE fw read block at addr " + addr );
-    byte[] buf = new byte[3];
-    buf[0] = MemoryOctet.BYTE_PACKET_FW_READ; // (byte)0x3a;
-    buf[1] = (byte)( addr & 0xff );
-    buf[2] = 0; // not necessary
     try {
-      enlistWrite(DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, buf, true);
-      mPacketType = DistoXBLEProtocol.PACKET_NONE;
-      syncWait( 5000, "read firmware block" );
-      // synchronized (mNewDataFlag) {
-      //   try {
-      //     long start = System.currentTimeMillis();
-      //     mNewDataFlag.wait(5000); // allow long wait for firmware
-      //     long millis = System.currentTimeMillis() - start;
-      //     TDLog.v("XBLE read firmware block waited " + millis + " msec" );
-      //   } catch (InterruptedException e) {
-      //     e.printStackTrace();
-      //   }
-      // }
-      if ( mPacketType == DistoXBLEProtocol.PACKET_FLASH_BYTES_2 ) {
-        buf = ((DistoXBLEProtocol) mProtocol).mFlashBytes;
-        int crc16 = calCRC16( buf, 256 );
-        if ( crc16 != ((DistoXBLEProtocol) mProtocol).mCheckCRC ) {
-          TDLog.Error("XBLE CRC-16 mismatch: got " + crc16 + " expected " + ((DistoXBLEProtocol) mProtocol).mCheckCRC );
-          return null;
+      for (int repeat = 3; repeat > 0; --repeat ) {
+        byte[] req_buf = new byte[3]; // request buffer
+        req_buf[0] = MemoryOctet.BYTE_PACKET_FW_READ; // (byte)0x3a;
+        req_buf[1] = (byte)( addr & 0xff );
+        req_buf[2] = 0; // not necessary
+        enlistWrite(DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, req_buf, true);
+        mPacketType = DistoXBLEProtocol.PACKET_NONE;
+        syncWait( 5000, "read firmware block" );
+        // synchronized (mNewDataFlag) {
+        //   try {
+        //     long start = System.currentTimeMillis();
+        //     mNewDataFlag.wait(5000); // allow long wait for firmware
+        //     long millis = System.currentTimeMillis() - start;
+        //     TDLog.v("XBLE read firmware block waited " + millis + " msec" );
+        //   } catch (InterruptedException e) {
+        //     e.printStackTrace();
+        //   }
+        // }
+        if ( mPacketType == DistoXBLEProtocol.PACKET_FLASH_BYTES_2 ) {
+          byte[] ret_buf = ((DistoXBLEProtocol) mProtocol).mFlashBytes; // return buffer
+          int crc16 = calCRC16( ret_buf, 256 );
+          if ( crc16 == ((DistoXBLEProtocol) mProtocol).mCheckCRC ) {
+            TDLog.Error("XBLE read fw (" + repeat +") OK");
+            return ret_buf; // success
+          }
+          TDLog.Error("XBLE read fw (" + repeat +") CRC-16 mismatch: got " + crc16 + " expected " + ((DistoXBLEProtocol) mProtocol).mCheckCRC );
+        } else {
+          TDLog.Error("XBLE read fw (" + repeat +") bad packet type " + mPacketType );
         }
-        return buf;
       }
+      TDLog.Error("XBLE read fw: repeatedly failed packet addr " + addr );
     } catch (Exception e) {
       TDLog.Error("XBLE error " + e.getMessage() );
-      return null;
     }
-    TDLog.Error("XBLE packet not FLASH_BYTES_2");
     return null;
   }
 
@@ -1323,50 +1369,85 @@ public class DistoXBLEComm extends TopoDroidComm
    * @param file      output file
    * @return ???
    */
-  public int dumpFirmware( String address, File file )
+  public void dumpFirmware( String address, File file, TDProgress progress )
   {
     TDLog.v( "XBLE fw dump: output filepath " + file.getPath() );
-    byte[] buf = new byte[256];
+    Resources res   = mContext.getResources();
+    Handler handler = new Handler();
 
-    boolean ok = true;
-    int cnt = 0;
-    try {
-      // TDPath.checkPath( filepath );
-      // File fp = new File( filepath );
-      FileOutputStream fos = new FileOutputStream(file);
-      DataOutputStream dos = new DataOutputStream(fos);
-      if ( tryConnectDevice( address, null, 0 ) ) {
+    new Thread( new Runnable() {
+      public void run() {
+        String filename = file.getName();
+        byte[] buf = new byte[256];
+        boolean ok = true;
+        int cnt = 0;
         try {
-          for ( int addr = 8; ; addr++ ) {
-            buf = readFirmwareBlock(addr);
-            if ( buf == null || buf.length < 256 ) {
-              TDLog.Error("XBLE fw read - failed at addr " + addr + " cnt " + cnt );
+          // TDPath.checkPath( filepath );
+          // File fp = new File( filepath );
+          FileOutputStream fos = new FileOutputStream(file);
+          DataOutputStream dos = new DataOutputStream(fos);
+          if ( tryConnectDevice( address, null, 0 ) ) {
+            try {
+              for ( int addr = 8; ; addr++ ) {
+                buf = readFirmwareBlock(addr);
+                if ( buf == null || buf.length < 256 ) {
+                  TDLog.Error("XBLE fw read - failed at addr " + addr + " cnt " + cnt );
+                  ok = false;
+                  break;
+                }
+                dos.write( buf, 0, 256 );
+                cnt += 256;
+                int k = 0; // check if the block is fully 0xFF
+                for ( ; k<256; ++k ) {
+                  if ( buf[k] != (byte)0xff ) break;
+                }
+                if ( k == 256 ) break;
+                String msg1 = String.format( mContext.getResources().getString( R.string.firmware_downloaded ), "XBLE", cnt );
+                int cnt1 = cnt;
+                TDLog.v( msg1 );
+                if ( progress != null ) {
+                  handler.post( new Runnable() {
+                    public void run() {
+                      progress.setProgress( cnt1 );
+                      progress.setText( msg1 );
+                    }
+                  } );
+                }
+              }
+              fos.close();
+            } catch (EOFException e) {
+              //OK
+            } catch (IOException e) {
               ok = false;
-              break;
+            } finally {
+              closeDevice( false );
             }
-            dos.write( buf, 0, 256 );
-            cnt += 256;
-            int k = 0; // check if the block is fully 0xFF
-            for ( ; k<256; ++k ) {
-              if ( buf[k] != (byte)0xff ) break;
-            }
-            if ( k == 256 ) break;
+          } else {
+            ok = false;
           }
-          fos.close();
-        } catch (EOFException e) {
-          //OK
-        } catch (IOException e) {
+        } catch ( FileNotFoundException e ) {
           ok = false;
-        } finally {
-          closeDevice( false );
         }
-      } else {
-        ok = false;
+        String msg = "XBLE Firmware dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt;
+        TDLog.v( msg );
+        int ret = ( ok ? cnt : -cnt );
+        boolean ok2 = ok;
+        String msg2 = ( ret > 0 )? String.format( res.getString(R.string.firmware_file_downloaded), filename, ret )
+                                 : res.getString(R.string.firmware_file_download_fail);
+        if ( progress != null ) {
+          handler.post( new Runnable() {
+            public void run() {
+              progress.setDone( ok2, msg2  );
+            }
+          } );
+        } else { // run on UI thread
+          handler.post( new Runnable() { 
+            public void run () { TDToast.makeLong( msg2 ); }
+          } );
+        }
       }
-    } catch ( FileNotFoundException e ) {
-      return 0;
-    }
-    return ( ok ? cnt : -cnt );
+    } ).start();
+    // if ( ! is_log_file ) TDLog.setLogStream( TDLog.LOG_SYSLOG ); // reset log stream if necessary
   }
 
   /** 0x3c: read the hardware code
@@ -1424,6 +1505,35 @@ public class DistoXBLEComm extends TopoDroidComm
     }
   }
 
+  // these are the same as for X310 because the memory layout is the same
+  private static final int DATA_PER_BLOCK = 56;
+  private static final int BYTE_PER_DATA  = 18;
+  private static final int BYTE_PER_OCTET = MemoryOctet.SIZE;
+
+  private static int index2addrXBLE( int index )
+  {
+    if ( index < 0 ) index = 0;
+    if ( index > 1792 ) index = 1792;
+    int addr = 0;
+    while ( index >= DATA_PER_BLOCK ) {
+      index -= DATA_PER_BLOCK;
+      addr += 0x400;
+    }
+    addr += BYTE_PER_DATA * index;
+    return addr;
+  }
+
+  private static int addr2indexXBLE( int addr )
+  {
+    int index = 0;
+    addr = addr - ( addr % 8 );
+    while ( addr >= 0x400 ) {
+      addr -= 0x400;
+      index += DATA_PER_BLOCK;
+    }
+    index += (int)(addr/BYTE_PER_DATA);
+    return index;
+  }
 }
 
 

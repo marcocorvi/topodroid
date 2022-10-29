@@ -864,6 +864,7 @@ public class DeviceActivity extends Activity
    * @param dialog     memory display dialog
    * @param head_tail  memory block bounds [indices]
    * @param dumpfile   filename to dump
+   * @param dialog     feedback receiver
    */
   public void readX310Memory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
   {
@@ -874,6 +875,7 @@ public class DeviceActivity extends Activity
    * @param dialog     memory display dialog
    * @param head_tail  memory block bounds [indices]
    * @param dumpfile   filename to dump
+   * @param dialog     feedback receiver
    */
   public void readXBLEMemory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
   {
@@ -884,6 +886,7 @@ public class DeviceActivity extends Activity
    * @param dialog     memory display dialog
    * @param head_tail  memory block bounds [addresses]
    * @param dumpfile   filename to dump
+   * @param dialog     feedback receiver
    */
   public void readA3Memory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
   {
@@ -1240,7 +1243,18 @@ public class DeviceActivity extends Activity
   {
     File file = TDPath.getBinFile( filename );
     long len = file.length();
-    TDProgress progress = new TDProgress( this, mApp, filename, len, msg );
+    TDProgress progress = new TDProgress( this, mApp, filename, len, msg, TDProgress.PROGRESS_UPLOAD );
+    // progress.setText( msg );
+    progress.show();
+  }
+
+  /** open a progress dialog to ask whether to download the firmware
+   * @param filename   filename
+   * @param msg        dialog message
+   */
+  public void askFirmwareDownload( String filename, String msg )
+  {
+    TDProgress progress = new TDProgress( this, mApp, filename, 16384, msg, TDProgress.PROGRESS_DOWNLOAD ); // 16384 estimated firmware length
     // progress.setText( msg );
     progress.show();
   }

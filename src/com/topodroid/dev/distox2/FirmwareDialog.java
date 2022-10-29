@@ -177,6 +177,10 @@ public class FirmwareDialog extends MyDialog
    */
   private void askDump( final String filename )
   {
+    String title = mRes.getString( R.string.ask_download );
+    dismiss();
+    mParent.askFirmwareDownload( filename, title );
+/*
     TopoDroidAlertDialog.makeAlert( mContext, mRes, R.string.ask_dump,
       new DialogInterface.OnClickListener() {
         @Override
@@ -200,6 +204,7 @@ public class FirmwareDialog extends MyDialog
         }
       }
     );
+*/
   }
 
   /** ask the user whether to upload the firmware

@@ -230,4 +230,9 @@ public class DeviceA3MemoryDialog extends MyDialog
     //   break;
     }
   }
+
+  public void setIndex( int index ) 
+  {
+    mETdumpfrom.setText( Integer.toString( index ) );
+  }
 }

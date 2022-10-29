@@ -18,4 +18,6 @@ import java.util.ArrayList;
 public interface IMemoryDialog
 {
   void updateList( ArrayList<MemoryOctet> memory );
+
+  void setIndex( int index );
 }

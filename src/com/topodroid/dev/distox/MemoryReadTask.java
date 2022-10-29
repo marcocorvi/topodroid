@@ -44,7 +44,7 @@ public class MemoryReadTask extends AsyncTask<Void, Integer, Integer>
   private WeakReference<IMemoryDialog>  mDialog;
   private int mType; // DistoX type
   private String mAddress;
-  private int[] mHT;
+  private int[] mHT; // memory indices
   private String mDumpfile = null;
   private ArrayList< MemoryOctet > mMemory;
 
@@ -65,11 +65,11 @@ public class MemoryReadTask extends AsyncTask<Void, Integer, Integer>
     int res = 0;
     if ( mApp.get() != null ) {
       if ( mType == Device.DISTO_X310 ) {
-        res = mApp.get().readX310Memory( mAddress, mHT[0], mHT[1], mMemory );
+        res = mApp.get().readX310Memory( mAddress, mHT[0], mHT[1], mMemory, mDialog.get() );
       } else if ( mType == Device.DISTO_XBLE ) {
-        res = mApp.get().readXBLEMemory( mAddress, mHT[0], mHT[1], mMemory );
+        res = mApp.get().readXBLEMemory( mAddress, mHT[0], mHT[1], mMemory, mDialog.get() );
       } else if ( mType == Device.DISTO_A3 ) {
-        res = mApp.get().readA3Memory( mAddress, mHT[0], mHT[1], mMemory );
+        res = mApp.get().readA3Memory( mAddress, mHT[0], mHT[1], mMemory, mDialog.get() );
       }
     }
     if ( res > 0 ) {

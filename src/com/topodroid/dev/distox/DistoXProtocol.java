@@ -22,6 +22,7 @@ import com.topodroid.dev.Device;
 import com.topodroid.dev.DataType;
 import com.topodroid.dev.TopoDroidProtocol;
 // import com.topodroid.dev.distox.DistoX;
+import com.topodroid.dev.distox.IMemoryDialog;
 
 // import java.lang.ref.WeakReference;
 
@@ -411,10 +412,11 @@ public class DistoXProtocol extends TopoDroidProtocol
    * @param start    start address (inclusive)
    * @param end      end address (excluded)
    * @param data     array-list of MemoryOctet to fill with read data
+   * @param dialog   setIndex feedback receiver (unused)
    * @return the number of read octets 
    */
   @Override
-  public int readMemory( int start, int end, List< MemoryOctet > data )
+  public int readMemory( int start, int end, List< MemoryOctet > data, IMemoryDialog dialog )
   {
     if ( start < 0 ) start = 0;
     if ( end > 0x8000 ) end = 0x8000;

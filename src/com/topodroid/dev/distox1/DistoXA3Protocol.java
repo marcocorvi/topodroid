@@ -18,6 +18,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.distox.DistoXProtocol;
+import com.topodroid.dev.distox.IMemoryDialog;
 
 // import java.lang.ref.WeakReference;
 

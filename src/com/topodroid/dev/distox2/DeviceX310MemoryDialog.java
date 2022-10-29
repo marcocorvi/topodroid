@@ -60,7 +60,7 @@ public class DeviceX310MemoryDialog extends MyDialog
     super.onCreate( bundle );
     initLayout( R.layout.device_x310_memory_dialog, R.string.memoryX310 );
 
-    mETdumpfrom  = (EditText) findViewById( R.id.et_dumpfrom );
+    mETdumpfrom  = (EditText) findViewById( R.id.et_dumpfrom ); // TODO handler
     mETdumpto    = (EditText) findViewById( R.id.et_dumpto );
     mETdumpfile  = (EditText) findViewById( R.id.et_dumpfile );
 
@@ -143,5 +143,10 @@ public class DeviceX310MemoryDialog extends MyDialog
   //     }
   //   );
   // }
+
+  public void setIndex( int index ) 
+  {
+    mETdumpfrom.setText( Integer.toString( index ) );
+  }
 
 }

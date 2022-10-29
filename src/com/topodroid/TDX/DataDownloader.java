@@ -123,7 +123,7 @@ public class DataDownloader
    */
   void doDataDownload( ListerHandler lister, int data_type )
   {
-    // TDLog.v( "DOWNLOAD: do Data Download() - nr " + mDownload + " connected " + mConnected + " data type " + data_type );
+    TDLog.v( "DOWNLOAD: do Data Download() - nr " + mDownload + " connected " + mConnected + " data type " + data_type );
     if ( mDownload ) {
       mLister = lister;
       startDownloadData( lister, data_type );
@@ -142,7 +142,7 @@ public class DataDownloader
     // TDLog.v( "DOWNLOAD data. status: " + mStatus );
     if ( TDInstance.isContinuousMode() ) {
       if ( TDSetting.mAutoReconnect ) {
-        // TDLog.v( "DOWNLOAD: start download continuous - autoreconnect ");
+        TDLog.v( "DOWNLOAD: start download continuous - autoreconnect ");
         TDInstance.secondLastShotId = TopoDroidApp.lastShotId( ); // FIXME-LATEST
         new ReconnectTask( this, lister, data_type, 0 ).execute();
       } else {
@@ -177,7 +177,7 @@ public class DataDownloader
    */
   void tryConnect( ListerHandler lister, int data_type )
   {
-    // TDLog.v( "DOWNLOAD: try connect - download " + mDownload + " connected " + mConnected );
+    TDLog.v( "DOWNLOAD: try connect - download " + mDownload + " connected " + mConnected );
     if ( TDInstance.getDeviceA() != null && DeviceUtil.isAdapterEnabled() ) {
       mApp.disconnectComm();
       if ( ! mDownload ) {
@@ -195,7 +195,7 @@ public class DataDownloader
           connected = ConnectionState.CONN_CONNECTED;
         }
         mLister = lister;
-        // TDLog.v( "DOWNLOAD: connect device returns " + connected );
+        TDLog.v( "DOWNLOAD: connect device returns " + connected );
         if ( TDInstance.isDeviceBLE() && connected == ConnectionState.CONN_CONNECTED ) {
           // TDLog.v( "DOWNLOAD: notify - connected " + connected );
           mConnected = connected;

@@ -362,19 +362,21 @@ public class BleCallback extends BluetoothGattCallback
    */
   public void disconnectGatt()
   {
-    TDLog.f( "BLE disconnect GATT");
     // mWriteInitialized = false; 
     // mReadInitialized  = false; 
     if ( mGatt != null ) {
+      TDLog.f( "BLE disconnect GATT");
       try {
-        // TDLog.v( "BLE callback: disconnect gatt");
         mGatt.disconnect();
         // FIXME mGapp.close();
       } catch ( SecurityException e ) {
-        TDLog.e("SECURITY GATT disconnect " + e.getMessage() );
+        TDLog.Error("SECURITY GATT disconnect " + e.getMessage() );
         // TDToast.makeBad("Security error: GATT disconnect");
+        // mComm.failure( ... );
       }
       mGatt = null;
+    } else {
+      TDLog.f( "BLE disconnect GATT - already null");
     }
   }
   // ---------------------------------------------------------------------

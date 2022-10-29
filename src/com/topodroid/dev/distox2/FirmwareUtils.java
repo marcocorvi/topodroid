@@ -43,8 +43,7 @@ public class FirmwareUtils
   {
     if ( fw == 2100 || fw == 2200 || fw == 2300 || fw == 2400 || fw == 2500 || fw == 2412 || fw == 2501 || fw == 2512 ) return HW_HEEB;
     if ( fw == 2610 || fw == 2630 || fw == 2640 ) return HW_LANDOLT;
-    // if ( fw == 2701 || fw == 2702 || fw == 2703 || fw == 2704 ) return HW_TIAN;
-    if ( fw == 2700 ) return HW_TIAN;
+    if ( fw == 2700 || fw == 2701 ) return HW_TIAN;
     return HW_NONE;
   }
 
@@ -62,7 +61,7 @@ public class FirmwareUtils
    * @return <= 0 (failure) or one of the known firmware codes:
    *    2100 2200 2300 2400 2412 2500 2501 2512
    *    2610 2630 2640
-   *    2700
+   *    2700 2701
    *
    * od -j 2048 -N 64 -x ... <-- HEEB block
    * od -j 4096 -N 64 -x ... <-- LANDOLT block
@@ -160,6 +159,7 @@ public class FirmwareUtils
       case 2630: len = 25568; break;
       case 2640: len = 25604; break;
       case 2700: len = 15732; break; // 20221016
+      case 2701: len = 15828; break; // 20221029
     }
     if ( len == 0 ) return false; // bad firmware version
     len /= 4; // number of int to read
@@ -191,6 +191,7 @@ public class FirmwareUtils
       case 2630: return ( checksum == 0x1b1488c5 );
       case 2640: return ( checksum == 0xee2d70ff ); // fixed error in magnetic calib matrix
       case 2700: return ( checksum == 0x4ec030fa ); // 20221016
+      case 2701: return ( checksum == 0x2ec0c11b ); // 20221029
     }
     return false;
   }
@@ -444,8 +445,11 @@ public class FirmwareUtils
    */
   private static int readFirmwareTian( byte[] buf )
   {
+    //            1 0  3 2  5 4  7 6  9 8  b a  d c  f e
     // 20221016: 4803 4685 f003 fc08 4800 4700 08d5 0800
+    // 20221029: 4803 4685 f003 fc38 4800 4700 08d5 0800
     if ( buf[4] == (byte)0x03 && buf[5] == (byte)0xf0 && buf[6] == (byte)0x08 && buf[7] == (byte)0xfc ) return 2700; // 20221016
+    if ( buf[4] == (byte)0x03 && buf[5] == (byte)0xf0 && buf[6] == (byte)0x38 && buf[7] == (byte)0xfc ) return 2701; // 20221029
     return -99; // failed on byte[7]
   }
 }

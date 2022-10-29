@@ -39,6 +39,9 @@ import android.graphics.drawable.BitmapDrawable;
 public class TDProgress extends MyDialog // Activity
                  implements View.OnClickListener
 {
+  public final static int PROGRESS_UPLOAD   = 1;
+  public final static int PROGRESS_DOWNLOAD = 2;
+
   private final int MAX = 100;
   // private TextView mTVtitle;   // dialog title
   private TextView mText;  
@@ -47,6 +50,7 @@ public class TDProgress extends MyDialog // Activity
   private String mFilename;
   private int    mLength;
   private String mMsg;
+  private int    mWhat;
 
   private Button mBtnOk;
   private Button mBtnClose;
@@ -57,13 +61,15 @@ public class TDProgress extends MyDialog // Activity
    * @param filename  name of the firmware file
    * @param len       length of the firmware data
    * @param text      initial display message
+   * @param what      what to do: UPLOAD or DOWNLOAD
    */
-  public TDProgress( Context context, TopoDroidApp app, String filename, long len, String text )
+  public TDProgress( Context context, TopoDroidApp app, String filename, long len, String text, int what )
   {
     super( context, app, 0 ); // no help
     mFilename = filename;
     mLength   = (int)len;
     mMsg      = text;
+    mWhat     = what;
   }
 
 // -------------------------------------------------------------------
@@ -91,6 +97,7 @@ public class TDProgress extends MyDialog // Activity
 
     mBtnOk    = (Button) findViewById(R.id.button_ok );
     mBtnOk.setOnClickListener( this );
+    if ( mWhat == PROGRESS_DOWNLOAD ) mBtnOk.setText( R.string.button_download );
 
     mBtnClose = (Button) findViewById(R.id.button_cancel );
     mBtnClose.setOnClickListener( this );
@@ -109,7 +116,11 @@ public class TDProgress extends MyDialog // Activity
         mBtnOk.setOnClickListener( null );
         mBtnOk.setText( R.string.button_wait );
         mBtnClose.setVisibility( View.GONE );
-        mApp.uploadFirmware( mFilename, this );
+        if ( mWhat == PROGRESS_UPLOAD ) {
+          mApp.uploadFirmware( mFilename, this );
+        } else {
+          mApp.dumpFirmware( mFilename, this );
+        }
       } else {
         dismiss();
       }
@@ -143,10 +154,11 @@ public class TDProgress extends MyDialog // Activity
    * @param text   display message
    * @note when "done" is true the OK button closes the dialog
    */
-  public void setDone( String text ) 
+  public void setDone( boolean result, String text ) 
   {
     // TDLog.v("Set done");
     mDone = true; 
+    if ( result ) setProgress( mLength );
     if ( text != null ) mText.setText( text );
     mText.postInvalidate();
     mBtnOk.setOnClickListener( this );
