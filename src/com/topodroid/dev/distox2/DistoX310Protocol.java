@@ -43,6 +43,7 @@ import java.util.List;
 
 // import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.Looper;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -140,6 +141,8 @@ public class DistoX310Protocol extends DistoXProtocol
   {
     // TDLog.v( "X310 memory start " + start + " end " + end );
     int cnt = 0;
+    int start0 = start;
+    Handler handler = new Handler( Looper.getMainLooper() );
     while ( start < end ) {
       MemoryOctet result = new MemoryOctet( start );
       // MemoryOctet result2 = new MemoryOctet( start ); // vector data
@@ -232,7 +235,23 @@ public class DistoX310Protocol extends DistoXProtocol
       } else {
         break;
       }
+      if ( dialog != null ) {
+        int k1 = start;
+        handler.post( new Runnable() {
+          public void run() {
+            dialog.setIndex( k1 );
+          }
+        } );
+      }
       ++start;
+    }
+    if ( dialog != null ) {
+      int k1 = start0;
+      handler.post( new Runnable() {
+        public void run() {
+          dialog.setIndex( k1 );
+        }
+      } );
     }
     return cnt;
   }

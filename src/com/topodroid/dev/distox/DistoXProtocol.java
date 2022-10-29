@@ -39,6 +39,9 @@ import android.content.Context;
 import java.nio.channels.ClosedByInterruptException;
 // import java.nio.ByteBuffer;
 
+import android.os.Handler;
+import android.os.Looper;
+
 public class DistoXProtocol extends TopoDroidProtocol
 {
   // protected Socket  mSocket = null;
@@ -423,7 +426,9 @@ public class DistoXProtocol extends TopoDroidProtocol
     start = start - start % 8;
     end   = end - ( end % 8 );
     if ( start >= end ) return -1;
+    Handler handler = new Handler( Looper.getMainLooper() );
     int cnt = 0; // number of data read
+    int start0 = start;
     for ( ; start < end; start += 8 ) {
       MemoryOctet result = new MemoryOctet( start/8 );
       int k = 0;
@@ -461,6 +466,22 @@ public class DistoXProtocol extends TopoDroidProtocol
       } else {
         break;
       }
+      if ( dialog != null ) {
+        int k1 = start;
+        handler.post( new Runnable() {
+          public void run() {
+            dialog.setIndex( k1 );
+          }
+        } );
+      }
+    }
+    if ( dialog != null ) {
+      int k1 = start0;
+      handler.post( new Runnable() {
+        public void run() {
+          dialog.setIndex( k1 );
+        }
+      } );
     }
     return cnt;
   }
