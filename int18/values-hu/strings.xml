@@ -814,7 +814,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="button_start"     >Indít</string -->
     <!-- UNUSED string name="button_stop"      >Állj</string -->
     <string name="button_upload"    >Feltölt</string>
-    <!-- TODO string name="button_download"  >Download</string -->
+    <string name="button_download"  >Letölt</string>
     <string name="button_view"      >Megtekint</string>
     <!-- UNUSED string name="button_zoomfit"   >Kitölt  </string -->
     <!-- UNUSED string name="button_landscape" >Fekvő </string -->
@@ -1838,19 +1838,19 @@ A részletekért keresse fel a weboldalakat.\n
    <string name="firmware_file_missing">Hiányzó firmware fájl</string>
    <string name="ask_dump">Készít biztonsági másolatot a firmware-ről?</string>
    <string name="ask_upload">Feltölti a firmware-t?</string>
-   <!-- TODO string name="ask_download">Download firmware? (be patient)</string -->
+   <string name="ask_download">Letöltöd firmware-t? (Legyél türelmes)</string>
    <string name="ask_upload_not_compatible">Firmware fájl nem tűnik megfelelőnek \nMindenképpen feltölti?</string>
    <string name="firmware_upload_no_sign">DistoX hardware ellenőrzés hiba</string>
    <string name="firmware_upload_bad_sign">Incompatibilis DistoX hardware</string>
    <string name="firmware_file_dumped">Mentett firmware fájl %1$s méret %2$d</string>
    <string name="firmware_file_uploaded">Feltöltött firmware fájl %1$s írás %2$d / %3$d</string>
-   <!-- TODO string name="firmware_file_downloaded">Downloaded firmware file %1$s read %2$d</string -->
+   <string name="firmware_file_downloaded">Letöltött firmware fájl %1$s olvasás %2$d</string>
    <string name="firmware_file_dump_fail">Firmware letöltés sikertelen</string>
    <string name="firmware_file_upload_fail">Firmware feltöltés sikertelen</string>
-   <!-- TODO string name="firmware_file_download_fail">Failed firmware download</string -->
+   <string name="firmware_file_download_fail">Firmware letöltés sikertelen</string>
    <string name="firmware_not_supported">A műszer nem támogatja a firmware funkciókat</string>
    <string name="firmware_uploaded">%1$s firmware: feltöltve %2$d</string>
-   <!-- TODO string name="firmware_downloaded">%1$s firmware: downloaded %2$d</string -->
+   <string name="firmware_downloaded">%1$s firmware: letöltve %2$d</string>
 
     <string name="project">Projekt %1$s</string>
     <string name="no_editor">Nincs szövegszerkesztő</string>
