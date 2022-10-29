@@ -807,6 +807,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Upload   </string>
+    <!-- TODO string name="button_download"  >Download</string -->
     <string name="button_view"      >Visualizza      </string>
     <!-- UNUSED string name="button_zoomfit"   >Adatta zoom</string -->
     <!-- UNUSED string name="button_landscape" >Panorama  </string -->
@@ -1819,15 +1820,19 @@ Fai riferimento alle pagine web per i dettagli.\n
    <string name="firmware_file_missing">File firmware mancante</string>
    <string name="ask_dump">Salva firmware?</string>
    <string name="ask_upload">Carica firmware?</string>
+   <!-- TODO string name="ask_download">Download firmware? (be patient)</string -->
    <string name="ask_upload_not_compatible">Il file non sembra corretto.\nCaricare ugualmente?</string>
    <string name="firmware_upload_no_sign">Errore nella verifica dell\'HW del DistoX</string>
    <string name="firmware_upload_bad_sign">HW del DistoX incompatibile</string>
    <string name="firmware_file_dumped">iSalvato file %1$s - %2$d B</string>
    <string name="firmware_file_uploaded">Caricato firmware %1$s scritti %2$d / %3$d B</string>
+   <!-- TODO string name="firmware_file_downloaded">Downloaded firmware file %1$s read %2$d</string -->
    <string name="firmware_file_dump_fail">Errore nello scarico del firmware</string>
    <string name="firmware_file_upload_fail">Errore caricamento firmware</string>
+   <!-- TODO string name="firmware_file_download_fail">Failed firmware download</string -->
    <string name="firmware_not_supported">Dispositivo senza funzioni firmware</string>
    <!-- TODO string name="firmware_uploaded">%1$s firmware: uploaded %2$d</string -->
+   <!-- TODO string name="firmware_downloaded">%1$s firmware: downloaded %2$d</string -->
 
     <string name="project">Progetto %1$s</string>
     <string name="no_editor">Editor non trovato</string>
