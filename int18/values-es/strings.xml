@@ -924,7 +924,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="split_nothing">Nada para dividir</string>
     <string name="flip_shots">Tomas contínuas</string>
     <string name="copy_items">Copiar elementos</string>
-    <string name="current_station_format">%1$s: E %2$.1f N %3$.1f H %4$.1f</string>
+    <string name="current_station_format">E %1$.1f N %2$.1f H %3$.1f</string>
 
     <string name="man_preface"> Prefacio </string>
     <string name="man_intro">1. Introducción </string>

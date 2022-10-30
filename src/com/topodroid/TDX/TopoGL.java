@@ -230,6 +230,7 @@ public class TopoGL extends Activity
 
   private LinearLayout mLayoutStation;
   private Button mCurrentStation;
+  private Button mCurrentCoords;
   Button mMeasureStation;
   Button mFixStation;
   boolean isMeasuring = false;
@@ -329,6 +330,7 @@ public class TopoGL extends Activity
     
     mLayoutStation = (LinearLayout) findViewById( R.id.layout_station );
     mCurrentStation = (Button) findViewById( R.id.current_station );
+    mCurrentCoords  = (Button) findViewById( R.id.current_coords );
     mCurrentStation.setOnClickListener( this );
     // mCurrentStation.setOnLongClickListener( this );
 
@@ -1167,11 +1169,13 @@ public class TopoGL extends Activity
   }
 
   /** show the selected station
-   * @param text display text
+   * @param station   station name
+   * @param coords    station coords
    */
-  void showCurrentStation( String text )
+  void showCurrentStation( String station, String coords )
   {
-    mCurrentStation.setText( text );
+    mCurrentStation.setText( station );
+    mCurrentCoords.setText( coords );
     mLayoutStation.setVisibility( View.VISIBLE );
     isMeasuring = false;
     isFixed = false;

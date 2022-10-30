@@ -119,15 +119,18 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
           Cave3DStation st = mParser.getStation( mFullname );
           if ( st != null ) {
             DEMsurface surface = (mDEM != null)? mDEM : mParser.getSurface();
-            String msg = String.format(Locale.US, mApp.getResources().getString( R.string.current_station_format ), st.getShortName(), st.x, st.y, st.z );
+            String msg = String.format(Locale.US, mApp.getResources().getString( R.string.current_station_format ), st.x, st.y, st.z );
             if (surface != null) {
               double zs = surface.computeZ( st.x, st.y );
               if ( zs > -1000 ) {
                 zs -= st.z;
-                msg = msg + String.format(Locale.US, "\nDepth %.1f", zs );
+                mApp.showCurrentStation( st.getShortName() + String.format(Locale.US, " [Depth %.1f]", zs), msg );
+              } else {
+                mApp.showCurrentStation( st.getShortName(), msg );
               }
+            } else {
+              mApp.showCurrentStation( st.getShortName(), msg );
             }
-            mApp.showCurrentStation( msg );
             // TDToast.make( msg );
           }
         }

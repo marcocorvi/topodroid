@@ -67,31 +67,50 @@
     android:orientation="horizontal"
     android:background="#990099ff"
     >
-    <Button android:id="@+id/current_station"
+    <LinearLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="start"
       android:paddingStart="10dp"
       android:paddingEnd="5dp"
       android:gravity="start"
-      android:background="#990066cc"
-      android:textColor="#ffffffff"
-    />
-    <Button android:id="@+id/fix_station"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:paddingStart="5dp"
-      android:paddingEnd="5dp"
-      android:background="@drawable/iz_station_off"
+      android:orientation="vertical"
+      >
+      <Button android:id="@+id/current_station"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#990066cc"
+        android:textColor="#ffffffff"
       />
-    <Button android:id="@+id/measure_station"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:paddingStart="5dp"
-      android:paddingEnd="10dp"
-      android:background="@drawable/iz_ruler_off"
+      <Button android:id="@+id/current_coords"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#990066cc"
+        android:textColor="#ffffffff"
       />
-
+    </LinearLayout>
+    <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="end"
+      android:gravity="end"
+      android:orientation="horizontal"
+      >
+      <Button android:id="@+id/fix_station"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:background="@drawable/iz_station_off"
+        />
+      <Button android:id="@+id/measure_station"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="5dp"
+        android:paddingEnd="10dp"
+        android:background="@drawable/iz_ruler_off"
+        />
+    </LinearLayout>
   </LinearLayout>
 
 </FrameLayout>
