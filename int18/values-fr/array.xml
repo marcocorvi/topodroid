@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+  <string-array name="bricMode">
+     <item name="prim_only">Seulement prim.</item>
+     <!-- item name="sequence">Sequence</item -->
+     <item name="all">Tous avec index</item>
+     <!-- item name="all_zero">All + Zero</ite -->
+     <item name="no_index">Tous sans index</item>
+  </string-array>
+  
+ 
   <string-array name="orientation">
      <item name="unspecified">Non spécifiée</item>
      <item name="portrait">portrait</item>
