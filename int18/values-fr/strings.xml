@@ -371,7 +371,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 	<string name="no_cave3d">Cave3D n\'est pas installé</string>
     <string name="no_data_reduction">Pas de réduction des données</string>
 	<string name="no_db">Pas de base de données</string>
-	<string name="no_device_address">Adresse de périphérique non sélectionnée</string>
+	<string name="no_device_address">Aucun périphérique sélectionné</string>
 	<string name="no_device_window">La fenêtre du périphérique n\'est pas disponible pendant le téléchargement</string>
 	<!-- UNUSED string name="no_device_found">Found no device</string -->
 	<string name="no_feature_audio">Audio non supporté</string>
