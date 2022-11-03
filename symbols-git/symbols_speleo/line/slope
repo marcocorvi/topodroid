@@ -24,10 +24,9 @@ effect
   lineTo 0 -8
   lineTo 1 -8
   lineTo 1 0
-  moveTo 16 0
+  lineTo 16 0
   lineTo 16 -18
   lineTo 17 -18
   lineTo 17 0
-  moveto 0 0
 endeffect
 endsymbol
