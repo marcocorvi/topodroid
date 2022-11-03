@@ -35,6 +35,8 @@ Refer to the web pages for details.\n
     <string name="double_back">Cliquez à nouveau sur RETOUR pour quitter</string>
 
     <string name="new_survey_label">Nouveau relevé tpographique</string>
+	<string name="distox_label" translatable="false">DistoX</string>
+    <string name="cave3d_label" translatable="false">Cave3D</string>
 
     <!-- UNUSED string name="version_ask">Vous être en train de mettre à jour vers une nouvelle version de TopoDroid.\n Voulez-vous réinstaller les symboles de dessins ?</string -->
     <string name="symbols_ask">Installer les outils de dessin v.%1$s?\n ? (v. actuelle: v.%2$s) </string>
@@ -187,7 +189,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="device_status_silent_off">Mode silencieux : off</string>
     <string name="bt_reset">Redémarrer la connexion Bluetooth</string>
     <string name="save_as">Enregistrer sous</string>
-    <string name="nickname">Alias ou pseudo</string>
+    <string name="nickname">Alias</string>
 
     <string name="comment">Commentaires</string>
     <!-- UNUSED string name="flag">Point Drapeau</string -->
@@ -973,7 +975,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 	<string name="help_cave3d">Cave3D, visionneuse 3D</string>
     <!-- UNUSED string name="help_database">Application Database viewer (SQliteViewer)</string -->
     <string name="help_prefs">Modifie les préférences</string>
-    <string name="help_log">Active/désactive les options de journalisation</string>
+    
     <!-- UNUSED string name="help_join_survey">Joindre les relevés</string -->
     <!-- UNUSED string name="help_join_survey">Joint surveying</string --> 
 	<string name="help_info_topodroid">Infos TopoDroid</string>
@@ -1628,8 +1630,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
   <string name="pref_backup_number_summary">Nombre de sauvegardes de croquis</string>
   <string name="pref_backup_interval_title">Intervalle sauvegarde</string>
   <string name="pref_backup_interval_summary">Intervalle minimum entre deux sauvegardes [s]</string>
-  <string name="pref_backups_clear_title">Effacement Sauvegardes</string>
-  <string name="pref_backups_clear_summary">Activer le menu de nettoyage des sauvegardes de croquis</string>
+  
+  
   <!-- UNUSED string name="pref_xtherion_areas_title">Aire Xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Sauver les Aires Xtherion</string -->
   <string name="pref_therion_splays_title">Visées latérales d\'habillage Therion</string>
@@ -1833,8 +1835,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="no_th_file">Pas de fichier Therion</string>
     <string name="file_exists">Le fichier existe déjà</string>
     <string name="file_create_fail">Échec de la création du fichier</string>
-    <string name="oom">Attention. Mémoire pleine</string>
-
+    
     <string name="ask_delete_tdconfig">Supprimer le fichier TdConfig</string>
     <string name="ask_remove_equate">Supprimer l\'égalité %1$s ?</string>
     <string name="equate_no_station">Aucune station sélectionnée</string>
@@ -1845,8 +1846,6 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="menu_equate">AJOUT EGALITE</string -->
     <!-- UNUSED string name="menu_equates">EGALITES</string -->
     <!-- UNUSED string name="menu_save">ENREGISTRER</string -->
-
-    <string name="overwrite">écraser</string>
 
     <string name="title_export_settings">Paramétrages d\'import/export</string>
     <string name="title_export">Exporter le projet sous &#8230;</string>
@@ -1879,9 +1878,9 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="cmenu_fractal">Fractal counts</string -->
 
     <string name="fractal_title">Nombre de fractales</string>
-    <string name="info_title">Information</string>
+    
     <string name="info_surveys">TOPOGRAPHIES</string>
-    <string name="info_axes">Axes: bleu Nord, vert Est</string>
+    
     <string name="info_grid">Grille quadrillage (m)</string>
     <string name="info_view">Point de vue</string>
     <string name="info_survey">Topographie</string>
@@ -1894,7 +1893,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="info_east">Est</string>
     <string name="info_north">Nord</string>
     <string name="info_z">Altitude</string>
-    <!-- TODO string name="info_grid_value">%1$.0f m</string -->
+    <string name="info_grid_value">%1$.0f m</string>
     <!-- TODO string name="info_view_value">A. %1$.0f C. %2$.0f</string -->
     <!-- TODO string name="info_survey_value">%1$d</string -->
     <!-- TODO string name="info_shot_value">Legs %1$d, Splays %2$d</string -->
@@ -1907,7 +1906,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- TODO string name="info_north_value">S %1$.1f N %2$.1f</string -->
     <!-- TODO string name="info_z_value">%1$.1f  %2$.1f</string -->
 
-    <string name="query" formatted="false">Topographie: %d Visées: %d Station: %d\nLongueur : %d Profondeur : %d</string>
+    
     <!-- UNUSED string name="cno_files">Pas de fichier archive</string -->
     <string name="clear">Effacer</string>
 
@@ -1970,7 +1969,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="view_north">Nord</string>
     <string name="view_west">Ouest</string>
     <string name="view_south">Sud</string>
-    <string name="view_point">Point de vue</string>
+    
     <string name="view_zoom">Zoom 1</string>
 
     <string name="walls_title">Parois</string>
@@ -1997,7 +1996,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="error_parser_error">Erreur : erreur de l\'analyseur %1$s</string>
     <string name="error_export_failed">Erreur : exportation défaillante %1$s</string>
 
-    <string name="warning_not_overwrite">Avertissement : ne pas écraser l\'archive existante %1$s</string>
+    
     <!-- UNUSED string name="warning_not_txt">Avertissement : pas d'archive txt %1$s</string -->
     <!-- UNUSED string name="warning_not_kml">Avertissement : pas d'archive Kml %1$s</string -->
     <!-- UNUSED string name="warning_not_las">Avertissement : pas d'archive %1$s</string -->
