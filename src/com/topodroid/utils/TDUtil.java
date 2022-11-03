@@ -335,7 +335,7 @@ public class TDUtil
   public static boolean slowDown( int msec ) 
   {
     try {
-      // TDLog.v("SLEEP down " + msec );
+      // TDLog.v("SLEEP slow " + msec );
       Thread.sleep( msec );
     } catch ( InterruptedException e ) { return false; }
     return true;
@@ -348,7 +348,7 @@ public class TDUtil
   public static boolean slowDown( int msec, String msg )
   {
     try {
-      // TDLog.v("SLEEP down * " + msec );
+      // TDLog.v("SLEEP slow * " + msec );
       Thread.sleep( msec );
     } catch ( InterruptedException e ) {
       TDLog.Error( msg + " " + e.getMessage() );

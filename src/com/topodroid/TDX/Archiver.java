@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDStatus;
+import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDsafUri;
 import com.topodroid.utils.TDVersion;
@@ -548,8 +549,8 @@ public class Archiver
         return -4;
       }
 
-      mManifestSurveyname = br.readLine().trim();
-      TDLog.v("MANIFEST read <" + mManifestSurveyname + ">" );
+      mManifestSurveyname = TDString.spacesToUnderscore( br.readLine().trim() );
+      // TDLog.v("MANIFEST read <" + mManifestSurveyname + ">" );
       if ( app.mData.hasSurveyName( mManifestSurveyname ) ) {
         TDLog.Error( "MANIFEST survey exists: <" + mManifestSurveyname + ">" );
         return -1;
@@ -612,7 +613,7 @@ public class Archiver
           sub = 10 * sub + (int)(ch - '0');
           ++k;
         }
-        // TDLog.v( "Version " + major + " " + minor + " " + sub );
+        // TDLog.v( "ZIP version " + major + " " + minor + " " + sub );
         if (    ( major <  TDVersion.MAJOR_MIN )
              || ( major == TDVersion.MAJOR_MIN && minor < TDVersion.MINOR_MIN )
              || ( major == TDVersion.MAJOR_MIN && minor == TDVersion.MINOR_MIN && sub < TDVersion.SUB_MIN ) 
@@ -650,6 +651,7 @@ public class Archiver
     } else {
       if ( version_code > TDVersion.VERSION_CODE ) ret = 1;
     }
+    // TDLog.v("ZIP check version return " + ret );
     return ret;
   }
 
@@ -801,7 +803,7 @@ public class Archiver
           // FileOutputStream fout = TDFile.getFileOutputStream( pathname );
           ByteArrayOutputStream bout = new ByteArrayOutputStream();
           int size = decompressEntry( zin, ze, bout );
-          // TDLog.Log( TDLog.LOG_ZIP, "Zip manifest: \"" + ze.getName() + "\" size " + size );
+          // TDLog.v( "ZIP manifest: \"" + ze.getName() + "\" size " + size );
           if ( size > 0 ) {
             ok_manifest = checkManifestFile( app, bout.toString() );
             TDLog.v( "ZIP manifest [1]: \"" + ze.getName() + "\" size " + size + " ok " + ok_manifest + " survey " + mManifestSurveyname );

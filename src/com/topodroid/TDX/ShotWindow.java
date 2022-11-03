@@ -2784,7 +2784,7 @@ public class ShotWindow extends Activity
     }
     for ( int k = 0; k < 5; ++k ) {
       if ( BrushManager.hasSymbolLibraries() ) break;
-      TDUtil.slowDown( 250 );
+      TDUtil.slowDown( 251 );
     }
     if ( ! BrushManager.hasSymbolLibraries() ) {
       TDToast.makeWarn( R.string.no_symbols );

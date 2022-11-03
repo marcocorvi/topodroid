@@ -1351,7 +1351,7 @@ public class MainWindow extends Activity
             int pos   = filename.lastIndexOf("."); 
             int qos_1 = filename.lastIndexOf("/") + 1;
             String ext  = (pos >= 0 )? filename.substring( pos ).toLowerCase( Locale.getDefault() ) : ""; // extension with leading '.'
-            String name = (pos > qos_1 )? filename.substring( qos_1, pos ) : filename.substring( qos_1 );
+            String name = TDString.spacesToUnderscore( (pos > qos_1 )? filename.substring( qos_1, pos ) : filename.substring( qos_1 ) );
             // TDLog.v( "URI to import: " + filename + " mime " + mimetype + " name <" + name + "> ext <" + ext + ">" );
             if ( mimetype.equals("application/zip") ) {
               ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );

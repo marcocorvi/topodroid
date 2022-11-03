@@ -858,4 +858,14 @@ public class BricComm extends TopoDroidComm
   }
   */
     
+  /** request a new MTU
+   * @param mtu   new value
+   * @return always false
+   */
+  public boolean requestMtu( int mtu )
+  {
+    TDLog.Error( "BRIC requestMtu not implemented" );
+    return false;
+  }
+
 }

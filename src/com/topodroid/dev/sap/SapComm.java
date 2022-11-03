@@ -634,4 +634,14 @@ public class SapComm extends TopoDroidComm
     clearPending(); // FIXME 20221028
   }
 
+  /** request a new MTU
+   * @param mtu   new value
+   * @return always false
+   */
+  public boolean requestMtu( int mtu )
+  {
+    TDLog.Error( "SAP requestMtu not implemented" );
+    return false;
+  }
+
 }

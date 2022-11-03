@@ -162,12 +162,13 @@ public class DataDownloader
    */
   void stopDownloadData( ListerHandler lister )
   {
-    // TDLog.v( "stop Download Data() connected " + mConnected );
-    // if ( ! mConnected ) return;
+    // TDLog.v( "stop download data - connected " + mConnected );
+    // if ( mConnected == ConnectionState.CONN_DISCONNECTED ) return;
     // if ( TDSetting.isConnectionModeBatch() ) {
       if ( mApp.disconnectComm() ) {
         notifyConnectionStatus( lister, ConnectionState.CONN_DISCONNECTED );
       }
+      // mConnected = ConnectionState.CONN_DISCONNECTED; // 20221103
     // }
   }
 
@@ -264,7 +265,7 @@ public class DataDownloader
     mDownload = false;
     if ( mConnected  > ConnectionState.CONN_DISCONNECTED ) { // mConnected == ConnectionState.CONN_CONNECTED || mConnected == ConnectionState.CONN_WAITING
       stopDownloadData( mLister );
-      mConnected = ConnectionState.CONN_DISCONNECTED;
+      mConnected = ConnectionState.CONN_DISCONNECTED; // 20221103 already in stopDownloadData()
     }
   }
 

@@ -50,6 +50,8 @@ public interface BleComm // extends BleChrtChanged
   void connectGatt( Context ctx, BluetoothDevice device );
   void disconnectGatt();
 
+  boolean requestMtu( int mtu );
+
   // recoverable error
   void error( int status, String extra, String what );
 

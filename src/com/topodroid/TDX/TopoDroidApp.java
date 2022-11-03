@@ -685,7 +685,7 @@ public class TopoDroidApp extends Application
   public void notifyConnectionState( int state )
   {
     // TODO
-    // TDLog.v( "App: notify conn state " + state + " TODO" );
+    TDLog.v( "App: notify conn state " + state + " >>>>> TODO" );
   }
   // end FIXME_COMM
 
@@ -746,8 +746,8 @@ public class TopoDroidApp extends Application
       // info.setError( DeviceX310Info.ERR_E004 );
       return null;
     }
-    // TDLog.Log( TDLog.LOG_COMM, "Addr e004 (hw): " + ret[0] + " " + ret[1] );
-    info.mHardware = String.format( getResources().getString( R.string.device_hardware ), ret[0], ret[1] );
+    // TDLog.v( "TD Addr e004 (hw): " + ret[0] + " " + ret[1] );
+    info.mHardware = String.format( getResources().getString( R.string.device_hardware ), (ret[0]/10), (ret[0]%10) ); // 20221102
 
     // ret = readMemory( address, 0xc044 );
     // if ( ret != null ) {
