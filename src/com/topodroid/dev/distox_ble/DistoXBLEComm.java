@@ -68,7 +68,7 @@ import android.content.res.Resources;
 public class DistoXBLEComm extends TopoDroidComm
         implements BleComm
 {
-  private final static boolean LOG = false; 
+  private final static boolean LOG = true; 
   private final static boolean USE_MTU = false;
 
   final static int DATA_PRIM = 1;   // same as Bric DATA_PRIM
@@ -504,7 +504,7 @@ public class DistoXBLEComm extends TopoDroidComm
     }
     doNextOp();
 
-    // 20221026 MOVED TO enablePNotify
+    // 20221026 MOVED TO enablePNotify -- 202211XX
     // mBTConnected  = true;
     // notifyStatus( ConnectionState.CONN_CONNECTED );
     // // TODO write a resend-interrupt to the DistoXBLE
@@ -524,6 +524,7 @@ public class DistoXBLEComm extends TopoDroidComm
       // closeDevice( true );
     } else {
       if ( LOG ) TDLog.v("XBLE enable PNotify success");
+      // 202211XX
       mBTConnected  = true;
       notifyStatus( ConnectionState.CONN_CONNECTED );
       // TODO write a resend-interrupt to the DistoXBLE

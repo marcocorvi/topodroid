@@ -100,7 +100,7 @@ class LoxFile
   // static private final int SIZE_SURVEY  = ( ( 6 * Endian.SIZE32 + 0 * Endian.SIZEDBL ) );
   static private final int SIZE_STATION = ( ( 7 * Endian.SIZE32 + 3 * Endian.SIZEDBL ) ); // 52 bytes
   static private final int SIZE_SHOT    = ( ( 5 * Endian.SIZE32 + 9 * Endian.SIZEDBL ) );
-  static private final int SIZE_SCRAP   = ( ( 8 * Endian.SIZE32     * Endian.SIZEDBL ) );
+  static private final int SIZE_SCRAP   = ( ( 8 * Endian.SIZE32 + 0 * Endian.SIZEDBL ) );
   // static private final int SIZE_SURFACE = ( ( 5 * Endian.SIZE32 + 6 * Endian.SIZEDBL ) );
 
   private void readChunks( DataInputStream dis, String filename ) throws ParserException
@@ -138,7 +138,7 @@ class LoxFile
           c.data = new byte[ c.data_size ];
           if ( dis.read( c.data, 0, c.data_size ) != c.data_size ) throw new ParserException(filename, linenr);
         }
-        // TDLog.v( "LOX Read: bytes " + (4 * Endian.SIZE32 + c.rec_size + c.data_size) );
+        TDLog.v( "LOX Read: bytes " + (4 * Endian.SIZE32 + c.rec_size + c.data_size) );
         switch ( type ) {
           case 1: // SURVEY
             HandleSurvey( c );
@@ -289,8 +289,7 @@ class LoxFile
       int na = Endian.toIntLEndian( recs, off ); off += Endian.SIZE32;
       int ap = Endian.toIntLEndian( recs, off ); off += Endian.SIZE32;
       int as = Endian.toIntLEndian( recs, off ); off += Endian.SIZE32;
-      // LOGI("Scrap %d (Survey %d) N.pts %d %d %d N.ang %d %d %d Size %d",
-      //   id, sid, np, pp, ps, na, ap, as, mScrapChunk.data_size );
+      TDLog.v( String.format("LOX %d Scrap %d (Survey %d) N.pts %d %d %d N.ang %d %d %d Size %d", i, id, sid, np, pp, ps, na, ap, as, mScrapChunk.data_size ) );
       // assert( pp + np * 3 * sizeof(double) == ap );
       // assert( np * 3 * sizeof(double) == ps );
       // assert( na * 3 * Endian.SIZE32 == as );

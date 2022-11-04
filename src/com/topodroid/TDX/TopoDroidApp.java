@@ -670,7 +670,7 @@ public class TopoDroidApp extends Application
   // @param data_type data type ...
   public boolean connectDevice( ListerHandler lister, String address, int data_type, int timeout ) 
   {
-    TDLog.v( "App: connect address " + address + " comm is " + ((mComm==null)? "null" : "non-null") );
+    // TDLog.v( "App: connect address " + address + " comm is " + ((mComm==null)? "null" : "non-null") );
     // return mComm != null && mComm.connectDevice( address, mListerSet, data_type, timeout ); // FIXME_LISTER
     if ( lister == null ) lister = mListerSet;
     return mComm != null && mComm.connectDevice( address, lister, data_type, timeout ); // FIXME_LISTER
@@ -2925,7 +2925,7 @@ public class TopoDroidApp extends Application
   {
     if ( exportIndex < 0 ) return false; // extra safety
     if ( exportIndex == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
-      TDLog.v("APP URI export zip");
+      // TDLog.v("APP URI export zip");
       // this is SurveyWindow.doArchive
       while ( ! TopoDroidApp.mEnableZip ) Thread.yield();
       (new ExportZipTask( context, this, uri )).execute();
@@ -2954,7 +2954,7 @@ public class TopoDroidApp extends Application
     if ( exportIndex < 0 ) return false; // extra safety
     if ( exportIndex == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
       // String filepath = TDPath.getOutFile( filename );
-      TDLog.v("APP file export zip " + filename );
+      // TDLog.v("APP file export zip " + filename );
       while ( ! TopoDroidApp.mEnableZip ) Thread.yield();
       (new ExportZipTask( context, this, null )).execute();
       // return false;
