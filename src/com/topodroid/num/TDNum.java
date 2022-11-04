@@ -132,8 +132,10 @@ public class TDNum
   private double mInLegErrSum2;
   private double mInLegErr1;    // statistics
   private double mInLegErr2;
+  private double mLegSigmaSum;  // sum of legs sigmas (accumulator)
 
   private int mLenCnt;
+  private int mLegCnt;
 
   /** reset the counters for the statistics
    */
@@ -148,6 +150,8 @@ public class TDNum
     mSurfNr  = 0;
     mInLegErrSum0 = mInLegErrSum1 = mInLegErrSum2 = 0;
     mInLegErr1 = mInLegErr2 = 0;
+    mLegSigmaSum = 0;
+    mLegCnt = 0;
   }
 
   /** add the contribution of the data of a leg to the statistics of in-leg errors
@@ -156,6 +160,7 @@ public class TDNum
   private void addToInLegError( TriShot ts )
   {
     int size = ts.blocks.size();
+    double d2 = 0;
     for ( int i = 0; i < size; ++i ) {
       DBlock blk1 = ts.blocks.get(i);
       for ( int j = i+1; j < size; ++j ) {
@@ -164,7 +169,13 @@ public class TDNum
         mInLegErrSum0 += 1;
         mInLegErrSum1 += e;
         mInLegErrSum2 += e*e;
+
+        d2 += blk1.relativeSquareDistance( blk2 );
       }
+    }
+    if ( d2 > 0 ) {
+      mLegSigmaSum += Math.sqrt( d2 );
+      mLegCnt ++;
     }
   }
 
@@ -274,6 +285,10 @@ public class TDNum
   /** @return the std-dev of the angle error [radians]
    */
   public float angleErrorStddev() { return (float)mInLegErr2; }
+
+  /** @return the average sigma of in-leg shots [m]
+   */
+  public float legSigma() { return (float)mLegSigmaSum/mLegCnt; }
 
   // -------------------------------------------------------
   // SURVEY DATA 

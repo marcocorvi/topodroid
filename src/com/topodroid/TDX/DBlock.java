@@ -948,5 +948,15 @@ public class DBlock
    */
   TDVector getUnitVector() { return new TDVector( mBearing * TDMath.DEG2RAD, mClino * TDMath.DEG2RAD ); }
 
+  public double relativeSquareDistance( DBlock blk ) 
+  {
+    double z = mLength * TDMath.sind( mClino ) - blk.mLength * TDMath.sind( blk.mClino );
+    double h1 =     mLength * TDMath.cosd(     mClino );
+    double h2 = blk.mLength * TDMath.cosd( blk.mClino );
+    double x = h1 * TDMath.cosd( mBearing ) - h2 * TDMath.cosd( blk.mBearing );
+    double y = h1 * TDMath.sind( mBearing ) - h2 * TDMath.sind( blk.mBearing );
+    return x*x + y*y + z*z;
+  }
+
 }
 

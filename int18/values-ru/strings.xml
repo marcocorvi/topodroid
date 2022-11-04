@@ -274,6 +274,7 @@
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Ошибки закрытия колец</string>
     <string name="loop_none">нет колец</string>
+    <!-- TODO string name="loops_bad">Inaccurate loops: %1$d</string -->
     <!-- UNUSED string name="long_lat">Широта-Долгота</string -->
 
     <!-- OK string name="line_delete">Удалить линию</string -->
@@ -682,6 +683,7 @@
     <!-- UNUSED string name="stat_shot">Замеров:  %1$d,   Дублированные %2$d,   Поверхность %3$d</string -->
     <string name="stat_splay">Сплеев: %1$d # %2$d</string>
     <string name="stat_station">Пикетов: %1$d # %2$d</string>
+    <!-- TODO string name="stat_leg_sigma">Leg sigma %1$.1f cm</string -->
     <string name="stat_dangling">Несоединенные замеры %1$d %2$.1f %3$s</string>
     <string name="stat_surface">Поверхн. пикеты %1$d # %2$d длина: %3$.1f %4$s</string>
     <string name="stat_wens">З %1$.0f  В %2$.0f  С %3$.0f  Ю %4$.0f [%5$s]"</string>

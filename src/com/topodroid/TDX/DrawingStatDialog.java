@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumClosure;
 import com.topodroid.ui.MyDialog;
@@ -82,6 +83,7 @@ class DrawingStatDialog extends MyDialog
         TextView mTextSurface   = (TextView) findViewById(R.id.stat_surface);
         TextView mTextSplay     = (TextView) findViewById(R.id.stat_splay);
         TextView mTextStation   = (TextView) findViewById(R.id.stat_station);
+        TextView mTextLegSigma  = (TextView) findViewById(R.id.stat_leg_sigma);
         TextView mTextDangling  = (TextView) findViewById(R.id.stat_dangling);
         TextView mTextLoop      = (TextView) findViewById(R.id.stat_loop);
         TextView mTextComponent = (TextView) findViewById(R.id.stat_component);
@@ -96,10 +98,9 @@ class DrawingStatDialog extends MyDialog
           mStat.countDuplicate, mNum.duplicateNr(), mStat.lengthDuplicate * unit, unit_str ) );
         mTextSurface.setText( String.format( res.getString(R.string.stat_surface),
           mStat.countSurface, mNum.surfaceNr(), mStat.lengthSurface * unit, unit_str ) );
-        mTextSplay.setText( String.format( res.getString(R.string.stat_splay),
-          mStat.countSplay, mNum.splaysNr() ) );
-        mTextStation.setText( String.format( res.getString(R.string.stat_station),
-          mStat.countStation, mNum.stationsNr() ) );
+        mTextSplay.setText( String.format( res.getString(R.string.stat_splay), mStat.countSplay, mNum.splaysNr() ) );
+        mTextStation.setText( String.format( res.getString(R.string.stat_station), mStat.countStation, mNum.stationsNr() ) );
+        mTextLegSigma.setText( String.format( res.getString(R.string.stat_leg_sigma), mNum.legSigma()*100 ) );
 
         if ( mNum.unattachedShotsNr() > 0 ) {
           mTextDangling.setText( String.format( res.getString(R.string.stat_dangling),
@@ -121,8 +122,8 @@ class DrawingStatDialog extends MyDialog
           mTextComponent.setVisibility( View.GONE );
         }
 
-        mTextAngleErr.setText( String.format( res.getString(R.string.stat_angle_error), 
-            mNum.angleErrorMean() * TDMath.RAD2DEG, mNum.angleErrorStddev() * TDMath.RAD2DEG ) );
+        mTextAngleErr.setText( String.format( res.getString(R.string.stat_angle_error), mNum.angleErrorMean() * TDMath.RAD2DEG, mNum.angleErrorStddev() * TDMath.RAD2DEG ) );
+        TDLog.v("Leg sigma " + mNum.legSigma() );
 
    
         List< NumClosure > cls = mNum.getClosures();
