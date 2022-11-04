@@ -23,7 +23,7 @@ effect
   lineTo 20 0
   lineTo 20 1
   lineTo 0 1
-  lineTo 0 8
+  moveTo 0 8
   lineTo 9 8
   lineTo 9 9
   lineTo 0 9
