@@ -1,82 +1,83 @@
 <html><body>
-<h3>[5] DistoX CALIBRATION DATA</h3>
+<h3>[5] DONNÉES d'étalonnage du DistoX</h3>
 
-The <u>calibration-data window</u> displays the list of calibration data. If the calibration has no data, the window is empty but for the top buttons. Each calibration data line contains the following data information:
+<b>Valable uniquement pour DistoX, DistoX2 et DistoXBLE</b><br><p>
+
+La <u>Fenêtre d'étalonnage</u> affiche la liste des données de d'étalonnage. Si la base d'étalonnage de contient aucune données, la liste est vide, mais les bouton du haut sont disponibles. Chaque ligne de donnée contient les informations suivantes :
+
 <ul style="margin-top=0">
-<li>index: incremental index that identifies the data</li>
-<li>group: number of the group the data belongs to</li>
-<li>error: the difference between the calibration-corrected direction and the group average direction, in degrees</li>
-<li>azimuth, inclination, and roll, computed from the raw values without any calibration correction</li>
-<li>optionally the raw calibration data values, ie, the components of G and M in the DistoX frame, either as decimal or hex values</li>
+<li>index: index incrémental qui identifie la donnée</li>
+<li>groupe: numéro du groupe à qui appartient la donnée</li>
+<li>erreur: la différence entre la direction corrigée par l'étalonnage pour la direction, la direction moyenne du groupe (en degrés)</li>
+<li>azimuth, pente et roulis, calculé depuis les valeur brute sans correction d'étalonnage</li>
+<li>optionnellement, les données brute d'étalonnage ; ex: la composante G et M dans la trale DistoX en valeurs décimales ou hexadécimales.</li>
 </ul><br><p>
 
-<h4>Colors</h4>
-The calibration data are displayed with yellow and blue text-color, alternating between even and odd group numbers. Data with no group are grey.<br><p>
+<h4>Couleurs</h4>
+Les données d'étalonnage sont affichée en jaune et un texte bleu, avec une alternance paire et impaire des numéros de groupes. Les données sans groupe sont grises.<br><p>
 
-The data values background color are:
+Les couleurs de fond pour les donénes sont :
+
 <ul>
-<li>black: normal values</li>
-<li>violet: incomplete data (not used in the calibration, but used for the groups)</li>
-<li>brown: saturated data</li>
-<li>gray: deleted data (only if deleted data are displayed)</li>
-<li>red: data with error larger than 1&deg;</li>
-<li>green: data differing from the group average value by more than the <i>group distance</i></li>
+<li>noir : valeurs normales</li>
+<li>violet : données incomplètes (non utilisées pour l'étalonnage, mais utilisées pour le groupe)</li>
+<li>maron : données saturées</li>
+<li>gris : données supprimées (seulement si affichées)</li>
+<li>rouge : données dint l'erreur est supérieure à 1&deg;</li>
+<li>vert : données différant de la valeur moyenne du groupe pour une valeur supérieure à la valeur <i>distance de groupe</li>
 </ul><br><p>
 
 <h4>ACTIONS</h4>
 <ul style="margin-top=0">
-<li>tap on a data: calibration data edit dialog</li>
+<li>Appuie sur une donnée : ouvre la fenêtre d'édition</li>
 </ul><br><p>
 
-<h4>BUTTONS</h4>
+<h4>BOUTTONS</h4>
 <ul style="margin-top=0">
-<li><img src="btn_toggle.png"> toggle the DistoX calibration mode on and off (It may fail at the first try)</li>
-<li><img src="btn_bluetooth.png"> reset BT, or control DistoX remotely</li>
-<li><img src="btn_download.png"> download calibration data from the DistoX</li>
-<li><img src="btn_numbers.png"> assign <a href="page_groups.htm">group</a> numbers to the data, or reset the group numbers</li>
-<li><img src="btn_compute.png"> compute the <a href="page_calib_coeffs.htm">calibration coefficients</a></li>
-<li><img src="btn_cover.png"> <a href="page_calib_distrib.htm">direction distribution</a> of the calibration data</li>
-<li><img src="btn_read.png"> read and display the coefficients stored in the DistoX</li>
-<li><img src="btn_write.png"> write the calibration coefficients to the DistoX. Enabled only after the calibration coefficients have been computed. The coefficients can also be written directly from the dialog showing the result of the computation. A warning is issued in the data direction coverage is below 95% or the average error is above 0.5&deg;</li>
-<li><img src="btn_search.png"> opens the search dialog</li>
+<li><img src="btn_toggle.png"> bascule le DistoX en mode étalonnage (cela peut échouer au premier essai</li>
+<li><img src="btn_bluetooth.png"> Réinitialise la connexion BT ou contrôle de DistoX à distance</li>
+<li><img src="btn_download.png"> Télécharge les données d'étalonnage du DistoX</li>
+<li><img src="btn_numbers.png"> affecte un numéro de <a href="page_groups.htm">groupe</a> aux données, ou réinitialise les numéros de groupe</li>
+<li><img src="btn_compute.png"> Calcule les <a href="page_calib_coeffs.htm">coefficients d'étalonnage</a></li>
+<li><img src="btn_cover.png"> <a href="page_calib_distrib.htm">distribution de la direction</a> des données d'étalonnage</li>
+<li><img src="btn_read.png"> lit et affiche les coéficients d'étalonnage stockés dans le DistoX</li>
+<li><img src="btn_write.png"> écrit les coéficients d'étalonnage dans le DistoX. Activé uniquement après le calcul des coéficients. Les coéficients peuvent également être écrit depuis la fenêtre de résultats de calculs. Un avertissement in affiché sir la couverture des directions est inférieure à 95% ou si l'erreur moyenne est supérieure à 0.5&deg;</li>
+<li><img src="btn_search.png"> ouvre la fenêtre de recherche</li>
 </ul><br><p>
 
-At the moment only on-demand data download is active for the calibration data. The downloaded data are added to the current calibration. Therefore you can take some calibration measurements, download the data, check if you are satisfied with them, if not take further data and download them, and so on until you are happy with your calibration data. Downloaded data can be "disabled" (by setting the group number to "0" (zero); 
-disabled data are not used in the computation of calibration coefficients), or deleted (usually not shown in the list of data).
-Deleted data are not taken into account in the group-number assignment and in the computation of the calibration.<br><p>
+Pour le moment, seul le téléchargement de données A-la-demande n'est activé pour les données d'étalonnage. Les données téléchargées sont ajoutées à l'étalonnage actuel. Par conséquent, vous pouvez prendre quelques mesures, télécharger les données, vérifier si elles sont satisfaisantes, si non, en prendre d'autres et les télécharger de nouveau. Et cela, jusqu'à trouver satisfaction dans vos données d'étalonnage. Les données télécharger peuvent être "désactivées" en définisant le numéro de groupe à "0" (zéro). Les données désactivées ne sont pas utilisées dans le calcul des coéficients d'étalonnage. Elles ne sont pas non plus supprimées (normalement, elle ne sont pas affichée dans la liste).
+Les données supprimées ne sont pas prise en compte dans affectations des numéros de groupe et dans le calcul des coéficients.<br><p>
 
 <h4>Bluetooth</h4>
-This button resets the TopoDroid bluetooth connection.<br>
-It also lets the user control the DistoX remotely [A]: turn on or off the laser, and take a calibration shot.
-The data is immediately downloaded if the the data download mode is set to "continuous".<br>
-In this case it is also possible to take (and download) a group of four calibration shots with a small delay between them
-(controlled by the settings "laser-wait" and "shot-wait").<br><p>
+Ce bouton réinitialise la connexion Bluetooth de TopoDroid.<br/>
+Il permet également à l'utilisateur de contrôler le DistoX à distance [A] : éteindre ou alumer le laser et prendre des visées pour l'étalonnage.
+Les données sont imédiatement téléchargée si le mode est défini sur "Continu".<br/>
+Dans ce cas, il est également possible de prendre (et télécharger) un groupe  de quatre visées d'étalonnage avec un court délai entre elles (controlé par le paramètre "attente laser" et attente visée").<br><p>
 
-The bluetooth button is disabled while TopoDroid is taking a calibration shot.<br><p>
+Le bouton Bluetooth est désactivé tant que TopoDroid prend des visées d'étalonnage.<br><p>
 
-<h4>Calibration computation</h4>
-The "gear" button starts the computation of the calibration coefficients.<br>
-When the computation ends, the coefficient dialog is shown.<br>
-If there are not enough data or data groups the computation is not carried out and a warning message is displayed.<br>
-The calibration fails if the limit of the iteration is reached before the computation ends.
-This usually happens if the group numbers have been set wrongly.
-In this case a message is displayed.<br><p>
+<h4>Calculs de l'étalonnage</h4>
+Le bouton "roue dentée" démarre le calcul des coéficients d'étalonnage.<br/>
+Quand le calcul se termine, la fenêtre de coéficients est affichée.<br>
+Si il n'y a pas sufisament de données ou de groupe de données, le calcul n'éboutit pas et un avertissement est affiché.<br>
+L'étalonnage échoue si la limite d'itération est atteinte avant la fin du calcul.
+Cela arrivé généralement si les numéros de groupes sint affectés de manière erronné. Dans cette situation, un message est également affiché.<br><p>
 
-<h4>Warnings</h4>
+<h4>Avertissements</h4>
 <ul style=margin-top=0">
-<li><b>saturated data</b>: data with abnormal magnetic field value. A possible cause of this is the presence of spurious magnetic fields. Saturated data have a brown background</li>
-<li><b>zero data</b>: incorrectly received calibration data. The data has zero values, and by default it is not assigned a number, although it is used in computing the groups. Zero data have a violet background</li>
+<li><b>données saturées</b>: données avec un valeur de champ magnétique anormal. Une cause possible est la présence d'un champ magnétique anormal. Les données saturées possède une couleur de fond marron</li>
+<li><b>Aucune données</b> : les données d'étalonnage reçues incorectement. La donnée ne possède pas de valeurs et par défaut n'est pas assignée à un nombre. Toutefois, elle est utilisée pour le calcul des groupes. Les données nulles son affichées avec un fond violet</li>
 </ul><br><p>
 
 <h4>MENUS</h4>
 <ul style="margin-top=0">
-<li><u>Display</u>: whether to display all data including the deleted data</li>
-<li><u>Validate</u>: <a href="page_validation.htm">validation</a> of this calibration with another one</li>
-<li><u>Settings</u>: same as for the <u>calibration window</u></li>
-<li><u>Help</u></li>
+<li><u>Afficher</u> : affiche ou non toutes les données, incluant celles supprimées</li>
+<li><u>Valider</u> : <a href="page_validation.htm">validation</a> des données d'étalonnage avec une autre</li>
+<li><u>Paramètres</u> : identique à la <u>fenêtre d'étalonnage</li>
+<li><u>Aide</u></li>
 </ul><br><p>
 
-<a href="manual04.htm">&lt; Calibration window</a> |
-<a href="manual06.htm">Survey data &gt;</a>
+<a href="manual04.htm">&lt; fenêtre d'étalonnage</a> |
+<a href="manual06.htm">Données de relevé &gt;</a>
 
 </body></html>

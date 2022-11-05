@@ -1,9 +1,9 @@
 <html><body>
-<h3>[3] FENETRE PéRIPHéRIQUES</h3>
+<h3>[3] FENÊTRE PÉRIPHÉRIQUES</h3>
 
 Avant de vous lancer dans un relevé topographique, vous devez connecter et apairer votre appareil Android avec votre périphérique et l'étalonner.
 
-Appuyez sur le bouton <i>Périphériques</i> dans la <u>fenètre principale</u> afin d'ouvrir la <i>Fenêtre périphériques</i>
+Appuyez sur le bouton <i>Périphériques</i> dans la <u>Fenêtre principale</u> afin d'ouvrir la <i>Fenêtre périphériques</i>
 La liste des périphériques connus est affichée.
 Les périphériques supportés sont les suivants : DistoX, DistoX2, DistoX-BLE, SAP5 et Bric4</br><p>
 
@@ -60,49 +60,46 @@ Cela peut arriver quand la <u>Fenêtre périphériques</u> est ouverte depuis la
 <li><u>Aide</u></li>
 </ul><br>
 
-<h4>DEVICE SETTINGS</h4>
+<h4>PARAMÈTRES DU PÉRIPHÉRIQUE</h4>
 <ul style="margin-top=0">
-<li><i>Bluetooth</i>: whether to enable, disable, or check on start-up [default "check"]</li>
-<li><i>Number of new data</i>: get the number of new data before downloading them (on-demand mode) [default "no"]</li>
+<li><i>Bluetooth</i>: Activation/désactivation et vérification au démarrage [défaut "vérifier"]</li>
+<li><i>Nombre de nouvelles données</i>: récupère le nombre de nouvelles donénes avant de les télécharger (mode à-la-demande) [défaut "non"]</li>
 </ul><br><p>
 
-The following settings apply only to the DistoX (which uses classical bluetooth).
+Les paramètres suivants ne s'appliquent qu'au DistoX (qui utilise une connexion Bluetooth classique). 
 <ul style="margin-top=0">
-<li><i>Connection mode</i>. "On-demand", "continuous", or "multi" [default "on-demand"]</li>
+<li><i>Mode de connexion</i>. "A-la-demande", "continue", or "multiple" [défaut "A-la-demande"]</li>
 <!-- li><i>Auto reconnect</i>: automatically reconnect if the connection is lost in "continuous" data download-mode [default "no"]</li -->
-<li>DistoX <i>Socket</i> type. Normal or "insecure" [default is "insecure"]</li>
-<li>DistoX <i>Z6-workaround</i>: a download timeout error on Z6 phone, and possibly other devices. It is safe to leave this enabled [default "on"]</li>
+<li>Type de <i>Socket</i> DistoX. Normal ou "Non sécurisé" [defaut "Non sécurisé"]</li>
+<li>DistoX <i>Contournement Z6</i>: un erreur de dépassement de délai survient sur les périphériques Z6 et potentiellement d'autres. Il est recommandé de laisser cette option activée [défault "activé"]</li>
 <!-- li><i>Auto pairing</i>: whether TopoDroid should try to pair with the DistoX selected from a scan [default "no"]</li -->
 </ul><br><p>
 
-<b>Connection mode</b><br>
-There are three connections modes for the DistoX.
+<b>Mode de connexion</b><br>
+Il existe trois modes de connexion pour les DistoX
 <ul>
-<li>in <i>on-demand</i> mode data are downloaded in burst, and when there is no more data to download the connection is closed.</li>
-<li>in <i>continuous</i> mode TopoDroid remains connected to the DistoX and the shots are downloaded as soon as they are taken.
-If the DistoX and Android disconnect, TopoDroid repeatedly tries to reconnect.
-Otherwise, the bluetooth connection is closed.</li>
-<li>the <i>multi</i> mode is like the "on-demand" mode, but a long-tap on the "download" button, in the <i>Shot</i> window or in the <i>Sketch</i> window,
-changes the DistoX. It you have set a "second" DistoX (in the <i>Device</i> window) it is swapped with the current DistoX.
-Otherwise, you get a dialog to pick one among the paired DistoXes.</li>
+<li>Mode <i>À-la-demande</i>, les données sont téléchargées en rafale et quand il n'y à plus aucune données à télécharger, la connexion est fermée.</li>
+<li>Mode <i>continu</i>, TopoDroid reste connecté au DistoX et les visées sont téléchargées dès leur prise.
+Si le DistoX ou l'apareil Android se déconnecter, TopoDroid tente de se reconnecter. Sinon, la connexion Bluetooth est fermée.</li>
+<li>Mode <i>multiple</i>, ce mode resemble au mode "A-la-demande" mais un appuie long sur le bouton "Télécharger" dans le fenêtre de <i>visées</i> ou de <i>dessin</i> change de DistoX. Si vous avez défini un "second" DistoX (dans la fenêtre <i>Périphériques</i>), il est changé par le DistoX actuel. Autrement, il vous est proposé une liste DistoX appairés dans laquelle vous pouvez choisir le bon.</li>
 </ul>
 <br>
-With the "multi" mode, the current DistoX is shown in the title of the <i>Shot</i> and <i>Sketch</i> windows.<br>
-The connection mode applies only to the data download. Other DistoX functions use a one-shot query mode.
+Avec l'option "Multiple", le DistoX courant est affiché dans le titre de la fenêtre <i>visées</i> et <i>Dessin</i>.
+Le mode de connexion ne s'applique uniquement au téléchargements des données. Les autres fonctions utilisent un mode d'intérogation unique.
 <br><p>
 
-Sap5 and Bric4 are always connected in <i>continuous</i> mode.<br><p>
+Les SAP5 and Bric4 sont toujours connectés en mode <i>continu</i><br><p>
 
-<a href="page_geek.htm">Custom settings</a>: <i>Connection delay</i>, <i>Second DistoX</i>, <i>Data pause</i>, <i>Data-ready wait</i>, <i>Laser pause</i>, <i>Shot pause</i>.<br><p>
+<a href="page_geek.htm">Paramètres personnalisés</a>: <i>Délai de connexion</i>, <i>Second DistoX</i>, <i>Data pause</i>, <i>Data-ready wait</i>, <i>Laser pause</i>, <i>Shot pause</i>.<br><p>
 
-<a href="page_device_select.htm">Devices</a><br>
-<a href="page_trouble.htm">DistoX troubleshooting</a><br>
-<a href="page_distox.htm">DistoX functions</a><br>
-<a href="page_bric.htm">Bric4 functions</a><br>
-<a href="page_sap.htm">Sap5 functions</a><br>
+<a href="page_device_select.htm">Périphériques</a><br>
+<a href="page_trouble.htm">Dépanage DistoX</a><br>
+<a href="page_distox.htm">DistoX </a><br>
+<a href="page_bric.htm">Fonctions Bric4</a><br>
+<a href="page_sap.htm">Fonctions Sap5</a><br>
 <p>
 
-<a href="manual02.htm">&lt; Main window</a> |
-<a href="manual04.htm">Calibration window &gt;</a>
+<a href="manual02.htm">&lt; Fenêtre principale</a> |
+<a href="manual04.htm">Fenêtre d'étalonnage &gt;</a>
 
 </body></html>
