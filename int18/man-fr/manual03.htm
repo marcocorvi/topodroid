@@ -1,0 +1,108 @@
+<html><body>
+<h3>[3] FENETRE PéRIPHéRIQUES</h3>
+
+Avant de vous lancer dans un relevé topographique, vous devez connecter et apairer votre appareil Android avec votre périphérique et l'étalonner.
+
+Appuyez sur le bouton <i>Périphériques</i> dans la <u>fenètre principale</u> afin d'ouvrir la <i>Fenêtre périphériques</i>
+La liste des périphériques connus est affichée.
+Les périphériques supportés sont les suivants : DistoX, DistoX2, DistoX-BLE, SAP5 et Bric4</br><p>
+
+TopoDroid n'utilise qu'un seul appareil à la fois.
+Pour le sélectionner, appuyez sur son nom dans la liste. Le nom du périphérique sélectionné et affiché en hat de l'écran, sous les boutons.
+Si aucun appareil n'est sélectionné, un message rouge s'affiche : "Aucun périphérique sélectionné".<br><p>
+
+Si la liste des périphériques est vide, votre périphérique à besoin d'être appairé avec votre appareil Android.
+Cela peut être réalisé avec l'application <i>Paramètres</i> d'Android.<br>
+Si votre périphérique ne s'apaire pas automatiquement, le code PIN des DistoX est 0000 (quatre zéros). Le code Pin des SAP5 est "000000" (six zéros).<br><p>
+
+
+<b>Nom du périphérique</b><br>
+Par défaut, TopoDroid utilisé l'adress MAC bluetooth comme nom de périphérique.
+Les périphériques peuvent être identifiés par un alias pour les distinguer entre eux plus facilement.<br><p>
+
+<i>Nota : Les boutons et menus marqués d'une [*] sont spécifique aux DistoX et nécessite que le périphérique soit allumé.</i><br><p>
+
+<h4>ACTIONS</h4>
+<ul style="margin-top=0">
+<li>appuyez sur la ligne d'un périphérique le sélectionne pour en faire l'appareil à utiliser.</li>
+<li>Un appuis long sur un périphérique permet de définir le <a href="page_device_name.htm">alias</a> ou définir un "second" DistoX</li>
+</ul><br><p>
+
+<h4>BOUTONS</h4>
+<ul style="margin-top=0">
+<li><img src="btn_bluetooth.png">Réinitialise la connexion bluetooth.</li>
+<li><img src="btn_info.png">Information du périphérique[N,*]</li>
+<li><img src="btn_memory.png">Fonctions mémoire des <a href="page_memory.htm">DistoX</a> ou <a href="page_bric_memory.htm">Bric4</a>[*]</li>
+<li><img src="btn_toggle.png">Active/désactive le mode d'étalonnage du DistoX [*]</li>
+<li><img src="btn_compute.png"><a href="page_calib_dialog.htm">Etalonnages</a> des DistoX</li>
+<li><img src="btn_read.png">Lit et affiche et les coefficients d'étalonnage depuis le DistoX [A,*]</li>
+</ul><br><p>
+
+Pour le DistoX tous les boutons sont actifs.</br>
+Pour le Bric4, les trois premiers boutons sont actifs.</br>
+Pour le SAP5, seul le premier bouton est actif</br> 
+
+Si la bascule du DistoX en mode étalonnage échoue au premier essai, répétez l'opération une seconde fois.<br><p>
+
+La lecture du périphérique échoue si TopoDroid est connecté au périphérique et télécharge des données.
+Cela peut arriver quand la <u>Fenêtre périphériques</u> est ouverte depuis la <u>Fenêtre des visées</u>.
+<br><p>
+
+<h4>MENUS</h4>
+<ul style="margin-top=0">
+<!-- li><u>Scan</u> for new DistoX devices [N,*]. You might have to try two or three times before the DistoX is found</li -->
+<!-- li><u>BLE Scan</u> for new BLE devices [N,*].</li -->
+<!-- li><u>Pair</u> the active DistoX with the Android, if not already paired [N,*]</li -->
+<li><u>Déconnecte</u> déconnecte le périphérique actif [A]</li>
+<li>Télécharge mes <a href="page_firmware.htm">firmwares</a> vers le DistoX (v. 2 and BLE) [E,*]</li>
+<li>Affiche les journaux des paquets du DistoX[T]</li>
+<li><u>Paramètres</u></li>
+<li><u>Aide</u></li>
+</ul><br>
+
+<h4>DEVICE SETTINGS</h4>
+<ul style="margin-top=0">
+<li><i>Bluetooth</i>: whether to enable, disable, or check on start-up [default "check"]</li>
+<li><i>Number of new data</i>: get the number of new data before downloading them (on-demand mode) [default "no"]</li>
+</ul><br><p>
+
+The following settings apply only to the DistoX (which uses classical bluetooth).
+<ul style="margin-top=0">
+<li><i>Connection mode</i>. "On-demand", "continuous", or "multi" [default "on-demand"]</li>
+<!-- li><i>Auto reconnect</i>: automatically reconnect if the connection is lost in "continuous" data download-mode [default "no"]</li -->
+<li>DistoX <i>Socket</i> type. Normal or "insecure" [default is "insecure"]</li>
+<li>DistoX <i>Z6-workaround</i>: a download timeout error on Z6 phone, and possibly other devices. It is safe to leave this enabled [default "on"]</li>
+<!-- li><i>Auto pairing</i>: whether TopoDroid should try to pair with the DistoX selected from a scan [default "no"]</li -->
+</ul><br><p>
+
+<b>Connection mode</b><br>
+There are three connections modes for the DistoX.
+<ul>
+<li>in <i>on-demand</i> mode data are downloaded in burst, and when there is no more data to download the connection is closed.</li>
+<li>in <i>continuous</i> mode TopoDroid remains connected to the DistoX and the shots are downloaded as soon as they are taken.
+If the DistoX and Android disconnect, TopoDroid repeatedly tries to reconnect.
+Otherwise, the bluetooth connection is closed.</li>
+<li>the <i>multi</i> mode is like the "on-demand" mode, but a long-tap on the "download" button, in the <i>Shot</i> window or in the <i>Sketch</i> window,
+changes the DistoX. It you have set a "second" DistoX (in the <i>Device</i> window) it is swapped with the current DistoX.
+Otherwise, you get a dialog to pick one among the paired DistoXes.</li>
+</ul>
+<br>
+With the "multi" mode, the current DistoX is shown in the title of the <i>Shot</i> and <i>Sketch</i> windows.<br>
+The connection mode applies only to the data download. Other DistoX functions use a one-shot query mode.
+<br><p>
+
+Sap5 and Bric4 are always connected in <i>continuous</i> mode.<br><p>
+
+<a href="page_geek.htm">Custom settings</a>: <i>Connection delay</i>, <i>Second DistoX</i>, <i>Data pause</i>, <i>Data-ready wait</i>, <i>Laser pause</i>, <i>Shot pause</i>.<br><p>
+
+<a href="page_device_select.htm">Devices</a><br>
+<a href="page_trouble.htm">DistoX troubleshooting</a><br>
+<a href="page_distox.htm">DistoX functions</a><br>
+<a href="page_bric.htm">Bric4 functions</a><br>
+<a href="page_sap.htm">Sap5 functions</a><br>
+<p>
+
+<a href="manual02.htm">&lt; Main window</a> |
+<a href="manual04.htm">Calibration window &gt;</a>
+
+</body></html>

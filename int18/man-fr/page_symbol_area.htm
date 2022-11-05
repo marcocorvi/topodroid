@@ -1,0 +1,72 @@
+<html>
+	<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+<body>
+<h4>OUTILS ZONES</h4>
+<p>Les outils &quot;zones&quot; sont d&eacute;finis dans des fichiers texte.</p>
+<p> Deux outils de zone, &quot;utilisateur&quot; et &quot;eau&quot;, sont intégrés 
+  dans le programme. Les autres sont chargés à partir du répertoire privé de TopoDroid. 
+  Ce r&eacute;pertoire contient les outils de points compil&eacute;s dans l'apk 
+  de distribution. Vous pouvez supprimer les outils dont vous n'avez pas besoin, 
+  modifier ceux que vous souhaitez modifier et en ajouter de nouveaux qui ne sont 
+  pas fournis dans l'apk.</p>
+<p><br>
+  Le fichier d'outil de zone contient des lignes sp&eacute;cifiant la propri&eacute;t&eacute; 
+  de l'outil de dessin.</p>
+<ul>
+  <li>&quot;zone de symbole&quot; [obligatoire]</li>
+  <li>&quot;nom NAME&quot;, o&ugrave; NAME est le nom par d&eacute;faut de la 
+    zone [obligatoire]</li>
+  <li>noms traduits, par exemple, &quot;nom-es ...&quot; [facultatif]</li>
+  <li>&quot;th_name NAME&quot;, o&ugrave; NAME est le nom de <em>Therion</em>, 
+    et doit &ecirc;tre le m&ecirc;me que le nom de fichier [obligatoire]</li>
+  <li>&quot;couleur rgb alpha&quot; (rgb et alpha au format hexad&eacute;cimal) 
+    [obligatoire]</li>
+  <li>&quot;close-horizontal&quot; [facultatif, faux si manquant]</li>
+  <li>&quot;orientable&quot; [facultatif, faux si manquant]</li>
+  <li>&quot;bitmap WIDTH HEIGHT X_TILE Y_TILE&quot; d&eacute;marre le motif bitmap. 
+    Les modes mosa&iuml;que peuvent &ecirc;tre M (miroir) ou R (r&eacute;p&eacute;tition). 
+    Cette ligne doit &ecirc;tre suivie par des lignes HEIGHT de longueur WIDTH 
+    avec les pixels bitmap (1: premier plan, 0 : arri&egrave;re plan).</li>
+  <li>&quot;endbitmap&quot; marque la fin d'un bitmap</li>
+  <li>&quot;<em>cSurvey</em> LAYER CATEGORY PEN BRUSH&quot;</li>
+  <li>&quot;Endsymbol&quot;</li>
+</ul>
+<p><b>Nom<br>
+  </b>Reportez-vous à la page <a href="page_symbol_point.htm">outil points</a> 
+  pour savoir comment spécifier les noms. </p>
+<p><br>
+  <strong>Fermer-horizontal</strong><br>
+  Si cet attribut est défini, la bordure de zone est fermée horizontalement dans 
+  la vue en coupe et dans les sections transverses.<br>
+  Si la coordonnée Y du dernier point de la ligne tracée est proche de celle du 
+  premier alors le bord de la zone s'arrête au premier point dont la coordonnée 
+  Y est proche de celui-ci. Vous pouvez ainsi dessiner des zones avec un profil 
+  supérieur (ou inférieur) horizontal plat.<br>
+  Si les coordonnées Y des extrémités de la ligne tracée diffèrent trop, la bordure 
+  est fermée par un segment oblique.<br>
+</p>
+<p>Actuellement, cet attribut est seulement utilisé pour l'outil &quot;eau&quot; 
+  intégré.</p>
+<p><br>
+  <strong>Modèle bitmap</strong><br>
+  Avec cette option, vous pouvez spécifier un motif de fond, par exemple, pour 
+  différencier les formations rocheuses.</p>
+<p> Cet attribut n'est utilisé dans aucun des outils inclus dans l'apk.</p>
+<p><br>
+  <strong>Orientation</strong><br>
+  Si l'attribut &quot;orientable&quot; est défini, le motif de zone peut être 
+  pivoté dans la boîte de dialogue d'édition de zone.<br>
+  Les motifs de zone ne sont pas utilisés dans le jeu de symboles par défaut. 
+  L'ombrage est préféré pour améliorer la performance.</p>
+<br>
+<strong>Niveau</strong><br>
+L'attribut &quot;level&quot; prend la valeur du marqueur pour les vues activées 
+ici.<br>
+L'indicateur est un nombre dont la somme est 1 (niveau de base), 2 (plancher), 
+4 (remplissages), 8 (plafond) et 16 (artefacts). 
+<p>
+
+
+</body></html>

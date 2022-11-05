@@ -1,0 +1,45 @@
+<html><body>
+
+<h4>DistoX MEMORY</h4>
+
+This dialog is opened from the <i>Memory</i> button of the <u>device window</u>.<br><p>
+
+<b>Memory dump</b><br><p>
+
+The <i>Dump</i> button reads the content of the DistoX memory.
+Reading the DistoX memory directly is a slow process, and the DistoX must be kept "ON" while doing it.
+It is advisable to read a small portion of memory, say 20 entries, at a time:
+enter the initial and final data memory index in the two text fields to the right.
+Data are read from the initial index up to one before the final index.
+For the DistoX2 the memory indices range from 0 included to 1064 excluded.<br>
+For the DistoX version 1 the memory they range from 0 included to 4096 excluded.<br>
+<p>
+
+If you have entered a filename the memory dump is also saved to a file (in the "dump" folder).<br><p>
+
+The result of the memory dump is shown in a list at the bottom of the dialog.
+Each line contains 
+<ul>
+<li>the memory location</li>
+<li>a letter-code: foresight shot ('d'), backsight ('b'), calibration data ('g' or 'm')</li>
+<li>the values of the memory.</li>
+</ul>
+<br><p>
+
+Uppercase letter code denotes data that have not been downloaded yet.<br>
+Shot are shown as length (meters), azimuth and clino (degrees).<br>
+The "accuracy" data of the DistoX2 are not shown.<br>
+For the calibration data, the raw values are shown. The 'm' data are not shown for the DistoX2.<br>
+Entries without a recognized type are marked with a question-mark ('?') code.<br><p>
+
+<!-- anything special to XBLE ? -->
+
+
+<b>Only for DistoX A3</b><br>
+<ul>
+<li><b>Read</b> the memory cursors</li>
+<li><b>Store</b> the memory cursors</li>
+<li><b>Reset</b> a portion of memory, ie, marks it "to-be-downloaded"</li>
+</ul>
+
+</body></html>

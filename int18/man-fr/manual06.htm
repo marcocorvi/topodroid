@@ -1,0 +1,256 @@
+<html>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+<body>
+<h3>[6] FENÊTRE DES DONNÉES DU RELEVÉ TOPOGRAPHIQUE</h3>
+
+<p>La fenêtre des données du relevé topographique affiche le tableau des mesures 
+  [Figure 5] effectuées lors du relevé topo. 
+<p>Le titre affiche le nom du relevé topographique et, en mode multi/double appareil, 
+  l'appareil actuellement actif. La couleur du titre dépend de la &quot;politique&quot; 
+  actuelle d'affectation des stations :<br>
+  - bleu : toutes les visées vers l’avant (sens du cheminement)<br>
+  - bleu foncé : toutes les visées vers l’arrière (sens inverse au cheminement)<br>
+  - rose : visées effectuées au trépied<br>
+  - violet : &quot;politique&quot; de visées doubles avant plus arrière (cheminement 
+  et sens inverse)<br>
+  - rouge : &quot;politique&quot; d’anomalie magnétique<br>
+  - orange : &quot;politique&quot; de type Toporobot</p>
+<p>Les propriétés des différentes visées sont indiquées par la couleur de l'avant-plan 
+  et de l'arrière-plan des données mesurées ainsi que par la couleur des noms 
+  de stations.</p>
+<p>TopoDroid distingue quatre types de visées (affichés avec des couleurs différentes) 
+  : &quot;visée de cheminement&quot;, &quot;visée répétée&quot;, &quot;visée latérale 
+  d’habillage&quot;, et &quot;vide&quot;. De plus les visées latérales d'&quot;habillage&quot; 
+  peuvent être classées en croisées (X), horizontales (H), verticales (V), et 
+  &quot;scan&quot; (plans acquis en mode scanner). Les classes X-H-V sont désactivées 
+  par défaut [G]. </p>
+<p> 1. <strong>Couleurs de premier plan des données </strong>
+<blockquote>
+  <p>• [blanc] : données des visées de cheminement (première prise de vue d'un 
+    groupe de mesures répétées) : ces visées sont associées aux stations &quot;DEPUIS&quot; 
+    et &quot;VERS&quot;.<br>
+    • [gris] : données de visées répétées (visées suivantes d'un groupe de mesures 
+    de cheminement) : ces visées n'ont pas de stations associées.<br>
+    • [bleu]: visées latérales d’habillage. Associées généralement à une seule 
+    station &quot;DEPUIS&quot;.<br>
+    • [vert] : visées d’habillage de type croisé X<br>
+    • [bleu foncé] : visées d’habillage de type H/V<br>
+    • [vert clair] : visées d’habillage de type scan <br>
+    • [orange] : visées vierges, c'est-à-dire visées dont les stations ne sont 
+    pas encore définies.<br>
+    • [jaune] : visée arrière (&quot;politique&quot; de visée vers l’arrière ou 
+    « inversée »)<br>
+    • [violet] : visée vide</p>
+</blockquote>
+<p>2. <strong>Couleurs de fond (arrière plan des données)</strong></p>
+<blockquote>
+  <p>• [Rougeâtre] : valeurs <a href="page_accuracy.htm">peu fiables</a>, c'est 
+    à dire des visées avec une intensité &quot;anormale&quot; du champ magnétique 
+    (seulement pour le DistoX2) <br>
+    • [Orange] : visées les plus courtes<br>
+    • [Gris] : visée commentée<br>
+  </p>
+</blockquote>
+<p> 3. <strong>Couleur de premier plan du nom de la station :</strong>
+<blockquote>
+  <p>• [vert vif] : station actuelle ou courante (voir ci-dessous)</p>
+</blockquote>
+<p>4. <strong>Couleur d'arrière-plan du nom de la station :</strong></p>
+<blockquote>
+  <p>• [vert foncé] : données des dernières visées téléchargées<br>
+    • [gris] : données des visées sélectionnées en mode multivisées (voir ci-dessous)<br>
+    • [jaune foncé] : données de visées arrière du DistoX<br>
+  </p>
+</blockquote>
+<p>
+
+<img src="shots_list.png" alt="shots list"/>
+<p>
+<p><strong>Remarque sur les noms des stations</strong>
+<p>Les noms des stations sont des propriétés des visées, comme l'azimut ou la 
+  longueur. Cependant, contrairement à ces propriétés, les noms des stations sont 
+  utilisés pour &quot;joindre&quot; les visées entre elles afin de former la ligne 
+  médiane de cheminement. Cela affecte à la fois la ligne médiane et les croquis.<br>
+  Lorsque le nom d'une station est modifié, la ligne médiane peut changer. Si 
+  une section transverse est liée à la station modifiée, celle-ci est dissociée 
+  de la ligne médiane (et peut être liée ultérieurement à une autre station). 
+  Une esquisse (plan ou coupe) peut être dissociée de la ligne médiane si le nom 
+  de sa station de référence (son origine) est modifié.</p>
+<p>
+
+<h4>ACTIONS</h4>
+<blockquote>
+  <p>• Appui court sur les données d'une visée : ouvrir la boîte de dialogue Modifier 
+    (<a href="page_shot_edit1.htm">édition des visées</a>) <br>
+    • Appui court sur une station : afficher/masquer les visées latérales d'habillage 
+    (si elles n'ont pas été préalablement cochées dans &quot;<em>Options du relevé</em>&quot;)<br>
+    • Appui long sur un nom de station : sélectionner/désélectionner la &quot;<a href="page_current.htm">station 
+    active</a>&quot; (ou courante), son affichage passe au vert<br>
+    • Appui long sur les données d'une station : ouvre/ferme le <a href="#mv">mode 
+    de sélection multivisées</a>, l'affichage du nom de la station passe sur fond 
+    gris (voir ci-dessus). </p>
+</blockquote>
+<p> 
+<h4>BOUTONS</h4>
+<ul style="margin-top:0">
+  <li><a href="page_download.htm">Téléchargement de données</a> depuis le DistoX. 
+    Bouton grisé et inactif si aucun DistoX n'est sélectionné.</li>
+  <li><a href="page_bluetooth.htm">Bluetooth</a></li>
+  <li> <a href="page_displaymode.htm">Mode d'affichage des données</a></li>
+  <li> <a href="page_plot_list.htm">Croquis du relevé topo</a> (croquis en PLAN 
+    et en COUPE) </li>
+  <li> <a href="page_survey_notes.htm">Commentaires (notes) du relevé topo</a></li>
+  <li><u><a href="page_man_data.htm">Saisie manuelle</a></u> de données (infos 
+    de visée)</li>
+  <li><a href="page_saved_station.htm">Stations sauvegardées</a></li>
+  <li><a href="page_azimuth.htm">Référence extension</a></li>
+  <li><a href="page_station_search.htm">Recherche de stations</a> (absent suivant 
+    versions)</li>
+</ul>
+<br>
+<p> 5. <strong>Appuis longs sur les boutons</strong>
+<p>• &quot;Télécharger&quot; : commutateur du DistoX <br>
+  • &quot;Croquis&quot; : ouvre immédiatement le croquis le plus récent <br>
+  • &quot;Saisie manuelle de données&quot; : ouvre la boite de dialogue d'étalonnage 
+  des instruments de mesure<br>
+  • &quot;Chercher une station&quot; : passe à la ligne de données de la visée 
+  suivante (uniquement visible en mode utilisateur 'Testeur&quot;) </p>
+<br>
+<p> <b><a name="mv"></a>Mode de sélection multivisées</b> 
+<p> Les noms des visées sélectionnées sont sur fond gris (mais généralement pas 
+  le fond des données de ces visées). Une fois le mode de sélection multi-visées 
+  démarré, appuyer brièvement sur la ligne de données d'une visée ajoute ou supprime 
+  cette visée à la sélection. Dans ce mode, la barre de boutons du haut change 
+  et affiche alors des boutons spécifiques : 
+<p><img src="mv1.png" width="42" height="42"> Applique à toutes les visées sélectionnées 
+  le sens d'extension vers la "gauche" </p>
+<p><img src="mv2.png" width="42" height="42"> Permute le sens d'extension de toutes 
+  les visées sélectionnées</p>
+<p><img src="mv3.png" width="42" height="41"> Applique à toutes les visées sélectionnées 
+  le sens d'extension vers la "droite" </p>
+<p><img src="mv4.png" width="44" height="42"> Renommer ou échager les noms des 
+  stations sélectionnées (&quot;Annuler&quot; pour ne rien faire)</p>
+<p><img src="mv5.png" width="42" height="42"> Supprimer toutes les visées sélectionnées. 
+  ATTENTION&#160;: les visées latérales cachées sont également supprimées lorsque 
+  la visée dont elles dépendent est supprimée </p>
+<p><img src="mv6.png" width="42" height="42"> Fermer la sélection multi-visées 
+  et revenir au tableau des visées de la fenêtre des données </p>
+<p> 
+<h4>Boite de dialogue croquis (ou esquisse)</h4>
+La boite de dialogue croquis (ou esquisse) permet de créer un nouveau croquis 
+ou d'en ouvrir un déjà existant. On y trouve un bouton pour créer un nouveau croquis, 
+ainsi qu'une liste à deux colonnes présentant toutes les croquis existant sur 
+ce relevé topographique. Les items de la colonne de gauche ouvrent des vues en 
+PLAN, ceux de la colonne de droite ouvrent des vues en COUPE. Vous pourrez aussi 
+basculer entre les deux de l'intérieur de la fenêtre de croquis une fois celle-ci 
+ouverte. 
+<p>&nbsp; 
+<h4>MENU DÉROULANT DE DROITE</h4>
+<ul style="margin-top:0">
+  <li><u>INFO RELEVÉ</u> : fenêtre d'information du relevé topographique</li>
+  <li><u>RÉCUPÉRER</u>&#160;: <a href="page_undelete.htm">récupération</a> d'un 
+    élément supprimé (une visée ou un croquis) </li>
+  <li><u>PHOTO</u>&#160;: photographies prises pour ce relevé topo (le cas échéant, 
+    sinon message d'avertissement)</li>
+  <li><u>CAPTEUR</u> : données des capteurs concernant ce relevé topo (le cas 
+    échéant, sinon message d'avertissement)</li>
+  <li><u>3D</u>&#160;: topographie en 3D (cet affichage du relevé nécessite l'appli 
+    <a page="manual14.htm">Cave3D</a>) </li>
+  <li><u>DISTOX</u>&#160;: passe à la fenêtre du périphérique connecté</li>
+  <li><u>OPTIONS</u> : paramètres généraux du relevé topo</li>
+  <li><u>AIDE</u></li>
+</ul>
+<br>
+<p><b>DÉTAIL DES OPTIONS ou PARAMÈTRES DU RELEVÉ TOPO</b> 
+<ul style="margin-top:0">
+  <li><em>Équipe spéléo</em>&#160;: nom de l'équipe qui a effectué le relevé. 
+    Si la valeur du &quot;champ&quot; n'est pas vide, elle est utilisée par défaut 
+    pour définir le nom de l'équipe lorsque vous créerez un nouveau relevé. Ecrivez 
+    votre nom et celui des spéléologues avec lesquels vous avez l'habitude d'effectuer 
+    un levé topographique. [vide par défaut] </li>
+  <li><em>Stations du relevé</em> : définit le principe d'affectation des noms; 
+    sélectionnez la <a href="page_station_policy.htm">stratégie de dénomination 
+    automatique des stations</a> de votre choix [par défaut visées "lat. habillage&#160;+ 
+    cheminement"].</li>
+  <li><i>Noms des stations : </i> indique le type&#160;de nom de station, soit 
+    alphanumérique soit numérique [par défaut "alphanumérique"]</li>
+  <li><em>Nom par défaut première station</em>&#160;: nom de la station initiale 
+    utilisé par défaut. C'est aussi celui attribué à la première station pour 
+    de nouveaux relevés. Il peut être modifié dans la boite de dialogue <i>Nouveau 
+    relevé</i> [par défaut vide].</li>
+  <li><i>Taille des miniatures</i>&#160;: taille des vignettes photo [par défaut 
+    200, min 80, max 400] </li>
+  <li><i>Data auto-export </i>: sauvegarde des données automatique; si vous souhaitez 
+    exporter les données du relevé topo chaque fois que la fenêtre de données 
+    est fermée [par défaut non].</li>
+  <li><i>Shared x-sections</i>&#160;: partager les visées latérales d'habillage 
+    de la station &quot;Vers&quot; entre les croquis [par défaut non].</li>
+  <li><i>UNITÉS</i> 
+    <ul style="margin-top:0; margin-bottom:0">
+      <li><i>Unités de distance</i>&#160;: longueurs en mètres ou en pieds [mètres 
+        par défaut].</li>
+      <li><i>Unités d'angle</i>&#160;: degrés décimaux ou grades décimaux [degrés 
+        par défaut].</li>
+      <li><em>Unités des croquis</em>&#160;: mètres, yards, 2-feets, [mètres par 
+        défaut].</li>
+    </ul>
+  </li>
+  <li><i>OPTIONS DONNÉES VISÉE</i> 
+    <ul style="margin-top:0; margin-bottom:0">
+      <li><i>Longueur max cheminement</i>&#160;: les visées les plus longues sont 
+        définies comme "dépassées" [par défaut 50 m, min 20 m].</li>
+      <li><i>Longueur min cheminement </i>: les visées les plus courtes sont mises 
+        en évidence sur un fond orange [0,5 m par défaut].</li>
+      <li><i>Tolérance du cheminement</i>&#160;: tolérance angulaire (en pourcentage) 
+        entre plusieurs visées d'un même cheminement [par défaut 0,05° et min. 
+        0]</li>
+      <li><i>Nombre mini de visées</i>&#160;: nombre minimum de visées identiques 
+        pour changer de station [2 par défaut, min 2, max 4].</li>
+      <li><i>Seuil vertical vis. latérales : </i> seuil d'angle autour de 90 degrés 
+        pour définir l'<a href="page_azimuth.htm">"extension"</a> des visées latérales 
+        [par défaut 10°, min 0, max 90°].</li>
+      <li><i>Seuil visées verticales</i> (Therion "vthreshold")&#160;: le GDHB 
+        pour les visées saisies manuellement est considéré comme Ouest-Est-Nord-Sud 
+        lorsque l'inclinaison de la visée dépasse ce seuil vertical [par défaut 
+        80°, min 0, max 90°]</li>
+      <li><i>Définition manuelle d'extension</i>&#160;: fixe ou par rapport à 
+        la <a href="page_azimuth.htm">l'extension</a> [relative par défaut].</li>
+      <li><em>Bouclage</em> : compensation d'erreur de bouclage. Il est conseillé 
+        de ne pas faire la compensation, car cela permet de voir graphiquement 
+        les erreurs et aussi de repérer les erreurs possibles au sein du relevé 
+        [par défaut &quot;non&quot;]. La compensation de boucle spéciale basée 
+        sur les &quot;triangles&quot; est pour la <a href="page_trilateration.htm">trilatération</a> 
+        [E].</li>
+      <li><em>Icônes Précédent/Suivant</em> : afficher les boutons Précédent/Suivant 
+        dans la boîte de dialogue d'Edition de nouvelle visée [oui par défaut].</li>
+      <li><i>Visée inverse : </i> afficher les champs de visée inverse dans la 
+        boîte de dialogue d'Edition de nouvelle visée [N] [non par défaut].</li>
+      <li><em>Anomalie magnétique</em> : compensation de l'anomalie. Celle-ci 
+        nécessite une stratégie automatique ou convention de visées de cheminement 
+        inverses [non par défaut]. </li>
+      <li><i>Minuterie boussole</i>&#160;: délai en secondes avant de mesurer 
+        les directions avec les capteurs Android [par défaut [0], 10 min] </li>
+      <li><em>Volume bip retardateur </em>: volume &quot;bip bip&quot; du timer 
+        [N] [par défaut 50, 10 min, max 100] </li>
+    </ul>
+  </li>
+  <li><i> <a href="page_fixed_list.htm">Paramètres de géolocalisation</a></i></li>
+  <li><i> <a href="page_accuracy.htm">Paramètres de précision</a></i> </li>
+</ul>
+<p><a href="page_geek.htm"><strong>Paramètres personnalisés</strong></a>: : Dernières 
+  visées et leur délai d'attente, Extension fractionnée, Classes d'exposition 
+  et coloration, Mode plongée, Capteurs.
+<p> Pour quitter la fenêtre de données du relevé topographique appuyez deux fois 
+  sur le<u></u> bouton de retour de votre appareil. <br>
+  Si la sauvegarde automatique est activée et que le format de fichier de données 
+  par défaut est défini, les données sont exportées chaque fois que la fenêtre 
+  de données est fermée. <br>
+<p> <strong>Attention</strong> : Il se peut que la première visée de la liste 
+  ne soit pas mise à jour après une édition ou un appui court, en raison d'un 
+  problème lié à Android. Le bouton &quot;Rafraîchir&quot; peut être utilisé pour 
+  demander un rechargement de la liste si cela se produit.
+<p><a href="manual05.htm">&lt; Données d'étalonnage</a> | <a href="manual07.htm"> 
+  Tableau des visées&nbsp; &gt;</a> </p>
+</body></html>

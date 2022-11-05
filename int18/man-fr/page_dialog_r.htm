@@ -1,0 +1,19 @@
+<html><body>
+<h4>Android R dialog</h4>
+
+Starting with Android-11, TopoDroid cannot access files in the usual way, as of a Google requirement.<br>
+
+The app private files (device database, drawing symbols, firmware files, etc.) are stored
+in the app private space, "Android/data/com.topodroid.TDX/files", where other apps do not have
+access.<br>
+This folder is deleted by the system when you uninstall the app.
+<br> 
+
+The survey database and files are stored under "Documents/TDX/TopoDroid".<br>
+This folder is not deleted by the system when you uninstall the app,
+but <b>TopoDroid cannot access it any more if you uninstall and reinstall the app.</b><br>
+In that case you have to rename "Documents/TDX" and cold-start TopoDroid so that it creates
+its new "TDX".<br>
+
+
+</body></html>

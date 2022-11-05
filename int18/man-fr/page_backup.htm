@@ -1,0 +1,52 @@
+<html>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+<body>
+<h4>RECHARGEMENT DE CROQUIS SAUVEGARDÉ</h4>
+Cette boite de dialogue est ouverte en appuyant sur <u>RECHARGER</u> dans le menu 
+déroulant<em> </em>de la<em> </em><a href="manual09.htm">Fenêtre de croquis</a>. 
+<br>
+<p> TopoDroid conserve des copies de sauvegarde des fichiers, à partir desquels 
+  les croquis peuvent être récupérés. <br>
+  L'appli conserve un ensemble de quatre copies de sauvegarde pour chaque fichier 
+  de croquis. Ces fichiers sont nommés avec des suffixes "bck", "bck0", "bck1", 
+  et "bck2" et sont stockés dans le <i></i> sous-répertoire TDR (Ticket Deposit 
+  Receipt) des fichiers binaires de croquis. Chaque fois qu'un croquis est enregistré 
+  les copies de sauvegarde font l'objet d'une incrémentation (par exemple, "bck1" 
+  est renommé "bck2", et ainsi de suite&#160;; "bck" est renommé "bck0"), l'ancien 
+  "TDR" est renommé avec le suffixe "bck", et le cvroquis est enregistré dans 
+  un nouveau fichier "TDR". <br>
+
+<p> Un croquis est enregistré chaque fois qu'il est fermé, que vous passez de 
+  la vue en plan à la vue en coupe, que vous ouvrez une section transverse ou 
+  que vous passez à un autre croquis. Il est aussi enregistré chaque fois qu'il 
+  est modifié (par exemple quand un nouvel élément est ajouté, ou qu'une partie 
+  du croquis est effacée) et lorsqu'il est ouvert. Lors d'une modification un 
+  délai d'attente est lancé et, lorsqu'il expire, le croquis est sauvegardé. Le 
+  temps d'attente est paramétrable (60 secondes par défaut). Le nombre de sauvegardes 
+  est un autre paramètre. 
+<p>La boîte de dialogue affiche la liste des sauvegardes de croquis. Une seule 
+  sauvegarde est affichée à la fois. Certaines informations sur la sauvegarde 
+  sont affichées dans le titre : 
+<ul>
+  <li>le temps écoulé depuis son écriture, avec des suffixes pour les minutes 
+    (m), les heures (h), les jours (d), les mois (M) et les années (Y)</li>
+  <li>la taille du fichier, entre crochets, en octets</li>
+  <li>le numéro de sauvegarde</li>
+</ul>
+<p>Il y a deux boutons pour se déplacer en avant et en arrière dans la liste des 
+  sauvegardes. 
+<p> Le menu est le suivant :
+<ul>
+  <li><strong>Fermer</strong> la fenêtre sans recharger le croqis à partir d'une 
+    sauvegarde.</li>
+  <li><strong>Recharger</strong> le croquis à partir de la sauvegarde affichée 
+    (et fermer la fenêtre).</li>
+  <li><strong>Aide</strong></li>
+</ul>
+<p><br>
+  <br>
+<p>
+
+</body></html>

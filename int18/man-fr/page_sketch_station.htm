@@ -1,0 +1,100 @@
+<html>
+	<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+	<body>
+<h4>ÉDITION DES STATIONS DU CROQUIS</h4>
+
+<p>Cette boîte de dialogue affiche la position de la station sélectionnée (par 
+  appui bref) : Est, Nord, et Z (altitude) par rapport à l'origine du croquis, 
+  et le commentaire de la station (champ éditable) [T]. </p>
+<p>Cette boîte de dialogue permet d'effectuer les actions suivantes : </p>
+<ul>
+  <li>Saisir ou modifier le commentaire de la station et l'enregistrer [T].</li>
+  <li>OK : rendre la station &quot;active&quot;, c'est-à-dire continuer le relevé 
+    topographique à partir de cette station.</li>
+  <li> Montrer la ligne médiane précédemment cachée (le cas échéant).</li>
+  <li> Forcer l'affichage ou le masquage de l'affichage des visées d'habillage 
+    de la station.</li>
+  <li> Boutons de section transverse </li>
+  <li> Aller à la boîte de <a href="page_saved_station.htm">dialogue de la station 
+    mémorisée</a> [A].</li>
+</ul>
+<b>Station active</b> <strong>(ou station courante)</strong><br>
+La station &quot;active&quot; est l'endroit où les prochaines visées téléchargées 
+seront rattachées. Lorsqu'un segment est téléchargé (ou inséré), la nouvelle station 
+devient la station &quot;active&quot;. En changeant la station &quot;active&quot;, 
+vous pouvez continuer à topographier une branche depuis une station n'importe 
+où sur le relevé. La station active est affichée en vert sur le tableau des visées 
+dans la fenêtre des données du relevé topo.<br>
+<p><b>Cacher la ligne de cheminement médiane</b><br>
+  Cacher certaines parties de la ligne médiane est utile lorsque la topographie 
+  est compliquée ou qu'elle se superpose. Dans ce cas, il est utile de ne voir 
+  que la partie pertinente de la ligne médiane, en cachant ce qui se trouve au-delà 
+  d'une station. Si la ligne médiane au-delà d'une station est masquée, la station 
+  est mise en évidence par une couleur : violet si la ligne médiane cachée se 
+  trouve entre celle-ci et la station d'origine du croquis, sinon rouge (voir 
+  dessin ci-dessous). Les stations situées dans la partie médiane derrière une 
+  station &quot;rouge&quot; ne sont pas automatiquement sauvegardées en tant que 
+  stations relais Therion. Par conséquent, en choisissant la station d'origine 
+  du croquis à l'intérieur du calque et en marquant les stations comme des 
+  stations &quot;butoirs&quot;, vous pouvez éviter les stations parasites dans 
+  le fichier 'scrap' (<em>Therion</em>).<br>
+  L'affichage de la ligne médiane peut être limité via la boîte de dialogue d'édition 
+  des propriétés des visées de cheminement. Lorsque la ligne médiane au-delà de 
+  la station est cachée, il y a un bouton pour revenir en arrière et l'afficher 
+  à nouveau dans la boîte de dialogue d'édition de la station.<br>
+<p> <img src="hiding_stations.png" alt="hiding stations" width="241" height="213"><br>
+<p><strong>Visées d'habillage de la station</strong><br>
+  L'affichage des visées d'habillage de la station peut être forcé pour remplacer 
+  le paramètre global du croquis. Si l'affichage est forcé, les visées d'habillage 
+  sont affichées même si elles sont masquées globalement. Si le masquage est forcé, 
+  les visées d'habillage ne sont pas affichées même si elles sont affichées globalement.<br>
+  Ce marqueur n'affecte PAS la sélection par édition des visées d'habillage ; 
+  les points verts de sélection sont toujours affichés en fonction du paramètre 
+  global. 
+<p><b>Sections transverses au niveau d'une station</b><br>
+  Des sections transverses peuvent &ecirc;tre cr&eacute;&eacute;es au niveau d'une 
+  station. En plan, elles sont dans le plan vertical (leur plan est d&eacute;termin&eacute; 
+  par l'azimut). En coupe, la section transverse peut avoir une inclinaison. Cependant 
+  lorsqu'elles sont s&eacute;lectionn&eacute;es par les cases &quot;stations&quot;, 
+  elles sont verticales si l'inclinaison du cheminement est inf&eacute;rieure 
+  &agrave; une valeur sp&eacute;cifi&eacute;e (un r&eacute;glage), sinon elles 
+  sont horizontales.<br>
+  Si la station n'a que deux visées attach&eacute;es, le plan de la section X 
+  peut &ecirc;tre d&eacute;duit par TopoDroid (la bissectrice de l'angle entre 
+  les deux visées, ou perpendiculaire &agrave; la visée de celui-ci est unique). 
+  Il ne reste qu'une ambigu&iuml;t&eacute; pour définir quel c&ocirc;t&eacute; 
+  du plan de la section transverse est regard&eacute;. Le problème a été r&eacute;solu 
+  en fournissant deux boutons qui sp&eacute;cifient la direction de la vue avec 
+  une paire de stations.<br>
+  Avec le dernier bouton, l'utilisateur peut choisir la direction de la section 
+  transverse pointée par la cam&eacute;ra Android. 
+<p> Les sections transverses de station peuvent &ecirc;tre &quot;priv&eacute;es&quot; 
+  pour le croquis dans laquelle elles ont &eacute;t&eacute; d&eacute;finies ou 
+  &quot;partag&eacute;es&quot; entre toutes les croquis. Dans ce dernier cas, 
+  dans tous les croquis, le dialogue d'&eacute;dition de la station ouvre la m&ecirc;me 
+  section transverse. Alors que dans le premier cas, une section transverse de 
+  station est rouverte uniquement par la boite de dialogue d'&eacute;dition de 
+  la station dans le croquis o&ugrave; elle a &eacute;t&eacute; d&eacute;finie.</p>
+<p> Dans les deux cas, la section transverse est export&eacute;e uniquement dans 
+  le croquis contenant le point de section, c'est-&agrave;-dire dans le croquis 
+  o&ugrave; elle a &eacute;t&eacute; d&eacute;finie.</p>
+<p> Le choix entre les sections transverses &laquo;priv&eacute;es&raquo; et &laquo;partag&eacute;es&raquo; 
+  est effectu&eacute; lorsque le relevé topographique est cr&eacute;&eacute; et 
+  ne peut pas &ecirc;tre modifi&eacute;e par la suite. Lorsque les sections transverses 
+  de station sont priv&eacute;es, vous pouvez entrer un surnom pour distinguer 
+  les sections de la m&ecirc;me station dans diff&eacute;rentes esquisses.</p>
+<p> Le nom d'une section transverse de station sur un plan est compos&eacute; 
+  de &quot;survey_name&quot;, &quot;xs&quot;, &quot;station_name&quot; et, si 
+  les sections transverses sont priv&eacute;es, &quot;sketch_name&quot;. Par exemple, 
+  &quot;survey-xs-0-1p&quot;. Le nom d'une section transverse de station sur une 
+  coupe contient les lettres &quot;xh&quot; au lieu de &quot;xs&quot;.</p>
+<p> Les sections transverses de station peuvent contenir un commentaire, tout 
+  comme les sections transverses de cheminement.</p>
+<p><br>
+<p>
+
+
+
+</body></html>

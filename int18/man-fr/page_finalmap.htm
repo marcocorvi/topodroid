@@ -1,0 +1,36 @@
+<html>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+<body>
+<h4>EXPORTER UNE TOPOGRAPHIE FINALISÉE AU FORMAT<em> THERION </em>(&quot;map&quot; 
+  Therion)</h4>
+
+<p>Cette section décrit l'utilisation de <em>Therion</em> ou de <em>cSurvey</em> 
+  pour rédiger le fichier topographique final.</p>
+<p> <b>Therion</b><br>
+  Si vous voulez compiler le projet <em>Therion</em>, vous devez fournir un fichier 
+  <em>thconfig</em> qui peut être aussi simple que ça :</p>
+<p> <code> source my_survey.th <br>
+  export map -proj plan -o my_cave_p.pdf <br>
+  export map -proj extended -o my_cave_s.pdf</code></p>
+<p>Vous devez avoir exporté les données du relevé topographique sous forme de 
+  fichier Therion &quot;.th&quot;, et les croquis sous forme de fichiers Therion 
+  &quot;.th2&quot;.<br>
+  Le fichier de données contient des commandes pour entrer les fichiers de croquis. 
+  Cependant, elles sont commentées et vous devez les décommenter.<br>
+  Le fichier de données contient des commandes définissant un segment (scrap) 
+  pour chaque croquis. Pour les relevés simples, vous pouvez laisser ces commandes 
+  commentées.Vous pouvez également exporter les croquis sous forme de fichiers 
+  <em>Therion</em> &quot;.xvi&quot; et les retracer en utilisant <em>xtherion</em>.</p>
+<p><b>cSurvey</b><br>
+  Exportez le croquis en tant que fichier cSurvey &quot;.csx&quot;.<br>
+  Ouvrez le fichier croquis exporté avec<i> cSurvey</i>&#160;: vous obtiendrez 
+  la feuille de données du relevé remplie avec les données topographiques et les 
+  croquis correctement alignés sur la page de dessin de <em>cSurvey</em>. <br>
+</p>
+<p><br>
+
+<p>
+
+</body></html>

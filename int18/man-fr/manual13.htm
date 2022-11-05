@@ -1,0 +1,667 @@
+<html>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+<body>
+<h3>[13] IMPORT EXPORT</h3>
+<p>Lorsque vous avez terminé, exportez les données du relevé topo et ses croquis 
+  dans votre format préféré et transférez les fichiers exportés sur votre PC, 
+  pour terminer le dessin de la topographie de la cavité avec votre programme 
+  de dessin habituel. <br>
+  Par sécurité, créez une archive zip de TopoDroid et transférez-la sur votre 
+  PC. L'archive zip est une sauvegarde complète de votre relevé, et elle contient 
+  la commande permettant de restaurer les données du relevé et les autres informations 
+  de la base de données. Vous pouvez l'utiliser pour transférer le relevé topographique  de votre 
+  appareil <em>TopoDroid</em> vers un autre périphérique Android (tablette, smartphone...).</p>
+<p> Les données du relevé, ainsi que l'archive zip, sont exportées à partir de 
+  la fenêtre d'information du relevé.<br>
+  Les croquis du relevé sont exportés à partir de la fenêtre de croquis (un seul 
+  croquis) et de la fenêtre de vue d'ensemble (tous les croquis dans un seul fichier).</p>
+<p> Les archives zip de <em>TopoDroid</em> sont stockées dans le dossier zip.</p>
+<p> Les fichiers de données et de croquis exportés sont stockés dans des dossiers 
+  nommés de manière appropriée sous le dossier &quot;survey&quot;.</p>
+<p> <b>Attention</b> : L'importation du Zip &eacute;choue si le Zip a une version 
+  de base de donn&eacute;es trop ancienne ou plus r&eacute;cente que celle de 
+  TopoDroid. La compatibilité à l'importation avec un autre format de fichier 
+  de topographie peut ne pas &ecirc;tre complète.
+<p><em>TopoDroid</em> importe des données du relevé topo à partir d'archives zip 
+  <em>TopoDroid</em> ou de fichiers externes.<br>
+  Pour importer des archives zip à partir du dossier interne, appuyez sur le bouton 
+  &quot;Importer&quot; de la fenêtre principale.<br>
+  Pour importer des fichiers externes (ou des archives zip externes), appuyez 
+  longuement sur le bouton &quot;Importer&quot;. Les fichiers externes sont sélectionnés 
+  par un module du système.<br>
+  Le nom du fichier ne doit pas contenir de signe le ponctuation deux points. 
+  ':'.<br>
+  Les formats d'importation suivants sont pris en charge : 
+<ul>
+  <li>Compass</li>
+  <li> Survex</li>
+  <li> Therion. (seulement les données)</li>
+  <li> VisualTopo</li>
+  <li> CaveSniper</li>
+  <li> PocketTopo (y compris les croquis)</li>
+  <li> Archives zip de TopoDroid</li>
+</ul>
+<p></p>
+<p>L'importation d'un fichier échoue si un relevé portant le même nom se trouve 
+  déjà dans <em>TopoDroid</em>.<br>
+  L'importation d'une archive zip échoue si le zip possède une version de la base 
+  de données trop ancienne ou plus récente que celle de <em>TopoDroid</em>.</p>
+<p> Lors de l'importation à partir de formats de fichiers qui ont des valeurs 
+  LRUD, celles-ci sont converties en valeurs x (affichées en vert).</p>
+<p> <strong>Importation de Therion</strong><br>
+  Seuls les fichiers de relevés Therion avec des données en mode de données &quot;normal&quot; 
+  sont importables.<br>
+  La commande &quot;declination&quot; est prise en compte : les azimuts lus sont 
+  corrigés avec la valeur de la déclinaison magnétique.<br>
+  <em>TopoDroid</em> n'importe pas les grilles Therion.</p>
+<p><br>
+  <strong>Importation de PocketTopo</strong><br>
+  <em>TopoDroid</em> importe à la fois les données du relevé et les croquis. Cet 
+  import fait correspondre les couleurs <em>PocketTopo</em> aux outils de dessin 
+  de <em>TopoDroid</em> (points et lignes). Le mappage peut être modifié par un 
+  paramètre.</p>
+<p><br>
+  <strong>Importation depuis Compas</strong>s<br>
+  <em>TopoDroid</em> convertit les relevés de données importés depuis <em>Compass</em> 
+  du mode &quot;normal&quot; au mode &quot;plongée&quot; [T], si le paramètre 
+  correspondant est activé [G].</p>
+<p> <strong>NB</strong> : L'importation peut échouer (et faire planter l'application) 
+  en raison d'une défaillance de la base de données que <em>TopoDroid</em> ne 
+  peut pas intercepter. Si cela se produit, supprimez le relevé partiellement 
+  importé et essayez de l'importer à nouveau.</p>
+<p> 
+<h4>FORMATS D'EXPORT PAR DÉFAUT</h4>
+<em>TopoDroid</em> possède deux param&egrave;tres pour s&eacute;lectionner un 
+format d'exportation par d&eacute;faut pour les donn&eacute;es de topographie 
+et un seul pour les croquis. Par d&eacute;faut, ils sont tous les deux r&eacute;gl&eacute;s 
+sur &quot;none&quot;, c'est-&agrave;-dire sans exportation.<br>
+Lorsque le format d'exportation des donn&eacute;es de lev&eacute; topographique 
+est d&eacute;fini, <em>TopoDroid</em> exporte les donn&eacute;es du lev&eacute; 
+topo dans ce format avant de cr&eacute;er une archive zip, et ce afin que l'exportation 
+soit incluse dans l'archive. 
+<p> Lorsque le format d'exportation d'esquisse par d&eacute;faut est d&eacute;fini, 
+  les croquis sont export&eacute;es dans ce format &agrave; chaque fois qu'elles 
+  sont ferm&eacute;es (en plus d'&ecirc;tre enregistr&eacute;es au format binaire 
+  <em>TopoDroid</em>).<br>
+</p>
+<p><strong>EXPORTATION DES DONNÉES DU RELEVÉ</strong>
+<p><strong>Remarque</strong> : Les points fixes sont exportés avec leurs coordonnées 
+  latitude-longitude [en degrés décimaux] et l'altitude au-dessus du niveau moyen 
+  de la mer [m].</p>
+<p><em>TopoDroid</em> exporte les données des relevés topographiques aux formats 
+  des programmes de topographie spéléo suivants : </p>
+<ul>
+  <li><a href="#compass">Compass</a></li>
+  <li><a href="#csurvey">cSurvey</a></li>
+  <li><a href="#survex">Survex</a></li>
+  <li><a href="#therion">Therion</a></li>
+  <li><a href="#trobot">TopoRobot</a></li>
+  <li><a href="#vtopo">VisualTopo</a></li>
+  <li><a href="#walls">Walls</a></li>
+  <li><a href="#winkarst">WinKarst</a></li>
+  <li><a href="#ghtopo">GHTopo</a></li>
+  <li><a href="#grottolf">Grottolf</a></li>
+  <li><a href="#ptopo">PocketTopo</a></li>
+  <li><a href="#polygon">Polygon</a></li>
+  <li><a href="#topo">Topo</a></li>
+</ul>
+En outre, il exporte les données des relevés topographiques informatiques aux 
+formats suivants : 
+<ul>
+  <li><a href="#csv">CSV</a></li>
+  <li><a href="#dxf">DXF</a></li>
+  <li><a href="#kml">KML</a></li>
+  <li><a href="#geojson">GeoJSON</a></li>
+  <li><a href="#plt">trackfile (OziExplorer)</a></li>
+  <li><a href="#shp">shapefile</a></li>
+</ul>
+<p>Si le relevé n'est pas géoréférencé, les données du relevé ne peuvent pas être 
+  exportées dans les quatre derniers formats d'exportation. <br>
+</p>
+<p> <b><a name="compass"></a>Compass</b> (.dat) <br>
+  Fichier de données <em>Compass</em> sont pris en charge à la fois à l'import 
+  et à l'export. <br>
+  Les fichiers importants de <em>Compass</em> doivent avoir l'extension ".dat" 
+  ou ".DAT". <br>
+  Les unités de données sont 'pieds' et 'degrés'. 
+<p>Paramètres 
+<ul>
+  <li><u>Préfixe de la station</u> : s'il est mentionné, il est ajouté au début 
+    du nom de la station. </li>
+  <li><u>Visées latérales d'habillage</u> (rayonnement)</li>
+  <li><u>Échange G/D</u> <br>
+  </li>
+</ul>
+<p><strong><a name="csurvey"></a>cSurvey</strong> (.csx)<br>
+  Les fichiers d'exportation <em>cSurvey</em> nécessitent <em>cSurvey</em> v. 
+  1.20 ou ultérieur.<br>
+  L'exportation <em>cSurvey</em> à partir de la fenêtre d'information du relevé 
+  ne comprend que les données du relevé, et ne comporte pas de croquis.<br>
+  Pour réaliser une exportation cSurvey avec un croquis (plan et coupe), vous 
+  devez exporter à partir de la fenêtre de dessin. </p>
+<p> L'exportation <em>cSurvey</em> inclut les visées de contrôle d'étalonnage 
+  et les fichiers média (audio et photo). </p>
+<p> Paramètres :</p>
+<ul>
+  <li><u>Préfixe de la station</u> : préfixe ou non le nom de la station avec 
+    le nom du relevé.</li>
+</ul>
+<p></p>
+<p><strong><a name="survex"></a>Survex</strong> (.svx)<br>
+  Les données du relevé peuvent être exportées sous forme de fichiers <em>Survex</em>.<br>
+  Les unités de données suivent les options de l'utilisateur.</p>
+<p> Paramètres :</p>
+<ul>
+  <li><u>la fin de ligne</u> peut être soit du type <em>Unix</em>, soit du type 
+    <em>Windows</em></li>
+  <li><u>station nommée TO</u> pour les visées d'habillage (le nom TO devient 
+    le nom de la station FROM avec une lettre en annexe)</li>
+  <li>ajouter les visées <u>LRUD</u> à l'exportation<br>
+  </li>
+</ul>
+<p><b><a name="therion"></a>Therion</b> (.th) <br>
+  Les données du relevé topo sont exportées au format <em>Therion</em>, en utilisant 
+  le formulaire &quot;normal&quot;.<br>
+  Les unités de données sont définies par les options de l'utilisateur.<br>
+  Les noms des équipes sont répertoriés mais la commande est commentée.<br>
+  Les commentaires et les marques de la station (fixes, couleurs) précèdent les 
+  données de la ligne de cheminement.<br>
+  Les visées latérales sont exportées avec la station &quot;-&quot; (tiret), les 
+  autres avec la station &quot;.&quot; (point). 
+<p> Les coordonn&eacute;es des points fixes (latitude longitude et altitude a.s.l.) 
+  sont export&eacute;es comment&eacute;es. Si le point a des coordonn&eacute;es 
+  CRS personnalis&eacute;es, celles-ci sont &eacute;galement export&eacute;es, 
+  pr&eacute;c&eacute;d&eacute;es du nom CRS.</p>
+<p> De plus, les &quot;inputs&quot; des fichiers th2 et les d&eacute;finitions 
+  pour la topographie de chaque calque (voir doc. <em>Therion</em>) sont ajout&eacute;s 
+  &agrave; la fin, mais sont comment&eacute;s. </p>
+<p> Paramètres 
+<ul>
+  <li><u>Cartes <em>Therion</em></u>&#160;: si cette option est activée, les commandes 
+    &quot;map&quot; sont placées avant la ligne de cheminement du relevé topographique.</li>
+  <li><u></u> LRUD&#160;: ajouter LRUD pour exporter.</li>
+</ul>
+<p> Les fichiers import <em>Therion</em> doivent avoir l'extension &quot;.th&quot;.<br>
+  L'analyse <em>TopoDroid</em> de la syntaxe des donn&eacute;es <em>Therion</em> 
+  est tr&egrave;s limit&eacute;e. G&eacute;n&eacute;ralement, seules les donn&eacute;es 
+  sous forme &quot;normale&quot; sont comprises. Les commandes de donn&eacute;es 
+  <em>Therion</em> &quot;units&quot;, &quot;flag&quot;, &quot;extend&quot;, &quot;mark&quot; 
+  et &quot;station&quot; sont support&eacute;es.<br>
+  Les points fixes (&quot;fix&quot;) sont analys&eacute;s mais ne sont pas pris 
+  en compte car &quot;cs&quot; n'est pas support&eacute;. <br>
+<p><b><a name="trobot"></a>TopoRobot</b> (.trb) <br>
+  Les données du relevé peuvent être exportées sous forme de fichiers <em>TopoRobot</em>. 
+  La stratégie de dénomination des stations de <em>TopoRobot</em> doit avoir été 
+  sélectionnée. Si les noms de station suivent&nbsp; la convention <em>TopoRobot</em> 
+  &quot;numéros de série&quot;, ils sont alors utilisés. <br>
+
+<p><b><a name="vtopo"></a>VisualTopo</b> (.tro)<br>
+  Les fichier de données <em>VisualTopo</em> sont pris en charge à la fois à l'import 
+  et à l'export. <br>
+  Les fichiers <em>VisualTopo</em> importés doivent avoir l'extension ".tro" ou 
+  ".TRO". <br>
+  Les unités utilisées sont 'm' et 'degrés'. 
+<p>Paramètres : 
+<ul>
+  <li><u>Format tro</u>. Par défaut, les données sont enregistrées au format &quot;tro&quot;.</li>
+  <li><u>Visées latérales d'habillage</u></li>
+  <li><u>LRUD</u> liées à la station DEPUIS (FROM)</li>
+  <li><u>Suffixe de la station</u> : s'il est mentionné, il est ajouté aux noms 
+    des stations.<br>
+  </li>
+</ul>
+<p> <b><a name="walls"></a>Walls</b> (.srv) <br>
+  Les données du relevé peuvent être exportées sous forme de fichiers <em>Walls</em> 
+  (partiellement testés). <br>
+  Les unités sont données selon les options de l'utilisateur. <br>
+<p> <b><a name="winkarst"></a>WinKarst</b> (.sur) <br>
+  Les données du relevé peuvent être exportées sous forme de fichiers <em>WinKarst</em> 
+  (non testé). 
+<p>Paramètres :
+<p> <u>Préfixe de la station</u> : s'il est donné, il est ajouté au début du nom 
+  de la station.<br>
+<p> <b><a name="ghtopo"></a>GHTopo</b> (.gtx) <br>
+  TopoDroid peut exporter des données de relevé topographique au format <em>GHTopo</em> 
+  (partiellement testé).<br>
+<p> <b></b><b><a name="grottolf"></a>Grottolf</b> (.grt)<br>
+  TopoDroid peut exporter des données topographiques au format <em>Grottolf</em> 
+  (non testé). Si la première station a des coordonnées géographiques, celles-ci 
+  sont exportées, sinon les coordonnées locales sont utilisées. La coupe sur les 
+  stations est calculée en projetant visées d'habillage sur un plan vertical perpendiculaire 
+  au cheminement. <br>
+<p><b><a name="ptopo"></a>PocketTopo</b> (.top)<br>
+  TopoDroid prend en charge <i>PocketTopo</i> aussi bien à l'import qu'à l'export. 
+<p> Les exportations ne contiennent que les données du relevé topo. 
+<p> Si la stratégie d'attribution des noms de station, qui est utilisée dans l'export, 
+  est réglée sur "<em>TopoRobot</em>" et que les noms de stations suivent la convention 
+  TopoRobot &quot;series.number&quot;, alors les noms sont convertis en nombres. 
+  Les caractères alphabétiques remplacent chaque caractère par deux chiffres. 
+  Plus précisément &quot;a&quot; devient&quot;00&quot;, &quot;b&quot; devient&quot;01&quot; 
+  et ainsi de suite, &quot;A&quot; devient&quot;50&quot;, &quot;B&quot; devient&quot;51&quot;, 
+  et ainsi de suite. Chaque autre caractère (c'est-à-dire non alphanumérique) 
+  passe à &quot;99&quot;.
+<p> Les fichiers importés depuis <em>PocketTopo</em> doivent avoir l'extension 
+  ".top" ou ".TOP". <br>
+  Les dessins du &quot;plan&quot; et de la "coupe" sont importés. <i>PocketTopo</i> 
+  n'utilise que peu de couleurs pour différencier les types de ligne. Par conséquent 
+  la <a href="page_pt_cmap.htm">palette</a> de couleurs de <em>Therion</em> est 
+  utilisée. Les types de ligne et de point peuvent être réglés via un paramètre. 
+<p> Il peut arriver que le croquis importé ne soit pas aligné avec la topographie 
+  issue des données du relevé. Dans ce cas, vous pourrez déplacer l'esquisse pour 
+  l'adapter à l'axe de cheminement (option <em>Références fixes</em> du menu déroulant). 
+  <br>
+<p><b><a name="polygon"></a>Polygon</b> (.cave) <br>
+  <em>TopoDroid</em> peut exporter des données de relevé topographique au format 
+  <em>Polygon</em>. Les points fixes sont exportés en tant que lat-long.<br>
+<p><b><a name="topo"></a>Topo</b> (.cav) <br>
+  Les données du relevé peuvent être exportées sous forme de fichiers <em>Topo</em>. 
+<p>
+
+Paramètres&#160;:  
+<ul style="margin-top=0">
+  <li><u>Fin de ligne</u> peuvent être soit du type <em>Unix</em> soit du type 
+    <em>Windows</em> <br>
+    <b></b> </li>
+</ul>
+<p><b><a name="csv"></a>Fichier CSV</b> (.csv) <br>
+  Les données du relevé peuvent être exportées sous la forme d'une liste d'enregistrements 
+  avec les champs séparés par des virgules&#160;: 
+<ul>
+  <li>Station"Depuis" </li>
+  <li>Station "Vers" </li>
+  <li>Distance, azimut, pente</li>
+  <li>Icône si présente <br>
+  </li>
+</ul>
+<p><b><a name="dxf"></a>DXF</b> (.dxf) <br>
+  Les données du relevé sont exportées sous forme de couches 3D DXF 
+<ul>
+  <li>Stations</li>
+  <li>Cheminement</li>
+  <li>Visées d'habillage</li>
+</ul>
+<p> Les données sont corrigées avec la déclinaison magnétique. <br>
+</p>
+<p><b><a name="kml"></a>KML</b> (.kml) <br>
+  Les données du relevé peuvent être exportées en tant que fichier KML (<em>GoogleEarth</em>) 
+  si vous avez géoréférencé au moins une station. Si le relevé topographique contient 
+  des tronçons disjoints, l'export KML inclut tous les tronçons ayant une station 
+  géoréférencée. Les données sont corrigées avec la déclinaison magnétique. </p>
+<p> Paramètres&#160;: 
+<ul>
+  <li><u>Stations</u></li>
+  <li><u>Visées d'habillage<br>
+    </u> </li>
+</ul>
+<p><strong><a name="geojson"></a></strong><b id="geojson">GeoJSON</b> (.json)<br>
+  Les données du relevé topographique peuvent être exportées en tant que fichier 
+  <em>GeoJSON</em> (RFC 7946) si vous avez géoréférencé au moins une station. 
+  Les prises de vue sont exportées sous forme de LineString, les stations sous 
+  forme de Point. Si le levé contient des morceaux disjoints, l'exportation <em>GeoJSON</em> 
+  inclut tous les morceaux avec une station géoréférencée. Les données sont corrigées 
+  avec la déclinaison magnétique. 
+<p> Paramètres :
+<ul>
+  <li><u>Stations</u></li>
+  <li><u>Visées d'habillage </u></li>
+</ul>
+<p align="justify"><br>
+  <strong><a name="plt" id="plt"></a>PLT</strong> (.plt) <br>
+  Les données du relevé peuvent être exportées en tant que fichier de trace (<em>OziExplorer</em>) 
+  si vous avez géoréférencé une station. Si le relevé topographique contient des 
+  tronçons disjoints, le fichier de trace inclut tous les tronçons ayant une station 
+  géoréférencée. Les données sont corrigées avec la déclinaison magnétique. <br>
+</p>
+<p align="justify"><b><a name="shp"></a>Shapefile</b> (.shp .shx .dbf)<br>
+  Les données du relevé topographique peuvent être exportées sous forme de <em>shapefile</em>. 
+  Il y a un fichier pour les stations et un autre pour les visées (à la fois de 
+  cheminement et d'habillage). Si le relevé contient des pièces disjointes, un 
+  shapefile est exporté pour chaque pièce avec une station géoréférencée. Les 
+  données sont corrigées avec la déclinaison magnétique. Chaque shapefile est 
+  composé de trois fichiers : le fichier de données (shp), le fichier d'index 
+  (shx) et le fichier d'attributs (dbf). Les fichiers sont compressés en zip et 
+  le .zip est enregistré dans le dossier &quot;shp&quot; avec l'extension &quot;.shz&quot;. 
+</p>
+<p> Si vous avez géoréférencé au moins une station et coché la case appropriée 
+  dans le dialogue d'exportation, les données sont exportées dans le système de 
+  référence WGS84, et corrigées avec la déclinaison magnétique.<br>
+  Sinon, les données sont exportées en coordonnées locales et la correction de 
+  la déclinaison magnétique n'est pas appliquée.</p>
+<p> Le fichier .dbf&nbsp; &quot;stations&quot; contient uniquement le champ &quot;nom&quot;.<br>
+  Le fichier .dbf&nbsp; &quot;visées&quot; contient les champs suivants :</p>
+<ul>
+  <li><em>type</em> : soit &quot;cheminement&quot;, soit &quot;habillage&quot;.</li>
+  <li><em>DEPUIS</em> la station</li>
+  <li><em>VERS</em> la station (&quot;-&quot; pour les visées d'habillage)</li>
+  <li><em>indicateur</em> de la visée sous forme hex : 1-visée de surface, 2-visée 
+    dupliquée, 4-visée commentée</li>
+  <li><em>commentaire</em>s des visées</li>
+</ul>
+<p> Paramètres : </p>
+<ul>
+  <li><u>Stations</u> : si vous voulez exporter les stations</li>
+  <li><u>Visées d'habillage</u> : inclure ou non les visées latérales d'habillage 
+    (rayonnement) </li>
+</ul>
+<p>&nbsp;
+<h4>EXPORTATION de CROQUIS</h4>
+<p>TopoDroid exporte les croquis des relevés topographiques aux formats suivants 
+  : </p>
+<ul>
+  <li><a href="#csx">cSurvey</a></li>
+  <li><a href="#th2">Therion</a></li>
+  <li><a href="#tunnel">Tunnel</a></li>
+  <li><a href="#xvi">xtherion</a></li>
+  <li><a href="#cave3d">Cave3D</a></li>
+  <li><a href="#dxf2">DXF</a></li>
+  <!-- li><a href="#png">PNG image</a></li -->
+  <li><a href="#pdf">PDF file</a></li>
+  <li><a href="#shp2">shapefile</a></li>
+  <li><a href="#svg">SVG</a></li>
+</ul>
+<p><b><a name="csx"></a>cSurvey</b> (.csx)<br>
+  Ces exportations contiennent à la fois les croquis de plan et de coupe, ainsi 
+  que les données de relevés topographiques. Lorsque des points &quot;section&quot; 
+  sont définis, les dessins de section transverses sont ajoutés à ces points.<br>
+  L'attribut <em>cSurvey</em> &quot;cave&quot; est défini avec le nom du relevé 
+  topographique et l'attribut &quot;branch&quot; avec le nom du croquis. Les 
+  branches, les séparations de ligne de cheminement et les éléments d'esquisse 
+  partagent ces attributs.</p>
+<p> Si votre relevé topographique ne contient qu'une seule esquisse, il s'agit 
+  d'une exportation complète de votre travail (sauf pour les sections transverses). 
+  Si le relevé topographique contient plus d'un croquis, vous devrez exporter 
+  chaque esquisse individuellement et fusionner les exportations avec <em>cSurvey</em>.</p>
+<p> Les éléments des esquisses sont répartis sur des couches <em>cSurvey</em> 
+  appropriées. <br>
+</p>
+<p><b><a name="th2"></a>Therion</b> (.th2) </p>
+<p>les croquis sont exportées au format <em>Therion</em> sous la forme d'une 
+  seule esquisse par fichier, si elles sont exportées depuis la fenêtre d'esquisse, 
+  ou sous la forme d'un fichier contenant toutes les croquis avec la même vue, 
+  en plan ou coupe développée, si elles sont exportées depuis la fenêtre d'aperçu. 
+  Dans ce dernier cas, il y a un calque <em>Therion</em> (scrap) pour chaque esquisse, 
+  et les scrap de section sont inclus si les points de section automatiques sont 
+  activés. </p>
+<p>Les noms de scrap <em>Therion</em> sont composés du nom du relevé, du nom de 
+  l'esquisse et d'un suffixe, soit 'p' pour plan, soit 's' (du mot &quot;<strong>s</strong>ection&quot;) 
+  pour la coupe.<br>
+  Pour les croquis multi-scrap, les noms des scraps <em>Therion</em>, au-delà 
+  du premier, sont également accompagnés d'un numéro commençant par 1.<br>
+  Les noms de scrap <em>Therion</em> des sections transverses sont composés du 
+  nom du relevé, d'un code de deux lettres, 'xx', et d'un numéro.</p>
+<p> Lorsqu'un croquis avec des points de section transverse est exportée via 
+  la boîte de dialogue d'exportation, les sections transverses des points de section 
+  sont également exportées.</p>
+<p> Si l'esquisse contient des symboles qui ne sont pas inclus dans le jeu de 
+  symboles <em>Therion</em>, vous devez ajouter le préfixe &quot;u :&quot; aux 
+  noms des symboles non supportés, avant d'utiliser le fichier th2.</p>
+<p> Paramètres :</p>
+<ul>
+  <li><u>points de station</u> automatiques. [par défaut : yes].</li>
+  <li>ajout de <u>visées d'habillage </u>au scrap (sous forme de lignes de type 
+    &quot;splay&quot;) [par défaut : no].</li>
+  <li>ajouter une commande <em>Xtherion</em> pour lire l'image <u>XVI</u> du croquis 
+    [par défaut : non].</li>
+  <li>exporter <u>l'échelle</u>. Par défaut : 1:100</li>
+  <li><u>espacement des points</u> : distance minimale entre les points sur les 
+    polylignes. Les points intermédiaires ne sont pas exportés. [par défaut : 
+    20 cm]</li>
+</ul>
+<p>Les images XVI ne sont pas automatiquement exportées avec le fichier <em>Therion</em> 
+  &quot;th2&quot;, même si une commande <em>Xtherion</em> pour l'inclure est ajoutée 
+  au fichier <em>Therion</em>, car elle ne contiendrait pas plus d'informations 
+  que le fichier <em>Therion</em> lui-même. La commande peut être utilisée pour 
+  charger dans <em>Xtherion</em> une image XVI créée par un autre programme. </p>
+<p><u>Remarque</u>. Avec la version 3.1, <em>TopoDroid</em> enregistre les croquis 
+  &quot;nativement&quot; dans son format binaire. Les versions précédentes utilisaient 
+  le format <em>Therion</em>. La conversion de <em>Therion</em> en binaire est 
+  &quot;automatique&quot; lorsque vous ouvrez un croquis : si TopoDroid ne trouve 
+  pas le fichier binaire, il recherche le fichier <em>Therion</em>. <br>
+</p>
+<p><strong><a name="tunnel"></a>Tunnel</strong> (.xml)<br>
+  Sketch peut être exporté au format <em>Tunnel</em> XML. Les fichiers sont enregistrés 
+  dans le sous-répertoire &quot;tnl&quot;.<br>
+  Les lignes suivantes sont mappées aux lignes du <em>Tunnel</em> : mur, présumé, 
+  fosse, cheminée, et pente. Toutes les autres lignes sont mappées à la ligne 
+  &quot;details&quot; de <em>Tunnel</em>.<br>
+  Les limites de la zone sont mappées à la ligne &quot;filled&quot; de <em>Tunnel</em>.<br>
+  Les points suivants sont associés aux points du tunnel : courant d'air, archéo, 
+  blocs, argile, colonne, rideau, pierre d'écoulement, gradient, guano, boue, 
+  cailloux, popcorn, sable, soda-paille, stalactite, stalagmite, eau, écoulement 
+  d'eau. Tous les autres points sont mappés au point de <em>Tunnel</em> &quot;bedrock&quot;.</p>
+<p><br>
+  <strong><a name="xtherion"></a>Xtherion</strong> (.xvi)<br>
+  L'exportation &quot;xvi&quot; peut être insérée comme image de fond dans <em>Xtherion</em>.<br>
+  Les lignes de type &quot;paroi&quot; sont rouges, &quot;pente&quot; orange, 
+  &quot;section&quot; grise, toutes les autres sont brunes. Les bordures des zones 
+  sont noires. Les icônes de points sont rendues de manière simplifiée. Le rendu 
+  des étiquettes ne supporte que les caractères latins, les chiffres et quelques 
+  caractères ('+', '-', '/', '_', '&gt;', '&lt;', '?'). Les autres caractères 
+  sont remplacés par un &quot;losange&quot;.<br>
+  La maille de la grille est au pas de 1 m. </p>
+<p> Les paramètres XVI font partie des paramètres <em>Therion</em> :</p>
+<ul>
+  <li>Dessin des <u>points de section</u> : si des points de section sont automatiquement 
+    ajoutés aux lignes de section, le dessin de la section transverse est inséré 
+    dans le fichier xvi, au point &quot;section&quot;.</li>
+  <li>lignes de <u>grille</u> ajoutées à l'exportation (taille de la cellule correspondant 
+    aux unités de grille courantes). [par défaut, aucune grille]</li>
+  <li><u>échelle</u> d'exportation. [par défaut 1:100]</li>
+  <p></p>
+</ul>
+<p><strong><a name="cave3D"></a>Cave3D</strong> (.c3d)<br>
+  L'esquisse exportée au format &quot;c3d&quot; peut être transposée en modèle 
+  3D grâce au visualisateur 3D.<br>
+</p>
+<p> <b><a name="dxf2"></a>DXF</b> (.dxf) <br>
+  Les croquis (esquisses) peuvent être exporté(e)s sous forme de fichiers DXF 
+  2D avec des couches pour chaque point, ligne et type de zone en plus des couches 
+  de données 3D DXF. Les éléments du croquis 2D DXF sont situés dans le plan 
+  z&#160;=0. <br>
+  les croquis peuvent être exportées en tant que DXF 9 AC1009, 12 (R13) AC1012, 
+  et 14 (R14) AC1014. <br>
+  Pour le DXF-9 les zones sont exportées avec seulement la bordure et ne sont 
+  pas colorées à l'intérieur. Il est possible d'inclure dans le fichier DXF, les 
+  sections tranxverses (pour lesquelles l'esquisse contient un point &quot;section&quot;) 
+  et l'axe X-Y. </p>
+<p> Paramètres :</p>
+<ul>
+  <li><u>Version DXF</u> : 9 (dxf-9), 12 (dxf-13), ou 14 (dxf-14). [par défaut 
+    &quot;9&quot;].</li>
+  <li><u>Point de section</u> : si une ligne de section transverse possède le 
+    point de section relatif, le dessin de la section est inséré dans l'exportation 
+    au point &quot;section&quot;.</li>
+  <li><u>Référence XY</u> : insertion ou non de la référence des axes XY</li>
+  <li><u>Stations</u> : insertion ou non des points de station</li>
+  <li><u>Courbes interpolées</u> : permet de dessiner les cubiques comme des polylignes 
+    interpolées.</li>
+  <li><u>Espacement des points</u> : distance maximale entre les points d'interpolation 
+    sur les lignes lissées. [par défaut 20 cm]<br>
+  </li>
+</ul>
+<p><strong><a name="pdf"></a>PDF</strong> (.pdf)<br>
+  les croquis peuvent être exportées sous forme de fichiers PDF. Les fichiers 
+  PDF de croquis (oun esquisses) sont conçus comme un moyen rapide de partager 
+  la topographie avec des non spéléologues dans un format que tout le monde peut 
+  ouvrir.</p>
+<p> Le fichier PDF a une seule page sur fond blanc et il comprend uniquement les 
+  éléments de référence (stations, visées d'habillage, grille, etc.) qui sont 
+  affichés à l'écran.<br>
+  Le taille du texte des étiquettes, des indications des barres d'échelle et des 
+  stations, est réduite d'un quart. La couleur de certains éléments (par exemple 
+  des étiquettes) est inversée, pour plus de visibilité.<br>
+</p>
+<p> <strong><a name="shp2"></a>Fichier Shapefile</strong> (.shp)<br>
+  les croquis peuvent être exportées en tant que <em>shapefile</em>, avec des 
+  stations, des visées et des lignes. Chaque élément possède trois fichiers : 
+  le fichier de données de forme, le fichier d'index et le fichier de base de 
+  données. Les fichiers composant l'exportation <em>shapefile</em> sont compressés 
+  par zip et le fichier .zip est enregistré dans le dossier &quot;shp&quot; avec 
+  l'extension &quot;.shz&quot;.</p>
+<p> Si vous avez géoréférencé au moins une station et coché la case appropriée 
+  dans le dialogue d'exportation, les données sont exportées dans le système de 
+  référence WGS84, et corrigées avec la déclinaison magnétique.<br>
+  Sinon, les données sont exportées en coordonnées locales et la correction de 
+  la déclinaison magnétique n'est pas appliquée.</p>
+<p>Le fichier .dbf&nbsp; &quot;points&quot; contient uniquement les champs suivants 
+  :</p>
+<ul>
+  <li><em>nom</em> du point</li>
+  <li><em>orientation</em></li>
+  <li><em>niveau</em></li>
+  <li><em>scrap</em></li>
+  <li> 
+    <div align="left"><em>texte</em> optionnel (tronqué à 128 caractères) </div>
+  </li>
+</ul>
+<p> Le fichier .dbf&nbsp; &quot;extra&quot; contient les champs nom du point :</p>
+<ul>
+  <li><em>orientation</em></li>
+  <li><em>niveau</em></li>
+  <li><em>scrap</em></li>
+  <li><em>texte</em> facultatif (tronqué à 128 caractères)</li>
+  <li><em>fichier</em></li>
+</ul>
+<p> Les fichiers .dbf&nbsp; &quot;line&quot; et &quot;area&quot; contiennent : 
+</p>
+<ul>
+  <li>le <em>type</em> qui permet de distinguer la ligne de la zone</li>
+  <li><em>nom</em> de la ligne ou de la zone</li>
+  <li><em>niveau</em></li>
+  <li><em>scrap</em>&nbsp;&nbsp; </li>
+</ul>
+<p>Le fichier .dbf&nbsp; &quot;station&quot; contient :</p>
+<ul>
+  <li>le <em>nom</em> de la station.</li>
+</ul>
+<p>Le fichier .dbf&nbsp; &quot;visées&quot; contient les champs suivants :</p>
+<ul>
+  <li><em>type</em> : soit &quot;cheminement&quot;, soit &quot;habillage&quot;.</li>
+  <li> la station<em> DEPUIS</em></li>
+  <li>la station <em>VERS</em> (&quot;-&quot; pour les visées d'habillage)</li>
+  <li>un <em>indicateur</em> de la visée sous forme hex : 1-visée de surface, 
+    2-visée dupliquée, 4-visée commentée<br>
+  </li>
+</ul>
+<p> <b></b><b><a name="svg"></a>SVG</b> (.svg)<br>
+  Les croquis peuvent être exportés sous forme de fichiers SVG. </p>
+<p>Les éléments sont organisés en couches : grilles, stations, visées de cheminement, 
+  visées d'habillage, points, lignes et zones.<br>
+  Ces couches (layers) se trouvent sous une couche de calque global.<br>
+  Chaque &quot;scrap&quot; a ses propres couches points, lignes et zones. <br>
+  L'échelle d'exportation est de 1:100. </p>
+<p>Si les classes d'affichage sont activées, les visées d'habillage sont colorées 
+  en fonction de leur classe : les visées d'habillage normales sont gris, les 
+  horizontales sont vert marin clair, les verticales sont bleu acier et les sections 
+  transverses sont bleu ciel. Les classes d'habillage ne sont pas prises en charge 
+  dans l'exportation type &quot;aller-retour&quot;. </p>
+<p>Les effets de ligne, tels que les coches sur les parois de puits, ne sont pas 
+  exportés, mais la direction peut être montrée en activant le paramètre &quot;Line 
+  Direction&quot;.</p>
+<p> Paramètres&#160;: </p>
+<ul>
+  <li><u>Programme SVG</u> : <em>Inkscape</em> ou <em>Illustrator</em>. Cela affecte 
+    un facteur d'échelle d'exportation.</li>
+  <li><u>Point de section du dessin</u> : si des points de section sont automatiquement 
+    ajoutés aux lignes de section, le dessin de section est inséré dans l'export, 
+    au point &quot;section&quot;.</li>
+  <li><u>Points de station automatiques</u> : si cette option est activée, toutes 
+    les stations sont incluses dans l'exportation, sinon seules les stations choisies 
+    par l'utilisateur sont incluses.</li>
+  <li><u>Espacement des points</u> : distance maximale entre les points d'interpolation 
+    sur les lignes lisses</li>
+  <li><u>Round-trip</u> : les croquis sont exportées prêtes pour le round-trip 
+    de <em>Walls</em>/<em>Compass</em> [non]</li>
+  <li><u>Grille</u> : quadrillage ajouté à l'export (taille des carreaux calquée 
+    sur les unités de la grille en cours). [non] </li>
+  <li><u>Orientation des ignes</u> : coche [non]</li>
+  <li><u>Épaisseur des lignes</u>&#160;: étiquettes, icônes, lignes (et limites 
+    de zone), lignes du quadrillage de la grille, visées, trait d'orientation</li>
+  <li><u>taille des stations</u> : taille du texte des noms de stations. [par 
+    défaut : 20] </li>
+</ul>
+<p>&nbsp; </p>
+<h4>EXPORTATION D'ÉTALONNAGE </h4>
+<ul style="margin-top=0">
+  <a href="page_calib_import.htm">Les données d'étalonnage</a> peuvent être exportées 
+  et importées au format CSV (fichiers.csv). <br>
+  <p> 
+  <p> 
+</ul>
+<h4>PARAMÈTRES d'IMPORT/EXPORT</h4>
+<ul>
+  <li><b>PocketTopo</b> <u>import color-map</u> : palette des couleurs <em>PocketTopo</em> 
+    pour esquisser les types d'éléments.</li>
+  <li><u>Estimation LR extend</u> : à l'importation des fichiers <b>Compass</b> 
+    / <b>VisualTopo</b> [oui] </li>
+  <li><u>Format d'exportation de données par défaut</u> : définit le format par 
+    défaut auquel les données sont exportées. Ce fichier est généré automatiquement 
+    et inséré dans l'export ZIP. [défaut non]</li>
+  <li><u>Format d'exportation du croquis par défaut</u> : définit le format 
+    par défaut auquel les croquis sont exportées. Ces fichiers sont automatiquement 
+    générés chaque fois qu'un croquis est fermée. Cela impose une charge supplémentaire 
+    pour le système, vous pouvez donc opter pour l'exportation explicite d'esquisses 
+    après la session de levé topographique. [défaut non]</li>
+  <li><u>Exportation automatique des esquisses.</u> Si cette option est activée, 
+    les croquis sont exportés dans le format choisi lorsqu'ils sont fermés. Les 
+    fichiers exportés sont stockés dans le sous-dossier &quot;out&quot; du dossier 
+    de l'enquête. L'exportation automatique des croquis impose une charge de travail 
+    supplémentaire à l'application. [défaut non]</li>
+  <li> <u>Commandes de carte <b>Therion</b></u> avant ou après le bloc de ligne 
+    centrale [après] </li>
+  <li><u>Stations automatiques <b>Therion</b></u> : ajoutez automatiquement des 
+    points de station au(x) fichier(s) d'esquisse <strong>Therion</strong> [oui]. 
+    Si vous voulez utiliser les fichiers d'esquisse dans <b>Therion</b>, ils doivent 
+    avoir des points de station pour définir leur échelle. Vous pouvez choisir 
+    manuellement le point à ajouter (en éditant le dessin d'esquisse), ou laisser 
+    <em>TopoDroid</em> ajouter les stations. Le programme ajoutera toutes les 
+    stations qui sont &quot;à l'intérieur&quot; du dessin (à l'intérieur du dessin 
+    de l'enveloppe convexe). </li>
+  <li>Lignes<em> </em><u>u:splays <b></b></u><b>Therion</b> dans les calques de 
+    <b>Therion</b> [oui] </li>
+  <li><b>cSurvey / Compass</b> préfixe du relevé topo sur le site du relevé topo 
+    aux stations [non] </li>
+  <li><b>Compass</b> / <b>TopoRobot</b> / <b>WinKarst</b> / <b>Polygon</b> / <b>VisualTopo</b> 
+    <ul>
+      <li>Angle minimum de la visée latérale pour le calcul LRUD [0.0] Ceci est 
+        également utilisé dans <b>Survex</b> / <b>Therion</b> si les LRUD sont 
+        requis. </li>
+      <li>minimum clino des visées utilisées pour UP / DOWN dans LRUD [0]</li>
+      <li>pente maximale des visées utilisées pour LEFT /RIGHT dans LRUD [90]</li>
+    </ul>
+  </li>
+  <li><b>Compass</b> swap LR : échange L et R sur l'exportation de <b>Compass</b>.</li>
+  <li><u>Terminaison de ligne</u> <b>Survex</b> / <b>Topo</b> : <em>Unix</em> 
+    ou <em>Windows</em> [Unix] </li>
+  <li>Exportation <b>Survex</b> avec les stations <u>named splay</u> TO [non] 
+  </li>
+  <li>Exportation <b>Survex</b> / <b>Therion</b> avec des <u>lignes LRUD</u> [non] 
+  </li>
+  <li>Exportation <b>SVG</b> avec <u>grille</u> [non] </li>
+  <li>L'<u>orientation de la ligne</u> d'export <b>SVG</b> est activée [non] </li>
+  <li><u>Largeurs de trait</u> <b>SVG</b> (étiquettes, icônes, lignes, grilles, 
+    plans, coches d'orientation) </li>
+  <li>Exportation <b>KML/GeoJSON</b> avec les <u>stations</u> [oui] </li>
+  <li>Export <b>KML/GeoJSON</b> avec des les <u>visées latérales d'habillage</u> 
+    [non] </li>
+  <li><u>Échelle</u> d'exportation d'esquisse <b>DXF</b> [1.0] </li>
+  <li>Exportation <b>DXF</b> avec les<u> points de terminaison des visées latérales 
+    d'habillage</u> [non] </li>
+  <li>Version <b>DXF</b> AutoCAD pour l'exportation DXF : 6 (AutoCAD R9) ou 12 
+    (AutoCAD R13). Dans la version 6, les courbes Bezier d'exportation DXF sont 
+    remplacées par des polylignes et les zones n'ont pas de hachures. La version 
+    12 de l'exportation DXF utilise des splines et des hachures, mais elle est 
+    toujours boguée. 
+    <blockquote> 
+      <p>&nbsp; </p>
+    </blockquote>
+  </li>
+</ul>
+<ul style="margin-top=0">
+  <p> <a href="page_finalmap.htm">La &quot;carte&quot; Therion définitive</a><br>
+  <p> <a href="manual12.htm">&#160;&lt; Sommaire</a> | <a href="manual14.htm">Gestionnaire 
+    de projets &gt;</a> 
+</ul>
+</body></html>

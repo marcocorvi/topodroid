@@ -1,0 +1,70 @@
+	<html>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+<body>
+<h4>BOITE DE DIALOGUE D'ÉDITION DE VISÉES (2)</h4>
+<p>Cette boîte de dialogue est ouverte à l'aide du bouton &quot;Plus&quot; <img src="btn_plus.png"> 
+  de la première <a href="page_shot_edit1.htm">boîte de dialogue d'édition de 
+  visées</a>. </p>
+<p>Elle montre les stations de visées et leurs données (longueur, azimut, inclinaison).</p>
+<p> &Agrave; un niveau utilisateur &quot;Basique&quot; ou &quot;Normal&quot;, 
+  cette bo&icirc;te de dialogue ne contient qu'un seul bouton pour supprimer la 
+  vis&eacute;e.
+<p> Aux niveaux d'utilisateur sup&eacute;rieurs, il a six ou sept boutons :</p>
+<p>
+
+<ul>
+  <li><img src="btn_photo.png" valign="bottom">&nbsp; commentaire <a href="page_photo_comment.htm">photo</a> 
+  </li>
+  <li><img src="btn_audio.png" valign="bottom">&nbsp; commentaire <a href="page_audio.htm">audio</a> 
+    (enregistrement possible)</li>
+  <li><img src="btn_sensor.png" valign="bottom">&nbsp; boite de dialogue des <a href="page_sensors.htm">capteurs 
+    de mesures</a> </li>
+  <li><img src="btn_shot.png" valign="bottom">&nbsp; ajouter une visée avant celle-ci 
+    (entrer manuellement les données)</li>
+  <li><img src="btn_split.png" valign="bottom">&nbsp; diviser le relevé topographique 
+    à partir de ce cliché (création d'un nouveau relevé)</li>
+  <li><img src="btn_delete.png" valign="bottom">&nbsp; supprimer la visée</li>
+  <li><img src="btn_calib_check.png" width="36" border="1" > marquer la visée 
+    comme contrôle d'étalonnage</li>
+</ul>
+<br>
+<p align="justify"> Le bouton <b>Supprimer</b> ne supprime pas totalement la visée 
+  de la base de données. Elle est simplement marquée comme &quot;supprimée&quot; 
+  et peut être récupérée plus tard avec la boîte de dialogue de <a href="page_undelete.htm">Récupération</a>. 
+  Si la visée est la première d'un cheminement ou d'une branche, vous pouvez également 
+  supprimer toutes les autres visées du cheminement, en cochant la case placée 
+  à côté du bouton. 
+<p align="justify"><br>
+  <img src="btn_calib_check.png" width="36" border="1" >&nbsp; Les visées de cheminement 
+  disposent aussi d'un bouton <b>d'étalonnage</b>. Ce bouton marque la visée comme 
+  &quot;test-étalonnage&quot;. Ces visées ne sont pas utilisées dans le relevé 
+  topo, et leurs données doivent être prises avec différents angles de roulis. 
+  Elles sont enregistrées dans la base de données et constituent un enregistrement 
+  de la fiabilité de l'étalonnage du DistoX lors du relevé topographique. Elles 
+  peuvent être affichées avec la boîte de dialogue de <a href="page_undelete.htm">Récupération</a>.</p>
+<p><br>
+  <b>Division du relevé</b><br>
+  Le bouton 'OK&quot; ouvre une boîte de dialogue pour les nouvelles informations 
+  topographiques. Ensuite, les données topographiques seront attribuées au nouveau 
+  relevé, en commençant par cette visée. Puis, le programme se poursuit avec le 
+  nouveau relevé. Il se peut que vous deviez partager des relevés topographiques 
+  lorsque vous avez des données provenant de deux relevés topographiques (distincts) 
+  stockés dans le DistoX : ceux-ci sont téléchargés dans un seul relevé topographique 
+  qui doit ensuite être scindé en deux parties différentes. <br>
+  Au niveau du testeur, vous avez également la possibilité de déplacer les données 
+  vers un autre relevé. Sélectionnez le relevé cible dans la liste déroulante 
+  des options et appuyez sur le bouton &quot;Déplacer&quot;. </p>
+<p><strong>Attention</strong> : Il est conseillé de créer une archive zip avant 
+  de diviser/déplacer le relevé et de la sauvegarder dans un endroit sûr.</p>
+<p> <b>Ajouter LRDU (GDHB</b>)<br>
+  Les visées latérales LRUD (GDHB), liées à la station FROM (DEPUIS) ou à la station 
+  TO (VERS), sont ajoutées en remplissant les quatre champs de saisie GDHB et 
+  en appuyant sur le bouton &quot;Ajouter LRUD&quot;. <br>
+  Les visées d'habillage ne sont reliées qu'à la station FROM (DEPUIS). <br>
+  Les LRUD (GDHB) &quot;intermédiaires&quot; sont ajoutés à la liste des données, 
+  les autres sont ajoutées avant la visée.<br>
+  Les LRUD (GDHB) manuelles sont marquées comme &quot;sections transverses&quot;.</p>
+<p>&nbsp;</p>
+</body></html>

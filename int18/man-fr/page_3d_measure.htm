@@ -1,0 +1,32 @@
+<html><body>
+<h4>3d VIEWER - Measure dialog</h4>
+
+When the fixed station is selected, its coordinates appear in a blue bar 
+at the bottom of the screen.<br>
+
+This bar has two button:
+<ul>
+<li>the first sets the station as center of rotations</li>
+<li>the second switches the program in "measure mode": tapping on another
+station brings up the <i>Measure</i> dialog with the result of the measurement.</li>
+</ul><br><p>
+
+The <i>Measure</i> dialog show the distance between the fixed station and another one.<br>
+<ul>
+<li>the full names of the two stations</li>
+<li>the East, North, and vertical displacement between the two stations</li>
+<li>the 3D distance</li>
+<li>the distance in the horizontal plane</li>
+<li>the azimuth and inclination of the straight line between the two stations</li>
+<li>if it exists, the length of the shortest path along the cave midline between the two stations,
+and the positive and negative denivelation</li>
+</ul><br><p> 
+
+<b>Denivelation</b><br>
+The positive and negative denivelation are computed summing the vertical components of upwards and downwards legs, respectively.
+Only legs with inclination over 10&deg; are considered.
+Above 30&deg; the leg vertical component is fully taken into account.
+Between 10 and 30&deg; the vertical component is linearly interpolated, ie, multiplied by (clino-10)/20.<br><p>
+
+
+</body></html>

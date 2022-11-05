@@ -1,0 +1,135 @@
+	<html>
+	<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+	<body>
+<h4>BOITE DE DIALOGUE D'ÉDITION DES VISÉES</h4>
+<p>Cette bo&icirc;te de dialogue est ouverte en appuyant brièvement sur les donn&eacute;es 
+  d'une visée dans la <u><a href="manual06.htm">fen&ecirc;tre de données du relevé 
+  topographique</a>. </u></p>
+<p>Elle affiche :</p>
+<ul>
+  <li><b>Longueur, azimut, inclinaison.</b> Modifiables pour les vis&eacute;es 
+    entr&eacute;es manuellement mais pas pour les vis&eacute;es t&eacute;l&eacute;charg&eacute;es. 
+  </li>
+  <li>Diff&eacute;rences d'acc&eacute;l&eacute;ration, de champ magn&eacute;tique 
+    et de l'inclinaison magn&eacute;tique calculées respectivement &agrave; partir 
+    des valeurs moyennes. Fonctionne seulement pour les vis&eacute;es faites avec 
+    un DistoX2<b>.</b></li>
+  <li><b>Stations</b></li>
+  <li><b>Fl&egrave;che gauche </b>: afficher la vis&eacute;e pr&eacute;c&eacute;dente</li>
+  <li><b>Bouton &quot;inverse&quot;</b> : permuter les stations (&quot;Depuis&quot; 
+    / &quot;Vers&quot;)</li>
+  <li><b>Fl&egrave;che droite </b>: afficher la vis&eacute;e suivante</li>
+  <li>Ligne de <b>commentaire </b>(note)</li>
+  <li><strong>Profil d'extension</strong> (direction de la vis&eacute;e) avec 
+    au choix: "Gauche", "Vertical", "Droite". L'extension est &quot;désactivée&quot; 
+    si rien n'est coché.</li>
+</ul>
+<p>Boutons :</p>
+<ul>
+  <li><img src="btn_duplicate.png" valighn="bottom"> vis&eacute;e "dupliqu&eacute;e" 
+    [A] </li>
+  <li><img src="btn_surface.png" valighn="bottom"> vis&eacute;e de "surface" [A]</li>
+  <li><img src="btn_comment.png" valighn="bottom"> vis&eacute;e "comment&eacute;e" 
+    [A] </li>
+  <li><img src="btn_leg_after.png" valighn="bottom"> la vis&eacute;e est li&eacute;e 
+    &agrave; la station pr&eacute;c&eacute;dente.</li>
+  <li><img src="btn_leg_before.png" valighn="bottom"> la vis&eacute;e est li&eacute;e 
+    &agrave; la station suivante.</li>
+  <li><img src="btn_backleg.png" width="36" border="1" > la visée est une visée 
+    arrière.</li>
+  <li><img src="btn_renumber.png" valighn="bottom"> renum&eacute;roter les vis&eacute;es 
+    &agrave; partir de ce point en suivant la stratégie actuelle de d&eacute;nomination 
+    des stations. Les deux stations (&quot;DEPUIS&quot; et &quot;VERS&quot;) doivent 
+    être indiqu&eacute;es.</li>
+  <li><img src="btn_splay_group.png" valighn="bottom"> appliquer un changement 
+    de station &agrave; tout le groupe de vis&eacute;es d'habillage liées à une 
+    station donnée. S'applique uniquement aux vis&eacute;es d'habillage de la 
+    m&ecirc;me station que la vis&eacute;e en cours d'&eacute;dition. Seule la 
+    station &quot;DEPUIS&quot; doit être indiquée.</li>
+  <li><img src="btn_plan_profile.png" width="36" border="1" background-color="blue"> 
+    cacher les visées latérales soit sur le plan, soit sur la coupe, soit sur 
+    les deux (habillage seulement) [A]</li>
+  <li><img src="btn_xsplay.png" valighn="bottom"> transformer cette visée et toutes 
+    les vis&eacute;es de ce groupe en visées de section transverse. Les visées 
+    de section transverse sont affich&eacute;es en vert. Ce dernier bouton assigne 
+    alors l'affichage des vis&eacute;es latérales soit au plan soit à la coupe 
+    (cette option est utile pour l'appli <em>cSurvey</em>).</li>
+</ul>
+<ul>
+  <li><b>Annuler </b>: fermer la bo&icirc;te de dialogue sans enregistrer</li>
+  <li><b>Enregistrer</b>: enregistrer les modifications sans fermer la bo&icirc;te 
+    de dialogue </li>
+  <li><b>Plus </b>: passer &agrave; la bo&icirc;te de dialogue d'<a href="page_shot_edit2.htm">Édition 
+    secondaire</a> (au contenu variant suivant le niveau utilisateur choisi)</li>
+  <li><b>OK </b>: enregistrer les modifications et fermer la bo&icirc;te de dialogue 
+  </li>
+</ul>
+Les marqueurs de visées, &quot;dupliquée&quot;, &quot;surface&quot; et &quot;commentée&quot;, 
+s'excluent mutuellement. Les visées marquées ne comptent pas pour les statistiques 
+du relevé topo. En export, les visées marquées est exportées soit avec un marqueur 
+si le format le permet, soit avec un commentaire. 
+<p> Un avertissement est émis si, lors de l'édition d'une visée de cheminement, 
+  celle-ci diffère d'une autre visée de cheminement entre les mêmes stations de 
+  plus d'un quart de la longueur, ou de plus de 15°. </p>
+<p> <b>Copier - coller un nom de station</b> 
+<p> Les noms de stations peuvent être «coupés», «copiés» et «collés» dans l'application, 
+  à partir de n'importe quelle boîte de dialogue où se trouve un champ d'entrée 
+  de station. 
+<p> Un appui long sur le champ de saisie de la station ouvre un petit menu déroulant 
+  avec les trois options suivantes : 
+<ul>
+  <li>COUPER</li>
+  <li>COPIER</li>
+  <li>COLLER</li>
+</ul>
+<p><strong>Réaffectation des stations</strong><br>
+  La réaffectation des stations peut être initiée uniquement à partir d'une visée 
+  de cheminement. Par défaut, la réaffectation affecte toutes les visées qui suivent 
+  la visée de cheminement sélectionnée jusqu'à la fin. Si le paramètre personnalisé 
+  <em>splay station</em> est désactivé, les stations des visées d'habillage ne 
+  sont pas réaffectées. </p>
+<p> La réaffectation normale ne devrait être utilisée que pour les toutes dernières 
+  visées de cheminement, dans le cas où une visée n'a pas été détecté (par exemple, 
+  seulement deux données au lieu de trois), ou détectée de manière erronée (des 
+  visées d'habillage très proches considérées comme un cheminement).</p>
+<p> Un meilleur contrôle sur les visées qui sont réassignées est obtenu avec le 
+  mode &quot;multi-sélection&quot;, où l'utilisateur peut choisir les visées à 
+  réassigner individuellement. </p>
+<p><br>
+  <strong>Groupe de visées latérales d'habillage</strong><br>
+  Un groupe de visées d'habillage est constitué de toutes les visées entre deux 
+  visées de cheminement. Le changement de station d'un groupe de visées d'habillage 
+  s'applique uniquement à l'ensemble contigu de visées d'habillage ayant la même 
+  station que la visée en cours d'édition. Seule la station DEPUIS doit avoir 
+  été spécifiée. <br>
+  Si le paramètre personnalisé &quot;Splay group&quot; est défini, seuls les visées 
+  d'habillage après la visée en cours d'édition sont modifiées. </p>
+<p><br>
+  <strong>Classes de visées d'habillage</strong><br>
+  Les classes de visées d'habillage sont activées par un &quot;paramètre personnalisé&quot;. 
+  Il existe quatre classes et quatre couleurs d'affichage : </p>
+<ul>
+  <li><em>normales</em> : visées latérales d'habillage standard. Bleu</li>
+  <li>visées latérales des <em>sections transverses</em>. Vert</li>
+  <li> visées latérales <em>horizontales</em>, sur le plan. Bleu foncé</li>
+  <li> visées latérales <em>verticales</em>, sur la coupe. Violet</li>
+</ul>
+<p><br>
+  Le bouton <em>Classe d'affichage</em> permet de faire défiler ces quatre classes. 
+  La visée d'habillage est définie dans la classe choisie lorsque les données 
+  sont sauvegardées. Si le bouton &quot;tous les visées&quot; est coché, la classe 
+  est également attribuée à toutes les visées d'habillage &quot;normales&quot; 
+  précédentes contigues.</p>
+<p> Les classes d'affichage peuvent également être définies avec le mode &quot;multi-sélectiont&quot;. 
+  En multi-sélectiont, vous pouvez sélectionner des visées d'habillage qui ne sont 
+  pas contigües et leur attribuer à toutes une classe d'affichage.</p>
+<p> Si vous effectuez des visées latérales d'habillage de manière cohérente, les 
+  classes peuvent être définies en éditant la visée de cheminement et en cochant 
+  le bouton de groupe des visées d'habillage. Vous devez d'abord prendre les visées 
+  d'habillage de la section transverse en commençant par +90 et en tournant en 
+  rond. Ensuite, vous prenez les visées latérales H. Enfin, vous prenez les visées 
+  latérales dans le plan vertical en commençant à nouveau par +90.</p>
+</body>
+</html>

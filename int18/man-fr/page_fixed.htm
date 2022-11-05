@@ -1,0 +1,41 @@
+<html>
+<body>
+
+<h4>GEO-POINT EDIT</h4>
+
+This dialog is opened tapping a fixed point entry in the <a href="page_fixed_list.htm">Geo-points list</a> window.<br><p>
+
+The dialog shows
+<ul>
+<li>longitude, latitude and geoid altitude. WGS84 ellipsoid altitude in square brackets</li>
+<li>point <b>name</b> and <b>comment</b></li>
+<li>magnetic <b>declination</b> at the point (at the current date)</li>
+</ul><br><p>
+
+Buttons
+<ul>
+<li><b>View</b> the point in a Location app (provided you have one installed)</li>
+<li><b>Clear</b> converted coordinates. This action is immediate.</li>
+<li><b>Convert</b> the geo-point coordinates to another reference system (using the app Proj4)</li>
+<li><b>Delete</b> the geo-point record</li>
+</ul>
+
+If the coordinates of the geo-point have been entered manually, they can be edited.
+Coordinates taken with GNSS or imported from <i>MobileTopographer</i> cannot be changed.<br><p>
+
+The orthometric altitude is computed from the ellipsoidic altitude using the geoid model EGM2008.<br><p>
+
+The <b>Convert</b> button computes the geo-point coordinates in another Coordinate Reference System,
+using the app Proj4. The geoid altitude is used in the conversion.
+The converted coordinates are displayed and stored in the database with the geo-point.<br><p>
+
+The magnetic declination is computed using the World Magnetic Model for 2020-2025 (this is replaced 
+with a more recent WMM when it is released).
+The uncertainty of the WMM model declination can be as large as 0.4 degrees in temperate regions.<br>
+Check the <b>save</b> box to set the magnetic declination into the survey.<br><p>
+
+The <b>Save</b> button commits the changes to the database.<br><p>
+
+
+</body>
+</html>

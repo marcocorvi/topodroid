@@ -1,0 +1,37 @@
+<html>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+<body>
+<h4>GROUPES DE DONNÉES D'ÉTALONNAGE du DistoX</h4>
+Cette boîte de dialogue s'ouvre en appuyant sur le bouton <em>Groupe</em> de la 
+<u> fenêtre Données d'étalonnage</u>. <img src="btn_grouper.png"><br>
+<p> Avant de calculer le coefficient d'étalonnage les données d'étalonnage doivent 
+  être subdivisées en groupes de données ayant le même azimut et inclinaison (rotations 
+  différentes). <br>
+  Attention, une mauvaise affectation de groupe peut entraîner l'échec du calcul 
+  des coefficients d'étalonnage (généralement dû à un trop grand nombre d'itérations 
+  dans l'algorithme). 
+<p> Les groupes sont identifiés par un nombre entier à partir de 1. <br>
+  Les données identifiées par un&nbsp;0 sont répertoriées mais exclues du coefficient 
+  de calcul. <br>
+  Les données supprimées ont un numéro de groupe négatif, donc définir le numéro 
+  de groupe -1 revient à marquer les données comme &quot;Supprimées&quot;.
+<p> Il existe deux stratégies d'affectation automatique des groupes : 
+<ol>
+  <li><em>TopoDroid</em> : quatre données à la fois pour chaque groupe ;</li>
+  <li> <em>PocketTopo</em> : quatre à la fois pour les 16 premières données (quatre 
+    groupes), puis chaque donnée est un groupe à part entière ; 
+    <!-- li>groups based on the relative angle distance (direction difference).</li -->
+  </li>
+</ol>
+<p> <strong>Actions</strong>&#160;: 
+<ul>
+  <li><em>Réinitialiser</em> tous les groupes&#160;: les groupes de données sont 
+    remis à zéro </li>
+  <li><em>OK</em>&#160;: des groupes sont affectés (uniquement possible pour les 
+    données qui n'ont pas de groupe) </li>
+</ul>
+<br><p>
+
+</body></html>

@@ -1,0 +1,73 @@
+	<html>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+<body>
+<h3>[4] FENÊTRE d'ÉTALONNAGE (calibration)</h3>
+En appuyant sur le menu <u>d'étalonnage</u> dans la fenêtre <em>Périphérique (DistoX)</em> 
+s'affiche la liste des <a href="page_calib_dialog.htm">étalonnages</a> du DistoX 
+actif. Vous pouvez ouvrir un étalonnage ou bien en créer un nouveau. Dans les 
+deux cas, vous êtes conduit à la <em>Fenêtre d'étalonnage</em>. <br>
+<p> La <em>fenêtre d'étalonnage</em> affiche les champs de texte suivants : 
+<ul style="margin-top=0">
+  <li>Le nom. Chaque étalonnage doit avoir un nom unique. </li>
+  <li>La date. </li>
+  <li>Une description.</li>
+  <li>Des boutons radio pour l'algorithme d'étalonnage (automatique / linéaire 
+    / non-linéaire). Par défaut, ils sont réglés sur "Automatique" (c'est à dire, 
+    laisser TopoDroid décider quel algorithme utiliser).<br>
+  </li>
+</ul>
+<p>
+	
+	
+<h4>BOUTONS</h4>
+	
+<ul style="margin-top=0">
+  <li><u>Enregistrer</u> les informations d'étalonnage dans la base de données.</li>
+  <li><u>Ouvrir</u> la fenêtre des données d'étalonnage.</li>
+  <li><u>Afficher</u> les coefficients d'étalonnage. Cela montre les coefficients 
+    calculés précédemment, et stockés dans la base de données.</li>
+</ul>
+<p>
+	
+	
+<h4>MENU DÉROULANT DE DROITE</h4>
+	
+<ul style="margin-top=0">
+  <li> <a href="page_calib_import.htm">EXPORTER l'étalonnage</a></li>
+  <li><u>SUPPRIMER</u> l'étalonnage et ses données de la base de données (action 
+    non récupérable) </li>
+  <li><u>OPTIONS</u> de réglage</li>
+  <li><u>AIDE<br>
+    </u> </li>
+</ul>
+<p><b>PARAMÈTRES d'ÉTALONNAGE</b>
+<ul style="margin-top=0">
+  <li><i>Stratégie de groupe</i>&#160;: comment diviser les données de calibrage 
+    en <a href="page_groups.htm">groupes</a> [par défaut "groupe de 4"].</li>
+  <li><i>Tolérance du groupe</i>&#160;: distance angulaire maximale entre des 
+    données consécutives pour qu'elles soient classées dans le même groupe lorsque 
+    la stratégie de groupe «distance-basée» est utilisée [défaut 40, min 0].</li>
+  <li><i>Erreur</i>&#160;: le calcul des coefficients se termine si la variation 
+    du coefficient de chaque étape pendant une itération est plus petite que cette 
+    valeur [par défaut 10-6<sup></sup>i, min 0]. </li>
+  <li><i>Itérations</i>&#160;: nombre maximum d'itération de l'algorithme d'étalonnage 
+    [par défaut 200, min 50]. </li>
+  <li><em>Téléchargement</em> : chargement immédiat des données à distance. </li>
+  <li><i>Les données brutes</i>&#160;: par défaut TopoDroid affiche l'azimut, 
+    l'inclinaison et la rotation. Sélectionnez cette option si vous souhaitez 
+    voir aussi les données d'étalonnage brutes, soit décimal ou hexadécimal. [Par 
+    défaut "non"].</li>
+  <li><i>Algorithme</i>&#160;: peut être 0 (auto), 1 (linéaire), 2 (non-linéaire). 
+    Si un algorithme de calibrage est laissé "auto", et que ce paramètre n'est 
+    pas "auto", l'algorithme de ces paramètres est utilisé pour calculer l'étalonnage. 
+    S'ils sont à la fois "auto" tous les deux, l'algorithme est choisi automatiquement 
+    par TopoDroid selon le modèle DistoX et firmware utilisés. [Par défaut "auto"].</li>
+</ul>
+<br>
+<p> <a href="page_calib_howto.htm">Guide d'étalonnage</a><br>
+	
+<p> <a href="manual03.htm">&lt;&nbsp;Fenêtre du périphérique</a> | <a href="manual05.htm"> 
+  Données d'étalonnage &gt;</a> 
+</body></html>

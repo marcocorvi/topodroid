@@ -1,0 +1,76 @@
+<html><body>
+<h4>DistoX2 FIRMWARE</h4>
+
+TopoDroid includes the DistoX2 firmwares v. 2.1, 2.2, 2.3, 2.4, and 2.5, which are all compatible with hardware 1.0.<br>
+Only v. 2.5 is compatible with hardware 1.1.<br> 
+TopoDroid includes also firmwares v. 2.6.1, 2.6.3 and 2.6.4 which are compatible with hardware 1.2,
+and firmware v. 2.7.0 compatible with hardware 1.3 (BLE).<br><p>
+
+<b>WARNING.</b><br>
+<b>Uploading an incompatible firmware makes your DistoX unusable.</b><br>
+<b>Read carefully all the messages before uploading a new firmware.</b><br><p>
+<p>
+
+Through the firmware dialog you can save a copy of the current firmware of your DistoX2, or upload a new firmware file.
+Before uploading a new firmware TopoDroid checks that it is compatible with the hardware version.
+Unfortunately there is no sure way to read the firmware version from the file content;
+To prevent uploading a bad file, 
+compares a signature block in the file (the first block after the bootloader blocks) and on the
+file checksum, against the known values.<br><p>
+
+The check result codes are (negative for failure):
+<ul>
+<li>2100: firmware 2.1</li>
+<li>2200: firmware 2.2</li>
+<li>2300: firmware 2.3</li>
+<li>2400: firmware 2.4</li>
+<li>2412: firmware 2.4c</li>
+<li>2500: firmware 2.5</li>
+<li>2501: firmware 2.51</li>
+<li>2512: firmware 2.5c</li>
+<li>2610: firmware 2.6.1</li>
+<li>2630: firmware 2.6.3</li>
+<li>2640: firmware 2.6.4</li>
+<li>2700: firmware 2.7.0</li>
+<li>-200: failed either 2.1 or 2.2</li>
+<li>-230, -2300: failed 2.3</li>
+<li>-240, -2400: failed 2.4</li>
+<li>-250: failed either 2.5 or 2.51</li>
+<li>-246, -2412: failed 2.4c</li>
+<li>-256, -2512: failed 2.5c</li>
+<li>-99: generic failure</li>
+</ul>
+
+The DistoX (v. 2 or BLE) must be booted in <b>bootloader mode</b>. Refer to the DistoX2 documentation for details.<br>
+The device must be turned on in bootloader mode because
+TopoDroid reads the signature block from the firmware that is
+already installed on the DistoX, before uploading a new firmware.<br>
+If the hardware versions are not compatible there is a warning.<br><p>
+<b>Beware that TopoDroid does not warn against uploading a firmware pre 2.5 on hardware 1.1.</b><br><p>
+
+Upon uploading a firmware, TopoDroid displays a message saying how many bytes have been written to the DistoX.
+If these are less than the firmware file size, the upload has failed.<br><p> 
+
+<b>Firmware update procedure</b><br>
+<ol>
+<li>Make sure the DistoX is the selected active DistoX in TopoDroid</li>
+<li>Open the firmware dialog ("Firmware" menu) and select the firmware file to upload</li>
+<li>Check version of hardware and firmware of your DistoX: make sure laser is switched off (CLR) and press FUNC twice to show the version.
+You may also check the DistoX firmware and hardware versions with TopoDroid device info dialog.</li>
+<li>Switch off the DistoX, and switch it on in bootloader mode: press PLUS, MINUS and DIST together. 
+The display illumination switches on, but the screen remains empty.</li>
+<li>Upload the new firmware with TopoDroid</li>
+<li>Switch off the DistoX by pressing CLR</li>
+<li>Switch the DistoX on and check the new firmware version.</li>
+</ol>
+<br><p>
+
+If the DistoX does not turn on after a firmware upload, you ned to restart it in bootloader
+mode and try to upload a firmware again. To restart it in bootloader mode you must open it
+and jump two pins: see the docs on internet for details.
+<br><p>
+
+<b>Note</b><br>
+The firmware updates are always logged in the TopoDroid log file.<br><p>
+
+</body></html>

@@ -1,0 +1,62 @@
+<html> <HEAD> <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" /> </HEAD> <body>
+<h4>BASE DE DONNÉES TopoDroid</h4>
+<p>Il est utile d'avoir une id&eacute;e approximative de l'organisation de l'information 
+  et des donn&eacute;es dans les bases de donn&eacute;es. Les unit&eacute;s de 
+  travail dans TopoDroid sont les relev&eacute;s topographiques et les &eacute;talonnages. 
+  Un relev&eacute; repr&eacute;sente une session unique de topo d'une portion 
+  de cavit&eacute;. Un &eacute;talonnage est un &eacute;talonnage DistoX unique.<br>
+  Les enqu&ecirc;tes sont stock&eacute;es dans la base de donn&eacute;es &quot;distox14.sqlite&quot;. 
+  Il y a une telle base de donn&eacute;es dans chaque r&eacute;pertoire de travail.<br>
+  Les &eacute;talonnages sont stock&eacute;s dans la base de donn&eacute;es &quot;device10.sqlite&quot;, 
+  avec les informations du DistoX. Cette base de donn&eacute;es est globale et 
+  n'est pr&eacute;sente que dans le r&eacute;pertoire &quot;TopoDroid&quot;.<br>
+  En cons&eacute;quence, la table la plus importante dans la base de donn&eacute;es 
+  du relev&eacute; est :</p>
+<ul>
+  <li><b>surveys</b> : informations du relev&eacute; topo</li>
+</ul>
+<p></p>
+<p> Les dossiers de relev&eacute;s contiennent le nom du relev&eacute; topo, la 
+  date, l'&eacute;quipe, la d&eacute;clinaison magn&eacute;tique, le nom de la 
+  station initiale et &eacute;ventuellement un commentaire.<br>
+  En relation avec les relev&eacute;s topos on trouve des tables pour :</p>
+<ul>
+  <li> <b>shots</b> : donn&eacute;es des stations de vis&eacute;es</li>
+  <li><b>stations</b> : stations enregistr&eacute;es</li>
+  <li><b>plots</b> : croquis 2D, plans, coupes, x-sections</li>
+  <li><b>photos</b> : images associ&eacute;es &agrave; des prises de vue</li>
+  <li><b>audios</b> : commentaires audio associ&eacute;s aux vis&eacute;es du 
+    relev&eacute; </li>
+  <li><b>sensors</b> : mesures associ&eacute;es aux vis&eacute;es du relev&eacute;</li>
+  <li><b>fixeds</b> : stations g&eacute;olocalis&eacute;es 
+    <!-- li><b>sketches</b>: 3D models</li -->
+  </li>
+</ul>
+<p>Les tables les plus importantes dans la base de donn&eacute;es de l'appareil 
+  sont :</p>
+<ul>
+  <li><b>devices</b> : informations sur les p&eacute;riph&eacute;riques</li>
+  <li><b>calibs</b> : informations d'&eacute;talonnage</li>
+</ul>
+<p> Les enregistrements <b>calibs</b> contiennent le nom d'&eacute;talonnage, 
+  la date, le dispositif DistoX, l'algorithme et les r&eacute;sultats du dernier 
+  calcul : coefficients, erreur moyenne, erreur maximale, nombre d'it&eacute;rations. 
+</p>
+<p>Il existe aussi une table de donn&eacute;es relative aux &eacute;talonnages 
+  :</p>
+<ul>
+  <li><b>gms</b> : donn&eacute;es d'&eacute;talonnage</li>
+</ul>
+<p> Enfin chaque base de donn&eacute;es contient la table :</p>
+<ul>
+  <li><b>configs</b> : valeurs de configuration</li>
+</ul>
+<p> Vous pouvez en apprendre plus sur l'organisation des donn&eacute;es dans la 
+  base de donn&eacute;es en l'ouvrant avec un visualiseur SQLite.</p>
+<p></p>
+<h4><br>
+</h4>
+
+<p>
+
+</body></html>

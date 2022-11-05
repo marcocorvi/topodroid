@@ -1,0 +1,93 @@
+<html>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+<body>
+<h4>STRATÉGIES ET CONVENTIONS DE DÉNOMINATION AUTOMATIQUE DES STATIONS</h4>
+
+<p>Lorsque vous téléchargez des données, TopoDroid peut automatiquement attribuer 
+  des noms aux stations. Une mesure répétée est considérée comme une visée de 
+  cheminement, les autres sont des visées latérales d'habillement. Si vous vous 
+  en tenez à une convention en prenant vos mesures, la stratégie d'affectation 
+  automatique des noms de station de TopoDroid peut être très pratique. TopoDroid 
+  prend en charge un certain nombre de conventions pour attribuer automatiquement 
+  des appellations de stations aux différentes visées. Vous pouvez sélectionner 
+  celui qui correspond à vos habitudes grâce aux paramètres. </p>
+<ol>
+  <li><strong>habillage + cheminement</strong> : à la station &quot;DEPUIS&quot; 
+    vous prenez d'abord des &quot;visées latérales d'habillage&quot; et ensuite 
+    une ou des &quot;visée(s) de cheminement&quot; vers l'avant. C'est la convention 
+    par défaut.</li>
+  <li><strong>habillage + inverse</strong> : à la station &quot;VERS&quot; vous 
+    prenez d'abord des &quot;visées latérales d'habillage&quot; puis une ou des 
+    &quot;visée(s) de cheminement&quot; inverse(s).</li>
+  <li>visées<strong> inverses</strong> (vers l'arrière)</li>
+  <li>visées au <strong>trépied</strong> [A]</li>
+  <li>compensation d'<strong>anomalie magnétique</strong> [E]</li>
+  <li><strong>cheminement + habillage</strong> : à la station &quot;DEPUIS&quot; 
+    vous prenez d'abord une ou des &quot;visée(s) de cheminement&quot; vers l'avant, 
+    puis des &quot;visées latérales d'habillage&quot;.</li>
+  <li><strong>inverse + habillage</strong> : à la station &quot;VERS&quot; vous 
+    prenez d'abord une ou des &quot;visée(s) de cheminement&quot; inverse(s), 
+    puis des &quot;visées latérales d'habillage&quot;.</li>
+  <li><strong>TopoRobot</strong> [T] </li>
+</ol>
+<p> Voici des exemples de conventions (les visées faites à une même station sont 
+  regroupées entre parenthèses): </p>
+<ul>
+  <li>... (1-. 1-. 1-. 1-2) (2-. 2-. 2-3) ... </li>
+  <li> ... (2-. 2-. 2-. 2-1) (3-. 3-. 3-2) ... </li>
+  <li> ... (2-1 2-. 2-. 2-3) (3-2 3-. 3-. 3-4) ... </li>
+  <li> ... (2-1 2-. 2-. 2-3) (4-3 4-. 4-. 4-5) ... </li>
+  <li> ... (2-1 2-. 2-. 2-3) (3-2 3-. 3-. 3-4) ... (idem à"3")</li>
+  <li> ... (1-2 1-. 1-. 1-.) (2-3 2-. 2-.) ... </li>
+  <li> ... (2-1 2-. 2-. 2-.) (3-2 3-. 3-.) ... </li>
+  <li> ... (1-. 1-. 1-. 1-2) (2-. 2-. 2-3) ... (idem à "1")</li>
+</ul>
+<p><br>
+  S&eacute;quence a-b-c-d représentée selon la première stratégie (visée vers 
+  l'avant) et la troisi&egrave;me stratégie (vis&eacute;e inverse).</p>
+<p><br>
+  <img src="survey_policy.png" width="320" height="240"> <br>
+</p>
+<p align="justify">Chaque fois que l'affectation automatique des stations est 
+  effectuée, elle commence à partir de la dernière visée de cheminement (ou de 
+  l'avant-dernier pour les stratédies de <em>visée arrière</em> et au <em>trépied</em>). 
+  Si le relevé n'a pas encore de visée de cheminement, elle commence à partir 
+  de la première visée. Par conséquent, les visées précédant le dernier point 
+  de cheminement ne sont pas modifiées, tandis que les stations sont assignées 
+  à toutes les visées suivant la dernière visée de cheminement. Ceci peut avoir 
+  un impact sur la station des visées d'habillage qui suivent immédiatement le 
+  dernier cheminement, lorsque la convention d'assignation des stations est modifiée.</p>
+<p><br>
+  <strong>Stratégie de visée inverse (arrière)</strong><br>
+  À chaque station, on effectue la visée en arrière vers la station précédente, 
+  puis les visées d'habillage, et enfin la visée en avant vers la station suivante.<br>
+  Les visées arrière sont vérifiées : si une visée n'est pas proche de l'opposé 
+  de la visée de cheminement précédente, elle n'est pas considérée comme une visée 
+  arrière.<br>
+  Les visées inverses arrière sont marqués &quot;dupliquées&quot;.</p>
+<p><br>
+  <strong>Stratégie de visée au trépied</strong><br>
+  Au poste &quot;1&quot;, vous effectuez des visées d'habillage, puis des visées 
+  vers la station &quot;2&quot;. Ensuite, vous vous déplacez vers la station &quot;3&quot;, 
+  vous prenez des visées vers la station &quot;2&quot;, puis des visées d'habillage, 
+  puis des visées vers la station &quot;4&quot;. Passez à la station &quot;5&quot; 
+  et ainsi de suite.</p>
+<p><br>
+  <strong>Compensation des anomalies magnétiques</strong> [Niveau Testeur].<br>
+  La compensation de l'anomalie magnétique se fait en estimant à chaque station 
+  la déclinaison magnétique &quot;locale&quot; en comparant les azimuts de la 
+  visée qui atteint la station et de la visée inverse. Les azimuts de toutes les 
+  visées à la station sont ensuite corrigés avec la déclinaison &quot;locale&quot;. 
+  Une déclinaison globale demeure car la déclinaison à la première station ne 
+  peut être déterminée. De plus, les angles d'azimut du relevé deviennent relatifs 
+  comme dans une traversée, donc les erreurs d'angle s'additionnent au lieu de 
+  se compenser.<br>
+  La compensation des anomalies magnétiques nécessite de prendre des mesures en 
+  visée arrière. Cependant, avec la compensation des anomalies magnétiques, la 
+  vérification qu'une visée est une visée arrière ne prend pas en compte l'azimut. 
+  La compensation des anomalies magnétiques est effectuée pendant la réduction 
+  des données (pour les croquis).</p>
+<p>&nbsp; </p>
+</body></html>

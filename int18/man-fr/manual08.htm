@@ -1,0 +1,67 @@
+<html><body>
+<h3>[8] SURVEY INFO WINDOW</h3>
+
+The <i>survey</i> menu of the <u>data window</u> opens the survey <u>info window</u>. Alternatively you can open it with a
+long tap on the survey entry in the <u>main window</u>.<br><p>
+
+The displayed survey info are:
+<ul>
+<li>name (not editable)</li>
+<li>date</li>
+<li>team</li>
+<li>magnetic declination (if set)</li>
+<li>survey description</li>
+<li>whether the x-sections are <i>shared</i> among sketches or not</li>
+<li>whether the data-mode is <i>normal</i> or <i>diving</i> [T]</li>
+</ul>
+<br>
+
+The survey "team" is mandatory and cannot be empty.<br>
+The magnetic declination must be entered in decimal degrees.
+The allowed range of values is [-360&deg;, 360&deg;].
+Values outside this range are considered as "unset".<br><p>
+
+
+<h4>BUTTONS</h4>
+<ul style="margin-top=0">
+<li><img src="btn_note.png"> survey annotations</li>
+<li><img src="btn_info.png"> survey <a href="page_stat1.htm">statistics</a></li>
+<li><img src="btn_3d.png"> 3D display (Cave3D) [A]</li>
+<li><img src="btn_gps.png"> <a href="page_fixed_list.htm">geo-points</a> [A]</li>
+<li><img src="btn_photo.png"> photo list. Tap on an entry to edit the description or delete the photo [A]</li>
+<li><img src="btn_sensor.png"> sensor measurements. Tap on an entry to edit the comment or delete the measurement [T]</li>
+</ul><br><p>
+
+<h4>MENUS</h4>
+<ul style="margin-top=0">
+<li><u>Close</u> </li>
+<li><u>Export</u></li>
+<li><u>Rename</u> [T]</li>
+<li><u>Delete</u> [A]</li>
+<li><u>Clear color</u>: clear the custom splay colors [T]</li>
+<li>Instruments <a href="page_survey_calib.htm">offsets</a> [E]</li>
+<li><a href="page_calib_check.htm">Calibration-check</a> shots [E]</li>
+<li><u>Settings</u> (same as the <u>data window</u> settings)</li>
+<li><u>Help</u></li>
+</ul><br><p>
+
+<h4>Export dialog</h4>
+The export dialog has a selection-list of export-formats: <i>Compass</i>, <i>cSurvey</i>, <i>Survex</i>, <i>PocketTopo</i>, <i>Polygon</i>, <i>GHTopo</i>, <i>Grottolf</i>, <i>Therion</i>, <i>Topo</i>, <i>VisualTopo</i>, <i>Walls</i>, and <i>WinKarst</i>. Furthermore the data can be exported as <i>DXF (LibreCAD)</i>, <i>CSV</i> text file, and <i>shapefile (QGIS)</i>.
+If the survey has a fixed station it can be exported as <i>KML (GoogleEarth)</i>, <i>GeoJSON</i>, and <i>track</i> file (PLT). This export fails if no the survey station is fixed. Finally you can export a <i>ZIP</i> archive which includes all the data of the survey.<br><p>
+
+There are a number of export settings, that control the way TopoDroid writes the survey data in the various export formats.<br><p>
+
+<h4>Delete dialog [A]</h4>
+The delete dialog asks for confirmation to delete the survey. Deleting the survey is unrecoverable: the survey and all associated data (photos, notes, sketch files, etc. ), except the zip archive, are deleted. Make sure to export a backup <i>ZIP</i> archive before you delete the survey.<br><p>
+
+<h4>Rename dialog</h4>
+With this dialog you can rename the survey. Renaming fails if there is already a survey with the specified name.<br><p>
+The info in the database, the file of the notes, the binary sketch file, and the image and audio directory are renamed.
+However reference to section "scrap" in the sketch files are not updated until the files are opened again.
+Therefore it is advisable to go over and "open and close" all the sketches.
+<br><p>
+
+<a href="manual07.htm">&lt; Shot list</a> |
+<a href="manual09.htm">Sketch window &gt;</a>
+
+</body></html>

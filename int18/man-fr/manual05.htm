@@ -1,0 +1,82 @@
+<html><body>
+<h3>[5] DistoX CALIBRATION DATA</h3>
+
+The <u>calibration-data window</u> displays the list of calibration data. If the calibration has no data, the window is empty but for the top buttons. Each calibration data line contains the following data information:
+<ul style="margin-top=0">
+<li>index: incremental index that identifies the data</li>
+<li>group: number of the group the data belongs to</li>
+<li>error: the difference between the calibration-corrected direction and the group average direction, in degrees</li>
+<li>azimuth, inclination, and roll, computed from the raw values without any calibration correction</li>
+<li>optionally the raw calibration data values, ie, the components of G and M in the DistoX frame, either as decimal or hex values</li>
+</ul><br><p>
+
+<h4>Colors</h4>
+The calibration data are displayed with yellow and blue text-color, alternating between even and odd group numbers. Data with no group are grey.<br><p>
+
+The data values background color are:
+<ul>
+<li>black: normal values</li>
+<li>violet: incomplete data (not used in the calibration, but used for the groups)</li>
+<li>brown: saturated data</li>
+<li>gray: deleted data (only if deleted data are displayed)</li>
+<li>red: data with error larger than 1&deg;</li>
+<li>green: data differing from the group average value by more than the <i>group distance</i></li>
+</ul><br><p>
+
+<h4>ACTIONS</h4>
+<ul style="margin-top=0">
+<li>tap on a data: calibration data edit dialog</li>
+</ul><br><p>
+
+<h4>BUTTONS</h4>
+<ul style="margin-top=0">
+<li><img src="btn_toggle.png"> toggle the DistoX calibration mode on and off (It may fail at the first try)</li>
+<li><img src="btn_bluetooth.png"> reset BT, or control DistoX remotely</li>
+<li><img src="btn_download.png"> download calibration data from the DistoX</li>
+<li><img src="btn_numbers.png"> assign <a href="page_groups.htm">group</a> numbers to the data, or reset the group numbers</li>
+<li><img src="btn_compute.png"> compute the <a href="page_calib_coeffs.htm">calibration coefficients</a></li>
+<li><img src="btn_cover.png"> <a href="page_calib_distrib.htm">direction distribution</a> of the calibration data</li>
+<li><img src="btn_read.png"> read and display the coefficients stored in the DistoX</li>
+<li><img src="btn_write.png"> write the calibration coefficients to the DistoX. Enabled only after the calibration coefficients have been computed. The coefficients can also be written directly from the dialog showing the result of the computation. A warning is issued in the data direction coverage is below 95% or the average error is above 0.5&deg;</li>
+<li><img src="btn_search.png"> opens the search dialog</li>
+</ul><br><p>
+
+At the moment only on-demand data download is active for the calibration data. The downloaded data are added to the current calibration. Therefore you can take some calibration measurements, download the data, check if you are satisfied with them, if not take further data and download them, and so on until you are happy with your calibration data. Downloaded data can be "disabled" (by setting the group number to "0" (zero); 
+disabled data are not used in the computation of calibration coefficients), or deleted (usually not shown in the list of data).
+Deleted data are not taken into account in the group-number assignment and in the computation of the calibration.<br><p>
+
+<h4>Bluetooth</h4>
+This button resets the TopoDroid bluetooth connection.<br>
+It also lets the user control the DistoX remotely [A]: turn on or off the laser, and take a calibration shot.
+The data is immediately downloaded if the the data download mode is set to "continuous".<br>
+In this case it is also possible to take (and download) a group of four calibration shots with a small delay between them
+(controlled by the settings "laser-wait" and "shot-wait").<br><p>
+
+The bluetooth button is disabled while TopoDroid is taking a calibration shot.<br><p>
+
+<h4>Calibration computation</h4>
+The "gear" button starts the computation of the calibration coefficients.<br>
+When the computation ends, the coefficient dialog is shown.<br>
+If there are not enough data or data groups the computation is not carried out and a warning message is displayed.<br>
+The calibration fails if the limit of the iteration is reached before the computation ends.
+This usually happens if the group numbers have been set wrongly.
+In this case a message is displayed.<br><p>
+
+<h4>Warnings</h4>
+<ul style=margin-top=0">
+<li><b>saturated data</b>: data with abnormal magnetic field value. A possible cause of this is the presence of spurious magnetic fields. Saturated data have a brown background</li>
+<li><b>zero data</b>: incorrectly received calibration data. The data has zero values, and by default it is not assigned a number, although it is used in computing the groups. Zero data have a violet background</li>
+</ul><br><p>
+
+<h4>MENUS</h4>
+<ul style="margin-top=0">
+<li><u>Display</u>: whether to display all data including the deleted data</li>
+<li><u>Validate</u>: <a href="page_validation.htm">validation</a> of this calibration with another one</li>
+<li><u>Settings</u>: same as for the <u>calibration window</u></li>
+<li><u>Help</u></li>
+</ul><br><p>
+
+<a href="manual04.htm">&lt; Calibration window</a> |
+<a href="manual06.htm">Survey data &gt;</a>
+
+</body></html>

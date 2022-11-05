@@ -1,0 +1,258 @@
+	<html>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+<body>
+	
+<h3>[15] VISUALISEUR CAVE3D</h3>
+	
+	
+<p>La visionneuse 3D de TopoDroid est conçue pour être utilisée sous terre et 
+  ne nécessite donc pas de connexion Internet.<br>
+  Elle peut aussi charger d'autres formats de fichiers : <em>Therion</em> (th, 
+  thconfig), <em>Loch</em>, <em>Compass</em> (dat, mak), et <em>VisualTopo</em>.<br>
+  Le modèle 3D peut être ouvert soit à partir d'un menu dans la <a href="manual06.htm">fenêtre 
+  de données du relevé</a>, soit à partir d'un bouton <em><img src="btn_3d.png"></em> 
+  dans la <a href="manual08.htm">fenêtre d'info du relevé</a>.</p>
+<p> Le modèle 3D d'un projet de cavité peut être ouvert à partir d'un bouton <em><img src="btn_3d.png"></em> 
+  dans la <a href="page_tdm_config_dialog.htm">fenêtre de projet</a>. <br>
+  Le modèle est présenté avec une grille de référence sous-jacente (bleu vers 
+  le nord, vert vers l'est) ou un triplet de flèches (rose vers le haut).<br>
+</p>
+<p>
+	
+	
+<h4>BOUTONS</h4>
+	
+<ul style="margin-top:0">
+  <li><em>D&eacute;placement</em> : la fl&egrave;che verte bascule la vue entre 
+    les modes de rotation <img src="btn_3d_rot.png" width="36" height="38"> et 
+    de d&eacute;placement <img src="btn_3d_trans.png" width="36" height="37">. 
+    Avec deux doigts on peut mettre à l'échelle le modèle 3D.</li>
+  <li><em>Vue</em> : Soit en perspective <img src="btn_3d_persp.png" width="36" height="38">, 
+    soit orthogonale <img src="btn_3d_ortho.png" width="36" height="37">.</li>
+  <li><img src="btn_3d_stations.png" width="36" height="35">&nbsp;<em>Stations</em> 
+    : le bouton affiche et cache les stations (point gris ou nom de la station). 
+  </li>
+  <li><img src="btn_3d_splays.png" width="36" height="36">&nbsp;<em>Visées latérales</em> 
+    : le bouton affichera et masquera les visées. Les s&eacute;parations sont 
+    repr&eacute;sent&eacute;es par des lignes ou des points de terminaison. </li>
+  <li><img src="btn_3d_walls.png" width="36" height="37">&nbsp;<em>Parois</em> 
+    : le bouton affichera ou masquera les mod&egrave;les de parois s'il y en a. 
+  </li>
+  <li><img src="bt_3d_surf.png" width="36" height="38">&nbsp;<em>Surface</em> 
+    : le bouton affichera la surface. Fonctionne uniquement si les donn&eacute;es 
+    de surface ASCII sont sp&eacute;cifi&eacute;es dans le fichier .th. </li>
+  <li><img src="btn_3d_coul.png" width="36" height="40">&nbsp;<em>Couleur</em> 
+    : le bouton va changer le code de couleur de la ligne de cheminement grise, 
+    en fonction du relevé topographiques gris et de la profondeur. </li>
+  <li><img src="btn_3d_grid.png" width="36" height="40">&nbsp;<em>Grille</em> 
+    : le bouton bascule entre la grille sous-jacente ou l'axe X, Y, Z. </li>
+</ul>
+<p><br>
+  Les icônes des boutons sont adaptées à l'état du programme. <br>
+  Quelques boutons ont des actions par appui long : </p>
+<p><em>Vue</em> : Ajuster le paramètre focal de la perspective.<br>
+  <em>Stations</em> : Activer/désactiver la sélection des stations.<br>
+  <em>Couleur</em> : Sélectionnez les sondages à afficher ou à masquer.<br>
+  <em>Cadre</em> : Sélectionnez l'affichage des visées de surface/dupliquées/commentées.</p>
+<p>
+	
+	
+<h4>MENU DÉROULANT</h4>
+<ul style="margin-top:0">
+  <li><i>Ouvrir le fichier</i>&#160;: ouvre une boite de dialogue pour sélectionner 
+    un fichier du répertoire de travail de TopoDroid.</li>
+  <li><i>Export</i>&#160;: ouvre la boîte de dialogue d'exportation. </li>
+  <li><i>Info</i>&#160;: affiche les statistiques du relevé topo.</li>
+  <li><em>Diagramme Rosace 3D</em> : distribution des directions en 3D.</li>
+  <li><i>Diagramme Rosace</i>&#160;: affiche un diagramme des azimuts majeurs 
+    de la cavité. </li>
+  <li><em>Réinitialisation</em> : retour à la vue orthogonale du dessus, au zoom 
+    1.</li>
+  <li><i>Point de vue</i>&#160;: vous permet de sélectionner un point de vue (haut, 
+    est, nord, ouest, sud) et le zoom de niveau 1. </li>
+  <li><em>Surface</em> : transparence et fichier MNE. Projection de la ligne centrale 
+    sur la surface.</li>
+  <li><i>Modèles de parois</i>&#160;: créer ou supprimer la construction d'une 
+    paroi 3D. Il existe plusieurs modèles de paroi.</li>
+  <li><em>Croquis</em></li>
+  <li><i>Options </i>(voir ci-dessous)</li>
+  <li><em>Aide</em></li>
+</ul>
+<p>&nbsp;</p>
+<h4>OPTIONS </h4>
+	
+<ul style="margin-top:0">
+  <li><i>Chemin de base</i>&#160;: répertoire contenant les fichiers du relevé<em></em> 
+  </li>
+  <li><em>Rayon de sélection</em>&#160;: rayon de sélection des stations.</li>
+  <li><em>Dialogue de la station</em> : ouverture ou non de la boîte de dialogue 
+    de la station sélectionnée [n].</li>
+  <li> <em>Points de station</em> : si vous souhaitez toujours afficher les points 
+    de station (en vert) [n].</li>
+  <li> <em>Grille supérieure</em> : affichez la grille par dessus. [n].</li>
+  <li> <em>Étendue de la grille </em>: étendue de la grille autour du relevé [10 
+    cellules].</li>
+  <li> <em>Vue sous l'horizon</em>: si vous souhaitez autoriser les points de 
+    vue par dessous l'horizon [n].</li>
+  <li> <em>Tampon DEM</em> : étendue du modèle de surface autour du relevé lors 
+    du chargement du modèle de surface à partir d'un fichier DEM.</li>
+  <li> <em>DEM taille max.</em> : taille maximale du DEM de surface dans chaque 
+    direction [400 cellules].</li>
+  <li> <em>Réduction du DEM</em> : comment réduire le DEM s'il est trop grand 
+    (sous-échantillon ou clip) [sous-échantillon].</li>
+  <li><i>Toutes les visées latérales </i>: utiliser toutes les visées latérales 
+    pour dessiner les parois.</li>
+  <li><em>Fractionner les triangles</em>: s&eacute;paration des intersections 
+    des triangles de parois.</li>
+  <li><i>Randomiser des points</i>&#160;: ajouter un petit vecteur aléatoire aux 
+    visées latérales.</li>
+  <li><em>Parois étendues </em>: déplacer légèrement les points des parois le 
+    long du cheminement.</li>
+  <li><em>Powercrust delta</em> : filtrer les visées latérales trop différentes 
+    des précédentes et des suivantes. </li>
+  <li><em>Dispositif Bluetooth</em> : nom du dispositif Bluetooth. <br>
+    <br>
+  </li>
+</ul>
+<p><strong>LIGNE DE TITRE</strong><br>
+  La barre de titre indique les paramètres de visualisation : 
+<ul>
+  <li><em>C</em> et <em>A</em> pente et azimut du point de vue.</li>
+  <li><em>S</em> est le facteur de zoom.</li>
+  <li><em>T</em> sont les translations X-Y du modèle.</li>
+  <li><em>L</em> donne la pente et l'azimut de la lumière.</li>
+</ul>
+<p><br>
+  <strong>EXPORTATIONS</strong><br>
+  Le modèle peut être exporté en DXF, KML, STL ou STL-binaire, CGAL, LAS-binaire, 
+  et shapefile.<br>
+  Le fichier exporté est enregistré dans le dossier &quot;c3export&quot; du répertoire 
+  de travail actuel. </p>
+<p> Il y a des options pour inclure les visées latérales d'habillage, les parois, 
+  les stations et la surface dans l'exportation.<br>
+  Le modèle peut également être sérialisé dans un fichier texte. </p>
+<p><br>
+  <strong>GRILLE/CADRE</strong><br>
+  Les lignes de la grille/du cadre sont vertes (ouest-est), bleues (sud-nord) 
+  et rouges (verticales).<br>
+  En perspective, la grille semble verdâtre vers le nord/sud parce que les lignes 
+  vertes s'empilent les unes sur les autres. Et elle semble bleuâtre vers l'est/ouest 
+  pour la même raison. Afin de distinguer les quatre directions cardinales, la 
+  grille devient légèrement rougeâtre à l'angle sud-ouest.<br>
+  Par défaut, la grille se trouve sous le relevé, mais elle peut être placée au-dessus 
+  (en option). </p>
+<p><br>
+  <strong>RELEVÉ TOPO</strong><br>
+  Les visées d'habillage de la topographie peuvent être cachées, affichées comme 
+  des lignes ou des points d'extrémité.<br>
+  Les cheminements du relevé peuvent être non colorés ou colorés par relevé, par 
+  profondeur (rouge-bleu) ou par la dénivelée par rapport à la surface (bleu-rouge).<br>
+  Lorsqu'elles ne sont pas colorées, les visées de cheminement du relevé sont 
+  blanches, les visées de surface vertes, les visées dupliquées orange, et les 
+  visées commentées bleu clair.<br>
+  Les visées de &quot;surface&quot;, &quot;dupliquée&quot; et &quot;commentée&quot; 
+  peuvent être activése/désactivées avec la boîte de dialogue &quot;visées&quot; 
+  qui est ouverte par un appui long sur le bouton &quot;cadre&quot; <img src="btn_3d_grid.png" width="36" height="40"></p>
+<p><br>
+  <strong>PAROIS</strong><br>
+  Le modèle de paroi n'est pas calculé automatiquement à l'ouverture du fichier, 
+  mais il doit être demandé par l'utilisateur à travers le menu &quot;paroi&quot;. 
+  Il existe trois modèles : coque simple, pseudo-coque convexe et powercrust. 
+  Les deux premiers conviennent lorsqu'il y a&nbsp; peu de visées d'habillage 
+  et le troisième est préférable pour les visées d'habillage denses.<br>
+  Le modèle de paroi dépend du nombre et de la qualité des visées d'habillage. 
+  De mauvaises visées d'habillage donneront un mauvais modèle.<br>
+  Le calcul est effectué en arrière-plan. Une fois terminé, la paroi peut être 
+  affichée avec le bouton &quot;paroi&quot; <img src="btn_3d_walls.png" width="36" height="37">.</p>
+<p><br>
+  Le modèle <em>powercrust</em> inclut également la projection des parois sur 
+  le plan horizontal (vue en plan), et sur un rideau vertical le long du levé 
+  (vue de profil). Leur affichage est activé par le menu &quot;parois&quot;. </p>
+<p><br>
+  <strong>SURFACE</strong><br>
+  Si le modèle (Therion ou Loch) contient des données de surface (Modèle Numérique 
+  d'Élévation), la surface peut être affichée soit en gris soit avec la texture 
+  (si disponible).<br>
+  La boîte de dialogue de surface possède un bouton pour charger un DEM à partir 
+  d'un fichier. Les formats supportés sont ascii (.asc ou .ascii) et Therion grid 
+  (.grid). Seule la partie pertinente du fichier DEM est chargée.<br>
+  Le relevé et le fichier de données DEM doivent être dans le même système de 
+  référence de coordonnées cartographiques. Si les coordonnées du point fixe du 
+  relevé ont été transformées dans un autre système de référence, les coordonnées 
+  transformées sont utilisées pour référencer le modèle. S'il ne possède que des 
+  coordonnées long-lat (WGS84), le système WGS-84 est utilisé.</p>
+<p><br>
+  La transparence de la surface est réglable. Si elle est totalement opaque, les 
+  parties de la surface situées derrière d'autres seront cachées.<br>
+  La projection de la ligne centrale du relevé sur la surface peut être affichée 
+  (en bleu).<br>
+  Lorsque le modèle possède une surface, elle peut être colorée suivant sa profondeur 
+  sous la surface. </p>
+<p><br>
+  Si le modèle possède un DEM de surface, la texture de la surface peut être chargée 
+  à partir d'un fichier. Les formats de fichier pris en charge sont GeoTiff et 
+  OSM.<br>
+  Le fichier GeoTiff doit être dans le même système de référence de coordonnées 
+  cartographiques que le levé. [Note technique : si le fichier est non compressé 
+  en 24 bits ou utilise une carte de couleurs, Cave3D essaie de lire uniquement 
+  la partie couvrant la zone DEM, sinon l'image entière est lue et la zone partielle 
+  est extraite].<br>
+  La texture OSM (WGS84) ne peut être chargée que pour les relevés et les projets 
+  de cavités ouverts depuis TopoDroid. La texture affiche les lignes OSM. </p>
+<p><br>
+  Il est possible de visualiser un point (point jaune) sur la surface en entrant 
+  les coordonnées Est/Nord dans le CRS du modèle.<br>
+  Les modèles chargés depuis TopoDroid peuvent également obtenir des points GNSS. 
+  Si l'application a la permission d'utiliser le service &quot;Localisation&quot;, 
+  et que ce service est activé, il est possible d'obtenir un point de surface 
+  avec le GNSS d'Android.<br>
+  Les permissions sont données pour l'utiliser.<br>
+  L'application affiche les 10 derniers points. </p>
+<p><br>
+  <strong>ACTIONS SUR LES STATIONS</strong><br>
+  Par défaut, lorsque les stations sont affichées, elles peuvent être sélectionnées 
+  en tapant sur le point ou le nom de la station.<br>
+  La sélection des stations peut être activée/désactivée par une longue pression 
+  sur le bouton &quot;station&quot;. Lorsque les stations sont sélectionnables, 
+  le bouton comporte un point rouge.</p>
+<p><br>
+  La station sélectionnée est mise en évidence en rouge, et ses coordonnées sont 
+  affichées dans une barre bleue en bas. Si le modèle possède un MNE, la dénivelée 
+  de la station sous la surface est incluse.<br>
+  Pour désélectionner la station, tapez à nouveau sur la station ou sur la barre 
+  de titre.</p>
+<p><br>
+  Pour mesurer les distances entre la station sélectionnée et une autre station, 
+  cochez le bouton &quot;mesurer&quot; dans la barre inférieure, et tapez sur 
+  l'autre station. La distance 3D entre les deux stations, ses composantes est, 
+  nord et verticale, ainsi que la distance plane 2D sont affichées dans une boîte 
+  de dialogue. Si les deux stations sont connectées le long de la ligne centrale 
+  de cheminement, la distance &quot;cavité&quot; est également affichée et le 
+  chemin les relaint dans la cavité est surligné en vert.<br>
+  En option, les valeurs peuvent être affichées dans une brève boîte de message 
+  au lieu d'une boîte de dialogue. </p>
+<p><br>
+  Lorsque le bouton &quot;station&quot; dans la barre inférieure est coché, la 
+  position de la station sur l'écran est fixée sous les rotations et la station 
+  sélectionnée est surlignée en orange. </p>
+<p><br>
+  <strong>ADAPTATION DE CROQUIS</strong> (Expérimental)<br>
+  Avec des relevés et des projets de topo de cavités ouverts à partir de TopoDroid, 
+  il est possible d'&quot;adapter&quot; des croquis 2D au modèle 3D. Le croquis 
+  doit être préalablement exporté (dans TopoDroid) au format &quot;Cave3D&quot;. 
+  Le fichier exporté se trouve dans le dossier &quot;c3d&quot; de TopoDroid. Ensuite, 
+  le fichier de croquis peut être chargé à partir du visualiseur 3D, et le croquis 
+  est transféré pour s'adapter au modèle 3D.<br>
+  La boîte de dialogue de croquis affiche la liste des croquis ouverts.<br>
+  Chaque élément comporte deux cases à cocher : la première pour <em>activer/désactiver 
+  </em>l'affichage du croquis, la seconde pour <em>supprimer</em> le croquis. 
+  Les choix doivent être confirmés par le bouton &quot;<em>OK</em>&quot;.<br>
+  Il y a un bouton pour charger un nouveau croquis.<br>
+  Enfin, il y a un bouton pour reconstituer à nouveau les icônes de point, s'ils 
+  deviennent noirs. <br>
+</p>
+<p> <a href="manual14.htm">&lt; Cave Projects</a> | <a href="manual16.htm">Index 
+  &#160;&gt;</a> 
+</body></html>

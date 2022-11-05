@@ -1,0 +1,83 @@
+﻿<html>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+<body>
+
+<h4>GUIDE D'ÉTALONNAGE du DistoX </h4>
+
+Le DistoX doit être étalonné avant de l'utiliser. L'étalonnage est une transformation 
+des données qui tient compte de l'absence de l'orthogonalité parfaite de l'axe 
+des capteurs avec l'alignement avec la direction de laser et des effets de l'électronique 
+sur le champ magnétique. <br>
+<p> Pour calculer les coefficients de cette transformation, vous devez prendre 
+  un certain nombre de "visées" précises enregistrant les données brutes des capteurs. 
+  Cela n'est possible que lorsque le DistoX est en "mode de calibration" (étalonnage). 
+<p> Les visées d'étalonnage doivent être prises dans un endroit à l'abri de l'influence 
+  magnétique, par exemple, dans une grotte ou dans un bois. Méfiez-vous des objets 
+  métalliques et appareils électroniques qui pourraient perturber le DistoX. 
+<p> Les visées doivent couvrir toutes les directions et pour chaque direction 
+  vous devez prendre un groupe de visées avec différentes positions de rotation 
+  autour de l'axe laser. <br>
+  La meilleure technique consiste à prendre 14 groupes de quatre visées chacune, 
+  huit groupes dans les directions des coins d'un cube virtuel, et six dans ceux 
+  des centres des faces. Les quatre visées de chaque groupe doivent être prises 
+  en faisant tourner le DistoX de 90 degrés entre chacune. Vous pouvez prendre 
+  plus de 14 groupes de prises&#160;; plus il y en a, mieux c'est. <br>
+  Au minimum, vous devez prendre quatre groupes de quatre prises de vue (avec 
+  rotation différente) dans quatre directions à 90 degrés dans le plan horizontal, 
+  comme si vous visiez en allant du centre d'un cube vers le centre des quatre 
+  faces latérales, et huit visées du centre du cube vers les huit sommets. Encore 
+  une fois, vous pouvez prendre plus d'une visée unique. 
+<p> Les visées d'étalonnage doivent être prises avec précaution. Une visée inexacte 
+  entraînera un mauvais étalonnage. Par conséquent il faut privilégier l'utilisation 
+  de points fixes (par exemple, un point dans le mur, ou sur un arbre) éloignés 
+  les unes des autres (à quelques mètres), de sorte que la précision du pointage 
+  le laser soit supérieure à ce que nécessitait la précision d'étalonnage (2 cm 
+  à 5 m font d'environ 0,2 degrés). 
+<p> Après avoir pris les visées d'étalonnage, les télécharger dans TopoDroid. 
+  Vous n'avez pas besoin d'attendre de prendre toutes les visées d'étalonnage 
+  pour les télécharger&#160;: lorsque vous téléchargez des visées, elles sont 
+  ajoutées à celles déjà présentes dans l'étalonnage. Par conséquent, si, par 
+  erreur, vous prenez cinq visées au lieu de quatre, téléchargez les données et 
+  supprimez l'une d'entre elles dans TopoDroid. 
+<p> Avant de calculer l'étalonnage, vous devez dire à TopoDroid comment les visées 
+  d'étalonnage sont regroupées par le système, c.-à-d. que vous devez affecter 
+  un groupe à chaque visée. Les groupes sont identifiés avec des nombres entiers 
+  positifs. Une visée avec le groupe "0" (zéro) ou aucun groupe, n'est pas utilisée 
+  pour calculer l'étalonnage. Les visées supprimées ne sont généralement pas indiquées 
+  dans la liste. 
+<p> TopoDroid met en œuvre deux stratégies d'attribution automatique des groupes 
+  :
+<ul>
+  <li> type <em>TopoDroid</em> : toutes les données sont divisées en groupes de 
+    quatre données. Il s'agit de la stratégie par défaut</li>
+  <li> type <em>PocketTopo</em> : quatre groupes de quatre données, suivis de 
+    données individuelles. 
+    <!-- li>"data group assignment based on the angle discrepancy between data</li -->
+  </li>
+</ul>
+<br>
+Les numéros de groupe peuvent être affectés ou modifiés par édition des visées 
+d'étalonnage. Appuyez sur une visée dans la liste pour ouvrir la boîte de dialogue 
+d'édition. <br>
+Après que les groupes de visées ont été définis, vous pouvez calculer l'étalonnage. 
+Outre les coefficients d'étalonnage, la boîte de dialogue affiche l'erreur moyenne, 
+son écart-type, et l'erreur maximale. De plus, il y a un histogramme avec la répartition 
+de l'erreur pour les données d'étalonnage. Ce graphique possède deux lignes verticales&#160;: 
+une marque jaune à 0,5 degrés et une rouge à 1 degré. <br>
+<p> <img src="calib_data.png" caption="Directions of calibration shots"> <br>
+  <br>
+  En résumé, pour étalonner le DistoX vous devez&#160;: 
+<ul>
+  <li>Placer le DistoX en mode d'étalonnage </li>
+  <li>Effectuer les visées d'étalonnage </li>
+  <li>Télécharger les visées dans l'application TopoDroid</li>
+  <li>Attribuer les visées à des groupes (automatiquement ou manuellement) </li>
+<li>Calculer les coefficients d'étalonnage </li>
+  <li>Télécharger les coefficients sur le DistoX </li>
+  <li>Remettre le DistoX en mode normal </li>
+</ul>
+<br><p>
+
+</body></html>

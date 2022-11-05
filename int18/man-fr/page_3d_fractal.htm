@@ -1,0 +1,37 @@
+<html><body>
+<h4>3D VIEWER - Fractal Analysis</h4>
+
+The fractal analysis considers the 3D space divided into cubes and counts the number of cubes
+that cover the cave (midline and splays).
+For a 3-dimensional object, when the cube side halves, i.e. is divided by 2,
+the number of cubes that cover the cave increase by 8 = 2<sup>3</sup>.
+The fractal exponent at a given side is the power of 2 (ie, 3 in the example).<br><p>
+
+The fractal analysis finds this exponent for varying length of the cube side,
+and displays the result as a graph.<br><p>
+
+The <i>Fractal</i> dialog is opened from the <i>Fractal</i> menu of the <i>3D viewer</i> window.<br>
+It displays the result of the last fractal computation or starts a new fractal computation.<br><p>
+
+The result is a graph plotting the variation of the computed dimension as the size of the unit
+cubic cell varies.<br><p>
+
+The computation depends on
+<ul>
+<li><i>counting</i> mode</li>
+<li>whether to consider also the <i>splays</i> or only the legs</li>
+<li>the starting <i>cell size</i><li>
+</ul><br> 
+
+<b>Counting</b><br>
+
+There are three counting modes:
+<ul>
+<li>counting the number of filled boxes</li>
+<li>counting the number of filled box-pair along X, Y, or Z directions (6 pairs)</li>
+<li>counting the number of filled box-pair along X, Y, or Z as well as the diagonal directions (26 pairs)</li>
+</ul><br>
+
+The cell (box) size is increased by sqrt(2) at each step.<br><p>
+
+</body></html>

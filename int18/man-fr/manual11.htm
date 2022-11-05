@@ -1,0 +1,90 @@
+<html><body>
+<h3>[11] CROSS-SECTIONS</h3>
+
+X-sections are kind of special because they do not belong to the sketch but are independent sketches associated to either the plan or the profile.
+TopoDroid has two types of x-sections: <u>leg</u> x-sections and <u>station</u> x-sections. The former cross a leg, the latter are defined at a station.<br><p>
+
+A plan x-section is always in a vertical plane and the upward direction is the vertical.<br>
+A profile x-section is in a plane with the inclination defined by the section-line.
+The upward direction is the azimuth of the crossed leg.
+However, if the inclination of the x-section plane is above a "horizontal threshold", the section is considered "horizontal" and the
+upward direction is the magnetic North.<br><p>
+
+You can assign a comment to an x-section.<br><p>
+
+
+<b>Leg x-sections</b><p>
+To tell TopoDroid that you want to draw a x-section you have to draw a "section" line, either in the plan view or in the profile view. The section line defines the position of the x-section and its orientation.<br><p>
+
+A x-section is the shape of the cave in a plane that cuts it. The orientation of the x-section is the orientation of this plane, i.e., the direction of the line perpendicular to the plane, and pointing in the direction of sight. You define the orientation of the x-section by the way you trace the section line. As an indicator the section line has a tick pointing from the line to the direction of view of the x-section.<br>
+The size of this "tick" can be adjusted in the <i>settings</i> dialog.<br><p>
+
+You can choose between a photo x-section, and a sketch x-section. In the first case just take a photo that will remind you of the shape of the gallery when you will be drafting the cave map. Make sure to have a fellow caver in the picture who will serve as a size reference.<br><p>
+
+In the second case you sketch the x-section on a canvas with the usual drawing tools of TopoDroid. As a reference TopoDroid displays the leg shot traversed by the x-section and the splay shots at its endpoints. The station in front (the one that the x-section is looking at) is centered in the grid. The splay shots in front are light grey, those behind are thinner darker grey. All the shots are displayed projected on the plane of the x-section. A white dot marks where the section plane intersects the leg [T].<br><p>
+
+Leg x-sections can be re-opened and modified by selecting, in "edit" mode, the section line or the section point, and tapping the <i>edit</i> button.<br><p>
+
+<b>X-sections in the plan view</b><br>
+X-sections defined in the plan view are always "vertical" (zero inclination). Their orientation (ie, the azimuth of the x-section plane) is determined by the angle of the section line. Very often the section plane is perpendicular to the gallery, but can be at any needed angle. For example, a section line drawn from left to right(e.g. horizontal, angle 90&deg; from the vertical) has a direction of view to the North (up, azimuth 0). If drawn slightly downwards at an angle of 120, it will have a direction of view to an azimuth of 30&deg;.<br>
+The crossed leg is displayed vertical when the x-section has the same azimuth as the leg. Otherwise it is tilted right or left.<br><p>
+
+In plan view it is possible to make a x-section that crosses multiple legs. All the crossed legs and the splays at their stations are shown as x-section sketch reference. The crossing point is marked on every leg.<br>
+
+<img src="plan-xsection.png" >
+<br><p>
+
+<b>X-sections in the profile</b><br>
+X-sections in the profile view can be either "horizontal" (on vertical shots in pits) or "vertical" (on more or less horizontal galleries). They are considered "horizontal" if their inclination exceeds the value of the H-threshold setting.<br>
+The azimuth of vertical x-sections is determined by that of the crossed leg.<br><p>
+
+"Horizontal" x-sections are displayed always with the North up. Furthermore, a reference line 5 m long, oriented to the North, is added to them. The leg is shown at its azimuth<br>
+"Vertical" x-sections always have the azimuth of the crossed leg (or the opposite one if the direction of the section line is the opposite of that of the leg). The crossed leg is displayed vertical as the x-section has the same azimuth as the leg.<br><p>
+
+If the section line is traced from the right to left, the x-section is oriented downwards and has -90&deg; inclination. This is a "horizontal" x-section as seen from above. Most of the times you will want to draw "horizontal" x-sections this way, as it is more natural to lay a map on a surface and look down at it. If you trace the section line from left to right the x-section is oriented upwards (inclination +90&deg;).<br><p>
+
+In profile view the leg x-section must cross a single leg.<br><p>
+ 
+<img src="profile-xsection.png" >
+<br><p>
+
+<b>Section points</b><br>
+If the setting for the "auto section points" is checked, when you insert a x-section, either by drawing a section-line or inserting it at a station, the corresponding section point is added to the sketch.
+Section points are displayed as white squares and and orange line connecting them to the relative section line or station.<br>
+If the x-section is deleted, the corresponding section point is also deleted.<br><p>
+
+<b>X-section files</b><br>
+Each x-section is saved in a separate file in the "tdr" subfolder. The files get consecutive names "MySurvey-xx0.tdr", "MySurvey-xx1.tdr", etc. The "xx0" numbering part of the name is also displayed in the Section dialog that pops up when you create or edit a section.<br>
+The file is deleted when a x-section is deleted.<br><p>
+
+X-sections can be exported in other formats just like the other sketches, except in <i>cSurvey</i> format.
+X-sections are included in the sketch exports in the DXF, SVG, <i>cSurvey</i>, provided there is the associated section point.<br><p>
+
+<b>Station x-sections</b> [E]<br>
+This is another way to insert x-sections.
+The "Station" dialog, that you get by tapping on a station point in <i>Edit</i> mode, displays the station coordinates
+and has some buttons:
+<ul style="margin-top=0">
+<li>"Continue" the survey from the station. Set the station as the "active station", ie, that to which the next shot will be attached</li>
+<li>"Reset" the centerline display after the station.</li>
+<li>"Toggle" the display of the splays at the station.</li>
+<li>"X-Section" [E] opens a <u>sketch window</u> to draw a x-section at the station.</li>
+</ul>
+
+If the mean clino of the legs at the station is smaller than the "vertical threshold", the x-section at a station is drawn in a vertical plane passing through the station, otherwise it is horizontal.
+The station x-section is useful when you take several splay shots around the station to describe the shape of the gallery. 
+The x-section plane can be oriented with the <i>compass</i> button.
+If the station has only two legs the plane can be oriented along the bisecant of the angles formed by the (horizontal projections of the) legs. If there is only one leg it can be oriented orthogonal to that. If there are more than two legs you have to use the
+<i>compass</i> button.<br><p>
+
+Station x-sections can be re-opened and modified by selecting, in "edit" mode, the station or the section point, and tapping the <i>edit</i> button.<br><p>
+
+See also<br>
+<a href="page_sketch_station.htm">Sketch station edit dialog</a>,<br>
+<a href="page_line_dialog.htm">Sketch line edit dialog</a>.
+<br><p>
+
+<a href="manual10.htm">&lt; Sketch drawing</a> |
+<a href="manual12.htm">Overview window &gt;</a>
+
+</body></html>

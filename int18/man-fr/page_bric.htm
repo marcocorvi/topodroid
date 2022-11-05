@@ -1,0 +1,141 @@
+<html>
+<body>
+
+<h4>Bric4 REFERENCE GUIDE</h4>
+
+<i>Here is a summary of the Bric4 functions.<br>
+The official user manuals are available at http://www.caveexploration.org/gear/bric4</i>
+<br><p>
+
+To turn the Bric4 on press the external button three times quickly in a row.
+To turn it off press and hold the external button.
+The Bric4 goes off by itself after 90 seconds on inactivity.
+<br><p>
+
+<b>Internal buttons</b><br>
+<ul>
+<li><i>Menu</i> enters the menu functions</li>
+<li><i>Up</i> scrolls forwards the data on the display</li>
+<li><i>Down</i> scrolls backwards the data on the display</li>
+<li><i>Back</i> ...</li>
+</ul><br><p>
+
+<b>Menu functions</b><br>
+The main menu is entered by pressing the <i>Menu</i> internal button.
+A press of the external button exits the menu and return to normal mode.
+You can also return to normal mode by repeatedly pressing the <i>Back</i> button.
+<br><p>
+
+In menu mode the internal buttons are
+<ul>
+<li><i>Enter</i> confirms the choice</li>
+<li><i>Up</i> scrolls up among the choices</li>
+<li><i>Down</i> scrolls down among the choices</li>
+<li><i>Back</i> goes back to the previous screen, or to normal mode</li>
+</ul><br><p>
+
+Options:
+<ul>
+<li><i>Dist</i>: meters or feet</li>
+<li><i>Temp</i>: Celcius or Fahrenheit</li>
+<li><i>Shot delay</i>: between <u>0</u> and 5 seconds</li>
+<li><i>Change current</i>: 100 mA or <u>500</u> mA</li>
+<li><i>Error sensitivity</i>: from 0.2&deg; to 2.8&deg; in steps of 0.2&deg; [1.0&deg;]</li>
+</ul><br><p>
+
+Error info: reports the errors info of the last ten measurements.<br><p>
+
+Calibration:
+<ul>
+<li><i>Display report</i></li>
+<li><i>Loop test</i></li>
+<li><i>CAL quick AZM</i>: quick azimuth calibration</li>
+<li><i>CAL full INC&amp;AZM</i></li>
+<li><i>CAL range finder</i></li>
+</ul><br><p>
+
+
+Set Clock (scroll down beyond <i>second</i> to confirm)
+<ul>
+<li><i>Year</i></li>
+<li><i>Month</i>: from 01 to 12</li>
+<li><i>Date</i>: day of the month, from 00 to 31</li>
+<li><i>Hour</i>: from 00 to 23</li>
+<li><i>Minute</i>: from 00 to 59</li>
+<li><i>Second</i>: from 00 to 59</li>
+</ul><br><p>
+
+Bluetooth
+<ul>
+<li><i>Name</i>: eg Bric4_0039</li>
+<li><i>MAC address</i>: eg D52FDE2E98DE</li>
+<li><i>Connected to</i>: client MAC address</li>
+<li><i>Reset BLE</i></li>
+<li><i>Advanced</i></li>
+</ul><br><p>
+
+The advanced bluetooth has three options
+<ul>
+<li><i>RST to AT mode</i></li>
+<li><i>RST to Run Mode</i></li>
+<li><i>Curr Comm</i>: CPU</li>
+</ul><br><p>
+
+The advanced <i>BLE menu</i> shows 
+<ul>
+<li>the BLE transmit and receive counts</li>
+<li>the data sync status: total measurements and BT messages sent</li>
+<li>the last BLE remote command</li>
+</ul><br><p>
+
+Display
+<ul>
+<li><i>BL light</i>: 0 to 5</li>
+<li><i>Color</i>: white, red, blue, green, purple, cyan</li>
+<li><i>Contrast</i>: 0 (invisible) to 30 (completely dark) [16]</li>
+</ul><br><p>
+
+Advanced Menu
+<ul>
+<li><i>Memory clear</i>: resets data index to 0 (clears the display)</li>
+<li><i>Sensor Raw Data</i></li>
+<li><i>Firmware CPU</i>: firmware and hardware versions - <i>Bootloader mode</i> option</li>
+<li><i>Firmware BLE</i>: firmware version - <i>Update</i> option</li>
+<li><i>Reprocess full Calibration</i></li>
+<li><i>Reprocess AZM Calibration</i></li>
+<li><i>Backlight Manual</i>: set Red, Green, Blue</li>
+<li><i>Charger info</i> (debug)</li>
+</ul><br><p>
+
+The <i>Memory clear</i> screen shows the total measurements and BT-sent messages.
+It has an option to resets the data index to 0.
+<br><p>
+
+<b>Error codes</b><br>
+The Bric4 reports up to two errors with the shot data.
+The error code are recorded in the shot comments together with the error value.
+Nothing is recorded if there is no error (code 0).
+<br><p>
+
+<ol>
+<li value="0">no error</li>
+<li value="1">first accelerometer high <u>value</u> [normal 1]</li>
+<li value="2">second accelerometer high <u>value</u> [normal 1]</li>
+<li value="3">first magnetometer high <u>value</u> [normal 1]</li>
+<li value="4">second magnetometer high <u>value</u> [normal 1]</li>
+<li value="5">accelerometers <u>disparity</u> in an axis (1:X, 2:Y, 3:Z)</li>
+<li value="6">magnetometers <u>disparity</u> in an axis (1:X, 2:Y, 3:Z)</li>
+<li value="7">rangefinder calculation error</li>
+<li value="8">rangefinder weak signal</li>
+<li value="9">rangefinder strong signal</li>
+<li value="10">rangefinder pattern error</li>
+<li value="11">rangefinder response <u>timeout</u></li>
+<li value="12">rangefinder <u>error</u></li>
+<li value="13">rangefinder wrong <u>message id</u></li>
+<li value="14">inclination <u>disparity</u></li>
+<li value="15">azimuth <u>disparity</u></li>
+</ol>
+
+
+</body>
+</html>

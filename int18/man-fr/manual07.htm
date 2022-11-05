@@ -1,0 +1,115 @@
+	<html>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+<body>
+	
+<h3>[7] TABLEAU DES DONNÉES DU RELEVÉ TOPOGRAPHIQUE</h3>
+	
+	Les mesures des visées sont affichées dans un tableau. Ce tableau n'a pas 
+d'entête afin d'économiser de l'espace. Les informations disponibles sur les visées 
+sont : 
+<ul style="margin-top=0">
+  <li>Numéro d'indexation (facultatif&#160;: il n'est affiché que si ce choix 
+    est coché dans la boite de dialogue <a href="page_displaymode.htm">mode d'affichage</a>) 
+  </li>
+  <li>Station DEPUIS</li>
+  <li>Station VERS</li>
+  <li>Distance </li>
+  <li>Azimut </li>
+  <li>Pente</li>
+  <li>Extension de la visée&#160;: à gauche (&lt;), à droite (&gt;), verticale 
+    (|), ou ignorée (un espace vide). "L'extension" des visées latérales d'habillage 
+    est présente uniquement si elle est explicitement définie par l'utilisateur 
+    dans l'une des boites de dialogue d'édition des visées. </li>
+</ul>
+Il peut y avoir des caractères supplémentaires comme marqueurs et la présence 
+d'une photo (#). On y trouve aussi le début du commentaire, le cas échéant. Le 
+marqueur peut indiquer : une visée prise en double (*), une visée de surface (÷), 
+coupe uniquement (§), plan uniquement (_).<br>
+<p> Les visées peuvent être &quot;à blanc&quot; ou bien &quot;cachées&quot;. Les 
+  visées latérales d'habillage peuvent également être masquées pour alléger la 
+  liste. Cependant, même si elles ne sont pas affichées, vous pouvez les voir 
+  à une station en appuyant brièvement sur le nom de cette station. Pour les cacher, 
+  appuyez à nouveau sur le nom de la station (ou sur le nom d'une visée latérale 
+  d'habillage qui en dépend). 
+<p> TopoDroid peut définir le nom de la station automatiquement en fonction de 
+  la <a href="page_station_policy.htm">stratégie d'affectation des noms de station</a>. 
+  <br>
+<p> <b>Sous-menus du tableau des visées (appui court ou long)</b> 
+<ul style="margin-top=0">
+  <li>Un appui court sur le nom d'une station active ou désactive l'affichage 
+    des visées latérales d'habillage sur cette station (uniquement si elles ne 
+    sont pas affichées au départ) </li>
+  <li>Un appui court sur la visée ouvre la boite de dialogue <a href="page_shot_edit1.htm"> 
+    Édition des visées</a>, dans laquelle vous pouvez définir les stations ainsi 
+    que d'autres attributs de la visée. </li>
+  <li>Un appui long sur le nom d'une station sélectionne cette<a href="page_current.htm"></a> 
+    station comme active (station courante) et son affichage passe au vert. Un 
+    nouvel appui long la désélectionne.</li>
+  <li>Un appui long sur une visée latérale d'habillage ouvre le dernier croquis, 
+    le cas échéant, avec la visée latérale représentée par un segment violet.</li>
+  <li>Un appui long sur les données d'une visée lance le <a href="#mv">mode de 
+    sélection multivisées</a> (noms des visées sélectionnées affichés sur fond 
+    gris)</li>
+</ul>
+	
+<p> Si vous utilisez <a href="page_station_policy.htm">le nommage automatique 
+  des stations</a> de TopoDroid, il est probable que vous n'aurez besoin de la 
+  boîte de dialogue des visées que pour écrire un commentaire et changer le sens 
+  de l'&quot;extension&quot;. Ces deux actions peuvent également être effectuées 
+  à partir de la fenêtre de dessin, en sélectionnant la visée en mode &quot;Edition&quot; 
+  [A] et en choisissant le bouton <u><a href="page_survey_notes.htm">Note</a></u>. 
+  (Ceci est décrit dans le manuel dans la section de la <a href="manual09.htm">fenêtre 
+  de croquis</a>).<br>
+
+<p> <b><a name="mv"></a>Mode de sélection multivisées</b> 
+<p> Les noms des visées sélectionnées sont sur fond gris (mais généralement pas 
+  le fond des données de ces visées). Une fois le mode de sélection multivisées 
+  démarré, appuyer brièvement sur la ligne de données d'une visée ajoute ou supprime 
+  cette visée à la sélection. Dans ce mode, la barre de boutons du haut change 
+  et affiche alors des boutons spécifiques : 
+<ul>
+  <li><img src="mv1.png" width="42" height="42"> Applique à toutes les visées 
+    sélectionnées le sens d'extension vers la "gauche" </li>
+  <li><img src="mv2.png" width="42" height="42"> Permute le sens d'extension de 
+    toutes les visées sélectionnées</li>
+  <li><img src="mv3.png" width="42" height="41"> Applique à toutes les visées 
+    sélectionnées le sens d'extension vers la "droite" </li>
+  <li><img src="btn_actions.png" width="43" height="45">&nbsp;Actions spéciales</li>
+  <li><img src="mv4.png" width="44" height="42"> Renommer ou échanger les noms 
+    des stations sélectionnées (&quot;Annuler&quot; pour ne rien faire)</li>
+  <li><img src="mv5.png" width="42" height="42"> Supprimer toutes les visées sélectionnées. 
+    ATTENTION&#160;: les visées latérales cachées sont également supprimées lorsque 
+    la visée dont elles dépendent est supprimée </li>
+  <li><img src="mv6.png" width="42" height="42"> Fermer la sélection multivisées 
+    et revenir au tableau des visées de la fenêtre des données</li>
+</ul>
+<p>&nbsp;</p>
+<p>La boîte de dialogue des actions spéciales comprend [T] : </p>
+<ul>
+  <li>renuméroter les visées sélectionnées</li>
+  <li> permuter les stations de chaque visée</li>
+  <li> définir la couleur du croquis des visées latérales d'habillage sélectionnées</li>
+  <li> marquer les visées latérales d'habillage en tant que X (transverses) ou 
+    H/V , ou les rendre standard</li>
+  <li> calculer l'inclinaison et le pendage du plan contenant les visées.</li>
+</ul>
+<p><br>
+  Les stations de la première visée sont utilisées pour amorcer la renumérotation. 
+  Elles peuvent être modifiées dans la boîte de dialogue. Si les deux stations 
+  (DEPUIS / VERS) sont saisies, la premère visée sélectionnée est une visée de 
+  cheminement et les visées sélectionnées suivantes sont renumérotées de manière 
+  cohérente. Si seule la station DEPUIS est saisie (la station VERS est laissée 
+  vide), toutes les visées sont renumérotées en tant que visées d'habillage. </p>
+<p><br>
+  Le réglage de la couleur des visées latérales d'habillage est activé si seules 
+  celes-ci ont été sélectionnées, sinon il est désactivé.<br>
+  Le calcul de l'inclinaison et du pendage du plan nécessite que toutes les visées 
+  sélectionnées aient la même station DEPUIS. Sinon, il est désactivé. Le résultat 
+  est affiché dans la boîte de dialogue et ajouté (remplacé s'il est déjà présent) 
+  au commentaire de la première visée sélectionnée. </p>
+<br>
+<p> <a href="manual06.htm"> &lt; Données du relevé topographique</a> | <a href="manual08.htm">Informations 
+  du relevé topo&#160;&gt;</a> 
+</body></html>
