@@ -35,8 +35,8 @@ Refer to the web pages for details.\n
     <string name="double_back">Cliquez à nouveau sur RETOUR pour quitter</string>
 
     <string name="new_survey_label">Nouveau relevé tpographique</string>
-	<string name="distox_label" translatable="false">DistoX</string>
-    <string name="cave3d_label" translatable="false">Cave3D</string>
+	<!-- <string name="distox_label" translatable="false">DistoX</string> -->
+    <!-- <string name="cave3d_label" translatable="false">Cave3D</string> -->
 
     <!-- UNUSED string name="version_ask">Vous être en train de mettre à jour vers une nouvelle version de TopoDroid.\n Voulez-vous réinstaller les symboles de dessins ?</string -->
     <string name="symbols_ask">Installer les outils de dessin v.%1$s?\n ? (v. actuelle: v.%2$s) </string>
@@ -538,7 +538,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="plot_view">Station consulté</string -->
     <string name="read_fail_with_code">Echec de lecture : code d\'erreur </string>
     <string name="read_failed">Échec lors de la lecture du DistoX</string>
-    <string name="reading_file_failed">Echec lors de la lecture du fichier</string>
+    <!-- UNUSED <string name="reading_file_failed">Echec lors de la lecture du fichier</string> -->
     <!-- UNUSED string name="saved_file_">Fichier enregistré\ </string -->
 	
     <string name="saved_file_1">Fichier enregistré %1$s</string>
@@ -1814,14 +1814,14 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
    <string name="firmware_file">Firmware</string>
    <string name="firmware_file_exists">Fichier firmware existant</string>
    <string name="firmware_file_missing">Fichier firmware manquant</string>
-   <string name="ask_dump">Sauvegarder le firmware ?</string>
+   <!-- UNUSED<string name="ask_dump">Sauvegarder le firmware ?</string> -->
    <string name="ask_upload">Envoyer le firmware ?</string>
    <string name="ask_upload_not_compatible">Le firmware semble incorrect.\nEnvoyer quand même ?</string>
    <string name="firmware_upload_no_sign">Échec de la vérification du matériel DistoX</string>
    <string name="firmware_upload_bad_sign">Matériel DistoX incompatible</string>
-   <string name="firmware_file_dumped">Firmware sauvegardé dans : %1$s taille %2$d</string>
+   <!-- UNUSED  <string name="firmware_file_dumped">Firmware sauvegardé dans : %1$s taille %2$d</string> -->
    <string name="firmware_file_uploaded">Firmware %1$s envoyé  %2$d / %3$d écrits</string>  
-   <string name="firmware_file_dump_fail">Échec de l\'installation du firmware</string>
+   <!-- UNUSED <string name="firmware_file_dump_fail">Échec de l\'installation du firmware</string> -->
    <string name="firmware_file_upload_fail">Échec du téléchargement du firmware</string>
    <string name="firmware_not_supported">L\'appareil ne supporte pas les fonctions du firmware</string>
 
@@ -1833,13 +1833,13 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="no_surveys">Pas de topographie</string>
     <string name="no_tdconfig">Fichier tdconfig manquant</string>
     <string name="no_th_file">Pas de fichier Therion</string>
-    <string name="file_exists">Le fichier existe déjà</string>
-    <string name="file_create_fail">Échec de la création du fichier</string>
+    <!-- UNUSED <string name="file_exists">Le fichier existe déjà</string> -->
+    <!-- UNUSED <string name="file_create_fail">Échec de la création du fichier</string> -->
     
     <string name="ask_delete_tdconfig">Supprimer le fichier TdConfig</string>
     <string name="ask_remove_equate">Supprimer l\'égalité %1$s ?</string>
     <string name="equate_no_station">Aucune station sélectionnée</string>
-    <string name="equate_no_stations">Trop peu de stations</string>
+    <!-- UNUSED <string name="equate_no_stations">Trop peu de stations</string> -->
     <string name="equate_no_nearby">Pas de station à proximité</string>
 
     <!-- UNUSED string name="menu_new">NOUVEAU</string -->
@@ -1877,7 +1877,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="cmenu_wall">Menu parois</string>
     <!-- UNUSED string name="cmenu_fractal">Fractal counts</string -->
 
-    <string name="fractal_title">Nombre de fractales</string>
+    <!-- OK <string name="fractal_title" translatable="false">Nombre de fractales</string> -->
     
     <string name="info_surveys">TOPOGRAPHIES</string>
     
@@ -1908,13 +1908,13 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 
     
     <!-- UNUSED string name="cno_files">Pas de fichier archive</string -->
-    <string name="clear">Effacer</string>
+    <!-- UNUSED <string name="clear">Effacer</string> -->
 
     <string name="plan_proj">Plan</string>
     <string name="profile_proj">Coupe</string>
     <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
     <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Cavité %9$.1f</string>
-    <string name="measure">mesure</string>
+    <!-- UNUSED  <string name="measure">mesure</string> -->
 
     <!-- UNUSED string name="style_stroke">Stroke</string -->
     <!-- UNUSED string name="style_stroke_fill">Fill &amp; Stroke</string -->
@@ -1980,9 +1980,9 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="walls_tube">Tube</string>
     <!-- OK string name="walls_delaunay">Enveloppe Delaunay</string -->
 
-    <string name="powercrust_few_splays">Enveloppe Powercrust : très peu de visées latérales</string>
-    <string name="powercrust_failed">Enveloppe Powercrust en échec</string>
-    <string name="powercrust_successful">Enveloppe Powercrust appliquée avec succès : %1$d / %2$d</string>
+    <!-- UNUSED <string name="powercrust_few_splays">Enveloppe Powercrust : très peu de visées latérales</string> -->
+    <!-- UNUSED <string name="powercrust_failed">Enveloppe Powercrust en échec</string> -->
+    <!-- UNUSED <string name="powercrust_successful">Enveloppe Powercrust appliquée avec succès : %1$d / %2$d</string> -->
     <string name="powercrust_dxf_not_supported">Export dxf de Powercrust non supportée</string>
 
     <string name="ok_export">OK. Exporté %1$s</string>
@@ -1992,7 +1992,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 
     <!-- UNUSED string name="error_file_not_found">Erreur : archive  non trouvée</string -->
     <!-- UNUSED string name="error_file_not_readable">Erreur : fichier illisible</string -->
-    <string name="error_io_exception">Erreur : IO exception</string>
+    <!-- UNUSED <string name="error_io_exception">Erreur : IO exception</string> -->
     <string name="error_parser_error">Erreur : erreur de l\'analyseur %1$s</string>
     <string name="error_export_failed">Erreur : exportation défaillante %1$s</string>
 
@@ -2005,7 +2005,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="warning_no_cwd">Avertissement : répertoire initial absent</string>
     <string name="warning_no_parent">Avertissement : impossible d\'associer au dossier parent</string>
 
-    <string name="done_fractals">Dimension fractale calculée</string>
+    <!-- OK <string name="done_fractals" translatable="false">Dimension fractale calculée</string> -->
     <string name="done_convexhull">Parois enveloppe convexe terminées</string>
     <string name="fail_convexhull">Erreur parois enveloppe convexe</string>
     <string name="done_powercrust">Parois powercrust terminées</string>
@@ -2031,15 +2031,12 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="cpref_station_toast_summary">Dialogue sur les données de la station au lieu de la boîte [n]</string>
     <string name="cpref_station_points_title">Points de station</string>
     <string name="cpref_station_points_summary">Afficher toujours les stations [n]</string>
-    <string name="cpref_station_size_title">Taille points de station</string>
-    <string name="cpref_station_size_summary">Taille des points de station [8 pxl]</string>
     <string name="cpref_measure_dialog_title">Message de distance</string>
     <string name="cpref_measure_dialog_summary">Message de distance au lieu d\'une boîte de dialogue [n]</string>
  
     <string name="cpref_grid_above_title">Situation de la grille quadrillée</string>
     <string name="cpref_grid_above_summary">Placer la grille dans la partie supérieure</string>
     <string name="cpref_grid_extent_title">Étendue de la grille</string>
-    <string name="cpref_grid_extend_summary">Extension de la grille autour de la topographie</string>
     <string name="cpref_neg_clino_title">Vue sous horizon</string>
     <string name="cpref_neg_clino_summary">Permettre point de vue sous l\'horizon</string>
     <string name="cpref_dem_buffer_title">Tampon MNE</string>
@@ -2088,9 +2085,9 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="help_viewpoint_3d">Point de vue 3D</string>
     <string name="help_alpha_3d">M.N.E.</string>
     <string name="help_wall_3d">Modèle 3D</string>
-    <string name="help_temperature">Tempérture</string>
+    <!-- UNUSED  <string name="help_temperature">Tempérture</string> -->
     <string name="help_sketch_3d">Levage de croquis en 3D</string>
-    <string name="help_fractal">Analyse fractale</string>
+    <!-- UNUSED <string name="help_fractal">Analyse fractale</string> -->
 
     <string name="help_light_3d">Panoramique et lumière</string>
     <string name="help_projection_3d">Projection 3D</string>
