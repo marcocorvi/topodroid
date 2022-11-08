@@ -316,6 +316,11 @@ public class ExportDialogPlot extends MyDialog
           // if ( ((CheckBox) findViewById( R.id.pdf_bgcolor )).isChecked() ) TDSetting.mPdfBgcolor = 0;
           // if ( ((CheckBox) findViewById( R.id.pdf_bgcolor )).isChecked() ) TDSetting.mBitmapBgcolor = 0xffffffff;
           // TDSetting.mTherionSplays = ((CheckBox) findViewById( R.id.pdf_splays )).isChecked();
+          try { 
+            TDSetting.setExportScale( Integer.parseInt( ((EditText) findViewById( R.id.pdf_scale )).getText().toString() ) );
+          } catch ( NumberFormatException e ) {
+            TDLog.Error("Not integer export scale");
+          }
         }
         break;
     }
