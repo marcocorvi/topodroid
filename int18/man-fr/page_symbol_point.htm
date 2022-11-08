@@ -1,0 +1,68 @@
+<html>
+	<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+<body>
+<h4> OUTILS POINTS</h4>
+<p>Les outils &quot;point&quot; sont d&eacute;finis dans des fichiers texte.</p>
+<p>Deux entr&eacute;es spécifiques : &quot;user&quot; et &quot;label&quot; (texte), 
+  sont int&eacute;gr&eacute;es dans le programme. Les autres fichiers &quot;points&quot; 
+  sont t&eacute;l&eacute;charg&eacute;s &agrave; partir du sous-r&eacute;pertoire 
+  <em>symbol/point</em> de TopoDroid. Ce r&eacute;pertoire est rempli avec les 
+  outils de points compil&eacute;s dans l'apk de distribution. Vous pouvez supprimer 
+  les outils dont vous n'avez pas besoin, modifier ceux que vous souhaitez modifier 
+  et en ajouter de nouveaux qui ne sont pas fournis dans l'apk.</p>
+<p><br>
+  Le fichier d'outil de point contient des lignes sp&eacute;cifiant la propri&eacute;t&eacute; 
+  de l'outil de dessin :</p>
+<ul>
+  <li>&quot;symbole point&quot; [obligatoire]</li>
+  <li>&quot;nom NAME&quot;, o&ugrave; NAME est le nom par d&eacute;faut de la 
+    zone [obligatoire]</li>
+  <li>noms traduits, par exemple, &quot;nom-es ...&quot; [facultatif]</li>
+  <li>&quot;th_name NAME&quot;, o&ugrave; NAME est le nom de type Therion et doit 
+    &ecirc;tre le m&ecirc;me que le nom de fichier Therion sans l'éventuel préfixe 
+    &quot;u&quot; [obligatoire]</li>
+  <li>&quot;color rgb&quot; (rgb au format hexad&eacute;cimal) [obligatoire]</li>
+  <li>&quot;orientation FLAG&quot; [facultatif, faux si manquant, vrai si FLAG 
+    est '1' ou 'oui']</li>
+  <li>&quot;has_text FLAG&quot; [optionnel, faux si manquant, vrai si FLAG est 
+    '1' ou 'oui']</li>
+  <li>"roundtrip VALUE" [optionnel, pour SVG-roundtrip, VALUE peut être 1 (walls_shp), 
+    2 (walls_sym), 3 (detail_shp), 4 (detail_sym) - défaut 4]</li>
+  <li>&quot;level&quot; view_flag [facultatif, niveau de visualisation du point 
+    ; si le niveau est absent, il est fixé à 1].</li>
+  <li>&quot;path&quot; commence le chemin d'accès du symbole de point. Ceci est 
+    sp&eacute;cifi&eacute; avec les commandes suivantes :</li>
+  <ul>
+    <li>&quot;moveTo X Y&quot; </li>
+  </ul>
+  <ul>
+    <li>&quot;lineTo X Y&quot; </li>
+  </ul>
+  <ul>
+    <li>&quot;cubicTo X1 Y1 X2 Y2 X Y&quot; </li>
+  </ul>
+  <ul>
+    <li>&quot;addCircle X Y R&quot;: centre (X, Y), rayon R </li>
+  </ul>
+  <ul>
+    <li>&quot;arcTo X0 Y0 X1 Y1 FROM_ANGLE SPAN_ANGLE&quot;: (X0, Y0 - X1, Y1) 
+      rectangle de d&eacute;limitation, angles en degr&eacute;s, 0 le long de 
+      l'axe X, direction est CW</li>
+  </ul>
+  <li>&quot;endpath&quot; marque la fin du chemin d'accès de l'outil</li>
+  <li>&quot;endsymbol&quot;</li>
+</ul>
+<p></p>
+<p><strong>Orientation</strong><br>
+  Si l'attribut &quot;orientation&quot; est d&eacute;fini, le symbole de point 
+  peut &ecirc;tre pivot&eacute;.</p>
+<p> <strong>Niveau</strong><br>
+  L'attribut &quot;level&quot; prend la valeur de l'indicateur des différentes 
+  vues activées sur les éléments de ce point.<br>
+  L'indicateur est un nombre dont la somme est 1 (niveau de base), 2 (plancher), 
+  4 (remplissages), 8 (plafond) et 16 (artefacts). </p>
+<p>
+
+</body></html>

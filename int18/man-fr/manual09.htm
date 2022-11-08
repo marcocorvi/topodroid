@@ -1,0 +1,474 @@
+<html>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+<body>
+<h3>[9] FENÊTRE DE CROQUIS</h3>
+
+<div align="left">
+  <p>Le bouton &quot;<em>Croquis</em>&quot; du relevé topo&nbsp;<img src="btn_croquis.png"> 
+    de la <em><a href="manual06.htm">fenêtre de données du relevé topographique</a></em> 
+    ouvre la boîte de dialogue avec la liste des croquis déjà présents ainsi qu'un 
+    bouton &quot;<em>Nouveau croquis</em>&quot;. Appuyez sur ce bouton pour créer 
+    un nouveau croquis pour ce relevé. </p>
+  <p>Chaque nouveau croquis est composé de deux fichiers : un croquis pour la 
+    vue en plan, un autre croquis pour la vue en coupe (au choix : développée 
+    ou projetée). Le nouveau croquis s'ouvrira d'abord sur la vue en plan. <br>
+    Les visées latérales d'habillage sont composées d'un seul fichier de croquis. 
+    La boîte de dialogue des croquis affiche deux colonnes : une pour les croquis 
+    de plans, l'autre pour les croquis de coupes et vous pouvez choisir celle 
+    que vous souhaitez ouvrir. </p>
+</div>
+<p> La vue en coupe développée affiche la ligne médiane de cheminement (polygonale) 
+  avec les visées orientées vers la gauche, vers la droite, ou à la verticale, 
+  en fonction de leur «extension». Le cheminement est projeté sur le plan vertical 
+  de la visée la plus proche en azimut, à moins que l'utilisateur n'ait imposé 
+  une &quot;extension&quot; dans la boîte de dialogue d'édition des visées. Par 
+  exemple, pour la vue en plan de la figure ci-dessous, les visées dans la région 
+  claire sont projetées sur le plan vertical de la visée 1-2, ceux dans la région 
+  sombre sur le plan vertical de 0-1.</p>
+<p><br>
+  La coupe projetée affiche la ligne médiane et les visées latérales projetées 
+  dans le plan vertical perpendiculaire à l'azimut de la projection.</p>
+<p>&nbsp;
+<p> <img src="splay_extend.png">
+<p><strong>Visées de cheminement</strong><br>
+  Les couleurs des visées de cheminement sont 
+<ul>
+  <li>normale : blanc</li>
+  <li> anormales par rapport aux champs : rouge</li>
+  <li> incohérentes avec les voisines (visées parentes) : orange. Elles sont également 
+    dessinées avec une ligne en zig-zag comme indiqué ci-dessous.</li>
+</ul>
+<p><img src="line_zigzag.png"><br>
+<p> <b>Visées latérales d'habillage </b><br>
+  Les visées d'habillage sont affichées avec des segments de ligne ou par leurs 
+  points d'extrémité [G]. Lorsque la fenêtre est en mode sélection, les visées 
+  d'habillage sont toujours affichées sous forme de segments. 
+<p>Les différentes couleurs d'affichage sont [E/G] 
+<ul>
+  <li>commentée : vert foncé</li>
+  <li> x-splay transversale (LRUD) : vert</li>
+  <li> h-splay horizontale : bleu marine (plan), bleu foncé (coupe)</li>
+  <li> v-splay verticale : bleu foncé (plan), bleu marine (coupe)</li>
+  <li> autres : gris clair</li>
+</ul>
+<p>Il est possible de définir la transparence des visées d'habillage (niveau d'opacité) 
+  [G].<br>
+  Il est possible d'attribuer des couleurs différentes aux visées d'habillage, 
+  individuellement ou en groupe (en mode d'édition multiple ou multi-sélection). 
+  Les couleurs des visées d'habillage peuvent être choisies dans une palette de 
+  couleurs ou à l'aide d'un sélecteur de couleurs [G].<br>
+  Une visée d'habillage n'est pas affichée si la visée est marquée pour ne pas 
+  être affichée sur le plan ou la coupe.</p>
+<p><br>
+  Si la fonction d'affichage discontinu [G] n'est pas désactivée, elles peuvent 
+  être affichées avec une ligne faite de tirets ou de pointillés.<br>
+  Si l'affichage discontinu est réglé sur &quot;<em>azimut</em>&quot;, l'affichage 
+  est fait de tirets si l'angle avec la visée de cheminement la plus proche en 
+  azimut est supérieur au seuil d'azimut du tiret, [par défaut 60°].<br>
+  Si l'affichage discontinu est réglé sur &quot;<em>pente</em>&quot;, l'affichage 
+  est discontinu si la pente de la visée de cheminement est supérieure au seuil 
+  de pente du tiret. Elle s'affiche alors avec des pointillés (pente positive) 
+  ou avec des tirets (pente négative).<br>
+  Si la fonction d'affichage discontinu est définie <em>en fonction de la vue</em>, 
+  les visées d'habillage seront pointillées suivant la pente sur la vue en plan 
+  et suivant l'azimut sur la vue en coupe développée. Sur une coupe projetée, 
+  les visées d'habillage sont en pointillés selon l'angle qu'elles forment avec 
+  la direction de la projection.</p>
+<p> De plus, dans la vue en plan, La visée d'habillage n'est pas affichée son 
+  inclinaison est supérieure au seuil de la vue en plan [par défaut 80°].<br>
+</p>
+<p>Pour les <u>sections transverses</u> : </p>
+<ul>
+  <li>les visées latérales (LRUD ou GDHB) sont en vert</li>
+  <li>les autres visées d'habillage sont : bleu foncé à la station VERS, bleu 
+    clair à la station DEPUIS</li>
+  <li>enfin, si l'option d'affichage discontinu est activée, elles sont en pointillés 
+    ou en tirets si l'angle que fait la visée d'habillage avec la normale au plan 
+    de la section transverse est inférieur au seuil d'angle du tiret [par défaut 
+    60°] ( pointillés si c'est dans la direction de la normale et tirets si c'est 
+    dans la direction opposée).</li>
+</ul>
+<p></p>
+<p> Les couleurs de la ligne de visée d'habillage en pointillés et de la ligne 
+  la ligne de visée d'habillage en tirets peuvent être modifiées avec les paramètres 
+  appropriés [G].<br>
+</p>
+<p><strong>Stations</strong><br>
+  Les couleurs des stations sont </p>
+<ul>
+  <li>violet : par défaut</li>
+  <li> vert : station active</li>
+  <li> rouge : stations au-delà desquelles la ligne médiane est cachée</li>
+  <li> bleu : stations avant lesquelles la ligne médiane est cachée</li>
+  <li> jaune : stations sauvegardées [T/G].</li>
+</ul>
+<p></p>
+<p> <strong>Modes d'interaction</strong><br>
+  La fenêtre de croquis possède quatre modes :</p>
+<ul style="margin-top=0">
+  <li><b>Déplacement </b>[par défaut] : vous pouvez déplacer la page écran et 
+    effectuer un zoom avant/arrière. Si dans la boîte de dialogue Références les 
+    "références" fixes sont cochées, les changements n'affectent que les dessins 
+    [T]</li>
+  <li><b>Dessiner </b>(crayon) : dans ce mode, vous pouvez ajouter des symboles 
+    (points et étiquettes), et tracer des lignes ou définir des zones (régions 
+    fermées remplies d'une couleur). </li>
+  <li><b>Effacer ou supprimer</b> (gomme) : pour supprimer du croquis des éléments 
+    (lignes ou zones), ou des parties de ceux-ci. </li>
+  <li><b>Modifier </b>[A]&#160;(main avec index) : pour sélectionner et effectuer 
+    une modification ponctuelle des propriétés d'un élément voire sa suppression. 
+  </li>
+</ul>
+<p> Déplacement et zoom sont possibles dans les modes <b> Dessiner</b> et <b>Effacer 
+  </b>à l'aide de deux doigts. Les commandes de zoom peuvent être activées de 
+  façon temporaire ou définitive. Si elles sont temporaires, elles apparaissent 
+  quand vous touchez au bas de la page vers le milieu. Si l'option &quot;<em>glisser 
+  par les coins</em>&quot; est activée, le croquis peut être déplacé par "glissement" 
+  vers la gauche, la droite, le bas ou le haut de la page depuis les coins du 
+  fond de dessin. Ces coins sont alors affichés en gris transparent.<br>
+
+<p>
+
+
+<h4>BOUTONS</h4>
+<p align="center"><img src="boutons_verts.png" width="158" height="48">&nbsp;inactifs<br>
+  <img src="boutons_verts_int1.png" width="157" height="48">&nbsp; <img src="boutons_verts_int2.png" width="157" height="48">&nbsp; 
+  <img src="boutons_verts_int3.png" width="157" height="48"> actifs</p>
+<p> Les modes sont représentés par les trois boutons verts sur la gauche : <em>Dessiner</em> 
+  <em>Effacer</em> et <em>Modifier</em>. Quand l'un d'entre eux est sélectionné 
+  l'icône du mode &quot;actif&quot; prend une couleur verte intense. Sinon c'est 
+  le mode "Déplacement" qui est actif. </p>
+<p> Lorsqu'un bouton vert est &quot;actif&quot;, un appui long dessus ouvre une 
+  boîte de dialogue permettant de modifier les paramètres utilisés pour ce mode. 
+<p> Les autres boutons sont de couleur bleue et varient suivant le mode &quot;actif&quot;. 
+  En mode <b>Déplacement</b> on trouve : 
+<ul style="margin-top=0">
+  <li><img src="btn_download.png"> <em>Téléchargement de données</em> : Si aucun 
+    DistoX n'est sélectionné, ce bouton est caché. Par défaut, les visées d'habillage 
+    et de cheminement sont rafraîchies lorsqu'une nouvelle visée de cheminement 
+    est téléchargée (et identifiée). Utilisez le bouton de rafraîchissement pour 
+    forcer un rafraîchissement de la ligne de cheminement. Les dernières visées 
+    téléchargées peuvent être mises en bleu surbrillant pour aider à les distinguer 
+    des autres [G]. </li>
+  <li> <u><img src="btn_bluetooth.png"></u> <u><a href="page_bluetooth.htm">Bluetooth</a></u> 
+    : redémarrage de la connexion Bluetooth</li>
+  <li><img src="btn_mode.png"> <a href="page_drawing_refs.htm">Références</a>&#160; 
+    : au choix, afficher sur le croquis / Cheminements / Visées latérales / Stations 
+    / Grille / Échelle...</li>
+  <li><img src="btn_plan.png"> <em>Coupe / Plan</em> : commutateur permettant 
+    d'alterner entre les deux types de croquis. Mode d'affichage des visées latérales 
+    pour les sections transverses. </li>
+  <li><img src="btn_note.png"> <a href="page_survey_notes.htm">Notes</a> : informations 
+    sur le relevé topo </li>
+  <li><img src="btn_azimuth.png"> <a href="page_azimuth.htm">Référence "extension"</a> 
+    : réglage de celle-ci.</li>
+  <li><img src="btn_refresh.png"> Rafraîchir l'affichage de la ligne centrale 
+    de cheminement.</li>
+</ul>
+<br>
+<p> Le mode <b>Effacer</b> ou supprimer (gomme) possède quatre autres boutons 
+  en plus des boutons verts&#160; : 
+<ul style="margin-top=0">
+  <li><img src="btn_undo.png"><u> Annuler</u> : supprime un par un les derniers 
+    éléments que vous avez dessiné. </li>
+  <li><img src="btn_redo.png"> <u>Refaire</u> : réintègre un par un sur le dessin 
+    les éléments supprimés. La liste des éléments supprimés est effacée lorsque 
+    vous dessinez quelque chose de nouveau. Ponctuellement des actions d'édition 
+    peuvent aussi affecter cette liste. </li>
+  <li><img src="btn_tools.png"> <a href="page_tools_recent.htm"> Outil de dessin</a> 
+    : filtre pour limiter la gomme à un seul type d'éléments : points, lignes 
+    ou zones </li>
+  <li><u><img src="btn_size.png"> Taille</u> de la gomme : petite, moyenne ou 
+    grosse [S, M, L] </li>
+</ul>
+<p>&nbsp; 
+<p> Le mode <b>Modifier </b> [A] possède six autres boutons en plus des boutons 
+  verts&#160; : 
+<ul style="margin-top=0">
+  <li><u><img src="btn_edit.png"> Filtre</u> de sélection (main index bleue) : 
+    menu déroulant pour sélectionner des éléments [tout, points, lignes, zones, 
+    visées, stations] </li>
+  <li> <u><img src="btn_size.png"> Taille</u> de l'outil de sélection&nbsp;(cercles 
+    concentriques) : petite, moyenne ou grande [S, M, L] </li>
+  <li><img src="btn_point.png"> <u>Actions ponctuelles</u></li>
+  <li><img src="btn_item.png"> Modifier les <u>propriétés</u> de l'élément </li>
+  <li><u><img src="btn_delete.png"> Supprimer</u> l'élément du croquis (demande 
+    confirmation et peut être "annulé"). </li>
+  <li><img src="btn_range.png"> Sélection de <u>plage</u> : soit ponctuelle soit 
+    locale (uniquement pour les lignes et les zones).<br>
+  </li>
+</ul>
+<p> Lorsqu'il y a des éléments sélectionnés, les deux premiers boutons bleus deviennent 
+  des boutons de navigation &quot;précédent / suivant&quot; (&lt; &gt;) pour l'ensemble 
+  des éléments sélectionnés. 
+<p align="justify"><br>
+  Les boutons sont quelque peu différents pour les croquis de sections transverses. 
+  Dans le mode de <strong>déplacement</strong>, les boutons &quot;download&quot;, 
+  &quot;bluetooth&quot;, &quot;switch&quot; et &quot;azimut&quot; ne sont pas 
+  affichés, mais il y a un bouton pour sélectionner les visées d'habillage à afficher, 
+  il propose successivement : &quot; toutes&quot;, &quot;station précédente&quot;, 
+  &quot;station suivante&quot;, &quot;aucune&quot;. Par conséquent sur cette page 
+  (sections transverses), la fenêtre de dialogue des références du dessin ne contient 
+  plus que 4 cases à cocher (au lieu de 8) : Cheminement / Stations / Grille / 
+  Echelle. (pas de case à cocher pour les visées d'habillage). </p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><strong>Actions par appui long</strong></p>
+<ul>
+  <li> Un appui long sur chaque bouton de <em>mode</em> ouvre la boîte de dialogue 
+    de paramétrage correspondante [A].</li>
+  <li> Le bouton de <em>téléchargement</em> permet de changer d'appareil, en mode 
+    multi-appareil [E].</li>
+  <li> En vue en plan, un appui long sur le bouton de <em>référence d'extension</em> 
+    permet de modifier graphiquement l'azimut de référence en faisant glisser 
+    le doigt sur l'écran. Le bouton devient vert [E].</li>
+  <li> Dans la vue en coupe développée, un appui long sur le bouton de <em>mode 
+    d'affichage</em> fait basculer le croquis [N].</li>
+  <li> Avec les sections transverses, il permet de basculer l'affichage des visées 
+    d'habillage qui sont hors du plan de coupe [T].</li>
+  <li> Un appui long sur le bouton <em>outils</em> inverse l'ordre de rotation 
+    de la barre d'outils inférieure.</li>
+  <li> Un appui long sur le bouton de <em>suppression</em> supprime le point de 
+    ligne/zone sélectionné [N].</li>
+  <li> Un appui long sur le bouton d'<em>édition des propriétés</em> de l'élément, 
+    lorsque l'élément sélectionné est un point de section, ouvre le croquis de 
+    la section transverse correspondante [T]. </li>
+</ul>
+<p>
+
+
+
+<h4>MENU DÉROULANT DE DROITE</h4>
+<p>Lorsque des anomalies ont été détectées dans la compilation des données du 
+  relevé topo, le bouton &quot;menu&quot; (trois points à la verticale) comporte 
+  un point d'exclamation rouge. Appuyez longuement sur le bouton pour afficher 
+  une information sur ces anomalies.</p>
+<ul style="margin-top=0">
+  <li><u>BASCULER/FERMER</u> : passer à un autre croquis ou fermer la fenêtre 
+    de croquis. </li>
+  <li><u>EXPORTER</u>&#160; : le croquis peut être <a href="page_plot_export.htm">exporté</a> 
+    en tant que Therion th2, cSurvey, DXF, SVG, PDF, xvi (xtherion), shapefile 
+    (QGIS), et Tunnel. Toutes les exportations génèrent deux fichiers, l'un pour 
+    le plan et l'autre pour la coupe, sauf cSurvey qui contient les deux vues 
+    dans un seul fichier.</li>
+  <li><a href="page_stat2.htm">STATS</a> : statistiques du relevé et du croquis. 
+  </li>
+  <li><u>RECHARGER</u> : recharge le croquis à partir d'une <a href="page_backup.htm">copie 
+    de sauvegarde</a>. </li>
+  <li><u>ZOOM</u> : adapter le croquis à l'écran en faisant varier le facteur 
+    de zoom ou faire alterner portrait / paysage.</li>
+  <li><u>RENOMMER/SUPPRIMER</u>&nbsp; : le croquis. Les croquis supprimés peuvent 
+    être récupérés ("RECHARGER" dans ce menu déroulant) </li>
+  <li> <u>PALETTE</u> : tous les outils de dessin </li>
+  <li><u>APERÇU</u> : fenêtre d'aperçu montrant une vue d'ensemble de tous les 
+    croquis topographiques réunis. [Uniquement disponible pour le plan et la coupe 
+    projetée]</li>
+  <li><u>OPTIONS</u> : paramètres du croquis</li>
+  <li><u>AIDE</u></li>
+</ul>
+<br>
+<p><b>DÉTAIL DES OPTIONS ou PARAMÈTRES DU CROQUIS</b> 
+<p> 
+  <!-- li><i>Drawing tool picker</i>: list, grid, or triple-grid view [default: list]</li -->
+  <!-- li><i>Bottom toolbar</i>: single or triple [default: single]</li -->
+</p>
+<ul style="margin-top=0">
+  <li><em>Déplacement latéral</em> : activer le balayage par déplacement des coins</li>
+  <li><em>Contrôle du zoom</em> : sp&eacute;cifie si et comment les commandes 
+    de zoom sont affich&eacute;es sur les croquis [B]. Les commandes de zoom peuvent 
+    &ecirc;tre masqu&eacute;es, affich&eacute;es uniquement quand l'utilisateur 
+    appuie brièvement au milieu de la partie inf&eacute;rieure de l'&eacute;cran, 
+    ou affich&eacute;es en permanence. </li>
+  <li><em>Sections transverses horizontales</em> : seuil cheminement-pente pour 
+    les sections transverses horizontales (vue en coupe).</li>
+  <li><em>V&eacute;rification du cheminement </em> : v&eacute;rifie si toutes 
+    les stations du cheminement sont reliées entre elles [désactivé].</li>
+  <li><em>Contrôle de l'extension</em> : vérifie si toutes les stations du cheminement 
+    ont une option &quot;zxtension&quot; définie [activé]. 
+    <!-- li><i>xtherion areas</i> save sketch th2 files with an extra point in area borders</li -->
+  </li>
+  <li><em>OUTILS POINT</em> 
+    <ul>
+      <li><em>Point non zoom&eacute; </em> : les &eacute;l&eacute;ments ponctuels 
+        restent de taille fixe lors du zoom </li>
+      <li><em>Echelle de base</em> pour les symboles ponctuels de dessin</li>
+      <li><em>Taille du texte</em> des &eacute;tiquettes [par défaut 24 pt]</li>
+    </ul>
+  </li>
+  <li><em>OUTILS LIGNE </em> 
+    <ul>
+      <li> <em>&Eacute;paisseur</em> de ligne (NB : les lignes de parois sont 
+        deux fois plus larges) [1 px].</li>
+      <li><em>Symboles de dessin </em>pour les lignes possédant un &quot;effet 
+        de motif&quot;.</li>
+      <li><em>Style de ligne </em> : ligne Fine, Normale, Epaisse, Bézier (courbe 
+        interpol&eacute;e), simplifiée</li>
+      <li><em>Espacement des points de ligne</em> : distance minimale entre les 
+        points de ligne dans le style normal [5 px]</li>
+      <li><em>Longueur de la coche de direction</em> pour pour les lignes de section 
+        transverse [5 px]</li>
+      <li><em>Points de section</em> : ajout automatique ou non d'un point de 
+        section pour les lignes de section transverse [oui par défaut].</li>
+      <li> <em>Mode de jonction par défaut des lignes</em> : aucun, début, fin, 
+        les deux, &quot;continue&quot;.</li>
+      <li> <em>Visibilité</em> <em>par défaut de la bordure</em> de la zone</li>
+    </ul>
+  </li>
+  <li><em>OPTIONS ÉCRAN DESSIN</em> 
+    <ul>
+      <li><em>&Eacute;paisseur</em> de la ligne du croquis (ligne m&eacute;diane 
+        / visées latérales)</li>
+      <li><em>Taille du texte</em> du nom de la station [18 pt] [N]</li>
+      <li><em>Taille des points</em> verts affich&eacute;s en mode &eacute;dition 
+        [5 px] [A]</li>
+      <li><em>Rayon de s&eacute;lection</em> pour l'&eacute;dition fine d'une 
+        esquisse; [16 px] [A]</li>
+      <li><em>Taille de la gomme</em> </li>
+      <li><em>Sensibilit&eacute; au d&eacute;calage </em> : pas maximum lors du 
+        d&eacute;placement d'un dessin [60 px] [E]. Augmentez-le si le d&eacute;calage 
+        de croquis est saccadé.</li>
+      <li><em>Transparence de l'affichage</em> : niveau d'opacité [0 : transparent, 
+        100 : opaque, par défaut 80]. 
+        <!--
+    <li><i>Splay plan-view threshold</i>: splay shots with inclination above this threshold are hidden in the plan-view [80&deg;]</li>
+    <li><i>X-section H-threshold</i>: the inclination angle above which a x-section is horizontal. (Below it x-section are vertical).</li>
+    -->
+      </li>
+    </ul>
+    <p>&nbsp;</p>
+  </li>
+</ul>
+<p><a href="page_geek.htm">Paramètres personnalisés</a> : <em>décalage/échelle 
+  du croquis, division/fusion du croquis, seuil de verticalité de la visée (au-delà 
+  du seuil, LRUD devient WENS), coloration des stations enregistrées, angle minimum 
+  des coins lorsqu'une ligne est redressée ; précision de l'interpolation de Bézier 
+  et seuil des coins, distance, longueur et zone tampon de la simplification de 
+  la ligne, drapeaux d'actions ponctuelles (accrochage ligne/zone, segment lissé/redressé, 
+  multi-sélection, actions composées), visées d'habillage discontinues (mode, seuil 
+  de pente, seuils d'azimut), nombre et intervalle de sauvegarde, menu de suppression 
+  des sauvegardes, section transverse automatique dans les exportations (csx, 
+  svg, dxf, xvi) Paramètres des parois automatiques.</em> </p>
+<h4>Cache des croquis </h4>
+Une fois ouverts les croquis sont conservés en mémoire dans un cache. Ceci accélère 
+la commutation entre la fenêtre de données et la fenêtre de croquis, car ainsi 
+les croquis n'ont pas besoin d'être lus à partir du fichier. Les croquis en cache 
+sont effacés quand le relevé topo est fermé. <br>
+<p>
+
+<h4>Format de fichier de dessin </h4>
+Chaque croquis est sauvegardée dans le fichier chaque fois qu'il est modifié, 
+ou lorsque la fenêtre de croquis passe à un croquis différent. Pour des performances 
+optimales, TopoDroid enregistre les croquis au format binaire.<br>
+<p>
+
+<h4>Sélection de point [A] </h4>
+Pour effectuer une modification du croquis, vous devez en sélectionner un élément : un point, un point de ligne ou de zone, une station ou le point-milieu du segment 
+d'une ligne de visée.<br>
+Pour ça, appuyez brièvement au plus près du point que vous voulez sélectionner. 
+Cependant, s'il y a plusieurs points proches de l'endroit où vous appuyez, ils 
+risquent d'être tous sélectionnés, mais un seul d'entre eux sera en cours de modification 
+(&quot;actif&quot;). Parmi l'ensemble de points sélectionnés, vous pourrez changer 
+de point &quot;actif&quot; avec les boutons <em>Précédent et Suivant</em>.<br>
+<p>
+
+<h4>Style de ligne </h4>
+TopoDroid dispose de quatre styles de ligne. Avec le style 'Normale' [Par défaut], 
+les lignes sont dessinées comme des polylignes. Avec le style 'Fine' les segments 
+de polyligne sont plus courts, tandis qu'avec le style 'Épaisse' ils sont plus 
+longs. Dans le quatrième style elles sont interpolées afin de remplacer les segments 
+par des courbes de 'Bézier' (courbes polynomiales paramétriques). Ces segments 
+dépassent à leurs deux extrémités et possèdent deux points de contrôle permettant 
+de modifier la courbure. Si vous exportez le dessin dans DXF avec <em>AutoCAD</em> 
+version 6, n'utilisez pas de courbes de Bezier car elles sont exportées en tant 
+que polylignes.<br>
+<p>
+
+<h4>Continuation/jonction de ligne </h4>
+<p>Le bouton de jonction est un bouton multi-états. La jonction de lignes ne peut 
+  se faire qu'avec d'autres lignes des mêmes segments de calque (scraps). Les 
+  lignes qui sont jointes doivent appartenir au même groupe. Si vous devez &quot;joindre&quot; 
+  deux points de lignes de groupes différents, vous devez déplacer un point pour 
+  qu'il coïncide avec l'autre.</p>
+<ul>
+  <li><em>off</em> : les lignes de type courant ne peuvent pas être jointes </li>
+  <li><em>non</em> : la ligne de type courant ne sera pas jointe</li>
+  <li><em>début</em> : la ligne de type courant sera jointe à une ligne du même 
+    groupe si son point de départ est proche de l'un de ses points de terminaison</li>
+  <li><em>fin</em> : la ligne de type courant sera jointe à une ligne du même 
+    groupe par son point final</li>
+  <li><em>les deux</em> : la ligne de type courant sera jointe à une ligne du 
+    même groupe par son point début et par son point final</li>
+  <li><em>continuer</em> : la ligne de type courant continuera par une ligne du 
+    même groupe si son point de départ est suffisamment proche d'un point d'extrémité 
+    de cette ligne.</li>
+</ul>
+<p><br>
+  Lorsque la jonction est réglée sur &quot;<em>continuer</em>&quot;, la dernière 
+  ligne qui a été dessinée peut être modifiée comme dans Adobe Illustrator, c'est-à-dire 
+  en redessinant un morceau de la ligne.<br>
+  L'option &quot;<em>continuer</em>&quot; a une incidence sur la pile d'annulation, 
+  car la ligne continuée peut être déplacée au sommet de la pile. </p>
+<p><strong>Actions composées </strong>[T]</p>
+<p>Les actions composées sont des actions ponctuelles par appui long<br>
+  Actuellement, la seule action d'appui long permet d'insérer un point pour une 
+  ligne/zone et de l'accrocher à un point voisin en même temps. Le point sélectionné 
+  est d'abord déplacé vers le point voisin, puis il est dupliqué et le nouveau 
+  point est placé après lui dans la ligne/zone. Cela permet de retracer un chemin 
+  en sélectionnant le dernier point et en insérant des points en arrière.<br>
+  Pour retracer le chemin vers l'avant, changez le point sélectionné après chaque 
+  insertion. </p>
+<h4>Présentation Portrait/Paysage </h4>
+<p>Dans la boîte de dialogue qui s'ouvre (<strong>uniquement si niveau d'utilisation 
+  'Tester'</strong>) vous pouvez choisir de faire permuter le nord pour alterner 
+  les modes portrait et paysage. En mode portrait, le nord ou la verticale sont 
+  sur un axe vertical respectivement sur le plan et sur la coupe. En mode paysage 
+  ils sont à gauche de manière à ce que l'est soit en haut pour la vue en plan 
+  et que le côté droit d'une coupe soit en aussi haut.<br>
+  En mode paysage la présentation des icônes est tournée de sorte à ce qu'ils 
+  apparaissent naturellement lorsque l'appareil est tenu en mode portrait. <br>
+  Par contre, les croquis sont toujours enregistrés et exportés avec le Nord (ou 
+  la verticale) vers le haut. </p>
+<p><b>Attention : si le croquis disparaît de l'écran, passer du plan à la coupe 
+  pour forcer TopoDroid à rafraîchir l'affichage. </b><br>
+</p>
+<p><strong>Éditeur de croquis</strong></p>
+<p>TopoDroid peut éditer/modifier les fichiers Therion th2 (simples).<br>
+  La syntaxe des fichiers Therion th2 n'est pas entièrement prise en charge. En 
+  particulier, les zones à bordure multiligne ne sont pas prises en charge, car 
+  TopoDroid ne dispose que de zones à bordure simple.<br>
+  Lorsque la <em>fenêtre de croquis</em> est ouverte comme éditeur, les boutons 
+  et les menus changent. Les menus sont les suivants :</p>
+<ul>
+  <li><em>Fermer</em> la fenêtre</li>
+  <li> <em>Enregistrer</em> le fichier th2 avec les modifications</li>
+  <li> <em>Ouvrir</em> un fichier th2</li>
+  <li> Ajustement du <em>zoom</em></li>
+  <li> <em>Scraps</em> (segments de calque)</li>
+  <li> <em>Palette</em></li>
+  <li> <em>Paramètres</em></li>
+  <li> <em>Aide</em></li>
+</ul>
+<p><br>
+  En mode <em>déplacement</em>, il n'y a que les trois boutons verts des autres 
+  modes.<br>
+  Le mode <em>dessin</em> comporte les boutons : défaire, refaire, outils, et 
+  jonction de ligne.<br>
+  Les <em>modes</em> effacer et <em>éditer</em> ont les boutons habituels.</p>
+<p>Le fichier th2 peut contenir plus d'un scrap. Comme le croquis n'est pas lié 
+  à un relevé, il n'y a pas de référence de ligne médiane, c'est-à-dire pas de 
+  visées de cheminement et pas de visées latérales d'habillage. Les stations ne 
+  sont présentes que si le fichier th2 contient des points &quot;station&quot;. 
+  Dans ce cas, elles sont affichées sous forme de points avec le nom de la station 
+  à proximité.</p>
+<p>La grille métrique n'est affichée que lorsqu'une taille de papier millimétré 
+  est définie (par le biais du dialogue de <em>zoom</em>).<br>
+</p>
+<p> <a href="page_tools.htm">Palette d'outils de dessin</a><br>
+  <a href="page_therion_stations.htm">Points de Stations Therion</a><br>
+  <a href="page_undo.htm">Pile d'annulation</a><br>
+  <a href="page_shift.htm">Déplacement de croquis et retournement</a><br>
+
+<p> <a href="manual08.htm">&#160;&lt; Infos du relevé topographique</a> | <a href="manual10.htm">Dessiner 
+  un croquis &#160;&gt;</a> 
+</body></html>

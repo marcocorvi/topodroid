@@ -1,0 +1,36 @@
+<html><body>
+<h4>3D VIEWER - Surface DEM</h4>
+
+A surface DEM (Digital Elevation Model) can be shown if it is enclosed in the model file (eg, in a lox file), 
+or has been added to the model.<br><p>
+
+The <i>Surface</i> button of the <i>3D viewer</i> window toggles the DEM display on and off.<br><p>
+
+This dialog is opened from the <i>Surface</i> menu of the <i>3D viewer</i> window.<br><p>
+It is used to load a DEM, a surface texture to overlay on te DEM, and adjust its opacity.<br>
+ 
+It contains
+<ul>
+<li>a button to select a DEM file</li>
+<li>a button to select a texture file, if the model has a DEM</li>
+<li>a slider to adjust the opacity</li>
+<li>a checkbox to activate the display of the projection of the model on the DEM</li>
+<li>a checkbox to activate the display of the surface texture (if there is one)</li>
+</ul><br>
+
+<b>DEM file</b><br>
+
+The 3D viewer supports DEM file in ascii format, or Therion grid format.<br><p>
+
+<b>Texture file</b><br>
+
+The 3D viewer supports texture GeoTIFF image files, and OSM map files.<br><p>
+
+The DEM and texture X-Y coordinates must be in the Coordinate Reference System of the model,
+because the 3D viewer does not perform coordinate conversions.<br><p>
+
+OSM files are in WGS84 geographical coordinates. The values can be used with models
+in UTM cartographic, but the conversion is approximate.<br><p>
+
+
+</body></html>

@@ -1,0 +1,83 @@
+<html><body>
+<h3>[5] DONNÉES d'étalonnage du DistoX</h3>
+
+<b>Valable uniquement pour DistoX, DistoX2 et DistoXBLE</b><br><p>
+
+La <u>Fenêtre d'étalonnage</u> affiche la liste des données de d'étalonnage. Si la base d'étalonnage de contient aucune données, la liste est vide, mais les bouton du haut sont disponibles. Chaque ligne de donnée contient les informations suivantes :
+
+<ul style="margin-top=0">
+<li>index: index incrémental qui identifie la donnée</li>
+<li>groupe: numéro du groupe à qui appartient la donnée</li>
+<li>erreur: la différence entre la direction corrigée par l'étalonnage pour la direction, la direction moyenne du groupe (en degrés)</li>
+<li>azimuth, pente et roulis, calculé depuis les valeur brute sans correction d'étalonnage</li>
+<li>optionnellement, les données brute d'étalonnage ; ex: la composante G et M dans la trale DistoX en valeurs décimales ou hexadécimales.</li>
+</ul><br><p>
+
+<h4>Couleurs</h4>
+Les données d'étalonnage sont affichée en jaune et un texte bleu, avec une alternance paire et impaire des numéros de groupes. Les données sans groupe sont grises.<br><p>
+
+Les couleurs de fond pour les donénes sont :
+
+<ul>
+<li>noir : valeurs normales</li>
+<li>violet : données incomplètes (non utilisées pour l'étalonnage, mais utilisées pour le groupe)</li>
+<li>maron : données saturées</li>
+<li>gris : données supprimées (seulement si affichées)</li>
+<li>rouge : données dint l'erreur est supérieure à 1&deg;</li>
+<li>vert : données différant de la valeur moyenne du groupe pour une valeur supérieure à la valeur <i>distance de groupe</li>
+</ul><br><p>
+
+<h4>ACTIONS</h4>
+<ul style="margin-top=0">
+<li>Appuie sur une donnée : ouvre la fenêtre d'édition</li>
+</ul><br><p>
+
+<h4>BOUTTONS</h4>
+<ul style="margin-top=0">
+<li><img src="btn_toggle.png"> bascule le DistoX en mode étalonnage (cela peut échouer au premier essai</li>
+<li><img src="btn_bluetooth.png"> Réinitialise la connexion BT ou contrôle de DistoX à distance</li>
+<li><img src="btn_download.png"> Télécharge les données d'étalonnage du DistoX</li>
+<li><img src="btn_numbers.png"> affecte un numéro de <a href="page_groups.htm">groupe</a> aux données, ou réinitialise les numéros de groupe</li>
+<li><img src="btn_compute.png"> Calcule les <a href="page_calib_coeffs.htm">coefficients d'étalonnage</a></li>
+<li><img src="btn_cover.png"> <a href="page_calib_distrib.htm">distribution de la direction</a> des données d'étalonnage</li>
+<li><img src="btn_read.png"> lit et affiche les coéficients d'étalonnage stockés dans le DistoX</li>
+<li><img src="btn_write.png"> écrit les coéficients d'étalonnage dans le DistoX. Activé uniquement après le calcul des coéficients. Les coéficients peuvent également être écrit depuis la fenêtre de résultats de calculs. Un avertissement in affiché sir la couverture des directions est inférieure à 95% ou si l'erreur moyenne est supérieure à 0.5&deg;</li>
+<li><img src="btn_search.png"> ouvre la fenêtre de recherche</li>
+</ul><br><p>
+
+Pour le moment, seul le téléchargement de données A-la-demande n'est activé pour les données d'étalonnage. Les données téléchargées sont ajoutées à l'étalonnage actuel. Par conséquent, vous pouvez prendre quelques mesures, télécharger les données, vérifier si elles sont satisfaisantes, si non, en prendre d'autres et les télécharger de nouveau. Et cela, jusqu'à trouver satisfaction dans vos données d'étalonnage. Les données télécharger peuvent être "désactivées" en définisant le numéro de groupe à "0" (zéro). Les données désactivées ne sont pas utilisées dans le calcul des coéficients d'étalonnage. Elles ne sont pas non plus supprimées (normalement, elle ne sont pas affichée dans la liste).
+Les données supprimées ne sont pas prise en compte dans affectations des numéros de groupe et dans le calcul des coéficients.<br><p>
+
+<h4>Bluetooth</h4>
+Ce bouton réinitialise la connexion Bluetooth de TopoDroid.<br/>
+Il permet également à l'utilisateur de contrôler le DistoX à distance [A] : éteindre ou alumer le laser et prendre des visées pour l'étalonnage.
+Les données sont imédiatement téléchargée si le mode est défini sur "Continu".<br/>
+Dans ce cas, il est également possible de prendre (et télécharger) un groupe  de quatre visées d'étalonnage avec un court délai entre elles (controlé par le paramètre "attente laser" et attente visée").<br><p>
+
+Le bouton Bluetooth est désactivé tant que TopoDroid prend des visées d'étalonnage.<br><p>
+
+<h4>Calculs de l'étalonnage</h4>
+Le bouton "roue dentée" démarre le calcul des coéficients d'étalonnage.<br/>
+Quand le calcul se termine, la fenêtre de coéficients est affichée.<br>
+Si il n'y a pas sufisament de données ou de groupe de données, le calcul n'éboutit pas et un avertissement est affiché.<br>
+L'étalonnage échoue si la limite d'itération est atteinte avant la fin du calcul.
+Cela arrivé généralement si les numéros de groupes sint affectés de manière erronné. Dans cette situation, un message est également affiché.<br><p>
+
+<h4>Avertissements</h4>
+<ul style=margin-top=0">
+<li><b>données saturées</b>: données avec un valeur de champ magnétique anormal. Une cause possible est la présence d'un champ magnétique anormal. Les données saturées possède une couleur de fond marron</li>
+<li><b>Aucune données</b> : les données d'étalonnage reçues incorectement. La donnée ne possède pas de valeurs et par défaut n'est pas assignée à un nombre. Toutefois, elle est utilisée pour le calcul des groupes. Les données nulles son affichées avec un fond violet</li>
+</ul><br><p>
+
+<h4>MENUS</h4>
+<ul style="margin-top=0">
+<li><u>Afficher</u> : affiche ou non toutes les données, incluant celles supprimées</li>
+<li><u>Valider</u> : <a href="page_validation.htm">validation</a> des données d'étalonnage avec une autre</li>
+<li><u>Paramètres</u> : identique à la <u>fenêtre d'étalonnage</li>
+<li><u>Aide</u></li>
+</ul><br><p>
+
+<a href="manual04.htm">&lt; fenêtre d'étalonnage</a> |
+<a href="manual06.htm">Données de relevé &gt;</a>
+
+</body></html>

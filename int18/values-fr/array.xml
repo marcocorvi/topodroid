@@ -166,8 +166,8 @@
 
 
   <string-array name="connMode">
-     <item name="batch">À la demande</item>
-     <item name="continuous">Continue</item>
+     <item name="batch">À-la-demande</item>
+     <item name="continuous">Continu</item>
      <item name="multi">Multiple</item>
   </string-array>
  

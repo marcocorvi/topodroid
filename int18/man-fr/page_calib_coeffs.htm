@@ -1,0 +1,55 @@
+<html>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+<body>
+
+<h4>LES COEFFICIENTS D'ÉTALONNAGE du DistoX</h4>
+
+Cette boîte de dialogue affiche les 24 coefficients des transformations linéaires 
+d'étalonnage pour les vecteurs <strong>G</strong> et <strong>M</strong> (12 coefficients 
+chacun) et 3 coefficients des termes non linéaires (uniquement DistoX2 v. 2.3 
+ou supérieur).<br>
+<p> Ces données sont utilisées dans trois situations différentes&#160;: 
+<ul>
+  <li>Avec le bouton <em>Lire</em> de la <u>fenêtre du périphérique</u> qui affiche 
+    les coefficients lus depuis le DistoX. <img src="btn_lire.png" width="50" height="53"></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+  <li>Avec le<u></u> bouton <em>Lire</em> de la <u>fenêtre d'étalonnage</u> qui 
+    affiche les coefficients stockés dans la base de données.<img src="btn_lire.png" width="50" height="53"></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+  <li>Avec le bouton <em>Calculer</em> de la <u>fenêtre des données d'étalonnage</u> 
+    qui affiche les coefficients calculés. <img src="btn_calculcal.png" width="51" height="52"></li>
+</ul>
+
+<p>Dans le dernier cas, la boîte de dialogue affiche également un histogramme 
+  des erreurs résiduelles des données d'étalonnage, de l'erreur moyenne (et le 
+  &quot;delta&quot; de l'algorithme original), de l'écart type de la distribution 
+  des erreurs, de l'erreur maximale et du nombre d'itérations prises par le calcul 
+  d'étalonnage.<br>
+  En supposant que la distribution des erreurs azimut-clino est normale, l'écart-type 
+  des erreurs devrait être légèrement supérieur à la moitié de la valeur moyenne.</p>
+<p> L'erreur d'une donnée de calibration est l'angle entre la direction de la 
+  donnée et la direction moyenne du groupe auquel la donnée appartient, après 
+  avoir pris en compte la correction d'étalonnage. Les erreurs sont indiquées 
+  en degrés.</p>
+<p> L'histogramme a des graduations sur l'axe horizontal à 0,5 (ligne jaune), 
+  1,0 (ligne rouge) et 1,5 degré.<br>
+  Sur l'axe vertical, les graduations sont 10 et 20.</p>
+<p>Le &quot;delta&quot; de l'algorithme original est la moyenne de la racine carrée 
+  des différences résiduelles entre les vecteurs G-M calibrés et les vecteurs 
+  qui satisfont la condition de minimisation. Il donne une estimation de la précision 
+  de l'étalonnage (précision de l'instrument) : &quot;delta&quot; représente environ 
+  5/4 de la précision en degrés.</p>
+<p> Cette boîte de dialogue possède un bouton pour<b> écrire</b> les coefficients 
+  sur le DistoX. <br>
+  Un avertissement est émis si la distribution de la direction des données est 
+  inférieure à 95 %, ou si l'erreur moyenne de l'étalonnage est supérieure à 0,5°. 
+  <br>
+<p>
+
+</body></html>

@@ -1,0 +1,82 @@
+	<html>
+	<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+	<body>
+
+<h3>NOUVEAU CROQUIS</h3>
+Cette boîte de dialogue s'ouvre en appuyant sur le bouton <em>Nouveau</em> dans 
+la boite de dialogue de la <a href="manual08.htm">Liste de croquis du relevé</a>. 
+<br>
+<p> Elle comporte deux zones de texte et un bouton de confirmation. <br>
+  <br>
+  • <strong>Nom</strong> est le nom attribué au croquis<br>
+  • <strong>Station d'origine </strong>ou de référence du croquis<br>
+  • <strong>Coupe</strong> développée (ou Coupe projetée) : case à cocher [E] 
+  [par défaut, la coupe est &quot;Développée&quot;] <br>
+  • <strong>Azimut de projection</strong>, pour la vue en coupe projetée [E] <br>
+  • <strong>Croquis flottants</strong> (origine non attachée à la ligne médiane 
+  de cheminement) [T] [non par défaut] <br>
+</p>
+<p> Vous pouvez utiliser soit le<b> nom</b> suggéré par TopoDroid (nombre entier 
+  de plus en plus) ou entrez un nom de votre choix. Chaque nouvelle esquisse est 
+  composée de deux fichiers de croquis : un pour le plan, l'autre pour la coupe 
+  (au choix : développée ou projetée). Les noms de fichiers sont obtenus en composant 
+  le nom du relevé topographique, le nom du croquis et un suffixe (&quot;p&quot; 
+  pour le plan, &quot;s&quot; pour la coupe). Par exemple, le croquis &quot;2&quot; 
+  du relevé topographique &quot;cave&quot; est enregistrée dans les deux fichiers 
+  &quot;cave-2p.th2&quot; et &quot;cave-2s.th2&quot; (si vous choisissez de sauvegarder 
+  le croquis au format <em>Therion</em>). 
+<p> TopoDroid émet un avertissement si le nom coïncide avec le nom d'un croquis 
+  existant.<br>
+  En particulier, il n'est pas possible d'avoir deux croquis dont les noms ne 
+  diffèrent que par la casse des caractères car les deux croquis auraient le même 
+  fichier, le système de fichiers n'étant pas sensible à la casse. 
+<p> <b>ATTENTION. </b>Le nom du croquis ne peut pas contenir le caractère '/' 
+  (slash), qui est le séparateur d'adresse de fichier. Les '/' sont remplacés 
+  par des tirets '-'.<br>
+
+<p> S<strong>tation d'origine (ou de référence) </strong> <br>
+  Elle définit la manière dont le croquis est traduit par rapport à la ligne médiane 
+  de cheminement du relevé topographique. La référence à la ligne médiane du relevé 
+  topographique définit l'échelle et la rotation du croquis, mais ne détermine 
+  pas la manière dont le dessin est traduit par rapport à ce cheminement. Cette 
+  incertitude est levée en spécifiant la station d'origine à (0,0) dans le référentiel 
+  de la page du croquis. 
+<p> La station d'origine détermine également la <strong>réduction des données</strong> 
+  sur la ligne de cheminement du relevé topographique pour chaque croquis. Du 
+  point de vue du croquis, la ligne de cheminement démarre à partir de la station 
+  d'origine et continue tant que des données peuvent être reliées entre elles. 
+  La ligne médiane résultante forme une polygonale ancrée à la station d'origine. 
+  Afin de rendre la page moins encombrée, il est possible de masquer l'affichage 
+  d'une la partie de la ligne médiane, soit après une station, soit avant (c'est-à-dire 
+  entre la station d'origine et la station en cours). Ceci est expliqué dans la 
+  boîte de dialogue &quot;<a href="page_sketch_station.htm">Stations du croquis</a>&quot;.</p>
+<p> TopoDroid choisit comme &quot;station d'origine&quot; la dernière station 
+  utilisée ou la station active si celle-ci est définie. Vous pouvez en changer 
+  si vous le souhaitez et choisir une autre station comme origine du croquis.</p>
+<p>Si le relevé possède une &quot;origine de station fixe&quot; [paramètre], TopoDroid 
+  désigne alors la première station du relevé comme&quot;station de référence&quot;. 
+  Sinon, il utilise la dernière station ou la station active si celle-ci est définie. 
+  Vous pouvez en changer si vous le souhaitez et choisir une autre station comme 
+  origine du croquis.</p>
+<p>L'application signale une erreur si la station de référence n'existe pas dans 
+  les données du relevé. Il est possible de la forcer à utiliser une station inexistante 
+  en cochant la case &quot;flottante&quot;.<br>
+  Dans ce cas, le croquis n'aura pas de référence de ligne médiane, ni de visées 
+  d'habillage, ni de stations, jusqu'à ce que la station de référence soit assignée 
+  à une visée de cheminement.</p>
+<p>Si la case <strong>projetée</strong> est cochée, le croquis généré sera une 
+  coupe projetée. Son orientation, c'est-à-dire l'azimut de projection, est choisie 
+  à l'aide d'une boîte de dialogue graphique qui permet de faire pivoter la ligne 
+  médiane du relevé autour d'un axe vertical. </p>
+<p>Sinon, la coupe du croquis sera du type coupe développée (&quot;extended profile&quot; 
+  en anglais) et l<strong>'azimut de la projection</strong> ne sera pas indiqué. 
+<p> En mode <strong>Croquis flottants</strong> (&quot;Dangling sketch&quot; en 
+  anglais), le Nord et la verticale se trouvent respectivement sur le côté gauche 
+  de l'écran, en plan et en coupe. De même, les sections transverses (x-stations) 
+  ont leur verticale du côté gauche.</p>
+<p>
+
+</body>
+</html>

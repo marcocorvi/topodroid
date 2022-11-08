@@ -1,0 +1,54 @@
+<html>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+
+<body>
+<p><strong>EXPORTATIONS DES CROQUIS</strong></p>
+<p> Les croquis sont stockés dans TopoDroid au format binaire et peuvent être 
+  exporté en tant que : </p>
+<ul>
+  <li>Fichier <em>Therion</em> &quot;.th2</li>
+  <li> Fichier &quot;.csx&quot; de <em>cSurvey</em></li>
+  <li> Fichier &quot;.xml&quot; de <em>Tunnel</em></li>
+  <li> 2D DXF (<em>LibreCAD</em>)</li>
+  <li> SVG (<em>Inkscape</em>)</li>
+  <li> PDF</li>
+  <li> shapefile (<em>QGIS</em>)</li>
+  <li> Image <em>xtherion</em> &quot;.xvi&quot;. </li>
+</ul>
+<p> En plus de l'exportation, il existe une option permettant d'enregistrer automatiquement 
+  un croquis (dans l'un des formats d'exportation pris en charge) chaque fois 
+  qu'il est fermé.
+<p> Le fichier d'exportation <b>cSurvey</b> contient à la fois les croquis en 
+  plan et en coupe. Si des points de &quot;section&quot; ont été définis, il contient 
+  aussi les sections transverses. Les sections transverses ne sont pas exportées 
+  comme fichiers cSurvey. 
+<p> Les croquis peuvent être exportées sous forme de fichiers <strong>DXF</strong> 
+  2D. Les versions <strong>DXF</strong> prises en charge sont 9, 12 et 14.
+<p> L'exportation du fichier <strong>shapefile</strong> comprend les stations, 
+  les visées et le dessin. Tous les objets de dessin sont convertis en &quot;linestring&quot;. 
+  Les tables d'attributs contiennent les données des objets (par exemple, le type 
+  de point, l'orientation, etc.). Les fichiers composant un export <strong>shapefile</strong> 
+  sont compressés dans une archive zip. </p>
+<p> Quelques paramètres d'exportation, spécifiques au format sélectionné, peuvent 
+  être remplacés dans la boîte de dialogue d'exportation.<br>
+</p>
+<p><strong>Exportation de la vue d'ensemble</strong><br>
+  Les croquis peuvent également être exportés à partir de la &quot;<a href="manual12.htm">Fenêtre 
+  d'aperçu</a>&quot; aux formats suivants :</p>
+<ul>
+  <li>Fichier <em>Therion</em> &quot;.th2</li>
+  <li> DXF 2D (<em>LibreCAD</em>)</li>
+  <li> SVG</li>
+  <li> shapefile (<em>QGIS</em>)</li>
+  <li> PDF</li>
+  <li> fichier &quot;.xvi&quot; (<em>xtherion</em>)</li>
+</ul>
+<p><br>
+  L'exportation de la fenêtre d'aperçu inclut tous les croquis de la vue courante 
+  (plan ou coupe).<br>
+  S'il y a des points de &quot;section&quot;, les sections transverses sont également 
+  incluses. </p>
+</body>
+</html>

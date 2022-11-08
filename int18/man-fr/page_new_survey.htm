@@ -1,0 +1,71 @@
+<html>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+<body>
+
+<h4>NOUVEAU RELEVÉ TOPOGRAPHIQUE</h4>
+
+Cette boîte de dialogue s'ouvre en appuyant sur le bouton <em>Ajouter</em> de 
+la <u>fenêtre principale. </u><br>
+<p> Les informations sur le nouveau relevé&#160;sont : 
+<ul>
+  <li><em>Nom</em><b> </b></li>
+  <li><em>Date </em></li>
+  <li><em>Équipe</em></li>
+  <li><em>Station initiale </em></li>
+  <li><em>Déclinaison magnétique </em></li>
+  <li><em>Description </em>du relevé topo</li>
+  <li><em>Sections transverses</em> partagées ou privées</li>
+  <li><em>Mode données de plongée</em> [T] </li>
+</ul>
+<p> Le nom du relevé est obligatoire. Il doit être unique dans la base de données. 
+  Les noms des relevés topographiques sont utilisés pour répertorier les relevés 
+  topographiques dans la fenêtre principale et TopoDroid distingue les relevés 
+  topographiques par leur nom (bien que chaque relevé ait une identification numérique 
+  unique dans la base de données).<br>
+  Le nom du relevé topographique ne peut pas contenir le caractère '/' (barre 
+  oblique), qui est le séparateur de chemin d'accès.
+<p><strong>ATTENTION</strong>. Le nom du relevé ne peut pas contenir d'espaces, 
+  ni les caractères '/' (barre oblique, qui est le séparateur de nom de chemin), 
+  ':' (deux points), '*' (étoile) et '\' (barre oblique inversée). Les barres 
+  obliques inversées sont supprimées. Les espaces sont remplacés par '_' (trait 
+  de soulignement), les barres obliques et les deux-points par des tirets '-', 
+  et les étoiles par '+' (plus).</p>
+<p><br>
+  La <em>date</em> est écrite au format &quot;aaaa.mm.jj&quot;. Par exemple le 
+  6 janvier 2015 devient &quot;2015.01.06&quot;. Il est prédéfini à la date actuelle.</p>
+<p> <em>L'équipe</em> est obligatoire et ne peut être laissée vide.</p>
+<p><em>La description</em> est vide. Elle peut être laissée vide en toute sécurité, 
+  bien qu'il soit préférable de prendre l'habitude de la remplir.</p>
+<p> La <em>déclinaison magnétique</em> est de 0,0 par défaut. Si vous le connaissez, 
+  vous pouvez la saisir ici, sinon vous pouvez le rechercher sur le Web après 
+  avoir trouvé les coordonnées d'un point fixe (par exemple l'entrée de la grotte) 
+  avec le GPS [A].</p>
+<p> Les <em>sections transverses</em> de la station &quot;Vers&quot; peuvent être 
+  soit partagées entre les deux esquisses topographiques (PLAN et COUPE), soit 
+  spécifiques à chacune des esquisses (privées). Ce choix doit être fait lors 
+  de la création du relevé topographique et ne peut être modifié ultérieurement 
+  car il affecte les croquis existants.</p>
+<p><strong>Boutons</strong> :<br>
+  <br>
+  <em>Enregistrer</em>: le nom du nouveau relevé topographique est ajouté à la 
+  base de données.<br>
+  <em>Ouvrir</em><b> </b>: enregistre et ouvre immédiatement la fenêtre de données 
+  du relevé topographique.</p>
+<p><strong>Mode de données de plongée</strong><br>
+  Le mode de données de plongée est une fonction expérimentale. Les données ne 
+  peuvent être saisies que manuellement, et dans le format suivant : </p>
+<p>DE la station<br>
+  station d'arrivée<br>
+  profondeur à la station DEPUIS<br>
+  azimut de la direction DEPUIS-VERS<br>
+  distance entre la station DEPUIS et la station VERS<br>
+  LRUD (GDHB) à la station DEPUIS (facultatif)</p>
+<p> Les données backshot (vers l'arrière) ne sont pas prises en charge en mode 
+  de données &quot;plongée&quot;. <br>
+</p>
+<p><br>
+<p>
+
+</body></html>
