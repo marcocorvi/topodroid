@@ -35,7 +35,7 @@ res/values/strings.xml:167: Error: "calib_min_error" is not translated in "cn", 
 res/values/strings.xml:168: Error: "magn_dip" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="magn_dip">Magn. dip &#8230;</string>
             ~~~~~~~~~~~~~~~
-res/values/strings.xml:284: Error: "loops_bad" is not translated in "ru" (Russian), "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:284: Error: "loops_bad" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
     <string name="loops_bad">Inaccurate loops: %1$d</string>
             ~~~~~~~~~~~~~~~~
 res/values/strings.xml:313: Error: "error_text_required" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
@@ -50,7 +50,7 @@ res/values/strings.xml:401: Error: "no_search_result" is not translated in "cn",
 res/values/strings.xml:550: Error: "swap_hotbit_ok" is not translated in "fr" (French) [MissingTranslation]
     <string name="swap_hotbit_ok">Swapped data hot bit</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:698: Error: "stat_leg_sigma" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:698: Error: "stat_leg_sigma" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="stat_leg_sigma">Leg sigma %1$.1f cm</string>
             ~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:726: Error: "projected_profile" is not translated in "es" (Spanish) [MissingTranslation]
@@ -137,6 +137,9 @@ res/values/strings.xml:1868: Error: "firmware_uploaded" is not translated in "cn
 res/values/strings.xml:1869: Error: "firmware_downloaded" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
    <string name="firmware_downloaded">%1$s firmware: downloaded %2$d</string>
            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1886: Error: "equate_no_stations" is not translated in "fr" (French) [MissingTranslation]
+    <string name="equate_no_stations">Too few stations</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:1892: Error: "menu_open" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="menu_open">OPEN</string>
             ~~~~~~~~~~~~~~~~
@@ -317,72 +320,9 @@ res/values/strings.xml:2161: Error: "cpref_splay_use_title" is not translated in
 res/values/strings.xml:2162: Error: "cpref_splay_use_summary" is not translated in "fr" (French) [MissingTranslation]
     <string name="cpref_splay_use_summary">Splay use: none, normal, xsections [normal]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:541: Error: "reading_file_failed" is translated here but not found in default locale [ExtraTranslation]
-    <string name="reading_file_failed">Echec lors de la lecture du fichier</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1817: Error: "ask_dump" is translated here but not found in default locale [ExtraTranslation]
-   <string name="ask_dump">Sauvegarder le firmware ?</string>
-           ~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1822: Error: "firmware_file_dumped" is translated here but not found in default locale [ExtraTranslation]
-   <string name="firmware_file_dumped">Firmware sauvegardé dans : %1$s taille %2$d</string>
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1824: Error: "firmware_file_dump_fail" is translated here but not found in default locale [ExtraTranslation]
-   <string name="firmware_file_dump_fail">Échec de l\'installation du firmware</string>
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1836: Error: "file_exists" is translated here but not found in default locale [ExtraTranslation]
-    <string name="file_exists">Le fichier existe déjà</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1837: Error: "file_create_fail" is translated here but not found in default locale [ExtraTranslation]
-    <string name="file_create_fail">Échec de la création du fichier</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
 res/values-fr/strings.xml:1841: Error: "equate_no_station" is translated here but not found in default locale [ExtraTranslation]
     <string name="equate_no_station">Aucune station sélectionnée</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1911: Error: "clear" is translated here but not found in default locale [ExtraTranslation]
-    <string name="clear">Effacer</string>
-            ~~~~~~~~~~~~
-res/values-fr/strings.xml:1917: Error: "measure" is translated here but not found in default locale [ExtraTranslation]
-    <string name="measure">mesure</string>
-            ~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1983: Error: "powercrust_few_splays" is translated here but not found in default locale [ExtraTranslation]
-    <string name="powercrust_few_splays">Enveloppe Powercrust : très peu de visées latérales</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1984: Error: "powercrust_failed" is translated here but not found in default locale [ExtraTranslation]
-    <string name="powercrust_failed">Enveloppe Powercrust en échec</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1985: Error: "powercrust_successful" is translated here but not found in default locale [ExtraTranslation]
-    <string name="powercrust_successful">Enveloppe Powercrust appliquée avec succès : %1$d / %2$d</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1995: Error: "error_io_exception" is translated here but not found in default locale [ExtraTranslation]
-    <string name="error_io_exception">Erreur : IO exception</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:2034: Error: "cpref_station_size_title" is translated here but not found in default locale [ExtraTranslation]
-    <string name="cpref_station_size_title">Taille points de station</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:2035: Error: "cpref_station_size_summary" is translated here but not found in default locale [ExtraTranslation]
-    <string name="cpref_station_size_summary">Taille des points de station [8 pxl]</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:2042: Error: "cpref_grid_extend_summary" is translated here but not found in default locale [ExtraTranslation]
-    <string name="cpref_grid_extend_summary">Extension de la grille autour de la topographie</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:2091: Error: "help_temperature" is translated here but not found in default locale [ExtraTranslation]
-    <string name="help_temperature">Tempérture</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:2093: Error: "help_fractal" is translated here but not found in default locale [ExtraTranslation]
-    <string name="help_fractal">Analyse fractale</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:38: Warning: The resource string "distox_label" is marked as translatable="false", but is translated to "fr" (French) here [Untranslatable]
- <string name="distox_label" translatable="false">DistoX</string>
-                             ~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:39: Warning: The resource string "cave3d_label" is marked as translatable="false", but is translated to "fr" (French) here [Untranslatable]
-    <string name="cave3d_label" translatable="false">Cave3D</string>
-                                ~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1880: Warning: The resource string "fractal_title" has been marked as translatable="false" elsewhere (usually in the values folder), but is translated to "fr" (French) here [Untranslatable]
-    <string name="fractal_title">Nombre de fractales</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:2008: Warning: The resource string "done_fractals" has been marked as translatable="false" elsewhere (usually in the values folder), but is translated to "fr" (French) here [Untranslatable]
-    <string name="done_fractals">Dimension fractale calculée</string>
-            ~~~~~~~~~~~~~~~~~~~~
 res/values-fr/plurals.xml:5: Error: The quantity 'one' matches more than one specific number in this locale (0, 1), but the message did not include a formatting argument (such as %d). This is usually an internationalization error. See full issue explanation for more. [ImpliedQuantity]
     <item quantity="one">ATTENTION. Une donnée saturée</item>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -426,62 +366,14 @@ res/mipmap-anydpi-v26/ic_launcher_round.xml:2: Warning: The resource R.mipmap.ic
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
 ^
 res/raw/name_pos_hl_geometry.glsl: Warning: The resource R.raw.name_pos_hl_geometry appears to be unused [UnusedResources]
-res/values-fr/strings.xml:541: Warning: The resource R.string.reading_file_failed appears to be unused [UnusedResources]
-    <string name="reading_file_failed">Echec lors de la lecture du fichier</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1817: Warning: The resource R.string.ask_dump appears to be unused [UnusedResources]
-   <string name="ask_dump">Sauvegarder le firmware ?</string>
-           ~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1822: Warning: The resource R.string.firmware_file_dumped appears to be unused [UnusedResources]
-   <string name="firmware_file_dumped">Firmware sauvegardé dans : %1$s taille %2$d</string>
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1824: Warning: The resource R.string.firmware_file_dump_fail appears to be unused [UnusedResources]
-   <string name="firmware_file_dump_fail">Échec de l\'installation du firmware</string>
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1836: Warning: The resource R.string.file_exists appears to be unused [UnusedResources]
-    <string name="file_exists">Le fichier existe déjà</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1837: Warning: The resource R.string.file_create_fail appears to be unused [UnusedResources]
-    <string name="file_create_fail">Échec de la création du fichier</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
 res/values-fr/strings.xml:1841: Warning: The resource R.string.equate_no_station appears to be unused [UnusedResources]
     <string name="equate_no_station">Aucune station sélectionnée</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1911: Warning: The resource R.string.clear appears to be unused [UnusedResources]
-    <string name="clear">Effacer</string>
-            ~~~~~~~~~~~~
-res/values-fr/strings.xml:1917: Warning: The resource R.string.measure appears to be unused [UnusedResources]
-    <string name="measure">mesure</string>
-            ~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1983: Warning: The resource R.string.powercrust_few_splays appears to be unused [UnusedResources]
-    <string name="powercrust_few_splays">Enveloppe Powercrust : très peu de visées latérales</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1984: Warning: The resource R.string.powercrust_failed appears to be unused [UnusedResources]
-    <string name="powercrust_failed">Enveloppe Powercrust en échec</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1985: Warning: The resource R.string.powercrust_successful appears to be unused [UnusedResources]
-    <string name="powercrust_successful">Enveloppe Powercrust appliquée avec succès : %1$d / %2$d</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1995: Warning: The resource R.string.error_io_exception appears to be unused [UnusedResources]
-    <string name="error_io_exception">Erreur : IO exception</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:2034: Warning: The resource R.string.cpref_station_size_title appears to be unused [UnusedResources]
-    <string name="cpref_station_size_title">Taille points de station</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:2035: Warning: The resource R.string.cpref_station_size_summary appears to be unused [UnusedResources]
-    <string name="cpref_station_size_summary">Taille des points de station [8 pxl]</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:2042: Warning: The resource R.string.cpref_grid_extend_summary appears to be unused [UnusedResources]
-    <string name="cpref_grid_extend_summary">Extension de la grille autour de la topographie</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:2091: Warning: The resource R.string.help_temperature appears to be unused [UnusedResources]
-    <string name="help_temperature">Tempérture</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:2093: Warning: The resource R.string.help_fractal appears to be unused [UnusedResources]
-    <string name="help_fractal">Analyse fractale</string>
-            ~~~~~~~~~~~~~~~~~~~
+res/layout/export_dialog_plot.xml:420: Warning: This LinearLayout layout or its LinearLayout parent is possibly unnecessary [UselessParent]
+    <LinearLayout android:id="@+id/layout_pdf_scale"
+     ~~~~~~~~~~~~
 res/layout/progress_dialog.xml:49: Warning: This LinearLayout layout or its LinearLayout parent is unnecessary [UselessParent]
     <LinearLayout
      ~~~~~~~~~~~~
 res/mipmap-xhdpi/ic_launcher.png: Warning: The following unrelated icon files have identical contents: iz_topodroid.png, ic_launcher.png [IconDuplicates]
-121 errors, 40 warnings
+105 errors, 20 warnings

@@ -853,9 +853,10 @@ public class OverviewWindow extends ItemDrawer
       // builder.setResolution( new PrintAttributes.Resolution( "300", "300 dpi", 300, 300 ) );
       // PrintedPdfDocument pdf = new PrintedPdfDocument( TDInstance.context, builder.build() );
 
-      RectF bnds = manager.getBitmapBounds();
-      int zw = 40 + (int)(bnds.right - bnds.left); // margin 20+20
-      int zh = 40 + (int)(bnds.bottom - bnds.top);
+      float scale = TDSetting.mToPdf;
+      RectF bnds = manager.getBitmapBounds( scale );
+      int zw = 120 + (int)(bnds.right - bnds.left); // margin 40 + 80
+      int zh = 120 + (int)(bnds.bottom - bnds.top);
       // TDLog.v( "rect " + bnds.right + " " + bnds.left + " == " + bnds.bottom + " " + bnds.top );
       PageInfo.Builder builder = new PageInfo.Builder( zw, zh, 1 );
       PageInfo info = builder.create();

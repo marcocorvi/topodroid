@@ -2489,6 +2489,12 @@ public class TDExporter
     return lrud;
   }
 
+  /** compute the LRUD for a leg
+   * @param b       leg
+   * @param list    splay data
+   * @param at_from whether to compute LRUD at the FROM station
+   * @return computed LRUD
+   */
   static private LRUD computeLRUD( DBlock b, List< DBlock > list, boolean at_from )
   {
     LRUD lrud = new LRUD();
@@ -2499,48 +2505,96 @@ public class TDExporter
     float cb0 = n0;
     float sb0 = e0;
     String station = ( at_from ) ? b.mFrom : b.mTo;
+
+    int cnt = TDSetting.mLRUDcount; // counter for the splay used to compute LRUD
     
-    for ( DBlock item : list ) {
-      String from = item.mFrom;
-      String to   = item.mTo;
-      if ( TDString.isNullOrEmpty( from ) ) { // skip blank
-        // if ( TDString.isNullOrEmpty( to ) ) continue;
-        continue;
-      } else { // skip leg
-        if ( to != null && to.length() > 0 ) continue;
-      }
-      if ( station.equals( from ) ) {
-        float cb = TDMath.cosd( item.mBearing );
-        float sb = TDMath.sind( item.mBearing );
-        float cc = TDMath.cosd( item.mClino );
-        float sc = TDMath.sind( item.mClino );
-        float len = item.mLength;
-
-        // skip splays too close to shot direction // FIXME setting
-        // this test aims to use only splays that are "orthogonal" to the shot
-	// 
-	// FIXME considering only the angle splay-leg may be not enough
-	//       should split the case for LR and UD
-	//       [1] LR must be almost horizontal: |clino| < threshold
-	//       [2] UD must be vertical: |clino| > threshold
-        if ( TDSetting.mOrthogonalLRUD ) {
-          float cbb1 = sc*sc0*(sb*sb0 + cb*cb0) + cc*cc0; // cosine of angle between block and item
-          if ( Math.abs( cbb1 ) > TDSetting.mOrthogonalLRUDCosine ) continue; 
+    if ( cnt > 0 ) {
+      for ( DBlock item : list ) {
+        String from = item.mFrom;
+        String to   = item.mTo;
+        if ( TDString.isNullOrEmpty( from ) ) { // skip blank
+          // if ( TDString.isNullOrEmpty( to ) ) continue;
+          continue;
+        } else { // skip leg
+          if ( to != null && to.length() > 0 ) continue;
         }
+        if ( station.equals( from ) ) {
+          float cb = TDMath.cosd( item.mBearing );
+          float sb = TDMath.sind( item.mBearing );
+          float cc = TDMath.cosd( item.mClino );
+          float sc = TDMath.sind( item.mClino );
+          float len = item.mLength;
 
-        float z1 = len * sc;
-        float n1 = len * cc * cb;
-        float e1 = len * cc * sb;
-	if ( Math.abs( item.mClino ) >= TDSetting.mLRUDvertical ) {
-          if ( z1 > 0.0 ) { if ( z1 > lrud.u ) lrud.u = z1; }
-          else            { if ( -z1 > lrud.d ) lrud.d = -z1; }
-        } 
-	if ( Math.abs( item.mClino ) <= TDSetting.mLRUDhorizontal ) {
-          float rl = e1 * n0 - n1 * e0;
-          if ( rl > 0.0 ) { if ( rl > lrud.r ) lrud.r = rl; }
-          else            { if ( -rl > lrud.l ) lrud.l = -rl; }
-	}
+          // skip splays too close to shot direction // FIXME setting
+          // this test aims to use only splays that are "orthogonal" to the shot
+          // 
+          // FIXME considering only the angle splay-leg may be not enough
+          //       should split the case for LR and UD
+          //       [1] LR must be almost horizontal: |clino| < threshold
+          //       [2] UD must be vertical: |clino| > threshold
+          if ( TDSetting.mOrthogonalLRUD ) {
+            float cbb1 = sc*sc0*(sb*sb0 + cb*cb0) + cc*cc0; // cosine of angle between block and item
+            if ( Math.abs( cbb1 ) > TDSetting.mOrthogonalLRUDCosine ) continue; 
+          }
+
+          float z1 = len * sc;
+          float n1 = len * cc * cb;
+          float e1 = len * cc * sb;
+          if ( Math.abs( item.mClino ) >= TDSetting.mLRUDvertical ) {
+            if ( z1 > 0.0 ) { if ( z1 > lrud.u )  { if ( lrud.u < 0.0001f ) { lrud.u =  z1; --cnt; } } }
+            else            { if ( -z1 > lrud.d ) { if ( lrud.d < 0.0001f ) { lrud.d = -z1; --cnt; } } }
+          } else if ( Math.abs( item.mClino ) <= TDSetting.mLRUDhorizontal ) {
+            float rl = e1 * n0 - n1 * e0;
+            if ( rl > 0.0 ) { if ( rl > lrud.r )  { if ( lrud.r < 0.0001f ) { lrud.r =  rl; --cnt; } } }
+            else            { if ( -rl > lrud.l ) { if ( lrud.l < 0.0001f ) { lrud.l = -rl; --cnt; } } }
+          }
+          if ( cnt == 0 ) break;
+        }
       }
+    } else { 
+      for ( DBlock item : list ) {
+        String from = item.mFrom;
+        String to   = item.mTo;
+        if ( TDString.isNullOrEmpty( from ) ) { // skip blank
+          // if ( TDString.isNullOrEmpty( to ) ) continue;
+          continue;
+        } else { // skip leg
+          if ( to != null && to.length() > 0 ) continue;
+        }
+        if ( station.equals( from ) ) {
+          float cb = TDMath.cosd( item.mBearing );
+          float sb = TDMath.sind( item.mBearing );
+          float cc = TDMath.cosd( item.mClino );
+          float sc = TDMath.sind( item.mClino );
+          float len = item.mLength;
+
+          // skip splays too close to shot direction // FIXME setting
+          // this test aims to use only splays that are "orthogonal" to the shot
+          // 
+          // FIXME considering only the angle splay-leg may be not enough
+          //       should split the case for LR and UD
+          //       [1] LR must be almost horizontal: |clino| < threshold
+          //       [2] UD must be vertical: |clino| > threshold
+          if ( TDSetting.mOrthogonalLRUD ) {
+            float cbb1 = sc*sc0*(sb*sb0 + cb*cb0) + cc*cc0; // cosine of angle between block and item
+            if ( Math.abs( cbb1 ) > TDSetting.mOrthogonalLRUDCosine ) continue; 
+          }
+
+          float z1 = len * sc;
+          float n1 = len * cc * cb;
+          float e1 = len * cc * sb;
+          if ( Math.abs( item.mClino ) >= TDSetting.mLRUDvertical ) {
+            if ( z1 > 0.0 ) { if ( z1 > lrud.u )  { lrud.u =  z1; } }
+            else            { if ( -z1 > lrud.d ) { lrud.d = -z1; } }
+          } 
+          if ( Math.abs( item.mClino ) <= TDSetting.mLRUDhorizontal ) {
+            float rl = e1 * n0 - n1 * e0;
+            if ( rl > 0.0 ) { if ( rl > lrud.r )  { lrud.r =  rl; } }
+            else            { if ( -rl > lrud.l ) { lrud.l = -rl; } }
+          }
+        }
+      }
+
     }
     // TDLog.v( "<" + b.mFrom + "-" + b.mTo + "> at " + station + ": " + lrud.l + " " + lrud.r );
     return lrud;

@@ -1178,7 +1178,7 @@ public class DrawingCommandManager
   void deleteSectionPoint( String scrap_name, EraseCommand cmd ) { mCurrentScrap.deleteSectionPoint( scrap_name, cmd ); }
 
   // called by DrawingSurface.getBitmap()
-  public RectF getBitmapBounds()
+  public RectF getBitmapBounds( float scale )
   {
     // TDLog.v( "get bitmap bounds. splays " + mSplaysStack.size() 
     //               + " legs " + mLegsStack.size() 
@@ -1204,7 +1204,11 @@ public class DrawingCommandManager
     synchronized( mSyncScrap ) {
       for ( Scrap scrap : mScraps ) scrap.getBitmapBounds( bounds );
     }
-    // TDLog.v( "bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
+    bounds.left   *= scale;
+    bounds.top    *= scale;
+    bounds.right  *= scale;
+    bounds.bottom *= scale;
+    TDLog.v( "scale " + scale + " bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
     return bounds;
   }
 
@@ -1327,7 +1331,7 @@ public class DrawingCommandManager
   // @return true if the line has been modified
   // @param line  line to modify
   // @param line2 modification
-  // @param zoom  current zoom
+  // @param zoom  current zoom (the larger the zoom, the bigger the sketch on the display)
   // @param size  selection size
   boolean modifyLine( DrawingLinePath line, DrawingLinePath line2, float zoom, float size ) { return mCurrentScrap.modifyLine( line, line2, zoom, size ); }
 
@@ -1338,7 +1342,7 @@ public class DrawingCommandManager
   /** draw the sketch on the canvas (display)
    * N.B. doneHandler is not used
    * @param canvas where to draw
-   * @param zoom   used for scalebar and selection points (use < negative zoom for pdf print)
+   * @param zoom   used for scalebar and selection points (use negative zoom for pdf print)
    * @param station_splay ??? whether to draw splays as dots
    * @param inverted_colors   whether colors must be inverted
    */
@@ -1353,16 +1357,6 @@ public class DrawingCommandManager
     float  scale = mScale;
     RectF  bbox  = mBBox;
     boolean sidebars = true;
-    if ( zoom < 0 ) {
-      mm = new Matrix();
-      scale = 1.0f; // getBitmapScale();
-      bbox  = getBitmapBounds();
-      // float sca = 1 / scale
-      mm.postTranslate( 20 - bbox.left, 20 - bbox.top );
-      // mm.postScale( scale, scale );
-      zoom = -zoom;
-      sidebars = false; // do not draw sidebars
-    }
 
     boolean legs     = (mDisplayMode & DisplayMode.DISPLAY_LEG     ) != 0;
     boolean splays   = (mDisplayMode & DisplayMode.DISPLAY_SPLAY   ) != 0;
@@ -1399,6 +1393,20 @@ public class DrawingCommandManager
       case Drawing.FILTER_STATION:
         sstations = true;
         break;
+    }
+
+    if ( zoom < 0 ) { // PDF print
+      mm = new Matrix();
+      // scale = 1.0f; // getBitmapScale();
+      scale = TDSetting.mToPdf;
+      bbox  = getBitmapBounds( scale );
+      // float sca = 1 / scale
+      mm.postTranslate( 40 - bbox.left/scale, 40 - bbox.top/scale );
+      mm.postScale( scale, scale );
+      zoom = -zoom * scale;
+      sidebars = false; // do not draw sidebars
+      grids    = false;
+      TDLog.v("scale " + scale + " bbox " + bbox.left + " " + bbox.top + " " + bbox.right + " " + bbox.bottom + " zoom " + zoom );
     }
 
     if ( sidebars && TDSetting.mSideDrag ) {

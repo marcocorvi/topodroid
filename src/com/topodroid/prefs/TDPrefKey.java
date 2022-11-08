@@ -1785,6 +1785,7 @@ public class TDPrefKey
     "DISTOX_IMPORT_DATAMODE",
     "DISTOX_AUTO_XSECTIONS",  // automatically add xsections on export/save
     "DISTOX_AUTO_STATIONS",    // whether to add stations to therion th2 exports
+    "DISTOX_LRUD_COUNT" ,     // LRUD downcounter
     // "DISTOX_AUTO_PLOT_EXPORT", // whether to export plots to private folder automatically
     // "DISTOX_TRANSFER_CSURVEY"
   };
@@ -1794,6 +1795,7 @@ public class TDPrefKey
     R.string.pref_import_datamode_title,
     R.string.pref_auto_xsections_title,
     R.string.pref_autoStations_title,
+    R.string.pref_lrud_count_title,
     // R.string.pref_auto_plot_export_title,
     // R.string.pref_tcsx,
     -1
@@ -1804,6 +1806,7 @@ public class TDPrefKey
     R.string.pref_import_datamode_summary,
     R.string.pref_auto_xsections_summary,
     R.string.pref_autoStations_summary,
+    R.string.pref_lrud_count_summary,
     // R.string.pref_auto_plot_export_summary,
     // R.string.pref_tcsx,
     -1
@@ -1814,6 +1817,7 @@ public class TDPrefKey
     TDString.ZERO, // SurveyInfo.DATAMODE_NORMAL
     TRUE,
     TRUE,
+    "-1",
     // "-1",
     // TRUE,
     null

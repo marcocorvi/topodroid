@@ -358,6 +358,7 @@ public class ExportDialogPlot extends MyDialog
 
     // ((CheckBox) findViewById( R.id.pdf_bgcolor )).setChecked( TDSetting.mBitmapBgcolor == 0xffffffff );
     // ((CheckBox) findViewById( R.id.pdf_splays )).setChecked( TDSetting.mTherionSplays );
+    ((EditText) findViewById( R.id.pdf_scale )).setText( Integer.toString( TDSetting.mTherionScale ) );
   }
 }
 

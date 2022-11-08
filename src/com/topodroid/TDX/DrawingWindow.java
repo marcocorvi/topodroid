@@ -5361,7 +5361,7 @@ public class DrawingWindow extends ItemDrawer
     }
     if ( plot != null ) {
       pushInfo( plot.type, plot.name, plot.start, "", plot.azimuth, plot.clino, -1, null );
-      // zoomFit( mDrawingSurface.getBitmapBounds() );
+      // zoomFit( mDrawingSurface.getBitmapBounds( 1.0f ) );
     }
   }
 
@@ -6848,7 +6848,7 @@ public class DrawingWindow extends ItemDrawer
       }
       pushInfo( type, mSectionName, from, to, azimuth, clino, tt, center );
     } 
-    // zoomFit( mDrawingSurface.getBitmapBounds() );
+    // zoomFit( mDrawingSurface.getBitmapBounds( 1.0f ) );
   }
 
   /** open the xsection scrap in the window
@@ -6868,7 +6868,7 @@ public class DrawingWindow extends ItemDrawer
     if ( pi != null ) {
       Vector3D center = (pi.intercept <= 1 ) ? null : pi.center;
       pushInfo( pi.type, pi.name, pi.start, pi.view, pi.azimuth, pi.clino, pi.intercept, center );
-      // zoomFit( mDrawingSurface.getBitmapBounds() );
+      // zoomFit( mDrawingSurface.getBitmapBounds( 1.0f ) );
     }
   }
 
@@ -7042,17 +7042,18 @@ public class DrawingWindow extends ItemDrawer
       // builder.setResolution( new PrintAttributes.Resolution( "300", "300 dpi", 300, 300 ) );
       // PrintedPdfDocument pdf = new PrintedPdfDocument( TDInstance.context, builder.build() );
 
-      RectF bnds = manager.getBitmapBounds();
-      int zw = 40 + (int)(bnds.right - bnds.left); // margin 20 + 20
-      int zh = 40 + (int)(bnds.bottom - bnds.top);
-      // TDLog.v( "rect " + bnds.right + " " + bnds.left + " == " + bnds.bottom + " " + bnds.top );
+      float scale = TDSetting.mToPdf;
+      RectF bnds = manager.getBitmapBounds( scale );
+      int zw = 120 + (int)(bnds.right - bnds.left); // margin 40 + 80
+      int zh = 120 + (int)(bnds.bottom - bnds.top);
+      TDLog.v( "rect " + bnds.right + " " + bnds.left + " == " + bnds.bottom + " " + bnds.top + " W " + zw + " H " + zh );
       PageInfo.Builder builder = new PageInfo.Builder( zw, zh, 1 );
       PageInfo info = builder.create();
 
       PdfDocument pdf = new PdfDocument( );
       Page page = pdf.startPage( info );
       // must select the zoom to the plot size - however the zoom arg is not for this purpose
-      // RectF bnds = manager.getBitmapBounds();
+      // RectF bnds = manager.getBitmapBounds( scale );
       // float zw = (bnds.right - bnds.left) / ( 300.0f * 11.69f );
       // float zh = (bnds.bottom - bnds.top) / ( 300.0f * 16.54f );
       // float zoom = 1.00f / ( (zw > zh)? zw : zh );
@@ -7564,7 +7565,7 @@ public class DrawingWindow extends ItemDrawer
     if ( mDrawingSurface.isFixedZoom() ) return;
     // FIXME FIXED_ZOOM for big sketches this leaves out some bits at the ends
     // maybe should increase the bitmap bounds by a small factor ...
-    RectF b = mDrawingSurface.getBitmapBounds();
+    RectF b = mDrawingSurface.getBitmapBounds( 1.0f );
     zoomFit( b );
   }
 

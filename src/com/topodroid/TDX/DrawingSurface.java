@@ -456,7 +456,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   /** erase at a position, in the current manager
    * @param x    X scene coords
    * @param y    Y scene coords
-   * @param zoom current zoom
+   * @param zoom current zoom (the larger the zoom, the bigger the sketch on the display)
    * @param cmd  erase command
    * @param erase_mode  erasing mode
    * @param erase_size  eraser size
@@ -876,20 +876,25 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
     commandManager.removeUserStation( path );
   }
 
-  RectF getBitmapBounds( )
+  RectF getBitmapBounds( float scale )
   { 
     if ( commandManager == null ) return null;
-    return commandManager.getBitmapBounds();
+    return commandManager.getBitmapBounds( scale );
   }
 
-  // @param lp   point
-  // @param type line type
-  // @param zoom canvas zoom
+  /** get the line to continue
+   * @param lp   point
+   * @param type line type
+   * @param zoom canvas zoom (the larger the zoom, the bigger the sketch on the display)
+   * @param size ???
+   * @return the line to continue or null
+   */
   DrawingLinePath getLineToContinue( LinePoint lp, int type, float zoom, float size ) 
   {
     return commandManager.getLineToContinue( lp, type, zoom, size );
   }
 
+  // @param zoom canvas zoom (the larger the zoom, the bigger the sketch on the display)
   boolean modifyLine( DrawingLinePath line, DrawingLinePath lp2, float zoom, float size )
   {
     return commandManager.modifyLine( line, lp2, zoom, size );
