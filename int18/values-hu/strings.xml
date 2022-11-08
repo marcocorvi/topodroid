@@ -1144,7 +1144,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="title_coord">Ird be a pont koordinátáit:</string -->
     <string name="title_current_station">Elmentett mérési pontok</string>
     <string name="title_search">Pont/Mérés keresés</string>
-    <!-- UNUSED string name="title_gm_search">Kalibrációs adat keresés</string -->
+    <string name="title_gm_search">Kalibrációs adat keresés</string>
     <string name="title_dangling">Csatolatlan mérés</string>
     <string name="title_device">DistoX-ek</string>
     <string name="title_device_select">Válaszd ki a DistoX-et</string>
