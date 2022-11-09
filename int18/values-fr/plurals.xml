@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <plurals name="calib_saturated_values">
-    <!-- UNUSED item quantity="zero">Aucune donnée saturée</item -->
     <item quantity="one">ATTENTION. Une donnée saturée</item>
     <item quantity="other">ATTENTION. %1$d données saturées</item>
   </plurals>
-
   <plurals name="read_data">
     <item quantity="zero">Aucune donnée lue</item>
-	<item quantity="one">Une donnée lue</item>
     <item quantity="other">Lecture de %1$d données</item>
   </plurals>
-
   <plurals name="read_calib_data">
     <item quantity="zero">Aucune donnée d\'étalonnage</item>
-    <item quantity="one">Lecture d\'une donnée (%2$d paquets)</item>
 	<item quantity="other">Lecture de %1$d données (%2$d paquets)</item>
   </plurals>
+  <plurals name="found_calib_groups">
+    <item quantity="zero">Aucun groupe trouvé</item>
+    <item quantity="one">%1$d groupe trouvé</item>
+    <item quantity="other">%1$d groupes trouvés</item>
+  </plurals>
+  
 </resources>
