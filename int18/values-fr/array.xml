@@ -11,9 +11,9 @@
   </string-array>
   <!-- <string-array name="bricModeValue">
      <item name="prim_only">1</item>
-     <!-- item name="sequence">2</item - ->
+     <! - - item name="sequence">2</item - ->
      <item name="all">3</item>
-     <!-- item name="all_zero">4</item - ->
+     <! - - item name="all_zero">4</item - ->
      <item name="no_index">5</item>
   </string-array> -->
   
@@ -92,7 +92,7 @@
      <item name="both">Réunir les deux points</item>
      <item name="continue">Continuer</item>
   </string-array>
-  <!-- <string-array name="lineContinueValue" translatable="false"> <!-- must agree with DrawingWindow.CONT_XXX -- >
+  <!-- <string-array name="lineContinueValue" translatable="false"> <! - - must agree with DrawingWindow.CONT_XXX - - >
      <item name="none">0</item>
      <item name="start">1</item>
      <item name="end">2</item>
