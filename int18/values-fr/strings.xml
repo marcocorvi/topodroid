@@ -62,7 +62,7 @@
 Si vous rencontrez des problèmes avec la connexion du DistoX, essayez de choisir le mode non sécurisé.\n\n
 D\'autres paramètres concernent la présentation dans la fenêtre de croquis (taille des icônes, taille des étiquettes, largeur des lignes, etc.); vous devriez les adapter à vos besoins./n/n
     </string>
-	<string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string>
+    <!-- OK string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string -->
 
     <string name="POINT">POINT</string>
     <string name="LINE">LIGNE</string>
@@ -1278,19 +1278,19 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
   <string name="pref_cat_drawing">OPTIONS DE DESSIN</string>
   <string name="pref_cat_import_export">IMPORT - EXPORT</string>
   <string name="pref_cat_exportimport">IMPORT</string>
-  <!-- OK <string name="pref_cat_exportsvx" translatable="false">Survex</string>
-  <string name="pref_cat_exportth"  translatable="false">Therion</string>
-  <string name="pref_cat_exportdat" translatable="false">Compass</string>
-  <string name="pref_cat_exporttro" translatable="false">VisualTopo</string>
-  <string name="pref_cat_exportsvg" translatable="false">SVG</string>
-  <string name="pref_cat_exportdxf" translatable="false">DXF</string>
-  <string name="pref_cat_exportshp" translatable="false">Shapefile</string> -->
-	<!-- UNUSED string name="pref_cat_exportpng" translatable="false">PNG</string NO_PNG -->
-	<!-- OK <string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string>
-	<string name="pref_cat_exportcsx" translatable="false">cSurvey</string>
-	<string name="pref_cat_exportcsv" translatable="false">CSV</string>
-	<string name="pref_cat_calib">OPTIONS D\'ÉTALONNAGE</string>
-	<!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
+  <!-- OK string name="pref_cat_exportsvx" translatable="false">Survex</string -->
+  <!-- OK string name="pref_cat_exportth"  translatable="false">Therion</string -->
+  <!-- OK string name="pref_cat_exportdat" translatable="false">Compass</string -->
+  <!-- OK string name="pref_cat_exporttro" translatable="false">VisualTopo</string -->
+  <!-- OK string name="pref_cat_exportsvg" translatable="false">SVG</string -->
+  <!-- OK string name="pref_cat_exportdxf" translatable="false">DXF</string -->
+  <!-- OK string name="pref_cat_exportshp" translatable="false">Shapefile</string -->
+  <!-- UNUSED string name="pref_cat_exportpng" translatable="false">PNG</string NO_PNG -->
+  <!-- OK <string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string -->
+  <!-- OK string name="pref_cat_exportcsx" translatable="false">cSurvey</string -->
+  <!-- OK string name="pref_cat_exportcsv" translatable="false">CSV</string -->
+  <!-- OK string name="pref_cat_calib">OPTIONS D\'ÉTALONNAGE</string -->
+  <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
 	
   <string name="pref_cat_device">OPTIONS PÉRIPHÉRIQUE</string>
   <string name="pref_cat_cave3d">3D VIEWER</string>
