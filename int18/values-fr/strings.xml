@@ -1289,7 +1289,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
   <!-- OK <string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string -->
   <!-- OK string name="pref_cat_exportcsx" translatable="false">cSurvey</string -->
   <!-- OK string name="pref_cat_exportcsv" translatable="false">CSV</string -->
-  <!-- OK string name="pref_cat_calib">OPTIONS D\'ÉTALONNAGE</string -->
+  <string name="pref_cat_calib">OPTIONS D\'ÉTALONNAGE</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
 	
   <string name="pref_cat_device">OPTIONS PÉRIPHÉRIQUE</string>
@@ -1884,7 +1884,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="ask_delete_tdconfig">Supprimer le fichier TdConfig</string>
     <string name="ask_remove_equate">Supprimer l\'égalité %1$s ?</string>
     <string name="equate_no_station">Aucune station sélectionnée</string>
-    <!-- UNUSED <string name="equate_no_stations">Trop peu de stations</string> -->
+    <string name="equate_no_stations">Trop peu de stations</string>
     <string name="equate_no_nearby">Pas de station à proximité</string>
 
     <!-- UNUSED string name="menu_new">NOUVEAU</string -->
@@ -2149,7 +2149,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 	<string name="cpref_grid_above_title">Situation de la grille quadrillée</string>
     <string name="cpref_grid_above_summary">Placer la grille dans la partie supérieure</string>
 	<string name="cpref_grid_extent_title">Étendue grille</string>
-    <string name="cpref_grid_extend_summary">Extension de la grille autour de la topographie</string>
+    <string name="cpref_grid_extent_summary">Extension de la grille autour de la topographie</string>
 	<string name="cpref_neg_clino_title">Vue sous horizon</string>
 	<string name="cpref_neg_clino_summary">Permettre point de vue sous l\'horizon</string>
 	<string name="cpref_dem_buffer_title">Tampon MNE</string>
