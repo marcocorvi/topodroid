@@ -197,14 +197,21 @@
      <item name="1">Temporaire</item>
      <item name="2">Permanent</item>
   </string-array>
+  <!-- <string-array name="zoomCtrlValue" translatable="false">
+     <item name="0">0</item>
+     <item name="1">1</item>
+     <item name="2">2</item>
+  </string-array> -->
   
-
   <string-array name="stationNames">
      <item name="alpha">Alphanumérique</item>
      <item name="number">Numérique</item>
   </string-array>
+  <!-- <string-array name="stationNamesValue" translatable="false">
+     <item name="alpha">alpha</item>
+     <item name="number">number</item>
+  </string-array> -->
  
-
   <!-- UNUSED string-array name="extend_name">
      <item>Left</item>
      <item>Vertical</item>
@@ -212,12 +219,78 @@
      <item>None</item>
   </string-array -->
 
+<!-- DISTOX_LOCALE -->
+  <!-- <string-array name="locale" translatable="false">
+     <item name="default">default</item>
+     <item name="english">English</item>
+     <! -- item name="french">Français</item -- >
+     <item name="spanish">Español</item>
+     <item name="italian">Italiano</item>
+     <item name="russian">Русский</item>
+     <! -- item name="german">Deutsch</item -- >
+     <! -- item name="polish">Polski</item -- >
+     <! -- item name="portuguese">Português</item -- >
+     <! -- item name="romanian">Română</item -- >
+     <! -- item name="slovak">Slovenčina</item -- >
+     <! -- item name="slovenian">Slovenščina</item -- >
+     <! -- item name="bulgarian">Български</item -- >
+     <item name="chinese">中文</item>
+     <! -- item name="ukrainian">Українська</item -- >
+     <item name="hungarian">Magyar</item>
+  </string-array>
+  <string-array name="localeValue" translatable="false">
+     <item name="default"></item>
+     <item name="english">en</item>
+     <! -- item name="french">fr</item -- >
+     <item name="spanish">es</item>
+     <item name="italian">it</item>
+     <item name="russian">ru</item>
+     <! -- item name="german">de</item -- >
+     <! -- item name="polish">pl</item -- >
+     <! -- item name="portuguese">pt</item -- >
+     <! -- item name="romanian">ro</item -- >
+     <! -- item name="slovak">sk</item -- >
+     <! -- item name="slovenian">sl</item -- >
+     <! -- item name="bulgarian">bg</item -- >
+     <item name="chinese">cn</item>
+     <! -- item name="ukrainian">ua</item -- >
+     <item name="hungarian">hu</item>
+  </string-array> -->
 
-  <!-- DO NOT TRANSLATE string-array name="legShots">
-  </string-array -->
+  <!-- DISTOX_LOCAL_HELP -->
+  <!-- <string-array name="localUserMan" translatable="false">
+     <item name="english">English</item>
+     <item name="spanish">Español</item>
+     <item name="italian">Italiano</item>
+     <item name="russian">Русский</item>
+     <item name="hungarian">Magyar</item>
+     <item name="french">Français</item>
+     <!-- item name="slovak">Slovenčina</item -- >
+  </string-array>
+  <string-array name="localUserManValue" translatable="false">
+     <item name="english">0</item>
+     <item name="spanish">1</item>
+     <item name="italian">2</item>
+     <item name="russian">3</item>
+     <item name="hungarian">4</item>
+     <item name="french">5</item>
+     <! -- item name="slovak">6</item -- >
+  </string-array> -->
+  
+  <string-array name="importDatamode">
+     <item name="normal">normal</item>
+     <item name="diving">plongée</item>
+  </string-array>
 
-  <!-- UNUSED string-array name="exportShots">
-     <item name="none">Aucun</item>
+  <!-- <string-array name="importDatamodeValue" translatable="false"> <! -- see SurveyInfo.DATAMODE_xxx -- >
+     <item name="normal">0</item>
+     <item name="diving">1</item>
+  </string-array> -->
+  
+  <!-- shot default export -->
+  <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
+  <!-- <string-array name="exportShots">
+     <item name="none">none</item>
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
      <item name="csurvey">cSurvey</item>
@@ -233,18 +306,132 @@
      <item name="winkarst">Winkarst</item>
      <item name="csv">CSV</item>
      <item name="dxf">DXF</item>
-  </string-array -->
-
-  <!-- UNUSED string-array name="exportPlot">
-     <item name="none">Aucun</item>
+     <! -- item name="kml">KML</item -- >
+     <! -- item name="track">Track file</item -- >
+     <! -- item name="json">GeoJSON</item -- >
+     <! -- item name="shp">Shapefile</item -- >
+  </string-array>
+  <string-array name="exportShotsValue" translatable="false">
+     <item name="none">-1</item>
+     <item name="therion">0</item>
+     <item name="compass">2</item>
+     <item name="csurvey">7</item>
+     <item name="ghtopo">19</item>
+     <item name="grottolf">18</item>
+     <item name="pockettopo">8</item>
+     <item name="polygon">16</item>
+     <item name="survex">3</item>
+     <item name="topo">17</item>
+     <item name="toporobot">21</item>
+     <item name="visualtopo">4</item>
+     <item name="walls">9</item>
+     <item name="winkarst">20</item>
+     <item name="csv">5</item>
+     <item name="dxf">6</item>
+     <! -- item name="kml">10</item -- >
+     <! -- item name="track">11</item -- >
+     <! -- item name="json">22</item -- >
+     <! -- item name="shp">23</item -- >
+  </string-array> -->
+  
+  <!-- plot default export -->
+  <!-- <string-array name="exportPlot">
+     <item name="none">none</item>
      <item name="therion">Therion</item>
      <item name="csurvey">cSurvey</item>
+     <item name="tunnel">Tunnel</item>
+     <item name="xtherion">xtherion</item>
      <item name="dxf">DXF</item>
      <item name="svg">SVG</item>
      <item name="shp">SHP</item>
+     <! -- item name="png">PNG</item -- >
+     <item name="pdf">PDF</item>
+     <! -- item name="c3d">Cave3D</item -- >
+  </string-array>
+  <string-array name="exportPlotValue" translatable="false">
+     <item name="none">-1</item>
+     <item name="therion">14</item>
+     <item name="csurvey">7</item>
+     <item name="tunnel">25</item>
+     <item name="xtherion">24</item>
+     <item name="dxf">6</item>
+     <item name="svg">13</item>
+     <item name="shp">23</item>
+     <! -- item name="png">12</item -- >
+     <item name="pdf">27</item>
+     <! -- item name="c3d">26</item -- >
+  </string-array> -->
+  
+  
+  <!-- plot auto export -->
+  <!-- <string-array name="exportPlotAuto">
+     <item name="none">none</item>
+     <item name="therion">Therion</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="tunnel">Tunnel</item>
+     <item name="xtherion">xtherion</item>
+     <item name="dxf">DXF</item>
+     <item name="svg">SVG</item>
+     <item name="shp">SHP</item>
+     <! -- item name="png">PNG</item -- >
+     <! -- item name="pdf">PDF</item -- > 
+  </string-array>
+  <string-array name="exportPlotAutoValue" translatable="false">
+     <item name="none">-1</item>
+     <item name="therion">14</item>
+     <item name="csurvey">7</item>
+     <item name="tunnel">25</item>
+     <item name="xtherion">24</item>
+     <item name="dxf">6</item>
+     <item name="svg">13</item>
+     <item name="shp">23</item>
+     <! -- item name="png">12</item -- >
+     <! -- item name="pdf">27</item -- > 
+  </string-array> -->
+  
+  
+  <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
+  <!-- UNUSED string-array name="exportSketch">
+     <item name="therion">Therion</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="dxf">DXF</item>
      <item name="png">PNG</item>
+     <item name="svg">SVG</item>
+  </string-array>
+  <string-array name="exportSketchValue">
+     <item name="therion">0</item>
+     <item name="csurvey">7</item>
+     <item name="dxf">6</item>
+     <item name="png">11</item>
+     <item name="svg">12</item>
   </string-array -->
+  
+  <!-- <string-array name="legShots" translatable="false">
+     <item name="two">2</item>
+     <item name="three">3</item>
+     <item name="four">4</item>
+  </string-array>
+  <string-array name="legShotsValue" translatable="false">
+     <item name="two">2</item>
+     <item name="three">3</item>
+     <item name="four">4</item>
+  </string-array>
 
+  <string-array name="backupNumber" translatable="false">
+     <item name="four">4</item>
+     <item name="five">5</item>
+     <item name="six">6</item>
+     <item name="seven">7</item>
+     <item name="eight">8</item>
+  </string-array>
+  <string-array name="backupNumberValue" translatable="false">
+     <item name="four">4</item>
+     <item name="five">5</item>
+     <item name="six">6</item>
+     <item name="seven">7</item>
+     <item name="eight">8</item>
+  </string-array> -->
+  
   <string-array name="extraButtons">
      <item name="basic">Basique</item>
      <item name="normal">Normal</item>
@@ -253,8 +440,15 @@
      <item name="tester">Testeur</item>
      <!-- item name="complete">Complete</item -->
   </string-array>
- 
-
+  <!-- <string-array name="extraButtonsValue" translatable="false">
+     <item name="basic">0</item>
+     <item name="normal">1</item>
+     <item name="advanced">2</item>
+     <item name="expert">3</item>
+     <item name="tester">4</item>
+     <! -- item name="complete">5</item -- >
+  </string-array> -->
+  
   <string-array name="sizeButtons">
      <item name="small">Petit</item>
      <item name="normal">Normal</item>
@@ -262,32 +456,33 @@
      <item name="large">Grand</item>
      <item name="huge">Énorme</item>
   </string-array>
- 
+  <!-- <string-array name="sizeButtonsValue" translatable="false">
+     <item name="small">0</item>
+     <item name="normal">1</item>
+     <item name="medium">3</item>
+     <item name="large">4</item>
+     <item name="huge">2</item>
+  </string-array> -->
 
-  <!-- DO NOT TRANSLATE string-array name="logStream">
-     <item name="android">Journal système</item>
-     <item name="file">Journal fichiers</item>
+  <!-- UNUSED string-array name="logStream" translatable="false">
+     <item name="android">System log</item>
+     <item name="file">File log</item>
+  </string-array>
+  <string-array name="logStreamValue" translatable="false">
+     <item name="android">0</item>
+     <item name="file">1</item>
   </string-array -->
-
 
   <string-array name="connMode">
      <item name="batch">À-la-demande</item>
      <item name="continuous">Continu</item>
      <item name="multi">Multiple</item>
   </string-array>
- 
-
-  <!-- UNUSED string-array name="altitudeType">
-    <item name="wgs84">Ellipsoide WGS84</item>
-    <item name="asl">Orthometrique</item>
-  </string-array -->
-  
-  <!-- UNUSED string-array name="sectionStations">
-     <item name="both">Les deux</item>
-     <item name="from">Derrière</item>
-     <item name="to">Devant</item>
-  </string-array -->
- 
+  <!-- <string-array name="connModeValue" translatable="false">
+     <item name="batch">0</item>
+     <item name="continuous">1</item>
+     <item name="multi">2</item>
+  </string-array> --> 
 
   <string-array name="sockType">
      <item name="default">Par défaut</item>
@@ -295,8 +490,17 @@
      <!-- item name="Port">Port</item -->
      <!-- item name="InsecurePort">Insecure/Port</item -->
   </string-array>
+  <!-- <string-array name="sockTypeValue" translatable="false">
+     <item name="default">0</item>
+     <item name="Insecure">1</item>
+     <! -- item name="Port">2</item -- >
+     <! -- item name="InsecurePort">3</item -- >
+  </string-array> -->
 
-
+  <!--
+       the order of options must be increasing with the enabling level
+       and consistent throuh all the arrays on the names
+  -->
   <string-array name="surveyStations">
      <item name="no">Désactivé</item>
      <item name="for">Visée normale, visées latérales d\'habillage en premier</item>
@@ -341,18 +545,58 @@
   </string-array>
 -->
 
+  <!-- <string-array name="surveyStationsValue" translatable="false">
+     <item name="no">0</item>
+     <item name="for">1</item>
+     <item name="back">2</item>
+     <item name="backsight">5</item>
+     <item name="tripod">6</item>
+     <item name="anomaly">8</item>
+     <item name="for2">3</item>
+     <item name="back2">4</item>
+     <item name="toporobot">7</item>
+  </string-array> -->
+  
    <!-- UNUSED string-array name="pickerType">
      <item name="recent">Plus récentes</item>
      <item name="list">Liste</item>
      <item name="grid">Grille</item>
      <item name="grid3">Triple grille</item>
+   </string-array>
+   <string-array name="pickerTypeValue" translatable="false">
+      <item name="recent">0</item>
+      <item name="list">1</item>
+      <item name="grid">2</item>
+      <item name="grid3">3</item>
    </string-array -->
+   
+   <!-- string-array name="sectionStations">
+     <item name="both">Both</item>
+     <item name="from">Behind</item>
+     <item name="to">In front</item>
+  </string-array>
+  <string-array name="sectionStationsValue" translatable="false">
+     <item name="both">3</item>
+     <item name="from">1</item>
+     <item name="to">2</item>
+  </string-array -->
 
+  <!-- string-array name="recentNr" translatable="false">
+     <item name="3">3</item>
+     <item name="4">4</item>
+     <item name="5">5</item>
+     <item name="6">6</item>
+  </string-array -->
 
-  <!-- UNUSED string-array name="deviceType">
-     <item name="none">Aucune</item>
+  <!-- string-array name="deviceType">
+     <item name="none">None</item>
      <item name="A3">A3</item>
      <item name="X310">X310</item>
+  </string-array>
+  <string-array name="deviceTypeValue" translatable="false">
+     <item name="none">0</item>
+     <item name="A3">1</item>
+     <item name="X310">2</item>
   </string-array -->
  
   <string-array name="deviceBT">
@@ -360,13 +604,23 @@
      <item name="1">Vérifier au démarrage</item>
      <item name="2">Activé</item>
   </string-array>
-  
+  <!-- <string-array name="deviceBTValue" translatable="false">
+     <item name="0">0</item>
+     <item name="1">1</item>
+     <item name="2">2</item>
+  </string-array> -->
 
  <!-- UNUSED string-array name="exportType">
      <item name="th">Therion</item>
      <item name="dat">Compass</item>
      <item name="svx">Survex</item>
      <item name="tro">VisualTopo</item>
+  </string-array>
+  <string-array name="exportTypeValue" translatable="false">
+     <item name="th">th</item>
+     <item name="dat">dat</item>
+     <item name="svx">svx</item>
+     <item name="tro">tro</item>
   </string-array -->
 
   <string-array name="lineStyle">
@@ -376,34 +630,68 @@
      <item name="bezier">Bézier</item>
      <item name="simplified">Simplifiée</item>
   </string-array>
+  <!-- <string-array name="lineStyleValue" translatable="false">
+     <item name="none">1</item>
+     <item name="two">2</item>
+     <item name="three">3</item>
+     <item name="bezier">0</item>
+     <item name="simplified">4</item>
+  </string-array> -->
 
   <string-array name="groupBy">
      <!-- item name="distance">Distance</item -->
      <item name="four">Quatre en même temps</item>
      <item name="only16">Seize premières</item>
   </string-array>
+  <!-- <string-array name="groupByValue" translatable="false">
+     <! -- item name="distance">0</item -- >
+     <item name="four">1</item>
+     <item name="only16">2</item>
+  </string-array> -->
 
   <string-array name="unitLength">
      <item name="meters">Mètres</item>
      <item name="feet">Pieds</item>
   </string-array>
+  <!-- <string-array name="unitLengthValue" translatable="false">
+     <item name="meters">meters</item>
+     <item name="feet">feet</item>
+  </string-array> -->
+  <!-- string-array name="unitLengthNumber">
+     <item name="meters">1</item>
+     <item name="feet">3.28084</item>
+  </string-array -->
 
   <string-array name="unitAngle">
      <item name="degrees">Degrés décimaux</item>
      <item name="grads">Grades décimaux</item>
   </string-array>
+  <!-- <string-array name="unitAngleValue" translatable="false">
+     <item name="degrees">degrees</item>
+     <item name="grads">grads</item>
+  </string-array> -->
 
   <string-array name="unitLocation">
      <item name="degrees">Degrés décimaux</item>
      <item name="ddmmss">Degrés, minutes, secondes</item>
   </string-array>
-
+  <!-- <string-array name="unitLocationValue" translatable="false">
+     <item name="degrees">degrees</item>
+     <item name="ddmmss">ddmmss</item>
+  </string-array> -->
 
   <string-array name="calibAlgo">
      <item name="auto">Automatique</item>
      <item name="linear">Linéaire</item>
      <item name="nonlinear">Non-linéaire</item>
+	 <!-- item name="minimum">Minimum</item -->
   </string-array>
+  <!-- <string-array name="calibAlgoValue" translatable="false">
+     <item name="auto">0</item>
+     <item name="linear">1</item>
+     <item name="nonlinear">2</item>
+     <! -- item name="minimum">3</item -- >
+  </string-array> -->
 
   <string-array name="rawCData">
      <item name="none">Aucune</item>
@@ -414,6 +702,26 @@
      <item name="decm">M Decimal</item>
      <item name="hexm">M Hex</item>
   </string-array>
+  <!-- <string-array name="rawCDataValue" translatable="false">
+     <item name="none">0</item>
+     <item name="dec">1</item>
+     <item name="hex">2</item>
+     <item name="decg">11</item>
+     <item name="hexg">12</item>
+     <item name="decm">21</item>
+     <item name="hexm">22</item>
+  </string-array> -->
+
+  <!-- FIXME_SKETCH_3D string-array name="modelType">
+     <item name="none">None</item>
+     <item name="convexhull">Convex Hull</item>
+     <item name="powercrust">Powercrust</item>
+  </string-array>
+  <string-array name="modelTypeValue" translatable="false">
+     <item name="none">0</item>
+     <item name="convexhull">1</item>
+     <item name="powercrust">2</item>
+  </string-array -->
 
   <!-- 3D VIEWER array strings -->
 
@@ -421,11 +729,20 @@
      <item name="shrink">sous-échantillonage</item>
      <item name="cut">découpée</item>
   </string-array>
+  <!-- <string-array name="demReduceValue" translatable="false">
+     <item name="shrink">1</item>
+     <item name="cut">2</item>
+  </string-array> -->
 
   <string-array name="splayUse">
      <item name="skip">Sauter</item>
      <item name="normal">Normal</item>
      <item name="xsection">X-Section</item>
   </string-array>
-
+  <!-- <string-array name="splayUseValue" translatable="false">
+     <item name="skip">0</item>
+     <item name="normal">1</item>
+     <item name="xsection">2</item>
+  </string-array> -->
+ 
 </resources>
