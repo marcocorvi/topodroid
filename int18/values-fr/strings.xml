@@ -2166,12 +2166,14 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 	<string name="cpref_splay_proj_summary">Utilisation ou non des visées d\'habillage projetées sur un plan normal [n]</string>
 	<string name="cpref_splay_thr_title">Seuil des visées d\'habillage</string>
 	<string name="cpref_splay_thr_summary">Visées latérales d\'habillage à conserver [0.5]</string>
+	
 	<string name="cpref_split_triangles_title">Diviser triangles</string>
 	<string name="cpref_split_triangles_summary">Diviser les parois en triangles</string>
 	<string name="cpref_split_random_title">Points aléatoires</string>
 	<string name="cpref_split_random_summary">Selection aléatoire des points de parois</string>
 	<string name="cpref_split_stretch_title">Etirer les parois</string>
 	<string name="cpref_split_stretch_summary">Etirer les parois le long de la visée</string>
+	
 	<string name="cpref_powercrust_delta_title">Enveloppe Powercrust Delta</string>
     <string name="cpref_powercrust_delta_summary">Filtrage des visées latérales</string>
 <!--
