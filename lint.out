@@ -133,12 +133,6 @@ res/values/strings.xml:2107: Error: "warning_nogrant_camera" is not translated i
 res/values/strings.xml:2152: Error: "cpref_grid_extent_summary" is not translated in "fr" (French) [MissingTranslation]
     <string name="cpref_grid_extent_summary">Grid extent around the survey plan-view</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:1886: Error: "equate_no_station" is translated here but not found in default locale [ExtraTranslation]
-    <string name="equate_no_station">Aucune station sélectionnée</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:2152: Error: "cpref_grid_extend_summary" is translated here but not found in default locale [ExtraTranslation]
-    <string name="cpref_grid_extend_summary">Extension de la grille autour de la topographie</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values-fr/plurals.xml:4: Error: The quantity 'one' matches more than one specific number in this locale (0, 1), but the message did not include a formatting argument (such as %d). This is usually an internationalization error. See full issue explanation for more. [ImpliedQuantity]
     <item quantity="one">ATTENTION. Une donnée saturée</item>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -178,12 +172,9 @@ res/mipmap-anydpi-v26/ic_launcher_round.xml:2: Warning: The resource R.mipmap.ic
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
 ^
 res/raw/name_pos_hl_geometry.glsl: Warning: The resource R.raw.name_pos_hl_geometry appears to be unused [UnusedResources]
-res/values-fr/strings.xml:1886: Warning: The resource R.string.equate_no_station appears to be unused [UnusedResources]
-    <string name="equate_no_station">Aucune station sélectionnée</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-fr/strings.xml:2152: Warning: The resource R.string.cpref_grid_extend_summary appears to be unused [UnusedResources]
-    <string name="cpref_grid_extend_summary">Extension de la grille autour de la topographie</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:313: Warning: The resource R.string.error_text_required appears to be unused [UnusedResources]
+    <string name="error_text_required">Text required</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/layout/export_dialog_plot.xml:420: Warning: This LinearLayout layout or its LinearLayout parent is possibly unnecessary [UselessParent]
     <LinearLayout android:id="@+id/layout_pdf_scale"
      ~~~~~~~~~~~~
@@ -191,4 +182,4 @@ res/layout/progress_dialog.xml:49: Warning: This LinearLayout layout or its Line
     <LinearLayout
      ~~~~~~~~~~~~
 res/mipmap-xhdpi/ic_launcher.png: Warning: The following unrelated icon files have identical contents: iz_topodroid.png, ic_launcher.png [IconDuplicates]
-45 errors, 20 warnings
+43 errors, 19 warnings
