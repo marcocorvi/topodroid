@@ -219,7 +219,7 @@ public class TDSetting
   public static boolean mLRExtend           = true;   // whether to extend LR or not (Compass/VisualTopo input)
   public static float   mLRUDvertical       = 45;     // vertical splay for UD 
   public static float   mLRUDhorizontal     = 45;     // horizontal splay for LR 
-  public static int     mLRUDcount          = -1;     // LRUD counter (-1 keep all)
+  public static boolean mLRUDcount          = false;  // LRUD counter (false: use all)
 
   public static String mSurvexEol           = "\n";
   public static boolean mSurvexSplay        = false; // splays with named TO
@@ -244,7 +244,7 @@ public class TDSetting
   public static boolean mVTopoLrudAtFrom = false; 
   public static boolean mVTopoTrox = false; 
 
-  public static final float PDF_SCALE     = 146.0f; // approx
+  public static final float PDF_SCALE     = 145.56f; // approx
   public static final float THERION_SCALE = 196.8503937f; // 200 * 39.3700787402 / 40;
   public static final float SVG_SCALE_INK = 188.97637795f; // 94.488189f; // 10 * 96 px/in / ( 25.4 mm/in * 40 px/m ) -> scale 1 : 100  Inkscape
   public static final float SVG_SCALE_AI  = 141.73228346f; // 70.866141732f; // A.I. 10 * 72 / ( 25.4 * 40 ) scale 1:100 Adobe Illustrator
@@ -1939,7 +1939,7 @@ public class TDSetting
     } else if ( k.equals( key[ 3 ] ) ) {        // DISTOX_AUTO_STATIONS
       mAutoStations = tryBooleanValue( hlp, k, v, bool(def[ 3]) ); 
     } else if ( k.equals( key[ 4 ] ) ) {        // DISTOX_LRUD_COUNT
-      mLRUDcount = tryIntValue( hlp, k, v, def[ 4] );
+      mLRUDcount = tryBooleanValue( hlp, k, v, bool(def[ 4]) );
     // } else if ( k.equals( key[ 4 ] ) ) {        // DISTOX_AUTO_PLOT_EXPORT moved to EXPORT
     //   mAutoExportPlotFormat = tryIntValue( hlp, k, v, def[ 4] );
     // } else if ( k.equals( key[ 2 ] ) ) {        // DISTOX_TRANSFER_CSURVEY
@@ -2968,7 +2968,7 @@ public class TDSetting
       pw.printf(Locale.US, "Data input: backsight %c, prev/next %c\n", tf(mBacksightInput), tf(mPrevNext) );
       // pw.printf(Locale.US, "L/R extend %c BlunderShot %c\n", tf(mLRExtend), tf(mBlunderShot) );
       pw.printf(Locale.US, "L/R extend %c BlunderShot %c SplayStation %c SplayGroup %c\n", tf(mLRExtend), tf(mBlunderShot), tf(mSplayStation), tf(mSplayOnlyForward) ); 
-      pw.printf(Locale.US, "U/D vertical %.1f L/R horicontal %.1f count $d\n", mLRUDvertical, mLRUDhorizontal, mLRUDcount );
+      pw.printf(Locale.US, "U/D vertical %.1f L/R horicontal %.1f count $c\n", mLRUDvertical, mLRUDhorizontal, tf(mLRUDcount) );
 
       pw.printf(Locale.US, "Geek Import - data mode %d, zipped symbols %c\n", mImportDatamode, tf( mZipWithSymbols) ); //  tf(mExportTcsx) );
       pw.printf(Locale.US, "Timer: wait %d, volume %d\n", mTimerWait, mBeepVolume );
@@ -3472,7 +3472,7 @@ public class TDSetting
             mLRUDvertical   = getFloat( vals, 2, 0.0f ); setPreference( editor, "DISTOX_LRUD_VERTICAL",   mLRUDvertical );
             mLRUDhorizontal = getFloat( vals, 4, 90.0f ); setPreference( editor, "DISTOX_LRUD_HORIZONTAL", mLRUDhorizontal );
             if ( vals.length > 6 ) {
-              mLRUDcount = getInt( vals, 6, -1 ); setPreference( editor, "DISTOX_LRUD_COUNT", mLRUDcount );
+             mLRUDcount = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_LRUD_COUNT", mLRUDcount );
             }
           }
           continue;

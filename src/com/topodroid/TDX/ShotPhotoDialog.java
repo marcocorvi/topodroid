@@ -100,10 +100,10 @@ class ShotPhotoDialog extends MyDialog
     if ( b == mButtonOK ) {
       String comment = "";
       if ( mETcomment.getText() != null ) comment = mETcomment.getText().toString().trim();
-      if ( comment.length() == 0 ) {
-        mETcomment.setError(  mContext.getResources().getString( R.string.error_text_required ) );
-        return;
-      }
+      // if ( comment.length() == 0 ) { // this was annoying
+      //   mETcomment.setError(  mContext.getResources().getString( R.string.error_text_required ) );
+      //   return;
+      // }
       // TDLog.v( "PHOTO comment " + comment );
       int camera = ( cameraAPI || mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_TOPODROID_2;
       // TDLog.v("camera " + camera + " old-API " + cameraAPI + ", checked " + mCamera.isChecked() );
