@@ -2,7 +2,7 @@
 <h3>[15] 3D VIEWER (Cave3D)</h3>
 
 TopoDroid 3D viewer is designed for use in cave and it does not require internet connection.<br>
-It can load also other file formats: Therion (th, thconfig), Loch, Compass (dat, mak), and VisualTopo.<br><p>
+It can load also other file formats: Therion (th, thconfig), Loch (lox), Compass (dat, mak), Survex (3d), and VisualTopo (tro, trox).<br><p>
 
 The 3D model can be opened either from a menu in the <i>Data Window</i>, or a button in the
 <i>Survey Info Window</i>.<br>
@@ -32,7 +32,7 @@ A few buttons have long-tap actions:
 <li><i>View</i>: Adjust the focal parameter of the perspective.</li>
 <li><i>Stations</i>: Toggle station selection on/off.</li>
 <li><i>Color</i>: Select the surveys to show or hide.</li>
-<li><i>Frame</i>: Select the display of surface/duplicate/commented legs.</li>
+<li><i>Frame</i>: Open the <i>leg dialog</i> (display of surface/duplicate/commented legs).</li>
 </ul>
 <br><p>
 
@@ -83,7 +83,7 @@ The title bar shows the viewing parameters:
 <br><p>
 
 <b>EXPORTS</b><br>
-Model can be exported into DXF, KML, STL or STL-binary, CGAL, LAS-binary, and shapefile.<br>
+Model can be exported as DXF, KML, STL or STL-binary, CGAL, LAS-binary, and shapefile.<br>
 The exported file is saved in the folder "c3export" of the current working directory.
 <br><p>
 
@@ -102,12 +102,12 @@ By default the grid is below the survey, but it can be set above it (optionally)
 <b>SURVEY</b><br>
 The survey splays can be hidden, displayed as lines or endpoints.<br>
 The survey legs can be uncolored or colored by survey, by depth (red-to-blue) or by
-the depth beneath the surface (blue-to-red).<br>
+the depth beneath the surface (blue-to-red) if the mdel has a DEM surface.<br>
 
 When uncolored the survey legs are white, the surface legs green, the duplicate legs orange, 
 and the commented legs light blue.<br>
 
-The "surface", "duplicate", and "commented" legs can be turned on/off with the "legs" dialog which
+The "surface", "duplicate", and "commented" legs can be turned on/off with the <i>leg dialog</i> which
 is opened by a long-tap on the fourth button.
 <br><p>
 

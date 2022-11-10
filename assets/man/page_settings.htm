@@ -149,26 +149,34 @@ Custom Import/Export settings
 <ul>
 <li>Zipped symbols in zip archives</li>
 <li>Import datamode</li>
-<li>Insert X-Sections</li>
-<li>Include stations</li>
-<li>LRUD count: number of splays used for LRUD</li>
-</ul>  
+<li>Insert X-Sections in sketch exports</li>
+<li>Include stations in sketch exports</li>
+<li>LRUD count: number of splays used for LRUD [default false]</li>
+</ul><br>
+If LRUD count is false all splays (within tolerances) are used to compute LRUD. The tranverse 
+dimension is set to the maximum value of the splay projections on the horizontal or vertical axes.
+An in-tolerance splay can be taken into account for both horizontal and vertical dimensions.<br>
+If LRUD count is true only the first four splays that satisfy the tolerances are used, and an in-tolerance
+splay is used only for the vertical or the horizontal dimensions. Each dimension is set to the
+value of the first acceptable splay. A dimension can be left with value zero by shooting a splay
+in a direction already set.<br>
+By default the tolerances are very permissive: 0&deg; for vertical directions and 90&deg; for horizontal.
 </div><br><p>
 
 <!-- ========================================== -->
 
 <b>Survey Data</b><br>
 <ul>
-<li>Team. Default survey team. Default "unset"</li>
+<li>Team. Default survey team. By default it is unset. When you create a new survey you must enter the team.</li>
 <li>Survey stations name assignment policy {none, splay+fore, splay+back, fore+splay, back+splay, back+splay+fore, tripod, magn.anomaly}.
 	The number of choices varies with the activity level.
 	Default "splay+fore".</li>
 <li>Station names {alphanumeric,numeric}. [alphanumeric]</li>
-<li>Initial station name. Default "unset"</li>
+<li>Initial station name. By default it is unset, and the program uses "0".</li>
 <li>Photo thumbnails size [80,400]. [200 pxl]</li>
 <li>Inline-editable stations [no]</li>
-<li>Sketch origin</li>
-<li>Shared x-sections</li>
+<li>Sketch origin in common to all sketches or not</li>
+<li>X-sections shared among sketches</li>
 </ul><br>
 
 Units
@@ -188,7 +196,7 @@ Shot Data
 <li>Shot vertical threshold. Region around 90&deg;, where shots are extended "vertical" [0,90]. [10&deg;]</li>
 <li>Leg WENS threshold. Leg V threshold [0,90]. [80&deg;]</li>
 <li>"extend" reference. Settable or fixed extend L/R reference. [no]</li>
-<li>Prev/Next buttons. [yes]</li>
+<li>Prev/Next buttons in the shot edit dialog. [yes]</li>
 <li>Backsight in user entered shot dialog. [no]</li>
 <li>Leg identification feedback [no]</li>
 </ul><br>

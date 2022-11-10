@@ -2506,9 +2506,15 @@ public class TDExporter
     float sb0 = e0;
     String station = ( at_from ) ? b.mFrom : b.mTo;
 
-    int cnt = TDSetting.mLRUDcount; // counter for the splay used to compute LRUD
-    
-    if ( cnt > 0 ) {
+    boolean do_cnt = TDSetting.mLRUDcount; // counter for the splay used to compute LRUD
+    // if do_cnt is true LRUD are set only the first time (do_XXX true)
+    //                   and only four in-tolerance splays are used
+    if ( do_cnt ) {
+      boolean do_left  = true;
+      boolean do_right = true;
+      boolean do_up    = true;
+      boolean do_down  = true;
+      int cnt = 4;
       for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
@@ -2541,17 +2547,19 @@ public class TDExporter
           float n1 = len * cc * cb;
           float e1 = len * cc * sb;
           if ( Math.abs( item.mClino ) >= TDSetting.mLRUDvertical ) {
-            if ( z1 > 0.0 ) { if ( z1 > lrud.u )  { if ( lrud.u < 0.0001f ) { lrud.u =  z1; --cnt; } } }
-            else            { if ( -z1 > lrud.d ) { if ( lrud.d < 0.0001f ) { lrud.d = -z1; --cnt; } } }
+            if ( z1 > 0.0 ) { if ( do_up   &&  z1 > lrud.u ) { lrud.u =  z1; do_up   = false; } }
+            else            { if ( do_down && -z1 > lrud.d ) { lrud.d = -z1; do_down = false; } }
+            --cnt;
           } else if ( Math.abs( item.mClino ) <= TDSetting.mLRUDhorizontal ) {
             float rl = e1 * n0 - n1 * e0;
-            if ( rl > 0.0 ) { if ( rl > lrud.r )  { if ( lrud.r < 0.0001f ) { lrud.r =  rl; --cnt; } } }
-            else            { if ( -rl > lrud.l ) { if ( lrud.l < 0.0001f ) { lrud.l = -rl; --cnt; } } }
+            if ( rl > 0.0 ) { if ( do_right &&  rl > lrud.r ) { lrud.r =  rl; do_right = false; } }
+            else            { if ( do_left  && -rl > lrud.l ) { lrud.l = -rl; do_left  = false; } }
+            --cnt;
           }
           if ( cnt == 0 ) break;
         }
       }
-    } else { 
+    } else {
       for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
@@ -2579,22 +2587,20 @@ public class TDExporter
             float cbb1 = sc*sc0*(sb*sb0 + cb*cb0) + cc*cc0; // cosine of angle between block and item
             if ( Math.abs( cbb1 ) > TDSetting.mOrthogonalLRUDCosine ) continue; 
           }
-
           float z1 = len * sc;
           float n1 = len * cc * cb;
           float e1 = len * cc * sb;
           if ( Math.abs( item.mClino ) >= TDSetting.mLRUDvertical ) {
-            if ( z1 > 0.0 ) { if ( z1 > lrud.u )  { lrud.u =  z1; } }
+            if ( z1 > 0.0 ) { if (  z1 > lrud.u ) { lrud.u =  z1; } }
             else            { if ( -z1 > lrud.d ) { lrud.d = -z1; } }
           } 
           if ( Math.abs( item.mClino ) <= TDSetting.mLRUDhorizontal ) {
             float rl = e1 * n0 - n1 * e0;
-            if ( rl > 0.0 ) { if ( rl > lrud.r )  { lrud.r =  rl; } }
+            if ( rl > 0.0 ) { if (  rl > lrud.r ) { lrud.r =  rl; } }
             else            { if ( -rl > lrud.l ) { lrud.l = -rl; } }
           }
         }
       }
-
     }
     // TDLog.v( "<" + b.mFrom + "-" + b.mTo + "> at " + station + ": " + lrud.l + " " + lrud.r );
     return lrud;

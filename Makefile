@@ -89,6 +89,9 @@ less:
 lint:
 	../../../cmdline-tools/latest/bin/lint --ignore IconLocation . > lint.out
 
+strings:
+	@ for i in cn es fr hu it ru; do echo "$$i" `grep \"$$i\" lint.out | wc -l`; done
+
 pdf:
 	./howto/pdf.sh
 

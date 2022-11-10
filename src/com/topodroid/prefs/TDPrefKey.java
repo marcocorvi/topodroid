@@ -1014,7 +1014,7 @@ public class TDPrefKey
     // "DISTOX_DASH_SPLAY",           // whether dash-splay are coherent between plan and profile
     // "DISTOX_VERT_SPLAY",      // 9 // splays with clino over this are shown with dashed/dotted line
     // "DISTOX_HORIZ_SPLAY",          // splays off-azimuth over this are shown with dashed/dotted line
-    // "ashedDISTOX_SECTION_SPLAY",        // splays with angle over this are shown with dashed/dotted line
+    // "DISTOX_SECTION_SPLAY",        // splays with angle over this are shown with dashed/dotted line
     // "DISTOX_HTHRESHOLD",      // 12 // if clino is over thr, H_SECTION is horizontal (has north arrow)
     null
   };
@@ -1817,7 +1817,7 @@ public class TDPrefKey
     TDString.ZERO, // SurveyInfo.DATAMODE_NORMAL
     TRUE,
     TRUE,
-    "-1",
+    FALSE,
     // "-1",
     // TRUE,
     null
