@@ -855,8 +855,11 @@ public class OverviewWindow extends ItemDrawer
 
       float scale = TDSetting.mToPdf;
       RectF bnds = manager.getBitmapBounds( scale );
-      int zw = 120 + (int)(bnds.right - bnds.left); // margin 40 + 80
-      int zh = 120 + (int)(bnds.bottom - bnds.top);
+      int margin_left = 40, margin_right=40, margin_top=40,margin_bottom=40;  //HBX sketch unit * 20, 2m=40
+      bnds = new  RectF((bnds.left-margin_left*scale)/1, (bnds.top-margin_top*scale)/1,
+              (bnds.right+margin_right*scale)/1,(bnds.bottom+margin_bottom*scale)/1); // HBX
+      int zw = (int)(bnds.right - bnds.left); // margin 40 + 80 6.1.76 HBX
+      int zh = (int)(bnds.bottom - bnds.top); // HBX
       // TDLog.v( "rect " + bnds.right + " " + bnds.left + " == " + bnds.bottom + " " + bnds.top );
       PageInfo.Builder builder = new PageInfo.Builder( zw, zh, 1 );
       PageInfo info = builder.create();
