@@ -1415,8 +1415,7 @@ public class DrawingCommandManager
       bbox = new  RectF( bbox.left/scale  - margin, bbox.top/scale - margin,
                          bbox.right/scale + margin, bbox.bottom/scale + margin); // HBX
       sidebars = false; // do not draw sidebars
-      // grids    = false; // HBX control sketch properties
-      TDLog.v("scale " + scale + " bbox " + bbox.left + " " + bbox.top + " " + bbox.right + " " + bbox.bottom + " zoom " + zoom );
+      // TDLog.v("scale " + scale + " bbox " + bbox.left + " " + bbox.top + " " + bbox.right + " " + bbox.bottom + " zoom " + zoom );
     }
 
     if ( sidebars && TDSetting.mSideDrag ) {
@@ -1469,14 +1468,23 @@ public class DrawingCommandManager
             dpath.draw( canvas );
           }
         } else {
-          int xor_color = isPDFpage ? 0xffffffff : 0;
-          if ( scale < 1 || isPDFpage ) {
-            for ( DrawingPath p1 : mGridStack1 ) p1.draw( canvas, mm, bbox, xor_color );
+          if ( isPDFpage ) {
+            if ( pdf_scale < 1.41731f ) { // PDF_SCALE - eps
+              for ( DrawingPath p1 : mGridStack1 ) p1.draw( canvas, mm, bbox, 0xffffffff );
+            }
+            if ( pdf_scale < 14.1731f ) {
+              for ( DrawingPath p10 : mGridStack10 ) p10.draw( canvas, mm, bbox, 0xffffffff );
+            }
+            for ( DrawingPath p100 : mGridStack100 ) p100.draw( canvas, mm, bbox, 0xffffffff );
+          } else {
+            if ( scale < 1 ) {
+              for ( DrawingPath p1 : mGridStack1 ) p1.draw( canvas, mm, bbox );
+            }
+            if ( scale < 10 ) {
+              for ( DrawingPath p10 : mGridStack10 ) p10.draw( canvas, mm, bbox );
+            }
+            for ( DrawingPath p100 : mGridStack100 ) p100.draw( canvas, mm, bbox );
           }
-          if ( scale < 10 || isPDFpage ) {
-            for ( DrawingPath p10 : mGridStack10 ) p10.draw( canvas, mm, bbox, xor_color );
-          }
-          for ( DrawingPath p100 : mGridStack100 ) p100.draw( canvas, mm, bbox, xor_color );
         }
       }
       if ( mNorthLine != null ) {
