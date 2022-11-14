@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  IMPORATANT translatable="false" MEANS THAT THE ARRAY MUST NOT BE HERE 
+-->
 
 <!--suppress CheckTagEmptyBody -->
 <resources>
@@ -92,13 +95,6 @@
      <item name="both">Réunir les deux points</item>
      <item name="continue">Continuer</item>
   </string-array>
-  <!-- <string-array name="lineContinueValue" translatable="false"> <! - - must agree with DrawingWindow.CONT_XXX - - >
-     <item name="none">0</item>
-     <item name="start">1</item>
-     <item name="end">2</item>
-     <item name="both">3</item>
-     <item name="continue">4</item>
-  </string-array> -->
   
   <string-array name="unitGrid">
      <item name="meter">Mètres</item>
@@ -106,23 +102,12 @@
      <item name="two_tf">2 pieds</item>
      <item name="ten_cm">10 cm</item>
   </string-array>
-  <!-- <string-array name="unitGridValue" translatable="false">
-     <item name="meter">1.0</item>
-     <item name="yard">0.914</item>
-     <item name="two_tf">0.6096</item>
-     <item name="ten_cm">0.1</item>
-  </string-array> -->
 
   <string-array name="unitMeasure">
      <item name="grid_cell">grille/cellule</item>
      <item name="meter">métrique</item>
      <item name="tf">pied</item>
   </string-array>
-  <!-- <string-array name="unitMeasureValue" translatable="false">
-     <item name="grid_cell">-1.0</item>
-     <item name="meter">1.0</item>
-     <item name="tf">0.3048</item>
-  </string-array> -->
   
   <string-array name="loopClosure">
      <item name="none">Aucune</item>
@@ -131,22 +116,11 @@
 	 <item name="selective">Sélective</item>
      <item name="triangles">Triangles</item>
   </string-array>
-  <!-- <string-array name="loopClosureValue" translatable="false">
-     <item name="none">0</item>
-     <item name="normal">1</item>
-     <item name="weighted">4</item>
-     <item name="selective">5</item>
-     <item name="triangles">3</item>
-  </string-array> -->
 
   <string-array name="survexEol">
      <item name="lf">Linux</item>
      <item name="lfcr">Windows</item>
   </string-array>
-  <!-- <string-array name="survexEolValue" translatable="false">
-     <item name="lf">LF</item>
-     <item name="lfcr">LFCR</item>
-  </string-array> -->
   
   <!-- string-array name="exportScale">
      <item name="s50">1:50</item>
@@ -161,36 +135,11 @@
      <item name="s500">500</item>
   </string-array -->
   
-  <!-- <string-array name="svgProgram" translatable="false">
-     <item name="inkscape">Inkscape</item>
-     <item name="illustrator">Illustrator</item>
-  </string-array>
-  <string-array name="svgProgramValue" translatable="false">
-     <item name="inkscape">0</item>
-     <item name="illustrator">1</item>
-  </string-array> -->
-
   <!-- string-array name="wallsType">
      <item name="none">None</item>
      <item name="convex">Convex</item>
      <item name="delaunay">Delaunay</item>
-  </string-array>
-  <string-array name="wallsTypeValue" translatable="false">
-     <item name="none">0</item>
-     <item name="convex">1</item>
-     <item name="delaunay">2</item>
   </string-array -->
-
-	<!-- <string-array name="acadVersion" translatable="false">
-     <item name="9">R12 (AC1009)</item>
-     <item name="13">R13 (AC1012)</item>
-     <item name="16">R14 (AC1014)</item>
-  </string-array>
-  <string-array name="acadVersionValue" translatable="false">
-     <item name="9">9</item>
-     <item name="13">13</item>
-     <item name="16">16</item>
-  </string-array> -->
   
   <string-array name="zoomCtrl">
      <item name="0">OFF, Désactivé</item>
@@ -198,13 +147,11 @@
      <item name="2">Permanent</item>
   </string-array>
   
-
   <string-array name="stationNames">
      <item name="alpha">Alphanumérique</item>
      <item name="number">Numérique</item>
   </string-array>
  
-
   <!-- UNUSED string-array name="extend_name">
      <item>Left</item>
      <item>Vertical</item>
@@ -213,11 +160,15 @@
   </string-array -->
 
 
-  <!-- DO NOT TRANSLATE string-array name="legShots">
-  </string-array -->
+  <string-array name="importDatamode">
+     <item name="normal">normal</item>
+     <item name="diving">plongée</item>
+  </string-array>
 
-  <!-- UNUSED string-array name="exportShots">
-     <item name="none">Aucun</item>
+  <!-- shot default export -->
+  <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
+  <!-- <string-array name="exportShots">
+     <item name="none">none</item>
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
      <item name="csurvey">cSurvey</item>
@@ -233,18 +184,57 @@
      <item name="winkarst">Winkarst</item>
      <item name="csv">CSV</item>
      <item name="dxf">DXF</item>
+     <! - - item name="kml">KML</item - - >
+     <! - - item name="track">Track file</item - - >
+     <! - - item name="json">GeoJSON</item - - >
+     <! - - item name="shp">Shapefile</item - - >
   </string-array -->
-
-  <!-- UNUSED string-array name="exportPlot">
-     <item name="none">Aucun</item>
+  
+  <!-- plot default export -->
+  <!-- <string-array name="exportPlot">
+     <item name="none">none</item>
      <item name="therion">Therion</item>
      <item name="csurvey">cSurvey</item>
+     <item name="tunnel">Tunnel</item>
+     <item name="xtherion">xtherion</item>
      <item name="dxf">DXF</item>
      <item name="svg">SVG</item>
      <item name="shp">SHP</item>
-     <item name="png">PNG</item>
+     <! - - item name="png">PNG</item - - >
+     <item name="pdf">PDF</item>
+     <! - - item name="c3d">Cave3D</item - - >
   </string-array -->
-
+  
+  <!-- plot auto export -->
+  <!-- <string-array name="exportPlotAuto">
+     <item name="none">none</item>
+     <item name="therion">Therion</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="tunnel">Tunnel</item>
+     <item name="xtherion">xtherion</item>
+     <item name="dxf">DXF</item>
+     <item name="svg">SVG</item>
+     <item name="shp">SHP</item>
+     <! - - item name="png">PNG</item - - >
+     <! - - item name="pdf">PDF</item - - > 
+  </string-array -->
+  
+  <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
+  <!-- UNUSED string-array name="exportSketch">
+     <item name="therion">Therion</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="dxf">DXF</item>
+     <item name="png">PNG</item>
+     <item name="svg">SVG</item>
+  </string-array>
+  <string-array name="exportSketchValue">
+     <item name="therion">0</item>
+     <item name="csurvey">7</item>
+     <item name="dxf">6</item>
+     <item name="png">11</item>
+     <item name="svg">12</item>
+  </string-array -->
+  
   <string-array name="extraButtons">
      <item name="basic">Basique</item>
      <item name="normal">Normal</item>
@@ -253,8 +243,7 @@
      <item name="tester">Testeur</item>
      <!-- item name="complete">Complete</item -->
   </string-array>
- 
-
+  
   <string-array name="sizeButtons">
      <item name="small">Petit</item>
      <item name="normal">Normal</item>
@@ -262,32 +251,12 @@
      <item name="large">Grand</item>
      <item name="huge">Énorme</item>
   </string-array>
- 
-
-  <!-- DO NOT TRANSLATE string-array name="logStream">
-     <item name="android">Journal système</item>
-     <item name="file">Journal fichiers</item>
-  </string-array -->
-
 
   <string-array name="connMode">
      <item name="batch">À-la-demande</item>
      <item name="continuous">Continu</item>
      <item name="multi">Multiple</item>
   </string-array>
- 
-
-  <!-- UNUSED string-array name="altitudeType">
-    <item name="wgs84">Ellipsoide WGS84</item>
-    <item name="asl">Orthometrique</item>
-  </string-array -->
-  
-  <!-- UNUSED string-array name="sectionStations">
-     <item name="both">Les deux</item>
-     <item name="from">Derrière</item>
-     <item name="to">Devant</item>
-  </string-array -->
- 
 
   <string-array name="sockType">
      <item name="default">Par défaut</item>
@@ -296,7 +265,10 @@
      <!-- item name="InsecurePort">Insecure/Port</item -->
   </string-array>
 
-
+  <!--
+       the order of options must be increasing with the enabling level
+       and consistent throuh all the arrays on the names
+  -->
   <string-array name="surveyStations">
      <item name="no">Désactivé</item>
      <item name="for">Visée normale, visées latérales d\'habillage en premier</item>
@@ -347,10 +319,15 @@
      <item name="grid">Grille</item>
      <item name="grid3">Triple grille</item>
    </string-array -->
+   
+   <!-- string-array name="sectionStations">
+     <item name="both">Both</item>
+     <item name="from">Behind</item>
+     <item name="to">In front</item>
+  </string-array -->
 
-
-  <!-- UNUSED string-array name="deviceType">
-     <item name="none">Aucune</item>
+  <!-- string-array name="deviceType">
+     <item name="none">None</item>
      <item name="A3">A3</item>
      <item name="X310">X310</item>
   </string-array -->
@@ -360,7 +337,6 @@
      <item name="1">Vérifier au démarrage</item>
      <item name="2">Activé</item>
   </string-array>
-  
 
  <!-- UNUSED string-array name="exportType">
      <item name="th">Therion</item>
@@ -387,6 +363,10 @@
      <item name="meters">Mètres</item>
      <item name="feet">Pieds</item>
   </string-array>
+  <!-- string-array name="unitLengthNumber">
+     <item name="meters">1</item>
+     <item name="feet">3.28084</item>
+  </string-array -->
 
   <string-array name="unitAngle">
      <item name="degrees">Degrés décimaux</item>
@@ -398,11 +378,11 @@
      <item name="ddmmss">Degrés, minutes, secondes</item>
   </string-array>
 
-
   <string-array name="calibAlgo">
      <item name="auto">Automatique</item>
      <item name="linear">Linéaire</item>
      <item name="nonlinear">Non-linéaire</item>
+	 <!-- item name="minimum">Minimum</item -->
   </string-array>
 
   <string-array name="rawCData">
@@ -414,6 +394,12 @@
      <item name="decm">M Decimal</item>
      <item name="hexm">M Hex</item>
   </string-array>
+
+  <!-- FIXME_SKETCH_3D string-array name="modelType">
+     <item name="none">None</item>
+     <item name="convexhull">Convex Hull</item>
+     <item name="powercrust">Powercrust</item>
+  </string-array -->
 
   <!-- 3D VIEWER array strings -->
 
@@ -427,5 +413,5 @@
      <item name="normal">Normal</item>
      <item name="xsection">X-Section</item>
   </string-array>
-
+ 
 </resources>

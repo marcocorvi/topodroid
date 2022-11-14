@@ -1289,7 +1289,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
   <!-- OK <string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string -->
   <!-- OK string name="pref_cat_exportcsx" translatable="false">cSurvey</string -->
   <!-- OK string name="pref_cat_exportcsv" translatable="false">CSV</string -->
-  <!-- OK string name="pref_cat_calib">OPTIONS D\'ÉTALONNAGE</string -->
+  <string name="pref_cat_calib">OPTIONS D\'ÉTALONNAGE</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
 	
   <string name="pref_cat_device">OPTIONS PÉRIPHÉRIQUE</string>
@@ -1818,7 +1818,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="perm_camera">\nCamera</string>
     <string name="perm_microphone">\nMicrophone</string>
 
-    <!-- OK string name="welcome_title">Bienvenue dans TopoDroid %1$s</string -->
+    <!-- OK <string name="welcome_title" translatable="false">TopoDroid %1$s</string> -->
     <string name="welcome_text">
 \nTopodroid est une application Open Source pour réaliser des relevés topographiques de cavités souterraines avec un DistoX.
 \n\nAucune garantie : en utilisant ce logiciel vous acceptez que l\'auteur ne puisse être responsable d\'une quelconque perte de données, dommages ou quoi que ce soit d\'autre.
@@ -1828,24 +1828,24 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 \nTraduction initiale de par G. Chardin : guillaume.chardin@gmail.com
 \nMise à jour le 29-11-2015 par F. Martin : frankm@gmail.com
 \nMise à jour le 23-05-2017 par G. Chardin
-\nMise à jour le 25-04-2018 par D. Ros : souterweb@free.fr  
-\nMise à jour 10-2022 par D. Ros et G. Chardin </string>
+\nMise à jour le 25-04-2018 par D. Ros : souterweb@free.fr \nMise à jour 10-2022 par D. Ros et G. Chardin
+   </string>
     
 <!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED : mark OK untranslated strings -->
   <string name="firmware_title">Firmware Updater</string>
   <string name="firmware_file_title">Firmware Files</string>
   <string name="firmware_text">
-\n[1] Choisissez l\'envoi d\'un firmware ou l\'export dans un fichier.
-\n[2] Choisissez le fichier à envoyer ou sauvegarder. Les fichiers firmware se trouvent dans le répertoire \'bin\'.
-\n[3] Soyez certain de charger un firmware compatible avec votre DistoX.
-\n[4] Allumez le DistoX2 en mode booloader en appuyant simultanément sur les touches PLUS, MOINS et ON/DIST.
-\n[5] Appuyez sur le bouton OK.
-\n[6] Confirmez et patientez jusqu\'à la fin de l\'opération.
-\n[7] Éteignez le DistoX2 avec la touche CLR.
+READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
+\nThis is only a reminder:
+\n[1] Select either to upload a firmware or to dump the firmware to a file.
+\n[2] Choose the file to upload or save. Firmware files are in the bin directory.
+\n[3] Make sure the upload firmware version is compatible with the DistoX hardware version.
+\n[4] Put the DistoX2 in bootloader mode: press PLUS and MINUS while switching on with DIST key.
+\n[5] Tap the OK button.
+\n[6] Read the message before you confirm to continue.
+\n[7] Wait till the process is done. It takes a while.
+\n[8] Turn off the DistoX2 with the CLR key.
 \n
-   
-   
-   
    </string>
    <!-- UNUSED string name="firmware_wait_dump">Reading firmware &#8230; wait</string -->
    <!-- UNUSED string name="firmware_wait_check">Checking hardware &#8230; wait</string -->
