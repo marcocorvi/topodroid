@@ -18,9 +18,13 @@ import com.topodroid.common.PointScale;
 
 import android.app.Activity;
 
+import android.graphics.pdf.PdfDocument.PageInfo;
+import android.graphics.RectF;
+
 abstract class ItemDrawer extends Activity
 {
   static final int POINT_MAX = 32678;
+  static final int PDF_MARGIN = 40;
 
   protected Activity mActivity = null;
 
@@ -267,5 +271,22 @@ abstract class ItemDrawer extends Activity
    * @note overridden by DrawingWindow
    */
   public boolean forbidLineSection( int j ) { return false; }
+
+
+  protected PageInfo getPdfPage( DrawingCommandManager manager )
+  {
+    float scale = TDSetting.mToPdf;
+    RectF bnds = manager.getBitmapBounds( scale );
+    bnds = new  RectF((bnds.left   - PDF_MARGIN * scale)/1,
+                      (bnds.top    - PDF_MARGIN * scale)/1,
+                      (bnds.right  + PDF_MARGIN * scale)/1,
+                      (bnds.bottom + PDF_MARGIN * scale)/1); // HBX
+    int zw = (int)(bnds.right - bnds.left); // margin 40 + 80 6.1.76 HBX
+    int zh = (int)(bnds.bottom - bnds.top); // HBX
+    // TDLog.v( "rect " + bnds.right + " " + bnds.left + " == " + bnds.bottom + " " + bnds.top + " W " + zw + " H " + zh );
+    PageInfo.Builder builder = new PageInfo.Builder( zw, zh, 1 );
+    return builder.create();
+  }
+
 
 }

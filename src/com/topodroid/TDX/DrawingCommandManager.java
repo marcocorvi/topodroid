@@ -48,10 +48,11 @@ public class DrawingCommandManager
   private final static Object mSyncScrap = new Object();
   private final static Object mSyncOutline = new Object();
 
+
   // FIXED_ZOOM 
   private int mFixedZoom = 0;
 
-  private static final int BORDER = 20; // for the bitmap
+  // private static final int BORDER = 20; // for the bitmap
   private int mMode = 0;  // command manager mode type (PLAN PROFILE SECTION OVERVIEW)
 
   static private volatile int mDisplayMode = DisplayMode.DISPLAY_PLOT; // this display mode is shared among command managers
@@ -1357,7 +1358,7 @@ public class DrawingCommandManager
     float  scale = mScale;
     RectF  bbox  = mBBox;
     boolean sidebars = true;
-    boolean PDF_page = false; // HBX
+    boolean isPDFpage = false; // HBX
 
     boolean legs     = (mDisplayMode & DisplayMode.DISPLAY_LEG     ) != 0;
     boolean splays   = (mDisplayMode & DisplayMode.DISPLAY_SPLAY   ) != 0;
@@ -1396,20 +1397,23 @@ public class DrawingCommandManager
         break;
     }
 
-    float pscale = TDSetting.mToPdf; // HBX scale conflict width grid
+    float pdf_scale = 1.0f;
+    float pdf_off   = 0.0f;
     if ( zoom < 0 ) { // PDF print
-      PDF_page = true; // HBX
+      isPDFpage = true; // HBX
+      scale = TDSetting.mToPdf;
+      pdf_scale = TDSetting.mToPdf; // HBX scale conflict width grid
+      pdf_off   = 20.0f; // HBX 20 -> 1/72 inch
+      int margin = ItemDrawer.PDF_MARGIN;
       mm = new Matrix();
       // scale = 1.0f; // getBitmapScale();
-      scale = TDSetting.mToPdf;
-      bbox  = getBitmapBounds( pscale ); // HBX
+      bbox  = getBitmapBounds( scale ); // HBX
       // float sca = 1 / scale
-      int margin_left = 40, margin_right=40, margin_top=40,margin_bottom=40; // HBX
-      mm.postTranslate( margin_left - bbox.left/pscale, margin_top - bbox.top/pscale ); // HBX
-      mm.postScale( pscale, pscale ); // HBX
-      zoom = -zoom * pscale; // HBX
-      bbox = new  RectF((bbox.left)/pscale-margin_left, (bbox.top)/pscale-margin_top,
-              (bbox.right)/pscale+margin_right,(bbox.bottom)/pscale+margin_bottom); // HBX
+      mm.postTranslate( margin - bbox.left/scale, margin - bbox.top/scale ); // HBX
+      mm.postScale( scale, scale ); // HBX
+      zoom = -zoom * scale; // HBX
+      bbox = new  RectF( bbox.left/scale  - margin, bbox.top/scale - margin,
+                         bbox.right/scale + margin, bbox.bottom/scale + margin); // HBX
       sidebars = false; // do not draw sidebars
       // grids    = false; // HBX control sketch properties
       TDLog.v("scale " + scale + " bbox " + bbox.left + " " + bbox.top + " " + bbox.right + " " + bbox.bottom + " zoom " + zoom );
@@ -1465,13 +1469,14 @@ public class DrawingCommandManager
             dpath.draw( canvas );
           }
         } else {
-          if ( scale < 1 ) {
-            for ( DrawingPath p1 : mGridStack1 ) p1.draw( canvas, mm, bbox );
+          int xor_color = isPDFpage ? 0xffffffff : 0;
+          if ( scale < 1 || isPDFpage ) {
+            for ( DrawingPath p1 : mGridStack1 ) p1.draw( canvas, mm, bbox, xor_color );
           }
-          if ( scale < 10 ) {
-            for ( DrawingPath p10 : mGridStack10 ) p10.draw( canvas, mm, bbox );
+          if ( scale < 10 || isPDFpage ) {
+            for ( DrawingPath p10 : mGridStack10 ) p10.draw( canvas, mm, bbox, xor_color );
           }
-          for ( DrawingPath p100 : mGridStack100 ) p100.draw( canvas, mm, bbox );
+          for ( DrawingPath p100 : mGridStack100 ) p100.draw( canvas, mm, bbox, xor_color );
         }
       }
       if ( mNorthLine != null ) {
@@ -1487,21 +1492,13 @@ public class DrawingCommandManager
           if ( sidebars ) {
             mScaleRef.draw(canvas, zoom, mLandscape, sketch_unit, 0xffffff );
           } else {
-            if (PDF_page) { // HBX 20-> PDF 1/72 inch
-              mScaleRef.draw(canvas, zoom, mLandscape, 20, (bbox.bottom - bbox.top)*pscale-20, sketch_unit, 0xffffff ); // HBX
-            } else {
-              mScaleRef.draw(canvas, zoom, mLandscape, 20, bbox.bottom - bbox.top, sketch_unit, 0xffffff );
-            }
+            mScaleRef.draw(canvas, zoom, mLandscape, 20, (bbox.bottom - bbox.top)*pdf_scale-pdf_off, sketch_unit, 0xffffff ); // HBX
           }
         } else {
           if ( sidebars ) {
             mScaleRef.draw(canvas, zoom, mLandscape, sketch_unit );
           } else {
-            if (PDF_page) { // HBX
-              mScaleRef.draw(canvas, zoom, mLandscape, 20, (bbox.bottom - bbox.top)*pscale-20, sketch_unit ); // HBX
-            } else {
-              mScaleRef.draw(canvas, zoom, mLandscape, 20, bbox.bottom - bbox.top, sketch_unit );
-            }
+            mScaleRef.draw(canvas, zoom, mLandscape, 20, (bbox.bottom - bbox.top)*pdf_scale-pdf_off, sketch_unit ); // HBX
           }
         }
       }

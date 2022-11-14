@@ -2942,6 +2942,11 @@ public class DrawingWindow extends ItemDrawer
    */
   private void doStart( boolean do_load, float tt, Vector3D center )
   {
+    if ( mApp_mData == null ) {
+      TDLog.Error("DrawingWindow start with null DB");
+      finish();
+      return;
+    }
 
     // TDLog.v( "do start " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null); // not needed - guaranteed by callers
@@ -7042,24 +7047,9 @@ public class DrawingWindow extends ItemDrawer
       // builder.setResolution( new PrintAttributes.Resolution( "300", "300 dpi", 300, 300 ) );
       // PrintedPdfDocument pdf = new PrintedPdfDocument( TDInstance.context, builder.build() );
 
-      float scale = TDSetting.mToPdf;
-      RectF bnds = manager.getBitmapBounds( scale );
-      int margin_left = 40, margin_right=40, margin_top=40,margin_bottom=40;  //HBX sketch unit * 20, 2m=40
-      bnds = new  RectF((bnds.left-margin_left*scale)/1, (bnds.top-margin_top*scale)/1,
-              (bnds.right+margin_right*scale)/1,(bnds.bottom+margin_bottom*scale)/1); // HBX
-      int zw = (int)(bnds.right - bnds.left); // margin 40 + 80 6.1.76 HBX
-      int zh = (int)(bnds.bottom - bnds.top); // HBX
-      TDLog.v( "rect " + bnds.right + " " + bnds.left + " == " + bnds.bottom + " " + bnds.top + " W " + zw + " H " + zh );
-      PageInfo.Builder builder = new PageInfo.Builder( zw, zh, 1 );
-      PageInfo info = builder.create();
-
+      PageInfo info = getPdfPage( manager );
       PdfDocument pdf = new PdfDocument( );
       Page page = pdf.startPage( info );
-      // must select the zoom to the plot size - however the zoom arg is not for this purpose
-      // RectF bnds = manager.getBitmapBounds( scale );
-      // float zw = (bnds.right - bnds.left) / ( 300.0f * 11.69f );
-      // float zh = (bnds.bottom - bnds.top) / ( 300.0f * 16.54f );
-      // float zoom = 1.00f / ( (zw > zh)? zw : zh );
 
       // page.getCanvas().drawColor( 0 ); // TDSetting.mBitmapBgcolor );
       // page.getCanvas().drawRect( new RectF(0,0,zw,zh), BrushManager.blackPaint ); // TDSetting.mBitmapBgcolor );
