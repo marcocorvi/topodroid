@@ -683,7 +683,7 @@ public class OverviewWindow extends ItemDrawer
   {
     TDNum num = mNum;
     final String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
-    TDLog.v( "OVERVIEW export plot type " + mType + " with extension " + ext );
+    TDLog.v( "OVERVIEW export plot type " + mType + " with extension " + ext + " " + fullname );
     DrawingCommandManager manager = mOverviewSurface.getManager( DrawingSurface.DRAWING_OVERVIEW );
 
     // APP_OUT_DIR
@@ -854,7 +854,7 @@ public class OverviewWindow extends ItemDrawer
       PdfDocument pdf = new PdfDocument( );
       Page page = pdf.startPage( info );
 
-      manager.executeAll( page.getCanvas(), -1.0f, null, false ); // zoom is 1.0, false = no inverted_color
+      manager.executeAll( page.getCanvas(), -1.0f, null, true ); // zoom is 1.0, true = inverted_color
       // manager.executeAll( page.getCanvas(), -1.0f, null ); // zoom is 1.0
       pdf.finishPage( page );
       pdf.writeTo( fos );

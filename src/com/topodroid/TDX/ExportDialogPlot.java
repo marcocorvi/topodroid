@@ -238,9 +238,9 @@ public class ExportDialogPlot extends MyDialog
   {
     int selected = mSelectedPos;
     if ( mParentType == PARENT_OVERVIEW ) {
-      if ( selected > 0 ) ++selected;  // shift indices dxf .. xvi up
-      if ( selected == 1 || selected > 4 ) return; // no options for pdf xvi tnl c3d
-    }
+      if ( selected > 0 ) ++selected;  // shift indices dxf .. xvi up - skip csx
+    } 
+    if ( selected > 5 ) return; // no options for xvi tnl c3d
     switch ( selected ) {
       case 0: // Therion
         {
