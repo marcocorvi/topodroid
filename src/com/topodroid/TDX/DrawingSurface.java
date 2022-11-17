@@ -476,18 +476,19 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   /**
    * @param mode   drawing mode 
    * @param type   plot type ( unused )
+   * @param decl   declination [degrees]
    */
-  void addScaleRef( int mode, int type )
+  void addScaleRef( int mode, int type, float decl )
   {
     switch ( mode ) {
       case DRAWING_PLAN: 
-        mCommandManager1.addScaleRef( ); // true ); // true = with extendAzimuth
+        mCommandManager1.addScaleRef( decl ); // true ); // true = with extendAzimuth
         break;
       case DRAWING_PROFILE:
-        mCommandManager2.addScaleRef( );
+        mCommandManager2.addScaleRef( decl );
         break;
       default:
-        mCommandManager3.addScaleRef( );
+        mCommandManager3.addScaleRef( decl );
     }
   }
 
@@ -791,7 +792,10 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
     cmd.dropLastSplayPath( );
   }
 
-  // used only by H-Sections
+  /** set the north line
+   * @param path  new north line 
+   * @note  used only by DrawingWindow for H-Section
+   */
   public void setNorthPath( DrawingPath path ) { commandManager.setNorthLine( path ); }
 
   /** set the path for the first point of a measurement

@@ -333,6 +333,23 @@ public class DrawingPath extends RectF
     mPath.lineTo( x2, y2 );
   }
 
+  /** make a segment path (x1,y1)--(x2,y2) with angle to (x4,y4)
+   * @param x1    X coord of the first endpoint [scene] (angle corner)
+   * @param y1    Y coord of the first endpoint
+   * @param x2    X coord of the second endpoint
+   * @param y2    Y coord of the second endpoint
+   * @param x4    X ccord of angle point
+   * @param y4    Y coord of angle point
+   */
+  void makePath( float x1, float y1, float x2, float y2, float x4, float y4 )
+  {
+    // TDLog.v("make endpoint path - type " + mType + " at " + x1 + " " + y1 );
+    mPath = new Path( );
+    mPath.moveTo( x2, y2 );
+    mPath.lineTo( x1, y1 );
+    mPath.lineTo( x4, y4 );
+  }
+
   // implemented in DrawingUtil
   // void makeDotPath( float x2, float y2, float off_x, float off_y )
   // {
@@ -423,6 +440,16 @@ public class DrawingPath extends RectF
       top    = y2;
       bottom = y1;
     }
+  }
+
+  /** update the boundig rectangle to include (x,y)
+   * @param x x
+   * @param y y
+   */
+  void updateBounds( float x, float y )
+  { 
+    if ( x < left ) { left = x; } else if ( x > right ) { right = x; }
+    if ( y < top  ) { top  = y; } else if ( y > bottom ) { bottom = y; }
   }
 
   /** intersection with a segment (for shot paths)

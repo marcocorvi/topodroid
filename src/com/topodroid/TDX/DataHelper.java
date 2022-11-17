@@ -494,7 +494,7 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
-  /** @return the survey declination
+  /** @return the survey declination (or 0 if not known) [degrees]
    * @param sid   survey ID
    */
   float getSurveyDeclination( long sid )

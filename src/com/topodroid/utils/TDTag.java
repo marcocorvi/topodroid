@@ -57,5 +57,6 @@ public class TDTag
 
   public static final String TOPODROID_BEARING = "topodroid.bearing";
   public static final String TOPODROID_CLINO = "topodroid.clino";
+  public static final String TOPODROID_DECL  = "topodroid.decl";
 
 }

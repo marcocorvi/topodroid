@@ -307,7 +307,8 @@ public class OverviewWindow extends ItemDrawer
     // mOverviewSurface.setManager( DrawingSurface.DRAWING_OVERVIEW, type ); 
     mOverviewSurface.newReferences( DrawingSurface.DRAWING_OVERVIEW, type ); 
    
-    mOverviewSurface.addScaleRef( DrawingSurface.DRAWING_OVERVIEW, type );
+    float decl = ( type == PlotType.PLOT_PLAN )? mApp.mData.getSurveyDeclination(mSid) : 0;
+    mOverviewSurface.addScaleRef( DrawingSurface.DRAWING_OVERVIEW, type, decl );
 
     // float xoff = 0; float yoff = 0;
 

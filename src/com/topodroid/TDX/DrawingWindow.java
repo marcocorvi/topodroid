@@ -465,7 +465,7 @@ public class DrawingWindow extends ItemDrawer
   // String getSurvey() { return TDInstance.survey; }
 
   private TDNum mNum;
-  private float mDecl;
+  private float mDecl = 0;
   private String mFormatClosure;  // loop closure report format
   // private int nr_multi_bad;    // number of bad-sibling leg shots - TODO move to TDNum
   private ArrayList< StringPair > mMultiBad;
@@ -1004,9 +1004,11 @@ public class DrawingWindow extends ItemDrawer
   // used by H-Sections for the North line
   private void addFixedSpecial( float x1, float y1, float x2, float y2 ) // float xoff, float yoff )
   {
+    float decl = mApp_mData.getSurveyDeclination( mSid ); // declination only displayed
+    TDLog.v("Declination " + decl );
     DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
     dpath.setPathPaint( BrushManager.highlightPaint );
-    DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2 ); // xoff, yoff ); // LEG PATH
+    DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, decl ); // xoff, yoff ); // LEG PATH
     mDrawingSurface.setNorthPath( dpath );
     // mLastLinePath = null;
   }
@@ -1612,7 +1614,8 @@ public class DrawingWindow extends ItemDrawer
     // mDrawingSurface.setManager( manager_type, type );
 
     DrawingUtil.addGrid( e1, e2, s1, s2, mDrawingSurface );
-    mDrawingSurface.addScaleRef( manager_type, type );
+    float decl = ( type == PlotType.PLOT_PLAN )? mApp_mData.getSurveyDeclination( mSid ) : 0;
+    mDrawingSurface.addScaleRef( manager_type, type, decl );
 
     if ( type == PlotType.PLOT_PROJECTED ) {
       cosp = TDMath.cosd( mPlot2.azimuth );
@@ -2389,7 +2392,7 @@ public class DrawingWindow extends ItemDrawer
     } else {
       resetReference( null, false );
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
-      mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)PlotType.PLOT_NULL );
+      mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)PlotType.PLOT_NULL, 0 );
     }
 
     mLayoutTools  = (LinearLayout) findViewById( R.id.layout_tools );
@@ -3041,7 +3044,7 @@ public class DrawingWindow extends ItemDrawer
 
     mDrawingSurface.newReferences( DrawingSurface.DRAWING_SECTION, (int)mType );
     // TDLog.v( "section list " + list.size() + " tt " + tt + " azimuth " + mAzimuth + " clino " + mClino );
-    mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)mType );
+    mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)mType, 0 );
     float xfrom=0;
     float yfrom=0;
     float zfrom=0;
@@ -3226,7 +3229,7 @@ public class DrawingWindow extends ItemDrawer
 
     mDrawingSurface.newReferences( DrawingSurface.DRAWING_SECTION, (int)mType );
     DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface ); // FIXME_SK moved out
-    mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)mType );
+    mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)mType, 0 );
     float xfrom=0;
     float yfrom=0;
     float zfrom=0;
@@ -3424,7 +3427,7 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
       // mAllSymbols =
       mDrawingSurface.modeloadDataStream( filename3b, null, false /*, FIXME-MISSING missingSymbols */ );
-      mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)type );
+      mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)type, 0 );
     }
 
     // if ( ! mAllSymbols ) {

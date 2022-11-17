@@ -18,8 +18,8 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDMath;
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
 
@@ -41,6 +41,9 @@ class DrawingScaleReference
   private Paint mPaint;
   // private String mUnits;
   // private boolean mExtendAzimuth = false;
+  private boolean mHasDecl;  // declination [degrees]
+  private float mSdecl; // sin of declination
+  private float mCdecl; // cos of declination
 
   private final static float[] mValues = { 0, 0.01f, 0.05f, 0.1f, 0.5f, 1, 2, 5, 10, 20, 50, 100, 200, 500 };
 
@@ -62,8 +65,9 @@ class DrawingScaleReference
    *            (negative values are allowed with the meaning of negative offset from screen bottom-right)
    * @param widthPercent maximum width of scale reference in percentage of screen width
    *                     (valid value are in range [0.2, 1.0]
+   * @param decl declination [degrees]
    */
-  DrawingScaleReference( Paint p, Point loc, float widthPercent ) // boolean with_azimuth 
+  DrawingScaleReference( Paint p, Point loc, float widthPercent, float decl ) // boolean with_azimuth 
   {
     if (p == null)
     {
@@ -81,6 +85,10 @@ class DrawingScaleReference
     else if(widthPercent > MAX_WIDTH_PERCENT) mMaxWidthPercent = MAX_WIDTH_PERCENT;
     else mMaxWidthPercent = widthPercent;
 
+    mHasDecl = (Math.abs(decl) > 0.01); 
+    mSdecl = TDMath.sind( decl );
+    mCdecl = TDMath.cosd( decl );
+    // TDLog.v("Scale ref decl " + decl + " " + mHasDecl + " c " + mCdecl + " s " + mSdecl );
     mLocation = loc;
     // mUnits = getUnits( TDSetting.mUnitGrid )
     // mExtendAzimuth = with_azimuth;
@@ -188,18 +196,30 @@ class DrawingScaleReference
 	if ( landscape ) {
 	  float x = locX + arrowlen;
           float y = locY - 8 * HEIGHT_BARS;	  
+          if ( mSdecl > 0 ) y -= arrowlen * mSdecl;
           canvas.drawLine( x, y, x - arrowlen, y, mPaint);
           canvas.drawLine( x-arrowlen+arrowtip, y-arrowtip, x - arrowlen, y, mPaint);
           canvas.drawLine( x-arrowlen+arrowtip, y+arrowtip, x - arrowlen, y, mPaint);
+          if ( mHasDecl ) {
+            float xd = x - arrowlen * mCdecl; // FIXME might be wrong
+            float yd = y + arrowlen * mSdecl;
+            canvas.drawLine( x, y, xd, yd, mPaint);
+          }
           // if ( mExtendAzimuth && TDAzimuth.mFixedExtend == 0 ) {
           //   canvas.drawLine( x, y, x - TDMath.cosd( TDAzimuth.mRefAzimuth ), y - TDMath.sind( TDAzimuth.mRefAzimuth ), mPaint );
           // }
         } else {
           float x = locX;
           float y = locY - 4 * HEIGHT_BARS;
+          if ( mSdecl > 0 ) x += arrowlen * mSdecl;
           canvas.drawLine( x, y, x, y - arrowlen, mPaint);
           canvas.drawLine( x-arrowtip, y-arrowlen+arrowtip, x, y - arrowlen, mPaint);
           canvas.drawLine( x+arrowtip, y-arrowlen+arrowtip, x, y - arrowlen, mPaint);
+          if ( mHasDecl ) {
+            float xd = x - arrowlen * mSdecl;
+            float yd = y - arrowlen * mCdecl;
+            canvas.drawLine( x, y, xd, yd, mPaint);
+          }
           // if ( mExtendAzimuth && TDAzimuth.mFixedExtend == 0 ) {
           //   canvas.drawLine( x, y, x + TDMath.sind( TDAzimuth.mRefAzimuth ), y - TDMath.cosd( TDAzimuth.mRefAzimuth ), mPaint );
           // }

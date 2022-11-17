@@ -849,7 +849,7 @@ public class Archiver
       ZipInputStream zin = new ZipInputStream( fis );
       // int nr_entry = 0;
       while ( ( ze = zin.getNextEntry() ) != null ) {
-        // TDLog.v( "ZIP 8 entry " + ze.getName() ); // entry names do not have directory but only filename with extension
+        TDLog.v( "ZIP 8 entry " + ze.getName() ); // entry names do not have directory but only filename with extension
         // ++ nr_entry;
         if ( ze.isDirectory() ) {
           // TDLog.v( "ZIP 8 dir entry " + nr_entry + " \"" + ze.getName() + "\"");
@@ -858,7 +858,6 @@ public class Archiver
           // TDLog.v( "ZIP 8 entry " + nr_entry + " \"manifest\": skipping ...");
           // skip
         } else {
-          // TDLog.Log( TDLog.LOG_ZIP, "Zip file entry " + nr_entry + " \"" + ze.getName() + "\"");
           // TDLog.v( "ZIP 8 file entry " + nr_entry + " \"" + ze.getName() + "\"");
           boolean sql = false;
           pathname = null;
@@ -923,7 +922,7 @@ public class Archiver
     if ( ok_manifest < 0 ) { // delete survey folder
       TDLog.Error("TODO manifest result " + ok_manifest );
     }
-    // TDLog.v( "unarchive stream returns " + ok_manifest );
+    TDLog.v( "unarchive stream returns " + ok_manifest );
     return ok_manifest; // return 0 or 1
   }
 

@@ -529,13 +529,15 @@ public class DrawingCommandManager
 
 
   /** add the scalebar
+   * @param decl   declination [degrees]
    * @note this is the only place DrawingScaleReference is instantiated
    */
-  void addScaleRef( ) // boolean with_azimuth
+  void addScaleRef( float decl ) // boolean with_azimuth
   {
     DrawingScaleReference scale_ref = new DrawingScaleReference( BrushManager.referencePaint, 
       new Point(20,-(int)(20+40*Float.parseFloat( TDInstance.getResources().getString( R.string.dimmy ) ) )),
-      0.33f ); // with_azimuth
+      0.33f,
+      decl ); // with_azimuth
     synchronized ( TDPath.mGridsLock ) { mScaleRef = scale_ref; }
   }
 
@@ -1114,10 +1116,13 @@ public class DrawingCommandManager
   //   }
   // }
  
-  
-  // used by H-Sections
-  void setNorthLine( DrawingPath path ) 
+  /** set the north line
+   * @param path  new north line 
+   * @note used only by H-Sections
+   */
+  void setNorthLine( DrawingPath path )
   { 
+    TDLog.v("Set North line");
     synchronized( TDPath.mGridsLock ) { mNorthLine = path; }
   }
 
@@ -1400,7 +1405,7 @@ public class DrawingCommandManager
     float pdf_scale = 1.0f;
     if ( zoom < 0 ) { // PDF print
       isPDFpage = true; // HBX
-      scale = TDSetting.mToPdf;
+      // scale = TDSetting.mToPdf;
       pdf_scale = TDSetting.mToPdf; // HBX scale conflict width grid
       int margin = ItemDrawer.PDF_MARGIN;
       mm = new Matrix();

@@ -48,11 +48,12 @@ class Scanline
   }
   
   /** @return the position of the next quote
+   * @param quote   quote chaaracter (either '"' or '\'')
    */
-  private int nextQuote()
+  private int nextQuote( int quote )
   {
     int next = pos;
-    while ( next < len && val.charAt(next) != '"' ) ++next; 
+    while ( next < len && val.charAt(next) != quote ) ++next; 
     return next;
   }
 
@@ -70,8 +71,9 @@ class Scanline
    */
   String stringValue( ) 
   {
-    ++pos; // skip '"'
-    int next_pos = nextQuote( );
+    int quote = val.charAt( pos ); // quote character
+    ++pos; // skip quote character
+    int next_pos = nextQuote( quote );
     String ret = (pos == next_pos )? "" : val.substring(pos, next_pos );
     // TDLog.v( "SCANLINE stringValue " + pos + " " + next_pos + " <" + ret + ">" );
     pos = (next_pos < len )? next_pos + 1 : len;
