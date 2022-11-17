@@ -13,7 +13,7 @@
 SQLITE=`which sqlite3`
 ZIP=`which zip`
 DATE=`which date`
-if [ -z $SQLITE ] : then
+if [ -z $SQLITE ] ; then
     echo "Missing sqlite3"
     exit 1
 fi
@@ -38,7 +38,7 @@ if [ ! -f $distox14 ] ; then
      echo "TopoDroid database not found"
      exit 2
 else 
-     db_version=`echo "PRAMGA user_version;" | $SQLITE $distox14`
+     db_version=`echo "PRAGMA user_version;" | $SQLITE $distox14`
 fi
 if [ ! -f $device10 ] ; then
      td_version=`echo "select value from configs where key=\"version\";" | $SQLITE $device10`
@@ -61,7 +61,7 @@ else
     $DATE +%Y-%m-%d >> __tmp/manifest
 
 cat > $name.sqlite << x123end
-.output __tmp/survey.sqlite
+.output __tmp/survey.sql
 .mode insert surveys
 select surveys.* from surveys where surveys.name="$name";
 .mode insert plots
@@ -88,13 +88,13 @@ audio="audio/$name"
 photo="photo/$name"
 note="note/$name.txt"
 
-    if [ -e $tdr && -z "$(ls -A $tdr/$name-*.tdr)" ] ; then
+    if [ -e $tdr ] && [ -z "$(ls -A $tdr/$name-*.tdr)" ] ; then
         cp -l $tdr/$name-*.tdr __tmp
     fi
-    if [ -e $audio && -z "$(ls -A $audio/*.wav)" ] ; then
+    if [ -e $audio ] && [ -z "$(ls -A $audio/*.wav)" ] ; then
         cp -l $audio/*.wav __tmp 
     fi
-    if [ -e $photo && -z "$(ls -A $photo/*.wav)" ] ; then
+    if [ -e $photo ] && [ -z "$(ls -A $photo/*.wav)" ] ; then
         cp -l $photo/*.jpg __tmp
     fi
     if [ -e $note ] ; then
