@@ -616,7 +616,6 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )
   {
-    // TDLog.v( "get view at " + pos );
     DBlock b = (DBlock)(getItem( pos ));
 
     ViewHolder holder; // = null;
@@ -624,6 +623,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       if ( TDSetting.mEditableStations ) {
         convertView = mLayoutInflater.inflate( R.layout.dblock_row, parent, false );
       } else {
+        // TDLog.v( "get view at " + pos + " parent " + parent.getId() );
         convertView = mLayoutInflater.inflate( R.layout.dblock_row_noedit, parent, false );
       }
       holder = new ViewHolder( 
