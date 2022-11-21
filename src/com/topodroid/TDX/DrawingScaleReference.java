@@ -201,9 +201,9 @@ class DrawingScaleReference
           canvas.drawLine( x-arrowlen+arrowtip, y-arrowtip, x - arrowlen, y, mPaint);
           canvas.drawLine( x-arrowlen+arrowtip, y+arrowtip, x - arrowlen, y, mPaint);
           if ( mHasDecl ) {
-            float xd = x - arrowlen * mCdecl; // FIXME might be wrong
+            float xd = x - arrowlen * mCdecl;
             float yd = y + arrowlen * mSdecl;
-            canvas.drawLine( x, y, xd, yd, mPaint);
+            canvas.drawLine( x, y, xd, yd, BrushManager.lightBluePaint);
           }
           // if ( mExtendAzimuth && TDAzimuth.mFixedExtend == 0 ) {
           //   canvas.drawLine( x, y, x - TDMath.cosd( TDAzimuth.mRefAzimuth ), y - TDMath.sind( TDAzimuth.mRefAzimuth ), mPaint );
@@ -218,7 +218,7 @@ class DrawingScaleReference
           if ( mHasDecl ) {
             float xd = x - arrowlen * mSdecl;
             float yd = y - arrowlen * mCdecl;
-            canvas.drawLine( x, y, xd, yd, mPaint);
+            canvas.drawLine( x, y, xd, yd, BrushManager.lightBluePaint);
           }
           // if ( mExtendAzimuth && TDAzimuth.mFixedExtend == 0 ) {
           //   canvas.drawLine( x, y, x + TDMath.sind( TDAzimuth.mRefAzimuth ), y - TDMath.cosd( TDAzimuth.mRefAzimuth ), mPaint );
