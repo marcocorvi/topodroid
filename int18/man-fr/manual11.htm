@@ -1,90 +1,156 @@
-<html><body>
-<h3>[11] CROSS-SECTIONS</h3>
+<html>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+<body>
+<h3>[11] SECTIONS TRANSVERSES</h3>
 
-X-sections are kind of special because they do not belong to the sketch but are independent sketches associated to either the plan or the profile.
-TopoDroid has two types of x-sections: <u>leg</u> x-sections and <u>station</u> x-sections. The former cross a leg, the latter are defined at a station.<br><p>
+Les sections transverses sont un genre de dessin particulier parce qu'elles n'appartiennent 
+pas au croquis mais sont des dessins indépendants associés soit au plan soit à 
+la coupe. TopoDroid peut créer deux types de sections&#160;transverses : des sections 
+transverses de cheminement et des sections transverses de station. L'une coupe 
+le cheminement n'importe où alors que l'autre est positionnée à une station particulière. 
+<br>
+<p> Les sections transverses du plan sont toujours dans un plan vertical et la 
+  direction vers le haut est la verticale.. <br>
+  Les sections transverses sur la coupe sont dans un plan dont l'inclinaison est 
+  définie par la ligne de section. L'azimut de la visée transverse est dirigé 
+  vers le haut. Toutefois, si l'inclinaison du plan de la section transverse est 
+  supérieure à un &quot;seuil horizontal&quot;, la section est&nbsp; considérée 
+  comme &quot;horizontale&quot; et c'est alors le nord magnétique qui est dirigé 
+  vers le haut. 
+<p> On peut affecter un commentaire à une section transverse. <br>
+<p> <b>Sections transverses de cheminement</b>
+<p> Pour indiquer à TopoDroid que vous voulez dessiner une section transverse, 
+  vous devez dessiner une ligne de &quot;section&quot;, soit sur la vue en plan, 
+  soit sur la vue en coupe. Cette ligne de section définit la position de la section 
+  transverse et son orientation. 
+<p> Une section transverse représente la forme de la caverne dans un plan qui 
+  la coupe. L'orientation de la section de coupe est l'orientation de ce plan, 
+  c'est-à-dire l'orientation de la ligne perpendiculaire au plan et pointant dans 
+  la direction de la visée. On définit l'orientation de la section de coupe par 
+  la manière dont est tracée la ligne de section. Comme indicateur, la ligne de 
+  coupe dispose d'une coche partant de la ligne et pointant dans la direction 
+  de la vue de la section.<br>
+  La taille de cette &quot;coche&quot; peut être ajustée dans la boîte de dialogue 
+  <u>Paramètres</u>.</p>
+<p> Vous pouvez choisir entre une photographie de section transverse (prise avec 
+  un appareil photo) et une section transverse dessinée. Dans le premier cas, 
+  il suffit de prendre une photo qui vous rappellera la forme de la galerie lors 
+  de la réalisation de la topographie de la grotte. Assurez-vous d'avoir un spéléologue 
+  sur l'image qui servira d'échelle.</p>
+<p> Dans le second cas, vous esquissez la section transverse sur une page avec 
+  les outils de dessin habituels de TopoDroid. En tant que référence, TopoDroid 
+  affiche la visée de cheminement traversée par la section et les visées d'habillage 
+  à ses extrémités. La station en avant (celle que regarde la section transverse) 
+  est centrée dans la page. Les visées vers l'avant sont gris clair, celles vers 
+  l'arrière sont plus minces et gris plus foncé. Toutes les visées sont affichées 
+  projetées sur le plan de la section transverse. Un point &quot;utilisateur&quot; 
+  est placé sur le plan de section à l'endroit où la visée coupe la ligne de section 
+  [T].</p>
+<p> Une fois fermées, les sections transverses peuvent être rouvertes et modifiées 
+  en sélectionnant la ligne de section relative en mode &quot;edit&quot; et en 
+  appuyant sur le bouton <u>Modifier</u>. </p>
+<p>&nbsp; 
+<p> <b>Sections transverses sur un plan </b>
+<p> Une section transverse définie sur la vue en plan est toujours "verticale" 
+  (zéro). Son orientation (c'est-à-dire l'azimut du plan de la section transverse) 
+  est déterminée par l'angle de la ligne de section. Très souvent le plan de la 
+  section transverse est perpendiculaire à la galerie, mais il peut être égal 
+  à tout angle nécessaire. Par exemple, une ligne de section tracée de gauche 
+  à droite (par exemple horizontalement avec un angle de 90 degrés par rapport 
+  à la verticale) a une direction de vue vers le nord (vers le haut, azimut 0). 
+  Si elle est légèrement inclinée vers le bas à un angle de 120°, elle aura une 
+  direction de vue d'un azimut égal à 30 degrés (120-90). <br>
+  La portion traversée est affichée verticalement lorsque la section transverse 
+  a le même azimut que le cheminement. Sinon, elle est inclinée à droite ou à 
+  gauche. 
+<p>Sur un plan, il est possible de réaliser une section transverse qui coupe plusieurs 
+  visées de cheminement. Toutes les visées de cheminement traversées et les visées 
+  d'habillage de leurs stations sont indiquées comme référence pour le croquis 
+  de la section transverse. Le point de croisement est marqué sur chaque visée 
+  de cheminement.
+<p><br>
+  <img src="plan-xsection.png" caption="Plan view x-section"> 
+<p> <b>Sections transverses sur une coupe</b>
+<p> Une section transverse sur la vue en coupe peut être soit "horizontale" (sur 
+  les visées verticales dans les puits) ou "verticale" (sur des galeries plus 
+  ou moins horizontales). Elles sont considérés comme "horizontales" si leur inclinaison 
+  dépasse la valeur du H-seuil. L'azimut des sections transverses verticales est 
+  déterminé par celui de la portion traversée.<br>
 
-A plan x-section is always in a vertical plane and the upward direction is the vertical.<br>
-A profile x-section is in a plane with the inclination defined by the section-line.
-The upward direction is the azimuth of the crossed leg.
-However, if the inclination of the x-section plane is above a "horizontal threshold", the section is considered "horizontal" and the
-upward direction is the magnetic North.<br><p>
+<p> Les sections transverses "Horizontales" s'affichent toujours avec le nord 
+  en haut. En outre, une ligne de référence de 5 m de long, orientée au nord, 
+  leur est ajoutée. La visée de cheminement est montrée à son azimut. Les sections 
+  transverses &quot;Verticales&quot; ont toujours l'azimut de la portion traversée 
+  (ou l'inverse si la direction de la ligne de coupe est l'opposé de celle de 
+  la portion traversée). La portion traversée est affichée verticalement car la 
+  section transverse a le même azimut que la visée.<br>
 
-You can assign a comment to an x-section.<br><p>
+<p> Si la ligne de section est tracée à partir de la droite vers la gauche, la 
+  section transverse est orientée vers le bas et à -90 degrés d'inclinaison. Il 
+  s'agit d'une section transverse "horizontale" comme vue par dessus. La plupart 
+  du temps, on appelle "horizontale" une section transverse de ce type, comme 
+  si on posait naturellement une carte sur une surface plane et qu'on la regardait 
+  vers le bas. Si vous tracez la ligne de section de gauche à droite la section 
+  transverse est orientée vers le haut (inclinaison &#160;+90 degrés). 
+<p>Sur une coupe, les sections transverses ne doivent traverser qu'une seule visée 
+  de cheminement.
+<p>&nbsp;
+<p>
 
-
-<b>Leg x-sections</b><p>
-To tell TopoDroid that you want to draw a x-section you have to draw a "section" line, either in the plan view or in the profile view. The section line defines the position of the x-section and its orientation.<br><p>
-
-A x-section is the shape of the cave in a plane that cuts it. The orientation of the x-section is the orientation of this plane, i.e., the direction of the line perpendicular to the plane, and pointing in the direction of sight. You define the orientation of the x-section by the way you trace the section line. As an indicator the section line has a tick pointing from the line to the direction of view of the x-section.<br>
-The size of this "tick" can be adjusted in the <i>settings</i> dialog.<br><p>
-
-You can choose between a photo x-section, and a sketch x-section. In the first case just take a photo that will remind you of the shape of the gallery when you will be drafting the cave map. Make sure to have a fellow caver in the picture who will serve as a size reference.<br><p>
-
-In the second case you sketch the x-section on a canvas with the usual drawing tools of TopoDroid. As a reference TopoDroid displays the leg shot traversed by the x-section and the splay shots at its endpoints. The station in front (the one that the x-section is looking at) is centered in the grid. The splay shots in front are light grey, those behind are thinner darker grey. All the shots are displayed projected on the plane of the x-section. A white dot marks where the section plane intersects the leg [T].<br><p>
-
-Leg x-sections can be re-opened and modified by selecting, in "edit" mode, the section line or the section point, and tapping the <i>edit</i> button.<br><p>
-
-<b>X-sections in the plan view</b><br>
-X-sections defined in the plan view are always "vertical" (zero inclination). Their orientation (ie, the azimuth of the x-section plane) is determined by the angle of the section line. Very often the section plane is perpendicular to the gallery, but can be at any needed angle. For example, a section line drawn from left to right(e.g. horizontal, angle 90&deg; from the vertical) has a direction of view to the North (up, azimuth 0). If drawn slightly downwards at an angle of 120, it will have a direction of view to an azimuth of 30&deg;.<br>
-The crossed leg is displayed vertical when the x-section has the same azimuth as the leg. Otherwise it is tilted right or left.<br><p>
-
-In plan view it is possible to make a x-section that crosses multiple legs. All the crossed legs and the splays at their stations are shown as x-section sketch reference. The crossing point is marked on every leg.<br>
-
-<img src="plan-xsection.png" >
-<br><p>
-
-<b>X-sections in the profile</b><br>
-X-sections in the profile view can be either "horizontal" (on vertical shots in pits) or "vertical" (on more or less horizontal galleries). They are considered "horizontal" if their inclination exceeds the value of the H-threshold setting.<br>
-The azimuth of vertical x-sections is determined by that of the crossed leg.<br><p>
-
-"Horizontal" x-sections are displayed always with the North up. Furthermore, a reference line 5 m long, oriented to the North, is added to them. The leg is shown at its azimuth<br>
-"Vertical" x-sections always have the azimuth of the crossed leg (or the opposite one if the direction of the section line is the opposite of that of the leg). The crossed leg is displayed vertical as the x-section has the same azimuth as the leg.<br><p>
-
-If the section line is traced from the right to left, the x-section is oriented downwards and has -90&deg; inclination. This is a "horizontal" x-section as seen from above. Most of the times you will want to draw "horizontal" x-sections this way, as it is more natural to lay a map on a surface and look down at it. If you trace the section line from left to right the x-section is oriented upwards (inclination +90&deg;).<br><p>
-
-In profile view the leg x-section must cross a single leg.<br><p>
- 
-<img src="profile-xsection.png" >
-<br><p>
-
-<b>Section points</b><br>
-If the setting for the "auto section points" is checked, when you insert a x-section, either by drawing a section-line or inserting it at a station, the corresponding section point is added to the sketch.
-Section points are displayed as white squares and and orange line connecting them to the relative section line or station.<br>
-If the x-section is deleted, the corresponding section point is also deleted.<br><p>
-
-<b>X-section files</b><br>
-Each x-section is saved in a separate file in the "tdr" subfolder. The files get consecutive names "MySurvey-xx0.tdr", "MySurvey-xx1.tdr", etc. The "xx0" numbering part of the name is also displayed in the Section dialog that pops up when you create or edit a section.<br>
-The file is deleted when a x-section is deleted.<br><p>
-
-X-sections can be exported in other formats just like the other sketches, except in <i>cSurvey</i> format.
-X-sections are included in the sketch exports in the DXF, SVG, <i>cSurvey</i>, provided there is the associated section point.<br><p>
-
-<b>Station x-sections</b> [E]<br>
-This is another way to insert x-sections.
-The "Station" dialog, that you get by tapping on a station point in <i>Edit</i> mode, displays the station coordinates
-and has some buttons:
+<img src="profile-xsection.png" caption="Profile view x-section">
+<br>
+<p> <b>Points de Section </b><br>
+  Si le paramètre de la section automatique "points" est cochée, lorsque vous 
+  insérez une section transverse, soit en dessinant une ligne de section soit 
+  en l'insérant dans une station, le point correspondant est ajouté au croquis. 
+  Les points de section sont affichés sous forme de carrés blancs. <br>
+  Si la section transverse est supprimée, le point de section correspondant est 
+  également supprimé. <br>
+<p> <b>Fichiers des Sections transverses</b><br>
+  Chaque section transverse est enregistrée dans un fichier séparé dans le sous-dossier 
+  "tdr". Les fichiers ont des noms incrémentés "MySurvey-xx0.tdr", "MySurvey-xx1.tdr", 
+  etc. La partie du nom numérotée "XX0" est également affichée dans la section 
+  Boîte de dialogue qui apparaît lorsque vous créez ou modifiez un fichier. <br>
+  Le fichier est supprimé lorsqu'une section transverse est supprimée. 
+<p> Les sections transverses peuvent être exportées dans d'autres formats comme 
+  les autres croquis, sauf dans <em>cSurvey</em> format. Les sections transverses 
+  sont incluses dans l'exportation des esquisses au format DXF, SVG, <em>cSurvey</em>, 
+  à condition qu'il y ait le point de section associé. 
+<p> <b>Sections transverses à la station &quot;Vers&quot;</b> [E] <br>
+  C'est une autre façon d'insérer des sections transverses. La boite de dialogue 
+  "Station&quot;, qui s'ouvre en appuyant brièvement sur le point désignant une 
+  station du croquis puis sur l'icône &quot;Edition&quot;, affiche les coordonnées 
+  des stations et possède des boutons&#160;: 
 <ul style="margin-top=0">
-<li>"Continue" the survey from the station. Set the station as the "active station", ie, that to which the next shot will be attached</li>
-<li>"Reset" the centerline display after the station.</li>
-<li>"Toggle" the display of the splays at the station.</li>
-<li>"X-Section" [E] opens a <u>sketch window</u> to draw a x-section at the station.</li>
+  <li>&quot;OK&quot; : Continuer le relevé topographique à partir de cette station. 
+    Définit la station comme &quot;station active&quot;, c'est-à-dire, celle à 
+    laquelle la visée suivante sera attachée.</li>
+  <li>&quot;Réinitialiser&quot; l'affichage de la ligne de cheminement après la 
+    station. </li>
+  <li> &quot;OK&quot; : Basculer l'affichage des visées d'habillage à la station.</li>
+  <li>&quot;XSection&quot; [E] ouvre une <a href="manual09.htm">fenêtre de croquis</a> 
+    pour dessiner une section transverse à la station. </li>
+  
 </ul>
-
-If the mean clino of the legs at the station is smaller than the "vertical threshold", the x-section at a station is drawn in a vertical plane passing through the station, otherwise it is horizontal.
-The station x-section is useful when you take several splay shots around the station to describe the shape of the gallery. 
-The x-section plane can be oriented with the <i>compass</i> button.
-If the station has only two legs the plane can be oriented along the bisecant of the angles formed by the (horizontal projections of the) legs. If there is only one leg it can be oriented orthogonal to that. If there are more than two legs you have to use the
-<i>compass</i> button.<br><p>
-
-Station x-sections can be re-opened and modified by selecting, in "edit" mode, the station or the section point, and tapping the <i>edit</i> button.<br><p>
-
-See also<br>
-<a href="page_sketch_station.htm">Sketch station edit dialog</a>,<br>
-<a href="page_line_dialog.htm">Sketch line edit dialog</a>.
-<br><p>
-
-<a href="manual10.htm">&lt; Sketch drawing</a> |
-<a href="manual12.htm">Overview window &gt;</a>
-
+<p>Si la pente de visée moyenne est inférieure au «seuil vertical», la section 
+  transverse d'une station est dessinée dans un plan vertical passant par cette 
+  station, sinon elle est horizontale. La section transverse à la station &quot;Vers&quot; 
+  est utile lorsque vous prenez plusieurs visées d'habillage autour de la station 
+  pour décrire la forme de la galerie. Le plan de la section x peut être orienté 
+  avec le bouton &quot;Compass&quot;. De plus, si la station n'a que deux visées, 
+  le plan peut être orienté le long de la bissectrice des angles formés par les 
+  projections (horizontales des plans). S'il n'y a qu'une seule visée, il peut 
+  être orienté orthogonalement à cela. S'il y a plus de deux visées, vous devrez 
+  utiliser le bouton de la boussole.</p>
+<p>Les sections transverses des stations peuvent être rouvertes et modifiées en 
+  sélectionnant, en mode &quot;<em>édition</em>&quot;de station ou de point de 
+  section, et en appuyant sur le bouton d'édition.<br>
+</p>
+<p> Voir aussi :<br>
+  <a href="page_sketch_station.htm">Boîte de dialogue Modification des stations</a><br>
+  <a href="page_line_dialog.htm">Boîte de dialogue Modification des lignes</a><br>
+<p> <a href="manual10.htm">&#160;&lt; Croquis</a> | <a href="manual12.htm">Fenêtre 
+  d'aperçu&#160;&gt;</a> 
 </body></html>
