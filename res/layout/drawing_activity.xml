@@ -109,7 +109,7 @@
         android:layout_height="match_parent" 
         android:max="200"
         android:background="#666666"
-        android:progressDrawable="@xml/progress2"
+        android:progressDrawable="@xml/progress3"
       />
     </LinearLayout>
   </LinearLayout>

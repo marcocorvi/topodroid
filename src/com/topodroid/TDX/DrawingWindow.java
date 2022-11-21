@@ -557,6 +557,7 @@ public class DrawingWindow extends ItemDrawer
   private SeekBar      mScaleBar;
 
   // window mode
+  static final int MODE_NONE  = 0; // initial mode
   static final int MODE_DRAW  = 1;
   static final int MODE_MOVE  = 2;
   static final int MODE_EDIT  = 3;
@@ -575,7 +576,7 @@ public class DrawingWindow extends ItemDrawer
   private static final int CONT_CONTINUE  = 4;  // continue: continue existing line
   // static final private int CONT_MAX   = 5;
 
-  private int mMode         = MODE_MOVE;
+  private int mMode         = MODE_NONE;
   private int mTouchMode    = MODE_MOVE;
   private int mContinueLine = CONT_NONE;
   // private float mDownX;
@@ -590,6 +591,7 @@ public class DrawingWindow extends ItemDrawer
   private float mSave2Y;
   private float mStartX; // line shift scene start point
   private float mStartY;
+  private float mRotateScale = 180 / TopoDroidApp.mDisplayHeight;
 
   // private boolean mAllSymbols; // whether the library has all the symbols of the plot
 
@@ -1813,6 +1815,7 @@ public class DrawingWindow extends ItemDrawer
     if ( pt != null ) {
       mHotItemType = pt.type();
       mHotPath     = pt.mItem;
+      // TDLog.v("set button 3 item - type " + mHotItemType );
       // DrawingPath item = pt.mItem;
       switch ( mHotItemType ) {
         case DrawingPath.DRAWING_PATH_FIXED:
@@ -2534,6 +2537,7 @@ public class DrawingWindow extends ItemDrawer
   // private int mSplayMode;
 
   /** reset the status mode(s) to the default values
+   * @note called by popInfo pushInfo
    */
   private void resetStatus()
   {
@@ -2542,7 +2546,7 @@ public class DrawingWindow extends ItemDrawer
     mShiftDrawing = false;
     // mContinueLine = TDSetting.mContinueLine; // do not reset cont-mode
     resetModified();
-    setMode( MODE_MOVE ); // this setTheTitle() as well
+    setMode( MODE_MOVE ); // this setTheTitle() as well, and clearHotPath( INVISIBLE )
     mTouchMode    = MODE_MOVE;
     setMenuAdapter( getResources(), mType );
   }
@@ -4695,6 +4699,7 @@ public class DrawingWindow extends ItemDrawer
         DrawingPointPath path = (DrawingPointPath)(sp.mItem);
         if ( BrushManager.isPointOrientable(path.mPointType) ) {
           mTouchMode = MODE_ROTATE;
+          mRotateScale = ((xc > TopoDroidApp.mBorderRight)? 180 : -180) / TopoDroidApp.mDisplayHeight;
           mStartY = yc;
         }
       }
@@ -4877,7 +4882,7 @@ public class DrawingWindow extends ItemDrawer
         mSaveY = yc;
       }
     } else if ( mTouchMode == MODE_ROTATE ) {
-      mDrawingSurface.rotateHotItem( 180 * ( yc - mStartY ) / TopoDroidApp.mDisplayHeight );
+      mDrawingSurface.rotateHotItem( mRotateScale * ( yc - mStartY ) );
       mStartX = xc; // xs;
       mStartY = yc; // ys;
       modified();
@@ -5603,6 +5608,18 @@ public class DrawingWindow extends ItemDrawer
       );
     }
 
+    /** clear the hot path and show/hide the tool layaout
+     * @param, visibility  tool layout visibility
+     */
+    private void clearHotPath( int visibility )
+    {
+      // TDLog.v("clear hot item - visibility " + visibility );
+      mHotPath     = null;
+      mHotItemType = -1;
+      if ( visibility == View.VISIBLE ) setToolsToolbars();
+      mLayoutTools.setVisibility( visibility );
+    }
+
     /** set the drawing window mode (change the list of buttons)
      * @param mode    drawing window mode
      */
@@ -5623,26 +5640,26 @@ public class DrawingWindow extends ItemDrawer
       mLastLinePath = null;
       switch ( mMode ) {
         case MODE_MOVE:
-          mLayoutTools.setVisibility( View.INVISIBLE );
+          clearHotPath( View.INVISIBLE );
           mDrawingSurface.setDisplayPoints( false );
           mListView.setAdapter( mButtonView1.mAdapter );
           mListView.invalidate();
           break;
         case MODE_DRAW:
-          mLayoutTools.setVisibility( View.VISIBLE );
+          clearHotPath( View.VISIBLE );
           mDrawingSurface.setDisplayPoints( false );
           mListView.setAdapter( mButtonView2.mAdapter );
           mListView.invalidate();
           break;
         case MODE_ERASE:
-          mLayoutTools.setVisibility( View.INVISIBLE );
+          clearHotPath( View.INVISIBLE );
           mDrawingSurface.setDisplayPoints( false );
           mListView.setAdapter( mButtonView5.mAdapter );
           mListView.invalidate();
           break;
         case MODE_EDIT:
           clearSelected();
-          mLayoutTools.setVisibility( View.INVISIBLE );
+          clearHotPath( View.INVISIBLE );
           mDrawingSurface.setDisplayPoints( true );
           mListView.setAdapter( mButtonView3.mAdapter );
           mListView.invalidate();
@@ -8972,10 +8989,11 @@ public class DrawingWindow extends ItemDrawer
   }
 
   /** switch to the current toolbar
+   * @note called by rotateRecentToolset() setBtnRecent() setBtnRecentAll()
    */
   private void setToolsToolbars()
   {
-    // TDLog.v("set tools toolbars");
+    // TDLog.v("set tools toolbars - visible ");
     // TDLog.v("set Tools Toolbar - triple: " + TDSetting.mTripleToolbar );
     // if ( TDSetting.mTripleToolbar ) {
     //   ZOOM_TRANSLATION = ZOOM_TRANSLATION_3;
@@ -9028,13 +9046,14 @@ public class DrawingWindow extends ItemDrawer
     if ( path != null ) {
       int progress = 20 + 35 * ( 2 + path.getScale() );
       mScaleBar.setProgress( progress );
-      TDLog.v("set scale bar progress " + progress + " scale " + path.getScale() );
+      // TDLog.v("set scale bar - progress " + progress + " scale " + path.getScale() + " visible " );
       mLayoutTools.setVisibility( View.VISIBLE );
       mLayoutToolsP.setVisibility( View.GONE );
       mLayoutToolsL.setVisibility( View.GONE );
       mLayoutToolsA.setVisibility( View.GONE );
       mLayoutScale.setVisibility( View.VISIBLE );
     } else {
+      // TDLog.v("set scale bar - invisible " );
       mLayoutTools.setVisibility( View.INVISIBLE );
     }
   }
@@ -9048,7 +9067,7 @@ public class DrawingWindow extends ItemDrawer
     if ( mHotPath instanceof DrawingPointPath ) {
       int scale = (int)(progress / 40) - 2;
       ((DrawingPointPath)mHotPath).setScale( scale );
-      TDLog.v("set point scale " + progress + " scale " + scale );
+      // TDLog.v("set point scale " + progress + " scale " + scale );
     }
   }
     
@@ -9126,6 +9145,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void setBtnRecentAll()
   {
+    // TDLog.v("set btn recent all" );
     setButtonRecent( mBtnRecentP, mRecentPoint );
     setButtonRecent( mBtnRecentL, mRecentLine  );
     setButtonRecent( mBtnRecentA, mRecentArea  );
@@ -9268,6 +9288,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public void onRecentSymbolsLoaded()
   {
+    // TDLog.v("on recent symbols loaded");
     mRecentDimX  = Float.parseFloat( getResources().getString( R.string.dimxl ) );
     mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimyl ) );
     setBtnRecentAll( );
