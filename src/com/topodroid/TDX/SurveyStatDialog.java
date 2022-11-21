@@ -71,6 +71,7 @@ class SurveyStatDialog extends MyDialog
       TextView mTextStddevM   = (TextView) findViewById(R.id.stat_stddev_m);
       TextView mTextStddevG   = (TextView) findViewById(R.id.stat_stddev_g);
       TextView mTextStddevD   = (TextView) findViewById(R.id.stat_stddev_dip);
+      TextView mTextDevices   = (TextView) findViewById(R.id.stat_devices);
 
       histG = (ImageView) findViewById( R.id.histogramG );
       histM = (ImageView) findViewById( R.id.histogramM );
@@ -105,6 +106,7 @@ class SurveyStatDialog extends MyDialog
       mTextStddevG.setText( String.format( res.getString(R.string.stat_stddev_g), mStat.stddevG ) );
       mTextStddevD.setText( String.format( res.getString(R.string.stat_stddev_dip), mStat.stddevD, mStat.averageD ) );
 
+      mTextDevices.setText( String.format( res.getString(R.string.stat_devices), mStat.deviceNr, mStat.deviceCnt ) );
   }
 
     @Override

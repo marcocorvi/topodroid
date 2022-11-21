@@ -665,6 +665,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="zoom_in_out">Zoom aumentar/disminuir</string -->
 
     <string name="survey_info">Info Topografía</string>
+    <!-- TODO string name="stat_devices">Devices %1$d: %2$s</string -->
     <string name="stat_stddev_m">M desv. estandar %1$.1f %%</string>
     <string name="stat_stddev_g">G desv. estandar %1$.1f %%</string>
     <string name="stat_stddev_dip">Dip desv. estandar %1$.1f deg. (promedio %2$.1f deg.)</string>

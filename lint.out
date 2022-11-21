@@ -1,3 +1,6 @@
+res/layout/shot_activity.xml:57: Warning: This ListView should use android:layout_width="wrap_content" [ScrollViewSize]
+        android:layout_width="fill_parent"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 src/com/topodroid/c3in/LoxFile.java:292: Warning: Implicitly using the default locale is a common source of bugs: Use String.format(Locale, ...) instead [DefaultLocale]
       TDLog.v( String.format("LOX %d Scrap %d (Survey %d) N.pts %d %d %d N.ang %d %d %d Size %d", i, id, sid, np, pp, ps, na, ap, as, mScrapChunk.data_size ) );
                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -79,15 +82,12 @@ res/values/strings.xml:1255: Error: "title_import_th2" is not translated in "es"
 res/values/strings.xml:1256: Error: "title_infos" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
     <string name="title_infos">Surveys geo-points</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1273: Error: "pref_lrud_count_title" is not translated in "ru" (Russian), "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1273: Error: "pref_lrud_count_title" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
   <string name="pref_lrud_count_title">LRUD splay count</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1274: Error: "pref_lrud_count_summary" is not translated in "ru" (Russian), "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1274: Error: "pref_lrud_count_summary" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
   <string name="pref_lrud_count_summary">Number of splays used for LRUD</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1293: Error: "pref_cat_calib" is not translated in "fr" (French) [MissingTranslation]
-  <string name="pref_cat_calib">CALIBRATIONS</string>
-          ~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:1524: Error: "pref_sibling_thr_title" is not translated in "es" (Spanish) [MissingTranslation]
   <string name="pref_sibling_thr_title">Sibling threshold</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -182,4 +182,4 @@ res/layout/progress_dialog.xml:49: Warning: This LinearLayout layout or its Line
     <LinearLayout
      ~~~~~~~~~~~~
 res/mipmap-xhdpi/ic_launcher.png: Warning: The following unrelated icon files have identical contents: iz_topodroid.png, ic_launcher.png [IconDuplicates]
-43 errors, 19 warnings
+42 errors, 20 warnings

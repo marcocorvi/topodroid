@@ -666,6 +666,7 @@
     <!-- UNUSED string name="zoom_in_out">Увеличить/уменьшить/string -->
 
     <string name="survey_info">Статистика съёмки</string>
+    <!-- TODO string name="stat_devices">Devices %1$d: %2$s</string -->
     <string name="stat_stddev_m">M ст.откл %1$.1f процентов</string>
     <string name="stat_stddev_g">G ст.откл %1$.1f процентов</string>
     <string name="stat_stddev_dip">Накл. ст.откл %1$.1f град. (среднее %2$.1f град.)</string>

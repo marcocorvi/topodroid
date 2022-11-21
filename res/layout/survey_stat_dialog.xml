@@ -41,8 +41,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         />
-
     <TextView android:id="@+id/stat_component"
+        android:layout_marginTop="@dimen/marginv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        />
+
+    <TextView android:id="@+id/stat_devices"
         android:layout_marginTop="@dimen/marginv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 

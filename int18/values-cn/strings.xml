@@ -669,6 +669,7 @@
 
 
     <string name="survey_info">测量信息</string>
+    <!-- TODO string name="stat_devices">Devices %1$d: %2$s</string -->
     <string name="stat_stddev_m">M 标准差 %1$.1f %%</string>
     <string name="stat_stddev_g">G 标准差 %1$.1f %%</string>
     <string name="stat_stddev_dip">Dip stddev %1$.1f deg. (average %2$.1f deg.)</string>

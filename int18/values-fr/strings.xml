@@ -678,6 +678,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 	
 
     <string name="survey_info">Information sur le relevé</string>
+    <!-- TODO string name="stat_devices">Devices %1$d: %2$s</string -->
     <string name="stat_stddev_m">Ecart type M %1$.1f %%</string>
     <string name="stat_stddev_g">Ecart type G %1$.1f %%</string>
     <string name="stat_stddev_dip">Ecart type Dipôle %1$.1f deg. (moyenne %2$.1f deg.)</string>

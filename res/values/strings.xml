@@ -678,6 +678,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
 
     <string name="survey_info">Survey info</string>
+    <string name="stat_devices">Devices %1$d: %2$s</string>
     <string name="stat_stddev_m">M stddev %1$.1f %%</string>
     <string name="stat_stddev_g">G stddev %1$.1f %%</string>
     <string name="stat_stddev_dip">Dip stddev %1$.1f deg. (average %2$.1f deg.)</string>

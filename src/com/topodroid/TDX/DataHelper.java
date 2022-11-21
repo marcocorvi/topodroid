@@ -393,7 +393,7 @@ public class DataHelper extends DataSetObservable
   private static final String qDatamode     = "select datamode from surveys where id=?";
   private static final String qDeclination  = "select declination from surveys where id=?";
   private static final String qExtend       = "select extend from surveys where id=?";
-  private static final String qSurveysStat1 = "select flag, acceleration, magnetic, dip from shots where surveyId=? AND status=0 AND acceleration > 1 ";
+  private static final String qSurveysStat1 = "select flag, acceleration, magnetic, dip, address from shots where surveyId=? AND status=0 AND acceleration > 1 ";
   private static final String qSurveysStat2 =
     "select flag, distance, fStation, tStation, clino, extend from shots where surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ";
   // private static String qSurveysStat3 = "select fStation, clino from shots where surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ";
@@ -583,6 +583,8 @@ public class DataHelper extends DataSetObservable
     stat.stddevG  = 0;
     stat.stddevD  = 0;
     stat.nrMGD = 0;
+    stat.deviceNr = 0;
+    stat.deviceCnt = "";
 
     if ( myDB == null ) return stat;
 
@@ -604,9 +606,11 @@ public class DataHelper extends DataSetObservable
         stat.G = new float[ nr ];
         stat.M = new float[ nr ];
         stat.D = new float[ nr ];
+        HashMap< String, Integer > cnts = new HashMap<>();
         do {
-          float a = (float)( cursor.getDouble(1) );
-          if ( a > 0.1f ) {
+          String address = cursor.getString(4);
+          if ( address.length() > 0 ) {
+            float a = (float)( cursor.getDouble(1) );
             float m = (float)( cursor.getDouble(2) );
             float d = (float)( cursor.getDouble(3) );
             stat.averageM += m;
@@ -619,6 +623,12 @@ public class DataHelper extends DataSetObservable
             stat.M[nrMGD]  = m;
             stat.D[nrMGD]  = d;
             ++nrMGD;
+            Integer cnt = (Integer) cnts.get( address );
+            if ( cnt == null ) {
+              cnts.put( address, new Integer(1) );
+            } else {
+              cnts.put( address, new Integer( cnt.intValue() + 1 ) );
+            }
           }
         } while ( cursor.moveToNext() );
         stat.nrMGD = nrMGD;
@@ -631,6 +641,13 @@ public class DataHelper extends DataSetObservable
           stat.stddevD   = (float)Math.sqrt( stat.stddevD / nrMGD - stat.averageD * stat.averageD );
           stat.stddevM  *= 100/stat.averageM;
           stat.stddevG  *= 100/stat.averageG;
+          stat.deviceNr  = cnts.size();
+          StringBuilder sb = new StringBuilder();
+          for ( String addr : cnts.keySet() ) {
+            // TDLog.v("address " + addr + " " + (Integer)cnts.get( addr ) );
+            sb.append( ((Integer)cnts.get( addr )).intValue() ).append(" ");
+          }
+          stat.deviceCnt = sb.toString();
         }
       }
       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();

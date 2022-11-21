@@ -41,4 +41,6 @@ class SurveyStat
   float[] D; // magnetic dips
 
   int nrMGD;
+  int deviceNr;     // number of devices
+  String deviceCnt; // shots per device
 }

@@ -672,6 +672,7 @@ A részletekért keresse fel a weboldalakat.\n
 
 	
     <string name="survey_info">Felmérés információ</string>
+    <!-- TODO string name="stat_devices">Devices %1$d: %2$s</string -->
     <string name="stat_stddev_m">M norm. szór. %1$.1f százalék</string>
     <string name="stat_stddev_g">G norm. szór. %1$.1f százalék</string>
     <string name="stat_stddev_dip">Inklináció norm. szór. %1$.1f fok (átlag %2$.1f fok)</string>

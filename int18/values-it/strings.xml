@@ -665,6 +665,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="zoom_in_out">Zoom in/out</string -->
 
     <string name="survey_info">Info rilievo</string>
+    <!-- TODO string name="stat_devices">Devices %1$d: %2$s</string -->
     <string name="stat_stddev_m">M stddev %1$.1f %%</string>
     <string name="stat_stddev_g">G stddev %1$.1f %%</string>
     <string name="stat_stddev_dip">Dip stddev %1$.1f &#xb0; (media %2$.1f &#xb0;)</string>
