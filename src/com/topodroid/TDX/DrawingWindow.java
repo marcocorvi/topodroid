@@ -95,6 +95,7 @@ import android.view.View;
 import android.view.ViewGroup;
 //
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.PopupWindow;
 import android.widget.Button;
 import android.widget.Toast;
@@ -524,6 +525,7 @@ public class DrawingWindow extends ItemDrawer
   boolean isShiftDrawing() { return mShiftDrawing; }
 
   private int mHotItemType     = -1;
+  private DrawingPath mHotPath = null;
   private boolean mHasSelected = false;
   private boolean hasPointActions  = false;
 
@@ -547,10 +549,12 @@ public class DrawingWindow extends ItemDrawer
   private LinearLayout mLayoutToolsP;
   private LinearLayout mLayoutToolsL;
   private LinearLayout mLayoutToolsA;
+  private LinearLayout mLayoutScale;
   // private ItemButton[] mBtnRecent;
   private ItemButton[] mBtnRecentP;
   private ItemButton[] mBtnRecentL;
   private ItemButton[] mBtnRecentA;
+  private SeekBar      mScaleBar;
 
   // window mode
   static final int MODE_DRAW  = 1;
@@ -1005,7 +1009,7 @@ public class DrawingWindow extends ItemDrawer
   private void addFixedSpecial( float x1, float y1, float x2, float y2 ) // float xoff, float yoff )
   {
     float decl = mApp_mData.getSurveyDeclination( mSid ); // declination only displayed
-    TDLog.v("Declination " + decl );
+    // TDLog.v("Declination " + decl );
     DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
     dpath.setPathPaint( BrushManager.highlightPaint );
     DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, decl ); // xoff, yoff ); // LEG PATH
@@ -1797,6 +1801,7 @@ public class DrawingWindow extends ItemDrawer
 
   /** set the button3 by the type of the hot-item
    * @param pt   hot item
+   * @note this is the only point where mHotItemType is set
    */
   private void setButton3Item( SelectionPoint pt )
   {
@@ -1804,46 +1809,54 @@ public class DrawingWindow extends ItemDrawer
     hasPointActions  = false;
     BitmapDrawable bm = mBMjoin_no;
     String title = getResources().getString( R.string.title_edit );
+    setScaleToolbar( null );
     if ( pt != null ) {
       mHotItemType = pt.type();
-      DrawingPath item = pt.mItem;
+      mHotPath     = pt.mItem;
+      // DrawingPath item = pt.mItem;
       switch ( mHotItemType ) {
         case DrawingPath.DRAWING_PATH_FIXED:
-          mActivity.setTitle( title + " " + item.mBlock.mFrom + "=" + item.mBlock.mTo );
+          mActivity.setTitle( title + " " + mHotPath.mBlock.mFrom + "=" + mHotPath.mBlock.mTo );
           break;
         case DrawingPath.DRAWING_PATH_SPLAY:
-          mActivity.setTitle( title + " " + item.mBlock.mFrom + "-." );
+          mActivity.setTitle( title + " " + mHotPath.mBlock.mFrom + "-." );
           break;
         case DrawingPath.DRAWING_PATH_POINT:
-          mActivity.setTitle( title + " " + BrushManager.getPointName( ((DrawingPointPath)item).mPointType ) );
+          mActivity.setTitle( title + " " + BrushManager.getPointName( ((DrawingPointPath)mHotPath).mPointType ) );
           hasPointActions = true;
 	  deletable = true;
+          if ( mHotPath instanceof DrawingPointPath ) {
+            setScaleToolbar( (DrawingPointPath)mHotPath );
+          } else {
+            setScaleToolbar( null );
+          }
           break;
         case DrawingPath.DRAWING_PATH_LINE:
-          mActivity.setTitle( title + " " + BrushManager.getLineName( ((DrawingLinePath)item).mLineType ) );
+          mActivity.setTitle( title + " " + BrushManager.getLineName( ((DrawingLinePath)mHotPath).mLineType ) );
           hasPointActions = true;
           bm = mBMjoin;
 	  deletable = true;
           break;
         case DrawingPath.DRAWING_PATH_AREA:
-          mActivity.setTitle( title + " " + BrushManager.getAreaName( ((DrawingAreaPath)item).mAreaType ) );
+          mActivity.setTitle( title + " " + BrushManager.getAreaName( ((DrawingAreaPath)mHotPath).mAreaType ) );
           hasPointActions = true;
           bm = mBMjoin;
 	  deletable = true;
           break;
         case DrawingPath.DRAWING_PATH_STATION:
           title = getResources().getString( R.string.title_edit_user_station );
-          mActivity.setTitle( title + " " + ((DrawingStationUser)item).name() );
+          mActivity.setTitle( title + " " + ((DrawingStationUser)mHotPath).name() );
 	  deletable = true;
           break;
         case DrawingPath.DRAWING_PATH_NAME:
           title = getResources().getString( R.string.title_edit_station );
-          mActivity.setTitle( title + " " + ((DrawingStationName)item).getName() );
+          mActivity.setTitle( title + " " + ((DrawingStationName)mHotPath).getName() );
           break;
         default:
           mActivity.setTitle( title );
       }
     } else {
+      mHotPath     = null;
       mHotItemType = -1;
       mActivity.setTitle( title );
     }
@@ -2395,10 +2408,21 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)PlotType.PLOT_NULL, 0 );
     }
 
-    mLayoutTools  = (LinearLayout) findViewById( R.id.layout_tools );
+    mLayoutTools  = (LinearLayout) findViewById( R.id.layout_tools  );
     mLayoutToolsP = (LinearLayout) findViewById( R.id.layout_tool_p );
     mLayoutToolsL = (LinearLayout) findViewById( R.id.layout_tool_l );
     mLayoutToolsA = (LinearLayout) findViewById( R.id.layout_tool_a );
+    mLayoutScale  = (LinearLayout) findViewById( R.id.layout_scale  );
+    mScaleBar     = (SeekBar)findViewById( R.id.scalebar );
+    mScaleBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
+      public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
+        if ( fromUser ) {
+          setPointScale( progress );
+        }
+      }
+      public void onStartTrackingTouch(SeekBar seekbar) { }
+      public void onStopTrackingTouch(SeekBar seekbar) { }
+    } );
     mLayoutTools.setVisibility( View.INVISIBLE );
 
     mBtnRecentP = new ItemButton[ NR_RECENT + 1 ];
@@ -3554,14 +3578,14 @@ public class DrawingWindow extends ItemDrawer
       } 
       // float d0 = TopoDroidApp.mCloseCutoff + TopoDroidApp.mSelectness / mZoom;
       SelectionSet selection = mDrawingSurface.getItemsAt( x, y, mZoom, mSelectMode, size );
-      // TDLog.v( "selection at " + x + " " + y + " items " + selection.size() );
-      // TDLog.v( " zoom " + mZoom + " radius " + d0 );
       mHasSelected = mDrawingSurface.hasSelected();
       setButton3PrevNext();
+      // TDLog.v( "selection at " + x + " " + y + " items " + selection.size() + " has selected " + mHasSelected );
+      // TDLog.v( " zoom " + mZoom + " radius " + d0 );
       if ( mHasSelected ) {
         if ( SelectionRange.isPoint( mDoEditRange ) ) {
           mMode = MODE_SHIFT;
-        } else if ( SelectionRange.isItem( mDoEditRange ) ) {
+	} else if ( SelectionRange.isItem( mDoEditRange ) ) {
           mDrawingSurface.setRangeAt( x, y, mZoom, mDoEditRange, size );
           mMode = MODE_SHIFT;
         }
@@ -8967,6 +8991,7 @@ public class DrawingWindow extends ItemDrawer
         mLayoutToolsP.setVisibility( View.VISIBLE );
         mLayoutToolsL.setVisibility( View.GONE );
         mLayoutToolsA.setVisibility( View.GONE );
+        mLayoutScale.setVisibility( View.GONE );
         k = getCurrentPointIndex();
         pointSelected( mCurrentPoint, false );
         setHighlight( SymbolType.POINT, k );
@@ -8975,6 +9000,7 @@ public class DrawingWindow extends ItemDrawer
         mLayoutToolsP.setVisibility( View.GONE );
         mLayoutToolsL.setVisibility( View.VISIBLE );
         mLayoutToolsA.setVisibility( View.GONE );
+        mLayoutScale.setVisibility( View.GONE );
         k = getCurrentLineIndex();
         // TDLog.v("Set tools toolbars: Current line index " + k );
         lineSelected( mCurrentLine, false );
@@ -8984,6 +9010,7 @@ public class DrawingWindow extends ItemDrawer
         mLayoutToolsP.setVisibility( View.GONE );
         mLayoutToolsL.setVisibility( View.GONE );
         mLayoutToolsA.setVisibility( View.VISIBLE );
+        mLayoutScale.setVisibility( View.GONE );
         k = getCurrentAreaIndex();
         areaSelected( mCurrentArea, false );
         setHighlight( SymbolType.AREA, k );
@@ -8992,6 +9019,39 @@ public class DrawingWindow extends ItemDrawer
     // }
     mLayoutTools.invalidate();
   }
+
+  /**
+   * @param path  selected (point) path, or null
+   */
+  private void setScaleToolbar( DrawingPointPath path )
+  {
+    if ( path != null ) {
+      int progress = 20 + 35 * ( 2 + path.getScale() );
+      mScaleBar.setProgress( progress );
+      TDLog.v("set scale bar progress " + progress + " scale " + path.getScale() );
+      mLayoutTools.setVisibility( View.VISIBLE );
+      mLayoutToolsP.setVisibility( View.GONE );
+      mLayoutToolsL.setVisibility( View.GONE );
+      mLayoutToolsA.setVisibility( View.GONE );
+      mLayoutScale.setVisibility( View.VISIBLE );
+    } else {
+      mLayoutTools.setVisibility( View.INVISIBLE );
+    }
+  }
+
+  /** set the hot-item point scale
+   * @param progress  scalebar progress value
+   */
+  void setPointScale( int progress )
+  {
+    if ( mHotPath == null ) return;
+    if ( mHotPath instanceof DrawingPointPath ) {
+      int scale = (int)(progress / 40) - 2;
+      ((DrawingPointPath)mHotPath).setScale( scale );
+      TDLog.v("set point scale " + progress + " scale " + scale );
+    }
+  }
+    
 
   // --------------------- from ItemDrawer
   /** set the recent symbol buttons of a symbol class

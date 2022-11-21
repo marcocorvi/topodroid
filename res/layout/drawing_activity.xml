@@ -97,6 +97,21 @@
       android:orientation="horizontal"
       android:background="#666666"
     />
+    <LinearLayout android:id="@+id/layout_scale"
+      android:layout_width="match_parent"
+      android:layout_height="16dp"
+      android:orientation="horizontal"
+      android:background="#666666"
+      >
+      <SeekBar android:id="@+id/scalebar"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:max="200"
+        android:background="#666666"
+        android:progressDrawable="@xml/progress2"
+      />
+    </LinearLayout>
   </LinearLayout>
 
 </FrameLayout>
