@@ -812,7 +812,8 @@ public class MainWindow extends Activity
     // } 
     done_init_dialogs = true;
     // TDLog.v( "INIT environment second");
-    boolean ok_folder = TopoDroidApp.initEnvironmentSecond( say_dialogR );
+    // boolean ok_folder = 
+    TopoDroidApp.initEnvironmentSecond( say_dialogR ); // always true
 
     // TDLog.v( "INIT environment second done " + ok_folder );
     // if ( TDVersion.targetSdk() > 29 ) { // FIXME_TARGET_29
@@ -823,20 +824,20 @@ public class MainWindow extends Activity
     //     }
     //   );
     // } else 
-    if ( ! ok_folder ) {
-      TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString(R.string.tdx_stale), R.string.button_ok,
-        -1, // R.string.button_help,
-        new DialogInterface.OnClickListener() {
-          @Override public void onClick( DialogInterface dialog, int btn ) { finish(); }
-        }, 
-        null
-        // new DialogInterface.OnClickListener() {
-        //   @Override public void onClick( DialogInterface dialog, int btn ) {
-        //     new WebView
-        //   }
-        // }
-      );
-    }
+    // if ( ! ok_folder ) {
+    //   TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString(R.string.tdx_stale), R.string.button_ok,
+    //     -1, // R.string.button_help,
+    //     new DialogInterface.OnClickListener() {
+    //       @Override public void onClick( DialogInterface dialog, int btn ) { finish(); }
+    //     }, 
+    //     null
+    //     // new DialogInterface.OnClickListener() {
+    //     //   @Override public void onClick( DialogInterface dialog, int btn ) {
+    //     //     new WebView
+    //     //   }
+    //     // }
+    //   );
+    // }
 
     // TDLog.v( "INIT welcome screen");
     if ( mApp.mWelcomeScreen ) {
@@ -1166,6 +1167,34 @@ public class MainWindow extends Activity
     // resetButtonBar();  // 6.0.33
     // setMenuAdapter();
     // closeMenu();
+
+    // TODO OPEN DATABASE HERE
+    boolean ok_folder = TopoDroidApp.initEnvironmentThird();
+
+    // TDLog.v( "INIT environment third done " + ok_folder );
+    // if ( TDVersion.targetSdk() > 29 ) { // FIXME_TARGET_29
+    //   // TDLog.v( "init environment target " + TDVersion.targetSdk() );
+    //   TopoDroidAlertDialog.makeAlert( this, getResources(), ( ok_folder ? R.string.target_sdk : R.string.target_sdk_stale ),
+    //     new DialogInterface.OnClickListener() {
+    //       @Override public void onClick( DialogInterface dialog, int btn ) { finish(); }
+    //     }
+    //   );
+    // } else 
+    if ( ! ok_folder ) {
+      TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString(R.string.tdx_stale), R.string.button_ok,
+        -1, // R.string.button_help,
+        new DialogInterface.OnClickListener() {
+          @Override public void onClick( DialogInterface dialog, int btn ) { finish(); }
+        }, 
+        null
+        // new DialogInterface.OnClickListener() {
+        //   @Override public void onClick( DialogInterface dialog, int btn ) {
+        //     new WebView
+        //   }
+        // }
+      );
+      return;
+    }
 
     // FIXME added three calls - but they should not be necessary ...
     mListView.invalidate();

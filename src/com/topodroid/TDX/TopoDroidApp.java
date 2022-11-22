@@ -1048,7 +1048,11 @@ public class TopoDroidApp extends Application
 
     // TDLog.Profile("TDApp paths");
     TDPath.setTdPaths( TDInstance.cwd /*, TDInstance.cbd */ );
+    return true;
+  }
 
+  static boolean initEnvironmentThird()
+  {
     // TDLog.Profile("TDApp DB"); 
     // ***** DATABASE MUST COME BEFORE PREFERENCES
     // if ( ! with_dialog_r ) {
