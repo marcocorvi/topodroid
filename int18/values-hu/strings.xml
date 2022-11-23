@@ -2027,10 +2027,10 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="cave_length"> Barlang hossza: %1$.1f %2$.1f %3$.1f</string>
     <string name="cave_angle"> Irány: %1$.0f  Lejtés: %2$.0f</string>
 
-  <!-- TODO string name="east">E</string -->
-  <!-- TODO string name="north">N</string -->
-  <!-- TODO string name="west">W</string -->
-  <!-- TODO string name="south">S</string -->
+  <string name="east">K</string>
+  <string name="north">É</string>
+  <string name="west">Ny</string>
+  <string name="south">D</string>
 
 
     <!-- UNUSED string name="SURVEYS">M É R É S E K</string -->
