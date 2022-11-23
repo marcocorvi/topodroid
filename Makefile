@@ -132,7 +132,9 @@ SRC = \
   ./README.md \
   ./assets/*/* \
   ./firmware/* \
-  ./int18/*/* \
+  ./int18/values-??/* \
+  ./int18/howto \
+  ./int18/readme \
   ./res/values/* \
   ./res/values-normal/* \
   ./res/values-small/* \

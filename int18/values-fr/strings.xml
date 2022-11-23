@@ -2041,6 +2041,10 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="cave_length">Longueur de la cavité : %1$.2f %2$.1f %3$.1f</string>
     <string name="cave_angle"> Azimut : %1$.0f  Pente : %2$.0f</string>
 
+  <!-- TODO string name="east">E</string -->
+  <!-- TODO string name="north">N</string -->
+  <!-- TODO string name="west">W</string -->
+  <!-- TODO string name="south">S</string -->
 
     <!-- UNUSED string name="SURVEYS">T o p o g r a p h i e</string -->
     <string name="INFO">INFO</string>

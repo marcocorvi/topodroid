@@ -2006,6 +2006,11 @@
     <string name="cave_length"> Длина пещеры: %1$.2f %2$.1f %3$.1f</string>
     <string name="cave_angle"> Азимут: %1$.0f  Уклон: %2$.0f</string>
 
+  <!-- TODO string name="east">E</string -->
+  <!-- TODO string name="north">N</string -->
+  <!-- TODO string name="west">W</string -->
+  <!-- TODO string name="south">S</string -->
+
     <!-- UNUSED string name="SURVEYS">С Ъ Ё М К И</string -->
     <string name="INFO">И Н Ф О Р М А Ц И Я</string>
     <string name="STATIONS">П И К Е Т</string>

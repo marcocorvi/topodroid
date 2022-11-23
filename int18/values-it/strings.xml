@@ -2011,6 +2011,11 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="cave_length"> Sviluppo totale: %1$.2f %2$.1f %3$.1f</string>
     <string name="cave_angle"> Azimut: %1$.0f  Inclinazione: %2$.0f</string>
 
+  <string name="east">E</string>
+  <string name="north">N</string>
+  <string name="west">W</string>
+  <string name="south">S</string>
+
     <!-- UNUSED string name="SURVEYS">R I L I E V I</string -->
     <string name="INFO">I N F O</string>
     <string name="STATIONS">C A P I S A L D I</string>

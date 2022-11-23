@@ -1804,7 +1804,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- UNUSED string name="line_fine">fine</string -->
   <!-- UNUSED string name="line_normal">normal</string -->
   <!-- UNUSED string name="line_coarse">coarse</string -->
-  <!-- UNUSED string name="units_ddmmss">ddmmss</string -->
+  <!-- UNUSED string name="units_ddmmss">DMS</string -->
   <!-- UNUSED string name="units_dd">degrees</string -->
   <!-- UNUSED string name="units_grads">grads</string -->
   <!-- UNUSED string name="units_meters">meters</string -->
@@ -2041,6 +2041,10 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="cave_length"> Cave length: %1$.1f D+ %2$.1f D- %3$.1f</string>
     <string name="cave_angle"> Azimuth: %1$.0f  Clino: %2$.0f</string>
 
+  <string name="east">E</string>
+  <string name="north">N</string>
+  <string name="west">W</string>
+  <string name="south">S</string>
 
     <!-- UNUSED string name="SURVEYS">S U R V E Y S</string -->
     <string name="INFO">I N F O</string>

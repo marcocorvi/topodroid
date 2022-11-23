@@ -2013,6 +2013,11 @@ debe ajustarlos a sus necesidades./n/n
     <string name="cave_length">Longitud de la cueva: %1$.2f %2$.1f %3$.1f</string>
     <string name="cave_angle">Rumbo: %1$.0f  inclinación: %2$.0f</string>
 
+  <!-- TODO string name="east">E</string -->
+  <!-- TODO string name="north">N</string -->
+  <!-- TODO string name="west">W</string -->
+  <!-- TODO string name="south">S</string -->
+
     <!-- UNUSED string name="SURVEYS">R E L I E V E</string -->
     <string name="INFO">I N F O R M A C I Ó N</string>
     <string name="STATIONS">E S T A C I Ó N</string>

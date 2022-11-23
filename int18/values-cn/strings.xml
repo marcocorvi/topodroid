@@ -2018,6 +2018,10 @@
     <string name="cave_length"> 洞穴长度: %1$.1f %2$.1f %3$.1f</string>
     <string name="cave_angle"> 方位角: %1$.0f  Clino: %2$.0f</string>
 
+  <!-- TODO string name="east">E</string -->
+  <!-- TODO string name="north">N</string -->
+  <!-- TODO string name="west">W</string -->
+  <!-- TODO string name="south">S</string -->
 
     <!-- UNUSED string name="SURVEYS">S U R V E Y S</string -->
     <string name="INFO"> 信 息 </string>
