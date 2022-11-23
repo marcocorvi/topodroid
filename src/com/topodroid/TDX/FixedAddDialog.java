@@ -180,14 +180,14 @@ class FixedAddDialog extends MyDialog
     Button b = (Button) v;
     // TDLog.Log( TDLog.LOG_INPUT, "FixedAddDialog onClick() button " + b.getText().toString() ); 
 
-    mNorth = mBtnNS.getText().toString().equals("N");
-    mEast  = mBtnEW.getText().toString().equals("E");
-
+    mNorth  = mBtnNS.getText().toString().equals(getContext().getString(R.string.north));
+    mEast  = mBtnEW.getText().toString().equals(getContext().getString(R.string.east));
+    
     if ( b == mBtnNS ) {
-      mBtnNS.setText( mNorth ? "S" : "N" );
+      mBtnNS.setText( mNorth ? R.string.south : R.string.north );
       return;
     } else if ( b == mBtnEW ) {
-      mBtnEW.setText( mEast ? "W" : "E" );
+      mBtnEW.setText( mEast ? R.string.west : R.string.east );
       return;
     } else if ( b == mBtnView ) {
       if ( getLngLat() ) {
