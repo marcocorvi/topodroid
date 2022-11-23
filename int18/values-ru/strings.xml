@@ -666,7 +666,7 @@
     <!-- UNUSED string name="zoom_in_out">Увеличить/уменьшить/string -->
 
     <string name="survey_info">Статистика съёмки</string>
-    <!-- TODO string name="stat_devices">Devices %1$d: %2$s</string -->
+    <string name="stat_devices">Приборы %1$d: %2$s</string>
     <string name="stat_stddev_m">M ст.откл %1$.1f процентов</string>
     <string name="stat_stddev_g">G ст.откл %1$.1f процентов</string>
     <string name="stat_stddev_dip">Накл. ст.откл %1$.1f град. (среднее %2$.1f град.)</string>
@@ -2006,10 +2006,10 @@
     <string name="cave_length"> Длина пещеры: %1$.2f %2$.1f %3$.1f</string>
     <string name="cave_angle"> Азимут: %1$.0f  Уклон: %2$.0f</string>
 
-  <!-- TODO string name="east">E</string -->
-  <!-- TODO string name="north">N</string -->
-  <!-- TODO string name="west">W</string -->
-  <!-- TODO string name="south">S</string -->
+  <string name="east">В</string>
+  <string name="north">С</string>
+  <string name="west">З</string>
+  <string name="south">Ю</string>
 
     <!-- UNUSED string name="SURVEYS">С Ъ Ё М К И</string -->
     <string name="INFO">И Н Ф О Р М А Ц И Я</string>
