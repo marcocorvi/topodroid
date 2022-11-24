@@ -700,7 +700,7 @@ public class GlModel
       Vector3D v2 = new Vector3D( leg.to_station );
       v1.z = surface.computeZ( v1.x, v1.y );
       v2.z = surface.computeZ( v2.x, v2.y );
-      surface_legs.addLine( v1, v2, 3, leg.mSurveyNr, false, mXmed, mYmed, mZmed ); // 3: color_index, false: fixed colors
+      surface_legs.addLine( v1, v2, 3, leg.getSurveyNr(), false, mXmed, mYmed, mZmed ); // 3: color_index, false: fixed colors
     }
     surface_legs.computeBBox();
     // surface_legs.logMinMax();
@@ -874,6 +874,10 @@ public class GlModel
   ArrayList< Cave3DShot > legsDuplicate;
   ArrayList< Cave3DShot > legsCommented;
 
+  /** create the 3D model
+   * @param parser  parser with the 3D data
+   * @param reduce  ???
+   */
   void prepareModel( TglParser parser, boolean reduce )
   {
     // TDLog.v("Model prepare full");
@@ -898,10 +902,11 @@ public class GlModel
     legsDuplicate = new ArrayList< Cave3DShot >();
     legsCommented = new ArrayList< Cave3DShot >();
 
-    // TDLog.v("Model create. shots " + parser.getShotNumber() + "/" + parser.getSplayNumber() + " stations " + parser.getStationNumber() );
+    // TDLog.v("3D-Model create. surveys " + parser.getSurveyNumber() + " shots " + parser.getShotNumber() + "/" + parser.getSplayNumber() + " stations " + parser.getStationNumber() );
+
     for ( Cave3DShot leg : parser.getShots() ) {
       if ( leg.from_station == null || leg.to_station == null ) continue; // skip fake-legs
-      int survey_nr = leg.mSurveyNr;
+      int survey_nr = leg.getSurveyNr();
       int color = mParser.getSurveyFromIndex( survey_nr ).getColor();
       if ( leg.isSurvey() ) {
         legsSurvey.add( leg );
@@ -937,7 +942,7 @@ public class GlModel
     // TDLog.v("Model center " + mXmed + " " + mYmed + " " + mZmed );
     // legs.logMinMax();
     for ( Cave3DShot splay : parser.getSplays() ) {
-      int survey_nr = splay.mSurveyNr;
+      int survey_nr = splay.getSurveyNr();
       int color = mParser.getSurveyFromIndex( survey_nr ).getColor();
       if ( splay.from_station != null ) {
         splays.addLine( splay.from_station, splay.toPoint3D(), color, survey_nr, true, mXmed, mYmed, mZmed );
@@ -1042,7 +1047,8 @@ public class GlModel
   //   // TDLog.v("Model add BT leg");
   //   synchronized( glLegs ) {
   //     legsSurvey.add( leg );
-  //     glLegs.addLine( leg.from_station, leg.to_station, leg.mSurveyNr, leg.mSurveyNr, true ); // leg.mSurveyNr = color-index
+  //     int survey_nr = leg.getSurveyNr(); // leg getSurveyNr() = color-index
+  //     glLegs.addLine( leg.from_station, leg.to_station, survey_nr, survey_nr, true ); 
   //     glLegs.initData( );
   //   }
   // }
@@ -1052,7 +1058,8 @@ public class GlModel
   // {
   //   // TDLog.v("Model add BT splay");
   //   synchronized( glSplays ) {
-  //     glSplays.addLine( splay.from_station, splay.to_station, splay.mSurveyNr, splay.mSurveyNr, true ); // leg.mSurveyNr = color-index
+  //     int survey_nr = splay.getSurveyNr(); // splay getSurveyNr() = color-index
+  //     glSplays.addLine( splay.from_station, splay.to_station, survey_nr, survey_nr, true );
   //     glSplays.initData( );
   //   }
   // }

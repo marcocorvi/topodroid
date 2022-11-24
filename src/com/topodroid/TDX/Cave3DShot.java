@@ -39,7 +39,7 @@ public class Cave3DShot
   public Cave3DStation from_station;
   public Cave3DStation to_station;  // null for splay shots
   public Cave3DSurvey mSurvey;
-  public int mSurveyNr;
+  private int mSurveyNr;
   public int mSurveyId;  // survey ID for bluetooth
   public int mColor = 0; // survey color - used by parser to pass the value to survey
 
@@ -185,8 +185,9 @@ public class Cave3DShot
 
   /** set the station survey
    * @param survey   survey
+   * @note used also by Parser3D
    */
-  void setSurvey( Cave3DSurvey survey ) 
+  public void setSurvey( Cave3DSurvey survey ) 
   { 
     mSurvey   = survey;
     mSurveyNr = survey.number;
@@ -196,6 +197,10 @@ public class Cave3DShot
   /** @return the station survey (or null)
    */
   Cave3DSurvey getSurvey() { return mSurvey; }
+
+  /** @return the survey index (number)
+   */
+  int getSurveyNr() { return mSurveyNr; }
 
   /** @return the ID of the station survey 
    */

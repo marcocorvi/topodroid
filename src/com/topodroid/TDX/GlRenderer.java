@@ -181,7 +181,7 @@ public class GlRenderer implements Renderer
    * @param parser   data parser
    * @param reduce   ...   
    */
-  void prepareModel( TglParser parser, boolean reduce )
+  private void prepareModel( TglParser parser, boolean reduce )
   {
     // mModel = new GlModel( mApp, mHalfWidth*2, mHalfHeight*2, parser );
     // if ( mModel == null ) return;

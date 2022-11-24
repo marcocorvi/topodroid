@@ -270,7 +270,10 @@ public class TglParser
    */
   public Cave3DSurvey getSurveyFromIndex( int k ) 
   { 
-    if ( k < 0 || k >= surveys.size() ) k = 0;
+    if ( k < 0 || k >= surveys.size() ) {
+      // TDLog.Error("get survey from index " + k );
+      k = 0;
+    }
     return surveys.get(k); 
   }
 
@@ -550,6 +553,7 @@ public class TglParser
       mName = filename;
     }
     mColor = TglColor.getSurveyColor();
+    Cave3DSurvey.resetCount();
     init( app, mName );
   }
 

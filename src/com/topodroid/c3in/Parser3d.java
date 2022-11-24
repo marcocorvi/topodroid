@@ -109,7 +109,7 @@ public class Parser3d extends TglParser
     String survey_name = mLabel.toString();
     Cave3DSurvey survey = getSurvey( survey_name );
     if ( survey == null ) {
-      survey = new Cave3DSurvey( survey_name, 0 );
+      survey = new Cave3DSurvey( survey_name, 0 ); // color = 0 [default]
       surveys.add( survey );
     }
 
@@ -120,8 +120,7 @@ public class Parser3d extends TglParser
         to = getStationAt( x, y, z );
         Cave3DShot splay = new Cave3DShot( from0, null, len, ber, cln, 0, 0, mColor );
         splays.add( splay );
-        splay.mSurvey = survey;
-        splay.mSurveyNr = survey.number;
+        splay.setSurvey( survey ); // FIXME this sets also mSurveyId - used to set only survey and surveyNr 2022-11-24
         if ( to != null ) {
           from0 = to;
         }
@@ -137,8 +136,7 @@ public class Parser3d extends TglParser
       }
       Cave3DShot shot = new Cave3DShot( from0, to, len, ber, cln, fl, 0, mColor );
       shots.add( shot );
-      shot.mSurvey = survey;
-      shot.mSurveyNr = survey.number;
+      shot.setSurvey( survey ); // FIXME this sets also mSurveyId - used to set only survey and surveyNr 2022-11-24
       from0 = to;
     }
     x0 = x;

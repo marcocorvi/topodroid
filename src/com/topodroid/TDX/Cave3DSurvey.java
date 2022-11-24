@@ -23,14 +23,15 @@ import java.io.IOException;
 
 public class Cave3DSurvey
 {
-  private static int count = 0;
+  private static int msCount = 0;
+  static void resetCount() { msCount = 0; }
 
   public int number; // survey index
   int mId;    // id 
   int mPid;   // parent Id
   String name;
   boolean visible;
-  int color;
+  private int color;
 
   ArrayList< Cave3DShot > mShots;
   ArrayList< Cave3DShot > mSplays;
@@ -89,7 +90,7 @@ public class Cave3DSurvey
    */
   public Cave3DSurvey( String nm, int col )
   {
-    number = count; ++ count;
+    number = msCount; ++ msCount;
     init( nm, -1, -1, col );
   }
 
@@ -101,7 +102,7 @@ public class Cave3DSurvey
    */
   public Cave3DSurvey( String n, int id, int pid, int col )
   {
-    number = count; ++ count;
+    number = msCount; ++ msCount;
     init( n, id, pid, col );
   }
 

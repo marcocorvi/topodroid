@@ -174,6 +174,7 @@ public class ParserTh extends TglParser
     } else {
       mData = null;
     }
+    // clearData();
 
     StringWriter sw = new StringWriter();
     PrintWriter  pw = new PrintWriter( sw );
@@ -237,8 +238,7 @@ public class ParserTh extends TglParser
       return ERR_NO_DB; 
     }
 
-    // TDLog.v("TH read survey " + surveyname );
-
+    // TDLog.v("TH read survey " + surveyname + " color " + color );
     // Toast.makeText( mApp, "Reading " + surveyname, Toast.LENGTH_SHORT ).show();
 
     SurveyInfo info = mData.getSurveyInfo( surveyname );
@@ -380,8 +380,7 @@ public class ParserTh extends TglParser
 
     String surveyname = "--";
     String path = basepath;
-    // TDLog.v( "Th basepath <" + basepath + ">");
-    // TDLog.v( "Th filename <" + filename + ">");
+    // TDLog.v( "TH basepath <" + basepath + "> filename <" + filename + ">");
     Cave3DCS cs = null;
     int in_data = 0; // 0 none, 1 normal, 2 dimension
 
@@ -407,7 +406,7 @@ public class ParserTh extends TglParser
       String dirname = "./";  // dirname has the trailing '/'
       int i = filename.lastIndexOf('/');
       if ( i > 0 ) dirname = filename.substring(0, i+1);
-      // TDLog.v( "Th reading file " + filename + " dir " + dirname );
+      // TDLog.v( "TH reading file " + filename + " dir " + dirname );
 
       // FileReader fr = new FileReader( filename );
       BufferedReader br = new BufferedReader( isr );
@@ -431,7 +430,7 @@ public class ParserTh extends TglParser
                 surveyname = vals[idx];
                 survey_pos[ks] = path.length();
                 path = path + "." + vals[idx];
-                // TDLog.v( "Th SURVEY " + path );
+                // TDLog.v( "TH SURVEY " + path );
                 ++ks;
                 in_survey = true;
               }
@@ -545,25 +544,25 @@ public class ParserTh extends TglParser
                   cs = new Cave3DCS( vals[idx] );
                 }
               } else if ( cmd.equals("fix") ) { // ***** fix station east north Z
-                // TDLog.v( "Th command fix");
+                // TDLog.v( "TH command fix");
                 idx = nextIndex( vals, idx );
                 if ( idx < vals.length ) {
                   String name = makeName( vals[idx], path );
-                  // TDLog.v( "Th command fix " + name );
+                  // TDLog.v( "TH command fix " + name );
                   try { 
                     idx = nextIndex( vals, idx );
                     if ( idx < vals.length ) {
                       double x = Double.parseDouble( vals[idx] );
-                      // TDLog.v( "Th fix x " + x );
+                      // TDLog.v( "TH fix x " + x );
                       idx = nextIndex( vals, idx );
                       if ( idx < vals.length ) {
                         double y = Double.parseDouble( vals[idx] );
-                        // TDLog.v( "Th fix y " + y );
+                        // TDLog.v( "TH fix y " + y );
                         idx = nextIndex( vals, idx );
                         if ( idx < vals.length ) {
                           double z = Double.parseDouble( vals[idx] );
 	                  fixes.add( new Cave3DFix( name, x, y, z, cs ) );
-                          // TDLog.v( "Th adding fix " + x + " " + y + " " + z );
+                          // TDLog.v( "TH adding fix " + x + " " + y + " " + z );
                         }
                       }
                     }
@@ -606,7 +605,7 @@ public class ParserTh extends TglParser
                               // StringWriter sw = new StringWriter();
                               // PrintWriter pw = new PrintWriter( sw );
                               // pw.format(Locale.US, "%s %s %.2f %.1f %.1f", from, to, len, ber, cln );
-                              // TDLog.v( "Th " + sw.getBuffer().toString() );
+                              // TDLog.v( "TH " + sw.getBuffer().toString() );
                               shots.add( new Cave3DShot( from, to, len, ber, cln, flags, millis, mColor ) );
                             }
                           }
@@ -651,7 +650,7 @@ public class ParserTh extends TglParser
                             if ( idx < vals.length ) {
                               c2 = Integer.parseInt( vals[idx] );
                               mSurface = new DEMsurface( e1, n1, delta_e, delta_n, c1, c2 );
-                              // TDLog.v( "Th Surface " + e1 + "-" + n1 + " " + e2 + "-" + n2 + " " + c1 + "x" + c2);
+                              // TDLog.v( "TH Surface " + e1 + "-" + n1 + " " + e2 + "-" + n2 + " " + c1 + "x" + c2);
                             }
                           }
                         }
@@ -666,13 +665,13 @@ public class ParserTh extends TglParser
                   mSurface.readGridData( units_grid, grid_flip, br, filename );
                 }
               } else if ( cmd.equals("grid-flip") ) {
-                // TDLog.v("Th parse the flip-value" );
+                // TDLog.v("TH parse the flip-value" );
                 idx = nextIndex( vals, idx );
                 if ( idx < vals.length ) {
                   grid_flip = parseFlip( vals[idx] );
                 }
               } else if ( cmd.equals("grid-units") ) {
-                // TDLog.v("Th parse the grid-units" );
+                // TDLog.v("TH parse the grid-units" );
                 try {
                   idx = nextIndex( vals, idx );
                   if ( idx < vals.length ) {
@@ -701,7 +700,7 @@ public class ParserTh extends TglParser
               idx = nextIndex( vals, idx );
               if ( idx < vals.length ) {
                 filename = vals[idx];
-                // TDLog.v( "Th file " + filename );
+                // TDLog.v( "TH input therion file " + filename );
                 if ( filename.toLowerCase( Locale.getDefault() ).endsWith( ".th" ) ) {
                   String filepath = dirname + filename; // dirname + '/' + filename
                   InputStreamReader isr0 = new InputStreamReader( new FileInputStream( filepath ) );
@@ -725,7 +724,7 @@ public class ParserTh extends TglParser
                   if ( (idx = nextIndex( vals, idx )) < vals.length ) color = 0xff000000 | Integer.parseInt( vals[idx] );
                   // TDLog.v("TH parser color " + color + " " + idx + ": " + vals[idx] );
                 }
-                // TDLog.v( "TH survey " + filename );
+                // TDLog.v( "TH load survey " + filename + " color " + color );
                 if ( mData == null ) {
                   String base = null;
                   if ( dirname.toLowerCase( Locale.getDefault() ).endsWith( "tdconfig/" ) ) {
