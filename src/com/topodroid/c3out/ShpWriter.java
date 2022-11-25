@@ -20,6 +20,7 @@ import com.topodroid.c3walls.cw.CWFacet;
 import com.topodroid.c3walls.cw.CWPoint;
    
 // import java.io.File;
+import java.io.PrintWriter;
 import java.io.FileOutputStream;
 // import java.io.FileNotFoundException;
 import java.io.IOException;   
@@ -435,6 +436,45 @@ class ShpObject
   // {
   //   updateBBox( xWorld( x ), yWorld(y) );
   // }
+
+  /** write WKT string for custom orthographic projection from lon-lat
+   * @param pw    file writer
+   * @param proj  projection name
+   * @param lon   center longitude
+   * @param lat   center latitude
+   * @param east  center false easting
+   * @param north center false northing
+   */
+  static void writeWKT( PrintWriter pw, String proj, double lon, double lat, double east, double north )
+  {
+    pw.format( Locale.US, "PROJCRS[\"%s\",\n", proj );
+    pw.format( Locale.US, "BASEGEOGCRS[\"WGS84\",\n" );
+    pw.format( Locale.US, "  DATUM[\"WGS84\",\n" );
+    pw.format( Locale.US, "    ELLIPSOID[\"GRS80\",6378137,298.257223563,\n" );
+    pw.format( Locale.US, "      LENGTHUNIT[\"metre\",1, ID[\"EPSG\",9001]]]],\n" );
+    pw.format( Locale.US, "  PRIMEM[\"Greenwich\",0, ANGLEUNIT[\"Degree\",0.0174532925199433]]],\n" );
+    pw.format( Locale.US, "  CONVERSION[\"%s\", METHOD[\"Orthographic\", ID[\"EPSG\",9840]],\n", proj );
+    pw.format( Locale.US, "  PARAMETER[\"central_meridian\",%f, ANGLEUNIT[\"Degree\",0.0174532925199433]],\n", lon );
+    pw.format( Locale.US, "  PARAMETER[\"standard_parallel\",%f, ANGLEUNIT[\"Degree\",0.0174532925199433]],\n", lat );
+    pw.format( Locale.US, "  PARAMETER[\"False easting\",%f, LENGTHUNIT[\"m\",1], ID[\"EPSG\",8806]],\n", east );
+    pw.format( Locale.US, "  PARAMETER[\"False northing\",%f, LENGTHUNIT[\"m\",1], ID[\"EPSG\",8807]]],\n", north );
+    pw.format( Locale.US, "  CS[Cartesian,2], AXIS[\"(E)\",east, ORDER[1], LENGTHUNIT[\"m\",1]],\n" );
+    pw.format( Locale.US, "    AXIS[\"(N)\",north, ORDER[2], LENGTHUNIT[\"m\",1]]]\n" );
+  }
+
+  /** write proj string for custom orthographic projection from lon-lat
+   * @param pw    file writer
+   * @param proj  projection name
+   * @param lon   center longitude
+   * @param lat   center latitude
+   * @param east  center false easting
+   * @param north center false northing
+   */
+  static void writeProj( PrintWriter pw, String proj, double lon, double lat, double east, double north )
+  {
+    pw.format( Locale.US, "+proj=%s +ellps=GRS80 +lat_0=%f +lon_0=%f +x_0=%f +y_0=%f\n",
+      proj, lat, lon, east, north );
+  }
 
 }
 // ---------------------------------------------------------------------------------------------

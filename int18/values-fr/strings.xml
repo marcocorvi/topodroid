@@ -1956,6 +1956,9 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="info_east">Est</string>
     <string name="info_north">Nord</string>
     <string name="info_z">Altitude</string>
+    <!-- TODO string name="info_origin">Origin</string -->
+    <!-- TODO string name="info_lonlat">coords.</string -->
+    <!-- TODO string name="info_radii">radii</string -->
     <string name="info_grid_value">%1$.0f m</string>
     <string name="info_view_value">A. %1$.0f C. %2$.0f</string>
     <string name="info_survey_value">%1$d</string>
@@ -1968,6 +1971,11 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="info_east_value">W %1$.1f E %2$.1f</string>
     <string name="info_north_value">S %1$.1f N %2$.1f</string>
     <string name="info_z_value">%1$.1f  %2$.1f</string>
+    <!-- TODO string name="info_origin_value">x %1$.0f y %2$.0f z %3$.0f</string -->
+    <!-- TODO string name="info_origin_none">undefined</string -->
+    <!-- TODO string name="info_lonlat_geovalue">lon %1$.7f lat %2$.7f</string -->
+    <!-- TODO string name="info_lonlat_prjvalue">lon %1$.1f lat %2$.1f</string -->
+    <!-- TODO string name="info_radii_value">EW %1$.1f NS %2$.1f</string -->
 
     <string name="legs_surface">Surface</string>
     <string name="legs_duplicate">Dupliquée</string>

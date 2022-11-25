@@ -18,6 +18,7 @@ import com.topodroid.TDX.Triangle3D;
 import com.topodroid.TDX.Vector3D;
 import com.topodroid.TDX.Cave3DStation;
 import com.topodroid.TDX.Cave3DShot;
+import com.topodroid.TDX.Cave3DFix;
 import com.topodroid.TDX.Archiver;
 // import com.topodroid.TDX.Cave3DFile;
 // import com.topodroid.TDX.TDPath;
@@ -30,6 +31,8 @@ import java.util.ArrayList;
 // import java.util.Locale;
 
 // import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.io.OutputStream;
 import java.io.IOException;
 
@@ -104,6 +107,14 @@ public class ExportSHP
 
     if ( files.size() == 0 ) ret = false;
     if ( ret ) {
+      // TODO write .prj file for orthographic projection if necessary
+      // if ( data.isWGS84() ) {
+      //   Cave3DFix origin = data.getOrigin();
+      //   if ( exportPrj( filepath, "station", name, origin ) ) files.add( "station.prj" );
+      //   if ( b_legs && exportPrj( filepath, "leg", name, origin ) ) files.add( "leg.prj" );
+      //   if ( b_splays && exportPrj( filepath, "splay", name, origin ) ) files.add( "splay.prj" );
+      //   if ( b_walls && exportPrj( filepath, "wall", name, origin ) ) files.add( "wall.prj" );
+      // }
       // TDLog.v( "export SHP: make zip. files " + files.size() );
       Archiver zipper = new Archiver( );
       zipper.compressFiles( zos, sub_name, files );
@@ -117,6 +128,26 @@ public class ExportSHP
 
     // TDLog.v( "export SHP: returns " + ret );
     return ret;
+  }
+
+  /** 
+   * @param filepath   dir path
+   * @param name       filename
+   * @param proj       projection name
+   * @param origin     projection origin
+   */
+  private boolean exportPrj( String filepath, String name, String proj, Cave3DFix origin )
+  {
+    try { 
+      FileWriter fw = new FileWriter( filepath + "/" + name + ".prj" );
+      PrintWriter pw = new PrintWriter( fw );
+      com.topodroid.c3out.ShpObject.writeWKT( pw, proj, origin.longitude, origin.latitude, origin.x, origin.y );
+      fw.close();
+      return true;
+    } catch ( IOException e ) {
+      // TODO
+    }
+    return false;
   }
 
   private boolean exportStations( String filepath, List<String> files, List< Cave3DStation> stations )

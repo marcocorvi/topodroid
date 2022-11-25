@@ -184,6 +184,63 @@
           android:layout_height="wrap_content" 
           android:layout_marginStart="15dp" 
           android:gravity="start"
+          android:text="@string/info_origin"
+          />
+        <TextView android:id="@+id/info_origin"
+          android:layout_width="fill_parent" 
+          android:layout_height="wrap_content" 
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
+          />
+      </TableRow>
+
+      <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView 
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
+          android:text="@string/info_lonlat"
+          />
+        <TextView android:id="@+id/info_lonlat"
+          android:layout_width="fill_parent" 
+          android:layout_height="wrap_content" 
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
+          />
+      </TableRow>
+
+      <TableRow android:id="@+id/info_row_radii"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView 
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
+          android:text="@string/info_radii"
+          />
+        <TextView android:id="@+id/info_radii"
+          android:layout_width="fill_parent" 
+          android:layout_height="wrap_content" 
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
+          />
+      </TableRow>
+
+      <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView 
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           android:text="@string/info_east"
           />
         <TextView android:id="@+id/info_east"

@@ -21,6 +21,7 @@ import android.content.res.Resources;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.TableRow;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView;
@@ -89,6 +90,24 @@ class DialogInfo extends MyDialog
 
     tv = ( TextView ) findViewById(R.id.info_volume);
     tv.setText( String.format(Locale.US, res.getString(R.string.info_volume_value), mParser.getPowercrustVolume(), mParser.getConvexHullVolume() ) );
+
+    tv = ( TextView ) findViewById(R.id.info_origin);
+    if ( mParser.hasOrigin() ) {
+      Cave3DFix origin = mParser.getOrigin();
+      tv.setText( String.format(Locale.US, res.getString(R.string.info_origin_value), origin.x, origin.y, origin.z ) );
+      TextView tv1 = ( TextView ) findViewById(R.id.info_lonlat);
+      if ( mParser.isWGS84() ) { 
+        tv1.setText( String.format(Locale.US, res.getString(R.string.info_lonlat_geovalue), origin.longitude, origin.latitude ) );
+        TextView tv2 = ( TextView ) findViewById(R.id.info_radii);
+        tv2.setText( String.format(Locale.US, res.getString(R.string.info_radii_value), mParser.getWEradius(), mParser.getSNradius() ) );
+      } else {
+        tv1.setText( String.format(Locale.US, res.getString(R.string.info_lonlat_prjvalue), origin.longitude, origin.y, origin.latitude ) );
+        TableRow tr2 = (TableRow) findViewById(R.id.info_row_radii);
+        tr2.setVisibility( View.GONE );
+      }
+    } else { 
+      tv.setText( R.string.info_origin_none );
+    }
 
     tv = ( TextView ) findViewById(R.id.info_east);
     tv.setText( String.format(Locale.US, res.getString(R.string.info_east_value), mParser.emin, mParser.emax ) );

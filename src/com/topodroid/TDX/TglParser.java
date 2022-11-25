@@ -106,9 +106,9 @@ public class TglParser
   protected Cave3DStation mStartStation = null;
   protected Cave3DFix mOrigin = null; // coordinates of the origin station
 
-  Cave3DFix getOrigin() { return mOrigin; }
+  public Cave3DFix getOrigin() { return mOrigin; }
   boolean hasOrigin() { return mOrigin != null; }
-  boolean isWGS84() { return mOrigin != null && mOrigin.isWGS84(); }
+  public boolean isWGS84() { return mOrigin != null && mOrigin.isWGS84(); }
   boolean hasWGS84() { return mOrigin != null && mOrigin.hasWGS84(); }
   double getSNradius() { return ( mOrigin != null )? mOrigin.getSNradius() : 1.0f; }
   double getWEradius() { return ( mOrigin != null )? mOrigin.getWEradius() : 1.0f; }

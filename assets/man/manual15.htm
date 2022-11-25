@@ -7,8 +7,17 @@ It can load also other file formats: Therion (th, thconfig), Loch (lox), Compass
 The 3D model can be opened either from a menu in the <i>Data Window</i>, or a button in the
 <i>Survey Info Window</i>.<br>
 The 3D model of a cave project can be opened from a button in the <i>Project Window</i>.
-<br>
-The model is shown with a reference grid (blue north, green east) or triplet (pink upward).
+<br><p>
+
+The model is shown with a reference grid (blue north, green east) or triplet (pink upward).<br>
+If the data (survey or cave project) has fixed points these are used to compute the coordinates of the points
+in the model. If the fixed point coordinates have been transformed into a cartographic (projected) coordinate
+system this is used. Otherwise the fixed point is set at distances from the equator and the prime meridian equal
+to the latitude times the meridian radius, and the longittude times the parallel radius, respectively.
+<br><p>
+
+There is no coordinate conversion. Therefore all the surveys in a cave project must be
+gereferenced in the same coordinate system.
 <br><p>
 
 

@@ -312,13 +312,14 @@ public class ParserTh extends TglParser
         // KML radius is already pre-multiplied by PI/180
         double s_radius = Geodetic.meridianRadiusExact( a_lat, a_alt );
         double e_radius = Geodetic.parallelRadiusExact( a_lat, a_alt );
+        TDLog.v("E radius " + e_radius + " S radius " + s_radius + " lon " + fx.mLongitude + " lat " + fx.mLatitude );
 
         // TODO use a_lng a_lat a_alt
 
         x0 = fx.mLongitude * e_radius;
         y0 = fx.mLatitude  * s_radius;
         z0 = fx.mAltitude;
-        // TDLog.v( "Th fix Long-Lat " + x0 + " " + y0 + " " + z0 + " cs1 <" + ((fx.mCsName!=null)?fx.mCsName:"null") + ">" );
+        TDLog.v( "Th fix Long-Lat " + x0 + " " + y0 + " " + z0 + " cs1 <" + ((fx.mCsName!=null)?fx.mCsName:"null") + ">" );
         if ( mOrigin == null ) {
           // TDLog.v( "Th fix origin " + name + " " + x0 + " " + y0 + " " + z0 );
           if ( fx.hasCS() ) {
