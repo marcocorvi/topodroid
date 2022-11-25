@@ -1943,9 +1943,9 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="info_east">Kelet</string>
     <string name="info_north">Észak</string>
     <string name="info_z">Magasság</string>
-    <!-- TODO string name="info_origin">Origin</string -->
-    <!-- TODO string name="info_lonlat">coords.</string -->
-    <!-- TODO string name="info_radii">radii</string -->
+    <string name="info_origin">Kezdőpont</string>
+    <string name="info_lonlat">koordináták.</string>
+    <string name="info_radii">rádii</string>
     <string name="info_grid_value">%1$.0f m</string>
     <string name="info_view_value">A. %1$.0f C. %2$.0f</string>
     <string name="info_survey_value">%1$d</string>
@@ -1958,11 +1958,11 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="info_east_value">Ny %1$.1f K %2$.1f</string>
     <string name="info_north_value">D %1$.1f É %2$.1f</string>
     <string name="info_z_value">%1$.1f  %2$.1f</string>
-    <!-- TODO string name="info_origin_value">x %1$.0f y %2$.0f z %3$.0f</string -->
-    <!-- TODO string name="info_origin_none">undefined</string -->
-    <!-- TODO string name="info_lonlat_geovalue">lon %1$.7f lat %2$.7f</string -->
-    <!-- TODO string name="info_lonlat_prjvalue">lon %1$.1f lat %2$.1f</string -->
-    <!-- TODO string name="info_radii_value">EW %1$.1f NS %2$.1f</string -->
+    <string name="info_origin_value">x %1$.0f y %2$.0f z %3$.0f</string>
+    <string name="info_origin_none">nem definiált</string>
+    <string name="info_lonlat_geovalue">hossz. %1$.7f szél. %2$.7f</string>
+    <string name="info_lonlat_prjvalue">hossz. %1$.1f szél. %2$.1f</string>
+    <string name="info_radii_value">KNy %1$.1f ÉD %2$.1f</string>
 
     <string name="legs_surface">Felszín</string>
     <string name="legs_duplicate">Duplikált</string>
