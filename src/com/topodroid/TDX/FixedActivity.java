@@ -383,7 +383,7 @@ public class FixedActivity extends Activity
 
   void clearConvertedCoords( FixedInfo fxd ) 
   {
-    TopoDroidApp.mData.updateFixedCS( fxd.id, TDInstance.sid, null, 0, 0, 0, 2L );
+    TopoDroidApp.mData.updateFixedCS( fxd.id, TDInstance.sid, null, 0, 0, 0, 2L, 0 );
     fxd.clearConverted();
   }
 
@@ -440,8 +440,9 @@ public class FixedActivity extends Activity
             double lat = bundle.getDouble( "latitude");
             double alt = bundle.getDouble( "altitude"); // geoid altitude
 	    long   n_dec = bundle.containsKey( "decimals" )? bundle.getLong( "decimals" ) : 2;
-            TopoDroidApp.mData.updateFixedCS(  mFixedDialog.getFixedId(), TDInstance.sid, cs, lng, lat, alt, n_dec );
-            mFixedDialog.setConvertedCoords( cs, lng, lat, alt, n_dec );
+	    double conv  = bundle.containsKey( "convergence" )? bundle.getDouble( "convergence" ) : 0; // degrees
+            TopoDroidApp.mData.updateFixedCS(  mFixedDialog.getFixedId(), TDInstance.sid, cs, lng, lat, alt, n_dec, conv );
+            mFixedDialog.setConvertedCoords( cs, lng, lat, alt, n_dec, conv );
           }
           mFixedDialog = null;
         }
@@ -452,7 +453,9 @@ public class FixedActivity extends Activity
             mFixedAddDialog.setCoordsGeo(
               bundle.getDouble( "longitude"),
               bundle.getDouble( "latitude"),
-              bundle.getDouble( "altitude") ); // geoid altitude
+              bundle.getDouble( "altitude")  // geoid altitude
+	      // ( bundle.containsKey( "convergence" )? bundle.getDouble( "convergence" ) : 0) // degrees
+            );
           }
           mFixedAddDialog = null;
         }

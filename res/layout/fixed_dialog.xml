@@ -213,7 +213,13 @@
     android:layout_marginTop="@dimen/marginvbig"
     > 
     <TextView android:id="@+id/fix_cs_coords" 
-      android:layout_width="match_parent" 
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:singleLine="true" 
+      android:layout_marginRight="@dimen/marginh"
+    />
+    <TextView android:id="@+id/fix_convergence" 
+      android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
       android:singleLine="true" 
     />

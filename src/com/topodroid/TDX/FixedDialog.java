@@ -76,6 +76,7 @@ class FixedDialog extends MyDialog
   private Button   mButtonConvert;
   private TextView mTVcrs;
   private TextView mTVcs_coords; // converted coords
+  private TextView mTVconvergence;
 
   private MyKeyboard mKeyboard;
   private boolean editable;
@@ -98,9 +99,9 @@ class FixedDialog extends MyDialog
   //   mTVcrs.setText( cs );
   // }
   
-  void setConvertedCoords( String cs, double lng, double lat, double alt, long n_dec )
+  void setConvertedCoords( String cs, double lng, double lat, double alt, long n_dec, double conv )
   {
-    mFxd.setCSCoords( cs, lng, lat, alt, n_dec );
+    mFxd.setCSCoords( cs, lng, lat, alt, n_dec, conv );
     showConvertedCoords( );
   }
 
@@ -113,9 +114,14 @@ class FixedDialog extends MyDialog
       mTVcs_coords.setText( mFxd.toExportCSString() );
       mTVcrs.setVisibility( View.VISIBLE );
       mTVcs_coords.setVisibility( View.VISIBLE );
+      // TODO show convergence
+      double conv = mFxd.getConvergence();
+      mTVconvergence.setText( String.format(Locale.US, "{%.3f}", conv ) );
+      mTVconvergence.setVisibility( View.VISIBLE );
     } else {
       mTVcrs.setVisibility( View.INVISIBLE );
       mTVcs_coords.setVisibility( View.GONE );
+      mTVconvergence.setVisibility( View.GONE );
     }
   }
 
@@ -150,6 +156,7 @@ class FixedDialog extends MyDialog
     mButtonConvert = (Button) findViewById( R.id.fix_convert );
     mTVcrs         = (TextView) findViewById( R.id.fix_crs );
     mTVcs_coords   = (TextView) findViewById( R.id.fix_cs_coords );
+    mTVconvergence = (TextView) findViewById( R.id.fix_convergence );
 
     mETstation = (TextView) findViewById( R.id.fix_station );
     mETcomment = (EditText) findViewById( R.id.fix_comment );
@@ -251,6 +258,7 @@ class FixedDialog extends MyDialog
     } else if ( b == mButtonClearConvert ) {
       mTVcrs.setText( "" );
       mTVcs_coords.setText( "" );
+      mTVconvergence.setText( "" );
       mParent.clearConvertedCoords( mFxd );
       return;
     } else if ( b == mButtonConvert ) {

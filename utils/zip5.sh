@@ -27,7 +27,7 @@ if [ -z $DATE ] ; then
 fi
 echo "Found $SQLITE"
 echo "      $ZIP"
-echo "      $DATE"
+echo "      $DATE\n"
 
 td_version="5.1.40"
 db_version="42"
