@@ -260,6 +260,7 @@ public class ParserTh extends TglParser
     if ( info.hasDeclination() ) {
       use_centerline_declination = true;
       declination = info.declination;
+      TDLog.v("survey declination " + declination );
     } else if ( usd ) {
       declination = sd;
     }
@@ -327,7 +328,9 @@ public class ParserTh extends TglParser
             x1 = fx.mCsLongitude;
             y1 = fx.mCsLatitude;
             z1 = fx.mCsAltitude;
-            // TDLog.v( "Th fix " + name + " CS1 " + fx.mCsName + " " + x1 + " " + y1 + " " + z1 );
+            double conv = fx.mConvergence; // degrees
+            TDLog.v( "Th fix " + name + " CS1 " + fx.mCsName + " " + x1 + " " + y1 + " " + z1 + " conv " + conv );
+            // TODO declination -= conv;
             mOrigin = new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mAltitude );
 	    fixes.add( mOrigin );
           } else {

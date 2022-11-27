@@ -24,6 +24,7 @@ public class SurveyFixed
   public double mCsLongitude;
   public double mCsLatitude;
   public double mCsAltitude;
+  public double mConvergence;
 
   // public void log()
   // { 
@@ -36,4 +37,5 @@ public class SurveyFixed
   }
 
   public boolean hasCS() { return ( mCsName != null ) && ( mCsName.length() > 0 ); }
+
 }
