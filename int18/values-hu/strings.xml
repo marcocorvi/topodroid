@@ -1945,7 +1945,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="info_z">Magasság</string>
     <string name="info_origin">Kezdőpont</string>
     <string name="info_lonlat">koordináták.</string>
-    <string name="info_radii">rádii</string>
+    <string name="info_radii">sugarak</string>
     <string name="info_grid_value">%1$.0f m</string>
     <string name="info_view_value">A. %1$.0f C. %2$.0f</string>
     <string name="info_survey_value">%1$d</string>
