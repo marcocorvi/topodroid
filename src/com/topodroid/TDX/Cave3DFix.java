@@ -103,12 +103,13 @@ public class Cave3DFix extends Vector3D
    */
   public Cave3DFix( String nm, double e0, double n0, double z0, Cave3DCS cs0 )
   {
-    super( e0, n0, z0 );
-    name = nm;
-    cs = cs0;
-    longitude = 0;
-    latitude  = 0;
-    altitude  = 0;
+    // super( e0, n0, z0 );
+    // name = nm;
+    // cs = cs0;
+    // longitude = 0;
+    // latitude  = 0;
+    // altitude  = 0;
+    this( nm, e0, n0, z0, cs0, 0, 0, 0 );
     hasWGS84  = false;
   }
 

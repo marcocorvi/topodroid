@@ -340,13 +340,19 @@ public class ParserTh extends TglParser
           }
         } else {
           // TDLog.v( "Th Fix relative " + name + " " + x0 + " " + y0 + " " + z0 + " cs1 " + ((fx.mCsName!=null)?fx.mCsName:"null") );
-          if ( cs1 != null && cs1.equals( fx.mCsName ) ) {
-            x1 = fx.mCsLongitude;
-            y1 = fx.mCsLatitude;
-            z1 = fx.mCsAltitude;
-            // TDLog.v( "Th fix relative fix " + name + " using " + cs1.name + " " + x1 + " " + y1 + " " + z1 );
-	    fixes.add( new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mAltitude ) );
+          if ( cs1 != null ) {
+            if ( cs1.equals( fx.mCsName ) ) {
+              x1 = fx.mCsLongitude;
+              y1 = fx.mCsLatitude;
+              z1 = fx.mCsAltitude;
+              // TDLog.v( "Th fix relative fix " + name + " using " + cs1.name + " " + x1 + " " + y1 + " " + z1 );
+	      fixes.add( new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mAltitude ) );
+            } else {
+              TDLog.Error("Th fix relative fix " + name + " does not have CS " + cs1 );
+            }
           } else {
+            y0 = mOrigin.latToNorth( fx.mLatitude, fx.mAltitude ); // should not be necessary
+            x0 = mOrigin.lngToEast( fx.mLongitude, fx.mLatitude, fx.mAltitude, y0 );
             // TDLog.v( "Th fix relative use CS0 " + x0 + " " + y0 + " " + z0 );
             fixes.add( new Cave3DFix( name, x0, y0, z0, cs0, fx.mLongitude, fx.mLatitude, fx.mAltitude ) );
           }
@@ -874,15 +880,15 @@ public class ParserTh extends TglParser
     ArrayList< Cave3DFix > ok_fixes = new ArrayList<>(); // array of fixed stations that are in the survey
 
     int bad_fixes = 0;
-    for ( Cave3DFix f : fixes ) {
+    for ( Cave3DFix fix : fixes ) {
       boolean found = false; 
       // when fixes are checked stations may not have been created yet, therefore the check runs on the shots
       for ( Cave3DShot s1 : shots ) { // HB
-          if ( f.hasName( s1.from ) ) { found = true; break ; }
-          if ( f.hasName( s1.to ) ) { found = true; break ; }
+          if ( fix.hasName( s1.from ) ) { found = true; break ; }
+          if ( fix.hasName( s1.to ) ) { found = true; break ; }
       }
       if ( found ) {
-        ok_fixes.add( f );
+        ok_fixes.add( fix );
       } else {
         bad_fixes ++;
       }
@@ -897,8 +903,8 @@ public class ParserTh extends TglParser
     }
  
     int mLoopCnt = 0;
-    Cave3DFix f0 = ok_fixes.get( 0 );
-    // TDLog.v( "Th Process Shots. Fix " + f0.getFullName() + " " + f0.x + " " + f0.y + " " + f0.z );
+    Cave3DFix fix0 = ok_fixes.get( 0 );
+    // TDLog.v( "Th Process Shots. Fix " + fix0.getFullName() + " " + fix0.x + " " + fix0.y + " " + fix0.z );
 
     mCaveLength = 0.0f;
     // TDLog.v( "Th shots " + shots.size() + " splays " + splays.size() + " ok_fixes " + ok_fixes.size() );
@@ -908,18 +914,18 @@ public class ParserTh extends TglParser
     // }
 
     int used_cnt = 0; // number of used shots
-    for ( Cave3DFix f : ok_fixes ) {
-      // TDLog.v( "Th checking fix " + f.getFullName() );
+    for ( Cave3DFix fix : ok_fixes ) {
+      // TDLog.v( "Th checking fix " + fix.getFullName() );
       boolean found = false;
       for ( Cave3DStation s1 : stations ) {
-        if ( f.hasName( s1.getFullName() ) ) { found = true; break; }
+        if ( fix.hasName( s1.getFullName() ) ) { found = true; break; }
       }
       if ( found ) { // skip fixed stations that are already included in the model
-        // TDLog.v( "Th fix " + f.getFullName() + " already used" );
+        // TDLog.v( "Th fix " + fix.getFullName() + " already used" );
         continue; // go to next fix
       }
-      // TDLog.v( "Th add start station " + f.getFullName() + " N " + f.y + " E " + f.x + " Z " + f.z );
-      stations.add( new Cave3DStation( f.getFullName(), f.x, f.y, f.z ) );
+      // TDLog.v( "Th add start station " + fix.getFullName() + " N " + fix.y + " E " + fix.x + " Z " + fix.z );
+      stations.add( new Cave3DStation( fix.getFullName(), fix.x, fix.y, fix.z ) );
       // sh.from_station = s0;
 
       boolean repeat = true;
@@ -983,8 +989,8 @@ public class ParserTh extends TglParser
           }
         }
       }
-      // TDLog.v( "Th after " + f.getFullName() + " used shot " + used_cnt + " loops " + mLoopCnt );
-    } // for ( Cave3DFix f : ok_fixes )
+      // TDLog.v( "Th after " + fix.getFullName() + " used shot " + used_cnt + " loops " + mLoopCnt );
+    } // for ( Cave3DFix fix : ok_fixes )
     // TDLog.v( "Th used shot " + used_cnt + " loops " + mLoopCnt + " total shots " + shots.size() );
     // StringBuilder sb = new StringBuilder();
     // for ( Cave3DStation st : stations ) { sb.append(" "); sb.append( st.name ); }
