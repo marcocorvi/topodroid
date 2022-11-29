@@ -112,8 +112,23 @@ public class TglParser
   boolean hasWGS84() { return mOrigin != null && mOrigin.hasWGS84(); }
   double getSNradius() { return ( mOrigin != null )? mOrigin.getSNradius() : 1.0f; }
   double getWEradius() { return ( mOrigin != null )? mOrigin.getWEradius() : 1.0f; }
-  double lngToEast( double lng, double lat, double alt ) { return (mOrigin != null)? mOrigin.lngToEast( lng, lat, alt ) : 0.0; }
+
+  double lngToEast( double lng, double lat, double alt, double north ) 
+  { 
+    return (mOrigin != null)? mOrigin.lngToEast( lng, lat, alt, north ) : 0.0;
+  }
+
   double latToNorth( double lat, double alt ) { return (mOrigin != null)? mOrigin.latToNorth( lat, alt ) : 0.0; }
+
+  // void lngLatToEastNorth( double lng, double lat, double alt, double[] east_north )
+  // {
+  //   if ( mOrigin != null ) {
+  //     mOrigin.lngLatToEastNorth( lng, lat, alt, east_north );
+  //   } else {
+  //     east_north[0] = 0;
+  //     east_north[1] = 0;
+  //   }
+  // }
 
   boolean isModelEmpty() { return shots.size() == 0 && splays.size() == 0; }
 

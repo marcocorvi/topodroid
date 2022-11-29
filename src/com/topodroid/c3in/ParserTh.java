@@ -28,7 +28,7 @@ import com.topodroid.TDX.Cave3DStation;
 import com.topodroid.TDX.Cave3DSurvey;
 import com.topodroid.TDX.Cave3DFix;
 // import com.topodroid.TDX.Cave3DXSection;
-import com.topodroid.TDX.Geodetic;
+import com.topodroid.mag.Geodetic;
 import com.topodroid.TDX.DEMsurface;
 import com.topodroid.TDX.Vector3D;
 import com.topodroid.TDX.TDToast;

@@ -2215,8 +2215,8 @@ public class TopoGL extends Activity
     // TODO
     // [1] convert to model CRS
     if ( mParser != null && mParser.hasWGS84() ) {
-      double e = mParser.lngToEast( lng, lat, alt );
       double n = mParser.latToNorth( lat, alt );
+      double e = mParser.lngToEast( lng, lat, alt, n );
       // TDLog.v("TopoGL GPS has origin " + mParser.hasOrigin() + " location " + e + " " + n );
       // [2] get Z from surface
       // [3] mRenderer.setLocation( new Vector3D( e, n, z ) );

@@ -87,6 +87,32 @@ public class Geodetic
     // RADIUS_NS = EARTH_A * EARTH_1E2 / ( W * W * W );    
     return (RADIUS_WE * Math.cos( a_lat * Math.PI / 180 ) * Math.PI / 180.0);
   }
+
+  /** @return approximate WGS84 meridian convergence factor
+   * @param latitude of the refernce point [deg]
+   * the approximate meridian convergence of a point at distance D from the reference point
+   * and azimuth A is
+   *     D sin(A) * meridianConvergence( ref_latitude )
+   *
+   * The correction to DE = D sin(A) approx., at DN is DN DE * tan(lat) / N 
+   * where N is the princtipal radius.
+   * Therefore the correction to DE is a multiplicative factor (1 + DN tan(lat) / N ).
+   *     neg.correction       pos. correction
+   *                     |
+   *     DE<0 DN>0   *   |   *   DE>0 DN>0
+   *     tan(lat)>0 /    |    \  tan(lat)>0
+   *     ----------------+-----------------
+   *     DE<0 DN<0  \    |    /  DE>0 DN<0
+   *     tan(lat)<0  *   |   *   tan(lat)<0
+   */
+  static public double meridianConvergenceFactor( double latitude )
+  {
+    double s = Math.sin( latitude * Math.PI / 180.0 );
+    double c = Math.cos( latitude * Math.PI / 180.0 );
+    double W = Math.sqrt( 1 - EARTH_E2 * s * s );
+    return s/c * (W / EARTH_A);
+  }
+
   
   // UNUSED -----------------------------------------------------------------------------
   /*

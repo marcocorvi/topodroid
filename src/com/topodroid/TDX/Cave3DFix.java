@@ -14,6 +14,7 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.mag.Geodetic;
 
 import java.io.DataOutputStream;
 import java.io.DataInputStream;
@@ -156,11 +157,25 @@ public class Cave3DFix extends Vector3D
    * @param lng WGS84 longitude
    * @param lat WGS84 latitude
    * @param alt WGS84 altitude
+   *
+   * ref. T. Soler, R.J. Fury PS alignment surveys and meridian convergence, J. Surveying Eng., Aug. 2000 69
+   *    dt = ds sin(A) tan(phi) / N
+   * where
+   *    N = a/W principal radius of curvature W = sqrt( 1 - E2 sin^2(phi) )
+   *    E2 = 2 F - F^2
+   *    a  = 6378137 [m]
+   *    1/F = 298,257222101
+   *    A = azimuth of AB  
+   *    ds distance AB
+   *    phi = latitude of A
+   *    dt = angle of convergence
+   * here i use a further approximation ds sin(A) = West-East projected distance AB 
    */
-  public double lngToEast( double lng, double lat, double alt )
+  public double lngToEast( double lng, double lat, double alt, double north )
   {
     double e_radius = Geodetic.parallelRadiusExact( lat, alt ); // this is the radius * PI/180
-    return hasWGS84()? x + (lng - longitude) * e_radius : 0.0;
+    double conv = Geodetic.meridianConvergenceFactor( latitude );
+    return hasWGS84()? x + (lng - longitude) * e_radius * (1 + north*conv) : 0.0;
   }
 
 }

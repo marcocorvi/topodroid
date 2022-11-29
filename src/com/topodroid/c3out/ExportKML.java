@@ -18,7 +18,7 @@ import com.topodroid.TDX.Vector3D;
 import com.topodroid.TDX.Cave3DStation;
 import com.topodroid.TDX.Cave3DFix;
 import com.topodroid.TDX.Cave3DShot;
-import com.topodroid.TDX.Geodetic;
+import com.topodroid.mag.Geodetic;
 import com.topodroid.c3walls.cw.CWFacet;
 import com.topodroid.c3walls.cw.CWPoint;
 
