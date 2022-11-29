@@ -16,13 +16,13 @@ package com.topodroid.mag;
 public class Geodetic
 {
   static public  final double EARTH_A  = 6378137.0;          // a - semi-major axis [meter]
-  static public  final double EARTH_B  = 6356752;
+  static public  final double EARTH_B  = 6356752.314245;
   static public  final double EARTH_BA = EARTH_B / EARTH_A; // b/a
   static private final double EARTH_C  = Math.sqrt( EARTH_A * EARTH_A - EARTH_B * EARTH_B );
   static private final double EARTH_E  = EARTH_C / EARTH_A; // e - eccentricity
   static private final double EARTH_E2 = EARTH_E * EARTH_E; // e^2
   static private final double EARTH_1E2 = 1.0 - EARTH_E2;   // (1- e^2)
-  static private final double FLATTENING = 298.257223563; // F = 1/( 1 - B/A ), 
+  static private final double FLATTENING = 298.257222101; // F = 1/( 1 - B/A ), 
   // 2 * F - F*F = ( 1 + B/A )*( 1 - B/A ) 
   //             = (1 - B^2/A^2) 
   //             = C^2 / A^2
