@@ -59,7 +59,7 @@ class FixedDialog extends MyDialog
   // private TextView mTVdata;
   private EditText mTVlng;
   private EditText mTVlat;
-  private EditText mTValt;
+  // private EditText mTValt;
   private EditText mTVasl;
 
   private TextView mETstation;
@@ -137,7 +137,7 @@ class FixedDialog extends MyDialog
 
     mTVlng = (EditText) findViewById( R.id.fix_lng );
     mTVlat = (EditText) findViewById( R.id.fix_lat );
-    mTValt = (EditText) findViewById( R.id.fix_alt );
+    // mTValt = (EditText) findViewById( R.id.fix_alt );
     mTVasl = (EditText) findViewById( R.id.fix_asl );
 
     mTVdecl = (EditText) findViewById( R.id.fix_decl );
@@ -176,14 +176,14 @@ class FixedDialog extends MyDialog
       mTVlng.setText( FixedInfo.double2ddmmss( mFxd.lng ) );
       mTVlat.setText( FixedInfo.double2ddmmss( mFxd.lat ) );
     }
-    mTValt.setText( String.format( Locale.US, "%.0f", mFxd.alt ) );
+    // mTValt.setText( String.format( Locale.US, "%.0f", mFxd.alt ) );
     mTVasl.setText( String.format( Locale.US, "%.0f", mFxd.asl ) );
 
     
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ),
                                 R.xml.my_keyboard, -1 );
     if ( TDSetting.mKeyboard ) {
-      MyKeyboard.registerEditText( mKeyboard, mTValt, MyKeyboard.FLAG_POINT );
+      // MyKeyboard.registerEditText( mKeyboard, mTValt, MyKeyboard.FLAG_POINT );
       MyKeyboard.registerEditText( mKeyboard, mTVasl, MyKeyboard.FLAG_POINT );
       MyKeyboard.registerEditText( mKeyboard, mTVlng, flag );
       MyKeyboard.registerEditText( mKeyboard, mTVlat, flag );
@@ -194,11 +194,11 @@ class FixedDialog extends MyDialog
 
     KeyListener mKLlng = mTVlng.getKeyListener();
     KeyListener mKLlat = mTVlat.getKeyListener();
-    KeyListener mKLalt = mTValt.getKeyListener();
+    // KeyListener mKLalt = mTValt.getKeyListener();
     KeyListener mKLasl = mTVasl.getKeyListener();
 
     editable = ( mFxd.source == FixedInfo.SRC_MANUAL );
-    MyKeyboard.setEditable( mTValt, mKeyboard, mKLalt, editable, MyKeyboard.FLAG_POINT );
+    // MyKeyboard.setEditable( mTValt, mKeyboard, mKLalt, editable, MyKeyboard.FLAG_POINT );
     MyKeyboard.setEditable( mTVasl, mKeyboard, mKLasl, editable, MyKeyboard.FLAG_POINT );
     MyKeyboard.setEditable( mTVlng, mKeyboard, mKLlng, editable, flag );
     MyKeyboard.setEditable( mTVlat, mKeyboard, mKLlat, editable, flag );
@@ -249,9 +249,11 @@ class FixedDialog extends MyDialog
       if ( editable ) {
         double lat = FixedInfo.string2double( mTVlat.getText() );
         double lng = FixedInfo.string2double( mTVlng.getText() );
-        double alt = FixedInfo.string2real( mTValt.getText() );
+        // double alt = FixedInfo.string2real( mTValt.getText() );
         double asl = FixedInfo.string2real( mTVasl.getText() );
-        if ( lat != mFxd.lat || lng != mFxd.lng || alt != mFxd.alt || asl != mFxd.asl ) {
+        if ( lat != mFxd.lat || lng != mFxd.lng /* || alt != mFxd.alt */ || asl != mFxd.asl ) {
+          // get ellipsoid height from geoid height
+          double alt = mWMM.geoidToEllipsoid( lat, lng, asl );
           mParent.updateFixedData( mFxd, lng, lat, alt, asl );
         }
       }

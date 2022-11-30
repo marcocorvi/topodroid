@@ -107,16 +107,16 @@
         android:text="@string/latitude"
         />
    					  
-    <TextView android:id="@+id/h_ellipsoid"
+    <!-- TextView android:id="@+id/h_ellipsoid"
         android:layout_below="@id/latitude"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:text="@string/h_ellipsoid"
-        />
+        / -->
 
     <TextView android:id="@+id/h_geoid"
-        android:layout_below="@id/h_ellipsoid"
+        android:layout_below="@id/latitude"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 

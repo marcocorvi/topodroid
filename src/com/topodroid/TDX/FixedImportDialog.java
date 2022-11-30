@@ -66,7 +66,7 @@ class FixedImportDialog extends MyDialog
   private Button mBtnView;
   private TextView mTVlat;
   private TextView mTVlng;
-  private TextView mTVhell;
+  // private TextView mTVhell;
   private TextView mTVhgeo;
   private EditText mETstation;
   private EditText mETcomment;
@@ -114,7 +114,7 @@ class FixedImportDialog extends MyDialog
 
     mTVlat  = (TextView) findViewById( R.id.tv_lat );
     mTVlng  = (TextView) findViewById( R.id.tv_lng );
-    mTVhell = (TextView) findViewById( R.id.tv_alt );
+    // mTVhell = (TextView) findViewById( R.id.tv_alt );
     mTVhgeo = (TextView) findViewById( R.id.tv_asl );
 
     mBtnOk   = (Button) findViewById( R.id.btn_ok );
@@ -280,7 +280,7 @@ class FixedImportDialog extends MyDialog
         mHGeo = Double.parseDouble( aslstr );
         mTVlat.setText( latstr );
         mTVlng.setText( lngstr );
-        mTVhell.setText( altstr );
+        // mTVhell.setText( altstr );
         mTVhgeo.setText( aslstr );
         isSet = true;
       } catch ( NumberFormatException e ) {

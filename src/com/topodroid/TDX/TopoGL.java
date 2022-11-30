@@ -2234,7 +2234,6 @@ public class TopoGL extends Activity
     // if ( cs_to == null ) return;
     try {
       Intent intent = new Intent( "Proj4.intent.action.Launch" );
-      // Intent intent = new Intent( Intent.ACTION_DEFAULT, "com.topodroid.Proj4.intent.action.Launch" );
       intent.putExtra( "version", "1.1" );      // Proj4 version
       intent.putExtra( "request", "CRS_CONVERSION_REQUEST" ); // Proj4 request
       intent.putExtra( "cs_from", "Long-Lat" ); // NOTE MUST USE SAME NAME AS Proj4
@@ -2252,7 +2251,6 @@ public class TopoGL extends Activity
   {
     try {
       Intent intent = new Intent( "Proj4.intent.action.Launch" );
-      // Intent intent = new Intent( Intent.ACTION_DEFAULT, "com.topodroid.Proj4.intent.action.Launch" );
       intent.putExtra( "version", "1.1" );      // Proj4 version
       intent.putExtra( "request", "CRS_INPUT_REQUEST" ); // Proj4 request
       startActivityForResult( intent, CRS_INPUT_REQUEST );

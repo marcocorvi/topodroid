@@ -207,6 +207,15 @@ public class FixedActivity extends Activity
     (new FixedDialog( mContext, this, mSaveFixed )).show();
   }
 
+  /** add a fixed point
+   * @param station point station name
+   * @param lng     longitude [degrees]
+   * @param lat     latitude [degrees]
+   * @param alt     ellipsoid altitude [m]
+   * @param asl     geoid altitude [m]
+   * @param comment comment
+   * @param source  source type
+   */
   public void addFixedPoint( String name,
                              double lng, // decimal degrees
                              double lat,
@@ -224,9 +233,18 @@ public class FixedActivity extends Activity
     // }
   }
 
+  /** insert a new fixed point 
+   * @param station point station name
+   * @param lng     longitude
+   * @param lat     latitude
+   * @param h_ell   ellipsoid altitude
+   * @param h_geo   geoid altitude
+   * @param comment comment
+   * @param source  source type
+   */
   private FixedInfo addLocation( String station, double lng, double lat, double h_ell, double h_geo, String comment, long source )
   {
-    // TDLog.v("FIXED location " + station + ": " + lng + " " + lat );
+    TDLog.v("FIXED new " + station + ": " + lng + " " + lat + " H " + h_ell + " " + h_geo );
     long id = TopoDroidApp.mData.insertFixed( TDInstance.sid, -1L, station, lng, lat, h_ell, h_geo, comment, 0L, source );
     return new FixedInfo( id, station, lng, lat, h_ell, h_geo, comment, source ); 
   }
@@ -349,13 +367,26 @@ public class FixedActivity extends Activity
     return TopoDroidApp.mData.hasFixed( TDInstance.sid, station );
   }
 
+  /** update fixed point data
+   * @param fxd     fixed point
+   * @param lng     longitude [degrees]
+   * @param lat     latitude [degrees]
+   * @param alt     ellipsoid altitude [m]
+   * @param asl     geoid altitude [m]
+   */
   void updateFixedData( FixedInfo fxd, double lng, double lat, double alt, double asl )
   {
+    TDLog.v("FIXED update data " + fxd.name + ": " + lng + " " + lat + " H " + alt + " " + asl );
     TopoDroidApp.mData.updateFixedData( fxd.id, TDInstance.sid, lng, lat, alt, asl );
     // mList.invalidate();
     refreshList();
   }
  
+  /** update fixed point name and comment
+   * @param fxd     fixed point
+   * @param name    station name
+   * @param comment comment
+   */
   void updateFixedNameComment( FixedInfo fxd, String name, String comment )
   {
     TopoDroidApp.mData.updateFixedStationComment( fxd.id, TDInstance.sid, name, comment );
@@ -363,36 +394,50 @@ public class FixedActivity extends Activity
     refreshList();
   }
 
+  /** drop a fixed point
+   * @param fxd     fixed point to drop (mark as deleted)
+   */
   public void dropFixed( FixedInfo fxd )
   {
     TopoDroidApp.mData.updateFixedStatus( fxd.id, TDInstance.sid, TDStatus.DELETED );
     refreshList();
   }
 
+  /** set the survey declination
+   * @param decl   declination [degree]
+   */
   void setDeclination( float decl )
   {
-    // TDLog.v( "set declination " + decl );
+    // TDLog.v( "set survey declination " + decl );
     TopoDroidApp.mData.updateSurveyDeclination( TDInstance.sid, decl );
   }
 
   // private final static int LOCATION_REQUEST = 1;
   private static final int CRS_CONVERSION_REQUEST = 2; // not final ?
   private static final int CRS_INPUT_REQUEST = 3;      // not final ?
+  private double mFixedAsl = 0;
   private FixedDialog mFixedDialog = null;
   private FixedAddDialog mFixedAddDialog = null;
 
+  /** clear converted coords in a fixed point
+   * @param fxd      fixed point
+   */
   void clearConvertedCoords( FixedInfo fxd ) 
   {
     TopoDroidApp.mData.updateFixedCS( fxd.id, TDInstance.sid, null, 0, 0, 0, 2L, 0 );
     fxd.clearConverted();
   }
 
+  /** get converted coords
+   * @param dialog   fixed point edit dialog
+   * @param cs_to    target CS
+   * @param fxd      fixed point
+   */
   void tryProj4( FixedDialog dialog, String cs_to, FixedInfo fxd )
   {
     if ( cs_to == null ) return;
     try {
       Intent intent = new Intent( "Proj4.intent.action.Launch" );
-      // Intent intent = new Intent( Intent.ACTION_DEFAULT, "com.topodroid.Proj4.intent.action.Launch" );
       intent.putExtra( "version", "1.1" );      // Proj4 version
       intent.putExtra( "request", "CRS_CONVERSION_REQUEST" ); // Proj4 request
       intent.putExtra( "cs_from", "Long-Lat" ); // NOTE MUST USE SAME NAME AS Proj4
@@ -401,21 +446,25 @@ public class FixedActivity extends Activity
       intent.putExtra( "latitude",  fxd.lat );
       // intent.putExtra( "altitude",  fxd.alt );
       intent.putExtra( "altitude",  fxd.asl ); // geoid altitude
-
+      mFixedAsl    = fxd.asl;
       mFixedDialog = dialog;
       // TDLog.Log( TDLog.LOG_LOC, "CONV. REQUEST " + fxd.lng + " " + fxd.lat + " " + fxd.alt );
       startActivityForResult( intent, CRS_CONVERSION_REQUEST );
     } catch ( ActivityNotFoundException e ) {
+      // mFixedAsl    = 0;
       mFixedDialog = null;
       TDToast.makeBad( R.string.no_proj4 );
     }
   }
 
+  /** request coordinates from Proj4
+   * @param dialog   add dialog
+   */
   void getProj4Coords( FixedAddDialog dialog )
   {
+    TDLog.v("FIXED get Proj4 coords");
     try {
       Intent intent = new Intent( "Proj4.intent.action.Launch" );
-      // Intent intent = new Intent( Intent.ACTION_DEFAULT, "com.topodroid.Proj4.intent.action.Launch" );
       intent.putExtra( "version", "1.1" );      // Proj4 version
       intent.putExtra( "request", "CRS_INPUT_REQUEST" ); // Proj4 request
       mFixedAddDialog = dialog;
@@ -438,12 +487,14 @@ public class FixedActivity extends Activity
             String cs  = bundle.getString( "cs_to" );
             double lng = bundle.getDouble( "longitude");
             double lat = bundle.getDouble( "latitude");
-            double alt = bundle.getDouble( "altitude"); // geoid altitude
+            // double alt = bundle.getDouble( "altitude"); // Proj4 (geoid) altitude
+            double alt   = mFixedAsl; // use geoid altitude instead of Proj4 altitude
 	    long   n_dec = bundle.containsKey( "decimals" )? bundle.getLong( "decimals" ) : 2;
 	    double conv  = bundle.containsKey( "convergence" )? bundle.getDouble( "convergence" ) : 0; // degrees
             TopoDroidApp.mData.updateFixedCS(  mFixedDialog.getFixedId(), TDInstance.sid, cs, lng, lat, alt, n_dec, conv );
             mFixedDialog.setConvertedCoords( cs, lng, lat, alt, n_dec, conv );
           }
+          // mFixedAsl    = 0;
           mFixedDialog = null;
         }
       } else if ( reqCode == CRS_INPUT_REQUEST ) {

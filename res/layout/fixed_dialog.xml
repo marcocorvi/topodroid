@@ -28,7 +28,7 @@
       android:text="@string/longitude"
     />
     <EditText android:id="@id/fix_lng" 
-      style="@style/edit_decimal_light"
+      style="@style/edit_signeddecimal_light"
       android:layout_width="0dp"
       android:layout_weight="40"
       android:layout_height="wrap_content" 
@@ -55,17 +55,17 @@
       android:text="@string/latitude"
     />
     <EditText android:id="@id/fix_lat" 
-      style="@style/edit_decimal_light"
+      style="@style/edit_signeddecimal_light"
       android:layout_width="0dp"
       android:layout_weight="40"
       android:layout_height="wrap_content" 
-      android:nextFocusDown="@+id/fix_alt"
+      android:nextFocusDown="@+id/fix_asl"
       android:singleLine="true"
       android:importantForAutofill="no"
     />
   </LinearLayout>
 
-  <LinearLayout android:id="@+id/layout2"
+  <!-- LinearLayout android:id="@+id/layout2"
     android:layout_below="@id/layout1"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
       android:text="@string/h_ellipsoid"
     />
     <EditText android:id="@id/fix_alt" 
-      style="@style/edit_decimal_light"
+      style="@style/edit_signeddecimal_light"
       android:layout_width="0dp"
       android:layout_weight="40"
       android:layout_height="wrap_content" 
@@ -89,10 +89,10 @@
       android:singleLine="true"
       android:importantForAutofill="no"
     />
-  </LinearLayout>
+  </LinearLayout -->
 
   <LinearLayout android:id="@+id/layout3"
-    android:layout_below="@id/layout2"
+    android:layout_below="@id/layout1"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -107,7 +107,7 @@
       android:text="@string/h_geoid"
     />
     <EditText android:id="@id/fix_asl" 
-      style="@style/edit_decimal_light"
+      style="@style/edit_signeddecimal_light"
       android:layout_width="0dp"
       android:layout_weight="40"
       android:layout_height="wrap_content" 

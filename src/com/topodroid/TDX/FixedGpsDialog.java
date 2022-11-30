@@ -75,7 +75,7 @@ class FixedGpsDialog extends MyDialog
 
   private TextView mTVlat;
   private TextView mTVlng;
-  private TextView mTValt;
+  // private TextView mTValt;
   private TextView mTVasl;
   private TextView mTVerr;
   private EditText mETstation;
@@ -90,8 +90,8 @@ class FixedGpsDialog extends MyDialog
 
   private double mLat = 0;  // decimal degrees
   private double mLng = 0;  // decimal degrees
-  private double mHEll = 0; // meters
-  private double mHGeo; // altimetric altitude
+  private double mHEll = 0; // ellipsoid altitude [meters]
+  private double mHGeo; // altimetrici (geoid) altitude
   private double mErr2 = -1; // location error [m]
   private boolean mHasLocation;
   private int mNrSatellites = 0;
@@ -138,7 +138,7 @@ class FixedGpsDialog extends MyDialog
 
     mTVlng = (TextView) findViewById(R.id.longitude );
     mTVlat = (TextView) findViewById(R.id.latitude  );
-    mTValt = (TextView) findViewById(R.id.h_ellipsoid  );   // ellipsoid
+    // mTValt = (TextView) findViewById(R.id.h_ellipsoid  );   // ellipsoid
     mTVasl = (TextView) findViewById(R.id.h_geoid );        // geoid
     mTVerr = (TextView) findViewById(R.id.error );          // location error
     mETstation = (EditText) findViewById( R.id.station );
@@ -317,7 +317,7 @@ class FixedGpsDialog extends MyDialog
 
     mTVlng.setText( String.format( mContext.getResources().getString( R.string.fmt_longitude ), FixedInfo.double2string( mLng ) ) );
     mTVlat.setText( String.format( mContext.getResources().getString( R.string.fmt_latitude ), FixedInfo.double2string( mLat ) ) );
-    mTValt.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_ellipsoid ), mHEll ) );
+    // mTValt.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_ellipsoid ), mHEll ) );
     mTVasl.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_geoid ), mHGeo ) );
     mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_m ), ret ) );
     // if ( do_error ) {

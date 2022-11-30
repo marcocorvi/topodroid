@@ -48,7 +48,7 @@ class FixedAddDialog extends MyDialog
   private EditText mETcomment;
   private EditText mETlng;
   private EditText mETlat;
-  private EditText mEThell; // altitude ellipsoid
+  // private EditText mEThell; // altitude ellipsoid
   private EditText mEThgeo; // altitude geoid
 
   private Button   mBtnNS;
@@ -82,7 +82,7 @@ class FixedAddDialog extends MyDialog
 
     mETlng  = (EditText) findViewById( R.id.edit_long );
     mETlat  = (EditText) findViewById( R.id.edit_lat  );
-    mEThell = (EditText) findViewById( R.id.edit_alt  );
+    // mEThell = (EditText) findViewById( R.id.edit_alt  );
     mEThgeo = (EditText) findViewById( R.id.edit_asl  );
 
     mNorth = true;
@@ -98,14 +98,14 @@ class FixedAddDialog extends MyDialog
       }
       MyKeyboard.registerEditText( mKeyboard, mETlng,  MyKeyboard.FLAG_POINT_SIGN_DEGREE );
       MyKeyboard.registerEditText( mKeyboard, mETlat,  MyKeyboard.FLAG_POINT_SIGN_DEGREE );
-      MyKeyboard.registerEditText( mKeyboard, mEThell, MyKeyboard.FLAG_POINT_SIGN  );
+      // MyKeyboard.registerEditText( mKeyboard, mEThell, MyKeyboard.FLAG_POINT_SIGN  );
       MyKeyboard.registerEditText( mKeyboard, mEThgeo, MyKeyboard.FLAG_POINT_SIGN  );
     } else {
       mKeyboard.hide();
       mETlng.setInputType(  TDConst.TEXT );
       mETlat.setInputType(  TDConst.TEXT );
-      mEThell.setInputType( TDConst.NUMBER_DECIMAL );
-      mEThgeo.setInputType( TDConst.NUMBER_DECIMAL );
+      // mEThell.setInputType( TDConst.NUMBER_DECIMAL_SIGNED );
+      mEThgeo.setInputType( TDConst.NUMBER_DECIMAL_SIGNED );
       if ( TDSetting.mStationNames == 1 ) {
         mETstation.setInputType( TDConst.NUMBER_DECIMAL );
       }
@@ -209,7 +209,7 @@ class FixedAddDialog extends MyDialog
               toast = false;
               mETlng.setText( val[0] );
               mETlat.setText( val[1] );
-              if ( val.length > 2 ) mEThell.setText( val[2] );
+              // if ( val.length > 2 ) mEThell.setText( val[2] );
             }
           }
         }
@@ -230,15 +230,15 @@ class FixedAddDialog extends MyDialog
       String comment = mETcomment.getText().toString();
       // if ( comment == null ) comment = "";
       if ( getLngLat() ) {
-        String altit = mEThell.getText().toString();
+        // String altit = mEThell.getText().toString();
         String aslit = mEThgeo.getText().toString();
-        if ( ( /* altit == null || */ altit.length() == 0 ) && ( /* aslit == null || */ aslit.length() == 0 ) ) {
-          mEThell.setError( mContext.getResources().getString( R.string.error_alt_required) );
+        if ( ( /* altit == null || altit.length() == 0 ) && ( aslit == null || */ aslit.length() == 0 ) ) {
+          mEThgeo.setError( mContext.getResources().getString( R.string.error_alt_required) );
           return;
         }
         mHEll = -1000.0;
         mHGeo = -1000.0;
-        if ( ( /* altit == null || */ altit.length() == 0 ) ) {
+        // if ( ( /* altit == null || */ altit.length() == 0 ) ) {
           try {
             mHGeo = Double.parseDouble( aslit.replace(",", ".") );
           } catch ( NumberFormatException e ) {
@@ -247,25 +247,25 @@ class FixedAddDialog extends MyDialog
           }
           WorldMagneticModel wmm = new WorldMagneticModel( mContext );
           mHEll = wmm.geoidToEllipsoid( mLat, mLng, mHGeo );
-        } else {
-          try {
-            mHEll = Double.parseDouble( altit.replace(",", ".") );
-          } catch ( NumberFormatException e ) {
-            mEThell.setError( mContext.getResources().getString( R.string.error_invalid_number) );
-            return;
-          }
-          if ( ( /* aslit == null || */ aslit.length() == 0 ) ) {
-            WorldMagneticModel wmm = new WorldMagneticModel( mContext );
-            mHGeo = wmm.ellipsoidToGeoid( mLat, mLng, mHEll );
-          } else {
-            try {
-              mHGeo = Double.parseDouble( aslit.replace(",", ".") );
-            } catch ( NumberFormatException e ) {
-              mEThgeo.setError( mContext.getResources().getString( R.string.error_invalid_number) );
-              return;
-            }
-          }
-        }
+        // } else {
+        //   try {
+        //     mHEll = Double.parseDouble( altit.replace(",", ".") );
+        //   } catch ( NumberFormatException e ) {
+        //     mEThell.setError( mContext.getResources().getString( R.string.error_invalid_number) );
+        //     return;
+        //   }
+        //   if ( ( /* aslit == null || */ aslit.length() == 0 ) ) {
+        //     WorldMagneticModel wmm = new WorldMagneticModel( mContext );
+        //     mHGeo = wmm.ellipsoidToGeoid( mLat, mLng, mHEll );
+        //   } else {
+        //     try {
+        //       mHGeo = Double.parseDouble( aslit.replace(",", ".") );
+        //     } catch ( NumberFormatException e ) {
+        //       mEThgeo.setError( mContext.getResources().getString( R.string.error_invalid_number) );
+        //       return;
+        //     }
+        //   }
+        // }
         mParent.addFixedPoint( name, mLng, mLat, mHEll, mHGeo, comment, FixedInfo.SRC_MANUAL );
       } else {
         return;

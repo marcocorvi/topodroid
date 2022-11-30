@@ -56,14 +56,14 @@
         android:layout_height="wrap_content"
         android:text="@string/empty"
       />
-      <TextView 
+      <!-- TextView 
         android:id="@+id/tv_alt"
         android:layout_marginBottom="@dimen/marginv"
         android:layout_width="0dp"
         android:layout_weight="20"
         android:layout_height="wrap_content"
         android:text="@string/empty"
-      />
+      / -->
       <TextView 
         android:id="@+id/tv_asl"
         android:layout_marginBottom="@dimen/marginv"

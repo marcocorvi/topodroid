@@ -35,7 +35,7 @@ public class FixedInfo extends MagLatLong
   public String name;     // station name, or whatever
   // public double lat;      // wgs84 latitude [decimal deg] (from MagLatLong)
   // public double lng;      // wgs84 longitude [decimal deg]
-  public double alt;      // wgs84 altitude [m]
+  public double alt;      // wgs84 altitude [m] (only internal use)
   public double asl;      // geoid altitude [m] 
   public String comment;
   public String cs;       // coordinate system
@@ -142,7 +142,7 @@ public class FixedInfo extends MagLatLong
   //   comment = "";
   // }
 
-  /** @return the string "station long lat alt" for the exports
+  /** @return the string "station long lat asl" for the exports
    */
   String toExportString()
   {
@@ -181,7 +181,7 @@ public class FixedInfo extends MagLatLong
   // @RecentlyNonNull
   public String toString()
   {
-    return name + " " + double2string( lng ) + " " + double2string( lat ) + " " + (int)(asl) + " [wgs " + (int)(alt) + "]";
+    return name + " " + double2string( lng ) + " " + double2string( lat ) + " " + (int)(asl); // + " [wgs " + (int)(alt) + "]";
   }
 
   static String double2string( double x )

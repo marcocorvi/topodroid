@@ -62,12 +62,12 @@
         android:layout_width="0dp"
         android:layout_weight="60"
         android:hint="@string/latitude_hint"
-        android:nextFocusDown="@+id/edit_alt"
+        android:nextFocusDown="@+id/edit_asl"
         android:importantForAutofill="no"
         />
   </LinearLayout>
   		
-  <LinearLayout android:id="@+id/layout3a"
+  <!-- LinearLayout android:id="@+id/layout3a"
       android:layout_below="@id/layout2"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
@@ -91,10 +91,10 @@
         android:nextFocusDown="@+id/edit_asl"
         android:importantForAutofill="no"
         />
-  </LinearLayout>
+  </LinearLayout -->
   		
   <LinearLayout android:id="@+id/layout3b"
-      android:layout_below="@id/layout3a"
+      android:layout_below="@id/layout2"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal"
