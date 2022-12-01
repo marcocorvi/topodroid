@@ -66,8 +66,8 @@ class FixedImportDialog extends MyDialog
   private Button mBtnView;
   private TextView mTVlat;
   private TextView mTVlng;
-  // private TextView mTVhell;
-  private TextView mTVhgeo;
+  // private TextView mTVh_ell;
+  private TextView mTVh_geo;
   private EditText mETstation;
   private EditText mETcomment;
 
@@ -114,8 +114,8 @@ class FixedImportDialog extends MyDialog
 
     mTVlat  = (TextView) findViewById( R.id.tv_lat );
     mTVlng  = (TextView) findViewById( R.id.tv_lng );
-    // mTVhell = (TextView) findViewById( R.id.tv_alt );
-    mTVhgeo = (TextView) findViewById( R.id.tv_asl );
+    // mTVh_ell = (TextView) findViewById( R.id.tv_h_ell );
+    mTVh_geo = (TextView) findViewById( R.id.tv_h_geo );
 
     mBtnOk   = (Button) findViewById( R.id.btn_ok );
     mBtnView = (Button) findViewById( R.id.btn_view );
@@ -272,16 +272,16 @@ class FixedImportDialog extends MyDialog
       try {
         String lngstr = vals[len-3].trim();
         String latstr = vals[len-4].trim();
-        String altstr = vals[len-2].trim();
-        String aslstr = vals[len-1].trim();
+        String h_ell_str = vals[len-2].trim();
+        String h_geo_str = vals[len-1].trim();
         mLng  = Double.parseDouble( lngstr );
         mLat  = Double.parseDouble( latstr );
-        mHEll = Double.parseDouble( altstr );
-        mHGeo = Double.parseDouble( aslstr );
+        mHEll = Double.parseDouble( h_ell_str );
+        mHGeo = Double.parseDouble( h_geo_str );
         mTVlat.setText( latstr );
         mTVlng.setText( lngstr );
-        // mTVhell.setText( altstr );
-        mTVhgeo.setText( aslstr );
+        // mTVh_ell.setText( h_ell_str );
+        mTVh_geo.setText( h_geo_str );
         isSet = true;
       } catch ( NumberFormatException e ) {
         TDLog.Error("Non-number input");

@@ -79,9 +79,9 @@ public class ImportWallsTask extends ImportTask
       // WorldMagneticModel wmm = new WorldMagneticModel( mApp.get() );
       // ArrayList< ParserWalls.Fix > fixes = parser.getFixes();
       // for ( ParserWalls.Fix fix : fixes ) {
-      //   // double asl = fix.z;
-      //   double alt = wmm.geoidToEllipsoid( fix.n, fix.e, fix.z );
-      //   app_data.insertFixed( sid, -1L, fix.name, fix.e, fix.n, alt, fix.z, "", 0 );
+      //   // double h_geo = fix.z;
+      //   double h_ell = wmm.geoidToEllipsoid( fix.n, fix.e, fix.z );
+      //   app_data.insertFixed( sid, -1L, fix.name, fix.e, fix.n, h_ell, fix.z, "", 0 );
       // }
 
       // ArrayList< ParserWalls.Station > stations = parser.getStations();

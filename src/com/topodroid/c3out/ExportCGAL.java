@@ -33,7 +33,7 @@ import java.io.IOException;
 public class ExportCGAL
 {
   // ArrayList<CWFacet> mFacets;
-  // double lat, lng, asl;
+  // double lat, lng, h_geo;
   double s_radius = 1;
   double e_radius = 1;
   Cave3DStation zero = new Cave3DStation( "", 0, 0, 0 );

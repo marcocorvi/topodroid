@@ -82,8 +82,8 @@ class FixedAddDialog extends MyDialog
 
     mETlng  = (EditText) findViewById( R.id.edit_long );
     mETlat  = (EditText) findViewById( R.id.edit_lat  );
-    // mEThell = (EditText) findViewById( R.id.edit_alt  );
-    mEThgeo = (EditText) findViewById( R.id.edit_asl  );
+    // mEThell = (EditText) findViewById( R.id.edit_h_ell  );
+    mEThgeo = (EditText) findViewById( R.id.edit_h_geo  );
 
     mNorth = true;
     mEast  = true;
@@ -162,13 +162,13 @@ class FixedAddDialog extends MyDialog
   // set the coordinates
   // @param lng longitude
   // @param lat latitude
-  // @param alt geoid altitude
-  void setCoordsGeo( double lng, double lat, double alt )
+  // @param h_geo geoid altitude
+  void setCoordsGeo( double lng, double lat, double h_geo )
   {
     mETlng.setText(  FixedInfo.double2string( lng ) );
     mETlat.setText(  FixedInfo.double2string( lat ) );
-    // mEThell.setText( String.format( Locale.US, "%.1f", alt ) );
-    mEThgeo.setText( String.format( Locale.US, "%.1f", alt ) );
+    // mEThell.setText( String.format( Locale.US, "%.1f", h_geo ) );
+    mEThgeo.setText( String.format( Locale.US, "%.1f", h_geo ) );
   }
 
   @Override
@@ -230,17 +230,17 @@ class FixedAddDialog extends MyDialog
       String comment = mETcomment.getText().toString();
       // if ( comment == null ) comment = "";
       if ( getLngLat() ) {
-        // String altit = mEThell.getText().toString();
-        String aslit = mEThgeo.getText().toString();
-        if ( ( /* altit == null || altit.length() == 0 ) && ( aslit == null || */ aslit.length() == 0 ) ) {
+        // String h_ell_str = mEThell.getText().toString();
+        String h_geo_str = mEThgeo.getText().toString();
+        if ( ( /* h_ell_str == null || h_ell_str.length() == 0 ) && ( h_geo_str == null || */ h_geo_str.length() == 0 ) ) {
           mEThgeo.setError( mContext.getResources().getString( R.string.error_alt_required) );
           return;
         }
         mHEll = -1000.0;
         mHGeo = -1000.0;
-        // if ( ( /* altit == null || */ altit.length() == 0 ) ) {
+        // if ( ( /* h_ell_str == null || */ h_ell_str.length() == 0 ) ) {
           try {
-            mHGeo = Double.parseDouble( aslit.replace(",", ".") );
+            mHGeo = Double.parseDouble( h_geo_str.replace(",", ".") );
           } catch ( NumberFormatException e ) {
             mEThgeo.setError( mContext.getResources().getString( R.string.error_invalid_number) );
             return;
@@ -249,17 +249,17 @@ class FixedAddDialog extends MyDialog
           mHEll = wmm.geoidToEllipsoid( mLat, mLng, mHGeo );
         // } else {
         //   try {
-        //     mHEll = Double.parseDouble( altit.replace(",", ".") );
+        //     mHEll = Double.parseDouble( h_ell_str.replace(",", ".") );
         //   } catch ( NumberFormatException e ) {
         //     mEThell.setError( mContext.getResources().getString( R.string.error_invalid_number) );
         //     return;
         //   }
-        //   if ( ( /* aslit == null || */ aslit.length() == 0 ) ) {
+        //   if ( ( /* h_geo_str == null || */ h_geo_str.length() == 0 ) ) {
         //     WorldMagneticModel wmm = new WorldMagneticModel( mContext );
         //     mHGeo = wmm.ellipsoidToGeoid( mLat, mLng, mHEll );
         //   } else {
         //     try {
-        //       mHGeo = Double.parseDouble( aslit.replace(",", ".") );
+        //       mHGeo = Double.parseDouble( h_geo_str.replace(",", ".") );
         //     } catch ( NumberFormatException e ) {
         //       mEThgeo.setError( mContext.getResources().getString( R.string.error_invalid_number) );
         //       return;

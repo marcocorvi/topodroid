@@ -70,9 +70,9 @@ public class ImportTherionTask extends ImportTask
       // WorldMagneticModel wmm = new WorldMagneticModel( mApp.get() );
       // ArrayList< ParserTherion.Fix > fixes = parser.getFixes();
       // for ( ParserTherion.Fix fix : fixes ) {
-      //   // double asl = fix.z;
-      //   double alt = wmm.geoidToEllipsoid( fix.n, fix.e, fix.z );
-      //   app_data.insertFixed( sid, -1L, fix.name, fix.e, fix.n, alt, fix.z, "", 0 );
+      //   // double h_geo = fix.z;
+      //   double h_ell = wmm.geoidToEllipsoid( fix.n, fix.e, fix.z );
+      //   app_data.insertFixed( sid, -1L, fix.name, fix.e, fix.n, h_ell, fix.z, "", 0 );
       // }
 
       ArrayList< ParserTherion.Station > stations = parser.getStations();

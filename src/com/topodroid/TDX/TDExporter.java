@@ -600,7 +600,7 @@ public class TDExporter
         for ( FixedInfo fix : fixed ) {
           pw.format("     <trigpoint name=\"%s\" labelsymbol=\"0\" >\n", fix.name );
           pw.format(Locale.US, "       <coordinate latv=\"%.7f\" longv=\"%.7f\" altv=\"%.2f\" lat=\"%.7f N\" long=\"%.7f E\" format=\"dd.ddddddd N\" alt=\"%.2f\" />\n",
-                    fix.lat, fix.lng, fix.asl, fix.lat, fix.lng, fix.asl );
+                    fix.lat, fix.lng, fix.h_geo, fix.lat, fix.lng, fix.h_geo );
           pw.format("     </trigpoint>\n");
         }
       }
@@ -631,12 +631,12 @@ public class TDExporter
   // ####################################################################################################################################
   // geographic exports - use (ge, gs, gv)
 
-  static GeoReference getGeolocalizedStation( long sid, DataHelper data, float asl_factor, boolean ellipsoid_altitude, String station )
+  static GeoReference getGeolocalizedStation( long sid, DataHelper data, float h_geo_factor, boolean ellipsoid_h, String station )
   {
     float decl = data.getSurveyDeclination( sid );
     if ( decl >= SurveyInfo.DECLINATION_MAX ) decl = 0; // if unset use 0
 
-    List< TDNum > nums = getGeolocalizedData( sid, data, decl, asl_factor, ellipsoid_altitude );
+    List< TDNum > nums = getGeolocalizedData( sid, data, decl, h_geo_factor, ellipsoid_h );
     if ( nums == null ) return null;
     for ( TDNum num : nums ) {
       for ( NumStation st : num.getStations() ) {
@@ -646,7 +646,7 @@ public class TDExporter
     return null;
   }
 
-  static private List< TDNum > getGeolocalizedData( long sid, DataHelper data, float decl, float asl_factor, boolean ellipsoid_altitude )
+  static private List< TDNum > getGeolocalizedData( long sid, DataHelper data, float decl, float h_geo_factor, boolean ellipsoid_h )
   {
     List< FixedInfo > fixeds = data.selectAllFixed( sid, 0 );
     // TDLog.v( "get geoloc. data. Decl " + decl + " fixeds " + fixeds.size() );
@@ -659,7 +659,7 @@ public class TDExporter
       TDNum num = new TDNum( shots_data, fixed.name, null, null, decl, null ); // null formatClosure
       // TDLog.v( "Num shots " + num.getShots().size() );
       if ( num.getShots().size() > 0 ) {
-        makeGeolocalizedData( num, fixed, asl_factor, ellipsoid_altitude );
+        makeGeolocalizedData( num, fixed, h_geo_factor, ellipsoid_h );
 	nums.add( num );
       } 
     }
@@ -667,16 +667,15 @@ public class TDExporter
     return nums;
   }
 
-  static private void  makeGeolocalizedData( TDNum num, FixedInfo origin, float asl_factor, boolean ellipsoid_altitude )
+  static private void  makeGeolocalizedData( TDNum num, FixedInfo origin, float h_geo_factor, boolean ellipsoid_h )
   {
 
     double lat = origin.lat;
     double lng = origin.lng;
-    double alt = origin.alt;
-    double asl = ellipsoid_altitude ? origin.alt 
-                                    : origin.asl; // KML uses Geoid altitude (unless altitudeMode is set)
-    double s_radius = 1 / Geodetic.meridianRadiusExact( lat, alt );
-    double e_radius = 1 / Geodetic.parallelRadiusExact( lat, alt );
+    double h_ell = origin.h_ell;
+    double h_geo = ellipsoid_h ? origin.h_ell : origin.h_geo; // KML uses Geoid altitude (unless altitudeMode is set)
+    double s_radius = 1 / Geodetic.meridianRadiusExact( lat, h_ell );
+    double e_radius = 1 / Geodetic.parallelRadiusExact( lat, h_ell );
     // TDLog.v( "radius S " + (s_radius / s_radius_e) + " E " + (e_radius / e_radius_a ) );
 
     mERadius = e_radius; // save radii factors for getGeolocalizedStation
@@ -688,17 +687,17 @@ public class TDExporter
     for ( NumStation st : num.getStations() ) {
       st.s = (lat - st.s * s_radius);
       st.e = (lng + st.e * e_radius); 
-      st.v = (asl - st.v) * asl_factor;
+      st.v = (h_geo - st.v) * h_geo_factor;
     }
     for ( NumStation cst : num.getClosureStations() ) {
       cst.s = (lat - cst.s * s_radius);
       cst.e = (lng + cst.e * e_radius); 
-      cst.v = (asl - cst.v) * asl_factor;
+      cst.v = (h_geo - cst.v) * h_geo_factor;
     }
     for ( NumSplay sp : num.getSplays() ) {
       sp.s = (lat - sp.s * s_radius);
       sp.e = (lng + sp.e * e_radius); 
-      sp.v = (asl - sp.v) * asl_factor;
+      sp.v = (h_geo - sp.v) * h_geo_factor;
     }
   }
 
@@ -733,7 +732,7 @@ public class TDExporter
     final String coordinates3 = "    <coordinates>%.8f,%.8f,%.1f</coordinates>\n";
     final String coordinates6 = "    %.8f,%.8f,%.1f %.8f,%.8f,%.1f\n";
     // TDLog.v( "export as KML " + file.getFilename() );
-    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: Geoid altitude
+    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: geoid altitude
     if ( TDUtil.isEmpty(nums) ) {
       TDLog.Error( "Failed KML export: no geolocalized station");
       return 2;
@@ -872,7 +871,7 @@ public class TDExporter
    */
   static int exportSurveyAsShp( OutputStream os, long sid, DataHelper data, SurveyInfo info, String survey, String dirname )
   {
-    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: Geoid altitude
+    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: geoid altitude
     if ( TDUtil.isEmpty(nums) ) {
       TDLog.Error( "Failed SHP export: no geolocalized station");
       return 0;
@@ -1860,7 +1859,7 @@ public class TDExporter
       }
 
       if ( fixed.size() > 0 ) {
-        writeSurvexLine(pw, "  ; fix stations as long-lat alt");
+        writeSurvexLine(pw, "  ; fix stations as long-lat h_geo");
         for ( FixedInfo fix : fixed ) {
           writeSurvexLine(pw, "  ; *fix " + fix.toExportString() );
         }
@@ -2193,7 +2192,7 @@ public class TDExporter
       pw.format("# %s created by TopoDroid v %s%s", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string(), newline );
       pw.format("# %s%s", info.name, newline );
       // if ( fixed.size() > 0 ) {
-      //   pw.format("  ; fix stations as long-lat alt\n");
+      //   pw.format("  ; fix stations as long-lat h_geo\n");
       //   for ( FixedInfo fix : fixed ) {
       //     pw.format("  ; *fix %s\n", fix.toExportString() );
       //   }
@@ -2866,7 +2865,7 @@ public class TDExporter
           // get TR-station from fixed name
           int pos = fixed.name.indexOf('.');
           int st = (pos < 0)? Integer.parseInt( fixed.name ) : Integer.parseInt( fixed.name.substring( pos+1 ) );
-          pw.format(Locale.US, "%6d%6d%4d%4d%4d%12.2f%12.2f%12.2f%8d%8d\r\n", -5, 1, 1, 1, 1, fixed.lng, fixed.lat, fixed.alt, 1, st );
+          pw.format(Locale.US, "%6d%6d%4d%4d%4d%12.2f%12.2f%12.2f%8d%8d\r\n", -5, 1, 1, 1, 1, fixed.lng, fixed.lat, fixed.h_geo, 1, st );
           pw.format(Locale.US, "(%5d%6d%4d%4d%4d %s \r\n", -5, 1, 1, 1, 1, fixed.name );
         }
       } else {
@@ -3122,7 +3121,7 @@ public class TDExporter
         pw.format("#DATUM: WGS 84\r\n");
         for ( FixedInfo fixed : fixeds ) {
           pw.format(Locale.US, "#CONTROL POINT: %s %.10f E %.10f N %.1f M\r\n",
-            fixed.name, fixed.lng, fixed.lat, fixed.alt );
+            fixed.name, fixed.lng, fixed.lat, fixed.h_geo );
         }
       }
       pw.format("\r\n" );
@@ -3272,7 +3271,7 @@ public class TDExporter
             pw.format("<Entrance");
             pw.format(Locale.US, " X=\"%.10f\"", fixed.lng );
             pw.format(Locale.US, " Y=\"%.10f\"", fixed.lat );
-            pw.format(Locale.US, " Z=\"%.2f\"",  fixed.alt );
+            pw.format(Locale.US, " Z=\"%.2f\"",  fixed.h_geo );
             pw.format(" Name=\"%s\"",     fixed.name );
             pw.format(" Numero=\"0\"" );  // ce
             pw.format(" Comments=\"%s\"", fixed.comment );
@@ -3519,7 +3518,7 @@ public class TDExporter
     if ( fixed.size() > 0 ) {
       for ( FixedInfo fix : fixed ) {
         if ( station.equals( fix.name ) ) {
-          pw.format(Locale.US, "%.8f %.8f %.1f\n", fix.lng, fix.lat, fix.asl );
+          pw.format(Locale.US, "%.8f %.8f %.1f\n", fix.lng, fix.lat, fix.h_geo );
           return;
         }
       }
@@ -3690,7 +3689,7 @@ public class TDExporter
           } else {
             pw.format(Locale.US, " S%.6f", - fix.lat );
           }
-          pw.format(Locale.US, " %.0f", fix.asl );
+          pw.format(Locale.US, " %.0f", fix.h_geo );
           if ( fix.comment != null && fix.comment.length() > 0 ) pw.format(" /%s", fix.comment );
           pw.format("\n");
         }
@@ -3928,7 +3927,7 @@ public class TDExporter
         for ( FixedInfo fix : fixed ) {
           ents.add( fix.name );
           pw.format(";\t#point\tPoint%s\t", fix.name );
-          pw.format(Locale.US, "%.6f\t%.6f\t%.0f%s", fix.lng, fix.lat, fix.asl, eol );
+          pw.format(Locale.US, "%.6f\t%.6f\t%.0f%s", fix.lng, fix.lat, fix.h_geo, eol );
           break;
         }
       }
@@ -4104,7 +4103,7 @@ public class TDExporter
         for ( FixedInfo fix : fixed ) {
           pw.format("Fix point: %s", fix.name );
           printPolygonEOL( pw );
-          pw.format(Locale.US, "%.6f\t%.6f\t%.0f\t0\t0\t0\t0", fix.lng, fix.lat, fix.asl );
+          pw.format(Locale.US, "%.6f\t%.6f\t%.0f\t0\t0\t0\t0", fix.lng, fix.lat, fix.h_geo );
           printPolygonEOL( pw );
           break;
         }
@@ -4805,7 +4804,7 @@ public class TDExporter
           pw.format(Locale.US, "<Coordonnees");
           pw.format(Locale.US, " X=\"%.7f\"", fix.lng );
           pw.format(Locale.US, " Y=\"%.7f\"", fix.lat );
-          pw.format(Locale.US, " Z=\"%.2f\"", fix.asl );
+          pw.format(Locale.US, " Z=\"%.2f\"", fix.h_geo );
           pw.format(" Projection=\"WGS84\"");
           pw.format("/>\r\n");
           pw.format("<Entree>%s</Entree>\r\n", fix.name );

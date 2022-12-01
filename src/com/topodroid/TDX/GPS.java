@@ -38,13 +38,13 @@ class GPS implements LocationListener
   // boolean mHasLocation;
   private double mLat  = 0;  // decimal degrees
   private double mLng  = 0;  // decimal degrees
-  private double mAlt  = 0;  // meters
+  private double nHEll = 0;  // meters (ellipsoid altitude)
   // private double mLat0 = 0;  // decimal degrees
   // private double mLng0 = 0;  // decimal degrees
   private int mLocCount;
   private double mLatSum;
   private double mLngSum;
-  private double mAltSum;
+  private double mHEllSum;
 
 
   // private double mErr2 = -1; // location error [m]
@@ -53,7 +53,7 @@ class GPS implements LocationListener
 
   interface GPSListener
   {
-    void notifyLocation( double lng, double lat, double alt );
+    void notifyLocation( double lng, double lat, double h_ell );
   }
 
   private GPSListener mListener = null;
@@ -111,18 +111,18 @@ class GPS implements LocationListener
   {
     double lat = loc.getLatitude();  // decimal degree
     double lng = loc.getLongitude();
-    double alt = loc.getAltitude();  // meters above WGS84 ellipsoid
+    double h_ell = loc.getAltitude();  // meters above WGS84 ellipsoid
     if ( Math.abs( lat - mLat ) + Math.abs( lng - mLng ) > DELTA ) {
       mLocCount ++;
-      mLatSum += lat;
-      mLngSum += lng;
-      mAltSum += alt;
+      mLatSum  += lat;
+      mLngSum  += lng;
+      mHEllSum += h_ell;
       if ( mLocCount > 10 ) {
         mLat = mLatSum / mLocCount;
         mLng = mLngSum / mLocCount;
-        mAlt = mAltSum / mLocCount;
+        nHEll = mHEllSum / mLocCount;
         resetSums();
-        if ( mListener != null ) mListener.notifyLocation( mLng, mLat, mAlt );
+        if ( mListener != null ) mListener.notifyLocation( mLng, mLat, nHEll );
       }
     } else {
       resetSums();
@@ -177,7 +177,7 @@ class GPS implements LocationListener
     mLocCount = 0;
     mLatSum = 0;
     mLngSum = 0;
-    mAltSum = 0;
+    mHEllSum = 0;
   }
 
   @Override

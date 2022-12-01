@@ -59,7 +59,7 @@
       android:layout_width="0dp"
       android:layout_weight="40"
       android:layout_height="wrap_content" 
-      android:nextFocusDown="@+id/fix_asl"
+      android:nextFocusDown="@+id/fix_h_geo"
       android:singleLine="true"
       android:importantForAutofill="no"
     />
@@ -72,7 +72,7 @@
     android:orientation="horizontal"
     android:paddingBottom="@dimen/paddingv"
     >
-    <TextView android:labelFor="@id/fix_alt"
+    <TextView android:labelFor="@id/fix_h_ell"
       android:layout_width="0dp" 
       android:layout_weight="40"
       android:layout_height="wrap_content" 
@@ -80,12 +80,12 @@
       android:layout_gravity="start"
       android:text="@string/h_ellipsoid"
     />
-    <EditText android:id="@id/fix_alt" 
+    <EditText android:id="@id/fix_h_ell" 
       style="@style/edit_signeddecimal_light"
       android:layout_width="0dp"
       android:layout_weight="40"
       android:layout_height="wrap_content" 
-      android:nextFocusDown="@+id/fix_asl"
+      android:nextFocusDown="@+id/fix_h_geo"
       android:singleLine="true"
       android:importantForAutofill="no"
     />
@@ -98,7 +98,7 @@
     android:orientation="horizontal"
     android:paddingBottom="@dimen/paddingv"
     >
-    <TextView android:labelFor="@id/fix_asl"
+    <TextView android:labelFor="@id/fix_h_geo"
       android:layout_width="0dp"
       android:layout_weight="40"
       android:layout_height="wrap_content" 
@@ -106,7 +106,7 @@
       android:layout_gravity="start"
       android:text="@string/h_geoid"
     />
-    <EditText android:id="@id/fix_asl" 
+    <EditText android:id="@id/fix_h_geo" 
       style="@style/edit_signeddecimal_light"
       android:layout_width="0dp"
       android:layout_weight="40"

@@ -2334,8 +2334,8 @@ public class TDSetting
       // TDLog.Log( TDLog.LOG_UNITS, "mUnitLocation changed " + mUnitLocation );
     // } else if ( k.equals( key[ ? ] ) ) { // DISTOX_ALTITUDE
     //   try {
-    //     mAltitude = Integer.parseInt( tryStringValue( hlp, k, v, ALTITUDE ) );
-    //   } catch ( NumberFormatException e ) { mAltitude = _WGS84; }
+    //     mEllipAlt = Integer.parseInt( tryStringValue( hlp, k, v, ALTITUDE ) );
+    //   } catch ( NumberFormatException e ) { mEllipAlt = _WGS84; }
     } else if ( k.equals( key[ 1 ] ) ) {
       mCRS = tryStringValue( hlp, k, v, def[1] );     // DISTOX_CRS (arbitrary)
     } else {

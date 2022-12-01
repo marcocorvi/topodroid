@@ -72,7 +72,7 @@ class ParserCaveSniper extends ImportParser
             TDLog.Error("unhandled unit line: " + line );
 	  }
         } else if ( line.startsWith("GPS:") ) {
-          // GPS: lng , lat , alt
+          // GPS: lng , lat , h_ell
         } else if ( line.startsWith("Od") ) {
           // Od Do Odleglosc Azymut Upad Komentarz
         } else if ( line.length() > 8 ) {

@@ -38,13 +38,13 @@ class ParserTherion extends ImportParser
   /** fix station:
    * fix stations are supposed to be referred to the same coord system
    */
-  static class Fix
+  static class ThFix
   {
     // private CS cs;
     String name;
     float e, n, z; // north east, vertical (upwards)
 
-    Fix( String nm, float e0, float n0, float z0 )
+    ThFix( String nm, float e0, float n0, float z0 )
     {
       name = nm;
       e = e0;
@@ -67,7 +67,7 @@ class ParserTherion extends ImportParser
     }
   }
 
-  private ArrayList< Fix > fixes;
+  private ArrayList< ThFix > fixes;
   private ArrayList< Station > stations;
   // private ArrayList< ParserShot > shots;   // centerline shots // FROM ImportParser
   // private ArrayList< ParserShot > splays;  // splay shots
@@ -76,7 +76,7 @@ class ParserTherion extends ImportParser
   // ArrayList< ParserShot > getShots()    { return shots; }
   // ArrayList< ParserShot > getSplays()   { return splays; }
   ArrayList< Station >    getStations() { return stations; }
-  ArrayList< Fix >        getFixes()    { return fixes; }
+  ArrayList< ThFix >        getFixes()    { return fixes; }
 
   // same as in ImportParser.java
   // String initStation() // FROM ImportParser
@@ -527,7 +527,7 @@ class ParserTherion extends ImportParser
                 if ( vals_len > 4 ) {
                   String name = extractStationName( vals[1] );
                   try {
-	            fixes.add( new Fix( name,
+	            fixes.add( new ThFix( name,
                                         Float.parseFloat( vals[2] ),
                                         Float.parseFloat( vals[3] ),
                                         Float.parseFloat( vals[4] ) ) );

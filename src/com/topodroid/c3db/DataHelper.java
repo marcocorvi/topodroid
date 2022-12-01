@@ -210,12 +210,12 @@ public class DataHelper extends DataSetObservable
         SurveyFixed fixed = new SurveyFixed( cursor.getString(0) );
         fixed.mLongitude  = cursor.getDouble(1); // longitude
         fixed.mLatitude   = cursor.getDouble(2);
-        fixed.mAltitude   = cursor.getDouble(3);
-        fixed.mAltimetric = cursor.getDouble(4);
+        fixed.mEllipAlt   = cursor.getDouble(3);
+        fixed.mGeoidAlt   = cursor.getDouble(4);
         fixed.mCsName     = cursor.getString(5);
         fixed.mCsLongitude = cursor.getDouble(6);
         fixed.mCsLatitude  = cursor.getDouble(7);
-        fixed.mCsAltitude  = cursor.getDouble(8);
+        fixed.mCsGeoidAlt  = cursor.getDouble(8);
         fixed.mConvergence = cursor.getDouble(9);
         ret.add( fixed );
       } while (cursor.moveToNext());

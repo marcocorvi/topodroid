@@ -2283,15 +2283,15 @@ public class DrawingIO
     }
     // TDLog.v( "Fixed " + fixed.name + ": " + fixed.e + " " + fixed.s + " " + fixed.v );
     if ( fix.cs != null ) {
-      // TDLog.v( "CS " + fix.cs_lng + " " + fix.cs_lat + " " + fix.cs_alt );
+      // TDLog.v( "CS " + fix.cs_lng + " " + fix.cs_lat + " " + fix.cs_h_geo );
       xoff = (float)(fix.cs_lng - fixed.e);
       yoff = (float)(fix.cs_lat + fixed.s);
-      zoff = (float)(fix.cs_alt + fixed.v);
+      zoff = (float)(fix.cs_h_geo + fixed.v);
     } else {
-      // TDLog.v( "WGS84 " + fix.lng + " " + fix.lat + " " + fix.alt );
+      // TDLog.v( "WGS84 " + fix.lng + " " + fix.lat + " " + fix.h_ell );
       xoff = (float)(fix.lng - fixed.e);
       yoff = (float)(fix.lat + fixed.s);
-      zoff = (float)(fix.alt + fixed.v);
+      zoff = (float)(fix.h_ell + fixed.v);
     }
     int azimuth = (int)(plot.azimuth);
 

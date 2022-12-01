@@ -75,8 +75,8 @@ class FixedGpsDialog extends MyDialog
 
   private TextView mTVlat;
   private TextView mTVlng;
-  // private TextView mTValt;
-  private TextView mTVasl;
+  // private TextView mTVh_ell;
+  private TextView mTVh_geo;
   private TextView mTVerr;
   private EditText mETstation;
   private EditText mETcomment;
@@ -138,8 +138,8 @@ class FixedGpsDialog extends MyDialog
 
     mTVlng = (TextView) findViewById(R.id.longitude );
     mTVlat = (TextView) findViewById(R.id.latitude  );
-    // mTValt = (TextView) findViewById(R.id.h_ellipsoid  );   // ellipsoid
-    mTVasl = (TextView) findViewById(R.id.h_geoid );        // geoid
+    // mTVh_ell = (TextView) findViewById(R.id.h_ellipsoid  );   // ellipsoid
+    mTVh_geo = (TextView) findViewById(R.id.h_geoid );        // geoid
     mTVerr = (TextView) findViewById(R.id.error );          // location error
     mETstation = (EditText) findViewById( R.id.station );
     mETcomment = (EditText) findViewById( R.id.comment );
@@ -317,8 +317,8 @@ class FixedGpsDialog extends MyDialog
 
     mTVlng.setText( String.format( mContext.getResources().getString( R.string.fmt_longitude ), FixedInfo.double2string( mLng ) ) );
     mTVlat.setText( String.format( mContext.getResources().getString( R.string.fmt_latitude ), FixedInfo.double2string( mLat ) ) );
-    // mTValt.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_ellipsoid ), mHEll ) );
-    mTVasl.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_geoid ), mHGeo ) );
+    // mTVh_ell.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_ellipsoid ), mHEll ) );
+    mTVh_geo.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_geoid ), mHGeo ) );
     mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_m ), ret ) );
     // if ( do_error ) {
     //   mTVerr.setTextColor( 0xff00ff00 );

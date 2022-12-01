@@ -62,7 +62,7 @@
         android:layout_width="0dp"
         android:layout_weight="60"
         android:hint="@string/latitude_hint"
-        android:nextFocusDown="@+id/edit_asl"
+        android:nextFocusDown="@+id/edit_h_geo"
         android:importantForAutofill="no"
         />
   </LinearLayout>
@@ -82,13 +82,13 @@
         android:layout_gravity="start"
         android:text="@string/h_ellipsoid"
         />
-      <EditText android:id="@id/edit_alt"
+      <EditText android:id="@id/edit_h_ell"
         style="@style/edit_text"
         android:layout_width="0dp"
 	android:layout_weight="40"
         android:hint="@string/h_ellipsoid_hint"
         android:scrollHorizontally="true"
-        android:nextFocusDown="@+id/edit_asl"
+        android:nextFocusDown="@+id/edit_h_geo"
         android:importantForAutofill="no"
         />
   </LinearLayout -->
@@ -108,7 +108,7 @@
         android:layout_gravity="start"
         android:text="@string/h_geoid"
         />
-      <EditText android:id="@id/edit_asl"
+      <EditText android:id="@id/edit_h_geo"
         style="@style/edit_text"
         android:layout_width="0dp"
 	android:layout_weight="40"

@@ -2206,17 +2206,17 @@ public class TopoGL extends Activity
   /** react to location notify
    * @param lng longitude [WGS84 decimal degrees]
    * @param lat latitude
-   * @param alt altitude [m]
+   * @param h_ell ellipsoid altitude [m]
    * @note WITH-GPS
    */
-  public void notifyLocation( double lng, double lat, double alt )
+  public void notifyLocation( double lng, double lat, double h_ell )
   {
     // TDLog.v("TopoGL GPS notified location " + lng + " " + lat );
     // TODO
     // [1] convert to model CRS
     if ( mParser != null && mParser.hasWGS84() ) {
-      double n = mParser.latToNorth( lat, alt );
-      double e = mParser.lngToEast( lng, lat, alt, n );
+      double n = mParser.latToNorth( lat, h_ell );
+      double e = mParser.lngToEast( lng, lat, h_ell, n );
       // TDLog.v("TopoGL GPS has origin " + mParser.hasOrigin() + " location " + e + " " + n );
       // [2] get Z from surface
       // [3] mRenderer.setLocation( new Vector3D( e, n, z ) );
@@ -2230,7 +2230,7 @@ public class TopoGL extends Activity
 
   void doProj4Conversion( String cs_to, double lng, double lat )
   {
-    double alt = 0;
+    double h_geo = 0;
     // if ( cs_to == null ) return;
     try {
       Intent intent = new Intent( "Proj4.intent.action.Launch" );
@@ -2240,7 +2240,7 @@ public class TopoGL extends Activity
       intent.putExtra( "cs_to", cs_to ); 
       intent.putExtra( "longitude", lng );
       intent.putExtra( "latitude",  lat );
-      intent.putExtra( "altitude",  alt );
+      intent.putExtra( "altitude",  h_geo );
       startActivityForResult( intent, CRS_CONVERSION_REQUEST );
     } catch ( ActivityNotFoundException e ) {
       // TODO TDToast.makeBad( R.string.no_proj4 );
@@ -2269,7 +2269,7 @@ public class TopoGL extends Activity
           String cs = bundle.getString( "cs_to" );
           double e  = bundle.getDouble( "longitude");
           double n = bundle.getDouble( "latitude");
-          // double alt = bundle.getDouble( "altitude");
+          // double h_geo = bundle.getDouble( "altitude");
 	  // long   n_dec = bundle.containsKey( "decimals" )? bundle.getLong( "decimals" ) : 2;
           addGPSpoint( e, n );
         }

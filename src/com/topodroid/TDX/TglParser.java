@@ -113,17 +113,27 @@ public class TglParser
   double getSNradius() { return ( mOrigin != null )? mOrigin.getSNradius() : 1.0f; }
   double getWEradius() { return ( mOrigin != null )? mOrigin.getWEradius() : 1.0f; }
 
-  double lngToEast( double lng, double lat, double alt, double north ) 
+  /** @return east coord from the longitude
+   * @param lng WGS84 longitude
+   * @param lat WGS84 latitude
+   * @param h_ell WGS84 altitude
+   * @param north north coordinate
+   */
+  double lngToEast( double lng, double lat, double h_ell, double north ) 
   { 
-    return (mOrigin != null)? mOrigin.lngToEast( lng, lat, alt, north ) : 0.0;
+    return (mOrigin != null)? mOrigin.lngToEast( lng, lat, h_ell, north ) : 0.0;
   }
 
-  double latToNorth( double lat, double alt ) { return (mOrigin != null)? mOrigin.latToNorth( lat, alt ) : 0.0; }
+  /** @return north coord from the latitude
+   * @param lat WGS84 latitude
+   * @param h_ell WGS84 altitude
+   */
+  double latToNorth( double lat, double h_ell ) { return (mOrigin != null)? mOrigin.latToNorth( lat, h_ell ) : 0.0; }
 
-  // void lngLatToEastNorth( double lng, double lat, double alt, double[] east_north )
+  // void lngLatToEastNorth( double lng, double lat, double h_ell, double[] east_north )
   // {
   //   if ( mOrigin != null ) {
-  //     mOrigin.lngLatToEastNorth( lng, lat, alt, east_north );
+  //     mOrigin.lngLatToEastNorth( lng, lat, h_ell, east_north );
   //   } else {
   //     east_north[0] = 0;
   //     east_north[1] = 0;
@@ -995,8 +1005,8 @@ public class TglParser
   }
   */
 
-  /** add a fix. The following fix fields are assumed initialized:
-   *   name, longitude, latitude, altitude 
+  /** add a fix. 
+   * @note The following fix fields are assumed initialized: name, longitude, latitude, h_ellipsoid 
    * @param fix   tix to add
    */
   public void addFix( Cave3DFix fix ) { fixes.add( fix ); }

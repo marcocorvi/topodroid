@@ -38,28 +38,28 @@ import java.util.Locale;
 
 class ParserWalls extends ImportParser
 {
-  static class Fix
+  static class WallsFix
   {
     String station;  // fix station
     double lng, lat; // WGS84 longitude and latitude
-    double alt;      // geoid altitude
+    double h_geo;    // geoid altitude
   
     /** cstr
      * @param st    station name
      * @param _lng  longitude [dec. degrees]
      * @param _lat  latitude [dec. degrees]
-     * @param _alt  geoid altitude [m]
+     * @param _geo  geoid altitude [m]
      */
-    Fix( String st, double _lng, double _lat, double _alt )
+    WallsFix( String st, double _lng, double _lat, double _geo )
     {
       station = st;
       lng = _lng;
       lat = _lat;
-      alt = _alt;
+      h_geo = _geo;
     }
   }
 
-  ArrayList< Fix > mFixes;
+  ArrayList< WallsFix > mFixes;
   int mIsWGS;
 
   float surveyDeclination( ) { return mDeclination; }
@@ -73,7 +73,7 @@ class ParserWalls extends ImportParser
   ParserWalls( InputStreamReader isr, String name, boolean apply_declination ) throws ParserException
   {
     super( apply_declination );
-    mFixes = new ArrayList< Fix >();
+    mFixes = new ArrayList< WallsFix >();
     readFile( isr, name, "" );
     checkValid();
   }
@@ -193,9 +193,9 @@ class ParserWalls extends ImportParser
                 String lat_str = vals[3].replace("S", "-").replace("N", "+");
                 double lng = strToCoordinate( lng_str, ul );
                 double lat = strToCoordinate( lat_str, ul );
-                double alt = strToValue( vals[4], ul );
+                double h_geo = strToValue( vals[4], ul );
                 if ( mIsWGS == 2 ) {
-                  mFixes.add( new Fix( station, lng, lat, alt ) );
+                  mFixes.add( new WallsFix( station, lng, lat, h_geo ) );
                 }
               }
             } else if ( cmd.equals("#date") ) { // yyyy-mm-dd

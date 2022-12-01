@@ -19,11 +19,11 @@ public class SurveyFixed
   public String station;
   public double mLongitude;
   public double mLatitude;
-  public double mAltitude;
-  public double mAltimetric;
+  public double mEllipAlt;
+  public double mGeoidAlt;
   public double mCsLongitude;
   public double mCsLatitude;
-  public double mCsAltitude;
+  public double mCsGeoidAlt;
   public double mConvergence;
 
   // public void log()

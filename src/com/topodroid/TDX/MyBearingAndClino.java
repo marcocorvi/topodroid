@@ -62,7 +62,7 @@ public class MyBearingAndClino implements IBearingAndClino
   {
     // TDLog.v( "BearingClino UI set orientation " + o0 + " bearing " + b0 + " clino " + c0 );
     // TDLog.v( "Bearing and Clino orientation " + o0 );
-    // this is not good for photo because it might alter azimuth/clino of xsection sketch
+    // this is not good for photo because it might change azimuth/clino of xsection sketch
     // mApp.mData.updatePlotAzimuthClino( TDInstance.sid, mPid, b0, c0 );
     mExif.setExifValues( b0, c0, o0, a0, cam );
   }

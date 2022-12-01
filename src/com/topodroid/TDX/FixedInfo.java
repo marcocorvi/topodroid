@@ -35,13 +35,13 @@ public class FixedInfo extends MagLatLong
   public String name;     // station name, or whatever
   // public double lat;      // wgs84 latitude [decimal deg] (from MagLatLong)
   // public double lng;      // wgs84 longitude [decimal deg]
-  public double alt;      // wgs84 altitude [m] (only internal use)
-  public double asl;      // geoid altitude [m] 
+  public double h_ell;      // wgs84 altitude [m] (only internal use)
+  public double h_geo;      // geoid altitude [m] 
   public String comment;
   public String cs;       // coordinate system
   public double cs_lng;   // longitude / east
   public double cs_lat;   // latitude / north
-  public double cs_alt;   // altitude
+  public double cs_h_geo;   // altitude (geoid)
   long   cs_n_dec; // number of decimals in lng/lat
   double convergence = 0.0; // cs meridian convergence [degree]
 
@@ -51,8 +51,8 @@ public class FixedInfo extends MagLatLong
     name = n;
     lat = latitude;
     lng = longitude;
-    alt = h_ellip;
-    asl = h_geoid;
+    h_ell = h_ellip;
+    h_geo = h_geoid;
     comment = cmt;
     source  = src;
     clearConverted();
@@ -71,25 +71,25 @@ public class FixedInfo extends MagLatLong
    * @param 
    * @param lng_cs
    * @param lat_cs
-   * @param alt_cs
+   * @param h_geo_cs
    * @param n_dec     numer of decimals
    * @param conv      convergence
    */
   FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid,
-             String cmt, long src, String name_cs, double lng_cs, double lat_cs, double alt_cs, long n_dec, double conv )
+             String cmt, long src, String name_cs, double lng_cs, double lat_cs, double h_geo_cs, long n_dec, double conv )
   {
     id = _id;
     name = n;
     lat = latitude;
     lng = longitude;
-    alt = h_ellip;
-    asl = h_geoid;
+    h_ell = h_ellip;
+    h_geo = h_geoid;
     comment = cmt;
     source  = src;
     cs      = name_cs;
     cs_lng  = lng_cs;
     cs_lat  = lat_cs;
-    cs_alt  = alt_cs;
+    cs_h_geo  = h_geo_cs;
     cs_n_dec = (n_dec >= 0)? n_dec : 0;
     convergence = conv;
   }
@@ -98,17 +98,17 @@ public class FixedInfo extends MagLatLong
    * @param name_cs   coordinate system
    * @param lng_cs    longitude / east
    * @param lat_cs    latitude / north
-   * @param alt_cs    altitude
+   * @param h_geo_cs  altitude (geoid) [m]
    * @param n_dec     number of decimals in lng/lat
    * @param conv      convergence [degree]
    */
-  void setCSCoords( String name_cs, double lng_cs, double lat_cs, double alt_cs, long n_dec, double conv )
+  void setCSCoords( String name_cs, double lng_cs, double lat_cs, double h_geo_cs, long n_dec, double conv )
   {
     cs = name_cs;
     if ( cs != null && cs.length() > 0 ) {
       cs_lng = lng_cs;
       cs_lat = lat_cs;
-      cs_alt = alt_cs;
+      cs_h_geo = h_geo_cs;
       cs_n_dec = (n_dec >= 0)? n_dec : 0;
       convergence = conv;
     }
@@ -121,7 +121,7 @@ public class FixedInfo extends MagLatLong
     cs = null;
     cs_lng = 0;
     cs_lat = 0;
-    cs_alt = 0;
+    cs_h_geo = 0;
     cs_n_dec = 2L;
     convergence = 0.0;
   }
@@ -137,26 +137,26 @@ public class FixedInfo extends MagLatLong
   //   name = n;
   //   lat = latitude;
   //   lng = longitude;
-  //   alt = h_ellip;
-  //   asl = h_geoid;
+  //   h_ell = h_ellip;
+  //   h_geo = h_geoid;
   //   comment = "";
   // }
 
-  /** @return the string "station long lat asl" for the exports
+  /** @return the string "station long lat h_geo" for the exports
    */
   String toExportString()
   {
-    return String.format(Locale.US, "%s %.6f %.6f %.0f", name, lng, lat, asl );
+    return String.format(Locale.US, "%s %.6f %.6f %.0f", name, lng, lat, h_geo );
   }
 
-  /** @return the string "long lat alt" with CS coordinates for the display
+  /** @return the string "long lat h_ell" with CS coordinates for the display
    */
   String toExportCSString()
   {
     StringBuilder fmt = new StringBuilder();
     fmt.append("%.").append( cs_n_dec ).append("f %.").append( cs_n_dec ).append("f %.0f");
-    return String.format(Locale.US, fmt.toString(), cs_lng, cs_lat, cs_alt );
-    // return String.format(Locale.US, "%s %.2f %.2f %.0f", name, cs_lng, cs_lat, cs_alt );
+    return String.format(Locale.US, fmt.toString(), cs_lng, cs_lat, cs_h_geo );
+    // return String.format(Locale.US, "%s %.2f %.2f %.0f", name, cs_lng, cs_lat, cs_h_geo );
   }
 
   String csName() { return cs; }
@@ -181,7 +181,7 @@ public class FixedInfo extends MagLatLong
   // @RecentlyNonNull
   public String toString()
   {
-    return name + " " + double2string( lng ) + " " + double2string( lat ) + " " + (int)(asl); // + " [wgs " + (int)(alt) + "]";
+    return name + " " + double2string( lng ) + " " + double2string( lat ) + " " + (int)(h_geo); // + " [wgs " + (int)(h_ell) + "]";
   }
 
   static String double2string( double x )

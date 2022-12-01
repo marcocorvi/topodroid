@@ -309,17 +309,17 @@ public class ParserTh extends TglParser
 
         // double a_lng = fx.mLongitude;
         double a_lat = fx.mLatitude;
-        double a_alt = fx.mAltitude; // FIXME Therion altitude are geodetic not ellipsoidic
+        double a_ell = fx.mEllipAlt; // FIXME Therion altitude are geodetic not ellipsoidic
         // KML radius is already pre-multiplied by PI/180
-        double s_radius = Geodetic.meridianRadiusExact( a_lat, a_alt );
-        double e_radius = Geodetic.parallelRadiusExact( a_lat, a_alt );
+        double s_radius = Geodetic.meridianRadiusExact( a_lat, a_ell );
+        double e_radius = Geodetic.parallelRadiusExact( a_lat, a_ell );
         // TDLog.v("E radius " + e_radius + " S radius " + s_radius + " lon " + fx.mLongitude + " lat " + fx.mLatitude );
 
-        // TODO use a_lng a_lat a_alt
+        // TODO use a_lng a_lat a_ell
 
         x0 = fx.mLongitude * e_radius;
         y0 = fx.mLatitude  * s_radius;
-        z0 = fx.mAltitude;
+        z0 = fx.mGeoidAlt; // 20221201 use geoid altitude
         // TDLog.v( "Th fix Long-Lat " + x0 + " " + y0 + " " + z0 + " cs1 <" + ((fx.mCsName!=null)?fx.mCsName:"null") + ">" );
         if ( mOrigin == null ) {
           // TDLog.v( "Th fix origin " + name + " " + x0 + " " + y0 + " " + z0 );
@@ -327,15 +327,15 @@ public class ParserTh extends TglParser
             cs1 = new Cave3DCS( fx.mCsName );
             x1 = fx.mCsLongitude;
             y1 = fx.mCsLatitude;
-            z1 = fx.mCsAltitude;
+            z1 = fx.mCsGeoidAlt;
             double conv = fx.mConvergence; // degrees
             // TDLog.v( "Th fix " + name + " CS1 " + fx.mCsName + " " + x1 + " " + y1 + " " + z1 + " conv " + conv );
             // TODO declination -= conv;
-            mOrigin = new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mAltitude );
+            mOrigin = new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mEllipAlt );
 	    fixes.add( mOrigin );
           } else {
             // TDLog.v( "Th CS0 " + x0 + " " + y0 + " " + z0 );
-            mOrigin = new Cave3DFix( name, x0, y0, z0, cs0, fx.mLongitude, fx.mLatitude, fx.mAltitude );
+            mOrigin = new Cave3DFix( name, x0, y0, z0, cs0, fx.mLongitude, fx.mLatitude, fx.mEllipAlt );
 	    fixes.add( mOrigin );
           }
         } else {
@@ -344,17 +344,17 @@ public class ParserTh extends TglParser
             if ( cs1.equals( fx.mCsName ) ) {
               x1 = fx.mCsLongitude;
               y1 = fx.mCsLatitude;
-              z1 = fx.mCsAltitude;
+              z1 = fx.mCsGeoidAlt;
               // TDLog.v( "Th fix relative fix " + name + " using " + cs1.name + " " + x1 + " " + y1 + " " + z1 );
-	      fixes.add( new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mAltitude ) );
+	      fixes.add( new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mEllipAlt ) );
             } else {
               TDLog.Error("Th fix relative fix " + name + " does not have CS " + cs1 );
             }
           } else {
-            double yy = mOrigin.latToNorth( fx.mLatitude, fx.mAltitude ); // north diff to the origin
-            double xx = mOrigin.lngToEast( fx.mLongitude, fx.mLatitude, fx.mAltitude, yy-mOrigin.y );
+            double yy = mOrigin.latToNorth( fx.mLatitude, fx.mEllipAlt ); // north diff to the origin
+            double xx = mOrigin.lngToEast( fx.mLongitude, fx.mLatitude, fx.mEllipAlt, yy-mOrigin.y );
             // TDLog.v( "Th fix relative use CS0 " + xx + " " + yy + " " + z0 );
-            fixes.add( new Cave3DFix( name, xx, yy, z0, cs0, fx.mLongitude, fx.mLatitude, fx.mAltitude ) );
+            fixes.add( new Cave3DFix( name, xx, yy, z0, cs0, fx.mLongitude, fx.mLatitude, fx.mEllipAlt ) );
           }
         }
       }

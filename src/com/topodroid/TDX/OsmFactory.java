@@ -154,13 +154,13 @@ public class OsmFactory
     mOrigin = origin;
     // TDLog.v("OSM origin " + origin.longitude + " " + origin.latitude + " X " + origin.x + " " + origin.y + " " + origin.z );
     double PI_180 = (Math.PI / 180);
-    double alat = origin.latitude;
-    double aalt = origin.altitude;
+    double a_lat = origin.latitude;
+    double a_ell = origin.h_ellip;
 
-    double a = ( alat < 0 )? -alat : alat;
+    double a = ( a_lat < 0 )? -a_lat : a_lat;
     // KML radius is already multiplied by PI/180
-    s_radius = Geodetic.meridianRadiusExact( alat, aalt );
-    e_radius = Geodetic.parallelRadiusExact( alat, aalt );
+    s_radius = Geodetic.meridianRadiusExact( a_lat, a_ell );
+    e_radius = Geodetic.parallelRadiusExact( a_lat, a_ell );
     // xmlParserFactory = XmlPullParserFactory.newInstance();
     mXres = mYres = 0.5f;
     width  = (int)( (x2 - x1 )/mXres );

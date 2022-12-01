@@ -211,22 +211,22 @@ public class FixedActivity extends Activity
    * @param station point station name
    * @param lng     longitude [degrees]
    * @param lat     latitude [degrees]
-   * @param alt     ellipsoid altitude [m]
-   * @param asl     geoid altitude [m]
+   * @param h_ell   ellipsoid altitude [m]
+   * @param h_geo   geoid altitude [m]
    * @param comment comment
    * @param source  source type
    */
   public void addFixedPoint( String name,
                              double lng, // decimal degrees
                              double lat,
-                             double alt,  // meters
-                             double asl,
+                             double h_ell,  // meters
+                             double h_geo,
                              String comment,
                              long source
                            )
   {
     if ( comment == null ) comment = "";
-    FixedInfo f = addLocation( name, lng, lat, alt, asl, comment, source );
+    FixedInfo f = addLocation( name, lng, lat, h_ell, h_geo, comment, source );
     // if ( f != null ) { // always true
       mFixedAdapter.add( f );
       mList.invalidate();
@@ -371,13 +371,13 @@ public class FixedActivity extends Activity
    * @param fxd     fixed point
    * @param lng     longitude [degrees]
    * @param lat     latitude [degrees]
-   * @param alt     ellipsoid altitude [m]
-   * @param asl     geoid altitude [m]
+   * @param h_ell   ellipsoid altitude [m]
+   * @param h_geo   geoid altitude [m]
    */
-  void updateFixedData( FixedInfo fxd, double lng, double lat, double alt, double asl )
+  void updateFixedData( FixedInfo fxd, double lng, double lat, double h_ell, double h_geo )
   {
-    TDLog.v("FIXED update data " + fxd.name + ": " + lng + " " + lat + " H " + alt + " " + asl );
-    TopoDroidApp.mData.updateFixedData( fxd.id, TDInstance.sid, lng, lat, alt, asl );
+    TDLog.v("FIXED update data " + fxd.name + ": " + lng + " " + lat + " H " + h_ell + " " + h_geo );
+    TopoDroidApp.mData.updateFixedData( fxd.id, TDInstance.sid, lng, lat, h_ell, h_geo );
     // mList.invalidate();
     refreshList();
   }
@@ -415,7 +415,7 @@ public class FixedActivity extends Activity
   // private final static int LOCATION_REQUEST = 1;
   private static final int CRS_CONVERSION_REQUEST = 2; // not final ?
   private static final int CRS_INPUT_REQUEST = 3;      // not final ?
-  private double mFixedAsl = 0;
+  private double mFixedHGeo = 0;
   private FixedDialog mFixedDialog = null;
   private FixedAddDialog mFixedAddDialog = null;
 
@@ -444,14 +444,14 @@ public class FixedActivity extends Activity
       intent.putExtra( "cs_to", cs_to ); 
       intent.putExtra( "longitude", fxd.lng );
       intent.putExtra( "latitude",  fxd.lat );
-      // intent.putExtra( "altitude",  fxd.alt );
-      intent.putExtra( "altitude",  fxd.asl ); // geoid altitude
-      mFixedAsl    = fxd.asl;
+      // intent.putExtra( "altitude",  fxd.h_ell );
+      intent.putExtra( "altitude",  fxd.h_geo ); // geoid altitude
+      mFixedHGeo   = fxd.h_geo;
       mFixedDialog = dialog;
-      // TDLog.Log( TDLog.LOG_LOC, "CONV. REQUEST " + fxd.lng + " " + fxd.lat + " " + fxd.alt );
+      // TDLog.Log( TDLog.LOG_LOC, "CONV. REQUEST " + fxd.lng + " " + fxd.lat + " " + fxd.h_ell );
       startActivityForResult( intent, CRS_CONVERSION_REQUEST );
     } catch ( ActivityNotFoundException e ) {
-      // mFixedAsl    = 0;
+      // mFixedHGeo  = 0;
       mFixedDialog = null;
       TDToast.makeBad( R.string.no_proj4 );
     }
@@ -487,14 +487,14 @@ public class FixedActivity extends Activity
             String cs  = bundle.getString( "cs_to" );
             double lng = bundle.getDouble( "longitude");
             double lat = bundle.getDouble( "latitude");
-            // double alt = bundle.getDouble( "altitude"); // Proj4 (geoid) altitude
-            double alt   = mFixedAsl; // use geoid altitude instead of Proj4 altitude
+            // double h_ell = bundle.getDouble( "altitude"); // Proj4 (geoid) altitude
+            double h_geo = mFixedHGeo; // use geoid altitude instead of Proj4 altitude
 	    long   n_dec = bundle.containsKey( "decimals" )? bundle.getLong( "decimals" ) : 2;
 	    double conv  = bundle.containsKey( "convergence" )? bundle.getDouble( "convergence" ) : 0; // degrees
-            TopoDroidApp.mData.updateFixedCS(  mFixedDialog.getFixedId(), TDInstance.sid, cs, lng, lat, alt, n_dec, conv );
-            mFixedDialog.setConvertedCoords( cs, lng, lat, alt, n_dec, conv );
+            TopoDroidApp.mData.updateFixedCS(  mFixedDialog.getFixedId(), TDInstance.sid, cs, lng, lat, h_geo, n_dec, conv );
+            mFixedDialog.setConvertedCoords( cs, lng, lat, h_geo, n_dec, conv );
           }
-          // mFixedAsl    = 0;
+          // mFixedHGeo   = 0;
           mFixedDialog = null;
         }
       } else if ( reqCode == CRS_INPUT_REQUEST ) {
@@ -522,7 +522,7 @@ public class FixedActivity extends Activity
             if ( line == null ) break;
             // TDLog.v( "read " + line );
 
-            // syntax: name, lat, lng, alt, asl
+            // syntax: name, lat, lng, h_ell, h_geo
             // units:        dec.degree meters
             String[] vals = line.split(",");
             int len = vals.length;

@@ -62,28 +62,28 @@ public class Geodetic
 
   // get the meridian radius times PI/180
   // @param latitude   latitude [deg]
-  // @param height     ellipsoidic altitude [m]
-  static public double meridianRadiusExact( double latitude, double height )
+  // @param h_ellip    ellipsoidic altitude [m]
+  static public double meridianRadiusExact( double latitude, double h_ellip )
   {
     double a_lat = Math.abs( latitude );
     double s = Math.sin( a_lat * Math.PI / 180.0 );
     double W = Math.sqrt( 1 - EARTH_E2 * s * s );
     // RADIUS_WE = EARTH_A / W; // principal radius of curvature in the prime vertical plane (N)
     //double RADIUS_NS = EARTH_A * EARTH_1E2 / ( W * W * W ); // ! W3 meridian radius of curvature (M)
-    double RADIUS_NS = (EARTH_A * EARTH_1E2 / ( W * W * W )) + height; //ellipsoidic altitude
+    double RADIUS_NS = (EARTH_A * EARTH_1E2 / ( W * W * W )) + h_ellip; //ellipsoidic altitude
     return (RADIUS_NS * Math.PI / 180.0);
   }
 
   // get the parallel radius times PI/180 - horizontal X-Y radius
   // @param latitude   latitude [deg]
-  // @param height     ellipsoidic altitude [m]
-  static public double parallelRadiusExact( double latitude, double height )
+  // @param h_ellip    ellipsoidic altitude [m]
+  static public double parallelRadiusExact( double latitude, double h_ellip )
   {
     double a_lat = Math.abs( latitude );
     double s = Math.sin( a_lat * Math.PI / 180.0 );
     double W = Math.sqrt( 1 - EARTH_E2 * s * s );
     //double RADIUS_WE = EARTH_A / W; // principal radius of curvature in the prime vertical plane (N) 
-    double RADIUS_WE = (EARTH_A / W) + height; // ellipsoid altitude
+    double RADIUS_WE = (EARTH_A / W) + h_ellip; // ellipsoid altitude
     // RADIUS_NS = EARTH_A * EARTH_1E2 / ( W * W * W );    
     return (RADIUS_WE * Math.cos( a_lat * Math.PI / 180 ) * Math.PI / 180.0);
   }
@@ -139,7 +139,7 @@ public class Geodetic
   /*
   double mLat; // phi latitude [deg]
   double mLng; // longitude [deg]
-  double mH;   // height [m]
+  double mH;   // h_ellip [m]
   double mPsi; // psi = atan( (b/a) tg( mLat ) )
   double mN;   // grand normal [m] : N = A / sqrt( 1 - E^2 sin(lat)^2 )
 
@@ -154,7 +154,7 @@ public class Geodetic
   /* cstr
    * @param lat   latitude [deg]
    * @param lng   longitude [deg] 
-   * @param h     height (over ellipsoid) [m] 
+   * @param h     h_ellip (over ellipsoid) [m] 
   public Geodetic( double lat, double lng, double h )
   {
     mLat = lat;
@@ -194,7 +194,7 @@ public class Geodetic
 
   /* compute geocentric R value: R = ( N + h ) * cos( lat )
    * @param phi latitude [deg]
-   * @param h   height [m]
+   * @param h   h_ellip [m]
   public static double geocentricR( double phi, double h ) 
   { 
     phi = phi * Math.PI/180.0;
@@ -205,7 +205,7 @@ public class Geodetic
 
   /* compute geocentric Z value: Z = ( N (1-e^2) + h ) * sin( lat )
    * @param phi latitude [deg]
-   * @param h   height [m]
+   * @param h   h_ellip [m]
   public static double geocentricZ( double phi, double h ) 
   { 
     phi = phi * Math.PI/180.0;
@@ -249,7 +249,7 @@ public class Geodetic
   }
   */
  
-  /* compute the geodetic height [m]
+  /* compute the geodetic h_ellip [m]
    * @param r    horizontal (X-Y) radius [m]
    * @param z    vertical [m]
    * @param phi  latitude [deg] - must have been obtained using geodeticLat()
