@@ -279,7 +279,9 @@
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
 
     <string name="error_m">错误 [m]</string>
+    <!-- TODO string name="accuracy_m">Accuracy [m]</string -->
     <string name="fmt_error_m">错误 %1$.1f m</string>
+    <!-- TODO string name="fmt_accuracy_m">Accuracy: H %1$.1f m V %2$.1f m</string -->
     <string name="fmt_h_geoid">海拔. %1$.0f m</string>
     <string name="fmt_h_ellipsoid">大地椭球高度. %1$.0f m</string>
     <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
@@ -351,6 +353,8 @@
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">纬度 %1$s</string>
     <string name="fmt_longitude">经度 %1$s</string>
+    <!-- TODO string name="fmt_latitude_dd_dms">Latitude: %1$s [%2$s]</string -->
+    <!-- TODO string name="fmt_longitude_dd_dms">Longitude: %1$s [%2$s]</string -->
     <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string -->
 
     <string name="fixed">修复</string>

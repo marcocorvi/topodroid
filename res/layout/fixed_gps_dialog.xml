@@ -131,6 +131,14 @@
         android:text="@string/error_m"
         />
 
+    <TextView android:id="@+id/accuracy"
+        android:layout_below="@id/error"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:text="@string/accuracy_m"
+        />
+
     <ListView android:id="@+id/list"
       style="@style/list_top"
       android:layout_below="@id/error"

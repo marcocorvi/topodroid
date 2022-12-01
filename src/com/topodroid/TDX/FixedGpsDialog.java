@@ -78,6 +78,7 @@ class FixedGpsDialog extends MyDialog
   // private TextView mTVh_ell;
   private TextView mTVh_geo;
   private TextView mTVerr;
+  private TextView mTVacc;
   private EditText mETstation;
   private EditText mETcomment;
 
@@ -92,7 +93,9 @@ class FixedGpsDialog extends MyDialog
   private double mLng = 0;  // decimal degrees
   private double mHEll = 0; // ellipsoid altitude [meters]
   private double mHGeo; // altimetrici (geoid) altitude
-  private double mErr2 = -1; // location error [m]
+  private double mErr2  = -1; // location error [m]
+  private double mErr2H = -1; // H location error [m]
+  private double mErr2V = -1; // V location error [m]
   private boolean mHasLocation;
   private int mNrSatellites = 0;
 
@@ -139,8 +142,9 @@ class FixedGpsDialog extends MyDialog
     mTVlng = (TextView) findViewById(R.id.longitude );
     mTVlat = (TextView) findViewById(R.id.latitude  );
     // mTVh_ell = (TextView) findViewById(R.id.h_ellipsoid  );   // ellipsoid
-    mTVh_geo = (TextView) findViewById(R.id.h_geoid );        // geoid
-    mTVerr = (TextView) findViewById(R.id.error );          // location error
+    mTVh_geo = (TextView) findViewById(R.id.h_geoid );    // geoid
+    mTVerr = (TextView) findViewById(R.id.error );        // location error
+    mTVacc = (TextView) findViewById(R.id.accuracy );     // H-V location error
     mETstation = (EditText) findViewById( R.id.station );
     mETcomment = (EditText) findViewById( R.id.comment );
 
@@ -283,12 +287,16 @@ class FixedGpsDialog extends MyDialog
 
   private void displayLocation( Location loc /*, boolean do_error*/ )
   {
-    double ret = 0;
+    double ret  = 0;
+    double retH = -1;
+    double retV = -1;
     if ( mErr2 < 0 ) {	  
       mLat  = loc.getLatitude();  // decimal degree
       mLng  = loc.getLongitude();
       mHEll = loc.getAltitude();  // meter
-      mErr2 = 10000;              // start with a large value
+      mErr2  = 1000;              // start with a large value
+      mErr2H = 1000;
+      mErr2V = 1000;
     } else {
       double lat0 = loc.getLatitude();
       double lng0 = loc.getLongitude();
@@ -299,27 +307,34 @@ class FixedGpsDialog extends MyDialog
       double dlat = (lat0-mLat) * mR * TDMath.DEG2RAD;
       double dlng = (lng0-mLng) * mR * TDMath.DEG2RAD * Math.cos( mLat * TDMath.DEG2RAD );
       double dhel = hel0 - mHEll;
-      double err2 = ( dlat*dlat + dlng*dlng + dhel*dhel );
-      mErr2 = mW0 * mErr2 + mW2 * err2;
+      double err2H = dlat*dlat + dlng*dlng;
+      double err2V = dhel*dhel;
+      double err2  = err2H + err2V;
+      mErr2  = mW0 * mErr2  + mW2 * err2;
+      mErr2H = mW0 * mErr2H + mW2 * err2H;
+      mErr2V = mW0 * mErr2V + mW2 * err2V;
       mLat  = lat;
       mLng  = lng;
       mHEll = hell;
       ret   = Math.sqrt( mErr2 );
-
-      if ( ret < 1 ) {
-	ret = 1; // FIXME hard lower bound
-      } else if ( ret > 100 ) {
-	ret = 100;
-      }
+      retH  = Math.sqrt( mErr2H );
+      retV  = Math.sqrt( mErr2V );
     }
     mHGeo = mWMM.ellipsoidToGeoid( mLat, mLng, mHEll ); 
     mHasLocation = true;
 
-    mTVlng.setText( String.format( mContext.getResources().getString( R.string.fmt_longitude ), FixedInfo.double2string( mLng ) ) );
-    mTVlat.setText( String.format( mContext.getResources().getString( R.string.fmt_latitude ), FixedInfo.double2string( mLat ) ) );
+    // mTVlng.setText( String.format( mContext.getResources().getString( R.string.fmt_longitude ), FixedInfo.double2string( mLng ) ) );
+    // mTVlat.setText( String.format( mContext.getResources().getString( R.string.fmt_latitude ), FixedInfo.double2string( mLat ) ) );
+    mTVlng.setText( String.format( mContext.getResources().getString( R.string.fmt_longitude_dd_dms ),
+      FixedInfo.double2degree( mLng ), FixedInfo.double2ddmmss( mLng ) ) );
+    mTVlat.setText( String.format( mContext.getResources().getString( R.string.fmt_latitude_dd_dms ),
+      FixedInfo.double2degree( mLat ), FixedInfo.double2ddmmss( mLat ) ) );
     // mTVh_ell.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_ellipsoid ), mHEll ) );
     mTVh_geo.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_geoid ), mHGeo ) );
-    mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_m ), ret ) );
+    if ( ret >= 0 && ret < 100 ) { 
+      mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_m ), ret ) );
+      mTVacc.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_accuracy_m ), retH, retV ) );
+    }
     // if ( do_error ) {
     //   mTVerr.setTextColor( 0xff00ff00 );
     // } else {

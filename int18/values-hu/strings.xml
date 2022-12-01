@@ -280,7 +280,9 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="multistation_plane">T9bbszörös-álláspont sík</string -->
 	
     <string name="error_m">Hiba [m]</string>
+    <!-- TODO string name="accuracy_m">Accuracy [m]</string -->
     <string name="fmt_error_m">Hiba %1$.1f m</string>
+    <!-- TODO string name="fmt_accuracy_m">Accuracy: H %1$.1f m V %2$.1f m</string -->
     <string name="fmt_h_geoid">Geoid mag. %1$.0f m</string>
     <string name="fmt_h_ellipsoid">Ellipszoid mag. %1$.0f m</string>
     <!-- UNUSED string name="depth_error">Figyelem! Adat mélység hiba</string -->
@@ -353,6 +355,8 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="fmt_id">Azonosító %1$s</string>
     <string name="fmt_latitude">Szélesség %1$s</string>
     <string name="fmt_longitude">Hosszúság %1$s</string>
+    <!-- TODO string name="fmt_latitude_dd_dms">Latitude: %1$s [%2$s]</string -->
+    <!-- TODO string name="fmt_longitude_dd_dms">Longitude: %1$s [%2$s]</string -->
     <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string -->
 	
     <string name="fixed">csavar</string>
