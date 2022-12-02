@@ -349,12 +349,12 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="legs">Poligon mérések</string>
     <string name="stations">Poligon-pont</string>
     <string name="splays">Sünök</string>
-    <!-- UNUSED string name="fmt_listen">HALLGAT | %1$s</string -->
+    <!-- UNUSED string name="fmt_listen">FIGYEL | %1$s</string -->
     <string name="fmt_id">Azonosító %1$s</string>
     <string name="fmt_latitude">Szélesség %1$s</string>
     <string name="fmt_longitude">Hosszúság %1$s</string>
-    <!-- TODO string name="fmt_latitude_dd_dms">Latitude: %1$s [%2$s]</string -->
-    <!-- TODO string name="fmt_longitude_dd_dms">Longitude: %1$s [%2$s]</string -->
+    <string name="fmt_latitude_dd_dms">Szélesség: %1$s [%2$s]</string>
+    <string name="fmt_longitude_dd_dms">Hosszúság: %1$s [%2$s]</string>
     <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string -->
 	
     <string name="fixed">csavar</string>
