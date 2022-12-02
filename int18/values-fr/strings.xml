@@ -285,8 +285,9 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 	<!-- UNUSED string name="long_lat">Long-Lat</string -->
 	<!-- UNUSED string name="multistation_plane">Multiple-station plane</string -->
 
-    <string name="error_m">Erreur [m]</string>
-    <string name="fmt_error_m">Erreur %1$.1f m (H %2$.1f V %3$.1f)</string>
+    <!-- TODO string name="error_m">Accuracy [m]</string -->
+    <!-- TODO string name="fmt_error_h">Accuracy: %1$.1f m</string -->
+    <!-- TODO string name="fmt_error_m">Accuracy: H %1$.1f V %2$.1f m</string -->
     <string name="fmt_h_geoid">Alt. géoïde %1$.0f m</string>
     <string name="fmt_h_ellipsoid">Alt. ellipsoïde %1$.0f m</string>
     <!-- UNUSED string name="depth_error">Attention. Erreur de profondeur de données</string -->
@@ -1459,6 +1460,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
   <string name="pref_firmware_sanity_summary">Appliquer les tests de validité du firmware</string>
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">Nom du Système de Coordonnées de Référence (UTM, WGS84&#8230;)</string>
+  <!-- TODO string name="pref_neg_altitude_title">Neg. altitudes</string -->
+  <!-- TODO string name="pref_neg_altitude_summary">Allow negative altitudes</string -->
   <!-- UNUSED string name="pref_gps_averaging_title">Utilizer GPSAveraging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Utiliser GPSAveraging</string -->
   <string name="pref_bric_mode_title">BRIC mode</string>

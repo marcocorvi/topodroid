@@ -276,8 +276,9 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- TODO string name="loops_bad">Inaccurate loops: %1$d</string -->
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
 
-    <string name="error_m">Errore [m]</string>
-    <string name="fmt_error_m">Errore %1$.1f m (H %2$.1f V %3$.1f)</string>
+    <!-- TODO string name="error_m">Accuracy [m]</string -->
+    <!-- TODO string name="fmt_error_h">Accuracy: %1$.1f m</string -->
+    <!-- TODO string name="fmt_error_m">Accuracy: H %1$.1f V %2$.1f m</string -->
     <string name="fmt_h_geoid">Errore %1$.0f m</string>
     <string name="fmt_h_ellipsoid">Errore %1$.0f m</string>
     <!-- UNUSED string name="depth_error">ATTENZIONE. Errore nella profondita\' dei dati</string -->
@@ -1439,6 +1440,8 @@ Fai riferimento alle pagine web per i dettagli.\n
   <string name="pref_firmware_sanity_summary">Effettua verifiche sanita\' firmware</string>
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">Nome CRS, come in Proj4</string>
+  <!-- TODO string name="pref_neg_altitude_title">Neg. altitudes</string -->
+  <!-- TODO string name="pref_neg_altitude_summary">Allow negative altitudes</string -->
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Se usare GPSAveraging</string -->
   <string name="pref_bric_mode_title">Modo BRIC</string>

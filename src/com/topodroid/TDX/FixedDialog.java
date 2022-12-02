@@ -18,7 +18,6 @@ import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 
-
 import com.topodroid.mag.MagElement;
 import com.topodroid.mag.WorldMagneticModel;
 
@@ -179,12 +178,16 @@ class FixedDialog extends MyDialog
     // mTVh_ell.setText( String.format( Locale.US, "%.0f", mFxd.h_ell ) );
     mTVh_geo.setText( String.format( Locale.US, "%.0f", mFxd.h_geo ) );
 
-    
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ),
                                 R.xml.my_keyboard, -1 );
     if ( TDSetting.mKeyboard ) {
-      // MyKeyboard.registerEditText( mKeyboard, mTVh_ell, MyKeyboard.FLAG_POINT );
-      MyKeyboard.registerEditText( mKeyboard, mTVh_geo, MyKeyboard.FLAG_POINT );
+      if ( TDSetting.mNegAltitude ) {
+        // MyKeyboard.registerEditText( mKeyboard, mTVh_ell, MyKeyboard.FLAG_POINT_SIGN );
+        MyKeyboard.registerEditText( mKeyboard, mTVh_geo, MyKeyboard.FLAG_POINT_SIGN );
+      } else {
+        // MyKeyboard.registerEditText( mKeyboard, mTVh_ell, MyKeyboard.FLAG_POINT );
+        MyKeyboard.registerEditText( mKeyboard, mTVh_geo, MyKeyboard.FLAG_POINT );
+      }
       MyKeyboard.registerEditText( mKeyboard, mTVlng, flag );
       MyKeyboard.registerEditText( mKeyboard, mTVlat, flag );
       // mKeyboard.hide();
@@ -198,8 +201,13 @@ class FixedDialog extends MyDialog
     KeyListener mKLh_geo = mTVh_geo.getKeyListener();
 
     editable = ( mFxd.source == FixedInfo.SRC_MANUAL );
-    // MyKeyboard.setEditable( mTVh_ell, mKeyboard, mKLalt, editable, MyKeyboard.FLAG_POINT );
-    MyKeyboard.setEditable( mTVh_geo, mKeyboard, mKLh_geo, editable, MyKeyboard.FLAG_POINT );
+    if ( TDSetting.mNegAltitude ) {
+      // MyKeyboard.setEditable( mTVh_ell, mKeyboard, mKLalt, editable, MyKeyboard.FLAG_POINT_SIGN );
+      MyKeyboard.setEditable( mTVh_geo, mKeyboard, mKLh_geo, editable, MyKeyboard.FLAG_POINT_SIGN );
+    } else {
+      // MyKeyboard.setEditable( mTVh_ell, mKeyboard, mKLalt, editable, MyKeyboard.FLAG_POINT );
+      MyKeyboard.setEditable( mTVh_geo, mKeyboard, mKLh_geo, editable, MyKeyboard.FLAG_POINT );
+    }
     MyKeyboard.setEditable( mTVlng, mKeyboard, mKLlng, editable, flag );
     MyKeyboard.setEditable( mTVlat, mKeyboard, mKLlat, editable, flag );
     

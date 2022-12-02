@@ -78,7 +78,6 @@ class FixedGpsDialog extends MyDialog
   // private TextView mTVh_ell;
   private TextView mTVh_geo;
   private TextView mTVerr;
-  // private TextView mTVacc;
   private EditText mETstation;
   private EditText mETcomment;
 
@@ -93,15 +92,15 @@ class FixedGpsDialog extends MyDialog
   private double mLng = 0;  // decimal degrees
   private double mHEll = 0; // ellipsoid altitude [meters]
   private double mHGeo; // altimetrici (geoid) altitude
-  private double mErr2  = -1; // location error [m]
-  private double mErr2H = -1; // H location error [m]
-  private double mErr2V = -1; // V location error [m]
+  private double mErr  = -1; // location error [m]
+  // private double mErr2H = -1; // H location error [m]
+  // private double mErr2V = -1; // V location error [m]
   private boolean mHasLocation;
   private int mNrSatellites = 0;
 
-  private double retMin = 1000;
-  private double retMax =    0;
-  private boolean retOk = false; // when error is getting stable: error decreases, then increases, then decreases again
+  private double errMin = 1000;
+  private double errMax =    0;
+  private boolean errOk = false; // when error is getting stable: error decreases, then increases, then decreases again
                                  // or after one minute has passed
   private long retStart = -1L;
 
@@ -150,7 +149,6 @@ class FixedGpsDialog extends MyDialog
     // mTVh_ell = (TextView) findViewById(R.id.h_ellipsoid  );   // ellipsoid
     mTVh_geo = (TextView) findViewById(R.id.h_geoid );    // geoid
     mTVerr = (TextView) findViewById(R.id.error );        // location error
-    // mTVacc = (TextView) findViewById(R.id.accuracy );     // H-V location error
     mETstation = (EditText) findViewById( R.id.station );
     mETcomment = (EditText) findViewById( R.id.comment );
 
@@ -275,8 +273,9 @@ class FixedGpsDialog extends MyDialog
         setGPSoff();
       } else {      
         setGPSon();
-        retMin = 1000;
-        retOk  = false;
+        errMin = 1000;
+        errMax =    0;
+        errOk  = false;
         retStart = -1L;
       }
     }
@@ -289,23 +288,23 @@ class FixedGpsDialog extends MyDialog
   /** location is stored in decimal degrees but displayed as deg:min:sec
    * N.B. the caller must check loc != null
    */
-  private final double mW0 = 0.9;
+  private final double mW0 = 0.8;
   private final double mW1 = 1 - mW0;
-  private final double mW2 = mW1 / mW0;
-  private final double mR = Geodetic.EARTH_A; // approx earth radius
+  // private final double mW2 = mW1 / mW0;
+  // private final double mR = Geodetic.EARTH_A; // approx earth radius
 
   private void displayLocation( Location loc /*, boolean do_error*/ )
   {
-    double ret  = 0;
-    double retH = -1;
-    double retV = -1;
-    if ( mErr2 < 0 ) {	  
+    double err3 = 0;
+    double errH = -1;
+    double errV = -1;
+    if ( mErr < 0 ) {	  
       mLat  = loc.getLatitude();  // decimal degree
       mLng  = loc.getLongitude();
       mHEll = loc.getAltitude();  // meter
-      mErr2  = 1000;              // start with a large value
-      mErr2H = 1000;
-      mErr2V = 1000;
+      mErr  = 1000;              // start with a large value
+      // mErr2H = 1000;
+      // mErr2V = 1000;
     } else {
       double lat0 = loc.getLatitude();
       double lng0 = loc.getLongitude();
@@ -313,33 +312,55 @@ class FixedGpsDialog extends MyDialog
       double lat  = mW1 * lat0 + mW0 * mLat;
       double lng  = mW1 * lng0 + mW0 * mLng;
       double hell = mW1 * hel0 + mW0 * mHEll;
-      double dlat = (lat0-mLat) * mR * TDMath.DEG2RAD;
-      double dlng = (lng0-mLng) * mR * TDMath.DEG2RAD * Math.cos( mLat * TDMath.DEG2RAD );
-      double dhel = hel0 - mHEll;
-      double err2H = dlat*dlat + dlng*dlng;
-      double err2V = dhel*dhel;
-      double err2  = err2H + err2V;
-      mErr2  = mW0 * mErr2  + mW2 * err2;
-      mErr2H = mW0 * mErr2H + mW2 * err2H;
-      mErr2V = mW0 * mErr2V + mW2 * err2V;
+      if ( loc.hasAccuracy() ) {
+        errH = loc.getAccuracy(); // meters
+        err3 = errH;
+        if ( TDandroid.BELOW_API_26 ) {
+          errV = Math.abs( hel0 - mHEll );
+        } else {
+          if ( loc.hasVerticalAccuracy() ) {
+            errV = loc.getVerticalAccuracyMeters();
+            err3 = Math.sqrt( errV * errV + errH * errH );
+          } else {
+            errV = -1;
+          }
+        }
+      } else {
+        err3 = -1;
+        // errH = -1;
+        // errV = -1;
+      }
       mLat  = lat;
       mLng  = lng;
       mHEll = hell;
-      ret   = 10 * Math.sqrt( mErr2 );  // FIXME multiplied by 10
-      retH  = 10 * Math.sqrt( mErr2H );
-      retV  = 10 * Math.sqrt( mErr2V );
-      if ( retOk ) {
-        if ( ret > retMax ) { 
-          retMax = ret;
-        } 
-      } else {
-        if ( ret < retMin ) {
-          retMin = ret;
-        } else if ( retStart < 0 ) {
-          retStart = System.currentTimeMillis();
-        } else if ( ret > 1.5 * retMin || System.currentTimeMillis() - retStart > 60000L ) { // one minute
-          retOk  = true;
-          retMax = ret;
+      if ( err3 > 0 ) {
+        // double dlat = (lat0-mLat) * mR * TDMath.DEG2RAD;
+        // double dlng = (lng0-mLng) * mR * TDMath.DEG2RAD * Math.cos( mLat * TDMath.DEG2RAD );
+        // double dhel = hel0 - mHEll;
+        // double err2H = dlat*dlat + dlng*dlng;
+        // double err2V = dhel*dhel;
+        // double err2  = err2H + err2V;
+        // mErr2  = mW0 * mErr2  + mW2 * err2;
+        // mErr2H = mW0 * mErr2H + mW2 * err2H;
+        // mErr2V = mW0 * mErr2V + mW2 * err2V;
+        // err3  = 10 * Math.sqrt( mErr2 );  // FIXME multiplied by 10
+        // errH  = 10 * Math.sqrt( mErr2H );
+        // errV  = 10 * Math.sqrt( mErr2V );
+        if ( errOk ) {
+          if ( err3 > errMax ) { 
+            errMax = err3;
+          } else if ( err3 < errMin ) {
+            errMin = err3;
+          }
+        } else {
+          if ( retStart < 0 ) {
+            retStart = System.currentTimeMillis();
+            TDToast.makeLong( R.string.location_start_fine );
+          } else if ( System.currentTimeMillis() - retStart > 60000L ) { // one minute
+            errOk  = true;
+            errMin = err3;
+            errMax = err3;
+          }
         }
       }
     }
@@ -354,19 +375,22 @@ class FixedGpsDialog extends MyDialog
       FixedInfo.double2degree( mLat ), FixedInfo.double2ddmmss( mLat ) ) );
     // mTVh_ell.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_ellipsoid ), mHEll ) );
     mTVh_geo.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_geoid ), mHGeo ) );
-    if ( ret >= 0 && ret < (retMax + retMin)/2 ) { 
-      mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_m ), ret, retH, retV ) );
-      // mTVacc.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_accuracy_m ), retH, retV ) );
+    if ( errOk && err3 >= 0 && err3 < (errMax + errMin)/2 ) { 
+      if ( TDandroid.BELOW_API_26 ) {
+        mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_h ), errH ) );
+      } else if ( errV > 0 ) {
+        mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_m ), errH, errV ) );
+      } else { 
+        mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_h ), errH ) );
+      }
     } else {
       mTVerr.setText( R.string.error_m );
-      // mTVacc.setText( R.string.minus );
     }
     // if ( do_error ) {
     //   mTVerr.setTextColor( 0xff00ff00 );
     // } else {
     //   mTVerr.setTextColor( 0xff00ffff );
     // }
-    // return ret;
   }
 
   // -----------------------------------------------------------
@@ -400,7 +424,7 @@ class FixedGpsDialog extends MyDialog
     mHasLocation = false;
     mBtnStatus.setText( TDString.ZERO );
     mBtnStatus.setBackgroundColor( 0x80ff0000 );
-    mErr2 = -1; // restart location averaging
+    mErr  = -1; // restart location averaging
     if ( mLocManager != null && mGpsEnabled ) {
       // TDLog.v("GNSS start locating ");
       if ( useGps /* TDandroid.BELOW_API_31 */ ) { 

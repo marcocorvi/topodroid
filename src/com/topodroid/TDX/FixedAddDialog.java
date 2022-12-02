@@ -61,6 +61,10 @@ class FixedAddDialog extends MyDialog
   private double  mLng, mLat, mHEll, mHGeo;
   private boolean mNorth, mEast;
 
+  /** cstr
+   * @param context context
+   * @param parent  parent activity
+   */
   FixedAddDialog( Context context, FixedActivity parent )
   {
     super( context, null, R.string.FixedAddDialog ); // null app
@@ -98,14 +102,24 @@ class FixedAddDialog extends MyDialog
       }
       MyKeyboard.registerEditText( mKeyboard, mETlng,  MyKeyboard.FLAG_POINT_SIGN_DEGREE );
       MyKeyboard.registerEditText( mKeyboard, mETlat,  MyKeyboard.FLAG_POINT_SIGN_DEGREE );
-      // MyKeyboard.registerEditText( mKeyboard, mEThell, MyKeyboard.FLAG_POINT_SIGN  );
-      MyKeyboard.registerEditText( mKeyboard, mEThgeo, MyKeyboard.FLAG_POINT_SIGN  );
+      if ( TDSetting.mNegAltitude ) {
+        // MyKeyboard.registerEditText( mKeyboard, mEThell, MyKeyboard.FLAG_POINT_SIGN  );
+        MyKeyboard.registerEditText( mKeyboard, mEThgeo, MyKeyboard.FLAG_POINT_SIGN  );
+      } else {
+        // MyKeyboard.registerEditText( mKeyboard, mEThell, MyKeyboard.FLAG_POINT  );
+        MyKeyboard.registerEditText( mKeyboard, mEThgeo, MyKeyboard.FLAG_POINT  );
+      }
     } else {
       mKeyboard.hide();
       mETlng.setInputType(  TDConst.TEXT );
       mETlat.setInputType(  TDConst.TEXT );
-      // mEThell.setInputType( TDConst.NUMBER_DECIMAL_SIGNED );
-      mEThgeo.setInputType( TDConst.NUMBER_DECIMAL_SIGNED );
+      if ( TDSetting.mNegAltitude ) {
+        // mEThell.setInputType( TDConst.NUMBER_DECIMAL_SIGNED );
+        mEThgeo.setInputType( TDConst.NUMBER_DECIMAL_SIGNED );
+      } else {
+        // mEThell.setInputType( TDConst.NUMBER_DECIMAL );
+        mEThgeo.setInputType( TDConst.NUMBER_DECIMAL );
+      }
       if ( TDSetting.mStationNames == 1 ) {
         mETstation.setInputType( TDConst.NUMBER_DECIMAL );
       }
@@ -125,6 +139,10 @@ class FixedAddDialog extends MyDialog
     mBtnClipboard.setOnClickListener( this );
   }
 
+  /** react to a user long tap
+   * @param v tapped view
+   * @return true if tap has been handled (ie, always)
+   */
   @Override
   public boolean onLongClick(View v) 
   {
@@ -132,6 +150,9 @@ class FixedAddDialog extends MyDialog
     return true;
   }
 
+  /** set the long-lat fields from the texts in the edit fields
+   * @return true if successful
+   */
   private boolean getLngLat()
   {
     String longit = mETlng.getText().toString();
@@ -159,10 +180,11 @@ class FixedAddDialog extends MyDialog
     return true;
   }
 
-  // set the coordinates
-  // @param lng longitude
-  // @param lat latitude
-  // @param h_geo geoid altitude
+  /** set the coordinates
+   * @param lng longitude
+   * @param lat latitude
+   * @param h_geo geoid altitude
+   */
   void setCoordsGeo( double lng, double lat, double h_geo )
   {
     mETlng.setText(  FixedInfo.double2string( lng ) );
@@ -171,6 +193,15 @@ class FixedAddDialog extends MyDialog
     mEThgeo.setText( String.format( Locale.US, "%.1f", h_geo ) );
   }
 
+  /** react to user tap
+   * @param v tapped view:
+   *    - button N/S
+   *    - button E/W
+   *    - button View
+   *    - button clipboard
+   *    - button convert (Proj4)
+   *    - button save (OK)
+   */
   @Override
   public void onClick(View v) 
   {
@@ -274,6 +305,8 @@ class FixedAddDialog extends MyDialog
     onBackPressed();
   }
 
+  /** react to BACK tap: dismiss the dialog
+   */
   @Override
   public void onBackPressed()
   {

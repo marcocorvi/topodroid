@@ -982,22 +982,26 @@ public class TDPrefKey
   public static String[] LOCATION = { // [2]
     "DISTOX_UNIT_LOCATION", // units of location [ddmmss dec.deg]
     "DISTOX_CRS",           // default C.R.S.
+    "DISTOX_NEG_ALTITUDE",  // allow negative altitudes
     null
   };
 
   static int[] LOCATIONtitle = {
     R.string.pref_unit_location_title,
-    R.string.pref_crs_title
+    R.string.pref_crs_title,
+    R.string.pref_neg_altitude_title
   };
 
   static int[] LOCATIONdesc = {
     R.string.pref_unit_location_summary,
-    R.string.pref_crs_summary
+    R.string.pref_crs_summary,
+    R.string.pref_neg_altitude_summary
   };
 
   public static String[] LOCATIONdef = {
     "ddmmss",
-    "Long-Lat"
+    "Long-Lat",
+    FALSE
   };
 
   // ------------------------------------------------------------------------------

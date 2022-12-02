@@ -278,6 +278,7 @@ public class TDSetting
   public static String mCRS = "Long-Lat";    // default coord ref system
   // public static final  String UNIT_LOCATION  = "ddmmss";
   public static int mUnitLocation = 0; // 0 dec-degree, 1 ddmmss
+  public static boolean mNegAltitude = false; 
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // CALIBRATION
@@ -1257,6 +1258,7 @@ public class TDSetting
     mUnitLocation  = (prefs.getString( keyLoc[0], defLoc[0] ).equals(defLoc[0])) ? TDUtil.DDMMSS  // DISTOX_UNIT_LOCATION
                                                                                  : TDUtil.DEGREE;
     mCRS           = prefs.getString( keyLoc[1], defLoc[1] );                 // DISTOX_CRS
+    mNegAltitude   = prefs.getBoolean( keyLoc[2], bool(defLoc[2]) );          // DISTOX_NEG_ALTITUDE
 
     String[] keyScreen = TDPrefKey.SCREEN;
     String[] defScreen = TDPrefKey.SCREENdef;
@@ -2338,6 +2340,8 @@ public class TDSetting
     //   } catch ( NumberFormatException e ) { mEllipAlt = _WGS84; }
     } else if ( k.equals( key[ 1 ] ) ) {
       mCRS = tryStringValue( hlp, k, v, def[1] );     // DISTOX_CRS (arbitrary)
+    } else if ( k.equals( key[ 2 ] ) ) {    // DISTOX_NEG_ALTITUDE
+      mNegAltitude = tryBooleanValue( hlp, k, v, bool(def[2]) );
     } else {
       TDLog.Error("missing LOCATION key: " + k );
     }
@@ -2962,7 +2966,7 @@ public class TDSetting
 
       pw.printf(Locale.US, "Default Team \"%s\"\n", mDefaultTeam);
       pw.printf(Locale.US, "Midline check: attached %c, extend %c\n", tf(mCheckAttached), tf(mCheckExtend) );
-      pw.printf(Locale.US, "Location: units %d, CRS \"%s\"\n", mUnitLocation, mCRS );
+      pw.printf(Locale.US, "Location: units %d, CRS \"%s\" NegAlt. %c\n", mUnitLocation, mCRS, tf(mNegAltitude) );
       pw.printf(Locale.US, "Shots: vthr %.1f, hthr %.1f \n", mVThreshold, mHThreshold );
       pw.printf(Locale.US, "Data: DistoX-backshot-swap %c, diving-mode %c \n", tf(mDistoXBackshot), tf(mDivingMode) );
       pw.printf(Locale.US, "Data input: backsight %c, prev/next %c\n", tf(mBacksightInput), tf(mPrevNext) );
@@ -3426,6 +3430,9 @@ public class TDSetting
             mCRS = getQuotedString( line ); 
             // TDLog.v("Setting crs <" + mCRS + ">" );
             setPreference( editor, "DISTOX_CRS", mCRS );
+            if ( vals.length > 6 ) {
+              mNegAltitude = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_NEG_ALTITUDE",   mNegAltitude );
+            }
           }
           continue;
         }
