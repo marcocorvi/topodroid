@@ -352,8 +352,8 @@
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Широта %1$s</string>
     <string name="fmt_longitude">Долгота %1$s</string>
-    <!-- TODO string name="fmt_latitude_dd_dms">Latitude: %1$s [%2$s]</string -->
-    <!-- TODO string name="fmt_longitude_dd_dms">Longitude: %1$s [%2$s]</string -->
+    <string name="fmt_latitude_dd_dms">Широта: %1$s [%2$s]</string>
+    <string name="fmt_longitude_dd_dms">Долгота: %1$s [%2$s]</string>
     <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string -->
     <string name="fixed">фиксированный репер</string>
     <string name="painted">нарисованный</string>
@@ -1927,9 +1927,9 @@
     <string name="info_east">Восток</string>
     <string name="info_north">Север</string>
     <string name="info_z">Альтитуда</string>
-    <!-- TODO string name="info_origin">Origin</string -->
-    <!-- TODO string name="info_lonlat">coords.</string -->
-    <!-- TODO string name="info_radii">radii</string -->
+    <string name="info_origin">Начало отсчета</string>
+    <string name="info_lonlat">координаты.</string>
+    <string name="info_radii">радиус</string>
     <string name="info_grid_value">%1$.0f м</string>
     <string name="info_view_value">A. %1$.0f C. %2$.0f</string>
     <string name="info_survey_value">%1$d</string>
@@ -1942,11 +1942,11 @@
     <string name="info_east_value">W %1$.1f E %2$.1f</string>
     <string name="info_north_value">S %1$.1f N %2$.1f</string>
     <string name="info_z_value">%1$.1f  %2$.1f</string>
-    <!-- TODO string name="info_origin_value">x %1$.0f y %2$.0f z %3$.0f</string -->
-    <!-- TODO string name="info_origin_none">undefined</string -->
-    <!-- TODO string name="info_lonlat_geovalue">lon %1$.7f lat %2$.7f</string -->
-    <!-- TODO string name="info_lonlat_prjvalue">lon %1$.1f lat %2$.1f</string -->
-    <!-- TODO string name="info_radii_value">EW %1$.1f NS %2$.1f</string -->
+    <string name="info_origin_value">x %1$.0f y %2$.0f z %3$.0f</string>
+    <string name="info_origin_none">не определено</string>
+    <string name="info_lonlat_geovalue">lon %1$.7f lat %2$.7f</string>
+    <string name="info_lonlat_prjvalue">lon %1$.1f lat %2$.1f</string>
+    <string name="info_radii_value">ВЗ %1$.1f СЮ %2$.1f</string>
 
     <string name="legs_surface">Поверхность</string>
     <string name="legs_duplicate">Дубликат</string>
