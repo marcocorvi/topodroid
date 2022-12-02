@@ -280,9 +280,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="multistation_plane">T9bbszörös-álláspont sík</string -->
 	
     <string name="error_m">Hiba [m]</string>
-    <!-- TODO string name="accuracy_m">Accuracy [m]</string -->
-    <string name="fmt_error_m">Hiba %1$.1f m</string>
-    <!-- TODO string name="fmt_accuracy_m">Accuracy: H %1$.1f m V %2$.1f m</string -->
+    <string name="fmt_error_m">Hiba %1$.1f m (H %2$.1f V %3$.1f)</string>
     <string name="fmt_h_geoid">Geoid mag. %1$.0f m</string>
     <string name="fmt_h_ellipsoid">Ellipszoid mag. %1$.0f m</string>
     <!-- UNUSED string name="depth_error">Figyelem! Adat mélység hiba</string -->

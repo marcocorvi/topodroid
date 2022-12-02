@@ -280,9 +280,7 @@
     <!-- OK string name="line_delete">Удалить линию</string -->
 
     <string name="error_m">Ошибка [м]</string>
-    <!-- TODO string name="accuracy_m">Accuracy [m]</string -->
-    <string name="fmt_error_m">Ошибка %1$.1f м</string>
-    <!-- TODO string name="fmt_accuracy_m">Accuracy: H %1$.1f m V %2$.1f m</string -->
+    <string name="fmt_error_m">Ошибка %1$.1f м (H %2$.1f V %3$.1f)</string>
     <string name="fmt_h_geoid">Ошибка %1$.0f м</string>
     <string name="fmt_h_ellipsoid">Ошибка %1$.0f м</string>
     <!-- UNUSED string name="depth_error">Внимание. >Ошибка данных глубины.</string -->

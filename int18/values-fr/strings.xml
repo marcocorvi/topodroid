@@ -286,9 +286,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 	<!-- UNUSED string name="multistation_plane">Multiple-station plane</string -->
 
     <string name="error_m">Erreur [m]</string>
-    <!-- TODO string name="accuracy_m">Accuracy [m]</string -->
-    <string name="fmt_error_m">Erreur %1$.1f m</string>
-    <!-- TODO string name="fmt_accuracy_m">Accuracy: H %1$.1f m V %2$.1f m</string -->
+    <string name="fmt_error_m">Erreur %1$.1f m (H %2$.1f V %3$.1f)</string>
     <string name="fmt_h_geoid">Alt. géoïde %1$.0f m</string>
     <string name="fmt_h_ellipsoid">Alt. ellipsoïde %1$.0f m</string>
     <!-- UNUSED string name="depth_error">Attention. Erreur de profondeur de données</string -->

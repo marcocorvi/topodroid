@@ -78,7 +78,7 @@ class FixedGpsDialog extends MyDialog
   // private TextView mTVh_ell;
   private TextView mTVh_geo;
   private TextView mTVerr;
-  private TextView mTVacc;
+  // private TextView mTVacc;
   private EditText mETstation;
   private EditText mETcomment;
 
@@ -98,6 +98,12 @@ class FixedGpsDialog extends MyDialog
   private double mErr2V = -1; // V location error [m]
   private boolean mHasLocation;
   private int mNrSatellites = 0;
+
+  private double retMin = 1000;
+  private double retMax =    0;
+  private boolean retOk = false; // when error is getting stable: error decreases, then increases, then decreases again
+                                 // or after one minute has passed
+  private long retStart = -1L;
 
   private boolean useGps = TDandroid.BELOW_API_24;
   // private GpsStatus mGpsStatus = null;   // deprecated API-24 crash API-31
@@ -144,7 +150,7 @@ class FixedGpsDialog extends MyDialog
     // mTVh_ell = (TextView) findViewById(R.id.h_ellipsoid  );   // ellipsoid
     mTVh_geo = (TextView) findViewById(R.id.h_geoid );    // geoid
     mTVerr = (TextView) findViewById(R.id.error );        // location error
-    mTVacc = (TextView) findViewById(R.id.accuracy );     // H-V location error
+    // mTVacc = (TextView) findViewById(R.id.accuracy );     // H-V location error
     mETstation = (EditText) findViewById( R.id.station );
     mETcomment = (EditText) findViewById( R.id.comment );
 
@@ -269,6 +275,9 @@ class FixedGpsDialog extends MyDialog
         setGPSoff();
       } else {      
         setGPSon();
+        retMin = 1000;
+        retOk  = false;
+        retStart = -1L;
       }
     }
     if ( do_toast ) {
@@ -280,7 +289,7 @@ class FixedGpsDialog extends MyDialog
   /** location is stored in decimal degrees but displayed as deg:min:sec
    * N.B. the caller must check loc != null
    */
-  private final double mW0 = 0.8;
+  private final double mW0 = 0.9;
   private final double mW1 = 1 - mW0;
   private final double mW2 = mW1 / mW0;
   private final double mR = Geodetic.EARTH_A; // approx earth radius
@@ -316,9 +325,23 @@ class FixedGpsDialog extends MyDialog
       mLat  = lat;
       mLng  = lng;
       mHEll = hell;
-      ret   = Math.sqrt( mErr2 );
-      retH  = Math.sqrt( mErr2H );
-      retV  = Math.sqrt( mErr2V );
+      ret   = 10 * Math.sqrt( mErr2 );  // FIXME multiplied by 10
+      retH  = 10 * Math.sqrt( mErr2H );
+      retV  = 10 * Math.sqrt( mErr2V );
+      if ( retOk ) {
+        if ( ret > retMax ) { 
+          retMax = ret;
+        } 
+      } else {
+        if ( ret < retMin ) {
+          retMin = ret;
+        } else if ( retStart < 0 ) {
+          retStart = System.currentTimeMillis();
+        } else if ( ret > 1.5 * retMin || System.currentTimeMillis() - retStart > 60000L ) { // one minute
+          retOk  = true;
+          retMax = ret;
+        }
+      }
     }
     mHGeo = mWMM.ellipsoidToGeoid( mLat, mLng, mHEll ); 
     mHasLocation = true;
@@ -331,9 +354,12 @@ class FixedGpsDialog extends MyDialog
       FixedInfo.double2degree( mLat ), FixedInfo.double2ddmmss( mLat ) ) );
     // mTVh_ell.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_ellipsoid ), mHEll ) );
     mTVh_geo.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_geoid ), mHGeo ) );
-    if ( ret >= 0 && ret < 100 ) { 
-      mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_m ), ret ) );
-      mTVacc.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_accuracy_m ), retH, retV ) );
+    if ( ret >= 0 && ret < (retMax + retMin)/2 ) { 
+      mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_m ), ret, retH, retV ) );
+      // mTVacc.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_accuracy_m ), retH, retV ) );
+    } else {
+      mTVerr.setText( R.string.error_m );
+      // mTVacc.setText( R.string.minus );
     }
     // if ( do_error ) {
     //   mTVerr.setTextColor( 0xff00ff00 );
