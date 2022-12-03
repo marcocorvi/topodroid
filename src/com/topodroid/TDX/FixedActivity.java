@@ -222,11 +222,13 @@ public class FixedActivity extends Activity
                              double h_ell,  // meters
                              double h_geo,
                              String comment,
-                             long source
+                             long source,
+                             double accur,
+                             double accur_v
                            )
   {
     if ( comment == null ) comment = "";
-    FixedInfo f = addLocation( name, lng, lat, h_ell, h_geo, comment, source );
+    FixedInfo f = addLocation( name, lng, lat, h_ell, h_geo, comment, source, accur, accur_v );
     // if ( f != null ) { // always true
       mFixedAdapter.add( f );
       mList.invalidate();
@@ -242,11 +244,11 @@ public class FixedActivity extends Activity
    * @param comment comment
    * @param source  source type
    */
-  private FixedInfo addLocation( String station, double lng, double lat, double h_ell, double h_geo, String comment, long source )
+  private FixedInfo addLocation( String station, double lng, double lat, double h_ell, double h_geo, String comment, long source, double accur, double accur_v )
   {
     TDLog.v("FIXED new " + station + ": " + lng + " " + lat + " H " + h_ell + " " + h_geo );
-    long id = TopoDroidApp.mData.insertFixed( TDInstance.sid, -1L, station, lng, lat, h_ell, h_geo, comment, 0L, source );
-    return new FixedInfo( id, station, lng, lat, h_ell, h_geo, comment, source ); 
+    long id = TopoDroidApp.mData.insertFixed( TDInstance.sid, -1L, station, lng, lat, h_ell, h_geo, comment, 0L, source, accur, accur_v );
+    return new FixedInfo( id, station, lng, lat, h_ell, h_geo, comment, source, accur, accur_v ); 
   }
 
   /** set the adapter of the menu pull-down list
@@ -374,10 +376,10 @@ public class FixedActivity extends Activity
    * @param h_ell   ellipsoid altitude [m]
    * @param h_geo   geoid altitude [m]
    */
-  void updateFixedData( FixedInfo fxd, double lng, double lat, double h_ell, double h_geo )
+  void updateFixedData( FixedInfo fxd, double lng, double lat, double h_ell, double h_geo ) // , double accur, double accur_v )
   {
     TDLog.v("FIXED update data " + fxd.name + ": " + lng + " " + lat + " H " + h_ell + " " + h_geo );
-    TopoDroidApp.mData.updateFixedData( fxd.id, TDInstance.sid, lng, lat, h_ell, h_geo );
+    TopoDroidApp.mData.updateFixedData( fxd.id, TDInstance.sid, lng, lat, h_ell, h_geo ); // , accur, accur_v );
     // mList.invalidate();
     refreshList();
   }

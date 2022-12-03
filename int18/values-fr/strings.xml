@@ -1462,6 +1462,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
   <string name="pref_crs_summary">Nom du Système de Coordonnées de Référence (UTM, WGS84&#8230;)</string>
   <!-- TODO string name="pref_neg_altitude_title">Neg. altitudes</string -->
   <!-- TODO string name="pref_neg_altitude_summary">Allow negative altitudes</string -->
+  <!-- TODO string name="pref_fine_location_title">Fine location [s]</string -->
+  <!-- TODO string name="pref_fine_location_summary">Fine location time [s]</string -->
   <!-- UNUSED string name="pref_gps_averaging_title">Utilizer GPSAveraging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Utiliser GPSAveraging</string -->
   <string name="pref_bric_mode_title">BRIC mode</string>

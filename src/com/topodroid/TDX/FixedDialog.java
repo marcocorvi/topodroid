@@ -37,6 +37,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.view.View;
 // import android.view.ViewGroup.LayoutParams;
 // import android.widget.GridView;
@@ -162,6 +163,20 @@ class FixedDialog extends MyDialog
     mETstation.setText( mFxd.name );
     mETcomment.setText( mFxd.comment );
 
+    LinearLayout layout_accuracy = (LinearLayout) findViewById( R.id.layout3b );
+    double accur = mFxd.getAccuracy();
+    if ( accur < 0 ) {
+      layout_accuracy.setVisibility( View.GONE );
+    } else {
+      double accur_v = mFxd.getAccuracyVert();
+      TextView tv = (TextView) findViewById( R.id.fix_accuracy );
+      if (accur_v < 0 ) {
+        tv.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_h ), accur ) );
+      } else {
+        tv.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_m ), accur, accur_v ) );
+      }
+    }
+
     mButtonSave = (Button) findViewById( R.id.fix_save );
     mButtonDrop    = (Button) findViewById(R.id.fix_drop );
     // mButtonOK      = (Button) findViewById(R.id.fix_ok );
@@ -262,7 +277,7 @@ class FixedDialog extends MyDialog
         if ( lat != mFxd.lat || lng != mFxd.lng /* || h_ell != mFxd.h_ell */ || h_geo != mFxd.h_geo ) {
           // get ellipsoid height from geoid height
           double h_ell = mWMM.geoidToEllipsoid( lat, lng, h_geo );
-          mParent.updateFixedData( mFxd, lng, lat, h_ell, h_geo );
+          mParent.updateFixedData( mFxd, lng, lat, h_ell, h_geo ); // , mFxd.getAccuracy(), mFxd.getAccuracyVert() );
         }
       }
     } else if ( b == mButtonClearConvert ) {

@@ -44,8 +44,10 @@ public class FixedInfo extends MagLatLong
   public double cs_h_geo;   // altitude (geoid)
   long   cs_n_dec; // number of decimals in lng/lat
   double convergence = 0.0; // cs meridian convergence [degree]
+  double accuracy    = 0.0; // horizontal [m]
+  double accuracy_v  = 0.0;
 
-  public FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid, String cmt, long src )
+  public FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid, String cmt, long src, double accur, double accur_v )
   {
     id = _id;
     name = n;
@@ -55,6 +57,8 @@ public class FixedInfo extends MagLatLong
     h_geo = h_geoid;
     comment = cmt;
     source  = src;
+    accuracy   = accur;
+    accuracy_v = accur_v;
     clearConverted();
   }
 
@@ -76,7 +80,7 @@ public class FixedInfo extends MagLatLong
    * @param conv      convergence
    */
   FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid,
-             String cmt, long src, String name_cs, double lng_cs, double lat_cs, double h_geo_cs, long n_dec, double conv )
+             String cmt, long src, String name_cs, double lng_cs, double lat_cs, double h_geo_cs, long n_dec, double conv, double accur, double accur_v )
   {
     id = _id;
     name = n;
@@ -92,6 +96,8 @@ public class FixedInfo extends MagLatLong
     cs_h_geo  = h_geo_cs;
     cs_n_dec = (n_dec >= 0)? n_dec : 0;
     convergence = conv;
+    accuracy   = accur;
+    accuracy_v = accur_v;
   }
 
   /** set converted coordinates
@@ -177,6 +183,9 @@ public class FixedInfo extends MagLatLong
    */
   public double getConvergence() { return convergence; }
 
+  public double getAccuracy() { return accuracy; }
+
+  public double getAccuracyVert() { return accuracy_v; }
 
   // @RecentlyNonNull
   public String toString()

@@ -24,7 +24,6 @@ import com.topodroid.mag.WorldMagneticModel;
 
 import java.util.Iterator;
 
-// import java.util.List;
 import java.util.Locale;
 
 // import android.app.Dialog;
@@ -92,7 +91,10 @@ class FixedGpsDialog extends MyDialog
   private double mLng = 0;  // decimal degrees
   private double mHEll = 0; // ellipsoid altitude [meters]
   private double mHGeo; // altimetrici (geoid) altitude
-  private double mErr  = -1; // location error [m]
+  private boolean mLocStarted = false;
+  private double mErrH = -1;
+  private double mErrV = -1;
+  // private double mErr  = -1; // location error [m]
   // private double mErr2H = -1; // H location error [m]
   // private double mErr2V = -1; // V location error [m]
   private boolean mHasLocation;
@@ -110,6 +112,8 @@ class FixedGpsDialog extends MyDialog
   private GnssStatus.Callback mGnssStatusCallback = null; // added API-24
   private boolean mLocating; // whether is locating
   private boolean mGpsEnabled = false;
+
+  private long mFineLocationTime = 60000L; // default 1 minute
 
   private MyKeyboard mKeyboard;
 
@@ -131,6 +135,7 @@ class FixedGpsDialog extends MyDialog
       }
     }
     mHasLocation = false;
+    mFineLocationTime = 1000L * TDSetting.mFineLocation;
     // mLocating = false;
     // TDLog.v(  "GPS Unit Location " + TopoDroidApp.mUnitLocation + " ddmmss " + TDUtil.DDMMSS );
   }
@@ -195,7 +200,7 @@ class FixedGpsDialog extends MyDialog
     }
     String comment = mETcomment.getText().toString();
     // if ( comment == null ) comment = "";
-    mParent.addFixedPoint( name, mLng, mLat, mHEll, mHGeo, comment, FixedInfo.SRC_TOPODROID );
+    mParent.addFixedPoint( name, mLng, mLat, mHEll, mHGeo, comment, FixedInfo.SRC_TOPODROID, mErrH, mErrV );
     return true;
   }
 
@@ -296,13 +301,14 @@ class FixedGpsDialog extends MyDialog
   private void displayLocation( Location loc /*, boolean do_error*/ )
   {
     double err3 = 0;
-    double errH = -1;
-    double errV = -1;
-    if ( mErr < 0 ) {	  
+    mErrH = -1;
+    mErrV = -1;
+    if ( ! mLocStarted ) {
       mLat  = loc.getLatitude();  // decimal degree
       mLng  = loc.getLongitude();
       mHEll = loc.getAltitude();  // meter
-      mErr  = 1000;              // start with a large value
+      mLocStarted = true;
+      // mErr  = 1000;              // start with a large value
       // mErr2H = 1000;
       // mErr2V = 1000;
     } else {
@@ -313,22 +319,22 @@ class FixedGpsDialog extends MyDialog
       double lng  = mW1 * lng0 + mW0 * mLng;
       double hell = mW1 * hel0 + mW0 * mHEll;
       if ( loc.hasAccuracy() ) {
-        errH = loc.getAccuracy(); // meters
-        err3 = errH;
+        mErrH = loc.getAccuracy(); // meters
+        err3 = mErrH;
         if ( TDandroid.BELOW_API_26 ) {
-          errV = Math.abs( hel0 - mHEll );
+          mErrV = Math.abs( hel0 - mHEll );
         } else {
           if ( loc.hasVerticalAccuracy() ) {
-            errV = loc.getVerticalAccuracyMeters();
-            err3 = Math.sqrt( errV * errV + errH * errH );
-          } else {
-            errV = -1;
+            mErrV = loc.getVerticalAccuracyMeters();
+            err3 = Math.sqrt( mErrV * mErrV + mErrH * mErrH );
+          // } else {
+          //   mErrV = 0;
           }
         }
       } else {
         err3 = -1;
-        // errH = -1;
-        // errV = -1;
+        // mErrH =-1;
+        // mErrV =-1;
       }
       mLat  = lat;
       mLng  = lng;
@@ -344,8 +350,8 @@ class FixedGpsDialog extends MyDialog
         // mErr2H = mW0 * mErr2H + mW2 * err2H;
         // mErr2V = mW0 * mErr2V + mW2 * err2V;
         // err3  = 10 * Math.sqrt( mErr2 );  // FIXME multiplied by 10
-        // errH  = 10 * Math.sqrt( mErr2H );
-        // errV  = 10 * Math.sqrt( mErr2V );
+        // mErrH  = 10 * Math.sqrt( mErr2H );
+        // mErrV  = 10 * Math.sqrt( mErr2V );
         if ( errOk ) {
           if ( err3 > errMax ) { 
             errMax = err3;
@@ -356,7 +362,7 @@ class FixedGpsDialog extends MyDialog
           if ( retStart < 0 ) {
             retStart = System.currentTimeMillis();
             TDToast.makeLong( R.string.location_start_fine );
-          } else if ( System.currentTimeMillis() - retStart > 60000L ) { // one minute
+          } else if ( System.currentTimeMillis() - retStart > mFineLocationTime ) {
             errOk  = true;
             errMin = err3;
             errMax = err3;
@@ -377,11 +383,11 @@ class FixedGpsDialog extends MyDialog
     mTVh_geo.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_geoid ), mHGeo ) );
     if ( errOk && err3 >= 0 && err3 < (errMax + errMin)/2 ) { 
       if ( TDandroid.BELOW_API_26 ) {
-        mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_h ), errH ) );
-      } else if ( errV > 0 ) {
-        mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_m ), errH, errV ) );
+        mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_h ), mErrH ) ); // TODO only if mErrH >= 0
+      } else if ( mErrV > 0 ) {
+        mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_m ), mErrH, mErrV ) );
       } else { 
-        mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_h ), errH ) );
+        mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_h ), mErrH ) );
       }
     } else {
       mTVerr.setText( R.string.error_m );
@@ -424,7 +430,8 @@ class FixedGpsDialog extends MyDialog
     mHasLocation = false;
     mBtnStatus.setText( TDString.ZERO );
     mBtnStatus.setBackgroundColor( 0x80ff0000 );
-    mErr  = -1; // restart location averaging
+    mLocStarted = false;
+    // mErr  = -1; // restart location averaging
     if ( mLocManager != null && mGpsEnabled ) {
       // TDLog.v("GNSS start locating ");
       if ( useGps /* TDandroid.BELOW_API_31 */ ) { 

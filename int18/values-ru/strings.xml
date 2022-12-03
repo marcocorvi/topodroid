@@ -1445,6 +1445,8 @@
   <string name="pref_crs_summary">Введите название CRS точно также как в программе Proj4</string>
   <!-- TODO string name="pref_neg_altitude_title">Neg. altitudes</string -->
   <!-- TODO string name="pref_neg_altitude_summary">Allow negative altitudes</string -->
+  <!-- TODO string name="pref_fine_location_title">Fine location [s]</string -->
+  <!-- TODO string name="pref_fine_location_summary">Fine location time [s]</string -->
   <!-- UNUSED string name="pref_gps_averaging_title">Осреднение данных GPS </string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Использовать GPSAveraging?</string -->
   <string name="pref_bric_mode_title">Режим BRIC</string>

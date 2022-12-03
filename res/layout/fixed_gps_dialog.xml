@@ -93,7 +93,7 @@
 
     <TextView android:id="@+id/longitude"
         android:layout_below="@id/help"
-        android:layout_marginTop="@dimen/margintiny"
+        android:layout_marginTop="@dimen/marginv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:text="@string/longitude"
@@ -101,7 +101,7 @@
    					  
     <TextView android:id="@+id/latitude"
         android:layout_below="@id/longitude"
-        android:layout_marginTop="@dimen/margintiny"
+        android:layout_marginTop="@dimen/marginsmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:text="@string/latitude"
@@ -109,7 +109,7 @@
    					  
     <!-- TextView android:id="@+id/h_ellipsoid"
         android:layout_below="@id/latitude"
-        android:layout_marginTop="@dimen/margintiny"
+        android:layout_marginTop="@dimen/marginsmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:text="@string/h_ellipsoid"
@@ -117,7 +117,7 @@
 
     <TextView android:id="@+id/h_geoid"
         android:layout_below="@id/latitude"
-        android:layout_marginTop="@dimen/margintiny"
+        android:layout_marginTop="@dimen/marginsmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:text="@string/h_geoid"
@@ -125,7 +125,7 @@
 
     <TextView android:id="@+id/error"
         android:layout_below="@id/h_geoid"
-        android:layout_marginTop="@dimen/margintiny"
+        android:layout_marginTop="@dimen/marginsmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:text="@string/error_m"
@@ -133,18 +133,18 @@
 
     <!-- TextView android:id="@+id/accuracy"
         android:layout_below="@id/error"
-        android:layout_marginTop="@dimen/margintiny"
+        android:layout_marginTop="@dimen/marginsmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:text="@string/accuracy_m"
         / -->
 
-    <ListView android:id="@+id/list"
+    <!-- ListView android:id="@+id/list"
       style="@style/list_top"
       android:layout_below="@id/error"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      />  
+      / -->  
 
 
   <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"

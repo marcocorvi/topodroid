@@ -174,7 +174,7 @@ public class DataHelper extends DataSetObservable
   // N.B. "source" comes after "status" although it is after "cs_altitude" in the table
   static final private String[] mFixedFields = {
     "id", "station", "longitude", "latitude", "altitude", "altimetric", "comment", "status", "source",
-    "cs_name", "cs_longitude", "cs_latitude", "cs_altitude", "cs_decimals", "convergence"
+    "cs_name", "cs_longitude", "cs_latitude", "cs_altitude", "cs_decimals", "convergence", "accuracy", "accuracy_v"
   };
 
   static final private String[] mStationFields = { "name", "comment", "flag", "presentation" };
@@ -2394,7 +2394,7 @@ public class DataHelper extends DataSetObservable
   private static final String qHasFixedStation = "select id from fixeds where surveyId=? and station=? and id!=? and status=0 ";
   private static final String qjShots       =
     "select s.flag, s.distance, s.fStation, s.tStation, s.clino, z.clino, s.extend from shots as s join shots as z on z.fStation=s.tStation where s.surveyId=? AND z.surveyId=? AND s.fStation!=\"\" AND s.tStation!=\"\" AND s.status=0 ";
-  private static final String qFixeds = "select A.station, A.latitude, A.longitude, A.altitude, A.altimetric, A.cs_name, A.cs_latitude, A.cs_longitude, A.cs_altitude A.convergence from fixeds as A, surveys as B where A.surveyId=B.id and B.name=?";
+  private static final String qFixeds = "select A.station, A.latitude, A.longitude, A.altitude, A.altimetric, A.cs_name, A.cs_latitude, A.cs_longitude, A.cs_altitude, A.convergence, A.accuracy, A.accuracy_v from fixeds as A, surveys as B where A.surveyId=B.id and B.name=?";
   // private static final String qLength = "select count(), sum(A.distance) from shots as A, surveys as B where A.surveyId=B.id and B.name=? and A.fStation!=\"\" and A.tStation!=\"\"";
 
   List< SensorInfo > selectAllSensors( long sid, long status )
@@ -2725,7 +2725,9 @@ public class DataHelper extends DataSetObservable
                                  cursor.getDouble(11),
                                  cursor.getDouble(12),
 				 cursor.getLong(13),
-                                 cursor.getDouble(14)
+                                 cursor.getDouble(14),
+                                 cursor.getDouble(15),
+                                 cursor.getDouble(16)
         ) );
       } while (cursor.moveToNext());
     }
@@ -2757,7 +2759,9 @@ public class DataHelper extends DataSetObservable
           cursor.getDouble(7),
           cursor.getDouble(8), // cs_altitude (geoid)
           0,                   // nr decimals
-          cursor.getDouble(9)  // convergence
+          cursor.getDouble(9),  // convergence
+          cursor.getDouble(10), // accuracy
+          cursor.getDouble(11)  // accuracy_v
         );
         // ret.add( info );
       // } while (cursor.moveToNext());
@@ -2795,7 +2799,9 @@ public class DataHelper extends DataSetObservable
                                   cursor.getDouble(11),
                                   cursor.getDouble(12),
 				  cursor.getLong(13),  // cs_decimals
-                                  cursor.getDouble(14)
+                                  cursor.getDouble(14),
+                                  cursor.getDouble(15),
+                                  cursor.getDouble(16)
          ) );
        } while (cursor.moveToNext());
      }
@@ -4572,14 +4578,14 @@ public class DataHelper extends DataSetObservable
    * N.B. this must be called with id == -1L ( currently called only by SurveyWindow )
    */
   public long insertFixed( long sid, long id, String station, double lng, double lat, double h_ell, double h_geo,
-                           String comment, long status, long source )
+                           String comment, long status, long source, double accur, double accur_v )
   {
-    return insertFixed( sid, id, station, lng, lat, h_ell, h_geo, comment, status, source, "", 0, 0, 0, 2, 0 );
+    return insertFixed( sid, id, station, lng, lat, h_ell, h_geo, comment, status, source, "", 0, 0, 0, 2, 0, accur, accur_v );
   }
 
   private ContentValues makeFixedContentValues( long sid, long id, String station, double lng, double lat, double h_ell, double h_geo,
                            String comment, long status, long source,
-                           String cs, double cs_lng, double cs_lat, double cs_h_geo, long cs_n_dec, double conv )
+                           String cs, double cs_lng, double cs_lat, double cs_h_geo, long cs_n_dec, double conv, double accur, double accur_v )
   {
     ContentValues cv = new ContentValues();
     cv.put( "surveyId",  sid );
@@ -4598,12 +4604,14 @@ public class DataHelper extends DataSetObservable
     cv.put( "source",     source );
     cv.put( "cs_decimals", cs_n_dec );
     cv.put( "convergence", conv );
+    cv.put( "accuracy", accur );
+    cv.put( "accuracy_v", accur_v );
     return cv;
   }
 
   private long insertFixed( long sid, long id, String station, double lng, double lat, double h_ell, double h_geo,
                            String comment, long status, long source,
-                           String cs, double cs_lng, double cs_lat, double cs_h_geo, long cs_n_dec, double conv )
+                           String cs, double cs_lng, double cs_lat, double cs_h_geo, long cs_n_dec, double conv, double accur, double accur_v )
   {
     // TDLog.v( "insert fixed id " + id + " station " + station );
     if ( id != -1L ) return id;
@@ -4615,7 +4623,7 @@ public class DataHelper extends DataSetObservable
     id = maxId( FIXED_TABLE, sid );
     // TDLog.Log( TDLog.LOG_DB, "insert Fixed id " + id );
     ContentValues cv = makeFixedContentValues( sid, id, station, lng, lat, h_ell, h_geo, comment, status, source,
-       	     cs, cs_lng, cs_lat, cs_h_geo, cs_n_dec, conv );
+       	     cs, cs_lng, cs_lat, cs_h_geo, cs_n_dec, conv, accur, accur_v );
     if ( ! doInsert( FIXED_TABLE, cv, "insert fixed" ) ) return -1L;
     return id;
   }
@@ -4913,24 +4921,28 @@ public class DataHelper extends DataSetObservable
     doUpdate( FIXED_TABLE, cv, sid, id, "fix alt" );
   }
 
-  void updateFixedData( long id, long sid, double lng, double lat, double h_ell )
+  void updateFixedData( long id, long sid, double lng, double lat, double h_ell ) // ,  double accur, double accur_v  )
   {
     if ( myDB == null ) return;
     ContentValues cv = new ContentValues();
-    cv.put( "longitude", lng );
-    cv.put( "latitude",  lat );
-    cv.put( "altitude",  h_ell );
+    cv.put( "longitude",  lng );
+    cv.put( "latitude",   lat );
+    cv.put( "altitude",   h_ell );
+    // cv.put( "accuracy",   accur );
+    // cv.put( "accuracy_v", accur_v );
     doUpdate( FIXED_TABLE, cv, sid, id, "fix dat1" );
   }
 
-  void updateFixedData( long id, long sid, double lng, double lat, double h_ell, double h_geo )
+  void updateFixedData( long id, long sid, double lng, double lat, double h_ell, double h_geo ) // , double accur, double accur_v )
   {
     if ( myDB == null ) return;
     ContentValues cv = new ContentValues();
-    cv.put( "longitude", lng );
-    cv.put( "latitude",  lat );
-    cv.put( "altitude",  h_ell );
+    cv.put( "longitude",  lng );
+    cv.put( "latitude",   lat );
+    cv.put( "altitude",   h_ell );
     cv.put( "altimetric", h_geo );
+    // cv.put( "accuracy",   accur );
+    // cv.put( "accuracy_v", accur_v );
     doUpdate( FIXED_TABLE, cv, sid, id, "fix dat2" );
   }
 
@@ -5526,7 +5538,7 @@ public class DataHelper extends DataSetObservable
        if (cursor.moveToFirst()) {
          do { // values in the order of the fields of the table
            pw.format(Locale.US,
-             "INSERT into %s values( %d, %d, \"%s\", %.6f, %.6f, %.2f, %.2f \"%s\", %d, %d, \"%s\", %.6f, %.6f, %.1f, %d, %d, %.4f );\n",
+             "INSERT into %s values( %d, %d, \"%s\", %.6f, %.6f, %.2f, %.2f \"%s\", %d, %d, \"%s\", %.6f, %.6f, %.1f, %d, %d, %.4f, %.1f, %.1f );\n",
              FIXED_TABLE,
              sid,
              cursor.getLong(0),
@@ -5544,7 +5556,9 @@ public class DataHelper extends DataSetObservable
              cursor.getDouble(12), // cs altitude
              cursor.getLong(8),    // source type
              cursor.getLong(13),   // cs decimals
-             cursor.getDouble(14) // cs convergence
+             cursor.getDouble(14), // cs convergence
+             cursor.getDouble(15), // accuracy
+             cursor.getDouble(16)  // accuracy_v
            );
          } while (cursor.moveToNext());
        }
@@ -5807,6 +5821,8 @@ public class DataHelper extends DataSetObservable
                double cs_h_geo = 0;
 	       long cs_n_dec = 2;
                double conv = 0.0;
+               double accur   = -1;
+               double accur_v = -1;
                String cs = TDString.unescape( scanline1.stringValue( ) );
                if ( cs.length() > 0 ) {
                  cs_lng = scanline1.doubleValue( 0.0 );
@@ -5814,13 +5830,17 @@ public class DataHelper extends DataSetObservable
                  cs_h_geo = scanline1.doubleValue( 0.0 );
 	         if ( db_version > 34 ) cs_n_dec = scanline1.longValue( 8 ); // nr. of decimals
 	         if ( db_version > 46 ) conv = scanline1.doubleValue( 0.0 ); // nr. of decimals
+	         if ( db_version > 47 ) {
+                   accur   = scanline1.doubleValue( -1 );
+                   accur_v = scanline1.doubleValue( -1 );
+                 }
                }
                // use id == -1L to force DB get a new id
                // if ( insertFixed( sid, -1L, station, lng, lat, h_ell, h_geo, comment, status, source, cs, cs_lng, cs_lat, cs_h_geo, cs_n_dec ) < 0 ) {
 	       //   success = false;
 	       // }
                cv = makeFixedContentValues( sid, -1L, station, lng, lat, h_ell, h_geo, comment, status, source,
-		     cs, cs_lng, cs_lat, cs_h_geo, cs_n_dec, conv );
+		     cs, cs_lng, cs_lat, cs_h_geo, cs_n_dec, conv, accur, accur_v );
                myDB.insert( FIXED_TABLE, null, cv ); 
                // TDLog.Log( TDLog.LOG_DB, "load from file fixed " + sid + " " + id + " " + station  );
              } 
@@ -6251,7 +6271,9 @@ public class DataHelper extends DataSetObservable
             +   " cs_altitude REAL, "
             +   " source INTEGER, "    // 0: unknown,  1: topodroid,  2: manual,   3: mobile-topographer
             +   " cs_decimals INTEGER, "
-            +   " convergence REAL default 0 " // meridian convergence [degree]
+            +   " convergence REAL default 0, " // meridian convergence [degree]
+            +   " accuracy REAL default -1, "    // accuracy: -1 unset
+            +   " accuracy_v REAL default -1 "   // vertical accuracy
             // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
             // +   " ON DELETE CASCADE "
             +   ")"
@@ -6482,6 +6504,9 @@ public class DataHelper extends DataSetObservable
 	   case 46:
              db.execSQL( "ALTER TABLE fixeds ADD COLUMN convergence REAL default 0" ); 
 	   case 47:
+             db.execSQL( "ALTER TABLE fixeds ADD COLUMN accuracy REAL default -1" ); 
+             db.execSQL( "ALTER TABLE fixeds ADD COLUMN accuracy_v REAL default -1" ); 
+	   case 48:
              // TDLog.v( "current version " + oldVersion );
            default:
              break;

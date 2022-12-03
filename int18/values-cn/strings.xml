@@ -1449,6 +1449,8 @@
   <string name="pref_crs_summary">CRS 名称,类属于Proj4</string>
   <!-- TODO string name="pref_neg_altitude_title">Neg. altitudes</string -->
   <!-- TODO string name="pref_neg_altitude_summary">Allow negative altitudes</string -->
+  <!-- TODO string name="pref_fine_location_title">Fine location [s]</string -->
+  <!-- TODO string name="pref_fine_location_summary">Fine location time [s]</string -->
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Use GPSAveraging</string -->
   <string name="pref_bric_mode_title">BRIC 模式</string>

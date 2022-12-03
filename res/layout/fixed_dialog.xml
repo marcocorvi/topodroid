@@ -11,8 +11,7 @@
   android:padding="0dp"
   >
 
-  <LinearLayout 
-    android:id="@+id/layout0"
+  <LinearLayout android:id="@+id/layout0"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -37,8 +36,7 @@
       android:importantForAutofill="no"
     />
   </LinearLayout>
-  <LinearLayout 
-    android:id="@+id/layout1"
+  <LinearLayout android:id="@+id/layout1"
     android:layout_below="@id/layout0"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
@@ -117,8 +115,26 @@
     />
   </LinearLayout>
 
-  <LinearLayout android:id="@+id/layout4"
+
+  <LinearLayout android:id="@+id/layout3b"
     android:layout_below="@id/layout3"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/paddingv"
+    >
+    <TextView android:id="@+id/fix_accuracy"
+      android:layout_width="0dp"
+      android:layout_weight="40"
+      android:layout_height="wrap_content" 
+      android:layout_marginEnd="@dimen/marginh"
+      android:layout_gravity="start"
+      android:text="@string/error_m"
+    />
+  </LinearLayout>
+
+  <LinearLayout android:id="@+id/layout4"
+    android:layout_below="@id/layout3b"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal"

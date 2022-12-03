@@ -275,10 +275,11 @@ public class TDSetting
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // LOCATION
-  public static String mCRS = "Long-Lat";    // default coord ref system
+  public static String mCRS = "Long-Lat";     // default coord ref system
   // public static final  String UNIT_LOCATION  = "ddmmss";
-  public static int mUnitLocation = 0; // 0 dec-degree, 1 ddmmss
-  public static boolean mNegAltitude = false; 
+  public static int mUnitLocation = 0;        // 0 dec-degree, 1 ddmmss
+  public static boolean mNegAltitude = false; // whether to allow negative altitudes
+  public static int mFineLocation = 60;       // fine location time
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // CALIBRATION
@@ -1257,19 +1258,20 @@ public class TDSetting
     String[] defLoc = TDPrefKey.LOCATIONdef;
     mUnitLocation  = (prefs.getString( keyLoc[0], defLoc[0] ).equals(defLoc[0])) ? TDUtil.DDMMSS  // DISTOX_UNIT_LOCATION
                                                                                  : TDUtil.DEGREE;
-    mCRS           = prefs.getString( keyLoc[1], defLoc[1] );                 // DISTOX_CRS
-    mNegAltitude   = prefs.getBoolean( keyLoc[2], bool(defLoc[2]) );          // DISTOX_NEG_ALTITUDE
+    mCRS           = prefs.getString(  keyLoc[1], defLoc[1] );       // DISTOX_CRS
+    mNegAltitude   = prefs.getBoolean( keyLoc[2], bool(defLoc[2]) ); // DISTOX_NEG_ALTITUDE
+    mFineLocation  = tryInt( prefs,    keyLoc[3], defLoc[3] );       // DISTOX_FINE_LOCATION
 
     String[] keyScreen = TDPrefKey.SCREEN;
     String[] defScreen = TDPrefKey.SCREENdef;
-    mFixedThickness = tryFloat( prefs, keyScreen[ 0],      defScreen[ 0] );  // DISTOX_FIXED_THICKNESS
-    mStationSize    = tryFloat( prefs, keyScreen[ 1],      defScreen[ 1] );  // DISTOX_STATION_SIZE
-    mDotRadius      = tryFloat( prefs, keyScreen[ 2],      defScreen[ 2] );  // DISTOX_DOT_RADIUS
-    mSelectness     = tryFloat( prefs, keyScreen[ 3],      defScreen[ 3] );  // DISTOX_CLOSENESS
-    mEraseness      = tryFloat( prefs, keyScreen[ 4],      defScreen[ 4] );  // DISTOX_ERASENESS
-    mMinShift       = tryInt(   prefs, keyScreen[ 5],      defScreen[ 5] );  // DISTOX_MIN_SHIFT
-    mPointingRadius = tryInt(   prefs, keyScreen[ 6],      defScreen[ 6] );  // DISTOX_POINTING
-    mSplayAlpha     = tryInt(   prefs, keyScreen[ 7],      defScreen[ 7] );  // DISTOX_SPLAY_ALPHA
+    mFixedThickness = tryFloat( prefs, keyScreen[ 0], defScreen[ 0] );  // DISTOX_FIXED_THICKNESS
+    mStationSize    = tryFloat( prefs, keyScreen[ 1], defScreen[ 1] );  // DISTOX_STATION_SIZE
+    mDotRadius      = tryFloat( prefs, keyScreen[ 2], defScreen[ 2] );  // DISTOX_DOT_RADIUS
+    mSelectness     = tryFloat( prefs, keyScreen[ 3], defScreen[ 3] );  // DISTOX_CLOSENESS
+    mEraseness      = tryFloat( prefs, keyScreen[ 4], defScreen[ 4] );  // DISTOX_ERASENESS
+    mMinShift       = tryInt(   prefs, keyScreen[ 5], defScreen[ 5] );  // DISTOX_MIN_SHIFT
+    mPointingRadius = tryInt(   prefs, keyScreen[ 6], defScreen[ 6] );  // DISTOX_POINTING
+    mSplayAlpha     = tryInt(   prefs, keyScreen[ 7], defScreen[ 7] );  // DISTOX_SPLAY_ALPHA
     BrushManager.setSplayAlpha( mSplayAlpha );
 
     String[] keyLine = TDPrefKey.LINE;
@@ -2342,6 +2344,9 @@ public class TDSetting
       mCRS = tryStringValue( hlp, k, v, def[1] );     // DISTOX_CRS (arbitrary)
     } else if ( k.equals( key[ 2 ] ) ) {    // DISTOX_NEG_ALTITUDE
       mNegAltitude = tryBooleanValue( hlp, k, v, bool(def[2]) );
+    } else if ( k.equals( key[ 3 ] ) ) {    // DISTOX_FINE_LOCATION
+      mFineLocation = tryIntValue(  hlp, k, v, def[3] );
+      if ( mFineLocation < 0 ) { mFineLocation = 0; } else if ( mFineLocation > 600 ) { mFineLocation = 600; }
     } else {
       TDLog.Error("missing LOCATION key: " + k );
     }
@@ -2966,7 +2971,7 @@ public class TDSetting
 
       pw.printf(Locale.US, "Default Team \"%s\"\n", mDefaultTeam);
       pw.printf(Locale.US, "Midline check: attached %c, extend %c\n", tf(mCheckAttached), tf(mCheckExtend) );
-      pw.printf(Locale.US, "Location: units %d, CRS \"%s\" NegAlt. %c\n", mUnitLocation, mCRS, tf(mNegAltitude) );
+      pw.printf(Locale.US, "Location: units %d, CRS \"%s\" NegAlt. %c FineLoc %d\n", mUnitLocation, mCRS, tf(mNegAltitude), mFineLocation );
       pw.printf(Locale.US, "Shots: vthr %.1f, hthr %.1f \n", mVThreshold, mHThreshold );
       pw.printf(Locale.US, "Data: DistoX-backshot-swap %c, diving-mode %c \n", tf(mDistoXBackshot), tf(mDivingMode) );
       pw.printf(Locale.US, "Data input: backsight %c, prev/next %c\n", tf(mBacksightInput), tf(mPrevNext) );
@@ -3432,6 +3437,9 @@ public class TDSetting
             setPreference( editor, "DISTOX_CRS", mCRS );
             if ( vals.length > 6 ) {
               mNegAltitude = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_NEG_ALTITUDE",   mNegAltitude );
+              if ( vals.length > 8 ) {
+                mFineLocation = getInt( vals, 8, 60 ); setPreference( editor, "DISTOX_FINE_LOCATION", mFineLocation );
+              }
             }
           }
           continue;

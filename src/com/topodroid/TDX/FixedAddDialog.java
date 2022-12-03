@@ -297,7 +297,7 @@ class FixedAddDialog extends MyDialog
         //     }
         //   }
         // }
-        mParent.addFixedPoint( name, mLng, mLat, mHEll, mHGeo, comment, FixedInfo.SRC_MANUAL );
+        mParent.addFixedPoint( name, mLng, mLat, mHEll, mHGeo, comment, FixedInfo.SRC_MANUAL, -1, -1 );
       } else {
         return;
       }
