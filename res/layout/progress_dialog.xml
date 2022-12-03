@@ -46,11 +46,11 @@
       style="@style/button_empty"
       android:text="@string/button_help"
     / -->
-    <LinearLayout
+    <!-- LinearLayout
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal"
-      >
+      -->
       <Button android:id="@+id/button_cancel"
         style="@style/button_default"
         android:layout_width="0dp" 
@@ -69,7 +69,7 @@
         android:layout_marginEnd="10dp"
         android:text="@string/button_upload"
         />
-     </LinearLayout>
+     <!-- /LinearLayout -->
    </LinearLayout>
 
 </LinearLayout>

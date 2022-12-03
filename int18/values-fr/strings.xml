@@ -271,11 +271,11 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 	<string name="label_title">ÉTIQUETTE</string>
 	<string name="label_text">Saisissez le texte de l\'étiquette</string>
 	<!-- UNUSED string name="altitude">Alt. </string -->
-	<string name="h_ellipsoid">H. ellip. </string>
+	<!-- UNUSED string name="h_ellipsoid">H. ellip. </string -->
 	<string name="h_geoid">H. géoïde </string>
 	<string name="latitude">Lat. </string>
 	<string name="longitude">Long. </string>
-	<string name="h_ellipsoid_hint">H. ellipsoïde [meters]</string>
+	<!-- UNUSED string name="h_ellipsoid_hint">H. ellipsoïde [meters]</string -->
 	<string name="h_geoid_hint">H. géoïde [meters]</string>
 	<string name="latitude_hint">Lat. dd:mm:ss.sss</string>
 	<string name="longitude_hint">Long. dd:mm:ss.sss</string>
@@ -289,7 +289,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- TODO string name="fmt_error_h">Accuracy: %1$.1f m</string -->
     <!-- TODO string name="fmt_error_m">Accuracy: H %1$.1f V %2$.1f m</string -->
     <string name="fmt_h_geoid">Alt. géoïde %1$.0f m</string>
-    <string name="fmt_h_ellipsoid">Alt. ellipsoïde %1$.0f m</string>
+    <!-- UNUSED string name="fmt_h_ellipsoid">Alt. ellipsoïde %1$.0f m</string -->
+    <!-- TODO string name="location_start_fine">Starting fine location</string -->
     <!-- UNUSED string name="depth_error">Attention. Erreur de profondeur de données</string -->
 
 	<string name="error_azimuth_required">Azimut nécessaire</string>
@@ -311,7 +312,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="error_name_exists">Projet déjà existant</string>
     <string name="error_name_invalid">Nom de projet invalide</string>
 	<string name="error_name_required">Nom nécessaire</string>
-	<string name="error_text_required">Texte nécessaire</string>
+	<!-- UNUSED string name="error_text_required">Texte nécessaire</string -->
     <string name="error_station_number">Nombre de stations incorrect</string>
     <string name="error_name_duplicate">Nom en doublon</string>
     <string name="error_no_section_in_section">Sections transverses dans section transverses non autorisé</string>
@@ -357,10 +358,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 	<string name="splays">Visées d\'habillage</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
-    <string name="fmt_latitude">Latitude %1$s</string>
-    <string name="fmt_longitude">Longitude %1$s</string>
-    <!-- TODO string name="fmt_latitude_dd_dms">Latitude: %1$s [%2$s]</string -->
-    <!-- TODO string name="fmt_longitude_dd_dms">Longitude: %1$s [%2$s]</string -->
+    <string name="fmt_latitude_dd_dms">Latitude %1$s [%2$s]</string>
+    <string name="fmt_longitude_dd_dms">Longitude %1$s [%2$s]</string>
     <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string -->
 	
 	<string name="fixed">Fixé</string>

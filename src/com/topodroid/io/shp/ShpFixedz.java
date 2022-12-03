@@ -43,13 +43,15 @@ public class ShpFixedz extends ShpObject
     int n_pts = (pts != null)? pts.size() : 0;
     if ( n_pts == 0 ) return false;
 
-    int n_fld = 3;
+    int n_fld = 5;
     String[] fields = new String[ n_fld ];
     fields[0] = "name";
     fields[1] = "comment";
     fields[2] = "source"; // 0, 1, 2, 3
-    byte[]   ftypes = { BYTEC, BYTEC, BYTEC };
-    int[]    flens  = { SIZE_NAME, SIZE_TEXT, SIZE_FLAG };
+    fields[3] = "accuracy";
+    fields[4] = "accuracy_v";
+    byte[]   ftypes = { BYTEC, BYTEC, BYTEC, BYTEN, BYTEN };
+    int[]    flens  = { SIZE_NAME, SIZE_TEXT, SIZE_FLAG, SIZE_ACCUR, SIZE_ACCUR };
 
     int shpRecLen = getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );
@@ -90,6 +92,19 @@ public class ShpFixedz extends ShpObject
       fields[0] = pt.name;
       fields[1] = cs.getComment();
       fields[2] = cs.getSource();
+      double accur = cs.getAccuracy();
+      if ( accur < 0 ) {
+        fields[3] = "";
+        fields[4] = "";
+      } else {
+        fields[3] = new String( blankPadded( accur, 1, SIZE_ACCUR ) );
+        double accur_v = cs.getAccuracyVert();
+        if ( accur_v < 0 ) {
+          fields[4] = "";
+        } else {
+          fields[4] = new String( blankPadded( accur_v, 1, SIZE_ACCUR ) );
+        }
+      }
       writeDBaseRecord( n_fld, fields, flens );
       ++cnt;
     }

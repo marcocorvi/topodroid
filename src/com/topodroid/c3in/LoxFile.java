@@ -17,6 +17,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 // #include "LoxSurvey.h"
 // #include "LoxStation.h"
@@ -289,7 +290,7 @@ class LoxFile
       int na = Endian.toIntLEndian( recs, off ); off += Endian.SIZE32;
       int ap = Endian.toIntLEndian( recs, off ); off += Endian.SIZE32;
       int as = Endian.toIntLEndian( recs, off ); off += Endian.SIZE32;
-      TDLog.v( String.format("LOX %d Scrap %d (Survey %d) N.pts %d %d %d N.ang %d %d %d Size %d", i, id, sid, np, pp, ps, na, ap, as, mScrapChunk.data_size ) );
+      // TDLog.v( String.format(Locale.US, "LOX %d Scrap %d (Survey %d) N.pts %d %d %d N.ang %d %d %d Size %d", i, id, sid, np, pp, ps, na, ap, as, mScrapChunk.data_size ) );
       // assert( pp + np * 3 * sizeof(double) == ap );
       // assert( np * 3 * sizeof(double) == ps );
       // assert( na * 3 * Endian.SIZE32 == as );

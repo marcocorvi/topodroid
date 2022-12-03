@@ -263,11 +263,11 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="label_title">TESTO</string>
     <string name="label_text">Scrivi il testo</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
-    <string name="h_ellipsoid">H ellissoide </string>
+    <!-- UNUSED string name="h_ellipsoid">H ellissoide </string -->
     <string name="h_geoid">H geoide </string>
     <string name="latitude">Lat. </string>
     <string name="longitude">Long. </string>
-    <string name="h_ellipsoid_hint">H ellissoide [metri]</string>
+    <!-- UNUSED string name="h_ellipsoid_hint">H ellissoide [metri]</string -->
     <string name="h_geoid_hint">H geoide [metri]</string>
     <string name="latitude_hint">Lat. gg:mm:ss.sss</string>
     <string name="longitude_hint">Long. gg:mm:ss.sss</string>
@@ -280,7 +280,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- TODO string name="fmt_error_h">Accuracy: %1$.1f m</string -->
     <!-- TODO string name="fmt_error_m">Accuracy: H %1$.1f V %2$.1f m</string -->
     <string name="fmt_h_geoid">Errore %1$.0f m</string>
-    <string name="fmt_h_ellipsoid">Errore %1$.0f m</string>
+    <!-- UNUSED string name="fmt_h_ellipsoid">Errore %1$.0f m</string -->
+    <!-- TODO string name="location_start_fine">Starting fine location</string -->
     <!-- UNUSED string name="depth_error">ATTENZIONE. Errore nella profondita\' dei dati</string -->
 
     <string name="error_azimuth_required">Azimuth mancante</string>
@@ -302,7 +303,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="error_name_exists">Progetto esistente</string>
     <string name="error_name_invalid">Nome progetto non valido</string>
     <string name="error_name_required">Nome mancante</string>
-    <!-- TODO string name="error_text_required">Text required</string -->
+    <!-- UNUSED string name="error_text_required">Text required</string -->
     <!-- TODO string name="error_station_number">Wrong number of stations</string -->
     <string name="error_name_duplicate">Nome duplicato</string>
     <string name="error_no_section_in_section">No X-section in X-section</string>
@@ -348,10 +349,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="splays">Splay</string>
     <!-- UNUSED string name="fmt_listen">ASCOLTA | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
-    <string name="fmt_latitude">Latitudine %1$s</string>
-    <string name="fmt_longitude">Longitudine %1$s</string>
-    <!-- TODO string name="fmt_latitude_dd_dms">Latitude: %1$s [%2$s]</string -->
-    <!-- TODO string name="fmt_longitude_dd_dms">Longitude: %1$s [%2$s]</string -->
+    <string name="fmt_latitude_dd_dms">Latitudine %1$s [%2$s]</string>
+    <string name="fmt_longitude_dd_dms">Longitudine %1$s [%2$s]</string>
     <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string -->
     <string name="fixed">fisso</string>
     <string name="painted">colorato</string>

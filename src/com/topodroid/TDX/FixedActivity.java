@@ -131,7 +131,7 @@ public class FixedActivity extends Activity
     // mApp = (TopoDroidApp)getApplication();
     mContext = this;
 
-    hasGps = TDandroid.ABOVE_API_23 && TDandroid.checkLocation( mContext );
+    hasGps = /* TDandroid.ABOVE_API_23 && */ TDandroid.checkLocation( mContext );
     // Bundle extras = getIntent().getExtras();
     // if ( extras != null ) {
     // }

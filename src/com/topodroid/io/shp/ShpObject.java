@@ -56,6 +56,7 @@ class ShpObject
   final static int SIZE_LEVELS =   6;
   final static int SIZE_SCRAP  =   6;
   final static int SIZE_TEXT   = 128;
+  final static int SIZE_ACCUR  =   8;
 
   public static final double SCALE = 1.0/DrawingUtil.SCALE_FIX; // TDSetting.mDxfScale; 
   // static double xWorld( double x ) { return (x-DrawingUtil.CENTER_X)*SCALE; }
@@ -123,6 +124,31 @@ class ShpObject
     } else {
       // keep only lowest significant digits 
       for ( int k = -pad; k < res.length(); ++ k ) ret[pad+k] = res.charAt( k );
+    }
+    return ret;
+  }
+
+  /** left justified blank-padded to length
+   * if the numeric is larger than length it is truncated 
+   * @param value   numeric value
+   * @param dec     number of decimals
+   * @param len     length of output chars
+   * @return char-string of the digits of the numeric value
+   */
+  protected char[] blankPadded( double value, int dec, int len )
+  {
+    while ( dec > 0 ) { value *= 10; --dec; } 
+    String res = Integer.toString( (int)value );
+    char[] ret = new char[len];
+    int num = res.length() - dec; 
+    // keep only most significant digits 
+    int k = 0;
+    for ( ; k < num && k < len; ++ k ) ret[k] = res.charAt( k );
+    if ( k < len ) {
+      ret[k] = '.';
+      ++k;
+      for ( ; k < res.length()+1 && k < len; ++ k ) ret[k] = res.charAt( k-1 );
+      for ( ; k < len; ++ k ) ret[k] = ' ';
     }
     return ret;
   }

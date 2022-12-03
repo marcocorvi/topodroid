@@ -265,11 +265,11 @@
     <string name="label_title">标注</string>
     <string name="label_text">输入标注文本</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
-    <string name="h_ellipsoid">地球椭圆高度 </string>
+    <!-- UNUSED string name="h_ellipsoid">地球椭圆高度 </string -->
     <string name="h_geoid">大地水准高度 </string>
     <string name="latitude">纬度 </string>
     <string name="longitude">经度 </string>
-    <string name="h_ellipsoid_hint">地球椭圆高度. [米]</string>
+    <!-- UNUSED string name="h_ellipsoid_hint">地球椭圆高度. [米]</string -->
     <string name="h_geoid_hint">大地水准高度 [米]</string>
     <string name="latitude_hint">纬度. dd:mm:ss.sss</string>
     <string name="longitude_hint">经度. dd:mm:ss.sss</string>
@@ -282,7 +282,8 @@
     <!-- TODO string name="fmt_error_h">Accuracy: %1$.1f m</string -->
     <!-- TODO string name="fmt_error_m">Accuracy: H %1$.1f V %2$.1f m</string -->
     <string name="fmt_h_geoid">海拔. %1$.0f m</string>
-    <string name="fmt_h_ellipsoid">大地椭球高度. %1$.0f m</string>
+    <!-- UNUSED string name="fmt_h_ellipsoid">大地椭球高度. %1$.0f m</string -->
+    <!-- TODO string name="location_start_fine">Starting fine location</string -->
     <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
 
     <string name="error_azimuth_required">输入方位角</string>
@@ -304,7 +305,7 @@
     <string name="error_name_exists">项目已存在</string>
     <string name="error_name_invalid">无效的项目名称</string>
     <string name="error_name_required">输入名称</string>
-    <!-- TODO string name="error_text_required">Text required</string -->
+    <!-- UNUSED string name="error_text_required">Text required</string -->
     <string name="error_station_number">错误的站点数</string>
     <string name="error_name_duplicate">重复名称</string>
     <string name="error_no_section_in_section">X截面操作在X截面中不允许</string>
@@ -350,10 +351,8 @@
     <string name="splays">侧线</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
-    <string name="fmt_latitude">纬度 %1$s</string>
-    <string name="fmt_longitude">经度 %1$s</string>
-    <!-- TODO string name="fmt_latitude_dd_dms">Latitude: %1$s [%2$s]</string -->
-    <!-- TODO string name="fmt_longitude_dd_dms">Longitude: %1$s [%2$s]</string -->
+    <string name="fmt_latitude_dd_dms">纬度 %1$s [%2$s]</string>
+    <string name="fmt_longitude_dd_dms">经度 %1$s [%2$s]</string>
     <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string -->
 
     <string name="fixed">修复</string>

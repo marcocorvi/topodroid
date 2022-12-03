@@ -667,6 +667,7 @@ public class TDExporter
     return nums;
   }
 
+  // FIXME CONVERGENCE
   static private void  makeGeolocalizedData( TDNum num, FixedInfo origin, float h_geo_factor, boolean ellipsoid_h )
   {
 

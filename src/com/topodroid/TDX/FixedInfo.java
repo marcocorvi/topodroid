@@ -149,10 +149,17 @@ public class FixedInfo extends MagLatLong
   // }
 
   /** @return the string "station long lat h_geo" for the exports
+   * if the fixed point has accuracies they are appended to the string
    */
   String toExportString()
   {
-    return String.format(Locale.US, "%s %.6f %.6f %.0f", name, lng, lat, h_geo );
+    if ( accuracy < 0 ) {
+      return String.format(Locale.US, "%s %.6f %.6f %.0f", name, lng, lat, h_geo );
+    } else if ( accuracy_v < 0 ) {
+      return String.format(Locale.US, "%s %.6f %.6f %.0f # %.1f", name, lng, lat, h_geo, accuracy );
+    } else {
+      return String.format(Locale.US, "%s %.6f %.6f %.0f # %.1f %.1f", name, lng, lat, h_geo, accuracy, accuracy_v );
+    }
   }
 
   /** @return the string "long lat h_ell" with CS coordinates for the display

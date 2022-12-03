@@ -116,7 +116,7 @@ public class ParserTrox extends TglParser
   // @param cs   VTopo Coordinate System
   private void setTroxFix( String entrance, double x, double y, double z, String cs )
   {
-    fixes.add( new Cave3DFix( entrance, x, y, z, new Cave3DCS( cs ) ) ); // FIXME
+    fixes.add( new Cave3DFix( entrance, x, y, z, new Cave3DCS( cs ) ) ); // no WGS84
   }
 
   /** read input TRO file
@@ -403,7 +403,7 @@ public class ParserTrox extends TglParser
     if ( shots.size() == 0 ) return;
     if ( fixes.size() == 0 ) {
       Cave3DShot sh = shots.get( 0 );
-      fixes.add( new Cave3DFix( sh.from, 0.0f, 0.0f, 0.0f, null ) );
+      fixes.add( new Cave3DFix( sh.from, 0.0f, 0.0f, 0.0f, null ) ); // no WGS84
       // TDLog.v( "TRO shots " + shots.size() + " no fixes. starts at " + sh.from );
     }
  

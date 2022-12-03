@@ -265,11 +265,11 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="label_title">FELIRAT</string>
     <string name="label_text">Írd be a feliratot.</string>
     <!-- UNUSED string name="altitude">Mag. </string -->
-    <string name="h_ellipsoid">Ellipszoid magasság</string>
+    <!-- UNUSED string name="h_ellipsoid">Ellipszoid magasság</string -->
     <string name="h_geoid">Geoid magasság</string>
     <string name="latitude">Szélesség</string>
     <string name="longitude">Hosszúság</string>
-    <string name="h_ellipsoid_hint">Ellipszoid mag. [méter]</string>
+    <!-- UNUSED string name="h_ellipsoid_hint">Ellipszoid mag. [méter]</string -->
     <string name="h_geoid_hint">Geoid mag. [méter]</string>
     <string name="latitude_hint">Szélesség ff:pp:mm.mmm</string>
     <string name="longitude_hint">Hosszúság ff:pp:mm.mmm</string>
@@ -283,7 +283,8 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- TODO string name="fmt_error_h">Accuracy: %1$.1f m</string -->
     <!-- TODO string name="fmt_error_m">Accuracy: H %1$.1f V %2$.1f m</string -->
     <string name="fmt_h_geoid">Geoid mag. %1$.0f m</string>
-    <string name="fmt_h_ellipsoid">Ellipszoid mag. %1$.0f m</string>
+    <!-- UNUSED string name="fmt_h_ellipsoid">Ellipszoid mag. %1$.0f m</string -->
+    <!-- TODO string name="location_start_fine">Starting fine location</string -->
     <!-- UNUSED string name="depth_error">Figyelem! Adat mélység hiba</string -->
 
     <string name="error_azimuth_required">Azimut szükséges</string>
@@ -305,7 +306,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="error_name_exists">Létező projekt</string>
     <string name="error_name_invalid">Érvénytelen projekt név</string>
     <string name="error_name_required">Név szükséges</string>
-    <string name="error_text_required">Szöveg szükséges</string>
+    <!-- UNUSED string name="error_text_required">Szöveg szükséges</string -->
     <string name="error_station_number">Rossz pont számok</string>
     <string name="error_name_duplicate">Duplikált név</string>
     <string name="error_no_section_in_section">Metszetben metszet nem megengedett</string>
@@ -352,8 +353,6 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="splays">Sünök</string>
     <!-- UNUSED string name="fmt_listen">FIGYEL | %1$s</string -->
     <string name="fmt_id">Azonosító %1$s</string>
-    <string name="fmt_latitude">Szélesség %1$s</string>
-    <string name="fmt_longitude">Hosszúság %1$s</string>
     <string name="fmt_latitude_dd_dms">Szélesség: %1$s [%2$s]</string>
     <string name="fmt_longitude_dd_dms">Hosszúság: %1$s [%2$s]</string>
     <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string -->

@@ -263,11 +263,11 @@ debe ajustarlos a sus necesidades./n/n
     <string name="label_title">Texto</string>
     <string name="label_text">Introducir texto en la etiqueta</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
-    <string name="h_ellipsoid">H elipsoide </string>
+    <!-- UNUSED string name="h_ellipsoid">H elipsoide </string -->
     <string name="h_geoid">H geoide </string>
     <string name="latitude">Lat. </string>
     <string name="longitude">Long. </string>
-    <string name="h_ellipsoid_hint">H elipsoide [metros]</string>
+    <!-- UNUSED string name="h_ellipsoid_hint">H elipsoide [metros]</string -->
     <string name="h_geoid_hint">H geoide [metros]</string>
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
@@ -280,7 +280,8 @@ debe ajustarlos a sus necesidades./n/n
     <!-- TODO string name="fmt_error_h">Accuracy: %1$.1f m</string -->
     <!-- TODO string name="fmt_error_m">Accuracy: H %1$.1f V %2$.1f m</string -->
     <string name="fmt_h_geoid">Error %1$.0f m</string>
-    <string name="fmt_h_ellipsoid">Error %1$.0f m</string>
+    <!-- UNUSED string name="fmt_h_ellipsoid">Error %1$.0f m</string -->
+    <!-- TODO string name="location_start_fine">Starting fine location</string -->
     <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
 
     <string name="error_azimuth_required">Introducir rumbo</string>
@@ -302,7 +303,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="error_name_exists">Proyecto existente</string>
     <string name="error_name_invalid">Nombre de proyecto no válido</string>
     <string name="error_name_required">Introducir nombre</string>
-    <!-- TODO string name="error_text_required">Text required</string -->
+    <!-- UNUSED string name="error_text_required">Text required</string -->
     <!-- TODO string name="error_station_number">Wrong number of stations</string -->
     <string name="error_name_duplicate">Nombre duplicado</string>
     <string name="error_no_section_in_section">No X-seccion en X-seccion</string>
@@ -348,10 +349,8 @@ debe ajustarlos a sus necesidades./n/n
     <string name="splays">Tomas laterales</string>
     <!-- UNUSED string name="fmt_listen">ASCOLTA | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
-    <string name="fmt_latitude">Latitud %1$s</string>
-    <string name="fmt_longitude">Longitud %1$s</string>
-    <!-- TODO string name="fmt_latitude_dd_dms">Latitude: %1$s [%2$s]</string -->
-    <!-- TODO string name="fmt_longitude_dd_dms">Longitude: %1$s [%2$s]</string -->
+    <string name="fmt_latitude_dd_dms">Latitud %1$s [%2$s]</string>
+    <string name="fmt_longitude_dd_dms">Longitud %1$s [%2$s]</string>
     <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string -->
     <string name="fixed">Fijo</string>
     <string name="painted">Dibujado</string>

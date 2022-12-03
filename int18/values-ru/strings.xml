@@ -264,11 +264,11 @@
     <string name="label_title">ПОДПИСЬ</string>
     <string name="label_text">Введите текст подписи</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
-    <string name="h_ellipsoid">H эллипсоид </string>
+    <!-- UNUSED string name="h_ellipsoid">H эллипсоид </string -->
     <string name="h_geoid">H геоид </string>
     <string name="latitude">Lat. </string>
     <string name="longitude">Long. </string>
-    <string name="h_ellipsoid_hint">H эллипсоид [метры]</string>
+    <!-- UNUSED string name="h_ellipsoid_hint">H эллипсоид [метры]</string -->
     <string name="h_geoid_hint">H геоид [метры]</string>
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
@@ -283,7 +283,8 @@
     <!-- TODO string name="fmt_error_h">Accuracy: %1$.1f m</string -->
     <!-- TODO string name="fmt_error_m">Accuracy: H %1$.1f V %2$.1f m</string -->
     <string name="fmt_h_geoid">Ошибка %1$.0f м</string>
-    <string name="fmt_h_ellipsoid">Ошибка %1$.0f м</string>
+    <!-- UNUSED string name="fmt_h_ellipsoid">Ошибка %1$.0f м</string -->
+    <!-- TODO string name="location_start_fine">Starting fine location</string -->
     <!-- UNUSED string name="depth_error">Внимание. >Ошибка данных глубины.</string -->
 
     <string name="error_azimuth_required">Требуется азимут</string>
@@ -305,7 +306,7 @@
     <string name="error_name_exists">Такой проект уже существует</string>
     <string name="error_name_invalid">Недопустимое название проекта</string>
     <string name="error_name_required">Требуется название</string>
-    <string name="error_text_required">Требуется ввести текст</string>
+    <!-- UNUSED string name="error_text_required">Требуется ввести текст</string -->
     <string name="error_station_number">Неверное кол-во пикетов</string>
     <string name="error_name_duplicate">Повторяющееся имя</string>
     <string name="error_no_section_in_section">Сечение внутри поперечного сечения недопустимо</string>
@@ -351,8 +352,6 @@
     <string name="splays">Сплеи</string>
     <!-- UNUSED string name="fmt_listen">СЛУШАТЬ | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
-    <string name="fmt_latitude">Широта %1$s</string>
-    <string name="fmt_longitude">Долгота %1$s</string>
     <string name="fmt_latitude_dd_dms">Широта: %1$s [%2$s]</string>
     <string name="fmt_longitude_dd_dms">Долгота: %1$s [%2$s]</string>
     <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string -->

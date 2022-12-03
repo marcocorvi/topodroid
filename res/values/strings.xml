@@ -271,11 +271,11 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="label_title">Label</string>
     <string name="label_text">Enter the label text</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
-    <string name="h_ellipsoid">H ellipsoid </string>
+    <!-- UNUSED string name="h_ellipsoid">H ellipsoid </string -->
     <string name="h_geoid">H geoid </string>
     <string name="latitude">Latitude </string>
     <string name="longitude">Longitude </string>
-    <string name="h_ellipsoid_hint">H ellipsoid [meters]</string>
+    <!-- UNUSED string name="h_ellipsoid_hint">H ellipsoid [meters]</string -->
     <string name="h_geoid_hint">H geoid [meters]</string>
     <string name="latitude_hint">Latitude dd:mm:ss.sss</string>
     <string name="longitude_hint">Longitude dd:mm:ss.sss</string>
@@ -289,7 +289,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="fmt_error_h">Accuracy: %1$.1f m</string>
     <string name="fmt_error_m">Accuracy: H %1$.1f V %2$.1f m</string>
     <string name="fmt_h_geoid">Geoid alt.: %1$.0f m</string>
-    <string name="fmt_h_ellipsoid">Ellipsoid alt.: %1$.0f m</string>
+    <!-- UNUSED string name="fmt_h_ellipsoid">Ellipsoid alt.: %1$.0f m</string -->
     <string name="location_start_fine">Starting fine location</string>
     <!-- UNUSED string name="depth_error">Warning. Data depth error</string -->
 
@@ -312,7 +312,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="error_name_exists">Project name already used</string>
     <string name="error_name_invalid">Invalid project name</string>
     <string name="error_name_required">Name required</string>
-    <string name="error_text_required">Text required</string>
+    <!-- UNUSED string name="error_text_required">Text required</string -->
     <string name="error_station_number">Wrong number of stations</string>
     <string name="error_name_duplicate">Duplicate name</string>
     <string name="error_no_section_in_section">Xsection in xsection not allowed</string>
@@ -358,8 +358,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="splays">Splays</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
-    <string name="fmt_latitude">Latitude %1$s</string>
-    <string name="fmt_longitude">Longitude %1$s</string>
     <string name="fmt_latitude_dd_dms">Latitude: %1$s [%2$s]</string>
     <string name="fmt_longitude_dd_dms">Longitude: %1$s [%2$s]</string>
     <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string --> 

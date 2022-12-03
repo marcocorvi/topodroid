@@ -331,11 +331,11 @@ public class ParserTh extends TglParser
             double conv = fx.mConvergence; // degrees
             // TDLog.v( "Th fix " + name + " CS1 " + fx.mCsName + " " + x1 + " " + y1 + " " + z1 + " conv " + conv );
             // TODO declination -= conv;
-            mOrigin = new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mEllipAlt );
+            mOrigin = new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mGeoidAlt, fx.mEllipAlt );
 	    fixes.add( mOrigin );
           } else {
             // TDLog.v( "Th CS0 " + x0 + " " + y0 + " " + z0 );
-            mOrigin = new Cave3DFix( name, x0, y0, z0, cs0, fx.mLongitude, fx.mLatitude, fx.mEllipAlt );
+            mOrigin = new Cave3DFix( name, x0, y0, z0, cs0, fx.mLongitude, fx.mLatitude, fx.mGeoidAlt, fx.mEllipAlt );
 	    fixes.add( mOrigin );
           }
         } else {
@@ -346,7 +346,7 @@ public class ParserTh extends TglParser
               y1 = fx.mCsLatitude;
               z1 = fx.mCsGeoidAlt;
               // TDLog.v( "Th fix relative fix " + name + " using " + cs1.name + " " + x1 + " " + y1 + " " + z1 );
-	      fixes.add( new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mEllipAlt ) );
+	      fixes.add( new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mGeoidAlt, fx.mEllipAlt ) );
             } else {
               TDLog.Error("Th fix relative fix " + name + " does not have CS " + cs1 );
             }
@@ -354,7 +354,7 @@ public class ParserTh extends TglParser
             double yy = mOrigin.latToNorth( fx.mLatitude, fx.mEllipAlt ); // north diff to the origin
             double xx = mOrigin.lngToEast( fx.mLongitude, fx.mLatitude, fx.mEllipAlt, yy-mOrigin.y );
             // TDLog.v( "Th fix relative use CS0 " + xx + " " + yy + " " + z0 );
-            fixes.add( new Cave3DFix( name, xx, yy, z0, cs0, fx.mLongitude, fx.mLatitude, fx.mEllipAlt ) );
+            fixes.add( new Cave3DFix( name, xx, yy, z0, cs0, fx.mLongitude, fx.mLatitude, fx.mGeoidAlt, fx.mEllipAlt ) );
           }
         }
       }
@@ -571,7 +571,7 @@ public class ParserTh extends TglParser
                         idx = nextIndex( vals, idx );
                         if ( idx < vals.length ) {
                           double z = Double.parseDouble( vals[idx] );
-	                  fixes.add( new Cave3DFix( name, x, y, z, cs ) );
+	                  fixes.add( new Cave3DFix( name, x, y, z, cs ) ); // no WGS84
                           // TDLog.v( "TH adding fix " + x + " " + y + " " + z );
                         }
                       }
@@ -899,7 +899,7 @@ public class ParserTh extends TglParser
 
     if ( ok_fixes.size() == 0 ) {
       Cave3DShot sh = shots.get( 0 );
-      ok_fixes.add( new Cave3DFix( sh.from, 0.0f, 0.0f, 0.0f, null ) );
+      ok_fixes.add( new Cave3DFix( sh.from, 0.0f, 0.0f, 0.0f, null ) ); // no WGS84
     }
  
     int mLoopCnt = 0;
