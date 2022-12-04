@@ -271,7 +271,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="longitude">Hosszúság</string>
     <!-- UNUSED string name="h_ellipsoid_hint">Ellipszoid mag. [méter]</string -->
     <string name="h_geoid_hint">Geoid mag. [méter]</string>
-    <!-- TODO string name="accuracy_hint">Accuracy [m]</string -->
+    <string name="accuracy_hint">Pontosság [m]</string>
     <string name="latitude_hint">Szélesség ff:pp:mm.mmm</string>
     <string name="longitude_hint">Hosszúság ff:pp:mm.mmm</string>
     <string name="loop_closure_errors">Hurokzárási hibák</string>
@@ -280,17 +280,17 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="long_lat">Hosszúság-Szélesség</string -->
     <!-- UNUSED string name="multistation_plane">T9bbszörös-álláspont sík</string -->
 	
-    <!-- TODO string name="error_m">Accuracy [m]</string -->
-    <!-- TODO string name="fmt_error_h">Accuracy: %1$.1f m</string -->
-    <!-- TODO string name="fmt_error_m">Accuracy: H %1$.1f V %2$.1f m</string -->
+    <string name="error_m">Pontosság [m]</string>
+    <string name="fmt_error_h">Pontosság: %1$.1f m</string>
+    <string name="fmt_error_m">Pontosság: V %1$.1f F %2$.1f m</string>
     <string name="fmt_h_geoid">Geoid mag. %1$.0f m</string>
     <!-- UNUSED string name="fmt_h_ellipsoid">Ellipszoid mag. %1$.0f m</string -->
-    <!-- TODO string name="location_start_fine">Starting fine location</string -->
+    <string name="location_start_fine">Pontos helymeghatározás kezdés</string>
     <!-- UNUSED string name="depth_error">Figyelem! Adat mélység hiba</string -->
 
     <string name="error_azimuth_required">Azimut szükséges</string>
     <string name="error_length_required">Hossz szükséges</string>
-	<string name="error_depth_required">Mélység szükséges</string>
+    <string name="error_depth_required">Mélység szükséges</string>
     <string name="error_clino_required">Lejtszög szükséges</string>
     <string name="error_comment_required">Megjegyzés szükséges</string>
     <string name="error_begin_required">Kezdő hivatkozás szükséges</string>
@@ -319,7 +319,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="error_start_required">Referencia állomás szükséges</string>
     <!-- UNUSED string name="error_station_already_fixed">Álláspontnak már van koordinátája</string -->
     <string name="error_station_required">Mérési pont szükséges</string>
-    <!-- TODO string name="error_station_fixed">Georefenced station</string -->
+    <string name="error_station_fixed">Földrajzi alappont</string>
     <string name="error_station_non_existing">Nem létező mérési pont</string>
     <string name="error_sensor_required">Szenzor szükséges</string>
     <string name="error_value_required">Érték szükséges</string>
@@ -1453,10 +1453,10 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_firmware_sanity_summary">Firmware biztonsági ellenőrzés végrehajtva</string>
   <string name="pref_crs_title">Koordinátarendszer</string>
   <string name="pref_crs_summary">Írd be a koordinátarendszer nevét Proj.4 szerint</string>
-  <!-- TODO string name="pref_neg_altitude_title">Neg. altitudes</string -->
-  <!-- TODO string name="pref_neg_altitude_summary">Allow negative altitudes</string -->
-  <!-- TODO string name="pref_fine_location_title">Fine location [s]</string -->
-  <!-- TODO string name="pref_fine_location_summary">Fine location time [s]</string -->
+  <string name="pref_neg_altitude_title">Neg. magasság</string>
+  <string name="pref_neg_altitude_summary">Negatív magasságok engedélyezése</string>
+  <string name="pref_fine_location_title">Pontos helymeghatározás [s]</string>
+  <string name="pref_fine_location_summary">Pontos helymeghatározás ideje [s]</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GNSS átlagolás</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">GNSS átlagolás használata</string -->
   <string name="pref_bric_mode_title">BRIC mód</string>
