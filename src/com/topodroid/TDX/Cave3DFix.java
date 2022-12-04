@@ -31,8 +31,8 @@ public class Cave3DFix extends Vector3D
   
   public double longitude; // WGS84
   public double latitude; 
-  public double h_geoid = 0.0; // FIXME geodetic altitude
-  public double h_ellip = 0.0; // FIXME ellipsoidic altitude
+  public double a_ellip = 0.0; // NOTE ellipsoidic altitude - used to compute radii
+  // private double a_geoid = 0.0; // geodetic altitude (not used)
   public boolean hasWGS84;
 
   /** serialize the 3D fix
@@ -46,8 +46,8 @@ public class Cave3DFix extends Vector3D
     dos.writeDouble( z );
     dos.writeDouble( longitude );
     dos.writeDouble( latitude );
-    dos.writeDouble( h_geoid ); // 20221203 inserted this
-    dos.writeDouble( h_ellip );
+    dos.writeDouble( a_ellip );
+    // dos.writeDouble( a_geoid ); // 20221203 inserted this
   }
 
   /** deserialize a 3D fix
@@ -63,9 +63,9 @@ public class Cave3DFix extends Vector3D
     double z = dis.readDouble( );
     double lng   = dis.readDouble( );
     double lat   = dis.readDouble( );
-    double h_geo = dis.readDouble( ); // 20221203 inserted this
     double h_ell = dis.readDouble( );
-    return new Cave3DFix( name, x, y, z, null, lng, lat, h_geo, h_ell );
+    // double h_geo = dis.readDouble( ); // 20221203 inserted this
+    return new Cave3DFix( name, x, y, z, null, lng, lat, h_ell /*, h_geo */ );
   }
     
 
@@ -84,18 +84,18 @@ public class Cave3DFix extends Vector3D
    * @param cs0  coord reference system
    * @param lng  WGS84 longitude
    * @param lat  WGS84 latitude
-   * @param h_geo geoid altitude
    * @param h_ell WGS84 altitude (ellipsoid)
+   * @param h_geo geoid altitude
    */
-  public Cave3DFix( String nm, double e0, double n0, double z0, Cave3DCS cs0, double lng, double lat, double h_geo, double h_ell )
+  public Cave3DFix( String nm, double e0, double n0, double z0, Cave3DCS cs0, double lng, double lat, double h_ell /* , double h_ell */ )
   {
     super( e0, n0, z0 );
     name = nm;
     cs = cs0;
     longitude = lng;
     latitude  = lat;
-    h_geoid   = h_geo;
-    h_ellip   = h_ell;
+    a_ellip   = h_ell;
+    // a_geoid   = h_geo;
     hasWGS84  = true;
   }
 
@@ -113,8 +113,9 @@ public class Cave3DFix extends Vector3D
     // cs = cs0;
     // longitude = 0;
     // latitude  = 0;
-    // h_ellip  = 0;
-    this( nm, e0, n0, z0, cs0, 0, 0, 0, 0 );
+    // a_ellip  = 0;
+    // // a_geoid  = 0;
+    this( nm, e0, n0, z0, cs0, 0, 0, 0 /*, 0 */ );
     hasWGS84 = false;
   }
 
@@ -135,14 +136,14 @@ public class Cave3DFix extends Vector3D
    */
   public double getSNradius() 
   { 
-    return isWGS84()? Geodetic.meridianRadiusExact( latitude, h_ellip ) : 1.0;
+    return isWGS84()? Geodetic.meridianRadiusExact( latitude, a_ellip ) : 1.0;
   }
 
   /** @return the west-east radius
    */
   public double getWEradius() 
   { 
-    return isWGS84()? Geodetic.parallelRadiusExact( latitude, h_ellip ) : 1.0;
+    return isWGS84()? Geodetic.parallelRadiusExact( latitude, a_ellip ) : 1.0;
   }
 
   /** @return true if the 3D fix has WGS84 coords

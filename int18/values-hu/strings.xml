@@ -271,6 +271,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="longitude">Hosszúság</string>
     <!-- UNUSED string name="h_ellipsoid_hint">Ellipszoid mag. [méter]</string -->
     <string name="h_geoid_hint">Geoid mag. [méter]</string>
+    <!-- TODO string name="accuracy_hint">Accuracy [m]</string -->
     <string name="latitude_hint">Szélesség ff:pp:mm.mmm</string>
     <string name="longitude_hint">Hosszúság ff:pp:mm.mmm</string>
     <string name="loop_closure_errors">Hurokzárási hibák</string>
@@ -318,6 +319,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="error_start_required">Referencia állomás szükséges</string>
     <!-- UNUSED string name="error_station_already_fixed">Álláspontnak már van koordinátája</string -->
     <string name="error_station_required">Mérési pont szükséges</string>
+    <!-- TODO string name="error_station_fixed">Georefenced station</string -->
     <string name="error_station_non_existing">Nem létező mérési pont</string>
     <string name="error_sensor_required">Szenzor szükséges</string>
     <string name="error_value_required">Érték szükséges</string>

@@ -229,6 +229,10 @@ class FixedImportDialog extends MyDialog
         mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
         return;
       }
+      if ( mParent.hasFixed( station ) ) {
+        mETstation.setError( mContext.getResources().getString( R.string.error_station_fixed ) );
+        return;
+      }
       String comment = mETcomment.getText().toString();
       // if ( comment == null ) comment = "";
       if ( isSet ) {

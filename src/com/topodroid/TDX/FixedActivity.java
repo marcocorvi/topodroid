@@ -185,6 +185,11 @@ public class FixedActivity extends Activity
     mList.setAdapter( mFixedAdapter );
   }
 
+  /** @return true if the list of fixed points contains the given point name
+   * @param name   name of the point
+   */
+  public boolean hasFixed( String name ) { return mFixedAdapter.hasFixed( name ); }
+
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {

@@ -28,6 +28,11 @@ class FixedAdapter extends ArrayAdapter< FixedInfo >
   private List< FixedInfo > items;
   private final Context context;
 
+  /** cstr
+   * @param ctx   context
+   * @param id    ???
+   * @param items list of fixed points
+   */
   FixedAdapter( Context ctx, int id, List< FixedInfo > items )
   {
     super( ctx, id, items );
@@ -35,6 +40,9 @@ class FixedAdapter extends ArrayAdapter< FixedInfo >
     this.items = items;
   }
 
+  /** @return the fixed info at the given position
+   * @param pos   index (must be between 0 and the number of items)
+   */
   public FixedInfo get( int pos ) { return items.get(pos); }
  
   @Override
@@ -59,6 +67,16 @@ class FixedAdapter extends ArrayAdapter< FixedInfo >
       // tw.setTextColor( b.color() );
     }
     return v;
+  }
+
+  /** @return true if the list of fixed points contains the given point name
+   * @param name   name of the point
+   */
+  public boolean hasFixed( String name ) 
+  {
+    if ( name == null || name.length() == 0 ) return false;
+    for ( FixedInfo fix : items ) if ( name.equals( fix.name ) ) return true;
+    return false;
   }
 
 }

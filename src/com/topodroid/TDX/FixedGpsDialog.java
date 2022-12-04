@@ -198,6 +198,10 @@ class FixedGpsDialog extends MyDialog
       mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
       return false;
     }
+    if ( mParent.hasFixed( name ) ) {
+      mETstation.setError( mContext.getResources().getString( R.string.error_station_fixed ) );
+      return false;
+    }
     String comment = mETcomment.getText().toString();
     // if ( comment == null ) comment = "";
     mParent.addFixedPoint( name, mLng, mLat, mHEll, mHGeo, comment, FixedInfo.SRC_TOPODROID, mErrH, mErrV );
@@ -381,7 +385,7 @@ class FixedGpsDialog extends MyDialog
       FixedInfo.double2degree( mLat ), FixedInfo.double2ddmmss( mLat ) ) );
     // mTVh_ell.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_ellipsoid ), mHEll ) );
     mTVh_geo.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_h_geoid ), mHGeo ) );
-    if ( errOk && err3 >= 0 && err3 < (errMax + errMin)/2 ) { 
+    if ( errOk && err3 >= 0 /* && err3 < (errMax + errMin)/2 */ ) { 
       if ( TDandroid.BELOW_API_26 ) {
         mTVerr.setText( String.format(Locale.US, mContext.getResources().getString( R.string.fmt_error_h ), mErrH ) ); // TODO only if mErrH >= 0
       } else if ( mErrV > 0 ) {

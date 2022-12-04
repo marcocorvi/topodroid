@@ -49,7 +49,8 @@ class FixedAddDialog extends MyDialog
   private EditText mETlng;
   private EditText mETlat;
   // private EditText mEThell; // altitude ellipsoid
-  private EditText mEThgeo; // altitude geoid
+  private EditText mEThgeo; // altitude geoid [m]
+  private EditText mETaccur; // accuracy [m]
 
   private Button   mBtnNS;
   private Button   mBtnEW;
@@ -87,7 +88,8 @@ class FixedAddDialog extends MyDialog
     mETlng  = (EditText) findViewById( R.id.edit_long );
     mETlat  = (EditText) findViewById( R.id.edit_lat  );
     // mEThell = (EditText) findViewById( R.id.edit_h_ell  );
-    mEThgeo = (EditText) findViewById( R.id.edit_h_geo  );
+    mEThgeo  = (EditText) findViewById( R.id.edit_h_geo  );
+    mETaccur = (EditText) findViewById( R.id.edit_accuracy  );
 
     mNorth = true;
     mEast  = true;
@@ -109,6 +111,7 @@ class FixedAddDialog extends MyDialog
         // MyKeyboard.registerEditText( mKeyboard, mEThell, MyKeyboard.FLAG_POINT  );
         MyKeyboard.registerEditText( mKeyboard, mEThgeo, MyKeyboard.FLAG_POINT  );
       }
+      MyKeyboard.registerEditText( mKeyboard, mETaccur, MyKeyboard.FLAG_POINT  );
     } else {
       mKeyboard.hide();
       mETlng.setInputType(  TDConst.TEXT );
@@ -120,6 +123,7 @@ class FixedAddDialog extends MyDialog
         // mEThell.setInputType( TDConst.NUMBER_DECIMAL );
         mEThgeo.setInputType( TDConst.NUMBER_DECIMAL );
       }
+      mETaccur.setInputType( TDConst.NUMBER_DECIMAL );
       if ( TDSetting.mStationNames == 1 ) {
         mETstation.setInputType( TDConst.NUMBER_DECIMAL );
       }
@@ -184,6 +188,8 @@ class FixedAddDialog extends MyDialog
    * @param lng longitude
    * @param lat latitude
    * @param h_geo geoid altitude
+   * @note used to set the coordinates obtained from Proj4 coord conversion
+   *       accuracy is not set
    */
   void setCoordsGeo( double lng, double lat, double h_geo )
   {
@@ -191,6 +197,7 @@ class FixedAddDialog extends MyDialog
     mETlat.setText(  FixedInfo.double2string( lat ) );
     // mEThell.setText( String.format( Locale.US, "%.1f", h_geo ) );
     mEThgeo.setText( String.format( Locale.US, "%.1f", h_geo ) );
+    mETaccur.setText( "" );
   }
 
   /** react to user tap
@@ -258,6 +265,10 @@ class FixedAddDialog extends MyDialog
         mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
         return;
       }
+      if ( mParent.hasFixed( name ) ) {
+        mETstation.setError( mContext.getResources().getString( R.string.error_station_fixed ) );
+        return;
+      }
       String comment = mETcomment.getText().toString();
       // if ( comment == null ) comment = "";
       if ( getLngLat() ) {
@@ -297,7 +308,16 @@ class FixedAddDialog extends MyDialog
         //     }
         //   }
         // }
-        mParent.addFixedPoint( name, mLng, mLat, mHEll, mHGeo, comment, FixedInfo.SRC_MANUAL, -1, -1 );
+        double accur = -1;
+        if ( mETaccur.getText() != null ) {
+          String accur_str = mETaccur.getText().toString();
+          if ( accur_str.length() > 0 ) {
+            try {
+              accur = Double.parseDouble( accur_str );
+            } catch ( NumberFormatException e ) { }
+          }
+        }
+        mParent.addFixedPoint( name, mLng, mLat, mHEll, mHGeo, comment, FixedInfo.SRC_MANUAL, accur, -1 ); // NOTE vert accuracy is always unset
       } else {
         return;
       }

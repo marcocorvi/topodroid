@@ -102,20 +102,49 @@
       >
       <TextView 
         android:layout_width="0dp" 
-        android:layout_weight="40"
+        android:layout_weight="23"
         android:layout_height="wrap_content" 
         android:layout_marginEnd="@dimen/marginh"
         android:layout_gravity="start"
-        android:text="@string/h_geoid"
+        android:text=""
         />
       <EditText android:id="@id/edit_h_geo"
         style="@style/edit_text"
         android:layout_width="0dp"
-	android:layout_weight="40"
+	android:layout_weight="57"
         android:layout_height="wrap_content" 
       	android:ems="25"
         android:singleLine="true"
         android:hint="@string/h_geoid_hint"
+        android:scrollHorizontally="true"
+        android:nextFocusDown="@+id/edit_accuracy"
+        android:importantForAutofill="no"
+        />
+  </LinearLayout>
+  		
+  <LinearLayout android:id="@+id/layout3c"
+      android:layout_below="@id/layout3b"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:layout_marginTop="@dimen/margintiny"
+      >
+      <TextView 
+        android:layout_width="0dp" 
+        android:layout_weight="23"
+        android:layout_height="wrap_content" 
+        android:layout_marginEnd="@dimen/marginh"
+        android:layout_gravity="start"
+        android:text=""
+        />
+      <EditText android:id="@id/edit_accuracy"
+        style="@style/edit_text"
+        android:layout_width="0dp"
+	android:layout_weight="57"
+        android:layout_height="wrap_content" 
+      	android:ems="25"
+        android:singleLine="true"
+        android:hint="@string/accuracy_hint"
         android:scrollHorizontally="true"
         android:nextFocusDown="@+id/edit_comment"
         android:importantForAutofill="no"
@@ -124,7 +153,7 @@
 
   <EditText android:id="@id/edit_comment" 
     style="@style/edit_text_light"
-    android:layout_below="@id/layout3b"
+    android:layout_below="@id/layout3c"
     android:layout_marginTop="@dimen/margintiny"
     android:layout_width="match_parent"
     android:hint="@string/comment"

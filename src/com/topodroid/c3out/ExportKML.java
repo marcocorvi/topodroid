@@ -93,7 +93,7 @@ public class ExportKML
     // altitude is assumed wgs84
     lat = origin.latitude;
     lng = origin.longitude;
-    double h_ell = origin.h_ellip;
+    double h_ell = origin.a_ellip;
     h_geo = origin.z; // KML uses Geoid altitude (unless altitudeMode is set)
     // TDLog.v( "KML origin " + lat + " N " + lng + " E " + h_geo );
 

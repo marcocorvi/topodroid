@@ -271,6 +271,7 @@
     <string name="longitude">经度 </string>
     <!-- UNUSED string name="h_ellipsoid_hint">地球椭圆高度. [米]</string -->
     <string name="h_geoid_hint">大地水准高度 [米]</string>
+    <!-- TODO string name="accuracy_hint">Accuracy [m]</string -->
     <string name="latitude_hint">纬度. dd:mm:ss.sss</string>
     <string name="longitude_hint">经度. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">闭合环路误差</string>
@@ -316,6 +317,7 @@
     <string name="error_start_required">输入参考测点</string>
     <!-- UNUSED string name="error_station_already_fixed">Station already with coordinates</string -->
     <string name="error_station_required">输入测点</string>
+    <!-- TODO string name="error_station_fixed">Georefenced station</string -->
     <string name="error_station_non_existing">不存在的测点</string>
     <string name="error_sensor_required">输入传感器</string>
     <string name="error_value_required">输入赋值</string>

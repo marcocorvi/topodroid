@@ -155,7 +155,7 @@ public class OsmFactory
     // TDLog.v("OSM origin " + origin.longitude + " " + origin.latitude + " X " + origin.x + " " + origin.y + " " + origin.z );
     double PI_180 = (Math.PI / 180);
     double a_lat = origin.latitude;
-    double a_ell = origin.h_ellip;
+    double a_ell = origin.a_ellip;
 
     double a = ( a_lat < 0 )? -a_lat : a_lat;
     // KML radius is already multiplied by PI/180
