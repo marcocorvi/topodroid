@@ -270,7 +270,7 @@
     <string name="longitude">Long. </string>
     <!-- UNUSED string name="h_ellipsoid_hint">H эллипсоид [метры]</string -->
     <string name="h_geoid_hint">H геоид [метры]</string>
-    <!-- TODO string name="accuracy_hint">Accuracy [m]</string -->
+    <string name="accuracy_hint">Точность [м]</string>
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Ошибки закрытия колец</string>
@@ -280,12 +280,12 @@
 
     <!-- OK string name="line_delete">Удалить линию</string -->
 
-    <!-- TODO string name="error_m">Accuracy [m]</string -->
-    <!-- TODO string name="fmt_error_h">Accuracy: %1$.1f m</string -->
-    <!-- TODO string name="fmt_error_m">Accuracy: H %1$.1f V %2$.1f m</string -->
+    <string name="error_m">Точность [m]</string>
+    <string name="fmt_error_h">Точность: %1$.1f m</string>
+    <string name="fmt_error_m">Точность: H %1$.1f V %2$.1f m</string>
     <string name="fmt_h_geoid">Ошибка %1$.0f м</string>
     <!-- UNUSED string name="fmt_h_ellipsoid">Ошибка %1$.0f м</string -->
-    <!-- TODO string name="location_start_fine">Starting fine location</string -->
+    <string name="location_start_fine">Начинаю уточнение позиции</string>
     <!-- UNUSED string name="depth_error">Внимание. >Ошибка данных глубины.</string -->
 
     <string name="error_azimuth_required">Требуется азимут</string>
@@ -318,7 +318,7 @@
     <string name="error_start_required">Требуется привязка к пикету</string>
     <!-- UNUSED string name="error_station_already_fixed">Пикет уже имеет координаты</string -->
     <string name="error_station_required">Требуется пикет</string>
-    <!-- TODO string name="error_station_fixed">Georefenced station</string -->
+    <string name="error_station_fixed">Геопривязаный пикет</string>
     <string name="error_station_non_existing">Несуществующий пикет</string>
     <string name="error_sensor_required">Требуется датчик</string>
     <string name="error_value_required">Требуется значение</string>
@@ -1078,7 +1078,7 @@
     <string name="help_equates">Список соединений съёмки</string>
 
     <!-- UNUSED string name="export_bgcolor">Цвет фона</string -->
-    <!-- TODO string name="export_bothviews">Plan and profile</string -->
+    <string name="export_bothviews">План и разрез</string>
     <string name="export_config">Команды config файла</string>
     <string name="export_csv_rawdata">Сырые данные</string>
     <string name="export_dxf_blocks">Блоки DXF</string>
@@ -1445,10 +1445,10 @@
   <string name="pref_firmware_sanity_summary">Принудительная проверка совместимости прошивкиs</string>
   <string name="pref_crs_title">CRS - система координат </string>
   <string name="pref_crs_summary">Введите название CRS точно также как в программе Proj4</string>
-  <!-- TODO string name="pref_neg_altitude_title">Neg. altitudes</string -->
-  <!-- TODO string name="pref_neg_altitude_summary">Allow negative altitudes</string -->
-  <!-- TODO string name="pref_fine_location_title">Fine location [s]</string -->
-  <!-- TODO string name="pref_fine_location_summary">Fine location time [s]</string -->
+  <string name="pref_neg_altitude_title">Отр. альтитуды</string>
+  <string name="pref_neg_altitude_summary">Разрешить отрицаттельные альтитуды</string>
+  <string name="pref_fine_location_title">Уточнение позиции [s]</string>
+  <string name="pref_fine_location_summary">Время уточнения позиции [s]</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Осреднение данных GPS </string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Использовать GPSAveraging?</string -->
   <string name="pref_bric_mode_title">Режим BRIC</string>
@@ -1845,7 +1845,7 @@
    <!-- UNUSED string name="firmware_file_dump_fail">Не удалось выполнить дамп прошивки</string -->
    <string name="firmware_file_upload_fail">Ошибка загрузки прошивки</string>
    <string name="firmware_file_download_fail">Неудачная загрузка прошивки</string>
-   <!-- TODO string name="firmware_file_download_fail">Failed firmware download</string -->
+   <string name="firmware_file_download_fail">Неудачная загрузка прошивки</string>
    <string name="firmware_not_supported">Устройство не поддерживает функции данной прошивки</string>
    <string name="firmware_uploaded">%1$s прошивка: загружено %2$d</string>
    <string name="firmware_downloaded">%1$s прошивка: выгружена %2$d</string>
