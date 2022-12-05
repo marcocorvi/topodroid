@@ -1085,7 +1085,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="help_equates">Kapcsolódó pontok listázása</string>
 
     <!-- UNUSED string name="export_bgcolor">Fehér háttér</string -->
-    <!-- TODO string name="export_bothviews">Plan and profile</string -->
+    <string name="export_bothviews">Alaprajz és oldalnézet</string>
     <string name="export_config">Konfigurációs parancsok</string>
     <string name="export_csv_rawdata">Nyers adat</string>
     <string name="export_dxf_blocks">Segédmérés végpont</string>
