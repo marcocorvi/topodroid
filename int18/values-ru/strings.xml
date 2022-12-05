@@ -1078,6 +1078,7 @@
     <string name="help_equates">Список соединений съёмки</string>
 
     <!-- UNUSED string name="export_bgcolor">Цвет фона</string -->
+    <!-- TODO string name="export_bothviews">Plan and profile</string -->
     <string name="export_config">Команды config файла</string>
     <string name="export_csv_rawdata">Сырые данные</string>
     <string name="export_dxf_blocks">Блоки DXF</string>

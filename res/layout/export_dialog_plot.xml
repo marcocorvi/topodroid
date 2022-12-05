@@ -34,6 +34,11 @@
       android:layout_height="wrap_content"
       android:text="@string/export_xvi"
       />
+    <CheckBox android:id="@+id/therion_bothviews"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_bothviews"
+      />
     <LinearLayout android:id="@+id/layout_therion_scale"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
@@ -107,6 +112,11 @@
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:text="@string/export_with_xsections"
+      />
+    <CheckBox android:id="@+id/svg_bothviews"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_bothviews"
       />
     <LinearLayout android:id="@+id/layout_svg_scale"
       android:layout_width="match_parent" 
@@ -304,6 +314,11 @@
       android:layout_height="wrap_content"
       android:text="@string/export_with_reference"
       />
+    <CheckBox android:id="@+id/dxf_bothviews"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_bothviews"
+      />
     <!-- CheckBox android:id="@+id/dxf_blocks"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
@@ -323,6 +338,11 @@
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:text="@string/export_georeference"
+      />
+    <CheckBox android:id="@+id/shp_bothviews"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_bothviews"
       />
   </LinearLayout>
 
@@ -417,6 +437,11 @@
       android:layout_height="wrap_content"
       android:text="@string/export_splays"
       / -->
+    <CheckBox android:id="@+id/pdf_bothviews"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_bothviews"
+      />
     <LinearLayout android:id="@+id/layout_pdf_scale"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"

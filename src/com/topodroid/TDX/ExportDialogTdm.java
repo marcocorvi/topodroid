@@ -117,7 +117,7 @@ public class ExportDialogTdm extends MyDialog
     // TDLog.v("C3D selected " + mSelected );
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
-      mParent.doExport( mSelected, getFilename(), null ); // null prefix
+      mParent.doExport( mSelected, getFilename(), null, false ); // null prefix, false second
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
     }

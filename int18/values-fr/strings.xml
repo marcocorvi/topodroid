@@ -1091,6 +1091,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="help_equates">Lister les égalités entre les topographies</string>
 
     <!-- UNUSED string name="export_bgcolor">White background</string -->
+    <!-- TODO string name="export_bothviews">Plan and profile</string -->
     <string name="export_config">Commandes de configuration</string>
     <string name="export_csv_rawdata">Données brutes</string>
     <string name="export_dxf_blocks">Blocs DXF</string>

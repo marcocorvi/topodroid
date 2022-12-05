@@ -7240,8 +7240,7 @@ public class DrawingWindow extends ItemDrawer
       info = mPlot3;
     }
     final String filename = name;
-    // TDLog.Log( TDLog.LOG_IO, "save th2: " + filename );
-    // TDLog.v( "save th2: " + filename );
+    TDLog.v( "save th2: type " + type + " file " + filename );
     if ( toast ) {
       th2Handler = new Handler(){
         @Override public void handleMessage(Message msg) {
@@ -7668,8 +7667,17 @@ public class DrawingWindow extends ItemDrawer
           // TDLog.v("DRAW save therion");
           selectFromProvider( TDConst.SURVEY_FORMAT_TH2, TDRequest.REQUEST_GET_EXPORT, Intent.ACTION_CREATE_DOCUMENT );
         } else {
-          String plotname = TDInstance.survey + "-" + mName;
-          new ExportDialogPlot( mActivity, this, TDConst.mPlotExportTypes, R.string.title_plot_save, plotname ).show();
+          String plotname1 = TDInstance.survey + "-" + mName;
+          String plotname2 = null;
+          if ( TDLevel.overExpert ) {
+            if ( PlotType.isProfile( mType ) ) {
+              plotname2 = TDInstance.survey + "-" + mName1;
+            } else if (  PlotType.isPlan( mType ) ) {
+              plotname2 = TDInstance.survey + "-" + mName2;
+            } 
+          }
+          TDLog.v("export " + plotname1 + " " + plotname2 );
+          new ExportDialogPlot( mActivity, this, TDConst.mPlotExportTypes, R.string.title_plot_save, plotname1, plotname2 ).show();
         }
       } else if ( ( ! mTh2Edit ) && p++ == pos ) { // TH2EDIT INFO - AREA
         if ( PlotType.isAnySection( mType ) ) {
@@ -7778,19 +7786,21 @@ public class DrawingWindow extends ItemDrawer
     return ( mPlot2 !=  null && PlotType.PLOT_PROJECTED == mPlot2.type );
   }
 
-  static private int mExportIndex;
-  static private String mExportExt;
+  static private int     mExportIndex;
+  static private String  mExportExt;
 
   /**
-   * @param export_type         export type
+   * @param export_type  export type
    * @param filename     export filename
    * @param prefix       station names export-prefix (not used)
+   * @param second       whether to export the second view instead of the current view (only for plan or profile)
+   * @note called from EportDialogPlot to do the export
    */
-  public void doExport( String export_type, String filename, String prefix ) // EXPORT
+  public void doExport( String export_type, String filename, String prefix, boolean second ) // EXPORT
   {
     if ( export_type == null ) return;
-    mExportIndex = TDConst.plotExportIndex( export_type );
-    mExportExt   = TDConst.plotExportExt( export_type );
+    mExportIndex  = TDConst.plotExportIndex( export_type );
+    mExportExt    = TDConst.plotExportExt( export_type );
     // TDLog.v( "EXPORT do type " + export_type + " index " + mExportIndex + " ext " + mExportExt + " filename " + filename );
     // if ( TDSetting.mExportUri ) {
       if ( mExportIndex == TDConst.SURVEY_FORMAT_C3D ) { // Cave3D
@@ -7807,7 +7817,7 @@ public class DrawingWindow extends ItemDrawer
         Uri uri = Uri.fromFile( new File( TDPath.getOutFile( filename ) ) );
         // TDLog.v("EXPORT " + TDPath.getOutFile( filename ) );
         if ( uri != null ) {
-          doUriExport( uri );
+          doUriExport( uri, second );
         }
       }
     // } else {
@@ -7830,17 +7840,26 @@ public class DrawingWindow extends ItemDrawer
   }
 
   /** 
-   * @param uri export URI
+   * @param uri     export URI
+   * @param second  whether to export the secong view (only for plan or profile)
    */
-  private void doUriExport( Uri uri ) 
+  private void doUriExport( Uri uri, boolean second ) 
   {
     // if ( ! TDSetting.mExportUri ) return;
     // TDLog.v( "do URI export. index " + mExportIndex );
     // int mExportIndex = TDConst.plotExportIndex( export_type );
+    long type = mType;
+    if ( second ) {
+      if ( PlotType.isProfile( mType ) ) {
+        type = mPlot1.type;
+      } else if ( PlotType.isPlan( mType ) ) {
+        type = mPlot2.type;
+      }
+    }
     switch ( mExportIndex ) {
-      case TDConst.SURVEY_FORMAT_TH2: doSaveTh2( uri, mType, true ); break;
+      case TDConst.SURVEY_FORMAT_TH2: doSaveTh2( uri, type, true ); break;
       case TDConst.SURVEY_FORMAT_CSX: 
-        if ( ! PlotType.isAnySection( mType ) ) { // FIXME x-sections are saved PNG for CSX
+        if ( ! PlotType.isAnySection( type ) ) { // FIXME x-sections are saved PNG for CSX
           if ( mPlot1 != null ) {
             String origin = mPlot1.start;
 	    int save_mode    = PlotSave.EXPORT;
@@ -7850,19 +7869,19 @@ public class DrawingWindow extends ItemDrawer
 	  }
           break;
         } // else fall-through and savePng
-      // case TDConst.SURVEY_FORMAT_PNG: savePng( uri, mType ); break; // NO_PNG
-      // case TDConst.SURVEY_FORMAT_PNM: savePnm( uri, mType ); break; // NO_PNM
-      case TDConst.SURVEY_FORMAT_DXF: saveWithExt( uri, mType, "dxf" ); break;
-      case TDConst.SURVEY_FORMAT_SVG: saveWithExt( uri, mType, "svg" ); break;
-      case TDConst.SURVEY_FORMAT_SHP: saveWithExt( uri, mType, "shz" ); break;
-      case TDConst.SURVEY_FORMAT_XVI: saveWithExt( uri, mType, "xvi" ); break;
-      case TDConst.SURVEY_FORMAT_TNL: saveWithExt( uri, mType, "xml" ); break;
+      // case TDConst.SURVEY_FORMAT_PNG: savePng( uri, type ); break; // NO_PNG
+      // case TDConst.SURVEY_FORMAT_PNM: savePnm( uri, type ); break; // NO_PNM
+      case TDConst.SURVEY_FORMAT_DXF: saveWithExt( uri, type, "dxf" ); break;
+      case TDConst.SURVEY_FORMAT_SVG: saveWithExt( uri, type, "svg" ); break;
+      case TDConst.SURVEY_FORMAT_SHP: saveWithExt( uri, type, "shz" ); break;
+      case TDConst.SURVEY_FORMAT_XVI: saveWithExt( uri, type, "xvi" ); break;
+      case TDConst.SURVEY_FORMAT_TNL: saveWithExt( uri, type, "xml" ); break;
       case TDConst.SURVEY_FORMAT_C3D: 
         // TDLog.v("export c3d");
-        // if ( ! PlotType.isAnySection( mType ) )
-          saveWithExt( uri, mType, "c3d" );
+        // if ( ! PlotType.isAnySection( type ) )
+          saveWithExt( uri, type, "c3d" );
         break;
-      case TDConst.SURVEY_FORMAT_PDF: savePdf( uri, mType ); break; 
+      case TDConst.SURVEY_FORMAT_PDF: savePdf( uri, type ); break; 
     }
   }
 
@@ -8537,7 +8556,7 @@ public class DrawingWindow extends ItemDrawer
       //     // int index = intent.getIntExtra( "exporttype", -1 );
       //     Uri uri = intent.getData();
       //     // TDLog.v( "URI Export " + mExportIndex + " uri " + uri.toString() );
-      //     if ( uri != null ) doUriExport( uri );
+      //     if ( uri != null ) doUriExport( uri, false );
       //   }
       //   break;
       case TDRequest.REQUEST_GET_IMPORT: // TH2EDIT handle a th2 import
