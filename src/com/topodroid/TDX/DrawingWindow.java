@@ -4100,11 +4100,13 @@ public class DrawingWindow extends ItemDrawer
       if ( mLastLinePath != null
            && mCurrentLine == mLastLinePath.mLineType 
            && mDrawingSurface.modifyLine( mLastLinePath, lp2, mZoom, mSelectSize ) ) {
+        // TDLog.v( "Try to join  LP2 " + lp2.toDebugString() + " FALSE" );
         return false;
       }
       DrawingLinePath line = null;
       line = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
       if ( line != null && mCurrentLine == line.mLineType ) { // continue line with the current line
+        // TDLog.v( "Try to join  LP2 " + lp2.toDebugString() + " add to " + line.toDebugString() );
         mDrawingSurface.addLineToLine( lp2, line );
         return false;
       }
@@ -4117,7 +4119,6 @@ public class DrawingWindow extends ItemDrawer
     //     return false;
     //   }
     } else {
-      // TDLog.v( "Try to join " + lp1.toString() + " " + lp2.toString() );
       DrawingLinePath line1 = null;
       DrawingLinePath line2 = null;
       if ( mContinueLine == CONT_START || mContinueLine == CONT_BOTH ) {
@@ -4147,6 +4148,7 @@ public class DrawingWindow extends ItemDrawer
         }
       }
     }
+    // TDLog.v( "Try to join  LP2 " + lp2.toDebugString() + " TRUE" );
     return true;
   }
 
@@ -7240,7 +7242,7 @@ public class DrawingWindow extends ItemDrawer
       info = mPlot3;
     }
     final String filename = name;
-    TDLog.v( "save th2: type " + type + " file " + filename );
+    // TDLog.v( "save th2: type " + type + " file " + filename );
     if ( toast ) {
       th2Handler = new Handler(){
         @Override public void handleMessage(Message msg) {
@@ -7676,7 +7678,7 @@ public class DrawingWindow extends ItemDrawer
               plotname2 = TDInstance.survey + "-" + mName2;
             } 
           }
-          TDLog.v("export " + plotname1 + " " + plotname2 );
+          // TDLog.v("export " + plotname1 + " " + plotname2 );
           new ExportDialogPlot( mActivity, this, TDConst.mPlotExportTypes, R.string.title_plot_save, plotname1, plotname2 ).show();
         }
       } else if ( ( ! mTh2Edit ) && p++ == pos ) { // TH2EDIT INFO - AREA
@@ -8592,7 +8594,7 @@ public class DrawingWindow extends ItemDrawer
               finish();
             }
           // } else if ( (type = TDPath.checkImportTypeStream( ext ) ) != null ) {
-          //   TDLog.v( "import stream type " + type + " name " + name );
+          //   // TDLog.v( "import stream type " + type + " name " + name );
           //   // importStream( uri, name, type );
           }
         } else {
@@ -8629,7 +8631,7 @@ public class DrawingWindow extends ItemDrawer
               finish();
             }
           // } else if ( (type = TDPath.checkImportTypeStream( ext ) ) != null ) {
-          //   TDLog.v( "import stream type " + type + " name " + name );
+          //   // TDLog.v( "import stream type " + type + " name " + name );
           //   // importStream( uri, name, type );
           }
         } else {

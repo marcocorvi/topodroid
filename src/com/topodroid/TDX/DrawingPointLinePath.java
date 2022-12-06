@@ -912,5 +912,10 @@ public class DrawingPointLinePath extends DrawingPath
     pw.format("\" />\n");
   }
 
+  String toDebugString()
+  {
+    return String.format(Locale.US, "<%.0f %.0f>-<%.0f %.0f>", mFirst.x, mFirst.y, mLast.x, mLast.y );
+  }
+
 }
 
