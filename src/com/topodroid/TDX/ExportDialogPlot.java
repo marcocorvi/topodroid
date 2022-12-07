@@ -53,7 +53,9 @@ public class ExportDialogPlot extends MyDialog
   private final int mTitle;
   private int mSelectedPos;
   private int mParentType; // parent type
-  private String mPlotName;
+  private String mPlotName1;
+  private String mPlotName2 = null;
+  private boolean mBothViews = false; // whether to export both views (local - independently set for each export) 
 
   private LinearLayout mLayoutTherion;
   private LinearLayout mLayoutCSurvey;
@@ -69,9 +71,10 @@ public class ExportDialogPlot extends MyDialog
    * @param types       export types, for the options
    * @param title       dialog title (resource)
    * @param parent_type 0: drawing, 1: overview
-   * @param plotname    name of the plot
+   * @param plotname1   name of the primary plot
+   * @param plotname2   name of the secondary plot
    */
-  public ExportDialogPlot( Context context, IExporter parent, String[] types, int title, String plotname )
+  public ExportDialogPlot( Context context, IExporter parent, String[] types, int title, String plotname1, String plotname2 )
   {
     super( context, null, R.string.ExportDialog ); // null app
     mParent = parent;
@@ -79,7 +82,8 @@ public class ExportDialogPlot extends MyDialog
     mSelected = null;
     mTitle = title;
     mParentType = ( parent instanceof OverviewWindow ) ? PARENT_OVERVIEW : PARENT_DRAWING;
-    mPlotName = plotname;
+    mPlotName1  = plotname1;
+    mPlotName2  = plotname2;
   }
 
 // -------------------------------------------------------------------
@@ -111,7 +115,13 @@ public class ExportDialogPlot extends MyDialog
       if ( ! TDLevel.overExpert ) {
         ((CheckBox) findViewById( R.id.svg_roundtrip )).setVisibility( View.GONE );
       }
+      ((CheckBox) findViewById( R.id.therion_bothviews )).setVisibility( View.GONE );
     }
+    // FIXME hide all except therion_bothviews
+    ((CheckBox) findViewById( R.id.svg_bothviews )).setVisibility( View.GONE );
+    ((CheckBox) findViewById( R.id.dxf_bothviews )).setVisibility( View.GONE );
+    ((CheckBox) findViewById( R.id.shp_bothviews )).setVisibility( View.GONE );
+    ((CheckBox) findViewById( R.id.pdf_bothviews )).setVisibility( View.GONE );
 
     mBtnOk   = (Button) findViewById(R.id.button_ok );
     mBtnOk.setOnClickListener( this );
@@ -180,14 +190,17 @@ public class ExportDialogPlot extends MyDialog
   @Override
   public void onClick(View v) 
   {
-    // TDLog.v("Export plot: " + mPlotName + " selected " + mSelected + " pos " + mSelectedPos  );
+    // TDLog.v("Export plot: " + mPlotName1 + " selected " + mSelected + " pos " + mSelectedPos  );
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
       setOptions();
       if ( mParentType == PARENT_DRAWING ) { // plot
-        mParent.doExport( mSelected, TDConst.getPlotFilename( mSelectedPos, mPlotName ), null );  // null prefix
+        mParent.doExport( mSelected, TDConst.getPlotFilename( mSelectedPos, mPlotName1 ), null, false );  // null prefix
+        if ( mBothViews && mPlotName2 != null ) {
+          mParent.doExport( mSelected, TDConst.getPlotFilename( mSelectedPos, mPlotName2 ), null, true );  // null prefix
+        }
       } else { // overview
-        mParent.doExport( mSelected, TDConst.getOverviewFilename( mSelectedPos, mPlotName ), null ); // null prefix
+        mParent.doExport( mSelected, TDConst.getOverviewFilename( mSelectedPos, mPlotName1 ), null, false ); // null prefix
       }
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
@@ -246,6 +259,9 @@ public class ExportDialogPlot extends MyDialog
         {
           TDSetting.mTherionSplays = ((CheckBox) findViewById( R.id.therion_splays )).isChecked();
           TDSetting.mTherionXvi = ((CheckBox) findViewById( R.id.therion_xvi )).isChecked();
+          if ( mParentType == PARENT_DRAWING ) {
+            mBothViews = ((CheckBox) findViewById( R.id.therion_bothviews )).isChecked();
+          }
           try { 
             TDSetting.setExportScale( Integer.parseInt( ((EditText) findViewById( R.id.therion_scale )).getText().toString() ) );
           } catch ( NumberFormatException e ) {
@@ -268,6 +284,9 @@ public class ExportDialogPlot extends MyDialog
           // TDSetting.mDxfBlocks = ((CheckBox) findViewById( R.id.dxf_blocks )).isChecked();
           TDSetting.mAutoXSections = ((CheckBox) findViewById( R.id.dxf_xsections )).isChecked();
           TDSetting.mDxfReference = ((CheckBox) findViewById( R.id.dxf_reference )).isChecked();
+          if ( mParentType == PARENT_DRAWING ) {
+            mBothViews = ((CheckBox) findViewById( R.id.dxf_bothviews )).isChecked();
+          }
           // TDSetting.mAcadVersion
           if ( ((RadioButton) findViewById( R.id.acad_12 )).isChecked() ) {
             TDSetting.mAcadVersion = 13;
@@ -285,6 +304,9 @@ public class ExportDialogPlot extends MyDialog
           TDSetting.mSvgLineDirection   = ((CheckBox) findViewById( R.id.svg_linedir )).isChecked();
           TDSetting.mSvgSplays     = ((CheckBox) findViewById( R.id.svg_splays )).isChecked();
           TDSetting.mAutoXSections = ((CheckBox) findViewById( R.id.svg_xsections )).isChecked();
+          if ( mParentType == PARENT_DRAWING ) {
+            mBothViews = ((CheckBox) findViewById( R.id.svg_bothviews )).isChecked();
+          }
           try { 
             TDSetting.setExportScale( Integer.parseInt( ((EditText) findViewById( R.id.svg_scale )).getText().toString() ) );
           } catch ( NumberFormatException e ) {
@@ -295,6 +317,9 @@ public class ExportDialogPlot extends MyDialog
       case 4: // Shapefile
         {
           TDSetting.mShpGeoref = ((CheckBox) findViewById( R.id.shp_georeference )).isChecked();
+          if ( mParentType == PARENT_DRAWING ) {
+            mBothViews = ((CheckBox) findViewById( R.id.shp_bothviews )).isChecked();
+          }
           // TDLog.v( "shapefile set georef " + TDSetting.mShpGeoref );
         }
         break;
@@ -316,6 +341,9 @@ public class ExportDialogPlot extends MyDialog
           // if ( ((CheckBox) findViewById( R.id.pdf_bgcolor )).isChecked() ) TDSetting.mPdfBgcolor = 0;
           // if ( ((CheckBox) findViewById( R.id.pdf_bgcolor )).isChecked() ) TDSetting.mBitmapBgcolor = 0xffffffff;
           // TDSetting.mTherionSplays = ((CheckBox) findViewById( R.id.pdf_splays )).isChecked();
+          if ( mParentType == PARENT_DRAWING ) {
+            mBothViews = ((CheckBox) findViewById( R.id.pdf_bothviews )).isChecked();
+          }
           try { 
             TDSetting.setExportScale( Integer.parseInt( ((EditText) findViewById( R.id.pdf_scale )).getText().toString() ) );
           } catch ( NumberFormatException e ) {
@@ -327,6 +355,7 @@ public class ExportDialogPlot extends MyDialog
   }
 
   /** initialize the options widgets
+   * @note the bothviews checkboxes are all unchecked
    */
   private void initOptions()
   {

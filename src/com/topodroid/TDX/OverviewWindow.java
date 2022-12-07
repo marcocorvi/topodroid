@@ -731,9 +731,10 @@ public class OverviewWindow extends ItemDrawer
    * @param export_type   export file format
    * @param filename      export file "name"
    * @param prefix        station name prefix (not used)
+   * @param second        whether to export the second view (unused)
    * @note called by the ExportPlotDialog
    */
-  public void doExport( String export_type, String filename, String prefix ) // EXPORT
+  public void doExport( String export_type, String filename, String prefix, boolean second ) // EXPORT
   {
     if ( export_type == null ) return;
     mExportIndex = TDConst.plotExportIndex( export_type );
@@ -1394,7 +1395,7 @@ public class OverviewWindow extends ItemDrawer
       super.onBackPressed();
     } else if ( TDLevel.overExpert && p++ == pos ) { // EXPORT THERION
       String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
-      new ExportDialogPlot( mActivity, this, TDConst.mOverviewExportTypes, R.string.title_plot_save, fullname ).show();
+      new ExportDialogPlot( mActivity, this, TDConst.mOverviewExportTypes, R.string.title_plot_save, fullname, null ).show();
     } else if ( p++ == pos ) { // OPTIONS
       Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
       intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_PLOT );

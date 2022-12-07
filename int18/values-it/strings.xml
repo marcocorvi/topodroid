@@ -1077,6 +1077,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="help_equates">Lista rilievi simili</string>
 
     <!-- UNUSED string name="export_bgcolor">Colore di sfondo</string -->
+    <!-- TODO string name="export_bothviews">Plan and profile</string -->
     <string name="export_config">Comandi di configurazione</string>
     <string name="export_csv_rawdata">Dati grezzi</string>
     <string name="export_dxf_blocks">Blocchi DXF</string>

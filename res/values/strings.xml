@@ -1091,6 +1091,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_equates">List surveys equates</string>
 
     <!-- UNUSED string name="export_bgcolor">White background</string -->
+    <string name="export_bothviews">Plan and profile</string>
     <string name="export_config">Config commands</string>
     <string name="export_csv_rawdata">Raw data</string>
     <string name="export_dxf_blocks">Splay endpoints</string>

@@ -490,9 +490,10 @@ public class TdmConfigActivity extends Activity
    * @param type       export type
    * @param surveyname not used (TdmConfig already has it)
    * @param prefix     station names prefix (not used)
+   * @param second     whether to export the second view (unused: only for plan or profile in DrawingWindow)
    * @note implements IExporter
    */
-  public void doExport( String type, String surveyname, String prefix )
+  public void doExport( String type, String surveyname, String prefix, boolean second )
   {
     String filename = null;
     int index = -1;

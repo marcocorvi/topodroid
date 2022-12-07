@@ -28,179 +28,188 @@ res/values/strings.xml:167: Error: "calib_min_error" is not translated in "cn", 
 res/values/strings.xml:168: Error: "magn_dip" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
     <string name="magn_dip">Magn. dip &#8230;</string>
             ~~~~~~~~~~~~~~~
-res/values/strings.xml:284: Error: "loops_bad" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:280: Error: "accuracy_hint" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+    <string name="accuracy_hint">Accuracy [m]</string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:285: Error: "loops_bad" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
     <string name="loops_bad">Inaccurate loops: %1$d</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:288: Error: "error_m" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:289: Error: "error_m" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
     <string name="error_m">Accuracy [m]</string>
             ~~~~~~~~~~~~~~
-res/values/strings.xml:289: Error: "fmt_error_h" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:290: Error: "fmt_error_h" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
     <string name="fmt_error_h">Accuracy: %1$.1f m</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:290: Error: "fmt_error_m" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:291: Error: "fmt_error_m" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
     <string name="fmt_error_m">Accuracy: H %1$.1f V %2$.1f m</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:293: Error: "location_start_fine" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:294: Error: "location_start_fine" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
     <string name="location_start_fine">Starting fine location</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:316: Error: "error_station_number" is not translated in "it" (Italian) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:317: Error: "error_station_number" is not translated in "it" (Italian) or "es" (Spanish) [MissingTranslation]
     <string name="error_station_number">Wrong number of stations</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:403: Error: "no_search_result" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:327: Error: "error_station_fixed" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+    <string name="error_station_fixed">Georefenced station</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:405: Error: "no_search_result" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
     <string name="no_search_result">No search_result.</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:683: Error: "stat_devices" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:685: Error: "stat_devices" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="stat_devices">Devices %1$d: %2$s</string>
             ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:701: Error: "stat_leg_sigma" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:703: Error: "stat_leg_sigma" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
     <string name="stat_leg_sigma">Leg sigma %1$.1f cm</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:729: Error: "projected_profile" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:731: Error: "projected_profile" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="projected_profile">Projected profile</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:816: Error: "button_leg_station" is not translated in "it" (Italian) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:818: Error: "button_leg_station" is not translated in "it" (Italian) or "es" (Spanish) [MissingTranslation]
     <string name="button_leg_station">Leg stations</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:817: Error: "button_all_station" is not translated in "it" (Italian) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:819: Error: "button_all_station" is not translated in "it" (Italian) or "es" (Spanish) [MissingTranslation]
     <string name="button_all_station">All stations</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:818: Error: "button_leg_search" is not translated in "it" (Italian) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:820: Error: "button_leg_search" is not translated in "it" (Italian) or "es" (Spanish) [MissingTranslation]
     <string name="button_leg_search">Leg search</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:829: Error: "button_download" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:831: Error: "button_download" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
     <string name="button_download"  >Download</string>
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:835: Error: "button_wait" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:837: Error: "button_wait" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
     <string name="button_wait">Wait</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1008: Error: "help_gps_surveys" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1010: Error: "help_gps_surveys" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
     <string name="help_gps_surveys">Surveys fixed points</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1017: Error: "help_drawing" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1019: Error: "help_drawing" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="help_drawing">Drawing</string>
             ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1108: Error: "export_spacing_th" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1094: Error: "export_bothviews" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+    <string name="export_bothviews">Plan and profile</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1111: Error: "export_spacing_th" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
     <string name="export_spacing_th">Point spacing</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1156: Error: "title_gm_search" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1159: Error: "title_gm_search" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="title_gm_search">Calib data search</string>
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1258: Error: "title_import_th2" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1261: Error: "title_import_th2" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="title_import_th2">Therion th2 file</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1259: Error: "title_infos" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1262: Error: "title_infos" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
     <string name="title_infos">Surveys geo-points</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1276: Error: "pref_lrud_count_title" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1279: Error: "pref_lrud_count_title" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
   <string name="pref_lrud_count_title">LRUD splay count</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1277: Error: "pref_lrud_count_summary" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1280: Error: "pref_lrud_count_summary" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
   <string name="pref_lrud_count_summary">Number of splays used for LRUD</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1462: Error: "pref_neg_altitude_title" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1465: Error: "pref_neg_altitude_title" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
   <string name="pref_neg_altitude_title">Neg. altitudes</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1463: Error: "pref_neg_altitude_summary" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1466: Error: "pref_neg_altitude_summary" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
   <string name="pref_neg_altitude_summary">Allow negative altitudes</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1464: Error: "pref_fine_location_title" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1467: Error: "pref_fine_location_title" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
   <string name="pref_fine_location_title">Fine location [s]</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1465: Error: "pref_fine_location_summary" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1468: Error: "pref_fine_location_summary" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
   <string name="pref_fine_location_summary">Fine location time [s]</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1531: Error: "pref_sibling_thr_title" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1534: Error: "pref_sibling_thr_title" is not translated in "es" (Spanish) [MissingTranslation]
   <string name="pref_sibling_thr_title">Sibling threshold</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1532: Error: "pref_sibling_thr_summary" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1535: Error: "pref_sibling_thr_summary" is not translated in "es" (Spanish) [MissingTranslation]
   <string name="pref_sibling_thr_summary">Threshold for sibling shots [&#37;]</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1690: Error: "pref_loop_thr_title" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1693: Error: "pref_loop_thr_title" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
   <string name="pref_loop_thr_title">Loop threshold</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1691: Error: "pref_loop_thr_summary" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1694: Error: "pref_loop_thr_summary" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
   <string name="pref_loop_thr_summary">Loop compensation threshold</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1866: Error: "ask_download" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1869: Error: "ask_download" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
    <string name="ask_download">Download firmware? (be patient)</string>
            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1872: Error: "firmware_file_downloaded" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1875: Error: "firmware_file_downloaded" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
    <string name="firmware_file_downloaded">Downloaded firmware file %1$s read %2$d</string>
            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1875: Error: "firmware_file_download_fail" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1878: Error: "firmware_file_download_fail" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
    <string name="firmware_file_download_fail">Failed firmware download</string>
            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1877: Error: "firmware_uploaded" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1880: Error: "firmware_uploaded" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
    <string name="firmware_uploaded">%1$s firmware: uploaded %2$d</string>
            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1878: Error: "firmware_downloaded" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1881: Error: "firmware_downloaded" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
    <string name="firmware_downloaded">%1$s firmware: downloaded %2$d</string>
            ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1895: Error: "equate_no_stations" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:1898: Error: "equate_no_stations" is not translated in "fr" (French) [MissingTranslation]
     <string name="equate_no_stations">Too few stations</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1901: Error: "menu_open" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1904: Error: "menu_open" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
     <string name="menu_open">OPEN</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1965: Error: "info_origin" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1968: Error: "info_origin" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="info_origin">Origin</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1966: Error: "info_lonlat" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1969: Error: "info_lonlat" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="info_lonlat">coords.</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1967: Error: "info_radii" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1970: Error: "info_radii" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="info_radii">radii</string>
             ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1980: Error: "info_origin_value" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1983: Error: "info_origin_value" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="info_origin_value">x %1$.0f y %2$.0f z %3$.0f</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1981: Error: "info_origin_none" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1984: Error: "info_origin_none" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="info_origin_none">undefined</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1982: Error: "info_lonlat_geovalue" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1985: Error: "info_lonlat_geovalue" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="info_lonlat_geovalue">lon %1$.7f lat %2$.7f</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1983: Error: "info_lonlat_prjvalue" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1986: Error: "info_lonlat_prjvalue" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="info_lonlat_prjvalue">lon %1$.1f lat %2$.1f</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1984: Error: "info_radii_value" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1987: Error: "info_radii_value" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="info_radii_value">EW %1$.1f NS %2$.1f</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2019: Error: "dem_loading" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2022: Error: "dem_loading" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
     <string name="dem_loading">Loading surface &#8230; please wait</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2027: Error: "texture" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2030: Error: "texture" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
     <string name="texture">DTM</string>
             ~~~~~~~~~~~~~~
-res/values/strings.xml:2058: Error: "east" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2061: Error: "east" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="east">E</string>
           ~~~~~~~~~~~
-res/values/strings.xml:2059: Error: "north" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2062: Error: "north" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="north">N</string>
           ~~~~~~~~~~~~
-res/values/strings.xml:2060: Error: "west" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2063: Error: "west" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="west">W</string>
           ~~~~~~~~~~~
-res/values/strings.xml:2061: Error: "south" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2064: Error: "south" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="south">S</string>
           ~~~~~~~~~~~~
-res/values/strings.xml:2126: Error: "warning_nogrant_camera" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2129: Error: "warning_nogrant_camera" is not translated in "cn", "it" (Italian), "es" (Spanish) [MissingTranslation]
     <string name="warning_nogrant_camera">Camera permission has not been granted</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2171: Error: "cpref_grid_extent_summary" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:2174: Error: "cpref_grid_extent_summary" is not translated in "fr" (French) [MissingTranslation]
     <string name="cpref_grid_extent_summary">Grid extent around the survey plan-view</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values-fr/plurals.xml:4: Error: The quantity 'one' matches more than one specific number in this locale (0, 1), but the message did not include a formatting argument (such as %d). This is usually an internationalization error. See full issue explanation for more. [ImpliedQuantity]
     <item quantity="one">ATTENTION. Une donnée saturée</item>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:593: Warning: Inconsistent number of arguments in formatting string shot_rename_unsafe; found both 1 here and 0 in values-fr/strings.xml [StringFormatCount]
+res/values/strings.xml:595: Warning: Inconsistent number of arguments in formatting string shot_rename_unsafe; found both 1 here and 0 in values-fr/strings.xml [StringFormatCount]
     <string name="shot_rename_unsafe">Stations referenced by xsections:%1$s.\nRename shot ?</string>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    res/values-fr/strings.xml:593: Conflicting number of arguments (0) here
-res/values/strings.xml:594: Warning: Inconsistent number of arguments in formatting string shots_rename_unsafe; found both 1 here and 0 in values-fr/strings.xml [StringFormatCount]
+    res/values-fr/strings.xml:595: Conflicting number of arguments (0) here
+res/values/strings.xml:596: Warning: Inconsistent number of arguments in formatting string shots_rename_unsafe; found both 1 here and 0 in values-fr/strings.xml [StringFormatCount]
     <string name="shots_rename_unsafe">Stations referenced by xsections:\n%1$s.\nRename shots ?</string>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    res/values-fr/strings.xml:594: Conflicting number of arguments (0) here
+    res/values-fr/strings.xml:596: Conflicting number of arguments (0) here
 res/values-fr/plurals.xml:7: Warning: For language "fr" (French) the following quantities are not relevant: zero [UnusedQuantity]
   <plurals name="read_data">
   ^
@@ -235,11 +244,5 @@ res/mipmap-anydpi-v26/ic_launcher_round.xml:2: Warning: The resource R.mipmap.ic
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
 ^
 res/raw/name_pos_hl_geometry.glsl: Warning: The resource R.raw.name_pos_hl_geometry appears to be unused [UnusedResources]
-res/layout/export_dialog_plot.xml:420: Warning: This LinearLayout layout or its LinearLayout parent is possibly unnecessary [UselessParent]
-    <LinearLayout android:id="@+id/layout_pdf_scale"
-     ~~~~~~~~~~~~
-res/layout/progress_dialog.xml:49: Warning: This LinearLayout layout or its LinearLayout parent is unnecessary [UselessParent]
-    <LinearLayout
-     ~~~~~~~~~~~~
 res/mipmap-xhdpi/ic_launcher.png: Warning: The following unrelated icon files have identical contents: iz_topodroid.png, ic_launcher.png [IconDuplicates]
-62 errors, 20 warnings
+65 errors, 18 warnings

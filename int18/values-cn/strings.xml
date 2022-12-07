@@ -1081,6 +1081,7 @@
     <string name="help_equates">同等显示测量数据</string>
 
     <!-- UNUSED string name="export_bgcolor">背景颜色</string -->
+    <!-- TODO string name="export_bothviews">Plan and profile</string -->
     <string name="export_config">配置文件</string>
     <string name="export_csv_rawdata">Raw数据</string>
     <string name="export_dxf_blocks">DXF块</string>

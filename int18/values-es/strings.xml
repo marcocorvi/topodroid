@@ -1077,6 +1077,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="help_equates">Lista relieves similares</string>
 
     <!-- UNUSED string name="export_bgcolor">Color de fondo</string -->
+    <!-- TODO string name="export_bothviews">Plan and profile</string -->
     <string name="export_config">Comandos de configuración</string>
     <string name="export_csv_rawdata">Datos sin procesar</string>
     <string name="export_dxf_blocks">Bloques DXF</string>

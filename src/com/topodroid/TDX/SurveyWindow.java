@@ -523,12 +523,13 @@ public class SurveyWindow extends Activity
   }
 
   /** export the survey data
-   * @param type   export file format
-   * @param filename      export file "name"
-   * @param prefix        station name prefix (Compass, VTopo, Winkarst
+   * @param type      export file format
+   * @param filename  export file "name"
+   * @param prefix    station name prefix (Compass, VTopo, Winkarst)
+   * @param second    whether to export the second view (unused: only plan or profile in DrawingWindow)
    * @note interface IExporter
    */
-  public void doExport( String type, String filename, String prefix )
+  public void doExport( String type, String filename, String prefix, boolean second )
   {
     if ( ! saveSurvey() ) return;
     mExportPrefix = prefix;
