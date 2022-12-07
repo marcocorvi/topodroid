@@ -2,6 +2,7 @@
 symbol point
 name cheese-cave
 name-fr cave_bâtarde
+name-pt caverna_queijaria
 th_name cheese-cave
 group cave
 color 0xffcc33

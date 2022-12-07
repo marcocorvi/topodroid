@@ -1,8 +1,9 @@
 symbol point
 name cupid
-name-ru купидон
-name-ro cupid
 name-hu Ámor
+name-pt cupido
+name-ro cupid
+name-ru купидон
 th_name cupid
 orientation yes
 color 0xffffff

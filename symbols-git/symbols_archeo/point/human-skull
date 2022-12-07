@@ -2,6 +2,7 @@ encoding utf-8
 symbol point
 name human-skull
 name-hu emberi_koponya
+name-pt crânio_humano
 name-ro craniu_uman
 th_name human-skull
 group archeo
