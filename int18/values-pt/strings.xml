@@ -1,11 +1,3 @@
-THIS TRANSLATION IS TOO INCOMPLETE
-In order to bring it back in the app you need to:
-  [1] translate all the untranslated strings
-  [2] copy the missing strings from the English strings.xml file and translate them
-  [3] send an email informing that the translation is ready for inclusion
-Translation with more than 20 lint errors are not accepted.
-Translation with more than 70 lint errors are dropped from the app.
-
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- TODO TODO TODO
@@ -429,7 +421,7 @@ Com o Android R o Topodroid deve por seu diretório dentro de "Android/data". O 
     <string name="menu_zoom_fit">ZOOM GERAL</string>
 
     <!-- FIXED_ZOOM -->
-    <string name="zoom_fixed">Papel milimetrado</string -->
+    <string name="zoom_fixed">Papel milimetrado</string>
 
     <string name="start_scan">Começar varredura</string>
     <string name="stop_scan">Parar varredura</string>
@@ -1152,7 +1144,7 @@ Com o Android R o Topodroid deve por seu diretório dentro de "Android/data". O 
     <string name="title_settings_geek_plot">Configurações Geek: croquis</string>
     <string name="title_settings_geek_line">Configurações Geek: linhas</string>
     <string name="title_settings_geek_device">Configurações Geek: dispositivos</string>
-    <string name="title_settings_geek_import">Configurações Geek: importação</string -->
+    <string name="title_settings_geek_import">Configurações Geek: importação</string>
     <string name="title_settings_log">Configurações log</string>
 
     <string name="title_shift">Deslocar</string>
@@ -1253,8 +1245,7 @@ Com o Android R o Topodroid deve por seu diretório dentro de "Android/data". O 
   <string name="pref_leg_shots_title">Mínimo medidas por visada</string>
   <string name="pref_leg_shots_summary">Quantidade mínima de medidas para uma visada</string>
   <string name="pref_recent_timeout_title">Prazo "dados recentes"</string>
-  <string name="pref_recent_timeout_summary">Limite de tempo para dados ser considerado recente</string>
-  <CHECK PREVIOUS string name="pref_recent_timeout_summary">Limite de tempo após o qual os dados não são mais considerados recentes [s]</string>
+  <string name="pref_recent_timeout_summary">Limite de tempo após o qual os dados não são mais considerados recentes [s]</string>
   <string name="pref_triple_shot_title">Som visada</string>
   <string name="pref_triple_shot_summary">Aviso sonoro reconhecimento de visada</string>
   <string name="pref_connect_feedback_title">Feedback conexão</string>
@@ -1741,7 +1732,7 @@ Com o Android R o Topodroid deve por seu diretório dentro de "Android/data". O 
     <string name="no_editor">Editor não encontrado</string>
     <string name="no_file">Arquivo não encontrado</string>
     <string name="no_path">Caminho para arquivo inexistente</string>
-    <string name="no_equate">Nenhum \'equate'\</string>
+    <string name="no_equate">Nenhum \'equate\'</string>
     <string name="no_surveys">Nenhuma topo</string>
     <string name="no_tdconfig">Arquivo TdConfig inexistente</string>
     <string name="no_th_file">Nenhum arquivo Therion</string>
@@ -1766,7 +1757,7 @@ Com o Android R o Topodroid deve por seu diretório dentro de "Android/data". O 
     <string name="title_export">Exportar projeto como &#8230;</string>
     <string name="title_equates">\'Equates\' do projeto</string>
     <string name="title_equate_new">Incluir \'equate\' &#8230;</string>
-    <string name="title_equate_with">\'Equate\'' %1$s e %2$s</string>
+    <string name="title_equate_with">\'Equate\' %1$s e %2$s</string>
     <!-- UNUSED string name="title_cwd">Current Work Directory</string -->
     <string name="title_drop">Excluir topos?</string>
     <string name="title_tdconfig">Insira nome do projeto</string>
@@ -1800,7 +1791,7 @@ Com o Android R o Topodroid deve por seu diretório dentro de "Android/data". O 
     <string name="info_axes">Eixos: azul Norte, verde Leste</string>
     <string name="info_grid">Grade quadro [m]</string>
     <string name="info_view">Ponto de vista</string>
-    <string name="info_surveys">Topos</string>
+    <string name="info_survey">Topos</string>
     <string name="info_shot">Visadas</string>
     <string name="info_station">Bases</string>
     <string name="info_length">Comprimento</string>
@@ -1932,7 +1923,7 @@ Com o Android R o Topodroid deve por seu diretório dentro de "Android/data". O 
     <string name="fail_hull">Falha nas paredes dos planos simples</string>
 
     <string name="no_database">Nenhum banco de dados\n</string>
-    <string name="no_survey">Topo %1$s não localizada\n</string>
+    <!-- ALREADY DEFINED string name="no_survey">Topo %1$s não localizada\n</string -->
     <!-- UNUSED string name="cno_file">No file %1$s\n</string -->
     <string name="empty_survey">Topo %1$s vazia\n</string>
 
