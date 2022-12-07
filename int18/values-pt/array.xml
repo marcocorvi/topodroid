@@ -14,11 +14,11 @@
      <item name="view">visão</item>
   </string-array>
 
-  <!-- TODO string-array name="splayColors">
-     <item name="none">none</item>
-     <item name="all">all</item>
-     <item name="palette">palette</item>
-  </string-arrayi -->
+  <string-array name="splayColors">
+     <item name="none">nenhuma</item>
+     <item name="all">todas</item>
+     <item name="palette">paleta</item>
+  </string-array>
 
   <string-array name="feedbackMode">
      <item name="none">nenhum</item>
@@ -52,11 +52,12 @@
      <item name="ten_cm">10 cm</item>
   </string-array>
 
-  <!-- TODO string-array name="unitMeasure">
-     <item name="grid_cell">grid cell</item>
-     <item name="meter">meter</item>
-     <item name="tf">feet</item>
-  </string-array -->
+  <string-array name="unitMeasure">
+     <item name="grid_cell">célula da grade</item>
+     <item name="meter">metros</item>
+     <item name="tf">pés</item>
+  </string-array>
+
   <string-array name="loopClosure">
      <item name="none">Nenhuma</item>
      <item name="normal">Normal</item>
@@ -272,15 +273,15 @@
 
   <!-- 3D VIEWER array strings -->
 
-  <!-- TODO string-array name="demReduce">
-     <item name="shrink">Subsample</item>
-     <item name="cut">Clip</item>
-  </string-array -->
+  <string-array name="demReduce">
+     <item name="shrink">Subamostragem</item>
+     <item name="cut">Cortar</item>
+  </string-array>
 
-  <!-- TODO string-array name="splayUse">
-     <item name="skip">Skip</item>
+  <string-array name="splayUse">
+     <item name="skip">Pular</item>
      <item name="normal">Normal</item>
-     <item name="xsection">X-Section</item>
-  </string-array -->
+     <item name="xsection">Seção X</item>
+  </string-array>
 
 </resources>
