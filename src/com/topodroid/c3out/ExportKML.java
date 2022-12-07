@@ -270,6 +270,7 @@ public class ExportKML
           pw.format(Locale.US, "             %f,%f,%.3f\n", e1,n1,z1);
           pw.format(Locale.US, "             %f,%f,%.3f\n", e2,n2,z2);
           pw.format(Locale.US, "             %f,%f,%.3f\n", e3,n3,z3);
+          pw.format(Locale.US, "             %f,%f,%.3f\n", e1,n1,z1); // repeat first point
           pw.format(Locale.US, "      </coordinates> </LinearRing> </outerBoundaryIs>\n");
           pw.format(Locale.US, "    </Polygon>\n");
           pw.format(Locale.US, "    <LineString> <coordinates>\n");
@@ -284,8 +285,12 @@ public class ExportKML
         }
         if ( mTriangles != null ) {
           for ( Triangle3D t : mTriangles ) {
+            double e0 = lng + (t.vertex[t.size-1].x - zero.x) * e_radius;
+            double n0 = lat + (t.vertex[t.size-1].y - zero.y) * s_radius;
+            double z0 = h_geo + (t.vertex[t.size-1].z - zero.z);
             pw.format(Locale.US, "    <Polygon>\n");
             pw.format(Locale.US, "      <outerBoundaryIs> <LinearRing> <coordinates>\n");
+            pw.format(Locale.US, "             %f,%f,%.3f\n", e0,n0,z0); // last point
             for ( int k = 0; k < t.size; ++k ) {
               double e1 = lng + (t.vertex[k].x - zero.x) * e_radius;
               double n1 = lat + (t.vertex[k].y - zero.y) * s_radius;
@@ -294,10 +299,7 @@ public class ExportKML
             }
             pw.format(Locale.US, "      </coordinates> </LinearRing> </outerBoundaryIs>\n");
             pw.format(Locale.US, "    </Polygon>\n");
-            double e0 = lng + (t.vertex[t.size-1].x - zero.x) * e_radius;
-            double n0 = lat + (t.vertex[t.size-1].y - zero.y) * s_radius;
-            double z0 = h_geo + (t.vertex[t.size-1].z - zero.z);
-            for ( int k = 0; k < t.size; ++k ) {
+            for ( int k = 0; k < t.size; ++k ) { // border (e0,n0,z0) set at last point
               double e1 = lng + (t.vertex[k].x - zero.x) * e_radius;
               double n1 = lat + (t.vertex[k].y - zero.y) * s_radius;
               double z1 = h_geo + (t.vertex[k].z - zero.z);
