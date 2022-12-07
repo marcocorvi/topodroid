@@ -1845,7 +1845,6 @@
    <!-- UNUSED string name="firmware_file_dump_fail">Не удалось выполнить дамп прошивки</string -->
    <string name="firmware_file_upload_fail">Ошибка загрузки прошивки</string>
    <string name="firmware_file_download_fail">Неудачная загрузка прошивки</string>
-   <string name="firmware_file_download_fail">Неудачная загрузка прошивки</string>
    <string name="firmware_not_supported">Устройство не поддерживает функции данной прошивки</string>
    <string name="firmware_uploaded">%1$s прошивка: загружено %2$d</string>
    <string name="firmware_downloaded">%1$s прошивка: выгружена %2$d</string>

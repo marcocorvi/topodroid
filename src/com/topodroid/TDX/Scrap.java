@@ -919,8 +919,14 @@ public class Scrap
           if ( group.equals( BrushManager.getLineGroup( line.mLineType ) ) )
           {
             if ( line.mFirst.distance( lp ) < delta || line.mLast.distance( lp ) < delta ) {
-              if ( ret != null ) return null; // ambiguity
+              if ( ret != null ) {
+                // TDLog.v("get line to continue: check " + line.toDebugString() + " ambiguous with " + ret.toDebugString() );
+                return null; // ambiguity
+              }
+              // TDLog.v("get line to continue: check " + line.toDebugString() + " OK" );
               ret = line;
+            // } else {
+            //   // TDLog.v("get line to continue: check " + line.toDebugString() + " no" );
             }
           }
         }
@@ -931,11 +937,18 @@ public class Scrap
     return ret;
   }
         
-  /** @return true if the line has been modified
+  /** modify a portion of a line with another one
    * @param line  line to modify
    * @param line2 modification
    * @param zoom  current zoom
    * @param size  selection size
+   * @return true if the line has been modified
+   * 
+   * search the first point on the line that is close to the start-point of line2
+   * if there is one
+   *   find the last point on the line (after the found first-point) that is close to the end-point of line2
+   *   replace the portion of line between the found first-point and last-point with the points of line2
+   *
    */
   boolean modifyLine( DrawingLinePath line, DrawingLinePath line2, float zoom, float size )
   {
@@ -949,7 +962,6 @@ public class Scrap
       return false;
     }
     float delta = size / zoom;
-    // TDLog.v( "modify line: delta " + delta );
     LinePoint first = line2.mFirst;
     LinePoint last  = line2.mLast;
     for ( ; lp1 != null; lp1 = lp1.mNext ) {
@@ -977,6 +989,7 @@ public class Scrap
         }
         synchronized( TDPath.mCommandsLock ) {
           // line.replacePortion( lp1, lp2, line2 );
+          // TDLog.v( "modify line: " + line.toDebugString() + " with " + line2.toDebugString() + " replace from " + first.toDebugString() + " to " + last.toDebugString() );
           lp1.mNext = first.mNext;
           first.mPrev = lp1;
           last.mNext = lp2;

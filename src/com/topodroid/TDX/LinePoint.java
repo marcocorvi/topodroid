@@ -336,4 +336,9 @@ public class LinePoint extends Point2D
     // pw.format( Locale.US, "%f %f %f\n", vv.x, -vv.y, -vv.z );
     pw.format( Locale.US, "%f %f %f\n", vv.x, vv.y, -vv.z );
   }
+
+  /** @return debug string (x,y)
+   */
+  String toDebugString() { return String.format(Locale.US, "<%.0f %.0f>", x, y ); }
+
 }
