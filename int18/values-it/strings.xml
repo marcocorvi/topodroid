@@ -153,10 +153,10 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="calib_ave_std">Accuratezza: %1$.4f %2$.4f &#xb0;</string>
     <string name="calib_precision">Precisione</string>
     <string name="calib_iter">Iterazioni: %1$d</string>
-    <!-- TODO string name="calib_dip">Magn. dip: %1$.1f</string -->
+    <string name="calib_dip">Dip Magnetica: %1$.1f</string>
     <string name="calib_reset">Resetta calibrazione sul DistoX?</string>
-    <!-- TODO string name="calib_min_error">Minimum error</string -->
-    <!-- TODO string name="magn_dip">Magn. dip &#8230;</string -->
+    <string name="calib_min_error">Minimo errore</string>
+    <string name="magn_dip">Dip Magnetica &#8230;</string>
 
     <string name="algorithm">Algoritmo:</string>
     <string name="auto">auto</string>
@@ -269,20 +269,20 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="longitude">Long. </string>
     <!-- UNUSED string name="h_ellipsoid_hint">H ellissoide [metri]</string -->
     <string name="h_geoid_hint">H geoide [metri]</string>
-    <!-- TODO string name="accuracy_hint">Accuracy [m]</string -->
+    <string name="accuracy_hint">Precisione [m]</string>
     <string name="latitude_hint">Lat. gg:mm:ss.sss</string>
     <string name="longitude_hint">Long. gg:mm:ss.sss</string>
     <string name="loop_closure_errors">Errori chiusura anelli</string>
     <string name="loop_none">Nessun anello</string>
-    <!-- TODO string name="loops_bad">Inaccurate loops: %1$d</string -->
+    <string name="loops_bad">Ciclo impreciso: %1$d</string>
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
 
-    <!-- TODO string name="error_m">Accuracy [m]</string -->
-    <!-- TODO string name="fmt_error_h">Accuracy: %1$.1f m</string -->
-    <!-- TODO string name="fmt_error_m">Accuracy: H %1$.1f V %2$.1f m</string -->
+    <string name="error_m">Precisione [m]</string>
+    <string name="fmt_error_h">Precisione: %1$.1f m</string>
+    <string name="fmt_error_m">Precisione: H %1$.1f V %2$.1f m</string>
     <string name="fmt_h_geoid">Errore %1$.0f m</string>
     <!-- UNUSED string name="fmt_h_ellipsoid">Errore %1$.0f m</string -->
-    <!-- TODO string name="location_start_fine">Starting fine location</string -->
+    <string name="location_start_fine">Inizio affinamento posizione</string>
     <!-- UNUSED string name="depth_error">ATTENZIONE. Errore nella profondita\' dei dati</string -->
 
     <string name="error_azimuth_required">Azimuth mancante</string>
@@ -305,7 +305,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="error_name_invalid">Nome progetto non valido</string>
     <string name="error_name_required">Nome mancante</string>
     <!-- UNUSED string name="error_text_required">Text required</string -->
-    <!-- TODO string name="error_station_number">Wrong number of stations</string -->
+    <string name="error_station_number">Numero caposaldo errato</string>
     <string name="error_name_duplicate">Nome duplicato</string>
     <string name="error_no_section_in_section">No X-section in X-section</string>
     <string name="error_team_required">Nomi rilevatori mancanti</string>
@@ -315,7 +315,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="error_start_required">Caposaldo di riferimento mancante</string>
     <!-- UNUSED string name="error_station_already_fixed">Caposaldo già con coordinate</string -->
     <string name="error_station_required">Caposaldo mancante</string>
-    <!-- TODO string name="error_station_fixed">Georefenced station</string -->
+    <string name="error_station_fixed">Caposaldo georeferenziato</string>
     <string name="error_station_non_existing">Caposaldo inesistente</string>
     <string name="error_sensor_required">Sensore mancante</string>
     <string name="error_value_required">Valore mancante</string>
@@ -392,7 +392,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="no_proj4">Proj4 non installato</string>
     <string name="no_sensors">Rilievo senza misurazioni</string>
     <!-- UNUSED string name="no_shots">Rilievo senza dati</string -->
-    <!-- TODO string name="no_search_result">No search_result.</string -->
+    <string name="no_search_result">Trovato nulla</string>
     <string name="no_survey">Rilievo non selezionato</string>
     <string name="no_symbols">Nessuna palette di strumenti</string>
     <!-- UNUSED string name="no_thmanager">ThManager non installato</string -->
@@ -669,7 +669,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="zoom_in_out">Zoom in/out</string -->
 
     <string name="survey_info">Info rilievo</string>
-    <!-- TODO string name="stat_devices">Devices %1$d: %2$s</string -->
+    <string name="stat_devices">Dispositivo %1$d: %2$s</string>
     <string name="stat_stddev_m">M stddev %1$.1f %%</string>
     <string name="stat_stddev_g">G stddev %1$.1f %%</string>
     <string name="stat_stddev_dip">Dip stddev %1$.1f &#xb0; (media %2$.1f &#xb0;)</string>
@@ -687,7 +687,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="stat_shot">Tiri  %1$d,   Doppi %2$d,   Superficie %3$d</string -->
     <string name="stat_splay">Splay %1$d # %2$d</string>
     <string name="stat_station">Capisaldi %1$d # %2$d</string>
-    <!-- TODO string name="stat_leg_sigma">Leg sigma %1$.1f cm</string -->
+    <string name="stat_leg_sigma">Sigma tiro %1$.1f cm</string>
     <string name="stat_dangling">Tiri scollegati %1$d %2$.1f %3$s</string>
     <string name="stat_surface">Tiri di superficie %1$d # %2$d %3$.1f %4$s</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string>
@@ -702,7 +702,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="survey_stat_surface">Tiri di superficie %1$d %2$.1f %3$s</string>
 
     <string name="hide_blank">Dati bianchi</string>
-    <string name="hide_leg">Batture ripetute</string>
+    <string name="hide_leg">Battute ripetute</string>
     <string name="hide_ids">ID misure</string>
     <string name="hide_splay">Misure laterali</string>
 
@@ -801,9 +801,9 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="button_clear_memory">Pulisci memoria</string>
     <string name="button_save"      >Salva     </string>
     <!-- UNUSED string name="button_select"    >Seleziona </string -->
-    <!-- TODO string name="button_leg_station">Leg stations</string -->
-    <!-- TODO string name="button_all_station">All stations</string -->
-    <!-- TODO string name="button_leg_search">Leg search</string -->
+    <string name="button_leg_station">Battute</string>
+    <string name="button_all_station">Tutti i capisaldi</string>
+    <string name="button_leg_search">Ricerca battuta</string>
     <string name="button_search"    >Cerca     </string>
     <string name="button_merge"     >Unisci    </string>
     <string name="button_saved"     >Caposaldo salvato</string>
@@ -814,7 +814,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Upload   </string>
-    <!-- TODO string name="button_download"  >Download</string -->
+    <string name="button_download"  >Scarica</string>
     <string name="button_view"      >Visualizza      </string>
     <!-- UNUSED string name="button_zoomfit"   >Adatta zoom</string -->
     <!-- UNUSED string name="button_landscape" >Panorama  </string -->
@@ -994,7 +994,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="help_remote">Coltrollo DistoX remoto</string>
     <string name="help_add_shot">Aggiungi un tiro manualmente</string>
     <string name="help_info_shot">Statistiche del rilievo</string>
-    <!-- TODO string name="help_gps_surveys">Surveys informations</string -->
+    <string name="help_gps_surveys">Info rilievo</string>
     <string name="help_survey_info">Dati generali del rilievo</string>
     <string name="help_undelete">Recupera oggetti eliminati</string>
     <string name="help_photo">Foto</string>
@@ -1077,7 +1077,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="help_equates">Lista rilievi simili</string>
 
     <!-- UNUSED string name="export_bgcolor">Colore di sfondo</string -->
-    <!-- TODO string name="export_bothviews">Plan and profile</string -->
+    <string name="export_bothviews">Pianta e sezione</string>
     <string name="export_config">Comandi di configurazione</string>
     <string name="export_csv_rawdata">Dati grezzi</string>
     <string name="export_dxf_blocks">Blocchi DXF</string>
@@ -1250,7 +1250,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="title_import_shot">Importa rilievo</string>
     <string name="title_import_gps">Importa punto GPS</string>
     <string name="title_import_th2">File Therion th2</string>
-    <!-- TODO string name="title_infos">Surveys info</string -->
+    <string name="title_infos">Info rilievi</string>
     <string name="title_graph_paper">Carta milimetrata in scala 1:100</string>
     <string name="graph_paper_scale">Regola la linea a 5 cm</string>
 
@@ -1267,8 +1267,8 @@ Fai riferimento alle pagine web per i dettagli.\n
   <string name="pref_export_shots_summary">Formato export dati di default</string>
   <string name="pref_auto_plot_export_title">Formato export schizzi automatico</string>
   <string name="pref_auto_plot_export_summary">Formato di export automatico di schizzi</string>
-  <!-- TODO string name="pref_lrud_count_title">LRUD splay count</string -->
-  <!-- TODO string name="pref_lrud_count_summary">Number of splays used for LRUD</string -->
+  <string name="pref_lrud_count_title">Conto LRUD splay</string>
+  <string name="pref_lrud_count_summary">Numero splay usati per LRUD</string>
 
   <string name="pref_cat_survey">OPZIONI RILIEVO</string>
   <string name="pref_cat_splay">DATI SPLAY</string>
@@ -1442,12 +1442,12 @@ Fai riferimento alle pagine web per i dettagli.\n
   <string name="pref_firmware_sanity_summary">Effettua verifiche sanita\' firmware</string>
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">Nome CRS, come in Proj4</string>
-  <!-- TODO string name="pref_neg_altitude_title">Neg. altitudes</string -->
-  <!-- TODO string name="pref_neg_altitude_summary">Allow negative altitudes</string -->
-  <!-- TODO string name="pref_fine_location_title">Fine location [s]</string -->
-  <!-- TODO string name="pref_fine_location_summary">Fine location time [s]</string -->
-  <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
-  <!-- UNUSED string name="pref_gps_averaging_summary">Se usare GPSAveraging</string -->
+  <string name="pref_neg_altitude_title">Altitudini negative</string>
+  <string name="pref_neg_altitude_summary">Consenti altitudini negative</string>
+  <string name="pref_fine_location_title">Posizionamento preciso [s]</string>
+  <string name="pref_fine_location_summary">Tempo di posizionamento preciso [s]</string>
+  <!-- UNUSED string name="pref_gps_averaging_title">Media GPS</string -->
+  <!-- UNUSED string name="pref_gps_averaging_summary">Usare media GPS</string -->
   <string name="pref_bric_mode_title">Modo BRIC</string>
   <string name="pref_bric_mode_summary">Modo BRIC operativo</string>
   <string name="pref_bric_zero_length_title">Tiro zero BRIC</string>
@@ -1670,8 +1670,8 @@ Fai riferimento alle pagine web per i dettagli.\n
   <string name="pref_full_affine_summary">Abilita trasformazione affine dei disegni</string>
   <string name="pref_loopClosure_title">Chiusura anelli</string>
   <string name="pref_loopClosure_summary">Compensazione errore nella chiusura anelli</string>
-  <!-- TODO string name="pref_loop_thr_title">Loop threshold</string -->
-  <!-- TODO string name="pref_loop_thr_summary">Loop compensation threshold</string -->
+  <string name="pref_loop_thr_title">Soglia ciclo</string>
+  <string name="pref_loop_thr_summary">Soglia di compensazione ciclo</string>
   <!-- UNUSED string name="pref_splayExtend_title">Stima extend per splay</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Stima del extend degli splay</string -->
   <string name="pref_swapLR_title">Scambia LR in Compass</string>
@@ -1834,19 +1834,19 @@ Fai riferimento alle pagine web per i dettagli.\n
    <string name="firmware_file_missing">File firmware mancante</string>
    <!-- UNUSED string name="ask_dump">Salva firmware?</string -->
    <string name="ask_upload">Carica firmware?</string>
-   <!-- TODO string name="ask_download">Download firmware? (be patient)</string -->
+   <string name="ask_download">Download firmware? (sii paziente)</string>
    <string name="ask_upload_not_compatible">Il file non sembra corretto.\nCaricare ugualmente?</string>
    <string name="firmware_upload_no_sign">Errore nella verifica dell\'HW del DistoX</string>
    <string name="firmware_upload_bad_sign">HW del DistoX incompatibile</string>
    <!-- UNUSED string name="firmware_file_dumped">iSalvato file %1$s - %2$d B</string -->
    <string name="firmware_file_uploaded">Caricato firmware %1$s scritti %2$d / %3$d B</string>
-   <!-- TODO string name="firmware_file_downloaded">Downloaded firmware file %1$s read %2$d</string -->
+   <string name="firmware_file_downloaded">File firmware scaricato %1$s letti %2$d</string>
    <!-- UNUSED string name="firmware_file_dump_fail">Errore nello scarico del firmware</string -->
    <string name="firmware_file_upload_fail">Errore caricamento firmware</string>
-   <!-- TODO string name="firmware_file_download_fail">Failed firmware download</string -->
+   <string name="firmware_file_download_fail">Scarico firmware fallito</string>
    <string name="firmware_not_supported">Dispositivo senza funzioni firmware</string>
-   <!-- TODO string name="firmware_uploaded">%1$s firmware: uploaded %2$d</string -->
-   <!-- TODO string name="firmware_downloaded">%1$s firmware: downloaded %2$d</string -->
+   <string name="firmware_uploaded">%1$s firmware: inviati %2$d</string>
+   <string name="firmware_downloaded">%1$s firmware: scaricati %2$d</string>
 
     <string name="project">Progetto %1$s</string>
     <string name="no_editor">Editor non trovato</string>
@@ -1933,9 +1933,9 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="info_east">Est</string>
     <string name="info_north">Nord</string>
     <string name="info_z">Altitudine</string>
-    <!-- TODO string name="info_origin">Origin</string -->
-    <!-- TODO string name="info_lonlat">coords.</string -->
-    <!-- TODO string name="info_radii">radii</string -->
+    <string name="info_origin">origine</string>
+    <string name="info_lonlat">coord.</string>
+    <string name="info_radii">raggi</string>
     <string name="info_grid_value">%1$.0f m</string>
     <string name="info_view_value">A. %1$.0f C. %2$.0f</string>
     <string name="info_survey_value">%1$d</string>
@@ -1948,11 +1948,11 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="info_east_value">W %1$.1f E %2$.1f</string>
     <string name="info_north_value">S %1$.1f N %2$.1f</string>
     <string name="info_z_value">%1$.1f  %2$.1f</string>
-    <!-- TODO string name="info_origin_value">x %1$.0f y %2$.0f z %3$.0f</string -->
-    <!-- TODO string name="info_origin_none">undefined</string -->
-    <!-- TODO string name="info_lonlat_geovalue">lon %1$.7f lat %2$.7f</string -->
-    <!-- TODO string name="info_lonlat_prjvalue">lon %1$.1f lat %2$.1f</string -->
-    <!-- TODO string name="info_radii_value">EW %1$.1f NS %2$.1f</string -->
+    <string name="info_origin_value">X:%1$.0f Y:%2$.0f Z:%3$.0f</string>
+    <string name="info_origin_none">indefinito</string>
+    <string name="info_lonlat_geovalue">Lon:%1$.7f Lat:%2$.7f</string>
+    <string name="info_lonlat_prjvalue">Lon:%1$.1f Lat:%2$.1f</string>
+    <string name="info_radii_value">E-W:%1$.1f N-S:%2$.1f</string>
 
     <string name="legs_surface">Esterno</string>
     <string name="legs_duplicate">Doppio</string>
@@ -2094,7 +2094,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="warning_not_stl">Attenzione: file %1$s non STL</string -->
     <string name="warning_no_cwd">Attenzione: folder di base non esistente</string>
     <string name="warning_no_parent">Attenzione: non possibile salire di folder</string>
-    <!-- TODO string name="warning_nogrant_camera">Camera permission has not been granted</string -->
+    <string name="warning_nogrant_camera">Permesso utilizzo fotocamera non concesso</string>
     <string name="no_permissions">L\'app non puó funzionare senza i permessi richiesti</string>
 
     <!-- UNUSED string name="done_fractals">Dimensione frattale calcolata</string -->
