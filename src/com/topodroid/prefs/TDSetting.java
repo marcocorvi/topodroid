@@ -358,7 +358,7 @@ public class TDSetting
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // SHOTS
   public static float mVThreshold = 80f;   // vertical threshold (LRUD)
-  public static float mHThreshold;         // horizontal plot threshold
+  public static float mHThreshold;         // horizontal xsection threshold (if |clino| < mHThreshold)
   // public static boolean mDataBackup = false; // whether to export data when shot-window is closed
   public static boolean mDistoXBackshot   = false;
   public static boolean mEditableStations = false;

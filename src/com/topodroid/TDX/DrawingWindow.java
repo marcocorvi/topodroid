@@ -5020,9 +5020,9 @@ public class DrawingWindow extends ItemDrawer
         return -10 * (int)((5-clino)/10);
       }
     } else {
-      if ( clino > 45 ) {
+      if ( clino > TDSetting.mHThreshold ) {
         return 90;
-      } else if ( clino < -45 ) {
+      } else if ( clino < -TDSetting.mHThreshold ) {
         return -90;
       } else {
         return 0;
