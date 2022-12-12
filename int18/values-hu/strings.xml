@@ -1468,7 +1468,7 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_plot_screen_title">VÁZLAT</string>
   <string name="pref_tool_line_title">VONALAK</string>
   <string name="pref_tool_point_title">PONTOK</string>
-  <string name="pref_location_title">HELYSZÍN</string>
+  <string name="pref_location_title">HELYMEGHATÁROZÁS</string>
   <string name="pref_accuracy_title">PONTOSSÁG</string>
   <string name="pref_shot_data_title">MÉRÉSI ADAT</string>
   <string name="pref_shot_units_title">MÉRTÉKEGYSÉGEK</string>
