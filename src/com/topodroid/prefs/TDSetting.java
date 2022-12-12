@@ -505,6 +505,7 @@ public class TDSetting
   // public static boolean mWithLayers  = true; // false;
   public static int mWithLevels = 0;  // 0: no, 1: by class, 2: by item
   public static int mGraphPaperScale = 0;  // correction subtracted to the system display density
+  public static boolean mSlantXSection = false; // whther to allow profile slanted xsections
 
   public static float mStationSize    = 20;   // size of station names [pt]
   public static float mLabelSize      = 24;   // size of labels [pt]
@@ -1190,7 +1191,8 @@ public class TDSetting
     mLegOnlyUpdate  = prefs.getBoolean( keyGPlot[ 6], bool(defGPlot[ 6]) ); // DISTOX_LEGONLY_UPDATE
     mFullAffine     = prefs.getBoolean( keyGPlot[ 7], bool(defGPlot[ 7]) ); // DISTOX_FULL_UPDATE
     mWithLevels     = tryInt( prefs,   keyGPlot[ 8],      defGPlot[ 8] );   // DISTOX_WITH_LEVELS
-    mGraphPaperScale = tryInt( prefs,   keyGPlot[ 9],      defGPlot[ 9] );   // DISTOX_GRAPH_PAPER_SCALE
+    mGraphPaperScale = tryInt( prefs,   keyGPlot[ 9],      defGPlot[ 9] );  // DISTOX_GRAPH_PAPER_SCALE
+    mSlantXSection  = prefs.getBoolean( keyGPlot[10], bool(defGPlot[10]) ); // DISTOX_SLANT_XSECTION
     // TDLog.v("SETTING load secondary GEEK plot done");
 
     String[] keyGPlotSplay = TDPrefKey.GEEKsplay;
@@ -1783,6 +1785,8 @@ public class TDSetting
       mWithLevels    = tryIntValue( hlp, k, v, def[ 8 ] );
     // } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_GRAPH_PAPER_SCALE - handled by a dialog
     //   mGraphPaperScale = tryIntValue( hlp, k, v, def[ 9 ] );
+    } else if ( k.equals( key[10 ] ) ) { // DISTOX_SLANT_XSECTION
+      mSlantXSection = tryBooleanValue( hlp, k, v, bool(def[10 ]) );
     } else {
       TDLog.Error("missing GEEK_PLOT key: " + k );
     }
@@ -2992,8 +2996,8 @@ public class TDSetting
       pw.printf(Locale.US, "ThumbSize %d, SavedStations %c, LegonlyUpdate %c, WithAzimuth %c, WithSensors %c, Bedding %c \n", // TdManager %c\n",
         mThumbSize, tf(mSavedStations), tf(mLegOnlyUpdate), tf(mWithAzimuth), tf(mWithSensors), tf(mBedding) ); // , tf(mWithTdManager) );
 
-      pw.printf(Locale.US, "Plot: zoom %d, drag %c, fix-origin %c, split %c, shift %c, levels %d, affine %c, stylus %d\n",
-        mZoomCtrl, tf(mSideDrag), tf(mFixedOrigin), tf(mPlotSplit), tf(mPlotShift), mWithLevels, tf(mFullAffine), mStylusSize );
+      pw.printf(Locale.US, "Plot: zoom %d, drag %c, fix-origin %c, split %c, shift %c, levels %d, affine %c, stylus %d, slant-xsection %c\n",
+        mZoomCtrl, tf(mSideDrag), tf(mFixedOrigin), tf(mPlotSplit), tf(mPlotShift), mWithLevels, tf(mFullAffine), mStylusSize, tf(mSlantXSection) );
       pw.printf(Locale.US, "Units: icon %.2f, line %.2f, grid %.2f, ruler %.2f\n", mUnitIcons, mUnitLines, mUnitGrid, mUnitMeasure );
       pw.printf(Locale.US, "Size: station %.1f, label %.1f, fixed %.1f line %.1f\n", mStationSize, mLabelSize, mFixedThickness, mLineThickness );
       pw.printf(Locale.US, "Select: radius %.2f, pointing %d, shift %d, dot %.1f, multiple %c \n",
@@ -3596,6 +3600,9 @@ public class TDSetting
             mWithLevels  = getInt( vals, 12, 0 );  setPreference( editor, "DISTOX_WITH_LEVELS",  mWithLevels );
             mFullAffine  = getBoolean( vals, 14 ); setPreference( editor, "DISTOX_FULL_AFFINE",  mFullAffine );
             setStylusSize( getInt( vals, 16, 0 ) ); setPreference( editor, "DISTOX_STYLUS_SIZE", mStylusSize );
+            if ( vals.length > 18 ) {
+              mSlantXSection = getBoolean( vals, 18 ); setPreference( editor, "DISTOX_SLANT_XSECTION", mSlantXSection );
+            }
           }
           continue;
         }

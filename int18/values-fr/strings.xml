@@ -1610,6 +1610,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_linecorner_summary">Seuil de détection d\'angle de courbe de Bézier</string>
     <string name="pref_graph_paper_scale_title">Échelle papier millimétré</string>
     <string name="pref_graph_paper_scale_summary">Ajustement de l\'échelle du papier millimétré</string>
+  <!-- TODO string name="pref_slant_xsection_title">Slant xsections</string -->
+  <!-- TODO string name="pref_slant_xsection_summary">Profile view slant xsections</string -->
     <string name="pref_weeddistance_title">Distance des points superflus</string>
     <string name="pref_weeddistance_summary">Distance maximale entre le segment et les points superflus [m]</string>
     <string name="pref_weedlength_title">Longueur maximale du segment de ligne</string>

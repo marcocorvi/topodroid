@@ -1486,6 +1486,7 @@ public class TDPrefKey
     "DISTOX_FULL_AFFINE",     // whether to do full affine transform or shift+scale only
     "DISTOX_WITH_LEVELS",     // 0 no, 1 by class, 2 by instance
     "DISTOX_GRAPH_PAPER_SCALE",
+    "DISTOX_SLANT_XSECTION",  // whether to allow slanted xsections in clino degrees 5 by 5
     null
   };
 
@@ -1503,6 +1504,7 @@ public class TDPrefKey
     R.string.pref_full_affine_title,
     R.string.pref_with_levels_title,
     R.string.pref_graph_paper_scale_title,
+    R.string.pref_slant_xsection_title,
     -1
   };
 
@@ -1520,6 +1522,7 @@ public class TDPrefKey
     R.string.pref_full_affine_summary,
     R.string.pref_with_levels_summary,
     R.string.pref_graph_paper_scale_summary,
+    R.string.pref_slant_xsection_summary,
     -1
   };
 
@@ -1537,6 +1540,7 @@ public class TDPrefKey
     FALSE,
     TDString.ZERO,
     TDString.ZERO,
+    FALSE,
     null
   };
 

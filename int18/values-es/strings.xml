@@ -1591,6 +1591,8 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_linecorner_summary">Detección del límite del ángulo de línea Bezier</string>
   <string name="pref_graph_paper_scale_title">Escala de papel cuadriculado</string>
   <string name="pref_graph_paper_scale_summary">Corrección de escala de papel cuadriculado</string>
+  <!-- TODO string name="pref_slant_xsection_title">Slant xsections</string -->
+  <!-- TODO string name="pref_slant_xsection_summary">Profile view slant xsections</string -->
   <string name="pref_weeddistance_title">Distancia del punto de desmalezado</string>
   <string name="pref_weeddistance_summary">Distancia máxima desde el segmento hasta los puntos de desmalezado [m]</string>
   <string name="pref_weedlength_title">Longitud del segmento de entramado puntual</string>
