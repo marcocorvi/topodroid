@@ -1595,8 +1595,8 @@
   <string name="pref_linecorner_summary">Порог чувствительности к углам в кривых Безье</string>
   <string name="pref_graph_paper_scale_title">Масштаб миллиметровки</string>
   <string name="pref_graph_paper_scale_summary">Регулировка масштаба миллиметровки</string>
-  <!-- TODO string name="pref_slant_xsection_title">Slant xsections</string -->
-  <!-- TODO string name="pref_slant_xsection_summary">Profile view slant xsections</string -->
+  <string name="pref_slant_xsection_title">Наклонные сечения</string>
+  <string name="pref_slant_xsection_summary">Наклонные поперечные сечения на разрезах</string>
   <string name="pref_weeddistance_title">Буфер сегмента прореживания точек</string>
   <string name="pref_weeddistance_summary">Макс. расстояние от сегмента до точек прореживания</string>
   <string name="pref_weedlength_title">Длина сегмента прореживания</string>
