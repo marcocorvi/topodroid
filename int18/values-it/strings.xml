@@ -308,6 +308,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="error_station_number">Numero caposaldo errato</string>
     <string name="error_name_duplicate">Nome duplicato</string>
     <string name="error_no_section_in_section">No X-section in X-section</string>
+    <!-- TODO string name="error_profile_slant_section">Slanted Xsection not enabled in profile view</string -->
     <string name="error_team_required">Nomi rilevatori mancanti</string>
 
     <!-- UNUSED string name="error_dir_exists">Directory già esistente</string -->

@@ -5008,7 +5008,7 @@ public class DrawingWindow extends ItemDrawer
     return true;
   }
 
-  /** @return the xsection clino
+  /** @return the xsection clino or more than 90 if error
    * @param clino input xsection clino
    */
   private float getXSectionClino( float clino )
@@ -5021,12 +5021,14 @@ public class DrawingWindow extends ItemDrawer
       }
     } else {
       if ( clino > TDSetting.mHThreshold ) {
-        return 90;
+        if ( clino > 80 ) return 90;
       } else if ( clino < -TDSetting.mHThreshold ) {
-        return -90;
+        if ( clino < -80 ) return -90;
       } else {
-        return 0;
+        if ( Math.abs(clino) < 10 ) return 0;
       }
+      TDToast.makeWarn( R.string.error_profile_slant_section );
+      return 999;
     }
   }
 
@@ -5102,7 +5104,8 @@ public class DrawingWindow extends ItemDrawer
             azimuth = (int) TDMath.add90(mPlot2.azimuth); //HBXx
             extend = -1;
           }
-          TDLog.v("single-leg x_section in projected profile: normal azimuth " + azimuth + " clino " + clino ); //HBXx
+          if ( clino > 91 ) return;
+          // TDLog.v("single-leg x_section in projected profile: normal azimuth " + azimuth + " clino " + clino ); //HBXx
         } else {
           int extend = 1;
           if (azimuth < 180) {
@@ -5112,6 +5115,7 @@ public class DrawingWindow extends ItemDrawer
             clino = getXSectionClino( azimuth - 270 );
             extend = -1;
           }
+          if ( clino > 91 ) return;
 
           float dc = TDMath.in360((extend == blk.getIntExtend()) ? clino - blk.mClino : 180 - clino - blk.mClino);
           if ( dc > 90 && dc <= 270 ) { // exchange FROM-TO
@@ -5151,6 +5155,7 @@ public class DrawingWindow extends ItemDrawer
               extend = -1;
               azimuth = (int) TDMath.add90(mPlot2.azimuth); //HBXx
             }
+            if ( clino > 91 ) return;
             // TDLog.v("multi-leg x_section in projected profile: normal azimuth " + azimuth + " clino " + clino ); //HBXx
 
             StringBuilder sb = new StringBuilder();

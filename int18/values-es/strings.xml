@@ -308,6 +308,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- TODO string name="error_station_number">Wrong number of stations</string -->
     <string name="error_name_duplicate">Nombre duplicado</string>
     <string name="error_no_section_in_section">No X-seccion en X-seccion</string>
+    <!-- TODO string name="error_profile_slant_section">Slanted Xsection not enabled in profile view</string -->
     <string name="error_team_required">Faltan nombres de detectores</string>
 
     <!-- UNUSED string name="error_dir_exists">El directorio ya existe</string -->

@@ -4,14 +4,10 @@
 X-sections are kind of special because they do not belong to the sketch but are independent sketches associated to either the plan or the profile.
 TopoDroid has two types of x-sections: <u>leg</u> x-sections and <u>station</u> x-sections. The former cross a leg, the latter are defined at a station.<br><p>
 
-A plan x-section is always in a vertical plane and the upward direction is the vertical.<br>
-A profile x-section is in a plane with the inclination defined by the section-line.
-The upward direction is the azimuth of the crossed leg.
-However, if the inclination of the x-section plane is above a "horizontal threshold", the section is considered "horizontal" and the
-upward direction is the magnetic North.<br><p>
+A plan-view x-section is always in a vertical plane and the upward direction is the vertical.<br>
+Profile-view x-sections can be either vertical or horizontal, or slanted if the appropriate setting is enabled [T].<br><p>
 
 You can assign a comment to an x-section.<br><p>
-
 
 <b>Leg x-sections</b><p>
 To tell TopoDroid that you want to draw a x-section you have to draw a "section" line, either in the plan view or in the profile view. The section line defines the position of the x-section and its orientation.<br><p>
@@ -25,8 +21,8 @@ In the second case you sketch the x-section on a canvas with the usual drawing t
 
 Leg x-sections can be re-opened and modified by selecting, in "edit" mode, the section line or the section point, and tapping the <i>edit</i> button.<br><p>
 
-<b>X-sections in the plan view</b><br>
-X-sections defined in the plan view are always "vertical" (zero inclination). Their orientation (ie, the azimuth of the x-section plane) is determined by the angle of the section line. Very often the section plane is perpendicular to the gallery, but can be at any needed angle. For example, a section line drawn from left to right(e.g. horizontal, angle 90&deg; from the vertical) has a direction of view to the magnetic North (up, azimuth 0). If drawn slightly downwards at an angle of 120, it will have a direction of view to an azimuth of 30&deg;.<br>
+<b>X-sections in plan view</b><br>
+X-sections defined in the plan view are always in a vertical plane (zero inclination). Their orientation (ie, the azimuth of the x-section plane) is determined by the angle of the section line. Very often the section plane is perpendicular to the gallery, but can be at any needed angle. For example, a section line drawn from left to right(e.g. horizontal, angle 90&deg; from the vertical) has a direction of view to the magnetic North (up, azimuth 0). If drawn slightly downwards at an angle of 120, it will have a direction of view to an azimuth of 30&deg;.<br>
 The crossed leg is displayed vertical when the x-section has the same azimuth as the leg. Otherwise it is tilted right or left.<br><p>
 
 In plan view it is possible to make a x-section that crosses multiple legs. All the crossed legs and the splays at their stations are shown as x-section sketch reference. The crossing point is marked on every leg.<br>
@@ -34,17 +30,25 @@ In plan view it is possible to make a x-section that crosses multiple legs. All 
 <img src="plan-xsection.png" >
 <br><p>
 
-<b>X-sections in the profile</b><br>
-X-sections in the profile view can be either "horizontal" (on vertical shots in pits) or "vertical" (on more or less horizontal galleries). They are considered "horizontal" if their inclination exceeds the value of the H-threshold setting.<br>
-The azimuth of vertical x-sections is determined by that of the crossed leg.<br><p>
+<b>X-sections in profile view</b><br>
+X-sections in the profile view can be either "horizontal" (on vertical shots in pits) or "vertical" (on more or less horizontal galleries).
 
-"Horizontal" x-sections are displayed always with the magnetic North up. Furthermore, a reference line 5 m long, oriented to the magnetic North, is added to them. The leg is shown at its azimuth<br>
-"Vertical" x-sections always have the azimuth of the crossed leg (or the opposite one if the direction of the section line is the opposite of that of the leg). The crossed leg is displayed vertical as the x-section has the same azimuth as the leg.<br><p>
+They are considered "horizontal" if the inclination
+of the leg exceeds the value of the H-threshold setting.<br><p>
 
+"Vertical" x-sections must be defined tracing an almost vertical section line.
+They always have the azimuth of the crossed leg (or the opposite one if the direction of the section line is the opposite of that of the leg). The crossed leg is displayed vertical as the x-section has the same azimuth as the leg.<br><p>
+
+"Horizontal" x-sections are defined tracing an almost horizontal section line.
 If the section line is traced from the right to left, the x-section is oriented downwards and has -90&deg; inclination. This is a "horizontal" x-section as seen from above. Most of the times you will want to draw "horizontal" x-sections this way, as it is more natural to lay a map on a surface and look down at it. If you trace the section line from left to right the x-section is oriented upwards (inclination +90&deg;).<br><p>
 
+Horizontal x-sections are displayed always with the magnetic North up. Furthermore, a reference line 5 m long, oriented to the magnetic North, is added to them. The leg is shown at its azimuth<br><p>
+
+If the "profile slant x-section" setting is enabled it is possible to define profile-view x-sections in planes at variable inclination (a multiple of 10&deg; close to the slope of the section line).<br><p>
+
 In extended profile view the leg x-section must cross a single leg.
-Multileg xsections are allowed in projected profile views. <br><p>
+Multileg xsections are allowed in projected profile views.
+For vertical x-sections the azimuth of the xsection plane is orthogonal to that of the profile view.<br><p>
  
 <img src="profile-xsection.png" >
 <br><p>

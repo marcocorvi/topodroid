@@ -310,6 +310,7 @@
     <string name="error_station_number">错误的站点数</string>
     <string name="error_name_duplicate">重复名称</string>
     <string name="error_no_section_in_section">X截面操作在X截面中不允许</string>
+    <!-- TODO string name="error_profile_slant_section">Slanted Xsection not enabled in profile view</string -->
     <string name="error_team_required">团队规则</string>
 
     <!-- UNUSED string name="error_dir_exists">目录已经存在</string -->

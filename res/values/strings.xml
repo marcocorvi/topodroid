@@ -317,6 +317,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="error_station_number">Wrong number of stations</string>
     <string name="error_name_duplicate">Duplicate name</string>
     <string name="error_no_section_in_section">Xsection in xsection not allowed</string>
+    <string name="error_profile_slant_section">Slanted Xsection not enabled in profile view</string>
     <string name="error_team_required">Team required</string>
 
     <!-- UNUSED string name="error_dir_exists">Directory already exists</string -->

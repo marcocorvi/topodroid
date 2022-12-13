@@ -317,6 +317,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="error_station_number">Nombre de stations incorrect</string>
     <string name="error_name_duplicate">Nom en doublon</string>
     <string name="error_no_section_in_section">Sections transverses dans section transverses non autorisé</string>
+    <!-- TODO string name="error_profile_slant_section">Slanted Xsection not enabled in profile view</string -->
     <string name="error_team_required">Équipe nécessaire</string>
     
     <!-- UNUSED string name="error_dir_exists">Le répertoire existe déjà</string -->
