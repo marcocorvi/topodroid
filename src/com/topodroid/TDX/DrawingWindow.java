@@ -5073,11 +5073,20 @@ public class DrawingWindow extends ItemDrawer
 
     currentLine.computeUnitNormal();
 
-    // orientation of the section-line
-    azimuth = TDMath.in360( 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG ) );
+    // orientation of the section-line:
+    // line_azimuth:
+    //              ^ 180
+    //     270 <----+-----> 90
+    //              v 0
+    // azimuth:
+    //              ^ 270
+    //       0 <----+-----> 180
+    //              v 90
+    float line_azimuth = TDMath.in360( (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG ) );
+    azimuth = TDMath.in360( 90 + line_azimuth );
     DBlock blk = null;
     Vector3D center = null; // centroid of the intersection
-    TDLog.v("do Section Line: section " + h_section + " projected " + h_section_projected + " legs " + nr_legs + " azimuth " + azimuth );
+    TDLog.v("do Section Line: section " + h_section + " projected " + h_section_projected + " legs " + nr_legs + " azimuth " + azimuth + " line " + line_azimuth );
 
     if ( nr_legs == 1 ) {
       DrawingPathIntersection pi = paths.get(0);
@@ -5095,30 +5104,25 @@ public class DrawingWindow extends ItemDrawer
       from = blk.mFrom;
       to   = blk.mTo;
       if ( h_section ) { // xsection in profile view
-        if ( h_section_projected ) { // HBXx
-          int extend = 1;
-          if ( azimuth < 180) {
-            clino = getXSectionClino( 90 - azimuth );
-            azimuth = (int) TDMath.sub90(mPlot2.azimuth); //HBXx
-            // extend = 1;
-          } else {
-            clino = getXSectionClino( azimuth - 270 );
-            azimuth = (int) TDMath.add90(mPlot2.azimuth); //HBXx
-            extend = -1;
-          }
-          if ( clino > 91 ) return;
-          // TDLog.v("single-leg x_section in projected profile: normal azimuth " + azimuth + " clino " + clino ); //HBXx
+        // clino:                  azimuth (for projected view)
+        //      -90    ^ 0   90                  ^
+        //       <-----+---->             <------+----->
+        //      -90    v 0   90        plot-90   v  plot+90
+        int extend = 1; // used only for extended profile
+        if ( azimuth < 180 ) {
+          clino = getXSectionClino( 90 - azimuth );
         } else {
-          int extend = 1;
-          if (azimuth < 180) {
-            clino = getXSectionClino( 90 - azimuth );
-            // extend = 1;
+          clino = getXSectionClino( azimuth - 270 );
+          extend = -1;
+        } 
+        if ( clino > 91 ) return;
+        if ( h_section_projected ) { // HBXx
+          if ( azimuth < 180) {
+            azimuth = (int) TDMath.add90(mPlot2.azimuth); //HBXx
           } else {
-            clino = getXSectionClino( azimuth - 270 );
-            extend = -1;
+            azimuth = (int) TDMath.sub90(mPlot2.azimuth); //HBXx
           }
-          if ( clino > 91 ) return;
-
+        } else {
           float dc = TDMath.in360((extend == blk.getIntExtend()) ? clino - blk.mClino : 180 - clino - blk.mClino);
           if ( dc > 90 && dc <= 270 ) { // exchange FROM-TO
             azimuth = TDMath.add180(blk.mBearing);
@@ -5132,6 +5136,7 @@ public class DrawingWindow extends ItemDrawer
           //   azimuth = TDMath.add180( blk.mBearing );
           // }
         } //HBXx
+        TDLog.v( "single-leg xsection clino " + clino + " azimuth " + azimuth ); 
       } else { // xsection in plan view ( clino = 0 )
         float da = TDMath.in360( azimuth - blk.mBearing );
         if ( da > 90 && da <= 270 ) { // exchange FROM-TO 
@@ -5147,18 +5152,22 @@ public class DrawingWindow extends ItemDrawer
             TDToast.makeWarn(R.string.too_many_leg_intersection);
             return;
           } else { // HBX xsection on projected profile
-            int extend = 1;
+            // clino:                  azimuth:
+            //      -90    ^ 0   90                  ^
+            //       <-----+---->             <------+----->
+            //      -90    v 0   90        plot-90   v  plot+90
             if ( azimuth < 180 ) {
               clino = getXSectionClino( 90 - azimuth );
-              // extend = 1;
-              azimuth = (int) TDMath.sub90(mPlot2.azimuth); //HBXx
             } else {
               clino = getXSectionClino( azimuth - 270 );
-              extend = -1;
-              azimuth = (int) TDMath.add90(mPlot2.azimuth); //HBXx
-            }
+            } 
             if ( clino > 91 ) return;
-            // TDLog.v("multi-leg x_section in projected profile: normal azimuth " + azimuth + " clino " + clino ); //HBXx
+            if ( azimuth < 180 ) {
+              azimuth = (int) TDMath.add90( mPlot2.azimuth ); // DOWN section-line
+            } else {
+              azimuth = (int) TDMath.sub90( mPlot2.azimuth ); // UP section-line
+            }
+            TDLog.v( "multi-leg xsection clino " + clino + " azimuth " + azimuth ); 
 
             StringBuilder sb = new StringBuilder();
 
