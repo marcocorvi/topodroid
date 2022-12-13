@@ -2763,7 +2763,6 @@ public class TDExporter
               ref_item = null; 
             }
 	    if ( TDSetting.mCompassSplays ) {
-              // Integer i = splay_station.get( to );
 	      int ii = nextSplayInt( splay_stations, to );
 	      printSplayToDat( pw, prefix, to, to + "ss" + ii, item, true ); // reverse
 	    }
@@ -2778,7 +2777,6 @@ public class TDExporter
               ref_item = null; 
             }
 	    if ( TDSetting.mCompassSplays ) {
-              // Integer i = splay_station.get( from );
 	      int ii = nextSplayInt( splay_stations, from );
 	      printSplayToDat( pw, prefix, from, from + "ss" + ii, item, false ); // not reverse
 	    }
@@ -3640,6 +3638,8 @@ public class TDExporter
     String uls = ( ul < 1.01f )? "Meters"  : "Feet"; // FIXME
     String uas = ( ua < 1.01f )? "Degrees" : "Grads";
 
+    HashMap<String, Integer > splay_stations = TDSetting.mCompassSplays ?  new HashMap<String, Integer >() : null;
+
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Walls " + file.getName() );
       // BufferedWriter bw = TDFile.getMSwriter( "srv", name + ".srv", "text/srv" );
@@ -3732,8 +3732,15 @@ public class TDExporter
             //   extend = item.getIntExtend();
             //   //  FIXME pw.format("    extend %s\n", therion_extend[1+extend] );
             // }
-            writeSrvStations( pw, "-", to, item.isCommented() );
-            pw.format(Locale.US, "%.2f\t%.1f\t%.1f", item.mLength*ul, item.mBearing*ua, item.mClino*ua );
+            if ( TDSetting.mCompassSplays ) {
+	      int ii = nextSplayInt( splay_stations, to );
+              writeSrvStations( pw, String.format("%s-%d", to, ii), to, item.isCommented() );
+              pw.format(Locale.US, "%.2f\t%.1f\t%.1f", item.mLength*ul, item.mBearing*ua, item.mClino*ua );
+            } else {
+              writeSrvStations( pw, "-", to, item.isCommented() );
+              float len = item.mLength*ul * TDMath.cosd( item.mClino ); // walls expects projected length
+              pw.format(Locale.US, "%.2f\t%.1f\t%.1f", len, item.mBearing*ua, item.mClino*ua );
+            }
             writeSrvComment( pw, item.mComment );
           }
         } else { // with FROM station
@@ -3755,8 +3762,15 @@ public class TDExporter
             //   extend = item.getIntExtend();
             //   // FIXME pw.format("    extend %s\n", therion_extend[1+extend] );
             // }
-            writeSrvStations( pw, from, "-", item.isCommented() );
-            pw.format(Locale.US, "%.2f\t%.1f\t%.1f", item.mLength*ul, item.mBearing*ua, item.mClino*ua );
+            if ( TDSetting.mCompassSplays ) {
+	      int ii = nextSplayInt( splay_stations, from );
+              writeSrvStations( pw, from, String.format("%s-%d", from, ii), item.isCommented() );
+              pw.format(Locale.US, "%.2f\t%.1f\t%.1f", item.mLength*ul, item.mBearing*ua, item.mClino*ua );
+            } else {
+              writeSrvStations( pw, from, "-", item.isCommented() );
+              float len = item.mLength*ul * TDMath.cosd( item.mClino ); // walls expects projected length
+              pw.format(Locale.US, "%.2f\t%.1f\t%.1f", len, item.mBearing*ua, item.mClino*ua );
+            }
             writeSrvComment( pw, item.mComment );
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {

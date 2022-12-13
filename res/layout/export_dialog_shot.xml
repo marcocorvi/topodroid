@@ -130,6 +130,20 @@
       />
   </LinearLayout>
 
+  <LinearLayout android:id="@+id/layout_walls"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    >
+    <CheckBox android:id="@+id/walls_splays"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_splays"
+      />
+  </LinearLayout>
+
   <LinearLayout android:id="@+id/layout_vtopo"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"

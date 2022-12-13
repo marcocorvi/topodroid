@@ -56,6 +56,7 @@ public class ExportDialogShot extends MyDialog
   private LinearLayout mLayoutCSurvey;
   private LinearLayout mLayoutSurvex;
   private LinearLayout mLayoutTherion;
+  private LinearLayout mLayoutWalls;
   private LinearLayout mLayoutVTopo;
   private LinearLayout mLayoutCsv;
   private LinearLayout mLayoutDxf;
@@ -98,6 +99,7 @@ public class ExportDialogShot extends MyDialog
     mLayoutCSurvey  = (LinearLayout) findViewById( R.id.layout_csurvey );
     mLayoutSurvex   = (LinearLayout) findViewById( R.id.layout_survex );
     mLayoutTherion  = (LinearLayout) findViewById( R.id.layout_therion );
+    mLayoutWalls    = (LinearLayout) findViewById( R.id.layout_walls );
     mLayoutVTopo    = (LinearLayout) findViewById( R.id.layout_vtopo );
     mLayoutCsv      = (LinearLayout) findViewById( R.id.layout_csv );
     mLayoutDxf      = (LinearLayout) findViewById( R.id.layout_dxf );
@@ -192,6 +194,7 @@ public class ExportDialogShot extends MyDialog
     mLayoutCSurvey.setVisibility( View.GONE );
     mLayoutSurvex.setVisibility( View.GONE );
     mLayoutTherion.setVisibility( View.GONE );
+    mLayoutWalls.setVisibility( View.GONE );
     mLayoutVTopo.setVisibility( View.GONE );
     mLayoutCsv.setVisibility( View.GONE );
     mLayoutDxf.setVisibility( View.GONE );
@@ -204,6 +207,7 @@ public class ExportDialogShot extends MyDialog
       case 7: mLayoutSurvex.setVisibility( View.VISIBLE ); break;
       case 8: mLayoutTherion.setVisibility( View.VISIBLE ); break;
       case 11: mLayoutVTopo.setVisibility( View.VISIBLE ); break;
+      case 12: mLayoutWalls.setVisibility( View.VISIBLE ); break;
       case 13: mLayoutWinkarst.setVisibility( View.VISIBLE ); break;
       case 14: mLayoutCsv.setVisibility( View.VISIBLE ); break;
       case 15: mLayoutDxf.setVisibility( View.VISIBLE ); break;
@@ -270,6 +274,11 @@ public class ExportDialogShot extends MyDialog
           setExportPrefix( ((EditText) findViewById( R.id.vtopo_suffix )).getText() );
         }
         break;
+      case 12: // Walls
+        {
+          TDSetting.mCompassSplays = ((CheckBox) findViewById( R.id.walls_splays )).isChecked();
+        }
+        break;
       case 13: // Winkarst
         {
           setExportPrefix( ((EditText) findViewById( R.id.winkarst_prefix )).getText() );
@@ -323,6 +332,8 @@ public class ExportDialogShot extends MyDialog
     ((CheckBox) findViewById( R.id.vtopo_trox )).setChecked( TDSetting.mVTopoTrox );
     ((CheckBox) findViewById( R.id.vtopo_splays )).setChecked( TDSetting.mVTopoSplays );
     ((CheckBox) findViewById( R.id.vtopo_lrud )).setChecked( TDSetting.mVTopoLrudAtFrom );
+
+    ((CheckBox) findViewById( R.id.walls_splays )).setChecked( TDSetting.mCompassSplays );
 
     ((CheckBox) findViewById( R.id.csv_rawdata )).setChecked( TDSetting.mCsvRaw );
 

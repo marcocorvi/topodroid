@@ -240,9 +240,10 @@ public class TDSetting
   public static boolean mTherionConfig = false; // whether to write survey.thconfig file
   public static boolean mTherionXvi    = false; // whether to add xvi image to th2
   public static boolean mCompassSplays = true;  // whether to add splays to Compass export
+                                                // whether to add splays to Walls export instead of projected dimensions
   public static boolean mVTopoSplays = true;    // whether to add splays to VisualTopo export
   public static boolean mVTopoLrudAtFrom = false; 
-  public static boolean mVTopoTrox = false; 
+  public static boolean mVTopoTrox   = false; 
 
   public static final float PDF_SCALE     = 141.73f; // =AI =1/72 in // was 145.56 approx.
   public static final float THERION_SCALE = 196.8503937f; // 200 * 39.3700787402 / 40;
