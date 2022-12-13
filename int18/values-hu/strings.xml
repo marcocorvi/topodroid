@@ -311,7 +311,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="error_station_number">Rossz pont számok</string>
     <string name="error_name_duplicate">Duplikált név</string>
     <string name="error_no_section_in_section">Metszetben metszet nem megengedett</string>
-    <!-- TODO string name="error_profile_slant_section">Slanted Xsection not enabled in profile view</string -->
+    <string name="error_profile_slant_section">Döntött ketesztmetszet nem engedélyezett oldalnézetben</string>
     <string name="error_team_required">Csapat szükséges</string>
 
 	
