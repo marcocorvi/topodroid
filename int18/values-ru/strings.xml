@@ -311,7 +311,7 @@
     <string name="error_station_number">Неверное кол-во пикетов</string>
     <string name="error_name_duplicate">Повторяющееся имя</string>
     <string name="error_no_section_in_section">Сечение внутри поперечного сечения недопустимо</string>
-    <!-- TODO string name="error_profile_slant_section">Slanted Xsection not enabled in profile view</string -->
+    <string name="error_profile_slant_section">Наклонные сечения не включены для разрезов</string>
     <string name="error_team_required">Нужно указать группу съёмки</string>
 
     <!-- UNUSED string name="error_dir_exists">Директория уже существует</string -->
