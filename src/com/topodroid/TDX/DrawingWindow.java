@@ -5044,6 +5044,8 @@ public class DrawingWindow extends ItemDrawer
     boolean h_section = PlotType.isProfile( mType );
     boolean h_section_projected = PlotType.isProjected( mType ); // HBXx
 
+    if ( h_section ) currentLine.clampOrientation( TDSetting.mSlantXSection ? 10 : 18 ); // either 18 or 30
+
     // NOTE here l1 is the end-point and l2 the start-point (not considering the tick)
     //         |
     //         L2 --------- L1

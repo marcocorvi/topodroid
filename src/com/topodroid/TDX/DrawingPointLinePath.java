@@ -917,5 +917,39 @@ public class DrawingPointLinePath extends DrawingPath
     return String.format(Locale.US, "<%.0f %.0f>-<%.0f %.0f>", mFirst.x, mFirst.y, mLast.x, mLast.y );
   }
 
+  /** rotate the line segment to have an orientation multiple of the given bin
+   * @param bin   angle range bin - must be even and divisor of 90
+   * @note used to clamp the section lines in prfile views to a set of fixed angles
+   */
+  void clampOrientation( float bin )
+  {
+    if ( mSize != 2 ) {
+      TDLog.v("clamp orientation nr. points " + mSize );
+      return;
+    }
+    float cx = (mFirst.x + mLast.x)/2;
+    float cy = (mFirst.y + mLast.y)/2;
+    float dx = (mLast.x - mFirst.x)/2;
+    float dy = (mLast.y - mFirst.y)/2;
+    
+    float a = TDMath.atan2d( dy, dx );
+    if ( a > 90 ) {
+      a = a - 180;
+    } else if ( a < -90 ) {
+      a = a + 180;
+    }
+    float ia = bin * (int)((bin/2 + TDMath.abs(a))/bin);
+    float da = ( (a < 0 )? -ia - a : ia - a ) * TDMath.DEG2RAD;
+    // rotate by da = ia-a
+    float ca = TDMath.cos( da );
+    float sa = TDMath.sin( da );
+    // TDLog.v("clamp a " + a + " ia " + ia + " da " + (da*TDMath.RAD2DEG) );
+    mLast.x  = cx + dx * ca - dy * sa;
+    mLast.y  = cy + dx * sa + dy * ca;
+    mFirst.x = cx - dx * ca + dy * sa;
+    mFirst.y = cy - dx * sa - dy * ca;
+    retracePath();
+  }
+
 }
 
