@@ -112,14 +112,14 @@ class TdmInfoAdapter extends ArrayAdapter< FixedInfo >
       tvName.setText( info.comment );
       if ( info != null ) { 
         tvStation.setText( info.name + ":" );
-        // tvWGS84.setText(  String.format(Locale.US, "%1$.8f %2$.8f (%3$.0f) %4$.0f", info.lat, info.lng, info.h_ell, info.h_geo ) );
-        tvWGS84.setText(  String.format(Locale.US, "%1$.8f %2$.8f %4$.0f", info.lat, info.lng, info.h_geo ) );
+        // tvWGS84.setText(  String.format(Locale.US, "%.8f %.8f (%.0f) %.0f", info.lat, info.lng, info.h_ell, info.h_geo ) );
+        tvWGS84.setText(  String.format(Locale.US, "%.8f %.8f %.0f", info.lat, info.lng, info.h_geo ) );
         if ( info.cs == null || info.cs.length() == 0 ) {
           llCS.setVisibility( View.GONE );
         } else {
           llCS.setVisibility( View.VISIBLE );
           tvCS.setText( info.cs + ":" );
-          tvCSdata.setText(  String.format(Locale.US, "%1$.0f %2$.0f %3$.0f", info.cs_lat, info.cs_lng, info.cs_h_geo ) );
+          tvCSdata.setText(  String.format(Locale.US, "%.0f %.0f %.0f", info.cs_lat, info.cs_lng, info.cs_h_geo ) );
         }
       }
 

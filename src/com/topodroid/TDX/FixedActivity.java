@@ -94,6 +94,7 @@ public class FixedActivity extends Activity
   // private Button mBtClose;
 
   private boolean hasGps = false;
+  private boolean hasMobileTopographer = false;
 
   private Button     mMenuImage;
   private ListView   mMenu;
@@ -104,7 +105,10 @@ public class FixedActivity extends Activity
   private static final int[] izons = {
                         R.drawable.iz_gps,
                         R.drawable.iz_plus,
-                        R.drawable.iz_import
+                        R.drawable.iz_import,
+                        R.drawable.iz_gps_no,
+                        0,
+                        R.drawable.iz_import_no,
                      };
   // private static final int menus[] = {
   //                    };
@@ -132,6 +136,7 @@ public class FixedActivity extends Activity
     mContext = this;
 
     hasGps = /* TDandroid.ABOVE_API_23 && */ TDandroid.checkLocation( mContext );
+    hasMobileTopographer = TDandroid.hasMobileTopographer( this );
     // Bundle extras = getIntent().getExtras();
     // if ( extras != null ) {
     // }
@@ -149,13 +154,17 @@ public class FixedActivity extends Activity
     /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     // MOBILE TOPOGRAPHER
-    mNrButton1 = 2;
-    if ( hasGps ) ++ mNrButton1;
+    mNrButton1 = 3;
+    // if ( hasGps ) ++ mNrButton1;
     mButton1 = new Button[ mNrButton1 + 1];
-    int kz = (hasGps)? 0 : 1; // index of izons
-    for ( int k=0; k<mNrButton1; ++k ) {
-      mButton1[k] = MyButton.getButton( mContext, this, izons[kz++] );
-    }
+    // int kz = 0; // (hasGps)? 0 : 1; // index of izons
+    // for ( int k=0; k<mNrButton1; ++k ) {
+    //   mButton1[k] = MyButton.getButton( mContext, this, izons[kz++] );
+    // }
+    mButton1[0] = MyButton.getButton( mContext, this, izons[ hasGps ? 0 : 3 ] );
+    mButton1[1] = MyButton.getButton( mContext, this, izons[ 1 ] );
+    mButton1[2] = MyButton.getButton( mContext, this, izons[ hasMobileTopographer ? 2 : 5 ] );
+
     mButton1[mNrButton1] = MyButton.getButton( mContext, null, R.drawable.iz_empty );
     mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
@@ -325,35 +334,42 @@ public class FixedActivity extends Activity
     // }
 
     int k = 0;
-    if ( hasGps && /* k < mNrButton1 && */ b == mButton1[k++] ) { // GPS
-      final LocationManager lm = (LocationManager)getSystemService( Context.LOCATION_SERVICE );
-      if ( lm != null ) {
-        if ( ! lm.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
-          TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.ask_gps_service ),
-            new DialogInterface.OnClickListener( ) { 
-              @Override public void onClick( DialogInterface dialog, int btn ) { 
-                startActivity( new Intent( android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS ) );
+    if ( /* k < mNrButton1 && */ b == mButton1[k++] ) { // GPS
+      if ( hasGps ) { 
+        final LocationManager lm = (LocationManager)getSystemService( Context.LOCATION_SERVICE );
+        if ( lm != null ) {
+          if ( ! lm.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+            TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.ask_gps_service ),
+              new DialogInterface.OnClickListener( ) { 
+                @Override public void onClick( DialogInterface dialog, int btn ) { 
+                  startActivity( new Intent( android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS ) );
+                }
               }
-            }
-          );
+            );
+          } else {
+            new FixedGpsDialog( mContext, this ).show();
+          }
         } else {
-          new FixedGpsDialog( mContext, this ).show();
+          TDLog.Error("No location manager" );
         }
       } else {
-        TDLog.Error("No location manager" );
+        // TODO
       }
     } else if ( /* k < mNrButton1 && */ b == mButton1[k++] ) { // ADD
       new FixedAddDialog( mContext, this ).show();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) { // IMPORT MOBILE TOPOGRAPHER
-      // get the file with MediaStore
-      selectImportFromProvider();
-
-      // FixedImportDialog dialog = new FixedImportDialog( mContext, this );
-      // if ( dialog.getNrPoints() > 0 ) {
-      //   dialog.show();
-      // } else {
-      //   TDToast.makeBad( R.string.MT_points_none );
-      // }
+      if ( hasMobileTopographer ) {
+        // get the file with MediaStore
+        selectImportFromProvider();
+        // FixedImportDialog dialog = new FixedImportDialog( mContext, this );
+        // if ( dialog.getNrPoints() > 0 ) {
+        //   dialog.show();
+        // } else {
+        //   TDToast.makeBad( R.string.MT_points_none );
+        // }
+      } else {
+        // TODO
+      }
     }
     // refreshList();
   }

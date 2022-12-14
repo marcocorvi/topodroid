@@ -33,8 +33,8 @@ import android.net.Uri;
 
 // import android.os.Build.VERSION_CODES;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageInfo;
 // import android.content.pm.PackageManager.NameNotFoundException;
-// import android.content.pm.PackageInfo;
 
 import android.hardware.Sensor;
 import android.widget.Button;
@@ -561,6 +561,20 @@ public class TDandroid
       case 2:
         act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE );
         break;
+    }
+  }
+
+  /** @return true is MobileTopographer is installed
+   * @param context   app context
+   */
+  public static boolean hasMobileTopographer( Context context )
+  {
+    try {
+      PackageManager pm = context.getPackageManager();
+      PackageInfo pi = pm.getPackageInfo( "gr.stasta.mobiletopographer", 0 );
+      return true;
+    } catch ( PackageManager.NameNotFoundException e ) {
+      return false;
     }
   }
 
