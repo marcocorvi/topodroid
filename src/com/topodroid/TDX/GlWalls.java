@@ -29,17 +29,31 @@ class GlWalls extends GlShape
 {
   private static class GlTriangle3D
   {
-    Vector3D v1, v2, v3;
-    Vector3D normal;
+    Vector3D v1, v2, v3; // vertices
+    Vector3D normal;     // normal is used to prepare facets / triangles
 
     GlTriangle3D( Vector3D w1, Vector3D w2, Vector3D w3 )
     { 
       v1 = w1; 
       v2 = w2; 
       v3 = w3;
-      normal = Vector3D.crossProduct( Vector3D.difference( w2, w1 ), Vector3D.difference( w3, w1 ) );
+      normal = null;
+    }
+
+    void computeNormal()
+    {
+      normal = Vector3D.crossProduct( Vector3D.difference( v2, v1 ), Vector3D.difference( v3, v1 ) );
       normal.normalized();
     }
+
+    /** @return true if this triangle is epsilon-empty
+     * @param eps   epsilon
+     */
+    boolean isEmpty( double eps ) 
+    {
+      return v1.coincide( v2, eps ) || v2.coincide( v3, eps ) || v3.coincide( v1, eps );
+    }
+
   }
 
   ArrayList< GlTriangle3D > triangles;
@@ -135,11 +149,26 @@ class GlWalls extends GlShape
 
   void initData() 
   { 
+    dropEmptyTriangles( 0.000001 ); // computes the normal of the triangles
     if ( mMode == WALL_FACE ) {
       initData( prepareDataFaces() );
     } else {
       initData( prepareDataSides() );
     }
+  }
+
+  /** drop the epsilon-emppty triangles
+   * @param eps  epsilon
+   */
+  private void dropEmptyTriangles( double eps )
+  {
+    ArrayList< GlTriangle3D > tmp = new ArrayList< >();
+    for ( GlTriangle3D tri : triangles ) {
+      if ( tri.isEmpty( eps ) ) continue;
+      tri.computeNormal();
+      tmp.add( tri );
+    }
+    triangles = tmp;
   }
 
   private float[] prepareDataFaces()

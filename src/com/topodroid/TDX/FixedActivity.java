@@ -30,6 +30,7 @@ import com.topodroid.help.UserManualActivity;
 import android.os.Bundle;
 
 import android.content.Context;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ActivityNotFoundException;
@@ -101,6 +102,7 @@ public class FixedActivity extends Activity
   final static int FLAG_GPS_TEST           = 8;
 
   private boolean hasGps = false;
+  private boolean hasGPSTest = false;
   private int mImportFlag = 0; // flag app import point 
 
   private Button     mMenuImage;
@@ -113,6 +115,7 @@ public class FixedActivity extends Activity
                         R.drawable.iz_gps,
                         R.drawable.iz_plus,
                         R.drawable.iz_import,
+                        R.drawable.iz_gpstest,
                         R.drawable.iz_gps_no,
                         0,
                         R.drawable.iz_import_no,
@@ -145,6 +148,7 @@ public class FixedActivity extends Activity
     mContext = this;
 
     hasGps = /* TDandroid.ABOVE_API_23 && */ TDandroid.checkLocation( mContext );
+    hasGPSTest  = TDandroid.hasGPSTest( this );
     mImportFlag = TDandroid.getImportPointFlag( this );
     // TDLog.v("FIXED import flag " + mImportFlag );
     if ( mImportFlag > 0 ) {
@@ -174,16 +178,18 @@ public class FixedActivity extends Activity
     /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     // MOBILE TOPOGRAPHER
-    mNrButton1 = 3;
+    mNrButton1 = ( hasGPSTest )? 4 : 3;
     // if ( hasGps ) ++ mNrButton1;
     mButton1 = new Button[ mNrButton1 + 1];
+
     // int kz = 0; // (hasGps)? 0 : 1; // index of izons
     // for ( int k=0; k<mNrButton1; ++k ) {
     //   mButton1[k] = MyButton.getButton( mContext, this, izons[kz++] );
     // }
-    mButton1[0] = MyButton.getButton( mContext, this, izons[ hasGps ? 0 : 3 ] );
+    mButton1[0] = MyButton.getButton( mContext, this, izons[ hasGps ? 0 : 4 ] );
     mButton1[1] = MyButton.getButton( mContext, this, izons[ 1 ] );
-    mButton1[2] = MyButton.getButton( mContext, this, izons[ (mImportFlag>0) ? 2 : 5 ] );
+    mButton1[2] = MyButton.getButton( mContext, this, izons[ (mImportFlag>0) ? 2 : 6 ] );
+    if ( hasGPSTest ) mButton1[3] = MyButton.getButton( mContext, this, izons[ 3 ] );
 
     mButton1[mNrButton1] = MyButton.getButton( mContext, null, R.drawable.iz_empty );
     mButtonView1 = new MyHorizontalButtonView( mButton1 );
@@ -444,7 +450,7 @@ public class FixedActivity extends Activity
         // TODO
       }
     } else if ( /* k < mNrButton1 && */ b == mButton1[k++] ) { // ADD
-      new FixedAddDialog( mContext, this ).show();
+      new FixedAddDialog( mContext, this /* , false */ ).show();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) { // IMPORT MOBILE TOPOGRAPHER
       if ( mImportFlag > 0 ) {
         // get the file with MediaStore
@@ -457,6 +463,15 @@ public class FixedActivity extends Activity
         // }
       } else {
         // TODO
+      }
+    } else if ( k < mNrButton1 && b == mButton1[k++] ) { // START GPSTest
+      try {
+        Intent intent = new Intent( Intent.ACTION_MAIN );
+        intent.setClassName( "com.android.gpstest", "com.android.gpstest.GpsTestActivity" );
+        startActivity( intent );
+        // startActivityForResult( intent, TDRequest.REQUEST_GPSTEST ); // GpsTest does not set result
+      } catch ( RuntimeException e ) {
+        TDLog.v("ERROR " + e.getMessage() );
       }
     }
     // refreshList();
@@ -578,6 +593,7 @@ public class FixedActivity extends Activity
 
   /** request coordinates from Proj4
    * @param dialog   add dialog
+   * @note called from a FixedAddDialog
    */
   void getProj4Coords( FixedAddDialog dialog )
   {
@@ -629,6 +645,8 @@ public class FixedActivity extends Activity
           }
           mFixedAddDialog = null;
         }
+      // } else if ( reqCode == TDRequest.REQUEST_GPSTEST ) {
+      //   (new FixedAddDialog( mContext, this, true )).show();
       } else if ( reqCode == TDRequest.REQUEST_GET_GPS_IMPORT ) {
         Uri uri = intent.getData();
         try { // MobileTopographer

@@ -100,6 +100,11 @@ public class GlLines extends GlShape
       isSurvey = is;
     }
 
+    /** @return true if the line is epsilon-null
+     * @param eps   epsilon
+     */
+    boolean isEmpty( double eps ) { return v1.coincide( v2, eps ); }
+
     /** set the color (as 4-vector) of this line
      * @param acolor color 4-vector (to be assigned)
      */
@@ -533,11 +538,22 @@ public class GlLines extends GlShape
 
   // FIXME INCREMENTAL void initData( ) { initData( prepareData(), lines.size() ); }
 
+  void dropEmptyLines( double eps )
+  { 
+    ArrayList< Line3D > tmp = new ArrayList<>();
+    for ( Line3D line : lines ) {
+      if ( line.isEmpty( eps ) ) continue;
+      tmp.add( line );
+    }
+    lines = tmp;
+  }
+
   /** initialize the data buffer
    */
-  void initData( ) 
+  void initData( )
   { 
     if ( mDataBuffer != null ) {
+      dropEmptyLines( 0.000001 );
       lineCount  = lines.size();
       dataBuffer = mDataBuffer.asFloat();
       // TDLog.v("Line data buffer - lines " + lineCount );

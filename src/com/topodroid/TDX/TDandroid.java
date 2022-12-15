@@ -564,6 +564,18 @@ public class TDandroid
     }
   }
 
+  public static boolean hasGPSTest( Context context )
+  {
+    PackageManager pm = context.getPackageManager();
+    try {
+      PackageInfo pi = pm.getPackageInfo( "com.android.gpstest", 0 );
+      return true;
+    } catch ( PackageManager.NameNotFoundException e ) {
+    }
+    return false;
+  }
+  
+
   /** @return true is MobileTopographer is installed
    * @param context   app context
    */

@@ -61,15 +61,18 @@ class FixedAddDialog extends MyDialog
 
   private double  mLng, mLat, mHEll, mHGeo;
   private boolean mNorth, mEast;
+  // private boolean hasClipBoard = false; // always false
 
   /** cstr
    * @param context context
    * @param parent  parent activity
    */
-  FixedAddDialog( Context context, FixedActivity parent )
+   // param has_clipboard whether there are coords in the clipboard
+  FixedAddDialog( Context context, FixedActivity parent /* , boolean has_clipboard */ )
   {
     super( context, null, R.string.FixedAddDialog ); // null app
     mParent = parent;
+    // hasClipBoard = has_clipboard; // always false
   }
 
 // -------------------------------------------------------------------
@@ -141,6 +144,8 @@ class FixedAddDialog extends MyDialog
     mBtnView.setOnClickListener( this );
     mBtnClipboard = (Button) findViewById(R.id.button_clipboard);
     mBtnClipboard.setOnClickListener( this );
+
+    // if ( hasClipBoard ) getClipBoard( false ); // always false
   }
 
   /** react to a user long tap
@@ -200,6 +205,42 @@ class FixedAddDialog extends MyDialog
     mETaccur.setText( "" );
   }
 
+  /** retrieve coords from the clipboard
+   * @param toast whether to toast message
+   */
+  private void getClipBoard( boolean toast )
+  {
+    ClipboardManager cm = (ClipboardManager)mContext.getSystemService( Context.CLIPBOARD_SERVICE ); 
+    if ( cm != null && cm.hasPrimaryClip() ) {
+      // CharSequence text = cm.getText();
+      ClipData clip = cm.getPrimaryClip();
+      if ( clip.getItemCount() > 0 ) {
+        CharSequence text = clip.getItemAt(0).coerceToText( mContext );
+        if ( text != null ) {
+          String str = text.toString();
+          String[] val = str.split(",");
+          if ( val.length > 1 ) {
+            toast = false;
+            mETlat.setText( val[0] );
+            mETlng.setText( val[1] );
+            if ( val.length > 2 ) {
+              // mEThell.setText( val[2] );
+              mLat = Double.parseDouble( val[0] );
+              mLng = Double.parseDouble( val[1] );
+              mHEll = Double.parseDouble( val[2] );
+              WorldMagneticModel wmm = new WorldMagneticModel( mContext );
+              mHGeo = wmm.ellipsoidToGeoid( mLat, mLng, mHEll );
+              mEThgeo.setText( String.format(Locale.US, "%.1f", mHGeo ) );
+            }
+          }
+        }
+      }
+    } 
+    if ( toast ) {
+      TDToast.makeBad( R.string.empty_clipboard );
+    }
+  }
+
   /** react to user tap
    * @param v tapped view:
    *    - button N/S
@@ -233,28 +274,7 @@ class FixedAddDialog extends MyDialog
         mContext.startActivity( new Intent( Intent.ACTION_VIEW, uri ) );
       }
     } else if ( b == mBtnClipboard ) {
-      ClipboardManager cm = (ClipboardManager)mContext.getSystemService( Context.CLIPBOARD_SERVICE ); 
-      boolean toast = true;
-      if ( cm != null && cm.hasPrimaryClip() ) {
-        // CharSequence text = cm.getText();
-        ClipData clip = cm.getPrimaryClip();
-        if ( clip.getItemCount() > 0 ) {
-          CharSequence text = clip.getItemAt(0).coerceToText( mContext );
-          if ( text != null ) {
-            String str = text.toString();
-            String[] val = str.split(",");
-            if ( val.length > 1 ) {
-              toast = false;
-              mETlng.setText( val[0] );
-              mETlat.setText( val[1] );
-              // if ( val.length > 2 ) mEThell.setText( val[2] );
-            }
-          }
-        }
-      }
-      if ( toast ) {
-        TDToast.makeBad( R.string.empty_clipboard );
-      }
+      getClipBoard( true );
       return;
     } else if ( b == mBtnProj4 ) {
       mParent.getProj4Coords( this );
