@@ -240,6 +240,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="import_zip_newer">ZIP importato da una versione più recente</string>
     <!-- UNUSED string name="import_zip_wait">Importare uno ZIP richiede tempo. Attendi&#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->
+    <!-- TODO string name="GPS_position_none">No GPS position data</string -->
+    <!-- TODO string name="GPX_record_none">No GPX point record</string -->
     <string name="MT_points_none">Punto GPS mancante</string>
     <string name="MT_bad_file">File MobileTopographer corrotto</string>
     <string name="bad_manifest">File manifesto corrotto</string>
@@ -383,6 +385,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="no_feature_pdf">PDF non supportato</string>
     <string name="no_gms">Calibrazione senza data.</string>
     <string name="no_geo_station">Errore: nessun caposaldo geolocalizzato</string>
+    <!-- TODO string name="no_geopoint_app">No geopoint app</string -->
     <string name="no_leg_first">La selezione non parte con una battuta</string>
     <string name="no_leg_intersection">La linea di sezione non interseca alcuna battuta</string>
     <string name="no_location_data">Nessun dato di posizione</string>
@@ -424,6 +427,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="menu_device">DISPOSITIVO</string>
     <string name="menu_export">ESPORTA</string>
     <string name="menu_firmware">FIRMWARE</string>
+    <!-- TODO string name="menu_geopoint_app">GEOPOINT APP</string -->
     <string name="menu_recover">RECUPERA</string>
     <string name="menu_recover_paste">RIPRISTINA/INCOLLA</string>
     <string name="menu_reload">RICARICA</string>
@@ -974,6 +978,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="help_device">Finestra DistoX</string>
     <string name="help_add_topodroid">Nuovo rilievo/calibr.</string>
     <string name="help_import">Importa zip o file dati rilievo</string>
+    <!-- TODO string name="help_geopoint_app">Geopoint external app</string -->
     <string name="help_symbol">Attiva/disattiva prototipi grafici</string>
     <string name="help_therion">Gestore progetti di grotta</string>
     <string name="help_cave3d">Cave3D, visualizzatore 3D</string>
@@ -1158,6 +1163,9 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="title_edit_station">Modifica caposaldo </string>
     <string name="title_erase">Cancella</string>
     <string name="title_fixed">Punti fissi</string>
+    <!-- TODO string name="title_fixed_mt">Geo points [Mobile Topographer]</string -->
+    <!-- TODO string name="title_fixed_gpx_rec">Geo points [GPX Recorder]</string -->
+    <!-- TODO string name="title_fixed_gps_pos">Geo points [GPS Position]</string -->
     <string name="title_fixed_edit">Modifica posizione</string>
     <string name="title_fixed_import">Importa punto fisso</string>
     <string name="title_fixed_gps">Punto fisso: GPS</string>
@@ -1447,6 +1455,8 @@ Fai riferimento alle pagine web per i dettagli.\n
   <string name="pref_neg_altitude_summary">Consenti altitudini negative</string>
   <string name="pref_fine_location_title">Posizionamento preciso [s]</string>
   <string name="pref_fine_location_summary">Tempo di posizionamento preciso [s]</string>
+  <!-- TODO string name="pref_geoimport_app_title">Geopoint app</string -->
+  <!-- TODO string name="pref_geoimport_app_summary">Geopoint external app</string -->
   <!-- UNUSED string name="pref_gps_averaging_title">Media GPS</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Usare media GPS</string -->
   <string name="pref_bric_mode_title">Modo BRIC</string>

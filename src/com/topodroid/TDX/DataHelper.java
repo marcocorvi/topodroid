@@ -2382,6 +2382,8 @@ public class DataHelper extends DataSetObservable
   // private static String qShotPhoto    = "select id, shotId, title, date, comment from photos where surveyId=? AND shotId=? ";
   private static final String qjShotPhoto   =
     "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera from photos as p join shots as s on p.shotId=s.id where p.surveyId=? AND s.surveyId=? AND p.shotId=? ";
+  private static final String cntPhotos      =
+    "select count(p.id) from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and p.status=? ";
 
   private static final String qFirstStation = "select fStation from shots where surveyId=? AND fStation!=\"\" AND tStation!=\"\" limit 1 ";
   private static final String qHasStation   = "select id, fStation, tStation from shots where surveyId=? and ( fStation=? or tStation=? ) order by id ";
@@ -2394,7 +2396,7 @@ public class DataHelper extends DataSetObservable
   private static final String qHasFixedStation = "select id from fixeds where surveyId=? and station=? and id!=? and status=0 ";
   private static final String qjShots       =
     "select s.flag, s.distance, s.fStation, s.tStation, s.clino, z.clino, s.extend from shots as s join shots as z on z.fStation=s.tStation where s.surveyId=? AND z.surveyId=? AND s.fStation!=\"\" AND s.tStation!=\"\" AND s.status=0 ";
-  private static final String qFixeds = "select A.station, A.latitude, A.longitude, A.altitude, A.altimetric, A.cs_name, A.cs_latitude, A.cs_longitude, A.cs_altitude, A.convergence, A.accuracy, A.accuracy_v from fixeds as A, surveys as B where A.surveyId=B.id and B.name=?";
+  private static final String qFixeds = "select A.station, A.latitude, A.longitude, A.altitude, A.altimetric, A.cs_name, A.cs_latitude, A.cs_longitude, A.cs_altitude, A.convergence, A.accuracy, A.accuracy_v from fixeds as A join surveys as B where A.surveyId=B.id and B.name=?";
   // private static final String qLength = "select count(), sum(A.distance) from shots as A, surveys as B where A.surveyId=B.id and B.name=? and A.fStation!=\"\" and A.tStation!=\"\"";
 
   List< SensorInfo > selectAllSensors( long sid, long status )
@@ -2604,6 +2606,18 @@ public class DataHelper extends DataSetObservable
     } catch (SQLiteException e) { logError("photo delete", e); }
   }
 
+  int countAllPhotos( long sid, long status )
+  {
+    if ( myDB == null ) return 0;
+    int ret = 0;
+    Cursor cursor = myDB.rawQuery( cntPhotos, new String[] { Long.toString(sid), Long.toString(sid), Long.toString(status) } );
+    if (cursor.moveToFirst()) {
+      ret = (int)( cursor.getLong(0) );
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return ret;
+  }
+
   //
   // select p.id, p.shotId, p.title, s.fStation, s.tStation, p.date, p.comment from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and p.status=?
   //
@@ -2711,23 +2725,23 @@ public class DataHelper extends DataSetObservable
                                 null, null, null );
     if (cursor.moveToFirst()) {
       do {
-        list.add( new FixedInfo( cursor.getLong(0),
+        list.add( new FixedInfo( cursor.getLong(0),   // id
                                  cursor.getString(1), // station
                                  cursor.getDouble(2), // longitude
                                  cursor.getDouble(3), // latitude
                                  cursor.getDouble(4), // ellipsoid height
                                  cursor.getDouble(5), // geoid height
-                                 cursor.getString(6),
+                                 cursor.getString(6), // comment
                                  // skip status
                                  cursor.getLong(8),   // source type
-                                 cursor.getString(9),
-                                 cursor.getDouble(10),
-                                 cursor.getDouble(11),
-                                 cursor.getDouble(12),
-				 cursor.getLong(13),
-                                 cursor.getDouble(14),
-                                 cursor.getDouble(15),
-                                 cursor.getDouble(16)
+                                 cursor.getString(9),  // cs name
+                                 cursor.getDouble(10), // cs longitude
+                                 cursor.getDouble(11), // cs latitude
+                                 cursor.getDouble(12), // cs altitude
+				 cursor.getLong(13),   // cs decomals
+                                 cursor.getDouble(14), // convergence
+                                 cursor.getDouble(15), // accuracy
+                                 cursor.getDouble(16)  // accuracy V
         ) );
       } while (cursor.moveToNext());
     }

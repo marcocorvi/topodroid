@@ -248,6 +248,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="import_zip_newer">Fichier ZIP importé d\'une version plus récente</string>
     <!-- UNUSED string name="import_zip_wait">L\'importation du fichier zip peut être longue… Patientez…</string -->
     <!-- UNUSED string name="sketch_saving">Exportation de dessin &#8230; Patientez &#8230;</string -->
+    <!-- TODO string name="GPS_position_none">No GPS position data</string -->
+    <!-- TODO string name="GPX_record_none">No GPX point record</string -->
     <string name="MT_points_none">Pas de point Mobile Topographer</string>
     <string name="MT_bad_file">Mauvais fichier MobileTopographer</string>
     <string name="bad_manifest">Mauvais fichier Manifest</string>
@@ -393,6 +395,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="no_feature_pdf">PDF non supporté</string>
     <string name="no_gms">L\'étalonnage ne contient pas de données.\nUtiliser le bouton Télécharger</string>
     <string name="no_geo_station">Échec : pas de station géolocalisée</string>
+    <!-- TODO string name="no_geopoint_app">No geopoint app</string -->
     <string name="no_leg_first">La sélection ne commence pas par une visée de cheminement</string>
     <string name="no_leg_intersection">La ligne de section transverse ne coupe aucune ligne de cheminement</string>
     <string name="no_location_data">Aucune donnée de géolocalisation</string>
@@ -434,6 +437,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="menu_device">APPAREIL</string>
     <string name="menu_export">EXPORTER</string>
     <string name="menu_firmware">FIRMWARE</string>
+    <!-- TODO string name="menu_geopoint_app">GEOPOINT APP</string -->
     <string name="menu_recover">RECUPÉRER</string>
     <string name="menu_recover_paste">RECUPERER/COLLER</string>
     <string name="menu_reload">RECHARGER</string>
@@ -987,6 +991,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="help_device">Périphériques DistoX</string>
     <string name="help_add_topodroid">Crée un nouveau relevé/étalonnage</string>
     <string name="help_import">Importe une archive Zip ou un fichier Therion</string>
+    <!-- TODO string name="help_geopoint_app">Geopoint external app</string -->
     <string name="help_symbol">Active/désactive des symboles de dessin</string>
     <string name="help_therion">Cave project manager</string>
     <string name="help_cave3d">Cave3D, visionneuse 3D</string>
@@ -1172,6 +1177,9 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="title_edit_station">Editer station </string>
     <string name="title_erase">Supprimer</string>
     <string name="title_fixed">Points géolocalisés</string>
+    <!-- TODO string name="title_fixed_mt">Geo points [Mobile Topographer]</string -->
+    <!-- TODO string name="title_fixed_gpx_rec">Geo points [GPX Recorder]</string -->
+    <!-- TODO string name="title_fixed_gps_pos">Geo points [GPS Position]</string -->
     <string name="title_fixed_edit">Modifier point</string>
     <string name="title_fixed_import">Importer un point</string>
     <string name="title_fixed_gps">Coordonnées du GPS</string>
@@ -1467,6 +1475,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- TODO string name="pref_neg_altitude_summary">Allow negative altitudes</string -->
     <!-- TODO string name="pref_fine_location_title">Fine location [s]</string -->
     <!-- TODO string name="pref_fine_location_summary">Fine location time [s]</string -->
+  <!-- TODO string name="pref_geoimport_app_title">Geopoint app</string -->
+  <!-- TODO string name="pref_geoimport_app_summary">Geopoint external app</string -->
     <!-- UNUSED string name="pref_gps_averaging_title">Utilizer GPSAveraging</string -->
     <!-- UNUSED string name="pref_gps_averaging_summary">Utiliser GPSAveraging</string -->
     <string name="pref_bric_mode_title">BRIC mode</string>

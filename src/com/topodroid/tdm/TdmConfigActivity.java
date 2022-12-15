@@ -77,7 +77,7 @@ public class TdmConfigActivity extends Activity
     R.drawable.iz_add,
     R.drawable.iz_drop,
     R.drawable.iz_view,
-    R.drawable.iz_gps,
+    R.drawable.iz_location,
     R.drawable.iz_equates,
     R.drawable.iz_3d
   };

@@ -50,6 +50,7 @@ class TdmInfoAdapter extends ArrayAdapter< FixedInfo >
     super( ctx, id );
     mApp     = app;
     for ( TdmInput item : items ) {
+      TDLog.v("TDM INFO survey " + item.getSurveyName() );
       FixedInfo info = mApp.mData.selectSurveyFixed( item.getSurveyName() );
       if ( info != null ) {
         info.comment = item.getSurveyName();
@@ -147,7 +148,7 @@ class TdmInfoAdapter extends ArrayAdapter< FixedInfo >
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )
   {
-    TDLog.v( "get view at " + pos );
+    // TDLog.v( "get view at " + pos );
     FixedInfo survey = (FixedInfo)(getItem( pos ));
 
     ViewHolder holder; // = null;

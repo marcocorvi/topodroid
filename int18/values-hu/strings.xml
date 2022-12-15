@@ -242,6 +242,8 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="import_zip_newer">Importált zip az újabb verzióból</string>
     <!-- UNUSED string name="import_zip_wait">A zip fájl importálása több időt vesz igénybe. Kérlek várjál &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Vázlat mentése &#8230; várjál &#8230;</string -->
+    <!-- TODO string name="GPS_position_none">No GPS position data</string -->
+    <!-- TODO string name="GPX_record_none">No GPX point record</string -->
     <string name="MT_points_none">Nincs MobileTopographer pont</string>
     <string name="MT_bad_file">Rossz MobileTopographer fájl</string>
     <string name="bad_manifest">Hibás manifest fájl</string>
@@ -388,6 +390,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="no_feature_pdf">PDF nem támogatott</string>
     <string name="no_gms">Nincsenek kalibrációs adatok.\nTöltsd le az adatokat </string>
     <string name="no_geo_station">Hiba: nincs geolokalizált mérésipont</string>
+    <!-- TODO string name="no_geopoint_app">No geopoint app</string -->
     <string name="no_leg_first">A kiválasztás nem poligon méréssel kezdődik</string>
     <string name="no_leg_intersection">A szelvény nem keresztez poligont</string>
     <string name="no_location_data">Nincs hely adat</string>
@@ -429,6 +432,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="menu_device">MŰSZER</string>
     <string name="menu_export">EXPORTÁLÁS</string>
     <string name="menu_firmware">FIRMWARE</string>
+    <!-- TODO string name="menu_geopoint_app">GEOPOINT APP</string -->
     <string name="menu_recover">HELYREÁLLÍT</string>
     <string name="menu_recover_paste">HELYREÁLLÍT/BEILLESZT</string>
     <string name="menu_reload">ÚJRATÖLT</string>
@@ -981,6 +985,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="help_device">Műszer funkciók</string>
     <string name="help_add_topodroid">Új felmérés</string>
     <string name="help_import">ZIP archívum, vagy felmérés importálása</string>
+    <!-- TODO string name="help_geopoint_app">Geopoint external app</string -->
     <string name="help_symbol">Rajzeszközök engedélyezése/tiltása</string>
     <string name="help_therion">Barlang projekt szervező</string>
 	    <string name="help_cave3d">Cave3D, 3D nézet</string>
@@ -1166,6 +1171,9 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="title_edit_station">Pont módosítás </string>
     <string name="title_erase">Radír</string>
     <string name="title_fixed">Helymeghatározások</string>
+    <!-- TODO string name="title_fixed_mt">Geo points [Mobile Topographer]</string -->
+    <!-- TODO string name="title_fixed_gpx_rec">Geo points [GPX Recorder]</string -->
+    <!-- TODO string name="title_fixed_gps_pos">Geo points [GPS Position]</string -->
     <string name="title_fixed_edit">Helymeghatározás szerkesztése</string>
     <string name="title_fixed_import">Helymeghatározás importálása</string>
     <string name="title_fixed_gps">GNSS helymeghatározás</string>
@@ -1459,6 +1467,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_neg_altitude_summary">Negatív magasságok engedélyezése</string>
   <string name="pref_fine_location_title">Pontos helymeghatározás [s]</string>
   <string name="pref_fine_location_summary">Pontos helymeghatározás ideje [s]</string>
+  <!-- TODO string name="pref_geoimport_app_title">Geopoint app</string -->
+  <!-- TODO string name="pref_geoimport_app_summary">Geopoint external app</string -->
   <!-- UNUSED string name="pref_gps_averaging_title">GNSS átlagolás</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">GNSS átlagolás használata</string -->
   <string name="pref_bric_mode_title">BRIC mód</string>

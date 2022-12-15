@@ -242,6 +242,8 @@
     <string name="import_zip_newer">从最近的版本导入zip文件</string>
     <!-- UNUSED string name="import_zip_wait">Imported zip file may take long. Please wait &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
+    <!-- TODO string name="GPS_position_none">No GPS position data</string -->
+    <!-- TODO string name="GPX_record_none">No GPX point record</string -->
     <string name="MT_points_none">无GPS坐标点</string>
     <string name="MT_bad_file">错误的移动地形图文件</string>
     <string name="bad_manifest">错误的清单文件</string>
@@ -386,6 +388,7 @@
     <string name="no_feature_pdf">PDF格式不支持</string>
     <string name="no_gms">校准无数据.\n点击下载按钮</string>
     <string name="no_geo_station">错误: 无地理定位测点</string>
+    <!-- TODO string name="no_geopoint_app">No geopoint app</string -->
     <string name="no_leg_first">选择未从主线开始</string>
     <string name="no_leg_intersection">横截面线与主线无交叉</string>
     <string name="no_location_data">无位置数据</string>
@@ -427,6 +430,7 @@
     <string name="menu_device">设备</string>
     <string name="menu_export">输出</string>
     <string name="menu_firmware">固件</string>
+    <!-- TODO string name="menu_geopoint_app">GEOPOINT APP</string -->
     <string name="menu_recover">恢复</string>
     <string name="menu_recover_paste">恢复/粘贴</string>
     <string name="menu_reload">重新导入</string>
@@ -977,6 +981,7 @@
     <string name="help_device">输入设备激活</string>
     <string name="help_add_topodroid">新建测量/新建校准</string>
     <string name="help_import">输入压缩的存档或者测量文件</string>
+    <!-- TODO string name="help_geopoint_app">Geopoint external app</string -->
     <string name="help_symbol">绘图工具设置</string>
     <string name="help_therion">洞穴项目管理</string>
     <string name="help_cave3d">Cave3D, 3D 视图</string>
@@ -1162,6 +1167,9 @@
     <string name="title_edit_station">编辑测点 </string>
     <string name="title_erase">擦除</string>
     <string name="title_fixed">位置</string>
+    <!-- TODO string name="title_fixed_mt">Geo points [Mobile Topographer]</string -->
+    <!-- TODO string name="title_fixed_gpx_rec">Geo points [GPX Recorder]</string -->
+    <!-- TODO string name="title_fixed_gps_pos">Geo points [GPS Position]</string -->
     <string name="title_fixed_edit">位置编辑</string>
     <string name="title_fixed_import">位置导入</string>
     <string name="title_fixed_gps">GPS坐标数据</string>
@@ -1454,6 +1462,8 @@
   <!-- TODO string name="pref_neg_altitude_summary">Allow negative altitudes</string -->
   <!-- TODO string name="pref_fine_location_title">Fine location [s]</string -->
   <!-- TODO string name="pref_fine_location_summary">Fine location time [s]</string -->
+  <!-- TODO string name="pref_geoimport_app_title">Geopoint app</string -->
+  <!-- TODO string name="pref_geoimport_app_summary">Geopoint external app</string -->
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Use GPSAveraging</string -->
   <string name="pref_bric_mode_title">BRIC 模式</string>

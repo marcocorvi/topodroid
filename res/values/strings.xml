@@ -248,6 +248,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="import_zip_newer">Imported zip from more recent version</string>
     <!-- UNUSED string name="import_zip_wait">Imported zip file may take long. Please wait &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
+    <string name="GPS_position_none">No GPS position data</string>
+    <string name="GPX_record_none">No GPX point record</string>
     <string name="MT_points_none">No MobileTopographer point file</string>
     <string name="MT_bad_file">Bad MobileTopographer file</string>
     <string name="bad_manifest">Bad manifest file</string>
@@ -393,6 +395,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="no_feature_pdf">PDF not supported</string>
     <string name="no_gms">Calibration has no data.\nUse Download button</string>
     <string name="no_geo_station">Failed: no geolocalized station</string>
+    <string name="no_geopoint_app">No geopoint app</string>
     <string name="no_leg_first">Selection does not start with a leg</string>
     <string name="no_leg_intersection">Section line crosses no leg</string>
     <string name="no_location_data">No location data</string>
@@ -434,6 +437,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_device">DEVICE</string>
     <string name="menu_export">EXPORT</string>
     <string name="menu_firmware">FIRMWARE</string>
+    <string name="menu_geopoint_app">GEOPOINT APP</string>
     <string name="menu_recover">RECOVER</string>
     <string name="menu_recover_paste">RECOVER/PASTE</string>
     <string name="menu_reload">RELOAD</string>
@@ -987,6 +991,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_device">Device activity</string>
     <string name="help_add_topodroid">New survey</string>
     <string name="help_import">Import zip archive or survey file</string>
+    <string name="help_geopoint_app">Geopoint external app</string>
     <string name="help_symbol">Drawing tools sets</string>
     <string name="help_therion">Cave project manager</string>
     <string name="help_cave3d">Cave3D, 3D viewer</string>
@@ -1172,9 +1177,12 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_edit_station">Edit station </string>
     <string name="title_erase">Erase</string>
     <string name="title_fixed">Geo-localized points</string>
+    <string name="title_fixed_mt">Geo points [Mobile Topographer]</string>
+    <string name="title_fixed_gpx_rec">Geo points [GPX Recorder]</string>
+    <string name="title_fixed_gps_pos">Geo points [GPS Position]</string>
     <string name="title_fixed_edit">Geo-point edit</string>
     <string name="title_fixed_import">Geo-point import</string>
-    <string name="title_fixed_gps">GPS geo-point</string>
+    <string name="title_fixed_gps">Geo-point GPS</string>
     <string name="title_fixed_add">Geo-point insert</string>
     <string name="title_manual">TopoDroid User Manual</string>
     <string name="title_mode">Display Mode</string>
@@ -1467,6 +1475,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_neg_altitude_summary">Allow negative altitudes</string>
   <string name="pref_fine_location_title">Fine location [s]</string>
   <string name="pref_fine_location_summary">Fine location time [s]</string>
+  <string name="pref_geoimport_app_title">Geopoint app</string>
+  <string name="pref_geoimport_app_summary">Geopoint external app</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Use GPSAveraging</string -->
   <string name="pref_bric_mode_title">BRIC mode</string>

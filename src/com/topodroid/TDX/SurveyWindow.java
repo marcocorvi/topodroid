@@ -82,11 +82,12 @@ public class SurveyWindow extends Activity
                         R.drawable.iz_note,
                         R.drawable.iz_info, // ic_details,
                         R.drawable.iz_3d,
-                        R.drawable.iz_gps,
-                        R.drawable.iz_camera,
+                        R.drawable.iz_location,
+                        R.drawable.iz_picture,
                         R.drawable.iz_sensor
 			// R.drawable.iz_empty // EMPTY
                      };
+  private static final int BTN_PHOTO = 4;
   private static final int INDEX_3D = 2; // index of button-3D if any
 
   private static final int[] menus = {
@@ -149,6 +150,7 @@ public class SurveyWindow extends Activity
   private String mInitStation = null;
   private int mXSections;
   private int mDatamode;
+  private int nrPhoto = 0;
 
   private TopoDroidApp mApp;
   private DataHelper   mApp_mData;
@@ -295,6 +297,11 @@ public class SurveyWindow extends Activity
     }
     mNrButton1 = kb;
     mButton1[mNrButton1] = MyButton.getButton( mActivity, null, R.drawable.iz_empty );
+    nrPhoto = mApp_mData.countAllPhotos( TDInstance.sid, TDStatus.NORMAL );
+    if ( nrPhoto == 0 ) {
+      TDandroid.setButtonBackground( mButton1[ BTN_PHOTO ], MyButton.getButtonBackground( this, res, R.drawable.iz_picture_no ) );
+      mButton1[ BTN_PHOTO ].setOnClickListener( null );
+    }
 
     mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );

@@ -136,7 +136,7 @@ public class DeviceActivity extends Activity
                         0,
                         0,
                         R.drawable.iz_toggle_no,
-                        R.drawable.iz_compute_no,
+                        R.drawable.iz_2compute_no,
                         R.drawable.iz_read_no,
                         0,
                         // R.drawable.iz_remote_no
@@ -146,7 +146,7 @@ public class DeviceActivity extends Activity
                         R.drawable.iz_bt,
                         R.drawable.iz_info,
                         R.drawable.iz_toggle,
-                        R.drawable.iz_compute,
+                        R.drawable.iz_2compute,
                         R.drawable.iz_read,
                         R.drawable.iz_sdcard
 			// R.drawable.iz_empty // EMPTY

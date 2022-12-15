@@ -240,6 +240,8 @@ debe ajustarlos a sus necesidades./n/n
     <string name="import_zip_newer">ZIP importado de una versión más reciente</string>
     <!-- UNUSED string name="import_zip_wait">El archivo ZIP importado puede tardar mucho tiempo. Por favor espere &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Exportando dibujo &#8230; espere &#8230;</string -->
+    <!-- TODO string name="GPS_position_none">No GPS position data</string -->
+    <!-- TODO string name="GPX_record_none">No GPX point record</string -->
     <string name="MT_points_none">No hay punto GPS</string>
     <string name="MT_bad_file">Archivo de topografía del móvil corrupto</string>
     <string name="bad_manifest">Archivo de manifiesto corrupto</string>
@@ -383,6 +385,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="no_feature_pdf">PDF no soportado</string>
     <string name="no_gms">La calibración no tiene datos.\nPulse el botón Descargar</string>
     <string name="no_geo_station">Error: estación no geolocalizada</string>
+    <!-- TODO string name="no_geopoint_app">No geopoint app</string -->
     <string name="no_leg_first">La selección no comienza con un trayecto</string>
     <string name="no_leg_intersection">La línea de la sección no atraviesa ninguna visual</string>
     <string name="no_location_data">Sin datos de calibración</string>
@@ -424,6 +427,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="menu_device">Dispositivo</string>
     <string name="menu_export">Exportar</string>
     <string name="menu_firmware">Firmware</string>
+    <!-- TODO string name="menu_geopoint_app">GEOPOINT APP</string -->
     <string name="menu_recover">Tomas eliminadas</string>
     <string name="menu_recover_paste">Restaurar/Pegar</string>
     <string name="menu_reload">Importar</string>
@@ -974,6 +978,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="help_device">Opciones del dispositivo distoX</string>
     <string name="help_add_topodroid">Crear nueva Topografía/calibración</string>
     <string name="help_import">Importar archivo zip o Therion</string>
+    <!-- TODO string name="help_geopoint_app">Geopoint external app</string -->
     <string name="help_symbol">Activar/desactivar los símbolos de dibujo</string>
     <string name="help_therion">Gestor topografías cuevas</string>
     <string name="help_cave3d">Cave3D, visualización 3D</string>
@@ -1158,6 +1163,9 @@ debe ajustarlos a sus necesidades./n/n
     <string name="title_edit_station">Editar estación</string>
     <string name="title_erase">Borrar</string>
     <string name="title_fixed">Fijar puntos</string>
+    <!-- TODO string name="title_fixed_mt">Geo points [Mobile Topographer]</string -->
+    <!-- TODO string name="title_fixed_gpx_rec">Geo points [GPX Recorder]</string -->
+    <!-- TODO string name="title_fixed_gps_pos">Geo points [GPS Position]</string -->
     <string name="title_fixed_edit">Punto de edición</string>
     <string name="title_fixed_import">Punto de importación fijado</string>
     <string name="title_fixed_gps">Punto fijo: GPS</string>
@@ -1447,6 +1455,8 @@ debe ajustarlos a sus necesidades./n/n
   <!-- TODO string name="pref_neg_altitude_summary">Allow negative altitudes</string -->
   <!-- TODO string name="pref_fine_location_title">Fine location [s]</string -->
   <!-- TODO string name="pref_fine_location_summary">Fine location time [s]</string -->
+  <!-- TODO string name="pref_geoimport_app_title">Geopoint app</string -->
+  <!-- TODO string name="pref_geoimport_app_summary">Geopoint external app</string -->
   <!-- UNUSED string name="pref_gps_averaging_title">Promedio GPS</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Uso promedio GPS</string -->
   <string name="pref_bric_mode_title">Modo BRIC</string>

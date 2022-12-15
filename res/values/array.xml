@@ -9,7 +9,7 @@
      <!-- item name="all_zero">All + Zero</ite -->
      <item name="no_index">All except index</item>
   </string-array>
-  <string-array name="bricModeValue">
+  <string-array name="bricModeValue" translatable="false">
      <item name="prim_only">1</item>
      <!-- item name="sequence">2</item -->
      <item name="all">3</item>
@@ -17,12 +17,25 @@
      <item name="no_index">5</item>
   </string-array>
   
+  <string-array name="geoImportApp">
+     <item name="none">none</item>
+     <item name="mobile_topographer">Mobile Topographer</item>
+     <item name="gpx_recorder">GPX Recorder</item>
+     <item name="gps_position">GPS Position</item>
+  </string-array>
+  <string-array name="geoImportAppValue" translatable="false"> <!-- values must agree with flags in FixedActvity -->
+     <item name="none">0</item>
+     <item name="mobile_topographer">1</item>
+     <item name="gpx_recorder">2</item>
+     <item name="gps_position">4</item>
+  </string-array>
+  
   <string-array name="orientation">
      <item name="unspecified">unspecified</item>
      <item name="portrait">portrait</item>
      <item name="landscape">landscape</item>
   </string-array>
-  <string-array name="orientationValue">
+  <string-array name="orientationValue" translatable="false">
      <item name="unspecified">0</item>
      <item name="portrait">1</item>
      <item name="landscape">2</item>
@@ -34,7 +47,7 @@
      <item name="profile">azimuth</item>
      <item name="view">view</item>
   </string-array>
-  <string-array name="splayDashValue">
+  <string-array name="splayDashValue" translatable="false">
      <item name="none">0</item>
      <item name="plan">1</item>
      <item name="profile">2</item>
@@ -46,7 +59,7 @@
      <item name="all">picker</item>
      <item name="palette">palette</item>
   </string-array>
-  <string-array name="splayColorsValue">
+  <string-array name="splayColorsValue" translatable="false">
      <item name="none">0</item>
      <item name="all">1</item>
      <item name="palette">2</item>
@@ -57,7 +70,7 @@
      <item name="sound">sound</item>
      <item name="haptic">haptic</item>
   </string-array>
-  <string-array name="feedbackModeValue">
+  <string-array name="feedbackModeValue" translatable="false">
      <item name="none">0</item>
      <item name="sound">1</item>
      <item name="haptic">2</item>
@@ -68,7 +81,7 @@
      <item name="class">by symbol</item>
      <item name="instance">by item</item>
   </string-array>
-  <string-array name="canvasLevelsValue">
+  <string-array name="canvasLevelsValue" translatable="false">
      <item name="none">0</item>
      <item name="class">1</item>
      <item name="instance">2</item>
@@ -79,7 +92,7 @@
      <item name="pipe">pipe</item>
      <item name="tab">tab</item>
   </string-array>
-  <string-array name="csvSeparatorValue">
+  <string-array name="csvSeparatorValue" translatable="false">
      <item name="comma">0</item>
      <item name="pipe">1</item>
      <item name="tab">2</item>

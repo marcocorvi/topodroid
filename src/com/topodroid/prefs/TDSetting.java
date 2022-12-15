@@ -50,8 +50,10 @@ import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.io.IOException;
 
+import android.preference.PreferenceManager;
 import android.content.res.Resources;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
@@ -281,6 +283,17 @@ public class TDSetting
   public static int mUnitLocation = 0;        // 0 dec-degree, 1 ddmmss
   public static boolean mNegAltitude = false; // whether to allow negative altitudes
   public static int mFineLocation = 60;       // fine location time
+  public static int mGeoImportApp = 0;
+  // 1 Mobile Topographer
+  // 2 GPX recorder
+  // 4 GPS position
+
+  public static void setGeoImportApp( Context context, int app )
+  {
+    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences( context );
+    mGeoImportApp = app;
+    setPreference( sp, "DISTOX_GEOPOINT_APP", Integer.toString(mGeoImportApp) );
+  }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // CALIBRATION
@@ -659,9 +672,7 @@ public class TDSetting
   private static int tryInt( SharedPreferences prefs, String key, String def_value )
   {
     int i = 0;
-    // TDLog.v(key + ": " + def_value );
-    String value = prefs.getString( key, def_value );
-    // TDLog.v(key + "= " + value );
+    // TDLog.v( "PREF " + key + ": " + def_value + " = " + prefs.getString( key, def_value ) );
     try { i = Integer.parseInt( prefs.getString( key, def_value ) ); }
     catch( NumberFormatException e ) { 
       TDLog.Error("Integer Format Error. Key " + key + " " + e.getMessage() );
@@ -1264,6 +1275,15 @@ public class TDSetting
     mCRS           = prefs.getString(  keyLoc[1], defLoc[1] );       // DISTOX_CRS
     mNegAltitude   = prefs.getBoolean( keyLoc[2], bool(defLoc[2]) ); // DISTOX_NEG_ALTITUDE
     mFineLocation  = tryInt( prefs,    keyLoc[3], defLoc[3] );       // DISTOX_FINE_LOCATION
+    // mGeoImportApp  = tryInt( prefs,    keyLoc[4], defLoc[4] );       // DISTOX_GEOPOINT_APP
+    TDLog.v("PREFS key <" + keyLoc[4] + "> val <" + defLoc[4] + ">" );
+    try {
+      mGeoImportApp = Integer.parseInt( prefs.getString( keyLoc[4], defLoc[4] ) );
+    } catch ( RuntimeException e ) {
+      TDLog.v("ERROR " + e.getMessage() );
+    } catch ( Exception ee ) {
+      TDLog.v("EXCEPT " + ee.getMessage() );
+    }
 
     String[] keyScreen = TDPrefKey.SCREEN;
     String[] defScreen = TDPrefKey.SCREENdef;
@@ -2352,6 +2372,8 @@ public class TDSetting
     } else if ( k.equals( key[ 3 ] ) ) {    // DISTOX_FINE_LOCATION
       mFineLocation = tryIntValue(  hlp, k, v, def[3] );
       if ( mFineLocation < 0 ) { mFineLocation = 0; } else if ( mFineLocation > 600 ) { mFineLocation = 600; }
+    } else if ( k.equals( key[ 4 ] ) ) {    // DISTOX_GEOPOINT_APP
+      mGeoImportApp = Integer.parseInt( tryStringValue(  hlp, k, v, def[4] ) );
     } else {
       TDLog.Error("missing LOCATION key: " + k );
     }
@@ -2976,7 +2998,7 @@ public class TDSetting
 
       pw.printf(Locale.US, "Default Team \"%s\"\n", mDefaultTeam);
       pw.printf(Locale.US, "Midline check: attached %c, extend %c\n", tf(mCheckAttached), tf(mCheckExtend) );
-      pw.printf(Locale.US, "Location: units %d, CRS \"%s\" NegAlt. %c FineLoc %d\n", mUnitLocation, mCRS, tf(mNegAltitude), mFineLocation );
+      pw.printf(Locale.US, "Location: units %d, CRS \"%s\" NegAlt. %c FineLoc %d GeoApp %d\n", mUnitLocation, mCRS, tf(mNegAltitude), mFineLocation, mGeoImportApp );
       pw.printf(Locale.US, "Shots: vthr %.1f, hthr %.1f \n", mVThreshold, mHThreshold );
       pw.printf(Locale.US, "Data: DistoX-backshot-swap %c, diving-mode %c \n", tf(mDistoXBackshot), tf(mDivingMode) );
       pw.printf(Locale.US, "Data input: backsight %c, prev/next %c\n", tf(mBacksightInput), tf(mPrevNext) );
@@ -3444,6 +3466,9 @@ public class TDSetting
               mNegAltitude = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_NEG_ALTITUDE",   mNegAltitude );
               if ( vals.length > 8 ) {
                 mFineLocation = getInt( vals, 8, 60 ); setPreference( editor, "DISTOX_FINE_LOCATION", mFineLocation );
+                if ( vals.length > 10 ) {
+                  mGeoImportApp = getInt( vals, 10, 0 ); setPreference( editor, "DISTOX_GEOPOINT_APP", mGeoImportApp );
+                }
               }
             }
           }

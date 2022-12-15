@@ -15,6 +15,8 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDRequest;
+import com.topodroid.prefs.TDSetting;
+import com.topodroid.mag.WorldMagneticModel;
 // import com.topodroid.utils.TDLocale;
 // import com.topodroid.ui.MyMenuAdapter;
 import com.topodroid.ui.MyButton;
@@ -93,8 +95,13 @@ public class FixedActivity extends Activity
   // private Button mBtHelp;   // TOOLBAR
   // private Button mBtClose;
 
+  final static int FLAG_MOBILE_TOPOGRAPHER = 1;
+  final static int FLAG_GPX_RECORDER       = 2;
+  final static int FLAG_GPS_POSITION       = 4;
+  final static int FLAG_GPS_TEST           = 8;
+
   private boolean hasGps = false;
-  private boolean hasMobileTopographer = false;
+  private int mImportFlag = 0; // flag app import point 
 
   private Button     mMenuImage;
   private ListView   mMenu;
@@ -115,11 +122,13 @@ public class FixedActivity extends Activity
 
   private static final int[] menus = {
                           R.string.menu_close,
+                          R.string.menu_geopoint_app,
                           R.string.menu_help,
                           };
 
   private static final int[] help_menus = {
                           R.string.help_close_app,
+                          R.string.help_geopoint_app,
                           R.string.help_help,
                         };
 
@@ -136,13 +145,24 @@ public class FixedActivity extends Activity
     mContext = this;
 
     hasGps = /* TDandroid.ABOVE_API_23 && */ TDandroid.checkLocation( mContext );
-    hasMobileTopographer = TDandroid.hasMobileTopographer( this );
+    mImportFlag = TDandroid.getImportPointFlag( this );
+    // TDLog.v("FIXED import flag " + mImportFlag );
+    if ( mImportFlag > 0 ) {
+      int app = TDSetting.mGeoImportApp;
+      if ( app == 0 ) {
+        if ( ( mImportFlag & FLAG_MOBILE_TOPOGRAPHER ) > 0 ) { app = 1; }
+        else if ( ( mImportFlag & FLAG_GPX_RECORDER ) > 0 )  { app = 2; }
+        else if ( ( mImportFlag & FLAG_GPS_POSITION ) > 0 )  { app = 4; }
+        TDSetting.setGeoImportApp( this, app );
+        // setTheTitle();
+      }
+    }
     // Bundle extras = getIntent().getExtras();
     // if ( extras != null ) {
     // }
 
     setContentView(R.layout.fixed_activity);
-    setTitle( R.string.title_fixed );
+    setTheTitle( );
 
     // mBtHelp  = (Button) findViewById( R.id.button_help ); // TOOLBAR
     // mBtHelp.setOnClickListener( this );
@@ -163,7 +183,7 @@ public class FixedActivity extends Activity
     // }
     mButton1[0] = MyButton.getButton( mContext, this, izons[ hasGps ? 0 : 3 ] );
     mButton1[1] = MyButton.getButton( mContext, this, izons[ 1 ] );
-    mButton1[2] = MyButton.getButton( mContext, this, izons[ hasMobileTopographer ? 2 : 5 ] );
+    mButton1[2] = MyButton.getButton( mContext, this, izons[ (mImportFlag>0) ? 2 : 5 ] );
 
     mButton1[mNrButton1] = MyButton.getButton( mContext, null, R.drawable.iz_empty );
     mButtonView1 = new MyHorizontalButtonView( mButton1 );
@@ -182,6 +202,29 @@ public class FixedActivity extends Activity
     mList = (ListView) findViewById(R.id.fx_list);
     mList.setOnItemClickListener( this );
 
+  }
+
+  private void setTheTitle()
+  {
+    switch ( TDSetting.mGeoImportApp ) {
+      case 1:
+        setTitle( R.string.title_fixed_mt );
+        break;
+      case 2:
+        setTitle( R.string.title_fixed_gpx_rec );
+        break;
+      case 4:
+        setTitle( R.string.title_fixed_gps_pos );
+        break;
+      default:
+        setTitle( R.string.title_fixed );
+    }
+  }
+
+  @Override
+  public void onResume()
+  {
+    super.onResume();
     refreshList();
   }
 
@@ -189,6 +232,10 @@ public class FixedActivity extends Activity
    */
   private void refreshList()
   {
+    if ( TopoDroidApp.mData == null ) {
+      TDLog.Error("FIXED refresh list : null Data helper");
+      return;
+    }
     List< FixedInfo > fxds = TopoDroidApp.mData.selectAllFixed( TDInstance.sid, TDStatus.NORMAL );
     mFixedAdapter = new FixedAdapter( mContext, R.layout.message, fxds );
     mList.setAdapter( mFixedAdapter );
@@ -221,6 +268,23 @@ public class FixedActivity extends Activity
     (new FixedDialog( mContext, this, mSaveFixed )).show();
   }
 
+  private void addFixedPoint( final long source, 
+                              final double lng, // decimal degrees
+                              final double lat,
+                              final double alt )  // ellipsoid meters
+  {
+    runOnUiThread( new Runnable() {
+      public void run() {
+        WorldMagneticModel wmm = new WorldMagneticModel( TDInstance.context );
+        double geo = wmm.ellipsoidToGeoid( lat, lng, alt ); 
+        int nr = 0;
+        while ( mFixedAdapter.hasName( "#"+nr ) ) ++nr;
+        addFixedPoint( "#"+nr, lng, lat, alt, geo, "", source, -1, -1 ); // FIXME ACCURACY
+      }
+    } );
+  }
+
+
   /** add a fixed point
    * @param station point station name
    * @param lng     longitude [degrees]
@@ -241,12 +305,15 @@ public class FixedActivity extends Activity
                              double accur_v
                            )
   {
+    TDLog.v("FIXED add point " + name + ": " + lng + " " + lat + " " + h_ell + " " + h_geo );
     if ( comment == null ) comment = "";
     FixedInfo f = addLocation( name, lng, lat, h_ell, h_geo, comment, source, accur, accur_v );
-    // if ( f != null ) { // always true
+    if ( f != null ) {
       mFixedAdapter.add( f );
       mList.invalidate();
-    // }
+    } else {
+      TDLog.Error("FIXED failed database insert ");
+    }
   }
 
   /** insert a new fixed point 
@@ -260,8 +327,9 @@ public class FixedActivity extends Activity
    */
   private FixedInfo addLocation( String station, double lng, double lat, double h_ell, double h_geo, String comment, long source, double accur, double accur_v )
   {
-    TDLog.v("FIXED new " + station + ": " + lng + " " + lat + " H " + h_ell + " " + h_geo );
+    if (  TopoDroidApp.mData == null ) return null;
     long id = TopoDroidApp.mData.insertFixed( TDInstance.sid, -1L, station, lng, lat, h_ell, h_geo, comment, 0L, source, accur, accur_v );
+    // TDLog.v("FIXED new " + id + " " + station + ": " + lng + " " + lat + " H " + h_ell + " " + h_geo );
     return new FixedInfo( id, station, lng, lat, h_ell, h_geo, comment, source, accur, accur_v ); 
   }
 
@@ -274,7 +342,8 @@ public class FixedActivity extends Activity
     ArrayAdapter< String > menu_adapter = new ArrayAdapter<String >( this, R.layout.menu );
 
     menu_adapter.add( res.getString( menus[0] ) ); // CLOSE
-    menu_adapter.add( res.getString( menus[1] ) ); // HELP
+    menu_adapter.add( res.getString( menus[1] ) ); // IMPORT APP
+    menu_adapter.add( res.getString( menus[2] ) ); // HELP
 
     mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
@@ -297,6 +366,25 @@ public class FixedActivity extends Activity
     int p = 0;
     if ( p++ == pos ) { // CLOSE 
       super.onBackPressed();
+    } else if ( p++ == pos ) { // IMPORT APP
+      if ( mImportFlag == 0 ) {
+        TDToast.makeWarn( R.string.no_geopoint_app );
+      } else {
+        int app = TDSetting.mGeoImportApp; // app cannot be 0 because mImportFlag > 0 
+        for ( int k=0; k<3; ++k ) {
+          app = app * 2;
+          if ( app > 4 ) app = 1;
+          if ( app == 1 && ( mImportFlag & FLAG_MOBILE_TOPOGRAPHER ) > 0 ) {
+            break;
+          } else if ( app == 2 && ( mImportFlag & FLAG_GPX_RECORDER ) > 0 ) {
+            break;
+          } else if ( app == 4 && ( mImportFlag & FLAG_GPS_POSITION ) > 0 ) {
+            break;
+          }
+        }
+        TDSetting.setGeoImportApp( this, app );
+        setTheTitle();
+      }
     } else if ( p == pos ) { // HELP
       doHelp();
     }
@@ -358,7 +446,7 @@ public class FixedActivity extends Activity
     } else if ( /* k < mNrButton1 && */ b == mButton1[k++] ) { // ADD
       new FixedAddDialog( mContext, this ).show();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) { // IMPORT MOBILE TOPOGRAPHER
-      if ( hasMobileTopographer ) {
+      if ( mImportFlag > 0 ) {
         // get the file with MediaStore
         selectImportFromProvider();
         // FixedImportDialog dialog = new FixedImportDialog( mContext, this );
@@ -377,7 +465,13 @@ public class FixedActivity extends Activity
   private void selectImportFromProvider( ) // GPS IMPORT
   {
     Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT );
-    intent.setType( "application/octet-stream" );
+    if ( TDSetting.mGeoImportApp == FLAG_MOBILE_TOPOGRAPHER ) { 
+      intent.setType( "application/octet-stream" );
+    } else if ( TDSetting.mGeoImportApp == FLAG_GPX_RECORDER  ) {
+      intent.setType( "application/octet-stream" );
+    } else if (  TDSetting.mGeoImportApp == FLAG_GPS_POSITION ) {
+      intent.setType( "text/*" );
+    }
     intent.addCategory(Intent.CATEGORY_OPENABLE);
     intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
     // intent.putExtra( "importtype", index ); // extra is not returned to the app
@@ -399,7 +493,7 @@ public class FixedActivity extends Activity
    */
   void updateFixedData( FixedInfo fxd, double lng, double lat, double h_ell, double h_geo ) // , double accur, double accur_v )
   {
-    TDLog.v("FIXED update data " + fxd.name + ": " + lng + " " + lat + " H " + h_ell + " " + h_geo );
+    // TDLog.v("FIXED update data " + fxd.name + ": " + lng + " " + lat + " H " + h_ell + " " + h_geo );
     TopoDroidApp.mData.updateFixedData( fxd.id, TDInstance.sid, lng, lat, h_ell, h_geo ); // , accur, accur_v );
     // mList.invalidate();
     refreshList();
@@ -412,6 +506,7 @@ public class FixedActivity extends Activity
    */
   void updateFixedNameComment( FixedInfo fxd, String name, String comment )
   {
+    // TDLog.v("FIXED update name " + name + " comment " + comment );
     TopoDroidApp.mData.updateFixedStationComment( fxd.id, TDInstance.sid, name, comment );
     // mList.invalidate();
     refreshList();
@@ -422,6 +517,7 @@ public class FixedActivity extends Activity
    */
   public void dropFixed( FixedInfo fxd )
   {
+    // TDLog.v("FIXED drop fixed : id " + fxd.id );
     TopoDroidApp.mData.updateFixedStatus( fxd.id, TDInstance.sid, TDStatus.DELETED );
     refreshList();
   }
@@ -485,7 +581,7 @@ public class FixedActivity extends Activity
    */
   void getProj4Coords( FixedAddDialog dialog )
   {
-    TDLog.v("FIXED get Proj4 coords");
+    // TDLog.v("FIXED get Proj4 coords");
     try {
       Intent intent = new Intent( "Proj4.intent.action.Launch" );
       intent.putExtra( "version", "1.1" );      // Proj4 version
@@ -535,34 +631,76 @@ public class FixedActivity extends Activity
         }
       } else if ( reqCode == TDRequest.REQUEST_GET_GPS_IMPORT ) {
         Uri uri = intent.getData();
-        ArrayList< String > gps_points = new ArrayList<>();
-        try {
+        try { // MobileTopographer
           boolean ok = true;
           InputStreamReader isr = new InputStreamReader( this.getContentResolver().openInputStream( uri ) );
           BufferedReader br = new BufferedReader( isr );
-          while ( ok ) {
-            String line = br.readLine();
-            if ( line == null ) break;
+          String line = br.readLine();
+          if ( line != null ) {
             // TDLog.v( "read " + line );
-
-            // syntax: name, lat, lng, h_ell, h_geo
-            // units:        dec.degree meters
-            String[] vals = line.split(",");
-            int len = vals.length;
-            if ( len != 5 ) {
-              ok = false;
-              break;
+            if ( line.startsWith("<?xml ") ) { // GPX recorder
+              String trkpt_line = null;
+              // while ( ( line = br.readLine() ) != null && line.indexOf("<trkseg>") < 0 ) /* nothing */ ;
+              while ( ( line = br.readLine() ) != null ) {
+                if ( line.indexOf("</trkpt") > 0 ) trkpt_line = line;
+              }
+              if ( trkpt_line != null ) {
+                String[] vals = trkpt_line.split("\"");
+                double lat = Double.parseDouble( vals[1] );
+                double lng = Double.parseDouble( vals[3] );
+                int pos  = vals[4].indexOf("<ele>");
+                int qos = vals[4].indexOf("</ele>");
+                double alt = Double.parseDouble( vals[4].substring( pos+5, qos ) );
+                addFixedPoint( FixedInfo.SRC_GPX_RECORDER, lng, lat, alt );
+              } else {
+                TDToast.makeBad( R.string.GPX_record_none );
+              }
+            } else if ( line.startsWith("\"{manufacturer") ) { // GPS position estimate
+              line = br.readLine(); // time,latitude,longitude,altitude, ...
+              double lat = 0;
+              double lng = 0;
+              double alt = 0;
+              int cnt = 0;
+              while ( ( line = br.readLine() ) != null ) {
+                String[] vals = line.split(",");
+                lat += Double.parseDouble( vals[1] );
+                lng += Double.parseDouble( vals[2] );
+                alt += Double.parseDouble( vals[3] );
+                cnt ++;
+              }
+              if ( cnt > 0 ) {
+                lat /= cnt;
+                lng /= cnt;
+                alt /= cnt;
+                addFixedPoint( FixedInfo.SRC_GPS_POSITION, lng, lat, alt );
+              } else {
+                TDToast.makeBad( R.string.GPS_position_none );
+              }
+            } else { // MobileTopographer
+              ArrayList< String > gps_points = new ArrayList<>();
+              do {
+                // syntax: name, lat, lng, h_ell, h_geo
+                // units:        dec.degree meters
+                String[] vals = line.split(",");
+                int len = vals.length;
+                if ( len != 5 ) {
+                  ok = false;
+                  break;
+                }
+                gps_points.add( line.trim() ); // add the whole line - needed for item click processing
+                line = br.readLine();
+                // TDLog.v( "read " + line );
+              } while ( line != null );
+              if ( ! ok ) {
+                TDToast.makeBad( R.string.MT_bad_file );
+              } else if ( gps_points.size() > 0 ) {
+                (new FixedImportDialog( mContext, this, gps_points )).show();
+              } else {
+                TDToast.makeBad( R.string.MT_points_none );
+              }
             }
-            gps_points.add( line.trim() ); // add the whole line - needed for item click processing
           }
           isr.close();
-          if ( ! ok ) {
-            TDToast.makeBad( R.string.MT_bad_file );
-          } else if ( gps_points.size() > 0 ) {
-            (new FixedImportDialog( mContext, this, gps_points )).show();
-          } else {
-            TDToast.makeBad( R.string.MT_points_none );
-          }
         // } catch ( NumberFormatException e ) {
         } catch ( FileNotFoundException e ) {
           TDLog.Error( "File not found " + e.getMessage() );

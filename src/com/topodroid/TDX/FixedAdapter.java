@@ -44,6 +44,18 @@ class FixedAdapter extends ArrayAdapter< FixedInfo >
    * @param pos   index (must be between 0 and the number of items)
    */
   public FixedInfo get( int pos ) { return items.get(pos); }
+
+  /** @return true if there is an item with the given name
+   * @param name   station name
+   */
+  boolean hasName( String name )
+  {
+    if ( name == null || name.length() == 0 ) return false;
+    for ( FixedInfo item : items ) {
+      if ( name.equals( item.name ) ) return true;
+    }
+    return false;
+  }
  
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )

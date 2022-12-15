@@ -12,16 +12,28 @@ The window shows the list of geo-localized points, and has three buttons to inse
 <ul>
 <li><a href="page_fixed_gps.htm">GNSS</a> gets the new point coordinates with the GNSS (if "Location" permission has been granted)</li>
 <li><a href="page_fixed_add.htm">Add</a> enter the coordinates of the new geo-point manually</li>
-<li><a href="page_fixed_import.htm">Import</a> the coordinates from <i>MobileTopographer</i></li>
+<li><a href="page_fixed_import.htm">Import</a> the coordinates from a point file created by a GNSS app</li>
 </ul>
 <br><p>
 
 <b>Menus</b>:<br>
 <ul>
 <li>Close the window</li>
+<li>Change the external geopoint app</li>
 <li>Help</li>
 </ul>
 <br><p>
+
+<b>External GNSS apps</b><br>
+TopoDroid can import geopoint coordinates from 
+<ul>
+<li><i>MobileTopographer</i> point files. A dialog is opened to choose the geopoint.</li>
+<li><i>GPX recorder</i> track (gpx) file. The last track-point is used.</li> 
+<li><i>GPX position</i> position (csv) file. TopoDroid computes an average of the positions.</li> 
+</ul><br>
+
+The station name of geopoint imported from <i>GPX recorder</i> and <i>GPX position</i> is set by TopoDroid
+automatically as a number prefixed by '#'.<br><p>
 
 Tapping a geo-point entry in the list opens the <a href="page_fixed.htm">Geo-point edit</a> dialog.<br><p>
 
@@ -36,6 +48,7 @@ If the keyboard does not have the decimal point '.' use the slash or the comma i
 <ul style="margin-top:0; margin-bottom:0">
 <li><i>Location units</i>: either dd.mm.ss or decimal degrees [A]</li>
 <li><i>C.R.S.</i> coordinate reference system [default is long-lat] (disabled)</li>
+<li><i>Geopoint app</i> [default none]</li>
 </ul>
 </body>
 </html>

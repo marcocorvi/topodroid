@@ -567,15 +567,31 @@ public class TDandroid
   /** @return true is MobileTopographer is installed
    * @param context   app context
    */
-  public static boolean hasMobileTopographer( Context context )
+  public static int getImportPointFlag( Context context )
   {
+    int ret = 0;
+    PackageManager pm = context.getPackageManager();
     try {
-      PackageManager pm = context.getPackageManager();
       PackageInfo pi = pm.getPackageInfo( "gr.stasta.mobiletopographer", 0 );
-      return true;
+      ret |= FixedActivity.FLAG_MOBILE_TOPOGRAPHER;
     } catch ( PackageManager.NameNotFoundException e ) {
-      return false;
     }
+    try {
+      PackageInfo pi = pm.getPackageInfo( "nz.ac.elec.gpsapp", 0 );
+      ret |= FixedActivity.FLAG_GPS_POSITION;
+    } catch ( PackageManager.NameNotFoundException e ) {
+    }
+    try {
+      PackageInfo pi = pm.getPackageInfo( "com.doitintuitively.gpxrecorder", 0 );
+      ret |= FixedActivity.FLAG_GPX_RECORDER;
+    } catch ( PackageManager.NameNotFoundException e ) {
+    }
+    // try {
+    //   PackageInfo pi = pm.getPackageInfo( "com.android.gpstest", 0 );
+    //   ret |= FixedActivity.FLAG_GPS_TEST
+    // } catch ( PackageManager.NameNotFoundException e ) {
+    // }
+    return ret;
   }
 
 }

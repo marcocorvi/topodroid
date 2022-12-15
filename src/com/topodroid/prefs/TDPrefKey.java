@@ -984,6 +984,7 @@ public class TDPrefKey
     "DISTOX_CRS",           // default C.R.S.
     "DISTOX_NEG_ALTITUDE",  // allow negative altitudes
     "DISTOX_FINE_LOCATION", // fine location time
+    "DISTOX_GEOPOINT_APP",  // geopoint import app
     null
   };
 
@@ -991,21 +992,24 @@ public class TDPrefKey
     R.string.pref_unit_location_title,
     R.string.pref_crs_title,
     R.string.pref_neg_altitude_title,
-    R.string.pref_fine_location_title
+    R.string.pref_fine_location_title,
+    R.string.pref_geoimport_app_title
   };
 
   static int[] LOCATIONdesc = {
     R.string.pref_unit_location_summary,
     R.string.pref_crs_summary,
     R.string.pref_neg_altitude_summary,
-    R.string.pref_fine_location_summary
+    R.string.pref_fine_location_summary,
+    R.string.pref_geoimport_app_summary
   };
 
   public static String[] LOCATIONdef = {
     "ddmmss",
     "Long-Lat",
     FALSE,
-    "60"
+    "60",
+    "0", // TDString.ZERO
   };
 
   // ------------------------------------------------------------------------------

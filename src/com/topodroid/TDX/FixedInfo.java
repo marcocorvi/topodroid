@@ -26,12 +26,15 @@ import java.util.Locale;
  */
 public class FixedInfo extends MagLatLong
 {
-  public final static long SRC_UNKNOWN    = 0L;
-  public final static long SRC_TOPODROID  = 1L;
-  public final static long SRC_MANUAL     = 2L;
-  public final static long SRC_MOBILE_TOP = 3L;
+  public final static long SRC_UNKNOWN      = 0L;
+  public final static long SRC_TOPODROID    = 1L;
+  public final static long SRC_MANUAL       = 2L;
+  public final static long SRC_MOBILE_TOP   = 3L;
+  public final static long SRC_GPX_RECORDER = 4L;
+  public final static long SRC_GPS_POSITION = 5L;
+
   long   id;       // fixed id
-  long   source;   // 0: unknown,  1: topodroid,  2: manual,   3: mobile-topographer
+  long   source;   // 0: unknown,  1: topodroid,  2: manual,   3: mobile-topographer, ...
   public String name;     // station name, or whatever
   // public double lat;      // wgs84 latitude [decimal deg] (from MagLatLong)
   // public double lng;      // wgs84 longitude [decimal deg]
@@ -182,6 +185,8 @@ public class FixedInfo extends MagLatLong
       case 1: return "TopoDroid";
       case 2: return "manual";
       case 3: return "Mobile-Topographer";
+      case 4: return "GPX recorder";
+      case 5: return "GPS position";
     }
     return "unknown";
   }
