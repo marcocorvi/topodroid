@@ -598,11 +598,11 @@ public class TDandroid
       ret |= FixedActivity.FLAG_GPX_RECORDER;
     } catch ( PackageManager.NameNotFoundException e ) {
     }
-    // try {
-    //   PackageInfo pi = pm.getPackageInfo( "com.android.gpstest", 0 );
-    //   ret |= FixedActivity.FLAG_GPS_TEST
-    // } catch ( PackageManager.NameNotFoundException e ) {
-    // }
+    try {
+      PackageInfo pi = pm.getPackageInfo( "com.android.gpstest", 0 );
+      ret |= FixedActivity.FLAG_GPS_TEST;
+    } catch ( PackageManager.NameNotFoundException e ) {
+    }
     return ret;
   }
 

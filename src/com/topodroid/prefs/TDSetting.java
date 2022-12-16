@@ -1276,7 +1276,7 @@ public class TDSetting
     mNegAltitude   = prefs.getBoolean( keyLoc[2], bool(defLoc[2]) ); // DISTOX_NEG_ALTITUDE
     mFineLocation  = tryInt( prefs,    keyLoc[3], defLoc[3] );       // DISTOX_FINE_LOCATION
     // mGeoImportApp  = tryInt( prefs,    keyLoc[4], defLoc[4] );       // DISTOX_GEOPOINT_APP
-    TDLog.v("PREFS key <" + keyLoc[4] + "> val <" + defLoc[4] + ">" );
+    // TDLog.v("PREFS key <" + keyLoc[4] + "> val <" + defLoc[4] + ">" );
     try {
       mGeoImportApp = Integer.parseInt( prefs.getString( keyLoc[4], defLoc[4] ) );
     } catch ( RuntimeException e ) {

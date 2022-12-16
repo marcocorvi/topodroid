@@ -306,7 +306,7 @@ public class TDLog
   {
     // mLogStream  = Integer.parseInt( prefs.getString("DISTOX_LOG_STREAM", "0") );
     // mLogAppend = prefs.getBoolean( "DISTOX_LOG_APPEND", false );
-    Log.v( TAG, "LOG load log prefs");
+    // Log.v( TAG, "LOG load log prefs");
     setLogTarget();
   //   int lk = 2;
   //   final String[] log_key = TDPrefKey.LOG;

@@ -1174,6 +1174,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- TODO string name="title_fixed_mt">Geo points [Mobile Topographer]</string -->
     <!-- TODO string name="title_fixed_gpx_rec">Geo points [GPX Recorder]</string -->
     <!-- TODO string name="title_fixed_gps_pos">Geo points [GPS Position]</string -->
+    <!-- TODO string name="title_fixed_gps_test">Geo points [GPS Test]</string -->
     <string name="title_fixed_edit">Helymeghatározás szerkesztése</string>
     <string name="title_fixed_import">Helymeghatározás importálása</string>
     <string name="title_fixed_gps">GNSS helymeghatározás</string>

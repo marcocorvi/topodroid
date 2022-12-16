@@ -157,6 +157,7 @@ public class FixedActivity extends Activity
         if ( ( mImportFlag & FLAG_MOBILE_TOPOGRAPHER ) > 0 ) { app = 1; }
         else if ( ( mImportFlag & FLAG_GPX_RECORDER ) > 0 )  { app = 2; }
         else if ( ( mImportFlag & FLAG_GPS_POSITION ) > 0 )  { app = 4; }
+        else if ( ( mImportFlag & FLAG_GPS_TEST     ) > 0 )  { app = 8; }
         TDSetting.setGeoImportApp( this, app );
         // setTheTitle();
       }
@@ -182,6 +183,19 @@ public class FixedActivity extends Activity
     // if ( hasGps ) ++ mNrButton1;
     mButton1 = new Button[ mNrButton1 + 1];
 
+    mMenu = (ListView) findViewById( R.id.menu );
+    mMenu.setOnItemClickListener( this );
+    setMenuAdapter( ); // in on Start()
+    closeMenu();
+
+    mList = (ListView) findViewById(R.id.fx_list);
+    mList.setOnItemClickListener( this );
+  }
+
+  /** make the UI buttons
+   */
+  private void makeButtons()
+  {
     // int kz = 0; // (hasGps)? 0 : 1; // index of izons
     // for ( int k=0; k<mNrButton1; ++k ) {
     //   mButton1[k] = MyButton.getButton( mContext, this, izons[kz++] );
@@ -199,17 +213,10 @@ public class FixedActivity extends Activity
     mMenuImage = (Button) findViewById( R.id.handle );
     mMenuImage.setOnClickListener( this );
     TDandroid.setButtonBackground( mMenuImage, MyButton.getButtonBackground( mContext, getResources(), R.drawable.iz_menu ) );
-
-    mMenu = (ListView) findViewById( R.id.menu );
-    mMenu.setOnItemClickListener( this );
-    setMenuAdapter( ); // in on Start()
-    closeMenu();
-
-    mList = (ListView) findViewById(R.id.fx_list);
-    mList.setOnItemClickListener( this );
-
   }
 
+  /** set the UI title
+   */
   private void setTheTitle()
   {
     switch ( TDSetting.mGeoImportApp ) {
@@ -222,15 +229,21 @@ public class FixedActivity extends Activity
       case 4:
         setTitle( R.string.title_fixed_gps_pos );
         break;
+      case 8:
+        setTitle( R.string.title_fixed_gps_test );
+        break;
       default:
         setTitle( R.string.title_fixed );
     }
   }
 
+  /** lifecycke - on resume
+   */
   @Override
   public void onResume()
   {
     super.onResume();
+    makeButtons();
     refreshList();
   }
 
@@ -275,9 +288,10 @@ public class FixedActivity extends Activity
   }
 
   private void addFixedPoint( final long source, 
-                              final double lng, // decimal degrees
+                              final double lng,  // decimal degrees
                               final double lat,
-                              final double alt )  // ellipsoid meters
+                              final double alt,  // ellipsoid meters
+                              final double acc ) // accuracy
   {
     runOnUiThread( new Runnable() {
       public void run() {
@@ -285,7 +299,7 @@ public class FixedActivity extends Activity
         double geo = wmm.ellipsoidToGeoid( lat, lng, alt ); 
         int nr = 0;
         while ( mFixedAdapter.hasName( "#"+nr ) ) ++nr;
-        addFixedPoint( "#"+nr, lng, lat, alt, geo, "", source, -1, -1 ); // FIXME ACCURACY
+        addFixedPoint( "#"+nr, lng, lat, alt, geo, "", source, acc, acc );
       }
     } );
   }
@@ -311,7 +325,7 @@ public class FixedActivity extends Activity
                              double accur_v
                            )
   {
-    TDLog.v("FIXED add point " + name + ": " + lng + " " + lat + " " + h_ell + " " + h_geo );
+    // TDLog.v("FIXED add point " + name + ": " + lng + " " + lat + " " + h_ell + " " + h_geo );
     if ( comment == null ) comment = "";
     FixedInfo f = addLocation( name, lng, lat, h_ell, h_geo, comment, source, accur, accur_v );
     if ( f != null ) {
@@ -377,14 +391,16 @@ public class FixedActivity extends Activity
         TDToast.makeWarn( R.string.no_geopoint_app );
       } else {
         int app = TDSetting.mGeoImportApp; // app cannot be 0 because mImportFlag > 0 
-        for ( int k=0; k<3; ++k ) {
+        for ( int k=0; k<4; ++k ) {
           app = app * 2;
-          if ( app > 4 ) app = 1;
+          if ( app > FLAG_GPS_TEST ) app = 1;
           if ( app == 1 && ( mImportFlag & FLAG_MOBILE_TOPOGRAPHER ) > 0 ) {
             break;
           } else if ( app == 2 && ( mImportFlag & FLAG_GPX_RECORDER ) > 0 ) {
             break;
           } else if ( app == 4 && ( mImportFlag & FLAG_GPS_POSITION ) > 0 ) {
+            break;
+          } else if ( app == 8 && ( mImportFlag & FLAG_GPS_TEST ) > 0 ) {
             break;
           }
         }
@@ -471,7 +487,7 @@ public class FixedActivity extends Activity
         startActivity( intent );
         // startActivityForResult( intent, TDRequest.REQUEST_GPSTEST ); // GpsTest does not set result
       } catch ( RuntimeException e ) {
-        TDLog.v("ERROR " + e.getMessage() );
+        TDLog.Error("ERROR " + e.getMessage() );
       }
     }
     // refreshList();
@@ -479,18 +495,26 @@ public class FixedActivity extends Activity
 
   private void selectImportFromProvider( ) // GPS IMPORT
   {
+    // TDLog.v("FIXED import app " + TDSetting.mGeoImportApp );
+    int request = 0;
     Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT );
     if ( TDSetting.mGeoImportApp == FLAG_MOBILE_TOPOGRAPHER ) { 
       intent.setType( "application/octet-stream" );
+      request = TDRequest.REQUEST_MOBILE_TOPOGRAPHER;
     } else if ( TDSetting.mGeoImportApp == FLAG_GPX_RECORDER  ) {
       intent.setType( "application/octet-stream" );
+      request = TDRequest.REQUEST_GPX_RECORDER;
     } else if (  TDSetting.mGeoImportApp == FLAG_GPS_POSITION ) {
       intent.setType( "text/*" );
+      request = TDRequest.REQUEST_GPS_POSITION;
+    } else if (  TDSetting.mGeoImportApp == FLAG_GPS_TEST ) {
+      intent.setType( "text/*" );
+      request = TDRequest.REQUEST_GPS_TEST;
     }
     intent.addCategory(Intent.CATEGORY_OPENABLE);
     intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
     // intent.putExtra( "importtype", index ); // extra is not returned to the app
-    startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.title_import_gps ) ), TDRequest.REQUEST_GET_GPS_IMPORT );
+    startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.title_import_gps ) ), request );
   }
 
 
@@ -647,9 +671,9 @@ public class FixedActivity extends Activity
         }
       // } else if ( reqCode == TDRequest.REQUEST_GPSTEST ) {
       //   (new FixedAddDialog( mContext, this, true )).show();
-      } else if ( reqCode == TDRequest.REQUEST_GET_GPS_IMPORT ) {
+      } else if ( reqCode == TDRequest.REQUEST_GPX_RECORDER ) {
         Uri uri = intent.getData();
-        try { // MobileTopographer
+        try { 
           boolean ok = true;
           InputStreamReader isr = new InputStreamReader( this.getContentResolver().openInputStream( uri ) );
           BufferedReader br = new BufferedReader( isr );
@@ -669,11 +693,28 @@ public class FixedActivity extends Activity
                 int pos  = vals[4].indexOf("<ele>");
                 int qos = vals[4].indexOf("</ele>");
                 double alt = Double.parseDouble( vals[4].substring( pos+5, qos ) );
-                addFixedPoint( FixedInfo.SRC_GPX_RECORDER, lng, lat, alt );
+                addFixedPoint( FixedInfo.SRC_GPX_RECORDER, lng, lat, alt, -1 );
               } else {
                 TDToast.makeBad( R.string.GPX_record_none );
               }
-            } else if ( line.startsWith("\"{manufacturer") ) { // GPS position estimate
+            }
+          }
+          isr.close();
+        } catch ( FileNotFoundException e ) {
+          TDLog.Error( "File not found " + e.getMessage() );
+        } catch ( IOException e ) { 
+          TDLog.Error( "IO exception " + e.getMessage() );
+        }
+      } else if ( reqCode == TDRequest.REQUEST_GPS_POSITION ) {
+        Uri uri = intent.getData();
+        try { 
+          boolean ok = true;
+          InputStreamReader isr = new InputStreamReader( this.getContentResolver().openInputStream( uri ) );
+          BufferedReader br = new BufferedReader( isr );
+          String line = br.readLine();
+          if ( line != null ) {
+            // TDLog.v( "read " + line );
+            if ( line.startsWith("\"{manufacturer") ) { // GPS position estimate
               line = br.readLine(); // time,latitude,longitude,altitude, ...
               double lat = 0;
               double lng = 0;
@@ -690,36 +731,78 @@ public class FixedActivity extends Activity
                 lat /= cnt;
                 lng /= cnt;
                 alt /= cnt;
-                addFixedPoint( FixedInfo.SRC_GPS_POSITION, lng, lat, alt );
+                addFixedPoint( FixedInfo.SRC_GPS_POSITION, lng, lat, alt, -1 );
               } else {
                 TDToast.makeBad( R.string.GPS_position_none );
-              }
-            } else { // MobileTopographer
-              ArrayList< String > gps_points = new ArrayList<>();
-              do {
-                // syntax: name, lat, lng, h_ell, h_geo
-                // units:        dec.degree meters
-                String[] vals = line.split(",");
-                int len = vals.length;
-                if ( len != 5 ) {
-                  ok = false;
-                  break;
-                }
-                gps_points.add( line.trim() ); // add the whole line - needed for item click processing
-                line = br.readLine();
-                // TDLog.v( "read " + line );
-              } while ( line != null );
-              if ( ! ok ) {
-                TDToast.makeBad( R.string.MT_bad_file );
-              } else if ( gps_points.size() > 0 ) {
-                (new FixedImportDialog( mContext, this, gps_points )).show();
-              } else {
-                TDToast.makeBad( R.string.MT_points_none );
               }
             }
           }
           isr.close();
-        // } catch ( NumberFormatException e ) {
+        } catch ( FileNotFoundException e ) {
+          TDLog.Error( "File not found " + e.getMessage() );
+        } catch ( IOException e ) { 
+          TDLog.Error( "IO exception " + e.getMessage() );
+        }
+      } else if ( reqCode == TDRequest.REQUEST_GPS_TEST ) {
+        Uri uri = intent.getData();
+        try { 
+          InputStreamReader isr = new InputStreamReader( this.getContentResolver().openInputStream( uri ) );
+          BufferedReader br = new BufferedReader( isr );
+          String fix_line = null;
+          String line;
+          while ( ( line = br.readLine() ) != null ) {
+            if ( line.startsWith("Fix,") ) { // GPS Test
+              fix_line = line;
+            }
+          }
+          if ( fix_line != null ) {
+            String[] vals = fix_line.split(",");
+            double lat = Double.parseDouble( vals[2] );
+            double lng = Double.parseDouble( vals[3] );
+            double alt = Double.parseDouble( vals[4] );
+            double acc = Double.parseDouble( vals[6] );
+            addFixedPoint( FixedInfo.SRC_GPS_TEST, lng, lat, alt, acc );
+          } else {
+            TDToast.makeBad( R.string.GPS_position_none );
+          }
+          isr.close();
+        } catch ( FileNotFoundException e ) {
+          TDLog.Error( "File not found " + e.getMessage() );
+        } catch ( IOException e ) { 
+          TDLog.Error( "IO exception " + e.getMessage() );
+        }
+      } else if ( reqCode == TDRequest.REQUEST_MOBILE_TOPOGRAPHER ) {
+        Uri uri = intent.getData();
+        try { 
+          boolean ok = true;
+          InputStreamReader isr = new InputStreamReader( this.getContentResolver().openInputStream( uri ) );
+          BufferedReader br = new BufferedReader( isr );
+          String line = br.readLine();
+          if ( line != null ) {
+            // TDLog.v( "read " + line );
+            ArrayList< String > gps_points = new ArrayList<>();
+            do {
+              // syntax: name, lat, lng, h_ell, h_geo
+              // units:        dec.degree meters
+              String[] vals = line.split(",");
+              int len = vals.length;
+              if ( len != 5 ) {
+                ok = false;
+                break;
+              }
+              gps_points.add( line.trim() ); // add the whole line - needed for item click processing
+              line = br.readLine();
+              // TDLog.v( "read " + line );
+            } while ( line != null );
+            if ( ! ok ) {
+              TDToast.makeBad( R.string.MT_bad_file );
+            } else if ( gps_points.size() > 0 ) {
+              (new FixedImportDialog( mContext, this, gps_points )).show();
+            } else {
+              TDToast.makeBad( R.string.MT_points_none );
+            }
+          }
+          isr.close();
         } catch ( FileNotFoundException e ) {
           TDLog.Error( "File not found " + e.getMessage() );
         } catch ( IOException e ) { 

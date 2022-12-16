@@ -1180,6 +1180,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- TODO string name="title_fixed_mt">Geo points [Mobile Topographer]</string -->
     <!-- TODO string name="title_fixed_gpx_rec">Geo points [GPX Recorder]</string -->
     <!-- TODO string name="title_fixed_gps_pos">Geo points [GPS Position]</string -->
+    <!-- TODO string name="title_fixed_gps_test">Geo points [GPS Test]</string -->
     <string name="title_fixed_edit">Modifier point</string>
     <string name="title_fixed_import">Importer un point</string>
     <string name="title_fixed_gps">Coordonnées du GPS</string>

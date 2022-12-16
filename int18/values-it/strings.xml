@@ -1166,6 +1166,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- TODO string name="title_fixed_mt">Geo points [Mobile Topographer]</string -->
     <!-- TODO string name="title_fixed_gpx_rec">Geo points [GPX Recorder]</string -->
     <!-- TODO string name="title_fixed_gps_pos">Geo points [GPS Position]</string -->
+    <!-- TODO string name="title_fixed_gps_test">Geo points [GPS Test]</string -->
     <string name="title_fixed_edit">Modifica posizione</string>
     <string name="title_fixed_import">Importa punto fisso</string>
     <string name="title_fixed_gps">Punto fisso: GPS</string>

@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
@@ -34,6 +34,7 @@ import android.view.View;
 // import android.text.ClipboardManager; // deprecated API-11
 import android.content.ClipboardManager;
 import android.content.ClipData;
+// import android.content.ClipDescription;
 
 import android.inputmethodservice.KeyboardView;
 
@@ -214,6 +215,8 @@ class FixedAddDialog extends MyDialog
     if ( cm != null && cm.hasPrimaryClip() ) {
       // CharSequence text = cm.getText();
       ClipData clip = cm.getPrimaryClip();
+      // ClipDescription desc = clip.getDescription();
+      // TDLog.v("FIXED clip items " + clip.getItemCount() + " desc " + desc.toString() );
       if ( clip.getItemCount() > 0 ) {
         CharSequence text = clip.getItemAt(0).coerceToText( mContext );
         if ( text != null ) {

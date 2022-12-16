@@ -22,12 +22,14 @@
      <item name="mobile_topographer">Mobile Topographer</item>
      <item name="gpx_recorder">GPX Recorder</item>
      <item name="gps_position">GPS Position</item>
+     <item name="gps_test">GPS Test</item>
   </string-array>
   <string-array name="geoImportAppValue" translatable="false"> <!-- values must agree with flags in FixedActvity -->
      <item name="none">0</item>
      <item name="mobile_topographer">1</item>
      <item name="gpx_recorder">2</item>
      <item name="gps_position">4</item>
+     <item name="gps_test">8</item>
   </string-array>
   
   <string-array name="orientation">

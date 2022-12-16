@@ -20,11 +20,15 @@ public class TDRequest
   public static final int REQUEST_DEVICE    = 5; 
   // public static final int QCAM_COMPASS_DRAWWINDOW  = 6;
   public static final int PLOT_RELOAD = 7;
-  public static final int REQUEST_GET_IMPORT = 8;
-  public static final int REQUEST_GET_EXPORT = 9;
-  public static final int REQUEST_GET_GPS_IMPORT = 10;
-  public static final int REQUEST_SETTINGS = 11;
-  public static final int REQUEST_GPSTEST  = 12;
+  public static final int REQUEST_GET_IMPORT         = 8;
+  public static final int REQUEST_GET_EXPORT         = 9;
+  // public static final int REQUEST_GET_GPS_IMPORT  = 10; // unused - replaced by 13-16
+  public static final int REQUEST_SETTINGS           = 11;
+  // public static final int REQUEST_GPSTEST         = 12; // unused
+  public static final int REQUEST_MOBILE_TOPOGRAPHER = 13;
+  public static final int REQUEST_GPX_RECORDER       = 14;
+  public static final int REQUEST_GPS_POSITION       = 15;
+  public static final int REQUEST_GPS_TEST           = 16;
 
   // public static final int REQUEST_TREE_URI = 20;
 
