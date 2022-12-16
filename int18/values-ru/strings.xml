@@ -241,8 +241,8 @@
     <string name="import_zip_newer">Импортирован zip более новой версии</string>
     <!-- UNUSED string name="import_zip_wait">Импорт zip файла может занять много времени. Обождите &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Сохранение абриса &#8230; обождите&#8230;</string -->
-    <!-- TODO string name="GPS_position_none">No GPS position data</string -->
-    <!-- TODO string name="GPX_record_none">No GPX point record</string -->
+    <string name="GPS_position_none">Нет данных о местоположении GPS</string>
+    <string name="GPX_record_none">Нет записи точки GPX</string>
     <string name="MT_points_none">Нет точки MobileTopographer</string>
     <string name="MT_bad_file">Плохойй файл MobileTopographer</string>
     <string name="bad_manifest">Неверный файл манифеста</string>
@@ -388,7 +388,7 @@
     <string name="no_feature_pdf">PDF не поддерживается</string>
     <string name="no_gms">Отсутствуют данные для калибровки.\nИспользуйте кнопку Скачать</string>
     <string name="no_geo_station">Ошибка: отсутствует пикет с координатами</string>
-    <!-- TODO string name="no_geopoint_app">No geopoint app</string -->
+    <string name="no_geopoint_app">Нет приложения геопозиционирования</string>
     <string name="no_leg_first">Выбор не начинается с замера между пикетами</string>
     <string name="no_leg_intersection">Разрез не пересекает пикет</string>
     <string name="no_location_data">Нет данных о местоположении</string>
@@ -430,7 +430,7 @@
     <string name="menu_device">ПРИБОР</string>
     <string name="menu_export">Экспорт</string>
     <string name="menu_firmware">Прошивка</string>
-    <!-- TODO string name="menu_geopoint_app">GEOPOINT APP</string -->
+    <string name="menu_geopoint_app">ПРИЛОЖЕНИЕ ГЕОПРИВЯЗКИ</string>
     <string name="menu_recover">Восстановить</string>
     <string name="menu_recover_paste">ВОССТАНОВИТЬ/ВСТАВИТЬ</string>
     <string name="menu_reload">Перезагрузить</string>
@@ -979,7 +979,7 @@
     <string name="help_device">Окно управления устройствами</string>
     <string name="help_add_topodroid">Создать новую съёмку/калибровку</string>
     <string name="help_import">Импорт zip архива или файла съёмки</string>
-    <!-- TODO string name="help_geopoint_app">Geopoint external app</string -->
+    <string name="help_geopoint_app">Внешнее приложение геопривязки</string>
     <string name="help_symbol">Вкл/Выкл инструментов рисования</string>
     <string name="help_therion">Управление проектами пещер</string>
     <string name="help_cave3d">Cave3D, 3D-просмотрщик</string>
@@ -1164,9 +1164,9 @@
     <string name="title_edit_station">Редактировать пикет </string>
     <string name="title_erase">Удалить</string>
     <string name="title_fixed">Гео-привязанные точки</string>
-    <!-- TODO string name="title_fixed_mt">Geo points [Mobile Topographer]</string -->
-    <!-- TODO string name="title_fixed_gpx_rec">Geo points [GPX Recorder]</string -->
-    <!-- TODO string name="title_fixed_gps_pos">Geo points [GPS Position]</string -->
+    <string name="title_fixed_mt">Гео точки [Mobile Topographer]</string>
+    <string name="title_fixed_gpx_rec">Гео точки [GPX Recorder]</string>
+    <string name="title_fixed_gps_pos">Гео точки [GPS Position]</string>
     <string name="title_fixed_edit">Редактировать привязку</string>
     <string name="title_fixed_import">Импортировать координаты точки</string>
     <string name="title_fixed_gps">Гео-привязка пикета: GPS</string>
@@ -1458,8 +1458,8 @@
   <string name="pref_neg_altitude_summary">Разрешить отрицаттельные альтитуды</string>
   <string name="pref_fine_location_title">Уточнение позиции [s]</string>
   <string name="pref_fine_location_summary">Время уточнения позиции [s]</string>
-  <!-- TODO string name="pref_geoimport_app_title">Geopoint app</string -->
-  <!-- TODO string name="pref_geoimport_app_summary">Geopoint external app</string -->
+  <string name="pref_geoimport_app_title">Приложение геопривязки</string>
+  <string name="pref_geoimport_app_summary">Внешнее приложение геопривязки</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Осреднение данных GPS </string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Использовать GPSAveraging?</string -->
   <string name="pref_bric_mode_title">Режим BRIC</string>
