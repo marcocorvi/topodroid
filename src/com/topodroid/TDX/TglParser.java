@@ -644,6 +644,7 @@ public class TglParser
     }
     String filepath = TDPath.getC3exportPath( export.mName ); // export temporary folder for shp files - fullpath
     // TDLog.v("export SHP: name " + export.mName + " path " + filepath );
+                                                            // legs  splays          walls
     return shp.exportASCII( zos, filepath, export.mName, this, true, export.mSplays, export.mWalls );
   }
 
@@ -687,7 +688,8 @@ public class TglParser
       ret = writeWalls( osw );
     } else {                          // model export 
       if ( type == ModelType.KML_ASCII ) { // KML export ASCII
-        // TDLog.v("3D export KML");
+        TDLog.v("3D export KML");
+        export.debug();
         ExportKML kml = new ExportKML();
         if ( export.mWalls ) {
           if ( convexhullcomputer != null ) {
@@ -699,11 +701,11 @@ public class TglParser
           } else if ( powercrustcomputer != null && powercrustcomputer.hasTriangles() ) {
             kml.mTriangles = powercrustcomputer.getTriangles();
           }
-        }
-        ret = kml.exportASCII( osw, this, export.mSplays, export.mWalls, export.mSurface );
+        }                                     // splays   walls          station
+        ret = kml.exportASCII( osw, this, export.mSplays, export.mWalls, export.mStation );
       } else if ( type == ModelType.CGAL_ASCII ) { // CGAL export: only stations and splay-points
-        // TDLog.v("3D export CGAL");
-        ret = (new ExportCGAL()).exportASCII( osw, this, export.mSplays, export.mWalls, export.mSurface );
+        // TDLog.v("3D export CGAL");                    // splays       walls          station
+        ret = (new ExportCGAL()).exportASCII( osw, this, export.mSplays, export.mWalls, export.mStation );
       } else if ( type == ModelType.DXF_ASCII ) { // DXF
         // TDLog.v("3D export DXF");
         ExportDXF dxf = new ExportDXF();
@@ -718,7 +720,7 @@ public class TglParser
             TDToast.makeWarn (R.string.powercrust_dxf_not_supported );
             return false;
           }
-        }
+        }                              // legs  splays          walls          version13
         ret = dxf.exportASCII( osw, this, true, export.mSplays, export.mWalls, true ); // true = version13
       // } else if ( type == ModelType.SHP_ASCII ) { // SHP
       //   ExportSHP shp = new ExportSHP();
@@ -750,7 +752,7 @@ public class TglParser
             stl.mTriangles = powercrustcomputer.getTriangles();
             stl.mVertex    = powercrustcomputer.getVertices();
           }
-        }
+        }                               // splays   walls          surface
         ret = stl.exportASCII( osw, export.mSplays, export.mWalls, export.mSurface );
       }
     }

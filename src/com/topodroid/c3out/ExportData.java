@@ -11,6 +11,8 @@
  */
 package com.topodroid.c3out;
 
+import com.topodroid.utils.TDLog;
+
 public class ExportData
 {
   public String  mName = null;
@@ -59,6 +61,11 @@ public class ExportData
     mSurface  = export.mSurface;
     mOverwrite = export.mOverwrite;
     mMime     = export.mMime;
+  }
+
+  public void debug()
+  {
+    TDLog.v("Export data " + mType + " " + mExt + " splays " + mSplays + " walls " + mWalls + " station " + mStation + " surface " + mSurface );
   }
 
 }

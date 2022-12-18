@@ -59,6 +59,7 @@ public class ExportTask extends AsyncTask< Void, Void, Boolean >
     mParser = parser;
     /* if ( TDSetting.mExportUri ) */ mUri = uri; // FIXME_URI
     mExport = new ExportData( export.mName, export ); // save a copy
+    mExport.debug();
   }
 
   @Override

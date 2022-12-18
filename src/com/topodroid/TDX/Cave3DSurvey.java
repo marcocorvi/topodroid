@@ -42,6 +42,10 @@ public class Cave3DSurvey
   double mLenShots;
   double mLenSplays;
 
+  /** @return the survey ID
+   */
+  public int getId() { return mId; }
+
   /** serialize the 3D survey
    * @param dos   output stream
    */
@@ -52,9 +56,9 @@ public class Cave3DSurvey
     dos.writeInt( color );
   }
 
-  /** @return survey color (int) value
+  /** @return survey color (int AARRGGBB) value
    */
-  int getColor() { return color; }
+  public int getColor() { return color; }
 
   /** set the survey color
    * @param col color
@@ -164,15 +168,15 @@ public class Cave3DSurvey
 
   /** @return list of shots
    */
-  List< Cave3DShot > getShots()       { return mShots; }
+  public List< Cave3DShot > getShots()       { return mShots; }
 
   /** @return list of splays
    */
-  List< Cave3DShot > getSplays()      { return mSplays; }
+  public List< Cave3DShot > getSplays()      { return mSplays; }
 
   /** @return list of stations
    */
-  List< Cave3DStation > getStations() { return mStations; }
+  public List< Cave3DStation > getStations() { return mStations; }
 
   // --------------------------- DATA REDUCTION
   /** compute the data reduction

@@ -2886,6 +2886,7 @@ public class TopoGL extends Activity
   {
     mExport = export;
     mExport.mName = mSurveyName; 
+    mExport.debug();
     // if ( TDSetting.mExportUri ) {
       // TDLog.v( "export with URI - survey " + mSurveyName );
       selectFile( REQUEST_EXPORT_FILE, Intent.ACTION_CREATE_DOCUMENT, mExport.mMime, R.string.select_export_file, TDConst.getModelFilename( mExport.mType, mSurveyName ) );
