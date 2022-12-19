@@ -1180,7 +1180,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_fixed_mt">Geo points [Mobile Topographer]</string>
     <string name="title_fixed_gpx_rec">Geo points [GPX Recorder]</string>
     <string name="title_fixed_gps_pos">Geo points [GPS Position]</string>
-    <string name="title_fixed_gps_test">Geo points [GPS Test]</string>
+    <string name="title_fixed_gps_test">Geo points [GPSTest]</string>
     <string name="title_fixed_gps_logger">Geo points [GPS Logger]</string>
     <string name="title_fixed_edit">Geo-point edit</string>
     <string name="title_fixed_import">Geo-point import</string>
