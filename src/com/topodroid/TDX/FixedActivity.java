@@ -96,10 +96,12 @@ public class FixedActivity extends Activity
   // private Button mBtHelp;   // TOOLBAR
   // private Button mBtClose;
 
-  final static int FLAG_MOBILE_TOPOGRAPHER = 1;
-  final static int FLAG_GPX_RECORDER       = 2;
-  final static int FLAG_GPS_POSITION       = 4;
-  final static int FLAG_GPS_TEST           = 8;
+  final static int FLAG_MOBILE_TOPOGRAPHER =  1;
+  final static int FLAG_GPX_RECORDER       =  2;
+  final static int FLAG_GPS_POSITION       =  4;
+  final static int FLAG_GPS_TEST           =  8;
+  final static int FLAG_GPS_LOGGER         = 16;
+  private final static int FLAG_GPS_MAX    = FLAG_GPS_LOGGER;
 
   private boolean hasGps = false;
   private boolean hasGPSTest = false;
@@ -154,10 +156,11 @@ public class FixedActivity extends Activity
     if ( mImportFlag > 0 ) {
       int app = TDSetting.mGeoImportApp;
       if ( app == 0 ) {
-        if ( ( mImportFlag & FLAG_MOBILE_TOPOGRAPHER ) > 0 ) { app = 1; }
-        else if ( ( mImportFlag & FLAG_GPX_RECORDER ) > 0 )  { app = 2; }
-        else if ( ( mImportFlag & FLAG_GPS_POSITION ) > 0 )  { app = 4; }
-        else if ( ( mImportFlag & FLAG_GPS_TEST     ) > 0 )  { app = 8; }
+        if ( ( mImportFlag & FLAG_MOBILE_TOPOGRAPHER ) > 0 ) { app =  1; }
+        else if ( ( mImportFlag & FLAG_GPX_RECORDER  ) > 0 ) { app =  2; }
+        else if ( ( mImportFlag & FLAG_GPS_POSITION  ) > 0 ) { app =  4; }
+        else if ( ( mImportFlag & FLAG_GPS_TEST      ) > 0 ) { app =  8; }
+        else if ( ( mImportFlag & FLAG_GPS_LOGGER    ) > 0 ) { app = 16; }
         TDSetting.setGeoImportApp( this, app );
         // setTheTitle();
       }
@@ -220,17 +223,20 @@ public class FixedActivity extends Activity
   private void setTheTitle()
   {
     switch ( TDSetting.mGeoImportApp ) {
-      case 1:
+      case FLAG_MOBILE_TOPOGRAPHER:
         setTitle( R.string.title_fixed_mt );
         break;
-      case 2:
+      case FLAG_GPX_RECORDER:
         setTitle( R.string.title_fixed_gpx_rec );
         break;
-      case 4:
+      case FLAG_GPS_POSITION:
         setTitle( R.string.title_fixed_gps_pos );
         break;
-      case 8:
+      case FLAG_GPS_TEST:
         setTitle( R.string.title_fixed_gps_test );
+        break;
+      case FLAG_GPS_LOGGER:
+        setTitle( R.string.title_fixed_gps_logger );
         break;
       default:
         setTitle( R.string.title_fixed );
@@ -391,21 +397,15 @@ public class FixedActivity extends Activity
         TDToast.makeWarn( R.string.no_geopoint_app );
       } else {
         int app = TDSetting.mGeoImportApp; // app cannot be 0 because mImportFlag > 0 
-        for ( int k=0; k<4; ++k ) {
+        do { 
           app = app * 2;
-          if ( app > FLAG_GPS_TEST ) app = 1;
-          if ( app == 1 && ( mImportFlag & FLAG_MOBILE_TOPOGRAPHER ) > 0 ) {
-            break;
-          } else if ( app == 2 && ( mImportFlag & FLAG_GPX_RECORDER ) > 0 ) {
-            break;
-          } else if ( app == 4 && ( mImportFlag & FLAG_GPS_POSITION ) > 0 ) {
-            break;
-          } else if ( app == 8 && ( mImportFlag & FLAG_GPS_TEST ) > 0 ) {
-            break;
+          if ( app > FLAG_GPS_MAX ) app = 1;
+          if ( ( mImportFlag & app ) > 0 ) {
+            TDSetting.setGeoImportApp( this, app );
+            setTheTitle();
+            break; // not necessary
           }
-        }
-        TDSetting.setGeoImportApp( this, app );
-        setTheTitle();
+        } while ( app != TDSetting.mGeoImportApp );
       }
     } else if ( p == pos ) { // HELP
       doHelp();
@@ -495,21 +495,24 @@ public class FixedActivity extends Activity
 
   private void selectImportFromProvider( ) // GPS IMPORT
   {
-    // TDLog.v("FIXED import app " + TDSetting.mGeoImportApp );
+    TDLog.v("FIXED import app " + TDSetting.mGeoImportApp );
     int request = 0;
     Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT );
-    if ( TDSetting.mGeoImportApp == FLAG_MOBILE_TOPOGRAPHER ) { 
+    if ( TDSetting.mGeoImportApp == FLAG_MOBILE_TOPOGRAPHER ) { // pointlist file
       intent.setType( "application/octet-stream" );
       request = TDRequest.REQUEST_MOBILE_TOPOGRAPHER;
-    } else if ( TDSetting.mGeoImportApp == FLAG_GPX_RECORDER  ) {
+    } else if ( TDSetting.mGeoImportApp == FLAG_GPX_RECORDER  ) { // gpx
       intent.setType( "application/octet-stream" );
       request = TDRequest.REQUEST_GPX_RECORDER;
-    } else if (  TDSetting.mGeoImportApp == FLAG_GPS_POSITION ) {
+    } else if (  TDSetting.mGeoImportApp == FLAG_GPS_POSITION ) { // csv
       intent.setType( "text/*" );
       request = TDRequest.REQUEST_GPS_POSITION;
-    } else if (  TDSetting.mGeoImportApp == FLAG_GPS_TEST ) {
+    } else if (  TDSetting.mGeoImportApp == FLAG_GPS_TEST ) { // csv
       intent.setType( "text/*" );
       request = TDRequest.REQUEST_GPS_TEST;
+    } else if (  TDSetting.mGeoImportApp == FLAG_GPS_LOGGER ) { // csv
+      intent.setType( "text/*" );
+      request = TDRequest.REQUEST_GPS_LOGGER;
     }
     intent.addCategory(Intent.CATEGORY_OPENABLE);
     intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
@@ -671,7 +674,33 @@ public class FixedActivity extends Activity
         }
       // } else if ( reqCode == TDRequest.REQUEST_GPSTEST ) {
       //   (new FixedAddDialog( mContext, this, true )).show();
-      } else if ( reqCode == TDRequest.REQUEST_GPX_RECORDER ) {
+      } else if ( reqCode == TDRequest.REQUEST_GPS_LOGGER ) { // csv format: type, date-time, lat, long, accur, alt, ...
+        Uri uri = intent.getData();
+        try { 
+          boolean ok = true;
+          InputStreamReader isr = new InputStreamReader( this.getContentResolver().openInputStream( uri ) );
+          BufferedReader br = new BufferedReader( isr );
+          String data_line = null;
+          String line;
+          while ( ( line = br.readLine() ) != null ) data_line = line;
+          isr.close();
+          if ( data_line != null ) {
+            TDLog.v("GPS Logger: " + data_line );
+            String[] vals = data_line.split(",");
+            double lat = Double.parseDouble( vals[2] );
+            double lng = Double.parseDouble( vals[3] );
+            double acc = Double.parseDouble( vals[4] );
+            double alt = Double.parseDouble( vals[5] );
+            addFixedPoint( FixedInfo.SRC_GPX_RECORDER, lng, lat, alt, acc );
+          } else {
+            TDToast.makeBad( R.string.GPX_record_none );
+          }
+        } catch ( FileNotFoundException e ) {
+          TDLog.Error( "File not found " + e.getMessage() );
+        } catch ( IOException e ) { 
+          TDLog.Error( "IO exception " + e.getMessage() );
+        }
+      } else if ( reqCode == TDRequest.REQUEST_GPX_RECORDER ) { 
         Uri uri = intent.getData();
         try { 
           boolean ok = true;
@@ -751,10 +780,9 @@ public class FixedActivity extends Activity
           String fix_line = null;
           String line;
           while ( ( line = br.readLine() ) != null ) {
-            if ( line.startsWith("Fix,") ) { // GPS Test
-              fix_line = line;
-            }
+            if ( line.startsWith("Fix,") ) fix_line = line;
           }
+          isr.close();
           if ( fix_line != null ) {
             String[] vals = fix_line.split(",");
             double lat = Double.parseDouble( vals[2] );
@@ -765,7 +793,6 @@ public class FixedActivity extends Activity
           } else {
             TDToast.makeBad( R.string.GPS_position_none );
           }
-          isr.close();
         } catch ( FileNotFoundException e ) {
           TDLog.Error( "File not found " + e.getMessage() );
         } catch ( IOException e ) { 

@@ -603,6 +603,11 @@ public class TDandroid
       ret |= FixedActivity.FLAG_GPS_TEST;
     } catch ( PackageManager.NameNotFoundException e ) {
     }
+    try {
+      PackageInfo pi = pm.getPackageInfo( "eu.basicairdata.graziano.gpslogger", 0 );
+      ret |= FixedActivity.FLAG_GPS_LOGGER;
+    } catch ( PackageManager.NameNotFoundException e ) {
+    }
     return ret;
   }
 

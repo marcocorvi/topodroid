@@ -17,10 +17,20 @@ The window shows the list of geo-localized points, and has three buttons to inse
 </ul>
 <br><p>
 
+<b>Warning. The accuracy of a geopoint obtained with a phone is usually 15-20 m at best.</b><br><p>
+
+Tapping a geo-point entry in the list opens the <a href="page_fixed.htm">Geo-point edit</a> dialog.<br><p>
+
+Internally TopoDroid stores the coordinates in decimal degrees.
+In the coordinate dialogs you can type them either in decimal degrees or as "dd:mm:ss.ss".
+The TopoDroid keypad has special keys for "degree" and "minute".
+If you use a keyboard that does not have colon ':', use the space instead.
+If the keyboard does not have the decimal point '.' use the slash or the comma instead.<br><p>
+
 <b>Menus</b>:<br>
 <ul>
 <li>Close the window</li>
-<li>Change the external geopoint app</li>
+<li>Cycle throught the external GNSS apps. If there is only one GNSS app this menu has no effect.</li>
 <li>Help</li>
 </ul>
 <br><p>
@@ -32,6 +42,7 @@ TopoDroid can import geopoint coordinates from
 <li><i>GPX Recorder</i> track (gpx) file. The last track-point is used.</li> 
 <li><i>GPS Position</i> position (csv) file. TopoDroid computes an average of the positions.</li> 
 <li><i>GPS Test</i> fix from a log file. TopoDroid uses the last fix.</li> 
+<li><i>GPS Logger</i> track file saved in "csv" format. TopoDroid uses the last trcak-point.</li> 
 </ul><br>
 
 The station name of geopoint imported from <i>GPX Recorder</i>, <i>GPX Position</i>, and <i>GPS Test</i> is set by TopoDroid
@@ -48,13 +59,19 @@ The log file isi saved when the app is closed, and is stored in the folder <i>gn
 Furtermore geopoint coordinates saved in the clipboard with the <i>GPS Test</i> app can be transferred to the 
 fields in the <i>geo-point insert</i> dialog. Make sure to set the checkbox to store also the altitude in the clipboard.<br><p>
 
-Tapping a geo-point entry in the list opens the <a href="page_fixed.htm">Geo-point edit</a> dialog.<br><p>
+<i>GPS Logger</i> track files must be exported in "csv" format. TopoDroid uses the ellipsoid altitude and the accuracy.<br><p>
 
-Internally TopoDroid stores the coordinates in decimal degrees.
-In the coordinate dialogs you can type them either in decimal degrees or as "dd:mm:ss.ss".
-The TopoDroid keypad has special keys for "degree" and "minute".
-If you use a keyboard that does not have colon ':', use the space instead.
-If the keyboard does not have the decimal point '.' use the slash or the comma instead.<br><p>
+<b>GNSS app advices</b> (search internet for details and how to do)<br>
+<ul>
+<li>Enable "force full GNSS measurement"</li>
+<li>If available disable "kinematic Kalman filtering"</li>
+<li>If available set location "static mode"</li>
+<li>If available disable "A-GSP". Disable "mobile data" and clear A-GPS data</li>
+<li>Disable location "wi-fi and bluetooth fix"</li>
+</ul><br>
+
+Note. Disabling battery optimization for the app is necessary only if you want to prevent the
+system closing the app when it is not in foreground.<br><p>
 
 <h4>Location settings</h4>
 

@@ -26,9 +26,10 @@ public class TDRequest
   public static final int REQUEST_SETTINGS           = 11;
   // public static final int REQUEST_GPSTEST         = 12; // unused
   public static final int REQUEST_MOBILE_TOPOGRAPHER = 13;
-  public static final int REQUEST_GPX_RECORDER       = 14;
-  public static final int REQUEST_GPS_POSITION       = 15;
-  public static final int REQUEST_GPS_TEST           = 16;
+  public static final int REQUEST_GPX_RECORDER       = 14; // gpx
+  public static final int REQUEST_GPS_POSITION       = 15; // cvs
+  public static final int REQUEST_GPS_TEST           = 16; // csv
+  public static final int REQUEST_GPS_LOGGER         = 17; // csv
 
   // public static final int REQUEST_TREE_URI = 20;
 

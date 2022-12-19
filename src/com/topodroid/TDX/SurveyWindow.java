@@ -150,7 +150,6 @@ public class SurveyWindow extends Activity
   private String mInitStation = null;
   private int mXSections;
   private int mDatamode;
-  private int nrPhoto = 0;
 
   private TopoDroidApp mApp;
   private DataHelper   mApp_mData;
@@ -297,11 +296,6 @@ public class SurveyWindow extends Activity
     }
     mNrButton1 = kb;
     mButton1[mNrButton1] = MyButton.getButton( mActivity, null, R.drawable.iz_empty );
-    nrPhoto = mApp_mData.countAllPhotos( TDInstance.sid, TDStatus.NORMAL );
-    if ( nrPhoto == 0 ) {
-      TDandroid.setButtonBackground( mButton1[ BTN_PHOTO ], MyButton.getButtonBackground( this, res, R.drawable.iz_picture_no ) );
-      mButton1[ BTN_PHOTO ].setOnClickListener( null );
-    }
 
     mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
@@ -338,7 +332,16 @@ public class SurveyWindow extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
-    doSetDeclination( mApp_mData.getSurveyDeclination( TDInstance.sid ) );
+    int nrPhoto = 0;
+    mApp_mData = TopoDroidApp.mData;
+    if ( mApp_mData != null ) {
+      doSetDeclination( mApp_mData.getSurveyDeclination( TDInstance.sid ) );
+      mApp_mData.countAllPhotos( TDInstance.sid, TDStatus.NORMAL );
+    }
+    if ( nrPhoto == 0 ) {
+      TDandroid.setButtonBackground( mButton1[ BTN_PHOTO ], MyButton.getButtonBackground( this, getResources(), R.drawable.iz_picture_no ) );
+      mButton1[ BTN_PHOTO ].setOnClickListener( null );
+    }
   }
 
   // ------------------------------------------
