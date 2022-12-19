@@ -1167,7 +1167,7 @@
     <string name="title_fixed_mt">Гео точки [Mobile Topographer]</string>
     <string name="title_fixed_gpx_rec">Гео точки [GPX Recorder]</string>
     <string name="title_fixed_gps_pos">Гео точки [GPS Position]</string>
-    <!-- TODO string name="title_fixed_gps_test">Geo points [GPS Test]</string -->
+    <string name="title_fixed_gps_test">Гео точки [GPS Test]</string>
     <string name="title_fixed_edit">Редактировать привязку</string>
     <string name="title_fixed_import">Импортировать координаты точки</string>
     <string name="title_fixed_gps">Гео-привязка пикета: GPS</string>
