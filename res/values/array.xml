@@ -22,7 +22,8 @@
      <item name="mobile_topographer">Mobile Topographer</item>
      <item name="gpx_recorder">GPX Recorder</item>
      <item name="gps_position">GPS Position</item>
-     <item name="gps_test">GPS Test</item>
+     <item name="gps_test">GPSTest</item>
+     <item name="gps_logger">GPS Logger</item>
   </string-array>
   <string-array name="geoImportAppValue" translatable="false"> <!-- values must agree with flags in FixedActvity -->
      <item name="none">0</item>
@@ -30,6 +31,7 @@
      <item name="gpx_recorder">2</item>
      <item name="gps_position">4</item>
      <item name="gps_test">8</item>
+     <item name="gps_logger">16</item>
   </string-array>
   
   <string-array name="orientation">
@@ -239,7 +241,7 @@
      <item name="default">default</item>
      <item name="english">English</item>
      <item name="french">Français</item>
-     <item name="spanish">Español</item>
+     <!-- item name="spanish">Español</item -->
      <item name="italian">Italiano</item>
      <item name="russian">Русский</item>
      <!-- item name="german">Deutsch</item -->
@@ -257,7 +259,7 @@
      <item name="default"></item>
      <item name="english">en</item>
      <item name="french">fr</item>
-     <item name="spanish">es</item>
+     <!-- item name="spanish">es</item -->
      <item name="italian">it</item>
      <item name="russian">ru</item>
      <!-- item name="german">de</item -->

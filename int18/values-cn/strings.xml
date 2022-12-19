@@ -388,7 +388,7 @@
     <string name="no_feature_pdf">PDF格式不支持</string>
     <string name="no_gms">校准无数据.\n点击下载按钮</string>
     <string name="no_geo_station">错误: 无地理定位测点</string>
-    <!-- TODO string name="no_geopoint_app">No geopoint app</string -->
+    <!-- UNUSED string name="no_geopoint_app">No geopoint app</string -->
     <string name="no_leg_first">选择未从主线开始</string>
     <string name="no_leg_intersection">横截面线与主线无交叉</string>
     <string name="no_location_data">无位置数据</string>

@@ -390,7 +390,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="no_feature_pdf">PDF nem támogatott</string>
     <string name="no_gms">Nincsenek kalibrációs adatok.\nTöltsd le az adatokat </string>
     <string name="no_geo_station">Hiba: nincs geolokalizált mérésipont</string>
-    <string name="no_geopoint_app">Nincs helymeghatározó app</string>
+    <!-- UNUSED string name="no_geopoint_app">Nincs helymeghatározó app</string -->
     <string name="no_leg_first">A kiválasztás nem poligon méréssel kezdődik</string>
     <string name="no_leg_intersection">A szelvény nem keresztez poligont</string>
     <string name="no_location_data">Nincs hely adat</string>

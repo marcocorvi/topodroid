@@ -385,7 +385,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="no_feature_pdf">PDF non supportato</string>
     <string name="no_gms">Calibrazione senza data.</string>
     <string name="no_geo_station">Errore: nessun caposaldo geolocalizzato</string>
-    <!-- TODO string name="no_geopoint_app">No geopoint app</string -->
+    <!-- UNUSED string name="no_geopoint_app">No geopoint app</string -->
     <string name="no_leg_first">La selezione non parte con una battuta</string>
     <string name="no_leg_intersection">La linea di sezione non interseca alcuna battuta</string>
     <string name="no_location_data">Nessun dato di posizione</string>

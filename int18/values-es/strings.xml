@@ -385,7 +385,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="no_feature_pdf">PDF no soportado</string>
     <string name="no_gms">La calibración no tiene datos.\nPulse el botón Descargar</string>
     <string name="no_geo_station">Error: estación no geolocalizada</string>
-    <!-- TODO string name="no_geopoint_app">No geopoint app</string -->
+    <!-- UNUSED string name="no_geopoint_app">No geopoint app</string -->
     <string name="no_leg_first">La selección no comienza con un trayecto</string>
     <string name="no_leg_intersection">La línea de la sección no atraviesa ninguna visual</string>
     <string name="no_location_data">Sin datos de calibración</string>

@@ -795,6 +795,8 @@ public class TDExporter
         List< NumShot >    shots = num.getShots();
         List< NumSplay >   splays = num.getSplays();
         if ( TDSetting.mKmlStations ) {
+          pw.format("  <Folder>\n");
+          pw.format("    <name>stations</name>\n");
           for ( NumStation st : stations ) {
             pw.format(placemark);
             pw.format(name2, st.name );
@@ -807,6 +809,7 @@ public class TDExporter
             pw.format(multigeometry_end);
             pw.format(placemark_end);
           }
+          pw.format("  </Folder>\n");
         }
 
         pw.format(placemark);

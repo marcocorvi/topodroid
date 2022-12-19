@@ -1,10 +1,10 @@
 res/layout/shot_activity.xml:57: Warning: This ListView should use android:layout_width="wrap_content" [ScrollViewSize]
         android:layout_width="fill_parent"
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-src/com/topodroid/TDX/TDExporter.java:3737: Warning: Implicitly using the default locale is a common source of bugs: Use String.format(Locale, ...) instead [DefaultLocale]
+src/com/topodroid/TDX/TDExporter.java:3740: Warning: Implicitly using the default locale is a common source of bugs: Use String.format(Locale, ...) instead [DefaultLocale]
               writeSrvStations( pw, String.format("%s-%d", to, ii), to, item.isCommented() );
                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-src/com/topodroid/TDX/TDExporter.java:3767: Warning: Implicitly using the default locale is a common source of bugs: Use String.format(Locale, ...) instead [DefaultLocale]
+src/com/topodroid/TDX/TDExporter.java:3770: Warning: Implicitly using the default locale is a common source of bugs: Use String.format(Locale, ...) instead [DefaultLocale]
               writeSrvStations( pw, from, String.format("%s-%d", from, ii), item.isCommented() );
                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/layout/dblock_row_noedit.xml:31: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
@@ -34,10 +34,10 @@ res/values/strings.xml:167: Error: "calib_min_error" is not translated in "cn" o
 res/values/strings.xml:168: Error: "magn_dip" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
     <string name="magn_dip">Magn. dip &#8230;</string>
             ~~~~~~~~~~~~~~~
-res/values/strings.xml:251: Error: "GPS_position_none" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:251: Error: "GPS_position_none" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="GPS_position_none">No GPS position data</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:252: Error: "GPX_record_none" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:252: Error: "GPX_record_none" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="GPX_record_none">No GPX point record</string>
             ~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:282: Error: "accuracy_hint" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
@@ -67,14 +67,14 @@ res/values/strings.xml:322: Error: "error_profile_slant_section" is not translat
 res/values/strings.xml:330: Error: "error_station_fixed" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="error_station_fixed">Georefenced station</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:398: Error: "no_geopoint_app" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
-    <string name="no_geopoint_app">No geopoint app</string>
+res/values/strings.xml:398: Error: "no_geopoint_app" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+    <string name="no_geopoint_app">No GNSS app</string>
             ~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:409: Error: "no_search_result" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
     <string name="no_search_result">No search_result.</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:440: Error: "menu_geopoint_app" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
-    <string name="menu_geopoint_app">GEOPOINT APP</string>
+res/values/strings.xml:440: Error: "menu_geopoint_app" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+    <string name="menu_geopoint_app">GNSS APP</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:690: Error: "stat_devices" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="stat_devices">Devices %1$d: %2$s</string>
@@ -100,8 +100,8 @@ res/values/strings.xml:836: Error: "button_download" is not translated in "cn" o
 res/values/strings.xml:842: Error: "button_wait" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
     <string name="button_wait">Wait</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:994: Error: "help_geopoint_app" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
-    <string name="help_geopoint_app">Geopoint external app</string>
+res/values/strings.xml:994: Error: "help_geopoint_app" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+    <string name="help_geopoint_app">External GNSS apps</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:1016: Error: "help_gps_surveys" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
     <string name="help_gps_surveys">Surveys fixed points</string>
@@ -118,130 +118,136 @@ res/values/strings.xml:1117: Error: "export_spacing_th" is not translated in "cn
 res/values/strings.xml:1165: Error: "title_gm_search" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="title_gm_search">Calib data search</string>
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1180: Error: "title_fixed_mt" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1180: Error: "title_fixed_mt" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="title_fixed_mt">Geo points [Mobile Topographer]</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1181: Error: "title_fixed_gpx_rec" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1181: Error: "title_fixed_gpx_rec" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="title_fixed_gpx_rec">Geo points [GPX Recorder]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1182: Error: "title_fixed_gps_pos" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1182: Error: "title_fixed_gps_pos" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="title_fixed_gps_pos">Geo points [GPS Position]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1270: Error: "title_import_th2" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1183: Error: "title_fixed_gps_test" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+    <string name="title_fixed_gps_test">Geo points [GPSTest]</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1184: Error: "title_fixed_gps_logger" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+    <string name="title_fixed_gps_logger">Geo points [GPS Logger]</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1272: Error: "title_import_th2" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="title_import_th2">Therion th2 file</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1271: Error: "title_infos" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1273: Error: "title_infos" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
     <string name="title_infos">Surveys geo-points</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1288: Error: "pref_lrud_count_title" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1290: Error: "pref_lrud_count_title" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
   <string name="pref_lrud_count_title">LRUD splay count</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1289: Error: "pref_lrud_count_summary" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1291: Error: "pref_lrud_count_summary" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
   <string name="pref_lrud_count_summary">Number of splays used for LRUD</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1474: Error: "pref_neg_altitude_title" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1476: Error: "pref_neg_altitude_title" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="pref_neg_altitude_title">Neg. altitudes</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1475: Error: "pref_neg_altitude_summary" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1477: Error: "pref_neg_altitude_summary" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="pref_neg_altitude_summary">Allow negative altitudes</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1476: Error: "pref_fine_location_title" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1478: Error: "pref_fine_location_title" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="pref_fine_location_title">Fine location [s]</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1477: Error: "pref_fine_location_summary" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1479: Error: "pref_fine_location_summary" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="pref_fine_location_summary">Fine location time [s]</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1478: Error: "pref_geoimport_app_title" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
-  <string name="pref_geoimport_app_title">Geopoint app</string>
+res/values/strings.xml:1480: Error: "pref_geoimport_app_title" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+  <string name="pref_geoimport_app_title">GNSS app</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1479: Error: "pref_geoimport_app_summary" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
-  <string name="pref_geoimport_app_summary">Geopoint external app</string>
+res/values/strings.xml:1481: Error: "pref_geoimport_app_summary" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+  <string name="pref_geoimport_app_summary">External GNSS app</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1545: Error: "pref_sibling_thr_title" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1547: Error: "pref_sibling_thr_title" is not translated in "es" (Spanish) [MissingTranslation]
   <string name="pref_sibling_thr_title">Sibling threshold</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1546: Error: "pref_sibling_thr_summary" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1548: Error: "pref_sibling_thr_summary" is not translated in "es" (Spanish) [MissingTranslation]
   <string name="pref_sibling_thr_summary">Threshold for sibling shots [&#37;]</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1624: Error: "pref_slant_xsection_title" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1626: Error: "pref_slant_xsection_title" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="pref_slant_xsection_title">Slant xsections</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1625: Error: "pref_slant_xsection_summary" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1627: Error: "pref_slant_xsection_summary" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="pref_slant_xsection_summary">Profile view slant xsections</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1706: Error: "pref_loop_thr_title" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1708: Error: "pref_loop_thr_title" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
   <string name="pref_loop_thr_title">Loop threshold</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1707: Error: "pref_loop_thr_summary" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1709: Error: "pref_loop_thr_summary" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
   <string name="pref_loop_thr_summary">Loop compensation threshold</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1882: Error: "ask_download" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1884: Error: "ask_download" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
    <string name="ask_download">Download firmware? (be patient)</string>
            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1888: Error: "firmware_file_downloaded" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1890: Error: "firmware_file_downloaded" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
    <string name="firmware_file_downloaded">Downloaded firmware file %1$s read %2$d</string>
            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1891: Error: "firmware_file_download_fail" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1893: Error: "firmware_file_download_fail" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
    <string name="firmware_file_download_fail">Failed firmware download</string>
            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1893: Error: "firmware_uploaded" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1895: Error: "firmware_uploaded" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
    <string name="firmware_uploaded">%1$s firmware: uploaded %2$d</string>
            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1894: Error: "firmware_downloaded" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1896: Error: "firmware_downloaded" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
    <string name="firmware_downloaded">%1$s firmware: downloaded %2$d</string>
            ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1911: Error: "equate_no_stations" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:1913: Error: "equate_no_stations" is not translated in "fr" (French) [MissingTranslation]
     <string name="equate_no_stations">Too few stations</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1917: Error: "menu_open" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1919: Error: "menu_open" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
     <string name="menu_open">OPEN</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1981: Error: "info_origin" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1983: Error: "info_origin" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="info_origin">Origin</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1982: Error: "info_lonlat" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1984: Error: "info_lonlat" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="info_lonlat">coords.</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1983: Error: "info_radii" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1985: Error: "info_radii" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="info_radii">radii</string>
             ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1996: Error: "info_origin_value" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1998: Error: "info_origin_value" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="info_origin_value">x %1$.0f y %2$.0f z %3$.0f</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1997: Error: "info_origin_none" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1999: Error: "info_origin_none" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="info_origin_none">undefined</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1998: Error: "info_lonlat_geovalue" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2000: Error: "info_lonlat_geovalue" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="info_lonlat_geovalue">lon %1$.7f lat %2$.7f</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1999: Error: "info_lonlat_prjvalue" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2001: Error: "info_lonlat_prjvalue" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="info_lonlat_prjvalue">lon %1$.1f lat %2$.1f</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2000: Error: "info_radii_value" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2002: Error: "info_radii_value" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
     <string name="info_radii_value">EW %1$.1f NS %2$.1f</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2035: Error: "dem_loading" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2037: Error: "dem_loading" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
     <string name="dem_loading">Loading surface &#8230; please wait</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2043: Error: "texture" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2045: Error: "texture" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
     <string name="texture">DTM</string>
             ~~~~~~~~~~~~~~
-res/values/strings.xml:2074: Error: "east" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2076: Error: "east" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="east">E</string>
           ~~~~~~~~~~~
-res/values/strings.xml:2075: Error: "north" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2077: Error: "north" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="north">N</string>
           ~~~~~~~~~~~~
-res/values/strings.xml:2076: Error: "west" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2078: Error: "west" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="west">W</string>
           ~~~~~~~~~~~
-res/values/strings.xml:2077: Error: "south" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2079: Error: "south" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
   <string name="south">S</string>
           ~~~~~~~~~~~~
-res/values/strings.xml:2142: Error: "warning_nogrant_camera" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2144: Error: "warning_nogrant_camera" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
     <string name="warning_nogrant_camera">Camera permission has not been granted</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2187: Error: "cpref_grid_extent_summary" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:2189: Error: "cpref_grid_extent_summary" is not translated in "fr" (French) [MissingTranslation]
     <string name="cpref_grid_extent_summary">Grid extent around the survey plan-view</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values-fr/plurals.xml:4: Error: The quantity 'one' matches more than one specific number in this locale (0, 1), but the message did not include a formatting argument (such as %d). This is usually an internationalization error. See full issue explanation for more. [ImpliedQuantity]
@@ -290,5 +296,8 @@ res/mipmap-anydpi-v26/ic_launcher_round.xml:2: Warning: The resource R.mipmap.ic
 ^
 res/drawable/iz_compute_no.png: Warning: The resource R.drawable.iz_compute_no appears to be unused [UnusedResources]
 res/raw/name_pos_hl_geometry.glsl: Warning: The resource R.raw.name_pos_hl_geometry appears to be unused [UnusedResources]
+res/values/strings.xml:398: Warning: The resource R.string.no_geopoint_app appears to be unused [UnusedResources]
+    <string name="no_geopoint_app">No GNSS app</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
 res/mipmap-xhdpi/ic_launcher.png: Warning: The following unrelated icon files have identical contents: iz_topodroid.png, ic_launcher.png [IconDuplicates]
-78 errors, 21 warnings
+80 errors, 22 warnings

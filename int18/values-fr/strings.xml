@@ -395,7 +395,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="no_feature_pdf">PDF non supporté</string>
     <string name="no_gms">L\'étalonnage ne contient pas de données.\nUtiliser le bouton Télécharger</string>
     <string name="no_geo_station">Échec : pas de station géolocalisée</string>
-    <!-- TODO string name="no_geopoint_app">No geopoint app</string -->
+    <!-- UNUSED string name="no_geopoint_app">No geopoint app</string -->
     <string name="no_leg_first">La sélection ne commence pas par une visée de cheminement</string>
     <string name="no_leg_intersection">La ligne de section transverse ne coupe aucune ligne de cheminement</string>
     <string name="no_location_data">Aucune donnée de géolocalisation</string>

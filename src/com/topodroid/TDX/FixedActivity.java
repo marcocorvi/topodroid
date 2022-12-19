@@ -105,7 +105,8 @@ public class FixedActivity extends Activity
 
   private boolean hasGps = false;
   private boolean hasGPSTest = false;
-  private int mImportFlag = 0; // flag app import point 
+  private int mImportFlag  = 0; // flag import point GNSS apps
+  private int mImportAppNr = 0; // number of GNSS import apps
 
   private Button     mMenuImage;
   private ListView   mMenu;
@@ -152,9 +153,13 @@ public class FixedActivity extends Activity
     hasGps = /* TDandroid.ABOVE_API_23 && */ TDandroid.checkLocation( mContext );
     hasGPSTest  = TDandroid.hasGPSTest( this );
     mImportFlag = TDandroid.getImportPointFlag( this );
+    mImportAppNr = 0;
     // TDLog.v("FIXED import flag " + mImportFlag );
     if ( mImportFlag > 0 ) {
       int app = TDSetting.mGeoImportApp;
+      for ( int k=1; k<= FLAG_GPS_MAX; k<<=1 ) {
+        if ( ( mImportFlag & k ) > 0 ) { ++mImportAppNr; } else if ( app == k ) { app = 0; }
+      }
       if ( app == 0 ) {
         if ( ( mImportFlag & FLAG_MOBILE_TOPOGRAPHER ) > 0 ) { app =  1; }
         else if ( ( mImportFlag & FLAG_GPX_RECORDER  ) > 0 ) { app =  2; }
@@ -368,7 +373,7 @@ public class FixedActivity extends Activity
     ArrayAdapter< String > menu_adapter = new ArrayAdapter<String >( this, R.layout.menu );
 
     menu_adapter.add( res.getString( menus[0] ) ); // CLOSE
-    menu_adapter.add( res.getString( menus[1] ) ); // IMPORT APP
+    if ( mImportAppNr > 1 ) menu_adapter.add( res.getString( menus[1] ) ); // IMPORT APP
     menu_adapter.add( res.getString( menus[2] ) ); // HELP
 
     mMenu.setAdapter( menu_adapter );
@@ -392,21 +397,17 @@ public class FixedActivity extends Activity
     int p = 0;
     if ( p++ == pos ) { // CLOSE 
       super.onBackPressed();
-    } else if ( p++ == pos ) { // IMPORT APP
-      if ( mImportFlag == 0 ) {
-        TDToast.makeWarn( R.string.no_geopoint_app );
-      } else {
-        int app = TDSetting.mGeoImportApp; // app cannot be 0 because mImportFlag > 0 
-        do { 
-          app = app * 2;
-          if ( app > FLAG_GPS_MAX ) app = 1;
-          if ( ( mImportFlag & app ) > 0 ) {
-            TDSetting.setGeoImportApp( this, app );
-            setTheTitle();
-            break; // not necessary
-          }
-        } while ( app != TDSetting.mGeoImportApp );
-      }
+    } else if ( mImportAppNr > 1 && p++ == pos ) { // IMPORT APP
+      int app = TDSetting.mGeoImportApp; // app cannot be 0 because mImportFlag > 0 
+      do { 
+        app = app * 2;
+        if ( app > FLAG_GPS_MAX ) app = 1;
+        if ( ( mImportFlag & app ) > 0 ) {
+          TDSetting.setGeoImportApp( this, app );
+          setTheTitle();
+          break; // not necessary
+        }
+      } while ( app != TDSetting.mGeoImportApp );
     } else if ( p == pos ) { // HELP
       doHelp();
     }

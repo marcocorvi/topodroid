@@ -395,7 +395,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="no_feature_pdf">PDF not supported</string>
     <string name="no_gms">Calibration has no data.\nUse Download button</string>
     <string name="no_geo_station">Failed: no geolocalized station</string>
-    <string name="no_geopoint_app">No geopoint app</string>
+    <!-- UNUSED string name="no_geopoint_app">No GNSS app</string -->
     <string name="no_leg_first">Selection does not start with a leg</string>
     <string name="no_leg_intersection">Section line crosses no leg</string>
     <string name="no_location_data">No location data</string>
@@ -437,7 +437,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_device">DEVICE</string>
     <string name="menu_export">EXPORT</string>
     <string name="menu_firmware">FIRMWARE</string>
-    <string name="menu_geopoint_app">GEOPOINT APP</string>
+    <string name="menu_geopoint_app">GNSS APP</string>
     <string name="menu_recover">RECOVER</string>
     <string name="menu_recover_paste">RECOVER/PASTE</string>
     <string name="menu_reload">RELOAD</string>
@@ -991,7 +991,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_device">Device activity</string>
     <string name="help_add_topodroid">New survey</string>
     <string name="help_import">Import zip archive or survey file</string>
-    <string name="help_geopoint_app">Geopoint external app</string>
+    <string name="help_geopoint_app">External GNSS apps</string>
     <string name="help_symbol">Drawing tools sets</string>
     <string name="help_therion">Cave project manager</string>
     <string name="help_cave3d">Cave3D, 3D viewer</string>
@@ -1477,8 +1477,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_neg_altitude_summary">Allow negative altitudes</string>
   <string name="pref_fine_location_title">Fine location [s]</string>
   <string name="pref_fine_location_summary">Fine location time [s]</string>
-  <string name="pref_geoimport_app_title">Geopoint app</string>
-  <string name="pref_geoimport_app_summary">Geopoint external app</string>
+  <string name="pref_geoimport_app_title">GNSS app</string>
+  <string name="pref_geoimport_app_summary">External GNSS app</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Use GPSAveraging</string -->
   <string name="pref_bric_mode_title">BRIC mode</string>

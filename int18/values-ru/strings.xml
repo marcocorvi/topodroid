@@ -388,7 +388,7 @@
     <string name="no_feature_pdf">PDF не поддерживается</string>
     <string name="no_gms">Отсутствуют данные для калибровки.\nИспользуйте кнопку Скачать</string>
     <string name="no_geo_station">Ошибка: отсутствует пикет с координатами</string>
-    <string name="no_geopoint_app">Нет приложения геопозиционирования</string>
+    <!-- UNUSED string name="no_geopoint_app">Нет приложения геопозиционирования</string -->
     <string name="no_leg_first">Выбор не начинается с замера между пикетами</string>
     <string name="no_leg_intersection">Разрез не пересекает пикет</string>
     <string name="no_location_data">Нет данных о местоположении</string>
