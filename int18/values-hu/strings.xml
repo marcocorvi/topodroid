@@ -432,7 +432,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="menu_device">MŰSZER</string>
     <string name="menu_export">EXPORTÁLÁS</string>
     <string name="menu_firmware">FIRMWARE</string>
-    <string name="menu_geopoint_app">GEOPOINT APP</string>
+    <string name="menu_geopoint_app">GEOPONT APP</string>
     <string name="menu_recover">HELYREÁLLÍT</string>
     <string name="menu_recover_paste">HELYREÁLLÍT/BEILLESZT</string>
     <string name="menu_reload">ÚJRATÖLT</string>
@@ -985,7 +985,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="help_device">Műszer funkciók</string>
     <string name="help_add_topodroid">Új felmérés</string>
     <string name="help_import">ZIP archívum, vagy felmérés importálása</string>
-    <string name="help_geopoint_app">Geopoint külső app</string>
+    <string name="help_geopoint_app">Geopont külső app</string>
     <string name="help_symbol">Rajzeszközök engedélyezése/tiltása</string>
     <string name="help_therion">Barlang projekt szervező</string>
 	    <string name="help_cave3d">Cave3D, 3D nézet</string>
@@ -1468,8 +1468,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_neg_altitude_summary">Negatív magasságok engedélyezése</string>
   <string name="pref_fine_location_title">Pontos helymeghatározás [s]</string>
   <string name="pref_fine_location_summary">Pontos helymeghatározás ideje [s]</string>
-  <string name="pref_geoimport_app_title">Geopoint app</string>
-  <string name="pref_geoimport_app_summary">Geopoint külső app</string>
+  <string name="pref_geoimport_app_title">Geopont app</string>
+  <string name="pref_geoimport_app_summary">Geopont külső app</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GNSS átlagolás</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">GNSS átlagolás használata</string -->
   <string name="pref_bric_mode_title">BRIC mód</string>
