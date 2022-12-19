@@ -13,7 +13,7 @@ The window shows the list of geo-localized points, and has three buttons to inse
 <li><a href="page_fixed_gps.htm">GNSS</a> gets the new point coordinates with the GNSS (if "Location" permission has been granted)</li>
 <li><a href="page_fixed_add.htm">Add</a> enter the coordinates of the new geo-point manually</li>
 <li><a href="page_fixed_import.htm">Import</a> the coordinates from a point file created by a GNSS app</li>
-<li>start <i>Gps Test</i> app</li>
+<li>start <i>GPSTest</i> app</li>
 </ul>
 <br><p>
 
@@ -31,10 +31,10 @@ TopoDroid can import geopoint coordinates from
 <li><i>MobileTopographer</i> point files. A dialog is opened to choose the geopoint.</li>
 <li><i>GPX Recorder</i> track (gpx) file. The last track-point is used.</li> 
 <li><i>GPS Position</i> position (csv) file. TopoDroid computes an average of the positions.</li> 
-<li><i>GPS Test</i> fix from a log file. TopoDroid uses the last fix.</li> 
+<li><i>GPSTest</i> fix from a log file. TopoDroid uses the last fix.</li> 
 </ul><br>
 
-The station name of geopoint imported from <i>GPX Recorder</i>, <i>GPX Position</i>, and <i>GPS Test</i> is set by TopoDroid
+The station name of geopoint imported from <i>GPX Recorder</i>, <i>GPX Position</i>, and <i>GPSTest</i> is set by TopoDroid
 automatically as a number prefixed by '#'.<br><p>
 
 <i>MobileTopographer</i> point-list files are stored in the folder <i>MobileTopographer/pointlists</i>.<br><p>
@@ -43,9 +43,9 @@ automatically as a number prefixed by '#'.<br><p>
 
 <i>GPS Position</i> files are stored in the external storage.<br><p>
 
-<i>GPS Test</i> logging must be enabled in the app setting. It is enough to log the fixes.
+<i>GPSTest</i> logging must be enabled in the app setting. It is enough to log the fixes.
 The log file isi saved when the app is closed, and is stored in the folder <i>gnss_log</i>.<br>
-Furtermore geopoint coordinates saved in the clipboard with the <i>GPS Test</i> app can be transferred to the 
+Furtermore geopoint coordinates saved in the clipboard with the <i>GPSTest</i> app can be transferred to the 
 fields in the <i>geo-point insert</i> dialog. Make sure to set the checkbox to store also the altitude in the clipboard.<br><p>
 
 Tapping a geo-point entry in the list opens the <a href="page_fixed.htm">Geo-point edit</a> dialog.<br><p>
