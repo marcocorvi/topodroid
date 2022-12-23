@@ -952,19 +952,19 @@ public class TDExporter
         if ( fis.size() > 0 ) {
           ArrayList< FixedStation > fst = new ArrayList<>();
           for ( FixedInfo fi : fis ) {
-            for ( TDNum num : nums ) {
-              NumStation ns = num.getStation( fi.name );
-              if ( ns != null ) {
-                fst.add( new FixedStation( fi, ns ) );
-                break;
-              } else { // HBXfix no survey point
+            // for ( TDNum num : nums ) {
+            // NumStation ns = num.getStation( fi.name );
+            //  if ( ns != null ) {
+            //    fst.add( new FixedStation( fi, ns ) );
+            //    break;
+            //  } else { // HBXfix no survey point
                 NumStation ns2 = new NumStation( fi.name );
                 ns2.e = fi.lng;
                 ns2.s = fi.lat;
                 ns2.v = fi.h_geo;
                 fst.add( new FixedStation( fi, ns2 ) );
-              }
-            }
+            //  }
+            //}
           }
           if ( fst.size() > 0 ) {
             String filepath = "fixeds";
