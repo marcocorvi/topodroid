@@ -2855,7 +2855,6 @@ public class TopoDroidApp extends Application
     TDToast.make( "Sync connected " + name );
     if ( mSyncConn != null ) registerDataListener( mSyncConn );
   }
-
   */
 
   // --------------------------------------------------------------

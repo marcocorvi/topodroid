@@ -190,6 +190,7 @@
     <string name="bt_reset">Сброс соединения bluetooth</string>
     <string name="save_as">сохранить как</string>
     <string name="nickname">Псевдоним</string>
+    <!-- TODO string name"unknown_device_type">Unknown device type %1$d</string -->
 
     <string name="comment">комментарий</string>
     <!-- UNUSED string name="flag">Флаг</string -->

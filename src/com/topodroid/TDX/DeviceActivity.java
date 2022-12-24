@@ -660,7 +660,8 @@ public class DeviceActivity extends Activity
           info.show();
           (new InfoReadBricTask( mApp, info )).execute();
         } else {
-          TDLog.Error( "Unknown device type " + currDeviceA().mType );
+          // TDLog.Error( "Unknown device type " + currDeviceA().mType );
+          TDToast.makeBad( String.format(Locale.US, getResources().getString( R.string.unknown_device_type ), currDeviceA().mType ) );
         }
         // setTitleColor( TDColor.TITLE_NORMAL );
       }
@@ -699,7 +700,7 @@ public class DeviceActivity extends Activity
         } else if ( currDeviceA().mType == Device.DISTO_XBLE ) { // SIWEI
           new DistoXBLEMemoryDialog(this,this).show();
         } else {
-          TDToast.makeBad( "Unknown device type " + currDeviceA().mType );
+          TDToast.makeBad( String.format(Locale.US, getResources().getString( R.string.unknown_device_type ), currDeviceA().mType ) );
         }
       }
 
@@ -899,7 +900,7 @@ public class DeviceActivity extends Activity
   // void resetX310DeviceHeadTail( final int[] head_tail )
   // {
   //   int n = mApp.resetX310Memory( currDeviceA().getAddress(), head_tail[0], head_tail[1] );
-  //   TDToast.make("X310 memory reset " + n + " data" );
+  //   TDToast.make("X310 memory reset " + n + " data" ); // FIXME string
   // }
 
   /** reset device from stored-tail to given tail
@@ -1057,7 +1058,7 @@ public class DeviceActivity extends Activity
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // FIRMWARE
       if ( TDInstance.deviceType() == Device.DISTO_X310 ) {
         // if ( TDSetting.mCommType != 0 ) {
-        //   TDToast.makeLong( "Connection mode must be \"on-demand\"" );
+        //   TDToast.makeLong( "Connection mode must be \"on-demand\"" ); // FIXME string
         // } else {
           mApp.resetComm();
           (new FirmwareDialog( this, this, getResources(), mApp )).show();
@@ -1221,7 +1222,7 @@ public class DeviceActivity extends Activity
   public void setBLEDevice( BluetoothDevice bt_device )
   {
     // TDLog.v("BLE " + "Device Activity: TODO set bluetooth LE device");
-    TDToast.make( "TODO set bluetooth LE device" );
+    TDToast.make( "TODO set bluetooth LE device not implemented" );
     // set bt_device as current
   }
 

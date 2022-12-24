@@ -42,7 +42,7 @@ public class Device
   // public final static int DISTO_BLEX  = 4;
   public final static int DISTO_SAP5  = 5; 
   public final static int DISTO_BRIC4 = 6;
-  public final static int DISTO_XBLE = 7; // SIWEI_TIAN
+  public final static int DISTO_XBLE  = 7; // SIWEI_TIAN
 
   // SIWEI_TIAN
   final static String[] typeString = { "Unknown", "A3", "X310", "X000", "BLEX", "SAP5", "BRIC4", "XBLE" };

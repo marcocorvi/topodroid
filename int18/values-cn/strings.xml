@@ -191,6 +191,7 @@
     <string name="bt_reset">重置蓝牙连接</string>
     <string name="save_as">另存为</string>
     <string name="nickname">别称</string>
+    <!-- TODO string name"unknown_device_type">Unknown device type %1$d</string -->
 
     <string name="comment">注释</string>
     <!-- UNUSED string name="flag">Flag</string -->
