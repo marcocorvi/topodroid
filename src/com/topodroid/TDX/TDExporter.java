@@ -952,26 +952,29 @@ public class TDExporter
         if ( fis.size() > 0 ) {
           ArrayList< FixedStation > fst = new ArrayList<>();
           for ( FixedInfo fi : fis ) {
+            // boolean found = false;
             // for ( TDNum num : nums ) {
-            // NumStation ns = num.getStation( fi.name );
-            //  if ( ns != null ) {
-            //    fst.add( new FixedStation( fi, ns ) );
-            //    break;
-            //  } else { // HBXfix no survey point
-                NumStation ns2 = new NumStation( fi.name );
-                ns2.e = fi.lng;
-                ns2.s = fi.lat;
-                ns2.v = fi.h_geo;
-                fst.add( new FixedStation( fi, ns2 ) );
-            //  }
-            //}
+            //   NumStation ns = num.getStation( fi.name );
+            //   if ( ns != null ) {
+            //     fst.add( new FixedStation( fi, ns ) );
+            //     found = true;
+            //     break;
+            //   }
+            // }
+            // if ( ! found ) {
+                 NumStation ns2 = new NumStation( fi.name ); // SHP export uses only name and (e,s,v) of NumStation 
+                 ns2.e = fi.lng;
+                 ns2.s = fi.lat;
+                 ns2.v = fi.h_geo;
+                 fst.add( new FixedStation( fi, ns2 ) );
+            // }
           }
-          if ( fst.size() > 0 ) {
+          // if ( fst.size() > 0 ) {
             String filepath = "fixeds";
             ShpFixedz shp = new ShpFixedz( dirname, filepath, files );
             shp.setYYMMDD( info.date );
             shp.writeFixeds( fst );
-          }
+          // }
         }   
 
         // for ( String file : files ) TDLog.v( "SHP export-file " + file );
