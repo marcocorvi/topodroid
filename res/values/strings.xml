@@ -198,7 +198,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="bt_reset">Bluetooth reset</string>
     <string name="save_as">save as</string>
     <string name="nickname">Nickname</string>
-    <string name"unknown_device_type">Unknown device type %1$d</string>
+    <string name="unknown_device_type">Unknown device type %1$d</string>
 
     <string name="comment">comment</string>
     <!-- UNUSED string name="flag">Flag</string -->

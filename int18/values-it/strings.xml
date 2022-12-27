@@ -189,7 +189,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="bt_reset">Resettare la connessione bluetooth</string>
     <string name="save_as">salva come</string>
     <string name="nickname">Nome</string>
-    <!-- TODO string name"unknown_device_type">Unknown device type %1$d</string -->
+    <!-- TODO string name="unknown_device_type">Unknown device type %1$d</string -->
 
     <string name="comment">commento</string>
     <!-- UNUSED string name="flag">Flag</string -->

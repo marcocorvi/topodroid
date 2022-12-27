@@ -2973,36 +2973,37 @@ public class TopoGL extends Activity
     }
   }
 
-  // /** import a survey reading from a URI
-  //  * @param uri    URI
-  //  */
-  // private void importSurvey( Uri uri )
-  // {
-  //   String pathname = uri.getPath();
-  //   int pos = pathname.lastIndexOf(":");
-  //   if ( pos >= 0 ) pathname = pathname.substring( pos+1 );
-  //   pos = pathname.lastIndexOf("/");
-  //   if ( pos >= 0 ) pathname = pathname.substring( pos+1 );
-  //   String pathname_lc = pathname.toLowerCase( Locale.getDefault() );
-  //   for ( int trial = 0; trial < 2; ++ trial ) { 
-  //     // TDLog.v("Import trial " + trial + ": survey " + pathname + " uri-path " + uri.getPath() );
-  //     if ( pathname_lc.endsWith( ".th" ) 
-  //       || pathname_lc.endsWith( "thconfig" )
-  //       || pathname_lc.endsWith( "tdconfig" )
-  //       || pathname_lc.endsWith( ".lox" )
-  //       || pathname_lc.endsWith( ".mak" )
-  //       || pathname_lc.endsWith( ".dat" )
-  //       || pathname_lc.endsWith( ".tro" )
-  //       || pathname_lc.endsWith( ".trox" )
-  //       || pathname_lc.endsWith( ".3d" ) ) {
-  //       doOpenFile( uri, pathname, true );
-  //     } else {
-  //       pathname = ( trial == 0 )? getPathFromUri( this, uri ) : null;
-  //       if ( pathname == null ) {
-  //         TDToast.makeBad( R.string.unsupported_format );
-  //       }
-  //     }
-  //   }
-  // }
+  /** import a survey reading from a URI
+   * @param uri    URI
+   * @note: called after a REQUEST_IMPORT_FILE
+   */
+  private void importSurvey( Uri uri )
+  {
+    String pathname = uri.getPath();
+    int pos = pathname.lastIndexOf(":");
+    if ( pos >= 0 ) pathname = pathname.substring( pos+1 );
+    pos = pathname.lastIndexOf("/");
+    if ( pos >= 0 ) pathname = pathname.substring( pos+1 );
+    String pathname_lc = pathname.toLowerCase( Locale.getDefault() );
+    for ( int trial = 0; trial < 2; ++ trial ) { 
+      // TDLog.v("Import trial " + trial + ": survey " + pathname + " uri-path " + uri.getPath() );
+      if ( pathname_lc.endsWith( ".th" ) 
+        || pathname_lc.endsWith( "thconfig" )
+        || pathname_lc.endsWith( "tdconfig" )
+        || pathname_lc.endsWith( ".lox" )
+        || pathname_lc.endsWith( ".mak" )
+        || pathname_lc.endsWith( ".dat" )
+        || pathname_lc.endsWith( ".tro" )
+        || pathname_lc.endsWith( ".trox" )
+        || pathname_lc.endsWith( ".3d" ) ) {
+        doOpenFile( uri, pathname, true );
+      } else {
+        pathname = ( trial == 0 )? getPathFromUri( this, uri ) : null;
+        if ( pathname == null ) {
+          TDToast.makeBad( R.string.unsupported_format );
+        }
+      }
+    }
+  }
 
 }

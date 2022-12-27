@@ -189,7 +189,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="bt_reset">Reinicio conexión bluetooth</string>
     <string name="save_as">Guardar como</string>
     <string name="nickname">Seudónimo</string>
-    <!-- TODO string name"unknown_device_type">Unknown device type %1$d</string -->
+    <!-- TODO string name="unknown_device_type">Unknown device type %1$d</string -->
 
     <string name="comment">Comentario</string>
     <!-- UNUSED string name="flag">Bandera</string -->
