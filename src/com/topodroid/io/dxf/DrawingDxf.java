@@ -539,8 +539,8 @@ public class DrawingDxf
               handle = DXF.printLayer( pw2, handle, p_name, flag, color, DXF.lt_continuous );
             }
           }
-          out.write( sw2.getBuffer().toString() );
-        }
+	}
+        out.write( sw2.getBuffer().toString() );
       }
       DXF.writeEndTable( out );
 
