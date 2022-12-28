@@ -314,6 +314,11 @@
       android:layout_height="wrap_content"
       android:text="@string/export_with_reference"
       />
+    <CheckBox android:id="@+id/dxf_layers"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_layers"
+      />
     <CheckBox android:id="@+id/dxf_bothviews"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"

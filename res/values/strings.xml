@@ -1105,6 +1105,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="export_dxf_version">Version</string>
     <string name="export_georeference">Georeference</string>
     <string name="export_grid">Grid</string>
+    <string name="export_layers">Scrap layers</string>
     <string name="export_linedir">Line direction</string>
     <string name="export_lrud">LRUD</string>
     <string name="export_lrud_from">LRUD at FROM station</string>
