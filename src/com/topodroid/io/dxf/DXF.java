@@ -512,14 +512,18 @@ public class DXF
    * @param x        X coordinate
    * @param y        Y coordinate
    * @param z        Z coordinate
+   * @param linetype line type
+   * @param color    color
    */
-  static int printLinePoint( PrintWriter pw, float scale, int handle, int ref, String layer, float x, float y, float z )
+  static int printLinePoint( PrintWriter pw, float scale, int handle, int ref, String layer, float x, float y, float z, String linetype, int color )
   {
     if ( mVersion14 ) {
       printXY( pw, x * scale, -y * scale, 0 );
     } else {
       printString( pw, 0, "VERTEX" );
       printString( pw, 8, layer );
+      printString( pw, 6, linetype );// HBX_DXF
+      printInt( pw, 62, color );// HBX_DXF
       if ( mVersion13 ) {
         handle = printAcDb( pw, handle, ref, AcDbEntity, AcDbVertex, "AcDb3dPolylineVertex" );
       }
@@ -555,6 +559,7 @@ public class DXF
     return handle;
   }
 
+// HBX_DXF
   /** write a polyline header
    * @param pw       output printer
    * @param handle   ACAD handle
@@ -565,13 +570,31 @@ public class DXF
    */
   static int printPolylineHeader( PrintWriter pw, int handle, int ref, String layer, boolean closed, int npt )
   {
+    String linetype = lt_byLayer;
+    int color = BY_LAYER;
+    return printPolylineHeader( pw, handle, ref, layer, closed, npt, linetype, color );
+  }
+
+  /** write a polyline header
+   * @param pw       output printer
+   * @param handle   ACAD handle
+   * @param ref      ...
+   * @param layer    layer name
+   * @param closed   whether the polyline is closed
+   * @param npt      number of points
+   * @param linetype line type
+   * @param color    color
+   */
+  static int printPolylineHeader( PrintWriter pw, int handle, int ref, String layer, boolean closed, int npt, String linetype, int color )
+  {
     if ( mVersion14 ) {
       printString( pw, 0, "LWPOLYLINE" );
       handle = printAcDb( pw, handle, AcDbEntity, AcDbPolyline );
       printString( pw, 8, layer );
-      printString( pw, 6, lt_byLayer );
+      printString( pw, 6, linetype ); // lt_byLayer );
+      printInt( pw, 62, color );// HBX_DXF
       printInt( pw, 43, 0 ); // width 0: constant
-      printInt( pw, 62, BY_LAYER );
+      // printInt( pw, 62, BY_LAYER );
       printInt( pw, 70, (closed? 1:0) ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20
       printInt( pw, 90, npt );
     } else {
@@ -579,12 +602,16 @@ public class DXF
       if ( mVersion13 ) {
         handle = printAcDb( pw, handle, AcDbEntity );
         printString( pw, 8, layer );
+        printString( pw, 6, linetype );// HBX_DXF
+        printInt( pw, 62, color );// HBX_DXF
         printString( pw, 100, AcDb3dPolyline );
-        printInt( pw, 62, BY_LAYER );
+        // printInt( pw, 62, BY_LAYER );
         printInt( pw, 66, 1 ); // group 1
         printInt( pw, 70, 8 + (closed? 1:0) ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20
       } else { // mVersion9 
         printString( pw, 8, layer );
+        printString( pw, 6, linetype );// HBX_DXF
+        printInt( pw, 62, color );// HBX_DXF
         // printInt(  pw, 39, 1 ); // line thickness
         // printInt(  pw, 40, 1 ); // start width
         // printInt(  pw, 41, 1 ); // end width
@@ -637,7 +664,7 @@ public class DXF
   //   return handle;
   // }
 
-
+// HBX_DXF
   /** write a hatch header
    * @param pw       output printer
    * @param handle   ACAD handle
@@ -647,13 +674,29 @@ public class DXF
    */
   static int printHatchHeader( PrintWriter pw, int handle, int ref, String layer, int npt )
   {
+    String linetype = lt_byLayer;
+    int color = BY_LAYER;
+    return printHatchHeader( pw, handle, ref, layer, npt, linetype, color );
+  }
+
+  /** write a hatch header
+   * @param pw       output printer
+   * @param handle   ACAD handle
+   * @param ref      ...
+   * @param layer    layer name
+   * @param npt      number of points
+   * @param linetype line type
+   * @param color    color
+   */
+  static int printHatchHeader( PrintWriter pw, int handle, int ref, String layer, int npt, String linetype, int color )
+  {
     if ( mVersion13_14 ) {
       printString( pw, 0, "HATCH" );    // entity type HATCH
       handle = printAcDb( pw, handle, AcDbEntity );
       // printString( pw5, 8, "AREA" );  // layer (color BYLAYER)
       printString( pw, 8, layer );      // layer (color BYLAYER)
-      printString( pw, 6, lt_byLayer ); // line color BYLAYER
-      printInt( pw, 62, BY_LAYER );
+      printString( pw, 6, linetype ); // lt_byLayer ); // line color BYLAYER
+      printInt( pw, 62, color ); // BY_LAYER );
       printAcDb( pw, -1, AcDbHatch );
 
       printXYZ( pw, 0f, 0f, 0f, 0 );
@@ -1071,7 +1114,7 @@ public class DXF
         // writeString( out, 49, "-0.1" ); writeInt( out, 74, 0 );
         // writeString( out, 49, "1.0" );  writeInt( out, 74, 0 );
 
-      } else {
+      } else { // dxf9
         writeString( out, 0, "LTYPE" );
         /* handle = */ writeAcDb( out, 14, AcDbSymbolTR, "AcDbLinetypeTableRecord" ); // unnecessary
         writeString( out, 2, lt_continuous );
@@ -1085,6 +1128,169 @@ public class DXF
     writeEndTable( out );
     return handle;
   }
+
+// HBX_DXF
+  static int writeLTypesTableheader( BufferedWriter out, int handle, int ltnr) throws IOException
+  { // HBX_DXF header and standard linetypes
+    if ( mVersion9 ) { handle = 5; } // necessary ???
+    int l_type_nr    = mVersion13_14 ? 1 : 1; // linetype number  //HBX_DXF !
+    handle = writeBeginTable( out, "LTYPE", handle, ltnr+1 );
+    int l_type_owner = handle;
+    // FIXME this line might be a problem with AutoCAD
+    // writeInt( out, 330, 0 ); // table has no owner
+    {
+      // int flag = 64;
+      if ( mVersion13_14 ) {
+        writeString( out, 0, "LTYPE" );
+        handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+        writeString( out, 2, lt_byBlock );
+        writeInt( out, 330, l_type_owner );
+        writeInt( out, 70, 0 );
+        writeString( out, 3, "Std by block" );
+        writeInt( out, 72, 65 );
+        writeInt( out, 73, 0 );
+        writeStringZero( out, 40 );
+
+        writeString( out, 0, "LTYPE" );
+        handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+        writeString( out, 2, lt_byLayer );
+        writeInt( out, 330, l_type_owner );
+        writeInt( out, 70, 0 );
+        writeString( out, 3, "Std by layer" );
+        writeInt( out, 72, 65 );
+        writeInt( out, 73, 0 );
+        writeStringZero( out, 40 );
+
+        writeString( out, 0, "LTYPE" );
+        handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+        writeString( out, 2, lt_continuous );
+        writeInt( out, 330, l_type_owner );
+        writeInt( out, 70, 0 );
+        writeString( out, 3, "Solid line ------" );
+        writeInt( out, 72, 65 );
+        writeInt( out, 73, 0 );
+        writeStringZero( out, 40 );
+/*
+        if ( mVersion13 ) { // kell-e?
+          writeString( out, 0, "LTYPE" );
+          handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+          writeString( out, 2, lt_center );
+          writeInt( out, 330, l_type_owner );
+          writeInt( out, 70, 0 );
+          writeString( out, 3, "Center ____ _ ____ _ ____ _ ____" ); // description
+          writeInt( out, 72, 65 );
+          writeInt( out, 73, 4 );         // number of elements
+          writeString( out, 40, "2.0" );  // pattern length
+          writeString( out, 49, "1.25" );  writeInt( out, 74, 0 ); // segment
+          writeString( out, 49, "-0.25" ); writeInt( out, 74, 0 ); // gap
+          writeString( out, 49, "0.25" );  writeInt( out, 74, 0 );
+          writeString( out, 49, "-0.25" ); writeInt( out, 74, 0 );
+
+          writeString( out, 0, "LTYPE" );
+          handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+          writeString( out, 2, lt_ticks );
+          writeInt( out, 330, l_type_owner );
+          writeInt( out, 70, 0 );
+          writeString( out, 3, "Ticks ____|____|____|____" ); // description
+          writeInt( out, 72, 65 );
+          writeInt( out, 73, 3 );        // number of elements
+          writeStringOne( out, 40 ); // pattern length
+          writeString( out, 49, "0.5" );  writeInt( out, 74, 0 ); // segment
+          writeString( out, 49, "-0.2" ); writeInt( out, 74, 2 ); // embedded text
+          writeInt( out, 75, 0 );   // SHAPE number must be 0
+          writeInt( out, 340, p_style );  // STYLE pointer FIXME
+          writeString( out, 46, "0.1" );  // scale
+          writeStringZero( out, 50 );   // rotation
+          writeString( out, 44, "-0.1" ); // X offset
+          writeString( out, 45, "-0.1" ); // Y offset
+          writeString( out, 9, "|" ); // text
+          writeString( out, 49, "-0.25" ); writeInt( out, 74, 0 ); // gap
+        }
+
+        // writeString( out, 0, "LTYPE" );
+        // handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+        // writeString( out, 2, lt_tick );
+        // writeInt( out, 330, l_type_owner );
+        // writeInt( out, 70, 0 );
+        // writeString( out, 3, "Ticks ____|____|____|____" ); // description
+        // writeInt( out, 72, 65 );
+        // writeInt( out, 73, 4 );
+        // writeString( out, 40, "1.45" ); // pattern length
+        // writeString( out, 49, "0.25" ); writeInt( out, 74, 0 ); // segment
+        // writeString( out, 49, "-0.1" ); writeInt( out, 74, 4 ); // embedded shape
+        //   writeInt( out, 75, 1 );   // SHAPE number
+        //   writeInt( out, 340, 1 );  // STYLE pointer
+        //   writeString( out, 46, "0.1" );  // scale
+        //   writeStringZero( out, 50 );   // rotation
+        //   writeString( out, 44, "-0.1" ); // X offset
+        //   writeStringZero( out, 45 );   // Y offset
+        // writeString( out, 49, "-0.1" ); writeInt( out, 74, 0 );
+        // writeString( out, 49, "1.0" );  writeInt( out, 74, 0 );
+*/
+      } else { // dxf9
+        writeString( out, 0, "LTYPE" );
+        /* handle = */ writeAcDb( out, 14, AcDbSymbolTR, "AcDbLinetypeTableRecord" ); // unnecessary
+        writeString( out, 2, lt_continuous );
+        writeInt( out, 70, 64 );
+        writeString( out, 3, "Solid line" );
+        writeInt( out, 72, 65 );
+        writeInt( out, 73, 0 );
+        writeStringZero( out, 40 );
+      }
+    }
+    //writeEndTable( out );
+    return handle;
+  }
+
+  /** write a LTYPE
+   * @param out      output printer
+   * @param handle   ACAD handle
+   * @param linetype layer line type
+   */
+  static int printLtype( BufferedWriter out, int handle, String linetype ) throws IOException
+  {
+    int l_type_owner = handle;
+    linetype = linetype.replace(":", "-");
+      if ( mVersion13_14 ) {
+        writeString( out, 0, "LTYPE" );
+        handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
+        writeString( out, 2, linetype );
+        writeInt( out, 330, l_type_owner );
+        writeInt( out, 70, 0 );
+        writeString( out, 3, linetype+" ------" );
+        writeInt( out, 72, 65 );
+        writeInt( out, 73, 0 );
+        writeStringZero( out, 40 );
+      } else { // dxf9
+        writeString( out, 0, "LTYPE" );
+        // /* handle = */ writeAcDb( out, 14, AcDbSymbolTR, "AcDbLinetypeTableRecord" ); // unnecessary
+        writeString( out, 2, linetype );
+        writeInt( out, 70, 0 );
+        writeString( out, 3, linetype+" ------" );
+        writeInt( out, 72, 65 );
+        writeInt( out, 73, 0 );
+        writeStringZero( out, 40 );
+      }
+/*
+    name = name.replace(":", "-");
+    printString( pw2, 0, "LAYER" );
+    handle = printAcDb( pw2, handle, AcDbSymbolTR, "AcDbLayerTableRecord");
+    printString( pw2, 2, name );  // layer name
+    printInt( pw2, 70, flag );    // layer flag
+    printInt( pw2, 62, color );   // layer color
+    printString( pw2, 6, linetype ); // linetype name
+
+ */
+    // if ( mVersion13_14 ) {
+    //   printInt( pw2, 330, 2 );       // soft-pointer id/handle to owner dictionary
+    //   printInt( pw2, 370, -3 );      // line-weight enum value
+    //   printString( pw2, 390, "F" );  // hard-pointer id/handle or plot style-name object
+    //   // printInt( pw2, 347, 46 );
+    //   // printInt( pw2, 348, 0 );
+    // }
+    return handle;
+  }
+// HBX_DXF
 
   static int writeExtraTables( BufferedWriter out, int handle ) throws IOException
   {

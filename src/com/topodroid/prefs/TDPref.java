@@ -1046,7 +1046,8 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],         ctx, hlp ),
       makeLst( cat, key[1], tit[1], dsc[1], E, def[1], R.array.acadVersion, R.array.acadVersionValue, ctx, hlp ),
       makeCbx( cat, key[2], tit[2], dsc[2], T, def[2],         ctx, hlp ),  // DISTOX_ACAD_SPLINE
-      makeCbx( cat, key[3], tit[3], dsc[3], A, def[3],         ctx, hlp )   // DISTOX_DXF_REFERENCE
+      makeCbx( cat, key[3], tit[3], dsc[3], A, def[3],         ctx, hlp ),  // DISTOX_DXF_REFERENCE
+      makeCbx( cat, key[4], tit[4], dsc[4], T, def[4],         ctx, hlp )   // DISTOX_ACAD_LAYER
       // makeCbx( cat, key[4], tit[4], dsc[4], N, def[4],         ctx, hlp )   // DISTOX_AUTO_STATIONS
     };
   }

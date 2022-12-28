@@ -52,6 +52,7 @@ import android.net.Uri;
 
 class FixedDialog extends MyDialog
                   implements View.OnClickListener
+                  , View.OnLongClickListener
 {
   private final FixedActivity mParent;
   private FixedInfo mFxd;
@@ -80,6 +81,7 @@ class FixedDialog extends MyDialog
 
   private MyKeyboard mKeyboard;
   private boolean editable;
+  private int mUnitLocation;
 
   // private Button   mButtonCancel;
 
@@ -140,6 +142,9 @@ class FixedDialog extends MyDialog
     // mTVh_ell = (EditText) findViewById( R.id.fix_h_ell );
     mTVh_geo = (EditText) findViewById( R.id.fix_h_geo );
 
+    mTVlng.setOnLongClickListener( this );
+    mTVlat.setOnLongClickListener( this );
+
     mTVdecl = (EditText) findViewById( R.id.fix_decl );
     {
       int year  = TDUtil.year();
@@ -183,13 +188,9 @@ class FixedDialog extends MyDialog
     // mButtonCancel  = (Button) findViewById(R.id.fix_cancel );
     // TDLog.v("FIXED info " + mFxd.lng + " " + mFxd.lat );
     int flag = MyKeyboard.FLAG_POINT_DEGREE;
-    if ( TDSetting.mUnitLocation == TDUtil.DEGREE ) {
-      mTVlng.setText( FixedInfo.double2degree( mFxd.lng ) );
-      mTVlat.setText( FixedInfo.double2degree( mFxd.lat ) );
-    } else { // TDUtil.DDMMSS
-      mTVlng.setText( FixedInfo.double2ddmmss( mFxd.lng ) );
-      mTVlat.setText( FixedInfo.double2ddmmss( mFxd.lat ) );
-    }
+    mUnitLocation = TDSetting.mUnitLocation;
+    setLngLatText();
+
     // mTVh_ell.setText( String.format( Locale.US, "%.0f", mFxd.h_ell ) );
     mTVh_geo.setText( String.format( Locale.US, "%.0f", mFxd.h_geo ) );
 
@@ -234,6 +235,32 @@ class FixedDialog extends MyDialog
     // mButtonCancel.setOnClickListener( this );
 
     showConvertedCoords( );
+  }
+
+  private void setLngLatText() 
+  {
+    if ( mUnitLocation == TDUtil.DEGREE ) {
+      mTVlng.setText( FixedInfo.double2degree( mFxd.lng ) );
+      mTVlat.setText( FixedInfo.double2degree( mFxd.lat ) );
+    } else { // TDUtil.DDMMSS
+      mTVlng.setText( FixedInfo.double2ddmmss( mFxd.lng ) );
+      mTVlat.setText( FixedInfo.double2ddmmss( mFxd.lat ) );
+    }
+  }
+
+  @Override
+  public boolean onLongClick( View v )
+  {
+    if ( v.getId() == R.id.fix_lng || v.getId() == R.id.fix_lat ) {
+      if ( mUnitLocation == TDUtil.DEGREE ) {
+        mUnitLocation = TDUtil.DDMMSS;
+      } else { 
+        mUnitLocation = TDUtil.DEGREE;
+      }
+      setLngLatText();
+      return true;
+    }
+    return false;
   }
 
   @Override

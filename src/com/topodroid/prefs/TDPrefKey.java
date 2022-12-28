@@ -774,6 +774,7 @@ public class TDPrefKey
     "DISTOX_ACAD_VERSION",     // 23 31 
     "DISTOX_ACAD_SPLINE",
     "DISTOX_DXF_REFERENCE",
+    "DISTOX_ACAD_LAYER",
     // "DISTOX_AUTO_STATIONS",    // whether to add stations to therion th2 exports
   };
   static int[] EXPORT_DXFtitle = {
@@ -782,6 +783,7 @@ public class TDPrefKey
     R.string.pref_acad_version_title,
     R.string.pref_acad_spline_title,
     R.string.pref_dxf_reference_title,
+    R.string.pref_acad_layer_title,
     // R.string.pref_autoStations_title,
     -1
   };
@@ -791,6 +793,7 @@ public class TDPrefKey
     R.string.pref_acad_version_summary,
     R.string.pref_acad_spline_summary,
     R.string.pref_dxf_reference_summary,
+    R.string.pref_acad_layer_summary,
     // R.string.pref_autoStations_summary,
     -1
   };
@@ -800,6 +803,7 @@ public class TDPrefKey
     "9",
     TRUE,
     FALSE,
+    TRUE,
     // TRUE,
     null
   };

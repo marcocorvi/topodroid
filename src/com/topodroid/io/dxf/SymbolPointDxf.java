@@ -25,15 +25,15 @@ import java.util.ArrayList;
 
 public class SymbolPointDxf
 {
-  public void line( String layer, float x0, float y0, float x1, float y1 )
+  public void line( String layer, float x0, float y0, float x1, float y1, int col )
   {
     startLine( layer );
     addHandle( DXF.ACAD_12 );
     addAcDbLine( false );
-    addLine( x0, y0, x1, y1 );
+    addLine( x0, y0, x1, y1, col );
   }
 
-  public void polyline( String layer, float[] xx, float[] yy )
+  public void polyline( String layer, float[] xx, float[] yy, int col )
   {
     startPolyline( /* layer */ );
     addHandle( DXF.ACAD_12 );
@@ -41,7 +41,7 @@ public class SymbolPointDxf
     addAcDbEntity( DXF.ACAD_12, null ); // 2021-A
     addLayer( TOKEN_POLYLINE, DXF.ACAD_9, layer );  // 2021-A    !!2022 ACAD_14 must be write layer!!
     addAcDbPolyline();
-    addPolylineColor( 256 );
+    addPolylineColor( col ); // HBX 256 -> col
     addPolylineGroup( 1 );
     addPolylineLineWidth( 0 );
     addPolylineNPoints( xx.length );
@@ -62,11 +62,11 @@ public class SymbolPointDxf
     // addHandle( DXF.ACAD_12 ); already in HandlePointer
   }
 
-  public void circle( String layer, float x, float y, float r )
+  public void circle( String layer, float x, float y, float r, int col )
   {
     startCircle( layer );
     addAcDbCircle( true );
-    addCircle( x, y, r );
+    addCircle( x, y, r, col );
   }
 
 
@@ -78,11 +78,21 @@ public class SymbolPointDxf
   // DXF.printString( pw, 100, DXF.AcDbArc );
   // DXF.printFloat( pw, 50, x2 );                                         // ANGLES
   // DXF.printFloat( pw, 51, x2+y2 );
-  public void arc( String layer, float x, float y, float r, float a1, float a2 )
+
+  /** TODO
+   * @param layer  layer
+   * @param x      center X coord
+   * @param y      center Y coord
+   * @param r      radius
+   * @param a1     start angle (?)
+   * @param a2     end angle (?)
+   * @param col    color index
+   */
+  public void arc( String layer, float x, float y, float r, float a1, float a2, int col )
   {
     startArc( layer );
     addAcDbCircle( true ); 
-    addCircle( x, y, r );
+    addCircle( x, y, r, col );
     addAcDbArc( true ); 
     addArcAngles( a1, a2 );
   }
@@ -96,7 +106,7 @@ public class SymbolPointDxf
   //           x1*dxfScale, -(y0+y1)/2*dxfScale, 0.0f,                        // ENDPOINT OF MAJOR AXIS
   //           (y1-y0)/(x1-x0),                                              // RATIO MINOR/MAJOR
   //           x2*TDMath.DEG2RAD, (x2+y2)*TDMath.DEG2RAD );  // START and END PARAMS
-  public void ellipse( String layer, float x, float y, float a, float b, float a1, float a2 )
+  public void ellipse( String layer, float x, float y, float a, float b, float a1, float a2, int col )
   {
     // TODO
   }
@@ -578,11 +588,11 @@ public class SymbolPointDxf
    * @param x1   second point X coord
    * @param y1   second point Y coord
    */
-  private void addLine( float x0, float y0, float x1, float y1 )
+  private void addLine( float x0, float y0, float x1, float y1, int col )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw );
-    DXF.printInt( pw, 62, DXF.BY_LAYER ); // color 0: by_block, 256: by_layer
+    DXF.printInt( pw, 62, col ); // DXF.BY_LAYER ); // color 0: by_block, 256: by_layer
     DXF.printXYZ( pw, x0, y0, 0.0f, 0 ); // prev point
     DXF.printXYZ( pw, x1, y1, 0.0f, 1 ); // current point
     addToken( new NormalToken( TOKEN_LINE, DXF.ACAD_9, sw.toString() ) );
@@ -654,11 +664,11 @@ public class SymbolPointDxf
    * @param y    Y coord of the center
    * @param r    radius
    */
-  private void addCircle( float x, float y, float r )
+  private void addCircle( float x, float y, float r, int col )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw ); // DXF writer
-    DXF.printInt( pw, 62, DXF.BY_LAYER ); // color 0: by_block, 256: by_layer
+    DXF.printInt( pw, 62, col ); // DXF.BY_LAYER ); // color 0: by_block, 256: by_layer
     DXF.printXYZ( pw, x, y, 0.0f, 0 );
     DXF.printFloat( pw, 40, r );
     addToken( new NormalToken( TOKEN_CIRCLE, DXF.ACAD_9, sw.toString() ) );
@@ -686,13 +696,13 @@ public class SymbolPointDxf
    * @param a1 angle ...
    * @param a2 angle ...
    */
-  private void addEllipse( float x0, float y0, float x1, float y1, float r, float a1, float a2 ) 
+  private void addEllipse( float x0, float y0, float x1, float y1, float r, float a1, float a2, int col ) 
   {
     float xc = (x0+x1)/2;
     float yc = (y0+y1)/2;
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw ); // DXF writer
-    DXF.printInt( pw, 62, DXF.BY_LAYER ); // color 0: by_block, 256: by_layer
+    DXF.printInt( pw, 62, col ); // DXF.BY_LAYER ); // color 0: by_block, 256: by_layer
     DXF.printXYZ( pw, xc, yc, 0.0f, 0 ); // CENTER
     DXF.printXYZ( pw, x0, yc, 0.0f, 1 ); // LEFT VERTEX
     DXF.printFloat( pw, 40, r  );        // ASPECT_RATIO

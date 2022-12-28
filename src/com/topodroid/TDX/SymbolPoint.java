@@ -21,6 +21,7 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.math.BezierCurve;
 import com.topodroid.math.Point2D;
 import com.topodroid.io.dxf.SymbolPointDxf;
+import com.topodroid.io.dxf.DxfColor;
 // import com.topodroid.dxf.SymbolPointDxf;
 
 import java.io.FileInputStream;
@@ -238,6 +239,7 @@ public class SymbolPoint extends Symbol
     String th_name = null;
     String group   = null;
     int color      = 0;
+    int color2     = 0; // HBX
     Paint.Style style = Paint.Style.STROKE;
     String path    = null;
     String options = null;
@@ -434,13 +436,13 @@ public class SymbolPoint extends Symbol
    */
   private void makePointPath( String path )
   {
+    String pname = TDSetting.mAcadLayer ? "0" : "P_" + getThName().replace(':', '-'); // "0" = block // HBX
+    int icolor = DxfColor.rgbToIndex( getColor() ); // HBX
     mDxf = new SymbolPointDxf();
     if ( path == null ) {
       mPath = new Path();
       mPath.moveTo(0,0);
-      String pname = "P_" + getThName().replace(':', '-');
-
-      mDxf.line( pname, 0, 0, 1, 0 );
+      mDxf.line( pname, 0, 0, 1, 0, icolor ); // HBX
 
       mSvg = "";
       mXvi = "";
@@ -458,7 +460,6 @@ public class SymbolPoint extends Symbol
     PrintWriter pv4  = new PrintWriter( sv4 ); // XVI writer: Lines / Cubics
 
     float x00=0, y00=0;  // last drawn point1
-    String pname = "P_" + getThName().replace(':', '-');
 
     float unit = TDSetting.mUnitIcons;
     mPath = new Path();
@@ -492,8 +493,7 @@ public class SymbolPoint extends Symbol
             mPath.lineTo( x0*unit, y0*unit );
             float x01 = x0 * dxfScale;
             float y01 = y0 * dxfScale;
-
-            mDxf.line(pname, x00, -y00, x01, -y01 );
+            mDxf.line( pname, x00, -y00, x01, -y01, icolor ); // HBX
 
 	    pv4.format(Locale.US, "L %.2f %.2f", x00, y00 );
 	    pv4.format(Locale.US, " %.2f %.2f ", x01, y01 );
@@ -578,7 +578,7 @@ public class SymbolPoint extends Symbol
            xx[np] =  x2*dxfScale;
            yy[np] = -y2*dxfScale;
 
-           mDxf.polyline( pname, xx, yy );
+           mDxf.polyline( pname, xx, yy, icolor ); // HBX
       
             // x00 /= dxfScale; // not needed
             // y00 /= dxfScale;
@@ -603,7 +603,7 @@ public class SymbolPoint extends Symbol
             x1 = Float.parseFloat( vals[k] );                 // radius
             mPath.addCircle( x0*unit, y0*unit, x1*unit, Path.Direction.CCW );
 
-            mDxf.circle( pname, x0*dxfScale, -y0*dxfScale, x1*dxfScale );
+            mDxf.circle( pname, x0*dxfScale, -y0*dxfScale, x1*dxfScale, icolor ); // HBX
 
 	    pv4.format(Locale.US, "C %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f ", 
               (x0-x1)*dxfScale, y0*dxfScale, (x0-x1)*dxfScale, (y0-x1)*dxfScale, (x0+x1)*dxfScale, (y0-x1)*dxfScale, (x0+x1)*dxfScale, y0*dxfScale );
@@ -650,7 +650,7 @@ public class SymbolPoint extends Symbol
             y2 = Float.parseFloat( vals[k] ); 
             mPath.arcTo( new RectF(x0*unit, y0*unit, x1*unit, y1*unit), x2, y2 );
 
-            mDxf.arc( pname, (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, x1*dxfScale, x2, y2 );
+            mDxf.arc( pname, (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, x1*dxfScale, x2, y2, icolor ); // HBX
 
 	    // TODO arcTo for XVI
 

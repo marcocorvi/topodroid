@@ -1590,6 +1590,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_acad_version_summary">DXF version</string>
   <string name="pref_acad_spline_title">DXF splines</string>
   <string name="pref_acad_spline_summary">DXF interpolated cubics</string>
+  <string name="pref_acad_layer_title">Scrap layers</string>
+  <string name="pref_acad_layer_summary">DXF layers by scraps</string>
   <string name="pref_dxf_reference_title">DXF reference</string>
   <string name="pref_dxf_reference_summary">X-Y axes is DXF sketch export</string>
   <!-- UNUSED string name="pref_dxf_scale_title">DXF sketch scale</string -->
