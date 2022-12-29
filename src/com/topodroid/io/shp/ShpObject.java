@@ -51,6 +51,7 @@ class ShpObject
   final static int SIZE_TYPE   =   8;
   final static int SIZE_FLAG   =   8;
   final static int SIZE_NAME   =  16; // name, from, to
+  final static int SIZE_SOURCE =  20; // "Mobile-Topographer"	
   final static int SIZE_ORIENT =   6;
   final static int SIZE_SCALE  =   6;
   final static int SIZE_LEVELS =   6;
