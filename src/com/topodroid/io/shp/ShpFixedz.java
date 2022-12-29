@@ -47,11 +47,11 @@ public class ShpFixedz extends ShpObject
     String[] fields = new String[ n_fld ];
     fields[0] = "name";
     fields[1] = "comment";
-    fields[2] = "source"; // 0, 1, 2, 3
+    fields[2] = "source"; // "Mobile-Topographer"
     fields[3] = "accuracy";
     fields[4] = "accuracy_v";
     byte[]   ftypes = { BYTEC, BYTEC, BYTEC, BYTEN, BYTEN };
-    int[]    flens  = { SIZE_NAME, SIZE_TEXT, SIZE_FLAG, SIZE_ACCUR, SIZE_ACCUR };
+    int[]    flens  = { SIZE_NAME, SIZE_TEXT, SIZE_SOURCE, SIZE_ACCUR, SIZE_ACCUR };
 
     int shpRecLen = getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );
