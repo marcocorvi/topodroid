@@ -572,7 +572,7 @@ public class DXF
   {
     String linetype = lt_byLayer;
     int color = BY_LAYER;
-    return printPolylineHeader( pw, handle, ref, layer, closed, npt, linetype, color );
+    return printPolylineHeader( pw, handle, ref, layer, closed, npt, linetype, color, 0 );
   }
 
   /** write a polyline header
@@ -585,7 +585,7 @@ public class DXF
    * @param linetype line type
    * @param color    color
    */
-  static int printPolylineHeader( PrintWriter pw, int handle, int ref, String layer, boolean closed, int npt, String linetype, int color )
+  static int printPolylineHeader( PrintWriter pw, int handle, int ref, String layer, boolean closed, int npt, String linetype, int color, float z )
   {
     if ( mVersion14 ) {
       printString( pw, 0, "LWPOLYLINE" );
@@ -594,6 +594,7 @@ public class DXF
       printString( pw, 6, linetype ); // lt_byLayer );
       printInt( pw, 62, color );// HBX_DXF
       printInt( pw, 43, 0 ); // width 0: constant
+      printFloat( pw, 38, z ); // elevation
       // printInt( pw, 62, BY_LAYER );
       printInt( pw, 70, (closed? 1:0) ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20
       printInt( pw, 90, npt );
@@ -776,9 +777,11 @@ public class DXF
    * @param xoff     X offset
    * @param yoff     Y offset
    * @param z        Z level
+   * @param s          flag, scrap
+   * @param color    color
    */
   static int printText( PrintWriter pw, int handle, int ref, String label, float x, float y, float angle, float scale,
-                        String layer, String style, float xoff, float yoff, float z )
+                        String layer, String style, float xoff, float yoff, float z, int s, int color )
   {
     // if ( false && mVersion13_14 ) { // FIXME TEXT in AC1012
     //   // int idx = 1 + point.mPointType;
@@ -795,6 +798,8 @@ public class DXF
       // printString( pw, 2, block );
       handle = printAcDb( pw, handle, ref, AcDbEntity );
       printString( pw, 8, layer );
+      //printString( pw, 6, linetype ); // lt_byLayer ); // line color BYLAYER
+      printInt( pw, 62, color ); // BY_LAYER );
       printAcDb( pw, -1, AcDbText );
       
       // printString( pw, 7, style_dejavu ); // style (optional)
