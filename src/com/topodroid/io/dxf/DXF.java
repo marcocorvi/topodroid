@@ -532,8 +532,8 @@ public class DXF
     } else {
       printString( pw, 0, "VERTEX" );
       printString( pw, 8, layer );
-      printString( pw, 6, linetype );// HBX_DXF
-      printInt( pw, 62, color );// HBX_DXF
+      printString( pw, 6, linetype ); // HBX_DXF
+      printInt( pw, 62, color ); // HBX_DXF
       if ( mVersion13 ) {
         handle = printAcDb( pw, handle, ref, AcDbEntity, AcDbVertex, "AcDb3dPolylineVertex" );
       }
@@ -603,7 +603,7 @@ public class DXF
       handle = printAcDb( pw, handle, AcDbEntity, AcDbPolyline );
       printString( pw, 8, layer );
       printString( pw, 6, linetype ); // lt_byLayer );
-      printInt( pw, 62, color );// HBX_DXF
+      printInt( pw, 62, color ); // HBX_DXF
       printInt( pw, 43, 0 ); // width 0: constant
       printFloat( pw, 38, z ); // elevation
       // printInt( pw, 62, BY_LAYER );
@@ -614,8 +614,8 @@ public class DXF
       if ( mVersion13 ) {
         handle = printAcDb( pw, handle, AcDbEntity );
         printString( pw, 8, layer );
-        printString( pw, 6, linetype );// HBX_DXF
-        printInt( pw, 62, color );// HBX_DXF
+        printString( pw, 6, linetype ); // HBX_DXF
+        printInt( pw, 62, color ); // HBX_DXF
         printString( pw, 100, AcDb3dPolyline );
         // printInt( pw, 62, BY_LAYER );
         printInt( pw, 66, 1 ); // group 1
@@ -623,8 +623,8 @@ public class DXF
         printInt( pw, 70, 8 + (closed? 1:0)+128 ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20 // HBX_DXF 128 linetype generated
       } else { // mVersion9 
         printString( pw, 8, layer );
-        printString( pw, 6, linetype );// HBX_DXF
-        printInt( pw, 62, color );// HBX_DXF
+        printString( pw, 6, linetype ); // HBX_DXF
+        printInt( pw, 62, color ); // HBX_DXF
         // printInt(  pw, 39, 1 ); // line thickness
         // printInt(  pw, 40, 1 ); // start width
         // printInt(  pw, 41, 1 ); // end width
@@ -1188,14 +1188,15 @@ public class DXF
 
 // HBX_DXF
   /** TODO
-   * @param out    output writer
-   * @param handle handle
-   * @param ltnr   ???
+   * @param out       output writer
+   * @param handle    handle
+   * @param ltnr      number of linetypes
+   * @param p1_style  linetype character style "pointer" 
    */
-  static int writeLTypesTableheader( BufferedWriter out, int handle, int ltnr, int p1_style) throws IOException
+  static int writeLTypesTableheader( BufferedWriter out, int handle, int ltnr, int p1_style ) throws IOException
   { // HBX_DXF header and standard linetypes
     if ( mVersion9 ) { handle = 5; } // necessary ???
-    int l_type_nr    = mVersion13_14 ? 1 : 1; // linetype number  //HBX_DXF !
+    int l_type_nr    = mVersion13_14 ? 1 : 1; // linetype number // HBX_DXF !
     handle = writeBeginTable( out, "LTYPE", handle, ltnr+1 );
     int l_type_owner = handle;
     // FIXME this line might be a problem with AutoCAD

@@ -252,9 +252,9 @@ public class DrawingDxf
    */
   static private int printSpline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle, String layer, boolean closed,
                                   float xoff, float yoff, float z ) {
-    String linetype = DXF.lt_continuous;
-    int color = DXF.BY_LAYER;
-    return printSpline( pw, line, scale, handle, layer, closed, xoff, yoff, z, linetype, color );
+    // String linetype = DXF.lt_continuous;
+    // int color = DXF.BY_LAYER;
+    return printSpline( pw, line, scale, handle, layer, closed, xoff, yoff, z, DXF.lt_continuous, DXF.BY_LAYER );
   }
 
   /** print a spline line path
@@ -441,26 +441,26 @@ public class DrawingDxf
         } else {
           nr_ltypes = 0;
         }
-        handle = DXF.writeLTypesTableheader(out, handle, nr_ltypes, p1_style);// HBX_DXF
+        handle = DXF.writeLTypesTableheader(out, handle, nr_ltypes, p1_style ); // HBX_DXF
         if ( TDSetting.mAcadLayer ){
           if ( line_lib != null ) { // always true
             for ( Symbol line : line_lib.getSymbols() ) {
               String l_name = "L_" + replaceColon( line.getThName() );
               String l_type = DXF.lt_continuous;
               if ( DXF.mVersion14 &&
-                      ( l_name.equals("L_pit")//4
-                              || l_name.equals("L_chimney")//3
-                              || l_name.equals("L_arrow")  //1
-                              || l_name.equals("L_slope")  //7
-                              || l_name.equals("L_user")   //a
-                              || l_name.equals("L_wall")   //b
-                              || l_name.equals("L_section")//c
-                              || l_name.equals("L_border") //2
-                              || l_name.equals("L_wall-presumed")//5
-                              || l_name.equals("L_rock-border")//6
-                      )) {
+                      (    l_name.equals("L_pit")          //4
+                        || l_name.equals("L_chimney")      //3
+                        || l_name.equals("L_arrow")        //1
+                        || l_name.equals("L_slope")        //7
+                        || l_name.equals("L_user")         //a
+                        || l_name.equals("L_wall")         //b
+                        || l_name.equals("L_section")      //c
+                        || l_name.equals("L_border")       //2
+                        || l_name.equals("L_wall-presumed")//5
+                        || l_name.equals("L_rock-border")  //6
+                      ) ) {
               } else {
-                //color = DxfColor.rgbToIndex( line.getColor() );
+                // color = DxfColor.rgbToIndex( line.getColor() );
                 handle = DXF.printLtype(out, handle, l_name);
               }
             }
@@ -469,7 +469,7 @@ public class DrawingDxf
           if ( area_lib != null ) { // always true
             for ( Symbol area : area_lib.getSymbols() ) {
               String a_name = "A_" + replaceColon( area.getThName() );
-              //color = DxfColor.rgbToIndex( area.getColor() );
+              // color = DxfColor.rgbToIndex( area.getColor() );
               handle = DXF.printLtype( out, handle, a_name );
             }
           }
@@ -765,7 +765,7 @@ public class DrawingDxf
           {
             DrawingStationUser sp = (DrawingStationUser)path;
             handle = DXF.printText( pw5, handle, model_block_handle, sp.name(), (sp.cx+xoff) * scale, -(sp.cy+yoff) * scale,
-                                0, LABEL_SCALE, "STATION", DXF.style_dejavu, xoff, yoff, z, scrap_flag, DXF.BY_LAYER);
+                                0, LABEL_SCALE, "STATION", DXF.style_dejavu, xoff, yoff, z, scrap_flag, DXF.BY_LAYER );
           }
           else if ( path.mType == DrawingPath.DRAWING_PATH_LINE )
           {
@@ -912,7 +912,7 @@ public class DrawingDxf
   { // FIXME point scale factor is 0.3
     if ( sn == null ) return handle;
     return DXF.printText( pw, handle, ref_handle, sn.getName(),  (sn.cx+xoff)*scale, -(sn.cy+yoff)*scale, 0,
-                        STATION_SCALE, "STATION", DXF.style_dejavu, xoff, yoff, z, scrap, DXF.BY_LAYER);
+                        STATION_SCALE, "STATION", DXF.style_dejavu, xoff, yoff, z, scrap, DXF.BY_LAYER );
   }
 
   /** write a station point to DXF format
