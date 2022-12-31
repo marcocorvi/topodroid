@@ -66,6 +66,7 @@ public class DXF
   static final String AcDbLine     = "AcDbLine";
   static final String AcDbPolyline = "AcDbPolyline";
   static final String AcDb3dPolyline = "AcDb3dPolyline";
+  static final String AcDb2dPolyline = "AcDb2dPolyline";
   static final String AcDbVertex   = "AcDbVertex";
   static final String AcDbCircle   = "AcDbCircle";
   static final String AcDbArc      = "AcDbArc";
@@ -535,12 +536,14 @@ public class DXF
       printString( pw, 6, linetype );// HBX_DXF
       printInt( pw, 62, color );// HBX_DXF
       if ( mVersion13 ) {
-        handle = printAcDb( pw, handle, ref, AcDbEntity, AcDbVertex, "AcDb3dPolylineVertex" );
+        //handle = printAcDb( pw, handle, ref, AcDbEntity, AcDbVertex, "AcDb3dPolylineVertex" );
+        handle = printAcDb( pw, handle, ref, AcDbEntity, AcDbVertex, "AcDb2dVertex" );
       }
-      printXYZ( pw, x * scale, -y * scale, z, 0 );
-      if ( mVersion13 ) {
-        printInt( pw, 70, 32 ); // flag 32 = 3D polyline vertex
-      }
+      //printXYZ( pw, x * scale, -y * scale, z, 0 );
+      printXY( pw, x * scale, -y * scale, 0 );// HBX_DXF
+      //if ( mVersion13 ) { //if 3D
+      //  printInt( pw, 70, 32 ); // flag 32 = 3D polyline vertex
+      //}
     }
     return handle;
   }
@@ -608,7 +611,7 @@ public class DXF
       printFloat( pw, 38, z ); // elevation
       // printInt( pw, 62, BY_LAYER );
       printInt( pw, 90, npt );
-      printInt( pw, 70, (closed? 1:0)+128 ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20 // HBX_DXF 128= linetype generated
+      printInt( pw, 70, (closed? 1:0) + 128 ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20 // HBX_DXF 128= linetype generated
     } else {
       printString( pw, 0, "POLYLINE" );
       if ( mVersion13 ) {
@@ -616,12 +619,15 @@ public class DXF
         printString( pw, 8, layer );
         printString( pw, 6, linetype );// HBX_DXF
         printInt( pw, 62, color );// HBX_DXF
-        printString( pw, 100, AcDb3dPolyline );
+        printInt( pw, 43, 0 ); // width 0: constant
+        //printString( pw, 100, AcDb3dPolyline );// OK
+        printString( pw, 100, AcDb2dPolyline );// HBX_DXF not ok
+        //printFloat( pw, 38, z ); // elevation // HBX_DXF
         // printInt( pw, 62, BY_LAYER );
+        printInt( pw, 70, (closed? 1:0) + 128 ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20 // HBX_DXF 128 linetype generated
         printInt( pw, 66, 1 ); // group 1
         printXYZ(pw,0f, 0f, z, 0);
-        printInt( pw, 70, 8 + (closed? 1:0)+128 ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20 // HBX_DXF 128 linetype generated
-      } else { // mVersion9 
+      } else { // mVersion9
         printString( pw, 8, layer );
         printString( pw, 6, linetype );// HBX_DXF
         printInt( pw, 62, color );// HBX_DXF
@@ -630,7 +636,7 @@ public class DXF
         // printInt(  pw, 41, 1 ); // end width
         printInt( pw, 66, 1 ); // group 1
         printXYZ(pw,0f, 0f, z, 0);
-        printInt( pw, 70, 8 + (closed? 1:0)+128 ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20 // HBX_DXF linetype gen enable
+        printInt( pw, 70, (closed? 1:0) + 128 ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20 // HBX_DXF linetype gen enable
         // printInt( pw, 75, 0 ); // 6 cubic spline, 5 quad spline, 0 (optional, default 0) // commented in 5.1.20
       }
     }
@@ -645,7 +651,7 @@ public class DXF
    */
   static int printPolylineFooter( PrintWriter pw, int handle, int ref, String layer )
   {
-    if ( mVersion14 ) {
+    if ( mVersion14 ) { //HBX_DXF 14 -> 13_14?
       // nothing 
     } else {
       pw.printf("  0%sSEQEND%s", EOL, EOL );
@@ -836,7 +842,7 @@ public class DXF
     return handle;
   }
 
-  /** TODO
+  /** AutoCAD default blocks
    * @param out    output writer
    * @param name   block record name
    * @param handle handle
@@ -855,7 +861,7 @@ public class DXF
      return handle;
   }
 
-  /** TODO
+  /** AutoCAD default blocks
    * @param out    output writer
    * @param name   block name
    * @param handle handle
@@ -1069,7 +1075,7 @@ public class DXF
     }
     return handle;
   }
-
+/*
   /** write the TYPES table
    * @param out    output writer
    * @param handle handle
@@ -1187,22 +1193,19 @@ public class DXF
   }
 
 // HBX_DXF
-  /** TODO
+  /** Separated linetype table header and contet
    * @param out    output writer
    * @param handle handle
-   * @param ltnr   ???
+   * @param ltnr   linetype number (its value is not important)
    */
   static int writeLTypesTableheader( BufferedWriter out, int handle, int ltnr, int p1_style) throws IOException
   { // HBX_DXF header and standard linetypes
-    if ( mVersion9 ) { handle = 5; } // necessary ???
-    int l_type_nr    = mVersion13_14 ? 1 : 1; // linetype number  //HBX_DXF !
+    //if ( mVersion9 ) { handle = 5; } // necessary ???
+    //int l_type_nr    = mVersion13_14 ? 1 : 1; // linetype number  //HBX_DXF !
     handle = writeBeginTable( out, "LTYPE", handle, ltnr+1 );
     int l_type_owner = handle;
-    // FIXME this line might be a problem with AutoCAD
-    // writeInt( out, 330, 0 ); // table has no owner
     {
-      // int flag = 64;
-      if ( mVersion14 ) { // R14
+      if (mVersion14) { // R14
         {
           writeString(out, 0, "LTYPE");
           handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
@@ -1234,7 +1237,7 @@ public class DXF
           writeInt(out, 73, 0);
           writeStringZero(out, 40);
         } // AutoCAD standard linetype
-        {
+        /*{
           writeString(out, 0, "LTYPE");
           handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
           writeString(out, 2, lt_center);
@@ -1252,8 +1255,8 @@ public class DXF
           writeInt(out, 74, 0);
           writeString(out, 49, "-0.25");//4
           writeInt(out, 74, 0);
-        }
-        {
+        }*/
+        /*{
           writeString(out, 0, "LTYPE");
           handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
           writeString(out, 2, lt_ticks);
@@ -1276,81 +1279,7 @@ public class DXF
           writeString(out, 9, "|"); // text
           writeString(out, 49, "-0.25");
           writeInt(out, 74, 0); // gap
-        }
-        {
-          writeString(out, 0, "LTYPE");
-          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
-          writeString(out, 2, "L_USER");//a
-          writeInt(out, 330, l_type_owner);
-          writeInt(out, 70, 0);
-          writeString(out, 3, "Solid line _________");
-          writeInt(out, 72, 65);
-          writeInt(out, 73, 0);
-          writeStringZero(out, 40);
-        } // user a
-        {
-          writeString(out, 0, "LTYPE");
-          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
-          writeString(out, 2, "L_WALL");//b
-          writeInt(out, 330, l_type_owner);
-          writeInt(out, 70, 0);
-          writeString(out, 3, "Solid line _________");
-          writeInt(out, 72, 65);
-          writeInt(out, 73, 0);
-          writeStringZero(out, 40);
-        } // wall b
-        {
-          writeString(out, 0, "LTYPE");
-          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
-          writeString(out, 2, "L_SECTION");//c
-          writeInt(out, 330, l_type_owner);
-          writeInt(out, 70, 0);
-          writeString(out, 3, "Section _ _ _ _ _ _ _ _ _");
-          writeInt(out, 72, 65);
-          writeInt(out, 73, 2);
-          writeString(out, 40, "1.0"); // pattern length
-          writeString(out, 49, "0.3"); //1
-          writeInt(out, 74, 0); // segment
-          writeString(out, 49, "-0.7"); //2
-          writeInt(out, 74, 0); // segment
-        } // section c
-        {
-          writeString(out, 0, "LTYPE");
-          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
-          writeString(out, 2, "L_BORDER");//2
-          writeInt(out, 330, l_type_owner);
-          writeInt(out, 70, 0);
-          writeString(out, 3, "Solid line _________");
-          writeInt(out, 72, 65);
-          writeInt(out, 73, 0);
-          writeStringZero(out, 40);
-        } // border 2
-        {
-          writeString(out, 0, "LTYPE");
-          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
-          writeString(out, 2, "L_ROCK-BORDER");//6
-          writeInt(out, 330, l_type_owner);
-          writeInt(out, 70, 0);
-          writeString(out, 3, "Solid line _________");
-          writeInt(out, 72, 65);
-          writeInt(out, 73, 0);
-          writeStringZero(out, 40);
-        } // rock-border 6
-        {
-          writeString(out, 0, "LTYPE");
-          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
-          writeString(out, 2, "L_WALL-PRESUMED");//5
-          writeInt(out, 330, l_type_owner);
-          writeInt(out, 70, 0);
-          writeString(out, 3, "Solid line _________");
-          writeInt(out, 72, 65);
-          writeInt(out, 73, 2);
-          writeString(out, 40, "1.0"); // pattern length
-          writeString(out, 49, "0.7"); //1
-          writeInt(out, 74, 0); // segment
-          writeString(out, 49, "-0.3"); //2
-          writeInt(out, 74, 0); // segment
-        } // wall-presumed 5
+        }*/
         {
           writeString(out, 0, "LTYPE");
           handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
@@ -1383,8 +1312,10 @@ public class DXF
           writeInt(out, 70, 0);
           writeString(out, 3, "PIT __|__|__|__"); // description
           writeInt(out, 72, 65);
-          writeInt(out, 73, 1);      // number of elements
+          writeInt(out, 73, 1);      // number of elements AutoCAD
+          //writeInt(out, 73, 3);      // number of elements dwg fastview?
           writeString(out, 40, "1.0"); // pattern length
+          //writeString(out, 49, "-0.01"); // dash 2 dwg fastview?
           writeInt(out, 74, 0); // segment
           writeString(out, 49, "1.0"); // dash 1
           writeInt(out, 74, 2); // embedded text
@@ -1395,6 +1326,7 @@ public class DXF
           writeString(out, 44, "-1.0"); // X offset
           writeString(out, 45, "0.2"); // Y offset
           writeString(out, 9, "|"); // text
+          //writeString(out, 49, "-0.01"); // dash 3 dwg fastview?
           writeInt(out, 74, 0); // gap
         } // pit 4
         {
@@ -1453,6 +1385,81 @@ public class DXF
         {
           writeString(out, 0, "LTYPE");
           handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
+          writeString(out, 2, "L_USER");//a
+          writeInt(out, 330, l_type_owner);
+          writeInt(out, 70, 0);
+          writeString(out, 3, "USER _________");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 0);
+          writeStringZero(out, 40);
+        } // user a
+        {
+          writeString(out, 0, "LTYPE");
+          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
+          writeString(out, 2, "L_WALL");//b
+          writeInt(out, 330, l_type_owner);
+          writeInt(out, 70, 0);
+          writeString(out, 3, "WALL _________");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 0);
+          writeStringZero(out, 40);
+        } // wall b
+        {
+          writeString(out, 0, "LTYPE");
+          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
+          writeString(out, 2, "L_SECTION");//c
+          writeInt(out, 330, l_type_owner);
+          writeInt(out, 70, 0);
+          writeString(out, 3, "Section _  _  _  _  _");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 2);
+          writeString(out, 40, "1.0"); // pattern length
+          writeString(out, 49, "0.3"); //1
+          writeInt(out, 74, 0); // segment
+          writeString(out, 49, "-0.7"); //2
+          writeInt(out, 74, 0); // segment
+        } // section c
+        {
+          writeString(out, 0, "LTYPE");
+          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
+          writeString(out, 2, "L_BORDER");//2
+          writeInt(out, 330, l_type_owner);
+          writeInt(out, 70, 0);
+          writeString(out, 3, "BORDER _________");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 0);
+          writeStringZero(out, 40);
+        } // border 2
+        {
+          writeString(out, 0, "LTYPE");
+          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
+          writeString(out, 2, "L_ROCK-BORDER");//6
+          writeInt(out, 330, l_type_owner);
+          writeInt(out, 70, 0);
+          writeString(out, 3, "ROCK-BORDER _________");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 0);
+          writeStringZero(out, 40);
+        } // rock-border 6
+        {
+          writeString(out, 0, "LTYPE");
+          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
+          writeString(out, 2, "L_WALL-PRESUMED");//5
+          writeInt(out, 330, l_type_owner);
+          writeInt(out, 70, 0);
+          writeString(out, 3, "WALL-PRESUMED __ __ __ __ __");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 2);
+          writeString(out, 40, "1.0"); // pattern length
+          writeString(out, 49, "0.7"); //1
+          writeInt(out, 74, 0); // segment}
+          writeString(out, 49, "-0.3"); //2
+          writeInt(out, 74, 0); // segment
+        } // wall-presumed 5
+
+        /*{
+          writeString(out, 0, "LTYPE");
+          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
           writeString(out, 2, lt_ticks + "2");
           writeInt(out, 330, l_type_owner);
           writeInt(out, 70, 0);
@@ -1474,16 +1481,210 @@ public class DXF
           writeInt(out, 74, 0);
           writeString(out, 49, "1.0");
           writeInt(out, 74, 0);
+        }*/
+      } else if (mVersion9) { // dxf9 (R12)
+        {
+          writeString(out, 0, "LTYPE");
+          /* handle = */
+          handle = writeAcDb(out, 14, AcDbSymbolTR, "AcDbLinetypeTableRecord"); // unnecessary
+          writeString(out, 2, lt_continuous);
+          writeInt(out, 70, 64);
+          writeString(out, 3, "Solid line");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 0);
+          writeStringZero(out, 40);
         }
-      } else { // dxf9-12 (R12, R13)
-        writeString( out, 0, "LTYPE" );
-        /* handle = */ writeAcDb( out, 14, AcDbSymbolTR, "AcDbLinetypeTableRecord" ); // unnecessary
-        writeString( out, 2, lt_continuous );
-        writeInt( out, 70, 64 );
-        writeString( out, 3, "Solid line" );
-        writeInt( out, 72, 65 );
-        writeInt( out, 73, 0 );
-        writeStringZero( out, 40 );
+        {
+          writeString(out, 0, "LTYPE");
+          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
+          writeString(out, 2, "L_USER");//a
+          if (mVersion14) {
+            writeInt(out, 330, l_type_owner);
+          }
+          writeInt(out, 70, 0);
+          writeString(out, 3, "USER _________");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 0);
+          writeStringZero(out, 40);
+        } // user a
+        {
+          writeString(out, 0, "LTYPE");
+          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
+          writeString(out, 2, "L_WALL");//b
+          if (mVersion14) {
+            writeInt(out, 330, l_type_owner);
+          }
+          writeInt(out, 70, 0);
+          writeString(out, 3, "WALL _________");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 0);
+          writeStringZero(out, 40);
+        } // wall b
+        {
+          writeString(out, 0, "LTYPE");
+          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
+          writeString(out, 2, "L_SECTION");//c
+          if (mVersion14) {
+            writeInt(out, 330, l_type_owner);
+          }
+          writeInt(out, 70, 0);
+          writeString(out, 3, "Section _  _  _  _  _");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 2);
+          writeString(out, 40, "1.0"); // pattern length
+          writeString(out, 49, "0.3"); //1
+          //if ( mVersion14 ) {writeInt(out, 74, 0);} // segment
+          writeString(out, 49, "-0.7"); //2
+          //if ( mVersion14 ) {writeInt(out, 74, 0);} // segment
+          //writeStringZero(out, 40);
+        } // section c
+        {
+          writeString(out, 0, "LTYPE");
+          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
+          writeString(out, 2, "L_BORDER");//2
+          writeInt(out, 70, 0);
+          writeString(out, 3, "BORDER _________");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 0);
+          writeStringZero(out, 40);
+        } // border 2
+        {
+          writeString(out, 0, "LTYPE");
+          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
+          writeString(out, 2, "L_ROCK-BORDER");//6
+          writeInt(out, 70, 0);
+          writeString(out, 3, "ROCK-BORDER _________");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 0);
+          writeStringZero(out, 40);
+        } // rock-border 6
+        {
+          writeString(out, 0, "LTYPE");
+          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
+          writeString(out, 2, "L_WALL-PRESUMED");//5
+          writeInt(out, 70, 0);
+          writeString(out, 3, "WALL-PRESUMED __ __ __ __ ");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 2);
+          writeString(out, 40, "1.0"); // pattern length
+          writeString(out, 49, "0.7"); //1
+          //if (false) {writeInt(out, 74, 0);} // segment}
+          writeString(out, 49, "-0.3"); //2
+          //if (false) {writeInt(out, 74, 0);} // segment
+          //writeStringZero(out, 40);
+        } // wall-presumed 5
+      } else {// dxf12 (R13)
+        {
+          writeString(out, 0, "LTYPE");
+          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
+          writeString(out, 2, lt_byBlock);
+          writeInt(out, 330, l_type_owner);
+          writeInt(out, 70, 0);
+          writeString(out, 3, "Std by block");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 0);
+          writeStringZero(out, 40);
+
+          writeString(out, 0, "LTYPE");
+          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
+          writeString(out, 2, lt_byLayer);
+          writeInt(out, 330, l_type_owner);
+          writeInt(out, 70, 0);
+          writeString(out, 3, "Std by layer");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 0);
+          writeStringZero(out, 40);
+
+          writeString(out, 0, "LTYPE");
+          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
+          writeString(out, 2, lt_continuous);
+          writeInt(out, 330, l_type_owner);
+          writeInt(out, 70, 0);
+          writeString(out, 3, "Solid line _________");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 0);
+          writeStringZero(out, 40);
+        } // AutoCAD standard linetype
+        {
+          writeString(out, 0, "LTYPE");
+          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
+          writeString(out, 2, "L_USER");//a
+          if (mVersion14) {
+            writeInt(out, 330, l_type_owner);
+          }
+          writeInt(out, 70, 0);
+          writeString(out, 3, "USER _________");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 0);
+          writeStringZero(out, 40);
+        } // user a
+        {
+          writeString(out, 0, "LTYPE");
+          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
+          writeString(out, 2, "L_WALL");//b
+          if (mVersion14) {
+            writeInt(out, 330, l_type_owner);
+          }
+          writeInt(out, 70, 0);
+          writeString(out, 3, "WALL _________");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 0);
+          writeStringZero(out, 40);
+        } // wall b
+        {
+          writeString(out, 0, "LTYPE");
+          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
+          writeString(out, 2, "L_SECTION");//c
+          if (mVersion14) {
+            writeInt(out, 330, l_type_owner);
+          }
+          writeInt(out, 70, 0);
+          writeString(out, 3, "Section _  _  _  _  _");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 2);
+          writeString(out, 40, "1.0"); // pattern length
+          writeString(out, 49, "0.3"); //1
+          writeInt(out, 74, 0); // segment
+          writeString(out, 49, "-0.7"); //2
+          writeInt(out, 74, 0); // segment
+          //writeStringZero(out, 40);
+        } // section c
+        {
+          writeString(out, 0, "LTYPE");
+          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
+          writeString(out, 2, "L_BORDER");//2
+          writeInt(out, 70, 0);
+          writeString(out, 3, "BORDER _________");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 0);
+          writeStringZero(out, 40);
+        } // border 2
+        {
+          writeString(out, 0, "LTYPE");
+          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
+          writeString(out, 2, "L_ROCK-BORDER");//6
+          writeInt(out, 70, 0);
+          writeString(out, 3, "ROCK-BORDER _________");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 0);
+          writeStringZero(out, 40);
+        } // rock-border 6
+        {
+          writeString(out, 0, "LTYPE");
+          handle = writeAcDb(out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord");
+          writeString(out, 2, "L_WALL-PRESUMED");//5
+          writeInt(out, 70, 0);
+          writeString(out, 3, "WALL-PRESUMED __ __ __ __ ");
+          writeInt(out, 72, 65);
+          writeInt(out, 73, 2);
+          writeString(out, 40, "1.0"); // pattern length
+          writeString(out, 49, "0.7"); //1
+          writeInt(out, 74, 0); // segment}
+          writeString(out, 49, "-0.3"); //2
+          writeInt(out, 74, 0); // segment
+          //writeStringZero(out, 40);
+        } // wall-presumed 5
+
       }
     }
     //writeEndTable( out );

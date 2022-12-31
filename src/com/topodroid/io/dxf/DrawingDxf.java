@@ -437,16 +437,16 @@ public class DrawingDxf
       {
         int nr_ltypes = 0;
         if ( TDSetting.mAcadLayer ) {
-          nr_ltypes += BrushManager.getLineLibSize() + BrushManager.getAreaLibSize();
+          nr_ltypes += BrushManager.getLineLibSize() + BrushManager.getAreaLibSize();// its value is not important
         } else {
-          nr_ltypes = 0;
+          nr_ltypes = 0; // its value is not important
         }
         handle = DXF.writeLTypesTableheader(out, handle, nr_ltypes, p1_style);// HBX_DXF
-        if ( TDSetting.mAcadLayer ){
+        // if ( TDSetting.mAcadLayer ){
           if ( line_lib != null ) { // always true
             for ( Symbol line : line_lib.getSymbols() ) {
               String l_name = "L_" + replaceColon( line.getThName() );
-              String l_type = DXF.lt_continuous;
+              //String l_type = DXF.lt_continuous;
               if ( DXF.mVersion14 &&
                       ( l_name.equals("L_pit")//4
                               || l_name.equals("L_chimney")//3
@@ -459,9 +459,19 @@ public class DrawingDxf
                               || l_name.equals("L_wall-presumed")//5
                               || l_name.equals("L_rock-border")//6
                       )) {
-              } else {
-                //color = DxfColor.rgbToIndex( line.getColor() );
-                handle = DXF.printLtype(out, handle, l_name);
+                // no print Ltype
+              } else { //9-12
+                if ( l_name.equals("L_user")   //a
+                        || l_name.equals("L_wall")   //b
+                        || l_name.equals("L_section")//c
+                        || l_name.equals("L_border") //2
+                        || l_name.equals("L_wall-presumed")//5
+                        || l_name.equals("L_rock-border")//6
+                ) {
+                  // no print Ltype
+                } else {
+                  handle = DXF.printLtype(out, handle, l_name);
+                }
               }
             }
           }
@@ -469,12 +479,10 @@ public class DrawingDxf
           if ( area_lib != null ) { // always true
             for ( Symbol area : area_lib.getSymbols() ) {
               String a_name = "A_" + replaceColon( area.getThName() );
-              //color = DxfColor.rgbToIndex( area.getColor() );
               handle = DXF.printLtype( out, handle, a_name );
             }
           }
-
-        }
+        //}
         //handle = DXF.printLtype(out, handle, "LEG");
         DXF.writeEndTable(out); // HBX_DXF
       }
@@ -497,16 +505,17 @@ public class DrawingDxf
         // 2 layer name, 70 flag (64), 62 color code, 6 line type
         int flag = 0;
         int color = 1;
+        String l_type = DXF.lt_continuous;
         // if ( ! DXF.mVersion13_14 ) { handle = 40; }
-        handle = DXF.printLayer( pw2, handle, "0",       flag, 7,     DXF.lt_continuous ); // LAYER "0" .. FIXME DraftSight color must be AutoCAD white
-        handle = DXF.printLayer( pw2, handle, "LEG",     flag, color, DXF.lt_continuous ); ++color; // red
-        handle = DXF.printLayer( pw2, handle, "SPLAY",   flag, color, DXF.lt_continuous ); ++color; // yellow
-        handle = DXF.printLayer( pw2, handle, "STATION", flag, color, DXF.lt_continuous ); ++color; // green
-        handle = DXF.printLayer( pw2, handle, "LINE",    flag, color, DXF.lt_continuous ); ++color; // cyan
-        handle = DXF.printLayer( pw2, handle, "POINT",   flag, color, DXF.lt_continuous ); ++color; // blue
-        handle = DXF.printLayer( pw2, handle, "AREA",    flag, color, DXF.lt_continuous ); ++color; // magenta
-        handle = DXF.printLayer( pw2, handle, "REF",     flag, color, DXF.lt_continuous ); ++color; // white
-        handle = DXF.printLayer( pw2, handle, "LINK",    flag, color, DXF.lt_continuous ); ++color; // ??? Link
+        handle = DXF.printLayer( pw2, handle, "0",       flag, 7, l_type ); // LAYER "0" .. FIXME DraftSight color must be AutoCAD white
+        handle = DXF.printLayer( pw2, handle, "LEG",     flag, color, l_type ); ++color; // red
+        handle = DXF.printLayer( pw2, handle, "SPLAY",   flag, color, l_type ); ++color; // yellow
+        handle = DXF.printLayer( pw2, handle, "STATION", flag, color, l_type ); ++color; // green
+        handle = DXF.printLayer( pw2, handle, "LINE",    flag, color, l_type ); ++color; // cyan
+        handle = DXF.printLayer( pw2, handle, "POINT",   flag, color, l_type ); ++color; // blue
+        handle = DXF.printLayer( pw2, handle, "AREA",    flag, color, l_type ); ++color; // magenta
+        handle = DXF.printLayer( pw2, handle, "REF",     flag, color, l_type ); ++color; // white
+        handle = DXF.printLayer( pw2, handle, "LINK",    flag, color, l_type ); ++color; // ??? Link
 
         // HBX_DXF if TDSetting.mAcadLayer then you need a layer for each scrap
         if ( TDSetting.mAcadLayer ) { // HBX_DXF linetype separated
@@ -514,30 +523,55 @@ public class DrawingDxf
             // String l_name = "SCRAP_" + Integer.toString( s );
             // String l_type = DXF.lt_continuous;
             // color = 7; // black
-            handle = DXF.printLayer( pw2, handle, ("SCRAP_" + Integer.toString( s )), flag, 7, DXF.lt_continuous );
+            handle = DXF.printLayer( pw2, handle, ("SCRAP_" + Integer.toString( s )), flag, 7, l_type );
           };
         } else { // HBX_DXF layer separated
           if ( line_lib != null ) { // always true
             for ( Symbol line : line_lib.getSymbols() ) {
-              // String l_name = "L_" + replaceColon( line.getThName() );
-              // String l_type = DXF.lt_continuous;
+              String l_name = "L_" + replaceColon( line.getThName() );
+              l_type = DXF.lt_continuous;
+              if ( DXF.mVersion14 &&
+                      ( l_name.equals("L_pit")//4
+                              || l_name.equals("L_chimney")//3
+                              || l_name.equals("L_arrow")  //1
+                              || l_name.equals("L_slope")  //7
+                              || l_name.equals("L_user")   //a
+                              || l_name.equals("L_wall")   //b
+                              || l_name.equals("L_section")//c
+                              || l_name.equals("L_border") //2
+                              || l_name.equals("L_wall-presumed")//5
+                              || l_name.equals("L_rock-border")//6
+                      )) {
+                l_type = l_name;
+              } else { //9-12
+                if (l_name.equals("L_user")   //a
+                        || l_name.equals("L_wall")   //b
+                        || l_name.equals("L_section")//c
+                        || l_name.equals("L_border") //2
+                        || l_name.equals("L_wall-presumed")//5
+                        || l_name.equals("L_rock-border")//6
+                ) {
+                  l_type = l_name;
+                }
+              }
               color = DxfColor.rgbToIndex( line.getColor() );
-              handle = DXF.printLayer( pw2, handle, ("L_" + replaceColon( line.getThName() )), flag, color, DXF.lt_continuous );
+              handle = DXF.printLayer( pw2, handle, l_name, flag, color, l_type );
             }
           }
+          l_type = DXF.lt_continuous;
           if ( area_lib != null ) { // always true
             for ( Symbol area : area_lib.getSymbols() ) {
               // String a_name = "A_" + replaceColon( area.getThName() );
               color = DxfColor.rgbToIndex( area.getColor() );
-              handle = DXF.printLayer( pw2, handle, ("A_" + replaceColon( area.getThName() )), flag, color, DXF.lt_continuous );
-	    }
+              handle = DXF.printLayer( pw2, handle, ("A_" + replaceColon( area.getThName() )), flag, color, l_type );
+            }
           }
           if ( point_lib != null ) { // always true
             for ( Symbol point : point_lib.getSymbols() ) {
               // String p_name = "P_" + replaceColon( point.getThName() );
               color = DxfColor.rgbToIndex( point.getColor() );
-              handle = DXF.printLayer( pw2, handle, ("P_" + replaceColon( point.getThName() )), flag, color, DXF.lt_continuous );
-	    }
+              handle = DXF.printLayer( pw2, handle, ("P_" + replaceColon( point.getThName() )), flag, color, l_type );
+            }
           }
         }
         out.write( sw2.getBuffer().toString() );
