@@ -508,7 +508,7 @@ public class DrawingDxf
         handle = DXF.printLayer( pw2, handle, "REF",     flag, color, DXF.lt_continuous ); ++color; // white
         handle = DXF.printLayer( pw2, handle, "LINK",    flag, color, DXF.lt_continuous ); ++color; // ??? Link
 
-        // HBX_DXF if TDSetting.mAcadLayer then you need a layer for each scrapó
+        // HBX_DXF if TDSetting.mAcadLayer then you need a layer for each scrap
         if ( TDSetting.mAcadLayer ) { // HBX_DXF linetype separated
           for ( int s = 0; s < plot.scrapMaxIndex(); ++s ) {
             // String l_name = "SCRAP_" + Integer.toString( s );
@@ -529,13 +529,15 @@ public class DrawingDxf
             for ( Symbol area : area_lib.getSymbols() ) {
               // String a_name = "A_" + replaceColon( area.getThName() );
               color = DxfColor.rgbToIndex( area.getColor() );
-              handle = DXF.printLayer( pw2, handle, ("A_" + replaceColon( area.getThName() )), flag, color, DXF.lt_continuous );            }
+              handle = DXF.printLayer( pw2, handle, ("A_" + replaceColon( area.getThName() )), flag, color, DXF.lt_continuous );
+	    }
           }
           if ( point_lib != null ) { // always true
             for ( Symbol point : point_lib.getSymbols() ) {
               // String p_name = "P_" + replaceColon( point.getThName() );
               color = DxfColor.rgbToIndex( point.getColor() );
-              handle = DXF.printLayer( pw2, handle, ("P_" + replaceColon( point.getThName() )), flag, color, DXF.lt_continuous );            }
+              handle = DXF.printLayer( pw2, handle, ("P_" + replaceColon( point.getThName() )), flag, color, DXF.lt_continuous );
+	    }
           }
         }
         out.write( sw2.getBuffer().toString() );
@@ -763,7 +765,7 @@ public class DrawingDxf
           {
             DrawingStationUser sp = (DrawingStationUser)path;
             handle = DXF.printText( pw5, handle, model_block_handle, sp.name(), (sp.cx+xoff) * scale, -(sp.cy+yoff) * scale,
-                                0, LABEL_SCALE, "STATION", DXF.style_dejavu, xoff, yoff, z, scrap_flag , DXF.BY_LAYER);
+                                0, LABEL_SCALE, "STATION", DXF.style_dejavu, xoff, yoff, z, scrap_flag, DXF.BY_LAYER);
           }
           else if ( path.mType == DrawingPath.DRAWING_PATH_LINE )
           {
@@ -910,7 +912,7 @@ public class DrawingDxf
   { // FIXME point scale factor is 0.3
     if ( sn == null ) return handle;
     return DXF.printText( pw, handle, ref_handle, sn.getName(),  (sn.cx+xoff)*scale, -(sn.cy+yoff)*scale, 0,
-                        STATION_SCALE, "STATION", DXF.style_dejavu, xoff, yoff, z, scrap , DXF.BY_LAYER);
+                        STATION_SCALE, "STATION", DXF.style_dejavu, xoff, yoff, z, scrap, DXF.BY_LAYER);
   }
 
   /** write a station point to DXF format
@@ -999,7 +1001,7 @@ public class DrawingDxf
     int color;
     if ( TDSetting.mAcadLayer ) {
       linetype = layer;
-      layer2 = "SCRAP_" + Integer.toString(scrap); //
+      layer2 = "SCRAP_" + Integer.toString( scrap ); //
       //layer = inttostr(z);
       Symbol line2 = BrushManager.getLineByIndex(BrushManager.getLineIndexByThName(line.getThName()));
       color = DxfColor.rgbToIndex(line2.getColor());
@@ -1050,7 +1052,7 @@ public class DrawingDxf
     int color;
     if ( TDSetting.mAcadLayer ) {
       linetype = layer;
-      layer2 = "SCRAP_" + Integer.toString(scrap);
+      layer2 = "SCRAP_" + Integer.toString( scrap );
       //layer = inttostr(z);
       Symbol area2 = BrushManager.getAreaByIndex(BrushManager.getAreaIndexByThName(area.getThName()));
       color = DxfColor.rgbToIndex(area2.getColor());
@@ -1097,7 +1099,7 @@ public class DrawingDxf
    * @param xoff       X offset
    * @param yoff       Y offset
    * @param z          Z "level"
-   * @param scrap      scrap index or (unused) layer
+   * @param scrap      scrap index - for scrap items
    */
   static private int tdrToDxf( PrintWriter pw, int handle, int ref_handle, int model_record_handle, String scrapfile,
                                float scale, float dx, float dy, float xoff, float yoff, float z, int scrap )
