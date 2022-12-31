@@ -51,7 +51,7 @@ public class ShpFixedz extends ShpObject
     fields[3] = "accuracy";
     fields[4] = "accuracy_v";
     byte[]   ftypes = { BYTEC, BYTEC, BYTEC, BYTEN, BYTEN };
-    int[]    flens  = { SIZE_NAME, SIZE_TEXT, SIZE_SOURCE, SIZE_ACCUR, SIZE_ACCUR };
+    int[]    flens  = { SIZE_NAME, SIZE_TEXT, SIZE_SOURCE, SIZE_ACCUR, SIZE_ACCUR }; // 16, 128, 20, 8, 8
 
     int shpRecLen = getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );
@@ -114,6 +114,8 @@ public class ShpFixedz extends ShpObject
   }
 
   // record length [word]: 4 + 36/2
+  // 4 (header)
+  // 36 = int + 4*double (data)
   @Override protected int getShpRecordLength( ) { return 22; }
     
   // Utility: set the bounding box of the set of geometries

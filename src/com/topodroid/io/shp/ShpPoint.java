@@ -53,7 +53,7 @@ public class ShpPoint extends ShpObject
     fields[4] = "scrap";
     fields[5] = "text";
     byte[]   ftypes = { BYTEC, BYTEN, BYTEN, BYTEC, BYTEC, BYTEC };
-    int[]    flens  = { SIZE_NAME, SIZE_ORIENT, SIZE_SCALE, SIZE_LEVELS, SIZE_SCRAP, SIZE_TEXT };
+    int[]    flens  = { SIZE_NAME, SIZE_ORIENT, SIZE_SCALE, SIZE_LEVELS, SIZE_SCRAP, SIZE_TEXT }; // 16, 6, 6, 6, 6, 128
 
     int shpRecLen = getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );
@@ -108,6 +108,7 @@ public class ShpPoint extends ShpObject
   }
 
   // record length [words]: 4 + 20/2
+  // 20 = int + double + double
   @Override protected int getShpRecordLength( ) { return 14; }
     
   // Utility: set the bounding box of the set of geometries

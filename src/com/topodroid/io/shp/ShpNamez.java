@@ -50,7 +50,7 @@ public class ShpNamez extends ShpObject
     fields[1] = "comment";
     fields[2] = "flag";
     byte[]   ftypes = { BYTEC, BYTEC, BYTEC };
-    int[]    flens  = { SIZE_NAME, SIZE_TEXT, SIZE_FLAG };
+    int[]    flens  = { SIZE_NAME, SIZE_TEXT, SIZE_FLAG }; // 16, 128, 8
 
     int shpRecLen = getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );

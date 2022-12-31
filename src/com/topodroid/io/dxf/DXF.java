@@ -584,6 +584,7 @@ public class DXF
    * @param npt      number of points
    * @param linetype line type
    * @param color    color
+   * @param z        ???
    */
   static int printPolylineHeader( PrintWriter pw, int handle, int ref, String layer, boolean closed, int npt, String linetype, int color, float z )
   {
@@ -777,7 +778,7 @@ public class DXF
    * @param xoff     X offset
    * @param yoff     Y offset
    * @param z        Z level
-   * @param s          flag, scrap
+   * @param s        flag (unused)
    * @param color    color
    */
   static int printText( PrintWriter pw, int handle, int ref, String label, float x, float y, float angle, float scale,
@@ -823,6 +824,11 @@ public class DXF
     return handle;
   }
 
+  /** TODO
+   * @param out    output writer
+   * @param name   block record name
+   * @param handle handle
+   */
   static int writeSpaceBlockRecord( BufferedWriter out, String name, int handle ) throws IOException
   {
      writeString( out, 0, "BLOCK_RECORD" );
@@ -837,6 +843,11 @@ public class DXF
      return handle;
   }
 
+  /** TODO
+   * @param out    output writer
+   * @param name   block name
+   * @param handle handle
+   */
   static int writeSpaceBlock( BufferedWriter out, String name, int handle ) throws IOException
   {
     writeString( out, 0, "BLOCK" );
@@ -860,6 +871,16 @@ public class DXF
     return handle;
   }
 
+  /** TODO
+   * @param out    output writer
+   * @param handle handle
+   * @param xmin   ...
+   * @param ymin   ...
+   * @param zmin   ...
+   * @param xmax   ...
+   * @param ymax   ...
+   * @param zmax   ...
+   */
   static int writeHeaderSection( BufferedWriter out, int handle,
              float xmin, float ymin, float zmin, float xmax, float ymax, float zmax ) throws IOException
   {
@@ -915,6 +936,10 @@ public class DXF
     return handle;
   }
 
+  /** write the CLASSES section (empty section)
+   * @param out    output writer
+   * @param handle handle
+   */
   static int writeClassesSection( BufferedWriter out, int handle ) throws IOException
   {
     if ( mVersion13_14 ) {
@@ -924,7 +949,14 @@ public class DXF
     return handle;
   }
 
-
+  /** write the VPORT table
+   * @param out    output writer
+   * @param handle handle
+   * @param xmin   minimum X
+   * @param ymin   ...
+   * @param xmax   maximum X
+   * @param ymax   ...
+   */
   static int writeVportTable( BufferedWriter out, int handle,
              float xmin, float ymin, float xmax, float ymax ) throws IOException
   {
@@ -983,6 +1015,10 @@ public class DXF
     return handle;
   }
 
+  /** write the STYLES section
+   * @param out    output writer
+   * @param handle handle
+   */
   static int writeStylesTable( BufferedWriter out, int handle ) throws IOException
   {
     if ( mVersion13_14 ) {
@@ -1022,6 +1058,10 @@ public class DXF
     return handle;
   }
 
+  /** write the TYPES table
+   * @param out    output writer
+   * @param handle handle
+   */
   static int writeLTypesTable( BufferedWriter out, int handle ) throws IOException
   {
     if ( mVersion9 ) { handle = 5; } // necessary ???
@@ -1135,6 +1175,11 @@ public class DXF
   }
 
 // HBX_DXF
+  /** TODO
+   * @param out    output writer
+   * @param handle handle
+   * @param ltnr   ???
+   */
   static int writeLTypesTableheader( BufferedWriter out, int handle, int ltnr) throws IOException
   { // HBX_DXF header and standard linetypes
     if ( mVersion9 ) { handle = 5; } // necessary ???
@@ -1297,6 +1342,10 @@ public class DXF
   }
 // HBX_DXF
 
+  /** write the additional tables (...)
+   * @param out    output writer
+   * @param handle handle
+   */
   static int writeExtraTables( BufferedWriter out, int handle ) throws IOException
   {
     handle = writeBeginTable( out, "VIEW", handle, 0 ); // no VIEW
@@ -1317,6 +1366,10 @@ public class DXF
     return handle;
   }
 
+  /** write the DUMSTYLE table
+   * @param out    output writer
+   * @param handle handle
+   */
   static int writeDimstyleTable( BufferedWriter out, int handle ) throws IOException
   {
     if ( mVersion13_14 ) {
@@ -1385,6 +1438,10 @@ public class DXF
 
 
 // SECTION OBJECTS
+  /** TODO
+   * @param out    output writer
+   * @param handle    handle
+   */
   static int writeSectionObjects( BufferedWriter out, int handle ) throws IOException
   {
     writeSection( out, "OBJECTS" );

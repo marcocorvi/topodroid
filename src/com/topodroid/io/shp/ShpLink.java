@@ -64,7 +64,7 @@ public class ShpLink extends ShpObject
     fields[1] = "levels";
     fields[2] = "scrap";
     byte[]   ftypes = { BYTEN, BYTEC, BYTEC };
-    int[]    flens  = { SIZE_SCALE, SIZE_LEVELS, SIZE_SCRAP };
+    int[]    flens  = { SIZE_SCALE, SIZE_LEVELS, SIZE_SCRAP }; // 6, 6, 6
 
     int shpRecLen = getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );

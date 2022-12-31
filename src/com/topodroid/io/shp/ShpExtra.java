@@ -77,7 +77,7 @@ public class ShpExtra extends ShpObject
     fields[5] = "text";
     fields[6] = "file";
     byte[]   ftypes = { BYTEC, BYTEN, BYTEN, BYTEC, BYTEC, BYTEC, BYTEC };
-    int[]    flens  = { SIZE_NAME, SIZE_ORIENT, SIZE_SCALE, SIZE_LEVELS, SIZE_SCRAP, SIZE_TEXT, SIZE_TEXT };
+    int[]    flens  = { SIZE_NAME, SIZE_ORIENT, SIZE_SCALE, SIZE_LEVELS, SIZE_SCRAP, SIZE_TEXT, SIZE_TEXT }; // 16, 6, 6, 6, 6, 128, 128
 
     int shpRecLen = getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );
