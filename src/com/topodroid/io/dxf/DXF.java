@@ -895,7 +895,7 @@ public class DXF
     return handle;
   }
 
-  /** TODO
+  /** TODO Standard DXF header
    * @param out    output writer
    * @param handle handle
    * @param xmin   ...
@@ -1329,12 +1329,11 @@ public class DXF
           writeInt(out, 70, 0);
           writeString(out, 3, "PIT __|__|__|__"); // description
           writeInt(out, 72, 65);
-          writeInt(out, 73, 1);      // number of elements AutoCAD
-          //writeInt(out, 73, 3);      // number of elements dwg fastview?
+          // writeInt(out, 73, 1);      // number of elements AutoCAD
+          writeInt(out, 73, 2);      // number of elements dwg fastview?
           writeString(out, 40, "1.0"); // pattern length
-          //writeString(out, 49, "-0.01"); // dash 2 dwg fastview?
           writeInt(out, 74, 0); // segment
-          writeString(out, 49, "1.0"); // dash 1
+          writeString(out, 49, "0.5"); // dash 1
           writeInt(out, 74, 2); // embedded text
           writeInt(out, 75, 0);   // SHAPE number must be 0
           writeInt(out, 340, p1_style);  // STYLE pointer
@@ -1343,7 +1342,7 @@ public class DXF
           writeString(out, 44, "-1.0"); // X offset
           writeString(out, 45, "0.2"); // Y offset
           writeString(out, 9, "|"); // text
-          //writeString(out, 49, "-0.01"); // dash 3 dwg fastview?
+          writeString(out, 49, "0.5"); // dash 2 dwg fastview?
           writeInt(out, 74, 0); // gap
         } // pit 4
         {
@@ -1354,18 +1353,19 @@ public class DXF
           writeInt(out, 70, 0);
           writeString(out, 3, "ARROW ->-->-->"); // description
           writeInt(out, 72, 65);
-          writeInt(out, 73, 1);      // number of elements
+          writeInt(out, 73, 2);      // number of elements
           writeString(out, 40, "1.5"); // pattern length
           writeInt(out, 74, 0); // segment
-          writeString(out, 49, "1.5"); // dash 1
+          writeString(out, 49, "1.0"); // dash 1
           writeInt(out, 74, 2); // embedded text
           writeInt(out, 75, 0);   // SHAPE number must be 0
           writeInt(out, 340, p1_style);  // STYLE pointer
           writeString(out, 46, "0.65");  // scale
           writeString(out, 50, "0.0");   // rotation
-          writeString(out, 44, "-1.0"); // X offset
-          writeString(out, 45, "-0.32"); // Y offset
+          writeString(out, 44, "0.0"); // X offset
+          writeString(out, 45, "-0.31"); // Y offset
           writeString(out, 9, ">"); // text
+          writeString(out, 49, "0.5"); // dash 2 dwg fastview
           writeInt(out, 74, 0); // gap
         } // arrow 1
         {
@@ -1854,7 +1854,7 @@ public class DXF
 
 
 // SECTION OBJECTS
-  /** TODO
+  /** minimal object sevtion
    * @param out    output writer
    * @param handle    handle
    */
