@@ -631,12 +631,12 @@ public class TDExporter
   // ####################################################################################################################################
   // geographic exports - use (ge, gs, gv)
 
-  static GeoReference getGeolocalizedStation( long sid, DataHelper data, float h_geo_factor, boolean ellipsoid_h, String station )
+  static GeoReference getGeolocalizedStation( long sid, DataHelper data, float h_geo_factor, boolean ellipsoid_h, String station, boolean convergence )
   {
     float decl = data.getSurveyDeclination( sid );
     if ( decl >= SurveyInfo.DECLINATION_MAX ) decl = 0; // if unset use 0
 
-    List< TDNum > nums = getGeolocalizedData( sid, data, decl, h_geo_factor, ellipsoid_h );
+    List< TDNum > nums = getGeolocalizedData( sid, data, decl, h_geo_factor, ellipsoid_h, convergence );
     if ( nums == null ) return null;
     for ( TDNum num : nums ) {
       for ( NumStation st : num.getStations() ) {
@@ -646,7 +646,15 @@ public class TDExporter
     return null;
   }
 
-  static private List< TDNum > getGeolocalizedData( long sid, DataHelper data, float decl, float h_geo_factor, boolean ellipsoid_h )
+  /**
+   * @param sid      survey ID
+   * @param data     survey database
+   * @param decl     magnetic declination [degree]
+   * @param h_geo_factor ???
+   * @param ellipsoid_h  whether altitude is ellipsoidic
+   * @param convergence  whether to apply the meridian convergence
+   */
+  static private List< TDNum > getGeolocalizedData( long sid, DataHelper data, float decl, float h_geo_factor, boolean ellipsoid_h, boolean convergence )
   {
     List< FixedInfo > fixeds = data.selectAllFixed( sid, 0 );
     // TDLog.v( "get geoloc. data. Decl " + decl + " fixeds " + fixeds.size() );
@@ -656,7 +664,9 @@ public class TDExporter
     List< DBlock > shots_data = data.selectAllExportShots( sid, 0 );
     FixedInfo origin = null;
     for ( FixedInfo fixed : fixeds ) {
-      TDNum num = new TDNum( shots_data, fixed.name, null, null, decl, null ); // null formatClosure
+      float decl0 = decl;
+      if ( convergence && fixed.hasCSCoords() ) decl0 -= fixed.getConvergence();
+      TDNum num = new TDNum( shots_data, fixed.name, null, null, decl0, null ); // null formatClosure
       // TDLog.v( "Num shots " + num.getShots().size() );
       if ( num.getShots().size() > 0 ) {
         makeGeolocalizedData( num, fixed, h_geo_factor, ellipsoid_h );
@@ -733,7 +743,7 @@ public class TDExporter
     final String coordinates3 = "    <coordinates>%.8f,%.8f,%.1f</coordinates>\n";
     final String coordinates6 = "    %.8f,%.8f,%.1f %.8f,%.8f,%.1f\n";
     // TDLog.v( "export as KML " + file.getFilename() );
-    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: geoid altitude
+    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false, false ); // false: geoid altitude
     if ( TDUtil.isEmpty(nums) ) {
       TDLog.Error( "Failed KML export: no geolocalized station");
       return 2;
@@ -875,7 +885,7 @@ public class TDExporter
    */
   static int exportSurveyAsShp( OutputStream os, long sid, DataHelper data, SurveyInfo info, String survey, String dirname )
   {
-    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: geoid altitude
+    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false, true ); // false: geoid altitude
     if ( TDUtil.isEmpty(nums) ) {
       TDLog.Error( "Failed SHP export: no geolocalized station");
       return 0;
@@ -1014,7 +1024,7 @@ public class TDExporter
     final String coords  = "\"coordinates\": ";
     final String feature = "\"Feature\"";
     // TDLog.v( "export as GeoJSON " + file.getName() );
-    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, true ); // true: ellipsoid altitude
+    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, true, false ); // true: ellipsoid altitude
     if ( TDUtil.isEmpty(nums) ) {
       TDLog.Error( "Failed GeoJSON export: no geolocalized station");
       return 2;
@@ -1103,7 +1113,7 @@ public class TDExporter
   static int exportSurveyAsPlt( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
     // TDLog.v( "export as trackfile: " + file.getName() );
-    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), TDUtil.M2FT, false ); // false: ... 
+    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), TDUtil.M2FT, false, false ); // false: ... 
     if ( TDUtil.isEmpty(nums) ) {
       TDLog.Error( "Failed PLT export: no geolocalized station");
       return 2;

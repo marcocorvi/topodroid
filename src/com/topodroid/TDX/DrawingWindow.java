@@ -7376,7 +7376,7 @@ public class DrawingWindow extends ItemDrawer
 
     if ( type == PlotType.PLOT_PLAN && ext.equals("shz") ) {
       String origin = num.getOriginStation();
-      station = TDExporter.getGeolocalizedStation( mSid, mApp_mData, 1.0f, true, origin );
+      station = TDExporter.getGeolocalizedStation( mSid, mApp_mData, 1.0f, true, origin, true );
     } else if ( ext.equals("c3d") ) {
       // c3d export uses plot and fixed instead of station
       plot  = PlotType.isAnySection(type) ? mPlot3 : PlotType.isProfile( type )? mPlot2 : mPlot1;

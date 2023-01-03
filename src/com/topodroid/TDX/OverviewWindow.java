@@ -715,7 +715,7 @@ public class OverviewWindow extends ItemDrawer
         GeoReference station = null;
         if ( mType == PlotType.PLOT_PLAN && ext.equals("shz") ) {
          String origin = mNum.getOriginStation();
-         station = TDExporter.getGeolocalizedStation( mSid, mData, 1.0f, true, origin );
+         station = TDExporter.getGeolocalizedStation( mSid, mData, 1.0f, true, origin, true );
         }
         SurveyInfo info = mData.selectSurveyInfo( mSid );
         // null PlotInfo, null FixedInfo, true toast

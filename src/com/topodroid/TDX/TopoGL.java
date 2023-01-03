@@ -236,9 +236,13 @@ public class TopoGL extends Activity
   boolean isMeasuring = false;
   boolean isFixed = false;
 
-  // used also by DialogSurface
+  /** @return true is there is the renderer and it has a surface
+   * @note used also by DialogSurface
+   */
   boolean hasSurface() { return ( mRenderer != null ) && mRenderer.hasSurface(); }
 
+  /** @return true is there is a model parser and it has an origin
+   */
   boolean withOsm() { return mParser != null && mParser.hasOrigin(); }
 
   GPS mGPS = null; // WITH-GPS
@@ -253,7 +257,9 @@ public class TopoGL extends Activity
   private String mSurveyName; 
   private String mThconfigName; 
 
-  // @note when called, FeatureChecker.checkPermissions( this ) >= 0
+  /** handle extra parameters
+   * @note when called, FeatureChecker.checkPermissions( this ) >= 0
+   */
   private void handleExtra()
   {
     // TDLog.v("handle extra " + mHasExtra );
@@ -495,6 +501,8 @@ public class TopoGL extends Activity
     }
   };
 
+  /** react to a BACK key tap
+   */
   @Override
   public void onBackPressed () // askClose
   {
@@ -517,6 +525,9 @@ public class TopoGL extends Activity
 
   // ----------------------------------------------------------------
 
+  /** create a model parser for a file
+   * @param filename   naem of the model file
+   */
   void makeParser( String filename )
   {
     // TDLog.v("TopoGL parser " + filename );
@@ -524,6 +535,9 @@ public class TopoGL extends Activity
     if ( mRenderer != null ) mRenderer.setParser( mParser, true );
   }
 
+  /** set the title 
+   * @param str   title string
+   */
   void setTheTitle( String str ) 
   { 
     // if ( mBtRemoteName != null ) {
@@ -533,6 +547,8 @@ public class TopoGL extends Activity
     // }
   }
 
+  /** make the rendering GL surface
+   */
   private void makeSurface()
   {
     if ( glSurfaceView != null ) return;
@@ -601,9 +617,9 @@ public class TopoGL extends Activity
 
   // final static int MENU_BT   =  2; // bluetooth
   // // final static int MENU_WALL =  8; // bluetooth
-  final static int MENU_C3D     =  9; // sketch
-  final static int MENU_TEMP    =  9; // temperature
-  final static int MENU_FRACTAL = 10; // fractal
+  final static int MENU_C3D         =  9; // sketch
+  // final static int MENU_TEMPERATURE = 10; // temperature
+  // final static int MENU_FRACTAL     = 11; // fractal
 
   Button     mMenuImage = null;
   ListView   mMenu = null;
@@ -622,7 +638,7 @@ public class TopoGL extends Activity
     R.string.cmenu_wall,       // 8
     R.string.cmenu_sketch,     // 9  C3D
     // R.string.cmenu_temp,       // 10 TEMPERATURE
-    // R.string.cmenu_fractal,    // 10 FRACTAL
+    // R.string.cmenu_fractal,    // 11 FRACTAL
     R.string.menu_options,
     R.string.menu_help
   };
@@ -644,7 +660,9 @@ public class TopoGL extends Activity
                           R.string.help_help
   };
 
-
+  /** create the list of menus
+   * @param res   resources
+   */
   void setMenuAdapter( Resources res )
   {
     ArrayAdapter< String > menu_adapter = new ArrayAdapter<>( this, R.layout.menu );
@@ -660,13 +678,18 @@ public class TopoGL extends Activity
     mMenu.invalidate();
   }
 
-  // used by GlSurfaceView
+  /** hide the menus
+   * @note used by GlSurfaceView
+   */
   void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
     onMenu = false;
   }
 
+  /** handle a tap on a menu
+   * @param pos  index of tapped menu
+   */
   private void handleMenu( int pos ) 
   {
     closeMenu();
@@ -768,6 +791,12 @@ public class TopoGL extends Activity
 
   // ---------------------------------------------------------------------
 
+  /** handle a user tap on an item
+   * @param parent   parent view
+   * @param view     tapped item
+   * @param pos      index of tapped item
+   * @param id       ...
+   */
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
@@ -1018,7 +1047,6 @@ public class TopoGL extends Activity
     }
     return true;
   }
-  // ------------------------------------------------------------------
 
   /** reset the state of the buttons
    */
@@ -1168,6 +1196,9 @@ public class TopoGL extends Activity
     }
   }
 
+  // ------------------------------------------------------
+  // SELECTED STATION
+
   /** show the selected station
    * @param station   station name
    * @param coords    station coords
@@ -1206,6 +1237,8 @@ public class TopoGL extends Activity
     GlNames.setHLcolorG( res ? 0.5f : 0.0f );
     return res;
   }
+
+  // ---------------------------------------------------------
 
   /** respond to user taps
    * @param view tapped view
@@ -1412,6 +1445,8 @@ public class TopoGL extends Activity
     return false;
   }
 
+  // /** start request to get a model file to read
+  //  */
   // private void openFile()
   // {
   //   Intent openFileIntent = new Intent( Intent.ACTION_EDIT ).setClass( this, DialogOpenFile.class );
