@@ -1105,6 +1105,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="export_dxf_version">Version</string>
     <string name="export_georeference">Géoréférence</string>
     <string name="export_grid">Grille</string>
+    <!-- TODO string name="export_layers">Scrap layers</string -->
     <string name="export_linedir">Direction lignes</string>
     <string name="export_lrud">LRUD</string>
     <string name="export_lrud_from">GDHB liées à la station DEPUIS</string>
@@ -1475,6 +1476,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_crs_summary">Nom du Système de Coordonnées de Référence (UTM, WGS84&#8230;)</string>
     <!-- TODO string name="pref_neg_altitude_title">Neg. altitudes</string -->
     <!-- TODO string name="pref_neg_altitude_summary">Allow negative altitudes</string -->
+  <!-- TODO string name="pref_edit_altitude_title">Editable altitude</string -->
+  <!-- TODO string name="pref_edit_altitude_summary">Allow editable altitudes</string -->
     <!-- TODO string name="pref_fine_location_title">Fine location [s]</string -->
     <!-- TODO string name="pref_fine_location_summary">Fine location time [s]</string -->
   <!-- TODO string name="pref_geoimport_app_title">Geopoint app</string -->
@@ -1589,6 +1592,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_acad_version_summary">Version de DXF</string>
     <string name="pref_acad_spline_title">Splines DXF</string>
     <string name="pref_acad_spline_summary">Interpolation cubique DXF</string>
+  <!-- TODO string name="pref_acad_layer_title">Scrap layers</string -->
+  <!-- TODO string name="pref_acad_layer_summary">DXF layers by scraps</string -->
     <string name="pref_dxf_reference_title">Référence DXF</string>
     <string name="pref_dxf_reference_summary">Axes X-Y exportés comme croquis DXF.</string>
     <!-- UNUSED string name="pref_dxf_scale_title">Échelle de dessin DXF</string -->

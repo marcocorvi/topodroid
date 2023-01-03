@@ -987,6 +987,7 @@ public class TDPrefKey
     "DISTOX_UNIT_LOCATION", // units of location [ddmmss dec.deg]
     "DISTOX_CRS",           // default C.R.S.
     "DISTOX_NEG_ALTITUDE",  // allow negative altitudes
+    "DISTOX_EDIT_ALTITUDE", // always allow editable altitudes
     "DISTOX_FINE_LOCATION", // fine location time
     "DISTOX_GEOPOINT_APP",  // geopoint import app
     null
@@ -996,6 +997,7 @@ public class TDPrefKey
     R.string.pref_unit_location_title,
     R.string.pref_crs_title,
     R.string.pref_neg_altitude_title,
+    R.string.pref_edit_altitude_title,
     R.string.pref_fine_location_title,
     R.string.pref_geoimport_app_title
   };
@@ -1004,6 +1006,7 @@ public class TDPrefKey
     R.string.pref_unit_location_summary,
     R.string.pref_crs_summary,
     R.string.pref_neg_altitude_summary,
+    R.string.pref_edit_altitude_summary,
     R.string.pref_fine_location_summary,
     R.string.pref_geoimport_app_summary
   };
@@ -1011,6 +1014,7 @@ public class TDPrefKey
   public static String[] LOCATIONdef = {
     "ddmmss",
     "Long-Lat",
+    FALSE,
     FALSE,
     "60",
     "0", // TDString.ZERO

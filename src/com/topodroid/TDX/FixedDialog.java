@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.utils.TDString;
 import com.topodroid.ui.MyKeyboard;
@@ -81,6 +81,7 @@ class FixedDialog extends MyDialog
 
   private MyKeyboard mKeyboard;
   private boolean editable;
+  private boolean editable_h; // editable altitude
   private int mUnitLocation;
 
   // private Button   mButtonCancel;
@@ -217,12 +218,14 @@ class FixedDialog extends MyDialog
     KeyListener mKLh_geo = mTVh_geo.getKeyListener();
 
     editable = ( mFxd.source == FixedInfo.SRC_MANUAL );
+    editable_h = editable || TDSetting.mEditableHGeo;
+    // TDLog.v("FIXED editable " + editable + " " + editable_h );
     if ( TDSetting.mNegAltitude ) {
-      // MyKeyboard.setEditable( mTVh_ell, mKeyboard, mKLalt, editable, MyKeyboard.FLAG_POINT_SIGN );
-      MyKeyboard.setEditable( mTVh_geo, mKeyboard, mKLh_geo, editable, MyKeyboard.FLAG_POINT_SIGN );
+      // MyKeyboard.setEditable( mTVh_ell, mKeyboard, mKLalt, editable_h, MyKeyboard.FLAG_POINT_SIGN );
+      MyKeyboard.setEditable( mTVh_geo, mKeyboard, mKLh_geo, editable_h, MyKeyboard.FLAG_POINT_SIGN );
     } else {
-      // MyKeyboard.setEditable( mTVh_ell, mKeyboard, mKLalt, editable, MyKeyboard.FLAG_POINT );
-      MyKeyboard.setEditable( mTVh_geo, mKeyboard, mKLh_geo, editable, MyKeyboard.FLAG_POINT );
+      // MyKeyboard.setEditable( mTVh_ell, mKeyboard, mKLalt, editable_h, MyKeyboard.FLAG_POINT );
+      MyKeyboard.setEditable( mTVh_geo, mKeyboard, mKLh_geo, editable_h, MyKeyboard.FLAG_POINT );
     }
     MyKeyboard.setEditable( mTVlng, mKeyboard, mKLlng, editable, flag );
     MyKeyboard.setEditable( mTVlat, mKeyboard, mKLlat, editable, flag );
@@ -296,7 +299,7 @@ class FixedDialog extends MyDialog
       mFxd.comment = comment;
       mParent.updateFixedNameComment( mFxd, station, comment );
 
-      if ( editable ) {
+      if ( editable_h ) {
         double lat = FixedInfo.string2double( mTVlat.getText() );
         double lng = FixedInfo.string2double( mTVlng.getText() );
         // double h_ell = FixedInfo.string2real( mTVh_ell.getText() );

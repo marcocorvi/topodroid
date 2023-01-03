@@ -294,7 +294,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="fmt_error_m">Accuracy: H %1$.1f V %2$.1f m</string>
     <string name="fmt_h_geoid">Geoid alt.: %1$.0f m</string>
     <!-- UNUSED string name="fmt_h_ellipsoid">Ellipsoid alt.: %1$.0f m</string -->
-    <string name="location_start_fine">Starting fine location</string>
+    <string name="location_start_fine">Starting fine position</string>
     <!-- UNUSED string name="depth_error">Warning. Data depth error</string -->
 
     <string name="error_azimuth_required">Azimuth required</string>
@@ -1477,8 +1477,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_crs_summary">CRS name, as in Proj4</string>
   <string name="pref_neg_altitude_title">Neg. altitudes</string>
   <string name="pref_neg_altitude_summary">Allow negative altitudes</string>
-  <string name="pref_fine_location_title">Fine location [s]</string>
-  <string name="pref_fine_location_summary">Fine location time [s]</string>
+  <string name="pref_edit_altitude_title">Editable altitude</string>
+  <string name="pref_edit_altitude_summary">Allow editable altitudes</string>
+  <string name="pref_fine_location_title">Fine position [s]</string>
+  <string name="pref_fine_location_summary">Fine position time [s]</string>
   <string name="pref_geoimport_app_title">GNSS app</string>
   <string name="pref_geoimport_app_summary">External GNSS app</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
@@ -1759,8 +1761,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_unit_length_summary">Display units for lengths</string>
   <string name="pref_unit_angle_title">Angle units</string>
   <string name="pref_unit_angle_summary">Display units for angles</string>
-  <string name="pref_unit_location_title">Location units</string>
-  <string name="pref_unit_location_summary">Display units for locations</string>
+  <string name="pref_unit_location_title">Coordinates units</string>
+  <string name="pref_unit_location_summary">Display units for coordinates</string>
 
 <!-- UNUSED
   <string name="pref_plot_walls_title">AUTO WALLS</string>

@@ -285,6 +285,7 @@ public class TDSetting
   public static boolean mNegAltitude = false; // whether to allow negative altitudes
   public static int mFineLocation = 60;       // fine location time
   public static int mGeoImportApp = 0;
+  public static boolean mEditableHGeo;
   // 1 Mobile Topographer
   // 2 GPX recorder
   // 4 GPS position
@@ -1276,11 +1277,12 @@ public class TDSetting
                                                                                  : TDUtil.DEGREE;
     mCRS           = prefs.getString(  keyLoc[1], defLoc[1] );       // DISTOX_CRS
     mNegAltitude   = prefs.getBoolean( keyLoc[2], bool(defLoc[2]) ); // DISTOX_NEG_ALTITUDE
-    mFineLocation  = tryInt( prefs,    keyLoc[3], defLoc[3] );       // DISTOX_FINE_LOCATION
+    mEditableHGeo  = prefs.getBoolean( keyLoc[3], bool(defLoc[3]) ); // DISTOX_EDIT_ALTITUDE
+    mFineLocation  = tryInt( prefs,    keyLoc[4], defLoc[4] );       // DISTOX_FINE_LOCATION
     // mGeoImportApp  = tryInt( prefs,    keyLoc[4], defLoc[4] );       // DISTOX_GEOPOINT_APP
     // TDLog.v("PREFS key <" + keyLoc[4] + "> val <" + defLoc[4] + ">" );
     try {
-      mGeoImportApp = Integer.parseInt( prefs.getString( keyLoc[4], defLoc[4] ) );
+      mGeoImportApp = Integer.parseInt( prefs.getString( keyLoc[5], defLoc[5] ) );
     } catch ( RuntimeException e ) {
       TDLog.v("ERROR " + e.getMessage() );
     } catch ( Exception ee ) {
@@ -2373,11 +2375,13 @@ public class TDSetting
       mCRS = tryStringValue( hlp, k, v, def[1] );     // DISTOX_CRS (arbitrary)
     } else if ( k.equals( key[ 2 ] ) ) {    // DISTOX_NEG_ALTITUDE
       mNegAltitude = tryBooleanValue( hlp, k, v, bool(def[2]) );
-    } else if ( k.equals( key[ 3 ] ) ) {    // DISTOX_FINE_LOCATION
-      mFineLocation = tryIntValue(  hlp, k, v, def[3] );
+    } else if ( k.equals( key[ 3 ] ) ) {    // DISTOX_EDIT_ALTITUDE
+      mEditableHGeo = tryBooleanValue( hlp, k, v, bool(def[3]) );
+    } else if ( k.equals( key[ 4 ] ) ) {    // DISTOX_FINE_LOCATION
+      mFineLocation = tryIntValue(  hlp, k, v, def[4] );
       if ( mFineLocation < 0 ) { mFineLocation = 0; } else if ( mFineLocation > 600 ) { mFineLocation = 600; }
-    } else if ( k.equals( key[ 4 ] ) ) {    // DISTOX_GEOPOINT_APP
-      mGeoImportApp = Integer.parseInt( tryStringValue(  hlp, k, v, def[4] ) );
+    } else if ( k.equals( key[ 5 ] ) ) {    // DISTOX_GEOPOINT_APP
+      mGeoImportApp = Integer.parseInt( tryStringValue(  hlp, k, v, def[5] ) );
     } else {
       TDLog.Error("missing LOCATION key: " + k );
     }
@@ -3002,7 +3006,7 @@ public class TDSetting
 
       pw.printf(Locale.US, "Default Team \"%s\"\n", mDefaultTeam);
       pw.printf(Locale.US, "Midline check: attached %c, extend %c\n", tf(mCheckAttached), tf(mCheckExtend) );
-      pw.printf(Locale.US, "Location: units %d, CRS \"%s\" NegAlt. %c FineLoc %d GeoApp %d\n", mUnitLocation, mCRS, tf(mNegAltitude), mFineLocation, mGeoImportApp );
+      pw.printf(Locale.US, "Location: units %d, CRS \"%s\" NegAlt. %c FineLoc %d GeoApp %d EditAlt. %c\n", mUnitLocation, mCRS, tf(mNegAltitude), mFineLocation, mGeoImportApp, tf(mEditableHGeo) );
       pw.printf(Locale.US, "Shots: vthr %.1f, hthr %.1f \n", mVThreshold, mHThreshold );
       pw.printf(Locale.US, "Data: DistoX-backshot-swap %c, diving-mode %c \n", tf(mDistoXBackshot), tf(mDivingMode) );
       pw.printf(Locale.US, "Data input: backsight %c, prev/next %c\n", tf(mBacksightInput), tf(mPrevNext) );
@@ -3475,6 +3479,9 @@ public class TDSetting
                 mFineLocation = getInt( vals, 8, 60 ); setPreference( editor, "DISTOX_FINE_LOCATION", mFineLocation );
                 if ( vals.length > 10 ) {
                   mGeoImportApp = getInt( vals, 10, 0 ); setPreference( editor, "DISTOX_GEOPOINT_APP", mGeoImportApp );
+                  if ( vals.length > 12 ) {
+                    mEditableHGeo = getBoolean( vals, 12 ); setPreference( editor, "DISTOX_EDIT_ALTITUDE", mEditableHGeo );
+                  }
                 }
               }
             }
