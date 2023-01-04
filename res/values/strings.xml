@@ -305,6 +305,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="error_begin_required">Start address required</string>
     <string name="error_declination_number">Declination must be a number</string>
     <string name="error_end_required">Final address required</string>
+    <string name="error_fixes_nocs">Fix points without CS %1$s:\n%2$s</string>
     <string name="error_from_required">First station required</string>
     <string name="error_group_required">Group number required</string>
     <string name="error_group_non_integer">Group must be integer number</string>

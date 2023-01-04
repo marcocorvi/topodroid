@@ -272,13 +272,14 @@ public class ParserTh extends TglParser
     path = path + "." + surveyname;
     // ++ks;
 
-    List<SurveyFixed> fixeds = mData.getSurveyFixeds( sid );
+    List< SurveyFixed > fixeds = mData.getSurveyFixeds( sid );
     // TDLog.v("TH survey fixed points " + fixeds.size() + " shots " + shots.size() + " splays " + splays.size() );
+
 
     if ( fixeds != null && fixeds.size() > 0 ) {
       Cave3DCS cs0 = new Cave3DCS( );
       double PI_180 = (Math.PI / 180);
-      double conv = 0; // HBX_mc
+      StringBuilder nocs = null;
       for ( SurveyFixed fx : fixeds ) {
         // fx.log();
         String name = makeName( fx.station, path );
@@ -306,9 +307,8 @@ public class ParserTh extends TglParser
             x1 = fx.mCsLongitude;
             y1 = fx.mCsLatitude;
             z1 = fx.mCsGeoidAlt;
-            conv = fx.mConvergence; // degrees // HBX_mc
             // TDLog.v( "Th fix " + name + " CS1 " + fx.mCsName + " " + x1 + " " + y1 + " " + z1 + " conv " + conv );
-            //declination -= conv;
+            declination -= fx.mConvergence; // convergence in degrees
             mOrigin = new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mEllipAlt /*, fx.mGeoidAlt */ );
 	    fixes.add( mOrigin );
           } else {
@@ -324,11 +324,14 @@ public class ParserTh extends TglParser
               y1 = fx.mCsLatitude;
               z1 = fx.mCsGeoidAlt;
               // TDLog.v( "Th fix relative fix " + name + " using " + cs1.name + " " + x1 + " " + y1 + " " + z1 );
-              conv = fx.mConvergence; // degrees // HBX_mc
-              //declination -= conv;
 	      fixes.add( new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mEllipAlt /*, fx.mGeoidAlt */ ) );
             } else {
-              TDLog.Error("Th fix relative fix " + name + " does not have CS " + cs1 );
+              if ( nocs == null ) {
+                nocs = new StringBuilder();
+              } else { 
+                nocs.append(", ");
+              }
+              nocs.append( name );
             }
           } else {
             double yy = mOrigin.latToNorth( fx.mLatitude, fx.mEllipAlt ); // north diff to the origin
@@ -338,9 +341,8 @@ public class ParserTh extends TglParser
           }
         }
       }
-      if ( cs1 != null ){  // HBX_mc
-        declination -= conv;
-        // TDLog.v( " HBX_mc Th fix " + " conv " + conv );
+      if ( nocs != null ) {
+        TDToast.makeWarn( String.format( TDInstance.getResourceString( R.string.error_fixes_nocs ), cs1.name, nocs.toString() ) );
       }
     }
 
