@@ -278,6 +278,7 @@ public class ParserTh extends TglParser
     if ( fixeds != null && fixeds.size() > 0 ) {
       Cave3DCS cs0 = new Cave3DCS( );
       double PI_180 = (Math.PI / 180);
+      double conv = 0; // HBX_mc
       for ( SurveyFixed fx : fixeds ) {
         // fx.log();
         String name = makeName( fx.station, path );
@@ -305,9 +306,9 @@ public class ParserTh extends TglParser
             x1 = fx.mCsLongitude;
             y1 = fx.mCsLatitude;
             z1 = fx.mCsGeoidAlt;
-            double conv = fx.mConvergence; // degrees
+            conv = fx.mConvergence; // degrees // HBX_mc
             // TDLog.v( "Th fix " + name + " CS1 " + fx.mCsName + " " + x1 + " " + y1 + " " + z1 + " conv " + conv );
-            declination -= conv;
+            //declination -= conv;
             mOrigin = new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mEllipAlt /*, fx.mGeoidAlt */ );
 	    fixes.add( mOrigin );
           } else {
@@ -323,8 +324,8 @@ public class ParserTh extends TglParser
               y1 = fx.mCsLatitude;
               z1 = fx.mCsGeoidAlt;
               // TDLog.v( "Th fix relative fix " + name + " using " + cs1.name + " " + x1 + " " + y1 + " " + z1 );
-              double conv = fx.mConvergence; // degrees
-              declination -= conv;
+              conv = fx.mConvergence; // degrees // HBX_mc
+              //declination -= conv;
 	      fixes.add( new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mEllipAlt /*, fx.mGeoidAlt */ ) );
             } else {
               TDLog.Error("Th fix relative fix " + name + " does not have CS " + cs1 );
@@ -336,6 +337,10 @@ public class ParserTh extends TglParser
             fixes.add( new Cave3DFix( name, xx, yy, z0, cs0, fx.mLongitude, fx.mLatitude, fx.mEllipAlt /*, fx.mGeoidAlt */ ) );
           }
         }
+      }
+      if ( cs1 != null ){  // HBX_mc
+        declination -= conv;
+        // TDLog.v( " HBX_mc Th fix " + " conv " + conv );
       }
     }
 
