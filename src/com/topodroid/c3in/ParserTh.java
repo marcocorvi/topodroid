@@ -272,29 +272,6 @@ public class ParserTh extends TglParser
     path = path + "." + surveyname;
     // ++ks;
 
-    for ( DBlock blk : blks ) {
-      if ( blk.mFrom.length() > 0 ) {
-        double ber = blk.mBearing + declination;
-        if ( ber >= 360 ) ber -= 360; else if ( ber < 0 ) ber += 360;
-        String from = makeName( blk.mFrom, path );
-        if ( blk.mTo.length() > 0 ) {
-          String to = makeName( blk.mTo, path );
-          shots.add( new Cave3DShot( from, to, blk.mLength, ber, blk.mClino, blk.mFlag, blk.mMillis, color ) );
-        } else {
-          if ( mSplayUse > SPLAY_USE_SKIP ) {
-            splays.add( new Cave3DShot( from, null, blk.mLength, ber, blk.mClino, blk.mFlag, blk.mMillis, color ) );
-          }
-        }
-      } else if ( blk.mTo.length() > 0 ) {
-        if ( mSplayUse > SPLAY_USE_SKIP ) {
-          String to = makeName( blk.mTo, path );
-          double ber = 180 + blk.mBearing + declination;
-          if ( ber >= 360 ) ber -= 360;
-          splays.add( new Cave3DShot( to, null, blk.mLength, ber, -blk.mClino, blk.mFlag, blk.mMillis, color ) );
-        }
-      }
-    }
-
     List<SurveyFixed> fixeds = mData.getSurveyFixeds( sid );
     // TDLog.v("TH survey fixed points " + fixeds.size() + " shots " + shots.size() + " splays " + splays.size() );
 
@@ -330,7 +307,7 @@ public class ParserTh extends TglParser
             z1 = fx.mCsGeoidAlt;
             double conv = fx.mConvergence; // degrees
             // TDLog.v( "Th fix " + name + " CS1 " + fx.mCsName + " " + x1 + " " + y1 + " " + z1 + " conv " + conv );
-            // TODO declination -= conv;
+            declination -= conv;
             mOrigin = new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mEllipAlt /*, fx.mGeoidAlt */ );
 	    fixes.add( mOrigin );
           } else {
@@ -346,6 +323,8 @@ public class ParserTh extends TglParser
               y1 = fx.mCsLatitude;
               z1 = fx.mCsGeoidAlt;
               // TDLog.v( "Th fix relative fix " + name + " using " + cs1.name + " " + x1 + " " + y1 + " " + z1 );
+              double conv = fx.mConvergence; // degrees
+              declination -= conv;
 	      fixes.add( new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mEllipAlt /*, fx.mGeoidAlt */ ) );
             } else {
               TDLog.Error("Th fix relative fix " + name + " does not have CS " + cs1 );
@@ -356,6 +335,29 @@ public class ParserTh extends TglParser
             // TDLog.v( "Th fix relative use CS0 " + xx + " " + yy + " " + z0 );
             fixes.add( new Cave3DFix( name, xx, yy, z0, cs0, fx.mLongitude, fx.mLatitude, fx.mEllipAlt /*, fx.mGeoidAlt */ ) );
           }
+        }
+      }
+    }
+
+    for ( DBlock blk : blks ) {
+      if ( blk.mFrom.length() > 0 ) {
+        double ber = blk.mBearing + declination;
+        if ( ber >= 360 ) ber -= 360; else if ( ber < 0 ) ber += 360;
+        String from = makeName( blk.mFrom, path );
+        if ( blk.mTo.length() > 0 ) {
+          String to = makeName( blk.mTo, path );
+          shots.add( new Cave3DShot( from, to, blk.mLength, ber, blk.mClino, blk.mFlag, blk.mMillis, color ) );
+        } else {
+          if ( mSplayUse > SPLAY_USE_SKIP ) {
+            splays.add( new Cave3DShot( from, null, blk.mLength, ber, blk.mClino, blk.mFlag, blk.mMillis, color ) );
+          }
+        }
+      } else if ( blk.mTo.length() > 0 ) {
+        if ( mSplayUse > SPLAY_USE_SKIP ) {
+          String to = makeName( blk.mTo, path );
+          double ber = 180 + blk.mBearing + declination;
+          if ( ber >= 360 ) ber -= 360;
+          splays.add( new Cave3DShot( to, null, blk.mLength, ber, -blk.mClino, blk.mFlag, blk.mMillis, color ) );
         }
       }
     }
