@@ -60,7 +60,7 @@ public class DrawingShp
       yoff = station.gs;
       xscale = ShpObject.SCALE * station.eradius; // use only S-radius FIXME
       yscale = ShpObject.SCALE * station.sradius;
-      cd = TDMath.cosd( station.declination );
+      cd = TDMath.cosd( station.declination ); // N.B. station.declination can include -convergence
       sd = TDMath.sind( station.declination );
     }
 

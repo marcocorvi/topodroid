@@ -305,6 +305,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="error_begin_required">Adresse de début nécessaire</string>
     <string name="error_declination_number">Déclinaison doit être un nombre</string>
     <string name="error_end_required">Adresse de fin nécessaire</string>
+    <!-- TODO string name="error_fixes_nocs">Fix points without CS %1$s:\n%2$s</string -->
     <string name="error_from_required">Première station nécessaire</string>
     <string name="error_group_required">Numéro de groupe nécessaire</string>
     <string name="error_group_non_integer">Groupe doit être un chiffre rond</string>

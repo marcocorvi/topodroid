@@ -73,7 +73,8 @@ public class ParserTh extends TglParser
 
   DataHelper mData;
 
-  private Cave3DCS cs1 = null;
+  private Cave3DCS cs0 = new Cave3DCS( ); // long-lat CS ?
+  private Cave3DCS cs1 = null;  // custom CS
 
   /** handle the command "flip"
    * @param flip   command argument
@@ -275,11 +276,10 @@ public class ParserTh extends TglParser
     List< SurveyFixed > fixeds = mData.getSurveyFixeds( sid );
     // TDLog.v("TH survey fixed points " + fixeds.size() + " shots " + shots.size() + " splays " + splays.size() );
 
-
     if ( fixeds != null && fixeds.size() > 0 ) {
-      Cave3DCS cs0 = new Cave3DCS( );
       double PI_180 = (Math.PI / 180);
       StringBuilder nocs = null;
+      double conv = 0;
       for ( SurveyFixed fx : fixeds ) {
         // fx.log();
         String name = makeName( fx.station, path );
@@ -308,7 +308,7 @@ public class ParserTh extends TglParser
             y1 = fx.mCsLatitude;
             z1 = fx.mCsGeoidAlt;
             // TDLog.v( "Th fix " + name + " CS1 " + fx.mCsName + " " + x1 + " " + y1 + " " + z1 + " conv " + conv );
-            declination -= fx.mConvergence; // convergence in degrees
+            conv = fx.mConvergence;
             mOrigin = new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mEllipAlt /*, fx.mGeoidAlt */ );
 	    fixes.add( mOrigin );
           } else {
@@ -323,6 +323,7 @@ public class ParserTh extends TglParser
               x1 = fx.mCsLongitude;
               y1 = fx.mCsLatitude;
               z1 = fx.mCsGeoidAlt;
+              conv = fx.mConvergence;
               // TDLog.v( "Th fix relative fix " + name + " using " + cs1.name + " " + x1 + " " + y1 + " " + z1 );
 	      fixes.add( new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mEllipAlt /*, fx.mGeoidAlt */ ) );
             } else {
@@ -341,6 +342,7 @@ public class ParserTh extends TglParser
           }
         }
       }
+      declination -= conv; // correct declination with -convergence
       if ( nocs != null ) {
         TDToast.makeWarn( String.format( TDInstance.getResourceString( R.string.error_fixes_nocs ), cs1.name, nocs.toString() ) );
       }

@@ -38,7 +38,7 @@ public class TDNum
    * @param start    start station
    * @param view     barriers list
    * @param hide     hiding list
-   * @param decl     magnetic declination
+   * @param decl     magnetic declination (possibly including the convergence)
    * @param loop_fmt loop closure report format
    */
   public TDNum( List< DBlock > data, String start, String view, String hide, float decl, String loop_fmt )
@@ -294,7 +294,7 @@ public class TDNum
   // SURVEY DATA 
 
   private NumStation mStartStation; // origin station
-  private float      mDecl;         // magnetic declination
+  private float      mDecl;         // magnetic declination (possibly including -convergence)
 
   private NumStationSet mStations;
   private ArrayList< NumStation > mClosureStations;
@@ -318,6 +318,10 @@ public class TDNum
   public List< NumClosure > getClosures() { return mClosures; }
   public List< DBlock >     getUnattached() { return mUnattachedShots; }
   public List< NumCycle >   getBadLoops() { return mBadLoops; }
+
+  /** @return the magnetic declination (possibly with -convergence)
+   */
+  public float getDeclination() { return mDecl; }
 
   /** @return the list of splays at a given station
    * @param st    station
@@ -754,16 +758,19 @@ public class TDNum
    * @param sf    from station
    * @param st    to station
    * @param ts    temp shot
+   * @param direction ???
+   * @param anomaly   magnetic anomaly angle
+   * @param decl      magnetic declination
    */
-  private NumShot makeShotFromTmp( NumStation sf, NumStation st, TriShot ts, int direction, float anomaly, float mDecl )
+  private NumShot makeShotFromTmp( NumStation sf, NumStation st, TriShot ts, int direction, float anomaly, float decl )
   {
     if ( ts.reversed != 1 ) {
       TDLog.Error( "making shot from reversed temp " + sf.name + " " + st.name );
     }
     DBlock blk = ts.getFirstBlock();
     // TDLog.v( "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() + " E " + blk.getIntExtend() + " S " + blk.getStretch() );
-    // NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly, mDecl ); // FIXME DIRECTION
-    NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), direction, anomaly, mDecl );
+    // NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly, decl ); // FIXME DIRECTION
+    NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), direction, anomaly, decl );
     ArrayList< DBlock > blks = ts.getBlocks();
     for ( int k = 1; k < blks.size(); ++k ) {
       sh.addBlock( blks.get(k) );
@@ -771,15 +778,15 @@ public class TDNum
     return sh;
   }
 
-  private NumShot makeShotFromTmpDiving( NumStation sf, NumStation st, TriShot ts, int direction, float anomaly, float mDecl, float tdepth )
+  private NumShot makeShotFromTmpDiving( NumStation sf, NumStation st, TriShot ts, int direction, float anomaly, float decl, float tdepth )
   {
     if ( ts.reversed != 1 ) {
       TDLog.Error( "making shot from reversed temp " + sf.name + " " + st.name );
     }
     DBlock blk = ts.getFirstBlock();
     // TDLog.v( "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() + " E " + blk.getIntExtend() + " S " + blk.getStretch() );
-    // NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly, mDecl ); // FIXME DIRECTION
-    NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), direction, anomaly, mDecl );
+    // NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly, decl ); // FIXME DIRECTION
+    NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), direction, anomaly, decl );
     ArrayList< DBlock > blks = ts.getBlocks();
     for ( int k = 1; k < blks.size(); ++k ) {
       sh.addBlock( blks.get(k) );

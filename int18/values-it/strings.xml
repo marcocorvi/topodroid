@@ -296,6 +296,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="error_begin_required">Indirizzo iniziale mancante</string>
     <string name="error_declination_number">La declinazione deve esser un numero</string>
     <string name="error_end_required">Indirizzo finale mancante</string>
+    <!-- TODO string name="error_fixes_nocs">Fix points without CS %1$s:\n%2$s</string -->
     <string name="error_from_required">Primo caposaldo mancante</string>
     <string name="error_group_required">Numero di gruppo mancante</string>
     <string name="error_group_non_integer">Il gruppo deve essere un numero intero</string>

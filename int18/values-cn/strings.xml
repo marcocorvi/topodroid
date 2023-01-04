@@ -8,6 +8,8 @@
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->
 
+    <!-- TODO string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string -->
+
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
     <!-- UNUSED string name="desc_lines">Lines</string -->
@@ -298,6 +300,7 @@
     <string name="error_begin_required">输入起点</string>
     <string name="error_declination_number">磁偏角必须是数字</string>
     <string name="error_end_required">输入终点</string>
+    <!-- TODO string name="error_fixes_nocs">Fix points without CS %1$s:\n%2$s</string -->
     <string name="error_from_required">需输入起始测点</string>
     <string name="error_group_required">需输入组编号</string>
     <string name="error_group_non_integer">组编号必须是整数</string>
@@ -1095,6 +1098,7 @@
     <string name="export_dxf_version">版本</string>
     <string name="export_georeference">地理参考</string>
     <string name="export_grid">网格</string>
+    <!-- TODO string name="export_layers">Scrap layers</string -->
     <string name="export_linedir">线方向</string>
     <string name="export_lrud">左右上下</string>
     <string name="export_lrud_from">测量点的左右上下</string>
@@ -1172,6 +1176,7 @@
     <!-- TODO string name="title_fixed_gpx_rec">Geo points [GPX Recorder]</string -->
     <!-- TODO string name="title_fixed_gps_pos">Geo points [GPS Position]</string -->
     <!-- TODO string name="title_fixed_gps_test">Geo points [GPS Test]</string -->
+    <!-- TODO string name="title_fixed_gps_logger">Geo points [GPS Logger]</string -->
     <string name="title_fixed_edit">位置编辑</string>
     <string name="title_fixed_import">位置导入</string>
     <string name="title_fixed_gps">GPS坐标数据</string>
@@ -1295,6 +1300,7 @@
   <string name="pref_cat_exportshp">Shapefile</string>
   <string name="pref_cat_exportpng">PNG</string>
   <string name="pref_cat_exportkml">KML/GeoJSON</string>
+  <string name="pref_cat_exportcsx">cSurvey</string>
   <string name="pref_cat_exportcsv">CSV</string>
 -->
 
@@ -1353,6 +1359,8 @@
   <string name="pref_palettes_summary">启用附加调色板</string>
   <string name="pref_packet_logger_title">日志包</string>
   <string name="pref_packet_logger_summary">启用日志包</string>
+  <!-- TODO string name="pref_th2_edit_title" translatable="false">Sketch editing</string -->
+  <!-- TODO string name="pref_th2_edit_summary" translatable="false">Enable sketch editing</string -->
 
   <string name="pref_bezier_step_title">点间距</string>
   <string name="pref_bezier_step_summary">最大点间距(多条曲线) [m]</string>
@@ -1462,6 +1470,8 @@
   <string name="pref_crs_summary">CRS 名称,类属于Proj4</string>
   <!-- TODO string name="pref_neg_altitude_title">Neg. altitudes</string -->
   <!-- TODO string name="pref_neg_altitude_summary">Allow negative altitudes</string -->
+  <!-- TODO string name="pref_edit_altitude_title">Editable altitude</string -->
+  <!-- TODO string name="pref_edit_altitude_summary">Allow editable altitudes</string -->
   <!-- TODO string name="pref_fine_location_title">Fine location [s]</string -->
   <!-- TODO string name="pref_fine_location_summary">Fine location time [s]</string -->
   <!-- TODO string name="pref_geoimport_app_title">Geopoint app</string -->
@@ -1576,6 +1586,8 @@
   <string name="pref_acad_version_summary">DXF 版本</string>
   <string name="pref_acad_spline_title">DXF 曲线</string>
   <string name="pref_acad_spline_summary">DXF 插值三次曲线</string>
+  <!-- TODO string name="pref_acad_layer_title">Scrap layers</string -->
+  <!-- TODO string name="pref_acad_layer_summary">DXF layers by scraps</string -->
   <string name="pref_dxf_reference_title">DXF 参考</string>
   <string name="pref_dxf_reference_summary">DXF的X-Y 轴 草图输出</string>
   <!-- UNUSED string name="pref_dxf_scale_title">DXF草图规模</string -->
