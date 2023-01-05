@@ -697,7 +697,7 @@ public class TDExporter
   {
     double lat, lng, h_geo;
     // TDLog.v( "st cnt " + NumStation.cnt + " size " + num.getStations().size() );
-    if ( convergence && fixed.hasCSCoords() ) {
+    if ( convergence && origin.hasCSCoords() ) {
       lat = origin.cs_lat;
       lng = origin.cs_lng;
       h_geo = origin.cs_h_geo;

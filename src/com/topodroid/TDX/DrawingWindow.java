@@ -7383,7 +7383,7 @@ public class DrawingWindow extends ItemDrawer
       List<FixedInfo> fixeds = mApp_mData.selectAllFixed( mSid, TDStatus.NORMAL );
       if ( fixeds != null && fixeds.size() > 0 ) fixed = fixeds.get( 0 );
       // TDLog.v("C3D saving " + filename + " fixeds " + fixeds.size() + " fixed " + fixed );
-      if ( fixed == null ) fixed = new FixedInfo( -1, num.getOriginStation(), 0, 0, 0, 0, "", 0, -1, -1 ); // NOTE ACCURACY -1 (unset)
+      if ( fixed == null ) fixed = new FixedInfo( -1, num.getOriginStation(), 0, 0, 0, 0, "", 0, -1, -1, 1 ); // NOTE ACCURACY -1 (unset), mToUnits=1
     }
     // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
     new ExportPlotToFile( mActivity, uri, info, plot, fixed, num, manager, type, filename, ext, toast, station ).execute();
