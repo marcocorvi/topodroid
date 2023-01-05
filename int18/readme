@@ -24,11 +24,13 @@ in the translation files i add the line
      <!-- TODO string name="string_name">The string value</string -->
      
 The keyword "TODO" is there to mark that the string value need to be translated.
-After providing the proper translation, remove the comment and the "TODO" mark. 
+After providing the proper translation, remove the comment marks and the "TODO" mark. 
+The example the above TODO string should become
+     <string name="string_name">Translated value</string>
 
 The following keywords are used:
   TODO    a string that need to be translated
-  OK      a string that is used but does not need translation (eg, "DXF")
+  OK      a string that is used but does not need translation (eg, "DXF"), 
   NO      similar to OK
   UNUSED  a string that is not used in the program, but i do not remove from the string file, as it might be used in future
   FIXME   a string that I modified and you should check if the translation needs to be updated
@@ -47,7 +49,8 @@ the next apk (in this case get the beta apk, they are updated more often).
 If you make a substantial change to the translation, you can also ask me to build an apk
 with your translation, and send it to you by mail.
 
-Finally if you have any doubt about the meaning of a string do not hesitate to write me.
+Finally if you have any doubt about the meaning of a string you can send me and email, or
+ask on the github channel of the TopoDroid project.
 
 -------------------------------------------------------------------------
 MISSING STRINGS
@@ -72,7 +75,7 @@ The string files are encoded.
 Write the proper encoding in the first line, and use an editor that saves the file with that encoding.
 My suggestion is to use UTF-8 to make life easier for you and me.
 
-Note that the apostrophe (asii 0x27) must be escaped, ie "\'".
+Note that the apostrophe (ascii 0x27) must be escaped, ie "\'".
 
 -------------------------------------------------------------------------
 HOW TO MANAGE YOUR TRANSLATION WITH THE SOURCE TREE
@@ -115,7 +118,7 @@ restart topodroid (you might have to stop the app explicitly with a task manager
 the Settings app).
 
 ------------------------------------------------------------------------
-USER MANUAL
+USER MANUAL (optional)
 
 The default user manual consists of HTML pages in the directory assets/man, and is bundled
 in the apk (app package). Translated user manuals are not included in the apk but can be
@@ -128,3 +131,6 @@ The download of a translated manual is started selecting the translation in the 
 When the user opens the manual, TopoDroid searches for the translated page first. 
 If this is not found it falls back to the deafult man page.
 The translated man pages can be disabled with a global preference.
+
+Translated user manpages can have a version number to alert the user when there is an update.
+Version numbers are in the english file user_man.xml.
