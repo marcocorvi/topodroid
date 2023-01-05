@@ -104,16 +104,16 @@ class FixedDialog extends MyDialog
   
   /**
    * @param cs    CS name
-   * @param lng   CS longitude - east  [CS uniits]
+   * @param lng   CS longitude - east  [m]
    * @param lat   CS latitude  - north
    * @param h_ell CS altitude [m]
    * @param n_dec number of decimals
    * @param conv  convergence
    * @param m_to_units  meters to units
    */
-  void setConvertedCoords( String cs, double lng, double lat, double h_ell, long n_dec, double conv, double m_to_units )
+  void setConvertedCoords( String cs, double lng, double lat, double h_ell, long n_dec, double conv, double m_to_units, double m_to_vunits )
   {
-    mFxd.setCSCoords( cs, lng, lat, h_ell, n_dec, conv, m_to_units );
+    mFxd.setCSCoords( cs, lng, lat, h_ell, n_dec, conv, m_to_units, m_to_vunits );
     showConvertedCoords( );
   }
 

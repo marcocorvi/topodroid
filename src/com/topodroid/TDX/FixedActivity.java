@@ -359,9 +359,9 @@ public class FixedActivity extends Activity
   private FixedInfo addLocation( String station, double lng, double lat, double h_ell, double h_geo, String comment, long source, double accur, double accur_v )
   {
     if (  TopoDroidApp.mData == null ) return null;
-    long id = TopoDroidApp.mData.insertFixed( TDInstance.sid, -1L, station, lng, lat, h_ell, h_geo, comment, 0L, source, accur, accur_v, 1 ); // mToUnits=1
+    long id = TopoDroidApp.mData.insertFixed( TDInstance.sid, -1L, station, lng, lat, h_ell, h_geo, comment, 0L, source, accur, accur_v );
     // TDLog.v("FIXED new " + id + " " + station + ": " + lng + " " + lat + " H " + h_ell + " " + h_geo );
-    return new FixedInfo( id, station, lng, lat, h_ell, h_geo, comment, source, accur, accur_v, 1 ); 
+    return new FixedInfo( id, station, lng, lat, h_ell, h_geo, comment, source, accur, accur_v ); 
   }
 
   /** set the adapter of the menu pull-down list
@@ -586,7 +586,7 @@ public class FixedActivity extends Activity
    */
   void clearConvertedCoords( FixedInfo fxd ) 
   {
-    TopoDroidApp.mData.updateFixedCS( fxd.id, TDInstance.sid, null, 0, 0, 0, 2L, 0, 1 );
+    TopoDroidApp.mData.updateFixedCS( fxd.id, TDInstance.sid, null, 0, 0, 0, 2L, 0, 1, 1 );
     fxd.clearConverted();
   }
 
@@ -655,9 +655,12 @@ public class FixedActivity extends Activity
 	    long   n_dec = bundle.containsKey( "decimals" )? bundle.getLong( "decimals" ) : 2;
 	    double conv  = bundle.containsKey( "convergence" )? bundle.getDouble( "convergence" ) : 0; // degrees
 	    double m_to_units = bundle.containsKey( "meterstounits" )? bundle.getDouble( "meterstounits" ) : 1; // meters to CS units
+	    double m_to_vunits = bundle.containsKey( "meterstovunits" )? bundle.getDouble( "meterstovunits" ) : 1; // meters to CS vert units
             // FIXME M_TO_UNITS
-            TopoDroidApp.mData.updateFixedCS(  mFixedDialog.getFixedId(), TDInstance.sid, cs, lng/m_to_units, lat/m_to_units, h_geo, n_dec, conv, m_to_units );
-            mFixedDialog.setConvertedCoords( cs, lng, lat, h_geo, n_dec, conv, m_to_units );
+            lng /= m_to_units; // convert CS units to meters
+            lat /= m_to_units; 
+            TopoDroidApp.mData.updateFixedCS(  mFixedDialog.getFixedId(), TDInstance.sid, cs, lng, lat, h_geo, n_dec, conv, m_to_units, m_to_vunits );
+            mFixedDialog.setConvertedCoords( cs, lng, lat, h_geo, n_dec, conv, m_to_units, m_to_vunits );
           }
           // mFixedHGeo   = 0;
           mFixedDialog = null;

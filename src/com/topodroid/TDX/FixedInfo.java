@@ -52,9 +52,9 @@ public class FixedInfo extends MagLatLong
   double accuracy    = 0.0; // horizontal [m]
   double accuracy_v  = 0.0;
   double mToUnits    = 1.0; // meters to units
+  double mToVUnits   = 1.0; // meters to vert units
 
-  public FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid, String cmt, long src, double accur, double accur_v,
-                    double m_to_units )
+  public FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid, String cmt, long src, double accur, double accur_v )
   {
     id = _id;
     name = n;
@@ -66,7 +66,6 @@ public class FixedInfo extends MagLatLong
     source  = src;
     accuracy   = accur;
     accuracy_v = accur_v;
-    mToUnits   = m_to_units;
     clearConverted();
   }
 
@@ -80,16 +79,15 @@ public class FixedInfo extends MagLatLong
    * @param cmt       comment
    * @param src       source
    * @param name_cs   CS name
-   * @param 
-   * @param lng_cs
-   * @param lat_cs
-   * @param h_geo_cs
+   * @param lng_cs    CS longitude - east [m]
+   * @param lat_cs    CS latitude - north [m]
+   * @param h_geo_cs  CS altitude (geoid) [m]
    * @param n_dec     numer of decimals
    * @param conv      convergence
    */
   FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid,
              String cmt, long src, String name_cs, double lng_cs, double lat_cs, double h_geo_cs, long n_dec, double conv, double accur, double accur_v,
-             double m_to_units )
+             double m_to_units, double m_to_vunits )
   {
     id = _id;
     name = n;
@@ -108,23 +106,25 @@ public class FixedInfo extends MagLatLong
     accuracy   = accur;
     accuracy_v = accur_v;
     mToUnits   = m_to_units;
+    mToVUnits  = m_to_vunits;
   }
 
   /** set converted coordinates
    * @param name_cs   coordinate system
-   * @param lng_cs    longitude / east [CS units]
-   * @param lat_cs    latitude / north [CS units]
+   * @param lng_cs    longitude / east [m]
+   * @param lat_cs    latitude / north [m]
    * @param h_geo_cs  altitude (geoid) [m]
    * @param n_dec     number of decimals in lng/lat
    * @param conv      convergence [degree]
-   * @param m_to_units meters to units
+   * @param m_to_units  meters to units
+   * @param m_to_vunits meters to vert units
    */
-  void setCSCoords( String name_cs, double lng_cs, double lat_cs, double h_geo_cs, long n_dec, double conv, double m_to_units )
+  void setCSCoords( String name_cs, double lng_cs, double lat_cs, double h_geo_cs, long n_dec, double conv, double m_to_units, double m_to_vunits )
   {
     cs = name_cs;
     if ( cs != null && cs.length() > 0 ) {
-      cs_lng = lng_cs / m_to_units;  // store values in meters FIXME M_TO_UNITS
-      cs_lat = lat_cs / m_to_units;
+      cs_lng = lng_cs;  // store values in meters FIXME M_TO_UNITS
+      cs_lat = lat_cs;
       cs_h_geo = h_geo_cs;
       cs_n_dec = (n_dec >= 0)? n_dec : 0;
       convergence = conv;
@@ -141,6 +141,8 @@ public class FixedInfo extends MagLatLong
     cs_h_geo = 0;
     cs_n_dec = 2L;
     convergence = 0.0;
+    mToUnits  = 1.0;
+    mToVUnits = 1.0;
   }
 
   /** test if this fixed has converted coordinates
@@ -181,7 +183,7 @@ public class FixedInfo extends MagLatLong
   {
     StringBuilder fmt = new StringBuilder();
     fmt.append("%.").append( cs_n_dec ).append("f %.").append( cs_n_dec ).append("f %.0f");
-    return String.format(Locale.US, fmt.toString(), cs_lng*mToUnits, cs_lat*mToUnits, cs_h_geo );
+    return String.format(Locale.US, fmt.toString(), cs_lng*mToUnits, cs_lat*mToUnits, cs_h_geo*mToVUnits );
     // return String.format(Locale.US, "%s %.2f %.2f %.0f", name, cs_lng, cs_lat, cs_h_geo );
   }
 
@@ -224,6 +226,10 @@ public class FixedInfo extends MagLatLong
   /** @return the meters-units factor
    */
   public double getMToUnits() { return mToUnits; }
+
+  /** @return the meters-vert.units factor
+   */
+  public double getMToVertUnits() { return mToVUnits; }
 
   // @RecentlyNonNull
   public String toString()
