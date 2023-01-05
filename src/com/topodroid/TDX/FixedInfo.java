@@ -33,6 +33,7 @@ public class FixedInfo extends MagLatLong
   public final static long SRC_GPX_RECORDER = 4L;
   public final static long SRC_GPS_POSITION = 5L;
   public final static long SRC_GPS_TEST     = 6L;
+  public final static long SRC_GPS_LOGGER   = 7L;
 
   long   id;       // fixed id
   long   source;   // 0: unknown,  1: topodroid,  2: manual,   3: mobile-topographer, ...
@@ -176,10 +177,16 @@ public class FixedInfo extends MagLatLong
     // return String.format(Locale.US, "%s %.2f %.2f %.0f", name, cs_lng, cs_lat, cs_h_geo );
   }
 
+  /** @return the name of the custom CS
+   */
   String csName() { return cs; }
 
+  /** @return the comment
+   */
   public String getComment() { return comment; }
 
+  /** @return the name of the source
+   */
   public String getSource() 
   {
     switch ( (int)source ) {
@@ -188,6 +195,8 @@ public class FixedInfo extends MagLatLong
       case 3: return "Mobile-Topographer";
       case 4: return "GPX recorder";
       case 5: return "GPS position";
+      case 6: return "GPS test";
+      case 7: return "GPS logger";
     }
     return "unknown";
   }
@@ -196,8 +205,12 @@ public class FixedInfo extends MagLatLong
    */
   public double getConvergence() { return convergence; }
 
+  /** @return the fix point accuracy
+   */
   public double getAccuracy() { return accuracy; }
 
+  /** @return the fix point vertical accuracy
+   */
   public double getAccuracyVert() { return accuracy_v; }
 
   // @RecentlyNonNull
@@ -211,6 +224,9 @@ public class FixedInfo extends MagLatLong
     return ( TDSetting.mUnitLocation == TDUtil.DDMMSS ) ? double2ddmmss( x ) : double2degree( x );
   }
 
+  /** @return dd.mm.ss with seconds at two decinal places (roughly 0.3 m)
+   * @param x  decimal degrees
+   */ 
   static String double2ddmmss( double x )
   {
     int dp = (int)x;
@@ -223,17 +239,31 @@ public class FixedInfo extends MagLatLong
     return String.format(Locale.US, "%d°%02d'%02d.%02d", dp, mp, sp, ds );
   }
 
+  /** @return degrees with six decimal places (roughly 0.1 m)
+   * @param x  decimal degrees
+   */
   static String double2degree( double x )
   {
     return String.format(Locale.US, "%.6f", x );
   }
 
+  /** convert a dd.mm.ss char-sequence to double (degrees)
+   * @param str  DD.MM.SS
+   * @return the decimal degrees
+   * @see next method
+   */
   static double string2double( CharSequence txt )
   {
     if ( txt == null ) return -1111;
     return string2double( txt.toString() );
   }
 
+  /** convert a dd.mm.ss string to double (degrees)
+   * @param str  DD.MM.SS
+   * @return the decimal degrees
+   * @note the D/M and M/S separators can be color, space, degree-sign, or apostrophe
+   *       the decimals separatos can be point, slash, or comma
+   */
   static double string2double( String str )
   {
     if ( str == null ) return -1111.0;
@@ -260,12 +290,22 @@ public class FixedInfo extends MagLatLong
     return -1111.0; // more neg than -1000
   }        
 
+  /** convert a decimal degree char-sequence to double (degrees)
+   * @param str  DD.MM.SS
+   * @return the decimal degrees
+   * @see next method
+   */
   static double string2real( CharSequence txt )
   {
     if ( txt == null ) return 0;
     return string2real( txt.toString() );
   }
 
+  /** convert a decimal degree string to double (degrees)
+   * @param str  DD.MM.SS
+   * @return the decimal degrees
+   * @note the decimals separatos can be point, slash, or comma
+   */
   static private double string2real( String str )
   {
     if ( str == null ) return 0;

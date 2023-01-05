@@ -631,6 +631,14 @@ public class TDExporter
   // ####################################################################################################################################
   // geographic exports - use (ge, gs, gv)
 
+  /**
+   * @param sid      survey ID
+   * @param data     database helper
+   * @param h_geo_factor ???
+   * @param ellipsoid_h  whether to use ellipsoid altitude
+   * @param station      ???
+   * @param convergence  whether to apply convergence
+   */
   static GeoReference getGeolocalizedStation( long sid, DataHelper data, float h_geo_factor, boolean ellipsoid_h, String station, boolean convergence )
   {
     float decl = data.getSurveyDeclination( sid );
@@ -669,7 +677,7 @@ public class TDExporter
       TDNum num = new TDNum( shots_data, fixed.name, null, null, decl0, null ); // null formatClosure
       // TDLog.v( "Num shots " + num.getShots().size() );
       if ( num.getShots().size() > 0 ) {
-        makeGeolocalizedData( num, fixed, h_geo_factor, ellipsoid_h );
+        makeGeolocalizedData( num, fixed, h_geo_factor, ellipsoid_h, convergence );
 	nums.add( num );
       } 
     }
@@ -678,36 +686,45 @@ public class TDExporter
   }
 
   // FIXME CONVERGENCE
-  static private void  makeGeolocalizedData( TDNum num, FixedInfo origin, float h_geo_factor, boolean ellipsoid_h )
+  /** make the reduced data geolocalized with respect to the given origin
+   * @param num          data reductuion
+   * @param origin       fix point, origin
+   * @param h_geo_factor ???
+   * @param ellipsoid_h  whether to use ellipsoid altitude
+   * @param convergence  whether to apple meridian convergence
+   */
+  static private void  makeGeolocalizedData( TDNum num, FixedInfo origin, float h_geo_factor, boolean ellipsoid_h, boolean convergence )
   {
-
-    double lat = origin.lat;
-    double lng = origin.lng;
-    double h_ell = origin.h_ell;
-    double h_geo = ellipsoid_h ? origin.h_ell : origin.h_geo; // KML uses Geoid altitude (unless altitudeMode is set)
-    double s_radius = 1 / Geodetic.meridianRadiusExact( lat, h_ell );
-    double e_radius = 1 / Geodetic.parallelRadiusExact( lat, h_ell );
-    // TDLog.v( "radius S " + (s_radius / s_radius_e) + " E " + (e_radius / e_radius_a ) );
-
-    mERadius = e_radius; // save radii factors for getGeolocalizedStation
-    mSRadius = s_radius;
-
+    double lat, lng, h_geo;
     // TDLog.v( "st cnt " + NumStation.cnt + " size " + num.getStations().size() );
-
+    if ( convergence && fixed.hasCSCoords() ) {
+      lat = origin.cs_lat;
+      lng = origin.cs_lng;
+      h_geo = origin.cs_h_geo;
+      mERadius = 1.0;
+      mSRadius = 1.0;
+    } else {
+      lat = origin.lat;
+      lng = origin.lng;
+      h_geo = ellipsoid_h ? origin.h_ell : origin.h_geo; // KML uses Geoid altitude (unless altitudeMode is set)
+      mSRadius = 1 / Geodetic.meridianRadiusExact( lat, origin.h_ell );
+      mERadius = 1 / Geodetic.parallelRadiusExact( lat, origin.h_ell );
+      // TDLog.v( "radius S " + (mSRadius / s_radius_e) + " E " + (mERadius / e_radius_a ) );
+    }
 
     for ( NumStation st : num.getStations() ) {
-      st.s = (lat - st.s * s_radius);
-      st.e = (lng + st.e * e_radius); 
+      st.s = (lat - st.s * mSRadius);
+      st.e = (lng + st.e * mERadius); 
       st.v = (h_geo - st.v) * h_geo_factor;
     }
     for ( NumStation cst : num.getClosureStations() ) {
-      cst.s = (lat - cst.s * s_radius);
-      cst.e = (lng + cst.e * e_radius); 
+      cst.s = (lat - cst.s * mSRadius);
+      cst.e = (lng + cst.e * mERadius); 
       cst.v = (h_geo - cst.v) * h_geo_factor;
     }
     for ( NumSplay sp : num.getSplays() ) {
-      sp.s = (lat - sp.s * s_radius);
-      sp.e = (lng + sp.e * e_radius); 
+      sp.s = (lat - sp.s * mSRadius);
+      sp.e = (lng + sp.e * mERadius); 
       sp.v = (h_geo - sp.v) * h_geo_factor;
     }
   }
@@ -743,7 +760,7 @@ public class TDExporter
     final String coordinates3 = "    <coordinates>%.8f,%.8f,%.1f</coordinates>\n";
     final String coordinates6 = "    %.8f,%.8f,%.1f %.8f,%.8f,%.1f\n";
     // TDLog.v( "export as KML " + file.getFilename() );
-    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false, false ); // false: geoid altitude
+    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false, false ); // false: geoid altitude, false no convergence
     if ( TDUtil.isEmpty(nums) ) {
       TDLog.Error( "Failed KML export: no geolocalized station");
       return 2;
@@ -885,7 +902,7 @@ public class TDExporter
    */
   static int exportSurveyAsShp( OutputStream os, long sid, DataHelper data, SurveyInfo info, String survey, String dirname )
   {
-    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false, true ); // false: geoid altitude
+    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false, true ); // false: geoid altitude, true with convergence
     if ( TDUtil.isEmpty(nums) ) {
       TDLog.Error( "Failed SHP export: no geolocalized station");
       return 0;
@@ -1024,7 +1041,7 @@ public class TDExporter
     final String coords  = "\"coordinates\": ";
     final String feature = "\"Feature\"";
     // TDLog.v( "export as GeoJSON " + file.getName() );
-    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, true, false ); // true: ellipsoid altitude
+    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, true, false ); // true: ellipsoid altitude, false no convergence
     if ( TDUtil.isEmpty(nums) ) {
       TDLog.Error( "Failed GeoJSON export: no geolocalized station");
       return 2;
@@ -1113,7 +1130,7 @@ public class TDExporter
   static int exportSurveyAsPlt( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
     // TDLog.v( "export as trackfile: " + file.getName() );
-    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), TDUtil.M2FT, false, false ); // false: ... 
+    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), TDUtil.M2FT, false, false ); // false geoid alt. - false no convergence
     if ( TDUtil.isEmpty(nums) ) {
       TDLog.Error( "Failed PLT export: no geolocalized station");
       return 2;
