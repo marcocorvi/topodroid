@@ -299,7 +299,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="error_begin_required">Kezdő hivatkozás szükséges</string>
     <string name="error_declination_number">A deklinációt számként kell megadni</string>
     <string name="error_end_required">Vépont szükséges</string>
-    <!-- TODO string name="error_fixes_nocs">Fix points without CS %1$s:\n%2$s</string -->
+    <string name="error_fixes_nocs">Fix pont CS nélkül %1$s:\n%2$s</string>
     <string name="error_from_required">Első mérési pont megadása szükséges</string>
     <string name="error_group_required">Csoport szám szükséges</string>
     <string name="error_group_non_integer">A csoport számnak egész számnak kell lennie</string>
