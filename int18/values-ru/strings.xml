@@ -299,7 +299,7 @@
     <string name="error_begin_required">Требуется начальный адрес</string>
     <string name="error_declination_number">Наклон должен быть задан числом</string>
     <string name="error_end_required">Требуется конечный адрес</string>
-    <!-- TODO string name="error_fixes_nocs">Fix points without CS %1$s:\n%2$s</string -->
+    <string name="error_fixes_nocs">Геопривязанные точки без указания CS %1$s:\n%2$s</string>
     <string name="error_from_required">Требуется начальный пикет</string>
     <string name="error_group_required">Требуется номер группы</string>
     <string name="error_group_non_integer">Номер группы должен быть целым числом</string>
@@ -1093,7 +1093,7 @@
     <string name="export_dxf_version">Версия</string>
     <string name="export_georeference">Геопривязка</string>
     <string name="export_grid">Сетка</string>
-    <!-- TODO string name="export_layers">Scrap layers</string -->
+    <string name="export_layers">Слои скрапа</string>
     <string name="export_linedir">Штрих направления линий</string>
     <string name="export_lrud">ЛПВН</string>
     <string name="export_lrud_from">ЛПВН на пикете ОТ</string>
@@ -1460,8 +1460,8 @@
   <string name="pref_crs_summary">Введите название CRS точно также как в программе Proj4</string>
   <string name="pref_neg_altitude_title">Отр. альтитуды</string>
   <string name="pref_neg_altitude_summary">Разрешить отрицаттельные альтитуды</string>
-  <!-- TODO string name="pref_edit_altitude_title">Editable altitude</string -->
-  <!-- TODO string name="pref_edit_altitude_summary">Allow editable altitudes</string -->
+  <string name="pref_edit_altitude_title">Редактируемая высота</string>
+  <string name="pref_edit_altitude_summary">Разрешить редактирование высот</string>
   <string name="pref_fine_location_title">Уточнение позиции [s]</string>
   <string name="pref_fine_location_summary">Время уточнения позиции [s]</string>
   <string name="pref_geoimport_app_title">Приложение геопривязки</string>
@@ -1577,8 +1577,8 @@
   <string name="pref_acad_version_summary">Версия DXF</string>
   <string name="pref_acad_spline_title">DXF сплайны</string>
   <string name="pref_acad_spline_summary">DXF кубическая интерполяция</string>
-  <!-- TODO string name="pref_acad_layer_title">Scrap layers</string -->
-  <!-- TODO string name="pref_acad_layer_summary">DXF layers by scraps</string -->
+  <string name="pref_acad_layer_title">Скрапы по слоям</string>
+  <string name="pref_acad_layer_summary">Слои в DXF в соответствии со скрапами</string>
   <string name="pref_dxf_reference_title">DXF ссылки</string>
   <string name="pref_dxf_reference_summary">X-Y области DXF экспорт абрисов</string>
   <!-- UNUSED string name="pref_dxf_scale_title">Масштаб абриса в DXF</string -->
