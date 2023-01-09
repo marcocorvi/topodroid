@@ -1476,6 +1476,8 @@
   <string name="pref_bric_mode_summary">Режим работы BRIC</string>
   <string name="pref_bric_zero_length_title">Нулевой замер BRIC</string>
   <string name="pref_bric_zero_length_summary">Записать замер нулевой длины BRIC</string>
+  <!-- TODO string name="pref_sap5_bit16_bug_title">SAP5 bit-16 bug</string -->
+  <!-- TODO string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 bug workaround</string -->
 
   <string name="pref_plot_screen_title">НАСТРОЙКИ ЭКРАНА АБРИСОВ</string>
   <string name="pref_tool_line_title">НАСТРОЙКИ ЛИНИЙ</string>

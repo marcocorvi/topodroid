@@ -1482,6 +1482,8 @@
   <string name="pref_bric_mode_summary">BRIC 操作模式</string>
   <string name="pref_bric_zero_length_title">BRIC 零点测射</string>
   <string name="pref_bric_zero_length_summary">记录BRIC 零长度测射</string>
+  <!-- TODO string name="pref_sap5_bit16_bug_title">SAP5 bit-16 bug</string -->
+  <!-- TODO string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 bug workaround</string -->
 
   <string name="pref_plot_screen_title">草图</string>
   <string name="pref_tool_line_title">线</string>

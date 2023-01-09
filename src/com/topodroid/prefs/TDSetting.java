@@ -344,6 +344,7 @@ public class TDSetting
   public static boolean mFirmwareSanity = true; // enforce firmware sanity checks
   public static int mBricMode = BricMode.MODE_NO_INDEX;
   public static boolean mBricZeroLength = false; // whether to handle 0-length data
+  public static boolean mSap5Bit16Bug   = true;  // whether to apply SAP5 bit-16 bug workaround
 
   // public static final boolean CHECK_BT = true;
   public static int mCheckBT = 1;        // BT: 0 disabled, 1 check on start, 2 enabled
@@ -995,6 +996,7 @@ public class TDSetting
     mFirmwareSanity = prefs.getBoolean( keyGDev[ 6], bool(defGDev[ 6]) );  // DISTOX_FIRMWARE_SANITY
     mBricMode       = tryInt( prefs,    keyGDev[ 7],      defGDev[ 7] );   // DISTOX_BRIC_MODE
     mBricZeroLength = prefs.getBoolean( keyGDev[ 8], bool(defGDev[ 8]) );  // DISTOX_BRIC_ZERO_LENGTH
+    mSap5Bit16Bug   = prefs.getBoolean( keyGDev[ 9], bool(defGDev[ 9]) );  // DISTOX_SAP5_BIT16_BUG
     // TDLog.v("SETTING load geek device done");
 
     String[] keyCave3D = TDPrefKey.CAVE3D;
@@ -1904,6 +1906,8 @@ public class TDSetting
       mBricMode = tryIntValue( hlp, k, v, def[7] );
     } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_BRIC_ZERO_LENGTH
       mBricZeroLength = tryBooleanValue( hlp, k, v, bool(def[8]) );
+    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_SAP5_BIT16_BUG
+      mSap5Bit16Bug = tryBooleanValue( hlp, k, v, bool(def[9]) );
     } else {
       TDLog.Error("missing DEVICE key: " + k );
     }

@@ -1490,6 +1490,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_bric_mode_summary">BRIC operating mode</string>
   <string name="pref_bric_zero_length_title">BRIC zero shot</string>
   <string name="pref_bric_zero_length_summary">Record BRIC zero-length shot</string>
+  <string name="pref_sap5_bit16_bug_title">SAP5 bit-16 bug</string>
+  <string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 bug workaround</string>
 
   <string name="pref_plot_screen_title">SKETCH</string>
   <string name="pref_tool_line_title">LINES</string>

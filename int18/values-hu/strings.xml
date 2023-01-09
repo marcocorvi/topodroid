@@ -1485,6 +1485,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_bric_mode_summary">BRIC működési mód</string>
   <string name="pref_bric_zero_length_title">BRIC nulla mérés</string>
   <string name="pref_bric_zero_length_summary">BRIC nulla-hossz mérés rögzítése</string>
+  <!-- TODO string name="pref_sap5_bit16_bug_title">SAP5 bit-16 bug</string -->
+  <!-- TODO string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 bug workaround</string -->
 
   <string name="pref_plot_screen_title">VÁZLAT</string>
   <string name="pref_tool_line_title">VONALAK</string>

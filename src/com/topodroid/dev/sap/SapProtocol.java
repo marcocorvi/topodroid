@@ -14,7 +14,7 @@
 package com.topodroid.dev.sap;
 
 // import com.topodroid.utils.TDLog;
-// import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.TopoDroidProtocol;
 
@@ -91,6 +91,13 @@ class SapProtocol extends TopoDroidProtocol
     // byte[] ack = new byte[1];
     // ack[0] = (byte)( ( buffer[0] & 0x80 ) | 0x55 );
     // addToWriteBuffer( ack );
+
+    // FIX SAP5 bug: 2023-01-05 Phil Underwood on SAP list:
+    // Looks like calculation of high byte for distoX protocol is incorrect - marks bit 16 when distance > 32.676m, should be when > 65.535m
+    if ( TDSetting.mSap5Bit16Bug ) {
+      if ( (buffer[2] & 0x80) == 0x80 ) buffer[0] &= 0xbf; // clear 0x40
+    }
+
     return handlePacket( buffer );
   }
 

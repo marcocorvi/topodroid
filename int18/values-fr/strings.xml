@@ -1490,6 +1490,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_bric_mode_summary">BRIC mode de fonctionnement</string>
     <string name="pref_bric_zero_length_title">BRIC visée nulle</string>
     <string name="pref_bric_zero_length_summary">BRIC enregistrer la visée de longueur nulle</string>
+  <!-- TODO string name="pref_sap5_bit16_bug_title">SAP5 bit-16 bug</string -->
+  <!-- TODO string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 bug workaround</string -->
 
     <string name="pref_plot_screen_title">OPTIONS ÉCRAN DESSIN</string>
     <string name="pref_tool_line_title">OUTILS LIGNES</string>

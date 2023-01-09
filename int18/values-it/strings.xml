@@ -1473,6 +1473,8 @@ Fai riferimento alle pagine web per i dettagli.\n
   <string name="pref_bric_mode_summary">Modo BRIC operativo</string>
   <string name="pref_bric_zero_length_title">Tiro zero BRIC</string>
   <string name="pref_bric_zero_length_summary">Registra tiro BRIC a lunghezza zero</string>
+  <!-- TODO string name="pref_sap5_bit16_bug_title">SAP5 bit-16 bug</string -->
+  <!-- TODO string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 bug workaround</string -->
 
   <string name="pref_plot_screen_title">OPZIONI DISEGNO</string>
   <string name="pref_tool_line_title">OPZIONI LINEE</string>
