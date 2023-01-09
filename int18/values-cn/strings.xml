@@ -157,10 +157,10 @@
     <string name="calib_ave_std">精确度: %1$.4f ± %2$.4f 度</string>
     <string name="calib_precision">精度</string>
     <string name="calib_iter">迭代次数: %1$d</string>
-    <!-- TODO string name="calib_dip">Magn. dip: %1$.1f</string -->
+    <string name="calib_dip">磁倾角(dip): %1$.1f</string>
     <string name="calib_reset">重置DistoX校准 ?</string>
-    <!-- TODO string name="calib_min_error">Minimum error</string -->
-    <!-- TODO string name="magn_dip">Magn. dip &#8230;</string -->
+    <string name="calib_min_error">最小误差</string>
+    <string name="magn_dip">磁倾角(dip) &#8230;</string>
     
     <string name="algorithm">算法:</string>
     <string name="auto">自动</string>
@@ -193,7 +193,7 @@
     <string name="bt_reset">重置蓝牙连接</string>
     <string name="save_as">另存为</string>
     <string name="nickname">别称</string>
-    <!-- TODO string name="unknown_device_type">Unknown device type %1$d</string -->
+    <TODO string name="unknown_device_type">无法识别的设备 %1$d</string>
 
     <string name="comment">注释</string>
     <!-- UNUSED string name="flag">Flag</string -->
@@ -245,8 +245,8 @@
     <string name="import_zip_newer">从最近的版本导入zip文件</string>
     <!-- UNUSED string name="import_zip_wait">Imported zip file may take long. Please wait &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
-    <!-- TODO string name="GPS_position_none">No GPS position data</string -->
-    <!-- TODO string name="GPX_record_none">No GPX point record</string -->
+    <string name="GPS_position_none">无GPS数据</string>
+    <string name="GPX_record_none">无GPX点记录</string>
     <string name="MT_points_none">无GPS坐标点</string>
     <string name="MT_bad_file">错误的移动地形图文件</string>
     <string name="bad_manifest">错误的清单文件</string>
@@ -276,17 +276,17 @@
     <string name="longitude">经度 </string>
     <!-- UNUSED string name="h_ellipsoid_hint">地球椭圆高度. [米]</string -->
     <string name="h_geoid_hint">大地水准高度 [米]</string>
-    <!-- TODO string name="accuracy_hint">Accuracy [m]</string -->
+    <string name="accuracy_hint">精度 [m]</string>
     <string name="latitude_hint">纬度. dd:mm:ss.sss</string>
     <string name="longitude_hint">经度. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">闭合环路误差</string>
     <string name="loop_none">无环路</string>
-    <!-- TODO string name="loops_bad">Inaccurate loops: %1$d</string -->
+    <string name="loops_bad">不准确的环路: %1$d</string>
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
 
-    <!-- TODO string name="error_m">Accuracy [m]</string -->
-    <!-- TODO string name="fmt_error_h">Accuracy: %1$.1f m</string -->
-    <!-- TODO string name="fmt_error_m">Accuracy: H %1$.1f V %2$.1f m</string -->
+    <string name="error_m">精度 [m]</string>
+    <string name="fmt_error_h">精度: %1$.1f m</string>
+    <string name="fmt_error_m">精度: H %1$.1f V %2$.1f m</string>
     <string name="fmt_h_geoid">海拔. %1$.0f m</string>
     <!-- UNUSED string name="fmt_h_ellipsoid">大地椭球高度. %1$.0f m</string -->
     <!-- TODO string name="location_start_fine">Starting fine location</string -->
@@ -403,7 +403,7 @@
     <string name="no_proj4">Proj4未安装</string>
     <string name="no_sensors">测量无数据</string>
     <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
-    <!-- TODO string name="no_search_result">No search_result.</string -->
+    <string name="no_search_result">无检索结果.</string>
     <string name="no_survey">未选定测量.</string>
     <string name="no_symbols">没有符号面板.</string>
     <!-- UNUSED string name="no_thmanager">ThManager应用未安装</string -->
@@ -682,7 +682,7 @@
 
 
     <string name="survey_info">测量信息</string>
-    <!-- TODO string name="stat_devices">Devices %1$d: %2$s</string -->
+    <string name="stat_devices">设备 %1$d: %2$s</string>
     <string name="stat_stddev_m">M 标准差 %1$.1f %%</string>
     <string name="stat_stddev_g">G 标准差 %1$.1f %%</string>
     <string name="stat_stddev_dip">Dip stddev %1$.1f deg. (average %2$.1f deg.)</string>
@@ -826,14 +826,14 @@
     <string name="button_swap"      >交换      </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
-    <string name="button_upload"    >上载    </string>
-    <!-- TODO string name="button_download"  >Download</string -->
+    <string name="button_upload"    >上传</string>
+    <string name="button_download"  >下载</string>
     <string name="button_view"      >视图      </string>
     <!-- UNUSED string name="button_zoomfit"   >Zoom fit  </string -->
     <!-- UNUSED string name="button_landscape" >Landscape </string --> 
     <!-- UNUSED string name="button_portrait"  >Portrait  </string -->
     <string name="button_splays">辐测</string>
-    <!-- TODO string name="button_wait">Wait</string -->
+    <string name="button_wait">等待</string>
 
 
     <string name="button_write"     >上载</string>
@@ -1007,7 +1007,7 @@
     <string name="help_remote">DistoX遥控</string>
     <string name="help_add_shot">手动添加一个测量数据</string>
     <string name="help_info_shot">测量统计</string>
-    <!-- TODO string name="help_gps_surveys">Surveys informations</string -->
+    <string name="help_gps_surveys">测量信息</string>
     <string name="help_survey_info">测量项目信息</string>
     <string name="help_undelete">恢复删除的项目</string>
     <!-- UPDATES string name="help_updates">Check for app version updates</string -->
@@ -1265,7 +1265,7 @@
     <string name="title_import_shot">测量导入</string>
     <string name="title_import_gps">GPS 点输入</string>
     <string name="title_import_th2">Therion th2 文件</string>
-    <!-- TODO string name="title_infos">Surveys info</string -->
+    <string name="title_infos">测量信息</string>
     <string name="title_graph_paper">方格比例 1:100</string>
     <string name="graph_paper_scale">将线调整为 5 厘米长</string>
 
@@ -1359,8 +1359,8 @@
   <string name="pref_palettes_summary">启用附加调色板</string>
   <string name="pref_packet_logger_title">日志包</string>
   <string name="pref_packet_logger_summary">启用日志包</string>
-  <!-- TODO string name="pref_th2_edit_title">Sketch editing</string -->
-  <!-- TODO string name="pref_th2_edit_summary">Enable sketch editing</string -->
+  <string name="pref_th2_edit_title">草图编辑</string>
+  <string name="pref_th2_edit_summary">启用草图编辑</string>
 
   <string name="pref_bezier_step_title">点间距</string>
   <string name="pref_bezier_step_summary">最大点间距(多条曲线) [m]</string>
@@ -1468,10 +1468,10 @@
   <string name="pref_firmware_sanity_summary">Enforce固件健康检查</string>
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">CRS 名称,类属于Proj4</string>
-  <!-- TODO string name="pref_neg_altitude_title">Neg. altitudes</string -->
-  <!-- TODO string name="pref_neg_altitude_summary">Allow negative altitudes</string -->
-  <!-- TODO string name="pref_edit_altitude_title">Editable altitude</string -->
-  <!-- TODO string name="pref_edit_altitude_summary">Allow editable altitudes</string -->
+  <string name="pref_neg_altitude_title">负海拔高度</string>
+  <string name="pref_neg_altitude_summary">允许负海拔高度</string>
+  <string name="pref_edit_altitude_title">可编辑海拔高度</string>
+  <string name="pref_edit_altitude_summary">允许可编辑海拔高度</string>
   <!-- TODO string name="pref_fine_location_title">Fine location [s]</string -->
   <!-- TODO string name="pref_fine_location_summary">Fine location time [s]</string -->
   <!-- TODO string name="pref_geoimport_app_title">Geopoint app</string -->
@@ -1482,8 +1482,8 @@
   <string name="pref_bric_mode_summary">BRIC 操作模式</string>
   <string name="pref_bric_zero_length_title">BRIC 零点测射</string>
   <string name="pref_bric_zero_length_summary">记录BRIC 零长度测射</string>
-  <!-- TODO string name="pref_sap5_bit16_bug_title">SAP5 bit-16 bug</string -->
-  <!-- TODO string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 bug workaround</string -->
+  <string name="pref_sap5_bit16_bug_title">SAP5 bit-16 bug</string>
+  <string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 bug解决方案</string>
 
   <string name="pref_plot_screen_title">草图</string>
   <string name="pref_tool_line_title">线</string>
@@ -1708,8 +1708,8 @@
   <string name="pref_full_affine_summary">启用草图仿射转换</string>
   <string name="pref_loopClosure_title">圈测闭合</string>
   <string name="pref_loopClosure_summary">圈测闭合错误补偿</string>
-  <!-- TODO string name="pref_loop_thr_title">Loop threshold</string -->
-  <!-- TODO string name="pref_loop_thr_summary">Loop compensation threshold</string -->
+  <string name="pref_loop_thr_title">圈测阈值</string>
+  <string name="pref_loop_thr_summary">圈测补偿阈值</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Estimate splay extend</string -->
   <string name="pref_swapLR_title">罗盘角转换左右</string>
@@ -1873,20 +1873,20 @@
    <string name="firmware_file_exists">现有固件文件</string>
    <string name="firmware_file_missing">固件文件缺失</string>
    <!-- UNUSED string name="ask_dump">转储固件?</string -->
-   <string name="ask_upload">上载固件?</string>
-   <!-- TODO string name="ask_download">Download firmware? (be patient)</string -->
+   <string name="ask_upload">上传固件?</string>
+   <string name="ask_download">下载固件? (请耐心等待)</string>
    <string name="ask_upload_not_compatible">固件文件不正确.\n强行上载??</string>
    <string name="firmware_upload_no_sign">DistoX硬件检查失败</string>
    <string name="firmware_upload_bad_sign">不兼容的DistoX硬件</string>
    <!-- UNUSED string name="firmware_file_dumped">保存固件文件 %1$s size %2$d</string -->
    <string name="firmware_file_uploaded">升级固件文件 %1$s written %2$d / %3$d</string>
-   <!-- TODO string name="firmware_file_downloaded">Downloaded firmware file %1$s read %2$d</string -->
+   <string name="firmware_file_downloaded">已下载固件文件 %1$s read %2$d</string>
    <!-- UNUSED string name="firmware_file_dump_fail">失败的固件转储</string -->
    <string name="firmware_file_upload_fail">固件上传失败</string>
-   <!-- TODO string name="firmware_file_download_fail">Failed firmware download</string -->
+   <string name="firmware_file_download_fail">固件下载失败</string>
    <string name="firmware_not_supported">设备不支持固件功能</string>
-   <!-- TODO string name="firmware_uploaded">%1$s firmware: uploaded %2$d</string -->
-   <!-- TODO string name="firmware_downloaded">%1$s firmware: downloaded %2$d</string -->
+   <string name="firmware_uploaded">%1$s 固件: 已上传 %2$d</string>
+   <string name="firmware_downloaded">%1$s 固件: 已下载 %2$d</string>
    
 
     <string name="project">项目 %1$s</string>
@@ -1910,7 +1910,7 @@
     <!-- UNUSED string name="menu_new">新建</string -->
     <!-- UNUSED string name="menu_equate">添加相同</string -->
     <!-- UNUSED string name="menu_equates">相同</string -->
-    <!-- TODO string name="menu_open">打开</string -->
+    <string name="menu_open">打开</string>
     <string name="menu_save">保存</string>
 
     <!-- UNUSED string name="overwrite">重写</string -->
@@ -1989,11 +1989,11 @@
     <string name="info_east_value">W %1$.1f E %2$.1f</string>
     <string name="info_north_value">S %1$.1f N %2$.1f</string>
     <string name="info_z_value">%1$.1f  %2$.1f</string>
-    <!-- TODO string name="info_origin_value">x %1$.0f y %2$.0f z %3$.0f</string -->
-    <!-- TODO string name="info_origin_none">undefined</string -->
-    <!-- TODO string name="info_lonlat_geovalue">lon %1$.7f lat %2$.7f</string -->
-    <!-- TODO string name="info_lonlat_prjvalue">lon %1$.1f lat %2$.1f</string -->
-    <!-- TODO string name="info_radii_value">EW %1$.1f NS %2$.1f</string -->
+    <string name="info_origin_value">x %1$.0f y %2$.0f z %3$.0f</string>
+    <string name="info_origin_none">未定义</string>
+    <string name="info_lonlat_geovalue">lon %1$.7f lat %2$.7f</string>
+    <string name="info_lonlat_prjvalue">经度 %1$.1f 纬度 %2$.1f</string>
+    <string name="info_radii_value">EW %1$.1f NS %2$.1f</string>
 
     <string name="legs_surface">表面</string>
     <string name="legs_duplicate">副本</string>
@@ -2027,7 +2027,7 @@
     <string name="surface_north">北</string>
     <!-- NO string name="dem_file">%1$s</string -->
     <string name="dem_load">载入 DEM</string>
-    <!-- TODO string name="dem_loading">Loading surface ... please wait</string -->
+    <string name="dem_loading">加载表面中 ... 请等待</string>
     <string name="dem_failed">DEM载入失败</string>
     <string name="dem_ok">读取 DEM 数据</string>
     <string name="dem">DEM</string>
@@ -2066,10 +2066,10 @@
     <string name="cave_length"> 洞穴长度: %1$.1f %2$.1f %3$.1f</string>
     <string name="cave_angle"> 方位角: %1$.0f  Clino: %2$.0f</string>
 
-  <!-- TODO string name="east">E</string -->
-  <!-- TODO string name="north">N</string -->
-  <!-- TODO string name="west">W</string -->
-  <!-- TODO string name="south">S</string -->
+  <string name="east">东</string>
+  <string name="north">北</string>
+  <string name="west">西</string>
+  <string name="south">南</string>
 
     <!-- UNUSED string name="SURVEYS">S U R V E Y S</string -->
     <string name="INFO"> 信 息 </string>
@@ -2135,7 +2135,7 @@
     <!-- UNUSED string name="warning_no_file">警告: 未发现 3d 文件</string -->
     <!-- UNUSED string name="warning_empty_cwd">警告: 空基本路径</string -->
     <string name="warning_no_parent">警告: 无法转到父文件夹</string>
-    <!-- TODO string name="warning_nogrant_camera">Camera permission has not been granted</string -->
+    <string name="warning_nogrant_camera">相机权限没有被允许</string>
     <string name="no_permissions">没有所需权限，应用程序无法运行</string>
 
     <!-- UNUSED string name="done_fractals">完成分形会变暗</string -->
