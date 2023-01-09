@@ -76,6 +76,9 @@ import android.content.DialogInterface.OnDismissListener;
 import android.content.res.Resources;
 import android.content.res.Configuration;
 import android.content.pm.PackageManager;
+
+import android.provider.Settings;
+
 import android.net.Uri;
 
 import android.widget.TextView;
@@ -795,8 +798,8 @@ public class MainWindow extends Activity
   static private boolean done_init_dialogs = false;
 
   /** display the init dialogs
-   * @param say_dialog_r  whether to show the dialog R - this seems to be always false
-   * @note called also by DialogR
+   * @param say_dialog_r  whether to show the dialog R
+   * @note called also by DialogR, with say_dialog_r = false
    */
   void showInitDialogs( boolean say_dialog_r )
   {
@@ -805,15 +808,15 @@ public class MainWindow extends Activity
     String app_dir = TDInstance.context.getExternalFilesDir( null ).getPath();
     // TDLog.v( "INIT dialogs: app_dir <" + app_dir + ">" );
     say_dialogR = say_dialog_r;
-    // if ( false && say_dialogR ) { // FIXME_R
-    //   // TDLog.v( "DIALOG R: delaying init environment second");
-    //   (new DialogR( this, this)).show();
-    //   return;
-    // } 
+    if ( say_dialogR ) { // FIXME_R
+      TDLog.v( "DIALOG R: delaying init environment second");
+      (new DialogR( this, this)).show();
+      return;
+    } 
     done_init_dialogs = true;
     // TDLog.v( "INIT environment second");
     // boolean ok_folder = 
-    TopoDroidApp.initEnvironmentSecond( say_dialogR ); // always true
+    TopoDroidApp.initEnvironmentSecond( );
 
     // TDLog.v( "INIT environment second done " + ok_folder );
     // if ( TDVersion.targetSdk() > 29 ) { // FIXME_TARGET_29
@@ -1140,7 +1143,7 @@ public class MainWindow extends Activity
         if ( TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime ) == 0 ) {
           mApp.initEnvironmentFirst( );
           // TDLog.v("MAIN show init dialogs [2]");
-          showInitDialogs( false /* ! TopoDroidApp.hasTopoDroidDatabase() */ );
+          showInitDialogs( true ); // ! TopoDroidApp.hasTopoDroidDatabase()
           // resetButtonBar();
         // } else {  // the followings are delayed after the permissions have been granted
         //   mApp.initEnvironmentFirst( );
@@ -1187,35 +1190,29 @@ public class MainWindow extends Activity
           @Override public void onClick( DialogInterface dialog, int btn ) { finish(); }
         }, 
         null
-        // new DialogInterface.OnClickListener() {
-        //   @Override public void onClick( DialogInterface dialog, int btn ) {
-        //     new WebView
-        //   }
-        // }
       );
-      return;
-    }
+    } else {
+      // FIXME added three calls - but they should not be necessary ...
+      mListView.invalidate();
+      mMenuImage.invalidate();
+      updateDisplay( ); // this was already done
+      ((ListView) findViewById(R.id.td_list)).invalidate();
 
-    // FIXME added three calls - but they should not be necessary ...
-    mListView.invalidate();
-    mMenuImage.invalidate();
-    updateDisplay( ); // this was already done
-    ((ListView) findViewById(R.id.td_list)).invalidate();
+      // TDLog.v( "onResume runs on " + TDLog.threadId() );
 
-    // TDLog.v( "onResume runs on " + TDLog.threadId() );
+      // TDLog.Profile("TDActivity onResume");
+      // TDLog.Log( TDLog.LOG_MAIN, "onResume " );
+      mApp.resumeComm();
 
-    // TDLog.Profile("TDActivity onResume");
-    // TDLog.Log( TDLog.LOG_MAIN, "onResume " );
-    mApp.resumeComm();
+      // restoreInstanceFromFile();
 
-    // restoreInstanceFromFile();
-
-    // This is necessary: switching display off/on there is the call sequence
-    //    [off] onSaveInstanceState
-    //    [on]  onResume
-    if ( TopoDroidApp.mCheckManualTranslation ) {
-      TopoDroidApp.mCheckManualTranslation = false;
-      checkManualTranslation();
+      // This is necessary: switching display off/on there is the call sequence
+      //    [off] onSaveInstanceState
+      //    [on]  onResume
+      if ( TopoDroidApp.mCheckManualTranslation ) {
+        TopoDroidApp.mCheckManualTranslation = false;
+        checkManualTranslation();
+      }
     }
   }
 
@@ -1452,13 +1449,13 @@ public class MainWindow extends Activity
   @Override
   public void onRequestPermissionsResult( int code, final String[] perms, int[] results )
   {
-    // TDLog.v("PERM " + "MAIN perm request result " + results.length );
+    TDLog.v("PERM " + "MAIN perm request result " + results.length );
     if ( code == TDandroid.REQUEST_PERMISSIONS ) {
       if ( results.length > 0 ) {
         int granted = 0;
 	for ( int k = 0; k < results.length; ++ k ) {
 	  TDandroid.GrantedPermission[k] = ( results[k] == PackageManager.PERMISSION_GRANTED );
-	  // TDLog.v("PERM " + "MAIN perm " + k + " perms " + perms[k] + " result " + results[k] );
+	  TDLog.v("PERM " + "MAIN perm " + k + " perms " + perms[k] + " result " + results[k] );
 	}
         ++ mRequestPermissionTime;
         int not_granted = TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime );

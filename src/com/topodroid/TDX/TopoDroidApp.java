@@ -1030,11 +1030,10 @@ public class TopoDroidApp extends Application
 
   static boolean done_init_env_second = false;
 
-  /** second step of environment initialization
-   * @param with_dialog_r   whether the app has dialog R
+  /** second step of environment initialization: CWD and paths
    * @return true if successful - can fail if cannot open the database
    */
-  static  boolean initEnvironmentSecond( boolean with_dialog_r )
+  static  boolean initEnvironmentSecond( )
   {
     if ( done_init_env_second ) return true;
     done_init_env_second = true;
@@ -1069,6 +1068,10 @@ public class TopoDroidApp extends Application
   static boolean done_init_env_first = false;
 
   /** initialize the environment, first step
+   *  - device DB helper, 
+   *  - primary preferences, 
+   *  - version, symbols, firmwares, translated user manpages
+   *  - data connection
    */
   void initEnvironmentFirst(  ) // TDPrefHelper prefHlp 
   {

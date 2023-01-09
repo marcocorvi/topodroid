@@ -58,6 +58,7 @@ public class TDandroid
   final static public boolean BELOW_API_29 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.Q );
   final static public boolean BELOW_API_30 = ( Build.VERSION.SDK_INT < 30 ) ; // Build.VERSION_CODES.R );
   final static public boolean BELOW_API_31 = ( Build.VERSION.SDK_INT < 31 ) ; // Build.VERSION_CODES.S );
+  final static public boolean BELOW_API_33 = ( Build.VERSION.SDK_INT < 32 ) ; // FIXME 33
 
   // final static public boolean ABOVE_API_16 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLYBEAN );
   final static public boolean ABOVE_API_21 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP );
@@ -71,6 +72,7 @@ public class TDandroid
   final static public boolean AT_LEAST_API_23 = ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.M );
   final static public boolean AT_LEAST_API_24 = ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ); // Android-6 Nougat
   final static public boolean AT_LEAST_API_31 = ( Build.VERSION.SDK_INT >= 31 ); 
+  final static public boolean AT_LEAST_API_33 = ( Build.VERSION.SDK_INT >= 32 ); // FIXME 33
 
   /** permissions string codes
    */ 
@@ -239,7 +241,9 @@ public class TDandroid
   {
     if ( BELOW_API_30 ) return true;
     // return ( context.checkSelfPermission( mPermissionManageExternalStorage ) == PackageManager.PERMISSION_GRANTED );
-    return Environment.isExternalStorageManager();
+    boolean ret = Environment.isExternalStorageManager();
+    TDLog.v("MANAGE EXTERNAL STORAGE: " + ret );
+    return ret;
   }
 
   /** request external storage access 

@@ -102,7 +102,8 @@ public class TDPath
   */
 
   // private static String PATH_CB_DIR  = EXTERNAL_STORAGE_PATH;
-  private static String PATH_CB_DIR   = TDFile.getExternalDir(null).getPath(); // fullpath
+  // FIXME PRIVATE_STORAGE
+  private static String PATH_CB_DIR   = TDandroid.BELOW_API_33 ? TDFile.getExternalDir(null).getPath() : "TDX"; // fullpath (< 33) or TDX (for 33+)
   private static String PATH_CW_DIR   = PATH_CB_DIR + "/TopoDroid";            // fullpath
 
   private static String PATH_ZIP      = PATH_CW_DIR + "/zip";

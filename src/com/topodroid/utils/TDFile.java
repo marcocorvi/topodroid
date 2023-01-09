@@ -369,12 +369,16 @@ public class TDFile
   private static File getCBD( String type, boolean create )
   {
     File ret = null;
-    String documents = ( TDandroid.BELOW_API_19 )? "Documents" : Environment.DIRECTORY_DOCUMENTS;
-    if ( type == null ) {
-      ret = new File( Environment.getExternalStoragePublicDirectory( documents ), "TDX" );
+    if ( TDandroid.BELOW_API_33 ) { // FIXME PRIVATE_STORAGE
+      String documents = ( TDandroid.BELOW_API_19 )? "Documents" : Environment.DIRECTORY_DOCUMENTS;
+      if ( type == null ) {
+        ret = new File( Environment.getExternalStoragePublicDirectory( documents ), "TDX" );
+      } else {
+        ret = new File( Environment.getExternalStoragePublicDirectory( documents ), "TDX/" + type );
+      } 
     } else {
-      ret = new File( Environment.getExternalStoragePublicDirectory( documents ), "TDX/" + type );
-    } 
+      ret = getPrivateDir( type ); // FIXME do i need to create ?
+    }
     if ( create && ret != null && ! ret.exists() ) {
       TDLog.v( "mkdirs " + ret.getPath() + " type: " + ((type == null)? "null" : type) + " create: " + create );
       ret.mkdirs();
