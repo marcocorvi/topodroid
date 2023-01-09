@@ -128,6 +128,8 @@ public class FixedInfo extends MagLatLong
       cs_h_geo = h_geo_cs;
       cs_n_dec = (n_dec >= 0)? n_dec : 0;
       convergence = conv;
+      mToUnits  = m_to_units;
+      mToVUnits = m_to_vunits;
     }
   }
 

@@ -8,6 +8,8 @@
     <!-- UNUSED string name="string_false">неверно</string -->
     <!-- UNUSED string name="string_true">верно</string -->
 
+    <!-- DO NOT TRANSLATE string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string -->
+
     <!-- UNUSED string name="desc_user_man">Руководство пользователя</string -->
     <!-- UNUSED string name="desc_points">Точки</string -->
     <!-- UNUSED string name="desc_lines">Линии</string -->
@@ -1352,6 +1354,8 @@
   <string name="pref_palettes_summary">Включить дополнительные наборы условных знаков</string>
   <string name="pref_packet_logger_title">Журнал пакетов</string>
   <string name="pref_packet_logger_summary">Включить запись журнала пакетов DistoX</string>
+    <!-- TODO <string name="pref_th2_edit_title">Sketch editing</string -->
+    <!-- TODO string name="pref_th2_edit_summary">Enable sketch editing</string -->
 
   <string name="pref_bezier_step_title">Макс. расстояние между точками</string>
   <string name="pref_bezier_step_summary">Маскисмальное расстояние между точками при апроксимации кривых полилиниями [м]</string>
@@ -1506,6 +1510,8 @@
   <string name="pref_splay_dash_color_summary">Цвет сплеев отображаемых пунктирной линией</string>
   <string name="pref_splay_dot_color_title">Цвет точеных сплеев</string>
   <string name="pref_splay_dot_color_summary">Цвет сплеев отображаемых точечной линией</string>
+  <!-- TODO string name="pref_splay_latest_color_title">Splay latest color</string -->
+  <!-- TODO string name="pref_splay_latest_color_summary">Color of latest splay lines</string -->
 
   <!-- UNUSED string name="pref_data_backup_title">Авто-экспорт данных</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Автоматический экспорт данных (требуется установить формат по умолчанию)</string -->

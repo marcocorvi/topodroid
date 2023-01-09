@@ -427,6 +427,7 @@ public class TDSetting
   public static float   mSectionSplay  = 60;
   public static int     mSplayDashColor = TDColor.SPLAY_LIGHT;
   public static int     mSplayDotColor  = TDColor.SPLAY_LIGHT;
+  public static int     mSplayLatestColor = TDColor.SPLAY_LATEST;
   public static int     mStationNames  = 0;        // type of station names (0: alpha, 1: number)
   public static int     mSplayAlpha    = 80;       // splay alpha [default 80 out of 100]
   // public static boolean mSplayAsDot    = false;    // draw splays as dots
@@ -1225,8 +1226,10 @@ public class TDSetting
     mSectionSplay   = tryFloat( prefs, keyGPlotSplay[ 6],      defGPlotSplay[ 6] );  // DISTOX_SECTION_SPLAY
     mSplayDashColor = tryColor( prefs, keyGPlotSplay[ 7],      defGPlotSplay[ 7] );  // DISTOX_SPLAY_DASH_COLOR
     BrushManager.setSplayDashColor( mSplayDashColor );
-    mSplayDotColor  = tryColor( prefs, keyGPlotSplay[ 8],      defGPlotSplay[ 8] );  // DISTOX_SPLAY_DASH_COLOR
+    mSplayDotColor  = tryColor( prefs, keyGPlotSplay[ 8],      defGPlotSplay[ 8] );  // DISTOX_SPLAY_DOT_COLOR
     BrushManager.setSplayDotColor( mSplayDotColor );
+    mSplayLatestColor  = tryColor( prefs, keyGPlotSplay[ 9],   defGPlotSplay[ 9] );  // DISTOX_SPLAY_LATEST_COLOR
+    BrushManager.setSplayLatestColor( mSplayLatestColor );
     // TDLog.v("SETTING load secondary GEEK plot done");
 
     String[] keyGLine = TDPrefKey.GEEKLINE;
@@ -1854,12 +1857,13 @@ public class TDSetting
       if ( mSectionSplay > 91 ) { mSectionSplay = 91; ret = TDString.NINETYONE; }
     } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SPLAY_DASH_COLOR
       mSplayDashColor = tryColorValue( hlp, k, v, def[ 7] ); 
-      // TDLog.v("dash color " + mSplayDashColor );
       BrushManager.setSplayDashColor( mSplayDashColor );
     } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_SPLAY_DOT_COLOR
       mSplayDotColor = tryColorValue( hlp, k, v, def[ 8] ); 
-      // TDLog.v("dot color " + mSplayDotColor );
       BrushManager.setSplayDotColor( mSplayDotColor );
+    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_SPLAY_LATEST_COLOR
+      mSplayLatestColor = tryColorValue( hlp, k, v, def[ 9] ); 
+      BrushManager.setSplayLatestColor( mSplayLatestColor );
     } else {
       TDLog.Error("missing GEEK_SPLAY key: " + k );
     }
@@ -3045,8 +3049,8 @@ public class TDSetting
       pw.printf(Locale.US, "Backup: nr %d, interval %d\n", mBackupNumber, mBackupInterval );
       pw.printf(Locale.US, "XSections: shared %c, auto-export %c, point %c\n", tf(mSharedXSections), tf(mAutoXSections), tf(mAutoSectionPt) );
       pw.printf(Locale.US, "Actions: snap %c, curve %c, straight %c %.1f\n", tf(mLineSnap), tf(mLineCurve), tf(mLineStraight), mReduceAngle );
-      pw.printf(Locale.US, "Splay: alpha %d, color %d, splay-dash %d, vert %.1f, horiz %.1f, section %.1f color %d %d\n",
-        mSplayAlpha, mDiscreteColors, mDashSplay, mVertSplay, mHorizSplay, mSectionSplay, mSplayDashColor, mSplayDotColor );
+      pw.printf(Locale.US, "Splay: alpha %d, color %d, splay-dash %d, vert %.1f, horiz %.1f, section %.1f color %d %d %d\n",
+        mSplayAlpha, mDiscreteColors, mDashSplay, mVertSplay, mHorizSplay, mSectionSplay, mSplayDashColor, mSplayDotColor, mSplayLatestColor );
       pw.printf(Locale.US, "Accuracy: G %.2f, M %.2f, dip %.2f, sibling %.2f\n", mAccelerationThr, mMagneticThr, mDipThr, mSiblingThr );
       // pw.printf(Locale.US, "Sketch: type %d, size %.2f, extrude %.2f\n", mSketchModelType, mSketchSideSize, mDeltaExtrude );
       // AUTOWALLS
@@ -3778,6 +3782,9 @@ public class TDSetting
               if ( vals.length > 15 ) {
                 mSplayDashColor = getInt( vals, 14, 0 );   setPreference( editor, "DISTOX_SPLAY_DASH_COLOR",  mSplayDashColor );
                 mSplayDotColor  = getInt( vals, 15, 0 );   setPreference( editor, "DISTOX_SPLAY_DOT_COLOR",   mSplayDotColor );
+                if ( vals.length > 17 ) {
+                  mSplayLatestColor  = getInt( vals, 17, 0 ); setPreference( editor, "DISTOX_SPLAY_LATEST_COLOR",   mSplayLatestColor ); 
+                }
               }
             }
           }

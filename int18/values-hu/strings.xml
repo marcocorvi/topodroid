@@ -8,6 +8,8 @@
     <!-- UNUSED string name="string_false">hamis</string -->
     <!-- UNUSED string name="string_true">igaz</string -->
 
+    <!-- DO NOT TRANSLATE string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string -->
+
     <!-- UNUSED string name="desc_user_man">Felhasználói kézikönyv</string -->
     <!-- UNUSED string name="desc_points">Pontok</string -->
     <!-- UNUSED string name="desc_lines">Vonalak</string -->
@@ -1360,6 +1362,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_palettes_summary">Hozzáadott paletták engedélyezése</string>
   <string name="pref_packet_logger_title">Csomag naplózás</string>
   <string name="pref_packet_logger_summary">Csomag naplózás engedélyezése</string>
+    <!-- TODO <string name="pref_th2_edit_title">Sketch editing</string -->
+    <!-- TODO string name="pref_th2_edit_summary">Enable sketch editing</string -->
 
   <string name="pref_bezier_step_title">Pont távolság</string>
   <string name="pref_bezier_step_summary">Pontok közötti távolság az exportált vonalon [m]</string>
@@ -1515,6 +1519,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_splay_dash_color_summary">Szaggatott vonal színe</string>
   <string name="pref_splay_dot_color_title">Sün pontozott szín</string>
   <string name="pref_splay_dot_color_summary">Pontozott vonal színe</string>
+  <!-- TODO string name="pref_splay_latest_color_title">Splay latest color</string -->
+  <!-- TODO string name="pref_splay_latest_color_summary">Color of latest splay lines</string -->
 
   <!-- UNUSED string name="pref_data_backup_title">Adat autómatikus export</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Automatkus adat export(alapértelmezett formátumra van szükség)</string -->

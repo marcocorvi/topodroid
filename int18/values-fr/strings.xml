@@ -10,7 +10,8 @@
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->    
     
-    <!-- OK <string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string> --> 
+    <!-- DO NOT TRANSLATE string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string -->
+ 
     <!-- UNUSED string name="target_sdk" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nFinish ?</string -->
     <!-- UNUSED string name="target_sdk_stale" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nThis version cannot access the old folder and must stop.\nSee http://marcocorvi.altervista.org/TopoDroidAndAndroid11.html.</string -->
 
@@ -1366,8 +1367,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_palettes_summary">Activer des palettes supplémentaires</string>
     <string name="pref_packet_logger_title">Journalisation des paquets</string>
     <string name="pref_packet_logger_summary">Activer la journalisation des paquets de données</string>
-    <!-- OK <string name="pref_th2_edit_title" translatable="false">Sketch editing</string>
-    <string name="pref_th2_edit_summary" translatable="false">Enable sketch editing</string> -->
+    <!-- TODO <string name="pref_th2_edit_title">Sketch editing</string -->
+    <!-- TODO string name="pref_th2_edit_summary">Enable sketch editing</string -->
   
     <string name="pref_bezier_step_title">Espacement des points</string>
     <string name="pref_bezier_step_summary">Distance entre les points lors de l\'export ligne [m]</string>
@@ -1523,6 +1524,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_splay_dash_color_summary">Couleur des lignes en tirets</string>
     <string name="pref_splay_dot_color_title">Couleur visées habillage pointillé</string>
     <string name="pref_splay_dot_color_summary">Couleur des lignes pointillé</string>
+  <!-- TODO string name="pref_splay_latest_color_title">Splay latest color</string -->
+  <!-- TODO string name="pref_splay_latest_color_summary">Color of latest splay lines</string -->
 
     <!-- UNUSED string name="pref_data_backup_title">Auto-export des données</string -->
     <!-- UNUSED string name="pref_data_backup_summary">Export automatique des données (nécessite le format par défaut)</string -->

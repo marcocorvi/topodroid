@@ -1367,8 +1367,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_palettes_summary">Enable additional palettes</string>
   <string name="pref_packet_logger_title">Packets log</string>
   <string name="pref_packet_logger_summary">Enable packets logging</string>
-  <string name="pref_th2_edit_title" translatable="false">Sketch editing</string>
-  <string name="pref_th2_edit_summary" translatable="false">Enable sketch editing</string>
+  <string name="pref_th2_edit_title">Sketch editing</string>
+  <string name="pref_th2_edit_summary">Enable sketch editing</string>
 
   <string name="pref_bezier_step_title">Point spacing</string>
   <string name="pref_bezier_step_summary">Max. point spacing (polyline approx. of curves) [m]</string>
@@ -1521,9 +1521,11 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_section_splay_title">Splay dash angle-threshold</string>
   <string name="pref_section_splay_message">Minimum angle with the section plane for dashed splays</string>
   <string name="pref_splay_dash_color_title">Splay dash color</string>
-  <string name="pref_splay_dash_color_summary">Color of dashed lines</string>
+  <string name="pref_splay_dash_color_summary">Color of dashed splay lines</string>
   <string name="pref_splay_dot_color_title">Splay dot color</string>
-  <string name="pref_splay_dot_color_summary">Color of dotted lines</string>
+  <string name="pref_splay_dot_color_summary">Color of dotted splay lines</string>
+  <string name="pref_splay_latest_color_title">Splay latest color</string>
+  <string name="pref_splay_latest_color_summary">Color of latest splay lines</string>
   
   <!-- UNUSED string name="pref_data_backup_title">Data auto-export</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Automatic data export (need default format)</string -->

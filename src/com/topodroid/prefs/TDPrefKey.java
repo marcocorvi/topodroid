@@ -1567,6 +1567,7 @@ public class TDPrefKey
     "DISTOX_SECTION_SPLAY",   // splays with angle over this are shown with dashed/dotted line
     "DISTOX_SPLAY_DASH_COLOR",      // color for dash splay 
     "DISTOX_SPLAY_DOT_COLOR",       // color for dot splay 
+    "DISTOX_SPLAY_LATEST_COLOR",    // color for latest splay 
   };
 
   public static int[] GEEKsplaytitle = {
@@ -1580,6 +1581,7 @@ public class TDPrefKey
     R.string.pref_section_splay_title,
     R.string.pref_splay_dash_color_title,
     R.string.pref_splay_dot_color_title,
+    R.string.pref_splay_latest_color_title,
   };
 
   public static int[] GEEKsplaydesc = {
@@ -1593,6 +1595,7 @@ public class TDPrefKey
     R.string.pref_section_splay_message, 
     R.string.pref_splay_dash_color_summary,
     R.string.pref_splay_dot_color_summary,
+    R.string.pref_splay_latest_color_summary,
   };
 
   public static String[] GEEKsplaydef = {
@@ -1606,6 +1609,7 @@ public class TDPrefKey
     TDString.SIXTY,
     "7190271", // "4285380351", // "0xff6db6ff", // BLUE
     "7190271", 
+    "6737151", // "0xff66ccff", // TDColor.SPLAY_LATEST
   };
 
   // ----------------------------------- 3D ----------------------------------

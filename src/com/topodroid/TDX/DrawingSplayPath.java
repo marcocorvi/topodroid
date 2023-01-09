@@ -357,7 +357,7 @@ public class DrawingSplayPath extends DrawingPath
     if ( mBlock != null ) {
       if ( TDSetting.mSplayColor ) {
         if ( mBlock.isRecent( ) ) { 
-          canvas.drawPath( path, BrushManager.lightBluePaint );
+          canvas.drawPath( path, BrushManager.paintSplayLatest );
           return;
         }
         if ( TDLevel.overExpert ) { // splay user-color only at tester level

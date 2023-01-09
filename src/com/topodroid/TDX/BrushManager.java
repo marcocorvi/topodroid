@@ -253,6 +253,7 @@ public class BrushManager
   public static final Paint paintSplayXBdot   = makePaint( TDColor.SPLAY_LIGHT,   WIDTH_CURRENT, Paint.Style.STROKE);
   public static final Paint paintSplayXVdash  = makePaint( TDColor.SPLAY_NORMAL,  WIDTH_CURRENT, Paint.Style.STROKE);
   public static final Paint paintSplayXVdot   = makePaint( TDColor.SPLAY_NORMAL,  WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint paintSplayLatest  = makePaint( TDColor.SPLAY_LATEST,  WIDTH_CURRENT, Paint.Style.STROKE);
 
   public static final Paint fixedGridPaint    = makePaint( TDColor.DARK_GRID,   WIDTH_FIXED, Paint.Style.STROKE);
   public static final Paint fixedGrid10Paint  = makePaint( TDColor.GRID,        WIDTH_FIXED, Paint.Style.STROKE);
@@ -437,6 +438,14 @@ public class BrushManager
     // }
   }
 
+  /** set the latest-splay color
+   * @param color   color (rrggbb)
+   */
+  static public void setSplayLatestColor( int color )
+  {
+    paintSplayLatest.setColor( color );
+    paintSplayLatest.setAlpha( mAlpha );
+  }
 
   /** set the splay opacity
    * @param alpha   opacity, in [0,100], 0=transparent

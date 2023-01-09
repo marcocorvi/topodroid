@@ -700,9 +700,9 @@ public class TDExporter
     if ( convergence && origin.hasCSCoords() ) {
       lat = origin.cs_lat;
       lng = origin.cs_lng;
-      h_geo = origin.cs_h_geo;
-      mERadius = 1.0;
-      mSRadius = 1.0;
+      h_geo = origin.cs_h_geo * origin.mToVUnits;
+      mERadius = origin.mToUnits;
+      mSRadius = origin.mToUnits;
     } else {
       lat = origin.lat;
       lng = origin.lng;
