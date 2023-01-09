@@ -338,7 +338,7 @@ public class SurveyWindow extends Activity
       doSetDeclination( mApp_mData.getSurveyDeclination( TDInstance.sid ) );
       mApp_mData.countAllPhotos( TDInstance.sid, TDStatus.NORMAL );
     }
-    if ( nrPhoto == 0 ) {
+    if ( nrPhoto == 0 && TDLevel.overNormal ) {
       TDandroid.setButtonBackground( mButton1[ BTN_PHOTO ], MyButton.getButtonBackground( this, getResources(), R.drawable.iz_picture_no ) );
       mButton1[ BTN_PHOTO ].setOnClickListener( null );
     }

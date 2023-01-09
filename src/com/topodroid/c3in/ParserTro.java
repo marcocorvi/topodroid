@@ -96,7 +96,7 @@ public class ParserTro extends TglParser
         double z = Double.parseDouble( params[3] );
         // TDLog.v("TRO XYZ " + x + " " + y + " " + z );
         String vt_cs = params[4]; // coords system: must be present in VisualTopo registry
-        fixes.add( new Cave3DFix( entrance, x, y, z, new Cave3DCS( vt_cs ) ) ); // no WGS84
+        fixes.add( new Cave3DFix( entrance, x, y, z, new Cave3DCS( vt_cs ), 1, 1 ) ); // no WGS84 - M_TO_UNITS = 1
         return true;
       } catch ( NumberFormatException e ) {
         TDLog.Error("Non-number param");
@@ -343,7 +343,7 @@ public class ParserTro extends TglParser
     if ( shots.size() == 0 ) return;
     if ( fixes.size() == 0 ) {
       Cave3DShot sh = shots.get( 0 );
-      fixes.add( new Cave3DFix( sh.from, 0.0f, 0.0f, 0.0f, null ) ); // no WGS84
+      fixes.add( new Cave3DFix( sh.from, 0.0f, 0.0f, 0.0f, null, 1, 1 ) ); // no WGS84 - M_TO_UNITS = 1
       // TDLog.v( "TRO shots " + shots.size() + " no fixes. starts at " + sh.from );
     }
  

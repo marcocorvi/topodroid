@@ -25,6 +25,8 @@ public class SurveyFixed
   public double mCsLatitude;
   public double mCsGeoidAlt;
   public double mConvergence;
+  public double mToUnits = 1;
+  public double mToVUnits = 1;
 
   // public void log()
   // { 

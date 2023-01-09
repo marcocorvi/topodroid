@@ -34,6 +34,8 @@ public class Cave3DFix extends Vector3D
   public double a_ellip = 0.0; // NOTE ellipsoidic altitude - used to compute radii
   // private double a_geoid = 0.0; // geodetic altitude (not used)
   public boolean hasWGS84;
+  public double mToUnits = 1.0;
+  public double mToVUnits = 1.0;
 
   /** serialize the 3D fix
    * @param dos    output stream
@@ -47,6 +49,8 @@ public class Cave3DFix extends Vector3D
     dos.writeDouble( longitude );
     dos.writeDouble( latitude );
     dos.writeDouble( a_ellip );
+    dos.writeDouble( mToUnits );
+    dos.writeDouble( mToVUnits );
     // dos.writeDouble( a_geoid ); // 20221203 inserted this
   }
 
@@ -64,8 +68,10 @@ public class Cave3DFix extends Vector3D
     double lng   = dis.readDouble( );
     double lat   = dis.readDouble( );
     double h_ell = dis.readDouble( );
+    double m_to_units  = dis.readDouble( ); // NOTE these break backward compatibility
+    double m_to_vunits = dis.readDouble( );
     // double h_geo = dis.readDouble( ); // 20221203 inserted this
-    return new Cave3DFix( name, x, y, z, null, lng, lat, h_ell /*, h_geo */ );
+    return new Cave3DFix( name, x, y, z, null, lng, lat, h_ell /*, h_geo */, m_to_units, m_to_vunits );
   }
     
 
@@ -87,7 +93,8 @@ public class Cave3DFix extends Vector3D
    * @param h_ell WGS84 altitude (ellipsoid)
    * @param h_geo geoid altitude
    */
-  public Cave3DFix( String nm, double e0, double n0, double z0, Cave3DCS cs0, double lng, double lat, double h_ell /* , double h_ell */ )
+  public Cave3DFix( String nm, double e0, double n0, double z0, Cave3DCS cs0, double lng, double lat, double h_ell /* , double h_ell */,
+                    double m_to_units, double m_to_vunits )
   {
     super( e0, n0, z0 );
     name = nm;
@@ -97,6 +104,8 @@ public class Cave3DFix extends Vector3D
     a_ellip   = h_ell;
     // a_geoid   = h_geo;
     hasWGS84  = true;
+    mToUnits  = m_to_units;
+    mToVUnits = m_to_vunits;
   }
 
   /** cstr
@@ -106,7 +115,7 @@ public class Cave3DFix extends Vector3D
    * @param z0   vertical coord
    * @param cs0  coord reference system
    */
-  public Cave3DFix( String nm, double e0, double n0, double z0, Cave3DCS cs0 )
+  public Cave3DFix( String nm, double e0, double n0, double z0, Cave3DCS cs0, double m_to_units, double m_to_vunits )
   {
     // super( e0, n0, z0 );
     // name = nm;
@@ -115,7 +124,7 @@ public class Cave3DFix extends Vector3D
     // latitude  = 0;
     // a_ellip  = 0;
     // // a_geoid  = 0;
-    this( nm, e0, n0, z0, cs0, 0, 0, 0 /*, 0 */ );
+    this( nm, e0, n0, z0, cs0, 0, 0, 0 /*, 0 */, m_to_units, m_to_vunits );
     hasWGS84 = false;
   }
 
