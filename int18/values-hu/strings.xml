@@ -1362,8 +1362,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_palettes_summary">Hozzáadott paletták engedélyezése</string>
   <string name="pref_packet_logger_title">Csomag naplózás</string>
   <string name="pref_packet_logger_summary">Csomag naplózás engedélyezése</string>
-    <!-- TODO <string name="pref_th2_edit_title">Sketch editing</string -->
-    <!-- TODO string name="pref_th2_edit_summary">Enable sketch editing</string -->
+  <string name="pref_th2_edit_title">Vázlat szerkesztés</string>
+  <string name="pref_th2_edit_summary">Vázlat szerkesztés engedélyezéseEnable sketch editing</string>
 
   <string name="pref_bezier_step_title">Pont távolság</string>
   <string name="pref_bezier_step_summary">Pontok közötti távolság az exportált vonalon [m]</string>
@@ -1485,8 +1485,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_bric_mode_summary">BRIC működési mód</string>
   <string name="pref_bric_zero_length_title">BRIC nulla mérés</string>
   <string name="pref_bric_zero_length_summary">BRIC nulla-hossz mérés rögzítése</string>
-  <!-- TODO string name="pref_sap5_bit16_bug_title">SAP5 bit-16 bug</string -->
-  <!-- TODO string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 bug workaround</string -->
+  <string name="pref_sap5_bit16_bug_title">SAP5 bit-16 hiba</string>
+  <string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 hiba megkerülése</string>
 
   <string name="pref_plot_screen_title">VÁZLAT</string>
   <string name="pref_tool_line_title">VONALAK</string>
@@ -1521,8 +1521,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_splay_dash_color_summary">Szaggatott vonal színe</string>
   <string name="pref_splay_dot_color_title">Sün pontozott szín</string>
   <string name="pref_splay_dot_color_summary">Pontozott vonal színe</string>
-  <!-- TODO string name="pref_splay_latest_color_title">Splay latest color</string -->
-  <!-- TODO string name="pref_splay_latest_color_summary">Color of latest splay lines</string -->
+  <string name="pref_splay_latest_color_title">Utolsó sünök színe</string>
+  <string name="pref_splay_latest_color_summary">Utolsó segédmérés vonalak színe</string>
 
   <!-- UNUSED string name="pref_data_backup_title">Adat autómatikus export</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Automatkus adat export(alapértelmezett formátumra van szükség)</string -->
