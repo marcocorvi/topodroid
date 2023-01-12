@@ -634,7 +634,7 @@ public class TDExporter
   /**
    * @param sid      survey ID
    * @param data     database helper
-   * @param h_geo_factor ???
+   * @param h_geo_factor unit conversion factor for vertical coord
    * @param ellipsoid_h  whether to use ellipsoid altitude
    * @param station      ???
    * @param convergence  whether to apply convergence
@@ -658,7 +658,7 @@ public class TDExporter
    * @param sid      survey ID
    * @param data     survey database
    * @param decl     magnetic declination [degree]
-   * @param h_geo_factor ???
+   * @param h_geo_factor unit conversion factor for vertical coord
    * @param ellipsoid_h  whether altitude is ellipsoidic
    * @param convergence  whether to apply the meridian convergence
    */
@@ -689,7 +689,7 @@ public class TDExporter
   /** make the reduced data geolocalized with respect to the given origin
    * @param num          data reductuion
    * @param origin       fix point, origin
-   * @param h_geo_factor ???
+   * @param h_geo_factor unit conversion factor for vertical coords
    * @param ellipsoid_h  whether to use ellipsoid altitude
    * @param convergence  whether to apple meridian convergence
    */
@@ -698,12 +698,13 @@ public class TDExporter
     double lat, lng, h_geo;
     // TDLog.v( "st cnt " + NumStation.cnt + " size " + num.getStations().size() );
     if ( convergence && origin.hasCSCoords() ) {
-      lat = origin.cs_lat;
-      lng = origin.cs_lng;
-      h_geo = origin.cs_h_geo * origin.mToVUnits;
+      lat   = origin.cs_lat   * origin.mToUnits; // CS units
+      lng   = origin.cs_lng   * origin.mToUnits; 
+      h_geo = origin.cs_h_geo; // meters
       mERadius = origin.mToUnits;
       mSRadius = origin.mToUnits;
-    } else {
+      h_geo_factor = (float)origin.mToVUnits; 
+    } else { // WGS84
       lat = origin.lat;
       lng = origin.lng;
       h_geo = ellipsoid_h ? origin.h_ell : origin.h_geo; // KML uses Geoid altitude (unless altitudeMode is set)
@@ -979,22 +980,17 @@ public class TDExporter
         if ( fis.size() > 0 ) {
           ArrayList< FixedStation > fst = new ArrayList<>();
           for ( FixedInfo fi : fis ) {
-            // boolean found = false;
-            // for ( TDNum num : nums ) {
-            //   NumStation ns = num.getStation( fi.name );
-            //   if ( ns != null ) {
-            //     fst.add( new FixedStation( fi, ns ) );
-            //     found = true;
-            //     break;
-            //   }
-            // }
-            // if ( ! found ) {
-                 NumStation ns2 = new NumStation( fi.name ); // SHP export uses only name and (e,s,v) of NumStation 
-                 ns2.e = fi.lng;
-                 ns2.s = fi.lat;
-                 ns2.v = fi.h_geo;
-                 fst.add( new FixedStation( fi, ns2 ) );
-            // }
+            NumStation ns2 = new NumStation( fi.name ); // SHP export uses only name and (e,s,v) of NumStation 
+            if ( fi.hasCSCoords() ) { 
+              ns2.e = fi.cs_lng * fi.mToUnits;  // cs units
+              ns2.s = fi.cs_lat * fi.mToUnits;
+              ns2.v = fi.h_geo  * fi.mToVUnits; // cs vert-units
+            } else {
+              ns2.e = fi.lng; // degrees (WGS84)
+              ns2.s = fi.lat;
+              ns2.v = fi.h_geo; // meters
+            }
+            fst.add( new FixedStation( fi, ns2 ) );
           }
           // if ( fst.size() > 0 ) {
             String filepath = "fixeds";
