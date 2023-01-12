@@ -26,11 +26,11 @@
     <!-- NO string name="cave3d_label">Cave3D</string -->
 
   <string name="r_title">Важное замечание по Android 13+</string>
-  <!-- TODO string name="r_dialog">With Android-13 TopoDroid must store surveys in the app private folder under "Android/data". Beware that this folder is usually deleted when the app is uninstalled. To confirm type\n"%1$s"\nin the field below and tap the button.</string -->
+  <string name="r_dialog">На ОС Android-13 TopoDroid обязан хранить данные съёмок в системной папке приложения "Android/data". Помните, что эта папка обычно удаляется при удалении приложения. Для подтверждения введите type\n"%1$s"\nin и нажмите на кнопку.</string>
   <!-- UNUSED string name="r_checkboxes">Вы должны подтвердить следующее:</string -->
   <!-- UNUSED string name="r_disclaimer">Я согласен с тем, что автор(ы) приложения не несут ответственности за любой ущерб или потерю данных.</string -->
-  <!-- TODO string name="r_continue">CONTINUE</string -->
-  <!-- TODO string name="r_quit">QUIT</string -->
+  <string name="r_continue">ПРОДОЛЖИТЬ</string>
+  <string name="r_quit">ЗАКРЫТЬ</string>
 
     <!-- UNUSED string name="version_ask">Обновление до новой версии TopoDroid.\nВы хотите переустановить инструменты рисования?</string -->
     <!-- REPLACED string name="symbols_ask">Вы хотите переустановить инструменты рисования?</string -->
