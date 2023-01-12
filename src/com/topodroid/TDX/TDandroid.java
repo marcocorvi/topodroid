@@ -57,8 +57,8 @@ public class TDandroid
   final static public boolean BELOW_API_26 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.O );
   final static public boolean BELOW_API_29 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.Q );
   final static public boolean BELOW_API_30 = ( Build.VERSION.SDK_INT < 30 ) ; // Build.VERSION_CODES.R );
-  final static public boolean BELOW_API_31 = ( Build.VERSION.SDK_INT < 31 ) ; // Build.VERSION_CODES.S );
-  final static public boolean BELOW_API_33 = ( Build.VERSION.SDK_INT < 32 ) ; // FIXME 33
+  final static public boolean BELOW_API_31 = ( Build.VERSION.SDK_INT < 31 ) ; // Build.VERSION_CODES.S ); Android-12
+  final static public boolean BELOW_API_33 = ( Build.VERSION.SDK_INT < 33 ) ; // Android-13
 
   // final static public boolean ABOVE_API_16 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLYBEAN );
   final static public boolean ABOVE_API_21 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP );
@@ -71,8 +71,10 @@ public class TDandroid
   final static public boolean AT_LEAST_API_21 = ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP );
   final static public boolean AT_LEAST_API_23 = ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.M );
   final static public boolean AT_LEAST_API_24 = ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ); // Android-6 Nougat
-  final static public boolean AT_LEAST_API_31 = ( Build.VERSION.SDK_INT >= 31 ); 
-  final static public boolean AT_LEAST_API_33 = ( Build.VERSION.SDK_INT >= 32 ); // FIXME 33
+  // final static public boolean AT_LEAST_API_31 = ( Build.VERSION.SDK_INT >= 31 ); 
+  final static public boolean AT_LEAST_API_33 = ( Build.VERSION.SDK_INT >= 33 );
+
+  final static public boolean PRIVATE_STORAGE = false;
 
   /** permissions string codes
    */ 
@@ -126,7 +128,9 @@ public class TDandroid
 
   // private static final int PERM_BT         = 0;
   // private static final int PERM_BT_ADMIN   = 1;
-  private static final int PERM_BT_CONNECT  = 2; // 2 API-31, use -1 to fail test and skip
+  private static final int PERM_BT_CONNECT  = 2; // 2 API-31, use -1 to fail test and skip \
+  private static final int PERM_WRITE       = 3; 
+  private static final int PERM_READ        = 4; 
 
   // private static final int PERM_LOCATION   = NR_PERMS_D + 0;
   private static final int PERM_CAMERA     = NR_PERMS_D + 1; 
@@ -196,6 +200,11 @@ public class TDandroid
         continue;
       }
 
+      if ( (k == PERM_WRITE || k == PERM_READ) && (PRIVATE_STORAGE || AT_LEAST_API_33) ) {
+        // GrantedPermission[k] = false;
+        continue;
+      }
+
       GrantedPermission[k] = ( context.checkSelfPermission( perms[k] ) == PackageManager.PERMISSION_GRANTED );
       if ( ! GrantedPermission[k] ) {
         // TDLog.v( "PERM " + permNames[k] + " not granted ");
@@ -240,9 +249,10 @@ public class TDandroid
   static boolean canManageExternalStorage( Context context )
   {
     if ( BELOW_API_30 ) return true;
+    if ( PRIVATE_STORAGE ) return true; // skip external storage
     // return ( context.checkSelfPermission( mPermissionManageExternalStorage ) == PackageManager.PERMISSION_GRANTED );
     boolean ret = Environment.isExternalStorageManager();
-    TDLog.v("MANAGE EXTERNAL STORAGE: " + ret );
+    TDLog.v("MANAGE external storage: " + ret );
     return ret;
   }
 
@@ -257,6 +267,9 @@ public class TDandroid
    */
   static void requestExternalStorage(  Context context, Activity activity )
   {
+    TDLog.v("MANAGE request external storage");
+    if ( PRIVATE_STORAGE ) return;
+
     Intent intent = new Intent();
     intent.setAction( Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION );
     Uri uri = Uri.fromParts( "package", context.getPackageName(), null );
@@ -278,15 +291,15 @@ public class TDandroid
     if ( BELOW_API_23 ) return true;
     for ( int k=0; k<NR_PERMS_D; ++k ) { // check whether the app has the six permissions
       if ( k == PERM_BT_CONNECT && BELOW_API_31 ) continue; // BT_CONNECT only for API >= 31 - API-31
+      if ( (k == PERM_WRITE || k == PERM_READ ) && ( PRIVATE_STORAGE || AT_LEAST_API_33 ) ) continue;
       // if ( k == PERM_CAMERA && AT_LEAST_API_21 ) continue; // CAMERA only for API >= 21
       if ( context.checkSelfPermission( perms[k] ) != PackageManager.PERMISSION_GRANTED ) {
-        // TDLog.v("TD cannot run because of " + k + ": " + perms[k] );
-        TDToast.makeLong( permShortNames[k] + " is needed to run. Bye.");
+        TDLog.v("TD cannot run because of perm " + permShortNames[k] + " - canRun() returns false" );
+        // TDToast.makeLong( permShortNames[k] + " is needed to run. Bye.");
         return false;
       }
     }
-    // return true;
-    return canManageExternalStorage( context );
+    return PRIVATE_STORAGE || canManageExternalStorage( context );
   }
 
   public static void setButtonBackground( Button btn, BitmapDrawable drawable ) { btn.setBackground( drawable ); }
@@ -415,7 +428,7 @@ public class TDandroid
       }
       flag *= 2;
     }
-    // TDLog.v("PERM Check permission returns " + ret );
+    TDLog.v("PERM Check permission returns " + ret );
     return ret;
   }
 
@@ -568,11 +581,11 @@ public class TDandroid
     }
   }
 
-  public static boolean hasGPSTest( Context context )
+  public static boolean hasPackage( Context context, String package_name )
   {
     PackageManager pm = context.getPackageManager();
     try {
-      PackageInfo pi = pm.getPackageInfo( "com.android.gpstest", 0 );
+      PackageInfo pi = pm.getPackageInfo( package_name, 0 );
       return true;
     } catch ( PackageManager.NameNotFoundException e ) {
     }

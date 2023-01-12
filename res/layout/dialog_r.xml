@@ -38,7 +38,7 @@
         >
         <Button android:id="@+id/r_continue"
           style="@style/button_default"
-          android:text="@string/r_continue"
+          android:text="@string/r_quit"
         />
     </LinearLayout>
 

@@ -25,15 +25,12 @@
     <!-- NO string name="distox_label">Псевдоним DistoX</string -->
     <!-- NO string name="cave3d_label">Cave3D</string -->
 
-  <!-- UNUSED string name="r_title">Важное замечание по Android R</string -->
-  <!-- UNUSED string name="r_dialog">
-В Android-R TopoDroid должен использовать свою папку в "Android/data". Если папкаTopoDroid не найдена она будет создана.\nВы можете импортировать zip-архивы своих старых съёмок.\n\nПомните, что файлы в новой папке TopoDroid удаляются при удалении программы TopoDroid.\n\n
-См. Подробности на веб сайте.\n
-  </string -->
+  <string name="r_title">Важное замечание по Android 13+</string>
+  <!-- TODO string name="r_dialog">With Android-13 TopoDroid must store surveys in the app private folder under "Android/data". Beware that this folder is usually deleted when the app is uninstalled. To confirm type\n"%1$s"\nin the field below and tap the button.</string -->
   <!-- UNUSED string name="r_checkboxes">Вы должны подтвердить следующее:</string -->
-  <!-- UNUSED string name="r_i_understood">Я полностью понял это уведомление.</string -->
   <!-- UNUSED string name="r_disclaimer">Я согласен с тем, что автор(ы) приложения не несут ответственности за любой ущерб или потерю данных.</string -->
-  <!-- UNUSED string name="r_continue">ПРОДОЛЖИТЬ</string -->
+  <!-- TODO string name="r_continue">CONTINUE</string -->
+  <!-- TODO string name="r_quit">QUIT</string -->
 
     <!-- UNUSED string name="version_ask">Обновление до новой версии TopoDroid.\nВы хотите переустановить инструменты рисования?</string -->
     <!-- REPLACED string name="symbols_ask">Вы хотите переустановить инструменты рисования?</string -->

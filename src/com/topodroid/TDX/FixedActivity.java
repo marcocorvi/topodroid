@@ -151,7 +151,7 @@ public class FixedActivity extends Activity
     mContext = this;
 
     hasGps = /* TDandroid.ABOVE_API_23 && */ TDandroid.checkLocation( mContext );
-    hasGPSTest  = TDandroid.hasGPSTest( this );
+    hasGPSTest  = TDandroid.hasPackage( this, "com.android.gpstest" );
     mImportFlag = TDandroid.getImportPointFlag( this );
     mImportAppNr = 0;
     // TDLog.v("FIXED import flag " + mImportFlag );

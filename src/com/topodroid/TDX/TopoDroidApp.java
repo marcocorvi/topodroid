@@ -143,6 +143,30 @@ public class TopoDroidApp extends Application
   static boolean mCheckManualTranslation = false;
   // static String mManual;  // manual url
 
+  // DialogR controller - only for PRIVATE_STORAGE
+  // static private boolean say_dialogR = false; // ! TopoDroidApp.hasTopoDroidDatabase(); // updated by showInitDialogs
+
+  /** @return  whether to say the dialogR or not
+   */
+  static boolean sayDialogR() 
+  { 
+    if ( mDData == null ) return true;
+    String res = mDData.getValue( "say_dialogR" );
+    boolean ret = ( res == null || ! res.equals("NO") );
+    TDLog.v("TD say dialog R " + ret );
+    return ret;
+  }
+
+  /** set the say_dialog_R config
+   * @param res   whether to say the dialogR or not
+   */
+  static void setSayDialogR( boolean res ) 
+  { 
+    TDLog.v("TD set dialog R " + res );
+    if ( mDData != null ) mDData.setValue( "say_dialogR", ( res? "YES" : "NO" ) );
+  }
+
+
   // static int mCheckPerms;
 
   static String mClipboardText = null; // text clipboard
@@ -1039,6 +1063,26 @@ public class TopoDroidApp extends Application
     done_init_env_second = true;
     // TDLog.v("APP init env. second " );
 
+    String version = mDData.getValue( "version" );
+    // TDLog.v("PATH " + "version " + version + " " + TDVersion.string() );
+    // TDLog.v( "DData version <" + version + "> TDversion <" + TDVersion.string() + ">" );
+    if ( version == null || ( ! version.equals( TDVersion.string() ) ) ) {
+      mDData.setValue( "version",  TDVersion.string()  );
+      // FIXME INSTALL_SYMBOL installSymbols( false ); // this updates symbol_version in the database
+      String symbol_version = mDData.getValue( "symbol_version" );
+      if ( symbol_version == null ) {
+        // TDLog.v("PATH " + "symbol version " + symbol_version );
+        installSymbols( true );
+      }
+      String firmware_version = mDData.getValue( "firmware_version" );
+      TDLog.v("APP current firmware version " + firmware_version );
+      if ( firmware_version == null || ( ! firmware_version.equals( TDVersion.FIRMWARE_VERSION ) ) ) {
+        installFirmware( false ); // false = do not overwrite
+      }
+      // installUserManual( );
+      mCheckManualTranslation = true;
+    }
+
     TDPrefHelper prefHlp = new TDPrefHelper( thisApp );
 
     // TDLog.Profile("TDApp cwd");
@@ -1087,29 +1131,36 @@ public class TopoDroidApp extends Application
 
     thisApp.mDataDownloader = new DataDownloader( thisApp, thisApp );
 
+    if ( TDandroid.PRIVATE_STORAGE ) {
+      String version = mDData.getValue( "version" );
+      if ( version == null || ( ! version.equals( TDVersion.string() ) ) ) {
+        setSayDialogR( true );
+      }
+    }
+
     // ***** DRAWING TOOLS SYMBOLS
     // TDLog.Profile("TDApp symbols");
 
-    // if one of the symbol dirs does not exist all of then are restored
-    String version = mDData.getValue( "version" );
-    // TDLog.v("PATH " + "version " + version + " " + TDVersion.string() );
-    // TDLog.v( "DData version <" + version + "> TDversion <" + TDVersion.string() + ">" );
-    if ( version == null || ( ! version.equals( TDVersion.string() ) ) ) {
-      mDData.setValue( "version",  TDVersion.string()  );
-      // FIXME INSTALL_SYMBOL installSymbols( false ); // this updates symbol_version in the database
-      String symbol_version = mDData.getValue( "symbol_version" );
-      if ( symbol_version == null ) {
-        // TDLog.v("PATH " + "symbol version " + symbol_version );
-        installSymbols( true );
-      }
-      String firmware_version = mDData.getValue( "firmware_version" );
-      TDLog.v("APP current firmware version " + firmware_version );
-      if ( firmware_version == null || ( ! firmware_version.equals( TDVersion.FIRMWARE_VERSION ) ) ) {
-        installFirmware( false ); // false = do not overwrite
-      }
-      // installUserManual( );
-      mCheckManualTranslation = true;
-    }
+    // if one of the symbol dirs does not exist all of then are restored - MOVED TO SECOND STEP
+    // String version = mDData.getValue( "version" );
+    // // TDLog.v("PATH " + "version " + version + " " + TDVersion.string() );
+    // // TDLog.v( "DData version <" + version + "> TDversion <" + TDVersion.string() + ">" );
+    // if ( version == null || ( ! version.equals( TDVersion.string() ) ) ) {
+    //   mDData.setValue( "version",  TDVersion.string()  );
+    //   // FIXME INSTALL_SYMBOL installSymbols( false ); // this updates symbol_version in the database
+    //   String symbol_version = mDData.getValue( "symbol_version" );
+    //   if ( symbol_version == null ) {
+    //     // TDLog.v("PATH " + "symbol version " + symbol_version );
+    //     installSymbols( true );
+    //   }
+    //   String firmware_version = mDData.getValue( "firmware_version" );
+    //   TDLog.v("APP current firmware version " + firmware_version );
+    //   if ( firmware_version == null || ( ! firmware_version.equals( TDVersion.FIRMWARE_VERSION ) ) ) {
+    //     installFirmware( false ); // false = do not overwrite
+    //   }
+    //   // installUserManual( );
+    //   mCheckManualTranslation = true;
+    // }
 
     // ***** CHECK SPECIAL EXPERIMENTAL FEATURES : SKETCH
     // if ( TDLevel.overTester ) {

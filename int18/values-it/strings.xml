@@ -25,15 +25,12 @@
     <!-- NO string name="distox_label">DistoX</string -->
     <!-- NO string name="cave3d_label">Cave3D</string -->
 
-  <!-- UNUSED string name="r_title">Android-R: avviso importante</string -->
-  <!-- UNUSED string name="r_dialog">
-Con Android-R TopoDroid deve usare la propria cartella in "Android/data". TopoDroid non l\'ha trovata e quindi l\'ha creata.\nPuoi copiare in questa cartella i file zip dei tuoi vecchi rilievi.\n\nAttenzione: i file nella nuova cartella verranno cancellati se disinstalli TopoDroid.\n\n
-Fai riferimento alle pagine web per i dettagli.\n
-  </string -->
+  <string name="r_title">Android-13+: avviso importante</string>
+  <!-- TODO string name="r_dialog">With Android-13 TopoDroid must store surveys in the app private folder under "Android/data". Beware that this folder is usually deleted when the app is uninstalled. To confirm type\n"%1$s"\nin the field below and tap the button.</string -->
   <!-- UNUSED string name="r_checkboxes">Devi confermare tramite le checkbox.</string -->
-  <!-- UNUSED string name="r_i_understood">Ho compreso appieno questo avviso</string -->
   <!-- UNUSED string name="r_disclaimer">Riconosco che gli autori della app non sono responsabili per qualsiasi danno o perdita di dati.</string -->
-  <!-- UNUSED string name="r_continue">CONTINUA</string -->
+  <!-- TODO string name="r_continue">CONTINUE</string -->
+  <!-- TODO string name="r_quit">QUIT</string -->
 
     <!-- UNUSED string name="version_ask">Stai aggiornando ad una nuova versione di TopoDroid.\nVuoi reinstallare prototipi grafici?</string -->
     <string name="symbols_ask">Installare gli strumenti di disegno v.%1$s?\n(Current v.%2$s)</string>

@@ -66,6 +66,34 @@ public class Archiver
   private String mZipname;
   // private static String mManifestPath = null;
 
+  private final static String[] mManifestError = {
+     "ok",
+     "survey already present",
+     "TopoDroid version mismatch",
+     "database version mismatch: manifest_DB_version < min_DB_version",
+     "database version mismatch: manifest_DB_version > current DB_version",
+     "survey name does not match filename",
+     "no database", // 6
+     null, // 7
+     null, // 8
+     null, // 9
+     "number format error",
+     "file not found",
+     "IO error", // 12
+     "unexpected error"
+  };
+
+  /** @return the manifest error string
+   * @param k manifest error code (neg. = error)
+   */
+  static String getManifestError( int k )
+  {
+    if ( k >= 0 ) return mManifestError[0];
+    if ( k < -12 ) return mManifestError[13];
+    return mManifestError[-k];
+  }
+
+
   /** cstr
    */
   public Archiver( ) // TopoDroidApp app
@@ -179,6 +207,7 @@ public class Archiver
     File[] files = dir.listFiles();
     if ( files != null ) {
       for ( File file : files ) { // listFiles MAY NullPointerException
+        TDLog.v("ZIP dir file " + file.getPath() );
         if (file.isFile()) addOptionalEntry(zos, file, file.getPath() ); 
       }
     }
@@ -235,7 +264,7 @@ public class Archiver
       zos = new ZipOutputStream( new BufferedOutputStream( os ) );
       for ( String filename : filenames ) {
         // the file.getPath() is the full absolute file path
-        // TDLog.v( "ZIP-compress files: add file " + filename );
+        TDLog.v( "ZIP-compress files: add file " + filename );
         ret &= addEntry( zos, subdir, filename );
       }
       // for ( File file : files ) TDFile.deleteFile( file );
@@ -365,8 +394,7 @@ public class Archiver
     String survey = TDInstance.survey;
     boolean ret = true;
 
-    // TDLog.Log( TDLog.LOG_IO, "ZIP export file: " + zipname );
-    // TDLog.v( "ZIP export file: " + zipname + " pre " + ret );
+    TDLog.v( "ZIP export survey " + survey );
 
     ParcelFileDescriptor pfd = null;
     ZipOutputStream zos = null;
@@ -383,15 +411,18 @@ public class Archiver
 
       pathname = TDPath.getManifestFile( ); // The first entry must be the manifest 
       app.writeManifestFile();
+      TDLog.v("ZIP manifest file " + pathname );
       ret &= addEntry( zos, TDFile.getTopoDroidFile(pathname), pathname );
       // TDLog.v("ZIP archive post-manifest returns " + ret );
 
       pathname = TDPath.getSqlFile( );
       app_data.dumpToFile( pathname, TDInstance.sid );
+      TDLog.v("ZIP sqlite file " + pathname );
       ret &= addEntry( zos, TDFile.getTopoDroidFile(pathname), pathname );
       // TDLog.v("ZIP archive post-sqlite returns " + ret );
 
       pathname = TDPath.getSurveyNoteFile( survey );
+      TDLog.v("ZIP note file " + pathname );
       addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
 
       if ( TDLevel.overExpert && TDSetting.mZipWithSymbols ) {
@@ -423,6 +454,7 @@ public class Archiver
       List< PlotInfo > plots  = app_data.selectAllPlots( TDInstance.sid, TDStatus.NORMAL );
       for ( PlotInfo plt : plots ) {
         pathname = TDPath.getSurveyPlotTdrFile( survey, plt.name ); // N.B. plot file CAN be missing
+        TDLog.v("ZIP plotfile " + pathname );
         addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       }
 
@@ -433,9 +465,11 @@ public class Archiver
       }
 
       pathname = TDPath.getSurveyPhotoDir( survey );
+      TDLog.v("ZIP photo dir " + pathname );
       addDirectory( zos, TDFile.getTopoDroidFile( pathname ), pathname );
 
       pathname = TDPath.getSurveyAudioDir( survey );
+      TDLog.v("ZIP audio dir " + pathname );
       addDirectory( zos, TDFile.getTopoDroidFile( pathname ), pathname );
 
       // ret = true;
@@ -513,6 +547,7 @@ public class Archiver
    * -3 database version mismatch: manifest_DB_version < min_DB_version
    * -4 database version mismatch: manifest_DB_version > current DB_version
    * -5 survey name does not match filename
+   * -6 no database
    * -10 number format error
    * -11 file not found
    * -12 IO error
@@ -551,6 +586,10 @@ public class Archiver
 
       mManifestSurveyname = TDString.spacesToUnderscore( br.readLine().trim() );
       // TDLog.v("MANIFEST read <" + mManifestSurveyname + ">" );
+      if ( app.mData == null ) {
+        TDLog.Error( "MANIFEST app has no database");
+        return -6;
+      }
       if ( app.mData.hasSurveyName( mManifestSurveyname ) ) {
         TDLog.Error( "MANIFEST survey exists: <" + mManifestSurveyname + ">" );
         return -1;

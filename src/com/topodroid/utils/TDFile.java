@@ -133,14 +133,20 @@ public class TDFile
    * @param name   file full pathname
    */
   public static boolean hasTopoDroidFile( String name )
-  { return name != null && (new File( name )).exists(); }
+  { 
+    // TDLog.v("FILE has TD file " + name );
+    return name != null && (new File( name )).exists();
+  }
 
   /** @return true if the given file exists 
    * @param dirpath   filename folder
    * @param name      filename
    */
   public static boolean hasTopoDroidFile( String dirpath, String name )
-  { return name != null && (new File( dirpath + "/" + name )).exists(); }
+  { 
+    // TDLog.v("FILE has TD file " + dirpath + " " + name );
+    return name != null && (new File( dirpath + "/" + name )).exists();
+  }
 
   /** @return length of the given file (negative if name is null, 0 if the file does not exist)
    * @param name   filename
@@ -148,6 +154,7 @@ public class TDFile
   public static long getTopoDroidFileLength( String name )
   { 
     if ( name == null ) return -2L;
+    // TDLog.v("FILE get TD file length " + name );
     File file = new File(name);
     if ( ! file.exists() ) return 0L;
     return file.length();
@@ -170,20 +177,27 @@ public class TDFile
    * @param name   full pathname
    */
   public static File getTopoDroidFile( String name )
-  { return new File( name ); }
+  {
+    // TDLog.v("FILE get TD file " + name );
+    return new File( name );
+  }
 
   /** @return a File for the full file pathname
    * @param dirname full directory pathname
    * @param name    file name
    */
   public static File getTopoDroidFile( String dirname, String name )
-  { return new File( dirname, name ); }
+  { 
+    // TDLog.v("FILE get TD file " + dirname + " " + name );
+    return new File( dirname, name );
+  }
 
   /** @return the input-stream for the pathname
    * @param name   full pathname
    */
   public static DataInputStream getTopoDroidFileInputStream( String name ) throws IOException
   { 
+    // TDLog.v("FILE get TD file I stream " + name );
     File file = new File( name ); 
     if ( ! file.exists() ) {
       TDLog.Error("no file " + name );
@@ -208,6 +222,7 @@ public class TDFile
    */
   public static DataOutputStream getTopoDroidFileOutputStream( String name ) throws IOException
   { 
+    // TDLog.v("FILE get TD file O stream " + name );
     File file = new File( name ); 
     if ( file.exists() ) {
       if ( ! file.canWrite() ) {
@@ -230,6 +245,7 @@ public class TDFile
    */
   public static BufferedReader getTopoDroidFileReader( String name ) throws IOException
   {
+    // TDLog.v("FILE get TD file reader " + name );
     File file = new File( name ); 
     if ( ! file.exists() || ! file.canRead() ) {
       TDLog.Error("file does not exist or cannot read file " + name );
@@ -249,6 +265,7 @@ public class TDFile
    */
   public static BufferedWriter getTopoDroidFileWriter( String name ) throws IOException
   {
+    // TDLog.v("FILE get TD file writer " + name );
     File file = new File( name ); 
     if ( file.exists() ) {
       if ( ! file.canWrite() ) {
@@ -369,18 +386,19 @@ public class TDFile
   private static File getCBD( String type, boolean create )
   {
     File ret = null;
-    if ( TDandroid.BELOW_API_33 ) { // FIXME PRIVATE_STORAGE
+    if ( TDandroid.PRIVATE_STORAGE ) { // FIXME PRIVATE_STORAGE
+      // TDLog.v("getCBD " + type + " use private dir ");
+      ret = getPrivateDir( type ); // FIXME do i need to create ?
+    } else {
       String documents = ( TDandroid.BELOW_API_19 )? "Documents" : Environment.DIRECTORY_DOCUMENTS;
       if ( type == null ) {
         ret = new File( Environment.getExternalStoragePublicDirectory( documents ), "TDX" );
       } else {
         ret = new File( Environment.getExternalStoragePublicDirectory( documents ), "TDX/" + type );
       } 
-    } else {
-      ret = getPrivateDir( type ); // FIXME do i need to create ?
     }
     if ( create && ret != null && ! ret.exists() ) {
-      TDLog.v( "mkdirs " + ret.getPath() + " type: " + ((type == null)? "null" : type) + " create: " + create );
+      // TDLog.v( "mkdirs " + ret.getAbsolutePath() + " type: " + ((type == null)? "null" : type) + " create: " + create );
       ret.mkdirs();
     }
     return ret;
@@ -411,8 +429,9 @@ public class TDFile
     return new File( getCBD( type, true ), name );
   }
 
-  // public static String getExternalPath( String type ) { return getCBD( type, false ).getPath(); }
-  // public static String getExternalPath( String type, String name ) { return new File( getCBD( type, false ), name ).getPath(); }
+  // PROVATE_STORAGE : these two has getPath() instead of getAbsolutePath()
+  // public static String getExternalPath( String type ) { return getCBD( type, false ).getAbsolutePath(); }
+  // public static String getExternalPath( String type, String name ) { return new File( getCBD( type, false ), name ).getAbsolutePath(); }
 
   // public static boolean hasExternalDir( String type ) { return getCBD( type, false ).exists(); }
   // public static boolean hasExternalFile( String type, String name ) { return new File( getCBD( type, false ), name ).exists(); }
@@ -474,7 +493,7 @@ public class TDFile
     File[] files = dir.listFiles();
     if ( files != null ) for ( File f : files ) {
       if ( f.lastModified() < time ) {
-        if ( ! f.delete() ) TDLog.Error("File delete error: " + f.getPath() );
+        if ( ! f.delete() ) TDLog.Error("File delete error: " + f.getAbsolutePath() ); // was getPath()
       }
     }
   }
@@ -688,6 +707,7 @@ public class TDFile
    */
   public static File makeTopoDroidDir( String pathname )
   {
+    // TDLog.v("FILE make TD dir " + pathname );
     File f = new File( pathname );
     if ( ! f.exists() ) {
       if ( ! f.mkdirs() ) {
@@ -720,7 +740,7 @@ public class TDFile
   public static boolean renameTempFile( File temp, File file )
   {
     boolean ret = false;
-    // TDLog.v( "rename " + temp.getPath() + " to " + file.getPath() );
+    // TDLog.v( "rename " + temp.getAbsolutePath() + " to " + file.getAbsolutePath() ); // was getPath()
     synchronized( mFilesLock ) {
       if ( file.exists() ) file.delete();
       ret = temp.renameTo( file );
@@ -807,7 +827,7 @@ public class TDFile
   {
     File dir = getMSfile( subdir );
     if ( dir.exists() ) return true;
-    TDLog.v("make MS dir " + subdir );
+    // TDLog.v("make MS dir " + subdir );
     return dir.mkdirs();
   }
 

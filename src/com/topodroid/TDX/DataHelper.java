@@ -197,6 +197,7 @@ public class DataHelper extends DataSetObservable
   // public DataHelper( Context context, TopoDroidApp app, DataListenerSet listeners ) // IF_COSURVEY
   public DataHelper( Context context /* , TopoDroidApp app */ )
   {
+    TDLog.v("DB cstr");
     // mApp     = app;
     // mListeners = listeners; // IF_COSURVEY
     this.openDatabase( context );
@@ -231,11 +232,11 @@ public class DataHelper extends DataSetObservable
   {
     String db_name = TDPath.getDatabase(); // DistoX-SAF
     if ( myDB != null ) {
-      // TDLog.v( "DB open: app already has database " + db_name );
+      TDLog.v( "DB open: app already has database " + db_name );
       return;
     }
     try {
-      // TDLog.v("DB ... try to open RW " + db_name);
+      TDLog.v("DB ... try to open RW " + db_name);
       myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE );
       if ( myDB != null ) {
         checkUpgrade();
@@ -243,21 +244,21 @@ public class DataHelper extends DataSetObservable
       }
     } catch ( SQLiteException e ) {
       // if it OK to fail
-      TDLog.Error( "ERROR DB open RW: " + e.getMessage() );
+      TDLog.Error( "ERROR DB " + db_name + " open RW: " + e.getMessage() );
     }
     
     try {
-      // TDLog.v("DB ... try to open RW+CREATE " + db_name );
+      TDLog.v("DB ... try to open RW+CREATE " + db_name );
       myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.CREATE_IF_NECESSARY );
       if ( myDB != null ) {
         // TDLog.v( "DB opened: create tables");
         DistoXOpenHelper.createTables( myDB );
         myDB.setVersion( TDVersion.DATABASE_VERSION );
       } else {
-        TDLog.Error( "ERROR DB failed open/create" );
+        TDLog.Error( "ERROR DB " + db_name + " failed open/create" );
       }
     } catch ( SQLiteException e ) {
-      TDLog.Error( "ERROR DB open/create: " + e.getMessage() );
+      TDLog.Error( "ERROR DB " + db_name + " open/create: " + e.getMessage() );
       myDB = null;
     }
   }
@@ -6243,7 +6244,7 @@ public class DataHelper extends DataSetObservable
 
      static void createTables( SQLiteDatabase db )
      {
-       // TDLog.Log( TDLog.LOG_DB, "BD open helper - create tables");
+       TDLog.v( "BD open helper - create tables");
        try {
           // db.setLockingEnabled( false );
           db.beginTransaction();
@@ -6465,7 +6466,7 @@ public class DataHelper extends DataSetObservable
      {
         // FIXME this is called at each start when the database file exists
         // TDLog.Log( TDLog.LOG_DB, "DB open helper - upgrade old " + oldVersion + " new " + newVersion );
-        // TDLog.v( "DB open helper - upgrade old " + oldVersion + " new " + newVersion );
+        TDLog.v( "DB open helper - upgrade old " + oldVersion + " new " + newVersion );
         switch ( oldVersion ) {
           case 14: 
             db.execSQL( "ALTER TABLE surveys ADD COLUMN declination REAL default 0" );

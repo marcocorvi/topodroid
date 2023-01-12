@@ -103,13 +103,14 @@ public class TDPath
 
   // private static String PATH_CB_DIR  = EXTERNAL_STORAGE_PATH;
   // FIXME PRIVATE_STORAGE
-  private static String PATH_CB_DIR   = TDandroid.BELOW_API_33 ? TDFile.getExternalDir(null).getPath() : "TDX"; // fullpath (< 33) or TDX (for 33+)
-  private static String PATH_CW_DIR   = PATH_CB_DIR + "/TopoDroid";            // fullpath
+  private static String PATH_CB_DIR   = TDandroid.PRIVATE_STORAGE ? TDFile.getPrivateDir( null ).getAbsolutePath() : TDFile.getExternalDir(null).getPath(); // fullpath (< 33) or null (for 33+)
+  private static String PATH_CW_DIR   = PATH_CB_DIR + "/TopoDroid";     // fullpath 
+  private static String ROOT_CW_DIR   = TDandroid.PRIVATE_STORAGE ? "TopoDroid" : PATH_CW_DIR;
 
-  private static String PATH_ZIP      = PATH_CW_DIR + "/zip";
-  private static String PATH_TMP      = PATH_CW_DIR + "/tmp";
-  private static String PATH_TDCONFIG = PATH_CW_DIR + "/thconfig";
-  private static String PATH_C3EXPORT = PATH_CW_DIR + "/c3export";
+  private static String ROOT_ZIP      = ROOT_CW_DIR + "/zip";
+  private static String ROOT_TMP      = ROOT_CW_DIR + "/tmp";
+  private static String ROOT_TDCONFIG = ROOT_CW_DIR + "/thconfig";
+  private static String ROOT_C3EXPORT = ROOT_CW_DIR + "/c3export";
 
   private static String APP_SURVEY_PATH   = null;
   private static String APP_PHOTO_PATH    = null;
@@ -119,8 +120,18 @@ public class TDPath
   private static String APP_C3D_PATH      = null;
   private static String APP_OUT_PATH      = null;
 
-  private static String RELATIVE_TMP = null;
+  private static String APP_SURVEY_ROOT   = null;
+  private static String APP_PHOTO_ROOT    = null;
+  private static String APP_AUDIO_ROOT    = null;
+  private static String APP_NOTE_ROOT     = null;
+  private static String APP_TDR_ROOT      = null;
+  private static String APP_C3D_ROOT      = null;
+  private static String APP_OUT_ROOT      = null;
+
+
   private static String APP_TMP_PATH = null;
+  private static String APP_TMP_ROOT = null;
+  private static String RELATIVE_TMP = null;
 
   /** clear the surveys pathnames
    */
@@ -140,7 +151,29 @@ public class TDPath
 
   /** @return the fullpath of the survey database
    */
-  static String getDatabase() { return PATH_CW_DIR + "/distox14.sqlite"; }
+  static String getDatabase() 
+  { 
+    File dir = new File( PATH_CW_DIR );
+    if ( ! dir.exists() ) dir.mkdirs();
+    return PATH_CW_DIR + "/distox14.sqlite";
+  }
+
+  // /** delete a database - only in the private storage
+  //  * @param name  database filename
+  //  */
+  // static void deleteDatabase( String name ) 
+  // {
+  //   if ( TDandroid.PRIVATE_STORAGE ) {
+  //     // TDFile.deletePrivateFile( "TopoDroid", "distox14.sqlite" );
+  //     String path = PATH_CW_DIR + "/distox14.sqlite";
+  //     TDLog.v("PATH delete " + path );
+  //     File file = new File( path );
+  //     if ( file.exists() ) file.delete();
+  //     path = PATH_CW_DIR + "/distox14.sqlite-journal";
+  //     file = new File( path );
+  //     if ( file.exists() ) file.delete();
+  //   }
+  // }
 
   // private static String PATH_DEFAULT  = PATH_CW_DIR;
   // static String getDeviceDatabase() { return PATH_DEFAULT + "device10.sqlite"; }
@@ -152,6 +185,10 @@ public class TDPath
    */
   static boolean checkBasePath( String name )
   {
+    if ( TDandroid.PRIVATE_STORAGE ) {
+      TDLog.v("check Base Path ... skipping get external dir: " + TDFile.getExternalDir(null).getPath() );
+      return true;
+    }
     File dir = TDFile.getExternalDir( name ); 
     if ( ! dir.exists() ) {
       if ( ! dir.mkdirs() ) {
@@ -173,32 +210,44 @@ public class TDPath
 
   /** @return the current base directory fullpath (which is unchangeable )
    */
-  public static String getCurrentBaseDir() { return PATH_CB_DIR; }
+  public static String getCurrentBaseDir() 
+  {
+    return PATH_CB_DIR;
+  }
 
   /** @return the current work directory fullpath
    */
-  public static String getCurrentWorkDir() { return PATH_CW_DIR; }
+  public static String getCurrentWorkDir() 
+  {
+    return ROOT_CW_DIR;
+  }
  
   /** set the Current Work Directory
    * @param name   current work directory name, eg, "TopoDroid"
    */
   static void setTdPaths( String name /*, String base */ )
   {
-    // TDLog.v( "set paths [0]: name " + name + " base " + base );
+    TDLog.v( "set paths [4]: " + name );
+    if ( TDandroid.PRIVATE_STORAGE ) {
+      checkFilesystemDirs( ROOT_ZIP );
+      checkFilesystemDirs( ROOT_TMP );
+      checkFilesystemDirs( ROOT_TDCONFIG  );
+      checkFilesystemDirs( ROOT_C3EXPORT  );
+      setSurveyPaths( null );
+      return;
+    }
     if ( name == null || ! name.toLowerCase( Locale.getDefault() ).startsWith( "topodroid" ) ) return;
-
     File dir = TDFile.getExternalDir( name ); // DistoX-SAF
-    // TDLog.v( "set paths [4]. Dir " + dir.getPath()  );
-
+    TDLog.v( "set paths [4]: " + name + ". Dir " + dir.getPath()  );
     try {
       if ( dir.exists() || dir.mkdirs() ) {
         // TDInstance.takePersistentPermissions( Uri.fromFile( dir ) ); // FIXME_PERSISTENT
 	if ( dir.isDirectory() && dir.canWrite() ) {
-	  PATH_CW_DIR   = PATH_CB_DIR + "/" + name;
-          PATH_ZIP      = PATH_CW_DIR + "/zip";      checkFilesystemDirs( PATH_ZIP );
-          PATH_TMP      = PATH_CW_DIR + "/tmp";      checkFilesystemDirs( PATH_TMP );
-          PATH_TDCONFIG = PATH_CW_DIR + "/thconfig"; checkFilesystemDirs( PATH_TDCONFIG  );
-          PATH_C3EXPORT = PATH_CW_DIR + "/c3export"; checkFilesystemDirs( PATH_C3EXPORT  );
+	  ROOT_CW_DIR   = TDandroid.PRIVATE_STORAGE ? name : PATH_CB_DIR + "/" + name;
+          ROOT_ZIP      = ROOT_CW_DIR + "/zip";      checkFilesystemDirs( ROOT_ZIP );
+          ROOT_TMP      = ROOT_CW_DIR + "/tmp";      checkFilesystemDirs( ROOT_TMP );
+          ROOT_TDCONFIG = ROOT_CW_DIR + "/thconfig"; checkFilesystemDirs( ROOT_TDCONFIG  );
+          ROOT_C3EXPORT = ROOT_CW_DIR + "/c3export"; checkFilesystemDirs( ROOT_C3EXPORT  );
           setSurveyPaths( null );
 	} else {
           TDLog.Error("PATH ext storage: no dir or no write " + name );
@@ -216,8 +265,14 @@ public class TDPath
    */
   public static void createSurveyPaths( String survey )
   {
-    // TDLog.v( "create survey path " + survey + " base " + PATH_CW_DIR );
-    String root = PATH_CW_DIR + "/" + survey; // fullpath
+    if ( TDandroid.PRIVATE_STORAGE ) {
+      PATH_CB_DIR = TDFile.getPrivateBaseDir().getAbsolutePath();
+      File cwd    = TDFile.getPrivateDir( ROOT_CW_DIR );
+      if ( ! cwd.exists() ) cwd.mkdirs();
+      PATH_CW_DIR = cwd.getAbsolutePath();
+    }
+    String root = ROOT_CW_DIR + "/" + survey;
+    TDLog.v( "create paths survey " + survey + " base " + ROOT_CW_DIR + " root " + root );
     checkFilesystemDirs( root );
     checkFilesystemDirs( root + "/tdr" );
     checkFilesystemDirs( root + "/c3d" );
@@ -235,17 +290,26 @@ public class TDPath
       // TDLog.v( "PATH set survey path NULL");
       clearAppPaths();
     } else {
-      // TDLog.v( "set survey path " + survey + " base " + PATH_CW_DIR );
-      APP_SURVEY_PATH = PATH_CW_DIR + "/" + survey;  checkFilesystemDirs( APP_SURVEY_PATH ); // fullpath
-      String root = APP_SURVEY_PATH;
-      APP_TDR_PATH   = root + "/tdr";     checkFilesystemDirs( APP_TDR_PATH );
-      APP_C3D_PATH   = root + "/c3d";     checkFilesystemDirs( APP_C3D_PATH );
-      APP_NOTE_PATH  = root + "/note";    checkFilesystemDirs( APP_NOTE_PATH );
-      APP_PHOTO_PATH = root + "/photo";   checkFilesystemDirs( APP_PHOTO_PATH );
-      APP_AUDIO_PATH = root + "/audio";   checkFilesystemDirs( APP_AUDIO_PATH );
-      APP_OUT_PATH   = root + "/out";     checkFilesystemDirs( APP_OUT_PATH );
+      // TDLog.v( "set survey path " + survey + " base " + ROOT_CW_DIR );
+      APP_SURVEY_ROOT = ROOT_CW_DIR + "/" + survey;
+      checkFilesystemDirs( APP_SURVEY_ROOT ); // fullpath
+      APP_TDR_ROOT   = APP_SURVEY_ROOT + "/tdr";     checkFilesystemDirs( APP_TDR_ROOT );
+      APP_C3D_ROOT   = APP_SURVEY_ROOT + "/c3d";     checkFilesystemDirs( APP_C3D_ROOT );
+      APP_NOTE_ROOT  = APP_SURVEY_ROOT + "/note";    checkFilesystemDirs( APP_NOTE_ROOT );
+      APP_PHOTO_ROOT = APP_SURVEY_ROOT + "/photo";   checkFilesystemDirs( APP_PHOTO_ROOT );
+      APP_AUDIO_ROOT = APP_SURVEY_ROOT + "/audio";   checkFilesystemDirs( APP_AUDIO_ROOT );
+      APP_OUT_ROOT   = APP_SURVEY_ROOT + "/out";     checkFilesystemDirs( APP_OUT_ROOT );
+      APP_TMP_ROOT   = APP_SURVEY_PATH + "/tmp";     checkFilesystemDirs( APP_TMP_ROOT );
 
-      APP_TMP_PATH = root + "/tmp";    // CWD/survey/tmp
+      APP_SURVEY_PATH = PATH_CW_DIR + "/" + survey;
+      APP_TDR_PATH   = APP_SURVEY_PATH + "/tdr";
+      APP_C3D_PATH   = APP_SURVEY_PATH + "/c3d";
+      APP_NOTE_PATH  = APP_SURVEY_PATH + "/note";
+      APP_PHOTO_PATH = APP_SURVEY_PATH + "/photo";
+      APP_AUDIO_PATH = APP_SURVEY_PATH + "/audio";
+      APP_OUT_PATH   = APP_SURVEY_PATH + "/out";
+      APP_TMP_PATH   = APP_SURVEY_PATH + "/tmp";    // CWD/survey/tmp
+
       RELATIVE_TMP = survey + "/tmp";
     }
   }
@@ -278,7 +342,7 @@ public class TDPath
    */
   public static String[] scanTdconfigDir() // DistoX-SAF
   {
-    File dir = TDFile.getTopoDroidFile( PATH_TDCONFIG  );
+    File dir = TDFile.getTopoDroidFile( ROOT_TDCONFIG  );
     if ( ! dir.exists() && ! dir.mkdirs() ) {
       TDLog.Error("tdconfig error: no exist no make");
       return null;
@@ -309,38 +373,51 @@ public class TDPath
   /** @return the sqlite script pathname, ie, <survey>/survey.sql
    * @note used by Archiver
    */
-  static String getSqlFile() { return APP_SURVEY_PATH + "/survey.sql"; }
+  static String getSqlFile() 
+  {
+    return APP_SURVEY_PATH + "/survey.sql";
+  }
 
   /** @return the manifest file pathname, ie, <tmp>/manifest
    * @note used by Archiver, TopoDroidApp
    */
-  static String getManifestFile() { return PATH_TMP + "/manifest"; }
+  static String getManifestFile() 
+  {
+    if ( TDandroid.PRIVATE_STORAGE ) return PATH_CW_DIR + "/tmp/manifest";
+    return ROOT_TMP + "/manifest";
+  }
 
   /** @return survey subfolder full pathname, is, <survey>/<subfolder>
    * @param name   subfolder name
    * @note used by Archiver
    */
-  static String getDirFile( String name ) { return APP_SURVEY_PATH + "/" + name; }
+  static String getDirFile( String name ) 
+  { 
+    return APP_SURVEY_PATH + "/" + name;
+  }
 
   // static String getSymbolFile( String name ) { return name; }
 
   static boolean hasTdrDir() { return TDFile.hasTopoDroidFile( APP_TDR_PATH ); } // DistoX-SAF
+
   static boolean hasC3dDir() { return TDFile.hasTopoDroidFile( APP_C3D_PATH ); } // DistoX-SAF
 
   // static File getTdrDir() { return TDFile.makeTopoDroidDir( APP_TDR_PATH ); } // DistoX-SAF // CLEAR_BACKUPS
+
   static File getC3dDir() { return TDFile.makeTopoDroidDir( APP_C3D_PATH ); } // DistoX-SAF
+
   static String getC3dPath() { return APP_C3D_PATH; } // DistoX-SAF
 
   /** @return full pathname of a zip file, in the zip folder
    * @param name   zip-file name
    * @note used by ImportZipTask.unArchive
    */
-  public static String getZipFile( String name ) { return PATH_ZIP     + "/" + name; }
+  public static String getZipFile( String name ) { return ROOT_ZIP     + "/" + name; }
 
   // /** @return full pathname of a temporary file, in the tmp folder
   //  * @param name   temp-file name
   //  */
-  // public static String getTmpFile( String name ) { return PATH_TMP     + "/" + name; }
+  // public static String getTmpFile( String name ) { return ROOT_TMP     + "/" + name; }
 
   /** @return full pathname of a tdr file, in the tdr folder
    * @param name   tdr-file name
@@ -354,17 +431,17 @@ public class TDPath
 
   /** @return full pathname of a Tdconfig folder, in the "TopoDroid" folder
    */
-  public static String getTdconfigDir( ) { return PATH_TDCONFIG ; }
+  public static String getTdconfigDir( ) { return ROOT_TDCONFIG ; }
 
   /** @return full pathname of a tdconfig file, in the tdconfig folder
    * @param name   tdconfig-file name
    */
-  public static String getTdconfigFile( String name ) { return PATH_TDCONFIG + "/" + name; }
+  public static String getTdconfigFile( String name ) { return ROOT_TDCONFIG + "/" + name; }
 
   // replaced with TDFile functions
-  // public static String getC3exportDir( ) { return PATH_C3EXPORT ; }
-  public static String getC3exportPath( String name ) { return PATH_C3EXPORT + "/" + name; }
-  // public static String getC3exportPath( String name, String ext ) { return PATH_C3EXPORT + "/" + name + "." + ext; }
+  // public static String getC3exportDir( ) { return ROOT_C3EXPORT ; }
+  public static String getC3exportPath( String name ) { return ROOT_C3EXPORT + "/" + name; }
+  // public static String getC3exportPath( String name, String ext ) { return ROOT_C3EXPORT + "/" + name + "." + ext; }
 
   public static String getManFileName( String name ) { return "man/" + name; }
 
@@ -391,7 +468,7 @@ public class TDPath
    * @param name photo filename, ie, <index>.jpg
    * @note used by Archiver, DrawingWindow, and ShpPoint
    */
-  static public String getJpgFile( String name )   { return APP_PHOTO_PATH + "/" + name; }
+  static public String getJpgFile( String name ) { return APP_PHOTO_PATH + "/" + name; }
 
   /** @return the current survey audio file full pathname
    * @param name audio filename, ie, <index>.wav
@@ -420,19 +497,23 @@ public class TDPath
   /** @return survey zip-archive full pathname
    * @param survey   survey name
    */
-  public static String getSurveyZipFile( String survey ) { return getPathname( PATH_ZIP, survey, ZIP ); }
+  public static String getSurveyZipFile( String survey ) { return getPathname( ROOT_ZIP, survey, ZIP ); }
 
   /** @return survey note-file full pathname
    * @param title   survey name
    */
-  public static String getSurveyNoteFile( String title ) { return getPathname( APP_NOTE_PATH, title, TXT ); }
+  public static String getSurveyNoteFile( String title ) 
+  { 
+    TDLog.v("PATH get survey note file " + title );
+    return getPathname( APP_NOTE_ROOT, title, TXT );
+  }
 
   /** @return survey tdr file full pathname
    * @param name   tdr-file name ,ie, <survey>-<plot>.tdr
    */
   public static String getTdrFileWithExt( String name )
   {
-    return getPathname( APP_TDR_PATH, name, TDR );
+    return getPathname( APP_TDR_ROOT, name, TDR );
   }
 
   /** @return a tdr file full pathname
@@ -441,14 +522,14 @@ public class TDPath
    */
   public static String getTdrFileWithExt( String dirname, String name )
   {
-    return getPathname( PATH_CW_DIR, dirname + "/" + name, TDR );
+    return getPathname( ROOT_CW_DIR, dirname + "/" + name, TDR );
   }
 
-  public static String getC3dFileWithExt( String name )  { return getPathname( APP_C3D_PATH, name, C3D ); }
+  public static String getC3dFileWithExt( String name )  { return getPathname( APP_C3D_ROOT, name, C3D ); }
 
   public static String getShpTempRelativeDir( ) 
   {
-    checkFilesystemDirs( APP_TMP_PATH );
+    // checkFilesystemDirs( APP_TMP_PATH );
     return RELATIVE_TMP;
   }
 
@@ -517,6 +598,7 @@ public class TDPath
    */
   public static  void deleteAreaFile( String name )  { TDFile.deletePrivateFile( DIR_AREA,  name ); }
 
+
   // ---------------------------------------------------------------------------------------
 
   /** get the list of "topodroid" folders (null if no such folder exists)
@@ -567,7 +649,7 @@ public class TDPath
 
   /** @return the array of zip archives in the zip folder
    */
-  static File[] getZipFiles() { return getFiles( PATH_ZIP, new String[] { ZIP } ); } // DistoX-SAF
+  static File[] getZipFiles() { return getFiles( ROOT_ZIP, new String[] { ZIP } ); } // DistoX-SAF
 
 
   // these are used to get the folders when the survey does not exist yet (on import)
@@ -824,26 +906,38 @@ public class TDPath
   }
 
   /** compose a file pathname: directory/name extension
-   * @param directory    directory pathname
+   * @param directory    directory pathname / rootname
    * @param name         file name
    * @param ext          file extension (including the dot)
    * @return the file pathname
    */
   private static String getPathname( String directory, String name, String ext ) 
   {
-    checkFilesystemDirs( directory );
-    return directory + "/" + name + ext;
+    if ( TDandroid.PRIVATE_STORAGE ) {
+      File dir = TDFile.getPrivateDir( directory );
+      if  ( ! dir.exists() ) dir.mkdirs();
+      return dir.getAbsolutePath() + "/" + name + ext;
+    } else {
+      checkFilesystemDirs( directory );
+      return directory + "/" + name + ext;
+    }
   }
 
   /** compose a file pathname: directory/name
-   * @param directory    directory pathname
+   * @param directory    directory pathname / rootname
    * @param name         file name (including extension)
    * @return the file pathname
    */
   private static String getPathname( String directory, String name ) 
   {
-    checkFilesystemDirs( directory );
-    return directory + "/" + name;
+    if ( TDandroid.PRIVATE_STORAGE ) {
+      File dir = TDFile.getPrivateDir( directory );
+      if  ( ! dir.exists() ) dir.mkdirs();
+      return dir.getAbsolutePath() + "/" + name;
+    } else {
+      checkFilesystemDirs( directory );
+      return directory + "/" + name;
+    }
   }
 
   /** get the files inside a folder, with a given extension 
@@ -882,8 +976,13 @@ public class TDPath
 
   private static void checkFilesystemDirs( String path )
   {
-    // TDLog.v("check filesystem dir " + path );
-    TDFile.makeTopoDroidDir( path );
+    TDLog.v("check filesystem dir " + path + " cwd " + ROOT_CW_DIR );
+    if ( TDandroid.PRIVATE_STORAGE ) {
+      File dir = TDFile.getPrivateDir( path );
+      if ( ! dir.exists() ) dir.mkdirs( );
+    } else {
+      TDFile.makeTopoDroidDir( path );
+    }
   }
 
   private static String checkType( String ext, String[] exts )

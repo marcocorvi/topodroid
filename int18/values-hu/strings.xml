@@ -25,15 +25,12 @@
     <!-- NO string name="distox_label">DistoX</string -->
     <!-- NO string name="cave3d_label">Cave3D</string -->
 
-  <!-- UNUSED string name="r_title">Android R fontos megjegyzés</string -->
-  <!-- UNUSED string name="r_dialog">
-Android-R-nél a TopoDroid-nak az "Android/data" alatt található mappáját kell használnia. TopoDroid nem találta meg, és létrehozta a mappáját.\nA régi felmérések zip archívumait importálhatja.\n\nVigyázzon, a TopoDroid eltávolításakor az új TopoDroid mappában lévő fájlok törlődnek!\n\n
-A részletekért keresse fel a weboldalakat.\n
-  </string -->
+  <string name="r_title">Android 13+ fontos megjegyzés</string>
+  <!-- TODO string name="r_dialog">With Android-13 TopoDroid must store surveys in the app private folder under "Android/data". Beware that this folder is usually deleted when the app is uninstalled. To confirm type\n"%1$s"\nin the field below and tap the button.</string -->
   <!-- UNUSED string name="r_checkboxes">Nyugtáznod kell a jelölőnégyzettel.</string -->
-  <!-- UNUSED string name="r_i_understood">Teljesen megértettem ezt az értesítést</string -->
   <!-- UNUSED string name="r_disclaimer">Egyetértek azzal, hogy az alkalmazás szerzői nem felelősek semmilyen kárért vagy adatvesztésért.</string -->
-  <!-- UNUSED string name="r_continue">FOLYTATÁS</string -->
+  <!-- TODO string name="r_continue">CONTINUE</string -->
+  <!-- TODO string name="r_quit">QUIT</string -->
 
     <!-- UNUSED string name="version_ask">A TopoDroid frissítése.\nSzeretnéd újratelepíteni a rajzeszközöket?</string -->
     <string name="symbols_ask">Telepíted a rajzeszközök következő verzióját v.%1$s?\n(Jelenlegi v.%2$s)</string>
