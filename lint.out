@@ -1,10 +1,10 @@
 res/layout/shot_activity.xml:57: Warning: This ListView should use android:layout_width="wrap_content" [ScrollViewSize]
         android:layout_width="fill_parent"
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-src/com/topodroid/TDX/TDExporter.java:3776: Warning: Implicitly using the default locale is a common source of bugs: Use String.format(Locale, ...) instead [DefaultLocale]
+src/com/topodroid/TDX/TDExporter.java:3772: Warning: Implicitly using the default locale is a common source of bugs: Use String.format(Locale, ...) instead [DefaultLocale]
               writeSrvStations( pw, String.format("%s-%d", to, ii), to, item.isCommented() );
                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-src/com/topodroid/TDX/TDExporter.java:3806: Warning: Implicitly using the default locale is a common source of bugs: Use String.format(Locale, ...) instead [DefaultLocale]
+src/com/topodroid/TDX/TDExporter.java:3802: Warning: Implicitly using the default locale is a common source of bugs: Use String.format(Locale, ...) instead [DefaultLocale]
               writeSrvStations( pw, from, String.format("%s-%d", from, ii), item.isCommented() );
                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/layout/dblock_row_noedit.xml:31: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
@@ -25,200 +25,203 @@ res/values-fr/plurals.xml:11: Error: For locale "fr" (French) the following quan
 res/values-fr/plurals.xml:15: Error: For locale "fr" (French) the following quantities should also be defined: many [MissingQuantity]
   <plurals name="found_calib_groups">
   ^
-res/values/strings.xml:23: Error: "r_title" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian) [MissingTranslation]
-  <string name="r_title">Android-13+ WARNING</string>
-          ~~~~~~~~~~~~~~
-res/values/strings.xml:27: Error: "r_dialog" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian) [MissingTranslation]
+res/values/strings.xml:27: Error: "r_dialog" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
   <string name="r_dialog">
           ~~~~~~~~~~~~~~~
-res/values/strings.xml:33: Error: "r_continue" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian) [MissingTranslation]
+res/values/strings.xml:33: Error: "r_continue" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
   <string name="r_continue">CONTINUE</string>
           ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:200: Error: "unknown_device_type" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
+res/values/strings.xml:34: Error: "r_quit" is not translated in "cn", "it" (Italian), "fr" (French), "hu" (Hungarian) [MissingTranslation]
+  <string name="r_quit">QUIT</string>
+          ~~~~~~~~~~~~~
+res/values/strings.xml:201: Error: "unknown_device_type" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
     <string name="unknown_device_type">Unknown device type %1$d</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:251: Error: "GPS_position_none" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
+res/values/strings.xml:252: Error: "GPS_position_none" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
     <string name="GPS_position_none">No GPS position data</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:252: Error: "GPX_record_none" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
+res/values/strings.xml:253: Error: "GPX_record_none" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
     <string name="GPX_record_none">No GPX point record</string>
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:282: Error: "accuracy_hint" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:283: Error: "accuracy_hint" is not translated in "fr" (French) [MissingTranslation]
     <string name="accuracy_hint">Accuracy [m]</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:291: Error: "error_m" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:292: Error: "error_m" is not translated in "fr" (French) [MissingTranslation]
     <string name="error_m">Accuracy [m]</string>
             ~~~~~~~~~~~~~~
-res/values/strings.xml:292: Error: "fmt_error_h" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:293: Error: "fmt_error_h" is not translated in "fr" (French) [MissingTranslation]
     <string name="fmt_error_h">Accuracy: %1$.1f m</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:293: Error: "fmt_error_m" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:294: Error: "fmt_error_m" is not translated in "fr" (French) [MissingTranslation]
     <string name="fmt_error_m">Accuracy: H %1$.1f V %2$.1f m</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:296: Error: "location_start_fine" is not translated in "cn" or "fr" (French) [MissingTranslation]
+res/values/strings.xml:297: Error: "location_start_fine" is not translated in "cn" or "fr" (French) [MissingTranslation]
     <string name="location_start_fine">Starting fine position</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:307: Error: "error_fixes_nocs" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:308: Error: "error_fixes_nocs" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
     <string name="error_fixes_nocs">Fix points without CS %1$s:\n%2$s</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:323: Error: "error_profile_slant_section" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:324: Error: "error_profile_slant_section" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
     <string name="error_profile_slant_section">Slanted Xsection not enabled in profile view</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:331: Error: "error_station_fixed" is not translated in "cn" or "fr" (French) [MissingTranslation]
+res/values/strings.xml:332: Error: "error_station_fixed" is not translated in "cn" or "fr" (French) [MissingTranslation]
     <string name="error_station_fixed">Georefenced station</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:441: Error: "menu_geopoint_app" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:442: Error: "menu_geopoint_app" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
     <string name="menu_geopoint_app">GNSS APP</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:691: Error: "stat_devices" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:692: Error: "stat_devices" is not translated in "fr" (French) [MissingTranslation]
     <string name="stat_devices">Devices %1$d: %2$s</string>
             ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:709: Error: "stat_leg_sigma" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:710: Error: "stat_leg_sigma" is not translated in "cn" [MissingTranslation]
     <string name="stat_leg_sigma">Leg sigma %1$.1f cm</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:995: Error: "help_geopoint_app" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:996: Error: "help_geopoint_app" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
     <string name="help_geopoint_app">External GNSS apps</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1101: Error: "export_bothviews" is not translated in "cn" or "fr" (French) [MissingTranslation]
+res/values/strings.xml:1102: Error: "export_bothviews" is not translated in "cn" or "fr" (French) [MissingTranslation]
     <string name="export_bothviews">Plan and profile</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1108: Error: "export_layers" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:1109: Error: "export_layers" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
     <string name="export_layers">Scrap layers</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1119: Error: "export_spacing_th" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1120: Error: "export_spacing_th" is not translated in "cn" [MissingTranslation]
     <string name="export_spacing_th">Point spacing</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1182: Error: "title_fixed_mt" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:1183: Error: "title_fixed_mt" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
     <string name="title_fixed_mt">Geo points [Mobile Topographer]</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1183: Error: "title_fixed_gpx_rec" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:1184: Error: "title_fixed_gpx_rec" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
     <string name="title_fixed_gpx_rec">Geo points [GPX Recorder]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1184: Error: "title_fixed_gps_pos" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:1185: Error: "title_fixed_gps_pos" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
     <string name="title_fixed_gps_pos">Geo points [GPS Position]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1185: Error: "title_fixed_gps_test" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:1186: Error: "title_fixed_gps_test" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
     <string name="title_fixed_gps_test">Geo points [GPSTest]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1186: Error: "title_fixed_gps_logger" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian) [MissingTranslation]
+res/values/strings.xml:1187: Error: "title_fixed_gps_logger" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian) [MissingTranslation]
     <string name="title_fixed_gps_logger">Geo points [GPS Logger]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1292: Error: "pref_lrud_count_title" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1293: Error: "pref_lrud_count_title" is not translated in "cn" [MissingTranslation]
   <string name="pref_lrud_count_title">LRUD splay count</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1293: Error: "pref_lrud_count_summary" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1294: Error: "pref_lrud_count_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_lrud_count_summary">Number of splays used for LRUD</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1369: Error: "pref_th2_edit_title" is not translated in "it" (Italian), "fr" (French), "hu" (Hungarian) [MissingTranslation]
+res/values/strings.xml:1370: Error: "pref_th2_edit_title" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
   <string name="pref_th2_edit_title">Sketch editing</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1370: Error: "pref_th2_edit_summary" is not translated in "it" (Italian), "fr" (French), "hu" (Hungarian) [MissingTranslation]
+res/values/strings.xml:1371: Error: "pref_th2_edit_summary" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
   <string name="pref_th2_edit_summary">Enable sketch editing</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1478: Error: "pref_neg_altitude_title" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:1479: Error: "pref_neg_altitude_title" is not translated in "fr" (French) [MissingTranslation]
   <string name="pref_neg_altitude_title">Neg. altitudes</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1479: Error: "pref_neg_altitude_summary" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:1480: Error: "pref_neg_altitude_summary" is not translated in "fr" (French) [MissingTranslation]
   <string name="pref_neg_altitude_summary">Allow negative altitudes</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1480: Error: "pref_edit_altitude_title" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
+res/values/strings.xml:1481: Error: "pref_edit_altitude_title" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
   <string name="pref_edit_altitude_title">Editable altitude</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1481: Error: "pref_edit_altitude_summary" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
+res/values/strings.xml:1482: Error: "pref_edit_altitude_summary" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
   <string name="pref_edit_altitude_summary">Allow editable altitudes</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1482: Error: "pref_fine_location_title" is not translated in "cn" or "fr" (French) [MissingTranslation]
+res/values/strings.xml:1483: Error: "pref_fine_location_title" is not translated in "cn" or "fr" (French) [MissingTranslation]
   <string name="pref_fine_location_title">Fine position [s]</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1483: Error: "pref_fine_location_summary" is not translated in "cn" or "fr" (French) [MissingTranslation]
+res/values/strings.xml:1484: Error: "pref_fine_location_summary" is not translated in "cn" or "fr" (French) [MissingTranslation]
   <string name="pref_fine_location_summary">Fine position time [s]</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1484: Error: "pref_geoimport_app_title" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:1485: Error: "pref_geoimport_app_title" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
   <string name="pref_geoimport_app_title">GNSS app</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1485: Error: "pref_geoimport_app_summary" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:1486: Error: "pref_geoimport_app_summary" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
   <string name="pref_geoimport_app_summary">External GNSS app</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1492: Error: "pref_sap5_bit16_bug_title" is not translated in "it" (Italian), "fr" (French), "hu" (Hungarian) [MissingTranslation]
+res/values/strings.xml:1493: Error: "pref_sap5_bit16_bug_title" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
   <string name="pref_sap5_bit16_bug_title">SAP5 bit-16 bug</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1493: Error: "pref_sap5_bit16_bug_summary" is not translated in "it" (Italian), "fr" (French), "hu" (Hungarian) [MissingTranslation]
+res/values/strings.xml:1494: Error: "pref_sap5_bit16_bug_summary" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
   <string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 bug workaround</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1528: Error: "pref_splay_latest_color_title" is not translated in "cn", "it" (Italian), "fr" (French), "hu" (Hungarian) [MissingTranslation]
+res/values/strings.xml:1529: Error: "pref_splay_latest_color_title" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
   <string name="pref_splay_latest_color_title">Splay latest color</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1529: Error: "pref_splay_latest_color_summary" is not translated in "cn", "it" (Italian), "fr" (French), "hu" (Hungarian) [MissingTranslation]
+res/values/strings.xml:1530: Error: "pref_splay_latest_color_summary" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
   <string name="pref_splay_latest_color_summary">Color of latest splay lines</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1600: Error: "pref_acad_layer_title" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:1601: Error: "pref_acad_layer_title" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
   <string name="pref_acad_layer_title">Scrap layers</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1601: Error: "pref_acad_layer_summary" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:1602: Error: "pref_acad_layer_summary" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
   <string name="pref_acad_layer_summary">DXF layers by scraps</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1636: Error: "pref_slant_xsection_title" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:1637: Error: "pref_slant_xsection_title" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
   <string name="pref_slant_xsection_title">Slant xsections</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1637: Error: "pref_slant_xsection_summary" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:1638: Error: "pref_slant_xsection_summary" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
   <string name="pref_slant_xsection_summary">Profile view slant xsections</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1923: Error: "equate_no_stations" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:1924: Error: "equate_no_stations" is not translated in "fr" (French) [MissingTranslation]
     <string name="equate_no_stations">Too few stations</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1993: Error: "info_origin" is not translated in "cn" or "fr" (French) [MissingTranslation]
+res/values/strings.xml:1994: Error: "info_origin" is not translated in "cn" or "fr" (French) [MissingTranslation]
     <string name="info_origin">Origin</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1994: Error: "info_lonlat" is not translated in "cn" or "fr" (French) [MissingTranslation]
+res/values/strings.xml:1995: Error: "info_lonlat" is not translated in "cn" or "fr" (French) [MissingTranslation]
     <string name="info_lonlat">coords.</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1995: Error: "info_radii" is not translated in "cn" or "fr" (French) [MissingTranslation]
+res/values/strings.xml:1996: Error: "info_radii" is not translated in "cn" or "fr" (French) [MissingTranslation]
     <string name="info_radii">radii</string>
             ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2008: Error: "info_origin_value" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:2009: Error: "info_origin_value" is not translated in "fr" (French) [MissingTranslation]
     <string name="info_origin_value">x %1$.0f y %2$.0f z %3$.0f</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2009: Error: "info_origin_none" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:2010: Error: "info_origin_none" is not translated in "fr" (French) [MissingTranslation]
     <string name="info_origin_none">undefined</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2010: Error: "info_lonlat_geovalue" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:2011: Error: "info_lonlat_geovalue" is not translated in "fr" (French) [MissingTranslation]
     <string name="info_lonlat_geovalue">lon %1$.7f lat %2$.7f</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2011: Error: "info_lonlat_prjvalue" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:2012: Error: "info_lonlat_prjvalue" is not translated in "fr" (French) [MissingTranslation]
     <string name="info_lonlat_prjvalue">lon %1$.1f lat %2$.1f</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2012: Error: "info_radii_value" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:2013: Error: "info_radii_value" is not translated in "fr" (French) [MissingTranslation]
     <string name="info_radii_value">EW %1$.1f NS %2$.1f</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2055: Error: "texture" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:2035: Error: "dist_path" is not translated in "ru" (Russian), "cn", "fr" (French), "hu" (Hungarian) [MissingTranslation]
+    <string name="dist_path">%1$s %2$s: D %3$.2f (%4$.2f %5$.2f %6$.2f) %7$.2f %8$.2f Path %9$.2f</string>
+            ~~~~~~~~~~~~~~~~
+res/values/strings.xml:2056: Error: "texture" is not translated in "cn" [MissingTranslation]
     <string name="texture">DTM</string>
             ~~~~~~~~~~~~~~
-res/values/strings.xml:2086: Error: "east" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:2087: Error: "east" is not translated in "fr" (French) [MissingTranslation]
   <string name="east">E</string>
           ~~~~~~~~~~~
-res/values/strings.xml:2087: Error: "north" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:2088: Error: "north" is not translated in "fr" (French) [MissingTranslation]
   <string name="north">N</string>
           ~~~~~~~~~~~~
-res/values/strings.xml:2088: Error: "west" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:2089: Error: "west" is not translated in "fr" (French) [MissingTranslation]
   <string name="west">W</string>
           ~~~~~~~~~~~
-res/values/strings.xml:2089: Error: "south" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:2090: Error: "south" is not translated in "fr" (French) [MissingTranslation]
   <string name="south">S</string>
           ~~~~~~~~~~~~
-res/values/strings.xml:2199: Error: "cpref_grid_extent_summary" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:2200: Error: "cpref_grid_extent_summary" is not translated in "fr" (French) [MissingTranslation]
     <string name="cpref_grid_extent_summary">Grid extent around the survey plan-view</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values-fr/plurals.xml:4: Error: The quantity 'one' matches more than one specific number in this locale (0, 1), but the message did not include a formatting argument (such as %d). This is usually an internationalization error. See full issue explanation for more. [ImpliedQuantity]
     <item quantity="one">ATTENTION. Une donnée saturée</item>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:601: Warning: Inconsistent number of arguments in formatting string shot_rename_unsafe; found both 1 here and 0 in values-fr/strings.xml [StringFormatCount]
+res/values/strings.xml:602: Warning: Inconsistent number of arguments in formatting string shot_rename_unsafe; found both 1 here and 0 in values-fr/strings.xml [StringFormatCount]
     <string name="shot_rename_unsafe">Stations referenced by xsections:%1$s.\nRename shot ?</string>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    res/values-fr/strings.xml:603: Conflicting number of arguments (0) here
-res/values/strings.xml:602: Warning: Inconsistent number of arguments in formatting string shots_rename_unsafe; found both 1 here and 0 in values-fr/strings.xml [StringFormatCount]
+    res/values-fr/strings.xml:601: Conflicting number of arguments (0) here
+res/values/strings.xml:603: Warning: Inconsistent number of arguments in formatting string shots_rename_unsafe; found both 1 here and 0 in values-fr/strings.xml [StringFormatCount]
     <string name="shots_rename_unsafe">Stations referenced by xsections:\n%1$s.\nRename shots ?</string>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    res/values-fr/strings.xml:604: Conflicting number of arguments (0) here
+    res/values-fr/strings.xml:602: Conflicting number of arguments (0) here
 res/values-fr/plurals.xml:7: Warning: For language "fr" (French) the following quantities are not relevant: zero [UnusedQuantity]
   <plurals name="read_data">
   ^
@@ -237,10 +240,10 @@ res/layout/survey_stat_dialog.xml:77: Warning: This tag and its children can be 
 res/layout/survey_stat_dialog.xml:97: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
     <LinearLayout 
      ~~~~~~~~~~~~
-src/com/topodroid/TDX/DataHelper.java:628: Warning: Use Integer.valueOf(1) instead [UseValueOf]
+src/com/topodroid/TDX/DataHelper.java:629: Warning: Use Integer.valueOf(1) instead [UseValueOf]
               cnts.put( address, new Integer(1) );
                                  ~~~~~~~~~~~~~~
-src/com/topodroid/TDX/DataHelper.java:630: Warning: Use Integer.valueOf(cnt.intValue() + 1) instead [UseValueOf]
+src/com/topodroid/TDX/DataHelper.java:631: Warning: Use Integer.valueOf(cnt.intValue() + 1) instead [UseValueOf]
               cnts.put( address, new Integer( cnt.intValue() + 1 ) );
                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/layout/menu.xml:11: Warning: Possible overdraw: Root element paints background @color/menu_background with a theme that also paints a background (inferred theme is @android:style/Theme.Holo) [Overdraw]
@@ -253,14 +256,5 @@ res/mipmap-anydpi-v26/ic_launcher_round.xml:2: Warning: The resource R.mipmap.ic
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
 ^
 res/raw/name_pos_hl_geometry.glsl: Warning: The resource R.raw.name_pos_hl_geometry appears to be unused [UnusedResources]
-res/values-cn/strings.xml:2030: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
-    <string name="dem_loading">加载表面中 ... 请等待</string>
                                ~~~~~~~~~~~~~
 res/mipmap-xhdpi/ic_launcher.png: Warning: The following unrelated icon files have identical contents: iz_topodroid.png, ic_launcher.png [IconDuplicates]
-res/layout/dialog_r.xml:20: Warning: This text field does not specify an inputType [TextFields]
-    <EditText android:id="@+id/r_i_understood"
-     ~~~~~~~~
-res/layout/dialog_r.xml:20: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/r_i_understood"
-     ~~~~~~~~
-66 errors, 23 warnings

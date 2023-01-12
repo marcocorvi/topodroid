@@ -2024,7 +2024,7 @@
     <string name="surface_north">北</string>
     <!-- NO string name="dem_file">%1$s</string -->
     <string name="dem_load">载入 DEM</string>
-    <string name="dem_loading">加载表面中 ... 请等待</string>
+    <string name="dem_loading">加载表面中 &#8230; 请等待</string>
     <string name="dem_failed">DEM载入失败</string>
     <string name="dem_ok">读取 DEM 数据</string>
     <string name="dem">DEM</string>
