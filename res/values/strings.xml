@@ -2031,8 +2031,8 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="clear">Clear</string -->
     <string name="plan_proj">Plan</string>
     <string name="profile_proj">Profile</string>
-    <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
-    <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Cave %9$.1f</string>
+    <string name="dist_no_path">%1$s %2$s: D %3$.2f (%4$.2f %5$.2f %6$.2f) %7$.2f %8$.2f</string>
+    <string name="dist_path">%1$s %2$s: D %3$.2f (%4$.2f %5$.2f %6$.2f) %7$.2f %8$.2f Path %9$.2f</string>
     <!-- UNUSED string name="measure">measure</string -->
 
     <!-- UNUSED string name="style_stroke">Stroke</string -->

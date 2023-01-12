@@ -2015,8 +2015,8 @@
     <!-- UNUSED string name="clear">Törlés</string -->
     <string name="plan_proj">Alaprajz</string>
     <string name="profile_proj">Oldalnézet</string>
-    <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
-    <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Barlang %9$.1f</string>
+    <string name="dist_no_path">%1$s %2$s: D %3$.2f (%4$.2f %5$.2f %6$.2f) %7$.2f %8$.2f</string>
+    <!-- TODO string name="dist_path">%1$s %2$s: D %3$.2f (%4$.2f %5$.2f %6$.2f) %7$.2f %8$.2f Path %9$.2f</string -->
     <!-- UNUSED string name="measure">mérés</string -->
 
     <!-- UNUSED string name="style_stroke">Simítás</string -->
