@@ -224,6 +224,7 @@ public class TDPath
  
   /** set the Current Work Directory
    * @param name   current work directory name, eg, "TopoDroid"
+   * FIXME FIXME FIXME allow cwd change in private folder
    */
   static void setTdPaths( String name /*, String base */ )
   {
@@ -237,7 +238,13 @@ public class TDPath
       return;
     }
     if ( name == null || ! name.toLowerCase( Locale.getDefault() ).startsWith( "topodroid" ) ) return;
-    File dir = TDFile.getExternalDir( name ); // DistoX-SAF
+    File dir = TDandroid.PRIVATE_STORAGE ?  TDFile.getPrivateDir( name ) : TDFile.getExternalDir( name ); // DistoX-SAF
+    // if ( TDandroid.PRIVATE_STORAGE ) { // TODO ?
+    //   // PATH_CW_DIR = cwd.getAbsolutePath();
+    //   // PATH_CW_DIR = PATH_CB_DIR + "/" + name; 
+    // } else {
+    //   // PATH_CW_DIR =  PATH_CB_DIR + "/" + name;
+    // }
     TDLog.v( "set paths [4]: " + name + ". Dir " + dir.getPath()  );
     try {
       if ( dir.exists() || dir.mkdirs() ) {
@@ -248,6 +255,7 @@ public class TDPath
           ROOT_TMP      = ROOT_CW_DIR + "/tmp";      checkFilesystemDirs( ROOT_TMP );
           ROOT_TDCONFIG = ROOT_CW_DIR + "/thconfig"; checkFilesystemDirs( ROOT_TDCONFIG  );
           ROOT_C3EXPORT = ROOT_CW_DIR + "/c3export"; checkFilesystemDirs( ROOT_C3EXPORT  );
+          PATH_CW_DIR   = TDandroid.PRIVATE_STORAGE ? dir.getAbsolutePath() : ROOT_CW_DIR;
           setSurveyPaths( null );
 	} else {
           TDLog.Error("PATH ext storage: no dir or no write " + name );
