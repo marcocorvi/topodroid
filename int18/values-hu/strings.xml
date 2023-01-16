@@ -48,7 +48,7 @@
     <string name="setup_drawingunit">Állítsa be a vázlat ikonok méretét.\nEzt később bármikor megváltoztathatja a főablak beállításain keresztül.</string>
     <string name="setup_done">Az alapbeállítás kész.\n\n
 	    Ha problémákat tapasztal a DistoX csatlakozással, próbálja meg beállítani a nem biztonságos kapcsolatot.\n\n
-	    A vázlatok bemutatásának más beállításai is vannak (ikonméret, címkeméret, vonalvastagság stb.); később beállíthatja őket.
+	    A vázlatok bemutatásának más beállításai is vannak (ikonméret, címkeméret, vonalvastagság stb.); később beállíthatja őket.\n
     </string>
     <!-- DONT_TRANSLATE string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string -->
 
@@ -114,7 +114,7 @@
     <string name="bric_clear_memory">Memória törlés</string>
     <string name="bric_future_time">Nem lehet visszaállítani jövőbeli időpontra</string>
     <string name="bric_ask_memory_clear">Töröljük a BRIC memóriáját?</string>
-    <string name="bric_reset_ok">Visszaállított idő</string>
+    <string name="bric_reset_ok">Idő visszaállítás</string>
     <string name="bric_reset_fail">Idő visszaállítás sikertelen</string>
     <string name="bric_clear_ok">Memória törölve </string>
     <string name="bric_clear_fail">Memória törlés sikertelen</string>
@@ -1007,7 +1007,7 @@
     <string name="help_add_shot">Mérés hozzáadása az adatok beírásával</string>
     <string name="help_info_shot">Felmérési statisztikák</string>
     <string name="help_gps_surveys">Mérések GNSS pontjai</string>
-    <string name="help_survey_info">Felmérési információk</string>
+    <string name="help_survey_info">Felmérési információ</string>
     <string name="help_undelete">Törölt elemek visszaállítása</string>
 	<!-- UPDATES string name="help_updates">Check for app version updates</string -->
     <string name="help_photo">Fényképek</string>
@@ -1434,7 +1434,7 @@
   <string name="pref_csv_eol_summary">CSV sor elválasztó</string>
 
   <string name="pref_sock_type_title">Csatlakozás</string>
-  <string name="pref_sock_type_summary">Csatlakozás létrehozása</string>
+  <string name="pref_sock_type_summary">Bluetooth socket típus</string>
   <!-- UNUSED string name="pref_device_type_title">Disto típus</string -->
   <!-- UNUSED string name="pref_device_type_summary">DistoX modell</string -->
   <!-- UNUSED string name="pref_comm_retry_title">Kapcsolódás ismétlés</string -->
