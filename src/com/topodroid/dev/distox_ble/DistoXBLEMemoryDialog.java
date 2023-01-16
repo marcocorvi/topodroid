@@ -136,7 +136,7 @@ public class DistoXBLEMemoryDialog extends MyDialog
 
   /** set the value in the FROM field
    * @param index   value
-   * @implements IMemoryDialog
+   * @note implements IMemoryDialog
    */
   public void setIndex( int index ) 
   {

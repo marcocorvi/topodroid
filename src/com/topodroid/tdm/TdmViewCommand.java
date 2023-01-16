@@ -134,7 +134,7 @@ public class TdmViewCommand
     for ( TdmViewStation st : mStations ) st.mEquated = false;
   }
 
-  // oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+  // -------------------------------------------------------------
 
   /** add a fixed path (called by DrawingSurface::addFixedPath)
    * @param sh    shot

@@ -72,7 +72,7 @@ public class BleCallback extends BluetoothGattCallback
 
   /** react to a characteristic change
    * @param gatt   GATT
-   * @param chrt   charcateristic
+   * @param chrt   characteristic
    */ 
   @Override
   public void onCharacteristicChanged( BluetoothGatt gatt, BluetoothGattCharacteristic chrt )
@@ -84,7 +84,7 @@ public class BleCallback extends BluetoothGattCallback
 
   /** react to a characteristic read
    * @param gatt   GATT
-   * @param chrt   charcateristic
+   * @param chrt   characteristic
    * @param status status
    */ 
   @Override
@@ -98,7 +98,7 @@ public class BleCallback extends BluetoothGattCallback
       if ( LOG ) TDLog.v("BLE callback on char read NOT PERMITTED - perms " + BleUtils.isChrtRead( chrt ) + " " + chrt.getPermissions() );
       mComm.error( status, chrt.getUuid().toString(), "onCharacteristicRead" );
     } else if ( status == BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION ) {
-      if ( LOG ) TDLog.v("BLE callback on char read insuff. auth.");
+      if ( LOG ) TDLog.v("BLE callback on char read insufficient auth.");
       mComm.failure( status, chrt.getUuid().toString(), "onCharacteristicRead" );
     } else {
       if ( LOG ) TDLog.v("BLE callback on char read generic error");
@@ -108,7 +108,7 @@ public class BleCallback extends BluetoothGattCallback
 
   /** react to a characteristic write
    * @param gatt   GATT
-   * @param chrt   charcateristic
+   * @param chrt   characteristic
    * @param status status
    */ 
   @Override
@@ -121,7 +121,7 @@ public class BleCallback extends BluetoothGattCallback
     } else if ( status == BluetoothGatt.GATT_INVALID_ATTRIBUTE_LENGTH || status == BluetoothGatt.GATT_WRITE_NOT_PERMITTED ) {
       mComm.error( status, chrt.getUuid().toString(), "onCharacteristicWrite" );
     } else if ( status == BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION ) {
-      if ( LOG ) TDLog.v("BLE callback on char write insuff. auth.");
+      if ( LOG ) TDLog.v("BLE callback on char write insufficient auth.");
       mComm.failure( status, chrt.getUuid().toString(), "onCharacteristicWrite" );
     } else {
       mComm.failure( status, chrt.getUuid().toString(), "onCharacteristicWrite" );
@@ -141,13 +141,13 @@ public class BleCallback extends BluetoothGattCallback
       if ( state == BluetoothProfile.STATE_CONNECTED ) {
         mComm.connected();
         try {
-          int bondstate = mDevice.getBondState();
-          if ( bondstate == BluetoothDevice.BOND_NONE ) {
+          int bond_state = mDevice.getBondState();
+          if ( bond_state == BluetoothDevice.BOND_NONE ) {
             if ( LOG ) TDLog.v("BLE bond NONE - discover services");
             gatt.discoverServices();
-          } else if ( bondstate == BluetoothDevice.BOND_BONDING ) {
+          } else if ( bond_state == BluetoothDevice.BOND_BONDING ) {
             if ( LOG ) TDLog.v("BLE bond BONDING - waiting for bonding to complete");
-          } else if ( bondstate == BluetoothDevice.BOND_BONDED ) { 
+          } else if ( bond_state == BluetoothDevice.BOND_BONDED ) {
             if ( TDandroid.BELOW_API_26 ) TDUtil.slowDown( 1001 ); // TODO use a Runnable to (wait and then) discover
             if ( LOG ) TDLog.v("BLE bond NONE - discover services");
             gatt.discoverServices();
@@ -169,7 +169,7 @@ public class BleCallback extends BluetoothGattCallback
       }
         
     } else {
-      TDLog.Error("BLE callack onConnectionStateChange error - status " + status );
+      TDLog.Error("BLE callback onConnectionStateChange error - status " + status );
       mComm.notifyStatus( ConnectionState.CONN_WAITING );
       if ( status == CONNECTION_TIMEOUT  // 8
         || status == CONNECTION_133      // low level error
@@ -532,7 +532,7 @@ public class BleCallback extends BluetoothGattCallback
 
   /**
    * @note writeType can be DEFAULT, NO_RESPONSE, SIGNED
-   * if a characteristics supports both NO_RESPONSE and DEFAILT Android picks NO_RESPONSE
+   * if a characteristics supports both NO_RESPONSE and DEFAULT Android picks NO_RESPONSE
    * FIXME do not rely on Android and set what yoy want
    */
   public boolean writeChrt(  UUID srvUuid, UUID chrtUuid, byte[] bytes )
@@ -655,12 +655,13 @@ public class BleCallback extends BluetoothGattCallback
   /** request a MTU value
    * @param mtu    requested value
    * @return true if the value has been accepted
+   * @note below API_21 MTU cannot be requested and the return is false
    */
   public boolean requestMtu( int mtu )
   {
     if ( LOG ) TDLog.v( "BLE request MTU " + mtu );
     if ( mGatt == null ) return false;
-    return mGatt.requestMtu( mtu );
+    return TDandroid.AT_LEAST_API_21 ? mGatt.requestMtu( mtu ) : false;
   }
 
   /** clear the gatt service cache - NB asynchronous

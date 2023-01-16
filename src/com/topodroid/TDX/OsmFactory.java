@@ -260,7 +260,7 @@ public class OsmFactory
         } else if ( line.startsWith( "<way" ) ) {
           way = new Way();
         } else if ( line.startsWith( "</way>" ) ) {
-          way.draw( canvas );
+          way.draw( canvas ); // FIXME may null pointer
           way = null;
         } else if ( line.startsWith( "<relation" ) ) {
         } else if ( line.startsWith( "</relation" ) ) {

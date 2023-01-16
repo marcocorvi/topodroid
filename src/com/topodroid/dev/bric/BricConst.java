@@ -75,7 +75,7 @@ public class BricConst
     // TDLog.v( "BRIC time " + String.format("%4d-%02d-%02d %2d:%02d:%02d.%02d", yy, mm, dd, HH, MM, SS, CS ) );
     Calendar date = new GregorianCalendar();
     date.set( yy, mm, dd, HH, MM, SS );
-    return date.getTimeInMillis() + 10 * CS;
+    return date.getTimeInMillis() + 10L * CS;
   }
 
   static String getTimeString( byte[] bytes ) 

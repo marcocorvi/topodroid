@@ -410,7 +410,7 @@ public class SapComm extends TopoDroidComm
     handleRegularPacket( res, mLister, DataType.DATA_SHOT );
   }
 
-  /** react to notifictaion that the write characteristics has been written
+  /** react to notification that the write characteristics has been written
    * @param uuid_str   characteristic short UUID (?) (unused)
    * @param bytes      array of written bytes (unused)
    * @note from the BleCallback

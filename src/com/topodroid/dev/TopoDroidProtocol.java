@@ -322,7 +322,7 @@ public class TopoDroidProtocol
    * @param data     array-list of MemoryOctet to fill with read data
    * @return the number of read octets 
    */
-  public int readMemory( int start, int end, List< MemoryOctet > data, IMemoryDialog dialod ) { return 0; }
+  public int readMemory( int start, int end, List< MemoryOctet > data, IMemoryDialog dialog ) { return 0; }
 
   /** write calibration coeffs to the DistoX
    * @param calib    array of 48 (52) bytes with the coefficients

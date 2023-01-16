@@ -1616,11 +1616,11 @@ public class MainWindow extends Activity
       return;
     } 
     // TDLog.v( "selectImportFromProvider runs on " + TDLog.threadId() );
-    Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT );
-    intent.setType( TDConst.mMimeType[ index ] );
-    // TDLog.v( "Import from provider. index " + index + " mime " + TDConst.mMimeType[ index ] );
-    intent.addCategory(Intent.CATEGORY_OPENABLE);
-    intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+    // Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT ); // API_19
+    // intent.setType( TDConst.mMimeType[ index ] );
+    // intent.addCategory(Intent.CATEGORY_OPENABLE);
+    // intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION); // API_19
+    Intent intent = TDandroid.getOpenDocumentIntent( index );
     // intent.putExtra( "importtype", index ); // extra is not returned to the app
     mImportData = data;
     mImportData.mType = index;

@@ -317,7 +317,7 @@ public class FixedActivity extends Activity
 
 
   /** add a fixed point
-   * @param station point station name
+   * @param name point station name
    * @param lng     longitude [degrees]
    * @param lat     latitude [degrees]
    * @param h_ell   ellipsoid altitude [m]
@@ -498,7 +498,7 @@ public class FixedActivity extends Activity
   {
     TDLog.v("FIXED import app " + TDSetting.mGeoImportApp );
     int request = 0;
-    Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT );
+    Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT ); // API_19 - TODO use TDandroid.getOpenDocumentIntent
     if ( TDSetting.mGeoImportApp == FLAG_MOBILE_TOPOGRAPHER ) { // pointlist file
       intent.setType( "application/octet-stream" );
       request = TDRequest.REQUEST_MOBILE_TOPOGRAPHER;
@@ -516,7 +516,8 @@ public class FixedActivity extends Activity
       request = TDRequest.REQUEST_GPS_LOGGER;
     }
     intent.addCategory(Intent.CATEGORY_OPENABLE);
-    intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+    intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION); // API_19
+
     // intent.putExtra( "importtype", index ); // extra is not returned to the app
     startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.title_import_gps ) ), request );
   }

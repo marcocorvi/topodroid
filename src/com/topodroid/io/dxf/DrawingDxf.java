@@ -628,7 +628,7 @@ public class DrawingDxf
             handle = DXF.writeAcDb( out, handle, point_record_handle[n], DXF.AcDbEntity, "AcDbBlockBegin" );
             block_handle = handle;
           }
-          String th_name = replaceColon( pt.getThName() );
+          String th_name = replaceColon( pt.getThName() ); // FIXME may null pointer
           // HBX_DXF
           String layer2 = TDSetting.mAcadLayer?  "0" // by-block
                                               : "P_" + th_name;
@@ -1046,7 +1046,7 @@ public class DrawingDxf
       layer2 = "SCRAP_" + Integer.toString( scrap ); //
       //layer = inttostr(z);
       Symbol line2 = BrushManager.getLineByIndex(BrushManager.getLineIndexByThName(line.getThName()));
-      color = DxfColor.rgbToIndex(line2.getColor());
+      color = DxfColor.rgbToIndex(line2.getColor()); // FIXME may null pointer
       //color = 1;
       // TDLog.v( "HBX_DXF <" + line.getThName() + "> " + String.format("%X %X ", ref_handle, color) + layer + layer2+" "+color);
     } else {
@@ -1099,7 +1099,7 @@ public class DrawingDxf
       layer2 = "SCRAP_" + Integer.toString( scrap );
       //layer = inttostr(z);
       Symbol area2 = BrushManager.getAreaByIndex(BrushManager.getAreaIndexByThName(area.getThName()));
-      color = DxfColor.rgbToIndex(area2.getColor());
+      color = DxfColor.rgbToIndex(area2.getColor()); // FIXME may null pointer
       //int color = 1;
     } else {
       linetype = DXF.lt_byLayer;

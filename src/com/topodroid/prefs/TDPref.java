@@ -178,7 +178,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
         setColor( value );
         break;
     }
-    textview = (TextView) v.findViewById( R.id.title );
+    textview = (TextView) v.findViewById( R.id.title ); // FIXME may null pointer
     textview.setMaxWidth( (int)(0.70f * TopoDroidApp.mDisplayWidth) );
     textview.setText( title );
     if ( summary == null ) {
@@ -1124,7 +1124,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     return new TDPref[ ] {
       makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],         ctx, hlp ), // DISTOX_CSV_RAW
       makeLst( cat, key[1], tit[1], dsc[1], A, def[1], R.array.csvSeparator, R.array.csvSeparatorValue, ctx, hlp ), // DISTOX_CSV_SEP
-      makeLst( cat, key[2], tit[2], dsc[2], N, def[2], R.array.survexEol, R.array.survexEolValue, ctx, hlp ) // DISTOC_SURVEX_EOL
+      makeLst( cat, key[2], tit[2], dsc[2], N, def[2], R.array.survexEol, R.array.survexEolValue, ctx, hlp ) // DISTOX_SURVEX_EOL
     };
   }
 

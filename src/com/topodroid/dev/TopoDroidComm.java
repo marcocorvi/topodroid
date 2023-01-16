@@ -355,7 +355,7 @@ public class TopoDroidComm
    * @param to_read   number of packets to read
    * @param lister    data lister
    * @param data_type expected data type (?)A
-   * @param timeout   closing the thread if no data raceived within the timeout (UNUSED)
+   * @param timeout   closing the thread if no data received within the timeout (UNUSED)
    * @return always false (ie, thread not started) by default
    */
   protected boolean startCommThread( int to_read, ListerHandler lister, int data_type, int timeout ) 
@@ -440,7 +440,7 @@ public class TopoDroidComm
    */
   public boolean connectDevice( String address, ListerHandler lister, int data_type, int timeout )
   {
-    TDLog.v("TD comm: generic comnnect device always false");
+    TDLog.v("TD comm: generic connect device always false");
     return false;
   }
 
@@ -449,7 +449,7 @@ public class TopoDroidComm
    */
   public boolean disconnectDevice() 
   { 
-    TDLog.v("TD comm: generic discomnnect device always true");
+    TDLog.v("TD comm: generic disconnect device always true");
     return true;
   }
 

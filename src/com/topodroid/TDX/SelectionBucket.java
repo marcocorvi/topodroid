@@ -74,6 +74,6 @@ class SelectionBucket
 
   // void dump( )
   // {
-  //   tdlog.v("SELECT B " + size() + " " + x0 + ":" + x1 + " " + y0 + ":" + y1 );
+  //   TDLog.v("SELECT B " + size() + " " + x0 + ":" + x1 + " " + y0 + ":" + y1 );
   // }
 }

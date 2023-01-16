@@ -400,18 +400,18 @@ public class Scrap
     if ( size == 2 ) return;
     syncClearSelected();
 
-    boolean splitted = false;
+    boolean is_split = false;
     DrawingLinePath line1 = new DrawingLinePath( line.mLineType, mScrapIdx );
     DrawingLinePath line2 = new DrawingLinePath( line.mLineType, mScrapIdx );
     line1.setOptions( line.getOptions() );
     line2.setOptions( line.getOptions() );
 
     try {
-      splitted = line.splitAt( lp, line1, line2, false );
+      is_split = line.splitAt( lp, line1, line2, false );
     } catch ( OutOfMemoryError e ) {
       TDLog.Error("OOM " + e.getMessage() );
     }
-    if ( splitted ) {
+    if ( is_split ) {
       synchronized( TDPath.mCommandsLock ) {
         mCurrentStack.remove( line );
         mCurrentStack.add( line1 );
@@ -491,13 +491,13 @@ public class Scrap
     line1.setOptions( line.getOptions() );
     line2.setOptions( line.getOptions() );
 
-    boolean splitted = false;
+    boolean is_split = false;
     try {
-      splitted = line.splitAt( lp, line1, line2, true );
+      is_split = line.splitAt( lp, line1, line2, true );
     } catch ( OutOfMemoryError e ) {
       TDLog.Error("OOM " + e.getMessage() );
     }
-    if ( splitted ) {
+    if ( is_split ) {
       // TDLog.v( "split " + line.size() + " ==> " + line1.size() + " " + line2.size() );
       // synchronized( TDPath.mCommandsLock ) // not necessary: called in synchronized context
       {

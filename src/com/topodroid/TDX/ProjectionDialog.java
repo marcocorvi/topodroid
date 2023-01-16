@@ -281,7 +281,7 @@ class ProjectionDialog extends MyDialog
 
   // --------------------------------------------------------------
 
-  /** svitch the visibility of zoom-controls
+  /** switch the visibility of zoom-controls
    * @param ctrl   control value: 0 not used, 1 not visible, 2 visible
    * @note this method is a callback to let other objects tell the activity to use zooms or not
    */
@@ -421,7 +421,7 @@ class ProjectionDialog extends MyDialog
     doStart();
   }
 
-  /** set the vallue of the azimuth
+  /** set the value of the azimuth
    * @param a         new value of the azimuth
    * @param edit_text whether the set came from the edit text field
    */
@@ -460,7 +460,7 @@ class ProjectionDialog extends MyDialog
     int h0 = findViewById( R.id.layout1 ).getHeight();
     
     // mDisplayCenter = new PointF( w / 2 - DrawingUtil.CENTER_X, h / 2 - DrawingUtil.CENTER_Y );
-    mDisplayCenter = new PointF( w / 2, (h + h0)/ 2 );
+    mDisplayCenter = new PointF( w / 2.0f, (h + h0)/ 2.0f );
 
     float centerx = ( e1 + e2 )/ 2; // FIXME this is DrawingUtil.CENTER_X = 100
     float centery = ( v1 + v2 )/ 2; // FIXME this is DrawingUtil.CENTER_Y = 120

@@ -91,9 +91,9 @@ public class Cave3DFix extends Vector3D
    * @param lng  WGS84 longitude
    * @param lat  WGS84 latitude
    * @param h_ell WGS84 altitude (ellipsoid)
-   * @param h_geo geoid altitude
+   * (param h_geo geoid altitude)
    */
-  public Cave3DFix( String nm, double e0, double n0, double z0, Cave3DCS cs0, double lng, double lat, double h_ell /* , double h_ell */,
+  public Cave3DFix( String nm, double e0, double n0, double z0, Cave3DCS cs0, double lng, double lat, double h_ell /* , double h_geo */,
                     double m_to_units, double m_to_vunits )
   {
     super( e0, n0, z0 );

@@ -93,7 +93,7 @@ public class SymbolPoint extends Symbol
   @Override public String getName( ) { return mName; }
   // @Override public String getThName( ) { return mThName; } // same as in Symbol.java
 
-  /** @return the point in DXVI format
+  /** @return the point in DXF format
    */
   public SymbolPointDxf getDxf() { return mDxf; }
 

@@ -360,7 +360,7 @@ public class TDExporter
       
 
    // ============== SESSIONS
-      String info_date = info.date.replaceAll("[\\.,-,/]", "");
+      String info_date = info.date.replaceAll("[.,-,/]", "");
       pw.format("    <sessions>\n");
       pw.format("      <session date=\"%s\" ", info.date); // yyyy-mm-dd or any other format is ok
       pw.format(         "description=\"%s\" ", cave ); // title
@@ -2083,7 +2083,7 @@ public class TDExporter
                       }
                     }
                   }
-                  if ( st_name.equals( blk.mTo ) ) {
+                  if ( st_name.equals( blk.mTo ) ) { // FIXME may null pointer
                     writeSurvexLRUD( pw, blk.mFrom, computeLRUD( blk, list, true ), ul );
                     st_name = blk.mFrom;
                   } else if ( st_name.equals( blk.mFrom ) ) {
@@ -2715,7 +2715,7 @@ public class TDExporter
   {
     int ret = 0;
     if ( splay_station.containsKey( name ) ) {
-      ret = splay_station.get( name ).intValue();
+      ret = splay_station.get( name ).intValue(); // FIXME may null pointer
     }
     splay_station.put( name, Integer.valueOf(ret+1) );
     return ret;
@@ -3769,7 +3769,7 @@ public class TDExporter
             // }
             if ( TDSetting.mCompassSplays ) {
 	      int ii = nextSplayInt( splay_stations, to );
-              writeSrvStations( pw, String.format("%s-%d", to, ii), to, item.isCommented() );
+              writeSrvStations( pw, String.format(Locale.US, "%s-%d", to, ii), to, item.isCommented() );
               pw.format(Locale.US, "%.2f\t%.1f\t%.1f", item.mLength*ul, item.mBearing*ua, item.mClino*ua );
             } else {
               writeSrvStations( pw, "-", to, item.isCommented() );
@@ -3799,7 +3799,7 @@ public class TDExporter
             // }
             if ( TDSetting.mCompassSplays ) {
 	      int ii = nextSplayInt( splay_stations, from );
-              writeSrvStations( pw, from, String.format("%s-%d", from, ii), item.isCommented() );
+              writeSrvStations( pw, from, String.format(Locale.US, "%s-%d", from, ii), item.isCommented() );
               pw.format(Locale.US, "%.2f\t%.1f\t%.1f", item.mLength*ul, item.mBearing*ua, item.mClino*ua );
             } else {
               writeSrvStations( pw, from, "-", item.isCommented() );

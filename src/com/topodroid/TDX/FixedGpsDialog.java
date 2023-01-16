@@ -420,7 +420,7 @@ class FixedGpsDialog extends MyDialog
       if ( useGps /* TDandroid.BELOW_API_31 */ ) {
         mLocManager.removeGpsStatusListener( this );
       } else { // TODO
-        mLocManager.unregisterGnssStatusCallback( mGnssStatusCallback );
+        mLocManager.unregisterGnssStatusCallback( mGnssStatusCallback ); // API_24
         mGnssStatusCallback = null;
       }
     }
@@ -442,14 +442,14 @@ class FixedGpsDialog extends MyDialog
         mLocManager.addGpsStatusListener( this );
       } else { // TODO
         if ( mGnssStatusCallback == null ) {
-          mGnssStatusCallback = new GnssStatus.Callback() {
+          mGnssStatusCallback = new GnssStatus.Callback() { // API_24
             @Override public void onFirstFix( int millis ) { TDLog.v("GNSS first fix " + millis ); }
 
             @Override public void onSatelliteStatusChanged( GnssStatus status )
             {
-              int nr = status.getSatelliteCount();
+              int nr = status.getSatelliteCount(); // API_24
               int nr_sat = 0;
-              for ( int k = 0; k<nr; ++k ) if ( status.usedInFix( k ) ) nr_sat++;
+              for ( int k = 0; k<nr; ++k ) if ( status.usedInFix( k ) ) nr_sat++; // API_24
               // TDLog.v("GNSS satellites " + nr_sat );
               setNrSatellites( nr_sat );
             }
@@ -460,7 +460,7 @@ class FixedGpsDialog extends MyDialog
 
           };       
         }
-        mLocManager.registerGnssStatusCallback( mGnssStatusCallback );
+        mLocManager.registerGnssStatusCallback( mGnssStatusCallback ); // API_24
       }
       mLocManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 0, this );
       mLocating = true;

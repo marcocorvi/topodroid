@@ -42,7 +42,8 @@ public class LoxBitmap
     height = 0;
     calib     = new double[6];
     calib_inv = new double[6];
-    for ( int k=0; k<6; ++k ) calib[k]= c[k];
+    // for ( int k=0; k<6; ++k ) calib[k]= c[k];
+    System.arraycopy(c, 0, calib, 0, 6);
 
     Data2RGB();
     // TDLog.v("Bitmap " + String.format("calib %.2f %.6f %.6f   %.2f %.6f %.6f", c[0], c[2], c[3], c[1], c[4], c[5] ) );

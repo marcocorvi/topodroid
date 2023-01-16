@@ -350,7 +350,7 @@ public class TopoDroidApp extends Application
     // MiA2          10 29  false    408 2.55    480         397.565 474.688  480 (ok)      0         188.97638          
     //                               480 3.0                                                   
     //                               540 3.375                                                   
-    // Smsung A3     11 30  false    420 2.625   420         409,432 411.891  500 (ok)      0         196.8504           
+    // Samsung A3    11 30  false    420 2.625   420         409,432 411.891  500 (ok)      0         196.8504
     //                               450 2.8125                                                  
     //                               480 3.0                                                     
     //                               510 3.1875                                                  
@@ -923,7 +923,7 @@ public class TopoDroidApp extends Application
     doBluetoothReset( lister );
   }
 
-  // GM download flag - kludge for DixtoXBLE calib data
+  // GM download flag - kludge for DistoXBLE calib data
   // private static boolean mGMdownload = false;
 
   // /** set the GM download flag
@@ -931,7 +931,7 @@ public class TopoDroidApp extends Application
   //  */
   // void setGMdownload( boolean value ) { mGMdownload = value; }
 
-  /** @return true if the data downloader is downoading
+  /** @return true if the data downloader is downloading
    */
   public boolean isDownloading() 
   { 
@@ -962,8 +962,8 @@ public class TopoDroidApp extends Application
     mBorderLeft       = dim / 16;
     mBorderInnerRight = dim * 3 / 4;
     mBorderInnerLeft  = dim / 4;
-    mBorderTop        = dm.heightPixels / 8;
-    mBorderBottom     = (dm.heightPixels * 7) / 8 + DrawingWindow.ZOOM_TRANSLATION_1;
+    mBorderTop        = (int)( dm.heightPixels / 8 );
+    mBorderBottom     = (int)( (dm.heightPixels * 7) / 8 ) + DrawingWindow.ZOOM_TRANSLATION_1;
     mDisplayWidth  = dm.widthPixels;
     mDisplayHeight = dm.heightPixels;
     // TDLog.v("ConfigChange set display params " + mDisplayWidth + " " + mDisplayHeight + " landscape " + landscape + " dim " + dim );
@@ -1114,7 +1114,7 @@ public class TopoDroidApp extends Application
   /** initialize the environment, first step
    *  - device DB helper, 
    *  - primary preferences, 
-   *  - version, symbols, firmwares, translated user manpages
+   *  - version, symbols, firmwares, translated user man-pages
    *  - data connection
    */
   void initEnvironmentFirst(  ) // TDPrefHelper prefHlp 
@@ -2476,7 +2476,7 @@ public class TopoDroidApp extends Application
   {
     if ( mComm != null && mComm instanceof DistoXBLEComm ) {
       DistoXBLEComm comm = (DistoXBLEComm)mComm;
-      /*boolean bisconnect = comm.isConnected();
+      /* // boolean isconnect = comm.isConnected();
       if ( ! comm.isConnected() ) {
         connectDevice( lister?, TDInstance.deviceAddress(), DataType.DATA_ALL, timeout );
         // TDLog.v("BRIC info: wait 4 secs");
@@ -2491,7 +2491,7 @@ public class TopoDroidApp extends Application
           TDLog.e("DistoXBLE info: failed to connect");
           return false;
         }
-      }*/
+      } */
       comm.tryConnectDevice( TDInstance.deviceAddress(), null, DataType.DATA_ALL );
       comm.getXBLEInfo( info );
 	  
@@ -2643,7 +2643,6 @@ public class TopoDroidApp extends Application
 
   /** read the firmware and save it to a file - only X310
    * @param name   filename including ".bin" extension
-   * @return -1 on error; ...
    */
   public void dumpFirmware( String name, TDProgress progress )
   {

@@ -526,7 +526,7 @@ public class TopoGL extends Activity
   // ----------------------------------------------------------------
 
   /** create a model parser for a file
-   * @param filename   naem of the model file
+   * @param filename   name of the model file
    */
   void makeParser( String filename )
   {
@@ -2135,7 +2135,7 @@ public class TopoGL extends Activity
       mParser = null;
       if ( mRenderer != null ) mRenderer.clearModel();
       // resetAllPaths();
-      if ( ext.equals( "tdconfig" ) ) { // isr not used
+      if ( ext.equals( "tdconfig" ) ) { // isr not used  // FIXME may null pointer
         // TDLog.v("init rendering (2) TDCONGIF"); // TopoDroid TDM projects
         InputStreamReader isr = ( is == null )? null : new InputStreamReader( is );
         mParser = new ParserTh( this, isr, filepath, ParserTh.TDCONFIG ); // tdconfig files are saved with therion syntax
@@ -3010,7 +3010,7 @@ public class TopoGL extends Activity
 
   /** import a survey reading from a URI
    * @param uri    URI
-   * @note: called after a REQUEST_IMPORT_FILE
+   * @note called after a REQUEST_IMPORT_FILE
    */
   private void importSurvey( Uri uri )
   {

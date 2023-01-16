@@ -48,7 +48,7 @@ class Scanline
   }
   
   /** @return the position of the next quote
-   * @param quote   quote chaaracter (either '"' or '\'')
+   * @param quote   quote character (either '"' or '\'')
    */
   private int nextQuote( int quote )
   {

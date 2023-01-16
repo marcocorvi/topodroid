@@ -284,8 +284,8 @@ abstract class ItemDrawer extends Activity
     int zw = (int)(bnds.right - bnds.left); // margin 40 + 80 6.1.76 HBX
     int zh = (int)(bnds.bottom - bnds.top); // HBX
     // TDLog.v( "rect " + bnds.right + " " + bnds.left + " == " + bnds.bottom + " " + bnds.top + " W " + zw + " H " + zh );
-    PageInfo.Builder builder = new PageInfo.Builder( zw, zh, 1 );
-    return builder.create();
+    PageInfo.Builder builder = new PageInfo.Builder( zw, zh, 1 ); // API_19
+    return builder.create(); // API_19
   }
 
 

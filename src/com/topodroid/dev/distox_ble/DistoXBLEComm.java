@@ -18,6 +18,7 @@ import android.content.Context;
 // import android.os.Handler;
 
 import com.topodroid.TDX.R;
+import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.ListerHandler;
@@ -66,7 +67,7 @@ import android.os.Looper;
 import android.content.res.Resources;
 
 public class DistoXBLEComm extends TopoDroidComm
-        implements BleComm
+                           implements BleComm 
 {
   private final static boolean LOG = true; 
   private final static boolean USE_MTU = false;
@@ -434,7 +435,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
-    if ( uuid_str.equals( BleUtils.CCCD_UUID ) ) { // a notify op
+    if ( uuid_str.equals( BleUtils.CCCD_UUID_STR ) ) { // a notify op
       if ( bytes != null ) {
         if ( bytes[0] != 0 ) { // set notify/indicate
           if ( LOG ) TDLog.v("XBLE CCC set notify " + bytes[0] + " chrt " + uuid_chrt_str );
@@ -1033,8 +1034,8 @@ public class DistoXBLEComm extends TopoDroidComm
   }
 
   /** batch data download
-   * @param address
-   * @param lister
+   * @param address    device address
+   * @param lister     data lister
    * @param data_type  expected type of data (not really used)
    * @param timeout    (unused)
    * @return number of downloaded data (neg on error)
@@ -1395,7 +1396,6 @@ public class DistoXBLEComm extends TopoDroidComm
   /** read the firmware from the device and save it to file
    * @param address   device address (passed to tryConnect)
    * @param file      output file
-   * @return ???
    */
   public void dumpFirmware( String address, File file, TDProgress progress )
   {
@@ -1570,6 +1570,17 @@ public class DistoXBLEComm extends TopoDroidComm
   public boolean requestMtu( int mtu )
   {
     return mCallback.requestMtu( mtu );
+  }
+
+  /** log
+   * @return bond state,or -1 if no permission
+   */
+  private int getBondState( BluetoothDevice bt_dev )
+  {
+    if ( ! TDandroid.checkBluetooth( mContext ) ) {
+      return -1;
+    }
+    return bt_dev.getBondState();
   }
 }
 

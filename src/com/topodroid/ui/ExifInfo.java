@@ -125,6 +125,7 @@ public class ExifInfo
         exif.setAttribute( ExifInterface.TAG_ORIENTATION, String.format(Locale.US, "%d", rot) );
       }
       // exif.setAttribute( ExifInterface.TAG_MAKE, String.format(Locale.US, "%d", rot) ); // set by Android
+      // API_24
       exif.setAttribute( ExifInterface.TAG_USER_COMMENT, String.format(Locale.US, "%d %d", mCamera, rot) );
       exif.setAttribute( ExifInterface.TAG_DATETIME, TDUtil.currentDateTime() );
       int cint = (int)(mClino*100);
@@ -144,6 +145,7 @@ public class ExifInfo
         exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE, String.format(Locale.US, "%d/100", -bint ) );
         exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE_REF, "W" );
       }
+      // API_24 both lines
       exif.setAttribute( ExifInterface.TAG_GPS_IMG_DIRECTION,  String.format(Locale.US, "%d/100", bint ) );
       exif.setAttribute( ExifInterface.TAG_MAKER_NOTE,  String.format(Locale.US, "%d", mAccuracy ) );
 
@@ -169,7 +171,7 @@ public class ExifInfo
     try {
       ExifInterface exif = new ExifInterface( filename );
       // mAzimuth = exif.getAttribute( "GPSImgDirection" );
-      String maker_note = exif.getAttribute( ExifInterface.TAG_USER_COMMENT );
+      String maker_note = exif.getAttribute( ExifInterface.TAG_USER_COMMENT ); // API_24
       if ( maker_note != null ) {
         String[] vals = maker_note.split(" ");
         if ( vals.length == 2 ) {
@@ -227,7 +229,7 @@ public class ExifInfo
 	}
         // TDLog.v( "Long <" + mAzimuth + "> Lat <" + mClino + "> " );
       }
-      String acc = exif.getAttribute( ExifInterface.TAG_MAKER_NOTE );
+      String acc = exif.getAttribute( ExifInterface.TAG_MAKER_NOTE ); // API_24
       try {
         mAccuracy = Integer.parseInt( acc );
       } catch ( NumberFormatException e ) {

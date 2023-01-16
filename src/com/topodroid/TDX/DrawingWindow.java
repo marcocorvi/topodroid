@@ -886,7 +886,7 @@ public class DrawingWindow extends ItemDrawer
     if ( mTh2Edit ) return; // TH2EDIT
     if ( ! mModified ) {
       mModified = true;
-      saveHandler.postDelayed( saveRunnable, TDSetting.mBackupInterval * 1000 ); // Backup Interval is in seconds
+      saveHandler.postDelayed( saveRunnable, TDSetting.mBackupInterval * 1000L ); // Backup Interval is in seconds
     }
   }
 
@@ -4368,7 +4368,7 @@ public class DrawingWindow extends ItemDrawer
                  && ( mSymbol == SymbolType.AREA || ! BrushManager.isLineStraight( mCurrentLine ) )
                ) {
               int nPts = (mSymbol == SymbolType.LINE )? mCurrentLinePath.size() 
-                                                  : mCurrentAreaPath.size() ;
+                                                  : mCurrentAreaPath.size() ; // FIXME may null pointer
               if ( nPts > 1 ) {
 		if ( TDSetting.isLineStyleBezier() ) {
                   ArrayList< Point2D > pts = new ArrayList<>(); // [ nPts ];
@@ -5790,7 +5790,7 @@ public class DrawingWindow extends ItemDrawer
     }
 
     /** clear the hot path and show/hide the tool layaout
-     * @param, visibility  tool layout visibility
+     * @param visibility  tool layout visibility
      */
     private void clearHotPath( int visibility )
     {
@@ -7846,6 +7846,7 @@ public class DrawingWindow extends ItemDrawer
         if ( mTh2Edit ) { // TH2EDIT export Therion
           int thpos = 0; // Therion index
           // TDLog.v("DRAW save therion");
+          // API_19
           selectFromProvider( TDConst.SURVEY_FORMAT_TH2, TDRequest.REQUEST_GET_EXPORT, Intent.ACTION_CREATE_DOCUMENT );
         } else {
           String plotname1 = TDInstance.survey + "-" + mName;
@@ -7878,7 +7879,7 @@ public class DrawingWindow extends ItemDrawer
 	  }
 	}
       } else if ( TDLevel.overNormal && p++ == pos ) { // RECOVER RELOAD - OPEN
-        if ( mTh2Edit ) { // TH2EDIT
+        if ( mTh2Edit ) { // TH2EDIT API_19
           selectFromProvider( TDConst.SURVEY_FORMAT_TH2, TDRequest.REQUEST_GET_IMPORT, Intent.ACTION_OPEN_DOCUMENT );
         } else {
           Intent intent = new Intent( this, PlotReloadWindow.class );
@@ -8883,7 +8884,7 @@ public class DrawingWindow extends ItemDrawer
     if ( request == TDRequest.REQUEST_GET_EXPORT ) {
       intent.putExtra( Intent.EXTRA_TITLE, mFullName3 );
     }
-    intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+    intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION); // API_19
     // intent.putExtra( "importtype", index ); // extra is not returned to the app
     startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.title_import_th2 ) ), request );
   }

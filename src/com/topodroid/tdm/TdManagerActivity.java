@@ -328,7 +328,7 @@ public class TdManagerActivity extends Activity
         } else if ( result == TDRequest.RESULT_TDCONFIG_DELETE ) {
           // TDLog.v( "**** TdmConfig DELETE" );
           // get TdmConfig name and delete it
-          String path = extras.getString( TDRequest.TDCONFIG_PATH );
+          String path = extras.getString( TDRequest.TDCONFIG_PATH ); // FIXME may null pointer
           mTdmConfigAdapter.deleteTdmConfig( path );
           mList.invalidate();
           // updateTdmConfigList();

@@ -165,8 +165,7 @@ class ProjectionCommandManager
     // mBBox.bottom = mScale * TopoDroidApp.mDisplayHeight - dy;
   }
 
-  // oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
-
+  // ------------------------------------------------
   void addLegPath( DrawingPath path )
   { 
     if ( mLegsStack == null ) return;

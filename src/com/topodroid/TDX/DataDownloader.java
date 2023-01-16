@@ -40,7 +40,7 @@ public class DataDownloader
    */
   boolean isDownloading() { return mDownload; }
 
-  /** @return true if it needs to re-connect, ie, it is odwnloading but not CONNECTED
+  /** @return true if it needs to re-connect, ie, it is downloading but not CONNECTED
    */
   boolean needReconnect() { return mDownload && mConnected != ConnectionState.CONN_CONNECTED; }
 

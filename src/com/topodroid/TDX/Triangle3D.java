@@ -60,7 +60,7 @@ public class Triangle3D
     color = col;
   }
   
-  /** @return an offseted triangle for OpenGL
+  /** @return an offset-ed triangle for OpenGL
    * @param x    X offset (OpenGL frame)
    * @param y    Y offset
    * @param z    Z offset

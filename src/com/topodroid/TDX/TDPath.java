@@ -229,22 +229,23 @@ public class TDPath
   static void setTdPaths( String name /*, String base */ )
   {
     TDLog.v( "set paths [4]: " + name );
-    if ( TDandroid.PRIVATE_STORAGE ) {
-      checkFilesystemDirs( ROOT_ZIP );
-      checkFilesystemDirs( ROOT_TMP );
-      checkFilesystemDirs( ROOT_TDCONFIG  );
-      checkFilesystemDirs( ROOT_C3EXPORT  );
-      setSurveyPaths( null );
-      return;
-    }
-    if ( name == null || ! name.toLowerCase( Locale.getDefault() ).startsWith( "topodroid" ) ) return;
-    File dir = TDandroid.PRIVATE_STORAGE ?  TDFile.getPrivateDir( name ) : TDFile.getExternalDir( name ); // DistoX-SAF
-    // if ( TDandroid.PRIVATE_STORAGE ) { // TODO ?
-    //   // PATH_CW_DIR = cwd.getAbsolutePath();
-    //   // PATH_CW_DIR = PATH_CB_DIR + "/" + name; 
-    // } else {
-    //   // PATH_CW_DIR =  PATH_CB_DIR + "/" + name;
+    // if ( TDandroid.PRIVATE_STORAGE ) { // FIXME this was enabled
+    //   checkFilesystemDirs( ROOT_ZIP );
+    //   checkFilesystemDirs( ROOT_TMP );
+    //   checkFilesystemDirs( ROOT_TDCONFIG  );
+    //   checkFilesystemDirs( ROOT_C3EXPORT  );
+    //   setSurveyPaths( null );
+    //   return;
     // }
+    if ( name == null || ! name.toLowerCase( Locale.getDefault() ).startsWith( "topodroid" ) ) return;
+    File dir = null;
+    if ( TDandroid.PRIVATE_STORAGE ) { 
+      dir = TDFile.getPrivateDir( name ); // PATH_CB_DIR + "/" + name 
+      // PATH_CW_DIR = dir.getAbsolutePath();
+    } else {
+      dir = TDFile.getExternalDir( name ); // DistoX-SAF
+      // PATH_CW_DIR =  PATH_CB_DIR + "/" + name;
+    }
     TDLog.v( "set paths [4]: " + name + ". Dir " + dir.getPath()  );
     try {
       if ( dir.exists() || dir.mkdirs() ) {
@@ -904,7 +905,7 @@ public class TDPath
       return;
     }
     File fpp = fp.getParentFile();
-    if ( fpp.exists() ) {
+    if ( fpp != null && fpp.exists() ) {
       // TDLog.v( "check path: parent file exists " + fpp.getPath() );
       return;
     }

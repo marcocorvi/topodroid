@@ -213,7 +213,7 @@ public class PlotReloadWindow extends ItemDrawer
   private void computeReferences( int type, float zoom )
   {
     mReloadSurface.setManager( DrawingSurface.DRAWING_OVERVIEW, type ); 
-    mReloadSurface.addScaleRef( DrawingSurface.DRAWING_OVERVIEW, type, 0 ); // FXIME no declination
+    mReloadSurface.addScaleRef( DrawingSurface.DRAWING_OVERVIEW, type, 0 ); // FIXME no declination
   }
     
   // ------------------------------------------------------------------------------

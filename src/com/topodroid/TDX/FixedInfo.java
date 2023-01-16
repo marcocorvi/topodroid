@@ -268,9 +268,9 @@ public class FixedInfo extends MagLatLong
   }
 
   /** convert a dd.mm.ss char-sequence to double (degrees)
-   * @param str  DD.MM.SS
+   * @param txt  DD.MM.SS
    * @return the decimal degrees
-   * @see next method
+   * @note see the next method
    */
   static double string2double( CharSequence txt )
   {
@@ -311,9 +311,9 @@ public class FixedInfo extends MagLatLong
   }        
 
   /** convert a decimal degree char-sequence to double (degrees)
-   * @param str  DD.MM.SS
+   * @param txt  DD.MM.SS
    * @return the decimal degrees
-   * @see next method
+   * @note see the next method
    */
   static double string2real( CharSequence txt )
   {

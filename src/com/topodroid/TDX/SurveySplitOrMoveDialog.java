@@ -77,7 +77,7 @@ class SurveySplitOrMoveDialog extends MyDialog
     // setTitleColor( TDColor.TITLE_NORMAL );
 
     List< String > surveys = TopoDroidApp.getSurveyNames();
-    int size = surveys.size();
+    int size = surveys.size(); // FIXME may null pointer
     if ( size > 0 ) {
 
       mSurveys = new String[ size ];

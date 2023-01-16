@@ -265,7 +265,7 @@ public class DrawingTh
 
             // TODO insert new area-path
             line = readLine( br );
-            if ( ! line.equals( "endline" ) ) { 
+            if ( ! line.equals( "endline" ) ) {  // FIXME may null pointer
               String[] pt = line.split( "\\s+" );
               try {
                 x = dx + Float.parseFloat( pt[0] ) / toTherion;
@@ -361,7 +361,7 @@ public class DrawingTh
             }
             // TODO insert new line-path
             line = readLine( br );
-            if ( ! line.equals( "endline" ) ) { 
+            if ( ! line.equals( "endline" ) ) {  // FIXME may null pointer
               path = new DrawingLinePath( lnType, scrap_idx );
               path.setClosed( closed );
               path.setReversed( reversed );
@@ -441,7 +441,7 @@ public class DrawingTh
           artype = 0; // SymbolPointLibrary.mPointUserIndex; // FIXME
         }
         line = readLine( br );
-        if ( ! line.equals( "endarea" ) ) { 
+        if ( ! line.equals( "endarea" ) ) {  // FIXME may null pointer
           String border_id = line;
           for ( DrawingAreaPath path : areas ) {
             if ( path.mPrefix.equals( border_id ) ) {

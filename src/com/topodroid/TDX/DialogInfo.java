@@ -101,7 +101,8 @@ class DialogInfo extends MyDialog
         TextView tv2 = ( TextView ) findViewById(R.id.info_radii);
         tv2.setText( String.format(Locale.US, res.getString(R.string.info_radii_value), mParser.getWEradius(), mParser.getSNradius() ) );
       } else {
-        tv1.setText( String.format(Locale.US, res.getString(R.string.info_lonlat_prjvalue), origin.longitude, origin.y, origin.latitude ) );
+        tv1.setText( String.format(Locale.US, res.getString(R.string.info_lonlat_prjvalue), origin.longitude, origin.latitude ) );
+        // FXIME origin.y
         TableRow tr2 = (TableRow) findViewById(R.id.info_row_radii);
         tr2.setVisibility( View.GONE );
       }

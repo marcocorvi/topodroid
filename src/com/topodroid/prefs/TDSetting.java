@@ -3020,7 +3020,7 @@ public class TDSetting
       pw.printf(Locale.US, "Data input: backsight %c, prev/next %c\n", tf(mBacksightInput), tf(mPrevNext) );
       // pw.printf(Locale.US, "L/R extend %c BlunderShot %c\n", tf(mLRExtend), tf(mBlunderShot) );
       pw.printf(Locale.US, "L/R extend %c BlunderShot %c SplayStation %c SplayGroup %c\n", tf(mLRExtend), tf(mBlunderShot), tf(mSplayStation), tf(mSplayOnlyForward) ); 
-      pw.printf(Locale.US, "U/D vertical %.1f L/R horicontal %.1f count $c\n", mLRUDvertical, mLRUDhorizontal, tf(mLRUDcount) );
+      pw.printf(Locale.US, "U/D vertical %.1f L/R horizontal %.1f count $c\n", mLRUDvertical, mLRUDhorizontal, tf(mLRUDcount) );
 
       pw.printf(Locale.US, "Geek Import - data mode %d, zipped symbols %c\n", mImportDatamode, tf( mZipWithSymbols) ); //  tf(mExportTcsx) );
       pw.printf(Locale.US, "Timer: wait %d, volume %d\n", mTimerWait, mBeepVolume );

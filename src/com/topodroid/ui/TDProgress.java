@@ -166,7 +166,8 @@ public class TDProgress extends MyDialog // Activity
     // mBtnClose.setVisibility( View.VISIBLE );
   }
 
-  public void setTitle( String title ) { setTitle( title ); }
+  // unused
+  // public void setTheTitle( String title ) { setTitle( title ); }
 
 }
 

@@ -866,7 +866,6 @@ public class DeviceActivity extends Activity
    * @param dialog     memory display dialog
    * @param head_tail  memory block bounds [indices]
    * @param dumpfile   filename to dump
-   * @param dialog     feedback receiver
    */
   public void readX310Memory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
   {
@@ -877,7 +876,6 @@ public class DeviceActivity extends Activity
    * @param dialog     memory display dialog
    * @param head_tail  memory block bounds [indices]
    * @param dumpfile   filename to dump
-   * @param dialog     feedback receiver
    */
   public void readXBLEMemory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
   {
@@ -888,7 +886,6 @@ public class DeviceActivity extends Activity
    * @param dialog     memory display dialog
    * @param head_tail  memory block bounds [addresses]
    * @param dumpfile   filename to dump
-   * @param dialog     feedback receiver
    */
   public void readA3Memory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
   {

@@ -466,7 +466,7 @@ public class ShotWindow extends Activity
         mSurveyAccuracy.addBlockAMD( blk );
         if ( StationPolicy.doBacksight() || StationPolicy.doTripod() ) {
           // FIXME UNTESTED it was: ret = mApp.assignStationsAll( mDataAdapter.getItems( ) ); 
-          ret = mApp.assignStationsAll( mDataAdapter.getItemsForAssign( 2 ) ); // fron the 2-nd last leg
+          ret = mApp.assignStationsAll( mDataAdapter.getItemsForAssign( 2 ) ); // from the 2-nd last leg
         } else {
           ret = mApp.assignStationsAll( mDataAdapter.getItemsForAssign( 1 ) ); // from 1-st last leg
         }
@@ -612,7 +612,7 @@ public class ShotWindow extends Activity
       mListView.setAdapter( mButtonViewF.mAdapter );
       mListView.invalidate();
       onMultiselect = true;
-      // FIXME this should not be neceessary but it is (???)
+      // FIXME this should not be necessary but it is (???)
       if ( pos == 0 ) mDataAdapter.notifyDataSetChanged(); // THIS IS USED TO REFRESH THE DATA LIST
     } else {
       mListView.setAdapter( mButtonView1.mAdapter );
@@ -655,7 +655,7 @@ public class ShotWindow extends Activity
   }
 
   /** implement user tap on a shot data
-   * @param view  tapped viee
+   * @param view  tapped view
    * @param pos   item position
    *
    * if it is in "multiselection" add the item to the multiselection,
@@ -742,7 +742,7 @@ public class ShotWindow extends Activity
   // assign splay classes traversing backwards: expected
   //   V-splays from +/-90 to -/+90 ... to +/-90
   //   H-splays all in [-30, +30]
-  //   X-splays from +/-90 (to -/+90 and againt to +/-90)
+  //   X-splays from +/-90 (to -/+90 and again to +/-90)
   void setSplayClasses( int pos )
   {
     DBlock blk = null;
@@ -1241,7 +1241,7 @@ public class ShotWindow extends Activity
     onMultiselect = false;
 
     mList = (ListView) findViewById(R.id.list);
-    // view_group.setDescendantFocusbility( ViewGroup.FOCUS_BLOCK_DESCENDANTS ); //  FOCUS_BEFORE_DESCENDANTS FOCUS_AFTER_DESCENDANTS
+    // view_group.setDescendantFocusability( ViewGroup.FOCUS_BLOCK_DESCENDANTS ); //  FOCUS_BEFORE_DESCENDANTS FOCUS_AFTER_DESCENDANTS
     mList.setOnScrollListener( new OnScrollListener() {
       @Override public void onScroll( AbsListView listview, int first, int count, int total ) { }
 
@@ -2155,7 +2155,7 @@ public class ShotWindow extends Activity
     }
   }
 
-  /** @return true if no xsection refer to a station of the blcok, or to FROM / TO
+  /** @return true if no xsection refer to a station of the block, or to FROM / TO
    * @param blk    data block
    * @param from   FROM station (or null)
    * @param to     TO station (or null)
@@ -2486,7 +2486,7 @@ public class ShotWindow extends Activity
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         onBackPressed();
         return true;
-      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+      case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)

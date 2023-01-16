@@ -271,7 +271,7 @@ public class TDandroid
     if ( PRIVATE_STORAGE ) return;
 
     Intent intent = new Intent();
-    intent.setAction( Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION );
+    intent.setAction( Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION ); // API_30
     Uri uri = Uri.fromParts( "package", context.getPackageName(), null );
     intent.setData( uri );
     try {
@@ -626,6 +626,18 @@ public class TDandroid
     } catch ( PackageManager.NameNotFoundException e ) {
     }
     return ret;
+  }
+
+  /** @return an o[en-document intent - requires API_19
+   * @param index  index of mime type
+   */
+  static Intent getOpenDocumentIntent( int index )
+  {
+    Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT ); // API_19
+    intent.setType( TDConst.mMimeType[ index ] );
+    intent.addCategory(Intent.CATEGORY_OPENABLE);
+    intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION); // API_19
+    return intent;
   }
 
 }

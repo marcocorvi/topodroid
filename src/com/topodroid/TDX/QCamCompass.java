@@ -90,7 +90,7 @@ class QCamCompass extends Dialog
    * @param inserter   photo inserter
    * @param with_box   ...
    * @param with_delay ...
-   * @param cam        camera API (1 or 2)
+   * @param camera     camera API (1 or 2)
    *
    * @note QCamCompass is used by
    *   - DrawingWindow to take photo (with old Camera API)

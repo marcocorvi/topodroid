@@ -144,7 +144,7 @@ public class Point2D // extends PointF
    */
   public float squareLength() { return x*x + y*y; }
 
-  /** @return the Euclidean distance betwween this point and another
+  /** @return the Euclidean distance between this point and another
    * @param p  the other point
    */
   public float distance( Point2D p ) // { return distance( p.x, p.y ); }

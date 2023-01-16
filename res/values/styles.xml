@@ -299,7 +299,7 @@
     </style -->
 
     <style name="lvrseekbar" parent="@android:style/Widget.SeekBar" >
-      <!-- item name="androiid:indeterminateOnly">false</item -->
+      <!-- item name="android:indeterminateOnly">false</item -->
       <item name="android:progressDrawable">@xml/lvrseekbar_selector</item>
       <!-- item name="android:indeterminateDrawable">@drawable/lrvseekbar_progress</item -->
       <item name="android:thumb">@drawable/lvrseekbar_thumb</item>

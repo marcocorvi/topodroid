@@ -36,7 +36,7 @@ public class Cave3DStation extends Vector3D
   private String survey_name;
   private String full_name;
 
-  // double temp;          // station temperature [Celcius] TEMPERATURE
+  // double temp;          // station temperature [Celsius] TEMPERATURE
   double depth;         // depth from Zmax: positive and scaled in [0,1] : 1.0 deepest
   double surface_depth; // depth beneath the surface
   int flag;       // station flag (not used)

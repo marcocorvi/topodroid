@@ -646,7 +646,11 @@ public class DataHelper extends DataSetObservable
           StringBuilder sb = new StringBuilder();
           for ( String addr : cnts.keySet() ) {
             // TDLog.v("address " + addr + " " + (Integer)cnts.get( addr ) );
-            sb.append( ((Integer)cnts.get( addr )).intValue() ).append(" ");
+            try {
+              sb.append(((Integer) cnts.get(addr)).intValue()).append(" ");
+            } catch ( NullPointerException e ) {
+              // TODO
+            }
           }
           stat.deviceCnt = sb.toString();
         }
@@ -1687,8 +1691,12 @@ public class DataHelper extends DataSetObservable
 	  String s2 = sh.to;
           if ( s1.length() > 0 && s2.length() > 0 && ( to.equals( s1 ) || to.equals( s2 ) ) ) stack.add( sh );
         }
-        float depth = depths.get( from ).floatValue() - shot.len * TDMath.sind( shot.cln );
-        depths.put( to, Float.valueOf( depth ) );
+        try {
+          float depth = depths.get(from).floatValue() - shot.len * TDMath.sind(shot.cln);
+          depths.put(to, Float.valueOf(depth));
+        } catch ( NullPointerException e ) {
+          // TODO
+        }
         // TDLog.v( "processed shot <" + from + "-" + to + "> shots " + stack.size() + "add station <" + to + "> depth " + depth );
       }
       if ( to != null && to.length() > 0 && depths.containsKey( to ) && from != null && from.length() > 0 && ! depths.containsKey( from ) ) { // can add FROM station
@@ -1697,8 +1705,12 @@ public class DataHelper extends DataSetObservable
 	  String s2 = sh.to;
           if ( s1.length() > 0 && s2.length() > 0 && ( from.equals( s1 ) || from.equals( s2 ) ) ) stack.add( sh );
         }
-        float depth = depths.get( to ).floatValue() + shot.len * TDMath.sind( shot.cln );
-        depths.put( from, Float.valueOf( depth ) );
+        try {
+          float depth = depths.get(to).floatValue() + shot.len * TDMath.sind(shot.cln);
+          depths.put(from, Float.valueOf(depth));
+        } catch ( NullPointerException e ) {
+          // TODO
+        }
         // TDLog.v( "processed shot <" + from + "-" + to + "> shots " + stack.size() + "add station <" + from + "> depth " + depth );
       }
     }

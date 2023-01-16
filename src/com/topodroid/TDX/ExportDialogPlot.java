@@ -70,9 +70,10 @@ public class ExportDialogPlot extends MyDialog
    * @param parent      parent window
    * @param types       export types, for the options
    * @param title       dialog title (resource)
-   * @param parent_type 0: drawing, 1: overview
    * @param plotname1   name of the primary plot
    * @param plotname2   name of the secondary plot
+   *
+   * @note parent_type 0: drawing, 1: overview
    */
   public ExportDialogPlot( Context context, IExporter parent, String[] types, int title, String plotname1, String plotname2 )
   {

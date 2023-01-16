@@ -35,7 +35,8 @@ public class BleUtils
 
   public final static String STANDARD_UUID =  "-0000-1000-8000-00805f9b34fb";
 
-  public final static UUID CCCD_UUID = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb");
+  public final static String CCCD_UUID_STR = "00002902-0000-1000-8000-00805f9b34fb";
+  public final static UUID CCCD_UUID = UUID.fromString( CCCD_UUID_STR );
   
   // ------------------------------------------------------------------------------
   /* DEBUG

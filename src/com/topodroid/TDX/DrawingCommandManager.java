@@ -1336,7 +1336,7 @@ public class DrawingCommandManager
    * @param zoom canvas zoom (the larger the zoom, the bigger the sketch on the display)
    * @param size ???
    * @return the line to continue or null
-   * @noteline points are scene-coords
+   * @note line points are scene-coords
    *           continuation is checked in canvas-coords: canvas = offset + scene * zoom
    */
   DrawingLinePath getLineToContinue( LinePoint lp, int type, float zoom, float size ) { return mCurrentScrap.getLineToContinue( lp, type, zoom, size ); }

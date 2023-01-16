@@ -25,7 +25,7 @@
      <item name="gps_test">GPSTest</item>
      <item name="gps_logger">GPS Logger</item>
   </string-array>
-  <string-array name="geoImportAppValue" translatable="false"> <!-- values must agree with flags in FixedActvity -->
+  <string-array name="geoImportAppValue" translatable="false"> <!-- values must agree with flags in FixedActivity -->
      <item name="none">0</item>
      <item name="mobile_topographer">1</item>
      <item name="gpx_recorder">2</item>
@@ -516,7 +516,7 @@
 
   <!--
        the order of options must be increasing with the enabling level
-       and consistent throuh all the arrays on the names
+       and consistent through all the arrays on the names
   -->
   <string-array name="surveyStations">
      <item name="no">No</item>

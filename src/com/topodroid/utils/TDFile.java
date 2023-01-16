@@ -429,7 +429,7 @@ public class TDFile
     return new File( getCBD( type, true ), name );
   }
 
-  // PROVATE_STORAGE : these two has getPath() instead of getAbsolutePath()
+  // PRIVATE_STORAGE : these two has getPath() instead of getAbsolutePath()
   // public static String getExternalPath( String type ) { return getCBD( type, false ).getAbsolutePath(); }
   // public static String getExternalPath( String type, String name ) { return new File( getCBD( type, false ), name ).getAbsolutePath(); }
 
@@ -643,8 +643,8 @@ public class TDFile
     if ( dir.isFile() ) return dir.delete();
     if ( dir.isDirectory() ) {
       String[] children = dir.list();
-      for ( int i=0; i < children.length; ++i ) {
-        if ( ! recursiveDeleteDir( new File( dir, children[i] ) ) ) return false;
+      for ( String child : children ) {
+        if (!recursiveDeleteDir(new File(dir, child))) return false;
       }
       return dir.delete();
     }

@@ -20,6 +20,7 @@ import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.DBlock;
 import com.topodroid.TDX.StationPolicy;
 import com.topodroid.TDX.SurveyInfo;
+import com.topodroid.TDX.TDandroid;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -296,6 +297,8 @@ public class TDNum
   private NumStation mStartStation; // origin station
   private float      mDecl;         // magnetic declination (possibly including -convergence)
 
+  private final Object mShotLock = new Object(); // to synchronize mShots
+
   private NumStationSet mStations;
   private ArrayList< NumStation > mClosureStations;
   private ArrayList< NumShot >    mShots;
@@ -370,10 +373,10 @@ public class TDNum
   /** @return the last shot
    * @note for the incremental update
    */
-  public NumShot getLastShot() 
+  public NumShot getLastShot()
   {
     NumShot ret = null;
-    synchronized( mShots ) {
+    synchronized( mShotLock ) {
       int sz = mShots.size();
       if ( sz > 0 ) ret = mShots.get( sz - 1 );
     }
@@ -387,9 +390,9 @@ public class TDNum
   public List< NumShot > getShotsAt( NumStation st, NumStation except )
   {
     ArrayList< NumShot > ret = new ArrayList<>();
-    synchronized( mShots ) {
+    synchronized( mShotLock ) {
       for ( NumShot shot : mShots ) {
-        if ( ( shot.from == st && shot.to   != except ) 
+        if ( ( shot.from == st && shot.to   != except )
           || ( shot.to   == st && shot.from != except ) ) {
           ret.add( shot );
         }
@@ -539,7 +542,7 @@ public class TDNum
   {
     if ( s1 == null || s2 == null ) return null;
     NumShot ret = null;
-    synchronized( mShots ) {
+    synchronized( mShotLock ) {
       for (NumShot sh : mShots ) {
         if ( s1.equals( sh.from.name ) && s2.equals( sh.to.name ) ) { ret = sh; break; }
         if ( s2.equals( sh.from.name ) && s1.equals( sh.to.name ) ) { ret = sh; break; }
@@ -556,7 +559,7 @@ public class TDNum
   {
     if ( st1 == null || st2 == null ) return null;
     NumShot ret = null;
-    synchronized( mShots ) {
+    synchronized( mShotLock ) {
       for (NumShot sh : mShots ) {
         if ( ( st1 == sh.from && st2 == sh.to ) || ( st2 == sh.from && st1 == sh.to ) ) { ret = sh; break; }
       }
@@ -575,7 +578,7 @@ public class TDNum
   {
     if ( s1 == null || s2 == null ) return 0;
     int dir = 0;
-    synchronized( mShots ) {
+    synchronized( mShotLock ) {
       for (NumShot sh : mShots ) {
         if ( s1.equals( sh.from.name ) && s2.equals( sh.to.name ) ) { dir =  sh.mDirection; break; }
         if ( s2.equals( sh.from.name ) && s1.equals( sh.to.name ) ) { dir = -sh.mDirection; break; }
@@ -861,7 +864,7 @@ public class TDNum
       // String error = TDString.EMPTY;
       for ( DBlock blk : data ) { // set dblock clino
 	if ( blk.mTo != null && blk.mTo.length() > 0 && depths.containsKey( blk.mTo ) ) {
-          float tdepth = depths.get( blk.mTo ).floatValue();
+          float tdepth = depths.get( blk.mTo ).floatValue(); // FIXME may null pointer
 	  if ( ! blk.makeClino( tdepth ) ) {
 	    // depth_error = true;
 	    TDLog.Error("Failed make clino: " +  blk.mFrom + "-" + blk.mTo + " (" + tdepth + ") " );
@@ -1054,7 +1057,7 @@ public class TDNum
       compensateLoopClosure( mNodes, mShots );
   
       // recompute station positions
-      synchronized( mShots ) {
+      synchronized( mShotLock ) {
         for ( NumShot sh1 : mShots ) {
           sh1.mUsed = false;
         }
@@ -1062,7 +1065,7 @@ public class TDNum
       mStations.reset3DCoords( );       // reset the stations "Has 3D Coords" to false
       mStartStation.setHas3DCoords( );  // except for the start station 
 
-      synchronized( mShots ) {
+      synchronized( mShotLock ) {
         boolean repeat = true;
         while ( repeat ) {
           repeat = false;
@@ -1262,7 +1265,7 @@ public class TDNum
   {
     addShotToStation( sh, st1 );
     addShotToStation( sh, st2 );
-    synchronized ( mShots ) {
+    synchronized ( mShotLock ) {
       mShots.add( sh );
     }
   }
@@ -1557,7 +1560,7 @@ public class TDNum
     boolean found = true;
     while ( found ) {
       found = false;
-      synchronized( mShots ) {
+      synchronized( mShotLock ) {
         for ( NumShot shot1 : mShots ) {
           if ( shot1.branch != null ) continue;
           if ( shot1.from == st ) {
@@ -1653,7 +1656,7 @@ public class TDNum
         }
       }
     } else if ( also_cross_end ) { // no nodes: only end-end lines
-      synchronized ( mShots ) {
+      synchronized ( mShotLock ) {
         for ( NumShot shot : mShots ) {
           if ( shot.branch != null ) continue;
           NumBranch branch = new NumBranch( NumBranch.BRANCH_END_END, null );
@@ -1730,9 +1733,33 @@ public class TDNum
       // TDLog.v("NUM loop compensation no branch"); 
       return;
     }
-    branches.sort( new Comparator< NumBranch >() {
-      public int compare( NumBranch b1, NumBranch b2 ) { return ( b1.length() <= b2.length() )? -1 : 1; }
-    } );
+    if ( bs > 1 ) {
+      if ( TDandroid.AT_LEAST_API_24 ) {
+        branches.sort(new Comparator<NumBranch>() { // API_24
+          public int compare(NumBranch b1, NumBranch b2) {
+            return (b1.length() <= b2.length()) ? -1 : 1;
+          }
+        });
+      } else {
+        NumBranch b1, b2;
+        int k = 1;
+        while ( k < bs ) {
+          b1 = branches.get( k-1 );
+          b2 = branches.get( k );
+          if ( b1.length() > b2.length() ) { // swap
+            branches.set( k-1, b2 );
+            branches.set( k,   b1 );
+            if ( k > 1 ) { 
+              --k;
+            } else {
+              ++k;
+            }
+          } else {
+            ++k;
+          }
+        }
+      }
+    }
     for ( NumBranch b : branches ) {
       TDLog.v("BRANCH: " + b.toString( 1 ) );
     }

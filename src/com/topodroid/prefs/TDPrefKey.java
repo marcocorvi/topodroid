@@ -256,7 +256,7 @@ public class TDPrefKey
     "DISTOX_GROUP_BY",       // 0 // calib data grouping policy
     "DISTOX_GROUP_DISTANCE",      // calib data grouping by the distance threshold
     "DISTOX_CALIB_EPS",           // calib computation param EPS
-    "DISTOX_CALIB_MAX_IT",   // 3 // calib computation maximun number of iterations
+    "DISTOX_CALIB_MAX_IT",   // 3 // calib computation maximum number of iterations
     "DISTOX_CALIB_SHOT_DOWNLOAD", // remote calib data immediately downloaded
     // "DISTOX_RAW_DATA",
     "DISTOX_RAW_CDATA",      // 5 // whether to display also raw calib data
@@ -319,7 +319,7 @@ public class TDPrefKey
     // "DISTOX_DEVICE_TYPE",
     "DISTOX_BLUETOOTH",       // 0 * // whether to check bluetooth on start
     "DISTOX_CONN_MODE",              // data download mode [on-demand, continuous]
-    // "DISTOX_AUTO_RECONNECT",         // whether to try to reconnect if DistoX is lost [continuos mode]
+    // "DISTOX_AUTO_RECONNECT",         // whether to try to reconnect if DistoX is lost [continuous mode]
     "DISTOX_HEAD_TAIL",       // 2 // whether to read head-tail to get the number of packets to download
     "DISTOX_SOCKET_TYPE",          // socket type
     // "DISTOX_COMM_RETRY",        // number of socket connection attempts
@@ -954,7 +954,7 @@ public class TDPrefKey
   // ------------------------------------------------------------------------------
   public static String[] ACCURACY = { // [3]
     "DISTOX_ACCEL_PERCENT", // shot quality G threshold [%]
-    "DISTOX_MAG_PERCENT",   // shot quality M threhsold [%]
+    "DISTOX_MAG_PERCENT",   // shot quality M threshold [%]
     "DISTOX_DIP_THR",       // shot quality dip threshold [deg]
     "DISTOX_SIBLING_PERCENT", // shot sibling threshold [%]
     null
@@ -1172,7 +1172,7 @@ public class TDPrefKey
   // AUTOWALLS
   // public static String[] WALLS = { // [6]
   //   "DISTOX_WALLS_TYPE",         // 
-  //   "DISTOX_WALLS_PLAN_THR",     // clino threshold for splays to contrinute to walls in plan view
+  //   "DISTOX_WALLS_PLAN_THR",     // clino threshold for splays to contribute to walls in plan view
   //   "DISTOX_WALLS_EXTENDED_THR", // clino threshold for splays to contribute to walls in profile view
   //   "DISTOX_WALLS_XCLOSE",       // 
   //   "DISTOX_WALLS_CONCAVE",      // allowed "concavity"
@@ -1341,7 +1341,7 @@ public class TDPrefKey
     "DISTOX_WEED_BUFFER",
     "DISTOX_LINE_SNAP",       // whether to show line-snap action
     "DISTOX_LINE_CURVE",      // whether to show line- smooth/straighten action
-    "DISTOX_LINE_STRAIGHT",   // whetter to show lines straighten button
+    "DISTOX_LINE_STRAIGHT",   // whether to show lines straighten button
     "DISTOX_PATH_MULTISELECT",// path multiselection
     "DISTOX_COMPOSITE_ACTIONS",
     null

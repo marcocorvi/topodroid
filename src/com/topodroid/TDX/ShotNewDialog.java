@@ -598,7 +598,7 @@ class ShotNewDialog extends MyDialog
             // File imagefile = TDFile.getTopoDroidFile( filepath );
             // FileOutputStream fos = TDFile.getFileOutputStream( imagefile );
             DataOutputStream fos = TDFile.getTopoDroidFileOutputStream( filepath );
-            fos.write( mJpegData );
+            fos.write( mJpegData ); // FIXME may null pointer
             // fos.flush();
             fos.close();
             mExif.writeExif( filepath );
