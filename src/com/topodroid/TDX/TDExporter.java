@@ -360,7 +360,7 @@ public class TDExporter
       
 
    // ============== SESSIONS
-      String info_date = info.date.replaceAll("[.,-,/]", "");
+      String info_date = info.date.replaceAll("[.,-,/]", ""); // was \\.
       pw.format("    <sessions>\n");
       pw.format("      <session date=\"%s\" ", info.date); // yyyy-mm-dd or any other format is ok
       pw.format(         "description=\"%s\" ", cave ); // title
@@ -2083,7 +2083,7 @@ public class TDExporter
                       }
                     }
                   }
-                  if ( st_name.equals( blk.mTo ) ) { // FIXME may null pointer
+                  if ( blk.mTo.equals( st_name ) ) {
                     writeSurvexLRUD( pw, blk.mFrom, computeLRUD( blk, list, true ), ul );
                     st_name = blk.mFrom;
                   } else if ( st_name.equals( blk.mFrom ) ) {

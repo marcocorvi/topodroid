@@ -716,7 +716,7 @@ public class MainWindow extends Activity
   public void onCreate(Bundle savedInstanceState)
   {
     super.onCreate( savedInstanceState );
-    TDLog.v("MAIN on Create");
+    // TDLog.v("MAIN on Create");
 
     TDandroid.setScreenOrientation( this );
 
@@ -811,7 +811,7 @@ public class MainWindow extends Activity
     String app_dir = TDInstance.context.getExternalFilesDir( null ).getPath();
     // TDLog.v( "INIT dialogs: app_dir <" + app_dir + ">" );
     done_init_dialogs = true;
-    TDLog.v( "INIT environment second");
+    // TDLog.v( "INIT environment second");
     // boolean ok_folder = 
     TopoDroidApp.initEnvironmentSecond( );
 
@@ -839,7 +839,7 @@ public class MainWindow extends Activity
     //   );
     // }
 
-    TDLog.v( "INIT welcome screen");
+    // TDLog.v( "INIT welcome screen");
     if ( mApp.mWelcomeScreen ) {
       TopoDroidApp.setBooleanPreference( "DISTOX_WELCOME_SCREEN", false );
       mApp.mWelcomeScreen = false;
@@ -1082,9 +1082,9 @@ public class MainWindow extends Activity
   {
     super.onStart();
     // restoreInstanceFromFile();
-    TDLog.v( "MAIN on Start: check BT " + do_check_bt + " enabled " + DeviceUtil.isAdapterEnabled() );
+    // TDLog.v( "MAIN on Start: check BT " + do_check_bt + " enabled " + DeviceUtil.isAdapterEnabled() );
     if ( ! TDandroid.canManageExternalStorage( this ) ) {
-      TDLog.v("MAIN cannot manage external storage");
+      // TDLog.v("MAIN cannot manage external storage");
       TDandroid.requestExternalStorage( this, this );
     }
 
@@ -1128,18 +1128,18 @@ public class MainWindow extends Activity
       // int perms = TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime );
 
       if ( TDandroid.canRun( mApp, mActivity ) && ! TDandroid.PRIVATE_STORAGE ) {
-        TDLog.v("MAIN can run - has db " + TopoDroidApp.hasTopoDroidDatabase() + " init envs first [1]");
+        // TDLog.v("MAIN can run - has db " + TopoDroidApp.hasTopoDroidDatabase() + " init envs first [1]");
         mApp.initEnvironmentFirst( );
-        TDLog.v("MAIN show init dialogs [1]");
+        // TDLog.v("MAIN show init dialogs [1]");
         showInitDialogs( );
         // resetButtonBar();
       } else {
         // if ( TDandroid.PRIVATE_STORAGE && ! TopoDroidApp.hasTopoDroidDatabase() ) TopoDroidApp.setSayDialogR( true );
         TDLog.Error("MAIN cannot run - has db " + TopoDroidApp.hasTopoDroidDatabase() + " request perms time " + mRequestPermissionTime );
         if ( TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime ) == 0 ) {
-          TDLog.v("MAIN can run - init envs first [2]");
+          // TDLog.v("MAIN can run - init envs first [2]");
           mApp.initEnvironmentFirst( );
-          TDLog.v("MAIN show init dialogs [2]");
+          // TDLog.v("MAIN show init dialogs [2]");
           showInitDialogs( );
           // resetButtonBar();
         // } else {  // the followings are delayed after the permissions have been granted
@@ -1163,7 +1163,7 @@ public class MainWindow extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
-    TDLog.v("MAIN on Resume");
+    // TDLog.v("MAIN on Resume");
     // resetButtonBar();  // 6.0.33
     // setMenuAdapter();
     // closeMenu();
@@ -1171,7 +1171,7 @@ public class MainWindow extends Activity
     // TODO OPEN DATABASE HERE
     boolean ok_folder = TopoDroidApp.initEnvironmentThird();
 
-    TDLog.v( "MAIN init environment third done return " + ok_folder );
+    // TDLog.v( "MAIN init environment third done return " + ok_folder );
 
     // if ( TDVersion.targetSdk() > 29 ) { // FIXME_TARGET_29
     //   // TDLog.v( "init environment target " + TDVersion.targetSdk() );
@@ -1448,14 +1448,14 @@ public class MainWindow extends Activity
   @Override
   public void onRequestPermissionsResult( int code, final String[] perms, int[] results )
   {
-    TDLog.v("MAIN perm request result " + results.length + " request time " + mRequestPermissionTime );
+    // TDLog.v(  "MAIN perm request result " + results.length + " request time " + mRequestPermissionTime );
     ++ mRequestPermissionTime;
     if ( code == TDandroid.REQUEST_PERMISSIONS ) {
       if ( results.length > 0 ) {
         int granted = 0;
 	for ( int k = 0; k < results.length; ++ k ) {
 	  TDandroid.GrantedPermission[k] = ( results[k] == PackageManager.PERMISSION_GRANTED );
-	  TDLog.v("PERM " + "MAIN perm " + k + " perms " + perms[k] + " result " + results[k] );
+	  // TDLog.v( "MAIN perm " + k + " perms " + perms[k] + " result " + results[k] );
 	}
         ++ mRequestPermissionTime;
         int not_granted = TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime );
@@ -1634,7 +1634,7 @@ public class MainWindow extends Activity
   void resultR( boolean res )
   {
     if ( ! TDandroid.PRIVATE_STORAGE ) return;
-    TDLog.v("MAIN result R " + res );
+    // TDLog.v("MAIN result R " + res );
     if ( ! res ) {
       TopoDroidApp.setSayDialogR( true );
       finish();

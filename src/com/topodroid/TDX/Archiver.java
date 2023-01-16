@@ -207,7 +207,7 @@ public class Archiver
     File[] files = dir.listFiles();
     if ( files != null ) {
       for ( File file : files ) { // listFiles MAY NullPointerException
-        TDLog.v("ZIP dir file " + file.getPath() );
+        // TDLog.v("ZIP dir file " + file.getPath() );
         if (file.isFile()) addOptionalEntry(zos, file, file.getPath() ); 
       }
     }
@@ -264,7 +264,7 @@ public class Archiver
       zos = new ZipOutputStream( new BufferedOutputStream( os ) );
       for ( String filename : filenames ) {
         // the file.getPath() is the full absolute file path
-        TDLog.v( "ZIP-compress files: add file " + filename );
+        // TDLog.v( "ZIP-compress files: add file " + filename );
         ret &= addEntry( zos, subdir, filename );
       }
       // for ( File file : files ) TDFile.deleteFile( file );
@@ -394,7 +394,7 @@ public class Archiver
     String survey = TDInstance.survey;
     boolean ret = true;
 
-    TDLog.v( "ZIP export survey " + survey );
+    // TDLog.v( "ZIP export survey " + survey );
 
     ParcelFileDescriptor pfd = null;
     ZipOutputStream zos = null;
@@ -411,18 +411,18 @@ public class Archiver
 
       pathname = TDPath.getManifestFile( ); // The first entry must be the manifest 
       app.writeManifestFile();
-      TDLog.v("ZIP manifest file " + pathname );
+      // TDLog.v("ZIP manifest file " + pathname );
       ret &= addEntry( zos, TDFile.getTopoDroidFile(pathname), pathname );
       // TDLog.v("ZIP archive post-manifest returns " + ret );
 
       pathname = TDPath.getSqlFile( );
       app_data.dumpToFile( pathname, TDInstance.sid );
-      TDLog.v("ZIP sqlite file " + pathname );
+      // TDLog.v("ZIP sqlite file " + pathname );
       ret &= addEntry( zos, TDFile.getTopoDroidFile(pathname), pathname );
       // TDLog.v("ZIP archive post-sqlite returns " + ret );
 
       pathname = TDPath.getSurveyNoteFile( survey );
-      TDLog.v("ZIP note file " + pathname );
+      // TDLog.v("ZIP note file " + pathname );
       addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
 
       if ( TDLevel.overExpert && TDSetting.mZipWithSymbols ) {
@@ -454,7 +454,7 @@ public class Archiver
       List< PlotInfo > plots  = app_data.selectAllPlots( TDInstance.sid, TDStatus.NORMAL );
       for ( PlotInfo plt : plots ) {
         pathname = TDPath.getSurveyPlotTdrFile( survey, plt.name ); // N.B. plot file CAN be missing
-        TDLog.v("ZIP plotfile " + pathname );
+        // TDLog.v("ZIP plotfile " + pathname );
         addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       }
 
@@ -465,11 +465,11 @@ public class Archiver
       }
 
       pathname = TDPath.getSurveyPhotoDir( survey );
-      TDLog.v("ZIP photo dir " + pathname );
+      // TDLog.v("ZIP photo dir " + pathname );
       addDirectory( zos, TDFile.getTopoDroidFile( pathname ), pathname );
 
       pathname = TDPath.getSurveyAudioDir( survey );
-      TDLog.v("ZIP audio dir " + pathname );
+      // TDLog.v("ZIP audio dir " + pathname );
       addDirectory( zos, TDFile.getTopoDroidFile( pathname ), pathname );
 
       // ret = true;

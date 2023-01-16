@@ -905,8 +905,8 @@ public class TDPath
       return;
     }
     File fpp = fp.getParentFile();
-    if ( fpp != null && fpp.exists() ) {
-      // TDLog.v( "check path: parent file exists " + fpp.getPath() );
+    if ( fpp == null || fpp.exists() ) {
+      // TDLog.v( "check path: parent file null or exists " + ( (fpp==null) ? "null" : fpp.getPath() ) );
       return;
     }
     if ( ! fpp.mkdirs() ) {

@@ -248,7 +248,7 @@ public class DataHelper extends DataSetObservable
     }
     
     try {
-      TDLog.v("DB ... try to open RW+CREATE " + db_name );
+      // TDLog.v("DB ... try to open RW+CREATE " + db_name );
       myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.CREATE_IF_NECESSARY );
       if ( myDB != null ) {
         // TDLog.v( "DB opened: create tables");
