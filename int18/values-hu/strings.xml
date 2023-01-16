@@ -1175,6 +1175,7 @@
     <string name="title_fixed_gpx_rec">Geo pontok [GPX Recorder]</string>
     <string name="title_fixed_gps_pos">Geo pontok [GPS Position]</string>
     <string name="title_fixed_gps_test">Geo pontok [GPSTest]</string>
+    <string name="title_fixed_gps_logger">Geo pontok [GPS Logger]</string>
     <string name="title_fixed_edit">Helymeghatározás szerkesztése</string>
     <string name="title_fixed_import">Helymeghatározás importálása</string>
     <string name="title_fixed_gps">GNSS helymeghatározás</string>
