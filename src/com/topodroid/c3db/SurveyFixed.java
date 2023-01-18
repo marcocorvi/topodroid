@@ -11,7 +11,7 @@
  */
 package com.topodroid.c3db;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 public class SurveyFixed
 {

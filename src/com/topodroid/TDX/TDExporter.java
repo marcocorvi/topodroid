@@ -360,7 +360,7 @@ public class TDExporter
       
 
    // ============== SESSIONS
-      String info_date = info.date.replaceAll("[.,-,/]", ""); // was \\.
+      String info_date = info.date.replaceAll("[\\.,-,/]", "");
       pw.format("    <sessions>\n");
       pw.format("      <session date=\"%s\" ", info.date); // yyyy-mm-dd or any other format is ok
       pw.format(         "description=\"%s\" ", cave ); // title
@@ -2083,7 +2083,7 @@ public class TDExporter
                       }
                     }
                   }
-                  if ( blk.mTo.equals( st_name ) ) {
+                  if ( blk.mTo.equals( st_name ) ) { // 20230118 swapped strings
                     writeSurvexLRUD( pw, blk.mFrom, computeLRUD( blk, list, true ), ul );
                     st_name = blk.mFrom;
                   } else if ( st_name.equals( blk.mFrom ) ) {

@@ -526,7 +526,7 @@ public class DrawingDxf
             // String l_type = DXF.lt_continuous;
             // color = 7; // black
             handle = DXF.printLayer( pw2, handle, ("SCRAP_" + Integer.toString( s )), flag, 7, l_type );
-          };
+          }
         } else { // HBX_DXF layer separated
           if ( line_lib != null ) { // always true
             for ( Symbol line : line_lib.getSymbols() ) {

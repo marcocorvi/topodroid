@@ -134,7 +134,7 @@ public class BricProto extends TopoDroidProtocol
     }
   }
 
-  /** add the metainfo byte array
+  /** add the meta-info byte array
    * @param bytes  meta info byte array
    */
   void addMeasMeta( byte[] bytes ) 

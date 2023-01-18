@@ -12,7 +12,7 @@
 package com.topodroid.tdm;
 
 import com.topodroid.ui.MyDialog;
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;

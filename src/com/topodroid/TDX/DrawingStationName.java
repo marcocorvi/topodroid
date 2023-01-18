@@ -13,7 +13,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.num.NumStation;
 // import com.topodroid.math.Point2D;
 import com.topodroid.prefs.TDSetting;

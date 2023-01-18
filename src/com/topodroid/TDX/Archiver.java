@@ -454,7 +454,7 @@ public class Archiver
       List< PlotInfo > plots  = app_data.selectAllPlots( TDInstance.sid, TDStatus.NORMAL );
       for ( PlotInfo plt : plots ) {
         pathname = TDPath.getSurveyPlotTdrFile( survey, plt.name ); // N.B. plot file CAN be missing
-        // TDLog.v("ZIP plotfile " + pathname );
+        // TDLog.v("ZIP plot-file " + pathname );
         addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       }
 

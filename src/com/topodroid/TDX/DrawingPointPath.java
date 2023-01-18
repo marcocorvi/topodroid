@@ -276,7 +276,7 @@ public class DrawingPointPath extends DrawingPath
     return true;
   }
 
-  /** shift the pointposition
+  /** shift the point position
    * @param dx       X coord shift
    * @param dy       Y coord shift
    */

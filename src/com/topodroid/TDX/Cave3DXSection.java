@@ -107,7 +107,7 @@ public class Cave3DXSection
 
   // void dump( )
   // {
-  //   tdlog.v("XS " + size() + " C " + center.x + " " + center.y + " " + center.z + " N " + normal.x + " " + normal.y + " " + normal.z );
+  //   TDLog.v("XS " + size() + " C " + center.x + " " + center.y + " " + center.z + " N " + normal.x + " " + normal.y + " " + normal.z );
   //   for ( int k=0; k < splays.length; ++k ) splays[k].dump();
   // }
 
@@ -126,7 +126,7 @@ public class Cave3DXSection
     }
     // normal = leastEigenvector( A );
 
-    // compute the smallest eigenvalue of A (A is positive semidefinite therefore eigenvalue >= 0)
+    // compute the smallest eigenvalue of A (A is positive semi-definite therefore eigenvalue >= 0)
     // L^3 - Tr(A) L^2 + ( Axx Ayy + Ayy Azz + Azz Axx - Axy^2 - Axz^2 - Azy^2 ) L + det(A)
     // 
     double b2 = - ( A[0] + A[4] + A[8] ); // trace

@@ -141,7 +141,7 @@ public class BleCallback extends BluetoothGattCallback
       if ( state == BluetoothProfile.STATE_CONNECTED ) {
         mComm.connected();
         try {
-          int bond_state = mDevice.getBondState();
+          int bond_state = mDevice.getBondState(); // 20230118 local var "bond_state"
           if ( bond_state == BluetoothDevice.BOND_NONE ) {
             if ( LOG ) TDLog.v("BLE bond NONE - discover services");
             gatt.discoverServices();
@@ -661,7 +661,7 @@ public class BleCallback extends BluetoothGattCallback
   {
     if ( LOG ) TDLog.v( "BLE request MTU " + mtu );
     if ( mGatt == null ) return false;
-    return TDandroid.AT_LEAST_API_21 ? mGatt.requestMtu( mtu ) : false;
+    return TDandroid.AT_LEAST_API_21 ? mGatt.requestMtu( mtu ) : false; // 20230118 test for API 21
   }
 
   /** clear the gatt service cache - NB asynchronous

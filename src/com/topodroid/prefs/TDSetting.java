@@ -555,7 +555,7 @@ public class TDSetting
   public static boolean mBedding        = false;
   public static int     mTripleShot     = FEEDBACK_NONE;  // leg feedback
   public static boolean mSplayClasses   = false;
-  public static int     mDiscreteColors = 0;;
+  public static int     mDiscreteColors = 0;
   public static boolean mSplayColor     = false; // = (mDiscreteColors > 0)
   public static boolean mDivingMode     = false;
 

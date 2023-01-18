@@ -102,7 +102,7 @@ class DialogInfo extends MyDialog
         tv2.setText( String.format(Locale.US, res.getString(R.string.info_radii_value), mParser.getWEradius(), mParser.getSNradius() ) );
       } else {
         tv1.setText( String.format(Locale.US, res.getString(R.string.info_lonlat_prjvalue), origin.longitude, origin.latitude ) );
-        // FXIME origin.y
+        // FIXME origin.y 20230118
         TableRow tr2 = (TableRow) findViewById(R.id.info_row_radii);
         tr2.setVisibility( View.GONE );
       }

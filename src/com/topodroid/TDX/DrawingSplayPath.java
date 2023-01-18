@@ -16,7 +16,7 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 // import com.topodroid.num.TDNum;
 // import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;

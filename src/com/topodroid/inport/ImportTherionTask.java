@@ -11,7 +11,7 @@
  */
 package com.topodroid.inport;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 import com.topodroid.TDX.DataHelper;
 import com.topodroid.TDX.SurveyInfo;

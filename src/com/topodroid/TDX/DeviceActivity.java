@@ -1010,15 +1010,15 @@ public class DeviceActivity extends Activity
     ArrayAdapter< String > menu_adapter = new ArrayAdapter<>(this, R.layout.menu );
 
     int k = -1;
-    // ++k; if ( TDLevel.overBasic    ) nemu_adapter.add( res.getString( menus[k] ) );         // BT_SCAN
-    // ++k; if ( TDLevel.overExpert && mHasBLE ) nemu_adapter.add( res.getString( menus[k] ) ); // FIXME_SCAN_BRIC BLE_SCAN
-    // ++k; if ( TDLevel.overBasic    ) nemu_adapter.add( res.getString( menus[k] ) );
+    // ++k; if ( TDLevel.overBasic    ) menu_adapter.add( res.getString( menus[k] ) );         // BT_SCAN
+    // ++k; if ( TDLevel.overExpert && mHasBLE ) menu_adapter.add( res.getString( menus[k] ) ); // FIXME_SCAN_BRIC BLE_SCAN
+    // ++k; if ( TDLevel.overBasic    ) menu_adapter.add( res.getString( menus[k] ) );
     ++k; if ( TDLevel.overNormal   ) menu_adapter.add( res.getString( menus[k] ) );
     ++k; if ( TDLevel.overAdvanced ) menu_adapter.add( res.getString( menus[k] ) );
     ++k; if ( TDLevel.overExpert && TDSetting.mPacketLog ) menu_adapter.add( res.getString( menus[k] ) ); // PACKET_LOG
     ++k; menu_adapter.add( res.getString( menus[k] ) );
     ++k; menu_adapter.add( res.getString( menus[k] ) );
-    // ++k; if ( TDLevel.overTester ) nemu_adapter.add( res.getString( menus[8] ) ); // CALIB_RESET
+    // ++k; if ( TDLevel.overTester ) menu_adapter.add( res.getString( menus[8] ) ); // CALIB_RESET
     mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
   }

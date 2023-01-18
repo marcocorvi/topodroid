@@ -34,7 +34,7 @@ class LoxSurface
     grid = g;
     calib = new double[6];
     // for ( int k=0; k<6; ++k ) calib[k] = c[k];
-    System.arraycopy(c, 0, calib, 0, 6);
+    System.arraycopy(c, 0, calib, 0, 6); // 20230118 using arraycopy
   }
 
   // int Id()      { return id; }

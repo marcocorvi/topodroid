@@ -864,7 +864,7 @@ public class DrawingCommandManager
     // }
   }
 
-  // oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+  // -----------------------------------------------------------
 
   /** add an erase command in the current scrap
    * @param cmd   erase command
@@ -979,7 +979,7 @@ public class DrawingCommandManager
    */
   void closePointLine( DrawingPointLinePath line ) { mCurrentScrap.closePointLine( line ); }
 
-  // ooooooooooooooooooooooooooooooooooooooooooooooooooooo
+  // ----------------------------------------------------------
 
   // FIXME LEGS_SPLAYS
   void resetFixedPaint( TopoDroidApp app, boolean profile, Paint paint )
@@ -1550,7 +1550,7 @@ public class DrawingCommandManager
             for ( DrawingSplayPath path : mSplaysStack ) {
 	      if ( ! station_splay.isStationOFF( path ) ) path.draw( canvas, mm, scale, bbox, ! mDisplayPoints );
 	    }
-          } else if ( latest || station_splay.hasSplaysON() ) { // draw the splays-on and/or the lastest
+          } else if ( latest || station_splay.hasSplaysON() ) { // draw the splays-on and/or the latest
             for ( DrawingSplayPath path : mSplaysStack ) {
               if ( station_splay.isStationON( path ) || path.isBlockRecent() ) path.draw( canvas, mm, scale, bbox, ! mDisplayPoints );
 	    }

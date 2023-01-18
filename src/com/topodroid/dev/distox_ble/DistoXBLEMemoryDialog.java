@@ -1,6 +1,6 @@
 /* @file DeviceXBLEMemoryDialog.java
  *
- * @author siwei tian
+ * @author Siwei Tian
  * @date aug 2022
  *
  * @brief TopoDroid DistoX XBLE memory dialog

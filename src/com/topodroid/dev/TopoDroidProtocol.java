@@ -24,7 +24,7 @@ import com.topodroid.dev.distox.IMemoryDialog;
 
 import java.util.UUID;
 import java.util.List;
-import java.util.Locale;
+// import java.util.Locale;
 // import java.lang.reflect.Field;
 
 // import android.os.CountDownTimer;

@@ -74,7 +74,7 @@ class DEMasciiParser extends ParserDEM
       // BufferedReader mBr = new BufferedReader( mIsr );
       // for ( int k=0; k<6; ++k) mBr.readLine(); // header MUST have been read already
 
-      double y = yll + mDim2/2 + mDim2 * (rows-1); // upper-row midpoint - mDim2 = Y-cellsize
+      double y = yll + mDim2/2 + mDim2 * (rows-1); // upper-row midpoint - mDim2 = Y-cell-size
       // TDLog.v("DEM upper-row midpoint " + y + " " + ynorth + " rows " + rows );
       int k = 0;
       for ( ; k < rows && y > ynorth; ++k ) {
@@ -163,19 +163,19 @@ class DEMasciiParser extends ParserDEM
       // BufferedReader mBr = new BufferedReader( mIsr );
       String line = mBr.readLine();
       String[] vals = TDString.splitOnSpaces( line );
-      cols = Integer.parseInt( vals[1] ); // ncols
+      cols = Integer.parseInt( vals[1] ); // number cols
       line = mBr.readLine();
       vals = TDString.splitOnSpaces( line );
-      rows = Integer.parseInt( vals[1] ); // nrows
+      rows = Integer.parseInt( vals[1] ); // number rows
       line = mBr.readLine();
       vals = TDString.splitOnSpaces( line );
-      xll  = Double.parseDouble( vals[1] ); // xllcorner
+      xll  = Double.parseDouble( vals[1] ); // xll corner
       line = mBr.readLine();
       vals = TDString.splitOnSpaces( line );
-      yll  = Double.parseDouble( vals[1] ); // yllcorner
+      yll  = Double.parseDouble( vals[1] ); // yll corner
       line = mBr.readLine();
       vals = TDString.splitOnSpaces( line );
-      mDim1 = Double.parseDouble( vals[1] ); // cellsize
+      mDim1 = Double.parseDouble( vals[1] ); // cell-size
       mDim2 = mDim1;
       line = mBr.readLine();
       vals = TDString.splitOnSpaces( line );

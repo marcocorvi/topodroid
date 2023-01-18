@@ -11,7 +11,7 @@
  */
 package com.topodroid.tdm;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.R;

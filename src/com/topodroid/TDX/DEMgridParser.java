@@ -65,7 +65,7 @@ class DEMgridParser extends ParserDEM
       for ( ; i < cols && x > xeast; ++i ) x -= mDim1;
       mEast2 = x;   // X-coord of first data
       xoff = i; // col-index of first data 
-      mNr1 = 0;     // numver of X-data
+      mNr1 = 0;     // number of X-data
       for ( ; i < cols && x >= xwest; ++i ) { x -= mDim1; ++mNr1; }
       mEast1 = x + mDim1; // X-coord of last data
     } else {
@@ -74,7 +74,7 @@ class DEMgridParser extends ParserDEM
       for ( ; i < cols && x < xwest; ++i ) x += mDim1;
       mEast1 = x;   // X-coord of first data
       xoff = i; // col-index of first data 
-      mNr1 = 0;     // numver of X-data
+      mNr1 = 0;     // number of X-data
       for ( ; i < cols && x <= xeast; ++i ) { x += mDim1; ++mNr1; }
       mEast2 = x - mDim1; // X-coord of last data
     }
@@ -172,7 +172,7 @@ class DEMgridParser extends ParserDEM
     return mValid;
   }
 
-  /** read tthe header info
+  /** read the header info
    * @param filename file fullpath
    * @return true if successful
    */
@@ -195,12 +195,12 @@ class DEMgridParser extends ParserDEM
         if ( line.startsWith("grid ") ) {
           // TDLog.v("DEM grid: " + line );
           String[] vals = TDString.splitOnSpaces( line );
-          cols = Integer.parseInt( vals[5] ); // ncols
-          rows = Integer.parseInt( vals[6] ); // nrows
-          xll = Double.parseDouble( vals[1] ); // xcorner
-          yll = Double.parseDouble( vals[2] ); // ycorner
-          mDim1 = Double.parseDouble( vals[3] ); // cellsize
-          mDim2 = Double.parseDouble( vals[4] ); // cellsize
+          cols = Integer.parseInt( vals[5] ); // number cols
+          rows = Integer.parseInt( vals[6] ); // number rows
+          xll = Double.parseDouble( vals[1] ); // x corner
+          yll = Double.parseDouble( vals[2] ); // y corner
+          mDim1 = Double.parseDouble( vals[3] ); // cell-size
+          mDim2 = Double.parseDouble( vals[4] ); // cell-size
           continue;
         }
         if ( line.startsWith("grid-flip ") ) {

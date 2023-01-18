@@ -338,7 +338,7 @@ public class DrawingPath extends RectF
    * @param y1    Y coord of the first endpoint
    * @param x2    X coord of the second endpoint
    * @param y2    Y coord of the second endpoint
-   * @param x4    X ccord of angle point
+   * @param x4    X coord of angle point
    * @param y4    Y coord of angle point
    */
   void makePath( float x1, float y1, float x2, float y2, float x4, float y4 )
@@ -442,7 +442,7 @@ public class DrawingPath extends RectF
     }
   }
 
-  /** update the boundig rectangle to include (x,y)
+  /** update the bounding rectangle to include (x,y)
    * @param x x
    * @param y y
    */

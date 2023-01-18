@@ -919,7 +919,7 @@ public class DrawingPointLinePath extends DrawingPath
 
   /** rotate the line segment to have an orientation multiple of the given bin
    * @param bin   angle range bin - must be even and divisor of 90
-   * @note used to clamp the section lines in prfile views to a set of fixed angles
+   * @note used to clamp the section lines in profile views to a set of fixed angles
    */
   void clampOrientation( float bin )
   {

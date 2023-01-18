@@ -12,7 +12,7 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDFeedback;

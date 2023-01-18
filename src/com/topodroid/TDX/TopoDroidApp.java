@@ -962,7 +962,7 @@ public class TopoDroidApp extends Application
     mBorderLeft       = dim / 16;
     mBorderInnerRight = dim * 3 / 4;
     mBorderInnerLeft  = dim / 4;
-    mBorderTop        = (int)( dm.heightPixels / 8 );
+    mBorderTop        = (int)( dm.heightPixels / 8 ); // 20230118 cast to int (2 lines)
     mBorderBottom     = (int)( (dm.heightPixels * 7) / 8 ) + DrawingWindow.ZOOM_TRANSLATION_1;
     mDisplayWidth  = dm.widthPixels;
     mDisplayHeight = dm.heightPixels;

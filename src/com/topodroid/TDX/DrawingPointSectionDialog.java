@@ -1,4 +1,4 @@
-/* @file DrawingPointSectiontDialog.java
+/* @file DrawingPointSectionDialog.java
  *
  * @author marco corvi
  * @date march 2021

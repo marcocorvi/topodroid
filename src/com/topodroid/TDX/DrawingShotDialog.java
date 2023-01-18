@@ -358,7 +358,7 @@ class DrawingShotDialog extends MyDialog
     mBtnColor.setBackgroundColor( mColor );
   }
 
-  /** implements user long-tapps
+  /** implements user long-taps
    * @param view   tapped view
    * @return true if the tap has been handled
    */
@@ -369,7 +369,7 @@ class DrawingShotDialog extends MyDialog
     return true;
   }
 
-  /** implements user tapps
+  /** implements user taps
    * @param view   tapped view
    */
   @Override

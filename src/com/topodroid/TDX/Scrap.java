@@ -400,7 +400,7 @@ public class Scrap
     if ( size == 2 ) return;
     syncClearSelected();
 
-    boolean is_split = false;
+    boolean is_split = false; // 20230118 local var "is_split"
     DrawingLinePath line1 = new DrawingLinePath( line.mLineType, mScrapIdx );
     DrawingLinePath line2 = new DrawingLinePath( line.mLineType, mScrapIdx );
     line1.setOptions( line.getOptions() );
@@ -491,7 +491,7 @@ public class Scrap
     line1.setOptions( line.getOptions() );
     line2.setOptions( line.getOptions() );
 
-    boolean is_split = false;
+    boolean is_split = false; // 20230118 local var "is_split"
     try {
       is_split = line.splitAt( lp, line1, line2, true );
     } catch ( OutOfMemoryError e ) {

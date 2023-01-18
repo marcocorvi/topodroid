@@ -1,6 +1,6 @@
 /* @file DrawingScaleReference.java
  *
- * @author andrea russino
+ * @author Andrea Russino
  * @date feb 2016
  *
  * @brief A scale reference is a reverse square bracket scaled to the current scale factor, used to
@@ -19,7 +19,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
 

@@ -11,7 +11,7 @@
  */
 package com.topodroid.utils;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.TDX.TDInstance;
 // import com.topodroid.TDX.TDPath;
 

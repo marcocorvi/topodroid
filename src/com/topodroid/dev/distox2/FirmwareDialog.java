@@ -18,7 +18,7 @@ import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.DeviceActivity;
-import com.topodroid.TDX.TopoDroidAlertDialog;
+// import com.topodroid.TDX.TopoDroidAlertDialog;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.R;
@@ -35,7 +35,7 @@ import android.os.Bundle;
 import android.content.Context;
 import android.content.res.Resources;
 // import android.content.Intent;
-import android.content.DialogInterface;
+// import android.content.DialogInterface;
 // import android.content.DialogInterface.OnCancelListener;
 // import android.content.DialogInterface.OnDismissListener;
 
@@ -102,7 +102,7 @@ public class FirmwareDialog extends MyDialog
     
   }
 
-  /** set the firmware filename in the edit textbox
+  /** set the firmware filename in the edit text-view
    * @param filename   name of the firmware file
    */
   public void setFirmwareFile( String filename )

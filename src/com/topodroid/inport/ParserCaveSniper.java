@@ -74,7 +74,7 @@ class ParserCaveSniper extends ImportParser
         } else if ( line.startsWith("GPS:") ) {
           // GPS: lng , lat , h_ell
         } else if ( line.startsWith("Od") ) {
-          // Od Do Odleglosc Azymut Upad Komentarz FIXME
+          // from, to, distance, azimuth, clino, comment 
         } else if ( line.length() > 8 ) {
           String[] vals = splitLine(line); // line.split( "\\s+" );
           int k = 0;

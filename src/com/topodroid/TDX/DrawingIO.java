@@ -68,7 +68,7 @@ public class DrawingIO
   //   return line;
   // } 
 
-  /* NOTE therion th2 files can no longer be supported because therionscale is not fixed
+  /* NOTE therion th2 files can no longer be supported because therion scale is not fixed
    */
   // static boolean doLoadTherion( DrawingSurface surface,
   //                               String filename,
@@ -223,7 +223,7 @@ public class DrawingIO
   //             }
 
   //             BrushManager.tryLoadMissingPoint( type );
-  //             // map pre 3.1.1 thnames to 3.1.1 names
+  //             // map pre 3.1.1 therion names to 3.1.1 names
   //             String thname = type;
   //             else if ( thname.equals( "archeo" ) ) { thname = "archeo-material"; }
   //             ptType = BrushManager.getPointIndexByThName( thname );

@@ -646,7 +646,7 @@ public class DataHelper extends DataSetObservable
           StringBuilder sb = new StringBuilder();
           for ( String addr : cnts.keySet() ) {
             // TDLog.v("address " + addr + " " + (Integer)cnts.get( addr ) );
-            try {
+            try { // 20280118 try - catch
               sb.append(((Integer) cnts.get(addr)).intValue()).append(" ");
             } catch ( NullPointerException e ) {
               // TODO
@@ -1691,7 +1691,7 @@ public class DataHelper extends DataSetObservable
 	  String s2 = sh.to;
           if ( s1.length() > 0 && s2.length() > 0 && ( to.equals( s1 ) || to.equals( s2 ) ) ) stack.add( sh );
         }
-        try {
+        try { // 20280118 try - catch
           float depth = depths.get(from).floatValue() - shot.len * TDMath.sind(shot.cln);
           depths.put(to, Float.valueOf(depth));
         } catch ( NullPointerException e ) {
@@ -1705,7 +1705,7 @@ public class DataHelper extends DataSetObservable
 	  String s2 = sh.to;
           if ( s1.length() > 0 && s2.length() > 0 && ( from.equals( s1 ) || from.equals( s2 ) ) ) stack.add( sh );
         }
-        try {
+        try { // 20280118 try - catch
           float depth = depths.get(to).floatValue() + shot.len * TDMath.sind(shot.cln);
           depths.put(from, Float.valueOf(depth));
         } catch ( NullPointerException e ) {
@@ -2751,7 +2751,7 @@ public class DataHelper extends DataSetObservable
                                  cursor.getDouble(10), // cs longitude
                                  cursor.getDouble(11), // cs latitude
                                  cursor.getDouble(12), // cs altitude
-				 cursor.getLong(13),   // cs decomals
+				                 cursor.getLong(13),   // cs decimals
                                  cursor.getDouble(14), // convergence
                                  cursor.getDouble(15), // accuracy
                                  cursor.getDouble(16), // accuracy V

@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date oct 2015
  *
- * @brief TopoDroid drawing: display mode consts
+ * @brief TopoDroid drawing: display mode constants
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.

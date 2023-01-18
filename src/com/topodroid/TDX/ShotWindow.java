@@ -1368,7 +1368,7 @@ public class ShotWindow extends Activity
 
   /** @return the name (ILister interface)
    */
-  public String name() { return "ShotWindow"; };
+  public String name() { return "ShotWindow"; }
 
   // --------------------------------------------------------------
 

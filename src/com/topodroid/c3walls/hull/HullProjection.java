@@ -16,7 +16,7 @@ import com.topodroid.TDX.Cave3DStation;
 import com.topodroid.TDX.Vector3D;
 import com.topodroid.TDX.TopoGL;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 class HullProjection 
 {

@@ -229,7 +229,7 @@ public class TDPath
   static void setTdPaths( String name /*, String base */ )
   {
     TDLog.v( "set paths [4]: " + name );
-    // if ( TDandroid.PRIVATE_STORAGE ) { // FIXME this was enabled
+    // if ( TDandroid.PRIVATE_STORAGE ) { // FIXME this was enabled 20230118
     //   checkFilesystemDirs( ROOT_ZIP );
     //   checkFilesystemDirs( ROOT_TMP );
     //   checkFilesystemDirs( ROOT_TDCONFIG  );
@@ -238,7 +238,7 @@ public class TDPath
     //   return;
     // }
     if ( name == null || ! name.toLowerCase( Locale.getDefault() ).startsWith( "topodroid" ) ) return;
-    File dir = null;
+    File dir = null; // 20230118 (8 lines)
     if ( TDandroid.PRIVATE_STORAGE ) { 
       dir = TDFile.getPrivateDir( name ); // PATH_CB_DIR + "/" + name 
       // PATH_CW_DIR = dir.getAbsolutePath();
@@ -893,6 +893,11 @@ public class TDPath
 
   /** make sure the file parent directory exists
    * @param fp   file
+   *
+   * TODO replace with 20230118
+   * if ( fp == null || fp.exists() ) return;
+   * File fpp fp.getParentFile();
+   * if ( fpp != null && ! fpp.exists() ) fpp.mkdirs();
    */
   private static void checkPath( File fp ) // DistoX-SAF
   {

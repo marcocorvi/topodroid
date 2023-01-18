@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;

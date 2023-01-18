@@ -20,11 +20,11 @@ public interface IDrawingLink
 {
   /** @return the X coordinate of the linked item
    */
-  public float getLinkX();
+  float getLinkX();
 
   /** @return the Y coordinate of the linked item
    */
-  public float getLinkY();
+  float getLinkY();
 
   // Point2D getLink(); // TODO
 }

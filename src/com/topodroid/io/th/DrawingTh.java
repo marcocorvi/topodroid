@@ -12,7 +12,7 @@
 package com.topodroid.io.th;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
+// import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDString;
 // import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDUtil;
@@ -90,7 +90,7 @@ public class DrawingTh
     return sb.toString();
   } 
 
-  /* NOTE therion th2 files can no longer be supported because therionscale is not fixed
+  /* NOTE therion th2 files can no longer be supported because therion scale is not fixed
    * @param surface  drawing surface
    * @param fr       input th2 file reader
    * @param dx       X offset
@@ -215,7 +215,7 @@ public class DrawingTh
           }
 
           // BrushManager.tryLoadMissingPoint( type );
-          // map pre 3.1.1 thnames to 3.1.1 names
+          // map pre 3.1.1 therion names to 3.1.1 names
           if ( thname.equals( "archeo-material" ) ) { thname = "archeo"; }
           ptType = BrushManager.getPointIndexByThName( thname );
           if ( ptType < 0 ) {
@@ -435,17 +435,17 @@ public class DrawingTh
       } else if ( vals[0].equals( "area" ) ) { // THERION AREAS
         thname = vals[1]; // area type
         // TDLog.v( "area thname " + thname );
-        int artype = BrushManager.getAreaIndexByThName( thname );
-        if ( artype < 0 ) {
+        int area_type = BrushManager.getAreaIndexByThName( thname ); // 20230118 local var "area_type"
+        if ( area_type < 0 ) {
           missingSymbols.append(" A").append( thname );
-          artype = 0; // SymbolPointLibrary.mPointUserIndex; // FIXME
+          area_type = 0; // SymbolPointLibrary.mPointUserIndex; // FIXME
         }
         line = readLine( br );
         if ( ! line.equals( "endarea" ) ) {  // FIXME may null pointer
           String border_id = line;
           for ( DrawingAreaPath path : areas ) {
             if ( path.mPrefix.equals( border_id ) ) {
-              path.setAreaType( artype );
+              path.setAreaType( area_type );
               surface.addDrawingPath( path );
               break;
             }

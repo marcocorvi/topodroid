@@ -194,7 +194,7 @@ public class GMActivity extends Activity
 
   /** @return the name (ILister interface)
    */
-  public String name() { return "ShotWindow"; };
+  public String name() { return "ShotWindow"; }
 
   // -------------------------------------------------------------------
   // forward survey name to DeviceHelper

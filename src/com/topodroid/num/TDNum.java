@@ -297,7 +297,7 @@ public class TDNum
   private NumStation mStartStation; // origin station
   private float      mDecl;         // magnetic declination (possibly including -convergence)
 
-  private final Object mShotLock = new Object(); // to synchronize mShots
+  private final Object mShotLock = new Object(); // 20230118 new, to synchronize mShots
 
   private NumStationSet mStations;
   private ArrayList< NumStation > mClosureStations;
@@ -1733,14 +1733,14 @@ public class TDNum
       // TDLog.v("NUM loop compensation no branch"); 
       return;
     }
-    if ( bs > 1 ) {
+    if ( bs > 1 ) { // 20230118 added test
       if ( TDandroid.AT_LEAST_API_24 ) {
         branches.sort(new Comparator<NumBranch>() { // API_24
           public int compare(NumBranch b1, NumBranch b2) {
             return (b1.length() <= b2.length()) ? -1 : 1;
           }
         });
-      } else {
+      } else { // 20230118 sort for API before 24
         NumBranch b1, b2;
         int k = 1;
         while ( k < bs ) {

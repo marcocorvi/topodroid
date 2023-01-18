@@ -13,10 +13,10 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDThread;
-import com.topodroid.ui.ExifInfo;
+// import com.topodroid.ui.ExifInfo;
 // import com.topodroid.prefs.TDSetting;
 
-import java.io.IOException;
+// import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.Arrays;
@@ -28,12 +28,12 @@ import java.util.concurrent.TimeUnit;
 
 // import android.Manifest;
 // import android.annotation.TargetApi;
-import android.Manifest;
+// import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 // import android.content.pm.PackageManager;
-import android.content.pm.PackageManager;
+// import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Handler;
@@ -46,7 +46,7 @@ import android.graphics.RectF;
 import android.graphics.SurfaceTexture;
 
 // API-21 use android.hardware.camera2 classes
-import android.hardware.SensorManager;
+// import android.hardware.SensorManager;
 import android.hardware.display.DisplayManager;
 
 import android.hardware.camera2.CameraDevice;

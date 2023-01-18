@@ -110,8 +110,8 @@ public class DBlock
 
   // void resetFlag() { mFlag = FLAG_SURVEY; }
 
-  /** set the block flag to a given bitstring 
-   * @param flag    new flag bitstring
+  /** set the block flag to a given bit-string
+   * @param flag    new flag bit-string
    */
   void resetFlag( long flag ) { mFlag = flag; }
 
@@ -138,7 +138,7 @@ public class DBlock
    */
   public int getVisible() { return mVisible; }
 
-  /** test if the block is not visible (ie it is a bunder)
+  /** test if the block is not visible (ie it is a blunder)
    * @return true if the block is not visible
    */
   public boolean isNotVisible() { return mVisible == View.GONE; }

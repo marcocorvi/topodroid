@@ -30,7 +30,7 @@ import com.topodroid.help.UserManualActivity;
 import android.os.Bundle;
 
 import android.content.Context;
-import android.content.ComponentName;
+// import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ActivityNotFoundException;
@@ -248,7 +248,7 @@ public class FixedActivity extends Activity
     }
   }
 
-  /** lifecycke - on resume
+  /** life-cycke - on resume
    */
   @Override
   public void onResume()
@@ -499,7 +499,7 @@ public class FixedActivity extends Activity
     TDLog.v("FIXED import app " + TDSetting.mGeoImportApp );
     int request = 0;
     Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT ); // API_19 - TODO use TDandroid.getOpenDocumentIntent
-    if ( TDSetting.mGeoImportApp == FLAG_MOBILE_TOPOGRAPHER ) { // pointlist file
+    if ( TDSetting.mGeoImportApp == FLAG_MOBILE_TOPOGRAPHER ) { // point-list file
       intent.setType( "application/octet-stream" );
       request = TDRequest.REQUEST_MOBILE_TOPOGRAPHER;
     } else if ( TDSetting.mGeoImportApp == FLAG_GPX_RECORDER  ) { // gpx

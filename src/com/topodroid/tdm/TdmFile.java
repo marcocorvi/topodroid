@@ -11,7 +11,7 @@
  */
 package com.topodroid.tdm;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 class TdmFile 
 {

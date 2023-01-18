@@ -65,7 +65,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-import android.graphics.RectF;
+// import android.graphics.RectF;
 // import android.print.PrintAttributes;
 // import android.print.pdf.PrintedPdfDocument;
 import android.graphics.pdf.PdfDocument;

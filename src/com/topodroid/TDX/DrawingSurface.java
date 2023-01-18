@@ -591,8 +591,8 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
 
   /** split the plot, in the current manager
    * @param border    splitting border
-   * @param remove    whether to remove splitted items
-   * @return the list of (a copy of the) splitted items
+   * @param remove    whether to remove split items
+   * @return the list of (a copy of the) split items
    */
   List< DrawingPath > splitPlot( ArrayList< PointF > border, boolean remove )
   {

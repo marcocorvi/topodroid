@@ -124,7 +124,7 @@ class ImportParser
    */
   String nextLine( BufferedReader br ) throws IOException
   {
-    if ( br == null ) throw new IOException( "null BufferedReader" );
+    if ( br == null ) throw new IOException( "null BufferedReader" ); // 20230118 new test
     String line = br.readLine();
     if ( line == null ) return null; // EOF
     line = line.trim();

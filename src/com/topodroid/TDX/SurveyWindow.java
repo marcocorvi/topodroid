@@ -582,7 +582,7 @@ public class SurveyWindow extends Activity
     // intent.setType( TDConst.mMimeType[index] );
     // intent.addCategory(Intent.CATEGORY_OPENABLE);
     // intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
-    Intent intent = TDandroid.getOpenDocumentIntent( index );
+    Intent intent = TDandroid.getOpenDocumentIntent( index ); // 20230118 replace previuos 4 lines
     // intent.putExtra( "exporttype", index ); // index is not returned to the app
     intent.putExtra( Intent.EXTRA_TITLE, filename );
     mExportIndex = index;

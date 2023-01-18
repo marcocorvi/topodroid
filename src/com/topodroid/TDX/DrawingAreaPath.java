@@ -531,7 +531,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
   @Override
   void toCave3D( PrintWriter pw, int type, TDVector V1, TDVector V2 )
   {
-    if ( size() < 2 || mFirst == null ) return;
+    if ( size() < 2 || mFirst == null ) return; // 20230118 added test on mFirst
     String name = getThName();
     int color   = BrushManager.getAreaColor( mAreaType );
     float red   = ((color >> 16)&0xff)/255.0f;

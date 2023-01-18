@@ -11,10 +11,10 @@
  */
 package com.topodroid.ui;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 // import com.topodroid.ui.MyDialog;
 import com.topodroid.TDX.TopoDroidApp;
-import com.topodroid.TDX.TDandroid;
+// import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.R;
 
 // import android.app.Activity;
@@ -33,8 +33,8 @@ import android.view.View;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
+// import android.graphics.Bitmap;
+// import android.graphics.drawable.BitmapDrawable;
 
 public class TDProgress extends MyDialog // Activity
                  implements View.OnClickListener

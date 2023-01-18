@@ -57,7 +57,7 @@ public class MyColorPicker extends MyDialog
   private Button mBtnClose;
 
   public interface IColorChanged {
-    public void colorChanged(int color);
+    void colorChanged(int color);
   }
 
   private IColorChanged mListener;

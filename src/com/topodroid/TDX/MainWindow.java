@@ -77,7 +77,7 @@ import android.content.res.Resources;
 import android.content.res.Configuration;
 import android.content.pm.PackageManager;
 
-import android.provider.Settings;
+// import android.provider.Settings;
 
 import android.net.Uri;
 
@@ -1620,7 +1620,7 @@ public class MainWindow extends Activity
     // intent.setType( TDConst.mMimeType[ index ] );
     // intent.addCategory(Intent.CATEGORY_OPENABLE);
     // intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION); // API_19
-    Intent intent = TDandroid.getOpenDocumentIntent( index );
+    Intent intent = TDandroid.getOpenDocumentIntent( index ); // 20230181 replace previous lines
     // intent.putExtra( "importtype", index ); // extra is not returned to the app
     mImportData = data;
     mImportData.mType = index;

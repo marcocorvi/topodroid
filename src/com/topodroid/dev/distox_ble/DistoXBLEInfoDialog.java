@@ -26,7 +26,7 @@ import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.dev.Device;
 // import com.topodroid.dev.ble.BleUtils;
 import com.topodroid.ui.MyDialog;
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 // import com.topodroid.utils.TDUtil;
 
 import java.lang.ref.WeakReference;

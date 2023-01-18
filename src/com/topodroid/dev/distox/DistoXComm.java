@@ -668,7 +668,7 @@ public class DistoXComm extends TopoDroidComm
    * @param address    device address
    * @param lister     data lister
    * @param data_type  packet datatype
-   * @param timeout    data receivin timeout
+   * @param timeout    data receiving timeout
    * @return number of packets (-1 failure)
    */
   @Override

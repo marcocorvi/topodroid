@@ -628,7 +628,7 @@ public class TDandroid
     return ret;
   }
 
-  /** @return an o[en-document intent - requires API_19
+  /** @return an o[en-document intent - requires API_19 - 20230118 new method
    * @param index  index of mime type
    */
   static Intent getOpenDocumentIntent( int index )

@@ -14,7 +14,7 @@ package com.topodroid.dev.distox2;
 import com.topodroid.TDX.TopoDroidApp;
 // import com.topodroid.TDX.R;
 // import com.topodroid.TDX.TDToast;
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 import java.lang.ref.WeakReference;
 

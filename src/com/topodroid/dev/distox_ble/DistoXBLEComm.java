@@ -23,7 +23,7 @@ import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.ListerHandler;
 import com.topodroid.TDX.TopoDroidApp;
-import com.topodroid.TDX.TopoDroidAlertDialog;
+// import com.topodroid.TDX.TopoDroidAlertDialog;
 import com.topodroid.dev.ConnectionState;
 // import com.topodroid.dev.DataType;
 import com.topodroid.dev.Device;
@@ -62,7 +62,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.ArrayList;
 
 import android.os.Handler;
-import android.os.Message;
+// import android.os.Message;
 import android.os.Looper;
 import android.content.res.Resources;
 
@@ -431,11 +431,11 @@ public class DistoXBLEComm extends TopoDroidComm
    * @param uuid_chrt_str characteristics UUID string
    * @param bytes    array of written bytes 
    *
-   * TODO distinguish CCC descriiptor (BleUtils.CCCD_UUID) from other descriptors
+   * TODO distinguish CCC descriptor (BleUtils.CCCD_UUID) from other descriptors
    */
   public void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
-    if ( uuid_str.equals( BleUtils.CCCD_UUID_STR ) ) { // a notify op
+    if ( uuid_str.equals( BleUtils.CCCD_UUID_STR ) ) { // a notify op - 202301818 using CCCD_UUID_STR
       if ( bytes != null ) {
         if ( bytes[0] != 0 ) { // set notify/indicate
           if ( LOG ) TDLog.v("XBLE CCC set notify " + bytes[0] + " chrt " + uuid_chrt_str );
@@ -642,7 +642,7 @@ public class DistoXBLEComm extends TopoDroidComm
 
   /** prepare a write op and put it on the queue - call the next op
    * @param srvUuid   service UUID
-   * @param chrtUuid  chracteristic UUID
+   * @param chrtUuid  characteristic UUID
    * @param bytes     data array byte
    * @param addHeader whether to add a (6-byte) header "data:#" and 2-byte footer "\r\n"
    * @return ...
@@ -1025,7 +1025,7 @@ public class DistoXBLEComm extends TopoDroidComm
    *
    * @param turn_on   whether to turn on or off the DistoX calibration mode
    * @return true if success
-   * @note commands: 0x31 calin-ON 0x30 calib-OFF
+   * @note commands: 0x31 calib-ON 0x30 calib-OFF
    */
   private boolean setCalibMode( boolean turn_on )
   {
@@ -1103,11 +1103,11 @@ public class DistoXBLEComm extends TopoDroidComm
         return false;
       }
     }
-    int loopcnt = 50;
+    int loop_cnt = 50; // 20230118 local var "loop_cnt"
     while( ! mBTConnected ) {
-      if ( LOG ) TDLog.v("XBLE try connect - not connected ... " + loopcnt );
+      if ( LOG ) TDLog.v("XBLE try connect - not connected ... " + loop_cnt );
       TDUtil.slowDown( 105 );
-      if ( loopcnt-- == 0 ) {
+      if ( loop_cnt-- == 0 ) {
         disconnectGatt();
         return false;
       }
@@ -1131,12 +1131,12 @@ public class DistoXBLEComm extends TopoDroidComm
     int addr = 0x8010;
     byte[] buff = new byte[4];
     int k = 0;
-    byte[] coefftmp = readMemory( addr, 52 );
+    byte[] coeff_tmp = readMemory( addr, 52 ); // 20230118 local var "coeff_tmp"
     disconnectDevice();
-    if ( coefftmp == null || coefftmp.length != 52 ) return false;
-    //coeff = Arrays.copyOf( coefftmp, 52 );  //calling this functions cause a problem: all the params shown in dialog are zero.
+    if ( coeff_tmp == null || coeff_tmp.length != 52 ) return false;
+    //coeff = Arrays.copyOf( coeff_tmp, 52 );  // calling this functions causes a problem: all the params shown in dialog are zero.
     //calling the following is ok. I don't know why. both the 2 functions can copy the right value to coeff[]
-    for(int i = 0;i < 52;i++) coeff[i] = coefftmp[i];
+    for(int i = 0;i < 52;i++) coeff[i] = coeff_tmp[i];
     return true;
   }
 
@@ -1239,30 +1239,30 @@ public class DistoXBLEComm extends TopoDroidComm
               addr++;
               int repeat = 3; // THIS IS A repeat TEST
               for ( ; repeat > 0; -- repeat ) { // repeat-for: exit with repeat == 0 (error) or -1 (success)
-                byte[] seperated_buf1 = new byte[131]; // 131 = 3 (cmd, addr, index) + 128 (payload) 
-                seperated_buf1[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte) 0x3b;
-                seperated_buf1[1] = (byte) (flashaddr & 0xff);
-                seperated_buf1[2] = 0; //packet index
-                System.arraycopy(buf, 0, seperated_buf1, 3, 128);
+                byte[] separated_buf1 = new byte[131]; // 131 = 3 (cmd, addr, index) + 128 (payload) // 20230118 corrected "separated"
+                separated_buf1[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte) 0x3b;
+                separated_buf1[1] = (byte) (flashaddr & 0xff);
+                separated_buf1[2] = 0; //packet index
+                System.arraycopy(buf, 0, separated_buf1, 3, 128);
                 if ( DRY_RUN ) {
                   TDUtil.slowDown( 103 );
                 } else {
-                  enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, seperated_buf1, true);
+                  enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, separated_buf1, true);
                 }
 
-                byte[] seperated_buf2 = new byte[133];
-                seperated_buf2[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte) 0x3b;
-                seperated_buf2[1] = (byte) (flashaddr & 0xff);
-                seperated_buf2[2] = 1;
-                System.arraycopy(buf, 128, seperated_buf2, 3, 128);
-                seperated_buf2[131] = (byte) (crc16 & 0x00FF);
-                seperated_buf2[132] = (byte) ((crc16 >> 8) & 0x00FF);
+                byte[] separated_buf2 = new byte[133]; // 20230118 corrected "separated"
+                separated_buf2[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte) 0x3b;
+                separated_buf2[1] = (byte) (flashaddr & 0xff);
+                separated_buf2[2] = 1;
+                System.arraycopy(buf, 128, separated_buf2, 3, 128);
+                separated_buf2[131] = (byte) (crc16 & 0x00FF);
+                separated_buf2[132] = (byte) ((crc16 >> 8) & 0x00FF);
                 if ( DRY_RUN ) {
                   TDUtil.slowDown( 104 );
                   mPacketType = DistoXBLEProtocol.PACKET_FLASH_CHECKSUM;
                   ((DistoXBLEProtocol) mProtocol).mCheckCRC = crc16;
                 } else {
-                  enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, seperated_buf2, true);
+                  enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, separated_buf2, true);
                   //TDUtil.yieldDown(1000);
                   mPacketType = DistoXBLEProtocol.PACKET_NONE;
                   syncWait( 5000, "write firmware block" );
@@ -1512,7 +1512,7 @@ public class DistoXBLEComm extends TopoDroidComm
 
   /** synchronized wait
    * @param msec  wait timeout [msec]
-   * @param msg   log messsage
+   * @param msg   log message
    * @return true if ok, false if interrupted
    */
   private boolean syncWait( long msec, String msg )

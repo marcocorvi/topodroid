@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDString;
 import com.topodroid.prefs.TDSetting;
@@ -366,7 +366,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     int size = getCount();
     if ( size > 0 ) {
       int k = size-1;
-      for ( ; k >= START; --k ) { // scan from last backword until a leg is found
+      for ( ; k >= START; --k ) { // scan from last backward until a leg is found
         DBlock b = (DBlock)( getItem( k ) );
         if ( b.mFrom.length() > 0 && b.mTo.length() > 0 ) {
           -- nth;
@@ -485,7 +485,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         return false;
       }
 
-    /** fill the textviews with the data of a block
+    /** fill the text-views with the data of a block
      * @param b        block
      * @param listener listener of long-taps on the view
      */

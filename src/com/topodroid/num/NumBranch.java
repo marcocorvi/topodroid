@@ -16,7 +16,7 @@ import com.topodroid.utils.TDMath;
 
 
 import java.util.ArrayList;
-import java.util.ListIterator;
+// import java.util.ListIterator;
 import java.util.Locale;
 
 public class NumBranch

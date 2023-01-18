@@ -736,7 +736,7 @@ public class DrawingWindow extends ItemDrawer
 
   /** @return the name (ILister interface)
    */
-  public String name() { return "DrawingWindow"; };
+  public String name() { return "DrawingWindow"; }
 
   // ----------------------------------------------------------
 

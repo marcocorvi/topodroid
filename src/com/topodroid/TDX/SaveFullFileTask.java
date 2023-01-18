@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 // import com.topodroid.utils.TDFile;
 
 // import java.lang.ref.WeakReference;

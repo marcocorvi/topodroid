@@ -17,7 +17,7 @@ import android.content.Context;
 
 // import android.bluetooth.BluetoothDevice;
 
-import java.util.UUID;
+// import java.util.UUID;
 
 public class BleOpRequestMtu extends BleOperation 
 {

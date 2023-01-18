@@ -12,10 +12,10 @@
 package com.topodroid.dev.distox2;
 
 import com.topodroid.utils.TDUtil;
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
-import com.topodroid.dev.DataType;
+// import com.topodroid.dev.DataType;
 import com.topodroid.TDX.ILister;
 import com.topodroid.TDX.ListerHandler;
 import com.topodroid.TDX.TopoDroidApp;

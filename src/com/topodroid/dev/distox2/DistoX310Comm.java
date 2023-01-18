@@ -116,7 +116,7 @@ public class DistoX310Comm extends DistoXComm
           }
         }
         // mSkipNotify = false;
-        // TDLog.v("X310 destry socket");
+        // TDLog.v("X310 destroy socket");
         destroySocket( ); // this cancel the comm thread
         TDUtil.slowDown( 1000 );
         // TDLog.v("X310 notify lister " + ( (lister != null)? lister.name() : "null") );
