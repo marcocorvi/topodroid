@@ -117,7 +117,7 @@ public class GlRenderer implements Renderer
   private float[] mMVPMatrixInv    = new float[16];
 
   private final float[] mPerspectiveMatrix  = new float[16];
-  private final float[] mOrtographicMatrix = new float[16];
+  private final float[] mOrthographicMatrix = new float[16]; // 202301018 fixed typo
   private final float[] mViewMatrix       = new float[16];
   private final float[] mModelMatrix      = new float[16];
   private final float[] mModelViewMatrix  = new float[16];
@@ -273,9 +273,9 @@ public class GlRenderer implements Renderer
     // String station = "";
     if ( mParser != null ) {
       if ( mParser.hasSurface() ) {
-        float xlight = 90 - mXLight;
-        float ylight = 90 - mYLight; if ( ylight < 0 ) ylight += 360;
-        light = String.format(Locale.US, "L %.0f %.0f ", xlight, ylight );
+        float x_light = 90 - mXLight;
+        float y_light = 90 - mYLight; if ( y_light < 0 ) y_light += 360;
+        light = String.format(Locale.US, "L %.0f %.0f ", x_light, y_light );
       }
       // if ( mParser.mStartStation != null ) station = mParser.mStartStation.short_name;
     }
@@ -344,12 +344,12 @@ public class GlRenderer implements Renderer
     Matrix.frustumM(mPerspectiveMatrix, 0, -FOCAL*ratio, FOCAL*ratio, -FOCAL, FOCAL, NEAR_P, FAR_P ); // 0 ... : offset, left, right, bottom, top, near, far 
   }
 
-  /** make ortographic matrix
+  /** make orthographic matrix
    */
   void makeOrthographicMatrix( )
   {
-    // TDLog.v("Renderer ortographic " + SIDE + " " + NEAR_O + " " + FAR_O );
-    Matrix.orthoM( mOrtographicMatrix, 0, -SIDE*ratio, SIDE*ratio, -SIDE, SIDE, NEAR_O, FAR_O );
+    // TDLog.v("Renderer orthographic " + SIDE + " " + NEAR_O + " " + FAR_O );
+    Matrix.orthoM( mOrthographicMatrix, 0, -SIDE*ratio, SIDE*ratio, -SIDE, SIDE, NEAR_O, FAR_O );
   }
 
   /** @return the X angle
@@ -419,20 +419,20 @@ public class GlRenderer implements Renderer
     // refresh ?
   }
 
-  public void setXYAngle( float dxangle, float dyangle )
+  public void setXYAngle( float dx_angle, float dy_angle )
   {
     if ( mMode == MODE_ROTATE ) {
-      float xangle = mXAngle - dxangle;
-      float yangle = mYAngle + dyangle;
-      // if ( xangle < -90)  { xangle = -90;  } else if ( xangle > 90 ) { xangle = 90; }
-      if ( xangle < -90)  { xangle = -90;  } else if ( xangle > mMinClino ) { xangle = mMinClino; }
-      if ( yangle > 360 ) { yangle -= 360; } else if ( yangle < 0 )  { yangle += 360; }
-      mXAngle = xangle;
-      mYAngle = yangle;
+      float x_angle = mXAngle - dx_angle;
+      float y_angle = mYAngle + dy_angle; // TODO TDMath.in360( ... )
+      // if ( x_angle < -90)  { x_angle = -90;  } else if ( x_angle > 90 ) { x_angle = 90; }
+      if ( x_angle < -90)  { x_angle = -90;  } else if ( x_angle > mMinClino ) { x_angle = mMinClino; }
+      if ( y_angle > 360 ) { y_angle -= 360; } else if ( y_angle < 0 )  { y_angle += 360; }
+      mXAngle = x_angle;
+      mYAngle = y_angle;
       makeModelMatrix();
-      // setXYLight( dxangle, dyangle );
+      // setXYLight( dx_angle, dy_angle );
     } else {
-      setScaleTranslation( 1.0f, dxangle, dyangle );
+      setScaleTranslation( 1.0f, dx_angle, dy_angle );
     }
   }
 
@@ -445,17 +445,17 @@ public class GlRenderer implements Renderer
     float dxp = mDXP - dy * df;
     float dyp = mDYP - dx * df;
 
-    float scalep = mScaleP * scale;
-    if ( scalep < 0.05f ) {
-      scalep = 0.05f;
+    float scale_p = mScaleP * scale; // 20230118 local var "scale_p"
+    if ( scale_p < 0.05f ) {
+      scale_p = 0.05f;
     } else {
-      // if ( scalep > 100.0f ) { scalep = 100.0f;
+      // if ( scale_p > 100.0f ) { scale_p = 100.0f;
       dxp *= scale;
       dyp *= scale;
     }
     mDXP = dxp;
     mDYP = dyp;
-    mScaleP = scalep;
+    mScaleP = scale_p;
 
     // orthogonal
     // TDLog.v("Renderer scale " + mScaleO + " " + scale + " at " + mDXO + " " + mDYO );
@@ -471,17 +471,17 @@ public class GlRenderer implements Renderer
       mOffset[1] -= dx / (mHalfHeight);
     }
 
-    float scaleo = mScaleO * scale;
-    if ( scaleo < 0.05f ) {
-      scaleo = 0.05f;
+    float scale_o = mScaleO * scale; // 20230118 local var "scale_o"
+    if ( scale_o < 0.05f ) {
+      scale_o = 0.05f;
     } else {
-      // if ( scaleo > 100.0f ) { scaleo = 100.0f;
+      // if ( scale_o > 100.0f ) { scale_o = 100.0f;
       dxo *= scale;
       dyo *= scale;
     }
     mDXO = dxo;
     mDYO = dyo;
-    mScaleO = scaleo;
+    mScaleO = scale_o;
     makeModelMatrix();
   }
 
@@ -583,7 +583,7 @@ public class GlRenderer implements Renderer
     //    glGetFloatv( GL_MODELVIEW_MATRIX, &array )
     // proj matrix maps camera to screen
 
-    Matrix.setLookAtM( mViewMatrix, 0,   0, 0, -3,  0f, 0f, 0f,   0f, 1.0f, 0.0f); // offest, eye-XYZ, center-XYZ, up-XYZ
+    Matrix.setLookAtM( mViewMatrix, 0,   0, 0, -3,  0f, 0f, 0f,   0f, 1.0f, 0.0f); // offset, eye-XYZ, center-XYZ, up-XYZ
     // Matrix.invertM( mInverseViewMatrix, 0, mViewMatrix, 0 );
 
     // long time = SystemClock.uptimeMillis() % 4000L;
@@ -594,7 +594,7 @@ public class GlRenderer implements Renderer
     if ( projectionMode == PROJ_PERSPECTIVE ) {
       Matrix.multiplyMM( mMVPMatrix, 0, mPerspectiveMatrix, 0, mModelViewMatrix, 0);
     } else {
-      Matrix.multiplyMM( mMVPMatrix, 0, mOrtographicMatrix, 0, mModelViewMatrix, 0);
+      Matrix.multiplyMM( mMVPMatrix, 0, mOrthographicMatrix, 0, mModelViewMatrix, 0);
     }
     Matrix.invertM( mMVPMatrixInv, 0, mMVPMatrix, 0 );
     Matrix.invertM( matrix2, 0, mModelViewMatrix, 0 );
@@ -718,9 +718,9 @@ public class GlRenderer implements Renderer
     }
   }
 
-  void notifySketch( ParserSketch psketch )
+  void notifySketch( ParserSketch sketch_parser )
   {
-    if ( mModel != null ) mModel.prepareSketch( psketch );
+    if ( mModel != null ) mModel.prepareSketch( sketch_parser );
   }
 
   void notifyDEM( ParserDEM dem ) 

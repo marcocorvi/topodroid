@@ -29,7 +29,7 @@ class DialogMeasure extends MyDialog
                     implements View.OnClickListener
 {
   // private Cave3DView mCave3Dview;
-  private TglMeasure mMeasure;
+  private final TglMeasure mMeasure;
 
   /** cstr
    * @param context context

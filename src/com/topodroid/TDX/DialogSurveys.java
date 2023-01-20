@@ -32,8 +32,8 @@ import android.view.View.OnClickListener;
 class DialogSurveys extends MyDialog
                     implements OnClickListener
 {
-  private TopoGL  mTopoGl;
-  private List< Cave3DSurvey > mSurveys;
+  private final TopoGL  mTopoGl;
+  private final List< Cave3DSurvey > mSurveys;
 
   private SurveyAdapter mAdapter;
   private ListView mList;

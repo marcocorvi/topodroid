@@ -38,7 +38,7 @@ public class NumShot
   // float mClino;
   private AverageLeg mAvgLeg;
   private float mAnomaly;  // local magnetic anomaly
-  private boolean mBadLoop = false; // whether the shot belons to a bad loop
+  private boolean mBadLoop = false; // whether the shot belongs to a bad loop
 
   /** @return the shot length
    */
@@ -162,7 +162,7 @@ public class NumShot
   //   return sh.from == from || sh.to == from || sh.from == to || sh.to == to;
   // }
 
-  /** @return the string presenttaion of the shot (debug)
+  /** @return the string presentation of the shot (debug)
    */
   public String toString()
   { 

@@ -460,7 +460,7 @@ public class MyHorizontalListViewDemo extends Activity
 
       @Override
       public View getView(int position, View convertView, ViewGroup parent) {
-          View retval = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewitem, parent, false );
+          View ret_val = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewitem, parent, false );
           TextView title = (TextView) retval.findViewById(R.id.title);
           Button button = (Button) retval.findViewById(R.id.clickbutton);
           button.setOnClickListener(mOnButtonClicked);

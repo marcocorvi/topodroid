@@ -13,13 +13,13 @@ The model is shown with a reference grid (blue north, green east) or triplet (pi
 If the data (survey or cave project) has fixed points these are used to compute the coordinates of the points
 in the model. If the fixed point coordinates have been transformed into a cartographic (projected) coordinate
 system this is used. Otherwise the fixed point is set at distances from the equator and the prime meridian equal
-to the latitude times the meridian radius, and the longittude times the parallel radius, respectively.<br>
+to the latitude times the meridian radius, and the longitude times the parallel radius, respectively.<br>
 The coordinates in cartographic reference systems do not take into account the meridian convergence.
 Therefore the north is not the cartographic north bu the direction of the meridian.
 <br><p>
 
 There is no coordinate conversion. Therefore all the surveys in a cave project must be
-gereferenced in the same coordinate system.
+geo-referenced in the same coordinate system.
 <br><p>
 
 
@@ -113,7 +113,7 @@ By default the grid is below the survey, but it can be set above it (optionally)
 <b>SURVEY</b><br>
 The survey splays can be hidden, displayed as lines or endpoints.<br>
 The survey legs can be uncolored or colored by survey, by depth (red-to-blue) or by
-the depth beneath the surface (blue-to-red) if the mdel has a DEM surface.<br>
+the depth beneath the surface (blue-to-red) if the model has a DEM surface.<br>
 
 When uncolored the survey legs are white, the surface legs green, the duplicate legs orange, 
 and the commented legs light blue.<br>
@@ -189,7 +189,7 @@ The 3D distance between the two stations, its East, North, and vertical componen
 displayed in a dialog.
 If the two stations are connected along the centerline the "cave" distance is also shown
 and the cave-path between them is highlighted green.<br>
-Optioally, the values can be displayed in a brief message box instead of a dialog.  <br><p>
+Optionally, the values can be displayed in a brief message box instead of a dialog.  <br><p>
 
 When the "station" button in the bottom bar is checked, the station position on the screen 
 if fixed under rotations and the

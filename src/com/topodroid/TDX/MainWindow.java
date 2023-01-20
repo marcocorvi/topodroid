@@ -322,7 +322,7 @@ public class MainWindow extends Activity
         // int check = TDVersion.checkCave3DVersion( this );
         // if ( check < 0 ) {
         //   TDToast.makeBad( R.string.no_cave3d );
-        // } else { // start Cave3D even if the version is below required mimimum
+        // } else { // start Cave3D even if the version is below required minimum
           try {
             // FIXME_CAVE3D intent = new Intent( "Cave3D.intent.action.Launch" );
             intent = new Intent( Intent.ACTION_VIEW ).setClass( this, com.topodroid.TDX.TopoGL.class );
@@ -1144,7 +1144,7 @@ public class MainWindow extends Activity
           // resetButtonBar();
         // } else {  // the followings are delayed after the permissions have been granted
         //   mApp.initEnvironmentFirst( );
-        //   if ( perms == 0 ) showInitDialogs( ); // this had arg "say_dilog_r = ! TopoDroidApp.hasTopoDroidDatabase()"
+        //   if ( perms == 0 ) showInitDialogs( ); // this had arg "say_dialog_r = ! TopoDroidApp.hasTopoDroidDatabase()"
         }
       }
     }

@@ -42,7 +42,7 @@ public class CalibListDialog extends MyDialog
                       , View.OnClickListener
                       // , OnItemLongClickListener
 {
-  private DeviceActivity mParent;
+  private final DeviceActivity mParent;
   private ArrayAdapter<String> mArrayAdapter;
   private Button mBtnNew;
   private Button mBtnImport;

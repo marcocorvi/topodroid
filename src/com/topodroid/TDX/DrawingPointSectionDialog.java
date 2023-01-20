@@ -33,9 +33,9 @@ import android.view.View;
 class DrawingPointSectionDialog extends MyDialog
                          implements View.OnClickListener
 {
-  private DrawingWindow  mParent;
-  private DrawingPointPath mPoint;
-  private int mPointType;
+  private final DrawingWindow  mParent;
+  private final DrawingPointPath mPoint;
+  private final int mPointType;
   private boolean  mHasXSectionOutline;
   private String mXSectionName; // full section name = scrap-name
 
@@ -167,7 +167,7 @@ class DrawingPointSectionDialog extends MyDialog
     // mCBtext .setChecked( ( level & DrawingLevel.LEVEL_TEXT  ) == DrawingLevel.LEVEL_TEXT  );
   }
 
-  /** set the leyers from the checkboxes
+  /** set the layers from the checkboxes
    */
   private void setLevel()
   {

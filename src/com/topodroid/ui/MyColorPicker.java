@@ -205,6 +205,9 @@ public class MyColorPicker extends MyDialog
 
       /** react to user touch
        * @param event  touch event
+       * @return true if event has been handled
+       *
+       * @note Studio: onTouch() should call View#performClick when a click is detected
        */
       @Override
       public boolean onTouchEvent(MotionEvent event)

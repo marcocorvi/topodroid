@@ -232,8 +232,8 @@ class GL
   //   T -> T * a          -> T/N a
   //   N -> (FN-NN)/(F-N)  -> 1
   //   1 -> N
-  public static void perspective( float[] mat, float fovy, float aspect, float znear, float zfar ) {
-    perspective( mat, 0, fovy, aspect, znear, zfar );
+  public static void perspective( float[] mat, float fovy, float aspect, float z_near, float z_far ) {
+    perspective( mat, 0, fovy, aspect, z_near, z_far );
   }
 
   public static void perspective( float[] mat, int offset, float fovy, float aspect, float znear, float zfar )
@@ -327,7 +327,7 @@ class GL
     GLES20.glAttachShader(program, geometryShader); // add the geometry shader to program
     GLES20.glLinkProgram(program); // creates OpenGL ES program executables
     final int[] status = new int[1];
-    GLES20.glGetProgramiv( program, GLES20.GL_LINK_STATUS, status, 0 );
+    GLES20.glGetProgramiv( program, GLES20.GL_LINK_STATUS, status, 0 ); // 20230118 FIXME Programiv ?
     if ( status[0] == 0 ) {
       TDLog.Error("GL failed link program: " + GLES20.glGetShaderInfoLog( program ) );
       GLES20.glDeleteProgram( program );

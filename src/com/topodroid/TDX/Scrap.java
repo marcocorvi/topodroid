@@ -148,11 +148,11 @@ public class Scrap
   // end SELECTION -------------------------------------------
   // UNDO/REDO -----------------------------------------------
 
-  /** @return true if there are redo's
+  /** @return true if there are redo-es
    */
   boolean hasMoreRedo() { return  mRedoStack.toArray().length > 0; }
 
-  /** @return true if there are undo's
+  /** @return true if there are undo-es
    */
   boolean hasMoreUndo() { return  mCurrentStack.size() > 0; }
 

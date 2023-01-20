@@ -14,6 +14,7 @@ package com.topodroid.inport;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDio;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDUtil;
 // import com.topodroid.prefs.TDSetting;
@@ -143,7 +144,7 @@ class ParserWalls extends ImportParser
       // System.out.println("readFile dir " + dirname + " filename " + filename );
       // TDLog.Log( TDLog.LOG_IO, "import read Walls file <" + filename + ">" );
 
-      BufferedReader br = getBufferedReader( isr, filename );
+      BufferedReader br = TDio.getBufferedReader( isr, filename );
       String line = nextLine( br );
       while ( line != null ) {
         // TDLog.v( "Parser Walls " + state.in_survey + " " + state.in_centerline + " " + state.in_data + " : " + line );

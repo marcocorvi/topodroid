@@ -157,7 +157,7 @@ class GlWalls extends GlShape
     }
   }
 
-  /** drop the epsilon-emppty triangles
+  /** drop the epsilon-empty triangles
    * @param eps  epsilon
    */
   private void dropEmptyTriangles( double eps )

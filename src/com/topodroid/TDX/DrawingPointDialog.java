@@ -31,11 +31,11 @@ import android.view.View;
 class DrawingPointDialog extends MyDialog
                          implements View.OnClickListener
 {
-  private DrawingWindow  mParent;
-  private DrawingPointPath mPoint;
-  private boolean mOrientable;
-  private int mPointType;
-  private boolean  mDoOptions;
+  private final DrawingWindow  mParent;
+  private final DrawingPointPath mPoint;
+  private final boolean mOrientable;
+  private final int mPointType;
+  private final boolean  mDoOptions;
   // private boolean  mHasXSectionOutline;
   // private String mXSectionName; // full section name = scrap-name
 

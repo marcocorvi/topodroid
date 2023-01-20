@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date may 2012
  *
- * @brief TopoDroid multistate button
+ * @brief TopoDroid multi-state button
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.

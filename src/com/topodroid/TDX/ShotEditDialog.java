@@ -642,12 +642,12 @@ class ShotEditDialog extends MyDialog
     // }
  
     int extend = shot_extend;
-    boolean sflen = shot_from.length() > 0;
-    boolean stlen = shot_to.length() > 0;
+    boolean sf_len = shot_from.length() > 0; // 20230118 local var
+    boolean st_len = shot_to.length() > 0;
     if ( mBlk.getIntExtend() != shot_extend ) {
-      if ( /* leg_next || */ ( sflen && stlen ) ) { // leg
+      if ( /* leg_next || */ ( sf_len && st_len ) ) { // leg
         mBlk.setExtend( extend, ExtendType.STRETCH_NONE ); // FIXME_STRETCH
-      } else if ( ( sflen /* && ! stlen */ ) || ( stlen /* && ! sflen */ ) ) { // splay
+      } else if ( ( sf_len /* && ! st_len */ ) || ( st_len /* && ! sf_len */ ) ) { // splay
         // extend = shot_extend + ExtendType.EXTEND_FVERT;
         mBlk.setExtend( extend, ExtendType.STRETCH_NONE ); // FIXME_STRETCH
       }

@@ -106,7 +106,7 @@ public class NumStation extends NumSurveyPoint
     name = id;
     v = from.v - d * TDMath.sinDd( c );
     double h0 = d * Math.abs( TDMath.cosDd( c ) );
-    // assert( extend <= 2 ); // 2020-07-29 PREREQ
+    // assert( extend <= 2 ); // 20200729 pre-requisite
     h = from.h + extend * h0;
     s = from.s - h0 * TDMath.cosDd( b );
     e = from.e + h0 * TDMath.sinDd( b );
@@ -264,7 +264,7 @@ public class NumStation extends NumSurveyPoint
     return e;
   }
 
-  /** @return string presenttation of the station (ie, the name)
+  /** @return string presentation of the station (ie, the name)
    */
   public String toString() { return name; }
     

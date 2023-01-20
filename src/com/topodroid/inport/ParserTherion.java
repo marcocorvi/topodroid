@@ -14,6 +14,7 @@ package com.topodroid.inport;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDio;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDUtil;
 // import com.topodroid.prefs.TDSetting;
@@ -172,7 +173,7 @@ class ParserTherion extends ImportParser
       // TDLog.Log( TDLog.LOG_THERION, "reading file " + filename + " dir " + dirname );
       // TDLog.Log( TDLog.LOG_IO, "import read Therion file <" + filename + ">" );
 
-      BufferedReader br = getBufferedReader( isr, filename );
+      BufferedReader br = TDio.getBufferedReader( isr, filename );
       String line = nextLine( br );
       while ( line != null ) {
         // TDLog.Log( TDLog.LOG_THERION, "TH " + line );

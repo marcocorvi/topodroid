@@ -1832,7 +1832,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_log_csurvey" translatable="false">cSurvey</string>
   <string name="pref_log_ptopo" translatable="false">PocketTopo</string>
   <string name="pref_log_zip" translatable="false">ZIP</string>
-  <!- - UNUSED string name="pref_log_sync" translatable="false">Cosurveying</string - ->
+  <!- - UNUSED string name="pref_log_sync" translatable="false">Co-surveying</string - ->
 -->
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->

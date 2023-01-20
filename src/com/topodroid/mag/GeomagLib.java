@@ -769,7 +769,7 @@ class GeomagLib
       }
     }
     // legendre.debugLegendre();
-    // legendre.ddebugLegendre();
+    // legendre.debugLegendre();
     return legendre;
   } 
 

@@ -122,18 +122,18 @@ class DrawingShotDialog extends MyDialog
     mETfrom    = (EditText) findViewById(R.id.shot_from );
     mETto      = (EditText) findViewById(R.id.shot_to );
     mETcomment = (EditText) findViewById(R.id.shot_comment );
-    TextView tvtype    = (TextView) findViewById(R.id.shot_type );
+    TextView tv_type    = (TextView) findViewById(R.id.shot_type ); // 20230118 local var "tv_type"
     if (mBlock.isBacksight() ) {
-      tvtype.setText( R.string.type_b );
+      tv_type.setText( R.string.type_b );
     } else if (mBlock.isForesight() ) {
-      tvtype.setText( R.string.type_d );
+      tv_type.setText( R.string.type_d );
     } else if (mBlock.isManual() ) {
-      tvtype.setText( R.string.type_m );
+      tv_type.setText( R.string.type_m );
     }
     if (mBlock.isMultiBad() ) {
-      tvtype.setTextColor( TDColor.DARK_ORANGE );
+      tv_type.setTextColor( TDColor.DARK_ORANGE );
     } else if ( TopoDroidApp.mShotWindow != null && TopoDroidApp.mShotWindow.isBlockMagneticBad( mBlock ) ) {
-      tvtype.setTextColor( TDColor.FIXED_RED );
+      tv_type.setTextColor( TDColor.FIXED_RED );
     }
 
     mETfrom.setOnLongClickListener( this );

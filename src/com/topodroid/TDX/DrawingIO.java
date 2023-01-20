@@ -2249,7 +2249,7 @@ public class DrawingIO
   )
   {
     // XYZefoffsets are on the header-line
-    azimuth = 0;
+    azimuth = 0; // FIXME
     pw.format(Locale.US, "SCRAP %s %d %d %f %f %f\n", scrap_name, type, azimuth, /* clino, */ center.x, center.y, center.z );
     // synchronized( scraps ) { // FIXME
       // pw.format("N %d\n", scrap.mScrapIdx );

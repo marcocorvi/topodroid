@@ -75,6 +75,7 @@ import java.util.HashMap;
 
 import android.util.Base64;
 
+@SuppressWarnings("ALL")
 public class TDExporter
 {
                                                  // -1      0           1        2         3       4        5
@@ -224,7 +225,7 @@ public class TDExporter
         }
       }
     }
-    String photodir = TDPath.getSurveyPhotoDir( survey );
+    String photo_dir = TDPath.getSurveyPhotoDir( survey ); // 20230118 FIXME why this ?
     for ( PhotoInfo photo : photos ) {
       String subdir = survey + "/photo"; // "photo/" + survey;
       String name   = photo.id + ".jpg"; // Long.toString(photo.id) + ".jpg";
@@ -318,9 +319,9 @@ public class TDExporter
     //   }
     // }
 
-    List< DBlock > dlist = data.selectAllExportShots( sid, TDStatus.NORMAL );
-    List< DBlock > clist = data.selectAllExportShots( sid, TDStatus.CHECK );
-    checkShotsClino( dlist );
+    List< DBlock > d_list = data.selectAllExportShots( sid, TDStatus.NORMAL );
+    List< DBlock > c_list = data.selectAllExportShots( sid, TDStatus.CHECK );
+    checkShotsClino( d_list );
 
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     // List< PlotInfo > plots  = data.selectAllPlots( sid, TDStatus.NORMAL );
@@ -328,7 +329,7 @@ public class TDExporter
     // List< StationInfo > stations = data.getStations( sid );
 
     if ( origin == null ) { // use first non-null "from"
-      for ( DBlock item : dlist ) {
+      for ( DBlock item : d_list ) {
         String from = item.mFrom;
         if ( from != null && from.length() > 0 ) {
           origin = from;
@@ -407,7 +408,7 @@ public class TDExporter
 // ++++++++++++++++ SHOTS
       pw.format("  <segments>\n");
 
-      for ( DBlock blk : clist ) { // calib-check shots
+      for ( DBlock blk : c_list ) { // calib-check shots
         writeCsxSegment( pw, blk.mId, cave, branch, session, prefix, blk.mFrom, blk.mTo );
         pw.format(" exclude=\"1\"");
         pw.format(" calibration=\"1\""); 
@@ -437,7 +438,7 @@ public class TDExporter
       // int n = 0;
       AverageLeg leg = new AverageLeg(0);
 
-      for ( DBlock item : dlist ) {
+      for ( DBlock item : d_list ) {
         String from = item.mFrom;
         String to   = item.mTo;
         if ( from == null || from.length() == 0 ) {
@@ -1417,7 +1418,7 @@ public class TDExporter
     // String uas = TDSetting.mUnitAngleStr;
 
     List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
-    List< DBlock > clist = data.selectAllExportShots( sid, TDStatus.CHECK );
+    List< DBlock > c_list = data.selectAllExportShots( sid, TDStatus.CHECK );
     checkShotsClino( list );
 
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
@@ -1453,9 +1454,9 @@ public class TDExporter
       }
       pw.format("\n");
 
-      if ( clist.size() > 0 ) {
+      if ( c_list.size() > 0 ) {
         pw.format("# calibration-check\n");
-        for ( DBlock blk : clist ) { // calib-check shots
+        for ( DBlock blk : c_list ) { // calib-check shots
           pw.format("# %s %s :", blk.mFrom, blk.mTo );
           pw.format(Locale.US, " %.2f %.1f %.1f", blk.mLength, blk.mBearing, blk.mClino);
           pw.format(Locale.US, " %.1f %.1f %.1f", blk.mAcceleration, blk.mMagnetic, blk.mDip );

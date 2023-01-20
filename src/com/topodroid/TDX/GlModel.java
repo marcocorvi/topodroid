@@ -722,17 +722,23 @@ public class GlModel
     }
   }
 
-  void prepareSketch( ParserSketch psketch )
+  /** ???
+   * @param sketch_parser sketch parser
+   */
+  void prepareSketch( ParserSketch sketch_parser )
   {
-    // TDLog.v("Model prepare sketch " + psketch.mName );
-    dropSketch( psketch.mName );
-    GlSketch gl_sketch = new GlSketch( mContext, psketch.mName, psketch.mType, psketch.mPoints, psketch.mLines, psketch.mAreas );
+    // TDLog.v("Model prepare sketch " + sketch_parser.mName );
+    dropSketch( sketch_parser.mName );
+    GlSketch gl_sketch = new GlSketch( mContext, sketch_parser.mName, sketch_parser.mType, sketch_parser.mPoints, sketch_parser.mLines, sketch_parser.mAreas );
     // gl_sketch.logMinMax();
     // TDLog.v("MODEL sketch init data");
-    gl_sketch.initData( mXmed, mYmed, mZmed, psketch.xoff, psketch.yoff, psketch.zoff );
+    gl_sketch.initData( mXmed, mYmed, mZmed, sketch_parser.xoff, sketch_parser.yoff, sketch_parser.zoff );
     addSketch( gl_sketch );
   }
 
+  /** drop a sketch
+   * @param name  sketch name
+   */
   private void dropSketch( String name )
   {
     synchronized( glSketches ) {
@@ -746,6 +752,9 @@ public class GlModel
     }
   }
 
+  /** add a sketch
+   * @param sketch  GL sketch
+   */
   private void addSketch( GlSketch sketch ) 
   {
     if ( sketch == null || sketch.mName == null ) return;

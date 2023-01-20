@@ -37,10 +37,10 @@ public class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
   public static final int PARENT_GM     = 2;
 
   private byte[]   coeff;
-  private WeakReference<TopoDroidApp> mApp; // FIXME LEAK
-  // private WeakReference<Context> mContext;  // FIXME LEAK
-  private WeakReference< ICoeffDisplayer > mParent;
-  private int mParentType;
+  private final WeakReference<TopoDroidApp> mApp; // FIXME LEAK
+  // private final WeakReference<Context> mContext;  // FIXME LEAK
+  private final WeakReference< ICoeffDisplayer > mParent;
+  private final int mParentType;
   // String comp_name;
 
   public CalibReadTask( ICoeffDisplayer parent, TopoDroidApp app, int parent_type )

@@ -694,7 +694,7 @@ public class GlSketch extends GlShape
     mlUPointSize = GL.getUniform(   program, GL.uPointSize );
     mlUAlpha     = GL.getUniform(   program, GL.uAlpha );
     mlUMVPMatrix = GL.getUniform(   program, GL.uMVPMatrix );
-    // TDLog.v("SKETCH line locs " + mlAPosition + " " + mlAColor + " " + mlUMVPMatrix + " " + mProgramLine );
+    // TDLog.v("SKETCH line locations " + mlAPosition + " " + mlAColor + " " + mlUMVPMatrix + " " + mProgramLine );
   }
 
   /** set OpenGL locations for area
@@ -706,7 +706,7 @@ public class GlSketch extends GlShape
     maAColor     = GL.getAttribute( program, GL.aColor );
     // maUPointSize = GL.getUniform(   program, GL.uPointSize );
     maUMVPMatrix = GL.getUniform(   program, GL.uMVPMatrix );
-    // TDLog.v("SKETCH area locs " + maAPosition + " " + maAColor + " " + maUMVPMatrix + " " + mProgramArea );
+    // TDLog.v("SKETCH area locations " + maAPosition + " " + maAColor + " " + maUMVPMatrix + " " + mProgramArea );
   }
 
   // ====================================================================

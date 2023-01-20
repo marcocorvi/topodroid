@@ -28,8 +28,8 @@ class DialogSurvey extends MyDialog
 {
   // private Button mBtnOk;
 
-  private TopoGL mTopoGl;
-  private Cave3DSurvey mSurvey;
+  private final TopoGL mTopoGl;
+  private final Cave3DSurvey mSurvey;
 
   public DialogSurvey( TopoGL topogl, Cave3DSurvey survey )
   {

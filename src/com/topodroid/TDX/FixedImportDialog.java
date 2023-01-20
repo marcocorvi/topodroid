@@ -165,7 +165,7 @@ class FixedImportDialog extends MyDialog
     for ( File f : files ) {
       // TDLog.v( "file " + f.getName() + " is dir " + f.isDirectory() );
       if ( ! f.isDirectory() ) {
-        ret += readGpsPointFile( dirname, f.getName() ); // N.B. read file before oring with ret
+        ret += readGpsPointFile( dirname, f.getName() ); // N.B. read file before or-ing with ret
       }
     }
     return ret;
@@ -274,16 +274,16 @@ class FixedImportDialog extends MyDialog
     int len = vals.length;
     if ( len >= 4 ) {
       try {
-        String lngstr = vals[len-3].trim();
-        String latstr = vals[len-4].trim();
+        String lng_str = vals[len-3].trim(); // 20230118 local var "lng_str"
+        String lat_str = vals[len-4].trim();
         String h_ell_str = vals[len-2].trim();
         String h_geo_str = vals[len-1].trim();
-        mLng  = Double.parseDouble( lngstr );
-        mLat  = Double.parseDouble( latstr );
+        mLng  = Double.parseDouble( lng_str );
+        mLat  = Double.parseDouble( lat_str );
         mHEll = Double.parseDouble( h_ell_str );
         mHGeo = Double.parseDouble( h_geo_str );
-        mTVlat.setText( latstr );
-        mTVlng.setText( lngstr );
+        mTVlat.setText( lat_str );
+        mTVlng.setText( lng_str );
         // mTVh_ell.setText( h_ell_str );
         mTVh_geo.setText( h_geo_str );
         isSet = true;

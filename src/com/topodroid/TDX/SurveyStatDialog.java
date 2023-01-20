@@ -129,25 +129,25 @@ class SurveyStatDialog extends MyDialog
     }
 
     // histogram from -bin*std to +bin*std in step std
-    int bbin = 2*bin + 1;
-    int[] hist = new int[bbin];
-    for ( int k=0; k<bbin; ++k ) hist[k] = 0;
+    int b_bin = 2*bin + 1; // 20230118 local var
+    int[] hist = new int[b_bin];
+    for ( int k=0; k<b_bin; ++k ) hist[k] = 0;
     if ( vals != null ) {
       for ( int k=0; k < nr; ++ k ) {
         int i = bin + (int)( (vals[k]-ave)/std );
-        if ( i >= bbin ) i = bbin-1;
+        if ( i >= b_bin ) i = b_bin-1;
         if ( i < 0 ) i = 0;
         ++ hist[i];
       }
     }
     int max = 1; // histogram max
-    for ( int k=0; k<bbin; ++k ) if ( hist[k] > max ) max = hist[k];
+    for ( int k=0; k<b_bin; ++k ) if ( hist[k] > max ) max = hist[k];
 
     int joff = hh-10;
-    int dx   = ww / bbin;
+    int dx   = ww / b_bin;
     if ( dx*20 >= ww ) dx --;
     int x, y;
-    for ( int k=0; k<bbin; ++ k ) {
+    for ( int k=0; k<b_bin; ++ k ) {
       int brd = ( k == bin )? TDColor.FIXED_RED : TDColor.WHITE;
       int h = (joff * hist[k]) / max;
       x  = dx * k;

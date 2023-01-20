@@ -38,7 +38,7 @@ import java.util.ArrayList;
 
 public class CBlockAdapter extends ArrayAdapter< CBlock >
 {
-  private GMActivity mParent;
+  private final GMActivity mParent;
   private ArrayList< CBlock > items;  // list if calibration data
   private ArrayList<CBlock> searchResult = null;
   // private final Context context;

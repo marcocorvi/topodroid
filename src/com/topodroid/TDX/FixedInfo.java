@@ -82,7 +82,7 @@ public class FixedInfo extends MagLatLong
    * @param lng_cs    CS longitude - east [m]
    * @param lat_cs    CS latitude - north [m]
    * @param h_geo_cs  CS altitude (geoid) [m]
-   * @param n_dec     numer of decimals
+   * @param n_dec     number of decimals
    * @param conv      convergence
    */
   FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid,
@@ -244,7 +244,7 @@ public class FixedInfo extends MagLatLong
     return ( TDSetting.mUnitLocation == TDUtil.DDMMSS ) ? double2ddmmss( x ) : double2degree( x );
   }
 
-  /** @return dd.mm.ss with seconds at two decinal places (roughly 0.3 m)
+  /** @return dd.mm.ss with seconds at two decimal places (roughly 0.3 m)
    * @param x  decimal degrees
    */ 
   static String double2ddmmss( double x )
@@ -282,7 +282,7 @@ public class FixedInfo extends MagLatLong
    * @param str  DD.MM.SS
    * @return the decimal degrees
    * @note the D/M and M/S separators can be color, space, degree-sign, or apostrophe
-   *       the decimals separatos can be point, slash, or comma
+   *       the decimals separator can be point, slash, or comma
    */
   static double string2double( String str )
   {
@@ -324,7 +324,7 @@ public class FixedInfo extends MagLatLong
   /** convert a decimal degree string to double (degrees)
    * @param str  DD.MM.SS
    * @return the decimal degrees
-   * @note the decimals separatos can be point, slash, or comma
+   * @note the decimals separator can be point, slash, or comma
    */
   static private double string2real( String str )
   {

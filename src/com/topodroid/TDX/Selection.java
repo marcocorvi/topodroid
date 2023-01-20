@@ -774,7 +774,7 @@ class Selection
   //       default: noth ++;
   //     }
   //   }
-  //   tdlog.v("SELECT Selection points " + mPoints.size() + " " + nfxd + " " + nspl + " " + ngrd + " " + nsta 
+  //   TDLog.v("SELECT Selection points " + mPoints.size() + " " + nfxd + " " + nspl + " " + ngrd + " " + nsta
   //                   + " " + npnt + " " + nlin + " " + nare + " " + nnam + " " + nnrt + " " + noth  );
   // }
 }

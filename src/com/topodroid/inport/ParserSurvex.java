@@ -14,6 +14,7 @@ package com.topodroid.inport;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDio;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDUtil;
 // import com.topodroid.prefs.TDSetting;
@@ -105,7 +106,7 @@ class ParserSurvex extends ImportParser
   ParserSurvex( InputStreamReader isr, String filename, boolean apply_declination ) throws ParserException
   {
     super( apply_declination );
-    mName = extractName( filename );
+    mName    = TDio.extractName( filename );
     fixes    = new ArrayList<>();
     stations = new ArrayList<>();
     aliases  = new HashMap<>();
@@ -167,7 +168,7 @@ class ParserSurvex extends ImportParser
       // TDLog.Log( TDLog.LOG_THERION, "reading file " + filename + " dir " + dirname );
       // TDLog.Log( TDLog.LOG_IO, "import read Survex file <" + filename + ">" );
 
-      BufferedReader br = getBufferedReader( isr, filename );
+      BufferedReader br = TDio.getBufferedReader( isr, filename );
       String line = nextLine( br );
       while ( line != null ) {
         // TDLog.v( "Parser Survex " + state.in_survey + " " + state.in_centerline + " " + state.in_data + " : " + line );

@@ -217,6 +217,9 @@ class DialogIco extends MyDialog
   /** respond to user touch 
    * @param v   tapped view
    * @param e   motion event
+   * @return true if touch event has been handled
+   *
+   * @note Studio: onTouch() should call View#performClick when a click is detected
    */
   @Override
   public boolean onTouch( View v, MotionEvent e )

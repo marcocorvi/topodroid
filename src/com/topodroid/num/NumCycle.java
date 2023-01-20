@@ -71,7 +71,7 @@ public class NumCycle
     return len;
   }
 
-  /** @return the absolute value of the loop misclosure
+  /** @return the absolute value of the loop mis-closure
    */
   double error() 
   { 

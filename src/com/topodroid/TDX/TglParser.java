@@ -33,12 +33,12 @@ import com.topodroid.c3walls.pcrust.PowercrustComputer;
 // import java.io.File;
 import java.io.IOException;
 // import java.io.FileReader;
-import java.io.InputStreamReader;
+// import java.io.InputStreamReader;
 import java.io.BufferedReader;
 // import java.io.FileWriter;
 // import java.io.StringWriter;
 import java.io.PrintWriter;
-import java.io.FileNotFoundException;
+// import java.io.FileNotFoundException;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.BufferedWriter;
@@ -795,25 +795,30 @@ public class TglParser
   //   return true;
   // }
 
+  /** #return the size of a grid cell
+   */
   protected double getGridSize()
   {
     double dx = emax - emin;
     double dy = nmax - nmin;
     double d = Math.sqrt( dx*dx + dy*dy );
     double grid_size = d / 10;
-    if ( grid_size > 50 ) { grid_size = 50; }
-    else if ( grid_size > 20 ) { grid_size = 20; }
-    else if ( grid_size > 10 ) { grid_size = 10; }
-    else if ( grid_size >  5 ) { grid_size =  5; }
-    else if ( grid_size >  2 ) { grid_size =  2; }
-    else if ( grid_size >  1 ) { grid_size =  1; }
-    else if ( grid_size > 0.5f ) { grid_size = 0.5f; }
-    else if ( grid_size > 0.2f ) { grid_size = 0.2f; }
-    else if ( grid_size > 0.1f ) { grid_size = 0.1f; }
+    if ( grid_size > 50 )      { grid_size = 100; }
+    else if ( grid_size > 20 ) { grid_size =  50; }
+    else if ( grid_size > 10 ) { grid_size =  20; }
+    else if ( grid_size >  5 ) { grid_size =  10; }
+    else if ( grid_size >  2 ) { grid_size =   5; }
+    else if ( grid_size >  1 ) { grid_size =   2; }
+    else if ( grid_size > 0.5f ) { grid_size = 1; }
+    else if ( grid_size > 0.2f ) { grid_size = 0.5f; }
+    else if ( grid_size > 0.1f ) { grid_size = 0.2f; }
+    else                         { grid_size = 0.1f; }
     return grid_size;
   }
 
   // ------------------------ 3D MODEL: CONVEX HULL
+  /** make the convex-hull wall model 
+   */
   public void makeConvexHull( )
   {
     if ( shots == null ) return;
@@ -838,6 +843,8 @@ public class TglParser
   }
 
   // FIXME skip -------------------------- WALL_TUBE triangles
+  /** make the tubular wall model
+   */
   public void makeTube( )
   {
     if ( shots == null ) return;
@@ -861,6 +868,8 @@ public class TglParser
 
 
   // FIXME skip -------------------------- WALL_BUBBLE triangles
+  /** make the bubble wall model
+   */
   public void makeBubble( )
   {
     if ( shots == null ) {
@@ -889,6 +898,8 @@ public class TglParser
   }
 
   // FIXME skip -------------------------- WALL_HULL triangles
+  /** make the hull wall model
+   */
   public void makeHull( )
   {
     if ( shots == null ) return;
@@ -912,6 +923,8 @@ public class TglParser
   
 
   /* // FIXME skip ------------------------- WALL_DELAUNAY triangles
+   ** make the Delaunay wall model
+   * 
   public void makeDelaunay()
   {
     triangles_delaunay = null;
@@ -938,6 +951,8 @@ public class TglParser
 
 
   // ------------------------ 3D MODEL: POWERCRUST
+  /** make the powercrust wall model
+   */
   public void makePowercrust( )
   {
     if ( shots == null ) return;
@@ -957,7 +972,10 @@ public class TglParser
     }
   }
 
-  /* unused
+  /** serialize the parser data - unused
+   * @param filepath pathname of the output file  
+   * @return true if success
+   *
   public boolean serialize( String filepath )
   {
     // TDLog.v("Parser serialize " + filepath );
@@ -982,7 +1000,10 @@ public class TglParser
   }
   */
 
-  /* unused
+  /** deserialize the parser data - unused
+   * @param filepath pathname of the input file  
+   * @return true if success
+   *
   public boolean deserialize( String filepath )
   {
     // TDLog.v("Parser deserialize " + filepath );
@@ -1037,8 +1058,11 @@ public class TglParser
     }
   }
 
-
-  // must be written in this order because deserialization creates the connections
+  /** serialize the parser data
+   * @param dos    output stream
+   * 
+   * @note must be written in this order because deserialization creates the connections
+   */
   public void serialize( DataOutputStream dos ) throws IOException
   {
     // TDLog.v("serialize: surveys " + surveys.size() + " " + stations.size() + " " + shots.size() + " " + splays.size() );
@@ -1063,6 +1087,9 @@ public class TglParser
     dos.write('E');
   }
 
+  /** deserialize the parser data
+   * @param dis    input stream
+   */
   public void deserialize( DataInputStream dis, int version ) throws IOException
   {
     boolean done = false;
@@ -1132,50 +1159,40 @@ public class TglParser
     }
   }   
 
-  static protected BufferedReader getBufferedReader( InputStreamReader isr, String filename )
-  {
-    try {
-      if ( isr == null ) {
-        isr = new InputStreamReader( new FileInputStream( filename ) );
-      }
-      return new BufferedReader( isr );
-    } catch ( FileNotFoundException e ) {
-    }
-    return null;
-  }
-
-  static protected String extractName( String filename )
-  {
-    int pos = filename.lastIndexOf( '/' );
-    if ( pos < 0 ) { pos = 0; } else { ++pos; }
-    int ext = filename.lastIndexOf( '.' ); if ( ext < 0 ) ext = filename.length();
-    return filename.substring( pos, ext );
-  }
-
-  private double temperature_weight( double len, double cln )
-  {
-    double h = len * Math.sin( cln );
-    return 1.0 / (0.1 + Math.abs(h) );
-  }
-
-  /** compute the stations temperature, by relaxing from the temperature at a set of stations
-   *  @param filename   pathname of file with (station_name, temp) pairs
-   *  called by TopoGL when a temperature file is read
+  /** get next line and increment line number
+   * @return next line, trimmed
    */
+  protected static String nextLine( BufferedReader br ) throws IOException
+  {
+    ++ linenr;
+    String line = br.readLine();
+    return ( line == null )? null : line.trim();
+  }
+
   // TEMPERATURE
+
+  // unused
+  // private double temperature_weight( double len, double cln )
+  // {
+  //   double h = len * Math.sin( cln );
+  //   return 1.0 / (0.1 + Math.abs(h) );
+  // }
+
+  // /** compute the stations temperature, by relaxing from the temperature at a set of stations
+  //  *  @param filename   pathname of file with (station_name, temp) pairs
+  //  *  called by TopoGL when a temperature file is read
+  //  */
   // boolean computeTemperature( InputStreamReader isr, String filename )
   // {
   //   has_temperature = false; 
   //   int sz = stations.size();
   //   if ( sz <= 0 ) return false;
   //   boolean[] kfix = new boolean[ sz ];
-
   //   for ( int k = 0; k < sz; ++k ) {
   //     kfix[ k ] = false;
   //     stations.get( k ).temp = -1000;
   //     // TDLog.v("station " + stations.get( k ).getName() );
   //   }
- 
   //   double sum = 0;
   //   int nr_fix = 0;
   //   try {
@@ -1245,15 +1262,5 @@ public class TglParser
   //   has_temperature = true;
   //   return true;
   // }
-
-  /** get next line and increment line number
-   * @return next line, trimmed
-   */
-  protected static String nextLine( BufferedReader br ) throws IOException
-  {
-    ++ linenr;
-    String line = br.readLine();
-    return ( line == null )? null : line.trim();
-  }
 
 }

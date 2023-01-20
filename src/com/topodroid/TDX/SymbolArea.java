@@ -74,7 +74,7 @@ class SymbolArea extends Symbol
    * color 0xaarrggbb
    * level canvas level
    */
-  SymbolArea( String name, String th_name, String group, String fname, int color, Bitmap bitmap, TileMode xmode, TileMode ymode,
+  SymbolArea( String name, String th_name, String group, String fname, int color, Bitmap bitmap, TileMode x_mode, TileMode y_mode,
               boolean close_horizontal, int level, int rt )
   {
     super( Symbol.TYPE_AREA, th_name, group, fname, rt );
@@ -83,8 +83,8 @@ class SymbolArea extends Symbol
     mLevel  = level;
 
     mBitmap = bitmap;
-    mXMode  = xmode;
-    mYMode  = ymode;
+    mXMode  = x_mode;
+    mYMode  = y_mode;
     mCloseHorizontal = close_horizontal;
     mOrientable  = false;
     // FIXME AREA_ORIENT mOrientation = 0;
@@ -162,7 +162,13 @@ class SymbolArea extends Symbol
     return null;
   }
 
-  private void makeShader( Bitmap bitmap, TileMode xmode, TileMode ymode, boolean subimage ) 
+  /** ???
+   * @param bitmap   tile bitmap
+   * @param x_mode   tiling mode in X direction 
+   * @param y_mode   tiling mode in Y direction 
+   * @param subimage ???
+   */
+  private void makeShader( Bitmap bitmap, TileMode x_mode, TileMode y_mode, boolean subimage ) 
   {
     if ( bitmap == null ) return;
     int width  = bitmap.getWidth();
@@ -173,7 +179,7 @@ class SymbolArea extends Symbol
         int h1 = height / 2;
         mShaderBitmap = Bitmap.createBitmap( bitmap, w1/2, h1/2, w1, h1 );
       }
-      mShader = new BitmapShader( mShaderBitmap, xmode, ymode );
+      mShader = new BitmapShader( mShaderBitmap, x_mode, y_mode );
       mPaint.setShader( mShader );
     }
   }
@@ -209,7 +215,7 @@ class SymbolArea extends Symbol
       // TDLog.Log( TDLog.LOG_IO, "read symbol area file <" + filename + ">" );
       FileInputStream fr = TDFile.getFileInputStream( filename );
       BufferedReader br = new BufferedReader( new InputStreamReader( fr, iso ) );
-      boolean insymbol = false;
+      boolean in_symbol = false; // 20230118 local var
       String line;
       line = br.readLine();
       while ( line != null ) {
@@ -219,12 +225,12 @@ class SymbolArea extends Symbol
         for (int k=0; k<s; ++k ) {
   	  if ( vals[k].startsWith( "#" ) ) break;
           if ( vals[k].length() == 0 ) continue;
-          if ( ! insymbol ) {
+          if ( ! in_symbol ) {
   	    if ( vals[k].equals("symbol") ) {
   	      name    = null;
   	      th_name = null;
   	      mColor  = TDColor.TRANSPARENT;
-              insymbol = true;
+              in_symbol = true;
             }
   	  } else {
             if ( vals[k].equals("name") || vals[k].equals(locale) ) {
@@ -367,7 +373,7 @@ class SymbolArea extends Symbol
                 mPaint.setStrokeCap(Paint.Cap.ROUND);
                 mPaint.setStrokeWidth( TDSetting.mLineThickness );
   	      }
-              insymbol = false;
+              in_symbol = false;
             }
           }
         }

@@ -14,6 +14,7 @@ package com.topodroid.inport;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDio;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.prefs.TDSetting;
@@ -67,7 +68,7 @@ class ParserCompass extends ImportParser
     float mLength, mBearing, mClino, mLeft, mUp, mDown, mRight;
     String mFlag=null, mComment=null, mFrom=null, mTo=null;
 
-    BufferedReader br = getBufferedReader( isr, filename );
+    BufferedReader br = TDio.getBufferedReader( isr, filename );
     String line = "";
     try {
       line = nextLine( br );

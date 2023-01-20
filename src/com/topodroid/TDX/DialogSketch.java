@@ -40,7 +40,7 @@ class DialogSketch extends MyDialog
                    implements OnItemClickListener
                    , OnClickListener
 {
-  private TopoGL  mTopoGl;
+  private final TopoGL  mTopoGl;
   private String  mBaseDir;
 
   private ArrayList< MyFileItem > mItems;

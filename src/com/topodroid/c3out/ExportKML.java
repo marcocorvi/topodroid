@@ -64,10 +64,10 @@ public class ExportKML
    */
   private boolean getGeolocalizedData( TglParser data, double decl, double h_geo_factor )
   {
-    // TDLog.v( "KML get geoloc. data. Decl " + decl );
+    // TDLog.v( "KML get geo-localized data. Declination " + decl );
     List< Cave3DFix > fixes = data.getFixes();
     if ( fixes.size() == 0 ) {
-      // TDLog.v( "KML no geolocalization");
+      // TDLog.v( "KML no geo-localization");
       return false;
     }
 

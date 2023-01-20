@@ -36,9 +36,9 @@ class DialogSurface extends MyDialog
   // private EditText mDemFile;
   // private EditText mTextureFile;
 
-  private TopoGL mTopoGl;
+  private final TopoGL mTopoGl;
 
-  private boolean mHasLocation; // WITH-GPS
+  private final boolean mHasLocation; // WITH-GPS
   private CheckBox mCBgps;
   private EditText mEast;
   private EditText mNorth;

@@ -35,10 +35,10 @@ class DrawingLineDialog extends MyDialog
                         implements View.OnClickListener
                         , AdapterView.OnItemSelectedListener
 {
-  private DrawingWindow mParent;
-  private DrawingLinePath mLine;  // edit item
-  private LinePoint mPoint;       // edit point
-  private boolean mDoOptions;     // whether level is over advanced (cached)
+  private final DrawingWindow mParent;
+  private final DrawingLinePath mLine;  // edit item
+  private final LinePoint mPoint;       // edit point
+  private final boolean mDoOptions;     // whether level is over advanced (cached)
 
   private int mType;              // line type - initialized from line item's type
   private int mTypeSection;

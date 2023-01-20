@@ -292,7 +292,7 @@ class UndeleteDialog extends MyDialog
     incrementStatus(); // calls updateList();
   }
 
-  /** update the list of undeleteble items: switch adapter according to the status
+  /** update the list of non-deletable items: switch adapter according to the status
    */
   private void updateList()
   {

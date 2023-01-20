@@ -285,14 +285,14 @@ public class QCamDrawingTexture extends TextureView {
           Integer ae1 = result.get(CaptureResult.CONTROL_AE_STATE);
           if (ae1 == null || ae1 == CaptureResult.CONTROL_AE_STATE_PRECAPTURE) {
             mState = STATE_WAITING_NON_PRECAPTURE;
-            // TDLog.v("CAM2 state WAITING PRECAPTURE --> WAITING NON PRECATURE");
+            // TDLog.v("CAM2 state WAITING PRECAPTURE --> WAITING NON PRECAPTURE");
           }
           break;
         case STATE_WAITING_NON_PRECAPTURE:
           Integer ae2 = result.get(CaptureResult.CONTROL_AE_STATE);
           if (ae2 == null || ae2 != CaptureResult.CONTROL_AE_STATE_PRECAPTURE) {
             mState = STATE_PICTURE_TAKEN;
-            // TDLog.v("CAM2 state WAITING NON PRECATURE --> PICTURE TAKEN");
+            // TDLog.v("CAM2 state WAITING NON PRECAPTURE --> PICTURE TAKEN");
             capturePicture();
           }
           break;
@@ -721,7 +721,7 @@ public class QCamDrawingTexture extends TextureView {
       try {
         mPreviewRequestBuilder.set( CaptureRequest.CONTROL_AE_PRECAPTURE_TRIGGER, CameraMetadata.CONTROL_AE_PRECAPTURE_TRIGGER_START );
         mState = STATE_WAITING_PRECAPTURE;
-        // TDLog.v("CAM2 state --> WAITING PRECATURE");
+        // TDLog.v("CAM2 state --> WAITING PRECAPTURE");
         mCaptureSession.capture( mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler );
       } catch ( CameraAccessException e ) {
         TDLog.Error("CAM2 access " + e.getMessage() );

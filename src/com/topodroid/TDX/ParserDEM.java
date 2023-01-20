@@ -124,7 +124,7 @@ class ParserDEM extends DEMsurface
    * @param xwest     West X coord
    * @param xeast     East X coord
    * @param ysouth    South Y coord
-   * @param ynorth    Nouth Y coord
+   * @param ynorth    North Y coord
    */
   boolean readData( double xwest, double xeast, double ysouth, double ynorth ) { return false; }
 

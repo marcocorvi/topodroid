@@ -37,9 +37,9 @@ class DialogInfo extends MyDialog
 {
   // private Button mBtnOk;
 
-  private TopoGL mTopoGl;
-  private TglParser mParser;
-  private GlRenderer   mRenderer;
+  private final TopoGL mTopoGl;
+  private final TglParser mParser;
+  private final GlRenderer   mRenderer;
 
   private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;

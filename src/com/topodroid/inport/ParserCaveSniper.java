@@ -14,6 +14,7 @@ package com.topodroid.inport;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDio;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.common.LegType;
@@ -62,7 +63,7 @@ class ParserCaveSniper extends ImportParser
 
     String line = "";
     try {
-      BufferedReader br = getBufferedReader( isr, filename );
+      BufferedReader br = TDio.getBufferedReader( isr, filename );
       line = nextLine( br );
       while ( line != null ) {
         line = line.trim();

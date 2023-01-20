@@ -89,13 +89,13 @@ public class Geodetic
   }
 
   /** @return approximate WGS84 meridian convergence factor
-   * @param latitude of the refernce point [deg]
+   * @param latitude of the reference point [deg]
    * the approximate meridian convergence of a point at distance D from the reference point
    * and azimuth A is
    *     D sin(A) * meridianConvergence( ref_latitude )
    *
    * The correction to DE = D sin(A) approx., at DN is DN DE * tan(lat) / N 
-   * where N is the princtipal radius.
+   * where N is the principal radius.
    * Therefore the correction to DE is a multiplicative factor (1 + DN tan(lat) / N ).
    *     neg.correction       pos. correction
    *                     |

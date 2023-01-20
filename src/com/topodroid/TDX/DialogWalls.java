@@ -25,8 +25,8 @@ import android.widget.SeekBar;
 class DialogWalls extends MyDialog 
                   implements View.OnClickListener
 {
-  private TopoGL  mTopoGl;
-  private TglParser mParser;
+  private final TopoGL  mTopoGl;
+  private final TglParser mParser;
 
   private CheckBox mCBbubble;
   // private CheckBox mCBbubbleNo;

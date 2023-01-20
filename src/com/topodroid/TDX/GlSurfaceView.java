@@ -100,6 +100,12 @@ class GlSurfaceView extends GLSurfaceView
     } );
   }
 
+  /*
+   * @param e touch event
+   * @return true if event has been handled
+   *
+   * @note Studio: onTouch() should call View#performClick when a click is detected
+   */
   @Override
   public boolean onTouchEvent( MotionEvent e) // override from SurfaceView
   {

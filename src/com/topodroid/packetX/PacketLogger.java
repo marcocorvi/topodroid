@@ -78,7 +78,7 @@ public class PacketLogger extends DataSetObservable
     if ( do_open ) openDatabase();
   }
 
-  /** close the database (as a cleanup in the dstr)
+  /** close the database (as a cleanup in the destructor)
    */
   public void closeDatabase()
   {

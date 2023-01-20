@@ -57,7 +57,7 @@
       android:layout_weight="100"
       android:text=""
       />
-  </LinearLayouti -->				  
+  </LinearLayout -->
 
   <LinearLayout android:id="@+id/layout_swap"
     android:layout_below="@id/layout_renumber"

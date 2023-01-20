@@ -34,8 +34,8 @@ class DialogSketches extends MyDialog
 {
   // private Button mBtnOk;
 
-  private TopoGL mTopoGl;
-  private GlRenderer mRenderer;
+  private final TopoGL mTopoGl;
+  private final GlRenderer mRenderer;
   // private List< GlSketch > sketches;
 
   public DialogSketches( Context context, TopoGL topogl, GlRenderer renderer )

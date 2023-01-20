@@ -34,8 +34,8 @@ class DrawingAreaDialog extends MyDialog
                         implements View.OnClickListener
                         , AdapterView.OnItemSelectedListener
 {
-  private DrawingWindow mParent;
-  private DrawingAreaPath mArea;  // area item
+  private final DrawingWindow mParent;
+  private final DrawingAreaPath mArea;  // area item
   private int mAreaType;          // area type initialized from area item's type
   private boolean mOrientable;    // whether the area type is orientable
   // private boolean mDoOptions; // areas do not have options

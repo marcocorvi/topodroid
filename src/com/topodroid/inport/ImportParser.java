@@ -84,6 +84,8 @@ class ImportParser
    */
   public boolean isValid() { return mValid; }
 
+  /** @return the first FROM string that is not empty, or '0' if not found 
+   */
   String initStation()
   {
     for ( ParserShot sh : shots ) {
@@ -183,33 +185,33 @@ class ImportParser
   }
    */
 
-  /** @return the input reader
-   * @param isr  input stream
-   * @param filename file full pathname (used if the stream is null)
-   */
-  static BufferedReader getBufferedReader( InputStreamReader isr, String filename )
-  {
-    try {
-      if ( isr == null ) {
-        isr = new InputStreamReader( new FileInputStream( filename ) );
-      }
-      return new BufferedReader( isr );
-    } catch ( FileNotFoundException e ) {
-      TDLog.Error("File not found");
-    }
-    return null;
-  }
+  // /** @return the input reader - MOVED to TDio
+  //  * @param isr  input stream
+  //  * @param filename file full pathname (used if the stream is null)
+  //  */
+  // static BufferedReader getBufferedReader( InputStreamReader isr, String filename )
+  // {
+  //   try {
+  //     if ( isr == null ) {
+  //       isr = new InputStreamReader( new FileInputStream( filename ) );
+  //     }
+  //     return new BufferedReader( isr );
+  //   } catch ( FileNotFoundException e ) {
+  //     TDLog.Error("File not found");
+  //   }
+  //   return null;
+  // }
 
-  /** extract the survey name from the filename
-   * @param filename  file name
-   * @return survey name 
-   */
-  static protected String extractName( String filename )
-  {
-    int pos = filename.lastIndexOf( '/' );
-    if ( pos < 0 ) { pos = 0; } else { ++pos; }
-    int ext = filename.lastIndexOf( '.' ); if ( ext < 0 ) ext = filename.length();
-    return filename.substring( pos, ext );
-  }
+  // /** extract the survey name from the filename - MOVED to TDio
+  //  * @param filename  file name
+  //  * @return survey name 
+  //  */
+  // static protected String extractName( String filename )
+  // {
+  //   int pos = filename.lastIndexOf( '/' );
+  //   if ( pos < 0 ) { pos = 0; } else { ++pos; }
+  //   int ext = filename.lastIndexOf( '.' ); if ( ext < 0 ) ext = filename.length();
+  //   return filename.substring( pos, ext );
+  // }
 
 }

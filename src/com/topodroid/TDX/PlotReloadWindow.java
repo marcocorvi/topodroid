@@ -184,28 +184,28 @@ public class PlotReloadWindow extends ItemDrawer
     mPos = 0;
 
     String tdr = TDPath.getTdrFileWithExt( filename );   
-    String filetdr = filename + ".tdr";
+    String file_tdr = filename + ".tdr"; // 20230118 local var
 
     long millis = System.currentTimeMillis();
     String age = TDFile.getTopoDroidFileAgeLength( tdr, millis );
     if ( age != null ) {
       String name = age + " ()";
-      mBackups.add( new PlotBackup( tdr, name, filetdr ) );
+      mBackups.add( new PlotBackup( tdr, name, file_tdr ) );
     }
     tdr = tdr + TDPath.BCK_SUFFIX;
-    filetdr = filetdr + TDPath.BCK_SUFFIX;
+    file_tdr = file_tdr + TDPath.BCK_SUFFIX;
     age = TDFile.getTopoDroidFileAgeLength( tdr, millis );
     if ( age != null ) {
       String name = age + " (" + TDPath.BCK_SUFFIX + ")";
-      mBackups.add( new PlotBackup( tdr, name, filetdr ) );
+      mBackups.add( new PlotBackup( tdr, name, file_tdr ) );
     }
     for ( int i=0; i< TDPath.NR_BACKUP; ++i ) {
       String tdr1 = tdr + i;
       age = TDFile.getTopoDroidFileAgeLength( tdr1, millis );
       if ( age != null ) {
         String name = age + " (" +  TDPath.BCK_SUFFIX + i + ")";
-        String filetdr1 = filetdr + i;
-        mBackups.add( new PlotBackup( tdr1, name, filetdr1 ) );
+        String file_tdr_1 = file_tdr + i;
+        mBackups.add( new PlotBackup( tdr1, name, file_tdr_1 ) );
       }
     }
   }
@@ -520,6 +520,13 @@ public class PlotReloadWindow extends ItemDrawer
     return ba;
   }
 
+  /** react to a user touch
+   * @param view     touched view
+   * @param rawEvent touch event
+   * @return true if event has been handled
+   *
+   * @note Studio: onTouch() should call View#performClick when a click is detected
+   */
   public boolean onTouch( View view, MotionEvent rawEvent )
   {
     float d0 = TDSetting.mCloseCutoff + TDSetting.mSelectness / mZoom;

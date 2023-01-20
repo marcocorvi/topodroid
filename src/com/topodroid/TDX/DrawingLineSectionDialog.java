@@ -36,8 +36,8 @@ import android.view.View;
 class DrawingLineSectionDialog extends MyDialog
                                implements View.OnClickListener
 {
-  private DrawingLinePath mLine;
-  private DrawingWindow mParent;
+  private final DrawingLinePath mLine;
+  private final DrawingWindow mParent;
   // private TopoDroidApp    mApp; // unused
   private String mFilename = null;
 

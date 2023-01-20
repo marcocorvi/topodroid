@@ -25,8 +25,8 @@ import android.os.AsyncTask;
 
 public class CalibToggleTask extends AsyncTask<Void, Integer, Boolean>
 {
-  private WeakReference<TopoDroidApp> mApp; // FIXME LEAK
-  private WeakReference<ICoeffDisplayer> mParent;
+  private final WeakReference<TopoDroidApp> mApp; // FIXME LEAK
+  private final WeakReference<ICoeffDisplayer> mParent;
 
   public CalibToggleTask( ICoeffDisplayer parent, TopoDroidApp app )
   {

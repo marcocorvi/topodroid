@@ -32,14 +32,15 @@ public class MotionEventWrap
    {
       // FIXME NFE 
 
+      // 20230118 - dropped test because minimal target API is 18
       // Use Build.VERSION.SDK_INT if you don't have to support Cupcake
-      if (Integer.parseInt(Build.VERSION.SDK) >= Build.VERSION_CODES.ECLAIR) { // DEPRECATED API-16
+      // if (Integer.parseInt(Build.VERSION.SDK) >= Build.VERSION_CODES.ECLAIR) { // DEPRECATED API-16
          // TDLog.d("MotionEventWrap using Eclair version");
          return new MotionEventEclair(event);
-      } else {
-         // TDLog.d("MotionEventWrap using Cupcake/Donut version");
-         return new MotionEventWrap(event);
-      }
+      // } else {
+      //    // TDLog.d("MotionEventWrap using Cupcake/Donut version");
+      //    return new MotionEventWrap(event);
+      // }
    }
    
    /** @return the action ID from the wrapped event

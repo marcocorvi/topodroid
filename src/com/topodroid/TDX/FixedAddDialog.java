@@ -165,22 +165,22 @@ class FixedAddDialog extends MyDialog
    */
   private boolean getLngLat()
   {
-    String longit = mETlng.getText().toString();
-    if ( /* longit == null || */ longit.length() == 0 ) {
+    String lng_it = mETlng.getText().toString(); // 20230118 local var "lng_it"
+    if ( /* lng_it == null || */ lng_it.length() == 0 ) {
       mETlng.setError( mContext.getResources().getString( R.string.error_long_required ) );
       return false;
     }
-    String latit = mETlat.getText().toString();
-    if ( /* latit == null || */ latit.length() == 0 ) {
+    String lat_it = mETlat.getText().toString(); // 20230118 local var "lat_it"
+    if ( /* lat_it == null || */ lat_it.length() == 0 ) {
       mETlat.setError( mContext.getResources().getString( R.string.error_lat_required) );
       return false;
     }
-    mLng = FixedInfo.string2double( longit );
+    mLng = FixedInfo.string2double( lng_it );
     if ( mLng < -1000 ) {
       mETlng.setError( mContext.getResources().getString( R.string.error_long_required ) );
       return false;
     } 
-    mLat = FixedInfo.string2double( latit );
+    mLat = FixedInfo.string2double( lat_it );
     if ( mLat < -1000 ) {
       mETlat.setError( mContext.getResources().getString( R.string.error_lat_required) );
       return false;

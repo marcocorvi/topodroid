@@ -171,7 +171,8 @@ public class Parser3d extends TglParser
 
   // --------------------------------------------------------
   private double cm2m16( int cm ) { return ((cm & 0xffff) == 0xffff)? -1 : cm * 0.01; }
-  private double cm2m32( int cm ) { return ((cm & 0xffffffff) == 0xffffffff)? -1 : cm * 0.01; }
+  @SuppressWarnings("PointlessBitwiseExpression")
+  private double cm2m32(int cm ) { return ((cm & 0xffffffff) == 0xffffffff)? -1 : cm * 0.01; }
 
   private String readline( DataInputStream dis ) throws IOException
   {

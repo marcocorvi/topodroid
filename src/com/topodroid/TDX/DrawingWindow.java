@@ -1345,7 +1345,7 @@ public class DrawingWindow extends ItemDrawer
         startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP );
         popInfo();
         doStart( false, -1, null );
-        // FIXME_POPINFO recomputeReferences( mNum, mZoom );
+        // FIXME_POP-INFO recomputeReferences( mNum, mZoom );
       } else {
         if ( doubleBack ) {
           if ( doubleBackToast != null ) doubleBackToast.cancel();
@@ -2196,7 +2196,7 @@ public class DrawingWindow extends ItemDrawer
     mBMlarge  = MyButton.getButtonBackground( this, res, izons[IC_LARGE] );
 
     mBMmenured = MyButton.getButtonBackground( this, res, izons[IC_MENU_RED] );
-    // mBMmenubkue = MyButton.getButtonBackground( this, res, izons[IC_MENU] );
+    // mBMmenublue = MyButton.getButtonBackground( this, res, izons[IC_MENU] );
 
     setButtonEraseSize( Drawing.SCALE_MEDIUM );
     setButtonSelectSize( Drawing.SCALE_MEDIUM );
@@ -3002,7 +3002,7 @@ public class DrawingWindow extends ItemDrawer
         if  ( tt >= 0 ) { // if failed to load x-section file
           popInfo();
           doStart( false, -1, null );
-          // FIXME_POPINFO recomputeReferences( mNum, mZoom );
+          // FIXME_POP-INFO recomputeReferences( mNum, mZoom );
           return;
         } else {
 	  finish();
@@ -4188,6 +4188,8 @@ public class DrawingWindow extends ItemDrawer
    * @param view  touched view
    * @param rawEvent raw event
    * @return ...
+   *
+   * @note Studio: onTouch() should call View#performClick when a click is detected
    */
   public boolean onTouch( View view, MotionEvent rawEvent )
   {
@@ -4396,11 +4398,11 @@ public class DrawingWindow extends ItemDrawer
                         Point2D p3 = c.getPoint(3);
                         lp1.addPoint3(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y );
                       }
-                      boolean addline = true;
+                      boolean add_line = true; // 20230118 local var "add_line"
                       if ( mContinueLine > CONT_NONE && ! BrushManager.isLineSection( mCurrentLine ) ) {
-                        addline = tryToJoin( lp1, mCurrentLinePath );
+                        add_line = tryToJoin( lp1, mCurrentLinePath );
                       }
-                      if ( addline ) {
+                      if ( add_line ) {
                         lp1.computeUnitNormal();
                         if ( mSymbol == SymbolType.LINE && BrushManager.isLineClosed( mCurrentLine ) ) {
                           // mCurrentLine == lp1.mLineType 
@@ -4456,11 +4458,11 @@ public class DrawingWindow extends ItemDrawer
                         p0 = points.get(k);
                         lp1.addPoint(p0.x, p0.y );
                       }
-                      boolean addline = true;
+                      boolean add_line = true; // 20230118 local var "add_line"
                       if ( mContinueLine > CONT_NONE && ! BrushManager.isLineSection( mCurrentLine ) ) {
-                        addline = tryToJoin( lp1, mCurrentLinePath );
+                        add_line = tryToJoin( lp1, mCurrentLinePath );
                       }
-                      if ( addline ) {
+                      if ( add_line ) {
                         lp1.computeUnitNormal();
                         if ( mSymbol == SymbolType.LINE && BrushManager.isLineClosed( mCurrentLine ) ) {
                           // mCurrentLine == lp1.mLineType 
@@ -4503,11 +4505,11 @@ public class DrawingWindow extends ItemDrawer
                     mLastLinePath = null;
                     doSectionLine( mCurrentLinePath );
                   } else { // not section line
-                    boolean addline= true;
+                    boolean add_line= true; // 20230118 local var "add_line"
                     if ( mContinueLine > CONT_NONE && ! BrushManager.isLineSection( mCurrentLine ) ) {
-                      addline = tryToJoin( mCurrentLinePath, mCurrentLinePath );
+                      add_line = tryToJoin( mCurrentLinePath, mCurrentLinePath );
                     }
-                    if ( addline ) {
+                    if ( add_line ) {
                       mCurrentLinePath.computeUnitNormal();
                       if ( mSymbol == SymbolType.LINE && BrushManager.isLineClosed( mCurrentLine ) ) {
                         // mCurrentLine == mCurrentLinePath.mLineType
@@ -5789,7 +5791,7 @@ public class DrawingWindow extends ItemDrawer
       );
     }
 
-    /** clear the hot path and show/hide the tool layaout
+    /** clear the hot path and show/hide the tool layout
      * @param visibility  tool layout visibility
      */
     private void clearHotPath( int visibility )
@@ -6093,13 +6095,13 @@ public class DrawingWindow extends ItemDrawer
         if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
           // ----- DUPLICATE LINE/AREA POINT - INSERT LINE/AREA POINTS IN RANGE
           //
-          final boolean pointwise = SelectionRange.isPoint( mDoEditRange );
-          text = getString( pointwise? R.string.popup_split_pt : R.string.popup_split_pts );
+          final boolean point_wise = SelectionRange.isPoint( mDoEditRange ); // 20230118 local var "point_wise"
+          text = getString( point_wise? R.string.popup_split_pt : R.string.popup_split_pts );
           myTextView2 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
             new View.OnClickListener( ) {
               public void onClick(View v) {
                 if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // LINE/AREA
-                  if ( pointwise ) {
+                  if ( point_wise ) {
                     mDrawingSurface.splitPointHotItem(); // split point 
                   } else {
                     mDrawingSurface.insertPointsHotItem(); // insert points in range
@@ -6109,7 +6111,7 @@ public class DrawingWindow extends ItemDrawer
                 dismissPopupEdit();
               }
             } );
-          if ( TDLevel.overExpert && TDSetting.mCompositeActions && pointwise ) {
+          if ( TDLevel.overExpert && TDSetting.mCompositeActions && point_wise ) {
             myTextView2.setOnLongClickListener( new View.OnLongClickListener() {
               public boolean onLongClick( View v ) {
                 if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // LINE/AREA
@@ -6754,7 +6756,7 @@ public class DrawingWindow extends ItemDrawer
           mLastLinePath = null;
         }
       } else if ( k5 < mNrButton5 && b == mButton5[k5++] ) { // ERASE MODE
-        makePopupFilter( b, Drawing.mEraseModes, 4, Drawing.CODE_ERASE, dismiss ); // pulldown menu to select erase mode
+        makePopupFilter( b, Drawing.mEraseModes, 4, Drawing.CODE_ERASE, dismiss ); // pull-down menu to select erase mode
       } else if ( k5 < mNrButton5 && b == mButton5[k5++] ) { // ERASE SIZE
         setButtonEraseSize( mEraseScale + 1 ); // toggle erase size
       }
@@ -7045,10 +7047,10 @@ public class DrawingWindow extends ItemDrawer
     long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
     if ( pid >= 0 ) {
       // imageFile := PHOTO_DIR / surveyId / photoId .jpg
-      String imagefilepath = TDPath.getSurveyJpgFile( TDInstance.survey, id );
-      // File imagefile = TDFile.getTopoDroidFile( imagefilepath );
+      String image_filepath = TDPath.getSurveyJpgFile( TDInstance.survey, id ); // 20230118 local var "image_filepath"
+      // File imagefile = TDFile.getTopoDroidFile( image_filepath );
       // TODO TD_XSECTION_PHOTO
-      doTakePointPhoto( imagefilepath, false, pid ); // without inserter
+      doTakePointPhoto( image_filepath, false, pid ); // without inserter
     }
   }
 
@@ -7749,7 +7751,7 @@ public class DrawingWindow extends ItemDrawer
       } else {
         menu_adapter.add( res.getString( menus[3] ) );  // RELOAD
       }
-      menu_adapter.add( res.getString( menus[4] ) );  // ZOOMFIT
+      menu_adapter.add( res.getString( menus[4] ) );  // ZOOM-FIT
     }
     if ( TDLevel.overAdvanced && (! mTh2Edit) && PlotType.isSketch2D( type ) ) { // TH2EDIT
       menu_adapter.add( res.getString( menus[5] ) ); // RENAME/DELETE
@@ -7844,7 +7846,7 @@ public class DrawingWindow extends ItemDrawer
         }
       } else if ( p++ == pos ) { // EXPORT - SAVE
         if ( mTh2Edit ) { // TH2EDIT export Therion
-          int thpos = 0; // Therion index
+          // int th_pos = 0; // Therion index, unused? - 20230118 local var "th_pos"
           // TDLog.v("DRAW save therion");
           // API_19
           selectFromProvider( TDConst.SURVEY_FORMAT_TH2, TDRequest.REQUEST_GET_EXPORT, Intent.ACTION_CREATE_DOCUMENT );
@@ -7902,7 +7904,7 @@ public class DrawingWindow extends ItemDrawer
           }
           startActivityForResult( intent, TDRequest.PLOT_RELOAD );
         }
-      } else if ( TDLevel.overNormal && p++ == pos ) { // ZOOMFIT / ORIENTATION
+      } else if ( TDLevel.overNormal && p++ == pos ) { // ZOOM-FIT / ORIENTATION
 	if ( TDLevel.overExpert ) {
           ( new PlotZoomFitDialog( mActivity, this, mTh2Edit ) ).show(); // TH2EDIT added last param
 	} else {
@@ -7976,7 +7978,7 @@ public class DrawingWindow extends ItemDrawer
    * @param filename     export filename
    * @param prefix       station names export-prefix (not used)
    * @param second       whether to export the second view instead of the current view (only for plan or profile)
-   * @note called from EportDialogPlot to do the export
+   * @note called from ExportDialogPlot to do the export
    */
   public void doExport( String export_type, String filename, String prefix, boolean second ) // EXPORT
   {
@@ -8023,7 +8025,7 @@ public class DrawingWindow extends ItemDrawer
 
   /** 
    * @param uri     export URI
-   * @param second  whether to export the secong view (only for plan or profile)
+   * @param second  whether to export the second view (only for plan or profile)
    */
   private void doUriExport( Uri uri, boolean second ) 
   {
@@ -9054,7 +9056,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void mergeOutlineScrap()
   {
-    // merge is aclled in MOVE mode
+    // merge is called in MOVE mode
     // TDLog.v("mergeOutlineScrap " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null );
 

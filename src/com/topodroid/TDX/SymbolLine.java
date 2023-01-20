@@ -183,8 +183,8 @@ class SymbolLine extends Symbol
       FileInputStream fr = TDFile.getFileInputStream( filename );
       BufferedReader br = new BufferedReader( new InputStreamReader( fr, iso ) );
       String line;
-      boolean insymbol = false;
-      // TDLog.v( "read symbol line file <" + filename + "> in_symbol " + insymbol );
+      boolean in_symbol = false; // 20230118 local var
+      // TDLog.v( "read symbol line file <" + filename + "> in_symbol " + in_symbol );
       while ( (line = br.readLine()) != null ) {
         line = line.trim();
         String[] vals = line.split(" ");
@@ -192,14 +192,14 @@ class SymbolLine extends Symbol
         for (int k=0; k<s; ++k ) {
   	  if ( vals[k].startsWith( "#" ) ) break;
           if ( vals[k].length() == 0 ) continue;
-          if ( ! insymbol ) {
+          if ( ! in_symbol ) {
             // TDLog.v("SL not in symbol " + line );
   	    if ( vals[k].equals("symbol" ) ) {
   	      name    = null;
   	      th_name = null;
               group   = null;
   	      color   = TDColor.TRANSPARENT;
-              insymbol = true;
+              in_symbol = true;
               // TDLog.v("SL " + filename + " in symbol" );
               break;
             }
@@ -287,19 +287,19 @@ class SymbolLine extends Symbol
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
                 int k1 = k;
-                int ndash = 0;
+                int n_dash = 0; // 20230118 local var number of dash+space
                 while ( k1 < s ) {
                   while ( k1 < s && vals[k1].length() == 0 ) ++k1;
-                  ++ ndash;
+                  ++ n_dash;
                   ++k1;
                 }
-                ndash = ndash - (ndash % 2);
-                if ( ndash > 0 ) {
+                n_dash = n_dash - (n_dash % 2);
+                if ( n_dash > 0 ) {
                   try {
-                    float[] x = new float[ndash];
+                    float[] x = new float[n_dash];
   	            x[0] = Float.parseFloat( vals[k] ) * unit;
                     kval = k;
-                    for (int n=1; n<ndash; ++n ) {
+                    for (int n=1; n<n_dash; ++n ) {
   	              x[n] = nextFloat( vals, s, unit );
                       // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	              // x[n] = Float.parseFloat( vals[k] ) * unit;
@@ -502,7 +502,7 @@ class SymbolLine extends Symbol
                 mPaint.setStrokeWidth( dy * width * TDSetting.mLineThickness );
                 mRevPaint.setStrokeWidth( dy * width * TDSetting.mLineThickness );
   	      }
-              insymbol = false;
+              in_symbol = false;
             }
           }
         }

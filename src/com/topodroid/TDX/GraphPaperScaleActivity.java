@@ -127,7 +127,7 @@ public class GraphPaperScaleActivity extends Activity
     mTVdensity.setText( Integer.toString( density ) );
   }
 
-  /** reac t to a user tap
+  /** react to a user tap
    * @param view tapped view
    *   - button OK: tell the parent to create the projection profile with the current azimuth
    *   - button PLUS: increase azimuth

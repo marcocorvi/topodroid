@@ -47,7 +47,7 @@ class MagLegendre
   //   }
   // }
  
-  // void ddebugLegendre()
+  // void debugLegendre()
   // {
   //   for ( int n=0; n<=12; ++n ) {
   //     StringBuilder sb = new StringBuilder();

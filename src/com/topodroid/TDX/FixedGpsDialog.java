@@ -90,7 +90,7 @@ class FixedGpsDialog extends MyDialog
   private double mLat = 0;  // decimal degrees
   private double mLng = 0;  // decimal degrees
   private double mHEll = 0; // ellipsoid altitude [meters]
-  private double mHGeo; // altimetrici (geoid) altitude
+  private double mHGeo; // altimetric (geoid) altitude
   private boolean mLocStarted = false;
   private double mErrH = -1;
   private double mErrV = -1;

@@ -33,10 +33,10 @@ class DialogStation extends MyDialog
   private Button mBtCenter;
   private TextView mTvSurface;
 
-  private TopoGL     mTopoGl;
-  private TglParser  mParser;
-  private Cave3DStation  mStation;
-  private DEMsurface  mSurface;
+  private final TopoGL     mTopoGl;
+  private final TglParser  mParser;
+  private final Cave3DStation  mStation;
+  private final DEMsurface  mSurface;
 
   public DialogStation( Context context, TopoGL topogl, TglParser parser, String fullname, DEMsurface surface )
   {

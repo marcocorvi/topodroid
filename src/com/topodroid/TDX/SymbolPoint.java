@@ -252,7 +252,7 @@ public class SymbolPoint extends Symbol
       BufferedReader br = new BufferedReader( new InputStreamReader( fr, iso ) );
       String line;
       line = br.readLine();
-      boolean insymbol = false;
+      boolean in_symbol = false;
       while ( line != null ) {
         line = TDString.spacesToSpace( line.trim() );
         String[] vals = line.split(" ");
@@ -260,13 +260,13 @@ public class SymbolPoint extends Symbol
         for (int k=0; k<s; ++k ) {
           if ( vals[k].startsWith( "#" ) ) break;
           if ( vals[k].length() == 0 ) continue; // not needed
-          if ( ! insymbol ) {
+          if ( ! in_symbol ) {
             if ( vals[k].equals("symbol" ) ) {
               name = null;
               th_name = null;
               color = TDColor.TRANSPARENT;
               path = null;
-              insymbol = true;
+              in_symbol = true;
             }
           } else {
             if ( vals[k].equals("name") || vals[k].equals(locale) ) {
@@ -399,7 +399,7 @@ public class SymbolPoint extends Symbol
                 }
                 ++ cnt;
               }
-              insymbol = false;
+              in_symbol = false;
             }
           }
         }
@@ -415,8 +415,8 @@ public class SymbolPoint extends Symbol
   // {
   //   mPath = new Path();
   //   mPath.moveTo(0,0);
-  //   String pname = "P_" + getThName().replace(':', '-');
-  //   mDxf  = "  0\nLINE\n  8\n" + pname + "\n" 
+  //   String p_name = "P_" + getThName().replace(':', '-');
+  //   mDxf  = "  0\nLINE\n  8\n" + p_name + "\n" 
   //         + "  100\nAcDbEntity\n  100\nAcDbLine\n"
   //         + "  10\n0.0\n  20\n0.0\n  30\n0.0\n"
   //         + "  11\n1.0\n  21\n0.0\n  31\n0.0\n"; // 1 mm long
@@ -436,13 +436,13 @@ public class SymbolPoint extends Symbol
    */
   private void makePointPath( String path )
   {
-    String pname = TDSetting.mAcadLayer ? "0" : "P_" + getThName().replace(':', '-'); // "0" = block // HBX
-    int icolor = DxfColor.rgbToIndex( getColor() ); // HBX
+    String p_name = TDSetting.mAcadLayer ? "0" : "P_" + getThName().replace(':', '-'); // "0" = block // HBX
+    int i_color = DxfColor.rgbToIndex( getColor() ); // HBX
     mDxf = new SymbolPointDxf();
     if ( path == null ) {
       mPath = new Path();
       mPath.moveTo(0,0);
-      mDxf.line( pname, 0, 0, 1, 0, icolor ); // HBX
+      mDxf.line( p_name, 0, 0, 1, 0, i_color ); // HBX
 
       mSvg = "";
       mXvi = "";
@@ -493,7 +493,7 @@ public class SymbolPoint extends Symbol
             mPath.lineTo( x0*unit, y0*unit );
             float x01 = x0 * dxfScale;
             float y01 = y0 * dxfScale;
-            mDxf.line( pname, x00, -y00, x01, -y01, icolor ); // HBX
+            mDxf.line( p_name, x00, -y00, x01, -y01, i_color ); // HBX
 
 	    pv4.format(Locale.US, "L %.2f %.2f", x00, y00 );
 	    pv4.format(Locale.US, " %.2f %.2f ", x01, y01 );
@@ -531,7 +531,7 @@ public class SymbolPoint extends Symbol
             // cubic to 8-segment polyline
          //    DrawingDxf.printString( pw, 0, "POLYLINE" );
          //    // handle = DrawingDxf.inc(handle);
-         //    DrawingDxf.printString( pw, 8, pname );
+         //    DrawingDxf.printString( pw, 8, p_name );
          //    DrawingDxf.printAcDb( pw, -1, "AcDbEntity", "AcDbLine" );
          //    // DrawingDxf.printInt(  pw, 39, 1 ); // line thickness
          //    // DrawingDxf.printInt(  pw, 40, 1 ); // start width
@@ -542,18 +542,18 @@ public class SymbolPoint extends Symbol
          //    DrawingDxf.printXYZ( pw, 0.0f, 0.0f, 0.0f, 0 ); // position
          //    BezierCurve bc = new BezierCurve( x00, -y00, x0*dxfScale, -y0*dxfScale, x1*dxfScale, -y1*dxfScale, x2*dxfScale, -y2*dxfScale );
          //    DrawingDxf.printString( pw, 0, "VERTEX" ); 
-         //    DrawingDxf.printString( pw, 8, pname ); // layer
+         //    DrawingDxf.printString( pw, 8, p_name ); // layer
          //    DrawingDxf.printXYZ( pw, x00, -y00, 0.0f, 0 );
          //    for ( int n=1; n < 8; ++n ) { //8 point
          //      Point2D pb = bc.evaluate( (float)n / (float)8 );
-         //      // handle = DrawingDxf.printLinePoint( pw, scale, handle, pname, pb.x, pb.y );
+         //      // handle = DrawingDxf.printLinePoint( pw, scale, handle, p_name, pb.x, pb.y );
          //      DrawingDxf.printString( pw, 0, "VERTEX" );
-         //      DrawingDxf.printString( pw, 8, pname );
+         //      DrawingDxf.printString( pw, 8, p_name );
          //      DrawingDxf.printXYZ( pw, pb.x, pb.y, 0.0f, 0 );
          //    }
-         //    // handle = DrawingDxf.printLinePoint( pw, scale, handle, pname, x2*dxfScale, -y2*dxfScale );
+         //    // handle = DrawingDxf.printLinePoint( pw, scale, handle, p_name, x2*dxfScale, -y2*dxfScale );
          //    DrawingDxf.printString( pw, 0, "VERTEX" );
-         //    DrawingDxf.printString( pw, 8, pname );
+         //    DrawingDxf.printString( pw, 8, p_name );
          //    DrawingDxf.printXYZ( pw, x2*dxfScale, -y2*dxfScale, 0.0f, 0 ); 
          //    // x0 = x3;
          //    // y0 = y3;
@@ -578,7 +578,7 @@ public class SymbolPoint extends Symbol
            xx[np] =  x2*dxfScale;
            yy[np] = -y2*dxfScale;
 
-           mDxf.polyline( pname, xx, yy, icolor ); // HBX
+           mDxf.polyline( p_name, xx, yy, i_color ); // HBX
       
             // x00 /= dxfScale; // not needed
             // y00 /= dxfScale;
@@ -603,7 +603,7 @@ public class SymbolPoint extends Symbol
             x1 = Float.parseFloat( vals[k] );                 // radius
             mPath.addCircle( x0*unit, y0*unit, x1*unit, Path.Direction.CCW );
 
-            mDxf.circle( pname, x0*dxfScale, -y0*dxfScale, x1*dxfScale, icolor ); // HBX
+            mDxf.circle( p_name, x0*dxfScale, -y0*dxfScale, x1*dxfScale, i_color ); // HBX
 
 	    pv4.format(Locale.US, "C %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f ", 
               (x0-x1)*dxfScale, y0*dxfScale, (x0-x1)*dxfScale, (y0-x1)*dxfScale, (x0+x1)*dxfScale, (y0-x1)*dxfScale, (x0+x1)*dxfScale, y0*dxfScale );
@@ -650,7 +650,7 @@ public class SymbolPoint extends Symbol
             y2 = Float.parseFloat( vals[k] ); 
             mPath.arcTo( new RectF(x0*unit, y0*unit, x1*unit, y1*unit), x2, y2 );
 
-            mDxf.arc( pname, (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, x1*dxfScale, x2, y2, icolor ); // HBX
+            mDxf.arc( p_name, (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, x1*dxfScale, x2, y2, i_color ); // HBX
 
 	    // TODO arcTo for XVI
 

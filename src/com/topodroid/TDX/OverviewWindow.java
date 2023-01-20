@@ -610,7 +610,7 @@ public class OverviewWindow extends ItemDrawer
 
     // TDLog.v( "Overview plots " + plots.size() );
 
-    // if ( plots.size() < 1 ) { // N.B. this should never happpen
+    // if ( plots.size() < 1 ) { // N.B. this should never happen
     //   TDToast.makeBad( R.string.few_plots );
     //   finish();
     //   return;
@@ -1028,6 +1028,13 @@ public class OverviewWindow extends ItemDrawer
     return ba;
   }
 
+  /** react to a user touch
+   * @param view     touched view
+   * @param rawEvent touch event
+   * @return true if event has been handled
+   *
+   * @note Studio: onTouch() should call View#performClick when a click is detected
+   */
   public boolean onTouch( View view, MotionEvent rawEvent )
   {
     float d0 = TDSetting.mCloseCutoff + TDSetting.mSelectness / mZoom;

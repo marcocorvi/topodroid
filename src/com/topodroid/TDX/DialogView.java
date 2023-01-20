@@ -26,8 +26,8 @@ class DialogView extends MyDialog
 {
   private Button mBtnOk;
 
-  private TopoGL  mTopoGl;
-  private GlRenderer mRenderer;
+  private final TopoGL  mTopoGl;
+  private final GlRenderer mRenderer;
 
   private Button   mButtonOK;
   private Button   mButtonCancel;

@@ -53,7 +53,7 @@ public class MyHorizontalButtonView
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-      // View retval = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewitem, null);
+      // View ret_val = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewitem, null);
       return (View)mButtons[position];
     }
   };

@@ -38,7 +38,7 @@ import android.text.Editable;
 class DialogR extends MyDialog
               implements View.OnClickListener
 {
-  private MainWindow mParent;
+  private final MainWindow mParent;
 
   private Button mBTcontinue;
   private EditText mCBunderstood;

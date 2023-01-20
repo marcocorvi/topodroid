@@ -190,6 +190,7 @@ public class CWFacet
    * 
    * @param p1  first segment endpoint (inside)
    * @param p2  second segment endpoint (outside)
+   * @param res (output) intersection 's' coordinate
    * @return intersection point or null
    */
   Vector3D intersection( Vector3D p1, Vector3D p2, Double res )

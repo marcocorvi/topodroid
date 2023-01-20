@@ -117,7 +117,7 @@ public class GlSurface extends GlShape
     float x0 = (float)( surface.mEast1  - xmed );
    
     // double dz =   surface.mDim2;  // GOOD
-    float dz = (float)( flip ? - surface.mDim2 : surface.mDim2 ); // flip for complesso.lox
+    float dz = (float)( flip ? - surface.mDim2 : surface.mDim2 ); // flip for "complesso.lox"
     // double z0 =   surface.mNorth1 + zmed; //  GOOD
     float z0 = (float)( flip ? surface.mNorth2 + zmed : surface.mNorth1 + zmed );
 
@@ -305,11 +305,11 @@ public class GlSurface extends GlShape
    */
   private void putVertex( float[] buffer, int k, float[] data, int i, int j, int nx, int nz, float x, float z, float ymed ) // ny unused
   {
-    int doff = (j * nx + i) * COORDS_PER_VERTEX;
-    int boff = k * STRIDE + OFFSET_VERTEX;
-    buffer[boff  ] = x;
-    buffer[boff+1] = data[j * nx + i] - ymed;
-    buffer[boff+2] = -z;
+    // int d_off = (j * nx + i) * COORDS_PER_VERTEX; // 20230118 commented
+    int b_off = k * STRIDE + OFFSET_VERTEX;
+    buffer[b_off  ] = x;
+    buffer[b_off+1] = data[j * nx + i] - ymed;
+    buffer[b_off+2] = -z;
   }
 
   /** set the value of a textel 
@@ -320,14 +320,14 @@ public class GlSurface extends GlShape
    */
   private void putTexel( float[] buffer, int k, float s0, float t0 ) 
   {
-    int boff = k * STRIDE + OFFSET_TEXEL;
-    buffer[boff  ] = s0;
-    buffer[boff+1] = t0;
+    int b_off = k * STRIDE + OFFSET_TEXEL;
+    buffer[b_off  ] = s0;
+    buffer[b_off+1] = t0;
   }
 
   private void putNormal( float[] buffer, int k, float[] data, int i, int j, int nx, int nz, float dx, float dz  )
   {
-    int boff = k * STRIDE + OFFSET_NORMAL;
+    int b_off = k * STRIDE + OFFSET_NORMAL;
     int i1 = (i>0)? i-1 : i;
     int i2 = (i<nx-1)? i+1 : i;
     int j1 = (j>0)? j-1 : j;
@@ -339,7 +339,7 @@ public class GlSurface extends GlShape
     // Vector3D.difference( z2, 0, data, (j2*nx+i)*COORDS_PER_VERTEX, data, (j1*nx+i)*COORDS_PER_VERTEX );
     // Vector3D.crossProduct( zx, 0, z2, 0, x2, 0 ); // (z2-z1)^(x2-x1) copied in x1
     // Vector3D.normalize( zx, 0 );
-    // for ( int s=0; s<COORDS_PER_NORMAL; ++s ) buffer[boff+s] = zx[s];
+    // for ( int s=0; s<COORDS_PER_NORMAL; ++s ) buffer[b_off+s] = zx[s];
     float dyx = data[j *nx+i2] - data[j *nx+i1];
     float dyz = data[j2*nx+i ] - data[j1*nx+ i];
     dz *= j2 - j1;
@@ -349,9 +349,9 @@ public class GlSurface extends GlShape
     float y =   dz * dx;
     float z =   dx * dyz;
     float d = (float)(Math.sqrt( x*x + y*y + z*z ));
-    buffer[boff  ] = x/d;
-    buffer[boff+1] = y/d;
-    buffer[boff+2] = z/d;
+    buffer[b_off  ] = x/d;
+    buffer[b_off+1] = y/d;
+    buffer[b_off+2] = z/d;
   }
 
   /** initialize the GL buffer

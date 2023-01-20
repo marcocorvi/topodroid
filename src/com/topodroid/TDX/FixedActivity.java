@@ -248,7 +248,7 @@ public class FixedActivity extends Activity
     }
   }
 
-  /** life-cycke - on resume
+  /** life-cycle - on resume
    */
   @Override
   public void onResume()
