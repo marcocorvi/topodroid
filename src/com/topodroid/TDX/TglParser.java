@@ -803,16 +803,16 @@ public class TglParser
     double dy = nmax - nmin;
     double d = Math.sqrt( dx*dx + dy*dy );
     double grid_size = d / 10;
-    if ( grid_size > 50 )      { grid_size = 100; }
-    else if ( grid_size > 20 ) { grid_size =  50; }
-    else if ( grid_size > 10 ) { grid_size =  20; }
-    else if ( grid_size >  5 ) { grid_size =  10; }
-    else if ( grid_size >  2 ) { grid_size =   5; }
-    else if ( grid_size >  1 ) { grid_size =   2; }
-    else if ( grid_size > 0.5f ) { grid_size = 1; }
-    else if ( grid_size > 0.2f ) { grid_size = 0.5f; }
-    else if ( grid_size > 0.1f ) { grid_size = 0.2f; }
-    else                         { grid_size = 0.1f; }
+    if ( grid_size > 50 )        { grid_size =  50; }
+    else if ( grid_size > 20 )   { grid_size =  20; }
+    else if ( grid_size > 10 )   { grid_size =  10; }
+    else if ( grid_size >  5 )   { grid_size =   5; }
+    else if ( grid_size >  2 )   { grid_size =   2; }
+    else if ( grid_size >  1 )   { grid_size =   1; }
+    else if ( grid_size > 0.5f ) { grid_size = 0.5f; }
+    else if ( grid_size > 0.2f ) { grid_size = 0.1f; }
+    else if ( grid_size > 0.1f ) { grid_size = 0.1f; }
+    else                         { grid_size = 0.05f; }
     return grid_size;
   }
 

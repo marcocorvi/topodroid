@@ -540,7 +540,12 @@ public class GlModel
     return ret;
   }
 
-  // legs must have already been reduced ( bbox must be symmetric )
+  /** prepare the ground X-Y grid and the frame
+   * @param legs        ???
+   * @param grid_size   grid cell size
+   * @param delta       additional border around the model area
+   * @note legs must have already been reduced ( bbox must be symmetric )
+   */
   void prepareGridAndFrame( GlLines legs, float grid_size, float delta )
   {
     // TDLog.v("Model BBox " + legs.getBBoxString() );
@@ -554,6 +559,10 @@ public class GlModel
     makeFrame( xmin, xmax, zmin, zmax, (float)legs.getYmin(), (float)legs.getYmax() );
   }
 
+  /** prepare the walls triangles using the Convex-Hull model
+   * @param computer   convex-hull computer
+   * @param make       ???
+   */
   void prepareWalls( ConvexHullComputer computer, boolean make )
   {
     if ( ! make ) {
@@ -576,6 +585,10 @@ public class GlModel
     // TDLog.v("Model CW-Hull triangles " + walls.triangleCount );
   }
 
+  /** prepare the walls triangles using the powercrust model
+   * @param computer   powercrust computer
+   * @param make       ???
+   */
   void prepareWalls( PowercrustComputer computer, boolean make )
   {
     if ( ! make ) {
@@ -598,6 +611,10 @@ public class GlModel
     preparePlanAndProfile( computer );
   }
 
+  /** prepare the walls triangles using the wall model
+   * @param computer   wall computer
+   * @param make       ???
+   */
   void prepareWalls( WallComputer computer, boolean make )
   {
     if ( ! make ) {
@@ -621,6 +638,9 @@ public class GlModel
     // TDLog.v("powercrust triangles " + walls.triangleCount );
   }
 
+  /** prepare the projected plan and profile using the powercrust model
+   * @param computer   powercrust computer
+   */
   private void preparePlanAndProfile( PowercrustComputer computer )
   {
     if ( computer.hasPlanview() ) {
@@ -786,9 +806,18 @@ public class GlModel
   }
 
   // ----------------------------------------------------------------------
+  /** prepare the X-Y grid
+   * @param x1  left X (west)
+   * @param x2  right X (east)
+   * @param z1  top Y (north) ?
+   * @param z2  bottom Y (soiuth) ?
+   * @param y1  lower Z (ground)
+   * @param y2  upper Z (only for vertical axis line)
+   * @param step  grid cell size
+   */
   private void makeGrid( float x1, float x2, float z1, float z2, float y1, float y2, float step )
   {
-    step = 2 * step;
+    // step = 2 * step;
     int nx = 1 + (int)((x2-x1)/step);
     int nz = 1 + (int)((z2-z1)/step);
     // TDLog.v("Model Grid NX " + nx + " NY " + nz + " cell " + step + " X0 " + x1 + " Y0 " + y1 + " Z0 " + z1 );
