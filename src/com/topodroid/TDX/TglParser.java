@@ -802,7 +802,7 @@ public class TglParser
     double dx = emax - emin;
     double dy = nmax - nmin;
     double d = Math.sqrt( dx*dx + dy*dy );
-    double grid_size = d / 10;
+    double grid_size = 2 * d / 10;
     if ( grid_size > 50 )        { grid_size =  50; }
     else if ( grid_size > 20 )   { grid_size =  20; }
     else if ( grid_size > 10 )   { grid_size =  10; }
