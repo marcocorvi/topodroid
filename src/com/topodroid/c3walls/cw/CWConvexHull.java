@@ -753,8 +753,14 @@ public class CWConvexHull
         }
       }
       if ( d0 > distance_thr ) break;
-      double a0 = t0.maxAngleOfPoint( p0 );
-      if ( a0 > angle_thr ) break;
+      if ( p0 != null ) {
+        try {
+          double a0 = t0.maxAngleOfPoint(p0);
+          if (a0 > angle_thr) break;
+        } catch ( NullPointerException e ) {
+          TDLog.Error( e.getMessage() );
+        }
+      }
       // TDLog.v( "CW-Hull concavity T " + t0.mCnt + " P " + p0.x + " " + p0.y + " " + p0.z );
       // TODO replace CWTriangle t0 with 3 Triangles in apex CWPoint p0
       // for the three sides s of t0:

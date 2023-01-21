@@ -19,6 +19,8 @@ import com.topodroid.prefs.TDSetting;
 // import com.topodroid.prefs.TDPrefActivity;
 import com.topodroid.help.UserManualActivity;
 
+import java.util.Locale;
+
 // import android.content.Context;
 
 // import android.graphics.PointF;
@@ -124,7 +126,7 @@ public class GraphPaperScaleActivity extends Activity
    */
   void setDensityTextView( int density )
   {
-    mTVdensity.setText( Integer.toString( density ) );
+    mTVdensity.setText( String.format( Locale.US, "%d", density ) );
   }
 
   /** react to a user tap

@@ -15,6 +15,7 @@ package com.topodroid.TDX;
 import com.topodroid.ui.MyDialog;
 
 // import java.util.ArrayList;
+import java.util.Locale;
 
 import android.os.Bundle;
 // import android.content.Context;
@@ -46,13 +47,13 @@ class DialogSurvey extends MyDialog
 
     TextView tv;
     tv = (TextView) findViewById( R.id.survey_legs );
-    tv.setText( Integer.toString( mSurvey.getShotNr() ) );
+    tv.setText( String.format( Locale.US, "%d", mSurvey.getShotNr() ) );
     tv = (TextView) findViewById( R.id.survey_legs_length );
-    tv.setText( Integer.toString( (int)(mSurvey.mLenShots) ) );
+    tv.setText( String.format( Locale.US, "%d", (int)(mSurvey.mLenShots) ) );
     tv = (TextView) findViewById( R.id.survey_splays );
-    tv.setText( Integer.toString( mSurvey.getSplayNr() ) );
+    tv.setText( String.format( Locale.US, "%d", mSurvey.getSplayNr() ) );
     tv = (TextView) findViewById( R.id.survey_splays_length );
-    tv.setText( Integer.toString( (int)(mSurvey.mLenSplays) ) );
+    tv.setText( String.format( Locale.US, "%d", (int)(mSurvey.mLenSplays) ) );
 
     ((Button) findViewById( R.id.button_close )).setOnClickListener( this );
 

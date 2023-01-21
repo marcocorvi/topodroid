@@ -586,11 +586,11 @@ public class Archiver
 
       mManifestSurveyname = TDString.spacesToUnderscore( br.readLine().trim() );
       // TDLog.v("MANIFEST read <" + mManifestSurveyname + ">" );
-      if ( app.mData == null ) {
+      if ( TopoDroidApp.mData == null ) {
         TDLog.Error( "MANIFEST app has no database");
         return -6;
       }
-      if ( app.mData.hasSurveyName( mManifestSurveyname ) ) {
+      if ( TopoDroidApp.mData.hasSurveyName( mManifestSurveyname ) ) {
         TDLog.Error( "MANIFEST survey exists: <" + mManifestSurveyname + ">" );
         return -1;
       }

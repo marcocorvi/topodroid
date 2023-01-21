@@ -193,6 +193,7 @@ public class CWFacet
    * @param res (output) intersection 's' coordinate
    * @return intersection point or null
    */
+  @SuppressWarnings("ParameterCanBeLocal")
   Vector3D intersection( Vector3D p1, Vector3D p2, Double res )
   {
 	  Vector3D dp = new Vector3D( p2.x-p1.x, p2.y-p1.y, p2.z-p1.z);

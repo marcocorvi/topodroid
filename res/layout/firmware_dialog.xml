@@ -52,7 +52,7 @@
       >
       <Button android:id="@+id/firmware_close"
         style="@style/button_default"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
         android:text="@string/button_close"
       />
       <Button android:id="@+id/firmware_ok"

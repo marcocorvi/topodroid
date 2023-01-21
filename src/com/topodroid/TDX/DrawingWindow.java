@@ -1505,16 +1505,16 @@ public class DrawingWindow extends ItemDrawer
     if ( psd2 != null ) {
       // TDLog.Log( TDLog.LOG_IO, "save plot [2] " + psd2.fname );
       try { 
-        (new SavePlotFileTask( mActivity, null, this, null, psd2.num, /* psd2.util, */ psd2.cm, psd2.plot, psd2.fname, psd2.type, psd2.azimuth, psd2.suffix, r, mTh2Edit )).execute(); // TH2EDIT
+        (new SavePlotFileTask( mActivity, null, this, null, psd2.num, /* psd2.util, */ psd2.cm, psd2.plot, psd2.filename, psd2.type, psd2.azimuth, psd2.suffix, r, mTh2Edit )).execute(); // TH2EDIT
       } catch ( RejectedExecutionException e ) { 
-        TDLog.Error("rejected exec save plot " + psd2.fname );
+        TDLog.Error("rejected exec save plot " + psd2.filename );
       }
     }
     try { 
       // TDLog.Log( TDLog.LOG_IO, "save plot [1] " + psd1.fname );
-      (new SavePlotFileTask( mActivity, null, this, saveHandler, psd1.num, /* psd1.util, */ psd1.cm, psd1.plot, psd1.fname, psd1.type, psd1.azimuth, psd1.suffix, r, mTh2Edit )).execute(); // TH2EDIT
+      (new SavePlotFileTask( mActivity, null, this, saveHandler, psd1.num, /* psd1.util, */ psd1.cm, psd1.plot, psd1.filename, psd1.type, psd1.azimuth, psd1.suffix, r, mTh2Edit )).execute(); // TH2EDIT
     } catch ( RejectedExecutionException e ) { 
-      TDLog.Error("rejected exec save plot " + psd1.fname );
+      TDLog.Error("rejected exec save plot " + psd1.filename );
       -- mNrSaveTh2Task;
     }
   }
@@ -1602,7 +1602,7 @@ public class DrawingWindow extends ItemDrawer
     float e1=-50, e2=50, s1=-50, s2=50;
     int manager_type = DrawingSurface.DRAWING_PLAN;
     if ( type == PlotType.PLOT_PLAN ) {
-      manager_type = DrawingSurface.DRAWING_PLAN;
+      manager_type = DrawingSurface.DRAWING_PLAN; // already assigned
       e1 = num.surveyEmin();
       e2 = num.surveyEmax();
       s1 = num.surveySmin();
@@ -2712,7 +2712,7 @@ public class DrawingWindow extends ItemDrawer
     mZoom     = TopoDroidApp.mScaleFactor;    // canvas zoom
     mOffset.x = 0;
     mOffset.y = 0;
-    if ( p1 != null ) {
+    if ( p1 != null ) { // always true
       // PlotInfo plot2 =  mApp_mData.getPlotInfo( TDInstance.sid, name+"s" );
       mName1 = name+"p";
       mName2 = name+"s";
@@ -4370,7 +4370,7 @@ public class DrawingWindow extends ItemDrawer
                  && ( mSymbol == SymbolType.AREA || ! BrushManager.isLineStraight( mCurrentLine ) )
                ) {
               int nPts = (mSymbol == SymbolType.LINE )? mCurrentLinePath.size() 
-                                                  : mCurrentAreaPath.size() ; // FIXME may null pointer
+                                                  : mCurrentAreaPath.size() ; // FIXME may NullPointerException
               if ( nPts > 1 ) {
 		if ( TDSetting.isLineStyleBezier() ) {
                   ArrayList< Point2D > pts = new ArrayList<>(); // [ nPts ];
@@ -4849,7 +4849,7 @@ public class DrawingWindow extends ItemDrawer
           // }
 
           // HBXP copy and modification from onTouchUp
-          if (true) // HBXP geek settings enable
+          if (true) // HBXP geek settings enable FIXME drop test
           { // SymbolType.POINT
             mLastLinePath = null;
             if ( ! mPointerDown ) {
@@ -5148,7 +5148,7 @@ public class DrawingWindow extends ItemDrawer
         }
       }
       // TDLog.v( "new leg xsection " + from + " - " + to + " intercept " + tt );
-    } else if ( nr_legs > 1 ) {
+    } else if ( nr_legs > 1 ) { // always true
         if ( h_section ) { // FAILURE: xsection in profile view and many legs
           if ( ! h_section_projected ) { //original HBXx
             TDToast.makeWarn(R.string.too_many_leg_intersection);
@@ -5627,7 +5627,7 @@ public class DrawingWindow extends ItemDrawer
     boolean drop = false;
     if ( /* hide == null || */ hide.length() == 0 ) {
       add = true;
-      drop = false;
+      drop = false; // already assigned
     } else {
       String[] hidden = hide.split( "\\s+" );
       StringBuilder sb = new StringBuilder();

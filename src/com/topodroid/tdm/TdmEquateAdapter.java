@@ -62,7 +62,7 @@ class TdmEquateAdapter extends ArrayAdapter< TdmEquate >
 
     TdmEquateViewHolder holder = null; 
     if ( view == null ) {
-      view = mLayoutInflater.inflate( R.layout.tdequate_adapter, null );
+      view = mLayoutInflater.inflate( R.layout.tdequate_adapter, null ); // parent crashes app
       holder = new TdmEquateViewHolder();
       holder.textView = (TextView) view.findViewById( R.id.tdequate );
       view.setTag( holder );

@@ -22,18 +22,18 @@ import java.util.ArrayList;
 
 class Cave3DHull
 {
-  Cave3DShot    shot;    
-  Cave3DStation mStationFrom;  // base station
-  Cave3DStation mStationTo;
-  Vector3D  normal;   // normal to the plane (unit vector along the shot)
+  final Cave3DShot    shot;
+  final Cave3DStation mStationFrom;  // base station
+  final Cave3DStation mStationTo;
+  final Vector3D  normal;   // normal to the plane (unit vector along the shot)
   Vector3D  center;   // hull center (in the plane)
   ArrayList< Cave3DShot > rays1;  
   ArrayList< Cave3DShot > rays2;  
   ArrayList< Triangle3D > triangles;
   ArrayList< HullProjection > projs1;
   ArrayList< HullProjection > projs2;
-  HullAngle a_from;
-  HullAngle a_to;
+  final HullAngle a_from;
+  final HullAngle a_to;
   int color; // DEBUG
 
   // /** get the size of the projections

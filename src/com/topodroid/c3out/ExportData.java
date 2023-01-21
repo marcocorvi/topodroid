@@ -21,8 +21,8 @@ public class ExportData
   public boolean mSurface;
   public boolean mStation;
   public boolean mOverwrite = true;
-  public int mType;
-  public String mMime; // mime type
+  public int mType;    // model type
+  public String mMime; // mime type - always application/octet-stream
   public String mExt;
 
   /** cstr

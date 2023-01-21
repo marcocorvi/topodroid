@@ -307,7 +307,7 @@ public class OverviewWindow extends ItemDrawer
     // mOverviewSurface.setManager( DrawingSurface.DRAWING_OVERVIEW, type ); 
     mOverviewSurface.newReferences( DrawingSurface.DRAWING_OVERVIEW, type ); 
    
-    float decl = ( type == PlotType.PLOT_PLAN )? mApp.mData.getSurveyDeclination(mSid) : 0;
+    float decl = ( type == PlotType.PLOT_PLAN )? TopoDroidApp.mData.getSurveyDeclination(mSid) : 0;
     mOverviewSurface.addScaleRef( DrawingSurface.DRAWING_OVERVIEW, type, decl );
 
     // float xoff = 0; float yoff = 0;
@@ -810,7 +810,7 @@ public class OverviewWindow extends ItemDrawer
   private void savePdf( Uri uri ) 
   {
     String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
-    if ( fullname != null ) {
+    if ( fullname != null ) { // always true
       DrawingCommandManager manager = mOverviewSurface.getManager( DrawingSurface.DRAWING_OVERVIEW );
       doSavePdf( uri, manager, fullname );
     } else {
@@ -861,7 +861,7 @@ public class OverviewWindow extends ItemDrawer
       pdf.finishPage( page );
       pdf.writeTo( fos );
       pdf.close();
-      if ( fos != null ) fos.close();
+      /* if ( fos != null ) */ fos.close(); // test always true
       TDToast.make( String.format( getResources().getString(R.string.saved_file_1), fullname ) ); // PDF
     } catch ( IOException e ) {
       TDLog.Error("Failed PDF export " + e.getMessage() );

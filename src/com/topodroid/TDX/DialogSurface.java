@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.ui.MyDialog;
+import com.topodroid.utils.TDLog;
 // import com.topodroid.utils.TDLog;
 // import com.topodroid.TDX.TDandroid;
 
@@ -138,7 +139,9 @@ class DialogSurface extends MyDialog
           double e = Double.parseDouble( mEast.getText().toString() );
           double n = Double.parseDouble( mNorth.getText().toString() );
           mTopoGl.addGPSpoint( e, n );
-        } catch ( NumberFormatException e ) { }
+        } catch ( NumberFormatException e ) {
+          TDLog.Error( e.getMessage() );
+        }
       }
 
       // TDLog.v( "Surface onClick()" );

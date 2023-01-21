@@ -14,7 +14,7 @@ public class Cave3DCS
 {
   public final static String WGS84 = "WGS-84";
 
-  public String name; // CS name
+  final public String name; // CS name
   // String proj4; // proj4 syntax CS description
 
   /** default cstr

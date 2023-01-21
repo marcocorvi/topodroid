@@ -12,6 +12,7 @@
 package com.topodroid.help;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDVersion;
 // import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.TDInstance;
@@ -66,7 +67,9 @@ public class TDVersionCheck extends AsyncTask< Void, Integer, Integer >
             if ( ch < '0' ) break;
             version = 10 * version + (int)( ch - '0' );
           }
-        } catch ( IOException e ) { }
+        } catch ( IOException e ) {
+          TDLog.Error( e.getMessage() );
+        }
         // TDLog.v( "last version " + version + " current " + TDVersion.VERSION_CODE );
         isr.close();
         ret = version;

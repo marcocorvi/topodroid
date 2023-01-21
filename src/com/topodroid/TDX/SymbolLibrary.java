@@ -333,7 +333,9 @@ public class SymbolLibrary
       // int str_len = sb.length();
       // dos.writeInt( str_len );
       dos.writeUTF( sb.toString() );
-    } catch ( IOException e ) { }
+    } catch ( IOException e ) {
+      TDLog.Error( e.getMessage() );
+    }
   }
 
   // -------------------------------------------------------------

@@ -51,7 +51,7 @@ class TdmInfoAdapter extends ArrayAdapter< FixedInfo >
     mApp     = app;
     for ( TdmInput item : items ) {
       TDLog.v("TDM INFO survey " + item.getSurveyName() );
-      FixedInfo info = mApp.mData.selectSurveyFixed( item.getSurveyName() );
+      FixedInfo info = TopoDroidApp.mData.selectSurveyFixed( item.getSurveyName() );
       if ( info != null ) {
         info.comment = item.getSurveyName();
         add( info );

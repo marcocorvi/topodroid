@@ -119,22 +119,23 @@ class SymbolLine extends Symbol
   }
 
 
-  private int kval;
+  private int k_val; // index in array vals[]
+
   private float nextFloat( String[] vals, int s, float unit ) throws NumberFormatException
   {
-    ++kval; while ( kval < s && vals[kval].length() == 0 ) ++kval;
-    if ( kval < s ) {
-      return Float.parseFloat( vals[kval] ) * unit;
+    ++k_val; while ( k_val < s && vals[k_val].length() == 0 ) ++k_val;
+    if ( k_val < s ) {
+      return Float.parseFloat( vals[k_val] ) * unit;
     }
     throw new NumberFormatException();
   }
 
   private int nextInt( String[] vals, int s ) throws NumberFormatException
   {
-    ++kval; while ( kval < s && vals[kval].length() == 0 ) ++kval;
-    if ( kval < s ) {
+    ++k_val; while ( k_val < s && vals[k_val].length() == 0 ) ++k_val;
+    if ( k_val < s ) {
       try {
-        return Integer.parseInt( vals[kval] );
+        return Integer.parseInt( vals[k_val] );
       } catch( NumberFormatException e ) {
         TDLog.Error("Non-integer value");
       }
@@ -274,7 +275,7 @@ class SymbolLine extends Symbol
   	      }
   	    } else if ( vals[k].equals("width") ) {
               try {
-                kval = k;
+                k_val = k;
                 width = nextInt( vals, s ) * TDSetting.mLineThickness;
   	        // ++k; while ( k < s && vals[k].length() == 0 ) ++k;    
   	        // if ( k < s ) {
@@ -298,7 +299,7 @@ class SymbolLine extends Symbol
                   try {
                     float[] x = new float[n_dash];
   	            x[0] = Float.parseFloat( vals[k] ) * unit;
-                    kval = k;
+                    k_val = k;
                     for (int n=1; n<n_dash; ++n ) {
   	              x[n] = nextFloat( vals, s, unit );
                       // ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -341,7 +342,7 @@ class SymbolLine extends Symbol
                   if ( vals[k].equals("moveTo") ) {
                     try {
                       // if ( ! moved_to ) {
-                        kval = k;
+                        k_val = k;
                         float x = nextFloat( vals, s, unit );
                         float y = nextFloat( vals, s, unit );
                         path_dir.moveTo( x, y );
@@ -369,7 +370,7 @@ class SymbolLine extends Symbol
                     }
                   } else if ( vals[k].equals("lineTo") ) { 
                     try {
-                      kval = k;
+                      k_val = k;
                       float x = nextFloat( vals, s, unit );
                       float y = nextFloat( vals, s, unit );
                       path_dir.lineTo( x, y );
@@ -393,7 +394,7 @@ class SymbolLine extends Symbol
                     }
                   } else if ( vals[k].equals("cubicTo") ) { 
                     try {
-                      kval = k;
+                      k_val = k;
                       float x1 = nextFloat( vals, s, unit );
                       float y1 = nextFloat( vals, s, unit );
                       float x2 = nextFloat( vals, s, unit );
@@ -443,7 +444,7 @@ class SymbolLine extends Symbol
                     }
                   } else if ( vals[k].equals("addCircle") ) { 
                     try {
-                      kval = k;
+                      k_val = k;
                       float x = nextFloat( vals, s, unit );
                       float y = nextFloat( vals, s, unit );
                       float r = nextFloat( vals, s, unit );

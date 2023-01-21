@@ -588,6 +588,7 @@ public class TDandroid
       PackageInfo pi = pm.getPackageInfo( package_name, 0 );
       return true;
     } catch ( PackageManager.NameNotFoundException e ) {
+      TDLog.Error( e.getMessage() );
     }
     return false;
   }
@@ -604,37 +605,54 @@ public class TDandroid
       PackageInfo pi = pm.getPackageInfo( "gr.stasta.mobiletopographer", 0 );
       ret |= FixedActivity.FLAG_MOBILE_TOPOGRAPHER;
     } catch ( PackageManager.NameNotFoundException e ) {
+      TDLog.Error( e.getMessage() );
     }
     try {
       PackageInfo pi = pm.getPackageInfo( "nz.ac.elec.gpsapp", 0 );
       ret |= FixedActivity.FLAG_GPS_POSITION;
     } catch ( PackageManager.NameNotFoundException e ) {
+      TDLog.Error( e.getMessage() );
     }
     try {
       PackageInfo pi = pm.getPackageInfo( "com.doitintuitively.gpxrecorder", 0 );
       ret |= FixedActivity.FLAG_GPX_RECORDER;
     } catch ( PackageManager.NameNotFoundException e ) {
+      TDLog.Error( e.getMessage() );
     }
     try {
       PackageInfo pi = pm.getPackageInfo( "com.android.gpstest", 0 );
       ret |= FixedActivity.FLAG_GPS_TEST;
     } catch ( PackageManager.NameNotFoundException e ) {
+      TDLog.Error( e.getMessage() );
     }
     try {
       PackageInfo pi = pm.getPackageInfo( "eu.basicairdata.graziano.gpslogger", 0 );
       ret |= FixedActivity.FLAG_GPS_LOGGER;
     } catch ( PackageManager.NameNotFoundException e ) {
+      TDLog.Error( e.getMessage() );
     }
     return ret;
   }
 
-  /** @return an o[en-document intent - requires API_19 - 20230118 new method
+  /** @return an open-document intent - requires API_19 - 20230118 new method
    * @param index  index of mime type
    */
-  static Intent getOpenDocumentIntent( int index )
+  public static Intent getOpenDocumentIntent( int index )
   {
     Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT ); // API_19
-    intent.setType( TDConst.mMimeType[ index ] );
+    intent.setType( (index < 0)? "*/*" : TDConst.mMimeType[ index ] );
+    intent.addCategory(Intent.CATEGORY_OPENABLE);
+    intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION); // API_19
+    return intent;
+  }
+
+  /** @return a create-document intent - requires API_19 - 20230118 new method
+   * @param index  index of mime type
+   */
+  public static Intent getCreateDocumentIntent( int index )
+  {
+    Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT ); // API_19
+    intent.setType( (index < 0)? "*/*" : TDConst.mMimeType[ index ] );
     intent.addCategory(Intent.CATEGORY_OPENABLE);
     intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION); // API_19
     return intent;

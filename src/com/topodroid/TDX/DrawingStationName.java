@@ -12,6 +12,7 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDMath;
 // import com.topodroid.utils.TDLog;
 import com.topodroid.num.NumStation;
@@ -300,7 +301,9 @@ public class DrawingStationName extends DrawingPointPath
         dos.writeFloat( mAzimuth );
         dos.writeFloat( mClino );
       }
-    } catch ( IOException e ) { }
+    } catch ( IOException e ) {
+      TDLog.Error( e.getMessage() );
+    }
   }
 
   /** deserialize - used to make therion file from binary file
@@ -331,7 +334,9 @@ public class DrawingStationName extends DrawingPointPath
         }
       }
       return ret;
-    } catch ( IOException e ) { }
+    } catch ( IOException e ) {
+      TDLog.Error( e.getMessage() );
+    }
     return null;
   }
 

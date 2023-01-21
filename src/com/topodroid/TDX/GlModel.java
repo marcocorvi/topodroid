@@ -810,7 +810,7 @@ public class GlModel
    * @param x1  left X (west)
    * @param x2  right X (east)
    * @param z1  top Y (north) ?
-   * @param z2  bottom Y (soiuth) ?
+   * @param z2  bottom Y (south) ?
    * @param y1  lower Z (ground)
    * @param y2  upper Z (only for vertical axis line)
    * @param step  grid cell size
@@ -1179,7 +1179,7 @@ public class GlModel
       if ( st.surface_depth > zmax ) { zmax = st.surface_depth; }
       else if ( st.surface_depth < 0.0f ) { st.surface_depth = 0.0f; }
     }
-    if ( zmax > 0 ) {
+    if ( zmax > 0 ) { // always true
       zmax = 1.0 / zmax;
       for ( Cave3DStation st : parser.getStations() ) {
         st.surface_depth *= zmax;

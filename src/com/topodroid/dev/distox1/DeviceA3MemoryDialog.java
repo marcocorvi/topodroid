@@ -233,6 +233,6 @@ public class DeviceA3MemoryDialog extends MyDialog
 
   public void setIndex( int index ) 
   {
-    mETdumpfrom.setText( Integer.toString( index ) );
+    mETdumpfrom.setText( String.format( Locale.US, "%d", index ) );
   }
 }

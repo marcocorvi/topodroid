@@ -845,51 +845,51 @@ public class ExportDXF
         StringWriter sw9 = new StringWriter();
         PrintWriter pw9  = new PrintWriter(sw9);
         double sc2 = sc1 / 2;
-        if ( false ) {      //0.0 is not good and should be made optional (HB)
-          handle = printLine( pw9, handle, "REF", xmin,     ymin,     zmin, xmin+sc1,  ymin,      zmin );
-          handle = printLine( pw9, handle, "REF", xmin,     ymin,     zmin, xmin,      ymin+sc1,  zmin );
-          handle = printLine( pw9, handle, "REF", xmin,     ymin,     zmin, xmin,      ymin,      zmin+sc1 );
-          handle = printLine( pw9, handle, "REF", xmin+sc2, ymin,     zmin, xmin+sc2,  ymin+0.5f, zmin ); // 10 m ticks
-          handle = printLine( pw9, handle, "REF", xmin,     ymin+sc2, zmin, xmin+0.5f, ymin+sc2,  zmin );
-          handle = printLine( pw9, handle, "REF", xmin,     ymin,     zmin+sc2, xmin+0.5f, ymin,  zmin+sc2 );
-          handle = printLine( pw9, handle, "REF", xmin,     ymin,     zmin+sc2, xmin,  ymin+0.5f, zmin+sc2 );
-          handle = printLine( pw9, handle, "REF", xmin+sc1, ymin,     zmin, xmin+sc1,  ymin+0.5f, zmin ); // 20 m ticks
-          handle = printLine( pw9, handle, "REF", xmin,     ymin+sc1, zmin, xmin+0.5f, ymin+sc1,  zmin );
-          handle = printLine( pw9, handle, "REF", xmin,     ymin,     zmin+sc1, xmin+0.5f, ymin,  zmin+sc1 );
-          handle = printLine( pw9, handle, "REF", xmin,     ymin,     zmin+sc1, xmin,      ymin+0.5f,  zmin+sc1 );
-        
-        // out.write( sw9.getBuffer().toString() );
-        
-        // printString( pw9, 0, "LINE" );
-        // handle = inc(handle);
-        // printAcDb( pw9, handle, AcDbEntity, AcDbLine );
-        // printString( pw9, 8, "REF" );
-        // // printInt(  pw9, 39, 0 );         // line thickness
-        // printXYZ( pw9, xmin,       ymin, 0.0f, 0 );
-        // printXYZ( pw9, (xmin+sc1), ymin, 0.0f, 1 );
-        // out.write( sw9.getBuffer().toString() );
+        // if ( false ) { // 0.0 is not good and should be made optional (HB) FIXME commented
+        //   handle = printLine( pw9, handle, "REF", xmin,     ymin,     zmin, xmin+sc1,  ymin,      zmin );
+        //   handle = printLine( pw9, handle, "REF", xmin,     ymin,     zmin, xmin,      ymin+sc1,  zmin );
+        //   handle = printLine( pw9, handle, "REF", xmin,     ymin,     zmin, xmin,      ymin,      zmin+sc1 );
+        //   handle = printLine( pw9, handle, "REF", xmin+sc2, ymin,     zmin, xmin+sc2,  ymin+0.5f, zmin ); // 10 m ticks
+        //   handle = printLine( pw9, handle, "REF", xmin,     ymin+sc2, zmin, xmin+0.5f, ymin+sc2,  zmin );
+        //   handle = printLine( pw9, handle, "REF", xmin,     ymin,     zmin+sc2, xmin+0.5f, ymin,  zmin+sc2 );
+        //   handle = printLine( pw9, handle, "REF", xmin,     ymin,     zmin+sc2, xmin,  ymin+0.5f, zmin+sc2 );
+        //   handle = printLine( pw9, handle, "REF", xmin+sc1, ymin,     zmin, xmin+sc1,  ymin+0.5f, zmin ); // 20 m ticks
+        //   handle = printLine( pw9, handle, "REF", xmin,     ymin+sc1, zmin, xmin+0.5f, ymin+sc1,  zmin );
+        //   handle = printLine( pw9, handle, "REF", xmin,     ymin,     zmin+sc1, xmin+0.5f, ymin,  zmin+sc1 );
+        //   handle = printLine( pw9, handle, "REF", xmin,     ymin,     zmin+sc1, xmin,      ymin+0.5f,  zmin+sc1 );
+        // 
+        // // out.write( sw9.getBuffer().toString() );
+        // 
+        // // printString( pw9, 0, "LINE" );
+        // // handle = inc(handle);
+        // // printAcDb( pw9, handle, AcDbEntity, AcDbLine );
+        // // printString( pw9, 8, "REF" );
+        // // // printInt(  pw9, 39, 0 );         // line thickness
+        // // printXYZ( pw9, xmin,       ymin, 0.0f, 0 );
+        // // printXYZ( pw9, (xmin+sc1), ymin, 0.0f, 1 );
+        // // out.write( sw9.getBuffer().toString() );
 
-        // StringWriter sw8 = new StringWriter();
-        // PrintWriter pw8  = new PrintWriter(sw8);
-        // printString( pw8, 0, "LINE" );
-        // handle = inc(handle);
-        // printAcDb( pw8, handle, AcDbEntity, AcDbLine );
-        // printString( pw8, 8, "REF" );
-        // // printInt(  pw8, 39, 0 );         // line thickness
-        // printXYZ( pw8, xmin, ymin, 0.0f, 0 );
-        // printXYZ( pw8, xmin, ymin+sc1, 0.0f, 1 );
-        // out.write( sw8.getBuffer().toString() );
-        // out.flush();
-        
-        // offset axes legends by 1
-        // StringWriter sw7 = new StringWriter();
-        // PrintWriter pw7  = new PrintWriter(sw7);
-          handle = printText( pw9, handle, scale_len, xmin+sc1, ymin+1,   zmin+1,   0, AXIS_SCALE, "REF", style_dejavu );
-          handle = printText( pw9, handle, scale_len, xmin+1,   ymin+sc1, zmin+1,   0, AXIS_SCALE, "REF", style_dejavu );
-          handle = printText( pw9, handle, scale_len, xmin+1,   ymin+1,   zmin+sc1, 0, AXIS_SCALE, "REF", style_dejavu );
-          out.write( sw9.getBuffer().toString() );
-          out.flush();
-        }
+        // // StringWriter sw8 = new StringWriter();
+        // // PrintWriter pw8  = new PrintWriter(sw8);
+        // // printString( pw8, 0, "LINE" );
+        // // handle = inc(handle);
+        // // printAcDb( pw8, handle, AcDbEntity, AcDbLine );
+        // // printString( pw8, 8, "REF" );
+        // // // printInt(  pw8, 39, 0 );         // line thickness
+        // // printXYZ( pw8, xmin, ymin, 0.0f, 0 );
+        // // printXYZ( pw8, xmin, ymin+sc1, 0.0f, 1 );
+        // // out.write( sw8.getBuffer().toString() );
+        // // out.flush();
+        // 
+        // // offset axes legends by 1
+        // // StringWriter sw7 = new StringWriter();
+        // // PrintWriter pw7  = new PrintWriter(sw7);
+        //   handle = printText( pw9, handle, scale_len, xmin+sc1, ymin+1,   zmin+1,   0, AXIS_SCALE, "REF", style_dejavu );
+        //   handle = printText( pw9, handle, scale_len, xmin+1,   ymin+sc1, zmin+1,   0, AXIS_SCALE, "REF", style_dejavu );
+        //   handle = printText( pw9, handle, scale_len, xmin+1,   ymin+1,   zmin+sc1, 0, AXIS_SCALE, "REF", style_dejavu );
+        //   out.write( sw9.getBuffer().toString() );
+        //   out.flush();
+        // }
         // FACETS
         if ( b_walls ) {
           StringWriter sw10 = new StringWriter();

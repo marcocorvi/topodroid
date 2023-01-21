@@ -11,6 +11,8 @@
  */
 package com.topodroid.ptopo;
 
+import com.topodroid.utils.TDLog;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.IOException;
@@ -49,6 +51,7 @@ class PTString
         shift += 7;
       } while ( (b & 0x80) != 0 );
     } catch ( IOException e ) {
+      TDLog.Error( e.getMessage() );
     }
 
     if ( len > 0 ) {
@@ -78,6 +81,7 @@ class PTString
         fs.write( chars, 0, _str.length() );
       }
     } catch ( IOException e ) {
+      TDLog.Error( e.getMessage() );
     }
   }
 

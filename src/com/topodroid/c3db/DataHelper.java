@@ -40,7 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 // import java.util.Locale;
 
-@SuppressWarnings("SyntaxError")
+// @SuppressWarnings("SyntaxError")
 public class DataHelper extends DataSetObservable
 {
   private static final String SURVEY_TABLE = "surveys";

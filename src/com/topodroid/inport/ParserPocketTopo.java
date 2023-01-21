@@ -336,7 +336,7 @@ class ParserPocketTopo extends ImportParser
         throw new ParserException();
       }
     }
-    return ret;
+    return ret; // always true
   }
 
 

@@ -19,6 +19,7 @@ import com.topodroid.TDX.R;
 import com.topodroid.dev.distox.IMemoryDialog;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import android.os.Bundle;
 import android.content.Context;
@@ -146,7 +147,7 @@ public class DeviceX310MemoryDialog extends MyDialog
 
   public void setIndex( int index ) 
   {
-    mETdumpfrom.setText( Integer.toString( index ) );
+    mETdumpfrom.setText( String.format( Locale.US, "%d", index ) );
   }
 
 }

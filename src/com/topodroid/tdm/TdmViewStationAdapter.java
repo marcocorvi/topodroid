@@ -108,7 +108,7 @@ class TdmViewStationAdapter extends ArrayAdapter< TdmViewStation >
 
     ViewHolder holder = null; 
     if ( convertView == null ) {
-      convertView = mLayoutInflater.inflate( R.layout.tdviewstation_adapter, null );
+      convertView = mLayoutInflater.inflate( R.layout.tdviewstation_adapter, null ); // parent crashes app
       holder = new ViewHolder();
       holder.cb = (CheckBox) convertView.findViewById( R.id.station );
       holder.cb.setOnClickListener( this );
@@ -148,7 +148,7 @@ class TdmViewStationAdapter extends ArrayAdapter< TdmViewStation >
     for ( TdmViewStation station : mItems ) {
       if ( station.name().equals( item.toString() ) ) {
         station.setChecked( true );
-        if ( mTextView != null ) mTextView.setText( station.name() + "@" + mCommand.name() );
+        if ( mTextView != null ) mTextView.setText( String.format( "%s@%s", station.name(), mCommand.name() ) );
       } else {
         station.setChecked( false );
       }

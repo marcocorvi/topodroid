@@ -374,7 +374,9 @@ class ShotNewDialog extends MyDialog
       try {
         bx = 360 - Float.parseFloat( b.replace(',','.') ); // DIVING_BEARING
         if ( bx >= 360 ) bx -= 360;
-      } catch ( NumberFormatException e ) { }
+      } catch ( NumberFormatException e ) {
+        TDLog.Error( e.getMessage() );
+      }
     }
     return bx;
   }
@@ -629,7 +631,7 @@ class ShotNewDialog extends MyDialog
       mTimer = new TimerTask( this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
       mTimer.execute();
     } else if ( cameraCheck && b == mBtnCamera ) {
-      new QCamCompass( mContext, mApp.mShotWindow, this, null, true, true, PhotoInfo.CAMERA_TOPODROID ).show();
+      new QCamCompass( mContext, TopoDroidApp.mShotWindow, this, null, true, true, PhotoInfo.CAMERA_TOPODROID ).show();
                        // null inserter, with_box, with_delay
     } else if ( b == mBtnBack ) {
       dismiss();

@@ -1344,7 +1344,7 @@ public class MainWindow extends Activity
       case TDRequest.REQUEST_GET_IMPORT: // handle a survey/zip import 
         if ( result == Activity.RESULT_OK ) {
           String filename;              // import filename
-          Uri uri = intent.getData();   // import uri
+          Uri uri = intent.getData();   // import uri - may NullPointerException
           String mimetype = TDsafUri.getDocumentType( uri );
           if ( mimetype == null ) {
             String path = TDsafUri.getDocumentPath(this, uri);
@@ -1354,10 +1354,10 @@ public class MainWindow extends Activity
               int ros = filename.indexOf(":"); // drop the "content" header
               if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
               // TDLog.v("import path NULL filename " + filename );
-              if ( filename != null ) {
+              // if ( filename != null ) { // always true
                 int pos = filename.lastIndexOf("/");
                 filename = filename.substring( pos+1 );
-              }
+              // }
               // TDLog.v( "URI to import: " + uri.toString() + " null mime, null path, filename <" + filename + ">" );
             } else {
               // filename = (new File(path)).getName(); // FILE to get the survey name
@@ -1383,13 +1383,17 @@ public class MainWindow extends Activity
               FileInputStream fis = TDsafUri.docFileInputStream( pfd );
               // if ( fis.markSupported() ) fis.mark();
               int manifest_ok = Archiver.getOkManifest( mApp, fis );
-              try { fis.close(); } catch ( IOException e ) { }
+              try { fis.close(); } catch ( IOException e ) {
+                TDLog.Error( e.getMessage() );
+              }
               TDsafUri.closeFileDescriptor( pfd );
               if ( manifest_ok >= 0 ) {
                 ParcelFileDescriptor pfd2 = TDsafUri.docReadFileDescriptor( uri );
                 FileInputStream fis2 = TDsafUri.docFileInputStream( pfd2 );
                 Archiver.unArchive( mApp, fis2 ); 
-                try { fis2.close(); } catch ( IOException e ) { }
+                try { fis2.close(); } catch ( IOException e ) {
+                  TDLog.Error( e.getMessage() );
+                }
                 TDsafUri.closeFileDescriptor( pfd2 );
               } else {
                 TDLog.Error("ZIP import: failed manifest " + manifest_ok );
@@ -1535,13 +1539,17 @@ public class MainWindow extends Activity
             } else if ( key.equals("VERSION") ) {
               try {
                 version = Integer.parseInt( token[1] );
-              } catch ( NumberFormatException e ) { }
+              } catch ( NumberFormatException e ) {
+                TDLog.Error( e.getMessage() );
+              }
             }
           }
         }
         br.close();
       } catch ( FileNotFoundException e ) {
+        TDLog.Error( e.getMessage() );
       } catch ( IOException e ) {
+        TDLog.Error( e.getMessage() );
       }
       // TDLog.v("MAN manifest " + lang + " " + version );
       if ( lang != null && version > 0 ) {

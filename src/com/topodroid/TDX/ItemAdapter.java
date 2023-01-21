@@ -268,7 +268,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
     boolean doubleclick = false;
     if ( v instanceof CheckBox ) {
       CheckBox cb = (CheckBox)v;
-      if ( /* mOnClickReact && */ cb != null ) {
+      if ( /* mOnClickReact && */ cb != null ) { // always true
         int pos = 0;
         for ( ItemSymbol item : mItems ) {
           if ( cb == item.mCheckBox ) {

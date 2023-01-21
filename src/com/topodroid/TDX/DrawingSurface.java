@@ -111,7 +111,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   // TH2EDIT
   public boolean setScrapOptions( int idx, String options )
   {
-    return ( commandManager != null )? commandManager.setScrapOptions( idx, options ) : false;
+    return commandManager != null && commandManager.setScrapOptions(idx, options);
   }
 
   // -----------------------------------------------------

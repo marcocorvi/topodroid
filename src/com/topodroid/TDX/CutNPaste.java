@@ -12,7 +12,7 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
-import static android.view.Gravity.LEFT;
+// import static android.view.Gravity.LEFT;
 
 import com.topodroid.dev.distox_ble.DistoXBLETakeShot; // SIWEI
 
@@ -99,7 +99,7 @@ public class CutNPaste
             mClipboardText = edit_text.getText().toString();
             edit_text.setText(TDString.EMPTY);
             String str = String.format( context.getResources().getString( R.string.copied ), mClipboardText );
-            TDToast.makeGravity( str, LEFT | Gravity.TOP );
+            TDToast.makeGravity( str, Gravity.START | Gravity.TOP );
           }
           dismissPopup();
         }
@@ -113,7 +113,7 @@ public class CutNPaste
           if ( edit_text != null ) {
             mClipboardText = edit_text.getText().toString();
             String str = String.format( context.getResources().getString( R.string.copied ), mClipboardText );
-            TDToast.makeGravity( str, LEFT | Gravity.TOP );
+            TDToast.makeGravity( str, Gravity.START | Gravity.TOP );
           }
           dismissPopup();
         }

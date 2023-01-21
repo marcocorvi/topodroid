@@ -385,7 +385,7 @@ public class DrawingTh
               while ( (line = readLine( br )) != null ) {
                 if ( line.contains( "l-size" ) ) continue;
                 if ( line.equals( "endline" ) ) {
-                  if ( path != null ) {
+                  if ( path != null ) { // always true
                     if ( thname.equals( SymbolLibrary.SECTION) ) { // section line only in non-section scraps
                       path.makeStraight( );
                     } else {

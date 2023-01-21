@@ -18,6 +18,8 @@ package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
 
+import com.topodroid.utils.TDLog;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
@@ -149,7 +151,9 @@ class ParserDEM extends DEMsurface
       mIsr.close(); 
       mIsr = null;
       mBr  = null;
-    } catch ( IOException e ) {}
+    } catch ( IOException e ) {
+      TDLog.Error( e.getMessage() );
+    }
   }
 
 }

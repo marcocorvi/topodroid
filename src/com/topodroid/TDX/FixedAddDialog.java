@@ -17,6 +17,7 @@ import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 
 import com.topodroid.mag.WorldMagneticModel;
+import com.topodroid.utils.TDLog;
 
 import java.util.Locale;
 
@@ -337,7 +338,9 @@ class FixedAddDialog extends MyDialog
           if ( accur_str.length() > 0 ) {
             try {
               accur = Double.parseDouble( accur_str );
-            } catch ( NumberFormatException e ) { }
+            } catch ( NumberFormatException e ) {
+              TDLog.Error( e.getMessage() );
+            }
           }
         }
         mParent.addFixedPoint( name, mLng, mLat, mHEll, mHGeo, comment, FixedInfo.SRC_MANUAL, accur, -1 ); // NOTE vert accuracy is always unset

@@ -553,10 +553,11 @@ public class TdmConfigActivity extends Activity
   {
     // if ( ! TDSetting.mExportUri ) return; // FIXME-URI
     // Intent intent = new Intent( Intent.ACTION_INSERT_OR_EDIT );
-    Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
-    intent.setType( TDConst.mMimeType[index] );
-    intent.addCategory(Intent.CATEGORY_OPENABLE);
-    intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+    // Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
+    // intent.setType( TDConst.mMimeType[index] );
+    // intent.addCategory(Intent.CATEGORY_OPENABLE);
+    // intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+    Intent intent = TDandroid.getCreateDocumentIntent( index );
     // intent.putExtra( "exporttype", index ); // index is not returned to the app
     intent.putExtra( Intent.EXTRA_TITLE, filename );
     mExportIndex = index;

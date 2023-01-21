@@ -205,7 +205,7 @@ public class Parser3d extends TglParser
       for ( ; ; ) {
         line = readline( dis );
         // TDLog.v("3d @ " + line ); // <proj4>
-        if ( line == null ) break;
+        if ( line == null ) break; // always false
         if ( line.startsWith("@") ) break;
       } 
 
@@ -236,7 +236,7 @@ public class Parser3d extends TglParser
           handleLabel( dis, code );
         }
       }
-      if ( dis != null ) dis.close(); 
+      /* if ( dis != null ) */ dis.close(); // test always true
     } catch ( IOException e ) { 
       TDLog.Error("3d error " + e.getMessage() );
     }

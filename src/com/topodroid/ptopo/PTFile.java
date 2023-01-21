@@ -120,6 +120,7 @@ public class PTFile
     try { 
       fs.write( b );
     } catch ( IOException e ) {
+      TDLog.Error( e.getMessage() );
     }
   }
 
@@ -330,6 +331,7 @@ public class PTFile
         byte[] header = { 'T', 'o', 'p', (byte)3 };
         fs.write( header, 0, 4 );
       } catch( IOException e ) {
+        TDLog.Error( e.getMessage() );
       }
       PTFile.writeInt( fs, _trips.size() );
       for ( PTTrip t : _trips ) t.write( fs );

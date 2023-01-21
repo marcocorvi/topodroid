@@ -649,7 +649,7 @@ public class DataHelper extends DataSetObservable
             try { // 20280118 try - catch
               sb.append(((Integer) cnts.get(addr)).intValue()).append(" ");
             } catch ( NullPointerException e ) {
-              // TODO
+              TDLog.Error( e.getMessage() );
             }
           }
           stat.deviceCnt = sb.toString();
@@ -1439,7 +1439,8 @@ public class DataHelper extends DataSetObservable
   }
 
   // used internally to merge to next leg
-  private void updateShotNameAndLeg( long id, long sid, String fStation, String tStation, int leg )
+  @SuppressWarnings("SameParameterValue")
+  private void updateShotNameAndLeg(long id, long sid, String fStation, String tStation, int leg )
   {
     if ( myDB == null ) return;
     if ( fStation == null ) fStation = TDString.EMPTY;
@@ -1695,7 +1696,7 @@ public class DataHelper extends DataSetObservable
           float depth = depths.get(from).floatValue() - shot.len * TDMath.sind(shot.cln);
           depths.put(to, Float.valueOf(depth));
         } catch ( NullPointerException e ) {
-          // TODO
+          TDLog.Error( e.getMessage() );
         }
         // TDLog.v( "processed shot <" + from + "-" + to + "> shots " + stack.size() + "add station <" + to + "> depth " + depth );
       }
@@ -1707,9 +1708,9 @@ public class DataHelper extends DataSetObservable
         }
         try { // 20280118 try - catch
           float depth = depths.get(to).floatValue() + shot.len * TDMath.sind(shot.cln);
-          depths.put(from, Float.valueOf(depth));
+          depths.put( from, Float.valueOf( depth ) );
         } catch ( NullPointerException e ) {
-          // TODO
+          TDLog.Error( e.getMessage() );
         }
         // TDLog.v( "processed shot <" + from + "-" + to + "> shots " + stack.size() + "add station <" + from + "> depth " + depth );
       }
@@ -1795,9 +1796,9 @@ public class DataHelper extends DataSetObservable
     return doSimpleInsertShot( sid, id, millis, color, d, b, c, r, extend, stretch, leg, 0L, shot_type, addr );
   }
 
-  long insertManualShot( long sid, long id, long millis, long color, double d, double b, double c, double r,
-		   long extend, double stretch, long leg,
-                   long shot_type )
+  long insertManualShot(long sid, @SuppressWarnings("SameParameterValue") long id, long millis, long color, double d, double b, double c, double r,
+                        long extend, double stretch, long leg,
+                        long shot_type )
   { // leg, 0L=status, type 
     // return doInsertShot( sid, id, millis, color, "", "",  d, b, c, r, extend, stretch, DBlock.FLAG_SURVEY, leg, 0L, shot_type, "", "" );
     return doSimpleInsertShot( sid, id, millis, color, d, b, c, r, extend, stretch, leg, 0L, shot_type, "" );
@@ -5927,7 +5928,9 @@ public class DataHelper extends DataSetObservable
        }
        fr.close();
      } catch ( FileNotFoundException e ) { // DistoX-SAF
+       TDLog.Error( e.getMessage() );
      } catch ( IOException e ) {
+       TDLog.Error( e.getMessage() );
      }
      // TDLog.v( "DB success: " + success + " SID " + sid );
 

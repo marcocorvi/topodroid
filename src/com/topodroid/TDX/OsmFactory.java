@@ -15,6 +15,7 @@ package com.topodroid.TDX;
 // import com.topodroid.TDX.DPoint2D;
 
 import com.topodroid.mag.Geodetic;
+import com.topodroid.utils.TDLog;
 
 import android.graphics.Bitmap;
 import android.graphics.Paint;
@@ -206,7 +207,9 @@ public class OsmFactory
   {
     try {
       return Double.parseDouble( getValue( line, pos ) );
-    } catch ( NumberFormatException e ) { }
+    } catch ( NumberFormatException e ) {
+      TDLog.Error( e.getMessage() );
+    }
     return 0;
   }
 
@@ -260,7 +263,7 @@ public class OsmFactory
         } else if ( line.startsWith( "<way" ) ) {
           way = new Way();
         } else if ( line.startsWith( "</way>" ) ) {
-          way.draw( canvas ); // FIXME may null pointer
+          way.draw( canvas ); // FIXME may NullPointerException
           way = null;
         } else if ( line.startsWith( "<relation" ) ) {
         } else if ( line.startsWith( "</relation" ) ) {
@@ -323,10 +326,13 @@ public class OsmFactory
           }
         }
       }
-    } catch ( IOException e ) { 
+    } catch ( IOException e ) {
+      TDLog.Error( e.getMessage() );
     } finally {
       if ( isr != null ) {
-        try { isr.close(); } catch ( IOException e ) { }
+        try { isr.close(); } catch ( IOException e ) {
+          TDLog.Error( e.getMessage() );
+        }
       }
     }
     return bitmap;

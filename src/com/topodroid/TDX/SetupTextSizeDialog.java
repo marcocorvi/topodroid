@@ -154,7 +154,7 @@ class SetupTextSizeDialog extends MyDialog
        mParent.doNextSetup( -1 );
        dismiss();
      } else if ( b == mBtnNext ) {
-       mParent.getApp().setTextSize( mSize );
+       TopoDroidApp.setTextSize( mSize );
        mParent.updateDisplay();
        mParent.doNextSetup( mSetup + 1 );
        dismiss();

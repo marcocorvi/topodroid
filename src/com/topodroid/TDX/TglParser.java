@@ -42,7 +42,7 @@ import java.io.PrintWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
+// import java.io.FileInputStream;
 // import java.io.FileOutputStream;
 // import java.io.BufferedInputStream;
 // import java.io.BufferedOutputStream;
@@ -555,10 +555,10 @@ public class TglParser
 
   protected void setStationDepths( )
   {
-    double deltaz = zmax - zmin + 0.001f;
+    double delta_z = zmax - zmin + 0.001f;
     int k = 0;
     for ( Cave3DStation s : stations ) {
-      s.depth = (zmax - s.z)/deltaz; // Z depth
+      s.depth = (zmax - s.z)/delta_z; // Z depth
       // TDLog.v("Depth " + s.name + " " + s.depth ); 
     }  
     if ( stations.size() > 0 ) do_render = true;
@@ -675,7 +675,9 @@ public class TglParser
       try {
         dos.flush();
         dos.close();
-      } catch ( IOException e ) { }
+      } catch ( IOException e ) {
+        TDLog.Error( e.getMessage() );
+      }
     }
     return ret;
   }
@@ -760,7 +762,9 @@ public class TglParser
       try {
         osw.flush();
         osw.close();
-      } catch ( IOException e ) { }
+      } catch ( IOException e ) {
+        TDLog.Error( e.getMessage() );
+      }
     }
     return ret;
   }
@@ -1045,16 +1049,16 @@ public class TglParser
    */
   public void addShot( Cave3DShot shot ) 
   { 
-    Cave3DStation fstation = getStation( shot.from );
-    shot.setFromStation( fstation );
+    Cave3DStation f_station = getStation( shot.from );
+    shot.setFromStation( f_station );
     if ( TDString.isNullOrEmpty( shot.to ) ) {
       splays.add( shot );
       shot.to = "";
       shot.setToStation( null );
     } else {
       shots.add( shot );
-      Cave3DStation tstation = getStation( shot.to );
-      shot.setToStation( tstation );
+      Cave3DStation t_station = getStation( shot.to );
+      shot.setToStation( t_station );
     }
   }
 
@@ -1187,9 +1191,9 @@ public class TglParser
   //   has_temperature = false; 
   //   int sz = stations.size();
   //   if ( sz <= 0 ) return false;
-  //   boolean[] kfix = new boolean[ sz ];
+  //   boolean[] k_fix = new boolean[ sz ];
   //   for ( int k = 0; k < sz; ++k ) {
-  //     kfix[ k ] = false;
+  //     k_fix[ k ] = false;
   //     stations.get( k ).temp = -1000;
   //     // TDLog.v("station " + stations.get( k ).getName() );
   //   }
@@ -1206,7 +1210,7 @@ public class TglParser
   //       if ( idx < 0 ) {
   //         // TDLog.v("missing station " + vals[0] );
   //       } else {
-  //         kfix[idx] = true;
+  //         k_fix[idx] = true;
   //         double t = Double.parseDouble( vals[1] );
   //         stations.get( idx ).temp = t;
   //         sum += t;
@@ -1228,7 +1232,7 @@ public class TglParser
   //     delta = 0;
   //     for ( int k = 0; k < sz; ++k ) {
   //       Cave3DStation s1 = stations.get( k );
-  //       if ( ! kfix[k] ) {
+  //       if ( ! k_fix[k] ) {
   //         double tn = 0;
   //         double td = 0;
   //         for ( Cave3DShot leg : getLegsAtFrom( s1 ) ) {

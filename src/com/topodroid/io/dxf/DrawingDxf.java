@@ -1046,8 +1046,12 @@ public class DrawingDxf
       layer2 = "SCRAP_" + Integer.toString( scrap ); //
       //layer = inttostr(z);
       Symbol line2 = BrushManager.getLineByIndex(BrushManager.getLineIndexByThName(line.getThName()));
-      color = DxfColor.rgbToIndex(line2.getColor()); // FIXME may null pointer
-      //color = 1;
+      color = 1;
+      try {
+        color = DxfColor.rgbToIndex( line2.getColor() );
+      } catch ( NullPointerException e ) {
+        TDLog.Error( e.getMessage() );
+      }
       // TDLog.v( "HBX_DXF <" + line.getThName() + "> " + String.format("%X %X ", ref_handle, color) + layer + layer2+" "+color);
     } else {
       linetype = DXF.lt_byLayer;
@@ -1097,10 +1101,14 @@ public class DrawingDxf
     if ( TDSetting.mAcadLayer ) {
       linetype = layer;
       layer2 = "SCRAP_" + Integer.toString( scrap );
-      //layer = inttostr(z);
+      // layer = inttostr(z);
       Symbol area2 = BrushManager.getAreaByIndex(BrushManager.getAreaIndexByThName(area.getThName()));
-      color = DxfColor.rgbToIndex(area2.getColor()); // FIXME may null pointer
-      //int color = 1;
+      color = 1;
+      try {
+        DxfColor.rgbToIndex(area2.getColor());
+      } catch ( NullPointerException e ) {
+        TDLog.Error( e.getMessage() );
+      }
     } else {
       linetype = DXF.lt_byLayer;
       layer2 = layer;

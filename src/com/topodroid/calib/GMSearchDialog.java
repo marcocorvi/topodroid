@@ -23,6 +23,7 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.TDConst;
 import com.topodroid.TDX.GMActivity;
 import com.topodroid.TDX.R;
+import com.topodroid.utils.TDLog;
 
 import android.os.Bundle;
 // import android.app.Dialog;
@@ -98,7 +99,9 @@ public class GMSearchDialog extends MyDialog
       float error = 1.0f; // degrees
       try { 
         error = Float.parseFloat( mError.getText().toString().trim() );
-      } catch ( NumberFormatException e ) { }
+      } catch ( NumberFormatException e ) {
+        TDLog.Error( e.getMessage() );
+      }
       mParent.searchData( error );
     } else if ( b == mBtnClear ) {
       mParent.clearSearchResult();

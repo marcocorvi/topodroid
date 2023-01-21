@@ -74,7 +74,8 @@ class PacketData
         double c = MemoryOctet.toInt( buf[6], buf[5] );
         // X31--ready
         // mRollHigh = buf[7];
-        int r7 = (int)(buf[7] & 0xff); if ( r7 < 0 ) r7 += 256;
+        int r7 = (int)(buf[7] & 0xff);
+        if ( r7 < 0 ) r7 += 256; // always false
         // double r = (buf[7] & 0xff);
         double r = r7;
 

@@ -19,7 +19,7 @@ import com.topodroid.TDX.TDandroid;
 import java.io.IOException;
 import java.util.Locale;
 import android.os.Build;
-import android.media.ExifInterface; // REQUIRES android.support
+import android.media.ExifInterface; // REQUIRES android.support - suggested: androidx.media.ExifInterface
 
 public class ExifInfo
 {
@@ -178,7 +178,9 @@ public class ExifInfo
           try {
             mCamera = Integer.parseInt( vals[0] );
             mOrientation = Integer.parseInt( vals[1] );
-          } catch ( NumberFormatException e ) { }
+          } catch ( NumberFormatException e ) {
+            TDLog.Error( e.getMessage() );
+          }
         }
         TDLog.v("EXIF from MAKER_NOTE orientation " + mOrientation + " camera " + mCamera );
       } else {
@@ -221,11 +223,19 @@ public class ExifInfo
         // TDLog.v( "EXIF azimuth " + azimuth + " " + bref + " clino " + clino + " " + cref );
         int k = azimuth.indexOf('/');
 	if ( k >= 0 ) {
-          try { mAzimuth = bsign * Integer.parseInt( azimuth.substring(0,k) ) / 100.0f; } catch ( NumberFormatException e ) { }
+          try {
+            mAzimuth = bsign * Integer.parseInt( azimuth.substring(0,k) ) / 100.0f;
+          } catch ( NumberFormatException e ) {
+            TDLog.Error( e.getMessage() );
+          }
 	}
         k = clino.indexOf('/');
 	if ( k >= 0 ) {
-          try { mClino = csign * Integer.parseInt( clino.substring(0,k) ) / 100.0f; } catch ( NumberFormatException e ) { }
+          try {
+            mClino = csign * Integer.parseInt( clino.substring(0,k) ) / 100.0f;
+          } catch ( NumberFormatException e ) {
+            TDLog.Error( e.getMessage() );
+          }
 	}
         // TDLog.v( "Long <" + mAzimuth + "> Lat <" + mClino + "> " );
       }

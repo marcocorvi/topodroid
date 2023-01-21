@@ -107,7 +107,9 @@ abstract class ImportTask extends AsyncTask< String, Integer, Long >
   {
     try {
       if ( mPfd != null ) mPfd.close();
-    } catch ( IOException e ) { }
+    } catch ( IOException e ) {
+      TDLog.Error( e.getMessage() );
+    }
 
     mProgress.dismiss();
     MainWindow main = mMain.get();

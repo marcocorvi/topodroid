@@ -237,7 +237,9 @@ public class TDUtil
     if ( date != null && date.length() >= 4 ) {
       try {
         return Integer.parseInt( date.substring(0, 4) );
-      } catch ( NumberFormatException e ) { }
+      } catch ( NumberFormatException e ) {
+        TDLog.Error( e.getMessage() );
+      }
     }
     return 1970;
   }

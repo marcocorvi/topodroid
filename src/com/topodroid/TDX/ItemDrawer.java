@@ -277,10 +277,10 @@ abstract class ItemDrawer extends Activity
   {
     float scale = TDSetting.mToPdf;
     RectF bnds = manager.getBitmapBounds( scale );
-    bnds = new  RectF((bnds.left   - PDF_MARGIN * scale)/1,
-                      (bnds.top    - PDF_MARGIN * scale)/1,
-                      (bnds.right  + PDF_MARGIN * scale)/1,
-                      (bnds.bottom + PDF_MARGIN * scale)/1); // HBX
+    bnds = new  RectF((bnds.left   - PDF_MARGIN * scale),
+                      (bnds.top    - PDF_MARGIN * scale),
+                      (bnds.right  + PDF_MARGIN * scale),
+                      (bnds.bottom + PDF_MARGIN * scale)); // HBX
     int zw = (int)(bnds.right - bnds.left); // margin 40 + 80 6.1.76 HBX
     int zh = (int)(bnds.bottom - bnds.top); // HBX
     // TDLog.v( "rect " + bnds.right + " " + bnds.left + " == " + bnds.bottom + " " + bnds.top + " W " + zw + " H " + zh );

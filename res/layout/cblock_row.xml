@@ -22,21 +22,21 @@
       android:layout_height="wrap_content"
       android:textSize="@dimen/textsize"
       android:typeface="monospace"
-      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginEnd="@dimen/marginh"
     />
     <TextView android:id="@+id/error"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:textSize="@dimen/textsize"
       android:typeface="monospace"
-      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginEnd="@dimen/marginh"
     />
     <TextView android:id="@+id/data"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:textSize="@dimen/textsizesmall"
       android:typeface="monospace"
-      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginEnd="@dimen/marginh"
     />
   </LinearLayout>
 </ScrollView>

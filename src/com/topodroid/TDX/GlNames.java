@@ -501,7 +501,7 @@ public class GlNames extends GlShape
       }
       bitmap0.eraseColor(0);
       Canvas canvas = new Canvas(bitmap0); // get a canvas to paint over the bitmap
-      if ( canvas == null ) {
+      if ( canvas == null ) { // always false
         TDLog.Error("NAMES null canvas");
         bitmap0.recycle();
         bitmap0 = null;

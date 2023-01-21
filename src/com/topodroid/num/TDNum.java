@@ -723,11 +723,11 @@ public class TDNum
     // try to see if any temp-shot station is on the list of stations
     NumStation sf = getStation( ts.from );
     NumStation st = getStation( ts.to );
-    int  iext = DBlock.getIntExtend( ts.extend ); // integer extend
-    float fext = DBlock.getReducedExtend( ts.extend, ts.stretch ); // float extend - used for station coords
-    float aext = fext; // station azimuth extends
+    int  i_ext = DBlock.getIntExtend( ts.extend ); // integer extend
+    float f_ext = DBlock.getReducedExtend( ts.extend, ts.stretch ); // float extend - used for station coords
+    float a_ext = f_ext; // station azimuth extends
     if ( sf != null ) {
-      sf.addAzimuth( ts.b(), aext );
+      sf.addAzimuth( ts.b(), a_ext );
       if ( st != null ) { // loop-closure -: need the loop length to compute the fractional closure error
         // do close loop also on duplicate shots
         if ( shot_fmt != null ) {
@@ -737,23 +737,23 @@ public class TDNum
           (new ClosureTask( this, shot_fmt, shots, paths, sf, st, ts.d(), ts.b(), ts.c() )).execute();
         }
         if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
-          addOpenLoopShot( sf, ts, iext, aext, fext, anomaly ); // keep loop open: new station( id=ts.to, from=sf, ... )
+          addOpenLoopShot( sf, ts, i_ext, a_ext, f_ext, anomaly ); // keep loop open: new station( id=ts.to, from=sf, ... )
         } else { // TDLog.v( "close loop at " + sf.name + " " + st.name );
           NumShot sh = makeShotFromTmp( sf, st, ts, 0, sf.mAnomaly, mDecl ); 
           addShotToStations( sh, sf, st );
         }
         // float length = ts.d();
-        // if ( iext == 0 ) length = TDMath.sqrt( length*length - ts.h()*ts.h() );
-        addToStats( ts.duplicate, ts.surface, ts.d(), ((iext == 0)? Math.abs(ts.v()) : ts.d()), ts.h() );
+        // if ( i_ext == 0 ) length = TDMath.sqrt( length*length - ts.h()*ts.h() );
+        addToStats( ts.duplicate, ts.surface, ts.d(), ((i_ext == 0)? Math.abs(ts.v()) : ts.d()), ts.h() );
       }
       else // st null || st isBarrier
       { // forward shot: from --> to
-        addForwardShot( sf, ts, iext, aext, fext, anomaly );
+        addForwardShot( sf, ts, i_ext, a_ext, f_ext, anomaly );
       }
     }
     else if ( st != null ) 
     { // sf == null: reversed shot only difference is '-' sign in new NumStation, and the new station is sf
-      addReversedShot( st, ts, iext, aext, fext, anomaly );
+      addReversedShot( st, ts, i_ext, a_ext, f_ext, anomaly );
     }
   }
 
@@ -892,25 +892,25 @@ public class TDNum
     mUnattachedShots = new ArrayList<>();
     mBadLoops = new ArrayList<>();
 
-    List< TriShot > tmpshots   = new ArrayList<>();
-    List< TriSplay > tmpsplays = new ArrayList<>();
+    List< TriShot > tmp_shots   = new ArrayList<>();
+    List< TriSplay > tmp_splays = new ArrayList<>();
 
-    initShots( data, tmpshots, tmpsplays );
-    // TDLog.Log( TDLog.LOG_NUM, "data " + data.size() + " shots " + tmpshots.size() + " splays " + tmpsplays.size() );
+    initShots( data, tmp_shots, tmp_splays );
+    // TDLog.Log( TDLog.LOG_NUM, "data " + data.size() + " shots " + tmp_shots.size() + " splays " + tmp_splays.size() );
 
     if ( TDSetting.mLoopClosure == TDSetting.LOOP_TRIANGLES ) {
-      makeTrilateration( tmpshots );
+      makeTrilateration( tmp_shots );
     }
 
     // ---------------------------------- SIBLINGS and BACKSIGHT -------------------------------
-    for ( TriShot tsh : tmpshots ) { // clear backshot, sibling, and multibad
+    for ( TriShot tsh : tmp_shots ) { // clear backshot, sibling, and multibad
       tsh.backshot = 0;    
       tsh.sibling  = null; // link to sibling shots
       tsh.getFirstBlock().setMultiBad( false );
     }
 
-    for ( int i = 0; i < tmpshots.size(); ++i ) {
-      TriShot ts0 = tmpshots.get( i );
+    for ( int i = 0; i < tmp_shots.size(); ++i ) {
+      TriShot ts0 = tmp_shots.get( i );
       addToInLegError( ts0 );
       if ( ts0.backshot != 0 ) continue; // skip siblings
 
@@ -920,8 +920,8 @@ public class TDNum
       String to   = ts0.to;
       // if ( from == null || to == null ) continue; // FIXME
       TriShot ts1 = ts0; // last sibling (head = the shot itself)
-      for ( int j=i+1; j < tmpshots.size(); ++j ) {
-        TriShot ts2 = tmpshots.get( j );
+      for ( int j=i+1; j < tmp_shots.size(); ++j ) {
+        TriShot ts2 = tmp_shots.get( j );
         if ( from.equals( ts2.from ) && to.equals( ts2.to ) ) { // TDLog.v( "chain a positive sibling" );
           ts1.sibling = ts2;
           ts1 = ts2;
@@ -964,7 +964,7 @@ public class TDNum
           while ( ts1 != null ) { // TDLog.v( "NUM removing sibling " + ts1.from + "-" + ts1.to + " : " + nrSiblings );
             -- nrSiblings;
             TriShot ts2 = ts1.sibling;
-            tmpshots.remove( ts1 );
+            tmp_shots.remove( ts1 );
             ts1 = ts2;
           }
           ts0.sibling = null;
@@ -993,7 +993,7 @@ public class TDNum
       boolean repeat = true;
       while ( repeat ) {
         repeat = false;
-        for ( TriShot ts : tmpshots ) {
+        for ( TriShot ts : tmp_shots ) {
           if ( ts.used || ts.backshot != 0 ) continue;                  // skip used and siblings
           if ( pass == 0 && DBlock.getIntExtend(ts.extend) > 1 ) continue; // first pass skip non-extended
 
@@ -1007,11 +1007,11 @@ public class TDNum
           NumStation sf = getStation( ts.from );
           NumStation st = getStation( ts.to );
 
-          int  iext = DBlock.getIntExtend( ts.extend ); // integer extend
-          float fext = DBlock.getReducedExtend( ts.extend, ts.stretch ); // float extend - used for station coords
-          float aext = fext; // station azimuth extends
+          int  i_ext = DBlock.getIntExtend( ts.extend ); // integer extend
+          float f_ext = DBlock.getReducedExtend( ts.extend, ts.stretch ); // float extend - used for station coords
+          float a_ext = f_ext; // station azimuth extends
           if ( sf != null ) {
-            sf.addAzimuth( ts.b(), aext );
+            sf.addAzimuth( ts.b(), a_ext );
             if ( st != null ) { // loop-closure -: need the loop length to compute the fractional closure error
               // do close loop also on duplicate shots
 	      if ( path_fmt != null ) {
@@ -1021,27 +1021,27 @@ public class TDNum
                 (new ClosureTask( this, path_fmt, shots, paths, sf, st, ts.d(), ts.b(), ts.c() )).execute();
               }
               if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
-                addOpenLoopShot( sf, ts, iext, aext, fext, anomaly ); // keep loop open: new station( id=ts.to, from=sf, ... )
+                addOpenLoopShot( sf, ts, i_ext, a_ext, f_ext, anomaly ); // keep loop open: new station( id=ts.to, from=sf, ... )
               } else { // TDLog.v( "close loop at " + sf.name + " " + st.name );
                 NumShot sh = makeShotFromTmp( sf, st, ts, 0, sf.mAnomaly, mDecl ); 
                 addShotToStations( sh, sf, st );
               }
               // float length = ts.d();
-	      // if ( iext == 0 ) length = TDMath.sqrt( length*length - ts.h()*ts.h() );
-              addToStats( ts.duplicate, ts.surface, ts.d(), ((iext == 0)? Math.abs(ts.v()) : ts.d()), ts.h() );
+	      // if ( i_ext == 0 ) length = TDMath.sqrt( length*length - ts.h()*ts.h() );
+              addToStats( ts.duplicate, ts.surface, ts.d(), ((i_ext == 0)? Math.abs(ts.v()) : ts.d()), ts.h() );
               ts.used = true;
               repeat = true;
             }
             else // st null || st isBarrier
             { // forward shot: from --> to
-              addForwardShot( sf, ts, iext, aext, fext, anomaly );
+              addForwardShot( sf, ts, i_ext, a_ext, f_ext, anomaly );
               ts.used = true;
               repeat = true;
             }
           }
           else if ( st != null ) 
           { // sf == null: reversed shot only difference is '-' sign in new NumStation, and the new station is sf
-            addReversedShot( st, ts, iext, aext, fext, anomaly );
+            addReversedShot( st, ts, i_ext, a_ext, f_ext, anomaly );
             ts.used = true;
             repeat = true;
           }
@@ -1111,13 +1111,13 @@ public class TDNum
     // TDLog.v( "insert splays");
     mStations.setAzimuths();
     // for ( NumStation st : mStations ) st.setAzimuths();
-    for ( TriSplay ts : tmpsplays ) {
+    for ( TriSplay ts : tmp_splays ) {
       insertSplay( ts );
     }
     // long millis_end = System.currentTimeMillis() - millis_start;
     // TDLog.v( "Data reduction " + millis_end + " msec" );
     mUnattachedLength = 0;
-    for ( TriShot ts : tmpshots ) {
+    for ( TriShot ts : tmp_shots ) {
       if ( ! ts.used ) {
         // TDLog.v( "unattached shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
         mUnattachedShots.add( ts.blocks.get(0) );
@@ -1126,7 +1126,7 @@ public class TDNum
     }
     // TDLog.Log( TDLog.LOG_NUM, "unattached shot length " + mUnattachedLength );
     
-    return (mShots.size() + nrSiblings == tmpshots.size() );
+    return (mShots.size() + nrSiblings == tmp_shots.size() );
   }
 
 
@@ -1134,21 +1134,22 @@ public class TDNum
   /** insert a reversed shot
    * @param sf    station to which the shot is attached (FROM station of the shot)
    * @param ts    shot
-   * @param aext  azimuth extend
-   * @param fext  fractional extend
+   * @param i_ext TODO
+   * @param a_ext  azimuth extend
+   * @param f_ext  fractional extend
    * @param anomaly magnetic anomaly
    */
-  private void addForwardShot( NumStation sf, TriShot ts, int iext, float aext, float fext, float anomaly )
+  private void addForwardShot( NumStation sf, TriShot ts, int i_ext, float a_ext, float f_ext, float anomaly )
   {
     float bearing = ts.b() - sf.mAnomaly;
-    boolean has_coords = (iext <= 1);
-    NumStation st = new NumStation( ts.to, sf, ts.d(), bearing + mDecl, ts.c(), fext, has_coords ); // 20200503 added mDecl
+    boolean has_coords = (i_ext <= 1);
+    NumStation st = new NumStation( ts.to, sf, ts.d(), bearing + mDecl, ts.c(), f_ext, has_coords ); // 20200503 added mDecl
     if ( ! mStations.addStation( st ) ) mClosureStations.add( st );
 
-    st.addAzimuth( (ts.b()+180)%360, -aext );
+    st.addAzimuth( (ts.b()+180)%360, -a_ext );
     st.mAnomaly = anomaly + sf.mAnomaly;
     updateBBox( st );
-    addToStats( ts.duplicate, ts.surface, ts.d(), ((iext == 0)? Math.abs(ts.v()) : ts.d()), ts.h(), st.v );
+    addToStats( ts.duplicate, ts.surface, ts.d(), ((i_ext == 0)? Math.abs(ts.v()) : ts.d()), ts.h(), st.v );
 
     NumShot sh = makeShotFromTmp( sf, st, ts, 1, sf.mAnomaly, mDecl );
     addShotToStations( sh, st, sf );
@@ -1157,23 +1158,24 @@ public class TDNum
   /** insert a reversed shot
    * @param st    station to which the shot is attached (TO station of the shot)
    * @param ts    shot
-   * @param aext  azimuth extend
-   * @param fext  fractional extend
+   * @param i_ext TODO
+   * @param a_ext  azimuth extend
+   * @param f_ext  fractional extend
    * @param anomaly magnetic anomaly
    */
-  private void addReversedShot( NumStation st, TriShot ts, int iext, float aext, float fext, float anomaly )
+  private void addReversedShot( NumStation st, TriShot ts, int i_ext, float a_ext, float f_ext, float anomaly )
   {
-    st.addAzimuth( (ts.b()+180)%360, -aext );
+    st.addAzimuth( (ts.b()+180)%360, -a_ext );
     float bearing = ts.b() - st.mAnomaly;
-    boolean has_coords = (iext <= 1);
-    NumStation sf = new NumStation( ts.from, st, - ts.d(), bearing + mDecl, ts.c(), fext, has_coords ); // 20200503 added mDecl
+    boolean has_coords = (i_ext <= 1);
+    NumStation sf = new NumStation( ts.from, st, - ts.d(), bearing + mDecl, ts.c(), f_ext, has_coords ); // 20200503 added mDecl
     if ( ! mStations.addStation( sf ) ) mClosureStations.add( sf );
 
-    sf.addAzimuth( ts.b(), aext );
+    sf.addAzimuth( ts.b(), a_ext );
     sf.mAnomaly = anomaly + st.mAnomaly; 
 
     updateBBox( sf );
-    addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ), Math.abs( (iext == 0)? ts.v() : ts.d() ), Math.abs(ts.h()), sf.v );
+    addToStats( ts.duplicate, ts.surface, Math.abs(ts.d() ), Math.abs( (i_ext == 0)? ts.v() : ts.d() ), Math.abs(ts.h()), sf.v );
 
     // FIXME is st.mAnomaly OK ?
     // N.B. was new NumShot(st, sf, ts.block, -1, mDecl); // FIXME check -anomaly
@@ -1184,18 +1186,19 @@ public class TDNum
   /** insert a reversed shot
    * @param sf    station to which the shot is attached (FROM station of the shot)
    * @param ts    shot
-   * @param aext  azimuth extend
-   * @param fext  fractional extend
+   * @param i_ext TODO
+   * @param a_ext  azimuth extend
+   * @param f_ext  fractional extend
    * @param anomaly magnetic anomaly
    */
-  private void addOpenLoopShot( NumStation sf, TriShot ts, int iext, float aext, float fext, float anomaly )
+  private void addOpenLoopShot( NumStation sf, TriShot ts, int i_ext, float a_ext, float f_ext, float anomaly )
   {
     float bearing = ts.b() - sf.mAnomaly;
-    boolean has_coords = (iext <= 1);
-    NumStation st1 = new NumStation( ts.to, sf, ts.d(), bearing + mDecl, ts.c(), fext, has_coords ); // 20200503 added mDecl
+    boolean has_coords = (i_ext <= 1);
+    NumStation st1 = new NumStation( ts.to, sf, ts.d(), bearing + mDecl, ts.c(), f_ext, has_coords ); // 20200503 added mDecl
     if ( ! mStations.addStation( st1 ) ) mClosureStations.add( st1 );
 
-    st1.addAzimuth( (ts.b()+180)%360, -aext );
+    st1.addAzimuth( (ts.b()+180)%360, -a_ext );
     st1.mAnomaly = anomaly + sf.mAnomaly;
     updateBBox( st1 );
     st1.mDuplicate = true;
@@ -1278,37 +1281,37 @@ public class TDNum
     float anomaly = 0;
     // if ( ts.backshot == 0 ) 
     {
-      int   nfwd = 1;      // nr of forward
-      float bfwd = ts.b(); // forward bearing
-      int   nbck = 0;      // nr of backward
-      float bbck = 0;      // backward bearing
+      int   n_fwd = 1;      // nr of forward
+      float b_fwd = ts.b(); // forward bearing
+      int   n_bck = 0;      // nr of backward
+      float b_bck = 0;      // backward bearing
       for ( TriShot ts1 = ts.sibling; ts1 != null; ts1 = ts1.sibling ) {
         if ( ts1.backshot == 1 ) {
           if ( ts1.b() > ts.b() + 180 ) {
-            bfwd += ts1.b() - 360;
+            b_fwd += ts1.b() - 360;
           } else if ( ts.b() > ts1.b() + 180 ) {
-            bfwd += ts1.b() + 360;
+            b_fwd += ts1.b() + 360;
           } else {
-            bfwd += ts1.b();
+            b_fwd += ts1.b();
           }
-          ++ nfwd;
+          ++ n_fwd;
         } else {
-          if ( nbck > 0 ) {
+          if ( n_bck > 0 ) {
             if ( ts1.b() > ts.b() + 180 ) {
-              bbck += ts1.b() - 360;
+              b_bck += ts1.b() - 360;
             } else if ( ts.b() > ts1.b() + 180 ) {
-              bbck += ts1.b() + 360;
+              b_bck += ts1.b() + 360;
             } else {
-              bbck += ts1.b();
+              b_bck += ts1.b();
             }
           } else {
-            bbck += ts1.b();
+            b_bck += ts1.b();
           }
-          ++ nbck;
+          ++ n_bck;
         }
       }
-      if ( nbck > 0 ) {  // station_anomaly must be subtracted to measured bearing to get corrected bearing
-        anomaly = bbck/nbck - bfwd/nfwd - 180;  // station_anomaly = <backward> - <forward> - 180
+      if ( n_bck > 0 ) {  // station_anomaly must be subtracted to measured bearing to get corrected bearing
+        anomaly = b_bck/n_bck - b_fwd/n_fwd - 180;  // station_anomaly = <backward> - <forward> - 180
         if ( anomaly < -180 ) anomaly += 360;
       }
       // TDLog.v( "anomaly " + anomaly);
@@ -1413,10 +1416,10 @@ public class TDNum
   {
     ArrayList< NumCycle > cycles = new ArrayList<>();
     int bs = branches.size();
-    // TDLog.v("NUM make indep. cycles - branches " + + bs );
+    // TDLog.v("NUM make independent cycles - branches " + + bs );
     if ( bs == 0 ) return cycles;
 
-    // TDLog.v("Indep. cycles on " + bs + " branches ");
+    // TDLog.v("Independent cycles on " + bs + " branches ");
     // StringBuilder sb = new StringBuilder();
     // for ( int k0 = 0; k0 < bs; ++k0 ) {
     //   NumBranch b0 = branches.get(k0);
@@ -1643,7 +1646,7 @@ public class TDNum
             }
             sh0 = sh1;
           }
-          if ( st0 == sf0 ) { // closed-loop: this is not an error (just a very wierd case)
+          if ( st0 == sf0 ) { // closed-loop: this is not an error (just a very weird case)
             branch.addShot( sh0 ); // add shot to branch and find next shot
             sh0.branch = branch;
             branch.setLastNode( st0.node );
@@ -1717,11 +1720,11 @@ public class TDNum
     makeSingleLoops( singleBranches, shots ); // check all shots without branch
     // TDLog.v("NUM single loops " + singleBranches.size() );
 
-    // can use a global multiloop compensation
+    // can use a global multi-loop compensation
     // for ( NumBranch br : branches ) singleBranches.add( br );
     // compensateMultiLoops( singleBranches );
 
-    // of separate multiloop followed by singleloop
+    // of separate multi-loop followed by single-loop
     compensateMultiLoops( branches );
     compensateSingleLoops( singleBranches );
   }
@@ -1765,7 +1768,7 @@ public class TDNum
     }
 
     ArrayList< NumCycle > cycles = makeIndependentCycles( branches );
-    TDLog.v("NUM indep. loops " + cycles.size() );
+    TDLog.v("NUM independent loops " + cycles.size() );
     for ( NumCycle cy : cycles ) {
       TDLog.v("CYCLE: " + cy.toString() );
     }
@@ -1773,10 +1776,10 @@ public class TDNum
     // TDLog.v("Branches " + branches.size() + " single " + singleBranches.size() + " cycles " + cycles.size() );
     // This is not necessary as the cycles are already independent
     // if ( TDSetting.mLoopClosure == ? ) {
-    //   indep_cycles = new ArrayList<>(); // independent cycles
+    //   independent_cycles = new ArrayList<>(); // independent cycles
     //   for ( NumCycle cycle : cycles ) {
-    //     if ( ! cycle.isBranchCovered( indep_cycles ) ) {
-    //       indep_cycles.add( cycle );
+    //     if ( ! cycle.isBranchCovered( independent_cycles ) ) {
+    //       independent_cycles.add( cycle );
     //     }
     //   }
     // }
@@ -1800,7 +1803,7 @@ public class TDNum
       CV[y] = cy.v;
     }
 
-    // ArrayList< NumCycle > indep_cycles; // 2022-09-23 replaced with cycles
+    // ArrayList< NumCycle > independent_cycles; // 2022-09-23 replaced with cycles
 
     if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) { // find the basis of loops with smallest error
       // TDLog.v("LOOP selective policy");
@@ -1818,7 +1821,7 @@ public class TDNum
         }
       }
       cycles = tmp_cycles;
-      ls = cycles.size(); // indep_cycles
+      ls = cycles.size(); // independent_cycles
       // TDLog.v("LOOP accurate " + ls + " inaccurate " + nrInaccurateLoops );
     }
 
@@ -1831,7 +1834,7 @@ public class TDNum
     // TDLog.v("LOOP cycles " + ls + " branches " + bs );
     int[] alpha = new int[ bs * ls ]; // cycle = row-index, branch = col-index
     for (int y=0; y<ls; ++y ) {  // branch-cycle matrix
-      NumCycle cy = cycles.get(y); // indep_cycles
+      NumCycle cy = cycles.get(y); // independent_cycles
       for (int x=0; x<bs; ++x ) {
         alpha[ y*bs + x] = cy.getBranchDir( branches.get(x) );
         /* old way
@@ -1888,10 +1891,10 @@ public class TDNum
       double det = LoopUtil.computeInverse( aa, ls, ls, ls );
 
       for (int y=0; y<ls; ++y ) { // compute the closure compensation values
-        NumCycle cy = cycles.get(y); // indep_cycles
+        NumCycle cy = cycles.get(y); // independent_cycles
         cy.resetCorrections();
         for (int x=0; x<ls; ++x ) {
-          NumCycle cx = cycles.get(x); // indep_cycles
+          NumCycle cx = cycles.get(x); // independent_cycles
           cy.ce += aa[ y*ls + x] * cx.e;
           cy.cs += aa[ y*ls + x] * cx.s;
           cy.cv += aa[ y*ls + x] * cx.v;
@@ -1901,7 +1904,7 @@ public class TDNum
         //   double err = cy.error();
         //   if ( err > 0.0 ) {
         //     double cy_len = cy.length();
-        //     if ( err > cy_len * TDSetting.mLoopThr / 100.0 ) { // do not compensate loop misclosure (mLoopThr is a percent)
+        //     if ( err > cy_len * TDSetting.mLoopThr / 100.0 ) { // do not compensate loop mis-closure (mLoopThr is a percent)
         //       cy.applyCorrection = false;
         //       ++ nrInaccurateLoops;
         //     }
@@ -1918,7 +1921,7 @@ public class TDNum
         double s = 0;
         double v = 0;
         for (int y=0; y<ls; ++y ) {
-          NumCycle cy = cycles.get(y); // indep_cycles
+          NumCycle cy = cycles.get(y); // independent_cycles
           // if ( ! cy.applyCorrection ) continue; // SELECTIVE
           e += alpha[ y*bs + x ] * cy.ce;
           s += alpha[ y*bs + x ] * cy.cs;

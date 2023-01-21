@@ -2239,13 +2239,13 @@ public class DrawingIO
   }
 
   static void exportCave3DXSection (
-      int type,
-      PrintWriter pw,
-      // DrawingCommandManager manager,
-      String scrap_name,
-      int azimuth, int clino,
-      Scrap scrap,
-      TDVector center, TDVector V1, TDVector V2 
+          int type,
+          PrintWriter pw,
+          // DrawingCommandManager manager,
+          String scrap_name,
+          @SuppressWarnings("ParameterCanBeLocal") int azimuth, int clino,
+          Scrap scrap,
+          TDVector center, TDVector V1, TDVector V2
   )
   {
     // XYZefoffsets are on the header-line

@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
 // import com.topodroid.utils.TDColor;
 import com.topodroid.ui.MyKeyboard;
@@ -25,7 +26,7 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.LegType;
 import com.topodroid.common.ExtendType;
 
-import java.util.regex.Pattern;
+// import java.util.regex.Pattern;
 
 // import android.app.Dialog;
 import android.os.Bundle;
@@ -58,7 +59,7 @@ class ShotEditDialog extends MyDialog
   private DBlock mNextBlk;
   private int mPos; // item position in the parent' adapter list
 
-  private Pattern mPattern; // name pattern
+  // private Pattern mPattern; // name pattern
 
   // private TextView mTVdata;
   private EditText mETdistance; // distance | depth
@@ -109,8 +110,6 @@ class ShotEditDialog extends MyDialog
   private String shot_clino;     // clino    - distance
   private boolean shot_manual;
   private float shot_stretch; // FIXME_STRETCH
-
-  private int set_xsplay = -1;
 
   private String shot_extra;
   private int  shot_extend;
@@ -727,7 +726,9 @@ class ShotEditDialog extends MyDialog
           float c = Float.parseFloat( mETclino.getText().toString() )    / TDSetting.mUnitAngle;
           mParent.updateShotDistanceBearingClino( d, b, c, mBlk );
 	}
-      } catch (NumberFormatException e ) { }
+      } catch (NumberFormatException e ) {
+        TDLog.Error( e.getMessage() );
+      }
     }
 
     // if ( renumber ) {

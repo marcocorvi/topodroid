@@ -110,7 +110,7 @@ class TdmInputAdapter extends ArrayAdapter< TdmInput >
 
     ViewHolder holder = null; 
     if ( convertView == null ) {
-      convertView = mLayoutInflater.inflate( R.layout.tdinput_adapter, null );
+      convertView = mLayoutInflater.inflate( R.layout.tdinput_adapter, null ); // parent crashes app
       holder = new ViewHolder();
       holder.checkBox = (CheckBox) convertView.findViewById( R.id.tdinput_checked );
       holder.textView = (TextView) convertView.findViewById( R.id.tdinput_name );

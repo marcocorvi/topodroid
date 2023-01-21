@@ -67,16 +67,16 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   static final int COLOR    = 6;
 
   String name;
-  int wtype;   // widget type
+  int widget_type;   // widget type
   String title;
   String summary; // -1 if no summary
   int level;
-  int ptype;   // preference type
+  int pref_type;   // preference type
   String value = null;
   String def_value = null;
-  boolean bvalue = false;
-  int     ivalue = 0;
-  float   fvalue = 0;
+  boolean b_value = false;
+  int     i_value = 0;
+  float   f_value = 0;
   int     category;
   boolean commit = false; // whether need to commit value to DB
 
@@ -103,12 +103,12 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   private TDPref( int cat, String nm, int wt, int tit, int sum, int lvl, int pt, String val, String def_val, Context ctx, TDPrefHelper hlp )
   {
     name  = nm;
-    wtype = wt;
+    widget_type = wt;
     context = ctx;
     title   = ctx.getResources().getString( tit );
     summary = (sum >= 0)? ctx.getResources().getString( sum ) : null;
     level = lvl;
-    ptype = pt;
+    pref_type = pt;
     value = val;
     def_value = def_val;
     options = null;
@@ -129,7 +129,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     Spinner spinner;
     CheckBox checkbox;
     TextView textview;
-    switch ( wtype ) {
+    switch ( widget_type ) {
       case FORWARD:
         v = li.inflate( R.layout.pref_forward, parent, false );
         break;
@@ -147,7 +147,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
         v = li.inflate( R.layout.pref_edittext, parent, false );
 	mEdittext = (EditText) v.findViewById( R.id.edittext );
 	mEdittext.setText( stringValue() );
-        switch ( ptype ) {
+        switch ( pref_type ) {
 	  case INTEGER:
 	    mEdittext.setInputType( TDConst.NUMBER );
             break;
@@ -208,9 +208,9 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   private void setColor( int color )
   {
     if ( mButton == null ) return;
-    ivalue = color & 0xffffff;
-    mButton.setBackgroundColor( 0xff000000 | ivalue );
-    // TDLog.v( name + " set color " + ivalue + " " + color );
+    i_value = color & 0xffffff;
+    mButton.setBackgroundColor( 0xff000000 | i_value );
+    // TDLog.v( name + " set color " + i_value + " " + color );
   }
 
   // -------------------------------------------------------------------------
@@ -277,8 +277,8 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   {
     int vid = v.getId();
     if ( vid == R.id.checkbox ) { // click always switches the checkbox
-      bvalue = ((CheckBox)v).isChecked();
-      value  = ( bvalue? "true" : "false" );
+      b_value = ((CheckBox)v).isChecked();
+      value  = ( b_value? "true" : "false" );
       // TDLog.v( "Pref [onClick] checkbox: " + name + " val " + value );
       TDSetting.updatePreference( helper, category, name, value );
     } else if ( vid == R.id.title ) {
@@ -295,8 +295,8 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   public void colorChanged( int color )
   {
     setColor( color );
-    // TDLog.v(name + " update color " + ivalue + " " + color );
-    TDSetting.updatePreference( helper, category, name, Integer.toString( ivalue ) );
+    // TDLog.v(name + " update color " + i_value + " " + color );
+    TDSetting.updatePreference( helper, category, name, Integer.toString( i_value ) );
   }
 
   /** react to a user item selection
@@ -309,10 +309,10 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   public void onItemSelected( AdapterView av, View v, int pos, long id )
   {
     value  = options[pos];
-    if ( ivalue != pos ) {
-      // TDLog.v( "Pref [onItemSelected]: " + name + " index " + ivalue + "->" + pos + " val " + values[pos] );
-      ivalue = pos;
-      TDSetting.updatePreference( helper, category, name, values[ ivalue ] ); // options store the selected value
+    if ( i_value != pos ) {
+      // TDLog.v( "Pref [onItemSelected]: " + name + " index " + i_value + "->" + pos + " val " + values[pos] );
+      i_value = pos;
+      TDSetting.updatePreference( helper, category, name, values[ i_value ] ); // options store the selected value
     }
   }
 
@@ -322,9 +322,9 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   @Override
   public void onNothingSelected( AdapterView av )
   {
-    ivalue = Integer.parseInt( value );
-    value  = options[ivalue];
-    // TDLog.v( "Pref TODO nothing Selected: " + name + " index " + ivalue + " val " + value );
+    i_value = Integer.parseInt( value );
+    value  = options[i_value];
+    // TDLog.v( "Pref TODO nothing Selected: " + name + " index " + i_value + " val " + value );
   }
 
   /** react to a user key press
@@ -359,7 +359,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   // @Override
   // public int getInputType() 
   // {
-  //   switch ( ptype ) {
+  //   switch ( pref_type ) {
   //     case INTEGER: return TDConst.NUMBER;
   //     case FLOAT:   return TDConst.NUMBER_DECIMAL;
   //   }
@@ -413,7 +413,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   { 
     boolean val = hlp.getBoolean( nm, def_val );
     TDPref ret = new TDPref( cat, nm, CHECKBOX, tit, sum, lvl, BOOLEAN, (val? "true" : "false"), (def_val? "true" : "false"), ctx, hlp );
-    ret.bvalue = val;
+    ret.b_value = val;
     return ret;
   }
 
@@ -431,7 +431,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   { 
     boolean val = hlp.getBoolean( nm, def_str.startsWith("t") );
     TDPref ret = new TDPref( cat, nm, CHECKBOX, tit, sum, lvl, BOOLEAN, (val? "true" : "false"), def_str, ctx, hlp );
-    ret.bvalue = val;
+    ret.b_value = val;
     return ret;
   }
 
@@ -454,7 +454,9 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     int color = def_val;
     try {
       color = Integer.parseInt( str );
-    } catch ( NumberFormatException e ) { }
+    } catch ( NumberFormatException e ) {
+      TDLog.Error( e.getMessage() );
+    }
     ret.setColor( color );
     return ret;
   }
@@ -499,23 +501,25 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     TDPref ret = new TDPref( cat, nm, EDITTEXT, tit, sum, lvl, pt, val, def_val, ctx, hlp );
     try {
       if ( pt == INTEGER ) {
-        ret.ivalue = Integer.parseInt( ret.value );
+        ret.i_value = Integer.parseInt( ret.value );
       } else if ( pt == FLOAT ) {
-        ret.fvalue = Float.parseFloat( ret.value );
+        ret.f_value = Float.parseFloat( ret.value );
       }
-    } catch ( NumberFormatException e ) { }
+    } catch ( NumberFormatException e ) {
+      TDLog.Error( e.getMessage() );
+    }
     return ret;
   }
 
-  // private static TDPref makeEdt( int cat, String nm, int tit, int sum, int lvl, int idef, int pt, Context ctx, TDPrefHelper hlp)
+  // private static TDPref makeEdt( int cat, String nm, int tit, int sum, int lvl, int id_def, int pt, Context ctx, TDPrefHelper hlp)
   // { 
-  //   String val = hlp.getString( nm, ctx.getString(idef) );
+  //   String val = hlp.getString( nm, ctx.getString(id_def) );
   //   TDPref ret = new TDPref( cat, nm, EDITTEXT, tit, sum, lvl, pt, val, ctx, hlp );
   //   // TDLog.v("EditText value " + ret.value );
   //   if ( pt == INTEGER ) {
-  //     ret.ivalue = Integer.parseInt( ret.value );
+  //     ret.i_value = Integer.parseInt( ret.value );
   //   } else if ( pt == FLOAT ) {
-  //     ret.fvalue = Float.parseFloat( ret.value );
+  //     ret.f_value = Float.parseFloat( ret.value );
   //   }
   //   return ret;
   // }
@@ -534,7 +538,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    */ 
   private static TDPref makeLst( int cat, String nm, int tit, int sum, int lvl, String def_val, int opts, int vals, Context ctx, TDPrefHelper hlp )
   { 
-    String val = hlp.getString( nm, def_val ); // options stoctx the selected value
+    String val = hlp.getString( nm, def_val ); // options ... the selected value
     String[] options = ctx.getResources().getStringArray( opts );
     String[] values  = ctx.getResources().getStringArray( vals );
     // String opt = getOptionFromValue( val, options, values );
@@ -552,15 +556,15 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param tit     preference title
    * @param sum     preference description
    * @param lvl     activity level
-   * @param idef    preference default value resource ID
+   * @param id_def    preference default value resource ID
    * @param opts    options resource ID
    * @param vals    values resource ID
    * @param ctx     context
    * @param hlp     shared preferences helper
    */ 
-  private static TDPref makeLst( int cat, String nm, int tit, int sum, int lvl, int idef, int opts, int vals, Context ctx, TDPrefHelper hlp )
+  private static TDPref makeLst( int cat, String nm, int tit, int sum, int lvl, int id_def, int opts, int vals, Context ctx, TDPrefHelper hlp )
   { 
-    String val = hlp.getString( nm, ctx.getResources().getString(idef) ); // options stores the selected value
+    String val = hlp.getString( nm, ctx.getResources().getString(id_def) ); // options stores the selected value
     String[] options = ctx.getResources().getStringArray( opts );
     String[] values  = ctx.getResources().getStringArray( vals );
     // String opt = getOptionFromValue( val, options, values );
@@ -582,14 +586,14 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     if ( value == null || value.length() == 0 ) {
       for ( int k=0; k< values.length; ++k ) { 
         if ( values[k].length() == 0 ) {
-          ivalue = k;
+          i_value = k;
           return k;
         }
       }
     } else {
       for ( int k=0; k< values.length; ++k ) { 
         if ( value.equals( values[k] ) ) {
-          ivalue = k;
+          i_value = k;
           return k;
         }
       }
@@ -623,16 +627,16 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   public void setValue( String val )
   {
     value = val;
-    if ( ptype == OPTIONS ) {
+    if ( pref_type == OPTIONS ) {
       makeLstIndex();
     } else {
       try {
-	if ( ptype == INTEGER ) {
-          ivalue = Integer.parseInt( value );
-        } else if ( ptype == FLOAT ) {
-          fvalue = Float.parseFloat( value );
-        } else if ( ptype == BOOLEAN ) {
-          bvalue = Boolean.parseBoolean( value );
+	if ( pref_type == INTEGER ) {
+          i_value = Integer.parseInt( value );
+        } else if ( pref_type == FLOAT ) {
+          f_value = Float.parseFloat( value );
+        } else if ( pref_type == BOOLEAN ) {
+          b_value = Boolean.parseBoolean( value );
         }
       } catch ( NumberFormatException e ) {
 	TDLog.Error("FIXME number format exception " + e.getMessage() );
@@ -654,11 +658,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
 
   /** @return the preference integer value
    */
-  public int intValue()         { return ( ptype == INTEGER || ptype == OPTIONS )? ivalue : 0; }
+  public int intValue()         { return ( pref_type == INTEGER || pref_type == OPTIONS )? i_value : 0; }
 
   /** @return the preference float value
    */
-  public float floatValue()     { return ( ptype == FLOAT )? fvalue : 0; }
+  public float floatValue()     { return ( pref_type == FLOAT )? f_value : 0; }
 
   /** @return the preference string value
    */
@@ -666,7 +670,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
 
   /** @return the preference boolean value
    */
-  public boolean booleanValue() { return ( ptype == BOOLEAN )&& bvalue; }
+  public boolean booleanValue() { return ( pref_type == BOOLEAN )&& b_value; }
 
   // -----------------------------------------------
   static final int B = 0; // activity levels
@@ -1025,7 +1029,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], A,  def[ 9], FLOAT,  ctx, hlp ),
       makeEdt( cat, key[10], tit[10], dsc[10], A,  def[12], INTEGER,  ctx, hlp ),
       makeEdt( cat, key[11], tit[11], dsc[11], A,  def[11], INTEGER,  ctx, hlp ),
-      makeLst( cat, key[12], tit[12], dsc[12], N,  def[12], R.array.svgProgram, R.array.svgProgramValue, ctx, hlp )  // DISTOC_SVG_PROGRAM
+      makeLst( cat, key[12], tit[12], dsc[12], N,  def[12], R.array.svgProgram, R.array.svgProgramValue, ctx, hlp )  // DISTOX_SVG_PROGRAM
     };
   }
 

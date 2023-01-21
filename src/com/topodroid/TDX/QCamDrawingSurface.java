@@ -95,7 +95,9 @@ public class QCamDrawingSurface extends SurfaceView
     try {
       DisplayManager dm = (DisplayManager)( mContext.getSystemService( Context.DISPLAY_SERVICE ) );
       mDisplay = dm.getDisplay( Display.DEFAULT_DISPLAY );
-    } catch ( ClassCastException e ) { }
+    } catch ( ClassCastException e ) {
+      TDLog.Error( e.getMessage() );
+    }
   }
 
   /** @return the JPEG data buffer

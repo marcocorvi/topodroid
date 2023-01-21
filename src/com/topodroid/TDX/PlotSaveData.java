@@ -24,12 +24,12 @@ class PlotSaveData
   // final DrawingUtil util;
   final DrawingCommandManager cm;
   final String name;   
-  final String fname;  // filename
+  final String filename;  // filename
   final int azimuth;   // projected profile azimuth (0 for plan and extended profile)
   final int suffix;    // plot save mode
   final int rotate;    // number of backups to rotate (??)
 
-  PlotSaveData( TDNum n, /* DrawingUtil u, */ PlotInfo p, DrawingCommandManager manager, String nam, String fnam, int a, int s, int r )
+  PlotSaveData( TDNum n, /* DrawingUtil u, */ PlotInfo p, DrawingCommandManager manager, String nam, String file_name, int a, int s, int r )
   {
     plot = p;
     type = p.type;
@@ -37,7 +37,7 @@ class PlotSaveData
     // util = u;
     cm   = manager;
     name  = nam;
-    fname = fnam; // fullname
+    filename = file_name; // fullname
     azimuth = (int)p.azimuth;
     suffix  = s;
     rotate  = r;

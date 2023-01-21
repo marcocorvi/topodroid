@@ -444,7 +444,7 @@ public class ParserDat extends TglParser
             sh.setUsed( );
             mCaveLength += sh.length();
             repeat = true;
-          } else if ( sf == null && st != null ) {
+          } else if ( sf == null && st != null ) { // always true
             // TDLog.v( "unused shot " + sh.from + " " + sh.to + " : null " + st.name );
             Cave3DStation s = sh.getStationFromStation( st );
             stations.add( s );

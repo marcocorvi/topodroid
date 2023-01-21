@@ -2610,7 +2610,7 @@ public class ShotWindow extends Activity
   /** renumber shots after a given one
    * @param blk   shot after which to renumber
    * no need to synchronize
-   * @note colled be ShotEditDialog
+   * @note called be ShotEditDialog
    */
   void renumberShotsAfter( DBlock blk )
   {

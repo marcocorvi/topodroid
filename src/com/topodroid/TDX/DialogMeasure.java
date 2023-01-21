@@ -50,7 +50,7 @@ class DialogMeasure extends MyDialog
       ((Button) findViewById( R.id.button_close )).setOnClickListener( this );
 
       TextView tv = ( TextView ) findViewById(R.id.st_name);
-      tv.setText( mMeasure.st1.getFullName() + " - " + mMeasure.st2.getFullName() );
+      tv.setText( String.format( "%s - %s", mMeasure.st1.getFullName(), mMeasure.st2.getFullName() ) );
 
       tv = ( TextView ) findViewById(R.id.st_east);
       tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.cave_east), mMeasure.de ) );

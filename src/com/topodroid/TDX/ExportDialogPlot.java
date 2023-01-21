@@ -15,6 +15,8 @@ import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.utils.TDLog;
 
+import java.util.Locale;
+
 // import android.app.Dialog;
 // import android.app.Activity;
 import android.os.Bundle;
@@ -363,8 +365,8 @@ public class ExportDialogPlot extends MyDialog
   {
     ((CheckBox) findViewById( R.id.therion_splays )).setChecked( TDSetting.mTherionSplays );
     ((CheckBox) findViewById( R.id.therion_xvi )).setChecked( TDSetting.mTherionXvi );
-    ((EditText) findViewById( R.id.therion_scale )).setText( Integer.toString( TDSetting.mTherionScale ) );
-    ((EditText) findViewById( R.id.therion_spacing )).setText( Float.toString( TDSetting.mBezierStep ) );
+    ((EditText) findViewById( R.id.therion_scale )).setText( String.format( Locale.US, "%d", TDSetting.mTherionScale ) );
+    ((EditText) findViewById( R.id.therion_spacing )).setText( String.format( Locale.US, "%.2f", TDSetting.mBezierStep ) );
 
     ((CheckBox) findViewById( R.id.csurvey_prefix )).setChecked( TDSetting.mExportStationsPrefix );
     
@@ -379,7 +381,7 @@ public class ExportDialogPlot extends MyDialog
     ((CheckBox) findViewById( R.id.svg_linedir )).setChecked( TDSetting.mSvgLineDirection );
     ((CheckBox) findViewById( R.id.svg_splays )).setChecked( TDSetting.mSvgSplays );
     ((CheckBox) findViewById( R.id.svg_xsections )).setChecked( TDSetting.mAutoXSections );
-    ((EditText) findViewById( R.id.svg_scale )).setText( Integer.toString( TDSetting.mTherionScale ) );
+    ((EditText) findViewById( R.id.svg_scale )).setText( String.format( Locale.US, "%d", TDSetting.mTherionScale ) );
     
     ((CheckBox) findViewById( R.id.shp_georeference )).setChecked( TDSetting.mShpGeoref );
 
@@ -390,7 +392,7 @@ public class ExportDialogPlot extends MyDialog
 
     // ((CheckBox) findViewById( R.id.pdf_bgcolor )).setChecked( TDSetting.mBitmapBgcolor == 0xffffffff );
     // ((CheckBox) findViewById( R.id.pdf_splays )).setChecked( TDSetting.mTherionSplays );
-    ((EditText) findViewById( R.id.pdf_scale )).setText( Integer.toString( TDSetting.mTherionScale ) );
+    ((EditText) findViewById( R.id.pdf_scale )).setText( String.format( Locale.US, "%d", TDSetting.mTherionScale ) );
   }
 }
 

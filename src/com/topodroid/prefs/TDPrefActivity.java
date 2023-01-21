@@ -132,7 +132,7 @@ public class TDPrefActivity extends Activity
       mPrefActivitySurvey = null;
     }
     if ( mPrefs != null ) {
-      for ( TDPref pref : mPrefs ) if ( pref.wtype == TDPref.EDITTEXT ) {
+      for ( TDPref pref : mPrefs ) if ( pref.widget_type == TDPref.EDITTEXT ) {
         pref.commitValueString();
       }
     }

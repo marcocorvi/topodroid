@@ -127,7 +127,7 @@ public class ExportSTL
     } catch ( IOException e ) { // ???
       return false;
     }
-    return ret;
+    return ret; // always true
   }
 
   private void intToByte( int i, byte[] b )
@@ -168,8 +168,8 @@ public class ExportSTL
     byte[] b4 = new byte[4];
     byte[] b2  = new byte[2];
     for (int k=0; k<80; ++k) header[k] = (byte)0;
-    b2[0] = (byte)0;
-    b2[1] = (byte)0;
+    b2[0] = (byte)0; // already assigned
+    b2[1] = (byte)0; // already assigned
     try {
       BufferedOutputStream bw = new BufferedOutputStream( dos ); 
       bw.write( header, 0, 80 );

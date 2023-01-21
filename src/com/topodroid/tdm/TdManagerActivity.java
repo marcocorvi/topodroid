@@ -248,11 +248,11 @@ public class TdManagerActivity extends Activity
 	}
       }
     );
-    String[] tdconfigs = TDPath.scanTdconfigDir(); // full pathnames
-    if ( tdconfigs != null ) {
-      for ( String tdconfig : tdconfigs ) {
-        // TDLog.v( "activity update: path <" + tdconfig + ">" );
-        mTdmConfigAdapter.add( new TdmConfig( tdconfig, false ) ); // false: no save
+    String[] td_configs = TDPath.scanTdconfigDir(); // full pathnames
+    if ( td_configs != null ) {
+      for ( String td_config : td_configs ) {
+        // TDLog.v( "activity update: path <" + td_config + ">" );
+        mTdmConfigAdapter.add( new TdmConfig( td_config, false ) ); // false: no save
       }
     } else {
       mTdmConfigAdapter.add( new TdmConfig( TDPath.getTdconfigFile( "test.tdconfig" ), false ) ); // false: no save

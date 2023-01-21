@@ -71,16 +71,16 @@ public class MemoryOctet
   public static int toInt( byte b ) 
   {
     int ret = (int)(b & 0xff);
-    if ( ret < 0 ) ret += 256;
+    if ( ret < 0 ) ret += 256; // always false
     return ret;
   }
 
   public static int toInt( byte bh, byte bl )
   {
     int h = (int)(bh & 0xff);   // high
-    if ( h < 0 ) h += 256;
+    if ( h < 0 ) h += 256; // always false
     int l = (int)(bl & 0xff);   // low
-    if ( l < 0 ) l += 256;
+    if ( l < 0 ) l += 256; // always false
     return (h * 256 + l);
   }
   // ------------------------------------------------------------

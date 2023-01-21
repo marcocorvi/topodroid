@@ -80,7 +80,9 @@ public class DrawingAreaPath extends DrawingPointLinePath
       try {
         mAreaCnt = Integer.parseInt( id.substring( pos ) );
         mPrefix  = id.substring(0, pos);
-      } catch ( NumberFormatException e ) { }
+      } catch ( NumberFormatException e ) {
+        TDLog.Error( e.getMessage() );
+      }
     }
     TDLog.v("AREA " + id + " count " + mPrefix + " " + mAreaCnt );
     if ( BrushManager.hasArea( mAreaType ) ) { 
@@ -542,7 +544,6 @@ public class DrawingAreaPath extends DrawingPointLinePath
     for ( LinePoint pt = mFirst; pt != null; pt = pt.mNext ) {
       pt.toCave3D( pw, type, V1, V2 );
     }
-
     mFirst.toCave3D( pw, type, V1, V2 );
     pw.format( Locale.US, "ENDAREA\n" );
   }

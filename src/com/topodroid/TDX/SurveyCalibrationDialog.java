@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.utils.TDLog;
 
 import java.util.Locale;
 
@@ -77,17 +78,23 @@ class SurveyCalibrationDialog extends MyDialog
       if ( mETlength.getText() != null ) {
         try {
           ManualCalibration.mLength = Float.parseFloat( mETlength.getText().toString() ) / TDSetting.mUnitLength;
-        } catch ( NumberFormatException e ) { }
+        } catch ( NumberFormatException e ) {
+          TDLog.Error( e.getMessage() );
+        }
       }
       if ( mETazimuth.getText() != null ) {
         try {
           ManualCalibration.mAzimuth = Float.parseFloat( mETazimuth.getText().toString() ) / TDSetting.mUnitAngle;
-        } catch ( NumberFormatException e ) { }
+        } catch ( NumberFormatException e ) {
+          TDLog.Error( e.getMessage() );
+        }
       }
       if ( mETclino.getText() != null ) {
         try {
           ManualCalibration.mClino = Float.parseFloat( mETclino.getText().toString() ) / TDSetting.mUnitAngle;
-        } catch ( NumberFormatException e ) { }
+        } catch ( NumberFormatException e ) {
+          TDLog.Error( e.getMessage() );
+        }
       }
       ManualCalibration.mLRUD = mCBlrud.isChecked();
     // } else if ( vid == R.id.btn_cancel ) {

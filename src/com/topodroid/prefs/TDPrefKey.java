@@ -1813,7 +1813,7 @@ public class TDPrefKey
     "DISTOX_IMPORT_DATAMODE",
     "DISTOX_AUTO_XSECTIONS",  // automatically add xsections on export/save
     "DISTOX_AUTO_STATIONS",    // whether to add stations to therion th2 exports
-    "DISTOX_LRUD_COUNT" ,     // LRUD downcounter
+    "DISTOX_LRUD_COUNT" ,     // LRUD down-counter
     // "DISTOX_AUTO_PLOT_EXPORT", // whether to export plots to private folder automatically
     // "DISTOX_TRANSFER_CSURVEY"
   };

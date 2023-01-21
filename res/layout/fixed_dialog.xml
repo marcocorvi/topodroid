@@ -232,7 +232,7 @@
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
       android:singleLine="true" 
-      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginEnd="@dimen/marginh"
     />
     <TextView android:id="@+id/fix_convergence" 
       android:layout_width="wrap_content" 

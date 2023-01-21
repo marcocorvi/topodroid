@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 
 import java.nio.ByteOrder;
 import java.nio.ByteBuffer;
@@ -144,7 +144,9 @@ class DataBuffer
     try {
       DataBuffer db = new DataBuffer( FLOAT, count * 4, count * 4 ); // 4 bytes / float
       return db.mData.asFloatBuffer();
-    } catch ( OutOfMemoryError e ) { }
+    } catch ( OutOfMemoryError e ) {
+      TDLog.Error("Out of memory [0]");
+    }
     return null;
   }
 
@@ -160,7 +162,9 @@ class DataBuffer
   {
     try {
       return new DataBuffer( type, type*cap, type*delta );
-    } catch ( OutOfMemoryError e ) { }
+    } catch ( OutOfMemoryError e ) {
+      TDLog.Error("out of memory [1]");
+    }
     return null;
   }
 
@@ -173,7 +177,9 @@ class DataBuffer
   {
     try {
       return new DataBuffer( type, type*cap, type*cap );
-    } catch ( OutOfMemoryError e ) { }
+    } catch ( OutOfMemoryError e ) {
+      TDLog.Error("out of memory [2]");
+    }
     return null;
   }
 

@@ -18,6 +18,8 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 // import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+
+import com.topodroid.utils.TDLog;
 // import android.provider.Settings.Secure;
 
 public class TDLevel
@@ -54,6 +56,7 @@ public class TDLevel
         final PackageInfo info = ctx.getPackageManager().getPackageInfo( ctx.getPackageName(), 0);
         debug = (info.applicationInfo.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
       } catch ( NameNotFoundException e ) {
+        TDLog.Error( e.getMessage() );
       }
       test_debug = false;
       // TDLog.v("DEBUG " + debug );

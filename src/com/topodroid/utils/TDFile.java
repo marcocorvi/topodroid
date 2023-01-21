@@ -939,6 +939,7 @@ public class TDFile
       try {
         pfd.close();
       } catch ( IOException e ) {
+        TDLog.Error( e.getMessage() );
       }
     }
   }

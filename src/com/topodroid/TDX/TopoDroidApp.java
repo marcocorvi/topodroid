@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid application (consts and prefs)
+ * @brief TopoDroid application (constants and preferences)
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -344,7 +344,7 @@ public class TopoDroidApp extends Application
     double log_xdpi = Math.log( Resources.getSystem().getDisplayMetrics().xdpi / 100.0 );
     double log_ydpi = Math.log( Resources.getSystem().getDisplayMetrics().ydpi / 100.0 );
 
-    //              Android below-24 dpi density sys-density xpdi    ypdi     density    adjust dp1cm 1:100A      
+    //              Android below-24 dpi density sys-density X-dpi   Y-dpi    density    adjust dp1cm 1:100A      
     // Nexus 4        5 21  true     320 2.0     320 *       319.79  318.745  640 (need)    ?         251.9685 (needed)   
     // Note 3         7 24  false    480 3.0     480         386.366 387.047  530 (need)  -50         208.66142 (needed) 
     // MiA2          10 29  false    408 2.55    480         397.565 474.688  480 (ok)      0         188.97638          
@@ -361,7 +361,7 @@ public class TopoDroidApp extends Application
     // Note 4         6     true     640 4.0     640 *       508     516.06   400         880         156.29921 
     // Xperia M2      5     true     240 1.5     240 *       232.47  234.46   900        -420         354.72443    
     // Galaxy S4      5     true     480 3.0     480 *       442.45  439.35   470         490         183.858
-    // Xcover        11 30  false    320 2.0                 309.96  310.67                 ?                      
+    // X-cover       11 30  false    320 2.0                 309.96  310.67                 ?                      
     //
     // Android dp are pixels
     // conversion: 1 m [world] = 20 units [scene]
@@ -380,8 +380,8 @@ public class TopoDroidApp extends Application
     if ( yx > yy ) { 
       int dpi = getDisplayDensityDpi();
       int dds = TDandroid.BELOW_API_24 ?  dpi : Resources.getSystem().getDisplayMetrics().DENSITY_DEVICE_STABLE;
-      double log_sdpi = Math.log( dds / 100.0 );
-      int ys = 10 * (int)( 10 * Math.exp( 3.00521 + -0.90490 * log_sdpi ) );
+      double log_s_dpi = Math.log( dds / 100.0 );
+      int ys = 10 * (int)( 10 * Math.exp( 3.00521 + -0.90490 * log_s_dpi ) );
       CACHED_DENSITY = ys;
     } else {
       CACHED_DENSITY = yy;
@@ -459,7 +459,7 @@ public class TopoDroidApp extends Application
   // }
 
   // ------------------------------------------------------------
-  // CONSTS
+  // CONSTANTS
   // private static final byte char0C = 0x0c;
 
   // ---------------------------------------------------------------
@@ -500,7 +500,9 @@ public class TopoDroidApp extends Application
         Message msg = Message.obtain();
         msg.what = w;
         new Messenger( hdl ).send( msg );
-      } catch ( RemoteException e ) { }
+      } catch ( RemoteException e ) {
+        TDLog.Error( e.getMessage() );
+      }
     }
   }
   
@@ -1524,7 +1526,7 @@ public class TopoDroidApp extends Application
     TDInstance.sid      = -1;       // no survey by default
     TDInstance.survey   = null;
     TDInstance.datamode = 0;
-    // TDINstance.extend   = SurveyInfo.SURVEY_EXTEND_NORMAL;
+    // TDInstance.extend   = SurveyInfo.SURVEY_EXTEND_NORMAL;
     StationName.clearCurrentStation();
     ManualCalibration.reset();
 
@@ -1841,7 +1843,7 @@ public class TopoDroidApp extends Application
 
   // static long trobotmillis = 0L; // TROBOT_MILLIS
 
-  /** called also by ShotWindow::updataBlockList
+  /** called also by ShotWindow::updateBlockList
    * this re-assign stations to shots with station(s) already set
    * the list of stations is ordered by compare
    *
@@ -1870,7 +1872,7 @@ public class TopoDroidApp extends Application
     return new StationNameDefault( this, mData, TDInstance.sid ).assignStationsAfter( blk0, list, sts );
   }
 
-  /** called also by ShotWindow::updataBlockList
+  /** called also by ShotWindow::updateBlockList
    * @param list blocks whose stations need to be set in the DB
    * @return true if a leg was assigned
    */
@@ -1964,7 +1966,9 @@ public class TopoDroidApp extends Application
     TDLog.v("APP FW install firmware. overwrite: " + overwrite );
     InputStream is = TDInstance.getResources().openRawResource( R.raw.firmware );
     firmwareUncompress( is, overwrite );
-    try { is.close(); } catch ( IOException e ) { }
+    try { is.close(); } catch ( IOException e ) {
+      TDLog.Error( e.getMessage() );
+    }
     mDData.setValue( "firmware_version", TDVersion.FIRMWARE_VERSION );
   }
  
@@ -2100,7 +2104,9 @@ public class TopoDroidApp extends Application
       }
       zin.close();
     } catch ( FileNotFoundException e ) {
+      TDLog.Error( e.getMessage() );
     } catch ( IOException e ) {
+      TDLog.Error( e.getMessage() );
     }
   }
 
@@ -2142,7 +2148,9 @@ public class TopoDroidApp extends Application
       }
       zin.close();
     } catch ( FileNotFoundException e ) {
+      TDLog.Error( e.getMessage() );
     } catch ( IOException e ) {
+      TDLog.Error( e.getMessage() );
     }
   }
 
@@ -2476,18 +2484,17 @@ public class TopoDroidApp extends Application
   {
     if ( mComm != null && mComm instanceof DistoXBLEComm ) {
       DistoXBLEComm comm = (DistoXBLEComm)mComm;
-      /* // boolean isconnect = comm.isConnected();
+      /* // boolean is_connect = comm.isConnected();
       if ( ! comm.isConnected() ) {
         connectDevice( lister?, TDInstance.deviceAddress(), DataType.DATA_ALL, timeout );
         // TDLog.v("BRIC info: wait 4 secs");
         TDUtil.yieldDown( 1000 ); // FIXME was 4000
       }
-      int waitcnt = 0;
-      while(!comm.isConnected())
-      {
+      int wait_cnt = 0;
+      while( ! comm.isConnected() ) {
         TDUtil.yieldDown( 500 );
-        waitcnt++;
-        if(waitcnt > 10) {
+        wait_cnt++;
+        if ( wait_cnt > 10 ) {
           TDLog.e("DistoXBLE info: failed to connect");
           return false;
         }

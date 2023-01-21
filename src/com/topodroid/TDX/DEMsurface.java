@@ -22,6 +22,7 @@ import java.io.IOException;
 
 import android.graphics.RectF;
 
+@SuppressWarnings("ParameterCanBeLocal")
 public class DEMsurface
 {
   double mEast1, mNorth1; // (west, south) center of LL-cornel cell

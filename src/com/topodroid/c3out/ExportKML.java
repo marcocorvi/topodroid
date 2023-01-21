@@ -108,7 +108,7 @@ public class ExportKML
   {
     String name = data.getName();
     boolean ret = true;
-    if ( data == null ) return false;
+    if ( data == null ) return false; // always false
 
     TDLog.v( "KML export splays " + do_splays + " walls " + do_walls + " stations " + do_station );
     if ( ! getGeolocalizedData( data, 0.0f, 1.0f ) ) { // FIXME declination 0.0f

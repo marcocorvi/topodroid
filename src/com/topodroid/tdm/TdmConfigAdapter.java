@@ -97,7 +97,7 @@ class TdmConfigAdapter extends ArrayAdapter< TdmConfig >
     View v = convertView;
     if ( v == null ) {
       LayoutInflater li = (LayoutInflater)mContext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-      v = li.inflate( R.layout.row, null );
+      v = li.inflate( R.layout.row, null ); // parent crashes app
     }
 
     TdmConfig b = mItems.get( pos );

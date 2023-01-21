@@ -22,6 +22,7 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDMath;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
@@ -296,7 +297,9 @@ public class LinePoint extends Point2D
         // TDLog.v( "Pt " + x + " " + y );
         dos.write( 0 );
       }
-    } catch ( IOException e ) { }
+    } catch ( IOException e ) {
+      TDLog.Error( e.getMessage() );
+    }
   }
 
   /** write this line-point in Cave3D format

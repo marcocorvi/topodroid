@@ -769,21 +769,21 @@ public class TDPath
    */
   static void deleteSurveyFiles( String survey )
   {
-    File imagedir = TDFile.getTopoDroidFile( getSurveyPhotoDir( survey ) ); // DistoX-SAF
-    if ( imagedir.exists() ) {
-      File[] files = imagedir.listFiles();
+    File image_dir = TDFile.getTopoDroidFile( getSurveyPhotoDir( survey ) ); // DistoX-SAF
+    if ( image_dir.exists() ) {
+      File[] files = image_dir.listFiles();
       if ( files != null ) {
         for (File f : files) if (!f.delete()) TDLog.Error("image file delete error " + f.getPath() );
       }
-      if ( ! imagedir.delete() ) TDLog.Error("Dir photo delete error");
+      if ( ! image_dir.delete() ) TDLog.Error("Dir photo delete error");
     }
-    File audiodir = TDFile.getTopoDroidFile( getSurveyAudioDir( survey ) ); // DistoX-SAF
-    if ( audiodir.exists() ) {
-      File[] files = audiodir.listFiles();
+    File audio_dir = TDFile.getTopoDroidFile( getSurveyAudioDir( survey ) ); // DistoX-SAF
+    if ( audio_dir.exists() ) {
+      File[] files = audio_dir.listFiles();
       if ( files != null ) {
         for (File f : files) if (!f.delete()) TDLog.Error("audio file delete error " + f.getPath() );
       }
-      if ( ! audiodir.delete() ) TDLog.Error("Dir audio delete error");
+      if ( ! audio_dir.delete() ) TDLog.Error("Dir audio delete error");
     }
     TDFile.deleteFile( getSurveyNoteFile( survey ) );
     // deleteSurveyExportFiles( survey )
@@ -920,7 +920,7 @@ public class TDPath
   }
 
   /** compose a file pathname: directory/name extension
-   * @param directory    directory pathname / rootname
+   * @param directory    directory pathname / root-name
    * @param name         file name
    * @param ext          file extension (including the dot)
    * @return the file pathname
@@ -938,7 +938,7 @@ public class TDPath
   }
 
   /** compose a file pathname: directory/name
-   * @param directory    directory pathname / rootname
+   * @param directory    directory pathname / root-name
    * @param name         file name (including extension)
    * @return the file pathname
    */
@@ -999,9 +999,9 @@ public class TDPath
     }
   }
 
-  private static String checkType( String ext, String[] exts )
+  private static String checkType( String extension, String[] extensions )
   {
-    for ( String e : exts ) if ( e.equals( ext ) ) return e;
+    for ( String e : extensions ) if ( e.equals( extension ) ) return e;
     return null;
   }
 

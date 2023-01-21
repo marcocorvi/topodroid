@@ -101,12 +101,12 @@ public class DistoXBLEInfoDialog extends MyDialog
     if ( type == DistoXBLEProtocol.PACKET_INFO_FIRMWARE ) {
       mParent.runOnUiThread( new Runnable() {
         public void run() {
-          tv_firmware.setText( "Firmware: " + txtval );
+          tv_firmware.setText( String.format( "Firmware: %s", txtval ) );
       } } );
     } else if ( type == DistoXBLEProtocol.PACKET_INFO_HARDWARE ) {
       mParent.runOnUiThread( new Runnable() {
         public void run() {
-          tv_hardware.setText( "Hardware: " + txtval);
+          tv_hardware.setText( String.format( "Hardware: %d", txtval) );
       } } );
     }
   }

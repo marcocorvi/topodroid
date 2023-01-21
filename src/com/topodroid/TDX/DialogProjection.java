@@ -90,7 +90,7 @@ class DialogProjection extends MyDialog
   {
     super.onCreate(savedInstanceState);
     initLayout( R.layout.cave3d_projection_dialog,
-      ( mRenderer.projectionMode == GlRenderer.PROJ_PERSPECTIVE )? R.string.proj_perspective : R.string.proj_orthographic
+      ( GlRenderer.projectionMode == GlRenderer.PROJ_PERSPECTIVE )? R.string.proj_perspective : R.string.proj_orthographic
     );
 
     mFocal = (SeekBar) findViewById( R.id.focal );
@@ -101,7 +101,7 @@ class DialogProjection extends MyDialog
     // TextView tvNear  = (TextView) findViewById( R.id.tv_near  );
     // TextView tvFar   = (TextView) findViewById( R.id.tv_far   );
 
-    if ( mRenderer.projectionMode == GlRenderer.PROJ_PERSPECTIVE ) {
+    if ( GlRenderer.projectionMode == GlRenderer.PROJ_PERSPECTIVE ) {
       setProgressLog( mFocal, GlRenderer.FOCAL,  GlRenderer.FOCAL_MIN,  GlRenderer.FOCAL_MAX );
       // setProgress( mNear,  GlRenderer.NEAR_P, GlRenderer.NEAR_P_MIN, GlRenderer.NEAR_P_MAX );
       // setProgress( mFar,   GlRenderer.FAR_P,  GlRenderer.FAR_P_MIN,  GlRenderer.FAR_P_MAX );
@@ -129,7 +129,7 @@ class DialogProjection extends MyDialog
   public void onClick(View view)
   {
     if ( view.getId() == R.id.button_ok ) {
-      if ( mRenderer.projectionMode == GlRenderer.PROJ_PERSPECTIVE ) {
+      if ( GlRenderer.projectionMode == GlRenderer.PROJ_PERSPECTIVE ) {
         GlRenderer.FOCAL  = getProgressLog( mFocal, GlRenderer.FOCAL_MIN,  GlRenderer.FOCAL_MAX );
         // GlRenderer.NEAR_P = getProgress( mNear,  GlRenderer.NEAR_P_MIN, GlRenderer.NEAR_P_MAX );
         // GlRenderer.FAR_P  = getProgress( mFar,   GlRenderer.FAR_P_MIN,  GlRenderer.FAR_P_MAX );

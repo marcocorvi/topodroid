@@ -132,7 +132,7 @@ public class TDSetting
 
   /** set the size of the label text
    * @param f      label text size [pt]
-   * @param brush  if true set the text sizes also in the BruchManager
+   * @param brush  if true set the text sizes also in the BrushManager
    */
   public static boolean setLabelSize( float f, boolean brush )
   {
@@ -146,7 +146,7 @@ public class TDSetting
 
   /** set the size of the station names
    * @param f      station name size [pt]
-   * @param brush  if true set the text sizes also in the BruchManager
+   * @param brush  if true set the text sizes also in the BrushManager
    */
   public static boolean setStationSize( float f, boolean brush )
   {
@@ -523,7 +523,7 @@ public class TDSetting
   // public static boolean mWithLayers  = true; // false;
   public static int mWithLevels = 0;  // 0: no, 1: by class, 2: by item
   public static int mGraphPaperScale = 0;  // correction subtracted to the system display density
-  public static boolean mSlantXSection = false; // whther to allow profile slanted xsections
+  public static boolean mSlantXSection = false; // whether to allow profile slanted xsections
 
   public static float mStationSize    = 20;   // size of station names [pt]
   public static float mLabelSize      = 24;   // size of labels [pt]
@@ -616,7 +616,9 @@ public class TDSetting
       int i = Integer.parseInt( ctrl );
       if ( i >= 0 && i <= 2 ) mZoomCtrl = i;
       if ( mZoomCtrl == 0 && ! is_multitouch ) mZoomCtrl = 1;
-    } catch ( NumberFormatException e ) { }
+    } catch ( NumberFormatException e ) {
+      TDLog.Error( e.getMessage() );
+    }
   }
 
   /** set the sibling thresholds 
@@ -697,15 +699,15 @@ public class TDSetting
     float f = 0;
     if ( val == null ) { 
       f = Float.parseFloat(def_value);
-      hlp.update( key, def_value );
+      TDPrefHelper.update( key, def_value );
     } else {
       try {
         f = Float.parseFloat( val );
-        hlp.update( key, val );
+        TDPrefHelper.update( key, val );
       } catch ( NumberFormatException e ) {
         TDLog.Error("Float Format Error. Key " + key + " " + e.getMessage() );
         f = Float.parseFloat(def_value);
-        hlp.update( key, def_value );
+        TDPrefHelper.update( key, def_value );
       }
     }
     return f;
@@ -716,15 +718,15 @@ public class TDSetting
     int i = 0;
     if ( val == null ) { 
       i = Integer.parseInt(def_value);
-      hlp.update( key, def_value );
+      TDPrefHelper.update( key, def_value );
     } else {
       try {
         i = Integer.parseInt( val );
-        hlp.update( key, val );
+        TDPrefHelper.update( key, val );
       } catch( NumberFormatException e ) { 
         TDLog.Error("Integer Format Error. Key " + key + " " + e.getMessage() );
         i = Integer.parseInt(def_value);
-        hlp.update( key, def_value );
+        TDPrefHelper.update( key, def_value );
       }
     }
     return i;
@@ -740,14 +742,14 @@ public class TDSetting
       TDLog.Error("Integer Format Error. Key " + key + " " + e.getMessage() );
       color = Integer.parseInt(def_value);
     }
-    hlp.update( key, Integer.toString(color) );
+    TDPrefHelper.update( key, Integer.toString(color) );
     return color;
   }
 
   private static String tryStringValue( TDPrefHelper hlp, String key, String val, String def_value )
   {
     if ( val == null ) val = def_value;
-    hlp.update( key, val );
+    TDPrefHelper.update( key, val );
     return val;
   }
 
@@ -761,7 +763,7 @@ public class TDSetting
         TDLog.Error("Boolean Format Error. Key " + key + " " + e.getMessage() );
       }
     }
-    hlp.update( key, i );
+    TDPrefHelper.update( key, i );
     return i;
   }
 
@@ -1444,7 +1446,7 @@ public class TDSetting
     } else {
       TDLog.Error("missing MAIN key: " + k );
     }
-    if ( ret != null ) hlp.update( k, ret );
+    if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
   }
 
@@ -1482,7 +1484,7 @@ public class TDSetting
     } else {
       TDLog.Error("missing SURVEY key: " + k );
     }
-    if ( ret != null ) hlp.update( k, ret );
+    if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
   }
 
@@ -1522,7 +1524,7 @@ public class TDSetting
     } else {
       TDLog.Error("missing PLOT key: " + k );
     }
-    if ( ret != null ) hlp.update( k, ret );
+    if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
   }
 
@@ -1566,7 +1568,7 @@ public class TDSetting
     } else {
       TDLog.Error("missing CALIB key: " + k );
     }
-    if ( ret != null ) hlp.update( k, ret );
+    if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
   }
 
@@ -1597,7 +1599,7 @@ public class TDSetting
     } else {
       TDLog.Error("missing DEVICE key: " + k );
     }
-    if ( ret != null ) hlp.update( k, ret );
+    if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
   }
 
@@ -1613,7 +1615,7 @@ public class TDSetting
       GlRenderer.mMinClino = b ? 90 : 0;
     } else if ( k.equals( key[1] ) ) { // CAVE3D_STATION_POINTS
       GlModel.mStationPoints = tryBooleanValue( hlp, k, v, bool(def[1]) );
-    } else if ( k.equals( key[2] ) ) { // CAVE3D_STTAION_POINT_SIZE def=8
+    } else if ( k.equals( key[2] ) ) { // CAVE3D_STATION_POINT_SIZE def=8
       GlNames.setPointSize( tryIntValue( hlp, k, v, def[2] ) );
     } else if ( k.equals( key[3] ) ) { // CAVE3D_STATION_TEXT_SIZE def=20
       GlNames.setTextSize( tryIntValue( hlp, k, v, def[3] ) );
@@ -1771,7 +1773,7 @@ public class TDSetting
     } else {
       TDLog.Error("missing GEEK_SHOT key: " + k );
     }
-    if ( ret != null ) hlp.update( k, ret );
+    if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
   }
 
@@ -1820,7 +1822,7 @@ public class TDSetting
     } else {
       TDLog.Error("missing GEEK_PLOT key: " + k );
     }
-    if ( ret != null ) hlp.update( k, ret );
+    if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
   }
 
@@ -1832,7 +1834,7 @@ public class TDSetting
     String[] def = TDPrefKey.GEEKsplaydef;
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_SPLAY_CLASSES
       mSplayClasses = tryBooleanValue( hlp, k, v, bool(def[ 0]) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_DISCREE_COLORS was DISTOX_SPLAY_COLOR
+    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_DISCRETE_COLORS was DISTOX_SPLAY_COLOR
       // mSplayColor   = tryBooleanValue( hlp, k, v, bool(def[ 1]) );
       mDiscreteColors = tryIntValue( hlp, k, v, def[ 1] );
       mSplayColor = (mDiscreteColors > 0);
@@ -1869,7 +1871,7 @@ public class TDSetting
     } else {
       TDLog.Error("missing GEEK_SPLAY key: " + k );
     }
-    if ( ret != null ) hlp.update( k, ret );
+    if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
   }
 
@@ -1911,7 +1913,7 @@ public class TDSetting
     } else {
       TDLog.Error("missing DEVICE key: " + k );
     }
-    if ( ret != null ) hlp.update( k, ret );
+    if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
   }
 
@@ -1946,7 +1948,7 @@ public class TDSetting
     } else {
       TDLog.Error("missing DEVICE key: " + k );
     }
-    if ( ret != null ) hlp.update( k, ret );
+    if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
   }
 
@@ -2024,7 +2026,7 @@ public class TDSetting
     } else {
       TDLog.Error("missing EXPORT key: " + k );
     }
-    if ( ret != null ) hlp.update( k, ret );
+    if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
   }
 
@@ -2051,7 +2053,7 @@ public class TDSetting
     String ret = null;
     String[] key = TDPrefKey.EXPORT_TH;
     String[] def = TDPrefKey.EXPORT_THdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_THERION_CONFIP (bool)
+    if ( k.equals( key[ 0 ] ) ) { // DISTOX_THERION_CONFIG (bool)
       mTherionConfig    = tryBooleanValue( hlp, k, v, bool(def[ 0 ]) );
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_THERION_MAPS (bool)
       mTherionMaps      = tryBooleanValue( hlp, k, v, bool(def[ 1 ]) );
@@ -2070,7 +2072,7 @@ public class TDSetting
     } else {
       TDLog.Error("missing EXPORT TH key: " + k );
     }
-    if ( ret != null ) hlp.update( k, ret );
+    if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
   }
 
@@ -2176,7 +2178,9 @@ public class TDSetting
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_DXF_BLOCKS (bool)
       mDxfBlocks = tryBooleanValue( hlp, k, v, bool(def[ 0 ]) );
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_ACAD_VERSION (choice)
-      try { mAcadVersion = tryIntValue( hlp, k, v, def[ 1 ] ); } catch ( NumberFormatException e) { }
+      try { mAcadVersion = tryIntValue( hlp, k, v, def[ 1 ] ); } catch ( NumberFormatException e) {
+        TDLog.Error( e.getMessage() );
+      }
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_ACAD_SPLINE (bool)
       mAcadSpline = tryBooleanValue( hlp, k, v, bool(def[ 2 ]) );
     } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_DXF_REFERENCE (bool)
@@ -2264,7 +2268,7 @@ public class TDSetting
     } else {
       TDLog.Error("missing EXPORT_SVG key: " + k );
     }
-    if ( ret != null ) hlp.update( k, ret );
+    if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
   }
   // --------------------------------------------------------------------------
@@ -2307,7 +2311,7 @@ public class TDSetting
     } else {
       TDLog.Error("missing DATA key: " + k );
     }
-    if ( ret != null ) hlp.update( k, ret );
+    if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
   }
 
@@ -2362,7 +2366,7 @@ public class TDSetting
     } else {
       TDLog.Error("missing ACCURACY key: " + k );
     }
-    if ( ret != null ) hlp.update( k, ret );
+    if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
   }
 
@@ -2417,7 +2421,9 @@ public class TDSetting
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_STATION_SIZE
       try {
         setStationSize( Float.parseFloat( tryStringValue( hlp, k, v, def[1] ) ), true );
-      } catch ( NumberFormatException e ) { }
+      } catch ( NumberFormatException e ) {
+        TDLog.Error( e.getMessage() );
+      }
       ret = String.format(Locale.US, "%.2f", mStationSize );
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_DOT_RADIUS
       ret = setDotRadius( tryFloatValue( hlp, k, v, def[2] ) );
@@ -2437,7 +2443,7 @@ public class TDSetting
     } else {
       TDLog.Error("missing SCREEN key: " + k );
     }
-    if ( ret != null ) hlp.update( k, ret );
+    if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
   }
 
@@ -2450,7 +2456,11 @@ public class TDSetting
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_LINE_THICKNESS
       ret = setLineThickness( tryStringValue( hlp, k, v, def[0] ) );
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_LINE_UNITS
-      try { setDrawingUnitLines( tryFloatValue( hlp, k, v, def[1] ) ); } catch ( NumberFormatException e ) { }
+      try {
+        setDrawingUnitLines( tryFloatValue( hlp, k, v, def[1] ) );
+      } catch ( NumberFormatException e ) {
+        TDLog.Error( e.getMessage() );
+      }
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_LINE_STYLE (choice)
       setLineStyleAndType( tryStringValue( hlp, k, v, def[2] ) );
     } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_LINE_SEGMENT
@@ -2466,7 +2476,7 @@ public class TDSetting
     } else {
       TDLog.Error("missing LINE key: " + k );
     }
-    if ( ret != null ) hlp.update( k, ret );
+    if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
   }
 
@@ -2479,17 +2489,23 @@ public class TDSetting
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_UNSCALED_POINTS (bool)
       mUnscaledPoints = tryBooleanValue( hlp, k, v, bool(def[0]) );
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_DRAWING_UNIT 
-      try { setDrawingUnitIcons( tryFloatValue( hlp, k, v, def[1] ) ); } catch ( NumberFormatException e ) { }
+      try {
+        setDrawingUnitIcons( tryFloatValue( hlp, k, v, def[1] ) );
+      } catch ( NumberFormatException e ) {
+        TDLog.Error( e.getMessage() );
+      }
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_LABEL_SIZE
       try {
         setLabelSize( Float.parseFloat( tryStringValue( hlp, k, v, def[2] ) ), true );
-      } catch ( NumberFormatException e ) { }
+      } catch ( NumberFormatException e ) {
+        TDLog.Error( e.getMessage() );
+      }
       // FIXME changing label size affects only new labels; not existing labels (until they are edited)
       ret = String.format(Locale.US, "%.2f", mLabelSize );
     } else {
       TDLog.Error("missing POINT key: " + k );
     }
-    if ( ret != null ) hlp.update( k, ret );
+    if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
   }
 
@@ -2535,11 +2551,17 @@ public class TDSetting
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_UNSCALED_POINTS (bool)
       mUnscaledPoints = tryBooleanValue( hlp, k, v, bool(def[0]) );
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_DRAWING_UNIT (choice)
-      try { setDrawingUnitIcons( tryFloatValue( hlp, k, v, def[1] ) ); } catch ( NumberFormatException e ) { }
+      try {
+        setDrawingUnitIcons( tryFloatValue( hlp, k, v, def[1] ) );
+      } catch ( NumberFormatException e ) {
+        TDLog.Error( e.getMessage() );
+      }
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_LABEL_SIZE
       try {
         setLabelSize( Float.parseFloat( tryStringValue( hlp, k, v, def[2] ) ), true );
-      } catch ( NumberFormatException e ) { }
+      } catch ( NumberFormatException e ) {
+        TDLog.Error( e.getMessage() );
+      }
       // FIXME changing label size affects only new labels; not existing labels (until they are edited)
       ret = String.format(Locale.US, "%.2f", mLabelSize );
     } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_LINE_THICKNESS
@@ -2561,7 +2583,7 @@ public class TDSetting
     } else {
       TDLog.Error("missing DRAW key: " + k );
     }
-    if ( ret != null ) hlp.update( k, ret );
+    if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
   }
 
@@ -2580,7 +2602,7 @@ public class TDSetting
     } else {
       TDLog.Error("missing ERASE key: " + k );
     }
-    if ( ret != null ) hlp.update( k, ret );
+    if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
   }
 
@@ -2601,7 +2623,7 @@ public class TDSetting
     } else {
       TDLog.Error("missing EDIT key: " + k );
     }
-    if ( ret != null ) hlp.update( k, ret );
+    if ( ret != null ) TDPrefHelper.update( k, ret );
     return ret;
   }
 
@@ -2817,7 +2839,7 @@ public class TDSetting
     }
     if ( ! setStationPolicy( policy ) ) {
       // preference is reset to the last saved policy
-      hlp.update( TDPrefKey.SURVEY[1], Integer.toString( StationPolicy.savedPolicy() ) );
+      TDPrefHelper.update( TDPrefKey.SURVEY[1], Integer.toString( StationPolicy.savedPolicy() ) );
       if ( TDPrefActivity.mPrefActivitySurvey != null ) TDPrefActivity.mPrefActivitySurvey.reloadPreferences(); // FIXME_PREF
     }
     // if ( ! mBacksightShot ) clearMagAnomaly( hlp.getSharedPrefs() );
@@ -3114,7 +3136,9 @@ public class TDSetting
     if ( idx < vals.length ) {
       try { 
         return Float.parseFloat(vals[idx]);
-      } catch ( NumberFormatException e ) { }
+      } catch ( NumberFormatException e ) {
+        TDLog.Error( e.getMessage() );
+      }
     }
     return fail;
   }
@@ -3129,7 +3153,9 @@ public class TDSetting
     if ( idx < vals.length ) {
       try { 
         return Integer.parseInt(vals[idx]);
-      } catch ( NumberFormatException e ) { }
+      } catch ( NumberFormatException e ) {
+        TDLog.Error( e.getMessage() );
+      }
     }
     return fail;
   }

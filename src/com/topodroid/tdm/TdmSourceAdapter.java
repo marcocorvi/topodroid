@@ -109,7 +109,7 @@ class TdmSourceAdapter extends ArrayAdapter< TdmSource >
 
     ViewHolder holder = null; 
     if ( convertView == null ) {
-      convertView = mLayoutInflater.inflate( R.layout.tdsource_adapter, null );
+      convertView = mLayoutInflater.inflate( R.layout.tdsource_adapter, null ); // parent crashes app
       holder = new ViewHolder();
       holder.checkBox = (CheckBox) convertView.findViewById( R.id.tdsource_checked );
       holder.textView = (TextView) convertView.findViewById( R.id.tdsource_name );

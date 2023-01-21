@@ -80,7 +80,7 @@ public class FirmwareUtils
       int skip = 0;   // bytes to skip in order to reach the offset
 
       // SIWEI FIXME
-      skip = OFFSET_TIAN - offset;
+      skip = OFFSET_TIAN - offset; // already assigned
       if ( dis.skipBytes( skip ) != skip ) {
         TDLog.v( "failed tian skip");
         return 0; // skip 8 bootloader blocks

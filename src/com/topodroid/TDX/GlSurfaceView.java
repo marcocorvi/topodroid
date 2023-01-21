@@ -81,7 +81,7 @@ class GlSurfaceView extends GLSurfaceView
     // queueEvent
     mApp.runOnUiThread( new Runnable() {
       @Override public void run() {
-        mRenderer.setXYLight( dax, day );
+        GlRenderer.setXYLight( dax, day );
         mApp.setTheTitle( mRenderer.getAngleString() );
       }
     } );

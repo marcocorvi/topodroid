@@ -10,7 +10,7 @@
 ***/
 package com.topodroid.ui;
 
-import android.os.Build;
+// import android.os.Build;
 import android.view.MotionEvent;
 
 public class MotionEventWrap

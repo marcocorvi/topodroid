@@ -39,7 +39,7 @@ import android.content.res.Resources;
 
 // import android.widget.TextView;
 // import android.widget.EditText;
-import android.widget.Button;
+// import android.widget.Button;
 import android.widget.ArrayAdapter;
 import android.view.View;
 

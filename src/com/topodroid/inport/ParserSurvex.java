@@ -252,7 +252,7 @@ class ParserSurvex extends ImportParser
                 // TODO
               } else if ( cmd.equals("default") ) {
                 // default calibrate|data|units|all
-		if ( vals_len > 1 ) {
+		if ( vals_len > 1 ) { // always true
 		  String what = vals[1].toLowerCase( Locale.getDefault() );
 		  if ( what.equals("calibrate") ) {
                     state.setCalibrateDefault();
@@ -306,7 +306,7 @@ class ParserSurvex extends ImportParser
                 // calibrate <quantities> <zero_error> [<scale>]
                 // calibrate <quantities> <zero_error> <zero_units> [<scale>]
 		// calibrate default
-		if ( vals_len > 1 ) {
+		if ( vals_len > 1 ) { // always true
 		  if ( vals[1].toLowerCase( Locale.getDefault() ).equals("default") ) {
                     state.setCalibrateDefault();
 		  } else {

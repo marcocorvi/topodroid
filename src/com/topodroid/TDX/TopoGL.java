@@ -1019,7 +1019,7 @@ public class TopoGL extends Activity
 
     Button b = (Button) v;
     if ( b == mButton1[ BTN_PROJECT ] ) {
-      if ( mRenderer.projectionMode != GlRenderer.PROJ_PERSPECTIVE ) return false;
+      if ( GlRenderer.projectionMode != GlRenderer.PROJ_PERSPECTIVE ) return false;
       new DialogProjection( this, mRenderer ).show();
     } else if ( b == mButton1[ BTN_STATION ] ) {
       mSelectStation = ! mSelectStation;
@@ -1178,7 +1178,7 @@ public class TopoGL extends Activity
   private void setButtonProjection()
   {
     mButton1[ BTN_PROJECT ].setBackgroundDrawable( 
-     ( mRenderer != null && mRenderer.projectionMode == GlRenderer.PROJ_PERSPECTIVE )? mBMperspective : mBMorthogonal );
+     ( mRenderer != null && GlRenderer.projectionMode == GlRenderer.PROJ_PERSPECTIVE )? mBMperspective : mBMorthogonal );
   }
 
   /** set the MOVE button: light, pan, rotate
@@ -1274,7 +1274,7 @@ public class TopoGL extends Activity
       setButtonMove();
     } else if ( b0 == mButton1[k1++] ) { // PROJECTION
       if ( mRenderer != null ) {
-        mRenderer.toggleProjectionMode();
+        GlRenderer.toggleProjectionMode();
         setButtonProjection();
         refresh(); // does not help
       }
@@ -1439,7 +1439,9 @@ public class TopoGL extends Activity
           CWConvexHull.resetCounters();
           if ( mRenderer != null ) mRenderer.setParser( mParser, true );
         }
-      } catch ( FileNotFoundException e ) { }
+      } catch ( FileNotFoundException e ) {
+        TDLog.Error( e.getMessage() );
+      }
       return ( mFilename != null );
     }
     return false;
@@ -1697,7 +1699,9 @@ public class TopoGL extends Activity
         if ( isr != null ) {
           try {
             isr.close();
-          } catch ( IOException e ) { }
+          } catch ( IOException e ) {
+            TDLog.Error( e.getMessage() );
+          }
         }
         if ( b ) {
           if ( mRenderer != null ) mRenderer.notifyTexture( bitmap ); // FIXME do in doInBackground
@@ -2893,7 +2897,8 @@ public class TopoGL extends Activity
   void selectDEMFile( )
   {
     onDEMloading = true;
-    selectFile( REQUEST_DEM_FILE, Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_dem_file, null ); 
+    // selectFile( REQUEST_DEM_FILE, Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_dem_file, null ); 
+    selectFile( REQUEST_DEM_FILE, false, -1, R.string.select_dem_file, null ); 
   }
 
   /** request selection of a texture file
@@ -2901,16 +2906,25 @@ public class TopoGL extends Activity
   void selectTextureFile( )
   {
     onDEMloading = true;
-    selectFile( REQUEST_TEXTURE_FILE, Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_texture_file, null ); 
+    // selectFile( REQUEST_TEXTURE_FILE, Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_texture_file, null ); 
+    selectFile( REQUEST_TEXTURE_FILE, false, -1, R.string.select_texture_file, null ); 
   }
 
   /** request selection of an import file
    */
-  void selectImportFile( )  { selectFile( REQUEST_IMPORT_FILE,  Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_survey_file,  null ); }
+  void selectImportFile( )  
+  {
+    // selectFile( REQUEST_IMPORT_FILE,  Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_survey_file,  null );
+    selectFile( REQUEST_IMPORT_FILE,  false, -1, R.string.select_survey_file,  null );
+  }
 
   // /** request selection of an attribute (temperature) file
   //  */
-  // void selectTemperatureFile( ) { selectFile( REQUEST_TEMPERATURE_FILE,  Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_temp_file, null ); }
+  // void selectTemperatureFile( )
+  // {
+  //   // selectFile( REQUEST_TEMPERATURE_FILE,  Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_temp_file, null );
+  //   selectFile( REQUEST_TEMPERATURE_FILE,  false, -1, R.string.select_temp_file, null );
+  // }
 
   /** export file selection
    * @param export   export data-struct
@@ -2922,7 +2936,9 @@ public class TopoGL extends Activity
     mExport.debug();
     // if ( TDSetting.mExportUri ) {
       // TDLog.v( "export with URI - survey " + mSurveyName );
-      selectFile( REQUEST_EXPORT_FILE, Intent.ACTION_CREATE_DOCUMENT, mExport.mMime, R.string.select_export_file, TDConst.getModelFilename( mExport.mType, mSurveyName ) );
+      // FIXME mExport.mMime is always "application/octet-stream" therefore index 0 is used
+      // selectFile( REQUEST_EXPORT_FILE, Intent.ACTION_CREATE_DOCUMENT, mExport.mMime, R.string.select_export_file, TDConst.getModelFilename( mExport.mType, mSurveyName ) );
+      selectFile( REQUEST_EXPORT_FILE, true, 0, R.string.select_export_file, TDConst.getModelFilename( mExport.mType, mSurveyName ) );
     //} else {
     //  // TDLog.v( "export with task - survey " + mSurveyName );
     //  (new ExportTask( this, mParser, null, mExport )).execute(); // null = URI
@@ -2931,18 +2947,22 @@ public class TopoGL extends Activity
 
   /** file selection
    * @param request   selection request type (code)
-   * @param action    unused
-   * @param mime      file mime type (unused)
+   * @param create    whether to create (or open) a file
+   * @param mime      index of file mime type 
    * @param res       dialog title resource
    * @param filename  suggested filename (optional)
    */
-  void selectFile( int request, String action, String mime, int res, String filename )
+  // void selectFile( int request, String action, String mime, int res, String filename )
+  void selectFile( int request, boolean create, int mime, int res, String filename )
   {
     // TDLog.v("TopoGL select file");
-    Intent intent = new Intent( action );
-    intent.setType( (mime==null)? "*/*" : mime );
-    intent.addCategory( Intent.CATEGORY_OPENABLE );
-    intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+    // Intent intent = new Intent( action );
+    // intent.setType( (mime == null)? "*/*" : mime );
+    // intent.addCategory( Intent.CATEGORY_OPENABLE );
+    // intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+
+    Intent intent = create? TDandroid.getCreateDocumentIntent( mime ) : TDandroid.getOpenDocumentIntent( mime );
+
     if ( filename != null ) intent.putExtra( Intent.EXTRA_TITLE, filename );
     startActivityForResult( Intent.createChooser(intent, getResources().getString( res ) ), request );
   }

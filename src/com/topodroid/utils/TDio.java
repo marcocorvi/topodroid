@@ -21,7 +21,7 @@ public class TDio
 
   /** @return a buffered reader on the given input stream or filepath
    * @param isr      input stream reader (null = not specified)
-   * @param filename filepath - used if the imput stream is not specified
+   * @param filename filepath - used if the input stream is not specified
    *
    */
   public static BufferedReader getBufferedReader( InputStreamReader isr, String filename )

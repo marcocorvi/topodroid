@@ -204,8 +204,8 @@ public class CalibGMDialog extends MyDialog
       /* nothing */
     } else if ( TDLevel.overExpert && b == mSB_regroup ) {
       switch ( mSB_regroup.getState() ) {
-        case 0: mSB_regroup.setState(1); mTV_regroup.setText("TopoDroid"); break;
-        case 1: mSB_regroup.setState(2); mTV_regroup.setText("PocketTopo"); break;
+        case 0: mSB_regroup.setState(1); mTV_regroup.setText(R.string.topodroid); break;
+        case 1: mSB_regroup.setState(2); mTV_regroup.setText(R.string.pockettopo); break;
         case 2: mSB_regroup.setState(0); mTV_regroup.setText(R.string.regroup); break;
       }
       return;

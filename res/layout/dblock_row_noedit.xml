@@ -30,7 +30,7 @@
     android:inputType="none"
     android:editable="false"
     android:hint="@string/char_hyphen"
-  /> <!-- editable=false is necessary -->
+  /> <!-- editable=false is necessary although deprecated -->
   <!-- 
     android:importantForAutofill="no"
     android:imeOptions="actionDone"
@@ -53,7 +53,7 @@
     android:inputType="none"
     android:editable="false"
     android:hint="@string/char_hyphen"
-  /> <!-- editable=false is necessary -->
+  /> <!-- editable=false is necessary although deprecated -->
   <!-- 
     android:importantForAutofill="no"
     android:imeOptions="actionDone"

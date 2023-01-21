@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
 
 import java.util.List;
@@ -81,7 +82,9 @@ public class Cave3DSurvey
       id = dis.readInt();
       nm = dis.readUTF();
       col = dis.readInt();
-    } catch ( IOException e ) { }
+    } catch ( IOException e ) {
+      TDLog.Error( e.getMessage() );
+    }
     // TDLog.v("Cave3D survey deserialized " + id + " " + nm + " color " + col );
     return new Cave3DSurvey( nm, id, -1, col );
   }

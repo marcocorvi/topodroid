@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.utils.TDLog;
 // import com.topodroid.dev.ConnectionState;
 
 import android.os.AsyncTask;
@@ -58,7 +59,9 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
           }
           // TDLog.v( "RECONNECT TASK status " + mDownloader.isDownloading() );
           mDownloader.tryConnect( mLister, mDataType ); 
-        } catch ( InterruptedException e ) { }
+        } catch ( InterruptedException e ) {
+          TDLog.Error( e.getMessage() );
+        }
       }
     }
     // TDLog.v( "RECONNECT TASK exits");

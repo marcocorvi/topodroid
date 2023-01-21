@@ -80,8 +80,8 @@ public class ExportLAS
       dos.write( (byte)0xdd );
       dos.write( (byte)0xcc );
 
-      if ( nr_vlr > 0 ) {
-	byte[] record = new byte[1];
+      if ( nr_vlr > 0 ) { // always false
+        byte[] record = new byte[1];
         for ( int k = 0; k < nr_vlr; ++ k ) {
           byte[] vlr = makeVLR("LAS_projection", 34735, record );
           dos.write( vlr );
