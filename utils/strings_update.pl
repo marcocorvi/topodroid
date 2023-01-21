@@ -9,7 +9,9 @@
 # --------------------------------------------------------
 #
 
-use builtin qw(trim);
+use builtin qw(
+  trim
+);
 no warnings "experimental::builtin";
 
 use File::Basename;
@@ -66,6 +68,7 @@ open( NEW, '>', $new_file ) or die "Cannot open new strings file \"$new_file\" f
 $buffer = '';
 $name = '';
 $tag = '';
+$translatable = 1;
 
 print NEW q|<?xml version="1.0" encoding="utf-8"?>
 <resources
@@ -87,8 +90,24 @@ while ( $line = <EN> ) {
   }
 
   if ( $trimmed_line =~ /translatable=.false./ ) {
-    next;
+    $translatable = 0;
   }
+
+  if ( $name eq '' ) {
+    if ( $trimmed_line =~ /name="/ ) {
+      $name = $trimmed_line;
+      $name =~ s/^.*name="//;
+      $name =~ s/".*$//;
+      $name = trim($name);
+      # print "NAME to write: '$name'\n";
+    }
+
+    if ( $name eq '' ) {
+      next;
+    }
+  }
+
+  $buffer .= $line;
 
   if ( $trimmed_line =~ /<!--/ ) { 
     $in_comment = 1;
@@ -98,51 +117,38 @@ while ( $line = <EN> ) {
     # print "TAG in EN: '$tag'\n";
   }
 
-  $buffer .= $line;
-
-  if ( $trimmed_line =~ /-->/ ) {
-    if ( $in_comment == 1 ) {
+  if ( $in_comment == 1 ) {
+    if ( $trimmed_line =~ /-->/ ) {
       $in_comment = 3;
-    }
-  } else {
-    if ( $in_comment == 1 ) {
+    } else {
       next;
     }
-  }
-
-  if ( ( $name  eq '' ) && ( $trimmed_line =~ /name="/ ) ) {
-    $name = $trimmed_line;
-    $name =~ s/^.*name="//;
-    $name =~ s/".*$//;
-    $name = trim($name);
-    # print "NAME to write: '$name'\n";
-  }
-
-  if ( $name eq '' ) {
-    next;
   }
 
   if ( ! ( $trimmed_line =~ /\<\/string.*$/ ) ) {
     next;
   }
 
-  $x_line = $xx_line{ $name };
-  # print "X_LINE: '$x_line'\n";
-  if ( $x_line eq '' ) {
-    if ( ( $tag eq '' ) || ( $tag eq 'TODO' ) ) {
-      $value = $buffer;
-      $value =~ s/^.*\"\>//;
-      $value =~ s/\<\/string.*$//;
-      chomp $value;
-      print NEW PREFIX . "<!-- TODO string name=\"$name\">$value<\/string -->\n";
+  if ($translatable) {
+    $x_line = $xx_line{ $name };
+    # print "X_LINE: '$x_line'\n";
+    if ( $x_line eq '' ) {
+      if ( ( $tag eq '' ) || ( $tag eq 'TODO' ) ) {
+        $value = $buffer;
+        $value =~ s/^.*\"\>//;
+        $value =~ s/\<\/string.*$//;
+        chomp $value;
+        print NEW PREFIX . "<!-- TODO string name=\"$name\">$value<\/string -->\n";
+      }
+    } else {
+      print NEW PREFIX . "$x_line\n";
     }
-  } else {
-    print NEW PREFIX . "$x_line\n";
   }
 
   $buffer = '';
   $name = '';
   $tag = '';
+  $translatable = 1;
 
   if ( $in_comment == 3 ) {
     $in_comment = 2;
