@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 #
 # align translation string file to english file
-# usage: strings.pl <en-strings_file> <xx-strings_file>
+# usage: strings_align.pl <en-strings_file> <xx-strings_file>
 #
 # --------------------------------------------------------
 #  Copyright This software is distributed under GPL-3.0 or later
@@ -50,7 +50,7 @@ while ( $line = <EN> ) {
       $value = $line;
       $value =~ s/^.*\"\>//;
       $value =~ s/\<\/string.*$//;
-      print "  <!-- XXX $tag string name=\"$name\">$value<\\string -->\n";
+      print "  <!-- XXX $tag string name=\"$name\">$value<\/string -->\n";
     }
   } else {
     print "  $x_line\n";
