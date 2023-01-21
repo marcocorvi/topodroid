@@ -89,10 +89,6 @@ while ( $line = <EN> ) {
     next;
   }
 
-  if ( $trimmed_line =~ /translatable=.false./ ) {
-    $translatable = 0;
-  }
-
   if ( $name eq '' ) {
     if ( $trimmed_line =~ /name="/ ) {
       $name = $trimmed_line;
@@ -105,6 +101,10 @@ while ( $line = <EN> ) {
     if ( $name eq '' ) {
       next;
     }
+  }
+
+  if ( $trimmed_line =~ /translatable=.false./ ) {
+    $translatable = 0;
   }
 
   $buffer .= $line;
