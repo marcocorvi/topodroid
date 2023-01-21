@@ -1484,7 +1484,7 @@ Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". 
     <string name="pref_weedlength_title">Comprimento segmento weeding</string>
     <string name="pref_weedlength_summary">Comprimento máximo de um segmento na redução da quantidade de pontos via \'weeding\'</string>
     <string name="pref_weedbuffer_title">Buffer segmentos weed</string>
-    <string name="pref_weedbuffer_summary">Buffer em torno de segmento de linha [pxl]</string -->
+    <string name="pref_weedbuffer_summary">Buffer em torno de segmento de linha [pxl]</string>
     <string name="pref_calib_algo_title">Algoritmo</string>
     <string name="pref_calib_algo_summary">Algoritmo de calibração</string>
     <string name="pref_group_by_title">Regra agrupamento</string>
@@ -1744,7 +1744,7 @@ Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". 
     <string name="info_east">Leste</string>
     <string name="info_north">Norte</string>
     <string name="info_z">Altitude</string>
-    <string Oname="info_origin">Origem</string>
+    <string name="info_origin">Origem</string>
     <string name="info_lonlat">coords.</string>
     <string name="info_radii">radianos</string>
     <string name="info_grid_value">%1$.0f m</string>
@@ -1754,7 +1754,6 @@ Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". 
     <string name="info_station_value">%1$d</string>
     <string name="info_length_value">%1$.1f m</string>
     <string name="info_depth_value">%1$.1f m</string>
-    <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
     <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
     <string name="info_east_value">O %1$.1f L %2$.1f</string>
     <string name="info_north_value">S %1$.1f N %2$.1f</string>
@@ -1787,7 +1786,7 @@ Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". 
     <string name="surface_projection">Projeção no DEM</string>
     <string name="surface_texture">Textura da superfície</string>
     <string name="surface_gps">Track GPS</string>
-    <string name="surface_east">Leste</string -->
+    <string name="surface_east">Leste</string>
     <string name="surface_north">Norte</string>
     <string name="dem_load">carregar</string>
     <string name="dem_loading">Carregando superfície &#8230; por favor espere</string>
@@ -1888,7 +1887,7 @@ Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". 
     <string name="cno_survey">Topo %1$s não localizada\n</string>
     <!-- UNUSED string name="cno_file">No file %1$s\n</string -->
     <string name="empty_survey">Topo %1$s vazia\n</string>
-    <string name="viewing_at">Viewing at clino %1$.0f azimuth %2$.0f</string -->
+    <string name="viewing_at">Viewing at clino %1$.0f azimuth %2$.0f</string>
     <string name="cpref_dem3d">DEM</string>
     <string name="cpref_walls3d">MODELO WALLS</string>
     <!-- UNUSED string name="cpref_base_path_title">Diretório base</string -->

@@ -90,7 +90,8 @@ lint:
 	../../../cmdline-tools/latest/bin/lint --ignore IconLocation . > lint.out
 
 strings:
-	@ for i in cn es fr hu it ru; do echo "$$i" `grep \"$$i\" lint.out | wc -l`; done
+	@ for i in cn fr hu it pt ru; do echo "$$i" `grep \"$$i\" lint.out | wc -l`; done
+	@ for i in cn fr hu it pt ru; do echo "values-$$i" `grep values-$$i lint.out | wc -l`; done
 
 pdf:
 	./howto/pdf.sh

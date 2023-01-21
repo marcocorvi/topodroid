@@ -1,6 +1,16 @@
+res/values/array.xml:144: Warning: Array loopClosure has an inconsistent number of items (4 in values-pt/array.xml, 5 in values-fr/array.xml) [InconsistentArrays]
+  <string-array name="loopClosure">
+  ^
+    res/values-fr/array.xml:112: Declaration with array size (5)
+    res/values-hu/array.xml:61: Declaration with array size (5)
+    res/values-pt/array.xml:61: Declaration with array size (4)
+    res/values-ru/array.xml:63: Declaration with array size (5)
 res/layout/shot_activity.xml:57: Warning: This ListView should use android:layout_width="wrap_content" [ScrollViewSize]
         android:layout_width="fill_parent"
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/com/topodroid/dev/distox_ble/DistoXBLEInfoDialog.java:109: Warning: Implicitly using the default locale is a common source of bugs: Use String.format(Locale, ...) instead [DefaultLocale]
+          tv_hardware.setText( String.format( "Hardware: %d", txtval) );
+                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/layout/dblock_row_noedit.xml:31: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
     android:editable="false"
     ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -19,297 +29,507 @@ res/values-fr/plurals.xml:11: Error: For locale "fr" (French) the following quan
 res/values-fr/plurals.xml:15: Error: For locale "fr" (French) the following quantities should also be defined: many [MissingQuantity]
   <plurals name="found_calib_groups">
   ^
-res/values/strings.xml:23: Error: "r_title" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="r_title">Android-13+ WARNING</string>
-          ~~~~~~~~~~~~~~
-res/values/strings.xml:27: Error: "r_dialog" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:27: Error: "r_dialog" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
   <string name="r_dialog">
           ~~~~~~~~~~~~~~~
-res/values/strings.xml:33: Error: "r_continue" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:33: Error: "r_continue" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
   <string name="r_continue">CONTINUE</string>
           ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:34: Error: "r_quit" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:34: Error: "r_quit" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
   <string name="r_quit">QUIT</string>
           ~~~~~~~~~~~~~
-res/values/strings.xml:165: Error: "calib_dip" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="calib_dip">Magn. dip: %1$.1f &#xb0;</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:167: Error: "calib_min_error" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="calib_min_error">Minimum error</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:168: Error: "magn_dip" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="magn_dip">Magn. dip &#8230;</string>
-            ~~~~~~~~~~~~~~~
-res/values/strings.xml:201: Error: "unknown_device_type" is not translated in "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:201: Error: "unknown_device_type" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
     <string name="unknown_device_type">Unknown device type %1$d</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:252: Error: "GPS_position_none" is not translated in "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:252: Error: "GPS_position_none" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
     <string name="GPS_position_none">No GPS position data</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:253: Error: "GPX_record_none" is not translated in "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:253: Error: "GPX_record_none" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
     <string name="GPX_record_none">No GPX point record</string>
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:283: Error: "accuracy_hint" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:283: Error: "accuracy_hint" is not translated in "fr" (French) [MissingTranslation]
     <string name="accuracy_hint">Accuracy [m]</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:288: Error: "loops_bad" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="loops_bad">Inaccurate loops: %1$d</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:292: Error: "error_m" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:292: Error: "error_m" is not translated in "fr" (French) [MissingTranslation]
     <string name="error_m">Accuracy [m]</string>
             ~~~~~~~~~~~~~~
-res/values/strings.xml:293: Error: "fmt_error_h" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:293: Error: "fmt_error_h" is not translated in "fr" (French) [MissingTranslation]
     <string name="fmt_error_h">Accuracy: %1$.1f m</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:294: Error: "fmt_error_m" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:294: Error: "fmt_error_m" is not translated in "fr" (French) [MissingTranslation]
     <string name="fmt_error_m">Accuracy: H %1$.1f V %2$.1f m</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:297: Error: "location_start_fine" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:297: Error: "location_start_fine" is not translated in "cn" or "fr" (French) [MissingTranslation]
     <string name="location_start_fine">Starting fine position</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:308: Error: "error_fixes_nocs" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:308: Error: "error_fixes_nocs" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
     <string name="error_fixes_nocs">Fix points without CS %1$s:\n%2$s</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:321: Error: "error_station_number" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="error_station_number">Wrong number of stations</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:324: Error: "error_profile_slant_section" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:324: Error: "error_profile_slant_section" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
     <string name="error_profile_slant_section">Slanted Xsection not enabled in profile view</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:332: Error: "error_station_fixed" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:332: Error: "error_station_fixed" is not translated in "cn" or "fr" (French) [MissingTranslation]
     <string name="error_station_fixed">Georeferenced station</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:411: Error: "no_search_result" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="no_search_result">No search_result.</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:442: Error: "menu_geopoint_app" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:412: Error: "no_survey" is not translated in "pt" (Portuguese) [MissingTranslation]
+    <string name="no_survey">No survey selected.</string>
+            ~~~~~~~~~~~~~~~~
+res/values/strings.xml:442: Error: "menu_geopoint_app" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
     <string name="menu_geopoint_app">GNSS APP</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:692: Error: "stat_devices" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:559: Error: "read_fail_with_code" is not translated in "pt" (Portuguese) [MissingTranslation]
+    <string name="read_fail_with_code">Read failure: error code </string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:692: Error: "stat_devices" is not translated in "fr" (French) [MissingTranslation]
     <string name="stat_devices">Devices %1$d: %2$s</string>
             ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:710: Error: "stat_leg_sigma" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:710: Error: "stat_leg_sigma" is not translated in "cn" [MissingTranslation]
     <string name="stat_leg_sigma">Leg sigma %1$.1f cm</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:738: Error: "projected_profile" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="projected_profile">Projected profile</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:825: Error: "button_leg_station" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="button_leg_station">Leg stations</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:826: Error: "button_all_station" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="button_all_station">All stations</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:827: Error: "button_leg_search" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="button_leg_search">Leg search</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:838: Error: "button_download" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="button_download"  >Download</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:844: Error: "button_wait" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="button_wait">Wait</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:996: Error: "help_geopoint_app" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:716: Error: "shot_data" is not translated in "pt" (Portuguese) [MissingTranslation]
+    <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f</string>
+            ~~~~~~~~~~~~~~~~
+res/values/strings.xml:784: Error: "button_gps_start" is not translated in "pt" (Portuguese) [MissingTranslation]
+    <string name="button_gps_start" >GPS</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:802: Error: "button_ok" is not translated in "pt" (Portuguese) [MissingTranslation]
+    <string name="button_ok"        >OK</string>
+            ~~~~~~~~~~~~~~~~
+res/values/strings.xml:996: Error: "help_geopoint_app" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
     <string name="help_geopoint_app">External GNSS apps</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1018: Error: "help_gps_surveys" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="help_gps_surveys">Surveys fixed points</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1027: Error: "help_drawing" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="help_drawing">Drawing</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1102: Error: "export_bothviews" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1102: Error: "export_bothviews" is not translated in "cn" or "fr" (French) [MissingTranslation]
     <string name="export_bothviews">Plan and profile</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1109: Error: "export_layers" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1109: Error: "export_layers" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
     <string name="export_layers">Scrap layers</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1120: Error: "export_spacing_th" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1120: Error: "export_spacing_th" is not translated in "cn" [MissingTranslation]
     <string name="export_spacing_th">Point spacing</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1168: Error: "title_gm_search" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="title_gm_search">Calib data search</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1183: Error: "title_fixed_mt" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1183: Error: "title_fixed_mt" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
     <string name="title_fixed_mt">Geo points [Mobile Topographer]</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1184: Error: "title_fixed_gpx_rec" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1184: Error: "title_fixed_gpx_rec" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
     <string name="title_fixed_gpx_rec">Geo points [GPX Recorder]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1185: Error: "title_fixed_gps_pos" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1185: Error: "title_fixed_gps_pos" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
     <string name="title_fixed_gps_pos">Geo points [GPS Position]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1186: Error: "title_fixed_gps_test" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1186: Error: "title_fixed_gps_test" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
     <string name="title_fixed_gps_test">Geo points [GPSTest]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1187: Error: "title_fixed_gps_logger" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1187: Error: "title_fixed_gps_logger" is not translated in "ru" (Russian), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
     <string name="title_fixed_gps_logger">Geo points [GPS Logger]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1275: Error: "title_import_th2" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="title_import_th2">Therion th2 file</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1276: Error: "title_infos" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="title_infos">Surveys geo-points</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1293: Error: "pref_lrud_count_title" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1293: Error: "pref_lrud_count_title" is not translated in "cn" [MissingTranslation]
   <string name="pref_lrud_count_title">LRUD splay count</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1294: Error: "pref_lrud_count_summary" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1294: Error: "pref_lrud_count_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_lrud_count_summary">Number of splays used for LRUD</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1370: Error: "pref_th2_edit_title" is not translated in "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1370: Error: "pref_th2_edit_title" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
   <string name="pref_th2_edit_title">Sketch editing</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1371: Error: "pref_th2_edit_summary" is not translated in "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1371: Error: "pref_th2_edit_summary" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
   <string name="pref_th2_edit_summary">Enable sketch editing</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1479: Error: "pref_neg_altitude_title" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1407: Error: "pref_svg_program_title" is not translated in "pt" (Portuguese) [MissingTranslation]
+  <string name="pref_svg_program_title">SVG program</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1408: Error: "pref_svg_program_summary" is not translated in "pt" (Portuguese) [MissingTranslation]
+  <string name="pref_svg_program_summary">Target SVG program</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1479: Error: "pref_neg_altitude_title" is not translated in "fr" (French) [MissingTranslation]
   <string name="pref_neg_altitude_title">Neg. altitudes</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1480: Error: "pref_neg_altitude_summary" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1480: Error: "pref_neg_altitude_summary" is not translated in "fr" (French) [MissingTranslation]
   <string name="pref_neg_altitude_summary">Allow negative altitudes</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1481: Error: "pref_edit_altitude_title" is not translated in "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1481: Error: "pref_edit_altitude_title" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
   <string name="pref_edit_altitude_title">Editable altitude</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1482: Error: "pref_edit_altitude_summary" is not translated in "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1482: Error: "pref_edit_altitude_summary" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
   <string name="pref_edit_altitude_summary">Allow editable altitudes</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1483: Error: "pref_fine_location_title" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1483: Error: "pref_fine_location_title" is not translated in "cn" or "fr" (French) [MissingTranslation]
   <string name="pref_fine_location_title">Fine position [s]</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1484: Error: "pref_fine_location_summary" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1484: Error: "pref_fine_location_summary" is not translated in "cn" or "fr" (French) [MissingTranslation]
   <string name="pref_fine_location_summary">Fine position time [s]</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1485: Error: "pref_geoimport_app_title" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1485: Error: "pref_geoimport_app_title" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
   <string name="pref_geoimport_app_title">GNSS app</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1486: Error: "pref_geoimport_app_summary" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1486: Error: "pref_geoimport_app_summary" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
   <string name="pref_geoimport_app_summary">External GNSS app</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1493: Error: "pref_sap5_bit16_bug_title" is not translated in "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1493: Error: "pref_sap5_bit16_bug_title" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
   <string name="pref_sap5_bit16_bug_title">SAP5 bit-16 bug</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1494: Error: "pref_sap5_bit16_bug_summary" is not translated in "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1494: Error: "pref_sap5_bit16_bug_summary" is not translated in "it" (Italian) or "fr" (French) [MissingTranslation]
   <string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 bug workaround</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1529: Error: "pref_splay_latest_color_title" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1529: Error: "pref_splay_latest_color_title" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
   <string name="pref_splay_latest_color_title">Splay latest color</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1530: Error: "pref_splay_latest_color_summary" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1530: Error: "pref_splay_latest_color_summary" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
   <string name="pref_splay_latest_color_summary">Color of latest splay lines</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1556: Error: "pref_sibling_thr_title" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_sibling_thr_title">Sibling threshold</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1557: Error: "pref_sibling_thr_summary" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_sibling_thr_summary">Threshold for sibling shots [&#37;]</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1601: Error: "pref_acad_layer_title" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1601: Error: "pref_acad_layer_title" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
   <string name="pref_acad_layer_title">Scrap layers</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1602: Error: "pref_acad_layer_summary" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1602: Error: "pref_acad_layer_summary" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
   <string name="pref_acad_layer_summary">DXF layers by scraps</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1637: Error: "pref_slant_xsection_title" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1637: Error: "pref_slant_xsection_title" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
   <string name="pref_slant_xsection_title">Slant xsections</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1638: Error: "pref_slant_xsection_summary" is not translated in "cn", "it" (Italian), "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1638: Error: "pref_slant_xsection_summary" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
   <string name="pref_slant_xsection_summary">Profile view slant xsections</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1719: Error: "pref_loop_thr_title" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_loop_thr_title">Loop threshold</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1720: Error: "pref_loop_thr_summary" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_loop_thr_summary">Loop compensation threshold</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1895: Error: "ask_download" is not translated in "es" (Spanish) [MissingTranslation]
-   <string name="ask_download">Download firmware? (be patient)</string>
-           ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1901: Error: "firmware_file_downloaded" is not translated in "es" (Spanish) [MissingTranslation]
-   <string name="firmware_file_downloaded">Downloaded firmware file %1$s read %2$d</string>
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1904: Error: "firmware_file_download_fail" is not translated in "es" (Spanish) [MissingTranslation]
-   <string name="firmware_file_download_fail">Failed firmware download</string>
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1906: Error: "firmware_uploaded" is not translated in "es" (Spanish) [MissingTranslation]
-   <string name="firmware_uploaded">%1$s firmware: uploaded %2$d</string>
-           ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1907: Error: "firmware_downloaded" is not translated in "es" (Spanish) [MissingTranslation]
-   <string name="firmware_downloaded">%1$s firmware: downloaded %2$d</string>
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1752: Error: "pref_side_drag_title" is not translated in "pt" (Portuguese) [MissingTranslation]
+  <string name="pref_side_drag_title">Corner drag</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1753: Error: "pref_side_drag_summary" is not translated in "pt" (Portuguese) [MissingTranslation]
+  <string name="pref_side_drag_summary">Enable corner-drag on the sketch window</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:1924: Error: "equate_no_stations" is not translated in "fr" (French) [MissingTranslation]
     <string name="equate_no_stations">Too few stations</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1930: Error: "menu_open" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="menu_open">OPEN</string>
+res/values/strings.xml:1931: Error: "menu_save" is not translated in "pt" (Portuguese) [MissingTranslation]
+    <string name="menu_save">SAVE</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1994: Error: "info_origin" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1994: Error: "info_origin" is not translated in "cn" or "fr" (French) [MissingTranslation]
     <string name="info_origin">Origin</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1995: Error: "info_lonlat" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1995: Error: "info_lonlat" is not translated in "cn" or "fr" (French) [MissingTranslation]
     <string name="info_lonlat">coords.</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1996: Error: "info_radii" is not translated in "cn", "fr" (French), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1996: Error: "info_radii" is not translated in "cn" or "fr" (French) [MissingTranslation]
     <string name="info_radii">radii</string>
             ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2009: Error: "info_origin_value" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2009: Error: "info_origin_value" is not translated in "fr" (French) [MissingTranslation]
     <string name="info_origin_value">x %1$.0f y %2$.0f z %3$.0f</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2010: Error: "info_origin_none" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2010: Error: "info_origin_none" is not translated in "fr" (French) [MissingTranslation]
     <string name="info_origin_none">undefined</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2011: Error: "info_lonlat_geovalue" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2011: Error: "info_lonlat_geovalue" is not translated in "fr" (French) [MissingTranslation]
     <string name="info_lonlat_geovalue">lon %1$.7f lat %2$.7f</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2012: Error: "info_lonlat_prjvalue" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2012: Error: "info_lonlat_prjvalue" is not translated in "fr" (French) [MissingTranslation]
     <string name="info_lonlat_prjvalue">lon %1$.1f lat %2$.1f</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2013: Error: "info_radii_value" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2013: Error: "info_radii_value" is not translated in "fr" (French) [MissingTranslation]
     <string name="info_radii_value">EW %1$.1f NS %2$.1f</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:2035: Error: "dist_path" is not translated in "cn" or "fr" (French) [MissingTranslation]
     <string name="dist_path">%1$s %2$s: D %3$.2f (%4$.2f %5$.2f %6$.2f) %7$.2f %8$.2f Path %9$.2f</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:2048: Error: "dem_loading" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="dem_loading">Loading surface &#8230; please wait</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2056: Error: "texture" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2056: Error: "texture" is not translated in "cn" [MissingTranslation]
     <string name="texture">DTM</string>
             ~~~~~~~~~~~~~~
-res/values/strings.xml:2087: Error: "east" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2063: Error: "ctitle_sketches" is not translated in "pt" (Portuguese) [MissingTranslation]
+    <string name="ctitle_sketches">Sketches</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:2064: Error: "ctitle_legs" is not translated in "pt" (Portuguese) [MissingTranslation]
+    <string name="ctitle_legs">Legs visibility</string>
+            ~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:2087: Error: "east" is not translated in "fr" (French) [MissingTranslation]
   <string name="east">E</string>
           ~~~~~~~~~~~
-res/values/strings.xml:2088: Error: "north" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2088: Error: "north" is not translated in "fr" (French) [MissingTranslation]
   <string name="north">N</string>
           ~~~~~~~~~~~~
-res/values/strings.xml:2089: Error: "west" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2089: Error: "west" is not translated in "fr" (French) [MissingTranslation]
   <string name="west">W</string>
           ~~~~~~~~~~~
-res/values/strings.xml:2090: Error: "south" is not translated in "fr" (French) or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2090: Error: "south" is not translated in "fr" (French) [MissingTranslation]
   <string name="south">S</string>
           ~~~~~~~~~~~~
-res/values/strings.xml:2155: Error: "warning_nogrant_camera" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="warning_nogrant_camera">Camera permission has not been granted</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:2200: Error: "cpref_grid_extent_summary" is not translated in "fr" (French) [MissingTranslation]
     <string name="cpref_grid_extent_summary">Grid extent around the survey plan-view</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:23: Error: "r_checkboxes" is translated here but not found in default locale [ExtraTranslation]
+    <string name="r_checkboxes">Você deve confirmar marcando as caixas de seleção.</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:187: Error: "found_groups" is translated here but not found in default locale [ExtraTranslation]
+    <string name="found_groups">Encontrados %1$d grupos</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:196: Error: "export_plot_title" is translated here but not found in default locale [ExtraTranslation]
+    <string name="export_plot_title">Exportar croqui</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:197: Error: "export_overview_title" is translated here but not found in default locale [ExtraTranslation]
+    <string name="export_overview_title">Exportar visão geral</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:237: Error: "h_ellipsoid" is translated here but not found in default locale [ExtraTranslation]
+    <string name="h_ellipsoid">Elipsóide H </string>
+            ~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:241: Error: "h_ellipsoid_hint" is translated here but not found in default locale [ExtraTranslation]
+    <string name="h_ellipsoid_hint">Elipsóide H [metros]</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:254: Error: "fmt_h_ellipsoid" is translated here but not found in default locale [ExtraTranslation]
+    <string name="fmt_h_ellipsoid">Erro (elipsóide): %1$.0f m</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:321: Error: "fmt_savetext" is translated here but not found in default locale [ExtraTranslation]
+    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:337: Error: "no_capture_app" is translated here but not found in default locale [ExtraTranslation]
+    <string name="no_capture_app">Nenhum aplicativo de captura de imagem</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:343: Error: "no_device_found" is translated here but not found in default locale [ExtraTranslation]
+    <string name="no_device_found">Nenhum dispositivo encontrado</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:351: Error: "no_paired_device" is translated here but not found in default locale [ExtraTranslation]
+    <string name="no_paired_device">Nenhum dispositivo associado.\nBusque e associe uma DistoX</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:374: Error: "menu_backups" is translated here but not found in default locale [ExtraTranslation]
+    <string name="menu_backups">APAGAR BACKUPS</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:397: Error: "menu_logs" is translated here but not found in default locale [ExtraTranslation]
+    <string name="menu_logs">LOGS</string>
+            ~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:402: Error: "menu_pair" is translated here but not found in default locale [ExtraTranslation]
+    <string name="menu_pair">PAREAR</string>
+            ~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:416: Error: "start_scan" is translated here but not found in default locale [ExtraTranslation]
+    <string name="start_scan">Começar varredura</string>
+            ~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:417: Error: "stop_scan" is translated here but not found in default locale [ExtraTranslation]
+    <string name="stop_scan">Parar varredura</string>
+            ~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:418: Error: "title_scan" is translated here but not found in default locale [ExtraTranslation]
+    <string name="title_scan">Varredura BLE</string>
+            ~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:460: Error: "connection_error" is translated here but not found in default locale [ExtraTranslation]
+    <string name="connection_error">Erro na conexão</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:461: Error: "connecting" is translated here but not found in default locale [ExtraTranslation]
+    <string name="connecting">Conectando &#8230;</string>
+            ~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:464: Error: "not_available" is translated here but not found in default locale [ExtraTranslation]
+    <string name="not_available">Bluetooth indisponível</string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:557: Error: "survey_not_attached_extend" is translated here but not found in default locale [ExtraTranslation]
+    <string name="survey_not_attached_extend">ALERTA: visadas desconectadas e sem medidas auxiliares</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:653: Error: "extended_profile" is translated here but not found in default locale [ExtraTranslation]
+    <string name="extended_profile">Perfil retificado</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:671: Error: "ask_backups_clear" is translated here but not found in default locale [ExtraTranslation]
+    <string name="ask_backups_clear">Apagar backups dos croquis?</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:677: Error: "button_change" is translated here but not found in default locale [ExtraTranslation]
+    <string name="button_change"    >Alterar    </string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:875: Error: "help_backups" is translated here but not found in default locale [ExtraTranslation]
+    <string name="help_backups">Apagar backups dos croquis</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:895: Error: "help_log" is translated here but not found in default locale [ExtraTranslation]
+    <string name="help_log">Ativar/desativar configurações de log</string>
+            ~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:951: Error: "help_to_point" is translated here but not found in default locale [ExtraTranslation]
+    <string name="help_to_point">Mover o ponto selecionado para juntá-lo ao ponto mais próximo</string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:952: Error: "help_split_point" is translated here but not found in default locale [ExtraTranslation]
+    <string name="help_split_point">Dividir o ponto em dois [linha/área]</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:953: Error: "help_split_line" is translated here but not found in default locale [ExtraTranslation]
+    <string name="help_split_line">Dividir a linha em dois no ponto [linha/área]</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:954: Error: "help_kink" is translated here but not found in default locale [ExtraTranslation]
+    <string name="help_kink">Utilizar uma linha reta no ponto [linha/área]</string>
+            ~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:988: Error: "export_bgcolor" is translated here but not found in default locale [ExtraTranslation]
+    <string name="export_bgcolor">Cor de fundo</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1005: Error: "export_scale_png" is translated here but not found in default locale [ExtraTranslation]
+    <string name="export_scale_png">Resolução</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1111: Error: "title_settings_splay" is translated here but not found in default locale [ExtraTranslation]
+    <string name="title_settings_splay">Configurações medidas auxiliares</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1436: Error: "pref_bitmap_scale_title" is translated here but not found in default locale [ExtraTranslation]
+    <string name="pref_bitmap_scale_title">Resolução PNG</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1437: Error: "pref_bitmap_scale_summary" is translated here but not found in default locale [ExtraTranslation]
+    <string name="pref_bitmap_scale_summary">Resolução imagem PNG croquis</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1438: Error: "pref_bitmap_bgcolor_title" is translated here but not found in default locale [ExtraTranslation]
+    <string name="pref_bitmap_bgcolor_title">Cor fundo PNG</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1439: Error: "pref_bitmap_bgcolor_summary" is translated here but not found in default locale [ExtraTranslation]
+    <string name="pref_bitmap_bgcolor_summary">Cor de fundo imagem PNG croquis</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1540: Error: "pref_backups_clear_title" is translated here but not found in default locale [ExtraTranslation]
+    <string name="pref_backups_clear_title">Apagar backups</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1541: Error: "pref_backups_clear_summary" is translated here but not found in default locale [ExtraTranslation]
+    <string name="pref_backups_clear_summary">Habilitar menu para apagar backups</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1608: Error: "pref_plot_walls_title" is translated here but not found in default locale [ExtraTranslation]
+    <string name="pref_plot_walls_title">PAREDES AUTOMÁTICAS</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1609: Error: "pref_walls_type_title" is translated here but not found in default locale [ExtraTranslation]
+    <string name="pref_walls_type_title">Tipo paredes</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1610: Error: "pref_walls_type_summary" is translated here but not found in default locale [ExtraTranslation]
+    <string name="pref_walls_type_summary">Tipo das paredes</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1611: Error: "pref_walls_plan_thr_title" is translated here but not found in default locale [ExtraTranslation]
+    <string name="pref_walls_plan_thr_title">Inclinação medidas planta</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1612: Error: "pref_walls_plan_thr_summary" is translated here but not found in default locale [ExtraTranslation]
+    <string name="pref_walls_plan_thr_summary">Inclinação máxima de medidas auxiliares para paredes de plantas baixas [deg]</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1613: Error: "pref_walls_extended_thr_title" is translated here but not found in default locale [ExtraTranslation]
+    <string name="pref_walls_extended_thr_title">Inclinação medidas corte</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1614: Error: "pref_walls_extended_thr_summary" is translated here but not found in default locale [ExtraTranslation]
+    <string name="pref_walls_extended_thr_summary">Inclinação máxima de medidas auxiliares para paredes de cortes [deg]</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1615: Error: "pref_walls_xclose_title" is translated here but not found in default locale [ExtraTranslation]
+    <string name="pref_walls_xclose_title">Espaçamento</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1616: Error: "pref_walls_xclose_summary" is translated here but not found in default locale [ExtraTranslation]
+    <string name="pref_walls_xclose_summary">Separação mínima de pontos de paredes ao longo da medida [m]</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1617: Error: "pref_walls_concave_title" is translated here but not found in default locale [ExtraTranslation]
+    <string name="pref_walls_concave_title">Concavidade</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1618: Error: "pref_walls_concave_summary" is translated here but not found in default locale [ExtraTranslation]
+    <string name="pref_walls_concave_summary">Concavidade máxima [percentual]</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1619: Error: "pref_walls_xstep_title" is translated here but not found in default locale [ExtraTranslation]
+    <string name="pref_walls_xstep_title">Passo</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1620: Error: "pref_walls_xstep_summary" is translated here but not found in default locale [ExtraTranslation]
+    <string name="pref_walls_xstep_summary">Separação dos pontos ao longo das paredes [m]</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1669: Error: "ask_dump" is translated here but not found in default locale [ExtraTranslation]
+    <string name="ask_dump">Baixar firmware?</string>
+            ~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1675: Error: "firmware_file_dumped" is translated here but not found in default locale [ExtraTranslation]
+    <string name="firmware_file_dumped">Arquivo firmware salvo %1$s tamanho %2$d</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1678: Error: "firmware_file_dump_fail" is translated here but not found in default locale [ExtraTranslation]
+    <string name="firmware_file_dump_fail">Falha no recebimento de firmware</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1692: Error: "file_exists" is translated here but not found in default locale [ExtraTranslation]
+    <string name="file_exists">Arquivo já existe</string>
+            ~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1693: Error: "file_create_fail" is translated here but not found in default locale [ExtraTranslation]
+    <string name="file_create_fail">Falha na criação de arquivo</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1694: Error: "oom" is translated here but not found in default locale [ExtraTranslation]
+    <string name="oom">Alerta: memória cheia.</string>
+            ~~~~~~~~~~
+res/values-pt/strings.xml:1697: Error: "equate_no_station" is translated here but not found in default locale [ExtraTranslation]
+    <string name="equate_no_station">Nenhuma base selecionada</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1705: Error: "overwrite" is translated here but not found in default locale [ExtraTranslation]
+    <string name="overwrite">sobreescrever</string>
+            ~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1733: Error: "info_title" is translated here but not found in default locale [ExtraTranslation]
+    <string name="info_title">INFO</string>
+            ~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1735: Error: "info_axes" is translated here but not found in default locale [ExtraTranslation]
+    <string name="info_axes">Eixos: azul Norte, verde Leste</string>
+            ~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1773: Error: "query" is translated here but not found in default locale [ExtraTranslation]
+    <string name="query" formatted="false">Topos: %d visadas: %d bases: %d\nComprimento: %d Profundidade: %d</string>
+            ~~~~~~~~~~~~
+res/values-pt/strings.xml:1777: Error: "clear" is translated here but not found in default locale [ExtraTranslation]
+    <string name="clear">Limpar</string>
+            ~~~~~~~~~~~~
+res/values-pt/strings.xml:1782: Error: "measure" is translated here but not found in default locale [ExtraTranslation]
+    <string name="measure">medida</string>
+            ~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1842: Error: "view_point" is translated here but not found in default locale [ExtraTranslation]
+    <string name="view_point">Ponto de vista</string>
+            ~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1849: Error: "powercrust_few_splays" is translated here but not found in default locale [ExtraTranslation]
+    <string name="powercrust_few_splays">Powercrust: poucas medidas auxiliares</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1850: Error: "powercrust_failed" is translated here but not found in default locale [ExtraTranslation]
+    <string name="powercrust_failed">Powercrust falhou</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1851: Error: "powercrust_successful" is translated here but not found in default locale [ExtraTranslation]
+    <string name="powercrust_successful">Powercrust bem sucedido: %1$d / %2$d</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1858: Error: "error_file_not_found" is translated here but not found in default locale [ExtraTranslation]
+    <string name="error_file_not_found">Erro: arquivo não encontrado</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1859: Error: "error_file_not_readable" is translated here but not found in default locale [ExtraTranslation]
+    <string name="error_file_not_readable">Erro: arquivo ilegível</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1862: Error: "error_io_exception" is translated here but not found in default locale [ExtraTranslation]
+    <string name="error_io_exception">Erro: exceção de IO</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1866: Error: "warning_not_overwrite" is translated here but not found in default locale [ExtraTranslation]
+    <string name="warning_not_overwrite">Alerta: não sobreescrevendo arquivo %1$s</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1939: Error: "cpref_convex_hull_title" is translated here but not found in default locale [ExtraTranslation]
+    <string name="cpref_convex_hull_title">Convex hull</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1940: Error: "cpref_convex_hull_summary" is translated here but not found in default locale [ExtraTranslation]
+    <string name="cpref_convex_hull_summary">Convex hull walls</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1941: Error: "cpref_delaunay_title" is translated here but not found in default locale [ExtraTranslation]
+    <string name="cpref_delaunay_title">Delaunay</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1942: Error: "cpref_delaunay_summary" is translated here but not found in default locale [ExtraTranslation]
+    <string name="cpref_delaunay_summary">Delaunay walls</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1943: Error: "cpref_hull_title" is translated here but not found in default locale [ExtraTranslation]
+    <string name="cpref_hull_title">Hull</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1944: Error: "cpref_hull_summary" is translated here but not found in default locale [ExtraTranslation]
+    <string name="cpref_hull_summary">Hull walls</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1946: Error: "cperms_mandatory" is translated here but not found in default locale [ExtraTranslation]
+    <string name="cperms_mandatory">Cave3D não pode ser executado sem as seguintes permissões:</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
 res/values-fr/plurals.xml:4: Error: The quantity 'one' matches more than one specific number in this locale (0, 1), but the message did not include a formatting argument (such as %d). This is usually an internationalization error. See full issue explanation for more. [ImpliedQuantity]
     <item quantity="one">ATTENTION. Une donnée saturée</item>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:602: Warning: Inconsistent number of arguments in formatting string shot_rename_unsafe; found both 1 here and 0 in values-fr/strings.xml [StringFormatCount]
+res/values-pt/plurals.xml:4: Error: The quantity 'one' matches more than one specific number in this locale (0, 1), but the message did not include a formatting argument (such as %d). This is usually an internationalization error. See full issue explanation for more. [ImpliedQuantity]
+    <item quantity="one">ATENÇÃO. Um dado saturado</item>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/plurals.xml:9: Error: The quantity 'one' matches more than one specific number in this locale (0, 1), but the message did not include a formatting argument (such as %d). This is usually an internationalization error. See full issue explanation for more. [ImpliedQuantity]
+    <item quantity="one">1 dado lido</item>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:27: Warning: Inconsistent number of arguments in formatting string r_dialog; found both 1 here and 0 in values-pt/strings.xml [StringFormatCount]
+  <string name="r_dialog">
+  ^
+    res/values-pt/strings.xml:20: Conflicting number of arguments (0) here
+res/values-pt/strings.xml:252: Warning: Inconsistent number of arguments in formatting string fmt_error_m; found both 1 here and 2 in values/strings.xml [StringFormatCount]
+    <string name="fmt_error_m">Erro: %1$.1f m</string>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    res/values/strings.xml:294: Conflicting number of arguments (2) here
+res/values/strings.xml:602: Warning: Inconsistent number of arguments in formatting string shot_rename_unsafe; found both 1 here and 0 in values-pt/strings.xml [StringFormatCount]
     <string name="shot_rename_unsafe">Stations referenced by xsections:%1$s.\nRename shot ?</string>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    res/values-fr/strings.xml:601: Conflicting number of arguments (0) here
-res/values/strings.xml:603: Warning: Inconsistent number of arguments in formatting string shots_rename_unsafe; found both 1 here and 0 in values-fr/strings.xml [StringFormatCount]
+    res/values-pt/strings.xml:533: Conflicting number of arguments (0) here
+res/values/strings.xml:603: Warning: Inconsistent number of arguments in formatting string shots_rename_unsafe; found both 1 here and 0 in values-pt/strings.xml [StringFormatCount]
     <string name="shots_rename_unsafe">Stations referenced by xsections:\n%1$s.\nRename shots ?</string>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    res/values-fr/strings.xml:602: Conflicting number of arguments (0) here
+    res/values-pt/strings.xml:534: Conflicting number of arguments (0) here
+res/values-pt/strings.xml:625: Warning: Inconsistent number of arguments in formatting string stat_loop; found both 1 here and 3 in values/strings.xml [StringFormatCount]
+    <string name="stat_loop">Poligonais: %1$d</string>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    res/values/strings.xml:704: Conflicting number of arguments (3) here
 res/values-fr/plurals.xml:7: Warning: For language "fr" (French) the following quantities are not relevant: zero [UnusedQuantity]
   <plurals name="read_data">
   ^
+res/values-pt/plurals.xml:7: Warning: For language "pt" (Portuguese) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="read_data">
+  ^
 res/values-fr/plurals.xml:11: Warning: For language "fr" (French) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="read_calib_data">
+  ^
+res/values-pt/plurals.xml:12: Warning: For language "pt" (Portuguese) the following quantities are not relevant: zero [UnusedQuantity]
   <plurals name="read_calib_data">
   ^
 res/values-fr/plurals.xml:15: Warning: For language "fr" (French) the following quantities are not relevant: zero [UnusedQuantity]
@@ -340,5 +560,245 @@ res/mipmap-anydpi-v26/ic_launcher_round.xml:2: Warning: The resource R.mipmap.ic
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
 ^
 res/raw/name_pos_hl_geometry.glsl: Warning: The resource R.raw.name_pos_hl_geometry appears to be unused [UnusedResources]
+res/values-pt/strings.xml:23: Warning: The resource R.string.r_checkboxes appears to be unused [UnusedResources]
+    <string name="r_checkboxes">Você deve confirmar marcando as caixas de seleção.</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:187: Warning: The resource R.string.found_groups appears to be unused [UnusedResources]
+    <string name="found_groups">Encontrados %1$d grupos</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:196: Warning: The resource R.string.export_plot_title appears to be unused [UnusedResources]
+    <string name="export_plot_title">Exportar croqui</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:197: Warning: The resource R.string.export_overview_title appears to be unused [UnusedResources]
+    <string name="export_overview_title">Exportar visão geral</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:237: Warning: The resource R.string.h_ellipsoid appears to be unused [UnusedResources]
+    <string name="h_ellipsoid">Elipsóide H </string>
+            ~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:241: Warning: The resource R.string.h_ellipsoid_hint appears to be unused [UnusedResources]
+    <string name="h_ellipsoid_hint">Elipsóide H [metros]</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:254: Warning: The resource R.string.fmt_h_ellipsoid appears to be unused [UnusedResources]
+    <string name="fmt_h_ellipsoid">Erro (elipsóide): %1$.0f m</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:321: Warning: The resource R.string.fmt_savetext appears to be unused [UnusedResources]
+    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:337: Warning: The resource R.string.no_capture_app appears to be unused [UnusedResources]
+    <string name="no_capture_app">Nenhum aplicativo de captura de imagem</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:343: Warning: The resource R.string.no_device_found appears to be unused [UnusedResources]
+    <string name="no_device_found">Nenhum dispositivo encontrado</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:351: Warning: The resource R.string.no_paired_device appears to be unused [UnusedResources]
+    <string name="no_paired_device">Nenhum dispositivo associado.\nBusque e associe uma DistoX</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:374: Warning: The resource R.string.menu_backups appears to be unused [UnusedResources]
+    <string name="menu_backups">APAGAR BACKUPS</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:397: Warning: The resource R.string.menu_logs appears to be unused [UnusedResources]
+    <string name="menu_logs">LOGS</string>
+            ~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:402: Warning: The resource R.string.menu_pair appears to be unused [UnusedResources]
+    <string name="menu_pair">PAREAR</string>
+            ~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:416: Warning: The resource R.string.start_scan appears to be unused [UnusedResources]
+    <string name="start_scan">Começar varredura</string>
+            ~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:417: Warning: The resource R.string.stop_scan appears to be unused [UnusedResources]
+    <string name="stop_scan">Parar varredura</string>
+            ~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:418: Warning: The resource R.string.title_scan appears to be unused [UnusedResources]
+    <string name="title_scan">Varredura BLE</string>
+            ~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:460: Warning: The resource R.string.connection_error appears to be unused [UnusedResources]
+    <string name="connection_error">Erro na conexão</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:461: Warning: The resource R.string.connecting appears to be unused [UnusedResources]
+    <string name="connecting">Conectando &#8230;</string>
+            ~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:464: Warning: The resource R.string.not_available appears to be unused [UnusedResources]
+    <string name="not_available">Bluetooth indisponível</string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:557: Warning: The resource R.string.survey_not_attached_extend appears to be unused [UnusedResources]
+    <string name="survey_not_attached_extend">ALERTA: visadas desconectadas e sem medidas auxiliares</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:653: Warning: The resource R.string.extended_profile appears to be unused [UnusedResources]
+    <string name="extended_profile">Perfil retificado</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:671: Warning: The resource R.string.ask_backups_clear appears to be unused [UnusedResources]
+    <string name="ask_backups_clear">Apagar backups dos croquis?</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:677: Warning: The resource R.string.button_change appears to be unused [UnusedResources]
+    <string name="button_change"    >Alterar    </string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:875: Warning: The resource R.string.help_backups appears to be unused [UnusedResources]
+    <string name="help_backups">Apagar backups dos croquis</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:895: Warning: The resource R.string.help_log appears to be unused [UnusedResources]
+    <string name="help_log">Ativar/desativar configurações de log</string>
+            ~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:951: Warning: The resource R.string.help_to_point appears to be unused [UnusedResources]
+    <string name="help_to_point">Mover o ponto selecionado para juntá-lo ao ponto mais próximo</string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:952: Warning: The resource R.string.help_split_point appears to be unused [UnusedResources]
+    <string name="help_split_point">Dividir o ponto em dois [linha/área]</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:953: Warning: The resource R.string.help_split_line appears to be unused [UnusedResources]
+    <string name="help_split_line">Dividir a linha em dois no ponto [linha/área]</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:954: Warning: The resource R.string.help_kink appears to be unused [UnusedResources]
+    <string name="help_kink">Utilizar uma linha reta no ponto [linha/área]</string>
+            ~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:988: Warning: The resource R.string.export_bgcolor appears to be unused [UnusedResources]
+    <string name="export_bgcolor">Cor de fundo</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1005: Warning: The resource R.string.export_scale_png appears to be unused [UnusedResources]
+    <string name="export_scale_png">Resolução</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1111: Warning: The resource R.string.title_settings_splay appears to be unused [UnusedResources]
+    <string name="title_settings_splay">Configurações medidas auxiliares</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1436: Warning: The resource R.string.pref_bitmap_scale_title appears to be unused [UnusedResources]
+    <string name="pref_bitmap_scale_title">Resolução PNG</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1437: Warning: The resource R.string.pref_bitmap_scale_summary appears to be unused [UnusedResources]
+    <string name="pref_bitmap_scale_summary">Resolução imagem PNG croquis</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1438: Warning: The resource R.string.pref_bitmap_bgcolor_title appears to be unused [UnusedResources]
+    <string name="pref_bitmap_bgcolor_title">Cor fundo PNG</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1439: Warning: The resource R.string.pref_bitmap_bgcolor_summary appears to be unused [UnusedResources]
+    <string name="pref_bitmap_bgcolor_summary">Cor de fundo imagem PNG croquis</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1540: Warning: The resource R.string.pref_backups_clear_title appears to be unused [UnusedResources]
+    <string name="pref_backups_clear_title">Apagar backups</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1541: Warning: The resource R.string.pref_backups_clear_summary appears to be unused [UnusedResources]
+    <string name="pref_backups_clear_summary">Habilitar menu para apagar backups</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1608: Warning: The resource R.string.pref_plot_walls_title appears to be unused [UnusedResources]
+    <string name="pref_plot_walls_title">PAREDES AUTOMÁTICAS</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1609: Warning: The resource R.string.pref_walls_type_title appears to be unused [UnusedResources]
+    <string name="pref_walls_type_title">Tipo paredes</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1610: Warning: The resource R.string.pref_walls_type_summary appears to be unused [UnusedResources]
+    <string name="pref_walls_type_summary">Tipo das paredes</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1611: Warning: The resource R.string.pref_walls_plan_thr_title appears to be unused [UnusedResources]
+    <string name="pref_walls_plan_thr_title">Inclinação medidas planta</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1612: Warning: The resource R.string.pref_walls_plan_thr_summary appears to be unused [UnusedResources]
+    <string name="pref_walls_plan_thr_summary">Inclinação máxima de medidas auxiliares para paredes de plantas baixas [deg]</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1613: Warning: The resource R.string.pref_walls_extended_thr_title appears to be unused [UnusedResources]
+    <string name="pref_walls_extended_thr_title">Inclinação medidas corte</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1614: Warning: The resource R.string.pref_walls_extended_thr_summary appears to be unused [UnusedResources]
+    <string name="pref_walls_extended_thr_summary">Inclinação máxima de medidas auxiliares para paredes de cortes [deg]</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1615: Warning: The resource R.string.pref_walls_xclose_title appears to be unused [UnusedResources]
+    <string name="pref_walls_xclose_title">Espaçamento</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1616: Warning: The resource R.string.pref_walls_xclose_summary appears to be unused [UnusedResources]
+    <string name="pref_walls_xclose_summary">Separação mínima de pontos de paredes ao longo da medida [m]</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1617: Warning: The resource R.string.pref_walls_concave_title appears to be unused [UnusedResources]
+    <string name="pref_walls_concave_title">Concavidade</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1618: Warning: The resource R.string.pref_walls_concave_summary appears to be unused [UnusedResources]
+    <string name="pref_walls_concave_summary">Concavidade máxima [percentual]</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1619: Warning: The resource R.string.pref_walls_xstep_title appears to be unused [UnusedResources]
+    <string name="pref_walls_xstep_title">Passo</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1620: Warning: The resource R.string.pref_walls_xstep_summary appears to be unused [UnusedResources]
+    <string name="pref_walls_xstep_summary">Separação dos pontos ao longo das paredes [m]</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1669: Warning: The resource R.string.ask_dump appears to be unused [UnusedResources]
+    <string name="ask_dump">Baixar firmware?</string>
+            ~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1675: Warning: The resource R.string.firmware_file_dumped appears to be unused [UnusedResources]
+    <string name="firmware_file_dumped">Arquivo firmware salvo %1$s tamanho %2$d</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1678: Warning: The resource R.string.firmware_file_dump_fail appears to be unused [UnusedResources]
+    <string name="firmware_file_dump_fail">Falha no recebimento de firmware</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1692: Warning: The resource R.string.file_exists appears to be unused [UnusedResources]
+    <string name="file_exists">Arquivo já existe</string>
+            ~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1693: Warning: The resource R.string.file_create_fail appears to be unused [UnusedResources]
+    <string name="file_create_fail">Falha na criação de arquivo</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1694: Warning: The resource R.string.oom appears to be unused [UnusedResources]
+    <string name="oom">Alerta: memória cheia.</string>
+            ~~~~~~~~~~
+res/values-pt/strings.xml:1697: Warning: The resource R.string.equate_no_station appears to be unused [UnusedResources]
+    <string name="equate_no_station">Nenhuma base selecionada</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1705: Warning: The resource R.string.overwrite appears to be unused [UnusedResources]
+    <string name="overwrite">sobreescrever</string>
+            ~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1733: Warning: The resource R.string.info_title appears to be unused [UnusedResources]
+    <string name="info_title">INFO</string>
+            ~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1735: Warning: The resource R.string.info_axes appears to be unused [UnusedResources]
+    <string name="info_axes">Eixos: azul Norte, verde Leste</string>
+            ~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1773: Warning: The resource R.string.query appears to be unused [UnusedResources]
+    <string name="query" formatted="false">Topos: %d visadas: %d bases: %d\nComprimento: %d Profundidade: %d</string>
+            ~~~~~~~~~~~~
+res/values-pt/strings.xml:1777: Warning: The resource R.string.clear appears to be unused [UnusedResources]
+    <string name="clear">Limpar</string>
+            ~~~~~~~~~~~~
+res/values-pt/strings.xml:1782: Warning: The resource R.string.measure appears to be unused [UnusedResources]
+    <string name="measure">medida</string>
+            ~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1842: Warning: The resource R.string.view_point appears to be unused [UnusedResources]
+    <string name="view_point">Ponto de vista</string>
+            ~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1849: Warning: The resource R.string.powercrust_few_splays appears to be unused [UnusedResources]
+    <string name="powercrust_few_splays">Powercrust: poucas medidas auxiliares</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1850: Warning: The resource R.string.powercrust_failed appears to be unused [UnusedResources]
+    <string name="powercrust_failed">Powercrust falhou</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1851: Warning: The resource R.string.powercrust_successful appears to be unused [UnusedResources]
+    <string name="powercrust_successful">Powercrust bem sucedido: %1$d / %2$d</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1858: Warning: The resource R.string.error_file_not_found appears to be unused [UnusedResources]
+    <string name="error_file_not_found">Erro: arquivo não encontrado</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1859: Warning: The resource R.string.error_file_not_readable appears to be unused [UnusedResources]
+    <string name="error_file_not_readable">Erro: arquivo ilegível</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1862: Warning: The resource R.string.error_io_exception appears to be unused [UnusedResources]
+    <string name="error_io_exception">Erro: exceção de IO</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1866: Warning: The resource R.string.warning_not_overwrite appears to be unused [UnusedResources]
+    <string name="warning_not_overwrite">Alerta: não sobreescrevendo arquivo %1$s</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1939: Warning: The resource R.string.cpref_convex_hull_title appears to be unused [UnusedResources]
+    <string name="cpref_convex_hull_title">Convex hull</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1940: Warning: The resource R.string.cpref_convex_hull_summary appears to be unused [UnusedResources]
+    <string name="cpref_convex_hull_summary">Convex hull walls</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1941: Warning: The resource R.string.cpref_delaunay_title appears to be unused [UnusedResources]
+    <string name="cpref_delaunay_title">Delaunay</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1942: Warning: The resource R.string.cpref_delaunay_summary appears to be unused [UnusedResources]
+    <string name="cpref_delaunay_summary">Delaunay walls</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1943: Warning: The resource R.string.cpref_hull_title appears to be unused [UnusedResources]
+    <string name="cpref_hull_title">Hull</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1944: Warning: The resource R.string.cpref_hull_summary appears to be unused [UnusedResources]
+    <string name="cpref_hull_summary">Hull walls</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:1946: Warning: The resource R.string.cperms_mandatory appears to be unused [UnusedResources]
+    <string name="cperms_mandatory">Cave3D não pode ser executado sem as seguintes permissões:</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
 res/mipmap-xhdpi/ic_launcher.png: Warning: The following unrelated icon files have identical contents: iz_topodroid.png, ic_launcher.png [IconDuplicates]
-97 errors, 18 warnings
+161 errors, 105 warnings
