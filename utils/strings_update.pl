@@ -63,6 +63,9 @@ open( EN, '<', $ARGV[0] ) or die "Cannot open english strings file \"$ARGV[0]\"\
 
 ($filename, $path, $suffix) = fileparse($ARGV[1], '.xml');
 $new_file = $path . $filename. '-NEW'. $suffix;
+if ( -e $new_file ) {
+  die "'$new_file' already exists. Won't overwrite existing file.\n";
+}
 open( NEW, '>', $new_file ) or die "Cannot open new strings file \"$new_file\" for writing\n";
 
 $buffer = '';
