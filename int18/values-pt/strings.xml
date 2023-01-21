@@ -8,7 +8,8 @@
     <string name="no_manual">Não é possível obter o manual do usuário na internet</string>
     <string name="user_man_ok">Manual traduzido instalado</string>
     <string name="user_man_fail">Instalação do manual traduzido falhou</string>
-
+    <string name="string_false">falso</string>
+    <string name="string_true">verdadeiro</string>
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
     <!-- UNUSED string name="desc_lines">Lines</string -->
@@ -17,23 +18,29 @@
 
     <!-- OK string name="app_name">TopoDroid</string -->
     <string name="tdm_title">Gerenciador TopoDroid</string>
+    <string name="tdm_config_project">projeto.tdconfig</string>
     <string name="double_back">Clicar novamente em VOLTAR para sair</string>
 
     <string name="new_survey_label">Nova topo</string>
     <string name="distox_label">DistoX</string>
 
-  <string name="r_title">Aviso importante Android R</string>
+  <string name="r_title">Aviso importante Android 13+</string>
+   <string name="r_dialog_1"></string>
   <string name="r_dialog">
-Com o Android R o Topodroid deve por seu diretório dentro de "Android/data". O Topodroid não achou seu diretório nesse local e portanto criou um novo diretório.\nVocê pode importar os arquivos zip com suas topografias antigas.\n\nObserve que os arquivos no novo diretório do Topodroid são apagados quando você desinstala o Topodroid.\n\nConsulte a página web para mais detalhes.\n
+Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Android/data". O Topodroid não achou seu diretório nesse local e portanto criou um novo diretório.\nVocê pode importar os arquivos zip com suas topografias antigas.\n\nObserve que os arquivos no novo diretório do Topodroid são apagados quando você desinstala o Topodroid.\n\nConsulte a página web para mais detalhes.\n
   </string>
   <string name="r_checkboxes">Você deve confirmar marcando as caixas de seleção.</string>
   <string name="r_i_understood">Eu compreendo completamente este aviso.</string>
   <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
   <string name="r_continue">CONTINUAR</string>
-
+  <string name="r_quit">FINALIZAR</string>
     <!-- OK string name="app_name" translatable="false">TopoDroid</string -->
     <!-- UNUSED string name="version_ask">Atualizando para uma nova versão do TopoDroid.\nQuer re-instalar os símbolos?</string -->
     <string name="symbols_ask">Instalar símbolos versão %1$s?\n(Versão atual %2$s)</string>
+    <string name="version_check">Última versão</string>
+    <string name="version_check_failed">Falha ao buscar última versão</string>
+    <string name="version_check_latest">Versão mais atualizada</string>
+    <string name="version_check_newer">Versão mais atualizada disponível: %1$d</string>
 
     <string name="setup_textsize_title">Configuração TopoDroid. Tamanho do texto</string>
     <string name="setup_buttonsize_title">Configuração TopoDroid. Tamanho dos botões</string>
@@ -69,6 +76,7 @@ Com o Android R o Topodroid deve por seu diretório dentro de "Android/data". O 
 
     <string name="memoryA3">Memória DistoX A3</string>
     <string name="memoryX310">Memória DistoX X310</string>
+    <string name="memoryXBLE">Memória DistoX-BLE</string>
     <!-- UNUSED string name="memory_data">Dados DistoX</string -->
 
     <string name="thp_user">usuário</string>
@@ -85,6 +93,7 @@ Com o Android R o Topodroid deve por seu diretório dentro de "Android/data". O 
     <!-- UNUSED string name="make_walls">Paredes</string -->
     <string name="missing_station">Base inexistente</string>
     <string name="station_not_found">Base não encontrada</string>
+    <string name="station_coords">O %1$.2f N %2$.2f Z %3$.2f</string>
     <string name="shot_not_found">Medida não encontrada</string>
     <string name="bad_sibling">Visada irmã inválida</string>
     <!-- UNUSED string name="missing_area">ÁREA</string -->
@@ -141,13 +150,16 @@ Com o Android R o Topodroid deve por seu diretório dentro de "Android/data". O 
     <!-- UNUSED string name="data">Dados</string -->
     <string name="using">Usando %1$s</string>
     <string name="calib_error">Erro médio: %1$.2f graus (Delta BH %2$.2f)</string>
+    <string name="calib_validate_error">Erro médio: %1$.2f &#xb0;</string>
     <string name="calib_stddev">Erro desvio padrão: %1$.4f graus</string>
     <string name="calib_max_error">Erro máximo: %1$.4f graus</string>
     <string name="calib_ave_std">Exatidão: %1$.4f ± %2$.4f graus</string>
     <string name="calib_precision">Precisão</string>
     <string name="calib_iter">Iterações: %1$d</string>
+    <string name="calib_dip">Desvio mag.: %1$.1f &#xb0;</string>
     <string name="calib_reset">Reiniciar a calibração da DistoX?</string>
-
+    <string name="calib_min_error">Erro mínimo</string>
+    <string name="magn_dip">Desvio mag. &#8230;</string>
     <string name="algorithm">Algoritmo:</string>
     <string name="auto">auto</string>
     <string name="linear">linear</string>
@@ -167,6 +179,7 @@ Com o Android R o Topodroid deve por seu diretório dentro de "Android/data". O 
     <string name="device_code">Código da DistoX %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
     <string name="device_hardware">Hardware  %1$d.%2$d</string>
+    <string name="device_memory">Memória %1$02x.%2$02x</string>
     <string name="device_status_angle_grad">Unidade angular: grado</string>
     <string name="device_status_angle_degree">Unidade angular: grau</string>
     <string name="device_status_compass_on">Bússola/clinômetro: on</string>
@@ -178,7 +191,7 @@ Com o Android R o Topodroid deve por seu diretório dentro de "Android/data". O 
     <string name="bt_reset">Reiniciar conexão Bluetooth</string>
     <string name="save_as">salvar como</string>
     <string name="nickname">Apelido</string>
-
+    <string name="unknown_device_type">Tipo dispositivo desconhecido %1$d</string>
     <string name="comment">comentário</string>
     <!-- UNUSED string name="flag">Flag</string -->
     <!-- UNUSED string name="backshot">Contramedida</string -->
@@ -202,8 +215,8 @@ Com o Android R o Topodroid deve por seu diretório dentro de "Android/data". O 
     <string name="regroup">Não reagrupar</string>
     <!-- UNUSED string name="few_plots">Esboços não suficientes</string -->
     <string name="few_calibs">Calibrações insuficientes</string>
-    <string name="getting_info">Obtendo informações da DistoX &#8230;</string>
-
+    <string name="getting_info">Obtendo info DistoX &#8230;</string>
+    <string name="gettingble_info">Obtendo info DistoX-BLE &#8230;</string>
     <string name="calib_import_title">Importar calibração</string>
     <string name="import_title">Importar topo</string>
     <string name="export_data_title">Exportar dados</string>
@@ -228,6 +241,8 @@ Com o Android R o Topodroid deve por seu diretório dentro de "Android/data". O 
     <string name="import_zip_newer">Arquivo zip importado da versão mais recente</string>
     <!-- UNUSED string name="import_zip_wait">A importação do arquivo zip pode demorar. Aguarde &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Salvando croqui &#8230; por favor espere &#8230;</string -->
+    <string name="GPS_position_none">Sem info posição GPS</string>
+    <string name="GPX_record_none">Sem registro ponto GPX</string>
     <string name="MT_points_none">Nenhum ponto MobileTopographer</string>
     <string name="MT_bad_file">Arquivo MobileTopographer inválido</string>
     <string name="bad_manifest">Arquivo de manifesto inválido</string>
@@ -251,6 +266,7 @@ Com o Android R o Topodroid deve por seu diretório dentro de "Android/data". O 
     <!-- UNUSED string name="altitude">Alt. </string -->
     <string name="h_ellipsoid">Elipsóide H </string>
     <string name="h_geoid">Geóide H </string>
+    <string name="accuracy_hint">Acurácia [m]</string>
     <string name="latitude">Latitude </string>
     <string name="longitude">Longitude </string>
     <string name="h_ellipsoid_hint">Elipsóide H [metros]</string>
@@ -259,21 +275,26 @@ Com o Android R o Topodroid deve por seu diretório dentro de "Android/data". O 
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Erros no fechamento de poligonais</string>
     <string name="loop_none">Nenhuma poligonal fechada</string>
+    <string name="loops_bad">Loops com erros: %1$d</string>
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
-
+    <string name="multistation_plane">Plano multi-base</string>
     <string name="error_m">Erro [m]</string>
+    <string name="fmt_error_h">Acurácia: %1$.1f m</string>
     <string name="fmt_error_m">Erro: %1$.1f m</string>
     <string name="fmt_h_geoid">Erro (geóide): %1$.0f m</string>
     <string name="fmt_h_ellipsoid">Erro (elipsóide): %1$.0f m</string>
+    <string name="location_start_fine">Posição de início correta</string>
     <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
 
     <string name="error_azimuth_required">Azimute exigido</string>
     <string name="error_length_required">Comprimento exigido</string>
+    <string name="error_depth_required">Profundidade exigida</string>
     <string name="error_clino_required">Inclinação exigida</string>
     <string name="error_comment_required">Comentário exigido</string>
     <string name="error_begin_required">Endereço inicial exigido</string>
     <string name="error_declination_number">A declinação deve ser um número</string>
     <string name="error_end_required">Endereço final exigido</string>
+    <string name="error_fixes_nocs">Pontos fixos sem CS %1$s:\n%2$s</string>
     <string name="error_from_required">Primeira base exigida</string>
     <string name="error_group_required">Número do grupo exigido</string>
     <string name="error_group_non_integer">O grupo deve ser um número inteiro</string>
@@ -1585,8 +1606,8 @@ Com o Android R o Topodroid deve por seu diretório dentro de "Android/data". O 
   <string name="pref_station_size_summary">Tamanho do nome das bases</string>
   <string name="pref_zoom_controls_title">Controle zoom</string>
   <string name="pref_zoom_controls_summary">Controle do zoom em telas multitoque</string>
-  <!-- FIXME string name="pref_side_drag_title">Arrasto lateral</string -->
-  <!-- FIXME string name="pref_side_drag_summary">Habilitar o arrastamento lateral na área de desenho do croqui</string -->
+  <string name="pref_side_drag_title">Arrasto canto</string>
+  <string name="pref_side_drag_summary">Habilitar o arrastamento pelo canto da área de desenho do croqui</string>
   <string name="pref_unit_grid_title">Unidades croqui</string>
   <string name="pref_unit_grid_summary">Tamanho dos intervalos na grade do croqui</string>
   <string name="pref_unit_measure_title">Unidade régua</string>
