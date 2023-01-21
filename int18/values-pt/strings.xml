@@ -1,53 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+  xmlns:tools="http://schemas.android.com/tools"
+  >
+
     <!-- TODO TODO TODO
-         DO NOT FORGET THAT APOSTROPHE MUST BE PRECEEDED BY BACKSLASH
-     -->
+        DO NOT FORGET THAT APOSTROPHE MUST BE PRECEEDED BY BACKSLASH
+    -->
 
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Não é possível obter o manual do usuário na internet</string>
     <string name="user_man_ok">Manual traduzido instalado</string>
     <string name="user_man_fail">Instalação do manual traduzido falhou</string>
-    <string name="string_false">falso</string>
-    <string name="string_true">verdadeiro</string>
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
     <!-- UNUSED string name="desc_lines">Lines</string -->
     <!-- UNUSED string name="desc_areas">Areas</string -->
     <string name="desc_menu">Menu</string>
-
-    <!-- OK string name="app_name">TopoDroid</string -->
+    <string name="r_title">Aviso importante Android 13+</string>
+    <string name="r_dialog">
+Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". O Topodroid não achou seu diretório nesse local e portanto criou um novo diretório.\nVocê pode importar os arquivos zip com suas topografias antigas.\n\nObserve que os arquivos no novo diretório do Topodroid são apagados quando você desinstala o Topodroid.\n\nConsulte a página web para mais detalhes.\n
+  </string>
+    <string name="r_checkboxes">Você deve confirmar marcando as caixas de seleção.</string>
+    <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
+    <string name="r_continue">CONTINUAR</string>
+    <string name="r_quit">FINALIZAR</string>
     <string name="tdm_title">Gerenciador TopoDroid</string>
     <string name="tdm_config_project">projeto.tdconfig</string>
     <string name="double_back">Clicar novamente em VOLTAR para sair</string>
-
     <string name="new_survey_label">Nova topo</string>
-    <string name="distox_label">DistoX</string>
-
-  <string name="r_title">Aviso importante Android 13+</string>
-   <string name="r_dialog_1"></string>
-  <string name="r_dialog">
-Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Android/data". O Topodroid não achou seu diretório nesse local e portanto criou um novo diretório.\nVocê pode importar os arquivos zip com suas topografias antigas.\n\nObserve que os arquivos no novo diretório do Topodroid são apagados quando você desinstala o Topodroid.\n\nConsulte a página web para mais detalhes.\n
-  </string>
-  <string name="r_checkboxes">Você deve confirmar marcando as caixas de seleção.</string>
-  <string name="r_i_understood">Eu compreendo completamente este aviso.</string>
-  <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
-  <string name="r_continue">CONTINUAR</string>
-  <string name="r_quit">FINALIZAR</string>
-    <!-- OK string name="app_name" translatable="false">TopoDroid</string -->
     <!-- UNUSED string name="version_ask">Atualizando para uma nova versão do TopoDroid.\nQuer re-instalar os símbolos?</string -->
     <string name="symbols_ask">Instalar símbolos versão %1$s?\n(Versão atual %2$s)</string>
-    <string name="version_check">Última versão</string>
-    <string name="version_check_failed">Falha ao buscar última versão</string>
-    <string name="version_check_latest">Versão mais atualizada</string>
-    <string name="version_check_newer">Versão mais atualizada disponível: %1$d</string>
-
+    <string name="version_check_newer">Nova versão disponível: %1$d</string>
     <string name="setup_textsize_title">Configuração TopoDroid. Tamanho do texto</string>
     <string name="setup_buttonsize_title">Configuração TopoDroid. Tamanho dos botões</string>
     <string name="setup_drawingunit_title">Configuração TopoDroid. Tamanho dos ícones</string>
     <string name="setup_done_title">Configuração TopoDroid. Fim</string>
     <string name="setup_buttonsample">Tamanho do botão</string>
-
     <string name="setup_textsize">Defina o tamanho do texto.\nPode ser alterado depois na janela principal de configurações.</string>
     <string name="setup_buttonsize">Defina o tamanho dos botões.\nPode ser alterado depois na janela principal de configurações.</string>
     <string name="setup_drawingunit">Defina o tamanho dos ícones do croqui.\nPode ser alterado depois na janela de configurações do croqui.</string>
@@ -55,8 +43,6 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
 	    Se você tiver problemas com a conexão com a DistoX, experimente a opção "Inseguro" para a configuração "Soquete".\n\n
 	    Há outras configurações que afetam a apresentação na janela de croqui (tamanho dos ícones e rótulos, espessura da linha, etc). Altere-as da maneira que achar mais conveniente.\n\n
     </string>
-    <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
-
     <string name="POINT">PONTO</string>
     <string name="LINE">LINHA</string>
     <string name="AREA">ÁREA</string>
@@ -64,21 +50,17 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="STATION">BASE</string>
     <string name="UP">PARA CIMA</string>
     <string name="DOWN">PARA BAIXO</string>
-
     <string name="xsplay">X</string>
     <string name="hsplay">H</string>
     <string name="vsplay">V</string>
-
     <string name="cut">CORTAR</string>
     <string name="copy">COPIAR</string>
     <string name="paste">COLAR</string>
     <string name="copied">Copiado %1$s na prancheta</string>
-
     <string name="memoryA3">Memória DistoX A3</string>
     <string name="memoryX310">Memória DistoX X310</string>
     <string name="memoryXBLE">Memória DistoX-BLE</string>
     <!-- UNUSED string name="memory_data">Dados DistoX</string -->
-
     <string name="thp_user">usuário</string>
     <string name="thp_label">rótulo</string>
     <string name="thp_section">corte</string>
@@ -89,11 +71,10 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="thl_section">corte</string>
     <string name="tha_user">usuário</string>
     <string name="tha_water">água</string>
-
     <!-- UNUSED string name="make_walls">Paredes</string -->
     <string name="missing_station">Base inexistente</string>
     <string name="station_not_found">Base não encontrada</string>
-    <string name="station_coords">O %1$.2f N %2$.2f Z %3$.2f</string>
+    <string name="station_coords">L %1$.2f N %2$.2f Z %3$.2f</string>
     <string name="shot_not_found">Medida não encontrada</string>
     <string name="bad_sibling">Visada irmã inválida</string>
     <!-- UNUSED string name="missing_area">ÁREA</string -->
@@ -108,7 +89,6 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="failed_snap_to_point">Nenhum ponto de fechamento para atrair o ponto</string>
     <string name="failed_snap_to_splays">Nenhuma medida auxiliar próxima onde juntar linha</string>
     <string name="failed_append_to_line">Falha ao conectar a outra linha</string>
-
     <string name="bric_device">Dispositivo %1$s</string>
     <string name="bric_ble">BLE %1$s</string>
     <string name="bric_fw">Firmware %1$s</string>
@@ -123,19 +103,16 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="bric_reset_fail">Redefinição de horário falhou</string>
     <string name="bric_clear_ok">Memória esvaziada</string>
     <string name="bric_clear_fail">Limpeza de memória falhou</string>
-
     <string name="calibration_title">Calibração de instrumentos</string>
     <string name="calibration_length">Trena</string>
     <string name="calibration_azimuth">Bússola</string>
     <string name="calibration_clino">Clinômetro</string>
-
     <string name="calib_new">Nova calibração</string>
     <string name="calib_exists">Já existe uma calibração com este nome</string>
     <string name="calib_delete">Apagar calibração </string>
     <string name="calib_device_mismatch">Alerta: Dispositivo a ser calibrado incompatível</string>
     <string name="calib_no_name">Nome exigido</string>
     <string name="calib_no_coeff">Coeficientes de calibração não definidos</string>
-    <!-- REMOVE string name="calib_gm_policy">Regra</string -->
     <string name="calib_gm_policy">Regra de agrupamento</string>
     <string name="calib_gm_undelete">Restaurar os dados de calibração?</string>
     <!-- UNUSED string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
@@ -164,8 +141,6 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="auto">auto</string>
     <string name="linear">linear</string>
     <string name="non_linear">não linear</string>
-    <string name="algo_minimum">mínimo</string>
-
     <!-- UNUSED string name="device_algo_failed">Determinação automática do algoritmo mal sucedida\nUtilizando algoritmo linear</string -->
     <string name="device_address">Endereço %1$s</string>
     <!-- UNUSED string name="device_busy">Dispositivo indisponível</string -->
@@ -179,7 +154,6 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="device_code">Código da DistoX %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
     <string name="device_hardware">Hardware  %1$d.%2$d</string>
-    <string name="device_memory">Memória %1$02x.%2$02x</string>
     <string name="device_status_angle_grad">Unidade angular: grado</string>
     <string name="device_status_angle_degree">Unidade angular: grau</string>
     <string name="device_status_compass_on">Bússola/clinômetro: on</string>
@@ -207,7 +181,6 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="splay_at_to">Dados EDTC na base PARA</string>
     <string name="lrud">EDTC</string>
     <string name="strike_dip">Direção %1$.0f Mergulho %2$.0f</string>
-
     <string name="few_data">Não há dados suficientes</string>
     <string name="few_iter">Falha: excesso de iterações</string>
     <string name="few_groups">Não há dados suficientes para os grupos</string>
@@ -224,7 +197,6 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="export_overview_title">Exportar visão geral</string>
     <string name="export_model_title">Exportar modelo 3D</string>
     <string name="export_tdconfig_title">Exportar projeto</string>
-
     <!-- UNUSED string name="import_wait">Importando arquivo &#8230; Por favor aguarde &#8230;</string -->
     <string name="import_already">Topo já importada</string>
     <string name="import_bad">Arquivo de importação inválido</string>
@@ -246,17 +218,15 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="MT_points_none">Nenhum ponto MobileTopographer</string>
     <string name="MT_bad_file">Arquivo MobileTopographer inválido</string>
     <string name="bad_manifest">Arquivo de manifesto inválido</string>
-
     <string name="pleasewait">Por favor espere</string>
     <string name="processing">processando &#8230;</string>
-
     <!-- UNUSED string name="head_tail">Memória: </string -->
     <string name="head_tail_failed">Falha ao ler o índice de memória da DistoX</string>
     <string name="head_tail_store_failed">Falha ao gravar o índice de memória da DistoX</string>
     <!-- UNUSED string name="pairing_failed">Falha no pareamento</string -->
-
+    <string name="datamode_normal">Modo normal de dados</string>
+    <string name="datamode_diving">Modo mergulho de dados</string>
     <string name="illegal_data_value">Dado inválido</string>
-
     <string name="photo_title">FOTO</string>
     <string name="photo_text">Entre comentário para foto</string>
     <string name="photo_failed">Foto falhou</string>
@@ -266,26 +236,24 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <!-- UNUSED string name="altitude">Alt. </string -->
     <string name="h_ellipsoid">Elipsóide H </string>
     <string name="h_geoid">Geóide H </string>
-    <string name="accuracy_hint">Acurácia [m]</string>
     <string name="latitude">Latitude </string>
     <string name="longitude">Longitude </string>
     <string name="h_ellipsoid_hint">Elipsóide H [metros]</string>
     <string name="h_geoid_hint">Geóide H [metros]</string>
+    <string name="accuracy_hint">Acurácia [m]</string>
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Erros no fechamento de poligonais</string>
     <string name="loop_none">Nenhuma poligonal fechada</string>
-    <string name="loops_bad">Loops com erros: %1$d</string>
+    <string name="loops_bad">Loops com erro: %1$d</string>
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
-    <string name="multistation_plane">Plano multi-base</string>
     <string name="error_m">Erro [m]</string>
     <string name="fmt_error_h">Acurácia: %1$.1f m</string>
     <string name="fmt_error_m">Erro: %1$.1f m</string>
     <string name="fmt_h_geoid">Erro (geóide): %1$.0f m</string>
     <string name="fmt_h_ellipsoid">Erro (elipsóide): %1$.0f m</string>
-    <string name="location_start_fine">Posição de início correta</string>
+    <string name="location_start_fine">Posição de início adequada</string>
     <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
-
     <string name="error_azimuth_required">Azimute exigido</string>
     <string name="error_length_required">Comprimento exigido</string>
     <string name="error_depth_required">Profundidade exigida</string>
@@ -294,7 +262,7 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="error_begin_required">Endereço inicial exigido</string>
     <string name="error_declination_number">A declinação deve ser um número</string>
     <string name="error_end_required">Endereço final exigido</string>
-    <string name="error_fixes_nocs">Pontos fixos sem CS %1$s:\n%2$s</string>
+    <string name="error_fixes_nocs">Ponto fixo sem CS %1$s:\n%2$s</string>
     <string name="error_from_required">Primeira base exigida</string>
     <string name="error_group_required">Número do grupo exigido</string>
     <string name="error_group_non_integer">O grupo deve ser um número inteiro</string>
@@ -306,24 +274,26 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="error_name_exists">Projeto já existe</string>
     <string name="error_name_invalid">Nome de projeto inválido</string>
     <string name="error_name_required">Nome exigido</string>
+    <string name="error_station_number">Quantidade incorreta de bases</string>
     <string name="error_name_duplicate">Nome duplicado</string>
     <string name="error_no_section_in_section">Seção-X dentro de seção-x não suportada</string>
-
+    <string name="error_profile_slant_section">Seção-X inclinada não habilitada na visualização de perfil</string>
+    <string name="error_team_required">Equipe exigida</string>
     <!-- UNUSED string name="error_dir_exists">Diretório já existe</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Estação de referência exigida</string>
     <!-- UNUSED string name="error_station_already_fixed">Base já tem coordenadas</string -->
     <string name="error_station_required">Base exigida</string>
+    <string name="error_station_fixed">Base georeferenciada</string>
     <string name="error_station_non_existing">Base inexistente</string>
     <string name="error_sensor_required">Sensor exigido</string>
     <string name="error_value_required">Valor exigido</string>
-
+    <string name="error_bad_fixes">Ponto fixos não estão na topo</string>
     <string name="group_title">Grupos dados calibração</string>
     <!-- UNUSED string name="group_policy_four">Regra: agrupar 4 a 4</string -->
     <!-- UNUSED string name="group_policy_sixteen">Regra: 4 grupos de 4, o restante isolados</string -->
     <!-- UNUSED string name="group_policy_distance">Regra: agrupar por distância angular</string -->
     <string name="group_reset">Reiniciar grupos</string>
-
     <!-- UNUSED string name="scale">Escala</string -->
     <!-- UNUSED string name="reversed">invertido</string -->
     <string name="options">opções</string>
@@ -339,17 +309,18 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="hidden_show">Mostrar visadas após base</string>
     <!-- UNUSED string name="splays_toggle">Alternar exibição das medidas auxiliares</string -->
     <string name="splays_on_off">Medidas auxiliares</string>
-    <string name="splays">medidas auxiliares</string>
+    <string name="with_splays">com medidas auxiliares</string>
+    <string name="cell_size">Tamanho célula [m]</string>
     <string name="legs">Visadas</string>
     <string name="stations">Bases</string>
+    <string name="splays">medidas auxiliares</string>
     <!-- UNUSED string name="fmt_listen">OUVIR | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
-    <string name="fmt_latitude">Latitude %1$s</string>
-    <string name="fmt_longitude">Longitude %1$s</string>
+    <string name="fmt_latitude_dd_dms">Latitude: %1$s [%2$s]</string>
+    <string name="fmt_longitude_dd_dms">Longitude: %1$s [%2$s]</string>
     <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string>
     <string name="fixed">fixa</string>
     <string name="painted">pintada</string>
-
     <!-- UNUSED string name="cbd_title">Diretório base</string -->
     <string name="cwd">Diretório de projetos do TopoDroid</string>
     <string name="empty_cwd">Nome de projeto vazio</string>
@@ -357,7 +328,7 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="bad_cwd">O nome do projeto não pode incluir um diretório</string>
     <string name="bad_line">Tipo de linha inválido</string>
     <string name="bad_point">Tipo de ponto inválido</string>
-
+    <string name="index_oob">Índice fora dos limites %1$d</string>
     <string name="no_audio">Nenhum registro de áudio</string>
     <string name="no_bt">Bluetooth indisponível</string>
     <string name="no_calib">Nenhuma calibração</string>
@@ -368,6 +339,7 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="no_data_reduction">Nenhuma redução nos dados</string>
     <string name="no_db">Nenhum banco de dados</string>
     <string name="no_device_address">Dispositivo não selecionado</string>
+    <string name="no_device_window">Janela do dispositivo não disponível durante download</string>
     <string name="no_device_found">Nenhum dispositivo encontrado</string>
     <string name="no_feature_audio">Sem suporte para áudio</string>
     <string name="no_feature_pdf">PDF não suportado</string>
@@ -383,7 +355,8 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="no_proj4">Proj4 não instalado</string>
     <string name="no_sensors">Topo sem informações de sensores externos</string>
     <!-- UNUSED string name="no_shots">Nenhuma medida registrada na topo.\nUsar o botão Download para baixar algumas</string -->
-    <string name="no_survey">Nenhuma topo selecionada</string>
+    <string name="no_search_result">Nenhum resultado na pesquisa.</string>
+    <!-- ALREADY DEFINED string name="no_survey">Topo %1$s não localizada\n</string -->
     <string name="no_symbols">Nenhuma paleta de símbolos.</string>
     <!-- UNUSED string name="no_thmanager">O aplicativo ThManager não está instalado</string -->
     <!-- UNUSED string name="no_db_viewer">DB_viewer não encontrado</string -->
@@ -391,8 +364,6 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="no_undelete_paste">Nenhum item a ser recuperado/colado</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Azimute %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Inclinação %5$.1f"</string>
-    <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
-
     <string name="menu_3d">3D</string>
     <string name="menu_about">SOBRE</string>
     <string name="menu_area">ÁREA</string>
@@ -413,6 +384,7 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="menu_device">DISPOSITIVO</string>
     <string name="menu_export">EXPORTAR</string>
     <string name="menu_firmware">FIRMWARE</string>
+    <string name="menu_geopoint_app">APP GNSS</string>
     <string name="menu_recover">RESTAURAR</string>
     <string name="menu_recover_paste">RECUPERAR/COLAR</string>
     <string name="menu_reload">RECARREGAR</string>
@@ -440,10 +412,7 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <!-- UNUSED string name="menu_tdr2th2">CROQUIS TH2</string -->
     <string name="menu_validate">VALIDAR</string>
     <string name="menu_zoom_fit">ZOOM GERAL</string>
-
-    <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Papel milimetrado</string>
-
     <string name="start_scan">Começar varredura</string>
     <string name="stop_scan">Parar varredura</string>
     <string name="title_scan">Varredura BLE</string>
@@ -458,8 +427,6 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <!-- UNUSED string name="bric_laser">Laser</string -->
     <!-- UNUSED string name="bric_off">Off</string -->
     <string name="bric_memory">Memória BRIC</string>
-
-
     <string name="popup_join_pt">Juntar ao ponto mais próximo</string>
     <string name="popup_snap_ln">Juntar à linha mais próxima</string>
     <string name="popup_snap_to_splays">Juntar à medida auxiliar próxima</string>
@@ -475,33 +442,27 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="popup_delete">Apagar</string>
     <string name="popup_decimate">Eliminar</string>
     <string name="popup_join">Unir</string>
-
     <string name="popup_erase_all">Apagar tudo</string>
     <string name="popup_erase_point">Apagar pontos</string>
     <string name="popup_erase_line">Apagar linhas</string>
     <string name="popup_erase_area">Apagar áreas</string>
-
     <string name="popup_select_all">Selecione tudo</string>
     <string name="popup_select_point">Selecione pontos</string>
     <string name="popup_select_line">Selecione linhas</string>
     <string name="popup_select_area">Selecione áreas</string>
     <string name="popup_select_shot">Selecione medidas</string>
     <string name="popup_select_station">Selecione bases</string>
-
     <string name="popup_cont_none">Nada</string>
     <string name="popup_cont_start">Ponto inicial</string>
     <string name="popup_cont_end">Ponto final</string>
     <string name="popup_cont_both">Ambos pontos</string>
     <string name="popup_cont_continue">Continuar</string>
-
     <string name="connection_error">Erro na conexão</string>
     <string name="connecting">Conectando &#8230;</string>
     <!-- UNUSED string name="connected_none">Não conectado</string -->
     <!-- UNUSED string name="connected_already">Já conectado</string -->
-
     <string name="not_available">Bluetooth indisponível</string>
     <string name="not_enabled">Bluetooth desabilitado</string>
-
     <!-- UNUSED string name="not_implemented">Não implementado</string -->
     <string name="null_bitmap">Impossível criar imagem [OOM error]</string>
     <string name="photo">foto</string>
@@ -531,6 +492,7 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <!-- UNUSED string name="plot_view">Base visualizada</string -->
     <!-- UNUSED string name="read_fail_with_code">Falha na leitura: código erro </string -->
     <string name="read_failed">Falha na leitura da DistoX</string>
+    <string name="swap_hotbit_ok">Hot bits de dados trocados</string>
     <!-- UNUSED string name="reading_file_failed">Falha leitura do arquivo</string -->
     <string name="saved_file_1">Arquivo salvo %1$s</string>
     <string name="saved_file_2">Arquivo salvo %1$s Escala %2$.2f</string>
@@ -548,7 +510,6 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="scrap_string">Trecho do croqui: %1$d / %2$d</string>
     <string name="section_point_not_allowed">ponto tipo seção não permitido</string>
     <string name="section_line_not_allowed">linha tipo seção não permitida</string>
-
     <!-- UNUSED string name="sensor">sensor</string -->
     <string name="sensor_gravity">gravidade</string>
     <!-- UNUSED string name="sensor_humidity">humidade</string -->
@@ -560,11 +521,10 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="sensor_extern">externo</string>
     <string name="sensor_type">tipo</string>
     <string name="sensor_value">valor</string>
-    <string name="sensor_commment">comentário</string>
+    <string name="sensor_comment">comentário</string>
     <!-- UNUSED string name="insufficient_data">informações insuficientes do sensor</string -->
     <string name="sensor_no_readings">Sem leitura dos sensores</string>
     <string name="sensor_failure">Falha no sensor: %1$d</string>
-
     <!-- UNUSED string name="shot_clino">clinômetro</string -->
     <!-- UNUSED string name="shot_compass">bússola</string -->
     <string name="shot_delete">Apagar medida?</string>
@@ -580,7 +540,6 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="shot_note">comentário</string>
     <string name="shot_reverse">inverter</string>
     <string name="shot_to">para</string>
-
     <string name="station">Base de referência</string>
     <string name="station_ask">Inserir a base no croqui?</string>
     <string name="station_del">Remover a base do croqui?</string>
@@ -596,27 +555,28 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="survey_not_attached">ALERTA: visadas desconectadas</string>
     <string name="survey_not_extend">ALERTA: visadas sem medidas auxiliares</string>
     <string name="survey_not_attached_extend">ALERTA: visadas desconectadas e sem medidas auxiliares</string>
+    <string name="survey_no_data_reduction">ALERTA: nenhuma redução de dados</string>
+    <string name="survey_not_saved">ALERTA: info da topo não gravada</string>
+    <string name="survey_bad_siblings">ALERTA: visada com irmã incorreta: %1$s</string>
+    <string name="survey_bad_magnetic">ALERTA: visada com info magnética ruim</string>
     <string name="saturated_coeffs">ALERTA: coeficientes de calibração saturados</string>
     <string name="out_of_memory">ALERTA: sem memória!</string>
     <string name="disk_io_error">CRÍTICO: erro de E/S no disco!</string>
-
     <string name="toporobot_warning">Política para o TopoRobot é \'Testador\'!</string>
     <string name="anomaly_warning">Compensação de anomalias magnéticas é \'Especialista\'!</string>
     <string name="tripod_warning">Política para tripés é "Avançado"!</string>
     <string name="coverage_warning">Amplitude angular abaixo de %1$d %%\nGravar coeficientes?</string>
     <string name="delta_warning">Erro mpédio acima de %1$.1f\nGravar coeficientes?</string>
     <!-- UNUSED string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
-
     <string name="cover_data">Distribuição dos dados brutos: %1$.2f %%</string>
     <string name="cover_calib">Distribuição dos dados calibrados: %1$.2f %%</string>
     <string name="cover_g">Distribuição G: %1$.2f %%</string>
     <string name="cover_m">Distribuição M: %1$.2f %%</string>
     <string name="cover_r">Distribuição rolagem: %1$.2f %%</string>
-
     <string name="accuracy_low">Baixa precisão. Calibração necessária.</string>
     <string name="accuracy_medium">Baixa precisão</string>
     <string name="accuracy_unreliable">Sensores não confiáveis</string>
-
+    <string name="empty_clipboard">Área de transferência vazia</string>
     <string name="cannot_rename">Não é possível renomear a topo</string>
     <string name="declination">declinação magnética</string>
     <string name="description">descrição</string>
@@ -633,6 +593,7 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="undelete_shot">Medidas</string>
     <string name="undelete_overshoot">Medidas erradas</string>
     <string name="undelete_check">Verificações</string>
+    <string name="undelete_blunder">Erros</string>
     <string name="undelete_plot">Croquis</string>
     <string name="delete_whole_leg">Apague esta visada inteira</string>
     <string name="visible_border">borda visível</string>
@@ -648,8 +609,8 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="unzip_fail_db">Falha: versão do banco de dados incompatível</string>
     <string name="unzip_fail_td">Falha: versão do TopoDroid incompatível</string>
     <!-- UNUSED string name="zoom_in_out">Abrir/fechar zoom</string -->
-
     <string name="survey_info">Informações da topo</string>
+    <string name="stat_devices">Dispositivos %1$d: %2$s</string>
     <string name="stat_stddev_m">Desvio padrão M: %1$.1f %%</string>
     <string name="stat_stddev_g">Desvio padrão G: %1$.1f %%</string>
     <string name="stat_stddev_dip">Desvio padrão Dip: %1$.1f graus (média: %2$.1f graus)</string>
@@ -660,12 +621,14 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="stat_length">Extensão total: %1$.1f %2$s</string>
     <string name="stat_extlen">Comprimento 3D %1$.1f %2$s</string>
     <string name="stat_projlen">Projeção horizontal: %1$.1f %2$s</string>
+    <string name="stat_cycle">Ciclos %1$d</string>
     <string name="stat_loop">Poligonais: %1$d</string>
     <string name="stat_origin">Base inicial: %1$s</string>
     <string name="stat_azimuth">Azimute da projeção do perfil: %1$.1f</string>
     <!-- UNUSED string name="stat_shot">Medidas: %1$d Duplicadas: %2$d Na superfície: %3$d</string -->
     <string name="stat_splay">Medidas auxiliares: %1$d # %2$d</string>
     <string name="stat_station">Bases: %1$d # %2$d</string>
+    <string name="stat_leg_sigma">Sigma da visada %1$.1f cm</string>
     <string name="stat_dangling">Medidas desconectadas %1$d %2$.1f %3$s</string>
     <string name="stat_surface">Medidas na superfície - Qt: %1$d # %2$d Ext: %3$.1f %4$s</string>
     <string name="stat_wens">Oeste: %1$.0f %5$s Leste: %2$.0f %5$s Norte: %3$.0f %5$s Sul: %4$.0f %5$s</string>
@@ -673,57 +636,56 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="shot_title">MEDIDA %1$s - %2$s</string>
     <!-- OK string name="shot_data">D %1$.2f  A %2$.1f  I %3$.1f</string -->
     <string name="survey_split_move_title">Mover/dividir topografia</string>
-
     <string name="survey_stat_duplicate">Visadas duplicadas - Qt: %1$d Ext: %2$.1f %3$s</string>
     <string name="survey_stat_splay">Medidas auxiliares: %1$d</string>
     <string name="survey_stat_station">Bases: %1$d</string>
     <string name="survey_stat_surface">Medidas na superfície - Qt: %1$d Ext: %2$.1f %3$s</string>
-
     <string name="hide_blank">Medidas vazias</string>
     <string name="hide_leg">Visadas repetidas</string>
     <string name="hide_ids">IDs das medidas</string>
     <string name="hide_splay">Medidas auxiliares</string>
-
     <!-- UNUSED string name="plan">PLANTA</string -->
     <string name="extended">RETIFICADO</string>
     <string name="profile">LONGITUDINAL</string>
     <string name="fmt_plan">%1$s: PLANTA-BAIXA</string>
     <string name="fmt_extended">%1$s: PERFIL</string>
     <string name="fmt_profile">%1$s: PROJETADO</string>
-
     <string name="extended_profile">Perfil retificado</string>
+    <string name="projected_profile">Perfil projetado</string>
     <!-- UNUSED string name="x_section">X-SECTION</string -->
     <!-- UNUSED string name="v_section">CORTE V</string -->
     <!-- UNUSED string name="h_section">CORTE H</string -->
     <!-- UNUSED string name="landscape">paisagem</string -->
-
+    <string name="display_view">Display</string>
+    <string name="plan_view">planta-baixa</string>
+    <string name="profile_view">perfil</string>
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Falha na leitura da memória da DistoX</string>
     <string name="distox_err_headtail_io">Erro de I/O na memória da DistoX</string>
     <string name="distox_err_headtail_eof">Erro de EOF na memória da DistoX</string>
     <string name="distox_err_connected">Dispositivo já conectado</string>
-
     <string name="ask_close_app">Fechar TopoDroid?</string>
     <!-- UNUSED string name="ask_reset">Reiniciar memória da DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Fechar mapa?</string -->
     <string name="ask_gps_service">Configurar o serviço GPS?</string>
     <string name="ask_backups_clear">Apagar backups dos croquis?</string>
     <string name="ask_manual_update">Atualizar tradução do manual do usuário?\nVersão disponível %1$d Versão instalada %2$d</string>
-
     <!-- UNUSED string name="button_add"       >Novo       </string -->
     <string name="button_apply"     >Aplicar</string>
     <string name="button_back"      >Voltar     </string>
     <string name="button_cancel"    >Cancelar   </string>
     <string name="button_change"    >Alterar    </string>
+    <string name="button_clipboard">Área transferência</string>
     <string name="button_close"     >Fechar     </string>
     <!-- UNUSED string name="button_create"    >Criar      </string -->
     <string name="button_color"     >Cor        </string>
     <string name="button_compute"   >Calcular</string>
+    <string name="button_clear_convert">Limpar conversão</string>
     <string name="button_convert"   >Converter  </string>
     <string name="button_copy"      >Copiar</string>
     <string name="button_current"   >Atual      </string>
     <string name="button_delete"    >Apagar     </string>
-    <string name="button_duplicate" >Dupĺicar   </string>
+    <string name="button_duplicate" >Duplicar   </string>
     <string name="button_surface"   >Superfície </string>
     <string name="button_no_extend" >Excluídas perfil retificado</string>
     <string name="button_eval"      >Calcular   </string>
@@ -733,7 +695,6 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="button_eval_cal"  >Calcular c/ calib.</string>
     <!-- OK string name="button_gps_start" >GPS       </string -->
     <!-- UNUSED string name="button_gps_stop"  >Parar     </string -->
-    <!-- DONT TRANSLATE string name="button_help">?</string -->
     <string name="button_manual"    >Manual do Usuário</string>
     <!-- UNUSED string name="button_measure"   >Medir   </string -->
     <!-- UNUSED string name="button_photo"   >Foto</string -->
@@ -754,6 +715,8 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="button_on"        >ligar</string>
     <string name="button_open"      >Abrir     </string>
     <string name="button_read"      >Ler       </string>
+    <string name="button_recover">Recuperar</string>
+    <string name="button_reverse">Inverter</string>
     <!-- UNUSED string name="button_redo"      >Refazer   </string -->
     <!-- UNUSED string name="button_regroup"   >Reagrupar   </string -->
     <string name="button_dump"      >Baixar    </string>
@@ -763,7 +726,6 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="button_replace"   >Substituir</string>
     <string name="button_reset"     >Reiniciar </string>
     <string name="button_left"      >ESQUERDA</string>
-
     <string name="button_right"     >DIREITA</string>
     <string name="button_clear"     >Limpar    </string>
     <string name="button_clear_day" >Limpar 1 dia</string>
@@ -771,29 +733,31 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="button_clear_memory">Limpar memória</string>
     <string name="button_save"      >Salvar    </string>
     <!-- UNUSED string name="button_select"    >Selecionar    </string -->
+    <string name="button_leg_station">Bases visada</string>
+    <string name="button_all_station">Todas bases</string>
+    <string name="button_leg_search">Pesquisar visadas</string>
     <string name="button_search"    >Pesquisar </string>
     <string name="button_merge"     >Mesclar   </string>
     <string name="button_saved"     >Base salva</string>
     <string name="button_split"     >Dividir   </string>
-    <string name="button_station"   >Centralizar em</string>
+    <string name="button_station"   >Centralizar</string>
     <string name="button_store"     >Armazenar </string>
     <string name="button_swap"      >Inverter      </string>
     <!-- UNUSED string name="button_start"     >Iniciar</string -->
     <!-- UNUSED string name="button_stop"      >Parar</string -->
     <string name="button_upload"    >Enviar     </string>
+    <string name="button_download">Download</string>
     <string name="button_view"      >Ver no mapa</string>
     <!-- UNUSED string name="button_zoomfit"   >Zoom fit  </string -->
     <!-- UNUSED string name="button_landscape" >Landscape </string -->
     <!-- UNUSED string name="button_portrait"  >Portrait  </string -->
     <string name="button_splays">Medidas auxiliares</string>
-
-
+    <string name="button_wait">Espere</string>
     <string name="button_write"     >Enviar</string>
     <string name="button_xsection"  >Corte X</string>
     <string name="xsection">Corte X</string>
     <string name="buffer_size">Buffer: %1$d dados</string>
     <string name="buffer_unsorted">desordenado</string>
-
     <string name="mode_leg">Visadas</string>
     <string name="mode_splay">Medidas auxiliares</string>
     <string name="mode_latest">Últimas medidas auxiliares</string>
@@ -802,7 +766,6 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="mode_fixed">Deslocar croqui X aranha (CUIDADO!)</string>
     <string name="mode_outline">Contorno</string>
     <string name="mode_scale_ref">Escala gráfica</string>
-
     <string name="layer_floor">Base</string>
     <string name="layer_fill">Preenchimentos</string>
     <string name="layer_ceil">Topo</string>
@@ -810,29 +773,25 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <!-- UNUSED string name="layer_form">Forms</string -->
     <!-- UNUSED string name="layer_water">Water</string -->
     <!-- UNUSED string name="layer_text">Text</string -->
-
-
     <!-- UNUSED string name="remote_title">Controle remoto do dispositivo</string -->
     <string name="remote_on">Ligar laser</string>
     <string name="remote_off">Desligar laser</string>
     <!-- UNUSED string name="remote_measure">Medir</string -->
     <string name="remote_reset">Reiniciar Bluetooth</string>
     <!-- UNUSED string name="download">Download</string -->
-
     <string name="popup_do_splay">Medida auxiliar</string>
     <string name="popup_do_leg">Visada</string>
     <string name="popup_do_gm_data">Medida de calibração</string>
+    <string name="popup_do_gm_group">Grupo calib.</string>
     <string name="popup_do_laser">Laser</string>
     <string name="popup_do_scan">Varrer</string>
     <string name="popup_do_shot">Medir</string>
     <string name="popup_do_clear">Limpar</string>
     <string name="popup_do_off">Desligar</string>
-
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_export">Exportar</string>
     <string name="btn_import">Importar</string>
     <string name="btn_install">Instalar</string>
-
     <string name="symbol_archeo">Arqueologia</string>
     <string name="symbol_anthro">Antrópico</string>
     <string name="symbol_bio">Biologia</string>
@@ -842,14 +801,21 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="symbol_paleo">Paleontologia</string>
     <string name="symbol_speleo">Espeleologia</string>
     <string name="symbol_extra">Espeleologia (extras)</string>
-
     <string name="symbol_reload">Símbolos</string>
     <string name="warning_no_palette">Alerta: paleta ainda não foi carregada</string>
-
     <!-- UNUSED string name="length">Comprimento [m]</string -->
     <!-- UNUSED string name="azimuth">Azimute [deg]</string -->
     <!-- UNUSED string name="clino">Inclinação [deg]</string -->
-
+    <string name="hint_cellsize">tamanho célula</string>
+    <string name="hint_cwd">pasta de trabalho</string>
+    <string name="hint_distance">distância</string>
+    <string name="hint_length">comprimento</string>
+    <string name="hint_line">linha</string>
+    <string name="hint_origin">base de origem</string>
+    <string name="hint_point">ponto</string>
+    <string name="hint_textsize">tamanho texto</string>
+    <string name="hint_units">unidades símbolos</string>
+    <string name="hint_value">valor</string>
     <string name="hint_notes">observações</string>
     <string name="hint_label">rótulo</string>
     <string name="hint_comment">comentário</string>
@@ -873,18 +839,15 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <!-- UNUSED string name="hint_altitude_asl">altitude (asl)</string -->
     <!-- UNUSED string name="hint_declination">declination</string -->
     <string name="hint_station">base</string>
-
     <string name="orientation">orientação</string>
     <string name="contents">conteúdos</string>
     <string name="error_distribution">distribuição do erro</string>
     <string name="angle_distribution">distribuição angular</string>
-
     <string name="btn_horizontal">Horizontal</string>
-
     <string name="split_nothing">Nada a ser dividido</string>
     <string name="flip_shots">Virar medidas</string>
     <string name="copy_items">Copiar itens</string>
-
+    <string name="current_station_format">L %1$.1f N %2$.1f A %3$.1f</string>
     <string name="man_preface">Prefácio</string>
     <string name="man_intro">1. Introdução</string>
     <string name="man_main">2. Tela principal</string>
@@ -903,13 +866,11 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="man_threed">15. Visualizador 3D</string>
     <string name="man_index">16. Índice</string>
     <string name="man_website">* Site</string>
-
     <string name="help_help">Esta ajuda</string>
     <!-- UNUSED string name="help_manual">Manual do usuário</string -->
     <string name="help_measure">Medir distâncias</string>
     <string name="help_measure_type">Modo de medição: ponto fixo ou linha com diversos pontos</string>
     <string name="help_measure_undo">Descartar o último ponto da polilinha</string>
-
     <string name="help_audio">Relação de registros de áudio</string>
     <string name="help_backups">Apagar backups dos croquis</string>
     <string name="help_calib_check">Medidas de verificação de calibração</string>
@@ -925,8 +886,10 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="help_device">Editar dispositivo em uso</string>
     <string name="help_add_topodroid">Criar nova topo/calibração</string>
     <string name="help_import">Importar arquivo zip ou arquivo de topo</string>
+    <string name="help_geopoint_app">Apps GNSS externas</string>
     <string name="help_symbol">Habilitar/desabilitar símbolos</string>
     <string name="help_therion">Gerenciador de projetos</string>
+    <string name="help_cave3d">Cave 3D, visualizador 3D</string>
     <!-- UNUSED string name="help_database">App Visualizador de banco de dados (SQliteViewer)</string -->
     <string name="help_prefs">Editar preferências</string>
     <string name="help_log">Ativar/desativar configurações de log</string>
@@ -945,6 +908,7 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="help_remote">Controle remoto da DistoX</string>
     <string name="help_add_shot">Criar uma medida inserindo manualmente os dados</string>
     <string name="help_info_shot">Estatísticas da topo</string>
+    <string name="help_gps_surveys">Pontos fixos da topo</string>
     <string name="help_survey_info">Informações sobre a topo</string>
     <string name="help_undelete">Recuperar itens apagados</string>
     <string name="help_photo">Fotos</string>
@@ -952,6 +916,7 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="help_3d">App de visualização 3D (Cave3D)</string>
     <!-- UNUSED string name="help_move">Modo mover/zoom</string -->
     <string name="help_draw">Modo DESENHAR</string>
+    <string name="help_drawing">Desenho</string>
     <string name="help_edit">Modo EDITAR</string>
     <string name="help_refs">Definir tipos de medidas apresentadas</string>
     <string name="help_rename">Mudar nome da topo</string>
@@ -982,14 +947,11 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="help_reload_next">Mostrar backup mais antigo</string>
     <string name="help_reload_plot">Recarregar backup do croqui</string>
     <string name="help_zoom_fit">Encaixar croqui na tela</string>
-
     <string name="help_line_point">Ações com linhas e pontos: juntar, separar, cortar, remover</string>
-<!--
     <string name="help_to_point">Mover o ponto selecionado para juntá-lo ao ponto mais próximo</string>
     <string name="help_split_point">Dividir o ponto em dois [linha/área]</string>
     <string name="help_split_line">Dividir a linha em dois no ponto [linha/área]</string>
     <string name="help_kink">Utilizar uma linha reta no ponto [linha/área]</string>
--->
     <string name="help_manual_calibration">Calibração manual dos instrumentos</string>
     <string name="help_note_plot">Editar as propriedades do item selecionado do croqui</string>
     <!-- UNUSED string name="help_save">Salvar mudanças nas informações da topo</string -->
@@ -1013,7 +975,7 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="help_cover">Visualizar a distribuição angular dos dados de calibração</string>
     <string name="help_compute">Calcular calibração</string>
     <string name="help_write">Gravar coeficientes de calibração na DistoX</string>
-
+    <string name="help_splays">Medidas auxiliares segmento/ponto</string>
     <string name="help_add_project">Adicionar projeto</string>
     <string name="help_add_surveys">Adicionar topos</string>
     <string name="help_drop_surveys">Remover topos</string>
@@ -1023,13 +985,15 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="help_delete_config">Apagar projeto</string>
     <string name="help_add_equate">Adicionar \'equates\' das topos</string>
     <string name="help_equates">Listar \'equates\' das topos</string>
-
     <string name="export_bgcolor">Cor de fundo</string>
+    <string name="export_bothviews">Planta-baixa e perfil</string>
     <string name="export_config">Comandos de configuração</string>
     <string name="export_csv_rawdata">Dados brutos</string>
     <string name="export_dxf_blocks">Blocos DXF</string>
+    <string name="export_dxf_version">Versão</string>
     <string name="export_georeference">Georeferência</string>
     <string name="export_grid">Grade</string>
+    <string name="export_layers">Camadas croquis</string>
     <string name="export_linedir">Direção da linha</string>
     <string name="export_lrud">EDTC</string>
     <string name="export_lrud_from">EDTC na base DE</string>
@@ -1040,6 +1004,7 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="export_roundtrip">Circuito</string>
     <string name="export_scale_png">Resolução</string>
     <string name="export_scale_th">Escala 1 :</string>
+    <string name="export_spacing_th">Espaçamento pontos</string>
     <string name="export_splays">Medidas auxiliares</string>
     <string name="export_splays_named">Medidas auxiliares nomeadas</string>
     <string name="export_stations">Bases</string>
@@ -1050,7 +1015,6 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="export_xvi">Images Xvi</string>
     <string name="export_with_xsections">Incluir seções-X</string>
     <string name="export_with_reference">Incluir referência XY</string>
-
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
     <!-- UNUSED string name="export_station_stroke">Station stroke</string -->
     <!-- UNUSED string name="export_grid_stroke">Grid stroke</string -->
@@ -1058,7 +1022,6 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <!-- UNUSED string name="export_shot_stroke">Shot stroke</string -->
     <!-- UNUSED string name="export_point_stroke">Point stroke</string -->
     <!-- UNUSED string name="export_label_stroke">Label stroke</string -->
-
     <string name="audio_id_shot">Gravando: visada %1$s %2$s</string>
     <string name="audio_id_plot">Gravando: croqui %1$d</string>
     <string name="audio_paused">Pausado</string>
@@ -1067,13 +1030,11 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="audio_delete">Apagar?</string>
     <string name="audio_overwrite">Sobreescrever?</string>
     <!-- UNUSED string name="playing">Playing %1$s</string -->
-
     <string name="import_functional">Importar somente configurações funcionais</string>
     <string name="import_trox">Formato de arquivo Trox</string>
     <string name="import_lrud">Importar EDTC</string>
     <string name="import_leg_first">Medida antes de EDTC</string>
     <string name="import_diving_datamode">Modo de dados \'mergulho\'</string>
-
     <string name="title_azimut">Referência para retificar perfil</string>
     <string name="title_audio">Áudio comentário</string>
     <string name="title_audio_list">Registros de áudio</string>
@@ -1087,6 +1048,7 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <!-- UNUSED string name="title_coord">Inserir as coordenadas do ponto:</string -->
     <string name="title_current_station">Base gravadas</string>
     <string name="title_search">Pesquisa de estações e visadas</string>
+    <string name="title_gm_search">Busca dados calibração</string>
     <string name="title_dangling">Medidas desconectadas</string>
     <string name="title_device">Dispositivos DistoX</string>
     <string name="title_device_select">Selecionar o dispositivo DistoX</string>
@@ -1101,6 +1063,11 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="title_edit_station">Alterar base </string>
     <string name="title_erase">Apagar</string>
     <string name="title_fixed">Localizações</string>
+    <string name="title_fixed_mt">Ponto geo [Mobile Topographer]</string>
+    <string name="title_fixed_gpx_rec">Pontos geo [GPX Recorder]</string>
+    <string name="title_fixed_gps_pos">Pontos geo [GPS Position]</string>
+    <string name="title_fixed_gps_test">Pontos geo [GPSTest]</string>
+    <string name="title_fixed_gps_logger">Pontos geo [GPS Logger]</string>
     <string name="title_fixed_edit">Editar coordenadas</string>
     <string name="title_fixed_import">Importar coordenadas</string>
     <string name="title_fixed_gps">Coordenadas GPS</string>
@@ -1113,17 +1080,18 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="title_photo">Foto/Medições</string>
     <string name="title_photo_comment">Comentário da foto</string>
     <string name="title_photo_list">Fotos</string>
+    <string name="title_photo_view">Foto</string>
     <string name="title_plot_save">Exportar croqui</string>
     <!-- UNUSED string name="title_plot_merge">Mesclar croqui</string -->
     <!-- UNUSED string name="title_plot_reload">Recarregar croqui</string -->
     <string name="title_plot_scraps">Trechos do croqui</string>
     <string name="title_profile_flip">Virar o corte?</string>
     <string name="title_projection">Azimute do corte projetado %1$d</string>
+    <string name="title_reduction_errors">Anomalias redução dados</string>
     <string name="title_refs">Mostrar</string>
     <string name="title_scraps">Croquis da topo</string>
     <string name="title_scraps_outline">Contorno do croqui</string>
     <!-- UNUSED string name="title_select">Selecionar</string -->
-
     <string name="title_settings_main">Configurações principais</string>
     <string name="title_settings_export">Configurações importação/exportação</string>
     <string name="title_settings_import">Configurãções importação</string>
@@ -1138,7 +1106,6 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="title_settings_shp">Configurações exportação SHP</string>
     <string name="title_settings_png">Configurações exportação PNG</string>
     <string name="title_settings_kml">Configurações exportação KML</string>
-
     <string name="title_settings_sketch">Configurações croquis 3D</string>
     <string name="title_settings_survey">Configurações topo</string>
     <string name="title_settings_splay">Configurações medidas auxiliares</string>
@@ -1167,12 +1134,10 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="title_settings_geek_device">Configurações Geek: dispositivos</string>
     <string name="title_settings_geek_import">Configurações Geek: importação</string>
     <string name="title_settings_log">Configurações log</string>
-
     <string name="title_shift">Deslocar</string>
     <string name="title_shot_delete">Apagar medida?</string>
     <string name="title_sensor_edit">Sensor</string>
     <string name="title_split">Dividir croqui</string>
-
     <string name="title_stats">Estatísticas</string>
     <!-- UNUSED string name="title_step">Passo</string -->
     <string name="title_survey">Informações da topo</string>
@@ -1183,530 +1148,495 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="title_plot_zoomfit">Encaixar zoom / Orientação</string>
     <string name="title_calib_export">Exportar calibração</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
-
     <string name="title_import_shot">Importar topo</string>
     <string name="title_import_gps">Importar ponto GPS</string>
-
-  <string name="pref_export_settings">CONFIGURAÇÕES DE EXPORTAÇÃO</string>
-  <!-- UNUSED string name="pref_tcsx">Exportar cSurvey-1.20 transfer-csx</string -->
-
-  <string name="pref_export_plot_title">Formato exportação croqui</string>
-  <string name="pref_export_plot_summary">Formato padrão de exportação de croqui</string>
-  <string name="pref_export_shots_title">Formato exportação dados</string>
-  <string name="pref_export_shots_summary">Formato padrão de exportação de dados</string>
-  <string name="pref_auto_plot_export_title">Formato exportação automática croquis</string>
-  <string name="pref_auto_plot_export_summary">Formato de exportação automática de croquis</string>
-
-  <string name="pref_cat_survey">DADOS DA TOPO</string>
-  <string name="pref_cat_splay">DADOS MEDIDA AUXILIAR</string>
-  <string name="pref_cat_drawing">DESENHANDO CROQUI</string>
-  <string name="pref_cat_import_export">IMPORTAR/EXPORTAR</string>
-  <string name="pref_cat_exportimport">IMPORTAR</string>
-  <!-- OK string name="pref_cat_exportth">Therion</string -->
-  <!-- OK string name="pref_cat_exportdat">Compass</string -->
-  <!-- OK string name="pref_cat_exporttro">VisualTopo</string -->
-  <!-- OK string name="pref_cat_exportsvg">SVG</string -->
-  <!-- OK string name="pref_cat_exportdxf">DXF</string -->
-  <!-- OK string name="pref_cat_exportshp">Shapefile</string -->
-  <!-- OK string name="pref_cat_exportpng">PNG</string -->
-  <!-- OK string name="pref_cat_exportkml">KML/GeoJSON</string -->
-  <!-- OK string name="pref_cat_exportcsv">CSV</string -->
-
-  <string name="pref_cat_calib">CALIBRAÇÕES</string>
-  <string name="pref_cat_device">DISPOSITIVOS</string>
-  <string name="pref_cat_cave3d">VISUALIZADOR 3D</string>
-  <string name="pref_cat_geek">CONFIGURAÇÕES GEEK</string>
-  <!-- UNUSED string name="pref_cat_sketch">MODELOS 3D</string -->
-  <!-- UNUSED string name="pref_cat_log">LOGS</string -->
-
-  <string name="pref_locale_title">Língua</string>
-  <string name="pref_locale_summary">Língua</string>
-  <string name="pref_orientation_title">Orientação da tela</string>
-  <string name="pref_orientation_summary">Orientação da tela do aplicativo</string>
-
-  <string name="pref_raw_data_title">Dados brutos</string>
-  <string name="pref_raw_data_summary">Exibir dados brutos</string>
-  <string name="pref_calib_shot_download_title">Fazer download de dados remotos</string>
-  <string name="pref_calib_shot_download_summary">Fazer download de dados de calibração remotos imediatamente</string>
-  <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
-  <!-- UNUSED string name="pref_bootloader_summary">Ativar bootloader</string -->
-  <string name="pref_mkeyboard_title">Teclado</string>
-  <string name="pref_mkeyboard_summary">Habilitar teclados customizados</string>
-  <string name="pref_no_cursor_title">Sem cursor teclado</string>
-  <string name="pref_no_cursor_summary">Desabilitar o cursor do teclado especial</string>
-  <string name="pref_local_help_title">Manual traduzido</string>
-  <string name="pref_local_help_summary">Habilitar manual traduzido</string>
-  <!-- UNUSED string name="pref_cosurvey_title">Topo colaborativa</string -->
-  <!-- UNUSED string name="pref_cosurvey_summary">Habilitar topo colaborativa</string -->
-  <string name="pref_import_datamode_title">Formato de dados importação</string>
-  <string name="pref_import_datamode_summary">Formato de dados para importação de topos</string>
-
-  <string name="pref_therion_config_title">Comandos de configuração Therion</string>
-  <string name="pref_therion_config_summary">Criar comandos de configuração Therion</string>
-  <string name="pref_therion_maps_title">Mapas Therion primeiro</string>
-  <string name="pref_therion_maps_summary">Mapas de Therion antes dos dados da topo</string>
-  <string name="pref_extra_buttons_title">Nível de recursos</string>
-  <string name="pref_extra_buttons_summary">Nível de recursos habilitados</string>
-  <string name="pref_size_buttons_title">Tamanho botões</string>
-  <string name="pref_size_buttons_summary">Tamanho dos botões da barra de ações</string>
-  <string name="pref_with_sensors_title">Sensores</string>
-  <string name="pref_with_sensors_summary">Habilitar dados de sensores</string>
-  <string name="pref_with_android_azimuth_title">Bússola Android</string>
-  <string name="pref_with_android_azimuth_summary">Habilitar bússola/clino do Android</string>
-  <string name="pref_with_levels_title">Camadas</string>
-  <string name="pref_with_levels_summary">Usar camadas na tela de desenho</string>
-  <string name="pref_palettes_title">Paletas</string>
-  <string name="pref_palettes_summary">Habilitar paletas adicionais</string>
-  <string name="pref_packet_logger_title">Log de pacotes</string>
-  <string name="pref_packet_logger_summary">Habilitar log de pacotes</string>
-  <!-- UNUSED string name="pref_size_buttons_message">Defina o tamanho dos botões da barra de ações [pixels]</string -->
-
-  <string name="pref_bezier_step_title">Espaçamento pontos</string>
-  <string name="pref_bezier_step_summary">Distância entre pontos em uma linha exportada [m]</string>
-  <string name="pref_leg_shots_title">Mínimo medidas por visada</string>
-  <string name="pref_leg_shots_summary">Quantidade mínima de medidas para uma visada</string>
-  <string name="pref_recent_timeout_title">Prazo "dados recentes"</string>
-  <string name="pref_recent_timeout_summary">Limite de tempo após o qual os dados não são mais considerados recentes [s]</string>
-  <string name="pref_triple_shot_title">Som visada</string>
-  <string name="pref_triple_shot_summary">Aviso sonoro reconhecimento de visada</string>
-  <string name="pref_connect_feedback_title">Feedback conexão</string>
-  <string name="pref_connect_feedback_summary">Feedback ao estabelecer conexão com dispositivo</string>
-  <string name="pref_station_prefix_title">Prefixos bases Compass</string>
-  <string name="pref_station_prefix_summary">Exportar prefixo de bases (Compass)</string>
-  <string name="pref_compass_splays_title">Medidas auxiliares Compass</string>
-  <string name="pref_compass_splays_summary">Exportar medidas auxiliares em arquivos Compass</string>
-  <string name="pref_vtopo_splays_title">Medidas auxiliares VisualTopo</string>
-  <string name="pref_vtopo_splays_summary">Incluir medidas auxiliares em arquivos VisualTopo</string>
-  <string name="pref_vtopo_lrud_title">EDTC em De</string>
-  <string name="pref_vtopo_lrud_summary">EDTC na base De em arquivos VisualTopo</string>
-  <string name="pref_vtopo_trox_title">Formato Trox</string>
-  <string name="pref_vtopo_trox_summary">Exportar VisualTopo no formato trox</string>
-  <!-- UNUSED string name="pref_trobot_names_title">Nomes bases TopoRobot</string -->
-  <!-- UNUSED string name="pref_trobot_names_summary">Os nomes das bases usam o estilo do TopoRobot</string -->
-  <string name="pref_ortho_lrud_title">Ângulo med. aux. EDTC Compass</string>
-  <string name="pref_ortho_lrud_summary">Ângulo mínimo entre uma medida auxiliar e uma visada para ser uma medida auxiliar EDTC</string>
-  <string name="pref_lrud_vertical_title">Incl. mín. TC</string>
-  <string name="pref_lrud_vertical_summary">Incl. mín. medidas auxiliares Teto/Chão</string>
-  <string name="pref_lrud_horizontal_title">Incl. máx. ED</string>
-  <string name="pref_lrud_horizontal_summary">Incl. máx. medidas auxiliares Esquerda/Direita</string>
-  <string name="pref_survex_eol_title">Terminação linha Survex/Topo</string>
-  <string name="pref_survex_eol_summary">Terminação de linha Survex/Topo</string>
-  <string name="pref_survex_splay_title">Base med. aux. Survex</string>
-  <string name="pref_survex_splay_summary">Incluir a base PARA à medida auxiliar nos arquivos Survex exportados</string>
-  <string name="pref_survex_lrud_title">EDTC Survex</string>
-  <string name="pref_survex_lrud_summary">Incluir EDTC nos arquivos Survex exportados</string>
-  <!-- UNUSED string name="pref_svg_program_title">SVG program</string -->
-  <!-- UNUSED string name="pref_svg_program_summary">Target SVG program</string -->
-  <string name="pref_svg_grid_title">Grade</string>
-  <string name="pref_svg_grid_summary">Incluir grade no arquivo SVG/PNG exportado</string>
-  <string name="pref_svg_roundtrip_title">SVG circuito</string>
-  <string name="pref_svg_roundtrip_summary">Exportar SVG preparado para circuito</string>
-  <string name="pref_svg_splays_title">Medidas auxiliares SVG</string>
-  <string name="pref_svg_splays_summary">Incluir medidas auxiliares nos arquivos SVG exportados</string>
-  <!-- UNUSED string name="pref_svg_in_html_title">SVG em HTML</string -->
-  <!-- UNUSED string name="pref_svg_in_html_summary">Incorporar arquivo SVG exportado em HTML</string -->
-  <string name="pref_svg_pointstroke_title">Espessura ponto SVG</string>
-  <string name="pref_svg_pointstroke_summary">Espessura símbolos pontos nos arquivos SVG exportados</string>
-  <string name="pref_svg_labelstroke_title">Espessura rótulo SVG</string>
-  <string name="pref_svg_labelstroke_summary">Espessura do texto rótulo nos arquivos SVG exportados</string>
-  <string name="pref_svg_linestroke_title">Espessura linha SVG</string>
-  <string name="pref_svg_linestroke_summary">Espessura das linhas nos arquivos SVG exportados</string>
-  <string name="pref_svg_gridstroke_title">Espessura grade SVG</string>
-  <string name="pref_svg_gridstroke_summary">Espessura das linhas da grade nos arquivos SVG exportados</string>
-  <string name="pref_svg_shotstroke_title">Espessura medida SVG</string>
-  <string name="pref_svg_shotstroke_summary">Espessura das linhas de medidas nos arquivos SVG exportados</string>
-  <string name="pref_svg_linedirstroke_title">Espessura orientação linha SVG</string>
-  <string name="pref_svg_linedirstroke_summary">ESpessura das orientações de linha nos arquivos SVG exportados</string>
-  <string name="pref_svg_line_dir_title">Orientação das linhas SVG</string>
-  <string name="pref_svg_line_dir_summary">Incluir indicadores de orientação de linha nos arquivos SVG exportados</string>
-  <string name="pref_svg_stationsize_title">Tamanho bases</string>
-  <string name="pref_svg_stationsize_summary">Tamanho do nome das bases</string>
-  <string name="pref_svg_labelsize_title">Tamanho rótulo</string>
-  <string name="pref_svg_labelsize_summary">Tamanho do texto do rótulo</string>
-  <string name="pref_kml_stations_title">Bases KML</string>
-  <string name="pref_kml_stations_summary">Incluir bases nos arquivos KML exportados</string>
-  <string name="pref_kml_splays_title">Medidas auxiliares KML</string>
-  <string name="pref_kml_splays_summary">Incluir medidas auxiliares nos arquivos KML exportados</string>
-  <string name="pref_csv_raw_title">CSV bruto</string>
-  <string name="pref_csv_raw_summary">Exportar dados brutos no CSV</string>
-  <string name="pref_csv_sep_title">Separador CSV</string>
-  <string name="pref_csv_sep_summary">Separador de campos nos arquivos CSV exportados</string>
-  <string name="pref_csv_eol_title">Separador de linhas CSV</string>
-  <string name="pref_csv_eol_summary">Separador de linhas/registros nos arquivos CSV exportados</string>
-
-  <string name="pref_sock_type_title">Soquete</string>
-  <string name="pref_sock_type_summary">Criar soquete</string>
-  <!-- UNUSED string name="pref_device_type_title">Tipo de DistoX</string -->
-  <!-- UNUSED string name="pref_device_type_summary">Modelo de DistoX</string -->
-  <!-- UNUSED string name="pref_comm_retry_title">Tentar nova conexão</string -->
-  <!-- UNUSED string name="pref_comm_retry_summary">Número de tentativas de conexão</string -->
-  <string name="pref_wait_laser_title">Pausa do laser [ms]</string>
-  <string name="pref_wait_laser_summary">Pausa após a ligação do laser [ms]</string>
-  <string name="pref_wait_shot_title">Pausa da medida [ms]</string>
-  <string name="pref_wait_shot_summary">Pausa após a medição [ms]</string>
-  <string name="pref_wait_data_title">Pausa dos dados [ms]</string>
-  <string name="pref_wait_data_summary">Pausa após download dos dados [ms]</string>
-  <string name="pref_wait_conn_title">Tempo espera dados prontos [ms]</string>
-  <string name="pref_wait_conn_summary">Tempo de espera até que os dados estejam prontos [ms]</string>
-  <string name="pref_conn_mode_title">Tipo conexão de dados</string>
-  <string name="pref_conn_mode_summary">Tipo de conexão com DistoX</string>
-  <!-- UNUSED string name="pref_auto_reconnect_title">Reconexão automática</string -->
-  <!-- UNUSED string name="pref_auto_reconnect_summary">Reconectar automaticamente quando a conexão for perdida</string -->
-  <string name="pref_second_distox_title">Topografia 2 DistoX</string>
-  <string name="pref_second_distox_summary">Topografando com duas Disto-X</string>
-  <string name="pref_auto_pair_title">Pareamento automático</string>
-  <string name="pref_auto_pair_summary">Parear com o dispositivo após a busca</string>
-  <string name="pref_head_tail_title">Quantidade de dados novos</string>
-  <string name="pref_head_tail_summary">Obtenha a quantidade de novos dados antes de baixá-los</string>
-  <string name="pref_socket_delay_title">Atraso conexão</string>
-  <string name="pref_socket_delay_summary">Tempo de espera da conexão para permitir o pareamento [0.1 sec]</string>
-  <string name="pref_z6_workaround_title">Gambiara Z6</string>
-  <string name="pref_z6_workaround_summary">Gambiarra Z6 para download dos dados</string>
-  <string name="pref_firmware_sanity_title">Verificação de firmware</string>
-  <string name="pref_firmware_sanity_summary">Forçar verificações de sanidade de firmware</string>
-  <string name="pref_crs_title">C R S </string>
-  <string name="pref_crs_summary">Nome do CRS como no Proj4</string>
-  <!-- UNUSED string name="pref_gps_averaging_title">Média GPS</string -->
-  <!-- UNUSED string name="pref_gps_averaging_summary">Utilizar a média para produzir coordenadas GPS</string -->
-  <string name="pref_bric_mode_title">Modo BRIC</string>
-  <string name="pref_bric_mode_summary">Operando com um BRIC</string>
-  <string name="pref_bric_zero_length_title">Visada zerada BRIC</string>
-  <string name="pref_bric_zero_length_summary">Registrar visadas com comprimento zero do BRIC</string>
-
-  <string name="pref_plot_screen_title">CROQUI</string>
-  <string name="pref_tool_line_title">LINHAS</string>
-  <string name="pref_tool_point_title">PONTOS</string>
-  <string name="pref_location_title">LOCALIZAÇÃO</string>
-  <string name="pref_accuracy_title">EXATIDÃO</string>
-  <string name="pref_shot_data_title">DADOS DAS MEDIDAS</string>
-  <string name="pref_shot_units_title">UNIDADES</string>
-  <string name="pref_cwd_title">Diretório de trabalho</string>
-  <!-- UNUSED string name="pref_cwd_summary">Diretório de trabalho do Topodroid</string -->
-  <string name="pref_pt_color_map_title">Esquema cores PocketTopo</string>
-  <string name="pref_pt_color_map_summary">Esquema de cores do PocketTopo (importação PocketTopo)</string>
-  <string name="pref_text_size_title">Tamanho texto</string>
-  <string name="pref_text_size_summary">Tamanho do texto dos itens de lista</string>
-  <string name="pref_closeness_title">Raio de seleção</string>
-  <string name="pref_closeness_message">Raio da ferramenta de seleção do croqui</string>
-  <string name="pref_eraseness_title">Tamanho da borracha</string>
-  <string name="pref_eraseness_message">Raio da borracha no desenho</string>
-  <string name="pref_min_shift_title">Sensibilidade deslocamento</string>
-  <string name="pref_min_shift_message">Sensibilidade do deslocamento [pxl/passo]</string>
-  <string name="pref_pointing_title">Diâmetro tolerância cursor</string>
-  <string name="pref_pointing_message">Tolerância do deslocamento da posição do toque e da remoção do toque para seleção de ponto</string>
-  <string name="pref_dash_splay_title">Coerência pont. med. aux.</string>
-  <string name="pref_dash_splay_message">Pontilhamento coerente entre medidas auxiliares na planta baixa e nos perfis</string>
-  <string name="pref_vert_splay_title">Limite med. aux. tracejadas</string>
-  <string name="pref_vert_splay_message">Medidas auxiliares acima dessa inclinação serão tracejadas</string>
-  <string name="pref_horiz_splay_title">Limite pontilhamento de med. aux. X azimute</string>
-  <string name="pref_horiz_splay_message">Medida auxiliar divergindo do azimute acima deste limite será pontilhada</string>
-  <string name="pref_section_splay_title">Limite pontilhamento de med. aux. X plano corte</string>
-  <string name="pref_section_splay_message">Acima deste ângulo com o plano do corte, a medida auxiliar será pontilhada</string>
-  <string name="pref_splay_dash_color_title">Cor auxilares tracejadas</string>
-  <string name="pref_splay_dash_color_summary">Cor das medidas auxiliares quando tracejadas</string>
-  <string name="pref_splay_dot_color_title">Cor auxiliares pontilhadas</string>
-  <string name="pref_splay_dot_color_summary">Cor das medidas auxiliares quando pontilhadas</string>
-
-  <!-- UNUSED string name="pref_data_backup_title">Exportação automática</string -->
-  <!-- UNUSED string name="pref_data_backup_summary">Exportação automática de dados (exige definição de formato padrão)</string -->
-  <string name="pref_zipped_symbols_title">Arquivos de símbolos zipados</string>
-  <string name="pref_zipped_symbols_summary">Armazenar/carregar arquivos de símbolos em/de arquivo zip</string>
-  <string name="pref_fixed_origin_title">Origem do croqui</string>
-  <string name="pref_fixed_origin_summary">Origem fixa para croqui</string>
-  <string name="pref_shared_xsections_title">Cortes X compartilhados</string>
-  <string name="pref_shared_xsections_summary">Cortes X em bases compartilhados entre croquis</string>
-  <string name="xsections_shared">Cortes X compartilhados</string>
-  <string name="xsections_private">Cortes X não compartilhados</string>
-  <string name="pref_reduce_angle_title">Ângulo endireitar</string>
-  <string name="pref_reduce_angle_summary">Ângulo mínimo do segmento a endireitar</string>
-
-
-  <string name="pref_survey_stations_title">Regras para bases</string>
-  <string name="pref_survey_stations_summary">Regras para nomes de bases criados automaticamente</string>
-  <string name="pref_accel_thr_title">Tolerância aceleração</string>
-  <string name="pref_accel_thr_summary">Percentual de tolerância para valores de aceleração</string>
-  <string name="pref_mag_thr_title">Tolerância campo magnético</string>
-  <string name="pref_mag_thr_summary">Percentual de tolerância para valores do campo magnético</string>
-  <string name="pref_dip_thr_title">Tolerância declinação magnética</string>
-  <string name="pref_dip_thr_summary">Percentual de tolerância para valores da declinação magnética</string>
-
-  <string name="pref_leg_title">Tolerância visadas</string>
-  <string name="pref_leg_summary">Tolerância entre as medições de uma visada</string>
-  <string name="pref_max_shot_title">Comprimento máximo medida</string>
-  <string name="pref_max_shot_summary">Comprimento máximo de medidas [m]</string>
-  <string name="pref_min_leg_title">Comprimento mínimo visada</string>
-  <string name="pref_min_leg_summary">Comprimeto mínimo de visadas [m]</string>
-  <string name="pref_backsight_title">Medida contra</string>
-  <string name="pref_backsight_summary">Campos de contra azimute e inclinação invertida para inserção manual de medida</string>
-  <string name="pref_backshot_title">Contramedida DistoX</string>
-  <string name="pref_backshot_summary">Inverter bases nas contramedidas da DistoX</string>
-  <string name="pref_prev_next_title">Botões Ant/Próx</string>
-  <string name="pref_prev_next_summary">Botões Ant/Próx na janela de medição</string>
-  <!-- UNUSED string name="pref_mag_anomaly_title">Anomalia magnética</string -->
-  <!-- UNUSED string name="pref_mag_anomaly_summary">Compensar anomalia magnética local</string -->
-  <string name="pref_azimuth_manual_title">Ref. fixa retif. perfil</string>
-  <string name="pref_azimuth_manual_summary">Referência fixa para retificação de perfil</string>
-
-  <string name="pref_team_title">Equipe</string>
-  <string name="pref_team_summary">Equipe padrão para novas topos</string>
-
-  <string name="pref_ethr_title">Limite vertical med. aux.</string>
-  <string name="pref_ethr_summary">Ângulo máximo a partir dos 90° para considerar como vertical uma medida auxiliar [deg]</string>
-  <string name="pref_vthr_title">Limite vertical medidas</string>
-  <string name="pref_vthr_summary">Limite inclinação vertical de medidas para definição EDTC/NSLO</string>
-  <string name="pref_plan_vthr_title">Limite medida planta baixa</string>
-  <string name="pref_plan_vthr_summary">Esconder medidas auxiliares com grande inclinação na visualização da planta baixa</string>
-  <string name="pref_init_station_title">Nome base inicial</string>
-  <string name="pref_init_station_summary">Nome padrão da base inicial</string>
-  <string name="pref_station_names_title">Nomes bases</string>
-  <string name="pref_station_names_summary">Tipo de nome das bases</string>
-
-  <string name="pref_hthr_title">Limite hor. corte h</string>
-  <string name="pref_hthr_summary">Limite horizontal para cortes horizontais</string>
-  <string name="pref_bitmap_scale_title">Resolução PNG</string>
-  <string name="pref_bitmap_scale_summary">Resolução imagem PNG croquis</string>
-  <string name="pref_bitmap_bgcolor_title">Cor fundo PNG</string>
-  <string name="pref_bitmap_bgcolor_summary">Cor de fundo imagem PNG croquis</string>
-  <string name="pref_acad_version_title">Versão DXF</string>
-  <string name="pref_acad_version_summary">Versão DXF</string>
-  <string name="pref_acad_spline_title">Splines DXF</string>
-  <string name="pref_acad_spline_summary">Interpolação cúbica DXF</string>
-  <string name="pref_dxf_reference_title">Referência DXF</string>
-  <string name="pref_dxf_reference_summary">Incluir eixos XY na exportação de croquis DXF</string>
-  <!-- UNUSED string name="pref_dxf_scale_title">Escala croqui DXF</string -->
-  <!-- UNUSED string name="pref_dxf_scale_summary">Fator de escala croqui DXF</string -->
-  <string name="pref_dxf_blocks_title">Ponto final med. aux. DXF</string>
-  <string name="pref_dxf_blocks_summary">Ponto final de medida auxiliar DXF</string>
-  <string name="pref_shp_georef_title">Exportar croqui georeferenciado</string>
-  <string name="pref_shp_georef_summary">Croqui exportado em WGS84 long-lat</string>
-  <string name="pref_thumbnail_title">Tamanho Thumbnails</string>
-  <string name="pref_thumbnail_summary">Tamanho das fotos miniatura</string>
-  <string name="pref_shot_timer_title">Temporização direção medidas</string>
-  <string name="pref_shot_timer_summary">Segundos de espera antes de capturar a direção da medida</string>
-  <string name="pref_beep_volume_title">Volume bip temporizador</string>
-  <string name="pref_beep_volume_summary">Percentual de volume do bip do temporizador</string>
-  <string name="pref_extend_frac_title">Extensão parcial no perfil retificado</string>
-  <string name="pref_extend_frac_summary">Define se as visadas podem ser incluídas com comprimentos parciais nos perfis retificados</string>
-  <string name="pref_recent_shot_title">Medidas recentes</string>
-  <string name="pref_recent_shot_summary">Medidas recentes devem ser destacadas?</string>
-  <string name="pref_drawing_unit_title">Escala símbolos pontos</string>
-  <string name="pref_drawing_unit_summary">Escala dos símbolos dos pontos</string>
-  <string name="pref_unscaled_points_title">Ícones pontos sem zoom</string>
-  <string name="pref_unscaled_points_summary">Ícones de pontos não são alterados pelo zoom</string>
-  <string name="pref_segment_title">Espaçamento entre pontos de linhas</string>
-  <string name="pref_segment_message">Distância mínima entre pontos de linhas</string>
-  <string name="pref_linestyle_title">Estilo linha</string>
-  <string name="pref_linestyle_summary">Estilo de desenho da linha</string>
-  <string name="pref_linecontinue_title">Continuação de linha</string>
-  <string name="pref_linecontinue_summary">Modo padrão de continuação de linhas</string>
-  <string name="pref_lineacc_title">Precisão interpolação</string>
-  <string name="pref_lineacc_summary">Exatidão da interpolação cúbica das curvas Bézier</string>
-  <string name="pref_linecorner_title">Limite quinas Bézier</string>
-  <string name="pref_linecorner_summary">Limite para detecção de quinas nas curvas Bézier</string>
-  <string name="pref_weeddistance_title">Distância pontos \'weeding\'</string>
-  <string name="pref_weeddistance_summary">Distância máxima entre segmento e pontos \'weed\' (para redução da quantidade pontos em uma linha) [m]</string>
-  <string name="pref_weedlength_title">Comprimento segmento \'weeding\'</string>
-  <string name="pref_weedlength_summary">Comprimento máximo de um segmento na redução da quantidade de pontos via \'weeding\'</string>
-  <string name="pref_calib_algo_title">Algoritmo</string>
-  <string name="pref_calib_algo_summary">Algoritmo de calibração</string>
-  <string name="pref_group_by_title">Regra agrupamento</string>
-  <string name="pref_group_by_summary">Regra para agrupamento dos dados de calibração</string>
-  <string name="pref_group_title">Tolerância grupos</string>
-  <string name="pref_group_summary">Tolerância entre medidas de um mesmo grupo</string>
-  <string name="pref_error_title">Erro algoritmo</string>
-  <string name="pref_error_summary">Limite erro interrupção de calib.</string>
-  <string name="pref_iter_title">Iterações algoritmo</string>
-  <string name="pref_iter_summary">Máximo de iterações</string>
-  <string name="pref_label_size_title">Tamanho rótulos</string>
-  <string name="pref_label_size_summary">Tamanho dos rótulos</string>
-  <string name="pref_arrow_length_title">Tamanho linha corte</string>
-  <string name="pref_arrow_length_message">Tamanho do tracejado das linhas de corte</string>
-  <string name="pref_dot_radius_title">Raio pontos verdes</string>
-  <string name="pref_dot_radius_message">Raio dos pontos verdes</string>
-  <string name="pref_line_thickness_title">Espessura linha</string>
-  <string name="pref_line_thickness_summary">Espessura das linhas do desenho</string>
-  <string name="pref_line_units_title">Unidade linhas</string>
-  <string name="pref_line_units_summary">Unidades desenho linhas</string>
-  <string name="pref_linesnap_title">Colar linha/área</string>
-  <string name="pref_linesnap_summary">Habilitar atração + união de linhas/áreas</string>
-  <string name="pref_linecurve_title">Suavizar/tornar retos segmentos</string>
-  <string name="pref_linecurve_summary">Habilitar função de suavizar/tornar retos segmentos de linhas</string>
-  <string name="pref_linestraight_title">Tornar linhas retas</string>
-  <string name="pref_linestraight_summary">Habilitar função de transformar linhas inteiras em retas</string>
-  <string name="pref_path_multiselect_title">Multiseleção de caminhos</string>
-  <string name="pref_path_multiselect_summary">Habilitar função de seleção de vários caminhos</string>
-  <string name="pref_composite_actions_title">Ações compostas</string>
-  <string name="pref_composite_actions_summary">Habilitar ações de \'clique longo\' para linhas e áreas</string>
-  <string name="pref_plane_interpolation_title">Interpolação de plano</string>
-  <string name="pref_plane_interpolation_summary">Habilitar função de interpolação de plano</string>
-  <string name="pref_plot_split_title">Quebra/união de croquis</string>
-  <string name="pref_plot_split_summary">Habilitar função de quebra/união de croquis</string>
-  <string name="pref_stylus_size_title">Tamanho caneta</string>
-  <string name="pref_stylus_size_summary">Tamanho da caneta [0: ignorar]</string>
-  <string name="pref_fixed_thickness_title">Espessura linha trena</string>
-  <string name="pref_fixed_thickness_summary">Espessura das linhas de trena</string>
-  <!-- UNUSED string name="pref_device_title">Dispositivo</string -->
-  <!-- UNUSED string name="pref_device_summary">Nome do endereço da DistoX</string -->
-  <string name="pref_checkBT_title">Bluetooth</string>
-  <string name="pref_checkBT_summary">Habilitar verificação do Bluetooth na abertura do aplicativo</string>
-  <string name="pref_checkAttached_title">Verificação linha de trena</string>
-  <string name="pref_checkAttached_summary">Verificar se as bases estão conectadas</string>
-  <string name="pref_checkExtend_title">Verificar medidas auxiliares de visada</string>
-  <string name="pref_checkExtend_summary">Verificar se a visada tem medidas auxiliares definidas</string>
-  <string name="pref_toolbarSize_title">Tamanho barra de ferramentas</string>
-  <string name="pref_toolbarSize_summary">Tamanho da barra de ferramentas das ferramentas de desenho</string>
-  <string name="pref_backup_number_title">Quantidade backup</string>
-  <string name="pref_backup_number_summary">Quantidade de backups do croqui</string>
-  <string name="pref_backup_interval_title">Intervalos backup</string>
-  <string name="pref_backup_interval_summary">Intervalo mínimo entre dois backups [s]</string>
-  <string name="pref_backups_clear_title">Apagar backups</string>
-  <string name="pref_backups_clear_summary">Habilitar menu para apagar backups</string>
-  <!-- UNUSED string name="pref_xtherion_areas_title">Áreas xtherion</string -->
-  <!-- UNUSED string name="pref_xtherion_areas_summary">Salvar áreas como o xtherion</string -->
-  <string name="pref_therion_splays_title">Medidas auxiliares Therion</string>
-  <string name="pref_therion_splays_summary">Adicionar linhas u:splay aos arquivos th2</string>
-  <string name="pref_th2_scale_title">Escala Therion</string>
-  <string name="pref_th2_scale_summary">Escala da exportação de arquivos th2/xvi</string>
-  <string name="pref_th2_xvi_title">Imagem xvi</string>
-  <string name="pref_th2_xvi_summary">Inserir imagem xvi no arquivo th2</string>
-  <string name="pref_autoStations_title">Bases Therion</string>
-  <string name="pref_autoStations_summary">Incluir automaticamente bases aos arquivos para o Therion</string>
-  <string name="pref_auto_xsections_title">Cortes X automáticos</string>
-  <string name="pref_auto_xsections_summary">Incluir automaticamente cortes X na exportação de arquivos csx/svg/dxf/xvi</string>
-  <string name="pref_saved_stations_title">Estações salvas</string>
-  <string name="pref_saved_stations_summary">Apresentar estações salvas em laranja</string>
-  <string name="pref_legonly_update_title">Atualizar somente visadas</string>
-  <string name="pref_legonly_update_summary">Somente redesenhar linha de trena quando receber novas visadas</string>
-  <string name="pref_loopClosure_title">Fechamento anéis</string>
-  <string name="pref_loopClosure_summary">Compensação de erro de fechamento do anel</string>
-  <!-- UNUSED string name="pref_splayExtend_title">Estimar extensão medida auxiliar</string -->
-  <!-- UNUSED string name="pref_splayExtend_summary">Estimar extensão medida auxiliar</string -->
-  <string name="pref_swapLR_title">Inverter Esq/Dir Compass</string>
-  <string name="pref_swapLR_summary">Inverter Esquerda e Direita na exportação para o Compass</string>
-  <string name="pref_LRExtend_title">Estimar ref. retif. perfil</string>
-  <string name="pref_LRExtend_summary">Estimar referência para retificação do perfil (importação Compass/VisualTopo)</string>
-  <string name="pref_diving_mode_title">Modo mergulho</string>
-  <string name="pref_diving_mode_summary">Habilitar modo mergulho</string>
-  <string name="pref_splay_classes_title">Classes medidas auxiliares</string>
-  <string name="pref_splay_classes_summary">Habilitar classes e coloração de medidas auxiliares</string>
-  <string name="pref_splay_color_title">Coloração medidas auxiliares</string>
-  <string name="pref_splay_color_summary">Habilitar coloração de medidas auxiliares</string>
-  <string name="pref_plot_shift_title">Escalar e deslocar croquis</string>
-  <string name="pref_plot_shift_summary">Habilitar escalonamento e deslocamento de croquis</string>
-  <string name="pref_splay_alpha_title">Transparência de medidas auxiliares</string>
-  <string name="pref_splay_alpha_summary">Transparência de medidas auxiliares [0: transparente, 100: opaca]</string>
-
-  <!-- UNUSED string name="pref_picker_type_title">Janela símbolos</string -->
-  <!-- UNUSED string name="pref_picker_type_summary">Forma de apresentação da seleção de símbolos</string -->
-  <!-- UNUSED string name="pref_triple_toolbar_title">Triple bottom bar</string -->
-  <!-- UNUSED string name="pref_triple_toolbar_summary">Triple drawing tools bar</string -->
-  <!-- UNUSED string name="pref_section_stations_title">Bases corte X</string -->
-  <!-- UNUSED string name="pref_section_stations_summary">Bases de referência cortes X</string -->
-  <string name="pref_station_size_title">Tamanho nome bases</string>
-  <string name="pref_station_size_summary">Tamanho do nome das bases</string>
-  <string name="pref_zoom_controls_title">Controle zoom</string>
-  <string name="pref_zoom_controls_summary">Controle do zoom em telas multitoque</string>
-  <string name="pref_side_drag_title">Arrasto canto</string>
-  <string name="pref_side_drag_summary">Habilitar o arrastamento pelo canto da área de desenho do croqui</string>
-  <string name="pref_unit_grid_title">Unidades croqui</string>
-  <string name="pref_unit_grid_summary">Tamanho dos intervalos na grade do croqui</string>
-  <string name="pref_unit_measure_title">Unidade régua</string>
-  <string name="pref_unit_measure_summary">Unidade de comprimento da ferramenta de medição</string>
-  <!-- UNUSED string name="pref_recent_nr_title">Número símbolos recentes</string -->
-  <!-- UNUSED string name="pref_recent_nr_summary">Número de símbolos mais recentes na janela de seleção</string -->
-  <string name="pref_area_border_title">Visibilidade borda área</string>
-  <string name="pref_area_border_summary">Visibilidade padrão das bordas da área</string>
-  <string name="pref_auto_section_pt_title">Pontos corte</string>
-  <string name="pref_auto_section_pt_summary">Adicionar ponto de corte às linhas de corte</string>
-
-  <string name="pref_unit_length_title">Unidade distâncias</string>
-  <string name="pref_unit_length_summary">Unidade para visualização de distâncias</string>
-  <string name="pref_unit_angle_title">Unidade ângulos</string>
-  <string name="pref_unit_angle_summary">Unidade para visualização de ângulos</string>
-  <string name="pref_unit_location_title">Unidade coordenadas</string>
-  <string name="pref_unit_location_summary">Unidade para visualização de coordenadas</string>
-
-<!-- UNUSED
-  <string name="pref_plot_walls_title">PAREDES AUTOMÁTICAS</string>
-  <string name="pref_walls_type_title">Tipo paredes</string>
-  <string name="pref_walls_type_summary">Tipo das paredes</string>
-  <string name="pref_walls_plan_thr_title">Inclinação medidas planta</string>
-  <string name="pref_walls_plan_thr_summary">Inclinação máxima de medidas auxiliares para paredes de plantas baixas [deg]</string>
-  <string name="pref_walls_extended_thr_title">Inclinação medidas corte</string>
-  <string name="pref_walls_extended_thr_summary">Inclinação máxima de medidas auxiliares para paredes de cortes [deg]</string>
-  <string name="pref_walls_xclose_title">Espaçamento</string>
-  <string name="pref_walls_xclose_summary">Separação mínima de pontos de paredes ao longo da medida [m]</string>
-  <string name="pref_walls_concave_title">Concavidade</string>
-  <string name="pref_walls_concave_summary">Concavidade máxima [percentual]</string>
-  <string name="pref_walls_xstep_title">Passo</string>
-  <string name="pref_walls_xstep_summary">Separação dos pontos ao longo das paredes [m]</string>
--->
-
-  <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
-  <string name="pref_algo_min_alpha_summary">ator de correção para min-algo (em [0,1])</string>
-  <string name="pref_algo_min_beta_title">Min-algo beta</string>
-  <string name="pref_algo_min_beta_summary">Fator de correção para min-algo do peso dip M</string>
-  <string name="pref_algo_min_gamma_title">Min-algo gamma</string>
-  <string name="pref_algo_min_gamma_summary">Fator de correção para min-algo do peso do grupo G.x M.x</string>
-  <string name="pref_algo_min_delta_title">Min-algo delta</string>
-  <string name="pref_algo_min_delta_summary">Fator de correção para min-algo do peso do grupo G^M.x</string>
-
-<!-- LEAVE LOG STUFF IN ENGLISH
-  <string name="pref_log_stream_summary">Fluxo do log de saída</string>
-  <string name="pref_log_stream_title">Fluxo do log</string>
-  <string name="pref_log_bt">Bluetooth</string>
-  <string name="pref_log_bezier">Curvas Bézier</string>
-  <string name="pref_log_calib">Calibração</string>
-  <string name="pref_log_comm">Comunicação BT</string>
-  <string name="pref_log_csurvey">cSurvey</string>
-  <string name="pref_log_data">Dados da topo</string>
-  <string name="pref_log_db">Banco de dados</string>
-  <string name="pref_log_debug">Debug</string>
-  <string name="pref_log_device">Janela do dispositivo</string>
-  <string name="pref_log_distox">DistoX</string>
-  <string name="pref_log_err">Erro</string>
-  <string name="pref_log_fixed">Pontos GPS</string>
-  <string name="pref_log_input">Entrada pelo usuário</string>
-  <string name="pref_log_io">Sketch i/o</string>
-  <string name="pref_log_loc">Localização</string>
-  <string name="pref_log_num">Redução de dados</string>
-  <string name="pref_log_path">Arquivos</string>
-  <string name="pref_log_perm">Permissões</string>
-  <string name="pref_log_photo">Foto</string>
-  <string name="pref_log_plot">Croquis</string>
-  <string name="pref_log_proto">Protocolo DistoX</string>
-  <string name="pref_log_ptopo">PocketTopo</string>
-  <string name="pref_log_sensor">Sensores</string>
-  <string name="pref_log_shot">Medidas</string>
-  <string name="pref_log_sync">Mapeamento compartilhado</string>
-  <string name="pref_log_survey">Topografias</string>
-  <string name="pref_log_therion">Therion</string>
-  <string name="pref_log_units">Unidades</string>
-  <string name="pref_log_zip">ZIP</string>
--->
-
-  <!-- UNUSED string name="line_bezier">Bézier</string -->
-  <!-- UNUSED string name="line_fine">fino</string -->
-  <!-- UNUSED string name="line_normal">normal</string -->
-  <!-- UNUSED string name="line_coarse">grosseiro</string -->
-  <!-- UNUSED string name="units_ddmmss">ddmmss</string -->
-  <!-- UNUSED string name="units_dd">graus</string -->
-  <!-- UNUSED string name="units_grads">grads</string -->
-  <!-- UNUSED string name="units_meters">metros</string -->
-  <!-- UNUSED string name="units_feet">pés</string -->
-  <!-- UNUSED string name="alt_wgs">elipsoide</string -->
-  <!-- UNUSED string name="alt_ortho">Ortométrico</string -->
-  <!-- UNUSED string name="splay_extend">Estimar extensão visada auxiliar</string -->
-
+    <string name="title_import_th2">Arquivo th2 Therion</string>
+    <string name="title_infos">Pontos geo da topo</string>
+    <string name="title_graph_paper">Papel milimetrado escala 1:100</string>
+    <string name="graph_paper_scale">Ajuste a linha para que tenha 5 cm de comprimento</string>
+    <string name="exported_settings">Configurações exportação %1$s</string>
+    <string name="imported_settings">Configurações importadas</string>
+    <string name="imported_settings_failed">Falha ao importar configurações</string>
+    <string name="export_settings_failed">Falha ao exportar configurações</string>
+    <string name="pref_export_settings">CONFIGURAÇÕES EXPORTAÇÃO</string>
+    <!-- UNUSED string name="pref_tcsx">Exportar cSurvey-1.20 transfer-csx</string -->
+    <string name="pref_export_plot_title">Formato exportação croqui</string>
+    <string name="pref_export_plot_summary">Formato padrão de exportação de croqui</string>
+    <string name="pref_export_shots_title">Formato exportação dados</string>
+    <string name="pref_export_shots_summary">Formato padrão de exportação de dados</string>
+    <string name="pref_auto_plot_export_title">Formato exportação automática croquis</string>
+    <string name="pref_auto_plot_export_summary">Formato de exportação automática de croquis</string>
+    <string name="pref_lrud_count_title">Quant med aux EDTC</string>
+    <string name="pref_lrud_count_summary">Quantidade de medidas auxiliares usadas como EDTC</string>
+    <string name="pref_cat_survey">DADOS DA TOPO</string>
+    <string name="pref_cat_splay">DADOS MEDIDA AUXILIAR</string>
+    <string name="pref_cat_drawing">DESENHANDO CROQUI</string>
+    <string name="pref_cat_import_export">IMPORTAR/EXPORTAR</string>
+    <string name="pref_cat_exportimport">IMPORTAR</string>
+    <string name="pref_cat_calib">CALIBRAÇÕES</string>
+    <string name="pref_cat_device">DISPOSITIVOS</string>
+    <string name="pref_cat_cave3d">VISUALIZADOR 3D</string>
+    <string name="pref_cat_geek">CONFIGURAÇÕES GEEK</string>
+    <!-- UNUSED string name="pref_cat_log">LOGS</string -->
+    <string name="pref_locale_title">Língua</string>
+    <string name="pref_locale_summary">Língua</string>
+    <string name="pref_orientation_title">Orientação da tela</string>
+    <string name="pref_orientation_summary">Orientação da tela do aplicativo</string>
+    <string name="pref_raw_data_title">Dados brutos</string>
+    <string name="pref_raw_data_summary">Exibir dados brutos</string>
+    <string name="pref_calib_shot_download_title">Fazer download de dados remotos</string>
+    <string name="pref_calib_shot_download_summary">Fazer download de dados de calibração remotos imediatamente</string>
+    <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
+    <!-- UNUSED string name="pref_bootloader_summary">Ativar bootloader</string -->
+    <string name="pref_mkeyboard_title">Teclado</string>
+    <string name="pref_mkeyboard_summary">Habilitar teclados customizados</string>
+    <string name="pref_no_cursor_title">Sem cursor teclado</string>
+    <string name="pref_no_cursor_summary">Desabilitar o cursor do teclado especial</string>
+    <string name="pref_local_help_title">Manual traduzido</string>
+    <string name="pref_local_help_summary">Habilitar manual traduzido</string>
+    <!-- UNUSED string name="pref_cosurvey_title">Topo colaborativa</string -->
+    <!-- UNUSED string name="pref_cosurvey_summary">Habilitar topo colaborativa</string -->
+    <string name="pref_import_datamode_title">Formato de dados importação</string>
+    <string name="pref_import_datamode_summary">Formato de dados para importação de topos</string>
+    <string name="pref_therion_config_title">Comandos de configuração Therion</string>
+    <string name="pref_therion_config_summary">Criar comandos de configuração Therion</string>
+    <string name="pref_therion_maps_title">Mapas Therion primeiro</string>
+    <string name="pref_therion_maps_summary">Mapas de Therion antes dos dados da topo</string>
+    <string name="pref_extra_buttons_title">Nível de recursos</string>
+    <string name="pref_extra_buttons_summary">Nível de recursos habilitados</string>
+    <string name="pref_size_buttons_title">Tamanho botões</string>
+    <string name="pref_size_buttons_summary">Tamanho dos botões da barra de ações</string>
+    <string name="pref_with_sensors_title">Sensores</string>
+    <string name="pref_with_sensors_summary">Habilitar dados de sensores</string>
+    <string name="pref_with_android_azimuth_title">Bússola Android</string>
+    <string name="pref_with_android_azimuth_summary">Habilitar bússola/clino do Android</string>
+    <string name="pref_blunder_shot_title">Medidas com erro</string>
+    <string name="pref_blunder_shot_summary">Pular visadas com erro</string>
+    <string name="pref_splay_station_title">Reatribuir base med aux</string>
+    <string name="pref_splay_station_summary">Reatribuir bases às medidas auxiliares</string>
+    <string name="pref_splay_group_title">Renomear med aux grupo</string>
+    <string name="pref_splay_group_summary">Renomear em grupo medidas auxiliares subsequentes</string>
+    <string name="pref_with_levels_title">Camadas</string>
+    <string name="pref_with_levels_summary">Usar camadas na tela de desenho</string>
+    <string name="pref_palettes_title">Paletas</string>
+    <string name="pref_palettes_summary">Habilitar paletas adicionais</string>
+    <string name="pref_packet_logger_title">Log de pacotes</string>
+    <string name="pref_packet_logger_summary">Habilitar log de pacotes</string>
+    <string name="pref_th2_edit_title">Edição croqui</string>
+    <string name="pref_th2_edit_summary">Permitir edição de croqui</string>
+    <string name="pref_bezier_step_title">Espaçamento pontos</string>
+    <string name="pref_bezier_step_summary">Distância entre pontos em uma linha exportada [m]</string>
+    <string name="pref_leg_shots_title">Mínimo medidas por visada</string>
+    <string name="pref_leg_shots_summary">Quantidade mínima de medidas para uma visada</string>
+    <string name="pref_recent_timeout_title">Prazo "dados recentes"</string>
+    <string name="pref_recent_timeout_summary">Limite de tempo após o qual os dados não são mais considerados recentes [s]</string>
+    <string name="pref_triple_shot_title">Som visada</string>
+    <string name="pref_triple_shot_summary">Aviso sonoro reconhecimento de visada</string>
+    <string name="pref_connect_feedback_title">Feedback conexão</string>
+    <string name="pref_connect_feedback_summary">Feedback ao estabelecer conexão com dispositivo</string>
+    <string name="pref_station_prefix_title">Prefixos bases Compass</string>
+    <string name="pref_station_prefix_summary">Exportar prefixo de bases (Compass)</string>
+    <string name="pref_compass_splays_title">Medidas auxiliares Compass</string>
+    <string name="pref_compass_splays_summary">Exportar medidas auxiliares em arquivos Compass</string>
+    <string name="pref_vtopo_splays_title">Medidas auxiliares VisualTopo</string>
+    <string name="pref_vtopo_splays_summary">Incluir medidas auxiliares em arquivos VisualTopo</string>
+    <string name="pref_vtopo_lrud_title">EDTC em De</string>
+    <string name="pref_vtopo_lrud_summary">EDTC na base De em arquivos VisualTopo</string>
+    <string name="pref_vtopo_trox_title">Formato Trox</string>
+    <string name="pref_vtopo_trox_summary">Exportar VisualTopo no formato trox</string>
+    <!-- UNUSED string name="pref_trobot_names_title">Nomes bases TopoRobot</string -->
+    <!-- UNUSED string name="pref_trobot_names_summary">Os nomes das bases usam o estilo do TopoRobot</string -->
+    <string name="pref_ortho_lrud_title">Ângulo med. aux. EDTC Compass</string>
+    <string name="pref_ortho_lrud_summary">Ângulo mínimo entre uma medida auxiliar e uma visada para ser uma medida auxiliar EDTC</string>
+    <string name="pref_lrud_vertical_title">Incl. mín. TC</string>
+    <string name="pref_lrud_vertical_summary">Incl. mín. medidas auxiliares Teto/Chão</string>
+    <string name="pref_lrud_horizontal_title">Incl. máx. ED</string>
+    <string name="pref_lrud_horizontal_summary">Incl. máx. medidas auxiliares Esquerda/Direita</string>
+    <string name="pref_survex_eol_title">Terminação linha Survex/Topo</string>
+    <string name="pref_survex_eol_summary">Terminação de linha Survex/Topo</string>
+    <string name="pref_survex_splay_title">Base med. aux. Survex</string>
+    <string name="pref_survex_splay_summary">Incluir a base PARA à medida auxiliar nos arquivos Survex exportados</string>
+    <string name="pref_survex_lrud_title">EDTC Survex</string>
+    <string name="pref_survex_lrud_summary">Incluir EDTC nos arquivos Survex exportados</string>
+    <!-- UNUSED string name="pref_svg_program_title">SVG program</string -->
+    <!-- UNUSED string name="pref_svg_program_summary">Target SVG program</string -->
+    <string name="pref_svg_grid_title">Grade</string>
+    <string name="pref_svg_grid_summary">Incluir grade no arquivo SVG/PNG exportado</string>
+    <string name="pref_svg_roundtrip_title">SVG circuito</string>
+    <string name="pref_svg_roundtrip_summary">Exportar SVG preparado para circuito</string>
+    <string name="pref_svg_splays_title">Medidas auxiliares SVG</string>
+    <string name="pref_svg_splays_summary">Incluir medidas auxiliares nos arquivos SVG exportados</string>
+    <!-- UNUSED string name="pref_svg_in_html_title">SVG em HTML</string -->
+    <!-- UNUSED string name="pref_svg_in_html_summary">Incorporar arquivo SVG exportado em HTML</string -->
+    <string name="pref_svg_pointstroke_title">Espessura ponto SVG</string>
+    <string name="pref_svg_pointstroke_summary">Espessura símbolos pontos nos arquivos SVG exportados</string>
+    <string name="pref_svg_labelstroke_title">Espessura rótulo SVG</string>
+    <string name="pref_svg_labelstroke_summary">Espessura do texto rótulo nos arquivos SVG exportados</string>
+    <string name="pref_svg_linestroke_title">Espessura linha SVG</string>
+    <string name="pref_svg_linestroke_summary">Espessura das linhas nos arquivos SVG exportados</string>
+    <string name="pref_svg_gridstroke_title">Espessura grade SVG</string>
+    <string name="pref_svg_gridstroke_summary">Espessura das linhas da grade nos arquivos SVG exportados</string>
+    <string name="pref_svg_shotstroke_title">Espessura medida SVG</string>
+    <string name="pref_svg_shotstroke_summary">Espessura das linhas de medidas nos arquivos SVG exportados</string>
+    <string name="pref_svg_linedirstroke_title">Espessura orientação linha SVG</string>
+    <string name="pref_svg_linedirstroke_summary">ESpessura das orientações de linha nos arquivos SVG exportados</string>
+    <string name="pref_svg_line_dir_title">Orientação das linhas SVG</string>
+    <string name="pref_svg_line_dir_summary">Incluir indicadores de orientação de linha nos arquivos SVG exportados</string>
+    <string name="pref_svg_stationsize_title">Tamanho bases</string>
+    <string name="pref_svg_stationsize_summary">Tamanho do nome das bases</string>
+    <string name="pref_svg_labelsize_title">Tamanho rótulo</string>
+    <string name="pref_svg_labelsize_summary">Tamanho do texto do rótulo</string>
+    <string name="pref_kml_stations_title">Bases KML</string>
+    <string name="pref_kml_stations_summary">Incluir bases nos arquivos KML exportados</string>
+    <string name="pref_kml_splays_title">Medidas auxiliares KML</string>
+    <string name="pref_kml_splays_summary">Incluir medidas auxiliares nos arquivos KML exportados</string>
+    <string name="pref_csv_raw_title">CSV bruto</string>
+    <string name="pref_csv_raw_summary">Exportar dados brutos no CSV</string>
+    <string name="pref_csv_sep_title">Separador CSV</string>
+    <string name="pref_csv_sep_summary">Separador de campos nos arquivos CSV exportados</string>
+    <string name="pref_csv_eol_title">Separador de linhas CSV</string>
+    <string name="pref_csv_eol_summary">Separador de linhas/registros nos arquivos CSV exportados</string>
+    <string name="pref_sock_type_title">Soquete</string>
+    <string name="pref_sock_type_summary">Criar soquete</string>
+    <!-- UNUSED string name="pref_device_type_title">Tipo de DistoX</string -->
+    <!-- UNUSED string name="pref_device_type_summary">Modelo de DistoX</string -->
+    <!-- UNUSED string name="pref_comm_retry_title">Tentar nova conexão</string -->
+    <!-- UNUSED string name="pref_comm_retry_summary">Número de tentativas de conexão</string -->
+    <string name="pref_wait_laser_title">Pausa do laser [ms]</string>
+    <string name="pref_wait_laser_summary">Pausa após a ligação do laser [ms]</string>
+    <string name="pref_wait_shot_title">Pausa da medida [ms]</string>
+    <string name="pref_wait_shot_summary">Pausa após a medição [ms]</string>
+    <string name="pref_wait_data_title">Pausa dos dados [ms]</string>
+    <string name="pref_wait_data_summary">Pausa após download dos dados [ms]</string>
+    <string name="pref_wait_conn_title">Tempo espera dados prontos [ms]</string>
+    <string name="pref_wait_conn_summary">Tempo de espera até que os dados estejam prontos [ms]</string>
+    <string name="pref_conn_mode_title">Tipo conexão de dados</string>
+    <string name="pref_conn_mode_summary">Tipo de conexão com DistoX</string>
+    <!-- UNUSED string name="pref_auto_reconnect_title">Reconexão automática</string -->
+    <!-- UNUSED string name="pref_auto_reconnect_summary">Reconectar automaticamente quando a conexão for perdida</string -->
+    <string name="pref_second_distox_title">Topografia 2 DistoX</string>
+    <string name="pref_second_distox_summary">Topografando com duas Disto-X</string>
+    <string name="pref_auto_pair_title">Pareamento automático</string>
+    <string name="pref_auto_pair_summary">Parear com o dispositivo após a busca</string>
+    <string name="pref_head_tail_title">Quantidade de dados novos</string>
+    <string name="pref_head_tail_summary">Obtenha a quantidade de novos dados antes de baixá-los</string>
+    <string name="pref_socket_delay_title">Atraso conexão</string>
+    <string name="pref_socket_delay_summary">Tempo de espera da conexão para permitir o pareamento [0.1 sec]</string>
+    <string name="pref_z6_workaround_title">Gambiara Z6</string>
+    <string name="pref_z6_workaround_summary">Gambiarra Z6 para download dos dados</string>
+    <string name="pref_firmware_sanity_title">Verificação de firmware</string>
+    <string name="pref_firmware_sanity_summary">Forçar verificações de sanidade de firmware</string>
+    <string name="pref_crs_title">C R S </string>
+    <string name="pref_crs_summary">Nome do CRS como no Proj4</string>
+    <string name="pref_neg_altitude_title">Altitude negativa</string>
+    <string name="pref_neg_altitude_summary">Permitir altitudes negativas</string>
+    <string name="pref_edit_altitude_title">Altitude editável</string>
+    <string name="pref_edit_altitude_summary">Permitir edição de altitudes</string>
+    <string name="pref_fine_location_title">Posição precisa [s]</string>
+    <string name="pref_fine_location_summary">Horário posição precisa [s]</string>
+    <string name="pref_geoimport_app_title">App GNSS</string>
+    <string name="pref_geoimport_app_summary">App GNSS externa</string>
+    <!-- UNUSED string name="pref_gps_averaging_title">Média GPS</string -->
+    <!-- UNUSED string name="pref_gps_averaging_summary">Utilizar a média para produzir coordenadas GPS</string -->
+    <string name="pref_bric_mode_title">Modo BRIC</string>
+    <string name="pref_bric_mode_summary">Operando com um BRIC</string>
+    <string name="pref_bric_zero_length_title">Visada zerada BRIC</string>
+    <string name="pref_bric_zero_length_summary">Registrar visadas com comprimento zero do BRIC</string>
+    <string name="pref_sap5_bit16_bug_title">Bug bit-16 SAP5</string>
+    <string name="pref_sap5_bit16_bug_summary">Gambiarra bug bit-16 SAP5</string>
+    <string name="pref_plot_screen_title">CROQUI</string>
+    <string name="pref_tool_line_title">LINHAS</string>
+    <string name="pref_tool_point_title">PONTOS</string>
+    <string name="pref_location_title">LOCALIZAÇÃO</string>
+    <string name="pref_accuracy_title">EXATIDÃO</string>
+    <string name="pref_shot_data_title">DADOS DAS MEDIDAS</string>
+    <string name="pref_shot_units_title">UNIDADES</string>
+    <string name="pref_cwd_title">Diretório de trabalho</string>
+    <!-- UNUSED string name="pref_cwd_summary">Diretório de trabalho do Topodroid</string -->
+    <string name="pref_pt_color_map_title">Esquema cores PocketTopo</string>
+    <string name="pref_pt_color_map_summary">Esquema de cores do PocketTopo (importação PocketTopo)</string>
+    <string name="pref_text_size_title">Tamanho texto</string>
+    <string name="pref_text_size_summary">Tamanho do texto dos itens de lista</string>
+    <string name="pref_closeness_title">Raio de seleção</string>
+    <string name="pref_closeness_message">Raio da ferramenta de seleção do croqui</string>
+    <string name="pref_eraseness_title">Tamanho da borracha</string>
+    <string name="pref_eraseness_message">Raio da borracha no desenho</string>
+    <string name="pref_min_shift_title">Sensibilidade deslocamento</string>
+    <string name="pref_min_shift_message">Sensibilidade do deslocamento [pxl/passo]</string>
+    <string name="pref_pointing_title">Diâmetro tolerância cursor</string>
+    <string name="pref_pointing_message">Tolerância do deslocamento da posição do toque e da remoção do toque para seleção de ponto</string>
+    <string name="pref_dash_splay_title">Coerência pont. med. aux.</string>
+    <string name="pref_dash_splay_message">Pontilhamento coerente entre medidas auxiliares na planta baixa e nos perfis</string>
+    <string name="pref_vert_splay_title">Limite med. aux. tracejadas</string>
+    <string name="pref_vert_splay_message">Medidas auxiliares acima dessa inclinação serão tracejadas</string>
+    <string name="pref_horiz_splay_title">Limite pontilhamento de med. aux. X azimute</string>
+    <string name="pref_horiz_splay_message">Medida auxiliar divergindo do azimute acima deste limite será pontilhada</string>
+    <string name="pref_section_splay_title">Limite pontilhamento de med. aux. X plano corte</string>
+    <string name="pref_section_splay_message">Acima deste ângulo com o plano do corte, a medida auxiliar será pontilhada</string>
+    <string name="pref_splay_dash_color_title">Cor auxilares tracejadas</string>
+    <string name="pref_splay_dash_color_summary">Cor das medidas auxiliares quando tracejadas</string>
+    <string name="pref_splay_dot_color_title">Cor auxiliares pontilhadas</string>
+    <string name="pref_splay_dot_color_summary">Cor das medidas auxiliares quando pontilhadas</string>
+    <string name="pref_splay_latest_color_title">Cor med aux recente</string>
+    <string name="pref_splay_latest_color_summary">Cor das medidas auxiliares recentes</string>
+    <!-- UNUSED string name="pref_data_backup_title">Exportação automática</string -->
+    <!-- UNUSED string name="pref_data_backup_summary">Exportação automática de dados (exige definição de formato padrão)</string -->
+    <string name="pref_editable_stations_title">Base editável</string>
+    <string name="pref_editable_stations_summary">Nomes de bases editáveis na lista de medidas</string>
+    <string name="pref_zipped_symbols_title">Arquivos de símbolos zipados</string>
+    <string name="pref_zipped_symbols_summary">Armazenar/carregar arquivos de símbolos em/de arquivo zip</string>
+    <string name="pref_fixed_origin_title">Origem do croqui</string>
+    <string name="pref_fixed_origin_summary">Origem fixa para croqui</string>
+    <string name="pref_shared_xsections_title">Cortes X compartilhados</string>
+    <string name="pref_shared_xsections_summary">Cortes X em bases compartilhados entre croquis</string>
+    <string name="xsections_shared">Cortes X compartilhados</string>
+    <string name="xsections_private">Cortes X não compartilhados</string>
+    <string name="pref_reduce_angle_title">Ângulo endireitar</string>
+    <string name="pref_reduce_angle_summary">Ângulo mínimo do segmento a endireitar</string>
+    <string name="pref_survey_stations_title">Regras para bases</string>
+    <string name="pref_survey_stations_summary">Regras para nomes de bases criados automaticamente</string>
+    <string name="pref_accel_thr_title">Tolerância aceleração</string>
+    <string name="pref_accel_thr_summary">Percentual de tolerância para valores de aceleração</string>
+    <string name="pref_mag_thr_title">Tolerância campo magnético</string>
+    <string name="pref_mag_thr_summary">Percentual de tolerância para valores do campo magnético</string>
+    <string name="pref_dip_thr_title">Tolerância declinação magnética</string>
+    <string name="pref_dip_thr_summary">Percentual de tolerância para valores da declinação magnética</string>
+    <string name="pref_sibling_thr_title">Limite irmã</string>
+    <string name="pref_sibling_thr_summary">Limite para visadas irmãs [&#37;]</string>
+    <string name="pref_leg_title">Tolerância visadas</string>
+    <string name="pref_leg_summary">Tolerância entre as medições de uma visada</string>
+    <string name="pref_max_shot_title">Comprimento máximo medida</string>
+    <string name="pref_max_shot_summary">Comprimento máximo de medidas [m]</string>
+    <string name="pref_min_leg_title">Comprimento mínimo visada</string>
+    <string name="pref_min_leg_summary">Comprimeto mínimo de visadas [m]</string>
+    <string name="pref_backsight_title">Medida contra</string>
+    <string name="pref_backsight_summary">Campos de contra azimute e inclinação invertida para inserção manual de medida</string>
+    <string name="pref_backshot_title">Contramedida DistoX</string>
+    <string name="pref_backshot_summary">Inverter bases nas contramedidas da DistoX</string>
+    <string name="pref_prev_next_title">Botões Ant/Próx</string>
+    <string name="pref_prev_next_summary">Botões Ant/Próx na janela de medição</string>
+    <!-- UNUSED string name="pref_mag_anomaly_title">Anomalia magnética</string -->
+    <!-- UNUSED string name="pref_mag_anomaly_summary">Compensar anomalia magnética local</string -->
+    <string name="pref_azimuth_manual_title">Ref. fixa retif. perfil</string>
+    <string name="pref_azimuth_manual_summary">Referência fixa para retificação de perfil</string>
+    <string name="pref_team_title">Equipe</string>
+    <string name="pref_team_summary">Equipe padrão para novas topos</string>
+    <string name="pref_ethr_title">Limite vertical med. aux.</string>
+    <string name="pref_ethr_summary">Ângulo máximo a partir dos 90° para considerar como vertical uma medida auxiliar [deg]</string>
+    <string name="pref_vthr_title">Limite vertical medidas</string>
+    <string name="pref_vthr_summary">Limite inclinação vertical de medidas para definição EDTC/NSLO</string>
+    <string name="pref_plan_vthr_title">Limite medida planta baixa</string>
+    <string name="pref_plan_vthr_summary">Esconder medidas auxiliares com grande inclinação na visualização da planta baixa</string>
+    <string name="pref_init_station_title">Nome base inicial</string>
+    <string name="pref_init_station_summary">Nome padrão da base inicial</string>
+    <string name="pref_station_names_title">Nomes bases</string>
+    <string name="pref_station_names_summary">Tipo de nome das bases</string>
+    <string name="pref_hthr_title">Limite hor. corte h</string>
+    <string name="pref_hthr_summary">Limite horizontal para cortes horizontais</string>
+    <string name="pref_bitmap_scale_title">Resolução PNG</string>
+    <string name="pref_bitmap_scale_summary">Resolução imagem PNG croquis</string>
+    <string name="pref_bitmap_bgcolor_title">Cor fundo PNG</string>
+    <string name="pref_bitmap_bgcolor_summary">Cor de fundo imagem PNG croquis</string>
+    <string name="pref_acad_version_title">Versão DXF</string>
+    <string name="pref_acad_version_summary">Versão DXF</string>
+    <string name="pref_acad_spline_title">Splines DXF</string>
+    <string name="pref_acad_spline_summary">Interpolação cúbica DXF</string>
+    <string name="pref_acad_layer_title">Camadas croquis</string>
+    <string name="pref_acad_layer_summary">Camadas DXF por croquis</string>
+    <string name="pref_dxf_reference_title">Referência DXF</string>
+    <string name="pref_dxf_reference_summary">Incluir eixos XY na exportação de croquis DXF</string>
+    <!-- UNUSED string name="pref_dxf_scale_title">Escala croqui DXF</string -->
+    <!-- UNUSED string name="pref_dxf_scale_summary">Fator de escala croqui DXF</string -->
+    <string name="pref_dxf_blocks_title">Ponto final med. aux. DXF</string>
+    <string name="pref_dxf_blocks_summary">Ponto final de medida auxiliar DXF</string>
+    <string name="pref_shp_georef_title">Exportar croqui georeferenciado</string>
+    <string name="pref_shp_georef_summary">Croqui exportado em WGS84 long-lat</string>
+    <string name="pref_thumbnail_title">Tamanho Thumbnails</string>
+    <string name="pref_thumbnail_summary">Tamanho das fotos miniatura</string>
+    <string name="pref_shot_timer_title">Temporização direção medidas</string>
+    <string name="pref_shot_timer_summary">Segundos de espera antes de capturar a direção da medida</string>
+    <string name="pref_beep_volume_title">Volume bip temporizador</string>
+    <string name="pref_beep_volume_summary">Percentual de volume do bip do temporizador</string>
+    <string name="pref_extend_frac_title">Extensão parcial no perfil retificado</string>
+    <string name="pref_extend_frac_summary">Define se as visadas podem ser incluídas com comprimentos parciais nos perfis retificados</string>
+    <string name="pref_recent_shot_title">Medidas recentes</string>
+    <string name="pref_recent_shot_summary">Medidas recentes devem ser destacadas?</string>
+    <string name="pref_drawing_unit_title">Escala símbolos pontos</string>
+    <string name="pref_drawing_unit_summary">Escala dos símbolos dos pontos</string>
+    <string name="pref_unscaled_points_title">Ícones pontos sem zoom</string>
+    <string name="pref_unscaled_points_summary">Ícones de pontos não são alterados pelo zoom</string>
+    <string name="pref_segment_title">Espaçamento entre pontos de linhas</string>
+    <string name="pref_segment_message">Distância mínima entre pontos de linhas</string>
+    <string name="pref_linestyle_title">Estilo linha</string>
+    <string name="pref_linestyle_summary">Estilo de desenho da linha</string>
+    <string name="pref_linecontinue_title">Continuação de linha</string>
+    <string name="pref_linecontinue_summary">Modo padrão de continuação de linhas</string>
+    <string name="pref_lineacc_title">Precisão interpolação</string>
+    <string name="pref_lineacc_summary">Exatidão da interpolação cúbica das curvas Bézier</string>
+    <string name="pref_linecorner_title">Limite quinas Bézier</string>
+    <string name="pref_linecorner_summary">Limite para detecção de quinas nas curvas Bézier</string>
+    <string name="pref_graph_paper_scale_title">Escala papel milimetrado</string>
+    <string name="pref_graph_paper_scale_summary">Ajuste escala papel milimetrado</string>
+    <string name="pref_slant_xsection_title">Seções-X inclinadas</string>
+    <string name="pref_slant_xsection_summary">Visualização de perfis de seções-x inclinadas</string>
+    <string name="pref_weeddistance_title">Distância pontos weeding</string>
+    <string name="pref_weeddistance_summary">Distância máxima entre segmento e pontos \'weed\' (para redução da quantidade pontos em uma linha) [m]</string>
+    <string name="pref_weedlength_title">Comprimento segmento weeding</string>
+    <string name="pref_weedlength_summary">Comprimento máximo de um segmento na redução da quantidade de pontos via \'weeding\'</string>
+    <string name="pref_weedbuffer_title">Buffer segmentos weed</string>
+    <string name="pref_weedbuffer_summary">Buffer em torno de segmento de linha [pxl]</string -->
+    <string name="pref_calib_algo_title">Algoritmo</string>
+    <string name="pref_calib_algo_summary">Algoritmo de calibração</string>
+    <string name="pref_group_by_title">Regra agrupamento</string>
+    <string name="pref_group_by_summary">Regra para agrupamento dos dados de calibração</string>
+    <string name="pref_group_title">Tolerância grupos</string>
+    <string name="pref_group_summary">Tolerância entre medidas de um mesmo grupo</string>
+    <string name="pref_error_title">Erro algoritmo</string>
+    <string name="pref_error_summary">Limite erro interrupção de calib.</string>
+    <string name="pref_iter_title">Iterações algoritmo</string>
+    <string name="pref_iter_summary">Máximo de iterações</string>
+    <string name="pref_label_size_title">Tamanho rótulos</string>
+    <string name="pref_label_size_summary">Tamanho dos rótulos</string>
+    <string name="pref_arrow_length_title">Tamanho linha corte</string>
+    <string name="pref_arrow_length_message">Tamanho do tracejado das linhas de corte</string>
+    <string name="pref_dot_radius_title">Raio pontos verdes</string>
+    <string name="pref_dot_radius_message">Raio dos pontos verdes</string>
+    <string name="pref_line_thickness_title">Espessura linha</string>
+    <string name="pref_line_thickness_summary">Espessura das linhas do desenho</string>
+    <string name="pref_line_units_title">Unidade linhas</string>
+    <string name="pref_line_units_summary">Unidades desenho linhas</string>
+    <string name="pref_linesnap_title">Colar linha/área</string>
+    <string name="pref_linesnap_summary">Habilitar atração + união de linhas/áreas</string>
+    <string name="pref_linecurve_title">Suavizar/tornar retos segmentos</string>
+    <string name="pref_linecurve_summary">Habilitar função de suavizar/tornar retos segmentos de linhas</string>
+    <string name="pref_linestraight_title">Tornar linhas retas</string>
+    <string name="pref_linestraight_summary">Habilitar função de transformar linhas inteiras em retas</string>
+    <string name="pref_path_multiselect_title">Multiseleção de caminhos</string>
+    <string name="pref_path_multiselect_summary">Habilitar função de seleção de vários caminhos</string>
+    <string name="pref_composite_actions_title">Ações compostas</string>
+    <string name="pref_composite_actions_summary">Habilitar ações de \'clique longo\' para linhas e áreas</string>
+    <string name="pref_plane_interpolation_title">Interpolação de plano</string>
+    <string name="pref_plane_interpolation_summary">Habilitar função de interpolação de plano</string>
+    <string name="pref_plot_split_title">Quebra/união de croquis</string>
+    <string name="pref_plot_split_summary">Habilitar função de quebra/união de croquis</string>
+    <string name="pref_stylus_size_title">Tamanho caneta</string>
+    <string name="pref_stylus_size_summary">Tamanho da caneta [0: ignorar]</string>
+    <string name="pref_fixed_thickness_title">Espessura linha trena</string>
+    <string name="pref_fixed_thickness_summary">Espessura das linhas de trena</string>
+    <!-- UNUSED string name="pref_device_title">Dispositivo</string -->
+    <!-- UNUSED string name="pref_device_summary">Nome do endereço da DistoX</string -->
+    <string name="pref_checkBT_title">Bluetooth</string>
+    <string name="pref_checkBT_summary">Habilitar verificação do Bluetooth na abertura do aplicativo</string>
+    <string name="pref_checkAttached_title">Verificação linha de trena</string>
+    <string name="pref_checkAttached_summary">Verificar se as bases estão conectadas</string>
+    <string name="pref_checkExtend_title">Verificar medidas auxiliares de visada</string>
+    <string name="pref_checkExtend_summary">Verificar se a visada tem medidas auxiliares definidas</string>
+    <string name="pref_toolbarSize_title">Tamanho barra de ferramentas</string>
+    <string name="pref_toolbarSize_summary">Tamanho da barra de ferramentas das ferramentas de desenho</string>
+    <string name="pref_backup_number_title">Quantidade backup</string>
+    <string name="pref_backup_number_summary">Quantidade de backups do croqui</string>
+    <string name="pref_backup_interval_title">Intervalos backup</string>
+    <string name="pref_backup_interval_summary">Intervalo mínimo entre dois backups [s]</string>
+    <string name="pref_backups_clear_title">Apagar backups</string>
+    <string name="pref_backups_clear_summary">Habilitar menu para apagar backups</string>
+    <!-- UNUSED string name="pref_xtherion_areas_title">Áreas xtherion</string -->
+    <!-- UNUSED string name="pref_xtherion_areas_summary">Salvar áreas como o xtherion</string -->
+    <string name="pref_therion_splays_title">Medidas auxiliares Therion</string>
+    <string name="pref_therion_splays_summary">Adicionar linhas u:splay aos arquivos th2</string>
+    <string name="pref_th2_scale_title">Escala Therion</string>
+    <string name="pref_th2_scale_summary">Escala da exportação de arquivos th2/xvi</string>
+    <string name="pref_th2_xvi_title">Imagem xvi</string>
+    <string name="pref_th2_xvi_summary">Inserir imagem xvi no arquivo th2</string>
+    <string name="pref_autoStations_title">Bases Therion</string>
+    <string name="pref_autoStations_summary">Incluir automaticamente bases aos arquivos para o Therion</string>
+    <string name="pref_auto_xsections_title">Cortes X automáticos</string>
+    <string name="pref_auto_xsections_summary">Incluir automaticamente cortes X na exportação de arquivos csx/svg/dxf/xvi</string>
+    <string name="pref_saved_stations_title">Estações salvas</string>
+    <string name="pref_saved_stations_summary">Apresentar estações salvas em laranja</string>
+    <string name="pref_legonly_update_title">Atualizar somente visadas</string>
+    <string name="pref_legonly_update_summary">Somente redesenhar linha de trena quando receber novas visadas</string>
+    <string name="pref_full_affine_title">Transformação affline</string>
+    <string name="pref_full_affine_summary">Habilitar transformações affline em croquis</string>
+    <string name="pref_loopClosure_title">Fechamento anéis</string>
+    <string name="pref_loopClosure_summary">Compensação de erro de fechamento do anel</string>
+    <string name="pref_loop_thr_title">Limite loop</string>
+    <string name="pref_loop_thr_summary">Limite compensação loop</string>
+    <!-- UNUSED string name="pref_splayExtend_title">Estimar extensão medida auxiliar</string -->
+    <!-- UNUSED string name="pref_splayExtend_summary">Estimar extensão medida auxiliar</string -->
+    <string name="pref_swapLR_title">Inverter Esq/Dir Compass</string>
+    <string name="pref_swapLR_summary">Inverter Esquerda e Direita na exportação para o Compass</string>
+    <string name="pref_LRExtend_title">Estimar ref. retif. perfil</string>
+    <string name="pref_LRExtend_summary">Estimar referência para retificação do perfil (importação Compass/VisualTopo)</string>
+    <string name="pref_diving_mode_title">Modo mergulho</string>
+    <string name="pref_diving_mode_summary">Habilitar modo mergulho</string>
+    <string name="pref_splay_classes_title">Classes medidas auxiliares</string>
+    <string name="pref_splay_classes_summary">Habilitar classes e coloração de medidas auxiliares</string>
+    <string name="pref_splay_color_title">Coloração medidas auxiliares</string>
+    <string name="pref_splay_color_summary">Habilitar coloração de medidas auxiliares</string>
+    <string name="pref_plot_shift_title">Escalar e deslocar croquis</string>
+    <string name="pref_plot_shift_summary">Habilitar escalonamento e deslocamento de croquis</string>
+    <string name="pref_splay_alpha_title">Transparência de medidas auxiliares</string>
+    <string name="pref_splay_alpha_summary">Transparência de medidas auxiliares [0: transparente, 100: opaca]</string>
+    <!-- UNUSED string name="pref_picker_type_title">Janela símbolos</string -->
+    <!-- UNUSED string name="pref_picker_type_summary">Forma de apresentação da seleção de símbolos</string -->
+    <!-- UNUSED string name="pref_triple_toolbar_title">Triple bottom bar</string -->
+    <!-- UNUSED string name="pref_triple_toolbar_summary">Triple drawing tools bar</string -->
+    <!-- UNUSED string name="pref_section_stations_title">Bases corte X</string -->
+    <!-- UNUSED string name="pref_section_stations_summary">Bases de referência cortes X</string -->
+    <string name="pref_station_size_title">Tamanho nome bases</string>
+    <string name="pref_station_size_summary">Tamanho do nome das bases</string>
+    <string name="pref_zoom_controls_title">Controle zoom</string>
+    <string name="pref_zoom_controls_summary">Controle do zoom em telas multitoque</string>
+    <!-- FIXME string name="pref_side_drag_title">Arrasto lateral</string -->
+    <!-- FIXME string name="pref_side_drag_summary">Habilitar o arrastamento lateral na área de desenho do croqui</string -->
+    <string name="pref_unit_grid_title">Unidades croqui</string>
+    <string name="pref_unit_grid_summary">Tamanho dos intervalos na grade do croqui</string>
+    <string name="pref_unit_measure_title">Unidade régua</string>
+    <string name="pref_unit_measure_summary">Unidade de comprimento da ferramenta de medição</string>
+    <!-- UNUSED string name="pref_recent_nr_title">Número símbolos recentes</string -->
+    <!-- UNUSED string name="pref_recent_nr_summary">Número de símbolos mais recentes na janela de seleção</string -->
+    <string name="pref_area_border_title">Visibilidade borda área</string>
+    <string name="pref_area_border_summary">Visibilidade padrão das bordas da área</string>
+    <string name="pref_auto_section_pt_title">Pontos corte</string>
+    <string name="pref_auto_section_pt_summary">Adicionar ponto de corte às linhas de corte</string>
+    <string name="pref_unit_length_title">Unidade distâncias</string>
+    <string name="pref_unit_length_summary">Unidade para visualização de distâncias</string>
+    <string name="pref_unit_angle_title">Unidade ângulos</string>
+    <string name="pref_unit_angle_summary">Unidade para visualização de ângulos</string>
+    <string name="pref_unit_location_title">Unidade coordenadas</string>
+    <string name="pref_unit_location_summary">Unidade para visualização de coordenadas</string>
+    <string name="pref_plot_walls_title">PAREDES AUTOMÁTICAS</string>
+    <string name="pref_walls_type_title">Tipo paredes</string>
+    <string name="pref_walls_type_summary">Tipo das paredes</string>
+    <string name="pref_walls_plan_thr_title">Inclinação medidas planta</string>
+    <string name="pref_walls_plan_thr_summary">Inclinação máxima de medidas auxiliares para paredes de plantas baixas [deg]</string>
+    <string name="pref_walls_extended_thr_title">Inclinação medidas corte</string>
+    <string name="pref_walls_extended_thr_summary">Inclinação máxima de medidas auxiliares para paredes de cortes [deg]</string>
+    <string name="pref_walls_xclose_title">Espaçamento</string>
+    <string name="pref_walls_xclose_summary">Separação mínima de pontos de paredes ao longo da medida [m]</string>
+    <string name="pref_walls_concave_title">Concavidade</string>
+    <string name="pref_walls_concave_summary">Concavidade máxima [percentual]</string>
+    <string name="pref_walls_xstep_title">Passo</string>
+    <string name="pref_walls_xstep_summary">Separação dos pontos ao longo das paredes [m]</string>
+    <!-- UNUSED string name="line_bezier">Bézier</string -->
+    <!-- UNUSED string name="line_fine">fino</string -->
+    <!-- UNUSED string name="line_normal">normal</string -->
+    <!-- UNUSED string name="line_coarse">grosseiro</string -->
+    <!-- UNUSED string name="units_ddmmss">ddmmss</string -->
+    <!-- UNUSED string name="units_dd">graus</string -->
+    <!-- UNUSED string name="units_grads">grads</string -->
+    <!-- UNUSED string name="units_meters">metros</string -->
+    <!-- UNUSED string name="units_feet">pés</string -->
+    <!-- UNUSED string name="alt_wgs">elipsoide</string -->
+    <!-- UNUSED string name="alt_ortho">Ortométrico</string -->
+    <!-- UNUSED string name="splay_extend">Estimar extensão visada auxiliar</string -->
     <string name="perms_mandatory">O TopoDroid não pode ser executado sem essas permissões:</string>
     <string name="perms_optional">O TopoDroid pode apresentar erros sem essas permissões:</string>
     <string name="perm_location">\nLocalização</string>
     <string name="perm_camera">\nCâmera</string>
     <string name="perm_microphone">\nMicrofone</string>
-
-    <!-- OK string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
-\nTopodroid é um aplicativo Android Open Source para mapeamento de cavernas com DistoX.
+\nTopodroid é um aplicativo Android Open Source para mapeamento de cavernas com DistoX, BRIC4 e SAP5.
 \n\nNenhuma garantia: utilizando o aplicativo, você concorda com o fato de que o autor não é responsável por qualquer perda de dados ou quaisquer outros danos.
 \n\nAjuda: menu "Ajuda"
 \nPágina principal: botão MENU
@@ -1717,11 +1647,9 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
 \n  * Inicial por Angelo Roncolato (angelo.roncolato.110@gmail.com)
 \n
     </string>
-
-<!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED : mark OK untranslated strings -->
-  <string name="firmware_title">Atualizador Firmware</string>
-  <string name="firmware_file_title">Arquivos Firmware</string>
-  <string name="firmware_text">
+    <string name="firmware_title">Atualizador Firmware</string>
+    <string name="firmware_file_title">Arquivos Firmware</string>
+    <string name="firmware_text">
 \n[1] Selecionar uma das 2 opções: "Enviar" um novo firmware para a DistoX ou "Baixar" o firmware atual da DistoX para um arquivo local.
 \n[2] Selecione o arquivo a ser enviado ou baixado. Os arquivos de firmware estão na pasta bin.
 \n[3] Assegure-se de que a versão do firmware seja compatível com a versão do hardware da DistoX.
@@ -1731,24 +1659,28 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
 \n[7] Desligar a DistoX2 com a tecla CLR.
 \n
    </string>
-   <!-- UNUSED string name="firmware_wait_dump">Reading firmware &#8230; wait</string -->
-   <!-- UNUSED string name="firmware_wait_check">Checking hardware &#8230; wait</string -->
-   <!-- UNUSED string name="firmware_wait_upload">Uploading firmware &#8230; wait</string -->
-   <string name="firmware_none">nenhum arquivo firmware encontrado</string>
-   <string name="firmware_file">arquivo firmware</string>
-   <string name="firmware_file_exists">Arquivo firmware existente</string>
-   <string name="firmware_file_missing">Arquivo firmware não encontrado</string>
-   <string name="ask_dump">Baixar firmware?</string>
-   <string name="ask_upload">Enviar firmware?</string>
-   <string name="ask_upload_not_compatible">Arquivo firmware não parece estar correto.\Ainda assim enviar?</string>
-   <string name="firmware_upload_no_sign">Falha na verificação da DistoX</string>
-   <string name="firmware_upload_bad_sign">DistoX incompatível</string>
-   <string name="firmware_file_dumped">Arquivo firmware salvo %1$s tamanho %2$d</string>
-   <string name="firmware_file_uploaded">Arquivo firmware enviado %1$s escrito %2$d / %3$d</string>
-   <string name="firmware_file_dump_fail">Falha no recebimento de firmware</string>
-   <string name="firmware_file_upload_fail">Falha no envio de firmware</string>
-   <string name="firmware_not_supported">Dispositivo não suporte funções relativas à firmware</string>
-
+    <!-- UNUSED string name="firmware_wait_dump">Reading firmware &#8230; wait</string -->
+    <!-- UNUSED string name="firmware_wait_check">Checking hardware &#8230; wait</string -->
+    <!-- UNUSED string name="firmware_wait_upload">Uploading firmware &#8230; wait</string -->
+    <string name="firmware_none">nenhum arquivo firmware encontrado</string>
+    <string name="firmware_file">arquivo firmware</string>
+    <string name="firmware_file_exists">Arquivo firmware existente</string>
+    <string name="firmware_file_missing">Arquivo firmware não encontrado</string>
+    <string name="ask_dump">Baixar firmware?</string>
+    <string name="ask_upload">Enviar firmware?</string>
+    <string name="ask_download">Baixar firmware? (tenha paciência)</string>
+    <string name="ask_upload_not_compatible">Arquivo firmware não parece estar correto.\Ainda assim enviar?</string>
+    <string name="firmware_upload_no_sign">Falha na verificação da DistoX</string>
+    <string name="firmware_upload_bad_sign">DistoX incompatível</string>
+    <string name="firmware_file_dumped">Arquivo firmware salvo %1$s tamanho %2$d</string>
+    <string name="firmware_file_uploaded">Arquivo firmware enviado %1$s escrito %2$d / %3$d</string>
+    <string name="firmware_file_downloaded">Arquivo firmware %1$s baixado, lido %2$d</string>
+    <string name="firmware_file_dump_fail">Falha no recebimento de firmware</string>
+    <string name="firmware_file_upload_fail">Falha no envio de firmware</string>
+    <string name="firmware_file_download_fail">Falha ao baixar firmware</string>
+    <string name="firmware_not_supported">Dispositivo não suporte funções relativas à firmware</string>
+    <string name="firmware_uploaded">%1$s firmware: enviado %2$d</string>
+    <string name="firmware_downloaded">%1$s firmware: baixado %2$d</string>
     <string name="project">Projeto %1$s</string>
     <string name="no_editor">Editor não encontrado</string>
     <string name="no_file">Arquivo não encontrado</string>
@@ -1760,20 +1692,17 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="file_exists">Arquivo já existe</string>
     <string name="file_create_fail">Falha na criação de arquivo</string>
     <string name="oom">Alerta: memória cheia.</string>
-
     <string name="ask_delete_tdconfig">Apagar arquivo TdConfig</string>
     <string name="ask_remove_equate">Remover \'equate\' %1$s ?</string>
     <string name="equate_no_station">Nenhuma base selecionada</string>
     <string name="equate_no_stations">Poucas bases</string>
     <string name="equate_no_nearby">Nenhuma base próxima</string>
-
     <!-- UNUSED string name="menu_new">NEW</string -->
     <!-- UNUSED string name="menu_equate">ADD EQUATE</string -->
     <!-- UNUSED string name="menu_equates">EQUATES</string -->
+    <string name="menu_open">ABRIR</string>
     <!-- UNUSED string name="menu_save">SAVE</string -->
-
     <string name="overwrite">sobreescrever</string>
-
     <string name="title_export_settings">Configurações de importação/exportação</string>
     <string name="title_export">Exportar projeto como &#8230;</string>
     <string name="title_equates">\'Equates\' do projeto</string>
@@ -1783,17 +1712,13 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="title_drop">Excluir topos?</string>
     <string name="title_tdconfig">Insira nome do projeto</string>
     <string name="title_surveys">Topos</string>
-
     <string name="exported">Arquivo %1$s salvo</string>
-    <string name="imported_settings">Configurações importadas</string>
     <string name="export_failed">Exportação falhou</string>
-
-    <!-- 3D VIEWER strings -->
-
+    <string name="image_diagram">Diagrama direção</string>
+    <string name="image_photo">Foto</string>
+    <string name="cbtn_bind">Religar</string>
     <string name="cmenu_open">Abrir arquivo</string>
     <string name="cmenu_reset">Reiniciar</string>
-    <!-- UNUSED string name="menu_zoom_one">Zoom 1</string -->
-
     <string name="cmenu_alpha">Opacidade DEM</string>
     <string name="cmenu_viewpoint">Ponto de vista</string>
     <!-- UNUSED string name="cmenu_files">Topos</string -->
@@ -1803,10 +1728,8 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="cmenu_ico">Diagrama Ico</string>
     <string name="cmenu_rose">Diagrama Rose</string>
     <string name="cmenu_wall">Modo parede</string>
-    <!-- UNUSED string name="cmenu_fractal">Fractal counts</string -->
-
-    <string name="fractal_title">Contagem de fractais</string>
-
+    <string name="cmenu_sketch">CROQUIs</string>
+    <string name="illegal_value">Valor inválido</string>
     <string name="info_title">INFO</string>
     <string name="info_surveys">TOPOS</string>
     <string name="info_axes">Eixos: azul Norte, verde Leste</string>
@@ -1818,10 +1741,12 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="info_length">Comprimento</string>
     <string name="info_depth">Profundidade</string>
     <string name="info_volume">Volume</string>
-
     <string name="info_east">Leste</string>
     <string name="info_north">Norte</string>
     <string name="info_z">Altitude</string>
+    <string Oname="info_origin">Origem</string>
+    <string name="info_lonlat">coords.</string>
+    <string name="info_radii">radianos</string>
     <string name="info_grid_value">%1$.0f m</string>
     <string name="info_view_value">A. %1$.0f I. %2$.0f</string>
     <string name="info_survey_value">%1$d</string>
@@ -1830,69 +1755,85 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="info_length_value">%1$.1f m</string>
     <string name="info_depth_value">%1$.1f m</string>
     <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
+    <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
     <string name="info_east_value">O %1$.1f L %2$.1f</string>
     <string name="info_north_value">S %1$.1f N %2$.1f</string>
     <string name="info_z_value">%1$.1f %2$.1f</string>
-
+    <string name="info_origin_value">x %1$.0f y %2$.0f z %3$.0f</string>
+    <string name="info_origin_none">indefinido</string>
+    <string name="info_lonlat_geovalue">lon %1$.7f lat %2$.7f</string>
+    <string name="info_lonlat_prjvalue">lon %1$.1f lat %2$.1f</string>
+    <string name="info_radii_value">LO %1$.1f NS %2$.1f</string>
+    <string name="legs_surface">Surface</string>
+    <string name="legs_duplicate">Duplicadas</string>
+    <string name="legs_commented">Comentadas</string>
+    <string name="proj_perspective">Parâmetros perspectiva</string>
+    <string name="proj_orthographic">Parâmetros ortográficos</string>
+    <string name="proj_focal">Focal</string>
+    <string name="proj_side">Lateral</string>
     <string name="query" formatted="false">Topos: %d visadas: %d bases: %d\nComprimento: %d Profundidade: %d</string>
     <!-- UNUSED string name="cno_files">Nenhum arquivo</string -->
     <string name="reading_file">Lendo arquivo %1$s</string>
+    <string name="read_survey">Ler topo %1$s\n</string>
     <string name="clear">Limpar</string>
-
     <string name="plan_proj">Planta-baixa</string>
     <string name="profile_proj">Perfil</string>
     <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
     <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Caverna %9$.1f</string>
     <string name="measure">medida</string>
-
     <!-- UNUSED string name="style_stroke">Stroke</string -->
     <!-- UNUSED string name="style_stroke_fill">Fill &amp; Stroke</string -->
     <!-- UNUSED string name="style_fill">Fill</string -->
     <string name="surface_projection">Projeção no DEM</string>
     <string name="surface_texture">Textura da superfície</string>
-    <!-- OK string name="dem_file">DEM %1$s</string -->
+    <string name="surface_gps">Track GPS</string>
+    <string name="surface_east">Leste</string -->
+    <string name="surface_north">Norte</string>
     <string name="dem_load">carregar</string>
-
+    <string name="dem_loading">Carregando superfície &#8230; por favor espere</string>
     <string name="dem_failed">Falha ao carregar DEM</string>
     <string name="dem_ok">Ler dados DEM</string>
-    <!-- OK string name="texture_file">%1$s</string -->
+    <string name="dem">DEM</string>
     <string name="texture_load">carregar textura</string>
     <string name="texture_failed">Falha ao carregar textura</string>
     <string name="texture_ok">Carregar textura</string>
+    <string name="texture">DTM</string>
     <string name="sketch_load">Carregar</string>
     <string name="sketch_failed">Falha ao carregar croqui</string>
     <string name="sketch_ok">Carregar croqui</string>
-
     <string name="ctitle">%1$s  Inclinação: %2$.0f  Azimute: %3$.0f</string>
     <string name="ctitle_surface_alpha">Opacidade superfície</string>
     <!-- UNUSED string name="ctitle_sketches">Sketches</string -->
     <!-- UNUSED string name="ctitle_legs">Legs visibility</string -->
     <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
     <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
-
+    <string name="survey_list">TOPOs</string>
     <string name="survey_legs"> Visadas: </string>
     <string name="survey_legs_length"> Comprimento das visadas: </string>
     <string name="survey_splays"> Medidas auxiliares: </string>
     <string name="survey_splays_length"> Comprimento das medidas auxiliares: </string>
-
     <string name="cave_east"> L: %1$.1f</string>
     <string name="cave_north"> N: %1$.1f</string>
     <string name="cave_vert"> Z: %1$.1f</string>
-
     <string name="cave_distance"> Distância 3D: %1$.2f</string>
     <string name="horz_distance"> Distância horizontal 2D: %1$.1f</string>
     <string name="cave_length"> Comprimento da caverna: %1$.2f %2$.1f %3$.1f</string>
     <string name="cave_angle"> Azimute: %1$.0f  Inclinação: %2$.0f</string>
-
+    <string name="east">L</string>
+    <string name="north">N</string>
+    <string name="west">O</string>
+    <string name="south">S</string>
     <!-- UNUSED string name="SURVEYS">T O P O S</string -->
     <string name="INFO">I N F O</string>
     <string name="STATIONS">B A S E</string>
     <string name="STATIONS_DISTANCE">DISTÂNCIA BASES</string>
     <!-- UNUSED string name="DISTANCE">DISTÂNCIA</string -->
     <!-- UNUSED string name="CENTER">CENTER</string -->
+    <string name="select_survey_file">Selecione um arquivo de topo</string>
+    <string name="select_export_file">Selecione arquivo exportação</string>
     <string name="select_dem_file">Selecione um arquivo DEM:</string>
     <string name="select_texture_file">Selecione o arquivo de textura:</string>
-
+    <string name="select_sketch_file">Selecione arquivo croqui</string>
     <string name="view_title">PONTOS DE VISTA</string>
     <string name="view_top">Topo</string>
     <string name="view_east">Leste</string>
@@ -1901,31 +1842,28 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="view_south">Sul</string>
     <string name="view_point">Ponto de vista</string>
     <string name="view_zoom">Zoom 1</string>
-
     <string name="walls_title">WALLS</string>
     <string name="walls_convexhull">Plano Convexo</string>
-    <!-- OK string name="walls_powercrust">Powercrust</string -->
     <string name="walls_hull">Plano</string>
     <string name="walls_bubble">Bolha</string>
     <string name="walls_tube">Tubo</string>
-    <!-- OK string name="walls_delaunay">Delaunay</string -->
-
     <string name="powercrust_few_splays">Powercrust: poucas medidas auxiliares</string>
     <string name="powercrust_failed">Powercrust falhou</string>
     <string name="powercrust_successful">Powercrust bem sucedido: %1$d / %2$d</string>
     <string name="powercrust_dxf_not_supported">exportação DXF Powercrust não suportada</string>
-
     <string name="ok_export">OK. Exportado %1$s</string>
-
     <!-- UNUSED string name="no_planview">No plan view</string -->
     <!-- UNUSED string name="no_surface">No surface DEM</string -->
-
+    <string name="no_model">Nenhum modelo 3D</string>
+    <string name="no_topodroid_model">Não é um modelo Topodroid</string>
     <string name="error_file_not_found">Erro: arquivo não encontrado</string>
     <string name="error_file_not_readable">Erro: arquivo ilegível</string>
+    <string name="error_file_read">Erro: leitura arquivo %1$s falhou</string>
+    <string name="error_survey_read">Erro: leitura topo %1$s falhou</string>
     <string name="error_io_exception">Erro: exceção de IO</string>
     <string name="error_parser_error">Erro: erro de parse %1$s</string>
     <string name="error_export_failed">Erro: exportação %1$s falhou</string>
-
+    <string name="unsupported_format">Formato arquivo não suportado</string>
     <string name="warning_not_overwrite">Alerta: não sobreescrevendo arquivo %1$s</string>
     <!-- UNUSED string name="warning_not_txt">Warning: not txt file %1$s</string -->
     <!-- UNUSED string name="warning_not_kml">Warning: not kml file %1$s</string -->
@@ -1934,20 +1872,25 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <!-- UNUSED string name="warning_not_stl">Warning: not stl file %1$s</string -->
     <string name="warning_no_cwd">Alerta: diretório inicial inexistente</string>
     <string name="warning_no_parent">Alerta: impossível acessar diretório pai</string>
-
-    <string name="done_fractals">Dimensões fractais prontas</string>
+    <string name="warning_nogrant_camera">Permissão câmera não consedida</string>
+    <string name="no_permissions">O app não pode funcionar sem as permissões necessárias</string>
     <string name="done_convexhull">Paredes dos planos convexos prontas</string>
     <string name="fail_convexhull">Falha nas paredes dos planos convexos</string>
     <string name="done_powercrust">Paredes do powercrust prontas</string>
     <string name="fail_powercrust">Falha nas paredes do powercrust</string>
     <string name="done_hull">Paredes dos planos simples prontas</string>
     <string name="fail_hull">Falha nas paredes dos planos simples</string>
-
+    <string name="done_tube">Paredes tubo simples criadas</string>
+    <string name="fail_tube">Paredes tubo simples falharam</string>
+    <string name="done_bubble">Paredes bolha criadas</string>
+    <string name="fail_bubble">Paredes bolha falharam</string>
     <string name="no_database">Nenhum banco de dados\n</string>
-    <!-- ALREADY DEFINED string name="no_survey">Topo %1$s não localizada\n</string -->
+    <string name="cno_survey">Topo %1$s não localizada\n</string>
     <!-- UNUSED string name="cno_file">No file %1$s\n</string -->
     <string name="empty_survey">Topo %1$s vazia\n</string>
-
+    <string name="viewing_at">Viewing at clino %1$.0f azimuth %2$.0f</string -->
+    <string name="cpref_dem3d">DEM</string>
+    <string name="cpref_walls3d">MODELO WALLS</string>
     <!-- UNUSED string name="cpref_base_path_title">Diretório base</string -->
     <!-- UNUSED string name="cpref_base_path_summary">Diretório base da app</string -->
     <!-- UNUSED string name="cpref_text_size_title">Tamanho do texto</string -->
@@ -1956,37 +1899,36 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <!-- UNUSED string name="cpref_size_buttons_summary">Tamanho dos botões</string -->
     <string name="cpref_selection_radius_title">Raio seleção</string>
     <string name="cpref_selection_radius_summary">Raio da seleção</string>
-
     <string name="cpref_station_toast_title">Caixa de Diálogo base</string>
     <string name="cpref_station_toast_summary">Usar caixa de diálogo no lugar de caixa de edição [n]</string>
     <string name="cpref_station_points_title">Pontos das bases</string>
     <string name="cpref_station_points_summary">Sempre mostrar bases[n]</string>
-    <string name="cpref_station_size_title">Tamanho ponto base</string>
-    <string name="cpref_station_size_summary">Tamanho dos pontos das bases [8 pxl]</string>
+    <string name="cpref_station_point_size_title">Tamanho ponto base</string>
+    <string name="cpref_station_point_size_summary">Tamanho dos pontos das bases [8 pxl]</string>
+    <string name="cpref_station_text_size_title">Tamanho texto bases</string>
+    <string name="cpref_station_text_size_summary">Tamanhos dos textos das bases [20 pt]</string>
     <string name="cpref_measure_dialog_title">Mensagem distância</string>
     <string name="cpref_measure_dialog_summary">Usar mensagem no lugar de caixa de diálogo para distância [n]</string>
- 
     <string name="cpref_grid_above_title">Grade topo</string>
     <string name="cpref_grid_above_summary">Grade no topo</string>
     <string name="cpref_grid_extent_title">Extensão grade</string>
-    <string name="cpref_grid_extend_summary">Extensão da grade ao redor da topo</string>
+    <string name="cpref_grid_extent_summary">Tamanho da extensão da grade ao redor da planta-baixa</string>
     <string name="cpref_neg_clino_title">Visão abaixo horizonte</string>
     <string name="cpref_neg_clino_summary">Permitir pontos de vista abaixo do horizonte</string>
     <string name="cpref_dem_buffer_title">Buffer DEM</string>
     <string name="cpref_dem_buffer_summary">Extensão DEM ao redor da topo</string>
-   
     <string name="cpref_dem_maxsize_title">Tamanho máx DEM</string>
     <string name="cpref_dem_maxsize_summary">Quantidade máxima de células [400]</string>
     <string name="cpref_dem_reduce_title">Redução DEM</string>
     <string name="cpref_dem_reduce_summary">Modo de redução DEM [encolher]</string>
-  
     <string name="cpref_all_splay_title">Todas medidas auxiliares</string>
     <string name="cpref_all_splay_summary">Todas as medidas auxiliares</string>
+    <string name="cpref_splay_use_title">Uso med aux</string>
+    <string name="cpref_splay_use_summary">Uso medidas auxiliares: nenhum, normal, seções-x [normal]</string>
     <string name="cpref_splay_proj_title">Medidas auxiliares projetadas</string>
     <string name="cpref_splay_proj_summary">Projetar as medidas auxiliares em um plano normal [n]</string>
     <string name="cpref_splay_thr_title">Limite medida auxiliar</string>
     <string name="cpref_splay_thr_summary">Medidas auxiliares fora da visada a manter [0.5]</string>
-
     <string name="cpref_split_triangles_title">Partir triângulos</string>
     <string name="cpref_split_triangles_summary">Partir triângulos das paredes</string>
     <string name="cpref_split_random_title">Ruído pontos</string>
@@ -1995,20 +1937,16 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="cpref_split_stretch_summary">Alongar pontos das paredes na direção da visada</string>
     <string name="cpref_powercrust_delta_title">Delta Powercrust</string>
     <string name="cpref_powercrust_delta_summary">Filtro medidas auxiliares</string>
-<!--
     <string name="cpref_convex_hull_title">Convex hull</string>
     <string name="cpref_convex_hull_summary">Convex hull walls</string>
     <string name="cpref_delaunay_title">Delaunay</string>
     <string name="cpref_delaunay_summary">Delaunay walls</string>
     <string name="cpref_hull_title">Hull</string>
     <string name="cpref_hull_summary">Hull walls</string>
--->
-
     <!--  UNUSED string name="TopoGLPerms">Permissions</string -->
     <string name="cperms_mandatory">Cave3D não pode ser executado sem as seguintes permissões:</string>
     <!-- UNUSED string name="cperms_optional">Cave3D may fail without these permissions:</string -->
     <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
-
     <string name="help_open_3d">Abrir arquivo 3D</string>
     <string name="help_export_3d">Exportar arquivo 3D</string>
     <string name="help_info_3d">Info 3D</string>
@@ -2020,8 +1958,6 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="help_wall_3d">Modelo 3D</string>
     <!-- UNUSED string name="help_temperature">Tempertaure</string -->
     <string name="help_sketch_3d">Elevação croqui 3D</string>
-    <!-- UNUSED string name="help_fractal">Fractal analysis</string -->
-
     <string name="help_light_3d">Giro e luz</string>
     <string name="help_projection_3d">Projeção 3D</string>
     <string name="help_stations_3d">Bases</string>
@@ -2030,5 +1966,4 @@ Com o Android 13+ o Topodroid é obrigado a por seu diretório dentro de "Androi
     <string name="help_surface_3d">Terreno</string>
     <string name="help_color_3d">Cores</string>
     <string name="help_frame_3d">Estrutura</string>
-
 </resources>
