@@ -69,6 +69,7 @@ $buffer = '';
 $name = '';
 $tag = '';
 $translatable = 1;
+$in_comment = 0;
 
 print NEW q|<?xml version="1.0" encoding="utf-8"?>
 <resources
@@ -149,10 +150,7 @@ while ( $line = <EN> ) {
   $name = '';
   $tag = '';
   $translatable = 1;
-
-  if ( $in_comment == 3 ) {
-    $in_comment = 2;
-  }
+  $in_comment = 0;
 }
 close EN;
 
