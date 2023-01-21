@@ -139,7 +139,7 @@ while ( $line = <EN> ) {
     if ( $x_line eq '' ) {
       if ( ( $tag eq '' ) || ( $tag eq 'TODO' ) ) {
         $value = $buffer;
-        $value =~ s/^.*\"\>//;
+        $value =~ s/^.*\"\s*\>//;
         $value =~ s/\<\/string.*$//;
         chomp $value;
         print NEW PREFIX . "<!-- TODO string name=\"$name\">$value<\/string -->\n";
