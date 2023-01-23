@@ -9,5 +9,5 @@ cd tmp_pdf
 lowriter --headless --convert-to pdf:writer_pdf_Export tot.htm
 mv tot.pdf ../TDmanual.pdf
 cd -
-# rm -rf tmp_pdf
+rm -rf tmp_pdf
 echo -n "\nCreated TDmanual.pdf\nTo update git version rename it to manual.pdf\n"

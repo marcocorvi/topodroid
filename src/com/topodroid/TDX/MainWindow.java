@@ -130,6 +130,7 @@ public class MainWindow extends Activity
   private ListItemAdapter mArrayAdapter;
 
   private Button[] mButton1;
+  private BitmapDrawable  mButtonDistoX0;
   private BitmapDrawable  mButtonDistoX1;
   private BitmapDrawable  mButtonDistoX2;
   private BitmapDrawable  mButtonDistoX3;
@@ -981,6 +982,7 @@ public class MainWindow extends Activity
     mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
 
+    mButtonDistoX0 = MyButton.getButtonBackground( this, res, R.drawable.iz_disto0b );
     mButtonDistoX1 = MyButton.getButtonBackground( this, res, R.drawable.iz_disto1b );
     mButtonDistoX2 = MyButton.getButtonBackground( this, res, R.drawable.iz_disto2b );
     mButtonDistoX3 = MyButton.getButtonBackground( this, res, R.drawable.iz_disto3b );
@@ -1029,7 +1031,7 @@ public class MainWindow extends Activity
     } else if ( TDInstance.isDeviceBric() ) {
       TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonBric4 );
     } else {
-      TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonDistoX2 );
+      TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonDistoX0 );
     }
   }
     
