@@ -112,11 +112,7 @@ sub parse_line {
 
   # print Dumper(\%result);
 
-  $parse_buffer = '';
-  $parse_comment = 0;
-  $parse_name = '';
-  $parse_translatable = 1;
-  $parse_tag = '';
+  parse_reset();
 
   return \%result;
 }
