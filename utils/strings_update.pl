@@ -9,6 +9,8 @@
 # --------------------------------------------------------
 #
 
+use strict;
+
 use builtin qw(
   trim
 );
@@ -20,59 +22,131 @@ use constant {
   PREFIX => '    ',
 };
 
-open( XX, '<', $ARGV[1] ) or die "Cannot open strings file \"$ARGV[1]\"\n";
-# -------------------------------------------------------
-$in_comment = 2;
-$buffer = '';
-$name = '';
-while ( $line = <XX> ) {
-  # print "LINE: '$line'\n";
-  $trimmed_line = $line;
+# For debbuging
+# use Data::Dumper;
+
+# global aux variables for parsing (potentially multiline) comments
+# this parsing code should probably be a class but I am too lazy to relearn
+# Perl OO.
+my $parse_comment = 0;
+my $parse_translatable = 1;
+my $parse_name = '';
+my $parse_buffer = '';
+my $parse_tag = '';
+
+my %xx_line = {};
+
+sub parse_reset() {
+  $parse_comment = 0;
+  $parse_translatable = 1;
+  $parse_name = '';
+  $parse_buffer = '';
+  $parse_tag = ''; 
+}
+
+sub parse_line {
+  my $line = shift @_;
+  my $trimmed_line = $line;
+  my $parse_value = '';
+
   chomp $trimmed_line;
   $trimmed_line = trim($trimmed_line);
   if ( $trimmed_line eq '' ) {
-    next;
+    return 0;
   }
 
-  if ( $name eq '' ) {
+  if ( $parse_name eq '' ) {
     if ( $trimmed_line =~ /name="/ ) {
-      $name = $trimmed_line;
-      $name =~ s/^.*name="//;
-      $name =~ s/".*$//;
-      $name = trim($name);
-      # print "NAME found: '$name'\n";
-    } else {
-      next;
+      $parse_name = $trimmed_line;
+      $parse_name =~ s/^.*name="//;
+      $parse_name =~ s/".*$//;
+      $parse_name = trim($parse_name);
+      # print "NAME to write: '$parse_name'\n";
+    }
+
+    if ( $parse_name eq '' ) {
+      return 0;
     }
   }
 
-  $buffer .= $line;
-  # print "BUFFER current: '$buffer'\n";
-
-  if ( $trimmed_line =~ /\<\/string/ ) {
-    chomp $buffer;
-    $xx_line{ $name } = trim($buffer);
-    # print "BUFFER saved: '" . $xx_line{ $name } . "'\n";
-    $buffer = '';
-    $name = '';
+  if ( $trimmed_line =~ /translatable=.false./ ) {
+    $parse_translatable = 0;
   }
+
+  $parse_buffer .= $line;
+
+  if ( $trimmed_line =~ /<!--/ ) { 
+    $parse_comment = 1;
+    $parse_tag = $trimmed_line;
+    $parse_tag =~ s/^<!--\s+//;
+    $parse_tag =~ s/\s+string.*$//;
+    # print "TAG in EN: '$parse_tag'\n";
+  }
+
+  if ( $parse_comment == 1 ) {
+    if ( $trimmed_line =~ /-->/ ) {
+      $parse_comment = 3;
+    } else {
+      return 0;
+    }
+  }
+
+  if ( ! ( $trimmed_line =~ /\<\/string.*$/ ) ) {
+    return 0;
+  }
+
+  $parse_value = $parse_buffer;
+  $parse_value =~ s/^.*\"\s*\>//;
+  $parse_value =~ s/\<\/string.*$//;
+  chomp $parse_value;
+
+  my %result = (
+    'name' => $parse_name,
+    'content' => {
+      'tag' => $parse_tag,
+      'translatable' => $parse_translatable,
+      'value' => $parse_value,
+      'raw' => trim($parse_buffer),
+    },
+  );
+
+  # print Dumper(\%result);
+
+  $parse_buffer = '';
+  $parse_comment = 0;
+  $parse_name = '';
+  $parse_translatable = 1;
+  $parse_tag = '';
+
+  return \%result;
+}
+
+open( XX, '<', $ARGV[1] ) or die "Cannot open strings file \"$ARGV[1]\"\n";
+
+parse_reset();
+while ( my $line = <XX> ) {
+  # print "LINE: '$line'\n";
+  my $result = parse_line($line);
+  if ( $result == 0 ) {
+    next;
+  }
+  # print Dumper($result);
+
+  $xx_line{${$result}{'name'}} = ${$result}{'content'};
 }
 close XX;
 
+# print Dumper(\%xx_line);
+# exit;
+
 open( EN, '<', $ARGV[0] ) or die "Cannot open english strings file \"$ARGV[0]\"\n";
 
-($filename, $path, $suffix) = fileparse($ARGV[1], '.xml');
-$new_file = $path . $filename. '-NEW'. $suffix;
+my ($filename, $path, $suffix) = fileparse($ARGV[1], '.xml');
+my $new_file = $path . $filename. '-NEW'. $suffix;
 if ( -e $new_file ) {
   die "'$new_file' already exists. Won't overwrite existing file.\n";
 }
 open( NEW, '>', $new_file ) or die "Cannot open new strings file \"$new_file\" for writing\n";
-
-$buffer = '';
-$name = '';
-$tag = '';
-$translatable = 1;
-$in_comment = 0;
 
 print NEW q|<?xml version="1.0" encoding="utf-8"?>
 <resources
@@ -85,75 +159,35 @@ print NEW q|<?xml version="1.0" encoding="utf-8"?>
 
 |;
 
-while ( $line = <EN> ) {
-  $trimmed_line = $line;
-  chomp $trimmed_line;
-  $trimmed_line = trim($trimmed_line);
-  if ( $trimmed_line eq '' ) {
+parse_reset();
+while ( my $line = <EN> ) {
+  # print "LINE: '$line'\n";
+
+  my $result = parse_line($line);
+  # print Dumper($result);
+  if ( $result == 0 ) {
     next;
   }
-
-  if ( $name eq '' ) {
-    if ( $trimmed_line =~ /name="/ ) {
-      $name = $trimmed_line;
-      $name =~ s/^.*name="//;
-      $name =~ s/".*$//;
-      $name = trim($name);
-      # print "NAME to write: '$name'\n";
-    }
-
-    if ( $name eq '' ) {
-      next;
-    }
-  }
-
-  if ( $trimmed_line =~ /translatable=.false./ ) {
-    $translatable = 0;
-  }
-
-  $buffer .= $line;
-
-  if ( $trimmed_line =~ /<!--/ ) { 
-    $in_comment = 1;
-    $tag = $trimmed_line;
-    $tag =~ s/^<!--\s+//;
-    $tag =~ s/\s+string.*$//;
-    # print "TAG in EN: '$tag'\n";
-  }
-
-  if ( $in_comment == 1 ) {
-    if ( $trimmed_line =~ /-->/ ) {
-      $in_comment = 3;
-    } else {
-      next;
-    }
-  }
-
-  if ( ! ( $trimmed_line =~ /\<\/string.*$/ ) ) {
-    next;
-  }
-
-  if ($translatable) {
-    $x_line = $xx_line{ $name };
-    # print "X_LINE: '$x_line'\n";
-    if ( $x_line eq '' ) {
-      if ( ( $tag eq '' ) || ( $tag eq 'TODO' ) ) {
-        $value = $buffer;
-        $value =~ s/^.*\"\s*\>//;
-        $value =~ s/\<\/string.*$//;
-        chomp $value;
-        print NEW PREFIX . "<!-- TODO string name=\"$name\">$value<\/string -->\n";
+  my $name = ${$result}{'name'};
+  my $content = ${$result}{'content'};
+  # print Dumper($name);
+  # print Dumper($content);
+  if ( ${$content}{'translatable'} ) {
+    if ( $xx_line{$name} ) {
+    my $x_content = $xx_line{$name};
+    # print Dumper($x_content);
+      if ( ${$content}{'tag'} eq '' ) {
+        print NEW PREFIX . "${$x_content}{'raw'}\n";
+      } else {
+        print NEW PREFIX . "<!-- ${$content}{'tag'} string name=\"$name\">${$x_content}{'value'}<\/string -->\n";
       }
     } else {
-      print NEW PREFIX . "$x_line\n";
+      if ( ${$content}{'tag'} eq '' ) {
+        ${$content}{'tag'} = 'TODO';
+      }
+      print NEW PREFIX . "<!-- ${$content}{'tag'} string name=\"$name\">${$content}{'value'}<\/string -->\n";
     }
   }
-
-  $buffer = '';
-  $name = '';
-  $tag = '';
-  $translatable = 1;
-  $in_comment = 0;
 }
 close EN;
 
