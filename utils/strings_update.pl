@@ -174,8 +174,8 @@ while ( my $line = <EN> ) {
   # print Dumper($content);
   if ( ${$content}{'translatable'} ) {
     if ( $xx_line{$name} ) {
-    my $x_content = $xx_line{$name};
-    # print Dumper($x_content);
+      my $x_content = $xx_line{$name};
+      # print Dumper($x_content);
       if ( ${$content}{'tag'} eq '' ) {
         print NEW PREFIX . "${$x_content}{'raw'}\n";
       } else {
