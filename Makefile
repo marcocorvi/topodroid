@@ -20,6 +20,8 @@ LOGNAME = topodroid-X
 PACKAGE = com.topodroid.$(APPCODE)
 VERSION_TARGET = $(VERSION)-$(TARGET_SDK)
 
+LANGS := cn fr hu it pt ru
+
 default:
 	$(ANT) debug
 
@@ -90,8 +92,8 @@ lint:
 	../../../cmdline-tools/latest/bin/lint --ignore IconLocation . > lint.out
 
 strings:
-	@ for i in cn fr hu it pt ru; do echo "$$i" `grep \"$$i\" lint.out | wc -l`; done
-	@ for i in cn fr hu it pt ru; do echo "values-$$i" `grep values-$$i lint.out | wc -l`; done
+	@ for i in $(LANGS); do echo "$$i" `grep \"$$i\" lint.out | wc -l`; done
+	@ for i in $(LANGS); do echo "values-$$i" `grep values-$$i lint.out | wc -l`; done
 
 pdf:
 	./howto/pdf.sh
