@@ -28,36 +28,10 @@ use constant {
 my $en_filename = $ARGV[0];
 my $xx_filename = $ARGV[1];
 my %xx_names;
-my %xx_duplicated_names;
-my @xx_empty_named_elements;
-my $xx_ok = 1;
+my %en_names;
 
 # For debbuging
 use Data::Dumper;
-
-# For debbuging
-use Data::Visitor::Callback qw();
-use DDP;
-my $v = Data::Visitor::Callback->new(
-    'XML::LibXML::Text' => sub {
-        my ($v, $node) = @_;
-        return ($node->nodeValue =~ qr/\S/)
-            ? {
-                n => $node->nodeName,
-                t => $node->nodeType,
-                v => $node->nodeValue,
-            }
-            : (); # skip whitespace text nodes
-    },
-    'XML::LibXML::Element' => sub {
-        my ($v, $node) = @_;
-        return {
-            c => [grep $_, $v->visit($node->childNodes)],
-            n => $node->nodeName,
-            t => $node->nodeType,
-        };
-    },
-);
 
 sub parse_comment_name ($content) {
   my $name = '';
@@ -72,18 +46,89 @@ sub parse_comment_name ($content) {
   return $name;
 }
 
-sub add_named_element ($name, $element_ref) {
-  if (exists($xx_names{$name})) {
+sub add_named_element (
+  $name, 
+  $element_ref, 
+  $names_ref, 
+  $duplicate_names_ref) {
+  # print "\$element_ref em add_named_element: '" . Dumper($element_ref) . "'\n";
+  if (exists($$names_ref{$name})) {
     # print "REPEATED NAME - '$name': '" . $element_ref->textContent(). "'\n";
-    if (exists($xx_duplicated_names{$name})) {
-      $xx_duplicated_names{$name} .= $element_ref;
+    if (exists($$duplicate_names_ref{$name})) {
+      push(@{%{$duplicate_names_ref}{$name}}, $element_ref);
     }
     else {
-      $xx_duplicated_names{$name} = [$xx_names{$name}, $element_ref];
+      $$duplicate_names_ref{$name} = [$$names_ref{$name}, $element_ref];
     }
   }
   else {
-    $xx_names{$name} = $element_ref;
+    $$names_ref{$name} = $element_ref;
+  }
+}
+
+sub check_xml_file ($filename, $dom, $names_ref) {
+  my %duplicated_names;
+  my @empty_named_elements;
+  my $xml_ok = 1;
+
+  for my $named_element ($dom->findnodes('//*[@name]')) {
+    # print "\$named_element em check_xml_file: '" . Dumper($named_element) . "'\n";
+    my $name = trim($named_element->getAttribute('name'));
+
+    if ($name eq '') {
+      push (@empty_named_elements, $named_element);
+      next;
+    }
+
+    add_named_element(
+      $name,
+      $named_element,
+      $names_ref,
+      \%duplicated_names
+    );
+    # print "'$name': '" . $named_element->textContent() . "'\n";
+  }
+
+  for my $comment ($dom->findnodes('//comment()')) {
+    # print "\$comment em check_xml_file: '" . Dumper($comment) . "'\n";
+    my $name = parse_comment_name($comment->textContent());
+
+    if ($name eq '') {
+      next;
+    }
+
+    add_named_element
+    ($name,
+    $comment,
+    $names_ref,
+    \%duplicated_names
+  );
+    # print "'$name': '" . $comment->textContent(). "'\n";
+  }
+
+  if (@empty_named_elements > 0) {
+    $xml_ok = 0;
+    print "> '$filename' HAS EMPTY NAMED ELEMENTS:\n";
+    for my $empty_named_element (@empty_named_elements) {
+      print "> '" . $empty_named_element . "'\n";
+    }
+  }
+
+  if (%duplicated_names > 0) {
+    $xml_ok = 0;
+    # print Dumper(\%duplicated_names);
+    print "-> '$filename' HAS DUPLICATED NAMED ELEMENTS:\n";
+    for my $duplicated_name (keys(%duplicated_names)) {
+      print "-> '$duplicated_name' ELEMENTS:\n";
+      for my $element (@{$duplicated_names{$duplicated_name}}) {
+        print "--> '$element'\n";
+      }
+    }
+  }
+
+  if ($xml_ok == 0) {
+    print "'$filename' has problems. Please fix them and retry.\n";
+    exit 1;
   }
 }
 
@@ -96,59 +141,29 @@ if($@) {
     exit 0;
 }
 
-# p $v->visit(
-#     $xx_dom->findnodes('//comment()')
-# );
-
-for my $named_element ($xx_dom->findnodes('//*[@name]')) {
-  my $name = trim($named_element->getAttribute('name'));
-
-  if ($name eq '') {
-    push (@xx_empty_named_elements, $named_element);
-    next;
-  }
-
-  add_named_element($name, $named_element);
-  # print "'$name': '" . $named_element->textContent() . "'\n";
-}
-
-for my $comment ($xx_dom->findnodes('//comment()')) {
-  my $name = parse_comment_name($comment->textContent());
-
-  if ($name eq '') {
-    next;
-  }
-
-  add_named_element($name, $comment);
-  # print "'$name': '" . $comment->textContent(). "'\n";
-}
-
-if (@xx_empty_named_elements > 0) {
-  $xx_ok = 0;
-  print "> '$xx_filename' HAS EMPTY NAMED ELEMENTS:\n";
-  for my $empty_named_element (@xx_empty_named_elements) {
-    print "> '" . $empty_named_element . "'\n";
-  }
-}
-
-if (%xx_duplicated_names > 0) {
-  $xx_ok = 0;
-  print "-> '$xx_filename' HAS DUPLICATED NAMED ELEMENTS:\n";
-  for my $duplicated_name (keys(%xx_duplicated_names)) {
-    print "-> '$duplicated_name' ELEMENTS:\n";
-    for my $element (@{$xx_duplicated_names{$duplicated_name}}) {
-      print "--> '$element'\n";
-    }
-  }
-}
-
-if ($xx_ok == 0) {
-  print "'$xx_filename' has problems. Please fix them and retry.\n";
-  exit 1;
-}
+check_xml_file($xx_filename, $xx_dom, \%xx_names);
 
 # print Dumper(\%xx_names);
+
 exit;
+
+my $en_dom = eval {
+    XML::LibXML->load_xml(location => $en_filename, {no_blanks => 1});
+};
+if($@) {
+    # Log failure and exit
+    print "Error parsing '$en_filename':\n$@";
+    exit 0;
+}
+
+check_xml_file($en_filename, $en_dom, \%en_names);
+
+# foreach my $node ($en_dom->findnodes('/resources/*'))
+# {
+#     print $node->serialize . "\n";
+# }
+
+
 
 # open( EN, '<', $ARGV[0] ) or die "Cannot open english strings file \"$ARGV[0]\"\n";
 
