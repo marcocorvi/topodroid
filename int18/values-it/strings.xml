@@ -1042,12 +1042,12 @@
     <string name="help_zoom_fit">Adatta rilievo allo schermo</string>
    
     <string name="help_line_point">Azioni per punti di linee: unire, dividere, tagliare, rimuovere</string>
-<!--
-    <string name="help_to_point">Move selected point to join with the nearest point</string>
-    <string name="help_split_point">Split the point into two [line/area]</string>
-    <string name="help_split_line">Split the line into two at the point</string>
-    <string name="help_kink">Use a straight line at the point [line/area]</string>
--->
+
+    <!-- UNUSED string name="help_to_point">Move selected point to join with the nearest point</string -->
+    <!-- UNUSED string name="help_split_point">Split the point into two [line/area]</string -->
+    <!-- UNUSED string name="help_split_line">Split the line into two at the point</string -->
+    <!-- UNUSED string name="help_kink">Use a straight line at the point [line/area]</string -->
+
     <string name="help_manual_calibration">Strumenti di calibrazione manuale</string>
     <string name="help_note_plot">Edita le proprietà dell\'oggetto</string>
     <!-- UNUSED string name="help_save">Salva le modifiche al rilievo/calibr.</string -->
@@ -1349,7 +1349,7 @@
   <string name="pref_palettes_summary">Abilita tavolozze addizionali</string>
   <string name="pref_packet_logger_title">Log Pacchetti</string>
   <string name="pref_packet_logger_summary">Abilita log pacchetti</string>
-    <!-- TODO <string name="pref_th2_edit_title">Sketch editing</string -->
+    <!-- TODO string name="pref_th2_edit_title">Sketch editing</string -->
     <!-- TODO string name="pref_th2_edit_summary">Enable sketch editing</string -->
 
   <string name="pref_bezier_step_title">Spaziatura punti</string>
@@ -2196,14 +2196,13 @@
 
     <string name="cpref_powercrust_delta_title">Powercrust Delta</string>
     <string name="cpref_powercrust_delta_summary">Filtro splay</string>
-<!--
-    <string name="cpref_convex_hull_title">Convex hull</string>
-    <string name="cpref_convex_hull_summary">Convex hull walls</string>
-    <string name="cpref_delaunay_title">Delaunay</string>
-    <string name="cpref_delaunay_summary">Delaunay walls</string>
-    <string name="cpref_hull_title">Hull</string>
-    <string name="cpref_hull_summary">Hull walls</string>
--->
+
+    <!-- NO string name="cpref_convex_hull_title">Convex hull</string -->
+    <!-- NO string name="cpref_convex_hull_summary">Convex hull walls</string -->
+    <!-- NO string name="cpref_delaunay_title">Delaunay</string -->
+    <!-- NO string name="cpref_delaunay_summary">Delaunay walls</string -->
+    <!-- NO string name="cpref_hull_title">Hull</string -->
+    <!-- NO string name="cpref_hull_summary">Hull walls</string -->
 
     <!-- UNUSED string name="TopoGLPerms">Permessi</string -->
     <!-- UNUSED string name="cperms_mandatory">Cave3D può non funzionare senza questi permessi:</string -->

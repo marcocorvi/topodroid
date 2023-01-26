@@ -1046,12 +1046,12 @@
     <string name="help_zoom_fit">草图适应屏幕</string>
    
     <string name="help_line_point">线点功能: 衔接,分割, 剪切, 删除</string>
-<!--
-    <string name="help_to_point">移动选定的点以与最近的点相连</string>
-    <string name="help_split_point">把这个点一分为二 [line/area]</string>
-    <string name="help_split_line">把线在选定的点出一分为二</string>
-    <string name="help_kink">在点处画一天直线 [line/area]</string>
--->
+
+    <!-- UNUSED string name="help_to_point">移动选定的点以与最近的点相连</string -->
+    <!-- UNUSED string name="help_split_point">把这个点一分为二 [line/area]</string -->
+    <!-- UNUSED string name="help_split_line">把线在选定的点出一分为二</string -->
+    <!-- UNUSED string name="help_kink">在点处画一天直线 [line/area]</string -->
+
     <string name="help_manual_calibration">手动校准仪器</string>
     <string name="help_note_plot">编辑选定的草图项目属性</string>
     <!-- UNUSED string name="help_save">Save changes to survey info</string -->
@@ -1287,19 +1287,19 @@
   <string name="pref_cat_drawing">草图</string>
   <string name="pref_cat_import_export">输入输出</string>
   <string name="pref_cat_exportimport">输入</string>
-<!-- DO NOT TRANSLATE THESE
-  <string name="pref_cat_exportsvx">Survex</string>
-  <string name="pref_cat_exportth" >Therion</string>
-  <string name="pref_cat_exportdat">Compass</string>
-  <string name="pref_cat_exporttro">VisualTopo</string>
-  <string name="pref_cat_exportsvg">SVG</string>
-  <string name="pref_cat_exportdxf">DXF</string>
-  <string name="pref_cat_exportshp">Shapefile</string>
-  <string name="pref_cat_exportpng">PNG</string>
-  <string name="pref_cat_exportkml">KML/GeoJSON</string>
-  <string name="pref_cat_exportcsx">cSurvey</string>
-  <string name="pref_cat_exportcsv">CSV</string>
--->
+
+<!-- DO NOT TRANSLATE THESE -->
+  <!-- NO string name="pref_cat_exportsvx">Survex</string -->
+  <!-- NO string name="pref_cat_exportth" >Therion</string -->
+  <!-- NO string name="pref_cat_exportdat">Compass</string -->
+  <!-- NO string name="pref_cat_exporttro">VisualTopo</string -->
+  <!-- NO string name="pref_cat_exportsvg">SVG</string -->
+  <!-- NO string name="pref_cat_exportdxf">DXF</string -->
+  <!-- NO string name="pref_cat_exportshp">Shapefile</string -->
+  <!-- NO string name="pref_cat_exportpng">PNG</string -->
+  <!-- NO string name="pref_cat_exportkml">KML/GeoJSON</string -->
+  <!-- NO string name="pref_cat_exportcsx">cSurvey</string -->
+  <!-- NO string name="pref_cat_exportcsv">CSV</string -->
 
   <string name="pref_cat_calib">校准</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
@@ -1756,32 +1756,29 @@
   <string name="pref_unit_location_title">位置单位</string>
   <string name="pref_unit_location_summary">显示位置单位</string>
 
-<!-- UNUSED
-  <string name="pref_plot_walls_title">自动洞壁</string>
-  <string name="pref_walls_type_title">洞壁类型</string>
-  <string name="pref_walls_type_summary">洞壁类型</string>
-  <string name="pref_walls_plan_thr_title">测线平面倾斜</string>
-  <string name="pref_walls_plan_thr_summary">最大平面洞壁副线倾斜角[度]</string>
-  <string name="pref_walls_extended_thr_title">副线侧面角度</string>
-  <string name="pref_walls_extended_thr_summary">侧面洞壁副线最小倾角[度]</string>
-  <string name="pref_walls_xclose_title">间隔</string>
-  <string name="pref_walls_xclose_summary">沿着测线洞壁点的最小间隔[米]</string>
-  <string name="pref_walls_concave_title">凹面</string>
-  <string name="pref_walls_concave_summary">最大凹度 [百分比]</string>
-  <string name="pref_walls_xstep_title">步骤</string>
-  <string name="pref_walls_xstep_summary">沿着洞壁的点的分离 [m]</string>
--->
+  <!-- UNUSED string name="pref_plot_walls_title">自动洞壁</string -->
+  <!-- UNUSED string name="pref_walls_type_title">洞壁类型</string -->
+  <!-- UNUSED string name="pref_walls_type_summary">洞壁类型</string -->
+  <!-- UNUSED string name="pref_walls_plan_thr_title">测线平面倾斜</string -->
+  <!-- UNUSED string name="pref_walls_plan_thr_summary">最大平面洞壁副线倾斜角[度]</string -->
+  <!-- UNUSED string name="pref_walls_extended_thr_title">副线侧面角度</string -->
+  <!-- UNUSED string name="pref_walls_extended_thr_summary">侧面洞壁副线最小倾角[度]</string -->
+  <!-- UNUSED string name="pref_walls_xclose_title">间隔</string -->
+  <!-- UNUSED string name="pref_walls_xclose_summary">沿着测线洞壁点的最小间隔[米]</string -->
+  <!-- UNUSED string name="pref_walls_concave_title">凹面</string -->
+  <!-- UNUSED string name="pref_walls_concave_summary">最大凹度 [百分比]</string -->
+  <!-- UNUSED string name="pref_walls_xstep_title">步骤</string -->
+  <!-- UNUSED string name="pref_walls_xstep_summary">沿着洞壁的点的分离 [m]</string -->
 
-<!-- DO NOT TRANSLATE THESE
-  <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
-  <string name="pref_algo_min_alpha_summary">Min-algo adjustment factor (in [0,1])</string>
-  <string name="pref_algo_min_beta_title">Min-algo beta</string>
-  <string name="pref_algo_min_beta_summary">Min-algo M dip weight</string>
-  <string name="pref_algo_min_gamma_title">Min-algo gamma</string>
-  <string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string>
-  <string name="pref_algo_min_delta_title">Min-algo delta</string>
-  <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string>
--->
+<!-- DO NOT TRANSLATE THESE -->
+  <!-- NO string name="pref_algo_min_alpha_title">Min-algo alpha</string -->
+  <!-- NO string name="pref_algo_min_alpha_summary">Min-algo adjustment factor (in [0,1])</string -->
+  <!-- NO string name="pref_algo_min_beta_title">Min-algo beta</string -->
+  <!-- NO string name="pref_algo_min_beta_summary">Min-algo M dip weight</string -->
+  <!-- NO string name="pref_algo_min_gamma_title">Min-algo gamma</string -->
+  <!-- NO string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string -->
+  <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
+  <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
 
 <!-- DO NOT TRANSLATE THESE
   <string name="pref_log_stream_summary" translatable="false">Log output stream</string>
