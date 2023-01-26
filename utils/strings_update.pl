@@ -79,7 +79,7 @@ sub add_named_element ($name, $element_ref) {
       $xx_duplicated_names{$name} .= $element_ref;
     }
     else {
-      $xx_duplicated_names{$name} = [$element_ref];
+      $xx_duplicated_names{$name} = [$xx_names{$name}, $element_ref];
     }
   }
   else {
