@@ -33,6 +33,23 @@ my %en_names;
 # For debbuging
 use Data::Dumper;
 
+sub get_node_name($element) {
+  # print "ELEMENT in get_node_name: '$element'\n";
+  my $name = '';
+
+  if ($element->nodeType == XML_COMMENT_NODE) {
+    $name = parse_comment_name ($element->textContent);
+  }
+  else {
+    if ($element->hasAttribute('name')) {
+      $name = $element->getAttribute('name');
+    }
+  }
+  # print "name found: '$name'\n";
+
+  return $name;
+}
+
 sub parse_comment_name ($content) {
   my $name = '';
 
@@ -44,6 +61,29 @@ sub parse_comment_name ($content) {
   }
 
   return $name;
+}
+
+sub parse_comment_tag ($comment) {
+  my $tag = '';
+
+  if ($comment->nodeType != XML_COMMENT_NODE) {
+    return $tag;
+  }
+
+  $tag = $comment;
+  # print "TAG1 in parse_comment_tag: '$tag'\n";
+  $tag =~ s/^<!--\s*//;
+  # print "TAG2 in parse_comment_tag: '$tag'\n";
+  if ($tag =~ m/^([A-Z]+)\s+.*-->$/) {
+    $tag = $1;
+  }
+  else {
+    $tag = '';
+  }
+
+  # print "TAG in parse_comment_tag: '$tag'\n";
+
+  return $tag;
 }
 
 sub add_named_element (
@@ -66,13 +106,13 @@ sub add_named_element (
   }
 }
 
-sub check_xml_file ($filename, $dom, $names_ref) {
+sub analyze_xml_file ($filename, $dom, $names_ref) {
   my %duplicated_names;
   my @empty_named_elements;
   my $xml_ok = 1;
 
   for my $named_element ($dom->findnodes('//*[@name]')) {
-    # print "\$named_element em check_xml_file: '" . Dumper($named_element) . "'\n";
+    # print "\$named_element em analyze_xml_file: '" . Dumper($named_element) . "'\n";
     my $name = trim($named_element->getAttribute('name'));
 
     if ($name eq '') {
@@ -90,19 +130,20 @@ sub check_xml_file ($filename, $dom, $names_ref) {
   }
 
   for my $comment ($dom->findnodes('//comment()')) {
-    # print "\$comment em check_xml_file: '" . Dumper($comment) . "'\n";
+    # print "\$comment em analyze_xml_file: '" . Dumper($comment) . "'\n";
     my $name = parse_comment_name($comment->textContent());
+    my $tag = parse_comment_tag($comment);
 
     if ($name eq '') {
       next;
     }
 
-    add_named_element
-    ($name,
-    $comment,
-    $names_ref,
-    \%duplicated_names
-  );
+    add_named_element(
+      $name,
+      $comment,
+      $names_ref,
+      \%duplicated_names
+    );
     # print "'$name': '" . $comment->textContent(). "'\n";
   }
 
@@ -132,92 +173,96 @@ sub check_xml_file ($filename, $dom, $names_ref) {
   }
 }
 
+sub get_comment_content_without_tag($element) {
+  my $content = $element->toString();
+
+  # print "\$content pré em get_comment_content_without_tag: '$content'\n";
+  $content =~ s/^\<!--\s*//;
+  $content =~ s/^[A-Z]+\s+//;
+  $content =~ s/\s*--\>$//;
+  # print "\$content pós em get_comment_content_without_tag: '$content'\n";
+
+  return $content;
+}
+
+sub get_element_without_limiters($element) {
+  my $content = $element->toString();
+
+  # print "\$content pré em get_element_without_limiters: '$content'\n";
+  $content =~ s/^\<\s*//;
+  $content =~ s/\s*\>$//;
+  # print "\$content pós em get_element_without_limiters: '$content'\n";
+
+  return $content;
+}
+
 my $xx_dom = eval {
     XML::LibXML->load_xml(location => $xx_filename, {no_blanks => 1});
 };
-if($@) {
+if ($@) {
     # Log failure and exit
     print "Error parsing '$xx_filename':\n$@";
     exit 0;
 }
 
-check_xml_file($xx_filename, $xx_dom, \%xx_names);
+analyze_xml_file($xx_filename, $xx_dom, \%xx_names);
 
 # print Dumper(\%xx_names);
-
-exit;
 
 my $en_dom = eval {
     XML::LibXML->load_xml(location => $en_filename, {no_blanks => 1});
 };
-if($@) {
+if ($@) {
     # Log failure and exit
     print "Error parsing '$en_filename':\n$@";
     exit 0;
 }
 
-check_xml_file($en_filename, $en_dom, \%en_names);
+analyze_xml_file($en_filename, $en_dom, \%en_names);
 
-# foreach my $node ($en_dom->findnodes('/resources/*'))
-# {
-#     print $node->serialize . "\n";
-# }
+for my $element ($en_dom->documentElement()->childNodes()) {
+  my $name = get_node_name($element);
+  # print "\$name: '$name'\n";
+  if (($element->nodeType != XML_COMMENT_NODE)
+    && $element->hasAttribute('translatable')
+    && ($element->getAttribute('translatable') == 'false')) {
+    $element->unbindNode();
+    next;
+  }
 
+  if ($name eq '') {
+    next;
+  }
 
+  if (exists($xx_names{$name})) {
+    if ($element->nodeType == XML_COMMENT_NODE) {
+      my $tag = parse_comment_tag($element);
+      # print "\$tag: '$tag'\n";
+      my $content;
 
-# open( EN, '<', $ARGV[0] ) or die "Cannot open english strings file \"$ARGV[0]\"\n";
+      if ($xx_names{$name}->nodeType == XML_COMMENT_NODE) {
+        $content = get_comment_content_without_tag($xx_names{$name});
+        $content = " $tag $content ";
+      }
+      else {
+        $content = " $tag " . get_element_without_limiters($xx_names{$name}) . ' ';
+      }
+      $element->setData($content);
+    }
+    else {
+      $element->replaceNode($xx_names{$name});
+    }
+  }
+  else {
+    my $content = ' TODO ' . get_element_without_limiters($element) . ' ';
+    my $new_comment = XML::LibXML::Comment->new($content);
+    $element->replaceNode($new_comment);
+  }
+}
 
-# my ($filename, $path, $suffix) = fileparse($ARGV[1], '.xml');
-# my $new_file = $path . $filename. '-NEW'. $suffix;
-# if ( -e $new_file ) {
-#   die "'$new_file' already exists. Won't overwrite existing file.\n";
-# }
-# open( NEW, '>', $new_file ) or die "Cannot open new strings file \"$new_file\" for writing\n";
-
-# print NEW q|<?xml version="1.0" encoding="utf-8"?>
-# <resources
-#   xmlns:tools="http://schemas.android.com/tools"
-#   >
-
-#     <!-- TODO TODO TODO
-#         DO NOT FORGET THAT APOSTROPHE MUST BE PRECEEDED BY BACKSLASH
-#     -->
-
-# |;
-
-# parse_reset();
-# while ( my $line = <EN> ) {
-#   # print "LINE: '$line'\n";
-
-#   my $result = parse_line($line);
-#   # print Dumper($result);
-#   if ( $result == 0 ) {
-#     next;
-#   }
-#   my $name = ${$result}{'name'};
-#   my $content = ${$result}{'content'};
-#   # print Dumper($name);
-#   # print Dumper($content);
-#   if ( ${$content}{'translatable'} ) {
-#     if ( $xx_line{$name} ) {
-#       my $x_content = $xx_line{$name};
-#       # print Dumper($x_content);
-#       if ( ${$content}{'tag'} eq '' ) {
-#         print NEW PREFIX . "${$x_content}{'raw'}\n";
-#       } else {
-#         print NEW PREFIX . "<!-- ${$content}{'tag'} string name=\"$name\">${$x_content}{'value'}<\/string -->\n";
-#       }
-#     } else {
-#       if ( ${$content}{'tag'} eq '' ) {
-#         ${$content}{'tag'} = 'TODO';
-#       }
-#       print NEW PREFIX . "<!-- ${$content}{'tag'} string name=\"$name\">${$content}{'value'}<\/string -->\n";
-#     }
-#   }
-# }
-# close EN;
-
-# print NEW q|</resources>
-# |;
-
-# close NEW;
+my ($filename, $path, $suffix) = fileparse($xx_filename, '.xml');
+my $new_file = $path . $filename. '-NEW'. $suffix;
+if ( -e $new_file ) {
+  die "'$new_file' already exists. Won't overwrite existing file.\n";
+}
+$en_dom->toFile($new_file, 2);
