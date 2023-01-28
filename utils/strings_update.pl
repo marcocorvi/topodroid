@@ -55,7 +55,7 @@ sub parse_comment_name ($content) {
 
   if ( $content =~ /name="/ ) {
     $name = $content;
-    $name =~ s/^.*name="//;
+    $name =~ s/^.*?name="//;
     $name =~ s/".*$//;
     $name = trim($name);
   }
