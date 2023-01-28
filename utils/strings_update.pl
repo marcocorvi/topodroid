@@ -221,14 +221,15 @@ if ($@) {
 analyze_xml_file($en_filename, $en_dom, \%en_names);
 
 for my $element ($en_dom->documentElement()->childNodes()) {
-  my $name = get_node_name($element);
-  # print "\$name: '$name'\n";
   if (($element->nodeType != XML_COMMENT_NODE)
     && $element->hasAttribute('translatable')
     && ($element->getAttribute('translatable') eq 'false')) {
     $element->unbindNode();
     next;
   }
+
+  my $name = get_node_name($element);
+  # print "\$name: '$name'\n";
 
   if ($name eq '') {
     next;
