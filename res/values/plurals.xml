@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <!-- TODO TODO TODO
+    DO NOT FORGET THAT APOSTROPHE MUST BE PRECEEDED BY BACKSLASH
+  -->
   <plurals name="calib_saturated_values">
     <item quantity="one">WARNING. One saturated data</item>
     <item quantity="other" >WARNING. %1$d saturated data</item>

@@ -2,6 +2,9 @@
 
 <!--suppress CheckTagEmptyBody -->
 <resources>
+  <!-- TODO TODO TODO
+    DO NOT FORGET THAT APOSTROPHE MUST BE PRECEEDED BY BACKSLASH
+  -->
   <string-array name="bricMode">
      <item name="prim_only">Prim. only</item>
      <!-- item name="sequence">Sequence</item -->
