@@ -255,6 +255,10 @@ for my $element ($en_dom->documentElement()->childNodes()) {
     }
   }
   else {
+    if ($element->nodeType == XML_COMMENT_NODE) {
+      next;
+    }
+
     my $content = ' TODO ' . get_element_without_limiters($element) . ' ';
     my $new_comment = XML::LibXML::Comment->new($content);
     $element->replaceNode($new_comment);
