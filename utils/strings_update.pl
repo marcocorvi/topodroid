@@ -111,7 +111,7 @@ sub analyze_xml_file ($filename, $dom, $names_ref) {
   my @empty_named_elements;
   my $xml_ok = 1;
 
-  for my $named_element ($dom->findnodes('//*[@name]')) {
+  for my $named_element ($dom->findnodes('/resources/*[@name]')) {
     # print "\$named_element em analyze_xml_file: '" . Dumper($named_element) . "'\n";
     my $name = trim($named_element->getAttribute('name'));
 
@@ -129,7 +129,7 @@ sub analyze_xml_file ($filename, $dom, $names_ref) {
     # print "'$name': '" . $named_element->textContent() . "'\n";
   }
 
-  for my $comment ($dom->findnodes('//comment()')) {
+  for my $comment ($dom->findnodes('/resources/comment()')) {
     # print "\$comment em analyze_xml_file: '" . Dumper($comment) . "'\n";
     my $name = parse_comment_name($comment->textContent());
     my $tag = parse_comment_tag($comment);
