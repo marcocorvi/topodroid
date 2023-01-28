@@ -225,7 +225,7 @@ for my $element ($en_dom->documentElement()->childNodes()) {
   # print "\$name: '$name'\n";
   if (($element->nodeType != XML_COMMENT_NODE)
     && $element->hasAttribute('translatable')
-    && ($element->getAttribute('translatable') == 'false')) {
+    && ($element->getAttribute('translatable') eq 'false')) {
     $element->unbindNode();
     next;
   }
