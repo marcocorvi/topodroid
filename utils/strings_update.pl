@@ -186,7 +186,15 @@ sub get_comment_content_without_tag($element) {
 }
 
 sub get_element_without_limiters($element) {
-  my $content = $element->toString();
+  # Removing $element comment childs before getting $element content as string
+  # as a comment ending inside our new commment ends the comment prematurely.
+  for my $child ($element->childNodes()) {
+    if ($child->nodeType == XML_COMMENT_NODE) {
+      $child->unbindNode();
+    }
+  }
+
+  my $content = $element->toString(2);
 
   # print "\$content pré em get_element_without_limiters: '$content'\n";
   $content =~ s/^\<\s*//;
