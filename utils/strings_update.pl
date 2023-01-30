@@ -10,6 +10,8 @@
 #
 
 use strict;
+use warnings;
+use feature 'signatures';
 
 use builtin qw(
   trim
@@ -17,177 +19,263 @@ use builtin qw(
 no warnings "experimental::builtin";
 
 use File::Basename;
+use XML::LibXML;
 
 use constant {
   PREFIX => '    ',
 };
 
+my $en_filename = $ARGV[0];
+my $xx_filename = $ARGV[1];
+my %xx_names;
+my %en_names;
+
 # For debbuging
-# use Data::Dumper;
+use Data::Dumper;
 
-# global aux variables for parsing (potentially multiline) comments
-# this parsing code should probably be a class but I am too lazy to relearn
-# Perl OO.
-my $parse_comment = 0;
-my $parse_translatable = 1;
-my $parse_name = '';
-my $parse_buffer = '';
-my $parse_tag = '';
+sub get_node_name($element) {
+  # print "ELEMENT in get_node_name: '$element'\n";
+  my $name = '';
 
-my %xx_line = {};
+  if ($element->nodeType == XML_COMMENT_NODE) {
+    $name = parse_comment_name ($element->textContent);
+  }
+  else {
+    if ($element->hasAttribute('name')) {
+      $name = $element->getAttribute('name');
+    }
+  }
+  # print "name found: '$name'\n";
 
-sub parse_reset() {
-  $parse_comment = 0;
-  $parse_translatable = 1;
-  $parse_name = '';
-  $parse_buffer = '';
-  $parse_tag = ''; 
+  return $name;
 }
 
-sub parse_line {
-  my $line = shift @_;
-  my $trimmed_line = $line;
-  my $parse_value = '';
+sub parse_comment_name ($content) {
+  my $name = '';
 
-  chomp $trimmed_line;
-  $trimmed_line = trim($trimmed_line);
-  if ( $trimmed_line eq '' ) {
-    return 0;
+  if ( $content =~ /name="/ ) {
+    $name = $content;
+    $name =~ s/^.*?name="//;
+    $name =~ s/".*$//;
+    $name = trim($name);
   }
 
-  if ( $parse_name eq '' ) {
-    if ( $trimmed_line =~ /name="/ ) {
-      $parse_name = $trimmed_line;
-      $parse_name =~ s/^.*name="//;
-      $parse_name =~ s/".*$//;
-      $parse_name = trim($parse_name);
-      # print "NAME to write: '$parse_name'\n";
-    }
-
-    if ( $parse_name eq '' ) {
-      return 0;
-    }
-  }
-
-  if ( $trimmed_line =~ /translatable=.false./ ) {
-    $parse_translatable = 0;
-  }
-
-  $parse_buffer .= $line;
-
-  if ( $trimmed_line =~ /<!--/ ) { 
-    $parse_comment = 1;
-    $parse_tag = $trimmed_line;
-    $parse_tag =~ s/^<!--\s+//;
-    $parse_tag =~ s/\s+string.*$//;
-    # print "TAG in EN: '$parse_tag'\n";
-  }
-
-  if ( $parse_comment == 1 ) {
-    if ( $trimmed_line =~ /-->/ ) {
-      $parse_comment = 3;
-    } else {
-      return 0;
-    }
-  }
-
-  if ( ! ( $trimmed_line =~ /\<\/string.*$/ ) ) {
-    return 0;
-  }
-
-  $parse_value = $parse_buffer;
-  $parse_value =~ s/^.*\"\s*\>//;
-  $parse_value =~ s/\<\/string.*$//;
-  chomp $parse_value;
-
-  my %result = (
-    'name' => $parse_name,
-    'content' => {
-      'tag' => $parse_tag,
-      'translatable' => $parse_translatable,
-      'value' => $parse_value,
-      'raw' => trim($parse_buffer),
-    },
-  );
-
-  # print Dumper(\%result);
-
-  parse_reset();
-
-  return \%result;
+  return $name;
 }
 
-open( XX, '<', $ARGV[1] ) or die "Cannot open strings file \"$ARGV[1]\"\n";
+sub parse_comment_tag ($comment) {
+  my $tag = '';
 
-parse_reset();
-while ( my $line = <XX> ) {
-  # print "LINE: '$line'\n";
-  my $result = parse_line($line);
-  if ( $result == 0 ) {
+  if ($comment->nodeType != XML_COMMENT_NODE) {
+    return $tag;
+  }
+
+  $tag = $comment;
+  # print "TAG1 in parse_comment_tag: '$tag'\n";
+  $tag =~ s/^<!--\s*//;
+  # print "TAG2 in parse_comment_tag: '$tag'\n";
+  if ($tag =~ m/^([A-Z]+)\s+.*-->$/) {
+    $tag = $1;
+  }
+  else {
+    $tag = '';
+  }
+
+  # print "TAG in parse_comment_tag: '$tag'\n";
+
+  return $tag;
+}
+
+sub add_named_element (
+  $name, 
+  $element_ref, 
+  $names_ref, 
+  $duplicate_names_ref) {
+  # print "\$element_ref em add_named_element: '" . Dumper($element_ref) . "'\n";
+  if (exists($$names_ref{$name})) {
+    # print "REPEATED NAME - '$name': '" . $element_ref->textContent(). "'\n";
+    if (exists($$duplicate_names_ref{$name})) {
+      push(@{%{$duplicate_names_ref}{$name}}, $element_ref);
+    }
+    else {
+      $$duplicate_names_ref{$name} = [$$names_ref{$name}, $element_ref];
+    }
+  }
+  else {
+    $$names_ref{$name} = $element_ref;
+  }
+}
+
+sub analyze_xml_file ($filename, $dom, $names_ref) {
+  my %duplicated_names;
+  my @empty_named_elements;
+  my $xml_ok = 1;
+
+  for my $named_element ($dom->findnodes('/resources/*[@name]')) {
+    # print "\$named_element em analyze_xml_file: '" . Dumper($named_element) . "'\n";
+    my $name = trim($named_element->getAttribute('name'));
+
+    if ($name eq '') {
+      push (@empty_named_elements, $named_element);
+      next;
+    }
+
+    add_named_element(
+      $name,
+      $named_element,
+      $names_ref,
+      \%duplicated_names
+    );
+    # print "'$name': '" . $named_element->textContent() . "'\n";
+  }
+
+  for my $comment ($dom->findnodes('/resources/comment()')) {
+    # print "\$comment em analyze_xml_file: '" . Dumper($comment) . "'\n";
+    my $name = parse_comment_name($comment->textContent());
+    my $tag = parse_comment_tag($comment);
+
+    if ($name eq '') {
+      next;
+    }
+
+    add_named_element(
+      $name,
+      $comment,
+      $names_ref,
+      \%duplicated_names
+    );
+    # print "'$name': '" . $comment->textContent(). "'\n";
+  }
+
+  if (@empty_named_elements > 0) {
+    $xml_ok = 0;
+    print "> '$filename' HAS EMPTY NAMED ELEMENTS:\n";
+    for my $empty_named_element (@empty_named_elements) {
+      print "> '" . $empty_named_element . "'\n";
+    }
+  }
+
+  if (%duplicated_names > 0) {
+    $xml_ok = 0;
+    # print Dumper(\%duplicated_names);
+    print "-> '$filename' HAS DUPLICATED NAMED ELEMENTS:\n";
+    for my $duplicated_name (keys(%duplicated_names)) {
+      print "-> '$duplicated_name' ELEMENTS:\n";
+      for my $element (@{$duplicated_names{$duplicated_name}}) {
+        print "--> '$element'\n";
+      }
+    }
+  }
+
+  if ($xml_ok == 0) {
+    print "'$filename' has problems. Please fix them and retry.\n";
+    exit 1;
+  }
+}
+
+sub get_comment_content_without_tag($element) {
+  my $content = $element->toString();
+
+  # print "\$content pré em get_comment_content_without_tag: '$content'\n";
+  $content =~ s/^\<!--\s*//;
+  $content =~ s/^[A-Z]+\s+//;
+  $content =~ s/\s*--\>$//;
+  # print "\$content pós em get_comment_content_without_tag: '$content'\n";
+
+  return $content;
+}
+
+sub get_element_without_limiters($element) {
+  # Removing $element comment childs before getting $element content as string
+  # as a comment ending inside our new commment ends the comment prematurely.
+  for my $child ($element->childNodes()) {
+    if ($child->nodeType == XML_COMMENT_NODE) {
+      $child->unbindNode();
+    }
+  }
+
+  my $content = $element->toString(2);
+
+  # print "\$content pré em get_element_without_limiters: '$content'\n";
+  $content =~ s/^\<\s*//;
+  $content =~ s/\s*\>$//;
+  # print "\$content pós em get_element_without_limiters: '$content'\n";
+
+  return $content;
+}
+
+my $xx_dom = eval {
+    XML::LibXML->load_xml(location => $xx_filename, {no_blanks => 1});
+};
+if ($@) {
+    # Log failure and exit
+    print "Error parsing '$xx_filename':\n$@";
+    exit 0;
+}
+
+analyze_xml_file($xx_filename, $xx_dom, \%xx_names);
+
+# print Dumper(\%xx_names);
+
+my $en_dom = eval {
+    XML::LibXML->load_xml(location => $en_filename, {no_blanks => 1});
+};
+if ($@) {
+    # Log failure and exit
+    print "Error parsing '$en_filename':\n$@";
+    exit 0;
+}
+
+analyze_xml_file($en_filename, $en_dom, \%en_names);
+
+for my $element ($en_dom->documentElement()->childNodes()) {
+  if (($element->nodeType != XML_COMMENT_NODE)
+    && $element->hasAttribute('translatable')
+    && ($element->getAttribute('translatable') eq 'false')) {
+    $element->unbindNode();
     next;
   }
-  # print Dumper($result);
 
-  $xx_line{${$result}{'name'}} = ${$result}{'content'};
+  my $name = get_node_name($element);
+  # print "\$name: '$name'\n";
+
+  if ($name eq '') {
+    next;
+  }
+
+  if (exists($xx_names{$name})) {
+    if ($element->nodeType == XML_COMMENT_NODE) {
+      my $tag = parse_comment_tag($element);
+      # print "\$tag: '$tag'\n";
+      my $content;
+
+      if ($xx_names{$name}->nodeType == XML_COMMENT_NODE) {
+        $content = get_comment_content_without_tag($xx_names{$name});
+        $content = " $tag $content ";
+      }
+      else {
+        $content = " $tag " . get_element_without_limiters($xx_names{$name}) . ' ';
+      }
+      $element->setData($content);
+    }
+    else {
+      $element->replaceNode($xx_names{$name});
+    }
+  }
+  else {
+    if ($element->nodeType == XML_COMMENT_NODE) {
+      next;
+    }
+
+    my $content = ' TODO ' . get_element_without_limiters($element) . ' ';
+    my $new_comment = XML::LibXML::Comment->new($content);
+    $element->replaceNode($new_comment);
+  }
 }
-close XX;
 
-# print Dumper(\%xx_line);
-# exit;
-
-open( EN, '<', $ARGV[0] ) or die "Cannot open english strings file \"$ARGV[0]\"\n";
-
-my ($filename, $path, $suffix) = fileparse($ARGV[1], '.xml');
+my ($filename, $path, $suffix) = fileparse($xx_filename, '.xml');
 my $new_file = $path . $filename. '-NEW'. $suffix;
 if ( -e $new_file ) {
   die "'$new_file' already exists. Won't overwrite existing file.\n";
 }
-open( NEW, '>', $new_file ) or die "Cannot open new strings file \"$new_file\" for writing\n";
-
-print NEW q|<?xml version="1.0" encoding="utf-8"?>
-<resources
-  xmlns:tools="http://schemas.android.com/tools"
-  >
-
-    <!-- TODO TODO TODO
-        DO NOT FORGET THAT APOSTROPHE MUST BE PRECEEDED BY BACKSLASH
-    -->
-
-|;
-
-parse_reset();
-while ( my $line = <EN> ) {
-  # print "LINE: '$line'\n";
-
-  my $result = parse_line($line);
-  # print Dumper($result);
-  if ( $result == 0 ) {
-    next;
-  }
-  my $name = ${$result}{'name'};
-  my $content = ${$result}{'content'};
-  # print Dumper($name);
-  # print Dumper($content);
-  if ( ${$content}{'translatable'} ) {
-    if ( $xx_line{$name} ) {
-      my $x_content = $xx_line{$name};
-      # print Dumper($x_content);
-      if ( ${$content}{'tag'} eq '' ) {
-        print NEW PREFIX . "${$x_content}{'raw'}\n";
-      } else {
-        print NEW PREFIX . "<!-- ${$content}{'tag'} string name=\"$name\">${$x_content}{'value'}<\/string -->\n";
-      }
-    } else {
-      if ( ${$content}{'tag'} eq '' ) {
-        ${$content}{'tag'} = 'TODO';
-      }
-      print NEW PREFIX . "<!-- ${$content}{'tag'} string name=\"$name\">${$content}{'value'}<\/string -->\n";
-    }
-  }
-}
-close EN;
-
-print NEW q|</resources>
-|;
-
-close NEW;
+$en_dom->toFile($new_file, 2);
