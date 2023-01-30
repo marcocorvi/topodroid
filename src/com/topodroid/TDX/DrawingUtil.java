@@ -128,7 +128,8 @@ public class DrawingUtil
     dpath.makePath( x1, y1, x2, y2 ); // this sets the midpoint only
   }
 
-  /** make a straight path with an angle (for the North)
+  /** make a straight path with an angle (for the North arrow)
+   * ie the path makes a counterclockwise angle if the declination is positive, and clockwise if it is negative
    * @param dpath   path
    * @param xx1     first point X coord [world]
    * @param yy1     first point Y coord [world]
@@ -147,8 +148,8 @@ public class DrawingUtil
     float s = TDMath.sind( decl );
     float xx3 = xx2 - xx1;
     float yy3 = yy2 - yy1;
-    float xx4 = xx1 + xx3 * c - yy3 * s;
-    float yy4 = yy1 + xx3 * s + yy3 * c;
+    float xx4 = xx1 + xx3 * c + yy3 * s;
+    float yy4 = yy1 - xx3 * s + yy3 * c;
     float x4 = toSceneX( xx4, yy4 );
     float y4 = toSceneY( xx4, yy4 );
     TDLog.v("North P1 " + x1 + " " + y1 + " P2 " + x2 + " " + y2 + " P3 " + x4 + " " + y4 );
