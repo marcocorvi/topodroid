@@ -8,7 +8,7 @@
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->
 
-    <!-- DO NOT TRANSLATE string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string -->
+    <!-- DONT TRANSLATE string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string -->
 
     <!-- UNUSED string name="desc_user_man">Manuale utente</string -->
     <!-- UNUSED string name="desc_points">Punti</string -->
@@ -16,21 +16,21 @@
     <!-- UNUSED string name="desc_areas">Aree</string -->
     <string name="desc_menu">Menu</string>
 
-    <!-- NO string name="app_name">TopoDroid</string -->
-    <string name="tdm_title">Gestione TopoDroid</string>
-    <string name="tdm_config_project">progetto.tdconfig</string>
-    <string name="double_back">Per uscire premi INDIETRO di nuovo</string>
-
-    <string name="new_survey_label">Nuovo rilievo</string>
-    <!-- NO string name="distox_label">DistoX</string -->
-    <!-- NO string name="cave3d_label">Cave3D</string -->
-
   <string name="r_title">Android-13+: avviso importante</string>
   <!-- TODO string name="r_dialog">With Android-13 TopoDroid must store surveys in the app private folder under "Android/data". Beware that this folder is usually deleted when the app is uninstalled. To confirm type\n"%1$s"\nin the field below and tap the button.</string -->
   <!-- UNUSED string name="r_checkboxes">Devi confermare tramite le checkbox.</string -->
   <!-- UNUSED string name="r_disclaimer">Riconosco che gli autori della app non sono responsabili per qualsiasi danno o perdita di dati.</string -->
   <!-- TODO string name="r_continue">CONTINUE</string -->
   <!-- TODO string name="r_quit">QUIT</string -->
+
+    <!-- NO string name="app_name">TopoDroid</string -->
+    <string name="tdm_title">Gestione Progetti</string>
+    <string name="tdm_config_project">progetto.tdconfig</string>
+    <string name="double_back">Per uscire premi INDIETRO di nuovo</string>
+
+    <string name="new_survey_label">Nuovo rilievo</string>
+    <!-- NO string name="distox_label">DistoX</string -->
+    <!-- NO string name="cave3d_label">Cave3D</string -->
 
     <!-- UNUSED string name="version_ask">Stai aggiornando ad una nuova versione di TopoDroid.\nVuoi reinstallare prototipi grafici?</string -->
     <string name="symbols_ask">Installare gli strumenti di disegno v.%1$s?\n(Current v.%2$s)</string>
@@ -486,7 +486,6 @@
     <string name="popup_remove_pt">Elimina punto</string>
     <string name="popup_append_line">Collega alla linea</string>
     <string name="popup_multiselect">Selezione multipla</string>
-    <!-- DOPPIO string name="popup_finish">Fine</string -->
     <string name="popup_finish">Fine</string>
     <string name="popup_delete">Cancella</string>
     <string name="popup_decimate">Decima</string>
@@ -1747,21 +1746,19 @@
   <string name="pref_unit_location_title">Unità posizioni</string>
   <string name="pref_unit_location_summary">Unità posizioni</string>
 
-<!-- UNUSED
-  <string name="pref_plot_walls_title">OPZIONI AUTO-PARETI</string>
-  <string name="pref_walls_type_title">Tipo pareti</string>
-  <string name="pref_walls_type_summary">Tipo pareti</string>
-  <string name="pref_walls_plan_thr_title">Inclinazione per Splay in pianta</string>
-  <string name="pref_walls_plan_thr_summary">Massima inclinazione di splay per pareti in pianta [deg]</string>
-  <string name="pref_walls_extended_thr_title">Inclinazione per Splay in sezione</string>
-  <string name="pref_walls_extended_thr_summary">Massima inclinazione di splay per pareti in sezione [deg]</string>
-  <string name="pref_walls_xclose_title">Gestione spazio</string>
-  <string name="pref_walls_xclose_summary">Minimo di distanza tra punti lungo il tiro [m]</string>
-  <string name="pref_walls_concave_title">Concavita\'</string>
-  <string name="pref_walls_concave_summary">Massima concavita\' [percent]</string>
-  <string name="pref_walls_xstep_title">Passo</string>
-  <string name="pref_walls_xstep_summary">Distanza tra punti lungo il tiro [m]</string>
--->
+  <!-- UNUSED string name="pref_plot_walls_title">OPZIONI AUTO-PARETI</string -->
+  <!-- UNUSED string name="pref_walls_type_title">Tipo pareti</string -->
+  <!-- UNUSED string name="pref_walls_type_summary">Tipo pareti</string -->
+  <!-- UNUSED string name="pref_walls_plan_thr_title">Inclinazione per Splay in pianta</string -->
+  <!-- UNUSED string name="pref_walls_plan_thr_summary">Massima inclinazione di splay per pareti in pianta [deg]</string -->
+  <!-- UNUSED string name="pref_walls_extended_thr_title">Inclinazione per Splay in sezione</string -->
+  <!-- UNUSED string name="pref_walls_extended_thr_summary">Massima inclinazione di splay per pareti in sezione [deg]</string -->
+  <!-- UNUSED string name="pref_walls_xclose_title">Gestione spazio</string -->
+  <!-- UNUSED string name="pref_walls_xclose_summary">Minimo di distanza tra punti lungo il tiro [m]</string -->
+  <!-- UNUSED string name="pref_walls_concave_title">Concavita\'</string -->
+  <!-- UNUSED string name="pref_walls_concave_summary">Massima concavita\' [percent]</string -->
+  <!-- UNUSED string name="pref_walls_xstep_title">Passo</string -->
+  <!-- UNUSED string name="pref_walls_xstep_summary">Distanza tra punti lungo il tiro [m]</string -->
 
   <!-- NO string name="pref_algo_min_alpha_title">Min-algo alpha</string -->
   <!-- NO string name="pref_algo_min_alpha_summary">Min-algo adjustment factor (in [0,1])</string -->
@@ -1936,7 +1933,6 @@
     <!-- NO string name="cmenu_fractal">Dim. frattale</string -->
 
     <!-- NO string name="fractal_title">Computo frattale</string -->
-    <!-- NO string name="fractal_title">Fractal result</string -->
     <!-- NO string name="fractal_cnt_total">count</string -->
     <!-- NO string name="fractal_cnt_six">6-neighbor</string -->
     <!-- NO string name="fractal_cnt_twentysix">26-neighbor</string -->
@@ -1969,7 +1965,7 @@
     <string name="info_station_value">%1$d</string>
     <string name="info_length_value">%1$.1f m</string>
     <string name="info_depth_value">%1$.1f m</string>
-    <!-- string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
+    <!-- UNUSED string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
     <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
     <string name="info_east_value">W %1$.1f E %2$.1f</string>
     <string name="info_north_value">S %1$.1f N %2$.1f</string>

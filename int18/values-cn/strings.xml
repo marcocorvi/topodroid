@@ -147,7 +147,6 @@
     <!-- UNUSED string name="data"> data</string -->
     <string name="using">使用 %1$s</string>
     <string name="calib_error">平均误差: %1$.2f 度 (BH delta %2$.3f)</string>
-    <!-- OLD IS THIS THE NEXT ? string name="calib_error">平均误差: %1$.4f 度</string -->
     <string name="calib_validate_error">平均误差: %1$.2f &#xb0;</string>
     <string name="calib_stddev">标准差: %1$.4f 度</string>
     <string name="calib_max_error">最大误差: %1$.4f 度</string>
@@ -1780,40 +1779,39 @@
   <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
 
-<!-- DO NOT TRANSLATE THESE
-  <string name="pref_log_stream_summary" translatable="false">Log output stream</string>
-  <string name="pref_log_stream_title" translatable="false">Log stream</string>
-  <string name="pref_log_append" translatable="false">append logs</string>
-  <string name="pref_log_bt" translatable="false">Bluetooth</string>
-  <string name="pref_log_bezier" translatable="false">Bezier curves</string>
-  <string name="pref_log_calib" translatable="false">Calibration</string>
-  <string name="pref_log_comm" translatable="false">BT communication</string>
-  <string name="pref_log_csurvey" translatable="false">cSurvey</string>
-  <string name="pref_log_data" translatable="false">Survey data</string>
-  <string name="pref_log_db" translatable="false">Database</string>
-  <string name="pref_log_debug" translatable="false">Debug</string>
-  <string name="pref_log_device" translatable="false">Device window</string>
-  <string name="pref_log_distox" translatable="false">DistoX</string>
-  <string name="pref_log_err" translatable="false">Error</string>
-  <string name="pref_log_fixed" translatable="false">GPS points</string>
-  <string name="pref_log_input" translatable="false">User input</string>
-  <string name="pref_log_io" translatable="false">Sketch i/o</string>
-  <string name="pref_log_loc" translatable="false">Location</string>
-  <string name="pref_log_num" translatable="false">Data reduction</string>
-  <string name="pref_log_path" translatable="false">File paths</string>
-  <string name="pref_log_perm" translatable="false">Permissions</string>
-  <string name="pref_log_photo" translatable="false">Photo</string>
-  <string name="pref_log_plot" translatable="false">Sketches</string>
-  <string name="pref_log_proto" translatable="false">DistoX protocol</string>
-  <string name="pref_log_ptopo" translatable="false">PocketTopo</string>
-  <string name="pref_log_sensor" translatable="false">Sensors</string>
-  <string name="pref_log_shot" translatable="false">Shots</string>
-  <- UNUSED string name="pref_log_sync" translatable="false">Cosurveying</string ->
-  <string name="pref_log_survey" translatable="false">Surveys</string>
-  <string name="pref_log_therion" translatable="false">Therion</string>
-  <string name="pref_log_units" translatable="false">Units</string>
-  <string name="pref_log_zip" translatable="false">ZIP</string>
--->
+<!-- DO NOT TRANSLATE THESE -->
+  <!-- NO string name="pref_log_stream_summary" translatable="false">Log output stream</string -->
+  <!-- NO string name="pref_log_stream_title" translatable="false">Log stream</string -->
+  <!-- NO string name="pref_log_append" translatable="false">append logs</string -->
+  <!-- NO string name="pref_log_bt" translatable="false">Bluetooth</string -->
+  <!-- NO string name="pref_log_bezier" translatable="false">Bezier curves</string -->
+  <!-- NO string name="pref_log_calib" translatable="false">Calibration</string -->
+  <!-- NO string name="pref_log_comm" translatable="false">BT communication</string -->
+  <!-- NO string name="pref_log_csurvey" translatable="false">cSurvey</string -->
+  <!-- NO string name="pref_log_data" translatable="false">Survey data</string -->
+  <!-- NO string name="pref_log_db" translatable="false">Database</string -->
+  <!-- NO string name="pref_log_debug" translatable="false">Debug</string -->
+  <!-- NO string name="pref_log_device" translatable="false">Device window</string -->
+  <!-- NO string name="pref_log_distox" translatable="false">DistoX</string -->
+  <!-- NO string name="pref_log_err" translatable="false">Error</string -->
+  <!-- NO string name="pref_log_fixed" translatable="false">GPS points</string -->
+  <!-- NO string name="pref_log_input" translatable="false">User input</string -->
+  <!-- NO string name="pref_log_io" translatable="false">Sketch i/o</string -->
+  <!-- NO string name="pref_log_loc" translatable="false">Location</string -->
+  <!-- NO string name="pref_log_num" translatable="false">Data reduction</string -->
+  <!-- NO string name="pref_log_path" translatable="false">File paths</string -->
+  <!-- NO string name="pref_log_perm" translatable="false">Permissions</string -->
+  <!-- NO string name="pref_log_photo" translatable="false">Photo</string -->
+  <!-- NO string name="pref_log_plot" translatable="false">Sketches</string -->
+  <!-- NO string name="pref_log_proto" translatable="false">DistoX protocol</string -->
+  <!-- NO string name="pref_log_ptopo" translatable="false">PocketTopo</string -->
+  <!-- NO string name="pref_log_sensor" translatable="false">Sensors</string -->
+  <!-- NO string name="pref_log_shot" translatable="false">Shots</string -->
+  <!-- UNUSED string name="pref_log_sync" translatable="false">Cosurveying</string -->
+  <!-- NO string name="pref_log_survey" translatable="false">Surveys</string -->
+  <!-- NO string name="pref_log_therion" translatable="false">Therion</string -->
+  <!-- NO string name="pref_log_units" translatable="false">Units</string -->
+  <!-- NO string name="pref_log_zip" translatable="false">ZIP</string -->
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
   <!-- UNUSED string name="line_fine">fine</string -->
@@ -1946,7 +1944,6 @@
     <!-- NO string name="cmenu_fractal">分形计算</string -->
 
     <!-- NO string name="fractal_title">分形计算</string -->
-    <!-- NO string name="fractal_title">Fractal result</string -->
     <!-- NO string name="fractal_cnt_total">count</string -->
     <!-- NO string name="fractal_cnt_six">6-neighbor</string -->
     <!-- NO string name="fractal_cnt_twentysix">26-neighbor</string -->
@@ -1978,7 +1975,7 @@
     <string name="info_station_value">%1$d</string>
     <string name="info_length_value">%1$.1f m</string>
     <string name="info_depth_value">%1$.1f m</string>
-    <!-- UNUSED string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
+    <!-- UNUSED string name="info_volume_value_tryme">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
     <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
     <string name="info_east_value">W %1$.1f E %2$.1f</string>
     <string name="info_north_value">S %1$.1f N %2$.1f</string>

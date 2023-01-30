@@ -8,7 +8,7 @@
     <!-- UNUSED string name="string_false">hamis</string -->
     <!-- UNUSED string name="string_true">igaz</string -->
 
-    <!-- DO NOT TRANSLATE string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string -->
+    <!-- DONT TRANSLATE string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string -->
 
     <!-- UNUSED string name="desc_user_man">Felhasználói kézikönyv</string -->
     <!-- UNUSED string name="desc_points">Pontok</string -->
@@ -50,7 +50,7 @@
 	    Ha problémákat tapasztal a DistoX csatlakozással, próbálja meg beállítani a nem biztonságos kapcsolatot.\n\n
 	    A vázlatok bemutatásának más beállításai is vannak (ikonméret, címkeméret, vonalvastagság stb.); később beállíthatja őket.\n
     </string>
-    <!-- DONT_TRANSLATE string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string -->
+    <!-- NO string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string -->
 
     <string name="POINT">PONT</string>
     <string name="LINE">VONAL</string>
@@ -130,7 +130,6 @@
     <string name="calib_device_mismatch">FIGYELEM: A kalibrációs műszer nem egyezik</string>
     <string name="calib_no_name">Név megadása kötelező</string>
     <string name="calib_no_coeff">Kalibrációs állandók nincsenek beállítva</string>
-    <!-- REMOVE string name="calib_gm_policy">Eljárás</string -->
     <string name="calib_gm_policy">Csoportosítási szabály</string>
     <string name="calib_gm_undelete">Helyreállítja a kalibrációs adatokat?</string>
     <!-- UNUSED string name="calib_offgroup_data">Esetleg %1$d csoporton kívüli adat</string -->
@@ -1289,17 +1288,17 @@
   <string name="pref_cat_drawing">VÁZLATKÉSZÍTÉS</string>
   <string name="pref_cat_import_export">IMPORT_EXPORT</string>
   <string name="pref_cat_exportimport">IMPORT</string>
-  <!-- DONT_TRANSLATE string name="pref_cat_exportsvx" translatable="false">Survex</string -->
-  <!-- DONT_TRANSLATE string name="pref_cat_exportth"  translatable="false">Therion</string -->
-  <!-- DONT_TRANSLATE string name="pref_cat_exportdat" translatable="false">Compass</string -->
-  <!-- DONT_TRANSLATE string name="pref_cat_exporttro" translatable="false">VisualTopo</string -->
-  <!-- DONT_TRANSLATE string name="pref_cat_exportsvg" translatable="false">SVG</string -->
-  <!-- DONT_TRANSLATE string name="pref_cat_exportdxf" translatable="false">DXF</string -->
-  <!-- DONT_TRANSLATE string name="pref_cat_exportshp" translatable="false">Shapefile</string -->
-  <!-- DONT_TRANSLATE string name="pref_cat_exportpng" translatable="false">PNG</string -->
-  <!-- DONT_TRANSLATE string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string -->
-  <!-- DONT_TRANSLATE string name="pref_cat_exportcsx" translatable="false">cSurvey</string -->
-  <!-- DONT_TRANSLATE string name="pref_cat_exportcsv" translatable="false">CSV</string -->
+  <!-- NO string name="pref_cat_exportsvx" translatable="false">Survex</string -->
+  <!-- NO string name="pref_cat_exportth"  translatable="false">Therion</string -->
+  <!-- NO string name="pref_cat_exportdat" translatable="false">Compass</string -->
+  <!-- NO string name="pref_cat_exporttro" translatable="false">VisualTopo</string -->
+  <!-- NO string name="pref_cat_exportsvg" translatable="false">SVG</string -->
+  <!-- NO string name="pref_cat_exportdxf" translatable="false">DXF</string -->
+  <!-- NO string name="pref_cat_exportshp" translatable="false">Shapefile</string -->
+  <!-- NO string name="pref_cat_exportpng" translatable="false">PNG</string -->
+  <!-- NO string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string -->
+  <!-- NO string name="pref_cat_exportcsx" translatable="false">cSurvey</string -->
+  <!-- NO string name="pref_cat_exportcsv" translatable="false">CSV</string -->
 
   <string name="pref_cat_calib">KALIBRÁCIÓK</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
@@ -1760,67 +1759,63 @@
   <string name="pref_unit_location_title">Koordináta egységek</string>
   <string name="pref_unit_location_summary">Koordináták megjelenítési egysége</string>
 
-<!-- UNUSED
-  <string name="pref_plot_walls_title">AUTOMATA Kontúr</string>
-  <string name="pref_walls_type_title">Kontúr típusa</string>
-  <string name="pref_walls_type_summary">Kontúr típusa</string>
-  <string name="pref_walls_plan_thr_title">Alaprajzi sün szög</string>
-  <string name="pref_walls_plan_thr_summary">Alaprajzi kontúrhoz felhasznált legnagyobb lejtszögű segédmérés [fok]</string>
-  <string name="pref_walls_extended_thr_title">Oldalnézeti süns szög</string>
-  <string name="pref_walls_extended_thr_summary">Oldalnézet kontúrjához felhasznált legnagyobb lejtésszögű segédmérés [fok]</string>
-  <string name="pref_walls_xclose_title">Felbontás</string>
-  <string name="pref_walls_xclose_summary">Segédpontok maximális felbontása [m]</string>
-  <string name="pref_walls_concave_title">Homorúság</string>
-  <string name="pref_walls_concave_summary">Maximális homorúság [percent]</string>
-  <string name="pref_walls_xstep_title">Osztásköz</string>
-  <string name="pref_walls_xstep_summary">SPontok maximális távolsága a kontúr mentén [m]</string>
--->
+  <!-- UNUSED string name="pref_plot_walls_title">AUTOMATA Kontúr</string -->
+  <!-- UNUSED string name="pref_walls_type_title">Kontúr típusa</string -->
+  <!-- UNUSED string name="pref_walls_type_summary">Kontúr típusa</string -->
+  <!-- UNUSED string name="pref_walls_plan_thr_title">Alaprajzi sün szög</string -->
+  <!-- UNUSED string name="pref_walls_plan_thr_summary">Alaprajzi kontúrhoz felhasznált legnagyobb lejtszögű segédmérés [fok]</string -->
+  <!-- UNUSED string name="pref_walls_extended_thr_title">Oldalnézeti süns szög</string -->
+  <!-- UNUSED string name="pref_walls_extended_thr_summary">Oldalnézet kontúrjához felhasznált legnagyobb lejtésszögű segédmérés [fok]</string -->
+  <!-- UNUSED string name="pref_walls_xclose_title">Felbontás</string -->
+  <!-- UNUSED string name="pref_walls_xclose_summary">Segédpontok maximális felbontása [m]</string -->
+  <!-- UNUSED string name="pref_walls_concave_title">Homorúság</string -->
+  <!-- UNUSED string name="pref_walls_concave_summary">Maximális homorúság [percent]</string -->
+  <!-- UNUSED string name="pref_walls_xstep_title">Osztásköz</string -->
+  <!-- UNUSED string name="pref_walls_xstep_summary">SPontok maximális távolsága a kontúr mentén [m]</string -->
 
-<!-- DONT_TRANSLATE
-  <string name="pref_algo_min_alpha_title">Min-algo alfa</string>
-  <string name="pref_algo_min_alpha_summary">Min-algo illesztési tényezője ([0,1])</string>
-  <string name="pref_algo_min_beta_title">Min-algo béta</string>
-  <string name="pref_algo_min_beta_summary">Min-algo M dip súlyozása</string>
-  <string name="pref_algo_min_gamma_title">Min-algo gamma</string>
-  <string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x súlyozása</string>
-  <string name="pref_algo_min_delta_title">Min-algo delta</string>
-  <string name="pref_algo_min_delta_summary">Min-algo group G^M.x súlyozása</string>
--->
+<!-- DONT_TRANSLATE -->
+  <!-- NO string name="pref_algo_min_alpha_title">Min-algo alfa</string -->
+  <!-- NO string name="pref_algo_min_alpha_summary">Min-algo illesztési tényezője ([0,1])</string -->
+  <!-- NO string name="pref_algo_min_beta_title">Min-algo béta</string -->
+  <!-- NO string name="pref_algo_min_beta_summary">Min-algo M dip súlyozása</string -->
+  <!-- NO string name="pref_algo_min_gamma_title">Min-algo gamma</string -->
+  <!-- NO string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x súlyozása</string -->
+  <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
+  <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x súlyozása</string -->
 
-<!-- DONT_TRANSLATE
-  <string name="pref_log_stream_summary" translatable="false">Log output stream</string>
-  <string name="pref_log_stream_title" translatable="false">Log stream</string>
-  <string name="pref_log_append" translatable="false">append logs</string>
-  <string name="pref_log_bt" translatable="false">Bluetooth</string>
-  <string name="pref_log_bezier" translatable="false">Bezier curves</string>
-  <string name="pref_log_calib" translatable="false">Calibration</string>
-  <string name="pref_log_comm" translatable="false">BT communication</string>
-  <string name="pref_log_csurvey" translatable="false">cSurvey</string>
-  <string name="pref_log_data" translatable="false">Survey data</string>
-  <string name="pref_log_db" translatable="false">Database</string>
-  <string name="pref_log_debug" translatable="false">Debug</string>
-  <string name="pref_log_device" translatable="false">Device window</string>
-  <string name="pref_log_distox" translatable="false">DistoX</string>
-  <string name="pref_log_err" translatable="false">Error</string>
-  <string name="pref_log_fixed" translatable="false">GPS points</string>
-  <string name="pref_log_input" translatable="false">User input</string>
-  <string name="pref_log_io" translatable="false">Sketch i/o</string>
-  <string name="pref_log_loc" translatable="false">Location</string>
-  <string name="pref_log_num" translatable="false">Data reduction</string>
-  <string name="pref_log_path" translatable="false">File paths</string>
-  <string name="pref_log_perm" translatable="false">Permissions</string>
-  <string name="pref_log_photo" translatable="false">Photo</string>
-  <string name="pref_log_plot" translatable="false">Sketches</string>
-  <string name="pref_log_proto" translatable="false">DistoX protocol</string>
-  <string name="pref_log_ptopo" translatable="false">PocketTopo</string>
-  <string name="pref_log_sensor" translatable="false">Sensors</string>
-  <string name="pref_log_shot" translatable="false">Shots</string>
-  <! - - UNUSED string name="pref_log_sync" translatable="false">Cosurveying</string - - >
-  <string name="pref_log_survey" translatable="false">Surveys</string>
-  <string name="pref_log_therion" translatable="false">Therion</string>
-  <string name="pref_log_units" translatable="false">Units</string>
-  <string name="pref_log_zip" translatable="false">ZIP</string>
--->
+<!-- DONT_TRANSLATE -->
+  <!-- NO string name="pref_log_stream_summary" translatable="false">Log output stream</string -->
+  <!-- NO string name="pref_log_stream_title" translatable="false">Log stream</string -->
+  <!-- NO string name="pref_log_append" translatable="false">append logs</string -->
+  <!-- NO string name="pref_log_bt" translatable="false">Bluetooth</string -->
+  <!-- NO string name="pref_log_bezier" translatable="false">Bezier curves</string -->
+  <!-- NO string name="pref_log_calib" translatable="false">Calibration</string -->
+  <!-- NO string name="pref_log_comm" translatable="false">BT communication</string -->
+  <!-- NO string name="pref_log_csurvey" translatable="false">cSurvey</string -->
+  <!-- NO string name="pref_log_data" translatable="false">Survey data</string -->
+  <!-- NO string name="pref_log_db" translatable="false">Database</string -->
+  <!-- NO string name="pref_log_debug" translatable="false">Debug</string -->
+  <!-- NO string name="pref_log_device" translatable="false">Device window</string -->
+  <!-- NO string name="pref_log_distox" translatable="false">DistoX</string -->
+  <!-- NO string name="pref_log_err" translatable="false">Error</string -->
+  <!-- NO string name="pref_log_fixed" translatable="false">GPS points</string -->
+  <!-- NO string name="pref_log_input" translatable="false">User input</string -->
+  <!-- NO string name="pref_log_io" translatable="false">Sketch i/o</string -->
+  <!-- NO string name="pref_log_loc" translatable="false">Location</string -->
+  <!-- NO string name="pref_log_num" translatable="false">Data reduction</string -->
+  <!-- NO string name="pref_log_path" translatable="false">File paths</string -->
+  <!-- NO string name="pref_log_perm" translatable="false">Permissions</string -->
+  <!-- NO string name="pref_log_photo" translatable="false">Photo</string -->
+  <!-- NO string name="pref_log_plot" translatable="false">Sketches</string -->
+  <!-- NO string name="pref_log_proto" translatable="false">DistoX protocol</string -->
+  <!-- NO string name="pref_log_ptopo" translatable="false">PocketTopo</string -->
+  <!-- NO string name="pref_log_sensor" translatable="false">Sensors</string -->
+  <!-- NO string name="pref_log_shot" translatable="false">Shots</string -->
+  <!-- UNUSED string name="pref_log_sync" translatable="false">Cosurveying</string -->
+  <!-- NO string name="pref_log_survey" translatable="false">Surveys</string -->
+  <!-- NO string name="pref_log_therion" translatable="false">Therion</string -->
+  <!-- NO string name="pref_log_units" translatable="false">Units</string -->
+  <!-- NO string name="pref_log_zip" translatable="false">ZIP</string -->
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
   <!-- UNUSED string name="line_fine">finom</string -->
@@ -1955,7 +1950,6 @@
     <!-- NO string name="cmenu_fractal">FRAKTÁL SZÁMÍTÁS</string -->
 
     <!-- NO string name="fractal_title">Fraktál számítás</string -->
-    <!-- NO string name="fractal_title">Fractal result</string -->
     <!-- NO string name="fractal_cnt_total">count</string -->
     <!-- NO string name="fractal_cnt_six">6-neighbor</string -->
     <!-- NO string name="fractal_cnt_twentysix">26-neighbor</string -->
@@ -1987,7 +1981,7 @@
     <string name="info_station_value">%1$d</string>
     <string name="info_length_value">%1$.1f m</string>
     <string name="info_depth_value">%1$.1f m</string>
-    <!-- UNUSED string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
+    <!-- UNUSED string name="info_volume_value_tryme">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
     <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
     <string name="info_east_value">Ny %1$.1f K %2$.1f</string>
     <string name="info_north_value">D %1$.1f É %2$.1f</string>
@@ -2210,14 +2204,13 @@
 
     <string name="cpref_powercrust_delta_title">Powercrust Delta</string>
     <string name="cpref_powercrust_delta_summary">Zárja ki a közeli túlságosan eltérő sünöket [0.1]</string>
-<!-- UNUSED
-    <string name="cpref_convex_hull_title">Convex hull</string>
-    <string name="cpref_convex_hull_summary">Convex hull falak</string>
-    <string name="cpref_delaunay_title">Delaunay</string>
-    <string name="cpref_delaunay_summary">Delaunay falak</string>
-    <string name="cpref_hull_title">Hull</string>
-    <string name="cpref_hull_summary">Hull falak</string>
--->
+
+    <!-- UNUSED string name="cpref_convex_hull_title">Convex hull</string -->
+    <!-- UNUSED string name="cpref_convex_hull_summary">Convex hull falak</string -->
+    <!-- UNUSED string name="cpref_delaunay_title">Delaunay</string -->
+    <!-- UNUSED string name="cpref_delaunay_summary">Delaunay falak</string -->
+    <!-- UNUSED string name="cpref_hull_title">Hull</string -->
+    <!-- UNUSED string name="cpref_hull_summary">Hull falak</string -->
 
     <!-- UNUSED string name="TopoGLPerms">Engedélyek</string -->
     <!-- UNUSED string name="cperms_mandatory">Cave3D nem tud futni ennélkül:</string -->

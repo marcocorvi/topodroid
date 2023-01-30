@@ -8,7 +8,7 @@
     <!-- UNUSED string name="string_false">неверно</string -->
     <!-- UNUSED string name="string_true">верно</string -->
 
-    <!-- DO NOT TRANSLATE string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string -->
+    <!-- DONT TRANSLATE string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string -->
 
     <!-- UNUSED string name="desc_user_man">Руководство пользователя</string -->
     <!-- UNUSED string name="desc_points">Точки</string -->
@@ -33,7 +33,6 @@
   <string name="r_quit">ЗАКРЫТЬ</string>
 
     <!-- UNUSED string name="version_ask">Обновление до новой версии TopoDroid.\nВы хотите переустановить инструменты рисования?</string -->
-    <!-- REPLACED string name="symbols_ask">Вы хотите переустановить инструменты рисования?</string -->
     <string name="symbols_ask">Установить инструменты рисования v.%1$s?\n(Текущая v.%2$s)</string>
     <!-- UNUSED string name="version_check">Последняя версия</string -->
     <!-- UNUSED string name="version_check_failed">Сбой проверки версии</string -->
@@ -76,12 +75,11 @@
     <string name="memoryX310">Память DistoX X310</string>
     <string name="memoryXBLE">Память DistoX-BLE</string>
     <!-- UNUSED string name="memory_data">DistoX данные</string -->
-    <!-- string name="thp_danger">опасность</string -->
     <string name="thp_user">пользовательский</string>
     <string name="thp_label">подпись</string>
     <string name="thp_section">сечение</string>
     <string name="thp_station">пикет</string>
-    <!-- string name="thp_danger">опасность</string -->
+    <!-- UNUSED string name="thp_danger">опасность</string -->
     <string name="thl_user">пользовательский</string>
     <string name="thl_wall">стена</string>
     <string name="thl_section">сечение</string>
@@ -1969,7 +1967,7 @@
     <string name="info_station_value">%1$d</string>
     <string name="info_length_value">%1$.1f м</string>
     <string name="info_depth_value">%1$.1f м</string>
-    <!-- string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
+    <!-- UNUSED string name="info_volume_value_tryme">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
     <string name="info_volume_value">P. %1$.0f м³ C. %2$.0f м³</string>
     <string name="info_east_value">W %1$.1f E %2$.1f</string>
     <string name="info_north_value">S %1$.1f N %2$.1f</string>

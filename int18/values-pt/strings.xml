@@ -356,7 +356,7 @@ Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". 
     <string name="no_sensors">Topo sem informações de sensores externos</string>
     <!-- UNUSED string name="no_shots">Nenhuma medida registrada na topo.\nUsar o botão Download para baixar algumas</string -->
     <string name="no_search_result">Nenhum resultado na pesquisa.</string>
-    <!-- ALREADY DEFINED string name="no_survey">Topo %1$s não localizada\n</string -->
+    <!-- UNUSED string name="no_survey">Topo %1$s não localizada\n</string -->
     <string name="no_symbols">Nenhuma paleta de símbolos.</string>
     <!-- UNUSED string name="no_thmanager">O aplicativo ThManager não está instalado</string -->
     <!-- UNUSED string name="no_db_viewer">DB_viewer não encontrado</string -->
