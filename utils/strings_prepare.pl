@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 #
-# prepares translation string file according to english file crating an updated version
+# prepares translation string file according to english file creating 
+# an updated or new version in case xx-strings_file doesn't exist
 # usage: strings_prepare.pl <en-strings_file> <xx-strings_file> <updated_xx_strings_file_output>
 #
 # --------------------------------------------------------
@@ -209,20 +210,22 @@ my $new_filename = $ARGV[2];
 my %xx_names;
 my %en_names;
 
-if (! -e $xx_filename) {
-  die "\nError:
-  XX_TRANSLATED_FILE_TO_BE_UPDATED doesn't exist.\n\n";
-}
-my $xx_dom = eval {
-    XML::LibXML->load_xml(location => $xx_filename, {no_blanks => 1});
-};
-if ($@) {
-    # Log failure and exit
-    print "Error parsing '$xx_filename':\n$@";
-    exit 0;
-}
+my $xx_dom;
+if (-e $xx_filename) {
+  $xx_dom = eval {
+      XML::LibXML->load_xml(location => $xx_filename, {no_blanks => 1});
+  };
+  if ($@) {
+      # Log failure and exit
+      print "Error parsing '$xx_filename':\n$@";
+      exit 0;
+  }
 
-analyze_xml_file($xx_filename, $xx_dom, \%xx_names);
+  analyze_xml_file($xx_filename, $xx_dom, \%xx_names);
+}
+else {
+    print "Creating new '$new_filename' from empty '$xx_filename '.\n";
+}
 
 # print Dumper(\%xx_names);
 
