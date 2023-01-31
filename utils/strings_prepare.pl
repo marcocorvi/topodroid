@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 #
-# update translation string file according to english file and writes a updated version
-# usage: strings_update.pl <en-strings_file> <xx-strings_file> <updated_xx_strings_file_output>
+# prepares translation string file according to english file crating an updated version
+# usage: strings_prepare.pl <en-strings_file> <xx-strings_file> <updated_xx_strings_file_output>
 #
 # --------------------------------------------------------
 #  Copyright This software is distributed under GPL-3.0 or later
