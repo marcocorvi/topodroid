@@ -199,6 +199,67 @@ sub get_element_without_limiters($element) {
   return $content;
 }
 
+sub get_formats($element) {
+  my %formats;
+  my $text = $element->textContent();
+  if ($text =~ /%/) {
+    # print "TEXT: '$text'\n";
+  }
+
+  # Regex for sprinf formats taken from https://stackoverflow.com/questions/6915025/regexp-to-detect-if-a-string-has-printf-placeholders-inside
+  # /^\x25(?:([1-9]\d*)\$|\(([^\)]+)\))?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-fiosuxX])/
+  # Adapted to Perl:
+  # \x25(?:([1-9]\d*)\$|\(([^\)]+)\))?(\+)?(0|'[^\$])?(-)?(\d+)?(?:\.(\d+))?([b-fiosuxX])
+  while ($text =~ /(\x25(?:([1-9]\d*)\$|\(([^\)]+)\))?(\+)?(0|'[^\$])?(-)?(\d+)?(?:\.(\d+))?([b-fiosuxX]))/g) {
+    # print "--> Found a format: '$1'\n";
+    $formats{$1} = 1;
+  }
+  return \%formats;
+}
+
+sub replace_with_tagged_version($from, $to, $tag) {
+    my $content = " $tag " . get_element_without_limiters($from) . ' ';
+    my $new_comment = XML::LibXML::Comment->new($content);
+    $to->replaceNode($new_comment);
+}
+
+sub replace_with_comment_content_with_new_tag($from, $to, $tag) {
+    my $content = get_comment_content_without_tag($from);
+    $content = " $tag $content ";
+    my $new_comment = XML::LibXML::Comment->new($content);
+    $to->replaceNode($new_comment);
+}
+
+sub check_formats($a_element, $other_element) {
+  my $formats_ok = 1;
+  my $a_formats = get_formats($a_element);
+  my $other_formats = get_formats($other_element);
+
+  # if (scalar(keys(%$a_formats)) > 0) {
+  #   print "FOUND formats in '$a_element'\n";
+  # }
+  # if (scalar(keys(%$other_formats)) > 0) {
+  #   print "FOUND formats in '$other_element'\n";
+  # }
+
+  for my $a_format (keys(%$a_formats)) {
+    if (exists($other_formats->{$a_format})) {
+      delete($other_formats->{$a_format});
+      next;
+    }
+    else {
+      $formats_ok = 0;
+      last;
+    }
+  }
+
+  if (scalar(keys(%$other_formats)) > 0) {
+    $formats_ok = 0;
+  }
+
+  return $formats_ok;
+}
+
 if (@ARGV != 3) {
   die "\nUsage:
   $0 EN_ORIGINAL_FILE XX_TRANSLATED_FILE_TO_BE_UPDATED NEW_XX_FILE\n\n";
@@ -263,19 +324,26 @@ for my $element ($en_dom->documentElement()->childNodes()) {
     if ($element->nodeType == XML_COMMENT_NODE) {
       my $tag = parse_comment_tag($element);
       # print "\$tag: '$tag'\n";
-      my $content;
 
       if ($xx_names{$name}->nodeType == XML_COMMENT_NODE) {
-        $content = get_comment_content_without_tag($xx_names{$name});
-        $content = " $tag $content ";
+        replace_with_comment_content_with_new_tag($xx_names{$name}, $element, $tag);
       }
       else {
-        $content = " $tag " . get_element_without_limiters($xx_names{$name}) . ' ';
+        replace_with_tagged_version($xx_names{$name}, $element, $tag);
       }
-      $element->setData($content);
     }
     else {
-      $element->replaceNode($xx_names{$name});
+      if ($xx_names{$name}->nodeType == XML_COMMENT_NODE) {
+        replace_with_tagged_version($element, $element, 'TODO');
+      }
+      else {
+        if (check_formats($element, $xx_names{$name})) {
+          $element->replaceNode($xx_names{$name});
+        }
+        else {
+          replace_with_tagged_version($element, $element, 'TODO');
+        }
+      }
     }
   }
   else {
@@ -283,9 +351,7 @@ for my $element ($en_dom->documentElement()->childNodes()) {
       next;
     }
 
-    my $content = ' TODO ' . get_element_without_limiters($element) . ' ';
-    my $new_comment = XML::LibXML::Comment->new($content);
-    $element->replaceNode($new_comment);
+    replace_with_tagged_version($element, $element, 'TODO');
   }
 }
 
