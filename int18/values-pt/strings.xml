@@ -18,7 +18,11 @@
 On Android-11+ storage access must be granted to TopoDroid.\nYou can do this with the PC program "adb".\nOn Android: enable developer settings and usb-debug.\nConnect Android to the PC with a USB cable.\nOn the PC type "adb shell appops set com.topodroid.TDX MANAGE_EXTERNAL_STORAGE allow".
   </string -->
   <string name="r_dialog">
-Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". O Topodroid não achou seu diretório nesse local e portanto criou um novo diretório.\nVocê pode importar os arquivos zip com suas topografias antigas.\n\nObserve que os arquivos no novo diretório do Topodroid são apagados quando você desinstala o Topodroid.\n\nConsulte a página web para mais detalhes.\n
+A partir do Android 13 o Topodroid é obrigado a armazenar seus dados em um diretório privado do app dentro de "Android/data".
+Fique atento pois esse diretório normalmente é apagado ao desintalar o app.
+Para confirmar, digite
+"%1$s"
+no campo abaixo e aperte o botão.
   </string>
   <!-- UNUSED string name="r_checkboxes">Você deve confirmar marcando as caixas de seleção.</string -->
   <!-- FIXME FIXME FIXME -->
@@ -130,11 +134,11 @@ Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". 
   <!-- UNUSED string name="connect_failed">Falha de conexão</string -->
   <!-- UNUSED string name="data">Dados</string -->
   <string name="using">Usando %1$s</string>
-  <string name="calib_error">Erro médio: %1$.2f graus (Delta BH %2$.2f)</string>
+  <string name="calib_error">Erro médio: %1$.2f ° (Delta BH %2$.3f)</string>
   <string name="calib_validate_error">Erro médio: %1$.2f °</string>
-  <string name="calib_stddev">Erro desvio padrão: %1$.4f graus</string>
-  <string name="calib_max_error">Erro máximo: %1$.4f graus</string>
-  <string name="calib_ave_std">Exatidão: %1$.4f ± %2$.4f graus</string>
+  <string name="calib_stddev">Desvio padrão do erro: %1$.2f °</string>
+  <string name="calib_max_error">Erro máx.: %1$.2f °</string>
+  <string name="calib_ave_std">Acurácia: %1$.2f ± %2$.2f °</string>
   <string name="calib_precision">Precisão</string>
   <string name="calib_iter">Iterações: %1$d</string>
   <string name="calib_dip">Desvio mag.: %1$.1f °</string>
@@ -255,7 +259,7 @@ Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". 
   <!-- UNUSED string name="multistation_plane">Multiple-station plane</string -->
   <string name="error_m">Erro [m]</string>
   <string name="fmt_error_h">Acurácia: %1$.1f m</string>
-  <string name="fmt_error_m">Erro: %1$.1f m</string>
+  <string name="fmt_error_m">Acurácia: H %1$.1f V %2$.1f m</string>
   <string name="fmt_h_geoid">Erro (geóide): %1$.0f m</string>
   <!-- UNUSED string name="fmt_h_ellipsoid">Erro (elipsóide): %1$.0f m</string -->
   <string name="location_start_fine">Posição de início adequada</string>
@@ -365,7 +369,7 @@ Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". 
   <string name="no_sensors">Topo sem informações de sensores externos</string>
   <!-- UNUSED string name="no_shots">Nenhuma medida registrada na topo.\nUsar o botão Download para baixar algumas</string -->
   <string name="no_search_result">Nenhum resultado na pesquisa.</string>
-  <!-- UNUSED string name="no_survey">Topo %1$s não localizada\n</string -->
+  <string name="no_survey">Nenhuma topo selecionada.</string>
   <string name="no_symbols">Nenhuma paleta de símbolos.</string>
   <!-- UNUSED string name="no_thmanager">O aplicativo ThManager não está instalado</string -->
   <!-- UNUSED string name="no_db_viewer">DB_viewer não encontrado</string -->
@@ -501,7 +505,7 @@ Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". 
   <!-- UNUSED string name="plot_recover">Recarregar o croqui do backup?</string -->
   <string name="plot_start">Base inicial</string>
   <!-- UNUSED string name="plot_view">Base visualizada</string -->
-  <!-- UNUSED string name="read_fail_with_code">Falha na leitura: código erro </string -->
+  <string name="read_fail_with_code">Erro de leitura: código do erro </string>
   <string name="read_failed">Falha na leitura da DistoX</string>
   <string name="swap_hotbit_ok">Hot bits de dados trocados</string>
   <!-- UNUSED string name="reading_file_failed">Falha leitura do arquivo</string -->
@@ -541,8 +545,8 @@ Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". 
   <string name="shot_delete">Apagar medida?</string>
   <string name="shots_delete">Apagar medidas?</string>
   <string name="shots_delete_unsafe">Bases referenciadas por seções-X.\nApagar visadas?</string>
-  <string name="shot_rename_unsafe">Base referenciada por seções-X.\nRenomear visada?</string>
-  <string name="shots_rename_unsafe">Bases referenciadas por seções-X.\nRenomear visadas?</string>
+  <string name="shot_rename_unsafe">Bases referenciadas nas seções-x: %1$s.\nRenomear base?</string>
+  <string name="shots_rename_unsafe">Bases referenciadas nas seções-x:\n%1$s.\nRenomear bases?</string>
   <string name="shot_check">Marcar medida como medida de calibração?</string>
   <string name="shot_from">de</string>
   <string name="shot_info">Inserir medida manualmente</string>
@@ -634,7 +638,7 @@ Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". 
   <string name="stat_extlen">Comprimento 3D %1$.1f %2$s</string>
   <string name="stat_projlen">Projeção horizontal: %1$.1f %2$s</string>
   <string name="stat_cycle">Ciclos %1$d</string>
-  <string name="stat_loop">Poligonais: %1$d</string>
+  <string name="stat_loop">Poligonais %1$d [%2$d %3$d]</string>
   <string name="stat_origin">Base inicial: %1$s</string>
   <string name="stat_azimuth">Azimute da projeção do perfil: %1$.1f</string>
   <!-- UNUSED string name="stat_shot">Medidas: %1$d Duplicadas: %2$d Na superfície: %3$d</string -->
@@ -646,7 +650,7 @@ Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". 
   <string name="stat_wens">Oeste: %1$.0f %5$s Leste: %2$.0f %5$s Norte: %3$.0f %5$s Sul: %4$.0f %5$s</string>
   <string name="stat_angle_error">Erros de ângulo: %1$.2f ± %2$.2f</string>
   <string name="shot_title">MEDIDA %1$s - %2$s</string>
-  <!-- OK string name="shot_data">D %1$.2f  A %2$.1f  I %3$.1f</string -->
+  <string name="shot_data">C %1$.2f  N %2$.1f  I %3$.1f</string>
   <string name="survey_split_move_title">Mover/dividir topografia</string>
   <string name="survey_stat_duplicate">Visadas duplicadas - Qt: %1$d Ext: %2$.1f %3$s</string>
   <string name="survey_stat_splay">Medidas auxiliares: %1$d</string>
@@ -706,7 +710,7 @@ Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". 
   <string name="button_evalm">M      </string>
   <string name="button_evalroll">Rolar</string>
   <string name="button_eval_cal">Calcular c/ calib.</string>
-  <!-- OK string name="button_gps_start" >GPS       </string -->
+  <string name="button_gps_start">GPS</string>
   <!-- UNUSED string name="button_gps_stop"  >Parar     </string -->
   <string name="button_manual">Manual do Usuário</string>
   <!-- UNUSED string name="button_measure"   >Medir   </string -->
@@ -723,7 +727,7 @@ Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". 
   <string name="button_skip">Ignorar</string>
   <string name="button_done">Fim</string>
   <string name="button_lrud">Incluir EDTC</string>
-  <!-- OK string name="button_ok"        >OK        </string -->
+  <string name="button_ok" copyable="all">OK</string>
   <string name="button_off">desligar</string>
   <string name="button_on">ligar</string>
   <string name="button_open">Abrir     </string>
@@ -1278,8 +1282,8 @@ Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". 
   <string name="pref_survex_splay_summary">Incluir a base PARA à medida auxiliar nos arquivos Survex exportados</string>
   <string name="pref_survex_lrud_title">EDTC Survex</string>
   <string name="pref_survex_lrud_summary">Incluir EDTC nos arquivos Survex exportados</string>
-  <!-- UNUSED string name="pref_svg_program_title">SVG program</string -->
-  <!-- UNUSED string name="pref_svg_program_summary">Target SVG program</string -->
+  <string name="pref_svg_program_title">Programa SVG</string>
+  <string name="pref_svg_program_summary">Programa SVG alvo</string>
   <string name="pref_svg_grid_title">Grade</string>
   <string name="pref_svg_grid_summary">Incluir grade no arquivo SVG/PNG exportado</string>
   <string name="pref_svg_roundtrip_title">SVG circuito</string>
@@ -1612,8 +1616,8 @@ Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". 
   <string name="pref_station_size_summary">Tamanho do nome das bases</string>
   <string name="pref_zoom_controls_title">Controle zoom</string>
   <string name="pref_zoom_controls_summary">Controle do zoom em telas multitoque</string>
-  <!-- FIXME string name="pref_side_drag_title">Arrasto lateral</string -->
-  <!-- FIXME string name="pref_side_drag_summary">Habilitar o arrastamento lateral na área de desenho do croqui</string -->
+  <string name="pref_side_drag_title">Arrasto canto</string>
+  <string name="pref_side_drag_summary">Habilitar o arrasto pelo canto na janela de desenho</string>
   <string name="pref_unit_grid_title">Unidades croqui</string>
   <string name="pref_unit_grid_summary">Tamanho dos intervalos na grade do croqui</string>
   <string name="pref_unit_measure_title">Unidade régua</string>
@@ -1767,7 +1771,7 @@ Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". 
   <!-- UNUSED string name="menu_equate">ADD EQUATE</string -->
   <!-- UNUSED string name="menu_equates">EQUATES</string -->
   <string name="menu_open">ABRIR</string>
-  <!-- UNUSED string name="menu_save">SAVE</string -->
+  <string name="menu_save">GRAVAR</string>
   <!-- UNUSED string name="overwrite">sobreescrever</string -->
   <string name="title_export_settings">Configurações de importação/exportação</string>
   <string name="title_export">Exportar projeto como …</string>
@@ -1850,8 +1854,8 @@ Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". 
   <!-- UNUSED string name="clear">Limpar</string -->
   <string name="plan_proj">Planta-baixa</string>
   <string name="profile_proj">Perfil</string>
-  <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
-  <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Caverna %9$.1f</string>
+  <string name="dist_no_path" copyable="all">%1$s %2$s: D %3$.2f (%4$.2f %5$.2f %6$.2f) %7$.2f %8$.2f</string>
+  <string name="dist_path">%1$s %2$s: D %3$.2f (%4$.2f %5$.2f %6$.2f) %7$.2f %8$.2f Caminho %9$.2f</string>
   <!-- UNUSED string name="measure">medida</string -->
   <!-- UNUSED string name="style_stroke">Stroke</string -->
   <!-- UNUSED string name="style_stroke_fill">Fill &amp; Stroke</string -->
@@ -1875,8 +1879,8 @@ Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". 
   <string name="sketch_ok">Carregar croqui</string>
   <string name="ctitle">%1$s  Inclinação: %2$.0f  Azimute: %3$.0f</string>
   <string name="ctitle_surface_alpha">Opacidade superfície</string>
-  <!-- UNUSED string name="ctitle_sketches">Sketches</string -->
-  <!-- UNUSED string name="ctitle_legs">Legs visibility</string -->
+  <string name="ctitle_sketches">Sketches</string>
+  <string name="ctitle_legs">Visibilidade visadas</string>
   <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
   <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
   <!-- UNUSED string name="cbtn_laser">Laser</string -->
@@ -1892,9 +1896,9 @@ Com o Android 13+ o Topodroid deve por seu diretório dentro de "Android/data". 
   <string name="cave_east"> L: %1$.1f</string>
   <string name="cave_north"> N: %1$.1f</string>
   <string name="cave_vert"> Z: %1$.1f</string>
-  <string name="cave_distance"> Distância 3D: %1$.2f</string>
+  <string name="cave_distance"> Distância 3D: %1$.1f</string>
   <string name="horz_distance"> Distância horizontal 2D: %1$.1f</string>
-  <string name="cave_length"> Comprimento da caverna: %1$.2f %2$.1f %3$.1f</string>
+  <string name="cave_length"> Comprimento da caverna: %1$.1f D+ %2$.1f D- %3$.1f</string>
   <string name="cave_angle"> Azimute: %1$.0f  Inclinação: %2$.0f</string>
   <string name="east">L</string>
   <string name="north">N</string>
