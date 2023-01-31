@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 #
-# update translation string file to english file
-# usage: strings_update.pl <en-strings_file> <xx-strings_file>
+# prepares translation string file according to english file crating an updated version
+# usage: strings_prepare.pl <en-strings_file> <xx-strings_file> <updated_xx_strings_file_output>
 #
 # --------------------------------------------------------
 #  Copyright This software is distributed under GPL-3.0 or later
@@ -18,17 +18,11 @@ use builtin qw(
 );
 no warnings "experimental::builtin";
 
-use File::Basename;
 use XML::LibXML;
 
 use constant {
   PREFIX => '    ',
 };
-
-my $en_filename = $ARGV[0];
-my $xx_filename = $ARGV[1];
-my %xx_names;
-my %en_names;
 
 # For debbuging
 use Data::Dumper;
@@ -204,6 +198,21 @@ sub get_element_without_limiters($element) {
   return $content;
 }
 
+if (@ARGV != 3) {
+  die "\nUsage:
+  $0 EN_ORIGINAL_FILE XX_TRANSLATED_FILE_TO_BE_UPDATED NEW_XX_FILE\n\n";
+}
+
+my $en_filename = $ARGV[0];
+my $xx_filename = $ARGV[1];
+my $new_filename = $ARGV[2];
+my %xx_names;
+my %en_names;
+
+if (! -e $xx_filename) {
+  die "\nError:
+  XX_TRANSLATED_FILE_TO_BE_UPDATED doesn't exist.\n\n";
+}
 my $xx_dom = eval {
     XML::LibXML->load_xml(location => $xx_filename, {no_blanks => 1});
 };
@@ -217,6 +226,10 @@ analyze_xml_file($xx_filename, $xx_dom, \%xx_names);
 
 # print Dumper(\%xx_names);
 
+if (! -e $en_filename) {
+  die "\nError:
+  EN_ORIGINAL_FILE doesn't exist.\n\n";
+}
 my $en_dom = eval {
     XML::LibXML->load_xml(location => $en_filename, {no_blanks => 1});
 };
@@ -273,9 +286,4 @@ for my $element ($en_dom->documentElement()->childNodes()) {
   }
 }
 
-my ($filename, $path, $suffix) = fileparse($xx_filename, '.xml');
-my $new_file = $path . $filename. '-NEW'. $suffix;
-if ( -e $new_file ) {
-  die "'$new_file' already exists. Won't overwrite existing file.\n";
-}
-$en_dom->toFile($new_file, 2);
+$en_dom->toFile($new_filename, 2);
