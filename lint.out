@@ -93,7 +93,7 @@ res/values/strings.xml:784: Error: "button_gps_start" is not translated in "pt" 
     <string name="button_gps_start" >GPS</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:802: Error: "button_ok" is not translated in "pt" (Portuguese) [MissingTranslation]
-    <string name="button_ok"  copyable="true">OK</string>
+    <string name="button_ok"  copyable="all">OK</string>
             ~~~~~~~~~~~~~~~~
 res/values/strings.xml:996: Error: "help_geopoint_app" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
     <string name="help_geopoint_app">External GNSS apps</string>
@@ -194,61 +194,61 @@ res/values/strings.xml:1752: Error: "pref_side_drag_title" is not translated in 
 res/values/strings.xml:1753: Error: "pref_side_drag_summary" is not translated in "pt" (Portuguese) [MissingTranslation]
   <string name="pref_side_drag_summary">Enable corner-drag on the sketch window</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1924: Error: "equate_no_stations" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:1922: Error: "equate_no_stations" is not translated in "fr" (French) [MissingTranslation]
     <string name="equate_no_stations">Too few stations</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1931: Error: "menu_save" is not translated in "pt" (Portuguese) [MissingTranslation]
+res/values/strings.xml:1929: Error: "menu_save" is not translated in "pt" (Portuguese) [MissingTranslation]
     <string name="menu_save">SAVE</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1994: Error: "info_origin" is not translated in "cn" or "fr" (French) [MissingTranslation]
+res/values/strings.xml:1992: Error: "info_origin" is not translated in "cn" or "fr" (French) [MissingTranslation]
     <string name="info_origin">Origin</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1995: Error: "info_lonlat" is not translated in "cn" or "fr" (French) [MissingTranslation]
+res/values/strings.xml:1993: Error: "info_lonlat" is not translated in "cn" or "fr" (French) [MissingTranslation]
     <string name="info_lonlat">coords.</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1996: Error: "info_radii" is not translated in "cn" or "fr" (French) [MissingTranslation]
+res/values/strings.xml:1994: Error: "info_radii" is not translated in "cn" or "fr" (French) [MissingTranslation]
     <string name="info_radii">radii</string>
             ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2009: Error: "info_origin_value" is not translated in "fr" (French) [MissingTranslation]
-    <string name="info_origin_value">x %1$.0f y %2$.0f z %3$.0f</string>
+res/values/strings.xml:2007: Error: "info_origin_value" is not translated in "fr" (French) [MissingTranslation]
+    <string name="info_origin_value" copyable="all">x %1$.0f y %2$.0f z %3$.0f</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2010: Error: "info_origin_none" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:2008: Error: "info_origin_none" is not translated in "fr" (French) [MissingTranslation]
     <string name="info_origin_none">undefined</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2011: Error: "info_lonlat_geovalue" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:2009: Error: "info_lonlat_geovalue" is not translated in "fr" (French) [MissingTranslation]
     <string name="info_lonlat_geovalue">lon %1$.7f lat %2$.7f</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2012: Error: "info_lonlat_prjvalue" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:2010: Error: "info_lonlat_prjvalue" is not translated in "fr" (French) [MissingTranslation]
     <string name="info_lonlat_prjvalue">lon %1$.1f lat %2$.1f</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2013: Error: "info_radii_value" is not translated in "fr" (French) [MissingTranslation]
-    <string name="info_radii_value">EW %1$.1f NS %2$.1f</string>
+res/values/strings.xml:2011: Error: "info_radii_value" is not translated in "fr" (French) [MissingTranslation]
+    <string name="info_radii_value" copyable="all">EW %1$.1f NS %2$.1f</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2035: Error: "dist_path" is not translated in "cn" or "fr" (French) [MissingTranslation]
+res/values/strings.xml:2033: Error: "dist_path" is not translated in "cn" or "fr" (French) [MissingTranslation]
     <string name="dist_path">%1$s %2$s: D %3$.2f (%4$.2f %5$.2f %6$.2f) %7$.2f %8$.2f Path %9$.2f</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:2056: Error: "texture" is not translated in "cn" [MissingTranslation]
-    <string name="texture" copyable="true">DTM</string>
+res/values/strings.xml:2054: Error: "texture" is not translated in "cn" [MissingTranslation]
+    <string name="texture" copyable="all">DTM</string>
             ~~~~~~~~~~~~~~
-res/values/strings.xml:2063: Error: "ctitle_sketches" is not translated in "pt" (Portuguese) [MissingTranslation]
+res/values/strings.xml:2061: Error: "ctitle_sketches" is not translated in "pt" (Portuguese) [MissingTranslation]
     <string name="ctitle_sketches">Sketches</string>
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2064: Error: "ctitle_legs" is not translated in "pt" (Portuguese) [MissingTranslation]
+res/values/strings.xml:2062: Error: "ctitle_legs" is not translated in "pt" (Portuguese) [MissingTranslation]
     <string name="ctitle_legs">Legs visibility</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2087: Error: "east" is not translated in "fr" (French) [MissingTranslation]
-  <string name="east" copyable="true">E</string>
+res/values/strings.xml:2085: Error: "east" is not translated in "fr" (French) [MissingTranslation]
+  <string name="east" copyable="all">E</string>
           ~~~~~~~~~~~
-res/values/strings.xml:2088: Error: "north" is not translated in "fr" (French) [MissingTranslation]
-  <string name="north" copyable="true">N</string>
+res/values/strings.xml:2086: Error: "north" is not translated in "fr" (French) [MissingTranslation]
+  <string name="north" copyable="all">N</string>
           ~~~~~~~~~~~~
-res/values/strings.xml:2089: Error: "west" is not translated in "fr" (French) [MissingTranslation]
-  <string name="west" copyable="true">W</string>
+res/values/strings.xml:2087: Error: "west" is not translated in "fr" (French) [MissingTranslation]
+  <string name="west" copyable="all">W</string>
           ~~~~~~~~~~~
-res/values/strings.xml:2090: Error: "south" is not translated in "fr" (French) [MissingTranslation]
-  <string name="south" copyable="true">S</string>
+res/values/strings.xml:2088: Error: "south" is not translated in "fr" (French) [MissingTranslation]
+  <string name="south" copyable="all">S</string>
           ~~~~~~~~~~~~
-res/values/strings.xml:2200: Error: "cpref_grid_extent_summary" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:2198: Error: "cpref_grid_extent_summary" is not translated in "fr" (French) [MissingTranslation]
     <string name="cpref_grid_extent_summary">Grid extent around the survey plan-view</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values-pt/strings.xml:23: Error: "r_checkboxes" is translated here but not found in default locale [ExtraTranslation]

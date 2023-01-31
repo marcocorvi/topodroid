@@ -1007,14 +1007,19 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.resetFixedPaint( mApp, BrushManager.fixedShotPaint );
   }
   
-  // used by H-Sections for the North line
-  private void addFixedSpecial( float x1, float y1, float x2, float y2 ) // float xoff, float yoff )
+  /** add an angle for the north declination
+   * @param x1    X coord of first point (0)
+   * @param y1    Y coord of first point
+   * @param x2    X coord of second point (0)
+   * @param y2    Y coord of second point
+   * @param decl  declination [degrees]
+   * @note used by H-Sections for the North line
+   */
+  private void addFixedSpecial( float x1, float y1, float x2, float y2, float decl ) // float xoff, float yoff )
   {
-    float decl = mApp_mData.getSurveyDeclination( mSid ); // declination only displayed
-    // TDLog.v("Declination " + decl );
     DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
     dpath.setPathPaint( BrushManager.highlightPaint );
-    DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, decl ); // xoff, yoff ); // LEG PATH
+    DrawingUtil.makeDrawingPathWithAngle( dpath, x1, y1, x2, y2, decl ); // xoff, yoff ); // LEG PATH
     mDrawingSurface.setNorthPath( dpath );
     // mLastLinePath = null;
   }
@@ -3072,7 +3077,9 @@ public class DrawingWindow extends ItemDrawer
 
     mDrawingSurface.newReferences( DrawingSurface.DRAWING_SECTION, (int)mType );
     // TDLog.v( "section list " + list.size() + " tt " + tt + " azimuth " + mAzimuth + " clino " + mClino );
-    mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)mType, 0 );
+    // 2023-01-31 use survey declination for PLOT_H_SECTION
+    float decl = ( mType == PlotType.PLOT_H_SECTION )? mApp_mData.getSurveyDeclination( mSid ) : 0;
+    mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)mType, decl );
     float xfrom=0;
     float yfrom=0;
     float zfrom=0;
@@ -3105,20 +3112,15 @@ public class DrawingWindow extends ItemDrawer
     if ( PlotType.isLegSection( mType ) ) {
       if ( mType == PlotType.PLOT_H_SECTION ) {
         if ( Math.abs( mClino ) > TDSetting.mHThreshold ) { // north arrow == (1,0,0), 5 m long in the CS plane
-          // FIXME_VECTOR
-          // xn =  X1;
-          // yn = -X2;
+          // 2023-01-31 north is shown in scalebar
           xn =  V1.x;
           yn = -V2.x; 
-
-          float d = 5 / (float)Math.sqrt(xn*xn + yn*yn);
+          float d = 2 / (float)Math.sqrt(xn*xn + yn*yn);
           if ( mClino > 0 ) xn = -xn;
-          // FIXME_NORTH addFixedSpecial( xn*d, yn*d, 0, 0, 0, 0 ); 
-          // addFixedSpecial( 0, -d, 0, 0, 0, 0 ); // NORTH is upward
           // if ( mLandscape ) {
-          //   addFixedSpecial( -d, 0, 0, 0 ); // NORTH is leftward
+          //   addFixedSpecial( -d, 0, 0, 0, decl);
           // } else {
-            addFixedSpecial( 0, -d, 0, 0 ); // NORTH is upward
+            addFixedSpecial( 0, -d, 0, 0, decl ); 
           // }
         }
       }

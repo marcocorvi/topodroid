@@ -136,9 +136,10 @@ public class DrawingUtil
    * @param xx2     second point X coord [world]
    * @param yy2     second point Y coord [world]
    * @param decl    angle (declination) [degrees]
+   * @note used only for H-xsection North line
    */
   static
-  void makeDrawingPath( DrawingPath dpath, float xx1, float yy1, float xx2, float yy2, float decl )
+  void makeDrawingPathWithAngle( DrawingPath dpath, float xx1, float yy1, float xx2, float yy2, float decl )
   {
     float x1 = toSceneX( xx1, yy1 );
     float y1 = toSceneY( xx1, yy1 );
@@ -146,17 +147,17 @@ public class DrawingUtil
     float y2 = toSceneY( xx2, yy2 );
     float c = TDMath.cosd( decl );
     float s = TDMath.sind( decl );
-    float xx3 = xx2 - xx1;
-    float yy3 = yy2 - yy1;
-    float xx4 = xx1 + xx3 * c + yy3 * s;
-    float yy4 = yy1 - xx3 * s + yy3 * c;
+    float xx3 = (xx1 - xx2)*2;
+    float yy3 = (yy1 - yy2)*2;
+    float xx4 = xx2 + xx3 * c + yy3 * s;
+    float yy4 = yy2 - xx3 * s + yy3 * c;
     float x4 = toSceneX( xx4, yy4 );
     float y4 = toSceneY( xx4, yy4 );
     TDLog.v("North P1 " + x1 + " " + y1 + " P2 " + x2 + " " + y2 + " P3 " + x4 + " " + y4 );
     
     dpath.setEndPoints( x1, y1, x2, y2 ); // this sets the midpoint only
     dpath.updateBounds( x4, y4 );
-    dpath.makePath( x1, y1, x2, y2, x4, y4 ); // this sets the midpoint only
+    dpath.makePath( x2, y2, x1, y1, x4, y4 ); // this sets the midpoint only
   }
 
   /** make a straight path
