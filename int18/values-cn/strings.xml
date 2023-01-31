@@ -8,7 +8,7 @@
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->
 
-    <!-- DO NOT TRANSLATE string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string -->
+    <!-- DONO TRANSLATE string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string -->
 
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
@@ -52,7 +52,7 @@
 如果您在DistoX连接上遇到问题，请尝试设置不安全的套接字.\n\n
 其他设置与素描窗口中的显示有关(图标大小、标注大小、线宽等); 你可以根据自己的需要设置.\n
     </string>
-    <!-- DO NOT TRANSLATE string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string -->
+    <!-- DONO TRANSLATE string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string -->
 
     <string name="POINT">点</string>
     <string name="LINE">线</string>
@@ -1287,7 +1287,6 @@
   <string name="pref_cat_import_export">输入输出</string>
   <string name="pref_cat_exportimport">输入</string>
 
-<!-- DO NOT TRANSLATE THESE -->
   <!-- NO string name="pref_cat_exportsvx">Survex</string -->
   <!-- NO string name="pref_cat_exportth" >Therion</string -->
   <!-- NO string name="pref_cat_exportdat">Compass</string -->
@@ -1769,7 +1768,6 @@
   <!-- UNUSED string name="pref_walls_xstep_title">步骤</string -->
   <!-- UNUSED string name="pref_walls_xstep_summary">沿着洞壁的点的分离 [m]</string -->
 
-<!-- DO NOT TRANSLATE THESE -->
   <!-- NO string name="pref_algo_min_alpha_title">Min-algo alpha</string -->
   <!-- NO string name="pref_algo_min_alpha_summary">Min-algo adjustment factor (in [0,1])</string -->
   <!-- NO string name="pref_algo_min_beta_title">Min-algo beta</string -->
@@ -1779,7 +1777,6 @@
   <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
 
-<!-- DO NOT TRANSLATE THESE -->
   <!-- NO string name="pref_log_stream_summary" translatable="false">Log output stream</string -->
   <!-- NO string name="pref_log_stream_title" translatable="false">Log stream</string -->
   <!-- NO string name="pref_log_append" translatable="false">append logs</string -->
@@ -2198,14 +2195,13 @@
 
     <string name="cpref_powercrust_delta_title">动力外壳细节</string>
     <string name="cpref_powercrust_delta_summary">排除与附近相差太大的侧射线 [0.1]</string>
-<!-- UNUSED
-    <string name="cpref_convex_hull_title">Convex hull</string>
-    <string name="cpref_convex_hull_summary">Convex hull walls</string>
-    <string name="cpref_delaunay_title">三角剖分</string>
-    <string name="cpref_delaunay_summary">三角剖分洞壁</string>
-    <string name="cpref_hull_title">Hull</string>
-    <string name="cpref_hull_summary">Hull walls</string>
--->
+
+    <!-- NO string name="cpref_convex_hull_title">Convex hull</string -->
+    <!-- NO string name="cpref_convex_hull_summary">Convex hull walls</string -->
+    <!-- NO string name="cpref_delaunay_title">三角剖分</string -->
+    <!-- NO string name="cpref_delaunay_summary">三角剖分洞壁</string -->
+    <!-- NO string name="cpref_hull_title">Hull</string -->
+    <!-- NO string name="cpref_hull_summary">Hull walls</string -->
 
     <!-- UNUSED string name="TopoGLPerms">Permissions</string -->
     <!-- UNUSED string name="cperms_mandatory">Cave3D 的运行离不开:</string -->

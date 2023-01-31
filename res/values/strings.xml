@@ -18,7 +18,7 @@
     <!-- UNUSED string name="desc_points">Points</string -->
     <!-- UNUSED string name="desc_lines">Lines</string -->
     <!-- UNUSED string name="desc_areas">Areas</string -->
-    <string name="desc_menu" copyable="it">Menu</string>
+    <string name="desc_menu" copyable="fr it">Menu</string>
 
   <string name="r_title">Android-13+ WARNING</string>
   <!-- UNUSED string name="r_dialog_1">
@@ -34,8 +34,8 @@ With Android-13 TopoDroid must store surveys in the app private folder under "An
   <string name="r_quit">QUIT</string>
 
     <string name="app_name" translatable="false">TopoDroid-X</string>
-    <string name="tdm_title" copyable="hu ru">TopoDroid Manager</string>
-    <string name="tdm_config_project" copyable="ru">project.tdconfig</string>
+    <string name="tdm_title" copyable="fr hu ru">TopoDroid Manager</string>
+    <string name="tdm_config_project" copyable="fr ru">project.tdconfig</string>
     <string name="double_back">Click BACK again to exit</string>
 
     <string name="new_survey_label">New survey</string>
@@ -64,7 +64,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     </string>
     <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string>
 
-    <string name="POINT">POINT</string>
+    <string name="POINT" copyable="fr">POINT</string>
     <string name="LINE">LINE</string>
     <string name="AREA" copyable="it">AREA</string>
     <string name="HELP">HELP</string>
@@ -89,7 +89,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="thp_user">user</string>
     <string name="thp_label">label</string>
     <string name="thp_section">section</string>
-    <string name="thp_station">station</string>
+    <string name="thp_station" copyable="fr">station</string>
     <!-- UNUSED string name="thp_danger">danger</string -->
     <string name="thl_user">user</string>
     <string name="thl_wall">wall</string>
@@ -267,7 +267,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="datamode_diving">Diving data-mode</string>
     <string name="illegal_data_value">Illegal data value</string>
 
-    <string name="photo_title">Photo</string>
+    <string name="photo_title" copyable="fr">Photo</string>
     <string name="photo_text">Enter photo comment</string>
     <string name="photo_failed">Failed photo</string>
     <string name="photo_max_captures">Reached maximum capture limit</string>
@@ -343,7 +343,7 @@ There are other settings for the presentation of the sketches (icon size, label 
 
     <!-- UNUSED string name="scale">scale</string -->
     <!-- UNUSED string name="reversed">reversed</string -->
-    <string name="options">options</string>
+    <string name="options" copyable="fr">options</string>
     <string name="outline">outline</string>
     <string name="out">out</string>
     <string name="in">in</string>
@@ -361,7 +361,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="cell_size">Cell size [m]</string>
 
     <string name="legs">Legs</string>
-    <string name="stations">Station</string>
+    <string name="stations" copyable="fr">Station</string>
     <string name="splays" copyable="it pt">Splays</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
@@ -460,7 +460,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="menu_sensor" copyable="pt">SENSOR</string>
     <!-- UNUSED string name="menu_scan">SCAN</string -->
     <!-- UNUSED string name="menu_scan_ble">SCAN BTLE</string -->
-    <!-- UNUSED string name="menu_station">STATIONS</string -->
+    <!-- UNUSED string name="menu_station" copyable="fr">STATIONS</string -->
     <string name="menu_stats">STATS</string>
     <string name="menu_survey">SURVEY INFO</string>
     <!-- UNUSED string name="menu_sync">SYNC</string -->
@@ -531,7 +531,7 @@ There are other settings for the presentation of the sketches (icon size, label 
 
     <!-- UNUSED string name="not_implemented">Not implemented yet</string -->
     <string name="null_bitmap">Cannot create image [OOM error]</string>
-    <string name="photo">photo</string>
+    <string name="photo" copyable="fr">photo</string>
     <string name="photo_camera">Old camera</string>
     <string name="photo_comment_prompt">Enter the photo comment</string>
     <string name="photo_azimuth_clino">Azimuth: %1$.1f Clino %2$.1f</string>
@@ -583,7 +583,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="sensor_humidity">humidity</string -->
     <string name="sensor_light">light</string>
     <string name="sensor_magnetic_field">magnetic field</string>
-    <!-- UNUSED string name="sensor_orientation">orientation</string -->
+    <!-- UNUSED string name="sensor_orientation" copyable="fr">orientation</string -->
     <string name="sensor_pressure">pressure</string>
     <string name="sensor_temperature">temperature</string>
     <string name="sensor_extern">external</string>
@@ -610,7 +610,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="shot_reverse">reverse</string>
     <string name="shot_to">to</string>
 
-    <string name="station">station</string>
+    <string name="station" copyable="fr">station</string>
     <string name="station_ask">Insert station in sketch?</string>
     <string name="station_del">Remove station from sketch?</string>
     <string name="station_set">Continue survey from here?</string>
@@ -706,7 +706,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="stat_azimuth">Profile projection azimuth: %1$.1f</string>
     <!-- UNUSED string name="stat_shot">Shots %1$d, Duplicate %2$d, Surface %3$d</string -->
     <string name="stat_splay">Splays %1$d # %2$d</string>
-    <string name="stat_station">Stations %1$d # %2$d</string>
+    <string name="stat_station" copyable="fr">Stations %1$d # %2$d</string>
     <string name="stat_leg_sigma">Leg sigma %1$.1f cm</string>
     <string name="stat_dangling">Dangling shots %1$d %2$.1f %3$s</string>
     <string name="stat_surface">Surface shots %1$d # %2$d %3$.1f %4$s</string>
@@ -718,7 +718,7 @@ There are other settings for the presentation of the sketches (icon size, label 
 
     <string name="survey_stat_duplicate">Duplicate shots %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Splays %1$d</string>
-    <string name="survey_stat_station">Stations %1$d</string>
+    <string name="survey_stat_station" copyable="fr">Stations %1$d</string>
     <string name="survey_stat_surface">Surface shots %1$d %2$.1f %3$s</string>
 
     <string name="hide_blank">Blank shots</string>
@@ -774,7 +774,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="button_current"   >Active</string>
     <string name="button_delete"    >Delete</string>
     <string name="button_duplicate" >Duplicate</string>
-    <string name="button_surface"   >Surface</string>
+    <string name="button_surface"    copyable="fr">Surface</string>
     <string name="button_no_extend" >No extend</string>
     <string name="button_eval"      >Raw</string>
     <string name="button_evalg" copyable="hu">G</string>
@@ -786,7 +786,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="button_help" translatable="false">\?</string>
     <string name="button_manual"    >User manual</string>
     <!-- UNUSED string name="button_measure"   >Measure   </string -->
-    <!-- UNUSED string name="button_photo"   >Photo</string -->
+    <!-- UNUSED string name="button_photo"  copyable="fr">Photo</string -->
     <!-- UNUSED string name="button_sensor"  >Sensors</string -->
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
@@ -853,7 +853,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="mode_leg">Legs</string>
     <string name="mode_splay">Splays</string>
     <string name="mode_latest">Latest splays</string>
-    <string name="mode_station">Stations</string>
+    <string name="mode_station" copyable="fr">Stations</string>
     <string name="mode_grid">Grid</string>
     <string name="mode_fixed">Fix refs</string>
     <string name="mode_outline">Outline only</string>
@@ -908,11 +908,11 @@ There are other settings for the presentation of the sketches (icon size, label 
 
     <string name="hint_cellsize">cell size</string>
     <string name="hint_cwd">work folder</string>
-    <string name="hint_distance">distance</string>
+    <string name="hint_distance" copyable="fr">distance</string>
     <string name="hint_length">length</string>
     <string name="hint_line">line</string>
     <string name="hint_origin">origin station</string>
-    <string name="hint_point">point</string>
+    <string name="hint_point" copyable="fr">point</string>
     <string name="hint_textsize">text size</string>
     <string name="hint_units">symbol units</string>
     <string name="hint_value">value</string>
@@ -921,7 +921,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="hint_label">label</string>
     <string name="hint_comment">comment</string>
     <string name="hint_text">text</string>
-    <string name="hint_options">options</string>
+    <string name="hint_options" copyable="fr">options</string>
     <string name="hint_name">name</string>
     <string name="hint_from">from</string>
     <string name="hint_to">to</string>
@@ -932,16 +932,16 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="hint_month">month</string>
     <string name="hint_day">day</string>
     <string name="hint_hour">hour</string>
-    <string name="hint_minute">minute</string>
+    <string name="hint_minute" copyable="fr">minute</string>
     <string name="hint_second">second</string>
     <!-- UNUSED string name="hint_latitude">latitude</string -->
     <!-- UNUSED string name="hint_longitude">longitude</string -->
     <!-- UNUSED string name="hint_altitude">altitude</string -->
     <!-- UNUSED string name="hint_altitude_asl">altitude (asl)</string -->
     <!-- UNUSED string name="hint_declination">declination</string -->
-    <string name="hint_station">station</string>
+    <string name="hint_station" copyable="fr">station</string>
 
-    <string name="orientation">orientation</string>
+    <string name="orientation" copyable="fr">orientation</string>
     <string name="contents">contents</string>
     <string name="error_distribution">error distribution</string>
     <string name="angle_distribution">angular distribution</string>
@@ -954,7 +954,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="current_station_format" copyable="es">E %1$.1f N %2$.1f H %3$.1f</string>
 
     <string name="man_preface">Preface</string>
-    <string name="man_intro">1. Introduction</string>
+    <string name="man_intro" copyable="fr">1. Introduction</string>
     <string name="man_main">2. Main window</string>
     <string name="man_device">3. Device window</string>
     <string name="man_calib">4. Calibration window</string>
@@ -970,7 +970,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="man_project">14. Cave projects</string>
     <string name="man_threed">15. 3D viewer</string>
     <string name="man_index">16. Index</string>
-    <string name="man_website">* Website</string>
+    <string name="man_website" copyable="all">* Website</string>
 
     <string name="help_help">This help</string>
     <!-- UNUSED string name="help_manual">User manual</string -->
@@ -1001,7 +1001,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="help_prefs">Preferences</string>
     <!-- UNUSED string name="help_log">Logging preferences</string -->
     <!-- UNUSED string name="help_join_survey">Joint surveying</string -->
-    <string name="help_info_topodroid">TopoDroid info</string>
+    <string name="help_info_topodroid" copyable="fr">TopoDroid info</string>
     <string name="help_download">Data download</string>
     <!-- UNUSED string name="help_splay">Assign stations to splays automatically</string -->
     <string name="help_display">Display mode</string>
@@ -1019,7 +1019,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="help_survey_info">Survey information</string>
     <string name="help_undelete">Recover deleted items</string>
     <!-- UPDATES string name="help_updates">Check for app version updates</string -->
-    <string name="help_photo">Photos</string>
+    <string name="help_photo" copyable="fr">Photos</string>
     <string name="help_sensor">Measurements</string>
     <string name="help_3d">3D view (Cave3D)</string>
     <!-- UNUSED string name="help_move">Move/zoom mode</string -->
@@ -1103,7 +1103,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="export_config">Config commands</string>
     <string name="export_csv_rawdata">Raw data</string>
     <string name="export_dxf_blocks">Splay endpoints</string>
-    <string name="export_dxf_version">Version</string>
+    <string name="export_dxf_version" copyable="fr">Version</string>
     <string name="export_georeference">Georeference</string>
     <string name="export_grid">Grid</string>
     <string name="export_layers">Scrap layers</string>
@@ -1120,8 +1120,8 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="export_spacing_th">Point spacing</string>
     <string name="export_splays">Splays</string>
     <string name="export_splays_named">Named splays</string>
-    <string name="export_stations">Stations</string>
-    <string name="export_surface">Surface</string>
+    <string name="export_stations" copyable="fr">Stations</string>
+    <string name="export_surface" copyable="fr">Surface</string>
     <string name="export_swap_lr">Swap L/R</string>
     <string name="export_trox">Trox format</string>
     <string name="export_walls">Walls</string>
@@ -1196,8 +1196,8 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="title_packet_dialog">Packets</string>
     <string name="title_photo">More shot edit</string>
     <string name="title_photo_comment">Photo info</string>
-    <string name="title_photo_list">Photos</string>
-    <string name="title_photo_view">Photo</string>
+    <string name="title_photo_list" copyable="fr">Photos</string>
+    <string name="title_photo_view" copyable="fr">Photo</string>
     <string name="title_plot_save">Export sketch</string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
     <!-- UNUSED string name="title_plot_reload">Reload sketch</string -->
@@ -1363,7 +1363,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_with_levels_summary">Canvas layers</string>
   <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->
   <!-- UNUSED string name="pref_with_rename_summary">Enable "survey renaming" menu</string -->
-  <string name="pref_palettes_title">Palettes</string>
+  <string name="pref_palettes_title" copyable="fr">Palettes</string>
   <string name="pref_palettes_summary">Enable additional palettes</string>
   <string name="pref_packet_logger_title">Packets log</string>
   <string name="pref_packet_logger_summary">Enable packets logging</string>
@@ -1443,7 +1443,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_csv_eol_title">CSV eol</string>
   <string name="pref_csv_eol_summary">CSV records separator</string>
 
-  <string name="pref_sock_type_title" copyable="it">Socket</string>
+  <string name="pref_sock_type_title" copyable="fr it">Socket</string>
   <string name="pref_sock_type_summary">Bluetooth socket type</string>
   <!-- UNUSED string name="pref_device_type_title">Disto type</string -->
   <!-- UNUSED string name="pref_device_type_summary">Model of the DistoX</string -->
@@ -1704,7 +1704,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_th2_scale_summary">Scale of th2/xvi export</string>
   <string name="pref_th2_xvi_title">xvi image</string>
   <string name="pref_th2_xvi_summary">Insert xvi image in th2</string>
-  <string name="pref_autoStations_title">Stations</string>
+  <string name="pref_autoStations_title" copyable="fr">Stations</string>
   <string name="pref_autoStations_summary">Add stations automatically to th2/PNG files</string>
   <string name="pref_auto_xsections_title">Auto X-sections</string>
   <string name="pref_auto_xsections_summary">Add x-sections automatically to save/export [csx/svg/dxf/xvi]</string>
@@ -1822,7 +1822,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_log_num" translatable="false">Data reduction</string>
   <string name="pref_log_fixed" translatable="false">Fixed points</string>
   <string name="pref_log_loc" translatable="false">Geolocation</string>
-  <string name="pref_log_photo" translatable="false">Photo</string>
+  <string name="pref_log_photo" translatable="false" copyable="fr">Photo</string>
   <string name="pref_log_sensor" translatable="false">Sensors</string>
   <string name="pref_log_plot" translatable="false">Sketches</string>
   <string name="pref_log_bezier" translatable="false">Bezier curves</string>
@@ -1850,7 +1850,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="perms_optional">Some functions are disabled without these permissions:</string>
     <string name="perm_location">\nLocation</string>
     <string name="perm_camera">\nCamera</string>
-    <string name="perm_microphone">\nMicrophone</string>
+    <string name="perm_microphone" copyable="fr">\nMicrophone</string>
 
     <string name="welcome_title" translatable="false">TopoDroid %1$s</string>
     <string name="welcome_text">
@@ -1944,7 +1944,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="export_failed">Failed export</string>
 
     <string name="image_diagram">Direction diagram</string>
-    <string name="image_photo">Photo</string>
+    <string name="image_photo" copyable="fr">Photo</string>
 
     <!-- 3D VIEWER strings -->
     <!-- UNUSED string name="capp_name" translatable="false">Cave3D</string -->
@@ -1982,13 +1982,13 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="info_view">Viewpoint</string>
     <string name="info_survey">Surveys</string>
     <string name="info_shot">Shots</string>
-    <string name="info_station">Stations</string>
+    <string name="info_station" copyable="fr">Stations</string>
     <string name="info_length">Length</string>
     <string name="info_depth">Depth</string>
-    <string name="info_volume" copyable="it pt">Volume</string>
+    <string name="info_volume" copyable="fr it pt">Volume</string>
     <string name="info_east">East</string>
     <string name="info_north">North</string>
-    <string name="info_z" copyable="pt">Altitude</string>
+    <string name="info_z" copyable="fr pt">Altitude</string>
     <string name="info_origin">Origin</string>
     <string name="info_lonlat">coords.</string>
     <string name="info_radii">radii</string>
@@ -2000,7 +2000,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="info_length_value" copyable="all">%1$.1f m</string>
     <string name="info_depth_value" copyable="all">%1$.1f m</string>
     <!-- TRYME string name="info_volume_value_tryme">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
-    <string name="info_volume_value" copyable="it pt">P. %1$.0f m³ C. %2$.0f m³</string>
+    <string name="info_volume_value" copyable="all">P. %1$.0f m³ C. %2$.0f m³</string>
     <string name="info_east_value" copyable="all">W %1$.1f E %2$.1f</string>
     <string name="info_north_value" copyable="all">S %1$.1f N %2$.1f</string>
     <string name="info_z_value" copyable="all">%1$.1f  %2$.1f</string>
@@ -2010,7 +2010,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="info_lonlat_prjvalue">lon %1$.1f lat %2$.1f</string>
     <string name="info_radii_value" copyable="all">EW %1$.1f NS %2$.1f</string>
 
-    <string name="legs_surface">Surface</string>
+    <string name="legs_surface" copyable="fr">Surface</string>
     <string name="legs_duplicate">Duplicate</string>
     <string name="legs_commented">Commented</string>
 
@@ -2238,7 +2238,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
 
     <string name="help_open_3d">Open 3D file</string>
     <string name="help_export_3d">Export 3D file</string>
-    <string name="help_info_3d">3D info</string>
+    <string name="help_info_3d" copyable="fr">3D info</string>
     <string name="help_ico_3d">3D leg distribution</string>
     <string name="help_rose_3d">Rose diagram</string>
     <string name="help_reset_3d">Reset 3D view</string>
@@ -2250,11 +2250,11 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="help_fractal" translatable="false">Fractal analysis</string -->
 
     <string name="help_light_3d">Pan and light</string>
-    <string name="help_projection_3d">3D projection</string>
-    <string name="help_stations_3d">Stations</string>
+    <string name="help_projection_3d" copyable="fr">3D projection</string>
+    <string name="help_stations_3d" copyable="fr">Stations</string>
     <string name="help_splays_3d" copyable="all">Splays</string>
     <string name="help_walls_3d">Walls</string>
-    <string name="help_surface_3d">Terrain</string>
+    <string name="help_surface_3d" copyable="fr">Terrain</string>
     <string name="help_color_3d">Colors</string>
     <string name="help_frame_3d">Frame</string>
 

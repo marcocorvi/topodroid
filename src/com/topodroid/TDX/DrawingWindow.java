@@ -3116,7 +3116,9 @@ public class DrawingWindow extends ItemDrawer
           xn =  V1.x;
           yn = -V2.x; 
           float d = 2 / (float)Math.sqrt(xn*xn + yn*yn);
-          if ( mClino > 0 ) xn = -xn;
+          // if ( mClino > 0 ) xn = -xn;
+          if ( mClino > 0 ) decl = -decl;
+          TDLog.v("H-SECTION clino " + mClino + ": " + xn + " " + yn + " decl " + decl );
           // if ( mLandscape ) {
           //   addFixedSpecial( -d, 0, 0, 0, decl);
           // } else {
