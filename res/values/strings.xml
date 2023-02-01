@@ -346,7 +346,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="options" copyable="fr">options</string>
     <string name="outline">outline</string>
     <string name="out">out</string>
-    <string name="in">in</string>
+    <string name="in" copyable="it">in</string>
     <!-- UNUSED string name="none">none</string -->
     <!-- UNUSED string name="barrier_add">Hide following shots</string -->
     <string name="hide_from">Hide from</string>
@@ -415,8 +415,8 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="no_db_viewer">DB_viewer app not found</string -->
     <string name="no_undelete">No item to recover</string>
     <string name="no_undelete_paste">No item to recover/paste</string>
-    <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
-    <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
+    <string name="format_measure_plan" copyable="all">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
+    <string name="format_measure_profile" copyable="all">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
     <string name="format_closure" translatable="false">%1$s-%2$s: [%3$d] %4$.1f/%5$.1f (%6$.1f %7$.1f) %8$.1f %% (%9$.1f\u00b0)</string>
 
     <string name="menu_3d" copyable="all">3D</string>
@@ -497,7 +497,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="popup_curve_pt">Smoothen segment</string>
     <string name="popup_remove_pt">Remove point</string>
     <string name="popup_append_line">Attach to line</string>
-    <string name="popup_multiselect">Multiselection</string>
+    <string name="popup_multiselect" copyable="fr">Multiselection</string>
     <string name="popup_finish">Finish</string>
     <string name="popup_delete">Delete</string>
     <string name="popup_decimate">Decimate</string>
@@ -519,7 +519,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="popup_cont_start">Start point</string>
     <string name="popup_cont_end">End point</string>
     <string name="popup_cont_both">Both points</string>
-    <string name="popup_cont_continue">Continue</string>
+    <string name="popup_cont_continue" copyable="fr">Continue</string>
 
     <!-- UNUSED string name="connection_error">Connection error</string -->
     <!-- UNUSED string name="connecting">Connecting &#8230;</string -->
@@ -587,7 +587,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="sensor_pressure">pressure</string>
     <string name="sensor_temperature">temperature</string>
     <string name="sensor_extern">external</string>
-    <string name="sensor_type">type</string>
+    <string name="sensor_type" copyable="fr">type</string>
     <string name="sensor_value">value</string>
     <string name="sensor_comment">comment</string>
     <!-- UNUSED string name="insufficient_data">insufficient sensor data</string -->
@@ -727,10 +727,10 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="hide_splay">Splay shots</string>
 
     <!-- THESE MUST AGREE WITH THE FMT STRINGS -->
-    <!-- UNUSED string name="plan">PLAN</string -->
+    <!-- UNUSED string name="plan" copyable="fr">PLAN</string -->
     <string name="extended">PROFILE</string>
     <string name="profile">PROJECTED</string>
-    <string name="fmt_plan">%1$s: PLAN</string>
+    <string name="fmt_plan" copyable="fr">%1$s: PLAN</string>
     <string name="fmt_extended">%1$s: PROFILE</string>
     <string name="fmt_profile">%1$s: PROJECTED</string>
 
@@ -742,7 +742,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="landscape">landscape</string -->
 
     <string name="display_view">Display</string>
-    <string name="plan_view">plan</string>
+    <string name="plan_view" copyable="fr">plan</string>
     <string name="profile_view">profile</string>
 
     <string name="distox_err_ok" copyable="all">OK</string>
@@ -781,7 +781,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="button_evalm" copyable="hu">M</string>
     <string name="button_evalroll"  >Roll</string>
     <string name="button_eval_cal"  >Calibrated</string>
-    <string name="button_gps_start" >GPS</string>
+    <string name="button_gps_start" copyable="all">GPS</string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <string name="button_help" translatable="false">\?</string>
     <string name="button_manual"    >User manual</string>
@@ -840,18 +840,18 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="button_zoomfit"   >Zoom fit</string -->
     <!-- UNUSED string name="button_landscape" >Landscape</string --> 
     <!-- UNUSED string name="button_portrait"  >Portrait</string -->
-    <string name="button_splays">Splays</string>
+    <string name="button_splays" copyable="all">Splays</string>
     <string name="button_wait">Wait</string>
 
 
     <string name="button_write"     >Upload</string>
-    <string name="button_xsection"  >X-Section</string>
-    <string name="xsection">X-Section</string>
+    <string name="button_xsection" copyable="fr">X-Section</string>
+    <string name="xsection" copyable="fr">X-Section</string>
     <string name="buffer_size">Buffer size: %1$d</string>
     <string name="buffer_unsorted">unsorted</string>
 
     <string name="mode_leg">Legs</string>
-    <string name="mode_splay">Splays</string>
+    <string name="mode_splay" copyable="all">Splays</string>
     <string name="mode_latest">Latest splays</string>
     <string name="mode_station" copyable="fr">Stations</string>
     <string name="mode_grid">Grid</string>
@@ -1482,11 +1482,11 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_edit_altitude_summary">Allow editable altitudes</string>
   <string name="pref_fine_location_title">Fine position [s]</string>
   <string name="pref_fine_location_summary">Fine position time [s]</string>
-  <string name="pref_geoimport_app_title">GNSS app</string>
+  <string name="pref_geoimport_app_title" copyable="all">GNSS app</string>
   <string name="pref_geoimport_app_summary">External GNSS app</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Use GPSAveraging</string -->
-  <string name="pref_bric_mode_title">BRIC mode</string>
+  <string name="pref_bric_mode_title" copyable="fr">BRIC mode</string>
   <string name="pref_bric_mode_summary">BRIC operating mode</string>
   <string name="pref_bric_zero_length_title">BRIC zero shot</string>
   <string name="pref_bric_zero_length_summary">Record BRIC zero-length shot</string>
@@ -1495,7 +1495,7 @@ There are other settings for the presentation of the sketches (icon size, label 
 
   <string name="pref_plot_screen_title">SKETCH</string>
   <string name="pref_tool_line_title">LINES</string>
-  <string name="pref_tool_point_title">POINTS</string>
+  <string name="pref_tool_point_title" copyable="fr">POINTS</string>
   <string name="pref_location_title">LOCATION</string>
   <string name="pref_accuracy_title">ACCURACY</string>
   <string name="pref_shot_data_title">SHOT DATA</string>
@@ -2027,7 +2027,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="reading_file">Reading file %1$s</string>
     <string name="read_survey">Read survey %1$s\n</string>
     <!-- UNUSED string name="clear">Clear</string -->
-    <string name="plan_proj">Plan</string>
+    <string name="plan_proj" copyable="fr">Plan</string>
     <string name="profile_proj">Profile</string>
     <string name="dist_no_path" copyable="all">%1$s %2$s: D %3$.2f (%4$.2f %5$.2f %6$.2f) %7$.2f %8$.2f</string>
     <string name="dist_path">%1$s %2$s: D %3$.2f (%4$.2f %5$.2f %6$.2f) %7$.2f %8$.2f Path %9$.2f</string>
