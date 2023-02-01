@@ -1182,6 +1182,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="title_fixed_gpx_rec">Geo points [GPX Recorder]</string>
     <string name="title_fixed_gps_pos">Geo points [GPS Position]</string>
     <string name="title_fixed_gps_test">Geo points [GPS Test]</string>
+	<string name="title_fixed_gps_logger">Geo points [GPS Logger]</string>
     <string name="title_fixed_edit">Modifier point</string>
     <string name="title_fixed_import">Importer un point</string>
     <string name="title_fixed_gps">Coordonnées du GPS</string>
@@ -1487,8 +1488,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_bric_mode_summary">BRIC mode de fonctionnement</string>
     <string name="pref_bric_zero_length_title">BRIC visée nulle</string>
     <string name="pref_bric_zero_length_summary">BRIC enregistrer la visée de longueur nulle</string>
-  <!-- OK string name="pref_sap5_bit16_bug_title">SAP5 bit-16 bug</string -->
-  <!-- OK string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 bug workaround</string -->
+    <string name="pref_sap5_bit16_bug_title">Bug SAP5 bit-16 </string>
+    <string name="pref_sap5_bit16_bug_summary">Contournement SAP5 bit-16 bug X</string>
 
     <string name="pref_plot_screen_title">OPTIONS ÉCRAN DESSIN</string>
     <string name="pref_tool_line_title">OUTILS LIGNES</string>
@@ -1917,7 +1918,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="ask_delete_tdconfig">Supprimer le fichier TdConfig</string>
     <string name="ask_remove_equate">Supprimer l\'égalité %1$s ?</string>
     <!-- UNUSED string name="equate_no_station">Aucune station sélectionnée</string -->
-    <!-- UNUSED string name="equate_no_stations">Trop peu de stations</string -->
+    <string name="equate_no_stations">Trop peu de stations</string>
     <string name="equate_no_nearby">Pas de station à proximité</string>
 
     <!-- UNUSED string name="menu_new">NOUVEAU</string -->
@@ -2194,7 +2195,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="cpref_grid_above_title">Situation de la grille quadrillée</string>
     <string name="cpref_grid_above_summary">Placer la grille dans la partie supérieure</string>
     <string name="cpref_grid_extent_title">Étendue grille</string>
-    <!-- UNUSED string name="cpref_grid_extend_summary">Extension de la grille autour de la topographie</string -->
+    <string name="cpref_grid_extend_summary">Extension de la grille autour de la topographie vue plan</string>
     <string name="cpref_neg_clino_title">Vue sous horizon</string>
     <string name="cpref_neg_clino_summary">Permettre point de vue sous l\'horizon</string>
     <string name="cpref_dem_buffer_title">Tampon MNE</string>
