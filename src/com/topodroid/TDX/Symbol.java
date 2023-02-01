@@ -57,6 +57,7 @@ public class Symbol implements SymbolInterface
   int     mSymbolType; // the Symbol class needs a field for the symbol type, POINT, LINE, AREA
   boolean mEnabled;  //!< whether the symbol is enabled in the library
   private String  mThName;   // therion name
+  private String  mThPrefix = null; // therion prefix ("u:" or null) 2023-01-31
   String  mGroup;    // group of this symbol (null if no group)
   // String  mFilename; // filename coincide with therion name
   protected String mDefaultOptions;
@@ -140,15 +141,18 @@ public class Symbol implements SymbolInterface
   // SymbolInterface methods
   /** set the symbol Therion name
    * @param name    symbol Therion name
+   * 2023-01-31 saved prefix
    */
   protected void setThName( String name )
   {
     if ( name == null ) return;
     if ( name.startsWith("u:") ) {
       if ( name.length() == 2 ) return;
+      mThPrefix = "u:";
       mThName = name.substring(2);
     } else {
       if ( name.length() == 0 ) return;
+      mThPrefix = null;
       mThName = name;
     }
   }
@@ -156,6 +160,10 @@ public class Symbol implements SymbolInterface
   /** @return the symbol Therion name
    */
   public String getThName() { return mThName; }
+
+  /** @return the symbol full Therion name, possibly including the "u:" prefix (2023-01-31)
+   */
+  public String getFullThName() { return (mThPrefix == null)? mThName : mThPrefix + mThName; }
 
   /** @return true if the symbol Therion name is non-null and coincides with the given name
    * @param th_name   given name
@@ -246,8 +254,13 @@ public class Symbol implements SymbolInterface
   static float sizeY( int type ) { return ( type == SymbolType.POINT )? TDSetting.mUnitIcons * sizeFactorYP : TDSetting.mUnitIcons * sizeFactorYL; }
 
   /** @return the therion name, removing the "u:" prefix if present
-   * @param name   therion name
+   * @param name  full therion name
    */
   static String deprefix_u( String name ) { return (name == null)? null : (name.startsWith("u:"))? name.substring(2) : name; }
+
+  /** @return true if the name starts with "u:"
+   * @param name   full therion name
+   */
+  static boolean hasUPrefix( String name ) { return name.startsWith("u:"); }
 
 }

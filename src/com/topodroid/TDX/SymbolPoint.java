@@ -280,7 +280,8 @@ public class SymbolPoint extends Symbol
             } else if ( vals[k].equals("th_name") ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {
-                th_name = deprefix_u( vals[k] );
+                // 2023-01-31 th_name = deprefix_u( vals[k] ); 
+                th_name   = vals[k];
                 // TDLog.v("POINT " + "symbol " + pathname + " th name " + k + " / " + s + " " + th_name );
               }
             } else if ( vals[k].equals("group") ) {
@@ -379,7 +380,7 @@ public class SymbolPoint extends Symbol
               } else {
                 if ( cnt == 0 ) {
                   mName   = name;
-                  setThName( th_name );
+                  setThName( th_name ); // this sets prefix (if necessary) and name
                   mGroup  = group;
                   mPaint  = makePaint( color, style );
                   makePointPath( path );

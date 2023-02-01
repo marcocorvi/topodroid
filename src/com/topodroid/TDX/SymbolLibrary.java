@@ -29,7 +29,7 @@ import android.graphics.Path;
 public class SymbolLibrary
 {
   // Therion names (as well as filenames)
-  public final static String USER    = "user";
+  public final static String USER    = "u:user";
   public final static String LABEL   = "label";
   public final static String STATION = "station";
   public final static String WALL    = "wall";
@@ -198,6 +198,7 @@ public class SymbolLibrary
 
   String getSymbolName( int k )   { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getName(); }
   String getSymbolThName( int k ) { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getThName(); }
+  String getSymbolFullThName( int k ) { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getFullThName(); }
   String getSymbolGroup( int k )  { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getGroup(); }
   Paint getSymbolPaint( int k )   { return ( k < 0 || k >= mSymbols.size() )? BrushManager.errorPaint : mSymbols.get(k).getPaint(); }
   Path  getSymbolPath( int k )    { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getPath(); }

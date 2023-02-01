@@ -387,6 +387,11 @@ public class DrawingLinePath extends DrawingPointLinePath
    */
   public String getThName() { return BrushManager.getLineThName( mLineType ); }
 
+  /** get the full therion name
+   * @return the full *with possible prefix) therion name of this line type
+   */
+  public String getFullThName() { return BrushManager.getLineFullThName( mLineType ); }
+
   /** draw the line with the specified paint
    * @param canvas   canvas
    * @param matrix   transform matrix
@@ -454,7 +459,7 @@ public class DrawingLinePath extends DrawingPointLinePath
     if ( mFirst == null ) return null;
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format("line %s", getThName() );
+    pw.format("line %s", getFullThName() );
     if ( isClosed() ) {
       pw.format(" -close on");
     }

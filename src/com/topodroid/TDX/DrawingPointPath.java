@@ -387,6 +387,11 @@ public class DrawingPointPath extends DrawingPath
    */
   public String getThName() { return  BrushManager.getPointThName( mPointType ); }
 
+  /** get the full therion name 
+   * @return the point Therion type (possibly incuding the prefix)
+   */
+  public String getFullThName() { return  BrushManager.getPointFullThName( mPointType ); }
+
   /** draw the point on the canvas
    * @param canvas    canvas
    * @param matrix    transform matrix
@@ -682,7 +687,7 @@ public class DrawingPointPath extends DrawingPath
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
 
-    String th_name = getThName();
+    String th_name = getFullThName();
     pw.format(Locale.US, "point %.2f %.2f %s", cx*TDSetting.mToTherion, -cy*TDSetting.mToTherion, th_name );
     toTherionOrientation( pw );
     // FIXME SECTION_RENAME

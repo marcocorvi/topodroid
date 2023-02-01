@@ -310,6 +310,10 @@ public class DrawingAreaPath extends DrawingPointLinePath
    */
   public String getThName() { return BrushManager.getAreaThName( mAreaType ); }
 
+  /** @return the area full (with possible prefix) Therion name
+   */
+  public String getFullThName() { return BrushManager.getAreaFullThName( mAreaType ); }
+
   /** set the area orientation angle
    * @param angle  orientation angle [degrees]
    */
@@ -404,7 +408,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
     toTherionPoints( pw, true );
 
     pw.format("endline\n");
-    pw.format("area %s", getThName( ) );
+    pw.format("area %s", getFullThName( ) );
     if ( BrushManager.isAreaOrientable( mAreaType ) ) {
       pw.format(Locale.US, " #orientation %.1f", mOrientation );
     }

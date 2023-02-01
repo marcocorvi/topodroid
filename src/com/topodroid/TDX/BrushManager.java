@@ -118,6 +118,10 @@ public class BrushManager
   public static String getLineThName( int idx )  { return (mLineLib  == null)? null : mLineLib.getSymbolThName( idx ); }
   public static String getAreaThName( int idx )  { return (mAreaLib  == null)? null : mAreaLib.getSymbolThName( idx ); }
 
+  public static String getPointFullThName( int idx ) { return (mPointLib == null)? null : mPointLib.getSymbolFullThName( idx ); }
+  public static String getLineFullThName( int idx )  { return (mLineLib  == null)? null : mLineLib.getSymbolFullThName( idx ); }
+  public static String getAreaFullThName( int idx )  { return (mAreaLib  == null)? null : mAreaLib.getSymbolFullThName( idx ); }
+
   static String getPointGroup( int idx ) { return (mPointLib == null)? null : mPointLib.getSymbolGroup( idx ); }
   static String getLineGroup( int idx )  { return (mLineLib  == null)? null : mLineLib.getSymbolGroup( idx ); }
   static String getAreaGroup( int idx )  { return (mAreaLib  == null)? null : mAreaLib.getSymbolGroup( idx ); }
