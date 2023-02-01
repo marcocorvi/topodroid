@@ -1,0 +1,109 @@
+
+----------------------------------------------------
+Checking strings for fr (verbose level 1)
+Error reports verbosity levels:
+  No-default strings: ..... translated (1) commented (2)
+  Non-translatable strings: translated (1) commented (2)
+  Commented strings: ...... translated (1)
+  Untranslated strings: ... missing (1)    todo (2)      commented (3)
+  Copied strings: ......... non-copyable (1), copyable (2)
+----------------------------------------------------
+
+1787: ********* DUPLICATE fr STRING <!-- OK string translatable= IN COMMENT
+1788: ********* DUPLICATE fr STRING <!-- OK string translatable= IN COMMENT
+1789: ********* DUPLICATE fr STRING <!-- OK string translatable= IN COMMENT
+1790: ********* DUPLICATE fr STRING <!-- OK string translatable= IN COMMENT
+1791: ********* DUPLICATE fr STRING <!-- OK string translatable= IN COMMENT
+1792: ********* DUPLICATE fr STRING <!-- OK string translatable= IN COMMENT
+1793: ********* DUPLICATE fr STRING <!-- OK string translatable= IN COMMENT
+2003: ********* DUPLICATE fr STRING info_volume_value 
+Duplicated fr strings: 8
+
+fr strings without default:
+<string name = no-default translated "ATTENTION : visées non reliées !"
+cpref_grid_extend_summary no-default translated "Extension de la grille autour de la topographie vue plan"
+Errors 2, Warnings 20, Total 22
+
+EN string not-translatable that are translated:
+cpref_delaunay_title not-translatable translated: Enveloppe Delaunay
+Errors 1, Warnings 35, Total 36
+
+EN string commented that are translated:
+pref_plot_walls_title comment non-commented: PAROIS AUTO - 
+pref_walls_type_title comment non-commented: Type paroi - 
+pref_walls_type_summary comment non-commented: Type de paroi - 
+pref_walls_plan_thr_title comment non-commented: Inclinaison visées latérales d\'habillage PLAN - 
+pref_walls_plan_thr_summary comment non-commented: Inclinaison maximale visées latérales d\'habillage parois PLAN [deg] - 
+pref_walls_extended_thr_title comment non-commented: Inclinaison visées COUPE - 
+pref_walls_extended_thr_summary comment non-commented: Inclinaison maximale visées latérales d\'habillage parois COUPE [deg] - 
+pref_walls_xclose_title comment non-commented: Espacement point visée/paroi - 
+pref_walls_xclose_summary comment non-commented: Distance minimum entre les points définissant une paroi le long d\'une visée [m] - 
+pref_walls_concave_title comment non-commented: Concavité - 
+pref_walls_concave_summary comment non-commented: Concavité maximale [pourcents] - 
+pref_walls_xstep_title comment non-commented: Espac. points paroi - 
+pref_walls_xstep_summary comment non-commented: Distance minimum entres les points formant une ligne de paroi [m] - 
+Errors 13, Total 13
+
+EN string that are not translated:
+survey_not_attached string missing
+cpref_grid_extent_summary string missing
+Errors 2 + 0 + 0, Total 10
+
+EN string that are copied:
+datamode_normal string copied sentence: Normal data-mode
+datamode_diving string copied sentence: Diving data-mode
+menu_stats string copied word: STATS
+empty_clipboard string copied sentence: Empty clipboard
+popup_do_scan string copied word: Scan
+btn_export string copied word: Export
+hint_notes string copied word: notes
+man_export string copied sentence: 13. Import/export
+man_threed string copied sentence: 15. 3D viewer
+man_index string copied sentence: 16. Index
+help_therion string copied sentence: Cave project manager
+title_fixed_mt string copied sentence: Geo points [Mobile Topographer]
+title_fixed_gpx_rec string copied sentence: Geo points [GPX Recorder]
+title_fixed_gps_pos string copied sentence: Geo points [GPS Position]
+title_fixed_gps_logger string copied sentence: Geo points [GPS Logger]
+pref_cat_exportimport string copied word: IMPORT
+pref_cat_cave3d string copied sentence: 3D VIEWER
+pref_csv_raw_title string copied sentence: Raw CSV
+pref_weedbuffer_title string copied sentence: Weeding segment buffer
+perm_camera string copied word: \nCamera
+firmware_title string copied sentence: Firmware Updater
+firmware_file_title string copied sentence: Firmware Files
+firmware_text string copied sentence: 
+READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
+\nThis is only a reminder:
+\n[1] Select either to upload a firmware or to dump the firmware to a file.
+\n[2] Choose the file to upload or save. Firmware files are in the bin directory.
+\n[3] Make sure the upload firmware version is compatible with the DistoX hardware version.
+\n[4] Put the DistoX2 in bootloader mode: press PLUS and MINUS while switching on with DIST key.
+\n[5] Tap the OK button.
+\n[6] Read the message before you confirm to continue.
+\n[7] Wait till the process is done. It takes a while.
+\n[8] Turn off the DistoX2 with the CLR key.
+\n
+
+info_lonlat string copied word: coords.
+info_radii string copied word: radii
+info_origin_none string copied word: undefined
+proj_focal string copied word: Focal
+walls_tube string copied word: Tube
+cpref_walls3d string copied sentence: WALL MODEL
+Errors 18 possible, 11 maybe, Warnings 60, Total 89
+
+Formats check:
+r_dialog () bad format 1
+shot_rename_unsafe (1) bad format 0
+shots_rename_unsafe (1) bad format 0
+Errors: 3, Total 3
+
+EN strings 2023 fr strings 2016
+Translated with no-default:  commented 20 - translated 2 
+Translated non-translatable: commented 35 - translated 1 
+Translated comment: 13 
+Non-Translated: commented 0 missing 2 todo 0 
+Copied: copyable 60 possibly copyable 11 non-copyable 18
+Bad formats 3
+TOTAL ERRORS: 21 / 18 [11]

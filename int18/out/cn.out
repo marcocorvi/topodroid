@@ -1,0 +1,37 @@
+
+----------------------------------------------------
+Checking strings for cn (verbose level 1)
+Error reports verbosity levels:
+  No-default strings: ..... translated (1) commented (2)
+  Non-translatable strings: translated (1) commented (2)
+  Commented strings: ...... translated (1)
+  Untranslated strings: ... missing (1)    todo (2)      commented (3)
+  Copied strings: ......... non-copyable (1), copyable (2)
+----------------------------------------------------
+
+
+cn strings without default:
+Errors 0, Warnings 5, Total 5
+
+EN string not-translatable that are translated:
+Errors 0, Warnings 42, Total 42
+
+EN string that are not translated:
+calib_gm_policy string missing
+Errors 1 + 35 + 5, Total 41
+
+EN string that are copied:
+pref_sap5_bit16_bug_title string copied sentence: SAP5 bit-16 bug
+proj_focal string copied word: Focal
+survey_splays_length string copied sentence:  Splays length: 
+help_light_3d string copied sentence: Pan and light
+Errors 3 possible, 1 maybe, Warnings 11, Total 15
+
+EN strings 2023 cn strings 2006
+Translated with no-default:  commented 5 - translated 0 
+Translated non-translatable: commented 42 - translated 0 
+Translated comment: 0 
+Non-Translated: commented 5 missing 1 todo 35 
+Copied: copyable 11 possibly copyable 1 non-copyable 3
+Bad formats 0
+TOTAL ERRORS: 41 / 3 [1]

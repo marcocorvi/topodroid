@@ -95,6 +95,9 @@ strings:
 	@ for i in $(LANGS); do echo "$$i" `grep \"$$i\" lint.out | wc -l`; done
 	@ for i in $(LANGS); do echo "values-$$i" `grep values-$$i lint.out | wc -l`; done
 
+strings_check:
+	@ for i in $(LANGS); do utils/strings_compare.pl $$i 1 > int18/out/$$i.out ; done
+
 pdf:
 	./howto/pdf.sh
 

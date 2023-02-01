@@ -1,0 +1,44 @@
+
+----------------------------------------------------
+Checking strings for pt (verbose level 1)
+Error reports verbosity levels:
+  No-default strings: ..... translated (1) commented (2)
+  Non-translatable strings: translated (1) commented (2)
+  Commented strings: ...... translated (1)
+  Untranslated strings: ... missing (1)    todo (2)      commented (3)
+  Copied strings: ......... non-copyable (1), copyable (2)
+----------------------------------------------------
+
+
+pt strings without default:
+Errors 0, Warnings 9, Total 9
+
+EN string not-translatable that are translated:
+cpref_delaunay_title not-translatable translated: Delaunay
+Errors 1, Warnings 6, Total 7
+
+EN string that are copied:
+desc_menu string copied word: Menu
+display_view string copied word: Display
+button_download string copied word: Download
+help_view_surveys string copied sentence: Display surveys
+export_walls string copied word: Walls
+info_lonlat string copied word: coords.
+legs_surface string copied word: Surface
+ctitle_sketches string copied word: Sketches
+walls_title string copied word: WALLS
+cpref_convex_hull_title string copied sentence: Convex hull
+cpref_convex_hull_summary string copied sentence: Convex hull walls
+cpref_delaunay_summary string copied sentence: Delaunay walls
+cpref_hull_title string copied word: Hull
+cpref_hull_summary string copied sentence: Hull walls
+Errors 5 possible, 9 maybe, Warnings 28, Total 42
+
+EN strings 2023 pt strings 1983
+Translated with no-default:  commented 9 - translated 0 
+Translated non-translatable: commented 6 - translated 1 
+Translated comment: 0 
+Non-Translated: commented 0 missing 0 todo 0 
+Copied: copyable 28 possibly copyable 9 non-copyable 5
+Bad formats 0
+TOTAL ERRORS: 1 / 5 [9]

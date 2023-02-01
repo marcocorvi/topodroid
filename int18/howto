@@ -7,43 +7,51 @@ Howto add a translation
 [3] add the directory int18/values-XX for your translation (replace "XX" with the two-letter country code of the language)
 
 [4] copy res/values/strings.xml res/values/array.xml and res/values/plurals.xml in the translation directory.
+    edit the three files and replace the english strings with the translations in your language save them with utf-8 encoding
 
-[5] edit the three files and replace the english strings with the translations in your language save them with utf-8 encoding
+[4] you can use the PERL script utils/strings_prepare.pl, by R. Severo, to prepare the translation files for your languag.
 
-NOTES:
-(A) do not change the order of the strings. 
+
+NOTES: 
+[A] do not change the order of the strings. 
 it is the same for all translations and makes maintenance easier
 
-(B) UNUSED
+[B] UNUSED, TODO, FIXME, NO
 some strings are commented (ie, they are in the file but they are not used in the program):
-you may leave these untranslated.
-they are marke UNUSED
+they are marked UNUSED or NO
+strings commented and marked with UNUSED or NO must not be translated, or they can be translated but must
+remain commented
 
-(C) translatable="false"
-the array strings with name xxxValue MUST not be translated:
-you can delete them from the translation array.xml file.
-The strings marked with translatable="false" MUST not be translated.
-
-[D] PLURALS
-plurals strings may need different "numbers" in your language than in english
-use al those that apply.
-check lint.out for missing cases in your language
-
-[E] FORMAT STRINGS 
-Pay special attention to format strings, ie, strings with the percent marking the format arguments. A mistake in the format can crash the app.
-
-[F] TODO and FIXME
 i will not change a translated string, 
 however i do update the translation file to keep them uptodate with the default file (english):
 i may add a new string: in this case the new string is added in comment with a a mark TODO.
 you should translated it and remove the comment and the mark
 
-i may comment a string that becomes not used any longer.
+i may comment a string because it is not longer used.
 in this case i put the string in comment with a mark UNUSED
 
 i may change the english string of a translated string:
 i may put the translated string in comment with a mark FIXME
 after checking the english and possibly updating the translation remove the comment and the mark
+
+[C] translatable="false"
+the array strings with name xxxValue MUST NOT be translated: you can delete them from the translation array.xml file.
+The strings marked with translatable="false" MUST NOT be translated: if you want to keep them in the translation file
+make sure they are commented.
+
+[D] COPIED strings
+it is possible that translated strings are the same as the default (english) strings.
+For exanmple the French for "photo" is again "photo".
+Nevertheless the string must be translated.
+
+[E] PLURALS
+plurals strings may need different "numbers" in your language than in english
+use al those that apply.
+check lint.out for missing cases in your language
+
+[F] FORMAT STRINGS 
+Pay special attention to format strings, ie, strings with the percent marking the format arguments. A mistake in the format can crash the app.
+The string_prepare scriot checks the format strings and if their args do not agree with the default string it replaces with a TODO string
 
 [G] SPECIAL CHARACTERS
 some characters must be escaped, in particular apostrophy must be written "\'" (without double quotes).
@@ -68,4 +76,3 @@ NOTE replace spaces in the name with underscore
 push the new symbols file to github and let me know
 i need to increase the symbols version in the code otherwise topodroid will not install the new files
 
-[J] a perl script is available, utils/strings.pl, to compare a translation string file against the english file.

@@ -1,0 +1,47 @@
+
+----------------------------------------------------
+Checking strings for hu (verbose level 1)
+Error reports verbosity levels:
+  No-default strings: ..... translated (1) commented (2)
+  Non-translatable strings: translated (1) commented (2)
+  Commented strings: ...... translated (1)
+  Untranslated strings: ... missing (1)    todo (2)      commented (3)
+  Copied strings: ......... non-copyable (1), copyable (2)
+----------------------------------------------------
+
+1786: ********* DUPLICATE hu STRING <!-- DONT_TRANSLATE --> IN COMMENT
+Duplicated hu strings: 1
+
+hu strings without default:
+Errors 0, Warnings 8, Total 8
+
+EN string not-translatable that are translated:
+Errors 0, Warnings 42, Total 42
+
+EN string that are not translated:
+Errors 0 + 0 + 5, Total 6
+
+EN string that are copied:
+btn_export string copied word: Export
+man_export string copied sentence: 13. Import/export
+pref_cat_import_export string copied word: IMPORT_EXPORT
+pref_cat_exportimport string copied word: IMPORT
+pref_svg_program_title string copied sentence: SVG program
+walls_convexhull string copied sentence: Convex Hull
+walls_hull string copied word: Hull
+walls_bubble string copied word: Bubble
+walls_tube string copied word: Tube
+Errors 3 possible, 6 maybe, Warnings 18, Total 27
+
+Formats check:
+r_dialog () bad format 1
+Errors: 1, Total 1
+
+EN strings 2023 hu strings 2014
+Translated with no-default:  commented 8 - translated 0 
+Translated non-translatable: commented 42 - translated 0 
+Translated comment: 0 
+Non-Translated: commented 5 missing 0 todo 0 
+Copied: copyable 18 possibly copyable 6 non-copyable 3
+Bad formats 1
+TOTAL ERRORS: 6 / 3 [6]

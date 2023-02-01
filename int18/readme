@@ -30,8 +30,7 @@ The example the above TODO string should become
 
 The following keywords are used:
   TODO    a string that need to be translated
-  OK      a string that is used but does not need translation (eg, "DXF"), 
-  NO      similar to OK
+  NO      similar to UNUSED
   UNUSED  a string that is not used in the program, but i do not remove from the string file, as it might be used in future
   FIXME   a string that I modified and you should check if the translation needs to be updated
           also used for a translation i think does not catch the meaning of the master string
