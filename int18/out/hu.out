@@ -9,7 +9,7 @@ Error reports verbosity levels:
   Copied strings: ......... non-copyable (1), copyable (2)
 ----------------------------------------------------
 
-1786: ********* DUPLICATE hu STRING <!-- DONT_TRANSLATE --> IN COMMENT
+1788: ********* DUPLICATE hu STRING <!-- DONT_TRANSLATE --> IN COMMENT
 Duplicated hu strings: 1
 
 hu strings without default:
@@ -33,15 +33,11 @@ walls_bubble string copied word: Bubble
 walls_tube string copied word: Tube
 Errors 3 possible, 6 maybe, Warnings 18, Total 27
 
-Formats check:
-r_dialog () bad format 1
-Errors: 1, Total 1
-
 EN strings 2023 hu strings 2014
 Translated with no-default:  commented 8 - translated 0 
 Translated non-translatable: commented 42 - translated 0 
 Translated comment: 0 
 Non-Translated: commented 5 missing 0 todo 0 
 Copied: copyable 18 possibly copyable 6 non-copyable 3
-Bad formats 1
-TOTAL ERRORS: 6 / 3 [6]
+Bad formats 0
+TOTAL ERRORS: 5 / 3 [6]

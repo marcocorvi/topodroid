@@ -18,7 +18,7 @@ Errors 0, Warnings 40, Total 40
 
 EN string that are not translated:
 title_fixed_gps_logger string missing
-Errors 1 + 29 + 5, Total 35
+Errors 1 + 5 + 5, Total 11
 
 EN string that are copied:
 outline string copied word: outline
@@ -32,7 +32,7 @@ EN strings 2023 it strings 2002
 Translated with no-default:  commented 12 - translated 0 
 Translated non-translatable: commented 40 - translated 0 
 Translated comment: 0 
-Non-Translated: commented 5 missing 1 todo 29 
+Non-Translated: commented 5 missing 1 todo 5 
 Copied: copyable 35 possibly copyable 5 non-copyable 0
 Bad formats 0
-TOTAL ERRORS: 35 / 0 [5]
+TOTAL ERRORS: 11 / 0 [5]

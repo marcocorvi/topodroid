@@ -20,8 +20,8 @@
   <!-- TODO string name="r_dialog">With Android-13 TopoDroid must store surveys in the app private folder under "Android/data". Beware that this folder is usually deleted when the app is uninstalled. To confirm type\n"%1$s"\nin the field below and tap the button.</string -->
   <!-- UNUSED string name="r_checkboxes">Devi confermare tramite le checkbox.</string -->
   <!-- UNUSED string name="r_disclaimer">Riconosco che gli autori della app non sono responsabili per qualsiasi danno o perdita di dati.</string -->
-  <!-- TODO string name="r_continue">CONTINUE</string -->
-  <!-- TODO string name="r_quit">QUIT</string -->
+  <string name="r_continue">CONTINUA</string>
+  <string name="r_quit">ESCI</string>
 
     <!-- NO string name="app_name">TopoDroid</string -->
     <string name="tdm_title">Gestione Progetti</string>
@@ -188,7 +188,7 @@
     <string name="bt_reset">Resettare la connessione bluetooth</string>
     <string name="save_as">salva come</string>
     <string name="nickname">Nome</string>
-    <!-- TODO string name="unknown_device_type">Unknown device type %1$d</string -->
+    <string name="unknown_device_type">Tipo dispositivo non noto: %1$d</string>
 
     <string name="comment">commento</string>
     <!-- UNUSED string name="flag">Flag</string -->
@@ -295,7 +295,7 @@
     <string name="error_begin_required">Indirizzo iniziale mancante</string>
     <string name="error_declination_number">La declinazione deve esser un numero</string>
     <string name="error_end_required">Indirizzo finale mancante</string>
-    <!-- TODO string name="error_fixes_nocs">Fix points without CS %1$s:\n%2$s</string -->
+    <string name="error_fixes_nocs">Punti fissi senza Sistema Coordinate %1$s:\n%2$s</string>
     <string name="error_from_required">Primo caposaldo mancante</string>
     <string name="error_group_required">Numero di gruppo mancante</string>
     <string name="error_group_non_integer">Il gruppo deve essere un numero intero</string>
@@ -311,7 +311,7 @@
     <string name="error_station_number">Numero caposaldo errato</string>
     <string name="error_name_duplicate">Nome duplicato</string>
     <string name="error_no_section_in_section">No X-section in X-section</string>
-    <!-- TODO string name="error_profile_slant_section">Slanted Xsection not enabled in profile view</string -->
+    <string name="error_profile_slant_section">Sezioni inclinate disabilitate nel profilo</string>
     <string name="error_team_required">Nomi rilevatori mancanti</string>
 
     <!-- UNUSED string name="error_dir_exists">Directory già esistente</string -->
@@ -428,7 +428,7 @@
     <string name="menu_device">DISPOSITIVO</string>
     <string name="menu_export">ESPORTA</string>
     <string name="menu_firmware">FIRMWARE</string>
-    <!-- TODO string name="menu_geopoint_app">GEOPOINT APP</string -->
+    <string name="menu_geopoint_app">APP GNSS</string>
     <string name="menu_recover">RECUPERA</string>
     <string name="menu_recover_paste">RIPRISTINA/INCOLLA</string>
     <string name="menu_reload">RICARICA</string>
@@ -978,7 +978,7 @@
     <string name="help_device">Finestra DistoX</string>
     <string name="help_add_topodroid">Nuovo rilievo/calibr.</string>
     <string name="help_import">Importa zip o file dati rilievo</string>
-    <!-- TODO string name="help_geopoint_app">Geopoint external app</string -->
+    <string name="help_geopoint_app">App GNSS esterna</string>
     <string name="help_symbol">Attiva/disattiva prototipi grafici</string>
     <string name="help_therion">Gestore progetti di grotta</string>
     <string name="help_cave3d">Cave3D, visualizzatore 3D</string>
@@ -1090,7 +1090,7 @@
     <string name="export_dxf_version">Versione</string>
     <string name="export_georeference">Georeferenza</string>
     <string name="export_grid">Griglia</string>
-    <!-- TODO string name="export_layers">Scrap layers</string -->
+    <string name="export_layers">Layers per scraps</string>
     <string name="export_linedir">Linea direzione</string>
     <string name="export_lrud">LRUD</string>
     <string name="export_lrud_from">LRUD alla stazione DA</string>
@@ -1164,10 +1164,10 @@
     <string name="title_edit_station">Modifica caposaldo </string>
     <string name="title_erase">Cancella</string>
     <string name="title_fixed">Punti fissi</string>
-    <!-- TODO string name="title_fixed_mt">Geo points [Mobile Topographer]</string -->
-    <!-- TODO string name="title_fixed_gpx_rec">Geo points [GPX Recorder]</string -->
-    <!-- TODO string name="title_fixed_gps_pos">Geo points [GPS Position]</string -->
-    <!-- TODO string name="title_fixed_gps_test">Geo points [GPS Test]</string -->
+    <string name="title_fixed_mt">Punti fissi [Mobile Topographer]</string>
+    <string name="title_fixed_gpx_rec">Punti fissi [GPX Recorder]</string>
+    <string name="title_fixed_gps_pos">Punti fissi [GPS Position]</string>
+    <string name="title_fixed_gps_test">Punti fissi [GPS Test]</string>
     <string name="title_fixed_edit">Modifica posizione</string>
     <string name="title_fixed_import">Importa punto fisso</string>
     <string name="title_fixed_gps">Punto fisso: GPS</string>
@@ -1314,11 +1314,11 @@
   <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Bootloader abilitiato</string -->
   <string name="pref_mkeyboard_title">Tastiera</string>
-  <string name="pref_mkeyboard_summary">Abilita/Disabilita tastiere personalizzate</string>
+  <string name="pref_mkeyboard_summary">Utilizzo tastiera minimale</string>
   <string name="pref_no_cursor_title">No cursore di tastiera</string>
   <string name="pref_no_cursor_summary">Disabilita cursore di tastiera personalizzata</string>
   <string name="pref_local_help_title">Manuale tradotto</string>
-  <string name="pref_local_help_summary">Abilita manuale tradotto</string>
+  <string name="pref_local_help_summary">Utilizzo manuale tradotto</string>
   <!-- UNUSED string name="pref_cosurvey_title">Co-surveying</string -->
   <!-- UNUSED string name="pref_cosurvey_summary">Attiva/disattiva il servizio co-surveying</string -->
   <string name="pref_import_datamode_title">Formato import</string>
@@ -1333,9 +1333,9 @@
   <string name="pref_size_buttons_title">Dimensione bottoni</string>
   <string name="pref_size_buttons_summary">Dimensione bottoni barra superiore [pixels]</string>
   <string name="pref_with_sensors_title">Sensori</string>
-  <string name="pref_with_sensors_summary">Abilita dati "sensori"</string>
+  <string name="pref_with_sensors_summary">Dati di "sensori"</string>
   <string name="pref_with_android_azimuth_title">Bussola Android</string>
-  <string name="pref_with_android_azimuth_summary">Abilita bussola/clino Android</string>
+  <string name="pref_with_android_azimuth_summary">Utilizza bussola/clino Android</string>
   <string name="pref_blunder_shot_title">Falsi tiri</string>
   <string name="pref_blunder_shot_summary">Salta tiri di battuta falsi</string>
   <string name="pref_splay_station_title">Riassegnazione capisaldi splay</string>
@@ -1344,12 +1344,12 @@
   <string name="pref_splay_group_summary">Riassegna caposalso solo agli splay successivi</string>
   <string name="pref_with_levels_title">Strati</string>
   <string name="pref_with_levels_summary">Usa strati di tele</string>
-  <string name="pref_palettes_title">Tavolozze</string>
-  <string name="pref_palettes_summary">Abilita tavolozze addizionali</string>
+  <string name="pref_palettes_title">Simbologie</string>
+  <string name="pref_palettes_summary">Simbologia addizionali</string>
   <string name="pref_packet_logger_title">Log Pacchetti</string>
-  <string name="pref_packet_logger_summary">Abilita log pacchetti</string>
-    <!-- TODO string name="pref_th2_edit_title">Sketch editing</string -->
-    <!-- TODO string name="pref_th2_edit_summary">Enable sketch editing</string -->
+  <string name="pref_packet_logger_summary">Log dei pacchetti dati</string>
+  <string name="pref_th2_edit_title">Editing di schizzi</string>
+  <string name="pref_th2_edit_summary">Caricamento e editing di disegni</string>
 
   <string name="pref_bezier_step_title">Spaziatura punti</string>
   <string name="pref_bezier_step_summary">Distanza tra punti in una linea di export [m]</string>
@@ -1457,12 +1457,12 @@
   <string name="pref_crs_summary">Nome CRS, come in Proj4</string>
   <string name="pref_neg_altitude_title">Altitudini negative</string>
   <string name="pref_neg_altitude_summary">Consenti altitudini negative</string>
-  <!-- TODO string name="pref_edit_altitude_title">Editable altitude</string -->
-  <!-- TODO string name="pref_edit_altitude_summary">Allow editable altitudes</string -->
+  <string name="pref_edit_altitude_title">Altitudine editabile</string>
+  <string name="pref_edit_altitude_summary">Altitudine editabile</string>
   <string name="pref_fine_location_title">Posizionamento preciso [s]</string>
   <string name="pref_fine_location_summary">Tempo di posizionamento preciso [s]</string>
-  <!-- TODO string name="pref_geoimport_app_title">Geopoint app</string -->
-  <!-- TODO string name="pref_geoimport_app_summary">Geopoint external app</string -->
+  <string name="pref_geoimport_app_title">App GNSS</string>
+  <string name="pref_geoimport_app_summary">App GNSS esterna</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Media GPS</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Usare media GPS</string -->
   <string name="pref_bric_mode_title">Modo BRIC</string>
@@ -1505,8 +1505,8 @@
   <string name="pref_splay_dash_color_summary">Colore delle linee tratteggiate</string>
   <string name="pref_splay_dot_color_title">Colore splay punteggiati</string>
   <string name="pref_splay_dot_color_summary">Colore delle linee punteggiate</string>
-  <!-- TODO string name="pref_splay_latest_color_title">Splay latest color</string -->
-  <!-- TODO string name="pref_splay_latest_color_summary">Color of latest splay lines</string -->
+  <string name="pref_splay_latest_color_title">Colore splay recenti</string>
+  <string name="pref_splay_latest_color_summary">Colore dei piú recenti splay</string>
 
   <!-- UNUSED string name="pref_data_backup_title">Auto-esporta dati</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Esportazione automatica dei dati (necessita formato di default)</string -->
@@ -1577,8 +1577,8 @@
   <string name="pref_acad_version_summary">Versione di DXF</string>
   <string name="pref_acad_spline_title">Spline DXF</string>
   <string name="pref_acad_spline_summary">DXF interpolato cubico</string>
-  <!-- TODO string name="pref_acad_layer_title">Scrap layers</string -->
-  <!-- TODO string name="pref_acad_layer_summary">DXF layers by scraps</string -->
+  <string name="pref_acad_layer_title">Layers per scraps</string>
+  <string name="pref_acad_layer_summary">Layers DXF per scraps</string>
   <string name="pref_dxf_reference_title">Riferimento DXF</string>
   <string name="pref_dxf_reference_summary">Gli assi X-Y sono export disegno in DXF</string>
   <!-- UNUSED string name="pref_dxf_scale_title">Scala rilievo DXF</string -->
@@ -1613,8 +1613,8 @@
   <string name="pref_linecorner_summary">Soglia angolatura curve Bezier</string>
   <string name="pref_graph_paper_scale_title">Scala carta millimetrata</string>
   <string name="pref_graph_paper_scale_summary">Correzione scala carta millimetrata</string>
-  <!-- TODO string name="pref_slant_xsection_title">Slant xsections</string -->
-  <!-- TODO string name="pref_slant_xsection_summary">Profile view slant xsections</string -->
+  <string name="pref_slant_xsection_title">Sezioni inclinate</string>
+  <string name="pref_slant_xsection_summary">Sezione inclinate nella vista profilo</string>
   <string name="pref_weeddistance_title">Buffer segmento di pulizia punti</string>
   <string name="pref_weeddistance_summary">Distanza massima da un segmento ai punti superflui</string>
   <string name="pref_weedlength_title">Lunghezza massima segmento di pulizia punti</string>
@@ -1641,8 +1641,8 @@
   <string name="pref_line_thickness_summary">Spessore linee disegno</string>
   <string name="pref_line_units_title">Unita\' linea</string>
   <string name="pref_line_units_summary">Unita\' disegno linea</string>
-  <string name="pref_linesnap_title">Snap di Linea/Area</string>
-  <string name="pref_linesnap_summary">Abilita lo snap(copia) su linee/aree</string>
+  <string name="pref_linesnap_title">Snap di linea/area</string>
+  <string name="pref_linesnap_summary">Snap di linee/aree su linee</string>
   <string name="pref_linecurve_title">Aggiusta segmento</string>
   <string name="pref_linecurve_summary">Azioni per aggiustare segmenti</string>
   <string name="pref_linestraight_title">Raddrizza linee</string>
@@ -1650,7 +1650,7 @@
   <string name="pref_path_multiselect_title">Multiselezione</string>
   <string name="pref_path_multiselect_summary">Azione di selezione multipla</string>
   <string name="pref_composite_actions_title">Azioni composite</string>
-  <string name="pref_composite_actions_summary">Abilita azioni long-tap per linea/area</string>
+  <string name="pref_composite_actions_summary">Azioni long-tap linea/area</string>
   <string name="pref_plane_interpolation_title">Interpolazione piana</string>
   <string name="pref_plane_interpolation_summary">Azione di interpolazione piana</string>
   <string name="pref_plot_split_title">Divisione/Unione disegno</string>
@@ -1674,7 +1674,7 @@
   <string name="pref_backup_interval_title">Intervallo di backup</string>
   <string name="pref_backup_interval_summary">Intervallo minimo tra 2 backup [s]</string>
   <!-- UNUSED string name="pref_backups_clear_title">Cancella backup</string -->
-  <!-- UNUSED string name="pref_backups_clear_summary">Abilita menu per cancellazione backup disegni</string -->
+  <!-- UNUSED string name="pref_backups_clear_summary">Menu per cancellazione backup disegni</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">Aree xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Salva le aree in modo xtherion</string -->
   <string name="pref_therion_splays_title">Splay Therion</string>
@@ -1692,7 +1692,7 @@
   <string name="pref_legonly_update_title">Refresh solo tiri</string>
   <string name="pref_legonly_update_summary">Ridisegna linee solo allo scarico dei tiri</string>
   <string name="pref_full_affine_title">Trasformata affine</string>
-  <string name="pref_full_affine_summary">Abilita trasformazione affine dei disegni</string>
+  <string name="pref_full_affine_summary">Trasformazione affine dei disegni</string>
   <string name="pref_loopClosure_title">Chiusura anelli</string>
   <string name="pref_loopClosure_summary">Compensazione errore nella chiusura anelli</string>
   <string name="pref_loop_thr_title">Soglia ciclo</string>
@@ -1704,15 +1704,15 @@
   <string name="pref_LRExtend_title">Stima extend Sx/Dx</string>
   <string name="pref_LRExtend_summary">Stima extend Sx/Dx (Bussola/import VisualTopo)</string>
   <string name="pref_diving_mode_title">Modo Immersione</string>
-  <string name="pref_diving_mode_summary">Abilita modo immersione</string>
+  <string name="pref_diving_mode_summary">Modalità distanza/azimut/profondità </string>
   <string name="pref_splay_classes_title">Classi di splay</string>
-  <string name="pref_splay_classes_summary">Abilita classi e colorazione splay</string>
+  <string name="pref_splay_classes_summary">Classi e colorazione splay</string>
   <!-- UNUSED string name="pref_splay_as_dot_title">Finale di splay</string -->
   <!-- UNUSED string name="pref_splay_as_dot_summary">Mostra splay come finali</string -->
-  <string name="pref_splay_color_title">Colorazione splay</string>
-  <string name="pref_splay_color_summary">Abilita colorazione splay</string>
+  <string name="pref_splay_color_title">Colore splay</string>
+  <string name="pref_splay_color_summary">Colorazione degli splay</string>
   <string name="pref_plot_shift_title">Scala/Sposta disegno</string>
-  <string name="pref_plot_shift_summary">Abilita spostamento/ridimensione disegno</string>
+  <string name="pref_plot_shift_summary">Spostamento/ridimensione disegno</string>
   <string name="pref_splay_alpha_title">Trasparenza splay</string>
   <string name="pref_splay_alpha_summary">Trasparenza splay [0: transparente, 100: opaco]</string>
 
@@ -1727,7 +1727,7 @@
   <string name="pref_zoom_controls_title">Regolazioni Zoom</string>
   <string name="pref_zoom_controls_summary">Regolazioni Zoom su multitouch</string>
   <string name="pref_side_drag_title">Corner-drag</string>
-  <string name="pref_side_drag_summary">Abilita corner-drag sul rilievo</string>
+  <string name="pref_side_drag_summary">Corner-dragi del disegno</string>
   <string name="pref_unit_grid_title">Unità di misura disegno</string>
   <string name="pref_unit_grid_summary">Dimensione celle della griglia</string>
   <string name="pref_unit_measure_title">Unita` distanze</string>
