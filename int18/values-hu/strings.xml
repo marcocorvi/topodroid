@@ -1785,7 +1785,6 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x súlyozása</string -->
 
-<!-- DONT_TRANSLATE -->
   <!-- NO string name="pref_log_stream_summary" translatable="false">Log output stream</string -->
   <!-- NO string name="pref_log_stream_title" translatable="false">Log stream</string -->
   <!-- NO string name="pref_log_append" translatable="false">append logs</string -->
@@ -1824,13 +1823,13 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <!-- UNUSED string name="line_normal">normál</string -->
   <!-- UNUSED string name="line_coarse">durva</string -->
   <!-- UNUSED string name="units_ddmmss">ddmmss</string -->
-  <!-- UNUSED string name="units_dd">degrees</string -->
-  <!-- UNUSED string name="units_grads">grads</string -->
-  <!-- UNUSED string name="units_meters">meters</string -->
-  <!-- UNUSED string name="units_feet">feet</string -->
-  <!-- UNUSED string name="alt_wgs">ellipsoid</string -->
-  <!-- UNUSED string name="alt_ortho">orthometric</string -->
-  <!-- UNUSED string name="splay_extend">estimate splay extend</string -->
+  <!-- UNUSED string name="units_dd">fok</string -->
+  <!-- UNUSED string name="units_grads">újfok</string -->
+  <!-- UNUSED string name="units_meters">méter</string -->
+  <!-- UNUSED string name="units_feet">láb</string -->
+  <!-- UNUSED string name="alt_wgs">ellipszoid</string -->
+  <!-- UNUSED string name="alt_ortho">t.sz. felett</string -->
+  <!-- UNUSED string name="splay_extend">sün meghosszabbítás becsléses</string -->
 
     <string name="perms_mandatory">A TopoDroid nem futtatható a következő engedélyek nélkül:</string>
     <string name="perms_optional">A TopoDroid hibázhat a következő engedélyek nélkül:</string>
@@ -2093,11 +2092,11 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="view_zoom">Zoom 1</string>
 
     <string name="walls_title">FALAK</string>
-    <string name="walls_convexhull">Convex Hull</string>
+    <string name="walls_convexhull">Konvex hajótest</string>
     <!-- NO string name="walls_powercrust">Powercrust</string -->
-    <string name="walls_hull">Hull</string>
-    <string name="walls_bubble">Bubble</string>
-    <string name="walls_tube">Tube</string>
+    <string name="walls_hull">Hajótest</string>
+    <string name="walls_bubble">Buborék</string>
+    <string name="walls_tube">Cső</string>
     <!-- NO string name="walls_delaunay">Delaunay</string -->
 
     <!-- UNUSED string name="powercrust_few_splays">Powercrust: túl kevés sün</string -->
@@ -2138,12 +2137,12 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="no_permissions">Az alkalmazás nem tud futni szükséges hozzáférések nélkül</string>
 
     <!-- UNUSED string name="done_fractals">Kész fraktál dimenziók</string -->
-    <string name="done_convexhull">Kész convex-hull falak</string>
-    <string name="fail_convexhull">Hibás convex-hull falak</string>
+    <string name="done_convexhull">Kész konvex-hajótest falak</string>
+    <string name="fail_convexhull">Hibás konvex-hajótest falak</string>
     <string name="done_powercrust">Kész powercrust falak</string>
     <string name="fail_powercrust">Hibás powercrust falak</string>
-    <string name="done_hull">Kész simple-hull falak</string>
-    <string name="fail_hull">Hibás simple-hull falak</string>
+    <string name="done_hull">Kész egyszerű-hajótest falak</string>
+    <string name="fail_hull">Hibás egszerű-hajótest falak</string>
     <string name="done_tube">Kész simple-tube falak</string>
     <string name="fail_tube">Hibás simple-tube falak</string>
     <string name="done_bubble">Kész bubble falak</string>
@@ -2207,12 +2206,12 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="cpref_powercrust_delta_title">Powercrust Delta</string>
     <string name="cpref_powercrust_delta_summary">Zárja ki a közeli túlságosan eltérő sünöket [0.1]</string>
 
-    <!-- UNUSED string name="cpref_convex_hull_title">Convex hull</string -->
-    <!-- UNUSED string name="cpref_convex_hull_summary">Convex hull falak</string -->
+    <!-- UNUSED string name="cpref_convex_hull_title">Konvex hajótest</string -->
+    <!-- UNUSED string name="cpref_convex_hull_summary">Konvex hajótest falak</string -->
     <!-- UNUSED string name="cpref_delaunay_title">Delaunay</string -->
     <!-- UNUSED string name="cpref_delaunay_summary">Delaunay falak</string -->
-    <!-- UNUSED string name="cpref_hull_title">Hull</string -->
-    <!-- UNUSED string name="cpref_hull_summary">Hull falak</string -->
+    <!-- UNUSED string name="cpref_hull_title">Hajótest</string -->
+    <!-- UNUSED string name="cpref_hull_summary">Hajótest falak</string -->
 
     <!-- UNUSED string name="TopoGLPerms">Engedélyek</string -->
     <!-- UNUSED string name="cperms_mandatory">Cave3D nem tud futni ennélkül:</string -->
