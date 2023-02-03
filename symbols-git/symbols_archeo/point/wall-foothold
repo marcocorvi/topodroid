@@ -1,0 +1,11 @@
+encoding utf-8
+symbol point
+name wall-foothold
+th_name wall-foothold
+color 0xcccccc
+path
+  moveTo 6 6
+  lineTo -6 6
+  cubicTo -6 -6 6 -6 6 6
+endpath
+endsymbol

@@ -1,0 +1,12 @@
+encoding utf-8
+symbol point
+name wall-handhold
+th_name wall-handhold
+color 0xcccccc
+path
+  moveTo 6 -6
+  lineTo 6 6
+  lineTo -6 6
+  lineTo -6 -6
+endpath
+endsymbol
