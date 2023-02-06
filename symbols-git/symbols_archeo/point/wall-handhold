@@ -1,6 +1,7 @@
 encoding utf-8
 symbol point
 name wall-handhold
+name-hu kéztámasz
 th_name wall-handhold
 color 0xcccccc
 path
