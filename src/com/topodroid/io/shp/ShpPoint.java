@@ -12,11 +12,13 @@
 package com.topodroid.io.shp;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDMath;
 // import com.topodroid.num.NumStation;
 // import com.topodroid.num.NumShot;
 // import com.topodroid.num.NumSplay;
 import com.topodroid.TDX.DrawingPointPath;
 import com.topodroid.TDX.DrawingUtil;
+import com.topodroid.TDX.BrushManager;
 
 // import java.io.File;
 // import java.io.FileOutputStream;
@@ -38,7 +40,7 @@ public class ShpPoint extends ShpObject
   }
 
   // write headers for POINT
-  public boolean writePoints( List< DrawingPointPath > pts, double x0, double y0, double xscale, double yscale, double cd, double sd ) throws IOException
+  public boolean writePoints( List< DrawingPointPath > pts, double x0, double y0, double xscale, double yscale, double cd, double sd, float decl ) throws IOException
   {
     int n_pts = (pts != null)? pts.size() : 0;
     // TDLog.v( "SHP write points " + n_pts );
@@ -91,7 +93,11 @@ public class ShpPoint extends ShpObject
       // TDLog.v( "POINT " + cnt + ": " + pt.getThName() +  " orient " +  (int)pt.mOrientation + " scale " +  pt.getScale() + " level " + pt.mLevel + " scrap " + pt.mScrap );
       writeShxRecord( offset, shpRecLen );
       fields[0] = pt.getThName( );
-      fields[1] = new String( blankPadded( (int)pt.mOrientation, SIZE_ORIENT ) ); 
+      if ( BrushManager.isPointOrientable( pt.pointType() ) ) { 
+        fields[1] = new String( blankPadded( TDMath.in360( (int)(pt.mOrientation+decl) ), SIZE_ORIENT ) ); 
+      } else {
+        fields[1] = new String( blankPadded( (int)pt.mOrientation, SIZE_ORIENT ) ); 
+      }
       fields[2] = new String( blankPadded( pt.getScale(), SIZE_SCALE ) );
       fields[3] = Integer.toString( pt.mLevel );
       fields[4] = Integer.toString( pt.mScrap ); 

@@ -55,13 +55,15 @@ public class DrawingShp
     double yscale = ShpObject.SCALE;
     float cd = 1;
     float sd = 0;
+    float decl = 0;
     if ( station != null && TDSetting.mShpGeoref ) {
       xoff = station.ge;
       yoff = station.gs;
       xscale = ShpObject.SCALE * station.eradius; // use only S-radius FIXME
       yscale = ShpObject.SCALE * station.sradius;
-      cd = TDMath.cosd( station.declination ); // N.B. station.declination can include -convergence
-      sd = TDMath.sind( station.declination );
+      decl = station.declination; // N.B. station.declination can include -convergence
+      cd = TDMath.cosd( decl ); 
+      sd = TDMath.sind( decl );
     }
 
     if ( ! TDFile.makeMSdir( dirname ) ) {
@@ -116,7 +118,7 @@ public class DrawingShp
         }
       }
       ShpPoint shp_point = new ShpPoint( dirname, "point", files );
-      shp_point.writePoints( points, xoff, yoff, xscale, yscale, cd, sd );
+      shp_point.writePoints( points, xoff, yoff, xscale, yscale, cd, sd, decl );
       ShpExtra shp_extra = new ShpExtra( dirname, "extra", files );
       shp_extra.writeExtras( extras, xoff, yoff, xscale, yscale, cd, sd, links );
       ShpPolyline shp_line = new ShpPolyline( dirname, "line", DrawingPath.DRAWING_PATH_LINE, files );
