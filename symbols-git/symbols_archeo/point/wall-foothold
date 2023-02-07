@@ -1,5 +1,6 @@
 encoding utf-8
 symbol point
+name-hu lábtámasz
 name wall-foothold
 th_name wall-foothold
 color 0xcccccc
