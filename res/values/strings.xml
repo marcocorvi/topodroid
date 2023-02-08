@@ -401,6 +401,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="no_leg_first">Selection does not start with a leg</string>
     <string name="no_leg_intersection">Section line crosses no leg</string>
     <string name="no_location_data">No location data</string>
+    <string name="no_native_lib">Missing native library</string>
     <!-- UNUSED string name="no_paired_device">No paired device.\nScan and pair a DistoX</string -->
     <string name="no_photos">Survey has no photo</string>
     <string name="no_plots">Survey has no sketch\nUse Add button to make one</string>

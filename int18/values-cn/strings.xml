@@ -392,6 +392,7 @@
     <string name="no_leg_first">选择未从主线开始</string>
     <string name="no_leg_intersection">横截面线与主线无交叉</string>
     <string name="no_location_data">无位置数据</string>
+    <!-- TODO string name="no_native_lib">Missing native library</string -->
     <!-- UNUSED string name="no_paired_device">无配对设备.\n扫描并配对一个DistoX</string -->
     <string name="no_photos">测量无照片</string>
     <string name="no_plots">测量无草图\n点击添加草图</string>

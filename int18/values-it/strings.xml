@@ -390,6 +390,7 @@
     <string name="no_leg_first">La selezione non parte con una battuta</string>
     <string name="no_leg_intersection">La linea di sezione non interseca alcuna battuta</string>
     <string name="no_location_data">Nessun dato di posizione</string>
+    <string name="no_native_lib">Libreria nativa assente</string>
     <!-- UNUSED string name="no_paired_device">Nessun DistoX accoppiato.</string -->
     <string name="no_photos">Rilievo senza foto</string>
     <string name="no_plots">Rilievo senza disegni</string>

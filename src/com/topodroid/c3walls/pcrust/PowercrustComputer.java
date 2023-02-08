@@ -34,7 +34,7 @@ public class PowercrustComputer
   ArrayList<Triangle3D> mTriangles;
   PCSite[] mVertices;
 
-  private Powercrust powercrust = null;
+  // private Powercrust powercrust = null;
 
   public PowercrustComputer( TglParser parser, List<Cave3DStation> stations, List<Cave3DShot> shots )
   {
@@ -57,7 +57,7 @@ public class PowercrustComputer
     double delta = GlModel.mPowercrustDelta;
     try {
       // mCave3D.toast( "computing the powercrust" );
-      powercrust = new Powercrust( );
+      Powercrust powercrust = new Powercrust( );
       powercrust.resetSites( 3 );
       double x, y, z, v;
       int n_tot = mStations.size();
@@ -158,8 +158,11 @@ public class PowercrustComputer
         computePowercrustPlanView( );
         computePowercrustProfileView( );
       }
+    } catch ( java.lang.UnsatisfiedLinkError e ) {
+      TDLog.Error( "PCrust link error " + e.getMessage() );
+      return false;
     } catch ( Exception e ) {
-      TDLog.Error( "PCrust Error: " + e.getMessage() );
+      TDLog.Error( "PCrust error: " + e.getMessage() );
       return false;
     }
     // TDLog.v( "Powercrust V " + mVertices.length + " F " + mTriangles.size() );

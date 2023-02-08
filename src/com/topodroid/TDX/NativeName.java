@@ -29,7 +29,6 @@ class NativeName
 
   NativeName()
   {
-    // TDLog.v( "powercrust cstr");
     initLog();
   }
 

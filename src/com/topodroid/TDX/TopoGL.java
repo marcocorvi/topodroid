@@ -1642,26 +1642,39 @@ public class TopoGL extends Activity
    */
   private void loadTextureGeotiff( final InputStreamReader isr, final String pathname, final RectF bounds )
   {
-    (new AsyncTask<String, Void, Boolean>() {
+    (new AsyncTask<String, Void, Integer>() {
       Bitmap bitmap = null;
 
-      public Boolean doInBackground( String ... files ) {
+      // @return: 0 ok, 1 fail, 2 no-lib
+      public Integer doInBackground( String ... files ) {
         String file = files[0];
-        bitmap = (Bitmap)( TiffFactory.getBitmap( pathname, bounds.left, bounds.bottom, bounds.right, bounds.top ) );
+        try { 
+          bitmap = (Bitmap)( TiffFactory.getBitmap( pathname, bounds.left, bounds.bottom, bounds.right, bounds.top ) );
+        } catch ( java.lang.UnsatisfiedLinkError e ) {
+          TDLog.Error( e.getMessage() );
+          return 1; 
+        }
         // if ( bitmap != null ) {
         //   // TDLog.v("texture " + file + " size " + bitmap.getWidth() + " " + bitmap.getHeight() );
         // }
 
-        return (bitmap != null);
+        return (bitmap != null)? 0 : 2;
       }
 
-      public void onPostExecute( Boolean b )
+      // @param b exec return value
+      public void onPostExecute( Integer b )
       {
-        if ( b ) {
-          if ( mRenderer != null ) mRenderer.notifyTexture( bitmap ); // FIXME do in doInBackground
-          TDToast.make( R.string.texture_ok );
-        } else {
-          TDToast.make( R.string.texture_failed );
+        switch ( b.intValue() ) {
+          case 0: 
+            if ( mRenderer != null ) mRenderer.notifyTexture( bitmap ); // FIXME do in doInBackground
+            TDToast.make( R.string.texture_ok );
+            break;
+          case 1:
+            TDToast.make( R.string.no_native_lib );
+            break;
+          // case 2:
+          default:
+            TDToast.make( R.string.texture_failed );
         }
       }
     }).execute( pathname );
