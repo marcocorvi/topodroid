@@ -18,16 +18,23 @@ group wall
 color 0xff0000 0xff
 width 1
 roundtrip 1
-dash 10 2
 effect
   moveTo 0 0
-  lineTo 10 2
-  lineTo 6 8
-  lineTo 0 1
-  lineTo 1 1
-  lineTo 5 6
-  lineTo 6 6
-  lineTo 8 2
-  lineTo 1 1
+  lineTo 15 5
+  lineTo 13 0
+  lineTo 23 8
+  lineTo 26 -4
+  lineTo 13 -1
+  lineTo 10 -9
+  lineTo 0 -1
+  lineTo 1 -0.5
+  lineTo 14.5 -8
+  lineTo 12 0
+  lineTo 25 -3
+  lineTo 22.5 7
+  lineTo 13 -0.2
+  lineTo 12 0
+  lineTo 13.5 4
+  lineTo 1 -0.5
 endeffect
 endsymbol
