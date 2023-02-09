@@ -2,6 +2,7 @@ encoding utf-8
 symbol point
 name rock-pit
 name-hu sziklagödör
+name-pt poço_na_rocha
 th_name rock-pit
 color 0xff6699
 path

@@ -361,7 +361,7 @@ no campo abaixo e aperte o botão.
   <string name="no_leg_first">Seleção não começa com uma visada</string>
   <string name="no_leg_intersection">Linha de corte não cruza nenhuma visada</string>
   <string name="no_location_data">Nenhuma informação de posição</string>
-    <!-- TODO string name="no_native_lib">Missing native library</string -->
+  <string name="no_native_lib">Biblioteca nativa não encontrada</string>
   <!-- UNUSED string name="no_paired_device">Nenhum dispositivo associado.\nBusque e associe uma DistoX</string -->
   <string name="no_photos">Topo sem foto</string>
   <string name="no_plots">Topo sem nenhum croqui registrado.\nUse o botão Novo para criar um</string>
@@ -1686,8 +1686,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_log_csurvey" translatable="false">cSurvey</string>
   <string name="pref_log_ptopo" translatable="false">PocketTopo</string>
   <string name="pref_log_zip" translatable="false">ZIP</string>
-  <!- - UNUSED string name="pref_log_sync" translatable="false">Co-surveying</string - ->
--->
+  <!- - UNUSED string name="pref_log_sync" translatable="false">Co-surveying</string - -> -->
   <!-- UNUSED string name="line_bezier">Bézier</string -->
   <!-- UNUSED string name="line_fine">fino</string -->
   <!-- UNUSED string name="line_normal">normal</string -->
@@ -2024,14 +2023,12 @@ no campo abaixo e aperte o botão.
   <string name="cpref_split_stretch_summary">Alongar pontos das paredes na direção da visada</string>
   <string name="cpref_powercrust_delta_title">Delta Powercrust</string>
   <string name="cpref_powercrust_delta_summary">Filtro medidas auxiliares</string>
-  <!--
-    <string name="cpref_convex_hull_title">Convex hull</string>
+  <!--  <string name="cpref_convex_hull_title">Convex hull</string>
     <string name="cpref_convex_hull_summary">Convex hull walls</string>
     <string name="cpref_delaunay_title" translatable="false">Delaunay</string>
     <string name="cpref_delaunay_summary">Delaunay walls</string>
     <string name="cpref_hull_title">Hull</string>
-    <string name="cpref_hull_summary">Hull walls</string>
--->
+    <string name="cpref_hull_summary">Hull walls</string> -->
   <!-- UNUSED string name="TopoGLPerms">Permissions</string -->
   <!-- UNUSED string name="cperms_mandatory">Cave3D não pode ser executado sem as seguintes permissões:</string -->
   <!-- UNUSED string name="cperms_optional">Cave3D may fail without these permissions:</string -->

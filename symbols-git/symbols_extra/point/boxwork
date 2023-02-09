@@ -1,6 +1,7 @@
 encoding utf-8
 symbol point
 name boxwork
+name-pt boxwork
 th_name boxwork
 orientation no
 color 0xccffff

@@ -2,6 +2,7 @@ encoding utf-8
 symbol line
 name wall_popcorn
 name-hu borsóköves_fal
+name-pt parede_coralóide
 name-ro perete_pisolitic
 th_name wall:popcorn
 group wall

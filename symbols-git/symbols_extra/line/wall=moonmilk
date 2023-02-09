@@ -2,6 +2,7 @@ encoding utf-8
 symbol line
 name wall_moonmilk
 name-hu fal_hegyitejből
+name-pt parede_leite_de_lua
 th_name wall:moonmilk
 group wall
 color 0xff0000 0xff
