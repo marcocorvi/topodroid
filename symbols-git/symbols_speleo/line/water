@@ -16,7 +16,7 @@ name-sk vodný_tok
 name-ro curs_de_apă
 th_name water-flow
 group water-flow
-color 0x6666ff
+color 0x6699ff
 width 1
 dash 14 7
 effect

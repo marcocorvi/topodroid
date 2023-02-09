@@ -16,7 +16,7 @@ name-sk stropné_koryto
 name-ro meandru_tavan
 th_name ceiling-meander
 group ceiling
-color 0xcc00cc 0xff
+color 0xff99ff 0xff
 width 1
 dash 15 5
 effect
