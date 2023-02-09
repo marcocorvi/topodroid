@@ -1,0 +1,33 @@
+encoding utf-8
+symbol line
+name wall_icing
+name-cn 冰积洞壁
+name-es paredes_de_hielo
+name-pt parede_de_gelo
+name-fr parois_glacées
+name-de Eiswand
+name-bg стена_изо_льда
+name-fa دیوار_یخی
+name-ru стена_во_льду
+name-ua стіна_в_льоду
+name-hu fal_jégből
+name-sk ľadové_steny
+name-ro perete_gheață
+th_name wall:icing
+group wall
+color 0xff0000 0xff
+width 1
+dash 25 5
+effect
+  moveTo 0 1
+  lineTo 19 1
+  lineTo 19 0
+  lineTo 0 0
+  lineTo 0 1
+  moveTo 24 10
+  lineTo 25 10
+  lineTo 25 -9
+  lineTo 24 -9
+  lineTo 24 10
+endeffect
+endsymbol
