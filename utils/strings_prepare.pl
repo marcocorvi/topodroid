@@ -23,13 +23,18 @@ use XML::LibXML;
 
 use constant {
   PREFIX => '    ',
+  DEBUG => 0
 };
 
 # For debbuging
 use Data::Dumper;
 
 sub get_node_name($element) {
-  # print "ELEMENT in get_node_name: '$element'\n";
+  our $debug;
+
+  if ($debug) {
+    print "ELEMENT in get_node_name: '$element'\n";
+  }
   my $name = '';
 
   if ($element->nodeType == XML_COMMENT_NODE) {
@@ -40,25 +45,41 @@ sub get_node_name($element) {
       $name = $element->getAttribute('name');
     }
   }
-  # print "name found: '$name'\n";
+  if ($debug) {
+    print "name found: '$name'\n";
+  }
 
   return $name;
 }
 
 sub parse_comment_name ($content) {
+  our $debug;
   my $name = '';
 
   if ( $content =~ /name="/ ) {
     $name = $content;
-    $name =~ s/^.*?name="//;
-    $name =~ s/".*$//;
+    if ($debug) {
+      print "\$name inside parse_comment_name 1: '$name'\n";
+    }
+    $name =~ s/^.*?name="//s;
+    if ($debug) {
+      print "\$name inside parse_comment_name 2: '$name'\n";
+    }
+    $name =~ s/".*$//s;
+    if ($debug) {
+      print "\$name inside parse_comment_name 3: '$name'\n";
+    }
     $name = trim($name);
+    if ($debug) {
+      print "\$name inside parse_comment_name 4: '$name'\n";
+    }
   }
 
   return $name;
 }
 
 sub parse_comment_tag ($comment) {
+  our $debug;
   my $tag = '';
 
   if ($comment->nodeType != XML_COMMENT_NODE) {
@@ -66,17 +87,23 @@ sub parse_comment_tag ($comment) {
   }
 
   $tag = $comment;
-  # print "TAG1 in parse_comment_tag: '$tag'\n";
-  $tag =~ s/^<!--\s*//;
-  # print "TAG2 in parse_comment_tag: '$tag'\n";
-  if ($tag =~ m/^([A-Z]+)\s+.*-->$/) {
+  if ($debug) {
+    print "TAG1 in parse_comment_tag: '$tag'\n";
+  }
+  $tag =~ s/^<!--\s*//s;
+  if ($debug) {
+    print "TAG2 in parse_comment_tag: '$tag'\n";
+  }
+  if ($tag =~ m/^([A-Z]+)\s+.*-->$/s) {
     $tag = $1;
   }
   else {
     $tag = '';
   }
 
-  # print "TAG in parse_comment_tag: '$tag'\n";
+  if ($debug) {
+    print "TAG in parse_comment_tag: '$tag'\n";
+  }
 
   return $tag;
 }
@@ -86,9 +113,15 @@ sub add_named_element (
   $element_ref, 
   $names_ref, 
   $duplicate_names_ref) {
-  # print "\$element_ref em add_named_element: '" . Dumper($element_ref) . "'\n";
+  our $debug;
+
+  if ($debug) {
+    print "\$element_ref em add_named_element: '" . Dumper($element_ref) . "'\n";
+  }
   if (exists($$names_ref{$name})) {
-    # print "REPEATED NAME - '$name': '" . $element_ref->textContent(). "'\n";
+    if ($debug) {
+      print "REPEATED NAME - '$name': '" . $element_ref->textContent(). "'\n";
+    }
     if (exists($$duplicate_names_ref{$name})) {
       push(@{%{$duplicate_names_ref}{$name}}, $element_ref);
     }
@@ -102,12 +135,15 @@ sub add_named_element (
 }
 
 sub analyze_xml_file ($filename, $dom, $names_ref) {
+  our $debug;
   my %duplicated_names;
   my @empty_named_elements;
   my $xml_ok = 1;
 
   for my $named_element ($dom->findnodes('/resources/*[@name]')) {
-    # print "\$named_element em analyze_xml_file: '" . Dumper($named_element) . "'\n";
+    if ($debug) {
+      print "\$named_element em analyze_xml_file: '" . Dumper($named_element) . "'\n";
+    }
     my $name = trim($named_element->getAttribute('name'));
 
     if ($name eq '') {
@@ -121,11 +157,15 @@ sub analyze_xml_file ($filename, $dom, $names_ref) {
       $names_ref,
       \%duplicated_names
     );
-    # print "'$name': '" . $named_element->textContent() . "'\n";
+    if ($debug) {
+      print "'$name': '" . $named_element->textContent() . "'\n";
+    }
   }
 
   for my $comment ($dom->findnodes('/resources/comment()')) {
-    # print "\$comment em analyze_xml_file: '" . Dumper($comment) . "'\n";
+    if ($debug) {
+      print "\$comment em analyze_xml_file: '" . Dumper($comment) . "'\n";
+    }
     my $name = parse_comment_name($comment->textContent());
     my $tag = parse_comment_tag($comment);
 
@@ -139,7 +179,9 @@ sub analyze_xml_file ($filename, $dom, $names_ref) {
       $names_ref,
       \%duplicated_names
     );
-    # print "'$name': '" . $comment->textContent(). "'\n";
+    if ($debug) {
+      print "'$name': '" . $comment->textContent(). "'\n";
+    }
   }
 
   if (@empty_named_elements > 0) {
@@ -152,7 +194,9 @@ sub analyze_xml_file ($filename, $dom, $names_ref) {
 
   if (%duplicated_names > 0) {
     $xml_ok = 0;
-    # print Dumper(\%duplicated_names);
+    if ($debug) {
+      print Dumper(\%duplicated_names);
+    }
     print "-> '$filename' HAS DUPLICATED NAMED ELEMENTS:\n";
     for my $duplicated_name (keys(%duplicated_names)) {
       print "-> '$duplicated_name' ELEMENTS:\n";
@@ -169,18 +213,25 @@ sub analyze_xml_file ($filename, $dom, $names_ref) {
 }
 
 sub get_comment_content_without_tag($element) {
+  our $debug;
   my $content = $element->toString();
 
-  # print "\$content pré em get_comment_content_without_tag: '$content'\n";
+  if ($debug) {
+    print "\$content pré em get_comment_content_without_tag: '$content'\n";
+  }
   $content =~ s/^\<!--\s*//;
   $content =~ s/^[A-Z]+\s+//;
   $content =~ s/\s*--\>$//;
-  # print "\$content pós em get_comment_content_without_tag: '$content'\n";
+  if ($debug) {
+    print "\$content pós em get_comment_content_without_tag: '$content'\n";
+  }
 
   return $content;
 }
 
 sub get_element_without_limiters($element) {
+  our $debug;
+
   # Removing $element comment childs before getting $element content as string
   # as a comment ending inside our new commment ends the comment prematurely.
   for my $child ($element->childNodes()) {
@@ -191,27 +242,35 @@ sub get_element_without_limiters($element) {
 
   my $content = $element->toString(2);
 
-  # print "\$content pré em get_element_without_limiters: '$content'\n";
+  if ($debug) {
+    print "\$content pré em get_element_without_limiters: '$content'\n";
+  }
   $content =~ s/^\<\s*//;
   $content =~ s/\s*\>$//;
-  # print "\$content pós em get_element_without_limiters: '$content'\n";
+  if ($debug) {
+    print "\$content pós em get_element_without_limiters: '$content'\n";
+  }
 
   return $content;
 }
 
 sub get_formats($element) {
+  our $debug;
+
   my %formats;
   my $text = $element->textContent();
-  if ($text =~ /%/) {
-    # print "TEXT: '$text'\n";
-  }
+  # if ($text =~ /%/) {
+  #   print "TEXT: '$text'\n";
+  # }
 
   # Regex for sprinf formats taken from https://stackoverflow.com/questions/6915025/regexp-to-detect-if-a-string-has-printf-placeholders-inside
   # /^\x25(?:([1-9]\d*)\$|\(([^\)]+)\))?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-fiosuxX])/
   # Adapted to Perl:
   # \x25(?:([1-9]\d*)\$|\(([^\)]+)\))?(\+)?(0|'[^\$])?(-)?(\d+)?(?:\.(\d+))?([b-fiosuxX])
   while ($text =~ /(\x25(?:([1-9]\d*)\$|\(([^\)]+)\))?(\+)?(0|'[^\$])?(-)?(\d+)?(?:\.(\d+))?([b-fiosuxX]))/g) {
-    # print "--> Found a format: '$1'\n";
+    if ($debug) {
+      print "--> Found a format: '$1'\n";
+    }
     $formats{$1} = 1;
   }
   return \%formats;
@@ -260,6 +319,8 @@ sub check_formats($a_element, $other_element) {
   return $formats_ok;
 }
 
+my $debug = DEBUG;
+
 if (@ARGV != 3) {
   die "\nUsage:
   $0 EN_ORIGINAL_FILE XX_TRANSLATED_FILE_TO_BE_UPDATED NEW_XX_FILE\n\n";
@@ -288,7 +349,9 @@ else {
     print "Creating new '$new_filename' from empty '$xx_filename '.\n";
 }
 
-# print Dumper(\%xx_names);
+if ($debug) {
+  print Dumper(\%xx_names);
+}
 
 if (! -e $en_filename) {
   die "\nError:
@@ -314,7 +377,10 @@ for my $element ($en_dom->documentElement()->childNodes()) {
   }
 
   my $name = get_node_name($element);
-  # print "\$name: '$name'\n";
+  
+  if ($debug) {
+    print "\$name: '$name'\n";
+  }
 
   if ($name eq '') {
     next;
@@ -323,7 +389,9 @@ for my $element ($en_dom->documentElement()->childNodes()) {
   if (exists($xx_names{$name})) {
     if ($element->nodeType == XML_COMMENT_NODE) {
       my $tag = parse_comment_tag($element);
-      # print "\$tag: '$tag'\n";
+      if ($debug) {
+        print "\$tag: '$tag'\n";
+      }
 
       if ($xx_names{$name}->nodeType == XML_COMMENT_NODE) {
         replace_with_comment_content_with_new_tag($xx_names{$name}, $element, $tag);
