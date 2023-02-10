@@ -391,7 +391,7 @@
     <string name="no_leg_first">Выбор не начинается с замера между пикетами</string>
     <string name="no_leg_intersection">Разрез не пересекает пикет</string>
     <string name="no_location_data">Нет данных о местоположении</string>
-    <!-- TODO string name="no_native_lib">Missing native library</string -->
+    <string name="no_native_lib">Отсутствует встроенная библиотека</string>
     <!-- UNUSED string name="no_paired_device">Отсутствует привязанный прибор.\nПросканируйте и привяжите DistoX</string -->
     <string name="no_photos">В съёмке нет фото</string>
     <string name="no_plots">В съёмке нет абрисов \nДля создания используйте кнопку Добавить</string>
