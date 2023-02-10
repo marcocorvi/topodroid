@@ -3,6 +3,7 @@ symbol area
 name icing-area
 name-pt área_congelável
 name-hu jeges_terület
+name-ru область_обледенения
 th_name icing-area
 group snow
 color 0xcccccc 0xcc
