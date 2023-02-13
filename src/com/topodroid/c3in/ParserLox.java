@@ -133,7 +133,11 @@ public class ParserLox extends TglParser
         shot.from_station = f;
         shot.to_station   = t;
         shot.setUsed();
-        mCaveLength += len;
+        if ( shot.isSurvey() ) {
+          mCaveLength += len;
+        } else if ( shot.isSurface() ) {
+          mSurfaceLength += len;
+        }
 
         Cave3DSurvey survey = getSurveyFromId( sh.Survey() );
         if ( (sh.Flag() & LoxShot.FLAG_SPLAY) != 0 ) {

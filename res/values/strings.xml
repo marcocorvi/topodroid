@@ -1984,7 +1984,8 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="info_survey">Surveys</string>
     <string name="info_shot">Shots</string>
     <string name="info_station" copyable="fr">Stations</string>
-    <string name="info_length">Length</string>
+    <string name="info_length">Cave length</string>
+    <string name="info_surface">Surface length</string>
     <string name="info_depth">Depth</string>
     <string name="info_volume" copyable="fr it pt">Volume</string>
     <string name="info_east">East</string>
@@ -1999,9 +2000,10 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="info_shot_value">Legs %1$d, Splays %2$d</string>
     <string name="info_station_value" copyable="all">%1$d</string>
     <string name="info_length_value" copyable="all">%1$.1f m</string>
+    <string name="info_surface_value" copyable="all">%1$.1f m</string>
     <string name="info_depth_value" copyable="all">%1$.1f m</string>
     <!-- TRYME string name="info_volume_value_tryme">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
-    <string name="info_volume_value" copyable="all">P. %1$.0f m³ C. %2$.0f m³</string>
+    <string name="info_volume_value" copyable="all">%1$.0f m³</string>
     <string name="info_east_value" copyable="all">W %1$.1f E %2$.1f</string>
     <string name="info_north_value" copyable="all">S %1$.1f N %2$.1f</string>
     <string name="info_z_value" copyable="all">%1$.1f  %2$.1f</string>

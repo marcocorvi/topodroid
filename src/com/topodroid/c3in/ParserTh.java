@@ -918,6 +918,7 @@ public class ParserTh extends TglParser
     // TDLog.v( "Th Process Shots. Fix " + fix0.getFullName() + " " + fix0.x + " " + fix0.y + " " + fix0.z );
 
     mCaveLength = 0.0f;
+    mSurfaceLength = 0.0f;
     // TDLog.v( "Th shots " + shots.size() + " splays " + splays.size() + " ok_fixes " + ok_fixes.size() );
 
     // for ( Cave3DShot sh : shots ) {
@@ -967,7 +968,11 @@ public class ParserTh extends TglParser
             // TDLog.v( "Th using loop-closing shot " + sh.from + " " + sh.to + " : " + sf.name + " " + st.name );
             sh.setUsed(); // LOOP
 	    ++ used_cnt;
-            mCaveLength += sh.length();
+            if ( sh.isSurvey() ) {
+              mCaveLength += sh.length();
+            } else if ( sh.isSurface() ) {
+              mSurfaceLength += sh.length();
+            }
             // make a fake station
             Cave3DStation s = sh.getStationFromStation( sf );
             stations.add( s );
@@ -983,7 +988,11 @@ public class ParserTh extends TglParser
             // TDLog.v( "Th add station TO " + sh.from + " " + sh.to + " " + sh.to_station.name );
             sh.setUsed();
 	    ++ used_cnt;
-            mCaveLength += sh.length();
+            if ( sh.isSurvey() ) {
+              mCaveLength += sh.length();
+            } else if ( sh.isSurface() ) {
+              mSurfaceLength += sh.length();
+            }
             repeat = true;
           } else if ( sf == null && st != null ) {
             // TDLog.v( "Th using backward shot " + sh.from + " " + sh.to + " : null " + st.name );
@@ -993,7 +1002,11 @@ public class ParserTh extends TglParser
             // TDLog.v( "Th add station FR " + sh.from + " " + sh.to + " " + sh.from_station.name  );
             sh.setUsed();
 	    ++ used_cnt;
-            mCaveLength += sh.length();
+            if ( sh.isSurvey() ) {
+              mCaveLength += sh.length();
+            } else if ( sh.isSurface() ) {
+              mSurfaceLength += sh.length();
+            }
             repeat = true;
           } else {
             // TDLog.v( "Th unused shot " + sh.from + " " + sh.to + " : null null" );

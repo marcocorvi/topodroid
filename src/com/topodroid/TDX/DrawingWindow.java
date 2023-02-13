@@ -2425,7 +2425,7 @@ public class DrawingWindow extends ItemDrawer
     mScaleBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
       public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
         if ( fromUser ) {
-          setPointScale( progress );
+          setPointScaleProgress( progress );
         }
       }
       public void onStartTrackingTouch(SeekBar seekbar) { }
@@ -9268,7 +9268,7 @@ public class DrawingWindow extends ItemDrawer
   /** set the hot-item point scale
    * @param progress  scalebar progress value
    */
-  void setPointScale( int progress )
+  void setPointScaleProgress( int progress )
   {
     if ( mHotPath == null ) return;
     if ( mHotPath instanceof DrawingPointPath ) {
@@ -9278,6 +9278,12 @@ public class DrawingWindow extends ItemDrawer
     }
   }
     
+  void setPointScale( int scale )
+  {
+    if ( scale >= PointScale.SCALE_XS && scale <= PointScale.SCALE_XL ) {
+      mPointScale = scale;
+    }
+  }
 
   // --------------------- from ItemDrawer
   /** set the recent symbol buttons of a symbol class

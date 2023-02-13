@@ -52,9 +52,10 @@ public class SymbolPoint extends Symbol
   private String mSvg;
   private String mXvi;
 
-  int mHasText;         // whether the point has a text (1), value (2), or none (0)
-  boolean mOrientable; // PRIVATE
-  double mOrientation;      // orientation [degrees]
+  int mHasText;                // whether the point has a text (1), value (2), or none (0)
+  boolean mOrientable;         // PRIVATE
+  double mOrientation;         // orientation [degrees]
+  boolean mDeclinable = false; // whether the symbol should be rotated by the declination (must be orientable)
   // SymbolPointBasic mPoint1; // basic point
 
   // boolean hasText() { return mHasText; }
@@ -63,6 +64,10 @@ public class SymbolPoint extends Symbol
   /** @return true if the point is orientable
    */
   @Override public boolean isOrientable() { return mOrientable; }
+
+  /** @return true if the point is declinable
+   */
+  @Override public boolean isDeclinable() { return mDeclinable; }
 
   // @Override public boolean isEnabled() { return mEnabled; }
   // @Override public void setEnabled( boolean enabled ) { mEnabled = enabled; }
@@ -97,13 +102,16 @@ public class SymbolPoint extends Symbol
    */
   public SymbolPointDxf getDxf() { return mDxf; }
 
-  /** @return the point in XVI format
+  /** @return the point in SVG format
    */
   public String getSvg( ) { return mSvg; }
 
   /** @return the point in XVI format
    */
   public String getXvi( ) { return mXvi; }
+  // @Override public boolean isEnabled() { return mEnabled; }
+  // @Override public void setEnabled( boolean enabled ) { mEnabled = enabled; }
+  // @Override public void toggleEnabled() { mEnabled = ! mEnabled; }
 
   /** @return the point path
    */
@@ -152,9 +160,10 @@ public class SymbolPoint extends Symbol
     makePointPath( path );
     mOrigPath = new Path( mPath );
     
-    mOrientable = orientable;
-    mHasText = 0;
+    mOrientable  = orientable;
+    mHasText     = 0;
     mOrientation = 0.0;
+    mDeclinable  = mOrientable && ( mHasText == 0 );
     mLevel = level;
   }
 
@@ -179,10 +188,11 @@ public class SymbolPoint extends Symbol
     makePointPath( path );
     mOrigPath = new Path( mPath );
 
-    mOrientable = orientable;
-    mHasText = has_text;
+    mOrientable  = orientable;
+    mHasText     = has_text;
+    mDeclinable  = mOrientable && ( mHasText == 0 );
     mOrientation = 0.0;
-    mLevel = level;
+    mLevel       = level;
   }
 
   /** rotate the orientation of the point symbol
@@ -324,6 +334,13 @@ public class SymbolPoint extends Symbol
                   mOrientable = ( vals[k].equals("yes") || vals[k].equals( TDString.ONE ) );
                 }
               }
+            } else if ( vals[k].equals("declination") ) {
+              if ( cnt == 0 ) {
+                ++k; while ( k < s && vals[k].length() == 0 ) ++k;
+                if ( k < s ) {
+                  mDeclinable = ( vals[k].equals("yes") || vals[k].equals( TDString.ONE ) );
+                }
+              }
             } else if ( vals[k].equals("has_text") ) {
               if ( cnt == 0 ) {
                 ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -409,6 +426,7 @@ public class SymbolPoint extends Symbol
     } catch ( FileNotFoundException e ) {// FIXME
     } catch( IOException e ) {// FIXME
     }
+    if ( ! mOrientable ) mDeclinable = false;
     mOrientation = 0.0;
   }
 

@@ -179,6 +179,7 @@ public class BrushManager
   // static int getAreaCsxBrush( int index )    { return (mAreaLib == null)? 0 : mAreaLib.areaCsxBrush( index ); }
   static int getAreaLevel( int idx )         { return (mAreaLib == null)? DrawingLevel.LEVEL_BASE : mAreaLib.getSymbolLevel( idx ); }
 
+  public static boolean isPointDeclinable( int index )  { return mPointLib != null && mPointLib.isSymbolDeclinable( index ); } // TH2EDIT package
   public static boolean isPointOrientable( int index )  { return mPointLib != null && mPointLib.isSymbolOrientable( index ); } // TH2EDIT package
   static double getPointOrientation( int index ) { return (mPointLib == null)? 0 : mPointLib.getPointOrientation( index ); }
   // test should not be necessary but Xperia Z Ultra Android 5.1 crashed 2019-10-07

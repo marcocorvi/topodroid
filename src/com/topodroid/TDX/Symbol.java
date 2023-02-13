@@ -212,6 +212,10 @@ public class Symbol implements SymbolInterface
    */
   public boolean isOrientable() { return false; }
 
+  /** @return true if the symbol is declinable - default to false
+   */
+  public boolean isDeclinable() { return false; }
+
   /** @return the symbol color - either the paint color of full white
    */
   public int    getColor() 

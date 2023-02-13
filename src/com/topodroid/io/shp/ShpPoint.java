@@ -94,7 +94,11 @@ public class ShpPoint extends ShpObject
       writeShxRecord( offset, shpRecLen );
       fields[0] = pt.getThName( );
       if ( BrushManager.isPointOrientable( pt.pointType() ) ) { 
-        fields[1] = new String( blankPadded( TDMath.in360( (int)(pt.mOrientation+decl) ), SIZE_ORIENT ) ); 
+        if ( BrushManager.isPointDeclinable( pt.pointType() ) ) {
+          fields[1] = new String( blankPadded( TDMath.in360( (int)(pt.mOrientation+decl) ), SIZE_ORIENT ) ); 
+        } else {
+          fields[1] = new String( blankPadded( TDMath.in360( (int)(pt.mOrientation) ), SIZE_ORIENT ) ); 
+        }
       } else {
         fields[1] = new String( blankPadded( (int)pt.mOrientation, SIZE_ORIENT ) ); 
       }

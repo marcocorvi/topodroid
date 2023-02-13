@@ -14,7 +14,7 @@ package com.topodroid.TDX;
 // used to export x-section scrap in therion file
 class XSectionScrap
 {
-  String name; // scrap name
+  String name; // scrap name: one of <survey_name>-xxN, <survey_name>-xs-N, <survey_name>-xh-N
   float x, y;  // offset (scene coords ?)
 
   /** cstr

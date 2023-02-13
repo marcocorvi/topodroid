@@ -94,12 +94,15 @@ public class TglParser
   TubeComputer tubecomputer = null;
   BubbleComputer bubblecomputer = null;
 
+  
+
   // private ArrayList< CWConvexHull > walls   = null;
   // private ArrayList< CWBorder >     borders = null;
 
   protected DEMsurface mSurface;
   protected LoxBitmap  mBitmap = null;
-  public double mCaveLength;
+  public double mCaveLength = 0.0f;
+  public double mSurfaceLength = 0.0f;
   protected String mName;     // survey base name
 
   // Cave3DStation mCenterStation = null;
@@ -199,8 +202,18 @@ public class TglParser
   }
   public boolean hasPlanview() { return powercrustcomputer != null && powercrustcomputer.hasPlanview(); }
 
-  double getConvexHullVolume() { return ( convexhullcomputer == null )? 0 : convexhullcomputer.getVolume(); }
-  double getPowercrustVolume() { return ( powercrustcomputer == null )? 0 : powercrustcomputer.getVolume(); }
+  double getVolume() 
+  {
+    if ( convexhullcomputer != null ) {
+      return convexhullcomputer.getVolume();
+    } else if ( powercrustcomputer != null ) {
+      return powercrustcomputer.getVolume();
+    }
+    return 0.0;
+  }
+
+  // double getConvexHullVolume() { return ( convexhullcomputer == null )? 0 : convexhullcomputer.getVolume(); }
+  // double getPowercrustVolume() { return ( powercrustcomputer == null )? 0 : powercrustcomputer.getVolume(); }
 
   public Cave3DXSection getXSectionAt( Cave3DStation st ) 
   {
@@ -334,7 +347,14 @@ public class TglParser
 
   public double getCaveZMin()   { return zmin; }
   public double getCaveDepth()  { return zmax - zmin; }
+
+  /** @return the length of the cave midline
+   */
   public double getCaveLength() { return mCaveLength; }
+
+  /** @return the length of the surface midline
+   */
+  public double getSurfaceLength() { return mSurfaceLength; }
 
   /** @return the array of the station coordinates 
    * for each station the array contains the X, Y, and Z coordinates
@@ -636,8 +656,7 @@ public class TglParser
             for ( CWTriangle f : cw.mFace ) shp.add( f );
           }
         }
-      } 
-      if ( powercrustcomputer != null && powercrustcomputer.hasTriangles() ) {
+      } else if ( powercrustcomputer != null && powercrustcomputer.hasTriangles() ) {
         shp.mTriangles = powercrustcomputer.getTriangles();
         shp.mVertex    = powercrustcomputer.getVertices();
       }
@@ -733,8 +752,7 @@ public class TglParser
       //           for ( CWTriangle f : cw.mFace ) shp.add( f );
       //         }
       //       }
-      //     } 
-      //     if ( powercrustcomputer != null && powercrustcomputer.hasTriangles() ) {
+      //     } else if ( powercrustcomputer != null && powercrustcomputer.hasTriangles() ) {
       //       shp.mTriangles = powercrustcomputer.getTriangles();
       //       shp.mVertex    = powercrustcomputer.getVertices();
       //     }
@@ -835,7 +853,14 @@ public class TglParser
           }
           public void onPostExecute( Boolean b )
           {
-            if ( ! b ) convexhullcomputer = null;
+            if ( ! b ) { 
+              convexhullcomputer = null;
+            } else {
+              powercrustcomputer = null;
+              hullcomputer = null;
+              tubecomputer = null;
+              bubblecomputer = null;
+            }
             if ( mApp != null ) mApp.notifyWall( WALL_CW, b );
           }
         }).execute();
@@ -860,7 +885,14 @@ public class TglParser
             return tubecomputer.computeWalls();
           }
           public void onPostExecute( Boolean b ) {
-            if ( ! b ) tubecomputer = null;
+            if ( ! b ) {
+              tubecomputer = null;
+            } else {
+              convexhullcomputer = null;
+              powercrustcomputer = null;
+              hullcomputer = null;
+              bubblecomputer = null;
+            }
             if ( mApp != null ) mApp.notifyWall( WALL_TUBE, b );
           }
         }).execute();
@@ -891,7 +923,14 @@ public class TglParser
           }
           public void onPostExecute( Boolean b ) {
             // TDLog.v("compute bubble: " + b );
-            if ( ! b ) bubblecomputer = null;
+            if ( ! b ) {
+              bubblecomputer = null;
+            } else {
+              convexhullcomputer = null;
+              powercrustcomputer = null;
+              hullcomputer = null;
+              tubecomputer = null;
+            }
             if ( mApp != null ) mApp.notifyWall( WALL_BUBBLE, b );
           }
         }).execute();
@@ -915,7 +954,14 @@ public class TglParser
             return hullcomputer.computeWalls();
           }
           public void onPostExecute( Boolean b ) {
-            if ( ! b ) hullcomputer = null;
+            if ( ! b ) {
+              hullcomputer = null;
+            } else {
+              convexhullcomputer = null;
+              powercrustcomputer = null;
+              bubblecomputer = null;
+              tubecomputer = null;
+            }
             if ( mApp != null ) mApp.notifyWall( WALL_HULL, b );
           }
         }).execute();
@@ -969,7 +1015,14 @@ public class TglParser
 
           public void onPostExecute( Boolean b )
           {
-            if ( ! b ) powercrustcomputer = null;
+            if ( ! b ) {
+              powercrustcomputer = null;
+            } else {
+              convexhullcomputer = null;
+              hullcomputer = null;
+              tubecomputer = null;
+              bubblecomputer = null;
+            }
             if ( mApp != null ) mApp.notifyWall( WALL_POWERCRUST, b );
           }
       }).execute();

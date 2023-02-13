@@ -1968,6 +1968,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="info_shot">Mérések</string>
     <string name="info_station">Pontok</string>
     <string name="info_length">Hossz</string>
+    <!-- TODO string name="info_surface">Surface length</string -->
     <string name="info_depth">Mélység</string>
     <string name="info_volume">Térfogat</string>
     <string name="info_east">Kelet</string>
@@ -1982,9 +1983,10 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="info_shot_value">Poligonok %1$d, Sünök %2$d</string>
     <string name="info_station_value">%1$d</string>
     <string name="info_length_value">%1$.1f m</string>
+    <string name="info_surface_value">%1$.1f m</string>
     <string name="info_depth_value">%1$.1f m</string>
     <!-- UNUSED string name="info_volume_value_tryme">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
-    <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
+    <string name="info_volume_value">%1$.0f m³</string>
     <string name="info_east_value">Ny %1$.1f K %2$.1f</string>
     <string name="info_north_value">D %1$.1f É %2$.1f</string>
     <string name="info_z_value">%1$.1f  %2$.1f</string>

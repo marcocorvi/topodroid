@@ -1813,6 +1813,7 @@ no campo abaixo e aperte o botão.
   <string name="info_shot">Visadas</string>
   <string name="info_station">Bases</string>
   <string name="info_length">Comprimento</string>
+    <!-- TODO string name="info_surface">Surface length</string -->
   <string name="info_depth">Profundidade</string>
   <string name="info_volume">Volume</string>
   <string name="info_east">Leste</string>
@@ -1827,6 +1828,7 @@ no campo abaixo e aperte o botão.
   <string name="info_shot_value">Visadas %1$d, Medidas auxiliares %2$d</string>
   <string name="info_station_value">%1$d</string>
   <string name="info_length_value">%1$.1f m</string>
+  <string name="info_surface_value">%1$.1f m</string>
   <string name="info_depth_value">%1$.1f m</string>
   <!-- TRYME string name="info_volume_value_tryme">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
   <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>

@@ -1985,6 +1985,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="info_shot">Visées</string>
     <string name="info_station">Stations</string>
     <string name="info_length">Longueur</string>
+    <!-- TODO string name="info_surface">Surface length</string -->
     <string name="info_depth">Profondeur</string>
     <string name="info_volume">Volume</string>
     <string name="info_east">Est</string>
@@ -1999,9 +2000,9 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="info_shot_value">Legs %1$d, Splays %2$d</string>
     <string name="info_station_value">%1$d</string>
     <string name="info_length_value">%1$.1f m</string>
+    <string name="info_surface_value">%1$.1f m</string>
     <string name="info_depth_value">%1$.1f m</string>
-    <!-- UNUSED string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
-    <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
+    <string name="info_volume_value">%1$.0f m³</string>
     <string name="info_east_value">W %1$.1f E %2$.1f</string>
     <string name="info_north_value">S %1$.1f N %2$.1f</string>
     <string name="info_z_value">%1$.1f  %2$.1f</string>

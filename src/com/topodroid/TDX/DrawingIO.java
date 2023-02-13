@@ -1420,10 +1420,10 @@ public class DrawingIO
       if ( TDSetting.mAutoExportPlotFormat != TDConst.SURVEY_FORMAT_TH2 ) { // xsections if not already auto exported
         for ( XSectionScrap xsection : xsections ) { // write xsection scraps
           // File file = TDFile.getTopoDroidFile( TDPath.getTdrFileWithExt( xsection.name ) );
-          try { 
+          try { // 20230213
             DataInputStream dis = TDFile.getTopoDroidFileInputStream( TDPath.getTdrFileWithExt( xsection.name ) );
             if ( dis != null ) {
-              dataStreamToTherion(dis, out, null, null, false, true, xsection.x, xsection.y);
+              dataStreamToTherion(dis, out, null, null, false, true, xsection.x, xsection.y, xsection.name );
               dis.close();
             }
           } catch ( IOException e ) { 
@@ -1600,10 +1600,10 @@ public class DrawingIO
     // TDLog.v( "multisketch sections " + xsections.size() );
     for ( XSectionScrap xsection : xsections ) { // write xsection scraps
       // File file = TDFile.getTopoDroidFile( TDPath.getTdrFileWithExt( xsection.name ) );
-      try {
+      try { // 20230213
         DataInputStream dis = TDFile.getTopoDroidFileInputStream( TDPath.getTdrFileWithExt( xsection.name ) );
         if ( dis != null ) {
-          dataStreamToTherion( dis, out, null, null, false, true, xsection.x, xsection.y );
+          dataStreamToTherion( dis, out, null, null, false, true, xsection.x, xsection.y, xsection.name );
         }
         dis.close();
       } catch ( IOException e ) { 
@@ -1703,13 +1703,14 @@ public class DrawingIO
    * @param endscrap    whether to write the scrap termination
    * @param xoff        X offset
    * @param yoff        Y offset
+   * @param xsection_name optional xsection name // 20230213
    *
-   * @note used to write XSections to the output file
+   * @note used only to write XSections to the output file
    * @note bbox != null  <==>  beginheader true
    */
   static private void dataStreamToTherion( DataInputStream dis, BufferedWriter out, String file_name, RectF bbox, 
                                           boolean beginheader, boolean endscrap,
-                                          float xoff, float yoff ) throws IOException 
+                                          float xoff, float yoff, String xsection_name ) throws IOException 
   {
     int version = 0;
     // boolean in_scrap = false;
@@ -1718,7 +1719,6 @@ public class DrawingIO
     boolean do_north = false;
     float north_x1=xoff, north_y1=yoff, north_x2=xoff, north_y2=yoff;
 
-    String name = "";
     int type = 0;
     boolean project = false;
     int project_dir = 0;
@@ -1760,18 +1760,19 @@ public class DrawingIO
                 if ( bbox != null ) exportTherionGlobalHeader( out, type, bbox, file_name );
                 // exportTherionHeader2( out, points, lines, areas );
                 String proj = PlotType.projName( type );
-                exportTherionScrapHeader( out, type, name, proj, project_dir, do_north, north_x1, north_y1, north_x2, north_y2, null ); // TH2EDIT no null last param
+                exportTherionScrapHeader( out, type, xsection_name, proj, project_dir, do_north, north_x1, north_y1, north_x2, north_y2, null ); // TH2EDIT no null last param
                 // if ( do_north ) { 
-                //   exportTherionScrapHeader( out, type, name, proj, 0, true, north_x1, north_y1, north_x2, north_y2, null ); // TH2EDIT no null last param
+                //   exportTherionScrapHeader( out, type, scrap_name, proj, 0, true, north_x1, north_y1, north_x2, north_y2, null ); // TH2EDIT no null last param
                 // } else {
-                //   exportTherionScrapHeader( out, type, name, proj, project_dir, false, 0, 0, 0, 0, null ); // TH2EDIT no null last param
+                //   exportTherionScrapHeader( out, type, scrap_name, proj, project_dir, false, 0, 0, 0, 0, null ); // TH2EDIT no null last param
                 // }
                 // in_scrap = true; // UNUSED HERE
               }
               break;
             case 'S':
               {
-                name = dis.readUTF();
+                // String name = // 20230213 discard name read from the file - use arg
+                  dis.readUTF();
                 type = dis.readInt();
                 if ( type == PlotType.PLOT_PROJECTED ) project_dir = dis.readInt();
                 // read palettes

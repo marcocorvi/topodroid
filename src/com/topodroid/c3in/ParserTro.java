@@ -352,6 +352,7 @@ public class ParserTro extends TglParser
     // TDLog.v( "TRO process shots. Fix " + f0.name + " " + f0.x + " " + f0.y + " " + f0.z );
 
     mCaveLength = 0.0f;
+    mSurfaceLength = 0.0f;
 
     for ( Cave3DFix f : fixes ) {
       boolean found = false;
@@ -394,7 +395,11 @@ public class ParserTro extends TglParser
           if ( sf != null && st != null ) {
             // TDLog.v( "TRO unused shot " + sh.from + " " + sh.to + " : " + sf.name + " " + st.name );
             sh.setUsed( ); // LOOP
-            mCaveLength += sh.length();
+            if ( sh.isSurvey() ) {
+              mCaveLength += sh.length();
+            } else if ( sh.isSurface() ) {
+              mSurfaceLength += sh.length();
+            }
             // make a fake station
             Cave3DStation s = sh.getStationFromStation( sf );
             stations.add( s );
@@ -408,7 +413,11 @@ public class ParserTro extends TglParser
             sh.to_station = s;
             // TDLog.v("TRO add station " + sh.to_station.name + " N " + sh.to_station.n + " E " + sh.to_station.e + " Z " + sh.to_station.z );
             sh.setUsed( );
-            mCaveLength += sh.length();
+            if ( sh.isSurvey() ) {
+              mCaveLength += sh.length();
+            } else if ( sh.isSurface() ) {
+              mSurfaceLength += sh.length();
+            }
             repeat = true;
           } else if ( sf == null && st != null ) {
             // TDLog.v( "TRO unused shot " + sh.from + " " + sh.to + " : null " + st.name );
@@ -417,7 +426,11 @@ public class ParserTro extends TglParser
             sh.from_station = s;
             // TDLog.v("TRO add station " + sh.from_station.name + " N " + sh.from_station.n + " E " + sh.from_station.e + " Z " + sh.from_station.z );
             sh.setUsed( );
-            mCaveLength += sh.length();
+            if ( sh.isSurvey() ) {
+              mCaveLength += sh.length();
+            } else if ( sh.isSurface() ) {
+              mSurfaceLength += sh.length();
+            }
             repeat = true;
           } else {
             // TDLog.v( "TRO unused shot " + sh.from + " " + sh.to + " : null null" );

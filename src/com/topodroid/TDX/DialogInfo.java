@@ -85,11 +85,14 @@ class DialogInfo extends MyDialog
     tv = ( TextView ) findViewById(R.id.info_length);
     tv.setText( String.format(Locale.US, res.getString(R.string.info_length_value), mParser.getCaveLength() ) );
 
+    tv = ( TextView ) findViewById(R.id.info_surface);
+    tv.setText( String.format(Locale.US, res.getString(R.string.info_surface_value), mParser.getSurfaceLength() ) );
+
     tv = ( TextView ) findViewById(R.id.info_depth);
     tv.setText( String.format(Locale.US, res.getString(R.string.info_depth_value), mParser.getCaveDepth() ) );
 
     tv = ( TextView ) findViewById(R.id.info_volume);
-    tv.setText( String.format(Locale.US, res.getString(R.string.info_volume_value), mParser.getPowercrustVolume(), mParser.getConvexHullVolume() ) );
+    tv.setText( String.format(Locale.US, res.getString(R.string.info_volume_value), mParser.getVolume() ) );
 
     tv = ( TextView ) findViewById(R.id.info_origin);
     if ( mParser.hasOrigin() ) {

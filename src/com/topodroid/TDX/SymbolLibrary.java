@@ -155,6 +155,9 @@ public class SymbolLibrary
     return -1;
   }
 
+  /** @return the index of a symbol given its Therion name
+   * @param name  symbol Therion name
+   */
   int getSymbolIndexByThName( String name )
   {
     String th_name = Symbol.deprefix_u( name );
@@ -163,6 +166,10 @@ public class SymbolLibrary
     return -1;
   }
 
+  /** @return the index of a symbol given its Therion name or group
+   * @param name  symbol Therion name 
+   * @param group symbol group
+   */
   int getSymbolIndexByThNameOrGroup( String name, String group )
   {
     String th_name = Symbol.deprefix_u( name );
@@ -196,16 +203,58 @@ public class SymbolLibrary
 
   Symbol getSymbolByIndex( int k ) { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get( k ); }
 
+  /** #return the name of the k-th symbol 
+   * @param k  symbol index
+   */
   String getSymbolName( int k )   { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getName(); }
+
+  /** #return the Therion name of the k-th symbol 
+   * @param k  symbol index
+   */
   String getSymbolThName( int k ) { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getThName(); }
+
+  /** #return the Therion full-name (including prefix) of the k-th symbol 
+   * @param k  symbol index
+   */
   String getSymbolFullThName( int k ) { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getFullThName(); }
+
+  /** #return the group of the k-th symbol 
+   * @param k  symbol index
+   */
   String getSymbolGroup( int k )  { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getGroup(); }
+
+  /** #return the paint of the k-th symbol 
+   * @param k  symbol index
+   */
   Paint getSymbolPaint( int k )   { return ( k < 0 || k >= mSymbols.size() )? BrushManager.errorPaint : mSymbols.get(k).getPaint(); }
+
+  /** #return the path of the k-th symbol 
+   * @param k  symbol index
+   */
   Path  getSymbolPath( int k )    { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getPath(); }
+
+  /** #return true if the k-th symbol is orientable
+   * @param k  symbol index
+   */
   boolean isSymbolOrientable( int k )   { return k >= 0 && k < mSymbols.size() && mSymbols.get( k ).isOrientable(); }
+
+  /** #return true if the k-th symbol is declinable
+   * @param k  symbol index
+   */
+  boolean isSymbolDeclinable( int k )   { return k >= 0 && k < mSymbols.size() && mSymbols.get( k ).isDeclinable(); }
+
+  /** #return true if the k-th symbol is enabled
+   * @param k  symbol index
+   */
   boolean isSymbolEnabled( int k )      { return k >= 0 && k < mSymbols.size() && mSymbols.get( k ).isEnabled(); }
+
+  /** #return the level of the k-th symbol 
+   * @param k  symbol index
+   */
   int getSymbolLevel( int k ) { return ( ( k<0 || k>=mSymbols.size() )? 0xff : mSymbols.get( k ).mLevel ); }
 
+  /** @return an array with the symbol names
+   */
   ArrayList< String > getSymbolNames()
   {
     ArrayList< String > ret = new ArrayList<>();
@@ -213,6 +262,9 @@ public class SymbolLibrary
     return ret;
   }
 
+  /** @return an array with the symbol names except a name
+   * @param skip name to skip
+   */
   ArrayList< String > getSymbolNamesExcept( String skip )
   {
     ArrayList< String > ret = new ArrayList<>();
@@ -223,7 +275,9 @@ public class SymbolLibrary
     return ret;
   }
 
-
+  /** @return true if a symbol is enabled
+   * @param th_name   symbol Therion name
+   */
   boolean isSymbolEnabled( String th_name ) 
   {
     Symbol a = get( th_name );
