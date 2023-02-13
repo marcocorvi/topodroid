@@ -1090,8 +1090,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="help_delete_config">Projekt törlése</string>
     <string name="help_add_equate">Mérések kapcsolódó pontjainak hozzáadása</string>
     <string name="help_equates">Kapcsolódó pontok listázása</string>
-    <!-- TODO string name="help_stations_minus">Show fewer stations</string -->
-    <!-- TODO string name="help_stations_plus">Show more stations</string -->
+    <string name="help_stations_minus">Mutass kevesebb pontot</string>
+    <string name="help_stations_plus">Mutass több pontot</string>
 
     <!-- UNUSED string name="export_bgcolor">Fehér háttér</string -->
     <string name="export_bothviews">Alaprajz és oldalnézet</string>
