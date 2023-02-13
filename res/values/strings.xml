@@ -103,6 +103,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="station_coords" copyable="all">E %1$.2f N %2$.2f Z %3$.2f</string>
     <string name="shot_not_found">No shot found</string>
     <string name="bad_sibling">Bad leg sibling</string>
+    <string name="bad_station">Bad station: %1$s</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINE</string -->
@@ -1098,6 +1099,8 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="help_delete_config">Delete project</string>
     <string name="help_add_equate">Add surveys equate</string>
     <string name="help_equates">List surveys equates</string>
+    <string name="help_stations_minus">Show fewer stations</string>
+    <string name="help_stations_plus">Show more stations</string>
 
     <!-- UNUSED string name="export_bgcolor">White background</string -->
     <string name="export_bothviews">Plan and profile</string>

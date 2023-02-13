@@ -54,6 +54,7 @@ public class TdmViewSurface extends SurfaceView
     int mWidth;            // canvas width
     int mHeight;           // canvas height
     private PointF mDisplayCenter;
+    private int mStationRate = 1;
 
     ArrayList< TdmViewCommand > mCommandManager; // FIXME not private only to export DXF
     TdmViewCommand mCommand = null;
@@ -64,6 +65,16 @@ public class TdmViewSurface extends SurfaceView
     float mZoom;
     private Matrix mMatrix;
     private Paint  mPaint;  // equate paint
+
+    void changeStationRate( int rate ) 
+    { 
+      if ( rate < 0 ) {
+        mStationRate <<= 1;
+      } else if ( rate > 0 ) {
+        mStationRate >>= 1;
+      }
+      if ( mStationRate < 1 ) mStationRate = 1;
+    }
 
     /** @return X scene coord from the X canvas coord
      * @param x_canvas   X canvas coord
@@ -110,7 +121,8 @@ public class TdmViewSurface extends SurfaceView
 
       mXoffset = 0;
       mYoffset = 0;
-      mZoom = 1;
+      mZoom    = 1;
+      mStationRate = 1;
       mMatrix = new Matrix();
       mPaint  = new Paint();
       mPaint.setDither(true);
@@ -350,7 +362,7 @@ public class TdmViewSurface extends SurfaceView
         mWidth  = canvas.getWidth();
         mHeight = canvas.getHeight();
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-        for ( TdmViewCommand command : mCommandManager ) command.executeAll( canvas, previewDoneHandler );
+        for ( TdmViewCommand command : mCommandManager ) command.executeAll( canvas, previewDoneHandler, mStationRate );
         // the view-stations in the view-equate have different transformation matrix
         // the two matrices have the same scale, but different translations
         synchronized( mEquates ) {

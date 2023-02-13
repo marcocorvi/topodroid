@@ -129,6 +129,11 @@ public class TdmViewActivity extends Activity
       mDrawingSurface.changeZoom( f );
     }
 
+    public void changeStationRate( int change ) 
+    {
+      mDrawingSurface.changeStationRate( change );
+    }
+
     public void zoomIn()  { changeZoom( ZOOM_INC ); }
     public void zoomOut() { changeZoom( ZOOM_DEC ); }
 
@@ -470,15 +475,19 @@ public class TdmViewActivity extends Activity
 
   // -------------------------------------------------
   boolean onMenu;
-  int mNrButton1 = 2;
+  int mNrButton1 = 4;
   private static int[] izons = { 
     R.drawable.iz_equate,
     R.drawable.iz_equates,
+    R.drawable.iz_numbers_minus,
+    R.drawable.iz_numbers_plus,
     // R.drawable.iz_exit,
   };
   private static final int[] help_icons = {
     R.string.help_add_equate,
     R.string.help_equates,
+    R.string.help_stations_minus,
+    R.string.help_stations_plus,
   };
 
   int mNrMenus   = 2;
@@ -649,6 +658,10 @@ public class TdmViewActivity extends Activity
       handleEquate();
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // SHOW EQUATES
       (new TdmEquatesDialog( this, TdmConfigActivity.mTdmConfig, this )).show();
+    } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // FEWER STATIONS
+      changeStationRate( -1 );
+    } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // MORE STATIONS
+      changeStationRate( 1 );
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // EXIT
       finish();
     }

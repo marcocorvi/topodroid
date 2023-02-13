@@ -1082,6 +1082,8 @@
     <string name="help_delete_config">Удалить проект</string>
     <string name="help_add_equate">Добавить соединение съёмок</string>
     <string name="help_equates">Список соединений съёмки</string>
+    <!-- TODO string name="help_stations_minus">Show fewer stations</string -->
+    <!-- TODO string name="help_stations_plus">Show more stations</string -->
 
     <!-- UNUSED string name="export_bgcolor">Цвет фона</string -->
     <string name="export_bothviews">План и разрез</string>

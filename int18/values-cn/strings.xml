@@ -1086,6 +1086,8 @@
     <string name="help_delete_config">删除项目</string>
     <string name="help_add_equate">添加等同的测量</string>
     <string name="help_equates">同等显示测量数据</string>
+    <!-- TODO string name="help_stations_minus">Show fewer stations</string -->
+    <!-- TODO string name="help_stations_plus">Show more stations</string -->
 
     <!-- UNUSED string name="export_bgcolor">背景颜色</string -->
     <!-- TODO string name="export_bothviews">Plan and profile</string -->

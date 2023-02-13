@@ -161,18 +161,22 @@ public class TdmViewCommand
    * @param canvas   display canvas
    * @param preview_handler  preview handler (unused)
    */
-  public void executeAll( Canvas canvas, Handler preview_handler )
+  public void executeAll( Canvas canvas, Handler preview_handler, int station_rate )
   {
     synchronized( mFixedStack ) { // FIXME SYNCH_ON_NON_FINAL
       for ( TdmViewPath path : mFixedStack ) path.draw( canvas, mMatrix, mPaint );
     }
     synchronized( mStations ) { // FIXME SYNCH_ON_NON_FINAL
       float zoom = mScale / 50;
+      int cnt = 0;
       for ( TdmViewStation st : mStations ) {
         // st.draw( canvas, mMatrix, mPaint, mFillPaint, zoom );
-        st.draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
+        if ( ( ( ++cnt ) % station_rate ) == 0 ) {
+          st.draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
+        }
       }
       if ( mSelected != null ) {
+        mSelected.draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
         mSelected.drawCircle( canvas, mMatrix, mPaint, zoom );
       }
     }

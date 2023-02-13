@@ -11,8 +11,10 @@
  */
 package com.topodroid.tdm;
 
+import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.TDX.R;
+import com.topodroid.TDX.TDToast;
 
 // import java.util.List;
 import java.util.ArrayList;
@@ -112,6 +114,7 @@ class TdmEquateNewDialog extends MyDialog
   {
     Button b = (Button) v;
     if ( b == mBTok ) {
+      String bad_station = null;
       ArrayList< String > sts = new ArrayList<>();
       for ( int k=0; k<size; ++k ) {
         TdmViewCommand vc = mCommands.get( k );
@@ -120,10 +123,25 @@ class TdmEquateNewDialog extends MyDialog
         while ( len > 0 && survey.charAt( len - 1 ) == '.' ) -- len;
         String station = mEdit[k].getText().toString();
         if ( station != null && station.length() > 0 ) {
-          sts.add( station + "@" + survey.substring(0,len) );
+          if ( vc.getViewStation( station ) != null ) {
+            sts.add( station + "@" + survey.substring(0,len) );
+            TDLog.v("added station: " + sts.size() );
+          } else {
+            bad_station = station + "@" + survey.substring(0,len);
+            TDLog.v("Bad station: " + bad_station );
+            break;
+          }
+        } else {
+          mEdit[k].setError( mContext.getResources().getString( R.string.error_name_required ) );
+          return;
         }
       }
-      mParent.makeEquate( sts ); // does nothing if sts.size() <= 1
+      if ( bad_station == null ) {
+        mParent.makeEquate( sts ); // does nothing if sts.size() <= 1
+      } else {
+        TDToast.makeWarn( String.format( mContext.getResources().getString( R.string.bad_station ), bad_station ) );
+        return;
+      }
     }
     dismiss();
   }
