@@ -1004,8 +1004,8 @@ no campo abaixo e aperte o botão.
   <string name="help_delete_config">Apagar projeto</string>
   <string name="help_add_equate">Adicionar \'equates\' das topos</string>
   <string name="help_equates">Listar \'equates\' das topos</string>
-    <!-- TODO string name="help_stations_minus">Show fewer stations</string -->
-    <!-- TODO string name="help_stations_plus">Show more stations</string -->
+  <string name="help_stations_minus">Mostrar menos bases</string>
+  <string name="help_stations_plus">Mostrar mais bases</string>
 
   <!-- UNUSED string name="export_bgcolor">Cor de fundo</string -->
   <string name="export_bothviews">Planta-baixa e perfil</string>
@@ -1816,7 +1816,7 @@ no campo abaixo e aperte o botão.
   <string name="info_shot">Visadas</string>
   <string name="info_station">Bases</string>
   <string name="info_length">Comprimento</string>
-    <!-- TODO string name="info_surface">Surface length</string -->
+  <string name="info_surface">Desenvolvimento horizontal</string>
   <string name="info_depth">Profundidade</string>
   <string name="info_volume">Volume</string>
   <string name="info_east">Leste</string>
