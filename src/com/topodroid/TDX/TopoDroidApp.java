@@ -1436,11 +1436,16 @@ public class TopoDroidApp extends Application
         List< PlotInfo > plots = mData.selectAllPlots( sid );
         for ( PlotInfo p : plots ) {
           // Tdr
-          TDFile.renameFile( TDPath.getSurveyPlotTdrFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotTdrFile( name, p.name ) );
+          String scrap_name = name + "-" + p.name;
+          DrawingIO.changeTdrFile( TDPath.getSurveyPlotTdrFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotTdrFile( name, p.name ), scrap_name );
+          // TDFile.renameFile( TDPath.getSurveyPlotTdrFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotTdrFile( name, p.name ) );
+
           // Tdr backups
-          TDFile.renameFile( TDPath.getSurveyPlotTdrBackupFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotTdrBackupFile( name, p.name ) );
+          DrawingIO.changeTdrFile( TDPath.getSurveyPlotTdrBackupFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotTdrBackupFile( name, p.name ), scrap_name );
+          // TDFile.renameFile( TDPath.getSurveyPlotTdrBackupFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotTdrBackupFile( name, p.name ) );
           for ( int bck_nr = 0; bck_nr < 5; ++ bck_nr ) {
-            TDFile.renameFile( TDPath.getSurveyPlotTdrBackupFile( TDInstance.survey, p.name, bck_nr ), TDPath.getSurveyPlotTdrBackupFile( name, p.name, bck_nr ) );
+            DrawingIO.changeTdrFile( TDPath.getSurveyPlotTdrBackupFile( TDInstance.survey, p.name, bck_nr ), TDPath.getSurveyPlotTdrBackupFile( name, p.name, bck_nr ), scrap_name );
+            // TDFile.renameFile( TDPath.getSurveyPlotTdrBackupFile( TDInstance.survey, p.name, bck_nr ), TDPath.getSurveyPlotTdrBackupFile( name, p.name, bck_nr ) );
           }
 
           // rename exported plots: th2 dxf png svg csx

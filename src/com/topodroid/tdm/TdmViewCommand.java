@@ -171,9 +171,14 @@ public class TdmViewCommand
       int cnt = 0;
       for ( TdmViewStation st : mStations ) {
         // st.draw( canvas, mMatrix, mPaint, mFillPaint, zoom );
-        if ( ( ( ++cnt ) % station_rate ) == 0 ) {
+        if ( ( cnt % station_rate ) == 0 ) {
           st.draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
         }
+        ++cnt;
+      }
+      int n = mStations.size() - 1;
+      if ( n > 0 ) {
+        mStations.get( n ).draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
       }
       if ( mSelected != null ) {
         mSelected.draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );

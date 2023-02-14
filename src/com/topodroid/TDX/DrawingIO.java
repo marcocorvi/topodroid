@@ -30,8 +30,8 @@ import java.io.BufferedWriter;
 // import java.io.BufferedReader;
 // import java.io.BufferedInputStream;
 // import java.io.BufferedOutputStream;
-// import java.io.FileInputStream;
-// import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.StringWriter;
@@ -944,6 +944,57 @@ public class DrawingIO
       }
       // TDLog.v( "read: " + sb.toString() );
     }
+  }
+
+  /** change the scrap name into a tdr file
+   * @param old_name   existing tdr file (deleted at the end)
+   * @param new_name   new tdr file (created)
+   * @param scrap_name new scrap name
+   * @return true if successful
+   */
+  static boolean changeTdrFile( String old_name, String new_name, String scrap_name )
+  {
+    File old_file = TDFile.getTopoDroidFile( old_name );
+    if ( ! old_file.exists() ) return false;
+    File new_file = TDFile.getTopoDroidFile( new_name );
+    if ( new_file.exists() ) { 
+      TDLog.Error("tdr file change: " + old_name + " to existing " + new_name );
+      return false;
+    }
+    byte[] buffer = new byte[4096];
+    int n;
+    try {
+      FileInputStream  fis = new FileInputStream(  old_file );
+      FileOutputStream fos = new FileOutputStream( new_file );
+      DataInputStream  dis = new DataInputStream(  fis );
+      DataOutputStream dos = new DataOutputStream( fos );
+      int what = dis.read(); // 'V'
+      if ( what != 'V' ) return false;
+      int version = dis.readInt();
+      dos.write( 'V' );
+      dos.writeInt( version );
+      what = dis.read(); // 'S'
+      if ( what != 'S' ) return false;
+      dis.readUTF();
+      dos.write( 'S' );
+      dos.writeUTF( scrap_name );
+      while ( ( n = dis.read( buffer ) ) > 0 ) {
+        dos.write( buffer, 0, n );
+      }
+      dos.flush();
+      // dos.close(); // does nothing
+      // dis.close(); // does nothing
+      fis.close();
+      fos.close();
+      old_file.delete();
+    } catch ( FileNotFoundException e ) {
+      e.printStackTrace();
+      return false;
+    } catch ( IOException e ) {
+      e.printStackTrace();
+      return false;
+    }
+    return true;
   }
 
   // used by ParserPocketTopo
