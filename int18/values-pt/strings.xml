@@ -161,8 +161,8 @@ no campo abaixo e aperte o botão.
   <string name="device_reset">Reiniciar memória da DistoX</string>
   <string name="device_clear">Limpar memória da DistoX</string>
   <string name="device_code">Código da DistoX %1$4d</string>
-  <string name="device_firmware">Firmware  %1$d.%2$d</string>
-  <string name="device_hardware">Hardware  %1$d.%2$d</string>
+  <string name="device_firmware">Firmware %1$d.%2$d</string>
+  <string name="device_hardware">Hardware %1$d.%2$d</string>
   <!-- UNUSED string name="device_memory">Memory  %1$02x.%2$02x</string -->
   <string name="device_status_angle_grad">Unidade angular: grado</string>
   <string name="device_status_angle_degree">Unidade angular: grau</string>
@@ -765,7 +765,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="button_start"     >Iniciar</string -->
   <!-- UNUSED string name="button_stop"      >Parar</string -->
   <string name="button_upload">Enviar     </string>
-  <string name="button_download">Download</string>
+  <string name="button_download">Baixar</string>
   <string name="button_view">Ver no mapa</string>
   <!-- UNUSED string name="button_zoomfit"   >Zoom fit  </string -->
   <!-- UNUSED string name="button_landscape" >Landscape </string -->
@@ -999,7 +999,7 @@ no campo abaixo e aperte o botão.
   <string name="help_add_project">Adicionar projeto</string>
   <string name="help_add_surveys">Adicionar topos</string>
   <string name="help_drop_surveys">Remover topos</string>
-  <string name="help_view_surveys">Display surveys</string>
+  <string name="help_view_surveys">Mostrar topos</string>
   <string name="help_view_equates">Listar \'equates\'</string>
   <string name="help_export_config">Exportar projeto</string>
   <string name="help_delete_config">Apagar projeto</string>
@@ -1033,7 +1033,7 @@ no campo abaixo e aperte o botão.
   <string name="export_surface">Superfície</string>
   <string name="export_swap_lr">Inverter E/D</string>
   <string name="export_trox">Formato Trox</string>
-  <string name="export_walls">Walls</string>
+  <string name="export_walls">Paredes</string>
   <string name="export_xvi">Images Xvi</string>
   <string name="export_with_xsections">Incluir seções-X</string>
   <string name="export_with_reference">Incluir referência XY</string>
@@ -1843,7 +1843,7 @@ no campo abaixo e aperte o botão.
   <string name="info_lonlat_geovalue">lon %1$.7f lat %2$.7f</string>
   <string name="info_lonlat_prjvalue">lon %1$.1f lat %2$.1f</string>
   <string name="info_radii_value">LO %1$.1f NS %2$.1f</string>
-  <string name="legs_surface">Surface</string>
+  <string name="legs_surface">Superfície</string>
   <string name="legs_duplicate">Duplicadas</string>
   <string name="legs_commented">Comentadas</string>
   <string name="proj_perspective">Parâmetros perspectiva</string>
@@ -1884,7 +1884,7 @@ no campo abaixo e aperte o botão.
   <string name="sketch_ok">Carregar croqui</string>
   <string name="ctitle">%1$s  Inclinação: %2$.0f  Azimute: %3$.0f</string>
   <string name="ctitle_surface_alpha">Opacidade superfície</string>
-  <string name="ctitle_sketches">Sketches</string>
+  <string name="ctitle_sketches">Croquis</string>
   <string name="ctitle_legs">Visibilidade visadas</string>
   <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
   <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
@@ -1979,7 +1979,7 @@ no campo abaixo e aperte o botão.
   <string name="cno_survey">Topo %1$s não localizada\n</string>
   <!-- UNUSED string name="cno_file">No file %1$s\n</string -->
   <string name="empty_survey">Topo %1$s vazia\n</string>
-  <string name="viewing_at">Viewing at clino %1$.0f azimuth %2$.0f</string>
+  <string name="viewing_at">Vendo com clino %1$.0f azimute %2$.0f</string>
   <string name="cpref_dem3d">DEM</string>
   <string name="cpref_walls3d">MODELO WALLS</string>
   <!-- UNUSED string name="cpref_base_path_title">Diretório base</string -->
