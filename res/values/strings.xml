@@ -18,7 +18,7 @@
     <!-- UNUSED string name="desc_points">Points</string -->
     <!-- UNUSED string name="desc_lines">Lines</string -->
     <!-- UNUSED string name="desc_areas">Areas</string -->
-    <string name="desc_menu" copyable="fr it">Menu</string>
+    <string name="desc_menu" copyable="fr it pt">Menu</string>
 
   <string name="r_title">Android-13+ WARNING</string>
   <!-- UNUSED string name="r_dialog_1">
@@ -119,8 +119,8 @@ There are other settings for the presentation of the sketches (icon size, label 
 
     <string name="bric_device">Device %1$s</string>
     <string name="bric_ble" copyable="all">BLE %1$s</string>
-    <string name="bric_fw">Firmware %1$s</string>
-    <string name="bric_hw">Hardware %1$s</string>
+    <string name="bric_fw" copyable="pt">Firmware %1$s</string>
+    <string name="bric_hw" copyable="pt">Hardware %1$s</string>
     <string name="bric_battery">Battery %1$d</string>
     <string name="bric_battery_wait">Battery &#8230;</string>
     <string name="bric_reset_time">Reset time</string>
@@ -185,9 +185,9 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="device_reset">Reset DistoX memory ?</string>
     <string name="device_clear">Clear DistoX memory</string>
     <string name="device_code">DistoX code %1$4d</string>
-    <string name="device_firmware">Firmware  %1$d.%2$d</string>
-    <string name="device_hardware">Hardware  %1$d.%2$d</string>
-    <!-- UNUSED string name="device_memory">Memory  %1$02x.%2$02x</string -->
+    <string name="device_firmware" copyable="pt">Firmware %1$d.%2$d</string>
+    <string name="device_hardware" copyable="pt">Hardware %1$d.%2$d</string>
+    <!-- UNUSED string name="device_memory">Memory %1$02x.%2$02x</string -->
     <string name="device_status_angle_grad">Angle units: grad</string>
     <string name="device_status_angle_degree">Angle units: degree</string>
     <string name="device_status_compass_on">Compass/clino: on</string>
@@ -365,9 +365,9 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="stations" copyable="fr">Station</string>
     <string name="splays" copyable="it pt">Splays</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
-    <string name="fmt_id">ID %1$s</string>
-    <string name="fmt_latitude_dd_dms">Latitude: %1$s [%2$s]</string>
-    <string name="fmt_longitude_dd_dms">Longitude: %1$s [%2$s]</string>
+    <string name="fmt_id" copyable="pt">ID %1$s</string>
+    <string name="fmt_latitude_dd_dms" copyable="pt">Latitude: %1$s [%2$s]</string>
+    <string name="fmt_longitude_dd_dms" copyable="pt">Longitude: %1$s [%2$s]</string>
     <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string --> 
 
     <string name="fixed">fixed</string>
@@ -1995,7 +1995,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="info_north">North</string>
     <string name="info_z" copyable="fr pt">Altitude</string>
     <string name="info_origin">Origin</string>
-    <string name="info_lonlat">coords.</string>
+    <string name="info_lonlat" copyable="pt">coords.</string>
     <string name="info_radii">radii</string>
     <string name="info_grid_value" copyable="all">%1$.0f m</string>
     <string name="info_view_value">A. %1$.0f C. %2$.0f</string>
@@ -2012,8 +2012,8 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="info_z_value" copyable="all">%1$.1f  %2$.1f</string>
     <string name="info_origin_value" copyable="all">x %1$.0f y %2$.0f z %3$.0f</string>
     <string name="info_origin_none">undefined</string>
-    <string name="info_lonlat_geovalue">lon %1$.7f lat %2$.7f</string>
-    <string name="info_lonlat_prjvalue">lon %1$.1f lat %2$.1f</string>
+    <string name="info_lonlat_geovalue" copyable="pt">lon %1$.7f lat %2$.7f</string>
+    <string name="info_lonlat_prjvalue" copyable="pt">lon %1$.1f lat %2$.1f</string>
     <string name="info_radii_value" copyable="all">EW %1$.1f NS %2$.1f</string>
 
     <string name="legs_surface" copyable="fr">Surface</string>
@@ -2114,7 +2114,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="view_point">Viewpoint</string -->
     <string name="view_zoom" copyable="fr hu it pt">Zoom 1</string>
 
-    <string name="walls_title">WALLS</string>
+    <string name="walls_title" copyable="pt">WALLS</string>
     <string name="walls_convexhull">Convex Hull</string>
     <string name="walls_powercrust" translatable="false">Powercrust</string>
     <string name="walls_hull">Hull</string>
