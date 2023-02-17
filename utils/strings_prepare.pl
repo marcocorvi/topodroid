@@ -130,8 +130,4 @@ for my $element ($en_dom->documentElement()->childNodes()) {
   }
 }
 
-for my $element ($en_dom->findnodes('/resources/*[@copyable]')) {
-  $element->removeAttribute('copyable');
-}
-
 $en_dom->toFile($new_filename, 2);
