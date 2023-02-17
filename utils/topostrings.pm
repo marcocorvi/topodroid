@@ -1,3 +1,15 @@
+# Support package for both strings_check.pl and strings_prepare.pl
+# usage:
+#       use File::Basename;
+#       use lib dirname (__FILE__);
+#       use topostrings;
+#
+# --------------------------------------------------------
+#  Copyright This software is distributed under GPL-3.0 or later
+#  See the file COPYING.
+# --------------------------------------------------------
+#
+
 package topostrings;
 
 use strict;
