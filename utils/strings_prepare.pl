@@ -79,14 +79,11 @@ if ($@) {
 
 analyze_xml_file($en_filename, $en_dom, \%en_names);
 
-for my $element ($en_dom->documentElement()->childNodes()) {
-  if (($element->nodeType != XML_COMMENT_NODE)
-    && $element->hasAttribute('translatable')
-    && ($element->getAttribute('translatable') eq 'false')) {
-    $element->unbindNode();
-    next;
-  }
+for my $element ($en_dom->findnodes('/resources/*[@translatable=\'false\']')) {
+  $element->unbindNode;
+}
 
+for my $element ($en_dom->documentElement()->childNodes()) {
   my $name = get_node_name($element);
   
   if ($debug) {
@@ -129,9 +126,12 @@ for my $element ($en_dom->documentElement()->childNodes()) {
     if ($element->nodeType == XML_COMMENT_NODE) {
       next;
     }
-
     replace_with_tagged_version($element, $element, 'TODO');
   }
+}
+
+for my $element ($en_dom->findnodes('/resources/*[@copyable]')) {
+  $element->removeAttribute('copyable');
 }
 
 $en_dom->toFile($new_filename, 2);
