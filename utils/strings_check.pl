@@ -103,6 +103,7 @@ my @translated_non_comment_for_commented_en;
 my @non_translatable_translated;
 my @commented_translation_for_uncommented_translation;
 my @copied_translations;
+my @translations_without_original;
 
 for my $element ($en_dom->documentElement()->childNodes()) {
   my $en_name = get_node_name($element);
@@ -177,6 +178,16 @@ for my $element ($en_dom->documentElement()->childNodes()) {
   }
 }
 
+for my $xx_element ($xx_dom->findnodes('/resources/*[@name]')) {
+  my $xx_name = $xx_element->getAttribute('name');
+  if (!exists($en_names{$xx_name})) {
+    my $result = "- translation for '$xx_name' has no original':
+-- TRANSLATED: '$xx_element'";
+    push(@translations_without_original, $result);
+  }
+}
+
+check_output($LOG, 'TRANSLATIONS WITHOUT ORIGINAL TEXT', \@translations_without_original);
 check_output($LOG, 'COPIED TRANSLATIONS', \@copied_translations);
 check_output($LOG, 'COMMENTED TRANSLATION FOR UNCOMMENTED ENTRY', \@commented_translation_for_uncommented_translation);
 check_output($LOG, 'NON TRANSLATABLE TRANSLATED', \@non_translatable_translated);
