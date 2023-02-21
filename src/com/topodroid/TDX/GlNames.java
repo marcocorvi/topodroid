@@ -38,10 +38,11 @@ public class GlNames extends GlShape
   static final int STATION_NONE  = 0;
   static final int STATION_POINT = 1;
   static final int STATION_NAME  = 2;
+  static final int STATION_LEG   = 3;
   // static final int STATION_ALL   = 3; 
-  static final int STATION_MAX   = 3; // skip station_all
+  static final int STATION_MAX   = 4; // skip station_all
 
-  static int stationMode = STATION_NONE;     // show_stations;
+  private static int stationMode = STATION_NONE;     // show_stations;
 
   private DataBuffer mDataBuffer = null;
 
@@ -53,15 +54,20 @@ public class GlNames extends GlShape
   static void toggleStations() 
   { 
     stationMode = (stationMode + 1)%STATION_MAX; 
+    if ( ( ! TDLevel.overExpert ) && ( stationMode == STATION_LEG ) ) stationMode = (stationMode + 1)%STATION_MAX;
     if ( GlModel.mStationPoints && ((stationMode % 2) == 1) ) stationMode = (stationMode + 1)%STATION_MAX; 
     // if ( ! hasNames() ) stationMode = STATION_NONE;
   } 
+
+  /** @return the station-mode
+   */
+  static int getStationMode() { return stationMode; }
 
   private boolean hasNames() { return nameBuffer != null; }
 
   static boolean showStationNames()  { return stationMode == STATION_NAME /* || stationMode == STATION_ALL */ ; }
   static boolean hiddenStations()    { return stationMode == STATION_NONE; }
-  static boolean showStationPoints() { return stationMode == STATION_POINT /* || stationMode == STATION_ALL */ ; }
+  static boolean showStationPoints() { return stationMode == STATION_POINT || stationMode == STATION_LEG /* || stationMode == STATION_ALL */ ; }
 
   // ----------------------------------------
  
@@ -79,11 +85,19 @@ public class GlNames extends GlShape
   private static float mTextSizeP = 0.6f; // text size factor = 12 pt perspective
   private static float mTextSizeO = 0.3f; // text size factor = 12 pt perspective
   
-  private int mHighlight = -1;
+  private int mHighlight = -1; // index of highlighted stations
+
+  /** set the highlighted station
+   * @param hl   highlighted station index
+   */
   private void setHighlight( int hl ) { mHighlight = hl; }
+
+  /** clear the highlighted station
+   */
   void clearHighlight() { mHighlight = -1; }
 
-  // get the vector of the highlighted station
+  /** @return the vector of the highlighted station (or null if no station is highlighted)
+   */
   Vector3D getCenter()
   {
     if ( mHighlight < 0 ) return null;
@@ -94,6 +108,9 @@ public class GlNames extends GlShape
   private static float mPointSize  = POINT_SIZE;
   private static float mPointSize4 = 2 * POINT_SIZE;
 
+  /** set the size of the points
+   * @param size   point size
+   */
   public static void setPointSize( float size )
   { 
     if ( size <= 1 ) return;
@@ -102,6 +119,9 @@ public class GlNames extends GlShape
     mPointSize4 = 2*size;
   }
 
+  /** set the size of the name text
+   * @param size   text size
+   */
   public static void setTextSize( int size ) 
   { 
     if ( size <= 1 ) return;
@@ -133,8 +153,14 @@ public class GlNames extends GlShape
   // int mIncrement = 0;
 
   public float[] getVertexData() { return mData; }
+
+  /** @return the number of (float) coords per vertex (3)
+   */
   public static int getVertexSize()     { return 3; } // 3 floats per vertex
-  public static int getVertexStride()   { return 4; } // 3 floats per vertex
+
+  /** @return the number of floats per vertex (4: 3 coords, 1 color )
+   */
+  public static int getVertexStride()   { return 4; } // 4 floats per vertex
 
   private boolean mIncremental = false;
 
@@ -159,7 +185,14 @@ public class GlNames extends GlShape
 
   static void setHLcolorG( float g ) { mHLcolor[1] = g; }
 
-  // XYZ-med in OpenGL
+  /** add a name
+   * @param pos      name position: (x,y,z) in world becomes (x-xmed, z-ymed, -y-zmed)
+   * @param name     short name
+   * @param fullname complete name
+   * @param xmed     center X coord (in OpenGL)
+   * @param ymed     center Y coord
+   * @param zmed     center Z coord
+   */
   void addName( Vector3D pos, String name, String fullname, double xmed, double ymed, double zmed )
   {
     if ( mIncremental ) {
@@ -180,7 +213,12 @@ public class GlNames extends GlShape
   //   addName( p, name, fullname );
   // }
 
-  private void addName( Vector3D p,  String name, String fullname )
+  /** add a name
+   * @param p        name position: (x,y,z) in OpenGL
+   * @param name     short name
+   * @param fullname complete name
+   */
+  private void addName( Vector3D p, String name, String fullname )
   {
     mNames.add( new GlName( p.x, p.y, p.z, name, fullname ) );
     if ( mDataBuffer != null ) {
@@ -224,6 +262,8 @@ public class GlNames extends GlShape
   double getZmin() { return zmin; }
   double getZmax() { return zmax; }
 
+  /** compute the bounding box 
+   */
   void computeBBox()
   {
     xmin = xmax = ymin = ymax = zmin = zmax = 0;
@@ -243,6 +283,8 @@ public class GlNames extends GlShape
   // ----------------------------------------------------
   // PROGRAM
 
+  /** initialize the data structures
+   */
   void initData( )
   {
     nameCount = mNames.size();
@@ -259,7 +301,9 @@ public class GlNames extends GlShape
   // ------------------------------------------------------
   // DRAW
 
-  // force texture rebind 
+  /** unbind the texture
+   * @note force texture rebind 
+   */
   void unbindTexture() 
   {
     if ( TDUtil.isEmpty(mNames) ) return;
@@ -392,9 +436,14 @@ public class GlNames extends GlShape
     return name.fullname;
   }
 
-  // x, y     canvas coordinates
-  // matrix   MVP matrix
-  // dim      minimum distance
+  /** ???
+   * @param x         canvas X coordinates
+   * @param y         canvas Y coordinates
+   * @param matrix    MVP matrix
+   * @param dim       minimum distance
+   * @param highlight ???
+   * @return ???
+   */ 
   String checkName( float x, float y, float[] matrix, double dmin, boolean highlight )
   {
     if ( TDUtil.isEmpty(mNames) ) return null;
@@ -405,7 +454,7 @@ public class GlNames extends GlShape
     String name = null;
     int idx = -1;
     for ( int i=0; i<nameCount; ++ i ) {
-      Matrix.multiplyMV( w, 0, matrix, 0, mData, 4*i );
+      Matrix.multiplyMV( w, 0, matrix, 0, mData, 4*i ); // apply MVP matrix to i-th vector
       w[0] = w[0]/w[3] - x;
       w[1] = w[1]/w[3] - y;
       double d = (Math.abs(w[0]) + Math.abs(w[1]) );
@@ -579,6 +628,8 @@ public class GlNames extends GlShape
   // --------------------------------------------------------------------
   // UTILITIES
 
+  /** @return the number of names
+   */
   public int size() { return nameCount; }
 
   // --------------------------------------------------------------------

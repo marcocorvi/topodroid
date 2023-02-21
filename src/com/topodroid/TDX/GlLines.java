@@ -23,6 +23,7 @@ import java.nio.FloatBuffer;
 // import java.nio.ShortBuffer;
 
 // import android.opengl.GLES20;
+import android.opengl.Matrix;
 import android.content.Context;
 
 import java.util.ArrayList;
@@ -46,11 +47,20 @@ public class GlLines extends GlShape
 
   private boolean mDebug = false;
   private float[] mData;
+  private float[] mCenterData;  // positions of the centers
 
   void setDebug( boolean on_off ) { mDebug = on_off; }
   
+  /** @return the number of (float) coords per vertex (3)
+   */
   public static int getVertexSize() { return COORDS_PER_VERTEX; }
+  
+  /** @return the number of floats per vertex (7)
+   */
   public static int getVertexStride() { return STRIDE; }
+  
+  /** @return the float array of vertexes
+   */
   public float[] getVertexData() { return mData; }
 
   // private boolean mIncremental = false;
@@ -64,6 +74,7 @@ public class GlLines extends GlShape
     int      mCol;    // color value (survey) / index (axis)
     int      survey;   // survey index in Parser survey list
     boolean  isSurvey; // survey or axis
+    Cave3DShot mShot;  // survey shot
 
     /** cstr
      * @param w1   first point (survey frame): the vector in OpenGL has comps (x, z, -y)
@@ -71,14 +82,16 @@ public class GlLines extends GlShape
      * @param c    color
      * @param s    survey index
      * @param is   whether the segment is survey
+     * @param shot shot
      */
-    Line3D( Vector3D w1, Vector3D w2, int c, int s, boolean is ) 
+    Line3D( Vector3D w1, Vector3D w2, int c, int s, boolean is, Cave3DShot shot ) 
     { 
        v1 = new Vector3D( w1.x, w1.z, -w1.y );
        v2 = new Vector3D( w2.x, w2.z, -w2.y );
        mCol  = c;
        survey = s;
        isSurvey = is;
+       mShot = shot;
     }
 
     /** cstr
@@ -90,14 +103,16 @@ public class GlLines extends GlShape
      * @param xmed mean X (in OpenGL)
      * @param ymed mean Y (in OpenGL)
      * @param zmed mean Z (in OpenGL)
+     * @param shot shot
      */
-    Line3D( Vector3D w1, Vector3D w2, int c, int s, boolean is, double xmed, double ymed, double zmed ) 
+    Line3D( Vector3D w1, Vector3D w2, int c, int s, boolean is, double xmed, double ymed, double zmed, Cave3DShot shot ) 
     { 
       v1 = new Vector3D( w1.x-xmed, w1.z-ymed, -w1.y-zmed );
       v2 = new Vector3D( w2.x-xmed, w2.z-ymed, -w2.y-zmed );
       mCol  = c;
       survey = s;
       isSurvey = is;
+      mShot = shot;
     }
 
     /** @return true if the line is epsilon-null
@@ -328,15 +343,16 @@ public class GlLines extends GlShape
    * @param color      color index: [0-5) for fixed, value for survey
    * @param survey     index of survey in Cave3DSurvey list
    * @param is_survey  whether the line is a survey line
+   * @param shot       shot
    */
-  void addLine( Vector3D w1, Vector3D w2, int color, int survey, boolean is_survey ) 
+  void addLine( Vector3D w1, Vector3D w2, int color, int survey, boolean is_survey, Cave3DShot shot ) 
   { 
     if ( w1 == null || w2 == null ) return; // should not happen, but it did:
        // TopoGL.onStart() calls makeSurface() which calls
        // GlRenderer.setParser() if the parser is not null
        // this calls GlRenderer.prepareModel() which calls addLine() on the legs
        // Legs should not have null stations ... [2020-05-23]
-    lines.add( new Line3D( w1, w2, color, survey, is_survey ) ); 
+    lines.add( new Line3D( w1, w2, color, survey, is_survey, shot ) ); 
     if ( lines.size() == 1 ) {
       xmin = xmax = w1.x;
       ymin = ymax = w1.z;
@@ -363,11 +379,12 @@ public class GlLines extends GlShape
    * @param xmed       mean X (in OpenGL)
    * @param ymed       mean Y (in OpenGL)
    * @param zmed       mean Z (in OpenGL)
+   * @param shot       shot
    */
-  void addLine( Vector3D w1, Vector3D w2, int color, int survey, boolean is_survey, double xmed, double ymed, double zmed ) 
+  void addLine( Vector3D w1, Vector3D w2, int color, int survey, boolean is_survey, double xmed, double ymed, double zmed, Cave3DShot shot ) 
   { 
     if ( w1 == null || w2 == null ) return; // should not happen
-    lines.add( new Line3D( w1, w2, color, survey, is_survey, xmed, ymed, zmed ) ); 
+    lines.add( new Line3D( w1, w2, color, survey, is_survey, xmed, ymed, zmed, shot ) ); 
   }
 
   /** prepare the buffer of depths
@@ -506,14 +523,17 @@ public class GlLines extends GlShape
     lineCount   = lines.size();
     // TDLog.v("lines " + lineCount + " X " + xmin + " " + xmax + " Y " + ymin + " " + ymax + " Z " + zmin + " " + zmax );
     int vertexCount = lineCount * 2;
+    TDLog.v("Lines prepare lines " + lineCount + " vertexes " + vertexCount );
 
     // mData for GLTF export
     mData  = new float[ vertexCount * STRIDE ];
+    mCenterData = new float[ lineCount * 4 ];
     float[] acolor = new float[ COORDS_PER_COLOR ];
     // lines.get(0).getLineColor( acolor );
     // TDLog.v("Lines prepare " + lineCount + " acolor " + acolor[0] + " " + acolor[1] + " " + acolor[2] + " " + acolor[3] );
     // TDLog.v("Lines prepare " + lineCount + " zmin " + zmin );
     int k = 0;
+    int h = 0; // center index
     for ( Line3D line : lines ) {
       Vector3D w1 = line.v1;
       Vector3D w2 = line.v2;
@@ -532,6 +552,10 @@ public class GlLines extends GlShape
       mData[k++] = acolor[1];
       mData[k++] = acolor[2];
       mData[k++] = 1.0f; // alpha;
+      mCenterData[h++] = (float)(w1.x + w2.x)/2;
+      mCenterData[h++] = (float)(w1.y + w2.y)/2;
+      mCenterData[h++] = (float)(w1.z + w2.z)/2;
+      mCenterData[h++] = 1;
     }
     return mData; 
   }
@@ -941,6 +965,35 @@ public class GlLines extends GlShape
     mzUColor     = GL.getUniform(   program, GL.uColor );
     mzAColor     = GL.getAttribute( program, GL.aColor );
     // TDLog.v("Line-Z " + mzUPointSize + " " + mzAPosition + " " + mzUColor + " " + mzUZMin + " " + mzUZDelta );
+  }
+
+  /** select a shot at the canvas point (x,y)
+   * @param x         canvas X coordinates
+   * @param y         canvas Y coordinates
+   * @param matrix    MVP matrix
+   * @param dim       minimum distance
+   * @return selected shot or null
+   */ 
+  Cave3DShot checkLines( float x, float y, float[] matrix, double dmin )
+  {
+    if ( TDUtil.isEmpty( lines ) ) return null;
+    dmin /= GlModel.mHalfWidth;
+    // TDLog.v("dmin " + dmin + " width " + GlModel.mWidth );
+    float[] w = new float[4];
+    // StringBuilder sb = new StringBuilder();
+    Cave3DShot ret = null;
+    for ( int i=0; i<lineCount; ++ i ) {
+      Cave3DShot leg = lines.get(i).mShot;
+      if ( leg == null ) continue;
+      Matrix.multiplyMV( w, 0, matrix, 0, mCenterData, 4*i ); // apply MVP matrix to i-th vector
+      w[0] = w[0]/w[3] - x;
+      w[1] = w[1]/w[3] - y;
+      double d = (Math.abs(w[0]) + Math.abs(w[1]) );
+      // sb.append( mNames[i] + " " + d );
+      if ( d < dmin ) { dmin = d; ret = leg; }
+    }
+    // TDLog.v("check name " + sb.toString() + " idx " + idx );
+    return ret;
   }
 }
 

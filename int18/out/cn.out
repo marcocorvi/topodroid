@@ -17,8 +17,9 @@ EN string not-translatable that are translated:
 Errors 0, Warnings 42, Total 42
 
 EN string that are not translated:
+bad_station string missing
 calib_gm_policy string missing
-Errors 1 + 35 + 5, Total 41
+Errors 2 + 39 + 5, Total 46
 
 EN string that are copied:
 pref_sap5_bit16_bug_title string copied sentence: SAP5 bit-16 bug
@@ -27,11 +28,15 @@ survey_splays_length string copied sentence:  Splays length:
 help_light_3d string copied sentence: Pan and light
 Errors 3 possible, 1 maybe, Warnings 11, Total 15
 
-EN strings 2023 cn strings 2006
+Formats check:
+bad_station (1) bad format 
+Errors: 1, Total 1
+
+EN strings 2030 cn strings 2011
 Translated with no-default:  commented 5 - translated 0 
 Translated non-translatable: commented 42 - translated 0 
 Translated comment: 0 
-Non-Translated: commented 5 missing 1 todo 35 
+Non-Translated: commented 5 missing 2 todo 39 
 Copied: copyable 11 possibly copyable 1 non-copyable 3
-Bad formats 0
-TOTAL ERRORS: 41 / 3 [1]
+Bad formats 1
+TOTAL ERRORS: 47 / 3 [1]

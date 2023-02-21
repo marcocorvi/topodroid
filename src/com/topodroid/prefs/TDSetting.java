@@ -515,6 +515,7 @@ public class TDSetting
   public static boolean mCompositeActions = false;
   public static boolean mLegOnlyUpdate = false; // whether to update display of drawing window at every shot (not just at legs)
   public static boolean mFullAffine = false; // whether to do full affine transform or shift+scale only
+  // public static boolean mLegProjection = true; // leg inclined-projection
 
   public static float mWeedDistance  = 0.5f;  // max weeding distance
   public static float mWeedLength    = 2.0f;  // max weeding length

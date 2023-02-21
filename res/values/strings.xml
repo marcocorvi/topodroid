@@ -784,10 +784,11 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="button_evalroll"  >Roll</string>
     <string name="button_eval_cal"  >Calibrated</string>
     <string name="button_gps_start" copyable="all">GPS</string>
-    <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
+    <!-- UNUSED string name="button_gps_stop"  >Stop</string -->
     <string name="button_help" translatable="false">\?</string>
+    <!-- UNUSED INCLINED_LEG string name="button_leg">Proj</string -->
     <string name="button_manual"    >User manual</string>
-    <!-- UNUSED string name="button_measure"   >Measure   </string -->
+    <!-- UNUSED string name="button_measure"   >Measure</string -->
     <!-- UNUSED string name="button_photo"  copyable="fr">Photo</string -->
     <!-- UNUSED string name="button_sensor"  >Sensors</string -->
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
@@ -2114,7 +2115,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="view_point">Viewpoint</string -->
     <string name="view_zoom" copyable="fr hu it pt">Zoom 1</string>
 
-    <string name="walls_title" copyable="pt">WALLS</string>
+    <string name="walls_title">WALLS</string>
     <string name="walls_convexhull">Convex Hull</string>
     <string name="walls_powercrust" translatable="false">Powercrust</string>
     <string name="walls_hull">Hull</string>

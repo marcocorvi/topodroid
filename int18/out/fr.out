@@ -9,20 +9,18 @@ Error reports verbosity levels:
   Copied strings: ......... non-copyable (1), copyable (2)
 ----------------------------------------------------
 
-1787: ********* DUPLICATE fr STRING <!-- OK string translatable= IN COMMENT
-1788: ********* DUPLICATE fr STRING <!-- OK string translatable= IN COMMENT
-1789: ********* DUPLICATE fr STRING <!-- OK string translatable= IN COMMENT
 1790: ********* DUPLICATE fr STRING <!-- OK string translatable= IN COMMENT
 1791: ********* DUPLICATE fr STRING <!-- OK string translatable= IN COMMENT
 1792: ********* DUPLICATE fr STRING <!-- OK string translatable= IN COMMENT
 1793: ********* DUPLICATE fr STRING <!-- OK string translatable= IN COMMENT
-2003: ********* DUPLICATE fr STRING info_volume_value 
-Duplicated fr strings: 8
+1794: ********* DUPLICATE fr STRING <!-- OK string translatable= IN COMMENT
+1795: ********* DUPLICATE fr STRING <!-- OK string translatable= IN COMMENT
+1796: ********* DUPLICATE fr STRING <!-- OK string translatable= IN COMMENT
+Duplicated fr strings: 7
 
 fr strings without default:
 <string name = no-default translated "ATTENTION : visées non reliées !"
-cpref_grid_extend_summary no-default translated "Extension de la grille autour de la topographie vue plan"
-Errors 2, Warnings 20, Total 22
+Errors 1, Warnings 21, Total 22
 
 EN string not-translatable that are translated:
 cpref_delaunay_title not-translatable translated: Enveloppe Delaunay
@@ -45,9 +43,10 @@ pref_walls_xstep_summary comment non-commented: Distance minimum entres les poin
 Errors 13, Total 13
 
 EN string that are not translated:
+bad_station string missing
 survey_not_attached string missing
 cpref_grid_extent_summary string missing
-Errors 2 + 0 + 0, Total 10
+Errors 3 + 4 + 0, Total 14
 
 EN string that are copied:
 datamode_normal string copied sentence: Normal data-mode
@@ -95,15 +94,16 @@ Errors 18 possible, 11 maybe, Warnings 60, Total 89
 
 Formats check:
 r_dialog () bad format 1
+bad_station (1) bad format 
 shot_rename_unsafe (1) bad format 0
 shots_rename_unsafe (1) bad format 0
-Errors: 3, Total 3
+Errors: 4, Total 4
 
-EN strings 2023 fr strings 2016
-Translated with no-default:  commented 20 - translated 2 
+EN strings 2030 fr strings 2020
+Translated with no-default:  commented 21 - translated 1 
 Translated non-translatable: commented 35 - translated 1 
 Translated comment: 13 
-Non-Translated: commented 0 missing 2 todo 0 
+Non-Translated: commented 0 missing 3 todo 4 
 Copied: copyable 60 possibly copyable 11 non-copyable 18
-Bad formats 3
-TOTAL ERRORS: 21 / 18 [11]
+Bad formats 4
+TOTAL ERRORS: 26 / 18 [11]

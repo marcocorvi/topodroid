@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 
 import android.os.AsyncTask;
 // import android.content.Context;
@@ -29,6 +29,7 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
   private final static int MEASURE_NO_NAME      = 5;
   private final static int MEASURE_NO_MODEL     = 6;
   private final static int MEASURE_SKIP         = 7;
+  private final static int MEASURE_LEG          = 8;
 
   float mX, mY;
   float[] mMVPMatrix;
@@ -38,6 +39,7 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
   ParserDEM mDEM;
   TglMeasure mMeasure;  // result of the measure
   String     mFullname; // station name
+  Cave3DShot mLeg = null;
 
   MeasureComputer( TopoGL app, float x, float y, float[] MVPMatrix, TglParser parser, ParserDEM dem, GlModel model )
   {
@@ -55,36 +57,46 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
   {
     if ( mModel == null || mParser == null ) return MEASURE_NO_MODEL; // new Integer( MEASURE_NO_MODEL );
 
-    mFullname = mModel.checkNames( mX, mY, mMVPMatrix, TopoGL.mSelectionRadius, (mParser.mStartStation == null) );
-    if ( mFullname == null ) return MEASURE_NO_NAME; // new Integer( MEASURE_NO_NAME );
-
-    // TDLog.v("Measure computer - station: " + mFullname + " start: " + ((mParser.mStartStation==null)?"null":"non-null") );
-    if ( mParser.mStartStation == null ) {
-      mModel.clearPath( );
-      mParser.setStartStation( mFullname );
-      return MEASURE_NO_START; // new Integer( MEASURE_NO_START );
-    }
-
-    // if ( ! mApp.mMeasureStation.isChecked() ) return MEASURE_SKIP; // new Integer( MEASURE_SKIP ); // do not measure
-    if ( ! mApp.isMeasuring ) return MEASURE_SKIP; // new Integer( MEASURE_SKIP ); // do not measure
-
-    Cave3DStation station = mParser.getStation( mFullname );
-    if ( station == null ) return MEASURE_NO_STATION; // new Integer( MEASURE_NO_STATION ); // null station
-
-    if ( station == mParser.mStartStation ) return MEASURE_SAME_STATION; // new Integer( MEASURE_SAME_STATION );
-
-    mMeasure = mParser.computeCavePathlength( station );
-    if ( mMeasure.dcave > 0 && station.getPathPrevious() != null ) {
-      ArrayList< Cave3DStation > path = new ArrayList< >();
-      while ( station != null ) {
-        path.add( station );
-        station = station.getPathPrevious();
+    if ( GlNames.getStationMode() == GlNames.STATION_LEG ) {
+      mLeg = mModel.checkLines( mX, mY, mMVPMatrix, TopoGL.mSelectionRadius );
+      if ( mLeg != null ) {
+        return MEASURE_LEG;
+      // } else {
+      //   TDLog.v("null leg search");
       }
-      // TDLog.v("path size " + path.size() );
-      // FIXME INCREMENTAL mModel.clearPath( );
-      mModel.setPath( path, false ); // mModel.setPath( path, mApp.hasBluetoothName() );
-	  
-      return MEASURE_OK; // new Integer( MEASURE_OK );
+      return MEASURE_SKIP;
+    } else {
+      mFullname = mModel.checkNames( mX, mY, mMVPMatrix, TopoGL.mSelectionRadius, (mParser.mStartStation == null) );
+      if ( mFullname == null ) return MEASURE_NO_NAME; // new Integer( MEASURE_NO_NAME );
+
+      // TDLog.v("Measure computer - station: " + mFullname + " start: " + ((mParser.mStartStation==null)?"null":"non-null") );
+      if ( mParser.mStartStation == null ) {
+        mModel.clearPath( );
+        mParser.setStartStation( mFullname );
+        return MEASURE_NO_START; // new Integer( MEASURE_NO_START );
+      }
+
+      // if ( ! mApp.mMeasureStation.isChecked() ) return MEASURE_SKIP; // new Integer( MEASURE_SKIP ); // do not measure
+      if ( ! mApp.isMeasuring ) return MEASURE_SKIP; // new Integer( MEASURE_SKIP ); // do not measure
+
+      Cave3DStation station = mParser.getStation( mFullname );
+      if ( station == null ) return MEASURE_NO_STATION; // new Integer( MEASURE_NO_STATION ); // null station
+
+      if ( station == mParser.mStartStation ) return MEASURE_SAME_STATION; // new Integer( MEASURE_SAME_STATION );
+
+      mMeasure = mParser.computeCavePathlength( station );
+      if ( mMeasure.dcave > 0 && station.getPathPrevious() != null ) {
+        ArrayList< Cave3DStation > path = new ArrayList< >();
+        while ( station != null ) {
+          path.add( station );
+          station = station.getPathPrevious();
+        }
+        // TDLog.v("path size " + path.size() );
+        // FIXME INCREMENTAL mModel.clearPath( );
+        mModel.setPath( path, false ); // mModel.setPath( path, mApp.hasBluetoothName() );
+            
+        return MEASURE_OK; // new Integer( MEASURE_OK );
+      }
     }
     return MEASURE_NO_PATH; // new Integer( MEASURE_NO_PATH );
   }
@@ -133,6 +145,11 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
             }
             // TDToast.make( msg );
           }
+        }
+        break;
+      case MEASURE_LEG:
+        if ( mLeg != null ) {
+          mApp.sketchLeg( mLeg );
         }
         break;
       // case MEASURE_NO_NAME:

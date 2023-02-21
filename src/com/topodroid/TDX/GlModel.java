@@ -493,6 +493,11 @@ public class GlModel
   //   return ( glNames != null )? glNames.checkName( zn, zf, dmin, highlight ) : null;
   // }
 
+  Cave3DShot checkLines( float x, float y, float[] mvpMatrix, float dmin )
+  {
+    return glLegs.checkLines( x, y, mvpMatrix, dmin );
+  }
+
   // ----------------------------------------------------------------------
   synchronized void clearWalls( ) 
   { 
@@ -655,7 +660,7 @@ public class GlModel
           for ( int k = 1; k < nn; ++k ) {
             Vector3D p2 = new Vector3D( poly.get( k ) );
             p2.z = mZ0Min;
-            plan.addLine( p1, p2, 4, -1, false, mXmed, mYmed, mZmed );
+            plan.addLine( p1, p2, 4, -1, false, mXmed, mYmed, mZmed, null );
             p1 = p2;
           }
         }
@@ -668,7 +673,7 @@ public class GlModel
       // FIXME INCREMENTAL : , 0 );
       GlLines profile = new GlLines( mContext, TglColor.ColorPlan, 0 );
       for ( PCSegment sgm : computer.getProfilearcs() ) {
-        profile.addLine( sgm.getV1(), sgm.getV2(), 4, -1, false, mXmed, mYmed, mZmed );
+        profile.addLine( sgm.getV1(), sgm.getV2(), 4, -1, false, mXmed, mYmed, mZmed, null );
       }
       // TDLog.v("MODEL profile init data");
       profile.initData();
@@ -720,7 +725,7 @@ public class GlModel
       Vector3D v2 = new Vector3D( leg.to_station );
       v1.z = surface.computeZ( v1.x, v1.y );
       v2.z = surface.computeZ( v2.x, v2.y );
-      surface_legs.addLine( v1, v2, 3, leg.getSurveyNr(), false, mXmed, mYmed, mZmed ); // 3: color_index, false: fixed colors
+      surface_legs.addLine( v1, v2, 3, leg.getSurveyNr(), false, mXmed, mYmed, mZmed, null ); // 3: color_index, false: fixed colors
     }
     surface_legs.computeBBox();
     // surface_legs.logMinMax();
@@ -948,19 +953,19 @@ public class GlModel
       int color = mParser.getSurveyFromIndex( survey_nr ).getColor();
       if ( leg.isSurvey() ) {
         legsSurvey.add( leg );
-        legs.addLine(  leg.from_station, leg.to_station, color, survey_nr, true ); 
+        legs.addLine(  leg.from_station, leg.to_station, color, survey_nr, true, leg ); 
       } else if ( leg.isSurface() ) {
         legsSurface.add( leg );
-        legsS.addLine( leg.from_station, leg.to_station, color, survey_nr, true );
+        legsS.addLine( leg.from_station, leg.to_station, color, survey_nr, true, null );
       } else if ( leg.isDuplicate() ) {
         legsDuplicate.add( leg );
-        legsD.addLine( leg.from_station, leg.to_station, color, survey_nr, true );
+        legsD.addLine( leg.from_station, leg.to_station, color, survey_nr, true, null );
       } else if ( leg.isCommented() ) {
         legsCommented.add( leg );
-        legsC.addLine( leg.from_station, leg.to_station, color, survey_nr, true );
+        legsC.addLine( leg.from_station, leg.to_station, color, survey_nr, true, null );
       } else {
         legsSurvey.add( leg );
-        legs.addLine(  leg.from_station, leg.to_station, color, survey_nr, true ); 
+        legs.addLine(  leg.from_station, leg.to_station, color, survey_nr, true, leg ); 
       }
     }
     // legs.logMinMax();
@@ -983,9 +988,9 @@ public class GlModel
       int survey_nr = splay.getSurveyNr();
       int color = mParser.getSurveyFromIndex( survey_nr ).getColor();
       if ( splay.from_station != null ) {
-        splays.addLine( splay.from_station, splay.toPoint3D(), color, survey_nr, true, mXmed, mYmed, mZmed );
+        splays.addLine( splay.from_station, splay.toPoint3D(), color, survey_nr, true, mXmed, mYmed, mZmed, null );
       } else if ( splay.to_station != null ) {
-        splays.addLine( splay.to_station, splay.toPoint3D(), color, survey_nr, true, mXmed, mYmed, mZmed );
+        splays.addLine( splay.to_station, splay.toPoint3D(), color, survey_nr, true, mXmed, mYmed, mZmed, null );
       }
     }
     splays.computeBBox();
@@ -1086,7 +1091,7 @@ public class GlModel
   //   synchronized( glLegs ) {
   //     legsSurvey.add( leg );
   //     int survey_nr = leg.getSurveyNr(); // leg getSurveyNr() = color-index
-  //     glLegs.addLine( leg.from_station, leg.to_station, survey_nr, survey_nr, true ); 
+  //     glLegs.addLine( leg.from_station, leg.to_station, survey_nr, survey_nr, true, leg ); 
   //     glLegs.initData( );
   //   }
   // }
@@ -1097,7 +1102,7 @@ public class GlModel
   //   // TDLog.v("Model add BT splay");
   //   synchronized( glSplays ) {
   //     int survey_nr = splay.getSurveyNr(); // splay getSurveyNr() = color-index
-  //     glSplays.addLine( splay.from_station, splay.to_station, survey_nr, survey_nr, true );
+  //     glSplays.addLine( splay.from_station, splay.to_station, survey_nr, survey_nr, true, null );
   //     glSplays.initData( );
   //   }
   // }

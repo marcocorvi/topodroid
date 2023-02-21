@@ -30,6 +30,7 @@ public class PlotType
   public static final long PLOT_SKETCH_3D  = 6;
   public static final long PLOT_XH_SECTION = 7; // X-H_section at a station (defined in EXT plot)
   public static final long PLOT_PROJECTED  = 8; // projected profile
+  public static final long PLOT_LEG        = 9; // projected on leg-inclined plane
 
   /** @return true if the type is for a vertical sketch
    * @param t   plot type
@@ -94,6 +95,10 @@ public class PlotType
    */
   public static boolean isSketch3D( long t ) { return t == PLOT_SKETCH_3D; }
 
+  /** #return true if type is leg-inclined projection
+   * @param t   plot type
+   */
+  public static boolean isLeg( long t ) { return t == PLOT_LEG; }
 
   // public static final String[] plotType = {
   //   "X-SECTION",  // vertical cross section

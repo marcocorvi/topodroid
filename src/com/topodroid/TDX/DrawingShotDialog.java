@@ -54,10 +54,12 @@ class DrawingShotDialog extends MyDialog
   private Button mBtnOK;
   private Button mBtnCancel;
   private Button mBtnColor;  // user-set color (tester level)
+  // private Button mBtnLeg = null;    // leg-inclined projection
   private EditText mETfrom;
   private EditText mETto;
   private EditText mETcomment;
 
+  // private boolean hideLegBtn     = true;
   private boolean hideColorBtn   = true;
   private boolean hideStretchBar = true;
 
@@ -156,8 +158,9 @@ class DrawingShotDialog extends MyDialog
     // mRBsurf = (CheckBox) findViewById( R.id.surface );
     // mRBbackshot  = (CheckBox) findViewById( R.id.backshot );
 
-    hideStretchBar = true;
-    hideColorBtn   = true;
+    // hideStretchBar = true;
+    // hideColorBtn   = true;
+    // hideLegBtn     = true;
     mBtnColor = (Button) findViewById( R.id.btn_color );
     if ( TDLevel.overExpert ) {
       if ( mBlock.isSplay() ) {
@@ -166,51 +169,53 @@ class DrawingShotDialog extends MyDialog
           mBtnColor.setOnClickListener( this );
           hideColorBtn = false;
 	}
-      } else if ( mParent.isExtendedProfile() && mBlock.isMainLeg() ) {
-	if ( TDSetting.mExtendFrac ) {
-	  Bitmap bitmap =  MyButton.getLVRseekbarBackGround( mContext, (int)(TopoDroidApp.mDisplayWidth), 20 );
-	  if ( bitmap != null ) {
-	    BitmapDrawable background = new BitmapDrawable( mContext.getResources(), bitmap );
-            TDandroid.setSeekBarBackground( mStretchBar, background ); 
-	  }
-          hideStretchBar = false;
-          mStretchBar.setProgress( (int)(150 + 100 * mIntExtend + 100 * mStretch ) );
-          mStretchBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener() {
-            public void onProgressChanged( SeekBar stretchbar, int progress, boolean fromUser) {
-              if ( fromUser ) {
-	        if ( progress < 100 ) { 
-                  mIntExtend = -1;
-	          mRBleft.setChecked(  true );
-	          mRBvert.setChecked(  false );
-	          mRBright.setChecked( false );
-	          mStretch = (progress- 50)/100.0f; 
-	        } else if ( progress > 200 ) {
-                  mIntExtend = 1;
-	          mRBleft.setChecked(  false );
-	          mRBvert.setChecked(  false );
-	          mRBright.setChecked( true );
-	          mStretch = (progress-250)/100.0f;
-	        } else { 
-                  mIntExtend = 0;
-	          mRBleft.setChecked(  false );
-	          mRBvert.setChecked(  true );
-	          mRBright.setChecked( false );
-	          mStretch = (progress-150)/100.0f;
-	        }
-                // mStretch = (progress - 100)/200.0f;
-                if ( mStretch < -0.5f ) mStretch = -0.5f;
-                if ( mStretch >  0.5f ) mStretch =  0.5f;
-              }
+      } else if ( mBlock.isMainLeg() ) {
+        if ( mParent.isExtendedProfile() ) {
+          if ( TDSetting.mExtendFrac ) {
+            Bitmap bitmap =  MyButton.getLVRseekbarBackGround( mContext, (int)(TopoDroidApp.mDisplayWidth), 20 );
+            if ( bitmap != null ) {
+              BitmapDrawable background = new BitmapDrawable( mContext.getResources(), bitmap );
+              TDandroid.setSeekBarBackground( mStretchBar, background ); 
             }
-            public void onStartTrackingTouch(SeekBar stretchbar) { }
-            public void onStopTrackingTouch(SeekBar stretchbar) { }
-          } );
-          mStretchBar.setEnabled( true );
-	}
+            hideStretchBar = false;
+            mStretchBar.setProgress( (int)(150 + 100 * mIntExtend + 100 * mStretch ) );
+            mStretchBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener() {
+              public void onProgressChanged( SeekBar stretchbar, int progress, boolean fromUser) {
+                if ( fromUser ) {
+                  if ( progress < 100 ) { 
+                    mIntExtend = -1;
+                    mRBleft.setChecked(  true );
+                    mRBvert.setChecked(  false );
+                    mRBright.setChecked( false );
+                    mStretch = (progress- 50)/100.0f; 
+                  } else if ( progress > 200 ) {
+                    mIntExtend = 1;
+                    mRBleft.setChecked(  false );
+                    mRBvert.setChecked(  false );
+                    mRBright.setChecked( true );
+                    mStretch = (progress-250)/100.0f;
+                  } else { 
+                    mIntExtend = 0;
+                    mRBleft.setChecked(  false );
+                    mRBvert.setChecked(  true );
+                    mRBright.setChecked( false );
+                    mStretch = (progress-150)/100.0f;
+                  }
+                  // mStretch = (progress - 100)/200.0f;
+                  if ( mStretch < -0.5f ) mStretch = -0.5f;
+                  if ( mStretch >  0.5f ) mStretch =  0.5f;
+                }
+              }
+              public void onStartTrackingTouch(SeekBar stretchbar) { }
+              public void onStopTrackingTouch(SeekBar stretchbar) { }
+            } );
+            mStretchBar.setEnabled( true );
+          }
+        }
       }
     }
 
-    if ( hideColorBtn ) mBtnColor.setVisibility( View.GONE );
+    if ( hideColorBtn )   mBtnColor.setVisibility( View.GONE );
     if ( hideStretchBar ) mStretchBar.setVisibility( View.GONE );
 
     LinearLayout layout3  = (LinearLayout) findViewById( R.id.layout3 );
@@ -237,6 +242,13 @@ class DrawingShotDialog extends MyDialog
         layout3.addView( mCBxSplay, lp );
         mCBxSplay.setOnClickListener( this );
       }
+      // if ( TDLevel.overExpert && mBlock.isMainLeg() ) {
+      //   if ( TDSetting.mLegProjection ) {
+      //     mBtnLeg = MyButton.getButton( mContext, this, R.drawable.iz_inclined );
+      //     layout3.addView( mBtnLeg, lp );
+      //     hideLegBtn = false;
+      //   }
+      // }
     } else {
       layout3.setVisibility( View.GONE );
     }
@@ -383,6 +395,9 @@ class DrawingShotDialog extends MyDialog
     if ( (! hideColorBtn) && b == mBtnColor ) {
       new MyColorPicker( mContext, this, mColor ).show();
       return;
+    // } else if ( (! hideLegBtn) && b == mBtnLeg ) {
+    //   // TODO
+    //   return;
     } else if ( b == mRBleft ) {
       mRBvert.setChecked( false );
       mRBright.setChecked( false );

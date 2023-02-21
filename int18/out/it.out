@@ -17,8 +17,8 @@ EN string not-translatable that are translated:
 Errors 0, Warnings 40, Total 40
 
 EN string that are not translated:
-title_fixed_gps_logger string missing
-Errors 1 + 5 + 5, Total 11
+bad_station string missing
+Errors 1 + 8 + 5, Total 14
 
 EN string that are copied:
 outline string copied word: outline
@@ -28,11 +28,15 @@ pref_backsight_title string copied word: Backsight
 cbtn_bind string copied word: Rebind
 Errors 0 possible, 5 maybe, Warnings 35, Total 40
 
-EN strings 2023 it strings 2002
+Formats check:
+bad_station (1) bad format 
+Errors: 1, Total 1
+
+EN strings 2030 it strings 2008
 Translated with no-default:  commented 12 - translated 0 
 Translated non-translatable: commented 40 - translated 0 
 Translated comment: 0 
-Non-Translated: commented 5 missing 1 todo 5 
+Non-Translated: commented 5 missing 1 todo 8 
 Copied: copyable 35 possibly copyable 5 non-copyable 0
-Bad formats 0
-TOTAL ERRORS: 11 / 0 [5]
+Bad formats 1
+TOTAL ERRORS: 15 / 0 [5]

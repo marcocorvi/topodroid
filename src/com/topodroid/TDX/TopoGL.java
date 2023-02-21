@@ -880,10 +880,12 @@ public class TopoGL extends Activity
   BitmapDrawable mBMstationNo;
   BitmapDrawable mBMstationPoint;
   BitmapDrawable mBMstationName;
+  BitmapDrawable mBMstationLeg;
   // BitmapDrawable mBMstation;
   BitmapDrawable mBMstationNoDot;
   BitmapDrawable mBMstationPointDot;
   BitmapDrawable mBMstationNameDot;
+  BitmapDrawable mBMstationLegDot;
   // BitmapDrawable mBMstationDot;
 
   BitmapDrawable mBMsplaysNo;
@@ -942,11 +944,13 @@ public class TopoGL extends Activity
       mBMstationNoDot   = MyButton.getButtonBackground( this, size, R.drawable.iz_station_no_dot );
       mBMstationPointDot= MyButton.getButtonBackground( this, size, R.drawable.iz_station_point_dot );
       mBMstationNameDot = MyButton.getButtonBackground( this, size, R.drawable.iz_station_name_dot );
+      mBMstationLegDot  = MyButton.getButtonBackground( this, size, R.drawable.iz_station_leg_dot );
       // mBMstationDot     = MyButton.getButtonBackground( this, size, R.drawable.iz_station_dot );
 
       mBMstationNo   = MyButton.getButtonBackground( this, size, R.drawable.iz_station_no );
       mBMstationPoint= MyButton.getButtonBackground( this, size, R.drawable.iz_station_point );
       mBMstationName = MyButton.getButtonBackground( this, size, R.drawable.iz_station_name );
+      mBMstationLeg  = MyButton.getButtonBackground( this, size, R.drawable.iz_station_leg );
       // mBMstation     = MyButton.getButtonBackground( this, size, R.drawable.iz_station );
 
       mBMsplaysNo    = MyButton.getButtonBackground( this, size, R.drawable.iz_splays_none );
@@ -1067,7 +1071,7 @@ public class TopoGL extends Activity
   private void setButtonStation()
   {
     if ( mSelectStation ) {
-      switch ( GlNames.stationMode ) {
+      switch ( GlNames.getStationMode() ) {
         case GlNames.STATION_NONE:
           mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationNoDot );
           break;
@@ -1077,12 +1081,15 @@ public class TopoGL extends Activity
         case GlNames.STATION_NAME:
           mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationNameDot );
           break;
+        case GlNames.STATION_LEG:
+          mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationLegDot );
+          break;
         // case GlNames.STATION_ALL:
         //   mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationDot );
         //   break;
       }
     } else {
-      switch ( GlNames.stationMode ) {
+      switch ( GlNames.getStationMode() ) {
         case GlNames.STATION_NONE:
           mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationNo );
           break;
@@ -1091,6 +1098,9 @@ public class TopoGL extends Activity
           break;
         case GlNames.STATION_NAME:
           mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationName );
+          break;
+        case GlNames.STATION_LEG:
+          mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstationLeg );
           break;
         // case GlNames.STATION_ALL:
         //   mButton1[ BTN_STATION ].setBackgroundDrawable( mBMstation );
@@ -3072,6 +3082,13 @@ public class TopoGL extends Activity
         }
       }
     }
+  }
+
+  void sketchLeg( Cave3DShot leg ) 
+  {
+    if ( leg == null ) return; // safety check
+    TDLog.v("TopoGL - sketch leg: " + leg.from + " " + leg.to );
+    // TODO
   }
 
 }

@@ -11,34 +11,30 @@ Error reports verbosity levels:
 
 
 pt strings without default:
-Errors 0, Warnings 9, Total 9
+Errors 0, Warnings 10, Total 10
 
 EN string not-translatable that are translated:
 cpref_delaunay_title not-translatable translated: Delaunay
 Errors 1, Warnings 6, Total 7
 
+EN string that are not translated:
+cpref_convex_hull_title string missing
+Errors 1 + 0 + 0, Total 1
+
 EN string that are copied:
-desc_menu string copied word: Menu
 display_view string copied word: Display
-button_download string copied word: Download
-help_view_surveys string copied sentence: Display surveys
-export_walls string copied word: Walls
-info_lonlat string copied word: coords.
-legs_surface string copied word: Surface
-ctitle_sketches string copied word: Sketches
 walls_title string copied word: WALLS
-cpref_convex_hull_title string copied sentence: Convex hull
 cpref_convex_hull_summary string copied sentence: Convex hull walls
 cpref_delaunay_summary string copied sentence: Delaunay walls
 cpref_hull_title string copied word: Hull
 cpref_hull_summary string copied sentence: Hull walls
-Errors 5 possible, 9 maybe, Warnings 28, Total 42
+Errors 3 possible, 3 maybe, Warnings 30, Total 36
 
-EN strings 2023 pt strings 1983
-Translated with no-default:  commented 9 - translated 0 
+EN strings 2030 pt strings 1989
+Translated with no-default:  commented 10 - translated 0 
 Translated non-translatable: commented 6 - translated 1 
 Translated comment: 0 
-Non-Translated: commented 0 missing 0 todo 0 
-Copied: copyable 28 possibly copyable 9 non-copyable 5
+Non-Translated: commented 0 missing 1 todo 0 
+Copied: copyable 30 possibly copyable 3 non-copyable 3
 Bad formats 0
-TOTAL ERRORS: 1 / 5 [9]
+TOTAL ERRORS: 2 / 3 [3]

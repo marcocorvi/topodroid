@@ -2199,7 +2199,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="cpref_grid_above_title">Situation de la grille quadrillée</string>
     <string name="cpref_grid_above_summary">Placer la grille dans la partie supérieure</string>
     <string name="cpref_grid_extent_title">Étendue grille</string>
-    <string name="cpref_grid_extend_summary">Extension de la grille autour de la topographie vue plan</string>
+    <!-- UNUSED string name="cpref_grid_extend_summary">Extension de la grille autour de la topographie vue plan</string -->
     <string name="cpref_neg_clino_title">Vue sous horizon</string>
     <string name="cpref_neg_clino_summary">Permettre point de vue sous l\'horizon</string>
     <string name="cpref_dem_buffer_title">Tampon MNE</string>
