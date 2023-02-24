@@ -605,10 +605,10 @@ public class ShotWindow extends Activity
    * @param pos   item position
    * @note the multiselection is closed if it contains only the given position
    */
-  private void multiSelect( int pos )
+  private void multiSelect( int pos, boolean long_tap )
   {
     // TDLog.v("multiselect " + pos );
-    if ( mDataAdapter.multiSelect( pos ) ) {
+    if ( mDataAdapter.multiSelect( pos, long_tap ) ) {
       mListView.setAdapter( mButtonViewF.mAdapter );
       mListView.invalidate();
       onMultiselect = true;
@@ -664,7 +664,7 @@ public class ShotWindow extends Activity
   public void itemClick( View view, int pos )
   {
     if ( mDataAdapter.isMultiSelect() ) {
-      multiSelect( pos );
+      multiSelect( pos, false );
       return;
     }
     DBlock blk = mDataAdapter.get(pos);
@@ -715,7 +715,7 @@ public class ShotWindow extends Activity
     // if ( blk.isSplay() ) {
     //   highlightBlocks( blk );
     // } else {
-      multiSelect( pos );
+      multiSelect( pos, true );
     // }
     return true;
   }

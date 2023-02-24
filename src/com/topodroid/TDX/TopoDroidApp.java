@@ -260,10 +260,11 @@ public class TopoDroidApp extends Application
   public static DeviceHelper mDData = null;      // device/calib database
 
   // public static TDPrefHelper mPrefHlp      = null;
-  static SurveyWindow mSurveyWindow    = null; // FIXME ref Survey Activity
-  public static ShotWindow mShotWindow = null; // FIXME ref Shot Activity - public for prefs/TDSetting
-  public static DrawingWindow mDrawingWindow  = null; // FIXME currently not used
-  public static MainWindow mMainActivity      = null; // FIXME ref Main Activity
+  static SurveyWindow mSurveyWindow          = null; // FIXME ref Survey Activity
+  public static ShotWindow mShotWindow       = null; // FIXME ref Shot Activity - public for prefs/TDSetting
+  public static DrawingWindow mDrawingWindow = null; // FIXME currently not used
+  public static MainWindow mMainActivity     = null; // FIXME ref Main Activity
+  public static TopoGL mTopoGL               = null; // FIXME
 
   /** @return the ID of the last shot
    */

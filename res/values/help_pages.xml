@@ -6,7 +6,7 @@
   <string name="PtCmapActivity" translatable="false">page_pt_cmap.htm</string>
   <string name="SensorActivity" translatable="false">page_sensors.htm</string>
   <string name="SensorListActivity" translatable="false">page_sensors_list.htm</string>
-  <!-- FIXME_SKETCH_3D string name="SketchWindow" translatable="false">page_todo.htm</string -->
+  <string name="SketchWindow" translatable="false">page_sketch.htm</string>
 
   <string name="FixedActivity" translatable="false">page_fixed_list.htm</string>
 

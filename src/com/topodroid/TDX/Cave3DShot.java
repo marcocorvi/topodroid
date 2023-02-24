@@ -12,6 +12,8 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.math.TDVector;
+import com.topodroid.utils.TDMath;
 
 import java.io.DataOutputStream;
 import java.io.DataInputStream;
@@ -272,6 +274,13 @@ public class Cave3DShot
   {
     double h = len * Math.cos(cln);
     return new Vector3D( (h * Math.sin(ber)), (h * Math.cos(ber)), (len * Math.sin(cln)) );
+  }
+
+  // return the TD vector (E, N, Up )
+  public TDVector toTDVector()
+  {
+    double h = len * Math.cos(cln);
+    return new TDVector( (float)(h * Math.sin(ber)), (float)(h * Math.cos(ber)), (float)(len * Math.sin(cln)) );
   }
 
   // makes sense only for splays

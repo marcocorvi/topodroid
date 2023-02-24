@@ -162,10 +162,11 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   boolean isMultiSelect() { return ( mSelect.size() > 0 ); }
 
   /** add a block to the multiselection
-   * @param pos  block position
+   * @param pos       block position
+   * @param long_tap  whether it was a long-tap
    * @return the number of blocks in the multiselection
    */
-  boolean multiSelect(int pos ) 
+  boolean multiSelect( int pos, boolean long_tap ) 
   {
     if ( pos >= START && pos < getCount() ) {
       DBlock b = (DBlock)( getItem( pos ) );
@@ -180,6 +181,15 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
             b.mMultiSelected = true;
             b.setBackgroundColor( TDColor.GRID );
             // TDLog.v("multiselect add " + b.mFrom + " " + b.mTo + " " + mSelect.size() );
+            if ( long_tap ) {
+              while ( --pos >= 0 ) {
+                b = (DBlock)( getItem( pos ) );
+                if ( b.mMultiSelected ) break;
+                mSelect.add( b );
+                b.mMultiSelected = true;
+                b.setBackgroundColor( TDColor.GRID );
+              }
+            }
           }
         } else {
           mSelect.add( b );

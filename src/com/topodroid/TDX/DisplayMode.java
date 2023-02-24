@@ -33,6 +33,8 @@ class DisplayMode
   static final int DISPLAY_OVERVIEW = 0x2f; //        0x20 |        0x08 | 0x04 | 0x02 | 0x01 skip outline and latest 
   static final int DISPLAY_FULL     = 0x032f; 
 
+  static final int DISPLAY_SKETCH   = 0x0c; // leg splay grid
+
   static boolean isLeg( int mode )     { return ( mode & DISPLAY_LEG     ) == DISPLAY_LEG; }
   static boolean isSplay( int mode )   { return ( mode & DISPLAY_SPLAY   ) == DISPLAY_SPLAY; }
   static boolean isStation( int mode ) { return ( mode & DISPLAY_STATION ) == DISPLAY_STATION; }

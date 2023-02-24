@@ -1031,6 +1031,8 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="help_edit">Editing mode</string>
     <string name="help_refs">Sketching references</string>
     <string name="help_rename">Change survey name</string>
+    <string name="help_plot_close">Close sketch</string>
+    <string name="help_plot_delete">Delete sketch</string>
     <string name="help_plot_rename">Rename/Delete sketch</string>
     <string name="help_plot_scrap">Sketch scraps</string>
     <string name="help_plot_switch">Switch sketch</string>
@@ -1044,6 +1046,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="help_redo">Redo last drawing action</string>
     <string name="help_symbol_plot">Select the active drawing tool</string>
     <string name="help_delete_item">Delete sketch item</string>
+    <string name="help_section_item">Sketch section item</string>
     <string name="help_range">Moving a portion of line</string>
     <!-- UNUSED string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Erase mode</string>

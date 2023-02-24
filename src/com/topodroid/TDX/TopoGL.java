@@ -63,7 +63,7 @@ import java.io.InputStreamReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-// import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
 // import java.util.Set;
 import java.util.Locale;
@@ -192,6 +192,26 @@ public class TopoGL extends Activity
 
   boolean doSketches = false;
 
+  // SKETCH
+  Cave3DShot mSketchLeg = null;
+  ArrayList< Cave3DShot > mSketchSplaysFrom = new ArrayList<>();
+  ArrayList< Cave3DShot > mSketchSplaysTo   = new ArrayList<>();
+
+  void setSketchLeg( Cave3DShot leg )
+  {
+    mSketchLeg = leg;
+    mSketchSplaysFrom.clear();
+    mSketchSplaysTo.clear();
+    if ( mSketchLeg != null && mParser != null ) {
+      Cave3DStation fs = leg.from_station;
+      Cave3DStation ts = leg.to_station;
+      mSketchSplaysFrom = mParser.getSplaysAt( fs );
+      mSketchSplaysTo   = mParser.getSplaysAt( ts );
+    }
+  }
+
+  // -------------------------------------------------------
+
   private BitmapDrawable mBMmeasureOn;
   private BitmapDrawable mBMmeasureOff;
   private BitmapDrawable mBMfixOn;
@@ -309,7 +329,13 @@ public class TopoGL extends Activity
   }
 
   @Override
-  public void onCreate(Bundle savedInstanceState) 
+  public void onDestroy( )
+  {
+    ((TopoDroidApp)getApplication()).mTopoGL = null;
+  }
+
+  @Override
+  public void onCreate( Bundle savedInstanceState ) 
   {
     super.onCreate(savedInstanceState);
     // TDLog.v("on create: Not Android 10 " + NOT_ANDROID_10 + " 11 " + NOT_ANDROID_11 );
@@ -320,6 +346,7 @@ public class TopoGL extends Activity
     // mHasFractal &= TDLevel.overExpert;
     // mHasTemperature &= TDLevel.overExpert;
    
+    ((TopoDroidApp)getApplication()).mTopoGL = this;
 
     setContentView( R.layout.cave3d_activity );
     mLayout = (LinearLayout) findViewById( R.id.view_layout );
@@ -3088,7 +3115,10 @@ public class TopoGL extends Activity
   {
     if ( leg == null ) return; // safety check
     TDLog.v("TopoGL - sketch leg: " + leg.from + " " + leg.to );
-    // TODO
+    setSketchLeg( leg );
+    Intent intent = new Intent( this, com.topodroid.TDX.SketchWindow.class );
+    intent.putExtra( "TOPOGL_SKETCH_VERTICAL", true );
+    startActivity( intent );
   }
 
 }

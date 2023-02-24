@@ -238,6 +238,12 @@
           </intent-filter>
         </activity>
 
+        <activity android:name=".SketchWindow"
+	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
+          android:exported="false"
+        />
+
         <!-- activity android:name=".SketchWindow"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"

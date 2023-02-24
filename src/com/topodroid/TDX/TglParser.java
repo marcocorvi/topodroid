@@ -192,6 +192,20 @@ public class TglParser
   public ArrayList< Cave3DFix >      getFixes()     { return fixes; }
   public ArrayList< Cave3DXSection > getXSections() { return xsections; }
 
+  /** @return an array with the splays at two stations
+   * @param st    station (ignored if null)
+   */
+  public ArrayList< Cave3DShot > getSplaysAt( Cave3DStation st )
+  {
+    ArrayList< Cave3DShot > ret = new ArrayList<>();
+    if ( st != null ) {
+      for ( Cave3DShot sp : splays ) {
+        if ( sp.from_station == st ) ret.add( sp );
+      }
+    }
+    return ret;
+  }  
+
   public Cave3DShot getShot( int k ) { return shots.get(k); }
 
   public DEMsurface getSurface() { return mSurface; }

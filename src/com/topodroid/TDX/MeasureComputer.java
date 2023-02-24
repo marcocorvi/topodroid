@@ -30,6 +30,7 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
   private final static int MEASURE_NO_MODEL     = 6;
   private final static int MEASURE_SKIP         = 7;
   private final static int MEASURE_LEG          = 8;
+  private final static int MEASURE_SKETCH       = 9;
 
   float mX, mY;
   float[] mMVPMatrix;
@@ -59,12 +60,7 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
 
     if ( GlNames.getStationMode() == GlNames.STATION_LEG ) {
       mLeg = mModel.checkLines( mX, mY, mMVPMatrix, TopoGL.mSelectionRadius );
-      if ( mLeg != null ) {
-        return MEASURE_LEG;
-      // } else {
-      //   TDLog.v("null leg search");
-      }
-      return MEASURE_SKIP;
+      return ( mLeg != null )? MEASURE_SKETCH : MEASURE_SKIP;
     } else {
       mFullname = mModel.checkNames( mX, mY, mMVPMatrix, TopoGL.mSelectionRadius, (mParser.mStartStation == null) );
       if ( mFullname == null ) return MEASURE_NO_NAME; // new Integer( MEASURE_NO_NAME );
@@ -147,10 +143,8 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
           }
         }
         break;
-      case MEASURE_LEG:
-        if ( mLeg != null ) {
-          mApp.sketchLeg( mLeg );
-        }
+      case MEASURE_SKETCH:
+        mApp.sketchLeg( mLeg );
         break;
       // case MEASURE_NO_NAME:
       //   // mModel.clearPath( );
