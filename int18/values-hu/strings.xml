@@ -1012,7 +1012,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="help_gps_surveys">Mérések GNSS pontjai</string>
     <string name="help_survey_info">Felmérési információ</string>
     <string name="help_undelete">Törölt elemek visszaállítása</string>
-	<!-- UPDATES string name="help_updates">Check for app version updates</string -->
+    <!-- UPDATES string name="help_updates">Check for app version updates</string -->
     <string name="help_photo">Fényképek</string>
     <string name="help_sensor">Mérések</string>
     <string name="help_3d">3D nézőke (Cave3D)</string>
@@ -1023,7 +1023,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="help_refs">Vázlat referencia</string>
     <string name="help_rename">Felmérés nevének megváltoztatása</string>
     <string name="help_plot_close">Vázlat bezárása</string>
-    <string name="help_plot_delete">Vázlat törléseDelete sketch</string>
+    <string name="help_plot_delete">Vázlat törlése</string>
     <string name="help_plot_rename">Vázlat átnevezése/törlése</string>
     <string name="help_plot_scrap">Vázlat szintek</string>
     <string name="help_plot_switch">Vázlat nézet átváltása</string>
