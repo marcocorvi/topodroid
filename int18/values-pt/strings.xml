@@ -29,7 +29,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
   <string name="r_continue">CONTINUAR</string>
   <string name="r_quit">FINALIZAR</string>
-  <string name="tdm_title">Gerenciador TopoDroid</string>
+  <string name="tdm_title">Gerenciador de Projetos</string>
   <string name="tdm_config_project">projeto.tdconfig</string>
   <string name="double_back">Clicar novamente em VOLTAR para sair</string>
   <string name="new_survey_label">Nova topo</string>
