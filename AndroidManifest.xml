@@ -238,13 +238,7 @@
           </intent-filter>
         </activity>
 
-        <activity android:name=".SketchWindow"
-	  android:theme="@style/Theme.FullScreen"
-          android:configChanges="orientation|screenSize"
-          android:exported="false"
-        />
-
-        <!-- activity android:name=".SketchWindow"
+        <activity android:name=".SketchWindow" tools:ignore="Instantiatable"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
@@ -253,7 +247,7 @@
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.DEFAULT" />
           </intent-filter>
-        </activity -->
+        </activity>
 
         <activity android:name="com.topodroid.help.UserManualActivity"
 	  android:theme="@style/Theme.FullScreen"

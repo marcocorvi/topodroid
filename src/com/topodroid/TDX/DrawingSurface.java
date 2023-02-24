@@ -63,7 +63,8 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   protected DrawThread mDrawThread;
 
   private boolean mSurfaceCreated = false;
-  public volatile boolean isDrawing = true;
+  private volatile boolean isDrawing = true;
+
   private DrawingPath mPreviewPath;
   // private SurfaceHolder mHolder; // canvas holder
   // private final Context mContext;
@@ -81,10 +82,6 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
 
   private DrawingStationSplay mStationSplay; // splays on/off at stations
 
-  /** check if the surface is drawing
-   * @return true if the surface is drawing
-   */
-  public boolean isDrawing() { return isDrawing; }
 
   // -----------------------------------------------------
   // SCRAPS 
@@ -564,6 +561,8 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    */
   Path getPreviewPath() { return (mPreviewPath != null)? mPreviewPath.mPath : null; }
 
+  // ------------------ IDrawingSurface -----------------------
+
   /** refresh the surface
    * @param holder   surface holder
    */
@@ -588,6 +587,18 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
       }
     }
   }
+
+  /** check if the surface is drawing
+   * @return true if the surface is drawing
+   */
+  public boolean isDrawing() { return isDrawing; }
+
+  /** set the boolean isDrawing
+   * @param drawing   new value
+   */
+  public void setDrawing( boolean drawing ) { isDrawing = drawing; }
+
+  // ----------------------------------------------------------
 
   /** split the plot, in the current manager
    * @param border    splitting border

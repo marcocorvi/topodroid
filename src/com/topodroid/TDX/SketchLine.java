@@ -19,8 +19,8 @@ import com.topodroid.math.TDVector;
 
 public class SketchLine // world coords
 {
-  TDVector mC;  // base point
-  TDVector mN;  // line vector
+  TDVector mC;  // base point (world)
+  TDVector mN;  // line vector (world)
 
   /** cstr
    * @param c   base point
@@ -34,7 +34,7 @@ public class SketchLine // world coords
   }
 
   /** @return distance of a point from the line
-   * @param pt   3D point
+   * @param pt   3D point (world coords)
    */
   float distance( SketchPoint pt )
   {

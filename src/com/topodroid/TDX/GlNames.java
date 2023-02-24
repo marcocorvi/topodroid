@@ -54,7 +54,7 @@ public class GlNames extends GlShape
   static void toggleStations() 
   { 
     stationMode = (stationMode + 1)%STATION_MAX; 
-    if ( ( ! TDLevel.overExpert ) && ( stationMode == STATION_LEG ) ) stationMode = (stationMode + 1)%STATION_MAX;
+    if ( ( ! TDLevel.overTester ) && ( stationMode == STATION_LEG ) ) stationMode = (stationMode + 1)%STATION_MAX;
     if ( GlModel.mStationPoints && ((stationMode % 2) == 1) ) stationMode = (stationMode + 1)%STATION_MAX; 
     // if ( ! hasNames() ) stationMode = STATION_NONE;
   } 

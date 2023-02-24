@@ -1,9 +1,9 @@
 /* @file SketchSurface.java
  *
  * @author marco corvi
- * @date nov 2011
+ * @date feb 2023
  *
- * @brief TopoDroid drawing: drawing surface (canvas)
+ * @brief TopoDroid sketching: drawing surface (canvas)
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -52,7 +52,7 @@ import java.io.PrintWriter;
 
 /**
  */
-public class SketchSurface extends SurfaceView // TH2EDIT was package
+public class SketchSurface extends SurfaceView
                            implements SurfaceHolder.Callback
                            , IDrawingSurface
 {
@@ -71,6 +71,9 @@ public class SketchSurface extends SurfaceView // TH2EDIT was package
 
   static private SketchCommandManager commandManager = null; 
 
+  private boolean mSurfaceCreated = false;
+  private volatile boolean isDrawing = true;
+
   // -----------------------------------------------------
 
   /** @return the canvas width
@@ -83,7 +86,7 @@ public class SketchSurface extends SurfaceView // TH2EDIT was package
 
   /** @return the sketch drawing scale
    */
-  float getScale() { return commandManager.getScale(); }
+  float getScale() { return ( commandManager == null )? 1 : commandManager.getScale(); }
 
   // private Timer mTimer;
   // private TimerTask mTask;
@@ -91,12 +94,16 @@ public class SketchSurface extends SurfaceView // TH2EDIT was package
   // /** test if the surface is selectable - UNUSED
   //  * @return true if the surface items are selectable
   //  */
-  // boolean isSelectable() { return commandManager.isSelectable(); }
+  // boolean isSelectable() { return ( commandManager == null )? false : commandManager.isSelectable(); }
 
   /** set the parent window
    * @param parent   parent window
    */
-  void setParent( SketchWindow parent ) { mParent = parent; }
+  void setParent( SketchWindow parent ) 
+  { 
+    mParent = parent;
+    commandManager = new SketchCommandManager( mParent.getVertical() );
+  }
 
   /** cstr
    * @param context context
@@ -114,7 +121,6 @@ public class SketchSurface extends SurfaceView // TH2EDIT was package
     // mHolder = getHolder();
     // mHolder.addCallback(this);
     getHolder().addCallback(this);
-    commandManager = new SketchCommandManager( mParent.getVertical() );
   }
 
   // -------------------------------------------------------------------
@@ -124,12 +130,15 @@ public class SketchSurface extends SurfaceView // TH2EDIT was package
    */
   void setDisplayPoints( boolean display ) 
   { 
+    if ( commandManager == null ) return;
     commandManager.setDisplayPoints( display );
     if ( display ) {
     } else {
       commandManager.syncClearSelected();
     }
   }
+
+  float getZoom() { return ( commandManager == null )? 1 : commandManager.getZoom(); }
 
   // -----------------------------------------------------------
 
@@ -145,54 +154,70 @@ public class SketchSurface extends SurfaceView // TH2EDIT was package
 
   /** set the transform in the current manager
    * @param act    activity
-   * @param dx     X shift
-   * @param dy     Y shift
-   * @param s      scale
-   * 
-   * the transformation is
-   *  X -> (x+dx)*s = x*s + dx*s
-   *  Y -> (y+dy)*s = y*s + dy*s
+   * @param dx     X offset
+   * @param dy     Y offset
+   * @param z      zoom
    */
-  public void setTransform( Activity act, float dx, float dy, float s ) { commandManager.setTransform( act, dx, dy, s ); }
+  public void setTransform( Activity act, float dx, float dy, float z ) 
+  { 
+    if ( commandManager != null ) commandManager.setTransform( act, dx, dy, z ); 
+  }
+
+  /** set the transform in the current manager
+   * @param act    activity
+   * @param dx     X offset
+   * @param dy     Y offset
+   */
+  public void setTransform( Activity act, float dx, float dy )
+  { 
+    if ( commandManager != null ) commandManager.setTransform( act, dx, dy ); 
+  }
 
   /** remove a path, from the current manager
    * @param path   path to remove
    */
   void deleteLine( SketchLinePath path ) 
   { 
-    // isSketching = true;
-    commandManager.deleteLine( path );
+    isDrawing = true;
+    if ( commandManager != null ) commandManager.deleteLine( path );
   }
 
 
   /** finish an erase command, in the current manager
    */
-  void endEraser() { commandManager.endEraser(); }
+  void endEraser()
+  { 
+    if ( commandManager != null ) commandManager.endEraser(); 
+  }
 
   /** set the eraser circle, in the current manager
    * @param x    X canvas coords
    * @param y    Y canvas coords
    * @param r    circle radius
    */
-  void setEraser( float x, float y, float r ) { commandManager.setEraser(x, y, r); } // canvas x,y, r
+  void setEraser( float x, float y, float r )
+  {
+    if ( commandManager != null )  commandManager.setEraser(x, y, r); // canvas x,y, r
+  }
 
   /** erase at a position, in the current manager
    * @param x    X scene coords
    * @param y    Y scene coords
-   * @param zoom current zoom (the larger the zoom, the bigger the sketch on the display)
    * @param cmd  erase command
    * @param erase_size  eraser size
    */
-  void eraseAt( float x, float y, float zoom, EraseCommand cmd, float erase_size ) 
-  { commandManager.eraseAt( x, y, zoom, cmd, erase_size ); }
+  void eraseAt( float x, float y, EraseCommand cmd, float erase_size ) 
+  { 
+    if ( commandManager != null ) commandManager.eraseAt( x, y, cmd, erase_size );
+  }
   
   /** add an erase command in the current manager
    * @param cmd   erase command
    */
   void addEraseCommand( EraseCommand cmd )
   {
-    // isSketching = true;
-    commandManager.addEraseCommand( cmd );
+    isDrawing = true;
+    if ( commandManager != null ) commandManager.addEraseCommand( cmd );
   }
 
   // ------------------ IDrawingSurface -----------------------
@@ -211,7 +236,7 @@ public class SketchSurface extends SurfaceView // TH2EDIT was package
         mWidth  = canvas.getWidth();
         mHeight = canvas.getHeight();
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-        commandManager.executeAll( canvas, mParent.zoom() );
+        commandManager.executeAll( canvas );
       }
     } finally {
       if ( canvas != null ) {
@@ -223,53 +248,59 @@ public class SketchSurface extends SurfaceView // TH2EDIT was package
   /** check if the surface is drawing
    * @return true if the surface is drawing
    */
-  public boolean isDrawing() { return isSketching; }
+  public boolean isDrawing() { return isDrawing; }
 
-  public void setDrawing( boolean sketching ) { isSketching = sketching; }
+
+  /** set the boolean isDrawing
+   * @param drawing   new value
+   */
+  public void setDrawing( boolean drawing ) { isDrawing = drawing; }
 
   // ----------------------------------------------------------
 
   // TH2EDIT this method was commented
   /** clear the drawing (only for mSkipSaving)
    */
-  void clearSketch() { commandManager.clearSketch(); }
+  void clearSketch() { if ( commandManager != null ) commandManager.clearSketch(); }
 
-  void addFixedSplayPath( SketchFixedPath path ) { commandManager.addTmpSplayPath( path ); }
+  void addFixedSplayPath( SketchFixedPath path ) { if ( commandManager != null ) commandManager.addTmpSplayPath( path ); }
 
-  void addFixedLegPath( SketchFixedPath path ) { commandManager.addTmpLegPath( path ); }
-
-  void resetPreviewPath() { commandManager.resetPreviewPath(); }
+  /**
+   * @note this starts a new reference in the command manager
+   */
+  void addFixedLegPath( SketchFixedPath path ) { if ( commandManager != null ) commandManager.addTmpLegPath( path ); }
 
   // k : grid type 1, 10, 100
-  public void addGridPath( SketchFixedPath path, int k ) { commandManager.addTmpGrid( path, k ); }
+  public void addGridPath( SketchFixedPath path, int k ) { if ( commandManager != null ) commandManager.addTmpGrid( path, k ); }
 
   // DEBUG
-  // public int getGrid1Size() { return commandManager.getGrid1().size(); }
-  // public int getGrid10Size() { return commandManager.getGrid10().size(); }
+  // public int getGrid1Size() { return ( commandManager == null )? 0 : commandManager.getGrid1().size(); }
+  // public int getGrid10Size() { return ( commandManager == null )? 0 : commandManager.getGrid10().size(); }
 
   public void doneReference()
   {
-    commandManager.commitReferences();
+    if ( commandManager != null ) commandManager.commitReferences();
   }
 
+  Paint getLinePaint() { return ( commandManager == null )? BrushManager.fixedOrangePaint : commandManager.getLinePaint(); }
 
   /** add a line item
    * @param path  line item
    */
-  public void addLinePath ( SketchLinePath path ) { commandManager.addLine( path ); }
+  public void addLinePath ( SketchLinePath path ) { if ( commandManager != null ) commandManager.addLine( path ); }
 
-  // void setBounds( float x1, float x2, float y1, float y2 ) { commandManager.setBounds( x1, x2, y1, y2 ); }
+  // void setBounds( float x1, float x2, float y1, float y2 ) { if ( commandManager != null ) commandManager.setBounds( x1, x2, y1, y2 ); }
 
   void redo()
   {
-    // isSketching = true;
-    commandManager.redo();
+    isDrawing = true;
+    if ( commandManager != null ) commandManager.redo();
   }
 
   void undo()
   {
-    // isSketching = true;
-    commandManager.undo();
+    isDrawing = true;
+    if ( commandManager != null ) commandManager.undo();
   }
 
   boolean hasMoreRedo()
@@ -279,28 +310,30 @@ public class SketchSurface extends SurfaceView // TH2EDIT was package
   // boolean hasMoreUndo()
   // { return commandManager!= null && commandManager.hasMoreUndo(); }
 
-  // RectF getBitmapBounds( float scale ) { return commandManager.getBitmapBounds( scale ); }
+  RectF getBitmapBounds( float scale ) { return ( commandManager == null )? null : commandManager.getBitmapBounds( scale ); }
 
-
-  SketchPoint getItemAt( float x, float y, float zoom, float size ) 
+  /** find the sketch point at the given canvas point
+   * @param x   X canvas coord
+   * @param y   Y canvas coord
+   * @return 0,1, or 2 : number of selected points
+   */
+  int getItemAt( float x, float y, float size ) 
   { 
-    return commandManager.getItemAt( x, y, zoom, size );
+    return ( commandManager == null )? 0 : commandManager.getItemAt( x, y, size );
   }
 
   // UNUSED
-  // boolean setRangeAt( float x, float y, float zoom, float size ) { return commandManager.setRangeAt( x, y, zoom, size ); }
+  // boolean setRangeAt( float x, float y, float zoom, float size ) { return ( commandManager == null )? false : commandManager.setRangeAt( x, y, zoom, size ); }
 
-  int hasSelected() { return commandManager.hasSelected(); }
+  int hasSelected() { return ( commandManager == null )? 0 : commandManager.hasSelected(); }
 
-  // SelectionPoint nextHotItem() { return commandManager.nextHotItem(); }
+  // SketchPoint nextHotItem() { return ( commandManager == null )? null : commandManager.nextHotItem(); }
 
-  // SelectionPoint prevHotItem() { return commandManager.prevHotItem(); }
+  // SketchPoint prevHotItem() { return ( commandManager == null )? null : commandManager.prevHotItem(); }
 
-  void clearSelected() { commandManager.syncClearSelected(); }
+  void clearSelected() { if ( commandManager != null ) commandManager.syncClearSelected(); }
 
   // ---------------------------------------------------------------------
-  private boolean mSurfaceCreated = false;
-  public volatile boolean isSketching = false;
 
   public void surfaceChanged( SurfaceHolder holder, int format, int width,  int height) 
   {
@@ -319,8 +352,8 @@ public class SketchSurface extends SurfaceView // TH2EDIT was package
     }
     // mDrawThread.setRunning(true); // not necessary: done by start
     mDrawThread.start();
+    isDrawing = true;
     mSurfaceCreated = true;
-    isSketching = true;
   }
 
   public void surfaceDestroyed( SurfaceHolder holder ) 
@@ -328,7 +361,6 @@ public class SketchSurface extends SurfaceView // TH2EDIT was package
     mSurfaceCreated = false;
     // TDLog.Log( TDLog.LOG_PLOT, "surfaceDestroyed " );
     // mDrawThread.setHolder( null );
-    isSketching = false;
     mDrawThread.setRunning(false);
     boolean retry = true;
     while (retry) {
@@ -342,13 +374,31 @@ public class SketchSurface extends SurfaceView // TH2EDIT was package
     mDrawThread = null;
   }
 
-  TDVector toTDVector( float x, float y ) { return commandManager.toTDVector( x, y ); }
+  /** @return the world 3D vector of a canvas point
+   * @param x    X canvas coord
+   * @param y    Y canvas coord
+   */
+  TDVector toTDVector( float x, float y ) { return ( commandManager == null )? null : commandManager.toTDVector( x, y ); }
 
   SketchCommandManager getManager( ) { return commandManager; }
 
-  void startCurrentPath() { commandManager.startCurrentPath(); }
-  void endCurrentPath() { commandManager.endCurrentPath(); }
-  ArrayList< Point2D > getCurrentPath() { return commandManager.getCurrentPath(); }
-  void addPointToCurrentPath( Point2D pt ) { commandManager.addPointToCurrentPath( pt ); }
+
+  /** restart the preview path in the command manager
+   */
+  void startCurrentPath() { if ( commandManager != null ) commandManager.startCurrentPath(); }
+
+  /** close the preview path in the command manager
+   */
+  void endCurrentPath()   { if ( commandManager != null ) commandManager.endCurrentPath(); }
+
+  /** @return the preview path from the command manager
+   */
+  ArrayList< Point2D > getCurrentPath() { return ( commandManager == null )? null : commandManager.getCurrentPath(); }
+
+  void addPointToCurrentPath( Point2D pt ) { if ( commandManager != null ) commandManager.addPointToCurrentPath( pt ); }
+
+  /** reset the current path in hhe command manager
+   */
+  void resetPreviewPath() { if ( commandManager != null ) commandManager.resetPreviewPath(); }
 
 }

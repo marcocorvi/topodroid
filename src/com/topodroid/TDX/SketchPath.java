@@ -86,24 +86,24 @@ public class SketchPath
 
   public int size() { return 0; }
 
-  /** draw the path on a canvas
-   * @param canvas   canvas - N.B. canvas is guaranteed not null
-   * @param C        center (E,N,Up)
-   * @param X        horizontal direction (E,N,Up)
-   * @param Y        downward direction in (E,N,Up)
-   * @param zoom     zoom
-   * @param off_x    X offset
-   * @param off_y    Y offset
-   */
-  public void draw( Canvas canvas, TDVector C, TDVector X, TDVector Y, float zoom, float off_x, float off_y )
-  {
-    if ( ! mVisible ) return;
-    Path path = makeProjectedPath( C, X, Y, zoom );
-    if ( path != null ) {
-      path.offset( off_x, off_y );
-      drawPath( path, canvas );
-    }
-  }
+  // /** draw the path on a canvas
+  //  * @param canvas   canvas - N.B. canvas is guaranteed not null
+  //  * @param C        center (E,N,Up)
+  //  * @param X        horizontal direction (E,N,Up)
+  //  * @param Y        downward direction in (E,N,Up)
+  //  * @param zoom     zoom
+  //  * @param off_x    X offset
+  //  * @param off_y    Y offset
+  //  */
+  // public void draw( Canvas canvas, TDVector C, TDVector X, TDVector Y, float zoom, float off_x, float off_y )
+  // {
+  //   if ( ! mVisible ) return;
+  //   Path path = makeProjectedPath( C, X, Y );
+  //   if ( path != null ) {
+  //     path.offset( off_x, off_y );
+  //     drawPath( path, canvas );
+  //   }
+  // }
 
 
   /** draw the path on a canvas
@@ -119,10 +119,10 @@ public class SketchPath
   public void draw( Canvas canvas, Matrix matrix, TDVector C, TDVector X, TDVector Y, float zoom, float off_x, float off_y )
   {
     if ( ! mVisible ) return;
-    Path path = makeProjectedPath( C, X, Y, zoom );
+    Path path = makeProjectedPath( C, X, Y );
     if ( path != null ) {
       path.transform( matrix );
-      path.offset( off_x, off_y );
+      // path.offset( off_x, off_y );
       drawPath( path, canvas );
     }
   }
@@ -131,9 +131,8 @@ public class SketchPath
    * @param C        center (E,N,Up)
    * @param X        horizontal direction (E,N,Up)
    * @param Y        downward direction in (E,N,Up)
-   * @param zoom     zoom
    */
-  Path makeProjectedPath( TDVector C, TDVector X, TDVector Y, float zoom ) { return null; }
+  Path makeProjectedPath( TDVector C, TDVector X, TDVector Y ) { return null; }
 
 
   /** draw the path on the canvas with the class paint

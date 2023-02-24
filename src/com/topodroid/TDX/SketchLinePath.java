@@ -73,16 +73,16 @@ public class SketchLinePath extends SketchPath
   /** make projected path
    */
   @Override
-  Path makeProjectedPath( TDVector C, TDVector X, TDVector Y, float zoom )
+  Path makeProjectedPath( TDVector C, TDVector X, TDVector Y )
   {
     int sz = mPts.size();
     if ( sz > 2 ) {
       TDVector v = mPts.get(0).minus( C );
       Path path = new Path();
-      path.moveTo( zoom * X.dot( v ), zoom * Y.dot( v ) );
+      path.moveTo( X.dot( v ), Y.dot( v ) );
       for ( int k=1; k<sz; ++k ) {
         v = mPts.get(k).minus( C );
-        path.lineTo( zoom * X.dot( v ), zoom * Y.dot( v ) );
+        path.lineTo( X.dot( v ), Y.dot( v ) );
       }
       return path;
     }
@@ -111,12 +111,12 @@ public class SketchLinePath extends SketchPath
     Path path = new Path();
     for ( SketchPoint p : mPts ) {
       TDVector v = p.minus( C );
-      float x = zoom * X.dot( v );
-      float y = zoom * Y.dot( v ); // downaward
+      float x = X.dot( v );
+      float y = Y.dot( v ); // downaward
       path.addCircle( x, y, r, Path.Direction.CCW );
     }
     path.transform( mm );
-    path.offset( off_x, off_y );
+    // path.offset( off_x, off_y );
     canvas.drawPath( path, BrushManager.fixedOrangePaint );
   }
 

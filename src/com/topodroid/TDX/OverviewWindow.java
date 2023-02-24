@@ -567,7 +567,7 @@ public class OverviewWindow extends ItemDrawer
     // mOffset.x = info.xoffset;
     // mOffset.y = info.yoffset;
     // mZoom     = info.zoom;
-    mOverviewSurface.isDrawing = true;
+    mOverviewSurface.setDrawing( true );
     switchZoomCtrl( TDSetting.mZoomCtrl );
   }
 
@@ -576,7 +576,7 @@ public class OverviewWindow extends ItemDrawer
   private void doPause()
   {
     switchZoomCtrl( 0 );
-    mOverviewSurface.isDrawing = false;
+    mOverviewSurface.setDrawing( false );
   }
 
   /** implement the actions of a "start"

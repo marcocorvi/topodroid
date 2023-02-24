@@ -363,14 +363,14 @@ public class PlotReloadWindow extends ItemDrawer
     // mOffset.x = info.xoffset;
     // mOffset.y = info.yoffset;
     // mZoom     = info.zoom;
-    mReloadSurface.isDrawing = true;
+    mReloadSurface.setDrawing( true );
     switchZoomCtrl( TDSetting.mZoomCtrl );
   }
 
   private void doPause()
   {
     switchZoomCtrl( 0 );
-    mReloadSurface.isDrawing = false;
+    mReloadSurface.setDrawing( false );
   }
 
 //---------------------------------------------------------------------------

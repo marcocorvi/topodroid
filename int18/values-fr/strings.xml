@@ -1027,6 +1027,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="help_edit">Mode d\'édition</string>
     <string name="help_refs">Choix des références de dessin</string>
     <string name="help_rename">Change le nom de la topographie</string>
+    <!-- TODO string name="help_plot_close">Close sketch</string -->
+    <!-- TODO string name="help_plot_delete">Delete sketch</string -->
     <string name="help_plot_rename">Renommer/suppr croquis</string>
     <string name="help_plot_scrap">Scraps de croquis</string>
     <string name="help_plot_switch">Changer de croquis</string>
@@ -1040,6 +1042,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="help_redo">Rétablit la dernière action</string>
     <string name="help_symbol_plot">Sélectionne le symbole à dessiner</string>
     <string name="help_delete_item">Supprimer objet topo</string>
+    <!-- TODO string name="help_section_item">Sketch section item</string -->
     <string name="help_range">Déplacer portion de ligne</string>
     <!-- UNUSED string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Efface un/des éléments du croquis</string>

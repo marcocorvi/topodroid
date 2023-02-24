@@ -50,9 +50,16 @@ public class SketchFixedPath extends SketchPath
     mV2 = v2;
   }
 
+  void dump( String msg )
+  {
+    TDLog.v("SKETCH " + msg + " " + mV1.x + " " + mV1.y + " " + mV1.z + "  .. "  + mV2.x + " " + mV2.y + " " + mV2.z );
+  }
+
   TDVector midpoint() { return new TDVector( (mV1.x+mV2.x)/2, (mV1.y+mV2.y)/2, (mV1.z+mV2.z)/2 ); }
 
   TDVector oppositeDirection() { return mV1.minus( mV2 ).getUnitVector(); }
+
+  float length() { return mV2.distance( mV1 ); }
 
   /** @return the number of points in the path
    */
@@ -71,16 +78,16 @@ public class SketchFixedPath extends SketchPath
 
   // -----------------------------------------------------------------------
 
-  /** make projected path
+  /** make projected path in world coords
    */
   @Override
-  Path makeProjectedPath( TDVector C, TDVector X, TDVector Y, float zoom )
+  Path makeProjectedPath( TDVector C, TDVector X, TDVector Y )
   {
     TDVector v1 = mV1.minus( C );
     TDVector v2 = mV2.minus( C );
     Path path = new Path();
-    path.moveTo( zoom * X.dot( v1 ), zoom * Y.dot( v1 ) );
-    path.lineTo( zoom * X.dot( v2 ), zoom * Y.dot( v2 ) );
+    path.moveTo( X.dot( v1 ), Y.dot( v1 ) );
+    path.lineTo( X.dot( v2 ), Y.dot( v2 ) );
     return path;
   }
 

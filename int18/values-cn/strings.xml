@@ -1017,6 +1017,8 @@
     <string name="help_edit">编辑模式</string>
     <string name="help_refs">草图引用</string>
     <string name="help_rename">改变测量名称</string>
+    <!-- TODO string name="help_plot_close">Close sketch</string -->
+    <!-- TODO string name="help_plot_delete">Delete sketch</string -->
     <string name="help_plot_rename">重命名/删除 草图</string>
     <string name="help_plot_scrap">草图层</string>
     <string name="help_plot_switch">切换草图</string>
@@ -1030,6 +1032,7 @@
     <string name="help_redo">重做上一步绘图操作</string>
     <string name="help_symbol_plot">选择最近使用的绘图工具</string>
     <string name="help_delete_item">删除草图项</string>
+    <!-- TODO string name="help_section_item">Sketch section item</string -->
     <string name="help_range">移动线的某部分</string>
     <!-- UNUSED string name="help_clear">Clear selection</string -->
     <string name="help_eraser">擦除模式</string>

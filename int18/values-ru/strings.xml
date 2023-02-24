@@ -1014,6 +1014,8 @@
     <string name="help_edit">Перейти в режим редактирования</string>
     <string name="help_refs">Вид окна абриса</string>
     <string name="help_rename">Изменить название съёмки</string>
+    <!-- TODO string name="help_plot_close">Close sketch</string -->
+    <!-- TODO string name="help_plot_delete">Delete sketch</string -->
     <string name="help_plot_rename">Переименовать/Удалить абрис</string>
     <string name="help_plot_scrap">Скрапы в абрисе</string>
     <string name="help_plot_switch">Переключить абрис</string>
@@ -1027,6 +1029,7 @@
     <string name="help_redo">Повтор последнего действия</string>
     <string name="help_symbol_plot">Выбрать инструмент рисования </string>
     <string name="help_delete_item">Удалить элемент абриса</string>
+    <!-- TODO string name="help_section_item">Sketch section item</string -->
     <string name="help_range">Переместить сегмент линии</string>
     <!-- UNUSED string name="help_clear">Очистить выбор</string -->
     <string name="help_eraser">Режим стирания</string>

@@ -50,6 +50,7 @@ public class SketchSection extends SketchPath
     mS = s;
     mN = n;
     mLines = new ArrayList< SketchLinePath >();
+    TDLog.v("SKETCH legviews C " + c.x + " " + c.y + " " + c.z );
   }
 
   /** cstr
@@ -66,6 +67,7 @@ public class SketchSection extends SketchPath
     float dx = p2.x - p1.x; // East
     float dy = p2.y - p1.y; // North
     float dz = p2.z - p1.z; // Upward
+    TDLog.v("SKETCH section (vert " + vertical + ") " + dx + " " + dy + " " + dz );
     float dh = TDMath.sqrt( dx*dx + dy*dy );
     if ( vertical ) {
       mS = new TDVector(      0,     0, -1 );
@@ -79,9 +81,13 @@ public class SketchSection extends SketchPath
     mLines = new ArrayList< SketchLinePath >();
   }
 
-  TDVector toTDVector( float x, float y )
+  /** @return the world 3D vector of a canvas point
+   * @param xw    H world coord
+   * @param yw    S world coord
+   */
+  TDVector toTDVector( float xw, float yw )
   {
-    return new TDVector( mC.x + x*mH.x + y*mS.x, mC.y + x*mH.y + y*mS.y, mC.z + x*mH.z + y*mS.z );
+    return new TDVector( mC.x + xw*mH.x + yw*mS.x, mC.y + xw*mH.y + yw*mS.y, mC.z + xw*mH.z + yw*mS.z );
   }
 
   /** delete a line
@@ -122,10 +128,10 @@ public class SketchSection extends SketchPath
   public void fromDataStream( DataInputStream dis ) { TDLog.Error( "ERROR Sketch Section fromDataStream "); }
 
 
-  public void draw( Canvas canvas, TDVector C, TDVector X, TDVector Y, float zoom, float off_x, float off_y )
-  {
-    for ( SketchLinePath line : mLines ) line.draw( canvas, C, X, Y, zoom, off_x, off_y );
-  }
+  // public void draw( Canvas canvas, TDVector C, TDVector X, TDVector Y, float zoom, float off_x, float off_y )
+  // {
+  //   for ( SketchLinePath line : mLines ) line.draw( canvas, C, X, Y, zoom, off_x, off_y );
+  // }
 
   public void draw( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y, float zoom, float off_x, float off_y )
   {

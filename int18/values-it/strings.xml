@@ -1013,6 +1013,8 @@
     <string name="help_edit">Modalità editing</string>
     <string name="help_refs">Seleziona riferimenti per disegno</string>
     <string name="help_rename">Modifica il nome del rilievo</string>
+    <!-- TODO string name="help_plot_close">Close sketch</string -->
+    <!-- TODO string name="help_plot_delete">Delete sketch</string -->
     <string name="help_plot_rename">Rinomina/Elimina disegno</string>
     <string name="help_plot_scrap">Scarti di disegno</string>
     <string name="help_plot_switch">Scambia disegno</string>
@@ -1026,6 +1028,7 @@
     <string name="help_redo">Ripeti ultima azione di disegno</string>
     <string name="help_symbol_plot">Seleziona prototipo per disegno</string>
     <string name="help_delete_item">Cancella elemento del disegno</string>
+    <!-- TODO string name="help_section_item">Sketch section item</string -->
     <string name="help_range">Sposta porzione di linea</string>
     <!-- UNUSED string name="help_clear">Pulisci selezione</string -->
     <string name="help_eraser">Modalità cancella</string>

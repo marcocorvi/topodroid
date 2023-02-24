@@ -186,7 +186,7 @@ public class TDPath
   static boolean checkBasePath( String name )
   {
     if ( TDandroid.PRIVATE_STORAGE ) {
-      TDLog.v("check Base Path ... skipping get external dir: " + TDFile.getExternalDir(null).getPath() );
+      // TDLog.v("check Base Path ... skipping get external dir: " + TDFile.getExternalDir(null).getPath() );
       return true;
     }
     File dir = TDFile.getExternalDir( name ); 
@@ -228,7 +228,7 @@ public class TDPath
    */
   static void setTdPaths( String name /*, String base */ )
   {
-    TDLog.v( "set paths [4]: " + name );
+    // TDLog.v( "set paths [4]: " + name );
     // if ( TDandroid.PRIVATE_STORAGE ) { // FIXME this was enabled 20230118
     //   checkFilesystemDirs( ROOT_ZIP );
     //   checkFilesystemDirs( ROOT_TMP );
@@ -246,7 +246,7 @@ public class TDPath
       dir = TDFile.getExternalDir( name ); // DistoX-SAF
       // PATH_CW_DIR =  PATH_CB_DIR + "/" + name;
     }
-    TDLog.v( "set paths [4]: " + name + ". Dir " + dir.getPath()  );
+    // TDLog.v( "set paths [4]: " + name + ". Dir " + dir.getPath()  );
     try {
       if ( dir.exists() || dir.mkdirs() ) {
         // TDInstance.takePersistentPermissions( Uri.fromFile( dir ) ); // FIXME_PERSISTENT
@@ -281,7 +281,7 @@ public class TDPath
       PATH_CW_DIR = cwd.getAbsolutePath();
     }
     String root = ROOT_CW_DIR + "/" + survey;
-    TDLog.v( "create paths survey " + survey + " base " + ROOT_CW_DIR + " root " + root );
+    // TDLog.v( "create paths survey " + survey + " base " + ROOT_CW_DIR + " root " + root );
     checkFilesystemDirs( root );
     checkFilesystemDirs( root + "/tdr" );
     checkFilesystemDirs( root + "/c3d" );
@@ -513,7 +513,7 @@ public class TDPath
    */
   public static String getSurveyNoteFile( String title ) 
   { 
-    TDLog.v("PATH get survey note file " + title );
+    // TDLog.v("PATH get survey note file " + title );
     return getPathname( APP_NOTE_ROOT, title, TXT );
   }
 
@@ -990,7 +990,7 @@ public class TDPath
 
   private static void checkFilesystemDirs( String path )
   {
-    TDLog.v("check filesystem dir " + path + " cwd " + ROOT_CW_DIR );
+    // TDLog.v("check filesystem dir " + path + " cwd " + ROOT_CW_DIR );
     if ( TDandroid.PRIVATE_STORAGE ) {
       File dir = TDFile.getPrivateDir( path );
       if ( ! dir.exists() ) dir.mkdirs( );

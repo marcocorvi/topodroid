@@ -1022,6 +1022,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="help_edit">Szerkesztés mód</string>
     <string name="help_refs">Vázlat referencia</string>
     <string name="help_rename">Felmérés nevének megváltoztatása</string>
+    <!-- TODO string name="help_plot_close">Close sketch</string -->
+    <!-- TODO string name="help_plot_delete">Delete sketch</string -->
     <string name="help_plot_rename">Vázlat átnevezése/törlése</string>
     <string name="help_plot_scrap">Vázlat szintek</string>
     <string name="help_plot_switch">Vázlat nézet átváltása</string>
@@ -1035,6 +1037,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="help_redo">Utolsó rajzi változtatás visszaállítása</string>
     <string name="help_symbol_plot">Legutóbbi rajzeszköz kiválasztása</string>
     <string name="help_delete_item">Vázlat elem törlése</string>
+    <!-- TODO string name="help_section_item">Sketch section item</string -->
     <string name="help_range">Vonalelem mozgatása</string>
     <!-- UNUSED string name="help_clear">Kiválasztás törlése</string -->
     <string name="help_eraser">Radír mód</string>

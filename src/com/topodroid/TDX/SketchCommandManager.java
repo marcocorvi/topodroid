@@ -68,8 +68,9 @@ public class SketchCommandManager
 
   private Matrix  mMatrix;
   private float   mScale; // current zoom: value of 1 pl in scene space
-  float mOffx = 0;
-  float mOffy = 0;
+  float mOffxc = 0;
+  float mOffyc = 0;
+  float mZoom = TopoDroidApp.mScaleFactor;
 
   ArrayList< Point2D > mCurrentPath = null;
 
@@ -78,6 +79,8 @@ public class SketchCommandManager
   public static int getDisplayMode() { return mDisplayMode; }
 
   public static void setDisplayMode( int mode ) { mDisplayMode = mode; }
+
+  float getZoom() { return mZoom; }
 
   /** cstr
    */
@@ -95,25 +98,46 @@ public class SketchCommandManager
     mMatrix       = new Matrix(); // identity
     mSplaysStack  = Collections.synchronizedList( new ArrayList< SketchFixedPath >());
     mLeg          = null;;
-    // makeView();
+    // makeLegView();
   }
 
+  /** @return the paint for the wall lines: red in the view, yellow in the sections
+   */
+  Paint getLinePaint() { return ( mCurrentScrap == mView )? BrushManager.fixedRedPaint : BrushManager.fixedYellowPaint; }
+
+  /** start the preview path
+   */
   void startCurrentPath() { mCurrentPath = new ArrayList< Point2D >(); }
-  void endCurrentPath() { mCurrentPath = null; }
+
+  /** close the preview path
+   */
+  void endCurrentPath() { }
+
+  /** @return the preview path
+   */
   ArrayList< Point2D > getCurrentPath() { return mCurrentPath; }
+
   void addPointToCurrentPath( Point2D pt ) { if ( mCurrentPath != null ) mCurrentPath.add( pt ); }
   
+  /** reset the preview path
+   */
   void resetPreviewPath() { mCurrentPath = null; }
 
-  private void makeView()
+  /** make the leg-view
+   */
+  private void makeLegView()
   {
     if ( mLeg == null ) return;
-    TDVector s = mLeg.oppositeDirection(); // this is normalized
+    // TDLog.v("SKETCH legview");
+    mLeg.dump( "LEG" );
+    TDVector s = mLeg.oppositeDirection(); // normalized Y-canvas (E,N,Up)
     TDVector h = new TDVector( -s.y, s.x, 0 );
     h.normalize();
+    // TDLog.v("S " + s.x + " " + s.y + " " + s.z );
+    // TDLog.v("H " + h.x + " " + h.y + " " + h.z );
     TDVector n = h.cross( s );
     mView = new SketchSection( mLeg.midpoint(), h, s, n );
-    closeSection(); // this sets mCurrentScrap
+    closeSection(); // this sets mCurrentScrap to the leg-view
   }
 
   /** open/create a section
@@ -283,10 +307,11 @@ public class SketchCommandManager
     clearTmpReferences();
   }
 
-  /** commit the sketch references 
+  /** commit the sketch references and make the leg-view
    */
   void commitReferences()
   {
+    // TDLog.v("SKETCH commitReferences");
     synchronized( TDPath.mGridsLock ) {
       mGridStack1   = mTmpGridStack1;
       mGridStack10  = mTmpGridStack10;
@@ -295,7 +320,7 @@ public class SketchCommandManager
     synchronized( TDPath.mShotsLock ) {
       mSplaysStack = mTmpSplaysStack;
       mLeg         = mTmpLeg;
-      makeView();
+      makeLegView();
     }
     mTmpGridStack1   = null;
     mTmpGridStack10  = null;
@@ -304,7 +329,14 @@ public class SketchCommandManager
     mTmpLeg          = null;
   }
 
-  void addTmpLegPath( SketchFixedPath path ) { mTmpLeg = path; }  
+  /** start a new reference and add the leg 
+   * @param path   leg
+   */
+  void addTmpLegPath( SketchFixedPath path ) 
+  { 
+    newReferences();
+    mTmpLeg = path;
+  }  
 
   void addTmpSplayPath( SketchFixedPath path ) { mTmpSplaysStack.add( path ); }  
  
@@ -347,44 +379,40 @@ public class SketchCommandManager
 
   /* Set the transform matrix for the canvas rendering of the drawing
    * @param act    activity
-   * @param dx     X shift
-   * @param dy     Y shift
+   * @param offxw     X shift
+   * @param offyw     Y shift
    * @param s      zoom
    * @param landscape whether landscape-presentation
    * 
-   * The matrix is diag(s*dx, s*dy)
-   *  X -> (x+dx)*s = x*s + dx*s
-   *  Y -> (y+dy)*s = y*s + dy*s
+   * The matrix is diag(s*offxw, s*offyw)
+   *  X -> (x+offxw)*s = x*s + offxw*s
+   *  Y -> (y+offyw)*s = y*s + offyw*s
    * 
    * @note the clipping rectangle is updated, according to the set presentation
    */
-  void setTransform( Activity act, float dx, float dy, float s )
+  void setTransform( Activity act, float offxw, float offyw, float z )
   {
     Display d = act.getWindowManager().getDefaultDisplay();
-    // int r = d.getRotation(); // not used
-    float ww, hh;
-    // if ( TDandroid.BELOW_API_13 ) { // HONEYCOMB_MR2
-    //   hh = d.getHeight();
-    //   ww = d.getWidth();
-    // } else {
-      Point pt = new Point();
-      d.getSize( pt );
-      hh = pt.y;
-      ww = pt.x;
-    // }
-    // TDLog.v( "R " + r + " W " + ww + " H " + hh );
+    Point pt = new Point();
+    d.getSize( pt );
+    float hh = pt.y;
+    float ww = pt.x;
 
-    mScale  = 1 / s;
+    mScale  = 1 / z;
     mMatrix = new Matrix();
-    mBBox.left   = - dx;      // scene coords
-    mBBox.right  = mScale * ww - dx; 
-    mBBox.top    = - dy;
-    mBBox.bottom = mScale * hh - dy;
-    mMatrix.postTranslate( dx, dy );
-    mMatrix.postScale( s, s );
-    mOffx = dx * s;
-    mOffy = dy * s;
+    mBBox.left   = - offxw;      // scene coords
+    mBBox.right  = mScale * ww - offxw; 
+    mBBox.top    = - offyw;
+    mBBox.bottom = mScale * hh - offyw;
+    mMatrix.postTranslate( offxw, offyw );
+    mMatrix.postScale( z, z );
+    mOffxc = offxw * z;
+    mOffyc = offyw * z;
+    mZoom = z;   // scaling factor from world to canvas
+    // TDLog.v("SKETCH set transform " + mOffxc + " " + mOffyc + " zoom " + mZoom );
   }
+
+  void setTransform( Activity act, float offxw, float offyw ) { setTransform( act, offxw, offyw, mZoom ); }
 
   // -----------------------------------------------------------
 
@@ -396,14 +424,13 @@ public class SketchCommandManager
   /** erase at a position, in the current scrap
    * @param x    X scene coords
    * @param y    Y scene coords
-   * @param zoom current canvas display zoom
    * @param eraseCmd  erase command
    * @param erase_size  eraser size
    *
    */
-  void eraseAt( float x, float y, float zoom, EraseCommand eraseCmd, float erase_size ) 
+  void eraseAt( float x, float y, EraseCommand eraseCmd, float erase_size ) 
   {
-    mCurrentScrap.eraseAt( x, y, zoom, eraseCmd, erase_size ); 
+    mCurrentScrap.eraseAt( x, y, mZoom, eraseCmd, erase_size ); 
   }
 
   void deleteLine( SketchLinePath line ) 
@@ -457,29 +484,40 @@ public class SketchCommandManager
     mN0 = n;
   }
 
-  // // called by SketchSurface.getBitmap()
-  // public RectF getBitmapBounds( float scale )
-  // {
-  //   RectF bounds = new RectF(-1,-1,1,1);
-  //   // TODO
-  //   return bounds;
-  // }
+  // called by SketchSurface.getBitmap()
+  public RectF getBitmapBounds( float scale )
+  {
+    RectF bounds = new RectF(-1,-1,1,1);
+    if ( mLeg != null ) {
+      float len = mLeg.length();
+      // TDLog.v("SKETCH leg length " + len );
+      bounds.top    = -len/2;
+      bounds.bottom =  len/2;
+    }
+    return bounds;
+  }
 
   public void undo () { mCurrentScrap.undo(); }
 
   public void redo () { mCurrentScrap.redo(); }
 
-  TDVector toTDVector( float x, float y ) { return mCurrentScrap.toTDVector( x, y ); }
+  /** @return the world 3D vector of a canvas point
+   * @param x    X canvas coord
+   * @param y    Y canvas coord
+   */
+  TDVector toTDVector( float x, float y )
+  {
+    return mCurrentScrap.toTDVector( (x-mOffxc)/mZoom, (y-mOffyc)/mZoom );
+  }
 
   /** draw the sketch on the canvas (display)
    * N.B. doneHandler is not used
    * @param canvas where to draw
-   * @param zoom   used for scalebar and selection points (use negative zoom for pdf print)
    */
-  void executeAll( Canvas canvas, float zoom )
+  void executeAll( Canvas canvas )
   {
     if ( canvas == null ) {
-      TDLog.Error( "drawing execute all: null canvas");
+      TDLog.Error( "SKETCH execute all: null canvas");
       return;
     }
 
@@ -495,28 +533,28 @@ public class SketchCommandManager
         Paint paint_grid    = BrushManager.fixedGridPaint;
         Paint paint_grid100 = BrushManager.fixedGrid100Paint;
         if ( scale < 1 ) {
-          for ( SketchPath p1 : mGridStack1 ) p1.draw( canvas, mm,  mC0, mH0, mS0, zoom, mOffx, mOffy );
+          for ( SketchPath p1 : mGridStack1 ) p1.draw( canvas, mm,  mC0, mH0, mS0, mZoom, mOffxc, mOffyc );
         }
         if ( scale < 10 ) {
-          for ( SketchPath p10 : mGridStack10 ) p10.draw( canvas, mm,  mC0, mH0, mS0, zoom, mOffx, mOffy );
+          for ( SketchPath p10 : mGridStack10 ) p10.draw( canvas, mm,  mC0, mH0, mS0, mZoom, mOffxc, mOffyc );
         }
-        for ( SketchPath p100 : mGridStack100 ) p100.draw( canvas, mm,  mC0, mH0, mS0, zoom, mOffx, mOffy );
+        for ( SketchPath p100 : mGridStack100 ) p100.draw( canvas, mm,  mC0, mH0, mS0, mZoom, mOffxc, mOffyc );
       }
     }
 
     synchronized( TDPath.mShotsLock ) {
-      mLeg.draw( canvas, mm, mC0, mH0, mS0, zoom, mOffx, mOffy );
-      for ( SketchPath splay : mSplaysStack ) splay.draw( canvas, mm, mC0, mH0, mS0, zoom, mOffx, mOffy );
+      mLeg.draw( canvas, mm, mC0, mH0, mS0, mZoom, mOffxc, mOffyc );
+      for ( SketchPath splay : mSplaysStack ) splay.draw( canvas, mm, mC0, mH0, mS0, mZoom, mOffxc, mOffyc );
       drawSideDrag( canvas );
-      mCurrentScrap.draw( canvas, mm, mC0, mH0, mS0, zoom, mOffx, mOffy );
+      mCurrentScrap.draw( canvas, mm, mC0, mH0, mS0, mZoom, mOffxc, mOffyc );
     }
  
     synchronized( TDPath.mSelectionLock ) {
       if ( isSelectable() ) {
-        float dot_radius = TDSetting.mDotRadius/zoom;
-        mCurrentScrap.drawPoints( canvas, mm, mC0, mH0, mS0, zoom, mOffx, mOffy, dot_radius );
-        if ( mSelected[0] != null ) mSelected[0].drawPoint( canvas, mm, mC0, mH0, mS0, zoom, mOffx, mOffy, dot_radius );
-        if ( mSelected[1] != null ) mSelected[1].drawPoint( canvas, mm, mC0, mH0, mS0, zoom, mOffx, mOffy, dot_radius );
+        float dot_radius = TDSetting.mDotRadius/mZoom;
+        mCurrentScrap.drawPoints( canvas, mm, mC0, mH0, mS0, mZoom, mOffxc, mOffyc, dot_radius );
+        if ( mSelected[0] != null ) mSelected[0].drawPoint( canvas, mm, mC0, mH0, mS0, mZoom, mOffxc, mOffyc, 2*dot_radius );
+        if ( mSelected[1] != null ) mSelected[1].drawPoint( canvas, mm, mC0, mH0, mS0, mZoom, mOffxc, mOffyc, 2*dot_radius );
       } else if ( hasEraser ) {
         drawEraser( canvas );
       } else {
@@ -527,6 +565,7 @@ public class SketchCommandManager
 
   void syncClearSelected()
   {
+    TDLog.v("SKETCH clear selected");
     synchronized( TDPath.mSelectionLock ) {
       mSelected[0] = null;
       mSelected[1] = null;
@@ -544,15 +583,24 @@ public class SketchCommandManager
   // UNUSED
   // boolean setRangeAt( float x, float y, float zoom, float size ) { return mCurrentScrap.setRangeAt( x, y, zoom, size ); }
 
-  SketchPoint getItemAt( float x, float y, float zoom, float size )
+  /** select the sketch point at the given canvas point
+   * @param xc   X canvas coord
+   * @param yc   Y canvas coord
+   * @return the number of selected points (0, 1, or 2)
+   */
+  int getItemAt( float xc, float yc, float size )
   {
-    if ( mCurrentScrap != mView ) return null;
-    TDVector mC0 = mCurrentScrap.mC;
-    TDVector mX0 = mCurrentScrap.mH;
-    TDVector mY0 = mCurrentScrap.mS;
-    float radius = TDSetting.mCloseCutoff + size/zoom; // TDSetting.mSelectness / zoom;
-    TDVector c = new TDVector( mC0.x + x*mX0.x + y*mY0.x, mC0.y + x*mX0.y + y*mY0.y, mC0.z + x*mX0.z + y*mY0.z );
-    SketchLine ray = new SketchLine( c, mN0 );
+    if ( mCurrentScrap != mView ) {
+      TDLog.Error("SKETCH section not selectable");
+      return 0;
+    }
+    float xw = (xc - mOffxc)/mZoom; // convert to world coords
+    float yw = (yc - mOffyc)/mZoom;
+    TDLog.v("SKETCH get item at " + xw + " " + yw );
+    float radius = TDSetting.mCloseCutoff + size/mZoom; 
+    TDVector c = mCurrentScrap.toTDVector( xw, yw );
+    TDLog.v("SKETCH center " + c.x + " " + c.y + " " + c.z );
+    SketchLine ray = new SketchLine( c, mCurrentScrap.mN );
     float min_dist = radius * radius;;
     SketchPoint min_pt = null;
     for ( SketchLinePath wall : mView.mLines ) {
@@ -564,7 +612,19 @@ public class SketchCommandManager
         }
       }
     }
-    return min_pt;
+    if ( min_pt == null ) {
+      TDLog.v("SKETCH min dist " + min_dist + " no point ");
+    } else {
+      TDLog.v("SKETCH min dist " + min_dist + " point " + min_pt.x + " " + min_pt.y + " " + min_pt.z );
+    }
+    if ( mSelected[0] == null ) {
+      mSelected[0] = min_pt;
+      mSelected[1] = null;
+      return ( mSelected[0] == null )? 0 : 1;
+    } else {
+      mSelected[1] = min_pt;
+      return ( mSelected[1] == null )? 1 : 2;
+    }
   }
     
   // get the bounding box and have scraps save their bbox

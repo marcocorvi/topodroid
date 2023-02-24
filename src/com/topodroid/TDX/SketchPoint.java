@@ -41,12 +41,12 @@ public class SketchPoint extends TDVector // world coords
   {
     Path path = new Path();
     TDVector v = this.minus( C );
-    float x = zoom * X.dot( v );
-    float y = zoom * Y.dot( v ); // downaward
+    float x = X.dot( v ); // (world coord)
+    float y = Y.dot( v ); // downward 
     path.addCircle( x, y, r, Path.Direction.CCW );
     path.transform( mm );
-    path.offset( off_x, off_y );
-    canvas.drawPath( path, BrushManager.fixedOrangePaint );
+    // path.offset( off_x, off_y );
+    canvas.drawPath( path, BrushManager.errorPaint );
   }
 
 }

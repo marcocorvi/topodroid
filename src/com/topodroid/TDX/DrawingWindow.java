@@ -2860,7 +2860,7 @@ public class DrawingWindow extends ItemDrawer
       // TDLog.v("PLOT resume: " + mOffset.x + " " + mOffset.y + " " + mZoom );
       setPlotType( mType, PARAMS_YES );
     }
-    mDrawingSurface.isDrawing = true;
+    mDrawingSurface.setDrawing( true );
     // TDLog.v("doResume " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     // TDLog.v( "do Resume. offset " + mOffset.x + " " + mOffset.y + " zoom " + mZoom );
   }
@@ -2870,7 +2870,7 @@ public class DrawingWindow extends ItemDrawer
   private void doPause() // saveInstanceToData
   {
     switchZoomCtrl( 0 );
-    mDrawingSurface.isDrawing = false;
+    mDrawingSurface.setDrawing( false );
     if ( mPid >= 0 ) {
       try {
         // TDLog.v("PLOT pause: " + mOffset.x + " " + mOffset.y + " " + mZoom );

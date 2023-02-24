@@ -246,7 +246,7 @@
      <item name="russian">Русский</item>
      <!-- item name="german">Deutsch</item -->
      <!-- item name="polish">Polski</item -->
-     <!-- item name="portuguese">Português</item -->
+     <item name="portuguese">Português</item>
      <!-- item name="romanian">Română</item -->
      <!-- item name="slovak">Slovenčina</item -->
      <!-- item name="slovenian">Slovenščina</item -->
@@ -264,7 +264,7 @@
      <item name="russian">ru</item>
      <!-- item name="german">de</item -->
      <!-- item name="polish">pl</item -->
-     <!-- item name="portuguese">pt</item -->
+     <item name="portuguese">pt</item>
      <!-- item name="romanian">ro</item -->
      <!-- item name="slovak">sk</item -->
      <!-- item name="slovenian">sl</item -->

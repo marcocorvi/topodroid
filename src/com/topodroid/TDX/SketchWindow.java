@@ -139,31 +139,32 @@ public class SketchWindow extends ItemDrawer
                         R.drawable.iz_small,         // 8
                         R.drawable.iz_medium,        // 9
                         R.drawable.iz_large,         // 10
-                        R.drawable.iz_back,          // 11
-                        R.drawable.iz_forw,          // 12
-                        R.drawable.iz_delete,        // 13
+                        // R.drawable.iz_back,          // 11
+                        // R.drawable.iz_forw,          // 12
+                        R.drawable.iz_delete,        // 11
                         R.drawable.iz_delete_off,
-                        R.drawable.iz_section_ok,    // 15
-                        R.drawable.iz_section_no,    // 16
+                        R.drawable.iz_section_ok,    // 13
+                        R.drawable.iz_section_no,    // 14
                         R.drawable.iz_menu,
   };
   private static final int IC_SMALL      = 8;
   private static final int IC_MEDIUM     = 9;
   private static final int IC_LARGE      = 10;
-  private static final int IC_PREV       = 11;
-  private static final int IC_NEXT       = 12;
-  private static final int IC_DELETE_OK  = 13;
-  private static final int IC_DELETE_NO  = 14;
-  private static final int IC_SECTION_OK = 15;
-  private static final int IC_SECTION_NO = 16;
-  private static final int IC_MENU       = 17;
+  // private static final int IC_PREV       = 11;
+  // private static final int IC_NEXT       = 12;
+  private static final int IC_DELETE_OK  = 11;
+  private static final int IC_DELETE_NO  = 12;
+  private static final int IC_SECTION_OK = 13;
+  private static final int IC_SECTION_NO = 14;
+  private static final int IC_MENU       = 15;
 
 
   private static final int NR_BUTTON1 = 6;
   private static final int NR_BUTTON2 = 5;
-  private static final int NR_BUTTON3 = 7;
+  private static final int NR_BUTTON3 = 6;
   private static final int NR_BUTTON5 = 6;
-  private static final int mNrMove = 6;
+
+  // private static final int mNrMove = 6;
   private static final int[] izons_move = {
                         R.drawable.iz_edit,          // 0
                         R.drawable.iz_eraser,
@@ -181,7 +182,7 @@ public class SketchWindow extends ItemDrawer
                         R.string.help_refresh
   };
 
-  private static final int mNrDraw = 5;
+  // private static final int mNrDraw = 5;
   private static final int[] izons_draw = {
                         R.drawable.iz_edit_ok,       // 0
                         R.drawable.iz_eraser,
@@ -197,34 +198,34 @@ public class SketchWindow extends ItemDrawer
                         R.string.help_redo
   };
 
-  private static final int mNrEdit = 7;
-  private static final int[] izons_edit = {
-                        R.string.help_edit,
+  // private static final int mNrEdit = 8;
+  private static final int[] izons_select = {
+                        R.drawable.iz_edit,
                         R.drawable.iz_eraser,
                         R.drawable.iz_select_ok,     // 2
-                        R.drawable.iz_back,          // 
-                        R.drawable.iz_forw,
+                        // R.drawable.iz_back,          // 
+                        // R.drawable.iz_forw,
                         R.drawable.iz_medium,
                         R.drawable.iz_delete_off,
                         R.drawable.iz_section_no,
   };
-  private static final int[] help_icons_edit = {
+  private static final int[] help_icons_select = {
                         R.string.help_draw,
                         R.string.help_eraser,
                         R.string.help_edit,
-                        R.string.help_previous,
-                        R.string.help_next,
+                        // R.string.help_previous,
+                        // R.string.help_next,
                         R.string.help_select_size,
                         R.string.help_delete_item,
                         R.string.help_section_item
   };
-  private static final int BTN_SELECT_PREV = 3;
-  private static final int BTN_SELECT_NEXT = 4;
-  private static final int BTN_SELECT_SIZE = 5;
-  private static final int BTN_REMOVE      = 6;
-  private static final int BTN_SECTION     = 7;
+  // private static final int BTN_SELECT_PREV = 3;
+  // private static final int BTN_SELECT_NEXT = 4;
+  private static final int BTN_SELECT_SIZE = 3;
+  private static final int BTN_REMOVE      = 4;
+  private static final int BTN_SECTION     = 5;
 
-  private static final int mNrErase = 6;
+  // private static final int mNrErase = 6;
   private static final int[] izons_erase = {
                         R.drawable.iz_edit,          // 0
                         R.drawable.iz_eraser_ok,
@@ -270,7 +271,6 @@ public class SketchWindow extends ItemDrawer
   // private boolean mIsNotMultitouch;
 
   // ERASE - EDIT mode and size
-  private SketchPoint[] mSelection = new SketchPoint[2];
 
   private int mEraseScale  = 0;
   private int mSelectScale = 0;
@@ -358,7 +358,6 @@ public class SketchWindow extends ItemDrawer
 
   // private long mSid;  // survey id
   // private long mPid;  // current plot id
-  private float mZoom  = 1.0f;
   private Point2D mOffset = new Point2D();
 
   // ----------------------------------------------------------------
@@ -370,10 +369,10 @@ public class SketchWindow extends ItemDrawer
   private Button[] mButton2; // draw
   private Button[] mButton3; // edit
   private Button[] mButton5; // eraser
-  private int mNrButton1 = NR_BUTTON1;
-  private int mNrButton2 = NR_BUTTON2;
-  private int mNrButton3 = NR_BUTTON3;
-  private int mNrButton5 = NR_BUTTON5; // erase
+  // private int mNrButton1 = NR_BUTTON1;
+  // private int mNrButton2 = NR_BUTTON2;
+  // private int mNrButton3 = NR_BUTTON3;
+  // private int mNrButton5 = NR_BUTTON5; // erase
   private MyHorizontalButtonView mButtonView1;
   private MyHorizontalButtonView mButtonView2;
   private MyHorizontalButtonView mButtonView3;
@@ -405,8 +404,8 @@ public class SketchWindow extends ItemDrawer
   private BitmapDrawable mBMlarge;
   // private BitmapDrawable mBMmenured;
   private BitmapDrawable mBMmenublue;
-  private BitmapDrawable mBMprev;
-  private BitmapDrawable mBMnext;
+  // private BitmapDrawable mBMprev;
+  // private BitmapDrawable mBMnext;
   private BitmapDrawable mBMsectionOk;
   private BitmapDrawable mBMsectionNo;
 
@@ -417,10 +416,10 @@ public class SketchWindow extends ItemDrawer
 
   private int mNrSaveTh2Task = 0; // current number of save tasks
 
-  private void setButton1( int k, BitmapDrawable bm ) { if ( k < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ k ], bm ); }
-  private void setButton2( int k, BitmapDrawable bm ) { if ( k < mNrButton2 ) TDandroid.setButtonBackground( mButton2[ k ], bm ); }
-  private void setButton3( int k, BitmapDrawable bm ) { if ( k < mNrButton3 ) TDandroid.setButtonBackground( mButton3[ k ], bm ); }
-  private void setButton5( int k, BitmapDrawable bm ) { if ( k < mNrButton5 ) TDandroid.setButtonBackground( mButton5[ k ], bm ); }
+  private void setButton1( int k, BitmapDrawable bm ) { if ( k < NR_BUTTON1 ) TDandroid.setButtonBackground( mButton1[ k ], bm ); }
+  private void setButton2( int k, BitmapDrawable bm ) { if ( k < NR_BUTTON2 ) TDandroid.setButtonBackground( mButton2[ k ], bm ); }
+  private void setButton3( int k, BitmapDrawable bm ) { if ( k < NR_BUTTON3 ) TDandroid.setButtonBackground( mButton3[ k ], bm ); }
+  private void setButton5( int k, BitmapDrawable bm ) { if ( k < NR_BUTTON5 ) TDandroid.setButtonBackground( mButton5[ k ], bm ); }
 
   // ----------------------------------------------------------
 
@@ -467,8 +466,6 @@ public class SketchWindow extends ItemDrawer
 
   /** @return zoom value
    */
-  public float zoom() { return mZoom; }
-
   public float xOffset() { return mOffset.x; }
   public float yOffset() { return mOffset.y; }
 
@@ -505,18 +502,12 @@ public class SketchWindow extends ItemDrawer
   private void changeZoom( float f ) 
   {
     if ( f < 0.05f || f > 4.0f ) return;
-    float zoom = mZoom;
-    mZoom     *= f;
-    // TDLog.v( "zoom " + mZoom );
-    // mOffset.x -= mDisplayCenter.x*(1/zoom-1/mZoom);
-    // mOffset.y -= mDisplayCenter.y*(1/zoom-1/mZoom);
-    adjustOffset( zoom, mZoom );
-    // TDLog.v( "change zoom " + mOffset.x + " " + mOffset.y + " " + mZoom );
-    // mSketchSurface.setZoom( this, mOffset.x, mOffset.y, mZoom );
-    mSketchSurface.setTransform( this, mOffset.x, mOffset.y, mZoom );
-
-    // mZoomCtrl.hide();
-    // if ( mZoomBtnsCtrlOn ) mZoomBtnsCtrl.setVisible( false );
+    float zoom_old = mSketchSurface.getZoom();
+    float zoom_new = zoom_old * f;
+    // TDLog.v( "zoom " + zoom );
+    adjustOffset( zoom_old, zoom_new );
+    // TDLog.v( "change zoom " + mOffset.x + " " + mOffset.y + " " + zoom_new );
+    mSketchSurface.setTransform( this, mOffset.x, mOffset.y, zoom_new );
   }
 
   /** increase zoom
@@ -541,7 +532,7 @@ public class SketchWindow extends ItemDrawer
 
   private void makeReference()
   {
-    TDLog.v("make reference");
+    // TDLog.v("SKETCH make reference");
     TopoGL topoGL = ((TopoDroidApp)getApplication()).mTopoGL;
     if ( topoGL == null ) {
       finish();
@@ -552,6 +543,7 @@ public class SketchWindow extends ItemDrawer
     }
     TDVector v1 = new TDVector();
     TDVector v2 = leg.toTDVector(); // (E,N,Up)
+    // TDLog.v("SKETCH V2: E " + v2.x + " N " + v2.y + " Up " + v2.z );
     addFixedLeg( v1, v2 );
     for ( Cave3DShot sp : topoGL.mSketchSplaysFrom ) {
       TDVector v = sp.toTDVector(); // .plus( v1 );
@@ -581,6 +573,7 @@ public class SketchWindow extends ItemDrawer
   /** used to add legs and splays
    * @param v1    leg first endpoint (E,N,Up)
    * @param v2    leg second endpoint (E,N,Up)
+   * @note this starts a new reference in the command manager
    */
   private SketchPath addFixedLeg( TDVector v1, TDVector v2 )
   {
@@ -636,9 +629,8 @@ public class SketchWindow extends ItemDrawer
   public void onConfigurationChanged( Configuration new_cfg )
   {
     super.onConfigurationChanged( new_cfg );
-    // TDLog.v( "PLOT config changed " + mOffset.x + " " + mOffset.y + " " + mZoom + " orientation " + new_cfg.orientation );
     TDLocale.resetTheLocale();
-    mSketchSurface.setTransform( this, mOffset.x, mOffset.y, mZoom );
+    mSketchSurface.setTransform( this, mOffset.x, mOffset.y );
     // setMenuAdapter( getResources() );
   }
 
@@ -739,17 +731,17 @@ public class SketchWindow extends ItemDrawer
     setButton3( BTN_REMOVE, (deletable ? mBMdeleteOn : mBMdeleteOff) );
   }
 
-  /** set the button3 to display "prev/next" 
-   */
-  private void setButton3PrevNext( )
-  {
-    if ( mHasSelected ) {
-      setButton3( BTN_SELECT_PREV, mBMprev );
-      setButton3( BTN_SELECT_NEXT, mBMnext );
-    } else {
-      setButtonSelectSize( mSelectScale );
-    }
-  }
+  // /** set the button3 to display "prev/next" 
+  //  */
+  // private void setButton3PrevNext( )
+  // {
+  //   if ( mHasSelected ) {
+  //     setButton3( BTN_SELECT_PREV, mBMprev );
+  //     setButton3( BTN_SELECT_NEXT, mBMnext );
+  //   } else {
+  //     setButtonSelectSize( mSelectScale );
+  //   }
+  // }
 
   // /** set the button "continue"
   //  * @param continue_line    type of line-continuation
@@ -758,7 +750,7 @@ public class SketchWindow extends ItemDrawer
   // private void setButtonContinue( int continue_line )
   // {
   //   mContinueLine = continue_line;
-  //   if ( BTN_CONT < mNrButton2 ) {
+  //   if ( BTN_CONT < NR_BUTTON2 ) {
   //     if ( mSymbol == SymbolType.LINE /* && mCurrentLine == BrushManager.getLineWallIndex() */ ) {
   //       mButton2[ BTN_CONT ].setVisibility( View.VISIBLE );
   //       switch ( mContinueLine ) {
@@ -867,35 +859,34 @@ public class SketchWindow extends ItemDrawer
   private void makeButtons( )
   {
     Resources res = getResources();
-    // TDLog.v("Buttons " + mNrButton1 + " " + mNrButton2 + " " + mNrButton3 + " " + mNrButton5 );
+    // TDLog.v("Buttons " + NR_BUTTON1 + " " + NR_BUTTON2 + " " + NR_BUTTON3 + " " + NR_BUTTON5 );
 
-    // if ( ! TDLevel.overNormal ) mNrButton1 -= 2; // AZIMUTH, REFRESH requires advanced level
-    mButton1 = new Button[ mNrButton1 + 1 ]; // MOVE
-    for ( int k=0; k<mNrButton1; ++k ) {
+    mButton1 = new Button[ NR_BUTTON1 + 1 ]; // MOVE
+    for ( int k=0; k<NR_BUTTON1; ++k ) {
       mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
     }
-    mButton1[ mNrButton1 ] = MyButton.getButton( mActivity, null, R.drawable.iz_empty );
+    mButton1[ NR_BUTTON1 ] = MyButton.getButton( mActivity, null, R.drawable.iz_empty );
 
-    mButton2 = new Button[ mNrButton2 + 1 ]; // DRAW
-    for ( int k=0; k<mNrButton2; ++k ) {
+    mButton2 = new Button[ NR_BUTTON2 + 1 ]; // DRAW
+    for ( int k=0; k<NR_BUTTON2; ++k ) {
       mButton2[k] = MyButton.getButton( mActivity, this, izons_draw[k] );
     }
-    mButton2[ mNrButton2 ] = mButton1[ mNrButton1 ];
+    mButton2[ NR_BUTTON2 ] = mButton1[ NR_BUTTON1 ];
 
-    mButton3 = new Button[ mNrButton3 + 1 ];      // EDIT
-    for ( int k=0; k<mNrButton3; ++k ) {
-      mButton3[k] = MyButton.getButton( mActivity, this, izons_edit[k] );
+    mButton3 = new Button[ NR_BUTTON3 + 1 ];      // EDIT
+    for ( int k=0; k<NR_BUTTON3; ++k ) {
+      mButton3[k] = MyButton.getButton( mActivity, this, izons_select[k] );
     }
-    mButton3[ mNrButton3 ] = mButton1[ mNrButton1 ];
+    mButton3[ NR_BUTTON3 ] = mButton1[ NR_BUTTON1 ];
 
-    mButton5 = new Button[ mNrButton5 + 1 ];    // ERASE
-    for ( int k=0; k<mNrButton5; ++k ) {
+    mButton5 = new Button[ NR_BUTTON5 + 1 ];    // ERASE
+    for ( int k=0; k<NR_BUTTON5; ++k ) {
       mButton5[k] = MyButton.getButton( mActivity, this, izons_erase[k] );
     }
-    mButton5[ mNrButton5 ] = mButton1[ mNrButton1 ];
+    mButton5[ NR_BUTTON5 ] = mButton1[ NR_BUTTON1 ];
 
-    mBMprev     = MyButton.getButtonBackground( this, res, izons[IC_PREV] );
-    mBMnext     = MyButton.getButtonBackground( this, res, izons[IC_NEXT] );
+    // mBMprev     = MyButton.getButtonBackground( this, res, izons[IC_PREV] );
+    // mBMnext     = MyButton.getButtonBackground( this, res, izons[IC_NEXT] );
 
     mBMsmall    = MyButton.getButtonBackground( this, res, izons[IC_SMALL] );
     mBMmedium   = MyButton.getButtonBackground( this, res, izons[IC_MEDIUM] );
@@ -949,13 +940,6 @@ public class SketchWindow extends ItemDrawer
     }
   }
 
-  private void clearSelection()
-  {
-    mSelection[0] = null;
-    mSelection[1] = null;
-  }
-
-
   @Override
   public void onCreate( Bundle savedInstanceState ) 
   {
@@ -970,8 +954,6 @@ public class SketchWindow extends ItemDrawer
     mActivity = this;
     mApp_mData = TopoDroidApp.mData; 
 
-    clearSelection();
-
     // audioCheck = TDandroid.checkMicrophone( mActivity );
     // TDLog.v( "Microphone perm : " + audioCheck );
 
@@ -980,8 +962,7 @@ public class SketchWindow extends ItemDrawer
 
     // mIsNotMultitouch = ! TDandroid.checkMultitouch( this );
 
-    setContentView(R.layout.sketch_activity);
-    mZoom             = TopoDroidApp.mScaleFactor;    // canvas zoom
+    setContentView( R.layout.sketch_activity );
 
     mDisplayCenter = new PointF(TopoDroidApp.mDisplayWidth  / 2, TopoDroidApp.mDisplayHeight / 2);
 
@@ -1025,7 +1006,7 @@ public class SketchWindow extends ItemDrawer
     // mDrawingUtil = new DrawingUtilPortrait();
 
     // mEraseScale = 0;  done in makeButtons()
-    // mSelectScale = 0;
+    mSelectScale = 0;
     makeButtons( );
 
     mListView.setAdapter( mButtonView1.mAdapter );
@@ -1348,8 +1329,8 @@ public class SketchWindow extends ItemDrawer
     // TODO FIXME
     // if ( mPid >= 0 ) {
     //   try {
-    //     // TDLog.v("PLOT pause: " + mOffset.x + " " + mOffset.y + " " + mZoom );
-    //     mApp_mData.updatePlot( mPid, mSid, mOffset.x, mOffset.y, mZoom );
+    //     // TDLog.v("PLOT pause: " + mOffset.x + " " + mOffset.y + " " + zoom );
+    //     mApp_mData.updatePlot( mPid, mSid, mOffset.x, mOffset.y, zoom );
     //   } catch ( IllegalStateException e ) {
     //     TDLog.Error("cannot save plot state: " + e.getMessage() );
     //   }
@@ -1382,47 +1363,39 @@ public class SketchWindow extends ItemDrawer
       finish();
       return;
     }
-
-    TDLog.v("TODO TODO TODO do start"); 
+    float zoom = mSketchSurface.getZoom();
+    mOffset.x = ( TopoDroidApp.mDisplayWidth )/(2*zoom);
+    mOffset.y = ( TopoDroidApp.mDisplayHeight + mListView.getHeight() )/(2*zoom);
+    mSketchSurface.setTransform( this, mOffset.x, mOffset.y );
   }
 
   // ----------------------------------------------------
 
-  /** select at a scene point (x,y)
-   * @param x    X-coord of the scene point
-   * @param y    Y-coord of the scene point
+  /** select at a canvas point (x,y)
+   * @param xc    X-coord (canvas)
+   * @param yc    Y-coord 
    * @param size selection radius
    * @note called only onTouchUp
    */
-  private void doSelectAt( float x, float y, float size )
+  private void doSelectAt( float xc, float yc, float size )
   {
     // if ( mLandscape ) { float t=x; x=-y; y=t; }
     if ( mMode == MODE_EDIT ) {
-      // float d0 = TopoDroidApp.mCloseCutoff + TopoDroidApp.mSelectness / mZoom;
-      SketchPoint selection = mSketchSurface.getItemAt( x, y, mZoom, size );
-      if ( mSelection[0] == null ) {
-        mSelection[0] = selection;
-        mSelection[1] = null;
-      } else if ( mSelection[0] != null && selection == null ) {
-        mSelection[0] = null;
-        mSelection[1] = null;
-      } else {
-        mSelection[1] = selection;
-      }
-      // TODO update section button according to mSelection[1]
-      setButton3( BTN_SECTION, (( mSelection[1] == null )? mBMsectionNo : mBMsectionOk) );
-      setButton3PrevNext();
+      TDLog.v("SKETCH select ...");
+      int selection = mSketchSurface.getItemAt( xc, yc, size );
+      setButton3( BTN_SECTION, ( ( selection < 2 )? mBMsectionNo : mBMsectionOk) );
+      // setButton3PrevNext();
     } 
   }
 
   /** execute an erase action
-   * @param x    X coordinate of the erase action (scene frame)
-   * @param y    Y coordinate of the erase action (scene frame)
+   * @param xc    X coordinate of the erase action (canvas)
+   * @param yc    Y coordinate of the erase action
    */
-  private void doEraseAt( float x, float y )
+  private void doEraseAt( float xc, float yc )
   {
     // if ( mLandscape ) { float t=x; x=-y; y=t; }
-    mSketchSurface.eraseAt( x, y, mZoom, mEraseCommand, mEraseSize );
+    mSketchSurface.eraseAt( xc, yc, mEraseCommand, mEraseSize );
     modified();
   }
 
@@ -1527,10 +1500,11 @@ public class SketchWindow extends ItemDrawer
     mSave1Y = y1;
   
     if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
-      mOffset.x += x_shift / mZoom;                // add shift to offset
-      mOffset.y += y_shift / mZoom; 
-      // TDLog.v( "PLOT shift event " + mOffset.x + " " + mOffset.y + " " + mZoom );
-      mSketchSurface.setTransform( this, mOffset.x, mOffset.y, mZoom );
+      float zoom = mSketchSurface.getZoom();
+      mOffset.x += x_shift / zoom;                // add shift to offset
+      mOffset.y += y_shift / zoom; 
+      // TDLog.v( "PLOT shift event " + mOffset.x + " " + mOffset.y + " " + zoom );
+      mSketchSurface.setTransform( this, mOffset.x, mOffset.y );
     }
   }
 
@@ -1541,10 +1515,11 @@ public class SketchWindow extends ItemDrawer
   private void moveCanvas( float x_shift, float y_shift )
   {
     if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
-      mOffset.x += x_shift / mZoom;                // add shift to offset
-      mOffset.y += y_shift / mZoom; 
-      // TDLog.v( "PLOT move event " + mOffset.x + " " + mOffset.y + " " + mZoom );
-      mSketchSurface.setTransform( this, mOffset.x, mOffset.y, mZoom );
+      float zoom = mSketchSurface.getZoom();
+      mOffset.x += x_shift / zoom;                // add shift to offset
+      mOffset.y += y_shift / zoom; 
+      // TDLog.v( "PLOT move event " + mOffset.x + " " + mOffset.y + " " + zoom );
+      mSketchSurface.setTransform( this, mOffset.x, mOffset.y );
     }
   }
 
@@ -1560,18 +1535,16 @@ public class SketchWindow extends ItemDrawer
 
   // -------------------------------------------------------------------------
   /** begin an erase command
-   * @param xs   scene X coord
-   * @param ys   scene Y coord
    * @param xc   canvas X coord 
    * @param yc   canvas Y coord
    */
-  private void startErasing( float xs, float ys, float xc, float yc )
+  private void startErasing( float xc, float yc )
   {
-    // TDLog.v( "Erase at " + xs + " " + ys );
+    // TDLog.v( "Erase at " + xc + " " + yc );
     if ( mTouchMode == MODE_MOVE ) {
       mEraseCommand =  new EraseCommand();
       mSketchSurface.setEraser( xc, yc, mEraseSize );
-      doEraseAt( xs, ys );
+      doEraseAt( xc, yc );
     }
   }
 
@@ -1651,17 +1624,15 @@ public class SketchWindow extends ItemDrawer
     }
     float x_canvas = event.getX(id);
     float y_canvas = event.getY(id);
-    float x_scene = x_canvas/mZoom - mOffset.x;
-    float y_scene = y_canvas/mZoom - mOffset.y;
 
     if (action == MotionEvent.ACTION_DOWN) { // ---------------------------------------- DOWN
-      return onTouchDown( x_canvas, y_canvas, x_scene, y_scene );
+      return onTouchDown( x_canvas, y_canvas );
 
     } else if ( action == MotionEvent.ACTION_MOVE ) { // ------------------------------- MOVE
-      return onTouchMove( x_canvas, y_canvas, x_scene, y_scene, event, threePointers );
+      return onTouchMove( x_canvas, y_canvas, event, threePointers );
 
     } else if (action == MotionEvent.ACTION_UP) { // ----------------------------------- UP
-      return onTouchUp( x_canvas, y_canvas, x_scene, y_scene );
+      return onTouchUp( x_canvas, y_canvas );
     }
     return true;
   }
@@ -1670,11 +1641,9 @@ public class SketchWindow extends ItemDrawer
   /** react to a touch-up event
    * @param xc   canvas X coord 
    * @param yc   canvas Y coord
-   * @param xs   scene X coord
-   * @param ys   scene Y coord
    * @return ...
    */
-  private boolean onTouchUp( float xc, float yc, float xs, float ys )
+  private boolean onTouchUp( float xc, float yc )
   {
     if ( onMenu ) {
       closeMenu();
@@ -1690,43 +1659,43 @@ public class SketchWindow extends ItemDrawer
       if ( mMode == MODE_DRAW ) {
         float squared_shift = x_shift*x_shift + y_shift*y_shift;
 
-        mSketchSurface.resetPreviewPath();
-
         if ( squared_shift > TDSetting.mLineSegment2 || ( mPointCnt % mLinePointStep ) > 0 ) {
           if ( ( ! TDSetting.mStylusOnly ) || squared_shift < 10 * TDSetting.mLineSegment2 ) {
-            mSketchSurface.addPointToCurrentPath( new Point2D(xs, ys) );
+            // TDLog.v("SKETCH DRAW final point " + xc + " " + yc );
+            mSketchSurface.addPointToCurrentPath( new Point2D(xc, yc) );
           }
         }
         
+        mSketchSurface.endCurrentPath(); 
         ArrayList< Point2D > cpath = mSketchSurface.getCurrentPath();
         if ( cpath.size() > 1 ) {
           if ( TDSetting.isLineStyleSimplified() ) {
 	    Weeder weeder = new Weeder();
             for ( Point2D lp : cpath ) weeder.addPoint( lp.x, lp.y );
 	    // get pixels from meters
-	    // float dist = mZoom*DrawingUtil.SCALE_FIX*TDSetting.mWeedDistance;
 	    float dist = DrawingUtil.SCALE_FIX*TDSetting.mWeedDistance; // N.B. no zoom
-	    float len  = mZoom*DrawingUtil.SCALE_FIX*TDSetting.mWeedLength;
+	    float len  = mSketchSurface.getZoom() * DrawingUtil.SCALE_FIX*TDSetting.mWeedLength;
             cpath = weeder.simplify( dist, len );
           } 
           if ( cpath.size() > 1 ) {
-            SketchLinePath lp1 = new SketchLinePath( BrushManager.errorPaint );
+            // TDLog.v("SKETCH new line size " + cpath.size() );
+            SketchLinePath lp1 = new SketchLinePath( mSketchSurface.getLinePaint() );
             for ( Point2D p0 : cpath ) {
               lp1.appendPoint( mSketchSurface.toTDVector( p0.x, p0.y ) );
             }
             mSketchSurface.addLinePath( lp1 );
           }
         }
+        mSketchSurface.resetPreviewPath();
         // undoBtn.setEnabled(true);
         // redoBtn.setEnabled(false);
         // canRedo = false;
-        mSketchSurface.endCurrentPath(); 
         mPointerDown = false;
         modified();
       } else if ( mMode == MODE_EDIT ) {
-        if ( Math.abs(mStartX - xc) < TDSetting.mPointingRadius 
-          && Math.abs(mStartY - yc) < TDSetting.mPointingRadius ) {
-          doSelectAt( xs, ys, mSelectSize );
+        TDLog.v("SKETCH touch up on edit at " + xc + " " + yc + " radius " + TDSetting.mPointingRadius );
+        if ( Math.abs(mStartX - xc) < TDSetting.mPointingRadius && Math.abs(mStartY - yc) < TDSetting.mPointingRadius ) {
+          doSelectAt( xc, yc, mSelectSize );
         }
         // mEditMove = false;
       } else if ( mMode == MODE_ERASE ) {
@@ -1739,15 +1708,13 @@ public class SketchWindow extends ItemDrawer
   /** react to a touch-down event
    * @param xc   canvas X coord 
    * @param yc   canvas Y coord
-   * @param xs   scene X coord
-   * @param ys   scene Y coord
    * @return ...
    */
-  private boolean onTouchDown( float xc, float yc, float xs, float ys )
+  private boolean onTouchDown( float xc, float yc )
   {
     HBXP_PointDown = false; // HBXP
     mSketchSurface.endEraser();
-    float d0 = TDSetting.mCloseCutoff + mSelectSize / mZoom;
+    float d0 = TDSetting.mCloseCutoff + mSelectSize / mSketchSurface.getZoom();
     // TDLog.v( "on touch down. mode " + mMode + " " + mTouchMode );
 
     // TDLog.Log( TDLog.LOG_PLOT, "DOWN at X " + xc + " [" +TopoDroidApp.mBorderInnerLeft + " " + TopoDroidApp.mBorderInnerRight + "] Y " 
@@ -1772,8 +1739,8 @@ public class SketchWindow extends ItemDrawer
       // TDLog.Log( TDLog.LOG_PLOT, "onTouch ACTION_DOWN symbol " + mSymbol );
       mPointCnt = 0;
       mSketchSurface.startCurrentPath();
-      // mCurrentLinePat.setOptions( BrushManager.getLineDefaultOptions( mCurrentLine ) );
-      mSketchSurface.addPointToCurrentPath( new Point2D( xs, ys ) );
+      // TDLog.v("SKETCH DRAW start point " + xc + " " + yc );
+      mSketchSurface.addPointToCurrentPath( new Point2D( xc, yc ) );
       mSaveX = xc; // FIXME-000
       mSaveY = yc;
     } else if ( mMode == MODE_MOVE ) {
@@ -1785,46 +1752,17 @@ public class SketchWindow extends ItemDrawer
       return false;
 
     } else if ( mMode == MODE_ERASE ) {
-      startErasing( xs, ys, xc, yc );
+      startErasing( xc, yc );
     } else if ( mMode == MODE_EDIT ) {
       mStartX = xc;
       mStartY = yc;
       // mEditMove = true;
-      TDLog.v("TODO touch down on edit ...");
-      // SelectionPoint pt = mSketchSurface.hotItem();
-      // if ( pt != null ) {
-      //   // if ( mLandscape ) {
-      //   //   mEditMove = ( pt.distance( -ys, xs ) < d0 );
-      //   // } else {
-      //   //   mEditMove = ( pt.distance( xs, ys ) < d0 );
-      //   // }
-      // } 
-      // // doSelectAt( xs, ys, mSelectSize );
+      TDLog.v("SKETCH touch down on edit at " + xc + " " + yc );
+      // doSelectAt( xc, yc, mSelectSize );
       mSaveX = xc;
       mSaveY = yc;
       // return false;
 
-    // } else if ( mMode == MODE_SHIFT ) {
-    //   mShiftMove = true; // whether to move canvas in point-shift mode
-    //                      // false if moving the hot point
-    //   mStartX = xc;
-    //   mStartY = yc;
-    //   SelectionPoint pt = mSketchSurface.hotItem();
-    //   if ( pt != null ) {
-    //     // if ( mLandscape ) {
-    //     //   if ( pt.distance( -ys, xs ) < d0*4 ) {
-    //     //     mShiftMove = false;
-    //     //     mStartX = xs;  // save start position
-    //     //     mStartY = ys;
-    //     //   }
-    //     // } else {
-    //       if ( pt.distance( xs, ys ) < d0*4 ) {
-    //         mShiftMove = false;
-    //         mStartX = xs;  // save start position
-    //         mStartY = ys;
-    //       }
-    //     // }
-    //   }
     //   mSaveX = xc; // FIXME-000
     //   mSaveY = yc;
     //   // return false;
@@ -1835,13 +1773,11 @@ public class SketchWindow extends ItemDrawer
   /** react to a touch-move event
    * @param xc   canvas X coord 
    * @param yc   canvas Y coord
-   * @param xs   scene X coord
-   * @param ys   scene Y coord
    * @param event motion event
    * @param threePointers whether the event has three pointers
    * @return ...
    */
-  private boolean onTouchMove( float xc, float yc, float xs, float ys, MotionEventWrap event, boolean threePointers )
+  private boolean onTouchMove( float xc, float yc, MotionEventWrap event, boolean threePointers )
   {
     // TDLog.v( "action MOVE mode " + mMode + " touch-mode " + mTouchMode);
     if ( mTouchMode == MODE_MOVE) {
@@ -1857,7 +1793,8 @@ public class SketchWindow extends ItemDrawer
         }
         if ( squared_shift > TDSetting.mLineSegment2 ) {
           if ( ++mPointCnt % mLinePointStep == 0 ) {
-            mSketchSurface.addPointToCurrentPath( new Point2D( xs, ys ) );
+            // TDLog.v("SKETCH DRAW add point " + xc + " " + yc );
+            mSketchSurface.addPointToCurrentPath( new Point2D( xc, yc ) );
           }
         } else {
           save = false;
@@ -1867,7 +1804,7 @@ public class SketchWindow extends ItemDrawer
       } else if ( mMode == MODE_ERASE ) {
         if ( mEraseCommand != null ) {
           mSketchSurface.setEraser( xc, yc, mEraseSize );
-          doEraseAt( xs, ys );
+          doEraseAt( xc, yc );
 	}
       }
       if ( save ) { // FIXME-000
@@ -1876,8 +1813,6 @@ public class SketchWindow extends ItemDrawer
       }
     // } else if ( mTouchMode == MODE_ROTATE ) {
     //   mSketchSurface.rotateHotItem( mRotateScale * ( yc - mStartY ) );
-    //   mStartX = xc; // xs;
-    //   mStartY = yc; // ys;
     //   modified();
     } else { // mTouchMode == MODE_ZOOM
       float newDist = spacing( event );
@@ -1970,7 +1905,7 @@ public class SketchWindow extends ItemDrawer
     mHasSelected = false;
     mSketchSurface.clearSelected();
     mMode = MODE_EDIT;
-    setButton3PrevNext();
+    // setButton3PrevNext();
     setButton3Item( null );
   }
 
@@ -2018,7 +1953,7 @@ public class SketchWindow extends ItemDrawer
 
     } else if ( mMode == MODE_DRAW ) {
       int k2 = 3;
-      if ( k2 < mNrButton2 && b == mButton2[k2++] ) { // UNDO
+      if ( k2 < NR_BUTTON2 && b == mButton2[k2++] ) { // UNDO
         mSketchSurface.undo();
         // if ( ! mSketchSurface.hasMoreUndo() ) {
         //   // undoBtn.setEnabled( false );
@@ -2026,11 +1961,11 @@ public class SketchWindow extends ItemDrawer
         // redoBtn.setEnabled( true );
         // canRedo = true;/
         modified();
-      } else if ( k2 < mNrButton2 && b == mButton2[k2++] ) { // REDO
+      } else if ( k2 < NR_BUTTON2 && b == mButton2[k2++] ) { // REDO
         if ( mSketchSurface.hasMoreRedo() ) {
           mSketchSurface.redo();
         }
-      // } else if ( k2 < mNrButton2 && b == mButton2[k2++] ) { // TOOLS
+      // } else if ( k2 < NR_BUTTON2 && b == mButton2[k2++] ) { // TOOLS
       //   if ( ! TDSetting.mTripleToolbar ) {
       //     rotateRecentToolset();
       //   } else {
@@ -2040,7 +1975,7 @@ public class SketchWindow extends ItemDrawer
 
     } else if ( mMode == MODE_ERASE ) {
       int k5 = 3;
-      if ( k5 < mNrButton5 && b == mButton5[k5++] ) { // UNDO same as in mButton2[]
+      if ( k5 < NR_BUTTON5 && b == mButton5[k5++] ) { // UNDO same as in mButton2[]
         mSketchSurface.undo();
         // if ( ! mSketchSurface.hasMoreUndo() ) {
         //   // undoBtn.setEnabled( false );
@@ -2048,40 +1983,41 @@ public class SketchWindow extends ItemDrawer
         // redoBtn.setEnabled( true );
         // canRedo = true;/
         modified();
-      } else if ( k5 < mNrButton5 && b == mButton5[k5++] ) { // REDO same as in mButton2[]
+      } else if ( k5 < NR_BUTTON5 && b == mButton5[k5++] ) { // REDO same as in mButton2[]
         if ( mSketchSurface.hasMoreRedo() ) {
           mSketchSurface.redo();
         }
-      } else if ( k5 < mNrButton5 && b == mButton5[k5++] ) { // ERASE SIZE
+      } else if ( k5 < NR_BUTTON5 && b == mButton5[k5++] ) { // ERASE SIZE
         setButtonEraseSize( mEraseScale + 1 ); // toggle erase size
       }
 
     } else if ( mMode == MODE_EDIT /* || mMode == MODE_SHIFT */ ) {
       int k3 = 3;
-      if ( k3 < mNrButton3 && b == mButton3[k3++] ) { // PREV
-        TDLog.v("TODO item previous");
-      } else if ( k3 < mNrButton3 && b == mButton3[k3++] ) { // NEXT
-        TDLog.v("TODO item next");
-      } else if ( k3 < mNrButton3 && b == mButton3[k3++] ) { // EDIT SIZE
-        TDLog.v("TODO select size");
-      } else if ( k3 < mNrButton3 && b == mButton3[k3++] ) { // EDIT ITEM DELETE
+      // if ( k3 < NR_BUTTON3 && b == mButton3[k3++] ) { // PREV
+      //   TDLog.v("TODO item previous");
+      // } else if ( k3 < NR_BUTTON3 && b == mButton3[k3++] ) { // NEXT
+      //   TDLog.v("TODO item next");
+      // } else 
+      if ( k3 < NR_BUTTON3 && b == mButton3[k3++] ) { // EDIT SIZE
+        setButtonSelectSize( mSelectScale + 1 ); // toggle select size
+      } else if ( k3 < NR_BUTTON3 && b == mButton3[k3++] ) { // EDIT ITEM DELETE
         TDLog.v("TODO item delete");
         // askDeleteItem( p, t, "section");
-      } else if ( k3 < mNrButton3 && b == mButton3[k3++] ) { // SECTION
+      } else if ( k3 < NR_BUTTON3 && b == mButton3[k3++] ) { // SECTION
         TDLog.v("TODO section");
       }
 
     } else {
       int k1 = 3;
-      if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // DISPLAY MODE 
+      if ( k1 < NR_BUTTON1 && b == mButton1[k1++] ) { // DISPLAY MODE 
         TDLog.v("TODO mode");
         // new SketchModeDialog( mActivity, this, mSketchSurface ).show();
-      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { //  NOTE
+      } else if ( k1 < NR_BUTTON1 && b == mButton1[k1++] ) { //  NOTE
         long mSid = TDInstance.sid;
         if ( mSid >= 0 ) {
           (new DialogAnnotations( mActivity, mApp_mData.getSurveyFromId(mSid) )).show();
         }
-      } else if ( TDLevel.overNormal && k1 < mNrButton1 && b == mButton1[k1++] ) { //  REFRESH
+      } else if ( TDLevel.overNormal && k1 < NR_BUTTON1 && b == mButton1[k1++] ) { //  REFRESH
         TDLog.v("TODO updateDisplay(); ");
       }
     }
@@ -2131,29 +2067,18 @@ public class SketchWindow extends ItemDrawer
   {
     float tb = (b.top + b.bottom)/2;
     float lr = (b.left + b.right)/2;
-    // if ( mLandscape ) {
-    //   float w = b.bottom - b.top;
-    //   float h = b.right - b.left;
-    //   float wZoom = (float) ( mSketchSurface.getMeasuredWidth() * 0.9 ) / ( 1 + w );
-    //   float hZoom = (float) ( ( ( mSketchSurface.getMeasuredHeight() - mListView.getHeight() ) * 0.9 ) / ( 1 + h ));
-    //   mZoom = Math.min(hZoom, wZoom);
-    //   if ( mZoom < 0.1f ) mZoom = 0.1f;
-    //   mOffset.y = ( TopoDroidApp.mDisplayHeight + mListView.getHeight() - DrawingUtil.CENTER_Y )/(2*mZoom) + lr;
-    //   mOffset.x = ( TopoDroidApp.mDisplayWidth - DrawingUtil.CENTER_X )/(2*mZoom) - tb;
-    // } else {
-      float w = b.right - b.left;
-      float h = b.bottom - b.top;
-      float wZoom = (float) ( mSketchSurface.getMeasuredWidth() * 0.9 ) / ( 1 + w );
-      float hZoom = (float) ( ( ( mSketchSurface.getMeasuredHeight() - mListView.getHeight() ) * 0.9 ) / ( 1 + h ));
-      mZoom = Math.min(hZoom, wZoom);
-      if ( mZoom < 0.1f ) mZoom = 0.1f;
-      mOffset.x = ( TopoDroidApp.mDisplayWidth - DrawingUtil.CENTER_X )/(2*mZoom) - lr;
-      mOffset.y = ( TopoDroidApp.mDisplayHeight + mListView.getHeight() - DrawingUtil.CENTER_Y )/(2*mZoom) - tb;
-    // }
-    // TDLog.v( "W " + w + " H " + h + " zoom " + mZoom + " X " + mOffset.x + " Y " + mOffset.y );
-    // TDLog.v( "display " + TopoDroidApp.mDisplayWidth + " " + TopoDroidApp.mDisplayHeight );
-    // TDLog.v( "PLOT zoom fit " + mOffset.x + " " + mOffset.y + " zoom " + mZoom + " tb " + tb + " lr " + lr );
-    mSketchSurface.setTransform( this, mOffset.x, mOffset.y, mZoom );
+    float w = b.right - b.left;
+    float h = b.bottom - b.top;
+    float wZoom = (float) ( mSketchSurface.getMeasuredWidth() * 0.9 ) / ( 1 + w*w );
+    float hZoom = (float) ( ( ( mSketchSurface.getMeasuredHeight() - mListView.getHeight() ) * 0.9 ) / ( 1 + h*h ));
+    float zoom = Math.min(hZoom, wZoom);
+    // TDLog.v("SKETCH w " + w + " h " + h + " wZoom " + wZoom + " hZoom " + hZoom );
+    if ( zoom < 0.1f ) zoom = 0.1f;
+    mOffset.x = ( TopoDroidApp.mDisplayWidth )/(2*zoom) - lr;
+    mOffset.y = ( TopoDroidApp.mDisplayHeight + mListView.getHeight() )/(2*zoom) - tb;
+    mSketchSurface.setTransform( this, mOffset.x, mOffset.y, zoom );
+    // TDLog.v( "SKETCH display " + TopoDroidApp.mDisplayWidth + " " + TopoDroidApp.mDisplayHeight );
+    // TDLog.v( "SKETCH zoom fit W " + w + " H " + h + " zoom " + mSketchSurface.getZoom() + " X " + mOffset.x + " Y " + mOffset.y );
   }
 
   @Override
@@ -2237,20 +2162,20 @@ public class SketchWindow extends ItemDrawer
       // mActivity.startActivity( intent );
     } else if ( p++ == pos ) { // HELP
       // 1 for select-tool
-      // int nn = 1 + NR_BUTTON1 + NR_BUTTON2 - 3 + NR_BUTTON5 - 5 + ( TDLevel.overBasic? mNrButton3 - 3: 0 );
+      // int nn = 1 + NR_BUTTON1 + NR_BUTTON2 - 3 + NR_BUTTON5 - 5 + ( TDLevel.overBasic? NR_BUTTON3 - 3: 0 );
       // TDLog.v( "Help menu, nn " + nn );
       switch ( mMode ) {
         case MODE_DRAW:
-          new HelpDialog(mActivity, izons_draw, menus, help_icons_draw, help_menus, mNrDraw, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+          new HelpDialog(mActivity, izons_draw, menus, help_icons_draw, help_menus, NR_BUTTON2, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
           break;
         case MODE_ERASE:
-          new HelpDialog(mActivity, izons_erase, menus, help_icons_erase, help_menus, mNrErase, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+          new HelpDialog(mActivity, izons_erase, menus, help_icons_erase, help_menus, NR_BUTTON5, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
           break;
         case MODE_EDIT:
-          new HelpDialog(mActivity, izons_edit, menus, help_icons_edit, help_menus, mNrEdit, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+          new HelpDialog(mActivity, izons_select, menus, help_icons_select, help_menus, NR_BUTTON3, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
           break;
         default: // MODE_MOVE
-          new HelpDialog(mActivity, izons_move, menus, help_icons_move, help_menus, mNrMove, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+          new HelpDialog(mActivity, izons_move, menus, help_icons_move, help_menus, NR_BUTTON1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
       }
     }
   }
@@ -2265,9 +2190,9 @@ public class SketchWindow extends ItemDrawer
     // if ( mSketchSurface.isFixedZoom() ) return;
     // FIXME FIXED_ZOOM for big sketches this leaves out some bits at the ends
     // maybe should increase the bitmap bounds by a small factor ...
-    // RectF b = mSketchSurface.getBitmapBounds( 1.0f );
-    // zoomFit( b );
-    TDLog.v("TODO doZoomFit");
+    // TDLog.v("SKETCH doZoomFit");
+    RectF b = mSketchSurface.getBitmapBounds( 1.0f );
+    zoomFit( b );
   }
 
   /**

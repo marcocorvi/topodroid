@@ -331,6 +331,7 @@ public class TopoGL extends Activity
   @Override
   public void onDestroy( )
   {
+    super.onDestroy();
     ((TopoDroidApp)getApplication()).mTopoGL = null;
   }
 
