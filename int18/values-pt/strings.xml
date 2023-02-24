@@ -714,6 +714,7 @@ no campo abaixo e aperte o botão.
   <string name="button_eval_cal">Calcular c/ calib.</string>
   <string name="button_gps_start">GPS</string>
   <!-- UNUSED string name="button_gps_stop"  >Parar     </string -->
+  <!-- UNUSED INCLINED_LEG string name="button_leg">Proj</string -->
   <string name="button_manual">Manual do Usuário</string>
   <!-- UNUSED string name="button_measure"   >Medir   </string -->
   <!-- UNUSED string name="button_photo"   >Foto</string -->
@@ -1033,7 +1034,7 @@ no campo abaixo e aperte o botão.
   <string name="export_surface">Superfície</string>
   <string name="export_swap_lr">Inverter E/D</string>
   <string name="export_trox">Formato Trox</string>
-  <string name="export_walls">Paredes</string>
+  <string name="export_walls">Walls</string>
   <string name="export_xvi">Images Xvi</string>
   <string name="export_with_xsections">Incluir seções-X</string>
   <string name="export_with_reference">Incluir referência XY</string>

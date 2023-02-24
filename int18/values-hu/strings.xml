@@ -93,6 +93,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="station_coords">K %1$.2f É %2$.2f Z %3$.2f</string>
     <string name="shot_not_found">Mérés nem található</string>
     <string name="bad_sibling">Rossz mérés ismétlés</string>
+    <string name="bad_station">Hibás mérési pont: %1$s</string>
     <!-- UNUSED string name="missing_area">TERÜLET</string -->
     <!-- UNUSED string name="missing_hint">Engedélyezd vagy installáld a hiányzó ezközöket</string -->
     <!-- UNUSED string name="missing_line">VONAL</string -->

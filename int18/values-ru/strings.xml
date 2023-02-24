@@ -92,6 +92,7 @@
     <string name="station_coords">E %1$.2f N %2$.2f Высота %3$.2f</string>
     <string name="shot_not_found">Замеры не найдены</string>
     <string name="bad_sibling">Плохой замер в группе</string>
+    <string name="bad_station">Плохой пикет: %1$s</string>
     <!-- UNUSED string name="missing_area">ОБЛАСТЬ</string -->
     <!-- UNUSED string name="missing_hint">Пожалуйста, подключите недостающие инструменты, либо установите их.</string -->
     <!-- UNUSED string name="missing_line">ЛИНИЯ</string -->
