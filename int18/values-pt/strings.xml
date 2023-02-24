@@ -959,7 +959,7 @@ no campo abaixo e aperte o botão.
   <string name="help_section_item">Elemento de seção do croqui</string>
   <string name="help_range">Mover uma parte da linha</string>
   <!-- UNUSED string name="help_clear">Deselecionar tudo</string -->
-  <string name="help_eraser">Modo APAGAR</string>
+  <string name="help_eraser">Modo BORRACHA</string>
   <string name="help_select_mode">Ferramenta de seleção</string>
   <string name="help_erase_mode">Tipo de borracha</string>
   <string name="help_erase_size">Tamamho da borracha [P/M/G]</string>
