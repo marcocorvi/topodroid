@@ -198,7 +198,7 @@
      <item name="file">1</item>
   </string-array -->
   <string-array name="connMode">
-    <item name="batch">Por pedido</item>
+    <item name="batch">Sob demanda</item>
     <item name="continuous">Contínua</item>
     <item name="multi">Multi</item>
   </string-array>
@@ -294,7 +294,7 @@
   </string-array -->
   <string-array name="deviceBT">
     <item name="0">Desativado</item>
-    <item name="1">Verificado no início</item>
+    <item name="1">Verificar ao abrir app</item>
     <item name="2">Ativado</item>
   </string-array>
   <!-- string-array name="exportType">
