@@ -142,10 +142,10 @@ no campo abaixo e aperte o botão.
   <string name="calib_ave_std">Acurácia: %1$.2f ± %2$.2f °</string>
   <string name="calib_precision">Precisão</string>
   <string name="calib_iter">Iterações: %1$d</string>
-  <string name="calib_dip">Desvio mag.: %1$.1f °</string>
+  <string name="calib_dip">Inclinação mag.: %1$.1f °</string>
   <string name="calib_reset">Reiniciar a calibração da DistoX?</string>
   <string name="calib_min_error">Erro mínimo</string>
-  <string name="magn_dip">Desvio mag. …</string>
+  <string name="magn_dip">Inclinação mag. …</string>
   <string name="algorithm">Algoritmo:</string>
   <string name="auto">auto</string>
   <string name="linear">linear</string>
@@ -631,7 +631,7 @@ no campo abaixo e aperte o botão.
   <string name="stat_devices">Dispositivos %1$d: %2$s</string>
   <string name="stat_stddev_m">Desvio padrão M: %1$.1f %%</string>
   <string name="stat_stddev_g">Desvio padrão G: %1$.1f %%</string>
-  <string name="stat_stddev_dip">Desvio padrão Dip: %1$.1f graus (média: %2$.1f graus)</string>
+  <string name="stat_stddev_dip">Desvio padrão mergulho: %1$.1f graus (média: %2$.1f graus)</string>
   <string name="stat_component">Componentes: %1$d</string>
   <string name="stat_depth">Profundidade - Mín: %1$.1f %2$s Máx: %3$.1f %4$s"</string>
   <string name="stat_duplicate">Visadas duplicadas - Qt: %1$d # %2$d Ext: %3$.1f %4$s</string>
@@ -1212,8 +1212,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_orientation_summary">Orientação da tela do aplicativo</string>
   <string name="pref_raw_data_title">Dados brutos</string>
   <string name="pref_raw_data_summary">Exibir dados brutos</string>
-  <string name="pref_calib_shot_download_title">Fazer download de dados remotos</string>
-  <string name="pref_calib_shot_download_summary">Fazer download de dados de calibração remotos imediatamente</string>
+  <string name="pref_calib_shot_download_title">Download dados remotos</string>
+  <string name="pref_calib_shot_download_summary">Fazer download de dados remotos de calibração imediatamente</string>
   <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Ativar bootloader</string -->
   <string name="pref_mkeyboard_title">Teclado</string>
@@ -1432,8 +1432,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_accel_thr_summary">Percentual de tolerância para valores de aceleração</string>
   <string name="pref_mag_thr_title">Tolerância campo magnético</string>
   <string name="pref_mag_thr_summary">Percentual de tolerância para valores do campo magnético</string>
-  <string name="pref_dip_thr_title">Tolerância declinação magnética</string>
-  <string name="pref_dip_thr_summary">Percentual de tolerância para valores da declinação magnética</string>
+  <string name="pref_dip_thr_title">Tolerância inclinação magnética</string>
+  <string name="pref_dip_thr_summary">Percentual de tolerância para valores da inclinação magnética</string>
   <string name="pref_sibling_thr_title">Limite irmã</string>
   <string name="pref_sibling_thr_summary">Limite para visadas irmãs [%]</string>
   <string name="pref_leg_title">Tolerância visadas</string>
@@ -1527,7 +1527,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_error_title">Erro algoritmo</string>
   <string name="pref_error_summary">Limite erro interrupção de calib.</string>
   <string name="pref_iter_title">Iterações algoritmo</string>
-  <string name="pref_iter_summary">Máximo de iterações</string>
+  <string name="pref_iter_summary">Quantidade máxima de iterações no cálculo dos coeficientes</string>
   <string name="pref_label_size_title">Tamanho rótulos</string>
   <string name="pref_label_size_summary">Tamanho dos rótulos</string>
   <string name="pref_arrow_length_title">Tamanho linha corte</string>
