@@ -1920,7 +1920,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
 
     <!-- UNUSED string name="overwrite">felülírja</string -->
 
-    <string name="title_export_settings">Import/export beállítások</string>
+    <string name="title_export_settings">Beállítás import/export</string>
     <string name="title_export">Projekt exportálása a &#8230;</string>
     <string name="title_equates">Projekt kapcsolódó pontok</string>
     <string name="title_equate_new">Kapcsolódó pont hozzáadás &#8230;</string>
