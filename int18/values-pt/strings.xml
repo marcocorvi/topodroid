@@ -197,7 +197,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="found_groups">Encontrados %1$d grupos</string -->
   <string name="regroup">Não reagrupar</string>
   <!-- UNUSED string name="few_plots">Esboços não suficientes</string -->
-  <string name="few_calibs">Calibrações insuficientes</string>
+  <string name="few_calibs">Quantidade de calibrações insuficiente</string>
   <string name="getting_info">Obtendo info DistoX …</string>
   <string name="gettingble_info">Obtendo info DistoX-BLE …</string>
   <string name="calib_import_title">Importar calibração</string>
@@ -395,7 +395,7 @@ no campo abaixo e aperte o botão.
   <string name="menu_detach">DESCONECTAR</string>
   <!-- UNUSED string name="menu_display">DISPLAY</string -->
   <string name="menu_show_deleted">MOSTRAR APAGADOS</string>
-  <string name="menu_hide_deleted">ESCONDER APAGADOS</string>
+  <string name="menu_hide_deleted">OCULTAR APAGADOS</string>
   <string name="menu_device">DISPOSITIVO</string>
   <string name="menu_export">EXPORTAR</string>
   <string name="menu_firmware">FIRMWARE</string>
@@ -987,7 +987,7 @@ no campo abaixo e aperte o botão.
   <string name="help_detach">Limpar escolha atual da DistoX</string>
   <string name="help_firmware">Atualizador de firmware da DistoX2</string>
   <string name="help_toggle">Alternar modo calibração da DistoX</string>
-  <string name="help_sdcard">Funções de memória da DistoX</string>
+  <string name="help_sdcard">Funções de memória da DistoX e do BRIC4</string>
   <string name="help_read">Ler e mostrar os coeficientes de calibração da DistoX</string>
   <string name="help_info_device">Informações do dispositivo</string>
   <!-- UNUSED string name="help_scan">Procurar por novos dispositivos DistoX</string -->
