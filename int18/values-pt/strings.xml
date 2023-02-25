@@ -1152,13 +1152,13 @@ no campo abaixo e aperte o botão.
   <string name="title_settings_3d">Configurações visualizador 3D</string>
   <string name="title_settings_dem">Configurações DEM</string>
   <string name="title_settings_walls3d">Configurações modelo 3D</string>
-  <string name="title_settings_geek">Configurações Geek</string>
-  <string name="title_settings_geek_survey">Configurações Geek: topos</string>
-  <string name="title_settings_geek_splay">Configurações Geek: medidas auxiliares</string>
-  <string name="title_settings_geek_plot">Configurações Geek: croquis</string>
-  <string name="title_settings_geek_line">Configurações Geek: linhas</string>
-  <string name="title_settings_geek_device">Configurações Geek: dispositivos</string>
-  <string name="title_settings_geek_import">Configurações Geek: importação</string>
+  <string name="title_settings_geek">Configurações Especiais</string>
+  <string name="title_settings_geek_survey">Configurações Especiais: topos</string>
+  <string name="title_settings_geek_splay">Configurações Especiais: medidas auxiliares</string>
+  <string name="title_settings_geek_plot">Configurações Especiais: croquis</string>
+  <string name="title_settings_geek_line">Configurações Especiais: linhas</string>
+  <string name="title_settings_geek_device">Configurações Especiais: dispositivos</string>
+  <string name="title_settings_geek_import">Configurações Especiais: importação</string>
   <string name="title_settings_log">Configurações log</string>
   <string name="title_shift">Deslocar</string>
   <string name="title_shot_delete">Apagar medida?</string>
@@ -1171,7 +1171,7 @@ no campo abaixo e aperte o botão.
   <string name="title_survey_export">Exportar topo</string>
   <string name="title_survey_rename">Renomear topo</string>
   <string name="title_plot_rename">Renomear croqui</string>
-  <string name="title_plot_zoomfit">Encaixar zoom / Orientação</string>
+  <string name="title_plot_zoomfit">Zoom / Orientação</string>
   <string name="title_calib_export">Exportar calibração</string>
   <!-- UNUSED string name="title_zoom">Zoom</string -->
   <string name="title_import_shot">Importar topo</string>
@@ -1184,7 +1184,7 @@ no campo abaixo e aperte o botão.
   <string name="imported_settings">Configurações importadas</string>
   <string name="imported_settings_failed">Falha ao importar configurações</string>
   <string name="export_settings_failed">Falha ao exportar configurações</string>
-  <string name="pref_export_settings">CONFIGURAÇÕES EXPORTAÇÃO</string>
+  <string name="pref_export_settings">IMPORTAÇÃO/EXPORTAÇÃO DE CONFIGURAÇÕES</string>
   <!-- UNUSED string name="pref_tcsx">Exportar cSurvey-1.20 transfer-csx</string -->
   <string name="pref_export_plot_title">Formato exportação croqui</string>
   <string name="pref_export_plot_summary">Formato padrão de exportação de croqui</string>
@@ -1196,7 +1196,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_lrud_count_summary">Quantidade de medidas auxiliares usadas como EDTC</string>
   <string name="pref_cat_survey">DADOS TOPO</string>
   <string name="pref_cat_splay">DADOS MEDIDA AUXILIAR</string>
-  <string name="pref_cat_drawing">DESENHANDO CROQUI</string>
+  <string name="pref_cat_drawing">DESENHO CROQUI</string>
   <string name="pref_cat_import_export">IMPORTAR/EXPORTAR</string>
   <string name="pref_cat_exportimport">IMPORTAR</string>
   <!-- UNUSED string name="pref_cat_exportpng" translatable="false">PNG</string NO_PNG -->
@@ -1204,10 +1204,10 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
   <string name="pref_cat_device">DISPOSITIVOS</string>
   <string name="pref_cat_cave3d">VISUALIZADOR 3D</string>
-  <string name="pref_cat_geek">CONFIGURAÇÕES GEEK</string>
+  <string name="pref_cat_geek">ESPECIAIS</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
   <string name="pref_locale_title">Língua</string>
-  <string name="pref_locale_summary">Língua</string>
+  <string name="pref_locale_summary">Língua do aplicativo</string>
   <string name="pref_orientation_title">Orientação da tela</string>
   <string name="pref_orientation_summary">Orientação da tela do aplicativo</string>
   <string name="pref_raw_data_title">Dados brutos</string>
@@ -1218,7 +1218,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="pref_bootloader_summary">Ativar bootloader</string -->
   <string name="pref_mkeyboard_title">Teclado</string>
   <string name="pref_mkeyboard_summary">Habilitar teclados customizados</string>
-  <string name="pref_no_cursor_title">Sem cursor teclado</string>
+  <string name="pref_no_cursor_title">Sem cursor</string>
   <string name="pref_no_cursor_summary">Desabilitar o cursor do teclado especial</string>
   <string name="pref_local_help_title">Manual traduzido</string>
   <string name="pref_local_help_summary">Habilitar manual traduzido</string>
@@ -1230,7 +1230,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_therion_config_summary">Criar comandos de configuração Therion</string>
   <string name="pref_therion_maps_title">Mapas Therion primeiro</string>
   <string name="pref_therion_maps_summary">Mapas de Therion antes dos dados da topo</string>
-  <string name="pref_extra_buttons_title">Nível de recursos</string>
+  <string name="pref_extra_buttons_title">Nível recursos</string>
   <string name="pref_extra_buttons_summary">Nível de recursos habilitados</string>
   <string name="pref_size_buttons_title">Tamanho botões</string>
   <string name="pref_size_buttons_summary">Tamanho dos botões da barra de ações</string>
