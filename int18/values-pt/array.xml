@@ -33,7 +33,7 @@
   <string-array name="feedbackMode">
     <item name="none">nenhum</item>
     <item name="sound">som</item>
-    <item name="heptic">tátil</item>
+    <item name="heptic">vibração</item>
   </string-array>
   <string-array name="canvasLevels">
     <item name="none">nenhum</item>
@@ -56,17 +56,17 @@
     <item name="meter">metros</item>
     <item name="yard">jardas</item>
     <item name="two_tf">2 pés</item>
-    <item name="ten_cm">10 cm</item>
+    <item name="ten_cm">0,1 metro</item>
   </string-array>
   <string-array name="unitMeasure">
-    <item name="grid_cell">célula da grade</item>
+    <item name="grid_cell">célula grade</item>
     <item name="meter">metros</item>
     <item name="tf">pés</item>
   </string-array>
   <string-array name="loopClosure">
     <item name="none">Nenhuma</item>
     <item name="normal">Normal</item>
-    <item name="weighted">Weighted</item>
+    <item name="weighted">Proporcional</item>
     <item name="triangles">Triângulos</item>
   </string-array>
   <string-array name="survexEol">
@@ -179,7 +179,7 @@
     <item name="normal">Normal</item>
     <item name="advanced">Avançado</item>
     <item name="expert">Especialista</item>
-    <item name="tester">Testador</item>
+    <item name="tester">Teste</item>
     <!-- item name="complete">Completo</item -->
   </string-array>
   <string-array name="sizeButtons">
@@ -214,13 +214,13 @@
   -->
   <string-array name="surveyStations">
     <item name="no">Não</item>
-    <item name="for">Auxiliares (EDTC), próxima visada</item>
-    <item name="back">Auxiliares (EDTC), visada anterior</item>
-    <item name="backsight">Visada inversa</item>
+    <item name="for">Aux, visada</item>
+    <item name="back">Aux, contra</item>
+    <item name="backsight">Contra, aux, visada</item>
     <item name="tripod">Tripé</item>
-    <item name="anomaly">Magn. anomaly</item>
-    <item name="for2">Próxima visada, auxiliares (EDTC)</item>
-    <item name="back2">Visada anterior, auxiliares (EDTC)</item>
+    <item name="anomaly">Anomalia magnética</item>
+    <item name="for2">Visada, aux</item>
+    <item name="back2">Contra, aux</item>
     <item name="toporobot">TopoRobot</item>
   </string-array>
   <!--
@@ -330,8 +330,8 @@
      <item name="feet">3.28084</item>
   </string-array -->
   <string-array name="unitAngle">
-    <item name="degrees">graus decimais</item>
-    <item name="grads">grados decimais</item>
+    <item name="degrees">graus</item>
+    <item name="grads">grados</item>
   </string-array>
   <string-array name="unitLocation">
     <item name="degrees">graus decimais</item>
