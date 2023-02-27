@@ -91,7 +91,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="missing_line">LINHA</string -->
   <!-- UNUSED string name="missing_point">PONTO</string -->
   <!-- UNUSED string name="missing_save">O croqui utiliza alguns símbolos desconhecidos.\nGravação cancelada.</string -->
-  <!-- UNUSED string name="missing_symbols">Alguns símbolos não foram reconhecidos.\nSalvar mesmo assim?</string -->
+  <!-- UNUSED string name="missing_symbols">Alguns símbolos não foram reconhecidos.\Gravar mesmo assim?</string -->
   <!-- UNUSED string name="missing_title">SÍMBOLOS DESCONHECIDOS</string -->
   <!-- UNUSED string name="missing_warning">Os seguintes símbolos são desconhecidos.\n</string -->
   <string name="failed_snap_to_line">Nenhum ponto de fechamento de linha para atrair a borda da área</string>
@@ -125,7 +125,7 @@ no campo abaixo e aperte o botão.
   <string name="calib_gm_policy">Regra de agrupamento</string>
   <string name="calib_gm_undelete">Restaurar os dados de calibração?</string>
   <!-- UNUSED string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
-  <string name="calib_saved">Calibração salva</string>
+  <string name="calib_saved">Calibração gravada</string>
   <string name="calib_updated">Calibração atualizada</string>
   <string name="calib_compute_groups">Calculando grupos de dados de calibração …</string>
   <string name="calib_compute_coeffs">Calculando coeficientes de calibração …</string>
@@ -173,7 +173,7 @@ no campo abaixo e aperte o botão.
   <string name="device_status_silent_on">Silencioso: on</string>
   <string name="device_status_silent_off">Silencioso: off</string>
   <string name="bt_reset">Reiniciar conexão Bluetooth</string>
-  <string name="save_as">salvar como</string>
+  <string name="save_as">Gravar como</string>
   <string name="nickname">Apelido</string>
   <string name="unknown_device_type">Tipo dispositivo desconhecido %1$d</string>
   <string name="comment">comentário</string>
@@ -222,7 +222,7 @@ no campo abaixo e aperte o botão.
   <string name="import_zip_ok">Arquivo zip importado com sucesso</string>
   <string name="import_zip_newer">Arquivo zip importado da versão mais recente</string>
   <!-- UNUSED string name="import_zip_wait">A importação do arquivo zip pode demorar. Aguarde &#8230;</string -->
-  <!-- UNUSED string name="sketch_saving">Salvando croqui &#8230; por favor espere &#8230;</string -->
+  <!-- UNUSED string name="sketch_saving">Gravando croqui &#8230; por favor espere &#8230;</string -->
   <string name="GPS_position_none">Sem info posição GPS</string>
   <string name="GPX_record_none">Sem registro ponto GPX</string>
   <string name="MT_points_none">Nenhum ponto MobileTopographer</string>
@@ -513,8 +513,8 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="reading_file_failed">Falha leitura do arquivo</string -->
   <string name="saved_file_1">Arquivo salvo %1$s</string>
   <string name="saved_file_2">Arquivo salvo %1$s Escala %2$.2f</string>
-  <!-- UNUSED string name="saving_">Salvando </string -->
-  <string name="saving_file_failed">Falha ao salvar o arquivo</string>
+  <!-- UNUSED string name="saving_">Gravando </string -->
+  <string name="saving_file_failed">Falha ao gravar o arquivo</string>
   <!-- UNUSED string name="scrap_name">nome do croqui</string -->
   <!-- UNUSED string name="splay">visada auxiliar</string -->
   <string name="too_many_leg_intersection">Linha de corte cruza mais de uma visada.</string>
@@ -751,14 +751,14 @@ no campo abaixo e aperte o botão.
   <string name="button_clear_day">Limpar 1 dia</string>
   <string name="button_clear_week">Limpar 7 dias</string>
   <string name="button_clear_memory">Limpar memória</string>
-  <string name="button_save">Salvar    </string>
+  <string name="button_save">Gravar    </string>
   <!-- UNUSED string name="button_select"    >Selecionar    </string -->
   <string name="button_leg_station">Bases visada</string>
   <string name="button_all_station">Todas bases</string>
   <string name="button_leg_search">Pesquisar visadas</string>
   <string name="button_search">Pesquisar </string>
   <string name="button_merge">Mesclar   </string>
-  <string name="button_saved">Base salva</string>
+  <string name="button_saved">Gravar base</string>
   <string name="button_split">Dividir   </string>
   <string name="button_station">Centralizar</string>
   <string name="button_store">Armazenar </string>
@@ -900,7 +900,7 @@ no campo abaixo e aperte o botão.
   <string name="help_color">Voltar medidas auxiliares para cor padrão</string>
   <string name="help_continue">Continuar desenho de uma linha</string>
   <!-- UNUSED string name="help_contour">Editar perfil</string -->
-  <string name="help_current_station">Bases salvas</string>
+  <string name="help_current_station">Bases gravadas</string>
   <string name="help_azimuth">Referência para retificar perfil</string>
   <string name="help_refresh">Redesenhar tela</string>
   <string name="help_device">Editar dispositivo em uso</string>
@@ -978,8 +978,8 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="help_kink">Utilizar uma linha reta no ponto [linha/área]</string -->
   <string name="help_manual_calibration">Calibração manual dos instrumentos</string>
   <string name="help_note_plot">Editar as propriedades do item selecionado do croqui</string>
-  <!-- UNUSED string name="help_save">Salvar mudanças nas informações da topo</string -->
-  <string name="help_save_calib">Salvar alterações nas informações de calibração</string>
+  <!-- UNUSED string name="help_save">Gravar mudanças nas informações da topo</string -->
+  <string name="help_save_calib">Gravar alterações nas informações de calibração</string>
   <string name="help_export_survey">Exportar topo</string>
   <string name="help_loc">Coordenada GPS</string>
   <string name="help_delete_survey">Apagar topo</string>
@@ -1072,7 +1072,7 @@ no campo abaixo e aperte o botão.
   <string name="title_color_picker">Escolha uma cor</string>
   <!-- UNUSED string name="title_contour">Contorno</string -->
   <!-- UNUSED string name="title_coord">Inserir as coordenadas do ponto:</string -->
-  <string name="title_current_station">Base gravadas</string>
+  <string name="title_current_station">Bases gravadas</string>
   <string name="title_search">Pesquisa de bases e visadas</string>
   <string name="title_gm_search">Busca dados calibração</string>
   <string name="title_dangling">Medidas desconectadas</string>
@@ -1099,7 +1099,7 @@ no campo abaixo e aperte o botão.
   <string name="title_fixed_gps">Coordenadas GPS</string>
   <string name="title_fixed_add">Inserir coordenadas</string>
   <string name="title_manual">Manual do usuário do TopoDroid</string>
-  <string name="title_mode">Modo de visualização</string>
+  <string name="title_mode">Opções de visualização</string>
   <string name="title_move">Mover</string>
   <string name="title_note">Comentários da topo</string>
   <string name="title_packet_dialog">Pacotes</string>
@@ -1573,7 +1573,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="pref_backups_clear_title">Apagar backups</string -->
   <!-- UNUSED string name="pref_backups_clear_summary">Habilitar menu para apagar backups</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">Áreas xtherion</string -->
-  <!-- UNUSED string name="pref_xtherion_areas_summary">Salvar áreas como o xtherion</string -->
+  <!-- UNUSED string name="pref_xtherion_areas_summary">Gravar áreas como o xtherion</string -->
   <string name="pref_therion_splays_title">Medidas auxiliares Therion</string>
   <string name="pref_therion_splays_summary">Adicionar linhas u:splay aos arquivos th2</string>
   <string name="pref_th2_scale_title">Escala Therion</string>
@@ -1584,8 +1584,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_autoStations_summary">Incluir automaticamente bases aos arquivos para o Therion</string>
   <string name="pref_auto_xsections_title">Cortes X automáticos</string>
   <string name="pref_auto_xsections_summary">Incluir automaticamente cortes X na exportação de arquivos csx/svg/dxf/xvi</string>
-  <string name="pref_saved_stations_title">Estações salvas</string>
-  <string name="pref_saved_stations_summary">Apresentar estações salvas em laranja</string>
+  <string name="pref_saved_stations_title">Bases gravadas</string>
+  <string name="pref_saved_stations_summary">Apresentar bases gravadas em laranja</string>
   <string name="pref_legonly_update_title">Atualizar somente visadas</string>
   <string name="pref_legonly_update_summary">Somente redesenhar linha de trena quando receber novas visadas</string>
   <string name="pref_full_affine_title">Transformação affline</string>
