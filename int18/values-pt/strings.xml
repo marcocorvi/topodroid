@@ -190,7 +190,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="external_prompt">Inserir medição</string -->
   <string name="splay_at_to">Dados EDTC na base PARA</string>
   <string name="lrud">EDTC</string>
-  <string name="strike_dip">Direção %1$.0f Mergulho %2$.0f</string>
+  <string name="strike_dip">Direção %1$.0f &mdash; Mergulho %2$.0f</string>
   <string name="few_data">Não há dados suficientes</string>
   <string name="few_iter">Falha: excesso de iterações</string>
   <string name="few_groups">Não há dados suficientes para os grupos</string>
@@ -390,7 +390,7 @@ no campo abaixo e aperte o botão.
   <string name="menu_calib_check">VERIF. CALIB.</string>
   <string name="menu_close">FECHAR</string>
   <!-- UNUSED string name="menu_clear">LIMPAR</string -->
-  <string name="menu_color">VOLTAR PARA COR PADRÃO</string>
+  <string name="menu_color">COR PADRÃO</string>
   <string name="menu_delete">APAGAR</string>
   <string name="menu_detach">DESCONECTAR</string>
   <!-- UNUSED string name="menu_display">DISPLAY</string -->
@@ -410,7 +410,7 @@ no campo abaixo e aperte o botão.
   <string name="menu_help">AJUDA</string>
   <!-- UNUSED string name="menu_join_survey">TOPOGRAFIA COLABORATIVA</string -->
   <!-- UNUSED string name="menu_logs">LOGS</string -->
-  <string name="menu_manual_calibration">CALIBRAÇÃO</string>
+  <string name="menu_manual_calibration">AJUSTE INSTR.</string>
   <string name="menu_options">CONFIGURAÇÕES</string>
   <string name="menu_overview">VISÃO GLOBAL</string>
   <string name="menu_packets">PACOTES</string>
@@ -980,7 +980,7 @@ no campo abaixo e aperte o botão.
   <string name="help_note_plot">Editar as propriedades do item selecionado do croqui</string>
   <!-- UNUSED string name="help_save">Gravar mudanças nas informações da topo</string -->
   <string name="help_save_calib">Gravar alterações nas informações de calibração</string>
-  <string name="help_export_survey">Exportar topo</string>
+  <string name="help_export_survey">Exportar Topo</string>
   <string name="help_loc">Coordenada GPS</string>
   <string name="help_delete_survey">Apagar topo</string>
   <string name="help_delete_calib">Apagar calibração</string>
@@ -1544,12 +1544,12 @@ no campo abaixo e aperte o botão.
   <string name="pref_linecurve_summary">Habilitar função de suavizar/tornar retos segmentos de linhas</string>
   <string name="pref_linestraight_title">Tornar linhas retas</string>
   <string name="pref_linestraight_summary">Habilitar função de transformar linhas inteiras em retas</string>
-  <string name="pref_path_multiselect_title">Multiseleção de caminhos</string>
+  <string name="pref_path_multiselect_title">Multisseleção caminhos</string>
   <string name="pref_path_multiselect_summary">Habilitar função de seleção de vários caminhos</string>
   <string name="pref_composite_actions_title">Ações compostas</string>
   <string name="pref_composite_actions_summary">Habilitar ações de \'clique longo\' para linhas e áreas</string>
-  <string name="pref_plane_interpolation_title">Interpolação de plano</string>
-  <string name="pref_plane_interpolation_summary">Habilitar função de interpolação de plano</string>
+  <string name="pref_plane_interpolation_title">Interpolar plano</string>
+  <string name="pref_plane_interpolation_summary">Habilitar função de interpolação de plano que contém visadas (direção e mergulho)</string>
   <string name="pref_plot_split_title">Quebra/união de croquis</string>
   <string name="pref_plot_split_summary">Habilitar função de quebra/união de croquis</string>
   <string name="pref_stylus_size_title">Tamanho caneta</string>
