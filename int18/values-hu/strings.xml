@@ -1012,7 +1012,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="help_gps_surveys">Mérések GNSS pontjai</string>
     <string name="help_survey_info">Felmérési információ</string>
     <string name="help_undelete">Törölt elemek visszaállítása</string>
-	<!-- UPDATES string name="help_updates">Check for app version updates</string -->
+    <!-- UPDATES string name="help_updates">Check for app version updates</string -->
     <string name="help_photo">Fényképek</string>
     <string name="help_sensor">Mérések</string>
     <string name="help_3d">3D nézőke (Cave3D)</string>
@@ -1022,8 +1022,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="help_edit">Szerkesztés mód</string>
     <string name="help_refs">Vázlat referencia</string>
     <string name="help_rename">Felmérés nevének megváltoztatása</string>
-    <!-- TODO string name="help_plot_close">Close sketch</string -->
-    <!-- TODO string name="help_plot_delete">Delete sketch</string -->
+    <string name="help_plot_close">Vázlat bezárása</string>
+    <string name="help_plot_delete">Vázlat törlése</string>
     <string name="help_plot_rename">Vázlat átnevezése/törlése</string>
     <string name="help_plot_scrap">Vázlat szintek</string>
     <string name="help_plot_switch">Vázlat nézet átváltása</string>
@@ -1037,7 +1037,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="help_redo">Utolsó rajzi változtatás visszaállítása</string>
     <string name="help_symbol_plot">Legutóbbi rajzeszköz kiválasztása</string>
     <string name="help_delete_item">Vázlat elem törlése</string>
-    <!-- TODO string name="help_section_item">Sketch section item</string -->
+    <string name="help_section_item">Vázlet metszet elem</string>
     <string name="help_range">Vonalelem mozgatása</string>
     <!-- UNUSED string name="help_clear">Kiválasztás törlése</string -->
     <string name="help_eraser">Radír mód</string>
@@ -1920,7 +1920,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
 
     <!-- UNUSED string name="overwrite">felülírja</string -->
 
-    <string name="title_export_settings">Import/export beállítások</string>
+    <string name="title_export_settings">Beállítás import/export</string>
     <string name="title_export">Projekt exportálása a &#8230;</string>
     <string name="title_equates">Projekt kapcsolódó pontok</string>
     <string name="title_equate_new">Kapcsolódó pont hozzáadás &#8230;</string>

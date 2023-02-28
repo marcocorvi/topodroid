@@ -4,7 +4,7 @@
 Before surveying you need to connect and pair Android with your device and calibrate it.
 
 Tap the <i>Device</i> button in the <u>main window</u> to open the <i>Device Window</i>.
-The list of known devices is shown in the middle. 
+The list of known devices is shown in the bottom. 
 The supported devices are: DistoX, DistoX2, DistoXBLE, Sap5, and Bric4.<br>
 <img src="btn_devices.png" height="36" border="1"><br><p>
 
@@ -58,7 +58,6 @@ This can happen when te <u>device window</u> is opened from the <u>shot window</
 <!-- li><u>Pair</u> the active DistoX with the Android, if not already paired [N,*]</li -->
 <li><u>Disconnect</u> clears the active device [A]</li>
 <li>Dump and upload <a href="page_firmware.htm">firmwares</a> to the DistoX (v. 2 and BLE) [E,*]</li>
-<li>Display log of DistoX packets [T]</li>
 <li><u>Settings</u></li>
 <li><u>Help</u></li>
 </ul><br>
@@ -71,14 +70,14 @@ This can happen when te <u>device window</u> is opened from the <u>shot window</
 
 The following settings apply only to the DistoX (which uses classical bluetooth).
 <ul style="margin-top=0">
-<li><i>Connection mode</i>. "On-demand", "continuous", or "multi" [default "on-demand"]</li>
+<li><i>Data connection mode</i>. "On-demand", "continuous", or "multi" [default "on-demand"]</li>
 <!-- li><i>Auto reconnect</i>: automatically reconnect if the connection is lost in "continuous" data download-mode [default "no"]</li -->
-<li>DistoX <i>Socket</i> type. Normal or "insecure" [default is "insecure"]</li>
+<li>DistoX <i>Socket</i> type. Normal or "insecure" [default "insecure"]</li>
 <li>DistoX <i>Z6-workaround</i>: a download timeout error on Z6 phone, and possibly other devices. It is safe to leave this enabled [default "on"]</li>
 <!-- li><i>Auto pairing</i>: whether TopoDroid should try to pair with the DistoX selected from a scan [default "no"]</li -->
 </ul><br><p>
 
-<b>Connection mode</b><br>
+<b>Data connection mode</b><br>
 There are three connections modes for the DistoX.
 <ul>
 <li>in <i>on-demand</i> mode data are downloaded in burst, and when there is no more data to download the connection is closed.</li>
@@ -96,7 +95,7 @@ The connection mode applies only to the data download. Other DistoX functions us
 
 Sap5 and Bric4 are always connected in <i>continuous</i> mode.<br><p>
 
-<a href="page_geek.htm">Custom settings</a>: <i>Connection delay</i>, <i>Second DistoX</i>, <i>Data pause</i>, <i>Data-ready wait</i>, <i>Laser pause</i>, <i>Shot pause</i>.<br><p>
+<a href="page_geek.htm">Custom settings</a>: <i>Connection delay</i>, <i>Two-DistoX survey</i>, <i>Data pause</i>, <i>Data ready wait delay</i>, <i>Laser pause</i>, <i>Shot pause</i>.<br><p>
 
 <a href="page_device_select.htm">Devices</a><br>
 <a href="page_trouble.htm">DistoX troubleshooting</a><br>

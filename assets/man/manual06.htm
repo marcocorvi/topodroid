@@ -115,48 +115,52 @@ If the 3D modelling is enabled there is also a button to create a new 3D model, 
 
 <h4>MENUS</h4>
 <ul style="margin-top:0">
+<li><u>Close</u>: closes the current survey</li>
 <li><u>Survey info</u>: survey information window</li>
-<li><u>Recover</u>: deleted item (shot or sketch) <a href="page_undelete.htm">recovery</a></li>
-<li><u>Photo</u>: pictures taken for this survey</li>
-<li><u>Sensor</u>: sensor data taken for this survey</li>
-<li><u>3D</u>: <a href="manual15.htm">3D viewer</a></li>
+<li><u>Recover/paste</u>: deleted item (shot or sketch) <a href="page_undelete.htm">recovery</a> [N]/[E]</li>
+<li><u>Photo</u>: pictures taken for this survey [A]</li>
+<li><u>Audio</u>: audios recorded in this survey [T]</li>
+<li><u>Sensor</u>: sensor data taken for this survey [E]</li>
+<li><u>3D</u>: <a href="manual15.htm">3D viewer</a> [N]</li>
 <li><u>Device</u>: switches to the device window</li>
 <li><u>Settings</u></li>
-<li><u>Help</u></li>
+<li><u>Help</u> [N]</li>
 </ul><br><p>
 
 <h4>SURVEY SETTINGS</h4>
 <ul style="margin-top:0">
-  <li><i>Team</i>: the default surveying team. If the value is not empty, it is used to set the "Team" field when you create a new survey. Write your name and that of the cavers you usually survey with. [default unset]</li>
+  <li><i>Team</i>: the default surveying team. This value is used to set the "Team" field when you create a new survey. Write your name and that of the cavers you usually survey with. [default unset]</li>
   <li><i>Stations policy</i>: select the automatic <a href="page_station_policy.htm">station naming policy.</a> [default "splays+foresight"]</li>
   <li><i>Station names</i> specifies the type of the station names, either alphanumeric or numeric [default "alphanumeric"]</li>
-  <li><i>Start station</i>: the default first station name for new surveys. Can be overridden in the <i>New survey</i> dialog. [default unset]</li>
-  <li><i>Thumbnail size</i>: size of the photo thumbnails [default 200, min 80, max 400]</li>
-  <li><i>Data default-export</i>: default data export format [default none]</li>
+  <li><i>Initial station name</i>: the default first station name for new surveys. Can be overridden in the <i>New survey</i> dialog. [default 0]</li>
+  <li><i>Thumbnail size</i>: size of the photo thumbnails [default 200, min 80, max 400] [A]</li>
+  <li><i>Editable stations</i>: defines if station names are editable in the shot list [default no] [E]</li>
   <li><i>Sketch origin</i>: whether to suggest always the same origin or not [default no]</li>
   <li><i>Shared x-sections</i>: whether at-station x-section should be shared by default [default no]</li>
-  <li><i>DATA UNITS</i>
+  <li><i>UNITS</i>
     <ul style="margin-top:0; margin-bottom:0">
     <li><i>Length units</i>: either meters or feet [default meters]</li>
     <li><i>Angle units</i>: either degrees or grads [default degrees]</li>
-    <li><i>Sketch grid-cell unit</i>: either meters, yards, 2-ft, or 0.1 meter [default meters]</li>
+    <li><i>Sketch units</i>: sketch grid cell size either in meters, yards, 2-ft, or 0.1 meter [default meters]</li>
+    <li><i>Ruler units</i>: either the same as sketch units (grid-cell), meters or feet [default grid-cell]</li>
     </ul>
   </li>
   <li><i>SHOT DATA</i>
     <ul style="margin-top:0; margin-bottom:0">
     <li><i>Leg tolerance</i>: the angle tolerance (percent) between consecutive shots of a leg [default 0.05, min 0]. The length tolerance is the product of the angle tolerance and the length.</li>
-    <li><i>Max shot length</i>: longer shots are marked as "deleted" [default 50 m, min 20 m]</li>
-    <li><i>Min leg length</i>: shorter legs are highlighted with an orange background [default 0.5 m]</li>
-    <li><i>Min leg shots</i>: minimum number of close consecutive shots for a leg.[default 2, min 2, max 4]</li>
-    <li><i>Backshot DistoX</i>: DistoX in "backshot" mode [default no]</li>
-    <li><i>Splay vertical threshold</i> defines how the <a href="page_azimuth.htm">splay "extend"</a> is set [default 10, min 0, max 90]</li>
-    <li><i>Leg WENS threshold</i> (Therion "vthreshold"): the LRUD for manually entered shots are considered West-East-North-South when the shot inclination exceeds the vertical threshold [default 80, min 0, max 90]</li>
-    <li><i>Shot extend</i>: either fixed or relative to the <a href="page_azimuth.htm">extend reference</a> azimuth [default relative]</li>
-    <li><i>Loop closure</i> error compensation. It is advisable not to do the compensation, as this allows to see graphically the mis-closures, and spot possible survey errors [default "none"].</li>
-    <li>whether to show <i>prev/next</i> buttons in the shot edit dialog [default yes]</li>
-    <li><i>Backsight</i> fields in the shot manual input dialog [N] [default no]</li>
-    <li><i>Timer</i>: seconds of delay before measuring directions with the Android sensors [default 10, min 0]</li>
-    <li><i>Beep volume</i>: timer beep volume [N] [default 50, min 10, max 100]</li>
+    <li><i>Maximum shot length</i>: longer shots are marked as "deleted" [default 50 m, min 20 m]</li>
+    <li><i>Minimum leg length</i>: shorter legs are highlighted with an orange background [default 0 m]</li>
+    <li><i>Leg minimum shots</i>: minimum number of close consecutive shots for a leg [default 3, min 2, max 4] [E]</li>
+    <li><i>Shot vertical threshold</i>: defines how the <a href="page_azimuth.htm">splay "extend"</a> is set [default 10, min 0, max 90] [N]</li>
+    <li><i>Leg WENS threshold</i> (Therion "vthreshold"): the LRUD for manually entered shots are considered West-East-North-South when the shot inclination exceeds the vertical threshold [default 80, min 0, max 90] [N]</li>
+    <li><i>Fixed extend reference</i>: either fixed or relative to the <a href="page_azimuth.htm">extend reference</a> azimuth [default relative] [A]</li>
+    <li>whether to show <i>prev/next buttons</i> in the shot edit dialog [default yes] [A]</li>
+    <li><i>Backsight</i> fields in the shot manual input dialog [N] [default no] [A]</li>
+    <li><i>Leg-shot feedback</i>: feedback on leg-shot recognition: "none", "sound" or "haptic" [default "none"] [N]</li>
+    <!-- li><i>Backshot DistoX</i>: DistoX in "backshot" mode [default no] [N]</li -->
+    <!-- li><i>Loop closure</i> error compensation. It is advisable not to do the compensation, as this allows to see graphically the mis-closures, and spot possible survey errors [default "none"]  [N]</li -->
+    <!-- li><i>Timer</i>: seconds of delay before measuring directions with the Android sensors [default 10, min 0] [N]</li -->
+    <!-- li><i>Beep volume</i>: timer beep volume [N] [default 50, min 10, max 100] [N]</li -->
     </ul>
   </li>  
   <li><i>LOCATION <a href="page_fixed_list.htm">settings</a></i></li>  
@@ -164,7 +168,7 @@ If the 3D modelling is enabled there is also a button to create a new 3D model, 
 </ul><br><p>
 
 <div style="font-size:90%">
-<a href="page_geek.htm">Custom settings</a>: <i>Latest shots and their timeout</i>, <i>Fractional extend</i>, <i>Splay classes and coloring</i>, <i>Diving mode</i>, <i>Sensors</i>.
+<a href="page_geek.htm">Custom settings</a>: <i>Recent shots and their timeout</i>, <i>Fractional extend</i>, <i>Splay classes and coloring</i>, <i>Diving mode</i>, <i>Sensors</i>.
 </div><br><p>
 
 To exit the survey data window double tap on the <i>BACK</i> button of your device.<br>
@@ -183,10 +187,10 @@ Nevertheless TopoDroid implements a few "loop error compensation" policies.<br>
 The <i>normal</i> policy [E] distributes the loop closure errors on the network branches that make the loops.<br>
 In the <i>weighted</i> policy [E] the mis-closures of the loops are weighted according to the "branch relevance".<br>
 <!-- i don't recall exactly how this works -->
-The <i>selective</i> [T] compensation applies only the corrections of loops with mis-closure smaller than a certain percent
+<!-- The <i>selective</i> [T] compensation applies only the corrections of loops with mis-closure smaller than a certain percent
 (the "loop threshold" setting) of the loop length.
 The loops above threshold are displayed violet.
-<br>
+<br> -->
 Finally, the special loop compensation based on <i>triangles</i> is for <a href="page_trilateration.htm">trilateration</a> [T].
 <br><p>
 

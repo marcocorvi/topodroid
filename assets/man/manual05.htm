@@ -22,7 +22,7 @@ The data values background color are:
 <li>brown: saturated data</li>
 <li>gray: deleted data (only if deleted data are displayed)</li>
 <li>red: data with error larger than 1&deg;</li>
-<li>green: data differing from the group average value by more than the <i>group distance</i></li>
+<li>green: data differing from the group average value by more than the <i>group tolerance</i></li>
 </ul><br><p>
 
 <h4>ACTIONS</h4>
@@ -50,9 +50,9 @@ Deleted data are not taken into account in the group-number assignment and in th
 <h4>Bluetooth</h4>
 This button resets the TopoDroid bluetooth connection.<br>
 It also lets the user control the DistoX remotely [A]: turn on or off the laser, and take a calibration shot.
-The data is immediately downloaded if the the data download mode is set to "continuous".<br>
+The data is immediately downloaded if the the DistoX data connection mode is set to "continuous".<br>
 In this case it is also possible to take (and download) a group of four calibration shots with a small delay between them
-(controlled by the settings "laser-wait" and "shot-wait").<br><p>
+(controlled by the settings "Laser pause" and "Shot pause").<br><p>
 
 The bluetooth button is disabled while TopoDroid is taking a calibration shot.<br><p>
 
@@ -72,7 +72,7 @@ In this case a message is displayed.<br><p>
 
 <h4>MENUS</h4>
 <ul style="margin-top=0">
-<li><u>Display</u>: whether to display all data including the deleted data</li>
+<li><u>Show/hide deleted</u>: whether to display all data including the deleted data</li>
 <li><u>Validate</u>: <a href="page_validation.htm">validation</a> of this calibration with another one</li>
 <li><u>Settings</u>: same as for the <u>calibration window</u></li>
 <li><u>Help</u></li>

@@ -3,7 +3,7 @@
 
 <b>Only for DistoX, DistoX2, and DistoXBLE</b><br><p>
 
-Tapping the <i>Calibration</i> menu in the <u>device window</u> shows the lists of the 
+Tapping the <i>Calibration</i> button in the <u>device window</u> shows the lists of the 
 <a href="page_calib_dialog.htm">calibrations</a> of the active device. You can open a calibration or
 create a new one. In both cases you are led to the <u>calibration window</u>.<br><p>
 
@@ -25,7 +25,7 @@ and radio buttons for the calibration algorithm. By default this is set to "auto
 
 <h4>MENUS</h4>
 <ul style="margin-top=0">
-<li><a href="page_calib_import.htm">export</a> the calibration</li>
+<li><a href="page_calib_import.htm">Export</a> the calibration</li>
 <li><u>Delete</u> the calibration and its data from the database (non-recoverable action)</li>
 <li><u>Settings</u></li>
 <li><u>Help</u></li>
@@ -33,11 +33,11 @@ and radio buttons for the calibration algorithm. By default this is set to "auto
 
 <h4>CALIBRATION SETTINGS (DistoX only)</h4>
 <ul style="margin-top=0">
-<li><i>Group policy</i>: how to split the calibration data into <a href="page_groups.htm">groups</a> [default "all in groups of 4 data"]</li>
+<li><i>Group policy</i>: how to split the calibration data into <a href="page_groups.htm">groups</a> [default "Four at a time"]</li>
 <li><i>Group tolerance</i>: threshold to highlight calibration data with large angle distance from the group-mean [default 40 min 0]</li>
-<li><i>Error</i>: the computation of the coefficients ends if the variation of every coefficient during an iteration step is smaller than this value [default 10<sup>-6</sup>, min 0].</li>
-<li><i>Iterations</i>: the maximum number of iteration of the calibration algorithm [default 200, min 50].</li>
-<li><i>Remote data</i> immediate download.</li>
+<li><i>Algorithm error</i>: the computation of the coefficients ends if the variation of every coefficient during an iteration step is smaller than this value [default 10<sup>-6</sup>, min 0].</li>
+<li><i>Algorithm iterations</i>: the maximum number of iteration of the calibration algorithm [default 200, min 50].</li>
+<li><i>Download remote data</i> immediate download.</li>
 <li><i>Raw data</i>: by default TopoDroid displays the azimuth, inclination, and roll. Select if you want to see also the raw calibration data (the components of G and M), either decimal or hex. [default "no"]</li>
 <li><i>Algorithm</i>: can be 0 (auto), 1 (linear), 2 (non-linear). If a calibration algorithm is left "auto", and this setting is not "auto", then the algorithm of the settings is used to calculate the calibration. If they are both "auto" the algorithm is chosen automatically by TopoDroid depending on the DistoX model and firmware. [default "auto"]</li>
 </ul><br><p>
