@@ -303,16 +303,15 @@ public class SketchSection extends SketchPath
     for ( int k=0; k<nln; ++k ) {
       SketchLinePath line = new SketchLinePath( -1, mId, paint ); // line ID initialized to -1, is read from stream
       line.fromDataStream( cmd, dis, version );
-      if ( line.getId() > nMaxLineId ) nMaxLineId = line.getId();
-      cmd.addLine( mId, line );
+      if ( line.size() > 1 ) { 
+        if ( line.getId() > nMaxLineId ) nMaxLineId = line.getId();
+        cmd.addLine( mId, line );
+      } else {
+        TDLog.Error("Sketch line with " + line.size() + " points" );
+      }
     }
     TDLog.v("READ section " + mId + " max line id " + nMaxLineId + " lines " + nln );
     return mId;
-  }
-
-  private void dataCheck( String msg, boolean test )
-  {
-    if ( ! test ) TDLog.Error("ERROR failed " + msg );
   }
 
 }

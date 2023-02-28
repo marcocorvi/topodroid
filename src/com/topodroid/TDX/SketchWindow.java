@@ -2118,10 +2118,11 @@ public class SketchWindow extends ItemDrawer
           SketchPoint[] pts = mSketchSurface.getSelected();
           ++ mMaxSection;
           SketchSection section = new SketchSection( mMaxSection, pts[0], pts[1], true ); // FIXME vertical
+          mSketchSurface.addSection( section );
           mCurSection = mSketchSurface.openSection( section );
           TDLog.v("SKETCH open section " + mCurSection + " " + mMaxSection );
         } else {
-          mCurSection =  mSketchSurface.closeSection();
+          mCurSection = mSketchSurface.closeSection();
           TDLog.v("SKETCH close section - current " + mCurSection );
         }
       }
@@ -2265,7 +2266,11 @@ public class SketchWindow extends ItemDrawer
   {
     closeMenu();
     int p = 0;
-    if ( p++ == pos ) { // CLOSE
+    if ( p++ == pos ) { // CLOSE SECTION
+      if ( mCurSection > 0 ) {
+        mCurSection = mSketchSurface.closeSection();
+        return;
+      }
       super.onBackPressed();
     } else if ( p++ == pos ) { // EXPORT
       String filename = TDPath.getC3dFile( mSketchName );

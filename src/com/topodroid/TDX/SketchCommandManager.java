@@ -483,7 +483,7 @@ public class SketchCommandManager
    */
   void addLine( int id, SketchLinePath line )
   {
-    dataCheck( "line ID", ( mCurrentScrap.getId() == id ) );
+    SketchPath.dataCheck( "line ID", ( mCurrentScrap.getId() == id ) );
     mCurrentScrap.appendLine( line );
   }
 
@@ -593,6 +593,9 @@ public class SketchCommandManager
       for ( SketchPath splay : mSplaysStack ) splay.draw( canvas, mm, mC0, mH0, mS0, mZoom, mOffxc, mOffyc );
       drawSideDrag( canvas );
       mCurrentScrap.draw( canvas, mm, mC0, mH0, mS0, mZoom, mOffxc, mOffyc );
+      if ( mCurrentScrap == mView ) {
+        for ( SketchSection section : mSections ) section.draw( canvas, mm, mC0, mH0, mS0, mZoom, mOffxc, mOffyc );
+      }
     }
  
     synchronized( TDPath.mSelectionLock ) {
@@ -726,10 +729,10 @@ public class SketchCommandManager
   {
     TDLog.v("WRITE manager - nr sections " + mSections.size() );
     dos.write( 'M' );
-    SketchPath.toDataStream( dos, mView.mC );
-    SketchPath.toDataStream( dos, mView.mN );
-    SketchPath.toDataStream( dos, mView.mH );
-    SketchPath.toDataStream( dos, mView.mS );
+    // SketchPath.toDataStream( dos, mView.mC  );
+    // SketchPath.toDataStream( dos, mView.mNp );
+    // SketchPath.toDataStream( dos, mView.mH  );
+    // SketchPath.toDataStream( dos, mView.mSp );
     dos.writeInt( mSections.size() );
     mView.toDataStream( dos );
     for ( SketchSection s : mSections ) {
@@ -741,11 +744,11 @@ public class SketchCommandManager
    */
   int fromDataStream( DataInputStream dis, int version, boolean vertical ) throws IOException
   {
-    dataCheck( "MANAGER", (dis.read() == 'M') );
-    TDVector C = SketchPath.tdVectorFromDataStream( dis );  dataCheck( "mC", ( C.maxDiff( mView.mC ) < 0.001f ) ); 
-    TDVector N = SketchPath.tdVectorFromDataStream( dis );  dataCheck( "mN", ( N.maxDiff( mView.mN ) < 0.001f ) ); 
-    TDVector H = SketchPath.tdVectorFromDataStream( dis );  dataCheck( "mH", ( H.maxDiff( mView.mH ) < 0.001f ) ); 
-    TDVector S = SketchPath.tdVectorFromDataStream( dis );  dataCheck( "mS", ( S.maxDiff( mView.mS ) < 0.001f ) ); 
+    SketchPath.dataCheck( "MANAGER", (dis.read() == 'M') );
+    // TDVector C = SketchPath.tdVectorFromDataStream( dis );  SketchPath.dataCheck( "mC", ( C.maxDiff( mView.mC ) < 0.001f ) ); 
+    // TDVector N = SketchPath.tdVectorFromDataStream( dis );  SketchPath.dataCheck( "mN", ( N.maxDiff( mView.mN ) < 0.001f ) ); 
+    // TDVector H = SketchPath.tdVectorFromDataStream( dis );  SketchPath.dataCheck( "mH", ( H.maxDiff( mView.mH ) < 0.001f ) ); 
+    // TDVector S = SketchPath.tdVectorFromDataStream( dis );  SketchPath.dataCheck( "mS", ( S.maxDiff( mView.mS ) < 0.001f ) ); 
     int n_sections = dis.readInt();
     TDLog.v("READ manager - nr sections " + n_sections );
     closeSection();
@@ -758,11 +761,6 @@ public class SketchCommandManager
     }
     closeSection();
     return max_id;
-  }
-
-  private void dataCheck( String msg, boolean test )
-  {
-    if ( ! test ) TDLog.Error("ERROR failed " + msg );
   }
 
 }

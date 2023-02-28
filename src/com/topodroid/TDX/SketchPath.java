@@ -171,4 +171,10 @@ public class SketchPath
     canvas.drawPath( path, mPaint );
   }
 
+  static void dataCheck( String msg, boolean test )
+  {
+    if ( ! test ) TDLog.Error("ERROR failed " + msg );
+  }
+
+
 }

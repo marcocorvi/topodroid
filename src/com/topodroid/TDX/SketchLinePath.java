@@ -121,12 +121,6 @@ public class SketchLinePath extends SketchPath
     return true;
   }
 
-  private void dataCheck( String msg, boolean test )
-  {
-    if ( ! test ) TDLog.Error("ERROR failed " + msg );
-  }
-
-
   /** make projected path
    */
   @Override

@@ -1,7 +1,7 @@
 <html><body>
 <h3>[9] SKETCH WINDOW</h3>
 
-The <i>sketch</i> button of the <u>data window</u> opens the dialog with the list of sketches, besides the <i>New Sketch</i> button. Tap on this button to create a new survey sketch.<br><p>
+The <i>sketch</i> button of the <u>Survey Data window</u> opens the dialog with the list of sketches, besides the <i>New Sketch</i> button. Tap on this button to create a new survey sketch.<br><p>
 
 Each sketch is made of two sketch files: one for the plan view, the other for the profile view (either extended or projected). X-sections have only one file. A new sketch is opened in the plan view. Afterwards the sketch dialog shows two columns, one for the plan, the other for the profile view, and you can choose which one to open from.<br>
 Each sketch can contain multiple scraps.<br><p>
@@ -79,7 +79,7 @@ The station colors are
 </ul><br><p>
 
 <b>Interaction modes</b><br>
-The <u>sketch window</u> has four interaction modes:
+The <u>Drawing window</u> has four interaction modes:
 <ul style="margin-top=0">
 <li><b>move</b>: you can shift the canvas, and zoom in/out. If the "fixed references" box in the references dialog is set, shifts affect only the drawings [T]</li>
 <li><b>draw</b>: in this mode you add iconic symbols (points, including labels), and trace lines and areas (closed regions filled with a color or a pattern).</li>
@@ -184,7 +184,7 @@ All exports generate two files, one for plan the other for profile, except <i>cS
 <li><a href="page_stat2.htm">Statistics</a>. For x-sections this computes the section area.</li>
 <li><u>Reload</u> the sketch from a <a href="page_backup.htm">backup copy</a>.</li>
 <li><u>Zoom-fit</u>: dialog to fit the sketch into the screen, and to select the portrait or landscape presentation</li>
-<li><u>Rename/Delete/Split</u> the sketch. Renaming and deleting affects both plan and profile view at the same time. Deleted sketches can be recovered (<i>recover</i> menu in <u>data window</u>). Splitting affects only the current view.</li>
+<li><u>Rename/Delete/Split</u> the sketch. Renaming and deleting affects both plan and profile view at the same time. Deleted sketches can be recovered (<i>recover</i> menu in <u>Survey Data window</u>). Splitting affects only the current view.</li>
 <li><a href="page_plot_scraps.htm">Scraps</a> dialog [T]</li>
 <li><a href="page_tools.htm">drawing tools</a> palette</li>
 <li><u>Overview window</u>, showing all the survey sketches together. [Only for plan and extended profiles]</li>
@@ -257,12 +257,12 @@ All exports generate two files, one for plan the other for profile, except <i>cS
 </div><br><p>
 
 <h4>Sketch cache</h4>
-Once opened the sketches are kept in memory, in a cache. This speeds up switching between the <u>data window</u>
-and the <u>sketch window</u>, as the sketch do not need to be read from file.
+Once opened the sketches are kept in memory, in a cache. This speeds up switching between the <u>Survey Data window</u>
+and the <u>Drawing window</u>, as the sketch do not need to be read from file.
 The sketch cache is cleared when the survey is closed.<br><p>
 
 <h4>Sketch file format</h4>
-Each sketch is saved to file whenever it is modified, or when the <u>sketch window</u> changes to a different view.
+Each sketch is saved to file whenever it is modified, or when the <u>Drawing window</u> changes to a different view.
 For performance TopoDroid saves the sketches in a binary format.<br><p>
 
 <h4>Point selection [A]</h4>
@@ -315,7 +315,7 @@ The sketches are always saved and exported with the magnetic North and the verti
 
 
 <h4>File editor mode</h4>
-The <i>sketch window</i> is opened in file editing mode from the "sketch" button of the <i>Main window</i>.
+The <i>Drawing window</i> is opened in file editing mode from the "sketch" button of the <i>Main window</i>.
 TopoDroid sketch ".tdr" files and (simple) Therion '.th2" files can be loaded and edited.
 The changes are not saved and the sketch must be exported to save them.<br><p>
 
@@ -324,7 +324,7 @@ TopoDroid ".tdr" files are not related to a survey. The stations are loaded from
 The syntax of Therion ".th2" files is not fully supported. 
 In particular areas with multiline border are not supported, because TopoDroid has only single-line border areas.<br><p>
 
-When the <i>sketch window</i> is opened as editor, the buttons and the menus change.
+When the <i>Drawing window</i> is opened as editor, the buttons and the menus change.
 The menus are:<br>
 <ul>
 <li><i>Close</i> the window</li>
