@@ -1014,7 +1014,7 @@
     <string name="help_edit">Перейти в режим редактирования</string>
     <string name="help_refs">Вид окна абриса</string>
     <string name="help_rename">Изменить название съёмки</string>
-    <string name="help_plot_close"Закрыть абрис</string>
+    <string name="help_plot_close">Закрыть абрис</string>
     <string name="help_plot_delete">Удалить абрис</string>
     <string name="help_plot_rename">Переименовать/Удалить абрис</string>
     <string name="help_plot_scrap">Скрапы в абрисе</string>

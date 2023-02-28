@@ -19,7 +19,7 @@ Errors 0, Warnings 42, Total 42
 EN string that are not translated:
 bad_station string missing
 calib_gm_policy string missing
-Errors 2 + 39 + 5, Total 46
+Errors 2 + 42 + 5, Total 49
 
 EN string that are copied:
 pref_sap5_bit16_bug_title string copied sentence: SAP5 bit-16 bug
@@ -32,11 +32,11 @@ Formats check:
 bad_station (1) bad format 
 Errors: 1, Total 1
 
-EN strings 2030 cn strings 2011
+EN strings 2033 cn strings 2014
 Translated with no-default:  commented 5 - translated 0 
 Translated non-translatable: commented 42 - translated 0 
 Translated comment: 0 
-Non-Translated: commented 5 missing 2 todo 39 
+Non-Translated: commented 5 missing 2 todo 42 
 Copied: copyable 11 possibly copyable 1 non-copyable 3
 Bad formats 1
-TOTAL ERRORS: 47 / 3 [1]
+TOTAL ERRORS: 50 / 3 [1]

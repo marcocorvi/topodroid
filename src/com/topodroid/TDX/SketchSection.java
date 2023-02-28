@@ -38,9 +38,17 @@ public class SketchSection extends SketchPath
   SketchPoint mP1;
   SketchPoint mP2;
   TDVector    mC;   // midpoint
-  TDVector    mN;   // normal
+  TDVector    mN;   // projection normal
   TDVector    mH;   // X unit rightward
-  TDVector    mS;   // Y unit downward
+  TDVector    mS;   // projection Y unit downward
+  // 
+  float mAlpha = 0; // projection rotation angle [degrees]
+  float mMaxAlpha = 0;
+  float mMinAlpha = 0;
+  boolean mCanRotate = false;
+  TDVector    mNp;  // section-plane normal
+  TDVector    mSp;  // section-plane Y
+  
   ArrayList< SketchLinePath > mLines; // lines, in the plane of the section
 
   public SketchSection( int id, TDVector c, TDVector h, TDVector s, TDVector n )
@@ -56,6 +64,8 @@ public class SketchSection extends SketchPath
     mN = n;
     mLines = new ArrayList< SketchLinePath >();
     TDLog.v("SKETCH legviews C " + c.x + " " + c.y + " " + c.z );
+    mNp = mN;
+    mSp = mS;
   }
 
   /** cstr
@@ -93,6 +103,44 @@ public class SketchSection extends SketchPath
       mN = new TDVector( 0, 0, 1 );
     }
     mLines = new ArrayList< SketchLinePath >();
+    mNp = mN;
+    mSp = mS;
+  }
+
+  /** set the projection rotation-angle min-max
+   * @param theta   leg clino [degree]
+   */
+  void setZeroAlpha( float theta )
+  {
+    mMaxAlpha = 90 - theta;
+    mMinAlpha = -90 - theta;
+    mCanRotate = (mMaxAlpha - mMinAlpha ) > 90;
+  }
+
+  /** set the projection rotation-angle
+   * @param alpha rotation angle [degrees]
+   */
+  private void setAlpha( float alpha )
+  {
+    mAlpha = alpha;
+    if ( mAlpha > mMaxAlpha ) { mAlpha = mMaxAlpha; }
+    else if ( mAlpha < mMinAlpha ) { mAlpha = mMinAlpha; }
+
+    float c = TDMath.cosd( mAlpha );
+    float s = TDMath.sind( mAlpha );
+    // TDLog.v("Section set alpha " + mAlpha + " [" + + mMinAlpha + ", " + mMaxAlpha + "] c " + c + " s " + s );
+    mN = new TDVector( c*mNp.x - s*mSp.x, c*mNp.y - s*mSp.y, c*mNp.z - s*mSp.z );
+    mS = new TDVector( c*mSp.x + s*mNp.x, c*mSp.y + s*mNp.y, c*mSp.z + s*mNp.z );
+  }
+
+  /** change the projection angle - only leg-view
+   * @param delta angle change [degree]
+   */
+  boolean changeAlpha( int delta )
+  { 
+    if ( ! mCanRotate ) return false;
+    setAlpha( mAlpha + delta );
+    return true;
   }
 
   /** @return the section ID
@@ -110,7 +158,9 @@ public class SketchSection extends SketchPath
    */
   TDVector toTDVector( float xw, float yw )
   {
-    return new TDVector( mC.x + xw*mH.x + yw*mS.x, mC.y + xw*mH.y + yw*mS.y, mC.z + xw*mH.z + yw*mS.z );
+    TDVector w = new TDVector( mC.x + xw*mH.x + yw*mS.x, mC.y + xw*mH.y + yw*mS.y, mC.z + xw*mH.z + yw*mS.z );
+    float g = ( w.dot( mNp ) ) / TDMath.cosd( mAlpha );
+    return new TDVector( w.x - g * mN.x, w.y - g * mN.y, w.z - g * mN.z );
   }
 
   /** delete a line
@@ -201,6 +251,8 @@ public class SketchSection extends SketchPath
     if ( mId > 0 ) {
       toDataStream( dos, mP1 );
       toDataStream( dos, mP2 );
+    } else {
+      // dos.writeFloat( mAlpha );
     }
     toDataStream( dos, mC );
     toDataStream( dos, mN );
@@ -222,6 +274,7 @@ public class SketchSection extends SketchPath
   @Override
   public int fromDataStream( SketchCommandManager cmd, DataInputStream dis, int version ) throws IOException
   {
+    float alpha = 0;
     dataCheck( "SECTION", ( dis.read() == 'X' ) );
     mId = dis.readInt();
     nMaxLineId = 0;
@@ -234,6 +287,7 @@ public class SketchSection extends SketchPath
     } else {
       mP1 = null;
       mP2 = null;
+      // alpha = dis.readFloat();
     }
     mC = tdVectorFromDataStream( dis );
     mN = tdVectorFromDataStream( dis );
@@ -242,6 +296,8 @@ public class SketchSection extends SketchPath
     if ( mId > 0 ) {
       cmd.addSection( this );
       cmd.openSection( this );
+    } else {
+      // setAlpha( alpha );
     }
     int nln = dis.readInt();
     for ( int k=0; k<nln; ++k ) {

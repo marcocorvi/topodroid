@@ -332,7 +332,7 @@ public class SketchWindow extends ItemDrawer
   static final int MODE_ZOOM  = 4; // used only for touchMode
   // static final int MODE_SHIFT = 5; // change point symbol position
   static final int MODE_ERASE = 6;
-  // static final int MODE_ROTATE = 7; // selected point rotate
+  static final int MODE_ROTATE = 7; 
 
   // line join-continue
   // private static final int CONT_OFF   = -1; // continue off
@@ -556,7 +556,8 @@ public class SketchWindow extends ItemDrawer
     mSketchName = leg.from + "-" + leg.to;
     TDVector v1 = new TDVector();
     TDVector v2 = leg.toTDVector(); // (E,N,Up)
-    // TDLog.v("SKETCH V2: E " + v2.x + " N " + v2.y + " Up " + v2.z );
+    float theta = TDMath.atan2d( v2.z, TDMath.sqrt( v2.x*v2.x + v2.y*v2.y) );
+    // TDLog.v("SKETCH V2: E " + v2.x + " N " + v2.y + " Up " + v2.z + " theta " + theta );
     addFixedLeg( v1, v2 );
     for ( Cave3DShot sp : topoGL.mSketchSplaysFrom ) {
       TDVector v = sp.toTDVector(); // .plus( v1 );
@@ -582,7 +583,7 @@ public class SketchWindow extends ItemDrawer
     for ( int j=j1; j<=j2; ++j ) {
       addFixedGrid ( new TDVector( i1*H.x + j*L.x, i1*H.y + j*L.y, z ), new TDVector( i2*H.x + j*L.x, i2*H.y + j*L.y, z ), 1 );
     }
-    mSketchSurface.doneReference();
+    mSketchSurface.doneReference( theta );
 
     if ( load ) {
       String filename = TDPath.getC3dFile( mSketchName );
@@ -1752,7 +1753,7 @@ public class SketchWindow extends ItemDrawer
     }
 
     // TDLog.v( "on touch up. mode " + mMode + " " + mTouchMode );
-    if ( mTouchMode == MODE_ZOOM /* || mTouchMode == MODE_ROTATE */ ) {
+    if ( mTouchMode == MODE_ZOOM || mTouchMode == MODE_ROTATE ) {
       mTouchMode = MODE_MOVE;
     } else {
       float x_shift = xc - mSaveX; // compute shift
@@ -1832,10 +1833,12 @@ public class SketchWindow extends ItemDrawer
         mZoomBtnsCtrl.setVisible( true );
         // mZoomCtrl.show( );
       } else if ( TDSetting.mSideDrag && ( xc > TopoDroidApp.mBorderRight || xc < TopoDroidApp.mBorderLeft ) ) {
-        mTouchMode = MODE_ZOOM;
+        mMode = MODE_MOVE;
+        mTouchMode = MODE_ROTATE;
       }
     } else if ( TDSetting.mSideDrag && (yc < TopoDroidApp.mBorderTop) && ( xc > TopoDroidApp.mBorderRight || xc < TopoDroidApp.mBorderLeft ) ) {
-      mTouchMode = MODE_ZOOM;
+      mMode = MODE_MOVE;
+      mTouchMode = MODE_ROTATE;
     }
 
     if ( mMode == MODE_DRAW ) {
@@ -1902,7 +1905,7 @@ public class SketchWindow extends ItemDrawer
         } else {
           save = false;
         }
-      } else if (  mMode == MODE_MOVE ) {
+      } else if ( mMode == MODE_MOVE ) {
         moveCanvas( x_shift, y_shift );
       } else if ( mMode == MODE_ERASE ) {
         if ( mEraseCommand != null ) {
@@ -1917,6 +1920,10 @@ public class SketchWindow extends ItemDrawer
     // } else if ( mTouchMode == MODE_ROTATE ) {
     //   mSketchSurface.rotateHotItem( mRotateScale * ( yc - mStartY ) );
     //   modified();
+    } else if ( mTouchMode == MODE_ROTATE ) {
+      mSketchSurface.changeAlpha( (yc > mSaveY)? +1 : -1 );
+      mSaveX = xc;
+      mSaveY = yc;
     } else { // mTouchMode == MODE_ZOOM
       float newDist = spacing( event );
       float factor = ( newDist > 32.0f && oldDist > 32.0f )? newDist/oldDist : 0 ;

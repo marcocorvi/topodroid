@@ -17,10 +17,9 @@ EN string not-translatable that are translated:
 Errors 0, Warnings 40, Total 40
 
 EN string that are not translated:
-bad_station string missing
 title_fixed_gps_logger string missing
 pref_unit_grid_title string missing
-Errors 3 + 0 + 5, Total 8
+Errors 2 + 0 + 5, Total 7
 
 EN string that are copied:
 pref_cat_cave3d string copied sentence: 3D VIEWER
@@ -32,14 +31,13 @@ Errors 4 possible, 1 maybe, Warnings 12, Total 17
 
 Formats check:
 r_dialog () bad format 1
-bad_station (1) bad format 
-Errors: 2, Total 2
+Errors: 1, Total 1
 
-EN strings 2030 ru strings 2003
+EN strings 2033 ru strings 2007
 Translated with no-default:  commented 13 - translated 0 
 Translated non-translatable: commented 40 - translated 0 
 Translated comment: 0 
-Non-Translated: commented 5 missing 3 todo 0 
+Non-Translated: commented 5 missing 2 todo 0 
 Copied: copyable 12 possibly copyable 1 non-copyable 4
-Bad formats 2
-TOTAL ERRORS: 10 / 4 [1]
+Bad formats 1
+TOTAL ERRORS: 8 / 4 [1]

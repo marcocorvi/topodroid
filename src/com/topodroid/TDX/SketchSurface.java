@@ -143,6 +143,11 @@ public class SketchSurface extends SurfaceView
 
   float getZoom() { return ( commandManager == null )? 1 : commandManager.getZoom(); }
 
+  /** change the projection angle - only leg-view
+   * @param delta angle change [degree]
+   */
+  void changeAlpha( int delta ) { if ( commandManager != null ) commandManager.changeAlpha( delta ); }
+
   // -----------------------------------------------------------
 
   /** set the global display mode
@@ -280,9 +285,12 @@ public class SketchSurface extends SurfaceView
   // public int getGrid1Size() { return ( commandManager == null )? 0 : commandManager.getGrid1().size(); }
   // public int getGrid10Size() { return ( commandManager == null )? 0 : commandManager.getGrid10().size(); }
 
-  public void doneReference()
+  /** refrence completion
+   * @param theta   leg inclination [degrees]
+   */
+  public void doneReference( float theta )
   {
-    if ( commandManager != null ) commandManager.commitReferences();
+    if ( commandManager != null ) commandManager.commitReferences( theta );
   }
 
   // Paint getLinePaint() { return ( commandManager == null )? BrushManager.fixedOrangePaint : commandManager.getLinePaint(); }

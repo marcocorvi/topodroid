@@ -23,18 +23,19 @@ Errors 1 + 0 + 0, Total 1
 
 EN string that are copied:
 display_view string copied word: Display
+export_walls string copied word: Walls
 walls_title string copied word: WALLS
 cpref_convex_hull_summary string copied sentence: Convex hull walls
 cpref_delaunay_summary string copied sentence: Delaunay walls
 cpref_hull_title string copied word: Hull
 cpref_hull_summary string copied sentence: Hull walls
-Errors 3 possible, 3 maybe, Warnings 30, Total 36
+Errors 3 possible, 4 maybe, Warnings 30, Total 37
 
-EN strings 2030 pt strings 1989
+EN strings 2033 pt strings 1993
 Translated with no-default:  commented 10 - translated 0 
 Translated non-translatable: commented 6 - translated 1 
 Translated comment: 0 
 Non-Translated: commented 0 missing 1 todo 0 
-Copied: copyable 30 possibly copyable 3 non-copyable 3
+Copied: copyable 30 possibly copyable 4 non-copyable 3
 Bad formats 0
-TOTAL ERRORS: 2 / 3 [3]
+TOTAL ERRORS: 2 / 3 [4]

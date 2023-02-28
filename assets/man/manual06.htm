@@ -132,9 +132,10 @@ If the 3D modelling is enabled there is also a button to create a new 3D model, 
   <li><i>Team</i>: the default surveying team. This value is used to set the "Team" field when you create a new survey. Write your name and that of the cavers you usually survey with. [default unset]</li>
   <li><i>Stations policy</i>: select the automatic <a href="page_station_policy.htm">station naming policy.</a> [default "splays+foresight"]</li>
   <li><i>Station names</i> specifies the type of the station names, either alphanumeric or numeric [default "alphanumeric"]</li>
-  <li><i>Initial station name</i>: the default first station name for new surveys. Can be overridden in the <i>New survey</i> dialog. [default 0]</li>
+  <li><i>Initial station name</i>: default name of the first station for a new surveys. Can be overridden in the <i>New survey</i> dialog. [default 0]</li>
   <li><i>Thumbnail size</i>: size of the photo thumbnails [default 200, min 80, max 400] [A]</li>
   <li><i>Editable stations</i>: defines if station names are editable in the shot list [default no] [E]</li>
+  <li><i>Data default-export</i>: default data export format [default none]</li>
   <li><i>Sketch origin</i>: whether to suggest always the same origin or not [default no]</li>
   <li><i>Shared x-sections</i>: whether at-station x-section should be shared by default [default no]</li>
   <li><i>UNITS</i>
@@ -157,10 +158,10 @@ If the 3D modelling is enabled there is also a button to create a new 3D model, 
     <li>whether to show <i>prev/next buttons</i> in the shot edit dialog [default yes] [A]</li>
     <li><i>Backsight</i> fields in the shot manual input dialog [N] [default no] [A]</li>
     <li><i>Leg-shot feedback</i>: feedback on leg-shot recognition: "none", "sound" or "haptic" [default "none"] [N]</li>
-    <!-- li><i>Backshot DistoX</i>: DistoX in "backshot" mode [default no] [N]</li -->
-    <!-- li><i>Loop closure</i> error compensation. It is advisable not to do the compensation, as this allows to see graphically the mis-closures, and spot possible survey errors [default "none"]  [N]</li -->
-    <!-- li><i>Timer</i>: seconds of delay before measuring directions with the Android sensors [default 10, min 0] [N]</li -->
-    <!-- li><i>Beep volume</i>: timer beep volume [N] [default 50, min 10, max 100] [N]</li -->
+    <li><i>Backshot DistoX</i>: DistoX in "backshot" mode [default no] [N]</li>
+    <li><i>Loop closure</i> error compensation. It is advisable not to do the compensation, as this allows to see graphically the mis-closures, and spot possible survey errors [default "none"]  [N]</li>
+    <li><i>Timer</i>: seconds of delay before measuring directions with the Android sensors [default 10, min 0] [N]</li>
+    <li><i>Beep volume</i>: timer beep volume [N] [default 50, min 10, max 100] [N]</li>
     </ul>
   </li>  
   <li><i>LOCATION <a href="page_fixed_list.htm">settings</a></i></li>  
@@ -187,10 +188,10 @@ Nevertheless TopoDroid implements a few "loop error compensation" policies.<br>
 The <i>normal</i> policy [E] distributes the loop closure errors on the network branches that make the loops.<br>
 In the <i>weighted</i> policy [E] the mis-closures of the loops are weighted according to the "branch relevance".<br>
 <!-- i don't recall exactly how this works -->
-<!-- The <i>selective</i> [T] compensation applies only the corrections of loops with mis-closure smaller than a certain percent
+The <i>selective</i> [T] compensation applies only the corrections of loops with mis-closure smaller than a certain percent
 (the "loop threshold" setting) of the loop length.
 The loops above threshold are displayed violet.
-<br> -->
+<br>
 Finally, the special loop compensation based on <i>triangles</i> is for <a href="page_trilateration.htm">trilateration</a> [T].
 <br><p>
 

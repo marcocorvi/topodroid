@@ -113,6 +113,19 @@ public class SketchCommandManager
    */
   static Paint getSectionLinePaint( int id ) { return ( id == 0 )? BrushManager.fixedRedPaint : BrushManager.fixedYellowPaint; }
 
+  /** change the projection angle - only leg-view
+   * @param delta angle change [degree]
+   */
+  void changeAlpha( int delta )
+  {
+    if ( mCurrentScrap == mView ) {
+      if ( mCurrentScrap.changeAlpha( delta ) ) {
+        mS0 = mCurrentScrap.mS;
+        mN0 = mCurrentScrap.mN;
+      }
+    }
+  }
+
   /** start the preview path
    */
   void startCurrentPath() { mCurrentPath = new ArrayList< Point2D >(); }
@@ -323,8 +336,9 @@ public class SketchCommandManager
   }
 
   /** commit the sketch references and make the leg-view
+   * @param theta   leg inclination [degrees]
    */
-  void commitReferences()
+  void commitReferences( float theta )
   {
     // TDLog.v("SKETCH commitReferences");
     synchronized( TDPath.mGridsLock ) {
@@ -342,6 +356,8 @@ public class SketchCommandManager
     mTmpGridStack100 = null;
     // mTmpStations     = null;
     mTmpLeg          = null;
+
+    mView.setZeroAlpha( theta );
   }
 
   /** start a new reference and add the leg 
