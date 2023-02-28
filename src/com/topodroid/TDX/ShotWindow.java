@@ -2404,7 +2404,7 @@ public class ShotWindow extends Activity
 	String strike_regex = strike_fmt.replaceAll("%\\d\\$.0f", "\\-??\\\\d+"); 
 	// TDLog.v( "Strike regex: <<" + strike_regex + ">>");
         TDMatrix m = new TDMatrix( new TDVector(xx, xy, xz), new TDVector(xy, yy, yz), new TDVector(xz, yz, zz) );
-        TDMatrix minv = m.InverseT(); // m is self-transpose
+        TDMatrix minv = m.inverseTransposed(); // m is self-transpose
         TDVector n0 = new TDVector( -xn, -yn, -zn );
         TDVector n1 = minv.timesV( n0 ); // n1 = (a,b,c)
         if ( n1.z < 0 ) { n1.x = - n1.x; n1.y = - n1.y; n1.z = - n1.z; } // make N positive Z

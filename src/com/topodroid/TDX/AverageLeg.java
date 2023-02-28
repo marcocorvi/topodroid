@@ -73,7 +73,7 @@ public class AverageLeg
   //   mAverage.z = - mAverage.z;
   // }
 
-  public float length() { return mAverage.Length() / mCnt; }
+  public float length() { return mAverage.length() / mCnt; }
 
   public float bearing() { return TDMath.in360( TDMath.atan2d( mAverage.x, mAverage.y ) + mDecl ); }
 

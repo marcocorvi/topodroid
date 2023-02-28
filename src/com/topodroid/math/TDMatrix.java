@@ -160,12 +160,12 @@ public class TDMatrix
    */
   public TDMatrix timesM( TDMatrix b )
   {
-    return this.timesT( b.Transposed() );
+    return this.timesT( b.transposedMatrix() );
   }
 
   /** @return inverse of the transposed: (this^t)^-1
    */
-  public TDMatrix InverseT()
+  public TDMatrix inverseTransposed()
   {
     TDMatrix ad = new TDMatrix( y.cross(z), z.cross(x), x.cross(y) );
     float inv_det = 1.0f / ( x.dot( ad.x ) );
@@ -175,10 +175,10 @@ public class TDMatrix
 
   /** @return the inverse matrix
    */
-  public TDMatrix InverseM()
+  public TDMatrix inverseMatrix()
   {
-    TDMatrix at = this.Transposed();
-    return at.InverseT();
+    TDMatrix at = this.transposedMatrix();
+    return at.inverseTransposed();
   }
 
   /** @return the transposed matrix
@@ -187,7 +187,7 @@ public class TDMatrix
    *             X   Y   Z
    *             |   |   |
    */
-  public TDMatrix Transposed()
+  public TDMatrix transposedMatrix()
   {
     TDMatrix ret = new TDMatrix();
     ret.x.x = x.x;
@@ -205,11 +205,11 @@ public class TDMatrix
   /** @return the maximum difference of elements between this matrix and another one
    * @param b  the other matrix
    */
-  public float MaxDiff( TDMatrix b )
+  public float maxDiff( TDMatrix b )
   {
-    float dx = x.MaxDiff( b.x );
-    float dy = y.MaxDiff( b.y );
-    float dz = z.MaxDiff( b.z );
+    float dx = x.maxDiff( b.x );
+    float dy = y.maxDiff( b.y );
+    float dz = z.maxDiff( b.z );
     if ( dx < dy ) { dx = dy; }
     if ( dx < dz ) { dx = dz; }
     return dx;

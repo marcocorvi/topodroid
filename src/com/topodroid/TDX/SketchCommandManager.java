@@ -39,6 +39,8 @@ import java.util.ArrayList;
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
 import java.io.DataOutputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
 
 // import java.util.Locale;
 
@@ -101,9 +103,15 @@ public class SketchCommandManager
     // makeLegView();
   }
 
-  /** @return the paint for the wall lines: red in the view, yellow in the sections
+  // /** @return the paint for the wall lines: red in the view, yellow in the sections
+  //  */
+  // Paint getLinePaint() { return ( mCurrentScrap == mView )? BrushManager.fixedRedPaint : BrushManager.fixedYellowPaint; }
+
+  /** get the line-paint
+   * @param id   section id
+   * @return the line paint
    */
-  Paint getLinePaint() { return ( mCurrentScrap == mView )? BrushManager.fixedRedPaint : BrushManager.fixedYellowPaint; }
+  static Paint getSectionLinePaint( int id ) { return ( id == 0 )? BrushManager.fixedRedPaint : BrushManager.fixedYellowPaint; }
 
   /** start the preview path
    */
@@ -136,7 +144,7 @@ public class SketchCommandManager
     // TDLog.v("S " + s.x + " " + s.y + " " + s.z );
     // TDLog.v("H " + h.x + " " + h.y + " " + h.z );
     TDVector n = h.cross( s );
-    mView = new SketchSection( mLeg.midpoint(), h, s, n );
+    mView = new SketchSection( 0, mLeg.midpoint(), h, s, n ); // leg-section has ID = 0
     closeSection(); // this sets mCurrentScrap to the leg-view
   }
 
@@ -144,7 +152,7 @@ public class SketchCommandManager
    * @param p1    first section base-point
    * @param p2    second section base-point
    */
-  SketchSection getSection( SketchPoint p1, SketchPoint p2 )
+  SketchSection getSection( int id, SketchPoint p1, SketchPoint p2 )
   {
     for ( SketchSection scrap : mSections ) {
       if ( scrap.hasBase( p1, p2 ) ) {
@@ -152,8 +160,8 @@ public class SketchCommandManager
         return scrap;
       }
     }
-    TDLog.v("TODO get new scrap");
-    return new SketchSection( p1, p2, mVertical );
+    TDLog.v("TODO get null scrap");
+    return new SketchSection( id, p1, p2, mVertical );
   }
 
   // ----------------------------------------------------------------
@@ -162,6 +170,13 @@ public class SketchCommandManager
    */
   float getScale() { return mScale; }
 
+  /** @return the ID of the next line in the current section
+   */
+  int getSectionNextLineId() { return mCurrentScrap.getNextLineId(); }
+
+  /** @return the ID of the current section
+   */
+  int getSectionId() { return mCurrentScrap.getId(); }
 
   // ----------------------------------------------------------------
   public List< SketchLinePath > getWalls()    { return mView.mLines; } 
@@ -422,15 +437,18 @@ public class SketchCommandManager
   void addEraseCommand( EraseCommand cmd ) { mCurrentScrap.addEraseCommand( cmd ); }
 
   /** erase at a position, in the current scrap
-   * @param x    X scene coords
-   * @param y    Y scene coords
+   * @param xc   X canvas coords
+   * @param yc   Y canvas coords
    * @param eraseCmd  erase command
-   * @param erase_size  eraser size
+   * @param size  eraser size
    *
    */
-  void eraseAt( float x, float y, EraseCommand eraseCmd, float erase_size ) 
+  void eraseAt( float xc, float yc, EraseCommand eraseCmd, float size ) 
   {
-    mCurrentScrap.eraseAt( x, y, mZoom, eraseCmd, erase_size ); 
+    TDVector c = toWorld( xc, yc );
+    TDLog.v("SKETCH center " + c.x + " " + c.y + " " + c.z );
+    float radius = /* TDSetting.mCloseCutoff + */ size/mZoom; 
+    mCurrentScrap.eraseAt( c, eraseCmd, radius ); 
   }
 
   void deleteLine( SketchLinePath line ) 
@@ -444,28 +462,40 @@ public class SketchCommandManager
 
 
   /** add a drawing item (and set the current scrap)
+   * @param id      section id
    * @param path    item
    */
-  void addLine( SketchLinePath line ) { mCurrentScrap.appendLine( line ); }
+  void addLine( int id, SketchLinePath line )
+  {
+    dataCheck( "line ID", ( mCurrentScrap.getId() == id ) );
+    mCurrentScrap.appendLine( line );
+  }
 
   /** add a new section
    * @param section   new section
+   * @note the section is not opened
    */
   void addSection( SketchSection section ) { mSections.add( section ); }
 
   /** Open a section
    * @param section   section to open
+   * @return the ID of the open section
    */
-  void openSection( SketchSection section ) 
+  int openSection( SketchSection section ) 
   { 
     setViewPoint( section.mC, section.mH, section.mS, section.mN );
     mCurrentScrap = section; // musr come last
+    return mCurrentScrap.getId();
   }
 
-  void closeSection()
+  /** close the open section and reset to the leg-section
+   * @return the ID of the current section (the leg-section)
+   */
+  int closeSection()
   {
     setViewPoint( mView.mC, mView.mH, mView.mS, mView.mN );
     mCurrentScrap = mView;
+    return mCurrentScrap.getId();
   }
 
   /** set the viewpoint
@@ -576,9 +606,34 @@ public class SketchCommandManager
    */
   int hasSelected() { return ( mSelected[1] != null )? 2 : ( mSelected[0] != null )? 1 : 0; }
 
+  SketchPoint[] getSelected() { return mSelected; }
+
   boolean hasMoreRedo() { return mCurrentScrap.hasMoreRedo(); }
 
   boolean hasMoreUndo() { return mCurrentScrap.hasMoreUndo(); }
+
+  /**  convert to world coords
+   * @param xc   canvas X
+   * @return world X
+   */
+  private float toWorldX( float xc ) { return (xc - mOffxc)/mZoom; };
+
+  /**  convert to world coords
+   * @param yc   canvas Y
+   * @return world Y
+   */
+  private float toWorldY( float yc ) { return (yc - mOffyc)/mZoom; };
+
+  /**  convert to world coords
+   * @param xc   canvas X
+   * @param yc   canvas Y
+   * @return world 3D point
+   */
+  private TDVector toWorld( float xc, float yc )
+  {
+    return mCurrentScrap.toTDVector( toWorldX(xc), toWorldY(yc) );
+  }
+  
 
   // UNUSED
   // boolean setRangeAt( float x, float y, float zoom, float size ) { return mCurrentScrap.setRangeAt( x, y, zoom, size ); }
@@ -594,12 +649,9 @@ public class SketchCommandManager
       TDLog.Error("SKETCH section not selectable");
       return 0;
     }
-    float xw = (xc - mOffxc)/mZoom; // convert to world coords
-    float yw = (yc - mOffyc)/mZoom;
-    TDLog.v("SKETCH get item at " + xw + " " + yw );
-    float radius = TDSetting.mCloseCutoff + size/mZoom; 
-    TDVector c = mCurrentScrap.toTDVector( xw, yw );
+    TDVector c = toWorld( xc, yc );
     TDLog.v("SKETCH center " + c.x + " " + c.y + " " + c.z );
+    float radius = TDSetting.mCloseCutoff + size/mZoom; 
     SketchLine ray = new SketchLine( c, mCurrentScrap.mN );
     float min_dist = radius * radius;;
     SketchPoint min_pt = null;
@@ -633,11 +685,6 @@ public class SketchCommandManager
   //   RectF bbox = new RectF( 0, 0, 0, 0 );
   // }
    
-  void exportDataStream( int type, DataOutputStream dos )
-  {
-    TDLog.v("TODO exportDataStream() ");
-  }
-
   // -----------------------------------------------------------------
   // previewPaint is not thread safe, but it is ok if two threads make two preview paints
   // eventually only one remains
@@ -657,6 +704,49 @@ public class SketchCommandManager
     paint.setStrokeWidth( BrushManager.WIDTH_PREVIEW );
     previewPaint = paint;
     return paint;
+  }
+
+  void toDataStream( DataOutputStream dos ) throws IOException
+  {
+    TDLog.v("WRITE manager - nr sections " + mSections.size() );
+    dos.write( 'M' );
+    SketchPath.toDataStream( dos, mView.mC );
+    SketchPath.toDataStream( dos, mView.mN );
+    SketchPath.toDataStream( dos, mView.mH );
+    SketchPath.toDataStream( dos, mView.mS );
+    dos.writeInt( mSections.size() );
+    mView.toDataStream( dos );
+    for ( SketchSection s : mSections ) {
+      s.toDataStream( dos );
+    }
+  }
+
+  /** @return max section id
+   */
+  int fromDataStream( DataInputStream dis, int version, boolean vertical ) throws IOException
+  {
+    dataCheck( "MANAGER", (dis.read() == 'M') );
+    TDVector C = SketchPath.tdVectorFromDataStream( dis );  dataCheck( "mC", ( C.maxDiff( mView.mC ) < 0.001f ) ); 
+    TDVector N = SketchPath.tdVectorFromDataStream( dis );  dataCheck( "mN", ( N.maxDiff( mView.mN ) < 0.001f ) ); 
+    TDVector H = SketchPath.tdVectorFromDataStream( dis );  dataCheck( "mH", ( H.maxDiff( mView.mH ) < 0.001f ) ); 
+    TDVector S = SketchPath.tdVectorFromDataStream( dis );  dataCheck( "mS", ( S.maxDiff( mView.mS ) < 0.001f ) ); 
+    int n_sections = dis.readInt();
+    TDLog.v("READ manager - nr sections " + n_sections );
+    closeSection();
+    mView.fromDataStream( this, dis, version );
+    int max_id = 0;
+    for ( int k=0; k < n_sections; ++k ) {
+      SketchSection section = new SketchSection( -1, null, null, vertical );
+      int id = section.fromDataStream( this, dis, version );
+      if ( id > max_id ) max_id = id;
+    }
+    closeSection();
+    return max_id;
+  }
+
+  private void dataCheck( String msg, boolean test )
+  {
+    if ( ! test ) TDLog.Error("ERROR failed " + msg );
   }
 
 }

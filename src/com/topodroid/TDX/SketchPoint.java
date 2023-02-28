@@ -36,6 +36,12 @@ public class SketchPoint extends TDVector // world coords
     mLine = line;
   }
 
+  /** cstr
+   * @param v     3D point
+   * @note line is unspecified (null)
+   */
+  public SketchPoint( TDVector v ) { this(v, null); }
+
   // @param r  dot radius
   void drawPoint( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y, float zoom, float off_x, float off_y, float r )
   {
@@ -48,6 +54,12 @@ public class SketchPoint extends TDVector // world coords
     // path.offset( off_x, off_y );
     canvas.drawPath( path, BrushManager.errorPaint );
   }
+
+  /** @return true if this point is eps-close to a specified vector
+   * @param v    given vector
+   * @param eps  epsilon
+   */
+  boolean isClose( TDVector v, double eps ) { return this.maxDiff( v ) < eps; }
 
 }
 

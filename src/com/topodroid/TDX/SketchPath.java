@@ -21,6 +21,7 @@ import com.topodroid.math.TDVector;
 
 import java.io.DataOutputStream;
 import java.io.DataInputStream;
+import java.io.IOException;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -69,9 +70,34 @@ public class SketchPath
   /** write the path to a data stream - it does nothing by default
    * @param dos   output stream
    */
-  public void toDataStream( DataOutputStream dos ) { TDLog.Error( "ERROR Sketch Path toDataStream"); }
+  public void toDataStream( DataOutputStream dos ) throws IOException { TDLog.Error( "ERROR Sketch Path toDataStream"); }
 
-  public void fromDataStream( DataInputStream dos ) { TDLog.Error( "ERROR Sketch Path fromDataStream"); }
+  /** read from a stream
+   * @param cmd  command manager (unused)
+   * @param dis  input stream
+   * @param version file version
+   * @return 0 by default
+   */
+  public int fromDataStream( SketchCommandManager cmd, DataInputStream dis, int version ) throws IOException
+  {
+    TDLog.Error( "ERROR Sketch Path fromDataStream");
+    return 0;
+  }
+
+  protected static void toDataStream( DataOutputStream dos, TDVector v ) throws IOException
+  {
+    dos.writeFloat( v.x );
+    dos.writeFloat( v.y );
+    dos.writeFloat( v.z );
+  }
+
+  protected static TDVector tdVectorFromDataStream( DataInputStream dis ) throws IOException
+  {
+    float x = dis.readFloat();
+    float y = dis.readFloat();
+    float z = dis.readFloat();
+    return new TDVector( x, y, z );
+  }
 
   /** @return the type of the command, namely 0
    */

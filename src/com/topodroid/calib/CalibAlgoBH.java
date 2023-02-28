@@ -127,7 +127,7 @@ public class CalibAlgoBH extends CalibAlgo
     float eps  = TDSetting.mCalibEps;
     // TDLog.v( "Calib Algo BH eps " + eps + " iter " + max_it );
 
-    // int num = g.Length();
+    // int num = g.length();
     TDVector[] gr = new TDVector[nn];
     TDVector[] mr = new TDVector[nn];
     TDVector[] gx = new TDVector[nn];
@@ -153,7 +153,7 @@ public class CalibAlgoBH extends CalibAlgo
     for (int i=0; i<nn; ++i ) {
       if ( group[i] > 0 ) {
         invNum += 1.0f;
-        sa += ( g[i].cross( m[i] )).Length(); // cross product
+        sa += ( g[i].cross( m[i] )).length(); // cross product
         ca += g[i].dot( m[i] );               // dot product
         sumG.plusEqual( g[i] );
         sumM.plusEqual( m[i] );
@@ -175,17 +175,17 @@ public class CalibAlgoBH extends CalibAlgo
     invNum = 1.0f / invNum;
 
     // FIXME here and below was InverseT because Beat's code Calibration.cs used 
-    // the inverse of the transposed (ok only for symmetric matrices).
+    // the inverse of the transposed matrix (ok only for symmetric matrices).
     // Beat's NLCalibration.cs uses TDMatrix.Inverse( TDMatrix m ) which is
-    //    m = Transposed(m);
+    //    m = transposedMatrix(m);
     //    TDMatrix ad = new TDMatrix( m.y % m.z, m.z % m.x, m.x % m.y ); // Vector.operator% is the cross-product
     //    return ad * ( 1 / m.x * ad.x ); // adjoint * 1/determinant
-    // which is InverseM 
+    // which is inverseMatrix
 
     TDVector avG = sumG.times( invNum );  // average G
     TDVector avM = sumM.times( invNum );  // average M
-    TDMatrix invG = (sumG2.minus( new TDMatrix(sumG, avG) ) ).InverseM();  // inverse of the transposed
-    TDMatrix invM = (sumM2.minus( new TDMatrix(sumM, avM) ) ).InverseM();
+    TDMatrix invG = (sumG2.minus( new TDMatrix(sumG, avG) ) ).inverseMatrix();  // inverse of the transposed matrix
+    TDMatrix invM = (sumM2.minus( new TDMatrix(sumM, avM) ) ).inverseMatrix();
 
     // TDLog.Log( TDLog.LOG_CALIB, "Number", nn );
     // TDLog.Log( TDLog.LOG_CALIB, "invG", invG, avG );
@@ -238,7 +238,7 @@ public class CalibAlgoBH extends CalibAlgo
           }
           OptVectors( grp, mrp, s, c ); // output ==> gxp, mxp
 
-          sa += (mrp.cross(gxp)).Length();
+          sa += (mrp.cross(gxp)).length();
           ca += mrp.dot(gxp);
           for (int j = first; j < i; ++j ) {
             if ( group[j] > 0 ) {
@@ -287,8 +287,8 @@ public class CalibAlgoBH extends CalibAlgo
       // LogMatrixVector( "G", aG, bG );
       // LogMatrixVector( "M", aM, bM );
 
-      float gmax = aG.MaxDiff(aG0);
-      float mmax = aM.MaxDiff(aM0);
+      float gmax = aG.maxDiff(aG0);
+      float mmax = aM.maxDiff(aM0);
       if ( mNonLinear ) { // get new non-linearity coefficients
         TDMatrix psum = new TDMatrix();
         TDVector qsum = new TDVector();
@@ -296,14 +296,14 @@ public class CalibAlgoBH extends CalibAlgo
           if ( group[ii] > 0 ) {
             TDMatrix p = aG.timesM( gs[ii] );
             TDVector q = ( gx[ii].minus( aG.timesV( g[ii] ) ) ).minus( bG );
-            TDMatrix pt = p.Transposed();
+            TDMatrix pt = p.transposedMatrix();
 
             // psum = (P^t * P) N.B. psum^t = psum
             psum.plusEqual( pt.timesT( pt ) ); // psum.plusEqual( pt.timesM( p ) ); 
             qsum.plusEqual( pt.timesV( q ) );
           }
         }
-        nL = ( psum.InverseM()).timesV( qsum );
+        nL = ( psum.inverseMatrix()).timesV( qsum );
         saturate( nL );
 
         sumG  = new TDVector(); // recalculate linearized g values
@@ -316,10 +316,10 @@ public class CalibAlgoBH extends CalibAlgo
           }
         }
         avG  = sumG.times( invNum ); // average g
-        invG = (sumG2.minus( new TDMatrix(sumG, avG)) ).InverseM(); // inverse of the transposed
+        invG = (sumG2.minus( new TDMatrix(sumG, avG)) ).inverseMatrix(); // inverse of the transposed matrix
       }
       ++ it;
-    } while ( it < max_it && ( aG.MaxDiff(aG0) > eps || aM.MaxDiff(aM0) > eps ) );
+    } while ( it < max_it && ( aG.maxDiff(aG0) > eps || aM.maxDiff(aM0) > eps ) );
 
     // LogMatrixVector( "final G", aG, bG );
     // LogMatrixVector( "final M", aM, bM );
@@ -333,7 +333,7 @@ public class CalibAlgoBH extends CalibAlgo
       if ( group[i] > 0 ) {
         TDVector dg = gx[i].minus( gr[i] );
         TDVector dm = mx[i].minus( mr[i] );
-        mDeltaBH += dg.LengthSquared() + dm.LengthSquared();
+        mDeltaBH += dg.lengthSquared() + dm.lengthSquared();
         ++ cnt_bh;
       }
     }
@@ -388,7 +388,7 @@ public class CalibAlgoBH extends CalibAlgo
           } else {
             computeBearingAndClinoRad( gr[j], mr[j] );
             TDVector v = new TDVector( b0, c0 );
-            err[j] = v0.minus(v).Length(); // approx angle with 2*tan(alpha/2)
+            err[j] = v0.minus(v).length(); // approx angle with 2*tan(alpha/2)
             // TDLog.v( "Err" + err[j] + " V " + v.x + " " + v.y + " " + v.z );
             if ( err[j] > mMaxError ) mMaxError = err[j];
             delta_gr  += err[j];
@@ -489,7 +489,7 @@ public class CalibAlgoBH extends CalibAlgo
       // TDVector v1 = new TDVector( (float)Math.cos(c0) * (float)Math.cos(b0),
       //                         (float)Math.cos(c0) * (float)Math.sin(b0),
       //                         (float)Math.sin(c0) );
-      double e = v1.minus(v0).Length();
+      double e = v1.minus(v0).length();
       if ( errors != null ) errors[i] = (float)e;
       // TDLog.v( e + " " + g[i].x + " " + g[i].y + " " + g[i].z );
       mSumCount += 1;

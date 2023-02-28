@@ -3313,7 +3313,7 @@ public class DrawingWindow extends ItemDrawer
           TDVector vf = new TDVector( ytt - (float)st_f.s, (float)st_f.e - xtt, ztt - (float)st_f.v ); // N,E,Up
           TDVector vt = new TDVector( ytt - (float)sp.s,   (float)sp.e - xtt,   ztt - (float)sp.v );
           TDVector vft = new TDVector( (float)st_f.s - (float)sp.s, (float)sp.e - (float)st_f.e, (float)st_f.v - (float)sp.v );
-          float cosine = vft.dot(V0)/vft.Length();
+          float cosine = vft.dot(V0)/vft.length();
           xfrom =   vf.dot(V1); 
           yfrom = - vf.dot(V2);
           xto   =   vt.dot(V1); 

@@ -382,7 +382,7 @@ public class GMActivity extends Activity
       TDVector m = new TDVector( b.mx, b.my, b.mz );
       TDVector v0 = calib0.computeDirection(g,m);
       TDVector v1 = calib1.computeDirection(g,m);
-      double err = v0.minus( v1 ).Length();
+      double err = v0.minus( v1 ).length();
       errors[ke++] = (float) err;
       err1 += err;
       err2 += err * err;

@@ -455,6 +455,18 @@ public class TglParser
   //   return v;
   // }
 
+  /** @return the leg (from,to) or null
+   * @param from  from station
+   * @param to    to station
+   */
+  Cave3DShot getLeg( String from, String to ) 
+  {
+    for ( Cave3DShot leg : shots ) {
+      if ( leg.from.equals( from ) && leg.to.equals( to ) ) return leg;
+    }
+    return null;
+  }
+
   /** get the legs with FROM at "station"
    * @param station    FROM station
    */

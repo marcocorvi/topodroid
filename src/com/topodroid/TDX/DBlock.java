@@ -706,7 +706,7 @@ public class DBlock
     cb = TDMath.cosd( b.mBearing ); 
     sb = TDMath.sind( b.mBearing ); 
     TDVector v2 = new TDVector( cc * sb, cc * cb, sc );
-    return (v1.minus(v2)).Length(); // approximation: 2 * asin( dv/2 );
+    return (v1.minus(v2)).length(); // approximation: 2 * asin( dv/2 );
   }
 
   /** @return true if the relative distance between this block and the another block is smaller that CloseDistance setting (normal mode)
@@ -728,7 +728,7 @@ public class DBlock
     cb = TDMath.cosd( b.mBearing ); 
     sb = TDMath.sind( b.mBearing ); 
     TDVector v2 = new TDVector( blen * cc * sb, blen * cc * cb, blen * sc );
-    float d = (v1.minus(v2)).Length();
+    float d = (v1.minus(v2)).length();
     return ( d/alen + d/blen < TDSetting.mCloseDistance );
   }
 
@@ -747,7 +747,7 @@ public class DBlock
     cb = TDMath.cosd( b.mBearing ); 
     sb = TDMath.sind( b.mBearing ); 
     TDVector v2 = new TDVector( blen * sb, blen * cb, b.mDepth );
-    float d = (v1.minus(v2)).Length();
+    float d = (v1.minus(v2)).length();
     return ( d/alen + d/blen < TDSetting.mCloseDistance );
   }
 

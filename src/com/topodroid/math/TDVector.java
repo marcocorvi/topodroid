@@ -97,21 +97,21 @@ public class TDVector
 
   /** @return the (euclidean) length of this vector
    */
-  public float Length()
+  public float length()
   {
     return (float)Math.sqrt( x*x + y*y + z*z );
   }
 
   /** @return the squared length of this vector
    */
-  public float LengthSquared()
+  public float lengthSquared()
   {
     return ( x*x + y*y + z*z );
   }
 
   /** @return the (euclidean) length of this vector
    */
-  public float Abs( ) { return Length(); }
+  public float Abs( ) { return length(); }
 
   /** @return the vector right-hand turned around the X axis 
    * @param s   sine of the turn angle
@@ -135,7 +135,7 @@ public class TDVector
    */
   public void normalize( )
   {
-    float len = Length();
+    float len = length();
     if ( len > 0.0f ) {
       float n = 1.0f / len;
       x *= n;
@@ -156,7 +156,7 @@ public class TDVector
   /** @return the maximum absolute difference of coordinates with another vector
    * @param b   the other vector
    */
-  public float MaxDiff( TDVector b )
+  public float maxDiff( TDVector b )
   {
     float dx = TDMath.abs( x - b.x );
     float dy = TDMath.abs( y - b.y );

@@ -2373,11 +2373,11 @@ public class DrawingIO
         yoff -= view.s-fixed.s;
         zoff -= view.v-fixed.v;
         viewed = new TDVector( (float)(start.e - view.e), -(float)(start.s - view.s), -(float)(start.v - view.v) );
-        float d3 = viewed.LengthSquared();
+        float d3 = viewed.lengthSquared();
         float dd = V0.dot( viewed );
         ratio = TDMath.sqrt( (d3 - dd*dd) ); // world coordinates
-        // TDLog.v( "view  at " + view.name + " " + view.e + " " + view.s + " " + view.v + " length " + viewed.Length() );
-        // TDLog.v( "viewed  " + viewed.x + " " + viewed.y + " " + viewed.z + " length " + viewed.Length() );
+        // TDLog.v( "view  at " + view.name + " " + view.e + " " + view.s + " " + view.v + " length " + viewed.length() );
+        // TDLog.v( "viewed  " + viewed.x + " " + viewed.y + " " + viewed.z + " length " + viewed.length() );
       } else {
         xoff += start.e-fixed.e;
         yoff -= start.s-fixed.s;

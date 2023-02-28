@@ -21,6 +21,7 @@ import com.topodroid.prefs.TDSetting;
 // import java.io.PrintWriter;
 import java.io.DataOutputStream;
 import java.io.DataInputStream;
+import java.io.IOException;
 
 import java.util.ArrayList;
 
@@ -32,6 +33,8 @@ import android.graphics.Matrix;
 
 public class SketchSection extends SketchPath
 {
+  private int mId;  // section number ID
+  private int nMaxLineId = 0;
   SketchPoint mP1;
   SketchPoint mP2;
   TDVector    mC;   // midpoint
@@ -40,9 +43,11 @@ public class SketchSection extends SketchPath
   TDVector    mS;   // Y unit downward
   ArrayList< SketchLinePath > mLines; // lines, in the plane of the section
 
-  public SketchSection( TDVector c, TDVector h, TDVector s, TDVector n )
+  public SketchSection( int id, TDVector c, TDVector h, TDVector s, TDVector n )
   {
     super( SketchPath.SKETCH_PATH_SECTION, null ); // null Paint
+    mId = id;
+    nMaxLineId = 0;
     mP1 = null;
     mP2 = null;
     mC = c;
@@ -58,28 +63,46 @@ public class SketchSection extends SketchPath
    * @param p2   second base point
    * @param vertical 
    */
-  public SketchSection( SketchPoint p1, SketchPoint p2, boolean vertical )
+  public SketchSection( int id, SketchPoint p1, SketchPoint p2, boolean vertical )
   {
     super( SketchPath.SKETCH_PATH_SECTION, null ); // null Paint
+    mId = id;
+    nMaxLineId = 0;
     mP1 = p1;
     mP2 = p2;
-    mC  = new TDVector( (p1.x+p2.x)/2, (p1.y+p2.y)/2, (p1.z+p2.z)/2 );
-    float dx = p2.x - p1.x; // East
-    float dy = p2.y - p1.y; // North
-    float dz = p2.z - p1.z; // Upward
-    TDLog.v("SKETCH section (vert " + vertical + ") " + dx + " " + dy + " " + dz );
-    float dh = TDMath.sqrt( dx*dx + dy*dy );
-    if ( vertical ) {
-      mS = new TDVector(      0,     0, -1 );
-      mH = new TDVector(  dx/dh, dy/dh,  0 );
-      mN = new TDVector( -dy/dh, dx/dh,  0 ); // H ^ S
+    if ( p1 != null && p2 != null ) {
+      mC  = new TDVector( (p1.x+p2.x)/2, (p1.y+p2.y)/2, (p1.z+p2.z)/2 );
+      float dx = p2.x - p1.x; // East
+      float dy = p2.y - p1.y; // North
+      float dz = p2.z - p1.z; // Upward
+      TDLog.v("SKETCH section (vert " + vertical + ") " + dx + " " + dy + " " + dz );
+      float dh = TDMath.sqrt( dx*dx + dy*dy );
+      if ( vertical ) {
+        mS = new TDVector(      0,     0, -1 );
+        mH = new TDVector(  dx/dh, dy/dh,  0 );
+        mN = new TDVector( -dy/dh, dx/dh,  0 ); // H ^ S
+      } else {
+        mN = new TDVector(      0,     0, -1 ); // downward
+        mH = new TDVector(  dx/dh,  dy/dh, 0 );
+        mS = new TDVector(  dy/dh, -dx/dh, 0 ); // N ^ H
+      }
     } else {
-      mN = new TDVector(      0,     0, -1 ); // downward
-      mH = new TDVector(  dx/dh,  dy/dh, 0 );
-      mS = new TDVector(  dy/dh, -dx/dh, 0 ); // N ^ H
+      mC = new TDVector();
+      mH = new TDVector( 1, 0, 0 );
+      mS = new TDVector( 0, 1, 0 );
+      mN = new TDVector( 0, 0, 1 );
     }
     mLines = new ArrayList< SketchLinePath >();
   }
+
+  /** @return the section ID
+   */
+  int getId() { return mId; }
+
+  /** increase the max line ID and return it
+   * @return the max line-ID
+   */
+  int getNextLineId() { return ++nMaxLineId; }
 
   /** @return the world 3D vector of a canvas point
    * @param xw    H world coord
@@ -118,15 +141,6 @@ public class SketchSection extends SketchPath
     return false;
   }
 
-  /** write the path to a data stream - it does nothing by default
-   * @param dos   output stream
-   */
-  @Override
-  public void toDataStream( DataOutputStream dos ) { TDLog.Error( "ERROR Sketch Section toDataStream "); }
-
-  @Override
-  public void fromDataStream( DataInputStream dis ) { TDLog.Error( "ERROR Sketch Section fromDataStream "); }
-
 
   // public void draw( Canvas canvas, TDVector C, TDVector X, TDVector Y, float zoom, float off_x, float off_y )
   // {
@@ -148,9 +162,19 @@ public class SketchSection extends SketchPath
     TDLog.v("TODO Add erase command ");
   }
   
-  void eraseAt( float x, float y, float zoom, EraseCommand eraseCmd, float erase_size ) 
+  /** erase at a position, in the current scrap
+   * @param c   world point
+   * @param eraseCmd  erase command
+   * @param size  eraser size
+   *
+   */
+  void eraseAt( TDVector v, EraseCommand eraseCmd, float size ) 
   {
-    TDLog.v("TODO erase at " + x + " " + y + " zoom " + zoom );
+    // dataCheck( "V in plane", ( Math.abs( v.minus(mC).dot(mN) ) < 0.001 ) );
+    for ( SketchLinePath line : mLines ) {
+      // line.checkInPlane( mC, mN );
+      line.eraseAt( v, eraseCmd, size );
+    }
   }
 
   public void undo () { TDLog.v("TODO undo"); }
@@ -162,5 +186,77 @@ public class SketchSection extends SketchPath
   boolean hasMoreUndo() { return false; }
 
   boolean setRangeAt( float x, float y, float zoom, float size ) { TDLog.v("TODO set range at"); return false; }
+
+
+  /** write the path to a data stream - it does nothing by default
+   * @param dos   output stream
+   */
+  @Override
+  public void toDataStream( DataOutputStream dos ) throws IOException 
+  {
+    TDLog.v("WRITE section " + mId + " max line-ID " + nMaxLineId + " lines " + mLines.size() );
+    // TDLog.Error( "ERROR Sketch Section toDataStream ");
+    dos.write( 'X' );
+    dos.writeInt( mId );
+    if ( mId > 0 ) {
+      toDataStream( dos, mP1 );
+      toDataStream( dos, mP2 );
+    }
+    toDataStream( dos, mC );
+    toDataStream( dos, mN );
+    toDataStream( dos, mH );
+    toDataStream( dos, mS );
+    dos.writeInt( mLines.size() );
+    for ( SketchLinePath line : mLines ) {
+      line.toDataStream( dos );
+    }
+  }
+
+  /** read from a stream
+   * @param cmd  command manager - use to add line to this section
+   * @param dis  input stream
+   * @param version file version
+   * @return section id
+   * @note the command manager must be opened on this section
+   */
+  @Override
+  public int fromDataStream( SketchCommandManager cmd, DataInputStream dis, int version ) throws IOException
+  {
+    dataCheck( "SECTION", ( dis.read() == 'X' ) );
+    mId = dis.readInt();
+    nMaxLineId = 0;
+    Paint paint = SketchSurface.getSectionLinePaint( mId ); // line-paint
+    if ( mId > 0 ) {
+      TDVector v1 = tdVectorFromDataStream( dis );
+      mP1 = new SketchPoint( v1, null );
+      TDVector v2 = tdVectorFromDataStream( dis );
+      mP2 = new SketchPoint( v2, null );
+    } else {
+      mP1 = null;
+      mP2 = null;
+    }
+    mC = tdVectorFromDataStream( dis );
+    mN = tdVectorFromDataStream( dis );
+    mH = tdVectorFromDataStream( dis );
+    mS = tdVectorFromDataStream( dis );
+    if ( mId > 0 ) {
+      cmd.addSection( this );
+      cmd.openSection( this );
+    }
+    int nln = dis.readInt();
+    for ( int k=0; k<nln; ++k ) {
+      SketchLinePath line = new SketchLinePath( -1, mId, paint ); // line ID initialized to -1, is read from stream
+      line.fromDataStream( cmd, dis, version );
+      if ( line.getId() > nMaxLineId ) nMaxLineId = line.getId();
+      cmd.addLine( mId, line );
+    }
+    TDLog.v("READ section " + mId + " max line id " + nMaxLineId + " lines " + nln );
+    return mId;
+  }
+
+  private void dataCheck( String msg, boolean test )
+  {
+    if ( ! test ) TDLog.Error("ERROR failed " + msg );
+  }
 
 }

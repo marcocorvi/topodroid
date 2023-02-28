@@ -950,7 +950,7 @@ public class TDNum
           cb = TDMath.cosd( blk1.mBearing + mDecl ); 
           sb = TDMath.sind( blk1.mBearing + mDecl ); 
           TDVector v2 = new TDVector( blk1.mLength * cc * sb, blk1.mLength * cc * cb, blk1.mLength * sc );
-          float d = ( ( ts1.backshot == -1 )? v1.plus(v2) : v1.minus(v2) ).Length();
+          float d = ( ( ts1.backshot == -1 )? v1.plus(v2) : v1.minus(v2) ).length();
           d = d/blk0.mLength + d/blk1.mLength; 
           if ( d > dmax ) dmax = d;
           ts1 = ts1.sibling;

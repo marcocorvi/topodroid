@@ -40,7 +40,7 @@ public class SketchLine // world coords
   {
     TDVector v = pt.minus( mC );
     float a = mN.dot( v );
-    a = v.LengthSquared() - a*a;
+    a = v.lengthSquared() - a*a;
     return ( a > 0 )? TDMath.sqrt( a ) : 0;
   }
 
@@ -51,7 +51,7 @@ public class SketchLine // world coords
   {
     TDVector v = pt.minus( mC );
     float a = mN.dot( v );
-    return ( v.LengthSquared() - a*a );
+    return ( v.lengthSquared() - a*a );
   }
 
 }

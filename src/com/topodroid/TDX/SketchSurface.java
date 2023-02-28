@@ -46,6 +46,9 @@ import java.util.List;
 import java.util.HashMap;
 
 import java.io.PrintWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 // import java.util.Timer;
 // import java.util.TimerTask;
@@ -201,14 +204,14 @@ public class SketchSurface extends SurfaceView
   }
 
   /** erase at a position, in the current manager
-   * @param x    X scene coords
-   * @param y    Y scene coords
+   * @param xc   X canvas coords
+   * @param yc   Y canvas coords
    * @param cmd  erase command
    * @param erase_size  eraser size
    */
-  void eraseAt( float x, float y, EraseCommand cmd, float erase_size ) 
+  void eraseAt( float xc, float yc, EraseCommand cmd, float erase_size ) 
   { 
-    if ( commandManager != null ) commandManager.eraseAt( x, y, cmd, erase_size );
+    if ( commandManager != null ) commandManager.eraseAt( xc, yc, cmd, erase_size );
   }
   
   /** add an erase command in the current manager
@@ -282,12 +285,35 @@ public class SketchSurface extends SurfaceView
     if ( commandManager != null ) commandManager.commitReferences();
   }
 
-  Paint getLinePaint() { return ( commandManager == null )? BrushManager.fixedOrangePaint : commandManager.getLinePaint(); }
+  // Paint getLinePaint() { return ( commandManager == null )? BrushManager.fixedOrangePaint : commandManager.getLinePaint(); }
+
+  /** @return section paint
+   * @param id   section id
+   */
+  static Paint getSectionLinePaint( int id )
+  {
+    return ( commandManager == null )? BrushManager.fixedOrangePaint : commandManager.getSectionLinePaint( id );
+  }
+
+  /** @return the ID of the next line in the current section
+   */
+  int getSectionNextLineId() { return ( commandManager == null )? -1 : commandManager.getSectionNextLineId(); }
+
+  /** @return the ID of the current section
+   */
+  int getSectionId() { return ( commandManager == null )? -1 : commandManager.getSectionId(); }
 
   /** add a line item
+   * @param id    section id
    * @param path  line item
    */
-  public void addLinePath ( SketchLinePath path ) { if ( commandManager != null ) commandManager.addLine( path ); }
+  public void addLinePath ( int id, SketchLinePath path ) { if ( commandManager != null ) commandManager.addLine( id, path ); }
+
+  void addSection( SketchSection section ) { if ( commandManager != null ) commandManager.addSection( section ); }
+
+  int openSection( SketchSection section ) { return ( commandManager == null )? -1 : commandManager.openSection( section ); }
+
+  int closeSection() { return ( commandManager == null )? -1 : commandManager.closeSection(); }
 
   // void setBounds( float x1, float x2, float y1, float y2 ) { if ( commandManager != null ) commandManager.setBounds( x1, x2, y1, y2 ); }
 
@@ -326,6 +352,8 @@ public class SketchSurface extends SurfaceView
   // boolean setRangeAt( float x, float y, float zoom, float size ) { return ( commandManager == null )? false : commandManager.setRangeAt( x, y, zoom, size ); }
 
   int hasSelected() { return ( commandManager == null )? 0 : commandManager.hasSelected(); }
+
+  SketchPoint[] getSelected() {  return ( commandManager == null )? null : commandManager.getSelected(); }
 
   // SketchPoint nextHotItem() { return ( commandManager == null )? null : commandManager.nextHotItem(); }
 
@@ -400,5 +428,16 @@ public class SketchSurface extends SurfaceView
   /** reset the current path in hhe command manager
    */
   void resetPreviewPath() { if ( commandManager != null ) commandManager.resetPreviewPath(); }
+
+  void toDataStream( DataOutputStream dos ) throws IOException { if ( commandManager != null ) commandManager.toDataStream( dos ); }
+
+  /** @return max section id
+   */
+  int fromDataStream( DataInputStream dis, int version, boolean vertical ) throws IOException
+  {
+    return ( commandManager == null )? -1 : commandManager.fromDataStream( dis, version, vertical );
+  }
+
+
 
 }

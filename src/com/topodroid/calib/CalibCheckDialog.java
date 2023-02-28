@@ -149,7 +149,7 @@ public class CalibCheckDialog extends MyDialog
       String b0 = blk.mFrom + "-" + blk.mTo;
       String b2 = null;
       TDVector v0 = new TDVector( x, y, z ); // unit vector along the leg
-      float l0 = v0.Length();            // length of leg vector
+      float l0 = v0.length();            // length of leg vector
       v0.normalize();
       boolean in_leg = false;
       int n2 = 0; // number of data in the opposite leg
@@ -207,7 +207,7 @@ public class CalibCheckDialog extends MyDialog
             TDVector w2 = new TDVector( h * TDMath.sind( bb.mBearing ), h * TDMath.cosd( bb.mBearing ), bb.mLength * TDMath.sind( bb.mClino ) );
             w2.plusEqual( w1 );                      // W1 + W2
             w2.minusEqual( v0.times( v0.dot(w2) ) ); // (W1+W2) - V0 [ V0 * (W1+W2) ] part orthogonal to V0
-            errors2[k*n2+kk] = w2.Length() / l0;     // angle difference
+            errors2[k*n2+kk] = w2.length() / l0;     // angle difference
           }
         }
         hist2.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors2, 400, 100, 40, 10, TDColor.LIGHT_GRAY ) );
@@ -324,22 +324,22 @@ public class CalibCheckDialog extends MyDialog
             DBlock bb = mShots.get( k1 + h1 );
             float h = bb.mLength * TDMath.cosd( bb.mClino );
             TDVector w1 = new TDVector( h * TDMath.sind( bb.mBearing ), h * TDMath.cosd( bb.mBearing ), bb.mLength * TDMath.sind( bb.mClino ) );
-	    float l1 = w1.Length();
+	    float l1 = w1.length();
             for ( int h2 = 0; h2<n2; ++h2 ) {
               bb = mShots.get( k2 + h2 );
               h = sign2 * bb.mLength * TDMath.cosd( bb.mClino );
               TDVector w2 = new TDVector( h * TDMath.sind( bb.mBearing ), h * TDMath.cosd( bb.mBearing ), bb.mLength * TDMath.sind( bb.mClino ) );
-	      float l2 = w2.Length();
+	      float l2 = w2.length();
               w2.plusEqual( w1 );                      // W1 + W2
 	      for ( int h3 = 0; h3<n3; ++h3 ) {
                 bb = mShots.get( k3 + h3 );
                 h = sign3 * bb.mLength * TDMath.cosd( bb.mClino );
                 TDVector w3 = new TDVector( h * TDMath.sind( bb.mBearing ), h * TDMath.cosd( bb.mBearing ), bb.mLength * TDMath.sind( bb.mClino ) );
-	        float l3 = w3.Length();
+	        float l3 = w3.length();
                 w3.plusEqual( w2 );                    // W1 + W2 + W3
 	    	// mis-closure (percent of length), the factor 1 / (10*RAD2DEG) accounts for the same in makeHistogramBitmap()
 		// 52 = 3*sqrt(3) * 100 / 10
-                errors3[(h1*n2+h2)*n3+h3] = 52 * w3.Length() / ( (l1+l2+l3)*TDMath.RAD2DEG);
+                errors3[(h1*n2+h2)*n3+h3] = 52 * w3.length() / ( (l1+l2+l3)*TDMath.RAD2DEG);
 		// TDLog.v( "error " + errors3[(h1*n2+h2)*n3+h3] + " " + l1 + " " + l2 + " " + l3 );
 	      }
 	    }

@@ -22,6 +22,7 @@ import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.utils.TDVersion;
 // import com.topodroid.mag.Geodetic;
 import com.topodroid.math.TDVector;
 import com.topodroid.math.Point2D;
@@ -53,6 +54,11 @@ import java.util.Locale; // TH2EDIT
 
 import java.util.concurrent.RejectedExecutionException;
 // import java.util.Deque; // REQUIRES API-9
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 //
 import android.app.Activity;
 
@@ -250,6 +256,9 @@ public class SketchWindow extends ItemDrawer
   private DataHelper mApp_mData;
   private Activity mActivity = null;
   private boolean mVertical = true;  // whether sections are vertical (or horizontal)
+  private int mMaxSection = 0;       // number of last section - 0: leg-section
+  private int mCurSection = 0;       // current section
+  private String mSketchName;        // sketch name
 
   boolean getVertical() { return mVertical; }
 
@@ -530,7 +539,10 @@ public class SketchWindow extends ItemDrawer
   // -----------------------------------------------------------------
   // SPLAY+LEG REFERENCE
 
-  private void makeReference()
+  /**
+   * @param load   whether to try and load from file
+   */
+  private void makeReference( boolean load )
   {
     // TDLog.v("SKETCH make reference");
     TopoGL topoGL = ((TopoDroidApp)getApplication()).mTopoGL;
@@ -541,6 +553,7 @@ public class SketchWindow extends ItemDrawer
     if ( leg == null ) {
       finish();
     }
+    mSketchName = leg.from + "-" + leg.to;
     TDVector v1 = new TDVector();
     TDVector v2 = leg.toTDVector(); // (E,N,Up)
     // TDLog.v("SKETCH V2: E " + v2.x + " N " + v2.y + " Up " + v2.z );
@@ -554,9 +567,97 @@ public class SketchWindow extends ItemDrawer
       addFixedSplay( v2, v );
     }
     // TODO make the grid
-
+    int i1 = -3;
+    int i2 =  3;
+    int j1 =  0;
+    int j2 = (int)( v2.length() + 1);
+    float z = ( v1.z < v2.z )? v1.z : v2.z;
+    // TDVector G = new TDVector( 0, 0, z );
+    TDVector L = new TDVector( v2.x, v2.y, 0 ); 
+    L.normalize();
+    TDVector H = new TDVector( L.y, -L.x, 0 );
+    for ( int i = i1; i<=i2; ++i ) {
+      addFixedGrid ( new TDVector( i*H.x + j1*L.x, i*H.y + j1*L.y, z ), new TDVector( i*H.x + j2*L.x, i*H.y + j2*L.y, z ), 1 );
+    }
+    for ( int j=j1; j<=j2; ++j ) {
+      addFixedGrid ( new TDVector( i1*H.x + j*L.x, i1*H.y + j*L.y, z ), new TDVector( i2*H.x + j*L.x, i2*H.y + j*L.y, z ), 1 );
+    }
     mSketchSurface.doneReference();
+
+    if ( load ) {
+      String filename = TDPath.getC3dFile( mSketchName );
+      boolean ret = doLoad( filename );
+      TDLog.v("SKETCH loading " + filename + " return " + ret );
+    }
   }
+
+  private boolean doLoad( String filename )
+  {
+    if ( ! TDFile.hasTopoDroidFile( filename ) ) return false;
+    boolean ret = false;
+    int what;
+    int version = 0;
+    String name = "";
+    DataInputStream dis = null;
+    try {
+      dis = TDFile.getTopoDroidFileInputStream( filename );
+      while ( ( what = dis.read() ) != 'E' ) {
+        switch ( what ) {
+          case 'V':
+            version = dis.readInt();
+            break;
+          case 'S':
+            name = dis.readUTF();
+            assert( name.equals( mSketchName ) );
+            mVertical = (dis.readInt() == 0);
+            mMaxSection = mSketchSurface.fromDataStream( dis, version, mVertical );
+            break;
+          case 'E':
+            break;
+        }
+      }
+      ret = true;
+    } catch ( IOException e ) {
+      // TODO
+    } finally {
+      try {
+        if ( dis != null ) dis.close();
+      } catch ( IOException e ) { /* ignore */ }
+    }
+    mCurSection = 0;
+    TDLog.v("READ sketch " + name + " - max " + mMaxSection );
+    return ret;
+  }
+
+  /**
+   * @param filename   filename
+   * @param name       sketch name
+   */
+  private boolean doSave( String filename, String name )
+  {
+    boolean ret = false;
+    DataOutputStream dos = null;
+    try {
+      dos = TDFile.getTopoDroidFileOutputStream( filename );
+      dos.write( 'V' ); // version
+      dos.writeInt( TDVersion.code() );
+      dos.write( 'S' );
+      dos.writeUTF( name );
+      dos.writeInt( mVertical? 0 : 1 ); 
+      mSketchSurface.toDataStream( dos ); // forward to sketch command manager
+      dos.write( 'E' );
+      dos.flush();
+    } catch ( IOException e ) {
+      // TODO
+    } finally {
+      try {
+        if ( dos != null ) dos.close();
+      } catch ( IOException e ) { /* ignore */ }
+    }
+    return ret;
+  }
+      
+      
 
 
   // /** set the projection 
@@ -1276,7 +1377,7 @@ public class SketchWindow extends ItemDrawer
     closeMenu();
 
     // TODO set leg and splays
-    makeReference();
+    makeReference( true );
   }
 
   /** lifecycle: STOP
@@ -1678,12 +1779,14 @@ public class SketchWindow extends ItemDrawer
             cpath = weeder.simplify( dist, len );
           } 
           if ( cpath.size() > 1 ) {
-            // TDLog.v("SKETCH new line size " + cpath.size() );
-            SketchLinePath lp1 = new SketchLinePath( mSketchSurface.getLinePaint() );
+            int id  = mSketchSurface.getSectionNextLineId();
+            int sid = mSketchSurface.getSectionId();
+            TDLog.v("SKETCH new line " + id + "." + sid + " size " + cpath.size() );
+            SketchLinePath lp1 = new SketchLinePath( id, sid, SketchSurface.getSectionLinePaint( mCurSection ) );
             for ( Point2D p0 : cpath ) {
               lp1.appendPoint( mSketchSurface.toTDVector( p0.x, p0.y ) );
             }
-            mSketchSurface.addLinePath( lp1 );
+            mSketchSurface.addLinePath( mCurSection, lp1 );
           }
         }
         mSketchSurface.resetPreviewPath();
@@ -2004,7 +2107,16 @@ public class SketchWindow extends ItemDrawer
         TDLog.v("TODO item delete");
         // askDeleteItem( p, t, "section");
       } else if ( k3 < NR_BUTTON3 && b == mButton3[k3++] ) { // SECTION
-        TDLog.v("TODO section");
+        if ( mSketchSurface.hasSelected() == 2 ) {
+          SketchPoint[] pts = mSketchSurface.getSelected();
+          ++ mMaxSection;
+          SketchSection section = new SketchSection( mMaxSection, pts[0], pts[1], true ); // FIXME vertical
+          mCurSection = mSketchSurface.openSection( section );
+          TDLog.v("SKETCH open section " + mCurSection + " " + mMaxSection );
+        } else {
+          mCurSection =  mSketchSurface.closeSection();
+          TDLog.v("SKETCH close section - current " + mCurSection );
+        }
       }
 
     } else {
@@ -2149,7 +2261,8 @@ public class SketchWindow extends ItemDrawer
     if ( p++ == pos ) { // CLOSE
       super.onBackPressed();
     } else if ( p++ == pos ) { // EXPORT
-      TDLog.v("TODO menu EXPORT");
+      String filename = TDPath.getC3dFile( mSketchName );
+      doSave( filename, mSketchName );
     } else if ( p++ == pos ) { // ZOOM-FIT 
       doZoomFit();
     } else if ( p++ == pos ) { // DELETE
@@ -2193,18 +2306,6 @@ public class SketchWindow extends ItemDrawer
     // TDLog.v("SKETCH doZoomFit");
     RectF b = mSketchSurface.getBitmapBounds( 1.0f );
     zoomFit( b );
-  }
-
-  /**
-   * @param export_type  export type
-   * @param filename     export filename
-   * @param prefix       station names export-prefix (not used)
-   * @param second       whether to export the second view instead of the current view (only for plan or profile)
-   * @note called from ExportDialogPlot to do the export
-   */
-  public void doExport( String export_type, String filename, String prefix, boolean second ) // EXPORT
-  {
-    TDLog.v("TODO doExport");
   }
 
 

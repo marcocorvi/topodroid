@@ -73,8 +73,13 @@ public class SketchFixedPath extends SketchPath
   @Override
   public void toDataStream( DataOutputStream dos ) { TDLog.Error( "ERROR Sketch Fixed Path toDataStream "); }
 
+  /** read from a stream
+   * @param cmd  command manager (unused)
+   * @param dis  input stream
+   * @param version file version
+   */
   @Override
-  public void fromDataStream( DataInputStream dis ) { TDLog.Error( "ERROR Sketch Fixed Path fromDataStream "); }
+  public int fromDataStream( SketchCommandManager cmd, DataInputStream dis, int version ) { TDLog.Error( "ERROR Sketch Fixed Path fromDataStream "); return 0; }
 
   // -----------------------------------------------------------------------
 

@@ -21,6 +21,7 @@ import com.topodroid.prefs.TDSetting;
 import java.io.PrintWriter;
 import java.io.DataOutputStream;
 import java.io.DataInputStream;
+import java.io.IOException;
 
 import java.util.ArrayList;
 
@@ -40,19 +41,37 @@ import android.graphics.Matrix;
 
 public class SketchLinePath extends SketchPath 
 {
+  int mId;  // line ID - the full ID is composed of the line ID and the section ID
+  int mSid; // line section ID
   ArrayList< SketchPoint > mPts;
 
   /** cstr
    * @param type   path type: POINT (1), LINE (2), AREA (3) etc.
    */
-  public SketchLinePath( Paint paint )
+  public SketchLinePath( int id, int sid, Paint paint )
   {
     super( SketchPath.SKETCH_PATH_LINE, paint );
+    mId  = id;
+    mSid = sid;
     mPts = new ArrayList< SketchPoint >();
   }
 
+  /** append a point to the line
+   * @param v   point 3D vector
+   */
   void appendPoint( TDVector v ) { mPts.add( new SketchPoint( v, this ) ); }
 
+
+  /** @return the line ID
+   */
+  int getId() { return mId; }
+
+  /** @return the ID of the line section
+   */
+  int getSectionId() { return mSid; }
+
+  /** @return the number of points on the line
+   */
   @Override
   public int size() { return mPts.size(); }
 
@@ -64,10 +83,48 @@ public class SketchLinePath extends SketchPath
    * @param dos   output stream
    */
   @Override
-  public void toDataStream( DataOutputStream dos ) { TDLog.Error( "ERROR Sketch Line Path toDataStream "); }
+  public void toDataStream( DataOutputStream dos ) throws IOException
+  {
+    dos.write( 'L' );
+    dos.writeInt( mId );
+    dos.writeInt( mSid );
+    dos.writeInt( mPts.size() );
+    for ( SketchPoint pt : mPts ) toDataStream( dos, pt );
+    TDLog.v("WRITE line " + mId + "." + mSid + " n.pts " + mPts.size() );
+  }
 
+  /** read from a stream
+   * @param cmd  command manager (unused)
+   * @param dis  input stream
+   * @param version file version
+   * @return the number of points on the line
+   */
   @Override
-  public void fromDataStream( DataInputStream dis ) { TDLog.Error( "ERROR Sketch Line Path fromDataStream "); }
+  public int fromDataStream( SketchCommandManager cmd, DataInputStream dis, int version ) throws IOException
+  {
+    dataCheck( "LINE", ( dis.read() == 'L' ) );
+    mId  = dis.readInt();
+    int sid = dis.readInt(); dataCheck( "SID", ( sid == mSid ) );
+    int npt = dis.readInt();
+    for ( int k=0; k<npt; ++ k ) {
+      mPts.add( new SketchPoint( tdVectorFromDataStream( dis ), this ) );
+    }
+    TDLog.v("READ line " + mId + "." + mSid + " n.pts " + npt );
+    return npt;
+  }
+
+  boolean checkInPlane( TDVector C, TDVector N )
+  {
+    for ( SketchPoint p : mPts ) {
+      dataCheck( "line point", ( Math.abs( p.minus(C).dot(N) ) < 0.001 ) );
+    }
+    return true;
+  }
+
+  private void dataCheck( String msg, boolean test )
+  {
+    if ( ! test ) TDLog.Error("ERROR failed " + msg );
+  }
 
 
   /** make projected path
@@ -102,6 +159,27 @@ public class SketchLinePath extends SketchPath
       if ( d < ret ) { ret = d; pt = p; }
     }
    return TDMath.sqrt( ret );
+  }
+
+  /** erase line points
+   * @param v    erase center (a point in the section plane)
+   * @param eraseCmd
+   * @param erase_size
+   */
+  void eraseAt( TDVector v, EraseCommand eraseCmd, float erase_size ) 
+  {
+    float min_diff = 10000f;
+    for ( int k = 0; k < mPts.size(); ) {
+      SketchPoint p = mPts.get(k);
+      float diff = p.maxDiff( v );
+      if ( diff < min_diff ) min_diff = diff;
+      if ( diff < erase_size ) { 
+        mPts.remove( p );
+      } else {
+        ++k;
+      }
+    }
+    TDLog.v("LINE erase at: min diff " + min_diff );
   }
 
   // @param r  dot radius
