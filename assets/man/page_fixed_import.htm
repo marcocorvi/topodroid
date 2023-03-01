@@ -5,21 +5,75 @@
 
 This dialog is opened from the <i>Import</i> button of the <a href="page_fixed_list.htm">Geo-points</a> window.<br><p>
 
-With this dialog you can import in 
-TopoDroid the coordinates of a point from a <i>MobileTopographer</i> point-list file.<br>
-If you do not select a <i>MobileTopographer</i> point-list file the app behaviour is undefined.
+With this dialog you can import in TopoDroid the coordinates of a point acquired with one of the supported GNSS apps.
+<br>
 <br><p>
 
+<b>MobileTopographer</b><br>
+TopoDroid reads the point coordinates from a <i>MobileTopographer</i> point-list file.<br>
+If you do not select a <i>MobileTopographer</i> point-list file the app behaviour is undefined.
+<br><p>
 <ol>
 <li><img src="mobiletopographer_flag.png"> Open <i>MobileTopographer</i> and find the point coordinates.</li>
 <li><img src="mobiletopographer_plus.png"> When you have reached a sufficient accuracy in the coordinates, save the point.</li>
 <li><img src="mobiletopographer_points.png"> You can also enter the point coordinates by hand (and save the point).</li>
 <li><img src="mobiletopographer_disk.png"> Save the point list. The list is saved in "MobileTopographer/pointlist"</li>
 <li>Import the coordinates in TopoDroid. The saved points are shown in a list; tap on the point to import.</li>
-</ol>
-
+</ol><br>
 <img src="mobiletopographer_updown.png"> Optionally, you can go to the list of saved points in <i>MobileTopographer</i>, and
 move the point you just got to the top with the arrows.<br><p>
+
+<b>GPS Point</b><br>
+TopoDroid reads the coordinates exported to a point file.<br><p>
+<ol>
+<li>The app displays a list of saved points</li>
+<li><img src="gpspoint_btn1.png"> Open the GNSS interface</li> 
+<li><img src="gpspoint_btn2.png"> Acquire the GNSS position</li> 
+<li>The app displays the point with the circle of uncertainty on the map. The point coordinates, and other infos, are shown in a box.</li>
+<li>Save the point when done.</li>
+<li>Select the point from the list, and export to (text) file.</li>
+</ol>
+<img src="gpspoint_point.png"><br><p>
+
+<b>GPS Logger</b><br>
+The app displays the point coordinates and other infos.<br>
+<ol>
+<li></li>
+<li><img src="gpslogger_btn1.png"> Start recording the track points.</li>
+<li><img src="gpslogger_btn2.png"> Stop the track recording.</li>
+<li>Finalize the track. The track is added to the "tracklist".</li>
+</ol>
+<br><p>
+
+<b>GPX Recorder</b><br>
+<ol>
+<li><img src="gpxrecorder_start.png"> Start recording the points coordinates</li>
+<li><img src="gpxrecorder_stop.png"> Stop the recording.</li>
+<li>The points coordinates are saved in a track file that can be read by TopoDroid</li>
+</ol>
+<br><p>
+
+<b>GPS Position</b><br>
+The app displays the point coordinates and the satellite data.<br>
+<ol>
+<li><img src="gpsposition_btn1.png"></li>
+<li><img src="gpsposition_btn3.png"></li>
+<li><img src="gpsposition_btn2.png">The position can be copied to clipboard</li>
+<li>or it can be saved to a file.</li>
+</ol>
+<br><p>
+
+<b>GPSTest</b><br>
+The app displays the point coordinates and satellites data.
+The point can be shown on the map (option in the "settings").
+<ol>
+<li><img src="gpstest_btn1.png"> Open the share/export dialog.</li>
+<li><img src="gpstest_btn2.png"> The point coordinates can be copied to clipboard</li>
+<li><img src="gpstest_btn3.png"> or saved to file. It is important to check the "Include altitude" box.</li>
+</ol>
+<br><p>
+
+
 
 </body>
 </html>
