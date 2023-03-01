@@ -23,11 +23,11 @@
     <item name="none">nenhum</item>
     <item name="plan">clino</item>
     <item name="profile">azimute</item>
-    <item name="view">visão</item>
+    <item name="view">visualização</item>
   </string-array>
   <string-array name="splayColors">
     <item name="none">nenhuma</item>
-    <item name="all">todas</item>
+    <item name="all">livre</item>
     <item name="palette">paleta</item>
   </string-array>
   <string-array name="feedbackMode">
@@ -67,6 +67,7 @@
     <item name="none">Nenhuma</item>
     <item name="normal">Normal</item>
     <item name="weighted">Proporcional</item>
+    <item name="selective">Seletiva</item>
     <item name="triangles">Triângulos</item>
   </string-array>
   <string-array name="survexEol">
