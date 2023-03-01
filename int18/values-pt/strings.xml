@@ -667,7 +667,7 @@ no campo abaixo e aperte o botão.
   <string name="extended">RETIFICADO</string>
   <string name="profile">PROJETADO</string>
   <string name="fmt_plan">%1$s: PLANTA-BAIXA</string>
-  <string name="fmt_extended">%1$s: PERFIL</string>
+  <string name="fmt_extended">%1$s: RETIFICADO</string>
   <string name="fmt_profile">%1$s: PROJETADO</string>
   <!-- UNUSED string name="extended_profile">Perfil retificado</string -->
   <string name="projected_profile">Perfil projetado</string>
@@ -1089,12 +1089,12 @@ no campo abaixo e aperte o botão.
   <string name="title_edit_station">Alterar base </string>
   <string name="title_erase">Apagar</string>
   <string name="title_fixed">Localizações</string>
-  <string name="title_fixed_mt">Ponto geo [Mobile Topographer]</string>
-  <string name="title_fixed_gpx_rec">Pontos geo [GPX Recorder]</string>
-  <string name="title_fixed_gps_pos">Pontos geo [GPS Position]</string>
-  <string name="title_fixed_gps_test">Pontos geo [GPSTest]</string>
-  <string name="title_fixed_gps_logger">Pontos geo [GPS Logger]</string>
-  <string name="title_fixed_gps_point">Pontos geo [GPS Point]</string>
+  <string name="title_fixed_mt">Geopontos [Mobile Topographer]</string>
+  <string name="title_fixed_gpx_rec">Geopontos [GPX Recorder]</string>
+  <string name="title_fixed_gps_pos">Geopontos [GPS Position]</string>
+  <string name="title_fixed_gps_test">Geopontos [GPSTest]</string>
+  <string name="title_fixed_gps_logger">Geopontos [GPS Logger]</string>
+  <string name="title_fixed_gps_point">Geopontos [GPS Point]</string>
   <string name="title_fixed_edit">Editar coordenadas</string>
   <string name="title_fixed_import">Importar coordenadas</string>
   <string name="title_fixed_gps">Coordenadas GPS</string>
@@ -1178,7 +1178,7 @@ no campo abaixo e aperte o botão.
   <string name="title_import_shot">Importar topo</string>
   <string name="title_import_gps">Importar ponto GPS</string>
   <string name="title_import_th2">Arquivo th2 Therion</string>
-  <string name="title_infos">Pontos geo da topo</string>
+  <string name="title_infos">Geopontos da topo</string>
   <string name="title_graph_paper">Papel milimetrado escala 1:100</string>
   <string name="graph_paper_scale">Ajuste a linha para que tenha 5 cm de comprimento</string>
   <string name="exported_settings">Configurações exportação %1$s</string>
