@@ -717,8 +717,8 @@
     <string name="extended">РАЗРЕЗ-РАЗВЕРТКА</string>
     <string name="profile">РАЗРЕЗ-ПРОЕКЦИЯ</string>
     <string name="fmt_plan">%1$s: ПЛАН</string>
-    <string name="fmt_extended">%1$s: РАЗРЕЗ</string>
-    <string name="fmt_profile">%1$s: ПРОЕКЦИЯ</string>
+    <string name="fmt_extended">%1$s: РАЗРЕЗ-РАЗВЕРТКА</string>
+    <string name="fmt_profile">%1$s: РАЗРЕЗ-ПРОЕКЦИЯ</string>
 
     <!-- UNUSED string name="extended_profile">Разрез-развертка</string -->
     <string name="projected_profile">Разрез-проекция</string>
