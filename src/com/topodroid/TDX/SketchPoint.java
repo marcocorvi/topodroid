@@ -43,7 +43,7 @@ public class SketchPoint extends TDVector // world coords
   public SketchPoint( TDVector v ) { this(v, null); }
 
   // @param r  dot radius
-  void drawPoint( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y, float zoom, float off_x, float off_y, float r )
+  void drawPoint( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y, float r )
   {
     Path path = new Path();
     TDVector v = this.minus( C );
@@ -51,7 +51,6 @@ public class SketchPoint extends TDVector // world coords
     float y = Y.dot( v ); // downward 
     path.addCircle( x, y, r, Path.Direction.CCW );
     path.transform( mm );
-    // path.offset( off_x, off_y );
     canvas.drawPath( path, BrushManager.errorPaint );
   }
 

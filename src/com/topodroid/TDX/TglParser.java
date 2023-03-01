@@ -206,6 +206,20 @@ public class TglParser
     return ret;
   }  
 
+  /** @return an array with the splays at two stations
+   * @param st    station (ignored if null)
+   */
+  public ArrayList< Cave3DShot > getLegsAt( Cave3DStation st )
+  {
+    ArrayList< Cave3DShot > ret = new ArrayList<>();
+    if ( st != null ) {
+      for ( Cave3DShot sp : shots ) {
+        if ( sp.from_station == st || sp.to_station == st ) ret.add( sp );
+      }
+    }
+    return ret;
+  }  
+
   public Cave3DShot getShot( int k ) { return shots.get(k); }
 
   public DEMsurface getSurface() { return mSurface; }

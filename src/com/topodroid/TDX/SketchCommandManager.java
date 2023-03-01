@@ -56,6 +56,8 @@ public class SketchCommandManager
   private List< SketchFixedPath > mGridStack10;
   private List< SketchFixedPath > mGridStack100;
   private List< SketchFixedPath > mSplaysStack;
+  private List< SketchFixedPath > mNghblegsStack;
+  private List< SketchStationPath > mStationsStack;
   private SketchFixedPath         mLeg;
   private List< SketchSection >   mSections;
 
@@ -84,6 +86,8 @@ public class SketchCommandManager
 
   float getZoom() { return mZoom; }
 
+  float getLegViewRotation() { return (mView == null)? 0 : mView.getRotation(); }
+
   /** cstr
    */
   SketchCommandManager( boolean vertical ) // , SketchFixedPath leg, ArrayList< SketchFixedPath > splays )
@@ -92,14 +96,15 @@ public class SketchCommandManager
     mBBox = new RectF();
     mVertical = vertical;
 
-    mGridStack1   = Collections.synchronizedList(new ArrayList< SketchFixedPath >());
-    mGridStack10  = Collections.synchronizedList(new ArrayList< SketchFixedPath >());
-    mGridStack100 = Collections.synchronizedList(new ArrayList< SketchFixedPath >());
-    mSections     = Collections.synchronizedList(new ArrayList< SketchSection >());
+    mGridStack1    = Collections.synchronizedList(new ArrayList< SketchFixedPath >());
+    mGridStack10   = Collections.synchronizedList(new ArrayList< SketchFixedPath >());
+    mGridStack100  = Collections.synchronizedList(new ArrayList< SketchFixedPath >());
+    mSections      = Collections.synchronizedList(new ArrayList< SketchSection >());
 
-    mMatrix       = new Matrix(); // identity
-    mSplaysStack  = Collections.synchronizedList( new ArrayList< SketchFixedPath >());
-    mLeg          = null;;
+    mMatrix        = new Matrix(); // identity
+    mSplaysStack   = Collections.synchronizedList( new ArrayList< SketchFixedPath >());
+    mNghblegsStack = Collections.synchronizedList( new ArrayList< SketchFixedPath >());
+    mLeg           = null;;
     // makeLegView();
   }
 
@@ -192,15 +197,16 @@ public class SketchCommandManager
   int getSectionId() { return mCurrentScrap.getId(); }
 
   // ----------------------------------------------------------------
-  public List< SketchLinePath > getWalls()    { return mView.mLines; } 
-  public List< SketchSection >  getSections() { return mSections;  }
+  public List< SketchLinePath > getWalls()     { return mView.mLines; } 
+  public List< SketchSection >  getSections()  { return mSections;  }
 
-  public SketchFixedPath    getLeg()         { return mLeg;    } 
-  public List< SketchFixedPath > getSplays() { return mSplaysStack;  }
+  public SketchFixedPath    getLeg()           { return mLeg;    } 
+  public List< SketchFixedPath > getSplays()   { return mSplaysStack;  }
+  public List< SketchFixedPath > getNghblegs() { return mNghblegsStack;  }
 
-  public List< SketchFixedPath > getGrid1()   { return mGridStack1; }
-  public List< SketchFixedPath > getGrid10()  { return mGridStack10; }
-  public List< SketchFixedPath > getGrid100() { return mGridStack100; }
+  public List< SketchFixedPath > getGrid1()    { return mGridStack1; }
+  public List< SketchFixedPath > getGrid10()   { return mGridStack10; }
+  public List< SketchFixedPath > getGrid100()  { return mGridStack100; }
 
   // ------------------------------------------------------------
   // ERASER
@@ -299,6 +305,8 @@ public class SketchCommandManager
   private List< SketchFixedPath > mTmpGridStack10  = null;
   private List< SketchFixedPath > mTmpGridStack100 = null;
   private List< SketchFixedPath > mTmpSplaysStack  = null;
+  private List< SketchFixedPath > mTmpNghblegsStack  = null;
+  private List< SketchStationPath > mTmpStationsStack  = null;
   private SketchFixedPath    mTmpLeg = null;
 
   /** clear the sketch references
@@ -314,6 +322,7 @@ public class SketchCommandManager
     synchronized( TDPath.mShotsLock ) {
       mLeg = null;
       mSplaysStack.clear();
+      mNghblegsStack.clear();
     }
   }
 
@@ -325,6 +334,8 @@ public class SketchCommandManager
     mTmpGridStack10  = Collections.synchronizedList( new ArrayList< SketchFixedPath >() );
     mTmpGridStack100 = Collections.synchronizedList( new ArrayList< SketchFixedPath >() );
     mTmpSplaysStack  = Collections.synchronizedList( new ArrayList< SketchFixedPath >() );
+    mTmpNghblegsStack = Collections.synchronizedList( new ArrayList< SketchFixedPath >() );
+    mTmpStationsStack = Collections.synchronizedList( new ArrayList< SketchStationPath >() ); 
     // mTmpLeg = new SketchFixedPath();
   }
 
@@ -347,15 +358,19 @@ public class SketchCommandManager
       mGridStack100 = mTmpGridStack100;
     }
     synchronized( TDPath.mShotsLock ) {
-      mSplaysStack = mTmpSplaysStack;
-      mLeg         = mTmpLeg;
+      mSplaysStack   = mTmpSplaysStack;
+      mNghblegsStack = mTmpNghblegsStack;
+      mStationsStack = mTmpStationsStack;
+      mLeg           = mTmpLeg;
       makeLegView();
     }
-    mTmpGridStack1   = null;
-    mTmpGridStack10  = null;
-    mTmpGridStack100 = null;
-    // mTmpStations     = null;
-    mTmpLeg          = null;
+    mTmpGridStack1    = null;
+    mTmpGridStack10   = null;
+    mTmpGridStack100  = null;
+    mTmpSplaysStack   = null;
+    mTmpNghblegsStack = null;
+    mTmpStationsStack = null;
+    mTmpLeg           = null;
 
     mView.setZeroAlpha( theta );
   }
@@ -370,6 +385,10 @@ public class SketchCommandManager
   }  
 
   void addTmpSplayPath( SketchFixedPath path ) { mTmpSplaysStack.add( path ); }  
+
+  void addTmpNghblegPath( SketchFixedPath path ) { mTmpNghblegsStack.add( path ); }  
+
+  void addTmpStationPath( SketchStationPath path ) { mTmpStationsStack.add( path ); }
  
   void addTmpGrid( SketchFixedPath path, int k )
   { 
@@ -579,31 +598,38 @@ public class SketchCommandManager
         Paint paint_grid    = BrushManager.fixedGridPaint;
         Paint paint_grid100 = BrushManager.fixedGrid100Paint;
         if ( scale < 1 ) {
-          for ( SketchPath p1 : mGridStack1 ) p1.draw( canvas, mm,  mC0, mH0, mS0, mZoom, mOffxc, mOffyc );
+          for ( SketchPath p1 : mGridStack1 ) p1.draw( canvas, mm,  mC0, mH0, mS0 );
         }
         if ( scale < 10 ) {
-          for ( SketchPath p10 : mGridStack10 ) p10.draw( canvas, mm,  mC0, mH0, mS0, mZoom, mOffxc, mOffyc );
+          for ( SketchPath p10 : mGridStack10 ) p10.draw( canvas, mm,  mC0, mH0, mS0 );
         }
-        for ( SketchPath p100 : mGridStack100 ) p100.draw( canvas, mm,  mC0, mH0, mS0, mZoom, mOffxc, mOffyc );
+        for ( SketchPath p100 : mGridStack100 ) p100.draw( canvas, mm,  mC0, mH0, mS0 );
       }
     }
 
     synchronized( TDPath.mShotsLock ) {
-      mLeg.draw( canvas, mm, mC0, mH0, mS0, mZoom, mOffxc, mOffyc );
-      for ( SketchPath splay : mSplaysStack ) splay.draw( canvas, mm, mC0, mH0, mS0, mZoom, mOffxc, mOffyc );
-      drawSideDrag( canvas );
-      mCurrentScrap.draw( canvas, mm, mC0, mH0, mS0, mZoom, mOffxc, mOffyc );
+      mLeg.draw( canvas, mm, mC0, mH0, mS0 );
+      for ( SketchPath splay : mSplaysStack ) splay.draw( canvas, mm, mC0, mH0, mS0 );
       if ( mCurrentScrap == mView ) {
-        for ( SketchSection section : mSections ) section.draw( canvas, mm, mC0, mH0, mS0, mZoom, mOffxc, mOffyc );
+        for ( SketchPath nghb : mNghblegsStack ) nghb.draw( canvas, mm, mC0, mH0, mS0 );
+        for ( SketchPath station : mStationsStack ) station.draw( canvas, mm, mC0, mH0, mS0 );
+        for ( SketchSection section : mSections ) {
+          section.draw( canvas, mm, mC0.minus( section.mC ), mH0, mS0 );
+        }
+      } else {
+        int k = 0;
+        for ( SketchPath station : mStationsStack ) { station.draw( canvas, mm, mC0, mH0, mS0 ); if ( ++k >= 2 ) break; }
       }
+      drawSideDrag( canvas );
+      mCurrentScrap.draw( canvas, mm, mC0, mH0, mS0 );
     }
  
     synchronized( TDPath.mSelectionLock ) {
       if ( isSelectable() ) {
         float dot_radius = TDSetting.mDotRadius/mZoom;
-        mCurrentScrap.drawPoints( canvas, mm, mC0, mH0, mS0, mZoom, mOffxc, mOffyc, dot_radius );
-        if ( mSelected[0] != null ) mSelected[0].drawPoint( canvas, mm, mC0, mH0, mS0, mZoom, mOffxc, mOffyc, 2*dot_radius );
-        if ( mSelected[1] != null ) mSelected[1].drawPoint( canvas, mm, mC0, mH0, mS0, mZoom, mOffxc, mOffyc, 2*dot_radius );
+        mCurrentScrap.drawPoints( canvas, mm, mC0, mH0, mS0, dot_radius );
+        if ( mSelected[0] != null ) mSelected[0].drawPoint( canvas, mm, mC0, mH0, mS0, 2*dot_radius );
+        if ( mSelected[1] != null ) mSelected[1].drawPoint( canvas, mm, mC0, mH0, mS0, 2*dot_radius );
       } else if ( hasEraser ) {
         drawEraser( canvas );
       } else {

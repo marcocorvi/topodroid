@@ -34,6 +34,7 @@ public class FixedInfo extends MagLatLong
   public final static long SRC_GPS_POSITION = 5L;
   public final static long SRC_GPS_TEST     = 6L;
   public final static long SRC_GPS_LOGGER   = 7L;
+  public final static long SRC_GPS_POINT    = 8L;
 
   long   id;       // fixed id
   long   source;   // 0: unknown,  1: topodroid,  2: manual,   3: mobile-topographer, ...

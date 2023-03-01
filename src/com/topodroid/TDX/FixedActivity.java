@@ -101,7 +101,8 @@ public class FixedActivity extends Activity
   final static int FLAG_GPS_POSITION       =  4;
   final static int FLAG_GPS_TEST           =  8;
   final static int FLAG_GPS_LOGGER         = 16;
-  private final static int FLAG_GPS_MAX    = FLAG_GPS_LOGGER;
+  final static int FLAG_GPS_POINT          = 32;
+  private final static int FLAG_GPS_MAX    = FLAG_GPS_POINT;
 
   private boolean hasGps = false;
   private boolean hasGPSTest = false;
@@ -166,6 +167,7 @@ public class FixedActivity extends Activity
         else if ( ( mImportFlag & FLAG_GPS_POSITION  ) > 0 ) { app =  4; }
         else if ( ( mImportFlag & FLAG_GPS_TEST      ) > 0 ) { app =  8; }
         else if ( ( mImportFlag & FLAG_GPS_LOGGER    ) > 0 ) { app = 16; }
+        else if ( ( mImportFlag & FLAG_GPS_POINT     ) > 0 ) { app = 32; }
         TDSetting.setGeoImportApp( this, app );
         // setTheTitle();
       }
@@ -242,6 +244,9 @@ public class FixedActivity extends Activity
         break;
       case FLAG_GPS_LOGGER:
         setTitle( R.string.title_fixed_gps_logger );
+        break;
+      case FLAG_GPS_POINT:
+        setTitle( R.string.title_fixed_gps_point );
         break;
       default:
         setTitle( R.string.title_fixed );
@@ -514,6 +519,9 @@ public class FixedActivity extends Activity
     } else if (  TDSetting.mGeoImportApp == FLAG_GPS_LOGGER ) { // csv
       intent.setType( "text/*" );
       request = TDRequest.REQUEST_GPS_LOGGER;
+    } else if (  TDSetting.mGeoImportApp == FLAG_GPS_POINT ) { // plain text
+      intent.setType( "text/*" );
+      request = TDRequest.REQUEST_GPS_POINT;
     }
     intent.addCategory(Intent.CATEGORY_OPENABLE);
     intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION); // API_19
@@ -799,6 +807,50 @@ public class FixedActivity extends Activity
             addFixedPoint( FixedInfo.SRC_GPS_TEST, lng, lat, alt, acc );
           } else {
             TDToast.makeBad( R.string.GPS_position_none );
+          }
+        } catch ( FileNotFoundException e ) {
+          TDLog.Error( "File not found " + e.getMessage() );
+        } catch ( IOException e ) { 
+          TDLog.Error( "IO exception " + e.getMessage() );
+        }
+      } else if ( reqCode == TDRequest.REQUEST_GPS_POINT ) { // csv format: type, date-time, lat, long, accur, alt, ...
+        Uri uri = intent.getData();
+        try { 
+          double lat=0, lng=0, alt=-1000, acc=-1;
+          InputStreamReader isr = new InputStreamReader( this.getContentResolver().openInputStream( uri ) );
+          BufferedReader br = new BufferedReader( isr );
+          String data_line = null;
+          String line;
+          int k = 0;
+          for ( ; k<3; ++k ) {
+            if ( ( line = br.readLine() ) == null ) break;
+          } 
+          if ( k == 3 ) {
+            for ( ; k<6; ++k ) {
+              if ( (data_line = br.readLine()) == null) break;
+              if ( data_line != null ) {
+                // TDLog.v("GPS Point: " + data_line );
+                String[] vals = data_line.split(" ");
+                switch ( k ) {
+                  case 3: 
+                    lat = Double.parseDouble( vals[0] );
+                    lng = Double.parseDouble( vals[1] );
+                    break;
+                  case 4:
+                    alt = Double.parseDouble( vals[1] );
+                    break;
+                  case 5:
+                    acc = Double.parseDouble( vals[1] );
+                    break;
+                }
+              }
+            }
+          }
+          isr.close();
+          if ( k == 6 ) {
+            addFixedPoint( FixedInfo.SRC_GPS_POINT, lng, lat, alt, acc );
+          } else {
+            TDToast.makeBad( R.string.GPX_record_none );
           }
         } catch ( FileNotFoundException e ) {
           TDLog.Error( "File not found " + e.getMessage() );

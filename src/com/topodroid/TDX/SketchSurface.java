@@ -91,6 +91,10 @@ public class SketchSurface extends SurfaceView
    */
   float getScale() { return ( commandManager == null )? 1 : commandManager.getScale(); }
 
+  /** @return the leg-view rotation angle
+   */
+  float getLegViewRotation() { return ( commandManager == null )? 0 : commandManager.getLegViewRotation(); }
+
   // private Timer mTimer;
   // private TimerTask mTask;
 
@@ -271,14 +275,31 @@ public class SketchSurface extends SurfaceView
    */
   void clearSketch() { if ( commandManager != null ) commandManager.clearSketch(); }
 
+  /** add a station path
+   * @param path  station path
+   */
+  void addStationPath( SketchStationPath path ) { if ( commandManager != null ) commandManager.addTmpStationPath( path ); }
+
+  /** add a splay path
+   * @param path  splay path
+   */
   void addFixedSplayPath( SketchFixedPath path ) { if ( commandManager != null ) commandManager.addTmpSplayPath( path ); }
 
-  /**
+  /** add a neighbor leg path
+   * @param path  neighbor leg path
+   */
+  void addFixedNghblegPath( SketchFixedPath path ) { if ( commandManager != null ) commandManager.addTmpNghblegPath( path ); }
+
+  /** add the main leg path
+   * @param path  main leg path
    * @note this starts a new reference in the command manager
    */
   void addFixedLegPath( SketchFixedPath path ) { if ( commandManager != null ) commandManager.addTmpLegPath( path ); }
 
-  // k : grid type 1, 10, 100
+  /** add a grid line
+   * @param path   grid line
+   * @param k      grid-line type 1, 10, 100
+   */
   public void addGridPath( SketchFixedPath path, int k ) { if ( commandManager != null ) commandManager.addTmpGrid( path, k ); }
 
   // DEBUG

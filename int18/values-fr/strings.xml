@@ -1188,7 +1188,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="title_fixed_gpx_rec">Geo points [GPX Recorder]</string>
     <string name="title_fixed_gps_pos">Geo points [GPS Position]</string>
     <string name="title_fixed_gps_test">Geo points [GPS Test]</string>
-	<string name="title_fixed_gps_logger">Geo points [GPS Logger]</string>
+    <string name="title_fixed_gps_logger">Geo points [GPS Logger]</string>
+    <!-- TODO string name="title_fixed_gps_point">Geo points [GPS Point]</string -->
     <string name="title_fixed_edit">Modifier point</string>
     <string name="title_fixed_import">Importer un point</string>
     <string name="title_fixed_gps">Coordonnées du GPS</string>

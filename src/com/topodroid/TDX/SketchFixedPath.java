@@ -25,7 +25,7 @@ import com.topodroid.math.TDVector;
 import java.io.DataOutputStream;
 import java.io.DataInputStream;
 
-import android.graphics.Canvas;
+// import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Matrix;

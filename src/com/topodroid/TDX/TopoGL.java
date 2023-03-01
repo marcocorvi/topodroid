@@ -194,21 +194,21 @@ public class TopoGL extends Activity
 
   // SKETCH
   Cave3DShot mSketchLeg = null;
-  ArrayList< Cave3DShot > mSketchSplaysFrom = new ArrayList<>();
-  ArrayList< Cave3DShot > mSketchSplaysTo   = new ArrayList<>();
 
   void setSketchLeg( Cave3DShot leg )
   {
     mSketchLeg = leg;
-    mSketchSplaysFrom.clear();
-    mSketchSplaysTo.clear();
-    if ( mSketchLeg != null && mParser != null ) {
-      Cave3DStation fs = leg.from_station;
-      Cave3DStation ts = leg.to_station;
-      mSketchSplaysFrom = mParser.getSplaysAt( fs );
-      mSketchSplaysTo   = mParser.getSplaysAt( ts );
-    }
   }
+
+  /** @return the array of splays at a given station
+   * @param st    station
+   */
+  ArrayList< Cave3DShot > getSplaysAt( Cave3DStation st ) { return (mParser == null)? null : mParser.getSplaysAt( st ); }
+
+  /** @return the array of legs at a given station
+   * @param st    station
+   */
+  ArrayList< Cave3DShot > getLegsAt( Cave3DStation st ) { return (mParser == null)? null : mParser.getLegsAt( st ); }
 
   // -------------------------------------------------------
 

@@ -112,9 +112,10 @@ public class SketchSection extends SketchPath
    */
   void setZeroAlpha( float theta )
   {
-    mMaxAlpha = 90 - theta;
-    mMinAlpha = -90 - theta;
-    mCanRotate = (mMaxAlpha - mMinAlpha ) > 90;
+    mAlpha    = theta;
+    mMaxAlpha = theta + 30; if ( mMaxAlpha >  90 ) mMaxAlpha =  90;
+    mMinAlpha = theta - 30; if ( mMinAlpha < -90 ) mMinAlpha = -90;
+    mCanRotate = true;
   }
 
   /** set the projection rotation-angle
@@ -132,6 +133,8 @@ public class SketchSection extends SketchPath
     mN = new TDVector( c*mNp.x - s*mSp.x, c*mNp.y - s*mSp.y, c*mNp.z - s*mSp.z );
     mS = new TDVector( c*mSp.x + s*mNp.x, c*mSp.y + s*mNp.y, c*mSp.z + s*mNp.z );
   }
+
+  float getRotation( ) { return mAlpha; }
 
   /** change the projection angle - only leg-view
    * @param delta angle change [degree]
@@ -192,19 +195,14 @@ public class SketchSection extends SketchPath
   }
 
 
-  // public void draw( Canvas canvas, TDVector C, TDVector X, TDVector Y, float zoom, float off_x, float off_y )
-  // {
-  //   for ( SketchLinePath line : mLines ) line.draw( canvas, C, X, Y, zoom, off_x, off_y );
-  // }
-
-  public void draw( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y, float zoom, float off_x, float off_y )
+  public void draw( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y )
   {
-    for ( SketchLinePath line : mLines ) line.draw( canvas, mm, C, X, Y, zoom, off_x, off_y );
+    for ( SketchLinePath line : mLines ) line.draw( canvas, mm, C, X, Y );
   }
 
-  public void drawPoints( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y, float zoom, float off_x, float off_y, float r )
+  public void drawPoints( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y, float r )
   {
-    for ( SketchLinePath line : mLines ) line.drawPoints( canvas, mm, C, X, Y, zoom, off_x, off_y, r );
+    for ( SketchLinePath line : mLines ) line.drawPoints( canvas, mm, C, X, Y, r );
   }
 
   void addEraseCommand( EraseCommand cmd ) 

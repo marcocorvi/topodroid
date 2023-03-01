@@ -269,18 +269,21 @@ public class Cave3DShot
     return (from_station.depth + to_station.depth)/2;
   }
 
-  // return the 3D vector (E, N, Up )
+  /** return the 3D vector (E, N, Up )
+   */
   public Vector3D toVector3D() 
   {
     double h = len * Math.cos(cln);
     return new Vector3D( (h * Math.sin(ber)), (h * Math.cos(ber)), (len * Math.sin(cln)) );
   }
 
-  // return the TD vector (E, N, Up )
+  /** @return the TD vector (E, N, Down )
+   * @note used by SketchWindow
+   */
   public TDVector toTDVector()
   {
     double h = len * Math.cos(cln);
-    return new TDVector( (float)(h * Math.sin(ber)), (float)(h * Math.cos(ber)), (float)(len * Math.sin(cln)) );
+    return new TDVector( (float)(h * Math.sin(ber)), (float)(h * Math.cos(ber)), -(float)(len * Math.sin(cln)) );
   }
 
   // makes sense only for splays

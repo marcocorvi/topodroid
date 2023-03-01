@@ -1179,6 +1179,7 @@
     <!-- TODO string name="title_fixed_gps_pos">Geo points [GPS Position]</string -->
     <!-- TODO string name="title_fixed_gps_test">Geo points [GPS Test]</string -->
     <!-- TODO string name="title_fixed_gps_logger">Geo points [GPS Logger]</string -->
+    <!-- TODO string name="title_fixed_gps_point">Geo points [GPS Point]</string -->
     <string name="title_fixed_edit">位置编辑</string>
     <string name="title_fixed_import">位置导入</string>
     <string name="title_fixed_gps">GPS坐标数据</string>

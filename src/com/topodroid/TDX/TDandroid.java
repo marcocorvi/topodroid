@@ -631,6 +631,12 @@ public class TDandroid
     } catch ( PackageManager.NameNotFoundException e ) {
       TDLog.Error( e.getMessage() );
     }
+    try {
+      PackageInfo pi = pm.getPackageInfo( "sk.grecnar.gpspoint", 0 );
+      ret |= FixedActivity.FLAG_GPS_POINT;
+    } catch ( PackageManager.NameNotFoundException e ) {
+      TDLog.Error( e.getMessage() );
+    }
     return ret;
   }
 

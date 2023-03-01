@@ -176,8 +176,15 @@ public class SketchLinePath extends SketchPath
     TDLog.v("LINE erase at: min diff " + min_diff );
   }
 
-  // @param r  dot radius
-  void drawPoints( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y, float zoom, float off_x, float off_y, float r )
+  /** draw the path on a canvas
+   * @param canvas   canvas - N.B. canvas is guaranteed not null
+   * @param matrix   transform matrix
+   * @param C        center (E,N,Up)
+   * @param X        horizontal direction (E,N,Up)
+   * @param Y        downward direction in (E,N,Up)
+   * @param r        dot radius
+   */
+  void drawPoints( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y, float r )
   {
     if ( ! mVisible ) return;
     Path path = new Path();

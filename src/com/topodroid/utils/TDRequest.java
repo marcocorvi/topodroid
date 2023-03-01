@@ -30,6 +30,7 @@ public class TDRequest
   public static final int REQUEST_GPS_POSITION       = 15; // cvs
   public static final int REQUEST_GPS_TEST           = 16; // csv
   public static final int REQUEST_GPS_LOGGER         = 17; // csv
+  public static final int REQUEST_GPS_POINT          = 18; // plain text
 
   // public static final int REQUEST_TREE_URI = 20;
 

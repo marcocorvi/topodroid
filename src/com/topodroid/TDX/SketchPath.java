@@ -42,11 +42,13 @@ public class SketchPath
   public static final int SKETCH_PATH_LEG     = 0; // leg
   public static final int SKETCH_PATH_SPLAY   = 1; // splay
   public static final int SKETCH_PATH_GRID    = 2; // grid
-  public static final int SKETCH_PATH_WALL    = 3;
-  public static final int SKETCH_PATH_SECTION = 4;
-  public static final int SKETCH_PATH_LINE    = 5;
-  // public static final int SKETCH_PATH_POINT   = 4; // drawing point
-  // public static final int SKETCH_PATH_AREA    = 6;
+  public static final int SKETCH_PATH_NGHB    = 3; // neighbor leg
+  public static final int SKETCH_PATH_WALL    = 4;
+  public static final int SKETCH_PATH_STATION = 5;
+  public static final int SKETCH_PATH_SECTION = 6;
+  public static final int SKETCH_PATH_LINE    = 7;
+  // public static final int SKETCH_PATH_POINT   = 8; // drawing point
+  // public static final int SKETCH_PATH_AREA    = 9;
 
   protected int mType;      // path type
   protected boolean  mVisible = true; 
@@ -112,25 +114,6 @@ public class SketchPath
 
   public int size() { return 0; }
 
-  // /** draw the path on a canvas
-  //  * @param canvas   canvas - N.B. canvas is guaranteed not null
-  //  * @param C        center (E,N,Up)
-  //  * @param X        horizontal direction (E,N,Up)
-  //  * @param Y        downward direction in (E,N,Up)
-  //  * @param zoom     zoom
-  //  * @param off_x    X offset
-  //  * @param off_y    Y offset
-  //  */
-  // public void draw( Canvas canvas, TDVector C, TDVector X, TDVector Y, float zoom, float off_x, float off_y )
-  // {
-  //   if ( ! mVisible ) return;
-  //   Path path = makeProjectedPath( C, X, Y );
-  //   if ( path != null ) {
-  //     path.offset( off_x, off_y );
-  //     drawPath( path, canvas );
-  //   }
-  // }
-
 
   /** draw the path on a canvas
    * @param canvas   canvas - N.B. canvas is guaranteed not null
@@ -138,11 +121,8 @@ public class SketchPath
    * @param C        center (E,N,Up)
    * @param X        horizontal direction (E,N,Up)
    * @param Y        downward direction in (E,N,Up)
-   * @param zoom     zoom
-   * @param off_x    X offset
-   * @param off_y    Y offset
    */
-  public void draw( Canvas canvas, Matrix matrix, TDVector C, TDVector X, TDVector Y, float zoom, float off_x, float off_y )
+  public void draw( Canvas canvas, Matrix matrix, TDVector C, TDVector X, TDVector Y )
   {
     if ( ! mVisible ) return;
     Path path = makeProjectedPath( C, X, Y );

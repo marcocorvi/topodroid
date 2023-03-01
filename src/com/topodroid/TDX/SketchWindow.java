@@ -106,7 +106,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.Paint;
-import android.graphics.Paint.FontMetrics;
+// import android.graphics.Paint.FontMetrics;
 import android.graphics.PointF;
 import android.graphics.RectF;
 // import android.graphics.Rect;
@@ -559,14 +559,45 @@ public class SketchWindow extends ItemDrawer
     float theta = TDMath.atan2d( v2.z, TDMath.sqrt( v2.x*v2.x + v2.y*v2.y) );
     // TDLog.v("SKETCH V2: E " + v2.x + " N " + v2.y + " Up " + v2.z + " theta " + theta );
     addFixedLeg( v1, v2 );
-    for ( Cave3DShot sp : topoGL.mSketchSplaysFrom ) {
+    Cave3DStation st1 = leg.from_station;
+    Cave3DStation st2 = leg.to_station;
+    addStation( v1, st1.getShortName() );
+    addStation( v2, st2.getShortName() );
+    for ( Cave3DShot sp : topoGL.getSplaysAt( st1 ) ) {
       TDVector v = sp.toTDVector(); // .plus( v1 );
       addFixedSplay( v1, v );
     }
-    for ( Cave3DShot sp : topoGL.mSketchSplaysTo ) {
+    for ( Cave3DShot sp : topoGL.getSplaysAt( st2 ) ) {
       TDVector v = sp.toTDVector().plus( v2 );
       addFixedSplay( v2, v );
     }
+    for ( Cave3DShot lg : topoGL.getLegsAt( st1 ) ) {
+      if ( lg != leg ) {
+        if ( lg.from_station == st1 ) {
+          TDVector v = v1.plus( lg.toTDVector() );
+          addFixedNghbleg( v1, v );
+          addStation( v, lg.to_station.getShortName() );
+        } else if ( lg.to_station == st1 ) {
+          TDVector v = v1.minus( lg.toTDVector() );
+          addFixedNghbleg( v1, v );
+          addStation( v, lg.from_station.getShortName() );
+        }
+      }
+    }
+    for ( Cave3DShot lg : topoGL.getLegsAt( st2 ) ) {
+      if ( lg != leg ) {
+        if ( lg.from_station == st2 ) {
+          TDVector v = v2.plus( lg.toTDVector() );
+          addFixedNghbleg( v2, v );
+          addStation( v, lg.to_station.getShortName() );
+        } else if ( lg.to_station == st2 ) {
+          TDVector v = v2.minus( lg.toTDVector() );
+          addFixedNghbleg( v2, v );
+          addStation( v, lg.from_station.getShortName() );
+        }
+      }
+    }
+
     // TODO make the grid
     int i1 = -3;
     int i2 =  3;
@@ -672,6 +703,13 @@ public class SketchWindow extends ItemDrawer
   //   mSketchSurface.setProjection( C, X, Y, z );
   // }
 
+  private SketchPath addStation( TDVector v, String name )
+  { 
+    SketchStationPath path = new SketchStationPath( BrushManager.labelPaint, v, name );
+    mSketchSurface.addStationPath( path );
+    return path;
+  }
+
   /** used to add legs and splays
    * @param v1    leg first endpoint (E,N,Up)
    * @param v2    leg second endpoint (E,N,Up)
@@ -681,6 +719,18 @@ public class SketchWindow extends ItemDrawer
   {
     SketchFixedPath path = new SketchFixedPath( SketchPath.SKETCH_PATH_LEG, BrushManager.fixedShotPaint, v1, v2 );
     mSketchSurface.addFixedLegPath( path );
+    return path;
+  }
+
+  /** used to add legs and splays
+   * @param v1    leg first endpoint (E,N,Up)
+   * @param v2    leg second endpoint (E,N,Up)
+   * @note this starts a new reference in the command manager
+   */
+  private SketchPath addFixedNghbleg( TDVector v1, TDVector v2 )
+  {
+    SketchFixedPath path = new SketchFixedPath( SketchPath.SKETCH_PATH_NGHB, BrushManager.fixedShotPaint, v1, v2 );
+    mSketchSurface.addFixedNghblegPath( path );
     return path;
   }
 
@@ -764,6 +814,7 @@ public class SketchWindow extends ItemDrawer
     } else if ( mMode == MODE_ERASE ) {
       sb.append( res.getString( R.string.title_erase ) );
     }
+    sb.append( String.format(Locale.US, ": %.0f", mSketchSurface.getLegViewRotation() ) );
     mActivity.setTitle( sb.toString() );
   }
 
@@ -1922,6 +1973,7 @@ public class SketchWindow extends ItemDrawer
     //   modified();
     } else if ( mTouchMode == MODE_ROTATE ) {
       mSketchSurface.changeAlpha( (yc > mSaveY)? +1 : -1 );
+      setTheTitle();
       mSaveX = xc;
       mSaveY = yc;
     } else { // mTouchMode == MODE_ZOOM
