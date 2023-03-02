@@ -59,7 +59,11 @@ public class SketchLinePath extends SketchPath
   /** append a point to the line
    * @param v   point 3D vector
    */
-  void appendPoint( TDVector v ) { mPts.add( new SketchPoint( v, this ) ); }
+  void appendPoint( TDVector v )
+  { 
+    TDLog.v("LINE " + mId + "." + mSid + " add pt " + v.x + " " + v.y + " " + v.z );
+    mPts.add( new SketchPoint( v, this ) );
+  }
 
 
   /** @return the line ID

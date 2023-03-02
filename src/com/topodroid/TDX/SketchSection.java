@@ -23,7 +23,9 @@ import java.io.DataOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
+import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -37,7 +39,7 @@ public class SketchSection extends SketchPath
   private int nMaxLineId = 0;
   SketchPoint mP1;
   SketchPoint mP2;
-  TDVector    mC;   // midpoint
+  TDVector    mC;   // section center
   TDVector    mN;   // projection normal
   TDVector    mH;   // X unit rightward
   TDVector    mS;   // projection Y unit downward
@@ -50,6 +52,7 @@ public class SketchSection extends SketchPath
   TDVector    mSp;  // section-plane Y
   
   ArrayList< SketchLinePath > mLines; // lines, in the plane of the section
+  private List< SketchFixedPath > mSectionGrid = null;
 
   public SketchSection( int id, TDVector c, TDVector h, TDVector s, TDVector n )
   {
@@ -63,15 +66,16 @@ public class SketchSection extends SketchPath
     mS = s;
     mN = n;
     mLines = new ArrayList< SketchLinePath >();
-    TDLog.v("SKETCH legviews C " + c.x + " " + c.y + " " + c.z );
     mNp = mN;
     mSp = mS;
+    TDLog.v("SKETCH legviews C " + mC.x + " " + mC.y + " " + mC.z );
   }
 
   /** cstr
    * @param p1   first base point
    * @param p2   second base point
    * @param vertical 
+   * @note the section center i sthe midpoint of the two base points
    */
   public SketchSection( int id, SketchPoint p1, SketchPoint p2, boolean vertical )
   {
@@ -85,7 +89,8 @@ public class SketchSection extends SketchPath
       float dx = p2.x - p1.x; // East
       float dy = p2.y - p1.y; // North
       float dz = p2.z - p1.z; // Upward
-      TDLog.v("SKETCH section (vert " + vertical + ") " + dx + " " + dy + " " + dz );
+      TDLog.v("SKETCH section C " + mC.x + " " + mC.y + " " + mC.z );
+      // TDLog.v("SKETCH section (vert " + vertical + ") " + dx + " " + dy + " " + dz );
       float dh = TDMath.sqrt( dx*dx + dy*dy );
       if ( vertical ) {
         mS = new TDVector(      0,     0, -1 );
@@ -105,6 +110,27 @@ public class SketchSection extends SketchPath
     mLines = new ArrayList< SketchLinePath >();
     mNp = mN;
     mSp = mS;
+  }
+
+  /** make the sections grid
+   * @param size   grid (half) size 
+   */
+  void makeSectionGrid( int size )
+  {
+    mSectionGrid = Collections.synchronizedList(new ArrayList< SketchFixedPath >());
+    Paint paint = BrushManager.fixedGridPaint;
+    for ( int i=-size; i<=size; ++i ) {
+      TDVector v1 = new TDVector( mC.x + i*mH.x - size*mS.x, mC.y + i*mH.y - size*mS.y, mC.z + i*mH.z - size*mS.z );
+      TDVector v2 = new TDVector( mC.x + i*mH.x + size*mS.x, mC.y + i*mH.y + size*mS.y, mC.z + i*mH.z + size*mS.z );
+      SketchFixedPath path = new SketchFixedPath( SketchPath.SKETCH_PATH_GRID, paint, v1, v2 );
+      mSectionGrid.add( path );
+    }
+    for ( int j=-size; j<=size; ++j ) {
+      TDVector v1 = new TDVector( mC.x - size*mH.x + size*mS.x, mC.y - size*mH.y + j*mS.y, mC.z - size*mH.z + j*mS.z );
+      TDVector v2 = new TDVector( mC.x + size*mH.x + size*mS.x, mC.y + size*mH.y + j*mS.y, mC.z + size*mH.z + j*mS.z );
+      SketchFixedPath path = new SketchFixedPath( SketchPath.SKETCH_PATH_GRID, paint, v1, v2 );
+      mSectionGrid.add( path );
+    }
   }
 
   /** set the projection rotation-angle min-max
@@ -161,9 +187,9 @@ public class SketchSection extends SketchPath
    */
   TDVector toTDVector( float xw, float yw )
   {
-    TDVector w = new TDVector( mC.x + xw*mH.x + yw*mS.x, mC.y + xw*mH.y + yw*mS.y, mC.z + xw*mH.z + yw*mS.z );
+    TDVector w = new TDVector( xw*mH.x + yw*mS.x, xw*mH.y + yw*mS.y, xw*mH.z + yw*mS.z );
     float g = ( w.dot( mNp ) ) / TDMath.cosd( mAlpha );
-    return new TDVector( w.x - g * mN.x, w.y - g * mN.y, w.z - g * mN.z );
+    return mC.plus( new TDVector( w.x - g * mN.x, w.y - g * mN.y, w.z - g * mN.z ) );
   }
 
   /** delete a line
@@ -194,10 +220,15 @@ public class SketchSection extends SketchPath
     return false;
   }
 
+  public void drawGrid( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y )
+  {
+    if ( mSectionGrid == null ) return;
+    for ( SketchPath line : mSectionGrid ) line.draw( canvas, mm, C, X, Y );
+  }
 
   public void draw( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y )
   {
-    for ( SketchLinePath line : mLines ) line.draw( canvas, mm, C, X, Y );
+    for ( SketchPath line : mLines ) line.draw( canvas, mm, C, X, Y );
   }
 
   public void drawPoints( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y, float r )

@@ -557,7 +557,8 @@ public class SketchWindow extends ItemDrawer
     TDVector v1 = new TDVector();
     TDVector v2 = leg.toTDVector(); // (E,N,Up)
     float theta = TDMath.atan2d( v2.z, TDMath.sqrt( v2.x*v2.x + v2.y*v2.y) );
-    // TDLog.v("SKETCH V2: E " + v2.x + " N " + v2.y + " Up " + v2.z + " theta " + theta );
+    TDLog.v("SKETCH leg " + leg.from + "-" + leg.to + " L " + leg.len + " A " + leg.ber + " C " + leg.cln );
+    TDLog.v("SKETCH V2: E " + v2.x + " N " + v2.y + " Up " + v2.z + " theta " + theta );
     addFixedLeg( v1, v2 );
     Cave3DStation st1 = leg.from_station;
     Cave3DStation st2 = leg.to_station;
@@ -577,10 +578,12 @@ public class SketchWindow extends ItemDrawer
           TDVector v = v1.plus( lg.toTDVector() );
           addFixedNghbleg( v1, v );
           addStation( v, lg.to_station.getShortName() );
+          TDLog.v("SKETCH station " + lg.from + "-" + lg.to + " L " + lg.len + " A " + lg.ber + " C " + lg.cln + " " + v.x + " " + v.y + " " + v.z );
         } else if ( lg.to_station == st1 ) {
           TDVector v = v1.minus( lg.toTDVector() );
           addFixedNghbleg( v1, v );
           addStation( v, lg.from_station.getShortName() );
+          TDLog.v("SKETCH station " + lg.from + "-" + lg.to + " L " + lg.len + " A " + lg.ber + " C " + lg.cln + " " + v.x + " " + v.y + " " + v.z );
         }
       }
     }
@@ -590,10 +593,12 @@ public class SketchWindow extends ItemDrawer
           TDVector v = v2.plus( lg.toTDVector() );
           addFixedNghbleg( v2, v );
           addStation( v, lg.to_station.getShortName() );
+          TDLog.v("SKETCH station " + lg.from + "-" + lg.to + " L " + lg.len + " A " + lg.ber + " C " + lg.cln + " " + v.x + " " + v.y + " " + v.z );
         } else if ( lg.to_station == st2 ) {
           TDVector v = v2.minus( lg.toTDVector() );
           addFixedNghbleg( v2, v );
           addStation( v, lg.from_station.getShortName() );
+          TDLog.v("SKETCH station " + lg.from + "-" + lg.to + " L " + lg.len + " A " + lg.ber + " C " + lg.cln + " " + v.x + " " + v.y + " " + v.z );
         }
       }
     }

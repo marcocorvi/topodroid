@@ -277,13 +277,13 @@ public class Cave3DShot
     return new Vector3D( (h * Math.sin(ber)), (h * Math.cos(ber)), (len * Math.sin(cln)) );
   }
 
-  /** @return the TD vector (E, N, Down )
+  /** @return the TD vector (E, N, Up )
    * @note used by SketchWindow
    */
   public TDVector toTDVector()
   {
     double h = len * Math.cos(cln);
-    return new TDVector( (float)(h * Math.sin(ber)), (float)(h * Math.cos(ber)), -(float)(len * Math.sin(cln)) );
+    return new TDVector( (float)(h * Math.sin(ber)), (float)(h * Math.cos(ber)), (float)(len * Math.sin(cln)) );
   }
 
   // makes sense only for splays

@@ -510,7 +510,11 @@ public class SketchCommandManager
    * @param section   new section
    * @note the section is not opened
    */
-  void addSection( SketchSection section ) { mSections.add( section ); }
+  void addSection( SketchSection section ) 
+  { 
+    section.makeSectionGrid( 10 );
+    mSections.add( section ); 
+  }
 
   /** Open a section
    * @param section   section to open
@@ -547,6 +551,10 @@ public class SketchCommandManager
     mH0 = h;
     mS0 = s;
     mN0 = n;
+    TDLog.v("MANGAER set view point C " + c.x + " " + c.y + " " + c.z );
+    TDLog.v("                       H " + h.x + " " + h.y + " " + h.z );
+    TDLog.v("                       S " + s.x + " " + s.y + " " + s.z );
+    TDLog.v("                       N " + n.x + " " + n.y + " " + n.z );
   }
 
   // called by SketchSurface.getBitmap()
@@ -592,6 +600,7 @@ public class SketchCommandManager
     Matrix mm    = mMatrix; // mMatrix = Scale( 1/s, 1/s) * Translate( -Offx, -Offy)  (first translate then scale)
     float  scale = mScale;
     RectF  bbox  = mBBox;
+    float dot_radius = TDSetting.mDotRadius/mZoom;
 
     synchronized( TDPath.mGridsLock ) {
       if( mGridStack1 != null ) {
@@ -614,11 +623,14 @@ public class SketchCommandManager
         for ( SketchPath nghb : mNghblegsStack ) nghb.draw( canvas, mm, mC0, mH0, mS0 );
         for ( SketchPath station : mStationsStack ) station.draw( canvas, mm, mC0, mH0, mS0 );
         for ( SketchSection section : mSections ) {
-          section.draw( canvas, mm, mC0.minus( section.mC ), mH0, mS0 );
+          section.draw( canvas, mm, mC0, mH0, mS0 );
         }
       } else {
+        mCurrentScrap.drawGrid( canvas, mm, mC0, mH0, mS0 );
         int k = 0;
         for ( SketchPath station : mStationsStack ) { station.draw( canvas, mm, mC0, mH0, mS0 ); if ( ++k >= 2 ) break; }
+        if ( mCurrentScrap.mP1 != null ) mCurrentScrap.mP1.drawPoint( canvas, mm, mC0, mH0, mS0, 2*dot_radius );
+        if ( mCurrentScrap.mP2 != null ) mCurrentScrap.mP2.drawPoint( canvas, mm, mC0, mH0, mS0, 2*dot_radius );
       }
       drawSideDrag( canvas );
       mCurrentScrap.draw( canvas, mm, mC0, mH0, mS0 );
@@ -626,7 +638,6 @@ public class SketchCommandManager
  
     synchronized( TDPath.mSelectionLock ) {
       if ( isSelectable() ) {
-        float dot_radius = TDSetting.mDotRadius/mZoom;
         mCurrentScrap.drawPoints( canvas, mm, mC0, mH0, mS0, dot_radius );
         if ( mSelected[0] != null ) mSelected[0].drawPoint( canvas, mm, mC0, mH0, mS0, 2*dot_radius );
         if ( mSelected[1] != null ) mSelected[1].drawPoint( canvas, mm, mC0, mH0, mS0, 2*dot_radius );
