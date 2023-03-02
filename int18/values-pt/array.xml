@@ -47,10 +47,10 @@
   </string-array>
   <string-array name="lineContinue">
     <item name="none">nenhuma</item>
-    <item name="start">ligar ao ponto inicial</item>
-    <item name="end">ligar ao ponto final</item>
-    <item name="both">ligar às 2 extremidades</item>
-    <item name="continue">continuar</item>
+    <item name="start">liga início</item>
+    <item name="end">liga fim</item>
+    <item name="both">liga 2 extremidades</item>
+    <item name="continue">continua</item>
   </string-array>
   <string-array name="unitGrid">
     <item name="meter">metros</item>
@@ -311,11 +311,11 @@
      <item name="tro">tro</item>
   </string-array -->
   <string-array name="lineStyle">
-    <item name="none">Detalhado</item>
+    <item name="none">Detalhada</item>
     <item name="two">Normal</item>
-    <item name="three">Grosseiro</item>
-    <item name="bezier">Bezier (curva paramétrica)</item>
-    <item name="simplified">Simplificado</item>
+    <item name="three">Grosseira</item>
+    <item name="bezier">Bézier (curva)</item>
+    <item name="simplified">Simplificada</item>
   </string-array>
   <string-array name="groupBy">
     <!-- item name="distance">Distância</item -->
