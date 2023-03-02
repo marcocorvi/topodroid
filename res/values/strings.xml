@@ -1047,6 +1047,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="help_symbol_plot">Select the active drawing tool</string>
     <string name="help_delete_item">Delete sketch item</string>
     <string name="help_section_item">Sketch section item</string>
+    <string name="help_select_clear">Clear sketch selection</string>
     <string name="help_range">Moving a portion of line</string>
     <!-- UNUSED string name="help_clear">Clear selection</string -->
     <string name="help_eraser">Erase mode</string>

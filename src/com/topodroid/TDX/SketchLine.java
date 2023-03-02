@@ -36,7 +36,7 @@ public class SketchLine // world coords
   /** @return distance of a point from the line
    * @param pt   3D point (world coords)
    */
-  float distance( SketchPoint pt )
+  float distance( TDVector pt )
   {
     TDVector v = pt.minus( mC );
     float a = mN.dot( v );
@@ -47,7 +47,7 @@ public class SketchLine // world coords
   /** @return squared distance of a point from the line
    * @param pt   3D point
    */
-  float distanceSquared( SketchPoint pt )
+  float distanceSquared( TDVector pt )
   {
     TDVector v = pt.minus( mC );
     float a = mN.dot( v );

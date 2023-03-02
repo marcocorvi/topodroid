@@ -36,33 +36,48 @@ import android.graphics.Matrix;
 
 public class SketchStationPath extends SketchPath 
 {
-  private TDVector mV; // (E,N,Up)
+  private TDVector mV;    // (E,N,Up)
   private String mName;
+  private String mFrom;   // name of the other leg station
+  private boolean mForward; // true if this station is to TO of its leg (false if FROM is null)
 
   /** cstr
    * @param paint  path paint
    * @param v      station point vector (E,N,Up)
    * @param name   station name
    */
-  public SketchStationPath( Paint paint, TDVector v, String name )
+  public SketchStationPath( Paint paint, TDVector v, String name, String from, boolean forward )
   {
     super( SketchPath.SKETCH_PATH_STATION, paint );
     mV = v;
     mName = name;
+    mFrom = from;
+    mForward = forward;
   }
+
+  /** @return the station 3D vector point
+   */
+  TDVector getTDVector() { return mV; }
 
   // void dump( String msg )
   // {
   //   TDLog.v("SKETCH " + msg + ": " + name + " " + mV.x + " " + mV.y + " " + mV.z );
   // }
 
+  /** @return the station name
+   */
   String name() { return mName; }
+
+  /** @return the name of the other leg-station
+   */
+  String from() { return mFrom; }
 
   /** @return the number of points in the path
    */
   @Override
   public int size() { return 1; }
 
+  boolean isForward() { return mForward; }
 
   /** write the path to a data stream - it does nothing by default
    * @param dos   output stream
@@ -126,6 +141,11 @@ public class SketchStationPath extends SketchPath
     Path path = makeProjectedPath( C, X, Y );
     path.transform( mm );
     canvas.drawTextOnPath( mName, path, 0f, 0f, mPaint );
+  }
+
+  public void drawPoint( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y, float radius )
+  {
+    SketchPath.drawVector( mV, canvas, mm, C, X, Y, radius );
   }
 
 }

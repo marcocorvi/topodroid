@@ -151,6 +151,8 @@ public class SketchWindow extends ItemDrawer
                         R.drawable.iz_delete_off,
                         R.drawable.iz_section_ok,    // 13
                         R.drawable.iz_section_no,    // 14
+                        R.drawable.iz_open,          // 15
+                        R.drawable.iz_clear,         // 16
                         R.drawable.iz_menu,
   };
   private static final int IC_SMALL      = 8;
@@ -162,13 +164,14 @@ public class SketchWindow extends ItemDrawer
   private static final int IC_DELETE_NO  = 12;
   private static final int IC_SECTION_OK = 13;
   private static final int IC_SECTION_NO = 14;
-  private static final int IC_MENU       = 15;
+  private static final int IC_SECTION_OPEN = 15;
+  private static final int IC_MENU       = 17;
 
 
   private static final int NR_BUTTON1 = 6;
-  private static final int NR_BUTTON2 = 5;
-  private static final int NR_BUTTON3 = 6;
-  private static final int NR_BUTTON5 = 6;
+  private static final int NR_BUTTON2 = 5; // DRAW
+  private static final int NR_BUTTON3 = 7; // SELECT
+  private static final int NR_BUTTON5 = 6; // ERASE
 
   // private static final int mNrMove = 6;
   private static final int[] izons_move = {
@@ -204,7 +207,7 @@ public class SketchWindow extends ItemDrawer
                         R.string.help_redo
   };
 
-  // private static final int mNrEdit = 8;
+  // private static final int mNrEdit = 7;
   private static final int[] izons_select = {
                         R.drawable.iz_edit,
                         R.drawable.iz_eraser,
@@ -214,6 +217,7 @@ public class SketchWindow extends ItemDrawer
                         R.drawable.iz_medium,
                         R.drawable.iz_delete_off,
                         R.drawable.iz_section_no,
+                        R.drawable.iz_clear,
   };
   private static final int[] help_icons_select = {
                         R.string.help_draw,
@@ -223,7 +227,8 @@ public class SketchWindow extends ItemDrawer
                         // R.string.help_next,
                         R.string.help_select_size,
                         R.string.help_delete_item,
-                        R.string.help_section_item
+                        R.string.help_section_item,
+                        R.string.help_select_clear
   };
   // private static final int BTN_SELECT_PREV = 3;
   // private static final int BTN_SELECT_NEXT = 4;
@@ -417,6 +422,7 @@ public class SketchWindow extends ItemDrawer
   // private BitmapDrawable mBMnext;
   private BitmapDrawable mBMsectionOk;
   private BitmapDrawable mBMsectionNo;
+  private BitmapDrawable mBMsectionOpen;
 
   private MyHorizontalListView mListView;
   private ListView   mMenu;
@@ -562,8 +568,8 @@ public class SketchWindow extends ItemDrawer
     addFixedLeg( v1, v2 );
     Cave3DStation st1 = leg.from_station;
     Cave3DStation st2 = leg.to_station;
-    addStation( v1, st1.getShortName() );
-    addStation( v2, st2.getShortName() );
+    addStation( v1, st1.getShortName(), null, false );
+    addStation( v2, st2.getShortName(), null, false );
     for ( Cave3DShot sp : topoGL.getSplaysAt( st1 ) ) {
       TDVector v = sp.toTDVector(); // .plus( v1 );
       addFixedSplay( v1, v );
@@ -577,12 +583,12 @@ public class SketchWindow extends ItemDrawer
         if ( lg.from_station == st1 ) {
           TDVector v = v1.plus( lg.toTDVector() );
           addFixedNghbleg( v1, v );
-          addStation( v, lg.to_station.getShortName() );
+          addStation( v, lg.to_station.getShortName(), lg.from_station.getShortName(), true );
           TDLog.v("SKETCH station " + lg.from + "-" + lg.to + " L " + lg.len + " A " + lg.ber + " C " + lg.cln + " " + v.x + " " + v.y + " " + v.z );
         } else if ( lg.to_station == st1 ) {
           TDVector v = v1.minus( lg.toTDVector() );
           addFixedNghbleg( v1, v );
-          addStation( v, lg.from_station.getShortName() );
+          addStation( v, lg.from_station.getShortName(), lg.to_station.getShortName(), false );
           TDLog.v("SKETCH station " + lg.from + "-" + lg.to + " L " + lg.len + " A " + lg.ber + " C " + lg.cln + " " + v.x + " " + v.y + " " + v.z );
         }
       }
@@ -592,12 +598,12 @@ public class SketchWindow extends ItemDrawer
         if ( lg.from_station == st2 ) {
           TDVector v = v2.plus( lg.toTDVector() );
           addFixedNghbleg( v2, v );
-          addStation( v, lg.to_station.getShortName() );
+          addStation( v, lg.to_station.getShortName(), lg.from_station.getShortName(), true );
           TDLog.v("SKETCH station " + lg.from + "-" + lg.to + " L " + lg.len + " A " + lg.ber + " C " + lg.cln + " " + v.x + " " + v.y + " " + v.z );
         } else if ( lg.to_station == st2 ) {
           TDVector v = v2.minus( lg.toTDVector() );
           addFixedNghbleg( v2, v );
-          addStation( v, lg.from_station.getShortName() );
+          addStation( v, lg.from_station.getShortName(), lg.to_station.getShortName(), false );
           TDLog.v("SKETCH station " + lg.from + "-" + lg.to + " L " + lg.len + " A " + lg.ber + " C " + lg.cln + " " + v.x + " " + v.y + " " + v.z );
         }
       }
@@ -708,9 +714,15 @@ public class SketchWindow extends ItemDrawer
   //   mSketchSurface.setProjection( C, X, Y, z );
   // }
 
-  private SketchPath addStation( TDVector v, String name )
+  /** add a new station
+   * @param v     station vector
+   * @param name  station name
+   * @param from  other station on the leg (null for the leg stations)
+   * @param forward true if the station is TO-station of the leg (false if FROM is null)
+   */
+  private SketchPath addStation( TDVector v, String name, String from, boolean forward )
   { 
-    SketchStationPath path = new SketchStationPath( BrushManager.labelPaint, v, name );
+    SketchStationPath path = new SketchStationPath( BrushManager.labelPaint, v, name, from, forward );
     mSketchSurface.addStationPath( path );
     return path;
   }
@@ -1052,6 +1064,7 @@ public class SketchWindow extends ItemDrawer
 
     mBMsectionOk = MyButton.getButtonBackground( this, res, izons[IC_SECTION_OK] );
     mBMsectionNo = MyButton.getButtonBackground( this, res, izons[IC_SECTION_NO] );
+    mBMsectionOpen = MyButton.getButtonBackground( this, res, izons[IC_SECTION_OPEN] );
 
     mBMdeleteOn  = MyButton.getButtonBackground( this, res, izons[IC_DELETE_OK] );
     mBMdeleteOff = MyButton.getButtonBackground( this, res, izons[IC_DELETE_NO] );
@@ -1539,9 +1552,15 @@ public class SketchWindow extends ItemDrawer
   {
     // if ( mLandscape ) { float t=x; x=-y; y=t; }
     if ( mMode == MODE_EDIT ) {
-      TDLog.v("SKETCH select ...");
+      // TDLog.v("SKETCH select at " + xc, + " " + yc + " ...");
       int selection = mSketchSurface.getItemAt( xc, yc, size );
-      setButton3( BTN_SECTION, ( ( selection < 2 )? mBMsectionNo : mBMsectionOk) );
+      if ( selection == 2 ) {
+        setButton3( BTN_SECTION, mBMsectionOk );
+      } else if ( mSketchSurface.hasSelectedStation() ) {
+        setButton3( BTN_SECTION, mBMsectionOpen );
+      } else {
+        setButton3( BTN_SECTION, mBMsectionNo );
+      } 
       // setButton3PrevNext();
     } 
   }
@@ -2178,10 +2197,16 @@ public class SketchWindow extends ItemDrawer
           mSketchSurface.addSection( section );
           mCurSection = mSketchSurface.openSection( section );
           TDLog.v("SKETCH open section " + mCurSection + " " + mMaxSection );
+        } else if ( mSketchSurface.hasSelectedStation() ) {
+          SketchStationPath station = mSketchSurface.getSelectedStation();
+          TDLog.v("SKETCH open new leg " + station.name() + " " + station.from() + " " + station.isForward() );
         } else {
           mCurSection = mSketchSurface.closeSection();
           TDLog.v("SKETCH close section - current " + mCurSection );
         }
+      } else if ( k3 < NR_BUTTON3 && b == mButton3[k3++] ) { // CLEAR SELECTION
+        mSketchSurface.clearSelected();
+        setButton3( BTN_SECTION, mBMsectionNo );
       }
 
     } else {

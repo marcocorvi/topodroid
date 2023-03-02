@@ -156,5 +156,15 @@ public class SketchPath
     if ( ! test ) TDLog.Error("ERROR failed " + msg );
   }
 
+  static void drawVector( TDVector vv, Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y, float r )
+  {
+    Path path = new Path();
+    TDVector v = vv.minus( C );
+    float x = X.dot( v ); // (world coord)
+    float y = Y.dot( v ); // downward 
+    path.addCircle( x, y, r, Path.Direction.CCW );
+    path.transform( mm );
+    canvas.drawPath( path, BrushManager.errorPaint );
+  }
 
 }

@@ -7,6 +7,7 @@ This dialog is opened from the <i>Import</i> button of the <a href="page_fixed_l
 
 With this dialog you can import in TopoDroid the coordinates of a point acquired with one of the supported GNSS apps.
 <br>
+<img src="gnss_apps.png">
 <br><p>
 
 <b>MobileTopographer</b><br>
@@ -23,18 +24,6 @@ If you do not select a <i>MobileTopographer</i> point-list file the app behaviou
 <img src="mobiletopographer_updown.png"> Optionally, you can go to the list of saved points in <i>MobileTopographer</i>, and
 move the point you just got to the top with the arrows.<br><p>
 
-<b>GPS Point</b><br>
-TopoDroid reads the coordinates exported to a point file: latitude, longitude, altitude, and accuracy.<br>
-<ol>
-<li>The app displays a list of saved points</li>
-<li><img src="gpspoint_btn1.png"> Open the GNSS interface</li> 
-<li><img src="gpspoint_btn2.png"> Acquire the GNSS position</li> 
-<li>The app displays the point with the circle of uncertainty on the map. The point coordinates, and other infos, are shown in a box.</li>
-<li>Save the point when done.</li>
-<li>Select the point from the list, and export to (text) file.</li>
-</ol>
-<img src="gpspoint_point.png"><br><p>
-
 <b>GPS Logger</b><br>
 The app displays the point coordinates and other infos.
 The track files are saved in the folder "gnss_log". They have an header with device info, and the points data in CSV records:
@@ -44,6 +33,16 @@ The log can contain also raw GNSS measurements, navigation messages, and NMEA se
 <li><img src="gpslogger_btn1.png"> Start recording the track points.</li>
 <li><img src="gpslogger_btn2.png"> Stop the track recording.</li>
 <li>Finalize the track. The track is added to the "tracklist".</li>
+</ol>
+<br><p>
+
+<b>GPSTest</b><br>
+The app displays the point coordinates and satellites data: fix, constellation, carrier frequencies, carrier/noise ratio, flags, elevation, azimuth.
+The point can be shown on the map (option in the "settings").
+<ol>
+<li><img src="gpstest_btn1.png"> Open the share/export dialog.</li>
+<li><img src="gpstest_btn2.png"> The point coordinates can be copied to clipboard</li>
+<li><img src="gpstest_btn3.png"> or saved to file. It is important to check the "Include altitude" box.</li>
 </ol>
 <br><p>
 
@@ -57,6 +56,18 @@ The format is xml and the points data are latitude, longitude, altitiude, and ti
 </ol>
 <br><p>
 
+<b>GPS Point</b><br>
+TopoDroid reads the coordinates exported to a point file: latitude, longitude, altitude, and accuracy.<br>
+<ol>
+<li>The app displays a list of saved points</li>
+<li><img src="gpspoint_btn1.png"> Open the GNSS interface</li> 
+<li><img src="gpspoint_btn2.png"> Acquire the GNSS position</li> 
+<li>The app displays the point with the circle of uncertainty on the map. The point coordinates, and other infos, are shown in a box.</li>
+<li>Save the point when done.</li>
+<li>Select the point from the list, and export to (text) file.</li>
+</ol>
+<img src="gpspoint_point.png"><br><p>
+
 <b>GPS Position</b><br>
 The app displays the point coordinates and the satellite data.<br>
 <ol>
@@ -64,16 +75,6 @@ The app displays the point coordinates and the satellite data.<br>
 <li><img src="gpsposition_btn3.png"> Display the satellites data: fix, azimut, elevation, carrier/noise ratio, and flags (almanac, epherids)</li>
 <li><img src="gpsposition_btn2.png"> The position can be copied to clipboard</li>
 <li>or it can be saved to a file.</li>
-</ol>
-<br><p>
-
-<b>GPSTest</b><br>
-The app displays the point coordinates and satellites data: fix, constellation, carrier frequencies, carrier/noise ratio, flags, elevation, azimuth.
-The point can be shown on the map (option in the "settings").
-<ol>
-<li><img src="gpstest_btn1.png"> Open the share/export dialog.</li>
-<li><img src="gpstest_btn2.png"> The point coordinates can be copied to clipboard</li>
-<li><img src="gpstest_btn3.png"> or saved to file. It is important to check the "Include altitude" box.</li>
 </ol>
 <br><p>
 

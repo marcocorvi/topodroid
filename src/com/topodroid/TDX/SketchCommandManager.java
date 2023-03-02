@@ -67,6 +67,7 @@ public class SketchCommandManager
   private boolean mVertical = true;
 
   private SketchPoint[] mSelected = new SketchPoint[2];
+  private SketchStationPath mSelectedStation;
 
   private boolean mDisplayPoints;
 
@@ -155,7 +156,7 @@ public class SketchCommandManager
   {
     if ( mLeg == null ) return;
     // TDLog.v("SKETCH legview");
-    mLeg.dump( "LEG" );
+    // mLeg.dump( "LEG" );
     TDVector s = mLeg.oppositeDirection(); // normalized Y-canvas (E,N,Up)
     TDVector h = new TDVector( -s.y, s.x, 0 );
     h.normalize();
@@ -641,6 +642,7 @@ public class SketchCommandManager
         mCurrentScrap.drawPoints( canvas, mm, mC0, mH0, mS0, dot_radius );
         if ( mSelected[0] != null ) mSelected[0].drawPoint( canvas, mm, mC0, mH0, mS0, 2*dot_radius );
         if ( mSelected[1] != null ) mSelected[1].drawPoint( canvas, mm, mC0, mH0, mS0, 2*dot_radius );
+        if ( mSelectedStation != null ) mSelectedStation.drawPoint( canvas, mm, mC0, mH0, mS0, 2*dot_radius );
       } else if ( hasEraser ) {
         drawEraser( canvas );
       } else {
@@ -651,16 +653,21 @@ public class SketchCommandManager
 
   void syncClearSelected()
   {
-    TDLog.v("SKETCH clear selected");
+    // TDLog.v("SKETCH clear selected");
     synchronized( TDPath.mSelectionLock ) {
       mSelected[0] = null;
       mSelected[1] = null;
+      mSelectedStation = null;
     }
   }
 
   /** @return 0,1,2 according to the number of selected points
    */
   int hasSelected() { return ( mSelected[1] != null )? 2 : ( mSelected[0] != null )? 1 : 0; }
+
+  boolean hasSelectedStation() { return mSelectedStation != null; }
+
+  SketchStationPath getSelectedStation() { return mSelectedStation; }
 
   SketchPoint[] getSelected() { return mSelected; }
 
@@ -706,7 +713,7 @@ public class SketchCommandManager
       return 0;
     }
     TDVector c = toWorld( xc, yc );
-    TDLog.v("SKETCH center " + c.x + " " + c.y + " " + c.z );
+    TDLog.v("SKETCH iworld point " + c.x + " " + c.y + " " + c.z );
     float radius = TDSetting.mCloseCutoff + size/mZoom; 
     SketchLine ray = new SketchLine( c, mCurrentScrap.mN );
     float min_dist = radius * radius;;
@@ -720,11 +727,24 @@ public class SketchCommandManager
         }
       }
     }
-    if ( min_pt == null ) {
-      TDLog.v("SKETCH min dist " + min_dist + " no point ");
+    if ( min_pt != null ) {
+      if ( mSelectedStation != null ) mSelectedStation = null;
+      TDLog.v("SKETCH min point " + min_pt.x + " " + min_pt.y + " " + min_pt.z + " at dist " + min_dist );
     } else {
-      TDLog.v("SKETCH min dist " + min_dist + " point " + min_pt.x + " " + min_pt.y + " " + min_pt.z );
+      if ( mSelected[0] == null ) {
+        int k1 = mStationsStack.size();
+        for ( int k=2; k<k1; ++k ) { // skip leg stations
+          SketchStationPath station = mStationsStack.get( k );
+          float dist = ray.distance( station.getTDVector() );
+          if ( dist < min_dist ) {
+            min_dist = dist;
+            mSelectedStation = station;
+          }
+        }
+      }
+    //   TDLog.v("SKETCH min dist " + min_dist + " no point ");
     }
+    
     if ( mSelected[0] == null ) {
       mSelected[0] = min_pt;
       mSelected[1] = null;

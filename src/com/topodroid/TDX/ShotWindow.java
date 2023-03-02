@@ -148,7 +148,7 @@ public class ShotWindow extends Activity
                           // R.drawable.iz_bedding,    // compute bedding
                         R.drawable.iz_delete,     // cut shots 
                         R.drawable.iz_copy,       // copy shots 
-                        R.drawable.iz_cancel      // cancel
+                        R.drawable.iz_clear       // cancel
 			// R.drawable.iz_empty // EMPTY
                       };
   private static final int BTN_MULTISHOT = 3; // index of iz_highlight

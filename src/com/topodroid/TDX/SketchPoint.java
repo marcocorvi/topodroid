@@ -45,13 +45,7 @@ public class SketchPoint extends TDVector // world coords
   // @param r  dot radius
   void drawPoint( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y, float r )
   {
-    Path path = new Path();
-    TDVector v = this.minus( C );
-    float x = X.dot( v ); // (world coord)
-    float y = Y.dot( v ); // downward 
-    path.addCircle( x, y, r, Path.Direction.CCW );
-    path.transform( mm );
-    canvas.drawPath( path, BrushManager.errorPaint );
+    SketchPath.drawVector( this, canvas, mm, C, X, Y, r );
   }
 
   /** @return true if this point is eps-close to a specified vector

@@ -370,7 +370,7 @@ public class SketchSurface extends SurfaceView
   /** find the sketch point at the given canvas point
    * @param x   X canvas coord
    * @param y   Y canvas coord
-   * @return 0,1, or 2 : number of selected points
+   * @return 0, 1, or 2 : number of selected points
    */
   int getItemAt( float x, float y, float size ) 
   { 
@@ -381,6 +381,10 @@ public class SketchSurface extends SurfaceView
   // boolean setRangeAt( float x, float y, float zoom, float size ) { return ( commandManager == null )? false : commandManager.setRangeAt( x, y, zoom, size ); }
 
   int hasSelected() { return ( commandManager == null )? 0 : commandManager.hasSelected(); }
+
+  boolean  hasSelectedStation() { return ( commandManager == null )? false : commandManager.hasSelectedStation(); }
+
+  SketchStationPath getSelectedStation() { return ( commandManager == null )? null : commandManager.getSelectedStation(); }
 
   SketchPoint[] getSelected() {  return ( commandManager == null )? null : commandManager.getSelected(); }
 
