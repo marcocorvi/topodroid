@@ -3,14 +3,14 @@
 
 The <i>sketch</i> button of the <u>Survey Data window</u> opens the dialog with the list of sketches, besides the <i>New Sketch</i> button. Tap on this button to create a new survey sketch.<br><p>
 
-Each sketch is made of two sketch files: one for the plan view, the other for the profile view (either extended or projected). X-sections have only one file. A new sketch is opened in the plan view. Afterwards the sketch dialog shows two columns, one for the plan, the other for the profile view, and you can choose which one to open from.<br>
+Each sketch is made of two sketch files: one for the plan view, the other for the profile view (either extended or projected). X-sections have, each one, only one file. A new sketch is opened in the plan view. Afterwards the sketch dialog shows two columns, one for the plan, the other for the profile view, and you can choose which one to open from.<br>
 Each sketch can contain multiple scraps.<br><p>
 
 The <u>extended</u> profile view displays the midline with the shots drawn left or right, or vertical, according to their "extend". If a leg has the "extend" not set, the midline is not displayed from that leg on.
 Splays are projected on the vertical plane of the shot that is closest in azimuth, unless the user has set a given "extend" through the shot edit dialog.
 For example, for the plan view in figure, the splays in the light region are projected on the vertical plane of shot 1-2, those in the dark region on the vertical plane of 0-1.<br><p>  
 
-The <u>projected</u> profile view displays the midline and the splays projected in the vertical plane perpendicular to the projection azimuth.<br><p>
+The <u>projected</u> profile view displays the midline and the splays projected in the vertical plane perpendicular to the projection azimuth which is defined when creating the projected profile.<br><p>
 
 
 <img src="splay_extend.png"><br><p>
@@ -20,7 +20,7 @@ The <u>projected</u> profile view displays the midline and the splays projected 
 The leg colors are 
 <ul>
 <li>normal: white</li>
-<li>anomalous field values: red</li>
+<li>anomalous field values (DistoX only): red</li>
 <li>inconsistent with siblings: orange. These are also drawn with a zig-zag line as shown below.</li>
 </ul><br>
 
@@ -127,7 +127,7 @@ The <b>draw</b> mode has four buttons besides the green ones:
 <li><img src="btn_undo.png"  width="36" border="1"> removes the last items you have drawn, one at a time.</li>
 <li><img src="btn_redo.png"  width="36" border="1"> puts the removed item back in the sketch, one at a time. The list of removed items is emptied when you draw something new. Point-wise editing actions may also affect the list of redo.</li>
 <li><img src="btn_tools.png" width="36" border="1"> <a href="page_tools_list.htm">Drawing tool</a> switcher / picker.</li>
-<li>splay display mode: as segment or a border="1"s point.</li>
+<li><img src="btn_splay_display_mode.png" width="36" border="1"> splay display mode: as segment or a border="1"s point.</li>
 <li><img src="btn_cont.png"  width="36" border="1"> Line <i>joining</i> or continuing</li>
 </ul><br><p>
 The icon of the <i>tools</i> button reflects the current type of drawing tools: points, lines, or areas.<br><p>
@@ -173,8 +173,8 @@ graphically editable by sliding the finger across the display.  The button turns
 
 
 <h4>MENUS</h4>
-When anomalies have been detected in the survey data-reduction, the "menu" button (three dots in vertical) has a red exclamation mark.
-Long-tap on the button to display a dialog about the anomalies.<br><p>
+<p><img src="btn_sketch_anomalies.png" width="36" border="1" style="float:left;margin:5px 10px 0 0;"> When anomalies have been detected in the survey data-reduction, the "menu" button (three dots in vertical) has a red exclamation mark.
+Long-tap on the button to display a dialog about the anomalies.</p>
 
 <ul style="margin-top=0">
 <li><u>Switch</u> to another sketch or <u>close</u>.</li>
@@ -184,7 +184,7 @@ All exports generate two files, one for plan the other for profile, except <i>cS
 <li><a href="page_stat2.htm">Statistics</a>. For x-sections this computes the section area.</li>
 <li><u>Reload</u> the sketch from a <a href="page_backup.htm">backup copy</a>.</li>
 <li><u>Zoom-fit</u>: dialog to fit the sketch into the screen, and to select the portrait or landscape presentation</li>
-<li><u>Rename/Delete/Split</u> the sketch. Renaming and deleting affects both plan and profile view at the same time. Deleted sketches can be recovered (<i>recover</i> menu in <u>Survey Data window</u>). Splitting affects only the current view.</li>
+<li><u>Rename/Delete</u> the sketch. Renaming and deleting affects both plan and profile view at the same time. Deleted sketches can be recovered (<i>recover</i> menu in <u>Survey Data window</u>).</li>
 <li><a href="page_plot_scraps.htm">Scraps</a> dialog [T]</li>
 <li><a href="page_tools.htm">drawing tools</a> palette</li>
 <li><u>Overview window</u>, showing all the survey sketches together. [Only for plan and extended profiles]</li>
@@ -199,37 +199,38 @@ All exports generate two files, one for plan the other for profile, except <i>cS
   <!-- li><i>Bottom toolbar</i>: single or triple [default: single]</li -->
   <li><i>Corner drag</i>: enable panning by corner-drag</li>
   <li><i>Zoom controls</i>: specifies how zoom controls are displayed on multitouch devices [B]. The zoom controls can be hidden, displayed only for a short interval when the user tap the lower part of the screen in the middle, or shown all the time</li>
-  <li><i>Horizontal x-sections</i> leg-clino threshold for horizontal x-sections (profile view).</li>
-  <li><i>Midline check</i>: check if all the legs are attached to the midline [disabled]</li>
-  <li><i>Extend check</i>: check if all the legs have the "extend" defined [enabled]</li>
+  <li><i>Cross-section h-threshold</i>: leg-clino threshold for horizontal x-sections (profile view).</li>
+  <li><i>Midline check</i>: check if all the legs are attached to the midline [default no]</li>
+  <li><i>Leg extend check</i>: check if all the legs have the "extend" defined [default enabled]</li>
+  <li><i>Toolbar size</i>: size of the toolbar of drawing items [default 8]</li>
   <!-- li><i>xtherion areas</i> save sketch th2 files with an extra point in area borders</li -->
   <li><i>POINT TOOLS</i>
     <ul style="margin-top:0; margin-bottom:0">
-    <li><i>Non-zoomed point</i>: point items stay of fixed size when zooming</li>
-    <li><i>Drawing units</i> for point symbols</li>
-    <li>Label <i>text size</i> [24 pt]</li>
+    <li><i>Non-zoomed point icons</i>: point items stay of fixed size when zooming</li>
+    <li><i>Point tools scale</i>: scale of the point tools</li>
+    <li><i>Labels size</i>: size of text labels [default 24 pt]</li>
     </ul>
   <li><i>LINE TOOLS</i>
     <ul style="margin-top:0; margin-bottom:0">
-    <li>Line <i>pen width</i> (NB wall-lines are twice as wide) [1 px]</li>
-    <li><i>Drawing units</i> for lines with "path effect"</li>
-    <li>Line <i>style</i>: fine, normal, coarse, "splines" (interpolated-curve), simplified</li>
-    <li>Line <i>point spacing</i>: distance between line points in normal style [5 px] </li>
-    <li><i>Direction tick length</i> for x-section lines [5 px]</li>
+    <li><i>Line width</i>: drawing pen width for lines (NB wall-lines are twice as wide) [default 1 px]</li>
+    <li><i>Line style scale</i>: scale of line drawing styles [default 3.0]</li>
+    <li><i>Line style</i>: fine, normal, coarse, bezier (interpolated-curve), simplified [default normal]</li>
+    <li><i>Line-point spacing</i>: distance between line points in normal style [default 5 px] </li>
+    <li><i>Section line tick size</i>: size of the section line tick [default 5 px]</li>
     <li><i>Section points</i>: whether to add a "section" point automatically for "section" lines [default yes]</li>
-    <li>Line <i>default join mode</i>: none, start, end, both, "continue"</li>
-    <li>Area <i>border</i> default visibility</li>
+    <li><i>Line continue</i>: default line continue-mode: "none", "join with start point", "join with end point", "join with both ends", and "continue"</li>
+    <li><i>Area border visibility</i>: default area border visibility</li>
     </ul>
   </li>
   <li><i>SKETCH ITEMS</i>
     <ul style="margin-top:0; margin-bottom:0">
-    <li>Survey line <i>pen width</i> (midline/splay)</li>
-    <li>Station name <i>text size</i> [18 pt] [N]</li>
-    <li>Size of <i>green dots</i> displayed in <b>edit</b> mode [5 px] [A]</li>
-    <li><i>Selection</i> radius for fine-editing a sketch; [16 px] [A]</li>
-    <li>Base size of the <i>eraser</i></li>
+    <li><i>Survey line width</i>: survey line pen width (midline/splay)</li>
+    <li><i>Station name size</i>: size of text of station names [default 18 pt] [N]</li>
+    <li><i>Green dots size</i>: displayed in <b>edit</b> mode [default 5 px] [A]</li>
+    <li><i>Selection radius</i>: for fine-editing a sketch; [default 16 px] [A]</li>
+    <li><i>Eraser size</i>: base sketch item erasing radius</li>
     <li><i>Shift sensitivity</i>: maximum stepping when moving a sketch [60 px] [E]. Increase it if sketch shifting is jaggy</li>
-    <li>Radius of <i>pointing</i>: to select you must not move the finger more than this [A]</li>
+    <li><i>Pointing tolerance</i>: to select you must not move the finger more than this [A]</li>
     <li><i>Splay transparency</i>: opacity level [0: transparent, 100: opaque, default 80]</li>
     <!--
     <li><i>Splay plan-view threshold</i>: splay shots with inclination above this threshold are hidden in the plan-view [80&deg;]</li>
@@ -243,17 +244,22 @@ All exports generate two files, one for plan the other for profile, except <i>cS
 <a href="page_geek.htm">Custom settings</a>:
 <i>sketch shift/scale</i>, 
 <i>sketch split/merge</i>,
-<i>Leg vertical threshold (over threshold LRUD become WENS)</i>,
+<i>stylus only drawing</i>,
+<i>leg vertical threshold (over threshold LRUD become WENS)</i>,
 <i>saved stations coloring</i>,
-<i>minimum angle of corners when a line is straightened</i>
-<i>Bezier interpolation accuracy, and corner threshold</i>,
-<i>Line simplification distance, length, and buffer zone</i>,
-<i>Point-wise actions flags (Line/Area snap, Smooth/Straighten segment, Multiselection, Composite actions)</i>,
-<i>Splay dashing (mode, clino threshold, azimuth thresholds)</i>,
-<i>Backup number and interval</i>,
-<i>Backup clearing menu</i>,
-<i>auto x-section in exports (csx, svg, dxf, xvi)</i>
-<i>Auto-walls settings</i>.
+<i>leg-only refresh</i>,
+<i>minimum angle of corners when a line is straightened</i>,
+<i>layers</i>,
+<i>graph-paper scale</i>,
+<i>slant xsections</i>,
+<i>bezier interpolation accuracy, and corner threshold</i>,
+<i>line simplification distance, length, and buffer zone</i>,
+<i>point-wise actions flags (Line/Area snap, Smooth/Straighten segment, Multiselection, Composite actions)</i>,
+<i>splay dashing (mode, clino threshold, azimuth thresholds)</i>,
+<i>backup number and interval</i>,
+<!-- <i>backup clearing menu</i>, -->
+<i>auto x-section in exports (csx, svg, dxf, xvi)</i>.
+<!-- <i>auto-walls settings</i>. -->
 </div><br><p>
 
 <h4>Sketch cache</h4>
@@ -267,7 +273,11 @@ For performance TopoDroid saves the sketches in a binary format.<br><p>
 
 <h4>Point selection [A]</h4>
 To do some editing you must select a point: either a point item, a line/area point, a station, or a shot midpoint.<br>
-To this aim you tap near the point you want. However if there are several points close where you tap, they are all selected, but only one of them is being edited. You change the "edit" point among the selected set with the <i>previous/next</i> buttons.<br><p>
+To this aim you tap near the point you want. However if there are several points close where you tap, they are all selected, but only one of them is being edited. You change the "edit" point among the selected set with the <i>previous/next</i> buttons seen below.<br><p>
+
+<p><img src="btn_multiselection_previous.png" width="36" border="1"><img 
+  src="btn_multiselection_next.png" width="36" border="1">
+</p>
 
 <h4>Line style</h4>
 TopoDroid has five line styles. With the normal style [default] the lines are drawn as polylines. With the fine style the polyline segments are shorter, while with the coarse style they are longer. In the fourth style lines are interpolated replacing the segments with cubic Bezier curves (splines). These segments pass through the two endpoints and have two control points used define the curvature.
@@ -280,12 +290,12 @@ Line joining can be done only with other lines of the scraps.
 The lines that are joined must belong to the same group. If you need to "join" two points of lines of different groups
 you should move one point to coincide with the other.<br>
 <ul>
-<li><i>off</i>: the lines of the current type cannot be joined</li>
-<li><i>no</i>: the current type line will not be joined</li>
-<li><i>start</i>: the current type line will be joined to a line if its start-point is close to one of that line endpoints</li>
-<li><i>end</i>: the current type line will be joined to a line by its end-point</li>
-<li><i>both</i>: the current type line will be joined to a line by both its start and its end-point</li>
-<li><i>continue</i>: the current type line will continue a line if its start-point is close enough to an endpoint of that line</li>
+<li><img src="btn_line_join_off.png" width="36" border="1"> <i>off</i>: the lines of the current type cannot be joined</li>
+<li><img src="btn_line_join_none.png" width="36" border="1"> <i>no</i>: the current type line will not be joined</li>
+<li><img src="btn_line_join_start.png" width="36" border="1"> <i>start</i>: the current type line will be joined to a line if its start-point is close to one of that line endpoints</li>
+<li><img src="btn_line_join_end.png" width="36" border="1"> <i>end</i>: the current type line will be joined to a line by its end-point</li>
+<li><img src="btn_line_join_both.png" width="36" border="1"> <i>both</i>: the current type line will be joined to a line by both its start and its end-point</li>
+<li><img src="btn_line_join_continue.png" width="36" border="1"> <i>continue</i>: the current type line will continue a line if its start-point is close enough to an endpoint of that line</li>
 </ul>
 <br>
 
