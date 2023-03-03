@@ -663,10 +663,10 @@ no campo abaixo e aperte o botão.
   <string name="hide_ids">IDs medidas</string>
   <string name="hide_splay">Medidas auxiliares</string>
   <!-- THESE MUST AGREE WITH THE FMT STRINGS -->
-  <!-- UNUSED string name="plan">PLANTA-BAIXA</string -->
+  <!-- UNUSED string name="plan">PLANTA</string -->
   <string name="extended">RETIFICADO</string>
   <string name="profile">PROJETADO</string>
-  <string name="fmt_plan">%1$s: PLANTA-BAIXA</string>
+  <string name="fmt_plan">%1$s: PLANTA</string>
   <string name="fmt_extended">%1$s: RETIFICADO</string>
   <string name="fmt_profile">%1$s: PROJETADO</string>
   <!-- UNUSED string name="extended_profile">Perfil retificado</string -->
@@ -1501,10 +1501,10 @@ no campo abaixo e aperte o botão.
   <string name="pref_unscaled_points_summary">Ícones de pontos não são afetados pelo zoom</string>
   <string name="pref_segment_title">Dist mín pontos linha</string>
   <string name="pref_segment_message">Distância mínima entre pontos de uma linha de tipo normal</string>
-  <string name="pref_linestyle_title">Tipo linha</string>
-  <string name="pref_linestyle_summary">Tipo de linha</string>
-  <string name="pref_linecontinue_title">Continuação linha</string>
-  <string name="pref_linecontinue_summary">Modo padrão de continuação de linhas</string>
+  <string name="pref_linestyle_title">Estilo linha</string>
+  <string name="pref_linestyle_summary">Estilo de linha (forma como é desenhada)</string>
+  <string name="pref_linecontinue_title">Emenda linha</string>
+  <string name="pref_linecontinue_summary">Modo padrão de emenda de linhas</string>
   <string name="pref_lineacc_title">Prec interp Bézier</string>
   <string name="pref_lineacc_summary">Exatidão da interpolação cúbica das curvas Bézier</string>
   <string name="pref_linecorner_title">Lim quina Bézier</string>
