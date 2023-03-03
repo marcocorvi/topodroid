@@ -188,14 +188,14 @@ class QCamCompass extends Dialog
     // buttonCancel = (Button) findViewById(R.id.buttonQuit);
 
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
-    buttonClick  = MyButton.getButton( mContext, this, R.drawable.iz_camera_red_transp );
-    buttonSave   = MyButton.getButton( mContext, this, R.drawable.iz_save_off_transp );
+    buttonClick  = MyButton.getButton( mContext, this, R.drawable.iz_camera_red );
+    buttonSave   = MyButton.getButton( mContext, this, R.drawable.iz_save_off );
     buttonCancel = MyButton.getButton( mContext, this, R.drawable.iz_clear ); // iz_cancel_transp
 
-    mBDcameraRed = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_camera_red_transp );
-    mBDcamera    = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_camera ); // iz_camera_transp
-    mBDsaveok    = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_save_transp );
-    mBDsaveoff   = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_save_off_transp );
+    mBDcameraRed = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_camera_red );
+    mBDcamera    = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_camera ); 
+    mBDsaveok    = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_save );
+    mBDsaveoff   = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_save_off );
 
     LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 0, 10, 20, 10 );
     LinearLayout ll_help = (LinearLayout) findViewById( R.id.help );

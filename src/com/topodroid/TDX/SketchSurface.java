@@ -368,13 +368,15 @@ public class SketchSurface extends SurfaceView
   RectF getBitmapBounds( float scale ) { return ( commandManager == null )? null : commandManager.getBitmapBounds( scale ); }
 
   /** find the sketch point at the given canvas point
-   * @param x   X canvas coord
-   * @param y   Y canvas coord
+   * @param x         X canvas coord
+   * @param y         Y canvas coord
+   * @param size      select size
+   * @param stations  whether to select stations (or line points)
    * @return 0, 1, or 2 : number of selected points
    */
-  int getItemAt( float x, float y, float size ) 
+  int getItemAt( float x, float y, float size, boolean stations ) 
   { 
-    return ( commandManager == null )? 0 : commandManager.getItemAt( x, y, size );
+    return ( commandManager == null )? 0 : commandManager.getItemAt( x, y, size, stations );
   }
 
   // UNUSED

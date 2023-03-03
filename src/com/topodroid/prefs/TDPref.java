@@ -1626,7 +1626,6 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
-  /* FIXME_SKETCH_3D *
   public static TDPref[] makeSketchPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_SKETCH;
@@ -1635,16 +1634,9 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc    = TDPrefKey.SKETCHdesc;
     String[] def = TDPrefKey.SKETCHdef;
     return new TDPref[ ] {
-      // makeCbx( cat, key[ ], tit[ ], dsc[ ], X, def[ ],          ctx, hlp ),
-      makeLst( cat, key[0], tit[0], dsc[0], D, def[0], R.array.modelType, R.array.modelTypeValue, ctx, hlp ),
-      makeEdt( cat, key[1], tit[1], dsc[1], D, def[1], FLOAT,   ctx, hlp ),
-      // makeEdt( cat, key[ ], tit[ ], dsc[ ], X, def[ ], FLOAT,   ctx, hlp ),
-      // makeEdt( cat, key[ ], tit[ ], dsc[ ], X, def[ ], FLOAT,   ctx, hlp ),
-      makeEdt( cat, key[2], tit[2], dsc[2], D, def[2], FLOAT,   ctx, hlp )
-      // makeEdt( cat, key[ ], tit[ ], dsc[ ], X, def[ ], INTEGER, ctx, hlp ) 
+      makeEdt( cat, key[0], tit[0], dsc[0], D, def[0], FLOAT,   ctx, hlp ),
     };
   }
-  * END_SKETCH_3D */
 
   // NO_LOGS
   // /** construct the "logging" preferences array

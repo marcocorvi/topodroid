@@ -24,6 +24,7 @@ public class TDPrefCat
   public static final int PREF_CATEGORY_SKETCH    =  5;
   public static final int PREF_CATEGORY_EXPORT    =  6;
   public static final int PREF_CATEGORY_IMPORT    =  7;
+  // public static final int PREF_CATEGORY_3D        =  8; // TODO
   public static final int PREF_CATEGORY_SVX       =  8;
   public static final int PREF_CATEGORY_TH        =  9;
   public static final int PREF_CATEGORY_DAT       = 10;
@@ -32,7 +33,7 @@ public class TDPrefCat
   public static final int PREF_CATEGORY_SVG       = 13;
   public static final int PREF_CATEGORY_SHP       = 14;
   public static final int PREF_CATEGORY_DXF       = 15;
-  // public static final int PREF_CATEGORY_PNG       = 16; // NO_PNG
+  // public static final int PREF_CATEGORY_PNG       = ; // NO_PNG
   public static final int PREF_CATEGORY_KML       = 17;
   public static final int PREF_CATEGORY_CSV       = 18;
   public static final int PREF_SHOT_DATA          = 19; 
@@ -42,7 +43,7 @@ public class TDPrefCat
   public static final int PREF_PLOT_SCREEN        = 23; 
   public static final int PREF_TOOL_LINE          = 24; 
   public static final int PREF_TOOL_POINT         = 25; 
-  // public static final int PREF_PLOT_WALLS         = 26;  // AUTOWALLS
+  // public static final int PREF_PLOT_WALLS         = ;  // AUTOWALLS
   public static final int PREF_PLOT_DRAW          = 26; 
   public static final int PREF_PLOT_ERASE         = 27; 
   public static final int PREF_PLOT_EDIT          = 28;

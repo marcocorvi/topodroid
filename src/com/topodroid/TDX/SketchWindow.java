@@ -153,6 +153,8 @@ public class SketchWindow extends ItemDrawer
                         R.drawable.iz_section_no,    // 14
                         R.drawable.iz_open,          // 15
                         R.drawable.iz_clear,         // 16
+                        R.drawable.iz_select_station,
+                        R.drawable.iz_select_line,
                         R.drawable.iz_menu,
   };
   private static final int IC_SMALL      = 8;
@@ -165,12 +167,14 @@ public class SketchWindow extends ItemDrawer
   private static final int IC_SECTION_OK = 13;
   private static final int IC_SECTION_NO = 14;
   private static final int IC_SECTION_OPEN = 15;
-  private static final int IC_MENU       = 17;
+  private static final int IC_SELECT_STATION = 17;
+  private static final int IC_SELECT_LINE    = 18;
+  private static final int IC_MENU       = 19;
 
 
   private static final int NR_BUTTON1 = 6;
   private static final int NR_BUTTON2 = 5; // DRAW
-  private static final int NR_BUTTON3 = 7; // SELECT
+  private static final int NR_BUTTON3 = 8; // SELECT
   private static final int NR_BUTTON5 = 6; // ERASE
 
   // private static final int mNrMove = 6;
@@ -214,6 +218,7 @@ public class SketchWindow extends ItemDrawer
                         R.drawable.iz_select_ok,     // 2
                         // R.drawable.iz_back,          // 
                         // R.drawable.iz_forw,
+                        R.drawable.iz_select_line,
                         R.drawable.iz_medium,
                         R.drawable.iz_delete_off,
                         R.drawable.iz_section_no,
@@ -225,6 +230,7 @@ public class SketchWindow extends ItemDrawer
                         R.string.help_edit,
                         // R.string.help_previous,
                         // R.string.help_next,
+                        R.string.help_select_mode,
                         R.string.help_select_size,
                         R.string.help_delete_item,
                         R.string.help_section_item,
@@ -232,9 +238,10 @@ public class SketchWindow extends ItemDrawer
   };
   // private static final int BTN_SELECT_PREV = 3;
   // private static final int BTN_SELECT_NEXT = 4;
-  private static final int BTN_SELECT_SIZE = 3;
-  private static final int BTN_REMOVE      = 4;
-  private static final int BTN_SECTION     = 5;
+  private static final int BTN_SELECT_MODE = 3;
+  private static final int BTN_SELECT_SIZE = 4;
+  private static final int BTN_REMOVE      = 5;
+  private static final int BTN_SECTION     = 6;
 
   // private static final int mNrErase = 6;
   private static final int[] izons_erase = {
@@ -259,8 +266,9 @@ public class SketchWindow extends ItemDrawer
 
   private TopoDroidApp mApp;
   private DataHelper mApp_mData;
+  private TopoGL mTopoGL     = null;
   private Activity mActivity = null;
-  private boolean mVertical = true;  // whether sections are vertical (or horizontal)
+  private boolean mVertical  = true; // whether sections are vertical (or horizontal)
   private int mMaxSection = 0;       // number of last section - 0: leg-section
   private int mCurSection = 0;       // current section
   private String mSketchName;        // sketch name
@@ -286,11 +294,12 @@ public class SketchWindow extends ItemDrawer
 
   // ERASE - EDIT mode and size
 
-  private int mEraseScale  = 0;
-  private int mSelectScale = 0;
-
+  private int mEraseScale  = 1; // set in makeButtons
+  private int mSelectScale = 1;
   private float mEraseSize  = TDSetting.mEraseness;
   private float mSelectSize = TDSetting.mSelectness;
+
+  private boolean mSelectStation;
 
   // protected static int mEditRadius = 0; 
 
@@ -423,6 +432,8 @@ public class SketchWindow extends ItemDrawer
   private BitmapDrawable mBMsectionOk;
   private BitmapDrawable mBMsectionNo;
   private BitmapDrawable mBMsectionOpen;
+  private BitmapDrawable mBMselectStation;;
+  private BitmapDrawable mBMselectLine;;
 
   private MyHorizontalListView mListView;
   private ListView   mMenu;
@@ -548,17 +559,10 @@ public class SketchWindow extends ItemDrawer
   /**
    * @param load   whether to try and load from file
    */
-  private void makeReference( boolean load )
+  private void makeReference( Cave3DShot leg, boolean load )
   {
     // TDLog.v("SKETCH make reference");
-    TopoGL topoGL = ((TopoDroidApp)getApplication()).mTopoGL;
-    if ( topoGL == null ) {
-      finish();
-    }
-    Cave3DShot leg = topoGL.mSketchLeg;
-    if ( leg == null ) {
-      finish();
-    }
+    setSelectMode( false );
     mSketchName = leg.from + "-" + leg.to;
     TDVector v1 = new TDVector();
     TDVector v2 = leg.toTDVector(); // (E,N,Up)
@@ -570,15 +574,15 @@ public class SketchWindow extends ItemDrawer
     Cave3DStation st2 = leg.to_station;
     addStation( v1, st1.getShortName(), null, false );
     addStation( v2, st2.getShortName(), null, false );
-    for ( Cave3DShot sp : topoGL.getSplaysAt( st1 ) ) {
+    for ( Cave3DShot sp : mTopoGL.getSplaysAt( st1 ) ) {
       TDVector v = sp.toTDVector(); // .plus( v1 );
       addFixedSplay( v1, v );
     }
-    for ( Cave3DShot sp : topoGL.getSplaysAt( st2 ) ) {
+    for ( Cave3DShot sp : mTopoGL.getSplaysAt( st2 ) ) {
       TDVector v = sp.toTDVector().plus( v2 );
       addFixedSplay( v2, v );
     }
-    for ( Cave3DShot lg : topoGL.getLegsAt( st1 ) ) {
+    for ( Cave3DShot lg : mTopoGL.getLegsAt( st1 ) ) {
       if ( lg != leg ) {
         if ( lg.from_station == st1 ) {
           TDVector v = v1.plus( lg.toTDVector() );
@@ -593,7 +597,7 @@ public class SketchWindow extends ItemDrawer
         }
       }
     }
-    for ( Cave3DShot lg : topoGL.getLegsAt( st2 ) ) {
+    for ( Cave3DShot lg : mTopoGL.getLegsAt( st2 ) ) {
       if ( lg != leg ) {
         if ( lg.from_station == st2 ) {
           TDVector v = v2.plus( lg.toTDVector() );
@@ -943,6 +947,7 @@ public class SketchWindow extends ItemDrawer
   private void setButtonEraseSize( int scale )
   {
     mEraseScale = scale % Drawing.SCALE_MAX;
+    TDLog.v("SKETCH erase scale " + mEraseScale );
     switch ( mEraseScale ) {
       case Drawing.SCALE_SMALL:
         mEraseSize = 0.5f * TDSetting.mEraseness;
@@ -973,6 +978,7 @@ public class SketchWindow extends ItemDrawer
   private void setButtonSelectSize( int scale )
   {
     mSelectScale = scale % Drawing.SCALE_MAX;
+    TDLog.v("SKETCH select scale " + mSelectScale );
     switch ( mSelectScale ) {
       case Drawing.SCALE_SMALL:
         mSelectSize = 0.5f * TDSetting.mSelectness;
@@ -1065,6 +1071,8 @@ public class SketchWindow extends ItemDrawer
     mBMsectionOk = MyButton.getButtonBackground( this, res, izons[IC_SECTION_OK] );
     mBMsectionNo = MyButton.getButtonBackground( this, res, izons[IC_SECTION_NO] );
     mBMsectionOpen = MyButton.getButtonBackground( this, res, izons[IC_SECTION_OPEN] );
+    mBMselectStation = MyButton.getButtonBackground( this, res, izons[IC_SELECT_STATION] );
+    mBMselectLine    = MyButton.getButtonBackground( this, res, izons[IC_SELECT_LINE] );
 
     mBMdeleteOn  = MyButton.getButtonBackground( this, res, izons[IC_DELETE_OK] );
     mBMdeleteOff = MyButton.getButtonBackground( this, res, izons[IC_DELETE_NO] );
@@ -1177,7 +1185,7 @@ public class SketchWindow extends ItemDrawer
     // mDrawingUtil = new DrawingUtilPortrait();
 
     // mEraseScale = 0;  done in makeButtons()
-    mSelectScale = 0;
+    // mSelectScale = 0;
     makeButtons( );
 
     mListView.setAdapter( mButtonView1.mAdapter );
@@ -1447,7 +1455,15 @@ public class SketchWindow extends ItemDrawer
     closeMenu();
 
     // TODO set leg and splays
-    makeReference( true );
+    mTopoGL = ((TopoDroidApp)getApplication()).mTopoGL;
+    if ( mTopoGL == null ) {
+      finish();
+    }
+    Cave3DShot leg = mTopoGL.getSketchLeg();
+    if ( leg == null ) {
+      finish();
+    }
+    makeReference( leg, true );
   }
 
   /** lifecycle: STOP
@@ -1553,11 +1569,9 @@ public class SketchWindow extends ItemDrawer
     // if ( mLandscape ) { float t=x; x=-y; y=t; }
     if ( mMode == MODE_EDIT ) {
       // TDLog.v("SKETCH select at " + xc, + " " + yc + " ...");
-      int selection = mSketchSurface.getItemAt( xc, yc, size );
+      int selection = mSketchSurface.getItemAt( xc, yc, size, mSelectStation );
       if ( selection == 2 ) {
-        setButton3( BTN_SECTION, mBMsectionOk );
-      } else if ( mSketchSurface.hasSelectedStation() ) {
-        setButton3( BTN_SECTION, mBMsectionOpen );
+        setButton3( BTN_SECTION, ( mSketchSurface.hasSelectedStation()? mBMsectionOpen : mBMsectionOk ) );
       } else {
         setButton3( BTN_SECTION, mBMsectionNo );
       } 
@@ -2184,9 +2198,11 @@ public class SketchWindow extends ItemDrawer
       // } else if ( k3 < NR_BUTTON3 && b == mButton3[k3++] ) { // NEXT
       //   TDLog.v("TODO item next");
       // } else 
-      if ( k3 < NR_BUTTON3 && b == mButton3[k3++] ) { // EDIT SIZE
+      if ( k3 < NR_BUTTON3 && b == mButton3[k3++] ) { // SELECT MODE
+        setSelectMode( ! mSelectStation );
+      } else if ( k3 < NR_BUTTON3 && b == mButton3[k3++] ) { // SELECT SIZE
         setButtonSelectSize( mSelectScale + 1 ); // toggle select size
-      } else if ( k3 < NR_BUTTON3 && b == mButton3[k3++] ) { // EDIT ITEM DELETE
+      } else if ( k3 < NR_BUTTON3 && b == mButton3[k3++] ) { // SELECT ITEM DELETE
         TDLog.v("TODO item delete");
         // askDeleteItem( p, t, "section");
       } else if ( k3 < NR_BUTTON3 && b == mButton3[k3++] ) { // SECTION
@@ -2197,9 +2213,21 @@ public class SketchWindow extends ItemDrawer
           mSketchSurface.addSection( section );
           mCurSection = mSketchSurface.openSection( section );
           TDLog.v("SKETCH open section " + mCurSection + " " + mMaxSection );
-        } else if ( mSketchSurface.hasSelectedStation() ) {
+        } else if ( mSketchSurface.hasSelectedStation() ) { // SWITCH LEG_VIEW
           SketchStationPath station = mSketchSurface.getSelectedStation();
-          TDLog.v("SKETCH open new leg " + station.name() + " " + station.from() + " " + station.isForward() );
+          TDLog.v("SKETCH open new leg " + station.from() + " " + station.name() + " " + station.isForward() );
+          Cave3DShot sketchLeg = null;
+          if ( station.isForward() ) {
+            sketchLeg = mTopoGL.setSketchLeg( station.from(), station.name() );
+          } else { 
+            sketchLeg = mTopoGL.setSketchLeg( station.name(), station.from() );
+          }
+          if ( sketchLeg != null ) {
+            TDLog.v("SKETHC switch ...");
+            String filename = TDPath.getC3dFile( mSketchName );
+            doSave( filename, mSketchName );
+            // makeReference( sketchLeg, true );
+          }
         } else {
           mCurSection = mSketchSurface.closeSection();
           TDLog.v("SKETCH close section - current " + mCurSection );
@@ -2225,6 +2253,11 @@ public class SketchWindow extends ItemDrawer
     }
   }
 
+  private void setSelectMode( boolean select_station )
+  {
+    mSelectStation = select_station;
+    setButton3( BTN_SELECT_MODE, ( mSelectStation? mBMselectStation : mBMselectLine ) );
+  }
 
   /** ask confirmation to delete an item
    * @param p    item to delete

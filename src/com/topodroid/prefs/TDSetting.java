@@ -605,6 +605,8 @@ public class TDSetting
   // public static float mWallsXStep       = 1.0f;
   // public static float mWallsConcave     = 0.1f;
 
+  public static float mSplayBuffer = 2.0f; // sketch splay buffer size [m]
+
   // ------------------------------------------------------------------
   // public static void setZoomControls( boolean ctrl )
   // {
@@ -1045,6 +1047,10 @@ public class TDSetting
     GlModel.mPowercrustDelta = tryFloat( prefs,  keyWalls3D[7], defWalls3D[7] );
     // TDLog.v("SETTING load model done");
 
+    String[] keySketch = TDPrefKey.SKETCH;
+    String[] defSketch = TDPrefKey.SKETCHdef;
+    mSplayBuffer   = tryFloat( prefs, keySketch[0], defSketch[0] );
+
     String[] keyImport = TDPrefKey.EXPORT_import;
     String[] defImport = TDPrefKey.EXPORT_importdef;
     // keyImport[ 0 ] // DISTOX_PT_CMAP
@@ -1336,18 +1342,6 @@ public class TDSetting
     // mWallsXClose      = tryFloat( prefs, keyWalls[3], defWalls[3] ); // DISTOX_WALLS_XCLOSE
     // mWallsXStep       = tryFloat( prefs, keyWalls[4], defWalls[4] ); // DISTOX_WALLS_XSTEP
     // mWallsConcave     = tryFloat( prefs, keyWalls[5], defWalls[5] ); // DISTOX_WALLS_CONCAVE
-
-    /* FIXME_SKETCH_3D *
-    String[] keySketch = TDPrefKey.SKETCH;
-    String[] defSketch = TDPrefKey.SKETCHdef;
-    // mSketchUsesSplays  = prefs.getBoolean( keySketch[], bool(defSketch[]) );    
-    mSketchModelType = tryInt(  prefs, keySketch[0], defSketch[0] );   // DISTOX_SKETCH_MODEL_TYPE
-    mSketchSideSize = tryFloat( prefs, keySketch[1], defSketch[1] );   // DISTOX_SKETCH_LINE_STEP
-    // mSketchBorderStep  = Float.parseFloat( prefs.getString( keySketch[], defSketch[] );
-    // mSketchSectionStep = Float.parseFloat( prefs.getString( keySketch[], defSketch[] );
-    mDeltaExtrude   = tryFloat( prefs, keySketch[2], defSketch[2]  );  // DISTOX_DELTA_EXTRUDE
-    // mCompassReadings  = tryInt( prefs, keySketch[3], defSketch[] ); // DISTOX_COMPASS_READING 
-     * END_SKETCH_3D */
 
   }
 

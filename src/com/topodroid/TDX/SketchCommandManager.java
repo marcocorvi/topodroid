@@ -704,9 +704,11 @@ public class SketchCommandManager
   /** select the sketch point at the given canvas point
    * @param xc   X canvas coord
    * @param yc   Y canvas coord
-   * @return the number of selected points (0, 1, or 2)
+   * @param size      select size
+   * @param stations  whether to select stations (or line points)
+   * @return the number of selected points (0, 1, or 2) or 2 (if selected a station)
    */
-  int getItemAt( float xc, float yc, float size )
+  int getItemAt( float xc, float yc, float size, boolean stations )
   {
     if ( mCurrentScrap != mView ) {
       TDLog.Error("SKETCH section not selectable");
@@ -717,41 +719,40 @@ public class SketchCommandManager
     float radius = TDSetting.mCloseCutoff + size/mZoom; 
     SketchLine ray = new SketchLine( c, mCurrentScrap.mN );
     float min_dist = radius * radius;;
-    SketchPoint min_pt = null;
-    for ( SketchLinePath wall : mView.mLines ) {
-      for ( SketchPoint pt : wall.mPts ) {
-        float dist = ray.distanceSquared( pt );
+    mSelectedStation = null;
+    if ( stations ) {
+      mSelected[0] = null;
+      mSelected[1] = null;
+      int k1 = mStationsStack.size();
+      for ( int k=2; k<k1; ++k ) { // skip leg stations
+        SketchStationPath station = mStationsStack.get( k );
+        float dist = ray.distance( station.getTDVector() );
         if ( dist < min_dist ) {
           min_dist = dist;
-          min_pt = pt;
+          mSelectedStation = station;
         }
       }
-    }
-    if ( min_pt != null ) {
-      if ( mSelectedStation != null ) mSelectedStation = null;
-      TDLog.v("SKETCH min point " + min_pt.x + " " + min_pt.y + " " + min_pt.z + " at dist " + min_dist );
-    } else {
-      if ( mSelected[0] == null ) {
-        int k1 = mStationsStack.size();
-        for ( int k=2; k<k1; ++k ) { // skip leg stations
-          SketchStationPath station = mStationsStack.get( k );
-          float dist = ray.distance( station.getTDVector() );
+      return ( mSelectedStation != null )? 2 : 0;
+    } else { // line-point select
+      SketchPoint min_pt = null;
+      for ( SketchLinePath wall : mView.mLines ) {
+        for ( SketchPoint pt : wall.mPts ) {
+          float dist = ray.distanceSquared( pt );
           if ( dist < min_dist ) {
             min_dist = dist;
-            mSelectedStation = station;
+            min_pt = pt;
           }
         }
       }
-    //   TDLog.v("SKETCH min dist " + min_dist + " no point ");
-    }
-    
-    if ( mSelected[0] == null ) {
-      mSelected[0] = min_pt;
-      mSelected[1] = null;
-      return ( mSelected[0] == null )? 0 : 1;
-    } else {
-      mSelected[1] = min_pt;
-      return ( mSelected[1] == null )? 1 : 2;
+      // if ( min_pt != null ) TDLog.v("SKETCH min point " + min_pt.x + " " + min_pt.y + " " + min_pt.z + " at dist " + min_dist );
+      if ( mSelected[0] == null ) {
+        mSelected[0] = min_pt;
+        mSelected[1] = null;
+        return ( mSelected[0] == null )? 0 : 1;
+      } else {
+        mSelected[1] = min_pt;
+        return ( mSelected[1] == null )? 1 : 2;
+      }
     }
   }
     

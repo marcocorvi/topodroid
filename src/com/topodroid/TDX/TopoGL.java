@@ -193,11 +193,23 @@ public class TopoGL extends Activity
   boolean doSketches = false;
 
   // SKETCH
-  Cave3DShot mSketchLeg = null;
+  private Cave3DShot mSketchLeg = null;
+ 
+  Cave3DShot getSketchLeg() { return mSketchLeg; } 
 
   void setSketchLeg( Cave3DShot leg )
   {
     mSketchLeg = leg;
+  }
+
+  /** set the sketch-leg with the given stations
+   * @param from   FROM station
+   * @param to     TO station
+   */
+  Cave3DShot setSketchLeg( String from, String to )
+  {
+    mSketchLeg = mParser.getLeg( from, to );
+    return mSketchLeg;
   }
 
   /** @return the array of splays at a given station

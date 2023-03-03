@@ -36,7 +36,7 @@ public class TDPrefKey
     "DISTOX_DEVICE_PREF",   // FORWARD
     "DISTOX_CAVE3D_PREF",   // FORWARD
     "DISTOX_GEEK_PREF",     // FORWARD
-    // "DISTOX_SKETCH_PREF",   //    FORWARD
+    // "DISTOX_SKETCH_PREF",   // FORWARD
     "DISTOX_EXPORT_SETTINGS", // 15
     null
   };
@@ -1756,7 +1756,7 @@ public class TDPrefKey
     // "DISTOX_PLOT_WALLS",      // FORWARD // AUTOWALLS
     "DISTOX_GEEK_DEVICE",     // FORWARD
     "DISTOX_GEEK_IMPORT",     // FORWARD
-    // "DISTOX_SKETCH_PREF",     // FORWARD FIXME_SKETCH_3D
+    "DISTOX_SKETCH_PREF",     // FORWARD FIXME_SKETCH_3D
     null
   };
 
@@ -1772,7 +1772,7 @@ public class TDPrefKey
     // R.string.pref_plot_walls_title, // AUTOWALLS
     R.string.pref_cat_device,
     R.string.pref_cat_import_export,
-    // R.string.pref_cat_sketch,
+    R.string.pref_cat_sketch,
     -1
   };
 
@@ -1788,7 +1788,7 @@ public class TDPrefKey
     // -1, // AUTOWALLS
     -1,
     -1
-    // -1, // SKETCH
+    -1, // SKETCH
   };
 
   public static String[] GEEKdef = {
@@ -1803,7 +1803,7 @@ public class TDPrefKey
     // TDString.EMPTY, // AUTOWALLS
     TDString.EMPTY,
     TDString.EMPTY,
-    // TDString.EMPTY,
+    TDString.EMPTY,
     null
   };
 
@@ -1909,48 +1909,23 @@ public class TDPrefKey
   };
 
   // ------------------------------------------------------------------------------
-  /* FIXME_SKETCH_3D
   public static String[] SKETCH = { // [3] 
-    // "DISTOX_SKETCH_USES_SPLAYS",
-    "DISTOX_SKETCH_MODEL_TYPE",
-    "DISTOX_SKETCH_LINE_STEP",
-    // "DISTOX_SKETCH_BORDER_STEP",
-    // "DISTOX_SKETCH_SECTION_STEP",
-    "DISTOX_DELTA_EXTRUDE",
-    // "DISTOX_COMPASS_READINGS",
+    "DISTOX_SKETCH_SPLAY_BUFFER",
     null
   };
 
   static int[] SKETCHtitle = {
-    // R.string.pref_sketchUsesSplays_title,
-    R.string.pref_sketchModelType_title,
-    R.string.pref_sketchLineStep_title,
-    // R.string.pref_sketchBorderStep_title,
-    // R.string.pref_sketchSectionStep_title,
-    R.string.pref_sketchDeltaExtrude_title
-    // R.string.pref_sketchCompassReadings
+    R.string.pref_sketch_splay_buffer_title
   };
 
   static int[] SKETCHdesc = {
-    // R.string.pref_sketchUsesSplays_summary,
-    R.string.pref_sketchModelType_summary,
-    R.string.pref_sketchLineStep_summary,
-    // R.string.pref_sketchBorderStep_summary,
-    // R.string.pref_sketchSectionStep_summary,
-    R.string.pref_sketchDeltaExtrude_summary
-    // R.string.pref_sketchCompassReadings
+    R.string.pref_sketch_splay_buffer_title
   };
 
   public static String[] SKETCHdef = {
-    // FALSE, res, hlp );
-    TDString.ZERO,
-    "0.5",
-    // "0.2",
-    // "0.5",
-    TDString.FIFTY
-    // TDString.FOUR
+    TDString.TWO,
+    null
   };
-  // END_SKETCH_3D */
 
   // ------------------------------------------------------------------------------
   // NO_LOGS
