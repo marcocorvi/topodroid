@@ -1242,7 +1242,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_with_android_azimuth_title">Bússola Android</string>
   <string name="pref_with_android_azimuth_summary">Habilitar bússola/clino do Android</string>
   <string name="pref_blunder_shot_title">Medidas com erro</string>
-  <string name="pref_blunder_shot_summary">Pular medidas com erro</string>
+  <string name="pref_blunder_shot_summary">Ignorar medidas com erro</string>
   <string name="pref_splay_station_title">Reatribuir base aux</string>
   <string name="pref_splay_station_summary">Reatribuir bases às medidas auxiliares</string>
   <string name="pref_splay_group_title">Renomear aux grupo</string>
@@ -1255,8 +1255,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_palettes_summary">Habilitar paletas adicionais</string>
   <string name="pref_packet_logger_title">Log pacotes</string>
   <string name="pref_packet_logger_summary">Habilitar log de pacotes da DistoX</string>
-  <string name="pref_th2_edit_title">Edição croqui</string>
-  <string name="pref_th2_edit_summary">Permitir edição de croqui</string>
+  <string name="pref_th2_edit_title">Editor croqui</string>
+  <string name="pref_th2_edit_summary">Habilitar editor de croquis avulsos</string>
   <string name="pref_bezier_step_title">Espaçamento pontos</string>
   <string name="pref_bezier_step_summary">Distância entre pontos em uma linha exportada [m]</string>
   <string name="pref_leg_shots_title">Qt mín medidas/visada</string>
