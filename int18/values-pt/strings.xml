@@ -1218,9 +1218,9 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Ativar bootloader</string -->
   <string name="pref_mkeyboard_title">Teclado</string>
-  <string name="pref_mkeyboard_summary">Habilitar teclados customizados</string>
+  <string name="pref_mkeyboard_summary">Habilitar teclados especiais do Topodroid</string>
   <string name="pref_no_cursor_title">Sem cursor</string>
-  <string name="pref_no_cursor_summary">Desabilitar o cursor do teclado especial</string>
+  <string name="pref_no_cursor_summary">Desabilitar o cursor do teclado especial do Topodroid</string>
   <string name="pref_local_help_title">Manual traduzido</string>
   <string name="pref_local_help_summary">Habilitar manual traduzido</string>
   <!-- UNUSED string name="pref_cosurvey_title">Topo colaborativa</string -->
@@ -1233,7 +1233,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_therion_maps_summary">Mapas Therion antes dos dados da topo</string>
   <string name="pref_extra_buttons_title">Nível recursos</string>
   <string name="pref_extra_buttons_summary">Nível de recursos habilitados</string>
-  <string name="pref_size_buttons_title">Tamanho botões</string>
+  <string name="pref_size_buttons_title">Tam botões</string>
   <string name="pref_size_buttons_summary">Tamanho dos botões da barra de ações</string>
   <string name="pref_with_sensors_title">Sensores</string>
   <string name="pref_with_sensors_summary">Habilitar sensores do Android</string>
@@ -1529,7 +1529,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_error_summary">Limite erro interrupção de calib.</string>
   <string name="pref_iter_title">Iterações algoritmo</string>
   <string name="pref_iter_summary">Quantidade máxima de iterações no cálculo dos coeficientes</string>
-  <string name="pref_label_size_title">Tamanho rótulo</string>
+  <string name="pref_label_size_title">Tam rótulo</string>
   <string name="pref_label_size_summary">Tamanho dos textos dos rótulos</string>
   <string name="pref_arrow_length_title">Tam marca corte</string>
   <string name="pref_arrow_length_message">Tamanho da marca indicando direção do corte</string>
@@ -1999,9 +1999,9 @@ no campo abaixo e aperte o botão.
   <string name="cpref_station_toast_summary">Usar caixa de diálogo no lugar de caixa de edição [n]</string>
   <string name="cpref_station_points_title">Pontos das bases</string>
   <string name="cpref_station_points_summary">Sempre mostrar bases[n]</string>
-  <string name="cpref_station_point_size_title">Tamanho ponto base</string>
+  <string name="cpref_station_point_size_title">Tam ponto base</string>
   <string name="cpref_station_point_size_summary">Tamanho dos pontos das bases [8 pxl]</string>
-  <string name="cpref_station_text_size_title">Tamanho texto bases</string>
+  <string name="cpref_station_text_size_title">Tam texto bases</string>
   <string name="cpref_station_text_size_summary">Tamanhos dos textos das bases [20 pt]</string>
   <string name="cpref_measure_dialog_title">Mensagem distância</string>
   <string name="cpref_measure_dialog_summary">Usar mensagem no lugar de caixa de diálogo para distância [n]</string>
