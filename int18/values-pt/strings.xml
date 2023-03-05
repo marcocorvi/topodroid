@@ -957,6 +957,7 @@ no campo abaixo e aperte o botão.
   <string name="help_symbol_plot">Selecionar símbolo ativo</string>
   <string name="help_delete_item">Apagar objeto do croqui</string>
   <string name="help_section_item">Elemento de corte do croqui</string>
+  <string name="help_select_clear">Esvaziar seleção de croquis</string>
   <string name="help_range">Mover uma parte da linha</string>
   <!-- UNUSED string name="help_clear">Deselecionar tudo</string -->
   <string name="help_eraser">Modo BORRACHA</string>
@@ -1206,6 +1207,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_cat_device">DISPOSITIVOS</string>
   <string name="pref_cat_cave3d">VISUALIZADOR 3D</string>
   <string name="pref_cat_geek">ESPECIAIS</string>
+  <string name="pref_cat_sketch">CROQUI 3D</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
   <string name="pref_locale_title">Língua</string>
   <string name="pref_locale_summary">Língua do aplicativo</string>
@@ -1656,6 +1658,8 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="pref_walls_concave_summary">Concavidade máxima [percentual]</string -->
   <!-- UNUSED string name="pref_walls_xstep_title">Passo</string -->
   <!-- UNUSED string name="pref_walls_xstep_summary">Separação dos pontos ao longo das paredes [m]</string -->
+  <string name="pref_sketch_splay_buffer_title">Buffer medida</string>
+  <string name="pref_sketch_splay_buffer_summary">Zona tampão de medidas em cortes [m]</string>
   <!-- UNUSED NO_LOGS
   <string name="pref_log_stream_summary" translatable="false">Log output stream</string>
   <string name="pref_log_stream_title" translatable="false">Log stream</string>
