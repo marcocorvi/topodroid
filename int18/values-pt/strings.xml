@@ -377,7 +377,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="no_db_viewer">DB_viewer não encontrado</string -->
   <string name="no_undelete">Nenhum item a restaurado</string>
   <string name="no_undelete_paste">Nenhum item a restaurar/colar</string>
-  <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Azimute %5$.1f"</string>
+  <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Az %5$.1f</string>
   <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Inclinação %5$.1f"</string>
   <string name="menu_3d">3D</string>
   <string name="menu_about">SOBRE</string>
