@@ -558,9 +558,9 @@ no campo abaixo e aperte o botão.
   <string name="shot_reverse">inverter</string>
   <string name="shot_to">Para</string>
   <string name="station">Base referência</string>
-  <string name="station_ask">Inserir a base no croqui?</string>
-  <string name="station_del">Remover a base do croqui?</string>
-  <string name="station_set">Continuar a topo a partir deste ponto?</string>
+  <string name="station_ask">Inserir base no croqui?</string>
+  <string name="station_del">Remover base do croqui?</string>
+  <string name="station_set">Continuar linha de trena desta base?</string>
   <!-- UNUSED string name="station_base">base de referência</string -->
   <!-- UNUSED string name="station_next">próxima base</string -->
   <!-- UNUSED string name="station_viewed">base visualizada</string -->
@@ -731,8 +731,8 @@ no campo abaixo e aperte o botão.
   <string name="button_done">Fim</string>
   <string name="button_lrud">Incluir EDTC</string>
   <string name="button_ok" copyable="all">OK</string>
-  <string name="button_off">desligar</string>
-  <string name="button_on">ligar</string>
+  <string name="button_off">não</string>
+  <string name="button_on">sim</string>
   <string name="button_open">Abrir     </string>
   <string name="button_read">Ler       </string>
   <string name="button_recover">Recuperar</string>
@@ -901,7 +901,7 @@ no campo abaixo e aperte o botão.
   <string name="help_continue">Continuar desenho de uma linha</string>
   <!-- UNUSED string name="help_contour">Editar perfil</string -->
   <string name="help_current_station">Bases gravadas</string>
-  <string name="help_azimuth">Referência para retificar perfil</string>
+  <string name="help_azimuth">Direção no perfil retificado</string>
   <string name="help_refresh">Redesenhar tela</string>
   <string name="help_device">Editar dispositivo em uso</string>
   <string name="help_add_topodroid">Criar nova topo/calibração</string>
@@ -1468,7 +1468,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_station_names_title">Tipo nome base</string>
   <string name="pref_station_names_summary">Tipo de nome das bases</string>
   <string name="pref_hthr_title">Lim hor corte H</string>
-  <string name="pref_hthr_summary">Limite horizontal para cortes horizontais (para perfis projetados)</string>
+  <string name="pref_hthr_summary">Limite horizontal para cortes serem considerados horizontais em perfis</string>
   <!-- UNUSED string name="pref_bitmap_scale_title">Resolução PNG</string -->
   <!-- UNUSED string name="pref_bitmap_scale_summary">Resolução imagem PNG croquis</string -->
   <!-- UNUSED string name="pref_bitmap_bgcolor_title">Cor fundo PNG</string -->
@@ -1514,7 +1514,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_graph_paper_scale_title">Tam papel milimetrado</string>
   <string name="pref_graph_paper_scale_summary">Ajuste de escala para papel milimetrado</string>
   <string name="pref_slant_xsection_title">Corte inclinado</string>
-  <string name="pref_slant_xsection_summary">Visualização de perfis de cortes inclinados</string>
+  <string name="pref_slant_xsection_summary">Criação de cortes inclinados em perfis</string>
   <string name="pref_weeddistance_title">Dist ponto ref</string>
   <string name="pref_weeddistance_summary">Distância máxima entre segmento e ponto de referência na simplificação de linhas [m]</string>
   <string name="pref_weedlength_title">Compr seg ref</string>
@@ -1637,8 +1637,8 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="pref_recent_nr_summary">Número de símbolos mais recentes na tela de seleção</string -->
   <string name="pref_area_border_title">Visib borda área</string>
   <string name="pref_area_border_summary">Visibilidade padrão das bordas de áreas</string>
-  <string name="pref_auto_section_pt_title">Usar ponto corte</string>
-  <string name="pref_auto_section_pt_summary">Adicionar ponto indicando posição do corte às linhas de corte</string>
+  <string name="pref_auto_section_pt_title">Criar ponto corte</string>
+  <string name="pref_auto_section_pt_summary">Criar automaticamente ponto de corte atrelado a cada novo corte indicando posição onde apresentar o croqui do corte</string>
   <string name="pref_unit_length_title">Unidade distância</string>
   <string name="pref_unit_length_summary">Unidade para visualização de distâncias</string>
   <string name="pref_unit_angle_title">Unidade ângulo</string>
