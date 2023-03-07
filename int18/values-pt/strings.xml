@@ -1431,15 +1431,15 @@ no campo abaixo e aperte o botão.
   <string name="pref_reduce_angle_summary">Ângulo mínimo das quinas de linhas endireitadas</string>
   <string name="pref_survey_stations_title">Nomear bases</string>
   <string name="pref_survey_stations_summary">Método para nomear bases automaticamente</string>
-  <string name="pref_accel_thr_title">Tolerância aceleração</string>
+  <string name="pref_accel_thr_title">Toler aceleração</string>
   <string name="pref_accel_thr_summary">Percentual de tolerância para valores de aceleração</string>
-  <string name="pref_mag_thr_title">Tolerância campo magnético</string>
+  <string name="pref_mag_thr_title">Toler campo magnético</string>
   <string name="pref_mag_thr_summary">Percentual de tolerância para valores do campo magnético</string>
-  <string name="pref_dip_thr_title">Tolerância inclinação magnética</string>
+  <string name="pref_dip_thr_title">Toler inclin magnética</string>
   <string name="pref_dip_thr_summary">Percentual de tolerância para valores da inclinação magnética</string>
   <string name="pref_sibling_thr_title">Lim irmã</string>
   <string name="pref_sibling_thr_summary">Limite para visadas irmãs [%]</string>
-  <string name="pref_leg_title">Tolerância visadas</string>
+  <string name="pref_leg_title">Toler visadas</string>
   <string name="pref_leg_summary">Tolerância entre as medições de uma visada</string>
   <string name="pref_max_shot_title">Compr máx medida</string>
   <string name="pref_max_shot_summary">Comprimento máximo de medidas [m]</string>
@@ -1525,7 +1525,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_calib_algo_summary">Algoritmo de calibração</string>
   <string name="pref_group_by_title">Regra agrupamento</string>
   <string name="pref_group_by_summary">Regra para agrupamento dos dados de calibração</string>
-  <string name="pref_group_title">Tolerância grupos</string>
+  <string name="pref_group_title">Toler grupos</string>
   <string name="pref_group_summary">Tolerância entre medidas de um mesmo grupo</string>
   <string name="pref_error_title">Erro algoritmo</string>
   <string name="pref_error_summary">Limite erro interrupção de calibração</string>
@@ -1592,7 +1592,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_legonly_update_title">Só visada redesenha</string>
   <string name="pref_legonly_update_summary">Somente redesenhar linha de trena quando receber novas visadas</string>
   <string name="pref_full_affine_title">Transformação afim</string>
-  <string name="pref_full_affine_summary">Habilitar transformações afim (capaz de alterar proporções e posição) em croquis</string>
+  <string name="pref_full_affine_summary">Habilita transformação afim em croquis (permite distorcer alterando proporções e posição)</string>
   <string name="pref_loopClosure_title">Fech poligonal</string>
   <string name="pref_loopClosure_summary">Compensação de erro de fechamento de poligonais</string>
   <string name="pref_loop_thr_title">Lim poligonal</string>
