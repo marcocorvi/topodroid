@@ -1591,8 +1591,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_saved_stations_summary">Apresentar bases gravadas em laranja</string>
   <string name="pref_legonly_update_title">Só visada redesenha</string>
   <string name="pref_legonly_update_summary">Somente redesenhar linha de trena quando receber novas visadas</string>
-  <string name="pref_full_affine_title">Transformação affline</string>
-  <string name="pref_full_affine_summary">Habilitar transformações affline em croquis</string>
+  <string name="pref_full_affine_title">Transformação afim</string>
+  <string name="pref_full_affine_summary">Habilitar transformações afim (capaz de alterar proporções e posição) em croquis</string>
   <string name="pref_loopClosure_title">Fech poligonal</string>
   <string name="pref_loopClosure_summary">Compensação de erro de fechamento de poligonais</string>
   <string name="pref_loop_thr_title">Lim poligonal</string>
@@ -2054,7 +2054,7 @@ no campo abaixo e aperte o botão.
   <string name="help_rose_3d">Diagrama Rose</string>
   <string name="help_reset_3d">Reinicializar visualização 3D</string>
   <string name="help_viewpoint_3d">Ponto de vista 3D</string>
-  <string name="help_alpha_3d">D.E.M.</string>
+  <string name="help_alpha_3d">DEM</string>
   <string name="help_wall_3d">Modelo 3D</string>
   <!-- UNUSED string name="help_temperature">Tempertaure</string -->
   <string name="help_sketch_3d">Elevação croqui 3D</string>
