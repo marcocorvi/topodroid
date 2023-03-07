@@ -552,10 +552,10 @@ public class SketchCommandManager
     mH0 = h;
     mS0 = s;
     mN0 = n;
-    TDLog.v("MANGAER set view point C " + c.x + " " + c.y + " " + c.z );
-    TDLog.v("                       H " + h.x + " " + h.y + " " + h.z );
-    TDLog.v("                       S " + s.x + " " + s.y + " " + s.z );
-    TDLog.v("                       N " + n.x + " " + n.y + " " + n.z );
+    // TDLog.v("MANAGER set view point C " + c.x + " " + c.y + " " + c.z );
+    // TDLog.v("                       H " + h.x + " " + h.y + " " + h.z );
+    // TDLog.v("                       S " + s.x + " " + s.y + " " + s.z );
+    // TDLog.v("                       N " + n.x + " " + n.y + " " + n.z );
   }
 
   // called by SketchSurface.getBitmap()
@@ -715,7 +715,7 @@ public class SketchCommandManager
       return 0;
     }
     TDVector c = toWorld( xc, yc );
-    TDLog.v("SKETCH iworld point " + c.x + " " + c.y + " " + c.z );
+    // TDLog.v("SKETCH world point " + c.x + " " + c.y + " " + c.z );
     float radius = TDSetting.mCloseCutoff + size/mZoom; 
     SketchLine ray = new SketchLine( c, mCurrentScrap.mN );
     float min_dist = radius * radius;;

@@ -572,8 +572,8 @@ public class SketchWindow extends ItemDrawer
     addFixedLeg( v1, v2 );
     Cave3DStation st1 = leg.from_station;
     Cave3DStation st2 = leg.to_station;
-    addStation( v1, st1.getShortName(), null, false );
-    addStation( v2, st2.getShortName(), null, false );
+    addStation( v1, st1.getShortName(), leg.from, null, false );
+    addStation( v2, st2.getShortName(), leg.to,   null, false );
     for ( Cave3DShot sp : mTopoGL.getSplaysAt( st1 ) ) {
       TDVector v = sp.toTDVector(); // .plus( v1 );
       addFixedSplay( v1, v );
@@ -587,12 +587,12 @@ public class SketchWindow extends ItemDrawer
         if ( lg.from_station == st1 ) {
           TDVector v = v1.plus( lg.toTDVector() );
           addFixedNghbleg( v1, v );
-          addStation( v, lg.to_station.getShortName(), lg.from_station.getShortName(), true );
+          addStation( v, lg.to_station.getShortName(), lg.to, lg.from, true );
           TDLog.v("SKETCH station " + lg.from + "-" + lg.to + " L " + lg.len + " A " + lg.ber + " C " + lg.cln + " " + v.x + " " + v.y + " " + v.z );
         } else if ( lg.to_station == st1 ) {
           TDVector v = v1.minus( lg.toTDVector() );
           addFixedNghbleg( v1, v );
-          addStation( v, lg.from_station.getShortName(), lg.to_station.getShortName(), false );
+          addStation( v, lg.from_station.getShortName(), lg.from, lg.to, false );
           TDLog.v("SKETCH station " + lg.from + "-" + lg.to + " L " + lg.len + " A " + lg.ber + " C " + lg.cln + " " + v.x + " " + v.y + " " + v.z );
         }
       }
@@ -602,12 +602,12 @@ public class SketchWindow extends ItemDrawer
         if ( lg.from_station == st2 ) {
           TDVector v = v2.plus( lg.toTDVector() );
           addFixedNghbleg( v2, v );
-          addStation( v, lg.to_station.getShortName(), lg.from_station.getShortName(), true );
+          addStation( v, lg.to_station.getShortName(), lg.to, lg.from, true );
           TDLog.v("SKETCH station " + lg.from + "-" + lg.to + " L " + lg.len + " A " + lg.ber + " C " + lg.cln + " " + v.x + " " + v.y + " " + v.z );
         } else if ( lg.to_station == st2 ) {
           TDVector v = v2.minus( lg.toTDVector() );
           addFixedNghbleg( v2, v );
-          addStation( v, lg.from_station.getShortName(), lg.to_station.getShortName(), false );
+          addStation( v, lg.from_station.getShortName(), lg.from,  lg.to, false );
           TDLog.v("SKETCH station " + lg.from + "-" + lg.to + " L " + lg.len + " A " + lg.ber + " C " + lg.cln + " " + v.x + " " + v.y + " " + v.z );
         }
       }
@@ -721,12 +721,13 @@ public class SketchWindow extends ItemDrawer
   /** add a new station
    * @param v     station vector
    * @param name  station name
-   * @param from  other station on the leg (null for the leg stations)
+   * @param fullname station fullname
+   * @param from  other station on the leg (null for the leg stations) [fullname]
    * @param forward true if the station is TO-station of the leg (false if FROM is null)
    */
-  private SketchPath addStation( TDVector v, String name, String from, boolean forward )
+  private SketchPath addStation( TDVector v, String name, String fullname, String from, boolean forward )
   { 
-    SketchStationPath path = new SketchStationPath( BrushManager.labelPaint, v, name, from, forward );
+    SketchStationPath path = new SketchStationPath( BrushManager.labelPaint, v, name, fullname, from, forward );
     mSketchSurface.addStationPath( path );
     return path;
   }
@@ -1322,7 +1323,7 @@ public class SketchWindow extends ItemDrawer
     resetModified();
     setMode( MODE_MOVE ); // this setTheTitle() as well, and clearHotPath( INVISIBLE )
     mTouchMode    = MODE_MOVE;
-    setMenuAdapter( getResources() );
+    // setMenuAdapter( getResources() );
   }
 
   // /** update splays for a xsection
@@ -2212,25 +2213,27 @@ public class SketchWindow extends ItemDrawer
           SketchSection section = new SketchSection( mMaxSection, pts[0], pts[1], true ); // FIXME vertical
           mSketchSurface.addSection( section );
           mCurSection = mSketchSurface.openSection( section );
-          TDLog.v("SKETCH open section " + mCurSection + " " + mMaxSection );
+          // TDLog.v("SKETCH open section " + mCurSection + " " + mMaxSection );
         } else if ( mSketchSurface.hasSelectedStation() ) { // SWITCH LEG_VIEW
           SketchStationPath station = mSketchSurface.getSelectedStation();
-          TDLog.v("SKETCH open new leg " + station.from() + " " + station.name() + " " + station.isForward() );
+          // TDLog.v("SKETCH open new leg " + station.from() + " " + station.fullname() + " " + station.isForward() );
+          station.dump( "open leg" );
           Cave3DShot sketchLeg = null;
           if ( station.isForward() ) {
-            sketchLeg = mTopoGL.setSketchLeg( station.from(), station.name() );
+            sketchLeg = mTopoGL.setSketchLeg( station.from(), station.fullname() );
           } else { 
-            sketchLeg = mTopoGL.setSketchLeg( station.name(), station.from() );
+            sketchLeg = mTopoGL.setSketchLeg( station.fullname(), station.from() );
           }
           if ( sketchLeg != null ) {
-            TDLog.v("SKETHC switch ...");
+            // TDLog.v("SKETHC switch ...");
             String filename = TDPath.getC3dFile( mSketchName );
             doSave( filename, mSketchName );
-            // makeReference( sketchLeg, true );
+            makeReference( sketchLeg, true );
+            resetStatus();
           }
         } else {
           mCurSection = mSketchSurface.closeSection();
-          TDLog.v("SKETCH close section - current " + mCurSection );
+          // TDLog.v("SKETCH close section - current " + mCurSection );
         }
       } else if ( k3 < NR_BUTTON3 && b == mButton3[k3++] ) { // CLEAR SELECTION
         mSketchSurface.clearSelected();

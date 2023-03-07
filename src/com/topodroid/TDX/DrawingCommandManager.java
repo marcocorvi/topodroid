@@ -1330,6 +1330,22 @@ public class DrawingCommandManager
 
   public void undo () { mCurrentScrap.undo(); }
 
+  /** try to continue an area
+   * @param ap   area path
+   * @param lp1  first point
+   * @param lp2  last point
+   * @param type area type
+   * @param zoom canvas zoom (the larger the zoom, the bigger the sketch on the display)
+   * @param size ???
+   * @return true if the area ap1 has been added to the sketch
+   * @note line points are scene-coords
+   *           continuation is checked in canvas-coords: canvas = offset + scene * zoom
+   */
+  boolean getAreaToContinue( DrawingAreaPath ap, LinePoint lp1, LinePoint lp2,  int type, float zoom, float size ) 
+  {
+    return mCurrentScrap.getAreaToContinue( ap, lp1, lp2, type, zoom, size );
+  }
+
   /** get the line to continue
    * @param lp   point
    * @param type line type
@@ -1340,7 +1356,7 @@ public class DrawingCommandManager
    *           continuation is checked in canvas-coords: canvas = offset + scene * zoom
    */
   DrawingLinePath getLineToContinue( LinePoint lp, int type, float zoom, float size ) { return mCurrentScrap.getLineToContinue( lp, type, zoom, size ); }
-        
+
   // @return true if the line has been modified
   // @param line  line to modify
   // @param line2 modification

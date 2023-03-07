@@ -344,4 +344,15 @@ public class LinePoint extends Point2D
    */
   String toDebugString() { return String.format(Locale.US, "<%.0f %.0f>", x, y ); }
 
+
+  /** @return area of the CCW triangle
+   * @paramm p1 first vertex
+   * @paramm p2 second vertex
+   * @paramm p3 third vertex
+   */
+  static float area( LinePoint p1, LinePoint p2, LinePoint p3 )
+  {
+    return p1.x*p2.y + p2.x*p3.y + p3.x*p1.y - p1.y*p2.x - p2.y*p3.x - p3.y*p1.x;
+  }
+
 }

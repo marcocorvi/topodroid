@@ -38,7 +38,8 @@ public class SketchStationPath extends SketchPath
 {
   private TDVector mV;    // (E,N,Up)
   private String mName;
-  private String mFrom;   // name of the other leg station
+  private String mFullname;
+  private String mFrom;   // fullname of the other leg station
   private boolean mForward; // true if this station is to TO of its leg (false if FROM is null)
 
   /** cstr
@@ -46,13 +47,19 @@ public class SketchStationPath extends SketchPath
    * @param v      station point vector (E,N,Up)
    * @param name   station name
    */
-  public SketchStationPath( Paint paint, TDVector v, String name, String from, boolean forward )
+  public SketchStationPath( Paint paint, TDVector v, String name, String fullname, String from, boolean forward )
   {
     super( SketchPath.SKETCH_PATH_STATION, paint );
     mV = v;
     mName = name;
+    mFullname = fullname;
     mFrom = from;
     mForward = forward;
+  }
+
+  void dump( String msg )
+  {
+    TDLog.v("SKETCH " + msg + " station " + mName + " (" + mFullname + " " + mFrom + ") fwd " + mForward + " " + mV.x + " " + mV.y + " " + mV.z );
   }
 
   /** @return the station 3D vector point
@@ -67,6 +74,10 @@ public class SketchStationPath extends SketchPath
   /** @return the station name
    */
   String name() { return mName; }
+
+  /** @return the station fullname
+   */
+  String fullname() { return mFullname; }
 
   /** @return the name of the other leg-station
    */
@@ -87,6 +98,9 @@ public class SketchStationPath extends SketchPath
   {
     dos.write( 'N' );
     dos.writeUTF( mName );
+    dos.writeUTF( mFullname );
+    dos.writeUTF( mFrom );
+    dos.write( mForward? 't' : 'f' );
     dos.writeFloat( mV.x );
     dos.writeFloat( mV.y );
     dos.writeFloat( mV.z );
@@ -102,6 +116,9 @@ public class SketchStationPath extends SketchPath
   {
     dataCheck( "Station", ( dis.read() == 'N' ) );
     mName = dis.readUTF();
+    mFullname = dis.readUTF();
+    mFrom = dis.readUTF();
+    mForward = (dis.read() == 't');
     mV.x = dis.readFloat();
     mV.y = dis.readFloat();
     mV.z = dis.readFloat();

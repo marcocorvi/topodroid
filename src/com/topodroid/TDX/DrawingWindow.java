@@ -1244,6 +1244,21 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** select a area symbol
+   * @param k       index of selected area-tool in the symbol-library array
+   * @param update_recent ...
+   */
+  @Override
+  public void areaSelected( int k, boolean update_recent )
+  {
+    super.areaSelected( k, update_recent );
+    if ( TDLevel.overExpert ) {
+      setButtonContinue( CONT_CONTINUE );
+    } else {
+      setButtonContinue( CONT_NONE );
+    }
+  }
+
   /** called by Drawing Shot Dialog to change shot color
    *   @param blk   data block
    *   @param color color (0 to clear)
@@ -1295,8 +1310,8 @@ public class DrawingWindow extends ItemDrawer
         sb.append( String.format( res.getString(R.string.title_draw_area), BrushManager.getAreaName( mCurrentArea ) ) );
       }
       // boolean visible = ( mSymbol == SymbolType.LINE && mCurrentLine == BrushManager.getLineWallIndex() );
-      boolean visible = ( mSymbol == SymbolType.LINE );
-      if ( TDLevel.overNormal && BTN_CONT < mNrButton2 ) {
+      boolean visible = ( mSymbol == SymbolType.LINE || mSymbol == SymbolType.AREA );
+      if ( TDLevel.overAdvanced && BTN_CONT < mNrButton2 ) {
         mButton2[ BTN_CONT ].setVisibility( visible? View.VISIBLE : View.GONE );
       }
     } else if ( mMode == MODE_MOVE ) {
@@ -1891,30 +1906,38 @@ public class DrawingWindow extends ItemDrawer
    */
   private void setButtonContinue( int continue_line )
   {
-    mContinueLine = continue_line;
     if ( BTN_CONT < mNrButton2 ) {
-      if ( mSymbol == SymbolType.LINE /* && mCurrentLine == BrushManager.getLineWallIndex() */ ) {
-        mButton2[ BTN_CONT ].setVisibility( View.VISIBLE );
-        switch ( mContinueLine ) {
-          case CONT_NONE:
-            setButton2( BTN_CONT, mBMcont_none  );
-            break;
-          case CONT_START:
-            setButton2( BTN_CONT, mBMcont_start  );
-            break;
-          case CONT_END:
-            setButton2( BTN_CONT, mBMcont_end   );
-            break;
-          case CONT_BOTH:
-            setButton2( BTN_CONT, mBMcont_both  );
-            break;
-          case CONT_CONTINUE:
-            setButton2( BTN_CONT, mBMcont_continue  );
-            break;
-          case CONT_OFF:
-            setButton2( BTN_CONT, mBMcont_off  );
+      if ( TDLevel.overAdvanced ) {
+        mContinueLine = continue_line;
+        if ( mSymbol == SymbolType.LINE ) {
+          mButton2[ BTN_CONT ].setVisibility( View.VISIBLE );
+          switch ( mContinueLine ) {
+            case CONT_NONE:
+              setButton2( BTN_CONT, mBMcont_none  );
+              break;
+            case CONT_START:
+              setButton2( BTN_CONT, mBMcont_start  );
+              break;
+            case CONT_END:
+              setButton2( BTN_CONT, mBMcont_end   );
+              break;
+            case CONT_BOTH:
+              setButton2( BTN_CONT, mBMcont_both  );
+              break;
+            case CONT_CONTINUE:
+              setButton2( BTN_CONT, mBMcont_continue  );
+              break;
+            case CONT_OFF:
+              setButton2( BTN_CONT, mBMcont_off  );
+          }
+        } else if ( mSymbol == SymbolType.AREA ) {
+          mButton2[ BTN_CONT ].setVisibility( View.VISIBLE );
+          setButton2( BTN_CONT, ( mContinueLine == CONT_NONE )? mBMcont_none : mBMcont_continue );
+        } else {
+          mButton2[ BTN_CONT ].setVisibility( View.GONE );
         }
       } else {
+        mContinueLine = CONT_OFF;
         mButton2[ BTN_CONT ].setVisibility( View.GONE );
       }
     }
@@ -4089,6 +4112,21 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** try to join two areas
+   * @param ap1    is the area (being drawn) 
+   * @param ap2    is used to get the area to extend - initialized to the current areapath
+   * @return true if the area ap1 has been added to the sketch
+   */
+  private boolean tryToJoin( DrawingAreaPath ap1, DrawingAreaPath ap2 )
+  {
+    if ( mContinueLine <= CONT_NONE ) return false;
+    if ( ap1 == null ) return false;
+    if ( ap2 == null ) return false;
+    LinePoint p1 = ap2.first();
+    LinePoint p2 = ap2.last();
+    return mDrawingSurface.getAreaToContinue( ap1, p1, p2, mCurrentArea, mZoom, mSelectSize );
+  }
+
   /** try to join two lines
    * @param lp1    is the line (being drawn) to modify - a copy of the current linepath
    * @param lp2    is used to get the line to join/continue - initialized to the current linepath
@@ -4096,6 +4134,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private boolean tryToJoin( DrawingLinePath lp1, DrawingLinePath lp2 )
   {
+    if ( mContinueLine <= CONT_NONE ) return true;
     if ( lp1 == null ) return false;
     if ( lp2 == null ) return true;
 
@@ -4319,45 +4358,7 @@ public class DrawingWindow extends ItemDrawer
                    && BrushManager.isAreaCloseHorizontal( mCurrentArea ) 
                    && Math.abs( ys - mCurrentAreaPath.mFirst.y ) < 10  // 10 == 0.5 meter
                 ) {
-                DrawingAreaPath area = new DrawingAreaPath( mCurrentAreaPath.mAreaType,
-                                                            mCurrentAreaPath.mAreaCnt, 
-                                                            mCurrentAreaPath.mPrefix, 
-                                                            TDSetting.mAreaBorder, 
-                                                            mDrawingSurface.scrapIndex() );
-                area.setOptions( BrushManager.getAreaDefaultOptions( mCurrentArea ) );
-                if ( xs - mCurrentAreaPath.mFirst.x > 20 ) { // 20 == 1.0 meter // CLOSE BOTTOM SURFACE
-                  // TDLog.v("CLOSE BOTTOM " + (ys - mCurrentAreaPath.mFirst.y) );
-                  LinePoint lp = mCurrentAreaPath.mFirst; 
-                  float yy = lp.y;
-                  mCurrentAreaPath.addPoint( xs, yy-0.001f );
-                  area.addStartPoint( lp.x, lp.y );
-                  for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
-                    if ( lp.y <= yy ) {
-                      area.addPoint( lp.x, yy );
-                      break;
-                    } else {
-                      area.addPoint( lp.x, lp.y );
-                    }
-                  }
-                  mCurrentAreaPath = area; // area is empty if not recreated
-                } else if ( mCurrentAreaPath.mFirst.x - xs > 20 ) { // 20 == 1.0 meter // CLOSE TOP SURFACE
-                  // TDLog.v("CLOSE TOP " + (ys - mCurrentAreaPath.mFirst.y) );
-                  LinePoint lp = mCurrentAreaPath.mFirst; 
-                  float yy = lp.y;
-                  mCurrentAreaPath.addPoint( xs, yy-0.001f );
-                  area.addStartPoint( lp.x, lp.y );
-                  for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
-                    if ( lp.y >= yy ) {
-                      area.addPoint( lp.x, yy );
-                      break;
-                    } else {
-                      area.addPoint( lp.x, lp.y );
-                    }
-                  }
-                  mCurrentAreaPath = area; // area is empty if not recreated
-                } else {
-                  // TDLog.v("NO CLOSE " + (ys - mCurrentAreaPath.mFirst.y) + " " + (xs - mCurrentAreaPath.mFirst.x) );
-                }
+                tryCloseCurrentArea( xs );
               } else {  
                 // TDLog.v("NO CLOSE " + (ys - mCurrentAreaPath.mFirst.y) );
                 if ( squared_shift > TDSetting.mLineSegment2 || ( mPointCnt % mLinePointStep ) > 0 ) {
@@ -4373,8 +4374,7 @@ public class DrawingWindow extends ItemDrawer
                  && TDSetting.isLineStyleComplex()
                  && ( mSymbol == SymbolType.AREA || ! BrushManager.isLineStraight( mCurrentLine ) )
                ) {
-              int nPts = (mSymbol == SymbolType.LINE )? mCurrentLinePath.size() 
-                                                  : mCurrentAreaPath.size() ; // FIXME may NullPointerException
+              int nPts = (mSymbol == SymbolType.LINE )? mCurrentLinePath.size() : mCurrentAreaPath.size() ; // FIXME may NullPointerException
               if ( nPts > 1 ) {
 		if ( TDSetting.isLineStyleBezier() ) {
                   ArrayList< Point2D > pts = new ArrayList<>(); // [ nPts ];
@@ -4430,10 +4430,13 @@ public class DrawingWindow extends ItemDrawer
                         Point2D p3 = c.getPoint(3);
                         ap.addPoint3(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y );
                       }
-                      ap.closePath();
-                      ap.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
-                      mDrawingSurface.addDrawingPath( ap );
+                      if ( ! tryToJoin( ap, mCurrentAreaPath ) ) {
+                        ap.closePath();
+                        ap.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
+                        mDrawingSurface.addDrawingPath( ap );
+                      }
                       mLastLinePath = null;
+                      // mCurrentAreaPath = null;
                     }
                   }
                 } else { // if ( TDSetting.isLineStyleSimplified() ) 
@@ -4487,10 +4490,13 @@ public class DrawingWindow extends ItemDrawer
                         p0 = points.get(k);
                         ap.addPoint(p0.x, p0.y );
                       }
-                      ap.closePath();
-                      ap.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
-                      mDrawingSurface.addDrawingPath( ap );
+                      if ( ! tryToJoin( ap, mCurrentAreaPath ) ) {
+                        ap.closePath();
+                        ap.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
+                        mDrawingSurface.addDrawingPath( ap );
+                      }
                       mLastLinePath = null;
+                      // mCurrentAreaPath = null;
                     }
                   }
                 }
@@ -4530,9 +4536,11 @@ public class DrawingWindow extends ItemDrawer
                 }
               } else if ( mSymbol == SymbolType.AREA ) {
                 if ( mCurrentAreaPath != null ) {
-                  mCurrentAreaPath.closePath();
-                  mCurrentAreaPath.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
-                  mDrawingSurface.addDrawingPath( mCurrentAreaPath );
+                  if ( ! tryToJoin( mCurrentAreaPath, mCurrentAreaPath ) ) {
+                    mCurrentAreaPath.closePath();
+                    mCurrentAreaPath.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
+                    mDrawingSurface.addDrawingPath( mCurrentAreaPath );
+                  }
                   mCurrentAreaPath = null;
                   mLastLinePath = null;
                 }
@@ -5012,6 +5020,50 @@ public class DrawingWindow extends ItemDrawer
       }
     }
     return true;
+  }
+
+  /** try to close the current area horizontally
+   * @param xs ...
+   */
+  private void tryCloseCurrentArea( float xs )
+  {
+    DrawingAreaPath area = new DrawingAreaPath( mCurrentAreaPath.mAreaType,
+                                                mCurrentAreaPath.mAreaCnt, 
+                                                mCurrentAreaPath.mPrefix, 
+                                                TDSetting.mAreaBorder, 
+                                                mDrawingSurface.scrapIndex() );
+    area.setOptions( BrushManager.getAreaDefaultOptions( mCurrentArea ) );
+    if ( xs - mCurrentAreaPath.mFirst.x > 20 ) { // 20 == 1.0 meter // CLOSE BOTTOM SURFACE
+      // TDLog.v("CLOSE BOTTOM " + (ys - mCurrentAreaPath.mFirst.y) );
+      LinePoint lp = mCurrentAreaPath.mFirst; 
+      float yy = lp.y;
+      mCurrentAreaPath.addPoint( xs, yy-0.001f );
+      area.addStartPoint( lp.x, lp.y );
+      for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
+        if ( lp.y <= yy ) {
+          area.addPoint( lp.x, yy );
+          break;
+        } else {
+          area.addPoint( lp.x, lp.y );
+        }
+      }
+      mCurrentAreaPath = area; // area is empty if not recreated
+    } else if ( mCurrentAreaPath.mFirst.x - xs > 20 ) { // 20 == 1.0 meter // CLOSE TOP SURFACE
+      // TDLog.v("CLOSE TOP " + (ys - mCurrentAreaPath.mFirst.y) );
+      LinePoint lp = mCurrentAreaPath.mFirst; 
+      float yy = lp.y;
+      mCurrentAreaPath.addPoint( xs, yy-0.001f );
+      area.addStartPoint( lp.x, lp.y );
+      for ( lp = lp.mNext; lp != null; lp = lp.mNext ) {
+        if ( lp.y >= yy ) {
+          area.addPoint( lp.x, yy );
+          break;
+        } else {
+          area.addPoint( lp.x, lp.y );
+        }
+      }
+      mCurrentAreaPath = area; // area is empty if not recreated
+    } 
   }
 
   /** @return the xsection clino or more than 90 if error

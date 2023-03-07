@@ -891,6 +891,108 @@ public class Scrap
     }
   }
 
+  /** fine the area to continue
+   * @param lp     area point
+   * @param type   area type
+   * @param zoom   display zoom
+   * @param size   ...
+   * @return true if continued
+   * @note line points are scene-coords
+   *       continuation is checked in canvas-coords: canvas = offset + scene * zoom
+   */
+  boolean getAreaToContinue( DrawingAreaPath ap, LinePoint lp1, LinePoint lp2, int type, float zoom, float size )
+  {
+    float delta = 2 * size / zoom;
+
+    synchronized( TDPath.mCommandsLock ) {
+      for ( ICanvasCommand cmd : mCurrentStack ) {
+        if ( cmd.commandType() != 0 ) continue; // FIXME EraseCommand
+
+        final DrawingPath path = (DrawingPath)cmd;
+        if ( path.isArea() ) { // path instanceof DrawingLinePath
+          DrawingAreaPath area = (DrawingAreaPath)path;
+          if ( area.mAreaType == type ) {
+            LinePoint lp10 = null;
+            LinePoint lp20 = null;
+            int first = 0;
+            for ( LinePoint lp = area.first(); lp != null; lp = lp.mNext ) {
+              float dmin;
+              if ( lp10 == null && (dmin = lp.distance( lp1 )) < delta ) {
+                lp10 = lp;
+                for ( LinePoint lpp = lp.mNext; lpp != null; lpp=lp.mNext ) {
+                  float d = lpp.distance( lp1 );
+                  if ( d > dmin ) break;
+                  lp10 = lpp;
+                  dmin = d;
+                }
+                if ( first == 0 ) first = 1; // first is lp10
+                if ( lp20 != null ) break;
+              }
+              if ( lp20 == null && (dmin = lp.distance( lp2 )) < delta ) {
+                lp20 = lp;
+                for ( LinePoint lpp = lp.mNext; lpp != null; lpp=lp.mNext ) {
+                  float d = lpp.distance( lp2 );
+                  if ( d > dmin ) break;
+                  lp20 = lpp;
+                  dmin = d;
+                }
+                if ( first == 0 ) first = 2; // first is lp20
+                if ( lp10 != null ) break;
+              }
+            }
+            if ( lp10 != null && lp20 != null ) {
+              mSelection.removePath( area );
+              // area.dump( "a0" );
+              // ap.dump( "ap" );
+              boolean ccw0 = ap.isCCW();
+              boolean ccw1 = area.isCCW();
+              if ( ( ccw0 && ccw1 ) || ( ! ccw0 && ! ccw1 ) ) {
+                TDLog.v("AREA " + area.size() + " continue A: first " + first + " ccw " + ccw0 + " " + ccw1 );
+                if ( lp10.mNext != null ) lp10.mNext.mPrev = null;
+                if ( lp20.mPrev != null ) lp20.mPrev.mNext = null;
+                lp10.mNext = lp1;
+                lp1.mPrev  = lp10;
+                lp20.mPrev = lp2;
+                lp2.mNext  = lp20;
+                if ( first == 2 ) {
+                  TDLog.v("AREA reset First " + lp20.x + " " + lp20.y + " Last " + lp2.x + " " + lp2.y);
+                  area.resetFirstLast( lp20, lp2 );
+                }
+              } else { 
+                TDLog.v("AREA " + area.size() + " continue B: first " + first + " ccw " + ccw0 + " " + ccw1 );
+                if ( lp20.mNext != null ) lp20.mNext.mPrev = null;
+                if ( lp10.mPrev != null ) lp10.mPrev.mNext = null;
+                LinePoint lp_prev = lp20;
+                LinePoint lp_next = null;
+                for ( LinePoint lp = lp2; lp != lp1; lp = lp_next ) {
+                  lp_next       = lp.mPrev;
+                  lp_prev.mNext = lp;
+                  lp.mPrev      = lp_prev;
+                  lp_prev       = lp;
+                }
+                lp1.mNext  = lp10;
+                lp10.mPrev = lp1;
+                if ( first == 1 ) {
+                  TDLog.v("AREA reset First " + lp10.x + " " + lp10.y + " Last " + lp1.x + " " + lp1.y);
+                  area.resetFirstLast( lp10, lp1 );
+                }
+              }
+              // TODO update mSelection
+              area.recomputeSize();
+              area.retracePath();
+              mSelection.insertPath( area );
+              // area.dump( "af" );
+              TDLog.v("AREA new size " + area.size() );
+              return true;
+            }
+          }
+        }
+      }
+    }
+    return false;
+  }
+              
+
   /** fine the line to continue
    * @param lp     line point
    * @param type   line type
@@ -936,7 +1038,7 @@ public class Scrap
     // checkLines();
     return ret;
   }
-        
+
   /** modify a portion of a line with another one
    * @param line  line to modify
    * @param line2 modification

@@ -140,17 +140,14 @@ public class DrawingPointLinePath extends DrawingPath
   @Override
   float getY() { return (top+bottom)/2; }
 
-  // void dump( ) // DEBUG
-  // {
-  //   int k=0;
-  //   for (LinePoint l1 = mFirst; l1 != null; l1=l1.mNext ) {
-  //     // if ( k < 2 || k > mSize-2 ) 
-  //     {
-  //       TDLog.v("PATH " + k + ": " + l1.x + " " + l1.y );
-  //     }
-  //     ++k;
-  //   }
-  // }
+  void dump( String msg ) // DEBUG
+  {
+    int k=0;
+    for (LinePoint l1 = mFirst; l1 != null; l1=l1.mNext ) {
+      TDLog.v( msg + " " + k + ": " + l1.x + " " + l1.y );
+      ++k;
+    }
+  }
 
   /** shift the path point
    * @param dx   shift of X-coord
@@ -949,6 +946,32 @@ public class DrawingPointLinePath extends DrawingPath
     mFirst.x = cx - dx * ca + dy * sa;
     mFirst.y = cy - dx * sa - dy * ca;
     retracePath();
+  }
+
+  /** @return true if the area is counterclockwise
+   */
+  boolean isCCW()
+  {
+    if ( mSize < 3 ) return false;
+    float area = 0;
+    LinePoint lp1 = mFirst;
+    LinePoint lp2 = lp1.mNext;
+    for ( LinePoint lp3 = lp2.mNext; lp3 != null; lp3=lp3.mNext ) area += LinePoint.area( lp1, lp2, lp3 );
+    return area < 0;
+  }
+
+  /** reset the first/last line-points
+   * @param lp1   new first point
+   * @param lp2   new last point
+   */
+  void resetFirstLast( LinePoint lp1, LinePoint lp2 )
+  {
+    if ( mFirst.mPrev != null ) mFirst.mPrev.mNext = null;
+    mFirst = lp1;
+    mFirst.mPrev = null;
+    if ( mLast.mNext != null ) mLast.mNext.mPrev = null;
+    mLast = lp2;
+    mLast.mNext = null;
   }
 
 }
