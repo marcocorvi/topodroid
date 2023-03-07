@@ -410,9 +410,9 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="no_db_viewer">A DB_viewer alkalmazás nem található</string -->
     <string name="no_undelete">Nincs helyreállítható részlet</string>
     <string name="no_undelete_paste">Nincs visszaállítható/beilleszthető elem</string>
-    <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Irány %5$.1f"</string>
-    <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Lejtés %5$.1f</string>
-    <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
+    <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f Az. %5$.1f</string>
+    <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f Le. %5$.1f</string>
+    <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: [%3$d] %4$.1f/%5$.1f (%6$.1f %7$.1f) %8$.1f %% (%9$.1f\u00b0)</string -->
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">NÉVJEGY</string>
