@@ -47,9 +47,9 @@
   </string-array>
   <string-array name="lineContinue">
     <item name="none">nenhuma</item>
-    <item name="start">liga início</item>
-    <item name="end">liga fim</item>
-    <item name="both">liga 2 extremidades</item>
+    <item name="start">início</item>
+    <item name="end">fim</item>
+    <item name="both">2 extremidades</item>
     <item name="continue">continua</item>
   </string-array>
   <string-array name="unitGrid">

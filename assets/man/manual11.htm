@@ -22,8 +22,8 @@ In the second case you sketch the x-section on a canvas with the usual drawing t
 Leg x-sections can be re-opened and modified by selecting, in "edit" mode, the section line or the section point, and tapping the <i>edit</i> button.<br><p>
 
 <b>X-sections in plan view</b><br>
-X-sections defined in the plan view are always in a vertical plane (zero inclination). Their orientation (ie, the azimuth of the x-section plane) is determined by the angle of the section line. Very often the section plane is perpendicular to the gallery, but can be at any needed angle. For example, a section line drawn from left to right(e.g. horizontal, angle 90&deg; from the vertical) has a direction of view to the magnetic North (up, azimuth 0). If drawn slightly downwards at an angle of 120, it will have a direction of view to an azimuth of 30&deg;.<br>
-The crossed leg is displayed vertical when the x-section has the same azimuth as the leg. Otherwise it is tilted right or left.<br><p>
+X-sections defined in the plan view are always in a vertical plane (zero inclination<a href="#footnote-1">[1]</a>). Their orientation (ie, the azimuth of the x-section plane) is determined by the angle of the section line. Very often the section plane is perpendicular to the gallery, but can be at any needed angle. For example, a section line drawn from left to right(e.g. horizontal, angle 90&deg; from the vertical) has a direction of view to the magnetic North (up, azimuth 0). If drawn slightly downwards at an angle of 120, it will have a direction of view to an azimuth of 30&deg;.<br>
+The crossed leg is displayed vertical when the x-section has the same azimuth as the leg, i.e., when the section line is perfectly perpendicular to the leg. Otherwise it is tilted right or left.<br><p>
 
 In plan view it is possible to make a x-section that crosses multiple legs. All the crossed legs and the splays at their stations are shown as x-section sketch reference. The crossing point is marked on every leg.<br>
 
@@ -34,7 +34,7 @@ In plan view it is possible to make a x-section that crosses multiple legs. All 
 X-sections in the profile view can be either "horizontal" (on vertical shots in pits) or "vertical" (on more or less horizontal galleries).
 
 They are considered "horizontal" if the inclination
-of the leg exceeds the value of the H-threshold setting.<br><p>
+of the leg exceeds the value of the H-threshold setting (<i>X-section H-threshold</i>).<br><p>
 
 "Vertical" x-sections must be defined tracing an almost vertical section line.
 They always have the azimuth of the crossed leg (or the opposite one if the direction of the section line is the opposite of that of the leg). The crossed leg is displayed vertical as the x-section has the same azimuth as the leg.<br><p>
@@ -52,17 +52,17 @@ The leg is shown at its azimuth<br><p>
 <img src="hsection.png" >
 <br><p>
 
-If the "profile slant x-section" setting is enabled it is possible to define profile-view x-sections in planes at variable inclination (a multiple of 10&deg; close to the slope of the section line).<br><p>
+If the "Slant xsections" setting is enabled it is possible to define profile-view x-sections in planes at variable inclination (a multiple of 10&deg; close to the slope of the section line).<br><p>
 
 In extended profile view the leg x-section must cross a single leg.
 Multileg xsections are allowed in projected profile views.
-For vertical x-sections the azimuth of the xsection plane is orthogonal to that of the profile view.<br><p>
+For vertical x-sections the azimuth of the xsection plane is orthogonal to that of the profile view for projected profiles and orthogonal to the crossed leg for extended profiles.<br><p>
  
 <img src="profile-xsection.png" >
 <br><p>
 
 <b>Section points</b><br>
-If the setting for the "auto section points" is checked, when you insert a x-section, either by drawing a section-line or inserting it at a station, the corresponding section point is added to the sketch.
+If the setting for the auto "section points" is checked, when you insert a x-section, either by drawing a section-line or inserting it at a station, the corresponding section point is added to the sketch.
 Section points are displayed as white squares and and orange line connecting them to the relative section line or station.<br>
 If the x-section is deleted, the corresponding section point is also deleted.<br><p>
 
@@ -78,19 +78,20 @@ This is another way to insert x-sections.
 The "Station" dialog, that you get by tapping on a station point in <i>Edit</i> mode, displays the station coordinates
 and has some buttons:
 <ul style="margin-top=0">
-<li>"Continue" the survey from the station. Set the station as the "active station", ie, that to which the next shot will be attached</li>
-<li>"Reset" the centerline display after the station.</li>
-<li>"Toggle" the display of the splays at the station.</li>
-<li>"X-Section" [E] opens a <u>Drawing window</u> to draw a x-section at the station.</li>
+<li><i>Save</i>: saves the entered comment.</li>  
+<li><i>Ok</i>: continues the survey from the station. Set the station as the "active station", ie, that to which the next shot will be attached.</li>
+<li><i>Splays</i>: toggle for the display of splays at the station.</li>
+<li><i>X-Section</i> [E]: opens a <u>Drawing window</u> to draw a x-section at the station.</li>
+<li><i>Saved station</i>: opens the <i>Saved stations</i> dialog setted to the current station so it can be saved.</li>
 </ul>
 
-If the mean clino of the legs at the station is smaller than the "vertical threshold", the x-section at a station is drawn in a vertical plane passing through the station, otherwise it is horizontal.
+If the mean clino of the legs at the station is smaller than the "shot vertical threshold" setting, the x-section at a station is drawn in a vertical plane passing through the station, otherwise it is horizontal.
 The station x-section is useful when you take several splay shots around the station to describe the shape of the gallery. 
 The x-section plane can be oriented with the <i>compass</i> button.
 If the station has only two legs the plane can be oriented along the bisecant of the angles formed by the (horizontal projections of the) legs. If there is only one leg it can be oriented orthogonal to that. If there are more than two legs you have to use the
 <i>compass</i> button.<br><p>
 
-Station x-sections can be re-opened and modified by selecting, in "edit" mode, the station or the section point, and tapping the <i>edit</i> button.<br><p>
+Station x-sections can be re-opened and modified by selecting, in "edit" mode, the station or the section point, and tapping the <i>X-Section</i> button.<br><p>
 
 See also<br>
 <a href="page_sketch_station.htm">Sketch station edit dialog</a>,<br>
@@ -99,5 +100,7 @@ See also<br>
 
 <a href="manual10.htm">&lt; Sketch drawing</a> |
 <a href="manual12.htm">Overview window &gt;</a>
+
+<p id="footnote-1" style="font-size:90%">[1] <i>NB</i>: inclination in this page uses a different reference from clino used in surveys. Here inclination 0&deg; is vertical upward while clino 0&deg; is horizontal.</p>
 
 </body></html>
