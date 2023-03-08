@@ -813,12 +813,12 @@ public class SketchWindow extends ItemDrawer
   @Override
   public void setTheTitle()
   {
+    Resources res = getResources();
     StringBuilder sb = new StringBuilder();
     // sb.append(mName);
     // sb.append(": ");
-    sb.append( mVertical? R.string.ctitle_sketch_v : R.string.ctitle_sketch_h ).append(" ").append( mSketchName ).append(" ");
+    sb.append( res.getString( mVertical? R.string.ctitle_sketch_v : R.string.ctitle_sketch_h ) ).append(" ").append( mSketchName ).append(" ");
     
-    Resources res = getResources();
     if ( mMode == MODE_DRAW ) { 
       // if ( mSymbol == SymbolType.POINT ) {
       //   sb.append( String.format( res.getString(R.string.title_draw_point), BrushManager.getPointName( mCurrentPoint ) ) );
@@ -2210,7 +2210,7 @@ public class SketchWindow extends ItemDrawer
         if ( mSketchSurface.hasSelected() == 2 ) {
           SketchPoint[] pts = mSketchSurface.getSelected();
           ++ mMaxSection;
-          SketchSection section = new SketchSection( mMaxSection, pts[0], pts[1], true ); // FIXME vertical
+          SketchSection section = new SketchSection( mMaxSection, pts[0], pts[1], mVertical );
           mSketchSurface.addSection( section );
           mCurSection = mSketchSurface.openSection( section );
           // TDLog.v("SKETCH open section " + mCurSection + " " + mMaxSection );

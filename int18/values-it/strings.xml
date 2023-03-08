@@ -1031,6 +1031,7 @@
     <string name="help_delete_item">Cancella elemento del disegno</string>
     <!-- TODO string name="help_section_type">Sketch section type</string -->
     <!-- TODO string name="help_section_item">Sketch section item</string -->
+    <!-- TODO string name="help_select_clear">Clear sketch selection</string -->
     <string name="help_range">Sposta porzione di linea</string>
     <!-- UNUSED string name="help_clear">Pulisci selezione</string -->
     <string name="help_eraser">Modalità cancella</string>
@@ -1310,6 +1311,7 @@
   <string name="pref_cat_device">OPZIONI DISTOX</string>
   <string name="pref_cat_cave3d">VIEWER 3D</string>
   <string name="pref_cat_geek">FLAG PRINCIPIANTI</string>
+  <!-- TODO string name="pref_cat_sketch">3D SKETCH</string -->
   <!-- UNUSED string name="pref_cat_log">Opzioni log</string -->
 
   <string name="pref_locale_title">Lingua</string>
@@ -1778,6 +1780,9 @@
   <!-- NO string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string -->
   <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
+
+  <!-- TODO string name="pref_sketch_splay_buffer_title">Splay buffer</string -->
+  <!-- TODO string name="pref_sketch_splay_buffer_summary">Section splay buffer [m]</string -->
 
 <!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Log output stream</string>

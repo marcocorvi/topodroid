@@ -1040,6 +1040,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="help_delete_item">Vázlat elem törlése</string>
     <!-- TODO string name="help_section_type">Sketch section type</string -->
     <string name="help_section_item">Vázlet metszet elem</string>
+    <!-- TODO string name="help_select_clear">Clear sketch selection</string -->
     <string name="help_range">Vonalelem mozgatása</string>
     <!-- UNUSED string name="help_clear">Kiválasztás törlése</string -->
     <string name="help_eraser">Radír mód</string>
@@ -1317,6 +1318,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_cat_device">MŰSZEREK</string>
   <string name="pref_cat_cave3d">3D MEGJELENÍTŐ</string>
   <string name="pref_cat_geek">SAJÁT BEÁLLÍTÁSOK</string>
+  <!-- TODO string name="pref_cat_sketch">3D SKETCH</string -->
   <!-- UNUSED string name="pref_cat_log">NAPLÓZÁSOK</string -->
 
   <string name="pref_locale_title">Nyelv</string>
@@ -1794,6 +1796,9 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <!-- NO string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x súlyozása</string -->
   <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x súlyozása</string -->
+
+  <!-- TODO string name="pref_sketch_splay_buffer_title">Splay buffer</string -->
+  <!-- TODO string name="pref_sketch_splay_buffer_summary">Section splay buffer [m]</string -->
 
   <!-- NO string name="pref_log_stream_summary" translatable="false">Log output stream</string -->
   <!-- NO string name="pref_log_stream_title" translatable="false">Log stream</string -->

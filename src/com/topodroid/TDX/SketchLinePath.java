@@ -95,6 +95,10 @@ public class SketchLinePath extends SketchPath
     dos.writeInt( mPts.size() );
     for ( SketchPoint pt : mPts ) toDataStream( dos, pt );
     TDLog.v("WRITE line " + mId + "." + mSid + " n.pts " + mPts.size() );
+    if ( mPts.size() > 1 ) {
+      mPts.get(0).dump("  P[0]");
+      mPts.get(mPts.size()-1).dump("  P[N]");
+    }
   }
 
   /** read from a stream

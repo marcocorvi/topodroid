@@ -1032,6 +1032,7 @@
     <string name="help_delete_item">Удалить элемент абриса</string>
     <!-- TODO string name="help_section_type">Sketch section type</string -->
     <string name="help_section_item">Элемент раздела абриса</string>
+    <!-- TODO string name="help_select_clear">Clear sketch selection</string -->
     <string name="help_range">Переместить сегмент линии</string>
     <!-- UNUSED string name="help_clear">Очистить выбор</string -->
     <string name="help_eraser">Режим стирания</string>
@@ -1309,6 +1310,7 @@
   <string name="pref_cat_device">НАСТРОЙКИ УСТРОЙСТВ DistoX</string>
   <string name="pref_cat_cave3d">3D VIEWER</string>
   <string name="pref_cat_geek">СПЕЦ НАСТРОЙКИ</string>
+  <!-- TODO string name="pref_cat_sketch">3D SKETCH</string -->
   <!-- UNUSED string name="pref_cat_sketch">НАСТРОЙКИ АБРИСА</string -->
   <!-- UNUSED string name="pref_cat_log">НАСТРОЙКИ ЖУРНАЛА</string -->
   <!-- OK string name="pref_hide_help_title">Скрыть помощь</string -->
@@ -1780,6 +1782,9 @@
   <!-- NO string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string -->
   <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
+
+  <!-- TODO string name="pref_sketch_splay_buffer_title">Splay buffer</string -->
+  <!-- TODO string name="pref_sketch_splay_buffer_summary">Section splay buffer [m]</string -->
 
   <!-- NO string name="pref_log_stream_summary">Лог потока вывода</string -->
   <!-- NO string name="pref_log_stream_title">Лог потока</string -->

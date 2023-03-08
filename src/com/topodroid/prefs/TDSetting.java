@@ -2951,18 +2951,28 @@ public class TDSetting
 
   // -----------------------------------------------------------------------
   //
+  /** handle a request for the local manpages
+   * @param man       language code
+   * @param download  whether tp download the local man pages
+   * @return true if the requested language has been handled
+   *
+   * IMPORTANT
+   *    - the maximum number of user man index must agree with the number of entries in array.xml
+   *    - the order on the url resource array must agree with that in array.xml
+   */
   public static boolean handleLocalUserMan( /* Context my_app, */ String man, boolean download ) 
   {
     int idx = Integer.parseInt( man ); // no throw
-    if ( idx > 0 && idx < 6 ) { 
+    if ( idx > 0 && idx < 7 ) { 
       if ( download && TDandroid.checkInternet( TDInstance.context ) ) { // download user manual 
-       	int[] res = {
+       	int[] res = { // url resource array
 	         0, // english
 	         R.string.user_man_es, // the order must agree with that in array.xml
 	         R.string.user_man_it,
 	         R.string.user_man_ru,
                  R.string.user_man_hu,
-	         R.string.user_man_fr
+	         R.string.user_man_fr,
+	         R.string.user_man_pt,
 	       };
         String url = TDInstance.getResources().getString( res[idx] );
        	if ( url != null && url.length() > 0 ) {

@@ -14,6 +14,7 @@
 package com.topodroid.math;
 
 import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
 
 import java.lang.Math;
 import java.io.PrintWriter;
@@ -450,5 +451,10 @@ public class TDVector
     }
     return a;
   }
+
+  public void dump( String msg )
+  {
+    TDLog.v( String.format(Locale.US, "%s: %.2f %.2f %.2f", msg, x, y, z ) );
+  } 
 
 }

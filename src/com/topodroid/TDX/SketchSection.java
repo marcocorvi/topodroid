@@ -56,7 +56,7 @@ public class SketchSection extends SketchPath
   TDVector    mNp;  // section-plane normal
   TDVector    mSp;  // section-plane Y
   
-  ArrayList< SketchLinePath > mLines; // lines, in the plane of the section
+  ArrayList< SketchLinePath > mLines = null; // lines, in the plane of the section
   private List< SketchFixedPath > mSectionGrid = null;
   private int mType = SECTION_NONE; // whether the section is vertical (meaningfol only for x-sections)
 
@@ -226,19 +226,19 @@ public class SketchSection extends SketchPath
   /** delete a line
    * @param line   line to delete
    */
-  void deleteLine( SketchLinePath line ) { mLines.remove( line ); }
+  void deleteLine( SketchLinePath line ) { if ( mLines != null ) mLines.remove( line ); }
 
   /** append a line
    * @param line   line to append
    */
-  void appendLine( SketchLinePath line ) { mLines.add( line ); }
+  void appendLine( SketchLinePath line ) { if ( mLines != null ) mLines.add( line ); }
 
   @Override
-  public int size() { return mLines.size(); }
+  public int size() { return (mLines == null)? 0 : mLines.size(); }
 
   /** clear the section
    */
-  void clear() { mLines.clear(); }
+  void clear() { if ( mLines != null) mLines.clear(); }
 
   /** @return true if this section has the specified base points
    * @param p1    first section base-point
@@ -259,11 +259,13 @@ public class SketchSection extends SketchPath
 
   public void draw( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y )
   {
+    if ( mLines == null ) return;
     for ( SketchPath line : mLines ) line.draw( canvas, mm, C, X, Y );
   }
 
   public void drawPoints( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y, float r )
   {
+    if ( mLines == null ) return;
     for ( SketchLinePath line : mLines ) line.drawPoints( canvas, mm, C, X, Y, r );
   }
 
@@ -281,6 +283,7 @@ public class SketchSection extends SketchPath
   void eraseAt( TDVector v, EraseCommand eraseCmd, float size ) 
   {
     // dataCheck( "V in plane", ( Math.abs( v.minus(mC).dot(mN) ) < 0.001 ) );
+    if ( mLines == null ) return;
     for ( SketchLinePath line : mLines ) {
       // line.checkInPlane( mC, mN );
       line.eraseAt( v, eraseCmd, size );
@@ -304,7 +307,11 @@ public class SketchSection extends SketchPath
   @Override
   public void toDataStream( DataOutputStream dos ) throws IOException 
   {
-    TDLog.v("WRITE section " + mId + " max line-ID " + nMaxLineId + " lines " + mLines.size() );
+    TDLog.v("WRITE section " + mId + " type " + mType + " max line-ID " + nMaxLineId + " lines " + mLines.size() );
+    mC.dump("  C");
+    mH.dump("  H");
+    mS.dump("  S");
+    mN.dump("  N");
     // TDLog.Error( "ERROR Sketch Section toDataStream ");
     dos.write( 'X' );
     dos.writeInt( mId );

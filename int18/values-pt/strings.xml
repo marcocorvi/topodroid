@@ -959,6 +959,7 @@ no campo abaixo e aperte o botão.
   <string name="help_delete_item">Apagar objeto do croqui</string>
     <!-- TODO string name="help_section_type">Sketch section type</string -->
   <string name="help_section_item">Elemento de corte do croqui</string>
+    <!-- TODO string name="help_select_clear">Clear sketch selection</string -->
   <string name="help_select_clear">Esvaziar seleção de croquis</string>
   <string name="help_range">Mover uma parte da linha</string>
   <!-- UNUSED string name="help_clear">Deselecionar tudo</string -->
@@ -1209,6 +1210,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_cat_device">DISPOSITIVOS</string>
   <string name="pref_cat_cave3d">VISUALIZADOR 3D</string>
   <string name="pref_cat_geek">ESPECIAIS</string>
+  <!-- TODO string name="pref_cat_sketch">3D SKETCH</string -->
   <string name="pref_cat_sketch">CROQUI 3D</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
   <string name="pref_locale_title">Língua</string>
@@ -1647,6 +1649,10 @@ no campo abaixo e aperte o botão.
   <string name="pref_unit_angle_summary">Unidade para visualização de ângulos</string>
   <string name="pref_unit_location_title">Unidade coordenada</string>
   <string name="pref_unit_location_summary">Unidade para visualização de coordenadas</string>
+
+  <!-- TODO string name="pref_sketch_splay_buffer_title">Splay buffer</string -->
+  <!-- TODO string name="pref_sketch_splay_buffer_summary">Section splay buffer [m]</string -->
+
   <!-- UNUSED string name="pref_plot_walls_title">PAREDES AUTOMÁTICAS</string -->
   <!-- UNUSED string name="pref_walls_type_title">Tipo paredes</string -->
   <!-- UNUSED string name="pref_walls_type_summary">Tipo das paredes</string -->

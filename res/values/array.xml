@@ -282,6 +282,7 @@
      <item name="russian">Русский</item>
      <item name="hungarian">Magyar</item>
      <item name="french">Français</item>
+     <item name="portuguese">Português</item>
      <!-- item name="slovak">Slovenčina</item -->
   </string-array>
   <string-array name="localUserManValue" translatable="false">
@@ -291,6 +292,7 @@
      <item name="russian">3</item>
      <item name="hungarian">4</item>
      <item name="french">5</item>
+     <item name="portuguese">6</item>
      <!-- item name="slovak">6</item -->
   </string-array>
 
