@@ -1,4 +1,4 @@
-/* @file SketchSecion.java
+/* @file SketchSection.java
  *
  * @author marco corvi
  * @date nov 2011
@@ -35,6 +35,11 @@ import android.graphics.Matrix;
 
 public class SketchSection extends SketchPath
 {
+  public static final int SECTION_NONE       = -1;
+  public static final int SECTION_LEG        = 0;
+  public static final int SECTION_VERTICAL   = 1;
+  public static final int SECTION_HORIZONTAL = 2;
+
   private int mId;  // section number ID
   private int nMaxLineId = 0;
   SketchPoint mP1;
@@ -53,8 +58,18 @@ public class SketchSection extends SketchPath
   
   ArrayList< SketchLinePath > mLines; // lines, in the plane of the section
   private List< SketchFixedPath > mSectionGrid = null;
+  private int mType = SECTION_NONE; // whether the section is vertical (meaningfol only for x-sections)
 
-  public SketchSection( int id, TDVector c, TDVector h, TDVector s, TDVector n )
+  /** cstr
+   * @param id    section ID (0 for the leg-section)
+   * @param c     section center
+   * @param h     section H (X rightward) vector
+   * @param s     section S (Y downward) vector
+   * @param n     section N (Z entering) vector
+   * @param type  section type
+   * @note H,S,N is a right triple
+   */
+  public SketchSection( int id, TDVector c, TDVector h, TDVector s, TDVector n, int type )
   {
     super( SketchPath.SKETCH_PATH_SECTION, null ); // null Paint
     mId = id;
@@ -68,14 +83,24 @@ public class SketchSection extends SketchPath
     mLines = new ArrayList< SketchLinePath >();
     mNp = mN;
     mSp = mS;
+    mType = type;
     TDLog.v("SKETCH legviews C " + mC.x + " " + mC.y + " " + mC.z );
   }
 
-  /** cstr
-   * @param p1   first base point
-   * @param p2   second base point
-   * @param vertical 
-   * @note the section center i sthe midpoint of the two base points
+  /** cstr for X-sections
+   * @param p1       first base point
+   * @param p2       second base point
+   * @param vertical whether the x-section is vertical or horizontal
+   * @note the section center is the midpoint of the two base points
+   *   - the H axis is always horizontal (from P1 to P2)
+   *   - if the x-section is vertical 
+   *       - the H axis is horizontal in the vertical plane containing P1 and P2 (from P1 to P2)
+   *       - the S axis is vertical downward (negative Z-world)
+   *       - the N axis is H ^ S
+   *   - if the x-section is horizontal 
+   *       - the H axis is in the horizontal plane containing the projections of P1 and P2 (from P1 to P2)
+   *       - the N axis is vertical downward (negative Z-world)
+   *       - the S axis is N ^ H
    */
   public SketchSection( int id, SketchPoint p1, SketchPoint p2, boolean vertical )
   {
@@ -96,10 +121,12 @@ public class SketchSection extends SketchPath
         mS = new TDVector(      0,     0, -1 );
         mH = new TDVector(  dx/dh, dy/dh,  0 );
         mN = new TDVector( -dy/dh, dx/dh,  0 ); // H ^ S
+        mType = SECTION_VERTICAL;
       } else {
         mN = new TDVector(      0,     0, -1 ); // downward
         mH = new TDVector(  dx/dh,  dy/dh, 0 );
         mS = new TDVector(  dy/dh, -dx/dh, 0 ); // N ^ H
+        mType = SECTION_HORIZONTAL;
       }
     } else {
       mC = new TDVector();
@@ -175,6 +202,10 @@ public class SketchSection extends SketchPath
   /** @return the section ID
    */
   int getId() { return mId; }
+
+  /** @return the section type
+   */
+  int getType() { return mType; }
 
   /** increase the max line ID and return it
    * @return the max line-ID
@@ -277,6 +308,7 @@ public class SketchSection extends SketchPath
     // TDLog.Error( "ERROR Sketch Section toDataStream ");
     dos.write( 'X' );
     dos.writeInt( mId );
+    dos.writeInt( mType );
     if ( mId > 0 ) {
       toDataStream( dos, mP1 );
       toDataStream( dos, mP2 );
@@ -306,6 +338,7 @@ public class SketchSection extends SketchPath
     float alpha = 0;
     dataCheck( "SECTION", ( dis.read() == 'X' ) );
     mId = dis.readInt();
+    mType = dis.readInt();
     nMaxLineId = 0;
     Paint paint = SketchSurface.getSectionLinePaint( mId ); // line-paint
     if ( mId > 0 ) {

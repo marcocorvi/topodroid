@@ -417,6 +417,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="menu_pair">PAREAR</string -->
   <string name="menu_palette">PALETA</string>
   <string name="menu_photo">FOTO</string>
+    <!-- TODO string name="menu_sections">SECTIONS</string -->
   <string name="menu_sensor">SENSOR</string>
   <!-- UNUSED string name="menu_scan">PROCURAR</string -->
   <!-- UNUSED string name="menu_scan_ble">PROCURAR DISPOSITIVOS BLE</string -->
@@ -956,6 +957,7 @@ no campo abaixo e aperte o botão.
   <string name="help_redo">Refazer última ação desfeita de desenho</string>
   <string name="help_symbol_plot">Selecionar símbolo ativo</string>
   <string name="help_delete_item">Apagar objeto do croqui</string>
+    <!-- TODO string name="help_section_type">Sketch section type</string -->
   <string name="help_section_item">Elemento de corte do croqui</string>
   <string name="help_select_clear">Esvaziar seleção de croquis</string>
   <string name="help_range">Mover uma parte da linha</string>
@@ -1894,6 +1896,8 @@ no campo abaixo e aperte o botão.
   <string name="ctitle">%1$s  Inclinação: %2$.0f  Azimute: %3$.0f</string>
   <string name="ctitle_surface_alpha">Opacidade superfície</string>
   <string name="ctitle_sketches">Croquis</string>
+    <!-- TODO string name="ctitle_sketch_h">[H]</string -->
+    <!-- TODO string name="ctitle_sketch_v">[V]</string -->
   <string name="ctitle_legs">Visibilidade visadas</string>
   <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
   <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->

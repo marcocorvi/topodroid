@@ -816,6 +816,7 @@ public class SketchWindow extends ItemDrawer
     StringBuilder sb = new StringBuilder();
     // sb.append(mName);
     // sb.append(": ");
+    sb.append( mVertical? R.string.ctitle_sketch_v : R.string.ctitle_sketch_h ).append(" ").append( mSketchName ).append(" ");
     
     Resources res = getResources();
     if ( mMode == MODE_DRAW ) { 
@@ -895,14 +896,13 @@ public class SketchWindow extends ItemDrawer
 
   // ---------------------------------------------------------------------------------------
 
+
   /** set the button3 by the type of the hot-item
    * @param pt   hot item
    */
   private void setButton3Item( SketchPoint pt )
   {
     boolean deletable = ( pt != null );
-    String title = getResources().getString( R.string.title_edit );
-    mActivity.setTitle( title );
     setButton3( BTN_REMOVE, (deletable ? mBMdeleteOn : mBMdeleteOff) );
   }
 
@@ -2339,12 +2339,13 @@ public class SketchWindow extends ItemDrawer
 
   // ----------------------------- MENU ----------------------------
 
-  private static final int mNrMenus = 6;
+  private static final int mNrMenus = 7;
 
   private static final int[] menus = {
                         R.string.menu_close,      // 0
                         R.string.menu_export,     // 1
                         R.string.menu_zoom_fit,
+                        R.string.menu_sections,
                         R.string.menu_delete,
                         R.string.menu_options,
                         R.string.menu_help,
@@ -2354,6 +2355,7 @@ public class SketchWindow extends ItemDrawer
                         R.string.help_plot_close,
                         R.string.help_save_plot,
                         R.string.help_zoom_fit,
+                        R.string.help_section_type,
                         R.string.help_plot_delete,
                         R.string.help_prefs,
                         R.string.help_help
@@ -2395,6 +2397,9 @@ public class SketchWindow extends ItemDrawer
       doSave( filename, mSketchName );
     } else if ( p++ == pos ) { // ZOOM-FIT 
       doZoomFit();
+    } else if ( p++ == pos ) { // SECTIONS TYPE
+      mVertical = ! mVertical;
+      setTheTitle();
     } else if ( p++ == pos ) { // DELETE
       askDelete();
     } else if ( p++ == pos ) { // OPTIONS

@@ -459,6 +459,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="menu_pair">PAIR</string -->
     <string name="menu_palette" copyable="fr it">PALETTE</string>
     <string name="menu_photo" copyable="fr">PHOTO</string>
+    <string name="menu_sections">SECTIONS</string>
     <string name="menu_sensor" copyable="pt">SENSOR</string>
     <!-- UNUSED string name="menu_scan">SCAN</string -->
     <!-- UNUSED string name="menu_scan_ble">SCAN BTLE</string -->
@@ -1046,6 +1047,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="help_redo">Redo last drawing action</string>
     <string name="help_symbol_plot">Select the active drawing tool</string>
     <string name="help_delete_item">Delete sketch item</string>
+    <string name="help_section_type">Sketch section type</string>
     <string name="help_section_item">Sketch section item</string>
     <string name="help_select_clear">Clear sketch selection</string>
     <string name="help_range">Moving a portion of line</string>
@@ -2075,6 +2077,8 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="ctitle">%1$s  Clino: %2$.0f  Azimuth: %3$.0f</string>
     <string name="ctitle_surface_alpha">Surface model</string>
     <string name="ctitle_sketches">Sketches</string>
+    <string name="ctitle_sketch_h" copyable="all">[H]</string>
+    <string name="ctitle_sketch_v" copyable="all">[V]</string>
     <string name="ctitle_legs">Legs visibility</string>
     <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
     <!-- UNUSED string name="ctitle_bluetooth" copyable="all">Bluetooth</string -->

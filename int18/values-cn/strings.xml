@@ -449,6 +449,7 @@
     <!-- UNUSED string name="menu_pair">配对</string -->
     <string name="menu_palette">调色板</string>
     <string name="menu_photo">照片</string>
+    <!-- TODO string name="menu_sections">SECTIONS</string -->
     <string name="menu_sensor">传感器</string>
     <!-- UNUSED string name="menu_scan">扫描</string -->
     <!-- UNUSED string name="menu_scan_ble">扫描低功耗蓝牙设备</string -->
@@ -1032,6 +1033,7 @@
     <string name="help_redo">重做上一步绘图操作</string>
     <string name="help_symbol_plot">选择最近使用的绘图工具</string>
     <string name="help_delete_item">删除草图项</string>
+    <!-- TODO string name="help_section_type">Sketch section type</string -->
     <!-- TODO string name="help_section_item">Sketch section item</string -->
     <string name="help_range">移动线的某部分</string>
     <!-- UNUSED string name="help_clear">Clear selection</string -->
@@ -2040,6 +2042,8 @@
     <string name="ctitle">%1$s  倾角: %2$.0f  方位角: %3$.0f</string>
     <string name="ctitle_surface_alpha">表面透明度</string>
     <string name="ctitle_sketches">草图</string>
+    <!-- TODO string name="ctitle_sketch_h">[H]</string -->
+    <!-- TODO string name="ctitle_sketch_v">[V]</string -->
     <string name="ctitle_legs">Legs 透明度</string>
     <!-- UNUSED string name="ctitle_manual_leg">新leg</string -->
     <!-- UNUSED string name="ctitle_bluetooth">蓝牙</string -->

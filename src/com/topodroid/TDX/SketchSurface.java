@@ -467,6 +467,9 @@ public class SketchSurface extends SurfaceView
   void toDataStream( DataOutputStream dos ) throws IOException { if ( commandManager != null ) commandManager.toDataStream( dos ); }
 
   /** @return max section id
+   * @param dis      input stream
+   * @param version  input data version
+   * @param vertical current "vertical" status
    */
   int fromDataStream( DataInputStream dis, int version, boolean vertical ) throws IOException
   {

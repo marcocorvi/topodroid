@@ -163,7 +163,7 @@ public class SketchCommandManager
     // TDLog.v("S " + s.x + " " + s.y + " " + s.z );
     // TDLog.v("H " + h.x + " " + h.y + " " + h.z );
     TDVector n = h.cross( s );
-    mView = new SketchSection( 0, mLeg.midpoint(), h, s, n ); // leg-section has ID = 0
+    mView = new SketchSection( 0, mLeg.midpoint(), h, s, n, SketchSection.SECTION_LEG ); // leg-section has ID = 0
     closeSection(); // this sets mCurrentScrap to the leg-view
   }
 
@@ -799,6 +799,9 @@ public class SketchCommandManager
   }
 
   /** @return max section id
+   * @param dis      input stream
+   * @param version  input data version
+   * @param vertical current "vertical" status
    */
   int fromDataStream( DataInputStream dis, int version, boolean vertical ) throws IOException
   {

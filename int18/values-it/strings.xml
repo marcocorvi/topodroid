@@ -447,6 +447,7 @@
     <!-- UNUSED string name="menu_pair">ASSOCIA</string -->
     <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">FOTO</string>
+    <!-- TODO string name="menu_sections">SECTIONS</string -->
     <string name="menu_sensor">SENSORI</string>
     <!-- UNUSED string name="menu_scan">CERCA</string -->
     <!-- UNUSED string name="menu_scan_ble">SCAN BTLE</string -->
@@ -1028,6 +1029,7 @@
     <string name="help_redo">Ripeti ultima azione di disegno</string>
     <string name="help_symbol_plot">Seleziona prototipo per disegno</string>
     <string name="help_delete_item">Cancella elemento del disegno</string>
+    <!-- TODO string name="help_section_type">Sketch section type</string -->
     <!-- TODO string name="help_section_item">Sketch section item</string -->
     <string name="help_range">Sposta porzione di linea</string>
     <!-- UNUSED string name="help_clear">Pulisci selezione</string -->
@@ -2035,6 +2037,8 @@
     <string name="ctitle">%1$s  Clino: %2$.0f  Azimut: %3$.0f</string>
     <string name="ctitle_surface_alpha">Trasparenza DEM</string>
     <string name="ctitle_sketches">Disegni</string>
+    <!-- TODO string name="ctitle_sketch_h">[H]</string -->
+    <!-- TODO string name="ctitle_sketch_v">[V]</string -->
     <string name="ctitle_legs">Battute</string>
     <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
     <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->

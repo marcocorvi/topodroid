@@ -457,6 +457,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="menu_pair">PAIR</string -->
     <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">PHOTO</string>
+    <!-- TODO string name="menu_sections">SECTIONS</string -->
     <string name="menu_sensor">CAPTEUR</string>
     <!-- UNUSED string name="menu_scan">SCAN</string -->
     <!-- UNUSED string name="menu_scan_ble">SCAN BLE</string -->
@@ -1042,6 +1043,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="help_redo">Rétablit la dernière action</string>
     <string name="help_symbol_plot">Sélectionne le symbole à dessiner</string>
     <string name="help_delete_item">Supprimer objet topo</string>
+    <!-- TODO string name="help_section_type">Sketch section type</string -->
     <!-- TODO string name="help_section_item">Sketch section item</string -->
     <string name="help_range">Déplacer portion de ligne</string>
     <!-- UNUSED string name="help_clear">Clear selection</string -->
@@ -2067,6 +2069,8 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="ctitle">%1$s  Pente: %2$.0f  Azimut: %3$.0f</string>
     <string name="ctitle_surface_alpha">Opacité de surface</string>
     <string name="ctitle_sketches">Croquis</string>
+    <!-- TODO string name="ctitle_sketch_h">[H]</string -->
+    <!-- TODO string name="ctitle_sketch_v">[V]</string -->
     <string name="ctitle_legs">Visibilité cheminement</string>
     <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
     <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->

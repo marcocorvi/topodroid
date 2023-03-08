@@ -449,6 +449,7 @@
     <!-- UNUSED string name="menu_pair">СОПРЯЖЕНИЕ</string -->
     <string name="menu_palette">ПАЛИТРА</string>
     <string name="menu_photo">ФОТО</string>
+    <!-- TODO string name="menu_sections">SECTIONS</string -->
     <string name="menu_sensor">ДАТЧИКИ</string>
     <!-- UNUSED string name="menu_scan">Сканировать</string -->
     <!-- UNUSED string name="menu_scan_ble">СКАН BT окружение</string -->
@@ -1029,6 +1030,7 @@
     <string name="help_redo">Повтор последнего действия</string>
     <string name="help_symbol_plot">Выбрать инструмент рисования </string>
     <string name="help_delete_item">Удалить элемент абриса</string>
+    <!-- TODO string name="help_section_type">Sketch section type</string -->
     <string name="help_section_item">Элемент раздела абриса</string>
     <string name="help_range">Переместить сегмент линии</string>
     <!-- UNUSED string name="help_clear">Очистить выбор</string -->
@@ -2034,6 +2036,8 @@
     <string name="ctitle">%1$s  Наклон: %2$.0f  Азимут: %3$.0f</string>
     <string name="ctitle_surface_alpha">Прозрачность поверхности</string>
     <string name="ctitle_sketches">Абрисы</string>
+    <!-- TODO string name="ctitle_sketch_h">[H]</string -->
+    <!-- TODO string name="ctitle_sketch_v">[V]</string -->
     <string name="ctitle_legs">Видимость нитки хода</string>
     <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
     <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->

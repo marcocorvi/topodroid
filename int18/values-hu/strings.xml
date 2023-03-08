@@ -452,6 +452,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="menu_pair">PÁROSÍTÁS</string -->
     <string name="menu_palette">PALETTA</string>
     <string name="menu_photo">FOTÓ</string>
+    <!-- TODO string name="menu_sections">SECTIONS</string -->
     <string name="menu_sensor">SZENZOR</string>
     <!-- UNUSED string name="menu_scan">KERESÉS</string -->
     <!-- UNUSED string name="menu_scan_ble">BTLE KERESÉS</string -->
@@ -1037,6 +1038,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="help_redo">Utolsó rajzi változtatás visszaállítása</string>
     <string name="help_symbol_plot">Legutóbbi rajzeszköz kiválasztása</string>
     <string name="help_delete_item">Vázlat elem törlése</string>
+    <!-- TODO string name="help_section_type">Sketch section type</string -->
     <string name="help_section_item">Vázlet metszet elem</string>
     <string name="help_range">Vonalelem mozgatása</string>
     <!-- UNUSED string name="help_clear">Kiválasztás törlése</string -->
@@ -2051,6 +2053,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="ctitle">%1$s  Lejtés: %2$.0f  Irány: %3$.0f</string>
     <string name="ctitle_surface_alpha">Felszín átlátszóság</string>
     <string name="ctitle_sketches">Vázlatok</string>
+    <!-- TODO string name="ctitle_sketch_h">[H]</string -->
+    <!-- TODO string name="ctitle_sketch_v">[V]</string -->
     <string name="ctitle_legs">Poligon láthatóság</string>
     <!-- UNUSED string name="ctitle_manual_leg">Új poligon</string -->
     <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
