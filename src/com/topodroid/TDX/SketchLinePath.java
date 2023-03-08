@@ -207,4 +207,65 @@ public class SketchLinePath extends SketchPath
     canvas.drawPath( path, BrushManager.fixedOrangePaint );
   }
 
+  /** draw the path on a canvas
+   * @param canvas   canvas - N.B. canvas is guaranteed not null
+   * @param matrix   transform matrix
+   * @param C        center (E,N,Up)
+   * @param X        horizontal direction (E,N,Up)
+   * @param Y        downward direction in (E,N,Up)
+   */
+  public void drawBipath( Canvas canvas, Matrix matrix, TDVector C, TDVector X, TDVector Y )
+  {
+    if ( ! mVisible ) return;
+    int sz = mPts.size();
+    if ( sz <= 2 ) return;
+    TDVector Z = X.cross( Y );
+    boolean above = true;
+    int n_above = 0;
+    int n_below = 0;
+    Path path_above = new Path();
+    Path path_below = new Path();
+    TDVector v = mPts.get(0).minus( C );
+    if ( Z.dot( v ) < 0 ) {
+      n_below ++;
+      path_below.moveTo( X.dot( v ), Y.dot( v ) );
+      above = false;
+    } else {
+      n_above ++;
+      path_above.moveTo( X.dot( v ), Y.dot( v ) );
+      above = true;
+    }
+    for ( int k=1; k<sz; ++k ) {
+      v = mPts.get(k).minus( C );
+      if ( Z.dot( v ) < 0 ) {
+        n_below ++;
+        if ( above ) {
+          path_below.moveTo( X.dot( v ), Y.dot( v ) );
+        } else {
+          path_below.lineTo( X.dot( v ), Y.dot( v ) );
+        }
+        above = false;
+      } else {
+        n_above ++;
+        if ( above ) {
+          path_above.lineTo( X.dot( v ), Y.dot( v ) );
+        } else {
+          path_above.moveTo( X.dot( v ), Y.dot( v ) );
+        }
+        above = true;
+      }
+    }
+
+    if ( n_above > 1 ) {
+      path_above.transform( matrix );
+      // path.offset( off_x, off_y );
+      canvas.drawPath( path_above, BrushManager.fixedYellowPaint );
+    }
+    if ( n_below > 1 ) {
+      path_below.transform( matrix );
+      // path.offset( off_x, off_y );
+      canvas.drawPath( path_below, BrushManager.fixedOrangePaint );
+    }
+  }
+
 }

@@ -579,6 +579,7 @@ public class DrawingWindow extends ItemDrawer
   private int mMode         = MODE_NONE;
   private int mTouchMode    = MODE_MOVE;
   private int mContinueLine = CONT_NONE;
+  private int mContinueArea = CONT_NONE;
   // private float mDownX;
   // private float mDownY;
   private float mSaveX;
@@ -1237,9 +1238,9 @@ public class DrawingWindow extends ItemDrawer
     super.lineSelected( k, update_recent );
     if ( TDLevel.overNormal ) {
       if ( BrushManager.getLineGroup( mCurrentLine ) == null ) {
-        setButtonContinue( CONT_OFF );
+        setButtonContinueLine( CONT_OFF );
       } else {
-        setButtonContinue( mContinueLine ); // was CONT_NONE
+        setButtonContinueLine( mContinueLine ); // was CONT_NONE
       }
     }
   }
@@ -1253,9 +1254,14 @@ public class DrawingWindow extends ItemDrawer
   {
     super.areaSelected( k, update_recent );
     if ( TDLevel.overExpert ) {
-      setButtonContinue( CONT_CONTINUE );
+      if ( BrushManager.hasArea( mCurrentArea ) ) {
+        setButtonContinueArea( mContinueArea );
+      } else {
+        setButtonContinueArea( CONT_OFF );
+      }
+      mButton2[ BTN_CONT ].setVisibility( View.VISIBLE );
     } else {
-      setButtonContinue( CONT_NONE );
+      mButton2[ BTN_CONT ].setVisibility( View.GONE );
     }
   }
 
@@ -1904,7 +1910,7 @@ public class DrawingWindow extends ItemDrawer
    * @param continue_line    type of line-continuation
    * @note must be called only if TDLevel.overNormal
    */
-  private void setButtonContinue( int continue_line )
+  private void setButtonContinueLine( int continue_line )
   {
     if ( BTN_CONT < mNrButton2 ) {
       if ( TDLevel.overAdvanced ) {
@@ -1930,14 +1936,29 @@ public class DrawingWindow extends ItemDrawer
             case CONT_OFF:
               setButton2( BTN_CONT, mBMcont_off  );
           }
-        } else if ( mSymbol == SymbolType.AREA ) {
-          mButton2[ BTN_CONT ].setVisibility( View.VISIBLE );
-          setButton2( BTN_CONT, ( mContinueLine == CONT_NONE )? mBMcont_none : mBMcont_continue );
         } else {
           mButton2[ BTN_CONT ].setVisibility( View.GONE );
         }
       } else {
         mContinueLine = CONT_OFF;
+        mButton2[ BTN_CONT ].setVisibility( View.GONE );
+      }
+    }
+  }
+
+  private void setButtonContinueArea( int continue_area )
+  {
+    if ( BTN_CONT < mNrButton2 ) {
+      if ( TDLevel.overExpert ) {
+        mContinueArea = continue_area;
+        if ( mSymbol == SymbolType.AREA ) {
+          mButton2[ BTN_CONT ].setVisibility( View.VISIBLE );
+          setButton2( BTN_CONT, ( mContinueArea == CONT_NONE )? mBMcont_none : mBMcont_continue );
+        } else {
+          mButton2[ BTN_CONT ].setVisibility( View.GONE );
+        }
+      } else {
+        mContinueArea = CONT_OFF;
         mButton2[ BTN_CONT ].setVisibility( View.GONE );
       }
     }
@@ -1950,7 +1971,13 @@ public class DrawingWindow extends ItemDrawer
    */
   public void setButtonJoinMode( int join_mode, int code )
   {
-    if ( TDLevel.overNormal ) setButtonContinue( join_mode );
+    if ( TDLevel.overNormal ) {
+      if ( mSymbol == SymbolType.AREA ) {
+        setButtonContinueArea( join_mode );
+      } else {
+        setButtonContinueLine( join_mode );
+      }
+    }
     dismissPopupJoin();
   }
 
@@ -2411,6 +2438,7 @@ public class DrawingWindow extends ItemDrawer
     mLastLinePath = null;
     mShiftDrawing = false;
     mContinueLine = TDSetting.mContinueLine;
+    mContinueArea = TDSetting.mContinueLine; // FIXME TDSetting.mContinueArea;
     resetModified();
 
     // if ( PlotType.isLegSection( mType ) ) { 
@@ -2573,6 +2601,7 @@ public class DrawingWindow extends ItemDrawer
     mLastLinePath = null;
     mShiftDrawing = false;
     // mContinueLine = TDSetting.mContinueLine; // do not reset cont-mode
+    // mContinueArea = TDSetting.mContinueArea; // do not reset cont-mode
     resetModified();
     setMode( MODE_MOVE ); // this setTheTitle() as well, and clearHotPath( INVISIBLE )
     mTouchMode    = MODE_MOVE;
@@ -2762,6 +2791,7 @@ public class DrawingWindow extends ItemDrawer
       mLastLinePath = null;
       mShiftDrawing = false;
       // mContinueLine = TDSetting.mContinueLine; 
+      // mContinueArea = TDSetting.mContinueArea; 
       resetModified();
 
       doStart( true, -1, null );
@@ -3017,7 +3047,14 @@ public class DrawingWindow extends ItemDrawer
     // mCurrentArea  = ( BrushManager.isAreaEnabled( SymbolLibrary.WATER ) )?  1 : 0;
 
     // mContinueLine = TDSetting.mContinueLine; // do not reset
-    if ( TDLevel.overNormal ) setButtonContinue( mContinueLine );
+    // mContinueArea = TDSetting.mContinueArea;
+    if ( TDLevel.overNormal ) {
+      if ( mSymbol == SymbolType.AREA ) {
+        setButtonContinueArea( mContinueArea );
+      } else {
+        setButtonContinueLine( mContinueLine );
+      }
+    }
 
     boolean is_section = PlotType.isAnySection( mType );
     List< DBlock > list = is_section ?  getXSectionShots( mType, mFrom, mTo ) : mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
@@ -3141,7 +3178,7 @@ public class DrawingWindow extends ItemDrawer
           float d = 2 / (float)Math.sqrt(xn*xn + yn*yn);
           // if ( mClino > 0 ) xn = -xn;
           if ( mClino > 0 ) decl = -decl;
-          TDLog.v("H-SECTION clino " + mClino + ": " + xn + " " + yn + " decl " + decl );
+          // TDLog.v("H-SECTION clino " + mClino + ": " + xn + " " + yn + " decl " + decl );
           // if ( mLandscape ) {
           //   addFixedSpecial( -d, 0, 0, 0, decl);
           // } else {
@@ -4117,9 +4154,9 @@ public class DrawingWindow extends ItemDrawer
    * @param ap2    is used to get the area to extend - initialized to the current areapath
    * @return true if the area ap1 has been added to the sketch
    */
-  private boolean tryToJoin( DrawingAreaPath ap1, DrawingAreaPath ap2 )
+  private boolean tryAndJoin( DrawingAreaPath ap1, DrawingAreaPath ap2 )
   {
-    if ( mContinueLine <= CONT_NONE ) return false;
+    if ( mContinueArea <= CONT_NONE ) return false;
     if ( ap1 == null ) return false;
     if ( ap2 == null ) return false;
     LinePoint p1 = ap2.first();
@@ -4430,7 +4467,7 @@ public class DrawingWindow extends ItemDrawer
                         Point2D p3 = c.getPoint(3);
                         ap.addPoint3(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y );
                       }
-                      if ( ! tryToJoin( ap, mCurrentAreaPath ) ) {
+                      if ( ! tryAndJoin( ap, mCurrentAreaPath ) ) {
                         ap.closePath();
                         ap.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
                         mDrawingSurface.addDrawingPath( ap );
@@ -4490,7 +4527,7 @@ public class DrawingWindow extends ItemDrawer
                         p0 = points.get(k);
                         ap.addPoint(p0.x, p0.y );
                       }
-                      if ( ! tryToJoin( ap, mCurrentAreaPath ) ) {
+                      if ( ! tryAndJoin( ap, mCurrentAreaPath ) ) {
                         ap.closePath();
                         ap.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
                         mDrawingSurface.addDrawingPath( ap );
@@ -4536,7 +4573,7 @@ public class DrawingWindow extends ItemDrawer
                 }
               } else if ( mSymbol == SymbolType.AREA ) {
                 if ( mCurrentAreaPath != null ) {
-                  if ( ! tryToJoin( mCurrentAreaPath, mCurrentAreaPath ) ) {
+                  if ( ! tryAndJoin( mCurrentAreaPath, mCurrentAreaPath ) ) {
                     mCurrentAreaPath.closePath();
                     mCurrentAreaPath.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
                     mDrawingSurface.addDrawingPath( mCurrentAreaPath );
@@ -5144,7 +5181,7 @@ public class DrawingWindow extends ItemDrawer
     azimuth = TDMath.in360( 90 + line_azimuth );
     DBlock blk = null;
     Vector3D center = null; // centroid of the intersection
-    TDLog.v("do Section Line: section " + h_section + " projected " + h_section_projected + " legs " + nr_legs + " azimuth " + azimuth + " line " + line_azimuth );
+    // TDLog.v("do Section Line: section " + h_section + " projected " + h_section_projected + " legs " + nr_legs + " azimuth " + azimuth + " line " + line_azimuth );
 
     if ( nr_legs == 1 ) {
       DrawingPathIntersection pi = paths.get(0);
@@ -5194,7 +5231,7 @@ public class DrawingWindow extends ItemDrawer
           //   azimuth = TDMath.add180( blk.mBearing );
           // }
         } //HBXx
-        TDLog.v( "single-leg xsection clino " + clino + " azimuth " + azimuth ); 
+        // TDLog.v( "single-leg xsection clino " + clino + " azimuth " + azimuth ); 
       } else { // xsection in plan view ( clino = 0 )
         float da = TDMath.in360( azimuth - blk.mBearing );
         if ( da > 90 && da <= 270 ) { // exchange FROM-TO 
@@ -5225,7 +5262,7 @@ public class DrawingWindow extends ItemDrawer
             } else {
               azimuth = (int) TDMath.sub90( mPlot2.azimuth ); // UP section-line
             }
-            TDLog.v( "multi-leg xsection clino " + clino + " azimuth " + azimuth ); 
+            // TDLog.v( "multi-leg xsection clino " + clino + " azimuth " + azimuth ); 
 
             StringBuilder sb = new StringBuilder();
 
@@ -6789,8 +6826,8 @@ public class DrawingWindow extends ItemDrawer
       } else if ( ( ! mTh2Edit) && k2 < mNrButton2 && b == mButton2[k2++] ) { // SPLAYS TH2EDIT
         toggleSplayMode();
       } else if ( TDLevel.overNormal && k2 < mNrButton2 && b == mButton2[k2++] ) { //  CONT continuation popup menu
-        if ( mSymbol == SymbolType.LINE && BrushManager.getLineGroup( mCurrentLine ) != null ) {
-          // setButtonContinue( (mContinueLine+1) % CONT_MAX );
+        if ( ( mSymbol == SymbolType.LINE && BrushManager.getLineGroup( mCurrentLine ) != null ) 
+          || ( mSymbol == SymbolType.AREA && BrushManager.hasArea( mCurrentArea ) ) ) {
           makePopupJoin( b, Drawing.mJoinModes, 5, 0, dismiss );
         }
       }

@@ -909,17 +909,19 @@ public class Scrap
         if ( cmd.commandType() != 0 ) continue; // FIXME EraseCommand
 
         final DrawingPath path = (DrawingPath)cmd;
-        if ( path.isArea() ) { // path instanceof DrawingLinePath
+        if ( path instanceof DrawingAreaPath ) {
           DrawingAreaPath area = (DrawingAreaPath)path;
           if ( area.mAreaType == type ) {
             LinePoint lp10 = null;
             LinePoint lp20 = null;
-            int first = 0;
+            int first = 1;
+            // assert( area.last().mNext == null );
+            // TDLog.v("TRY area [" + area.mAreaCnt + "] with size " + area.size() );
             for ( LinePoint lp = area.first(); lp != null; lp = lp.mNext ) {
               float dmin;
               if ( lp10 == null && (dmin = lp.distance( lp1 )) < delta ) {
                 lp10 = lp;
-                for ( LinePoint lpp = lp.mNext; lpp != null; lpp=lp.mNext ) {
+                for ( LinePoint lpp = lp.mNext; lpp != null; lpp=lpp.mNext ) {
                   float d = lpp.distance( lp1 );
                   if ( d > dmin ) break;
                   lp10 = lpp;
@@ -930,7 +932,7 @@ public class Scrap
               }
               if ( lp20 == null && (dmin = lp.distance( lp2 )) < delta ) {
                 lp20 = lp;
-                for ( LinePoint lpp = lp.mNext; lpp != null; lpp=lp.mNext ) {
+                for ( LinePoint lpp = lp.mNext; lpp != null; lpp=lpp.mNext ) {
                   float d = lpp.distance( lp2 );
                   if ( d > dmin ) break;
                   lp20 = lpp;
@@ -947,7 +949,7 @@ public class Scrap
               boolean ccw0 = ap.isCCW();
               boolean ccw1 = area.isCCW();
               if ( ( ccw0 && ccw1 ) || ( ! ccw0 && ! ccw1 ) ) {
-                TDLog.v("AREA " + area.size() + " continue A: first " + first + " ccw " + ccw0 + " " + ccw1 );
+                // TDLog.v("AREA " + area.size() + " continue A: first " + first + " ccw " + ccw0 + " " + ccw1 );
                 if ( lp10.mNext != null ) lp10.mNext.mPrev = null;
                 if ( lp20.mPrev != null ) lp20.mPrev.mNext = null;
                 lp10.mNext = lp1;
@@ -955,11 +957,11 @@ public class Scrap
                 lp20.mPrev = lp2;
                 lp2.mNext  = lp20;
                 if ( first == 2 ) {
-                  TDLog.v("AREA reset First " + lp20.x + " " + lp20.y + " Last " + lp2.x + " " + lp2.y);
+                  // TDLog.v("AREA reset First " + lp20.x + " " + lp20.y + " Last " + lp2.x + " " + lp2.y);
                   area.resetFirstLast( lp20, lp2 );
                 }
               } else { 
-                TDLog.v("AREA " + area.size() + " continue B: first " + first + " ccw " + ccw0 + " " + ccw1 );
+                // TDLog.v("AREA " + area.size() + " continue B: first " + first + " ccw " + ccw0 + " " + ccw1 );
                 if ( lp20.mNext != null ) lp20.mNext.mPrev = null;
                 if ( lp10.mPrev != null ) lp10.mPrev.mNext = null;
                 LinePoint lp_prev = lp20;
@@ -973,7 +975,7 @@ public class Scrap
                 lp1.mNext  = lp10;
                 lp10.mPrev = lp1;
                 if ( first == 1 ) {
-                  TDLog.v("AREA reset First " + lp10.x + " " + lp10.y + " Last " + lp1.x + " " + lp1.y);
+                  // TDLog.v("AREA reset First " + lp10.x + " " + lp10.y + " Last " + lp1.x + " " + lp1.y);
                   area.resetFirstLast( lp10, lp1 );
                 }
               }
@@ -982,7 +984,7 @@ public class Scrap
               area.retracePath();
               mSelection.insertPath( area );
               // area.dump( "af" );
-              TDLog.v("AREA new size " + area.size() );
+              // TDLog.v("AREA new size " + area.size() );
               return true;
             }
           }

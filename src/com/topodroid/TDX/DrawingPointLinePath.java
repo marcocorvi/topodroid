@@ -635,6 +635,8 @@ public class DrawingPointLinePath extends DrawingPath
    */
   void recomputeSize()
   {
+    // assert( mFirst.mPrev == null );
+    // assert( mLast.mNext == null );
     mSize = 0;
     for ( LinePoint lp = mFirst; lp != null; lp = lp.mNext ) ++ mSize;
   }
@@ -921,7 +923,7 @@ public class DrawingPointLinePath extends DrawingPath
   void clampOrientation( float bin )
   {
     if ( mSize != 2 ) {
-      TDLog.v("clamp orientation nr. points " + mSize );
+      // TDLog.v("clamp orientation nr. points " + mSize );
       return;
     }
     float cx = (mFirst.x + mLast.x)/2;

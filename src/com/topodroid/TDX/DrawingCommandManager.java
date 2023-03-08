@@ -196,7 +196,7 @@ public class DrawingCommandManager
   int newScrapIndex( boolean force )  // TH2EDIT no force
   { 
     if ( force || mMode < 3 ) { // TH2EDIT no force
-      TDLog.v( "plot: " + mPlotName + " - new scrap. currently " + mScraps.size() );
+      // TDLog.v( "plot: " + mPlotName + " - new scrap. currently " + mScraps.size() );
       mScrapIdx = mScraps.size();
       mCurrentScrap = new Scrap( mScrapIdx, mPlotName );
       mScraps.add( mCurrentScrap ); 
@@ -1214,7 +1214,7 @@ public class DrawingCommandManager
     bounds.top    *= scale;
     bounds.right  *= scale;
     bounds.bottom *= scale;
-    TDLog.v( "scale " + scale + " bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
+    // TDLog.v( "scale " + scale + " bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
     return bounds;
   }
 
