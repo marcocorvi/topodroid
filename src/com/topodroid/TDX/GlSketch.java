@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date may 2020
  *
- * @brief TopoDroid symbols
+ * @brief TopoDroid GL sketch
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.

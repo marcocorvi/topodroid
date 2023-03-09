@@ -151,6 +151,7 @@ public class SketchPath
     canvas.drawPath( path, mPaint );
   }
 
+
   static void dataCheck( String msg, boolean test )
   {
     if ( ! test ) TDLog.Error("ERROR failed " + msg );
@@ -165,6 +166,22 @@ public class SketchPath
     path.addCircle( x, y, r, Path.Direction.CCW );
     path.transform( mm );
     canvas.drawPath( path, BrushManager.errorPaint );
+  }
+
+  // debug
+  static void drawSegment( TDVector v1, TDVector v2, Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y, Paint paint )
+  {
+    Path path = new Path();
+    TDVector w = v1.minus( C );
+    float x = X.dot( w ); // (world coord)
+    float y = Y.dot( w ); // downward 
+    path.moveTo( x, y );
+    w = v2.minus( C );
+    x = X.dot( w ); // (world coord)
+    y = Y.dot( w ); // downward 
+    path.lineTo( x, y );
+    path.transform( mm );
+    canvas.drawPath( path, paint );
   }
 
 }

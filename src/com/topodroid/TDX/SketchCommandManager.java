@@ -156,7 +156,7 @@ public class SketchCommandManager
   {
     if ( mLeg == null ) return;
     // TDLog.v("SKETCH legview");
-    // mLeg.dump( "LEG" );
+    mLeg.dump( "LEG" );
     TDVector s = mLeg.oppositeDirection(); // normalized Y-canvas (E,N,Up)
     TDVector h = new TDVector( -s.y, s.x, 0 );
     h.normalize();
@@ -482,7 +482,7 @@ public class SketchCommandManager
   void eraseAt( float xc, float yc, EraseCommand eraseCmd, float size ) 
   {
     TDVector c = toWorld( xc, yc );
-    TDLog.v("SKETCH center " + c.x + " " + c.y + " " + c.z );
+    // TDLog.v("SKETCH center " + c.x + " " + c.y + " " + c.z );
     float radius = /* TDSetting.mCloseCutoff + */ size/mZoom; 
     mCurrentScrap.eraseAt( c, eraseCmd, radius ); 
   }
@@ -603,19 +603,19 @@ public class SketchCommandManager
     RectF  bbox  = mBBox;
     float dot_radius = TDSetting.mDotRadius/mZoom;
 
-    synchronized( TDPath.mGridsLock ) {
-      if( mGridStack1 != null ) {
-        Paint paint_grid    = BrushManager.fixedGridPaint;
-        Paint paint_grid100 = BrushManager.fixedGrid100Paint;
-        if ( scale < 1 ) {
-          for ( SketchPath p1 : mGridStack1 ) p1.draw( canvas, mm,  mC0, mH0, mS0 );
-        }
-        if ( scale < 10 ) {
-          for ( SketchPath p10 : mGridStack10 ) p10.draw( canvas, mm,  mC0, mH0, mS0 );
-        }
-        for ( SketchPath p100 : mGridStack100 ) p100.draw( canvas, mm,  mC0, mH0, mS0 );
-      }
-    }
+    // synchronized( TDPath.mGridsLock ) {
+    //   if( mGridStack1 != null ) {
+    //     Paint paint_grid    = BrushManager.fixedGridPaint;
+    //     Paint paint_grid100 = BrushManager.fixedGrid100Paint;
+    //     if ( scale < 1 ) {
+    //       for ( SketchPath p1 : mGridStack1 ) p1.draw( canvas, mm,  mC0, mH0, mS0 );
+    //     }
+    //     if ( scale < 10 ) {
+    //       for ( SketchPath p10 : mGridStack10 ) p10.draw( canvas, mm,  mC0, mH0, mS0 );
+    //     }
+    //     for ( SketchPath p100 : mGridStack100 ) p100.draw( canvas, mm,  mC0, mH0, mS0 );
+    //   }
+    // }
 
     synchronized( TDPath.mShotsLock ) {
       mLeg.draw( canvas, mm, mC0, mH0, mS0 );
@@ -624,7 +624,8 @@ public class SketchCommandManager
         for ( SketchPath nghb : mNghblegsStack ) nghb.draw( canvas, mm, mC0, mH0, mS0 );
         for ( SketchPath station : mStationsStack ) station.draw( canvas, mm, mC0, mH0, mS0 );
         for ( SketchSection section : mSections ) {
-          section.draw( canvas, mm, mC0, mH0, mS0 );
+          section.drawBipath( canvas, mm, mC0, mH0, mS0 );
+          // section.drawFrame( canvas, mm, mC0, mH0, mS0 );
         }
       } else {
         mCurrentScrap.drawGrid( canvas, mm, mC0, mH0, mS0 );
@@ -648,6 +649,7 @@ public class SketchCommandManager
       } else {
         drawCurrentPath( canvas );
       }
+      mCurrentScrap.drawFrame( canvas, mm, mC0, mH0, mS0 );
     }
   }
 
@@ -785,7 +787,7 @@ public class SketchCommandManager
 
   void toDataStream( DataOutputStream dos ) throws IOException
   {
-    TDLog.v("WRITE manager - nr sections " + mSections.size() );
+    // TDLog.v("WRITE manager - nr sections " + mSections.size() );
     dos.write( 'M' );
     // SketchPath.toDataStream( dos, mView.mC  );
     // SketchPath.toDataStream( dos, mView.mNp );
@@ -811,7 +813,7 @@ public class SketchCommandManager
     // TDVector H = SketchPath.tdVectorFromDataStream( dis );  SketchPath.dataCheck( "mH", ( H.maxDiff( mView.mH ) < 0.001f ) ); 
     // TDVector S = SketchPath.tdVectorFromDataStream( dis );  SketchPath.dataCheck( "mS", ( S.maxDiff( mView.mS ) < 0.001f ) ); 
     int n_sections = dis.readInt();
-    TDLog.v("READ manager - nr sections " + n_sections );
+    // TDLog.v("READ manager - nr sections " + n_sections );
     closeSection();
     mView.fromDataStream( this, dis, version );
     int max_id = 0;

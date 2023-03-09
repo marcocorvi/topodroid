@@ -49,12 +49,15 @@ public class SketchSection extends SketchPath
   TDVector    mH;   // X unit rightward
   TDVector    mS;   // projection Y unit downward
   // 
-  float mAlpha = 0; // projection rotation angle [degrees]
-  float mMaxAlpha = 0;
+  private float mAlpha = 0; // projection rotation angle [degrees]
+  private float mMaxAlpha = 0;
+  private float mCosAlpha = 1.0f;
   float mMinAlpha = 0;
   boolean mCanRotate = false;
   TDVector    mNp;  // section-plane normal
   TDVector    mSp;  // section-plane Y
+
+  TDVector mEast, mNorth, mUp;
   
   ArrayList< SketchLinePath > mLines = null; // lines, in the plane of the section
   private List< SketchFixedPath > mSectionGrid = null;
@@ -84,7 +87,8 @@ public class SketchSection extends SketchPath
     mNp = mN;
     mSp = mS;
     mType = type;
-    TDLog.v("SKETCH legviews C " + mC.x + " " + mC.y + " " + mC.z );
+    // TDLog.v("SKETCH legviews C " + mC.x + " " + mC.y + " " + mC.z );
+    makeFrame();
   }
 
   /** cstr for X-sections
@@ -114,7 +118,7 @@ public class SketchSection extends SketchPath
       float dx = p2.x - p1.x; // East
       float dy = p2.y - p1.y; // North
       float dz = p2.z - p1.z; // Upward
-      TDLog.v("SKETCH section C " + mC.x + " " + mC.y + " " + mC.z );
+      // TDLog.v("SKETCH section C " + mC.x + " " + mC.y + " " + mC.z );
       // TDLog.v("SKETCH section (vert " + vertical + ") " + dx + " " + dy + " " + dz );
       float dh = TDMath.sqrt( dx*dx + dy*dy );
       if ( vertical ) {
@@ -137,6 +141,15 @@ public class SketchSection extends SketchPath
     mLines = new ArrayList< SketchLinePath >();
     mNp = mN;
     mSp = mS;
+    makeFrame();
+  }
+
+  // debug
+  private void makeFrame()
+  {
+    mEast  = new TDVector( mC.x + 1, mC.y, mC.z );
+    mNorth = new TDVector( mC.x, mC.y + 1, mC.z );
+    mUp    = new TDVector( mC.x, mC.y, mC.z + 1 );
   }
 
   /** make the sections grid
@@ -160,15 +173,22 @@ public class SketchSection extends SketchPath
     }
   }
 
+  private final static int THETA_BUFFER = 10;
+
   /** set the projection rotation-angle min-max
    * @param theta   leg clino [degree]
    */
   void setZeroAlpha( float theta )
   {
-    mAlpha    = theta;
-    mMaxAlpha = theta + 30; if ( mMaxAlpha >  90 ) mMaxAlpha =  90;
-    mMinAlpha = theta - 30; if ( mMinAlpha < -90 ) mMinAlpha = -90;
+    if ( theta > 0 ) {
+      mMaxAlpha = theta + THETA_BUFFER; if ( mMaxAlpha > 90 ) mMaxAlpha = 90;
+      mMinAlpha = 0 - THETA_BUFFER;
+    } else {
+      mMaxAlpha = 0 + THETA_BUFFER;
+      mMinAlpha = theta - THETA_BUFFER; if ( mMinAlpha < -90 ) mMinAlpha = -90;
+    }
     mCanRotate = true;
+    setAlpha( 0 );
   }
 
   /** set the projection rotation-angle
@@ -176,6 +196,7 @@ public class SketchSection extends SketchPath
    */
   private void setAlpha( float alpha )
   {
+    if ( ! mCanRotate ) return;
     mAlpha = alpha;
     if ( mAlpha > mMaxAlpha ) { mAlpha = mMaxAlpha; }
     else if ( mAlpha < mMinAlpha ) { mAlpha = mMinAlpha; }
@@ -185,6 +206,7 @@ public class SketchSection extends SketchPath
     // TDLog.v("Section set alpha " + mAlpha + " [" + + mMinAlpha + ", " + mMaxAlpha + "] c " + c + " s " + s );
     mN = new TDVector( c*mNp.x - s*mSp.x, c*mNp.y - s*mSp.y, c*mNp.z - s*mSp.z );
     mS = new TDVector( c*mSp.x + s*mNp.x, c*mSp.y + s*mNp.y, c*mSp.z + s*mNp.z );
+    mCosAlpha = c;
   }
 
   float getRotation( ) { return mAlpha; }
@@ -213,13 +235,13 @@ public class SketchSection extends SketchPath
   int getNextLineId() { return ++nMaxLineId; }
 
   /** @return the world 3D vector of a canvas point
-   * @param xw    H world coord
-   * @param yw    S world coord
+   * @param xw    H coord
+   * @param yw    S coord
    */
   TDVector toTDVector( float xw, float yw )
   {
     TDVector w = new TDVector( xw*mH.x + yw*mS.x, xw*mH.y + yw*mS.y, xw*mH.z + yw*mS.z );
-    float g = ( w.dot( mNp ) ) / TDMath.cosd( mAlpha );
+    float g = ( w.dot( mNp ) ) / mCosAlpha;
     return mC.plus( new TDVector( w.x - g * mN.x, w.y - g * mN.y, w.z - g * mN.z ) );
   }
 
@@ -261,6 +283,19 @@ public class SketchSection extends SketchPath
   {
     if ( mLines == null ) return;
     for ( SketchPath line : mLines ) line.draw( canvas, mm, C, X, Y );
+  }
+
+  public void drawBipath( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y )
+  {
+    if ( mLines == null ) return;
+    for ( SketchLinePath line : mLines ) line.drawBipath( canvas, mm, C, X, Y );
+  }
+
+  public void drawFrame( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y )
+  {
+    drawSegment( mC, mEast,  canvas, mm, C, X, Y, BrushManager.fullGreenPaint );
+    drawSegment( mC, mNorth, canvas, mm, C, X, Y, BrushManager.fullBluePaint );
+    drawSegment( mC, mUp,    canvas, mm, C, X, Y, BrushManager.fullRedPaint );
   }
 
   public void drawPoints( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y, float r )
@@ -307,7 +342,7 @@ public class SketchSection extends SketchPath
   @Override
   public void toDataStream( DataOutputStream dos ) throws IOException 
   {
-    TDLog.v("WRITE section " + mId + " type " + mType + " max line-ID " + nMaxLineId + " lines " + mLines.size() );
+    // TDLog.v("WRITE section " + mId + " type " + mType + " max line-ID " + nMaxLineId + " lines " + mLines.size() );
     mC.dump("  C");
     mH.dump("  H");
     mS.dump("  S");
@@ -379,7 +414,7 @@ public class SketchSection extends SketchPath
         TDLog.Error("Sketch line with " + line.size() + " points" );
       }
     }
-    TDLog.v("READ section " + mId + " max line id " + nMaxLineId + " lines " + nln );
+    // TDLog.v("READ section " + mId + " max line id " + nMaxLineId + " lines " + nln );
     return mId;
   }
 

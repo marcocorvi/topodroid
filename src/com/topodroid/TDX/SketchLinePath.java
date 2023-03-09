@@ -61,7 +61,7 @@ public class SketchLinePath extends SketchPath
    */
   void appendPoint( TDVector v )
   { 
-    TDLog.v("LINE " + mId + "." + mSid + " add pt " + v.x + " " + v.y + " " + v.z );
+    // TDLog.v("LINE " + mId + "." + mSid + " add pt " + v.x + " " + v.y + " " + v.z );
     mPts.add( new SketchPoint( v, this ) );
   }
 
@@ -94,7 +94,7 @@ public class SketchLinePath extends SketchPath
     dos.writeInt( mSid );
     dos.writeInt( mPts.size() );
     for ( SketchPoint pt : mPts ) toDataStream( dos, pt );
-    TDLog.v("WRITE line " + mId + "." + mSid + " n.pts " + mPts.size() );
+    // TDLog.v("WRITE line " + mId + "." + mSid + " n.pts " + mPts.size() );
     if ( mPts.size() > 1 ) {
       mPts.get(0).dump("  P[0]");
       mPts.get(mPts.size()-1).dump("  P[N]");
@@ -117,7 +117,7 @@ public class SketchLinePath extends SketchPath
     for ( int k=0; k<npt; ++ k ) {
       mPts.add( new SketchPoint( tdVectorFromDataStream( dis ), this ) );
     }
-    TDLog.v("READ line " + mId + "." + mSid + " n.pts " + npt );
+    // TDLog.v("READ line " + mId + "." + mSid + " n.pts " + npt );
     return npt;
   }
 
@@ -181,7 +181,7 @@ public class SketchLinePath extends SketchPath
         ++k;
       }
     }
-    TDLog.v("LINE erase at: min diff " + min_diff );
+    // TDLog.v("LINE erase at: min diff " + min_diff );
   }
 
   /** draw the path on a canvas
@@ -226,31 +226,39 @@ public class SketchLinePath extends SketchPath
     Path path_above = new Path();
     Path path_below = new Path();
     TDVector v = mPts.get(0).minus( C );
+    float x = X.dot( v);
+    float y = Y.dot( v);
     if ( Z.dot( v ) < 0 ) {
       n_below ++;
-      path_below.moveTo( X.dot( v ), Y.dot( v ) );
+      path_below.moveTo( x, y );
       above = false;
     } else {
       n_above ++;
-      path_above.moveTo( X.dot( v ), Y.dot( v ) );
+      path_above.moveTo( x, y );
       above = true;
     }
     for ( int k=1; k<sz; ++k ) {
       v = mPts.get(k).minus( C );
+      x = X.dot( v);
+      y = Y.dot( v);
       if ( Z.dot( v ) < 0 ) {
         n_below ++;
         if ( above ) {
-          path_below.moveTo( X.dot( v ), Y.dot( v ) );
+          n_above ++;
+          path_above.lineTo( x, y );
+          path_below.moveTo( x, y );
         } else {
-          path_below.lineTo( X.dot( v ), Y.dot( v ) );
+          path_below.lineTo( x, y );
         }
         above = false;
       } else {
         n_above ++;
         if ( above ) {
-          path_above.lineTo( X.dot( v ), Y.dot( v ) );
+          path_above.lineTo( x, y );
         } else {
-          path_above.moveTo( X.dot( v ), Y.dot( v ) );
+          n_below ++;
+          path_below.lineTo( x, y );
+          path_above.moveTo( x, y );
         }
         above = true;
       }
@@ -259,12 +267,12 @@ public class SketchLinePath extends SketchPath
     if ( n_above > 1 ) {
       path_above.transform( matrix );
       // path.offset( off_x, off_y );
-      canvas.drawPath( path_above, BrushManager.fixedYellowPaint );
+      canvas.drawPath( path_above, BrushManager.bgLinePaint );
     }
     if ( n_below > 1 ) {
       path_below.transform( matrix );
       // path.offset( off_x, off_y );
-      canvas.drawPath( path_below, BrushManager.fixedOrangePaint );
+      canvas.drawPath( path_below, BrushManager.fgLinePaint );
     }
   }
 

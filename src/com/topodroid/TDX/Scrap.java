@@ -892,7 +892,9 @@ public class Scrap
   }
 
   /** fine the area to continue
-   * @param lp     area point
+   * @param ap     area path
+   * @param lp1    area start point
+   * @param lq2    area end point
    * @param type   area type
    * @param zoom   display zoom
    * @param size   ...
@@ -900,7 +902,7 @@ public class Scrap
    * @note line points are scene-coords
    *       continuation is checked in canvas-coords: canvas = offset + scene * zoom
    */
-  boolean getAreaToContinue( DrawingAreaPath ap, LinePoint lp1, LinePoint lp2, int type, float zoom, float size )
+  boolean getAreaToContinue( DrawingAreaPath ap, LinePoint lq1, LinePoint lq2, int type, float zoom, float size )
   {
     float delta = 2 * size / zoom;
 
@@ -919,7 +921,7 @@ public class Scrap
             // TDLog.v("TRY area [" + area.mAreaCnt + "] with size " + area.size() );
             for ( LinePoint lp = area.first(); lp != null; lp = lp.mNext ) {
               float dmin;
-              if ( lp10 == null && (dmin = lp.distance( lp1 )) < delta ) {
+              if ( lp10 == null && (dmin = lp.distance( lq1 )) < delta ) {
                 lp10 = lp;
                 for ( LinePoint lpp = lp.mNext; lpp != null; lpp=lpp.mNext ) {
                   float d = lpp.distance( lp1 );
@@ -930,7 +932,7 @@ public class Scrap
                 if ( first == 0 ) first = 1; // first is lp10
                 if ( lp20 != null ) break;
               }
-              if ( lp20 == null && (dmin = lp.distance( lp2 )) < delta ) {
+              if ( lp20 == null && (dmin = lp.distance( lq2 )) < delta ) {
                 lp20 = lp;
                 for ( LinePoint lpp = lp.mNext; lpp != null; lpp=lpp.mNext ) {
                   float d = lpp.distance( lp2 );
@@ -952,13 +954,13 @@ public class Scrap
                 // TDLog.v("AREA " + area.size() + " continue A: first " + first + " ccw " + ccw0 + " " + ccw1 );
                 if ( lp10.mNext != null ) lp10.mNext.mPrev = null;
                 if ( lp20.mPrev != null ) lp20.mPrev.mNext = null;
-                lp10.mNext = lp1;
-                lp1.mPrev  = lp10;
-                lp20.mPrev = lp2;
-                lp2.mNext  = lp20;
+                lp10.mNext = lq1;
+                lq1.mPrev  = lp10;
+                lp20.mPrev = lq2;
+                lq2.mNext  = lp20;
                 if ( first == 2 ) {
                   // TDLog.v("AREA reset First " + lp20.x + " " + lp20.y + " Last " + lp2.x + " " + lp2.y);
-                  area.resetFirstLast( lp20, lp2 );
+                  area.resetFirstLast( lp20, lq2 );
                 }
               } else { 
                 // TDLog.v("AREA " + area.size() + " continue B: first " + first + " ccw " + ccw0 + " " + ccw1 );
@@ -966,17 +968,17 @@ public class Scrap
                 if ( lp10.mPrev != null ) lp10.mPrev.mNext = null;
                 LinePoint lp_prev = lp20;
                 LinePoint lp_next = null;
-                for ( LinePoint lp = lp2; lp != lp1; lp = lp_next ) {
+                for ( LinePoint lp = lq2; lp != lq1; lp = lp_next ) {
                   lp_next       = lp.mPrev;
                   lp_prev.mNext = lp;
                   lp.mPrev      = lp_prev;
                   lp_prev       = lp;
                 }
-                lp1.mNext  = lp10;
-                lp10.mPrev = lp1;
+                lq1.mNext  = lp10;
+                lp10.mPrev = lq1;
                 if ( first == 1 ) {
                   // TDLog.v("AREA reset First " + lp10.x + " " + lp10.y + " Last " + lp1.x + " " + lp1.y);
-                  area.resetFirstLast( lp10, lp1 );
+                  area.resetFirstLast( lp10, lq1 );
                 }
               }
               // TODO update mSelection

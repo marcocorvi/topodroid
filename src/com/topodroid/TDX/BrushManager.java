@@ -277,10 +277,12 @@ public class BrushManager
   public static final Paint duplicateStationPaint = makePaint( 0xFFFF66FF, WIDTH_FIXED, Paint.Style.STROKE);
   public static final Paint referencePaint = makePaint( 0xFFffffff, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
   public static final Paint badLoopPaint = errorPaint;
+  public static final Paint fgLinePaint = makePaint( 0xffff9933, WIDTH_FIXED, Paint.Style.STROKE);
+  public static final Paint bgLinePaint = makePaint( 0x99ff9933, WIDTH_FIXED, Paint.Style.STROKE);
   // DEBUG
-  // public static final Paint debugRed = makePaint( TDColor.FULL_RED, WIDTH_FIXED, Paint.Style.STROKE);
-  // public static final Paint debugGreen = makePaint( TDColor.FULL_GREEN, WIDTH_FIXED, Paint.Style.STROKE);
-  // public static final Paint debugBlue  = makePaint( TDColor.FULL_BLUE,  WIDTH_FIXED, Paint.Style.STROKE);
+  public static final Paint fullRedPaint   = makePaint( TDColor.FULL_RED,   WIDTH_FIXED, Paint.Style.STROKE);
+  public static final Paint fullGreenPaint = makePaint( TDColor.FULL_GREEN, WIDTH_FIXED, Paint.Style.STROKE);
+  public static final Paint fullBluePaint  = makePaint( TDColor.FULL_BLUE,  WIDTH_FIXED, Paint.Style.STROKE);
 
   // fixedGridPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
   // fixedGrid10Paint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );

@@ -567,8 +567,8 @@ public class SketchWindow extends ItemDrawer
     TDVector v1 = new TDVector();
     TDVector v2 = leg.toTDVector(); // (E,N,Up)
     float theta = TDMath.atan2d( v2.z, TDMath.sqrt( v2.x*v2.x + v2.y*v2.y) );
-    TDLog.v("SKETCH leg " + leg.from + "-" + leg.to + " L " + leg.len + " A " + leg.ber + " C " + leg.cln );
-    TDLog.v("SKETCH V2: E " + v2.x + " N " + v2.y + " Up " + v2.z + " theta " + theta );
+    // TDLog.v("SKETCH leg " + leg.from + "-" + leg.to + " L " + leg.len + " A " + leg.ber + " C " + leg.cln );
+    // TDLog.v("SKETCH V2: E " + v2.x + " N " + v2.y + " Up " + v2.z + " theta " + theta );
     addFixedLeg( v1, v2 );
     Cave3DStation st1 = leg.from_station;
     Cave3DStation st2 = leg.to_station;
@@ -588,12 +588,12 @@ public class SketchWindow extends ItemDrawer
           TDVector v = v1.plus( lg.toTDVector() );
           addFixedNghbleg( v1, v );
           addStation( v, lg.to_station.getShortName(), lg.to, lg.from, true );
-          TDLog.v("SKETCH station " + lg.from + "-" + lg.to + " L " + lg.len + " A " + lg.ber + " C " + lg.cln + " " + v.x + " " + v.y + " " + v.z );
+          // TDLog.v("SKETCH station " + lg.from + "-" + lg.to + " L " + lg.len + " A " + lg.ber + " C " + lg.cln + " " + v.x + " " + v.y + " " + v.z );
         } else if ( lg.to_station == st1 ) {
           TDVector v = v1.minus( lg.toTDVector() );
           addFixedNghbleg( v1, v );
           addStation( v, lg.from_station.getShortName(), lg.from, lg.to, false );
-          TDLog.v("SKETCH station " + lg.from + "-" + lg.to + " L " + lg.len + " A " + lg.ber + " C " + lg.cln + " " + v.x + " " + v.y + " " + v.z );
+          // TDLog.v("SKETCH station " + lg.from + "-" + lg.to + " L " + lg.len + " A " + lg.ber + " C " + lg.cln + " " + v.x + " " + v.y + " " + v.z );
         }
       }
     }
@@ -603,12 +603,12 @@ public class SketchWindow extends ItemDrawer
           TDVector v = v2.plus( lg.toTDVector() );
           addFixedNghbleg( v2, v );
           addStation( v, lg.to_station.getShortName(), lg.to, lg.from, true );
-          TDLog.v("SKETCH station " + lg.from + "-" + lg.to + " L " + lg.len + " A " + lg.ber + " C " + lg.cln + " " + v.x + " " + v.y + " " + v.z );
+          // TDLog.v("SKETCH station " + lg.from + "-" + lg.to + " L " + lg.len + " A " + lg.ber + " C " + lg.cln + " " + v.x + " " + v.y + " " + v.z );
         } else if ( lg.to_station == st2 ) {
           TDVector v = v2.minus( lg.toTDVector() );
           addFixedNghbleg( v2, v );
           addStation( v, lg.from_station.getShortName(), lg.from,  lg.to, false );
-          TDLog.v("SKETCH station " + lg.from + "-" + lg.to + " L " + lg.len + " A " + lg.ber + " C " + lg.cln + " " + v.x + " " + v.y + " " + v.z );
+          // TDLog.v("SKETCH station " + lg.from + "-" + lg.to + " L " + lg.len + " A " + lg.ber + " C " + lg.cln + " " + v.x + " " + v.y + " " + v.z );
         }
       }
     }
@@ -634,7 +634,7 @@ public class SketchWindow extends ItemDrawer
     if ( load ) {
       String filename = TDPath.getC3dFile( mSketchName );
       boolean ret = doLoad( filename );
-      TDLog.v("SKETCH loading " + filename + " return " + ret );
+      // TDLog.v("SKETCH loading " + filename + " return " + ret );
     }
   }
 
@@ -672,7 +672,7 @@ public class SketchWindow extends ItemDrawer
       } catch ( IOException e ) { /* ignore */ }
     }
     mCurSection = 0;
-    TDLog.v("READ sketch " + name + " - max " + mMaxSection );
+    // TDLog.v("READ sketch " + name + " - max " + mMaxSection );
     return ret;
   }
 
@@ -948,7 +948,7 @@ public class SketchWindow extends ItemDrawer
   private void setButtonEraseSize( int scale )
   {
     mEraseScale = scale % Drawing.SCALE_MAX;
-    TDLog.v("SKETCH erase scale " + mEraseScale );
+    // TDLog.v("SKETCH erase scale " + mEraseScale );
     switch ( mEraseScale ) {
       case Drawing.SCALE_SMALL:
         mEraseSize = 0.5f * TDSetting.mEraseness;
@@ -979,7 +979,7 @@ public class SketchWindow extends ItemDrawer
   private void setButtonSelectSize( int scale )
   {
     mSelectScale = scale % Drawing.SCALE_MAX;
-    TDLog.v("SKETCH select scale " + mSelectScale );
+    // TDLog.v("SKETCH select scale " + mSelectScale );
     switch ( mSelectScale ) {
       case Drawing.SCALE_SMALL:
         mSelectSize = 0.5f * TDSetting.mSelectness;
@@ -1872,7 +1872,7 @@ public class SketchWindow extends ItemDrawer
           if ( cpath.size() > 1 ) {
             int id  = mSketchSurface.getSectionNextLineId();
             int sid = mSketchSurface.getSectionId();
-            TDLog.v("SKETCH new line " + id + "." + sid + " size " + cpath.size() );
+            // TDLog.v("SKETCH new line " + id + "." + sid + " size " + cpath.size() );
             SketchLinePath lp1 = new SketchLinePath( id, sid, SketchSurface.getSectionLinePaint( mCurSection ) );
             for ( Point2D p0 : cpath ) {
               lp1.appendPoint( mSketchSurface.toTDVector( p0.x, p0.y ) );
@@ -1887,7 +1887,7 @@ public class SketchWindow extends ItemDrawer
         mPointerDown = false;
         modified();
       } else if ( mMode == MODE_EDIT ) {
-        TDLog.v("SKETCH touch up on edit at " + xc + " " + yc + " radius " + TDSetting.mPointingRadius );
+        // TDLog.v("SKETCH touch up on edit at " + xc + " " + yc + " radius " + TDSetting.mPointingRadius );
         if ( Math.abs(mStartX - xc) < TDSetting.mPointingRadius && Math.abs(mStartY - yc) < TDSetting.mPointingRadius ) {
           doSelectAt( xc, yc, mSelectSize );
         }
@@ -1953,7 +1953,7 @@ public class SketchWindow extends ItemDrawer
       mStartX = xc;
       mStartY = yc;
       // mEditMove = true;
-      TDLog.v("SKETCH touch down on edit at " + xc + " " + yc );
+      // TDLog.v("SKETCH touch down on edit at " + xc + " " + yc );
       // doSelectAt( xc, yc, mSelectSize );
       mSaveX = xc;
       mSaveY = yc;
