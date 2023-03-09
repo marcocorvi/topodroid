@@ -1,4 +1,4 @@
-/* @file Scrap.java
+  /* @file Scrap.java
  *
  * @author marco corvi
  * @date oct 2019
@@ -15,6 +15,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.TDGreenDot;
+import com.topodroid.math.Point2D;
 import com.topodroid.prefs.TDSetting;
 
 import java.util.List;
@@ -922,67 +923,100 @@ public class Scrap
             LinePoint lp10 = null;
             LinePoint lp20 = null;
             int first = 1;
+            int cnt1 = 0;
+            int cnt2 = 0;
             // assert( area.last().mNext == null );
             // TDLog.v("TRY area [" + area.mAreaCnt + "] with size " + area.size() );
             for ( LinePoint lp = area.first(); lp != null; lp = lp.mNext ) {
-              float dmin;
-              if ( lp10 == null && (dmin = lp.distance( lq1 )) < delta ) {
-                lp10 = lp;
-                for ( LinePoint lpp = lp.mNext; lpp != null; lpp=lpp.mNext ) {
-                  float d = lpp.distance( lq1 );
-                  if ( d > dmin ) break;
-                  lp10 = lpp;
-                  dmin = d;
+              if ( lp10 == null ) {
+                float d1min;
+                ++ cnt1;
+                if ( (d1min = lp.distance( lq1 )) < delta ) {
+                  lp10 = lp;
+                  for ( LinePoint lpp = lp.mNext; lpp != null; lpp=lpp.mNext ) {
+                    float d = lpp.distance( lq1 );
+                    if ( d > d1min ) break;
+                    lp10 = lpp;
+                    d1min = d;
+                    ++ cnt1;
+                  }
+                  if ( first == 0 ) first = 1; // first is lp10
+                  if ( lp20 != null ) break;
                 }
-                if ( first == 0 ) first = 1; // first is lp10
-                if ( lp20 != null ) break;
               }
-              if ( lp20 == null && (dmin = lp.distance( lq2 )) < delta ) {
-                lp20 = lp;
-                for ( LinePoint lpp = lp.mNext; lpp != null; lpp=lpp.mNext ) {
-                  float d = lpp.distance( lq2 );
-                  if ( d > dmin ) break;
-                  lp20 = lpp;
-                  dmin = d;
+              if ( lp20 == null ) {
+                float d2min;
+                ++ cnt2;
+                if ( (d2min = lp.distance( lq2 )) < delta ) {
+                  lp20 = lp;
+                  for ( LinePoint lpp = lp.mNext; lpp != null; lpp=lpp.mNext ) {
+                    float d = lpp.distance( lq2 );
+                    if ( d > d2min ) break;
+                    lp20 = lpp;
+                    d2min = d;
+                    ++ cnt2;
+                  }
+                  if ( first == 0 ) first = 2; // first is lp20
+                  if ( lp10 != null ) break;
                 }
-                if ( first == 0 ) first = 2; // first is lp20
-                if ( lp10 != null ) break;
               }
             }
             if ( lp10 != null && lp20 != null ) {
+              LinePoint lq1n = lq1.mNext;
+              Point2D q1 = new Point2D( lq1.x - lq1n.x, lq1.y - lq1n.y );
+              LinePoint lq2p = lq2.mPrev;
+              Point2D q2 = new Point2D( lq2.x - lq2p.x, lq2.y - lq2p.y );
+              for ( ; lq1 != lq2; lq1=lq1.mNext ) {
+                if ( q1.dot( lp10.sub( lq1 ) ) >= 0 ) break;
+              }
+              for ( ; lq2 != lq1; lq2=lq2.mPrev ) {
+                if ( q2.dot( lp20.sub( lq2 ) ) >= 0 ) break;
+              }
+
               mSelection.removePath( area );
+              TDLog.v("Found area p1 " + cnt1 + " p2 " + cnt2 + " of " + area.size() + " first " + first);
               // area.dump( "a0" );
               // ap.dump( "ap" );
               boolean ccw0 = ap.isCCW();
               boolean ccw1 = area.isCCW();
               if ( ( ccw0 && ccw1 ) || ( ! ccw0 && ! ccw1 ) ) {
-                // TDLog.v("AREA " + area.size() + " continue A: first " + first + " ccw " + ccw0 + " " + ccw1 );
+                TDLog.v("AREA concord: new ccw " + ccw0 + " old ccw " + ccw1 );
                 if ( lp10.mNext != null ) lp10.mNext.mPrev = null;
                 if ( lp20.mPrev != null ) lp20.mPrev.mNext = null;
                 lp10.mNext = lq1;
                 lq1.mPrev  = lp10;
                 lp20.mPrev = lq2;
                 lq2.mNext  = lp20;
-                if ( first == 2 ) {
-                  // TDLog.v("AREA reset First " + lp20.x + " " + lp20.y + " Last " + lp2.x + " " + lp2.y);
+                if ( cnt2 < cnt1 ) {
+                  TDLog.v("AREA reset First " + lp20.x + " " + lp20.y + " Last " + lq2.x + " " + lq2.y);
                   area.resetFirstLast( lp20, lq2 );
                 }
               } else { 
-                // TDLog.v("AREA " + area.size() + " continue B: first " + first + " ccw " + ccw0 + " " + ccw1 );
+                TDLog.v("AREA discord: new ccw " + ccw0 + " old ccw " + ccw1 );
                 if ( lp20.mNext != null ) lp20.mNext.mPrev = null;
                 if ( lp10.mPrev != null ) lp10.mPrev.mNext = null;
+                //    lp20         lq2
+                //    lp_prev .... lp <---> ... <--
+                // (1)                    lp_next
+                // (2)        <--> lp
+                // (3)           lp_prev .... lp
+                //                            lq1
+                // (4)                   <-->
+                // (5)                            <--> lp10 --> ...
                 LinePoint lp_prev = lp20;
                 LinePoint lp_next = null;
                 for ( LinePoint lp = lq2; lp != lq1; lp = lp_next ) {
-                  lp_next       = lp.mPrev;
-                  lp_prev.mNext = lp;
+                  lp_next       = lp.mPrev; // (1)
+                  lp_prev.mNext = lp;       // (2)
                   lp.mPrev      = lp_prev;
-                  lp_prev       = lp;
+                  lp_prev       = lp;       // (3)
                 }
-                lq1.mNext  = lp10;
+                lp_prev.mNext = lq1;        // (4)
+                lq1.mPrev     = lp_prev;
+                lq1.mNext  = lp10;          // (5)
                 lp10.mPrev = lq1;
-                if ( first == 1 ) {
-                  // TDLog.v("AREA reset First " + lp10.x + " " + lp10.y + " Last " + lp1.x + " " + lp1.y);
+                if ( cnt1 < cnt2 ) {
+                  TDLog.v("AREA reset First " + lp10.x + " " + lp10.y + " Last " + lq1.x + " " + lq1.y);
                   area.resetFirstLast( lp10, lq1 );
                 }
               }
