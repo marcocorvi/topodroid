@@ -910,7 +910,8 @@ public class TDExporter
       return 0;
     }
 
-    // TDLog.v( "SHP data export. base " + dirname );
+    TDLog.v( "SHP data export. base " + dirname ); 
+    // assert( dirname != null );
     boolean success = true;
     try {
       // TDLog.Log( TDLog.LOG_IO, "export SHP " + filename );

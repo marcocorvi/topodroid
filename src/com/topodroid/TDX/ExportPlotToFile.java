@@ -107,10 +107,14 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
             FileOutputStream fos = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : TDFile.getFileOutputStream( file_path );
             // FileOutputStream fos = TDsafUri.docFileOutputStream( pfd );
             String dirpath = TDPath.getShpTempRelativeDir();
-            TDLog.v("EXPORT shp - dir " + dirpath );
-	    DrawingShp.writeShp( fos, dirpath, mCommand, mType, mStation );
-	    // DrawingShp.writeShp( fos, mFullName, mCommand, mType, mStation );
-            // TDFile.deleteDir( dirpath );
+            if ( dirpath != null ) {
+              TDLog.v("EXPORT shp - dir " + dirpath );
+	      DrawingShp.writeShp( fos, dirpath, mCommand, mType, mStation );
+	      // DrawingShp.writeShp( fos, mFullName, mCommand, mType, mStation );
+              // TDFile.deleteDir( dirpath );
+            } else {
+              TDLog.Error("EXPORT shp - null dirpath"); // TODO
+            }
             fos.close();
 	  } else {
             BufferedWriter bw = null;

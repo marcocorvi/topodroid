@@ -905,6 +905,11 @@ public class Scrap
   boolean getAreaToContinue( DrawingAreaPath ap, LinePoint lq1, LinePoint lq2, int type, float zoom, float size )
   {
     float delta = 2 * size / zoom;
+    // assert( lq1.mPrev == null ); // DEBUG
+    // assert( lq2.mNext == null );
+    // LinePoint lq = lq1;
+    // for ( int k=1; k<ap.size(); ++k ) lq = lq.mNext;
+    // assert( lq == lq2 );
 
     synchronized( TDPath.mCommandsLock ) {
       for ( ICanvasCommand cmd : mCurrentStack ) {

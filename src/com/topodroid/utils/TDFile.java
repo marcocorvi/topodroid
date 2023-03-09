@@ -711,7 +711,7 @@ public class TDFile
     File f = new File( pathname );
     if ( ! f.exists() ) {
       if ( ! f.mkdirs() ) {
-        TDLog.Error("mkdir failed " + pathname );
+        TDLog.Error("mkdir topodroid failed " + pathname );
         return null;
       }
     }

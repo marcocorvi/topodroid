@@ -308,7 +308,7 @@ public class TDPath
       APP_PHOTO_ROOT = APP_SURVEY_ROOT + "/photo";   checkFilesystemDirs( APP_PHOTO_ROOT );
       APP_AUDIO_ROOT = APP_SURVEY_ROOT + "/audio";   checkFilesystemDirs( APP_AUDIO_ROOT );
       APP_OUT_ROOT   = APP_SURVEY_ROOT + "/out";     checkFilesystemDirs( APP_OUT_ROOT );
-      APP_TMP_ROOT   = APP_SURVEY_PATH + "/tmp";     checkFilesystemDirs( APP_TMP_ROOT );
+      APP_TMP_ROOT   = APP_SURVEY_ROOT + "/tmp";     checkFilesystemDirs( APP_TMP_ROOT );
 
       APP_SURVEY_PATH = PATH_CW_DIR + "/" + survey;
       APP_TDR_PATH   = APP_SURVEY_PATH + "/tdr";
@@ -319,7 +319,7 @@ public class TDPath
       APP_OUT_PATH   = APP_SURVEY_PATH + "/out";
       APP_TMP_PATH   = APP_SURVEY_PATH + "/tmp";    // CWD/survey/tmp
 
-      RELATIVE_TMP = survey + "/tmp";
+      RELATIVE_TMP = (survey == null)? null : survey + "/tmp";
     }
   }
 
@@ -990,7 +990,7 @@ public class TDPath
 
   private static void checkFilesystemDirs( String path )
   {
-    // TDLog.v("check filesystem dir " + path + " cwd " + ROOT_CW_DIR );
+    TDLog.v("check filesystem dir " + path + " cwd " + ROOT_CW_DIR );
     if ( TDandroid.PRIVATE_STORAGE ) {
       File dir = TDFile.getPrivateDir( path );
       if ( ! dir.exists() ) dir.mkdirs( );
