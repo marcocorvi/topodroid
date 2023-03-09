@@ -924,7 +924,7 @@ public class Scrap
               if ( lp10 == null && (dmin = lp.distance( lq1 )) < delta ) {
                 lp10 = lp;
                 for ( LinePoint lpp = lp.mNext; lpp != null; lpp=lpp.mNext ) {
-                  float d = lpp.distance( lp1 );
+                  float d = lpp.distance( lq1 );
                   if ( d > dmin ) break;
                   lp10 = lpp;
                   dmin = d;
@@ -935,7 +935,7 @@ public class Scrap
               if ( lp20 == null && (dmin = lp.distance( lq2 )) < delta ) {
                 lp20 = lp;
                 for ( LinePoint lpp = lp.mNext; lpp != null; lpp=lpp.mNext ) {
-                  float d = lpp.distance( lp2 );
+                  float d = lpp.distance( lq2 );
                   if ( d > dmin ) break;
                   lp20 = lpp;
                   dmin = d;
