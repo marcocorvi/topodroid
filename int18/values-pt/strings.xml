@@ -417,7 +417,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="menu_pair">PAREAR</string -->
   <string name="menu_palette">PALETA</string>
   <string name="menu_photo">FOTO</string>
-    <!-- TODO string name="menu_sections">SECTIONS</string -->
+  <string name="menu_sections">CORTES</string>
   <string name="menu_sensor">SENSOR</string>
   <!-- UNUSED string name="menu_scan">PROCURAR</string -->
   <!-- UNUSED string name="menu_scan_ble">PROCURAR DISPOSITIVOS BLE</string -->
@@ -957,10 +957,9 @@ no campo abaixo e aperte o botão.
   <string name="help_redo">Refazer última ação desfeita de desenho</string>
   <string name="help_symbol_plot">Selecionar símbolo ativo</string>
   <string name="help_delete_item">Apagar objeto do croqui</string>
-    <!-- TODO string name="help_section_type">Sketch section type</string -->
+  <string name="help_section_type">Tipo corte croqui</string>
   <string name="help_section_item">Elemento de corte do croqui</string>
-    <!-- TODO string name="help_select_clear">Clear sketch selection</string -->
-  <string name="help_select_clear">Esvaziar seleção de croquis</string>
+  <string name="help_select_clear">Limpar seleção croqui</string>
   <string name="help_range">Mover uma parte da linha</string>
   <!-- UNUSED string name="help_clear">Deselecionar tudo</string -->
   <string name="help_eraser">Modo BORRACHA</string>
@@ -1210,7 +1209,6 @@ no campo abaixo e aperte o botão.
   <string name="pref_cat_device">DISPOSITIVOS</string>
   <string name="pref_cat_cave3d">VISUALIZADOR 3D</string>
   <string name="pref_cat_geek">ESPECIAIS</string>
-  <!-- TODO string name="pref_cat_sketch">3D SKETCH</string -->
   <string name="pref_cat_sketch">CROQUI 3D</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
   <string name="pref_locale_title">Língua</string>
@@ -1650,8 +1648,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_unit_location_title">Unidade coordenada</string>
   <string name="pref_unit_location_summary">Unidade para visualização de coordenadas</string>
 
-  <!-- TODO string name="pref_sketch_splay_buffer_title">Splay buffer</string -->
-  <!-- TODO string name="pref_sketch_splay_buffer_summary">Section splay buffer [m]</string -->
+  <string name="pref_sketch_splay_buffer_title">Armazen Aux</string>
+  <string name="pref_sketch_splay_buffer_summary">Área de armazenamento temporário de medidas auxiliares de cortes [m]</string>
 
   <!-- UNUSED string name="pref_plot_walls_title">PAREDES AUTOMÁTICAS</string -->
   <!-- UNUSED string name="pref_walls_type_title">Tipo paredes</string -->
@@ -1666,8 +1664,6 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="pref_walls_concave_summary">Concavidade máxima [percentual]</string -->
   <!-- UNUSED string name="pref_walls_xstep_title">Passo</string -->
   <!-- UNUSED string name="pref_walls_xstep_summary">Separação dos pontos ao longo das paredes [m]</string -->
-  <string name="pref_sketch_splay_buffer_title">Buffer medida</string>
-  <string name="pref_sketch_splay_buffer_summary">Zona tampão de medidas em cortes [m]</string>
   <!-- UNUSED NO_LOGS
   <string name="pref_log_stream_summary" translatable="false">Log output stream</string>
   <string name="pref_log_stream_title" translatable="false">Log stream</string>
@@ -1902,8 +1898,8 @@ no campo abaixo e aperte o botão.
   <string name="ctitle">%1$s  Inclinação: %2$.0f  Azimute: %3$.0f</string>
   <string name="ctitle_surface_alpha">Opacidade superfície</string>
   <string name="ctitle_sketches">Croquis</string>
-    <!-- TODO string name="ctitle_sketch_h">[H]</string -->
-    <!-- TODO string name="ctitle_sketch_v">[V]</string -->
+  <string name="ctitle_sketch_h" copyable="pt">[H]</string>
+  <string name="ctitle_sketch_v" copyable="pt">[V]</string>
   <string name="ctitle_legs">Visibilidade visadas</string>
   <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
   <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
