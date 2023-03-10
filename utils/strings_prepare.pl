@@ -26,7 +26,6 @@ use File::Basename;
 use Data::Dumper;
 
 # Trick to make perl look for packages on the same directory as the running script.
-use File::Basename;
 use lib dirname (__FILE__);
 
 use topostrings;
@@ -40,11 +39,10 @@ if (@ARGV != 2) {
 
 my $en_filename = $ARGV[0];
 my $language = $ARGV[1];
-my $suffix = '.xml';
 my $filename;
 my $path;
-($filename, $path, $suffix) = fileparse($en_filename);
-my $xx_filename = $path . '../../int18/values-' . $language . '/' . $filename . $suffix;
+($filename, $path) = fileparse($en_filename);
+my $xx_filename = $path . '../../int18/values-' . $language . '/' . $filename;
 my $new_filename = $xx_filename;
 my %xx_names;
 my %en_names;
