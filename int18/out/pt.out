@@ -9,6 +9,11 @@ Error reports verbosity levels:
   Copied strings: ......... non-copyable (1), copyable (2)
 ----------------------------------------------------
 
+963: ********* DUPLICATE pt STRING help_select_clear 
+1214: ********* DUPLICATE pt STRING pref_cat_sketch 
+1669: ********* DUPLICATE pt STRING pref_sketch_splay_buffer_title 
+1670: ********* DUPLICATE pt STRING pref_sketch_splay_buffer_summary 
+Duplicated pt strings: 4
 
 pt strings without default:
 Errors 0, Warnings 10, Total 10
@@ -19,7 +24,7 @@ Errors 1, Warnings 6, Total 7
 
 EN string that are not translated:
 cpref_convex_hull_title string missing
-Errors 1 + 0 + 0, Total 1
+Errors 1 + 4 + 0, Total 9
 
 EN string that are copied:
 display_view string copied word: Display
@@ -29,13 +34,13 @@ cpref_convex_hull_summary string copied sentence: Convex hull walls
 cpref_delaunay_summary string copied sentence: Delaunay walls
 cpref_hull_title string copied word: Hull
 cpref_hull_summary string copied sentence: Hull walls
-Errors 3 possible, 4 maybe, Warnings 30, Total 37
+Errors 3 possible, 4 maybe, Warnings 29, Total 36
 
-EN strings 2033 pt strings 1993
+EN strings 2042 pt strings 2006
 Translated with no-default:  commented 10 - translated 0 
 Translated non-translatable: commented 6 - translated 1 
 Translated comment: 0 
-Non-Translated: commented 0 missing 1 todo 0 
-Copied: copyable 30 possibly copyable 4 non-copyable 3
+Non-Translated: commented 0 missing 1 todo 4 
+Copied: copyable 29 possibly copyable 4 non-copyable 3
 Bad formats 0
-TOTAL ERRORS: 2 / 3 [4]
+TOTAL ERRORS: 6 / 3 [4]

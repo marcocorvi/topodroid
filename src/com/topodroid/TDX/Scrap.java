@@ -1,4 +1,4 @@
-  /* @file Scrap.java
+   /* @file Scrap.java
  *
  * @author marco corvi
  * @date oct 2019
@@ -922,15 +922,11 @@ public class Scrap
           if ( area.mAreaType == type ) {
             LinePoint lp10 = null;
             LinePoint lp20 = null;
-            int first = 1;
-            int cnt1 = 0;
-            int cnt2 = 0;
             // assert( area.last().mNext == null );
-            // TDLog.v("TRY area [" + area.mAreaCnt + "] with size " + area.size() );
+            TDLog.v("TRY area [" + area.mAreaCnt + "] with size " + area.size() );
             for ( LinePoint lp = area.first(); lp != null; lp = lp.mNext ) {
               if ( lp10 == null ) {
                 float d1min;
-                ++ cnt1;
                 if ( (d1min = lp.distance( lq1 )) < delta ) {
                   lp10 = lp;
                   for ( LinePoint lpp = lp.mNext; lpp != null; lpp=lpp.mNext ) {
@@ -938,15 +934,12 @@ public class Scrap
                     if ( d > d1min ) break;
                     lp10 = lpp;
                     d1min = d;
-                    ++ cnt1;
                   }
-                  if ( first == 0 ) first = 1; // first is lp10
                   if ( lp20 != null ) break;
                 }
               }
               if ( lp20 == null ) {
                 float d2min;
-                ++ cnt2;
                 if ( (d2min = lp.distance( lq2 )) < delta ) {
                   lp20 = lp;
                   for ( LinePoint lpp = lp.mNext; lpp != null; lpp=lpp.mNext ) {
@@ -954,9 +947,7 @@ public class Scrap
                     if ( d > d2min ) break;
                     lp20 = lpp;
                     d2min = d;
-                    ++ cnt2;
                   }
-                  if ( first == 0 ) first = 2; // first is lp20
                   if ( lp10 != null ) break;
                 }
               }
@@ -974,27 +965,47 @@ public class Scrap
               }
 
               mSelection.removePath( area );
-              TDLog.v("Found area p1 " + cnt1 + " p2 " + cnt2 + " of " + area.size() + " first " + first);
               // area.dump( "a0" );
               // ap.dump( "ap" );
-              boolean ccw0 = ap.isCCW();
-              boolean ccw1 = area.isCCW();
-              if ( ( ccw0 && ccw1 ) || ( ! ccw0 && ! ccw1 ) ) {
-                TDLog.v("AREA concord: new ccw " + ccw0 + " old ccw " + ccw1 );
-                if ( lp10.mNext != null ) lp10.mNext.mPrev = null;
-                if ( lp20.mPrev != null ) lp20.mPrev.mNext = null;
+              // boolean ccw0 = ap.isCCW();
+              // boolean ccw1 = area.isCCW();
+
+              area.chainFirstLast(); // close the area chain
+              int cnt12 = 0;
+              int cnt21 = 0;
+              for ( LinePoint lp = lp10; lp != lp20; lp = lp.mNext ) ++cnt12;
+              for ( LinePoint lp = lp20; lp != lp10; lp = lp.mNext ) ++cnt21;
+
+              // if ( ( ccw0 && ccw1 ) || ( ! ccw0 && ! ccw1 ) ) 
+              if ( cnt12 < cnt21 ) { 
+                TDLog.v("     drop border 1-2 " + cnt12 + " " + cnt21 );
+                LinePoint lp20n = lp20.mNext; // remove wedge
+                Point2D p2 = new Point2D( lp20n.x - lp20.x, lp20n.y - lp20.y );
+                while ( p2.dot( lq2.sub( lp20 )) > 0 ) {
+                  lp20 = lp20.mNext; 
+                }
+                LinePoint lp10p = lp10.mPrev; if ( lp10p == null ) lp10p = area.last(); 
+                Point2D p1 = new Point2D( lp10p.x - lp10.x, lp10p.y - lp10.y );
+                while ( p1.dot( lq1.sub( lp10 )) > 0 ) {
+                  lp10 = lp10.mPrev;
+                }
                 lp10.mNext = lq1;
                 lq1.mPrev  = lp10;
                 lp20.mPrev = lq2;
                 lq2.mNext  = lp20;
-                if ( cnt2 < cnt1 ) {
-                  TDLog.v("AREA reset First " + lp20.x + " " + lp20.y + " Last " + lq2.x + " " + lq2.y);
-                  area.resetFirstLast( lp20, lq2 );
-                }
+                area.resetFirstLast( lp20, lq2 );
               } else { 
-                TDLog.v("AREA discord: new ccw " + ccw0 + " old ccw " + ccw1 );
-                if ( lp20.mNext != null ) lp20.mNext.mPrev = null;
-                if ( lp10.mPrev != null ) lp10.mPrev.mNext = null;
+                TDLog.v("     drop border 2-1 " + cnt12 + " " + cnt21 );
+                LinePoint lp20p = lp20.mPrev; // remove wedge
+                Point2D p2 = new Point2D( lp20p.x - lp20.x, lp20p.y - lp20.y );
+                while ( p2.dot( lq2.sub( lp20 )) > 0 ) {
+                  lp20 = lp20.mPrev; 
+                }
+                LinePoint lp10n = lp10.mNext;
+                Point2D p1 = new Point2D( lp10n.x - lp10.x, lp10n.y - lp10.y );
+                while ( p1.dot( lq1.sub( lp10 )) > 0 ) {
+                  lp10 = lp10.mNext; if ( lp10 == null ) lp10 = area.first();
+                }
                 //    lp20         lq2
                 //    lp_prev .... lp <---> ... <--
                 // (1)                    lp_next
@@ -1015,10 +1026,7 @@ public class Scrap
                 lq1.mPrev     = lp_prev;
                 lq1.mNext  = lp10;          // (5)
                 lp10.mPrev = lq1;
-                if ( cnt1 < cnt2 ) {
-                  TDLog.v("AREA reset First " + lp10.x + " " + lp10.y + " Last " + lq1.x + " " + lq1.y);
-                  area.resetFirstLast( lp10, lq1 );
-                }
+                area.resetFirstLast( lp10, lq1 );
               }
               // TODO update mSelection
               area.recomputeSize();

@@ -950,33 +950,69 @@ public class DrawingPointLinePath extends DrawingPath
     retracePath();
   }
 
-  /** @return true if the area is counterclockwise
+  // /** @return true if the line path is counterclockwise - UNUSED
+  //  */
+  // boolean isCCW()
+  // {
+  //   if ( mSize < 3 ) return false;
+  //   double angle = 0;
+  //   LinePoint lp1 = mLast;
+  //   LinePoint lp2 = mFirst;
+  //   LinePoint lp3 = lp2.mNext;
+  //   Point2D q1 = lp2.sub( lp1 ); 
+  //   while ( lp3 != null ) {
+  //     Point2D q2 = lp3.sub( lp2 );
+  //     double s = q1.cross( q2 );
+  //     double c = q1.dot( q2 );
+  //     angle += Math.atan2( s, c );
+  //     lp2 = lp3;
+  //     q1  = q2;
+  //     lp3 = lp3.mNext;
+  //   }
+  //   TDLog.v("CCW angle " + angle );
+  //   return angle > 0;
+  // }
+
+  /** link firtt and last point, thus closing the chain of line points
+   * @note used to try and continue areas
    */
-  boolean isCCW()
+  void chainFirstLast()
   {
-    if ( mSize < 3 ) return false;
-    float area = 0;
-    LinePoint lp1 = mFirst;
-    LinePoint lp2 = lp1.mNext;
-    for ( LinePoint lp3 = lp2.mNext; lp3 != null; lp3=lp3.mNext ) area += LinePoint.area( lp1, lp2, lp3 );
-    return area < 0;
+    mFirst.mPrev = mLast;
+    mLast.mNext  = mFirst;
   }
 
-  /** reset the first/last line-points
+  /** reset the first/last line-points - unlink first from its prev and last from its next
    * @param lp1   new first point
    * @param lp2   new last point
+   * @note used to try and continue areas
+   *
+   *     ... <--> lp1p <--> lp1 <--> ... ... <--> lp2 <--> lp2n <--> ...
+   * (1)     <--> lp1p     first <-> ...
+   * (2)                                     <--> last     lp2p <--> ...
    */
   void resetFirstLast( LinePoint lp1, LinePoint lp2 )
   {
-    mFirst.mNext = mLast;
-    mLast.mPrev  = mFirst;
-    // if ( mFirst.mPrev != null ) mFirst.mPrev.mNext = null;
-    // if ( mLast.mNext != null ) mLast.mNext.mPrev = null;
-    mFirst = lp1;
+    mFirst = lp1; // (1)
+    if ( mFirst.mPrev != null ) mFirst.mPrev.mNext = null;
     mFirst.mPrev = null;
-    mLast = lp2;
+    mLast = lp2; // (2)
+    if ( mLast.mNext != null ) mLast.mNext.mPrev = null;
     mLast.mNext = null;
   }
+
+  // /** @return the index of a point in the line - DEBUG
+  //  * @param lp0   line point
+  //  */
+  // int indexOf( LinePoint lp0 )
+  // {
+  //   int n = 0;
+  //   for ( LinePoint lp = mFirst; lp != mLast; lp=lp.mNext ) {
+  //     if ( lp == lp0 ) return n;
+  //     ++ n;
+  //   }
+  //   return n;
+  // }
 
 }
 

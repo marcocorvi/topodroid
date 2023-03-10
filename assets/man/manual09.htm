@@ -128,7 +128,7 @@ The <b>draw</b> mode has four buttons besides the green ones:
 <li><img src="btn_redo.png"  width="36" border="1"> puts the removed item back in the sketch, one at a time. The list of removed items is emptied when you draw something new. Point-wise editing actions may also affect the list of redo.</li>
 <li><img src="btn_tools.png" width="36" border="1"> <a href="page_tools_list.htm">Drawing tool</a> switcher / picker.</li>
 <li><img src="btn_splay_display_mode.png" width="36" border="1"> splay display mode: as segment or a point.</li>
-<li><img src="btn_cont.png"  width="36" border="1"> Line <i>joining</i> or continuing</li>
+<li><img src="btn_cont.png"  width="36" border="1"> Line/area <i>joining</i> or continuing</li>
 </ul><br><p>
 The icon of the <i>tools</i> button reflects the current type of drawing tools: points, lines, or areas.<br><p>
 
@@ -304,6 +304,15 @@ retracing a piece of the line from the start point.<br>
 "Continue" affects the undo-stack, because the continued line can be moved to the top of the stack.
 <br><p>
 
+<h4>Area continuation [T]</h4>
+With area continuation enabled, areas can be "continued" by tracing a line that starts and ends close to the border af the area.
+The shorter between the two pieces of this border is replaced by the newly traced line.<br>
+The area can be enlarged or shrinked, and a concavity can be filled (figure below).
+<br><p> 
+
+<img src="area_concavity.png" width="360" border="1">
+<br><p>
+
 <div style="font-size:90%">
 <h4>Composite actions [T]</h4>
 Composite actions are point-wise long-tap actions.<br>
@@ -348,7 +357,7 @@ The menus are:<br>
 </ul><br><p>
 
 In <i>move</i> mode there are only the three green buttons for the other modes.<br>
-The <i>draw</i> mode has the buttons: <i>undo</i>, <i>redo</i>, <i>tools</i>, and <i>line continuation</i>.<br>
+The <i>draw</i> mode has the buttons: <i>undo</i>, <i>redo</i>, <i>tools</i>, and <i>line/area continuation</i>.<br>
 The <i>erase</i> and <i>edit</i> modes have the usual buttons.<br><p>
 
 The th2 file can contain more than one scrap.

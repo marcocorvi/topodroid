@@ -9,17 +9,18 @@ Error reports verbosity levels:
   Copied strings: ......... non-copyable (1), copyable (2)
 ----------------------------------------------------
 
+1314: ********* DUPLICATE ru STRING pref_cat_sketch IN COMMENT
+Duplicated ru strings: 1
 
 ru strings without default:
-Errors 0, Warnings 13, Total 13
+Errors 0, Warnings 12, Total 12
 
 EN string not-translatable that are translated:
 Errors 0, Warnings 40, Total 40
 
 EN string that are not translated:
-title_fixed_gps_logger string missing
 pref_unit_grid_title string missing
-Errors 2 + 0 + 5, Total 7
+Errors 1 + 7 + 6, Total 15
 
 EN string that are copied:
 pref_cat_cave3d string copied sentence: 3D VIEWER
@@ -33,11 +34,11 @@ Formats check:
 r_dialog () bad format 1
 Errors: 1, Total 1
 
-EN strings 2033 ru strings 2007
-Translated with no-default:  commented 13 - translated 0 
+EN strings 2042 ru strings 2017
+Translated with no-default:  commented 12 - translated 0 
 Translated non-translatable: commented 40 - translated 0 
 Translated comment: 0 
-Non-Translated: commented 5 missing 2 todo 0 
+Non-Translated: commented 6 missing 1 todo 7 
 Copied: copyable 12 possibly copyable 1 non-copyable 4
 Bad formats 1
-TOTAL ERRORS: 8 / 4 [1]
+TOTAL ERRORS: 15 / 4 [1]

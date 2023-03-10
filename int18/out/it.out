@@ -18,7 +18,7 @@ Errors 0, Warnings 40, Total 40
 
 EN string that are not translated:
 bad_station string missing
-Errors 1 + 11 + 5, Total 17
+Errors 1 + 19 + 5, Total 25
 
 EN string that are copied:
 outline string copied word: outline
@@ -32,11 +32,11 @@ Formats check:
 bad_station (1) bad format 
 Errors: 1, Total 1
 
-EN strings 2033 it strings 2011
+EN strings 2042 it strings 2020
 Translated with no-default:  commented 12 - translated 0 
 Translated non-translatable: commented 40 - translated 0 
 Translated comment: 0 
-Non-Translated: commented 5 missing 1 todo 11 
+Non-Translated: commented 5 missing 1 todo 19 
 Copied: copyable 35 possibly copyable 5 non-copyable 0
 Bad formats 1
-TOTAL ERRORS: 18 / 0 [5]
+TOTAL ERRORS: 26 / 0 [5]
