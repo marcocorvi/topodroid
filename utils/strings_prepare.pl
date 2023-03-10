@@ -2,7 +2,7 @@
 #
 # prepares translation string file according to english file creating 
 # an updated or new version in case xx-strings_file doesn't exist
-# usage: strings_prepare.pl <en-strings_file> <xx-strings_file> <updated_xx_strings_file_output>
+# usage: strings_prepare.pl ORIGINAL_FILE TWO_CHAR_LANGUAGE_CODE
 #
 # --------------------------------------------------------
 #  Copyright This software is distributed under GPL-3.0 or later
@@ -20,6 +20,7 @@ use constant {
 };
 
 use XML::LibXML;
+use File::Basename;
 
 # For debbuging
 use Data::Dumper;
@@ -32,14 +33,19 @@ use topostrings;
 
 my $debug = DEBUG;
 
-if (@ARGV != 3) {
+if (@ARGV != 2) {
   die "\nUsage:
-  $0 EN_ORIGINAL_FILE XX_TRANSLATED_FILE_TO_BE_UPDATED NEW_XX_FILE\n\n";
+  $0 ORIGINAL_FILE TWO_CHAR_LANGUAGE_CODE\n\n";
 }
 
 my $en_filename = $ARGV[0];
-my $xx_filename = $ARGV[1];
-my $new_filename = $ARGV[2];
+my $language = $ARGV[1];
+my $suffix = '.xml';
+my $filename;
+my $path;
+($filename, $path, $suffix) = fileparse($en_filename);
+my $xx_filename = $path . '../../int18/values-' . $language . '/' . $filename . $suffix;
+my $new_filename = $xx_filename;
 my %xx_names;
 my %en_names;
 
