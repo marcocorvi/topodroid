@@ -1001,18 +1001,18 @@ public class DrawingPointLinePath extends DrawingPath
     mLast.mNext = null;
   }
 
-  // /** @return the index of a point in the line - DEBUG
-  //  * @param lp0   line point
-  //  */
-  // int indexOf( LinePoint lp0 )
-  // {
-  //   int n = 0;
-  //   for ( LinePoint lp = mFirst; lp != mLast; lp=lp.mNext ) {
-  //     if ( lp == lp0 ) return n;
-  //     ++ n;
-  //   }
-  //   return n;
-  // }
+  /** @return the index of a point in the line - DEBUG
+   * @param lp0   line point
+   */
+  int indexOf( LinePoint lp0 )
+  {
+    int n = 0;
+    for ( LinePoint lp = mFirst; lp != mLast; lp=lp.mNext ) {
+      if ( lp == lp0 ) return n;
+      ++ n;
+    }
+    return n;
+  }
 
 }
 

@@ -1096,7 +1096,7 @@ public class TDPrefKey
     "DISTOX_LINE_SEGMENT",         // minimum distance between consecutive points on a line
     "DISTOX_ARROW_LENGTH",    // 3 // length of the tick at the first line-point (when applicable)
     "DISTOX_AUTO_SECTION_PT",      // whether to add section point when tracing a section line
-    "DISTOX_LINE_CONTINUE",   // 6 // default line continuation set
+    // "DISTOX_LINE_CONTINUE",   // 6 // default line continuation set
     "DISTOX_AREA_BORDER",          // area border visibility
     // "DISTOX_REDUCE_ANGLE",         // "rock" reducing lines: maximal angle
     null
@@ -1109,7 +1109,7 @@ public class TDPrefKey
     R.string.pref_segment_title,
     R.string.pref_arrow_length_title,
     R.string.pref_auto_section_pt_title,
-    R.string.pref_linecontinue_title,
+    // R.string.pref_linecontinue_title,
     R.string.pref_area_border_title,
     // R.string.pref_reduce_angle_title, 
     -1
@@ -1122,7 +1122,7 @@ public class TDPrefKey
     R.string.pref_segment_message,
     R.string.pref_arrow_length_message,
     R.string.pref_auto_section_pt_summary,
-    R.string.pref_linecontinue_summary,
+    // R.string.pref_linecontinue_summary,
     R.string.pref_area_border_summary,
     // R.string.pref_reduce_angle_summary,
     -1
@@ -1135,7 +1135,7 @@ public class TDPrefKey
     TDString.TEN,
     "8",
     TRUE,
-    TDString.ZERO,
+    // TDString.ZERO,
     TRUE,
     // "45",
     null
@@ -1217,7 +1217,7 @@ public class TDPrefKey
     "DISTOX_LINE_SEGMENT",    // 5
     "DISTOX_ARROW_LENGTH",          // length of the tick at the first line-point (when applicable)
     "DISTOX_AUTO_SECTION_PT", // 7  // whether to add section point when tracing a section line
-    "DISTOX_LINE_CONTINUE",         // default line continuation set
+    // "DISTOX_LINE_CONTINUE",         // default line continuation set
     "DISTOX_AREA_BORDER",           // area border visibility
     // "DISTOX_REDUCE_ANGLE",    // 10 // "rock" reducing lines: maximal angle
     null
@@ -1232,7 +1232,7 @@ public class TDPrefKey
     R.string.pref_segment_title,
     R.string.pref_arrow_length_title,
     R.string.pref_auto_section_pt_title,
-    R.string.pref_linecontinue_title,
+    // R.string.pref_linecontinue_title,
     R.string.pref_area_border_title,
     // R.string.pref_reduce_angle_title,
     // R.string.pref_lineacc_title,
@@ -1249,7 +1249,7 @@ public class TDPrefKey
     R.string.pref_segment_message,
     R.string.pref_arrow_length_message,
     R.string.pref_auto_section_pt_summary,
-    R.string.pref_linecontinue_summary,
+    // R.string.pref_linecontinue_summary,
     R.string.pref_area_border_summary,
     // R.string.pref_reduce_angle_summary,
     // R.string.pref_lineacc_summary,  
@@ -1266,7 +1266,7 @@ public class TDPrefKey
     TDString.TEN,
     "8",
     FALSE,
-    TDString.ZERO,
+    // TDString.ZERO,
     TRUE,
     // "45",
     // "1.0",

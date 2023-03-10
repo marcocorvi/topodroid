@@ -128,7 +128,7 @@ The <b>draw</b> mode has four buttons besides the green ones:
 <li><img src="btn_redo.png"  width="36" border="1"> puts the removed item back in the sketch, one at a time. The list of removed items is emptied when you draw something new. Point-wise editing actions may also affect the list of redo.</li>
 <li><img src="btn_tools.png" width="36" border="1"> <a href="page_tools_list.htm">Drawing tool</a> switcher / picker.</li>
 <li><img src="btn_splay_display_mode.png" width="36" border="1"> splay display mode: as segment or a point.</li>
-<li><img src="btn_cont.png"  width="36" border="1"> Line/area <i>joining</i> or continuing</li>
+<li><img src="btn_cont.png"  width="36" border="1"> Line/area <i>retrace</i></li>
 </ul><br><p>
 The icon of the <i>tools</i> button reflects the current type of drawing tools: points, lines, or areas.<br><p>
 
@@ -218,7 +218,6 @@ All exports generate two files, one for plan the other for profile, except <i>cS
     <li><i>Point spacing</i>: distance between line points in normal style [5 px] </li>
     <li>Section line <i>direction tick length</i>: size of the section line tick [5 px]</li>
     <li><i>Section points</i>: whether to add a "section" point automatically for "section" lines [yes]</li>
-    <li><i>Default join mode</i>: none, start, end, both, "continue" [none]</li>
     <li>Area <i>border visibility</i> [on]</li>
     </ul>
   </li>
@@ -284,28 +283,20 @@ TopoDroid has five line styles. With the normal style [default] the lines are dr
 With the fifth line style the traced lines are simplified using a point-weeding algorithm.
 If you export the drawing in dxf with DXF version 6 do not use splines because they get exported as polylines.<br><p>
 
-<h4>Line joining</h4>
-The <i>join</i> button is a multi-state button.
-Line joining can be done only with other lines of the scraps.
-The lines that are joined must belong to the same group. If you need to "join" two points of lines of different groups
-you should move one point to coincide with the other.<br>
+<h4>Retracing</h4>
+The <i>retrace</i> button is a multi-state button.
 <ul>
-<li><img src="btn_line_join_off.png" width="36" border="1"> <i>off</i>: the lines of the current type cannot be joined</li>
-<li><img src="btn_line_join_none.png" width="36" border="1"> <i>no</i>: the current type line will not be joined</li>
-<li><img src="btn_line_join_start.png" width="36" border="1"> <i>start</i>: the current type line will be joined to a line if its start-point is close to one of that line endpoints</li>
-<li><img src="btn_line_join_end.png" width="36" border="1"> <i>end</i>: the current type line will be joined to a line by its end-point</li>
-<li><img src="btn_line_join_both.png" width="36" border="1"> <i>both</i>: the current type line will be joined to a line by both its start and its end-point</li>
-<li><img src="btn_line_join_continue.png" width="36" border="1"> <i>continue</i>: the current type line will continue a line if its start-point is close enough to an endpoint of that line</li>
+<li><img src="btn_line_join_off.png" width="36" border="1"> retracing is disabled</li>
+<li><img src="btn_line_join_none.png" width="36" border="1"> retracing is not active</li>
+<li><img src="btn_line_join_continue.png" width="36" border="1"> retracing is active</li>
 </ul>
 <br>
 
-When the joining is set to "continue" the last line that has been drawn can be <i>modified</i> as in Adobe Illustrator, ie,
-retracing a piece of the line from the start point.<br>
-"Continue" affects the undo-stack, because the continued line can be moved to the top of the stack.
+To retrace a portion of a line, trace a line that starts and or ends close to the line.
+Lines of type "section" cannot be retraced.
 <br><p>
 
-<h4>Area continuation [T]</h4>
-With area continuation enabled, areas can be "continued" by tracing a line that starts and ends close to the border af the area.
+Areas can be "retraced" by tracing a line that starts and ends close to the border af the area.
 The shorter between the two pieces of this border is replaced by the newly traced line.<br>
 The area can be enlarged or shrinked, and a concavity can be filled (figure below).
 <br><p> 

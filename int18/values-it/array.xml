@@ -38,13 +38,13 @@
      <item name="tab">tab</item>
   </string-array>
 
-  <string-array name="lineContinue">
+  <!-- UNUSED string-array name="lineContinue">
      <item name="none">nessuno</item>
      <item name="start">collega al punto iniziale</item>
      <item name="end">collega al punto finale</item>
      <item name="both">collega agli estremi</item>
      <item name="continue">continuazione</item>
-  </string-array>
+  </string-array -->
   <string-array name="unitGrid">
      <item name="meter">metri</item>
      <item name="yard">iarde</item>

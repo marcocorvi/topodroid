@@ -40,13 +40,13 @@
      <item name="tab">табуляция</item>
   </string-array>
 
-  <string-array name="lineContinue">
+  <!-- UNUSED string-array name="lineContinue">
      <item name="none">не присоединять</item>
      <item name="start">присоединить к начальной точке</item>
      <item name="end">присоединить к конечной точке</item>
      <item name="both">присоединить к началу или концу</item>
      <item name="continue">продолжить</item>
-  </string-array>
+  </string-array -->
   <string-array name="unitGrid">
      <item name="meter">метры</item>
      <item name="yard">ярды</item>

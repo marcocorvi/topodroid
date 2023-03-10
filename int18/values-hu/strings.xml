@@ -511,11 +511,11 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="popup_select_shot">Mérések kijelölése</string>
     <string name="popup_select_station">Fixpontok kijelölése</string>
 
-    <string name="popup_cont_none">Nincs</string>
-    <string name="popup_cont_start">Kezdőpont</string>
-    <string name="popup_cont_end">Végpont</string>
-    <string name="popup_cont_both">Mindkét pont</string>
-    <string name="popup_cont_continue">Folytat</string>
+    <!-- UNUSED string name="popup_cont_none">Nincs</string -->
+    <!-- UNUSED string name="popup_cont_start">Kezdőpont</string -->
+    <!-- UNUSED string name="popup_cont_end">Végpont</string -->
+    <!-- UNUSED string name="popup_cont_both">Mindkét pont</string -->
+    <!-- UNUSED string name="popup_cont_continue">Folytat</string -->
 
     <!-- UNUSED string name="connection_error">Kapcsolódási hiba</string -->
     <!-- UNUSED string name="connecting">Kapcsolódás &#8230;</string -->
@@ -1630,8 +1630,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_segment_message">Minimális távolság egy vonalon lévő pontok között</string>
   <string name="pref_linestyle_title">Vonalstílus</string>
   <string name="pref_linestyle_summary">Vonal rajzstílusa</string>
-  <string name="pref_linecontinue_title">Vonal folytatás</string>
-  <string name="pref_linecontinue_summary">Vonal alapértelmezett folytatési mód</string>
+  <!-- UNUSED string name="pref_linecontinue_title">Vonal folytatás</string -->
+  <!-- UNUSED string name="pref_linecontinue_summary">Vonal alapértelmezett folytatési mód</string -->
   <string name="pref_lineacc_title">Interpoláció pontossága</string>
   <string name="pref_lineacc_summary">Négyzetes Bezier interpoláció pontossága</string>
   <string name="pref_linecorner_title">Bezier küszöb</string>

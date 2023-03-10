@@ -904,11 +904,25 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
    * @param type area type
    * @param zoom canvas zoom (the larger the zoom, the bigger the sketch on the display)
    * @param size ???
-   * @return true if the area ap1 has been added to the sketch
+   * @return true if the area ap1 has been added to an area in the sketch
    */
   boolean getAreaToContinue( DrawingAreaPath ap, LinePoint lp1, LinePoint lp2,  int type, float zoom, float size ) 
   {
     return commandManager.getAreaToContinue( ap, lp1, lp2, type, zoom, size );
+  }
+
+  /** try to continue a line
+   * @param lp   line path
+   * @param lp1  first point
+   * @param lp2  last point
+   * @param type line type
+   * @param zoom canvas zoom (the larger the zoom, the bigger the sketch on the display)
+   * @param size ???
+   * @return true if the line lp1 has been added to a line in the sketch
+   */
+  boolean getLineToContinue( DrawingLinePath lp, LinePoint lp1, LinePoint lp2,  int type, float zoom, float size ) 
+  {
+    return commandManager.getLineToContinue( lp, lp1, lp2, type, zoom, size );
   }
 
   /** get the line to continue

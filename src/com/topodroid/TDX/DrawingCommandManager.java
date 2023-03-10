@@ -1346,6 +1346,20 @@ public class DrawingCommandManager
     return mCurrentScrap.getAreaToContinue( ap, lp1, lp2, type, zoom, size );
   }
 
+  /** try to continue a line
+   * @param lp   line path
+   * @param lp1  first point
+   * @param lp2  last point
+   * @param type line type
+   * @param zoom canvas zoom (the larger the zoom, the bigger the sketch on the display)
+   * @param size ???
+   * @return true if the line lp1 has been added to a line in the sketch
+   */
+  boolean getLineToContinue( DrawingLinePath lp, LinePoint lp1, LinePoint lp2,  int type, float zoom, float size ) 
+  {
+    return mCurrentScrap.getLineToContinue( lp, lp1, lp2, type, zoom, size );
+  }
+
   /** get the line to continue
    * @param lp   point
    * @param type line type

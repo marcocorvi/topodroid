@@ -47,11 +47,12 @@ class Drawing
     R.string.popup_select_station
   };
 
-  static final int[] mJoinModes = {
-    R.string.popup_cont_none,
-    R.string.popup_cont_start,
-    R.string.popup_cont_end,
-    R.string.popup_cont_both,
-    R.string.popup_cont_continue
-  };
+  // 2023-03-10 DROPPED
+  // static final int[] mJoinModes = {
+  //   R.string.popup_cont_none,
+  //   R.string.popup_cont_start,
+  //   R.string.popup_cont_end,
+  //   R.string.popup_cont_both,
+  //   R.string.popup_cont_continue
+  // };
 }

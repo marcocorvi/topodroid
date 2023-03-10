@@ -508,11 +508,11 @@
     <string name="popup_select_shot">Выбрать замеры</string>
     <string name="popup_select_station">Выбрать пикеты</string>
 
-    <string name="popup_cont_none">Не соединять</string>
-    <string name="popup_cont_start">Начальная точка</string>
-    <string name="popup_cont_end">Конечная точка</string>
-    <string name="popup_cont_both">Обе точки</string>
-    <string name="popup_cont_continue">Продолжить</string>
+    <!-- UNUSED string name="popup_cont_none">Не соединять</string -->
+    <!-- UNUSED string name="popup_cont_start">Начальная точка</string -->
+    <!-- UNUSED string name="popup_cont_end">Конечная точка</string -->
+    <!-- UNUSED string name="popup_cont_both">Обе точки</string -->
+    <!-- UNUSED string name="popup_cont_continue">Продолжить</string -->
 
     <!-- UNUSED string name="connection_error">Ошибка соединения</string -->
     <!-- UNUSED string name="connecting">Подключение к &#8230;</string -->
@@ -1621,8 +1621,8 @@
   <string name="pref_segment_message">Минимальное расстояние между точками в линии</string>
   <string name="pref_linestyle_title">Стиль рисования линий</string>
   <string name="pref_linestyle_summary">Способ отрисовки линий</string>
-  <string name="pref_linecontinue_title">Продолжить линию</string>
-  <string name="pref_linecontinue_summary">Способ продолжения рисования линий по-умолчанию</string>
+  <!-- UNUSED string name="pref_linecontinue_title">Продолжить линию</string -->
+  <!-- UNUSED string name="pref_linecontinue_summary">Способ продолжения рисования линий по-умолчанию</string -->
   <string name="pref_lineacc_title">Точность кривых Безье</string>
   <string name="pref_lineacc_summary">Точность кубической интерполяции при отрисовке кривых Безье</string>
   <string name="pref_linecorner_title">Угол Безье</string>

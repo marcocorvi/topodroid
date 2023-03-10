@@ -892,6 +892,388 @@ public class Scrap
     }
   }
 
+  // UNUSED
+  // private boolean findClosePoints( DrawingPointLinePath path, LinePoint lq1, LinePoint lq2, LinePoint lp10, LinePoint lp20, float delta )
+  // {
+  //   lp10 = null;
+  //   lp20 = null;
+  //   TDLog.v("TRY line with size " + path.size() );
+  //   for ( LinePoint lp = path.first(); lp != null; lp = lp.mNext ) {
+  //     if ( lp10 == null ) {
+  //       float d1min;
+  //       if ( (d1min = lp.distance( lq1 )) < delta ) {
+  //         lp10 = lp;
+  //         for ( LinePoint lpp = lp.mNext; lpp != null; lpp=lpp.mNext ) {
+  //           float d = lpp.distance( lq1 );
+  //           if ( d > d1min ) break;
+  //           lp10 = lpp;
+  //           d1min = d;
+  //         }
+  //         if ( lp20 != null ) break;
+  //       }
+  //     }
+  //     if ( lp20 == null ) {
+  //       float d2min;
+  //       if ( (d2min = lp.distance( lq2 )) < delta ) {
+  //         lp20 = lp;
+  //         for ( LinePoint lpp = lp.mNext; lpp != null; lpp=lpp.mNext ) {
+  //           float d = lpp.distance( lq2 );
+  //           if ( d > d2min ) break;
+  //           lp20 = lpp;
+  //           d2min = d;
+  //         }
+  //         if ( lp10 != null ) break;
+  //       }
+  //     }
+  //   }
+  //   return ( lp10 != null && lp20 != null );
+  // }
+
+  private LinePoint moveBack1( LinePoint lp, Point2D q, LinePoint lq, float delta )
+  {
+    for ( ; lp != null; lp=lp.mPrev ) {
+      Point2D p = lq.sub( lp );
+      if ( q.dot( p ) > 0 || p.length() > delta ) return lp;
+    }
+    return null;
+  }
+
+  private LinePoint moveForw1( LinePoint lp, Point2D q, LinePoint lq, float delta )
+  {
+    for ( ; lp != null; lp=lp.mNext ) {
+      Point2D p = lq.sub( lp );
+      if ( q.dot( p ) > 0 || p.length() > delta ) return lp;
+    }
+    return null;
+  }
+
+  private LinePoint moveBack2( LinePoint lp, Point2D q, LinePoint lq, float delta )
+  {
+    for ( ; lp != null; lp=lp.mPrev ) {
+      Point2D p = lq.sub( lp );
+      if ( q.dot( p ) < 0 || p.length() > delta ) return lp;
+    }
+    return null;
+  }
+
+  private LinePoint moveForw2( LinePoint lp, Point2D q, LinePoint lq, float delta )
+  {
+    for ( ; lp != null; lp=lp.mNext ) {
+      Point2D p = lq.sub( lp );
+      if ( q.dot( p ) < 0 || p.length() > delta ) return lp;
+    }
+    return null;
+  }
+
+  /** try to continue a line
+   * @param ap   line path
+   * @param lq1  first point
+   * @param lq2  last point
+   * @param type line type
+   * @param zoom canvas zoom (the larger the zoom, the bigger the sketch on the display)
+   * @param size ???
+   * @return true if the line lp1 has been added to a line in the sketch
+   */
+  boolean getLineToContinue( DrawingLinePath ap, LinePoint lq1, LinePoint lq2,  int type, float zoom, float size ) 
+  {
+    float delta = 2 * size / zoom;
+    TDLog.v("get line to continue, type " + type );
+    synchronized( TDPath.mCommandsLock ) {
+      for ( ICanvasCommand cmd : mCurrentStack ) {
+        if ( cmd.commandType() != 0 ) continue; // FIXME EraseCommand
+        final DrawingPath path = (DrawingPath)cmd;
+        if ( path instanceof DrawingLinePath ) {
+          DrawingLinePath line = (DrawingLinePath)path;
+          if ( line.mLineType == type ) {
+            int idx10 = 0;
+            int idx20 = 0;
+            LinePoint lp10 = null;
+            LinePoint lp20 = null;
+            TDLog.v("TRY line with size " + line.size() );
+            for ( LinePoint lp = line.first(); lp != null; lp = lp.mNext ) {
+              if ( lp10 == null ) {
+                ++ idx10;
+                float d1min;
+                if ( (d1min = lp.distance( lq1 )) < delta ) {
+                  lp10 = lp;
+                  for ( LinePoint lpp = lp.mNext; lpp != null; lpp=lpp.mNext ) {
+                    float d = lpp.distance( lq1 );
+                    if ( d > d1min ) break;
+                    lp10 = lpp;
+                    d1min = d;
+                    ++ idx10;
+                  }
+                  if ( lp20 != null ) break;
+                }
+              }
+              if ( lp20 == null ) {
+                ++ idx20;
+                float d2min;
+                if ( (d2min = lp.distance( lq2 )) < delta ) {
+                  lp20 = lp;
+                  for ( LinePoint lpp = lp.mNext; lpp != null; lpp=lpp.mNext ) {
+                    float d = lpp.distance( lq2 );
+                    if ( d > d2min ) break;
+                    lp20 = lpp;
+                    d2min = d;
+                    ++ idx20;
+                  }
+                  if ( lp10 != null ) break;
+                }
+              }
+            }
+            if ( lp10 != null && lp20 != null ) {
+              TDLog.v("FOUND P1 " + line.indexOf(lp10) + " P2 " + line.indexOf(lp20) );
+              lq1 = resetFirst( lq1, lq2, lp10 );
+              lq2 = resetLast( lq2, lq1, lp20 );
+              if ( lq1 != null && lq1.mNext != null && lq2 != null && lq2.mPrev != null ) {
+                TDLog.v("Q1 Q2 ok");
+                Point2D q1 = new Point2D( lq1.mNext.x - lq1.x, lq1.mNext.y - lq1.y );
+                Point2D q2 = new Point2D( lq2.x - lq2.mPrev.x, lq2.y - lq2.mPrev.y );
+                Point2D p1 = directionNextAt( lp10 );
+                Point2D p2 = directionPrevAt( lp20 );
+                if ( p1 != null && p2 != null ) {
+                  if ( idx10 < idx20 ) { // replace frward
+                    TDLog.v("P1 and P2 ok FORWARD " + idx10 + " " + idx20 );
+                    // while ( lp10 != null && q1.dot( lq1.sub( lp10 ) ) < 0 ) lp10 = lp10.mPrev;
+                    lp10 = moveBack1( lp10, q1, lq1, delta );
+                    if ( lp10 != null ) {
+                      while ( lp20 != null && q2.dot( lq2.sub( lp20 ) ) > 0 ) lp20 = lp20.mNext;
+                      lp20 = moveForw2( lp20, q2, lq2, delta );
+                      if ( lp20 != null ) {
+                        TDLog.v("P1 and P2 still ok ");
+                        mSelection.removePath( line );
+                        // if ( lp10.mNext != null ) lp10.mNext.mPrev = null;
+                        // if ( lq1.mPrev != null ) lq1.mPrev.mNext = null;
+                        // if ( lp20.mPrev != null ) lp20.mPrev.mNext = null;
+                        // if ( lq2.mNext != null ) lq2.mNext.mPrev = null;
+                        lp10.mNext = lq1;
+                        lq1.mPrev  = lp10;
+                        lp20.mPrev = lq2;
+                        lq2.mNext  = lp20;
+                        // line.resetFirstLast( line.first(), line.last() );
+                        line.recomputeSize();
+                        line.retracePath();
+                        mSelection.insertPath( line );
+                        return true;
+                      } else {
+                        TDLog.v("P1 ok, P2 null");
+                      }
+                    } else {
+                      TDLog.v("P1 null");
+                    }
+                  } else { // replace backward
+                    TDLog.v("P1 and P2 ok BACKWARD " + idx10 + " " + idx20 );
+                    // while ( lp10 != null && q1.dot( lq1.sub( lp10 ) ) < 0 ) lp10 = lp10.mNext;
+                    lp10 = moveForw1( lp10, q1, lq1, delta );
+                    if ( lp10 != null ) {
+                      // while ( lp20 != null && q2.dot( lq2.sub( lp20 ) ) > 0 ) lp20 = lp20.mPrev;
+                      lp20 = moveBack2( lp20, q2, lq2, delta );
+                      if ( lp20 != null ) {
+                        TDLog.v("P1 and P2 still ok ");
+                        mSelection.removePath( line );
+                        //     lp20 ...  lq2 <--> lq2p ... lq1n <--> lq1 ... lp10
+                        // (1)                    lp_n
+                        // (2) lp_p <--> lp
+                        // (3)           lp_p ... lp   ...
+                        // ...
+                        //                                 lp_p      lp_n
+                        // (4)                             lp_p <--> lq1
+                        // (5)                                       lq1 <--> lp10
+                        LinePoint lp_prev = lp20;
+                        LinePoint lp_next = null;
+                        for ( LinePoint lp = lq2; lp != lq1; lp = lp_next ) {
+                          lp_next = lp.mPrev; // (1)
+                          lp_prev.mNext = lp; // (2)
+                          lp.mPrev = lp_prev;
+                          lp_prev  = lp;      // (3)
+                        }
+                        lp_prev.mNext = lq1;     // (4)
+                        lq1.mPrev     = lp_prev;
+                        lq1.mNext  = lp10;       // (5)
+                        lp10.mPrev = lq1;
+                        // line.resetFirstLast( line.first(), line.last() );
+                        line.recomputeSize();
+                        line.retracePath();
+                        mSelection.insertPath( line );
+                        return true;
+                      } else {
+                        TDLog.v("P1 ok, P2 null");
+                      }
+                    } else {
+                      TDLog.v("P1 null");
+                    }
+                  }
+                }
+              }
+            } else if ( lp10 != null ) {
+              TDLog.v("FOUND P1 " + line.indexOf(lp10) );
+              lq1 = resetFirst( lq1, lq2, lp10 );
+              if ( lq1 != null && lq1.mNext != null ) {
+                TDLog.v("Q1 ok ");
+                Point2D q1 = new Point2D( lq1.mNext.x - lq1.x, lq1.mNext.y - lq1.y );
+                Point2D p1 = directionNextAt( lp10 );
+                if ( p1 != null ) {
+                  if ( q1.dot( p1 ) > 0 ) { // replace from P1 forward, direct Q-line
+                    TDLog.v("P1 ok : Q1.P1 " +  q1.dot( p1 ) + " FORWARD " );
+                    // while ( lp10 != null && q1.dot( lq1.sub( lp10 ) ) < 0 ) lp10 = lp10.mPrev;
+                    lp10 = moveBack1( lp10, q1, lq1, delta );
+                    if ( lp10 != null ) {
+                      TDLog.v("pos P1 stil lok");
+                      mSelection.removePath( line );
+                      // if ( lp10.mNext != null ) lp10.mNext.mPrev = null;
+                      // if ( lq1.mPrev != null ) lq1.mPrev.mNext = null;
+                      lp10.mNext = lq1;
+                      lq1.mPrev  = lp10;
+                      line.resetFirstLast( line.first(), ap.last() );
+                      line.recomputeSize();
+                      line.retracePath();
+                      mSelection.insertPath( line );
+                      return true;
+                    } else {
+                      TDLog.v("P1 null");
+                    }
+                  } else { // replace from P1 backward reversing Q-line
+                    TDLog.v("P1 ok : Q1.P1 " +  q1.dot( p1 ) + " BACKWARD " );
+                    // while ( lp10 != null && q1.dot( lq1.sub( lp10 ) ) < 0 ) lp10 = lp10.mNext;
+                    lp10 = moveForw1( lp10, q1, lq1, delta );
+                    if ( lp10 != null ) {
+                      TDLog.v("neg P1 stil lok");
+                      mSelection.removePath( line );
+                      //             lq1n <--> lq1 ... lp10
+                      //                               lp_n
+                      // (1)         lp_p      lp
+                      // (2)                   lp <--> lp_n
+                      // (3)         lp_p <--  lp
+                      // (4)         lp        lp_n
+                      LinePoint lp_prev = null;
+                      LinePoint lp_next = lp10;
+                      for ( LinePoint lp = lq1; lp != null; lp = lp_prev ) {
+                        lp_prev = lp.mNext; // (1)
+                        lp_next.mPrev = lp; // (2)
+                        lp.mNext = lp_next;
+                        lp.mPrev = lp_prev; // (3)
+                        lp_next  = lp;      // (4)
+                      }
+                      line.resetFirstLast( ap.last(), line.last() );
+                      line.recomputeSize();
+                      line.retracePath();
+                      mSelection.insertPath( line );
+                      return true;
+                    } else {
+                      TDLog.v("P1 null");
+                    }
+                  }
+                }
+              }
+            } else if ( lp20 != null ) {
+              TDLog.v("FOUND P2 " + line.indexOf(lp20) );
+              lq2 = resetLast( lq2, lq1, lp20 );
+              if ( lq2 != null && lq2.mPrev != null ) {
+                TDLog.v("Q1 ok ");
+                Point2D q2 = new Point2D( lq2.x - lq2.mPrev.x, lq2.y - lq2.mPrev.y );
+                Point2D p2 = directionPrevAt( lp20 );
+                if ( p2 != null ) {
+                  if ( q2.dot( p2 ) > 0 ) { // replace from P2 backward, direct Q-line
+                    TDLog.v("P2 ok : Q2.P2  " + q2.dot( p2 ) + " moving P2 forward" );
+                    // while ( lp20 != null && q2.dot( lq2.sub( lp20 ) ) > 0 ) lp20 = lp20.mNext;
+                    lp20 = moveForw2( lp20, q2, lq2, delta );
+                    if ( lp20 != null ) {
+                      TDLog.v("pos P2 stil lok");
+                      mSelection.removePath( line );
+                      // if ( lp20.mPrev != null ) lp20.mPrev.mNext = null;
+                      // if ( lq2.mNext != null ) lq2.mNext.mPrev = null;
+                      lp20.mPrev = lq2;
+                      lq2.mNext  = lp20;
+                      line.resetFirstLast( ap.first(), line.last() );
+                      line.recomputeSize();
+                      line.retracePath();
+                      mSelection.insertPath( line );
+                      return true;
+                    } else {
+                      TDLog.v("P2 null");
+                    }
+                  } else { // replace from P2 forward reversing Q-line
+                    TDLog.v("P2 ok : Q2.P2  " + q2.dot( p2 ) + " moving P2 backward" );
+                    // while ( lp20 != null && q2.dot( lq2.sub( lp20 ) ) > 0 ) lp20 = lp20.mPrev;
+                    lp20 = moveBack2( lp20, q2, lq2, delta );
+                    if ( lp20 != null ) {
+                      TDLog.v("neg P2 stil lok");
+                      mSelection.removePath( line );
+                      //     lp20 .... lq2 <--> lq2p ...
+                      //     lp_p      lp
+                      // (1)                    lp_n
+                      // (2) lp_p <--> lp       lp_n
+                      // (3)           lp -->   lp_n
+                      // (4)           lp_p     lp
+                      LinePoint lp_prev = lp20;
+                      LinePoint lp_next = null;
+                      for ( LinePoint lp = lq2; lp != null; lp = lp_next ) {
+                        lp_next = lp.mPrev; // (1)
+                        lp_prev.mNext = lp; // (2)
+                        lp.mPrev = lp_prev;
+                        lp.mNext = lp_next; // (3)
+                        lp_prev  = lp;      // (4)
+                      }
+                      line.resetFirstLast( line.first(), ap.first() );
+                      line.recomputeSize();
+                      line.retracePath();
+                      mSelection.insertPath( line );
+                      return true;
+                    } else {
+                      TDLog.v("P2 null");
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  private Point2D directionPrevAt( LinePoint lp )
+  {
+    LinePoint lpp = lp.mPrev;
+    if ( lpp != null ) return new Point2D( lp.x - lpp.x, lp.y - lpp.y );
+    LinePoint lpn = lp.mNext;
+    if ( lpn != null ) return new Point2D( lpn.x - lp.x, lpn.y - lp.y );
+    return null;
+  }
+
+  private Point2D directionNextAt( LinePoint lp )
+  {
+    LinePoint lpn = lp.mNext;
+    if ( lpn != null ) return new Point2D( lpn.x - lp.x, lpn.y - lp.y );
+    LinePoint lpp = lp.mPrev;
+    if ( lpp != null ) return new Point2D( lp.x - lpp.x, lp.y - lpp.y );
+    return null;
+  }
+
+
+  private LinePoint resetFirst( LinePoint lq1, LinePoint lq2, LinePoint lp10 )
+  {
+    LinePoint lq1n = lq1.mNext;
+    Point2D q1 = new Point2D( lq1.x - lq1n.x, lq1.y - lq1n.y );
+    for ( ; lq1 != lq2; lq1=lq1.mNext ) {
+      if ( q1.dot( lp10.sub( lq1 ) ) >= 0 ) break;
+    }
+    return lq1;
+  }
+
+  private LinePoint resetLast( LinePoint lq2, LinePoint lq1, LinePoint lp20 )
+  {
+    LinePoint lq2p = lq2.mPrev;
+    Point2D q2 = new Point2D( lq2.x - lq2p.x, lq2.y - lq2p.y );
+    for ( ; lq2 != lq1; lq2=lq2.mPrev ) {
+      if ( q2.dot( lp20.sub( lq2 ) ) >= 0 ) break;
+    }
+    return lq2;
+  }
+    
+
   /** fine the area to continue
    * @param ap     area path
    * @param lp1    area start point
@@ -915,7 +1297,6 @@ public class Scrap
     synchronized( TDPath.mCommandsLock ) {
       for ( ICanvasCommand cmd : mCurrentStack ) {
         if ( cmd.commandType() != 0 ) continue; // FIXME EraseCommand
-
         final DrawingPath path = (DrawingPath)cmd;
         if ( path instanceof DrawingAreaPath ) {
           DrawingAreaPath area = (DrawingAreaPath)path;
@@ -953,16 +1334,18 @@ public class Scrap
               }
             }
             if ( lp10 != null && lp20 != null ) {
-              LinePoint lq1n = lq1.mNext;
-              Point2D q1 = new Point2D( lq1.x - lq1n.x, lq1.y - lq1n.y );
-              LinePoint lq2p = lq2.mPrev;
-              Point2D q2 = new Point2D( lq2.x - lq2p.x, lq2.y - lq2p.y );
-              for ( ; lq1 != lq2; lq1=lq1.mNext ) {
-                if ( q1.dot( lp10.sub( lq1 ) ) >= 0 ) break;
-              }
-              for ( ; lq2 != lq1; lq2=lq2.mPrev ) {
-                if ( q2.dot( lp20.sub( lq2 ) ) >= 0 ) break;
-              }
+              lq1 = resetFirst( lq1, lq2, lp10 );
+              lq2 = resetLast( lq2, lq1, lp20 );
+              // LinePoint lq1n = lq1.mNext;
+              // Point2D q1 = new Point2D( lq1.x - lq1n.x, lq1.y - lq1n.y );
+              // LinePoint lq2p = lq2.mPrev;
+              // Point2D q2 = new Point2D( lq2.x - lq2p.x, lq2.y - lq2p.y );
+              // for ( ; lq1 != lq2; lq1=lq1.mNext ) {
+              //   if ( q1.dot( lp10.sub( lq1 ) ) >= 0 ) break;
+              // }
+              // for ( ; lq2 != lq1; lq2=lq2.mPrev ) {
+              //   if ( q2.dot( lp20.sub( lq2 ) ) >= 0 ) break;
+              // }
 
               mSelection.removePath( area );
               // area.dump( "a0" );
@@ -984,7 +1367,7 @@ public class Scrap
                 while ( p2.dot( lq2.sub( lp20 )) > 0 ) {
                   lp20 = lp20.mNext; 
                 }
-                LinePoint lp10p = lp10.mPrev; if ( lp10p == null ) lp10p = area.last(); 
+                LinePoint lp10p = lp10.mPrev; 
                 Point2D p1 = new Point2D( lp10p.x - lp10.x, lp10p.y - lp10.y );
                 while ( p1.dot( lq1.sub( lp10 )) > 0 ) {
                   lp10 = lp10.mPrev;

@@ -158,8 +158,8 @@ public class DrawingWindow extends ItemDrawer
   private static final int IC_PLAN         =  6;
   private static final int IC_DIAL         =  8;
   private static final int IC_TOOLS_LINE   = 12;
-  private static final int IC_SPLAYS_LINE  = 13;
-  private static final int IC_CONT_NONE    = 14;  // index of continue-no icon
+  private static final int IC_CONT_NONE    = 13;  // index of continue-no icon
+  private static final int IC_SPLAYS_LINE  = 14;
   private static final int IC_PREV         = 15;
   private static final int IC_NEXT         = 16;
   private static final int IC_DELETE_OFF   = 17;
@@ -172,9 +172,10 @@ public class DrawingWindow extends ItemDrawer
   private static final int IC_MENU          = IC_MEDIUM+1;
   private static final int IC_EXTEND        = IC_MEDIUM+2;
   private static final int IC_JOIN_NO       = IC_MEDIUM+3;
-  private static final int IC_CONT_START    = IC_MEDIUM+4;     // index of continue icon
-  private static final int IC_CONT_END      = IC_MEDIUM+5;     // index of continue icon
-  private static final int IC_CONT_BOTH     = IC_MEDIUM+6;     // index of continue icon
+  // // 2023-03-10 DROPPED
+  // private static final int IC_CONT_START    = IC_MEDIUM+4;     // index of continue icon
+  // private static final int IC_CONT_END      = IC_MEDIUM+5;     // index of continue icon
+  // private static final int IC_CONT_BOTH     = IC_MEDIUM+6;     // index of continue icon
   private static final int IC_CONT_CONTINUE = IC_MEDIUM+7;     // index of continue icon
   private static final int IC_ADD           = IC_MEDIUM+8;
   private static final int IC_RANGE_OK      = IC_MEDIUM+9;
@@ -204,8 +205,9 @@ public class DrawingWindow extends ItemDrawer
   private static final int BTN_DIAL   = 8;    // index of mButton1 azimuth button (level > normal)
 
   private static final int BTN_TOOL   = 5;    // index of mButton2 tools
-  private static final int BTN_SPLAYS = 6;    // index of mButton2 splays
-  private static       int BTN_CONT   = 7;    // index of mButton2 continue button (level > normal) // TH2EDIT was final
+  private static       int BTN_CONT   = 6;    // index of mButton2 continue button (level > normal) // TH2EDIT was final
+  private static final int BTN_SPLAYS = 7;    // index of mButton2 splays
+
   private static final int BTN_REMOVE = 5;    // index of mButton3 remove
   private static final int BTN_ATTRIB = 6;    // index of mButton3 attributes
   private static final int BTN_JOIN   = 7;    // index of mButton3 join button
@@ -235,8 +237,8 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_undo,          // 10 DRAW Nr 3+5
                         R.drawable.iz_redo,          // 11
                         R.drawable.iz_tools_line,    // 12
-                        R.drawable.iz_splays_line,  
-                        R.drawable.iz_cont_none,     // 14
+                        R.drawable.iz_cont_none,     // 13
+                        R.drawable.iz_splays_line,   // 14
 
                         R.drawable.iz_back,          // 15 EDIT Nr 3+6
                         R.drawable.iz_forw,
@@ -252,9 +254,9 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_menu,          // 23+1
                         R.drawable.iz_extended,      // 23+2
                         R.drawable.iz_join_no,       // 23+3
-                        R.drawable.iz_cont_start,    // 23+4
-                        R.drawable.iz_cont_end,      // 23+5
-                        R.drawable.iz_cont_both,
+                        -1, // R.drawable.iz_cont_start,    // 23+4 // 2023-03-10 TODO DROP
+                        -1, // R.drawable.iz_cont_end,      // 23+5
+                        -1, // R.drawable.iz_cont_both,
                         R.drawable.iz_cont_continue,
                         R.drawable.iz_plus,           // 23+8
                         R.drawable.iz_range_ok,       // 23+9
@@ -362,8 +364,8 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_undo,          // 9 DRAW Nr 3+4
                         R.drawable.iz_redo,          // 10
                         R.drawable.iz_tools,         // 11
-                        R.drawable.iz_splays_line,
-                        R.drawable.iz_cont_none
+                        R.drawable.iz_cont_none,
+                        R.drawable.iz_splays_line
   };
   private static final int[] help_icons_draw = {
                         R.string.help_draw,
@@ -372,8 +374,8 @@ public class DrawingWindow extends ItemDrawer
                         R.string.help_undo,
                         R.string.help_redo,
                         R.string.help_symbol_plot,
-                        R.string.help_splays, // TODO
-                        R.string.help_continue
+                        R.string.help_continue,
+                        R.string.help_splays
                       };
 
   private static final int[] izons_edit = {
@@ -443,7 +445,7 @@ public class DrawingWindow extends ItemDrawer
   private final static int DISMISS_NONE   = 0;
   private final static int DISMISS_EDIT   = 1;
   private final static int DISMISS_FILTER = 2;
-  private final static int DISMISS_JOIN   = 3;
+  // private final static int DISMISS_JOIN   = 3; // 2023-03-10 DROPPED
   private final static int DISMISS_BT     = 4;
 
   private final static boolean COMPUTE_NO  = false;  // do not compute references
@@ -570,9 +572,10 @@ public class DrawingWindow extends ItemDrawer
   // line join-continue
   private static final int CONT_OFF   = -1; // continue off
   public  static final int CONT_NONE  = 0;  // no continue
-  private static final int CONT_START = 1;  // continue: join to existing line
-  private static final int CONT_END   = 2;  // continue: join to existing line
-  private static final int CONT_BOTH  = 3;  // continue: join to existing line
+  // // 2023-03-10 DROPPED
+  // private static final int CONT_START = 1;  // continue: join to existing line
+  // private static final int CONT_END   = 2;  // continue: join to existing line
+  // private static final int CONT_BOTH  = 3;  // continue: join to existing line
   private static final int CONT_CONTINUE  = 4;  // continue: continue existing line
   // static final private int CONT_MAX   = 5;
 
@@ -678,9 +681,10 @@ public class DrawingWindow extends ItemDrawer
   private BitmapDrawable mBMplan;
   private BitmapDrawable mBMextend;
   private BitmapDrawable mBMcont_none;
-  private BitmapDrawable mBMcont_start;
-  private BitmapDrawable mBMcont_end;
-  private BitmapDrawable mBMcont_both;
+  // // 2023-03-10 DROPPED
+  // private BitmapDrawable mBMcont_start;
+  // private BitmapDrawable mBMcont_end;
+  // private BitmapDrawable mBMcont_both;
   private BitmapDrawable mBMcont_continue;
   private BitmapDrawable mBMcont_off;
   private BitmapDrawable mBMsplays_line;
@@ -1222,6 +1226,7 @@ public class DrawingWindow extends ItemDrawer
       return;
     }
     super.pointSelected( k, update_recent );
+    setButtonContinue();
   }
 
   /** select a line symbol
@@ -1236,13 +1241,14 @@ public class DrawingWindow extends ItemDrawer
       return;
     }
     super.lineSelected( k, update_recent );
-    if ( TDLevel.overNormal ) {
-      if ( BrushManager.getLineGroup( mCurrentLine ) == null ) {
-        setButtonContinueLine( CONT_OFF );
-      } else {
-        setButtonContinueLine( mContinueLine ); // was CONT_NONE
-      }
-    }
+    setButtonContinue();
+    // if ( TDLevel.overNormal ) { // 2023-03-10 DROPPED
+    //   if ( BrushManager.getLineGroup( mCurrentLine ) == null ) {
+    //     setButtonContinueLine( CONT_OFF );
+    //   } else {
+    //     setButtonContinueLine( mContinueLine ); // was CONT_NONE
+    //   }
+    // }
   }
 
   /** select a area symbol
@@ -1253,16 +1259,17 @@ public class DrawingWindow extends ItemDrawer
   public void areaSelected( int k, boolean update_recent )
   {
     super.areaSelected( k, update_recent );
-    if ( TDLevel.overExpert ) {
-      if ( BrushManager.hasArea( mCurrentArea ) ) {
-        setButtonContinueArea( mContinueArea );
-      } else {
-        setButtonContinueArea( CONT_OFF );
-      }
-      mButton2[ BTN_CONT ].setVisibility( View.VISIBLE );
-    } else {
-      mButton2[ BTN_CONT ].setVisibility( View.GONE );
-    }
+    setButtonContinue();
+    // if ( TDLevel.overExpert ) { // 2023-03-10 DROPPED
+    //   if ( BrushManager.hasArea( mCurrentArea ) ) {
+    //     setButtonContinueArea( mContinueArea );
+    //   } else {
+    //     setButtonContinueArea( CONT_OFF );
+    //   }
+    //   mButton2[ BTN_CONT ].setVisibility( View.VISIBLE );
+    // } else {
+    //   mButton2[ BTN_CONT ].setVisibility( View.GONE );
+    // }
   }
 
   /** called by Drawing Shot Dialog to change shot color
@@ -1906,79 +1913,152 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  /** set the button "continue"
-   * @param continue_line    type of line-continuation
-   * @note must be called only if TDLevel.overNormal
-   */
-  private void setButtonContinueLine( int continue_line )
-  {
-    if ( BTN_CONT < mNrButton2 ) {
-      if ( TDLevel.overAdvanced ) {
-        mContinueLine = continue_line;
-        if ( mSymbol == SymbolType.LINE ) {
-          mButton2[ BTN_CONT ].setVisibility( View.VISIBLE );
-          switch ( mContinueLine ) {
-            case CONT_NONE:
-              setButton2( BTN_CONT, mBMcont_none  );
-              break;
-            case CONT_START:
-              setButton2( BTN_CONT, mBMcont_start  );
-              break;
-            case CONT_END:
-              setButton2( BTN_CONT, mBMcont_end   );
-              break;
-            case CONT_BOTH:
-              setButton2( BTN_CONT, mBMcont_both  );
-              break;
-            case CONT_CONTINUE:
-              setButton2( BTN_CONT, mBMcont_continue  );
-              break;
-            case CONT_OFF:
-              setButton2( BTN_CONT, mBMcont_off  );
-          }
-        } else {
-          mButton2[ BTN_CONT ].setVisibility( View.GONE );
-        }
-      } else {
-        mContinueLine = CONT_OFF;
-        mButton2[ BTN_CONT ].setVisibility( View.GONE );
-      }
-    }
-  }
+  // // 20203-03-10 DROPPED
+  // /** set the button "continue"
+  //  * @param continue_line    type of line-continuation
+  //  * @note must be called only if TDLevel.overNormal
+  //  */
+  // private void setButtonContinueLine( int continue_line )
+  // {
+  //   if ( BTN_CONT < mNrButton2 ) {
+  //     if ( TDLevel.overAdvanced ) {
+  //       mContinueLine = continue_line;
+  //       if ( mContinueLine > CONT_NONE ) mContinueLine = CONT_CONTINUE;
+  //       if ( mSymbol == SymbolType.LINE ) {
+  //         mButton2[ BTN_CONT ].setVisibility( View.VISIBLE );
+  //         switch ( mContinueLine ) {
+  //           case CONT_NONE:
+  //             setButton2( BTN_CONT, mBMcont_none  );
+  //             break;
+  //           // // 2023-03-10 DROPPED
+  //           // case CONT_START:
+  //           //   setButton2( BTN_CONT, mBMcont_start  );
+  //           //   break;
+  //           // case CONT_END:
+  //           //   setButton2( BTN_CONT, mBMcont_end   );
+  //           //   break;
+  //           // case CONT_BOTH:
+  //           //   setButton2( BTN_CONT, mBMcont_both  );
+  //           //   break;
+  //           case CONT_CONTINUE:
+  //             setButton2( BTN_CONT, mBMcont_continue  );
+  //             break;
+  //           case CONT_OFF:
+  //             setButton2( BTN_CONT, mBMcont_off  );
+  //         }
+  //       } else {
+  //         mButton2[ BTN_CONT ].setVisibility( View.GONE );
+  //       }
+  //     } else {
+  //       mContinueLine = CONT_OFF;
+  //       mButton2[ BTN_CONT ].setVisibility( View.GONE );
+  //     }
+  //   }
+  // }
 
-  private void setButtonContinueArea( int continue_area )
-  {
-    if ( BTN_CONT < mNrButton2 ) {
-      if ( TDLevel.overExpert ) {
-        mContinueArea = continue_area;
-        if ( mSymbol == SymbolType.AREA ) {
-          mButton2[ BTN_CONT ].setVisibility( View.VISIBLE );
-          setButton2( BTN_CONT, ( mContinueArea == CONT_NONE )? mBMcont_none : mBMcont_continue );
-        } else {
-          mButton2[ BTN_CONT ].setVisibility( View.GONE );
-        }
-      } else {
-        mContinueArea = CONT_OFF;
-        mButton2[ BTN_CONT ].setVisibility( View.GONE );
-      }
-    }
-  }
+  // private void setButtonContinueArea( int continue_area )
+  // {
+  //   if ( BTN_CONT < mNrButton2 ) {
+  //     if ( TDLevel.overExpert ) {
+  //       mContinueArea = continue_area;
+  //       if ( mContinueLine > CONT_NONE ) mContinueLine = CONT_CONTINUE;
+  //       if ( mSymbol == SymbolType.AREA ) {
+  //         mButton2[ BTN_CONT ].setVisibility( View.VISIBLE );
+  //         setButton2( BTN_CONT, ( mContinueArea == CONT_NONE )? mBMcont_none : mBMcont_continue );
+  //       } else {
+  //         mButton2[ BTN_CONT ].setVisibility( View.GONE );
+  //       }
+  //     } else {
+  //       mContinueArea = CONT_OFF;
+  //       mButton2[ BTN_CONT ].setVisibility( View.GONE );
+  //     }
+  //   }
+  // }
 
-  /** set button "continue"
-   * @param join_mode    type of join
-   * @param code         unused
-   * @note called by JoinClickListener
+  // private void setButtonContinuePoint( )
+  // {
+  //   if ( BTN_CONT < mNrButton2 ) {
+  //     if ( TDLevel.overExpert ) {
+  //       mButton2[ BTN_CONT ].setVisibility( View.VISIBLE );
+  //       setButton2( BTN_CONT, mBMcont_off );
+  //     } else {
+  //       mButton2[ BTN_CONT ].setVisibility( View.GONE );
+  //     }
+  //   }
+  // }
+
+  // /** set button "continue" 
+  //  * @param join_mode    type of join
+  //  * @param code         unused
+  //  * @note called by JoinClickListener
+  //  */
+  // public void setButtonJoinMode( int join_mode, int code )
+  // {
+  //   if ( TDLevel.overNormal ) {
+  //     if ( mSymbol == SymbolType.AREA ) {
+  //       setButtonContinueArea( join_mode );
+  //     } else if ( mSymbol == SymbolType.LINE ) {
+  //       setButtonContinueLine( join_mode );
+  //     } else {
+  //       setButtonContinuePoint( );
+  //     }
+  //   }
+  //   dismissPopupJoin();
+  // }
+ 
+  /** update the button "continue"
    */
-  public void setButtonJoinMode( int join_mode, int code )
+  private void setButtonContinue()
   {
     if ( TDLevel.overNormal ) {
-      if ( mSymbol == SymbolType.AREA ) {
-        setButtonContinueArea( join_mode );
+      if ( TDLevel.overExpert ) {
+        mButton2[ BTN_CONT ].setVisibility( View.VISIBLE );
+        switch ( mSymbol ) {
+          case SymbolType.LINE:
+            setButton2( BTN_CONT, (mContinueLine == CONT_CONTINUE)? mBMcont_continue : mBMcont_none );
+            break;
+          case SymbolType.AREA:
+            setButton2( BTN_CONT, (mContinueArea == CONT_CONTINUE)? mBMcont_continue : mBMcont_none );
+            break;
+          default:
+            setButton2( BTN_CONT, mBMcont_off );
+            break;
+        }
       } else {
-        setButtonContinueLine( join_mode );
+        mButton2[ BTN_CONT ].setVisibility( View.GONE );
       }
     }
-    dismissPopupJoin();
+  }
+
+  /** toggle the continue flag and update the button
+   */
+  private void toggleButtonContinue()
+  {
+    if ( TDLevel.overNormal ) {
+      if ( TDLevel.overExpert ) {
+        switch ( mSymbol ) {
+          case SymbolType.LINE:
+            if ( mContinueLine == CONT_NONE ) {
+              mContinueLine = CONT_CONTINUE;
+            } else if ( mContinueLine == CONT_CONTINUE ) {
+              mContinueLine = CONT_NONE;
+            }
+            TDLog.v("Toggle Button Continue: line " + mContinueLine );
+            break;
+          case SymbolType.AREA:
+            if ( mContinueArea == CONT_NONE ) {
+              mContinueArea = CONT_CONTINUE;
+            } else if ( mContinueArea == CONT_CONTINUE ) {
+              mContinueArea = CONT_NONE;
+            }
+            TDLog.v("Toggle Button Continue: area " + mContinueArea );
+            break;
+          default:
+            break;
+        }
+      }
+    }
+    setButtonContinue();
   }
 
   /** set button "filter"
@@ -2184,9 +2264,10 @@ public class DrawingWindow extends ItemDrawer
     mButton2[ mNrButton2 ] = mButton1[ mNrButton1 ];
 
     mBMcont_continue  = MyButton.getButtonBackground( this, res, izons[IC_CONT_CONTINUE] );
-    mBMcont_start = MyButton.getButtonBackground( this, res, izons[IC_CONT_START] );
-    mBMcont_end   = MyButton.getButtonBackground( this, res, izons[IC_CONT_END] );
-    mBMcont_both  = MyButton.getButtonBackground( this, res, izons[IC_CONT_BOTH] );
+    // // 2023-03-10 DROPPED
+    // mBMcont_start = MyButton.getButtonBackground( this, res, izons[IC_CONT_START] );
+    // mBMcont_end   = MyButton.getButtonBackground( this, res, izons[IC_CONT_END] );
+    // mBMcont_both  = MyButton.getButtonBackground( this, res, izons[IC_CONT_BOTH] );
     mBMcont_off   = MyButton.getButtonBackground( this, res, izons[IC_CONT_OFF] );
     mBMdelete_off = MyButton.getButtonBackground( this, res, izons[IC_DELETE_OFF] );
     mBMdelete_on  = MyButton.getButtonBackground( this, res, izons[IC_DELETE_ON] );
@@ -2437,8 +2518,8 @@ public class DrawingWindow extends ItemDrawer
     mSectionName  = null; // resetStatus
     mLastLinePath = null;
     mShiftDrawing = false;
-    mContinueLine = TDSetting.mContinueLine;
-    mContinueArea = TDSetting.mContinueLine; // FIXME TDSetting.mContinueArea;
+    mContinueLine = CONT_NONE; // TDSetting.mContinueLine;
+    mContinueArea = CONT_NONE; // TDSetting.mContinueLine; // FIXME TDSetting.mContinueArea;
     resetModified();
 
     // if ( PlotType.isLegSection( mType ) ) { 
@@ -3048,13 +3129,16 @@ public class DrawingWindow extends ItemDrawer
 
     // mContinueLine = TDSetting.mContinueLine; // do not reset
     // mContinueArea = TDSetting.mContinueArea;
-    if ( TDLevel.overNormal ) {
-      if ( mSymbol == SymbolType.AREA ) {
-        setButtonContinueArea( mContinueArea );
-      } else {
-        setButtonContinueLine( mContinueLine );
-      }
-    }
+
+    // 2023-03-10 DROPPED
+    // if ( TDLevel.overNormal ) {
+    //   if ( mSymbol == SymbolType.AREA ) {
+    //     setButtonContinueArea( mContinueArea );
+    //   } else {
+    //     setButtonContinueLine( mContinueLine );
+    //   }
+    // }
+    setButtonContinue();
 
     boolean is_section = PlotType.isAnySection( mType );
     List< DBlock > list = is_section ?  getXSectionShots( mType, mFrom, mTo ) : mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
@@ -4165,72 +4249,88 @@ public class DrawingWindow extends ItemDrawer
   }
 
   /** try to join two lines
-   * @param lp1    is the line (being drawn) to modify - a copy of the current linepath
-   * @param lp2    is used to get the line to join/continue - initialized to the current linepath
-   * @return true is the line lp1 must be added to the sketch
+   * @param lp1    is the line (being drawn) 
+   * @param lp2    is used to get the line to extend - initialized to the current linepath
+   * @return true if the line lp1 has been added to the sketch
    */
-  private boolean tryToJoin( DrawingLinePath lp1, DrawingLinePath lp2 )
+  private boolean tryAndJoin( DrawingLinePath lp1, DrawingLinePath lp2 )
   {
-    if ( mContinueLine <= CONT_NONE ) return true;
+    if ( mContinueLine <= CONT_NONE ) return false;
     if ( lp1 == null ) return false;
-    if ( lp2 == null ) return true;
-
-    if ( mContinueLine == CONT_CONTINUE ) {
-      // TDLog.v( "Try to continue " + lp1.toString() + " " + lp2.toString() );
-      if ( mLastLinePath != null
-           && mCurrentLine == mLastLinePath.mLineType 
-           && mDrawingSurface.modifyLine( mLastLinePath, lp2, mZoom, mSelectSize ) ) {
-        // TDLog.v( "Try to join  LP2 " + lp2.toDebugString() + " FALSE" );
-        return false;
-      }
-      DrawingLinePath line = null;
-      line = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
-      if ( line != null && mCurrentLine == line.mLineType ) { // continue line with the current line
-        // TDLog.v( "Try to join  LP2 " + lp2.toDebugString() + " add to " + line.toDebugString() );
-        mDrawingSurface.addLineToLine( lp2, line );
-        return false;
-      }
-    // } else if ( mContinueLine == CONT_CONTINUE_END ) {
-    //   DrawingLinePath line = null;
-    //   line = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
-    //   if ( line != null && mCurrentLine == line.mLineType ) { // continue line with the current line
-    //     lp2.reversePath();
-    //     mDrawingSurface.addLineToLine( lp2, line );
-    //     return false;
-    //   }
-    } else {
-      DrawingLinePath line1 = null;
-      DrawingLinePath line2 = null;
-      if ( mContinueLine == CONT_START || mContinueLine == CONT_BOTH ) {
-        line1 = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
-      }
-      if ( mContinueLine == CONT_END || mContinueLine == CONT_BOTH ) {
-        line2 = mDrawingSurface.getLineToContinue( lp2.mLast, mCurrentLine, mZoom, mSelectSize );
-      }
-      if ( line1 != null ) {
-        float d1 = line1.mFirst.distance( lp1.mFirst );
-        float d2 = line1.mLast.distance( lp1.mFirst );
-        if ( d1 < d2 ) {
-          // line.reversePath();
-          lp1.moveFirstTo( line1.mFirst.x, line1.mFirst.y );
-        } else {
-          lp1.moveFirstTo( line1.mLast.x, line1.mLast.y );
-        }
-      }
-      if ( line2 != null ) {
-        float d1 = line2.mFirst.distance( lp1.mLast );
-        float d2 = line2.mLast.distance( lp1.mLast );
-        if ( d1 < d2 ) {
-          // line.reversePath();
-          lp1.moveLastTo( line2.mFirst.x, line2.mFirst.y );
-        } else {
-          lp1.moveLastTo( line2.mLast.x, line2.mLast.y );
-        }
-      }
-    }
-    // TDLog.v( "Try to join  LP2 " + lp2.toDebugString() + " TRUE" );
-    return true;
+    if ( lp2 == null ) return false;
+    TDLog.v("Try and JOIN LINE");
+    LinePoint p1 = lp2.first();
+    LinePoint p2 = lp2.last();
+    return mDrawingSurface.getLineToContinue( lp1, p1, p2, mCurrentLine, mZoom, mSelectSize );
   }
+
+  // 20023-03-10 DROPPED
+  // /** try to join two lines
+  //  * @param lp1    is the line (being drawn) to modify - a copy of the current linepath
+  //  * @param lp2    is used to get the line to join/continue - initialized to the current linepath
+  //  * @return true is the line lp1 must be added to the sketch
+  //  */
+  // private boolean tryToJoin( DrawingLinePath lp1, DrawingLinePath lp2 )
+  // {
+  //   if ( mContinueLine <= CONT_NONE ) return true;
+  //   if ( lp1 == null ) return false;
+  //   if ( lp2 == null ) return true;
+  //   if ( mContinueLine == CONT_CONTINUE ) {
+  //     // TDLog.v( "Try to continue " + lp1.toString() + " " + lp2.toString() );
+  //     if ( mLastLinePath != null
+  //          && mCurrentLine == mLastLinePath.mLineType 
+  //          && mDrawingSurface.modifyLine( mLastLinePath, lp2, mZoom, mSelectSize ) ) {
+  //       // TDLog.v( "Try to join  LP2 " + lp2.toDebugString() + " FALSE" );
+  //       return false;
+  //     }
+  //     DrawingLinePath line = null;
+  //     line = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
+  //     if ( line != null && mCurrentLine == line.mLineType ) { // continue line with the current line
+  //       // TDLog.v( "Try to join  LP2 " + lp2.toDebugString() + " add to " + line.toDebugString() );
+  //       mDrawingSurface.addLineToLine( lp2, line );
+  //       return false;
+  //     }
+  //   // } else if ( mContinueLine == CONT_CONTINUE_END ) {
+  //   //   DrawingLinePath line = null;
+  //   //   line = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
+  //   //   if ( line != null && mCurrentLine == line.mLineType ) { // continue line with the current line
+  //   //     lp2.reversePath();
+  //   //     mDrawingSurface.addLineToLine( lp2, line );
+  //   //     return false;
+  //   //   }
+  //   } else {
+  //     DrawingLinePath line1 = null;
+  //     DrawingLinePath line2 = null;
+  //     if ( mContinueLine == CONT_START || mContinueLine == CONT_BOTH ) {
+  //       line1 = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
+  //     }
+  //     if ( mContinueLine == CONT_END || mContinueLine == CONT_BOTH ) {
+  //       line2 = mDrawingSurface.getLineToContinue( lp2.mLast, mCurrentLine, mZoom, mSelectSize );
+  //     }
+  //     if ( line1 != null ) {
+  //       float d1 = line1.mFirst.distance( lp1.mFirst );
+  //       float d2 = line1.mLast.distance( lp1.mFirst );
+  //       if ( d1 < d2 ) {
+  //         // line.reversePath();
+  //         lp1.moveFirstTo( line1.mFirst.x, line1.mFirst.y );
+  //       } else {
+  //         lp1.moveFirstTo( line1.mLast.x, line1.mLast.y );
+  //       }
+  //     }
+  //     if ( line2 != null ) {
+  //       float d1 = line2.mFirst.distance( lp1.mLast );
+  //       float d2 = line2.mLast.distance( lp1.mLast );
+  //       if ( d1 < d2 ) {
+  //         // line.reversePath();
+  //         lp1.moveLastTo( line2.mFirst.x, line2.mFirst.y );
+  //       } else {
+  //         lp1.moveLastTo( line2.mLast.x, line2.mLast.y );
+  //       }
+  //     }
+  //   }
+  //   // TDLog.v( "Try to join  LP2 " + lp2.toDebugString() + " TRUE" );
+  //   return true;
+  // }
 
   // -------------------------------------------------------------------------
   /** begin an erase command
@@ -4439,11 +4539,12 @@ public class DrawingWindow extends ItemDrawer
                         Point2D p3 = c.getPoint(3);
                         lp1.addPoint3(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y );
                       }
-                      boolean add_line = true; // 20230118 local var "add_line"
-                      if ( mContinueLine > CONT_NONE && ! BrushManager.isLineSection( mCurrentLine ) ) {
-                        add_line = tryToJoin( lp1, mCurrentLinePath );
-                      }
-                      if ( add_line ) {
+                      // boolean add_line = true; // 2023-03-10 DROPPED
+                      // if ( mContinueLine > CONT_NONE && ! BrushManager.isLineSection( mCurrentLine ) ) {
+                      //   add_line = tryToJoin( lp1, mCurrentLinePath );
+                      // }
+                      // if ( add_line )
+                      if ( ! tryAndJoin( lp1, mCurrentLinePath ) ) {
                         lp1.computeUnitNormal();
                         if ( mSymbol == SymbolType.LINE && BrushManager.isLineClosed( mCurrentLine ) ) {
                           // mCurrentLine == lp1.mLineType 
@@ -4456,8 +4557,7 @@ public class DrawingWindow extends ItemDrawer
                       //   mLastLinePath = ???
                       }
                     } else { //  mSymbol == SymbolType.AREA
-                      DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", TDSetting.mAreaBorder, 
-                                                                mDrawingSurface.scrapIndex() ); 
+                      DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", TDSetting.mAreaBorder, mDrawingSurface.scrapIndex() ); 
                       ap.setOptions( BrushManager.getAreaDefaultOptions( mCurrentArea ) );
                       ap.addStartPoint( p0.x, p0.y );
                       for (int k=0; k<k0; ++k) {
@@ -4502,11 +4602,12 @@ public class DrawingWindow extends ItemDrawer
                         p0 = points.get(k);
                         lp1.addPoint(p0.x, p0.y );
                       }
-                      boolean add_line = true; // 20230118 local var "add_line"
-                      if ( mContinueLine > CONT_NONE && ! BrushManager.isLineSection( mCurrentLine ) ) {
-                        add_line = tryToJoin( lp1, mCurrentLinePath );
-                      }
-                      if ( add_line ) {
+                      // boolean add_line = true; // 2023-03-10 DROPPEB
+                      // if ( mContinueLine > CONT_NONE && ! BrushManager.isLineSection( mCurrentLine ) ) {
+                      //   add_line = tryToJoin( lp1, mCurrentLinePath );
+                      // }
+                      // if ( add_line ) 
+                      if ( ! tryAndJoin( lp1, mCurrentLinePath ) ) {
                         lp1.computeUnitNormal();
                         if ( mSymbol == SymbolType.LINE && BrushManager.isLineClosed( mCurrentLine ) ) {
                           // mCurrentLine == lp1.mLineType 
@@ -4552,11 +4653,12 @@ public class DrawingWindow extends ItemDrawer
                     mLastLinePath = null;
                     doSectionLine( mCurrentLinePath );
                   } else { // not section line
-                    boolean add_line= true; // 20230118 local var "add_line"
-                    if ( mContinueLine > CONT_NONE && ! BrushManager.isLineSection( mCurrentLine ) ) {
-                      add_line = tryToJoin( mCurrentLinePath, mCurrentLinePath );
-                    }
-                    if ( add_line ) {
+                    // boolean add_line= true; // 2023-03-10 DROPPED
+                    // if ( mContinueLine > CONT_NONE && ! BrushManager.isLineSection( mCurrentLine ) ) {
+                    //   add_line = tryToJoin( mCurrentLinePath, mCurrentLinePath );
+                    // }
+                    // if ( add_line ) 
+                    if ( ! tryAndJoin( mCurrentLinePath, mCurrentLinePath ) ) {
                       mCurrentLinePath.computeUnitNormal();
                       if ( mSymbol == SymbolType.LINE && BrushManager.isLineClosed( mCurrentLine ) ) {
                         // mCurrentLine == mCurrentLinePath.mLineType
@@ -5946,44 +6048,42 @@ public class DrawingWindow extends ItemDrawer
       setTheTitle();
     }
 
-    /** erase mode popup menu
-     * @param b     button
-     * @param modes ...
-     * @param nr    number of modes
-     * @param code  code of the filter-listener 
-     * @param dismiss if dismiss is JOIN don't make popup
-     */
-    private void makePopupJoin( View b, int[] modes, int nr, final int code, int dismiss )
-    {
-      if ( dismiss == DISMISS_JOIN ) return;
-
-      final Context context = this;
-      LinearLayout popup_layout = new LinearLayout(mActivity);
-      popup_layout.setOrientation(LinearLayout.VERTICAL);
-      int lHeight = LinearLayout.LayoutParams.WRAP_CONTENT;
-      int lWidth = LinearLayout.LayoutParams.WRAP_CONTENT;
-
-      String text;
-      float w = 0;
-      Button[] tv = new Button[nr];
-      for ( int k=0; k<nr; ++k ) {
-        text = getString( modes[k] );
-        tv[k] = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight, new JoinClickListener( this, k, code ) );
-        float ww = ( tv[k].getPaint().measureText( text ) );
-        if ( ww > w ) w = ww;
-      }
-      int iw = (int)(w + 10);
-      // TDLog.v("FONT W " + w + " " + TopoDroidApp.mDisplayWidth );
-      // if ( w > TopoDroidApp.mDisplayWidth / 2 ) w = (int)TopoDroidApp.mDisplayWidth / 2;
-      for ( int k=0; k<nr; ++k ) {
-        tv[k].setWidth( iw );
-      }
-      
-      FontMetrics fm = tv[0].getPaint().getFontMetrics();
-      int ih = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
-      mPopupJoin = new PopupWindow( popup_layout, iw, ih ); 
-      mPopupJoin.showAsDropDown(b); 
-    }
+    // // 2023-03-10 DROPPED
+    // /** erase mode popup menu
+    //  * @param b     button
+    //  * @param modes ...
+    //  * @param nr    number of modes
+    //  * @param code  code of the filter-listener 
+    //  * @param dismiss if dismiss is JOIN don't make popup
+    //  */
+    // private void makePopupJoin( View b, int[] modes, int nr, final int code, int dismiss )
+    // {
+    //   if ( dismiss == DISMISS_JOIN ) return;
+    //   final Context context = this;
+    //   LinearLayout popup_layout = new LinearLayout(mActivity);
+    //   popup_layout.setOrientation(LinearLayout.VERTICAL);
+    //   int lHeight = LinearLayout.LayoutParams.WRAP_CONTENT;
+    //   int lWidth = LinearLayout.LayoutParams.WRAP_CONTENT;
+    //   String text;
+    //   float w = 0;
+    //   Button[] tv = new Button[nr];
+    //   for ( int k=0; k<nr; ++k ) {
+    //     text = getString( modes[k] );
+    //     tv[k] = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight, new JoinClickListener( this, k, code ) );
+    //     float ww = ( tv[k].getPaint().measureText( text ) );
+    //     if ( ww > w ) w = ww;
+    //   }
+    //   int iw = (int)(w + 10);
+    //   // TDLog.v("FONT W " + w + " " + TopoDroidApp.mDisplayWidth );
+    //   // if ( w > TopoDroidApp.mDisplayWidth / 2 ) w = (int)TopoDroidApp.mDisplayWidth / 2;
+    //   for ( int k=0; k<nr; ++k ) {
+    //     tv[k].setWidth( iw );
+    //   }
+    //   FontMetrics fm = tv[0].getPaint().getFontMetrics();
+    //   int ih = (int)( (Math.abs(fm.top) + Math.abs(fm.bottom) + Math.abs(fm.leading) ) * 7 * 1.70);
+    //   mPopupJoin = new PopupWindow( popup_layout, iw, ih ); 
+    //   mPopupJoin.showAsDropDown(b); 
+    // }
 
     /** filter dropdown menu
      * @param b     button
@@ -6432,17 +6532,18 @@ public class DrawingWindow extends ItemDrawer
       return false;
     }
 
-    /** dismiss the line JOIN popup
-     */
-    private boolean dismissPopupJoin()
-    {
-      if ( mPopupJoin != null ) {
-        mPopupJoin.dismiss();
-        mPopupJoin = null;
-        return true;
-      }
-      return false;
-    }
+    // // 2023-03-10 DROPPED
+    // /** dismiss the line JOIN popup
+    //  */
+    // private boolean dismissPopupJoin()
+    // {
+    //   if ( mPopupJoin != null ) {
+    //     mPopupJoin.dismiss();
+    //     mPopupJoin = null;
+    //     return true;
+    //   }
+    //   return false;
+    // }
 
     /** dismiss the popups
      */
@@ -6450,7 +6551,7 @@ public class DrawingWindow extends ItemDrawer
     {
       if ( dismissPopupEdit() )         return DISMISS_EDIT;
       if ( dismissPopupFilter() )       return DISMISS_FILTER;
-      if ( dismissPopupJoin() )         return DISMISS_JOIN;
+      // if ( dismissPopupJoin() )         return DISMISS_JOIN;
       if ( CutNPaste.dismissPopupBT() ) return DISMISS_BT;
       return DISMISS_NONE;
     }
@@ -6823,13 +6924,13 @@ public class DrawingWindow extends ItemDrawer
         // } else {
         //   new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
         // }
+      } else if ( TDLevel.overNormal && k2 < mNrButton2 && b == mButton2[k2++] ) { //  CONT continuation popup menu
+        if ( ( mSymbol == SymbolType.LINE /* && BrushManager.getLineGroup( mCurrentLine ) != null */ ) || ( mSymbol == SymbolType.AREA /* && BrushManager.hasArea( mCurrentArea ) */ ) ) {
+          // makePopupJoin( b, Drawing.mJoinModes, 5, 0, dismiss ); // 2023-03-10 DROPPED
+          toggleButtonContinue();
+        }
       } else if ( ( ! mTh2Edit) && k2 < mNrButton2 && b == mButton2[k2++] ) { // SPLAYS TH2EDIT
         toggleSplayMode();
-      } else if ( TDLevel.overNormal && k2 < mNrButton2 && b == mButton2[k2++] ) { //  CONT continuation popup menu
-        if ( ( mSymbol == SymbolType.LINE && BrushManager.getLineGroup( mCurrentLine ) != null ) 
-          || ( mSymbol == SymbolType.AREA && BrushManager.hasArea( mCurrentArea ) ) ) {
-          makePopupJoin( b, Drawing.mJoinModes, 5, 0, dismiss );
-        }
       }
 
     } else if ( mMode == MODE_ERASE ) {

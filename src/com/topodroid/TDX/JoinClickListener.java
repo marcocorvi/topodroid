@@ -37,7 +37,7 @@ class JoinClickListener implements OnClickListener
    */
   @Override
   public void onClick(View v) {
-    mParent.setButtonJoinMode( mIndex, mCode );
+    // mParent.setButtonJoinMode( mIndex, mCode ); // 2023-03-10 DROPPED
     // mParent.dismissPopupJoin(); // already in setButtonJoinMode()
   }
 }

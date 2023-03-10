@@ -38,13 +38,14 @@
      <item name="tab">tab</item>
   </string-array>
 
-  <string-array name="lineContinue">
+  <!-- UNUSED string-array name="lineContinue">
      <item name="none">nincs</item>
      <item name="start">kapcsolódás a kezdő ponthoz</item>
      <item name="end">kapcsolódás a végponthoz</item>
      <item name="both">kapcsolódás mindkét véghez</item>
      <item name="continue">folytatás</item>
-  </string-array>
+  </string-array -->
+
   <string-array name="unitGrid">
      <item name="meter">méter</item>
      <item name="yard">yard</item>

@@ -509,11 +509,11 @@
     <string name="popup_select_shot">选择测线</string>
     <string name="popup_select_station">选择测点</string>
 
-    <string name="popup_cont_none">无</string>
-    <string name="popup_cont_start">起始点</string>
-    <string name="popup_cont_end">结束点</string>
-    <string name="popup_cont_both">两点都</string>
-    <string name="popup_cont_continue">继续</string>
+    <!-- UNUSED string name="popup_cont_none">无</string -->
+    <!-- UNUSED string name="popup_cont_start">起始点</string -->
+    <!-- UNUSED string name="popup_cont_end">结束点</string -->
+    <!-- UNUSED string name="popup_cont_both">两点都</string -->
+    <!-- UNUSED string name="popup_cont_continue">继续</string -->
 
     <!-- UNUSED string name="connection_error">连接错误</string -->
     <!-- UNUSED string name="connecting">连接 &#8230;</string -->
@@ -1624,8 +1624,8 @@
   <string name="pref_segment_message">直线上点之间的最小距离</string>
   <string name="pref_linestyle_title">线样式</string>
   <string name="pref_linestyle_summary">线绘画样式</string>
-  <string name="pref_linecontinue_title">线连接</string>
-  <string name="pref_linecontinue_summary">线默认连接模式</string>
+  <!-- UNUSED string name="pref_linecontinue_title">线连接</string -->
+  <!-- UNUSED string name="pref_linecontinue_summary">线默认连接模式</string -->
   <string name="pref_lineacc_title">插值精度</string>
   <string name="pref_lineacc_summary">贝塞尔三次插值精度</string>
   <string name="pref_linecorner_title">贝塞尔转折临界值</string>

@@ -41,13 +41,13 @@
      <item name="tab">跳格键</item>
   </string-array>
 
-  <string-array name="lineContinue">
+  <!-- UNUSED string-array name="lineContinue">
      <item name="none">不连接</item>
      <item name="start">连接至开始点</item>
      <item name="end">连接至结束点</item>
      <item name="both">两头连接</item>
      <item name="continue">继续</item>
-  </string-array>
+  </string-array  -->
 
   <string-array name="unitGrid">
      <item name="meter">米</item>

@@ -518,11 +518,11 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="popup_select_shot">Select shots</string>
     <string name="popup_select_station">Select stations</string>
 
-    <string name="popup_cont_none">None</string>
-    <string name="popup_cont_start">Start point</string>
-    <string name="popup_cont_end">End point</string>
-    <string name="popup_cont_both">Both points</string>
-    <string name="popup_cont_continue" copyable="fr">Continue</string>
+    <!-- UNUSED string name="popup_cont_none">None</string -->
+    <!-- UNUSED string name="popup_cont_start">Start point</string -->
+    <!-- UNUSED string name="popup_cont_end">End point</string -->
+    <!-- UNUSED string name="popup_cont_both">Both points</string -->
+    <!-- UNUSED string name="popup_cont_continue" copyable="fr">Continue</string -->
 
     <!-- UNUSED string name="connection_error">Connection error</string -->
     <!-- UNUSED string name="connecting">Connecting &#8230;</string -->
@@ -1639,8 +1639,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_segment_message">Minimum distance between points on a line</string>
   <string name="pref_linestyle_title">Line style</string>
   <string name="pref_linestyle_summary">Line drawing style</string>
-  <string name="pref_linecontinue_title">Line continue</string>
-  <string name="pref_linecontinue_summary">Line default continue-mode</string>
+  <!-- UNUSED string name="pref_linecontinue_title">Line continue</string -->
+  <!-- UNUSED string name="pref_linecontinue_summary">Line default continue-mode</string -->
   <string name="pref_lineacc_title">Interpolation accuracy</string>
   <string name="pref_lineacc_summary">Bezier cubic interpolation accuracy</string>
   <string name="pref_linecorner_title">Bezier corner threshold</string>

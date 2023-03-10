@@ -505,11 +505,11 @@
     <string name="popup_select_shot">Seleziona tiri</string>
     <string name="popup_select_station">Seleziona caposaldi</string>
 
-    <string name="popup_cont_none">Nessuno</string>
-    <string name="popup_cont_start">Punto inizio</string>
-    <string name="popup_cont_end">Punto fine</string>
-    <string name="popup_cont_both">Entrambi i punti</string>
-    <string name="popup_cont_continue">Continua</string>
+    <!-- UNUSED string name="popup_cont_none">Nessuno</string -->
+    <!-- UNUSED string name="popup_cont_start">Punto inizio</string -->
+    <!-- UNUSED string name="popup_cont_end">Punto fine</string -->
+    <!-- UNUSED string name="popup_cont_both">Entrambi i punti</string -->
+    <!-- UNUSED string name="popup_cont_continue">Continua</string -->
 
     <!-- UNUSED string name="connection_error">Errore di connessione</string -->
     <!-- UNUSED string name="connecting">Connessione a &#8230;</string -->
@@ -1617,8 +1617,8 @@
   <string name="pref_segment_message">Minima distanza fra punti di una linea</string>
   <string name="pref_linestyle_title">Stile linee</string>
   <string name="pref_linestyle_summary">Stile linee</string>
-  <string name="pref_linecontinue_title">Continua la linea</string>
-  <string name="pref_linecontinue_summary">Default modo continuazione linea</string>
+  <!-- UNUSED string name="pref_linecontinue_title">Continua la linea</string -->
+  <!-- UNUSED string name="pref_linecontinue_summary">Default modo continuazione linea</string -->
   <string name="pref_lineacc_title">Accuratezza curve Bezier</string>
   <string name="pref_lineacc_summary">Accuratezza di interpolazione per le curve Bezier</string>
   <string name="pref_linecorner_title">Angolatura Bezier</string>

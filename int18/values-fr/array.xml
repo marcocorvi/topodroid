@@ -88,13 +88,13 @@
      <item name="tab">2</item>
   </string-array> -->
 
-  <string-array name="lineContinue">
+  <!-- UNUSED string-array name="lineContinue">
      <item name="none">Aucune</item>
      <item name="start">Joindre au point initial</item>
      <item name="end">Joindre au point terminal</item>
      <item name="both">Réunir les deux points</item>
      <item name="continue">Continuer</item>
-  </string-array>
+  </string-array -->
   
   <string-array name="unitGrid">
      <item name="meter">Mètres</item>
