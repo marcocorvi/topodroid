@@ -1649,10 +1649,6 @@ no campo abaixo e aperte o botão.
   <string name="pref_unit_angle_summary">Unidade para visualização de ângulos</string>
   <string name="pref_unit_location_title">Unidade coordenada</string>
   <string name="pref_unit_location_summary">Unidade para visualização de coordenadas</string>
-
-  <string name="pref_sketch_splay_buffer_title">Armazen Aux</string>
-  <string name="pref_sketch_splay_buffer_summary">Área de armazenamento temporário de medidas auxiliares de cortes [m]</string>
-
   <!-- UNUSED string name="pref_plot_walls_title">PAREDES AUTOMÁTICAS</string -->
   <!-- UNUSED string name="pref_walls_type_title">Tipo paredes</string -->
   <!-- UNUSED string name="pref_walls_type_summary">Tipo das paredes</string -->
@@ -1666,6 +1662,8 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="pref_walls_concave_summary">Concavidade máxima [percentual]</string -->
   <!-- UNUSED string name="pref_walls_xstep_title">Passo</string -->
   <!-- UNUSED string name="pref_walls_xstep_summary">Separação dos pontos ao longo das paredes [m]</string -->
+  <string name="pref_sketch_splay_buffer_title">Armazen Aux</string>
+  <string name="pref_sketch_splay_buffer_summary">Área de armazenamento temporário de medidas auxiliares de cortes [m]</string>
   <!-- UNUSED NO_LOGS
   <string name="pref_log_stream_summary" translatable="false">Log output stream</string>
   <string name="pref_log_stream_title" translatable="false">Log stream</string>

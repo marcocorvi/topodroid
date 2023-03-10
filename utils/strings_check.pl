@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 #
 # checks translation string file for several commons errors
-# usage: strings_check.pl <en-strings_file> <xx-strings_file> <two_char_checked_language_code> <output_log_file>
+# usage: strings_check.pl ORIGINAL_FILE TWO_CHAR_LANGUAGE_CODE
 #
 # --------------------------------------------------------
 #  Copyright This software is distributed under GPL-3.0 or later
@@ -19,6 +19,7 @@ use builtin qw(
 no warnings "experimental::builtin";
 
 use XML::LibXML;
+use File::Basename;
 
 use constant {
   PREFIX => '    ',
@@ -29,7 +30,6 @@ use constant {
 use Data::Dumper;
 
 # Trick to make perl look for packages on the same directory as the running script.
-use File::Basename;
 use lib dirname (__FILE__);
 
 use topostrings;
@@ -48,15 +48,18 @@ sub check_output($FH, $check_title, $check_result) {
 
 my $debug = DEBUG;
 
-if (@ARGV != 4) {
+if (@ARGV != 2) {
   die "\nUsage:
-  $0 EN_ORIGINAL_FILE XX_TRANSLATED_FILE_TO_BE_CHECKED TWO_CHAR_CHECKED_LANGUAGE_CODE OUTPUT_LOG_FILE\n\n";
+  $0 EN_ORIGINAL_FILE TWO_CHAR_CHECKED_LANGUAGE_CODE\n\n";
 }
 
 my $en_filename = $ARGV[0];
-my $xx_filename = $ARGV[1];
-my $checked_language = $ARGV[2];
-my $log_filename = $ARGV[3];
+my $checked_language = $ARGV[1];
+my $filename;
+my $path;
+($filename, $path) = fileparse($en_filename);
+my $xx_filename = $path . '../../int18/values-' . $checked_language . '/' . $filename;
+my $log_filename = $path . '../../' . $checked_language . '.log';
 my %xx_names;
 my %en_names;
 my $LOG;
