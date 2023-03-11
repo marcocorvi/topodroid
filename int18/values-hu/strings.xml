@@ -880,7 +880,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
 
 
     <!-- UNUSED string name="btn_3d">3D</string -->
-    <string name="btn_export">Export</string>
+    <string name="btn_export">Exportálás</string>
     <string name="btn_import">Importálás</string>
     <string name="btn_install">Telepítés</string>
 
@@ -961,7 +961,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="man_draw">10. Vázlat rajz</string>
     <string name="man_xsection">11. Kereszmetszet</string>
     <string name="man_overview">12. Áttekintő ablak</string>
-    <string name="man_export">13. Import/export</string>
+    <string name="man_export" copyable="hu">13. Import/export</string>
     <string name="man_project">14. Barlang projekt</string>
     <string name="man_threed">15. 3D názet</string>
     <string name="man_index">16. Tárgymutató</string>
@@ -1299,8 +1299,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_cat_survey">FELMÉRÉSI ADAT</string>
   <string name="pref_cat_splay">SEGÉDMÉRÉS ADAT</string>
   <string name="pref_cat_drawing">VÁZLATKÉSZÍTÉS</string>
-  <string name="pref_cat_import_export">IMPORT_EXPORT</string>
-  <string name="pref_cat_exportimport">IMPORT</string>
+  <string name="pref_cat_import_export" copyable="hu">IMPORT_EXPORT</string>
+  <string name="pref_cat_exportimport" copyable="hu">IMPORT</string>
   <!-- NO string name="pref_cat_exportsvx" translatable="false">Survex</string -->
   <!-- NO string name="pref_cat_exportth"  translatable="false">Therion</string -->
   <!-- NO string name="pref_cat_exportdat" translatable="false">Compass</string -->
