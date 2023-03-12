@@ -1382,7 +1382,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_bric_zero_length_summary">Registrar visadas com comprimento zero do BRIC</string>
   <string name="pref_sap5_bit16_bug_title">Bug bit-16 SAP5</string>
   <string name="pref_sap5_bit16_bug_summary">Gambiarra bug bit-16 SAP5</string>
-  <string name="pref_plot_screen_title">CROQUI</string>
+  <string name="pref_plot_screen_title">DESENHO</string>
   <string name="pref_tool_line_title">LINHAS</string>
   <string name="pref_tool_point_title">PONTOS</string>
   <string name="pref_location_title">LOCALIZAÇÃO</string>
