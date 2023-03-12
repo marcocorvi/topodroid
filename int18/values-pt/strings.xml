@@ -1271,8 +1271,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_triple_shot_summary">Tipo de aviso ao reconhecer automaticamente visada</string>
   <string name="pref_connect_feedback_title">Feedback conexão</string>
   <string name="pref_connect_feedback_summary">Feedback ao estabelecer conexão com dispositivo</string>
-  <string name="pref_station_prefix_title">Pref base Compass</string>
-  <string name="pref_station_prefix_summary">Exportar prefixo de bases (Compass)</string>
+  <string name="pref_station_prefix_title">Pref base</string>
+  <string name="pref_station_prefix_summary">Exportar prefixo de bases (Compass/cSurvey)</string>
   <string name="pref_compass_splays_title">Aux Compass</string>
   <string name="pref_compass_splays_summary">Exportar medidas auxiliares em arquivos Compass</string>
   <string name="pref_vtopo_splays_title">Aux VisualTopo</string>
@@ -1292,7 +1292,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_survex_eol_title">Term linha Survex/Topo</string>
   <string name="pref_survex_eol_summary">Terminação de linha Survex/Topo</string>
   <string name="pref_survex_splay_title">Base aux Survex</string>
-  <string name="pref_survex_splay_summary">Incluir a base PARA à medida auxiliar nos arquivos Survex exportados</string>
+  <string name="pref_survex_splay_summary">Incluir às medidas auxiliares nos arquivos Survex exportados uma base PARA cujo nome é composto da base DE com uma letra adicionada.</string>
   <string name="pref_survex_lrud_title">EDTC Survex</string>
   <string name="pref_survex_lrud_summary">Incluir EDTC nos arquivos Survex exportados</string>
   <string name="pref_svg_program_title">Programa SVG</string>
