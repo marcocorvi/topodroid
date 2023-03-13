@@ -126,9 +126,9 @@ The <b>draw</b> mode has, besides the green buttons:
 <ul style="margin-top=0">
 <li><img src="btn_undo.png"  width="36" border="1"> removes the last items you have drawn, one at a time.</li>
 <li><img src="btn_redo.png"  width="36" border="1"> puts the removed item back in the sketch, one at a time. The list of removed items is emptied when you draw something new. Point-wise editing actions may also affect the list of redo.</li>
-<li><img src="btn_tools.png" width="36" border="1"> <a href="page_tools_list.htm">Drawing tool</a> switcher / picker.</li>
+<li><img src="btn_tools.png" width="36" border="1"> Drawing tool switcher.</li>
 <li><img src="btn_splay_display_mode.png" width="36" border="1"> splay display mode: as segment or a point.</li>
-<li><img src="btn_cont.png"  width="36" border="1"> Line/area <i>retrace</i></li>
+<!-- li><img src="btn_cont.png"  width="36" border="1"> Line/area <i>retrace</i></li -->
 </ul><br><p>
 The icon of the <i>tools</i> button reflects the current type of drawing tools: points, lines, or areas.<br><p>
 
@@ -166,7 +166,7 @@ Accordingly, the drawing references dialog has no box for the splays.
 graphically editable by sliding the finger across the display.  The button turns green [E].</li>
 <li>In the extended profile view, a long tap on the <i>display mode</i> button flips the sketch [N].</li>
 <li>With x-sections it toggles the display of splays that are off the section plane [T].</li>
-<li>A long tap on the <i>tools</i> button reverts the order of rotation of the bottom toolbar.<!-- Ineffective for the triple toolbar. --></li>
+<li>A long tap on the <i>tools</i> button toggles retracing on/off (only for line and areas) [A]</li>
 <li>A long tap on the <i>delete</i> button removes the selected line/area point [N].</li>
 <li>A long tap on the item <i>properties edit</i> button, when the selected item is a section point, opens the xsection sketch [T].</li>
 </ul><br><p>
@@ -284,13 +284,9 @@ With the fifth line style the traced lines are simplified using a point-weeding 
 If you export the drawing in dxf with DXF version 6 do not use splines because they get exported as polylines.<br><p>
 
 <h4>Retracing</h4>
-The <i>retrace</i> button is a multi-state button.
-<ul>
-<li><img src="btn_line_join_off.png" width="36" border="1"> retracing is disabled</li>
-<li><img src="btn_line_join_none.png" width="36" border="1"> retracing is not active</li>
-<li><img src="btn_line_join_continue.png" width="36" border="1"> retracing is active</li>
-</ul>
-<br>
+Line and areas can be drawn in "retracing" mode.<br>
+A long tap on the <i>tools</i> button turns retracing on/off.
+When retrace drawing is active the line/area in the respective <i>tool</i> button is white.<br><p>
 
 To retrace a portion of a line, trace a line that starts and or ends close to the line.
 Lines of type "section" cannot be retraced.
@@ -301,6 +297,8 @@ The shorter between the two pieces of this border is replaced by the newly trace
 The area can be enlarged or shrinked, and a concavity can be filled (figure below).
 <br><p> 
 
+Retracing can be undone and redone.<br><p>
+
 <img src="area_concavity.png" width="360" border="1">
 <br><p>
 
@@ -309,7 +307,7 @@ The area can be enlarged or shrinked, and a concavity can be filled (figure belo
 Composite actions are point-wise long-tap actions.<br>
 At the moment the only long-tap action is to <i>insert a point</i> for a line/area and snap it to a nearby point at the same time.
 The selected point is first moved to the nearby point, next it is duplicated and the new point is put after it in the line/area.
-This allows to retrace a path by selecting the last point and inserting points backwards.<br>
+This allows to retrace a small portion of a path by selecting the last point and inserting points backwards.<br>
 To retrace the path forward switch the selected point after each insertion.
 </div><br><p> 
 
