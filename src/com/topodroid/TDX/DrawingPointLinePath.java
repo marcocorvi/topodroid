@@ -993,9 +993,19 @@ public class DrawingPointLinePath extends DrawingPath
    */
   void resetFirstLast( LinePoint lp1, LinePoint lp2 )
   {
+    setFirst( lp1 );
+    setLast( lp2 );
+  }
+
+  void setFirst( LinePoint lp1 ) 
+  {
     mFirst = lp1; // (1)
     if ( mFirst.mPrev != null ) mFirst.mPrev.mNext = null;
     mFirst.mPrev = null;
+  }
+
+  void setLast( LinePoint lp2 )
+  {
     mLast = lp2; // (2)
     if ( mLast.mNext != null ) mLast.mNext.mPrev = null;
     mLast.mNext = null;

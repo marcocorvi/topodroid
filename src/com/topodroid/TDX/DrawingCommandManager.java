@@ -1360,27 +1360,28 @@ public class DrawingCommandManager
     return mCurrentScrap.getLineToContinue( lp, lp1, lp2, type, zoom, size );
   }
 
-  /** get the line to continue
-   * @param lp   point
-   * @param type line type
-   * @param zoom canvas zoom (the larger the zoom, the bigger the sketch on the display)
-   * @param size ???
-   * @return the line to continue or null
-   * @note line points are scene-coords
-   *           continuation is checked in canvas-coords: canvas = offset + scene * zoom
-   */
-  DrawingLinePath getLineToContinue( LinePoint lp, int type, float zoom, float size ) { return mCurrentScrap.getLineToContinue( lp, type, zoom, size ); }
+  // /** get the line to continue
+  //  * @param lp   point
+  //  * @param type line type
+  //  * @param zoom canvas zoom (the larger the zoom, the bigger the sketch on the display)
+  //  * @param size ???
+  //  * @return the line to continue or null
+  //  * @note line points are scene-coords
+  //  *           continuation is checked in canvas-coords: canvas = offset + scene * zoom
+  //  */
+  // DrawingLinePath getLineToContinue( LinePoint lp, int type, float zoom, float size ) { return mCurrentScrap.getLineToContinue( lp, type, zoom, size ); }
 
-  // @return true if the line has been modified
-  // @param line  line to modify
-  // @param line2 modification
-  // @param zoom  current zoom (the larger the zoom, the bigger the sketch on the display)
-  // @param size  selection size
-  boolean modifyLine( DrawingLinePath line, DrawingLinePath line2, float zoom, float size ) { return mCurrentScrap.modifyLine( line, line2, zoom, size ); }
+  // /** @return true if the line has been modified
+  //  * @param line  line to modify
+  //  * @param line2 modification
+  //  * @param zoom  current zoom (the larger the zoom, the bigger the sketch on the display)
+  //  * @param size  selection size
+  //  */
+  // boolean modifyLine( DrawingLinePath line, DrawingLinePath line2, float zoom, float size ) { return mCurrentScrap.modifyLine( line, line2, zoom, size ); }
 
-  /** add the points of the first line to the second line
-   */
-  void addLineToLine( DrawingLinePath line, DrawingLinePath line0 ) { mCurrentScrap.addLineToLine( line, line0 ); }
+  // /** add the points of the first line to the second line
+  //  */
+  // void addLineToLine( DrawingLinePath line, DrawingLinePath line0 ) { mCurrentScrap.addLineToLine( line, line0 ); }
 
   /** draw the sketch on the canvas (display)
    * N.B. doneHandler is not used

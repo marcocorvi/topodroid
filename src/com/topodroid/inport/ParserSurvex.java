@@ -150,6 +150,7 @@ class ParserSurvex extends ImportParser
     boolean in_station = true;
     String from = null;
     String to;
+    int line_nr = 0; // debug line number
 
     float len=0, ber=0, cln=0;
 
@@ -171,6 +172,7 @@ class ParserSurvex extends ImportParser
       BufferedReader br = TDio.getBufferedReader( isr, filename );
       String line = nextLine( br );
       while ( line != null ) {
+        ++line_nr; // debug
         // TDLog.v( "Parser Survex " + state.in_survey + " " + state.in_centerline + " " + state.in_data + " : " + line );
         line = line.trim();
         int pos = line.indexOf( ';' );
@@ -194,8 +196,7 @@ class ParserSurvex extends ImportParser
 	      if ( state.interleaved && in_station ) { // read station
                 to = checkAlias( ParserUtil.applyCase( state.mCase, vals[0] ) );
 		if ( from != null ) { // add shot
-                  shots.add( new ParserShot( from, to, len, ber, cln, 0.0f,
-                                         ExtendType.EXTEND_RIGHT, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
+                  shots.add( new ParserShot( from, to, len, ber, cln, 0.0f, ExtendType.EXTEND_RIGHT, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
 		}
 		from = to;
 		in_station = false; // in_data
@@ -221,35 +222,33 @@ class ParserSurvex extends ImportParser
                 //   TDLog.Log(  , "survex parser: unsupported alias " + vals[1] );
 		}
               } else if ( cmd.equals("include") ) {
-                // ignore
+                TDLog.v("SVX " + line_nr + " ignore include " );
               } else if ( cmd.equals("copyright") ) {
-                // ignore
+                TDLog.v("SVX " + line_nr + " ignore copyright " );
               } else if ( cmd.equals("entrance") ) {
-                // ignore
+                TDLog.v("SVX " + line_nr + " ignore entrance " );
               } else if ( cmd.equals("export") ) {
-                // ignore
+                TDLog.v("SVX " + line_nr + " ignore export " );
               } else if ( cmd.equals("infer") ) {
-                // ignore
+                TDLog.v("SVX " + line_nr + " ignore infer " );
               } else if ( cmd.equals("instrument") ) {
-                // ignore
+                TDLog.v("SVX " + line_nr + " ignore instrument " );
               } else if ( cmd.equals("prefix") ) {
-                // ignore
+                TDLog.v("SVX " + line_nr + " ignore prefix " );
               } else if ( cmd.equals("ref") ) {
-                // ignore
+                TDLog.v("SVX " + line_nr + " ignore ref " );
               } else if ( cmd.equals("require") ) {
-                // ignore
+                TDLog.v("SVX " + line_nr + " ignore require " );
               } else if ( cmd.equals("sd") ) {
-                // ignore
+                TDLog.v("SVX " + line_nr + " ignore sd " );
               } else if ( cmd.equals("truncate") ) {
-                // ignore
-              } else if ( cmd.equals("equate") ) {
-                // TODO
+                TDLog.v("SVX " + line_nr + " ignore truncate " );
               } else if ( cmd.equals("case") ) {
-                // TODO
+                TDLog.v("SVX " + line_nr + " TODO case " );
               } else if ( cmd.equals("set") ) {
                 // set blank x09x20
 		// set decimal ,
-                // TODO
+                TDLog.v("SVX " + line_nr + " TODO set " );
               } else if ( cmd.equals("default") ) {
                 // default calibrate|data|units|all
 		if ( vals_len > 1 ) { // always true
@@ -300,9 +299,16 @@ class ParserSurvex extends ImportParser
               } else if ( cmd.equals("date") ) {
                 String date = vals[1];
                 if ( mDate == null ) mDate = date; // save date
+                TDLog.v("SVX " + line_nr + " date " + mDate );
               } else if ( cmd.equals("team") ) {
-                mTeam += TDUtil.concat( vals, 1 );
+                if ( mTeam.length() > 0 ) {
+                  mTeam = mTeam + " " + TDUtil.concat( vals, 1 );
+                } else {
+                  mTeam = mTeam + TDUtil.concat( vals, 1 );
+                }
+                TDLog.v("SVX " + line_nr + " team " + mTeam );
               } else if ( cmd.equals("calibrate") ) {
+                TDLog.v("SVX " + line_nr + " calibrate ");
                 // calibrate <quantities> <zero_error> [<scale>]
                 // calibrate <quantities> <zero_error> <zero_units> [<scale>]
 		// calibrate default
@@ -313,12 +319,14 @@ class ParserSurvex extends ImportParser
 		    boolean clen = false;
                     boolean cber = false;
                     boolean ccln = false;
+                    boolean cdecl = false;
 	            int k = 1;
                     for ( ; k<vals_len - 1; ++k ) {
                       String what = vals[k].toLowerCase( Locale.getDefault() );
                       if ( what.equals("length")  || what.equals("tape") )  { clen = true; }
                       else if ( what.equals("compass") || what.equals("bearing") )  { cber = true; }
                       else if ( what.equals("clino")   || what.equals("gradient") ) { ccln = true; }
+                      else if ( what.equals("declination") ) { cdecl = true; }
                       else break;
                     }
                     float zero  =  0.0f;
@@ -334,20 +342,20 @@ class ParserSurvex extends ImportParser
 	                    ++k;
 	                    break;
                           } catch ( NumberFormatException e ) {
-	                      TDLog.Error("Non-number units");
-                      }
+	                    TDLog.Error("SVX [E] " + line_nr + " Non-number units " + vals[k] );
+                          }
 		        }
 		        if ( k + 1 == vals_len ) {
 	                  try { // try to read the "zero" float (next val)
                             scale  = Float.parseFloat( vals[k] );
 	                    break;
                           } catch ( NumberFormatException e ) {
-                          TDLog.Error("Non-number scale");
-                      }
+                            TDLog.Error("SVX [E] " + line_nr + " Non-number scale " + vals[k]);
+                          }
 		        }
                       } catch ( NumberFormatException e ) {
-                      TDLog.Error("Non-number zero");
-                  }
+                        TDLog.Error("SVX [E] " + line_nr + " Non-number zero " + vals[k]);
+                      }
                     }
 
                     if ( clen ) {
@@ -364,6 +372,10 @@ class ParserSurvex extends ImportParser
 		      if ( units < 0 ) units = state.mUnitCln;
                       state.mZeroCln  = zero * scale * units;
                       state.mScaleCln = scale;
+                    }
+                    if ( cdecl ) {
+                      state.mDeclination = zero; // * scale * units;
+                      if ( ! mApplyDeclination ) mDeclination = state.mDeclination;
                     }
                   }
                 }
@@ -394,7 +406,7 @@ class ParserSurvex extends ImportParser
                         factor = Float.parseFloat( vals[k] );
 		        ++k;
                       } catch ( NumberFormatException e ) {
-                        TDLog.Error( "survex parser: units without factor " + line ); // this is OK
+                        TDLog.Error( "SVX [E] " + line_nr + " units without factor " + line ); // this is OK
                       }
 		    }
 		    if ( k + 1 == vals_len ) {
@@ -416,6 +428,7 @@ class ParserSurvex extends ImportParser
                 if ( vals_len > 1 ) {
 	          if ( vals[1].equals("auto") ) { // declination reset
                     state.mDeclination = ( state.mParent == null )? 0 : state.mParent.mDeclination;
+                    if ( ! mApplyDeclination ) mDeclination = state.mDeclination;
 	          } else {
                     try {
                       float declination = Float.parseFloat( vals[1] );
@@ -425,7 +438,7 @@ class ParserSurvex extends ImportParser
                       state.mDeclination = declination;
                       if ( ! mApplyDeclination ) mDeclination = state.mDeclination;
                     } catch ( NumberFormatException e ) {
-                      TDLog.Error( "survex parser error: declination " + line );
+                      TDLog.Error( "SVX [E] " + line_nr + " declination " + line );
 	            }
                   }      
                 }      
@@ -450,7 +463,7 @@ class ParserSurvex extends ImportParser
                   }
                 }
               } else if ( cmd.equals("cs") ) { 
-                // TODO cs
+                TDLog.v("SVX " + line_nr + " TODO cs " + line );
               } else if ( cmd.equals("fix") ) { // ***** fix station east north Z (ignored std-dev's)
                 if ( vals_len > 4 ) {
                   String name = checkAlias( ParserUtil.applyCase( state.mCase, vals[1] ) );
@@ -460,7 +473,7 @@ class ParserSurvex extends ImportParser
                                         Float.parseFloat( vals[3] ),
                                         Float.parseFloat( vals[4] ) ) );
                   } catch ( NumberFormatException e ) {
-                    TDLog.Error( "survex parser error: fix " + line );
+                    TDLog.Error( "SVX [E] " + line_nr + " fix " + line );
                   }
                 }
               } else if ( cmd.equals("equate") ) {
@@ -520,7 +533,7 @@ class ParserSurvex extends ImportParser
 	        if ( ks > 0 ) {
                   --ks;
                 } else {
-                  TDLog.Error("Parser Survex: endsurvey out of survey");
+                  TDLog.Error("SVX [E] " + line_nr + " endsurvey out of survey");
 	        }
                 // path = path.substring(survey_pos[ks]); // return to previous survey_pos in path
 	      }
@@ -529,8 +542,7 @@ class ParserSurvex extends ImportParser
 		if ( in_station ) {
                   to = checkAlias( ParserUtil.applyCase( state.mCase, vals[0] ) );
 		  if ( from != null ) { // add shot
-                    shots.add( new ParserShot( from, to, len, ber, cln, 0.0f,
-                                           ExtendType.EXTEND_RIGHT, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
+                    shots.add( new ParserShot( from, to, len, ber, cln, 0.0f, ExtendType.EXTEND_RIGHT, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
 		  }
 		  from = to;
                   in_station = false;
@@ -551,16 +563,15 @@ class ParserSurvex extends ImportParser
                     cln = cln * state.mScaleCln * state.mUnitCln - state.mZeroCln;
 
                   } catch ( NumberFormatException e ) {
-                    TDLog.Error( "survex parser error: data " + line );
+                    TDLog.Error( "SVX [E] " + line_nr + " data " + line );
                   }
-
                   in_station = true;
 		}
 	      } else {
 	        if ( vals_len >= 5 ) {
-                  // data line
+                  TDLog.v("SVX " + line_nr + " data " + line );
                   try {
-                      from = checkAlias( ParserUtil.applyCase( state.mCase, vals[jFrom] ) );
+                    from = checkAlias( ParserUtil.applyCase( state.mCase, vals[jFrom] ) );
                     to   = checkAlias( ParserUtil.applyCase( state.mCase, vals[jTo] ) );
                     len  = Float.parseFloat( vals[jLength] );
                     ber  = Float.parseFloat( vals[jCompass] );
@@ -582,15 +593,13 @@ class ParserSurvex extends ImportParser
                       dist = Float.parseFloat( vals[jLeft] ) * sLen - zLen;
                       // b = ber - 90; if ( b < 0 ) b += 360;
                       b = TDMath.in360( ber - 90 );
-                      shots.add( new ParserShot( from, TDString.EMPTY,
-                                 dist, b, 0, 0.0f, ExtendType.EXTEND_UNSET, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "" ) );
+                      shots.add( new ParserShot( from, TDString.EMPTY, dist, b, 0, 0.0f, ExtendType.EXTEND_UNSET, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                     if ( jRight >= 0 && jRight < vals_len) {
                       dist = Float.parseFloat( vals[jRight] ) * sLen - zLen;
                       // b = ber + 90; if ( b >= 360 ) b -= 360;
                       b = TDMath.add90( ber );
-                      shots.add( new ParserShot( from, TDString.EMPTY,
-                                 dist, b, 0, 0.0f, ExtendType.EXTEND_UNSET, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "" ) );
+                      shots.add( new ParserShot( from, TDString.EMPTY, dist, b, 0, 0.0f, ExtendType.EXTEND_UNSET, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                     if ( jUp >= 0 && jUp < vals_len) {
                       dist = Float.parseFloat( vals[jUp] ) * sLen - zLen;
@@ -606,17 +615,13 @@ class ParserSurvex extends ImportParser
                     // TODO add shot
                     if ( to.equals("-") || to.equals(".") ) { // splay shot
                       // FIXME splays
-                      shots.add( new ParserShot( from, TDString.EMPTY,
-                                            len, ber, cln, 0.0f,
-                                            ExtendType.EXTEND_UNSET, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
+                      shots.add( new ParserShot( from, TDString.EMPTY, len, ber, cln, 0.0f, ExtendType.EXTEND_UNSET, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
                     } else {
                       // TDLog.v( "Parser Survex add shot " + from + " -- " + to);
-                      shots.add( new ParserShot( from, to,
-                                           len, ber, cln, 0.0f,
-                                           ExtendType.EXTEND_RIGHT, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
+                      shots.add( new ParserShot( from, to, len, ber, cln, 0.0f, ExtendType.EXTEND_RIGHT, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                   } catch ( NumberFormatException e ) {
-                    TDLog.Error( "survex parser error: data " + line );
+                    TDLog.Error( "SVX [E] " + line_nr + " data " + line );
                   }
                 }
                 // FIXME other data types
@@ -636,6 +641,8 @@ class ParserSurvex extends ImportParser
     // TDLog.v( "Parser Survex shots "+ shots.size() + " splays "+ splays.size() +" fixes "+  fixes.size() );
   }
 
+  /** @return true if data are interleaved
+   */
   private boolean setJIndices(String[] vals, int vals_len)
   {
     jFrom = jTo = jLength = jCompass = jClino = -1;
@@ -682,16 +689,18 @@ class ParserSurvex extends ImportParser
         }
       }
     }
+    TDLog.v("SVX J-indices: " + jFrom + " " + jTo + " data " + jLength + " " + jCompass + " " + jClino );
     return false;
   }
 
+  // 2023-03-10 FIX
   private void resetJIndices()
   {
-     jFrom    = 2;
-     jTo      = 3;
-     jLength  = 4;
-     jCompass = 5;
-     jClino   = 6;
+     jFrom    = 0; // 2;
+     jTo      = 1; // 3;
+     jLength  = 2; // 4;
+     jCompass = 3; // 5;
+     jClino   = 4; // 6;
      jLeft = jUp = jRight  = jDown = -1;
   }
 

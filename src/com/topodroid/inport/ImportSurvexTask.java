@@ -43,7 +43,7 @@ public class ImportSurvexTask extends ImportTask
   {
     long sid = 0;
     try {
-      ParserSurvex parser = new ParserSurvex( isr, str[0], true ); // apply_declination = true
+      ParserSurvex parser = new ParserSurvex( isr, str[0], false ); // apply_declination = false
       if ( ! parser.isValid() ) return -2L;
       if ( mApp.get() == null ) return -1L;
       if ( hasSurveyName( parser.mName ) ) {
@@ -57,6 +57,8 @@ public class ImportSurvexTask extends ImportTask
       // app_data.updateSurveyDeclination( sid, parser.surveyDeclination() );
       // app_data.updateSurveyInitStation( sid, parser.initStation() );
       updateSurveyMetadata( sid, parser );
+
+      app_data.updateSurveyTeam( sid, parser.mTeam ); // TODO check return ( boolean )
 
       ArrayList< ParserShot > shots  = parser.getShots();
       long id = insertImportShots( sid, 1, shots ); // start id = 1

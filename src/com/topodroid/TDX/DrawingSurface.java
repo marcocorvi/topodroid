@@ -925,27 +925,27 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
     return commandManager.getLineToContinue( lp, lp1, lp2, type, zoom, size );
   }
 
-  /** get the line to continue
-   * @param lp   point
-   * @param type line type
-   * @param zoom canvas zoom (the larger the zoom, the bigger the sketch on the display)
-   * @param size ???
-   * @return the line to continue or null
-   */
-  DrawingLinePath getLineToContinue( LinePoint lp, int type, float zoom, float size ) 
-  {
-    return commandManager.getLineToContinue( lp, type, zoom, size );
-  }
+  // /** get the line to continue
+  //  * @param lp   point
+  //  * @param type line type
+  //  * @param zoom canvas zoom (the larger the zoom, the bigger the sketch on the display)
+  //  * @param size ???
+  //  * @return the line to continue or null
+  //  */
+  // DrawingLinePath getLineToContinue( LinePoint lp, int type, float zoom, float size ) 
+  // {
+  //   return commandManager.getLineToContinue( lp, type, zoom, size );
+  // }
 
-  // @param zoom canvas zoom (the larger the zoom, the bigger the sketch on the display)
-  boolean modifyLine( DrawingLinePath line, DrawingLinePath lp2, float zoom, float size )
-  {
-    return commandManager.modifyLine( line, lp2, zoom, size );
-  }
+  // // @param zoom canvas zoom (the larger the zoom, the bigger the sketch on the display)
+  // boolean modifyLine( DrawingLinePath line, DrawingLinePath lp2, float zoom, float size )
+  // {
+  //   return commandManager.modifyLine( line, lp2, zoom, size );
+  // }
  
-  /** add the points of the first line to the second line
-   */
-  void addLineToLine( DrawingLinePath line, DrawingLinePath line0 ) { commandManager.addLineToLine( line, line0 ); }
+  // /** add the points of the first line to the second line
+  //  */
+  // void addLineToLine( DrawingLinePath line, DrawingLinePath line0 ) { commandManager.addLineToLine( line, line0 ); }
 
   // ---------------------------------------------------------------------
   // SELECT - EDIT
