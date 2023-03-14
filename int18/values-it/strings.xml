@@ -676,6 +676,7 @@
     <!-- UNUSED string name="zoom_in_out">Zoom in/out</string -->
 
     <string name="survey_info">Info rilievo</string>
+    <!-- TODO string name="stat_dates">From %1$s to %2$s</string -->
     <string name="stat_devices">Dispositivo %1$d: %2$s</string>
     <string name="stat_stddev_m">M stddev %1$.1f %%</string>
     <string name="stat_stddev_g">G stddev %1$.1f %%</string>
@@ -972,7 +973,7 @@
     <string name="help_close_app">Chiude l\'app</string>
     <string name="help_coeff">Coefficienti della calibrazione</string>
     <string name="help_color">Pulisci i colori degli splay</string>
-    <string name="help_continue">Continuare il disegno di una linea</string>
+    <!-- UNUSED string name="help_continue">Continuare il disegno di una linea</string -->
     <!-- NO string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Capisaldi salvati</string>
     <string name="help_azimuth">Riferimento per "extend"</string>

@@ -71,7 +71,7 @@ public class UserManualActivity extends Activity
     // String filepath = TDPath.getManFile( filename );
     // view.loadUrl( filepath );
     // setWebViewSettings( mTVtext );
-    // TDLog.v( "MAN-0 filename <" + filename + ">" );
+    TDLog.v( "MAN-0 filename <" + filename + ">" );
 
     if ( filename.startsWith("http://" ) ) {
       // ++mCloseOnBack;

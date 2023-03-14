@@ -680,6 +680,7 @@
 
 
     <string name="survey_info">测量信息</string>
+    <!-- TODO string name="stat_dates">From %1$s to %2$s</string -->
     <string name="stat_devices">设备 %1$d: %2$s</string>
     <string name="stat_stddev_m">M 标准差 %1$.1f %%</string>
     <string name="stat_stddev_g">G 标准差 %1$.1f %%</string>
@@ -975,7 +976,7 @@
     <string name="help_close_app">关闭软件</string>
     <string name="help_coeff">显示校准系数</string>
     <string name="help_color">清除副线颜色</string>
-    <string name="help_continue">继续画线</string>
+    <!-- UNUSED string name="help_continue">继续画线</string -->
     <!-- UNUSED string name="help_contour">Contour editing</string -->
     <string name="help_current_station">保存测点</string>
     <string name="help_azimuth">"延展"参照</string>

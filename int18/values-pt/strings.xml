@@ -631,6 +631,7 @@ no campo abaixo e aperte o botão.
   <string name="unzip_fail_td">Falha: versão do TopoDroid incompatível</string>
   <!-- UNUSED string name="zoom_in_out">Abrir/fechar zoom</string -->
   <string name="survey_info">Informações da topo</string>
+    <!-- TODO string name="stat_dates">From %1$s to %2$s</string -->
   <string name="stat_devices">Dispositivos %1$d: %2$s</string>
   <string name="stat_stddev_m">Desvio padrão M: %1$.1f %%</string>
   <string name="stat_stddev_g">Desvio padrão G: %1$.1f %%</string>
@@ -901,7 +902,7 @@ no campo abaixo e aperte o botão.
   <string name="help_close_app">Fechar app</string>
   <string name="help_coeff">Mostrar coeficientes de calibração</string>
   <string name="help_color">Voltar medidas auxiliares para cor padrão</string>
-  <string name="help_continue">Continuar desenho de uma linha</string>
+  <!-- UNUSED string name="help_continue">Continuar desenho de uma linha</string -->
   <!-- UNUSED string name="help_contour">Editar perfil</string -->
   <string name="help_current_station">Bases gravadas</string>
   <string name="help_azimuth">Direção no perfil retificado</string>

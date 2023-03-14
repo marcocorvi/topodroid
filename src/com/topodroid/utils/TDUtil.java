@@ -299,6 +299,16 @@ public class TDUtil
     return date.substring(6,10) + "." + date.substring(3,5) + "." + date.substring(0,2);
   }
 
+  /** @return the date from the millis
+   * @param millis    millis
+   */
+  public static String millisToDate( long millis )
+  {
+    GregorianCalendar calendar = new GregorianCalendar();
+    calendar.setTimeInMillis( millis );
+    return String.format("%04d-%02d-%02d", calendar.get( Calendar.YEAR ), calendar.get( Calendar.MONTH ), calendar.get( Calendar.DAY_OF_MONTH ) );
+  }
+
   /** @return the current year
    */
   public static int year()  { return (new GregorianCalendar()).get( Calendar.YEAR ); }

@@ -692,6 +692,7 @@ There are other settings for the presentation of the sketches (icon size, label 
 
 
     <string name="survey_info">Survey info</string>
+    <string name="stat_dates">From %1$s to %2$s</string>
     <string name="stat_devices">Devices %1$d: %2$s</string>
     <string name="stat_stddev_m">M stddev %1$.1f %%</string>
     <string name="stat_stddev_g">G stddev %1$.1f %%</string>
@@ -989,7 +990,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="help_close_app">Close app</string>
     <string name="help_coeff">Show calibration coefficients</string>
     <string name="help_color">Clear splay colors</string>
-    <string name="help_continue">Continue drawing a line</string>
+    <!-- UNUSED string name="help_continue">Continue drawing a line</string -->
     <!-- UNUSED string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Saved stations</string>
     <string name="help_azimuth">"Extend" reference</string>

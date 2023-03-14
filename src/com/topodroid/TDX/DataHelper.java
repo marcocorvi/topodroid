@@ -401,6 +401,7 @@ public class DataHelper extends DataSetObservable
   // private static String qSurveysStat4 =
   //   "select flag, distance, fStation, tStation, clino, extend from shots where surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ";
   private static final String qSurveysStat5 = " select count() from shots where surveyId=? AND status=0 AND flag=0 AND fStation!=\"\" AND tStation=\"\" ";
+  private static final String qSurveysStat6 = " select min( millis ), max( millis ) from shots where surveyId=? AND status=0 AND flag=0 ";
 
   /** @return the name of the survey initial station
    * @param sid   survey ID
@@ -844,6 +845,13 @@ public class DataHelper extends DataSetObservable
     cursor = myDB.rawQuery( qSurveysStat5, args );
     if (cursor.moveToFirst()) {
       stat.countSplay = (int)( cursor.getLong(0) );
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+
+    cursor = myDB.rawQuery( qSurveysStat6, args );
+    if (cursor.moveToFirst()) {
+      stat.minMillis = cursor.getLong(0); // [seconds]
+      stat.maxMillis = cursor.getLong(1);
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return stat;
@@ -1788,6 +1796,21 @@ public class DataHelper extends DataSetObservable
     return myNextId;
   }
 
+  /**
+   * @param sid       survey ID
+   * @param id        shot ID
+   * @param millis    millis/1000 ie seconds
+   * @param color
+   * @param d         distance [m]
+   * @param b         azimuth [degree]
+   * @param c         clino [degree]
+   * @param r         roll [degree]
+   * @param extend    extend (-1,0,1,2,...)
+   * @param stretch   fractional extend (in [-1,1])
+   * @param leg      
+   * @param shot_type shot type (?)
+   * @param addr      device address (?)
+   */
   public long insertShot( long sid, long id, long millis, long color, double d, double b, double c, double r,
 		   long extend, double stretch, long leg,
                    long shot_type, String addr )

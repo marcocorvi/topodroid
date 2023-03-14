@@ -43,4 +43,7 @@ class SurveyStat
   int nrMGD;
   int deviceNr;     // number of devices
   String deviceCnt; // shots per device
+
+  long minMillis;
+  long maxMillis;
 }

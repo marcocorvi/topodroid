@@ -1400,9 +1400,9 @@ public class Scrap
                 LinePoint lp10n = lp10.mNext;
                 Point2D p1 = new Point2D( lp10n.x - lp10.x, lp10n.y - lp10.y );
                 while ( p1.dot( lq1.sub( lp10 )) > 0 ) {
-                  lp10 = lp10.mNext; if ( lp10 == null ) lp10 = area.first();
+                  lp10 = lp10.mNext; 
                 }
-                mCurrentStack.add( new RetraceCommand( area, lp20.mNext, lp10.mPrev, lq2, lq1, lp10, lp20 ) );
+                mCurrentStack.add( new RetraceCommand( area, lp20.mNext, lp10.mPrev, lq2, lq1, lp20, lp10 ) );
                 //    lp20         lq2
                 //    lp_prev .... lp <---> ... <--
                 // (1)                    lp_next
@@ -1413,10 +1413,12 @@ public class Scrap
                 // (5)                            <--> lp10 --> ...
                 LinePoint lp_prev = lp20;
                 LinePoint lp_next = null;
+                lp20.mNext = lq2;
                 for ( LinePoint lp = lq2; lp != lq1; lp = lp_next ) {
                   lp_next       = lp.mPrev; // (1)
-                  lp_prev.mNext = lp;       // (2)
+                  // lp_prev.mNext = lp;       // (2)
                   lp.mPrev      = lp_prev;
+                  lp.mNext      = lp_next;
                   lp_prev       = lp;       // (3)
                 }
                 lp_prev.mNext = lq1;        // (4)

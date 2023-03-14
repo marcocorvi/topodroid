@@ -682,32 +682,33 @@ public class DrawingPointLinePath extends DrawingPath
     computeUnitNormal();
   }
 
-  // /** reverse the path - UNUSED
-  //  */
-  // void reversePath()
-  // {
-  //   if ( mSize == 0 ) return;
-  //   LinePoint lf = mFirst;
-  //   LinePoint ll = mLast;
-  //   clear();
-  //   // mPath = new Path();
-  //   // mFirst = null;
-  //   // mLast  = null;
-  //   LinePoint lp = ll;
-  //   addStartPoint( lp.x, lp.y );
-  //   LinePoint prev = lp.mPrev;
-  //   while ( prev != null ) {
-  //     if ( lp.has_cp ) {
-  //       addPoint3( lp.x2, lp.y2, lp.x1, lp.y1, prev.x, prev.y );
-  //     } else {
-  //       addPoint( prev.x, prev.y );
-  //     }
-  //     lp = prev;
-  //     prev = prev.mPrev;
-  //   }
-  //   if ( mClosed ) mPath.close();
-  //   computeUnitNormal(); // FIXME 
-  // }
+  /** reverse the pointline path 
+   * @note the drawing path is not retraced
+   */
+  void reverse()
+  {
+    if ( mSize == 0 ) return;
+    LinePoint lf = mFirst;
+    LinePoint ll = mLast;
+    clear();
+    // mPath = new Path();
+    // mFirst = null;
+    // mLast  = null;
+    LinePoint lp = ll;
+    addStartPoint( lp.x, lp.y );
+    LinePoint prev = lp.mPrev;
+    while ( prev != null ) {
+      if ( lp.has_cp ) {
+        addPoint3( lp.x2, lp.y2, lp.x1, lp.y1, prev.x, prev.y );
+      } else {
+        addPoint( prev.x, prev.y );
+      }
+      lp = prev;
+      prev = prev.mPrev;
+    }
+    // if ( mClosed ) mPath.close();
+    // computeUnitNormal(); // FIXME 
+  }
 
   /** compute the distance from the path to a point
    * @param x   X-coord of the point

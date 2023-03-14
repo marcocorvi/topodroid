@@ -23,7 +23,7 @@ import java.util.Locale;
 
 class SurveyAccuracy
 {
-  private final static int MIN_COUNT = 5;
+  // private final static int MIN_COUNT = 5;
 
   private float mAccelerationMean = 0.0f; // mean acceleration value
   private float mMagneticMean     = 0.0f; // mean magnetic field value
@@ -45,6 +45,10 @@ class SurveyAccuracy
     reset();
     setBlocks( blks );
   }
+
+  /** @return the number of AMD data accumulated
+   */
+  int getCount() { return mCount; }
 
   /** @return true if a shot is above A/M/D threshold
    * @param blk    shot data

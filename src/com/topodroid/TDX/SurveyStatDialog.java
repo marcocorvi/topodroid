@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 
@@ -72,6 +73,7 @@ class SurveyStatDialog extends MyDialog
       TextView mTextStddevG   = (TextView) findViewById(R.id.stat_stddev_g);
       TextView mTextStddevD   = (TextView) findViewById(R.id.stat_stddev_dip);
       TextView mTextDevices   = (TextView) findViewById(R.id.stat_devices);
+      TextView mTextDates     = (TextView) findViewById(R.id.stat_dates);
 
       histG = (ImageView) findViewById( R.id.histogramG );
       histM = (ImageView) findViewById( R.id.histogramM );
@@ -107,6 +109,7 @@ class SurveyStatDialog extends MyDialog
       mTextStddevD.setText( String.format( res.getString(R.string.stat_stddev_dip), mStat.stddevD, mStat.averageD ) );
 
       mTextDevices.setText( String.format( res.getString(R.string.stat_devices), mStat.deviceNr, mStat.deviceCnt ) );
+      mTextDates.setText( String.format( res.getString(R.string.stat_dates), TDUtil.millisToDate( mStat.minMillis * 1000 ), TDUtil.millisToDate( mStat.maxMillis * 1000 ) ) );
   }
 
     @Override

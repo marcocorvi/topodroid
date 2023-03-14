@@ -27,6 +27,8 @@ class RetraceCommand implements ICanvasCommand
   LinePoint mLPp1, mLPp2; // old PointLinePath endpoints
   LinePoint mLPp10; // start connection
   LinePoint mLPp20; // end connection
+  LinePoint mFirst;
+  LinePoint mLast;
 
   /** cstr - default
    * @param path    point-line path
@@ -34,6 +36,8 @@ class RetraceCommand implements ICanvasCommand
    * @param lp2     old path end point
    * @param lq1     new path start point
    * @param lq2     new path end point
+   * @param lp10
+   * @param lp20
    * @note the command is intantiated after the retrace has been carried out
    *       therefore q1 and q2 are used to get lp10 and lp20
    */
@@ -46,6 +50,8 @@ class RetraceCommand implements ICanvasCommand
     mLPq2  = lq2;
     mLPp10 = lp10;
     mLPp20 = lp20;
+    mFirst = path.first();
+    mLast  = path.last();
   }
 
   void undo() { relink( mLPp1, mLPp2 ); }
@@ -64,20 +70,29 @@ class RetraceCommand implements ICanvasCommand
       p1.mPrev = mLPp10;
       mLPp20.mPrev = p2;
       p2.mNext = mLPp20;
+      // mPath.resetFirstLast( mFirst, mLast );
       mPath.resetFirstLast( p1, mLPp10 );
     } else if ( mPath instanceof DrawingLinePath ) {
-      if ( mLPp10 != null ) {
-        mLPp10.mNext = p1;
+      if ( p1 != null ) {
+        if ( mLPp10 != null ) {
+          mLPp10.mNext = p1;
+        } else {
+          mPath.setFirst( p1 );
+        }
+        p1.mPrev = mLPp10;
       } else {
-        mPath.setFirst( p1 );
+        mPath.setFirst( mFirst );
       }
-      p1.mPrev = mLPp10;
-      if ( mLPp20 != null ) {
-        mLPp20.mPrev = p2;
+      if ( p2 != null ) {
+        if ( mLPp20 != null ) {
+          mLPp20.mPrev = p2;
+        } else {
+          mPath.setLast( p2 );
+        }
+        p2.mNext = mLPp20;
       } else {
-        mPath.setLast( p2 );
+        mPath.setLast( mLast );
       }
-      p2.mNext = mLPp20;
     }
     mPath.recomputeSize();
     mPath.retracePath();
