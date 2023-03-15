@@ -10,7 +10,7 @@
   <string name="man_version_es" translatable="false">0</string>
   <string name="man_version_it" translatable="false">14</string>
   <string name="man_version_ru" translatable="false">618</string>
-  <string name="man_version_hu" translatable="false">38</string>
+  <string name="man_version_hu" translatable="false">39</string>
   <string name="man_version_fr" translatable="false">0</string>
   <string name="man_version_pt" translatable="false">20230308</string>
 </resources>
