@@ -863,6 +863,9 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="mode_fixed">Fix refs</string>
     <string name="mode_outline">Outline only</string>
     <string name="mode_scale_ref">Scale bar</string>
+    <string name="mode_sections">Sections</string>
+    <string name="mode_walls">Walls</string>
+    <string name="mode_refs">Frame</string>
 
     <string name="layer_floor">Floor</string>
     <string name="layer_fill">Fills</string>

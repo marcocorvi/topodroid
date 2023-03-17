@@ -60,6 +60,7 @@ public class SketchCommandManager
   private List< SketchStationPath > mStationsStack;
   private SketchFixedPath         mLeg;
   private List< SketchSection >   mSections;
+  private SketchWall              mWall = null;
 
   private SketchSection mView;         // leg-projected view
   private SketchSection mCurrentScrap = null;
@@ -79,15 +80,22 @@ public class SketchCommandManager
 
   ArrayList< Point2D > mCurrentPath = null;
 
-  private static int mDisplayMode = DisplayMode.DISPLAY_SKETCH;
+  private int mDisplayMode = DisplayMode.DISPLAY_SKETCH;
 
-  public static int getDisplayMode() { return mDisplayMode; }
-
-  public static void setDisplayMode( int mode ) { mDisplayMode = mode; }
 
   float getZoom() { return mZoom; }
 
-  float getLegViewRotation() { return (mView == null)? 0 : mView.getRotation(); }
+  float getLegViewRotationAlpha() { return (mView == null)? 0 : mView.getRotationAlpha(); }
+  float getLegViewRotationBeta() { return (mView == null)? 0 : mView.getRotationBeta(); }
+
+  /** set the display mode
+   * @param mode   display mode
+   */
+  void setDisplayMode( int mode ) { mDisplayMode = mode; }
+
+  /** @return the display mode
+   */
+  int getDisplayMode() { return mDisplayMode; }
 
   /** cstr
    */
@@ -105,7 +113,8 @@ public class SketchCommandManager
     mMatrix        = new Matrix(); // identity
     mSplaysStack   = Collections.synchronizedList( new ArrayList< SketchFixedPath >());
     mNghblegsStack = Collections.synchronizedList( new ArrayList< SketchFixedPath >());
-    mLeg           = null;;
+    mLeg           = null;
+    mWall          = null;
     // makeLegView();
   }
 
@@ -122,13 +131,25 @@ public class SketchCommandManager
   /** change the projection angle - only leg-view
    * @param delta angle change [degree]
    */
-  void changeAlpha( int delta )
+  void changeAlpha( int da, int db )
   {
     if ( mCurrentScrap == mView ) {
-      if ( mCurrentScrap.changeAlpha( delta ) ) {
+      if ( mCurrentScrap.changeAlpha( da, db ) ) {
         mS0 = mCurrentScrap.mS;
         mN0 = mCurrentScrap.mN;
+        mH0 = mCurrentScrap.mH;
       }
+    }
+  }
+
+  /** set the wall
+   */
+  void makeWall( TDVector u )
+  {
+    mWall = new SketchWall( BrushManager.fixedGrid100Paint );
+    for ( SketchSection section : mSections ) {
+      if ( section != mView ) mWall.appendSection( section );
+      mWall.makeLines( u );
     }
   }
 
@@ -162,7 +183,7 @@ public class SketchCommandManager
     h.normalize();
     // TDLog.v("S " + s.x + " " + s.y + " " + s.z );
     // TDLog.v("H " + h.x + " " + h.y + " " + h.z );
-    TDVector n = h.cross( s );
+    TDVector n = s.cross( h ); // 20230317 was h.cross(s)
     mView = new SketchSection( 0, mLeg.midpoint(), h, s, n, SketchSection.SECTION_LEG ); // leg-section has ID = 0
     closeSection(); // this sets mCurrentScrap to the leg-view
   }
@@ -181,6 +202,17 @@ public class SketchCommandManager
     }
     TDLog.v("TODO get null scrap");
     return new SketchSection( id, p1, p2, mVertical );
+  }
+
+  /** @return the section given its ID
+   * @param sid   section ID
+   */
+  SketchSection getSection( int sid )
+  {
+    for ( SketchSection scrap : mSections ) {
+      if ( scrap.getId() == sid ) return scrap;
+    }
+    return null;
   }
 
   // ----------------------------------------------------------------
@@ -533,6 +565,9 @@ public class SketchCommandManager
    */
   int closeSection()
   {
+    // if ( mCurrentScrap != null && mCurrentScrap != mView ) { // POLAR
+    //   mCurrentScrap.dumpPolar();
+    // }
     setViewPoint( mView.mC, mView.mH, mView.mS, mView.mN );
     mCurrentScrap = mView;
     return mCurrentScrap.getId();
@@ -571,9 +606,29 @@ public class SketchCommandManager
     return bounds;
   }
 
-  public void undo () { mCurrentScrap.undo(); }
+  /** undo a line
+   * @return true if the undo has been done
+   */
+  public boolean undo () 
+  { 
+    boolean ret = false;
+    synchronized( TDPath.mShotsLock ) {
+      ret = mCurrentScrap.undo();
+    }
+    return ret;
+  }
 
-  public void redo () { mCurrentScrap.redo(); }
+  /** redo the last undo
+   * @return true if the redo has been done
+   */
+  public boolean redo ()
+  { 
+    boolean ret = false;
+    synchronized( TDPath.mShotsLock ) {
+      ret = mCurrentScrap.redo();
+    }
+    return ret;
+  }
 
   /** @return the world 3D vector of a canvas point
    * @param x    X canvas coord
@@ -583,6 +638,12 @@ public class SketchCommandManager
   {
     return mCurrentScrap.toTDVector( (x-mOffxc)/mZoom, (y-mOffyc)/mZoom );
   }
+
+  // POLAR
+  /** set the point polar coords 
+   * @param pt   sketch point
+   */
+  void setPolarCoords( SketchPoint pt ) { mCurrentScrap.setPolarCoords( pt ); }
 
   /** draw the sketch on the canvas (display)
    * N.B. doneHandler is not used
@@ -619,18 +680,26 @@ public class SketchCommandManager
 
     synchronized( TDPath.mShotsLock ) {
       mLeg.draw( canvas, mm, mC0, mH0, mS0 );
-      for ( SketchPath splay : mSplaysStack ) splay.draw( canvas, mm, mC0, mH0, mS0 );
+      if ( (mDisplayMode & DisplayMode.DISPLAY_SPLAY) != 0 ) {
+        for ( SketchPath splay : mSplaysStack ) splay.draw( canvas, mm, mC0, mH0, mS0 );
+      }
       if ( mCurrentScrap == mView ) {
         for ( SketchPath nghb : mNghblegsStack ) nghb.draw( canvas, mm, mC0, mH0, mS0 );
-        for ( SketchPath station : mStationsStack ) station.draw( canvas, mm, mC0, mH0, mS0 );
-        for ( SketchSection section : mSections ) {
-          section.drawBipath( canvas, mm, mC0, mH0, mS0 );
-          // section.drawFrame( canvas, mm, mC0, mH0, mS0 );
+        if ( (mDisplayMode & DisplayMode.DISPLAY_STATION) != 0 ) {
+          for ( SketchPath station : mStationsStack ) station.draw( canvas, mm, mC0, mH0, mS0 );
+        }
+        if ( (mDisplayMode & DisplayMode.DISPLAY_OUTLINE) != 0 ) {
+          for ( SketchSection section : mSections ) {
+            section.drawBipath( canvas, mm, mC0, mH0, mS0 );
+            // section.drawFrame( canvas, mm, mC0, mH0, mS0 );
+          }
         }
       } else {
         mCurrentScrap.drawGrid( canvas, mm, mC0, mH0, mS0 );
-        int k = 0;
-        for ( SketchPath station : mStationsStack ) { station.draw( canvas, mm, mC0, mH0, mS0 ); if ( ++k >= 2 ) break; }
+        if ( (mDisplayMode & DisplayMode.DISPLAY_STATION) != 0 ) {
+          int k = 0;
+          for ( SketchPath station : mStationsStack ) { station.draw( canvas, mm, mC0, mH0, mS0 ); if ( ++k >= 2 ) break; }
+        }
         if ( mCurrentScrap.mP1 != null ) mCurrentScrap.mP1.drawPoint( canvas, mm, mC0, mH0, mS0, 2*dot_radius );
         if ( mCurrentScrap.mP2 != null ) mCurrentScrap.mP2.drawPoint( canvas, mm, mC0, mH0, mS0, 2*dot_radius );
       }
@@ -649,7 +718,14 @@ public class SketchCommandManager
       } else {
         drawCurrentPath( canvas );
       }
-      mCurrentScrap.drawFrame( canvas, mm, mC0, mH0, mS0 );
+ 
+      if ( (mDisplayMode & DisplayMode.DISPLAY_SCALEBAR) != 0 ) {
+        mCurrentScrap.drawFrame( canvas, mm, mC0, mH0, mS0 );
+      }
+
+      if ( (mDisplayMode & DisplayMode.DISPLAY_WALLS) != 0 ) {
+        if ( mWall != null ) mWall.draw( canvas, mm, mC0, mH0, mS0 );
+      }
     }
   }
 

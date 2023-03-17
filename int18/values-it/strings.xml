@@ -845,6 +845,9 @@
     <string name="mode_fixed">[ Bloccati ]</string>
     <string name="mode_outline">Solo contorno</string>
     <string name="mode_scale_ref">Scala barra di riferimento</string>
+    <!-- TODO string name="mode_sections">Sections</string -->
+    <!-- TODO string name="mode_walls">Walls</string -->
+    <!-- TODO string name="mode_refs">Frame</string -->
 
     <string name="layer_floor">Pavimento</string>
     <string name="layer_fill">Riempimenti</string>

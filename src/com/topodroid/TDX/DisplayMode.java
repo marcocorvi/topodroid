@@ -22,7 +22,8 @@ class DisplayMode
   static final int DISPLAY_GRID     = 0x08;
   static final int DISPLAY_LATEST   = 0x10; // whether to display the latest shots
   static final int DISPLAY_SCALEBAR = 0x20; // whether to display the scale reference bar on not 
-  static final int DISPLAY_OUTLINE  = 0x40; // whether to display only the outline
+  static final int DISPLAY_OUTLINE  = 0x40; // whether to display only the outline - 3d sections
+  static final int DISPLAY_WALLS    = 0x80; 
   static final int DISPLAY_ID       = 0x100; 
   static final int DISPLAY_BLANK    = 0x200; 
 
@@ -33,7 +34,7 @@ class DisplayMode
   static final int DISPLAY_OVERVIEW = 0x2f; //        0x20 |        0x08 | 0x04 | 0x02 | 0x01 skip outline and latest 
   static final int DISPLAY_FULL     = 0x032f; 
 
-  static final int DISPLAY_SKETCH   = 0x0c; // leg splay grid
+  static final int DISPLAY_SKETCH   = DISPLAY_SPLAY | DISPLAY_STATION | DISPLAY_GRID | DISPLAY_SCALEBAR | DISPLAY_OUTLINE | DISPLAY_WALLS;
 
   static boolean isLeg( int mode )     { return ( mode & DISPLAY_LEG     ) == DISPLAY_LEG; }
   static boolean isSplay( int mode )   { return ( mode & DISPLAY_SPLAY   ) == DISPLAY_SPLAY; }

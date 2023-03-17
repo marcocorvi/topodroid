@@ -790,6 +790,9 @@ no campo abaixo e aperte o botão.
   <string name="mode_fixed">Deslocar croqui X linha de trena (CUIDADO!)</string>
   <string name="mode_outline">Contorno</string>
   <string name="mode_scale_ref">Escala gráfica</string>
+    <!-- TODO string name="mode_sections">Sections</string -->
+    <!-- TODO string name="mode_walls">Walls</string -->
+    <!-- TODO string name="mode_refs">Frame</string -->
   <string name="layer_floor">Bases</string>
   <string name="layer_fill">Preenchimentos</string>
   <string name="layer_ceil">Topos</string>

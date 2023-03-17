@@ -24,6 +24,7 @@ import com.topodroid.math.TDVector;
 // import java.io.PrintWriter;
 import java.io.DataOutputStream;
 import java.io.DataInputStream;
+import java.io.IOException;
 
 // import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -36,6 +37,7 @@ public class SketchFixedPath extends SketchPath
 {
   TDVector mV1; // (E,N,Up)
   TDVector mV2;
+  TDVector mU;  // unit vector of the line
 
   /** cstr
    * @param type   path type: 
@@ -48,6 +50,8 @@ public class SketchFixedPath extends SketchPath
     super( type, paint );
     mV1 = v1;
     mV2 = v2;
+    mU  = mV2.minus( mV1 );
+    mU.normalize();
   }
 
   void dump( String msg )
@@ -71,15 +75,29 @@ public class SketchFixedPath extends SketchPath
    * @param dos   output stream
    */
   @Override
-  public void toDataStream( DataOutputStream dos ) { TDLog.Error( "ERROR Sketch Fixed Path toDataStream "); }
+  public void toDataStream( DataOutputStream dos ) throws IOException
+  {
+    dos.write( 'F' );
+    toDataStream( dos, mV1 );
+    toDataStream( dos, mV2 );
+  }
 
   /** read from a stream
    * @param cmd  command manager (unused)
    * @param dis  input stream
    * @param version file version
+   * @return always 1
    */
   @Override
-  public int fromDataStream( SketchCommandManager cmd, DataInputStream dis, int version ) { TDLog.Error( "ERROR Sketch Fixed Path fromDataStream "); return 0; }
+  public int fromDataStream( SketchCommandManager cmd, DataInputStream dis, int version ) throws IOException
+  {
+    dataCheck( "SECTION", ( dis.read() == 'F' ) );
+    mV1 = tdVectorFromDataStream( dis );
+    mV2 = tdVectorFromDataStream( dis );
+    mU = mV2.minus( mV1 );
+    mU.normalize();
+    return 1;
+  }
 
   // -----------------------------------------------------------------------
 

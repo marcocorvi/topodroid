@@ -139,51 +139,53 @@ public class SketchWindow extends ItemDrawer
                         R.drawable.iz_select,
                         R.drawable.iz_mode,          // 3
                         R.drawable.iz_note,          // 4
+                        R.drawable.iz_wall,          // 5
                         R.drawable.iz_refresh,
-                        R.drawable.iz_undo,          // 6
-                        R.drawable.iz_redo,          // 7
-                        R.drawable.iz_small,         // 8
-                        R.drawable.iz_medium,        // 9
-                        R.drawable.iz_large,         // 10
+                        R.drawable.iz_undo,          // 7
+                        R.drawable.iz_redo,          // 8
+                        R.drawable.iz_small,         // 9
+                        R.drawable.iz_medium,        // 10
+                        R.drawable.iz_large,         // 11
                         // R.drawable.iz_back,          // 11
                         // R.drawable.iz_forw,          // 12
-                        R.drawable.iz_delete,        // 11
+                        R.drawable.iz_delete,        // 12
                         R.drawable.iz_delete_off,
-                        R.drawable.iz_section_ok,    // 13
-                        R.drawable.iz_section_no,    // 14
-                        R.drawable.iz_open,          // 15
-                        R.drawable.iz_clear,         // 16
+                        R.drawable.iz_section_ok,    // 14
+                        R.drawable.iz_section_no,    // 15
+                        R.drawable.iz_open,          // 16
+                        R.drawable.iz_clear,         // 17
                         R.drawable.iz_select_station,
                         R.drawable.iz_select_line,
                         R.drawable.iz_menu,
   };
-  private static final int IC_SMALL      = 8;
-  private static final int IC_MEDIUM     = 9;
-  private static final int IC_LARGE      = 10;
-  // private static final int IC_PREV       = 11;
-  // private static final int IC_NEXT       = 12;
-  private static final int IC_DELETE_OK  = 11;
-  private static final int IC_DELETE_NO  = 12;
-  private static final int IC_SECTION_OK = 13;
-  private static final int IC_SECTION_NO = 14;
-  private static final int IC_SECTION_OPEN = 15;
-  private static final int IC_SELECT_STATION = 17;
-  private static final int IC_SELECT_LINE    = 18;
-  private static final int IC_MENU       = 19;
+  private static final int IC_SMALL          =  9;
+  private static final int IC_MEDIUM         = 10;
+  private static final int IC_LARGE          = 11;
+  // private static final int IC_PREV        = 11;
+  // private static final int IC_NEXT        = 12;
+  private static final int IC_DELETE_OK      = 12;
+  private static final int IC_DELETE_NO      = 13;
+  private static final int IC_SECTION_OK     = 14;
+  private static final int IC_SECTION_NO     = 15;
+  private static final int IC_SECTION_OPEN   = 16;
+  private static final int IC_SELECT_STATION = 18;
+  private static final int IC_SELECT_LINE    = 19;
+  private static final int IC_MENU           = 20;
 
 
-  private static final int NR_BUTTON1 = 6;
+  private static final int NR_BUTTON1 = 7; // MOVE
   private static final int NR_BUTTON2 = 5; // DRAW
   private static final int NR_BUTTON3 = 8; // SELECT
   private static final int NR_BUTTON5 = 6; // ERASE
 
-  // private static final int mNrMove = 6;
+  // private static final int mNrMove = 7;
   private static final int[] izons_move = {
                         R.drawable.iz_edit,          // 0
                         R.drawable.iz_eraser,
                         R.drawable.iz_select,
                         R.drawable.iz_mode,          // 3
                         R.drawable.iz_note,          // 4
+                        R.drawable.iz_wall,
                         R.drawable.iz_refresh
   };
   private static final int[] help_icons_move = {
@@ -192,6 +194,7 @@ public class SketchWindow extends ItemDrawer
                         R.string.help_edit,
                         R.string.help_refs,
                         R.string.help_note,
+                        R.string.help_walls_3d, // FIXME help_walls
                         R.string.help_refresh
   };
 
@@ -382,6 +385,7 @@ public class SketchWindow extends ItemDrawer
   // private long mSid;  // survey id
   // private long mPid;  // current plot id
   private Point2D mOffset = new Point2D();
+  private TDVector mU = null;
 
   // ----------------------------------------------------------------
   // BUTTONS and MENU
@@ -434,6 +438,8 @@ public class SketchWindow extends ItemDrawer
   private BitmapDrawable mBMsectionOpen;
   private BitmapDrawable mBMselectStation;;
   private BitmapDrawable mBMselectLine;;
+  // private BitmapDrawable mBMempty;
+  private BitmapDrawable mBMwall;
 
   private MyHorizontalListView mListView;
   private ListView   mMenu;
@@ -566,6 +572,8 @@ public class SketchWindow extends ItemDrawer
     mSketchName = leg.from + "-" + leg.to;
     TDVector v1 = new TDVector();
     TDVector v2 = leg.toTDVector(); // (E,N,Up)
+    mU = v2.getUnitVector();
+
     float theta = TDMath.atan2d( v2.z, TDMath.sqrt( v2.x*v2.x + v2.y*v2.y) );
     // TDLog.v("SKETCH leg " + leg.from + "-" + leg.to + " L " + leg.len + " A " + leg.ber + " C " + leg.cln );
     // TDLog.v("SKETCH V2: E " + v2.x + " N " + v2.y + " Up " + v2.z + " theta " + theta );
@@ -837,7 +845,7 @@ public class SketchWindow extends ItemDrawer
     } else if ( mMode == MODE_ERASE ) {
       sb.append( res.getString( R.string.title_erase ) );
     }
-    sb.append( String.format(Locale.US, ": %.0f", mSketchSurface.getLegViewRotation() ) );
+    sb.append( String.format(Locale.US, ": %.0f %.0f", mSketchSurface.getLegViewRotationAlpha(), mSketchSurface.getLegViewRotationBeta() ) );
     mActivity.setTitle( sb.toString() );
   }
 
@@ -1074,6 +1082,7 @@ public class SketchWindow extends ItemDrawer
     mBMsectionOpen = MyButton.getButtonBackground( this, res, izons[IC_SECTION_OPEN] );
     mBMselectStation = MyButton.getButtonBackground( this, res, izons[IC_SELECT_STATION] );
     mBMselectLine    = MyButton.getButtonBackground( this, res, izons[IC_SELECT_LINE] );
+    // mBMempty         = MyButton.getButtonBackground( this, res, R.drawable.iz_empty );
 
     mBMdeleteOn  = MyButton.getButtonBackground( this, res, izons[IC_DELETE_OK] );
     mBMdeleteOff = MyButton.getButtonBackground( this, res, izons[IC_DELETE_NO] );
@@ -1085,6 +1094,19 @@ public class SketchWindow extends ItemDrawer
     mButtonView2 = new MyHorizontalButtonView( mButton2 );
     mButtonView3 = new MyHorizontalButtonView( mButton3 );
     mButtonView5 = new MyHorizontalButtonView( mButton5 );
+  }
+
+  void setDrawEraseEditButtons( boolean leg )
+  {
+    if ( leg ) {
+      mButton3[2].setVisibility( View.VISIBLE );
+      mButton3[2].setOnClickListener( this );
+    } else {
+      mButton3[2].setVisibility( View.GONE );
+      mButton3[2].setOnClickListener( null );
+    }
+    setMode( MODE_MOVE );
+    mTouchMode = MODE_MOVE;
   }
 
   /** set the params of the tools toolbar
@@ -1322,7 +1344,7 @@ public class SketchWindow extends ItemDrawer
     // mContinueLine = TDSetting.mContinueLine; // do not reset cont-mode
     resetModified();
     setMode( MODE_MOVE ); // this setTheTitle() as well, and clearHotPath( INVISIBLE )
-    mTouchMode    = MODE_MOVE;
+    mTouchMode = MODE_MOVE;
     // setMenuAdapter( getResources() );
   }
 
@@ -1495,16 +1517,17 @@ public class SketchWindow extends ItemDrawer
   private void doResume() // restoreInstanceFromData
   {
     // TDLog.v( "doResume()" );
-    // TDLog.v("restore drawing display mode");
-    String mode = mApp_mData.getValue( "DISTOX_PLOT_MODE" );
-    SketchCommandManager.setDisplayMode( DisplayMode.parseString( mode ) );
+    // String mode = mApp_mData.getValue( "DISTOX_SKETCH_MODE" );
+    // TDLog.v("restore drawing display mode " + mode );
+    // mSketchSurface.setDisplayMode( DisplayMode.parseString( mode ) );
     switchZoomCtrl( TDSetting.mZoomCtrl );
 
     // TODO FIXME
-    // PlotInfo info = mApp_mData.getPlotInfo( mSid, mName );
+    // SketchInfo info = mApp_mData.getSketchInfo( mSid, mName );
     // mOffset.x = info.xoffset;
     // mOffset.y = info.yoffset;
     // mZoom     = info.zoom;
+
     mSketchSurface.setDrawing( true );
   }
 
@@ -1518,17 +1541,21 @@ public class SketchWindow extends ItemDrawer
     // if ( mPid >= 0 ) {
     //   try {
     //     // TDLog.v("PLOT pause: " + mOffset.x + " " + mOffset.y + " " + zoom );
-    //     mApp_mData.updatePlot( mPid, mSid, mOffset.x, mOffset.y, zoom );
+    //     mApp_mData.updateSketch( mPid, mSid, mOffset.x, mOffset.y, zoom );
     //   } catch ( IllegalStateException e ) {
     //     TDLog.Error("cannot save plot state: " + e.getMessage() );
     //   }
     // }
-    (new Thread() {
-       public void run() {
-         mApp_mData.setValue( "DISTOX_PLOT_MODE", DisplayMode.toString( SketchCommandManager.getDisplayMode() ) );
-       }
-    } ).start();
-    doSaveTdr( ); // do not alert-dialog on mAllSymbols
+
+    // TODO FIXME
+    // (new Thread() {
+    //    public void run() {
+    //      mApp_mData.setValue( "DISTOX_SKETCH_MODE", DisplayMode.toString( mSketchWindow.getDisplayMode() ) );
+    //    }
+    // } ).start();
+
+    // TODO FIXME
+    // doSaveTdr( ); // do not alert-dialog on mAllSymbols
   }
 
   // private void doStop()
@@ -1540,7 +1567,7 @@ public class SketchWindow extends ItemDrawer
 
   /** start the sketch display 
    * @param do_load whether to load plot from file
-   * @note called by onCreate, switchPlotType, onBackPressed 
+   * @note called by onCreate, switchSketchType, onBackPressed 
    * 
    * FIXME null ptr in 5.1.40 on ANDROID-11 at line 2507 
    */
@@ -1875,7 +1902,9 @@ public class SketchWindow extends ItemDrawer
             // TDLog.v("SKETCH new line " + id + "." + sid + " size " + cpath.size() );
             SketchLinePath lp1 = new SketchLinePath( id, sid, SketchSurface.getSectionLinePaint( mCurSection ) );
             for ( Point2D p0 : cpath ) {
-              lp1.appendPoint( mSketchSurface.toTDVector( p0.x, p0.y ) );
+              TDVector vec = mSketchSurface.toTDVector( p0.x, p0.y );
+              SketchPoint pt = lp1.appendPoint( vec );
+              // mSketchSurface.setPolarCoords( pt ); // POLAR
             }
             mSketchSurface.addLinePath( mCurSection, lp1 );
           }
@@ -1911,7 +1940,6 @@ public class SketchWindow extends ItemDrawer
     float d0 = TDSetting.mCloseCutoff + mSelectSize / mSketchSurface.getZoom();
     // TDLog.v( "on touch down. mode " + mMode + " " + mTouchMode );
 
-    // TDLog.Log( TDLog.LOG_PLOT, "DOWN at X " + xc + " [" +TopoDroidApp.mBorderInnerLeft + " " + TopoDroidApp.mBorderInnerRight + "] Y " 
     // TDLog.v( "DOWN at X " + xc + " [" +TopoDroidApp.mBorderInnerLeft + " " + TopoDroidApp.mBorderInnerRight + "] Y " + yc + " [" + TopoDroidApp.mBorderTop + " " + TopoDroidApp.mBorderBottom + "]" );
 
     // float bottom = TopoDroidApp.mBorderBottom - mZoomTranslate;
@@ -2007,11 +2035,8 @@ public class SketchWindow extends ItemDrawer
         mSaveX = xc; 
         mSaveY = yc;
       }
-    // } else if ( mTouchMode == MODE_ROTATE ) {
-    //   mSketchSurface.rotateHotItem( mRotateScale * ( yc - mStartY ) );
-    //   modified();
     } else if ( mTouchMode == MODE_ROTATE ) {
-      mSketchSurface.changeAlpha( (yc > mSaveY)? +1 : -1 );
+      mSketchSurface.changeAlpha( ((yc > mSaveY)? +1 : -1), ((xc > mSaveX)? +1 : -1) );
       setTheTitle();
       mSaveX = xc;
       mSaveY = yc;
@@ -2155,7 +2180,7 @@ public class SketchWindow extends ItemDrawer
     } else if ( mMode == MODE_DRAW ) {
       int k2 = 3;
       if ( k2 < NR_BUTTON2 && b == mButton2[k2++] ) { // UNDO
-        mSketchSurface.undo();
+        mSketchSurface.undo(); // TODO return value unused
         // if ( ! mSketchSurface.hasMoreUndo() ) {
         //   // undoBtn.setEnabled( false );
         // }
@@ -2164,7 +2189,7 @@ public class SketchWindow extends ItemDrawer
         modified();
       } else if ( k2 < NR_BUTTON2 && b == mButton2[k2++] ) { // REDO
         if ( mSketchSurface.hasMoreRedo() ) {
-          mSketchSurface.redo();
+          mSketchSurface.redo(); // TODO return value unused
         }
       // } else if ( k2 < NR_BUTTON2 && b == mButton2[k2++] ) { // TOOLS
       //   if ( ! TDSetting.mTripleToolbar ) {
@@ -2243,13 +2268,15 @@ public class SketchWindow extends ItemDrawer
     } else {
       int k1 = 3;
       if ( k1 < NR_BUTTON1 && b == mButton1[k1++] ) { // DISPLAY MODE 
-        TDLog.v("TODO mode");
-        // new SketchModeDialog( mActivity, this, mSketchSurface ).show();
+        TDLog.v("TODO display mode");
+        new SketchModeDialog( mActivity, this, mSketchSurface ).show();
       } else if ( k1 < NR_BUTTON1 && b == mButton1[k1++] ) { //  NOTE
         long mSid = TDInstance.sid;
         if ( mSid >= 0 ) {
           (new DialogAnnotations( mActivity, mApp_mData.getSurveyFromId(mSid) )).show();
         }
+      } else if ( k1 < NR_BUTTON1 && b == mButton1[k1++] ) { //  WALLS
+        if ( mU != null ) mSketchSurface.makeWall( mU );
       } else if ( TDLevel.overNormal && k1 < NR_BUTTON1 && b == mButton1[k1++] ) { //  REFRESH
         TDLog.v("TODO updateDisplay(); ");
       }

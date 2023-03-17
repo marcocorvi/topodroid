@@ -15,6 +15,7 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDMath;
 import com.topodroid.math.TDVector;
+import com.topodroid.math.TDMatrix;
 import com.topodroid.prefs.TDSetting;
 // import com.topodroid.math.Point2D; // float X-Y
 
@@ -35,6 +36,7 @@ import android.graphics.Matrix;
 
 public class SketchSection extends SketchPath
 {
+  // section types
   public static final int SECTION_NONE       = -1;
   public static final int SECTION_LEG        = 0;
   public static final int SECTION_VERTICAL   = 1;
@@ -52,16 +54,50 @@ public class SketchSection extends SketchPath
   private float mAlpha = 0; // projection rotation angle [degrees]
   private float mMaxAlpha = 0;
   private float mCosAlpha = 1.0f;
+  private float mSinAlpha = 0.0f;
   float mMinAlpha = 0;
   boolean mCanRotate = false;
+  private float mBeta = 0;
+  private float mCosBeta = 1.0f;
+  private float mSinBeta = 0.0f;
   TDVector    mNp;  // section-plane normal
   TDVector    mSp;  // section-plane Y
+  TDVector    mHp;  // section-plane X
 
   TDVector mEast, mNorth, mUp;
   
   ArrayList< SketchLinePath > mLines = null; // lines, in the plane of the section
+  ArrayList< SketchLinePath > mRedos = null; // lines, in the plane of the section
+
   private List< SketchFixedPath > mSectionGrid = null;
-  private int mType = SECTION_NONE; // whether the section is vertical (meaningfol only for x-sections)
+  private int mSectionType = SECTION_NONE; // whether the section is vertical (meaningfol only for x-sections)
+
+  private TDMatrix mProjMatrix = null; 
+
+  /** make the projection matrix
+   */
+  void makeProjMatrix( TDVector u )
+  {
+    TDMatrix m1 = new TDMatrix( mH, mS, u );
+    mProjMatrix = m1.inverseTransposed();
+  }
+
+  /** @return distance of the U-projection on the section plane of a 3D point
+   * @param p  3D point
+   * @param pv 3D U-projection of the point on the section plane
+   * solution of
+   *    P + s U = C + x H + y S
+   * note s = -z
+   */
+  float project( TDVector p, TDVector pv )
+  {
+    TDVector pc = p.minus( mC );
+    TDVector v  = mProjMatrix.timesV( pc );
+    pv.x = mC.x + v.x * mH.x + v.y * mS.x;
+    pv.y = mC.y + v.x * mH.y + v.y * mS.y;
+    pv.z = mC.z + v.x * mH.z + v.y * mS.z;
+    return - v.z;
+  }
 
   /** cstr
    * @param id    section ID (0 for the leg-section)
@@ -84,9 +120,11 @@ public class SketchSection extends SketchPath
     mS = s;
     mN = n;
     mLines = new ArrayList< SketchLinePath >();
+    mRedos = new ArrayList< SketchLinePath >();
     mNp = mN;
     mSp = mS;
-    mType = type;
+    mHp = mH;
+    mSectionType = type;
     // TDLog.v("SKETCH legviews C " + mC.x + " " + mC.y + " " + mC.z );
     makeFrame();
   }
@@ -122,15 +160,15 @@ public class SketchSection extends SketchPath
       // TDLog.v("SKETCH section (vert " + vertical + ") " + dx + " " + dy + " " + dz );
       float dh = TDMath.sqrt( dx*dx + dy*dy );
       if ( vertical ) {
-        mS = new TDVector(      0,     0, -1 );
+        mS = new TDVector(      0,     0, -1 ); // 20230317 was 0,0,-1
         mH = new TDVector(  dx/dh, dy/dh,  0 );
         mN = new TDVector( -dy/dh, dx/dh,  0 ); // H ^ S
-        mType = SECTION_VERTICAL;
+        mSectionType = SECTION_VERTICAL;
       } else {
         mN = new TDVector(      0,     0, -1 ); // downward
         mH = new TDVector(  dx/dh,  dy/dh, 0 );
         mS = new TDVector(  dy/dh, -dx/dh, 0 ); // N ^ H
-        mType = SECTION_HORIZONTAL;
+        mSectionType = SECTION_HORIZONTAL;
       }
     } else {
       mC = new TDVector();
@@ -141,7 +179,20 @@ public class SketchSection extends SketchPath
     mLines = new ArrayList< SketchLinePath >();
     mNp = mN;
     mSp = mS;
+    mHp = mH;
     makeFrame();
+  }
+
+  // POLAR
+  /** set the point polar coords
+   * @param pt   sketch point
+   */
+  void setPolarCoords( SketchPoint pt ) 
+  {
+    if ( pt == null ) return;
+    TDVector v = pt.minus( mC );
+    pt.mRadius = v.length();
+    pt.mAlpha  = TDMath.atan2( mN.dot( v.cross( mS ) ), mS.dot( v ) );
   }
 
   // debug
@@ -173,7 +224,7 @@ public class SketchSection extends SketchPath
     }
   }
 
-  private final static int THETA_BUFFER = 10;
+  private final static int THETA_BUFFER = 45;
 
   /** set the projection rotation-angle min-max
    * @param theta   leg clino [degree]
@@ -188,36 +239,53 @@ public class SketchSection extends SketchPath
       mMinAlpha = theta - THETA_BUFFER; if ( mMinAlpha < -90 ) mMinAlpha = -90;
     }
     mCanRotate = true;
-    setAlpha( 0 );
+    setAlpha( 0, 0 );
   }
 
   /** set the projection rotation-angle
    * @param alpha rotation angle [degrees]
    */
-  private void setAlpha( float alpha )
+  private void setAlpha( float alpha, float beta )
   {
     if ( ! mCanRotate ) return;
-    mAlpha = alpha;
-    if ( mAlpha > mMaxAlpha ) { mAlpha = mMaxAlpha; }
-    else if ( mAlpha < mMinAlpha ) { mAlpha = mMinAlpha; }
-
-    float c = TDMath.cosd( mAlpha );
-    float s = TDMath.sind( mAlpha );
-    // TDLog.v("Section set alpha " + mAlpha + " [" + + mMinAlpha + ", " + mMaxAlpha + "] c " + c + " s " + s );
-    mN = new TDVector( c*mNp.x - s*mSp.x, c*mNp.y - s*mSp.y, c*mNp.z - s*mSp.z );
-    mS = new TDVector( c*mSp.x + s*mNp.x, c*mSp.y + s*mNp.y, c*mSp.z + s*mNp.z );
-    mCosAlpha = c;
+    boolean rotate = false;
+    if ( alpha >= mMinAlpha && alpha <= mMaxAlpha ) {
+      mAlpha = alpha;
+      mCosAlpha = TDMath.cosd( mAlpha );
+      mSinAlpha = TDMath.sind( mAlpha );
+      rotate = true;
+    }
+    if ( beta >= mMinAlpha && beta <= mMaxAlpha ) {
+      mBeta = beta;
+      mCosBeta = TDMath.cosd( mBeta );
+      mSinBeta = TDMath.sind( mBeta );
+      rotate = true;
+    }
+    if ( rotate ) {
+      float ca = mCosAlpha;
+      float sa = mSinAlpha;
+      float cb = mCosBeta;
+      float sb = mSinBeta;
+      // rotate N-S about H
+      TDVector N = new TDVector( ca*mNp.x - sa*mSp.x, ca*mNp.y - sa*mSp.y, ca*mNp.z - sa*mSp.z );
+      TDVector S = new TDVector( ca*mSp.x + sa*mNp.x, ca*mSp.y + sa*mNp.y, ca*mSp.z + sa*mNp.z );
+      // rotate any vector about Z
+      mH = new TDVector( cb*mHp.x - sb*mHp.y, cb*mHp.y + sb*mHp.x, mHp.z );
+      mN = new TDVector( cb*N.x - sb*N.y, cb*N.y + sb*N.x, N.z );
+      mS = new TDVector( cb*S.x - sb*S.y, cb*S.y + sb*S.x, S.z );
+    }
   }
 
-  float getRotation( ) { return mAlpha; }
+  float getRotationAlpha( ) { return mAlpha; }
+  float getRotationBeta( )  { return mBeta; }
 
   /** change the projection angle - only leg-view
    * @param delta angle change [degree]
    */
-  boolean changeAlpha( int delta )
+  boolean changeAlpha( int da, int db )
   { 
     if ( ! mCanRotate ) return false;
-    setAlpha( mAlpha + delta );
+    setAlpha( mAlpha + da, mBeta + db );
     return true;
   }
 
@@ -227,7 +295,7 @@ public class SketchSection extends SketchPath
 
   /** @return the section type
    */
-  int getType() { return mType; }
+  int getSectionType() { return mSectionType; }
 
   /** increase the max line ID and return it
    * @return the max line-ID
@@ -248,19 +316,33 @@ public class SketchSection extends SketchPath
   /** delete a line
    * @param line   line to delete
    */
-  void deleteLine( SketchLinePath line ) { if ( mLines != null ) mLines.remove( line ); }
+  void deleteLine( SketchLinePath line ) 
+  { 
+    if ( mLines == null ) return;
+    mLines.remove( line ); 
+  }
 
   /** append a line
    * @param line   line to append
    */
-  void appendLine( SketchLinePath line ) { if ( mLines != null ) mLines.add( line ); }
+  void appendLine( SketchLinePath line ) 
+  { 
+    if ( mLines == null ) return;
+    mLines.add( line );
+  }
+ 
 
   @Override
   public int size() { return (mLines == null)? 0 : mLines.size(); }
 
   /** clear the section
    */
-  void clear() { if ( mLines != null) mLines.clear(); }
+  void clear() 
+  {
+    if ( mLines == null) return;
+    mLines.clear();
+    mRedos.clear();
+  }
 
   /** @return true if this section has the specified base points
    * @param p1    first section base-point
@@ -325,13 +407,27 @@ public class SketchSection extends SketchPath
     }
   }
 
-  public void undo () { TDLog.v("TODO undo"); }
+  public boolean undo () 
+  { 
+    int sz = mLines.size();
+    if ( sz <= 0 ) return false;
+    SketchLinePath line = mLines.remove( sz - 1 );
+    mRedos.add( line );
+    return true;
+  }
 
-  public void redo () { TDLog.v("TODO redo"); }
+  public boolean redo () 
+  { 
+    int sz = mRedos.size();
+    if ( sz <= 0 ) return false;
+    SketchLinePath line = mRedos.remove( sz - 1 );
+    mLines.add( line );
+    return true;
+  }
 
-  boolean hasMoreRedo() { return false; }
+  boolean hasMoreRedo() { return mRedos.size() > 0; }
 
-  boolean hasMoreUndo() { return false; }
+  boolean hasMoreUndo() { return mLines.size() > 0; }
 
   boolean setRangeAt( float x, float y, float zoom, float size ) { TDLog.v("TODO set range at"); return false; }
 
@@ -342,7 +438,7 @@ public class SketchSection extends SketchPath
   @Override
   public void toDataStream( DataOutputStream dos ) throws IOException 
   {
-    // TDLog.v("WRITE section " + mId + " type " + mType + " max line-ID " + nMaxLineId + " lines " + mLines.size() );
+    // TDLog.v("WRITE section " + mId + " type " + mSectionType + " max line-ID " + nMaxLineId + " lines " + mLines.size() );
     mC.dump("  C");
     mH.dump("  H");
     mS.dump("  S");
@@ -350,7 +446,7 @@ public class SketchSection extends SketchPath
     // TDLog.Error( "ERROR Sketch Section toDataStream ");
     dos.write( 'X' );
     dos.writeInt( mId );
-    dos.writeInt( mType );
+    dos.writeInt( mSectionType );
     if ( mId > 0 ) {
       toDataStream( dos, mP1 );
       toDataStream( dos, mP2 );
@@ -380,7 +476,7 @@ public class SketchSection extends SketchPath
     float alpha = 0;
     dataCheck( "SECTION", ( dis.read() == 'X' ) );
     mId = dis.readInt();
-    mType = dis.readInt();
+    mSectionType = dis.readInt();
     nMaxLineId = 0;
     Paint paint = SketchSurface.getSectionLinePaint( mId ); // line-paint
     if ( mId > 0 ) {
@@ -416,6 +512,17 @@ public class SketchSection extends SketchPath
     }
     // TDLog.v("READ section " + mId + " max line id " + nMaxLineId + " lines " + nln );
     return mId;
+  }
+
+  // POLAR
+  void dumpPolar()
+  {
+    for ( SketchLinePath line : mLines ) {
+      int sz = line.size();
+      SketchPoint p1 = line.get( 0 );
+      SketchPoint p2 = line.get( sz-1 );
+      TDLog.v("Line " + line.getId() + " size " + sz + " P1 " + p1.mRadius + " " + p1.mAlpha + " P2 " + p2.mRadius + " " + p2.mAlpha );
+    }
   }
 
 }

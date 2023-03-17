@@ -147,6 +147,7 @@
   <string name="DialogSurvey" translatable="false">page_3d_survey.htm</string>
   <string name="DialogSurveys" translatable="false">page_3d_surveys.htm</string>
   <string name="DialogWalls" translatable="false">page_3d_walls.htm</string>
+  <string name="SketchModeDialog" translatable="false">page_sketch_mode.htm</string>
 
   <!-- string name="PageTodo" translatable="false">page_todo.htm</string -->
   <!-- UNUSED string name="DialogR" translatable="false">page_dialog_r.htm</string -->

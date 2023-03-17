@@ -25,6 +25,8 @@ import android.graphics.Matrix;
 public class SketchPoint extends TDVector // world coords
 {
   SketchLinePath mLine;
+  float mRadius = 0; // polar coords on the vert/horiz plane refrenced to the basepoint on the leg
+  float mAlpha  = 0; // [radians]
 
   /** cstr
    * @param v     3D point

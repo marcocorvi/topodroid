@@ -79,6 +79,10 @@ public class SketchSurface extends SurfaceView
 
   // -----------------------------------------------------
 
+  void setDisplayMode( int mode ) { if ( commandManager != null ) commandManager.setDisplayMode( mode ); }
+
+  int getDisplayMode() { return ( commandManager == null )? 0 : commandManager.getDisplayMode(); }
+
   /** @return the canvas width
    */
   public int width()  { return mWidth; }
@@ -93,7 +97,8 @@ public class SketchSurface extends SurfaceView
 
   /** @return the leg-view rotation angle
    */
-  float getLegViewRotation() { return ( commandManager == null )? 0 : commandManager.getLegViewRotation(); }
+  float getLegViewRotationAlpha() { return ( commandManager == null )? 0 : commandManager.getLegViewRotationAlpha(); }
+  float getLegViewRotationBeta() { return ( commandManager == null )? 0 : commandManager.getLegViewRotationBeta(); }
 
   // private Timer mTimer;
   // private TimerTask mTask;
@@ -150,19 +155,9 @@ public class SketchSurface extends SurfaceView
   /** change the projection angle - only leg-view
    * @param delta angle change [degree]
    */
-  void changeAlpha( int delta ) { if ( commandManager != null ) commandManager.changeAlpha( delta ); }
+  void changeAlpha( int da, int db ) { if ( commandManager != null ) commandManager.changeAlpha( da, db ); }
 
   // -----------------------------------------------------------
-
-  /** set the global display mode
-   * @param mode   display mode
-   */
-  public void setDisplayMode( int mode ) { SketchCommandManager.setDisplayMode(mode); }
-
-  /** get the global display mode
-   * @return the global display mode
-   */
-  public int getDisplayMode( ) { return SketchCommandManager.getDisplayMode(); }
 
   /** set the transform in the current manager
    * @param act    activity
@@ -346,20 +341,19 @@ public class SketchSurface extends SurfaceView
 
   // void setBounds( float x1, float x2, float y1, float y2 ) { if ( commandManager != null ) commandManager.setBounds( x1, x2, y1, y2 ); }
 
-  void redo()
+  boolean redo()
   {
     isDrawing = true;
-    if ( commandManager != null ) commandManager.redo();
+    return ( commandManager != null )? commandManager.redo(): false;
   }
 
-  void undo()
+  boolean undo()
   {
     isDrawing = true;
-    if ( commandManager != null ) commandManager.undo();
+    return ( commandManager != null )? commandManager.undo() : false;
   }
 
-  boolean hasMoreRedo()
-  { return commandManager!= null && commandManager.hasMoreRedo(); }
+  boolean hasMoreRedo() { return commandManager!= null && commandManager.hasMoreRedo(); }
 
   // UNUSED
   // boolean hasMoreUndo()
@@ -442,6 +436,16 @@ public class SketchSurface extends SurfaceView
    * @param y    Y canvas coord
    */
   TDVector toTDVector( float x, float y ) { return ( commandManager == null )? null : commandManager.toTDVector( x, y ); }
+
+  /** make the wall
+   * @param u   U (leg) vector
+   */
+  void makeWall( TDVector u ) { if ( commandManager != null ) commandManager.makeWall( u ); }
+
+  // POLAR
+  /** set the line points polar coords
+   */
+  void setPolarCoords( SketchPoint pt ) { if ( commandManager != null ) commandManager.setPolarCoords( pt ); }
 
   SketchCommandManager getManager( ) { return commandManager; }
 

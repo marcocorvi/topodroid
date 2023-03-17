@@ -50,7 +50,7 @@ public class SketchPath
   // public static final int SKETCH_PATH_POINT   = 8; // drawing point
   // public static final int SKETCH_PATH_AREA    = 9;
 
-  protected int mType;      // path type
+  protected int mPathType;      // path type
   protected boolean  mVisible = true; 
   protected Paint mPaint;
 
@@ -59,7 +59,7 @@ public class SketchPath
    */
   protected SketchPath( int type, Paint paint )
   {
-    mType  = type;
+    mPathType  = type;
     mPaint = paint;
   }
 
@@ -101,9 +101,9 @@ public class SketchPath
     return new TDVector( x, y, z );
   }
 
-  /** @return the type of the command, namely 0
+  /** @return the type of the path
    */
-  public int type() { return mType; }
+  public int getPathType() { return mPathType; }
 
   /** set visibility
    * @param visible   visibility

@@ -59,10 +59,13 @@ public class SketchLinePath extends SketchPath
   /** append a point to the line
    * @param v   point 3D vector
    */
-  void appendPoint( TDVector v )
+  SketchPoint appendPoint( TDVector v )
   { 
+    if ( v == null ) return null;
     // TDLog.v("LINE " + mId + "." + mSid + " add pt " + v.x + " " + v.y + " " + v.z );
-    mPts.add( new SketchPoint( v, this ) );
+    SketchPoint ret = new SketchPoint( v, this );
+    mPts.add( ret );
+    return ret;
   }
 
 
@@ -82,6 +85,11 @@ public class SketchLinePath extends SketchPath
   /** clear the path
    */
   void clear() { mPts.clear(); }
+
+  /** @return the i-th point
+   * @param i  point index
+   */
+  SketchPoint get( int i ) { return mPts.get( i ); }
 
   /** write the path to a data stream - it does nothing by default
    * @param dos   output stream

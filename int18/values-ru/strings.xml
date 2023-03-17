@@ -846,6 +846,9 @@
     <string name="mode_fixed">Сдвиг относительно нитки</string>
     <string name="mode_outline">Только контур</string>
     <string name="mode_scale_ref">Шкала масштаба</string>
+    <!-- TODO string name="mode_sections">Sections</string -->
+    <!-- TODO string name="mode_walls">Walls</string -->
+    <!-- TODO string name="mode_refs">Frame</string -->
 
     <string name="layer_floor">Пол</string>
     <string name="layer_fill">Отложения</string>

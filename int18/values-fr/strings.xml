@@ -860,6 +860,9 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="mode_fixed">Références fixes</string>
     <string name="mode_outline">Bordure ext. uniquement</string>
     <string name="mode_scale_ref">Barre d\'échelle de réf.</string>
+    <!-- TODO string name="mode_sections">Sections</string -->
+    <!-- TODO string name="mode_walls">Walls</string -->
+    <!-- TODO string name="mode_refs">Frame</string -->
 
     <string name="layer_floor">Sol</string>
     <string name="layer_fill">Remplissages</string>

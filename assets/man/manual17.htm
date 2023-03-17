@@ -3,61 +3,73 @@
 
 <h3>3D SKETCHING</h3>
 
-3D sketching is done around one shot at a time.
-Therefore the display is centered about the current shot. 
+3D sketching is done around one leg at a time.
+Therefore the display is centered about the selected leg.
 <br><p>
 
 The 3D <u>Sketch window</u> has three modes (and three different button bars):
 <ul>
 <li>move</li>
 <li>draw</li>
-<li>select</li>
+<li>select (only for the "leg" view)</li>
 </ul>
 
 As for the 2D <u>Drawing window</u>, the leftmost green buttons indicate the current mode.<br>
 The other buttons for the <i>move</i> mode are:
 <ul>
-<li>surface display mode</li>
-<li>surface create</li>
-<li>data download</li>
+<li>display mode</li>
 <li>notes</li>
-<li>info</li>
+<li>walls</li>
+<li>refresh</li>
 </ul>
 
-<b>Surface display mode</b>
-The surface display mode can be,
-<ul>
-<li>only the surface of the current shot</li>
-<li>the surfaces of the current and the nearby shots</li>
-<li>all the surfaces</li>
-<li>no surface.</li>
-</ul><br>
 
-When no surface is displayed, you can step to the nearby shots by selecting the shot.<br><p>
+In the <i>draw</i> mode you can trace contour lines.
+The contour line of the "leg" view lie in the 3D plane dipping with the leg.
+Those of section views lie in the section plane.<br><p>
 
-In the <i>draw</i> mode you can place iconic symbols on the surface, as well as trace line symbols.
+Buttons:
 <ul>
 <li>undo</li>
 <li>redo</li>
-<li>palette (item picker)</li>
 </ul>
+
+The <i>erase</i> mode has buttons
+<ul>
+<li>undo</li>
+<li>redo</li>
+<li>erasersize</li>
+</ul><br><p>
 
 For the <i>select</i> mode:
 <ul>
-<li>select mode</li>
+<li>selection mode: either contour points or neighbor stations</li>
 <li>select size</li>
-<li>previous item (not implemented)</li>
-<li>next item (not implemented)</li>
-</ul>
+<li>delete</li>
+<li>view: either section or neighbor "leg" view</li>
+<lI>clear selection</li>
+</ul><br>
+
+The "leg" view contains also the connected legs.
+Tapping one of neighbor stations moves the "leg" view to the leg of that station.<br><p>
+
+A section can be created when two points on the contour lines have been selected.
+The section plane can be "vertical" or "horizntal".
+If it is vertical it contains the two selected points, and the Y-axis is the vertical.
+If it is horizontal it passes through their midpoint and the Y-axis is the leg azimuth.
+The two points (or their projections) are shown in the display.<br>
+
+A menu commutes between the "vertical" and the "horizontal" choices.<br><p>
+
+
 
 <b>Menus</b><br>
 <ul>
-<li>Export (supported formats: Therion 3D, DXF)</li>
-<li>Palette</li>
+<li>Close</li>
+<li>Export (ie, save)</li>
 <li>Zoom fit </li>
-<li>Head: orienting the model using the Android device</li>
-<li>Delete the 3D model</li>
-<li>Clear: remove all the surfaces</li>
+<li>Section type</li>
+<li>Delete</li>
 <li>Settings</li>
 <li>Help</li>
 </ul>

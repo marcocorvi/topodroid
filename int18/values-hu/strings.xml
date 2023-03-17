@@ -853,6 +853,9 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="mode_fixed">Fix ref.</string>
     <string name="mode_outline">Csak körvonal</string>
     <string name="mode_scale_ref">Vonalas lépték</string>
+    <!-- TODO string name="mode_sections">Sections</string -->
+    <!-- TODO string name="mode_walls">Walls</string -->
+    <!-- TODO string name="mode_refs">Frame</string -->
 
     <string name="layer_floor">Talp F</string>
     <string name="layer_fill">Kitöltés D</string>

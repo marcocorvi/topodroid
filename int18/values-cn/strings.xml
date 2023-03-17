@@ -849,6 +849,9 @@
     <string name="mode_fixed">修复refs文件</string>
     <string name="mode_outline">只显示轮廓</string>
     <string name="mode_scale_ref">比例尺参考</string>
+    <!-- TODO string name="mode_sections">Sections</string -->
+    <!-- TODO string name="mode_walls">Walls</string -->
+    <!-- TODO string name="mode_refs">Frame</string -->
 
     <string name="layer_floor">地面</string>
     <string name="layer_fill">填充</string>
