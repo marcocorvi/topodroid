@@ -1409,8 +1409,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_pointing_message">Máximo deslocamento entre toque e destoque para selecionar</string>
   <string name="pref_dash_splay_title">Pontilh aux</string>
   <string name="pref_dash_splay_message">Pontilhamento de medidas auxiliares na planta baixa, nos perfis ou em ambos</string>
-  <string name="pref_vert_splay_title">Lim ponth clino</string>
-  <string name="pref_vert_splay_message">Medidas auxiliares acima dessa inclinação serão tracejadas na planta baixa</string>
+  <string name="pref_vert_splay_title">Lim pontilh clino</string>
+  <string name="pref_vert_splay_message">Se acima desta inclinação as medidas auxiliares serão pontilhadas, se abaixo, serão tracejadas.</string>
   <string name="pref_horiz_splay_title">Lim pontilh azimute</string>
   <string name="pref_horiz_splay_message">Medidas auxiliares divergindo do azimute da visada acima deste limite serão tracejadas nos perfis</string>
   <string name="pref_section_splay_title">Lim pontilh ângulo</string>
