@@ -470,13 +470,11 @@ no campo abaixo e aperte o botão.
   <string name="popup_select_area">Áreas</string>
   <string name="popup_select_shot">Medidas</string>
   <string name="popup_select_station">Bases</string>
-
   <!-- UNUSED string name="popup_cont_none">Nada</string -->
   <!-- UNUSED string name="popup_cont_start">Ponto inicial</string -->
   <!-- UNUSED string name="popup_cont_end">Ponto final</string -->
   <!-- UNUSED string name="popup_cont_both">Ambos pontos</string -->
   <!-- UNUSED string name="popup_cont_continue">Continuar</string -->
-
   <!-- UNUSED string name="connection_error">Erro na conexão</string -->
   <!-- UNUSED string name="connecting">Conectando …</string -->
   <!-- UNUSED string name="connected_none">Não conectado</string -->
@@ -631,7 +629,7 @@ no campo abaixo e aperte o botão.
   <string name="unzip_fail_td">Falha: versão do TopoDroid incompatível</string>
   <!-- UNUSED string name="zoom_in_out">Abrir/fechar zoom</string -->
   <string name="survey_info">Informações da topo</string>
-    <!-- TODO string name="stat_dates">From %1$s to %2$s</string -->
+  <string name="stat_dates">De %1$s para %2$s</string>
   <string name="stat_devices">Dispositivos %1$d: %2$s</string>
   <string name="stat_stddev_m">Desvio padrão M: %1$.1f %%</string>
   <string name="stat_stddev_g">Desvio padrão G: %1$.1f %%</string>
@@ -790,9 +788,9 @@ no campo abaixo e aperte o botão.
   <string name="mode_fixed">Deslocar croqui X linha de trena (CUIDADO!)</string>
   <string name="mode_outline">Contorno</string>
   <string name="mode_scale_ref">Escala gráfica</string>
-    <!-- TODO string name="mode_sections">Sections</string -->
-    <!-- TODO string name="mode_walls">Walls</string -->
-    <!-- TODO string name="mode_refs">Frame</string -->
+  <string name="mode_sections">Cortes</string >
+  <string name="mode_walls">Paredes</string>
+  <string name="mode_refs">Referência</string>
   <string name="layer_floor">Bases</string>
   <string name="layer_fill">Preenchimentos</string>
   <string name="layer_ceil">Topos</string>
