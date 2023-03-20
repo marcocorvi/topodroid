@@ -412,7 +412,8 @@ public class TDNum
    * @param name   station name
    * @param hide   whether to hide or show: +1 to hide, -1 to show
    *
-   * FIXME there is a problem here:               ,-----B---
+   * 20230318 fixed:
+   * there was a problem here:               ,-----B---
    * if the reduction tree has a branch, say 0----A
    *                                               `---C----D
    * when B, C are both hidden the left side of the tree is not shown.
@@ -426,15 +427,34 @@ public class TDNum
     if ( st == null ) return;
     st.mBarrierAndHidden = ( st.mHidden == -1 && hide == 1 );
     st.mHidden += hide;
-    // TDLog.v( "station " + st.name + " hide " + st.mHidden );
+    TDLog.v( "station " + st.name + " hide " + st.mHidden );
     hide *= 2;
-    st = st.mParent;
-    while ( st != null ) {
-      st.mHidden += hide;
-      if ( st.mHidden < 0 ) st.mHidden = 0;
-      // TDLog.v( "station " + st.name + " hide " + st.mHidden );
-      st = st.mParent;
-    }
+    // st = st.parent(); // 20230318 fixed
+    // while ( st != null ) {
+    //   st.mHidden += hide;
+    //   if ( st.mHidden < 0 ) st.mHidden = 0;
+    //   // TDLog.v( "station " + st.name + " hide " + st.mHidden );
+    //   st = st.parent();
+    // }
+    if ( mStartStation.name.equals( name ) ) return;
+    Stack<NumStation> stack = new Stack<NumStation>();
+    stack.push( mStartStation );
+    TDLog.v("push " + mStartStation.name );
+    while ( ! stack.empty() ) {
+      st = stack.pop();
+      TDLog.v("pop " + st.name );
+      if ( ! st.name.equals( name ) ) {
+        st.mHidden += hide;
+        if ( st.sibling() != null ) {
+          stack.push( st.sibling() );
+          TDLog.v("push sibling " + st.sibling().name );
+        }
+        if ( st.child() != null ) {
+          stack.push( st.child() );
+          TDLog.v("push child " + st.child().name );
+        }
+      }
+    }    
   }
 
   /** set the hidden stations
@@ -458,22 +478,33 @@ public class TDNum
     // TDLog.v( "Set Station barrier: " + barrier );
     NumStation st = getStation( name );
     if ( st == null ) return;
+    TDLog.v( "station " + st.name + " barr " + st.mHidden );
     st.mBarrierAndHidden = ( st.mHidden == 1 && barrier == 1 );
     st.mHidden -= barrier;
+    if ( mStartStation == st ) return;
     barrier *= 2;
-    Stack<NumStation> stack = new Stack<NumStation>();
-    stack.push( st );
-    while ( ! stack.empty() ) {
-      st = stack.pop();
-      // TDLog.v( "station " + st.name + " hide " + st.mHidden );
-      mStations.updateHidden( st, -barrier, stack );
-
-      // for ( NumStation s : mStations ) {
-      //   if ( s.mParent == st ) {
-      //     s.mHidden -= barrier;
-      //     stack.push( s );
-      //   }
-      // }
+    // stack.push( st ); // 20230318 fixed
+    // while ( ! stack.empty() ) {
+    //   st = stack.pop();
+    //   mStations.updateHidden( st, -barrier, stack );
+    // }
+    if ( st.child() != null ) {
+      Stack<NumStation> stack = new Stack<NumStation>();
+      stack.push( st.child() );
+      TDLog.v("push " + st.name );
+      while ( ! stack.empty() ) {
+        st = stack.pop();
+        TDLog.v("pop " + st.name );
+        st.mHidden -= barrier;
+        if ( st.sibling() != null ) {
+          stack.push( st.sibling() );
+          TDLog.v("push sibling " + st.sibling().name );
+        }
+        if ( st.child() != null ) {
+          stack.push( st.child() );
+          TDLog.v("push child " + st.child().name );
+        }
+      }
     }
   }
 

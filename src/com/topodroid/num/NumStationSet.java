@@ -23,7 +23,10 @@ class NumStationSet
   static final private boolean BLACK = true;
   static final private boolean RED = false;
 
-
+  /** string comparison with C-like return
+   * @param s1   left string
+   * @param s2   right string
+   */
   static private int compare( String s1, String s2 )
   { 
     int l1 = s1.length();
@@ -49,6 +52,9 @@ class NumStationSet
     boolean color;
     NumStation value;
 
+    /** cstr
+     * @param v  station
+     */
     NumStationNode( NumStation v )
     {
       parent = null;
@@ -96,6 +102,9 @@ class NumStationSet
     //   return ( left == null || left.checkPath() ) && ( right == null || right.checkPath() );
     // }
 
+    /** @return the station with a given name 
+     * @param name   station name
+     */
     NumStation get( String name )
     {
       int c = compare( value.name, name );
@@ -132,25 +141,26 @@ class NumStationSet
       if ( right != null ) right.setAzimuths();
     }
 
-    /* traverse the tree and put on the stack all the NuMStation that have parent st
-     * @param st    hiding station
-     * @param dh    variation of "hidden" field
-     * @param stack changed stations [output]
-     */
-    void updateHidden( NumStation st, int dh, Stack<NumStation> stack )
-    {
-      if ( value.mParent == st ) {
-	// TDLog.v( "hide station " + value.name );
-        value.mHidden += dh;
-        stack.push( value );
-      // } else {
-      // TDLog.v( "show station " + value.name );
-      }
-      if ( left != null ) left.updateHidden( st, dh, stack );
-      if ( right != null ) right.updateHidden( st, dh, stack );
-    }
+    // 20230318 dropped
+    // /* traverse the tree and put on the stack all the NuMStation that have parent st
+    //  * @param st    hiding station
+    //  * @param dh    variation of "hidden" field
+    //  * @param stack changed stations [output]
+    //  */
+    // void updateHidden( NumStation st, int dh, Stack<NumStation> stack )
+    // {
+    //   if ( value.parent() == st ) {
+    //     // TDLog.v( "hide station " + value.name );
+    //     value.mHidden += dh;
+    //     stack.push( value );
+    //   // } else {
+    //   // TDLog.v( "show station " + value.name );
+    //   }
+    //   if ( left != null ) left.updateHidden( st, dh, stack );
+    //   if ( right != null ) right.updateHidden( st, dh, stack );
+    // }
 
-  }
+  } // END NumStationNode
 
   private ArrayList< NumStation > mStations;
   private NumStationNode mRoot; // tree root
@@ -161,6 +171,11 @@ class NumStationSet
     mStations = new ArrayList<>();
   }
 
+  /** get the closest station
+   * @param type   view type, plan or profile
+   * @param x      X coord (east or hhoriz)
+   * @param y      Y coord (soiuth or downward)
+   */
   NumStation getClosestStation( long type, double x, double y ) 
   {
     NumStation ret = null;
@@ -185,33 +200,48 @@ class NumStationSet
     return ret;
   }
   
-  // initialize the tree with a distance value "p" (supposedly large)
+  /** initialize the search of the shortest path
+   *  initialize the tree with a distance value "p" (supposedly large)
+   * @paran paths    shortest paths (?)
+   * @param p        initial short-path length for each node
+   */
   void initShortestPath( ArrayList<NumShortpath> paths, float p ) 
   {
     if ( mRoot == null ) return;
     mRoot.initShortPathDist( paths, p );
   }
 
-  // reset the flag "has 3D Coords" in the stations of this set
+  /** reset the flag "has 3D Coords" in the stations of this set
+   */
   void reset3DCoords( ) 
   {
     if ( mRoot != null ) mRoot.reset3DCoords( );
   }
 
+  /** set the azimuths in the stations of this set
+   */
   void setAzimuths( )
   {
     if ( mRoot != null ) mRoot.setAzimuths();
   }
 
-  void updateHidden( NumStation st, int dh, Stack<NumStation> stack )
-  {
-    if ( mRoot != null ) mRoot.updateHidden( st, dh, stack );
-  }
+  // 20230318 dropped
+  // void updateHidden( NumStation st, int dh, Stack<NumStation> stack )
+  // {
+  //   if ( mRoot != null ) mRoot.updateHidden( st, dh, stack );
+  // }
 
+  /** @return the number of stations in this set
+   */
   int size() { return mStations.size(); }
 
+  /** @return the list of stations in this set
+   */
   List< NumStation > getStations() { return mStations; }
 
+  /** add a station to the set
+   * @param v   station to add
+   */
   boolean addStation( NumStation v )
   {
     // TDLog.v( "add station " + v.name + " root " + ((mRoot != null)? mRoot.value.name : "null") );
@@ -255,6 +285,9 @@ class NumStationSet
     return ret;
   }
 
+  /** @return the station with a given name
+   * @param name   station name
+   */
   NumStation getStation( String name ) 
   {
     // TDLog.v( "stations set size " + size() );

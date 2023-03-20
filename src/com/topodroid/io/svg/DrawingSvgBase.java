@@ -475,6 +475,17 @@ public class DrawingSvgBase
       e.printStackTrace();
     }
   }
+
+  protected void writeGrid( BufferedWriter out, DrawingCommandManager plot, float xoff, float yoff, float xmin, float ymin, float xmax, float ymax ) throws IOException
+  {
+    // TDLog.v( "SVG grid");
+    out.write("<g id=\"grid\"\n" );
+    out.write("  style=\"fill:none;stroke-opacity:0.4\" >\n");
+    printSvgGrid( out, plot.getGrid1(),   "grid1",   "999999", 0.4f, xoff, yoff, xmin, xmax, ymin, ymax );
+    printSvgGrid( out, plot.getGrid10(),  "grid10",  "666666", 0.6f, xoff, yoff, xmin, xmax, ymin, ymax );
+    printSvgGrid( out, plot.getGrid100(), "grid100", "333333", 0.8f, xoff, yoff, xmin, xmax, ymin, ymax );
+    out.write( end_grp ); // grid
+  }
  
   // strings
 

@@ -32,13 +32,15 @@ public class NumStation extends NumSurveyPoint
   NumShot s1;
   NumShot s2;
   NumNode node;
-  float   mAnomaly; // local magnetic anomaly
-  public int     mHidden;  // whether the station is "hidden": 0 show, 1 hiding, 2 hidden
-                    //                     or "barrier": -1 barrier, -2 behind
+  float   mAnomaly;    // local magnetic anomaly
+  public int mHidden;  // whether the station is "hidden": 0 show, 1 hiding, 2 hidden
+                       //                     or "barrier": -1 barrier, -2 behind
   public boolean mBarrierAndHidden;
   // NumShortpath mShortpathDist;  // loop closure distance (shortest-path algo)
 
-  NumStation mParent; // parent station in the reduction tree
+  private NumStation mParent;  // parent station in the reduction tree
+  private NumStation mChild;   // child station in the reduction tree
+  private NumStation mSibling; // sibling child station in the reduction tree
 
   public boolean show() { return Math.abs( mHidden ) < 2; }
   public boolean barriered() { return mHidden < -1; }
@@ -86,6 +88,8 @@ public class NumStation extends NumSurveyPoint
     mHidden  = 0;
     mBarrierAndHidden = false;
     mParent  = null;
+    mChild   = null;
+    mSibling = null;
     mLegs = new ArrayList<>();
   }
 
@@ -119,10 +123,27 @@ public class NumStation extends NumSurveyPoint
     mAnomaly = 0.0f;
     mHidden  = 0;
     mBarrierAndHidden = false;
-    mParent  = from;
+    setParent( from );
     mLegs = new ArrayList<>();
     // TDLog.v( "NumStation cstr " + id + " from " + from.name + " has coords " + mHasExtend + " " + from.mHasExtend );
   }
+
+  /** set the parent and set this child to the parent
+   * @param parent  parent
+   */
+  void setParent( NumStation parent )
+  {
+    mParent = parent;
+    if ( parent != null ) {
+      mSibling = parent.mChild;
+      parent.mChild = this;
+    }
+  }
+
+  NumStation parent()  { return mParent; }
+  NumStation child()   { return mChild; }
+  NumStation sibling() { return mSibling; }
+        
 
   /** set the station azimuth
    # @param azimuth  azimuth [degrees]

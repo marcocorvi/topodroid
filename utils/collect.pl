@@ -162,6 +162,7 @@ page_3d_sketch,
 # page_3d_fractal,
 page_3d_export,
 # manual16,
+# page_sketch_mode,
 );
 
 @month = qw( Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec );

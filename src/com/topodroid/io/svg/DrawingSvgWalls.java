@@ -371,12 +371,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
       out.write(      group_notes ); out.write( group_mode_close );
       out.write(      group_grids ); out.write( group_mode_open );
       if ( TDSetting.mSvgGrid ) {
-        out.write("<g id=\"grid\"\n" );
-        out.write("  style=\"fill:none;stroke-opacity:0.4\" >\n");
-        printSvgGrid( out, plot.getGrid1(),   "grid1",   "999999", 0.4f, xoff, yoff, xmin, xmax, ymin, ymax );
-        printSvgGrid( out, plot.getGrid10(),  "grid10",  "666666", 0.6f, xoff, yoff, xmin, xmax, ymin, ymax );
-        printSvgGrid( out, plot.getGrid100(), "grid100", "333333", 0.8f, xoff, yoff, xmin, xmax, ymin, ymax );
-        out.write( end_grp ); // grid
+        writeGrid( out, plot, xoff, yoff, xmin, ymin, xmax, ymax );
       }
       out.write( "    " + end_grp ); // group_grids
 

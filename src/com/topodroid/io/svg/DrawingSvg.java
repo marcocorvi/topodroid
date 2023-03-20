@@ -115,31 +115,14 @@ public class DrawingSvg extends DrawingSvgBase
       // }
       
       {
+        // 20230318 this was inside the next if ( PlotType.isSketch2D( type ) )
+        if ( TDSetting.mSvgGrid ) {
+          writeGrid( out, plot, xoff, yoff, xmin, ymin, xmax, ymax );
+        }
 
         // centerline data
         if ( PlotType.isSketch2D( type ) ) { 
-          // float xmin, xmax, ymax, ymin;
-          // if ( PlotType.isPlan( type ) ) {
-          //   xmin = num.surveyEmin();
-          //   xmax = num.surveyEmax();
-          //   ymin = num.surveySmin();
-          //   ymax = num.surveySmax();
-          // } else {
-          //   xmin = num.surveyHmin();
-          //   xmax = num.surveyHmax();
-          //   ymin = num.surveyVmin();
-          //   ymax = num.surveyVmax();
-          // }
             
-          if ( TDSetting.mSvgGrid ) {
-            // TDLog.v( "SVG grid");
-            out.write("<g id=\"grid\"\n" );
-            out.write("  style=\"fill:none;stroke-opacity:0.4\" >\n");
-            printSvgGrid( out, plot.getGrid1(),   "grid1",   "999999", 0.4f, xoff, yoff, xmin, xmax, ymin, ymax );
-            printSvgGrid( out, plot.getGrid10(),  "grid10",  "666666", 0.6f, xoff, yoff, xmin, xmax, ymin, ymax );
-            printSvgGrid( out, plot.getGrid100(), "grid100", "333333", 0.8f, xoff, yoff, xmin, xmax, ymin, ymax );
-            out.write( end_grp ); // grid
-          }
           // FIXME OK PROFILE
 
           // TDLog.v( "SVG legs " + plot.getLegs().size() );
@@ -183,7 +166,7 @@ public class DrawingSvg extends DrawingSvgBase
               // split splays in classes
               ArrayList< DrawingPath > horiz  = new ArrayList<>();
               ArrayList< DrawingPath > vert   = new ArrayList<>();
-              ArrayList< DrawingPath > x_sect  = new ArrayList<>();
+              ArrayList< DrawingPath > x_sect = new ArrayList<>();
               for ( DrawingPath sh : plot.getSplays() ) {
                 DBlock blk = sh.mBlock;
                 if ( blk == null ) continue;
@@ -197,10 +180,10 @@ public class DrawingSvg extends DrawingSvgBase
                   normal.add( sh );
                 }
               }
-              writeSplays( out, normal, "splays", "grey", xoff, yoff );
-              writeSplays( out, horiz,  "h-splays", "lightseagreen", xoff, yoff );
+              writeSplays( out, normal, "splays",   "grey",           xoff, yoff );
+              writeSplays( out, horiz,  "h-splays", "lightseagreen",  xoff, yoff );
               writeSplays( out, vert,   "v-splays", "lightsteelblue", xoff, yoff );
-              writeSplays( out, x_sect,  "x-splays", "lightseablue", xoff, yoff );
+              writeSplays( out, x_sect, "x-splays", "lightseablue",   xoff, yoff );
             } else {
               for ( DrawingPath sh : plot.getSplays() ) {
                 DBlock blk = sh.mBlock;
