@@ -246,7 +246,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="GPX_record_none">Nincs GNSS pont bejegyzés</string>
     <string name="MT_points_none">Nincs MobileTopographer pont</string>
     <string name="MT_bad_file">Rossz MobileTopographer fájl</string>
-    <string name="bad_manifest">Hibás manifest fájl</string>
+    <string name="bad_manifest">Hibás manifest fájl [%1$d]</string>
  
     <string name="pleasewait">Kérjük várjál</string>
     <string name="processing">feldolgozva &#8230;</string>

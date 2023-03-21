@@ -244,7 +244,7 @@
     <!-- TODO string name="GPX_record_none">No GPX point record</string -->
     <string name="MT_points_none">Punto GPS mancante</string>
     <string name="MT_bad_file">File MobileTopographer corrotto</string>
-    <string name="bad_manifest">File manifesto corrotto</string>
+    <string name="bad_manifest">File manifesto corrotto [%1$d]</string>
 
     <string name="pleasewait">Attendere &#8230;</string>
     <string name="processing">elaborazione &#8230;</string>
@@ -1111,7 +1111,7 @@
     <string name="export_prefix">Prefisso grotta nei nomi capisaldi</string>
     <string name="export_prefix_hint">prefisso</string>
     <string name="export_suffix_hint">suffisso</string>
-    <string name="export_roundtrip">Andata e Ritorno</string>
+    <string name="export_roundtrip">Round-trip</string>
     <!-- UNUSED string name="export_scale_png">Risoluzione</string -->
     <string name="export_scale_th">Scala 1 :</string>
     <string name="export_spacing_th">Spazio fra punti Therion</string>

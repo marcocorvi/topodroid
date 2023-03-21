@@ -4293,7 +4293,7 @@ public class DrawingWindow extends ItemDrawer
     if ( ! mContinueLine ) return false;
     if ( lp1 == null ) return false;
     if ( lp2 == null ) return false;
-    TDLog.v("Try and JOIN LINE");
+    // TDLog.v("Try and JOIN LINE lp1 " + lp1.size() + " lp2 " + lp2.size() );
     LinePoint p1 = lp2.first();
     LinePoint p2 = lp2.last();
     return mDrawingSurface.getLineToContinue( lp1, p1, p2, mCurrentLine, mZoom, mSelectSize );
@@ -4542,6 +4542,7 @@ public class DrawingWindow extends ItemDrawer
           }
           
           if ( mPointCnt > mLinePointStep || mLinePointStep == POINT_MAX ) {
+// FILTER START
             if ( ! ( mSymbol == SymbolType.LINE && BrushManager.isLineSection( mCurrentLine ) ) 
                  && TDSetting.isLineStyleComplex()
                  && ( mSymbol == SymbolType.AREA || ! BrushManager.isLineStraight( mCurrentLine ) )
@@ -4718,6 +4719,7 @@ public class DrawingWindow extends ItemDrawer
                   mCurrentAreaPath = null;
                   mLastLinePath = null;
                 }
+// FILTER END
               }
             }
             // undoBtn.setEnabled(true);

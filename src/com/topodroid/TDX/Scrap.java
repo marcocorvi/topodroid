@@ -1039,7 +1039,7 @@ public class Scrap
                 Point2D p1 = directionNextAt( lp10 );
                 Point2D p2 = directionPrevAt( lp20 );
                 if ( p1 != null && p2 != null ) {
-                  if ( idx10 < idx20 ) { // replace frward
+                  if ( idx10 < idx20 ) { // replace forward
                     TDLog.v("P1 and P2 ok FORWARD " + idx10 + " " + idx20 );
                     // while ( lp10 != null && q1.dot( lq1.sub( lp10 ) ) < 0 ) lp10 = lp10.mPrev;
                     lp10 = moveBack1( lp10, q1, lq1, delta );

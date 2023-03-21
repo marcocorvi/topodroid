@@ -244,7 +244,7 @@
     <string name="GPX_record_none">Нет записи точки GPX</string>
     <string name="MT_points_none">Нет точки MobileTopographer</string>
     <string name="MT_bad_file">Плохойй файл MobileTopographer</string>
-    <string name="bad_manifest">Неверный файл манифеста</string>
+    <string name="bad_manifest">Неверный файл манифеста [%1$d]</string>
  
     <string name="pleasewait">Пожалуйста подождите</string>
     <string name="processing">обработка &#8230;</string>

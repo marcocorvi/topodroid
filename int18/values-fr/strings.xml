@@ -252,7 +252,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="GPX_record_none">Pas de point GPX</string>
     <string name="MT_points_none">Pas de point Mobile Topographer</string>
     <string name="MT_bad_file">Mauvais fichier MobileTopographer</string>
-    <string name="bad_manifest">Mauvais fichier Manifest</string>
+    <string name="bad_manifest">Mauvais fichier Manifest [%1$d]</string>
 
     <string name="pleasewait">Attendre SVP</string>
     <string name="processing">Travail en cours &#8230;</string>

@@ -245,7 +245,7 @@
     <string name="GPX_record_none">无GPX点记录</string>
     <string name="MT_points_none">无GPS坐标点</string>
     <string name="MT_bad_file">错误的移动地形图文件</string>
-    <string name="bad_manifest">错误的清单文件</string>
+    <string name="bad_manifest">错误的清单文件 [%1$d]</string>
  
     <string name="pleasewait">请稍后</string>
     <string name="processing">处理 &#8230;</string>

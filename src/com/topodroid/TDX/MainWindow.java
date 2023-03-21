@@ -1398,8 +1398,8 @@ public class MainWindow extends Activity
                 }
                 TDsafUri.closeFileDescriptor( pfd2 );
               } else {
-                TDLog.Error("ZIP import: failed manifest " + manifest_ok );
-                TDToast.makeBad( R.string.bad_manifest );
+                // TDLog.Error("ZIP import: failed manifest " + manifest_ok );
+                TDToast.makeBad( String.format( getResources().getString( R.string.bad_manifest ), (-manifest_ok) ) );
               }
             } else {
               // TDLog.v( "import non-zip, ext " + ext );

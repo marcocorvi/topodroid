@@ -504,7 +504,7 @@ public class TDSetting
   private static final int LINE_STYLE_TWO    = 2;
   private static final int LINE_STYLE_THREE  = 3;
   private static final int LINE_STYLE_SIMPLIFIED = 4;
-  private static final String LINE_STYLE     = TDString.TWO;     // LINE_STYLE_TWO NORMAL
+  // private static final String LINE_STYLE     = TDString.TWO;     // LINE_STYLE_TWO NORMAL
   public static int   mLineStyle = LINE_STYLE_BEZIER;    
   public static int   mLineType;        // line type:  1       1     2    3
   public static int   mLineSegment   = 10;

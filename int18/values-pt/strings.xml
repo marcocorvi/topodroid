@@ -227,7 +227,7 @@ no campo abaixo e aperte o botão.
   <string name="GPX_record_none">Sem registro ponto GPX</string>
   <string name="MT_points_none">Nenhum ponto MobileTopographer</string>
   <string name="MT_bad_file">Arquivo MobileTopographer inválido</string>
-  <string name="bad_manifest">Arquivo de manifesto inválido</string>
+  <string name="bad_manifest">Arquivo de manifesto inválido [%1$d]</string>
   <string name="pleasewait">Por favor espere</string>
   <string name="processing">processando …</string>
   <!-- UNUSED string name="head_tail">Memória: </string -->

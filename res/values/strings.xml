@@ -254,7 +254,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="GPX_record_none">No GPX point record</string>
     <string name="MT_points_none">No MobileTopographer point file</string>
     <string name="MT_bad_file">Bad MobileTopographer file</string>
-    <string name="bad_manifest">Bad manifest file</string>
+    <string name="bad_manifest">Bad manifest file [%1$d]</string>
  
     <string name="pleasewait">Please wait</string>
     <string name="processing">processing &#8230;</string>
@@ -1129,7 +1129,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="export_prefix">Cave-prefix in station names</string>
     <string name="export_prefix_hint">prefix</string>
     <string name="export_suffix_hint">suffix</string>
-    <string name="export_roundtrip" copyable="hu ru">Roundtrip</string>
+    <string name="export_roundtrip" copyable="all">Round-trip</string>
     <!-- UNUSED string name="export_scale_png">Resolution</string -->
     <string name="export_scale_th">Scale 1 :</string>
     <string name="export_spacing_th">Point spacing</string>
