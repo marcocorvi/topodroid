@@ -66,20 +66,36 @@ public class Archiver
   private String mZipname;
   // private static String mManifestPath = null;
 
+  private final static int ERR_OK         =   0;
+  private final static int ERR_IO         =  -1;
+  private final static int ERR_TD_OLD     =  -2;
+  private final static int ERR_DB_OLD     =  -3;
+  private final static int ERR_DB_NEW     =  -4;
+  private final static int ERR_NAME       =  -5;
+  private final static int ERR_SURVEY     =  -6;
+  private final static int ERR_NO_DB      =  -7;      
+  private final static int ERR_SQL        =  -8;
+  private final static int ERR_NUMBER     =  -9;
+  private final static int ERR_FORMAT     = -10;
+  private final static int ERR_FILE       = -11;
+  private final static int ERR_MF_IO      = -12;
+  private final static int ERR_UNKNOWN    = -13;
+
+
   private final static String[] mManifestError = {
      "ok",
-     "survey already present",
+     "IO error",
      "TopoDroid version mismatch",
      "database version mismatch: manifest_DB_version < min_DB_version",
      "database version mismatch: manifest_DB_version > current DB_version",
      "survey name does not match filename",
-     "no database", // 6
-     null, // 7
-     null, // 8
-     null, // 9
+     "survey already present",
+     "no database", // 7
+     "SQL error",
      "number format error",
-     "file not found",
-     "IO error", // 12
+     "mamifest format", // 10
+     "manifest not found",
+     "manifest IO error",
      "unexpected error"
   };
 
@@ -89,7 +105,7 @@ public class Archiver
   static String getManifestError( int k )
   {
     if ( k >= 0 ) return mManifestError[0];
-    if ( k < -12 ) return mManifestError[13];
+    if ( k <= ERR_UNKNOWN ) return mManifestError[ERR_UNKNOWN];
     return mManifestError[-k];
   }
 
@@ -515,7 +531,7 @@ public class Archiver
       // decompresser.end();
     } catch ( IOException e ) {
       TDLog.Error("ZIP decompress entry: " + e.getMessage() );
-      return -1;
+      return ERR_IO;
     }
     // TDLog.v( "decompress entry: size " + size );
     return size;
@@ -533,7 +549,7 @@ public class Archiver
       }
     } catch ( IOException e ) {
       TDLog.Error("ZIP decompress entry to byte array: " + e.getMessage() );
-      return -1;
+      return ERR_IO;
     }
     return size;
   }
@@ -542,22 +558,25 @@ public class Archiver
    * @param manifest   content of manifest 
    * @return
    *  >=0 ok
-   * -1 survey already present
+   * -1 IO error
    * -2 TopoDroid version mismatch
    * -3 database version mismatch: manifest_DB_version < min_DB_version
    * -4 database version mismatch: manifest_DB_version > current DB_version
    * -5 survey name does not match filename
-   * -6 no database
-   * -10 number format error
-   * -11 file not found
-   * -12 IO error
+   * -6 survey already present
+   * -7 no database
+   * -8 number format error
+   * -10 manifest format error
+   * -11 manifest file not found
+   * -12 ...
+   * -13 unknown error
    */
   static private int checkManifestFile( TopoDroidApp app, String manifest )
   {
     mManifestDbVersion = 0;
     String line;
     int version_code = 0;
-    int ret = -1;
+    int ret = ERR_UNKNOWN;
     try {
       // FileReader fr = TDFile.getFileReader( filename );
       StringReader fr = new StringReader( manifest );
@@ -572,38 +591,38 @@ public class Archiver
         mManifestDbVersion = Integer.parseInt( line );
       } catch ( NumberFormatException e ) {
         TDLog.Error( "MANIFEST DB version format error: " + line );
-        return -10;
+        return ERR_NUMBER;
       }
       
       if ( ! ( mManifestDbVersion >= TDVersion.DATABASE_VERSION_MIN ) ) {
         TDLog.Error( "MANIFEST DB version mismatch: found " + mManifestDbVersion + " min " + TDVersion.DATABASE_VERSION_MIN );
-        return -3;
+        return ERR_DB_OLD;
       }
       if ( ! ( mManifestDbVersion <= TDVersion.DATABASE_VERSION ) ) {
         TDLog.Error( "MANIFEST DB version mismatch: found " + mManifestDbVersion + " current " + TDVersion.DATABASE_VERSION );
-        return -4;
+        return ERR_DB_NEW;
       }
 
       mManifestSurveyname = TDString.spacesToUnderscore( br.readLine().trim() );
       // TDLog.v("MANIFEST read <" + mManifestSurveyname + ">" );
       if ( TopoDroidApp.mData == null ) {
         TDLog.Error( "MANIFEST app has no database");
-        return -6;
+        return ERR_NO_DB;
       }
       if ( TopoDroidApp.mData.hasSurveyName( mManifestSurveyname ) ) {
         TDLog.Error( "MANIFEST survey exists: <" + mManifestSurveyname + ">" );
-        return -1;
+        return ERR_SURVEY;
       }
       // fr.close();
     } catch ( NumberFormatException e ) {
       TDLog.Error( "MANIFEST error: " + e.getMessage() );
-      return -10;
+      return ERR_NUMBER;
     } catch ( FileNotFoundException e ) {
       TDLog.Error( "MANIFEST file not found: " + e.getMessage() );
-      return -11;
+      return ERR_FILE;
     } catch ( IOException e ) {
       TDLog.Error( "MANIFEST I/O error: " + e.getMessage() );
-      return -12;
+      return ERR_MF_IO;
     }
     return ret;
   }
@@ -611,7 +630,7 @@ public class Archiver
   /** check the version line of a manifest file - called by checkManifestFile
    * @param version_line version line
    * @return
-   *   -10 number format error
+   *   -10 manifest format error
    *   -2  version is too old
    *   0   version is in acceptable range
    *   1   version is newer than this app
@@ -643,7 +662,7 @@ public class Archiver
           minor = Integer.parseInt( ver[1] );
         } catch ( NumberFormatException e ) {
           TDLog.Error( "parse error: major/minor " + ver[0] + " " + ver[1] );
-          return -10;
+          return ERR_FORMAT;
         }
         int k = 0;
         while ( k < ver[2].length() ) {
@@ -658,7 +677,7 @@ public class Archiver
              || ( major == TDVersion.MAJOR_MIN && minor == TDVersion.MINOR_MIN && sub < TDVersion.SUB_MIN ) 
           ) {
           TDLog.Error( "TopoDroid version mismatch: " + version_line + " < " + TDVersion.MAJOR_MIN + "." + TDVersion.MINOR_MIN + "." + TDVersion.SUB_MIN );
-          return -2;
+          return ERR_TD_OLD;
         }
         if (    ( major > TDVersion.MAJOR ) 
              || ( major == TDVersion.MAJOR && minor > TDVersion.MINOR )
@@ -679,11 +698,11 @@ public class Archiver
           version_code = Integer.parseInt( ver[0] );
           if ( version_code < TDVersion.CODE_MIN ) {
             TDLog.Error( "TopoDroid version mismatch: " + version_line + " < " + TDVersion.CODE_MIN );
-            return -2;
+            return ERR_TD_OLD;
           }
         } catch ( NumberFormatException e ) {
           TDLog.Error( "parse error: version code " + ver[0] + " " + e.getMessage() );
-          return -10;
+          return ERR_NUMBER;
         }
         if ( version_code > TDVersion.VERSION_CODE ) ret = 1;
       }
@@ -698,7 +717,7 @@ public class Archiver
   {
     TDLog.v("ZIP 7 un-archive file " + filename );
     boolean sql_success = false;
-    int ok_manifest = -2;
+    int ok_manifest = ERR_UNKNOWN;
     String pathname;
     // mManifestPath = null;
     DataHelper app_data = TopoDroidApp.mData;
@@ -709,7 +728,7 @@ public class Archiver
       // TDLog.Log( TDLog.LOG_ZIP, "unzip " + filename );
       ZipFile zip = new ZipFile( filename );
       ze = zip.getEntry( "manifest" );
-      if ( ze == null ) return -2;
+      if ( ze == null ) return ERR_FILE;
       // pathname = TDPath.getManifestFile( );
       // TDPath.checkPath( pathname );
       // FileOutputStream fout = TDFile.getFileOutputStream( pathname );
@@ -816,7 +835,7 @@ public class Archiver
     if ( ok_manifest == 0 && ! sql_success ) {
       TDLog.Error( "ZIP 7 sql error" );
       // tell user that there was a problem
-      return -5;
+      return ERR_SQL;
     }
     return ok_manifest; // return 0 or 1
   }
@@ -828,7 +847,7 @@ public class Archiver
    */
   static public int getOkManifest( TopoDroidApp app, InputStream fis )
   {
-    int ok_manifest = -2;
+    int ok_manifest = ERR_UNKNOWN;
     ZipEntry ze;
     // mManifestPath = null;
     try {
@@ -942,7 +961,7 @@ public class Archiver
             } else {
               if ( sql ) {
                 // TDLog.Log( TDLog.LOG_ZIP, "Zip sqlfile \"" + pathname + "\" DB version " + mManifestDbVersion );
-                if ( app_data.loadFromFile( pathname, mManifestDbVersion ) < 0 ) ok_manifest = -5;
+                if ( app_data.loadFromFile( pathname, mManifestDbVersion ) < 0 ) ok_manifest = ERR_NAME;
                 TDFile.deleteFile( pathname );
               }
             }

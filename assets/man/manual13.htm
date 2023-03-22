@@ -51,9 +51,26 @@ The following import formats are supported:
 
 A file import fails if a survey with the same name is already in TopoDroid.<br><p>
 
-Zip import fails if the zip has a database version that is too old or is newer than the one in TopoDroid.<br><p>
-
 On import from file formats that have LRUD values, these are converted to x-splays (shown in green).<br><p>
+
+<b>Zip import</b><br>
+Zip import fails if the zip has a database version that is too old or is newer than the one in TopoDroid.
+The error codes are
+<ul>
+<li>1: IO error</li>
+<li>2: zip TopoDroid version too old</li>
+<li>3: zip database version too old</li>
+<li>4: zip database version too new</li>
+<li>5: survey name differs from filename</li>
+<li>6: survey already present</li>
+<li>7: failed to open database</li>
+<li>8: zip SQL error</li>
+<li>9: number format error</li>
+<li>10: manifest format error</li>
+<li>11: manifest not found</li>
+<li>12: manifest IO error</li>
+<li>13: unexected error</li>
+</ul><br><p>
 
 <b>Therion import</b><br>
 Only Therion survey files with data in "normal" datamode are importable.<br>
