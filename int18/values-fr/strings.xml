@@ -1126,6 +1126,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="export_prefix_hint">préfixe</string>
     <string name="export_suffix_hint">suffixe</string>
     <string name="export_roundtrip">Aller-retour</string>
+    <!-- TODO string name="export_share">Share</string -->
     <!-- UNUSED string name="export_scale_png">Resolution</string -->
     <string name="export_scale_th">Echelle 1 :</string>
     <string name="export_spacing_th">Espacement des points</string>
@@ -1870,6 +1871,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="perm_camera">\nCamera</string>
     <string name="perm_microphone">\nMicrophone</string>
 
+    <!-- TODO string name="welcome_db_version">Database v. %1$d, %2$d</string -->
     <!-- OK string name="welcome_title" translatable="false">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopodroid est une application Open Source pour réaliser des relevés topographiques de cavités souterraines avec un DistoX.

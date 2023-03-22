@@ -52,6 +52,7 @@ public class ExportDialogShot extends MyDialog
   private String    mSurvey;
   private String    mExportPrefix;
 
+  private LinearLayout mLayoutZip;
   private LinearLayout mLayoutCompass;
   private LinearLayout mLayoutCSurvey;
   private LinearLayout mLayoutSurvex;
@@ -95,6 +96,7 @@ public class ExportDialogShot extends MyDialog
     ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, mTypes );
     spin.setAdapter( adapter );
 
+    mLayoutZip      = (LinearLayout) findViewById( R.id.layout_zip );
     mLayoutCompass  = (LinearLayout) findViewById( R.id.layout_compass );
     mLayoutCSurvey  = (LinearLayout) findViewById( R.id.layout_csurvey );
     mLayoutSurvex   = (LinearLayout) findViewById( R.id.layout_survex );
@@ -190,6 +192,7 @@ public class ExportDialogShot extends MyDialog
    */
   private void updateLayouts()
   {
+    mLayoutZip.setVisibility( View.GONE );
     mLayoutCompass.setVisibility( View.GONE );
     mLayoutCSurvey.setVisibility( View.GONE );
     mLayoutSurvex.setVisibility( View.GONE );
@@ -202,6 +205,7 @@ public class ExportDialogShot extends MyDialog
     mLayoutShp.setVisibility( View.GONE );
     mLayoutWinkarst.setVisibility( View.GONE );
     switch ( mSelectedPos ) { // indices in mSurveyExportTypes
+      case 0: mLayoutZip.setVisibility( View.VISIBLE ); break;
       case 1: mLayoutCompass.setVisibility( View.VISIBLE ); break;
       case 2: mLayoutCSurvey.setVisibility( View.VISIBLE ); break;
       case 7: mLayoutSurvex.setVisibility( View.VISIBLE ); break;
@@ -235,11 +239,12 @@ public class ExportDialogShot extends MyDialog
   private void setOptions()
   {
     switch ( mSelectedPos ) {
-      // case 0: // Zip GEEK
-      //   {
-      //     TDSetting.mZipWithSymbols = ((CheckBox) findViewById( R.id.zip_symbols )).isChecked();
-      //   }
-      //   break;
+      case 0: // Zip 
+        {
+          // TDSetting.mZipWithSymbols = ((CheckBox) findViewById( R.id.zip_symbols )).isChecked();
+          TDSetting.mZipShare = ((CheckBox) findViewById( R.id.zip_share )).isChecked();
+        }
+        break;
       case 1: // Compass
         {
           // TDSetting.mExportStationsPrefix = ((CheckBox) findViewById( R.id.compass_prefix )).isChecked();
@@ -316,6 +321,8 @@ public class ExportDialogShot extends MyDialog
    */
   private void initOptions()
   {
+    ((CheckBox) findViewById( R.id.zip_share )).setChecked( TDSetting.mZipShare );
+
     // ((CheckBox) findViewById( R.id.compass_prefix )).setChecked( TDSetting.mExportStationsPrefix );
     ((CheckBox) findViewById( R.id.compass_splays )).setChecked( TDSetting.mCompassSplays );
     ((CheckBox) findViewById( R.id.compass_swap_lr )).setChecked( TDSetting.mSwapLR );

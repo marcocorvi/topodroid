@@ -235,6 +235,7 @@ public class TDSetting
 
   public static boolean mExportStationsPrefix = false;  // whether to prepend cave name to station in cSurvey/compass export
   public static boolean mZipWithSymbols       = false;  // whether to add/load symbols to/from archive
+  public static boolean mZipShare             = false;  // whether to share exported zip
 
   // public static boolean mXTherionAreas = false;
   public static boolean mAutoStations  = true;  // whether to add stations automatically to scrap therion files

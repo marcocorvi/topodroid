@@ -171,6 +171,7 @@ public class TDLog
   
   /** log on file stream
    * @param msg  log message
+   * @note this is the same as Error()
    */
   static public void f( String msg )
   {
@@ -184,6 +185,7 @@ public class TDLog
   
   /** set log file stream and log on file stream
    * @param msg  log message
+   * @note this method starts to send logs to file
    */
   static public void e( String msg )
   {

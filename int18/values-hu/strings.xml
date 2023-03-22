@@ -1121,6 +1121,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="export_prefix_hint">előtag</string>
     <string name="export_suffix_hint">utótag</string>
     <string name="export_roundtrip">Roundtrip</string><!--Roundtrip-->
+    <!-- TODO string name="export_share">Share</string -->
     <!-- UNUSED string name="export_scale_png">Felbontás</string -->
     <string name="export_scale_th">Skála 1 :</string>
     <string name="export_spacing_th">Pont távolság</string>
@@ -1856,6 +1857,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="perm_camera">\nKamera</string>
     <string name="perm_microphone">\nMikrofon</string>
 
+    <!-- TODO string name="welcome_db_version">Database v. %1$d, %2$d</string -->
     <!-- NO string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nKöszönjük, hogy a TopoDroidot választotta.

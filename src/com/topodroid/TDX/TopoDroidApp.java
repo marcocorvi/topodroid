@@ -22,6 +22,7 @@ import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.utils.MyFileProvider;
 // import com.topodroid.utils.TDStatus;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyDialog;
@@ -90,7 +91,7 @@ import android.app.Application;
 
 import android.content.Context;
 // import android.content.pm.ActivityInfo;
-// import android.content.Intent;
+import android.content.Intent;
 // import android.content.ActivityNotFoundException;
 import android.content.IntentFilter;
 import android.content.res.Resources;
@@ -3041,6 +3042,22 @@ public class TopoDroidApp extends Application
       }
     }
     return false;
+  }
+
+  void shareZip( Uri uri0 )
+  {
+    String zipname = TDPath.getSurveyZipFile( TDInstance.survey );
+    TDLog.v("Zip file " + zipname );
+    // Uri uri = Uri.fromFile( TDFile.getFile( zipname ) );
+    Uri uri = MyFileProvider.fileToUri( this, TDFile.getFile( zipname ) );
+
+    Intent intent = new Intent( );
+    intent.setAction( Intent.ACTION_SEND );
+    intent.putExtra( Intent.EXTRA_STREAM, uri );
+    intent.setType( "application/zip" );
+    intent.addFlags( Intent.FLAG_GRANT_READ_URI_PERMISSION );
+    mSurveyWindow.startActivity( intent );
+    // mSurveyWindow.startActivity( Intent.createChooser( intent, null ) );
   }
 
   // called by zip archiver to export survey data before zip archive if TDSetting.mExportShotFormat >= 0

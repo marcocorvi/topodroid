@@ -533,6 +533,8 @@ public class TDFile
   //   return new File( dir, name );
   // }
 
+  public static File getFile( String name ) { return new File( name ); }
+
   /** @return file input stream
    * @param name  file fullpath
    */

@@ -1035,6 +1035,7 @@ no campo abaixo e aperte o botão.
   <string name="export_prefix_hint">prefixo</string>
   <string name="export_suffix_hint">sufixo</string>
   <string name="export_roundtrip">Circuito</string>
+    <!-- TODO string name="export_share">Share</string -->
   <!-- UNUSED string name="export_scale_png">Resolução</string -->
   <string name="export_scale_th">Escala 1 :</string>
   <string name="export_spacing_th">Espaçamento pontos</string>
@@ -1722,6 +1723,7 @@ no campo abaixo e aperte o botão.
   <string name="perm_location">\nLocalização</string>
   <string name="perm_camera">\nCâmera</string>
   <string name="perm_microphone">\nMicrofone</string>
+    <!-- TODO string name="welcome_db_version">Database v. %1$d, %2$d</string -->
   <string name="welcome_text">
 \nTopodroid é um aplicativo Android Open Source para mapeamento de cavernas com DistoX, BRIC4 e SAP5.
 \n\nNenhuma garantia: utilizando o aplicativo, você concorda com o fato de que o autor não é responsável por qualquer perda de dados ou quaisquer outros danos.

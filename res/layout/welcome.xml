@@ -18,6 +18,14 @@
         android:autoLink="all"
         android:padding="@dimen/paddingmedium"
   />
+
+  <TextView android:id="@+id/TextView02"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="@dimen/paddingmedium"
+      android:singleLine="true"
+      android:layout_marginTop="@dimen/margintiny"
+  />
   <LinearLayout 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

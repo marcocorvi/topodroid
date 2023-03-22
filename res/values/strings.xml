@@ -1130,6 +1130,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="export_prefix_hint">prefix</string>
     <string name="export_suffix_hint">suffix</string>
     <string name="export_roundtrip" copyable="all">Round-trip</string>
+    <string name="export_share">Share</string>
     <!-- UNUSED string name="export_scale_png">Resolution</string -->
     <string name="export_scale_th">Scale 1 :</string>
     <string name="export_spacing_th">Point spacing</string>
@@ -1872,6 +1873,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="perm_camera">\nCamera</string>
     <string name="perm_microphone" copyable="fr">\nMicrophone</string>
 
+    <string name="welcome_db_version">Database v. %1$d, %2$d</string>
     <string name="welcome_title" translatable="false">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nThank you for choosing TopoDroid.

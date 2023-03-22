@@ -13,7 +13,7 @@ package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
 
-// import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.TDSetting;
 
 // import java.lang.ref.WeakReference;
 
@@ -64,6 +64,9 @@ class ExportZipTask extends AsyncTask< Void, Void, Boolean >
     if ( res ) {
       // TDToast.make( mSaved + " " + mArchiver.getZipname() );
       TDToast.make( R.string.zip_saved );
+      if ( TDSetting.mZipShare ) {
+        mApp.shareZip( mUri );
+      }
     } else {
       TDToast.makeBad( R.string.zip_failed );
     }

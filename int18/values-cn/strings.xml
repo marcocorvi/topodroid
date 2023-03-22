@@ -1116,6 +1116,7 @@
     <string name="export_prefix_hint">前缀</string>
     <string name="export_suffix_hint">后缀</string>
     <string name="export_roundtrip">往返</string>
+    <!-- TODO string name="export_share">Share</string -->
     <!-- UNUSED string name="export_scale_png">分辨率</string -->
     <string name="export_scale_th">比例 1 :</string>
     <!-- TODO string name="export_spacing_th">Point spacing</string -->
@@ -1848,6 +1849,7 @@
     <string name="perm_microphone">\n话筒</string>
 
 
+    <!-- TODO string name="welcome_db_version">Database v. %1$d, %2$d</string -->
     <!-- NO string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopoDroid是一个专门配合DistoX使用的开源的免费的洞穴测量软件.

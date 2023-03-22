@@ -21,6 +21,7 @@ import android.content.Context;
 
 import android.app.Dialog;
 import android.widget.Button;
+import android.widget.TextView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -47,6 +48,9 @@ class TopoDroidAbout extends Dialog
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
     setTitle( String.format( context.getResources().getString(R.string.welcome_title), TDVersion.fullString() ) );
+
+    TextView version = (TextView) findViewById( R.id.TextView02 );
+    version.setText( String.format( context.getResources().getString(R.string.welcome_db_version), TDVersion.DATABASE_VERSION, TDVersion.DEVICE_DATABASE_VERSION ) );
 
     ((Button)findViewById(R.id.btn_ok)).setOnClickListener( this );
     ((Button)findViewById(R.id.btn_manual)).setOnClickListener( this );

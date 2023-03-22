@@ -27,7 +27,7 @@ Symbols are in symbols-git and make_symbol.sh creates the zips
 Subdirs bin gen are created by the build
 
 More notes
-src used to have androidx linking ../aosp/androidx, but it is not necessary
+the directory src used to have androidx linking ../aosp/androidx, but it is not necessary
 
 [3] TopoDroid debug build.
    ant debug
