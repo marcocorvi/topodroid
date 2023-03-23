@@ -4582,7 +4582,7 @@ public class DrawingWindow extends ItemDrawer
                       // if ( add_line )
                       if ( ! tryAndJoin( lp1, mCurrentLinePath ) ) {
                         lp1.computeUnitNormal();
-                        if ( mSymbol == SymbolType.LINE && BrushManager.isLineClosed( mCurrentLine ) ) {
+                        if ( mSymbol == SymbolType.LINE && TDSetting.mLineClose && BrushManager.isLineClosed( mCurrentLine ) ) {
                           // mCurrentLine == lp1.mLineType 
                           lp1.setClosed( true );
                           lp1.closePath();
@@ -4645,7 +4645,7 @@ public class DrawingWindow extends ItemDrawer
                       // if ( add_line ) 
                       if ( ! tryAndJoin( lp1, mCurrentLinePath ) ) {
                         lp1.computeUnitNormal();
-                        if ( mSymbol == SymbolType.LINE && BrushManager.isLineClosed( mCurrentLine ) ) {
+                        if ( mSymbol == SymbolType.LINE && TDSetting.mLineClose && BrushManager.isLineClosed( mCurrentLine ) ) {
                           // mCurrentLine == lp1.mLineType 
                           lp1.setClosed( true );
                           lp1.closePath();
@@ -4656,8 +4656,7 @@ public class DrawingWindow extends ItemDrawer
                       //   mLastLinePath = ???
                       }
                     } else { //  mSymbol == SymbolType.AREA
-                      DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", TDSetting.mAreaBorder, 
-                                                                mDrawingSurface.scrapIndex() ); 
+                      DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", TDSetting.mAreaBorder, mDrawingSurface.scrapIndex() ); 
                       ap.setOptions( BrushManager.getAreaDefaultOptions( mCurrentArea ) );
                       ap.addStartPoint( p0.x, p0.y );
                       for (int k=1; k<k0; ++k) {
@@ -4696,7 +4695,7 @@ public class DrawingWindow extends ItemDrawer
                     // if ( add_line ) 
                     if ( ! tryAndJoin( mCurrentLinePath, mCurrentLinePath ) ) {
                       mCurrentLinePath.computeUnitNormal();
-                      if ( mSymbol == SymbolType.LINE && BrushManager.isLineClosed( mCurrentLine ) ) {
+                      if ( mSymbol == SymbolType.LINE && TDSetting.mLineClose && BrushManager.isLineClosed( mCurrentLine ) ) {
                         // mCurrentLine == mCurrentLinePath.mLineType
                         mCurrentLinePath.setClosed( true );
                         mCurrentLinePath.closePath();

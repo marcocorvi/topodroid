@@ -1265,10 +1265,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], N, def[ 1], FLOAT,   ctx, hlp ),
       makeLst( cat, key[ 2], tit[ 2], dsc[ 2], N, def[ 2], R.array.lineStyle, R.array.lineStyleValue, ctx, hlp ),
       makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], N, def[ 3], INTEGER, ctx, hlp ),
-      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], A, def[ 4], FLOAT,   ctx, hlp ),
-      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], A, def[ 5],          ctx, hlp ),
+      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], N, def[ 4],          ctx, hlp ),
+      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], A, def[ 5], FLOAT,   ctx, hlp ),
+      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6],          ctx, hlp ),
       // makeLst( cat, key[ 6], tit[ 6], dsc[ 6], E, def[ 6], R.array.lineContinue, R.array.lineContinueValue, ctx, hlp ),
-      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], N, def[ 6],          ctx, hlp ),
+      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], N, def[ 7],          ctx, hlp ),
     };
   }
 
@@ -1327,11 +1328,12 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2], FLOAT,   ctx, hlp ), // DISTOX_LABEL_SIZE
       makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], N, def[ 3], FLOAT,   ctx, hlp ), // DISTOX_LINE_THICKNESS line
       makeLst( cat, key[ 4], tit[ 4], dsc[ 4], N, def[ 4], R.array.lineStyle, R.array.lineStyleValue, ctx, hlp ),
-      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], N, def[ 5], INTEGER, ctx, hlp ), // DISTOX_LINE_SEGMENT
-      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6], FLOAT,   ctx, hlp ), // DISTOX_ARROW_LENGTH
-      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          ctx, hlp ), // DISTOX_AUTO_SECTION_PT
+      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], N, def[ 5],          ctx, hlp ), // DISTOX_LINE_CLOSE
+      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], N, def[ 6], INTEGER, ctx, hlp ), // DISTOX_LINE_SEGMENT
+      makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7], FLOAT,   ctx, hlp ), // DISTOX_ARROW_LENGTH
+      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8],          ctx, hlp ), // DISTOX_AUTO_SECTION_PT
       // makeLst( cat, key[ 8], tit[ 8], dsc[ 8], E, def[ 8], R.array.lineContinue, R.array.lineContinueValue, ctx, hlp ),
-      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], N, def[ 8],          ctx, hlp ), // DISTOX_AREA_BORDER
+      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], N, def[ 9],          ctx, hlp ), // DISTOX_AREA_BORDER
       // makeEdt( cat, key[10], tit[10], dsc[10], A, def[10], FLOAT,   ctx, hlp ),
       // makeEdt( cat, key[11], tit[11], dsc[11], N, def[11], FLOAT,   ctx, hlp ),
       // makeEdt( cat, key[12], tit[12], dsc[12], N, def[12], FLOAT,   ctx, hlp ) 
