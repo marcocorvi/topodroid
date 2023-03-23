@@ -49,6 +49,32 @@ public class TDUtil
   public static final float IN2M = 0.0254f;
   public static final float YD2M = 0.9144f;
 
+  // COPIES ---------------------------------------------------------------
+
+  /** copy an array of strings, possibly truncating 
+   * @param original    original array
+   * @param length      length of new array
+   * @return new array
+   */
+  static String[] copyOf( String[] original, int length )
+  {
+    final String[] result = new String[length];
+    System.arraycopy( original, 0, result, 0, length );
+    return result;
+  }
+
+  /** copy an array of objects, possibly truncating 
+   * @param original    original array
+   * @param length      length of new array
+   * @return new array
+   */
+  static Object[] copyOf( Object[] original, int length )
+  {
+    final Object[] result = new Object[length];
+    System.arraycopy(original, 0, result, 0, length);
+    return result;
+  }
+
   // STRINGS --------------------------------------------------------------
   
   /** concatenate strings using a single-space separator
