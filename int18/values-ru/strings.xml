@@ -1113,7 +1113,7 @@
     <string name="export_prefix_hint">префикс</string>
     <string name="export_suffix_hint">суффикс</string>
     <string name="export_roundtrip">Roundtrip</string>
-    <!-- TODO string name="export_share">Share</string -->
+    <string name="export_share">Поделиться</string>
     <!-- UNUSED string name="export_scale_png">Разрешение</string -->
     <string name="export_scale_th">Масштаб 1 :</string>
     <string name="export_spacing_th">Расстояние между точками</string>
@@ -1662,8 +1662,8 @@
   <string name="pref_line_thickness_summary">Толщина линий</string>
   <string name="pref_line_units_title">Масштаб линий</string>
   <string name="pref_line_units_summary">Масштаб орнамета линий</string>
-  <!-- TODO string name="pref_line_close_title">Close closed lines</string -->
-  <!-- TODO string name="pref_line_close_summary">Close lines of closed type</string -->
+  <string name="pref_line_close_title">Замыкать замкнутые линии</string>
+  <string name="pref_line_close_summary">Замыкать линии замкнутого типа</string>
   <string name="pref_linesnap_title">Привязать линию/область</string>
   <string name="pref_linesnap_summary">Включить привязку линий/областей</string>
   <string name="pref_linecurve_title">Сгладить/Спрямить сегмент</string>
@@ -1845,7 +1845,7 @@
     <string name="perm_microphone">\nМикрофон</string>
 
 
-    <!-- TODO string name="welcome_db_version">Database v. %1$d, %2$d</string -->
+    <string name="welcome_db_version">База данных версии %1$d, %2$d</string>
     <!-- NO string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopoDroid это ПО с открытым исходным кодом для топосъёмки пещер с использованием прибора DistoX, BRIC4 или Sap5.
