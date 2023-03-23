@@ -1676,6 +1676,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_line_thickness_summary">Épaisseur de ligne</string>
     <string name="pref_line_units_title">Unités de ligne</string>
     <string name="pref_line_units_summary">Unités du dessin des lignes</string>
+  <!-- TODO string name="pref_line_close_title">Close closed lines</string -->
+  <!-- TODO string name="pref_line_close_summary">Close lines of closed type</string -->
     <string name="pref_linesnap_title">Accrochage ligne / zone</string>
     <string name="pref_linesnap_summary">Activer la jonction de plusieurs lignes ou zones</string>
     <string name="pref_linecurve_title">Lisser / Redresser segment</string>

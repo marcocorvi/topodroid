@@ -1662,6 +1662,8 @@
   <string name="pref_line_thickness_summary">Толщина линий</string>
   <string name="pref_line_units_title">Масштаб линий</string>
   <string name="pref_line_units_summary">Масштаб орнамета линий</string>
+  <!-- TODO string name="pref_line_close_title">Close closed lines</string -->
+  <!-- TODO string name="pref_line_close_summary">Close lines of closed type</string -->
   <string name="pref_linesnap_title">Привязать линию/область</string>
   <string name="pref_linesnap_summary">Включить привязку линий/областей</string>
   <string name="pref_linecurve_title">Сгладить/Спрямить сегмент</string>

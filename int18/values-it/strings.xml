@@ -1658,6 +1658,8 @@
   <string name="pref_line_thickness_summary">Spessore linee disegno</string>
   <string name="pref_line_units_title">Unita\' linea</string>
   <string name="pref_line_units_summary">Unita\' disegno linea</string>
+  <!-- TODO string name="pref_line_close_title">Close closed lines</string -->
+  <!-- TODO string name="pref_line_close_summary">Close lines of closed type</string -->
   <string name="pref_linesnap_title">Snap di linea/area</string>
   <string name="pref_linesnap_summary">Snap di linee/aree su linee</string>
   <string name="pref_linecurve_title">Aggiusta segmento</string>
