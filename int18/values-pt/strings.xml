@@ -788,7 +788,7 @@ no campo abaixo e aperte o botão.
   <string name="mode_fixed">Deslocar croqui X linha de trena (CUIDADO!)</string>
   <string name="mode_outline">Contorno</string>
   <string name="mode_scale_ref">Escala gráfica</string>
-  <string name="mode_sections">Cortes</string >
+  <string name="mode_sections">Cortes</string>
   <string name="mode_walls">Paredes</string>
   <string name="mode_refs">Referência</string>
   <string name="layer_floor">Bases</string>
@@ -1035,7 +1035,7 @@ no campo abaixo e aperte o botão.
   <string name="export_prefix_hint">prefixo</string>
   <string name="export_suffix_hint">sufixo</string>
   <string name="export_roundtrip">Circuito</string>
-    <!-- TODO string name="export_share">Share</string -->
+  <string name="export_share">Compartilhar</string>
   <!-- UNUSED string name="export_scale_png">Resolução</string -->
   <string name="export_scale_th">Escala 1 :</string>
   <string name="export_spacing_th">Espaçamento pontos</string>
@@ -1548,8 +1548,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_line_thickness_summary">Espessura das linhas no desenho</string>
   <string name="pref_line_units_title">Escala linha</string>
   <string name="pref_line_units_summary">Escala para desenho da simbologia das linhas</string>
-  <!-- TODO string name="pref_line_close_title">Close closed lines</string -->
-  <!-- TODO string name="pref_line_close_summary">Close lines of closed type</string -->
+  <string name="pref_line_close_title">Fechar linh fecháveis</string>
+  <string name="pref_line_close_summary">Fechar linhas cujos tipos sejam fecháveis</string>
   <string name="pref_linesnap_title">Colar linha/área</string>
   <string name="pref_linesnap_summary">Habilitar atração + união de linhas/áreas</string>
   <string name="pref_linecurve_title">Suav/endir segmento</string>
@@ -1725,7 +1725,7 @@ no campo abaixo e aperte o botão.
   <string name="perm_location">\nLocalização</string>
   <string name="perm_camera">\nCâmera</string>
   <string name="perm_microphone">\nMicrofone</string>
-    <!-- TODO string name="welcome_db_version">Database v. %1$d, %2$d</string -->
+  <string name="welcome_db_version">Banco de dados ver. %1$d, %2$d</string>
   <string name="welcome_text">
 \nTopodroid é um aplicativo Android Open Source para mapeamento de cavernas com DistoX, BRIC4 e SAP5.
 \n\nNenhuma garantia: utilizando o aplicativo, você concorda com o fato de que o autor não é responsável por qualquer perda de dados ou quaisquer outros danos.
