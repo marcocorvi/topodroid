@@ -46,6 +46,13 @@ import java.io.IOException;
 
 public class SketchCommandManager
 {
+  public final static int SELECT_OFF     = -1; // no selection for the current section
+  public final static int SELECT_NONE    = 0;
+  public final static int SELECT_POINT   = 1;
+  public final static int SELECT_POINTS  = 2;
+  public final static int SELECT_STATION = 3;
+  public final static int SELECT_SECTION = 4;
+
   private final static Object mSyncScrap = new Object();
 
   // private static final int BORDER = 20; // for the bitmap
@@ -69,6 +76,7 @@ public class SketchCommandManager
 
   private SketchPoint[] mSelected = new SketchPoint[2];
   private SketchStationPath mSelectedStation;
+  private SketchSection     mSelectedSection;
 
   private boolean mDisplayPoints;
 
@@ -555,6 +563,7 @@ public class SketchCommandManager
    */
   int openSection( SketchSection section ) 
   { 
+    syncClearSelected();
     setViewPoint( section.mC, section.mH, section.mS, section.mN );
     mCurrentScrap = section; // musr come last
     return mCurrentScrap.getId();
@@ -713,6 +722,13 @@ public class SketchCommandManager
         if ( mSelected[0] != null ) mSelected[0].drawPoint( canvas, mm, mC0, mH0, mS0, 2*dot_radius );
         if ( mSelected[1] != null ) mSelected[1].drawPoint( canvas, mm, mC0, mH0, mS0, 2*dot_radius );
         if ( mSelectedStation != null ) mSelectedStation.drawPoint( canvas, mm, mC0, mH0, mS0, 2*dot_radius );
+        if ( (mDisplayMode & DisplayMode.DISPLAY_OUTLINE) != 0 ) {
+          for ( SketchSection section : mSections ) {
+            section.drawMidpoint( canvas, mm, mC0, mH0, mS0, dot_radius );
+            // section.drawFrame( canvas, mm, mC0, mH0, mS0 );
+          }
+          if ( mSelectedSection != null ) mSelectedSection.drawPoint( canvas, mm, mC0, mH0, mS0, 2*dot_radius );
+        }
       } else if ( hasEraser ) {
         drawEraser( canvas );
       } else {
@@ -729,6 +745,8 @@ public class SketchCommandManager
     }
   }
 
+  /** clear all selection references
+   */
   void syncClearSelected()
   {
     // TDLog.v("SKETCH clear selected");
@@ -736,18 +754,41 @@ public class SketchCommandManager
       mSelected[0] = null;
       mSelected[1] = null;
       mSelectedStation = null;
+      mSelectedSection = null;
     }
   }
 
-  /** @return 0,1,2 according to the number of selected points
+  /** @return 0,1,2,3,4 according to the number of selected points/station/section
    */
-  int hasSelected() { return ( mSelected[1] != null )? 2 : ( mSelected[0] != null )? 1 : 0; }
+  int hasSelected() 
+  { 
+    if ( mCurrentScrap != mView ) return SELECT_OFF;
+    if ( hasSelectedSection() ) return SELECT_SECTION;
+    if ( hasSelectedStation() ) return SELECT_STATION;
+    return ( mSelected[1] != null )? SELECT_POINTS
+         : ( mSelected[0] != null )? SELECT_POINT
+         : SELECT_NONE;
+  }
 
+  /** @return true if the sketch has a station selected
+   */
   boolean hasSelectedStation() { return mSelectedStation != null; }
 
+  /** @return the selected station or null
+   */
   SketchStationPath getSelectedStation() { return mSelectedStation; }
 
-  SketchPoint[] getSelected() { return mSelected; }
+  /** @return true if the sketch has a section selected
+   */
+  boolean hasSelectedSection() { return mSelectedSection != null; }
+
+  /** @return the selected section or null
+   */
+  SketchSection getSelectedSection() { return mSelectedSection; }
+
+  /** @return the array of selected points 
+   */
+  SketchPoint[] getSelectedPoints() { return mSelected; }
 
   boolean hasMoreRedo() { return mCurrentScrap.hasMoreRedo(); }
 
@@ -784,7 +825,7 @@ public class SketchCommandManager
    * @param yc   Y canvas coord
    * @param size      select size
    * @param stations  whether to select stations (or line points)
-   * @return the number of selected points (0, 1, or 2) or 2 (if selected a station)
+   * @return the number of selected points (0, 1, or 2), 3 (if selected a station), 4 (if selected a section)
    */
   int getItemAt( float xc, float yc, float size, boolean stations )
   {
@@ -798,6 +839,7 @@ public class SketchCommandManager
     SketchLine ray = new SketchLine( c, mCurrentScrap.mN );
     float min_dist = radius * radius;;
     mSelectedStation = null;
+    mSelectedSection = null;
     if ( stations ) {
       mSelected[0] = null;
       mSelected[1] = null;
@@ -810,7 +852,7 @@ public class SketchCommandManager
           mSelectedStation = station;
         }
       }
-      return ( mSelectedStation != null )? 2 : 0;
+      return ( mSelectedStation != null )? SELECT_STATION : SELECT_NONE;
     } else { // line-point select
       SketchPoint min_pt = null;
       for ( SketchLinePath wall : mView.mLines ) {
@@ -822,14 +864,29 @@ public class SketchCommandManager
           }
         }
       }
+      if ( min_pt == null ) { // try sections
+        for ( SketchSection section : mSections ) {
+          float dist = ray.distanceSquared( section.mC );
+          if ( dist < min_dist ) {
+            mSelected[0] = null;
+            mSelected[1] = null;
+            mSelectedSection = section;
+            return SELECT_SECTION;
+          }
+        }
+      }
       // if ( min_pt != null ) TDLog.v("SKETCH min point " + min_pt.x + " " + min_pt.y + " " + min_pt.z + " at dist " + min_dist );
       if ( mSelected[0] == null ) {
         mSelected[0] = min_pt;
         mSelected[1] = null;
-        return ( mSelected[0] == null )? 0 : 1;
+        return ( mSelected[0] == null )? SELECT_NONE : SELECT_POINT;
       } else {
-        mSelected[1] = min_pt;
-        return ( mSelected[1] == null )? 1 : 2;
+        if ( min_pt.mLine == mSelected[0].mLine ) {
+          mSelected[0] = min_pt;
+        } else {
+          mSelected[1] = min_pt;
+        }
+        return ( mSelected[1] == null )? SELECT_POINT : SELECT_POINTS;
       }
     }
   }

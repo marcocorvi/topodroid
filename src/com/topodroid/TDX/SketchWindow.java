@@ -241,6 +241,7 @@ public class SketchWindow extends ItemDrawer
   };
   // private static final int BTN_SELECT_PREV = 3;
   // private static final int BTN_SELECT_NEXT = 4;
+  private static final int BTN_SELECT      = 2;
   private static final int BTN_SELECT_MODE = 3;
   private static final int BTN_SELECT_SIZE = 4;
   private static final int BTN_REMOVE      = 5;
@@ -405,12 +406,14 @@ public class SketchWindow extends ItemDrawer
   private MyHorizontalButtonView mButtonView3;
   private MyHorizontalButtonView mButtonView5;
 
-  private BitmapDrawable mBMjoin;
-  private BitmapDrawable mBMjoin_no;
-  private BitmapDrawable mBMedit_item = null;
-  private BitmapDrawable mBMedit_box  = null;
-  private BitmapDrawable mBMedit_ok   = null;
-  private BitmapDrawable mBMedit_no   = null;
+  private BitmapDrawable mBMselect;
+  private BitmapDrawable mBMback;
+  // private BitmapDrawable mBMjoin;
+  // private BitmapDrawable mBMjoin_no;
+  // private BitmapDrawable mBMedit_item = null;
+  // private BitmapDrawable mBMedit_box  = null;
+  // private BitmapDrawable mBMedit_ok   = null;
+  // private BitmapDrawable mBMedit_no   = null;
   // private BitmapDrawable mBMcont_none;
   // private BitmapDrawable mBMcont_start;
   // private BitmapDrawable mBMcont_end;
@@ -1073,6 +1076,9 @@ public class SketchWindow extends ItemDrawer
     // mBMprev     = MyButton.getButtonBackground( this, res, izons[IC_PREV] );
     // mBMnext     = MyButton.getButtonBackground( this, res, izons[IC_NEXT] );
 
+    mBMselect = MyButton.getButtonBackground( this, res, izons_draw[2] );
+    mBMback   = MyButton.getButtonBackground( this, res, R.drawable.iz_back );
+
     mBMsmall    = MyButton.getButtonBackground( this, res, izons[IC_SMALL] );
     mBMmedium   = MyButton.getButtonBackground( this, res, izons[IC_MEDIUM] );
     mBMlarge    = MyButton.getButtonBackground( this, res, izons[IC_LARGE] );
@@ -1598,8 +1604,12 @@ public class SketchWindow extends ItemDrawer
     if ( mMode == MODE_EDIT ) {
       // TDLog.v("SKETCH select at " + xc, + " " + yc + " ...");
       int selection = mSketchSurface.getItemAt( xc, yc, size, mSelectStation );
-      if ( selection == 2 ) {
-        setButton3( BTN_SECTION, ( mSketchSurface.hasSelectedStation()? mBMsectionOpen : mBMsectionOk ) );
+      if ( selection == 4 ) {
+        setButton3( BTN_SECTION, mBMsectionOk );
+      } else if ( selection == 3 ) {
+        setButton3( BTN_SECTION, mBMsectionOpen );
+      } else if ( selection == 2 ) {
+        setButton3( BTN_SECTION, mBMsectionOk );
       } else {
         setButton3( BTN_SECTION, mBMsectionNo );
       } 
@@ -2163,6 +2173,10 @@ public class SketchWindow extends ItemDrawer
     if ( ( b == mButton2[0] && mMode == MODE_DRAW ) || 
          ( b == mButton5[1] && mMode == MODE_ERASE ) || 
          ( b == mButton3[2] && ( mMode == MODE_EDIT /* || mMode == MODE_SHIFT */ ) ) ) { 
+      if ( mCurSection > 0 ) {
+        mCurSection = mSketchSurface.closeSection();
+
+      }
       setMode( MODE_MOVE );
     } else if ( b == mButton1[0] || b == mButton3[0] || b == mButton5[0] ) { // 0 --> DRAW
       setMode( MODE_DRAW );
@@ -2232,33 +2246,40 @@ public class SketchWindow extends ItemDrawer
         TDLog.v("TODO item delete");
         // askDeleteItem( p, t, "section");
       } else if ( k3 < NR_BUTTON3 && b == mButton3[k3++] ) { // SECTION
-        if ( mSketchSurface.hasSelected() == 2 ) {
-          SketchPoint[] pts = mSketchSurface.getSelected();
-          ++ mMaxSection;
-          SketchSection section = new SketchSection( mMaxSection, pts[0], pts[1], mVertical );
-          mSketchSurface.addSection( section );
-          mCurSection = mSketchSurface.openSection( section );
-          // TDLog.v("SKETCH open section " + mCurSection + " " + mMaxSection );
-        } else if ( mSketchSurface.hasSelectedStation() ) { // SWITCH LEG_VIEW
-          SketchStationPath station = mSketchSurface.getSelectedStation();
-          // TDLog.v("SKETCH open new leg " + station.from() + " " + station.fullname() + " " + station.isForward() );
-          station.dump( "open leg" );
-          Cave3DShot sketchLeg = null;
-          if ( station.isForward() ) {
-            sketchLeg = mTopoGL.setSketchLeg( station.from(), station.fullname() );
-          } else { 
-            sketchLeg = mTopoGL.setSketchLeg( station.fullname(), station.from() );
-          }
-          if ( sketchLeg != null ) {
-            // TDLog.v("SKETHC switch ...");
-            String filename = TDPath.getC3dFile( mSketchName );
-            doSave( filename, mSketchName );
-            makeReference( sketchLeg, true );
-            resetStatus();
-          }
-        } else {
-          mCurSection = mSketchSurface.closeSection();
-          // TDLog.v("SKETCH close section - current " + mCurSection );
+        switch ( mSketchSurface.hasSelected() ) {
+          case SketchCommandManager.SELECT_POINTS:
+            SketchPoint[] pts = mSketchSurface.getSelectedPoints();
+            ++ mMaxSection;
+            SketchSection section = new SketchSection( mMaxSection, pts[0], pts[1], mVertical );
+            mSketchSurface.addSection( section );
+            openSection( section );
+            // TDLog.v("SKETCH open section " + mCurSection + " " + mMaxSection );
+            break;
+          case SketchCommandManager.SELECT_STATION: // SWITCH LEG_VIEW
+            SketchStationPath station = mSketchSurface.getSelectedStation();
+            // TDLog.v("SKETCH open new leg " + station.from() + " " + station.fullname() + " " + station.isForward() );
+            station.dump( "open leg" );
+            Cave3DShot sketchLeg = null;
+            if ( station.isForward() ) {
+              sketchLeg = mTopoGL.setSketchLeg( station.from(), station.fullname() );
+            } else { 
+              sketchLeg = mTopoGL.setSketchLeg( station.fullname(), station.from() );
+            }
+            if ( sketchLeg != null ) {
+              // TDLog.v("SKETHC switch ...");
+              String filename = TDPath.getC3dFile( mSketchName );
+              doSave( filename, mSketchName );
+              makeReference( sketchLeg, true );
+              resetStatus();
+            }
+            break;
+          case SketchCommandManager.SELECT_SECTION: 
+            openSection( mSketchSurface.getSelectedSection() );
+            break;
+          case SketchCommandManager.SELECT_OFF:
+            tryCloseSection();
+            // TDLog.v("SKETCH close section - current " + mCurSection );
+            break;
         }
       } else if ( k3 < NR_BUTTON3 && b == mButton3[k3++] ) { // CLEAR SELECTION
         mSketchSurface.clearSelected();
@@ -2281,6 +2302,25 @@ public class SketchWindow extends ItemDrawer
         TDLog.v("TODO updateDisplay(); ");
       }
     }
+  }
+
+  private void openSection( SketchSection section )
+  {
+    if ( section == null ) return;
+    mCurSection = mSketchSurface.openSection( section );
+    setButton3( BTN_SELECT, mBMback );
+    resetModified();
+  }
+
+  private boolean tryCloseSection()
+  {
+    if ( mCurSection > 0 ) {
+      mCurSection = mSketchSurface.closeSection();
+      setButton3( BTN_SELECT, mBMselect );
+      resetModified();
+      return true;
+    }
+    return false;
   }
 
   private void setSelectMode( boolean select_station )
@@ -2414,10 +2454,7 @@ public class SketchWindow extends ItemDrawer
     closeMenu();
     int p = 0;
     if ( p++ == pos ) { // CLOSE SECTION
-      if ( mCurSection > 0 ) {
-        mCurSection = mSketchSurface.closeSection();
-        return;
-      }
+      if ( tryCloseSection() ) return;
       super.onBackPressed();
     } else if ( p++ == pos ) { // EXPORT
       String filename = TDPath.getC3dFile( mSketchName );

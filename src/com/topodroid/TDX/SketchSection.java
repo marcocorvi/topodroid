@@ -177,6 +177,7 @@ public class SketchSection extends SketchPath
       mN = new TDVector( 0, 0, 1 );
     }
     mLines = new ArrayList< SketchLinePath >();
+    mRedos = new ArrayList< SketchLinePath >();
     mNp = mN;
     mSp = mS;
     mHp = mH;
@@ -384,6 +385,25 @@ public class SketchSection extends SketchPath
   {
     if ( mLines == null ) return;
     for ( SketchLinePath line : mLines ) line.drawPoints( canvas, mm, C, X, Y, r );
+  }
+
+  public void drawPoint( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y, float r )
+  {
+    if ( mC == null ) return;
+    drawVector( mC, canvas, mm, C, X, Y, r );
+  }
+
+  public void drawMidpoint( Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y, float r )
+  {
+    if ( mC == null ) return;
+    Path path = new Path();
+    TDVector v = mC.minus( C );
+    float x = X.dot( v );
+    float y = Y.dot( v ); // downaward
+    path.addCircle( x, y, r, Path.Direction.CCW );
+    path.transform( mm );
+    // path.offset( off_x, off_y );
+    canvas.drawPath( path, BrushManager.fixedYellowPaint );
   }
 
   void addEraseCommand( EraseCommand cmd ) 

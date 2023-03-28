@@ -379,10 +379,11 @@ public class SketchSurface extends SurfaceView
   int hasSelected() { return ( commandManager == null )? 0 : commandManager.hasSelected(); }
 
   boolean  hasSelectedStation() { return ( commandManager == null )? false : commandManager.hasSelectedStation(); }
+  boolean  hasSelectedSection() { return ( commandManager == null )? false : commandManager.hasSelectedSection(); }
 
   SketchStationPath getSelectedStation() { return ( commandManager == null )? null : commandManager.getSelectedStation(); }
-
-  SketchPoint[] getSelected() {  return ( commandManager == null )? null : commandManager.getSelected(); }
+  SketchSection getSelectedSection() { return ( commandManager == null )? null : commandManager.getSelectedSection(); }
+  SketchPoint[] getSelectedPoints() {  return ( commandManager == null )? null : commandManager.getSelectedPoints(); }
 
   // SketchPoint nextHotItem() { return ( commandManager == null )? null : commandManager.nextHotItem(); }
 

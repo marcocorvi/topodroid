@@ -157,6 +157,16 @@ public class SketchPath
     if ( ! test ) TDLog.Error("ERROR failed " + msg );
   }
 
+  /** draw a pink circle
+   * @note used by SketchPoint, SketchStationPath and SketchSection
+   * @param vv  circle center
+   * @param canvas    canvas
+   * @param mm        transform matrix
+   * @param C         projection center
+   * @param X         projection X-axis 
+   * @param Y         projection Y-axis 
+   * @param r         circle radius
+   */
   static void drawVector( TDVector vv, Canvas canvas, Matrix mm, TDVector C, TDVector X, TDVector Y, float r )
   {
     Path path = new Path();
