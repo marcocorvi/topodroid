@@ -140,8 +140,9 @@ public class BrushManager
   static Paint getLinePaint(  int idx, boolean reversed ) { return (mLineLib  == null)? errorPaint : mLineLib.getLinePaint( idx, reversed ); }
   static Paint getAreaPaint(  int idx ) { return (mAreaLib  == null)? errorPaint : mAreaLib.getSymbolPaint( idx ); }
 
-  static int getLineColor(  int idx ) { return (mLineLib  == null)? 0xffffffff : mLineLib.getSymbolPaint( idx ).getColor(); }
-  static int getAreaColor(  int idx ) { return (mAreaLib  == null)? 0xffffffff : mAreaLib.getSymbolPaint( idx ).getColor(); }
+  static int getPointColor(  int idx ) { return (mPointLib  == null)? 0xffffffff : mPointLib.getSymbolPaint( idx ).getColor(); }
+  static int getLineColor(  int idx )  { return (mLineLib  == null)? 0xffffffff : mLineLib.getSymbolPaint( idx ).getColor(); }
+  static int getAreaColor(  int idx )  { return (mAreaLib  == null)? 0xffffffff : mAreaLib.getSymbolPaint( idx ).getColor(); }
 
   public static int getPointLibSize() { return ( mPointLib == null )? 0 : mPointLib.size(); }
   public static int getLineLibSize()  { return ( mLineLib  == null )? 0 : mLineLib.size(); }
@@ -188,6 +189,7 @@ public class BrushManager
   static Path getPointPath( int i )                  { return (mPointLib == null)? null : mPointLib.getPointPath( i ); }
   static Path getPointOrigPath( int i )              { return (mPointLib == null)? null : mPointLib.getPointOrigPath( i ); }
 
+  public static boolean isPointUser( int index )    { return mPointLib != null && index == mPointLib.mPointUserIndex; }
   public static boolean isPointLabel( int index )   { return mPointLib != null && index == mPointLib.mPointLabelIndex; }
   public static boolean isPointPhoto( int index )   { return mPointLib != null && index == mPointLib.mPointPhotoIndex; }
   public static boolean isPointAudio( int index )   { return mPointLib != null && index == mPointLib.mPointAudioIndex; }
@@ -209,6 +211,7 @@ public class BrushManager
   // LINE CLOSED
   static boolean isLineClosed( int index )  { return mLineLib != null && mLineLib.isClosed( index ); }
   static boolean isLineSection( int index ) { return mLineLib != null && index == mLineLib.mLineSectionIndex; }
+  static boolean isLineUser( int idx )      { return mLineLib != null && idx == mLineLib.mLineUserIndex; }
   static boolean isLineWall( int idx )      { return mLineLib != null && idx == mLineLib.mLineWallIndex; }
   static boolean isLineWallGroup( int idx ) { return mLineLib != null && mLineLib.isWall( idx ); }
   static boolean isLineSlope( int idx )     { return mLineLib != null && idx == mLineLib.mLineSlopeIndex; }

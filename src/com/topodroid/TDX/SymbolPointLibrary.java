@@ -35,7 +35,7 @@ public class SymbolPointLibrary extends SymbolLibrary
   };
 
   // ArrayList< SymbolPoint > mPoint;    // enabled points
-  int mPointUserIndex; // PRIVATE
+  int mPointUserIndex; 
   int mPointLabelIndex;
   int mPointPhotoIndex;
   int mPointAudioIndex;

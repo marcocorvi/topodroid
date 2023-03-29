@@ -66,6 +66,7 @@ public class ExportDialogPlot extends MyDialog
   private LinearLayout mLayoutShp;
   // private LinearLayout mLayoutPng; // NO_PNG
   private LinearLayout mLayoutPdf;
+  private LinearLayout mLayoutXvi;
 
   /** cstr
    * @param context     context
@@ -109,6 +110,7 @@ public class ExportDialogPlot extends MyDialog
     mLayoutShp     = (LinearLayout) findViewById( R.id.layout_shp );
     // mLayoutPng     = (LinearLayout) findViewById( R.id.layout_png ); // NO_PNG
     mLayoutPdf     = (LinearLayout) findViewById( R.id.layout_pdf );
+    mLayoutXvi     = (LinearLayout) findViewById( R.id.layout_xvi );
 
     if ( ! TDLevel.overAdvanced ) {
       ((CheckBox) findViewById( R.id.therion_xvi )).setVisibility( View.GONE );
@@ -222,6 +224,7 @@ public class ExportDialogPlot extends MyDialog
     mLayoutShp.setVisibility( View.GONE );
     // mLayoutPng.setVisibility( View.GONE ); // NO_PNG
     mLayoutPdf.setVisibility( View.GONE );
+    mLayoutXvi.setVisibility( View.GONE );
     if ( mParentType == PARENT_DRAWING ) { // SketchWindow
       switch ( mSelectedPos ) {
         case 0: mLayoutTherion.setVisibility( View.VISIBLE ); break;
@@ -231,6 +234,7 @@ public class ExportDialogPlot extends MyDialog
         case 4: if ( TDLevel.overExpert ) mLayoutShp.setVisibility( View.VISIBLE ); break;
         // case 5: mLayoutPng.setVisibility( View.VISIBLE ); break; // NO_PNG
         case 5: mLayoutPdf.setVisibility( View.VISIBLE ); break;
+        case 6: mLayoutXvi.setVisibility( View.VISIBLE ); break;
       }
     } else { // mParentType == PARENT_OVERVIEW // OverviewWindow
       switch ( mSelectedPos ) {
@@ -239,8 +243,9 @@ public class ExportDialogPlot extends MyDialog
         case 1: mLayoutDxf.setVisibility( View.VISIBLE ); break;
         case 2: mLayoutSvg.setVisibility( View.VISIBLE ); break;
         case 3: if ( TDLevel.overExpert ) mLayoutShp.setVisibility( View.VISIBLE ); break;
-        case 4: mLayoutPdf.setVisibility( View.VISIBLE ); break;
         // case 4: mLayoutPng.setVisibility( View.VISIBLE ); break;
+        case 4: mLayoutPdf.setVisibility( View.VISIBLE ); break;
+        case 5: mLayoutXvi.setVisibility( View.VISIBLE ); break;
       }
     }
   }
@@ -256,7 +261,7 @@ public class ExportDialogPlot extends MyDialog
     if ( mParentType == PARENT_OVERVIEW ) {
       if ( selected > 0 ) ++selected;  // shift indices dxf .. xvi up - skip csx
     } 
-    if ( selected > 5 ) return; // no options for xvi tnl c3d
+    if ( selected > 6 ) return; // no options for tnl c3d
     switch ( selected ) {
       case 0: // Therion
         {
@@ -355,6 +360,10 @@ public class ExportDialogPlot extends MyDialog
           }
         }
         break;
+      case 6: // XVI
+        TDSetting.mSvgSplays = ((CheckBox) findViewById( R.id.xvi_splays )).isChecked();
+        TDLog.v("SVG splays: " + TDSetting.mSvgSplays );
+        break;
     }
   }
 
@@ -393,6 +402,8 @@ public class ExportDialogPlot extends MyDialog
     // ((CheckBox) findViewById( R.id.pdf_bgcolor )).setChecked( TDSetting.mBitmapBgcolor == 0xffffffff );
     // ((CheckBox) findViewById( R.id.pdf_splays )).setChecked( TDSetting.mTherionSplays );
     ((EditText) findViewById( R.id.pdf_scale )).setText( String.format( Locale.US, "%d", TDSetting.mTherionScale ) );
+
+    ((CheckBox) findViewById( R.id.xvi_splays )).setChecked( TDSetting.mSvgSplays );
   }
 }
 

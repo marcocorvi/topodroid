@@ -382,6 +382,10 @@ public class DrawingPointPath extends DrawingPath
    */
   void setLink( IDrawingLink link ) { mLink = link; }
 
+  /** @return the point color
+   */
+  int pointColor( ) { return BrushManager.getPointColor( mPointType ); }
+
   /** get the therion name 
    * @return the point type
    */

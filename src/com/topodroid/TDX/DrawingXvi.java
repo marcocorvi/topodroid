@@ -275,8 +275,9 @@ class DrawingXvi
     float y0 = TDSetting.mToTherion*(yoff-p.y);
     float x00 = x0;
     float y00 = y0;
+    pw.format(Locale.US, "  { %s", color );
+    pw.format(Locale.US, " %.2f %.2f", x0, y0 );
     for ( p = p.mNext; p != null; p = p.mNext ) { 
-      pw.format(Locale.US, "  { %s %.2f %.2f", color, x0, y0 );
       float x3 = TDSetting.mToTherion*(xoff+p.x);
       float y3 = TDSetting.mToTherion*(yoff-p.y);
       if ( p.has_cp ) { // FIXME this converts the cubic with a thickly interpolated polyline
@@ -286,25 +287,26 @@ class DrawingXvi
         float y2 = TDSetting.mToTherion*(yoff - p.y2);
         pw.format(Locale.US, " %.2f %.2f %.2f %.2f", x1, y1, x2, y2 );
       } 
-      pw.format(Locale.US, " %.2f %.2f }\n", x3, y3 );
+      pw.format(Locale.US, " %.2f %.2f", x3, y3 );
       x0 = x3;
       y0 = y3;
     }
-    if ( closed ) { 
-      if ( x0 != x00 || y0 != y00 ) {
-        pw.format(Locale.US, "  { %s %.2f %.2f %.2f %.2f }\n", color, x0, y0, x00, y00 );
-      }
+    if ( closed && ( x0 != x00 || y0 != y00 ) ) {
+      pw.format(Locale.US, " %.2f %.2f }\n", x00, y00 );
+    } else {
+      pw.format(Locale.US, " }\n");
     }
   }
 
   // colors: black, gray, green, blue, red, orange, brown, ...
   static private void toXvi( PrintWriter pw, DrawingLinePath line, float xoff, float yoff ) 
   {
-    String color = "brown";
+    String color = String.format("#%06X", (line.lineColor() & 0x00ffffff) );
     int ltype = line.lineType();
-    if ( BrushManager.isLineWall( ltype ) )         { color = "red"; }
-    else if ( BrushManager.isLineSection( ltype ) ) { color = "gray"; }
-    else if ( BrushManager.isLineSlope( ltype ) )   { color = "orange"; }
+    if ( BrushManager.isLineSection( ltype ) ) { color = "gray"; }
+    else if ( BrushManager.isLineUser( ltype ) ) { color = "black"; }
+    // else if ( BrushManager.isLineWall( ltype ) )         { color = "red"; }
+    // else if ( BrushManager.isLineSlope( ltype ) )   { color = "orange"; }
     toXviPointLine( pw, line, color, xoff, yoff, line.isClosed() );
   }
 
@@ -361,7 +363,9 @@ class DrawingXvi
       return;
     }
 
-    String color = "blue";
+    String color = String.format("#%06X", ( point.pointColor() & 0x00ffffff ) ); // "blue";
+    if ( BrushManager.isPointUser( idx ) ) { color = "black"; }
+
     String name = point.getThName( );
     SymbolPoint sp = (SymbolPoint)BrushManager.getPointByIndex( idx );
     String path = ( sp == null )? null : sp.getXvi();

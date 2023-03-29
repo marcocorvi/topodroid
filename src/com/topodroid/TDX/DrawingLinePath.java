@@ -541,6 +541,10 @@ public class DrawingLinePath extends DrawingPointLinePath
     }
   }
 
+  /** @return the line color
+   */
+  int lineColor( ) { return BrushManager.getLineColor( mLineType ); }
+
   /** export in Cav3D format
    * @param pw     output writer
    * @param type   line type
