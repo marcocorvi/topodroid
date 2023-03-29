@@ -82,12 +82,9 @@ class SurveyStatDialog extends MyDialog
       float m = mStat.averageM*TDSetting.mMagneticThr/2000;
       float d = TDSetting.mDipThr/20;
       // TDLog.v( "G " + g + " M " + m + " D " + d );
-      histG.setImageBitmap( makeHistogramBitmap( mStat.G, mStat.nrMGD, mStat.averageG, g,
-                            400, 100, 40, TDColor.BLUE ) );
-      histM.setImageBitmap( makeHistogramBitmap( mStat.M, mStat.nrMGD, mStat.averageM, m,
-                            400, 100, 40, TDColor.BLUE ) );
-      histD.setImageBitmap( makeHistogramBitmap( mStat.D, mStat.nrMGD, mStat.averageD, d,
-                            400, 100, 40, TDColor.BLUE ) );
+      histG.setImageBitmap( makeHistogramBitmap( mStat.G, mStat.nrMGD, mStat.averageG, g, 400, 100, 40, TDColor.BLUE ) );
+      histM.setImageBitmap( makeHistogramBitmap( mStat.M, mStat.nrMGD, mStat.averageM, m, 400, 100, 40, TDColor.BLUE ) );
+      histD.setImageBitmap( makeHistogramBitmap( mStat.D, mStat.nrMGD, mStat.averageD, d, 400, 100, 40, TDColor.BLUE ) );
 
       // mBtnBack = (Button) findViewById(R.id.btn_back);
       // mBtnBack.setOnClickListener( this );
