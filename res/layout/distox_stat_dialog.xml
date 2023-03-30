@@ -97,6 +97,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
       />
+      <TextView android:id="@+id/text_stat_zsurvey_minmax"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+      />
+      <!-- TextView android:id="@+id/text_stat_zsurface_minmax"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+      / -->
       <!-- TextView android:id="@+id/text_stat_stations"
         android:layout_marginTop="@dimen/marginsmall"
         android:layout_width="match_parent"

@@ -74,6 +74,9 @@ class DrawingStatDialog extends MyDialog
         TextView mTextProjLen  = (TextView) findViewById(R.id.text_stat_projlen);
         TextView mTextWENS     = (TextView) findViewById(R.id.text_stat_wens);
         TextView mTextZminmax  = (TextView) findViewById(R.id.text_stat_zminmax);
+        TextView mTextZsurveyMinmax  = (TextView) findViewById(R.id.text_stat_zsurvey_minmax);
+        // TextView mTextZsurfaceMinmax = (TextView) findViewById(R.id.text_stat_zsurface_minmax);
+
         // TextView mTextStations = (TextView) findViewById(R.id.text_stat_stations);
         // TextView mTextShots    = (TextView) findViewById(R.id.text_stat_shots);
         // TextView mTextSplays   = (TextView) findViewById(R.id.text_stat_splays);
@@ -173,9 +176,17 @@ class DrawingStatDialog extends MyDialog
                                           mNum.surveySouth() * unit,
                                           unit_str
                           ) );
-        mTextZminmax.setText( String.format( res.getString(R.string.stat_depth),
-                                             mNum.surveyTop()    * unit, unit_str,
-                                             mNum.surveyBottom() * unit, unit_str ) );
+        mTextZminmax.setText( String.format( res.getString(R.string.stat_depth), mNum.surveyTop() * unit, unit_str, mNum.surveyBottom() * unit, unit_str ) );
+        if ( mNum.surveyZmax() >  mNum.surveyZmin() ) {
+          mTextZsurveyMinmax.setText( String.format( res.getString(R.string.stat_survey_z), mNum.surveyZmax() * unit, mNum.surveyZmin() * unit, unit_str ) );
+        } else {
+          mTextZsurveyMinmax.setVisibility( View.GONE );
+        }
+        // if ( mNum.surfaceZmax() >  mNum.surfaceZmin() ) {
+        //   mTextZsurfaceMinmax.setText( String.format( res.getString(R.string.stat_surface_z), mNum.surfaceZmax() * unit, mNum.surfaceZmin() * unit, unit_str ) );
+        // } else {
+        //   mTextZsurfaceMinmax.setVisibility( View.GONE );
+        // }
         // mTextStations.setText(String.format( res.getString(R.string.stat_station), mNum.stationsNr() ) );
 
         // mTextShots.setText( String.format( res.getString(R.string.stat_shot),

@@ -73,22 +73,46 @@ class TriShot
     cluster = null;
   }
 
+  /** @return the shot length
+   */
   double length()  { return mAvgLeg.length(); } 
+
+  /** @return the shot azimuth
+   */
   double bearing() { return mAvgLeg.bearing(); } 
+
+  /** @return the shot inclination
+   */
   double clino()   { return mAvgLeg.clino(); } 
 
+  /** @return the (integer) shot extend
+   */
   int   getIntExtend()   { return extend; }
+
+  /** @return the (float) shot extend, ie, integer part plus fractional part
+   */
   float getFloatExtend() { return extend + stretch; }
 
+  /** add a data to this shot
+   * @param blk data to add
+   */
   void addBlock( DBlock blk )
   {
     blocks.add( blk );
     mAvgLeg.add( blk );
   }
 
+  /** @return the fisrt data in this shot
+   */
   DBlock getFirstBlock( ) { return blocks.get(0); }
 
+  /** @return the array of data in this shot
+   */
   ArrayList< DBlock > getBlocks() { return blocks; }
+
+  /** @return the shot reduction type: 1 SURVEY, 2 SURFACE
+   */
+  int getReductionType() { return ( blocks.get(0).isSurface() )? NumStation.STATION_SURFACE : NumStation.STATION_SURVEY; }
 
   /** get the temp-shot distance
    * note if the temp-shot is reversed the distance is negative

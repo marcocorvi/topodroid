@@ -29,6 +29,11 @@ public class NumStation extends NumSurveyPoint
                               // set by TDNum only for the start station when it does data reduction
                               // used to check in the export
 
+  public static final int STATION_UNKNOWN = 0; // station reduction types
+  public static final int STATION_SURVEY  = 1;
+  public static final int STATION_SURFACE = 2;
+  public static final int STATION_ORIGIN  = 3;
+
   NumShot s1;
   NumShot s2;
   NumNode node;
@@ -37,6 +42,8 @@ public class NumStation extends NumSurveyPoint
                        //                     or "barrier": -1 barrier, -2 behind
   public boolean mBarrierAndHidden;
   // NumShortpath mShortpathDist;  // loop closure distance (shortest-path algo)
+
+  // int mReductionType = STATION_UNKNOWN; // reduction type is used only for the statistics - it is passed directly to TDNum.addToStat() without storing in NumStation
 
   private NumStation mParent;  // parent station in the reduction tree
   private NumStation mChild;   // child station in the reduction tree
@@ -47,6 +54,10 @@ public class NumStation extends NumSurveyPoint
   public boolean unbarriered() { return mHidden >= -1; }
   public boolean barrier() { return mBarrierAndHidden || mHidden < 0; }
   public boolean hidden()  { return mBarrierAndHidden || mHidden > 0; }
+
+  // /** @return the station reduction type: 0 unknown, 1 survey, 2 surface, 3 origin
+  //  */
+  // public int reductionType() { return mReductionType; }
 
   /** @return true if the station has 3D coords
    */
@@ -73,8 +84,9 @@ public class NumStation extends NumSurveyPoint
 
   /** cstr
    * @param id  station name
+   * // param reduction_type station reduction type
    */
-  public NumStation( String id )
+  public NumStation( String id /*, int reduction_type */ )
   {
     super();
     name = id;
@@ -91,6 +103,7 @@ public class NumStation extends NumSurveyPoint
     mChild   = null;
     mSibling = null;
     mLegs = new ArrayList<>();
+    // mReductionType = reduction_type;
   }
 
   /** cstr
@@ -101,8 +114,9 @@ public class NumStation extends NumSurveyPoint
    * @param c     clino FROM-this
    * @param extend extend value
    * @param has_extend whether the station has extend
+   * // param reduction_type station reduction type
    */
-  NumStation( String id, NumStation from, float d, float b, float c, float extend, boolean has_extend )
+  NumStation( String id, NumStation from, float d, float b, float c, float extend, boolean has_extend /*, int reduction_type */ )
   {
     super();
 
@@ -125,6 +139,7 @@ public class NumStation extends NumSurveyPoint
     mBarrierAndHidden = false;
     setParent( from );
     mLegs = new ArrayList<>();
+    // mReductionType = reduction_type;
     // TDLog.v( "NumStation cstr " + id + " from " + from.name + " has coords " + mHasExtend + " " + from.mHasExtend );
   }
 

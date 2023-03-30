@@ -134,6 +134,10 @@ public class TDNum
   private double mInLegErr1;    // statistics
   private double mInLegErr2;
   private double mLegSigmaSum;  // sum of legs sigmas (accumulator)
+  private double mVmaxSurvey;   // V downward
+  private double mVminSurvey;
+  // private double mVmaxSurface; // not used
+  // private double mVminSurface;
 
   private int mLenCnt;
   private int mLegCnt;
@@ -153,6 +157,10 @@ public class TDNum
     mInLegErr1 = mInLegErr2 = 0;
     mLegSigmaSum = 0;
     mLegCnt = 0;
+    mVmaxSurvey  = 0;
+    mVminSurvey  = 0;
+    // mVmaxSurface = 0;
+    // mVminSurface = 0;
   }
 
   /** add the contribution of the data of a leg to the statistics of in-leg errors
@@ -231,6 +239,23 @@ public class TDNum
     }
   }
 
+  /** add station Z to stats
+   * @param ns station
+   * @param reduction_type station reduction type
+   */
+  private void addToStat( NumStation ns, int reduction_type )
+  {
+    double v = ns.v;
+    switch ( reduction_type ) { 
+      case NumStation.STATION_SURVEY:
+        if ( v > mVmaxSurvey ) { mVmaxSurvey = v; } else if ( v < mVminSurvey ) { mVminSurvey = v; }
+        break;
+      // case NumStation.STATION_SURFACE:
+      //   if ( v > mVmaxSurface ) { mVmaxSurface = v; } else if ( v < mVminSurface ) { mVminSurface = v; }
+      //   break;
+    }
+  }
+
   /** @return the number of stations
    */
   public int stationsNr()  { return mStations.size(); }
@@ -274,6 +299,12 @@ public class TDNum
   public float surveyTop()        { return (float)mTup; }   // top must be positive
 
   public float surveyBottom()     { return (float)mTdown; } // bottom must be negative
+
+  public float surveyZmax()       { return -(float)mVminSurvey; }
+  public float surveyZmin()       { return -(float)mVmaxSurvey; }
+
+  // public float surfaceZmax()       { return -(float)mVminSurface; }
+  // public float surfaceZmin()       { return -(float)mVmaxSurface; }
 
   /** @return the length of the survey unattached legs
    */
@@ -1012,7 +1043,8 @@ public class TDNum
     computeInLegError();
 
     // ---------------------------------- DATA REDUCTION -------------------------------
-    mStartStation = new NumStation( start );
+    mStartStation = new NumStation( start /*, NumStation.STATION_ORIGIN */ );
+    // addToStat( mStartStation ); // useless
     mStartStation.setHasExtend( true );
     mStations.addStation( mStartStation );
 
@@ -1174,7 +1206,8 @@ public class TDNum
   {
     float bearing = ts.b() - sf.mAnomaly;
     boolean has_coords = (i_ext <= 1);
-    NumStation st = new NumStation( ts.to, sf, ts.d(), bearing + mDecl, ts.c(), f_ext, has_coords ); // 20200503 added mDecl
+    NumStation st = new NumStation( ts.to, sf, ts.d(), bearing + mDecl, ts.c(), f_ext, has_coords /*, ts.getReductionType() */ ); // 20200503 added mDecl
+    addToStat( st, ts.getReductionType() );
     if ( ! mStations.addStation( st ) ) mClosureStations.add( st );
 
     st.addAzimuth( (ts.b()+180)%360, -a_ext );
@@ -1199,7 +1232,8 @@ public class TDNum
     st.addAzimuth( (ts.b()+180)%360, -a_ext );
     float bearing = ts.b() - st.mAnomaly;
     boolean has_coords = (i_ext <= 1);
-    NumStation sf = new NumStation( ts.from, st, - ts.d(), bearing + mDecl, ts.c(), f_ext, has_coords ); // 20200503 added mDecl
+    NumStation sf = new NumStation( ts.from, st, - ts.d(), bearing + mDecl, ts.c(), f_ext, has_coords /*, ts.getReductionType() */ ); // 20200503 added mDecl
+    addToStat( sf, ts.getReductionType() );
     if ( ! mStations.addStation( sf ) ) mClosureStations.add( sf );
 
     sf.addAzimuth( ts.b(), a_ext );
@@ -1226,7 +1260,8 @@ public class TDNum
   {
     float bearing = ts.b() - sf.mAnomaly;
     boolean has_coords = (i_ext <= 1);
-    NumStation st1 = new NumStation( ts.to, sf, ts.d(), bearing + mDecl, ts.c(), f_ext, has_coords ); // 20200503 added mDecl
+    NumStation st1 = new NumStation( ts.to, sf, ts.d(), bearing + mDecl, ts.c(), f_ext, has_coords /*, ts.getReductionType() */ ); // 20200503 added mDecl
+    // addToStat( st1, ts.getReductionType() ); // FIXME should do this ?
     if ( ! mStations.addStation( st1 ) ) mClosureStations.add( st1 );
 
     st1.addAzimuth( (ts.b()+180)%360, -a_ext );

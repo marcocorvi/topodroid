@@ -59,7 +59,7 @@ public class DBlock
 
   int  mExtend;
   long mFlag;     
-  int  mBlockType;   
+  int  mBlockType;     // data type: BLANK, LEG, SEC_LEG, BACKLEG, SPLAY
   int  mShotType;      // 0: DistoX, 1: manual, -1: DistoX backshot
   boolean mWithPhoto;
 
