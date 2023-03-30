@@ -1024,7 +1024,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="help_bluetooth">Reset bluetooth connection</string>
     <string name="help_remote">Remote DistoX control</string>
     <string name="help_add_shot">Add a shot entering the data manually</string>
-    <string name="help_info_shot">Survey statistics</string>
+    <string name="help_info_shot">Survey data info</string>
     <string name="help_gps_surveys">Surveys fixed points</string>
     <string name="help_survey_info">Survey information</string>
     <string name="help_undelete">Recover deleted items</string>
@@ -1044,7 +1044,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="help_plot_scrap">Sketch scraps</string>
     <string name="help_plot_switch">Switch sketch</string>
     <string name="help_search">Data search</string>
-    <string name="help_stats">Survey statistics</string>
+    <string name="help_stats">Sketch statistics</string>
     <string name="help_save_plot">Export sketch</string>
     <!-- UNUSED string name="help_tdr2th2">Convert sketch binary files to th2</string -->
     <string name="help_toggle_plot">Switch between plan and profile view</string>
@@ -1278,7 +1278,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="title_sensor_edit" copyable="pt">Sensor</string>
     <string name="title_split">Sketch split</string>
 
-    <string name="title_stats">Statistics</string>
+    <string name="title_stats">Sketch statistics</string>
     <!-- UNUSED string name="title_step">Step</string -->
     <string name="title_survey">Survey Info</string>
     <string name="title_survey_new">New survey</string>
