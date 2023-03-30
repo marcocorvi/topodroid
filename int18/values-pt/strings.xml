@@ -651,8 +651,8 @@ no campo abaixo e aperte o botão.
   <string name="stat_leg_sigma">Sigma da visada %1$.1f cm</string>
   <string name="stat_dangling">Medidas desconectadas %1$d %2$.1f %3$s</string>
   <string name="stat_surface">Medidas na superfície - Qt: %1$d # %2$d Ext: %3$.1f %4$s</string>
-    <!-- UNUSED string name="stat_surface_z">Surface Z %1$.1f %2$.1f %3$s</string -->
-    <!-- TODO string name="stat_survey_z">Survey Z %1$.1f %2$.1f %3$s</string -->
+  <!-- UNUSED string name="stat_surface_z">Surface Z %1$.1f %2$.1f %3$s</string -->
+  <string name="stat_survey_z">Topo Z %1$.1f %2$.1f %3$s</string>
   <string name="stat_wens">Oeste: %1$.0f %5$s Leste: %2$.0f %5$s Norte: %3$.0f %5$s Sul: %4$.0f %5$s</string>
   <string name="stat_angle_error">Erros de ângulo: %1$.2f ± %2$.2f</string>
   <string name="shot_title">MEDIDA %1$s - %2$s</string>
