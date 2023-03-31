@@ -714,8 +714,8 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="stat_leg_sigma">Leg sigma %1$.1f cm</string>
     <string name="stat_dangling">Dangling shots %1$d %2$.1f %3$s</string>
     <string name="stat_surface">Surface shots %1$d # %2$d %3$.1f %4$s</string>
-    <!-- UNUSED string name="stat_surface_z">Surface Z %1$.1f %2$.1f %3$s</string -->
-    <string name="stat_survey_z">Survey Z %1$.1f %2$.1f %3$s</string>
+    <!-- UNUSED string name="stat_surface_z">Surface denivelation %1$.1f %2$.1f %3$s</string -->
+    <string name="stat_survey_z">Cave denivelation %1$.1f %2$.1f %3$s</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string>
     <string name="stat_angle_error">Angle errors %1$.2f ± %2$.2f</string>
     <string name="shot_title">SHOT %1$s - %2$s</string>
