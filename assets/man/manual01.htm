@@ -8,20 +8,24 @@ The TopoDroid interface has activity levels, differing by the number of actions 
 <li>The <b>normal</b> level [N] contains all the functions for a detailed cave survey.</li>
 <li>The <b>advanced</b> level [A] has also advanced functions.</li>
 <li>The <b>expert</b> level [E] has all the functions.</li>
-<li>The <b>tester</b> level [T] is only for testing. It has untested features enabled. These features are partly debugged and may crash the app. Please report any problem with them.</li>
-<!-- li>There is also a <b>developer</b> level [D] for code not fully developed that is compiled only in debug build of the app.</li -->
+<li>The <b>tester</b> level [T] is only for testing. It has untested features that are partly debugged and may crash the app.</li>
+<li>Features at <b>developer</b> level [D] are enabled only in debug build of the app.</li>
 </ul><br>
 
-By default TopoDroid has only the <b>normal</b> functions enabled, but you can switch level, according to your needs, without exiting from the program. This manual describes the complete TopoDroid. Features at a level above "basic" are marked with the level initial, [N], [A], [E], or [T].<br>
-The settings displayed in the <u>Preferences window</u> depend on the activity level.<br><p>
+By default TopoDroid has only the <b>normal</b> functions enabled, but you can switch level,
+according to your needs, without exiting from the program.
+This manual describes the complete TopoDroid.
+Features at a level above "basic" are (usually) marked with the level initial, [N], [A], [E], or [T].<br><p>
 
 <h4>Windows</h4>
 TopoDroid has a <u>Main window</u> from which you can move to other app activities.  The main activities are:
 <ul style="margin-top=0">
 <li><b>Survey</b> data management (<u>Survey Info</u> and <u>Survey Data</u> windows).</li>
 <li><b>Sketch</b> drafting, <u>Drawing window</u>, is a sub-activity of the Survey activity.</li>
+<li><b>3D viewer</b>.</li>
 <li><b>Device</b> functions, <u>Device window</u></li>
 <li><b>Calibration</b> of DistoX (<u>Calibration Info</u> and <u>Calibration Data</u> windows) is a sub-activity of the Device activity.</li>
+<li><b>Cave projects</b>.</li>
 </ul><br>
 
 <img src="windows.png"><br><p>
@@ -31,7 +35,6 @@ Dialogs usually have a confirmation button (<i>OK</i> or <i>Save</i>).
 If there are both, <i>OK</i> saves the input data and closes the dialog, while <i>Save</i> saves the input data and keep the dialog open for a new input.<br>
 Dialogs can have also a <i>back</i> (or <i>cancel</i>) button. If not present, the Android <i>BACK</i> button saves the changes and closes the dialog.
 Otherwise it just closes the dialog.<br><p>
-
 
 
 <h4>Help and user manual</h4>
@@ -52,13 +55,23 @@ TopoDroid has a large number of settings.
 These are divided in categories and subcategories:
 <ul>
 <li>General</li>
-<li>Survey data</li>
-<li>Sketches</li>
-<li>Devices and calibration</li>
 <li>Import/Export</li>
+<li>Survey data</li>
+<li>Sketching</li>
+<li>Devices and calibration</li>
+<li>3D viewer</li>
+<!-- li>Cave projects</li -->
 </ul><p>
 
-The number of settings displayed by the "Settings" interface depends on the activity level.<br><p> 
+The settings displayed in the <u>Preferences window</u> depend on the activity level.<br><p>
+
+Numerical settings can have minimum and maximum values. 
+If the entered value is outside the bounds, the value of the bound is assigned to the setting.<br><p>
+
+The app settings can be exported to "settings.txt", in plain text format. 
+The file is stored in the app private Files folder.
+The settings can be later reset importing the values from this file.<br><p>
+
 
 <div style="font-size: 90%">
 More esoteric settings (<a href="page_geek.htm">Geek</a>) are marked with [G].
