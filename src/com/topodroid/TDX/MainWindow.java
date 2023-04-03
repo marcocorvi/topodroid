@@ -191,8 +191,8 @@ public class MainWindow extends Activity
   private boolean say_not_enabled = true; // whether to say that BT is not enabled
   private boolean do_check_bt     = true;     // one-time bluetooth check sentinel
 
-  private boolean mPaletteButtonEnabled = false;
-  private void enablePaletteButton() { mPaletteButtonEnabled = true; }
+  static private boolean mPaletteButtonEnabled = false;
+  static void enablePaletteButton() { mPaletteButtonEnabled = true; }
 
   // -------------------------------------------------------------------
 
@@ -892,15 +892,9 @@ public class MainWindow extends Activity
       Thread loader = new Thread() {
         @Override
         public void run() {
+          TDLog.v("Main: app start-up step 2");
           mApp.startupStep2();
-          Resources res = getResources();
-          BrushManager.reloadPointLibrary( mApp, res ); // reload symbols
-          BrushManager.reloadLineLibrary( res );
-          BrushManager.reloadAreaLibrary( res );
-          BrushManager.setHasSymbolLibraries( true );
-          BrushManager.doMakePaths( );
           WorldMagneticModel.loadEGM9615( mApp );
-	  enablePaletteButton();
         }
       };
       loader.setPriority( Thread.MIN_PRIORITY );

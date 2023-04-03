@@ -112,8 +112,7 @@ public class SymbolLineLibrary extends SymbolLibrary
 
         SymbolLine symbol = new SymbolLine( file.getPath(), fname, locale, iso );
         if ( symbol.isThName( null ) ) {
-          TDLog.Error( "line with null ThName " + fname );
-          // TDLog.v( "line with null ThName " + fname );
+          TDLog.Error( "Line Symbol with null ThName: " + fname );
           continue;
         }
         if ( ! hasSymbolByThName( symbol.getThName() ) ) {
@@ -127,13 +126,15 @@ public class SymbolLineLibrary extends SymbolLibrary
                 if ( DefaultLines[k].equals( thname ) ) { enable = true; break; }
               }
               TopoDroidApp.mData.setSymbolEnabled( name, enable );
+              // TDLog.v("Line Symbol " + name + " set enabled " + enable );
             } else {
               enable = TopoDroidApp.mData.getSymbolEnabled( name );
+              // TDLog.v("Line Symbol " + name + " enabled " + enable );
             }
           }
           symbol.setEnabled( enable );
         } else {
-          TDLog.Error( "line " + symbol.getThName() + " already in library" );
+          TDLog.Error( "Line Symbol " + symbol.getThName() + " already in library" );
           // TDLog.v( "line " + symbol.getThname() + " already in library" );
         }
       }

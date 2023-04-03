@@ -831,6 +831,7 @@ public class TopoDroidApp extends Application
   // ---------------------------------------------------------
 
   /** second step of application initialization
+   * @note called by the MainWindow loader thread
    */
   void startupStep2( )
   {
@@ -1106,7 +1107,23 @@ public class TopoDroidApp extends Application
       // TDLog.v( "Open TopoDroid Database");
       mData = new DataHelper( thisApp ); 
     // }
-
+    if ( mData.hasDB() ) {
+      Thread loader = new Thread() {
+        @Override
+        public void run() {
+          TDLog.v("Main: app start-up step 2");
+          Resources res = TDInstance.getResources();
+          BrushManager.reloadPointLibrary( TDInstance.context, res ); // reload symbols
+          BrushManager.reloadLineLibrary( res );
+          BrushManager.reloadAreaLibrary( res );
+          BrushManager.setHasSymbolLibraries( true );
+          BrushManager.doMakePaths( );
+	  MainWindow.enablePaletteButton();
+        }
+      };
+      loader.setPriority( Thread.MIN_PRIORITY );
+      loader.start();
+    }
     // mStationName = new StationName();
     return mData.hasDB();
   }
@@ -1234,7 +1251,7 @@ public class TopoDroidApp extends Application
   public static void setCWD( String cwd /* , String cbd */ )
   {
     if ( TDString.isNullOrEmpty( cwd ) ) cwd = TDInstance.cwd;
-    // TDLog.v( "App set CWD " + cwd + " CBD " + cbd );
+    TDLog.v( "App set CWD " + cwd /* + " CBD " + cbd */ );
 
     if ( cwd.equals( TDInstance.cwd ) ) return;
     // TDInstance.cbd = cbd;

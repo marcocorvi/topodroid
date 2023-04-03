@@ -189,10 +189,10 @@ public class SymbolPointLibrary extends SymbolLibrary
 
         SymbolPoint symbol = new SymbolPoint( file.getPath(), fname, locale, iso );
         if ( symbol.isThName( null ) ) {
-          TDLog.Error( "point with null ThName " + fname );
+          TDLog.Error( "Point Symbol with null ThName " + fname );
           continue;
         }
-        // TDLog.v("Symbol point <" + fname + "> th_name <" + symbol.getThName() + ">" );
+        // TDLog.v("Point Symbol <" + fname + "> th_name <" + symbol.getThName() + ">" );
         if ( ! hasSymbolByThName( symbol.getThName() ) ) {
           addSymbol( symbol );
           String thname = symbol.getThName();
@@ -206,13 +206,15 @@ public class SymbolPointLibrary extends SymbolLibrary
                 if ( DefaultPoints[k].equals( thname ) ) { enable = true; break; }
               }
               TopoDroidApp.mData.setSymbolEnabled( name, enable );
+              // TDLog.v("Point Symbol " + name + " set enabled " + enable );
             } else {
               enable = TopoDroidApp.mData.getSymbolEnabled( name );
+              // TDLog.v("Point Symbol " + name + " enabled " + enable );
             }
 	  }
           symbol.setEnabled( enable );
         } else {
-          TDLog.Error( "point " + symbol.getThName() + " already in library" );
+          TDLog.Error( "Point Symbol " + symbol.getThName() + " already in library" );
         }
       }
       sortSymbolByName( systemNr );

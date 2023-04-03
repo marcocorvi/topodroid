@@ -189,7 +189,7 @@ public class DataHelper extends DataSetObservable
   // UNUSED
   // public SQLiteDatabase getDb() { return myDB; }
 
-  public boolean hasDB() { return myDB != null; }
+  public synchronized boolean hasDB() { return myDB != null; }
 
   /** cstr: open default database (in the current work directory)
    * @param context context
@@ -215,7 +215,7 @@ public class DataHelper extends DataSetObservable
 
   /** close the database
    */
-  void closeDatabase()
+  synchronized void closeDatabase()
   {
     if ( myDB == null ) return;
     myDB.close();
@@ -228,7 +228,7 @@ public class DataHelper extends DataSetObservable
    * open the database, if successful check if it needs to be updated
    * otherwise create the database
    */
-  void openDatabase( Context context )
+  synchronized void openDatabase( Context context )
   {
     String db_name = TDPath.getDatabase(); // DistoX-SAF
     if ( myDB != null ) {
