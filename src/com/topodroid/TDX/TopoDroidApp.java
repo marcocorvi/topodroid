@@ -154,7 +154,7 @@ public class TopoDroidApp extends Application
     if ( mDData == null ) return true;
     String res = mDData.getValue( "say_dialogR" );
     boolean ret = ( res == null || ! res.equals("NO") );
-    TDLog.v("TD say dialog R " + ret );
+    // TDLog.v("TD say dialog R " + ret );
     return ret;
   }
 
@@ -163,7 +163,7 @@ public class TopoDroidApp extends Application
    */
   static void setSayDialogR( boolean res ) 
   { 
-    TDLog.v("TD set dialog R " + res );
+    // TDLog.v("TD set dialog R " + res );
     if ( mDData != null ) mDData.setValue( "say_dialogR", ( res? "YES" : "NO" ) );
   }
 
@@ -1057,14 +1057,13 @@ public class TopoDroidApp extends Application
 
   }
 
-  static boolean done_init_env_second = false;
-
   /** second step of environment initialization: CWD and paths
    * @return true if successful - can fail if cannot open the database
    */
   static  boolean initEnvironmentSecond( )
   {
     if ( done_init_env_second ) return true;
+    TDLog.v("App Init Env [2]");
     done_init_env_second = true;
     // TDLog.v("APP init env. second " );
 
@@ -1101,28 +1100,34 @@ public class TopoDroidApp extends Application
 
   static boolean initEnvironmentThird()
   {
+    TDLog.v("App Init Env [3]");
     // TDLog.Profile("TDApp DB"); 
     // ***** DATABASE MUST COME BEFORE PREFERENCES
     // if ( ! with_dialog_r ) {
       // TDLog.v( "Open TopoDroid Database");
       mData = new DataHelper( thisApp ); 
     // }
-    if ( mData.hasDB() ) {
-      Thread loader = new Thread() {
-        @Override
-        public void run() {
-          TDLog.v("Main: app start-up step 2");
-          Resources res = TDInstance.getResources();
-          BrushManager.reloadPointLibrary( TDInstance.context, res ); // reload symbols
-          BrushManager.reloadLineLibrary( res );
-          BrushManager.reloadAreaLibrary( res );
-          BrushManager.setHasSymbolLibraries( true );
-          BrushManager.doMakePaths( );
-	  MainWindow.enablePaletteButton();
-        }
-      };
-      loader.setPriority( Thread.MIN_PRIORITY );
-      loader.start();
+    if ( ! done_loaded_palette ) {
+      if ( mData.hasDB() ) {
+        done_loaded_palette = true;
+        Thread loader = new Thread() {
+          @Override
+          public void run() {
+            TDLog.v("App loading palette");
+            Resources res = TDInstance.getResources();
+            BrushManager.reloadPointLibrary( TDInstance.context, res ); // reload symbols
+            BrushManager.reloadLineLibrary( res );
+            BrushManager.reloadAreaLibrary( res );
+            BrushManager.setHasSymbolLibraries( true );
+            BrushManager.doMakePaths( );
+            MainWindow.enablePaletteButton();
+          }
+        };
+        loader.setPriority( Thread.MIN_PRIORITY );
+        loader.start();
+      } else {
+        TDLog.Error("App database not opened");
+      }
     }
     // mStationName = new StationName();
     return mData.hasDB();
@@ -1130,7 +1135,10 @@ public class TopoDroidApp extends Application
 
   // init env requires the device database, which requires having the permissions
   //
-  static boolean done_init_env_first = false;
+  static boolean done_init_env_first  = false;
+  static boolean done_init_env_second = false;
+  static boolean done_loaded_palette  = false;
+
 
   /** initialize the environment, first step
    *  - device DB helper, 
@@ -1141,6 +1149,7 @@ public class TopoDroidApp extends Application
   void initEnvironmentFirst(  ) // TDPrefHelper prefHlp 
   {
     if ( done_init_env_first ) return;
+    TDLog.v("App Init Env [1]");
     done_init_env_first = true;
 
     // TDLog.v( "APP init env. first " );
@@ -2049,6 +2058,18 @@ public class TopoDroidApp extends Application
     }
   }
 
+  /** reload all symbols
+   * @param clear   whether to first clear symbols
+   * @param speleo  whether to load symbols "speleo"
+   * @param extra   whether to load symbols "extra"
+   * @param mine    whether to load symbols "mine"
+   * @param geo     whether to load symbols "geo"
+   * @param archeo  whether to load symbols "archeo"
+   * @param anthro  whether to load symbols "anthro"
+   * @param paleo   whether to load symbols "paleo"
+   * @param bio     whether to load symbols "bio"
+   * @param karst   whether to load symbols "karst"
+   */
   void reloadSymbols( boolean clear, 
                       boolean speleo, boolean extra, boolean mine, boolean geo, boolean archeo, boolean anthro, boolean paleo,
                       boolean bio,    boolean karst )

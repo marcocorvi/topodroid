@@ -990,7 +990,7 @@ public class TDPath
 
   private static void checkFilesystemDirs( String path )
   {
-    TDLog.v("check filesystem dir " + path + " cwd " + ROOT_CW_DIR );
+    // TDLog.v("check filesystem dir " + path + " cwd " + ROOT_CW_DIR );
     if ( TDandroid.PRIVATE_STORAGE ) {
       File dir = TDFile.getPrivateDir( path );
       if ( ! dir.exists() ) dir.mkdirs( );
