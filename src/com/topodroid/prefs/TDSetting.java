@@ -589,11 +589,11 @@ public class TDSetting
   public static float mAccelerationThr =  1; // acceleration threshold (shot quality) [%]
   public static float mMagneticThr     =  1; // magnetic threshold [%]
   public static float mDipThr          =  2; // dip threshold [deg]
-  private static float mSiblingThr     = 10; // sibling threshold [%]
-  public static float mSiblingThrA     = 0.56f * 10; // sibling angle threshold [%]
-  public static float mSiblingThrD     = 0.10f;      // sibling distance threshold [%]
-  public static float mMaxShotLength   = 50; // max length of a shot (if larger it is overshoot)
-  public static float mMinLegLength    =  0; // min length of a leg (if shorter it is undershoot)
+  private static float mSiblingThr     =  5; // sibling threshold [%]
+  public static float mSiblingThrA     = 0.56f * 5; // sibling angle threshold [deg]
+  public static float mSiblingThrD     = 0.05f;     // sibling distance threshold [m] 
+  public static float mMaxShotLength   = 50; // max length of a shot (if larger it is overshoot) [m]
+  public static float mMinLegLength    =  0; // min length of a leg (if shorter it is undershoot) [m]
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // AUTOWALLS
   // public static final int WALLS_NONE    = 0;
@@ -633,10 +633,10 @@ public class TDSetting
   {
     String ret = null;
     if ( thr <= 1 ) {
-      thr = 10.0f;
-      ret = TDString.TEN;
+      thr = 1.0f;
+      ret = TDString.ONE;
     }
-    mSiblingThr = thr;
+    mSiblingThr  = thr;
     mSiblingThrA = thr * 0.56f;
     mSiblingThrD = thr * 0.01f;
     return ret;

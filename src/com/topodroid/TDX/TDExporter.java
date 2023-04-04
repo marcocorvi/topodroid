@@ -2198,7 +2198,7 @@ public class TDExporter
 	  b.mLength, sep, b.mBearing, sep, b.mClino, sep, b.mRoll, sep, b.mAcceleration, sep, b.mMagnetic, sep, b.mDip, sep );
         String address = b.mAddress;
         if ( TDString.isNullOrEmpty( address ) ) address = "-";
-        pw.format(Locale.US, "%d%c%d%c%s%c", b.mTime, sep, b.mShotType, sep, address, sep );
+        pw.format(Locale.US, "%d%c%d%c%s%c", b.mTime, sep, b.getShotType(), sep, address, sep );
         pw.format(Locale.US, "%d%c%d%c%d%c%d%c%s%s", b.mExtend, sep, b.mFlag, sep, b.mLeg, sep, b.mStatus, sep, b.mComment, newline );
       }
       bw.flush();

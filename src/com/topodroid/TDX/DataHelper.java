@@ -324,7 +324,7 @@ public class DataHelper extends DataSetObservable
     blk.mAcceleration = (float)( cursor.getDouble(7) );
     blk.mMagnetic     = (float)( cursor.getDouble(8) );
     blk.mDip          = (float)( cursor.getDouble(9) );
-    blk.mShotType     = (int)(  cursor.getLong(10) );
+    blk.setShotType( (int)(  cursor.getLong(10) ) );
     blk.mTime         = (long)( cursor.getLong(11) );
     blk.mAddress      = cursor.getString(12);
     blk.mExtend       = (int)(  cursor.getLong(13) );
@@ -1791,7 +1791,7 @@ public class DataHelper extends DataSetObservable
     // 0L = color, 0 = status
     ContentValues cv = makeShotContentValues( sid, myNextId, blk.mTime, 0L, blk.mFrom, blk.mTo, 
                          blk.mLength, blk.mBearing, blk.mClino, blk.mRoll, blk.mMagnetic, blk.mAcceleration, blk.mDip, 
-                         blk.mExtend, blk.getStretch(), blk.mFlag, blk.getLegType(), 0, blk.mShotType, blk.mComment, blk.getAddress() );
+                         blk.mExtend, blk.getStretch(), blk.mFlag, blk.getLegType(), 0, blk.getShotType(), blk.mComment, blk.getAddress() );
     doInsert( SHOT_TABLE, cv, "dblock insert" );
     return myNextId;
   }
@@ -1881,6 +1881,15 @@ public class DataHelper extends DataSetObservable
     } finally { myDB.endTransaction(); }
   }
 
+  /**
+   * @param id     shot ID
+   * @param sid    survey ID
+   * @param acc    acceleration
+   * @param mag    magnetic
+   * @param dip    dip
+   * @param r      roll
+   * @param backshot  whether the shot is DistoX2 backsight
+   */
   public void updateShotAMDR( long id, long sid, double acc, double mag, double dip, double r, boolean backshot )
   {
     // if ( myDB == null ) return;

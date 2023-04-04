@@ -32,7 +32,7 @@ class RawDBlock
   int  mExtend;
   long mFlag;     
   int  mLeg;       // ? mBlockType;   
-  int  mShotType;  // 0: DistoX, 1: manual, -1: DistoX backshot
+  private int  mShotType;  // 0: DistoX, 1: manual, -1: DistoX backshot
   int  mStatus;    // FIXME used only to export CSV raw data
   // boolean mWithPhoto;
 
@@ -40,4 +40,9 @@ class RawDBlock
   // private float mStretch;
   String mAddress; // DistoX address - used only in exports
   // boolean mWasRecent = false; // REVISE_RECENT
+
+  void setShotType( int shot_type ) { mShotType = shot_type; } 
+  
+  int getShotType() { return mShotType; }
+
 }

@@ -60,7 +60,7 @@ public class DBlock
   int  mExtend;
   long mFlag;     
   int  mBlockType;     // data type: BLANK, LEG, SEC_LEG, BACKLEG, SPLAY
-  int  mShotType;      // 0: DistoX, 1: manual, -1: DistoX backshot
+  private int  mShotType;      // 0: DistoX, 1: manual, -1: DistoX backshot
   boolean mWithPhoto;
 
   private boolean mMultiBad; // whether it disagree with siblings
@@ -592,12 +592,13 @@ public class DBlock
 
   /** set the type of the shot
    * @param type   shot type
+   * @note used only by DataHelper to fill the DBlock
    */
   void setShotType( int type ) { mShotType = type; }
 
-  // /** @return the type of the shot - UNUSED
-  //  */
-  // int  getShotType( ) { return mShotType; }
+  /** @return the type of the shot: -1 DistoX-backsight, 0 DistoX, 1 manual
+   */
+  int  getShotType( ) { return mShotType; }
 
   /** @return true if the shot type is "DistoX"
    */

@@ -984,12 +984,14 @@ public class TDNum
       TriShot ts1 = ts0; // last sibling (head = the shot itself)
       for ( int j=i+1; j < tmp_shots.size(); ++j ) {
         TriShot ts2 = tmp_shots.get( j );
-        if ( from.equals( ts2.from ) && to.equals( ts2.to ) ) { // TDLog.v( "chain a positive sibling" );
+        if ( from.equals( ts2.from ) && to.equals( ts2.to ) ) { 
+          TDLog.v( "chain a positive sibling " + from + " " + to );
           ts1.sibling = ts2;
           ts1 = ts2;
           ts2.backshot = 1;
 	  ++ nrSiblings;
-        } else if ( from.equals( ts2.to ) && to.equals( ts2.from ) ) { // TDLog.v( "chain a negative sibling" );
+        } else if ( from.equals( ts2.to ) && to.equals( ts2.from ) ) { 
+          TDLog.v( "chain a negative sibling " + from + " " + to );
           ts1.sibling = ts2;
           ts1 = ts2;
           ts2.backshot = -1;
@@ -997,7 +999,8 @@ public class TDNum
         }
       }
 
-      if ( ts0.sibling != null ) { // TDLog.v( "check sibling shots agreement" );
+      if ( ts0.sibling != null ) { 
+        TDLog.v( "check sibling shots agreement " + ts0.from + " " + ts0.to );
         float dmax = 0.0f;
         float cc = TDMath.cosd( blk0.mClino );
         float sc = TDMath.sind( blk0.mClino );
@@ -1017,7 +1020,8 @@ public class TDNum
           if ( d > dmax ) dmax = d;
           ts1 = ts1.sibling;
         }
-        if ( ( ! StationPolicy.doMagAnomaly() ) && ( dmax > TDSetting.mCloseDistance ) ) {
+        if ( ( ! StationPolicy.doMagAnomaly() ) && ( dmax > TDSetting.mSiblingThrD /* TDSetting.mCloseDistance */ ) ) {
+          TDLog.v("Bad Block " + blk0.mFrom + " " + blk0.mTo + " dist " + dmax + " CloseDist " + TDSetting.mCloseDistance + " Sibling " + TDSetting.mSiblingThrD );
           blk0.setMultiBad( true );
         }
         

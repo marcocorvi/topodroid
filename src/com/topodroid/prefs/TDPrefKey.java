@@ -978,7 +978,7 @@ public class TDPrefKey
     "1.0",
     "1.0",
     "2.0",
-    "10.0"
+    "5.0"
   };
 
 
@@ -1862,7 +1862,7 @@ public class TDPrefKey
   // -------------------------------------------------------------------------------
   public static String[] GEEKDEVICE = {
     "DISTOX_SOCKET_DELAY",         // delay before a socket-connection attempt
-    "DISTOX_SECOND_DISTOX",
+    "DISTOX_SECOND_DISTOX",        // enable the two-disto survey
     "DISTOX_WAIT_DATA",       // 8 // msec wait after a data/vector packet
     "DISTOX_WAIT_CONN",            // msec wait after getting "NO PACKET"
     "DISTOX_WAIT_LASER",           // msec wait after command "laser ON"
