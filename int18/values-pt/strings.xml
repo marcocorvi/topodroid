@@ -1195,7 +1195,7 @@ no campo abaixo e aperte o botão.
   <string name="imported_settings">Configurações importadas</string>
   <string name="imported_settings_failed">Falha ao importar configurações</string>
   <string name="export_settings_failed">Falha ao exportar configurações</string>
-  <string name="pref_export_settings">IMPORTAÇÃO/EXPORTAÇÃO DE CONFIGURAÇÕES</string>
+  <string name="pref_export_settings">IMPORT/EXPORT CONFIGURAÇÕES</string>
   <!-- UNUSED string name="pref_tcsx">Exportar cSurvey-1.20 transfer-csx</string -->
   <string name="pref_export_plot_title">Form export croqui</string>
   <string name="pref_export_plot_summary">Formato padrão de exportação de croqui</string>
@@ -1279,9 +1279,9 @@ no campo abaixo e aperte o botão.
   <string name="pref_connect_feedback_title">Feedback conexão</string>
   <string name="pref_connect_feedback_summary">Feedback ao estabelecer conexão com dispositivo</string>
   <string name="pref_station_prefix_title">Pref base</string>
-  <string name="pref_station_prefix_summary">Exportar prefixo de bases (Compass/cSurvey)</string>
-  <string name="pref_compass_splays_title">Aux Compass</string>
-  <string name="pref_compass_splays_summary">Exportar medidas auxiliares em arquivos Compass</string>
+  <string name="pref_station_prefix_summary">Incluir prefixo de bases na exportação (Compass/cSurvey/WinKarst)</string>
+  <string name="pref_compass_splays_title">Aux Compass/Walls</string>
+  <string name="pref_compass_splays_summary">Exportar medidas auxiliares em arquivos Compass/Walls</string>
   <string name="pref_vtopo_splays_title">Aux VisualTopo</string>
   <string name="pref_vtopo_splays_summary">Incluir medidas auxiliares em arquivos VisualTopo</string>
   <string name="pref_vtopo_lrud_title">EDTC em DE</string>
@@ -1300,8 +1300,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_survex_eol_summary">Terminação de linha Survex/Topo</string>
   <string name="pref_survex_splay_title">Base aux Survex</string>
   <string name="pref_survex_splay_summary">Incluir às medidas auxiliares nos arquivos Survex exportados uma base PARA cujo nome é composto da base DE com uma letra adicionada.</string>
-  <string name="pref_survex_lrud_title">EDTC Survex</string>
-  <string name="pref_survex_lrud_summary">Incluir EDTC nos arquivos Survex exportados</string>
+  <string name="pref_survex_lrud_title">EDTC Survex/Therion</string>
+  <string name="pref_survex_lrud_summary">Incluir EDTC nos arquivos Survex/Therion exportados</string>
   <string name="pref_svg_program_title">Programa SVG</string>
   <string name="pref_svg_program_summary">Programa SVG alvo</string>
   <string name="pref_svg_grid_title">Grade</string>
@@ -1729,7 +1729,7 @@ no campo abaixo e aperte o botão.
   <string name="perm_microphone">\nMicrofone</string>
   <string name="welcome_db_version">Banco de dados ver. %1$d, %2$d</string>
   <string name="welcome_text">
-\nTopodroid é um aplicativo Android Open Source para mapeamento de cavernas com DistoX, BRIC4 e SAP5.
+\nTopodroid é um aplicativo Android open source para mapeamento de cavernas com DistoX, BRIC4 e SAP5.
 \n\nNenhuma garantia: utilizando o aplicativo, você concorda com o fato de que o autor não é responsável por qualquer perda de dados ou quaisquer outros danos.
 \n\nAjuda: menu "Ajuda"
 \nPágina principal: botão MENU
