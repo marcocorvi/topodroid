@@ -1401,7 +1401,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_connect_feedback_title">Connect feedback</string>
   <string name="pref_connect_feedback_summary">Feedback on device connect</string>
   <string name="pref_station_prefix_title">Station prefix</string>
-  <string name="pref_station_prefix_summary">Export station prefix [Compass/cSurvey]</string>
+  <string name="pref_station_prefix_summary">Export station prefix [Compass/cSurvey/WinKarst]</string>
   <string name="pref_compass_splays_title">Compass splays</string>
   <string name="pref_compass_splays_summary">Export splays in Compass files</string>
   <string name="pref_vtopo_splays_title">VisualTopo splays</string>
