@@ -651,8 +651,8 @@ no campo abaixo e aperte o botão.
   <string name="stat_leg_sigma">Sigma da visada %1$.1f cm</string>
   <string name="stat_dangling">Medidas desconectadas %1$d %2$.1f %3$s</string>
   <string name="stat_surface">Medidas na superfície - Qt: %1$d # %2$d Ext: %3$.1f %4$s</string>
-  <!-- UNUSED string name="stat_surface_z">Surface Z %1$.1f %2$.1f %3$s</string -->
-  <string name="stat_survey_z">Topo Z %1$.1f %2$.1f %3$s</string>
+  <!-- UNUSED string name="stat_surface_z">Desnível superfície %1$.1f %2$.1f %3$s</string -->
+  <string name="stat_survey_z">Desnível cavidade %1$.1f %2$.1f %3$s</string>
   <string name="stat_wens">Oeste: %1$.0f %5$s Leste: %2$.0f %5$s Norte: %3$.0f %5$s Sul: %4$.0f %5$s</string>
   <string name="stat_angle_error">Erros de ângulo: %1$.2f ± %2$.2f</string>
   <string name="shot_title">MEDIDA %1$s - %2$s</string>
@@ -934,7 +934,7 @@ no campo abaixo e aperte o botão.
   <string name="help_bluetooth">Reiniciar conexão Bluetooth</string>
   <string name="help_remote">Controle remoto da DistoX</string>
   <string name="help_add_shot">Criar uma medida inserindo manualmente os dados</string>
-  <string name="help_info_shot">Estatísticas da topo</string>
+  <string name="help_info_shot">Resumo topo</string>
   <string name="help_gps_surveys">Pontos fixos da topo</string>
   <string name="help_survey_info">Informações sobre a topo</string>
   <string name="help_undelete">Recuperar itens apagados</string>
@@ -954,7 +954,7 @@ no campo abaixo e aperte o botão.
   <string name="help_plot_scrap">Desenhos croqui</string>
   <string name="help_plot_switch">Mudar para outro croqui</string>
   <string name="help_search">Pesquisar base</string>
-  <string name="help_stats">Estatísticas da topo</string>
+  <string name="help_stats">Estatísticas croqui</string>
   <string name="help_save_plot">Exportar croqui</string>
   <!-- UNUSED string name="help_tdr2th2">Converter arquivos binários do croqui em th2</string -->
   <string name="help_toggle_plot">Alternar entre planta baixa e corte</string>
@@ -1175,7 +1175,7 @@ no campo abaixo e aperte o botão.
   <string name="title_shot_delete">Apagar medida?</string>
   <string name="title_sensor_edit">Sensor</string>
   <string name="title_split">Dividir croqui</string>
-  <string name="title_stats">Estatísticas</string>
+  <string name="title_stats">Estatísticas croqui</string>
   <!-- UNUSED string name="title_step">Passo</string -->
   <string name="title_survey">Informações da topo</string>
   <string name="title_survey_new">Nova topo</string>
@@ -1236,11 +1236,11 @@ no campo abaixo e aperte o botão.
   <string name="pref_local_help_summary">Habilitar manual traduzido</string>
   <!-- UNUSED string name="pref_cosurvey_title">Topo colaborativa</string -->
   <!-- UNUSED string name="pref_cosurvey_summary">Habilitar topo colaborativa</string -->
-  <string name="pref_import_datamode_title">Formato dados importação</string>
+  <string name="pref_import_datamode_title">Form dado importação</string>
   <string name="pref_import_datamode_summary">Formato de dados para importação de topos</string>
-  <string name="pref_therion_config_title">Comandos configuração Therion</string>
+  <string name="pref_therion_config_title">Comando config Therion</string>
   <string name="pref_therion_config_summary">Criar comandos de configuração Therion</string>
-  <string name="pref_therion_maps_title">Mapas Therion primeiro</string>
+  <string name="pref_therion_maps_title">Mapa Therion início</string>
   <string name="pref_therion_maps_summary">Mapas Therion antes dos dados da topo</string>
   <string name="pref_extra_buttons_title">Nível recursos</string>
   <string name="pref_extra_buttons_summary">Nível de recursos habilitados</string>
