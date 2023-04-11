@@ -1269,7 +1269,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_th2_edit_title">Editor croqui</string>
   <string name="pref_th2_edit_summary">Habilitar editor de croquis avulsos</string>
   <string name="pref_bezier_step_title">Espaçamento ponto</string>
-  <string name="pref_bezier_step_summary">Distância entre pontos em uma linha exportada [m]</string>
+  <string name="pref_bezier_step_summary">Distância máxima entre pontos em uma linha suave exportada [m]</string>
   <string name="pref_leg_shots_title">Qt mín medidas/visada</string>
   <string name="pref_leg_shots_summary">Quantidade mínima de medidas similares para uma nova base ser criada automaticamente</string>
   <string name="pref_recent_timeout_title">Lim aux recente</string>
@@ -1279,7 +1279,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_connect_feedback_title">Feedback conexão</string>
   <string name="pref_connect_feedback_summary">Feedback ao estabelecer conexão com dispositivo</string>
   <string name="pref_station_prefix_title">Pref base</string>
-  <string name="pref_station_prefix_summary">Incluir prefixo de bases na exportação (Compass/cSurvey/WinKarst)</string>
+  <string name="pref_station_prefix_summary">Incluir prefixo de bases na exportação Compass/cSurvey/WinKarst</string>
   <string name="pref_compass_splays_title">Aux Compass/Walls</string>
   <string name="pref_compass_splays_summary">Exportar medidas auxiliares em arquivos Compass/Walls</string>
   <string name="pref_vtopo_splays_title">Aux VisualTopo</string>
@@ -1305,7 +1305,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_svg_program_title">Programa SVG</string>
   <string name="pref_svg_program_summary">Programa SVG alvo</string>
   <string name="pref_svg_grid_title">Grade</string>
-  <string name="pref_svg_grid_summary">Incluir grade no arquivo SVG/PNG exportado</string>
+  <string name="pref_svg_grid_summary">Incluir grade no arquivo SVG/XVI exportado</string>
   <string name="pref_svg_roundtrip_title">SVG circuito</string>
   <string name="pref_svg_roundtrip_summary">Exportar SVG preparado para circuito</string>
   <string name="pref_svg_splays_title">Medidas auxiliares SVG</string>
@@ -1330,10 +1330,10 @@ no campo abaixo e aperte o botão.
   <string name="pref_svg_stationsize_summary">Tamanho do nome das bases</string>
   <string name="pref_svg_labelsize_title">Tam rótulo</string>
   <string name="pref_svg_labelsize_summary">Tamanho do texto do rótulo</string>
-  <string name="pref_kml_stations_title">Bases KML</string>
-  <string name="pref_kml_stations_summary">Incluir bases nos arquivos KML exportados</string>
-  <string name="pref_kml_splays_title">Medidas auxiliares KML</string>
-  <string name="pref_kml_splays_summary">Incluir medidas auxiliares nos arquivos KML exportados</string>
+  <string name="pref_kml_stations_title">Base KML/GeoJSON/SHP</string>
+  <string name="pref_kml_stations_summary">Incluir bases nos arquivos KML/GeoJSON/ShapeFile exportados</string>
+  <string name="pref_kml_splays_title">Aux KML/GeoJSON/SHP</string>
+  <string name="pref_kml_splays_summary">Incluir medidas auxiliares nos arquivos KML/GeoJSON/ShapeFile exportados</string>
   <string name="pref_csv_raw_title">CSV bruto</string>
   <string name="pref_csv_raw_summary">Exportar dados brutos no CSV</string>
   <string name="pref_csv_sep_title">Separ campo CSV</string>
@@ -1483,7 +1483,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="pref_bitmap_bgcolor_title">Cor fundo PNG</string -->
   <!-- UNUSED string name="pref_bitmap_bgcolor_summary">Cor de fundo imagem PNG croquis</string -->
   <string name="pref_acad_version_title">Versão DXF</string>
-  <string name="pref_acad_version_summary">Versão DXF</string>
+  <string name="pref_acad_version_summary">Versão DXF alvo para exportação</string>
   <string name="pref_acad_spline_title">Splines DXF</string>
   <string name="pref_acad_spline_summary">Interpolação cúbica de splines DXF</string>
   <string name="pref_acad_layer_title">Camadas croquis</string>
@@ -1492,8 +1492,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_dxf_reference_summary">Incluir eixos XY na exportação de croquis DXF</string>
   <!-- UNUSED string name="pref_dxf_scale_title">Escala croqui DXF</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Fator de escala croqui DXF</string -->
-  <string name="pref_dxf_blocks_title">Ponto final aux DXF</string>
-  <string name="pref_dxf_blocks_summary">Ponto final de medida auxiliar DXF</string>
+  <string name="pref_dxf_blocks_title">Final aux DXF</string>
+  <string name="pref_dxf_blocks_summary">Final de medida auxiliar DXF marcadas com cruzes</string>
   <string name="pref_shp_georef_title">Exportar croqui georeferenciado</string>
   <string name="pref_shp_georef_summary">Croqui exportado em WGS84 long-lat</string>
   <string name="pref_thumbnail_title">Tam miniatura</string>
@@ -1510,7 +1510,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_drawing_unit_summary">Escala dos símbolos dos pontos</string>
   <string name="pref_unscaled_points_title">Ícone ponto sem zoom</string>
   <string name="pref_unscaled_points_summary">Ícones de pontos não são afetados pelo zoom</string>
-  <string name="pref_segment_title">Dist mín pontos linha</string>
+  <string name="pref_segment_title">Dist mín ponto linha</string>
   <string name="pref_segment_message">Distância mínima entre pontos de uma linha de tipo normal</string>
   <string name="pref_linestyle_title">Estilo linha</string>
   <string name="pref_linestyle_summary">Estilo de linha (forma como é desenhada)</string>
@@ -1589,11 +1589,11 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="pref_xtherion_areas_title">Áreas xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Gravar áreas como o xtherion</string -->
   <string name="pref_therion_splays_title">Med aux Therion</string>
-  <string name="pref_therion_splays_summary">Adicionar linhas u:splay aos arquivos th2</string>
+  <string name="pref_therion_splays_summary">Adicionar linhas "u:splay" aos arquivos th2</string>
   <string name="pref_th2_scale_title">Escala Therion</string>
   <string name="pref_th2_scale_summary">Escala da exportação de arquivos th2/xvi</string>
-  <string name="pref_th2_xvi_title">Imagem xvi</string>
-  <string name="pref_th2_xvi_summary">Inserir imagem xvi no arquivo th2</string>
+  <string name="pref_th2_xvi_title">Imagem XVI</string>
+  <string name="pref_th2_xvi_summary">Incluir um comando xtherion no arquivo th2 para ler a imagem XVI do croqui</string>
   <string name="pref_autoStations_title">Bases Therion</string>
   <string name="pref_autoStations_summary">Incluir automaticamente bases aos arquivos para o Therion</string>
   <string name="pref_auto_xsections_title">Corte ao exportar</string>
@@ -1648,7 +1648,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="pref_recent_nr_summary">Número de símbolos mais recentes na tela de seleção</string -->
   <string name="pref_area_border_title">Visib borda área</string>
   <string name="pref_area_border_summary">Visibilidade padrão das bordas de áreas</string>
-  <string name="pref_auto_section_pt_title">Criar ponto corte</string>
+  <string name="pref_auto_section_pt_title">Ponto corte</string>
   <string name="pref_auto_section_pt_summary">Criar automaticamente ponto de corte atrelado a cada novo corte indicando posição onde apresentar o croqui do corte</string>
   <string name="pref_unit_length_title">Unidade distância</string>
   <string name="pref_unit_length_summary">Unidade para visualização de distâncias</string>
