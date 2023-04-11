@@ -42,7 +42,7 @@
   </string-array>
   <string-array name="csvSeparator">
     <item name="comma">vírgula</item>
-    <item name="pipe">barra vertical</item>
+    <item name="pipe">traço vertical</item>
     <item name="tab">tab</item>
   </string-array>
   <!-- UNUSED string-array name="lineContinue">

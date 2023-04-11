@@ -1336,10 +1336,10 @@ no campo abaixo e aperte o botão.
   <string name="pref_kml_splays_summary">Incluir medidas auxiliares nos arquivos KML exportados</string>
   <string name="pref_csv_raw_title">CSV bruto</string>
   <string name="pref_csv_raw_summary">Exportar dados brutos no CSV</string>
-  <string name="pref_csv_sep_title">Separador CSV</string>
+  <string name="pref_csv_sep_title">Separ campo CSV</string>
   <string name="pref_csv_sep_summary">Separador de campos nos arquivos CSV exportados</string>
-  <string name="pref_csv_eol_title">Separador de linhas CSV</string>
-  <string name="pref_csv_eol_summary">Separador de linhas/registros nos arquivos CSV exportados</string>
+  <string name="pref_csv_eol_title">Separ linha CSV</string>
+  <string name="pref_csv_eol_summary">Separador de linhas nos arquivos CSV exportados</string>
   <string name="pref_sock_type_title">Soquete DistoX</string>
   <string name="pref_sock_type_summary">Tipo de soquete bluetooth para DistoX</string>
   <!-- UNUSED string name="pref_device_type_title">Tipo de DistoX</string -->
