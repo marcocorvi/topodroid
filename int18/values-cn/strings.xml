@@ -26,11 +26,11 @@
     <!-- NO string name="cave3d_label">Cave3D</string -->
 
   <string name="r_title">Android 13+ 重要通知</string>
-  <!-- TODO string name="r_dialog">With Android-13 TopoDroid must store surveys in the app private folder under "Android/data". Beware that this folder is usually deleted when the app is uninstalled. To confirm type\n"%1$s"\nin the field below and tap the button.</string -->
+  <string name="r_dialog">当使用安卓V13时，Topodroid的测量数据将被保存在“Android/data”目录。请知悉，当Topodroid卸载时该目录也将被删除。确认请输入\n"%1$s"\n并点击按钮</string>
   <!-- UNUSED string name="r_checkboxes">您必须确认复选框.</string -->
   <!-- UNUSED string name="r_disclaimer">我同意应用程序作者不承担任何损坏或数据丢失的责任.</string -->
-  <!-- TODO string name="r_continue">CONTINUE</string -->
-  <!-- TODO string name="r_quit">QUIT</string -->
+  <string name="r_continue">继续</string>
+  <string name="r_quit">退出</string>
 
     <!-- UNUSED string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string -->
     <string name="symbols_ask">安装绘图工具 v.%1$s?\n(Current v.%2$s)</string>
@@ -392,7 +392,7 @@
     <string name="no_leg_first">选择未从主线开始</string>
     <string name="no_leg_intersection">横截面线与主线无交叉</string>
     <string name="no_location_data">无位置数据</string>
-    <!-- TODO string name="no_native_lib">Missing native library</string -->
+    <string name="no_native_lib">缺少库文件</string>
     <!-- UNUSED string name="no_paired_device">无配对设备.\n扫描并配对一个DistoX</string -->
     <string name="no_photos">测量无照片</string>
     <string name="no_plots">测量无草图\n点击添加草图</string>
@@ -449,7 +449,7 @@
     <!-- UNUSED string name="menu_pair">配对</string -->
     <string name="menu_palette">调色板</string>
     <string name="menu_photo">照片</string>
-    <!-- TODO string name="menu_sections">SECTIONS</string -->
+    <string name="menu_sections">截面</string>
     <string name="menu_sensor">传感器</string>
     <!-- UNUSED string name="menu_scan">扫描</string -->
     <!-- UNUSED string name="menu_scan_ble">扫描低功耗蓝牙设备</string -->
@@ -680,7 +680,7 @@
 
 
     <string name="survey_info">测量信息</string>
-    <!-- TODO string name="stat_dates">From %1$s to %2$s</string -->
+    <string name="stat_dates">从 %1$s 到 %2$s</string>
     <string name="stat_devices">设备 %1$d: %2$s</string>
     <string name="stat_stddev_m">M 标准差 %1$.1f %%</string>
     <string name="stat_stddev_g">G 标准差 %1$.1f %%</string>
@@ -699,11 +699,11 @@
     <!-- UNUSED string name="stat_shot">Shots %1$d, Duplicate %2$d, Surface %3$d</string -->
     <string name="stat_splay">辐测 %1$d # %2$d</string>
     <string name="stat_station">测点 %1$d # %2$d</string>
-    <!-- TODO string name="stat_leg_sigma">Leg sigma %1$.1f cm</string -->
+    <string name="stat_leg_sigma">主线总长 %1$.1f cm</string>
     <string name="stat_dangling">辐射测量 %1$d %2$.1f %3$s</string>
     <string name="stat_surface">表面测线 %1$d # %2$d %3$.1f %4$s</string>
     <!-- UNUSED string name="stat_surface_z">Surface Z %1$.1f %2$.1f %3$s</string -->
-    <!-- TODO string name="stat_survey_z">Survey Z %1$.1f %2$.1f %3$s</string -->
+    <string name="stat_survey_z">Survey Z %1$.1f %2$.1f %3$s</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string>
     <string name="stat_angle_error">角度错误 %1$.2f ± %2$.2f</string>
     <string name="shot_title">测线 %1$s - %2$s</string>
@@ -721,14 +721,14 @@
     <string name="hide_splay">辐测侧线</string>
 
     <!-- UNUSED string name="plan">平面图</string -->
-    <string name="extended">延展的剖面图</string>
+    <string name="extended">延展剖面图</string>
     <string name="profile">投影剖面图</string>
     <string name="fmt_plan">%1$s: 平面图</string>
-    <string name="fmt_extended">%1$s: 侧视图</string>
-    <string name="fmt_profile">%1$s: 项目</string>
+    <string name="fmt_extended">%1$s: 剖面图</string>
+    <string name="fmt_profile">%1$s: 投影剖面图</string>
 
     <!-- UNUSED string name="extended_profile">延展剖面图</string -->
-    <string name="projected_profile">投影轮廓</string>
+    <string name="projected_profile">投影剖面图</string>
     <!-- UNUSED string name="x_section">X-断面</string -->
     <!-- UNUSED string name="v_section">V-断面</string -->
     <!-- UNUSED string name="h_section">H-截面图</string -->
@@ -736,7 +736,7 @@
 
     <string name="display_view">显示</string>
     <string name="plan_view">平面图</string>
-    <string name="profile_view">侧视图</string>
+    <string name="profile_view">剖面图</string>
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">DistoX内存读取失败</string>
@@ -851,8 +851,8 @@
     <string name="mode_fixed">修复refs文件</string>
     <string name="mode_outline">只显示轮廓</string>
     <string name="mode_scale_ref">比例尺参考</string>
-    <!-- TODO string name="mode_sections">Sections</string -->
-    <!-- TODO string name="mode_walls">Walls</string -->
+    <string name="mode_sections">截面</string>
+    <string name="mode_walls">洞壁</string>
     <!-- TODO string name="mode_refs">Frame</string -->
 
     <string name="layer_floor">地面</string>
@@ -1024,8 +1024,8 @@
     <string name="help_edit">编辑模式</string>
     <string name="help_refs">草图引用</string>
     <string name="help_rename">改变测量名称</string>
-    <!-- TODO string name="help_plot_close">Close sketch</string -->
-    <!-- TODO string name="help_plot_delete">Delete sketch</string -->
+    <string name="help_plot_close">关闭草图</string>
+    <string name="help_plot_delete">删除草图</string>
     <string name="help_plot_rename">重命名/删除 草图</string>
     <string name="help_plot_scrap">草图层</string>
     <string name="help_plot_switch">切换草图</string>
@@ -1039,9 +1039,9 @@
     <string name="help_redo">重做上一步绘图操作</string>
     <string name="help_symbol_plot">选择最近使用的绘图工具</string>
     <string name="help_delete_item">删除草图项</string>
-    <!-- TODO string name="help_section_type">Sketch section type</string -->
-    <!-- TODO string name="help_section_item">Sketch section item</string -->
-    <!-- TODO string name="help_select_clear">Clear sketch selection</string -->
+    <string name="help_section_type">草图截面类型</string>
+    <string name="help_section_item">草图截面项</string>
+    <string name="help_select_clear">取消已选择的草图</string>
     <string name="help_range">移动线的某部分</string>
     <!-- UNUSED string name="help_clear">Clear selection</string -->
     <string name="help_eraser">擦除模式</string>
@@ -1098,11 +1098,11 @@
     <string name="help_delete_config">删除项目</string>
     <string name="help_add_equate">添加等同的测量</string>
     <string name="help_equates">同等显示测量数据</string>
-    <!-- TODO string name="help_stations_minus">Show fewer stations</string -->
-    <!-- TODO string name="help_stations_plus">Show more stations</string -->
+    <string name="help_stations_minus">显示更少的站点</string>
+    <string name="help_stations_plus">显示更多的站点</string>
 
     <!-- UNUSED string name="export_bgcolor">背景颜色</string -->
-    <!-- TODO string name="export_bothviews">Plan and profile</string -->
+    <string name="export_bothviews">平面图和剖面图</string>
     <string name="export_config">配置文件</string>
     <string name="export_csv_rawdata">Raw数据</string>
     <string name="export_dxf_blocks">DXF块</string>
@@ -1118,7 +1118,7 @@
     <string name="export_prefix_hint">前缀</string>
     <string name="export_suffix_hint">后缀</string>
     <string name="export_roundtrip">往返</string>
-    <!-- TODO string name="export_share">Share</string -->
+    <string name="export_share">分享到其他App</string>
     <!-- UNUSED string name="export_scale_png">分辨率</string -->
     <string name="export_scale_th">比例 1 :</string>
     <!-- TODO string name="export_spacing_th">Point spacing</string -->
@@ -1295,8 +1295,8 @@
   <string name="pref_export_shots_summary">默认数据输出格式</string>
   <string name="pref_auto_plot_export_title">草图自动输出格式</string>
   <string name="pref_auto_plot_export_summary">草图自动输出的格式</string>
-  <!-- TODO string name="pref_lrud_count_title">LRUD splay count</string -->
-  <!-- TODO string name="pref_lrud_count_summary">Number of splays used for LRUD</string -->
+  <string name="pref_lrud_count_title">LRUD侧线数量</string>
+  <string name="pref_lrud_count_summary">用于LRUD的侧线数</string>
 
   <string name="pref_cat_survey">测量信息</string>
   <string name="pref_cat_splay">侧线数据</string>
@@ -1321,7 +1321,7 @@
   <string name="pref_cat_device">设备</string>
   <string name="pref_cat_cave3d">3D 查看</string>
   <string name="pref_cat_geek">高级设置</string>
-  <!-- TODO string name="pref_cat_sketch">3D SKETCH</string -->
+  <string name="pref_cat_sketch">3D 草图</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
 
   <string name="pref_locale_title">语言</string>
@@ -1855,7 +1855,7 @@
     <string name="perm_microphone">\n话筒</string>
 
 
-    <!-- TODO string name="welcome_db_version">Database v. %1$d, %2$d</string -->
+    <string name="welcome_db_version">数据库版本 v. %1$d, %2$d</string>
     <!-- NO string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopoDroid是一个专门配合DistoX使用的开源的免费的洞穴测量软件.
@@ -1863,7 +1863,7 @@
 \n\n帮助: 请选择菜单的"帮助"
 \n说明页: 菜单键
 \n说明文件: http://sites.google.com/site/speleoapps
-\n注解, 错误报告, 特殊功能请联系: luohongjie2012@gmail.com \n中文版编辑张远海、罗宏杰。
+\n注解, 错误报告, 特殊功能请联系: luohongjie2012@gmail.com \n中文版编辑张远海、罗宏杰、田思维。
 \n
     </string>
 
@@ -1983,15 +1983,15 @@
     <string name="info_shot">测射</string>
     <string name="info_station">站点</string>
     <string name="info_length">长度</string>
-    <!-- TODO string name="info_surface">Surface length</string -->
+    <string name="info_surface">表面长度</string>
     <string name="info_depth">深度</string>
     <string name="info_volume">体积</string>
     <string name="info_east">东</string>
     <string name="info_north">北</string>
     <string name="info_z">海拔高度</string>
-    <!-- TODO string name="info_origin">Origin</string -->
-    <!-- TODO string name="info_lonlat">coords.</string -->
-    <!-- TODO string name="info_radii">radii</string -->
+    <string name="info_origin">起点</string>
+    <string name="info_lonlat">坐标.</string>
+    <string name="info_radii">半径</string>
     <string name="info_grid_value">%1$.0f m</string>
     <string name="info_view_value">A. %1$.0f C. %2$.0f</string>
     <string name="info_survey_value">%1$d</string>
@@ -2030,7 +2030,7 @@
     <string name="plan_proj">平面图</string>
     <string name="profile_proj">侧视图</string>
     <string name="dist_no_path">%1$s %2$s: D %3$.2f (%4$.2f %5$.2f %6$.2f) %7$.2f %8$.2f</string>
-    <!-- TODO string name="dist_path">%1$s %2$s: D %3$.2f (%4$.2f %5$.2f %6$.2f) %7$.2f %8$.2f Path %9$.2f</string -->
+    <string name="dist_path">%1$s %2$s: D %3$.2f (%4$.2f %5$.2f %6$.2f) %7$.2f %8$.2f Path %9$.2f</string>
     <!-- UNUSED string name="measure">测量</string -->
 
     <!-- UNUSED string name="style_stroke">Stroke</string -->
@@ -2051,7 +2051,7 @@
     <string name="texture_load">载入纹理</string>
     <string name="texture_failed">纹理载入失败</string>
     <string name="texture_ok">读取纹理失败</string>
-    <!-- TODO string name="texture">DTM</string -->
+    <string name="texture">DTM</string>
     <string name="sketch_load">载入</string>
     <string name="sketch_failed">草图载入失败</string>
     <string name="sketch_ok">读取草图数据</string>
@@ -2059,8 +2059,8 @@
     <string name="ctitle">%1$s  倾角: %2$.0f  方位角: %3$.0f</string>
     <string name="ctitle_surface_alpha">表面透明度</string>
     <string name="ctitle_sketches">草图</string>
-    <!-- TODO string name="ctitle_sketch_h">[H]</string -->
-    <!-- TODO string name="ctitle_sketch_v">[V]</string -->
+    <string name="ctitle_sketch_h">[H]</string>
+    <string name="ctitle_sketch_v">[V]</string>
     <string name="ctitle_legs">Legs 透明度</string>
     <!-- UNUSED string name="ctitle_manual_leg">新leg</string -->
     <!-- UNUSED string name="ctitle_bluetooth">蓝牙</string -->
