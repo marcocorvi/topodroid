@@ -1812,6 +1812,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- OK string translatable="false" name="pref_algo_min_delta_title">Min-algo delta</string -->
     <!-- OK string translatable="false" name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
 
+  <!-- TODO string name="pref_3d_sketch_title">3D modeling</string -->
+  <!-- TODO string name="pref_3d_sketch_summary">Enable 3D modeling (debug build only)</string -->
   <!-- TODO string name="pref_sketch_splay_buffer_title">Splay buffer</string -->
   <!-- TODO string name="pref_sketch_splay_buffer_summary">Section splay buffer [m]</string -->
 
