@@ -1115,6 +1115,127 @@ public class TDExporter
   }
 
   // -------------------------------------------------------------------
+  // TRACK FILE GPX
+  //   NOTE shot flags are ignored
+
+  static private void printTrkpt( PrintWriter pw, NumStation st )
+  {
+    pw.format(Locale.US, "    <trkpt lat=\"%.6f\" lon=\"%.6f\">\n", st.s, st.e );
+    pw.format(Locale.US, "      <geoidheight>%.1f</geoidheight>\n", st.v );
+    pw.format(Locale.US, "      <name>%s</name>\n", st.name );
+    pw.format(Locale.US, "    </trkpt>\n" );
+  }
+
+  static private void printWpt( PrintWriter pw, NumStation st )
+  {
+    // double e = st.e; if ( e > 180 ) e -= 360;
+    pw.format(Locale.US, "<wpt lat=\"%.6f\" lon=\"%.6f\">\n", st.s, st.e );
+    pw.format(Locale.US, "  <geoidheight>%.1f</geoidheight>\n", st.v );
+    pw.format(Locale.US, "  <name>%s</name>\n", st.name );
+    pw.format(Locale.US, "</wpt>\n");
+  }
+
+  /** export data track-file
+   * @param bw    buffered output stream
+   * @param data  database helper object
+   * @param info  survey info
+   * @param surveyname survey name
+   * @return 1 success, 0 fail, 2 no geopoint
+   */
+  static int exportSurveyAsGpx( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
+  {
+    // TDLog.v( "export as trackfile: " + file.getName() );
+    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false, false ); // false: geoid altitude, false no convergence
+    if ( TDUtil.isEmpty(nums) ) {
+      TDLog.Error( "Failed KML export: no geolocalized station");
+      return 2;
+    }
+
+    // now write the GXP file
+    try {
+      // TDLog.Log( TDLog.LOG_IO, "export trackfile " + file.getName() );
+      // BufferedWriter bw = TDFile.getMSwriter( "plt", surveyname + ".plt", "text/plt" );
+      PrintWriter pw = new PrintWriter( bw );
+
+      pw.format("<?xml version=\"1.0\" ?>\n"); //  encoding=\"UTF-8\" standalone=\"no\" ?>\n" );
+      pw.format("<gpx\n" );
+      pw.format("  xmlns=\"http://www.topografix.com/GPX/1/1\"\n" );
+      pw.format("  xmlns:xsi=\"http://www.w3c.org/2001/XMLSchema-instance\"\n" );
+      pw.format("  xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1\"\n" );
+      pw.format("  version=\"1.1\" creator=\"TopoDroid %s\">\n", TDVersion.string() );
+      pw.format("<metadata>\n");
+      pw.format("<name>%s</name>\n", surveyname );
+      pw.format("<time>%s</time>\n", TDUtil.getDateString("yyyy-MM-dd") );
+      if ( ! TDString.isNullOrEmpty( info.comment ) ) pw.format("<desc>%s</desc>\n", info.comment );
+      pw.format("</metadata>\n");
+
+      // skip-value: 0 (usually 1)
+      // track-type: 0=normal, 10=closed_polygon, 20=alarm_zone
+      // fill-style: 0=solid, 1=clear, 2=Bdiag, 3=Fdiag, 4=cross, 5=diag_cross, 6=horiz, 7=vert
+
+      // Calendar cal = Calendar.getInstance();
+      // cal.set(1996, Calendar.JANUARY, 1);
+      // long diff = System.currentTimeMillis() - cal.getTimeInMillis();
+      // long days = 35065 + diff / 86400000L; // 24*60*60*1000 // FIXME +33 ?
+      // String date = TDUtil.getDateString( "dd-MMM-yy" );
+
+      double minlat = 1;
+      double maxlat = 0;
+      double minlon = 0;
+      double maxlon = 0;
+      for ( TDNum num : nums ) {
+        List< NumStation > stations = num.getStations();
+        for ( NumStation st : stations ) {
+          if ( minlat > maxlat ) { // initialize
+            minlat = maxlat = st.s;
+            minlon = maxlon = st.e;
+          } else {
+            if ( minlat > st.s )      { minlat = st.s; }
+            else if ( maxlat < st.s ) { maxlat = st.s; }
+            if ( minlon > st.e )      { minlon = st.e; }
+            else if ( maxlon < st.e ) { maxlon = st.e; }
+          }
+        }
+      }
+      pw.format(Locale.US, "<bounds minlat=\"%.6f\" maxlat=\".6f\" minlon=\"%.6f\" maxlon=\"%.6f\" />\n", minlat, maxlat, minlon, maxlon );
+
+      for ( TDNum num : nums ) {
+        List< NumStation > stations = num.getStations();
+        for ( NumStation st : stations ) {
+          printWpt( pw, st );
+        }
+        List< NumShot >    shots = num.getShots();
+        // List< NumSplay >   splays = num.getSplays();
+        pw.format("<trk>\n");
+        pw.format("  <name>%s</name>\n", surveyname );
+        NumStation last = null;
+        for ( NumShot sh : shots ) {
+          NumStation from = sh.from;
+          NumStation to   = sh.to;
+          if ( from != last ) {
+            if ( last != null ) pw.format("  </trkseg>\n");
+            pw.format("  <trkseg>\n");
+            printTrkpt( pw, from );
+          }
+          printTrkpt( pw, to );
+          last = to;
+        }
+        if ( last != null ) pw.format("  </trkseg>\n");
+        pw.format("</trk>\n");
+      }
+      pw.format("</gpx>\n");
+
+
+      bw.flush();
+      bw.close();
+      return 1;
+    } catch ( IOException e ) {
+      TDLog.Error( "Failed GPX export: " + e.getMessage() );
+      return 0;
+    }
+  }
+
+  // -------------------------------------------------------------------
   // TRACK FILE OZIEXPLORER
   //   NOTE shot flags are ignored
 

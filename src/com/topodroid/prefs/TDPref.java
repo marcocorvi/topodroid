@@ -1549,8 +1549,8 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeFwd( cat, key[6], tit[6],          A,          ctx, hlp ), // GEEK_LINE
       // makeFwd( cat, key[7], tit[7],          T,          ctx, hlp ), // PLOT_WALLS AUTOWALLS
       makeFwd( cat, key[7], tit[7],          A,          ctx, hlp ), // GEEK_DEVICE
-      makeFwd( cat, key[8], tit[8],          T,          ctx, hlp )  // GEEK_IMPORT
-      // makeFwd( cat, key[8], tit[8],          D,          ctx, hlp )  // SKETCH // FIXME_SKETCH_3D
+      makeFwd( cat, key[8], tit[8],          T,          ctx, hlp ), // GEEK_IMPORT
+      makeFwd( cat, key[8], tit[8],          D,          ctx, hlp )  // SKETCH // FIXME_SKETCH_3D
     };
   }
 
@@ -1637,6 +1637,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     String[] def = TDPrefKey.SKETCHdef;
     return new TDPref[ ] {
       makeEdt( cat, key[0], tit[0], dsc[0], D, def[0], FLOAT,   ctx, hlp ),
+      makeCbx( cat, key[1], tit[1], dsc[1], D, def[1],          ctx, hlp ), // DISTOX_3D_SKETCH
     };
   }
 

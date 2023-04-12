@@ -574,8 +574,10 @@ public class TDSetting
   public static int   mSvgStationSize   = 20;     // font-size
   public static int   mSvgLabelSize     = 30;     // font-size
 
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-  /* FIXME_SKETCH_3D *
+  // FIXME_SKETCH_3D - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+  public static boolean m3Dsketch    = false;  // whether 3D sketch is enabled
+  public static float   mSplayBuffer = 2.0f; // sketch splay buffer size [m]
+  /* 
   public static int   mSketchModelType = 1;
   public static float mSketchSideSize;
   public static float mDeltaExtrude;
@@ -607,7 +609,6 @@ public class TDSetting
   // public static float mWallsXStep       = 1.0f;
   // public static float mWallsConcave     = 0.1f;
 
-  public static float mSplayBuffer = 2.0f; // sketch splay buffer size [m]
 
   // ------------------------------------------------------------------
   // public static void setZoomControls( boolean ctrl )
@@ -1051,7 +1052,8 @@ public class TDSetting
 
     String[] keySketch = TDPrefKey.SKETCH;
     String[] defSketch = TDPrefKey.SKETCHdef;
-    mSplayBuffer   = tryFloat( prefs, keySketch[0], defSketch[0] );
+    m3Dsketch    = prefs.getBoolean( keySketch[0], bool(defSketch[0]) );
+    mSplayBuffer = tryFloat( prefs, keySketch[1], defSketch[1] );
 
     String[] keyImport = TDPrefKey.EXPORT_import;
     String[] defImport = TDPrefKey.EXPORT_importdef;
@@ -2629,15 +2631,21 @@ public class TDSetting
     return ret;
   }
 
-  /* FIXME_SKETCH_3D *
+  // FIXME_SKETCH_3D 
   private static String updatePrefSketch( TDPrefHelper hlp, String k, String v )
   {
     String ret = null;
     // TDLog.v("update pref sketch: " + k );
     String[] key = TDPrefKey.SKETCH;
     String[] def = TDPrefKey.SKETCHdef;
-    // if ( k.equals( key[ ? ] ) ) {
-    //   mSketchUsesSplays = tryBooleanValue( hlp, k, v, bool(def[ ]) );
+    if ( k.equals( key[ 0 ] ) ) { // DISTOX_3D_SKETCH
+      m3Dsketch = tryBooleanValue( hlp, k, v, bool(def[0]) );
+    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SKETCH_SPLAY_BUFFER
+      mSplayBuffer = tryFloatValue( hlp, k, v, def[1] );
+    } else {
+      TDLog.Error("missing SKETCH key: " + k );
+    }
+    /*
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_SKETCH_MODEL_TYPE (choice)
       mSketchModelType = tryIntValue(  hlp, k, v, def[0] );
     } else if ( k.equals( key[ 1 ] ) ) { // 0.5 meter // DISTOX_SKETCH_LINE_STEP
@@ -2656,10 +2664,11 @@ public class TDSetting
     } else {
       TDLog.Error("missing SKETCH key: " + k );
     }
+    */
     if ( ret != null ) hlp.update( k, ret );
     return ret;
   }
-  * END_SKETCH_3D */
+  // END_SKETCH_3D 
  
   // NO_LOGS
   // @param k   key

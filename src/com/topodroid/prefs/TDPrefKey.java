@@ -1918,19 +1918,23 @@ public class TDPrefKey
 
   // ------------------------------------------------------------------------------
   public static String[] SKETCH = { // [3] 
+    "DISTOX_3D_SKETCH",
     "DISTOX_SKETCH_SPLAY_BUFFER",
     null
   };
 
   static int[] SKETCHtitle = {
+    R.string.pref_3d_sketch_title,
     R.string.pref_sketch_splay_buffer_title
   };
 
   static int[] SKETCHdesc = {
-    R.string.pref_sketch_splay_buffer_title
+    R.string.pref_3d_sketch_summary,
+    R.string.pref_sketch_splay_buffer_summary
   };
 
   public static String[] SKETCHdef = {
+    FALSE,
     TDString.TWO,
     null
   };

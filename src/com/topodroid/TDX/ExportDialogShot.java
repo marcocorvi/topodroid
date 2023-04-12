@@ -216,8 +216,8 @@ public class ExportDialogShot extends MyDialog
       case 14: mLayoutCsv.setVisibility( View.VISIBLE ); break;
       case 15: mLayoutDxf.setVisibility( View.VISIBLE ); break;
       case 16: 
-      case 18: mLayoutKml.setVisibility( View.VISIBLE ); break;
-      case 19: if ( TDLevel.overExpert) mLayoutShp.setVisibility( View.VISIBLE ); break;
+      case 19: mLayoutKml.setVisibility( View.VISIBLE ); break; // KML GeoJson
+      case 20: if ( TDLevel.overExpert) mLayoutShp.setVisibility( View.VISIBLE ); break;
     }
   }
 

@@ -16,6 +16,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.prefs.TDSetting;
 
 import java.nio.FloatBuffer;
 // import java.nio.ShortBuffer;
@@ -54,7 +55,9 @@ public class GlNames extends GlShape
   static void toggleStations() 
   { 
     stationMode = (stationMode + 1)%STATION_MAX; 
-    if ( ( ! TDLevel.overTester ) && ( stationMode == STATION_LEG ) ) stationMode = (stationMode + 1)%STATION_MAX;
+    if ( stationMode == STATION_LEG ) {
+      if ( ! ( TDLevel.overTester && TDSetting.m3Dsketch ) ) stationMode = (stationMode + 1)%STATION_MAX;
+    }
     if ( GlModel.mStationPoints && ((stationMode % 2) == 1) ) stationMode = (stationMode + 1)%STATION_MAX; 
     // if ( ! hasNames() ) stationMode = STATION_NONE;
   } 
