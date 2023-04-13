@@ -175,12 +175,12 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
             pathname = mSurvey + ".shz";
             ret = TDExporter.exportSurveyAsShp( fos, mSid, mData, mInfo, mSurvey, TDPath.getShpTempRelativeDir() );
             break;
-          case TDConst.SURVEY_FORMAT_PLT: // Track file PLT
-            // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getPltFileWithExt( mSurvey ) ) );
-            bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
-            pathname = mSurvey + ".plt";
-            ret = TDExporter.exportSurveyAsPlt( bw, mSid, mData, mInfo, mSurvey );
-            break;
+          // case TDConst.SURVEY_FORMAT_PLT: // Track file PLT
+          //   // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getPltFileWithExt( mSurvey ) ) );
+          //   bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+          //   pathname = mSurvey + ".plt";
+          //   ret = TDExporter.exportSurveyAsPlt( bw, mSid, mData, mInfo, mSurvey );
+          //   break;
           case TDConst.SURVEY_FORMAT_GPX: // Track file GPX
             // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getPltFileWithExt( mSurvey ) ) );
             bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );

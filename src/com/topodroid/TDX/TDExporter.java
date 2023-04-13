@@ -1245,7 +1245,7 @@ public class TDExporter
    * @param info  survey info
    * @param surveyname survey name
    * @return 1 success, 0 fail, 2 no geopoint
-   */
+   *
   static int exportSurveyAsPlt( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
     // TDLog.v( "export as trackfile: " + file.getName() );
@@ -1314,6 +1314,7 @@ public class TDExporter
       return 0;
     }
   }
+  */
 
   // #############################################################################################################
   // =======================================================================

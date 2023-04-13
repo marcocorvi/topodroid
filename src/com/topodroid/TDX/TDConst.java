@@ -29,8 +29,8 @@ public class TDConst
   public static final int SURVEY_FORMAT_TOP = 8; // PocketTopo  TopFile
   public static final int SURVEY_FORMAT_SRV = 9; // Walls       SrvFile
   public static final int SURVEY_FORMAT_KML = 10; //Keyhole     KmlFile
-  public static final int SURVEY_FORMAT_PLT = 11; // track file PltFile
-  public static final int SURVEY_FORMAT_GPX = 12; // track file GpxFile
+  // public static final int SURVEY_FORMAT_PLT = 11; // track file PltFile OziExplorer
+  public static final int SURVEY_FORMAT_GPX = 11; // track file GpxFile
 
   // public static final int SURVEY_FORMAT_PNG = 12; // NO_PNG
   public static final int SURVEY_FORMAT_SVG = 13;
@@ -75,8 +75,8 @@ public class TDConst
     "application/octet-stream", //    PocketTopo
     "application/octet-stream", //    Walls
     "application/vnd",          // 10 *KML
-    "application/octet-stream", //    trackfile (.plt)
-    "application/octet-stream", // 12 trackfile (.gpx)
+    // "application/octet-stream", //    trackfile (.plt)
+    "application/octet-stream", // 11 trackfile (.gpx)
     // "image/png",                // 12 *PNG
     "image/svg+kml",            //    *SVG
     "application/octet-stream", //    Therion-2
@@ -199,7 +199,7 @@ public class TDConst
     "CSV",
     "DXF",
     "KML",        // 16
-    "OziExplorer",
+    // "OziExplorer",
     "GPX",
     "GeoJSON",
     "Shapefile",
@@ -222,7 +222,7 @@ public class TDConst
     "CSV",
     "DXF"
     // "KML",
-    // "OziExplorer",
+    // // "OziExplorer",
     // "GPX",
     // "GeoJSON",
     // "Shapefile"
@@ -246,7 +246,7 @@ public class TDConst
     SURVEY_FORMAT_CSV,
     SURVEY_FORMAT_DXF,
     SURVEY_FORMAT_KML,
-    SURVEY_FORMAT_PLT,
+    // SURVEY_FORMAT_PLT,
     SURVEY_FORMAT_GPX,
     SURVEY_FORMAT_JSON,
     SURVEY_FORMAT_SHP
@@ -272,10 +272,10 @@ public class TDConst
       case 14: return survey + ".csv";
       case 15: return survey + ".dxf";
       case 16: return survey + ".kml";
-      case 17: return survey + ".plt";
-      case 18: return survey + ".gpx";
-      case 19: return survey + ".json";
-      case 20: return survey + ".shz";
+      // case 17: return survey + ".plt";
+      case 17: return survey + ".gpx";
+      case 18: return survey + ".json";
+      case 19: return survey + ".shz";
       case -11: return survey + ".trox";
     }
     return survey;

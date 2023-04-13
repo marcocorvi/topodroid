@@ -47,11 +47,15 @@ public class GlNames extends GlShape
 
   private DataBuffer mDataBuffer = null;
 
+  /** reset the stations display-mode
+   */
   static void resetStations()
   {
     stationMode = STATION_NONE; 
   }
 
+  /** cycle among the stations display-mode
+   */
   static void toggleStations() 
   { 
     stationMode = (stationMode + 1)%STATION_MAX; 
@@ -62,14 +66,22 @@ public class GlNames extends GlShape
     // if ( ! hasNames() ) stationMode = STATION_NONE;
   } 
 
-  /** @return the station-mode
+  /** @return the stations display-mode
    */
   static int getStationMode() { return stationMode; }
 
   private boolean hasNames() { return nameBuffer != null; }
 
+  /** @return true if the stations diaplay-mode shows names
+   */
   static boolean showStationNames()  { return stationMode == STATION_NAME /* || stationMode == STATION_ALL */ ; }
+
+  /** @return true if the stations diaplay-mode shows nothing
+   */
   static boolean hiddenStations()    { return stationMode == STATION_NONE; }
+
+  /** @return true if the stations diaplay-mode shows dots
+   */
   static boolean showStationPoints() { return stationMode == STATION_POINT || stationMode == STATION_LEG /* || stationMode == STATION_ALL */ ; }
 
   // ----------------------------------------
@@ -168,6 +180,10 @@ public class GlNames extends GlShape
   private boolean mIncremental = false;
 
   // FIXME INCREMENTAL increment
+  /** cstr
+   * @param ctx       context
+   * @param increment increment for incremental buffers
+   */
   GlNames( Context ctx, int increment ) 
   {
     super( ctx );
@@ -186,6 +202,9 @@ public class GlNames extends GlShape
     }
   }
 
+  /** set the highlight color
+   * @param g   color (?)
+   */
   static void setHLcolorG( float g ) { mHLcolor[1] = g; }
 
   /** add a name
@@ -315,6 +334,9 @@ public class GlNames extends GlShape
     mTexId = -1;
   }
 
+  /** draw the stations
+   * @param mvpMatrix   MVP (model-view-project) matrix
+   */
   void draw( float[] mvpMatrix )
   {
     if ( stationMode == STATION_NONE || TDUtil.isEmpty(mNames) ) return;

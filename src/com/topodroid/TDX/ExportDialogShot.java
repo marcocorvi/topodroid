@@ -11,6 +11,7 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 
@@ -176,9 +177,9 @@ public class ExportDialogShot extends MyDialog
   @Override
   public void onClick(View v) 
   {
-    // TDLog.v("C3D selected " + mSelected );
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
+      TDLog.v("Survey format selected " + mSelected + " " + TDConst.mSurveyExportIndex[ mSelectedPos ] );
       setOptions();
       int selected_pos = ( mSelectedPos == 11 && TDSetting.mVTopoTrox )? -mSelectedPos : mSelectedPos;
       mParent.doExport( mSelected, TDConst.getSurveyFilename( selected_pos, mSurvey ), mExportPrefix, false ); // second = false
@@ -208,16 +209,23 @@ public class ExportDialogShot extends MyDialog
       case 0: mLayoutZip.setVisibility( View.VISIBLE ); break;
       case 1: mLayoutCompass.setVisibility( View.VISIBLE ); break;
       case 2: mLayoutCSurvey.setVisibility( View.VISIBLE ); break;
+      // case 3: // GHTopo
+      // case 4: // Glottolf
+      // case 5: // PocketTopo
+      // case 6: // Polygon
       case 7: mLayoutSurvex.setVisibility( View.VISIBLE ); break;
       case 8: mLayoutTherion.setVisibility( View.VISIBLE ); break;
+      // case 9:  // Topo
+      // case 10: // TopoRobot
       case 11: mLayoutVTopo.setVisibility( View.VISIBLE ); break;
       case 12: mLayoutWalls.setVisibility( View.VISIBLE ); break;
       case 13: mLayoutWinkarst.setVisibility( View.VISIBLE ); break;
       case 14: mLayoutCsv.setVisibility( View.VISIBLE ); break;
       case 15: mLayoutDxf.setVisibility( View.VISIBLE ); break;
-      case 16: 
-      case 19: mLayoutKml.setVisibility( View.VISIBLE ); break; // KML GeoJson
-      case 20: if ( TDLevel.overExpert) mLayoutShp.setVisibility( View.VISIBLE ); break;
+      case 16: // KML (same as GeoJson)
+      // case 17: // GPX
+      case 18: mLayoutKml.setVisibility( View.VISIBLE ); break; // GeoJson
+      case 19: if ( TDLevel.overExpert) mLayoutShp.setVisibility( View.VISIBLE ); break;
     }
   }
 
@@ -271,6 +279,8 @@ public class ExportDialogShot extends MyDialog
           TDSetting.mSurvexLRUD  = ((CheckBox) findViewById( R.id.therion_lrud )).isChecked();
         }
         break;
+      // case 9:  // Topo
+      // case 10: // TopoRobot
       case 11: // VTopo
         {
           TDSetting.mVTopoTrox = ((CheckBox) findViewById( R.id.vtopo_trox )).isChecked();
@@ -301,6 +311,7 @@ public class ExportDialogShot extends MyDialog
         }
         break;
       case 16: // KML
+      // case 17: // GPX
       case 18: // GeoJSON
         {
           TDSetting.mKmlSplays = ((CheckBox) findViewById( R.id.kml_splays )).isChecked();

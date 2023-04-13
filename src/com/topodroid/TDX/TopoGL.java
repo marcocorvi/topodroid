@@ -195,8 +195,13 @@ public class TopoGL extends Activity
   // SKETCH
   private Cave3DShot mSketchLeg = null;
  
+  /** @return the 3D sketch-leg
+   */
   Cave3DShot getSketchLeg() { return mSketchLeg; } 
 
+  /** set the 3D sketch-leg
+   * @param leg  new 3D sketch-leg
+   */
   void setSketchLeg( Cave3DShot leg )
   {
     mSketchLeg = leg;
@@ -1060,6 +1065,10 @@ public class TopoGL extends Activity
     //   centerAtCurrentStation();
     //   return true;
     // }
+    if ( v.getId() == R.id.layout_station ) {
+      closeCurrentStation();
+      return true;
+    }
 
     Button b = (Button) v;
     if ( b == mButton1[ BTN_PROJECT ] ) {
