@@ -1806,8 +1806,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x súlyozása</string -->
 
-  <!-- TODO string name="pref_3d_sketch_title">3D modeling</string -->
-  <!-- TODO string name="pref_3d_sketch_summary">Enable 3D modeling (debug build only)</string -->
+  <string name="pref_3d_sketch_title">3D modellezés</string>
+  <string name="pref_3d_sketch_summary">3D modelezés engedélyezése (csak hibakeresésre)</string>
   <string name="pref_sketch_splay_buffer_title">Sün puffer</string>
   <string name="pref_sketch_splay_buffer_summary">Metszet sün puffer [m]</string>
 

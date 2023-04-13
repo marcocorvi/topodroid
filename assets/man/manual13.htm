@@ -633,38 +633,80 @@ otherwise only the user-chosen stations are included</li>
 
 
 <h4>IMPORT/EXPORT SETTINGS</h4>
-<ul style="margin-top=0">
-<li><b>PocketTopo</b> <i>import color-map</i>: map of PocketTopo colors to sketch item types.</li> 
-<li><i>Estimate LR extend</i>: on import of <b>Compass/VisualTopo</b> files [yes]</li>
-<li><i>Data default-export</i>: default data export format to present in the export dialog [default none]</li>
-<li><i>Sketch default-export</i>: default sketch export format to present in the export dialog [default none]</li>
-<li><i>Sketch auto-export</i>. If set sketches are exported in the chosen format when they are closed. The exported files are stored in the "out" subfolder of the survey folder. Sketch auto-export puts an extra load on the app, and is not set by default.</li>
-<li><b>Therion</b> <i>map commands</i> before or after the centerline block [after]</li>
-<li><b>Therion</b> <i>auto-stations</i>: automatically add station points to the therion sketch file(s) [yes]. If you want to use the sketch files in therion they must have station points to define their scale. You can choose manually which point to add (by editing the sketch drawing), or let TopoDroid add the stations. The program will add all the stations that are "inside" the drawing (inside the drawing convex hull).</li>
-<li><b>Therion</b> <i>splays</i> lines in Therion scraps [yes]</li>
-<li><b>cSurvey</b> <i>survey prefix</i> to the stations [no]</li>
-<li><b>Compass/TopoRobot/WinKarst/Polygon/VisualTopo</b>
+<ul>
+  <li><i>Data default-export</i>: default data export format to present in the export dialog [default none]</li>
+  <li><i>Sketch default-export</i>: default sketch export format to present in the export dialog [default none]</li>
+  <li><i>Sketch auto-export</i>: if set sketches are exported in the chosen format when they are closed. The exported files are stored in the "out" subfolder of the survey folder. Sketch auto-export puts an extra load on the app, and is not set by default.</li>
+<li><b>Compass/VisualTopo</b>:
   <ul>
+    <li><i>Estimate LR extend</i>: on import of <b>Compass/VisualTopo</b> files [yes]</li>
+  </ul>
+</li>
+<li><b>PocketTopo</b>:
+  <ul>
+    <li><i>import color-map</i>: map of PocketTopo colors to sketch item types.</li> 
+  </ul> 
+</li>
+<li><b>Therion</b>:
+<ul> 
+  <li><i>map commands</i> before or after the centerline block [after]</li>
+  <li><i>auto-stations</i>: automatically add station points to the therion sketch file(s) [yes]. If you want to use the sketch files in therion they must have station points to define their scale. You can choose manually which point to add (by editing the sketch drawing), or let TopoDroid add the stations. The program will add all the stations that are "inside" the drawing (inside the drawing convex hull).</li>
+  <li><i>splays</i> lines in Therion scraps [yes]</li>
+</ul>
+</li>
+<li><b>Compass/cSurvey/WinKarst</b>:
+<ul>
+  <li><i>survey prefix</i> to the stations [no]</li>
+</ul>
+</li>
+<li><b>Compass/TopoRobot/WinKarst/Polygon/VisualTopo</b>:
+<ul>
   <li>minimum <i>splay-leg angle</i> for LRUD computation [0.0] This is also used in <b>Survex/Therion</b> if LRUD are required.</li>
   <li>minimum clino of splays used for up/down LRUD [0]</li>
   <li>maximum clino of splays used for left/right LRUD [90]</li>
-  </ul>
+</ul>
 </li>
-<li><b>Compass swap LR</b>: Swap L and R on Compass export.</li>
-<li><b>Survex/Topo</b> <i>line termination</i>: either Unix or Windows [Unix]</li>
-<li><b>Survex</b> export with <i>named splay</i> TO stations [no]</li>
-<li><b>Survex/Therion</b> export with <i>LRUD</i> lines [no]</li>
-<li><b>SVG</b> target <i>program</i> [Inkscape]</li>
-<li><b>SVG</b> export with <i>grid</i> [no]</li>
-<li><b>SVG</b> export line orientation ticks [no]</li>
-<li><b>SVG</b> stroke widths (labels, icons, lines, grids, shots, orientation ticks)</li>
-<li><b>KML/GeoJSON</b> export with <i>stations</i> [yes]</li>
-<li><b>KML/GeoJSON</b> export with <i>splays</i> [no]</li>
-<!-- li><b>PNG</b> <i>resolution</i> [1.5]. It can be a number between 1 and 10. The higher the bigger the image (if you set it too high the system may not have enough memory to create the PNG).</li --> 
-<!-- li><b>PNG</b> <i>background color</i>: you can set the background color of PNG images by specifying the RGB values (three integers between 0 and 255).</li -->
-<li><b>DXF</b> sketch export <i>scale</i> [1.0]</li>
-<li><b>DXF</b> export with <i>splay endpoints</i> [no]</li>
-<li><i>DXF version</i> for the DXF export: either 6, 12, or 16. In version 6 DXF export bezier curves are replaced by polylines and areas do not have hatches. Version 12 and 16 DXF exports use splines and hatches, but they are still buggy.</li>
+<li><b>Compass</b>:
+<ul>
+<li><i>swap LR</i>: swap L and R on Compass export</li>
+</ul>
+</li>
+  <li><b>Survex/Topo</b>:
+<ul>
+  <li><i>line termination</i>: either Linux or Windows [Linux]</li>
+</ul>
+</li>
+<li><b>Survex</b>:
+<ul>
+  <li>export with <i>named splay</i> TO stations [no]</li>
+</ul>
+</li>
+<li><b>Survex/Therion</b>:
+<ul>
+  <li>export with <i>LRUD</i> lines [no]</li>
+</ul>
+</li>
+<li><b>SVG</b>:
+<ul>
+  <li>target <i>program</i> [Inkscape]</li>
+  <li>export with <i>grid</i> [no]</li>
+  <li>export line orientation ticks [no]</li>
+  <li>stroke widths (labels, icons, lines, grids, shots, orientation ticks)</li>
+</ul>
+</li>
+<li><b>KML/GeoJSON</b>:
+<ul>
+  <li>export with <i>stations</i> [yes]</li>
+  <li>export with <i>splays</i> [no]</li>
+</ul>
+</li>
+<li><b>DXF</b>:
+<ul>
+  <li>sketch export <i>scale</i> [1.0]</li>
+  <li>export with <i>splay endpoints</i> [no]</li>
+  <li><i>DXF version</i> for the DXF export: either 6, 12, or 16. In version 6 DXF export bezier curves are replaced by polylines and areas do not have hatches. Version 12 and 16 DXF exports use splines and hatches, but they are still buggy.</li>
+</ul>
+</li>
 </ul>
 <br><p>
 
