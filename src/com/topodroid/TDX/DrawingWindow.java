@@ -9370,7 +9370,7 @@ public class DrawingWindow extends ItemDrawer
     long pid = mApp.insert2dPlot( TDInstance.sid, mSplitName, mSplitStationName, extended, azimuth );
     String name = mSplitName + ( ( mType == PlotType.PLOT_PLAN )? "p" : "s" );
     String fullname = TDInstance.survey + "-" + name;
-    // TDLog.v("Split Plot " + paths.size() + " paths: " + name );
+    // TDLog.v("Split Plot " + paths.size() + " paths to <" + name + ">" );
     PlotInfo info = mApp_mData.getPlotInfo( TDInstance.sid, name );
     (new SavePlotFileTask( mActivity, null, this, null, mNum, paths, info, fullname, mType, azimuth ) ).execute();
     // TODO

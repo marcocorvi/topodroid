@@ -97,8 +97,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mRotate   = rotate;
      mTh2Edit  = th2_edit;
      if ( mRotate > TDPath.NR_BACKUP ) mRotate = TDPath.NR_BACKUP;
-     // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task [1] " + mFullName + " type " + mType + " suffix " + suffix);
-     TDLog.v( "save plot file task [1] " + mFullName + " type " + mType + " suffix " + suffix );
+     // TDLog.v( "save plot file task [1] " + mFullName + " type " + mType + " suffix " + suffix );
 
      if ( TDLevel.overExpert && mSuffix == PlotSave.SAVE && TDSetting.mAutoExportPlotFormat == TDConst.SURVEY_FORMAT_CSX ) { // auto-export format cSurvey
        // TDLog.v( "auto export CSX");
@@ -109,6 +108,11 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   }
 
   /**
+   * @param info      split-plot info
+   * @param fullname  split-plot full name (survey_name + plot_name)
+   * @param type      split-plot tyoe
+   * @param azimuth   azimuth (only for projected profile)
+   * @note called to split a plot
    */
   SavePlotFileTask( Context context, Uri uri, DrawingWindow parent, Handler handler,
 		    TDNum num,
@@ -129,8 +133,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mSuffix   = PlotSave.CREATE;
      mRotate   = 0;
      mTh2Edit  = false;
-     // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task [2] " + mFullName + " type " + mType );
-     TDLog.v( "save plot file task [2] " + mFullName + " type " + mType + " suffix CREATE");
+     // TDLog.v( "save plot file task [2] " + mFullName + " type " + mType + " suffix CREATE");
   }
 
   @Override
@@ -142,7 +145,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
     // TDLog.v( "save scrap files " + mFullName + " suffix " + mSuffix );
 
-    if ( mManager == null ) return false;
+    if ( mManager == null && mPaths == null ) return false;
     if ( mSuffix == PlotSave.EXPORT ) {
       // TDLog.v( "save plot Therion file EXPORT " + mFullName );
       // File file2 = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
@@ -271,8 +274,10 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       assert( mInfo != null );
       String filename = TDPath.getTdrFileWithExt( mFullName ) + TDPath.BCK_SUFFIX;
 
-      // TDLog.v( "rotate backups " + filename );
-      TDPath.rotateBackups( filename, mRotate ); // does not do anything if mRotate <= 0
+      // TDLog.v( "rotate backups " + filename + " rotate " + mRotate );
+      if ( mRotate > 0 ) {
+        TDPath.rotateBackups( filename, mRotate ); // does not do anything if mRotate <= 0
+      }
 
       long now  = System.currentTimeMillis();
       TDFile.clearExternalTempDir( 600000 ); // clean the cache ten minutes before now
@@ -288,7 +293,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         // DataOutputStream dos = new DataOutputStream( bos );
         DataOutputStream dos = TDFile.getExternalTempFileOutputStream( tempname1 );
         if ( mSuffix == PlotSave.CREATE ) {
-          // TDLog.v("Save Plot CREATE file " + file1 + " paths " + mPaths.size() );
+          // TDLog.v("Save Plot CREATE temp file, paths " + mPaths.size() );
           DrawingIO.exportDataStreamFile( mPaths, mType, mInfo, dos, mFullName, mProjDir, 0 ); // set path scrap to 0
         } else {
           DrawingIO.exportDataStreamFile( mManager, mType, mInfo, dos, mFullName, mProjDir );
@@ -303,15 +308,14 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         // if ( ! file1.delete() ) TDLog.Error("File delete error"); // no need to delete cache file
         return false;
       } else {
-        // TDLog.Log( TDLog.LOG_PLOT, "save binary completed" + mFullName );
-        // TDLog.v( "save binary completed" + mFullName );
+        // TDLog.v( "save binary completed. file " + mFullName );
 
         String filename1 = TDPath.getTdrFileWithExt( mFullName );
         if ( ! TDFile.renameTopoDroidFile( filename1, filename1 + TDPath.BCK_SUFFIX ) ) {
-          TDLog.Error("failed rename " + filename1 + TDPath.BCK_SUFFIX );
+          // TDLog.v("failed rename old " + filename1 + TDPath.BCK_SUFFIX );
         }
         if ( ! TDFile.renameExternalTempFile( tempname1, filename1 ) ) {
-          TDLog.Error("failed rename " + filename1 );
+          TDLog.Error("failed rename itempfile to " + filename1 );
         }
         return true;
       }
