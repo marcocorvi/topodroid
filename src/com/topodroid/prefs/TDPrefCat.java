@@ -24,41 +24,40 @@ public class TDPrefCat
   public static final int PREF_CATEGORY_SKETCH    =  5;
   public static final int PREF_CATEGORY_EXPORT    =  6;
   public static final int PREF_CATEGORY_IMPORT    =  7;
-  // public static final int PREF_CATEGORY_3D        =  8; // TODO
-  public static final int PREF_CATEGORY_SVX       =  8;
-  public static final int PREF_CATEGORY_TH        =  9;
-  public static final int PREF_CATEGORY_DAT       = 10;
-  public static final int PREF_CATEGORY_CSX       = 11;
-  public static final int PREF_CATEGORY_TRO       = 12;
-  public static final int PREF_CATEGORY_SVG       = 13;
-  public static final int PREF_CATEGORY_SHP       = 14;
-  public static final int PREF_CATEGORY_DXF       = 15;
-  // public static final int PREF_CATEGORY_PNG       = ; // NO_PNG
-  public static final int PREF_CATEGORY_KML       = 17;
-  public static final int PREF_CATEGORY_CSV       = 18;
-  public static final int PREF_SHOT_DATA          = 19; 
-  public static final int PREF_SHOT_UNITS         = 20; 
-  public static final int PREF_ACCURACY           = 21; 
-  public static final int PREF_LOCATION           = 22; 
-  public static final int PREF_PLOT_SCREEN        = 23; 
-  public static final int PREF_TOOL_LINE          = 24; 
-  public static final int PREF_TOOL_POINT         = 25; 
-  // public static final int PREF_PLOT_WALLS         = ;  // AUTOWALLS
-  public static final int PREF_PLOT_DRAW          = 26; 
-  public static final int PREF_PLOT_ERASE         = 27; 
-  public static final int PREF_PLOT_EDIT          = 28;
-  public static final int PREF_CATEGORY_CAVE3D    = 29;
-  public static final int PREF_DEM3D              = 30;
-  public static final int PREF_WALLS3D            = 31;
-  public static final int PREF_CATEGORY_GEEK      = 32; 
-  public static final int PREF_GEEK_SHOT          = 33; 
-  public static final int PREF_GEEK_SPLAY         = 34; 
-  public static final int PREF_GEEK_PLOT          = 35; 
-  public static final int PREF_GEEK_LINE          = 36; 
-  public static final int PREF_GEEK_DEVICE        = 37; 
-  public static final int PREF_GEEK_IMPORT        = 38; 
-  // public static final int PREF_CATEGORY_LOG       = 39; // this must be the last NO_LOGS
-  public static final int PREF_CATEGORY_MAX = 38; // last category
+  public static final int PREF_CATEGORY_CAVE3D    =  8;
+  public static final int PREF_CATEGORY_SVX       =  9;
+  public static final int PREF_CATEGORY_TH        = 10;
+  public static final int PREF_CATEGORY_DAT       = 11;
+  public static final int PREF_CATEGORY_CSX       = 12;
+  public static final int PREF_CATEGORY_TRO       = 13;
+  public static final int PREF_CATEGORY_SVG       = 14;
+  public static final int PREF_CATEGORY_SHP       = 15;
+  public static final int PREF_CATEGORY_DXF       = 16;
+  // public static final int PREF_CATEGORY_PNG       = 17; // NO_PNG
+  public static final int PREF_CATEGORY_KML       = 18;
+  public static final int PREF_CATEGORY_CSV       = 19;
+  public static final int PREF_SHOT_DATA          = 20; 
+  public static final int PREF_SHOT_UNITS         = 21; 
+  public static final int PREF_ACCURACY           = 22; 
+  public static final int PREF_LOCATION           = 23; 
+  public static final int PREF_PLOT_SCREEN        = 24; 
+  public static final int PREF_TOOL_LINE          = 25; 
+  public static final int PREF_TOOL_POINT         = 26; 
+  // public static final int PREF_PLOT_WALLS         = 27;  // AUTOWALLS UNUSED
+  public static final int PREF_PLOT_DRAW          = 28; 
+  public static final int PREF_PLOT_ERASE         = 29; 
+  public static final int PREF_PLOT_EDIT          = 30;
+  public static final int PREF_DEM3D              = 31;
+  public static final int PREF_WALLS3D            = 32;
+  public static final int PREF_CATEGORY_GEEK      = 33; 
+  public static final int PREF_GEEK_SHOT          = 34; 
+  public static final int PREF_GEEK_SPLAY         = 35; 
+  public static final int PREF_GEEK_PLOT          = 36; 
+  public static final int PREF_GEEK_LINE          = 37; 
+  public static final int PREF_GEEK_DEVICE        = 38; 
+  public static final int PREF_GEEK_IMPORT        = 39; 
+  // public static final int PREF_CATEGORY_LOG       = 40; // this must be the last NO_LOGS
+  public static final int PREF_CATEGORY_MAX = 39; // last category
 
   static int[] mTitleRes = {
     R.string.title_settings_main,     // 0
@@ -69,38 +68,38 @@ public class TDPrefCat
     R.string.title_settings_sketch,   // 5
     R.string.title_settings_export,
     R.string.title_settings_import,
+    R.string.title_settings_3d,
     R.string.title_settings_svx,
     R.string.title_settings_th,
     R.string.title_settings_dat,
     R.string.title_settings_csx,
     R.string.title_settings_tro,
-    R.string.title_settings_svg,      // 13
+    R.string.title_settings_svg,      // 14
     R.string.title_settings_shp,
     R.string.title_settings_dxf,
-    R.string.title_settings_png,
-    R.string.title_settings_kml,      // 17
+    -1, // R.string.title_settings_png, // 17
+    R.string.title_settings_kml,      // 18
     R.string.title_settings_csv,
     R.string.title_settings_shot,     
-    R.string.title_settings_units,    // 20
+    R.string.title_settings_units,    // 21
     R.string.title_settings_accuracy,
     R.string.title_settings_location,
-    R.string.title_settings_screen,   // 23
+    R.string.title_settings_screen,   // 24
     R.string.title_settings_line,
-    R.string.title_settings_point,    // 25
-    // R.string.title_settings_walls, // AUTOWALLS
+    R.string.title_settings_point,    // 26
+    -1, // R.string.title_settings_walls, // 27 AUTOWALLS
     R.string.title_settings_draw,
-    R.string.title_settings_erase,    // 27
+    R.string.title_settings_erase,    // 29
     R.string.title_settings_edit,
-    R.string.title_settings_3d,
     R.string.title_settings_dem,
     R.string.title_settings_walls3d,
     R.string.title_settings_geek,
-    R.string.title_settings_geek_survey,   // 33
-    R.string.title_settings_geek_splay,    // 34
+    R.string.title_settings_geek_survey,   // 34
+    R.string.title_settings_geek_splay,    // 35
     R.string.title_settings_geek_plot,
-    R.string.title_settings_geek_line,     // 36
-    R.string.title_settings_geek_device,   // 37
-    R.string.title_settings_geek_import,   // 38
-    R.string.title_settings_log       // 39
+    R.string.title_settings_geek_line,     // 37
+    R.string.title_settings_geek_device,   // 38
+    R.string.title_settings_geek_import,   // 39
+    R.string.title_settings_log       // 40
   };
 }

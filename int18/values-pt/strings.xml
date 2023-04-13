@@ -1141,7 +1141,7 @@ no campo abaixo e aperte o botão.
   <string name="title_settings_svg">Configurações exportação SVG</string>
   <string name="title_settings_dxf">Configurações exportação DXF</string>
   <string name="title_settings_shp">Configurações exportação SHP</string>
-  <string name="title_settings_png">Configurações exportação PNG</string>
+  <!-- UNUSED string name="title_settings_png">Configurações exportação PNG</string -->
   <string name="title_settings_kml">Configurações exportação KML</string>
   <string name="title_settings_sketch">Configurações croquis 3D</string>
   <string name="title_settings_survey">Configurações topo</string>

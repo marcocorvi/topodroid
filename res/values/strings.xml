@@ -1241,7 +1241,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="title_settings_svg">SVG export settings</string>
     <string name="title_settings_dxf">DXF export settings</string>
     <string name="title_settings_shp">Shapefile export settings</string>
-    <string name="title_settings_png">PNG export settings</string>
+    <!-- UNUSED string name="title_settings_png">PNG export settings</string -->
     <string name="title_settings_kml">KML export settings</string>
 
     <string name="title_settings_sketch">3d sketch settings</string>

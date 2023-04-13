@@ -1237,7 +1237,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="title_settings_svg">Paramètres d\'exportation SVG</string>
     <string name="title_settings_dxf">Paramètres d\'exportation DXF</string>
     <string name="title_settings_shp">Paramètres d\'exportation Shapefile</string>
-    <string name="title_settings_png">Paramètres d\'exportation PNG</string>
+    <!-- UNUSED string name="title_settings_png">Paramètres d\'exportation PNG</string -->
     <string name="title_settings_kml">Paramètres d\'exportation KML</string>
 
     <string name="title_settings_sketch">TopoDroid : paramétrage de croquis 3D</string>
