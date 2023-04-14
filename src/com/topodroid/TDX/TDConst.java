@@ -52,7 +52,6 @@ public class TDConst
   public static final int SURVEY_FORMAT_SNP = 28; // CaveSniper
   // public static final int SURVEY_FORMAT_TROX = 29; // VisualTopo X
   
-
   public static final int SURVEY_FORMAT_ZIP     = 30;
 
   public static final int SURVEY_FORMAT_GLTF    = 31;
@@ -69,39 +68,39 @@ public class TDConst
     "application/octet-stream", //    Compass
     "application/octet-stream", //    Survex
     "application/octet-stream", //    VisualTopo
-    "text/csv",                 // 5  *CSV
-    "application/dxf",          //    *DXF
-    "application/octet-stream", //    *cSurvey
-    "application/octet-stream", //    PocketTopo
-    "application/octet-stream", //    Walls
+    "text/csv",                 //  5 *CSV
+    "application/dxf",          //  6 *DXF
+    "application/octet-stream", //  7 *cSurvey
+    "application/octet-stream", //  8 PocketTopo
+    "application/octet-stream", //  9 Walls
     "application/vnd",          // 10 *KML
     // "application/octet-stream", //    trackfile (.plt)
     "application/octet-stream", // 11 trackfile (.gpx)
-    // "image/png",                // 12 *PNG
-    "image/svg+kml",            //    *SVG
-    "application/octet-stream", //    Therion-2
-    "application/octet-stream", //    Therion-3
+    null, // "image/png",                // 12 *PNG
+    "image/svg+kml",            // 13 *SVG
+    "application/octet-stream", // 14 Therion-2
+    "application/octet-stream", // 15 Therion-3
 
     "application/octet-stream", // 16 Polygon (.cave)
-    "application/octet-stream", //    Topo (.cav)
-    "application/octet-stream", //    Grottolf
-    "application/octet-stream", //    GhTopo
+    "application/octet-stream", // 17 Topo (.cav)
+    "application/octet-stream", // 18 Grottolf
+    "application/octet-stream", // 19 GhTopo
     "application/octet-stream", // 20 WinKarst
     "application/octet-stream", // 21 TopoRobot
     "application/json",         // 22 *Json
-    "application/shp",
-    "application/xvi",
+    "application/shp",          // 23
+    "application/xvi",          // 24
     "application/xml",          // 25 *Tunnel
-    "application/octet-stream", // 26
-    "application/pdf",          //    *PDF
-    "application/octet-stream", //    CaveSniper
-    "application/octet_stream", //    *trox
+    "application/octet-stream", // 26 *Cave3D
+    "application/pdf",          // 27 *PDF
+    "application/octet-stream", // 28 CaveSniper
+    "application/octet_stream", // 29 *trox
     "application/zip",          // 30 ZIP
     "application/octet-stream", // 31 glTF
     "application/octet-stream", // 32 CGAL
     "application/octet-stream", // 33 STL
-    "application/octet-stream", //    STL binary
-    "application/octet-stream", //    LAS binary
+    "application/octet-stream", // 34 STL binary
+    "application/octet-stream", // 35 LAS binary
     "test/plain",               // 36 serialized
     // "image/x-portable-pixmap",  // 37 NO_PNM
   };
