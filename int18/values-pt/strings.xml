@@ -1162,7 +1162,7 @@ no campo abaixo e aperte o botão.
   <string name="title_settings_calib">Configurações calibração</string>
   <string name="title_settings_3d">Configurações visualizador 3D</string>
   <string name="title_settings_dem">Configurações DEM</string>
-  <string name="title_settings_walls3d">Configurações modelo 3D</string>
+  <string name="title_settings_walls3d">Configurações modelagem paredes</string>
   <string name="title_settings_geek">Configurações Especiais</string>
   <string name="title_settings_geek_survey">Configurações Especiais: topos</string>
   <string name="title_settings_geek_splay">Configurações Especiais: medidas auxiliares</string>
@@ -1817,9 +1817,9 @@ no campo abaixo e aperte o botão.
   <!-- 3D VIEWER strings -->
   <!-- UNUSED string name="capp_name" translatable="false">Cave3D</string -->
   <string name="cbtn_bind">Religar</string>
-  <string name="cmenu_open">Abrir arquivo</string>
+  <string name="cmenu_open">Abrir</string>
   <string name="cmenu_reset">Reiniciar</string>
-  <string name="cmenu_alpha">Opacidade DEM</string>
+  <string name="cmenu_alpha">Superfície</string>
   <!-- UNUSED string name="cmenu_ble">BT surveys</string -->
   <string name="cmenu_viewpoint">Ponto de vista</string>
   <!-- UNUSED string name="cmenu_files">Topos</string -->
@@ -1828,7 +1828,7 @@ no campo abaixo e aperte o botão.
   <string name="cmenu_info">Info</string>
   <string name="cmenu_ico">Diagrama Ico</string>
   <string name="cmenu_rose">Diagrama Rose</string>
-  <string name="cmenu_wall">Modo parede</string>
+  <string name="cmenu_wall">Paredes</string>
   <string name="cmenu_sketch">CROQUIs</string>
   <!-- UNUSED string name="cmenu_fractal" translatable="false">FRACTAL DIM.</string -->
   <string name="illegal_value">Valor inválido</string>
@@ -1841,7 +1841,7 @@ no campo abaixo e aperte o botão.
   <string name="info_shot">Visadas</string>
   <string name="info_station">Bases</string>
   <string name="info_length">Comprimento</string>
-  <string name="info_surface">Desenvolvimento horizontal</string>
+  <string name="info_surface">Desenv horiz</string>
   <string name="info_depth">Profundidade</string>
   <string name="info_volume">Volume</string>
   <string name="info_east">Leste</string>
@@ -1912,7 +1912,7 @@ no campo abaixo e aperte o botão.
   <string name="ctitle_sketches">Croquis</string>
   <string name="ctitle_sketch_h" copyable="pt">[H]</string>
   <string name="ctitle_sketch_v" copyable="pt">[V]</string>
-  <string name="ctitle_legs">Visibilidade visadas</string>
+  <string name="ctitle_legs">Visadas visíveis</string>
   <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
   <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
   <!-- UNUSED string name="cbtn_laser">Laser</string -->
@@ -2008,7 +2008,7 @@ no campo abaixo e aperte o botão.
   <string name="empty_survey">Topo %1$s vazia\n</string>
   <string name="viewing_at">Vendo com clino %1$.0f azimute %2$.0f</string>
   <string name="cpref_dem3d">DEM</string>
-  <string name="cpref_walls3d">MODELO WALLS</string>
+  <string name="cpref_walls3d">MODELAGEM PAREDES</string>
   <!-- UNUSED string name="cpref_base_path_title">Diretório base</string -->
   <!-- UNUSED string name="cpref_base_path_summary">Diretório base da app</string -->
   <!-- UNUSED string name="cpref_text_size_title">Tam do texto</string -->
