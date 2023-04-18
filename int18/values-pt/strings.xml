@@ -1819,7 +1819,7 @@ no campo abaixo e aperte o botão.
   <string name="cbtn_bind">Religar</string>
   <string name="cmenu_open">Abrir</string>
   <string name="cmenu_reset">Reiniciar</string>
-  <string name="cmenu_alpha">Superfície</string>
+  <string name="cmenu_alpha">Superfície DEM</string>
   <!-- UNUSED string name="cmenu_ble">BT surveys</string -->
   <string name="cmenu_viewpoint">Ponto de vista</string>
   <!-- UNUSED string name="cmenu_files">Topos</string -->
@@ -1827,7 +1827,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="cmenu_color">Cor</string -->
   <string name="cmenu_info">Info</string>
   <string name="cmenu_ico">Diagrama Rose 3D</string>
-  <string name="cmenu_rose">Diagrama Rose</string>
+  <string name="cmenu_rose">Diagrama Rose 2D</string>
   <string name="cmenu_wall">Paredes</string>
   <string name="cmenu_sketch">CROQUIs</string>
   <!-- UNUSED string name="cmenu_fractal" translatable="false">FRACTAL DIM.</string -->
@@ -1871,8 +1871,8 @@ no campo abaixo e aperte o botão.
   <string name="legs_surface">Superfície</string>
   <string name="legs_duplicate">Duplicadas</string>
   <string name="legs_commented">Comentadas</string>
-  <string name="proj_perspective">Parâmetros perspectiva</string>
-  <string name="proj_orthographic">Parâmetros ortográficos</string>
+  <string name="proj_perspective">Projeção em perspectiva</string>
+  <string name="proj_orthographic">Projeção ortográfica</string>
   <string name="proj_focal">Focal</string>
   <string name="proj_side">Lateral</string>
   <!-- UNUSED string name="proj_near">Near</string -->
@@ -1890,7 +1890,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="style_stroke">Stroke</string -->
   <!-- UNUSED string name="style_stroke_fill">Fill &amp; Stroke</string -->
   <!-- UNUSED string name="style_fill">Fill</string -->
-  <string name="surface_projection">Projeção no DEM</string>
+  <string name="surface_projection">Projeção modelo no DEM</string>
   <string name="surface_texture">Textura da superfície</string>
   <string name="surface_gps">Track GPS</string>
   <string name="surface_east">Leste</string>
@@ -1908,7 +1908,7 @@ no campo abaixo e aperte o botão.
   <string name="sketch_failed">Falha ao carregar croqui</string>
   <string name="sketch_ok">Carregar croqui</string>
   <string name="ctitle">%1$s  Inclinação: %2$.0f  Azimute: %3$.0f</string>
-  <string name="ctitle_surface_alpha">Opacidade superfície</string>
+  <string name="ctitle_surface_alpha">Superfície DEM</string>
   <string name="ctitle_sketches">Croquis</string>
   <string name="ctitle_sketch_h" copyable="pt">[H]</string>
   <string name="ctitle_sketch_v" copyable="pt">[V]</string>
@@ -2069,10 +2069,10 @@ no campo abaixo e aperte o botão.
   <string name="help_export_3d">Exportar arquivo 3D</string>
   <string name="help_info_3d">Info 3D</string>
   <string name="help_ico_3d">Distribuição 3D das visadas</string>
-  <string name="help_rose_3d">Diagrama Rose</string>
+  <string name="help_rose_3d">Diagrama Rose 3D</string>
   <string name="help_reset_3d">Reinicializar visualização 3D</string>
   <string name="help_viewpoint_3d">Ponto de vista 3D</string>
-  <string name="help_alpha_3d">DEM</string>
+  <string name="help_alpha_3d">Superfície DEM</string>
   <string name="help_wall_3d">Modelo 3D</string>
   <!-- UNUSED string name="help_temperature">Tempertaure</string -->
   <string name="help_sketch_3d">Elevação croqui 3D</string>
