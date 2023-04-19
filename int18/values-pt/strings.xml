@@ -1072,7 +1072,7 @@ no campo abaixo e aperte o botão.
   <string name="import_leg_first">Medida antes de EDTC</string>
   <string name="import_diving_datamode">Modo de dados \'mergulho\'</string>
   <string name="title_azimut">Referência para retificar perfil</string>
-  <string name="title_audio">Áudio comentário</string>
+  <string name="title_audio">Comentário em áudio</string>
   <string name="title_audio_list">Registros de áudio</string>
   <string name="title_calib">Calibrações</string>
   <string name="title_calib_check">Medidas de verificação de calibração</string>
@@ -1441,13 +1441,13 @@ no campo abaixo e aperte o botão.
   <string name="pref_survey_stations_title">Nomear bases</string>
   <string name="pref_survey_stations_summary">Método para nomear bases automaticamente</string>
   <string name="pref_accel_thr_title">Toler aceleração</string>
-  <string name="pref_accel_thr_summary">Percentual de tolerância para valores de aceleração</string>
+  <string name="pref_accel_thr_summary">Percentual de tolerância de diferença de valores de aceleração em relação a seu valor médio acima do qual a medida será considerada pouco confiável (somente DistoX2)</string>
   <string name="pref_mag_thr_title">Toler campo magnético</string>
-  <string name="pref_mag_thr_summary">Percentual de tolerância para valores do campo magnético</string>
-  <string name="pref_dip_thr_title">Toler inclin magnética</string>
-  <string name="pref_dip_thr_summary">Percentual de tolerância para valores da inclinação magnética</string>
+  <string name="pref_mag_thr_summary">Percentual de tolerância de diferença de valores de campo magnético em relação a seu valor médio acima do qual a medida será considerada pouco confiável (somente DistoX2)</string>
+  <string name="pref_dip_thr_title">Toler merg magnético</string>
+  <string name="pref_dip_thr_summary">Tolerância de diferença de valores de mergulho do campo magnético em relação a seu valor médio acima do qual a medida será considerada pouco confiável (somente DistoX2). Unidade: graus.</string>
   <string name="pref_sibling_thr_title">Lim irmã</string>
-  <string name="pref_sibling_thr_summary">Limite para visadas irmãs [%]</string>
+  <string name="pref_sibling_thr_summary">Diferença percentual máxima nos valores de visadas acima do qual são consideradas irmãs "ruins" [%]</string>
   <string name="pref_leg_title">Toler visadas</string>
   <string name="pref_leg_summary">Tolerância entre as medições de uma visada</string>
   <string name="pref_max_shot_title">Compr máx medida</string>
@@ -1670,7 +1670,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="pref_walls_xstep_title">Passo</string -->
   <!-- UNUSED string name="pref_walls_xstep_summary">Separação dos pontos ao longo das paredes [m]</string -->
 
-  <string name="pref_3d_sketch_title">Modelo 3D</string>
+  <string name="pref_3d_sketch_title">Modelagem 3D</string>
   <string name="pref_3d_sketch_summary">Habilitar modelagem 3D (disponível somente na versão de debug)</string>
   <string name="pref_sketch_splay_buffer_title">Armazen Aux</string>
   <string name="pref_sketch_splay_buffer_summary">Área de armazenamento temporário de medidas auxiliares de cortes [m]</string>
@@ -1956,8 +1956,8 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="view_point">Ponto de vista</string -->
   <string name="view_zoom">Zoom 1</string>
   <string name="walls_title">WALLS</string>
-  <string name="walls_convexhull">Plano Convexo</string>
-  <string name="walls_hull">Plano</string>
+  <string name="walls_convexhull">Casco Convexo</string>
+  <string name="walls_hull">Casco</string>
   <string name="walls_bubble">Bolha</string>
   <string name="walls_tube">Tubo</string>
   <!-- UNUSED string name="walls_delaunay" translatable="false">Delaunay</string -->
