@@ -95,7 +95,7 @@ A few buttons have long-tap actions:
                     <li><i>Split triangles</i>: Whether to split intersecting wall triangles</li>
                     <li><i>Randomize points</i>: Add a small random vector to splays</li>
                     <li><i>Stretch walls</i>: Shift wall points by a small quantity along the leg</li>
-                    <li><i>Powercrust</i>: Algorithm "delta" parameter</li>
+                    <!-- <li><i>Powercrust</i>: Algorithm "delta" parameter</li> -->
                 </ul>
             </li>
         </ul>
@@ -144,7 +144,7 @@ is opened by a long-tap on the <i>Frame</i> button (last).
 <b>WALLS</b><br>
 The wall model is not computed automatically when the file is opened, but it must be
 requested by the user through the "wall" menu.
-There are three models: <i>simple hull</i>, <i>pseudo convex-hull</i>, and <i>powercrust</i>.
+There are two models: <i>simple hull</i>, and <i>pseudo convex-hull</i>.
 The first two are suitable when the splay are not dense. The third one is for dense splays.<br>
 
 The wall model depends on the number and the quality of the splays.
@@ -153,9 +153,9 @@ Poor splays will result in a poor model.<br>
 The computation is done in background.
 When done the wall can be displayed with the "wall" button.<br><p>
 
-The powercrust model includes also the projection of the walls on the horizontal plane (plan view), and on a vertical curtain
+<!-- The powercrust model includes also the projection of the walls on the horizontal plane (plan view), and on a vertical curtain
 along the survey (profile view). Their display is enabled through the "walls" menu.
-<br><p>
+<br><p> -->
 
 <b>SURFACE</b><br>
 If the (Therion or Loch) model contains surface data (Digital Elevation Model), the surface can be displayed either gray or
