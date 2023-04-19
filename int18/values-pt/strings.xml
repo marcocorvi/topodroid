@@ -1071,9 +1071,9 @@ no campo abaixo e aperte o botão.
   <string name="import_lrud">Importar EDTC</string>
   <string name="import_leg_first">Medida antes de EDTC</string>
   <string name="import_diving_datamode">Modo de dados \'mergulho\'</string>
-  <string name="title_azimut">Referência para retificar perfil</string>
-  <string name="title_audio">Comentário em áudio</string>
-  <string name="title_audio_list">Registros de áudio</string>
+  <string name="title_azimut">Direção perfil retificado</string>
+  <string name="title_audio">Áudiocomentário</string>
+  <string name="title_audio_list">Áudios</string>
   <string name="title_calib">Calibrações</string>
   <string name="title_calib_check">Medidas de verificação de calibração</string>
   <!-- UNUSED string name="title_check">Calibration-check</string -->
@@ -1462,8 +1462,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_prev_next_summary">Botões Ant/Próx na tela medidas</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Anomalia magnética</string -->
   <!-- UNUSED string name="pref_mag_anomaly_summary">Compensar anomalia magnética local</string -->
-  <string name="pref_azimuth_manual_title">Ref fixa retif perfil</string>
-  <string name="pref_azimuth_manual_summary">Referência fixa para retificação de perfil</string>
+  <string name="pref_azimuth_manual_title">Ref fix perf retific</string>
+  <string name="pref_azimuth_manual_summary">Referência fixa para direção de visada em perfil retificado</string>
   <string name="pref_team_title">Equipe</string>
   <string name="pref_team_summary">Equipe padrão para novas topos</string>
   <string name="pref_ethr_title">Lim vert aux</string>
