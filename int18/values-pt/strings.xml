@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-  <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
+  <!-- UNUSED string name="TopoDroidX_man">https://sites.google.com/site/speleoapps/home/TopoDroidX/docs</string -->
   <string name="no_manual">Não é possível obter o manual do usuário na internet</string>
   <string name="user_man_ok">Manual traduzido instalado</string>
   <string name="user_man_fail">Instalação do manual traduzido falhou</string>
   <!-- UNUSED string name="string_false">false</string -->
   <!-- UNUSED string name="string_true">true</string -->
-  <!-- UNUSED string name="target_sdk" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nFinish ?</string -->
-  <!-- UNUSED string name="target_sdk_stale" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nThis version cannot access the old folder and must stop.\nSee http://marcocorvi.altervista.org/TopoDroidAndAndroid11.html.</string -->
+  <!-- UNUSED string name="target_sdk" translatable="false">TopoDroidX official app is on http://marcocorvi.altervista.com/TopoDroidX.html\nFinish ?</string -->
+  <!-- UNUSED string name="target_sdk_stale" translatable="false">TopoDroidX official app is on http://marcocorvi.altervista.com/TopoDroidX.html\nThis version cannot access the old folder and must stop.\nSee http://marcocorvi.altervista.org/TopoDroidXAndAndroid11.html.</string -->
   <!-- UNUSED string name="desc_user_man">User manual</string -->
   <!-- UNUSED string name="desc_points">Points</string -->
   <!-- UNUSED string name="desc_lines">Lines</string -->
@@ -15,10 +15,10 @@
   <string name="desc_menu">Menu</string>
   <string name="r_title">Aviso importante Android 13+</string>
   <!-- UNUSED string name="r_dialog_1">
-On Android-11+ storage access must be granted to TopoDroid.\nYou can do this with the PC program "adb".\nOn Android: enable developer settings and usb-debug.\nConnect Android to the PC with a USB cable.\nOn the PC type "adb shell appops set com.topodroid.TDX MANAGE_EXTERNAL_STORAGE allow".
+On Android-11+ storage access must be granted to TopoDroidX.\nYou can do this with the PC program "adb".\nOn Android: enable developer settings and usb-debug.\nConnect Android to the PC with a USB cable.\nOn the PC type "adb shell appops set com.TopoDroidX.TDX MANAGE_EXTERNAL_STORAGE allow".
   </string -->
   <string name="r_dialog">
-A partir do Android 13 o TopoDroid é obrigado a armazenar seus dados em um diretório privado do app dentro de "Android/data".
+A partir do Android 13 o TopoDroidX é obrigado a armazenar seus dados em um diretório privado do app dentro de "Android/data".
 Fique atento pois esse diretório normalmente é apagado ao desintalar o app.
 Para confirmar, digite
 "%1$s"
@@ -33,16 +33,16 @@ no campo abaixo e aperte o botão.
   <string name="tdm_config_project">projeto.tdconfig</string>
   <string name="double_back">Clicar novamente em VOLTAR para sair</string>
   <string name="new_survey_label">Nova topo</string>
-  <!-- UNUSED string name="version_ask">Atualizando para uma nova versão do TopoDroid.\nQuer re-instalar os símbolos?</string -->
+  <!-- UNUSED string name="version_ask">Atualizando para uma nova versão do TopoDroidX.\nQuer re-instalar os símbolos?</string -->
   <string name="symbols_ask">Instalar símbolos versão %1$s?\n(Versão atual %2$s)</string>
   <!-- UNUSED string name="version_check">Last version</string -->
   <!-- UNUSED string name="version_check_failed">Failed version check</string -->
   <!-- UNUSED string name="version_check_latest">Version already at latest</string -->
   <string name="version_check_newer">Nova versão disponível: %1$d</string>
-  <string name="setup_textsize_title">Configuração TopoDroid. Tamanho do texto</string>
-  <string name="setup_buttonsize_title">Configuração TopoDroid. Tamanho dos botões</string>
-  <string name="setup_drawingunit_title">Configuração TopoDroid. Tamanho dos ícones</string>
-  <string name="setup_done_title">Configuração TopoDroid. Fim</string>
+  <string name="setup_textsize_title">Configuração TopoDroidX. Tamanho do texto</string>
+  <string name="setup_buttonsize_title">Configuração TopoDroidX. Tamanho dos botões</string>
+  <string name="setup_drawingunit_title">Configuração TopoDroidX. Tamanho dos ícones</string>
+  <string name="setup_done_title">Configuração TopoDroidX. Fim</string>
   <string name="setup_buttonsample">Tamanho do botão</string>
   <string name="setup_textsize">Defina o tamanho do texto.\nPode ser alterado depois na tela principal de configurações.</string>
   <string name="setup_buttonsize">Defina o tamanho dos botões.\nPode ser alterado depois na tela principal de configurações.</string>
@@ -335,7 +335,7 @@ no campo abaixo e aperte o botão.
   <string name="fixed">fixa</string>
   <string name="painted">pintada</string>
   <!-- UNUSED string name="cbd_title">Diretório base</string -->
-  <string name="cwd">Diretório de projetos do TopoDroid</string>
+  <string name="cwd">Diretório de projetos do TopoDroidX</string>
   <string name="empty_cwd">Nome de projeto vazio</string>
   <!-- UNUSED string name="bad_cbd">Diretório base inexistente ou não liberado para escrita</string -->
   <string name="bad_cwd">O nome do projeto não pode incluir um diretório</string>
@@ -484,7 +484,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="not_implemented">Não implementado</string -->
   <string name="null_bitmap">Impossível criar imagem [OOM error]</string>
   <string name="photo">foto</string>
-  <string name="photo_camera">Câmera do TopoDroid</string>
+  <string name="photo_camera">Câmera do TopoDroidX</string>
   <string name="photo_comment_prompt">Inserir comentário para a foto</string>
   <string name="photo_azimuth_clino">Azimute: %1$.1f Inclinação %2$.1f</string>
   <!-- UNUSED string name="photo_name">base/nome</string -->
@@ -626,7 +626,7 @@ no campo abaixo e aperte o botão.
   <string name="unzip_fail_sqlite">SQL falhou: apague a topo e tente novamente</string>
   <string name="unzip_fail_survey">Falha: nome da topo diferente do nome do arquivo ZIP</string>
   <string name="unzip_fail_db">Falha: versão do banco de dados incompatível</string>
-  <string name="unzip_fail_td">Falha: versão do TopoDroid incompatível</string>
+  <string name="unzip_fail_td">Falha: versão do TopoDroidX incompatível</string>
   <!-- UNUSED string name="zoom_in_out">Abrir/fechar zoom</string -->
   <string name="survey_info">Informações da topo</string>
   <string name="stat_dates">De %1$s para %2$s</string>
@@ -687,7 +687,7 @@ no campo abaixo e aperte o botão.
   <string name="distox_err_headtail_io">Erro de I/O na memória da DistoX</string>
   <string name="distox_err_headtail_eof">Erro de EOF na memória da DistoX</string>
   <string name="distox_err_connected">Dispositivo já conectado</string>
-  <string name="ask_close_app">Fechar TopoDroid?</string>
+  <string name="ask_close_app">Fechar TopoDroidX?</string>
   <!-- UNUSED string name="ask_reset">Reiniciar memória da DistoX?</string -->
   <!-- UNUSED string name="ask_close_survey">Fechar mapa?</string -->
   <string name="ask_gps_service">Configurar o serviço GPS?</string>
@@ -911,7 +911,7 @@ no campo abaixo e aperte o botão.
   <string name="help_azimuth">Direção no perfil retificado</string>
   <string name="help_refresh">Redesenhar tela</string>
   <string name="help_device">Editar dispositivo em uso</string>
-  <string name="help_add_topodroid">Criar nova topo/calibração</string>
+  <string name="help_add_TopoDroidX">Criar nova topo/calibração</string>
   <string name="help_import">Importar arquivo zip ou arquivo de topo</string>
   <string name="help_geopoint_app">Apps GNSS externas</string>
   <string name="help_symbol">Habilitar/desabilitar símbolos</string>
@@ -921,7 +921,7 @@ no campo abaixo e aperte o botão.
   <string name="help_prefs">Editar preferências</string>
   <!-- UNUSED string name="help_log">Ativar/desativar configurações de log</string -->
   <!-- UNUSED string name="help_join_survey">topo colaborativa</string -->
-  <string name="help_info_topodroid">Informações sobre o TopoDroid</string>
+  <string name="help_info_TopoDroidX">Informações sobre o TopoDroidX</string>
   <string name="help_download">Download de dados</string>
   <!-- UNUSED string name="help_splay">Atribuir bases à visadas auxiliares automaticamente</string -->
   <string name="help_display">Selecionar tipos de medidas apresentadas</string>
@@ -1109,7 +1109,7 @@ no campo abaixo e aperte o botão.
   <string name="title_fixed_import">Importar coordenadas</string>
   <string name="title_fixed_gps">Coordenadas GPS</string>
   <string name="title_fixed_add">Inserir coordenadas</string>
-  <string name="title_manual">Manual do usuário do TopoDroid</string>
+  <string name="title_manual">Manual do usuário do TopoDroidX</string>
   <string name="title_mode">Opções de visualização</string>
   <string name="title_move">Mover</string>
   <string name="title_note">Comentários da topo</string>
@@ -1229,9 +1229,9 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
   <!-- UNUSED string name="pref_bootloader_summary">Ativar bootloader</string -->
   <string name="pref_mkeyboard_title">Teclado</string>
-  <string name="pref_mkeyboard_summary">Habilitar teclados especiais do Topodroid</string>
+  <string name="pref_mkeyboard_summary">Habilitar teclados especiais do TopoDroidX</string>
   <string name="pref_no_cursor_title">Sem cursor</string>
-  <string name="pref_no_cursor_summary">Desabilitar o cursor do teclado especial do TopoDroid</string>
+  <string name="pref_no_cursor_summary">Desabilitar o cursor do teclado especial do TopoDroidX</string>
   <string name="pref_local_help_title">Manual traduzido</string>
   <string name="pref_local_help_summary">Habilitar manual traduzido</string>
   <!-- UNUSED string name="pref_cosurvey_title">Topo colaborativa</string -->
@@ -1397,7 +1397,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_shot_data_title">DADOS MEDIDAS</string>
   <string name="pref_shot_units_title">UNIDADES</string>
   <string name="pref_cwd_title">Diretório trabalho</string>
-  <!-- UNUSED string name="pref_cwd_summary">Diretório de trabalho do TopoDroid</string -->
+  <!-- UNUSED string name="pref_cwd_summary">Diretório de trabalho do TopoDroidX</string -->
   <string name="pref_pt_color_map_title">Esquema cor</string>
   <string name="pref_pt_color_map_summary">Esquema de cores do PocketTopo (importação PocketTopo)</string>
   <string name="pref_text_size_title">Tam texto</string>
@@ -1726,14 +1726,14 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="alt_wgs">elipsoide</string -->
   <!-- UNUSED string name="alt_ortho">Ortométrico</string -->
   <!-- UNUSED string name="splay_extend">Estimar extensão visada auxiliar</string -->
-  <string name="perms_mandatory">O TopoDroid não pode ser executado sem essas permissões:</string>
-  <string name="perms_optional">O TopoDroid pode apresentar erros sem essas permissões:</string>
+  <string name="perms_mandatory">O TopoDroidX não pode ser executado sem essas permissões:</string>
+  <string name="perms_optional">O TopoDroidX pode apresentar erros sem essas permissões:</string>
   <string name="perm_location">\nLocalização</string>
   <string name="perm_camera">\nCâmera</string>
   <string name="perm_microphone">\nMicrofone</string>
   <string name="welcome_db_version">Banco de dados ver. %1$d, %2$d</string>
   <string name="welcome_text">
-\nTopoDroid é um aplicativo Android open source para mapeamento de cavernas com DistoX, BRIC4 e SAP5.
+\nTopoDroidX é um aplicativo Android open source para mapeamento de cavernas com DistoX, BRIC4 e SAP5.
 \n\nNenhuma garantia: utilizando o aplicativo, você concorda com o fato de que o autor não é responsável por qualquer perda de dados ou quaisquer outros danos.
 \n\nAjuda: menu "Ajuda"
 \nPágina principal: botão MENU
@@ -1969,7 +1969,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="no_planview">No plan view</string -->
   <!-- UNUSED string name="no_surface">No surface DEM</string -->
   <string name="no_model">Nenhum modelo 3D</string>
-  <string name="no_topodroid_model">Não é um modelo TopoDroid</string>
+  <string name="no_TopoDroidX_model">Não é um modelo TopoDroidX</string>
   <!-- UNUSED string name="error_file_not_found">Erro: arquivo não encontrado</string -->
   <!-- UNUSED string name="error_file_not_readable">Erro: arquivo ilegível</string -->
   <string name="error_file_read">Erro: leitura arquivo %1$s falhou</string>
