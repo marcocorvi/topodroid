@@ -9,7 +9,7 @@ The official user manuals are available at http://www.caveexploration.org/gear/b
 
 To turn the Bric4 on press the external button three times quickly in a row.
 To turn it off press and hold the external button.
-The Bric4 goes off by itself after 90 seconds on inactivity.
+The Bric4 goes off by itself after the amount of time on inactivity defined at the <i>Idle off</i> setting.
 <br><p>
 
 <b>Internal buttons</b><br>
@@ -39,8 +39,9 @@ Options:
 <li><i>Dist</i>: meters or feet</li>
 <li><i>Temp</i>: Celsius or Fahrenheit</li>
 <li><i>Shot delay</i>: between <u>0</u> and 5 seconds</li>
-<li><i>Change current</i>: 100 mA or <u>500</u> mA</li>
+<li><i>Charge current</i>: 100 mA or <u>500</u> mA</li>
 <li><i>Error sensitivity</i>: from 0.2&deg; to 2.8&deg; in steps of 0.2&deg; [1.0&deg;]</li>
+<li><i>Idle off</i>: amount of time the Bric4 should be inactive before it shuts itself off. In steps from 30s to 1800s.</li>
 </ul><br><p>
 
 Error info: reports the errors info of the last ten measurements.<br><p>
@@ -59,7 +60,7 @@ Set Clock (scroll down beyond <i>second</i> to confirm)
 <ul>
 <li><i>Year</i></li>
 <li><i>Month</i>: from 01 to 12</li>
-<li><i>Date</i>: day of the month, from 00 to 31</li>
+<li><i>Date</i>: day of the month, from 01 to 31</li>
 <li><i>Hour</i>: from 00 to 23</li>
 <li><i>Minute</i>: from 00 to 59</li>
 <li><i>Second</i>: from 00 to 59</li>
@@ -71,17 +72,17 @@ Bluetooth
 <li><i>MAC address</i>: eg D52FDE2E98DE</li>
 <li><i>Connected to</i>: client MAC address</li>
 <li><i>Reset BLE</i></li>
-<li><i>Advanced</i></li>
+<li><i>Advanced Menu</i>: opens the <u>BLE Advanced</u> menu</li>
 </ul><br><p>
 
-The advanced bluetooth has three options
+The <u>BLE Advanced</u> menu has three options
 <ul>
 <li><i>RST to AT mode</i></li>
 <li><i>RST to Run Mode</i></li>
 <li><i>Curr Comm</i>: CPU</li>
 </ul><br><p>
 
-The advanced <i>BLE menu</i> shows 
+The <u>BLE Advanced</u> menu shows 
 <ul>
 <li>the BLE transmit and receive counts</li>
 <li>the data sync status: total measurements and BT messages sent</li>
@@ -97,14 +98,15 @@ Display
 
 Advanced Menu
 <ul>
-<li><i>Memory clear</i>: resets data index to 0 (clears the display)</li>
+<li><i>Memory clear</i>: opens the <i>Memory clear</i> screen</li>
 <li><i>Sensor Raw Data</i></li>
 <li><i>Firmware CPU</i>: firmware and hardware versions - <i>Bootloader mode</i> option</li>
 <li><i>Firmware BLE</i>: firmware version - <i>Update</i> option</li>
+<li><i>Cal Settings</i>: several settings related to the calibration processes</li>
 <li><i>Reprocess full Calibration</i></li>
 <li><i>Reprocess AZM Calibration</i></li>
-<li><i>Backlight Manual</i>: set Red, Green, Blue</li>
-<li><i>Charger info</i> (debug)</li>
+<!-- <li><i>Backlight Manual</i>: set Red, Green, Blue</li>
+<li><i>Charger info</i> (debug)</li> -->
 </ul><br><p>
 
 The <i>Memory clear</i> screen shows the total measurements and BT-sent messages.
