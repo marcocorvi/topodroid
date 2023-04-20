@@ -111,7 +111,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="bric_ble">BLE %1$s</string>
     <string name="bric_fw">Firmware %1$s</string>
     <string name="bric_hw">Hardware %1$s</string>
-    <string name="bric_battery">Akku %1$d</string>
+    <string name="bric_battery">Akku %1$d %%</string>
     <string name="bric_battery_wait">Akku &#8230;</string>
     <string name="bric_reset_time">Reset idő</string>
     <string name="bric_clear_memory">Memória törlés</string>

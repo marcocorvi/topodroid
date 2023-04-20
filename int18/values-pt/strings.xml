@@ -102,7 +102,7 @@ no campo abaixo e aperte o botão.
   <string name="bric_ble">BLE %1$s</string>
   <string name="bric_fw">Firmware %1$s</string>
   <string name="bric_hw">Hardware %1$s</string>
-  <string name="bric_battery">Bateria %1$d</string>
+  <string name="bric_battery">Bateria %1$d %%</string>
   <string name="bric_battery_wait">Bateria …</string>
   <string name="bric_reset_time">Redefinir horário</string>
   <string name="bric_clear_memory">Limpar memória</string>

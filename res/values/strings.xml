@@ -121,7 +121,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="bric_ble" copyable="all">BLE %1$s</string>
     <string name="bric_fw" copyable="pt">Firmware %1$s</string>
     <string name="bric_hw" copyable="pt">Hardware %1$s</string>
-    <string name="bric_battery">Battery %1$d</string>
+    <string name="bric_battery">Battery %1$d %%</string>
     <string name="bric_battery_wait">Battery &#8230;</string>
     <string name="bric_reset_time">Reset time</string>
     <string name="bric_clear_memory">Clear memory</string>

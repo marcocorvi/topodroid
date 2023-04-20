@@ -119,7 +119,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="bric_ble">BLE %1$s</string>
     <string name="bric_fw">Firmware %1$s</string>
     <string name="bric_hw">Hardware %1$s</string>
-    <string name="bric_battery">Batterie %1$d</string>
+    <string name="bric_battery">Batterie %1$d %%</string>
     <string name="bric_battery_wait">Batterie &#8230;</string>
     <string name="bric_reset_time">Remise à zéro</string>
     <string name="bric_clear_memory">Effacement de la mémoire</string>
