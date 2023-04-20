@@ -104,7 +104,7 @@ no campo abaixo e aperte o botão.
   <string name="bric_hw">Hardware %1$s</string>
   <string name="bric_battery">Bateria %1$d %%</string>
   <string name="bric_battery_wait">Bateria …</string>
-  <string name="bric_reset_time">Redefinir horário</string>
+  <string name="bric_reset_time">Redefinir último horário</string>
   <string name="bric_clear_memory">Limpar memória</string>
   <string name="bric_future_time">Recusando redefinir para um horário futuro</string>
   <string name="bric_ask_memory_clear">Limpar memória do BRIC?</string>
