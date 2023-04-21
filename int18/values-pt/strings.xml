@@ -711,11 +711,11 @@ no campo abaixo e aperte o botão.
   <string name="button_duplicate">Duplicar   </string>
   <string name="button_surface">Superfície </string>
   <string name="button_no_extend">Excluídas perfil retificado</string>
-  <string name="button_eval">Calcular   </string>
+  <string name="button_eval">Brutos   </string>
   <string name="button_evalg">G      </string>
   <string name="button_evalm">M      </string>
-  <string name="button_evalroll">Rolar</string>
-  <string name="button_eval_cal">Calcular c/ calib.</string>
+  <string name="button_evalroll">Rotação</string>
+  <string name="button_eval_cal">Calibrados</string>
   <string name="button_gps_start">GPS</string>
   <!-- UNUSED string name="button_gps_stop"  >Parar     </string -->
   <!-- UNUSED INCLINED_LEG string name="button_leg">Proj</string -->
