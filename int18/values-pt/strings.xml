@@ -116,7 +116,7 @@ no campo abaixo e aperte o botão.
   <string name="calibration_length">Trena</string>
   <string name="calibration_azimuth">Bússola</string>
   <string name="calibration_clino">Clinômetro</string>
-  <string name="calib_new">Nova calibração</string>
+  <string name="calib_new">Nova</string>
   <string name="calib_exists">Já existe uma calibração com este nome</string>
   <string name="calib_delete">Apagar calibração </string>
   <string name="calib_device_mismatch">Alerta: Dispositivo a ser calibrado incompatível</string>
