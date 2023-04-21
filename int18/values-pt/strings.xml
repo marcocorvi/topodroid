@@ -706,7 +706,7 @@ no campo abaixo e aperte o botão.
   <string name="button_clear_convert">Limpar conversão</string>
   <string name="button_convert">Converter  </string>
   <string name="button_copy">Copiar</string>
-  <string name="button_current">Atual      </string>
+  <string name="button_current">Selecionar</string>
   <string name="button_delete">Apagar     </string>
   <string name="button_duplicate">Duplicar   </string>
   <string name="button_surface">Superfície </string>
