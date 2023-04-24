@@ -1369,7 +1369,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_socket_delay_summary">Tempo de espera da conexão para permitir o pareamento [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Gambiarra Z6 DistoX</string>
   <string name="pref_z6_workaround_summary">Gambiarra Z6 para download dos dados da DistoX</string>
-  <string name="pref_firmware_sanity_title">Verificação de firmware</string>
+  <string name="pref_firmware_sanity_title">Verif firmware</string>
   <string name="pref_firmware_sanity_summary">Forçar verificações de sanidade de firmware</string>
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">Nome do CRS como no Proj4</string>
