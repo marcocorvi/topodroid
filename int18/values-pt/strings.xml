@@ -524,7 +524,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="convert_tdr2th2">Sobrescrever arquivos de croqui th2?</string -->
   <string name="section_area">Área do corte: %1$.1f</string>
   <string name="section_name">comentário sobre corte</string>
-  <string name="scrap_outline">Contorno de outro desenho</string>
+  <string name="scrap_outline">Contorno</string>
   <string name="scrap_string">Desenho do croqui: %1$d / %2$d</string>
   <string name="section_point_not_allowed">ponto tipo corte não permitido</string>
   <string name="section_line_not_allowed">linha tipo corte não permitida</string>
@@ -789,7 +789,7 @@ no campo abaixo e aperte o botão.
   <string name="mode_grid">Grade</string>
   <string name="mode_fixed">Deslocar croqui X linha de trena (CUIDADO!)</string>
   <string name="mode_outline">Contorno</string>
-  <string name="mode_scale_ref">Escala gráfica</string>
+  <string name="mode_scale_ref">Escala</string>
   <string name="mode_sections">Cortes</string>
   <string name="mode_walls">Paredes</string>
   <string name="mode_refs">Referência</string>
