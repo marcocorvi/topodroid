@@ -793,10 +793,10 @@ no campo abaixo e aperte o botão.
   <string name="mode_sections">Cortes</string>
   <string name="mode_walls">Paredes</string>
   <string name="mode_refs">Referência</string>
-  <string name="layer_floor">Bases</string>
-  <string name="layer_fill">Preenchimentos</string>
-  <string name="layer_ceil">Topos</string>
-  <string name="layer_arti">Artefatos</string>
+  <string name="layer_floor">Fundo (F)</string>
+  <string name="layer_fill">Decoração (D)</string>
+  <string name="layer_ceil">Cobertura (C)</string>
+  <string name="layer_arti">Avulsos (A)</string>
   <!-- UNUSED string name="layer_form">Forms</string -->
   <!-- UNUSED string name="layer_water">Water</string -->
   <!-- UNUSED string name="layer_text">Text</string -->
