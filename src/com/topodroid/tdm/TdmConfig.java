@@ -15,6 +15,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.utils.TDString;
 import com.topodroid.TDX.TglColor;
 
 // import java.io.File;
@@ -260,16 +261,16 @@ class TdmConfig extends TdmFile
     // TDLog.v("save config " + mSurveyName + " " + filepath );
     pw.format("# created by TopoDroid Manager %s - %s\n", TDVersion.string(), TDUtil.currentDate() );
     pw.format("source\n");
-    pw.format("  survey %s\n", mSurveyName );
+    pw.format("  survey \"%s\"\n", mSurveyName );
     for ( TdmInput input : mInputs ) {
       // FIXME path
       String path = input.getSurveyName();
       // TDLog.v("config write add survey " + path );
-      pw.format("    load %s -color %d\n", path, (input.getColor() & 0xffffff) );
+      pw.format("    load \"%s\" -color %d\n", path, (input.getColor() & 0xffffff) );
     }
     for ( TdmEquate equate : mEquates ) {
       pw.format("    equate");
-      for ( String st : equate.mStations ) pw.format(" %s", st );
+      for ( String st : equate.mStations ) pw.format(" \"%s\"", st );
       pw.format("\n");
     }
     pw.format("  endsurvey\n");
@@ -311,7 +312,7 @@ class TdmConfig extends TdmFile
         int pos = line.indexOf( '#' );
         if ( pos >= 0 ) line = line.substring( 0, pos );
         if ( line.length() > 0 ) {
-          String[] vals = line.split( " " );
+          String[] vals = TDString.splitOnStrings( line );
           if ( vals.length > 0 ) {
             if ( vals[0].equals( "source" ) ) {
             } else if ( vals[0].equals( "survey" ) ) {
@@ -371,16 +372,16 @@ class TdmConfig extends TdmFile
   {
     bw.format("# created by TopoDroid Manager %s - %s\n", TDVersion.string(), TDUtil.currentDate() );
     bw.format("source\n");
-    bw.format("  survey %s\n", mSurveyName );
+    bw.format("  survey \"%s\"\n", mSurveyName );
     for ( TdmInput input : mInputs ) {
       // FIXME path
       String path = "../th/" + input.getSurveyName() + ".th";
       // TDLog.v("config write add survey " + path );
-      bw.format("    input %s\n", path );
+      bw.format("    input \"%s\"\n", path );
     }
     for ( TdmEquate equate : mEquates ) {
       bw.format("    equate");
-      for ( String st : equate.mStations ) bw.format(" %s", st );
+      for ( String st : equate.mStations ) bw.format(" \"%s\"", st );
       bw.format("\n");
     }
     bw.format("  endsurvey\n");
@@ -399,11 +400,11 @@ class TdmConfig extends TdmFile
     // TODO EXPORT
     for ( TdmInput s : mInputs ) {
       String path = "../svx/" + s.getSurveyName() + ".svx";
-      bw.format("*include %s\n", path );
+      bw.format("*include \"%s\"\n", path );
     }
     for ( TdmEquate equate : mEquates ) {
       bw.format("*equate");
-      for ( String st : equate.mStations ) bw.format(" %s", toSvxStation( st ) );
+      for ( String st : equate.mStations ) bw.format(" \"%s\"", toSvxStation( st ) );
       bw.format("\n");
     }
     return "survex";
