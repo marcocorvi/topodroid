@@ -82,7 +82,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="make_walls">Paredes</string -->
   <string name="missing_station">Base inexistente</string>
   <string name="station_not_found">Base não encontrada</string>
-  <string name="station_coords">L %1$.2f N %2$.2f Z %3$.2f</string>
+  <string name="station_coords">L %1$.2f | N %2$.2f | Z %3$.2f</string>
   <string name="shot_not_found">Medida não encontrada</string>
   <string name="bad_sibling">Visada irmã inválida</string>
   <string name="bad_station">Base ruim: %1$s</string>
@@ -289,7 +289,7 @@ no campo abaixo e aperte o botão.
   <string name="error_station_number">Quantidade incorreta de bases</string>
   <string name="error_name_duplicate">Nome duplicado</string>
   <string name="error_no_section_in_section">Corte dentro de corte não suportado</string>
-  <string name="error_profile_slant_section">Corte inclinada não habilitada na visualização de perfil</string>
+  <string name="error_profile_slant_section">Corte inclinado não habilitado na visualização de perfil</string>
   <string name="error_team_required">Equipe exigida</string>
   <!-- UNUSED string name="error_dir_exists">Diretório já existe</string -->
   <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -314,7 +314,7 @@ no campo abaixo e aperte o botão.
   <string name="in">dentro</string>
   <!-- UNUSED string name="none">nenhum</string -->
   <!-- UNUSED string name="barrier_add">Ocultar visadas longe base referência</string -->
-  <string name="hide_from">Ocultar a partir</string>
+  <string name="hide_from">Ocultar a partir da base:</string>
   <!-- UNUSED string name="barrier_del">Mostrar visadas longe base referência</string -->
   <!-- UNUSED string name="hidden_add">Ocultar visadas até base referência</string -->
   <!-- UNUSED string name="hidden_del">Mostrar visadas até base referência</string -->
@@ -656,7 +656,7 @@ no campo abaixo e aperte o botão.
   <string name="stat_wens">Oeste: %1$.0f %5$s Leste: %2$.0f %5$s Norte: %3$.0f %5$s Sul: %4$.0f %5$s</string>
   <string name="stat_angle_error">Erros de ângulo: %1$.2f ± %2$.2f</string>
   <string name="shot_title">MEDIDA %1$s - %2$s</string>
-  <string name="shot_data">C %1$.2f  N %2$.1f  I %3$.1f</string>
+  <string name="shot_data">D %1$.2f | A %2$.1f | I %3$.1f</string>
   <string name="survey_split_move_title">Mover/dividir topografia</string>
   <string name="survey_stat_duplicate">Visadas duplicadas - Qt: %1$d Ext: %2$.1f %3$s</string>
   <string name="survey_stat_splay">Medidas auxiliares: %1$d</string>
@@ -874,7 +874,7 @@ no campo abaixo e aperte o botão.
   <string name="split_nothing">Nada a ser dividido</string>
   <string name="flip_shots">Virar medidas</string>
   <string name="copy_items">Copiar itens</string>
-  <string name="current_station_format">L %1$.1f N %2$.1f A %3$.1f</string>
+  <string name="current_station_format">L %1$.1f | N %2$.1f | A %3$.1f</string>
   <string name="man_preface">Prefácio</string>
   <string name="man_intro">1. Introdução</string>
   <string name="man_main">2. Tela principal</string>
@@ -1502,8 +1502,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_shot_timer_summary">Segundos de espera antes de capturar a medida</string>
   <string name="pref_beep_volume_title">Bip temporizador</string>
   <string name="pref_beep_volume_summary">Percentual de volume do bip do temporizador</string>
-  <string name="pref_extend_frac_title">Med parcial retific</string>
-  <string name="pref_extend_frac_summary">Define se as medidas podem ser incluídas com comprimentos parciais nos perfis retificados</string>
+  <string name="pref_extend_frac_title">Proj vis escala</string>
+  <string name="pref_extend_frac_summary">Define se as visadas poderão ser escalonadas ao serem projetadas nos perfis retificados</string>
   <string name="pref_recent_shot_title">Aux recentes</string>
   <string name="pref_recent_shot_summary">Destacar medidas auxiliares recentes?</string>
   <string name="pref_drawing_unit_title">Escala símbolo ponto</string>
@@ -1860,14 +1860,14 @@ no campo abaixo e aperte o botão.
   <string name="info_depth_value">%1$.1f m</string>
   <!-- TRYME string name="info_volume_value_tryme">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
   <string name="info_volume_value" copyable="all">%1$.0f m³</string>
-  <string name="info_east_value">O %1$.1f L %2$.1f</string>
-  <string name="info_north_value">S %1$.1f N %2$.1f</string>
+  <string name="info_east_value">O %1$.1f | L %2$.1f</string>
+  <string name="info_north_value">S %1$.1f | N %2$.1f</string>
   <string name="info_z_value">%1$.1f %2$.1f</string>
-  <string name="info_origin_value">x %1$.0f y %2$.0f z %3$.0f</string>
+  <string name="info_origin_value">x %1$.0f | y %2$.0f | z %3$.0f</string>
   <string name="info_origin_none">indefinido</string>
-  <string name="info_lonlat_geovalue">lon %1$.7f lat %2$.7f</string>
-  <string name="info_lonlat_prjvalue">lon %1$.1f lat %2$.1f</string>
-  <string name="info_radii_value">LO %1$.1f NS %2$.1f</string>
+  <string name="info_lonlat_geovalue">lon %1$.7f | lat %2$.7f</string>
+  <string name="info_lonlat_prjvalue">lon %1$.1f | lat %2$.1f</string>
+  <string name="info_radii_value">LO %1$.1f | NS %2$.1f</string>
   <string name="legs_surface">Superfície</string>
   <string name="legs_duplicate">Duplicadas</string>
   <string name="legs_commented">Comentadas</string>
