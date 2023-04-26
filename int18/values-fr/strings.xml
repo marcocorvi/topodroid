@@ -975,8 +975,9 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="man_overview">12. Fenêtre d\'aperçu</string>
     <string name="man_export">13. Import/export</string>
     <string name="man_project">14. Projets de cavité</string>
-    <string name="man_threed">15. 3D viewer</string>
-    <string name="man_index">16. Index</string>
+    <!-- TODO string name="man_threed">15. 3D viewer</string -->
+    <!-- TODO string name="man_content">16. Content</string -->
+    <!-- TODO string name="man_index">17. Index</string -->
     <string name="man_website">* Site Web</string>
 
     <string name="help_help">Affiche l\'aide</string>

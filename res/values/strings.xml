@@ -979,7 +979,8 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="man_export">13. Import/export</string>
     <string name="man_project">14. Cave projects</string>
     <string name="man_threed">15. 3D viewer</string>
-    <string name="man_index">16. Index</string>
+    <string name="man_content">16. Content</string>
+    <string name="man_index">17. Index</string>
     <string name="man_website" copyable="all">* Website</string>
 
     <string name="help_help">This help</string>

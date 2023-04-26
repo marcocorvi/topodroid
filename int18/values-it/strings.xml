@@ -962,7 +962,8 @@
     <string name="man_export">13. Importa/esporta</string>
     <string name="man_project">14. Progetti di grotta</string>
     <string name="man_threed">15. Visualizzatore 3D</string>
-    <string name="man_index">16. Indice</string>
+    <string name="man_content">16. Indice</string>
+    <!-- TODO string name="man_index">17. Index</string -->
     <string name="man_website">* Sito_Web</string>
 
     <string name="help_help">Questo aiuto</string>

@@ -891,7 +891,8 @@ no campo abaixo e aperte o botão.
   <string name="man_export">13. Importar/exportar</string>
   <string name="man_project">14. Projetos</string>
   <string name="man_threed">15. Visualizador 3D</string>
-  <string name="man_index">16. Índice</string>
+  <string name="man_content">16. Índice</string>
+  <!-- TODO string name="man_index">17. Index</string -->
   <string name="man_website">* Site</string>
   <string name="help_help">Esta ajuda</string>
   <!-- UNUSED string name="help_manual">Manual do usuário</string -->

@@ -965,7 +965,8 @@
     <string name="man_export">13. 输入/输出</string>
     <string name="man_project">14. 洞穴项目</string>
     <string name="man_threed">15. 3D 视图器</string>
-    <string name="man_index">16. 索引</string>
+    <string name="man_content">16. 索引</string>
+    <!-- TODO string name="man_index">17. Index</string -->
     <string name="man_website">* 网站</string>
 
     <string name="help_help">帮助</string>

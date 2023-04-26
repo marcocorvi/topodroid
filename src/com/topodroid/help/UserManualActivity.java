@@ -255,6 +255,7 @@ public class UserManualActivity extends Activity
     adapter.add( getResources().getString( R.string.man_export ) );
     adapter.add( getResources().getString( R.string.man_project ) );
     adapter.add( getResources().getString( R.string.man_threed ) );
+    adapter.add( getResources().getString( R.string.man_content ) );
     adapter.add( getResources().getString( R.string.man_index ) );
     adapter.add( getResources().getString( R.string.man_website ) );
  
@@ -294,14 +295,14 @@ public class UserManualActivity extends Activity
     // CharSequence item = ((TextView) view).getText();
     // TDLog.v( "click " + item + " pos " + pos);
     mList.setVisibility( View.GONE );
-    if ( pos <= 16 ) {
+    if ( pos <= 17 ) {
       mCloseOnBack = 0;
       try { 
         load( mTV_text, String.format(Locale.US, "manual%02d.htm", pos ) );
       } catch ( IOException e ) {
         TDLog.Error("User-man pos " + pos + " error " + e.getMessage() );
       }
-    } else if ( pos == 17 ) { // website
+    } else if ( pos == 18 ) { // website
       viewUrl( WEBSITE );
     } else {
       // getManualFromWeb();
