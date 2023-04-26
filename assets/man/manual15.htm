@@ -26,14 +26,14 @@ geo-referenced in the same coordinate system.
 
 <h4>BUTTONS</h4>
 <ul style="margin-top:0">
-<li><i>Mode</i>: either rotate the model or move the model or the light (if there is a DEM).  Two-finger always scale and translate the model.</li>
-<li><i>View</i>: either perspective or orthographic.</li>
-<li><i>Stations</i>: hide or show stations, as green points or names.</li>
-<li><i>Splays</i>: hide or sow splays, as segments or endpoints.</li>
-<li><i>Walls</i>: hide or show walls (if created).</li>
-<li><i>Surface</i>: hide or show surface DEM (if present).</li>
-<li><i>Color</i>: centerline color-coding. White, by-survey, or denivelation.</li>
-<li><i>Frame</i>: frame, either XY grid or XYZ axes.</li>
+<li><img style="border:1px solid black" width="36" height="36" src="btn_3d_turn.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_move.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_light.png"> <i>Mode</i>: either rotate the model or move the model or the light (if there is a DEM).  Two-finger always scale and translate the model.</li>
+<li><img style="border:1px solid black" width="36" height="36" src="btn_3d_orthogonal.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_perspective.png"> <i>View</i>: either orthographic or perspective.</li>
+<li><img style="border:1px solid black" width="36" height="36" src="btn_3d_station_no_dot.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_station_point_dot.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_station_name_dot.png"> <i>Stations</i>: hide or show stations, as green points or names.</li>
+<li><img style="border:1px solid black" width="36" height="36" src="btn_3d_splays_none.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_splays_line.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_splays_point.png"> <i>Splays</i>: hide or show splays, as segments or endpoints.</li>
+<li><img style="border:1px solid black" width="36" height="36" src="btn_3d_wall_no.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_wall.png"> <i>Walls</i>: hide or show walls (if created).</li>
+<li><img style="border:1px solid black" width="36" height="36" src="btn_3d_surface_off.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_surface_on.png"> <i>Surface</i>: hide or show surface DEM (if present).</li>
+<li><img style="border:1px solid black" width="36" height="36" src="btn_3d_color.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_color_survey.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_color_depth.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_color_surface.png"> <i>Color</i>: centerline color-coding: white, by-survey, denivelation, or surface.</li>
+<li><img style="border:1px solid black" width="36" height="36" src="btn_3d_frame_grid.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_frame_axes.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_frame_no.png"> <i>Frame</i>: frame, either XY grid or XYZ axes.</li>
 </ul><br>
 The button icons are adjusted to the state of the program.
 <br><p>
@@ -58,29 +58,48 @@ A few buttons have long-tap actions:
 <li><i>Viewpoint</i>: Select a point of view among top, north, east, south, and west. For example "south" means looking at the cave from the South.</li>
 <li><i>Surface</i>: Transparency and DEM file. Centreline projection on surface.</li>
 <li><i>Wall models</i>: Create or clear a wall 3D reconstruction. Toggle plan/profile projections of walls</li>
-<li><i>Sketches</i></li>
 <li><i>Options</i></li>
 <li><i>Help</i></li>
 </ul><br><p>
 
 <h4>OPTIONS</h4>
 <ul style="margin-top:0">
-<li><i>Base path</i>: Folder containing the survey files</li>
-<li><i>Selection radius</i>: Radius of selection for stations [1.0]</li>
-<li><i>Station dialog</i>: whether to open the station dialog for the selected station [n].</li>
-<li><i>Station points</i>: whether to always display station points (green) [n].</li>
-<li><i>Top grid</i>: Show the grid on the top [n].</li>
-<li><i>Grid extent</i>: amount of grid extent around the survey [10 cells].</li>
-<li><i>Below horizon view</i>: whether to allow viewpoints below the horizon [n].</li>
-<li><i>DEM buffer</i>: Extent of surface model around the survey on loading the surface model from a DEM file.</li>
-<li><i>DEM max size</i>: maximum size of surface DEM in each direction [400 cells].</li>
-<li><i>DEM reduction</i>: how to reduce the DEM if too large (subsample or clip) [subsample].</li>
-<li><i>All splay</i>: Whether to use all the splays for the walls</li>
-<li><i>Split triangles</i>: Whether to split intersecting wall triangles</li>
-<li><i>Randomize points</i>: Add a small random vector to splays</li>
-<li><i>Stretch walls</i>: Shift wall points by a small quantity along the leg</li>
-<li><i>Powercrust</i>: Algorithm "delta" parameter</li>
-<li><i>Bluetooth device</i>: name of the Bluetooth device.</li>
+    <li><i>Work Directory</i>: Folder containing the survey files</li>
+    <li>
+        <u>3D Viewer</u>:
+        <ul>
+            <li><i>Below horizon view</i>: whether to allow viewpoints below the horizon [n].</li>
+            <li><i>Station points</i>: whether to always display station points (green) [n].</li>
+            <li><i>Station point size</i>: radius of station points [8 pxl].</li>
+            <li><i>Station text size</i>: size of station names [20 pt].</li>
+            <li><i>Selection radius</i>: Radius of selection for stations [1.0]</li>
+            <li><i>Distance message</i>: show distance message instead of dialog [n]</li>
+            <li><i>Station dialog</i>: whether to open the station dialog for the selected station instead of box [n].</li>
+            <li><i>Top grid</i>: Show the grid on the top [n].</li>
+            <li><i>Grid extent</i>: amount of grid extent around the survey [10 cells].</li>
+            <li>
+                <u>DEM</u>:
+                <ul>
+                    <li><i>DEM buffer</i>: Extent of surface model around the survey on loading the surface model from a DEM file.</li>
+                    <li><i>DEM max size</i>: maximum size of surface DEM in each direction [400 cells].</li>
+                    <li><i>DEM reduction</i>: how to reduce the DEM if too large (subsample or clip) [subsample].</li>
+                </ul>
+            </li>
+            <li>
+                <u>Wall Model</u>:
+                <ul>
+                    <li><i>Splay usage</i>: Which splays to use (none, normal, x-sections) [normal]</li>
+                    <li><i>All splay</i>: Whether to use all the splays for the walls</li>
+                    <li><i>Projected splays</i>: Whether to use projected splays on a normal plane [n]</li>
+                    <li><i>Splay threshold</i>: splays outside the shot to keep [0.5]</li>
+                    <li><i>Split triangles</i>: Whether to split intersecting wall triangles</li>
+                    <li><i>Randomize points</i>: Add a small random vector to splays</li>
+                    <li><i>Stretch walls</i>: Shift wall points by a small quantity along the leg</li>
+                    <!-- <li><i>Powercrust</i>: Algorithm "delta" parameter</li> -->
+                </ul>
+            </li>
+        </ul>
+    </li>
 </ul><br><p>
 
 <b>TITLE LINE</b><br>
@@ -119,13 +138,13 @@ When uncolored the survey legs are white, the surface legs green, the duplicate 
 and the commented legs light blue.<br>
 
 The "surface", "duplicate", and "commented" legs can be turned on/off with the <i>leg dialog</i> which
-is opened by a long-tap on the fourth button.
+is opened by a long-tap on the <i>Frame</i> button (last).
 <br><p>
 
 <b>WALLS</b><br>
 The wall model is not computed automatically when the file is opened, but it must be
 requested by the user through the "wall" menu.
-There are three models: <i>simple hull</i>, <i>pseudo convex-hull</i>, and <i>powercrust</i>.
+There are two models: <i>simple hull</i>, and <i>pseudo convex-hull</i>.
 The first two are suitable when the splay are not dense. The third one is for dense splays.<br>
 
 The wall model depends on the number and the quality of the splays.
@@ -134,9 +153,9 @@ Poor splays will result in a poor model.<br>
 The computation is done in background.
 When done the wall can be displayed with the "wall" button.<br><p>
 
-The powercrust model includes also the projection of the walls on the horizontal plane (plan view), and on a vertical curtain
+<!-- The powercrust model includes also the projection of the walls on the horizontal plane (plan view), and on a vertical curtain
 along the survey (profile view). Their display is enabled through the "walls" menu.
-<br><p>
+<br><p> -->
 
 <b>SURFACE</b><br>
 If the (Therion or Loch) model contains surface data (Digital Elevation Model), the surface can be displayed either gray or
@@ -183,7 +202,7 @@ The selected station is highlighted red, and its coordinates are shown in a blue
 If the model has a DEM, the depth of the station below the surface is included.<br>
 To unselect the station tap on the station again or on the bar.<br><p>
 
-To measure distances between the selected station and another station, check the "measure" button in the bottom bar,
+To measure distances between the selected station and another station, check the <img style="border:1px solid black" width="36" height="36" src="btn_3d_measure_ruler_off.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_measure_ruler_on.png"> "measure" button in the bottom bar,
 and tap on the other station.
 The 3D distance between the two stations, its East, North, and vertical components, and the plane 2D distance are
 displayed in a dialog.
@@ -191,7 +210,7 @@ If the two stations are connected along the centerline the "cave" distance is al
 and the cave-path between them is highlighted green.<br>
 Optionally, the values can be displayed in a brief message box instead of a dialog.  <br><p>
 
-When the "station" button in the bottom bar is checked, the station position on the screen 
+When the <img style="border:1px solid black" width="36" height="36" src="btn_3d_measure_station_off.png"><img style="border:1px solid black" width="36" height="36" src="btn_3d_measure_station_on.png"> "station" button in the bottom bar is checked, the station position on the screen 
 if fixed under rotations and the
 selected station is highlighted orange.
 <br><p>

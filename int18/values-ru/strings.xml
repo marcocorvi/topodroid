@@ -110,7 +110,7 @@
     <string name="bric_ble">BLE %1$s</string>
     <string name="bric_fw">Прошивка %1$s</string>
     <string name="bric_hw">Аппаратное обеспечение %1$s</string>
-    <string name="bric_battery">Батарея %1$d</string>
+    <string name="bric_battery">Батарея %1$d %%</string>
     <string name="bric_battery_wait">Батарея &#8230;</string>
     <string name="bric_reset_time">Сброс таймера</string>
     <string name="bric_clear_memory">Очистить память</string>

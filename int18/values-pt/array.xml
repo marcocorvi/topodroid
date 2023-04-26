@@ -2,9 +2,9 @@
 <!--suppress CheckTagEmptyBody -->
 <resources>
   <string-array name="bricMode">
-    <item name="prim_only">Somente prim.</item>
-    <item name="all">Todos inclusive índice</item>
-    <item name="no_index">Todos exceto índice</item>
+    <item name="prim_only">Só principais</item>
+    <item name="all">Todos com índice</item>
+    <item name="no_index">Todos sem índice</item>
   </string-array>
   <string-array name="geoImportApp">
     <item name="none">nenhum</item>

@@ -110,7 +110,7 @@
     <string name="bric_ble">BLE %1$s</string>
     <string name="bric_fw">固件 %1$s</string>
     <string name="bric_hw">硬件 %1$s</string>
-    <string name="bric_battery">电池 %1$d</string>
+    <string name="bric_battery">电池 %1$d %%</string>
     <string name="bric_battery_wait">电池 &#8230;</string>
     <string name="bric_reset_time">重置时间</string>
     <string name="bric_clear_memory">清除存储</string>

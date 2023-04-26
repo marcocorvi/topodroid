@@ -110,7 +110,7 @@
     <string name="bric_ble">BLE %1$s</string>
     <string name="bric_fw">Firmware %1$s</string>
     <string name="bric_hw">Hardware %1$s</string>
-    <string name="bric_battery">Batteria %1$d</string>
+    <string name="bric_battery">Batteria %1$d %%</string>
     <string name="bric_battery_wait">Batteria &#8230;</string>
     <string name="bric_reset_time">Reset ora</string>
     <string name="bric_clear_memory">Pulisci memoria</string>
