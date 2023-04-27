@@ -963,8 +963,8 @@
     <string name="man_export">13. Импорт-Экспорт</string>
     <string name="man_project">14. Проект пещеры</string>
     <string name="man_threed">15. Просмотр в 3D</string>
-    <string name="man_content">16. Индекс</string>
-    <!-- TODO string name="man_index">17. Index</string -->
+    <string name="man_content">16. Оглавление</string>
+    <string name="man_index">17. Индекс</string>
     <string name="man_website">* Website</string>
 
     <string name="help_help">Помощь</string>
