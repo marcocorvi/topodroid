@@ -67,6 +67,9 @@ public class TDLevel
     overExpert   = mLevel > EXPERT;
     // overTester  = mLevel > TESTER;
     // FIXME_DEVELOPER
-    if ( overExpert && debug ) overTester = true;
+    if ( overExpert && debug ) {
+      overTester = true;
+      TglParser.setWallMax();
+    }
   }
 }

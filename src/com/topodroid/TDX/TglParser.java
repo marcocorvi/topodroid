@@ -67,7 +67,12 @@ public class TglParser
   public static final int WALL_TUBE       = 4;
   public static final int WALL_BUBBLE     = 5;
   public static final int WALL_DELAUNAY   = 6; // not included
-  public static final int WALL_MAX        = 3;
+  public static       int WALL_MAX        = 3;
+
+  public static void setWallMax()
+  {
+    WALL_MAX = (TDLevel.overTester? 6 : 3);
+  }
 
   public static final int SPLAY_USE_SKIP     = 0;
   public static final int SPLAY_USE_NORMAL   = 1;

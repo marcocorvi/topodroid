@@ -124,8 +124,6 @@ class DialogWalls extends MyDialog
     }
 
     mCBconvexhull.setOnClickListener( this );
-
-
   }
 
   @Override
