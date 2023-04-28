@@ -96,7 +96,7 @@ class ImportParser
 
   int mLineCnt;  // line counter
 
-  Pattern pattern = Pattern.compile( "\\s+" );
+  private static Pattern pattern = Pattern.compile( "\\s+" );
 
   /** cstr
    * @param apply_declination  whether to apply the declination read from the file

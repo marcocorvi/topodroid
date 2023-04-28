@@ -76,18 +76,30 @@ public class TDString
     return (str == null)? null : str.replaceAll("\\s+", " ").split(" ");
   }
 
+  /** split a line on spaces taking into account quoted strings
+   * @param str   input line
+   * @return array of string tokens
+   */ 
   public static String[] splitOnStrings( String str )
   {
     ArrayList< String > strs = new ArrayList<>();
     int len = str.length();
-    int inString = 0; // 0 no, 1 normal, 2 quoted
+    int inString = 0; // 0 no, 1 normal, 2 quoted, 3 double-quoted
     int pos = -1;
     for ( int i = 0; i < len; ++i ) {
       char ch = str.charAt( i );
       if ( inString == 0 ) {
         if ( ! Character.isSpaceChar( ch ) ) {
+          if ( ch == '\'' ) {
+            inString = 2;
+            ++i;
+          } else if ( ch == '"' ) {
+            inString = 3;
+            ++i;
+          } else {
+            inString = 1;
+          }
           pos = i;
-          inString = ( ch == '"' )? 2 : 1;
         }
       } else if ( inString == 1 ) {
         if ( Character.isSpaceChar( ch ) ) {
@@ -98,20 +110,28 @@ public class TDString
           }
         }
       } else if ( inString == 2 ) {
+        if ( ch == '\'' ) {
+          inString = 0;
+          if ( pos >= 0 ) {
+            if ( i > pos+1 ) strs.add( str.substring( pos, i ) );
+            pos = -1;
+          }
+        }
+      } else if ( inString == 3 ) {
         if ( ch == '"' ) {
           inString = 0;
           if ( pos >= 0 ) {
-            if ( i > pos + 1 ) strs.add( str.substring( pos+1, i ) );
+            if ( i > pos+1 ) strs.add( str.substring( pos, i ) );
             pos = -1;
           }
         }
       }
     }
-    if ( pos >= 0 && inString == 1 ) {
+    if ( inString == 1 && pos >= 0 && pos < len ) {
       strs.add( str.substring( pos ) );
     }
     int cnt = strs.size();
-    TDLog.v("Split On Strings <" + str + "> " + cnt );
+    // TDLog.v("Split On Strings <" + str + "> " + cnt );
     if ( cnt == 0 ) return null;
     String[] ret = new String[ cnt ];
     for ( int i=0; i<cnt; ++i ) ret[i] = (String)strs.get( i );

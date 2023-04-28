@@ -98,6 +98,7 @@ class ParserVisualTopoX extends ImportParser
    */
   static private String getValue( String key, String end, String line )
   {
+    // TDLog.v("VTopo X: get string in <" + line + "> key " + key + " end " + end );
     int pos = line.indexOf( key );
     if ( pos < 0 ) return null;
     pos += key.length();
@@ -293,7 +294,7 @@ class ParserVisualTopoX extends ImportParser
               } else if ( "Gra".equals( value ) ) {
                 ub = 0.9f; // 360/400
               } else if ( "Degd".equals( value ) ) {
-                TDLog.v("Degd: nothing"); // ub = 1, dmb = false
+                TDLog.v("VTopo X: Degd: nothing"); // ub = 1, dmb = false
               }
             }
           }
@@ -304,7 +305,7 @@ class ParserVisualTopoX extends ImportParser
               } else if ( "Gra".equals( value ) ) {
                 uc = 0.9f; // 360/400
               } else if ( "Degd".equals( value ) ) {
-                TDLog.v("Degd: nothing"); // uc = 1, dmc = false
+                TDLog.v("VTopo X: Degd: nothing"); // uc = 1, dmc = false
               }
             }
           }
@@ -349,7 +350,7 @@ class ParserVisualTopoX extends ImportParser
           String club = getValue("<Club>", "</Club>", line );
           if ( club != null ) mTeam = club;
         } else if ( line.startsWith("<Entree" ) && inCavite ) {
-          TDLog.v("Entree: TODO");
+          TDLog.v("VTopo X: Entree: TODO");
         } else if ( line.startsWith("<Configuration>") ) {
           break;
         }
