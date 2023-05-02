@@ -4311,6 +4311,7 @@ public class TDExporter
       // boolean duplicate = false;
       // boolean surface   = false;
       LRUD lrud;
+      boolean at_from = false;
 
       int nr_data = 0;
       for ( DBlock item : list ) {
@@ -4324,7 +4325,7 @@ public class TDExporter
             }
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
-              lrud = computeLRUD( ref_item, list, true );
+              lrud = computeLRUD( ref_item, list, at_from );
               // FIXME_P pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
               // FIXME_P printShotToPlg( pw, leg, lrud, ref_item.mComment );
               polygon_data[nr_data] = new PolygonData( ref_item.mFrom, ref_item.mTo, leg, lrud, ref_item.mComment );
@@ -4338,7 +4339,7 @@ public class TDExporter
         } else { // with FROM station
           if ( TDString.isNullOrEmpty( to ) ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write previous leg shot
-              lrud = computeLRUD( ref_item, list, true );
+              lrud = computeLRUD( ref_item, list, at_from );
               // FIXME_P pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
               // FIXME_P printShotToPlg( pw, leg, lrud, ref_item.mComment );
               polygon_data[nr_data] = new PolygonData( ref_item.mFrom, ref_item.mTo, leg, lrud, ref_item.mComment );
@@ -4350,7 +4351,7 @@ public class TDExporter
             }
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
-              lrud = computeLRUD( ref_item, list, true );
+              lrud = computeLRUD( ref_item, list, at_from );
               // FIXME_P pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
               // FIXME_P printShotToPlg( pw, leg, lrud, ref_item.mComment );
               polygon_data[nr_data] = new PolygonData( ref_item.mFrom, ref_item.mTo, leg, lrud, ref_item.mComment );
@@ -4365,7 +4366,7 @@ public class TDExporter
         }
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
-        lrud = computeLRUD( ref_item, list, true );
+        lrud = computeLRUD( ref_item, list, at_from );
         // FIXME_P pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
         // FIXME_P printShotToPlg( pw, leg, lrud, ref_item.mComment );
         polygon_data[nr_data] = new PolygonData( ref_item.mFrom, ref_item.mTo, leg, lrud, ref_item.mComment );
