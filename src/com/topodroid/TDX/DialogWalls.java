@@ -65,7 +65,7 @@ class DialogWalls extends MyDialog
 
     Button buttonOK     = (Button) findViewById( R.id.button_ok );
     Button buttonCancel = (Button) findViewById( R.id.button_cancel );
-    // Button buttonSketch = (Button) findViewById( R.id.button_sketch );
+    // Button buttonSketch = (Button) findViewById( R.id.button_sketch ); // C3D
 
     buttonOK.setOnClickListener( this );
     buttonCancel.setOnClickListener( this );
@@ -196,7 +196,7 @@ class DialogWalls extends MyDialog
       } else {
         GlModel.projMode = GlModel.PROJ_NONE;
       }
-    // } else if ( v.getId() == R.id.button_sketch ) {
+    // } else if ( v.getId() == R.id.button_sketch ) { // C3D
     //   (new DialogSketch( mTopoGl, mTopoGl )).show();
     // } else if ( v.getId() == R.id.button_cancel ) {
     }

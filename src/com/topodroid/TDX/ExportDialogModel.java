@@ -128,7 +128,7 @@ public class ExportDialogModel extends MyDialog
   @Override
   public void onClick(View v) 
   {
-    // TDLog.v("C3D selected " + mSelected );
+    // TDLog.v("TOPOGL selected " + mSelected );
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
       // setOptions(); // not necessary

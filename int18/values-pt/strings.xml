@@ -1828,7 +1828,7 @@ no campo abaixo e aperte o botão.
   <string name="cmenu_ico">Diagrama Rose 3D</string>
   <string name="cmenu_rose">Diagrama Rose 2D</string>
   <string name="cmenu_wall">Paredes</string>
-  <string name="cmenu_sketch">CROQUIs</string>
+  <!-- UNUSED string name="cmenu_sketch">CROQUIs</string -->
   <!-- UNUSED string name="cmenu_fractal" translatable="false">FRACTAL DIM.</string -->
   <string name="illegal_value">Valor inválido</string>
   <!-- UNUSED string name="info_title">INFO</string -->
@@ -1903,12 +1903,12 @@ no campo abaixo e aperte o botão.
   <string name="texture_failed">Falha ao carregar textura</string>
   <string name="texture_ok">Carregar textura</string>
   <string name="texture">DTM</string>
-  <string name="sketch_load">Carregar</string>
-  <string name="sketch_failed">Falha ao carregar croqui</string>
-  <string name="sketch_ok">Carregar croqui</string>
+  <!-- UNUSED string name="sketch_load">Carregar</string -->
+  <!-- UNUSED string name="sketch_failed">Falha ao carregar croqui</string -->
+  <!-- UNUSED string name="sketch_ok">Carregar croqui</string -->
   <string name="ctitle">%1$s  Inclinação: %2$.0f  Azimute: %3$.0f</string>
   <string name="ctitle_surface_alpha">Superfície DEM</string>
-  <string name="ctitle_sketches">Croquis</string>
+  <!-- UNUSED string name="ctitle_sketches">Croquis</string -->
   <string name="ctitle_sketch_h" copyable="pt">[H]</string>
   <string name="ctitle_sketch_v" copyable="pt">[V]</string>
   <string name="ctitle_legs">Visadas visíveis</string>
@@ -1945,7 +1945,7 @@ no campo abaixo e aperte o botão.
   <string name="select_export_file">Selecione arquivo exportação</string>
   <string name="select_dem_file">Selecione um arquivo DEM:</string>
   <string name="select_texture_file">Selecione o arquivo de textura:</string>
-  <string name="select_sketch_file">Selecione arquivo croqui</string>
+  <!-- UNUSED string name="select_sketch_file">Selecione arquivo croqui</string -->
   <string name="view_title">PONTOS DE VISTA</string>
   <string name="view_top">Topo</string>
   <string name="view_east">Leste</string>
@@ -1968,7 +1968,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="no_planview">No plan view</string -->
   <!-- UNUSED string name="no_surface">No surface DEM</string -->
   <string name="no_model">Nenhum modelo 3D</string>
-  <string name="no_topodroid_model">Não é um modelo TopoDroidX</string>
+  <!-- UNUSED string name="no_topodroid_model">Não é um modelo TopoDroidX</string -->
   <!-- UNUSED string name="error_file_not_found">Erro: arquivo não encontrado</string -->
   <!-- UNUSED string name="error_file_not_readable">Erro: arquivo ilegível</string -->
   <string name="error_file_read">Erro: leitura arquivo %1$s falhou</string>
@@ -1985,10 +1985,10 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="warning_not_las">Warning: not las file %1$s</string -->
   <!-- UNUSED string name="warning_not_cgal">Warning: not CGAL text file %1$s</string -->
   <!-- UNUSED string name="warning_not_stl">Warning: not stl file %1$s</string -->
-  <string name="warning_no_cwd">Alerta: diretório inicial inexistente</string>
+  <!-- UNUSED string name="warning_no_cwd">Alerta: diretório inicial inexistente</string -->
   <!-- UNUSED string name="warning_no_file">Warning: no 3d file found</string -->
   <!-- UNUSED string name="warning_empty_cwd">Warning: empty base path</string -->
-  <string name="warning_no_parent">Alerta: impossível acessar diretório pai</string>
+  <!-- UNUSED string name="warning_no_parent">Alerta: impossível acessar diretório pai</string -->
   <string name="warning_nogrant_camera">Permissão câmera não consedida</string>
   <string name="no_permissions">O app não pode funcionar sem as permissões necessárias</string>
   <string name="done_convexhull">Paredes dos planos convexos prontas</string>

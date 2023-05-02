@@ -13,7 +13,7 @@ package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
 // import com.topodroid.c3in.ParserBluetooth;
-import com.topodroid.c3in.ParserSketch;
+// import com.topodroid.c3in.ParserSketch; // NO_C3D
 import com.topodroid.c3out.ExportGltf;
 import com.topodroid.c3out.ExportData;
 
@@ -718,10 +718,11 @@ public class GlRenderer implements Renderer
     }
   }
 
-  void notifySketch( ParserSketch sketch_parser )
-  {
-    if ( mModel != null ) mModel.prepareSketch( sketch_parser );
-  }
+  // NO_C3D
+  // void notifySketch( ParserSketch sketch_parser )
+  // {
+  //   if ( mModel != null ) mModel.prepareSketch( sketch_parser );
+  // }
 
   void notifyDEM( ParserDEM dem ) 
   {
@@ -757,15 +758,16 @@ public class GlRenderer implements Renderer
     if ( mModel != null ) mModel.clearAll();
   }
 
-  void updateSketches()
-  {
-    if ( mModel != null ) mModel.updateSketches();
-  }
+  // ------- NO_C3D ----------------------------------------------
+  // void updateSketches() // NO_C3D
+  // {
+  //   if ( mModel != null ) mModel.updateSketches();
+  // }
 
-  List< GlSketch > getSketches()
-  {
-    return ( mModel != null )? mModel.getSketches() : null;
-  }
+  // List< GlSketch > getSketches() // NO_C3D
+  // {
+  //   return ( mModel != null )? mModel.getSketches() : null;
+  // }
 
   // user null vector to clear location
   void setLocation( Vector3D v ) // WITH-GPS

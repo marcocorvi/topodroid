@@ -22,8 +22,9 @@ manual12,
 manual13,
 manual14,
 manual15,
-# manual16,
-# manual17,
+manual16,
+# manual17, # moved at the end
+# manual18,
 page_setup,
 page_subdirs,
 page_perms,
@@ -157,12 +158,12 @@ page_3d_surface,
 page_3d_walls,
 page_3d_rose,
 page_3d_ico,
-page_3d_sketches,
-page_3d_sketch,
+# page_3d_sketches,
+# page_3d_sketch,
 # page_3d_fractal,
 page_3d_export,
-# manual16,
 # page_sketch_mode,
+manual17, # moved at the end
 );
 
 @month = qw( Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec );

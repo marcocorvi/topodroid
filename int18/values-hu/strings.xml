@@ -1975,7 +1975,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="cmenu_ico">3D-RÓZSA DIAGRAMM</string>
     <string name="cmenu_rose">RÓZSA DIAGRAMM</string>
     <string name="cmenu_wall">FALAK</string>
-    <string name="cmenu_sketch">VÁZLATOK</string>
+    <!-- UNUSED string name="cmenu_sketch">VÁZLATOK</string -->
     <!-- NO string name="cmenu_fractal">FRAKTÁL SZÁMÍTÁS</string -->
 
     <!-- NO string name="fractal_title">Fraktál számítás</string -->
@@ -2064,13 +2064,13 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="texture_failed">Textúra betöltés hiba</string>
     <string name="texture_ok">Textúra fájl olvasás</string>
     <string name="texture">DTM</string>
-    <string name="sketch_load">Beolvasás</string>
-    <string name="sketch_failed">Vázlat beolvasás hiba</string>
-    <string name="sketch_ok">Vázlat adat olvasás</string>
+    <!-- UNUSED string name="sketch_load">Beolvasás</string -->
+    <!-- UNUSED string name="sketch_failed">Vázlat beolvasás hiba</string -->
+    <!-- UNUSED string name="sketch_ok">Vázlat adat olvasás</string -->
 
     <string name="ctitle">%1$s  Lejtés: %2$.0f  Irány: %3$.0f</string>
     <string name="ctitle_surface_alpha">Felszín átlátszóság</string>
-    <string name="ctitle_sketches">Vázlatok</string>
+    <!-- UNUSED string name="ctitle_sketches">Vázlatok</string -->
     <string name="ctitle_sketch_h">[V]</string>
     <string name="ctitle_sketch_v">[F]</string>
     <string name="ctitle_legs">Poligon láthatóság</string>
@@ -2112,7 +2112,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="select_export_file">Válassz export fájlt</string>
     <string name="select_dem_file">Válassz egy DEM fájlt</string>
     <string name="select_texture_file">Válassz egy textúra fájlt</string>
-    <string name="select_sketch_file">Válassz egy vázlat fájlt</string>
+    <!-- UNUSED string name="select_sketch_file">Válassz egy vázlat fájlt</string -->
 
     <string name="view_title">NÉZŐPONTOK</string>
     <string name="view_top">Felső</string>
@@ -2141,7 +2141,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="no_planview">Nincs alaprajz nézet</string -->
     <!-- UNUSED string name="no_surface">Nincs felszín DEM</string -->
     <string name="no_model">Nincs 3D modell</string>
-    <string name="no_topodroid_model">Nen egy TopoDroid modell</string>
+    <!-- UNUSED string name="no_topodroid_model">Nen egy TopoDroid modell</string -->
 
     <!-- UNUSED string name="error_file_not_found">Hiba: %1$s fájl nem található</string -->
     <!-- UNUSED string name="error_file_not_readable">Hiba: %1$s fájl nem olvasható</string -->
@@ -2161,10 +2161,10 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="warning_not_las">Figyelem: nem las fájl %1$s</string -->
     <!-- UNUSED string name="warning_not_cgal">Figyelem: nem CGAL text fájl %1$s</string -->
     <!-- UNUSED string name="warning_not_stl">Figyelem: nem stl fájl %1$s</string -->
-    <string name="warning_no_cwd">Figyelem: nincs alap könyvtár</string>
+    <!-- UNUSED string name="warning_no_cwd">Figyelem: nincs alap könyvtár</string -->
     <!-- UNUSED string name="warning_no_file">Figyelem: nem talál 3d fájlt</string -->
     <!-- UNUSED string name="warning_empty_cwd">Figyelem: üres alap könyvtár</string -->
-    <string name="warning_no_parent">Figyelem: nem tud felsőbb könyvtárba lépni</string>
+    <!-- UNUSED string name="warning_no_parent">Figyelem: nem tud felsőbb könyvtárba lépni</string -->
     <string name="warning_nogrant_camera">A kamera engedély nincs megadva</string>
     <string name="no_permissions">Az alkalmazás nem tud futni szükséges hozzáférések nélkül</string>
 

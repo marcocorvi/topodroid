@@ -1956,7 +1956,7 @@
     <string name="cmenu_ico">Ico диаграмма</string>
     <string name="cmenu_rose">Rose диаграмма</string>
     <string name="cmenu_wall">Режим стен</string>
-    <string name="cmenu_sketch">АБРИСЫ</string>
+    <!-- UNUSED string name="cmenu_sketch">АБРИСЫ</string -->
     <!-- NO string name="cmenu_fractal">Кол-во фракталофф</string -->
 
     <!-- NO string name="fractal_title">Кол-во фракталов</string -->
@@ -2047,13 +2047,13 @@
     <string name="texture_failed">Ошибка загрузки текстуры</string>
     <string name="texture_ok">Прочитать файл текстуры</string>
     <string name="texture">DTM</string>
-    <string name="sketch_load">Загрузка</string>
-    <string name="sketch_failed">Ошибка загрузки абрисов</string>
-    <string name="sketch_ok">Прочитаны данные абрисов</string>
+    <!-- UNUSED string name="sketch_load">Загрузка</string -->
+    <!-- UNUSED string name="sketch_failed">Ошибка загрузки абрисов</string -->
+    <!-- UNUSED string name="sketch_ok">Прочитаны данные абрисов</string -->
 
     <string name="ctitle">%1$s  Наклон: %2$.0f  Азимут: %3$.0f</string>
     <string name="ctitle_surface_alpha">Прозрачность поверхности</string>
-    <string name="ctitle_sketches">Абрисы</string>
+    <!-- UNUSED string name="ctitle_sketches">Абрисы</string -->
     <string name="ctitle_sketch_h">[Гор]</string>
     <string name="ctitle_sketch_v">[Верт]</string>
     <string name="ctitle_legs">Видимость нитки хода</string>
@@ -2090,7 +2090,7 @@
     <string name="select_export_file">Выберите экспортированный файл</string>
     <string name="select_dem_file">Выбрать файл DEM:</string>
     <string name="select_texture_file">Выбрать файл текстуры:</string>
-    <string name="select_sketch_file">Выберите файл абриса</string>
+    <!-- UNUSED string name="select_sketch_file">Выберите файл абриса</string -->
 
     <string name="view_title">ТОЧКИ ПРОСМОТРА</string>
     <string name="view_top">Сверху</string>
@@ -2119,7 +2119,7 @@
     <!-- UNUSED string name="no_planview">Нет проекции плана</string -->
     <!-- UNUSED string name="no_surface">Нет DEM поверхности</string -->
     <string name="no_model">Нет 3D модели</string>
-    <string name="no_topodroid_model">Модель не из TopoDroid</string>
+    <!-- UNUSED string name="no_topodroid_model">Модель не из TopoDroid</string -->
 
     <!-- UNUSED string name="error_file_not_found">Ошибка: файл не обнаружен %1$s</string -->
     <!-- UNUSED string name="error_file_not_readable">Ошибка: файл не читается %1$s</string -->
@@ -2139,10 +2139,10 @@
     <!-- UNUSED string name="warning_not_las">Warning: not las file %1$s</string -->
     <!-- UNUSED string name="warning_not_cgal">Warning: not CGAL text file %1$s</string -->
     <!-- UNUSED string name="warning_not_stl">Warning: not stl file %1$s</string -->
-    <string name="warning_no_cwd">Внимание: отсутствует начальная директория</string>
+    <!-- UNUSED string name="warning_no_cwd">Внимание: отсутствует начальная директория</string -->
     <!-- UNUSED string name="warning_no_file">Внимание: 3d файл не обнаружен</string -->
     <!-- UNUSED string name="warning_empty_cwd">Внимание: не задан рабочий каталог</string -->
-    <string name="warning_no_parent">Внимание: невозможно перейти на каталог выше</string>
+    <!-- UNUSED string name="warning_no_parent">Внимание: невозможно перейти на каталог выше</string -->
     <string name="warning_nogrant_camera">Разрешение камеры не было предоставлено</string>
     <string name="no_permissions">Приложение не может работать без необходимых разрешений</string>
 

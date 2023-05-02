@@ -1957,7 +1957,7 @@
     <string name="cmenu_ico">Ico-diagramma</string>
     <string name="cmenu_rose">Diagramma a rosa</string>
     <string name="cmenu_wall">Modello pareti</string>
-    <string name="cmenu_sketch">Disegni</string>
+    <!-- UNUSED string name="cmenu_sketch">Disegni</string -->
     <!-- NO string name="cmenu_fractal">Dim. frattale</string -->
 
     <!-- NO string name="fractal_title">Computo frattale</string -->
@@ -2048,13 +2048,13 @@
     <string name="texture_failed">ERRORE: caricamento DTM</string>
     <string name="texture_ok">Caricato file DTM</string>
     <string name="texture">DTM</string>
-    <string name="sketch_load">carica</string>
-    <string name="sketch_failed">ERRORE: caricamento disegno</string>
-    <string name="sketch_ok">Lettura disegno</string>
+    <!-- UNUSED string name="sketch_load">carica</string -->
+    <!-- UNUSED string name="sketch_failed">ERRORE: caricamento disegno</string -->
+    <!-- UNUSED string name="sketch_ok">Lettura disegno</string -->
 
     <string name="ctitle">%1$s  Clino: %2$.0f  Azimut: %3$.0f</string>
     <string name="ctitle_surface_alpha">Trasparenza DEM</string>
-    <string name="ctitle_sketches">Disegni</string>
+    <!-- UNUSED string name="ctitle_sketches">Disegni</string -->
     <!-- TODO string name="ctitle_sketch_h">[H]</string -->
     <!-- TODO string name="ctitle_sketch_v">[V]</string -->
     <string name="ctitle_legs">Battute</string>
@@ -2097,7 +2097,7 @@
     <string name="select_export_file">Seleziona file export</string>
     <string name="select_dem_file">Seleziona DEM</string>
     <string name="select_texture_file">Seleziona tessitura</string>
-    <string name="select_sketch_file">Seleziona disegno</string>
+    <!-- UNUSED string name="select_sketch_file">Seleziona disegno</string -->
 
     <string name="view_title">PUNTI DI VISTA</string>
     <string name="view_top">Sopra</string>
@@ -2126,7 +2126,7 @@
     <!-- UNUSED string name="no_planview">Nessuna vista in pianta</string -->
     <!-- UNUSED string name="no_surface">Nessun modello DEM</string -->
     <string name="no_model">Nessun modello 3D</string>
-    <string name="no_topodroid_model">Modello non TopoDroid</string>
+    <!-- UNUSED string name="no_topodroid_model">Modello non TopoDroid</string -->
 
     <!-- UNUSED string name="error_file_not_found">Errore: file %1$s non trovato</string -->
     <!-- UNUSED string name="error_file_not_readable">Errore: file %1$s non leggibile</string -->
@@ -2146,8 +2146,8 @@
     <!-- UNUSED string name="warning_not_las">Attenzione: file %1$s non LAS</string -->
     <!-- UNUSED string name="warning_not_cgal">Attenzione: file %1$s non CGAL</string -->
     <!-- UNUSED string name="warning_not_stl">Attenzione: file %1$s non STL</string -->
-    <string name="warning_no_cwd">Attenzione: folder di base non esistente</string>
-    <string name="warning_no_parent">Attenzione: non possibile salire di folder</string>
+    <!-- UNUSED string name="warning_no_cwd">Attenzione: folder di base non esistente</string -->
+    <!-- UNUSED string name="warning_no_parent">Attenzione: non possibile salire di folder</string -->
     <string name="warning_nogrant_camera">Permesso utilizzo fotocamera non concesso</string>
     <string name="no_permissions">L\'app non puó funzionare senza i permessi richiesti</string>
 

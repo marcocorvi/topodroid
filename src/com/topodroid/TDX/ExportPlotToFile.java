@@ -139,11 +139,11 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
               bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
               // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
               (new DrawingTunnel()).writeXml( bw, mInfo, mNum, mCommand, mType );
-            } else if ( mExt.equals("c3d") ) {
-              // TDLog.v("C3D export to Cave3D: " + mFullName );
-              bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
-              // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
-              ret = DrawingIO.exportCave3D( bw, mCommand, mNum, mPlotInfo, mFixedInfo, mFullName );
+            // } else if ( mExt.equals("c3d") ) { // NO_C3D
+            //   // TDLog.v("C3D export to Cave3D: " + mFullName );
+            //   bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
+            //   // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+            //   ret = DrawingIO.exportCave3D( bw, mCommand, mNum, mPlotInfo, mFixedInfo, mFullName );
             } else {
               TDLog.Error("EXPORT unsupported extension " + mExt );
             } 

@@ -32,7 +32,7 @@ import com.topodroid.c3in.ParserDat;
 import com.topodroid.c3in.Parser3d;
 import com.topodroid.c3in.ParserLox;
 // import com.topodroid.c3in.ParserBluetooth;
-import com.topodroid.c3in.ParserSketch;
+// import com.topodroid.c3in.ParserSketch; // NO_C3D
 import com.topodroid.c3in.ParserException;
 
 import com.topodroid.c3out.ExportData;
@@ -662,7 +662,8 @@ public class TopoGL extends Activity
 
   // final static int MENU_BT   =  2; // bluetooth
   // // final static int MENU_WALL =  8; // bluetooth
-  final static int MENU_C3D         =  9; // sketch
+
+  // final static int MENU_C3D         =  9; // sketch // NO_C3D
   // final static int MENU_TEMPERATURE = 10; // temperature
   // final static int MENU_FRACTAL     = 11; // fractal
 
@@ -681,7 +682,7 @@ public class TopoGL extends Activity
     R.string.cmenu_viewpoint,  // 6
     R.string.cmenu_alpha,
     R.string.cmenu_wall,       // 8
-    R.string.cmenu_sketch,     // 9  C3D
+    // R.string.cmenu_sketch,     // 9  C3D NO_C3D
     // R.string.cmenu_temp,       // 10 TEMPERATURE
     // R.string.cmenu_fractal,    // 11 FRACTAL
     R.string.menu_options,
@@ -698,7 +699,7 @@ public class TopoGL extends Activity
                           R.string.help_viewpoint_3d,
                           R.string.help_alpha_3d,
                           R.string.help_wall_3d,
-                          R.string.help_sketch_3d,
+                          // R.string.help_sketch_3d, // NO_C3D
                           // R.string.help_temperature, // TEMPERATURE
                           // R.string.help_fractal, // FRACTAL
                           R.string.help_prefs,
@@ -714,7 +715,7 @@ public class TopoGL extends Activity
 
     for ( int k=0; k<menus.length; ++k ) {
       // if ( k == MENU_BT  && ! ( mWithBluetooth && hasBluetoothName() ) ) continue; // FIXME BLUETOOTH  MENU
-      if ( k == MENU_C3D && ! mHasC3d ) continue;
+      // if ( k == MENU_C3D && ! mHasC3d ) continue; // NO_C3D
       // if ( k == MENU_TEMPERATURE && ! mHasTemperature ) continue;
       // if ( k == MENU_FRACTAL && ! mHasFractal ) continue;
       menu_adapter.add( res.getString( menus[k] ) );
@@ -805,16 +806,16 @@ public class TopoGL extends Activity
       } else {
         Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
       }
-    } else if ( mHasC3d && p++ == pos ) { // SKETCH
-      if ( mParser != null ) {
-        if ( doSketches ) {
-          if ( mRenderer != null ) new DialogSketches( this, this, mRenderer ).show();
-        } else {
-          Toast.makeText( this, R.string.no_topodroid_model, Toast.LENGTH_SHORT ).show();
-        }
-      } else {
-        Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
-      }
+    // } else if ( mHasC3d && p++ == pos ) { // SKETCH // NO_C3D
+    //   if ( mParser != null ) {
+    //     if ( doSketches ) {
+    //       if ( mRenderer != null ) new DialogSketches( this, this, mRenderer ).show(); // C3D
+    //     } else {
+    //       Toast.makeText( this, R.string.no_topodroid_model, Toast.LENGTH_SHORT ).show();
+    //     }
+    //   } else {
+    //     Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
+    //   }
     // } else if ( mHasTemperature && p++ == pos ) { // TEMPERATURE
     //   if ( mParser != null ) {
     //     selectTemperatureFile();
@@ -1545,40 +1546,40 @@ public class TopoGL extends Activity
     }
   }
 
-  // ------------------------------ SKETCH
-  /** open a sketch file (in Cave3D format)
-   * @param pathname    file full pathname
-   * @param filename    ...
-   */
-  void openSketch( String pathname, String filename ) 
-  {
-    // TDLog.v("DEM " + pathname );
-    if ( ! pathname.toLowerCase( Locale.getDefault() ).endsWith( ".c3d" ) ) return;
-    ParserSketch sketch = new ParserSketch( pathname );
+  // ------- NO-C3D ------------------------------ SKETCH
+  // /** open a sketch file (in Cave3D format)
+  //  * @param pathname    file full pathname
+  //  * @param filename    ...
+  //  */
+  // void openSketch( String pathname, String filename ) 
+  // {
+  //   // TDLog.v("DEM " + pathname );
+  //   if ( ! pathname.toLowerCase( Locale.getDefault() ).endsWith( ".c3d" ) ) return;
+  //   ParserSketch sketch = new ParserSketch( pathname );
 
-    // final double dd = mDEMbuffer;
-    (new AsyncTask<ParserSketch, Void, Boolean>() {
-      ParserSketch my_sketch = null;
+  //   // final double dd = mDEMbuffer;
+  //   (new AsyncTask<ParserSketch, Void, Boolean>() {
+  //     ParserSketch my_sketch = null;
 
-      public Boolean doInBackground( ParserSketch ... sketch ) 
-      {
-        my_sketch = sketch[0];
-        my_sketch.readData( );
-        return true;
-      }
+  //     public Boolean doInBackground( ParserSketch ... sketch ) 
+  //     {
+  //       my_sketch = sketch[0];
+  //       my_sketch.readData( );
+  //       return true;
+  //     }
 
-      public void onPostExecute( Boolean b )
-      {
-        // my_sketch.log();
-        if ( b ) {
-          if ( mRenderer != null ) mRenderer.notifySketch( my_sketch );
-          TDToast.make( R.string.sketch_ok );
-        } else {
-          TDToast.make( R.string.sketch_failed );
-        }
-      }
-    }).execute( sketch );
-  }
+  //     public void onPostExecute( Boolean b )
+  //     {
+  //       // my_sketch.log();
+  //       if ( b ) {
+  //         if ( mRenderer != null ) mRenderer.notifySketch( my_sketch );
+  //         TDToast.make( R.string.sketch_ok );
+  //       } else {
+  //         TDToast.make( R.string.sketch_failed );
+  //       }
+  //     }
+  //   }).execute( sketch );
+  // }
 
   // ------------------------------ DEM
 
@@ -2305,12 +2306,12 @@ public class TopoGL extends Activity
     }
   }
 
-  /** open the dialog to load a survey sketch (c3d format)
-   */
-  void loadSketch()
-  {
-    new DialogSketch( this, this ).show();
-  }
+  // /** open the dialog to load a survey sketch (c3d format)
+  //  */
+  // void loadSketch() // NO_C3D
+  // {
+  //   new DialogSketch( this, this ).show();
+  // }
 
   /** react to location notify
    * @param lng longitude [WGS84 decimal degrees]

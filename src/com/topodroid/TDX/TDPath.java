@@ -125,7 +125,7 @@ public class TDPath
   private static String APP_AUDIO_ROOT    = null;
   private static String APP_NOTE_ROOT     = null;
   private static String APP_TDR_ROOT      = null;
-  private static String APP_C3D_ROOT      = null;
+  // private static String APP_C3D_ROOT      = null; // NO_C3D
   private static String APP_OUT_ROOT      = null;
 
 
@@ -303,7 +303,7 @@ public class TDPath
       APP_SURVEY_ROOT = ROOT_CW_DIR + "/" + survey;
       checkFilesystemDirs( APP_SURVEY_ROOT ); // fullpath
       APP_TDR_ROOT   = APP_SURVEY_ROOT + "/tdr";     checkFilesystemDirs( APP_TDR_ROOT );
-      APP_C3D_ROOT   = APP_SURVEY_ROOT + "/c3d";     checkFilesystemDirs( APP_C3D_ROOT );
+      // APP_C3D_ROOT   = APP_SURVEY_ROOT + "/c3d";     checkFilesystemDirs( APP_C3D_ROOT ); // NO_C3D
       APP_NOTE_ROOT  = APP_SURVEY_ROOT + "/note";    checkFilesystemDirs( APP_NOTE_ROOT );
       APP_PHOTO_ROOT = APP_SURVEY_ROOT + "/photo";   checkFilesystemDirs( APP_PHOTO_ROOT );
       APP_AUDIO_ROOT = APP_SURVEY_ROOT + "/audio";   checkFilesystemDirs( APP_AUDIO_ROOT );
@@ -312,7 +312,7 @@ public class TDPath
 
       APP_SURVEY_PATH = PATH_CW_DIR + "/" + survey;
       APP_TDR_PATH   = APP_SURVEY_PATH + "/tdr";
-      APP_C3D_PATH   = APP_SURVEY_PATH + "/c3d";
+      APP_C3D_PATH   = APP_SURVEY_PATH + "/c3d"; 
       APP_NOTE_PATH  = APP_SURVEY_PATH + "/note";
       APP_PHOTO_PATH = APP_SURVEY_PATH + "/photo";
       APP_AUDIO_PATH = APP_SURVEY_PATH + "/audio";
@@ -407,14 +407,20 @@ public class TDPath
 
   // static String getSymbolFile( String name ) { return name; }
 
+  /** @return true if there is the survey sketch folder
+   */
   static boolean hasTdrDir() { return TDFile.hasTopoDroidFile( APP_TDR_PATH ); } // DistoX-SAF
 
+  /** @return true if there is the survey 3D sketch folder
+   */
   static boolean hasC3dDir() { return TDFile.hasTopoDroidFile( APP_C3D_PATH ); } // DistoX-SAF
 
   // static File getTdrDir() { return TDFile.makeTopoDroidDir( APP_TDR_PATH ); } // DistoX-SAF // CLEAR_BACKUPS
 
   static File getC3dDir() { return TDFile.makeTopoDroidDir( APP_C3D_PATH ); } // DistoX-SAF
 
+  /** @return the survey 3D sketch folder
+   */
   static String getC3dPath() { return APP_C3D_PATH; } // DistoX-SAF
 
   /** @return full pathname of a zip file, in the zip folder
@@ -501,6 +507,10 @@ public class TDPath
    */
   static String getSurveyPlotTdrBackupFile( String survey, String name, int backup ) { return APP_TDR_PATH + "/" + survey + "-" + name + ".tdr.bck" + backup ; }
 
+  /** return a 3D sketch file in the survey folder
+   * @param survey   survey name
+   * @param name     sketch name
+   */
   static String getSurveyPlotC3dFile( String survey, String name ) { return APP_C3D_PATH + "/" + survey + "-" + name + ".c3d" ; }
 
   /** @return survey zip-archive full pathname
@@ -534,7 +544,11 @@ public class TDPath
     return getPathname( ROOT_CW_DIR, dirname + "/" + name, TDR );
   }
 
-  public static String getC3dFileWithExt( String name )  { return getPathname( APP_C3D_ROOT, name, C3D ); }
+  // /** return a 3D sketch file in the root folder // NO_C3D
+  //  * @param survey   survey name
+  //  * @param name     sketch name
+  //  */
+  // public static String getC3dFileWithExt( String name )  { return getPathname( APP_C3D_ROOT, name, C3D ); }
 
   public static String getShpTempRelativeDir( ) 
   {

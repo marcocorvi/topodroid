@@ -7611,13 +7611,13 @@ public class DrawingWindow extends ItemDrawer
     if ( type == PlotType.PLOT_PLAN && ext.equals("shz") ) {
       String origin = num.getOriginStation();
       station = TDExporter.getGeolocalizedStation( mSid, mApp_mData, 1.0f, true, origin, true );
-    } else if ( ext.equals("c3d") ) {
-      // c3d export uses plot and fixed instead of station
-      plot  = PlotType.isAnySection(type) ? mPlot3 : PlotType.isProfile( type )? mPlot2 : mPlot1;
-      List<FixedInfo> fixeds = mApp_mData.selectAllFixed( mSid, TDStatus.NORMAL );
-      if ( fixeds != null && fixeds.size() > 0 ) fixed = fixeds.get( 0 );
-      // TDLog.v("C3D saving " + filename + " fixeds " + fixeds.size() + " fixed " + fixed );
-      if ( fixed == null ) fixed = new FixedInfo( -1, num.getOriginStation(), 0, 0, 0, 0, "", 0, -1, -1 ); // NOTE ACCURACY -1 (unset)
+    // } else if ( ext.equals("c3d") ) { // NO_C3D
+    //   // c3d export uses plot and fixed instead of station
+    //   plot  = PlotType.isAnySection(type) ? mPlot3 : PlotType.isProfile( type )? mPlot2 : mPlot1;
+    //   List<FixedInfo> fixeds = mApp_mData.selectAllFixed( mSid, TDStatus.NORMAL );
+    //   if ( fixeds != null && fixeds.size() > 0 ) fixed = fixeds.get( 0 );
+    //   // TDLog.v("C3D saving " + filename + " fixeds " + fixeds.size() + " fixed " + fixed );
+    //   if ( fixed == null ) fixed = new FixedInfo( -1, num.getOriginStation(), 0, 0, 0, 0, "", 0, -1, -1 ); // NOTE ACCURACY -1 (unset)
     }
     // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
     new ExportPlotToFile( mActivity, uri, info, plot, fixed, num, manager, type, filename, ext, toast, station ).execute();
@@ -8215,9 +8215,9 @@ public class DrawingWindow extends ItemDrawer
     mExportExt    = TDConst.plotExportExt( export_type );
     // TDLog.v( "EXPORT do type " + export_type + " index " + mExportIndex + " ext " + mExportExt + " filename " + filename );
     // if ( TDSetting.mExportUri ) {
-      if ( mExportIndex == TDConst.SURVEY_FORMAT_C3D ) { // Cave3D
-        saveWithExt( null, mType, mExportExt );
-      } else {
+      // if ( mExportIndex == TDConst.SURVEY_FORMAT_C3D ) { // Cave3D NO_C3D
+      //   saveWithExt( null, mType, mExportExt );
+      // } else {
         // APP_OUT_DIR
         // Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
         // intent.setType( TDConst.mMimeType[ mExportIndex] );
@@ -8231,7 +8231,7 @@ public class DrawingWindow extends ItemDrawer
         if ( uri != null ) {
           doUriExport( uri, second );
         }
-      }
+      // }
     // } else {
     //   if ( mExportIndex == TDConst.SURVEY_FORMAT_TH2 ) {
     //     doSaveTh2( null, mType, true );
@@ -8288,11 +8288,11 @@ public class DrawingWindow extends ItemDrawer
       case TDConst.SURVEY_FORMAT_SHP: saveWithExt( uri, type, "shz" ); break;
       case TDConst.SURVEY_FORMAT_XVI: saveWithExt( uri, type, "xvi" ); break;
       case TDConst.SURVEY_FORMAT_TNL: saveWithExt( uri, type, "xml" ); break;
-      case TDConst.SURVEY_FORMAT_C3D: 
-        // TDLog.v("export c3d");
-        // if ( ! PlotType.isAnySection( type ) )
-          saveWithExt( uri, type, "c3d" );
-        break;
+      // case TDConst.SURVEY_FORMAT_C3D: // NO_C3D
+      //   // TDLog.v("export c3d");
+      //   // if ( ! PlotType.isAnySection( type ) )
+      //     saveWithExt( uri, type, "c3d" );
+      //   break;
       case TDConst.SURVEY_FORMAT_PDF: savePdf( uri, type ); break; 
     }
   }

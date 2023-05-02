@@ -14,7 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 
 // import com.topodroid.c3in.ParserBluetooth;
-import com.topodroid.c3in.ParserSketch;
+// import com.topodroid.c3in.ParserSketch; // NO_C3D
 import com.topodroid.c3walls.cw.CWConvexHull;
 import com.topodroid.c3walls.cw.CWTriangle;
 import com.topodroid.c3walls.cw.ConvexHullComputer;
@@ -51,7 +51,7 @@ public class GlModel
 
   TglParser mParser = null;
   RectF mSurfaceBounds = null;
-  List< GlSketch > glSketches = null;
+  // List< GlSketch > glSketches = null; // NO_C3D
 
   private double mXmed, mYmed, mZmed; // XYZ openGL
   float grid_size = 1;
@@ -183,7 +183,7 @@ public class GlModel
     GlSurface.initGL( mContext );
     GlWalls.initGL( mContext );
     GlPath.initGL( mContext );
-    GlSketch.initGL( mContext );
+    // GlSketch.initGL( mContext ); // NO_C3D
     GlPoint.initGL( mContext );
   }
 
@@ -322,9 +322,9 @@ public class GlModel
   GlModel ( Context ctx )
   { 
     mContext = ctx;
-    // GlSketch.loadSymbols( Cave3DFile.SYMBOL_PATH );
-    GlSketch.loadSymbols( TDPath.getPointDir() );
-    glSketches = Collections.synchronizedList(new ArrayList< GlSketch >());
+    // NO_C3D
+    // GlSketch.loadSymbols( TDPath.getPointDir() ); 
+    // glSketches = Collections.synchronizedList(new ArrayList< GlSketch >());
   }
 
   void hideOrShow( List< Cave3DSurvey > surveys )
@@ -472,13 +472,13 @@ public class GlModel
     //   glPath.draw( mvp_matrix );
     // }
 
-    synchronized( glSketches ) {
-      GlSketch gl_sketch;
-      for ( GlSketch sketch : glSketches ) {
-        synchronized( this ) { gl_sketch = sketch; }
-        gl_sketch.draw( mvp_matrix );
-      }
-    }
+    // synchronized( glSketches ) { // NO_C3D
+    //   GlSketch gl_sketch;
+    //   for ( GlSketch sketch : glSketches ) {
+    //     synchronized( this ) { gl_sketch = sketch; }
+    //     gl_sketch.draw( mvp_matrix );
+    //   }
+    // }
 
   }
 
@@ -747,68 +747,69 @@ public class GlModel
     }
   }
 
-  /** ???
-   * @param sketch_parser sketch parser
-   */
-  void prepareSketch( ParserSketch sketch_parser )
-  {
-    // TDLog.v("Model prepare sketch " + sketch_parser.mName );
-    dropSketch( sketch_parser.mName );
-    GlSketch gl_sketch = new GlSketch( mContext, sketch_parser.mName, sketch_parser.mType, sketch_parser.mPoints, sketch_parser.mLines, sketch_parser.mAreas );
-    // gl_sketch.logMinMax();
-    // TDLog.v("MODEL sketch init data");
-    gl_sketch.initData( mXmed, mYmed, mZmed, sketch_parser.xoff, sketch_parser.yoff, sketch_parser.zoff );
-    addSketch( gl_sketch );
-  }
+  // ------- NO_C3D ---------------------------------------------------------
+  // /** ???
+  //  * @param sketch_parser sketch parser
+  //  */
+  // void prepareSketch( ParserSketch sketch_parser )
+  // {
+  //   // TDLog.v("Model prepare sketch " + sketch_parser.mName );
+  //   dropSketch( sketch_parser.mName );
+  //   GlSketch gl_sketch = new GlSketch( mContext, sketch_parser.mName, sketch_parser.mType, sketch_parser.mPoints, sketch_parser.mLines, sketch_parser.mAreas );
+  //   // gl_sketch.logMinMax();
+  //   // TDLog.v("MODEL sketch init data");
+  //   gl_sketch.initData( mXmed, mYmed, mZmed, sketch_parser.xoff, sketch_parser.yoff, sketch_parser.zoff );
+  //   addSketch( gl_sketch );
+  // }
 
-  /** drop a sketch
-   * @param name  sketch name
-   */
-  private void dropSketch( String name )
-  {
-    synchronized( glSketches ) {
-      for ( int k = 0; k < glSketches.size(); ++k ) {
-        GlSketch sketch = glSketches.get( k );
-        if ( sketch.mName.equals( name ) ) {
-          glSketches.remove( k );
-          break;
-        }
-      }
-    }
-  }
+  // /** drop a sketch
+  //  * @param name  sketch name
+  //  */
+  // private void dropSketch( String name )
+  // {
+  //   synchronized( glSketches ) {
+  //     for ( int k = 0; k < glSketches.size(); ++k ) {
+  //       GlSketch sketch = glSketches.get( k );
+  //       if ( sketch.mName.equals( name ) ) {
+  //         glSketches.remove( k );
+  //         break;
+  //       }
+  //     }
+  //   }
+  // }
 
-  /** add a sketch
-   * @param sketch  GL sketch
-   */
-  private void addSketch( GlSketch sketch ) 
-  {
-    if ( sketch == null || sketch.mName == null ) return;
-    synchronized( glSketches ) {
-      glSketches.add( sketch );
-    }
-  }
+  // /** add a sketch
+  //  * @param sketch  GL sketch
+  //  */
+  // private void addSketch( GlSketch sketch ) 
+  // {
+  //   if ( sketch == null || sketch.mName == null ) return;
+  //   synchronized( glSketches ) {
+  //     glSketches.add( sketch );
+  //   }
+  // }
 
-  List< GlSketch > getSketches() 
-  {
-    List< GlSketch > sketches = new ArrayList< GlSketch >();
-    if ( glSketches == null ) return sketches;
-    synchronized( glSketches ) {
-      sketches.addAll( glSketches ); // for ( GlSketch sketch : glSketches ) sketches.add( sketch );
-    }
-    return sketches;
-  }
+  // List< GlSketch > getSketches() 
+  // {
+  //   List< GlSketch > sketches = new ArrayList< GlSketch >();
+  //   if ( glSketches == null ) return sketches;
+  //   synchronized( glSketches ) {
+  //     sketches.addAll( glSketches ); // for ( GlSketch sketch : glSketches ) sketches.add( sketch );
+  //   }
+  //   return sketches;
+  // }
 
-  void updateSketches() 
-  {
-    if ( glSketches == null ) return;
-    List< GlSketch > sketches = Collections.synchronizedList(new ArrayList< GlSketch >());
-    synchronized( glSketches ) {
-      for ( GlSketch sketch : glSketches ) {
-        if ( ! sketch.mDelete ) sketches.add( sketch );
-      }
-    }
-    synchronized( this ) { glSketches = sketches; }
-  }
+  // void updateSketches() 
+  // {
+  //   if ( glSketches == null ) return;
+  //   List< GlSketch > sketches = Collections.synchronizedList(new ArrayList< GlSketch >());
+  //   synchronized( glSketches ) {
+  //     for ( GlSketch sketch : glSketches ) {
+  //       if ( ! sketch.mDelete ) sketches.add( sketch );
+  //     }
+  //   }
+  //   synchronized( this ) { glSketches = sketches; }
+  // }
 
   // ----------------------------------------------------------------------
   /** prepare the X-Y grid

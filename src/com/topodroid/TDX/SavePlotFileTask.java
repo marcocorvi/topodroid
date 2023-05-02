@@ -232,7 +232,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
               mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "xvi", false );
             }
             break;
-          // case TDConst.SURVEY_FORMAT_C3D:
+          // case TDConst.SURVEY_FORMAT_C3D: // NO_C3D
           //   // TDLog.v("EXPORT AUTO c3d " + mFullName );
           //   if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) {
           //     mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "c3d", false );

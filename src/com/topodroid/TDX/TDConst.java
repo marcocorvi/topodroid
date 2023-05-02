@@ -305,8 +305,8 @@ public class TDConst
     SURVEY_FORMAT_PDF,
     SURVEY_FORMAT_XVI,
     SURVEY_FORMAT_TNL,
-    SURVEY_FORMAT_C3D,
-    // SURVEY_FORMAT_PNM, NO_PNM
+    // SURVEY_FORMAT_C3D, // NO_C3D
+    // SURVEY_FORMAT_PNM, // NO_PNM
   };
 
   private static final String[] mPlotExportExt = {
@@ -319,8 +319,8 @@ public class TDConst
     "pdf",
     "xvi",
     "xml",
-    "c3d",
-    // "pnm", NO_PNM
+    // "c3d", // NO_C3D
+    // "pnm", // NO_PNM
   };
 
   public static String getPlotFilename( int type, String name )

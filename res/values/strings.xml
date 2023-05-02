@@ -1993,7 +1993,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="cmenu_ico">3D-ROSE DIAGRAM</string>
     <string name="cmenu_rose">ROSE DIAGRAM</string>
     <string name="cmenu_wall">WALLS</string>
-    <string name="cmenu_sketch">SKETCHES</string>
+    <!-- UNUSED string name="cmenu_sketch">SKETCHES</string -->
     <!-- UNUSED string name="cmenu_fractal" translatable="false">FRACTAL DIM.</string -->
 
     <string name="fractal_title" translatable="false">Fractal result</string>
@@ -2083,13 +2083,13 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="texture_failed">Failed DTM loading</string>
     <string name="texture_ok">Read DTM file</string>
     <string name="texture" copyable="all">DTM</string>
-    <string name="sketch_load">Load</string>
-    <string name="sketch_failed">Failed sketch loading</string>
-    <string name="sketch_ok">Read sketch data</string>
+    <!-- UNUSED string name="sketch_load">Load</string -->
+    <!-- UNUSED string name="sketch_failed">Failed sketch loading</string -->
+    <!-- UNUSED string name="sketch_ok">Read sketch data</string -->
 
     <string name="ctitle">%1$s  Clino: %2$.0f  Azimuth: %3$.0f</string>
     <string name="ctitle_surface_alpha">Surface model</string>
-    <string name="ctitle_sketches">Sketches</string>
+    <!-- UNUSED string name="ctitle_sketches">Sketches</string -->
     <string name="ctitle_sketch_h" copyable="all">[H]</string>
     <string name="ctitle_sketch_v" copyable="all">[V]</string>
     <string name="ctitle_legs">Legs visibility</string>
@@ -2130,7 +2130,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="select_export_file">Select export file</string>
     <string name="select_dem_file">Select a DEM file</string>
     <string name="select_texture_file">Select a DTM file</string>
-    <string name="select_sketch_file">Select a sketch file</string>
+    <!-- UNUSED string name="select_sketch_file">Select a sketch file</string -->
 
     <string name="view_title">VIEWPOINTS</string>
     <string name="view_top">Top</string>
@@ -2159,7 +2159,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="no_planview">No plan view</string -->
     <!-- UNUSED string name="no_surface">No surface DEM</string -->
     <string name="no_model">No 3D model</string>
-    <string name="no_topodroid_model">Not a TopoDroid model</string>
+    <!-- UNUSED string name="no_topodroid_model">Not a TopoDroid model</string -->
 
     <!-- UNUSED string name="error_file_not_found">Error: file %1$s not found</string -->
     <!-- UNUSED string name="error_file_not_readable">Error: file %1$s not readable</string -->
@@ -2179,10 +2179,10 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="warning_not_las">Warning: not las file %1$s</string -->
     <!-- UNUSED string name="warning_not_cgal">Warning: not CGAL text file %1$s</string -->
     <!-- UNUSED string name="warning_not_stl">Warning: not stl file %1$s</string -->
-    <string name="warning_no_cwd">Warning: no base path</string>
+    <!-- UNUSED string name="warning_no_cwd">Warning: no base path</string -->
     <!-- UNUSED string name="warning_no_file">Warning: no 3d file found</string -->
     <!-- UNUSED string name="warning_empty_cwd">Warning: empty base path</string -->
-    <string name="warning_no_parent">Warning: cannot go to parent folder</string>
+    <!-- UNUSED string name="warning_no_parent">Warning: cannot go to parent folder</string -->
     <string name="warning_nogrant_camera">Camera permission has not been granted</string>
     <string name="no_permissions">The app cannot run without the required permissions</string>
 

@@ -140,8 +140,8 @@
   <string name="DialogProjection" translatable="false">page_3d_proj.htm</string>
   <string name="DialogFractal" translatable="false">page_3d_fractal.htm</string>
   <string name="DialogMeasure" translatable="false">page_3d_measure.htm</string>
-  <string name="DialogSketches" translatable="false">page_3d_sketches.htm</string>
-  <string name="DialogSketch" translatable="false">page_3d_sketch.htm</string>
+  <!-- UNUSED NO_C3D string name="DialogSketches" translatable="false">page_3d_sketches.htm</string -->
+  <!-- UNUSED NO_C3D string name="DialogSketch" translatable="false">page_3d_sketch.htm</string -->
   <string name="DialogStation" translatable="false">page_3d_station.htm</string>
   <string name="DialogSurface" translatable="false">page_3d_surface.htm</string>
   <string name="DialogSurvey" translatable="false">page_3d_survey.htm</string>

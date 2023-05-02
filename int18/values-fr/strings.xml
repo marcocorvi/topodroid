@@ -1990,7 +1990,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="cmenu_ico">DIAGRAMME ROSACE-3D</string>
     <string name="cmenu_rose">DIAGRAMME ROSACE</string>
     <string name="cmenu_wall">WALL</string>
-    <string name="cmenu_sketch">CROQUIS</string>
+    <!-- UNUSED string name="cmenu_sketch">CROQUIS</string -->
     <!-- UNUSED string name="cmenu_fractal">Fractal counts</string -->
     
     <!-- OK string name="fractal_title" translatable="false">Fractal result</string -->
@@ -2080,13 +2080,13 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="texture_failed">Échec du chargement de la texture</string>
     <string name="texture_ok">Lecture du fichier de texture</string>
     <string name="texture">MNT</string>
-    <string name="sketch_load">Chargement</string>
-    <string name="sketch_failed">Échec du chargement du croquis</string>
-    <string name="sketch_ok">Lecture des données du croquis</string>
+    <!-- UNUSED string name="sketch_load">Chargement</string -->
+    <!-- UNUSED string name="sketch_failed">Échec du chargement du croquis</string -->
+    <!-- UNUSED string name="sketch_ok">Lecture des données du croquis</string -->
 
     <string name="ctitle">%1$s  Pente: %2$.0f  Azimut: %3$.0f</string>
     <string name="ctitle_surface_alpha">Opacité de surface</string>
-    <string name="ctitle_sketches">Croquis</string>
+    <!-- UNUSED string name="ctitle_sketches">Croquis</string -->
     <!-- TODO string name="ctitle_sketch_h">[H]</string -->
     <!-- TODO string name="ctitle_sketch_v">[V]</string -->
     <string name="ctitle_legs">Visibilité cheminement</string>
@@ -2127,7 +2127,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="select_export_file">Sélectionnez un fichier à exporter</string>
     <string name="select_dem_file">Sélectionnez un fichier MNE</string>
     <string name="select_texture_file">Sélectionnez un fichier de texture</string>
-    <string name="select_sketch_file">Sélectionnez un fichier de croquis </string>
+    <!-- UNUSED string name="select_sketch_file">Sélectionnez un fichier de croquis </string -->
 
     <string name="view_title">POINTS DE VUE</string>
     <string name="view_top">Partie supérieure</string>
@@ -2156,7 +2156,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="no_planview">No plan view</string -->
     <!-- UNUSED string name="no_surface">No surface DEM</string -->
     <string name="no_model">Pas un modèle 3D</string>
-    <string name="no_topodroid_model">Pas un modèle TopoDroid</string>
+    <!-- UNUSED string name="no_topodroid_model">Pas un modèle TopoDroid</string -->
 
     <!-- UNUSED string name="error_file_not_found">Erreur : archive  non trouvée</string -->
     <!-- UNUSED string name="error_file_not_readable">Erreur : fichier illisible</string -->
@@ -2176,10 +2176,10 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="warning_not_las">Warning: not las file %1$s</string -->
     <!-- UNUSED string name="warning_not_cgal">Warning: not CGAL text file %1$s</string -->
     <!-- UNUSED string name="warning_not_stl">Warning: not stl file %1$s</string -->
-    <string name="warning_no_cwd">Attention : aucun répertoire de base</string>
+    <!-- UNUSED string name="warning_no_cwd">Attention : aucun répertoire de base</string -->
     <!-- UNUSED string name="warning_no_file">Warning: no 3d file found</string -->
     <!-- UNUSED string name="warning_empty_cwd">Warning: empty base path</string -->
-    <string name="warning_no_parent">Attention : impossible d\'accéder au dossier parent</string>
+    <!-- UNUSED string name="warning_no_parent">Attention : impossible d\'accéder au dossier parent</string -->
     <string name="warning_nogrant_camera">L\'autorisation caméra n\'a pas été accordée</string>
     <string name="no_permissions">L\'application ne peut pas fonctionner sans les autorisations requises.</string>
     
