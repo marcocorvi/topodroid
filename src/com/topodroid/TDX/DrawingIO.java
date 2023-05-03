@@ -1179,7 +1179,12 @@ public class DrawingIO
     }
   }
 
-  // @param name filename without extension .th2
+  /** write therion file global header
+   * @param out      output writer
+   * @param type     [unused]
+   * @param bbox     clipping rectangle
+   * @param name     filename without extension .th2
+   */
   static private void exportTherionGlobalHeader( BufferedWriter out, int type, RectF bbox, String name ) throws IOException
   {
     // TDLog.v("TH2 bbox " + bbox.left + " " + bbox.top + " - " + bbox.right + " " + bbox.bottom + " ToTherion " + TDSetting.mToTherion );
@@ -1235,6 +1240,19 @@ public class DrawingIO
   //   out.write( sw.getBuffer().toString() );
   // }
   
+  /** start scrap export (write header
+   * @param out          output writer
+   * @param type         plot type
+   * @param scrap_name   scrap name
+   * @param proj_name    therion projection type
+   * @param project_dir  projected profile azimuth (if applicable) - x-section ?
+   * @param do_north     ???
+   * @param x1           x-section first scale-point: X
+   * @param y1           x-section first scale-point: Y
+   * @param x2           x-section second scale-point: X
+   * @param y2           x-section second scale-point: Y
+   * @param scrap_options scrap therion options
+   */
   static private void exportTherionScrapHeader( BufferedWriter out,
          int type, String scrap_name, String proj_name, int project_dir,
          boolean do_north, float x1, float y1, float x2, float y2, String scrap_options ) throws IOException // TH2EDIT no scrap_options
@@ -1265,15 +1283,23 @@ public class DrawingIO
     out.newLine();
   }
 
+  /** finish scrap export
+   * @param out     output writer
+   */
   static private void exportTherionScrapEnd( BufferedWriter out ) throws IOException
   {
-    TDLog.v("export therion endscrap");
+    // TDLog.v("THERION export endscrap");
     out.newLine();
     out.newLine();
     out.write("endscrap");
     out.newLine();
   }
 
+  /** write splays to the export output
+   * @param out     output writer
+   * @param splays  list of splays
+   * @param bbox    clipping rectangle
+   */
   static private void exportTherionSplays( BufferedWriter out, List< DrawingSplayPath > splays, RectF bbox ) throws IOException
   {
     if ( splays == null ) return;
@@ -1295,6 +1321,10 @@ public class DrawingIO
     out.newLine();
   }
 
+  /** export an area item to therion file
+   * @param out   output writer
+   * @param ap    area item
+   */
   static private void exportTherionArea( BufferedWriter out, DrawingAreaPath ap ) throws IOException
   {
     if ( ap == null ) return;
@@ -1307,6 +1337,10 @@ public class DrawingIO
     }
   }
 
+  /** export a line item to therion file
+   * @param out   output writer
+   * @param lp    line item
+   */
   static private void exportTherionLine( BufferedWriter out, DrawingLinePath lp ) throws IOException
   {
     if ( lp == null ) return;
@@ -1319,6 +1353,10 @@ public class DrawingIO
     }
   }
 
+  /** export a point item to therion file
+   * @param out   output writer
+   * @param pp     point item
+   */
   static private void exportTherionPoint( BufferedWriter out, DrawingPointPath pp ) throws IOException
   {
     if ( pp == null ) return;
@@ -1329,6 +1367,11 @@ public class DrawingIO
     }
   }
 
+  /** export a set of station names to therion file
+   * @param out       output writer
+   * @param stations  set of station names
+   * @param bbox      clipping rectangle
+   */
   static private void exportTherionStations( BufferedWriter out, List< DrawingStationName > stations, RectF bbox ) throws IOException
   {
     if ( stations == null ) return;
@@ -1350,6 +1393,10 @@ public class DrawingIO
     }
   }
 
+  /** export a set of user-station names to therion file
+   * @param out       output writer
+   * @param userstations  set of user-station names
+   */
   static private void exportTherionUserStations( BufferedWriter out, List< DrawingStationUser > userstations ) throws IOException
   {
     if ( userstations == null ) return;
@@ -1442,11 +1489,15 @@ public class DrawingIO
           out.newLine();
           out.flush();
 
-          if ( ( ! th2_edit ) && TDSetting.mTherionSplays && scrap_nr == 0 ) { // TH2EDIT splays only in the first scrap
-            exportTherionSplays( out, splays, scrap_bbox );
-          }
-          if ( ( ! th2_edit ) && TDSetting.mAutoStations ) { // TH2EDIT 
-            exportTherionStations( out, stations, scrap_bbox );
+          if ( ! th2_edit ) {
+            if ( TDSetting.mTherionSplays ) { // TH2EDIT - FIXME this should be conditioned on mAutoStations
+              if ( scrap_nr == 0 || TDSetting.mTherionSplaysAll ) { // (splays always in the first scrap)
+                exportTherionSplays( out, splays, scrap_bbox );
+              }
+            }
+            if ( TDSetting.mAutoStations ) { // TH2EDIT 
+              exportTherionStations( out, stations, scrap_bbox );
+            }
           } else {
             List< DrawingStationUser > userstations = scrap.mUserStations;
             if ( userstations.size() > 0 ) {
@@ -1635,7 +1686,7 @@ public class DrawingIO
             }
           }
         }
-        if ( TDSetting.mTherionSplays ) {
+        if ( TDSetting.mTherionSplays ) { // FIXME this should be conditioned on mAutoStations
           exportTherionSplays( out, splays, bbox );
         }
         if ( TDSetting.mAutoStations ) {

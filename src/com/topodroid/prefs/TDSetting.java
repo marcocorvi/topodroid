@@ -240,6 +240,7 @@ public class TDSetting
   // public static boolean mXTherionAreas = false;
   public static boolean mAutoStations  = true;  // whether to add stations automatically to scrap therion files
   public static boolean mTherionSplays = false; // whether to add splay segments to auto stations
+  public static boolean mTherionSplaysAll = true; // whether to add splay segments to auto stations for all scraps, not just the first
   public static boolean mTherionConfig = false; // whether to write survey.thconfig file
   public static boolean mTherionXvi    = false; // whether to add xvi image to th2
   public static boolean mCompassSplays = true;  // whether to add splays to Compass export
