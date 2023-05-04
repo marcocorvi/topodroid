@@ -531,18 +531,4 @@ public class ParserTrox extends TglParser
     // }
   }
 
-  static int nextIndex( String[] vals, int idx )
-  {
-    ++idx;
-    while ( idx < vals.length && vals[idx].length() == 0 ) ++idx;
-    return idx;
-  }
-
-  static int prevIndex( String[] vals, int idx )
-  {
-    --idx;
-    while ( idx >= 0 && vals[idx].length() == 0 ) --idx;
-    return idx;
-  }
-
 }

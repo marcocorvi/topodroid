@@ -197,9 +197,9 @@ public class DEMsurface
         }
         String[] vals = TDString.splitOnSpaces( line );
         if ( vals.length > 0 ) {
-          int idx = ParserTh.nextIndex( vals, -1 );
+          int idx = TDString.nextIndex( vals, -1 );
           if ( vals[idx].equals( "grid_flip" ) ) {
-            idx = ParserTh.nextIndex( vals, idx );
+            idx = TDString.nextIndex( vals, idx );
             if ( idx < vals.length ) {
               flip = ParserTh.parseFlip( vals[idx] );
               if ( flip == ParserTh.FLIP_HORIZONTAL ) {
@@ -231,7 +231,7 @@ public class DEMsurface
                 y += dy;
                 if ( y == y2 ) break;
               }
-              idx = ParserTh.nextIndex( vals, idx );
+              idx = TDString.nextIndex( vals, idx );
             }
           }
         }

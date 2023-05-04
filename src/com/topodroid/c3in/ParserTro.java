@@ -12,6 +12,7 @@
 package com.topodroid.c3in;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
 import com.topodroid.TDX.TopoGL;
 import com.topodroid.TDX.TglParser;
 import com.topodroid.TDX.Cave3DCS;
@@ -148,7 +149,7 @@ public class ParserTro extends TglParser
         if ( line.length() == 0 ) continue;    // comment
         
         String[] vals = splitLine( line ); 
-        int idx = nextIndex( vals, -1 );
+        int idx = TDString.nextIndex( vals, -1 );
         if ( line.startsWith("Version") ) {
           // IGNORE
         } else if ( line.startsWith("Trou") ) { 
@@ -223,18 +224,18 @@ public class ParserTro extends TglParser
             if ( from.equals( entrance ) ) TDLog.v("TRO line: " + line );
             if ( from.equals("*") ) from = last_to;
 
-            idx = nextIndex( vals, idx );
+            idx = TDString.nextIndex( vals, idx );
             String to   = vals[idx];
             if ( ! to.equals("*") ) last_to = to;
             if ( ! from.equals( to ) ) {
               boolean splay = ( to.equals( "*" ) );
 
               try {
-                idx = nextIndex( vals, idx );
+                idx = TDString.nextIndex( vals, idx );
                 double len = Double.parseDouble(vals[idx]) * ul;
-                idx = nextIndex( vals, idx );
+                idx = TDString.nextIndex( vals, idx );
                 double ber = angle( Double.parseDouble(vals[idx]), ub, dmb);
-                idx = nextIndex( vals, idx );
+                idx = TDString.nextIndex( vals, idx );
                 double cln = angle( Double.parseDouble(vals[idx]), uc, dmc); 
                 if ( splay ) {
                   if ( mSplayUse > SPLAY_USE_SKIP ) {
@@ -247,19 +248,19 @@ public class ParserTro extends TglParser
                   ++ cnt_shot;
 
                   if ( mSplayUse > SPLAY_USE_SKIP ) {
-                    idx = nextIndex( vals, idx );
+                    idx = TDString.nextIndex( vals, idx );
 	            len = vals[idx].equals("*")? -1 : Double.parseDouble(vals[idx]) * ul; 
 	            if ( len > 0 ) splays.add( new Cave3DShot( station, station+"-L", len, ber-90, 0, 0, millis, mColor ) );
                     
-                    idx = nextIndex( vals, idx );
+                    idx = TDString.nextIndex( vals, idx );
 	            len = vals[idx].equals("*")? -1 : Double.parseDouble(vals[idx]) * ul; 
 	            if ( len > 0 ) splays.add( new Cave3DShot( station, station+"-R", len, ber+90, 0, 0, millis, mColor ) );
 
-                    idx = nextIndex( vals, idx );
+                    idx = TDString.nextIndex( vals, idx );
 	            len = vals[idx].equals("*")? -1 : Double.parseDouble(vals[idx]) * ul; 
 	            if ( len > 0 ) splays.add( new Cave3DShot( station, station+"-U", len, ber, 90, 0, millis, mColor ) );
                     
-                    idx = nextIndex( vals, idx );
+                    idx = TDString.nextIndex( vals, idx );
 	            len = vals[idx].equals("*")? -1 : Double.parseDouble(vals[idx]) * ul; 
 	            if ( len > 0 ) splays.add( new Cave3DShot( station, station+"-D", len, ber, -90, 0, millis, mColor ) );
                   }
@@ -469,20 +470,6 @@ public class ParserTro extends TglParser
     //   if ( zmin > s.z )      zmin = s.z;
     //   else if ( zmax < s.z ) zmax = s.z;
     // }
-  }
-
-  static int nextIndex( String[] vals, int idx )
-  {
-    ++idx;
-    while ( idx < vals.length && vals[idx].length() == 0 ) ++idx;
-    return idx;
-  }
-
-  static int prevIndex( String[] vals, int idx )
-  {
-    --idx;
-    while ( idx >= 0 && vals[idx].length() == 0 ) --idx;
-    return idx;
   }
 
 }

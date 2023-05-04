@@ -526,5 +526,29 @@ public class TDString
     }
     return this;
   }
+
+  // ------------ array of strings ---------------------------
+
+  /** @return the next index of non-empty string in an array (the array length if not found)
+   * @param vals   string array
+   * @param idx    start from the index after this
+   */
+  public static int nextIndex( String[] vals, int idx )
+  {
+    ++idx;
+    while ( idx < vals.length && vals[idx].length() == 0 ) ++idx;
+    return idx;
+  }
+
+  /** @return the previous index of non-empty string in an array (-1 if not found)
+   * @param vals   string array
+   * @param idx    start from the index before this
+   */
+  public static int prevIndex( String[] vals, int idx )
+  {
+    --idx;
+    while ( idx >= 0 && vals[idx].length() == 0 ) --idx;
+    return idx;
+  }
     
 }

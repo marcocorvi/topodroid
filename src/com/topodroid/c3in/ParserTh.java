@@ -95,15 +95,15 @@ public class ParserTh extends TglParser
     for ( String mark : mMarks ) {
       String[] vals = mark.split(" ");
       int len = vals.length;
-      len = prevIndex( vals, len );
+      len = TDString.prevIndex( vals, len );
       if ( len > 0 ) { // 0 must be "mark"
         int flag = parseFlag( vals[len] );
-        int idx = nextIndex( vals, -1 );
-        while ( idx < len && vals[idx].equals("mark") ) idx = nextIndex( vals, idx );
+        int idx = TDString.nextIndex( vals, -1 );
+        while ( idx < len && vals[idx].equals("mark") ) idx = TDString.nextIndex( vals, idx );
         while ( idx < len ) {
           Cave3DStation st = getStation( vals[idx] );
           if ( st != null ) st.setFlag( flag );
-          idx = nextIndex( vals, idx );
+          idx = TDString.nextIndex( vals, idx );
         }
       }
     }
@@ -444,10 +444,10 @@ public class ParserTh extends TglParser
           // for (int j=0; j<vals.length; ++j ) TDLog.v( "    " + vals[j] );
 
           if ( vals.length > 0 ) {
-            int idx = nextIndex( vals, -1 );
+            int idx = TDString.nextIndex( vals, -1 );
             String cmd = vals[idx];
             if ( cmd.equals("survey") ) {
-              idx = nextIndex( vals, idx );
+              idx = TDString.nextIndex( vals, idx );
               if ( idx < vals.length ) {
                 surveyname = vals[idx];
                 survey_pos[ks] = path.length();
@@ -466,7 +466,7 @@ public class ParserTh extends TglParser
                 use_centerline_declination = false;
                 centerline_declination = 0.0f;
               } else if ( cmd.equals("date") ) {
-                if ( (idx = nextIndex( vals, idx )) < vals.length ) {
+                if ( (idx = TDString.nextIndex( vals, idx )) < vals.length ) {
                   String date = vals[idx];
                   if ( date.length() >= 10 ) {
                     int yy = Integer.parseInt( date.substring( 0, 4 ) );
@@ -479,9 +479,9 @@ public class ParserTh extends TglParser
                   }
                 }
               } else if ( cmd.equals("flags") ) { 
-                if ( (idx = nextIndex( vals, idx )) < vals.length ) {
+                if ( (idx = TDString.nextIndex( vals, idx )) < vals.length ) {
                   if ( vals[idx].equals("not") ) {
-                    if ( (idx = nextIndex( vals, idx )) < vals.length ) {
+                    if ( (idx = TDString.nextIndex( vals, idx )) < vals.length ) {
                       if ( vals[idx].equals("duplicate") ) {
                         flags &= ~0x00000001;
                       } else if ( vals[idx].equals("surface") ) {
@@ -499,7 +499,7 @@ public class ParserTh extends TglParser
               } else if ( cmd.equals("team") ) { // skip
               } else if ( cmd.equals("extend") ) { // skip
               } else if ( cmd.equals("declination") ) { 
-                idx = nextIndex( vals, idx );
+                idx = TDString.nextIndex( vals, idx );
                 if ( idx < vals.length ) {
                   try {
                     double decl = Double.parseDouble( vals[idx] );
@@ -516,7 +516,7 @@ public class ParserTh extends TglParser
               } else if ( cmd.equals("data") ) {
                 in_data = 0;
                 // data normal from to length compass clino ...
-                idx = nextIndex( vals, idx );
+                idx = TDString.nextIndex( vals, idx );
                 if ( idx < vals.length ) {
                   if ( vals[idx].equals("normal") ) {
                     in_data = DATA_NORMAL;
@@ -527,7 +527,7 @@ public class ParserTh extends TglParser
                   }
                 }
               } else if ( cmd.equals("units") ) {
-                idx = nextIndex( vals, idx );
+                idx = TDString.nextIndex( vals, idx );
                 if ( idx < vals.length ) {
                   // parse "units" command
                   boolean isLength  = false;
@@ -561,26 +561,26 @@ public class ParserTh extends TglParser
                   } 
                 }
               } else if ( cmd.equals("cs") ) { // ***** fix station east north Z
-                idx = nextIndex( vals, idx );
+                idx = TDString.nextIndex( vals, idx );
                 if ( idx < vals.length ) {
                   cs = new Cave3DCS( vals[idx] );
                 }
               } else if ( cmd.equals("fix") ) { // ***** fix station east north Z
                 // TDLog.v( "TH command fix");
-                idx = nextIndex( vals, idx );
+                idx = TDString.nextIndex( vals, idx );
                 if ( idx < vals.length ) {
                   String name = makeName( vals[idx], path );
                   // TDLog.v( "TH command fix " + name );
                   try { 
-                    idx = nextIndex( vals, idx );
+                    idx = TDString.nextIndex( vals, idx );
                     if ( idx < vals.length ) {
                       double x = Double.parseDouble( vals[idx] );
                       // TDLog.v( "TH fix x " + x );
-                      idx = nextIndex( vals, idx );
+                      idx = TDString.nextIndex( vals, idx );
                       if ( idx < vals.length ) {
                         double y = Double.parseDouble( vals[idx] );
                         // TDLog.v( "TH fix y " + y );
-                        idx = nextIndex( vals, idx );
+                        idx = TDString.nextIndex( vals, idx );
                         if ( idx < vals.length ) {
                           double z = Double.parseDouble( vals[idx] );
 	                  fixes.add( new Cave3DFix( name, x, y, z, cs, 1, 1 ) ); // no WGS84 - FIXME M_TO_UNITS
@@ -595,14 +595,14 @@ public class ParserTh extends TglParser
               } else if ( vals.length >= 5 ) {
                 if ( in_data == DATA_NORMAL ) {
                   String from = vals[idx];
-                  idx = nextIndex( vals, idx );
+                  idx = TDString.nextIndex( vals, idx );
                   if ( idx < vals.length ) {
                     String to = vals[idx]; 
                     try {
-                      idx = nextIndex( vals, idx );
+                      idx = TDString.nextIndex( vals, idx );
                       if ( idx < vals.length ) {
                         double len  = Double.parseDouble( vals[idx] ) * units_len;
-                        idx = nextIndex( vals, idx );
+                        idx = TDString.nextIndex( vals, idx );
                         if ( idx < vals.length ) {
                           double ber  = Double.parseDouble( vals[idx] ) * units_len;
                           if ( use_centerline_declination ) {
@@ -610,7 +610,7 @@ public class ParserTh extends TglParser
                           } else if ( use_survey_declination ) {
                             ber += survey_declination;
                           }
-                          idx = nextIndex( vals, idx );
+                          idx = TDString.nextIndex( vals, idx );
                           if ( idx < vals.length ) {
                             double cln  = Double.parseDouble( vals[idx] ) * units_len;
                             // TODO add shot
@@ -653,22 +653,22 @@ public class ParserTh extends TglParser
                   double e1, n1, delta_e, delta_n;
                   int c1, c2;
                   // parse grid metadata
-                  idx = nextIndex( vals, idx );
+                  idx = TDString.nextIndex( vals, idx );
                   if ( idx < vals.length ) {
                     e1 = Double.parseDouble( vals[idx] );
-                    idx = nextIndex( vals, idx );
+                    idx = TDString.nextIndex( vals, idx );
                     if ( idx < vals.length ) {
                       n1 = Double.parseDouble( vals[idx] );
-                      idx = nextIndex( vals, idx );
+                      idx = TDString.nextIndex( vals, idx );
                       if ( idx < vals.length ) {
                         delta_e = Double.parseDouble( vals[idx] );
-                        idx = nextIndex( vals, idx );
+                        idx = TDString.nextIndex( vals, idx );
                         if ( idx < vals.length ) {
                           delta_n = Double.parseDouble( vals[idx] );
-                          idx = nextIndex( vals, idx );
+                          idx = TDString.nextIndex( vals, idx );
                           if ( idx < vals.length ) {
                             c1 = Integer.parseInt( vals[idx] );
-                            idx = nextIndex( vals, idx );
+                            idx = TDString.nextIndex( vals, idx );
                             if ( idx < vals.length ) {
                               c2 = Integer.parseInt( vals[idx] );
                               mSurface = new DEMsurface( e1, n1, delta_e, delta_n, c1, c2 );
@@ -688,17 +688,17 @@ public class ParserTh extends TglParser
                 }
               } else if ( cmd.equals("grid-flip") ) {
                 // TDLog.v("TH parse the flip-value" );
-                idx = nextIndex( vals, idx );
+                idx = TDString.nextIndex( vals, idx );
                 if ( idx < vals.length ) {
                   grid_flip = parseFlip( vals[idx] );
                 }
               } else if ( cmd.equals("grid-units") ) {
                 // TDLog.v("TH parse the grid-units" );
                 try {
-                  idx = nextIndex( vals, idx );
+                  idx = TDString.nextIndex( vals, idx );
                   if ( idx < vals.length ) {
                     double value = Double.parseDouble( vals[idx] );
-                    idx = nextIndex( vals, idx );
+                    idx = TDString.nextIndex( vals, idx );
                     if ( idx < vals.length ) {
                       // FIXME TODO
                       // units_grid = parseUnits( value, vals[idx] );
@@ -710,7 +710,7 @@ public class ParserTh extends TglParser
               }
             } else if ( cmd.equals("declination") ) {
               try {
-                idx = nextIndex( vals, idx );
+                idx = TDString.nextIndex( vals, idx );
                 if ( idx < vals.length ) {
                   use_survey_declination = true;
                   survey_declination = Double.parseDouble( vals[idx] );
@@ -719,7 +719,7 @@ public class ParserTh extends TglParser
                 TDLog.Error( "Th survey declination " + e.getMessage() );
               }
             } else if ( cmd.equals("input") ) {
-              idx = nextIndex( vals, idx );
+              idx = TDString.nextIndex( vals, idx );
               if ( idx < vals.length ) {
                 filename = vals[idx];
                 // TDLog.v( "TH input therion file " + filename );
@@ -738,12 +738,12 @@ public class ParserTh extends TglParser
                 }
               }
             } else if ( cmd.equals("load") ) { // DATABASE SURVEY
-              idx = nextIndex( vals, idx );
+              idx = TDString.nextIndex( vals, idx );
               if ( idx < vals.length ) {
                 filename = vals[idx]; // survey name
                 int color = 0;
-                if ( (idx = nextIndex( vals, idx )) < vals.length && vals[idx].equals("-color") ) {
-                  if ( (idx = nextIndex( vals, idx )) < vals.length ) color = 0xff000000 | Integer.parseInt( vals[idx] );
+                if ( (idx = TDString.nextIndex( vals, idx )) < vals.length && vals[idx].equals("-color") ) {
+                  if ( (idx = TDString.nextIndex( vals, idx )) < vals.length ) color = 0xff000000 | Integer.parseInt( vals[idx] );
                   // TDLog.v("TH parser color " + color + " " + idx + ": " + vals[idx] );
                 }
                 TDLog.v( "TH load survey " + filename + " color " + color );
@@ -770,11 +770,11 @@ public class ParserTh extends TglParser
                 }
               }
             } else if ( cmd.equals("equate") ) {
-              idx = nextIndex( vals, idx );
+              idx = TDString.nextIndex( vals, idx );
               if ( idx < vals.length ) {
                 String from = makeName( vals[idx], path );
                 while ( idx < vals.length ) {
-                  idx = nextIndex( vals, idx );
+                  idx = TDString.nextIndex( vals, idx );
                   if ( idx < vals.length ) {
 		    String to = makeName( vals[idx], path );
                     // StringWriter sw = new StringWriter();
@@ -1046,28 +1046,6 @@ public class ParserTh extends TglParser
     computeBoundingBox();
     // TDLog.v("Th stations " + stations.size() + " center " + x0 + " " + y0 + " " + z0 );
     // TDLog.v("Th bbox E " + emin + " " + emax + " N " + nmin + " " + nmax );
-  }
-
-  /** @return the next index of non-empty string in an array
-   * @param vals   string array
-   * @param idx    start from the index after this
-   */
-  public static int nextIndex( String[] vals, int idx )
-  {
-    ++idx;
-    while ( idx < vals.length && vals[idx].length() == 0 ) ++idx;
-    return idx;
-  }
-
-  /** @return the previous index of non-empty string in an array
-   * @param vals   string array
-   * @param idx    start from the index before this
-   */
-  public static int prevIndex( String[] vals, int idx )
-  {
-    --idx;
-    while ( idx >= 0 && vals[idx].length() == 0 ) --idx;
-    return idx;
   }
 
 }

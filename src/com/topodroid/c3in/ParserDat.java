@@ -12,6 +12,7 @@
 package com.topodroid.c3in;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
 
 import com.topodroid.TDX.TopoGL;
 import com.topodroid.TDX.TglParser;
@@ -115,11 +116,11 @@ public class ParserDat extends TglParser
           String[] vals = data.split( "," );
           if ( vals.length >= 3 ) {
             try {
-              int idx = nextIndex( vals, -1 );
+              int idx = TDString.nextIndex( vals, -1 );
 	      double x = Double.parseDouble( vals[idx] );
-              idx = nextIndex( vals, idx );
+              idx = TDString.nextIndex( vals, idx );
 	      double y = Double.parseDouble( vals[idx] );
-              idx = nextIndex( vals, idx );
+              idx = TDString.nextIndex( vals, idx );
 	      double z = Double.parseDouble( vals[idx] );
               String survey = TDPath.getMainname( file );
               InputStreamReader isr0 = new InputStreamReader( new FileInputStream( filename0 ) );
@@ -177,8 +178,8 @@ public class ParserDat extends TglParser
       for ( String line = nextLine( br ); line != null; line = nextLine( br ) ) {
 	if ( line.startsWith( "DECLINATION:" ) ) {
           String[] vals = splitLine( line );
-          idx = nextIndex( vals, -1 );
-          idx = nextIndex( vals, idx );
+          idx = TDString.nextIndex( vals, -1 );
+          idx = TDString.nextIndex( vals, idx );
 	  try {
             declination = Double.parseDouble( vals[idx] );
 	    // TDLog.v( "DAT declination " + declination );
@@ -194,34 +195,34 @@ public class ParserDat extends TglParser
 	    }
             String[] vals = splitLine( line );
 	    if ( vals.length >= 5 ) { // FROM TO LEN BEAR INC L U D R FLAGS COMMENT
-              idx = nextIndex( vals, -1 );
+              idx = TDString.nextIndex( vals, -1 );
               String f0   = vals[idx]; // remember FROM station
 	      String from = vals[idx] + survey;
 	      if ( station == null ) station = f0;
-              idx = nextIndex( vals, idx );
+              idx = TDString.nextIndex( vals, idx );
               String to   = vals[idx] + survey;
 	      try {
-                idx = nextIndex( vals, idx );
+                idx = TDString.nextIndex( vals, idx );
                 length = Double.parseDouble( vals[idx] ) * units_len;
-                idx = nextIndex( vals, idx );
+                idx = TDString.nextIndex( vals, idx );
                 bearing = Double.parseDouble( vals[idx] );
-                idx = nextIndex( vals, idx );
+                idx = TDString.nextIndex( vals, idx );
                 clino = Double.parseDouble( vals[idx] );
                 left  = -999;
                 up    = -999;
                 down  = -999;
                 right = -999;
                 if ( vals.length >= 9 ) {
-                  idx = nextIndex( vals, idx );
+                  idx = TDString.nextIndex( vals, idx );
 		  left = Double.parseDouble( vals[idx] ) * units_len; // LEFT
-                  idx = nextIndex( vals, idx );
+                  idx = TDString.nextIndex( vals, idx );
 		  up = Double.parseDouble( vals[idx] ) * units_len; // UP
-                  idx = nextIndex( vals, idx );
+                  idx = TDString.nextIndex( vals, idx );
 		  down = Double.parseDouble( vals[idx] ) * units_len; // DOWN
-                  idx = nextIndex( vals, idx );
+                  idx = TDString.nextIndex( vals, idx );
 		  right = Double.parseDouble( vals[idx] ) * units_len; // RIGHT
                   if ( vals.length >= 11 ) {
-                    idx = nextIndex( vals, idx );
+                    idx = TDString.nextIndex( vals, idx );
                     if (vals[idx].startsWith("#")) {
                       // mFlag = vals[idx];
                       // if ( k < kmax ) mComment = TDUtil.concat( vals, k );
@@ -238,7 +239,7 @@ public class ParserDat extends TglParser
                           bearing = ( bearing + back_bearing ) / 2;
                         }
                       }
-                      idx = nextIndex( vals, idx );
+                      idx = TDString.nextIndex( vals, idx );
                       back_clino = Double.parseDouble(vals[idx]);
                       if ( clino < -900 ) {
                         clino = - back_clino;
@@ -247,7 +248,7 @@ public class ParserDat extends TglParser
                       }
                  
                       // if ( vals.length >= 12 ) {
-                      //   idx = nextIndex( vals, idx );
+                      //   idx = TDString.nextIndex( vals, idx );
                       //   if (vals[idx].startsWith("#")) {
                       //     // mFlag = vals[idx];
                       //     // if ( k < kmax ) mComment = TDUtil.concat( vals, k );
@@ -502,20 +503,6 @@ public class ParserDat extends TglParser
     //   if ( zmin > s.z )      zmin = s.z;
     //   else if ( zmax < s.z ) zmax = s.z;
     // }
-  }
-
-  static int nextIndex( String[] vals, int idx )
-  {
-    ++idx;
-    while ( idx < vals.length && vals[idx].length() == 0 ) ++idx;
-    return idx;
-  }
-
-  static int prevIndex( String[] vals, int idx )
-  {
-    --idx;
-    while ( idx >= 0 && vals[idx].length() == 0 ) --idx;
-    return idx;
   }
 
 }
