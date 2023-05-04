@@ -191,7 +191,7 @@ public class TdmConfigActivity extends Activity
   {
     super.onPause();
     // TDLog.v( "TdmConfig activity on pause");
-    if ( mTdmConfig != null ) mTdmConfig.writeTdmConfig( false );
+    if ( mTdmConfig != null ) mTdmConfig.writeTdmConfig( false ); // no check on return value
   }
 
   /** @return true if the cave-project contains a survey
@@ -470,16 +470,18 @@ public class TdmConfigActivity extends Activity
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // EQUATES
       (new TdmEquatesDialog( this, mTdmConfig, null )).show();
     } else if ( TDLevel.overNormal && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // 3D
-      mTdmConfig.writeTdmConfig( true );
-      try {
-        // TDLog.v( "Cave3D of " + mTdmConfig.getFilepath() );
-        // Intent intent = new Intent( "Cave3D.intent.action.Launch" );
-        Intent intent = new Intent( Intent.ACTION_VIEW ).setClass( this, com.topodroid.TDX.TopoGL.class );
-        intent.putExtra( "INPUT_THCONFIG", mTdmConfig.getSurveyName() ); // thconfig (project) name, without ".thconfig" extension
-        intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );          // current work directory
-        startActivity( intent );
-      } catch ( ActivityNotFoundException e ) {
-        TDToast.make( R.string.no_cave3d );
+      if ( mTdmConfig.writeTdmConfig( true ) ) {
+        try {
+          // TDLog.v( "Cave3D of " + mTdmConfig.getFilepath() );
+          Intent intent = new Intent( Intent.ACTION_VIEW ).setClass( this, com.topodroid.TDX.TopoGL.class );
+          intent.putExtra( "INPUT_THCONFIG", mTdmConfig.getSurveyName() ); // thconfig (project) name, without ".thconfig" extension
+          intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );          // current work directory
+          startActivity( intent );
+        } catch ( ActivityNotFoundException e ) {
+          TDToast.make( R.string.no_cave3d );
+        }
+      } else {
+        TDToast.make( R.string.saving_file_failed );
       }
     }
   }

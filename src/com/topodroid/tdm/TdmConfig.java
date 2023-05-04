@@ -221,22 +221,26 @@ class TdmConfig extends TdmFile
   // this is called by the TdmConfigActivity when it goes on pause
   /** write the cave project info to the tdconfig file
    * @param force    whether to force writing
+   * @return true if file has been successfully written
    */
-  void writeTdmConfig( boolean force )
+  boolean writeTdmConfig( boolean force )
   {
     TDLog.v( "save tdconfig " + this + " save " + mSave + " force " + force );
+    boolean ret = false;
     if ( mSave || force ) { // was mRead || force
       String filepath = getFilepath();
       try {
         BufferedWriter bw = TDFile.getTopoDroidFileWriter( filepath );
         PrintWriter pw = new PrintWriter( bw );
         writeTd( pw );
-        bw.close();
+        bw.close(); // close the stream flushing it first
+        ret = true;
       } catch ( IOException e ) { 
         TDLog.Error("Tdm Config write file " + filepath + " I/O error " + e.getMessage() );
       }
       mSave = false;
     }
+    return ret;
   }
 
   /** read the cave project info from the tdconfig file
