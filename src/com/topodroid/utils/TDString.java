@@ -105,7 +105,7 @@ public class TDString
         if ( Character.isSpaceChar( ch ) ) {
           inString = 0;
           if ( pos >= 0 ) {
-            if ( i > pos+1 ) strs.add( str.substring( pos, i ) );
+            if ( i > pos ) strs.add( str.substring( pos, i ) );
             pos = -1;
           }
         }
@@ -113,7 +113,7 @@ public class TDString
         if ( ch == '\'' ) {
           inString = 0;
           if ( pos >= 0 ) {
-            if ( i > pos+1 ) strs.add( str.substring( pos, i ) );
+            if ( i > pos ) strs.add( str.substring( pos, i ) );
             pos = -1;
           }
         }
@@ -121,7 +121,7 @@ public class TDString
         if ( ch == '"' ) {
           inString = 0;
           if ( pos >= 0 ) {
-            if ( i > pos+1 ) strs.add( str.substring( pos, i ) );
+            if ( i > pos ) strs.add( str.substring( pos, i ) );
             pos = -1;
           }
         }

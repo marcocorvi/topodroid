@@ -27,7 +27,7 @@ import java.util.List;
 
 public class TdmSurvey
 {
-  String mName; // survey name = db_name
+  protected String mName; // survey name = db_name
   TdmSurvey mParent;
   TdmStation mStartStation;
   SurveyInfo mInfo = null;
@@ -121,6 +121,8 @@ public class TdmSurvey
   {
     if ( mLoadedData == 1 ) return true;
     if ( mLoadedData == 0 ) return false;
+
+    TDLog.v("TdManager load survey data <" + mName + ">" );
     
     if ( mInfo == null ) {
       mInfo = data.getSurveyInfo( mName );
@@ -134,7 +136,7 @@ public class TdmSurvey
       mLoadedData = 1;
       // TDLog.v("Survey " + mName + " loaded data " + mShots.size() );
     } else {
-      TDLog.Error("TdManager Survey " + mName + ": unable to get survey info");
+      TDLog.Error("TdManager survey <" + mName + ">: unable to get survey info");
       mLoadedData = 0;
     }
     return (mLoadedData == 1);

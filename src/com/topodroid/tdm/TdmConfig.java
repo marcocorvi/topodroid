@@ -225,7 +225,7 @@ class TdmConfig extends TdmFile
    */
   boolean writeTdmConfig( boolean force )
   {
-    TDLog.v( "save tdconfig " + this + " save " + mSave + " force " + force );
+    // TDLog.v( "save tdconfig " + this + " save " + mSave + " force " + force );
     boolean ret = false;
     if ( mSave || force ) { // was mRead || force
       String filepath = getFilepath();
@@ -248,7 +248,7 @@ class TdmConfig extends TdmFile
    */
   void readTdmConfig()
   {
-    TDLog.v( "read tdconfig " + this + " " + mRead );
+    // TDLog.v( "read tdconfig " + this + " " + mRead );
     if ( mRead ) return;
     readFile();
     mRead = true;
@@ -262,14 +262,14 @@ class TdmConfig extends TdmFile
    */
   private void writeTd( PrintWriter pw ) throws IOException
   {
-    // TDLog.v("save config " + mSurveyName + " " + filepath );
+    // TDLog.v("save config " + mSurveyName );
     pw.format("# created by TopoDroid Manager %s - %s\n", TDVersion.string(), TDUtil.currentDate() );
     pw.format("source\n");
     pw.format("  survey \"%s\"\n", mSurveyName );
     for ( TdmInput input : mInputs ) {
       // FIXME path
       String path = input.getSurveyName();
-      // TDLog.v("config write add survey " + path );
+      // TDLog.v("config write add survey <" + path + ">" );
       pw.format("    load \"%s\" -color %d\n", path, (input.getColor() & 0xffffff) );
     }
     for ( TdmEquate equate : mEquates ) {
@@ -328,14 +328,19 @@ class TdmConfig extends TdmFile
               }
             } else if ( vals[0].equals( "load" ) ) {
               for (int k=1; k<vals.length; ++k ) {
+                // TDLog.v("vals[" + k + "]: <" + vals[k] );
                 if ( vals[k].length() > 0 ) {
                   String surveyname = vals[k];
                   int color = TglColor.getSurveyColor(); // random color
                   for ( ++k; k<vals.length; ++k ) {
                     if ( vals[k].length() > 0 ) {
-                      if ( vals[k].equals("-color") ) continue;
-                      color = 0xff000000 | Integer.parseInt( vals[k] );
-                      break;
+                      if ( vals[k].equals("-color") ) {
+                        ++k;
+                        if ( k < vals.length ) {
+                          color = 0xff000000 | Integer.parseInt( vals[k] );
+                        }
+                      }
+                      // break;
                     }
                   }
                   insertInput( surveyname, color );
