@@ -345,6 +345,7 @@ public class ParserTh extends TglParser
       }
       declination -= conv; // correct declination with -convergence
       if ( nocs != null ) {
+        TDLog.v("Fix points without CS <" + cs1.name + ">: " + nocs.toString() );
         TDToast.makeWarn( String.format( TDInstance.getResourceString( R.string.error_fixes_nocs ), cs1.name, nocs.toString() ) );
       }
     }
@@ -897,12 +898,13 @@ public class ParserTh extends TglParser
       // when fixes are checked stations may not have been created yet, therefore the check runs on the shots
       for ( Cave3DShot s1 : shots ) { // HB
           if ( fix.hasName( s1.from ) ) { found = true; break ; }
-          if ( fix.hasName( s1.to ) ) { found = true; break ; }
+          if ( fix.hasName( s1.to ) )   { found = true; break ; }
       }
       if ( found ) {
         ok_fixes.add( fix );
       } else {
         bad_fixes ++;
+        TDLog.v("Bad fix " + fix.getFullName() + " CS " + fix.getCSName() );
       }
     }
     if ( bad_fixes > 0 ) {

@@ -595,8 +595,18 @@ public class DeviceActivity extends Activity
     // if ( mMode == MODE_SELECT ) return; // nothing in mode SELECT
     if ( TDInstance.isDeviceDistoX() ) {
       for ( int k=1; k<mNrButton1; ++k ) mButton1[k].setVisibility( View.VISIBLE );
+      TDandroid.setButtonBackground( mButton1[IDX_TOGGLE], mBMtoggle ); // this should already be enableButtons()
+      TDandroid.setButtonBackground( mButton1[IDX_CALIB], mBMcalib );
+      if ( TDLevel.overNormal ) {
+        TDandroid.setButtonBackground( mButton1[IDX_READ], mBMread_no );
+      }
     } else if ( TDInstance.isDeviceXBLE()) { // SIWEI Changed on Jun 2022
       for ( int k=1; k<mNrButton1; ++k ) mButton1[k].setVisibility( View.VISIBLE ); // FIXME is this OK ?
+      TDandroid.setButtonBackground( mButton1[IDX_TOGGLE], mBMtoggle ); // this should already be enableButtons()
+      TDandroid.setButtonBackground( mButton1[IDX_CALIB], mBMcalib );
+      if ( TDLevel.overNormal ) {
+        TDandroid.setButtonBackground( mButton1[IDX_READ], mBMread_no );
+      }
     } else if ( TDInstance.isDeviceBric() ) {
       mButton1[IDX_INFO].setVisibility( View.VISIBLE );
       for ( int k=2; k<mNrButton1; ++k ) mButton1[k].setVisibility( (k == IDX_MEMORY )? View.VISIBLE : View.GONE );

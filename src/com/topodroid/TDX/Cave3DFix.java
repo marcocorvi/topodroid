@@ -133,6 +133,10 @@ public class Cave3DFix extends Vector3D
    */
   public boolean hasName( String nm ) { return name != null && name.equals( nm ); }
 
+  /** @return the 3D fix CS name
+   */
+  public String getCSName( ) { return cs.name; }
+
   /** @return the 3D fix fullname
    */
   public String getFullName( ) { return name; }
