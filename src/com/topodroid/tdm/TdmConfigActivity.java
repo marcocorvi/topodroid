@@ -107,7 +107,7 @@ public class TdmConfigActivity extends Activity
   private static final int HELP_PAGE = R.string.TdmConfigActivity;
 
   // private TopoDroidApp mApp;
-  private TdmInputAdapter mTdmInputAdapter;
+  // private TdmInputAdapter mTdmInputAdapter;
 
   static TdmConfig mTdmConfig = null;  // current config file
 
@@ -208,8 +208,9 @@ public class TdmConfigActivity extends Activity
   {
     if ( mTdmConfig != null ) {
       // TDLog.v( "TdmConfig update list input nr. " + mTdmConfig.getInputsSize() );
-      mTdmInputAdapter = new TdmInputAdapter( this, R.layout.row, mTdmConfig.getInputs() );
-      mList.setAdapter( mTdmInputAdapter );
+      // mTdmConfig.printInputs(); DEBUG
+      TdmInputAdapter tdm_input_adapter = new TdmInputAdapter( this, R.layout.row, mTdmConfig /* mTdmConfig.getInputs() */ );
+      mList.setAdapter( tdm_input_adapter );
       mList.invalidate();
     } else {
       TDToast.make( R.string.no_tdconfig );
@@ -338,7 +339,8 @@ public class TdmConfigActivity extends Activity
       TdmInput input = new TdmInput( name );
       // mTdmConfig.addInput( input );
       mTdmConfig.setSave();
-      mTdmInputAdapter.add( input );
+      mTdmConfig.addInput( input );
+      // mTdmInputAdapter.addInput( input );
     }
     updateList();
   }
@@ -399,7 +401,7 @@ public class TdmConfigActivity extends Activity
           while ( it.hasNext() ) {
             TdmInput input = (TdmInput) it.next();
             if ( ! input.isChecked() ) {
-              inputs.add( input );
+              inputs.add( input ); // mTdmConfig inputs are name-ordered therefore this inputs get already name-ordered
             } else {
               String survey = input.getSurveyName();
               // TDLog.v( "drop survey >" + survey + "<" );

@@ -33,50 +33,85 @@ import android.view.LayoutInflater;
 
 class TdmInputAdapter extends ArrayAdapter< TdmInput >
 {
-  private ArrayList< TdmInput > mItems;
+  // private ArrayList< TdmInput > mItems;
+  private TdmConfig mConfig;
   private Context mContext;
   private LayoutInflater mLayoutInflater;
 
-  public TdmInputAdapter( Context ctx, int id, ArrayList< TdmInput > items )
+  public TdmInputAdapter( Context ctx, int id, TdmConfig config /* ArrayList< TdmInput > items */ )
   {
-    super( ctx, id, items );
+    // super( ctx, id, items );
+    super( ctx, id, config.getInputs() );
     mContext = ctx;
     mLayoutInflater = (LayoutInflater)ctx.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-    if ( items != null ) {
-      mItems = items;
-    } else {
-      mItems = new ArrayList< TdmInput >();
-    }
+    mConfig  = config;
+    // if ( items != null ) {
+    //   mItems = items;
+    // } else {
+    //   mItems = new ArrayList< TdmInput >();
+    // }
   }
 
-  public TdmInput get( int pos ) { return mItems.get(pos); }
+  /** @return the input at a given position in the array of inputs
+   * @param pos   input position
+   */
+  public TdmInput get( int pos ) 
+  { 
+    return mConfig.getInputAt( pos );
+    // return mItems.get(pos);
+  }
 
+  /** @return the input with the given name
+   * @param name  input name
+   */
   public TdmInput get( String name ) 
   {
-    for ( TdmInput input : mItems ) {
-      if ( input.getSurveyName().equals( name ) ) return input;
-    }
-    return null;
+    return mConfig.getInput( name );
+    // for ( TdmInput input : mItems ) {
+    //   if ( input.getSurveyName().equals( name ) ) return input;
+    // }
+    // return null;
   }
 
-  public void add( TdmInput input ) { mItems.add( input ); }
+  // /** insert a new input UNUSED
+  //  * @param input   new TdmInput 
+  //  */
+  // public void addInput( TdmInput input ) 
+  // { 
+  //   mConfig.addInput( input );
+  //   // mItems.add( input );
+  // }
 
-  public void drop( TdmInput input ) { mItems.remove( input ); }
+  // /** remove an input UNUSED
+  //  * @param input   TdmInput to romove
+  //  */
+  // public void dropInput( TdmInput input )
+  // {
+  //   mConfig.dropInput( input );
+  //   // mItems.remove( input );
+  // }
 
-  public void dropChecked( ) 
-  {
-    final Iterator it = mItems.iterator();
-    while ( it.hasNext() ) {
-      TdmInput input = (TdmInput) it.next();
-      if ( input.isChecked() ) {
-        mItems.remove( input );
-      }
-    }
-  }
+  // /** remove chacked inputs UNUSED
+  //  */
+  // public void dropChecked( ) 
+  // {
+  //   mConfig.dropChecked();
+  //   // final Iterator it = mItems.iterator();
+  //   // while ( it.hasNext() ) {
+  //   //   TdmInput input = (TdmInput) it.next();
+  //   //   if ( input.isChecked() ) {
+  //   //     mItems.remove( input );
+  //   //   }
+  //   // }
+  // }
 
   /** @return the number of input items
    */
-  public int size() { return mItems.size(); }
+  public int size()
+  {
+    return mConfig.getInputsSize();
+    // return mItems.size();
+  }
 
   private class ViewHolder implements OnClickListener
                       , MyColorPicker.IColorChanged
@@ -105,7 +140,7 @@ class TdmInputAdapter extends ArrayAdapter< TdmInput >
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )
   {
-    TdmInput b = mItems.get( pos );
+    TdmInput b = get(pos); // mItems.get( pos );
     if ( b == null ) return convertView;
 
     ViewHolder holder = null; 

@@ -130,6 +130,58 @@ class TdmConfig extends TdmFile
     return false;
   }
 
+  /** @return the last array index with name after the given string (0 if array is empty, the array-length if all name are before the given string)
+   * @param name  given string
+   */
+  private int getInputIndex( String name )
+  {
+    int len = mInputs.size();
+    if ( len == 0 ) {
+      // TDLog.v(name + " in [len 0] -> 0" );
+      return 0;
+    }
+    TdmInput input = mInputs.get( len-1 );
+    if ( len == 1 ) {
+      return ( input.getName().compareToIgnoreCase( name ) <= 0 )? 1 : 0;
+      // TDLog.v(name + " in [len 1]: " + input.getName() + " -> " + ret );
+      // return ret;
+    }
+    if ( input.getName().compareToIgnoreCase( name ) <= 0 ) {
+      // TDLog.v(name + " in [len " + len + "]: last " + input.getName() + " -> " + len );
+      return len;
+    }
+    input = mInputs.get( 0 );
+    if ( input.getName().compareToIgnoreCase( name ) > 0 ) {
+      // TDLog.v(name + " in [len " + len + "]: first " + input.getName() + " -> " + 0 );
+      return 0;
+    }
+    int a1 = 0;
+    int a2 = len;
+    while ( a1+1 < a2 ) {
+      int a = (a1 + a2)/2;
+      input = mInputs.get( a );
+      if ( input.getName().compareToIgnoreCase( name ) <= 0 ) { a1 = a; } else { a2 = a; }
+    }
+    // LOG
+    // StringBuilder names = new StringBuilder();
+    // names.append(name).append( " in [len " + len + "]: " );
+    // for ( int i=0; i<len; ++i ) names.append(" ").append( mInputs.get(i).getName() );
+    // names.append(" -> ").append(a2);
+    // TDLog.v( names.toString() );
+
+    return a2;
+  } 
+
+  // DEBUG
+  // void printInputs()
+  // {
+  //   int len = mInputs.size();
+  //   StringBuilder names = new StringBuilder();
+  //   names.append( "INPUTS [len " + len + "]: " );
+  //   for ( int i=0; i<len; ++i ) names.append(" ").append( mInputs.get(i).getName() );
+  //   TDLog.v( names.toString() );
+  // }
+
   /** insert an input
    * @param name  input name
    * @param color input color
@@ -139,7 +191,8 @@ class TdmConfig extends TdmFile
   {
     if ( name == null ) return;
     // TDLog.v( "insert input " + name );
-    mInputs.add( new TdmInput( name, color ) );
+    int at = getInputIndex( name );
+    mInputs.add( at, new TdmInput( name, color ) );
   }
 
   /** insert an input
@@ -150,8 +203,25 @@ class TdmConfig extends TdmFile
   {
     if ( input == null ) return;
     // TDLog.v( "add input " + input.mName );
-    mInputs.add( input );
+    int at = getInputIndex( input.getName() );
+    mInputs.add( at, input );
     setSave();
+  }
+
+  /** @return the input at a given position in the array of inputs
+   * @param pos   input position
+   */
+  TdmInput getInputAt( int pos ) { return mInputs.get(pos); }
+
+  /** @return the input with the given name
+   * @param name  input name
+   */
+  TdmInput getInput( String name )
+  {
+    for ( TdmInput input : mInputs ) {
+      if ( input.getSurveyName().equals( name ) ) return input;
+    }
+    return null;
   }
 
   /** @return an iterator on the inputs
@@ -189,6 +259,27 @@ class TdmConfig extends TdmFile
       }
     }
   }
+
+  /** remove an input
+   * @param input   TdmInput to romove
+   */
+  public void dropInput( TdmInput input )
+  {
+    mInputs.remove( input );
+  }
+
+  // /** remove chacked inputs UNUSED
+  //  */
+  // public void dropChecked( ) 
+  // {
+  //   final Iterator it = mInputs.iterator();
+  //   while ( it.hasNext() ) {
+  //     TdmInput input = (TdmInput) it.next();
+  //     if ( input.isChecked() ) {
+  //       mInputs.remove( input );
+  //     }
+  //   }
+  // }
 
   /** set the array of inputs
    * @param inputs   array of inputs
@@ -366,7 +457,7 @@ class TdmConfig extends TdmFile
       // TODO
       TDLog.Error( "TdManager exception " + e.getMessage() );
     }
-    // TDLog.v( "Tdm_Config read file: nr. sources " + mInputs.size() );
+    // TDLog.v( "Tdm_Config read file: nr. sources " + getInputsSize() );
   }
  
   // ---------------------------------------------------------
