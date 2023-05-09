@@ -27,6 +27,8 @@ import java.util.List;
 
 public class TdmSurvey
 {
+  static final char SURVEY_SEPARATOR = ':';
+
   protected String mName; // survey name = db_name
   TdmSurvey mParent;
   TdmStation mStartStation;
@@ -158,18 +160,18 @@ public class TdmSurvey
     survey.mParent = this;
   }
 
-  /** get the last-name of the survey
+  /** get the (last) name of this survey
    * @return the survey name
    */
   String getName()   { return mName; }
 
-  /** get the full name of the survey: "last_name.parent_full_name"
+  /** get the full name of the survey: "this_name:parent_full_name"
    * @return the survey full-name
    */
   String getFullName() 
   { 
     if ( mParent != null ) {
-      return mName + "." + mParent.getFullName();
+      return mName + SURVEY_SEPARATOR + mParent.getFullName();
     }
     return mName;
   }

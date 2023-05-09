@@ -139,7 +139,8 @@ public class TDConst
     "LAS-bin",
     "DXF",
     "KML",
-    "Shapefile"
+    "Shapefile",
+    "GPX"
   };
 
   public static final String[] mModelExportTypesNoGeo = {
@@ -151,6 +152,7 @@ public class TDConst
     "DXF"
     // "KML",
     // "Shapefile"
+    // "GPX"
   };
 
   private static final int[] mModelExportIndex = {
@@ -161,7 +163,8 @@ public class TDConst
     SURVEY_FORMAT_LAS_BIN,
     SURVEY_FORMAT_DXF,
     SURVEY_FORMAT_KML,
-    SURVEY_FORMAT_SHP
+    SURVEY_FORMAT_SHP,
+    SURVEY_FORMAT_GPX
   };
 
   public static String getModelFilename( int type, String name )
@@ -175,6 +178,7 @@ public class TDConst
       case ModelType.DXF_ASCII:  return name + ".dxf";
       case ModelType.KML_ASCII:  return name + ".kml";
       case ModelType.SHP_ASCII:  return name + ".shz";
+      case ModelType.GPX_ASCII:  return name + ".gpx";
       // case ModelType.SERIAL: return name + ".txt";
     }
     return name;

@@ -19,6 +19,7 @@ import com.topodroid.c3out.ExportKML;
 import com.topodroid.c3out.ExportCGAL;
 import com.topodroid.c3out.ExportLAS;
 import com.topodroid.c3out.ExportDXF;
+import com.topodroid.c3out.ExportGPX;
 import com.topodroid.c3out.ExportSHP;
 import com.topodroid.c3out.ExportSTL;
 import com.topodroid.c3in.LoxBitmap;
@@ -754,8 +755,8 @@ public class TglParser
       ret = writeWalls( osw );
     } else {                          // model export 
       if ( type == ModelType.KML_ASCII ) { // KML export ASCII
-        TDLog.v("3D export KML");
-        export.debug();
+        // TDLog.v("3D export KML");
+        // export.debug();
         ExportKML kml = new ExportKML();
         if ( export.mWalls ) {
           if ( convexhullcomputer != null ) {
@@ -769,6 +770,9 @@ public class TglParser
           }
         }                                     // splays   walls          station
         ret = kml.exportASCII( osw, this, export.mSplays, export.mWalls, export.mStation );
+      } else if ( type == ModelType.GPX_ASCII ) { // GPX export ASCII
+        ExportGPX gpx = new ExportGPX();
+        ret = gpx.exportASCII( osw, this, export.mSplays, export.mWalls, export.mStation );
       } else if ( type == ModelType.CGAL_ASCII ) { // CGAL export: only stations and splay-points
         // TDLog.v("3D export CGAL");                    // splays       walls          station
         ret = (new ExportCGAL()).exportASCII( osw, this, export.mSplays, export.mWalls, export.mStation );

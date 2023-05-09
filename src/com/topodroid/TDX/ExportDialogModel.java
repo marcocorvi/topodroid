@@ -11,6 +11,7 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.c3out.ExportData;
@@ -128,7 +129,6 @@ public class ExportDialogModel extends MyDialog
   @Override
   public void onClick(View v) 
   {
-    // TDLog.v("TOPOGL selected " + mSelected );
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
       // setOptions(); // not necessary
@@ -140,6 +140,7 @@ public class ExportDialogModel extends MyDialog
         ((CheckBox) findViewById( R.id.model_surface )).isChecked( ),
         ((CheckBox) findViewById( R.id.model_stations )).isChecked( ),
         true ); // overwrite
+      // TDLog.v("TOPOGL selected " + mSelectedPos );
       switch ( mSelectedPos ) {
         case 0: export.mType = ModelType.GLTF; break;
         case 1: export.mType = ModelType.CGAL_ASCII; break;
@@ -149,9 +150,12 @@ public class ExportDialogModel extends MyDialog
         case 5: export.mType = ModelType.DXF_ASCII; break;
         case 6: export.mType = ModelType.KML_ASCII; break;
         case 7: export.mType = ModelType.SHP_ASCII; break;
-        case 8: export.mType = ModelType.SERIAL; break; // TODO 
+        case 8: export.mType = ModelType.GPX_ASCII; break;
+        case 9: export.mType = ModelType.SERIAL; break; // TODO this must be last
+        default:
+          export.mType = ModelType.NONE;
       }
-      export.debug();
+      // export.debug();
       if ( export.mType >= 0 ) mParent.selectExportFile( export );
     // } else if ( b == mBtnBack ) {
     //   /* nothing */

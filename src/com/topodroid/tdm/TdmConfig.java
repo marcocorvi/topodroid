@@ -37,7 +37,7 @@ class TdmConfig extends TdmFile
 {
   // String mParentDir;            // parent directory
   String mSurveyName;
-  TdmSurvey mSurvey;             // inline survey in the tdconfig file
+  // TdmSurvey mSurvey;             // inline survey in the tdconfig file TODO UNUSED
   private ArrayList< TdmSurvey > mViewSurveys = null; // current view surveys
   private ArrayList< TdmInput >  mInputs; // input surveys
   private ArrayList< TdmEquate > mEquates;
@@ -53,7 +53,7 @@ class TdmConfig extends TdmFile
     super( filepath, null );
     // TDLog.v("Tdm_Config cstr filepath " + filepath );
     // mParentDir = (new File( filepath )).getParentFile().getName() + "/";
-    mSurvey    = null;
+    // mSurvey    = null;
     mInputs    = new ArrayList< TdmInput >();
     mEquates   = new ArrayList< TdmEquate >();
     mRead      = false;
@@ -438,6 +438,10 @@ class TdmConfig extends TdmFile
                   break;
                 }
               }    
+            } else if ( vals[0].equals( "include" ) ) {
+              String config_name = vals[1];
+              // TODO include a tdconfig file 
+
             } else if ( vals[0].equals( "equate" ) ) {
               TdmEquate equate = new TdmEquate();
               for (int k=1; k<vals.length; ++k ) {

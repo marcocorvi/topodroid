@@ -118,6 +118,11 @@ public class ExportTask extends AsyncTask< Void, Void, Boolean >
           bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
           ret = mParser.exportModelAscii( mExport.mType, bw, mExport );
           break;
+        case ModelType.GPX_ASCII:
+          // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( pathname + ".kml" ) );
+          bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+          ret = mParser.exportModelAscii( mExport.mType, bw, mExport );
+          break;
         case ModelType.SERIAL:
           // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( pathname + ".txt" ) );
           bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );

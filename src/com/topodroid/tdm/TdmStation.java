@@ -13,6 +13,8 @@ package com.topodroid.tdm;
 
 class TdmStation
 {
+  static final char STATION_SEPARATOR = '@';
+
   String mName;      // name
   float e, s, h, v;  // 3D+H coordinates
   TdmSurvey mSurvey; // survey this station belongs to
@@ -40,10 +42,10 @@ class TdmStation
    */
   String getFullName() 
   {
-    if ( mName.indexOf('@') > 0 ) {
-      return mName + '.' + mSurvey.getFullName();
+    if ( mName.indexOf( TdmStation.STATION_SEPARATOR ) > 0 ) {
+      return mName + TdmSurvey.SURVEY_SEPARATOR + mSurvey.getFullName();
     }
-    return mName + '@' + mSurvey.getFullName();
+    return mName + TdmStation.STATION_SEPARATOR + mSurvey.getFullName();
   }
 
   /** get the station name

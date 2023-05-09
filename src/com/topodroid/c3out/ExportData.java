@@ -65,7 +65,7 @@ public class ExportData
 
   public void debug()
   {
-    TDLog.v("Export data " + mType + " " + mExt + " splays " + mSplays + " walls " + mWalls + " station " + mStation + " surface " + mSurface );
+    TDLog.v("Export " + mName + " type " + mType + " <" + mExt + "> splays " + mSplays + " walls " + mWalls + " station " + mStation + " surface " + mSurface );
   }
 
 }
