@@ -158,6 +158,8 @@ public class SurveyWindow extends Activity
 
   private boolean mSplayColor = false;
 
+  private boolean mWarnTeam = true;
+
   // String getSurveyName() { return TDInstance.survey; }
 
   /** rename the current survey
@@ -313,6 +315,7 @@ public class SurveyWindow extends Activity
   public void onStart() 
   {
     super.onStart();
+    mWarnTeam = true;
     TDLocale.resetTheLocale();
     setMenuAdapter( getResources() );
     closeMenu();
@@ -370,7 +373,7 @@ public class SurveyWindow extends Activity
       int m = TDUtil.dateParseMonth( date );
       int d = TDUtil.dateParseDay( date );
       new DatePickerDialog( mActivity, mDateListener, y, m, d ).show();
-      saveSurvey();
+      saveSurvey( false );
       return;
     }
 
@@ -397,7 +400,7 @@ public class SurveyWindow extends Activity
   @Override
   public void onStop()
   {
-    saveSurvey();
+    saveSurvey( false );
     super.onStop();
   }
 
@@ -504,16 +507,26 @@ public class SurveyWindow extends Activity
 
   // ---------------------------------------------------------------
 
-  private boolean saveSurvey( )
+  /** save survey metadata
+   * @param check_team   whether to check if the "Team" field is not empty
+   * @return true if the survey data have been saved
+   */
+  private boolean saveSurvey( boolean check_team )
   {
+    TDLog.v("Save warn " + mWarnTeam + " check " + check_team );
     // String name = mTextName.getText().toString(); // RENAME is special
     // if ( name == null || name.length == 0 ) {
     // }
     String team = mEditTeam.getText().toString();
     if ( TDString.isNullOrEmpty( team ) ) {
-      mEditTeam.setError( getResources().getString( R.string.error_team_required ) );
-      TDToast.makeBad( R.string.survey_not_saved );
-      return false;
+      if ( mWarnTeam && check_team ) {
+        mEditTeam.setError( getResources().getString( R.string.error_team_required ) );
+        TDToast.makeBad( R.string.survey_not_saved );
+        mWarnTeam = false;
+        return false;
+      } else {
+        team = "";
+      }
     }
     String date = mEditDate.getText().toString();
     String comment = mEditComment.getText().toString();
@@ -529,6 +542,7 @@ public class SurveyWindow extends Activity
 
     // TDLog.v( "UPDATE survey id " + TDInstance.sid + " team " + team + " date " + date + " comment " + comment );
     mApp_mData.updateSurveyInfo( TDInstance.sid, date, team, decl, comment, mInitStation, mXSections );
+    mWarnTeam = true;
     return true;
   }
 
@@ -541,7 +555,7 @@ public class SurveyWindow extends Activity
    */
   public void doExport( String type, String filename, String prefix, boolean second )
   {
-    if ( ! saveSurvey() ) return;
+    if ( ! saveSurvey( false ) ) return;
     mExportPrefix = prefix;
     int index = TDConst.surveyFormatIndex( type );
     // TDLog.v( "SURVEY do export: type " + type + " index " + index );
@@ -646,7 +660,7 @@ public class SurveyWindow extends Activity
   {
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
-        if ( ! saveSurvey() ) return false;
+        if ( ! saveSurvey( true ) ) return true;
         TopoDroidApp.mSurveyWindow = null;
         super.onBackPressed();
         return true;

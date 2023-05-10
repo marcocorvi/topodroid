@@ -67,6 +67,7 @@ class SurveyNewDialog extends MyDialog
 
   private long mOldSid = -1L;
   private long mOldId  = -1L;
+  private boolean mWarnTeam;
 
 // -------------------------------------------------------------------
   /** cstr
@@ -82,6 +83,7 @@ class SurveyNewDialog extends MyDialog
     mApp    = (TopoDroidApp) mParent.getApplication();
     mOldSid = old_sid;
     mOldId  = old_id;
+    mWarnTeam = true;
   }
 
   @Override
@@ -205,8 +207,13 @@ class SurveyNewDialog extends MyDialog
     String date = mEditDate.getText().toString();
     String team = mEditTeam.getText().toString();
     if ( TDString.isNullOrEmpty( team ) ) {
-      mEditTeam.setError( mContext.getResources().getString( R.string.error_team_required ) );
-      return false;
+      if ( mWarnTeam ) {
+        mEditTeam.setError( mContext.getResources().getString( R.string.error_team_required ) );
+        mWarnTeam = false;
+        return false;
+      } else {
+        team = "";
+      }
     } 
     String comment = mEditComment.getText().toString();
     double decl = SurveyInfo.declination( mEditDecl );
