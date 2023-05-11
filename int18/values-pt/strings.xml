@@ -1341,6 +1341,9 @@ no campo abaixo e aperte o botão.
   <string name="pref_csv_sep_summary">Separador de campos nos arquivos CSV exportados</string>
   <string name="pref_csv_eol_title">Separ linha CSV</string>
   <string name="pref_csv_eol_summary">Separador de linhas nos arquivos CSV exportados</string>
+  <!-- TODO string name="pref_gpx_single_track_title">GPX single track</string -->
+  <!-- TODO string name="pref_gpx_single_track_summary">Export project surveys as a single GPX track</string -->
+
   <string name="pref_sock_type_title">Soquete DistoX</string>
   <string name="pref_sock_type_summary">Tipo de soquete bluetooth para DistoX</string>
   <!-- UNUSED string name="pref_device_type_title">Tipo de DistoX</string -->

@@ -1445,6 +1445,8 @@
   <string name="pref_csv_sep_summary">Разделитель данных в CSV</string>
   <string name="pref_csv_eol_title">CSV eol</string>
   <string name="pref_csv_eol_summary">CSV окончание строки</string>
+  <!-- TODO string name="pref_gpx_single_track_title">GPX single track</string -->
+  <!-- TODO string name="pref_gpx_single_track_summary">Export project surveys as a single GPX track</string -->
 
   <string name="pref_sock_type_title">Тип соединения</string>
   <string name="pref_sock_type_summary">Тип соединения Bluetooth</string>

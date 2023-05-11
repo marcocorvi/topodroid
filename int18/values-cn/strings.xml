@@ -1448,6 +1448,8 @@
   <string name="pref_csv_sep_summary">CSV 分隔符字段</string>
   <string name="pref_csv_eol_title">CSV 表达语言</string>
   <string name="pref_csv_eol_summary">CSV 记录分隔符</string>
+  <!-- TODO string name="pref_gpx_single_track_title">GPX single track</string -->
+  <!-- TODO string name="pref_gpx_single_track_summary">Export project surveys as a single GPX track</string -->
 
   <string name="pref_sock_type_title">信道</string>
   <string name="pref_sock_type_summary">蓝牙信道类型</string>

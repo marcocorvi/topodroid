@@ -1459,6 +1459,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_csv_sep_summary">Séparateur des données du fichier CSV</string>
     <string name="pref_csv_eol_title">CSV fin de ligne</string>
     <string name="pref_csv_eol_summary">Séparateur d\'enregistrements CSV</string>
+  <!-- TODO string name="pref_gpx_single_track_title">GPX single track</string -->
+  <!-- TODO string name="pref_gpx_single_track_summary">Export project surveys as a single GPX track</string -->
 
     <string name="pref_sock_type_title">Socket</string>
     <string name="pref_sock_type_summary">Créer un socket</string>

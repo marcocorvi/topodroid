@@ -240,8 +240,8 @@
     <string name="import_zip_newer">ZIP importato da una versione più recente</string>
     <!-- UNUSED string name="import_zip_wait">Importare uno ZIP richiede tempo. Attendi&#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->
-    <!-- TODO string name="GPS_position_none">No GPS position data</string -->
-    <!-- TODO string name="GPX_record_none">No GPX point record</string -->
+    <string name="GPS_position_none">Nessun dato da GPS position</string>
+    <string name="GPX_record_none">Nessun punto da GPX record</string>
     <string name="MT_points_none">Punto GPS mancante</string>
     <string name="MT_bad_file">File MobileTopographer corrotto</string>
     <string name="bad_manifest">File manifesto corrotto [%1$d]</string>
@@ -447,7 +447,7 @@
     <!-- UNUSED string name="menu_pair">ASSOCIA</string -->
     <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">FOTO</string>
-    <!-- TODO string name="menu_sections">SECTIONS</string -->
+    <string name="menu_sections">SEZIONI</string>
     <string name="menu_sensor">SENSORI</string>
     <!-- UNUSED string name="menu_scan">CERCA</string -->
     <!-- UNUSED string name="menu_scan_ble">SCAN BTLE</string -->
@@ -676,7 +676,7 @@
     <!-- UNUSED string name="zoom_in_out">Zoom in/out</string -->
 
     <string name="survey_info">Info rilievo</string>
-    <!-- TODO string name="stat_dates">From %1$s to %2$s</string -->
+    <string name="stat_dates">Da %1$s a %2$s</string>
     <string name="stat_devices">Dispositivo %1$d: %2$s</string>
     <string name="stat_stddev_m">M stddev %1$.1f %%</string>
     <string name="stat_stddev_g">G stddev %1$.1f %%</string>
@@ -699,7 +699,7 @@
     <string name="stat_dangling">Tiri scollegati %1$d %2$.1f %3$s</string>
     <string name="stat_surface">Tiri di superficie %1$d # %2$d %3$.1f %4$s</string>
     <!-- UNUSED string name="stat_surface_z">Surface Z %1$.1f %2$.1f %3$s</string -->
-    <!-- TODO string name="stat_survey_z">Survey Z %1$.1f %2$.1f %3$s</string -->
+    <string name="stat_survey_z">Rilievo: Z %1$.1f %2$.1f %3$s</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string>
     <string name="stat_angle_error">Errori angolari %1$.2f ± %2$.2f"</string>
     <string name="shot_title">BATTUTA %1$s - %2$s"</string>
@@ -847,9 +847,9 @@
     <string name="mode_fixed">[ Bloccati ]</string>
     <string name="mode_outline">Solo contorno</string>
     <string name="mode_scale_ref">Scala barra di riferimento</string>
-    <!-- TODO string name="mode_sections">Sections</string -->
-    <!-- TODO string name="mode_walls">Walls</string -->
-    <!-- TODO string name="mode_refs">Frame</string -->
+    <string name="mode_sections">Sezioni</string>
+    <string name="mode_walls">Pareti</string>
+    <string name="mode_refs">Riferimento</string>
 
     <string name="layer_floor">Pavimento</string>
     <string name="layer_fill">Riempimenti</string>
@@ -963,7 +963,7 @@
     <string name="man_project">14. Progetti di grotta</string>
     <string name="man_threed">15. Visualizzatore 3D</string>
     <string name="man_content">16. Indice</string>
-    <!-- TODO string name="man_index">17. Index</string -->
+    <string name="man_index">17. Indice anal.</string>
     <string name="man_website">* Sito_Web</string>
 
     <string name="help_help">Questo aiuto</string>
@@ -1021,8 +1021,8 @@
     <string name="help_edit">Modalità editing</string>
     <string name="help_refs">Seleziona riferimenti per disegno</string>
     <string name="help_rename">Modifica il nome del rilievo</string>
-    <!-- TODO string name="help_plot_close">Close sketch</string -->
-    <!-- TODO string name="help_plot_delete">Delete sketch</string -->
+    <string name="help_plot_close">Chiudi disegno</string>
+    <string name="help_plot_delete">Elimina disegno</string>
     <string name="help_plot_rename">Rinomina/Elimina disegno</string>
     <string name="help_plot_scrap">Scarti di disegno</string>
     <string name="help_plot_switch">Scambia disegno</string>
@@ -1036,9 +1036,9 @@
     <string name="help_redo">Ripeti ultima azione di disegno</string>
     <string name="help_symbol_plot">Seleziona prototipo per disegno</string>
     <string name="help_delete_item">Cancella elemento del disegno</string>
-    <!-- TODO string name="help_section_type">Sketch section type</string -->
-    <!-- TODO string name="help_section_item">Sketch section item</string -->
-    <!-- TODO string name="help_select_clear">Clear sketch selection</string -->
+    <string name="help_section_type">Tipo sezione</string>
+    <string name="help_section_item">Oggetto sezione</string>
+    <string name="help_select_clear">Annulla selezione disegno</string>
     <string name="help_range">Sposta porzione di linea</string>
     <!-- UNUSED string name="help_clear">Pulisci selezione</string -->
     <string name="help_eraser">Modalità cancella</string>
@@ -1095,8 +1095,8 @@
     <string name="help_delete_config">Cancella progetto</string>
     <string name="help_add_equate">Aggiungi rilievi simili</string>
     <string name="help_equates">Lista rilievi simili</string>
-    <!-- TODO string name="help_stations_minus">Show fewer stations</string -->
-    <!-- TODO string name="help_stations_plus">Show more stations</string -->
+    <string name="help_stations_minus">Mostra meno capisaldi</string>
+    <string name="help_stations_plus">Mostra piú capisaldi</string>
 
     <!-- UNUSED string name="export_bgcolor">Colore di sfondo</string -->
     <string name="export_bothviews">Pianta e sezione</string>
@@ -1115,7 +1115,7 @@
     <string name="export_prefix_hint">prefisso</string>
     <string name="export_suffix_hint">suffisso</string>
     <string name="export_roundtrip">Round-trip</string>
-    <!-- TODO string name="export_share">Share</string -->
+    <string name="export_share">Condividi</string>
     <!-- UNUSED string name="export_scale_png">Risoluzione</string -->
     <string name="export_scale_th">Scala 1 :</string>
     <string name="export_spacing_th">Spazio fra punti Therion</string>
@@ -1319,7 +1319,7 @@
   <string name="pref_cat_device">OPZIONI DISTOX</string>
   <string name="pref_cat_cave3d">VIEWER 3D</string>
   <string name="pref_cat_geek">FLAG PRINCIPIANTI</string>
-  <!-- TODO string name="pref_cat_sketch">3D SKETCH</string -->
+  <string name="pref_cat_sketch">SCHIZZO 3D</string>
   <!-- UNUSED string name="pref_cat_log">Opzioni log</string -->
 
   <string name="pref_locale_title">Lingua</string>
@@ -1443,6 +1443,9 @@
   <string name="pref_csv_sep_summary">Separatore campi CSV</string>
   <string name="pref_csv_eol_title">Fine linea CSV</string>
   <string name="pref_csv_eol_summary">Separatore riga CSV</string>
+  <string name="pref_gpx_single_track_title">GPX a traccia unica</string>
+  <string name="pref_gpx_single_track_summary">Rilievi dei progetti in una sola traccia</string>
+
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Crea socket</string>
   <!-- UNUSED string name="pref_device_type_title">Tipo DistoX</string -->
@@ -1661,8 +1664,8 @@
   <string name="pref_line_thickness_summary">Spessore linee disegno</string>
   <string name="pref_line_units_title">Unita\' linea</string>
   <string name="pref_line_units_summary">Unita\' disegno linea</string>
-  <!-- TODO string name="pref_line_close_title">Close closed lines</string -->
-  <!-- TODO string name="pref_line_close_summary">Close lines of closed type</string -->
+  <string name="pref_line_close_title">Completa linee chiuse</string>
+  <string name="pref_line_close_summary">Chiudi le linee di tipo "chiuso"</string>
   <string name="pref_linesnap_title">Snap di linea/area</string>
   <string name="pref_linesnap_summary">Snap di linee/aree su linee</string>
   <string name="pref_linecurve_title">Aggiusta segmento</string>
@@ -1977,7 +1980,7 @@
     <string name="info_shot">Battute</string>
     <string name="info_station">Capisaldi</string>
     <string name="info_length">Sviluppo</string>
-    <!-- TODO string name="info_surface">Surface length</string -->
+    <string name="info_surface">Lunghezza battute esterne</string>
     <string name="info_depth">Dislivello</string>
     <string name="info_volume">Volume</string>
 
@@ -2055,8 +2058,8 @@
     <string name="ctitle">%1$s  Clino: %2$.0f  Azimut: %3$.0f</string>
     <string name="ctitle_surface_alpha">Trasparenza DEM</string>
     <!-- UNUSED string name="ctitle_sketches">Disegni</string -->
-    <!-- TODO string name="ctitle_sketch_h">[H]</string -->
-    <!-- TODO string name="ctitle_sketch_v">[V]</string -->
+    <string name="ctitle_sketch_h">[H]</string>
+    <string name="ctitle_sketch_v">[V]</string>
     <string name="ctitle_legs">Battute</string>
     <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
     <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
