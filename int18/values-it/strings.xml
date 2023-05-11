@@ -1225,6 +1225,7 @@
     <string name="title_settings_dxf">DXF: Imposta export</string>
     <string name="title_settings_shp">Shapefile: Imposta export</string>
     <!-- UNUSED string name="title_settings_png">PNG: Imposta export</string -->
+    <!-- TODO string name="title_settings_gpx">GPX export settings</string -->
     <string name="title_settings_kml">KML: Imposta export</string>
 
     <string name="title_settings_sketch">Impostazione disegno 3D</string>

@@ -1229,6 +1229,7 @@
     <string name="title_settings_dxf">DXF输出设置</string>
     <string name="title_settings_shp">成形文件输出设定</string>
     <!-- UNUSED string name="title_settings_png">PNG输出设置</string -->
+    <!-- TODO string name="title_settings_gpx">GPX export settings</string -->
     <string name="title_settings_kml">KML输出设置</string>
 
     <string name="title_settings_sketch">TopoDroid 3d草图设置</string>

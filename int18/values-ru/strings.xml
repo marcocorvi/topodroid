@@ -1226,6 +1226,7 @@
     <string name="title_settings_dxf">DXF настройки экспорта</string>
     <string name="title_settings_shp">Shapefile настройки экспортаs</string>
     <!-- UNUSED string name="title_settings_png">PNG настройки экспорта</string -->
+    <!-- TODO string name="title_settings_gpx">GPX export settings</string -->
     <string name="title_settings_kml">KML настройки экспорта</string>
 
     <string name="title_settings_sketch">TopoDroid настройки 3d абриса</string>
