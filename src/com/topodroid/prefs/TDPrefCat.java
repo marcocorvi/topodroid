@@ -34,6 +34,7 @@ public class TDPrefCat
   public static final int PREF_CATEGORY_SHP       = 15;
   public static final int PREF_CATEGORY_DXF       = 16;
   // public static final int PREF_CATEGORY_PNG       = 17; // NO_PNG
+  public static final int PREF_CATEGORY_GPX       = 17;
   public static final int PREF_CATEGORY_KML       = 18;
   public static final int PREF_CATEGORY_CSV       = 19;
   public static final int PREF_SHOT_DATA          = 20; 
@@ -77,7 +78,8 @@ public class TDPrefCat
     R.string.title_settings_svg,      // 14
     R.string.title_settings_shp,
     R.string.title_settings_dxf,
-    -1, // R.string.title_settings_png, // 17
+    // R.string.title_settings_png, // 17
+    R.string.title_settings_gpx,      // 18
     R.string.title_settings_kml,      // 18
     R.string.title_settings_csv,
     R.string.title_settings_shot,     

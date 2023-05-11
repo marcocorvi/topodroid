@@ -401,7 +401,8 @@ public class TDPrefKey
     "DISTOX_EXPORT_DXF_PREF",
     // "DISTOX_EXPORT_PNG_PREF", // NO_PNG
     "DISTOX_EXPORT_KML_PREF",    // 16
-    "DISTOX_EXPORT_CSV_PREF",    // 17
+    "DISTOX_EXPORT_GPX_PREF",    // 17
+    "DISTOX_EXPORT_CSV_PREF",    // 18
     null
   };
 
@@ -424,6 +425,7 @@ public class TDPrefKey
     R.string.pref_cat_exportdxf,
     // R.string.pref_cat_exportpng, // NO_PNG
     R.string.pref_cat_exportkml,
+    R.string.pref_cat_exportgpx,
     R.string.pref_cat_exportcsv,
   };
 
@@ -447,6 +449,7 @@ public class TDPrefKey
     // -1, // NO_PNG
     -1,
     -1,
+    -1,
   };
 
   public static String[] EXPORTdef = {
@@ -457,6 +460,7 @@ public class TDPrefKey
     TDString.ZERO,
     TDString.NINETY,
     "0.2",
+    TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
@@ -489,7 +493,8 @@ public class TDPrefKey
     TDString.EMPTY,
     TRUE,
   };
-  // ------------------------------------------------------------------------------
+
+  // EXPORT CSV -------------------------------------------------------------------
   public static String[] EXPORT_CSX = { // [1]
     "DISTOX_STATION_PREFIX"        // whether to add cave-name prefix to stations (cSurvey/Compass export)
   };
@@ -506,6 +511,24 @@ public class TDPrefKey
     null
   };
 
+  // EXPORT GPX -----------------
+  public static String[] EXPORT_GPX = { // [1]
+    "DISTOX_GPX_SINGLE_TRACK"        // whether to export project surveys as a single track
+  };
+  static int[] EXPORT_GPXtitle = { // [1]
+    R.string.pref_gpx_single_track_title,
+    -1
+  };
+  static int[] EXPORT_GPXdesc = { // [1]
+    R.string.pref_gpx_single_track_summary,
+    -1
+  };
+  public static String[] EXPORT_GPXdef = { // [1]
+    TRUE,
+    null
+  };
+
+  // EXPORT CSV -----------------
   public static String[] EXPORT_CSV = { // [1]
     "DISTOX_CSV_RAW",
     "DISTOX_CSV_SEP",   // separator: 0 comma, 1 pipe, 2 tab

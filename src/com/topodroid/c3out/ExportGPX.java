@@ -20,6 +20,7 @@ import com.topodroid.TDX.Cave3DSurvey;
 import com.topodroid.TDX.Cave3DStation;
 import com.topodroid.TDX.Cave3DFix;
 import com.topodroid.TDX.Cave3DShot;
+import com.topodroid.prefs.TDSetting;
 import com.topodroid.mag.Geodetic;
 import com.topodroid.c3walls.cw.CWFacet;
 import com.topodroid.c3walls.cw.CWPoint;
@@ -112,11 +113,12 @@ public class ExportGPX
     boolean ret = true;
     if ( data == null ) return false; // always false
 
-    TDLog.v( "GPX export splays " + do_splays + " walls " + do_walls + " stations " + do_station );
     if ( ! getGeolocalizedData( data, 0.0f, 1.0f ) ) { // FIXME declination 0.0f
       TDLog.Error( "GPX no geolocalized station");
       return false;
     }
+    boolean single_track = TDSetting.mGPXSingleTrack;
+    TDLog.v( "GPX export splays " + do_splays + " stations " + do_station + " single track " + single_track );
 
     // TODO use survey colors
     List< Cave3DSurvey > surveys  = data.getSurveys();
@@ -148,16 +150,27 @@ public class ExportGPX
       pw.format(Locale.US, "    xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd\">\n");
       pw.format(Locale.US, "  <time>%s</time>\n", TDUtil.currentDateTime() );
       pw.format(Locale.US, "  <bounds minlat=\"%.7f\" minlon=\"%.7f\" maxlat=\"%.7f\" maxlon=\"%.7f\"/>\n", minlat, minlon, maxlat, maxlon );
+      pw.format(Locale.US, "  <extensions>\n");
+      pw.format(Locale.US, "    <color>#ff0000</color>\n"); // red
+      pw.format(Locale.US, "    <width>thin</width>\n");
+      pw.format(Locale.US, "  </extensions>\n");
+
+      if ( single_track ) pw.format(Locale.US, "<trk>\n");
     
       for ( Cave3DSurvey survey : surveys ) {
         String survey_name = survey.getName();
         // int    sid  = survey.getId();
-        pw.format(Locale.US, "<trk>\n");
-        pw.format(Locale.US, "  <name>%s</name>\n", survey_name );
+        if ( ! single_track ) {
+          pw.format(Locale.US, "<trk>\n");
+          pw.format(Locale.US, "  <name>%s</name>\n", survey_name );
+          // pw.format(Locale.US, "  <extensions>\n"); // ineffective in OsmAnd
+          // pw.format(Locale.US, "    <color>#%06x</color>\n", (0x00ffffff & survey.getColor() ) );
+          // pw.format(Locale.US, "  </extensions>\n");
+        }
         if ( do_station ) {
           stations = survey.getStations();
-          pw.format(Locale.US, "<Folder>\n");
-          pw.format(Locale.US, "  <name>stations</name>\n" );
+          // pw.format(Locale.US, "<Folder>\n");
+          // pw.format(Locale.US, "  <name>stations</name>\n" );
           for ( Cave3DStation st : stations ) {
             double e = lng + (st.x - zero.x) * e_radius;
             double n = lat + (st.y - zero.y) * s_radius;
@@ -168,7 +181,7 @@ public class ExportGPX
             pw.format(Locale.US, "    <desc></desc>\n");
             pw.format(Locale.US, "  </wpt>\n");
           }
-          pw.format(Locale.US, "</Folder>\n");
+          // pw.format(Locale.US, "</Folder>\n");
         // } else {
         //   TDLog.v("3D GPX no stations ");
         }
@@ -219,8 +232,9 @@ public class ExportGPX
             pw.format(Locale.US, "    </trkseg>\n");
           }
         }
-        pw.format(Locale.US, "</trk>\n");
+        if ( ! single_track ) pw.format(Locale.US, "</trk>\n");
       }
+      if ( single_track ) pw.format(Locale.US, "</trk>\n");
       pw.format(Locale.US, "</gpx>\n");
       osw.flush();
       osw.close();

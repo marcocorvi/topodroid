@@ -1243,6 +1243,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="title_settings_dxf">DXF export settings</string>
     <string name="title_settings_shp">Shapefile export settings</string>
     <!-- UNUSED string name="title_settings_png">PNG export settings</string -->
+    <string name="title_settings_gpx">GPX export settings</string>
     <string name="title_settings_kml">KML export settings</string>
 
     <string name="title_settings_sketch">3d sketch settings</string>
@@ -1326,6 +1327,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_cat_exportdxf" translatable="false">DXF</string>
   <string name="pref_cat_exportshp" translatable="false">Shapefile</string>
   <!-- UNUSED string name="pref_cat_exportpng" translatable="false">PNG</string NO_PNG -->
+  <string name="pref_cat_exportgpx" translatable="false">GPX</string>
   <string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string>
   <string name="pref_cat_exportcsx" translatable="false">cSurvey</string>
   <string name="pref_cat_exportcsv" translatable="false">CSV</string>
@@ -1463,6 +1465,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_csv_sep_summary">CSV fields separator</string>
   <string name="pref_csv_eol_title">CSV eol</string>
   <string name="pref_csv_eol_summary">CSV records separator</string>
+  <string name="pref_gpx_single_track_title">GPX single track</string>
+  <string name="pref_gpx_single_track_summary">Export project surveys as a single GPX track</string>
 
   <string name="pref_sock_type_title" copyable="fr it">Socket</string>
   <string name="pref_sock_type_summary">Bluetooth socket type</string>

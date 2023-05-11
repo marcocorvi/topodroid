@@ -859,7 +859,8 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeFwd( cat, key[15], tit[15],          T,                  ctx, hlp ), // dxf
       // makeFwd( cat, key[16], tit[16],          T,                  ctx, hlp ), // png NO_PNG
       makeFwd( cat, key[16], tit[16],          T,                  ctx, hlp ),
-      makeFwd( cat, key[17], tit[17],          T,                  ctx, hlp )
+      makeFwd( cat, key[17], tit[17],          T,                  ctx, hlp ),
+      makeFwd( cat, key[18], tit[18],          T,                  ctx, hlp )
     };
   }
 
@@ -1110,6 +1111,23 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     String[] def = TDPrefKey.EXPORT_CSXdef;
     return new TDPref[ ] {
       makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],         ctx, hlp ) // DISTOX_STATION_PREFIX
+    };
+  }
+
+  /** construct the "GPX" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "GPX" preferences
+   */
+  public static TDPref[] makeGpxPrefs( Context ctx, TDPrefHelper hlp )
+  {
+    int cat = TDPrefCat.PREF_CATEGORY_GPX;
+    String[] key = TDPrefKey.EXPORT_GPX;
+    int[] tit = TDPrefKey.EXPORT_GPXtitle;
+    int[] dsc = TDPrefKey.EXPORT_GPXdesc;
+    String[] def = TDPrefKey.EXPORT_GPXdef;
+    return new TDPref[ ] {
+      makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],         ctx, hlp ) // DISTOX_GPX_SINGLE_TRACK
     };
   }
 

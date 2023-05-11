@@ -263,6 +263,8 @@ public class TDSetting
   public static final int SVG_ILLUSTRATOR = 1;
   public static int mSvgProgram = SVG_ILLUSTRATOR;
 
+  public static boolean mGPXSingleTrack = false;
+
   public static float mBezierStep  = 0.2f;
   public static float getBezierStep() { return ( mBezierStep < 0.1f )? 0.05f : (mBezierStep/2); }
  
@@ -1147,6 +1149,10 @@ public class TDSetting
     // String[] defExpCsx = TDPrefKey.EXPORT_CSXdef;
     // mExportStationsPrefix = prefs.getBoolean(     keyExpCsx[0], bool(defExpCsx[0]) ); // DISTOX_STATION_PREFIX
 
+    String[] keyExpGpx = TDPrefKey.EXPORT_GPX;
+    String[] defExpGpx = TDPrefKey.EXPORT_GPXdef;
+    mGPXSingleTrack    = prefs.getBoolean(     keyExpGpx[0], bool(defExpGpx[0]) ); // DISTOX_GPX_STATION_TRACK
+
     String[] keyExpCsv = TDPrefKey.EXPORT_CSV;
     String[] defExpCsv = TDPrefKey.EXPORT_CSVdef;
     mCsvRaw            = prefs.getBoolean(     keyExpCsv[0], bool(defExpCsv[0]) ); // DISTOX_CSV_RAW
@@ -1374,6 +1380,7 @@ public class TDSetting
       case TDPrefCat.PREF_CATEGORY_DXF:    return updatePrefDxf( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_SHP:    return updatePrefShp( hlp, k, v );
       // case TDPrefCat.PREF_CATEGORY_PNG:    return updatePrefPng( hlp, k, v ); // NO_PNG
+      case TDPrefCat.PREF_CATEGORY_GPX:    return updatePrefGpx( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_KML:    return updatePrefKml( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_CSV:    return updatePrefCsv( hlp, k, v );
       case TDPrefCat.PREF_SHOT_DATA:       return updatePrefData( hlp, k, v );
@@ -2122,6 +2129,20 @@ public class TDSetting
       mKmlSplays   = tryBooleanValue( hlp, k, v, bool(def[ 1 ]) );
     } else {
       TDLog.Error("missing EXPORT KML key: " + k );
+    }
+    return null;
+  }
+
+
+  private static String updatePrefGpx( TDPrefHelper hlp, String k, String v )
+  {
+    // TDLog.v("update pref GPX: " + k );
+    String[] key = TDPrefKey.EXPORT_GPX;
+    String[] def = TDPrefKey.EXPORT_GPXdef;
+    if ( k.equals( key[ 0 ] ) ) { // DISTOX_GPX_SINGLE_TRACK (bool)
+      mGPXSingleTrack = tryBooleanValue( hlp, k, v, bool(def[ 0 ]) );
+    } else {
+      TDLog.Error("missing EXPORT GPX key: " + k );
     }
     return null;
   }
@@ -3040,6 +3061,7 @@ public class TDSetting
         mSvgShotStroke, mSvgLabelStroke, mSvgLabelSize, mSvgStationSize, mSvgPointStroke,
         tf(mSvgRoundTrip), tf(mSvgGrid), mSvgGridStroke, mSvgLineStroke, tf(mSvgLineDirection), mSvgLineDirStroke, tf(mSvgSplays) ); // , mSvgProgram );
       pw.printf(Locale.US, "SHP: georef-plan %c \n", tf(mShpGeoref) );
+      pw.printf(Locale.US, "GPX: single-track %c \n", tf(mGPXSingleTrack) );
       pw.printf(Locale.US, "KML: stations %c, splays %c \n", tf(mKmlStations), tf(mKmlSplays) );
       pw.printf(Locale.US, "CSV: raw %c, separator \'%c\' \n", tf(mCsvRaw), mCsvSeparator );
 
@@ -3388,6 +3410,12 @@ public class TDSetting
         if ( line.startsWith("SHP") ) {
           if ( vals.length > 2 ) {
             mShpGeoref = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_SHP_GEOREF", mShpGeoref );
+          }
+          continue;
+        }
+        if ( line.startsWith("GPX") ) {
+          if ( vals.length > 2 ) {
+            mGPXSingleTrack = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_GPX_SINGLE_TRACK", mGPXSingleTrack );
           }
           continue;
         }
