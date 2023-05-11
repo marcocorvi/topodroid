@@ -1454,8 +1454,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_csv_sep_summary">CSV mező határoló</string>
   <string name="pref_csv_eol_title">CSV sorvége</string>
   <string name="pref_csv_eol_summary">CSV sor elválasztó</string>
-  <!-- TODO string name="pref_gpx_single_track_title">GPX single track</string -->
-  <!-- TODO string name="pref_gpx_single_track_summary">Export project surveys as a single GPX track</string -->
+  <string name="pref_gpx_single_track_title">Egy GPX track</string -->
+  <string name="pref_gpx_single_track_summary">Mérési projek exportálása egy GPX track-ba</string>
 
   <string name="pref_sock_type_title">Csatlakozás</string>
   <string name="pref_sock_type_summary">Bluetooth socket típus</string>
