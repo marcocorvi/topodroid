@@ -1143,6 +1143,7 @@ no campo abaixo e aperte o botão.
   <string name="title_settings_dxf">Configurações exportação DXF</string>
   <string name="title_settings_shp">Configurações exportação SHP</string>
   <!-- UNUSED string name="title_settings_png">Configurações exportação PNG</string -->
+  <string name="title_settings_gpx">Configurações exportação GPX</string>
   <string name="title_settings_kml">Configurações exportação KML</string>
   <string name="title_settings_sketch">Configurações croquis 3D</string>
   <string name="title_settings_survey">Configurações topo</string>
@@ -1341,9 +1342,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_csv_sep_summary">Separador de campos nos arquivos CSV exportados</string>
   <string name="pref_csv_eol_title">Separ linha CSV</string>
   <string name="pref_csv_eol_summary">Separador de linhas nos arquivos CSV exportados</string>
-  <!-- TODO string name="pref_gpx_single_track_title">GPX single track</string -->
-  <!-- TODO string name="pref_gpx_single_track_summary">Export project surveys as a single GPX track</string -->
-
+  <string name="pref_gpx_single_track_title">GPX track único</string>
+  <string name="pref_gpx_single_track_summary">Exportar topos do projeto como um track GPX único</string>
   <string name="pref_sock_type_title">Soquete DistoX</string>
   <string name="pref_sock_type_summary">Tipo de soquete bluetooth para DistoX</string>
   <!-- UNUSED string name="pref_device_type_title">Tipo de DistoX</string -->
@@ -1472,8 +1472,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_team_summary">Equipe padrão para novas topos</string>
   <string name="pref_ethr_title">Lim vert aux</string>
   <string name="pref_ethr_summary">Ângulo máximo a partir dos 90° para que uma nova visada seja considerada como vertical no perfil retificado [deg]</string>
-  <string name="pref_vthr_title">Lim inclin aux</string>
-  <string name="pref_vthr_summary">(Therion "vthreshold") acima deste limite medidas auxiliares EDTC viram OLNS</string>
+  <string name="pref_vthr_title">Lim inclin OLNS</string>
+  <string name="pref_vthr_summary">(Therion "vthreshold") inclinação acima deste limite medidas auxiliares são consideradas Oeste-Leste-Norte-Sul (OLNS)</string>
   <string name="pref_plan_vthr_title">Lim aux planta baixa</string>
   <string name="pref_plan_vthr_summary">Esconder medidas auxiliares com inclinação acima deste valor na planta baixa</string>
   <string name="pref_init_station_title">Nome base inicial</string>
