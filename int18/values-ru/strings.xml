@@ -1226,7 +1226,7 @@
     <string name="title_settings_dxf">DXF настройки экспорта</string>
     <string name="title_settings_shp">Shapefile настройки экспортаs</string>
     <!-- UNUSED string name="title_settings_png">PNG настройки экспорта</string -->
-    <!-- TODO string name="title_settings_gpx">GPX export settings</string -->
+    <string name="title_settings_gpx">GPX настройки экспорта</string>
     <string name="title_settings_kml">KML настройки экспорта</string>
 
     <string name="title_settings_sketch">TopoDroid настройки 3d абриса</string>
@@ -1446,8 +1446,8 @@
   <string name="pref_csv_sep_summary">Разделитель данных в CSV</string>
   <string name="pref_csv_eol_title">CSV eol</string>
   <string name="pref_csv_eol_summary">CSV окончание строки</string>
-  <!-- TODO string name="pref_gpx_single_track_title">GPX single track</string -->
-  <!-- TODO string name="pref_gpx_single_track_summary">Export project surveys as a single GPX track</string -->
+  <string name="pref_gpx_single_track_title">GPX единый трек</string>
+  <string name="pref_gpx_single_track_summary">Экспорт съёмок проекта в единый GPX трек</string>
 
   <string name="pref_sock_type_title">Тип соединения</string>
   <string name="pref_sock_type_summary">Тип соединения Bluetooth</string>
@@ -1796,8 +1796,8 @@
   <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
 
-  <!-- TODO string name="pref_3d_sketch_title">3D modeling</string -->
-  <!-- TODO string name="pref_3d_sketch_summary">Enable 3D modeling (debug build only)</string -->
+  <string name="pref_3d_sketch_title">3D моделирование</string>
+  <string name="pref_3d_sketch_summary">Включить 3D моделирование (debug build only)</string>
   <string name="pref_sketch_splay_buffer_title">Буфер сплеев</string>
   <string name="pref_sketch_splay_buffer_summary">Буфер сплеев разреза [m]</string>
 
