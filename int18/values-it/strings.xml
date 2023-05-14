@@ -17,7 +17,7 @@
     <string name="desc_menu">Menu</string>
 
   <string name="r_title">Android-13+: avviso importante</string>
-  <!-- TODO string name="r_dialog">With Android-13 TopoDroid must store surveys in the app private folder under "Android/data". Beware that this folder is usually deleted when the app is uninstalled. To confirm type\n"%1$s"\nin the field below and tap the button.</string -->
+  <string name="r_dialog">Con Android-13 TopoDroid deve memorizzare i rilievi in una cartella dell'appl sotto "Android/data". Attenzione, questa cartella viene cancellata se si disinstalla l'app. Per confermare digitare\n"%1$s"\nnel campo sotto e premere il bottone.</string>
   <!-- UNUSED string name="r_checkboxes">Devi confermare tramite le checkbox.</string -->
   <!-- UNUSED string name="r_disclaimer">Riconosco che gli autori della app non sono responsabili per qualsiasi danno o perdita di dati.</string -->
   <string name="r_continue">CONTINUA</string>
@@ -1225,7 +1225,7 @@
     <string name="title_settings_dxf">DXF: Imposta export</string>
     <string name="title_settings_shp">Shapefile: Imposta export</string>
     <!-- UNUSED string name="title_settings_png">PNG: Imposta export</string -->
-    <!-- TODO string name="title_settings_gpx">GPX export settings</string -->
+    <string name="title_settings_gpx">GPX: impostazioni export</string>
     <string name="title_settings_kml">KML: Imposta export</string>
 
     <string name="title_settings_sketch">Impostazione disegno 3D</string>
@@ -1493,8 +1493,8 @@
   <string name="pref_bric_mode_summary">Modo BRIC operativo</string>
   <string name="pref_bric_zero_length_title">Tiro zero BRIC</string>
   <string name="pref_bric_zero_length_summary">Registra tiro BRIC a lunghezza zero</string>
-  <!-- TODO string name="pref_sap5_bit16_bug_title">SAP5 bit-16 bug</string -->
-  <!-- TODO string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 bug workaround</string -->
+  <string name="pref_sap5_bit16_bug_title">SAP5: anomalia bit-16</string>
+  <string name="pref_sap5_bit16_bug_summary">SAP5: ripara anomalia bit-16</string>
 
   <string name="pref_plot_screen_title">OPZIONI DISEGNO</string>
   <string name="pref_tool_line_title">OPZIONI LINEE</string>
@@ -1854,7 +1854,7 @@
     <string name="perm_camera">\nFotocamera</string>
     <string name="perm_microphone">\nMicrofono</string>
 
-    <!-- TODO string name="welcome_db_version">Database v. %1$d, %2$d</string -->
+    <string name="welcome_db_version">DB v. %1$d, %2$d</string>
     <!-- NO string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopoDroid è una app Android open-source per fare rilievi di grotta con il DistoX
