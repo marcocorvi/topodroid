@@ -1032,8 +1032,21 @@ public class Scrap
               TDLog.v("FOUND P1 " + line.indexOf(lp10) + " P2 " + line.indexOf(lp20) );
               lq1 = resetFirst( lq1, lq2, lp10 );
               lq2 = resetLast( lq2, lq1, lp20 );
-// FILTER START
-// FILTER END
+              /*{{ IF DEF_FILTER_START
+                if ( TDSetting.isLineStyleBezier() ) {
+                  DrawingPointLinePath tmp = new DrawingPointLinePath( DrawingPath.DRAWING_PATH_LINE, true, false, mScrapIdx );
+                  if ( DrawingPointLineFilter.bezier( lq1, lq2, tmp ) ) {
+                    lq1 = tmp.mFirst;
+                    if ( lq2 != null ) lq2 = tmp.mLast;
+                  }
+                } else if ( TDSetting.isLineStyleSimplified() ) {
+                  DrawingPointLinePath tmp = new DrawingPointLinePath( DrawingPath.DRAWING_PATH_LINE, true, false, mScrapIdx );
+                  if ( DrawingPointLineFilter.weeding( lq1, lq2, tmp, zoom ) ) {
+                    lq1 = tmp.mFirst;
+                    if ( lq2 != null ) lq2 = tmp.mLast;
+                  }
+                }
+              /*{{ END DEF FILTER_START */
               if ( lq1 != null && lq1.mNext != null && lq2 != null && lq2.mPrev != null ) {
                 TDLog.v("Q1 Q2 ok");
                 Point2D q1 = new Point2D( lq1.mNext.x - lq1.x, lq1.mNext.y - lq1.y );
@@ -1119,8 +1132,21 @@ public class Scrap
             } else if ( lp10 != null ) {
               TDLog.v("FOUND P1 " + line.indexOf(lp10) );
               lq1 = resetFirst( lq1, lq2, lp10 );
-// FILTER START
-// FILTER END
+              /*{{ IF DEF_FILTER_START
+                if ( TDSetting.isLineStyleBezier() ) {
+                  DrawingPointLinePath tmp = new DrawingPointLinePath( DrawingPath.DRAWING_PATH_LINE, true, false, mScrapIdx );
+                  if ( DrawingPointLineFilter.bezier( lq1, null, tmp ) ) {
+                    lq1 = tmp.mFirst;
+                    lq2 = tmp.mLast;
+                  }
+                } else if ( TDSetting.isLineStyleSimplified() ) {
+                  DrawingPointLinePath tmp = new DrawingPointLinePath( DrawingPath.DRAWING_PATH_LINE, true, false, mScrapIdx );
+                  if ( DrawingPointLineFilter.weeding( lq1, null, tmp, zoom ) ) {
+                    lq1 = tmp.mFirst;
+                    lq2 = tmp.mLast;
+                  }
+                }
+              /*{{ END DEF FILTER_START */
               if ( lq1 != null && lq1.mNext != null ) {
                 TDLog.v("Q1 ok ");
                 Point2D q1 = new Point2D( lq1.mNext.x - lq1.x, lq1.mNext.y - lq1.y );
@@ -1183,8 +1209,21 @@ public class Scrap
             } else if ( lp20 != null ) {
               TDLog.v("FOUND P2 " + line.indexOf(lp20) );
               lq2 = resetLast( lq2, lq1, lp20 );
-// FILTER START
-// FILTER END
+              /*{{ IF DEF_FILTER_START
+                if ( TDSetting.isLineStyleBezier() ) {
+                  DrawingPointLinePath tmp = new DrawingPointLinePath( DrawingPath.DRAWING_PATH_LINE, true, false, mScrapIdx );
+                  if ( DrawingPointLineFilter.bezier( lq1, lq2, tmp ) ) {
+                    lq1 = tmp.mFirst;
+                    lq2 = tmp.mLast;
+                  }
+                } else if ( TDSetting.isLineStyleSimplified() ) {
+                  DrawingPointLinePath tmp = new DrawingPointLinePath( DrawingPath.DRAWING_PATH_LINE, true, false, mScrapIdx );
+                  if ( DrawingPointLineFilter.weeding( lq1, lq2, tmp, zoom ) ) {
+                    lq1 = tmp.mFirst;
+                    lq2 = tmp.mLast;
+                  }
+                }
+              /*{{ END DEF FILTER_START */
               if ( lq2 != null && lq2.mPrev != null ) {
                 TDLog.v("Q1 ok ");
                 Point2D q2 = new Point2D( lq2.x - lq2.mPrev.x, lq2.y - lq2.mPrev.y );

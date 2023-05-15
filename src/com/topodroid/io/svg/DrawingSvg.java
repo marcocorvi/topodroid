@@ -65,8 +65,8 @@ public class DrawingSvg extends DrawingSvgBase
     if ( dy > 200 ) dy = 200;
     xmin -= dx;  xmax += dx;
     ymin -= dy;  ymax += dy;
-    int width  = (int)((xmax - xmin));
-    int height = (int)((ymax - ymin));
+    int width  = (int)(xmax - xmin);
+    int height = (int)(ymax - ymin);
     float xoff = - xmin; // offset
     float yoff = - ymin;
 
@@ -75,7 +75,7 @@ public class DrawingSvg extends DrawingSvgBase
 
       // header
       out.write( svg_header );
-      out.write( " width=\"" + width + "pt\" height=\"" + height + "pt\"\n" );
+      out.write( " width=\"" + (width*TDSetting.mToSvg) + "px\" height=\"" + (height*TDSetting.mToSvg) + "px\"\n" );
       // out.write( " viewBox=\"0 0 " + width + " " + height + "\"\n" );
       // out.write( "   xmlns:svg=\"http://www.w3.org/2000/svg\"\n"); // already in the svg_header
       // out.write( "   xmlns=\"http://www.w3.org/2000/svg\");
