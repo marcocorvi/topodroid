@@ -271,7 +271,6 @@ public class DistoXComm extends TopoDroidComm
     if ( address == null ) return;
     // TDLog.v( "Disto comm: create socket() address " + mAddress );
     final int port = 1;
-    // TDLog.Log( TDLog.LOG_COMM, "create Socket() addr " + address + " mAddress " + mAddress);
     if ( mProtocol == null || ! address.equals( mAddress ) ) {
       if ( mProtocol != null /* && ! address.equals( mAddress ) */ ) {
         disconnectRemoteDevice();
@@ -301,15 +300,15 @@ public class DistoXComm extends TopoDroidComm
       // FIXME PAIRING
       // TDLog.Log( TDLog.LOG_BT, "[1] device state " + mBTDevice.getBondState() );
       if ( ! DeviceUtil.isPaired( mBTDevice ) ) {
+        // TDLog.v( "Disto comm: pairing device " );
         DeviceUtil.pairDevice( mBTDevice );
-        // TDLog.Log( TDLog.LOG_BT, "[1b] pairing device " + ret );
-      // }
+        // }
 
         // TDLog.Log( TDLog.LOG_BT, "[2] device state " + mBTDevice.getBondState() );
-      // // if ( mBTDevice.getBondState() == DeviceUtil.BOND_NONE ) 
-      // if ( ! DeviceUtil.isPaired( mBTDevice ) ) 
-      // {
-      //   TDLog.Log( TDLog.LOG_BT, "bind device " );
+        // // if ( mBTDevice.getBondState() == DeviceUtil.BOND_NONE ) 
+        // if ( ! DeviceUtil.isPaired( mBTDevice ) ) 
+        // {
+        //   TDLog.Log( TDLog.LOG_BT, "bind device " );
         DeviceUtil.bindDevice( mBTDevice );
       }
 
@@ -431,8 +430,7 @@ public class DistoXComm extends TopoDroidComm
   protected boolean connectSocket( String address, int data_type )
   {
     if ( address == null ) return false;
-    // TDLog.v( "Disto comm: connect socket() address " + mAddress );
-    // TDLog.Log( TDLog.LOG_COMM, "connect socket(): " + address );
+    // TDLog.v( "Disto comm: connect socket() address " + mAddress + " previous connected " + mBTConnected );
     createSocket( address );
 
     if ( mBTSocket != null ) {

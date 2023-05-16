@@ -106,7 +106,7 @@ otherwise they are horizontal xsections.<br><p>
 <li><i>Second device</i>: whether to enable working with two devices (DistoX only) [T]</li>
 <li><i>Data pause</i>: pause after the download of each data [250 ms] [A]</li>
 <li><i>Ready data</i>: wait time for the data to get ready [500 ms] [A]</li>
-<li>Pause after the remote <i>Laser-on command</i> [1000 ms] [A]</li>
+<li>Pause after the remote <i>Laser-on command</i> [1500 ms] [A]</li>
 <li>Pause after the remote <i>shot command</i> [2000 ms] [A]</li>
 <li><i>Firmware</i> sanity check [yes] [A]</li>
 <li><i>Bric4 mode</i>: either primary data only, all data, or all data except the index.
@@ -114,6 +114,8 @@ With all data TopoDroid uses as shot index the value from the Bric4. [all] [T]</
 <li><i>Bric4 zero data</i>: whether to record zero-shots [no] [N]</li>
 <li><i>Sap5 bit-16 bug</i>: workaround [T]</li>
 </ul>
+<br>
+Note. If the delays after the remote "Laser-on" and "Shot" commands are too short, the commands may fail.
 <br><p>
   
 <b>Import-Export settings</b><br>

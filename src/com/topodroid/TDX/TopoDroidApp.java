@@ -643,8 +643,9 @@ public class TopoDroidApp extends Application
 
   public void resetComm() 
   { 
-    createComm();
+    // TDLog.v("APP reset BT");
     mDataDownloader.onStop(); // mDownload = false;
+    createComm();
   }
 
   // FIXME BT_RECEIVER 
@@ -678,7 +679,7 @@ public class TopoDroidApp extends Application
    */
   private void deleteComm( boolean disconnect ) // FIXME BLE5
   {
-    // TDLog.v( "App: delete comm");
+    // TDLog.v( "APP: delete comm - disconnect " + disconnect );
     if ( mComm != null ) {
       if ( disconnect || mComm.isConnected() ) {
         mComm.disconnectRemoteDevice(); 
@@ -861,6 +862,7 @@ public class TopoDroidApp extends Application
    */
   private void createComm()
   {
+    // TDLog.v("APP create Comm");
     deleteComm( true ); // if mComm is null this is nothing
     // if ( TDInstance.isDeviceAddress( Device.ZERO_ADDRESS ) ) { // FIXME VirtualDistoX
     //   mComm = new VirtualDistoXComm( this, mVirtualDistoX );
@@ -2635,16 +2637,33 @@ public class TopoDroidApp extends Application
    * @param nr        number od data to download
    # @param lister    optional lister
    * @param data_type type of expected data
+   * @param do_thread whether to run the call to the comm.setX310Laser() on a thread
+   * @return true on success
+   * @note this is called by popup menu to set laser on/off
+   *                  and by DeviceTakeShot to measure splay/leg
    */
-  public void setX310Laser( int what, int nr, ListerHandler lister, int data_type ) // FIXME_LISTER
+  public boolean setX310Laser( int what, int nr, ListerHandler lister, int data_type, boolean do_thread ) // FIXME_LISTER
   {
-    if ( mComm == null || TDInstance.getDeviceA() == null ) return;
+    if ( mComm == null || TDInstance.getDeviceA() == null ) return true;
     if ( mComm instanceof DistoX310Comm ) {
       DistoX310Comm comm = (DistoX310Comm)mComm;
-      if ( comm != null ) comm.setX310Laser( TDInstance.deviceAddress(), what, nr, lister, data_type );
+      if ( comm != null ) {
+        // TDLog.v("APP set X310 laser " + what + " nr " + nr );
+        if ( do_thread ) {
+          (new Thread() {
+            public void run() {
+              comm.setX310Laser( TDInstance.deviceAddress(), what, nr, lister, data_type );
+            }
+          } ).start();
+          return true;
+        } else {
+          return comm.setX310Laser( TDInstance.deviceAddress(), what, nr, lister, data_type );
+        }
+      }
     } else {
-      TDLog.e("set X310 laser: not X310 comm");
+      TDLog.e("APP set X310 laser: not X310 comm");
     }
+    return false;
   }
 
   /** set the Disto-XBLE laser

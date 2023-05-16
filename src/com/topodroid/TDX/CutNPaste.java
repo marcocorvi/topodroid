@@ -19,6 +19,7 @@ import com.topodroid.dev.distox_ble.DistoXBLETakeShot; // SIWEI
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.DataType;
 import com.topodroid.dev.distox2.DeviceX310TakeShot;
@@ -226,6 +227,7 @@ public class CutNPaste
       new View.OnClickListener( ) {
         public void onClick(View v) {
           app.resetComm();
+          lister.setConnectionStatus( ConnectionState.CONN_DISCONNECTED ); // FIXME this should be in app.resetComm()
           dismissPopupBT();
           TDToast.make( R.string.bt_reset );
         }
@@ -246,7 +248,7 @@ public class CutNPaste
       textview1 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
-            app.setX310Laser( Device.LASER_ON, 0, lister, DataType.DATA_ALL );
+            app.setX310Laser( Device.LASER_ON, 0, lister, DataType.DATA_ALL, true );
             dismissPopupBT();
           }
         } );
@@ -259,7 +261,7 @@ public class CutNPaste
       textview2 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           public void onClick(View v) {
-            app.setX310Laser( Device.LASER_OFF, 0, lister, DataType.DATA_ALL );
+            app.setX310Laser( Device.LASER_OFF, 0, lister, DataType.DATA_ALL, true );
             dismissPopupBT();
           }
         } );

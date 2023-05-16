@@ -261,12 +261,12 @@ public class DataDownloader
    */
   void onStop()
   {
-    // TDLog.v( "DataDownloader onStop()");
     mDownload = false;
     if ( mConnected  > ConnectionState.CONN_DISCONNECTED ) { // mConnected == ConnectionState.CONN_CONNECTED || mConnected == ConnectionState.CONN_WAITING
       stopDownloadData( mLister );
       mConnected = ConnectionState.CONN_DISCONNECTED; // 20221103 already in stopDownloadData()
     }
+    // TDLog.v( "DataDownloader onStop() - connected " + mConnected );
   }
 
   /** lifecycle: on resume (empty method)

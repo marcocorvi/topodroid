@@ -75,28 +75,28 @@ public class TDInstance
 
   /** @return true if the primary device is set and is of type A3
    */
-  static boolean isDeviceA3()     { return deviceA != null && deviceA.isA3(); }
+  public static boolean isDeviceA3()     { return deviceA != null && deviceA.isA3(); }
 
   /** @return true if the primary device is set and is of type X310
    */
-  static boolean isDeviceX310()   { return deviceA != null && deviceA.isX310(); }
+  public static boolean isDeviceX310()   { return deviceA != null && deviceA.isX310(); }
 
   /** @return true if the primary device is set and is of type DistoX (not XBLE)
    */
-  static boolean isDeviceDistoX() { return deviceA != null && deviceA.isDistoX(); }
+  public static boolean isDeviceDistoX() { return deviceA != null && deviceA.isDistoX(); }
 
   /** @return true if the primary device is set and is of type SAP5
    */
-  static boolean isDeviceSap()    { return deviceA != null && deviceA.isSap(); }
+  public static boolean isDeviceSap()    { return deviceA != null && deviceA.isSap(); }
 
   /** @return true if the primary device is set and is of type BRIC4
    */
-  static boolean isDeviceBric()   { return deviceA != null && deviceA.isBric(); }
+  public static boolean isDeviceBric()   { return deviceA != null && deviceA.isBric(); }
 
   /** @return true if the primary device is set and is of type DistoXBLE
    * SIWEI_TIAN
    */
-  static boolean isDeviceXBLE()   { return deviceA != null && deviceA.isDistoXBLE(); }
+  public static boolean isDeviceXBLE()   { return deviceA != null && deviceA.isDistoXBLE(); }
 
   /** @return primary bluetooth device
    */

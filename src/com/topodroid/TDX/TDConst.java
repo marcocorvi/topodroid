@@ -167,6 +167,10 @@ public class TDConst
     SURVEY_FORMAT_GPX
   };
 
+  /** return the model export name (null if illegal type)
+   * @param type    export type
+   * @param name    model name
+   */
   public static String getModelFilename( int type, String name )
   {
     switch( type ) {
@@ -181,7 +185,7 @@ public class TDConst
       case ModelType.GPX_ASCII:  return name + ".gpx";
       // case ModelType.SERIAL: return name + ".txt";
     }
-    return name;
+    return null;
   }
 
   // ======= DATA EXPORT  ======
@@ -255,6 +259,10 @@ public class TDConst
     SURVEY_FORMAT_SHP
   };
 
+  /** return the survey export name (null if illegal type)
+   * @param type    export type
+   * @param name    survey name
+   */
   public static String getSurveyFilename( int type, String survey )
   {
     switch ( type ) {
@@ -281,7 +289,7 @@ public class TDConst
       case 19: return survey + ".shz";
       case -11: return survey + ".trox";
     }
-    return survey;
+    return null;
   }
 
   // ======= PLOT EXPORT  ======
@@ -295,7 +303,7 @@ public class TDConst
       "PDF",
       "XVI",
       "Tunnel",
-      "Cave3D",
+      // "Cave3D",
       // "PNM", NO_PNM
   };
 
@@ -327,6 +335,10 @@ public class TDConst
     // "pnm", // NO_PNM
   };
 
+  /** return the plot export name (null if illegal type)
+   * @param type    export type
+   * @param name    plot name
+   */
   public static String getPlotFilename( int type, String name )
   {
     switch ( type ) { 
@@ -339,10 +351,10 @@ public class TDConst
       case 5: return name + ".pdf";
       case 6: return name + ".xvi";
       case 7: return name + ".xml"; // Tunnel
-      case 8: return name + ".c3d";
+      // case 8: return name + ".c3d";
       // case 9: return name + ".pnm"; NO_PNM
     }
-    return name;
+    return null;
   }
 
   // ======= OVERVIEW EXPORT  ======
@@ -372,6 +384,10 @@ public class TDConst
     "xvi"
   };
 
+  /** return the overview export name (null if illegal type)
+   * @param type    export type
+   * @param name    survey name (?)
+   */
   public static String getOverviewFilename( int type, String name )
   { 
     switch( type ) {
@@ -382,7 +398,7 @@ public class TDConst
       case 4: return name + ".pdf";
       case 5: return name + ".xvi";
     }
-    return name;
+    return null;
   }
 
   public static final String[] mCalibExportTypes = { "CSV" };

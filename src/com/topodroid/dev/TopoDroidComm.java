@@ -383,12 +383,12 @@ public class TopoDroidComm
    */
   public boolean sendCommand( int cmd )
   {
-    // TDLog.Log( TDLog.LOG_COMM, "VD comm send cmd " + cmd );
     boolean ret = false;
     if ( mProtocol != null ) {
+      // TDLog.v( "sendCommand " + cmd + " trying three times");
       for (int k=0; k<3 && ! ret; ++k ) { // try three times
+        // TDLog.v( "sendCommand " + cmd + " try " + k );
         ret = mProtocol.sendCommand( (byte)cmd ); // was ret |= ...
-        // TDLog.Log( TDLog.LOG_COMM, "sendCommand " + cmd + " " + k + "-ret " + ret );
         // TDLog.v( "sendCommand " + cmd + " " + k + "-ret " + ret );
         TDUtil.slowDown( TDSetting.mWaitCommand, "send command sleep interrupted"); // it is ok to be interrupted
       }

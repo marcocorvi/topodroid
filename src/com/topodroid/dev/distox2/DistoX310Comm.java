@@ -74,14 +74,18 @@ public class DistoX310Comm extends DistoXComm
    * @param what      command to send to the remote device
    * @param lister    callback handler
    * @param data_type packet datatype 
+   * @return true on success
    */
-  public void setX310Laser( String address, int what, int to_read, ListerHandler lister, int data_type ) // FIXME_LISTER
+  public boolean setX310Laser( String address, int what, int to_read, ListerHandler lister, int data_type ) // FIXME_LISTER
   {
     // TDLog.v("X310 laser " + what + " to read " + to_read );
+    boolean ret = false;
     // mSkipNotify = true;
-    Thread laserThread = new Thread() {
-      @Override public void run() {
+    // NOTE this thread is not necessary as the method is run in background or on a thread in the caller
+    // Thread laserThread = new Thread() {
+    //   @Override public void run() {
         if ( connectSocket( address, data_type ) ) {
+          ret = true;
           switch ( what ) {
             case DistoX.DISTOX_OFF:
               sendCommand( (byte)DistoX.DISTOX_OFF );
@@ -104,6 +108,8 @@ public class DistoX310Comm extends DistoXComm
             case DistoX.CALIB_ON:
               sendCommand( (byte)DistoX.CALIB_ON );
               break;
+            default:
+              ret = false;
           }
           if ( mCommThread == null ) {
             if ( to_read > 0 ) {
@@ -121,9 +127,10 @@ public class DistoX310Comm extends DistoXComm
         TDUtil.slowDown( 1000 );
         // TDLog.v("X310 notify lister " + ( (lister != null)? lister.name() : "null") );
         notifyStatus( lister, ConnectionState.CONN_DISCONNECTED );
-      }
-    };
-    laserThread.start();
+    //   }
+    // };
+    // laserThread.start();
+    return ret;
   }
 
   /* send the set/unset calib-mode command
