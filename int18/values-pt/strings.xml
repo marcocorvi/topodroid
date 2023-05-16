@@ -1616,7 +1616,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="pref_splayExtend_summary">Estimar extensão medida auxiliar</string -->
   <string name="pref_swapLR_title">Inverter Esq/Dir</string>
   <string name="pref_swapLR_summary">Inverter Esquerda e Direita na exportação para o Compass</string>
-  <string name="pref_LRExtend_title">Estimar ref. retif. perfil</string>
+  <string name="pref_LRExtend_title">Estimar ref retif perfil</string>
   <string name="pref_LRExtend_summary">Estimar referência para retificação do perfil (importação Compass/VisualTopo)</string>
   <string name="pref_diving_mode_title">Modo mergulho</string>
   <string name="pref_diving_mode_summary">Habilitar modo mergulho</string>
