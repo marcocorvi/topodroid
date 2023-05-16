@@ -1283,7 +1283,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_station_prefix_title">Pref base</string>
   <string name="pref_station_prefix_summary">Incluir prefixo nos nomes das bases na exportação Compass/cSurvey/WinKarst</string>
   <string name="pref_compass_splays_title">Aux Compass/Walls</string>
-  <string name="pref_compass_splays_summary">Exportar medidas auxiliares em arquivos Compass/Walls</string>
+  <string name="pref_compass_splays_summary">Exportar medidas auxiliares em arquivos Compass/Walls como "12 12-1" ou como "12 -".</string>
   <string name="pref_vtopo_splays_title">Aux VisualTopo</string>
   <string name="pref_vtopo_splays_summary">Incluir medidas auxiliares em arquivos VisualTopo</string>
   <string name="pref_vtopo_lrud_title">EDTC em DE</string>
