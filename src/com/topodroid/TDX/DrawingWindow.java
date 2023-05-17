@@ -2077,6 +2077,20 @@ public class DrawingWindow extends ItemDrawer
   //   // setButtonContinue();
   // }
 
+  // /** reset the continue flags to false
+  //  */
+  // public void resetContinue()
+  // {
+  //   mContinueLine = false;
+  //   mContinueArea = false;
+  //   switch ( mSymbol ) {
+  //     case SymbolType.LINE: setButton2( BTN_TOOL, mBMtoolsLine ); break;
+  //     case SymbolType.AREA: setButton2( BTN_TOOL, mBMtoolsArea ); break;
+  //   }
+  // }
+
+  /** toggle the continue flag of the current symbol
+   */
   private void toggleContinue()
   { 
     switch ( mSymbol ) {
@@ -4276,6 +4290,7 @@ public class DrawingWindow extends ItemDrawer
   private boolean tryAndJoin( DrawingAreaPath ap1, DrawingAreaPath ap2 )
   {
     if ( ! mContinueArea ) return false;
+    if ( ! TDLevel.overTester && TDSetting.isLineStyleComplex() ) return false; // FIXME ONLY DEBUG
     if ( ap1 == null ) return false;
     if ( ap2 == null ) return false;
     LinePoint p1 = ap2.first();
@@ -4291,6 +4306,7 @@ public class DrawingWindow extends ItemDrawer
   private boolean tryAndJoin( DrawingLinePath lp1, DrawingLinePath lp2 )
   {
     if ( ! mContinueLine ) return false;
+    if ( ! TDLevel.overTester && TDSetting.isLineStyleComplex() ) return false; // FIXME ONLY DEBUG
     if ( lp1 == null ) return false;
     if ( lp2 == null ) return false;
     // TDLog.v("Try and JOIN LINE lp1 " + lp1.size() + " lp2 " + lp2.size() );
@@ -6863,7 +6879,14 @@ public class DrawingWindow extends ItemDrawer
     } else if ( BTN_TOOL < mNrButton2 && b == mButton2[ BTN_TOOL ] /* && ! TDSetting.mTripleToolbar */ ) {
       // mRecentToolsForward = ! mRecentToolsForward;
       // rotateRecentToolset();
-      toggleContinue();
+
+      // this does not prevent a change of line-stype when retracing-mode is enabled
+      // however retracing has no effect if line-style is complex, except DEBUG 
+      if ( TDLevel.overTester || ! TDSetting.isLineStyleComplex() ) {
+        toggleContinue();
+      } else {
+        onClick( view ); // execute rotateRecentToolset();
+      }
 
     } else if ( TDLevel.overBasic && b == mButton3[ BTN_REMOVE ] ) {
       SelectionPoint sp = mDrawingSurface.hotItem();

@@ -131,6 +131,17 @@ public class TDConst
   };
 
   // ======= MODEL EXPORT  ====== see TopoGL::getFilename()
+
+  // These indices coincides with ModelType
+  public final static int MODEL_POS_GLTF    = 0;
+  public final static int MODEL_POS_CGAL    = 1;
+  public final static int MODEL_POS_STL     = 2;
+  public final static int MODEL_POS_STL_BIN = 3;
+  public final static int MODEL_POS_LAS_BIN = 4;
+  public final static int MODEL_POS_DXF     = 5;
+  public final static int MODEL_POS_SHAPEFILE = 6;
+  public final static int MODEL_POS_GPX     = 7;
+
   public static final String[] mModelExportTypes = {
     "gLTF",
     "CGAL",
@@ -189,23 +200,44 @@ public class TDConst
   }
 
   // ======= DATA EXPORT  ======
+
+  public final static int SURVEY_POS_ZIP       = 0;
+  public final static int SURVEY_POS_COMPASS   =  1;
+  public final static int SURVEY_POS_CSURVEY   =  2;
+  public final static int SURVEY_POS_GHTOPO    =  3;
+  public final static int SURVEY_POS_POLYGON   =  4;
+  public final static int SURVEY_POS_SURVEX    =  5;
+  public final static int SURVEY_POS_THERION   =  6;
+  public final static int SURVEY_POS_TOPO      =  7;
+  public final static int SURVEY_POS_TOPOROBOT =  8;
+  public final static int SURVEY_POS_VTOPO     =  9;
+  public final static int SURVEY_POS_VTOPOX    = -9;
+  public final static int SURVEY_POS_WALLS     = 10;
+  public final static int SURVEY_POS_WINKARST  = 11;
+  public final static int SURVEY_POS_CSV       = 12;
+  public final static int SURVEY_POS_DXF       = 13;
+  public final static int SURVEY_POS_KML       = 14;
+  public final static int SURVEY_POS_GPX       = 15;
+  public final static int SURVEY_POS_GEOJSON   = 16;
+  public final static int SURVEY_POS_SHAPEFILE = 17;
+
   public static final String[] mSurveyExportTypes = { "ZIP", 
     "Compass",   // 1
     "cSurvey",
     "GHTopo",
-    "Grottolf",
-    "PocketTopo", // 5
-    "Polygon",
-    "Survex",
-    "Therion",
+    // "Grottolf",
+    // "PocketTopo", // 5
+    "Polygon",    //  4
+    "Survex",     //  5
+    "Therion",    //  6
     "Topo",
-    "TopoRobot",  // 10
+    "TopoRobot",  //  8
     "VisualTopo",
     "Walls", 
-    "WinKarst",   // 13
+    "WinKarst",   // 11
     "CSV",
     "DXF",
-    "KML",        // 16
+    "KML",        // 14
     // "OziExplorer",
     "GPX",
     "GeoJSON",
@@ -216,8 +248,8 @@ public class TDConst
     "Compass",
     "cSurvey",
     "GHTopo",
-    "Grottolf",
-    "PocketTopo",
+    // "Grottolf",
+    // "PocketTopo",
     "Polygon",
     "Survex",
     "Therion",
@@ -240,8 +272,8 @@ public class TDConst
     SURVEY_FORMAT_DAT,
     SURVEY_FORMAT_CSX,
     SURVEY_FORMAT_GTX,
-    SURVEY_FORMAT_GRT,
-    SURVEY_FORMAT_TOP,
+    // SURVEY_FORMAT_GRT,
+    // SURVEY_FORMAT_TOP,
     SURVEY_FORMAT_PLG,
     SURVEY_FORMAT_SVX,
     SURVEY_FORMAT_TH,
@@ -260,39 +292,49 @@ public class TDConst
   };
 
   /** return the survey export name (null if illegal type)
-   * @param type    export type
+   * @param type    export type (position in the export-type list)
    * @param name    survey name
    */
   public static String getSurveyFilename( int type, String survey )
   {
+    TDLog.v("CONST export type " + type );
     switch ( type ) {
-      case  0: return survey + ".zip";
-      case  1: return survey + ".dat";
-      case  2: return survey + ".csx";
-      case  3: return survey + ".gtx";
-      case  4: return survey + ".grt";
-      case  5: return survey + ".top";
-      case  6: return survey + ".cave";
-      case  7: return survey + ".svx";
-      case  8: return survey + ".th";
-      case  9: return survey + ".cav";
-      case 10: return survey + ".trb";
-      case 11: return survey + ".tro";
-      case 12: return survey + ".srv";
-      case 13: return survey + ".sur";
-      case 14: return survey + ".csv";
-      case 15: return survey + ".dxf";
-      case 16: return survey + ".kml";
+      case SURVEY_POS_ZIP:       return survey + ".zip";
+      case SURVEY_POS_COMPASS:   return survey + ".dat";
+      case SURVEY_POS_CSURVEY:   return survey + ".csx";
+      case SURVEY_POS_GHTOPO:    return survey + ".gtx";
+      // case SURVEY_POS_GROTTOLF: return survey + ".grt";
+      // case SURVEY_POS_PTOPO:    return survey + ".top";
+      case SURVEY_POS_POLYGON:   return survey + ".cave";
+      case SURVEY_POS_SURVEX:    return survey + ".svx";
+      case SURVEY_POS_THERION:   return survey + ".th";
+      case SURVEY_POS_TOPO:      return survey + ".cav";
+      case SURVEY_POS_TOPOROBOT: return survey + ".trb";
+      case SURVEY_POS_VTOPO:     return survey + ".tro";
+      case SURVEY_POS_WALLS:     return survey + ".srv";
+      case SURVEY_POS_WINKARST:  return survey + ".sur";
+      case SURVEY_POS_CSV:       return survey + ".csv";
+      case SURVEY_POS_DXF:       return survey + ".dxf";
+      case SURVEY_POS_KML:       return survey + ".kml";
       // case 17: return survey + ".plt";
-      case 17: return survey + ".gpx";
-      case 18: return survey + ".json";
-      case 19: return survey + ".shz";
-      case -11: return survey + ".trox";
+      case SURVEY_POS_GPX:       return survey + ".gpx";
+      case SURVEY_POS_GEOJSON:   return survey + ".json";
+      case SURVEY_POS_SHAPEFILE: return survey + ".shz";
+      case SURVEY_POS_VTOPOX:    return survey + ".trox";
     }
     return null;
   }
 
   // ======= PLOT EXPORT  ======
+  public final static int PLOT_POS_THERION   = 0;
+  public final static int PLOT_POS_CSURVEY   = 1;
+  public final static int PLOT_POS_DXF       = 2;
+  public final static int PLOT_POS_SVG       = 3;
+  public final static int PLOT_POS_SHAPEFILE = 4;
+  public final static int PLOT_POS_PDF       = 5;
+  public final static int PLOT_POS_XVI       = 6;
+  public final static int PLOT_POS_TUNNEL    = 7;
+
   public static final String[] mPlotExportTypes = {
       "Therion",
       "cSurvey",
@@ -336,28 +378,35 @@ public class TDConst
   };
 
   /** return the plot export name (null if illegal type)
-   * @param type    export type
+   * @param type    export type (position in the export-type list)
    * @param name    plot name
    */
   public static String getPlotFilename( int type, String name )
   {
     switch ( type ) { 
-      case 0: return name + ".th2";
-      case 1: return name + ".csx";
-      case 2: return name + ".dxf";
-      case 3: return name + ".svg";
-      case 4: return name + ".shz";
-      // case 5: return name + ".png"; // NO_PNG
-      case 5: return name + ".pdf";
-      case 6: return name + ".xvi";
-      case 7: return name + ".xml"; // Tunnel
-      // case 8: return name + ".c3d";
-      // case 9: return name + ".pnm"; NO_PNM
+      case PLOT_POS_THERION: return name + ".th2";
+      case PLOT_POS_CSURVEY: return name + ".csx";
+      case PLOT_POS_DXF:     return name + ".dxf";
+      case PLOT_POS_SVG:     return name + ".svg";
+      case PLOT_POS_SHAPEFILE: return name + ".shz";
+      // case PLOT_POS_PNG: return name + ".png"; // NO_PNG
+      case PLOT_POS_PDF:    return name + ".pdf";
+      case PLOT_POS_XVI:    return name + ".xvi";
+      case PLOT_POS_TUNNEL: return name + ".xml"; // Tunnel
+      // case PLOT_POS_C3D: return name + ".c3d";
+      // case PLOT_POS_PNM: return name + ".pnm"; NO_PNM
     }
     return null;
   }
 
   // ======= OVERVIEW EXPORT  ======
+  public final static int OVERVIEW_POS_THERION   = 0;
+  public final static int OVERVIEW_POS_DXF       = 1;
+  public final static int OVERVIEW_POS_SVG       = 2;
+  public final static int OVERVIEW_POS_SHAPEFILE = 3;
+  public final static int OVERVIEW_POS_PDF       = 4;
+  public final static int OVERVIEW_POS_XVI       = 5;
+
   public static final String[] mOverviewExportTypes = {
       "Therion",
       "DXF",
@@ -385,18 +434,18 @@ public class TDConst
   };
 
   /** return the overview export name (null if illegal type)
-   * @param type    export type
+   * @param type    export type (position in the export-type list)
    * @param name    survey name (?)
    */
   public static String getOverviewFilename( int type, String name )
   { 
     switch( type ) {
-      case 0: return name + ".th2";
-      case 1: return name + ".dxf";
-      case 2: return name + ".svg";
-      case 3: return name + ".shz";
-      case 4: return name + ".pdf";
-      case 5: return name + ".xvi";
+      case OVERVIEW_POS_THERION:   return name + ".th2";
+      case OVERVIEW_POS_DXF:       return name + ".dxf";
+      case OVERVIEW_POS_SVG:       return name + ".svg";
+      case OVERVIEW_POS_SHAPEFILE: return name + ".shz";
+      case OVERVIEW_POS_PDF:       return name + ".pdf";
+      case OVERVIEW_POS_XVI:       return name + ".xvi";
     }
     return null;
   }

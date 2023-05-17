@@ -227,25 +227,26 @@ public class ExportDialogPlot extends MyDialog
     mLayoutXvi.setVisibility( View.GONE );
     if ( mParentType == PARENT_DRAWING ) { // SketchWindow
       switch ( mSelectedPos ) {
-        case 0: mLayoutTherion.setVisibility( View.VISIBLE ); break;
-        case 1: mLayoutCSurvey.setVisibility( View.VISIBLE ); break;
-        case 2: mLayoutDxf.setVisibility( View.VISIBLE ); break;
-        case 3: mLayoutSvg.setVisibility( View.VISIBLE ); break;
-        case 4: if ( TDLevel.overExpert ) mLayoutShp.setVisibility( View.VISIBLE ); break;
-        // case 5: mLayoutPng.setVisibility( View.VISIBLE ); break; // NO_PNG
-        case 5: mLayoutPdf.setVisibility( View.VISIBLE ); break;
-        case 6: mLayoutXvi.setVisibility( View.VISIBLE ); break;
+        case TDConst.PLOT_POS_THERION:   mLayoutTherion.setVisibility( View.VISIBLE ); break;
+        case TDConst.PLOT_POS_CSURVEY:   mLayoutCSurvey.setVisibility( View.VISIBLE ); break;
+        case TDConst.PLOT_POS_DXF:       mLayoutDxf.setVisibility( View.VISIBLE ); break;
+        case TDConst.PLOT_POS_SVG:       mLayoutSvg.setVisibility( View.VISIBLE ); break;
+        case TDConst.PLOT_POS_SHAPEFILE: if ( TDLevel.overExpert ) mLayoutShp.setVisibility( View.VISIBLE ); break;
+        // case TDConst.PLOT_POS_PNG: mLayoutPng.setVisibility( View.VISIBLE ); break; // NO_PNG
+        case TDConst.PLOT_POS_PDF: mLayoutPdf.setVisibility( View.VISIBLE ); break;
+        case TDConst.PLOT_POS_XVI: mLayoutXvi.setVisibility( View.VISIBLE ); break;
+        // case TDConst.PLOT_POS_TUNNEL: break;
       }
     } else { // mParentType == PARENT_OVERVIEW // OverviewWindow
       switch ( mSelectedPos ) {
-        case 0: mLayoutTherion.setVisibility( View.VISIBLE ); break;
-        // case 1: mLayoutCSurvey.setVisibility( View.VISIBLE ); break;
-        case 1: mLayoutDxf.setVisibility( View.VISIBLE ); break;
-        case 2: mLayoutSvg.setVisibility( View.VISIBLE ); break;
-        case 3: if ( TDLevel.overExpert ) mLayoutShp.setVisibility( View.VISIBLE ); break;
-        // case 4: mLayoutPng.setVisibility( View.VISIBLE ); break;
-        case 4: mLayoutPdf.setVisibility( View.VISIBLE ); break;
-        case 5: mLayoutXvi.setVisibility( View.VISIBLE ); break;
+        case TDConst.OVERVIEW_POS_THERION:    mLayoutTherion.setVisibility( View.VISIBLE ); break;
+        // case TDConst.OVERVIEW_POS_CSURVEY: mLayoutCSurvey.setVisibility( View.VISIBLE ); break;
+        case TDConst.OVERVIEW_POS_DXF:        mLayoutDxf.setVisibility( View.VISIBLE ); break;
+        case TDConst.OVERVIEW_POS_SVG:        mLayoutSvg.setVisibility( View.VISIBLE ); break;
+        case TDConst.OVERVIEW_POS_SHAPEFILE:  if ( TDLevel.overExpert ) mLayoutShp.setVisibility( View.VISIBLE ); break;
+        // case TDConst.OVERVIEW_POS_PNG: mLayoutPng.setVisibility( View.VISIBLE ); break;
+        case TDConst.OVERVIEW_POS_PDF:        mLayoutPdf.setVisibility( View.VISIBLE ); break;
+        case TDConst.OVERVIEW_POS_XVI:        mLayoutXvi.setVisibility( View.VISIBLE ); break;
       }
     }
   }

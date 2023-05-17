@@ -181,7 +181,7 @@ public class ExportDialogShot extends MyDialog
     if ( b == mBtnOk && mSelected != null ) {
       TDLog.v("Survey format selected " + mSelected + " " + TDConst.mSurveyExportIndex[ mSelectedPos ] );
       setOptions();
-      int selected_pos = ( mSelectedPos == 11 && TDSetting.mVTopoTrox )? -mSelectedPos : mSelectedPos;
+      int selected_pos = ( mSelectedPos == TDConst.SURVEY_POS_VTOPO && TDSetting.mVTopoTrox )? -mSelectedPos : mSelectedPos;
       mParent.doExport( mSelected, TDConst.getSurveyFilename( selected_pos, mSurvey ), mExportPrefix, false ); // second = false
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
@@ -206,26 +206,26 @@ public class ExportDialogShot extends MyDialog
     mLayoutShp.setVisibility( View.GONE );
     mLayoutWinkarst.setVisibility( View.GONE );
     switch ( mSelectedPos ) { // indices in mSurveyExportTypes
-      case 0: mLayoutZip.setVisibility( View.VISIBLE ); break;
-      case 1: mLayoutCompass.setVisibility( View.VISIBLE ); break;
-      case 2: mLayoutCSurvey.setVisibility( View.VISIBLE ); break;
-      // case 3: // GHTopo
-      // case 4: // Glottolf
-      // case 5: // PocketTopo
-      // case 6: // Polygon
-      case 7: mLayoutSurvex.setVisibility( View.VISIBLE ); break;
-      case 8: mLayoutTherion.setVisibility( View.VISIBLE ); break;
-      // case 9:  // Topo
-      // case 10: // TopoRobot
-      case 11: mLayoutVTopo.setVisibility( View.VISIBLE ); break;
-      case 12: mLayoutWalls.setVisibility( View.VISIBLE ); break;
-      case 13: mLayoutWinkarst.setVisibility( View.VISIBLE ); break;
-      case 14: mLayoutCsv.setVisibility( View.VISIBLE ); break;
-      case 15: mLayoutDxf.setVisibility( View.VISIBLE ); break;
-      case 16: // KML (same as GeoJson)
-      // case 17: // GPX
-      case 18: mLayoutKml.setVisibility( View.VISIBLE ); break; // GeoJson
-      case 19: if ( TDLevel.overExpert) mLayoutShp.setVisibility( View.VISIBLE ); break;
+      case TDConst.SURVEY_POS_ZIP: mLayoutZip.setVisibility( View.VISIBLE ); break;
+      case TDConst.SURVEY_POS_COMPASS: mLayoutCompass.setVisibility( View.VISIBLE ); break;
+      case TDConst.SURVEY_POS_CSURVEY: mLayoutCSurvey.setVisibility( View.VISIBLE ); break;
+      // case TDConst.SURVEY_POS_GHTOPO: // GHTopo
+      // // case TDConst.SURVEY_POS_GROTTOLF: // Grottolf
+      // // case TDConst.SURVEY_POS_PTOPO: // PocketTopo
+      // case TDConst.SURVEY_POS_POLYGON: // Polygon
+      case TDConst.SURVEY_POS_SURVEX:   mLayoutSurvex.setVisibility( View.VISIBLE ); break;
+      case TDConst.SURVEY_POS_THERION:  mLayoutTherion.setVisibility( View.VISIBLE ); break;
+      // case TDConst.SURVEY_POS_TOPO:  // Topo
+      // case TDConst.SURVEY_POS_TOPOROBOT: // TopoRobot
+      case TDConst.SURVEY_POS_VTOPO:    mLayoutVTopo.setVisibility( View.VISIBLE ); break;
+      case TDConst.SURVEY_POS_WALLS:    mLayoutWalls.setVisibility( View.VISIBLE ); break;
+      case TDConst.SURVEY_POS_WINKARST: mLayoutWinkarst.setVisibility( View.VISIBLE ); break;
+      case TDConst.SURVEY_POS_CSV:      mLayoutCsv.setVisibility( View.VISIBLE ); break;
+      case TDConst.SURVEY_POS_DXF:      mLayoutDxf.setVisibility( View.VISIBLE ); break;
+      case TDConst.SURVEY_POS_KML: // KML (same as GeoJson)
+      // case TDConst.SURVEY_POS_GPX: // GPX
+      case TDConst.SURVEY_POS_GEOJSON: mLayoutKml.setVisibility( View.VISIBLE ); break; // GeoJson
+      case TDConst.SURVEY_POS_SHAPEFILE: if ( TDLevel.overExpert) mLayoutShp.setVisibility( View.VISIBLE ); break;
     }
   }
 
@@ -247,13 +247,13 @@ public class ExportDialogShot extends MyDialog
   private void setOptions()
   {
     switch ( mSelectedPos ) {
-      case 0: // Zip 
+      case TDConst.SURVEY_POS_ZIP: // Zip 
         {
           // TDSetting.mZipWithSymbols = ((CheckBox) findViewById( R.id.zip_symbols )).isChecked();
           TDSetting.mZipShare = ((CheckBox) findViewById( R.id.zip_share )).isChecked();
         }
         break;
-      case 1: // Compass
+      case TDConst.SURVEY_POS_COMPASS: // Compass
         {
           // TDSetting.mExportStationsPrefix = ((CheckBox) findViewById( R.id.compass_prefix )).isChecked();
           TDSetting.mCompassSplays = ((CheckBox) findViewById( R.id.compass_splays )).isChecked();
@@ -261,27 +261,29 @@ public class ExportDialogShot extends MyDialog
           setExportPrefix( ((EditText) findViewById( R.id.compass_prefix )).getText() );
         }
         break;
-      case 2: // CSurvey
+      case TDConst.SURVEY_POS_CSURVEY: // CSurvey
         {
           TDSetting.mExportStationsPrefix = ((CheckBox) findViewById( R.id.csurvey_prefix )).isChecked();
         }
         break;
-      case 7: // Survex
+      // case TDConst.SURVEY_POS_GHTOPO: // GHTopo
+      // case TDConst.SURVEY_POS_POLYGON: // Polygon
+      case TDConst.SURVEY_POS_SURVEX: // Survex
         {
           TDSetting.mSurvexSplay = ((CheckBox) findViewById( R.id.survex_splay )).isChecked();
           TDSetting.mSurvexLRUD  = ((CheckBox) findViewById( R.id.survex_lrud )).isChecked();
         }
         break;
-      case 8: // Therion
+      case TDConst.SURVEY_POS_THERION: // Therion
         {
           TDSetting.mTherionConfig = ((CheckBox) findViewById( R.id.therion_config )).isChecked();
           TDSetting.mTherionMaps = ((CheckBox) findViewById( R.id.therion_maps )).isChecked();
           TDSetting.mSurvexLRUD  = ((CheckBox) findViewById( R.id.therion_lrud )).isChecked();
         }
         break;
-      // case 9:  // Topo
-      // case 10: // TopoRobot
-      case 11: // VTopo
+      // case 7: // Topo
+      // case 8: // TopoRobot
+      case TDConst.SURVEY_POS_VTOPO: // VTopo
         {
           TDSetting.mVTopoTrox = ((CheckBox) findViewById( R.id.vtopo_trox )).isChecked();
           TDSetting.mVTopoSplays = ((CheckBox) findViewById( R.id.vtopo_splays )).isChecked();
@@ -289,36 +291,36 @@ public class ExportDialogShot extends MyDialog
           setExportPrefix( ((EditText) findViewById( R.id.vtopo_suffix )).getText() );
         }
         break;
-      case 12: // Walls
+      case TDConst.SURVEY_POS_WALLS: // Walls
         {
           TDSetting.mCompassSplays = ((CheckBox) findViewById( R.id.walls_splays )).isChecked();
         }
         break;
-      case 13: // Winkarst
+      case TDConst.SURVEY_POS_WINKARST: // Winkarst
         {
           setExportPrefix( ((EditText) findViewById( R.id.winkarst_prefix )).getText() );
         }
         break;
-      case 14: //CSV
+      case TDConst.SURVEY_POS_CSV: //CSV
         {
           TDSetting.mCsvRaw = ((CheckBox) findViewById( R.id.csv_rawdata )).isChecked();
         }
         break;
-      case 15: // DXF
+      case TDConst.SURVEY_POS_DXF: // DXF
         {
           TDSetting.mDxfBlocks = ((CheckBox) findViewById( R.id.dxf_blocks )).isChecked();
           // TDSetting.mAcadVersion
         }
         break;
-      case 16: // KML
-      // case 17: // GPX
-      case 18: // GeoJSON
+      case TDConst.SURVEY_POS_KML: // KML
+      // case TDConst.SURVEY_POS_GPX: // GPX
+      case TDConst.SURVEY_POS_GEOJSON: // GeoJSON
         {
           TDSetting.mKmlSplays = ((CheckBox) findViewById( R.id.kml_splays )).isChecked();
           TDSetting.mKmlStations = ((CheckBox) findViewById( R.id.kml_stations )).isChecked();
         }
         break;
-      case 19: // Shapefile
+      case TDConst.SURVEY_POS_SHAPEFILE: // Shapefile
         {
           TDSetting.mKmlSplays = ((CheckBox) findViewById( R.id.shp_splays )).isChecked();
           TDSetting.mKmlStations = ((CheckBox) findViewById( R.id.shp_stations )).isChecked();
