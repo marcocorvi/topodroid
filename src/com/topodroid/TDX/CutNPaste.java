@@ -337,7 +337,7 @@ public class CutNPaste
       textview1 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
         new View.OnClickListener( ) {
           @Override public void onClick(View v) {
-            app.setXBLELaser( Device.LASER_ON, 0, lister, DataType.DATA_ALL, true );
+            app.setXBLELaser( Device.LASER_ON, 0, lister, DataType.DATA_ALL, true, true ); // FIXME check return value
             dismissPopupBT();
           }
         }
@@ -350,7 +350,7 @@ public class CutNPaste
       textview2 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
               new View.OnClickListener( ) {
                 @Override public void onClick(View v) {
-                  app.setXBLELaser( Device.LASER_OFF, 0, lister, DataType.DATA_ALL,true );
+                  app.setXBLELaser( Device.LASER_OFF, 0, lister, DataType.DATA_ALL,true, true ); // FIXME check return value
                   dismissPopupBT();
                 }
               } );

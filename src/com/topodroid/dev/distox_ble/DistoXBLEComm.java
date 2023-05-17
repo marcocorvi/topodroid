@@ -714,17 +714,19 @@ public class DistoXBLEComm extends TopoDroidComm
    * @param lister    callback handler
    * @param data_type packet datatype
    * @param closeBT   whether to close the connection at the end
+   * @return true on success
    */
-  public void setXBLELaser( String address, int what, int to_read, ListerHandler lister, int data_type, boolean closeBT )
+  public boolean setXBLELaser( String address, int what, int to_read, ListerHandler lister, int data_type, boolean closeBT )
   {
     mSkipNotify = true;
-    Thread laserThread = new Thread() {
-      @Override public void run() {
+    // FIXME no need to run on a thread
+    // Thread laserThread = new Thread() {
+    //   @Override public void run() {
         if ( ! tryConnectDevice( address, lister, 0 ) ) {
           TDLog.Error("XBLE set laser - failed connect device");
           closeDevice( true );
           mSkipNotify = false;
-          return; 
+          return false; 
         }
         // mNrReadPackets = 0;
         // mPacketToRead = to_read; // set the number of packet to read
@@ -771,9 +773,10 @@ public class DistoXBLEComm extends TopoDroidComm
           closeDevice( true );
           mSkipNotify = false;
         }
-      }
-    };
-    laserThread.start();
+    //   }
+    // };
+    // laserThread.start();
+    return true;
   }
 
   // ----------------- SEND COMMAND -------------------------------

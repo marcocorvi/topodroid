@@ -2672,16 +2672,27 @@ public class TopoDroidApp extends Application
    # @param lister    optional lister
    * @param data_type type of expected data
    # @param closeBT   whether to close the connection at the end 
+   * @param do_thread whether to run on a thread
    *                  SIWEI TIAN added on Jul
    */
-  public void setXBLELaser( int what, int nr, ListerHandler lister, int data_type, boolean closeBT ) // FIXME_LISTER
+  public boolean setXBLELaser( int what, int nr, ListerHandler lister, int data_type, boolean closeBT, boolean do_thread ) // FIXME_LISTER
   {
-    if ( mComm == null || TDInstance.getDeviceA() == null ) return;
+    if ( mComm == null || TDInstance.getDeviceA() == null ) return false;
     if ( mComm instanceof DistoXBLEComm ) {
-      ((DistoXBLEComm)mComm).setXBLELaser(TDInstance.deviceAddress(), what, nr, lister, data_type, closeBT );
+      if ( do_thread ) {
+        (new Thread() {
+          public void run() {
+            ((DistoXBLEComm)mComm).setXBLELaser(TDInstance.deviceAddress(), what, nr, lister, data_type, closeBT );
+          }
+        } ).start();
+        return true;
+      } else {
+        return ((DistoXBLEComm)mComm).setXBLELaser(TDInstance.deviceAddress(), what, nr, lister, data_type, closeBT );
+      }
     } else {
       TDLog.Error("set XBLE laser: not XBLE comm");
     }
+    return false;
   }
 
   // int readFirmwareHardware()

@@ -60,12 +60,12 @@ public class DistoXBLETakeShot extends AsyncTask<Integer, Integer, Integer >
     }
     for ( ; i>1; --i ) {
       TDLog.f( "take shot " + i + " wait " + TDSetting.mWaitLaser + "/" + TDSetting.mWaitShot );
-      mApp.setXBLELaser( Device.LASER_ON, 0, mLister, mDataType, false );
+      if ( ! mApp.setXBLELaser( Device.LASER_ON, 0, mLister, mDataType, false, false ) ) return i;
       TDUtil.slowDown( TDSetting.mWaitLaser ); 
-      mApp.setXBLELaser( Device.MEASURE, 0, mLister, mDataType, false);
+      if ( ! mApp.setXBLELaser( Device.MEASURE, 0, mLister, mDataType, false, false ) ) return i;
       TDUtil.slowDown( TDSetting.mWaitShot );
     }
-    mApp.setXBLELaser( Device.LASER_ON, 0, mLister, mDataType, false );
+    if ( ! mApp.setXBLELaser( Device.LASER_ON, 0, mLister, mDataType, false, false ) ) return i;
     TDUtil.slowDown( TDSetting.mWaitLaser );
     return 0;
   }
@@ -91,7 +91,9 @@ public class DistoXBLETakeShot extends AsyncTask<Integer, Integer, Integer >
   protected void onPostExecute( Integer result ) 
   {
     int nr = ( mLister == null )? 0 : mNr; // number of shots to download
-    mApp.setXBLELaser( Device.MEASURE, nr, mLister, mDataType, true ); // measure and download if nr > 
+    // FIXME what if this fails ?
+    //       really need to run on thread ?
+    mApp.setXBLELaser( Device.MEASURE, nr, mLister, mDataType, true, true ); // measure and download if nr > 
     mILister.enableBluetoothButton(true);
   }
 }

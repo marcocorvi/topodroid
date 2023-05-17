@@ -55,6 +55,8 @@ public class CWConvexHull
   double mVolume;
   boolean hasVolume;
   
+  /** cstr
+   */
   public CWConvexHull( )
   {
     mCnt  = cnt++;
@@ -73,12 +75,21 @@ public class CWConvexHull
   //   makeConcave( pts, distance_concavity, angle_concavity, eps );
   // }
 
-  public void create( ArrayList< Cave3DShot > legs1,   // legs at FROM station
-                      ArrayList< Cave3DShot > legs2,   // legs at TO station
-                      ArrayList< Cave3DShot > splays1, // splays at FROM station
-                      ArrayList< Cave3DShot > splays2, // splays at TO station
-                      Cave3DStation sf,                // shot FROM station
-                      Cave3DStation st,                // shot TO station
+  /** create the convex hull wall
+   * @param legs1    legs at FROM station
+   * @param legs2    legs at TO station
+   * @param splays1  splays at FROM station
+   * @param splays2  splays at TO station
+   * @param sf       shot FROM station
+   * @param st       shot TO station
+   * @param all_splay whether to use all splays
+   */
+  public void create( ArrayList< Cave3DShot > legs1,
+                      ArrayList< Cave3DShot > legs2,
+                      ArrayList< Cave3DShot > splays1,
+                      ArrayList< Cave3DShot > splays2,
+                      Cave3DStation sf,
+                      Cave3DStation st,
                       boolean all_splay )
     throws RuntimeException
   {
@@ -201,14 +212,23 @@ public class CWConvexHull
   }
 
   
+  /** add a vertex point
+   * @param p  3D point
+   */
   void addPoint( Vector3D p ) { insertPoint( p ); }
 
+  /** add a triangle face
+   * @param t  triangle
+   */
   void addTriangle( CWTriangle t ) { mFace.add( t ); }
 
   // int getNrVertex() { return mVertex.size(); }
   // int getNrSide()   { return mSide.size(); }
   // int getNrFace()   { return mFace.size(); }
 
+  /** compute the diameter of the convex hull
+   * @return the diameter
+   */
   double computeDiameter() 
   {
     double diam = 0;
@@ -222,6 +242,8 @@ public class CWConvexHull
     return diam;
   }
 
+  /** @return the volume of the convex hull
+   */
   double getVolume()
   {
     if ( ! hasVolume ) {
@@ -233,6 +255,8 @@ public class CWConvexHull
   
   // -------------------------------------------------------------------
 
+  /** @return the center of the convex hull (3D point)
+   */
   private Vector3D getCenter()
   {
     Vector3D ret = new Vector3D();
@@ -241,6 +265,13 @@ public class CWConvexHull
     return ret;
   }
 
+  /** compute the volume of a tetrahedron
+   * @param p0    first vertex
+   * @param p1    second vertex
+   * @param p2    third vertex
+   * @param p3    fourth vertex
+   * @return the volume
+   */
   private static double volume( Vector3D p0, Vector3D p1, Vector3D p2, Vector3D p3 )
   {
     // return p0.x * ( p1.y * p2.z + p3.y * p1.z + p2.y * p3.z - p1.y * p3.z - p3.y * p2.z - p2.y * p1.z ) 
@@ -253,30 +284,46 @@ public class CWConvexHull
     return u1.crossProduct(u2).dotProduct(u3);
   }
 
+  /** add a vertex
+   * @param v   vertex
+   */
   private void addVertex( CWPoint v )
   {
     if ( v == null || mVertex.contains(v) ) return;
     mVertex.add( v );
   }
   
+  /** @return the vertex given its tag
+   * @param tag   vertex tag
+   */
   private CWPoint getVertexByTag( int tag )
   {
     for ( CWPoint v : mVertex ) if ( v.mCnt == tag ) return v;
     return null;
   }
 
+  /** add a side
+   * @param s   side
+   */
   private void addSide( CWSide s )
   {
     if ( s == null || mSide.contains( s ) ) return;
     mSide.add( s );
   }
   
+  /** @return the side given its tag
+   * @param tag   side tag
+   */
   private CWSide getSideByTag( int tag )
   {
     for ( CWSide s : mSide ) if ( s.mCnt == tag ) return s;
     return null;
   }
 
+  /** @return the side given its end-vertices
+   * @param p1   first vertex
+   * @param p2   second vertex
+   */
   private CWSide getSide( CWPoint p1, CWPoint p2 )
   {
     for ( CWSide s : mSide ) {
@@ -288,6 +335,12 @@ public class CWConvexHull
     return s0;
   }
   
+  /** add a triangle
+   * @param p1   first vertex
+   * @param p2   second vertex
+   * @param p3   third vertex
+   * @return the triangle
+   */
   private CWTriangle addTriangle( CWPoint p1, CWPoint p2, CWPoint p3 )
   {
     CWSide s1 = getSide( p2, p3 );
@@ -304,14 +357,28 @@ public class CWConvexHull
     return t;
   }
   
+  /** @return the triangle given its tag
+   * @param tag   triangle tag
+   */
   private CWTriangle getTriangleByTag( int tag )
   {
     for ( CWTriangle t : mFace ) if ( t.mCnt == tag ) return t;
     return null;
   }
 
+  /** remove a vertex
+   * @param v   vertex to remove
+   */
   private void removeVertex( CWPoint v )  { mVertex.remove( v ); }
+
+  /** remove a side
+   * @param s   side to remove
+   */
   private void removeSide( CWSide s )     { mSide.remove( s ); }
+
+  /** remove a triangle
+   * @param t   triangle to remove
+   */
   private void removeFace( CWTriangle t ) { mFace.remove( t ); }
   
   // -------------------------------------------------------------------
@@ -349,6 +416,9 @@ public class CWConvexHull
     }
   }
   
+  /** insert a 3D point
+   * @param p  3D point
+   */
   private void insertPoint( Vector3D p )
   {
      // TDLog.v( "CW-Hull " + mVertex.size() + " insert point " + p.x + " " + p.y + " " + p.z );
@@ -501,7 +571,7 @@ public class CWConvexHull
         // TDLog.v( "CW-Hull faces to remove " + faceToRemove.size() );
         // for ( int j=0; j<faceToRemove.size(); ++j ) faceToRemove.get(j).dump();
 
-        throw new RuntimeException("side not found");
+        throw new RuntimeException( String.format(Locale.US, "CW - vertex %.2f %.2f %.f: side not found", p.x, p.y, p.z ) );
       }
     }
 
@@ -556,16 +626,23 @@ public class CWConvexHull
     // checkVertexConsistency();
   }
 
-  /*
-           s4
-  p4--------------p1
-    \             /\
-      \     t2  /s3  \
-     s5\      /   t s2 \
-  t3     \  /   s1       \
-          p2--------------p3
-        .'       tn         `.
-
+  /* reduce a triangle and a neighbor triangle if they form a parallelogram with short diagonal the shared side
+   * @param t   triangle (p2-p1-p3)
+   * @param p2  first vertex
+   * @param p1  second vertex
+   * @param p3  third vertex
+   * @param s3  side oppisite to p3
+   * @param s1  side opposite to p1
+   * @param s2  side opposite to p2
+   *
+   *           s4
+   *  p4--------------p1
+   *    \             /\
+   *      \     t2  /s3  \
+   *     s5\      /   t s2 \
+   *  t3     \  /   s1       \
+   *          p2--------------p3
+   *        .'       tn         `.
    */
   private void reduce( CWTriangle t, CWPoint p2, CWPoint p1, CWPoint p3, CWSide s3, CWSide s1, CWSide s2  )
   {
@@ -586,6 +663,7 @@ public class CWConvexHull
     // TDLog.v( "CW-Hull  T2/3 " + t2.mCnt + " " + t3.mCnt +  " TN " + tn.mCnt
     //    + " S4/5 " + s4.mCnt + " " + s5.mCnt + " P4 " + p4.mCnt );
     
+    // unlink triangles from p1, p3, and p4
     p3.removeTriangle(t);
     p1.removeTriangle(t);
     p1.removeTriangle(t2);
@@ -629,6 +707,8 @@ public class CWConvexHull
     // orderPointTriangles();
   }
   
+  /** @return true if the vertices are consistent
+   */
   private boolean checkVertexConsistency()
   {
     boolean ret = true;
@@ -645,6 +725,8 @@ public class CWConvexHull
     return ret;
   }
   
+  /** @return true if the sides are consistent
+   */
   private boolean checkSideConsistency()
   {
     boolean ret = true;
@@ -697,6 +779,9 @@ public class CWConvexHull
     out.flush();
   }
 
+  /** (binary) serialize the convex hull
+   * @param dos     output stream
+   */
   public void serialize( DataOutputStream dos ) throws IOException
   {
     dos.write('C');
@@ -710,6 +795,9 @@ public class CWConvexHull
   }
 
   /* FIXME
+   ** (binary) deserialize the convex hull
+   * @param dis     input stream
+   * 
   public void deserialize( DataInputStream dis ) throws IOException
   {
     char ch = dis.read();
@@ -723,9 +811,12 @@ public class CWConvexHull
   }
   */
 
-
-  // thr concavity threshold
-  // eps point "coincidence" threshold
+  /** make convace
+   * @param pts       points ???
+   * @param thr       concavity threshold
+   * @param angle_thr angle threshold
+   * @param eps       point "coincidence" threshold
+   */
   private void makeConcave( ArrayList< Vector3D > pts, double distance_thr, double angle_thr, double eps )
   {
     ArrayList<Vector3D> insidePts = new ArrayList<Vector3D>();
@@ -803,6 +894,9 @@ public class CWConvexHull
     addTriangle( v1, v2, p0 );
   }
 
+  /** remove a triangle
+   * @param t  triangle to remove
+   */
   private void dropTriangle( CWTriangle t )
   {
     t.v1.removeTriangle( t );
