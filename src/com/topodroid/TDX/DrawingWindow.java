@@ -4560,7 +4560,7 @@ public class DrawingWindow extends ItemDrawer
           
           if ( mPointCnt > mLinePointStep || mLinePointStep == POINT_MAX ) {
             /*{{ IF DEF_FILTER_NO_START*/
-              TDLog.v("Using DEF FILTER START");
+              // TDLog.v("Using DEF FILTER START");
               if ( mSymbol == SymbolType.LINE && BrushManager.isLineSection( mCurrentLine ) ) { // if ( BrushManager.isLineSection(  mCurrentLinePath.mLineType ) )
                 mLastLinePath = null;
                 doSectionLine( mCurrentLinePath );
