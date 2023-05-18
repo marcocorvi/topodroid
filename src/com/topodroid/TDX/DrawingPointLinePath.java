@@ -1000,16 +1000,20 @@ public class DrawingPointLinePath extends DrawingPath
 
   void setFirst( LinePoint lp1 ) 
   {
-    mFirst = lp1; // (1)
-    if ( mFirst.mPrev != null ) mFirst.mPrev.mNext = null;
-    mFirst.mPrev = null;
+    if ( lp1 != mFirst ) { // 20230518 added test
+      mFirst = lp1; // (1)
+      if ( mFirst.mPrev != null ) mFirst.mPrev.mNext = null;
+      mFirst.mPrev = null;
+    }
   }
 
   void setLast( LinePoint lp2 )
   {
-    mLast = lp2; // (2)
-    if ( mLast.mNext != null ) mLast.mNext.mPrev = null;
-    mLast.mNext = null;
+    if ( lp2 != mLast ) { // 20230518 added test
+      mLast = lp2; // (2)
+      if ( mLast.mNext != null ) mLast.mNext.mPrev = null;
+      mLast.mNext = null;
+    }
   }
 
   /** @return the index of a point in the line - DEBUG

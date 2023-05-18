@@ -4312,6 +4312,7 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v("Try and JOIN LINE lp1 " + lp1.size() + " lp2 " + lp2.size() );
     LinePoint p1 = lp2.first();
     LinePoint p2 = lp2.last();
+    // float size = TDSetting.isLineStyleComplex()? Float.MAX_VALUE : mSelectSize;
     return mDrawingSurface.getLineToContinue( lp1, p1, p2, mCurrentLine, mZoom, mSelectSize );
   }
 
@@ -4558,7 +4559,7 @@ public class DrawingWindow extends ItemDrawer
           }
           
           if ( mPointCnt > mLinePointStep || mLinePointStep == POINT_MAX ) {
-            /*{{ IF DEF_FILTER_START
+            /*{{ IF DEF_FILTER_NO_START*/
               TDLog.v("Using DEF FILTER START");
               if ( mSymbol == SymbolType.LINE && BrushManager.isLineSection( mCurrentLine ) ) { // if ( BrushManager.isLineSection(  mCurrentLinePath.mLineType ) )
                 mLastLinePath = null;
@@ -4619,7 +4620,7 @@ public class DrawingWindow extends ItemDrawer
                 }
               }
             /*{{ END DEF FILTER_START */
-            /*{{ IF DEF_NO_FILTER_NO_START*/
+            /*{{ IF DEF_NO_FILTER_START
               TDLog.v("Using DEF FILTER NO START");
               if ( ! ( mSymbol == SymbolType.LINE && BrushManager.isLineSection( mCurrentLine ) ) 
                    && TDSetting.isLineStyleComplex()
