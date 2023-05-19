@@ -1556,14 +1556,14 @@
 
   <string name="pref_survey_stations_title">测点命名原则</string>
   <string name="pref_survey_stations_summary">测点自动命名原则</string>
-  <string name="pref_accel_thr_title">加速度容限</string>
-  <string name="pref_accel_thr_summary">测线加速度的容差百分比</string>
-  <string name="pref_mag_thr_title">磁场容差</string>
-  <string name="pref_mag_thr_summary">测线磁场的容差百分比</string>
-  <string name="pref_dip_thr_title">磁偏角容差</string>
-  <string name="pref_dip_thr_summary">公差超过测线磁偏角</string>
-  <string name="pref_sibling_thr_title">相邻线阈值</string>
-  <string name="pref_sibling_thr_summary">相邻线测射阈值 [&#37;]</string>
+  <string name="pref_accel_thr_title">重力加速度（A）容差</string>
+  <string name="pref_accel_thr_summary">超过该值，数据报红</string>
+  <string name="pref_mag_thr_title">磁模量（absM）容差</string>
+  <string name="pref_mag_thr_summary">超过该值，数据报红</string>
+  <string name="pref_dip_thr_title">磁倾角（Dip）容差</string>
+  <string name="pref_dip_thr_summary">超过该值，数据报红</string>
+  <string name="pref_sibling_thr_title">复测主线容差</string>
+  <string name="pref_sibling_thr_summary">小于该值，认定为复测主线 [&#37;]</string>
 
   <string name="pref_leg_title">主线容差</string>
   <string name="pref_leg_summary">容差在主线测线之间</string>
@@ -1585,8 +1585,8 @@
   <string name="pref_team_title">团队</string>
   <string name="pref_team_summary">默认测量团队</string>
 
-  <string name="pref_ethr_title">测线垂直临界值</string>
-  <string name="pref_ethr_summary">垂直延展(测线)的范围</string>
+  <string name="pref_ethr_title">测线垂直临界角度</string>
+  <string name="pref_ethr_summary">该值决定在延展剖面图中测线的绘制方向</string>
   <string name="pref_vthr_title">主线东西南北临界值</string>
   <string name="pref_vthr_summary">主线 左右上下/东西南北 角度临界值</string>
 
