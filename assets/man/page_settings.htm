@@ -272,7 +272,7 @@ Line Tools
 <ul>
 <li>Lines width (N.B. wall line are twice this). [1 px]</li>
 <li>Line style scale factor</li>
-<li>Line style {Bezier,fine,normal,coarse, simplified}. [normal]</li>
+<li>Line style {Bezier, fine, normal, coarse, simplified}. [normal]</li>
 <li>Line close. Whether to close lines of "closed" type. [yes]</li>
 <li>Line-point spacing. Minimum distance between line points. [10 px]</li>
 <li>Section lines "direction tick" size [1,20]. Default 8 [x unit]</li>
@@ -363,17 +363,27 @@ Surface DEM
 
 Wall model
 <ul>
-<li>Using splays</li>
-<li>All splays</li>
-<li>Projected splays</li>
-<li>Splay threshold</li>
-<li>Split triangles</li>
-<li>Random split</li>
-<li>Stretch split</li>
-<li>Powercrust delta parameter</li>
-</ul><br><p>
+<li><i>Splays</i> use {none, normal, xsection} [normal]</li>
+<li>Hull wall model<ul>
+  <li><i>Project splays</i> on the normal plane [no]</li>
+  <li>Splay <i>threshold</i>: use only splays extending out of the shot (angle cosine) [0.5 ie 30&deg;]</li>
+</ul></li>
+<li>Convex hull wall model<ul>
+  <li>All splays [yes]</li>
+  <li>Split intersecting <i>triangles</i> [yes]</li>
+  <li>Random <i>point shift</i> [0.1m]</li>
+  <li><i>Leg</i> stretch [0.1 m]</li>
+</ul></li>
+<li>Powercrust wall model<ul>
+  <li><i>Delta</i> parameter</li>
+</ul></li>
+</ul><p>
 
-<!-- 3D modeling -->
+3D modeling
+<ul>
+<li>3D model enable [no]</li>
+<li>Splay <i>buffer</i> (unused) [2]</li>
+</ul><br><p>
 
 <!-- ========================================== -->
 

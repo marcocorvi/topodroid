@@ -44,12 +44,18 @@ public class CWPoint extends Vector3D
     mTriangle = new ArrayList<CWTriangle>();
   }
 
+  /** add a triangle to the list of triangles of this point, if not already present
+   * @param t  triangle to add
+   */
   public void addTriangle( CWTriangle t ) 
   {
     if ( t == null || mTriangle.contains(t) ) return;
     mTriangle.add( t );
   }
   
+  /** remove a triangle to the list of triangles of this point, if present
+   * @param t  triangle to remove
+   */
   public void removeTriangle( CWTriangle t )
   {
     if ( t == null ) return;
@@ -83,6 +89,14 @@ public class CWPoint extends Vector3D
     // return true;
   }
   
+  /** @return the right triangle of a side containing this point (null if the side does not contain this point)
+   * @param s left side of this point on the return triangle
+   *
+   *             * this point 
+   *            / \
+   *         s /   \
+   *          /  t  \
+   */
   public CWTriangle rightTriangleOf( CWSide s )
   {
     if ( ! s.contains(this) ) return null;
@@ -90,6 +104,14 @@ public class CWPoint extends Vector3D
     return null;
   }
   
+  /** @return the left triangle of a side containing this point (null if the side does not contain this point)
+   * @param s right side of this point on the return triangle
+   *
+   *             * this point 
+   *            / \
+   *           /   \ s
+   *          /  t  \
+   */
   public CWTriangle leftTriangleOf( CWSide s )
   {
     if ( ! s.contains(this) ) return null;
@@ -97,7 +119,8 @@ public class CWPoint extends Vector3D
     return null;
   }
 
-  // check if this point triangles are all marked "outside"
+  /** @return true if this point triangles are all marked "outside"
+   */
   public boolean areAllTrianglesOutside()
   {
     for ( CWTriangle t : mTriangle ) {

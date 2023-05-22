@@ -58,6 +58,15 @@ public class CWTriangle extends CWFacet
     return null;
   }
   
+  /** @return the left side of a vertex
+   * @param p vertex
+   *
+   *        v1
+   *    s2 /  \ s3
+   *      /    \
+   *     v3 --- v2
+   *        s1
+   */
   public CWSide leftSideOf( CWPoint p ) // left is prev
   {
     if ( p == v1 ) return s2;
@@ -66,6 +75,15 @@ public class CWTriangle extends CWFacet
     return null;
   }
   
+  /** @return the right side of a vertex
+   * @param p vertex
+   *
+   *        v1
+   *    s2 /  \ s3
+   *      /    \
+   *     v3 --- v2
+   *        s1
+   */
   public CWSide rightSideOf( CWPoint p ) // right is next
   {
     if ( p == v1 ) return s3;
@@ -74,6 +92,15 @@ public class CWTriangle extends CWFacet
     return null;
   }
   
+  /** @return the opposite side of a vertex
+   * @param p vertex
+   *
+   *        v1
+   *    s2 /  \ s3
+   *      /    \
+   *     v3 --- v2
+   *        s1
+   */
   public CWSide oppositeSideOf( CWPoint p )
   {
     if ( p == v1 ) return s1;
@@ -82,6 +109,15 @@ public class CWTriangle extends CWFacet
     return null;
   }
   
+  /** @return the opposite side of a side
+   * @param s  side
+   *
+   *        v1
+   *    s2 /  \ s3
+   *      /    \
+   *     v3 --- v2
+   *        s1
+   */
   public CWPoint oppositePointOf( CWSide s )
   {
     if ( s == s1 ) return v1;
@@ -92,6 +128,12 @@ public class CWTriangle extends CWFacet
 
   /** create a triangle on three points
    * Note each side can be null (if so it is created)
+   * @param v1  first vertex
+   * @param v2  second vertex
+   * @param v3  third vertex
+   * @param s1  first side (opposite to v1)
+   * @param s2  second side (opposite to v2)
+   * @param s3  third side (opposite to v3)
    */
   public CWTriangle( CWPoint v1, CWPoint v2, CWPoint v3, CWSide s1, CWSide s2, CWSide s3 )
   {
@@ -101,6 +143,16 @@ public class CWTriangle extends CWFacet
     buildTriangle( s1, s2, s3 );
   }
   
+  /** create a triangle on three points
+   * Note each side can be null (if so it is created)
+   * @param tag triangle tag
+   * @param v1  first vertex
+   * @param v2  second vertex
+   * @param v3  third vertex
+   * @param s1  first side (opposite to v1)
+   * @param s2  second side (opposite to v2)
+   * @param s3  third side (opposite to v3)
+   */
   public CWTriangle( int tag, CWPoint v1, CWPoint v2, CWPoint v3, CWSide s1, CWSide s2, CWSide s3 )
   {
     super( v1, v2, v3 );

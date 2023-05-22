@@ -33,6 +33,8 @@ import java.io.IOException;
 
 public class CWConvexHull 
 {
+  private final static boolean CW_CHECK_CONSISTENCY = true;
+
   private static int cnt = 0;
   static public void resetCounter() { cnt = 0; }
   static public void resetCounters() 
@@ -199,7 +201,7 @@ public class CWConvexHull
       // for ( Cave3DShot s2 : splays2 ) {
       //   vt.sum( s2.toVector3D() ).dump();
       // }
-      TDLog.Error( "CW-HUll error " + e.getMessage() );
+      TDLog.Error( "CW-Hull error " + e.getMessage() );
       throw e;
     }
     // TDLog.v( "CW-Hull " + sf.short_name + "-" + st.short_name 
@@ -456,10 +458,13 @@ public class CWConvexHull
       return;
     }
 
-    // boolean cs = checkSideConsistency();
-    // boolean cv = checkVertexConsistency();
-    // if ( ! cs || ! cv )
-    //   // TDLog.v( "CW-HUll consistency before: V " + mVertex.size() + " S " + mSide.size() + " T " + mFace.size() + " S-check " + cs + " V-check " + cv );
+    if ( CW_CHECK_CONSISTENCY ) {
+      boolean cs = checkSideConsistency();
+      boolean cv = checkVertexConsistency();
+      if ( ! cs || ! cv ) {
+        TDLog.v( "CW-Hull consistency before: V " + mVertex.size() + " S " + mSide.size() + " T " + mFace.size() + " S-check " + cs + " V-check " + cv );
+      }
+    }
    
     // int nv = mVertex.nv();
     ArrayList<CWTriangle> faceToRemove = new ArrayList<CWTriangle>();
@@ -584,10 +589,13 @@ public class CWConvexHull
     }
     for ( CWPoint v1 : vertexToRemove )  { removeVertex( v1 ); }
     
-    // cs = checkSideConsistency();
-    // cv = checkVertexConsistency();
-    // if ( ! cs || ! cv )
-    //   // TDLog.v( "CW-Hull consistency after: V " + mVertex.size() + " S " + mSide.size() + " T " + mFace.size() + " S-check " + cs + " V-check " + cv );
+    if ( CW_CHECK_CONSISTENCY ) {
+      boolean cs = checkSideConsistency();
+      boolean cv = checkVertexConsistency();
+      if ( ! cs || ! cv ) {
+        TDLog.v( "CW-Hull consistency after: V " + mVertex.size() + " S " + mSide.size() + " T " + mFace.size() + " S-check " + cs + " V-check " + cv );
+      }
+    }
 
     // remove small area triangles
     // TDLog.v( "CW-Hull small area V " + mVertex.size() + " S " + mSide.size() + " T " + mFace.size() );
@@ -621,9 +629,11 @@ public class CWConvexHull
       }
     }
     
-    // TDLog.v( "CW-Hull insert point done");
     // dump();
-    // checkVertexConsistency();
+    if ( CW_CHECK_CONSISTENCY ) {
+      boolean cv = checkVertexConsistency();
+      TDLog.v( "CW-Hull insert point done - V-consistency " + cv );
+    }
   }
 
   /* reduce a triangle and a neighbor triangle if they form a parallelogram with short diagonal the shared side
@@ -718,7 +728,7 @@ public class CWConvexHull
         double vol = t.volume( p );
         if ( vol < -0.01 ) {
           ret = false;
-          // TDLog.v( "CW-Hull Inconsistent T " + t.mCnt + " with V " + p.mCnt + " vol " + vol );
+          TDLog.v( "CW-Hull Inconsistent T " + t.mCnt + " with V " + p.mCnt + " vol " + vol );
         }
       }
     }
@@ -734,7 +744,7 @@ public class CWConvexHull
       CWTriangle t1 = s.t1;
       CWTriangle t2 = s.t2;
       if ( t1.contains( s ) && t2.contains(s) ) continue;
-      // TDLog.v( "CW-Hull Inconsistent S " + s.mCnt + " with T " + t1.mCnt + "  " + t2.mCnt );
+      TDLog.v( "CW-Hull Inconsistent S " + s.mCnt + " with T " + t1.mCnt + "  " + t2.mCnt );
       ret = false;
     }
     return ret;
