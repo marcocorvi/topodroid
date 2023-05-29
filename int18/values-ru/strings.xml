@@ -161,7 +161,7 @@
     <string name="auto">авто</string>
     <string name="linear">линейный</string>
     <string name="non_linear">нелинейный</string>
-    <!-- NO string name="algo_minimum">минимум</string -->
+    <!-- UNUSED string name="algo_minimum">минимум</string -->
    
     <!-- UNUSED string name="device_algo_failed">Алгоритм автоопределения не сработал\nИспользую линейный алгоритм</string -->
     <string name="device_address">Адрес %1$s</string>

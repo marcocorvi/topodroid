@@ -172,7 +172,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="auto" copyable="it pt">auto</string>
     <string name="linear" copyable="pt">linear</string>
     <string name="non_linear">non-linear</string>
-    <string name="algo_minimum" translatable="false">minimum</string>
+    <!-- UNUSED string name="algo_minimum" translatable="false">minimum</string -->
    
     <!-- UNUSED string name="device_algo_failed">Algorithm auto-determination failed\nUsing linear algorithm</string -->
     <string name="device_address">Address %1$s</string>

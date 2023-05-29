@@ -604,7 +604,7 @@ public class DBlock
    */
   boolean isDistoX() { return mShotType <= 0; }
 
-  /** @return true if the shot type is "DistoX - backsight" and "backshot" is set
+  /** @return true if the shot type is "DistoX - backsight" and the setting "backshot" is set
    */
   boolean isDistoXBacksight() { return TDSetting.mDistoXBackshot && mShotType == -1; }
 

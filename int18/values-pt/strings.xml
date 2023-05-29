@@ -150,6 +150,8 @@ no campo abaixo e aperte o botão.
   <string name="auto">auto</string>
   <string name="linear">linear</string>
   <string name="non_linear">não linear</string>
+    <!-- UNUSED string name="algo_minimum">minimum</string -->
+
   <!-- UNUSED string name="device_algo_failed">Determinação automática do algoritmo mal sucedida\nUtilizando algoritmo linear</string -->
   <string name="device_address">Endereço %1$s</string>
   <!-- UNUSED string name="device_busy">Dispositivo indisponível</string -->

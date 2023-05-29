@@ -163,7 +163,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="auto">automatikus</string>
     <string name="linear">lineáris</string>
     <string name="non_linear">nem lineáris</string>
-    <!-- NO string name="algo_minimum">minimum</string -->
+    <!-- UNUSED string name="algo_minimum">minimum</string -->
    
     <!-- UNUSED string name="device_algo_failed">Az algoritmus automatikus kiválasztása nem sikerült\nLineáris eljárás használata</string -->
     <string name="device_address">Cím %1$s</string>

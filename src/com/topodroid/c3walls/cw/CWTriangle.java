@@ -192,7 +192,7 @@ public class CWTriangle extends CWFacet
 
   // void dump( )
   // {
-  //   // TDLog.v( "CW Tri " + mCnt + " " + mType + " V " + v1.mCnt + " " + v2.mCnt + " " + v3.mCnt + " S " + s1.mCnt + " " + s2.mCnt + " " + s3.mCnt 
+  //   // TDLog.v( "CW-Hull Tri " + mCnt + " " + mType + " V " + v1.mCnt + " " + v2.mCnt + " " + v3.mCnt + " S " + s1.mCnt + " " + s2.mCnt + " " + s3.mCnt 
   //               // + " U " + un.x + " " + un.y + " " + un.z
   //   );
   // }
@@ -289,12 +289,12 @@ public class CWTriangle extends CWFacet
       if ( b2 >= 0 && b2 <= 1 ) {
         a2 = alpha2( v, n );
         lp2.copy( a2, s3, this, v.sum( n.scaledBy(a2) ) );
-        // TDLog.v( "CW Tri " + mCnt + " b1 " + b1 + " b2 " + b2 );
+        // TDLog.v( "CW-Hull Tri " + mCnt + " b1 " + b1 + " b2 " + b2 );
         return true;
       } else if ( b3 >= 0 && b3 <= 1 ) {
         a3 = alpha3( v, n );
         lp2.copy( a3, s2, this, v.sum( n.scaledBy(a3) ) );
-        // TDLog.v( "CW Tri " + mCnt + " b1 " + b1 + " b3 " + b3 );
+        // TDLog.v( "CW-Hull Tri " + mCnt + " b1 " + b1 + " b3 " + b3 );
         return true;
       }
     } else if ( b2 >= 0 && b2 <= 1 ) {
@@ -303,7 +303,7 @@ public class CWTriangle extends CWFacet
       if ( b3 >= 0 && b3 <= 1 ) {
         a3 = alpha3( v, n );
         lp2.copy( a3, s2, this, v.sum( n.scaledBy(a3) ) );
-        // TDLog.v( "CW Tri " + mCnt + " b2 " + b2 + " b3 " + b3 );
+        // TDLog.v( "CW-Hull Tri " + mCnt + " b2 " + b2 + " b3 " + b3 );
         return true;
       }
     }

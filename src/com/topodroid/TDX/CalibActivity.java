@@ -113,7 +113,7 @@ public class CalibActivity extends Activity
   private RadioButton mCBAlgoAuto;
   private RadioButton mCBAlgoLinear;
   private RadioButton mCBAlgoNonLinear;
-  private RadioButton mCBAlgoMinimum;
+  // private RadioButton mCBAlgoMinimum;
 
 
   private TopoDroidApp mApp;
@@ -169,11 +169,11 @@ public class CalibActivity extends Activity
     mCBAlgoAuto      = (RadioButton) findViewById( R.id.calib_algo_auto );
     mCBAlgoLinear    = (RadioButton) findViewById( R.id.calib_algo_linear );
     mCBAlgoNonLinear = (RadioButton) findViewById( R.id.calib_algo_non_linear );
-    mCBAlgoMinimum   = (RadioButton) findViewById( R.id.calib_algo_minimum );
+    // mCBAlgoMinimum   = (RadioButton) findViewById( R.id.calib_algo_minimum );
 
-    if ( ! TDLevel.overTester ) {
-      mCBAlgoMinimum.setVisibility( View.GONE );
-    }
+    // if ( ! TDLevel.overTester ) {
+    //   mCBAlgoMinimum.setVisibility( View.GONE );
+    // }
 
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlaceholder(true);
@@ -218,7 +218,7 @@ public class CalibActivity extends Activity
         // case 0: mCBAlgoAuto.setChecked( true ); break;
         case 1: mCBAlgoLinear.setChecked( true ); break;
         case 2: mCBAlgoNonLinear.setChecked( true ); break;
-        case 3: mCBAlgoMinimum.setChecked( true ); break;
+        // case 3: mCBAlgoMinimum.setChecked( true ); break;
         default: mCBAlgoAuto.setChecked( true ); break;
       }
       if ( info.dip < 180 ) {
@@ -398,7 +398,7 @@ public class CalibActivity extends Activity
     int algo = 0;
     if ( mCBAlgoLinear.isChecked() )         algo = 1;
     else if ( mCBAlgoNonLinear.isChecked() ) algo = 2;
-    else if ( mCBAlgoMinimum.isChecked() )   algo = 3;
+    // else if ( mCBAlgoMinimum.isChecked() )   algo = 3;
     TopoDroidApp.mDData.updateCalibAlgo( TDInstance.cid, algo );
 
     setButtons();

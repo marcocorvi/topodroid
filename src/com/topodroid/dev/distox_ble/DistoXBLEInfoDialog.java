@@ -26,7 +26,7 @@ import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.dev.Device;
 // import com.topodroid.dev.ble.BleUtils;
 import com.topodroid.ui.MyDialog;
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 // import com.topodroid.utils.TDUtil;
 
 import java.lang.ref.WeakReference;
@@ -41,10 +41,13 @@ public class DistoXBLEInfoDialog extends MyDialog
 
   private final DeviceActivity mParent;
   private final Device mDevice;
+  private boolean mDone;
 
   private TextView tv_code;
   private TextView tv_firmware;
   private TextView tv_hardware;
+  private String mHardware = null;
+  private String mFirmware = null;
 
   private final WeakReference<TopoDroidApp> mApp; // FIXME LEAK
 
@@ -59,6 +62,7 @@ public class DistoXBLEInfoDialog extends MyDialog
     mParent = parent;
     mDevice = device;
     mApp    = new WeakReference<TopoDroidApp>( app );
+    mDone   = false;
   }
 
   @Override
@@ -98,16 +102,25 @@ public class DistoXBLEInfoDialog extends MyDialog
    */
   public void SetVal( final int type, String txtval )
   {
+    if ( mDone ) return;
     if ( type == DistoXBLEProtocol.PACKET_INFO_FIRMWARE ) {
-      mParent.runOnUiThread( new Runnable() {
-        public void run() {
-          tv_firmware.setText( String.format( "Firmware: %s", txtval ) );
-      } } );
+      mFirmware = txtval;
     } else if ( type == DistoXBLEProtocol.PACKET_INFO_HARDWARE ) {
-      mParent.runOnUiThread( new Runnable() {
-        public void run() {
-          tv_hardware.setText( String.format( "Hardware: %d", txtval) );
-      } } );
+      mHardware = txtval;
+    }
+  }
+
+  /** update hw/fw textfields
+   * @note run on postexecute
+   */
+  void updateHwFw()
+  {
+    if ( mDone ) return;
+    if ( mFirmware != null ) {
+      tv_firmware.setText( String.format( "Firmware: %s", mFirmware ) );
+    }
+    if ( mHardware != null ) {
+      tv_hardware.setText( String.format( "Hardware: %d", mHardware) );
     }
   }
 
@@ -117,6 +130,7 @@ public class DistoXBLEInfoDialog extends MyDialog
   void updateInfo( DistoXBLEInfo info )
   {
     if ( info == null ) return;
+    if ( mDone ) return;
     mParent.runOnUiThread( new Runnable() {
       public void run() {
         tv_code.setText(     info.mCode );
@@ -145,7 +159,15 @@ public class DistoXBLEInfoDialog extends MyDialog
     //   );
     // } else
     if ( b == mBTback ) {
+        mDone = true;
         dismiss();
     }
+  }
+
+  @Override
+  public void onBackPressed()
+  {
+    mDone = true;
+    super.onBackPressed();
   }
 }

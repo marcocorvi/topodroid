@@ -4,6 +4,16 @@
  * @date nov 2011
  *
  * @brief TopoDroid DistoX calibration algorithm
+ *
+ * The calibration transform maps the G-M values, Gs and Ms, in the (non-orthogonal) sensor frame
+ * to the values, Md and Gd, in the (orthogonal) device frame (with X axis aligned to the laser direction):
+ *
+ *    Md = Am Ms + Bm
+ *    Gd = Ag Gs + Bg
+ * 
+ * The G-transform can have a non-linear term, a contribution  nl_i * Gs_i ^ 2 to the i-th
+ * component of Gd
+ *
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -55,17 +65,28 @@ public class CalibAlgo
 
   // ==============================================================
 
+  /** @return the vector scaled by the constant FV (24000.0)
+   * @param v unscaled vector (raw DistoX values)
+   */
   static protected TDVector scaledVector( TDVector v ) { return scaledVector( v.x, v.y, v.z ); }
 
+  /** @return the vector scaled by the constant FV (24000.0)
+   * @param x unscaled X component (raw DistoX value)
+   * @param y unscaled Y component (raw DistoX value)
+   * @param z unscaled Z component (raw DistoX value)
+   */
   static private TDVector scaledVector( float x, float y, float z )
   {
     return new TDVector( x/TDUtil.FV, y/TDUtil.FV, z/TDUtil.FV );
   }
 
+  /** maximum value of a tranform matrix entry
+   */
   static final private double MAX_M_VALUE = 1.99993896;
 
-  // this should never happen with BH algo
-  //
+  /** @return true if the AM matrix has an entry over the max M value (1.99993896) 
+   * @note this should never happen with BH algo
+   */
   public boolean hasSaturatedCoeff()
   {
     return ( ( Math.abs( aM.x.x ) >= MAX_M_VALUE ) 
@@ -89,6 +110,10 @@ public class CalibAlgo
   //   }
   // }
 
+  /** rescale the transformation coefficients so that none exceeds the max value
+   * @param b     B vector
+   * @param a     A matrix
+   */
   public void EnforceMax2( TDVector b, TDMatrix a )
   {
     double max = Math.abs( b.x );
@@ -123,6 +148,8 @@ public class CalibAlgo
   }
 
   /** construct a CalibAlgo from the saved coefficients
+   * @param coeff   coefficients array
+   * @param nonLinear whether the transform is non-linear
    */
   public CalibAlgo( byte[] coeff, boolean nonLinear )
   {
@@ -169,27 +196,55 @@ public class CalibAlgo
    */
   public float DeltaBH()      { return mDeltaBH; }
 
-  public float Delta()        { return mDelta; }
-  public float Delta2()       { return mDelta2; }
+  /** @return the delta value
+   */
+  public float Delta() { return mDelta; }
+
+  /** @return the delta2 value
+   */
+  public float Delta2() { return mDelta2; }
+
   // public float Error( int k ) { return err[k]; }
-  public float[] Errors()     { return err; }
+
+  /** @return the array of errors
+   */
+  public float[] Errors() { return err; }
 
   /** @return the maximum error
    */
-  public float MaxError( )    { return mMaxError; }
+  public float MaxError( ) { return mMaxError; }
 
   /** @return the dip angle [degrees]
    */
   public float Dip() { return mDip; }
 
+  /** @return the A-matrix for the tranform of G
+   */
   public TDMatrix GetAG() { return aG; }
+
+  /** @return the A-matrix for the tranform of M
+   */
   public TDMatrix GetAM() { return aM; }
+
+  /** @return the B-vector for the tranform of G
+   */
   public TDVector GetBG() { return bG; }
+
+  /** @return the B-vector for the tranform of M
+   */
   public TDVector GetBM() { return bM; }
+
+  /** @return the non-linear vector for the tranform of G
+   */
   public TDVector GetNL() { return nL; }
 
   // public int nrCoeff() { return mNonLinear ? 52 : 48; }
 
+  /** @return the rounded value of a float as unsigned short (16 bits)
+   * @param x     float value 
+   * @note x in [0, 1.365333] is positive
+   *       x in [1.365333, 2.730666] is negative (use complement)
+   */
   private static long roundV( float x )
   {
     long v = Math.round(x * TDUtil.FV);
@@ -197,6 +252,11 @@ public class CalibAlgo
     return v;
   }
 
+  /** @return the rounded value of a float as unsigned short (16 bits)
+   * @param x     float value
+   * @note x in [0, 2] is positive
+   *       x in [2, 4] is negative (use complement)
+   */
   private static long roundM( float x )
   {
     long v = Math.round(x * TDUtil.FM);
@@ -204,6 +264,8 @@ public class CalibAlgo
     return v;
   }
 
+  /** @return the (byte) array of coefficients as for DistoX memory
+   */
   public byte[] GetCoeff()
   {
     if ( aG == null ) return null;
@@ -301,7 +363,10 @@ public class CalibAlgo
     return coeff;
   }
 
-  // N.B. the string will have the length of the coeff array
+  /** @return the string presenttaion of the coefficients
+   * @param coeff  byte array of coefficients
+   * @note the string will have the length of the coeff array
+   */
   public static String coeffToString( byte[] coeff )
   {
     int kk = (coeff == null)? 0 : coeff.length;
@@ -326,6 +391,9 @@ public class CalibAlgo
   //   // TDLog.v( coeff[48] + " " + coeff[49] + " " + coeff[50] + " " + coeff[51] );
   // }
 
+  /** @return the byte array of coefficients for the string presentation
+   * @param cs   string presentation of the coefficients
+   */
   public static byte[] stringToCoeff( String cs )
   {
     byte[] coeff = new byte[ 52 ]; // N.B. return 52 calib coeff
@@ -340,6 +408,12 @@ public class CalibAlgo
     return coeff;
   }
 
+  /** initialize the A-matrix and B-vector from the byte array of coefficients
+   * @param coeff    coefficients
+   * @param b        B vector
+   * @param a        A matrix
+   * @param off      offset in the array of coefficients
+   */
   private static void coeffToBA( byte[] coeff, TDVector b, TDMatrix a, int off )
   {
     long v;
@@ -418,29 +492,41 @@ public class CalibAlgo
     a.z.z = v / TDUtil.FM;
   }
 
+  /** initialize the A-matrix and B-vector for G from the byte array of coefficients
+   * @param coeff    coefficients
+   * @param b        B vector
+   * @param a        A matrix
+   */
   public static void coeffToG( byte[] coeff, TDVector b, TDMatrix a )
   {
     coeffToBA( coeff, b, a, 0 );
     // TDLog.v( "G " + b.x + " " + b.y + " " + b.z + " " + a.x.x + " " + a.x.y + " " + a.x.z );
   }
 
+  /** initialize the A-matrix and B-vector for M from the byte array of coefficients
+   * @param coeff    coefficients
+   * @param b        B vector
+   * @param a        A matrix
+   */
   public static void coeffToM( byte[] coeff, TDVector b, TDMatrix a )
   {
     coeffToBA( coeff, b, a, 24 );
     // TDLog.v( "M " + b.x + " " + b.y + " " + b.z + " " + a.x.x + " " + a.x.y + " " + a.x.z );
   }
 
-  // N.B. map coeff <--> NL
-  //          0          1
-  //          1          2
-  //          ...
-  //          126        127
-  //          127        n.a.
-  //          128       -127
-  //          ...
-  //          254       -1
-  //  0xff    255        0     
-  //
+  /** @return the float value of a non-linear entry from its byte presentation
+   * @param b     non-linear byte
+   * N.B. map coeff <--> NL
+   *          0          1
+   *          1          2
+   *          ...
+   *          126        127
+   *          127        n.a.
+   *          128       -127
+   *          ...
+   *          254       -1
+   *  0xff    255        0     
+   */
   private static float byteToFloatNL( byte b )
   {
     int c0 = 1 + (int)(b);
@@ -448,6 +534,9 @@ public class CalibAlgo
     return c0 / TDUtil.FN;
   }
 
+  /** @return the byte value of a non-linear entry from its float value
+   * @param x     non-linear entry value
+   */
   public static byte floatToByteNL( float x )
   {
     float xf = x * TDUtil.FN; 
@@ -469,6 +558,10 @@ public class CalibAlgo
   //   return (byte)(v & 0xff);
   // }
   
+  /** initialize the non-linear vector form the byte array of coefficients
+   * @param coeff   coefficients
+   * @param nl      non-linear vector
+   */
   public static void coeffToNL( byte[] coeff, TDVector nl )
   {
     if ( coeff != null && coeff.length >= 51 ) {
@@ -489,6 +582,15 @@ public class CalibAlgo
     AddValues( b.gx, b.gy, b.gz, b.mx, b.my, b.mz, b.mGroup );
   }
 
+  /** insert G-M values
+   * @param gx   X-component of G
+   * @param gy   Y-component of G
+   * @param gz   Z-component of G
+   * @param mx   X-component of M
+   * @param my   Y-component of M
+   * @param mz   Z-component of M
+   * @param group0 group (if positive - otherwise the group is set to 0)
+   */
   private void AddValues( long gx, long gy, long gz, long mx, long my, long mz, long group0 )
   {
     if ( idx >= num ) {
@@ -509,6 +611,9 @@ public class CalibAlgo
 
   // public int Size() { return idx; }
 
+  /** reset the number of data
+   * @param N   new number of data
+   */
   public void Reset( int N )
   {
     if ( N != num ) {
@@ -590,6 +695,10 @@ public class CalibAlgo
     nl.z = saturate( nl.z );
   }
 
+  /** compute azimuth and clino from (g,m) in device frame
+   * @param g0   G value (device-frame)
+   * @param m0   M value
+   */
   protected void computeBearingAndClinoRad( TDVector g0, TDVector m0 )
   {
     // TDVector g = g0.mult( 1.0f / TDUtil.FV );
@@ -617,6 +726,8 @@ public class CalibAlgo
   // ERROR STATS
 
   /** compute the unit vector direction of sensor-data (g,m)
+   * @param g1    input G (sensor values)
+   * @param m1    input M 
    */
   public TDVector computeDirection( TDVector g1, TDVector m1 )
   {

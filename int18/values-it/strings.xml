@@ -161,7 +161,7 @@
     <string name="auto">auto</string>
     <string name="linear">lineare</string>
     <string name="non_linear">non-lineare</string>
-    <!-- NO string name="algo_minimum">minimum</string -->
+    <!-- UNUSED string name="algo_minimum">minimum</string -->
    
     <!-- UNUSED string name="device_algo_failed">Fallita determinazione automatica algoritmo\nUso algoritmo lineare</string -->
     <string name="device_address">Indirizzo %1$s</string>

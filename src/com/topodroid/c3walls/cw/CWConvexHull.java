@@ -859,7 +859,7 @@ public class CWConvexHull
           double a0 = t0.maxAngleOfPoint(p0);
           if (a0 > angle_thr) break;
         } catch ( NullPointerException e ) {
-          TDLog.Error( e.getMessage() );
+          TDLog.Error("CW-Hull make concave: " + e.getMessage() );
         }
       }
       // TDLog.v( "CW-Hull concavity T " + t0.mCnt + " P " + p0.x + " " + p0.y + " " + p0.z );

@@ -170,7 +170,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="auto">automatique</string>
     <string name="linear">linéaire</string>
     <string name="non_linear">non-linéaire</string>
-    <!-- OK string name="algo_minimum" translatable="false">minimum</string -->
+    <!-- UNUSED string name="algo_minimum" translatable="false">minimum</string -->
     
     <!-- UNUSED string name="device_algo_failed">Échec de détermination automatique de l\'algorithme depuis l\'appareil\n. Utilisation de l\'algorithme linéraire</string -->
     <string name="device_address">Addresse %1$s</string>

@@ -45,7 +45,7 @@ public class CWBorder
     mInts = new ArrayList< CWIntersection >();
     pts2in1 = cv1.computeInsidePoints( cv2, eps ); // points of cv2 inside cv1
     pts1in2 = cv2.computeInsidePoints( cv1, eps );
-    // TDLog.v( "Border " + mCnt + ": " + pts2in1.size() + " points of " + cv2.mCnt + " in " + cv1.mCnt 
+    // TDLog.v( "CW-HUll Border " + mCnt + ": " + pts2in1.size() + " points of " + cv2.mCnt + " in " + cv1.mCnt 
     //      + " " + pts1in2.size() + " points of " + cv1.mCnt + " in " + cv2.mCnt );
     hasVolume = false;
   }
@@ -72,11 +72,11 @@ public class CWBorder
       ii.makeSignature();
       // ii.dump();
     }
-    // TDLog.v("make border. nr ints " + ints.size() );
+    // TDLog.v("CW-Hull make border. nr ints " + ints.size() );
 
     boolean ret = orderIntersections( ints );
     // int sz = ints.size();
-    // TDLog.v("make border. order ints " + ret + " nr " +  mInts.size() );
+    // TDLog.v("CW-Hull make border. order ints " + ret + " nr " +  mInts.size() );
 
     int ns = mInts.size();
     for ( int k = 0; k < ns; ++ k ) {
@@ -84,7 +84,7 @@ public class CWBorder
       CWIntersection i2 = mInts.get( (k+1)%ns );
       i1.setNext( i2 );
     }
-    // TDLog.v("Border " + mCnt + " size " + mInts.size() );
+    // TDLog.v("CW-Hull Border " + mCnt + " size " + mInts.size() );
     // for ( CWIntersection ii : mInts ) {
     //   ii.dump();
     // }
@@ -94,10 +94,10 @@ public class CWBorder
 
   void splitCWTriangles( )
   {
-    // TDLog.v("split CW ints: " + mInts.size() + " pts2in1 " + pts2in1.size() + " pts1in2 " + pts1in2.size() );
+    // TDLog.v("CW-Hull split CW ints: " + mInts.size() + " pts2in1 " + pts2in1.size() + " pts1in2 " + pts1in2.size() );
     mCV1.splitTriangles( 1, mInts, pts1in2 );
     mCV2.splitTriangles( 2, mInts, pts2in1 );
-    // TDLog.v("split CW done");
+    // TDLog.v("CW-Hull split CW done");
   }
 
   // ---------------------------------------------------------------------------
@@ -213,7 +213,7 @@ public class CWBorder
     
     List<CWPoint> pts2in1 = mCV1.computeInsidePoints( mCV2, eps ); // points of cv2 inside cv1
     List<CWPoint> pts1in2 = mCV2.computeInsidePoints( mCV1, eps );
-    // TDLog.v("Pts1in2 " + pts1in2.size() + " Pts2in1 " + pts2in1.size() );
+    // TDLog.v("CW-Hull Pts1in2 " + pts1in2.size() + " Pts2in1 " + pts2in1.size() );
     
     if ( pts1in2.size() == 0 && pts2in1.size() == 0 ) return 0;
     double vol = 0;

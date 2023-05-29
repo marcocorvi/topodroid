@@ -70,7 +70,7 @@ public class ConvexHullComputer
         ArrayList< Cave3DShot > legs2   = mParser.getLegsAt( st, sf );
         ArrayList< Cave3DShot > splays1 = mParser.getSplayAt( sf, false );
         ArrayList< Cave3DShot > splays2 = mParser.getSplayAt( st, false );
-        // TDLog.v( "Hull splays at " + sf.name + " " + splays1.size() + " at " + st.name + " " + splays2.size() );
+        // TDLog.v( "CW-Hull splays at " + sf.name + " " + splays1.size() + " at " + st.name + " " + splays2.size() );
         // if ( splays1.size() > 0 && splays2.size() > 0 ) 
         {
           try {
@@ -79,19 +79,19 @@ public class ConvexHullComputer
             // TODO make convex-concave hull
             mWalls.add( cw );
           } catch ( RuntimeException e ) { 
-            TDLog.Error( "Hull create runtime exception [2] " + e.getMessage() );
+            TDLog.Error( "CW-Hull compute walls: " + e.getMessage() );
             return false;
           }
         }
       }
     }
-    // TDLog.v( "Hull done. split triangles " + GlModel.mSplitTriangles );
+    // TDLog.v( "CW-Hull done. split triangles " + GlModel.mSplitTriangles );
 
     // for ( CWConvexHull cv : mWalls ) cv.randomizePoints( 0.1f );
     if ( GlModel.mSplitTriangles ) {
       // synchronized( paths_borders ) 
       {
-        // TDLog.v( "Hull borders. nr walls " + mWalls.size() );
+        // TDLog.v( "CW-Hull borders. nr walls " + mWalls.size() );
         for ( int k1 = 0; k1 < mWalls.size(); ++ k1 ) {
           CWConvexHull cv1 = mWalls.get( k1 );
           for ( int k2 = k1+1; k2 < mWalls.size(); ++ k2 ) {
@@ -105,7 +105,7 @@ public class ConvexHullComputer
             }
           }
         }
-        // TDLog.v( "Hull borders done, nr borders " + mBorders.size() );
+        // TDLog.v( "CW-Hull borders done, nr borders " + mBorders.size() );
       }
     }
     return true;

@@ -238,7 +238,7 @@ public class CWFacet
 		}
 	}
 	// check
-	// TDLog.v( "Facet t " + mCnt + " intersection with " + t.mCnt + " " 
+	// TDLog.v( "CW-Hull Facet t " + mCnt + " intersection with " + t.mCnt + " " 
 	//    + un.dotProduct(ret.difference(v1)) + " " + t.un.dotProduct(ret.difference(t.v1)) );
 	return ret;
   }

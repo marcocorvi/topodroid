@@ -46,9 +46,10 @@ public class DistoXBLEInfoReadTask extends AsyncTask<Void, Integer, Boolean>
   // {
   // }
 
-  // @Override
-  // protected void onPostExecute( Boolean result )
-  // {
-  // }
+  @Override
+  protected void onPostExecute( Boolean result )
+  {
+    mDialog.get().updateHwFw();
+  }
 
 }
