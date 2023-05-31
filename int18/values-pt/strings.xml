@@ -1590,14 +1590,14 @@ no campo abaixo e aperte o botão.
   <string name="pref_backup_interval_summary">Intervalo mínimo entre dois backups [s]</string>
   <!-- UNUSED string name="pref_backups_clear_title">Apagar backups</string -->
   <!-- UNUSED string name="pref_backups_clear_summary">Habilitar menu para apagar backups</string -->
-  <!-- UNUSED string name="pref_xtherion_areas_title">Áreas xtherion</string -->
-  <!-- UNUSED string name="pref_xtherion_areas_summary">Gravar áreas como o xtherion</string -->
+  <!-- UNUSED string name="pref_xtherion_areas_title">Áreas xTherion</string -->
+  <!-- UNUSED string name="pref_xtherion_areas_summary">Gravar áreas como o xTherion</string -->
   <string name="pref_therion_splays_title">Med aux Therion</string>
   <string name="pref_therion_splays_summary">Adicionar linhas "u:splay" aos arquivos th2</string>
   <string name="pref_th2_scale_title">Escala Therion</string>
   <string name="pref_th2_scale_summary">Escala da exportação de arquivos th2/xvi</string>
   <string name="pref_th2_xvi_title">Imagem XVI</string>
-  <string name="pref_th2_xvi_summary">Incluir um comando xtherion no arquivo th2 para ler a imagem XVI do croqui</string>
+  <string name="pref_th2_xvi_summary">Incluir um comando xTherion no arquivo th2 para ler a imagem XVI do croqui</string>
   <string name="pref_autoStations_title">Bases</string>
   <string name="pref_autoStations_summary">Incluir automaticamente bases aos arquivos Therion</string>
   <string name="pref_auto_xsections_title">Corte ao exportar</string>
