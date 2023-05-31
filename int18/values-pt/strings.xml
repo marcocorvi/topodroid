@@ -1498,7 +1498,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="pref_dxf_scale_summary">Fator de escala croqui DXF</string -->
   <string name="pref_dxf_blocks_title">Final aux</string>
   <string name="pref_dxf_blocks_summary">Marcar final de medida auxiliar DXF com cruzes</string>
-  <string name="pref_shp_georef_title">Exportar croqui georeferenciado</string>
+  <string name="pref_shp_georef_title">Croqui georeferenciado</string>
   <string name="pref_shp_georef_summary">Croqui exportado em WGS84 long-lat</string>
   <string name="pref_thumbnail_title">Tam miniatura</string>
   <string name="pref_thumbnail_summary">Tamanho das fotos miniatura</string>
