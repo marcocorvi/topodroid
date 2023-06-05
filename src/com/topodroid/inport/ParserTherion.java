@@ -147,6 +147,7 @@ class ParserTherion extends ImportParser
    */
   private void readFile( InputStreamReader isr, String filename, String basepath, ParserTherionState state ) throws ParserException
   {
+    // TDLog.v("Parser TH file " + filename + " base " + basepath );
     String path = basepath;   // survey pathname(s)
     int ks = 0;               // survey index
     int ks_max = 20;
@@ -170,13 +171,11 @@ class ParserTherion extends ImportParser
       int i = filename.lastIndexOf('/');
       if ( i > 0 ) dirname = filename.substring(0, i+1);
       // System.out.println("readFile dir " + dirname + " filename " + filename );
-      // TDLog.Log( TDLog.LOG_THERION, "reading file " + filename + " dir " + dirname );
-      // TDLog.Log( TDLog.LOG_IO, "import read Therion file <" + filename + ">" );
+      // TDLog.v( "import read Therion file <" + filename + ">" );
 
       BufferedReader br = TDio.getBufferedReader( isr, filename );
       String line = nextLine( br );
       while ( line != null ) {
-        // TDLog.Log( TDLog.LOG_THERION, "TH " + line );
         // TDLog.v( "Parser TH " + state.in_survey + " " + state.in_centerline + " " + state.in_data + " : " + line );
         line = line.trim();
         int pos = line.indexOf( '#' );
@@ -192,7 +191,7 @@ class ParserTherion extends ImportParser
           //     ++ vals_len;
           //   }
           // }
-          // TDLog.v( "Parser TH vals " + vals.length + " " + vals_len );
+          // TDLog.v( "Parser TH vals " + vals.length + " line " + line );
           int vals_len = vals.length;
           if ( vals_len > 0 ) {
             String cmd = vals[0];
@@ -706,8 +705,8 @@ class ParserTherion extends ImportParser
                                             len, ber, cln, 0.0f,
                                             state.mExtend, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
                     } else {
-                      // from = from + "@" + path;
-                      // to   = to + "@" + path;
+                      from = from + "@" + path;
+                      to   = to + "@" + path;
                       // TDLog.v( "Parser TH add shot " + from + " -- " + to);
                       shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, state.mPrefix + to + state.mSuffix,
                                            len, ber, cln, 0.0f,

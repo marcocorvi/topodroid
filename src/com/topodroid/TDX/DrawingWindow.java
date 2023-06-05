@@ -4573,7 +4573,17 @@ public class DrawingWindow extends ItemDrawer
                     lp1.setOptions( BrushManager.getLineDefaultOptions( mCurrentLine ) );
                     if ( BrushManager.isLineStraight( mCurrentLine ) ) {
                       lp1.addStartPoint( mCurrentLinePath.mFirst.x, mCurrentLinePath.mFirst.y );
-                      lp1.addPoint( mCurrentLinePath.mLast.x, mCurrentLinePath.mLast.y );
+                      int nx = BrushManager.getLineStyleX( mCurrentLine );
+                      TDLog.v("line is straight " + nx);
+                      if ( nx > 0 ) { 
+                        LinePoint lp = mCurrentLinePath.mFirst;
+                        while ( lp != mCurrentLinePath.mLast ) {
+                          for ( int i=0; i<nx && lp != mCurrentLinePath.mLast; ++i ) lp = lp.mNext;
+                          lp1.addPoint( lp.x, lp.y );
+                        } 
+                      } else {
+                        lp1.addPoint( mCurrentLinePath.mLast.x, mCurrentLinePath.mLast.y );
+                      }
                       // add == true;
                     } else {
                       if ( TDSetting.isLineStyleBezier() ) {
@@ -4586,9 +4596,11 @@ public class DrawingWindow extends ItemDrawer
                       }
                     }
                     if ( add && lp1.size() > 1 ) {
+                      TDLog.v("line nr points " + lp1.size() );
                       lp1.computeUnitNormal();
                       if ( mSymbol == SymbolType.LINE && BrushManager.isLineClosed( mCurrentLine ) ) {
                         // mCurrentLine == lp1.mLineType 
+                        TDLog.v("line close");
                         lp1.setClosed( true );
                         lp1.closePath();
                       }
