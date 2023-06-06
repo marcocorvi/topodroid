@@ -78,7 +78,7 @@ class SurveyStatDialog extends MyDialog
       histG = (ImageView) findViewById( R.id.histogramG );
       histM = (ImageView) findViewById( R.id.histogramM );
       histD = (ImageView) findViewById( R.id.histogramD );
-      float g = mStat.averageG*TDSetting.mAccelerationThr/2000; // 2000 = 20 * 100
+      float g = mStat.averageG*TDSetting.mAccelerationThr/2000; // 2000 = 20 * 100 ie percent/20
       float m = mStat.averageM*TDSetting.mMagneticThr/2000;
       float d = TDSetting.mDipThr/20;
       // TDLog.v( "G " + g + " M " + m + " D " + d );
@@ -119,6 +119,16 @@ class SurveyStatDialog extends MyDialog
       dismiss();
     }
 
+  /** make the bitmap of the histogram of values
+   * @param vals   values
+   * @param nr     number of values
+   * @param ave    average value
+   * @param std    std dev
+   * @param width  bitmap width
+   * @param height bitmap height
+   * @param bin    half histogram bins
+   * @param col    color
+   */
   static private Bitmap makeHistogramBitmap( float[] vals, int nr, float ave, float std, int width, int height, int bin, int col )
   {
     Bitmap bitmap = Bitmap.createBitmap( width+20, height+20, Bitmap.Config.ARGB_8888 );
@@ -132,12 +142,28 @@ class SurveyStatDialog extends MyDialog
     int b_bin = 2*bin + 1; // 20230118 local var
     int[] hist = new int[b_bin];
     for ( int k=0; k<b_bin; ++k ) hist[k] = 0;
-    if ( vals != null ) {
+    if ( vals != null && nr > 0 ) {
+      float aave = 0;
+      for ( int k=0; k < nr; ++ k ) aave += vals[k];
+      aave /= nr;
+      float bave = 0;
+      int bnr = 0;
       for ( int k=0; k < nr; ++ k ) {
-        int i = bin + (int)( (vals[k]-ave)/std );
+        int i = bin + (int)( (vals[k]-aave)/std );
+        if ( i >= 0 && i < b_bin ) {
+          bnr ++;
+          bave += vals[k];
+        }
+      }
+      if ( bnr > 0 ) bave /= bnr;
+
+      for ( int k=0; k < nr; ++ k ) {
+        int i = bin + (int)( (vals[k]-bave)/std );
         if ( i >= b_bin ) i = b_bin-1;
         if ( i < 0 ) i = 0;
-        ++ hist[i];
+        if ( i >= 0 && i < b_bin ) {
+          ++ hist[i];
+        }
       }
     }
     int max = 1; // histogram max
