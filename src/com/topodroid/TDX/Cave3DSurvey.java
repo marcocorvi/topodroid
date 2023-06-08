@@ -120,7 +120,7 @@ public class Cave3DSurvey
 
   /** @return the station name
    */
-  public String  getName() { return name; }
+  public String getName() { return name; }
 
   // void addShot( String from, String to, double len, double ber, double cln ) { addShot( new Cave3DShot( from, to, ber, len, cln, 0, 0 ) ); }
   
@@ -133,6 +133,8 @@ public class Cave3DSurvey
   { 
     mShots.add( sh );
     sh.setSurvey( this );
+    addStation( sh.from_station ); // make sure shot stations are linked by the survey (included in the survey stations)
+    addStation( sh.to_station );
     // mNrShots ++;
     mLenShots += sh.len;
   }
@@ -148,13 +150,16 @@ public class Cave3DSurvey
     mLenSplays += sh.len;
   }
 
-  /** add a station to the station
+  /** add a station to the survey stations
    * @param st   station to add
    */
   public Cave3DStation addStation( Cave3DStation st )
   { 
-    mStations.add( st );
-    st.setSurvey( this );
+    if ( ! mStations.contains( st ) ) {
+      mStations.add( st );
+      st.setSurvey( this );
+      // TDLog.v("3D survey add station " + st.getShortName() + " size " + mStations.size() );
+    }
     return st;
   }
 
@@ -182,57 +187,60 @@ public class Cave3DSurvey
   public List< Cave3DStation > getStations() { return mStations; }
 
   // --------------------------- DATA REDUCTION
-  /** compute the data reduction
-   */
-  void reduce()
-  {
-    mLenShots  = 0.0;
-    mLenSplays = 0.0;
-    addStation( new Cave3DStation( mShots.get(0).from, 0f, 0f, 0f ) );
-    int used_shots = 0; // check connectedness
-    int size = 0;
-    while ( size < mStations.size() ) {
-      size = mStations.size();
-      for ( Cave3DShot sh : mShots ) {
-        if ( sh.hasSurvey() ) continue;
-        Cave3DStation fr = getStation( sh.from );
-        if ( fr != null ) {
-          sh.from_station = fr;
-          markShotUsed( sh );
-          ++used_shots;
-          Cave3DStation to = getStation( sh.to, size );
-          if ( to == null ) to = addStation( sh.getStationFromStation( fr ) );
-          sh.to_station = to;
-        } else {
-          Cave3DStation to = getStation( sh.to, size );
-          if ( to != null ) {
-            sh.to_station = to;
-            markShotUsed( sh );
-            ++used_shots;
-            sh.from_station = addStation( sh.getStationFromStation( to ) );
-          }
-        }
-      }
-    }
-    // TDLog.v("shots " + mShots.size() + " used " + used_shots );
-    int used_splays = 0; // check
-    for ( Cave3DShot sp : mSplays ) {
-      Cave3DStation st = getStation( sp.from );
-      if ( st != null ) {
-        sp.from_station = st;
-        markSplayUsed( sp );
-        ++ used_splays;
-      } else {
-        st = getStation( sp.to );
-        if ( st != null ) {
-          sp.from_station = st;
-          markSplayUsed( sp );
-          ++ used_splays;
-        }
-      }
-    }
-    // TDLog.v("splays " + mSplays.size() + " used " + used_splays );
-  }
+  // this data reduction is never used
+  //
+  // /** compute the data reduction
+  //  */
+  // void reduce()
+  // {
+  //   TDLog.v("3D reduce survey " + name ); 
+  //   mLenShots  = 0.0;
+  //   mLenSplays = 0.0;
+  //   addStation( new Cave3DStation( mShots.get(0).from, 0f, 0f, 0f ) );
+  //   int used_shots = 0; // check connectedness
+  //   int size = 0;
+  //   while ( size < mStations.size() ) {
+  //     size = mStations.size();
+  //     for ( Cave3DShot sh : mShots ) {
+  //       if ( sh.hasSurvey() ) continue;
+  //       Cave3DStation fr = getStation( sh.from );
+  //       if ( fr != null ) {
+  //         sh.from_station = fr;
+  //         markShotUsed( sh );
+  //         ++used_shots;
+  //         Cave3DStation to = getStation( sh.to, size );
+  //         if ( to == null ) to = addStation( sh.getStationFromStation( fr ) );
+  //         sh.to_station = to;
+  //       } else {
+  //         Cave3DStation to = getStation( sh.to, size );
+  //         if ( to != null ) {
+  //           sh.to_station = to;
+  //           markShotUsed( sh );
+  //           ++used_shots;
+  //           sh.from_station = addStation( sh.getStationFromStation( to ) );
+  //         }
+  //       }
+  //     }
+  //   }
+  //   // TDLog.v("shots " + mShots.size() + " used " + used_shots );
+  //   int used_splays = 0; // check
+  //   for ( Cave3DShot sp : mSplays ) {
+  //     Cave3DStation st = getStation( sp.from );
+  //     if ( st != null ) {
+  //       sp.from_station = st;
+  //       markSplayUsed( sp );
+  //       ++ used_splays;
+  //     } else {
+  //       st = getStation( sp.to );
+  //       if ( st != null ) {
+  //         sp.from_station = st;
+  //         markSplayUsed( sp );
+  //         ++ used_splays;
+  //       }
+  //     }
+  //   }
+  //   // TDLog.v("splays " + mSplays.size() + " used " + used_splays );
+  // }
 
   /** @return a station starting from index id
    * @param name   station name
@@ -298,7 +306,7 @@ public class Cave3DSurvey
    */
   private void init( String nm, int id, int pid, int col )
   {
-    // TDLog.v("Cave3DSurvey init color " + (col & 0xffffff) );
+    // TDLog.v("Cave3DSurvey init  " + nm + " id " + id + "/" + pid + " color " + (col & 0xffffff) );
     mId  = id;
     mPid = pid;
     name = nm;

@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 // import com.topodroid.TDX.DPoint2D;
 
 import java.io.DataOutputStream;
@@ -106,6 +106,7 @@ public class Cave3DStation extends Vector3D
   {
     super( e0, n0, z0 );
     int sid = ( survey == null )? -1 : survey.mId;
+    // TDLog.v("3D station " + nm + " survey " + (( survey == null )? "none" : survey.getName() ) );
     init ( nm, -1, sid, survey, FLAG_NONE, null );
   }
 

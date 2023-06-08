@@ -181,7 +181,7 @@ public class ParserTh extends TglParser
     StringWriter sw = new StringWriter();
     PrintWriter  pw = new PrintWriter( sw );
     pw.printf("Read file " + filename + "\n");
-    TDLog.v("TH parser Read file " + filename );
+    // TDLog.v("TH parser Read file " + filename );
     int res = readFile( isr, filename, "", false, 0.0f, 1.0, 1.0, 1.0, pw );
     // Toast.makeText( mApp, sw.toString(), Toast.LENGTH_LONG ).show();
 
@@ -345,7 +345,7 @@ public class ParserTh extends TglParser
       }
       declination -= conv; // correct declination with -convergence
       if ( nocs != null ) {
-        TDLog.v("Fix points without CS <" + cs1.name + ">: " + nocs.toString() );
+        TDLog.Error("Fix points without CS <" + cs1.name + ">: " + nocs.toString() );
         TDToast.makeWarn( String.format( TDInstance.getResourceString( R.string.error_fixes_nocs ), cs1.name, nocs.toString() ) );
       }
     }
@@ -747,7 +747,7 @@ public class ParserTh extends TglParser
                   if ( (idx = TDString.nextIndex( vals, idx )) < vals.length ) color = 0xff000000 | Integer.parseInt( vals[idx] );
                   // TDLog.v("TH parser color " + color + " " + idx + ": " + vals[idx] );
                 }
-                TDLog.v( "TH load survey " + filename + " color " + color );
+                // TDLog.v( "TH load survey " + filename + " color " + color );
                 if ( mData == null ) {
                   String base = null;
                   if ( dirname.toLowerCase( Locale.getDefault() ).endsWith( "tdconfig/" ) ) {
@@ -904,7 +904,7 @@ public class ParserTh extends TglParser
         ok_fixes.add( fix );
       } else {
         bad_fixes ++;
-        TDLog.v("Bad fix " + fix.getFullName() + " CS " + fix.getCSName() );
+        TDLog.Error("Bad fix " + fix.getFullName() + " CS " + fix.getCSName() );
       }
     }
     if ( bad_fixes > 0 ) {

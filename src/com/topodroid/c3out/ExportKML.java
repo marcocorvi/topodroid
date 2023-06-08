@@ -212,6 +212,7 @@ public class ExportKML
         pw.format(Locale.US, "  <name>%s</name>\n", survey_name );
         if ( do_station ) {
           List< Cave3DStation > stations = survey.getStations();
+          TDLog.v("3D-KML stations " + stations.size() );
           pw.format(Locale.US, "<Folder>\n");
           pw.format(Locale.US, "  <name>stations</name>\n" );
           // pw.format(Locale.US, "  <MultiGeometry>\n");

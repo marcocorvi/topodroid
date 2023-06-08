@@ -160,8 +160,8 @@ public class Parser3d extends TglParser
       if ( station == null ) {
         // TDLog.v("3d station <" + mLabel.toString() + "> " + x + " " + y + " " + z + " flag " + flag );
         station = new Cave3DStation( fullname, x, y, z, survey );
-        stations.add( station );
         survey.addStation( station );
+        stations.add( station );
       } else {
         station.setName( fullname );
       }
