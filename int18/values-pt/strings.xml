@@ -1475,7 +1475,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_ethr_title">Lim vert aux</string>
   <string name="pref_ethr_summary">Ângulo máximo a partir dos 90° para que uma nova visada seja considerada como vertical no perfil retificado [deg]</string>
   <string name="pref_vthr_title">Lim inclin OLNS</string>
-  <string name="pref_vthr_summary">(Therion "vthreshold") inclinação acima deste limite medidas auxiliares são consideradas Oeste-Leste-Norte-Sul (OLNS)</string>
+  <string name="pref_vthr_summary">Inclinação da visada abaixo deste limite medidas auxiliares são consideradas EDTC. Acima são consideradas OLNS (Oeste-Leste-Norte-Sul).</string>
   <string name="pref_plan_vthr_title">Lim aux planta baixa</string>
   <string name="pref_plan_vthr_summary">Esconder medidas auxiliares com inclinação acima deste valor na planta baixa</string>
   <string name="pref_init_station_title">Nome base inicial</string>
