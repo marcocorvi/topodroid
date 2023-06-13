@@ -250,6 +250,8 @@ public class FixedInfo extends MagLatLong
    */ 
   static String double2ddmmss( double x )
   {
+    boolean negative = x < 0;
+    x = Math.abs(x);
     int dp = (int)x;
     x = 60*(x - dp);
     int mp = (int)x;
@@ -257,7 +259,10 @@ public class FixedInfo extends MagLatLong
     int sp = (int)x;
     int ds = (int)( 100 * (x-sp) + 0.4999 );
     if ( ds == 100 ) { sp += 1; ds = 0; }
-    return String.format(Locale.US, "%d°%02d'%02d.%02d", dp, mp, sp, ds );
+    if (negative) {
+      dp = -dp;
+    }
+    return String.format(Locale.US, "%d°%02d'%02d.%02d\"", dp, mp, sp, ds );
   }
 
   /** @return degrees with six decimal places (roughly 0.1 m)
