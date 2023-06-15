@@ -560,7 +560,7 @@ no campo abaixo e aperte o botão.
   <string name="shot_note">comentário</string>
   <string name="shot_reverse">inverter</string>
   <string name="shot_to">Para</string>
-  <string name="station">Base referência</string>
+  <string name="station">Base</string>
   <string name="station_ask">Inserir base no croqui?</string>
   <string name="station_del">Remover base do croqui?</string>
   <string name="station_set">Continuar linha de trena desta base?</string>
@@ -700,7 +700,7 @@ no campo abaixo e aperte o botão.
   <string name="button_back">Voltar     </string>
   <string name="button_cancel">Cancelar   </string>
   <!-- UNUSED string name="button_change">Alterar    </string -->
-  <string name="button_clipboard">Área transferência</string>
+  <string name="button_clipboard">Colar</string>
   <string name="button_close">Fechar     </string>
   <!-- UNUSED string name="button_create"    >Criar      </string -->
   <string name="button_color">Cor        </string>
@@ -773,7 +773,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="button_stop"      >Parar</string -->
   <string name="button_upload">Enviar     </string>
   <string name="button_download">Baixar</string>
-  <string name="button_view">Ver no mapa</string>
+  <string name="button_view">Mapa</string>
   <!-- UNUSED string name="button_zoomfit"   >Zoom fit  </string -->
   <!-- UNUSED string name="button_landscape" >Landscape </string -->
   <!-- UNUSED string name="button_portrait"  >Portrait  </string -->
@@ -1101,7 +1101,7 @@ no campo abaixo e aperte o botão.
   <string name="title_edit_user_station">Alterar base do usuário </string>
   <string name="title_edit_station">Alterar base </string>
   <string name="title_erase">Apagar</string>
-  <string name="title_fixed">Localizações</string>
+  <string name="title_fixed">Pontos georeferenciados</string>
   <string name="title_fixed_mt">Geopontos [Mobile Topographer]</string>
   <string name="title_fixed_gpx_rec">Geopontos [GPX Recorder]</string>
   <string name="title_fixed_gps_pos">Geopontos [GPS Position]</string>
@@ -1118,7 +1118,7 @@ no campo abaixo e aperte o botão.
   <string name="title_note">Comentários da topo</string>
   <string name="title_packet_dialog">Log pacotes</string>
   <string name="title_photo">Foto/Medições</string>
-  <string name="title_photo_comment">Comentário da foto</string>
+  <string name="title_photo_comment">Dados da foto</string>
   <string name="title_photo_list">Fotos</string>
   <string name="title_photo_view">Foto</string>
   <string name="title_plot_save">Exportar croqui</string>
