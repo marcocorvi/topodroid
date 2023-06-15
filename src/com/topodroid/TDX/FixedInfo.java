@@ -301,12 +301,20 @@ public class FixedInfo extends MagLatLong
     str = str.replace( "'", ":" );     
     str = str.replace( "/", "." );
     str = str.replace( ",", "." );
+    str = str.replace( "\"", "" );  // remove final seconds identifier
     String[] token = str.split( ":" ); // tokenize str on ':'
     try {
       if ( token.length == 3 ) {
-        return Integer.parseInt( token[0] )
-             + Integer.parseInt( token[1] ) / 60.0
-             + Double.parseDouble( token[2] ) / 3600.0;
+        int degrees = Integer.parseInt( token[0] );
+        boolean isNegative = degrees < 0;
+        degrees = Math.abs(degrees);
+        double dd = degrees
+                + Integer.parseInt( token[1] ) / 60.0
+                + Double.parseDouble( token[2] ) / 3600.0;
+        if (isNegative) {
+          dd = -dd;
+        }
+        return dd;
       } else if ( token.length == 1 ) {
         return Double.parseDouble( str );
       }
