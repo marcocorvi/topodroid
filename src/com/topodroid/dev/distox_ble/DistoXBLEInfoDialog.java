@@ -120,7 +120,7 @@ public class DistoXBLEInfoDialog extends MyDialog
       tv_firmware.setText( String.format( "Firmware: %s", mFirmware ) );
     }
     if ( mHardware != null ) {
-      tv_hardware.setText( String.format( "Hardware: %d", mHardware) );
+      tv_hardware.setText( String.format( "Hardware: %s", mHardware) );
     }
   }
 
