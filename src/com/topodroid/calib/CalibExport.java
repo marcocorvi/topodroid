@@ -35,6 +35,22 @@ import java.util.List;
 
 public class CalibExport
 {
+  /** export the calibration data and coefficients
+   * @param cid    calibration id
+   * @param data   database helper
+   * @param ci     calibration info
+   * @param calib_name   calibration name
+   * @return ???
+   *
+   * the calibration coeff are exported on 4+4 lines:
+   * the first four lines are: BG, AG.x, AG.y, AG.z
+   * The next four lines are for M.
+   *
+   * Recall that the transformation is ( see TDMatrix::timesV )
+   *    gs[x] = BG[x] + AG.x * gr
+   *    gs[y] = BG[y] + AG.y * gr
+   *    gs[z] = BG[z] + AG.z * gr
+   */
   public static String exportCalibAsCsv( long cid, DeviceHelper data, CalibInfo ci, String calib_name )
   {
     try {

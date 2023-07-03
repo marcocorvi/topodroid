@@ -2111,13 +2111,13 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="survey_legs_length"> Legs length: </string>
     <string name="survey_splays" copyable="all"> Splays: </string>
     <string name="survey_splays_length"> Splays length: </string>
-    <string name="cave_east" copyable="all"> E: %1$.1f</string>
-    <string name="cave_north" copyable="all"> N: %1$.1f</string>
-    <string name="cave_vert" copyable="all"> Z: %1$.1f</string>
-    <string name="cave_distance"> 3D distance: %1$.1f</string>
-    <string name="horz_distance"> 2D horizontal distance: %1$.1f</string>
+    <string name="cave_east" copyable="all"> E: %1$.2f</string>
+    <string name="cave_north" copyable="all"> N: %1$.2f</string>
+    <string name="cave_vert" copyable="all"> Z: %1$.2f</string>
+    <string name="cave_distance"> 3D distance: %1$.2f</string>
+    <string name="horz_distance"> 2D horizontal distance: %1$.2f</string>
     <string name="cave_length"> Cave length: %1$.1f D+ %2$.1f D- %3$.1f</string>
-    <string name="cave_angle"> Azimuth: %1$.0f  Clino: %2$.0f</string>
+    <string name="cave_angle"> Azimuth: %1$.1f  Clino: %2$.1f</string>
 
   <string name="east" copyable="all">E</string>
   <string name="north" copyable="all">N</string>
