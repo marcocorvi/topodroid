@@ -1166,6 +1166,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="import_lrud">Importer LRUD</string>
     <string name="import_leg_first">Import du cheminement avant les visées d\'habillage LRUD</string>
     <string name="import_diving_datamode">Mode de données plongée</string>
+    <!-- TODO string name="import_therion_path">With survey path</string -->
 
     <string name="title_azimut">Référence extension</string>
     <string name="title_audio">Commentaire Audio</string>

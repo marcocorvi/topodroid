@@ -1152,6 +1152,7 @@
     <string name="import_lrud">Importa LRUD</string>
     <string name="import_leg_first">Battuta prima degli LRUD</string>
     <string name="import_diving_datamode">Modo dati da immersione</string>
+    <!-- TODO string name="import_therion_path">With survey path</string -->
 
     <string name="title_azimut">Riferimento Extend</string>
     <string name="title_audio">Commento audio</string>
