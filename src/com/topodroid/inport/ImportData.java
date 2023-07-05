@@ -23,6 +23,7 @@ public class ImportData
   public boolean mLeg;   // leg first
   public boolean mTrox;
   public int     mDatamode; // Compass
+  public boolean mTherionPath; // Therion survey path
 
   private boolean mDiving;
 
@@ -40,6 +41,7 @@ public class ImportData
       mDatamode = SurveyInfo.DATAMODE_NORMAL;
       mDiving = false;
     }
+    mTherionPath = false;
   }
 
   /** set diving mode

@@ -66,6 +66,7 @@ public class ImportDialogShot extends MyDialog
   private CheckBox mCBdivingDat; // Compass
   private CheckBox mCBlrudDat;
   private CheckBox mCBlegDat;
+  private CheckBox mCBtherionPath; // Therion survey path
 
   private ImportData mImportData;
 
@@ -191,6 +192,9 @@ public class ImportDialogShot extends MyDialog
       case 3: // Survex
         break;
       case 4: // Therion
+        {
+          mImportData.mTherionPath = mCBtherionPath.isChecked();
+        }
         break;
       case 5: // VTopo
         {
@@ -225,6 +229,9 @@ public class ImportDialogShot extends MyDialog
     mCBlrudTro.setChecked( mImportData.mLrud );
     mCBlegTro .setChecked( mImportData.mLeg );
     mCBtroxTro.setChecked( mImportData.mTrox );
+
+    mCBtherionPath = (CheckBox) findViewById( R.id.therion_path );
+    mCBtherionPath.setChecked( mImportData.mTherionPath );
   }
 
 }

@@ -580,7 +580,7 @@ public class MainWindow extends Activity
     // InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
     if ( type.equals(".th") ) {
       setTitleImport();
-      new ImportTherionTask( this, pfd ).execute( name, name );
+      new ImportTherionTask( this, pfd, data ).execute( name, name );
     } else if ( type.equals(".dat") ) {
       setTitleImport();
       new ImportCompassTask( this, pfd, data ).execute( name, name );

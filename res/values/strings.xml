@@ -1170,6 +1170,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="import_lrud">Import LRUD</string>
     <string name="import_leg_first">Leg before LRUD splays</string>
     <string name="import_diving_datamode">Diving datamode</string>
+    <string name="import_therion_path">With survey path</string>
 
     <string name="title_azimut">Extend reference azimuth</string>
     <string name="title_audio">Audio comment</string>

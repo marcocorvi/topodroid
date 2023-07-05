@@ -98,8 +98,9 @@ class ParserTherion extends ImportParser
    * @param isr    input reader
    * @param name   filename or surveyname ?
    * @param apply_declination whether to apply the declination correction
+   * @param therionPath       whether to add survey-path to station names
    */
-  ParserTherion( InputStreamReader isr, String name, boolean apply_declination ) throws ParserException
+  ParserTherion( InputStreamReader isr, String name, boolean apply_declination, boolean therionPath ) throws ParserException
   {
     super( apply_declination );
     fixes    = new ArrayList<>();
@@ -109,7 +110,7 @@ class ParserTherion extends ImportParser
     // // mStates  = new Stack< ParserTherionState >();
     // mApplyDeclination = apply_declination;
     ParserTherionState state = new ParserTherionState(); // root of the linked list of states
-    readFile( isr, name, "", state );
+    readFile( isr, name, "", state, therionPath );
     checkValid();
   }
 
@@ -131,11 +132,18 @@ class ParserTherion extends ImportParser
   /** @return the name of the station from a fullname 
    * @param fullname   fullname
    */
-  private String extractStationName( String fullname )
+  private String extractStationName( String fullname, String path ) 
   {
     int idx = fullname.indexOf('@');
     if ( idx > 0 ) {
-       return fullname.substring( 0, idx ); // + "@" + path + "." + vals[1].substring(idx+1);
+       if ( path != null ) {
+         return fullname.substring( 0, idx ) + "@" + path + "." + fullname.substring(idx+1);
+       } else {
+         return fullname.substring( 0, idx );
+       }
+    }
+    if ( path != null ) {
+      return fullname + "@" + path;
     }
     return fullname;
   }
@@ -144,8 +152,9 @@ class ParserTherion extends ImportParser
    * @param filename name of the file to parse
    * @param basepath survey pathname base
    * @param state    state of the parser
+   * @param therionPath       whether to add survey-path to station names
    */
-  private void readFile( InputStreamReader isr, String filename, String basepath, ParserTherionState state ) throws ParserException
+  private void readFile( InputStreamReader isr, String filename, String basepath, ParserTherionState state, boolean therionPath ) throws ParserException
   {
     // TDLog.v("Parser TH file " + filename + " base " + basepath );
     String path = basepath;   // survey pathname(s)
@@ -165,6 +174,7 @@ class ParserTherion extends ImportParser
 
     Pattern pattern = Pattern.compile( "\\s+" );
     StringBuffer team = new StringBuffer();
+    String surveyPath = therionPath? path : null;
 
     try {
       String dirname = "./";
@@ -475,7 +485,7 @@ class ParserTherion extends ImportParser
                 // TDLog.v( "Therion parser: mark flag " + flag + " " + flag_str );
                 if ( flag != 0 ) {
                   for ( int k=1; k<vals_len-1; ++k ) {
-                    String name = extractStationName( vals[k] );
+                    String name = extractStationName( vals[k], surveyPath );
                     // TDLog.v( "mark station " + name );
                     boolean must_add = true;
                     for ( Station st : stations ) if ( st.name.equals( name ) ) {
@@ -490,7 +500,7 @@ class ParserTherion extends ImportParser
               } else if ( cmd.equals("station") ) { // ***** station name "comment"
                 // TDLog.v("Therion station");
                 if ( vals_len > 2 ) {
-                  String name = extractStationName( vals[1] );
+                  String name = extractStationName( vals[1], surveyPath );
                   String comment = vals[2];
                   if ( comment.startsWith( "\"" ) ) {
                     if ( comment.endsWith( "\"" ) ) {
@@ -525,7 +535,7 @@ class ParserTherion extends ImportParser
               } else if ( cmd.equals("fix") ) { // ***** fix station east north Z (ignored std-dev's)
                 // TDLog.v("Therion fix");
                 if ( vals_len > 4 ) {
-                  String name = extractStationName( vals[1] );
+                  String name = extractStationName( vals[1], surveyPath );
                   try {
 	            fixes.add( new ThFix( name,
                                         Float.parseFloat( vals[2] ),
@@ -541,16 +551,32 @@ class ParserTherion extends ImportParser
                   String from, to;
                   int idx = vals[1].indexOf('@');
                   if ( idx > 0 ) {
-                    from = vals[1].substring( 0, idx ); // + "@" + path + "." + vals[1].substring(idx+1);
+                    if ( therionPath ) {
+                      from = vals[1].substring( 0, idx ) + "@" + path + "." + vals[1].substring(idx+1);
+                    } else {
+                      from = vals[1].substring( 0, idx );
+                    }
                   } else {
-                    from = vals[1]; // + "@" + path;
+                    if ( therionPath ) {
+                      from = vals[1] + "@" + path;
+                    } else {
+                      from = vals[1];
+                    }
                   }
                   for ( int j=2; j<vals_len; ++j ) {
                     idx = vals[j].indexOf('@');
                     if ( idx > 0 ) {
-                      to = vals[j].substring( 0, idx ); // + "@" + path + "." + vals[j].substring(idx+1);
+                      if ( therionPath ) {
+                        to = vals[j].substring( 0, idx ) + "@" + path + "." + vals[j].substring(idx+1);
+                      } else {
+                        to = vals[j].substring( 0, idx );
+                      }
                     } else {
-                      to = vals[j]; // + "@" + path;
+                      if ( therionPath ) {
+                        to = vals[j] + "@" + path;
+                      } else {
+                        to = vals[j];
+                      }
                     }
                     shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, state.mPrefix + to + state.mSuffix,
                                          0.0f, 0.0f, 0.0f, 0.0f, 0, LegType.NORMAL, true, false, false, "" ) );
@@ -699,14 +725,18 @@ class ParserTherion extends ImportParser
 
                     // TODO add shot
                     if ( to.equals("-") || to.equals(".") ) { // splay shot
-                      // from = from + "@" + path;
+                      if ( therionPath ) {
+                        from = from + "@" + path;
+                      }
                       // FIXME splays
                       shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, TDString.EMPTY,
                                             len, ber, cln, 0.0f,
                                             state.mExtend, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
                     } else {
-                      from = from + "@" + path;
-                      to   = to + "@" + path;
+                      if ( therionPath ) {
+                        from = from + "@" + path;
+                        to   = to + "@" + path;
+                      }
                       // TDLog.v( "Parser TH add shot " + from + " -- " + to);
                       shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, state.mPrefix + to + state.mSuffix,
                                            len, ber, cln, 0.0f,

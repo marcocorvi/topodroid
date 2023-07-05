@@ -248,6 +248,7 @@ public class TDSetting
   public static boolean mVTopoSplays = true;    // whether to add splays to VisualTopo export
   public static boolean mVTopoLrudAtFrom = false; 
   public static boolean mVTopoTrox   = false; 
+  // public static boolean mTherionPath = false; // whether to add surveypath to stations on import // NOT YET A SETTING
 
   public static final float PDF_SCALE     = 141.73f; // =AI =1/72 in // was 145.56 approx.
   public static final float THERION_SCALE = 196.8503937f; // 200 * 39.3700787402 / 40;
