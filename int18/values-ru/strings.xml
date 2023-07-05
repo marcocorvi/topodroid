@@ -1153,7 +1153,7 @@
     <string name="import_lrud">Импорт ЛПВН</string>
     <string name="import_leg_first">Замер перед ЛПВН сплеями</string>
     <string name="import_diving_datamode">Режим подводной съёмки</string>
-    <!-- TODO string name="import_therion_path">With survey path</string -->
+    <string name="import_therion_path">Вместе с ниткой хода</string>
 
     <string name="title_azimut">Опорный азимут развёртки</string>
     <string name="title_audio">Аудио заметка</string>
