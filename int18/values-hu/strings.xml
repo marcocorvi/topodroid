@@ -1161,7 +1161,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="import_lrud">Import BJFL</string>
     <string name="import_leg_first">Poligon mérés a BJFL előtt</string>
     <string name="import_diving_datamode">Merülési adatmód</string>
-    <!-- TODO string name="import_therion_path">With survey path</string -->
+    <string name="import_therion_path">Felmérési útvonallal</string>
 
     <string name="title_azimut">Kiterítés referencia iránya</string>
     <string name="title_audio">Hangjegyzet</string>
