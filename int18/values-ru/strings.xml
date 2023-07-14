@@ -1153,7 +1153,7 @@
     <string name="import_lrud">Импорт ЛПВН</string>
     <string name="import_leg_first">Замер перед ЛПВН сплеями</string>
     <string name="import_diving_datamode">Режим подводной съёмки</string>
-    <!-- TODO string name="import_therion_path">With survey path</string -->
+    <string name="import_therion_path">Вместе с ниткой хода</string>
 
     <string name="title_azimut">Опорный азимут развёртки</string>
     <string name="title_audio">Аудио заметка</string>
@@ -2070,14 +2070,14 @@
     <string name="survey_splays"> Сплеи: </string>
     <string name="survey_splays_length"> Длина сплеев: </string>
 
-    <string name="cave_east"> E: %1$.1f</string>
-    <string name="cave_north"> N: %1$.1f</string>
-    <string name="cave_vert"> Z: %1$.1f</string>
+    <string name="cave_east"> E: %1$.2f</string>
+    <string name="cave_north"> N: %1$.2f</string>
+    <string name="cave_vert"> Z: %1$.2f</string>
 
     <string name="cave_distance"> 3D расстояние: %1$.2f</string>
-    <string name="horz_distance"> 2D гоизонтальное проложение: %1$.1f</string>
+    <string name="horz_distance"> 2D гоизонтальное проложение: %1$.2f</string>
     <string name="cave_length"> Длина пещеры: %1$.2f %2$.1f %3$.1f</string>
-    <string name="cave_angle"> Азимут: %1$.0f  Уклон: %2$.0f</string>
+    <string name="cave_angle"> Азимут: %1$.1f  Уклон: %2$.1f</string>
 
   <string name="east">В</string>
   <string name="north">С</string>

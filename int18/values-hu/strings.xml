@@ -1161,7 +1161,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="import_lrud">Import BJFL</string>
     <string name="import_leg_first">Poligon mérés a BJFL előtt</string>
     <string name="import_diving_datamode">Merülési adatmód</string>
-    <!-- TODO string name="import_therion_path">With survey path</string -->
+    <string name="import_therion_path">Felmérési útvonallal</string>
 
     <string name="title_azimut">Kiterítés referencia iránya</string>
     <string name="title_audio">Hangjegyzet</string>
@@ -2092,13 +2092,13 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="survey_legs_length"> Poligonok hossza: </string>
     <string name="survey_splays"> Sünök: </string>
     <string name="survey_splays_length"> Sünök hossza: </string>
-    <string name="cave_east"> K: %1$.1f</string>
-    <string name="cave_north"> É: %1$.1f</string>
-    <string name="cave_vert"> Z: %1$.1f</string>
-    <string name="cave_distance"> 3D távolság: %1$.1f</string>
-    <string name="horz_distance"> 2D vízszintes távolság: %1$.1f</string>
+    <string name="cave_east"> K: %1$.2f</string>
+    <string name="cave_north"> É: %1$.2f</string>
+    <string name="cave_vert"> Z: %1$.2f</string>
+    <string name="cave_distance"> 3D távolság: %1$.2f</string>
+    <string name="horz_distance"> 2D vízszintes távolság: %1$.2f</string>
     <string name="cave_length"> Barlang hossza: %1$.1f %2$.1f %3$.1f</string>
-    <string name="cave_angle"> Irány: %1$.0f  Lejtés: %2$.0f</string>
+    <string name="cave_angle"> Irány: %1$.1f  Lejtés: %2$.1f</string>
 
   <string name="east">K</string>
   <string name="north">É</string>
