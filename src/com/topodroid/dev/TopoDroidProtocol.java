@@ -148,6 +148,7 @@ public class TopoDroidProtocol
 
   /** packet dispatcher
    * @param buffer 8-byte packet
+   * @return packet type
    * @note can be overwritten
    */
   protected int handlePacket( byte[] buffer )

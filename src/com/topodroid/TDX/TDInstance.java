@@ -87,7 +87,11 @@ public class TDInstance
 
   /** @return true if the primary device is set and is of type SAP5
    */
-  public static boolean isDeviceSap()    { return deviceA != null && deviceA.isSap(); }
+  public static boolean isDeviceSap()    { return deviceA != null && deviceA.isSap(); } // FIXME_SAP6
+
+  public static boolean isDeviceSap5()   { return deviceA != null && deviceA.isSap5(); }
+
+  public static boolean isDeviceSap6()   { return deviceA != null && deviceA.isSap6(); }
 
   /** @return true if the primary device is set and is of type BRIC4
    */
@@ -158,12 +162,14 @@ public class TDInstance
 
   /** @return true if the primary device is LE
    * SIWEI_TIAN
+   * FIXME_SAP6 this is OK
    */
   static boolean isDeviceBLE()    { return deviceA != null && ( deviceA.isBric() || deviceA.isSap() || deviceA.isDistoXBLE()); }
 
   /** @return true if the device is LE
    * @param device   bluetooth device
    * SIWEI_TIAN
+   * FIXME_SAP6 this is OK
    */
   private static boolean isDeviceBLE( Device device )    { return device != null && ( device.isBric() || device.isSap() || device.isDistoXBLE()); }
 
@@ -181,7 +187,7 @@ public class TDInstance
    */
   static boolean hasDeviceRemoteControl() 
   {
-    return deviceA != null && ( deviceA.isX310() || deviceA.isBric() || deviceA.isDistoXBLE() ); // SIWEI
+    return deviceA != null && ( deviceA.isX310() || deviceA.isBric() || deviceA.isDistoXBLE() || deviceA.isSap6() ); // SIWEI - FIXME_SAP6
   }
 
   // FIXME VirtualDistoX

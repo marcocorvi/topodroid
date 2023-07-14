@@ -432,7 +432,7 @@ public class DeviceActivity extends Activity
             if ( model.startsWith( "DistoX", 0 ) ) {
               mApp_mDData.insertDevice( addr, model, name );
               dev = mApp_mDData.getDevice( addr );
-            } else if ( model.startsWith( "Shetland", 0 ) ) { // FIXME SHETLAND
+            } else if ( model.startsWith( "Shetland", 0 ) ) { // FIXME SHETLAND FIXME_SAP6
               // if ( TDLevel.overExpert ) {
                 mApp_mDData.insertDevice( addr, model, name );
                 dev = mApp_mDData.getDevice( addr );

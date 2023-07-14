@@ -26,6 +26,7 @@ import com.topodroid.dev.distox2.DeviceX310TakeShot;
 import com.topodroid.dev.bric.BricMode; // MODE
 import com.topodroid.dev.bric.BricConst;
 import com.topodroid.dev.bric.MemoryBricTask;
+import com.topodroid.dev.sap.SapConst;
 
 import java.lang.ref.WeakReference;
 
@@ -517,6 +518,59 @@ public class CutNPaste
       ww = textview4.getPaint().measureText( text );
       if ( ww > w ) w = ww;
 */
+    } else if ( TDInstance.deviceType() == Device.DISTO_SAP6 ) {
+      // ----- TURN LASER ON
+      //
+      text = res.getString(R.string.remote_on);
+      textview1 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          public void onClick(View v) {
+            app.sendSap6Command( SapConst.SAP_LASER_ON );
+            dismissPopupBT();
+          }
+        } );
+      float ww = textview1.getPaint().measureText( text );
+      if ( ww > w ) w = ww;
+
+      // ----- TURN LASER OFF
+      //
+      text = res.getString(R.string.remote_off);
+      textview1 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          public void onClick(View v) {
+            app.sendSap6Command( SapConst.SAP_LASER_OFF );
+            dismissPopupBT();
+          }
+        } );
+      ww = textview1.getPaint().measureText( text );
+      if ( ww > w ) w = ww;
+
+      // ----- SHOT MEASURE 
+      //
+      text = res.getString( R.string.popup_do_shot );
+      textview2 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          public void onClick(View v) {
+            app.sendSap6Command( SapConst.SAP_TAKE_SHOT );
+            dismissPopupBT();
+          }
+        } );
+      ww = textview2.getPaint().measureText( text );
+      if ( ww > w ) w = ww;
+
+      // ----- TURN OFF
+      //
+      text = res.getString(R.string.popup_do_off);
+      textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          public void onClick(View v) {
+            app.sendSap6Command( SapConst.SAP_DEVICE_OFF );
+            dismissPopupBT();
+          }
+        } );
+      ww = textview4.getPaint().measureText( text );
+      if ( ww > w ) w = ww;
+
     }
     int iw = (int)(w + 10);
     textview0.setWidth( iw );

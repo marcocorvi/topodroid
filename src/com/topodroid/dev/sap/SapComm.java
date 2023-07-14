@@ -37,6 +37,7 @@ import com.topodroid.dev.ble.BleOperation;
 import com.topodroid.dev.ble.BleOpConnect;
 import com.topodroid.dev.ble.BleOpDisconnect;
 import com.topodroid.dev.ble.BleOpChrtRead;
+import com.topodroid.dev.ble.BleOpChrtWrite;
 
 // import android.os.Handler;
 // import android.os.Looper;
@@ -63,6 +64,11 @@ public class SapComm extends TopoDroidComm
   // BluetoothAdapter   mAdapter;
   // private BluetoothGatt mGatt = null;
   // BluetoothGattCharacteristic mWriteChrt;
+
+  private UUID mServiceUUID;
+  private UUID mReadUUID;
+  private UUID mWriteUUID;
+  private UUID mNotifyUUID;
 
   private ConcurrentLinkedQueue< BleOperation > mOps;
   private Context         mContext;
@@ -94,8 +100,8 @@ public class SapComm extends TopoDroidComm
   public SapComm( TopoDroidApp app, String address, BluetoothDevice bt_device ) 
   {
     super( app );
-    mRemoteAddress = address;
-    mRemoteBtDevice  = bt_device;
+    mRemoteAddress  = address;
+    mRemoteBtDevice = bt_device;
     // TDLog.v( "SAP comm: cstr, addr " + address );
     mOps = new ConcurrentLinkedQueue< BleOperation >();
     clearPending();
@@ -124,7 +130,20 @@ public class SapComm extends TopoDroidComm
     if ( mRemoteBtDevice == null ) {
       // TDToast.makeBad( R.string.ble_no_remote );
       TDLog.e("SAP comm: error: null remote device");
-    } else {
+    } else { // FIXME_SAP6
+      if ( device.isSap5() ) {
+        mServiceUUID = SapConst.SAP5_SERVICE_UUID;
+        mReadUUID    = SapConst.SAP5_CHRT_READ_UUID;
+        mWriteUUID   = SapConst.SAP5_CHRT_WRITE_UUID;
+      } else if ( device.isSap6() ) {
+        mServiceUUID = SapConst.SAP6_SERVICE_UUID;
+        mReadUUID    = SapConst.SAP6_CHRT_READ_UUID;
+        mWriteUUID   = SapConst.SAP6_CHRT_WRITE_UUID;
+        mNotifyUUID  = SapConst.SAP6_DSCR_NOTIFICATION;
+      } else {
+        TDLog.e("SAP comm: error: not a SAP device");
+        return;
+      }
       // check that device.mAddress.equals( mRemoteBtDevice.getAddress() 
       TDLog.v( "SAP comm: connect remote addr " + mRemoteBtDevice.getAddress() );
       notifyStatus( ConnectionState.CONN_WAITING );
@@ -204,10 +223,10 @@ public class SapComm extends TopoDroidComm
   private boolean readSapPacket( )
   { 
     TDLog.v( "SAP comm: reading packet");
-    // BluetoothGattService srv = mGatt.getService( SapConst.SAP5_SERVICE_UUID );
-    // BluetoothGattCharacteristic chrt = srv.getCharacteristic( SapConst.SAP5_CHRT_READ_UUID );
+    // BluetoothGattService srv = mGatt.getService( mServiceUUID );
+    // BluetoothGattCharacteristic chrt = srv.getCharacteristic( mReadUUID );
     // return mGatt.readCharacteristic( chrt );
-    enqueueOp( new BleOpChrtRead( mContext, this, SapConst.SAP5_SERVICE_UUID, SapConst.SAP5_CHRT_READ_UUID ) );
+    enqueueOp( new BleOpChrtRead( mContext, this, mServiceUUID, mReadUUID ) );
     doNextOp();
     return true;
     // return mCallback.readCharacteristic( );
@@ -311,7 +330,7 @@ public class SapComm extends TopoDroidComm
     if ( bytes != null ) {
       TDLog.v( "SAP comm: write chrt - bytes " + bytes.length );
       // mCallback.writeCharacteristic( mWriteChrt );
-      mCallback.writeChrt( SapConst.SAP5_SERVICE_UUID, SapConst.SAP5_CHRT_WRITE_UUID, bytes );
+      mCallback.writeChrt( mServiceUUID, mWriteUUID, bytes );
     } else { // done with the buffer writing
       TDLog.v( "SAP comm: write chrt - bytes null");
     }
@@ -388,7 +407,7 @@ public class SapComm extends TopoDroidComm
     } else if ( uuid_str.equals( SapConst.SAP5_CHRT_WRITE_UUID_STR ) ) {
       byte[] bytes = mSapProto.handleWriteNotify( chrt );
       if ( bytes != null ) {
-        mCallback.writeChrt( SapConst.SAP5_SERVICE_UUID, SapConst.SAP5_CHRT_WRITE_UUID, bytes );
+        mCallback.writeChrt( mServiceUUID, mWriteUUID, bytes );
       }
     }
   }
@@ -476,10 +495,10 @@ public class SapComm extends TopoDroidComm
   public int servicesDiscovered( BluetoothGatt gatt )
   {
     TDLog.v( "SAP comm: service discovered" );
-    BluetoothGattService srv = gatt.getService( SapConst.SAP5_SERVICE_UUID );
+    BluetoothGattService srv = gatt.getService( mServiceUUID );
 
-    mReadChrt  = srv.getCharacteristic( SapConst.SAP5_CHRT_READ_UUID );
-    mWriteChrt = srv.getCharacteristic( SapConst.SAP5_CHRT_WRITE_UUID );
+    mReadChrt  = srv.getCharacteristic( mReadUUID );
+    mWriteChrt = srv.getCharacteristic( mWriteUUID );
 
     // boolean write_has_write = BleUtils.isChrtRWrite( mWriteChrt.getProperties() );
     // boolean write_has_write_no_response = BleUtils.isChrtRWriteNoResp( mWriteChrt.getProperties() );
@@ -642,6 +661,24 @@ public class SapComm extends TopoDroidComm
   {
     TDLog.Error( "SAP requestMtu not implemented" );
     return false;
+  }
+
+  // ----------------- SEND COMMAND -------------------------------
+
+  /** sand a 1-byte command - FIXME_SAP6 only
+   * @param cmd command byte
+   * @return ...
+   */
+  @Override
+  public boolean sendCommand( int cmd )
+  {
+    if ( ! isConnected() ) return false;
+    byte[] command = new byte[1];
+    command[0] = (byte)cmd;
+    // TDLog.v( "SAP6 comm send cmd " + cmd );
+    enqueueOp( new BleOpChrtWrite( mContext, this, mServiceUUID, mWriteUUID, command ) );
+    doNextOp();
+    return true;
   }
 
 }

@@ -193,7 +193,7 @@ public class ImportDialogShot extends MyDialog
         break;
       case 4: // Therion
         {
-          mImportData.mTherionPath = mCBtherionPath.isChecked();
+          if ( TDLevel.overExpert ) mImportData.mTherionPath = mCBtherionPath.isChecked();
         }
         break;
       case 5: // VTopo
@@ -232,6 +232,9 @@ public class ImportDialogShot extends MyDialog
 
     mCBtherionPath = (CheckBox) findViewById( R.id.therion_path );
     mCBtherionPath.setChecked( mImportData.mTherionPath );
+    if ( ! TDLevel.overExpert ) {
+      mCBtherionPath.setVisibility( View.GONE );
+    }
   }
 
 }
