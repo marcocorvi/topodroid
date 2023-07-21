@@ -434,6 +434,7 @@ public class DeviceActivity extends Activity
               dev = mApp_mDData.getDevice( addr );
             } else if ( model.startsWith( "Shetland", 0 ) ) { // FIXME SHETLAND FIXME_SAP6
               // if ( TDLevel.overExpert ) {
+                TDLog.v("SAP6 BT device name " + model + " --> name " + name );
                 mApp_mDData.insertDevice( addr, model, name );
                 dev = mApp_mDData.getDevice( addr );
               // }

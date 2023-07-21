@@ -136,6 +136,7 @@ public class SapComm extends TopoDroidComm
         mReadUUID    = SapConst.SAP5_CHRT_READ_UUID;
         mWriteUUID   = SapConst.SAP5_CHRT_WRITE_UUID;
       } else if ( device.isSap6() ) {
+        TDLog.v("SAP6 connect device");
         mServiceUUID = SapConst.SAP6_SERVICE_UUID;
         mReadUUID    = SapConst.SAP6_CHRT_READ_UUID;
         mWriteUUID   = SapConst.SAP6_CHRT_WRITE_UUID;
@@ -675,7 +676,7 @@ public class SapComm extends TopoDroidComm
     if ( ! isConnected() ) return false;
     byte[] command = new byte[1];
     command[0] = (byte)cmd;
-    // TDLog.v( "SAP6 comm send cmd " + cmd );
+    TDLog.v( "SAP6 comm send command " + cmd );
     enqueueOp( new BleOpChrtWrite( mContext, this, mServiceUUID, mWriteUUID, command ) );
     doNextOp();
     return true;

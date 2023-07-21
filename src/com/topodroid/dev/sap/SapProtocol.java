@@ -13,7 +13,7 @@
  */
 package com.topodroid.dev.sap;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.DataType;
@@ -31,6 +31,7 @@ import android.bluetooth.BluetoothGattCharacteristic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 
@@ -100,7 +101,11 @@ class SapProtocol extends TopoDroidProtocol
       }
       return handlePacket( buffer );
     } else if ( Device.isSap6( mDeviceType ) ) { // FIXME_SAP6
-      // TDLog.v( "SAP6 proto: read bytes " + bytes.length );
+      {
+        StringBuilder sb = new StringBuilder();
+        for ( int k=0; k<bytes.length; ++k ) sb.append( String.format(" %02x", bytes[k] ) );
+        TDLog.v( "SAP6 proto: read " + bytes.length + " bytes:" + sb.toString() );
+      }
       if ( bytes.length != 17 ) return DataType.PACKET_NONE;
       byte[] buffer = new byte[16];
       System.arraycopy( bytes, 1, buffer, 0, 16 );
@@ -117,6 +122,7 @@ class SapProtocol extends TopoDroidProtocol
       mClino    = float_buffer.get(1);
       mRoll     = float_buffer.get(2);
       mDistance = float_buffer.get(3); // meters
+      TDLog.v( "SAP6 proto data: " + String.format(Locale.US, "%2d %2d %2d", mDistance, mBearing, mClino ) );
       return DataType.PACKET_DATA;
     }
     return DataType.PACKET_NONE;

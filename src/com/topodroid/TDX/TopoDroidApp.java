@@ -593,7 +593,7 @@ public class TopoDroidApp extends Application
 
   /** set the model of the bluetooth device
    * @param device   bluetooth device (must agree with the primary device)
-   * @param model    device model
+   * @param model    device type
    *
    * @note nothing if the device is not the primary device
    */
@@ -611,7 +611,8 @@ public class TopoDroidApp extends Application
           mDData.updateDeviceModel( device.getAddress(), "Shetland-0000" );
           device.mType = model;
         } else if ( Device.isSap6( model ) ) { // FIXME_SAP6
-          mDData.updateDeviceModel( device.getAddress(), "Shetland-0000" );
+          TDLog.v("SAP6 set device model: addr " + device.getAddress() + " type " + model );
+          mDData.updateDeviceModel( device.getAddress(), "SAP6-0000" );
           device.mType = model;
         } else if ( Device.isBric( model ) ) {
           mDData.updateDeviceModel( device.getAddress(), "BRIC-0000" );
@@ -917,7 +918,7 @@ public class TopoDroidApp extends Application
       } else if ( TDInstance.isDeviceSap5() ) { // SAP5 nothing
         // TDLog.v( "bt button over advanced : SAP5");
       } else if ( TDInstance.isDeviceSap6() ) { // FIXME_SAP6
-        TDLog.v( "bt button over advanced : SAP6");
+        TDLog.v( "SAP6 do bt button");
         // if ( TDInstance.hasDeviceRemoteControl() ) { // test not necessary 
           CutNPaste.showPopupBT( ctx, lister, this, b, false, (nr_shots == 0) );
           return;
@@ -2576,7 +2577,7 @@ public class TopoDroidApp extends Application
   { 
     // boolean ret = false;
     if ( mComm != null && mComm instanceof SapComm ) {
-      // TDLog.v( "App: send sap6 command " + cmd );
+      TDLog.v( "SAP6 app send command " + cmd );
       mComm.sendCommand( cmd );
     // } else {
     //   TDLog.e("Comm is null or not SAP6");
