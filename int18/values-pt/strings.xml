@@ -1032,7 +1032,7 @@ no campo abaixo e aperte o botão.
   <string name="export_georeference">Georeferência</string>
   <string name="export_grid">Grade</string>
   <string name="export_layers">Camadas croquis</string>
-  <string name="export_linedir">Direção da linha</string>
+  <string name="export_linedir">Orientação da linha</string>
   <string name="export_lrud">EDTC</string>
   <string name="export_lrud_from">EDTC na base DE</string>
   <string name="export_maps">Mapas antes dos dados</string>
