@@ -1074,7 +1074,7 @@ no campo abaixo e aperte o botão.
   <string name="import_lrud">Importar EDTC</string>
   <string name="import_leg_first">Visada antes de EDTC</string>
   <string name="import_diving_datamode">Modo de dados \'mergulho\'</string>
-    <!-- TODO string name="import_therion_path">With survey path</string -->
+  <string name="import_therion_path">Com hierarquia de topos</string>
 
   <string name="title_azimut">Direção perfil retificado</string>
   <string name="title_audio">Áudiocomentário</string>
