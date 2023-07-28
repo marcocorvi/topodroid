@@ -9,10 +9,10 @@
   <string-array name="geoImportApp">
     <item name="none">nenhum</item>
     <item name="mobile_topographer">Mobile Topographer</item>
-    <item name="gpx_recorder">Gravador GPX</item>
-    <item name="gps_position">Posição GPS</item>
-    <item name="gps_test">Teste GPS</item>
-    <item name="gps_logger">Logger GPS</item>
+    <item name="gpx_recorder">GPX Recorder</item>
+    <item name="gps_position">GPS Position</item>
+    <item name="gps_test">GPSTest</item>
+    <item name="gps_logger">GPS Logger</item>
   </string-array>
   <string-array name="orientation">
     <item name="unspecified">indefinida</item>
