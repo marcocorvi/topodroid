@@ -550,7 +550,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="plot_null_name">Hiányzó vázlat név</string -->
     <!-- UNUSED string name="plot_null_start">Hiányzó alap pont</string -->
     <!-- UNUSED string name="plot_recover">Visszaolvassuk a vázlatot a mentésből?</string -->
-    <string name="plot_start">Felmérés kezdőpontja</string>
+    <string name="plot_start">Vázlat kezdőpontja</string>
     <!-- UNUSED string name="plot_view">Megtekintett pont</string -->
         <string name="read_fail_with_code">Olvasási hiba: hiba kód </string>
     <string name="read_failed">DistoX kiolvasása nem sikerült</string>
