@@ -9,7 +9,7 @@ Howto add a translation
 [4] copy res/values/strings.xml res/values/array.xml and res/values/plurals.xml in the translation directory.
     edit the three files and replace the english strings with the translations in your language save them with utf-8 encoding
 
-[4] you can use the PERL script utils/strings_prepare.pl, by R. Severo, to prepare the translation files for your languag.
+[4] you can use the PERL script utils/strings_prepare.pl, by R. Severo, to prepare the translation files for your language.
 
 
 NOTES: 
@@ -17,7 +17,7 @@ NOTES:
 it is the same for all translations and makes maintenance easier
 
 [B] UNUSED, TODO, FIXME, NO
-some strings are commented (ie, they are in the file but they are not used in the program):
+some strings are commented (i.e., they are in the file but they are not used in the program):
 they are marked UNUSED or NO
 strings commented and marked with UNUSED or NO must not be translated, or they can be translated but must
 remain commented
@@ -41,30 +41,30 @@ make sure they are commented.
 
 [D] COPIED strings
 it is possible that translated strings are the same as the default (english) strings.
-For exanmple the French for "photo" is again "photo".
+For example the French for "photo" is again "photo".
 Nevertheless the string must be translated.
 
 [E] PLURALS
-plurals strings may need different "numbers" in your language than in english
-use al those that apply.
+plurals strings may need different "numbers" in your language than in English
+use all those that apply.
 check lint.out for missing cases in your language
 
 [F] FORMAT STRINGS 
 Pay special attention to format strings, ie, strings with the percent marking the format arguments. A mistake in the format can crash the app.
-The string_prepare scriot checks the format strings and if their args do not agree with the default string it replaces with a TODO string
+The string_prepare script checks the format strings and if their args do not agree with the default string it replaces with a TODO string
 
 [G] SPECIAL CHARACTERS
-some characters must be escaped, in particular apostrophy must be written "\'" (without double quotes).
-other charaters must be written as unicode, in particular ellipsis (...)  
+some characters must be escaped, in particular the apostroph must be written as "\'" (without double quotes).
+other characters must be written as unicode, in particular ellipsis (...) must be written as "&#8230;" (without double quotes).
 
 [H] GUIDELINES
-as a guideline strings should be short and concise: there is no much space on the display and the user do not like to read long messages
+as a guideline strings should be short and concise: there is not much space on the display and the user does not like to read long messages
 
 i am aware that it can be difficult to find a good translation for a string in english without knowing the context where the string is used. if you have doubts you may check the translation in another language (that you know) or write me an email
 
 add your name and email to the welcome message in the translation file strings.xml
 
-push your translation files to github and, if it is a new translation, send me and email since i need to add a s-link to the translation so that it is included in the app
+push your translation files to github and, if it is a new translation, send me an email since i need to add a s-link to the translation so that it is included in the app
 
 [I] SYMBOLS FILES
 add a translation to the symbol files in symbols-git:

@@ -14,11 +14,11 @@
      <item name="view">je nach Ansicht</item>
   </string-array>
 
-  <!-- TODO string-array name="splayColors">
-     <item name="none">none</item>
-     <item name="all">all</item>
-     <item name="palette">palette</item>
-  </string-arrayi -->
+  <string-array name="splayColors">
+     <item name="none">keine</item>
+     <item name="all">alle</item>
+     <item name="palette">Palette</item>
+  </string-array>
 
     <string-array name="feedbackMode">
         <item name="none">keine</item>
@@ -281,15 +281,15 @@
 
   <!-- 3D VIEWER array strings -->
 
-  <!-- TODO string-array name="demReduce">
-     <item name="shrink">Subsample</item>
-     <item name="cut">Clip</item>
-  </string-array -->
+  <string-array name="demReduce">
+     <item name="shrink">Reduzieren</item>
+     <item name="cut">Ausschneiden</item>
+  </string-array>
 
   <string-array name="splayUse">
      <item name="skip">Ignorieren</item>
      <item name="normal">Normal</item>
-     <item name="xsection">Querschnitte</item>
+     <item name="xsection">Profile</item>
   </string-array>
 
 </resources>

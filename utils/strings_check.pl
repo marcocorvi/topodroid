@@ -2,7 +2,9 @@
 #
 # checks translation string file for several commons errors
 # usage: strings_check.pl ORIGINAL_FILE TWO_CHAR_LANGUAGE_CODE
+# for example: strings_check.pl ../res/values/strings.xml de
 #
+# Requires Perl 5.36+ and the following perl module XML::LibXML
 # --------------------------------------------------------
 #  Copyright This software is distributed under GPL-3.0 or later
 #  See the file COPYING.
@@ -64,7 +66,7 @@ my %xx_names;
 my %en_names;
 my $LOG;
 
-open ($LOG, '>', $log_filename);
+open ($LOG, '>:encoding(UTF-8)', $log_filename);
 
 if (! -e $xx_filename) {
   die "\nError:

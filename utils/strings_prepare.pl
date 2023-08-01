@@ -1,9 +1,11 @@
 #!/usr/bin/perl
 #
-# prepares translation string file according to english file creating 
-# an updated or new version in case xx-strings_file doesn't exist
-# usage: strings_prepare.pl ORIGINAL_FILE TWO_CHAR_LANGUAGE_CODE
+# prepares/updates a translation string file according to the english file creating
+# an updated version (with TODOs for new strings) or a new version in case xx-strings_file doesn't exist
+# usage: strings_prepare.pl ORIGINAL_EN_FILE TWO_CHAR_LANGUAGE_CODE
+# example: strings_prepare.pl ../res/values/strings.xml de
 #
+# Requires Perl 5.36+ and the following perl module XML::LibXML
 # --------------------------------------------------------
 #  Copyright This software is distributed under GPL-3.0 or later
 #  See the file COPYING.
@@ -34,7 +36,7 @@ my $debug = DEBUG;
 
 if (@ARGV != 2) {
   die "\nUsage:
-  $0 ORIGINAL_FILE TWO_CHAR_LANGUAGE_CODE\n\n";
+  $0 ORIGINAL_EN_FILE TWO_CHAR_LANGUAGE_CODE\n\n";
 }
 
 my $en_filename = $ARGV[0];
