@@ -1,10 +1,11 @@
 encoding utf-8
 symbol point
 name bridge
-name-pt ponte
-name-ru мост
-name-ro pod
+name-de Brücke
 name-hu híd
+name-pt ponte
+name-ro pod
+name-ru мост
 th_name bridge
 group trail
 orientation no

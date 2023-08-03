@@ -1,18 +1,18 @@
 encoding utf-8
 symbol line
 name fault
-name-cn 断层
-name-es falla
-name-pt falha
-name-it faglia
-name-fr faille
-name-de Verwerfung
-name-ru разлом
 name-bg разлом
-name-ua розлом
+name-cn 断层
+name-de Verwerfung
+name-es falla
 name-fa شکست_زمین
+name-fr faille
 name-hu vető
+name-it faglia
+name-pt falha
 name-ro falie
+name-ru разлом
+name-ua розлом
 th_name fault
 group fault
 color 0xffffff 0x99

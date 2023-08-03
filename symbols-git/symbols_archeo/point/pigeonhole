@@ -1,15 +1,15 @@
 encoding utf-8
 symbol point
 name pigeonhole
-name-it buco_per_piccioni
-name-es hueco_palomas
-name-pt acesso_pombo
-name-ru полость
-name-fr ouverture_pour_pigeon
-name-sk otvor_pre_holuby
-name-ro volieră_porumbei
 name-de Taubenloch
+name-es hueco_palomas
+name-fr ouverture_pour_pigeon
 name-hu galamblyuk
+name-it buco_per_piccioni
+name-pt acesso_pombo
+name-ro volieră_porumbei
+name-ru полость
+name-sk otvor_pre_holuby
 th_name pigeonhole
 color 0xcccccc
 path

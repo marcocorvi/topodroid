@@ -1,15 +1,15 @@
 encoding utf-8
 symbol point
 name niche
-name-it nicchia
-name-es nicho
-name-pt nicho
-name-ru ниша
-name-fr niche
-name-sk výklenok
-name-ro nișă
 name-de Nische
+name-es nicho
+name-fr niche
 name-hu fülke
+name-it nicchia
+name-pt nicho
+name-ro nișă
+name-ru ниша
+name-sk výklenok
 th_name niche
 color 0x66ffcc
 path

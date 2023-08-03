@@ -1,14 +1,14 @@
 encoding utf-8
 symbol area
 name lava
-name-it lava
-name-es lava
-name-pt lava
-name-ru лава
-name-fr lave
-name-ro lavă
 name-de Lava
+name-es lava
+name-fr lave
 name-hu láva
+name-it lava
+name-pt lava
+name-ro lavă
+name-ru лава
 th_name lava
 color 0xff6666 0xcc
 bitmap 40 37

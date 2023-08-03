@@ -1,10 +1,11 @@
 encoding utf-8
 symbol line
 name ladder
-name-pt escada_de_mão
-name-ru лестница
-name-ro scară
+name-de Leiter
 name-hu létra
+name-pt escada_de_mão
+name-ro scară
+name-ru лестница
 th_name ladder
 group trail
 color 0xff0000 0xff

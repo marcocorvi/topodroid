@@ -3,10 +3,10 @@ symbol point
 name flowstone
 name-de Sinter
 name-fr plancher_stalagmitique
+name-hu cseppkőlefolyás
 name-pt escorrimento
 name-ro cruste_podea
 name-ru натёки
-name-hu cseppkőlefolyás
 th_name flowstone
 group flowstone
 orientation no

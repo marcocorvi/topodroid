@@ -1,13 +1,13 @@
 encoding utf-8
 symbol point
 name arachnid
-name-es arácnido
-name-pt aracnídeo
-name-ru арахнид
-name-fr araignée
-name-ro arahnidă
 name-de Spinne
+name-es arácnido
+name-fr araignée
 name-hu pók
+name-pt aracnídeo
+name-ro arahnidă
+name-ru арахнид
 th_name arachnid
 color 0xffcc66
 path

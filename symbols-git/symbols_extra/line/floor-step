@@ -1,14 +1,14 @@
 encoding utf-8
 symbol line
 name floor-step
-name-es resalte
-name-pt desnível_abrupto_chão
-name-ru уступ_пола
-name-fr ressaut
-name-sk schodisko
-name-ro treaptă_podea
 name-de Stufe
+name-es resalte
+name-fr ressaut
 name-hu padló_lépcső
+name-pt desnível_abrupto_chão
+name-ro treaptă_podea
+name-ru уступ_пола
+name-sk schodisko
 th_name floor-step
 group floor
 color 0x33cc66 0xff

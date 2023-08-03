@@ -1,10 +1,11 @@
 encoding utf-8
 symbol point
 name masonry
-name-pt alvenaria
-name-ru каменная_кладка
-name-ro zidărie
+name-de Gemäuer
 name-hu téglafal
+name-pt alvenaria
+name-ro zidărie
+name-ru каменная_кладка
 th_name masonry
 orientation no
 color 0x993300

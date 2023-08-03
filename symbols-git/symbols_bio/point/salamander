@@ -2,10 +2,10 @@ encoding utf-8
 symbol point
 name salamander
 name-de Salamander
-name-pt salamandra
-name-ru саламандра
-name-ro salamandră
 name-hu szalamandra
+name-pt salamandra
+name-ro salamandră
+name-ru саламандра
 th_name salamander
 color 0xcccc33
 path

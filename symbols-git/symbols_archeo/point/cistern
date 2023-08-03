@@ -1,15 +1,15 @@
 encoding utf-8
 symbol point
 name cistern
-name-it cisterna
-name-es cisterna
-name-pt cisterna
-name-hu ciszterna
-name-ru цистерна
-name-fr citerne
-name-sk citerna
-name-ro cisternă
 name-de Zisterne
+name-es cisterna
+name-fr citerne
+name-hu ciszterna
+name-it cisterna
+name-pt cisterna
+name-ro cisternă
+name-ru цистерна
+name-sk citerna
 th_name cistern
 color 0x66ccff
 path

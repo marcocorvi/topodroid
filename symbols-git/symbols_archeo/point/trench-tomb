@@ -1,15 +1,15 @@
 encoding utf-8
 symbol point
 name trench-tomb
-name-it fossa_tombale
-name-es fosa_coletiva
-name-pt fossa_coletiva
-name-ru курган
-name-fr sépulture_collective_ou_nécropole
-name-sk hromadný_hrob
-name-ro mormânt_colectiv
 name-de Schlitzgrab
+name-es fosa_coletiva
+name-fr sépulture_collective_ou_nécropole
 name-hu sírgödör
+name-it fossa_tombale
+name-pt fossa_coletiva
+name-ro mormânt_colectiv
+name-ru курган
+name-sk hromadný_hrob
 th_name trench-tomb
 color 0xffff33
 path

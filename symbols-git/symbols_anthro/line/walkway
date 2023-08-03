@@ -1,10 +1,11 @@
 encoding utf-8
 symbol line
 name walkway
-name-pt passarela
-name-ru дорожка
-name-ro trotuar
+name-de Fußweg
 name-hu járda
+name-pt passarela
+name-ro trotuar
+name-ru дорожка
 th_name walkway
 group trail
 color 0xffffff 0x66

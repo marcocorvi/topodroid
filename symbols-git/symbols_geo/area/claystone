@@ -1,14 +1,14 @@
 encoding utf-8
 symbol area
 name claystone
-name-it argilla
-name-es arcilita
-name-pt argilito
-name-ru аргилит
-name-fr argile
-name-ro argilă
 name-de Lehm
+name-es arcilita
+name-fr argile
 name-hu agyagkő
+name-it argilla
+name-pt argilito
+name-ro argilă
+name-ru аргилит
 th_name claystone
 group clay
 color 0xcc9933 0xcc

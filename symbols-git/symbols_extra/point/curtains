@@ -1,10 +1,11 @@
 encoding utf-8
 symbol point
 name curtains
-name-pt cortinas
-name-ru занавеси
-name-ro draperii
+name-de Vorhänge
 name-hu cseppkőzászlók
+name-pt cortinas
+name-ro draperii
+name-ru занавеси
 th_name curtains
 group curtain
 orientation no

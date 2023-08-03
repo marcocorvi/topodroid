@@ -1,13 +1,13 @@
 encoding utf-8
 symbol line
 name ceiling-step
-name-es resalte_techo
-name-pt desnível_abrupto_teto
-name-ru уступ_потолка
-name-fr décrochement-de-plafond
-name-ro treaptă_tavan
 name-de Deckenstufe
+name-es resalte_techo
+name-fr décrochement-de-plafond
 name-hu Menyezeti_lépcső
+name-pt desnível_abrupto_teto
+name-ro treaptă_tavan
+name-ru уступ_потолка
 th_name ceiling-step
 group ceiling
 color 0x33cc66 0xff

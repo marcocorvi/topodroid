@@ -1,10 +1,11 @@
 encoding utf-8
 symbol point
 name volcano
-name-pt vulcão
-name-ru вулкан
-name-ro vulcan
+name-de Vulkan
 name-hu vulkán
+name-pt vulcão
+name-ro vulcan
+name-ru вулкан
 th_name volcano
 orientation no
 color 0xccff66

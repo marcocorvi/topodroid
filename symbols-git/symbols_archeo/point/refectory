@@ -1,14 +1,14 @@
 encoding utf-8
 symbol point
 name refectory
-name-it refettorio
-name-es refectorio
-name-pt refeitório
-name-ru трапезная
-name-fr réfectoire
-name-ro cantină
 name-de Speisesaal
+name-es refectorio
+name-fr réfectoire
 name-hu reflektórium
+name-it refettorio
+name-pt refeitório
+name-ro cantină
+name-ru трапезная
 th_name refectory
 color 0xff9966
 path

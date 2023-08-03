@@ -2,13 +2,13 @@ encoding utf-8
 symbol point
 name stairs
 name-de Leiter
-name-pt escada
 name-es escalera
-name-ru лестница
 name-fr échelle
-name-sk rebrík
-name-ro scară
 name-hu létra
+name-pt escada
+name-ro scară
+name-ru лестница
+name-sk rebrík
 th_name stairs
 group trail
 color 0xcccccc

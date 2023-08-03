@@ -1,14 +1,14 @@
 encoding utf-8
 symbol area
 name gypsum
-name-it gesso
-name-es yeso
-name-pt gesso
-name-ru гипс
-name-fr gypse
-name-ro gips
 name-de Gips
+name-es yeso
+name-fr gypse
 name-hu gipsz
+name-it gesso
+name-pt gesso
+name-ro gips
+name-ru гипс
 th_name gypsum
 color 0xffffff 0xcc
 bitmap 44 26

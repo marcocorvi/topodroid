@@ -1,15 +1,15 @@
 encoding utf-8
 symbol point
 name inscription
-name-it inscrizione
-name-es inscripción
-name-pt inscrição
-name-ru надпись
-name-fr inscription
-name-sk nápis
-name-ro inscripție
 name-de Inschrift
+name-es inscripción
+name-fr inscription
 name-hu felirat
+name-it inscrizione
+name-pt inscrição
+name-ro inscripție
+name-ru надпись
+name-sk nápis
 th_name inscription
 color 0xff00cc
 path

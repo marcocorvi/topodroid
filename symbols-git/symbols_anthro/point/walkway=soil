@@ -1,10 +1,11 @@
 encoding utf-8
 symbol point
 name walkway_soil
-name-pt passarela_de_terra
-name-ru земляная_дорожка
-name-ro trotuar_sol
+name-de Fußweg_aus_Erde
 name-hu járda_földes
+name-pt passarela_de_terra
+name-ro trotuar_sol
+name-ru земляная_дорожка
 th_name walkway:soil
 group trail
 orientation no

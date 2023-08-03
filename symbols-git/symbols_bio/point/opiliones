@@ -1,13 +1,13 @@
 encoding utf-8
 symbol point
 name opiliones
-name-es opiliones
-name-pt opilião
-name-ru сенокосец
-name-fr opilion
-name-ro opiliones
 name-de Weberknechte
+name-es opiliones
+name-fr opilion
 name-hu kaszáspók
+name-pt opilião
+name-ro opiliones
+name-ru сенокосец
 th_name opiliones
 color 0xff9966
 path

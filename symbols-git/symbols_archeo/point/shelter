@@ -1,15 +1,15 @@
 encoding utf-8
 symbol point
 name shelter
-name-it riparo
-name-es abrigo
-name-pt abrigo
-name-ru укрытие
-name-fr abri
-name-sk prístrešok
-name-ro adăpost
 name-de Unterstand
+name-es abrigo
+name-fr abri
 name-hu menedék
+name-it riparo
+name-pt abrigo
+name-ro adăpost
+name-ru укрытие
+name-sk prístrešok
 th_name shelter
 color 0xffffff
 path

@@ -1,10 +1,11 @@
 encoding utf-8
 symbol area
 name stalactite
-name-pt estalactite
-name-ru сталактит
-name-ro stalactită
+name-de Stalaktiten
 name-hu függőcseppkő
+name-pt estalactite
+name-ro stalactită
+name-ru сталактит
 th_name stalactite
 group stalactite
 color 0xfff100 0x66

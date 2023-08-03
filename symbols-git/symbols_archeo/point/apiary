@@ -1,16 +1,16 @@
 encoding utf-8
 symbol point
 name apiary
+name-de Bienenhaus
+name-es apiario
+name-fr ruche
+name-hu méhészet
+name-hu méhészet
 name-it apiario
 name-pt apiário
-name-es apiario
-name-hu méhészet
-name-ru пасека
-name-fr ruche
-name-sk včelín
 name-ro apicultură
-name-de Bienenhaus
-name-hu méhészet
+name-ru пасека
+name-sk včelín
 th_name apiary
 color 0xff9966
 path

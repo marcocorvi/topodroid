@@ -1,10 +1,11 @@
 encoding utf-8
 symbol point
 name steps
-name-pt escada
-name-ru ступенька
-name-ro trepte
+name-de Stufen
 name-hu lépcsők
+name-pt escada
+name-ro trepte
+name-ru ступенька
 th_name steps
 group trail
 orientation no

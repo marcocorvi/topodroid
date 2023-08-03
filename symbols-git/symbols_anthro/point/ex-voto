@@ -1,9 +1,10 @@
 encoding utf-8
 symbol point
 name ex-voto
+name-de Ex-Voto
 name-pt ex-voto
-name-ru экс_вото
 name-ro ex-voto
+name-ru экс_вото
 th_name ex-voto
 orientation no
 color 0xffea80

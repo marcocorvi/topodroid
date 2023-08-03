@@ -1,15 +1,15 @@
 encoding utf-8
 symbol point
 name tomb
-name-it tomba
+name-de Grab
 name-es tumba
+name-fr tombe
+name-hu sír
+name-it tomba
 name-pt tumba
+name-ro mormânt
 name-ru погребение
 name-sk hrob
-name-ro mormânt
-name-fr tombe
-name-de Grab
-name-hu sír
 th_name tomb
 color 0xffff33
 path

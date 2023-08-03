@@ -2,10 +2,10 @@ encoding utf-8
 symbol area
 name mudcrack
 name-de Getrockneter_Lehm
-name-pt lama_rachada
-name-ru растрескавшаяся_глина
-name-ro crăpătură-lut
 name-hu szeptáriás_agyag
+name-pt lama_rachada
+name-ro crăpătură-lut
+name-ru растрескавшаяся_глина
 th_name mudcrack
 group clay
 color 0xcc9933 0xcc

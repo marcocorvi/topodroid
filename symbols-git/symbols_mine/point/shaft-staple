@@ -2,13 +2,13 @@ encoding utf-8
 symbol point
 name shaft-staple
 name-de Schacht
-name-pt poço_lacrado
 name-es pozo_grapado
-name-ru шахтный_отвал
 name-fr puits_de_mine_bâti
-name-sk šachta
-name-ro puț_legătură_nivele
 name-hu búvónyílás
+name-pt poço_lacrado
+name-ro puț_legătură_nivele
+name-ru шахтный_отвал
+name-sk šachta
 th_name shaft-staple
 group ceiling
 color 0xcccccc

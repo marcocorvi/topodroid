@@ -1,14 +1,14 @@
 encoding utf-8
 symbol line
 name syncline
+name-de Synklinale
+name-es sinclinal
+name-fr synclinal
+name-hu szinklinális
 name-it sinclinale
 name-pt sinclinal
-name-es sinclinal
-name-ru синклиналь
-name-fr synclinal
 name-ro sinclinal
-name-de Synklinale
-name-hu szinklinális
+name-ru синклиналь
 th_name syncline
 group fold
 color 0xff3399 0xff

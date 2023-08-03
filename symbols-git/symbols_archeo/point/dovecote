@@ -1,15 +1,15 @@
 encoding utf-8
 symbol point
 name dovecote
-name-it piccionaia
-name-es palomar
-name-pt pombal
-name-ru голубятня
-name-fr pigeonnier
-name-sk holubník
-name-ro foișor
 name-de Taubenschlag
+name-es palomar
+name-fr pigeonnier
 name-hu galambdúc
+name-it piccionaia
+name-pt pombal
+name-ro foișor
+name-ru голубятня
+name-sk holubník
 th_name dovecote
 color 0xcccccc
 path

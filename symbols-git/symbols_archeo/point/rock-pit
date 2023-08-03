@@ -1,6 +1,7 @@
 encoding utf-8
 symbol point
 name rock-pit
+name-de Felsloch
 name-hu sziklagödör
 name-pt poço_na_rocha
 th_name rock-pit

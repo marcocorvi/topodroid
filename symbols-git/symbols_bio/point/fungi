@@ -1,13 +1,13 @@
 encoding utf-8
 symbol point
 name fungi
-name-es hongo
-name-pt fungo
-name-ru грибы
-name-fr champignons
-name-ro fungi
 name-de Pilze
+name-es hongo
+name-fr champignons
 name-hu gomba
+name-pt fungo
+name-ro fungi
+name-ru грибы
 th_name fungi
 color 0xffcc66
 path

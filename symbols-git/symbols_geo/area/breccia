@@ -1,13 +1,13 @@
 encoding utf-8
 symbol area
 name breccia
-name-pt brecha
-name-es brecha
-name-ru брекчия
-name-fr brèche
-name-ro brecie
 name-de Brekzie
+name-es brecha
+name-fr brèche
 name-hu breccsa
+name-pt brecha
+name-ro brecie
+name-ru брекчия
 th_name breccia
 color 0x99ff00 0xcc
 bitmap 40 30

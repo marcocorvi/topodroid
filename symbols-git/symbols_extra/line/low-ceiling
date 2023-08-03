@@ -1,10 +1,11 @@
 encoding utf-8
 symbol line
 name low-ceiling
-name-pt teto_baixo
-name-ru низкий_потолок
-name-ro tavan_jos
+name-de Tiefe_Decke
 name-hu alacsony_plafon
+name-pt teto_baixo
+name-ro tavan_jos
+name-ru низкий_потолок
 th_name low-ceiling
 group ceiling
 color 0x85e0a3 0xff

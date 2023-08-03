@@ -1,12 +1,12 @@
 encoding utf-8
 symbol point
 name echinoid
-name-pt equinóide
-name-es equinoide
-name-ru ёж
-name-ro echinoid
 name-de Seeigel
+name-es equinoide
 name-hu tengerisünök
+name-pt equinóide
+name-ro echinoid
+name-ru ёж
 th_name echinoid
 group paleo
 color 0xcc9966

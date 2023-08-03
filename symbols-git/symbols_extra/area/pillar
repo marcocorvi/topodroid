@@ -1,10 +1,11 @@
 encoding utf-8
 symbol area
 name pillar
-name-pt coluna
-name-ru колонна
-name-ro pilier
+name-de Säule
 name-hu pillér
+name-pt coluna
+name-ro pilier
+name-ru колонна
 th_name pillar
 group pillar
 color 0xbf00ff 0x66

@@ -1,10 +1,11 @@
 encoding utf-8
 symbol point
 name human-bones
-name-pt ossos_humanos
-name-ru человеческие_кости
-name-ro oase_umane
+name-de Menschliche_Knochen
 name-hu emberi_csontok
+name-pt ossos_humanos
+name-ro oase_umane
+name-ru человеческие_кости
 th_name human-bones
 group paleo
 orientation no

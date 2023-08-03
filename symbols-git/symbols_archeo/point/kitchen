@@ -1,15 +1,15 @@
 encoding utf-8
 symbol point
 name kitchen
-name-it cucina
+name-de Küche
 name-es cocina
+name-fr cuisine
+name-hu konyha
+name-it cucina
 name-pt cozinha
+name-ro bucătărie
 name-ru кухня
 name-sk kuchyňa
-name-ro bucătărie
-name-fr cuisine
-name-de Küche
-name-hu konyha
 th_name kitchen
 color 0xff9966
 path

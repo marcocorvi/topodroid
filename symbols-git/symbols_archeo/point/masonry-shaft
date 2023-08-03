@@ -1,15 +1,15 @@
 encoding utf-8
 symbol point
 name masonry-shaft
-name-it pozzo_in_muratura
-name-es hueco_de_obra
-name-pt poço_alvenaria
-name-ru каменная_шахта
-name-fr puits_maçonné
-name-sk murivo
-name-ro puț_zidit
 name-de Gemauerter_Schacht
+name-es hueco_de_obra
+name-fr puits_maçonné
 name-hu falazott_kút
+name-it pozzo_in_muratura
+name-pt poço_alvenaria
+name-ro puț_zidit
+name-ru каменная_шахта
+name-sk murivo
 th_name masonry-shaft
 color 0xff6699
 path

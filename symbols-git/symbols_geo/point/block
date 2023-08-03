@@ -1,14 +1,14 @@
 encoding utf-8
 symbol point
 name block
-name-it blocco
-name-es bloque
-name-pt bloco
-name-ru блок
-name-fr bloc
-name-ro bloc
 name-de Block
+name-es bloque
+name-fr bloc
 name-hu tömb
+name-it blocco
+name-pt bloco
+name-ro bloc
+name-ru блок
 th_name block
 color 0xff6633
 path

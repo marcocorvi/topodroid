@@ -1,18 +1,18 @@
 encoding utf-8
 symbol line
 name wall_debris
-name-cn 碎石洞壁
-name-es paredes_descompuestas
-name-pt parede_de_escombros
-name-fr paroi_de_débris_rocheux_fracturés
-name-de Schuttwand
-name-fa آوار_دیوار
 name-bg стена_чакъл
-name-ru стена_из_щебень
-name-ua стіна_щебінь_опади
+name-cn 碎石洞壁
+name-de Schuttwand
+name-es paredes_descompuestas
+name-fa آوار_دیوار
+name-fr paroi_de_débris_rocheux_fracturés
 name-hu fal_kőtörmelékből
-name-sk sutinové_steny
+name-pt parede_de_escombros
 name-ro perete_prăbușiri
+name-ru стена_из_щебень
+name-sk sutinové_steny
+name-ua стіна_щебінь_опади
 th_name wall:debris
 group wall
 color 0xff0000 0xff

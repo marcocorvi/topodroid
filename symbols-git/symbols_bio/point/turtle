@@ -2,10 +2,10 @@ encoding utf-8
 symbol point
 name turtle
 name-de Schildkröte
-name-pt tartaruga
-name-ru черепаха
-name-ro broască_țestoasă
 name-hu teknős
+name-pt tartaruga
+name-ro broască_țestoasă
+name-ru черепаха
 th_name turtle
 color 0xffcc66
 path

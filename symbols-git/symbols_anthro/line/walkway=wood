@@ -1,10 +1,11 @@
 encoding utf-8
 symbol line
 name walkway_wood
-name-pt passarela_de_madeira
-name-ru деревянный_настил
-name-ro trotuar_lemn
+name-de Fußweg_aus_Holz
 name-hu fa_járda
+name-pt passarela_de_madeira
+name-ro trotuar_lemn
+name-ru деревянный_настил
 th_name walkway:wood
 group trail
 color 0x993300 0x66

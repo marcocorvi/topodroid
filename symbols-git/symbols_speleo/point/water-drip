@@ -3,13 +3,13 @@ symbol point
 name water-drip
 name-de Wassertropfen
 name-fr goutte_d'eau
+name-hu csepegés
 name-it stillicidio
 name-pt gotejamento
-name-ru водокап
-name-uа потік_води
-name-hu csepegés
-name-sk kvapkanie
 name-ro infiltrație
+name-ru водокап
+name-sk kvapkanie
+name-uа потік_води
 th_name water-drip
 group water-flow
 orientation no

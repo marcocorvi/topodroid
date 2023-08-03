@@ -1,10 +1,11 @@
 encoding utf-8
 symbol point
 name nameplate
-name-pt placa_identificação
-name-ru именная_табличка
-name-ro tăbliță
+name-de Namenstafel
 name-hu névtábla
+name-pt placa_identificação
+name-ro tăbliță
+name-ru именная_табличка
 th_name nameplate
 orientation no
 color 0x00b300

@@ -1,6 +1,7 @@
 encoding utf-8
 symbol point
 name wall-handhold
+name-de Wand-Handgriff
 name-hu kéztámasz
 name-pt apoio_para_mão_na_parede
 th_name wall-handhold

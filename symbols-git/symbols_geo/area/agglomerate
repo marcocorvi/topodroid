@@ -1,13 +1,13 @@
 encoding utf-8
 symbol area
 name agglomerate
-name-pt aglomerado
-name-es aglomerado
-name-ru конгломерат
-name-fr conglomérat_volcanique
-name-ro aglomerat
 name-de Agglomerat
+name-es aglomerado
+name-fr conglomérat_volcanique
 name-hu agglomerátum
+name-pt aglomerado
+name-ro aglomerat
+name-ru конгломерат
 th_name agglomerate
 color 0x99ff00 0xcc
 bitmap 40 30

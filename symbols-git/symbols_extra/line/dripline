@@ -1,10 +1,11 @@
 encoding utf-8
 symbol line
 name dripline
-name-pt linha_de_gotejamento
-name-ru линия_капежа
-name-ro linie_de_picurare
+name-de Tropfenlinie
 name-hu esővonal
+name-pt linha_de_gotejamento
+name-ro linie_de_picurare
+name-ru линия_капежа
 th_name dripline
 group wall
 color 0xff00ff 0xff

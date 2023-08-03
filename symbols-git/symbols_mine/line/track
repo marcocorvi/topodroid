@@ -2,13 +2,13 @@ encoding utf-8
 symbol line
 name track
 name-de Schienen
-name-pt trilha
 name-es camino
-name-ru колея
 name-fr galerie
-name-sk chodník
-name-ro pistă
 name-hu sín
+name-pt trilha
+name-ro pistă
+name-ru колея
+name-sk chodník
 th_name track
 group trail
 color 0xcccccc

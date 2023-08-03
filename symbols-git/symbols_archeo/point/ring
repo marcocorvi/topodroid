@@ -1,15 +1,15 @@
 encoding utf-8
 symbol point
 name ring
-name-it anello
-name-es anillo
-name-pt anel
-name-ru кольцо
-name-fr anneau
-name-sk prsteň
-name-ro inel
 name-de Ring
+name-es anillo
+name-fr anneau
 name-hu gyűrű
+name-it anello
+name-pt anel
+name-ro inel
+name-ru кольцо
+name-sk prsteň
 th_name ring
 color 0xcccccc
 path

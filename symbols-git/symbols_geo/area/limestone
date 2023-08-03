@@ -1,15 +1,15 @@
 encoding utf-8
 symbol area
 name limestone
-name-it calcare
-name-es caliza
-name-ua вапняк
 name-de Kalk
-name-pt calcário
-name-ru известняк
+name-es caliza
 name-fr calcaire
-name-ro calcar
 name-hu mészkő
+name-it calcare
+name-pt calcário
+name-ro calcar
+name-ru известняк
+name-ua вапняк
 th_name limestone
 color 0x99cccc 0xcc
 orientable

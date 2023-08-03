@@ -1,10 +1,11 @@
 encoding utf-8
 symbol point
 name altar
-name-pt altar
-name-ru алтарь
-name-ro altar
+name-de Altar
 name-hu oltár
+name-pt altar
+name-ro altar
+name-ru алтарь
 th_name altar
 orientation no
 color 0xffffff

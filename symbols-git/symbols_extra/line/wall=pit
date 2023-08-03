@@ -1,13 +1,13 @@
 encoding utf-8
 symbol line
 name wall-pit
-name-es pozo_pared
-name-pt parede_poço
-name-ru стена_отвеса
-name-fr paroi_de_puits
-name-ro perete_puț
 name-de Schachtwand
+name-es pozo_pared
+name-fr paroi_de_puits
 name-hu aknafal
+name-pt parede_poço
+name-ro perete_puț
+name-ru стена_отвеса
 th_name wall:pit
 group wall
 color 0xff0000 0xff

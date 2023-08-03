@@ -1,15 +1,15 @@
 encoding utf-8
 symbol point
 name cavity
-name-it cavita`
-name-es cavidad
-name-pt cavidade
-name-hu üreg
-name-ru каверна
-name-fr cavité
-name-sk dutina
-name-ro cavitate
 name-de Hohlraum
+name-es cavidad
+name-fr cavité
+name-hu üreg
+name-it cavita`
+name-pt cavidade
+name-ro cavitate
+name-ru каверна
+name-sk dutina
 th_name cavity
 color 0xffffff
 path

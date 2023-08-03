@@ -1,13 +1,13 @@
 encoding utf-8
 symbol point
 name arthropod
-name-es antrópodo
-name-pt artrópode
-name-ru членистоногое
-name-fr arthropode
-name-ro artropod
 name-de Gliederfüßer
+name-es antrópodo
+name-fr arthropode
 name-hu ízeltlábú
+name-pt artrópode
+name-ro artropod
+name-ru членистоногое
 th_name arthropod
 color 0xcc9933
 path
