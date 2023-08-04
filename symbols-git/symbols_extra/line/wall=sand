@@ -1,18 +1,18 @@
 encoding utf-8
 symbol line
 name wall_sand
-name-cn 砂积洞壁
-name-es paredes_de_arena
-name-pt parede_de_areia
-name-fr parois_sabloneuses
-name-de Sandwand
 name-bg стена_пясък
-name-ru стена_песок
-name-ua стіна_пісок
+name-cn 砂积洞壁
+name-de Sandwand
+name-es paredes_de_arena
 name-fa شن
+name-fr parois_sabloneuses
 name-hu fal_homok
-name-sk piesková_stena
+name-pt parede_de_areia
 name-ro perete_nisip
+name-ru стена_песок
+name-sk piesková_stena
+name-ua стіна_пісок
 th_name wall:sand
 group wall
 color 0xff0000 0xff

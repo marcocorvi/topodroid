@@ -1,10 +1,11 @@
 encoding utf-8
 symbol point
 name stalactites-stalagmites
-name-pt estalactites-estalagmites
-name-ru сталактиты_сталагмиты
-name-ro stalactite-stalagmite
+name-de Stalaktiten-Stalagmiten
 name-hu függő-álló_cseppkövek
+name-pt estalactites-estalagmites
+name-ro stalactite-stalagmite
+name-ru сталактиты_сталагмиты
 th_name stalactites-stalagmites
 group stalactite
 orientation no

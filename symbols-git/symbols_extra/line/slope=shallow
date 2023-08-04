@@ -1,13 +1,13 @@
 encoding utf-8
 symbol line
 name slope_shallow
-name-es pendiente_suave
-name-pt rampa_suave
-name-ru склон_пологий
-name-fr pente_douce
-name-ro pantă_mică
 name-de Leichte_Steigung
+name-es pendiente_suave
+name-fr pente_douce
 name-hu lejtő_enyhe
+name-pt rampa_suave
+name-ro pantă_mică
+name-ru склон_пологий
 th_name slope:shallow
 group slope
 color 0xfff5cc 0xff

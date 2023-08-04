@@ -1,10 +1,11 @@
 encoding utf-8
 symbol point
 name walkway_stone
-name-pt passarela_de_pedra
-name-ru бетонная_дорожка
-name-ro trotuar_piatră
+name-de Fußweg_aus_Stein
 name-hu járda_kő
+name-pt passarela_de_pedra
+name-ro trotuar_piatră
+name-ru бетонная_дорожка
 th_name walkway:stone
 group trail
 orientation no

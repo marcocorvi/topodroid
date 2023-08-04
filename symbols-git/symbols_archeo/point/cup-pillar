@@ -1,15 +1,15 @@
 encoding utf-8
 symbol point
 name cut-pillar
-name-it pilastro_tronco
-name-es base_columna
-name-pt base_pilar
-name-ru срезанная_колонна
-name-fr base_de_colonne
-name-sk základ_piliera
-name-ro bază_de_coloană
 name-de Säulenfuss
+name-es base_columna
+name-fr base_de_colonne
 name-hu oszloptalp
+name-it pilastro_tronco
+name-pt base_pilar
+name-ro bază_de_coloană
+name-ru срезанная_колонна
+name-sk základ_piliera
 th_name cut-pillar
 color 0xcccccc
 path

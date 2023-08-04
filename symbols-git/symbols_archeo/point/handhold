@@ -1,15 +1,15 @@
 encoding utf-8
 symbol point
 name handhold
-name-it maniglia
-name-es apoyo_mano
-name-pt apoio_mão
-name-ru поручень
-name-fr appui_de_main
-name-sk zábradlie
-name-ro mâner
 name-de Handgriff
+name-es apoyo_mano
+name-fr appui_de_main
 name-hu fogás
+name-it maniglia
+name-pt apoio_mão
+name-ro mâner
+name-ru поручень
+name-sk zábradlie
 th_name handhold
 color 0xcccccc
 path

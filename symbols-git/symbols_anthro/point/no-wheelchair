@@ -1,9 +1,10 @@
 encoding utf-8
 symbol point
 name no-wheelchair
+name-de Nicht_rollstuhltauglich
+name-hu kerekesszék_nélkül
 name-pt cadeira_de_rodas_(não_acessível)
 name-ro fără_scaun_cu_rotile
-name-hu kerekesszék_nélkül
 th_name no-wheelchair
 orientation no
 color 0xffffff

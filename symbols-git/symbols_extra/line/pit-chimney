@@ -1,10 +1,11 @@
 encoding utf-8
 symbol line
 name pit-chimney
-name-pt poço_e_chaminé
-name-ru колодец_с_органной_трубой
-name-ro puț-horn
+name-de Schacht_Kamin
 name-hu plafon-üreg
+name-pt poço_e_chaminé
+name-ro puț-horn
+name-ru колодец_с_органной_трубой
 th_name pit-chimney
 group floor
 color 0x990099 0xff

@@ -1,10 +1,11 @@
 encoding utf-8
 symbol point
 name helictites
-name-pt helectites
-name-ru гелликтиты
-name-ro helectite
+name-de Exzentriker
 name-hu heliktit
+name-pt helectites
+name-ro helectite
+name-ru гелликтиты
 th_name helictites
 group helictite
 orientation no

@@ -1,15 +1,15 @@
 encoding utf-8
 symbol point
 name cross
-name-it croce
-name-es cruce
-name-pt cruz
-name-hu kereszt
-name-ru крест
-name-fr croix
-name-sk kríž
-name-ro cruce
 name-de Kreuz
+name-es cruce
+name-fr croix
+name-hu kereszt
+name-it croce
+name-pt cruz
+name-ro cruce
+name-ru крест
+name-sk kríž
 th_name cross
 color 0xff00ff
 path

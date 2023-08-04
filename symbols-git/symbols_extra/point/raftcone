@@ -1,12 +1,12 @@
 encoding utf-8
 symbol point
 name raftcone
-name-pt cone_de_jangadas
-name-ru насыпной_конус
-name-hu karácsonyfa
-name-fr concrétions_coniques
-name-ro con_de_calcit
 name-de Kalzithalbkugel
+name-fr concrétions_coniques
+name-hu karácsonyfa
+name-pt cone_de_jangadas
+name-ro con_de_calcit
+name-ru насыпной_конус
 th_name raft-cone
 orientation no
 color 0xccff66

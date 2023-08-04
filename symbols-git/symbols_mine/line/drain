@@ -2,13 +2,13 @@ encoding utf-8
 symbol line
 name drain
 name-de Wasserablauf
-name-pt ralo
 name-es drenaje
-name-ru водосток
 name-fr drainage
-name-sk odtok
-name-ro drenaj
 name-hu csatorna
+name-pt ralo
+name-ro drenaj
+name-ru водосток
+name-sk odtok
 th_name drain
 group water-flow
 color 0x3399ff

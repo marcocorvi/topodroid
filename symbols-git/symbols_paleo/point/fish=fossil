@@ -1,13 +1,13 @@
 encoding utf-8
 symbol point
 name fish_fossil
-name-pt peixe
+name-de Fossiler_Fisch
 name-es pez
-name-ru рыба
 name-fr poisson
-name-ro pește
-name-de Fisch
 name-hu hal
+name-pt peixe
+name-ro pește
+name-ru рыба
 th_name fish:fossil
 group paleo
 color 0x6699ff

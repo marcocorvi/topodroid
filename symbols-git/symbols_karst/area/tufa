@@ -1,14 +1,14 @@
 encoding utf-8
 symbol area
 name tufa
-name-pt tufa
-name-es tufa
-name-ru туф
-name-fr tuf
-name-sk travertín
-name-ro tuf
 name-de Tuff
+name-es tufa
+name-fr tuf
 name-hu travertínó
+name-pt tufa
+name-ro tuf
+name-ru туф
+name-sk travertín
 th_name tufa
 color 0xff9966 0xcc
 bitmap 26 26

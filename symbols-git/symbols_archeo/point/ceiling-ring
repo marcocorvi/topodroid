@@ -1,14 +1,14 @@
 encoding utf-8
 symbol point
 name ceiling-ring
-name-it anello_a_soffitto
-name-es anillo_de_techo
-name-pt anel_teto
-name-fr anneau_de_suspension
-name-ru кольцо_на_потолке
-name-ro cupolă_suspendată
 name-de Deckenring
+name-es anillo_de_techo
+name-fr anneau_de_suspension
 name-hu mennyezeti_gyűrű
+name-it anello_a_soffitto
+name-pt anel_teto
+name-ro cupolă_suspendată
+name-ru кольцо_на_потолке
 th_name ceiling-ring
 color 0xcccccc
 path

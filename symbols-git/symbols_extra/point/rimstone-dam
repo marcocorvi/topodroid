@@ -3,13 +3,13 @@ symbol point
 name gour-dam
 name-de Sinterbecken-Rand
 name-es gour_seco
+name-fr gour-asséché
+name-hu mésztufagát
 name-it gour
 name-pt travertino_(sem_água)
+name-ro baraj_gur
 name-ru гур_сухой
 name-ua гур
-name-hu mésztufagát
-name-fr gour-asséché
-name-ro baraj_gur
 th_name rimstone-dam
 orientation yes
 color 0xff9933

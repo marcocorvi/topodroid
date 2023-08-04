@@ -1,10 +1,11 @@
 encoding utf-8
 symbol area
 name stalactite-stalagmite
-name-pt estalactite-estalagmite
-name-ru сталактит_сталагмит
-name-ro stalactită-stalagmită
+name-de Stalaktiten_Stalagmiten
 name-hu függő-álló_cseppkő
+name-pt estalactite-estalagmite
+name-ro stalactită-stalagmită
+name-ru сталактит_сталагмит
 th_name stalactite-stalagmite
 group stalactite
 color 0x78e000 0x66

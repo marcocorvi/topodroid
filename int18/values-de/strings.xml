@@ -394,7 +394,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="menu_firmware">FIRMWARE</string>
   <string name="menu_geopoint_app">GPS APP</string>
   <string name="menu_recover">WIEDERHERSTELLEN</string>
-  <string name="menu_recover_paste">WIEDERHERST./EINFÜGEN</string>
+  <string name="menu_recover_paste">WIEDERHERSTELLEN</string>
   <string name="menu_reload">FRÜHERE VERSION</string>
   <string name="menu_rename_delete">UMBENENNEN/LÖSCHEN</string>
   <string name="menu_rename">UMBENENNEN</string>
@@ -601,7 +601,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="toggle_failed">Fehler beim Kalibrierungsmodus-Wechsel</string>
   <string name="toggle_ok">Kalibrierungsmodus gewechselt</string>
   <string name="undelete_text">Tippen Sie um wiederherzustellen</string>
-  <string name="undelete_paste_text">Wiederherstellen/Einfügen</string>
+  <string name="undelete_paste_text">Wiederherstellen</string>
   <string name="undelete_shot">Messungen</string>
   <string name="undelete_overshoot">Zu lange Messungen</string>
   <string name="undelete_check">Kalibrierungstests</string>
@@ -1844,7 +1844,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="info_shot">Messungen</string>
   <string name="info_station">Messpunkte</string>
   <string name="info_length">Höhlenlänge</string>
-  <string name="info_surface">Länge Oberflächenmessungen</string>
+  <string name="info_surface">Oberflächenmessungen</string>
   <string name="info_depth">Höhenunterschied</string>
   <string name="info_volume">Volumen</string>
   <string name="info_east">Ost</string>

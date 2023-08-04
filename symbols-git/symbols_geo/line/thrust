@@ -1,13 +1,13 @@
 encoding utf-8
 symbol line
 name thrust
-name-pt empurrão
-name-es empuje
-name-ru надвиг
-name-fr chevauchement
-name-ro şariaj
 name-de Überschiebung
+name-es empuje
+name-fr chevauchement
 name-hu feltolódás
+name-pt empurrão
+name-ro şariaj
+name-ru надвиг
 th_name thrust
 group fault
 color 0x00cc33 0xff

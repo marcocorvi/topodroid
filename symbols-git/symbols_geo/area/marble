@@ -1,14 +1,14 @@
 encoding utf-8
 symbol area
 name marble
-name-it marmo
-name-es marmol
-name-pt mármore
-name-ru мрамор
-name-fr marbre
-name-ro marmură
 name-de Marmor
+name-es marmol
+name-fr marbre
 name-hu márvány
+name-it marmo
+name-pt mármore
+name-ro marmură
+name-ru мрамор
 th_name marble
 color 0x99cccc 0xcc
 orientable

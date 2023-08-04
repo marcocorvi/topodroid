@@ -1,15 +1,15 @@
 encoding utf-8
 symbol point
 name winery
-name-it cantina
-name-es bodega
-name-pt adega
-name-ru винный_погреб
-name-fr auberge
-name-sk vináreň
-name-ro podgorie
 name-de Weinkeller
+name-es bodega
+name-fr auberge
 name-hu pincészet
+name-it cantina
+name-pt adega
+name-ro podgorie
+name-ru винный_погреб
+name-sk vináreň
 th_name winery
 color 0x9933ff
 path

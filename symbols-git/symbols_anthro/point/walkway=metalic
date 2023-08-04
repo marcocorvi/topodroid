@@ -1,10 +1,11 @@
 encoding utf-8
 symbol point
 name walkway_metalic
-name-pt passarela_metálica
-name-ru металлический_настил
-name-ro trotuar_metalic
+name-de Fußweg_aus_Metall
 name-hu járda_fém
+name-pt passarela_metálica
+name-ro trotuar_metalic
+name-ru металлический_настил
 th_name walkway:metalic
 group trail
 orientation no

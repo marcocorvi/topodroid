@@ -1,14 +1,14 @@
 encoding utf-8
 symbol area
 name sandstone
-name-it arenaria
-name-es arenisca
-name-pt arenito
-name-ru песчаник
-name-fr grès
-name-ro gresie
 name-de Sandstein
+name-es arenisca
+name-fr grès
 name-hu homokkő
+name-it arenaria
+name-pt arenito
+name-ro gresie
+name-ru песчаник
 th_name sandstone
 group sand
 color 0xcc9933 0xcc

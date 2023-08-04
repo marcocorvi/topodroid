@@ -2,10 +2,10 @@ encoding utf-8
 symbol point
 name fish
 name-de Fisch
-name-pt peixe
-name-ru рыба
-name-ro pește
 name-hu hal
+name-pt peixe
+name-ro pește
+name-ru рыба
 th_name fish
 color 0x66ccff
 path

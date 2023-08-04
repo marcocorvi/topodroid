@@ -1,14 +1,14 @@
 encoding utf-8
 symbol area
 name dolomite
-name-it dolomite
-name-es dolomita
-name-pt dolomito
-name-ru доломит
-name-fr dolomie
-name-ro dolomit
 name-de Dolomit
+name-es dolomita
+name-fr dolomie
 name-hu dolomit
+name-it dolomite
+name-pt dolomito
+name-ro dolomit
+name-ru доломит
 th_name dolomite
 color 0x99cccc 0xcc
 orientable

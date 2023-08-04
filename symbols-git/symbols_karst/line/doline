@@ -1,13 +1,13 @@
 encoding utf-8
 symbol line
 name doline
-name-pt dolina
-name-es dolina
-name-ru карстовая_воронка
-name-fr doline
-name-ro dolină
 name-de Doline
+name-es dolina
+name-fr doline
 name-hu dolina
+name-pt dolina
+name-ro dolină
+name-ru карстовая_воронка
 th_name doline
 group doline
 color 0x66cc33 0xff

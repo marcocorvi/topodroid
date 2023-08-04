@@ -1,10 +1,11 @@
 encoding utf-8
 symbol point
 name electric_light
-name-pt luz_elétrica
-name-ru электрический_светильник
-name-ro lumină_electrică
+name-de Elektrisches_Licht
 name-hu elektromos_lámpa
+name-pt luz_elétrica
+name-ro lumină_electrică
+name-ru электрический_светильник
 th_name electric-light
 orientation no
 color 0xffbf00

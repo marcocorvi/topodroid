@@ -1,13 +1,13 @@
 encoding utf-8
 symbol point
 name nyphargus
-name-pt niphargus
-name-es niphargus
-name-ru нифаргус
-name-fr niphargus
-name-ro niphargus
 name-de Höhlenflohkrebs
+name-es niphargus
+name-fr niphargus
 name-hu vakrák
+name-pt niphargus
+name-ro niphargus
+name-ru нифаргус
 th_name nyphargus
 color 0x6699ff
 path

@@ -1,14 +1,14 @@
 encoding utf-8
 symbol area
 name granite
-name-it granito
-name-es granito
-name-pt granito
-name-ru гранит
-name-fr granit
-name-ro granit
 name-de Granit
+name-es granito
+name-fr granit
 name-hu gránit
+name-it granito
+name-pt granito
+name-ro granit
+name-ru гранит
 th_name granite
 color 0xcc9966 0xcc
 bitmap 40 30

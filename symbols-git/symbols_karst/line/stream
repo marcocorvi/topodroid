@@ -1,13 +1,13 @@
 encoding utf-8
 symbol line
 name stream
-name-pt corrente
-name-es corriente
-name-ru ручей
-name-fr courant_(d'eau)
-name-ro curs_de_apă
 name-de Strom
+name-es corriente
+name-fr courant_(d'eau)
 name-hu folyó
+name-pt corrente
+name-ro curs_de_apă
+name-ru ручей
 th_name stream
 group water-flow
 style straight x0

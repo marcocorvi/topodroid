@@ -1,13 +1,13 @@
 encoding utf-8
 symbol point
 name till
-name-pt tilito
-name-es tilita
-name-ru пашня
-name-fr moraine
-name-ro argilă_cu_blocuri
 name-de Gletscherablagerungen
+name-es tilita
+name-fr moraine
 name-hu moréna
+name-pt tilito
+name-ro argilă_cu_blocuri
+name-ru пашня
 th_name till
 color 0xccff66
 path

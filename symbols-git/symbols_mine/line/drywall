@@ -1,15 +1,15 @@
 encoding utf-8
 symbol line
 name drywall
-name-it muro_a_secco
-name-es muro_de_yeso
-name-pt parede_seca
-name-ru сухая_кладка
-name-fr paroi-sèche
-name-sk suchý_múrik
-name-ro perete_sec
 name-de Trockenmauer
+name-es muro_de_yeso
+name-fr paroi-sèche
 name-hu száraz_kőfal
+name-it muro_a_secco
+name-pt parede_seca
+name-ro perete_sec
+name-ru сухая_кладка
+name-sk suchý_múrik
 th_name drywall
 group wall
 color 0xff0000 0xff

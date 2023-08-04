@@ -1,10 +1,11 @@
 encoding utf-8
 symbol point
 name pillars-with-curtains
-name-pt colunas_cobertas_por_cortinas
-name-ru колонны_с_занавесями
-name-ro pilieri_cu_draperii
+name-de Säulen_mit_Vorhängen
 name-hu cseppkőoszlopok_zászlóval
+name-pt colunas_cobertas_por_cortinas
+name-ro pilieri_cu_draperii
+name-ru колонны_с_занавесями
 th_name pillars-with-curtains
 group pillar
 orientation no

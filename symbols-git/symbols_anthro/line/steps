@@ -1,10 +1,11 @@
 encoding utf-8
 symbol line
 name steps
-name-pt escada
-name-ru ступени
-name-ro trepte
+name-de Stufen
 name-hu lépések
+name-pt escada
+name-ro trepte
+name-ru ступени
 th_name steps
 group trail
 color 0x993300

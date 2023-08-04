@@ -1,10 +1,11 @@
 encoding utf-8
 symbol point
 name disc_stalactite
-name-pt disco_estalactite
-name-ru диск_на_сталактите
-name-ro disc_stalactitic
+name-de Diskus_Stalaktit
 name-hu cseppkődob
+name-pt disco_estalactite
+name-ro disc_stalactitic
+name-ru диск_на_сталактите
 th_name disc-stalactite
 group stalactite
 orientation yes

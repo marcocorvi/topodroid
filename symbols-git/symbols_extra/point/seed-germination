@@ -1,10 +1,11 @@
 encoding utf-8
 symbol point
 name seed-germination
-name-pt germinação_de_sementes
-name-ru прорастание_семян
-name-ro germinare_semințe
+name-de Samenkeim
 name-hu mag-csírák
+name-pt germinação_de_sementes
+name-ro germinare_semințe
+name-ru прорастание_семян
 th_name seed-germination
 group vegetable
 orientation no

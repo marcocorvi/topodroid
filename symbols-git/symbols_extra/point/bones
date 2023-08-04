@@ -1,10 +1,11 @@
 encoding utf-8
 symbol point
 name bones
-name-pt ossos
-name-ru кость
-name-ro oase
+name-de Knochen
 name-hu csontok
+name-pt ossos
+name-ro oase
+name-ru кость
 th_name bones
 group paleo
 orientation no

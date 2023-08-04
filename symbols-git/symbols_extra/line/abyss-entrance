@@ -1,10 +1,11 @@
 encoding utf-8
 symbol line
 name abyss-entrance
-name-pt entrada_em_abismo
-name-ru вход_в_пропасть
-name-ro intrare_prăpastie
+name-de Eingang_am_Abgrund
 name-hu zsomboly_bejárat
+name-pt entrada_em_abismo
+name-ro intrare_prăpastie
+name-ru вход_в_пропасть
 th_name abyss-entrance
 group wall
 color 0xff00ff 0xff

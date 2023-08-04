@@ -1,10 +1,11 @@
 encoding utf-8
 symbol point
 name plus
-name-pt mais
-name-ru плюс
-name-ro plus
+name-de Plus
 name-hu plusz
+name-pt mais
+name-ro plus
+name-ru плюс
 th_name plus
 orientation no
 color 0xffffff

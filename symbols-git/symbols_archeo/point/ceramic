@@ -1,15 +1,15 @@
 encoding utf-8
 symbol point
 name ceramic
-name-it ceramica
-name-es cerámica
-name-pt cerâmica
-name-hu kerámia
-name-ru керамика
-name-fr ceramique
-name-sk keramika
-name-ro ceramică
 name-de Keramik
+name-es cerámica
+name-fr ceramique
+name-hu kerámia
+name-it ceramica
+name-pt cerâmica
+name-ro ceramică
+name-ru керамика
+name-sk keramika
 th_name ceramic
 color 0x66ffcc
 path

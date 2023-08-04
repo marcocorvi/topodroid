@@ -1,8 +1,9 @@
 encoding utf-8
 symbol area
 name icing-area
-name-pt área_congelável
+name-de Eisfläche
 name-hu jeges_terület
+name-pt área_congelável
 name-ru область_обледенения
 th_name icing-area
 group snow

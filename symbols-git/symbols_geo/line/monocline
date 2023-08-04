@@ -1,14 +1,14 @@
 encoding utf-8
 symbol line
 name monocline
-name-it monoclinale
-name-es monoclinal
-name-pt monoclinal
-name-ru моноклиналь
-name-fr monoclinal
-name-ro monoclinal
 name-de Monoklinale
+name-es monoclinal
+name-fr monoclinal
 name-hu monoklinális
+name-it monoclinale
+name-pt monoclinal
+name-ro monoclinal
+name-ru моноклиналь
 th_name monocline
 group fold
 color 0xff3399 0xff

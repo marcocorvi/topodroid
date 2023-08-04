@@ -1,14 +1,14 @@
 encoding utf-8
 symbol area
 name gneiss
-name-it gneiss
-name-es gneis
-name-pt gnaisse
-name-ru гнейс
-name-ro gnais
-name-fr gneiss
 name-de Gneis
+name-es gneis
+name-fr gneiss
 name-hu gneisz
+name-it gneiss
+name-pt gnaisse
+name-ro gnais
+name-ru гнейс
 th_name gneiss
 color 0xcc6666 0xcc
 bitmap 40 22

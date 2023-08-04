@@ -1,11 +1,11 @@
 encoding utf-8
 symbol point
 name flowstone-floor
-name-pt chão_de_escorrimento
-name-ru натечный_пол
-name-ro cruste_podea
 name-de Sinterboden
 name-hu cseppköves_talaj
+name-pt chão_de_escorrimento
+name-ro cruste_podea
+name-ru натечный_пол
 th_name flowstone:floor
 group flowstone
 orientation no

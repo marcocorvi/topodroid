@@ -1,10 +1,11 @@
 encoding utf-8
 symbol point
 name archeo-excavation
-name-pt escavação_arqueológica
-name-ru археологические_раскопки
-name-ro săpătură_arheologică
+name-de Ausgrabung
 name-hu régészeti_ásatás
+name-pt escavação_arqueológica
+name-ro săpătură_arheologică
+name-ru археологические_раскопки
 th_name archeo-excavation
 group archeo
 orientation no

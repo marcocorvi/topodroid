@@ -1,18 +1,18 @@
 encoding utf-8
 symbol area
 name clay
-name-cn 泥土
-name-es arcilla
-name-pt argila
-name-it argilla
-name-fr argile
-name-de Lehmfläche
-name-ru глина
 name-bg глина
+name-cn 泥土
+name-de Lehmfläche
+name-es arcilla
 name-fa خاک
+name-fr argile
 name-hu agyag
-name-sk hlina
+name-it argilla
+name-pt argila
 name-ro argilă
+name-ru глина
+name-sk hlina
 th_name clay
 group clay
 color 0x99ff00 0x66

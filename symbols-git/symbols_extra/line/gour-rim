@@ -2,11 +2,11 @@ encoding utf-8
 symbol line
 name gour-rim
 name-de Sintersee-Rand
+name-hu mésztufa_színlő
 name-pt borda_de_travertino
 name-ro buză_de_gur
 name-ru край_гура
 name-sk obruč
-name-hu mésztufa_színlő
 th_name gour-rim
 group border
 color 0xccff33 0xff

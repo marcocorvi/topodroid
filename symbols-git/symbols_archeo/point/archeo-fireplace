@@ -1,6 +1,7 @@
 encoding utf-8
 symbol point
 name fireplace
+name-de Feuerstelle
 name-hu tűzrakóhely
 name-pt fogueira
 name-ro loc_pentru_foc

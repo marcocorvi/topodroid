@@ -1,15 +1,15 @@
 encoding utf-8
 symbol point
 name notch
-name-it incastro
-name-es muesca
-name-pt entalhe
-name-ru вырез
-name-fr entaille
-name-sk zárez
-name-ro șanț
 name-de Kerbe
+name-es muesca
+name-fr entaille
 name-hu bemetszés
+name-it incastro
+name-pt entalhe
+name-ro șanț
+name-ru вырез
+name-sk zárez
 th_name notch
 color 0x33ffcc
 path

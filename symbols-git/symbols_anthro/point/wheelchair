@@ -1,9 +1,10 @@
 encoding utf-8
 symbol point
 name wheelchair
+name-de Rollstuhl
+name-hu kerekesszék
 name-pt cadeira_de_rodas
 name-ro scaun_cu_rotile
-name-hu kerekesszék
 th_name wheelchair
 orientation no
 color 0xffffff

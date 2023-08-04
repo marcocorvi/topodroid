@@ -1,14 +1,14 @@
 encoding utf-8
 symbol point
 name gravel
-name-it ghiaia
-name-es grava
-name-pt cascalho
-name-ru гравелит
-name-fr gravier
-name-ro pietriș
 name-de Schotter
+name-es grava
+name-fr gravier
 name-hu kavics
+name-it ghiaia
+name-pt cascalho
+name-ro pietriș
+name-ru гравелит
 th_name gravel
 color 0xcc9966
 path

@@ -1,11 +1,12 @@
 encoding utf-8
 symbol point
 name minus
+name-de Minus
 name-fr moins
-name-pt menos
-name-ru минус
-name-ro minus
 name-hu mínusz
+name-pt menos
+name-ro minus
+name-ru минус
 th_name minus
 orientation no
 color 0xffffff

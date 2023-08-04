@@ -4,13 +4,13 @@ name mud
 name-de Schlamm
 name-es barro
 name-fr boue
+name-hu sár
 name-it fango
 name-pt lama
-name-ru грязь
-name-ua грязь
-name-hu sár
-name-sk bahno
 name-ro nămol
+name-ru грязь
+name-sk bahno
+name-ua грязь
 th_name mud
 group mud
 orientation no

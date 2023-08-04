@@ -1,14 +1,14 @@
 encoding utf-8
 symbol line
 name fold
-name-it piega
-name-es pliegue
-name-pt dobra
-name-ru складка
-name-fr pli
-name-ro cută
 name-de Faltung
+name-es pliegue
+name-fr pli
 name-hu gyűrődés
+name-it piega
+name-pt dobra
+name-ro cută
+name-ru складка
 th_name fold
 group fold
 color 0x00cc33 0xff
