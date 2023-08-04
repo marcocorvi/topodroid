@@ -3002,7 +3002,7 @@ public class TDSetting
   public static boolean handleLocalUserMan( /* Context my_app, */ String man, boolean download ) 
   {
     int idx = Integer.parseInt( man ); // no throw
-    if ( idx > 0 && idx < 7 ) { 
+    if ( idx > 0 && idx < 8 ) { 
       if ( download && TDandroid.checkInternet( TDInstance.context ) ) { // download user manual 
        	int[] res = { // url resource array
 	         0, // english
@@ -3012,6 +3012,7 @@ public class TDSetting
                  R.string.user_man_hu,
 	         R.string.user_man_fr,
 	         R.string.user_man_pt,
+	         R.string.user_man_cn,
 	       };
         String url = TDInstance.getResources().getString( res[idx] );
        	if ( url != null && url.length() > 0 ) {

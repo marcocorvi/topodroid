@@ -417,9 +417,12 @@ public class GMActivity extends Activity
     while( k < list.size() && list.get(k).mGroup <= 0 ) ++k;
     
     for ( int j=k; j<list.size(); ++j ) {
-      if ( list.get(j).mGroup > 0 ) {
-        if ( list.get(j).mGroup != group ) {
+      long jgroup = list.get(j).mGroup;
+      if ( jgroup > 0 ) {
+        // TDLog.v(" J " + j + "/" + list.size() + " group " + jgroup + " prev " + group );
+        if ( jgroup != group ) {
           if ( cnt > 1 ) { // 2019.09.23 at least two data in the group
+            // TDLog.v("Setting group " + group + " cnt " + cnt + " from " + k + " to " + j);
             TDVector[] g = new TDVector[cnt];
             TDVector[] m = new TDVector[cnt];
             float[]  e = new float[cnt];
@@ -438,6 +441,7 @@ public class GMActivity extends Activity
           }
           group = list.get(j).mGroup;
           cnt = 1;
+          k = j;
         } else { 
           cnt ++;
         }

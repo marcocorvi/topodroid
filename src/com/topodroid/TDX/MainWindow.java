@@ -1572,6 +1572,9 @@ public class MainWindow extends Activity
         // } else if ( "sl".equals( lang ) ) {
         //   res = R.string.man_version_sl;
         //   man = R.string.user_man_sl;
+        } else if ( "cn".equals( lang ) ) {
+          res = R.string.man_version_cn;
+          man = R.string.user_man_cn;
         }
         if ( res > 0 ) {
           int current = Integer.parseInt( getResources().getString( res ) );
