@@ -283,7 +283,7 @@
      <item name="hungarian">Magyar</item>
      <item name="french">Français</item>
      <item name="portuguese">Português</item>
-     <item name="chinese">TODO</item>
+     <item name="chinese">中文</item>
      <!-- item name="slovak">Slovenčina</item -->
   </string-array>
   <string-array name="localUserManValue" translatable="false">
