@@ -74,7 +74,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="make_walls">Wände</string -->
   <string name="missing_station">Kein Messpunkt</string>
   <string name="station_not_found">Messpunkt nicht gefunden</string>
-  <string name="station_coords" copyable="all">E %1$.2f N %2$.2f Z %3$.2f</string>
+  <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
   <string name="shot_not_found">Keine Messung gefunden</string>
   <string name="bad_sibling">Messzug weicht stark ab</string>
   <string name="bad_station">Ungültiger Messpunkt: %1$s</string>
@@ -322,8 +322,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="splays">Hilfszüge</string>
   <!-- UNUSED string name="fmt_listen">WARTEN | %1$s</string -->
   <string name="fmt_id">ID %1$s</string>
-  <string name="fmt_latitude_dd_dms" copyable="pt">Geogr. Breite: %1$s [%2$s]</string>
-  <string name="fmt_longitude_dd_dms" copyable="pt">Geogr. Länge: %1$s [%2$s]</string>
+  <string name="fmt_latitude_dd_dms">Geogr. Breite: %1$s [%2$s]</string>
+  <string name="fmt_longitude_dd_dms">Geogr. Länge: %1$s [%2$s]</string>
   <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string -->
   <string name="fixed">fixiert</string>
   <string name="painted">gezeichnet</string>
@@ -1112,7 +1112,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="title_photo">Foto/Messungen</string>
   <string name="title_photo_comment">Foto Kommentar</string>
   <string name="title_photo_list">Fotos</string>
-  <string name="title_photo_view" copyable="fr">Foto</string>
+  <string name="title_photo_view">Foto</string>
   <string name="title_plot_save">Skizze speichern als</string>
   <!-- UNUSED string name="title_plot_merge">Skizze einfügen</string -->
   <!-- UNUSED string name="title_plot_reload">Skizzenbackup wiederherstellen</string -->
@@ -1377,7 +1377,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_edit_altitude_summary">Erlaube die Höhenangaben zu bearbeiten</string>
   <string name="pref_fine_location_title">Genaue Position [s]</string>
   <string name="pref_fine_location_summary">Wartezeit bis zur genauen Position [s]</string>
-  <string name="pref_geoimport_app_title" copyable="all">GPS App</string>
+  <string name="pref_geoimport_app_title">GPS App</string>
   <string name="pref_geoimport_app_summary">Separate GPS App verwenden zur Positionsbestimmung</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Durchschnitt</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Ob GPSAveraging benutzen</string -->
@@ -1654,7 +1654,6 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_unit_angle_summary">Masseinheit für Winkel</string>
   <string name="pref_unit_location_title">Format</string>
   <string name="pref_unit_location_summary">Koordinatenformat</string>
-
   <!-- UNUSED string name="pref_plot_walls_title">Automatische Wände</string -->
   <!-- UNUSED string name="pref_walls_type_title">Wandtyp</string -->
   <!-- UNUSED string name="pref_walls_type_summary">Wandtyp</string -->
@@ -1668,7 +1667,6 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="pref_walls_concave_summary">Maximale Konkavität [%]</string -->
   <!-- UNUSED string name="pref_walls_xstep_title">Abstand Zwischenpunkte</string -->
   <!-- UNUSED string name="pref_walls_xstep_summary">Abstand der automatischen Zwischenpunkte [m]</string -->
-
   <string name="pref_3d_sketch_title">3D Modellierung</string>
   <string name="pref_3d_sketch_summary">3D Modellierung aktivieren (nur debug version)</string>
   <string name="pref_sketch_splay_buffer_title">Profil-Hilfszug Puffer</string>
@@ -1846,15 +1844,18 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="info_shot_value">Messzüge %1$d, Hilfszüge %2$d</string>
   <string name="info_station_value">%1$d</string>
   <string name="info_length_value">%1$.1f m</string>
+  <string name="info_surface_value">%1$.1f m</string>
   <string name="info_depth_value">%1$.1f m</string>
   <!-- TRYME string name="info_volume_value_tryme">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
   <string name="info_volume_value">%1$.0f m³</string>
   <string name="info_east_value">W %1$.1f E %2$.1f</string>
   <string name="info_north_value">S %1$.1f N %2$.1f</string>
   <string name="info_z_value">%1$.1f  %2$.1f</string>
+  <string name="info_origin_value">x %1$.0f y %2$.0f z %3$.0f</string>
   <string name="info_origin_none">undefiniert</string>
   <string name="info_lonlat_geovalue">lon %1$.7f lat %2$.7f</string>
   <string name="info_lonlat_prjvalue">lon %1$.1f lat %2$.1f</string>
+  <string name="info_radii_value">EW %1$.1f NS %2$.1f</string>
   <string name="legs_surface">Oberfläche</string>
   <string name="legs_duplicate">Duplikate</string>
   <string name="legs_commented">Kommentiert</string>
@@ -1871,6 +1872,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="clear">Clear</string -->
   <string name="plan_proj">Plan</string>
   <string name="profile_proj">Seitenriss</string>
+  <string name="dist_no_path">%1$s %2$s: D %3$.2f (%4$.2f %5$.2f %6$.2f) %7$.2f %8$.2f</string>
   <string name="dist_path">%1$s %2$s: D %3$.2f (%4$.2f %5$.2f %6$.2f) %7$.2f %8$.2f Pfad %9$.2f</string>
   <!-- UNUSED string name="measure">measure</string -->
   <!-- UNUSED string name="style_stroke">Stroke</string -->
@@ -1885,15 +1887,19 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="dem_loading">Lade Oberfläche &#8230; bitte warten</string>
   <string name="dem_failed">Laden des DEM fehlgeschlagen</string>
   <string name="dem_ok">Lese DEM Daten</string>
+  <string name="dem">DEM</string>
   <string name="texture_load">DTM laden</string>
   <string name="texture_failed">Laden des DTM fehlgeschlagen</string>
   <string name="texture_ok">Lese DTM Daten</string>
+  <string name="texture">DTM</string>
   <!-- UNUSED string name="sketch_load">Load</string -->
   <!-- UNUSED string name="sketch_failed">Failed sketch loading</string -->
   <!-- UNUSED string name="sketch_ok">Read sketch data</string -->
   <string name="ctitle">%1$s  Clino: %2$.0f  Azimut: %3$.0f</string>
   <string name="ctitle_surface_alpha">Oberflächenmodell</string>
   <!-- UNUSED string name="ctitle_sketches">Sketches</string -->
+  <string name="ctitle_sketch_h">[H]</string>
+  <string name="ctitle_sketch_v">[V]</string>
   <string name="ctitle_legs">Sichtbarkeit Messzüge</string>
   <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
   <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
@@ -1905,12 +1911,19 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="survey_list">VERMESSUNGEN</string>
   <string name="survey_legs"> Messzüge: </string>
   <string name="survey_legs_length"> Länge Messzüge: </string>
-  <string name="survey_splays" copyable="all"> Hilfszüge: </string>
+  <string name="survey_splays"> Hilfszüge: </string>
   <string name="survey_splays_length"> Länge Hilfszüge: </string>
+  <string name="cave_east"> E: %1$.2f</string>
+  <string name="cave_north"> N: %1$.2f</string>
+  <string name="cave_vert"> Z: %1$.2f</string>
   <string name="cave_distance"> 3D-Distanz: %1$.2f</string>
   <string name="horz_distance"> 2D horizontale Distanz: %1$.2f</string>
   <string name="cave_length"> Höhlenlänge: %1$.1f D+ %2$.1f D- %3$.1f</string>
   <string name="cave_angle"> Azimut: %1$.1f  Clino: %2$.1f</string>
+  <string name="east">E</string>
+  <string name="north">N</string>
+  <string name="west">W</string>
+  <string name="south">S</string>
   <!-- UNUSED string name="SURVEYS">S U R V E Y S</string -->
   <string name="INFO">I N F O</string>
   <string name="STATIONS">M E S S P U N K T</string>
@@ -1982,6 +1995,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="cno_file">No file %1$s\n</string -->
   <string name="empty_survey">Leere Vermessung %1$s\n</string>
   <string name="viewing_at">Anzeige mit Clino %1$.0f Azimut %2$.0f</string>
+  <string name="cpref_dem3d">DEM</string>
   <string name="cpref_walls3d">WANDMODELL</string>
   <!-- UNUSED string name="cpref_base_path_title">App base path</string -->
   <!-- UNUSED string name="cpref_base_path_summary">Directory containing the survey files</string -->
@@ -2027,6 +2041,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="cpref_split_random_summary">Kleiner zufälliger Vektor zu Hilfszügen hinzufügen [0.1]</string>
   <string name="cpref_split_stretch_title">Wandpunkte strecken</string>
   <string name="cpref_split_stretch_summary">Wandpunkte entlang der Messzüge strecken [0.1]</string>
+  <string name="cpref_powercrust_delta_title">Powercrust Delta</string>
   <string name="cpref_powercrust_delta_summary">Hilfszüge ausschliessen, die von nahen Hilfszügen zu verschieden sind [0.1]</string>
   <!--  string name="cpref_convex_hull_title">Convexe Hülle</string -->
   <!-- UNUSED string name="TopoGLPerms">Permissions</string -->
@@ -2040,6 +2055,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="help_rose_3d">Rosendiagramm</string>
   <string name="help_reset_3d">3D-Ansicht zurücksetzen</string>
   <string name="help_viewpoint_3d">3D Ansicht</string>
+  <string name="help_alpha_3d">D.E.M.</string>
   <string name="help_wall_3d">3D Modell</string>
   <!-- UNUSED string name="help_temperature">Temperatur</string -->
   <string name="help_sketch_3d">3D Skizzen Erhöhung</string>
