@@ -1259,13 +1259,13 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="title_settings_3d">TopoDroid 3D néző beállítások</string>
     <string name="title_settings_dem">TopoDroid DEM beállítások</string>
     <string name="title_settings_walls3d">TopoDroid 3D modell beállítások</string>
-    <string name="title_settings_geek">TopoDroid geek beállítások</string>
-    <string name="title_settings_geek_survey">Geek mérés beállítások</string>
-    <string name="title_settings_geek_splay">Geek sün beállítások</string>
-    <string name="title_settings_geek_plot">Geek vázlat beállítások</string>
-    <string name="title_settings_geek_line">Geek vonal beállítások</string>
-    <string name="title_settings_geek_device">Geek műszer beállítások</string>
-    <string name="title_settings_geek_import">Geek import beállítások</string>
+    <string name="title_settings_geek">Szakértői beállítások</string>
+    <string name="title_settings_geek_survey">Szakértői mérés beállítások</string>
+    <string name="title_settings_geek_splay">Szakértői sün beállítások</string>
+    <string name="title_settings_geek_plot">Szakértői vázlat beállítások</string>
+    <string name="title_settings_geek_line">Szakértői vonal beállítások</string>
+    <string name="title_settings_geek_device">Szakértői műszer beállítások</string>
+    <string name="title_settings_geek_import">Szakértői import beállítások</string>
     <string name="title_settings_log">TopoDroid naplózás beállítások</string>
 
     <string name="title_shift">Váltás</string>
@@ -1329,7 +1329,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
   <string name="pref_cat_device">MŰSZEREK</string>
   <string name="pref_cat_cave3d">3D MEGJELENÍTŐ</string>
-  <string name="pref_cat_geek">SAJÁT BEÁLLÍTÁSOK</string>
+  <string name="pref_cat_geek">SZAKÉRTŐI BEÁLLÍTÁSOK</string>
   <string name="pref_cat_sketch">3D VÁZLAT</string>
   <!-- UNUSED string name="pref_cat_log">NAPLÓZÁSOK</string -->
 
