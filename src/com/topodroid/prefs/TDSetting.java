@@ -244,7 +244,8 @@ public class TDSetting
   public static boolean mTherionConfig = false; // whether to write survey.thconfig file
   public static boolean mTherionXvi    = false; // whether to add xvi image to th2
   public static boolean mCompassSplays = true;  // whether to add splays to Compass export
-                                                // whether to add splays to Walls export instead of projected dimensions
+  public static boolean mWallsSplays   = true;  // whether to add splays to Walls export instead of wall shots
+  // public static int     mWallsUD     = 80;      // walls UD threshold: Up/Down (angle - degrees)
   public static boolean mVTopoSplays = true;    // whether to add splays to VisualTopo export
   public static boolean mVTopoLrudAtFrom = false; 
   public static boolean mVTopoTrox   = false; 
@@ -1112,6 +1113,11 @@ public class TDSetting
     mExportStationsPrefix =  prefs.getBoolean( keyExpDat[0], bool(defExpDat[0]) ); // DISTOX_STATION_PREFIX
     mCompassSplays     = prefs.getBoolean(     keyExpDat[1], bool(defExpDat[1]) ); // DISTOX_COMPASS_SPLAYS
     mSwapLR            = prefs.getBoolean(     keyExpDat[2], bool(defExpDat[2]) ); // DISTOX_SWAP_LR
+
+    String[] keyExpSrv = TDPrefKey.EXPORT_SRV;
+    String[] defExpSrv = TDPrefKey.EXPORT_SRVdef;
+    mWallsSplays       = prefs.getBoolean(     keyExpSrv[0], bool(defExpSrv[0]) ); // DISTOX_WALLS_SPLAYS
+    // mWallsUD           = tryInt( prefs, keyExpSrv[1], defExpSrv[1] );  // DISTOX_WALLS_UD
 
     String[] keyExpTro = TDPrefKey.EXPORT_TRO;
     String[] defExpTro = TDPrefKey.EXPORT_TROdef;
@@ -2102,6 +2108,21 @@ public class TDSetting
     return null;
   }
 
+  private static String updatePrefSrv( TDPrefHelper hlp, String k, String v )
+  {
+    // TDLog.v("update pref DAT: " + k );
+    String[] key = TDPrefKey.EXPORT_SRV;
+    String[] def = TDPrefKey.EXPORT_SRVdef;
+    if ( k.equals( key[ 0 ] ) ) { // DISTOX_WALLS_SPLAYS (bool)
+      mWallsSplays  = tryBooleanValue( hlp, k, v, bool(def[0]) );   
+    // } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_WALLS_UD
+    //   mWallsUD = tryIntValue( hlp, k, v, def[1] );
+    } else {
+      TDLog.Error("missing EXPORT SRV key: " + k );
+    }
+    return null;
+  }
+
   private static String updatePrefTro( TDPrefHelper hlp, String k, String v )
   {
     // TDLog.v("update pref TRO: " + k );
@@ -3053,6 +3074,8 @@ public class TDSetting
       String eol = mSurvexEol.equals("\r\n")? eol = "\\r\\n" : "\\n";
       pw.printf(Locale.US, "Survex: eol \"%s\", splay %c, LRUD %c \n", eol, tf(mSurvexSplay), tf(mSurvexLRUD) );
       pw.printf(Locale.US, "Compass: swap_LR %c, prefix %c, splays %c \n", tf(mSwapLR), tf(mExportStationsPrefix), tf(mCompassSplays) );
+      // pw.printf(Locale.US, "Walls: splays %c, wallsUD %d \n", tf(mWallsSplays), mWallsUD );
+      pw.printf(Locale.US, "Walls: splays %c \n", tf(mWallsSplays) );
       pw.printf(Locale.US, "VisualTopo: splays %c, at-from %c, trox %c \n", tf(mVTopoSplays), tf(mVTopoLrudAtFrom), tf(mVTopoTrox) ); 
       pw.printf(Locale.US, "Ortho LRUD %c, angle %.2f, cos %.2f \n", tf(mOrthogonalLRUD), mOrthogonalLRUDAngle, mOrthogonalLRUDCosine );
       pw.printf(Locale.US, "Therion: config %c, maps %c, stations %c, splays %c, xvi %c, scale %d \n",
@@ -3332,6 +3355,13 @@ public class TDSetting
             mSwapLR = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_SWAP_LR", mSwapLR );
             mExportStationsPrefix = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_STATION_PREFIX", mExportStationsPrefix );
             mCompassSplays = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_COMPASS_SPLAYS", mCompassSplays );
+          }
+          continue;
+        }
+        if ( line.startsWith("Walls") ) {
+          if ( vals.length > 2 ) {
+            mWallsSplays = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_WALLS_SPLAYS", mWallsSplays );
+            // mWallsUD = getInt( vals, 4, 80 ); setPreference( editor, "DISTOX_WALLS_UD", mWallsUD );
           }
           continue;
         }

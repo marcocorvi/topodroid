@@ -12,8 +12,9 @@
 package com.topodroid.num;
 
 import com.topodroid.utils.TDMath;
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.common.ExtendType;
+import com.topodroid.TDX.TDAzimuth;
 
 
 import java.util.ArrayList;
@@ -42,6 +43,9 @@ public class NumStation extends NumSurveyPoint
                        //                     or "barrier": -1 barrier, -2 behind
   public boolean mBarrierAndHidden;
   // NumShortpath mShortpathDist;  // loop closure distance (shortest-path algo)
+
+  private float mWrapAzimuth1 = 0;   // start wrap-azimuth
+  private float mWrapAzimuth2 = 360; // end wrap-azimuth
 
   // int mReductionType = STATION_UNKNOWN; // reduction type is used only for the statistics - it is passed directly to TDNum.addToStat() without storing in NumStation
 
@@ -179,6 +183,7 @@ public class NumStation extends NumSurveyPoint
   }
 
   /** compute the azimuths of the legs at this station
+   *  in general the azimuths start with a negative value and end with a value greater than 360
    */
   void setAzimuths()
   {
@@ -217,14 +222,13 @@ public class NumStation extends NumSurveyPoint
         temp.add( new NumAzimuth( a1.mAzimuth+270,   Float.NaN ) );
         temp.add( new NumAzimuth( a1.mAzimuth+360,   a1.mExtend ) );
       }
-    } else {
+    } else { // sz > 1
       NumAzimuth a3 = mLegs.get( sz-1 );
-      float azimuth = (a1.mAzimuth + a3.mAzimuth + 360)/2; 
+      mWrapAzimuth1 = (a1.mAzimuth + a3.mAzimuth)/2 - 180;
+      mWrapAzimuth2 = mWrapAzimuth1 + 360;
+      // TDLog.v("Station " + name + " legs " + sz + " from " + a1.mAzimuth + " to " + a3.mAzimuth + " azimuth " + mWrapAzimuth1 );
 
-      if ( azimuth > 360 ) { // make sure to start with a negative azimuth
-        temp.add( new NumAzimuth( a3.mAzimuth-360, a3.mExtend ) );
-      }
-      temp.add( new NumAzimuth( azimuth-360, Float.NaN ) ); // bi-secant
+      temp.add( new NumAzimuth( mWrapAzimuth1, Float.NaN ) );
       temp.add( a1 );
       for (int k=1; k<sz; ++k ) {
         NumAzimuth a2 = mLegs.get( k );
@@ -232,11 +236,7 @@ public class NumStation extends NumSurveyPoint
         temp.add( a2 );
         a1 = a2;
       }
-      temp.add( new NumAzimuth( azimuth, 0 ) ); // bi-secant (sz-1)..0
-      if ( azimuth < 360 ) {
-        a1 = mLegs.get( 0 );
-        temp.add( new NumAzimuth( a1.mAzimuth+360, a1.mExtend ) );
-      }
+      temp.add( new NumAzimuth( mWrapAzimuth2, Float.NaN ) );
     }
     mLegs = temp;
     // for ( NumAzimuth a : mLegs ) {
@@ -257,21 +257,15 @@ public class NumStation extends NumSurveyPoint
     // }
     if ( e < ExtendType.EXTEND_IGNORE ) {
       return e;
-    } else {
-      e = ExtendType.EXTEND_VERT;
+    } else { // extend as for legs 2023-08-26
+      e = (float)( TDAzimuth.computeLegExtend( b ) );
+      // e = ExtendType.EXTEND_VERT;
     }
     // if ( e > ExtendType.EXTEND_RIGHT ) e = ExtendType.EXTEND_VERT;
 
     if ( mLegs.size() == 0 ) return e;
+    if ( b < mWrapAzimuth1 ) { b += 360; } else if ( b > mWrapAzimuth2 ) { b -= 360; }
     NumAzimuth a1 = mLegs.get(0);
-    // if ( mLegs.size() == 1 ) {
-    //   if ( ! Float.isNaN( a1.mExtend ) ) {
-    //     float ret = TDMath.cosd( b - a1.mAzimuth ) * a1.mExtend;
-    //     TDLog.v( name + " compute cosine: legs " + mLegs.size() + " " + b + " " + a1.mAzimuth + " ext " + a1.mExtend + " = " + ret );
-    //     return ret;
-    //   } 
-    //   return e;
-    // }
     for (int k=1; k<mLegs.size(); k++ ) {
       NumAzimuth a2 = mLegs.get(k);
       if ( b >= a1.mAzimuth && b < a2.mAzimuth ) {
@@ -289,14 +283,8 @@ public class NumStation extends NumSurveyPoint
       }
       a1 = a2;
     }
-    // NumAzimuth a2 = mLegs.get(0);;
-    // if ( b >= a1.mAzimuth && b < a2.mAzimuth+360 ) {
-    //   if ( ! Float.isNaN( a2.mExtend ) ) {
-    //     return TDMath.cosd( a2.mAzimuth - b ) * a2.mExtend;
-    //   } else if ( ! Float.isNaN( a1.mExtend ) ) {
-    //     return TDMath.cosd( b - a1.mAzimuth ) * a1.mExtend;
-    //   }
-    // }
+    // at this point the splay azimuth is either less than azimuth(0) or larger-or-equal then azimuth(size-1)
+    // which should not be, because azimuth(0) < 0 and azimuth(sz-1) > 360
     return e;
   }
 

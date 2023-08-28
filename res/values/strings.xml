@@ -1246,6 +1246,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="title_settings_png">PNG export settings</string -->
     <string name="title_settings_gpx">GPX export settings</string>
     <string name="title_settings_kml">KML export settings</string>
+    <string name="title_settings_srv">Walls export settings</string>
 
     <string name="title_settings_sketch">3d sketch settings</string>
     <string name="title_settings_survey">Survey settings</string>
@@ -1324,6 +1325,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_cat_exportth"  translatable="false">Therion</string>
   <string name="pref_cat_exportdat" translatable="false">Compass</string>
   <string name="pref_cat_exporttro" translatable="false">VisualTopo</string>
+  <string name="pref_cat_exportsrv" translatable="false">Walls</string>
   <string name="pref_cat_exportsvg" translatable="false">SVG</string>
   <string name="pref_cat_exportdxf" translatable="false">DXF</string>
   <string name="pref_cat_exportshp" translatable="false">Shapefile</string>
@@ -1408,6 +1410,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_station_prefix_summary">Export station prefix [Compass/cSurvey/WinKarst]</string>
   <string name="pref_compass_splays_title">Compass splays</string>
   <string name="pref_compass_splays_summary">Export splays in Compass files</string>
+  <string name="pref_walls_splays_title">Walls splays</string>
+  <string name="pref_walls_splays_summary">Export splays in Walls files</string>
   <string name="pref_vtopo_splays_title">VisualTopo splays</string>
   <string name="pref_vtopo_splays_summary">Export splays in VisualTopo files</string>
   <string name="pref_vtopo_lrud_title">LRUD at From</string>

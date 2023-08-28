@@ -293,7 +293,7 @@ public class ExportDialogShot extends MyDialog
         break;
       case TDConst.SURVEY_POS_WALLS: // Walls
         {
-          TDSetting.mCompassSplays = ((CheckBox) findViewById( R.id.walls_splays )).isChecked();
+          TDSetting.mWallsSplays = ((CheckBox) findViewById( R.id.walls_splays )).isChecked();
         }
         break;
       case TDConst.SURVEY_POS_WINKARST: // Winkarst
@@ -353,7 +353,7 @@ public class ExportDialogShot extends MyDialog
     ((CheckBox) findViewById( R.id.vtopo_splays )).setChecked( TDSetting.mVTopoSplays );
     ((CheckBox) findViewById( R.id.vtopo_lrud )).setChecked( TDSetting.mVTopoLrudAtFrom );
 
-    ((CheckBox) findViewById( R.id.walls_splays )).setChecked( TDSetting.mCompassSplays );
+    ((CheckBox) findViewById( R.id.walls_splays )).setChecked( TDSetting.mWallsSplays );
 
     ((CheckBox) findViewById( R.id.csv_rawdata )).setChecked( TDSetting.mCsvRaw );
 

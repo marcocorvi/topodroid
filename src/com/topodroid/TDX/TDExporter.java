@@ -1438,6 +1438,7 @@ public class TDExporter
       }
     } else if ( item_extend != extend || ! splay_extend ) {
       pw.format("    extend %s\n", therion_extend[1+item_extend] );
+      // if ( splay_stretch != 0 ) pw.format(Locale.US, "    extend %d\n", (int)(100 + 100 * splay_stretch ) );
       return 1; // extend <- item_extend, splay_extend <- true
     }
     return -1;
@@ -1468,7 +1469,11 @@ public class TDExporter
         String subdir = TDInstance.survey + "/tdr"; // plot files
         String plotname =  info.name + "-" + plt.name;
         if ( TDFile.hasMSfile( subdir, plotname + ".tdr" ) ) {
-          pw.format("  # map m%s -projection %s\n", plt.name, PlotType.projName( plt.type ) );
+          if ( plt.type == PlotType.PLOT_PROJECTED ){
+            pw.format("  # map m%s -projection [%s %d]\n", plt.name, PlotType.projName( plt.type ) , (int) plt.azimuth);
+          } else {
+            pw.format("  # map m%s -projection %s\n", plt.name, PlotType.projName( plt.type ) );
+          }
           pw.format("  #   %s\n", plotname );
           for ( int k=1; k<=scrap_nr; ++k) pw.format("  #   %s%d\n", plotname, scrap_nr );
           pw.format("  # endmap\n");
@@ -1491,6 +1496,22 @@ public class TDExporter
     } else {
       pw.format("    %s %s ", from, to );
     }
+  }
+
+  /** possible output the fractional extend
+   * @param pw       output writer
+   * @param item     work item 
+   * @return current stretch
+   */
+  static private int checkThStretch( PrintWriter pw, DBlock item )
+  {
+    int item_stretch = item.hasStretch()? (int)(100 + 100 * item.getStretch() ) : 100;
+    if ( item_stretch < 0 ) {
+      item_stretch = 0;
+    } else if ( item_stretch > 200 ) {
+      item_stretch = 200;
+    }
+    return item_stretch;
   }
 
   /** export survey data in Therion format (.th)
@@ -1675,7 +1696,8 @@ public class TDExporter
 
       boolean splay_extend = true;
       int extend = 0;  // current extend
-      int extend_ratio = 100; // 100 percent, ie no shrink nor stretch
+      int stretch = 100; // therion value for no stretch, which corresponds to topodroid 0
+      // int extend_ratio = 100; // 100 percent, ie no shrink nor stretch
       AverageLeg leg = new AverageLeg(0);
       HashMap<String, LRUD> lruds = null;
       if ( TDSetting.mSurvexLRUD ) {
@@ -1748,7 +1770,8 @@ public class TDExporter
               splay_extend = false;
             } else if ( tmp == 1 ) {
               splay_extend = true;
-              extend = item.getIntExtend();
+              extend  = item.getIntExtend();
+              // item_stretch = checkThStretch( pw, item );
             }
             
             writeThStations( pw, from, ( item.isXSplay() ? "-" : "." ), item.isCommented() );
@@ -1766,24 +1789,44 @@ public class TDExporter
               }
             }
             ref_item = item;
-            if ( item.getIntExtend() != extend || ! splay_extend ) {
-              extend = item.getIntExtend();
+            int item_stretch = checkThStretch( pw, item );
+            int item_extend  = item.getIntExtend();
+            int tmp_extend   = extend;
+            if ( item_extend != tmp_extend ) {
+              tmp_extend = item_extend;
+            }
+            if ( tmp_extend == 0 ) {
+              if ( item_stretch > 100 ) {
+                tmp_extend = 1;
+                item_stretch = item_stretch - 100;
+              } else if ( item_stretch < 100 ) {
+                tmp_extend = -1;
+                item_stretch = 100 - item_stretch;
+              }
+            } 
+            if ( item_stretch != stretch ) {
+              stretch = item_stretch;
+              pw.format(Locale.US, "    extend %d\n", stretch );
+            }
+            if ( tmp_extend != extend || ! splay_extend )
+            {
+              extend = tmp_extend;
               pw.format("    extend %s\n", therion_extend[1+extend] );
               // handle extend stretch
-              if ( item.hasStretch() ) {
-                int ratio = (int)( 100 * (1 + item.getStretch() ) );
-                if ( ratio < 0 ) { ratio = 0; }
-                else if ( ratio > 200 ) { ratio = 200; }
-                if ( ratio != extend_ratio ) { 
-                  extend_ratio = ratio;
-                  pw.format("    extend %d\n", extend_ratio );
-                }
-              } else if ( extend_ratio != 100 ) {
-                extend_ratio = 100;
-                pw.format("    extend %d\n", extend_ratio );
-              }
-               
+              // if ( item.hasStretch() ) {
+              //   int ratio = (int)( 100 * (1 + item.getStretch() ) );
+              //   if ( ratio < 0 ) { ratio = 0; } else if ( ratio > 200 ) { ratio = 200; }
+              //   if ( ratio != extend_ratio ) { 
+              //     extend_ratio = ratio;
+              //     pw.format("    extend %d\n", extend_ratio );
+              //   }
+              // } else if ( extend_ratio != 100 ) {
+              //   extend_ratio = 100;
+              //   pw.format("    extend %d\n", extend_ratio );
+              // }
 	      splay_extend = true;
+            } else {
+
             }
             if ( item.isDuplicate() ) {
               pw.format(therion_flags_duplicate);
@@ -3797,7 +3840,7 @@ public class TDExporter
     String uls = ( ul < 1.01f )? "Meters"  : "Feet"; // FIXME
     String uas = ( ua < 1.01f )? "Degrees" : "Grads";
 
-    HashMap<String, Integer > splay_stations = TDSetting.mCompassSplays ?  new HashMap<String, Integer >() : null;
+    HashMap<String, Integer > splay_stations = TDSetting.mWallsSplays ?  new HashMap<String, Integer >() : null;
 
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Walls " + file.getName() );
@@ -3891,14 +3934,13 @@ public class TDExporter
             //   extend = item.getIntExtend();
             //   //  FIXME pw.format("    extend %s\n", therion_extend[1+extend] );
             // }
-            if ( TDSetting.mCompassSplays ) {
+            if ( TDSetting.mWallsSplays ) {
 	      int ii = nextSplayInt( splay_stations, to );
               writeSrvStations( pw, String.format(Locale.US, "%s-%d", to, ii), to, item.isCommented() );
               pw.format(Locale.US, "%.2f\t%.1f\t%.1f", item.mLength*ul, item.mBearing*ua, item.mClino*ua );
             } else {
               writeSrvStations( pw, "-", to, item.isCommented() );
-              float len = item.mLength*ul * TDMath.cosd( item.mClino ); // walls expects projected length
-              pw.format(Locale.US, "%.2f\t%.1f\t%.1f", len, item.mBearing*ua, item.mClino*ua );
+              pw.format(Locale.US, "%.2f\t%.1f\t%.1f", item.mLength*ul, item.mBearing*ua, item.mClino*ua );
             }
             writeSrvComment( pw, item.mComment );
           }
@@ -3921,14 +3963,13 @@ public class TDExporter
             //   extend = item.getIntExtend();
             //   // FIXME pw.format("    extend %s\n", therion_extend[1+extend] );
             // }
-            if ( TDSetting.mCompassSplays ) {
+            if ( TDSetting.mWallsSplays ) {
 	      int ii = nextSplayInt( splay_stations, from );
               writeSrvStations( pw, from, String.format(Locale.US, "%s-%d", from, ii), item.isCommented() );
               pw.format(Locale.US, "%.2f\t%.1f\t%.1f", item.mLength*ul, item.mBearing*ua, item.mClino*ua );
             } else {
               writeSrvStations( pw, from, "-", item.isCommented() );
-              float len = item.mLength*ul * TDMath.cosd( item.mClino ); // walls expects projected length
-              pw.format(Locale.US, "%.2f\t%.1f\t%.1f", len, item.mBearing*ua, item.mClino*ua );
+              pw.format(Locale.US, "%.2f\t%.1f\t%.1f", item.mLength*ul, item.mBearing*ua, item.mClino*ua );
             }
             writeSrvComment( pw, item.mComment );
           } else {

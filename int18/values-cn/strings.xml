@@ -1232,6 +1232,7 @@
     <!-- UNUSED string name="title_settings_png">PNG输出设置</string -->
     <string name="title_settings_gpx">GPX格式输出设置</string>
     <string name="title_settings_kml">KML输出设置</string>
+    <!-- TODO string name="title_settings_srv">Walls export settings</string -->
 
     <string name="title_settings_sketch">TopoDroid 3d草图设置</string>
     <string name="title_settings_survey">TopoDroid测量设置</string>
@@ -1311,6 +1312,7 @@
   <!-- NO string name="pref_cat_exportth" >Therion</string -->
   <!-- NO string name="pref_cat_exportdat">Compass</string -->
   <!-- NO string name="pref_cat_exporttro">VisualTopo</string -->
+  <!-- NO string name="pref_cat_exportsrv">Walls</string -->
   <!-- NO string name="pref_cat_exportsvg">SVG</string -->
   <!-- NO string name="pref_cat_exportdxf">DXF</string -->
   <!-- NO string name="pref_cat_exportshp">Shapefile</string -->
@@ -1392,6 +1394,8 @@
   <string name="pref_station_prefix_summary">输出测点前缀[Compass]</string>
   <string name="pref_compass_splays_title">Compass辐测</string>
   <string name="pref_compass_splays_summary">输出辐测到Compass文件</string>
+  <!-- TODO string name="pref_walls_splays_title">Walls splays</string -->
+  <!-- TODO string name="pref_walls_splays_summary">Export splays in Walls files</string -->
   <string name="pref_vtopo_splays_title">VisualTopo侧线</string>
   <string name="pref_vtopo_splays_summary">在VisualTopo文件中输出侧线</string>
   <string name="pref_vtopo_lrud_title">左右上下 来自 &#8230;</string>

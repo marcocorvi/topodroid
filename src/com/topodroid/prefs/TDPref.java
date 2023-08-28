@@ -985,6 +985,23 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "Walls" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "Walls" preferences
+   */
+  public static TDPref[] makeSrvPrefs( Context ctx, TDPrefHelper hlp )
+  {
+    int cat = TDPrefCat.PREF_CATEGORY_SRV;
+    String[] key = TDPrefKey.EXPORT_SRV;
+    int[] tit = TDPrefKey.EXPORT_SRVtitle;
+    int[] dsc = TDPrefKey.EXPORT_SRVdesc;
+    String[] def = TDPrefKey.EXPORT_SRVdef;
+    return new TDPref[ ] {
+      makeCbx( cat, key[0], tit[0], dsc[0], B, def[0], ctx, hlp ),
+    };
+  }
+
   /** construct the "VisualTopo" preferences array
    * @param ctx   context
    * @param hlp   shared preferences helper

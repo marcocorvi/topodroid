@@ -1228,6 +1228,7 @@
     <!-- UNUSED string name="title_settings_png">PNG: Imposta export</string -->
     <string name="title_settings_gpx">GPX: impostazioni export</string>
     <string name="title_settings_kml">KML: Imposta export</string>
+    <!-- TODO string name="title_settings_srv">Walls export settings</string -->
 
     <string name="title_settings_sketch">Impostazione disegno 3D</string>
     <string name="title_settings_survey">Impostazione rilievo</string>
@@ -1310,6 +1311,7 @@
   <!-- NO string name="pref_cat_exportth">Therion</string -->
   <!-- NO string name="pref_cat_exportdat">Compass</string -->
   <!-- NO string name="pref_cat_exporttro">VisualTopo</string -->
+  <!-- NO string name="pref_cat_exportsrv">Walls</string -->
   <!-- NO string name="pref_cat_exportsvg">SVG</string -->
   <!-- NO string name="pref_cat_exportdxf">DXF</string -->
   <!-- NO string name="pref_cat_exportshp">Shapefile</string -->
@@ -1387,6 +1389,8 @@
   <string name="pref_station_prefix_summary">Esporta caposaldi con prefisso [Compass]</string>
   <string name="pref_compass_splays_title">Splay Compass</string>
   <string name="pref_compass_splays_summary">Esporta splay in file Compass</string>
+  <!-- TODO string name="pref_walls_splays_title">Walls splays</string -->
+  <!-- TODO string name="pref_walls_splays_summary">Export splays in Walls files</string -->
   <string name="pref_vtopo_splays_title">Splay VisualTopo</string>
   <string name="pref_vtopo_splays_summary">Esporta splay in VisualTopo</string>
   <string name="pref_vtopo_lrud_title">LRUD al DA</string>

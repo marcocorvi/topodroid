@@ -37,28 +37,29 @@ public class TDPrefCat
   public static final int PREF_CATEGORY_GPX       = 17;
   public static final int PREF_CATEGORY_KML       = 18;
   public static final int PREF_CATEGORY_CSV       = 19;
-  public static final int PREF_SHOT_DATA          = 20; 
-  public static final int PREF_SHOT_UNITS         = 21; 
-  public static final int PREF_ACCURACY           = 22; 
-  public static final int PREF_LOCATION           = 23; 
-  public static final int PREF_PLOT_SCREEN        = 24; 
-  public static final int PREF_TOOL_LINE          = 25; 
-  public static final int PREF_TOOL_POINT         = 26; 
-  // public static final int PREF_PLOT_WALLS         = 27;  // AUTOWALLS UNUSED
-  public static final int PREF_PLOT_DRAW          = 28; 
-  public static final int PREF_PLOT_ERASE         = 29; 
-  public static final int PREF_PLOT_EDIT          = 30;
-  public static final int PREF_DEM3D              = 31;
-  public static final int PREF_WALLS3D            = 32;
-  public static final int PREF_CATEGORY_GEEK      = 33; 
-  public static final int PREF_GEEK_SHOT          = 34; 
-  public static final int PREF_GEEK_SPLAY         = 35; 
-  public static final int PREF_GEEK_PLOT          = 36; 
-  public static final int PREF_GEEK_LINE          = 37; 
-  public static final int PREF_GEEK_DEVICE        = 38; 
-  public static final int PREF_GEEK_IMPORT        = 39; 
-  // public static final int PREF_CATEGORY_LOG       = 40; // this must be the last NO_LOGS
-  public static final int PREF_CATEGORY_MAX = 39; // last category
+  public static final int PREF_CATEGORY_SRV       = 20;
+  public static final int PREF_SHOT_DATA          = 21; 
+  public static final int PREF_SHOT_UNITS         = 22; 
+  public static final int PREF_ACCURACY           = 23; 
+  public static final int PREF_LOCATION           = 24; 
+  public static final int PREF_PLOT_SCREEN        = 25; 
+  public static final int PREF_TOOL_LINE          = 26; 
+  public static final int PREF_TOOL_POINT         = 27; 
+  // public static final int PREF_PLOT_WALLS         = 28;  // AUTOWALLS UNUSED
+  public static final int PREF_PLOT_DRAW          = 29; 
+  public static final int PREF_PLOT_ERASE         = 30; 
+  public static final int PREF_PLOT_EDIT          = 31;
+  public static final int PREF_DEM3D              = 32;
+  public static final int PREF_WALLS3D            = 33;
+  public static final int PREF_CATEGORY_GEEK      = 34; 
+  public static final int PREF_GEEK_SHOT          = 35; 
+  public static final int PREF_GEEK_SPLAY         = 36; 
+  public static final int PREF_GEEK_PLOT          = 37; 
+  public static final int PREF_GEEK_LINE          = 38; 
+  public static final int PREF_GEEK_DEVICE        = 39; 
+  public static final int PREF_GEEK_IMPORT        = 40; 
+  // public static final int PREF_CATEGORY_LOG       = 41; // this must be the last NO_LOGS
+  public static final int PREF_CATEGORY_MAX = 40; // last category
 
   static int[] mTitleRes = {
     R.string.title_settings_main,     // 0
@@ -82,6 +83,7 @@ public class TDPrefCat
     R.string.title_settings_gpx,      // 18
     R.string.title_settings_kml,      // 18
     R.string.title_settings_csv,
+    R.string.title_settings_srv,
     R.string.title_settings_shot,     
     R.string.title_settings_units,    // 21
     R.string.title_settings_accuracy,

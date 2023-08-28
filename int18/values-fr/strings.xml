@@ -1242,6 +1242,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="title_settings_png">Paramètres d\'exportation PNG</string -->
     <!-- TODO string name="title_settings_gpx">GPX export settings</string -->
     <string name="title_settings_kml">Paramètres d\'exportation KML</string>
+    <!-- TODO string name="title_settings_srv">Walls export settings</string -->
 
     <string name="title_settings_sketch">TopoDroid : paramétrage de croquis 3D</string>
     <string name="title_settings_survey">TopoDroid : paramétrage du relevé topo</string>
@@ -1320,6 +1321,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- OK string name="pref_cat_exportth"  translatable="false">Therion</string -->
     <!-- OK string name="pref_cat_exportdat" translatable="false">Compass</string -->
     <!-- OK string name="pref_cat_exporttro" translatable="false">VisualTopo</string -->
+  <!-- NO string name="pref_cat_exportsrv">Walls</string -->
     <!-- OK string name="pref_cat_exportsvg" translatable="false">SVG</string -->
     <!-- OK string name="pref_cat_exportdxf" translatable="false">DXF</string -->
     <!-- OK string name="pref_cat_exportshp" translatable="false">Shapefile</string -->
@@ -1403,6 +1405,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_station_prefix_summary">Export préfixe station cSurvey</string>
     <string name="pref_compass_splays_title">Visées latérales d\'habillage Compass</string>
     <string name="pref_compass_splays_summary">Exporter les visées latérales d\'habillage dans le fichier Compass</string>
+  <!-- TODO string name="pref_walls_splays_title">Walls splays</string -->
+  <!-- TODO string name="pref_walls_splays_summary">Export splays in Walls files</string -->
     <string name="pref_vtopo_splays_title">Visées latérales VisualTopo</string>
     <string name="pref_vtopo_splays_summary">Exporter les visées latérales d\'habillage dans le fichier VisualTopo</string>
     <string name="pref_vtopo_lrud_title">LRUD à la station DEPUIS</string>

@@ -382,7 +382,10 @@ public class DBlock
   // int getFullExtend() { return mExtend; } // 20191002 same as getIntExtend()
   void setExtend( int ext, float stretch ) { mExtend = ext; mStretch = stretch; }
   public boolean hasStretch( float stretch ) { return Math.abs( mStretch - stretch ) < 0.01f; }
-  public boolean hasStretch( ) { return Math.abs( mStretch ) < 0.01f; }
+
+  /** @return true if the item has non-zero stretch 
+   */
+  public boolean hasStretch( ) { return Math.abs( mStretch ) > 0.01f; } 
 
   // void setStretch( float stretch ) { mStretch = stretch; } // UNUSED
   public float getStretch() { return mStretch; }

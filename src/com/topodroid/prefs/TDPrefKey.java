@@ -396,7 +396,8 @@ public class TDPrefKey
     "DISTOX_EXPORT_CSX_PREF",
     "DISTOX_EXPORT_DAT_PREF",    // 10
     "DISTOX_EXPORT_TRO_PREF",
-    "DISTOX_EXPORT_SVG_PREF",    // 12
+    "DISTOX_EXPORT_SRV_PREF",    // 12
+    "DISTOX_EXPORT_SVG_PREF",    // 13
     "DISTOX_EXPORT_SHP_PREF",    // 14
     "DISTOX_EXPORT_DXF_PREF",
     // "DISTOX_EXPORT_PNG_PREF", // NO_PNG
@@ -420,6 +421,7 @@ public class TDPrefKey
     R.string.pref_cat_exportcsx,
     R.string.pref_cat_exportdat,
     R.string.pref_cat_exporttro,
+    R.string.pref_cat_exportsrv,
     R.string.pref_cat_exportsvg,
     R.string.pref_cat_exportshp,
     R.string.pref_cat_exportdxf,
@@ -446,6 +448,7 @@ public class TDPrefKey
     -1,
     -1,
     -1,
+    -1,
     // -1, // NO_PNG
     -1,
     -1,
@@ -460,6 +463,7 @@ public class TDPrefKey
     TDString.ZERO,
     TDString.NINETY,
     "0.2",
+    TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
@@ -554,6 +558,7 @@ public class TDPrefKey
   };
 
 
+  // EXPORT SVX SURVEX ----------
   public static String[] EXPORT_SVX = { // [8]
     "DISTOX_SURVEX_EOL",            // survex end of line [either Linux or Windows]
     "DISTOX_SURVEX_SPLAY",    // 6  // whether to name endpoint of splays in Survex export
@@ -578,6 +583,7 @@ public class TDPrefKey
     null
   };
 
+  // EXPORT TH THERION ----------
   public static String[] EXPORT_TH = { // [8]
     "DISTOX_THERION_CONFIG",   // whether to write survey.thconfig file
     "DISTOX_THERION_MAPS",     // whether to put map commands before centerline in therion
@@ -624,7 +630,7 @@ public class TDPrefKey
     FALSE
   };
 
-  // ------------------------------------------------------------------------------
+  // EXPORT SVG -----------------
   public static String[] EXPORT_SVG = { // [8]
     "DISTOX_SVG_ROUNDTRIP",   // whether to export SVG in round-trip format
     "DISTOX_SVG_GRID",        // whether to export grid in SVG 
@@ -693,7 +699,7 @@ public class TDPrefKey
     TDString.ONE, // Illustrator
   };
 
-  // ------------------------------------------------------------------------------
+  // EXPORT DAT COMPASS ---------
   public static String[] EXPORT_DAT = {
     "DISTOX_STATION_PREFIX",       // whether to add cave-name prefix to stations (cSurvey/Compass export)
     "DISTOX_COMPASS_SPLAYS",       // whether to add splays to Compass dat export
@@ -715,7 +721,21 @@ public class TDPrefKey
     FALSE,
   };
 
-  // ------------------------------------------------------------------------------
+  // EXPORT SRV WALLS -----------
+  public static String[] EXPORT_SRV = {
+    "DISTOX_WALLS_SPLAYS",       // whether to use splays for Walls srv export
+  };
+  static int[] EXPORT_SRVtitle = {
+    R.string.pref_walls_splays_title,
+  };
+  static int[] EXPORT_SRVdesc = {
+    R.string.pref_walls_splays_summary,
+  };
+  public static String[] EXPORT_SRVdef = {
+    TRUE,
+  };
+
+  // EXPORT TRO VISUALTOPO  -------
   public static String[] EXPORT_TRO = {
     "DISTOX_VTOPO_SPLAYS",       // whether to add splays to VisualTopo tro export
     "DISTOX_VTOPO_LRUD",         // whether VisualTopo LRUD are at-from 
@@ -737,7 +757,7 @@ public class TDPrefKey
     FALSE,
   };
 
-  // ------------------------------------------------------------------------------
+  // EXPORT KML -------------------
   public static String[] EXPORT_KML = {
     "DISTOX_KML_STATIONS",     // 26 // whether to add station points to KML export
     "DISTOX_KML_SPLAYS"              // whether to add splay lines to KML export
@@ -790,7 +810,7 @@ public class TDPrefKey
   };
   */
 
-  // ------------------------------------------------------------------------------
+  // EXPORT DXF -------------------
   public static String[] EXPORT_DXF = {
     // "DISTOX_DXF_SCALE",     // default DXF scale (export)
     "DISTOX_DXF_BLOCKS",       // whether to export point items as Blocks in DXF export
@@ -831,7 +851,7 @@ public class TDPrefKey
     null
   };
 
-  // ------------------------------------------------------------------------------
+  // EXPORT SHP SHAPFILE ----------
   public static String[] EXPORT_SHP = {
     "DISTOX_SHP_GEOREF",             // whether to export plan-sketch georeferenced
   };

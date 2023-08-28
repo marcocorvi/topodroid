@@ -1139,6 +1139,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="title_settings_png">PNG-Export Einstellungen</string -->
   <string name="title_settings_gpx">GPX-Export Einstellungen</string>
   <string name="title_settings_kml">KML-Export Einstellungen</string>
+  <!-- TODO string name="title_settings_srv">Walls export settings</string -->
+
   <string name="title_settings_sketch">Einstellungen: 3D</string>
   <string name="title_settings_survey">Einstellungen: Vermessung</string>
   <!-- UNUSED string name="title_settings_splay">Einstellungen: Hilfszügen</string -->
@@ -1278,6 +1280,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_station_prefix_summary">Exportiere Messpunkt Prefix (compass)</string>
   <string name="pref_compass_splays_title">Compass: Hilfszüge</string>
   <string name="pref_compass_splays_summary">Hilfszüge exportieren (compass)</string>
+  <!-- TODO string name="pref_walls_splays_title">Walls splays</string -->
+  <!-- TODO string name="pref_walls_splays_summary">Export splays in Walls files</string -->
   <string name="pref_vtopo_splays_title">VisualTopo: Hilfszüge</string>
   <string name="pref_vtopo_splays_summary">Hilfszüge exportieren (VisualTopo)</string>
   <string name="pref_vtopo_lrud_title">VisualTopo: LRUD von Quellstation</string>

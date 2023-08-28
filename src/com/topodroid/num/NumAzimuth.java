@@ -11,6 +11,8 @@
  */
 package com.topodroid.num;
 
+import com.topodroid.utils.TDLog;
+
 class NumAzimuth
 {
   final float mAzimuth;  // azimuth of the leg at the station [degrees]
@@ -20,5 +22,6 @@ class NumAzimuth
   {
     mAzimuth = a;
     mExtend  = e;
+    // TDLog.v("new azimuth " + a + " extend " + e );
   }
 }

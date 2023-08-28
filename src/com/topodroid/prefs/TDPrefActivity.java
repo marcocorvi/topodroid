@@ -183,6 +183,7 @@ public class TDPrefActivity extends Activity
       case TDPrefCat.PREF_CATEGORY_DAT:       mPrefs = TDPref.makeDatPrefs(      this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_CSX:       mPrefs = TDPref.makeCsxPrefs(      this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_TRO:       mPrefs = TDPref.makeTroPrefs(      this, hlp ); break;
+      case TDPrefCat.PREF_CATEGORY_SRV:       mPrefs = TDPref.makeSrvPrefs(      this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_SVG:       mPrefs = TDPref.makeSvgPrefs(      this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_SHP:       mPrefs = TDPref.makeShpPrefs(      this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_DXF:       mPrefs = TDPref.makeDxfPrefs(      this, hlp ); break;
@@ -279,6 +280,7 @@ public class TDPrefActivity extends Activity
       linkPreference( "DISTOX_EXPORT_DAT_PREF",     TDPrefCat.PREF_CATEGORY_DAT );
       linkPreference( "DISTOX_EXPORT_CSX_PREF",     TDPrefCat.PREF_CATEGORY_CSX );
       linkPreference( "DISTOX_EXPORT_TRO_PREF",     TDPrefCat.PREF_CATEGORY_TRO );
+      linkPreference( "DISTOX_EXPORT_SRV_PREF",     TDPrefCat.PREF_CATEGORY_SRV );
       linkPreference( "DISTOX_EXPORT_SVG_PREF",     TDPrefCat.PREF_CATEGORY_SVG );
       linkPreference( "DISTOX_EXPORT_SHP_PREF",     TDPrefCat.PREF_CATEGORY_SHP );
       linkPreference( "DISTOX_EXPORT_DXF_PREF",     TDPrefCat.PREF_CATEGORY_DXF );

@@ -41,7 +41,7 @@ public class TDAzimuth
    * @param bearing  leg azimuth [degrees]
    * @note called by ShotNewDialog, and setLegExtend
    */
-  static long computeLegExtend( double bearing )
+  public static long computeLegExtend( double bearing )
   {
     if ( mFixedExtend == 0 ) {
       double ref = mRefAzimuth;

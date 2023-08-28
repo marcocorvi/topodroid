@@ -7942,7 +7942,8 @@ public class DrawingWindow extends ItemDrawer
                   double sinp = TDMath.sinDd( mPlot2.azimuth );
                   double h1 = st.e * cosp + st.s * sinp;
                   double h2 = sp.e * cosp + sp.s * sinp;
-                  appendFixedLine( mPlot2.type, blk2, h1, st.v, h2, sp.v, sp.getCosine(), true, true );
+                  float cosine = (float)( TDMath.sind( blk2.mBearing ) * sinp + TDMath.cosd( blk2.mBearing ) * cosp ); // instead of sp.getCosine()
+                  appendFixedLine( mPlot2.type, blk2, h1, st.v, h2, sp.v, cosine, true, true );
                 }
               }
             }

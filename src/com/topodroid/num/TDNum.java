@@ -359,6 +359,7 @@ public class TDNum
 
   /** @return the list of splays at a given station
    * @param st    station
+   * @note only splays FROM station is considered
    */
   public List< NumSplay >   getSplaysAt( NumStation st )
   {
@@ -1279,6 +1280,7 @@ public class TDNum
 
   /** insert a tri-splay into the list of splays
    * @param ts   tri-splay
+   * @pre stations azimuths precomputed
    */
   private boolean insertSplay( TriSplay ts )
   {
