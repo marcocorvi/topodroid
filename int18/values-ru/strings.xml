@@ -753,7 +753,7 @@
     <string name="button_back"      >Назад     </string>
     <string name="button_cancel"    >Отмена    </string>
     <!-- UNUSED string name="button_change"    >Изменить    </string -->
-    <string name="button_clipboard" >Буфер обмена</string>
+    <string name="button_clipboard" >Вставить  </string>
     <string name="button_close"     >Закрыть   </string>
     <!-- UNUSED string name="button_create"    >Создать    </string -->
     <string name="button_color"     >Цвет	</string>
