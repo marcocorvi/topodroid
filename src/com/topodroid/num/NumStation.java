@@ -84,7 +84,7 @@ public class NumStation extends NumSurveyPoint
    */
   public void setHasExtend( boolean has_extend ) { mHasExtend = has_extend; }
 
-  private ArrayList< NumAzimuth > mLegs; // ordered list of legs at the shot (used to compute extends)
+  private ArrayList< NumAzimuth > mLegAzimuths; // ordered list of legs at the shot (used to compute extends)
 
   /** cstr
    * @param id  station name
@@ -106,7 +106,7 @@ public class NumStation extends NumSurveyPoint
     mParent  = null;
     mChild   = null;
     mSibling = null;
-    mLegs = new ArrayList<>();
+    mLegAzimuths = new ArrayList<>();
     // mReductionType = reduction_type;
   }
 
@@ -142,7 +142,7 @@ public class NumStation extends NumSurveyPoint
     mHidden  = 0;
     mBarrierAndHidden = false;
     setParent( from );
-    mLegs = new ArrayList<>();
+    mLegAzimuths = new ArrayList<>();
     // mReductionType = reduction_type;
     // TDLog.v( "NumStation cstr " + id + " from " + from.name + " has coords " + mHasExtend + " " + from.mHasExtend );
   }
@@ -172,14 +172,19 @@ public class NumStation extends NumSurveyPoint
   {
     // TDLog.v( "Station " + name + " add azimuth " + azimuth + " extend " + extend );
     if ( extend > 1 ) return;
+    // if ( extend < 0 ) { // NO GOOD: this is not the way to handle legs with opposite extend
+    //   extend = -extend;
+    //   azimuth += 180;
+    //   if ( azimuth > 360 ) azimuth -= 360;
+    // }
     NumAzimuth leg = new NumAzimuth( azimuth, extend );
-    for ( int k=0; k<mLegs.size(); ++k ) {
-      if ( azimuth < mLegs.get(k).mAzimuth ) {
-        mLegs.add(k, leg );
+    for ( int k=0; k<mLegAzimuths.size(); ++k ) {
+      if ( azimuth < mLegAzimuths.get(k).mAzimuth ) {
+        mLegAzimuths.add(k, leg );
         return;
       }
     }
-    mLegs.add( leg );
+    mLegAzimuths.add( leg );
   }
 
   /** compute the azimuths of the legs at this station
@@ -187,11 +192,11 @@ public class NumStation extends NumSurveyPoint
    */
   void setAzimuths()
   {
-    int sz = mLegs.size();
+    int sz = mLegAzimuths.size();
     if ( sz == 0 ) return;
 
     ArrayList< NumAzimuth > temp = new ArrayList<>();
-    NumAzimuth a1 = mLegs.get( 0 );
+    NumAzimuth a1 = mLegAzimuths.get( 0 );
     if ( sz == 1 ) {
       if ( a1.mAzimuth > 270 ) {
         temp.add( new NumAzimuth( a1.mAzimuth-360,   a1.mExtend ) );
@@ -223,7 +228,7 @@ public class NumStation extends NumSurveyPoint
         temp.add( new NumAzimuth( a1.mAzimuth+360,   a1.mExtend ) );
       }
     } else { // sz > 1
-      NumAzimuth a3 = mLegs.get( sz-1 );
+      NumAzimuth a3 = mLegAzimuths.get( sz-1 );
       mWrapAzimuth1 = (a1.mAzimuth + a3.mAzimuth)/2 - 180;
       mWrapAzimuth2 = mWrapAzimuth1 + 360;
       // TDLog.v("Station " + name + " legs " + sz + " from " + a1.mAzimuth + " to " + a3.mAzimuth + " azimuth " + mWrapAzimuth1 );
@@ -231,15 +236,15 @@ public class NumStation extends NumSurveyPoint
       temp.add( new NumAzimuth( mWrapAzimuth1, Float.NaN ) );
       temp.add( a1 );
       for (int k=1; k<sz; ++k ) {
-        NumAzimuth a2 = mLegs.get( k );
+        NumAzimuth a2 = mLegAzimuths.get( k );
         temp.add( new NumAzimuth( (a1.mAzimuth + a2.mAzimuth)/2, Float.NaN ) ); // bi-secant
         temp.add( a2 );
         a1 = a2;
       }
       temp.add( new NumAzimuth( mWrapAzimuth2, Float.NaN ) );
     }
-    mLegs = temp;
-    // for ( NumAzimuth a : mLegs ) {
+    mLegAzimuths = temp;
+    // for ( NumAzimuth a : mLegAzimuths ) {
     //   TDLog.v( "Station " + name + " Azimuth " + a.mAzimuth + " extend " + a.mExtend );
     // }
   }
@@ -263,19 +268,19 @@ public class NumStation extends NumSurveyPoint
     }
     // if ( e > ExtendType.EXTEND_RIGHT ) e = ExtendType.EXTEND_VERT;
 
-    if ( mLegs.size() == 0 ) return e;
+    if ( mLegAzimuths.size() == 0 ) return e;
     if ( b < mWrapAzimuth1 ) { b += 360; } else if ( b > mWrapAzimuth2 ) { b -= 360; }
-    NumAzimuth a1 = mLegs.get(0);
-    for (int k=1; k<mLegs.size(); k++ ) {
-      NumAzimuth a2 = mLegs.get(k);
+    NumAzimuth a1 = mLegAzimuths.get(0);
+    for (int k=1; k<mLegAzimuths.size(); k++ ) {
+      NumAzimuth a2 = mLegAzimuths.get(k);
       if ( b >= a1.mAzimuth && b < a2.mAzimuth ) {
         if ( ! Float.isNaN( a2.mExtend ) ) {
           return TDMath.cosd( a2.mAzimuth - b ) * a2.mExtend;
-          // TDLog.v( name + " compute cosine: legs " + mLegs.size() + " " + b + " " + a2.mAzimuth + " ext " + a2.mExtend + " = " + ret );
+          // TDLog.v( name + " compute cosine: legs " + mLegAzimuths.size() + " " + b + " " + a2.mAzimuth + " ext " + a2.mExtend + " = " + ret );
           // return ret;
         } else if ( ! Float.isNaN( a1.mExtend ) ) {
           return TDMath.cosd( b - a1.mAzimuth ) * a1.mExtend;
-          // TDLog.v( name + " compute cosine: legs " + mLegs.size() + " " + b + " " + a1.mAzimuth + " ext " + a1.mExtend + " = " + ret );
+          // TDLog.v( name + " compute cosine: legs " + mLegAzimuths.size() + " " + b + " " + a1.mAzimuth + " ext " + a1.mExtend + " = " + ret );
           // return ret;
         } else {
           break;

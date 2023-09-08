@@ -487,9 +487,10 @@ public class FixedActivity extends Activity
         // TODO
       }
     } else if ( k < mNrButton1 && b == mButton1[k++] ) { // START GPSTest
+      TDLog.v("start GPStest activity");
       try {
         Intent intent = new Intent( Intent.ACTION_MAIN );
-        intent.setClassName( "com.android.gpstest", "com.android.gpstest.GpsTestActivity" );
+        intent.setClassName( "com.android.gpstest", "com.android.gpstest.ui.MainActivity" );
         startActivity( intent );
         // startActivityForResult( intent, TDRequest.REQUEST_GPSTEST ); // GpsTest does not set result
       } catch ( RuntimeException e ) {
