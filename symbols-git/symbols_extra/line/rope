@@ -1,0 +1,17 @@
+encoding utf-8
+symbol line
+name rope
+name-ru веревка
+name-hu kötél
+th_name rope
+group trail
+color 0xcccccc 0x66
+width 8
+effect
+  moveTo 0 0
+  lineTo 2 2
+  lineTo 6 2
+  lineTo 4 0
+  lineTo 0 0
+endeffect
+endsymbol
