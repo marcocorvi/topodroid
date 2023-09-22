@@ -188,6 +188,11 @@ public class TDSetting
   public static float mAlgoMinGamma = 1.0f;
   public static float mAlgoMinDelta = 1.0f;
 
+  public static float mAutoCalBeta  = 0.004f;
+  public static float mAutoCalEta   = 0.04f;
+  public static float mAutoCalGamma = 0.04f;
+  public static float mAutoCalDelta = 0.04f;
+
   public static String keyDeviceName() { return "DISTOX_DEVICE"; }
 
   // static final  String EXPORT_TYPE    = "th";    // DISTOX_EXPORT_TH
@@ -241,7 +246,8 @@ public class TDSetting
   public static boolean mAutoStations  = true;  // whether to add stations automatically to scrap therion files
   public static boolean mTherionSplays = false; // whether to add splay segments to auto stations
   public static boolean mTherionSplaysAll = true; // whether to add splay segments to auto stations for all scraps, not just the first
-  public static boolean mTherionConfig = false; // whether to write survey.thconfig file
+  public static boolean mTherionWithConfig = false; // whether to embed thconfig commands in th file 
+  public static boolean mTherionEmbedConfig = false; // whether to write survey.thconfig file (or embedded commands)
   public static boolean mTherionXvi    = false; // whether to add xvi image to th2
   public static boolean mCompassSplays = true;  // whether to add splays to Compass export
   public static boolean mWallsSplays   = true;  // whether to add splays to Walls export instead of wall shots
@@ -982,6 +988,10 @@ public class TDSetting
     mAlgoMinBeta   = tryFloat( prefs,      keyCalib[8],      defCalib[8] );  // DISTOX_ALGO_MIN_BETA
     mAlgoMinGamma  = tryFloat( prefs,      keyCalib[9],      defCalib[9] );  // DISTOX_ALGO_MIN_GAMMA
     mAlgoMinDelta  = tryFloat( prefs,      keyCalib[10],     defCalib[10] ); // DISTOX_ALGO_MIN_DELTA
+    mAutoCalBeta   = tryFloat( prefs,      keyCalib[11],     defCalib[11] ); // DISTOX_AUTO_CAL_BETA
+    mAutoCalEta    = tryFloat( prefs,      keyCalib[12],     defCalib[12] ); // DISTOX_AUTO_CAL_ETA
+    mAutoCalGamma  = tryFloat( prefs,      keyCalib[13],     defCalib[13] ); // DISTOX_AUTO_CAL_GAMMA
+    mAutoCalDelta  = tryFloat( prefs,      keyCalib[14],     defCalib[14] ); // DISTOX_AUTO_CAL_DELTA
     // TDLog.v("SETTING load calib done");
 
     String[] keyDevice = TDPrefKey.DEVICE;
@@ -1098,7 +1108,7 @@ public class TDSetting
 
     String[] keyExpTh  = TDPrefKey.EXPORT_TH;
     String[] defExpTh  = TDPrefKey.EXPORT_THdef;
-    mTherionConfig     = prefs.getBoolean( keyExpTh[0], bool(defExpTh[0]) ); // DISTOX_THERION_CONFIG
+    mTherionWithConfig = prefs.getBoolean( keyExpTh[0], bool(defExpTh[0]) ); // DISTOX_THERION_CONFIG
     mTherionMaps       = prefs.getBoolean( keyExpTh[1], bool(defExpTh[1]) ); // DISTOX_THERION_MAPS
     // mAutoStations      = prefs.getBoolean( keyExpTh[2], bool(defExpTh[2]) ); // DISTOX_AUTO_STATIONS 
     // mXTherionAreas  = prefs.getBoolean( keyExpTh[ ], bool(defExpTh[ ]) ); // DISTOX_XTHERION_AREAS
@@ -1580,6 +1590,22 @@ public class TDSetting
     } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_ALGO_MIN_DELTA
       mAlgoMinDelta   = tryFloatValue( hlp, k, v, def[10] ); 
       if ( mAlgoMinDelta < -10 ) { mAlgoMinDelta = -10; ret = "-10"; }
+    } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_AUTO_CAL_BETA
+      mAutoCalBeta   = tryFloatValue( hlp, k, v, def[11] ); 
+      if ( mAutoCalBeta < 0.001f ) { mAutoCalBeta = 0.001f; ret = "0.001"; }
+      if ( mAutoCalBeta > 0.999f ) { mAutoCalBeta = 0.999f; ret = "0.999"; }
+    } else if ( k.equals( key[ 12 ] ) ) { // DISTOX_AUTO_CAL_ETA
+      mAutoCalEta   = tryFloatValue( hlp, k, v, def[12] ); 
+      if ( mAutoCalEta < 0.01f ) { mAutoCalEta = 0.01f; ret = "0.01"; }
+      if ( mAutoCalEta > 0.99f ) { mAutoCalEta = 0.99f; ret = "0.99"; }
+    } else if ( k.equals( key[ 13 ] ) ) { // DISTOX_AUTO_CAL_GAMMA
+      mAutoCalGamma   = tryFloatValue( hlp, k, v, def[12] ); 
+      if ( mAutoCalGamma < 0.01f ) { mAutoCalGamma = 0.01f; ret = "0.01"; }
+      if ( mAutoCalGamma > 0.99f ) { mAutoCalGamma = 0.99f; ret = "0.99"; }
+    } else if ( k.equals( key[ 12 ] ) ) { // DISTOX_AUTO_CAL_DELTA
+      mAutoCalDelta   = tryFloatValue( hlp, k, v, def[12] ); 
+      if ( mAutoCalDelta < 0.01f ) { mAutoCalDelta = 0.01f; ret = "0.01"; }
+      if ( mAutoCalDelta > 0.99f ) { mAutoCalDelta = 0.99f; ret = "0.99"; }
     } else {
       TDLog.Error("missing CALIB key: " + k );
     }
@@ -2069,7 +2095,7 @@ public class TDSetting
     String[] key = TDPrefKey.EXPORT_TH;
     String[] def = TDPrefKey.EXPORT_THdef;
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_THERION_CONFIG (bool)
-      mTherionConfig    = tryBooleanValue( hlp, k, v, bool(def[ 0 ]) );
+      mTherionWithConfig    = tryBooleanValue( hlp, k, v, bool(def[ 0 ]) );
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_THERION_MAPS (bool)
       mTherionMaps      = tryBooleanValue( hlp, k, v, bool(def[ 1 ]) );
     // } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_AUTO_STATIONS (bool)
@@ -3079,7 +3105,7 @@ public class TDSetting
       pw.printf(Locale.US, "VisualTopo: splays %c, at-from %c, trox %c \n", tf(mVTopoSplays), tf(mVTopoLrudAtFrom), tf(mVTopoTrox) ); 
       pw.printf(Locale.US, "Ortho LRUD %c, angle %.2f, cos %.2f \n", tf(mOrthogonalLRUD), mOrthogonalLRUDAngle, mOrthogonalLRUDCosine );
       pw.printf(Locale.US, "Therion: config %c, maps %c, stations %c, splays %c, xvi %c, scale %d \n",
-        tf(mTherionConfig), tf(mTherionMaps), tf(mAutoStations), tf(mTherionSplays), tf(mTherionXvi), mTherionScale );
+        tf(mTherionWithConfig), tf(mTherionMaps), tf(mAutoStations), tf(mTherionSplays), tf(mTherionXvi), mTherionScale );
       // pw.printf(Locale.US, "PNG scale %.2f, bg_color %d \n", mBitmapScale, (mBitmapBgcolor & 0xffffff) );
       pw.printf(Locale.US, "DXF: acad_version %d, blocks %c, spline %c layer %c\n", mAcadVersion, tf(mDxfBlocks), tf(mAcadSpline), tf(mAcadLayer) );
       pw.printf(Locale.US, "SVG: shot %.1f, label %.1f, %d, station %d, point %.1f, round-trip %c, grid %c %.1f, line %.1f, dir %c %.1f, splays %c \n",
@@ -3385,7 +3411,7 @@ public class TDSetting
         }
         if ( line.startsWith("Therion") ) {
           if ( vals.length > 12 ) {
-            mTherionConfig = getBoolean( vals, 2 );    setPreference( editor, "DISTOX_THERION_CONFIG", mTherionConfig );
+            mTherionWithConfig = getBoolean( vals, 2 );    setPreference( editor, "DISTOX_THERION_CONFIG", mTherionWithConfig );
             mTherionMaps   = getBoolean( vals, 4 );    setPreference( editor, "DISTOX_THERION_MAPS",   mTherionMaps );
             mAutoStations  = getBoolean( vals, 6);     setPreference( editor, "DISTOX_AUTO_STATIONS",  mAutoStations );
             mTherionSplays = getBoolean( vals, 8 );    setPreference( editor, "DISTOX_THERION_SPLAYS", mTherionSplays );
@@ -3393,7 +3419,7 @@ public class TDSetting
             // the next line sets mTherionScale
             setExportScale( getInt( vals, 12, 100 ) ); 
             setPreference( editor, "DISTOX_TH2_SCALE",      mTherionScale );
-            // TDLog.v("Setting import therion settings " + mTherionConfig + " " + mTherionMaps + " " + mTherionSplays );
+            // TDLog.v("Setting import therion settings " + mTherionWithConfig + " " + mTherionMaps + " " + mTherionSplays );
           }
           continue;
         }

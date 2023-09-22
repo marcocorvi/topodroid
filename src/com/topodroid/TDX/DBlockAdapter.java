@@ -176,12 +176,21 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
             b.mMultiSelected = false;
             b.setBackgroundColor( TDColor.TRANSPARENT );
             // TDLog.v("multiselect remove " + b.mFrom + " " + b.mTo + " " + mSelect.size() );
+            if ( long_tap ) { // continue to de-select blocks all way before as long as possible
+              while ( --pos >= 0 ) {
+                b = (DBlock)( getItem( pos ) );
+                if ( ! b.mMultiSelected ) break;
+                mSelect.remove( b );
+                b.mMultiSelected = false;
+                b.setBackgroundColor( TDColor.TRANSPARENT );
+              }
+            }
           } else {
             mSelect.add( b );
             b.mMultiSelected = true;
             b.setBackgroundColor( TDColor.GRID );
             // TDLog.v("multiselect add " + b.mFrom + " " + b.mTo + " " + mSelect.size() );
-            if ( long_tap ) {
+            if ( long_tap ) { // continue to select block all te way before as long as possible
               while ( --pos >= 0 ) {
                 b = (DBlock)( getItem( pos ) );
                 if ( b.mMultiSelected ) break;
@@ -204,6 +213,10 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
    
     return ( mSelect.size() > 0 );
   }
+
+  /** @return the number of items on selection
+   */
+  int getMultiSelectSize() { return mSelect.size(); }
 
   /** clear the multiselection
    */

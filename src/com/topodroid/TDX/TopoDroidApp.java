@@ -872,10 +872,10 @@ public class TopoDroidApp extends Application
     //   mComm = new VirtualDistoXComm( this, mVirtualDistoX );
     // } else {
       if ( TDInstance.isDeviceX310() ) {
-        // TDLog.v( "App: create DistoX2 comm");
+        TDLog.v( "App: create DistoX2 comm");
         mComm = new DistoX310Comm( this );
       } else if ( TDInstance.isDeviceA3() ) {
-        // TDLog.v( "App: create DistoX1 comm");
+        TDLog.v( "App: create DistoX1 comm");
         mComm = new DistoXA3Comm( this );
       } else if ( TDInstance.isDeviceSap() ) {
         String address = TDInstance.deviceAddress();
@@ -893,6 +893,7 @@ public class TopoDroidApp extends Application
       //   // TDLog.v( "App: create ble comm. address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
       //   mComm = new BleComm( this, address, bt_device );
       } else if (TDInstance.isDeviceXBLE()){ // SIWEI_TIAN changed on Jun 2022
+        TDLog.v( "App: create DistoX-BLE comm");
         String address = TDInstance.deviceAddress();
         BluetoothDevice bt_device = TDInstance.getBleDevice();
         mComm = new DistoXBLEComm( this,this, address, bt_device );
@@ -1334,7 +1335,10 @@ public class TopoDroidApp extends Application
    */
   public boolean readCalibCoeff( byte[] coeff )
   {
-    if ( mComm == null || TDInstance.getDeviceA() == null ) return false;
+    if ( mComm == null || TDInstance.getDeviceA() == null ) {
+      TDLog.v("No comm or no device");
+      return false;
+    }
     boolean ret = mComm.readCoeff( TDInstance.deviceAddress(), coeff );
     resetComm();
     return ret;

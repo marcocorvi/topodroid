@@ -796,7 +796,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], D, def[ 7], FLOAT, ctx, hlp ),
       makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], D, def[ 8], FLOAT, ctx, hlp ),
       makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], D, def[ 9], FLOAT, ctx, hlp ),
-      makeEdt( cat, key[10], tit[10], dsc[10], D, def[10], FLOAT, ctx, hlp )
+      makeEdt( cat, key[10], tit[10], dsc[10], D, def[10], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[11], tit[11], dsc[11], D, def[11], FLOAT, ctx, hlp ), // AUTO_CAL
+      makeEdt( cat, key[12], tit[12], dsc[12], D, def[12], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[13], tit[13], dsc[13], D, def[13], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[14], tit[14], dsc[14], D, def[14], FLOAT, ctx, hlp )
     };
   }
 

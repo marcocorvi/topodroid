@@ -2568,7 +2568,7 @@ public class TopoGL extends Activity
     // TDLog.v("starting bluetooth - remote " + mBtRemoteName );
     if ( mBluetoothComm == null ) {
       // mBluetoothComm = new BluetoothComm( this, this, mBtRemoteDevice );
-      if ( mBtRemoteName.startsWith("BRIC4_" ) ) {
+      if ( mBtRemoteName.startsWith("BRIC4_" ) || mBtRemoteName.startsWith("BRIC5_ ) {
         mBluetoothComm = new BricComm( this, this, mBtRemoteDevice );
       } else if ( mBtRemoteName.startsWith("Shetland_" ) ) {
         mBluetoothComm = new SapComm( this, this, mBtRemoteDevice );

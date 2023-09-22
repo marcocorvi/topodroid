@@ -20,16 +20,44 @@ import android.os.Bundle;
 public class ListerHandler extends Handler
 {
   private ILister mLister = null;
+  private AutoCalibDialog mDialog = null; // AUTO-CALIB
 
-  // default cstr
-  public ListerHandler( ) { mLister = null; }
+  /** default cstr
+   */
+  public ListerHandler( ) { }
 
+  /** cstr with a list displayer
+   * @param lister  list displayer
+   */
   public ListerHandler( ILister lister )
   { 
     mLister = lister;
   }
 
-  public String name() { return mLister.name(); }
+  /** cstr with a dialog
+   * @param dialog  dialog
+   */
+  public ListerHandler( AutoCalibDialog dialog ) // AUTO-CALIB
+  {
+    mDialog = dialog;
+  }
+
+  /** @return true if this lister handler is associated to a dialog
+   */
+  public boolean hasDialog() { return mDialog != null; }
+
+  /** set the dialog to null
+   */
+  public void closeDialog() { mDialog = null; } // AUTO-CALIB
+
+  /** @return the handler name: either the lister name, or the string 'dialog', or 'no-name'
+   */
+  public String name() 
+  { 
+    if ( mLister != null ) return mLister.name();
+    if ( mDialog != null ) return "dialog";
+    return "no-name";
+  }
 
   /** refresh display
    * @param nr    number of data
@@ -54,27 +82,39 @@ public class ListerHandler extends Handler
   @Override
   public void handleMessage( Message msg )
   {
-    if ( mLister == null ) return;
-    Bundle bundle = msg.getData();
-    switch ( msg.what ) {
-      case Lister.LIST_REFRESH:
-        int nr = bundle.getInt( Lister.NUMBER );
-        mLister.refreshDisplay( nr, false );
-        break;
-      case Lister.LIST_STATUS:
-        int status = bundle.getInt( Lister.STATE );
-        mLister.setConnectionStatus( status );
-        break;
-      case Lister.LIST_UPDATE:
-        long blk_id = bundle.getLong( Lister.BLOCK_ID );
-        if ( TDLog.isStreamFile() ) TDLog.f("LISTER " + TDLog.threadId() + " lister " + this.toString() + " blk id " + blk_id );
-        mLister.updateBlockList( blk_id );
-        break;
-      case Lister.LIST_REF_AZIMUTH:
-        float azimuth =  bundle.getFloat( Lister.AZIMUTH );
-        long fixed_extend = bundle.getLong( Lister.FIXED_EXTEND );
-        mLister.setRefAzimuth( azimuth, fixed_extend );
-        break;
+    if ( mLister != null ) {
+      Bundle bundle = msg.getData();
+      switch ( msg.what ) {
+        case Lister.LIST_REFRESH:
+          int nr = bundle.getInt( Lister.NUMBER );
+          mLister.refreshDisplay( nr, false );
+          break;
+        case Lister.LIST_STATUS:
+          int status = bundle.getInt( Lister.STATE );
+          mLister.setConnectionStatus( status );
+          break;
+        case Lister.LIST_UPDATE:
+          long blk_id = bundle.getLong( Lister.BLOCK_ID );
+          if ( TDLog.isStreamFile() ) TDLog.f("LISTER " + TDLog.threadId() + " lister " + this.toString() + " blk id " + blk_id );
+          mLister.updateBlockList( blk_id );
+          break;
+        case Lister.LIST_REF_AZIMUTH:
+          float azimuth =  bundle.getFloat( Lister.AZIMUTH );
+          long fixed_extend = bundle.getLong( Lister.FIXED_EXTEND );
+          mLister.setRefAzimuth( azimuth, fixed_extend );
+          break;
+      }
+    } else if (  mDialog != null ) { // AUTO-CALIB
+      if ( msg.what ==  Lister.LIST_AUTO_CALIB ) {
+        Bundle bundle = msg.getData();
+        long gx = bundle.getLong( "GX" );
+        long gy = bundle.getLong( "GY" );
+        long gz = bundle.getLong( "GZ" );
+        long mx = bundle.getLong( "MX" );
+        long my = bundle.getLong( "MY" );
+        long mz = bundle.getLong( "MZ" );
+        mDialog.update( gx, gy, gz, mx, my, mz );
+      }
     }
   }
 

@@ -63,6 +63,8 @@ import java.io.OutputStream;
 // import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -383,7 +385,7 @@ public class TDExporter
 
    // ============== CAVE INFOS and BRANCHES
       pw.format("    <caveinfos>\n");
-      pw.format("      <caveinfo name=\"%s\"", cave );
+      pw.format("      <caveinfo name=\"%s\" color=\"1724697804\"", cave );
       // pw.format( " color=\"\"");
       if ( info.comment != null && info.comment.length() > 0 ) {
         pw.format( " comment=\"%s\"\n", toXml( info.comment ) );
@@ -391,7 +393,7 @@ public class TDExporter
       pw.format(" >\n");
       pw.format("        <branches>\n");
       if ( branch != null ) {
-        pw.format("          <branch name=\"%s\">\n          </branch>\n", branch );
+        pw.format("          <branch name=\"%s\" color=\"%ld\">\n          </branch>\n", branch, TDUtil.randomPastel() );
       }
       pw.format("        </branches>\n");
       pw.format("      </caveinfo>\n");
@@ -1524,32 +1526,39 @@ public class TDExporter
    */
   static int exportSurveyAsTh( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
-    // if ( TDSetting.mTherionConfig && ! TDSetting.mExportUri ) { // create thconfig file 
-    //   synchronized( TDFile.mFilesLock ) {
-    //     // File dir = TDFile.getFile( TDPath.getTdconfigDir() );
-    //     // if ( ! dir.exists() ) dir.mkdirs();
-    //     try {
-    //       // BufferedWriter bcw = TDFile.getMSwriter( "thconfig", surveyname + ".thconfig", "text/thconfig" );
-    //       BufferedWriter bcw = new BufferedWriter( new FileWriter( TDPath.getThconfigFileWithExt( surveyname ) ) );
-    //       PrintWriter pcw = new PrintWriter( bcw );
-    //       pcw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
-    //       pcw.format("source \"../th/%s.th\"\n\n", info.name );
-    //       pcw.format("layout topodroid\n");
-    //       pcw.format("  legend on\n");
-    //       pcw.format("  symbol-hide group centerline\n");
-    //       pcw.format("  symbol-show point station\n");
-    //       pcw.format("  debug station-names\n");
-    //       pcw.format("endlayout\n");
-    //       pcw.format("\n");
-    //       pcw.format("export map -layout topodroid -o %s-p.pdf -proj plan \n\n", info.name );
-    //       pcw.format("export map -layout topodroid -o %s-s.pdf -proj extended \n\n", info.name );
-    //       bcw.flush();
-    //       bcw.close();
-    //     } catch ( IOException e ) {
-    //       TDLog.Error( "Failed Therion config export: " + e.getMessage() );
-    //     }
-    //   }
-    // }
+    boolean with_thconfig = TDSetting.mTherionWithConfig;
+    boolean embed_thconfig = false;
+
+    if ( with_thconfig ) {
+      if ( TDSetting.mTherionEmbedConfig ) { 
+        embed_thconfig = true;
+      } else { // write thconfig file
+        String thconfig = TDPath.getOutFile( surveyname + ".thconfig" );
+        // File dir = TDFile.getFile( thconfig );
+        // if ( ! dir.exists() ) dir.mkdirs();
+        TDLog.v("thconfig: " + thconfig );
+        try {
+          // BufferedWriter bcw = TDFile.getMSwriter( "thconfig", surveyname + ".thconfig", "text/thconfig" );
+          BufferedWriter bcw = new BufferedWriter( new FileWriter( thconfig ) );
+          PrintWriter pcw = new PrintWriter( bcw );
+          pcw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
+          pcw.format("source \"../th/%s.th\"\n\n", info.name );
+          pcw.format("layout topodroid\n");
+          pcw.format("  legend on\n");
+          pcw.format("  symbol-hide group centerline\n");
+          pcw.format("  symbol-show point station\n");
+          pcw.format("  debug station-names\n");
+          pcw.format("endlayout\n");
+          pcw.format("\n");
+          pcw.format("export map -layout topodroid -o %s-p.pdf -proj plan \n\n", info.name );
+          pcw.format("export map -layout topodroid -o %s-s.pdf -proj extended \n\n", info.name );
+          bcw.flush();
+          bcw.close();
+        } catch ( IOException e ) {
+          TDLog.Error( "Failed Therion config export: " + e.getMessage() );
+        }
+      }
+    }
 
     // TDLog.v( "export as therion: " + file.getName() );
     // TDLog.v( "export " + info.name + " as therion: " + surveyname );
@@ -1579,7 +1588,7 @@ public class TDExporter
 
       pw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
 
-      if ( TDSetting.mTherionConfig /* && TDSetting.mExportUri */ ) { // embed thconfig
+      if ( embed_thconfig /* && TDSetting.mExportUri */ ) { // embed thconfig
         pw.format("layout topodroid\n");
         pw.format("  legend on\n");
         pw.format("  symbol-hide group centerline\n");
@@ -1628,7 +1637,7 @@ public class TDExporter
       }
       pw.format("    date %s \n", info.date );
       if ( info.team != null && info.team.length() > 0 ) {
-        if ( TDSetting.mTherionConfig ) { 
+        if ( embed_thconfig ) { 
           String[] names = info.team.replaceAll(",", " ").replaceAll(";", " ").replaceAll("\\s+", " ").split(" ");
           int len = names.length;
           int k = 0;
@@ -1872,7 +1881,7 @@ public class TDExporter
       pw.format("endsurvey\n");
       bw.flush();
 
-      if ( TDSetting.mTherionConfig /* && TDSetting.mExportUri */ ) { // end embed thconfig file 
+      if ( embed_thconfig /* && TDSetting.mExportUri */ ) { // end embed thconfig file 
         pw.format("endsource\n");
         pw.format("\n");
         pw.format("export map -layout topodroid -o %s-p.pdf -proj plan \n\n", info.name );

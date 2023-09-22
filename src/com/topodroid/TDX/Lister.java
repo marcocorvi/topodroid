@@ -23,5 +23,6 @@ public class Lister
   public static final int LIST_UPDATE  = 2;
   public static final int LIST_STATUS  = 3;
   public static final int LIST_REF_AZIMUTH = 4;
+  public static final int LIST_AUTO_CALIB  = 5; // AUTO-CALIB
 
 }

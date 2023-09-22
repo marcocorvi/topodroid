@@ -265,6 +265,10 @@ public class TDPrefKey
     "DISTOX_ALGO_MIN_BETA",       //                  beta
     "DISTOX_ALGO_MIN_GAMMA",      //                  gamma
     "DISTOX_ALGO_MIN_DELTA", // 10 //                 delta
+    "DISTOX_AUTO_CAL_BETA",
+    "DISTOX_AUTO_CAL_ETA",
+    "DISTOX_AUTO_CAL_GAMMA",
+    "DISTOX_AUTO_CAL_DELTA",
     null
   };
 
@@ -280,7 +284,11 @@ public class TDPrefKey
     R.string.pref_algo_min_alpha_title,
     R.string.pref_algo_min_beta_title, 
     R.string.pref_algo_min_gamma_title,
-    R.string.pref_algo_min_delta_title
+    R.string.pref_algo_min_delta_title,
+    R.string.pref_auto_cal_beta_title,
+    R.string.pref_auto_cal_eta_title,
+    R.string.pref_auto_cal_gamma_title,
+    R.string.pref_auto_cal_delta_title,
   };
 
   static int[] CALIBdesc = {
@@ -295,7 +303,11 @@ public class TDPrefKey
     R.string.pref_algo_min_alpha_summary,
     R.string.pref_algo_min_beta_summary,
     R.string.pref_algo_min_gamma_summary,
-    R.string.pref_algo_min_delta_summary
+    R.string.pref_algo_min_delta_summary,
+    R.string.pref_auto_cal_beta_summary,
+    R.string.pref_auto_cal_eta_summary,
+    R.string.pref_auto_cal_gamma_summary,
+    R.string.pref_auto_cal_delta_summary,
   };
 
   public static String[] CALIBdef = {
@@ -310,7 +322,11 @@ public class TDPrefKey
     "0.1",
     "4.0",
     "1.0",
-    "1.0"
+    "1.0",
+    "0.004",
+    "0.04",
+    "0.04",
+    "0.04",
   };
 
   // ------------------------------------------------------------------------------

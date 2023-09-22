@@ -93,6 +93,16 @@ public class TDMatrix
     z.plusEqual( b.z );
   }
 
+  /** subtract another matrix to this one
+   * @param b  the other matrix
+   */
+  public void minusEqual( TDMatrix b )
+  {
+    x.minusEqual( b.x );
+    y.minusEqual( b.y );
+    z.minusEqual( b.z );
+  }
+
   /** @return the sum of this matrix and another matrix
    * @param b  the other matrix
    */

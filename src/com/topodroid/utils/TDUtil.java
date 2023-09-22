@@ -20,6 +20,7 @@ import com.topodroid.TDX.TDandroid;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import java.util.Random;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -325,6 +326,13 @@ public class TDUtil
     return date.substring(6,10) + "." + date.substring(3,5) + "." + date.substring(0,2);
   }
 
+  /** @return the time in seconds since the age
+   */
+  public static long time()
+  {
+    return (new GregorianCalendar()).getTimeInMillis();
+  }
+
   /** @return the date from the millis
    * @param millis    millis
    */
@@ -437,6 +445,18 @@ public class TDUtil
   public static <E> boolean isEmpty( List< E > list ) 
   {
     return list == null || list.size() == 0;
+  }
+
+  // COLORS ---------------------------------------------
+  private static Random mRandom = new Random( time() );
+  private static int[] PASTEL = {
+     -2333874, -13990722, -1131206, -8008103, -7353100,
+     -1407935, -7245384, -5460820, -11354661, -13641823,
+     -3757442, -3308602 };
+
+  public static int randomPastel()
+  {
+    return PASTEL[ mRandom.nextInt( 12 ) ];
   }
 
 

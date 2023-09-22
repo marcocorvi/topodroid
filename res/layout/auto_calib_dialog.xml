@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:orientation="vertical"
+  >
+  <LinearLayout 
+    style="@style/base_padding"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+   					  
+    <TextView android:id="@+id/coeff_bg"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="BG"
+        />
+    <TextView android:id="@+id/coeff_agx"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="AGx"
+        />
+    <TextView android:id="@+id/coeff_agy"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="AGy"
+        />
+    <TextView android:id="@+id/coeff_agz"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="AGz"
+        />
+
+    <TextView android:id="@+id/coeff_bm"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="BM"
+        />
+    <TextView android:id="@+id/coeff_amx"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="AMx"
+        />
+    <TextView android:id="@+id/coeff_amy"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="AMy"
+        />
+    <TextView android:id="@+id/coeff_amz"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="AMz"
+        />
+
+    <TextView android:id="@+id/coeff_nl"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="nl"
+        />
+  </LinearLayout>
+
+  <LinearLayout android:id="@+id/help"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/marginvbig"
+      android:orientation="horizontal" 
+      android:gravity="start"
+      >
+      <Button android:id="@+id/button_help"
+          style="@style/button_empty"
+          android:text="@string/button_help"
+      />
+      <LinearLayout 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        >
+        <Button android:id="@+id/button_close"
+          android:layout_gravity="start"
+          style="@style/button_default"
+          android:text="@string/button_close"
+        />
+        <Button android:id="@+id/button_write"
+          style="@style/button_default"
+          android:text="@string/button_write"
+        />
+        <!-- Button android:id="@+id/button_stop"
+          style="@style/button_default"
+          android:text="@string/button_stop"
+        / -->
+        <Button android:id="@+id/button_start"
+          style="@style/button_default"
+          android:text="@string/button_start"
+        />
+      </LinearLayout>
+  </LinearLayout>
+
+</LinearLayout>

@@ -100,7 +100,7 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
   public int packetProcess( byte[] databuf )
   {
     if ( databuf.length == 0 ) {
-      TDLog.v("XBLE proto 0-length data");
+      TDLog.e("XBLE proto 0-length data");
       return PACKET_NONE;
     }
     if ( (databuf[0] == MemoryOctet.BYTE_PACKET_DATA || databuf[0] == MemoryOctet.BYTE_PACKET_G ) && databuf.length == DATA_LEN ) { // shot / calib data

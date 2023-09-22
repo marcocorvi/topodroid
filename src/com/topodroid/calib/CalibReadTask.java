@@ -35,6 +35,7 @@ public class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
 {
   public static final int PARENT_DEVICE = 1;
   public static final int PARENT_GM     = 2;
+  // public static final int PARENT_AUTO   = 3; // AUTO-CALIB
 
   private byte[]   coeff;
   private final WeakReference<TopoDroidApp> mApp; // FIXME LEAK
@@ -99,6 +100,9 @@ public class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
             // (new CalibCoeffDialog( mContext.get(), null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
           }
           break;
+        // case PARENT_AUTO: // AUTO-CALIB
+        //     mParent.get().displayCoeff( bg, ag, bm, am, nL );
+        //   break;
       }
     } else {
       TDToast.makeBad( R.string.read_failed );

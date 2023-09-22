@@ -421,6 +421,10 @@ public class ShotWindow extends Activity
     // sb.append( mApp.getConnectionStateTitleStr() ); // IF_COSURVEY
     sb.append( TDInstance.survey );
 
+    if ( onMultiselect ) {
+      sb.append( String.format( getResources().getString( R.string.select_size ), mDataAdapter.getMultiSelectSize() ) );
+    }
+
     setTitleColor( StationPolicy.mTitleColor );
     mActivity.setTitle( sb.toString() );
   }
@@ -619,6 +623,7 @@ public class ShotWindow extends Activity
       mListView.invalidate();
       onMultiselect = false;
     }
+    setTheTitle();
   }
 
   /** close the multiselection
@@ -630,6 +635,7 @@ public class ShotWindow extends Activity
     mListView.setAdapter( mButtonView1.mAdapter );
     mListView.invalidate();
     onMultiselect = false;
+    setTheTitle();
   }
 
   /** react to a user tap on an item (menu entry)

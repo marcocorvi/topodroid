@@ -40,7 +40,7 @@ import java.lang.reflect.Method;
 
 public class BleCallback extends BluetoothGattCallback
 {
-  private final static boolean LOG = true;
+  private final static boolean LOG = false;
   private BluetoothDevice mDevice = null;
 
   public final static int CONNECTION_TIMEOUT =   8;

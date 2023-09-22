@@ -276,7 +276,7 @@ public class ExportDialogShot extends MyDialog
         break;
       case TDConst.SURVEY_POS_THERION: // Therion
         {
-          TDSetting.mTherionConfig = ((CheckBox) findViewById( R.id.therion_config )).isChecked();
+          TDSetting.mTherionWithConfig = ((CheckBox) findViewById( R.id.therion_config )).isChecked();
           TDSetting.mTherionMaps = ((CheckBox) findViewById( R.id.therion_maps )).isChecked();
           TDSetting.mSurvexLRUD  = ((CheckBox) findViewById( R.id.therion_lrud )).isChecked();
         }
@@ -345,7 +345,7 @@ public class ExportDialogShot extends MyDialog
     ((CheckBox) findViewById( R.id.survex_splay )).setChecked( TDSetting.mSurvexSplay );
     ((CheckBox) findViewById( R.id.survex_lrud )).setChecked( TDSetting.mSurvexLRUD );
 
-    ((CheckBox) findViewById( R.id.therion_config )).setChecked( TDSetting.mTherionConfig );
+    ((CheckBox) findViewById( R.id.therion_config )).setChecked( TDSetting.mTherionWithConfig );
     ((CheckBox) findViewById( R.id.therion_maps )).setChecked( TDSetting.mTherionMaps );
     ((CheckBox) findViewById( R.id.therion_lrud )).setChecked( TDSetting.mSurvexLRUD );
 

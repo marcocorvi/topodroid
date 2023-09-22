@@ -41,6 +41,7 @@ import com.topodroid.calib.CalibGMDialog;
 import com.topodroid.calib.CalibCoverageDialog;
 import com.topodroid.calib.CalibValidateListDialog;
 import com.topodroid.calib.CalibValidateResultDialog;
+import com.topodroid.calib.CalibTransform;
 import com.topodroid.calib.CalibAlgo;
 import com.topodroid.calib.CalibAlgoBH;
 // import com.topodroid.calib.CalibAlgoMin;
@@ -143,6 +144,7 @@ public class GMActivity extends Activity
                         R.string.menu_options, 
                         R.string.menu_help,
 			R.string.menu_hide_deleted     // alternate 0
+                        // , R.string.menu_calib_auto // AUTO-CALIB
                      };
 
   static final private int[] help_icons = {
@@ -200,6 +202,10 @@ public class GMActivity extends Activity
   // forward survey name to DeviceHelper
 
   // -------------------------------------------------------------
+
+  // /** @return the calibration transform
+  //  */
+  // public CalibTransform getCalibration() { return mCalibration; }
 
   /** get the calibration algorithm
    * @return the index of the calibration algorithm
@@ -1200,6 +1206,8 @@ public class GMActivity extends Activity
     }
   }
 
+  // ----------------------------------------------------------
+
   /** compute the groups of the calibration data
    * @param start_id   ID of the starting data
    * @param policy     group policy
@@ -1367,6 +1375,7 @@ public class GMActivity extends Activity
     if ( TDLevel.overAdvanced ) menu_adapter.add( res.getString( menus[1] ) );
     menu_adapter.add( res.getString( menus[2] ) );
     menu_adapter.add( res.getString( menus[3] ) );
+    // if ( TDLevel.overTester ) menu_adapter.add( res.getString( menus[5] ) ); // AUTO-CALIB
 
     mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
@@ -1415,6 +1424,13 @@ public class GMActivity extends Activity
       startActivity( intent );
     } else if ( p++ == pos ) { // HELP
       new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
+    // } else if ( TDLevel.overTester && p++ == pos ) { // AUTO-CALIB
+    //   if ( mCalibration != null ) {
+    //     mApp.resetComm();
+    //     (new AutoCalibDialog( this, /* this, */ mApp, mCalibration )).show();
+    //   } else {
+    //     TDToast.makeLong( R.string.autocalib_not_supported );
+    //   }
     }
   }
 

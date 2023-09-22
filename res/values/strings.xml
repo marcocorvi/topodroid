@@ -167,6 +167,8 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="calib_reset">Reset DistoX calibration ?</string>
     <string name="calib_min_error">Minimum error</string>
     <string name="magn_dip">Magn. dip &#8230;</string>
+    <string name="auto_calib">Auto Calib</string>
+    <string name="autocalib_not_supported">Required calibration computation</string>
     
     <string name="algorithm">Algorithm:</string>
     <string name="auto" copyable="it pt">auto</string>
@@ -456,6 +458,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="menu_options">SETTINGS</string>
     <string name="menu_overview">OVERVIEW</string>
     <string name="menu_packets">PACKETS</string>
+    <string name="menu_calib_auto">AUTO-CALIB</string>
     <!-- UNUSED string name="menu_pair">PAIR</string -->
     <string name="menu_palette" copyable="fr it">PALETTE</string>
     <string name="menu_photo" copyable="fr">PHOTO</string>
@@ -839,8 +842,8 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="button_station"   >Center at</string>
     <string name="button_store"     >Store</string>
     <string name="button_swap"      >Swap</string>
-    <!-- UNUSED string name="button_start"     >Start</string -->
-    <!-- UNUSED string name="button_stop"      >Stop</string -->
+    <string name="button_start"     >Start</string>
+    <string name="button_stop"      >Stop</string>
     <string name="button_upload"    >Upload</string>
     <string name="button_download"  >Download</string>
     <string name="button_view"      >View</string>
@@ -1230,6 +1233,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="title_scraps">Survey sketches</string>
     <string name="title_scraps_outline">Sketch outlines</string>
     <!-- UNUSED string name="title_select">Select</string -->
+    <string name="select_size" translatable="false">  &lt;&lt; %1$d &gt;&gt;</string>
 
     <string name="title_settings_main">TopoDroid main settings</string>
     <string name="title_settings_export">TopoDroid import/export settings</string>
@@ -1823,6 +1827,15 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_algo_min_gamma_summary" translatable="false">Min-algo group G.x M.x weight</string>
   <string name="pref_algo_min_delta_title" translatable="false">Min-algo delta</string>
   <string name="pref_algo_min_delta_summary" translatable="false">Min-algo group G^M.x weight</string>
+
+  <string name="pref_auto_cal_beta_title" translatable="false">Auto-cal B</string>
+  <string name="pref_auto_cal_beta_summary" translatable="false">Auto-cal B (average)</string>
+  <string name="pref_auto_cal_eta_title" translatable="false">Auto-cal E</string>
+  <string name="pref_auto_cal_eta_summary" translatable="false">Auto-cal E (sum)</string>
+  <string name="pref_auto_cal_gamma_title" translatable="false">Auto-cal G</string>
+  <string name="pref_auto_cal_gamma_summary" translatable="false">Auto-cal G (matrix)</string>
+  <string name="pref_auto_cal_delta_title" translatable="false">Auto-cal D</string>
+  <string name="pref_auto_cal_delta_summary" translatable="false">Auto-cal D (ellipse)</string>
 
   <string name="pref_3d_sketch_title">3D modeling</string>
   <string name="pref_3d_sketch_summary">Enable 3D modeling (debug build only)</string>

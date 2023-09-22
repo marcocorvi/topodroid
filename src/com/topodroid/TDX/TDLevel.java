@@ -29,6 +29,7 @@ public class TDLevel
   public static final int ADVANCED = 2;
   public static final int EXPERT   = 3;
   public static final int TESTER   = 4;
+  public static final int DEBUG    = 5;
   // static final private int COMPLETE = 5;
 
   public static int mLevel = 1; // activity level
@@ -70,6 +71,7 @@ public class TDLevel
     if ( overExpert && debug ) {
       overTester = true;
       TglParser.setWallMax();
+      // mLevel = DEBUG; // this causes all DEBUG settings
     }
   }
 }

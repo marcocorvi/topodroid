@@ -1029,7 +1029,7 @@ public class DeviceActivity extends Activity
     ++k; if ( TDLevel.overExpert && TDSetting.mPacketLog ) menu_adapter.add( res.getString( menus[k] ) ); // PACKET_LOG
     ++k; menu_adapter.add( res.getString( menus[k] ) );
     ++k; menu_adapter.add( res.getString( menus[k] ) );
-    // ++k; if ( TDLevel.overTester ) menu_adapter.add( res.getString( menus[8] ) ); // CALIB_RESET
+    // ++k; if ( TDLevel.overTester ) menu_adapter.add( res.getString( menus[k] ) ); // CALIB_RESET
     mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
   }
@@ -1086,7 +1086,7 @@ public class DeviceActivity extends Activity
       Intent intent = new Intent( this, com.topodroid.prefs.TDPrefActivity.class );
       intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_DEVICE );
       startActivity( intent );
-    } else if ( p == pos ) { // HELP
+    } else if ( p++ == pos ) { // HELP
       new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
     // } else if ( TDLevel.overTester && p++ == pos ) { // CALIB_RESET
     //   doCalibReset();

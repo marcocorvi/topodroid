@@ -199,20 +199,36 @@ public class TopoDroidComm
       // }
     } else if ( res == DataType.PACKET_G ) {
       ++mNrReadPackets; // FIXME NON_ATOMIC_ON_VOLATILE incrementNrPacketsRead();
-      // TDLog.v( "TD comm: packet G " + mNrReadPackets );
+      TDLog.v( "TD comm: packet G " + mNrReadPackets );
       setHasG( true );
     } else if ( res == DataType.PACKET_M ) {
       ++mNrReadPackets; // FIXME NON_ATOMIC_ON_VOLATILE incrementNrPacketsRead();
-      // TDLog.v( "TD comm: packet M " + mNrReadPackets );
+      TDLog.v( "TD comm: packet M " + mNrReadPackets );
       // get G and M from mProtocol and save them to store
       // TDLog.v( "G " + mProtocol.mGX + " " + mProtocol.mGY + " " + mProtocol.mGZ + " M " + mProtocol.mMX + " " + mProtocol.mMY + " " + mProtocol.mMZ );
-      long c_blk = TopoDroidApp.mDData.insertGM( TDInstance.cid, mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ );
-      if ( lister != null ) {
-        Message msg = lister.obtainMessage( Lister.LIST_UPDATE );
-        Bundle bundle = new Bundle();
-        bundle.putLong( Lister.BLOCK_ID, c_blk );
-        msg.setData(bundle);
-        lister.sendMessage(msg);
+      if ( ! lister.hasDialog() ) {
+        long c_blk = TopoDroidApp.mDData.insertGM( TDInstance.cid, mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ );
+        if ( lister != null ) {
+          Message msg = lister.obtainMessage( Lister.LIST_UPDATE );
+          Bundle bundle = new Bundle();
+          bundle.putLong( Lister.BLOCK_ID, c_blk );
+          msg.setData(bundle);
+          lister.sendMessage(msg);
+        }
+      } else { // AUTO-CALIB
+        TDLog.v("AutoCalib CID " + TDInstance.cid + " has-G " + mHasG );
+        if ( mHasG ) {
+          Message msg = lister.obtainMessage( Lister.LIST_AUTO_CALIB );
+          Bundle bundle = new Bundle();
+          bundle.putLong( "GX", mProtocol.mGX );
+          bundle.putLong( "GY", mProtocol.mGY );
+          bundle.putLong( "GZ", mProtocol.mGZ );
+          bundle.putLong( "MX", mProtocol.mMX );
+          bundle.putLong( "MY", mProtocol.mMY );
+          bundle.putLong( "MZ", mProtocol.mMZ );
+          msg.setData(bundle);
+          lister.sendMessage(msg);
+        }
       }
       if ( ! mHasG ) {
         TDLog.e( "data without G packet " + mNrReadPackets /* getNrReadPackets() */ );
@@ -225,6 +241,7 @@ public class TopoDroidComm
         // }
       }
       setHasG( false );
+      
     } else if ( res == DataType.PACKET_REPLY ) {
       // TDLog.v( "TD comm: packet REPLY");
       // TODO handle packet reply

@@ -47,10 +47,11 @@ public class Device
   public final static int DISTO_BRIC4 = 6;
   public final static int DISTO_XBLE  = 7; // SIWEI_TIAN
   public final static int DISTO_SAP6  = 8; 
+  public final static int DISTO_BRIC5 = 9;
 
   // SIWEI_TIAN
-  final static String[] typeString = { "Unknown", "A3", "X310", "X000", "BLEX", "SAP5", "BRIC4", "XBLE", "SAP6" };
-  private final static String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0", "BleX", "Sap5", "Bric4", "DistoXBLE", "Sap6" };
+  final static String[] typeString = { "Unknown", "A3", "X310", "X000", "BLEX", "SAP5", "BRIC4", "XBLE", "SAP6", "BRIC5" };
+  private final static String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0", "BleX", "Sap5", "Bric4", "DistoXBLE", "Sap6", "Bric5" };
   
   public static String typeToString( int type )
   {
@@ -74,7 +75,7 @@ public class Device
   public boolean isA3( )        { return mType == DISTO_A3; }
   public boolean isX310( )      { return mType == DISTO_X310; }
   public boolean isSap( )       { return mType == DISTO_SAP5 || mType == DISTO_SAP6; }
-  public boolean isBric( )      { return mType == DISTO_BRIC4; }
+  public boolean isBric( )      { return mType == DISTO_BRIC4 || mType == DISTO_BRIC5; }
   public boolean isDistoXBLE( ) { return mType == DISTO_XBLE; } // SIWEI_TIAN
   public boolean isSap5( )      { return mType == DISTO_SAP5; }
   public boolean isSap6( )      { return mType == DISTO_SAP6; }
@@ -83,14 +84,14 @@ public class Device
   public static boolean isA3( int type )        { return type == DISTO_A3; }
   public static boolean isX310( int type )      { return type == DISTO_X310; }
   public static boolean isSap( int type )       { return type == DISTO_SAP5 || type == DISTO_SAP6; }
-  public static boolean isBric( int type )      { return type == DISTO_BRIC4; }
+  public static boolean isBric( int type )      { return type == DISTO_BRIC4 || type == DISTO_BRIC5; }
   public static boolean isDistoXBLE( int type ) { return type == DISTO_XBLE; } // SIWEI_TIAN
   public static boolean isSap5( int type )      { return type == DISTO_SAP5; }
   public static boolean isSap6( int type )      { return type == DISTO_SAP6; }
 
   // SIWEI_TIAN
-  public boolean canSendCommand() { return mType == DISTO_X310 || mType == DISTO_BRIC4 || mType == DISTO_SAP6; }
-  public static boolean canSendCommand( int type ) { return type == DISTO_X310 || type == DISTO_BRIC4 || type == DISTO_SAP6; }
+  public boolean canSendCommand() { return mType == DISTO_X310 || mType == DISTO_BRIC4 || mType == DISTO_BRIC5 || mType == DISTO_SAP6; }
+  public static boolean canSendCommand( int type ) { return type == DISTO_X310 || type == DISTO_BRIC4 || type == DISTO_BRIC5 || type == DISTO_SAP6; }
 
   /** @return the device name given the model string
    * @param model   model string
@@ -106,6 +107,9 @@ public class Device
     }
     if ( model.startsWith("BRIC4_") ) {
       return model.replace("BRIC4_", "" );
+    }
+    if ( model.startsWith("BRIC5_") ) {
+      return model.replace("BRIC5_", "" );
     }
     if ( model.startsWith("DistoXBLE-") ) { // SIWEI_TIAN
       return model.replace("DistoXBLE-", "" );
@@ -129,6 +133,7 @@ public class Device
       if ( model.equals( "BRIC4" ) || model.startsWith( "BRIC4" ) )     return DISTO_BRIC4; 
       if ( model.equals( "SAP5" )  || model.startsWith( "Shetland_" ) ) return DISTO_SAP5;
       if ( model.equals( "SAP6" )  /* || model.startsWith( "Shetland_" ) */ ) return DISTO_SAP6;
+      if ( model.equals( "BRIC5" ) || model.startsWith( "BRIC5" ) )     return DISTO_BRIC5; 
       // if ( model.equals( "BLEX" ) ) return DISTO_BLEX; // FIXME BLE_5
       // if ( model.equals( "X000" ) || model.equals( "DistoX0" ) ) return DISTO_X000; // FIXME VirtualDistoX
     }
@@ -200,6 +205,8 @@ public class Device
     if ( name.startsWith("SAP6-" ) )     return name.replace("SAP6-", "");
     if ( name.startsWith("SAP-" ) )      return name.replace("SAP-", "");
     if ( name.startsWith("BRIC-" ) )     return name.replace("BRIC-", "");
+    // if ( name.startsWith("BRIC4-" ) )    return name.replace("BRIC4-", "");
+    // if ( name.startsWith("BRIC5-" ) )    return name.replace("BRIC5-", "");
     return name;
   }
 

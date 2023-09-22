@@ -581,6 +581,7 @@ public class DistoXComm extends TopoDroidComm
    * @return true on success
    * 
    * called only by CalibReadTask
+   * @pre coeff preallocated not null 
    */
   @Override
   public boolean readCoeff( String address, byte[] coeff )

@@ -121,7 +121,7 @@ public class DataDownloader
    * @param lister       ...
    * @param data_type    expected type of the data
    */
-  void doDataDownload( ListerHandler lister, int data_type )
+  public void doDataDownload( ListerHandler lister, int data_type )
   {
     // TDLog.v( "DOWNLOAD: do Data Download() - nr " + mDownload + " connected " + mConnected + " data type " + data_type );
     if ( mDownload ) {
