@@ -393,7 +393,7 @@ public class TDExporter
       pw.format(" >\n");
       pw.format("        <branches>\n");
       if ( branch != null ) {
-        pw.format("          <branch name=\"%s\" color=\"%ld\">\n          </branch>\n", branch, TDUtil.randomPastel() );
+        pw.format("          <branch name=\"%s\" color=\"%d\">\n          </branch>\n", branch, TDUtil.randomPastel() );
       }
       pw.format("        </branches>\n");
       pw.format("      </caveinfo>\n");
