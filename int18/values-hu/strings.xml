@@ -158,7 +158,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="calib_reset">Visszaállítja a DistoX kalibrációját?</string>
     <string name="calib_min_error">Minimális hiba</string>
     <string name="magn_dip">Mágn. lehajlás &#8230;</string>
-    
+    <string name="auto_calib">Auto. Kalib.</string>
+    <string name="autocalib_not_supported">Kalibrációs számítás szükséges</string>
     <string name="algorithm">Algoritmus:</string>
     <string name="auto">automatikus</string>
     <string name="linear">lineáris</string>
@@ -449,6 +450,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="menu_options">BEÁLLÍTÁSOK</string>
     <string name="menu_overview">ÁTTEKINTŐ</string>
     <string name="menu_packets">CSOMAGOK</string>
+    <string name="menu_calib_auto">AUTO-KALIB</string>
     <!-- UNUSED string name="menu_pair">PÁROSÍTÁS</string -->
     <string name="menu_palette">PALETTA</string>
     <string name="menu_photo">FOTÓ</string>
