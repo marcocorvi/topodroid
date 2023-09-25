@@ -1383,8 +1383,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_z6_workaround_summary">Gambiarra Z6 para download dos dados da DistoX</string>
   <string name="pref_firmware_sanity_title">Verif firmware</string>
   <string name="pref_firmware_sanity_summary">Forçar verificações de sanidade de firmware</string>
-  <string name="pref_crs_title">C R S </string>
-  <string name="pref_crs_summary">Nome do CRS como no Proj4</string>
+  <string name="pref_crs_title">SRC</string>
+  <string name="pref_crs_summary">Nome do Sistema de Referência de Coordenadas como usado no Proj4</string>
   <string name="pref_neg_altitude_title">Altitude negativa</string>
   <string name="pref_neg_altitude_summary">Permitir altitudes negativas</string>
   <string name="pref_edit_altitude_title">Altitude editável</string>
