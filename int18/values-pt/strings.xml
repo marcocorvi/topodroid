@@ -1389,7 +1389,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_neg_altitude_summary">Permitir altitudes negativas</string>
   <string name="pref_edit_altitude_title">Altitude editável</string>
   <string name="pref_edit_altitude_summary">Permitir edição de altitudes</string>
-  <string name="pref_fine_location_title">Localização precisa [s]</string>
+  <string name="pref_fine_location_title">Tempo loc precisa</string>
   <string name="pref_fine_location_summary">Tempo de espera para localização precisa [s]</string>
   <string name="pref_geoimport_app_title">App GNSS</string>
   <string name="pref_geoimport_app_summary">App GNSS externa</string>
