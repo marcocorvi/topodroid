@@ -831,8 +831,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="button_station"   >Központ:</string>
     <string name="button_store"     >Tárol</string>
     <string name="button_swap"      >Csere      </string>
-    <string name="button_start"     >Indít</string -->
-    <string name="button_stop"      >Állj</string -->
+    <string name="button_start"     >Indít</string>
+    <string name="button_stop"      >Állj</string>
     <string name="button_upload"    >Feltölt</string>
     <string name="button_download"  >Letölt</string>
     <string name="button_view"      >Megtekint</string>
