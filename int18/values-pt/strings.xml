@@ -146,12 +146,13 @@ no campo abaixo e aperte o botão.
   <string name="calib_reset">Reiniciar a calibração da DistoX?</string>
   <string name="calib_min_error">Erro mínimo</string>
   <string name="magn_dip">Inclinação mag. …</string>
+  <string name="auto_calib">Auto Calib</string>
+  <string name="autocalib_not_supported">Cálculo obrigatório de calibração</string>
   <string name="algorithm">Algoritmo:</string>
   <string name="auto">auto</string>
   <string name="linear">linear</string>
   <string name="non_linear">não linear</string>
-    <!-- UNUSED string name="algo_minimum">minimum</string -->
-
+  <!-- UNUSED string name="algo_minimum">minimum</string -->
   <!-- UNUSED string name="device_algo_failed">Determinação automática do algoritmo mal sucedida\nUtilizando algoritmo linear</string -->
   <string name="device_address">Endereço %1$s</string>
   <!-- UNUSED string name="device_busy">Dispositivo indisponível</string -->
@@ -416,6 +417,7 @@ no campo abaixo e aperte o botão.
   <string name="menu_options">CONFIGURAÇÕES</string>
   <string name="menu_overview">VISÃO GERAL</string>
   <string name="menu_packets">LOG PACOTES</string>
+  <string name="menu_calib_auto">AUTO-CALIB</string>
   <!-- UNUSED string name="menu_pair">PAREAR</string -->
   <string name="menu_palette">PALETA</string>
   <string name="menu_photo">FOTO</string>
@@ -769,8 +771,8 @@ no campo abaixo e aperte o botão.
   <string name="button_station">Centralizar</string>
   <string name="button_store">Armazenar </string>
   <string name="button_swap">Inverter      </string>
-  <!-- UNUSED string name="button_start"     >Iniciar</string -->
-  <!-- UNUSED string name="button_stop"      >Parar</string -->
+  <string name="button_start">Iniciar</string>
+  <string name="button_stop">Parar</string>
   <string name="button_upload">Enviar     </string>
   <string name="button_download">Baixar</string>
   <string name="button_view">Mapa</string>
@@ -1076,7 +1078,6 @@ no campo abaixo e aperte o botão.
   <string name="import_leg_first">Visada antes de EDTC</string>
   <string name="import_diving_datamode">Modo de dados \'mergulho\'</string>
   <string name="import_therion_path">Com hierarquia de topos</string>
-
   <string name="title_azimut">Direção perfil retificado</string>
   <string name="title_audio">Áudiocomentário</string>
   <string name="title_audio_list">Áudios</string>
@@ -1150,7 +1151,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="title_settings_png">Config export PNG</string -->
   <string name="title_settings_gpx">Config export GPX</string>
   <string name="title_settings_kml">Config export KML/GeoJSON/ShapeFile</string>
-    <!-- TODO string name="title_settings_srv">Walls export settings</string -->
+  <string name="title_settings_srv">Config export Walls</string>
   <string name="title_settings_sketch">Config croquis 3D</string>
   <string name="title_settings_survey">Config topo</string>
   <!-- UNUSED string name="title_settings_splay">Config medidas auxiliares</string -->
@@ -1247,7 +1248,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_import_datamode_title">Form dado importação</string>
   <string name="pref_import_datamode_summary">Formato de dados para importação de topos</string>
   <string name="pref_therion_config_title">Comando config Therion</string>
-  <string name="pref_therion_config_summary">Criar comandos de configuração Therion</string>
+  <string name="pref_therion_config_summary">Criar arquivo thconfig simples com comandos de configuração Therion</string>
   <string name="pref_therion_maps_title">Mapa Therion início</string>
   <string name="pref_therion_maps_summary">Mapas Therion antes dos dados da topo</string>
   <string name="pref_extra_buttons_title">Nível recursos</string>
@@ -1290,8 +1291,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_station_prefix_summary">Incluir prefixo nos nomes das bases na exportação Compass/cSurvey/WinKarst</string>
   <string name="pref_compass_splays_title">Aux Compass/Walls</string>
   <string name="pref_compass_splays_summary">Exportar medidas auxiliares em arquivos Compass/Walls como "12 12-1" ou como "12 -".</string>
-  <!-- TODO string name="pref_walls_splays_title">Walls splays</string -->
-  <!-- TODO string name="pref_walls_splays_summary">Export splays in Walls files</string -->
+  <string name="pref_walls_splays_title">Med aux Walls</string>
+  <string name="pref_walls_splays_summary">Incluir medidas auxiliares nos arquivos Walls exportados</string>
   <string name="pref_vtopo_splays_title">Aux VisualTopo</string>
   <string name="pref_vtopo_splays_summary">Incluir medidas auxiliares em arquivos VisualTopo</string>
   <string name="pref_vtopo_lrud_title">EDTC em DE</string>
@@ -1383,13 +1384,13 @@ no campo abaixo e aperte o botão.
   <string name="pref_z6_workaround_summary">Gambiarra Z6 para download dos dados da DistoX</string>
   <string name="pref_firmware_sanity_title">Verif firmware</string>
   <string name="pref_firmware_sanity_summary">Forçar verificações de sanidade de firmware</string>
-  <string name="pref_crs_title">C R S </string>
-  <string name="pref_crs_summary">Nome do CRS como no Proj4</string>
+  <string name="pref_crs_title">SRC</string>
+  <string name="pref_crs_summary">Nome do Sistema de Referência de Coordenadas como usado no Proj4</string>
   <string name="pref_neg_altitude_title">Altitude negativa</string>
   <string name="pref_neg_altitude_summary">Permitir altitudes negativas</string>
   <string name="pref_edit_altitude_title">Altitude editável</string>
   <string name="pref_edit_altitude_summary">Permitir edição de altitudes</string>
-  <string name="pref_fine_location_title">Localização precisa [s]</string>
+  <string name="pref_fine_location_title">Tempo loc precisa</string>
   <string name="pref_fine_location_summary">Tempo de espera para localização precisa [s]</string>
   <string name="pref_geoimport_app_title">App GNSS</string>
   <string name="pref_geoimport_app_summary">App GNSS externa</string>
@@ -1937,13 +1938,13 @@ no campo abaixo e aperte o botão.
   <string name="survey_legs_length"> Comprimento visadas: </string>
   <string name="survey_splays"> Medidas auxiliares: </string>
   <string name="survey_splays_length"> Comprimento med aux: </string>
-  <string name="cave_east"> L: %1$.1f</string>
-  <string name="cave_north"> N: %1$.1f</string>
-  <string name="cave_vert"> Z: %1$.1f</string>
-  <string name="cave_distance"> Dist 3D: %1$.1f</string>
-  <string name="horz_distance"> Dist horizontal 2D: %1$.1f</string>
+  <string name="cave_east" copyable="all"> O: %1$.2f</string>
+  <string name="cave_north" copyable="all"> N: %1$.2f</string>
+  <string name="cave_vert" copyable="all"> Z: %1$.2f</string>
+  <string name="cave_distance"> Distância 3D: %1$.2f</string>
+  <string name="horz_distance"> Distância horizontal 2D: %1$.2f</string>
   <string name="cave_length"> Dist pela caverna: %1$.1f D+ %2$.1f D- %3$.1f</string>
-  <string name="cave_angle"> Azimute: %1$.0f | Inclinação: %2$.0f</string>
+  <string name="cave_angle"> Azimute: %1$.1f  Clino: %2$.1f</string>
   <string name="east">L</string>
   <string name="north">N</string>
   <string name="west">O</string>
