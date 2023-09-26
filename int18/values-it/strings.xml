@@ -979,6 +979,7 @@
     <string name="help_close_app">Chiude l\'app</string>
     <string name="help_coeff">Coefficienti della calibrazione</string>
     <string name="help_color">Pulisci i colori degli splay</string>
+    <!-- TODO string name="help_join">Join lines</string -->
     <!-- UNUSED string name="help_continue">Continuare il disegno di una linea</string -->
     <!-- NO string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Capisaldi salvati</string>
@@ -1682,6 +1683,8 @@
   <string name="pref_path_multiselect_summary">Azione di selezione multipla</string>
   <string name="pref_composite_actions_title">Azioni composite</string>
   <string name="pref_composite_actions_summary">Azioni long-tap linea/area</string>
+  <!-- TODO string name="pref_with_continue_line_title">Line join</string -->
+  <!-- TODO string name="pref_with_continue_line_summary">Enable line join</string -->
   <string name="pref_plane_interpolation_title">Interpolazione piana</string>
   <string name="pref_plane_interpolation_summary">Azione di interpolazione piana</string>
   <string name="pref_plot_split_title">Divisione/Unione disegno</string>

@@ -987,6 +987,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="help_close_app">Program bezárása</string>
     <string name="help_coeff">Mutassa a kalibrációs együtthatókat</string>
     <string name="help_color">Mérés szín törlése</string>
+    <!-- TODO string name="help_join">Join lines</string -->
     <!-- UNUSED string name="help_continue">Vonal folytatása</string -->
     <!-- UNUSED string name="help_contour">Körvonal szerkesztése</string -->
     <string name="help_current_station">Elmentett mérési pontok</string>
@@ -1694,6 +1695,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_path_multiselect_summary">Útvonalas többes kiválasztás lehetőség</string>
   <string name="pref_composite_actions_title">Összetett lehetőség</string>
   <string name="pref_composite_actions_summary">Vonal/terület hosszú érintés akciók</string>
+  <!-- TODO string name="pref_with_continue_line_title">Line join</string -->
+  <!-- TODO string name="pref_with_continue_line_summary">Enable line join</string -->
   <string name="pref_plane_interpolation_title">Felület interpoláció</string>
   <string name="pref_plane_interpolation_summary">Felület interpoláció akciók</string>
   <string name="pref_plot_split_title">Vázlat felosztás / egyesítés</string>

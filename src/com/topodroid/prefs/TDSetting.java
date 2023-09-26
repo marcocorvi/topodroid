@@ -526,6 +526,7 @@ public class TDSetting
   // public static int   mContinueLine  = DrawingWindow.CONT_NONE; // 0
   public static boolean mLineClose = true;
   public static boolean mCompositeActions = false;
+  public static boolean mWithLineJoin = false;  // with line join
   public static boolean mLegOnlyUpdate = false; // whether to update display of drawing window at every shot (not just at legs)
   public static boolean mFullAffine = false; // whether to do full affine transform or shift+scale only
   // public static boolean mLegProjection = true; // leg inclined-projection
@@ -1353,7 +1354,8 @@ public class TDSetting
     mArrowLength   = tryFloat( prefs,  keyLine[5],      defLine[5] );   // DISTOX_ARROW_LENGTH
     mAutoSectionPt = prefs.getBoolean( keyLine[6], bool(defLine[6]) );  // DISTOX_AUTO_SECTION_PT
     // mContinueLine  = tryInt(   prefs,  keyLine[6],      defLine[6] );   // DISTOX_LINE_CONTINUE
-    mAreaBorder    = prefs.getBoolean( keyLine[7], bool(defLine[7]) );  // DISTOX_AREA_BORDER
+    mWithLineJoin  = prefs.getBoolean( keyLine[7], bool(defLine[7]) );  // DISTOX_WITH_CONTINUE_LINE
+    mAreaBorder    = prefs.getBoolean( keyLine[8], bool(defLine[8]) );  // DISTOX_AREA_BORDER
 
     String[] keyPoint = TDPrefKey.POINT;
     String[] defPoint = TDPrefKey.POINTdef;
@@ -1985,6 +1987,8 @@ public class TDSetting
       mPathMultiselect = tryBooleanValue(   hlp, k, v, bool(def[9]) );
     } else if ( k.equals( key[10 ] ) ) { // DISTOX_COMPOSITE_ACTIONS (bool)
       mCompositeActions = tryBooleanValue(  hlp, k, v, bool(def[10]) );
+    } else if ( k.equals( key[11 ] ) ) { // DISTOX_WITH_CONTINUE_LINE (bool)
+      mWithLineJoin = tryBooleanValue(  hlp, k, v, bool(def[11]) );
 
     } else {
       TDLog.Error("missing DEVICE key: " + k );

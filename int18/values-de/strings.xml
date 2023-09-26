@@ -899,6 +899,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="help_close_app">Beenden</string>
   <string name="help_coeff">Kalibrierungs-Koeffizienten zeigen</string>
   <string name="help_color">Hilfszug-Farben löschen</string>
+    <!-- TODO string name="help_join">Join lines</string -->
   <!-- UNUSED string name="help_continue">Linien fortsetzen</string -->
   <!-- UNUSED string name="help_contour">Konturen bearbeiten</string -->
   <string name="help_current_station">Gespeicherte Messpunkte</string>
@@ -1564,6 +1565,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_path_multiselect_summary">Erlaube mehrere Pfade auszuwählen</string>
   <string name="pref_composite_actions_title">Zusammengesetzte Aktionen</string>
   <string name="pref_composite_actions_summary">Erlaube zusammengsetzte Aktionen für Linien/Flächen</string>
+  <!-- TODO string name="pref_with_continue_line_title">Line join</string -->
+  <!-- TODO string name="pref_with_continue_line_summary">Enable line join</string -->
   <string name="pref_plane_interpolation_title">Ebene interpolieren</string>
   <string name="pref_plane_interpolation_summary">Interpoliere die Ebene anhand der Hilfszüge</string>
   <string name="pref_plot_split_title">Skizzen aufteilen</string>

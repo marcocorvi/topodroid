@@ -999,6 +999,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="help_close_app">Close app</string>
     <string name="help_coeff">Show calibration coefficients</string>
     <string name="help_color">Clear splay colors</string>
+    <string name="help_join">Join lines</string>
     <!-- UNUSED string name="help_continue">Continue drawing a line</string -->
     <!-- UNUSED string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Saved stations</string>
@@ -1708,6 +1709,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_path_multiselect_summary">Enable path multiselection action</string>
   <string name="pref_composite_actions_title">Composite actions</string>
   <string name="pref_composite_actions_summary">Enable line/area long-tap actions</string>
+  <string name="pref_with_continue_line_title">Line join</string>
+  <string name="pref_with_continue_line_summary">Enable line join</string>
   <string name="pref_plane_interpolation_title">Plane interpolation</string>
   <string name="pref_plane_interpolation_summary">Enable plane interpolation action</string>
   <string name="pref_plot_split_title">Sketch split/merge</string>

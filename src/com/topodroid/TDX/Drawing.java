@@ -47,7 +47,7 @@ class Drawing
     R.string.popup_select_station
   };
 
-  // 2023-03-10 DROPPED
+  // 2023-03-10 DROPPED 
   // static final int[] mJoinModes = {
   //   R.string.popup_cont_none,
   //   R.string.popup_cont_start,

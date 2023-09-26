@@ -1308,7 +1308,8 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], A, def[ 5], FLOAT,   ctx, hlp ),
       makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6],          ctx, hlp ),
       // makeLst( cat, key[ 6], tit[ 6], dsc[ 6], E, def[ 6], R.array.lineContinue, R.array.lineContinueValue, ctx, hlp ),
-      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], N, def[ 7],          ctx, hlp ),
+      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], N, def[ 7],          ctx, hlp ), // WITH CONTINUE LINE
+      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], N, def[ 8],          ctx, hlp ),
     };
   }
 
@@ -1468,7 +1469,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          ctx, hlp ), // CURVE
       makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8],          ctx, hlp ), // STRAIGHT
       makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9],          ctx, hlp ), // PATH MULTISELECT
-      makeCbx( cat, key[10], tit[10], dsc[10], T, def[10],          ctx, hlp )  // COMPOSITE ACTIONS
+      makeCbx( cat, key[10], tit[10], dsc[10], T, def[10],          ctx, hlp ), // COMPOSITE ACTIONS
     };
   }
 

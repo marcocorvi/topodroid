@@ -908,6 +908,7 @@ no campo abaixo e aperte o botão.
   <string name="help_close_app">Fechar app</string>
   <string name="help_coeff">Mostrar coeficientes de calibração</string>
   <string name="help_color">Voltar medidas auxiliares para cor padrão</string>
+    <!-- TODO string name="help_join">Join lines</string -->
   <!-- UNUSED string name="help_continue">Continuar desenho de uma linha</string -->
   <!-- UNUSED string name="help_contour">Editar perfil</string -->
   <string name="help_current_station">Bases gravadas</string>
@@ -1573,6 +1574,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_path_multiselect_summary">Habilitar função de seleção de vários caminhos</string>
   <string name="pref_composite_actions_title">Ações compostas</string>
   <string name="pref_composite_actions_summary">Habilitar ações de \'clique longo\' para linhas e áreas</string>
+  <!-- TODO string name="pref_with_continue_line_title">Line join</string -->
+  <!-- TODO string name="pref_with_continue_line_summary">Enable line join</string -->
   <string name="pref_plane_interpolation_title">Interpolar plano</string>
   <string name="pref_plane_interpolation_summary">Habilitar função de interpolação de plano que contém visadas (direção e mergulho)</string>
   <string name="pref_plot_split_title">Partir/unir croqui</string>

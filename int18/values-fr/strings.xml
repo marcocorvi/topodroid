@@ -993,6 +993,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="help_close_app">Fermer l\'app</string>
     <string name="help_coeff">Montrer les coefficients d\'étalonnage</string>
     <string name="help_color">Efface la couleur des visées</string>
+    <!-- TODO string name="help_join">Join lines</string -->
     <!-- UNUSED string name="help_continue">Continuer une ligne</string -->
     <!-- UNUSED string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Stations enregistrées</string>
@@ -1699,6 +1700,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_path_multiselect_summary">Active le chemin de multisélection</string>
     <string name="pref_composite_actions_title">Actions multiples</string>
     <string name="pref_composite_actions_summary">Permettre des appuis longs sur les lignes et les zones.</string>
+  <!-- TODO string name="pref_with_continue_line_title">Line join</string -->
+  <!-- TODO string name="pref_with_continue_line_summary">Enable line join</string -->
     <string name="pref_plane_interpolation_title">Interpolation de plan</string>
     <string name="pref_plane_interpolation_summary">Active l\'interpolation de plan</string>
     <string name="pref_plot_split_title">Croquis fractionner / fusionner</string>

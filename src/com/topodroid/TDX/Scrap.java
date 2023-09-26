@@ -1518,170 +1518,170 @@ public class Scrap
   }
               
 
-  // /** fine the line to continue
-  //  * @param lp     line point
-  //  * @param type   line type
-  //  * @param zoom   display zoom
-  //  * @param size   ...
-  //  * @return the line to continue or null
-  //  * @note line points are scene-coords
-  //  *       continuation is checked in canvas-coords: canvas = offset + scene * zoom
-  //  */
-  // DrawingLinePath getLineToContinue( LinePoint lp, int type, float zoom, float size )
-  // {
-  //   String group = BrushManager.getLineGroup( type );
-  //   if ( group == null ) return null;
-  //   float delta = 2 * size / zoom;
-  //   DrawingLinePath ret = null;
-  //   synchronized( TDPath.mCommandsLock ) {
-  //     for ( ICanvasCommand cmd : mCurrentStack ) {
-  //       if ( cmd.commandType() != 0 ) continue; // FIXME EraseCommand
-  //       final DrawingPath path = (DrawingPath)cmd;
-  //       if ( path.isLine() ) { // path instanceof DrawingLinePath
-  //         DrawingLinePath line = (DrawingLinePath)path;
-  //         // if ( line.mLineType == type ) 
-  //         if ( group.equals( BrushManager.getLineGroup( line.mLineType ) ) )
-  //         {
-  //           if ( line.mFirst.distance( lp ) < delta || line.mLast.distance( lp ) < delta ) {
-  //             if ( ret != null ) {
-  //               // TDLog.v("get line to continue: check " + line.toDebugString() + " ambiguous with " + ret.toDebugString() );
-  //               return null; // ambiguity
-  //             }
-  //             // TDLog.v("get line to continue: check " + line.toDebugString() + " OK" );
-  //             ret = line;
-  //           // } else {
-  //           //   // TDLog.v("get line to continue: check " + line.toDebugString() + " no" );
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  //   // if ( ret != null ) mSelection.removePath( ret ); // FIXME do not remove continuation line
-  //   // checkLines();
-  //   return ret;
-  // }
+  /** find the line to continue
+   * @param lp     line point
+   * @param type   line type
+   * @param zoom   display zoom
+   * @param size   ...
+   * @return the line to continue or null
+   * @note line points are scene-coords
+   *       continuation is checked in canvas-coords: canvas = offset + scene * zoom
+   */
+  DrawingLinePath getLineToContinue( LinePoint lp, int type, float zoom, float size )
+  {
+    String group = BrushManager.getLineGroup( type );
+    if ( group == null ) return null;
+    float delta = 2 * size / zoom;
+    DrawingLinePath ret = null;
+    synchronized( TDPath.mCommandsLock ) {
+      for ( ICanvasCommand cmd : mCurrentStack ) {
+        if ( cmd.commandType() != 0 ) continue; // FIXME EraseCommand
+        final DrawingPath path = (DrawingPath)cmd;
+        if ( path.isLine() ) { // path instanceof DrawingLinePath
+          DrawingLinePath line = (DrawingLinePath)path;
+          // if ( line.mLineType == type ) 
+          if ( group.equals( BrushManager.getLineGroup( line.mLineType ) ) )
+          {
+            if ( line.mFirst.distance( lp ) < delta || line.mLast.distance( lp ) < delta ) {
+              if ( ret != null ) {
+                // TDLog.v("get line to continue: check " + line.toDebugString() + " ambiguous with " + ret.toDebugString() );
+                return null; // ambiguity
+              }
+              // TDLog.v("get line to continue: check " + line.toDebugString() + " OK" );
+              ret = line;
+            // } else {
+            //   // TDLog.v("get line to continue: check " + line.toDebugString() + " no" );
+            }
+          }
+        }
+      }
+    }
+    // if ( ret != null ) mSelection.removePath( ret ); // FIXME do not remove continuation line
+    // checkLines();
+    return ret;
+  }
 
-  // /** modify a portion of a line with another one
-  //  * @param line  line to modify
-  //  * @param line2 modification
-  //  * @param zoom  current zoom
-  //  * @param size  selection size
-  //  * @return true if the line has been modified
-  //  * 
-  //  * search the first point on the line that is close to the start-point of line2
-  //  * if there is one
-  //  *   find the last point on the line (after the found first-point) that is close to the end-point of line2
-  //  *   replace the portion of line between the found first-point and last-point with the points of line2
-  //  *
-  //  */
-  // boolean modifyLine( DrawingLinePath line, DrawingLinePath line2, float zoom, float size )
-  // {
-  //   LinePoint lp1 = line.mFirst; 
-  //   if ( lp1 == null ) {
-  //     // TDLog.v( "modify line no start point");
-  //     return false; // sanity check
-  //   }
-  //   if ( line2 == null || line2.size() < 3 ) {
-  //     // TDLog.v( "modify line line2 null or short");
-  //     return false;
-  //   }
-  //   float delta = size / zoom;
-  //   LinePoint first = line2.mFirst;
-  //   LinePoint last  = line2.mLast;
-  //   for ( ; lp1 != null; lp1 = lp1.mNext ) {
-  //     if ( lp1.distance( first ) < delta ) {
-  //       LinePoint lp2 = null;
-  //       LinePoint lp1n = lp1.mNext;
-  //       if ( lp1n != null ) {
-  //         lp2 = line.mLast;
-  //         // int toDrop = 0; // number of points to drop
-  //         for ( ; lp2 != lp1 && lp2 != null; lp2 = lp2.mPrev ) { // FIXME 20190512 check lp2 != null
-  //           if ( lp2.distance( last ) < delta ) {
-  //             lp2 = lp2.mNext; // backup one point
-  //             break;
-  //           }
-  //           // ++ toDrop;
-  //         }
-  //         if ( lp2 == lp1 ) { // if loop ended because arrived to the initial point lp1
-  //           lp2 = null;
-  //         }
-  //       } 
-  //       // int old_size = line.size();
-  //       // line.mSize += line2.mSize - toDrop; // better recount points
-  //       synchronized( TDPath.mSelectionLock ) {
-  //         mSelection.removePath( line );
-  //       }
-  //       synchronized( TDPath.mCommandsLock ) {
-  //         // line.replacePortion( lp1, lp2, line2 );
-  //         // TDLog.v( "modify line: " + line.toDebugString() + " with " + line2.toDebugString() + " replace from " + first.toDebugString() + " to " + last.toDebugString() );
-  //         lp1.mNext = first.mNext;
-  //         first.mPrev = lp1;
-  //         last.mNext = lp2;
-  //         if ( lp2 != null ) lp2.mPrev = last;
-  //         line.recomputeSize();
-  //         line.retracePath();
-  //         // TDLog.v("size old " + old_size + " drop " + toDrop + " line2 " + line2.size() + " new " + line.size() );
-  //       }
-  //       synchronized( TDPath.mSelectionLock ) {
-  //         mSelection.insertPath( line );
-  //       }
-  //       return true;
-  //     } 
-  //   }
-  //   return false;
-  // }
+  /** modify a portion of a line with another one
+   * @param line  line to modify
+   * @param line2 modification
+   * @param zoom  current zoom
+   * @param size  selection size
+   * @return true if the line has been modified
+   * 
+   * search the first point on the line that is close to the start-point of line2
+   * if there is one
+   *   find the last point on the line (after the found first-point) that is close to the end-point of line2
+   *   replace the portion of line between the found first-point and last-point with the points of line2
+   *
+   */
+  boolean modifyLine( DrawingLinePath line, DrawingLinePath line2, float zoom, float size )
+  {
+    LinePoint lp1 = line.mFirst; 
+    if ( lp1 == null ) {
+      // TDLog.v( "modify line no start point");
+      return false; // sanity check
+    }
+    if ( line2 == null || line2.size() < 3 ) {
+      // TDLog.v( "modify line line2 null or short");
+      return false;
+    }
+    float delta = size / zoom;
+    LinePoint first = line2.mFirst;
+    LinePoint last  = line2.mLast;
+    for ( ; lp1 != null; lp1 = lp1.mNext ) {
+      if ( lp1.distance( first ) < delta ) {
+        LinePoint lp2 = null;
+        LinePoint lp1n = lp1.mNext;
+        if ( lp1n != null ) {
+          lp2 = line.mLast;
+          // int toDrop = 0; // number of points to drop
+          for ( ; lp2 != lp1 && lp2 != null; lp2 = lp2.mPrev ) { // FIXME 20190512 check lp2 != null
+            if ( lp2.distance( last ) < delta ) {
+              lp2 = lp2.mNext; // backup one point
+              break;
+            }
+            // ++ toDrop;
+          }
+          if ( lp2 == lp1 ) { // if loop ended because arrived to the initial point lp1
+            lp2 = null;
+          }
+        } 
+        // int old_size = line.size();
+        // line.mSize += line2.mSize - toDrop; // better recount points
+        synchronized( TDPath.mSelectionLock ) {
+          mSelection.removePath( line );
+        }
+        synchronized( TDPath.mCommandsLock ) {
+          // line.replacePortion( lp1, lp2, line2 );
+          // TDLog.v( "modify line: " + line.toDebugString() + " with " + line2.toDebugString() + " replace from " + first.toDebugString() + " to " + last.toDebugString() );
+          lp1.mNext = first.mNext;
+          first.mPrev = lp1;
+          last.mNext = lp2;
+          if ( lp2 != null ) lp2.mPrev = last;
+          line.recomputeSize();
+          line.retracePath();
+          // TDLog.v("size old " + old_size + " drop " + toDrop + " line2 " + line2.size() + " new " + line.size() );
+        }
+        synchronized( TDPath.mSelectionLock ) {
+          mSelection.insertPath( line );
+        }
+        return true;
+      } 
+    }
+    return false;
+  }
 
-  // /** add the points of the first line to the second line
-  //  */
-  // void addLineToLine( DrawingLinePath line1, DrawingLinePath line0 )
-  // {
-  //   // TDLog.v( "add line to line" );
-  //   DrawingLinePath line = new DrawingLinePath( line0.mLineType, mScrapIdx );
-  //   boolean added = false;
-  //   try {
-  //     boolean prepend = line0.mFirst.distance( line1.mFirst ) < line0.mLast.distance( line1.mFirst );
-  //     if ( prepend ) {
-  //       line.appendReversedLinePoints( line1 );
-  //       line.appendLinePoints( line0 );
-  //     } else {
-  //       line.appendLinePoints( line0 );
-  //       line.appendLinePoints( line1 );
-  //     }
-  //     added = true;
-  //   } catch ( OutOfMemoryError e ) {
-  //     TDLog.Error("OOM " + e.getMessage() );
-  //   }
-  //   if ( added ) {
-  //     synchronized( TDPath.mCommandsLock ) {
-  //       mCurrentStack.remove( line0 );
-  //       mCurrentStack.add( line );
-  //     }
-  //     synchronized( TDPath.mSelectionLock ) {
-  //       mSelection.removePath( line0 );
-  //       mSelection.insertPath( line );
-  //     }
-  //   } else {
-  //     TDLog.Error( "FAILED add line to line ");
-  //   }
-  //   /*
-  //   synchronized( TDPath.mSelectionLock ) {
-  //     mSelection.removePath( line0 );
-  //   }
-  //   synchronized( TDPath.mCommandsLock ) {
-  //     boolean reverse = line0.mFirst.distance( line1.mFirst ) < line0.mLast.distance( line1.mFirst );
-  //     if ( reverse ) line0.reversePath();
-  //     line0.append( line1 );
-  //     if ( reverse ) {
-  //       line0.reversePath();
-  //       line0.computeUnitNormal();
-  //     }
-  //   }
-  //   synchronized( TDPath.mSelectionLock ) {
-  //     mSelection.insertPath( line0 );
-  //   }
-  //   */
-  //   // checkLines();
-  // }
+  /** add the points of the first line to the second line
+   */
+  void addLineToLine( DrawingLinePath line1, DrawingLinePath line0 )
+  {
+    // TDLog.v( "add line to line" );
+    DrawingLinePath line = new DrawingLinePath( line0.mLineType, mScrapIdx );
+    boolean added = false;
+    try {
+      boolean prepend = line0.mFirst.distance( line1.mFirst ) < line0.mLast.distance( line1.mFirst );
+      if ( prepend ) {
+        line.appendReversedLinePoints( line1 );
+        line.appendLinePoints( line0 );
+      } else {
+        line.appendLinePoints( line0 );
+        line.appendLinePoints( line1 );
+      }
+      added = true;
+    } catch ( OutOfMemoryError e ) {
+      TDLog.Error("OOM " + e.getMessage() );
+    }
+    if ( added ) {
+      synchronized( TDPath.mCommandsLock ) {
+        mCurrentStack.remove( line0 );
+        mCurrentStack.add( line );
+      }
+      synchronized( TDPath.mSelectionLock ) {
+        mSelection.removePath( line0 );
+        mSelection.insertPath( line );
+      }
+    } else {
+      TDLog.Error( "FAILED add line to line ");
+    }
+    /*
+    synchronized( TDPath.mSelectionLock ) {
+      mSelection.removePath( line0 );
+    }
+    synchronized( TDPath.mCommandsLock ) {
+      boolean reverse = line0.mFirst.distance( line1.mFirst ) < line0.mLast.distance( line1.mFirst );
+      if ( reverse ) line0.reversePath();
+      line0.append( line1 );
+      if ( reverse ) {
+        line0.reversePath();
+        line0.computeUnitNormal();
+      }
+    }
+    synchronized( TDPath.mSelectionLock ) {
+      mSelection.insertPath( line0 );
+    }
+    */
+    // checkLines();
+  }
 
   // COMMAND STACK ---------------------------------------------
   public void addCommandsToList( ArrayList< DrawingPath > ret ) 
