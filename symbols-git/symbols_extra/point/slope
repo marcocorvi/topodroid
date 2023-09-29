@@ -1,0 +1,13 @@
+encoding utf-8
+symbol point
+name slope
+th_name slope
+orientation yes
+color 0xffcc00
+path
+  moveTo -1 5
+  lineTo 1 5
+  lineTo 0 5
+  lineTo 0 -5
+endpath
+endsymbol
