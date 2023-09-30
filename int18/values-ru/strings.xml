@@ -156,6 +156,8 @@
     <string name="calib_reset">Сбросить калибровку DistoX ?</string>
     <string name="calib_min_error">Минимальная ошибка</string>
     <string name="magn_dip">Магн. наклон &#8230;</string>
+    <string name="auto_calib">Авто калибровка</string>
+    <string name="autocalib_not_supported">Необходимый расчет калибровки</string>
 
     <string name="algorithm">Алгоритм расчета:</string>
     <string name="auto">авто</string>
@@ -446,6 +448,7 @@
     <string name="menu_options">НАСТРОЙКИ</string>
     <string name="menu_overview">ОБЗОР</string>
     <string name="menu_packets">ПАКЕТЫ</string>
+    <string name="menu_calib_auto">АВТО-КАЛИБ</string>
     <!-- UNUSED string name="menu_pair">СОПРЯЖЕНИЕ</string -->
     <string name="menu_palette">ПАЛИТРА</string>
     <string name="menu_photo">ФОТО</string>
@@ -822,8 +825,8 @@
     <string name="button_station"   >По центру</string>
     <string name="button_store"     >Записать   </string>
     <string name="button_swap"      >Поменять местами      </string>
-    <!-- UNUSED string name="button_start"     >Start</string -->
-    <!-- UNUSED string name="button_stop"      >Stop</string -->
+    <string name="button_start"     >Старт</string>
+    <string name="button_stop"      >Стоп</string>
     <string name="button_upload"    >Загрузить  </string>
     <string name="button_download"  >Выгрузить</string>
     <string name="button_view"      >Просмотр   </string>
