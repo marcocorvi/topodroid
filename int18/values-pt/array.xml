@@ -3,8 +3,8 @@
 <resources>
   <string-array name="bricMode">
     <item name="prim_only">Só principais</item>
-    <item name="all">Todos com índice</item>
-    <item name="no_index">Todos sem índice</item>
+    <item name="all">Todos</item>
+    <item name="no_index">Todos exceto índice</item>
   </string-array>
   <string-array name="geoImportApp">
     <item name="none">nenhum</item>
@@ -36,7 +36,7 @@
     <item name="heptic">vibração</item>
   </string-array>
   <string-array name="canvasLevels">
-    <item name="none">nenhum</item>
+    <item name="none">nenhuma</item>
     <item name="class">por símbolo</item>
     <item name="instance">por item</item>
   </string-array>
