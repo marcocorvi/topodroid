@@ -1534,7 +1534,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_linecorner_title">Lim quina Bézier</string>
   <string name="pref_linecorner_summary">Limite para criação de quinas nas curvas Bézier</string>
   <string name="pref_graph_paper_scale_title">Tam papel milimetrado</string>
-  <string name="pref_graph_paper_scale_summary">Ajuste de escala para papel milimetrado</string>
+  <string name="pref_graph_paper_scale_summary">Ajuste de escala para simulação de papel milimetrado</string>
   <string name="pref_slant_xsection_title">Corte inclinado</string>
   <string name="pref_slant_xsection_summary">Criação de cortes inclinados em perfis</string>
   <string name="pref_weeddistance_title">Dist ponto ref</string>
