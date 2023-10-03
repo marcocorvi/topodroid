@@ -2366,8 +2366,8 @@ public class ShotWindow extends Activity
       if ( st != null && st.length() > 0 ) {
         for ( DBlock b : blks ) {
           if ( st.equals( b.mFrom ) ) {
-            float h = TDMath.cosd(b.mClino);
-            float z = TDMath.sind(b.mClino);
+            float h = b.mLength * TDMath.cosd(b.mClino);
+            float z = b.mLength * TDMath.sind(b.mClino);
             float y = h * TDMath.cosd(b.mBearing);
             float x = h * TDMath.sind(b.mBearing);
             xx += x * x;
@@ -2387,8 +2387,8 @@ public class ShotWindow extends Activity
         if ( st != null && st.length() > 0 ) {
           for ( DBlock b : blks ) {
             if ( st.equals( b.mTo ) ) {
-              float h = TDMath.cosd(b.mClino);
-              float z = TDMath.sind(b.mClino);       // vertical upwards
+              float h = b.mLength * TDMath.cosd(b.mClino);
+              float z = b.mLength * TDMath.sind(b.mClino);       // vertical upwards
               float y = h * TDMath.cosd(b.mBearing); // north
               float x = h * TDMath.sind(b.mBearing); // east
               xx += x * x;
