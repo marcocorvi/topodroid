@@ -1387,7 +1387,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_packet_logger_title">Csomag naplózás</string>
   <string name="pref_packet_logger_summary">Csomag naplózás engedélyezése</string>
   <string name="pref_th2_edit_title">Vázlat szerkesztés</string>
-  <string name="pref_th2_edit_summary">Vázlat szerkesztés engedélyezéseEnable sketch editing</string>
+  <string name="pref_th2_edit_summary">Vázlat szerkesztés engedélyezése</string>
 
   <string name="pref_bezier_step_title">Pont távolság</string>
   <string name="pref_bezier_step_summary">Pontok közötti távolság az exportált vonalon [m]</string>
