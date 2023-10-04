@@ -12,56 +12,63 @@ By default, the flags are disabled.
 
 <b>General settings</b><br>
 <ul>
-<li>Additional <i>tool sets</i>: to install tools from other sets than the basic cave-tool set</li>
-<li>Sketch <i>backup clearing</i>: the <u>Survey Data window</u> has a menu to clear the sketch backups.</li>
+<li>Additional <i>palettes</i>: to install tools from other sets than the basic cave-tool set</li>
 <li><i>Packet logging</i>: raw data packets are copied into the packed database</li>
+<li><i>Sketch editing</i>: enables the sketch editing tool in the <u>Main window</u></li>
 </ul>
 <br><p>
 
-<b>Data settings</b><br>
+<b>Survey data settings</b><br>
 <ul>
 <li><i>Diving mode</i> enables data "diving-mode" - distance, azimuth and depth</li>
 <li><i>Recent shots</i> can be highlighted in blue, and selectively displayed</li>
-<li>Recent shots timeout: the time after which a shot is no longer "recent"</li>
+<li><i>Recent data timeout</i> the time after which a shot is no longer "recent"</li>
 <li><i>Fractional extend</i> for legs in the extended profile</li>
 <li>Swap stations for <i>DistoX backsight</i> data</li>
-<li><i>Direction and dip</i> of the plane of a set of splays</li>
+<li><i>Plane interpolation</i>: direction and dip of the plane of a set of splays</li>
 <li><i>Sensors</i> measures [A]</li>
-<li><i>Loop closure</i> [E]</li>
-<li>Using Android <i>compass/clino</i> [A]</li>
+<li><i>Loop closure</i>: error compensation method [E]</li>
+<li><i>Loop threshold</i>: threshold used in selective loop compensation [E]</li>
+<li>Using <i></i>Android compass</i>/clino [A]</li>
 <li>Remote control shot <i>timer</i> [E]</li>
 <li>Remote control timer <i>volume</i> [E]</li>
 <li><i>Blunder</i> leg-shot [T]</li>
+<li><i>Splay station re-assignment</i></li>
+<li><i>Splay group-rename</i></li>
 </ul>
 <br><p>
 
-<b>Splay settings</b><br>
+<b>Splay data settings</b><br>
 <ul>
 <li><i>Splay classes</i>: classification of splays in classes (H,V,X, and normal)</li>
 <li>Splay <i>coloring</i></li>
-<li>Display splays <i>as dot</i> at the endpoint [T]</li>
+<!-- <li>Display splays <i>as dot</i> at the endpoint [T]</li> -->
 <li>Maximum <i>clino</i> of splays in plan view [80&deg;] [A]</li>
 <li><i>Splay dash mode</i>: none, by clino, by azimuth, by the view. [none]</li>
 <li><i>Splay dash clino threshold</i>: splay shots with inclination above this threshold are dashed. This applies when dashing by the clino, or in plan view dashing by the view. It also applies to projected profile in dashing by the view to dash splays that makes an angle below this threshold with the direction of projection [50&deg;]</li>
 <li><i>Splay dash azimuth threshold</i>: splay shots with azimuth off more than this threshold are dashed. This applies when dashing by the azimuth, or in extended profile
 dashing by the view [60&deg;]</li>
 <li><i>Splay dash angle threshold</i>: splay shots making an angle greater than this threshold are dashed, in x-sections [60&deg;]</li>
+<li><i>Splay dash color</i></li>
+<li><i>Splay dot color</i></li>
+<li><i>Splay latest color</i></li>
 </ul>
 <br><p>
 
 
-<b>Sketch settings</b><br>
+<b>Sketching settings</b><br>
 <ul>
 <li>Sketch <i>shift and scale</i></li>
 <li>Sketch <i>split/merge</i></li>
 <li><i>Stylus size</i> [0: ignore]: filter finger touch when drawing with a stylus [T]</li>
 <li>Number of sketch <i>backups</i>, kept in a round list [5] [A]</li>
 <li><i>Minimum interval</i> between two backups [60 s] [A]</li>
-<li>Automatic inclusion of x-sections in exports [yes]</li>
+<!-- <li>Automatic inclusion of x-sections in exports [yes]</li> -->
 <li><i>Saved stations</i> colored orange in the sketches</li>
 <li><i>Leg-only refresh</i> recompute (and redraw) the midline only when a leg is downloaded (in continuous data-download mode) [not] [T]</li>
 <li><i>Affine transform</i> enable the sketch affine transformation</li>
 <li><i>Canvas levels</i>: none, by item, by type [none]</li>
+<li><i>Graph-paper scale</i> adjustment [0]</li>
 <li><i>Slant xsections</i>: whether to allow slanted x-section for profile views [no]</li>
 </ul>
 <br><p>
@@ -81,6 +88,7 @@ otherwise they are horizontal xsections.<br><p>
 <li><i>Corner threshold</i> for cubic Bezier segments [20.0]</li>
 <li>Maximal <i>point/segment distance</i> for weeding points [0.5 m]</li>
 <li>Maximal <i>segment length</i> for weeding [2.0 m]</li>
+<li><i>Weeding segment buffer</i>: buffer around a line segment [10 pxl]</li>
 <li><i>Line/Area snap</i> actions</li>
 <li><i>Smooth/straighten segment</i> actions</li>
 <li>whole line <i>straightening</i> action</li>
@@ -89,7 +97,7 @@ otherwise they are horizontal xsections.<br><p>
 </ul>
 <br><p>
 
-<b>Auto wall settings</b><br>
+<!-- <b>Auto wall settings</b><br>
 <ul>
 <li><i>Auto-wall type</i> (none, convex, Delaunay) [none]</li>
 <li><i>Maximum clino</i> for plan-view splays [70&deg;]</li>
@@ -98,7 +106,7 @@ otherwise they are horizontal xsections.<br><p>
 <li><i>Maximum concavity</i> [0.1]</li>
 <li><i>Distance</i> between points in the wall-line [1.0]</li>
 </ul>
-<br><p>
+<br><p> -->
 
 <b>Device settings</b><br>
 <ul>
@@ -123,6 +131,8 @@ Note. If the delays after the remote "Laser-on" and "Shot" commands are too shor
 <li>Include <i>tool files</i> in zip archive</li>
 <li>Survey <i>datamode</i> on import (normal, diving) [normal]</li>
 <li>Export csx in <i>cSurvey-transfer</i> format (required cSurvey 1.20)</li> 
+<li><i>Stations</i>: add stations automatically to th2 files</li>
+<li><i>LRUD splay count</i>: number of splays used for LURD</li>
 </ul>
 <br><p>
 </div>

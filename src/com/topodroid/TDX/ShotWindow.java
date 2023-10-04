@@ -2398,9 +2398,9 @@ public class ShotWindow extends Activity
           for ( DBlock b : blks ) {
             if ( st.equals( b.mTo ) ) {
               float h =   b.mLength * TDMath.cosd(b.mClino);
-              float z = - b.mLength * TDMath.sind(b.mClino);       // vertical upwards
+              float z = - b.mLength * TDMath.sind(b.mClino);       // vertical upwards (+ ?)
               float y =   h * TDMath.cosd(b.mBearing); // north
-              float x = - h * TDMath.sind(b.mBearing); // east
+              float x = - h * TDMath.sind(b.mBearing); // east (+ ?)
               xx += x * x;
               xy += x * y;
               xz += x * z;

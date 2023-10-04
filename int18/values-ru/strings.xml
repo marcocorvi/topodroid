@@ -156,6 +156,8 @@
     <string name="calib_reset">Сбросить калибровку DistoX ?</string>
     <string name="calib_min_error">Минимальная ошибка</string>
     <string name="magn_dip">Магн. наклон &#8230;</string>
+    <string name="auto_calib">Авто калибровка</string>
+    <string name="autocalib_not_supported">Необходимый расчет калибровки</string>
 
     <string name="algorithm">Алгоритм расчета:</string>
     <string name="auto">авто</string>
@@ -446,6 +448,7 @@
     <string name="menu_options">НАСТРОЙКИ</string>
     <string name="menu_overview">ОБЗОР</string>
     <string name="menu_packets">ПАКЕТЫ</string>
+    <string name="menu_calib_auto">АВТО-КАЛИБ</string>
     <!-- UNUSED string name="menu_pair">СОПРЯЖЕНИЕ</string -->
     <string name="menu_palette">ПАЛИТРА</string>
     <string name="menu_photo">ФОТО</string>
@@ -822,8 +825,8 @@
     <string name="button_station"   >По центру</string>
     <string name="button_store"     >Записать   </string>
     <string name="button_swap"      >Поменять местами      </string>
-    <!-- UNUSED string name="button_start"     >Start</string -->
-    <!-- UNUSED string name="button_stop"      >Stop</string -->
+    <string name="button_start"     >Старт</string>
+    <string name="button_stop"      >Стоп</string>
     <string name="button_upload"    >Загрузить  </string>
     <string name="button_download"  >Выгрузить</string>
     <string name="button_view"      >Просмотр   </string>
@@ -980,7 +983,7 @@
     <string name="help_close_app">Закрыть приложение</string>
     <string name="help_coeff">Показать коэффициенты калибровки</string>
     <string name="help_color">Сбросить цвет сплеев</string>
-    <!-- TODO string name="help_join">Join lines</string -->
+    <string name="help_join">Соединить линии</string>
     <!-- UNUSED string name="help_continue">Продолжить рисовать линию</string -->
     <!-- UNUSED string name="help_contour">Редактировать контуры</string -->
     <string name="help_current_station">Сохраненные пикеты</string>
@@ -1686,8 +1689,8 @@
   <string name="pref_path_multiselect_summary">Одновременный выбор нескольких линий</string>
   <string name="pref_composite_actions_title">Комбинированные действия</string>
   <string name="pref_composite_actions_summary">Включить действия по длительному тапу для линий и областей</string>
-  <!-- TODO string name="pref_with_continue_line_title">Line join</string -->
-  <!-- TODO string name="pref_with_continue_line_summary">Enable line join</string -->
+  <string name="pref_with_continue_line_title">Соединять линии</string>
+  <string name="pref_with_continue_line_summary">Включить соединиение линий</string>
   <string name="pref_plane_interpolation_title">Плоская интерполяция</string>
   <string name="pref_plane_interpolation_summary">Выполнить простую интерполяцию</string>
   <string name="pref_plot_split_title">Разделить/Склеить абрис</string>
