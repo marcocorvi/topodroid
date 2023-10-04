@@ -527,7 +527,7 @@ public class ShotWindow extends Activity
    */
   private void processShotList( List< DBlock > list )
   {
-    // TDLog.v( "process shot list");
+    // TDLog.v( "process shot list - recent " + mFlagLatest );
     DBlock prev = null;
     boolean prev_is_leg = false;
     boolean check_recent = TDSetting.mShotRecent && mFlagLatest;
@@ -617,12 +617,13 @@ public class ShotWindow extends Activity
       mListView.invalidate();
       onMultiselect = true;
       // FIXME this should not be necessary but it is (???)
-      if ( pos == 0 ) mDataAdapter.notifyDataSetChanged(); // THIS IS USED TO REFRESH THE DATA LIST
+      // if ( pos == 0 ) mDataAdapter.notifyDataSetChanged(); // THIS IS USED TO REFRESH THE DATA LIST
     } else {
       mListView.setAdapter( mButtonView1.mAdapter );
       mListView.invalidate();
       onMultiselect = false;
     }
+    mDataAdapter.notifyDataSetChanged(); // THIS IS USED TO REFRESH THE DATA LIST
     setTheTitle();
   }
 
@@ -2334,26 +2335,35 @@ public class ShotWindow extends Activity
     updateDisplay();
   }
 
-  /** bedding: solve Sum (A*x + B*y + C*z + 1)^2 minimum
+  /** bedding: 
+   * The eq. of the plane is  N * X = const
+   *
+   * Solve Sum (A*x + B*y + C*z + 1)^2 minimum
    *   xx  xy  xz   A   -xn
    *   xy  yy  yz * B = -yn
    *   xz  yz  zz   C   -zn
    *
    *   det = xx * (yy * zz - yz^2) - xy * (xy * zz - xz * yz) + xz * (xy * yz - yy * xz) 
    *       = xx yy zz - xx yz^2 - yy xz^2 - zz xy^2 + 2 xy xz yz
-   *  the DIP is downwards and 90 deg. right from the STRIKE, thus
-   *    D x S = N
-   *    S x N = D
+   * The normal to the plane is taken in upward direction, ie, Nz > 0
+   * The strike is then along Z x N :
    *    S = ( Z x N ) normalized
+   * The DIP is downwards and 90 deg. right from the STRIKE, thus
+   *    D = S x N
    *
-   *          ^ Z
-   *          |  Normal
-   *          | /
-   *          |/______ Strike
-   *           \
-   *            \ Dip
-   *  The dip angle is measured from the horizontal plane
-   *  The strike from the north
+   *          ^ Z                     ^ Z
+   *          |  Normal            N  |
+   *          | /                   \ |
+   *          |/______ Strike   _____\|
+   *           \                     /
+   *            \ Dip               /
+   *
+   *  The dip angle is measured from the horizontal plane.
+   *  Therefore sin( dip ) = - ( D * Z ) and since D is always downwards this is always positive.
+   *
+   *  The strike iangle is measured from the north.
+   *  Therefore strike can be positive (east) or negative (west).
+   *     tan( strike ) = Nx / Ny
    */
   String computeBedding( List< DBlock > blks ) // BEDDING
   {
@@ -2366,10 +2376,10 @@ public class ShotWindow extends Activity
       if ( st != null && st.length() > 0 ) {
         for ( DBlock b : blks ) {
           if ( st.equals( b.mFrom ) ) {
-            float h = TDMath.cosd(b.mClino);
-            float z = TDMath.sind(b.mClino);
-            float y = h * TDMath.cosd(b.mBearing);
-            float x = h * TDMath.sind(b.mBearing);
+            float h = b.mLength * TDMath.cosd(b.mClino);
+            float z = b.mLength * TDMath.sind(b.mClino); // upwards
+            float y = h * TDMath.cosd(b.mBearing);       // north
+            float x = h * TDMath.sind(b.mBearing);       // east
             xx += x * x;
             xy += x * y;
             xz += x * z;
@@ -2387,10 +2397,10 @@ public class ShotWindow extends Activity
         if ( st != null && st.length() > 0 ) {
           for ( DBlock b : blks ) {
             if ( st.equals( b.mTo ) ) {
-              float h = TDMath.cosd(b.mClino);
-              float z = TDMath.sind(b.mClino);       // vertical upwards
-              float y = h * TDMath.cosd(b.mBearing); // north
-              float x = h * TDMath.sind(b.mBearing); // east
+              float h =   b.mLength * TDMath.cosd(b.mClino);
+              float z = - b.mLength * TDMath.sind(b.mClino);       // vertical upwards
+              float y =   h * TDMath.cosd(b.mBearing); // north
+              float x = - h * TDMath.sind(b.mBearing); // east
               xx += x * x;
               xy += x * y;
               xz += x * z;
@@ -2413,7 +2423,7 @@ public class ShotWindow extends Activity
         TDMatrix minv = m.inverseTransposed(); // m is self-transpose
         TDVector n0 = new TDVector( -xn, -yn, -zn );
         TDVector n1 = minv.timesV( n0 ); // n1 = (a,b,c)
-        if ( n1.z < 0 ) { n1.x = - n1.x; n1.y = - n1.y; n1.z = - n1.z; } // make N positive Z
+        if ( n1.z < 0 ) { n1.x = - n1.x; n1.y = - n1.y; n1.z = - n1.z; } // make Nz positive (upward)
         n1.normalize();
         // TDLog.v( "Plane normal " + n1.x + " " + n1.y + " " + n1.z );
 
@@ -2423,8 +2433,9 @@ public class ShotWindow extends Activity
         // TDVector dip = n1.cross( stk ); // dip
         // float astk = TDMath.atan2d( stk.x, stk.y ); // TDMath.atan2d( -n1.y, n1.x );
         // float adip = TDMath.acosd( dip.z ); // TDMath.asind( n1.z );
-        float astk = TDMath.atan2d( -n1.y, n1.x );
+        float astk = TDMath.atan2d( n1.y, n1.x );
         float adip = 90 - TDMath.asind( n1.z );
+
         strike_dip = String.format( strike_fmt, astk, adip );
         // TDToast.make( strike_dip );
         if ( b0.mComment != null && b0.mComment.length() > 0 ) {

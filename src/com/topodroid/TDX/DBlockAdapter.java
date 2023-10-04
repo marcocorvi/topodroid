@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDString;
 import com.topodroid.prefs.TDSetting;
@@ -168,6 +168,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
    */
   boolean multiSelect( int pos, boolean long_tap ) 
   {
+    // TDLog.v("Multiselect " + pos + " of " + getCount() );
     if ( pos >= START && pos < getCount() ) {
       DBlock b = (DBlock)( getItem( pos ) );
       if ( b != null ) {
@@ -584,35 +585,39 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       tvTo.setTextColor(   ( mParent.isCurrentStationName( b.mTo   ) )? TDColor.LIGHT_GREEN : col );
       tvLength.setTextColor( col );
 
-      if ( b.isBacksight() ) {
-        if ( b.isRecent() ) { 
-          // b.mWasRecent = true;
-          if ( b.isSplay() && ( col = b.getPaintColor() ) != 0 ) {
-            tvFrom.setBackgroundColor( col & 0x99ffffff );
-          } else {
-            tvFrom.setBackgroundColor( TDColor.GREEN );
-          }
-          tvTo.setBackgroundColor( TDColor.GREEN );
-        } else {
-          if ( b.isSplay() && ( col = b.getPaintColor() ) != 0 ) {
-            tvFrom.setBackgroundColor( col & 0x99ffffff );
-          } else {
-            tvFrom.setBackgroundColor( TDColor.BACK_YELLOW );
-          }
-          tvTo.setBackgroundColor( TDColor.BACK_YELLOW );
-        } 
+      if (b.mMultiSelected ) {
+        b.setBackgroundColor( TDColor.GRID );
       } else {
-        if ( b.isRecent() ) { 
-          // b.mWasRecent = true;
-          if ( b.isSplay() && ( col = b.getPaintColor() ) != 0 ) {
-            tvFrom.setBackgroundColor( col & 0x99ffffff );
+        if ( b.isBacksight() ) {
+          if ( b.isRecent() ) { 
+            // b.mWasRecent = true;
+            if ( b.isSplay() && ( col = b.getPaintColor() ) != 0 ) {
+              tvFrom.setBackgroundColor( col & 0x99ffffff );
+            } else {
+              tvFrom.setBackgroundColor( TDColor.GREEN );
+            }
+            tvTo.setBackgroundColor( TDColor.GREEN );
           } else {
-            tvFrom.setBackgroundColor( TDColor.DARK_GREEN );
-          }
-          tvTo.setBackgroundColor( TDColor.DARK_GREEN );
+            if ( b.isSplay() && ( col = b.getPaintColor() ) != 0 ) {
+              tvFrom.setBackgroundColor( col & 0x99ffffff );
+            } else {
+              tvFrom.setBackgroundColor( TDColor.BACK_YELLOW );
+            }
+            tvTo.setBackgroundColor( TDColor.BACK_YELLOW );
+          } 
         } else {
-          if ( b.isSplay() && ( col = b.getPaintColor() ) != 0 ) {
-            tvFrom.setBackgroundColor( col & 0x99ffffff );
+          if ( b.isRecent() ) { 
+            // b.mWasRecent = true;
+            if ( b.isSplay() && ( col = b.getPaintColor() ) != 0 ) {
+              tvFrom.setBackgroundColor( col & 0x99ffffff );
+            } else {
+              tvFrom.setBackgroundColor( TDColor.DARK_GREEN );
+            }
+            tvTo.setBackgroundColor( TDColor.DARK_GREEN );
+          } else {
+            if ( b.isSplay() && ( col = b.getPaintColor() ) != 0 ) {
+              tvFrom.setBackgroundColor( col & 0x99ffffff );
+            }
           }
         }
       }

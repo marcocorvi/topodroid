@@ -68,7 +68,7 @@ import android.view.KeyEvent;
 
 // import android.graphics.Bitmap;
 // import android.graphics.BitmapFactory;
-// import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.BitmapDrawable;
 
 import android.net.Uri;
 // import android.net.Uri.Builder;
@@ -159,6 +159,9 @@ public class SurveyWindow extends Activity
   private boolean mSplayColor = false;
 
   private boolean mWarnTeam = true;
+
+  private BitmapDrawable mBMpicture;
+  private BitmapDrawable mBMpicture_no;
 
   // String getSurveyName() { return TDInstance.survey; }
 
@@ -299,6 +302,9 @@ public class SurveyWindow extends Activity
     mNrButton1 = kb;
     mButton1[mNrButton1] = MyButton.getButton( mActivity, null, R.drawable.iz_empty );
 
+    mBMpicture = MyButton.getButtonBackground( this, res, R.drawable.iz_picture );
+    mBMpicture_no = MyButton.getButtonBackground( this, res, R.drawable.iz_picture_no );
+
     mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
 
@@ -339,11 +345,22 @@ public class SurveyWindow extends Activity
     mApp_mData = TopoDroidApp.mData;
     if ( mApp_mData != null ) {
       doSetDeclination( mApp_mData.getSurveyDeclination( TDInstance.sid ) );
-      mApp_mData.countAllPhotos( TDInstance.sid, TDStatus.NORMAL );
+      nrPhoto = mApp_mData.countAllPhotos( TDInstance.sid, TDStatus.NORMAL );
     }
-    if ( nrPhoto == 0 && TDLevel.overNormal ) {
-      TDandroid.setButtonBackground( mButton1[ BTN_PHOTO ], MyButton.getButtonBackground( this, getResources(), R.drawable.iz_picture_no ) );
-      mButton1[ BTN_PHOTO ].setOnClickListener( null );
+    setButtonPhoto( nrPhoto );
+  }
+
+  private void setButtonPhoto( int nr_photo )
+  {
+    if ( TDLevel.overNormal ) {
+      TDLog.v("nr photo " + nr_photo );
+      if ( nr_photo == 0 ) {
+        TDandroid.setButtonBackground( mButton1[ BTN_PHOTO ], mBMpicture_no );
+        mButton1[ BTN_PHOTO ].setOnClickListener( null );
+      } else {
+        TDandroid.setButtonBackground( mButton1[ BTN_PHOTO ], mBMpicture );
+        mButton1[ BTN_PHOTO ].setOnClickListener( this );
+      }
     }
   }
 

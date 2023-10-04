@@ -438,6 +438,8 @@ public class TDSetting
   public static float   mHorizSplay    = 60;
   public static float   mCosHorizSplay = TDMath.cosd( mHorizSplay );
   public static float   mSectionSplay  = 60;
+  public static float   mCosSectionSplay  = TDMath.cosd( mSectionSplay );
+
   public static int     mSplayDashColor = TDColor.SPLAY_LIGHT;
   public static int     mSplayDotColor  = TDColor.SPLAY_LIGHT;
   public static int     mSplayLatestColor = TDColor.SPLAY_LATEST;
@@ -1264,6 +1266,7 @@ public class TDSetting
     mHorizSplay     = tryFloat( prefs, keyGPlotSplay[ 5],      defGPlotSplay[ 5] );  // DISTOX_HORIZ_SPLAY
     mCosHorizSplay = TDMath.cosd( mHorizSplay );  
     mSectionSplay   = tryFloat( prefs, keyGPlotSplay[ 6],      defGPlotSplay[ 6] );  // DISTOX_SECTION_SPLAY
+    mCosSectionSplay  = TDMath.cosd( mSectionSplay );
     mSplayDashColor = tryColor( prefs, keyGPlotSplay[ 7],      defGPlotSplay[ 7] );  // DISTOX_SPLAY_DASH_COLOR
     BrushManager.setSplayDashColor( mSplayDashColor );
     mSplayDotColor  = tryColor( prefs, keyGPlotSplay[ 8],      defGPlotSplay[ 8] );  // DISTOX_SPLAY_DOT_COLOR
@@ -1902,6 +1905,7 @@ public class TDSetting
       mSectionSplay = tryFloatValue( hlp, k, v, def[ 6] );
       if ( mSectionSplay <  0 ) { mSectionSplay =  0; ret = TDString.ZERO; }
       if ( mSectionSplay > 91 ) { mSectionSplay = 91; ret = TDString.NINETYONE; }
+      mCosSectionSplay  = TDMath.cosd( mSectionSplay );
     } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SPLAY_DASH_COLOR
       mSplayDashColor = tryColorValue( hlp, k, v, def[ 7] ); 
       BrushManager.setSplayDashColor( mSplayDashColor );
@@ -3924,6 +3928,7 @@ public class TDSetting
               mHorizSplay = getFloat( vals, 10, 60.0f );   setPreference( editor, "DISTOX_HORIZ_SPLAY", mHorizSplay );
               mCosHorizSplay = TDMath.cosd( mHorizSplay );  
               mSectionSplay = getFloat( vals, 12, 60.0f ); setPreference( editor, "DISTOX_SECTION_SPLAY", mSectionSplay );
+              mCosSectionSplay  = TDMath.cosd( mSectionSplay );
               if ( vals.length > 15 ) {
                 mSplayDashColor = getInt( vals, 14, 0 );   setPreference( editor, "DISTOX_SPLAY_DASH_COLOR",  mSplayDashColor );
                 mSplayDotColor  = getInt( vals, 15, 0 );   setPreference( editor, "DISTOX_SPLAY_DOT_COLOR",   mSplayDotColor );

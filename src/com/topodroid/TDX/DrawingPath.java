@@ -85,7 +85,7 @@ public class DrawingPath extends RectF
   public DBlock mBlock;
   boolean mLandscape; // whether the canvas is in landscape presentation mode or not
   private float mCosine; // cosine value for splays (= cos of angle between splay and leg)
-                         // x-sections: angle between splay and plane-normal
+                         // x-sections: angle between splay and plane-normal [degrees ?]
   String mPlotName;      // full plotname, ie, survey-plot (only for Overview window)
   public int mLevel;     // canvas levels flag (public for export classes)
   public int mScrap;     // plot scrap (public for export classes)

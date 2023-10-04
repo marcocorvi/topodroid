@@ -401,11 +401,12 @@ public class DrawingCommandManager
 
   /** set the alpha flag for the splays
    * @param on   whether to set the flag
+   * the alpha flag is set only if the angle falls off the interval [ SectionSplay, 180-SectionSplay ]
    */
   void setSplayAlpha( boolean on ) 
   {
     for ( DrawingSplayPath p : mSplaysStack ) {
-      if ( p.getCosine() > TDSetting.mSectionSplay || p.getCosine() < -TDSetting.mSectionSplay ) p.setPaintAlpha( on );
+      if ( p.getCosine() > TDSetting.mCosSectionSplay || p.getCosine() < -TDSetting.mCosSectionSplay ) p.setPaintAlpha( on );
     }
   }
 

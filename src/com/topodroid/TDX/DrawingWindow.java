@@ -574,7 +574,7 @@ public class DrawingWindow extends ItemDrawer
   private SeekBar      mScaleBar;
 
   // window mode
-  static final int MODE_NONE  = 0; // initial mode
+  // static final int MODE_NONE  = 0; // initial mode
   static final int MODE_DRAW  = 1;
   static final int MODE_MOVE  = 2;
   static final int MODE_EDIT  = 3;
@@ -594,7 +594,7 @@ public class DrawingWindow extends ItemDrawer
   // private static final int JOIN_CONTINUE  = 4;  // continue: continue existing line
   // static final private int CONT_MAX   = 5;
 
-  private int mMode         = MODE_NONE;
+  private int mMode         = MODE_MOVE; // MODE_NONE;
   private int mTouchMode    = MODE_MOVE;
   private int mJoinLine = JOIN_NONE;
   private int mJoinArea = JOIN_NONE;
@@ -1165,7 +1165,7 @@ public class DrawingWindow extends ItemDrawer
    * @param blk    data block
    * @param x1,y1  first endpoint
    * @param x2,y2  second endpoint
-   * @param angle  angle between splay and normal to the plane
+   * @param angle  angle between splay and the plane [degrees]
    * @param blue   true for splays at TO station
    */
   private void addFixedSectionSplay( DBlock blk, float x1, float y1, float x2, float y2, float angle,
@@ -3444,7 +3444,7 @@ public class DrawingWindow extends ItemDrawer
       y0 += d * v.dot(V2);
       z0 += d * v.dot(V0);
       float d0 = ( x0*x0 + y0*y0 + z0*z0 );
-      float a = (d0 > 0)? 90 - (float)(Math.abs( z0 ) / Math.sqrt( d0 )) : 90;
+      float a = (d0 > 0)? 90 - TDMath.acosd( z0 / TDMath.sqrt( d0 ) ) : 90; // angle with plane [degrees]
       
       if ( mType == PlotType.PLOT_H_SECTION ) { // Rotate as NORTH is upward
         float xx = -yn * x + xn * y;
@@ -5123,7 +5123,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private boolean onTouchMove( float xc, float yc, float xs, float ys, MotionEventWrap event, boolean threePointers )
   {
-    // TDLog.v( "action MOVE mode " + mMode + " touch-mode " + mTouchMode);
+    TDLog.v( "action MOVE mode " + mMode + " touch-mode " + mTouchMode + " rotate azimuth " + mRotateAzimuth );
     if ( mTouchMode == MODE_MOVE) {
       float x_shift = xc - mSaveX; // compute shift
       float y_shift = yc - mSaveY;
@@ -5241,6 +5241,7 @@ public class DrawingWindow extends ItemDrawer
       } else if (  mMode == MODE_MOVE && mRotateAzimuth ) {
         TDAzimuth.mRefAzimuth = TDMath.in360( TDAzimuth.mRefAzimuth + x_shift/2 );
         setButtonAzimuth();
+        TDLog.v("rotated azimuth by " + x_shift + ": " + TDAzimuth.mRefAzimuth );
       } else if (  mMode == MODE_MOVE 
                || (mMode == MODE_EDIT && mEditMove ) 
                || (mMode == MODE_SHIFT && mShiftMove) ) {
