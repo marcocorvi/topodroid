@@ -244,7 +244,7 @@ no campo abaixo e aperte o botão.
   <string name="photo_text">Entre comentário para foto</string>
   <string name="photo_failed">Foto falhou</string>
   <string name="photo_max_captures">Limite máximo de captura atingido</string>
-  <string name="label_title">RÓTULO</string>
+  <string name="label_title">Rótulo</string>
   <string name="label_text">Inserir o texto do rótulo</string>
   <!-- UNUSED string name="altitude">Alt. </string -->
   <!-- UNUSED string name="h_ellipsoid">Elipsóide H </string -->
@@ -848,7 +848,7 @@ no campo abaixo e aperte o botão.
   <string name="hint_units">unidades símbolos</string>
   <string name="hint_value">valor</string>
   <string name="hint_notes">observações</string>
-  <string name="hint_label">rótulo</string>
+  <string name="hint_label">Texto do rótulo</string>
   <string name="hint_comment">comentário</string>
   <string name="hint_text">texto</string>
   <string name="hint_options">opções</string>
