@@ -11,6 +11,7 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDMath;
 import com.topodroid.prefs.TDSetting;
 
@@ -28,9 +29,9 @@ public class TDAzimuth
    */
   public static void resetRefAzimuth( final ShotWindow window, float azimuth )
   {
-    // TDLog.v( "reset Ref Azimuth " + azimuth );
     mRefAzimuth  = azimuth;
     mFixedExtend = ( TDSetting.mAzimuthManual )? 1L : 0L;
+    // TDLog.v( "reset Ref Azimuth: " + azimuth + " fixed: " + mFixedExtend + " < " +  TDSetting.mAzimuthManual );
     if ( window != null ) {
       window.runOnUiThread( new Runnable() { public void run() { window.setRefAzimuthButton(); } } );
     }

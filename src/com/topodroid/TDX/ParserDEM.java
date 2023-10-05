@@ -38,7 +38,8 @@ class ParserDEM extends DEMsurface
   // protected double   mWest, mEast, mSouth, mNorth; // bounds
   protected double nodata;    // nodata value
   String mFilename; // DEM filename
-  protected double xunit, yunit;
+  protected double xunit; // X factor, either 1 [m] or R*PI/180 [dec.degree]
+  protected double yunit;
 
   protected InputStreamReader mIsr = null;
   protected BufferedReader mBr = null;

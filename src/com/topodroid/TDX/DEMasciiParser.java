@@ -39,7 +39,7 @@ class DEMasciiParser extends ParserDEM
    * @param filename   fullpath of the DEM file
    * @param maxsize    ...
    * @param hflip      flip horizontally
-   * @param xu         X unit factor
+   * @param xu         X unit factor (either 1 for m, or R*PI/180 for dec-degrees)
    * @param yu         Y unit factor
    */
   DEMasciiParser( InputStreamReader isr, String filename, int maxsize, boolean hflip, double xu, double yu ) // FIXME DEM_URI
@@ -155,6 +155,11 @@ class DEMasciiParser extends ParserDEM
   @Override
   protected boolean readHeader( String filename ) // FIXME DEM_URI
   {
+    boolean xll_degrees  = false;
+    boolean yll_degrees  = false;
+    boolean xdim_degrees = false;
+    boolean ydim_degrees = false;
+
     // TDLog.v("DEM ascii parser read header " + filename );
     if ( mBr == null ) return false;
     try {
@@ -164,19 +169,29 @@ class DEMasciiParser extends ParserDEM
       String line = mBr.readLine();
       String[] vals = TDString.splitOnSpaces( line );
       cols = Integer.parseInt( vals[1] ); // number cols
+
       line = mBr.readLine();
       vals = TDString.splitOnSpaces( line );
       rows = Integer.parseInt( vals[1] ); // number rows
+
       line = mBr.readLine();
       vals = TDString.splitOnSpaces( line );
+      int pos = vals[1].indexOf('.');
+      if ( pos > 0 && pos + 4 > vals[1].length ) xll_degrees = true;
       xll  = Double.parseDouble( vals[1] ); // xll corner
+
       line = mBr.readLine();
       vals = TDString.splitOnSpaces( line );
+      pos = vals[1].indexOf('.');
+      if ( pos > 0 && pos + 4 > vals[1].length ) yll_degrees = true;
       yll  = Double.parseDouble( vals[1] ); // yll corner
+
       line = mBr.readLine();
       vals = TDString.splitOnSpaces( line );
-      mDim1 = Double.parseDouble( vals[1] ); // cell-size
-      mDim2 = mDim1;
+      pos = vals[1].indexOf('.');
+      if ( pos > 0 && pos + 4 > vals[1].length ) xdim_degrees = ydim_degrees = true;
+      mDim2 = mDim1 = Double.parseDouble( vals[1] ); // cell-size
+
       line = mBr.readLine();
       vals = TDString.splitOnSpaces( line );
       nodata = Double.parseDouble( vals[1] ); // nodata.value
@@ -186,10 +201,10 @@ class DEMasciiParser extends ParserDEM
     } catch ( NumberFormatException e2 ) {
       return false;
     }
-    xll   *= xunit;
-    mDim1 *= xunit;
-    yll   *= yunit;
-    mDim2 *= yunit;
+    if ( xll_degrees  ) xll   *= xunit;
+    if ( xdim_degrees ) mDim1 *= xunit;
+    if ( yll_degrees  ) yll   *= yunit;
+    if ( ydim_degrees ) mDim2 *= yunit;
     // TDLog.v("DEM cell " + mDim1 + " X " + xll + " Y " + yll + " Nx " + cols + " Ny " + rows );
     return true;
   }

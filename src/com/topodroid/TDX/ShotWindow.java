@@ -322,11 +322,12 @@ public class ShotWindow extends Activity
 
   public void setRefAzimuthButton()
   {
+    // TDLog.v( "set Ref Azimuth button, fixed: " + TDAzimuth.mFixedExtend + " azimuth: " + TDAzimuth.mRefAzimuth );
     if ( ! TDLevel.overNormal ) return;
     if ( BTN_AZIMUTH - boff >= mNrButton1 ) return;
 
     // TDLog.v( "set RefAzimuthButton extend " + TDAzimuth.mFixedExtend + " " + TDAzimuth.mRefAzimuth );
-    if ( TDAzimuth.mFixedExtend == 0 ) {
+    if ( ! TDSetting.mAzimuthManual /* TDAzimuth.mFixedExtend == 0 */ ) {
       // FIXME_AZIMUTH_DIAL 2
       // android.graphics.Matrix m = new android.graphics.Matrix();
       // m.postRotate( TDAzimuth.mRefAzimuth - 90 );
@@ -1240,7 +1241,7 @@ public class ShotWindow extends Activity
     mButtonF[mNrButtonF] = MyButton.getButton( this, null, R.drawable.iz_empty );
 
     // TDAzimuth.resetRefAzimuth( this, 90 );
-    setRefAzimuthButton( ); 
+    // setRefAzimuthButton( ); // called by onResume()
 
     mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mButtonViewF = new MyHorizontalButtonView( mButtonF );
@@ -1554,7 +1555,7 @@ public class ShotWindow extends Activity
       // int k2 = 0;
       if ( ! TDInstance.isDivingMode() ) {
         if ( k1 < mNrButton1 && b == mButton1[k1++] ) {        // DOWNLOAD
-          TDLog.v("SHOT pressed download button");
+          // TDLog.v("SHOT pressed download button");
           if ( TDInstance.getDeviceA() != null ) {
             // mSearch = null; // invalidate search
             // if ( mBTstatus == ConnectionState.CONN_DISCONNECTED ) {
