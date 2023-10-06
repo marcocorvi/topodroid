@@ -340,7 +340,17 @@ public class DBlock
        case LegType.VSPLAY:  mBlockType = BLOCK_V_SPLAY;     break;
        case LegType.SCAN:    mBlockType = BLOCK_SCAN;        break;
        // case LegType.BLUNDER: mBlockType = BLOCK_BLUNDER; break;
-       default: /* nothing */
+       default: // case LegTypeNORMAL:
+         if ( isSplay() ) {
+           mBlockType = BLOCK_SPLAY;
+         } else if ( isLeg() ) {
+           mBlockType = BLOCK_MAIN_LEG;
+         } else if ( isBlank() ) {
+           mBlockType = BLOCK_BLANK;
+         } else {
+           // BLOCK_BLANK_LEG not handled FIXME
+         }
+         break;
      }
   }
   

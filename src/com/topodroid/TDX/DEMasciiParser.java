@@ -155,10 +155,10 @@ class DEMasciiParser extends ParserDEM
   @Override
   protected boolean readHeader( String filename ) // FIXME DEM_URI
   {
-    boolean xll_degrees  = false;
-    boolean yll_degrees  = false;
-    boolean xdim_degrees = false;
-    boolean ydim_degrees = false;
+    // boolean xll_degrees  = false;
+    // boolean yll_degrees  = false;
+    // boolean xdim_degrees = false;
+    // boolean ydim_degrees = false;
 
     // TDLog.v("DEM ascii parser read header " + filename );
     if ( mBr == null ) return false;
@@ -176,20 +176,20 @@ class DEMasciiParser extends ParserDEM
 
       line = mBr.readLine();
       vals = TDString.splitOnSpaces( line );
-      int pos = vals[1].indexOf('.');
-      if ( pos > 0 && pos + 4 > vals[1].length ) xll_degrees = true;
+      // int pos = vals[1].indexOf('.');
+      // if ( pos > 0 && pos + 4 > vals[1].length() ) xll_degrees = true;
       xll  = Double.parseDouble( vals[1] ); // xll corner
 
       line = mBr.readLine();
       vals = TDString.splitOnSpaces( line );
-      pos = vals[1].indexOf('.');
-      if ( pos > 0 && pos + 4 > vals[1].length ) yll_degrees = true;
+      // pos = vals[1].indexOf('.');
+      // if ( pos > 0 && pos + 4 > vals[1].length() ) yll_degrees = true;
       yll  = Double.parseDouble( vals[1] ); // yll corner
 
       line = mBr.readLine();
       vals = TDString.splitOnSpaces( line );
-      pos = vals[1].indexOf('.');
-      if ( pos > 0 && pos + 4 > vals[1].length ) xdim_degrees = ydim_degrees = true;
+      // pos = vals[1].indexOf('.');
+      // if ( pos > 0 && pos + 4 > vals[1].length() ) xdim_degrees = ydim_degrees = true;
       mDim2 = mDim1 = Double.parseDouble( vals[1] ); // cell-size
 
       line = mBr.readLine();
@@ -201,10 +201,10 @@ class DEMasciiParser extends ParserDEM
     } catch ( NumberFormatException e2 ) {
       return false;
     }
-    if ( xll_degrees  ) xll   *= xunit;
-    if ( xdim_degrees ) mDim1 *= xunit;
-    if ( yll_degrees  ) yll   *= yunit;
-    if ( ydim_degrees ) mDim2 *= yunit;
+    /* if ( xll_degrees  ) */ xll   *= xunit;
+    /* if ( xdim_degrees ) */ mDim1 *= xunit;
+    /* if ( yll_degrees  ) */ yll   *= yunit;
+    /* if ( ydim_degrees ) */ mDim2 *= yunit;
     // TDLog.v("DEM cell " + mDim1 + " X " + xll + " Y " + yll + " Nx " + cols + " Ny " + rows );
     return true;
   }

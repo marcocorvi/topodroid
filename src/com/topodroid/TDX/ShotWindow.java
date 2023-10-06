@@ -2022,7 +2022,9 @@ public class ShotWindow extends Activity
    */
   void doUpdateShotNameAndFlags( String from, String to, int extend, float stretch, long flag, long leg, String comment, DBlock blk )
   {
+    TDLog.v("do update name and flags " + blk.mId + " flag " + flag + " leg " + leg + " / " + blk.getLegType() );
     blk.setBlockName( from, to, (leg == LegType.BACK) );
+    blk.setBlockType( (int)leg );
 
     int ret = mApp_mData.updateShotNameAndData( blk.mId, TDInstance.sid, from, to, extend, flag, leg, comment );
 
