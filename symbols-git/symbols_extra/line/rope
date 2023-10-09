@@ -1,8 +1,9 @@
 encoding utf-8
 symbol line
 name rope
-name-ru веревка
+name-de Seil
 name-hu kötél
+name-ru веревка
 th_name rope
 group trail
 color 0xcccccc 0x66

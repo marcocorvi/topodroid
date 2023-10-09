@@ -629,8 +629,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="stat_stddev_dip">Mag. Neigung Stdabweichung %1$.1f °. (durchschn. %2$.1f °)</string>
   <string name="stat_component">Komponenten %1$d</string>
   <string name="stat_depth">Tiefe %1$.1f %2$s %3$.1f %4$s"</string>
-  <string name="stat_duplicate">Doppelmessungen %1$d # %2$d %3$.1f %4$s</string>
-  <string name="stat_leg">Messstrecke %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
+  <string name="stat_duplicate">Doppelmessungen: %1$d # %2$d %3$.1f %4$s</string>
+  <string name="stat_leg">Messstrecken: %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
   <string name="stat_length">Länge %1$.1f %2$s</string>
   <string name="stat_extlen">3D-Länge %1$.1f %2$s</string>
   <string name="stat_projlen">Skizzenlänge %1$.1f %2$s</string>
@@ -643,7 +643,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="stat_station">Messpunkte %1$d # %2$d</string>
   <string name="stat_leg_sigma">Messstrecke Sigma %1$.1f cm</string>
   <string name="stat_dangling">Unverbundene Messungen %1$d %2$.1f %3$s</string>
-  <string name="stat_surface">Oberflächenmessungen %1$d # %2$d %3$.1f %4$s</string>
+  <string name="stat_surface">Oberflächenmessungen: %1$d # %2$d %3$.1f %4$s</string>
   <!-- UNUSED string name="stat_surface_z">Surface denivelation %1$.1f %2$.1f %3$s</string -->
   <string name="stat_survey_z">Höhenunterschied %1$.1f %2$.1f %3$s</string>
   <string name="stat_wens">W %1$.0f  O %2$.0f  N %3$.0f  S %4$.0f [%5$s]"</string>
@@ -651,10 +651,10 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="shot_title">Messung %1$s - %2$s"</string>
   <string name="shot_data">L %1$.2f  A %2$.1f  N %3$.1f"</string>
   <string name="survey_split_move_title">Vermessung teilen/verschieben</string>
-  <string name="survey_stat_duplicate">Doppelmessungen %1$d %2$.1f %3$s</string>
-  <string name="survey_stat_splay">Hilfszüge %1$d</string>
-  <string name="survey_stat_station">Messpunkte %1$d</string>
-  <string name="survey_stat_surface">Oberflächenmessungen %1$d %2$.1f %3$s</string>
+  <string name="survey_stat_duplicate">Doppelmessungen: %1$d %2$.1f %3$s</string>
+  <string name="survey_stat_splay">Hilfszüge: %1$d</string>
+  <string name="survey_stat_station">Messpunkte: %1$d</string>
+  <string name="survey_stat_surface">Oberflächenmessungen: %1$d %2$.1f %3$s</string>
   <string name="hide_blank">Hilfszüge ohne Punkte</string>
   <string name="hide_leg">Wiederholungsmessungen</string>
   <string name="hide_ids">Messungs-ID</string>
@@ -899,7 +899,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="help_close_app">Beenden</string>
   <string name="help_coeff">Kalibrierungs-Koeffizienten zeigen</string>
   <string name="help_color">Hilfszug-Farben löschen</string>
-    <!-- TODO string name="help_join">Join lines</string -->
+  <string name="help_join">Linie fortsetzen</string>
   <!-- UNUSED string name="help_continue">Linien fortsetzen</string -->
   <!-- UNUSED string name="help_contour">Konturen bearbeiten</string -->
   <string name="help_current_station">Gespeicherte Messpunkte</string>
@@ -1140,7 +1140,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="title_settings_png">PNG-Export Einstellungen</string -->
   <string name="title_settings_gpx">GPX-Export Einstellungen</string>
   <string name="title_settings_kml">KML-Export Einstellungen</string>
-  <!-- TODO string name="title_settings_srv">Walls export settings</string -->
+  <string name="title_settings_srv">Walls-Export Einstellungen</string>
 
   <string name="title_settings_sketch">Einstellungen: 3D</string>
   <string name="title_settings_survey">Einstellungen: Vermessung</string>
@@ -1281,8 +1281,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_station_prefix_summary">Exportiere Messpunkt Prefix (compass)</string>
   <string name="pref_compass_splays_title">Compass: Hilfszüge</string>
   <string name="pref_compass_splays_summary">Hilfszüge exportieren (compass)</string>
-  <!-- TODO string name="pref_walls_splays_title">Walls splays</string -->
-  <!-- TODO string name="pref_walls_splays_summary">Export splays in Walls files</string -->
+  <string name="pref_walls_splays_title">Walls Hilfszüge</string>
+  <string name="pref_walls_splays_summary">Hilfszüge als "splays" statt "wall shots" exportieren</string>
   <string name="pref_vtopo_splays_title">VisualTopo: Hilfszüge</string>
   <string name="pref_vtopo_splays_summary">Hilfszüge exportieren (VisualTopo)</string>
   <string name="pref_vtopo_lrud_title">VisualTopo: LRUD von Quellstation</string>
@@ -1565,8 +1565,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_path_multiselect_summary">Erlaube mehrere Pfade auszuwählen</string>
   <string name="pref_composite_actions_title">Zusammengesetzte Aktionen</string>
   <string name="pref_composite_actions_summary">Erlaube zusammengsetzte Aktionen für Linien/Flächen</string>
-  <!-- TODO string name="pref_with_continue_line_title">Line join</string -->
-  <!-- TODO string name="pref_with_continue_line_summary">Enable line join</string -->
+  <string name="pref_with_continue_line_title">Linie forsetzen</string>
+  <string name="pref_with_continue_line_summary">Setzt eine bestehende Linie fort</string>
   <string name="pref_plane_interpolation_title">Ebene interpolieren</string>
   <string name="pref_plane_interpolation_summary">Interpoliere die Ebene anhand der Hilfszüge</string>
   <string name="pref_plot_split_title">Skizzen aufteilen</string>
@@ -1812,9 +1812,9 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- 3D VIEWER strings -->
   <!-- UNUSED string name="capp_name" translatable="false">Cave3D</string -->
   <string name="cbtn_bind">Neuzuordnung</string>
-  <string name="cmenu_open">Datei öffnen</string>
-  <string name="cmenu_reset">Zurücksetzen</string>
-  <string name="cmenu_alpha">Oberfläche</string>
+  <string name="cmenu_open">DATEI ÖFFNEN</string>
+  <string name="cmenu_reset">ZURÜCKSETZEN</string>
+  <string name="cmenu_alpha">OBERFLÄCHE</string>
   <!-- UNUSED string name="cmenu_ble">BT surveys</string -->
   <string name="cmenu_viewpoint">ANSICHT</string>
   <!-- UNUSED string name="cmenu_files">Surveys</string -->
@@ -1832,10 +1832,10 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="info_axes">Axes: blue North, green East</string -->
   <string name="info_grid">Gitterzelle</string>
   <string name="info_view">Ansicht</string>
-  <string name="info_survey">Vermessung</string>
+  <string name="info_survey">Vermessungen</string>
   <string name="info_shot">Messungen</string>
   <string name="info_station">Messpunkte</string>
-  <string name="info_length">Höhlenlänge</string>
+  <string name="info_length">Messzuglänge</string>
   <string name="info_surface">Oberflächenmessungen</string>
   <string name="info_depth">Höhenunterschied</string>
   <string name="info_volume">Volumen</string>
