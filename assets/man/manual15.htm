@@ -164,25 +164,49 @@ along the survey (profile view). Their display is enabled through the "walls" me
 <br><p>
 
 <b>SURFACE</b><br>
-If the (Therion or Loch) model contains surface data (Digital Elevation Model), the surface can be displayed either gray or
-with the texture (if available).<br>
-The surface dialog has a button to load a DEM from a file. The supported formats are ascii (.asc or .ascii) and Therion grid (.grid). 
-Only the relevant portion of the DEM file is loaded.<br>
-The DEM extent must cover the area of the model.<br><p>
+For Topodroid models, a surface (Digital Elevation Model) can be added from a DEM file.
+If externally loaded Therion or Loch models contain surface data (Digital Elevation Model and optionally a texture), the surface can be displayed either gray or with the texture.<br>
+The surface dialog has a button to load a DEM from a file. The supported formats are ascii (.asc or .ascii) and Therion grid (.grid).<br>
+Only the relevant portion of the DEM file is loaded. The DEM extent must cover the area of the model.<br>
 
-The survey and the DEM data file must be in the same (cartographic) Coordinate Reference System.
-If the survey fixed point coordinates have been transformed into another reference system,
-the transformed coordinates are used to reference the model and the DEM data must be
-in that reference system.<br>
-If the survey has only long-lat (WGS84) coordinates, the WGS-84 system is used, and the DEM data must be in WGS-84,
-namely the lower left corner coordinates and the (square) cell dimension should be in decimal degrees.
-<br><p>
+<p>
+The Esri ASCII Format must use a header like in the following example:<br>
+<pre>
+  ncols 374
+  nrows 225
+  xllcorner 7.444608
+  yllcorner 46.947922
+  cellsize 0.000213
+  NODATA_value -99.00
+  567.1 567.2 ...
+  ...
+</pre>
+A Therion grid file must use a header like in the following example and may contain comments on lines starting with "#":<br>
+<pre>
+  grid 7.444608 46.947922 0.000213 0.000213 374 225
+  567.1 567.2 ...
+  ...
+</pre>
 
+<p>Coordinate Reference Systems (CRS):</p>
+<p>
+The fixed stations of the survey and the DEM data file must all be in the same (cartographic) Coordinate Reference System.<br>
+By default, WGS84 is used, so the coordinates and cell size must be entered in degrees (with six or more decimals for good accuracy).<br>
+</p>
+<p>
+To use a different CRS, all fixed stations must be transformed into that other CRS using the "Convert" button in the respective "Geo-Points" dialog.
+Notice: the separately available app "Proj4" must be installed as well (do not use the version from Play Store but the more current one from the Topodroid Website).
+Check the INFO dialog of the 3D Viewer to verify that the required CRS is effectively in use.<br>
+The DEM data must now be in that reference system instead of WGS-84 (depending on the CRS used, cellsize may now be in meters).
+</p>
+
+<p>
 The transparency of the surface is adjustable. If fully opaque the portions of surface behind others are hidden.<br>
 The projection of the survey centerline on the surface can be displayed (blue).<br>
 When the model has a surface, it can be colored by the depth beneath the surface.
-<br><p>
+</p>
 
+<p>
 If the model has a surface DEM, the surface texture can be loaded from a file.
 The supported file formats are GeoTiff and OSM.<br>
 The GeoTiff file must be in the same Cartographic Coordinate Reference System of the survey.
