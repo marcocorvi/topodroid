@@ -1,6 +1,7 @@
 encoding utf-8
 symbol point
 name slope
+name_de Abhang
 th_name slope
 orientation yes
 color 0xffcc00
