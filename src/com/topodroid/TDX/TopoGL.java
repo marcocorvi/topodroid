@@ -1737,6 +1737,7 @@ public class TopoGL extends Activity
           default:
             TDToast.make( R.string.texture_failed );
         }
+        onDEMloading = false;
       }
     }).execute( pathname );
   }
@@ -1783,6 +1784,7 @@ public class TopoGL extends Activity
         } else {
           TDToast.make( R.string.texture_failed );
         }
+        onDEMloading = false;
       }
     }).execute( pathname );
   }
