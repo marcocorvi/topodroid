@@ -449,6 +449,11 @@ public class GlNames extends GlShape
   // ---------------------------------------------------------------
   // FEEDBACK
 
+  /** check if ican highlight a station 
+   * @param idx       sttaion index
+   * @param highlight whether to mark the station highlight
+   * @return fullname of highlighted station or null
+   */ 
   private String checkName( int idx, boolean highlight )
   {
     // TDLog.v(sb.toString() + " min " + name + " " + dmin );
@@ -461,13 +466,13 @@ public class GlNames extends GlShape
     return name.fullname;
   }
 
-  /** ???
+  /** check if a station in close to the point (x,y) on the display
    * @param x         canvas X coordinates
    * @param y         canvas Y coordinates
    * @param matrix    MVP matrix
    * @param dim       minimum distance
-   * @param highlight ???
-   * @return ???
+   * @param highlight whether to mark the station highlight
+   * @return fullname of highlighted station or null
    */ 
   String checkName( float x, float y, float[] matrix, double dmin, boolean highlight )
   {

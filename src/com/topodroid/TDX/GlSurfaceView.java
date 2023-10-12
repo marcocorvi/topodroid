@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 // import com.topodroid.c3in.ParserBluetooth;
 // import com.topodroid.c3in.ParserSketch;
 
@@ -111,6 +111,7 @@ class GlSurfaceView extends GLSurfaceView
   {
     mApp.closeMenu();
     if ( e == null ) return true;
+    // TDLog.v("GL surface view on touch " + e.getX() + " " + e.getY() );
     float x0, y0, x1, y1, dx, dy;
     switch (e.getAction()) {
       case MotionEvent.ACTION_DOWN:

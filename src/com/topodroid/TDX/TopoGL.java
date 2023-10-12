@@ -380,9 +380,9 @@ public class TopoGL extends Activity
     GlModel.setWidthAndHeight( TopoDroidApp.mDisplayWidth, TopoDroidApp.mDisplayHeight );
     
     mLayoutStation = (LinearLayout) findViewById( R.id.layout_station );
-    mCurrentStation = (Button) findViewById( R.id.current_station );
+    mCurrentStation = (Button) findViewById( R.id.current_station ); // name of the highlighted station in the station dialog-bar
     mCurrentCoords  = (Button) findViewById( R.id.current_coords );
-    mCurrentStation.setOnClickListener( this );
+    // mCurrentStation.setOnClickListener( this ); // better use onLongClick on layout
     // mCurrentStation.setOnLongClickListener( this );
 
     mMeasureStation = (Button) findViewById( R.id.measure_station );
@@ -391,6 +391,7 @@ public class TopoGL extends Activity
     mFixStation.setOnClickListener( this );
 
     mLayoutStation.setVisibility( View.GONE );
+    mLayoutStation.setOnLongClickListener( this );
     
     // setWallButton( mRenderer.wall_mode );
 
@@ -1322,10 +1323,10 @@ public class TopoGL extends Activity
       }
       return;
     } 
-    if ( id == R.id.current_station ) {
-      closeCurrentStation();
-      return;
-    }
+    // if ( id == R.id.current_station ) {
+    //   closeCurrentStation();
+    //   return;
+    // }
 
     Button b0 = (Button)view;
     int k1 = 0;

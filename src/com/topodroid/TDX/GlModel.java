@@ -482,9 +482,17 @@ public class GlModel
 
   }
 
+  /** check if there is a station name at point (x,y) of the display
+   * @param x    X coord
+   * @param y    Y coord
+   * @param mvpMatrix MVP matrix
+   * @param dmin      maximum distance
+   * @param highlight whether to highlight the station
+   * @return the station name or null
+   */
   String checkNames( float x, float y, float[] mvpMatrix, float dmin, boolean highlight ) 
   { 
-    // TDLog.v("Model check names at " + x + " " + y );
+    // TDLog.v("Model check names at " + x + " " + y + " highlight " + highlight + " ret " + ret );
     return ( glNames != null )? glNames.checkName( x, y, mvpMatrix, dmin, highlight ) : null;
   }
 

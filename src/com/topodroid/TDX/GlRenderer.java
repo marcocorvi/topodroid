@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 // import com.topodroid.c3in.ParserBluetooth;
 // import com.topodroid.c3in.ParserSketch; // NO_C3D
 import com.topodroid.c3out.ExportGltf;
@@ -386,7 +386,7 @@ public class GlRenderer implements Renderer
 
   void onTouch( float x, float y )
   {
-    // TDLog.v("Renderer on Touch() ");
+    // TDLog.v("GL renderer on Touch() " + x + " " + y );
     // if ( ! GlNames.showStationNames() ) return;
     if ( GlNames.hiddenStations() ) return;
     if ( mMeasureCompute ) return;

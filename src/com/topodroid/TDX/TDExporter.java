@@ -1477,7 +1477,7 @@ public class TDExporter
             pw.format("  # map m%s -projection %s\n", plt.name, PlotType.projName( plt.type ) );
           }
           pw.format("  #   %s\n", plotname );
-          for ( int k=1; k<=scrap_nr; ++k) pw.format("  #   %s%d\n", plotname, scrap_nr );
+          for ( int k=1; k<=scrap_nr; ++k) pw.format("  #   %s%d\n", plotname, k );
           pw.format("  # endmap\n");
         } 
       }
