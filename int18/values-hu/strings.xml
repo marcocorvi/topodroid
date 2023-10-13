@@ -971,7 +971,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="man_overview">12. Áttekintő ablak</string>
     <string name="man_export" copyable="hu">13. Import/export</string>
     <string name="man_project">14. Barlang projekt</string>
-    <string name="man_threed">15. 3D názet</string>
+    <string name="man_threed">15. 3D nézet</string>
     <string name="man_content">16. Tartalomjegyzék</string>
     <string name="man_index">17. Tárgymutató</string>
     <string name="man_website">* Weboldal</string>
