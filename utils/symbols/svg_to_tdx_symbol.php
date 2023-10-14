@@ -1145,7 +1145,7 @@ class SVGToTDXSymbolConverter
 //
 //----------------------------------------------------------------------
 const TAU = M_PI * 2;
-const NEAR_ZERO_FLOAT_EPSILON = PHP_FLOAT_EPSILON / 10;
+const NEAR_ZERO_FLOAT_EPSILON = PHP_FLOAT_EPSILON / 32;
 
 //
 // Sensible float comparison
@@ -1320,8 +1320,8 @@ function arcToBezier(
     $rx = abs($rx);
     $ry = abs($ry);
 
-    $lambda = (pow($pxp, 2) / pow($rx, 2) + 
-        pow($pyp, 2) / pow($ry, 2));
+    $lambda = (($pxp * $pxp) / ($rx * $rx) + 
+        ($pyp * $pyp) / ($ry * $ry));
 
     if ($lambda > 1) {
         $rx *= sqrt($lambda);
