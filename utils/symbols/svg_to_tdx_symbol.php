@@ -1141,8 +1141,40 @@ class SVGToTDXSymbolConverter
 //
 // SVG arcs (from paths) to cubic bézier curves convertion functions.
 //
+// Based on https://www.npmjs.com/package/svg-arc-to-cubic-bezier
+//
 //----------------------------------------------------------------------
 const TAU = M_PI * 2;
+const NEAR_ZERO_FLOAT_EPSILON = PHP_FLOAT_EPSILON / 10;
+
+//
+// Sensible float comparison
+//
+// Based on https://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/
+//
+function almostEqual(
+    $a,
+    $b,
+    $maxDiffNearZero = NEAR_ZERO_FLOAT_EPSILON,
+    $maxDiffRel = PHP_FLOAT_EPSILON)
+{
+    // Check if the numbers are really close -- needed
+    // when comparing numbers near zero.
+     $diff = abs($a - $b);
+     if ($diff <= $maxDiffNearZero)
+     {
+        return true;
+     }
+
+     $absA = abs($a);
+     $absB = abs ($b);
+     $largest = ($absB > $absA) ? $absB : $absA;
+     if ($diff <= ($largest * $maxDiffRel))
+     {
+        return true;
+     }
+     return false;
+}
 
 function mapToEllipse($point, $rx, $ry, $cosphi, $sinphi, $centerx, $centery) 
 {
@@ -1162,8 +1194,8 @@ function approxUnitArc($ang1, $ang2)
 {
     // If 90 degree circular arc, use a constant
     // as derived from http://spencermortensen.com/articles/bezier-circle
-    $a = ($ang2 == 1.5707963267948966) ? 0.551915024494 : 
-        (($ang2 == -1.5707963267948966) ? -0.551915024494 : 
+    $a = (almostEqual($ang2, 1.5707963267948966)) ? 0.551915024494 : 
+        ((almostEqual($ang2, -1.5707963267948966)) ? -0.551915024494 : 
             4 / 3 * tan($ang2 / 4));
 
     $x1 = cos($ang1);
@@ -1281,7 +1313,7 @@ function arcToBezier(
     $pxp = $cosphi * ($px - $cx) / 2 + $sinphi * ($py - $cy) / 2;
     $pyp = -$sinphi * ($px - $cx) / 2 + $cosphi * ($py - $cy) / 2;
 
-    if ($pxp == 0 && $pyp == 0) {
+    if (almostEqual($pxp, 0) && almostEqual($pyp, 0)) {
         return [];
     }
 
@@ -1318,8 +1350,8 @@ function arcToBezier(
     // unnecessary split, and adds extra points to the bezier curve. To alleviate
     // this issue, we round to 1.0 when the ratio is close to 1.0.
     $ratio = abs($ang2) / (TAU / 4);
-    if (abs(1.0 - $ratio) < 0.0000001) {
-        $ratio = 1.0;
+    if (almostEqual(1, $ratio)) {
+        $ratio = 1;
     }
 
     $segments = max(ceil($ratio), 1);
