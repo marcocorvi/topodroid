@@ -1,8 +1,7 @@
 <html><body>
 <h4>3D VIEWER - Surface DEM</h4>
 
-A surface DEM (Digital Elevation Model) can be shown if it is enclosed in the model file (eg, in a lox file), 
-or has been added to the model.<br><p>
+A surface DEM (Digital Elevation Model) can be added to TopoDroid models or can be shown if it is enclosed in a loaded model file (eg, in a lox file)<br><p>
 
 The <i>Surface</i> button of the <u>3D Viewer window</u> toggles the DEM display on and off.<br><p>
 
@@ -12,7 +11,7 @@ It is used to load a DEM, a surface texture to overlay on the DEM, and adjust it
 It contains
 <ul>
 <li>a button to select a DEM file</li>
-<li>a button to select a texture file, if the model has a DEM</li>
+<li>a button to select a texture file, after a DEM has been loaded (or if the model already has a DEM)</li>
 <li>a slider to adjust the opacity</li>
 <li>a checkbox to activate the display of the projection of the model on the DEM</li>
 <li>a checkbox to activate the display of the surface texture (if there is one)</li>
@@ -20,13 +19,13 @@ It contains
 
 <b>DEM file</b><br>
 
-The 3D viewer supports DEM file in ascii format, or Therion grid format.<br><p>
+The 3D viewer supports DEM file in ascii format, or Therion grid format (see manual for details on the file formats and coordinate reference systems).<br><p>
 
 <b>Texture file</b><br>
 
 The 3D viewer supports texture GeoTIFF image files, and OSM map files.<br><p>
 
-The DEM and texture X-Y coordinates must be in the Coordinate Reference System of the model,
+The DEM and texture X-Y coordinates must be in the Coordinate Reference System of the model (which can be changed in the fixed station dialog),
 because the 3D viewer does not perform coordinate conversions.<br><p>
 
 OSM files are in WGS84 geographical coordinates. The values can be used with models
