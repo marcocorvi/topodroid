@@ -3071,7 +3071,7 @@ public class TDExporter
     DBlock item = shots.get( 0 );
     String st = item.mFrom; // current station
     trb.put( st, "1.0" );
-    TDLog.v("TRB shots: " + nr + " start " + st + "-" + item.mTo + " put " + st + " as 1.0" );
+    // TDLog.v("TRB shots: " + nr + " start " + item.mFrom + "-" + item.mTo + " put " + st + " as 1.0" );
     
     boolean repeat1 = true;
     int series = 1;
@@ -3079,7 +3079,7 @@ public class TDExporter
     int start_point  = 0;
     while ( repeat1 ) {
       repeat1 = false;
-      TDLog.v("TRB make series " + series + " start " + start_series + "." + start_point );
+      // TDLog.v("TRB make series " + series + " start " + start_series + "." + start_point );
       TrbSeries trb_series = new TrbSeries( series, start_series, start_point );
       trb.addSeries( trb_series );
       int point  = 0;
@@ -3117,18 +3117,23 @@ public class TDExporter
       }
       trb_series.setPoints( point );
 
-      for ( int k = 0; k < shots.size(); ) { // check for a new series
+      // TDLog.v("TRB check new series. shots " + shots.size() );
+      boolean found = false;
+      for ( int k = 0; k < shots.size(); ++k ) { // check for a new series
         item = shots.get( k );
         String from = item.mFrom;
         String to   = item.mTo;
         String spf  = trb.get( from );
         String spt  = trb.get( to );
+        if ( shots.size() < 7 ) TDLog.v("TRB try " + from + " " + to + " ==> " + spf + " " + spt );
         if ( spf != null && spt == null ) { // new series
           ++ series;
           repeat1 = true;
           start_series = getTrbSeries( spf );
           start_point  = getTrbStation( spf );
           st = from;
+          found = true;
+          // TDLog.v("TRB new series F " + series + " from " + st + " = " + spf );
           break;
         } else if ( spt != null && spf == null ) { // new series
           ++ series;
@@ -3136,8 +3141,14 @@ public class TDExporter
           start_series = getTrbSeries( spt );
           start_point  = getTrbStation( spt );
           st = to;
+          found = true;
+          // TDLog.v("TRB new series T " + series + " from " + st + " = " + spt );
           break;
         }
+      }
+      if ( ! found ) { 
+        TDLog.e("TRB non-connected shots");
+        break;
       }
     }
     TDLog.v("TRB done make series: " + trb.getNrSeries() + " stations " + trb.getNrStations() );
@@ -3147,10 +3158,10 @@ public class TDExporter
       
   private static void writeTrbSeries1( PrintWriter pw, List< DBlock > list, TrbStruct trb, String comment ) 
   {
-    TDLog.v("TRB write trb: nr. series " + trb.getSeries().size() );
+    // TDLog.v("TRB write trb: nr. series " + trb.getSeries().size() );
     for ( TrbSeries sr : trb.getSeries() ) {
       TDLog.v("TRB series " + sr.series + " start " + sr.start_series + "." + sr.start_point + " pts " + sr.points );
-      sr.dumpBlocks(); // DEBUG
+      // sr.dumpBlocks(); // DEBUG
       pw.format("\r\n" );
       pw.format("%d\t-1\t%d\t%d\t%d\t%d\t%d\t0\t0\t%s\r\n", sr.series, sr.start_series, sr.start_point, sr.series, sr.points, sr.points, comment );
       int fs = sr.start_series;
@@ -3169,7 +3180,7 @@ public class TDExporter
         int pf = getTrbStation( spf );
         int st = getTrbSeries( spt );
         int pt = getTrbStation( spt );
-        TDLog.v("TRB " + fs + "." + fp + " -- " + st + "." + tp + " item " + item.mFrom + "-" + item.mTo + " < " + spf + " " + sf + "." + pf + " -- " + spt + " " + st + "." + pt + " > " + shot.forward );
+        // TDLog.v("TRB " + fs + "." + fp + " -- " + st + "." + tp + " item " + item.mFrom + "-" + item.mTo + " < " + spf + " " + sf + "." + pf + " -- " + spt + " " + st + "." + pt + " > " + shot.forward );
         AverageLeg leg = computeAverageLeg( item, list );
         assert( leg != null );
         lrud = computeLRUD( item, list, (! shot.forward) ); // not forward: at TO -- forward: at FROM
@@ -3190,7 +3201,7 @@ public class TDExporter
 
   private static AverageLeg computeAverageLeg( DBlock blk, List< DBlock > list )
   {
-    TDLog.v("TRB average leg: block " +  blk.mFrom + "-" + blk.mTo + " list size " + list.size() );
+    // TDLog.v("TRB average leg: block " +  blk.mFrom + "-" + blk.mTo + " list size " + list.size() );
     if ( TDString.isNullOrEmpty( blk.mFrom ) || TDString.isNullOrEmpty( blk.mTo ) ) return null;
     for ( int k = 0; k < list.size(); ++k ) {
       DBlock item = list.get( k );
@@ -3211,11 +3222,11 @@ public class TDExporter
             break;
           }
         }
-        TDLog.v("TRB average leg: items " + k0 + " ... " + k );
+        // TDLog.v("TRB average leg: items " + k0 + " ... " + k );
         return leg;
       } 
     }
-    TDLog.v("TRB average leg: null " );
+    // TDLog.v("TRB average leg: null " );
     return null;
   }
 
@@ -3225,7 +3236,7 @@ public class TDExporter
     int code = 1;
     List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
-    TDLog.v( "TRB export: shots " + list.size() );
+    // TDLog.v( "TRB export: shots " + list.size() );
     char[] line = new char[ TRB_LINE_LENGTH ];
     try {
       // TDLog.Log( TDLog.LOG_IO, "export TopoRobot " + file.getName() );

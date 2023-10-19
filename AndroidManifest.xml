@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
       package="com.topodroid.TDX"
       android:installLocation="auto"
-      android:versionCode="602025"
-      android:versionName="6.2.25"
+      android:versionCode="602026"
+      android:versionName="6.2.26"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:

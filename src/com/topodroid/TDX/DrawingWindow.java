@@ -5123,7 +5123,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private boolean onTouchMove( float xc, float yc, float xs, float ys, MotionEventWrap event, boolean threePointers )
   {
-    TDLog.v( "action MOVE mode " + mMode + " touch-mode " + mTouchMode + " rotate azimuth " + mRotateAzimuth );
+    // TDLog.v( "action MOVE mode " + mMode + " touch-mode " + mTouchMode + " rotate azimuth " + mRotateAzimuth );
     if ( mTouchMode == MODE_MOVE) {
       float x_shift = xc - mSaveX; // compute shift
       float y_shift = yc - mSaveY;
@@ -5241,7 +5241,7 @@ public class DrawingWindow extends ItemDrawer
       } else if (  mMode == MODE_MOVE && mRotateAzimuth ) {
         TDAzimuth.mRefAzimuth = TDMath.in360( TDAzimuth.mRefAzimuth + x_shift/2 );
         setButtonAzimuth();
-        TDLog.v("rotated azimuth by " + x_shift + ": " + TDAzimuth.mRefAzimuth );
+        // TDLog.v("rotated azimuth by " + x_shift + ": " + TDAzimuth.mRefAzimuth );
       } else if (  mMode == MODE_MOVE 
                || (mMode == MODE_EDIT && mEditMove ) 
                || (mMode == MODE_SHIFT && mShiftMove) ) {
