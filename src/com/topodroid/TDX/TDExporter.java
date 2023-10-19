@@ -46,6 +46,7 @@ import com.topodroid.io.shp.ShpNamez;
 import com.topodroid.io.shp.ShpFixedz;
 import com.topodroid.io.trb.TrbStruct;
 import com.topodroid.io.trb.TrbSeries;
+import com.topodroid.io.trb.TrbShot;
 import com.topodroid.trb.TRobotPoint;
 import com.topodroid.trb.TRobotSeries;
 import com.topodroid.trb.TRobot;
@@ -1026,97 +1027,97 @@ public class TDExporter
   // GEO JASON GeoJSON export
   //   NOTE shot flags are ignored
 
-  /** export data json file
-   * @param bw    buffered output stream
-   * @param sid   survey ID
-   * @param data  database helper object
-   * @param info  survey info
-   * @param surveyname survey name
-   * @return 1 success, 0 fail, 2 no geopoint
-   */
-  static int exportSurveyAsJson( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
-  {
-    final String name    = "\"name\": ";
-    final String type    = "\"type\": ";
-    final String item    = "\"item\": ";
-    final String geom    = "\"geometry\": ";
-    final String coords  = "\"coordinates\": ";
-    final String feature = "\"Feature\"";
-    // TDLog.v( "export as GeoJSON " + file.getName() );
-    List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, true, false ); // true: ellipsoid altitude, false no convergence
-    if ( TDUtil.isEmpty(nums) ) {
-      TDLog.Error( "Failed GeoJSON export: no geolocalized station");
-      return 2;
-    }
+  // /** export data json file
+  //  * @param bw    buffered output stream
+  //  * @param sid   survey ID
+  //  * @param data  database helper object
+  //  * @param info  survey info
+  //  * @param surveyname survey name
+  //  * @return 1 success, 0 fail, 2 no geopoint
+  //  */
+  // static int exportSurveyAsJson( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
+  // {
+  //   final String name    = "\"name\": ";
+  //   final String type    = "\"type\": ";
+  //   final String item    = "\"item\": ";
+  //   final String geom    = "\"geometry\": ";
+  //   final String coords  = "\"coordinates\": ";
+  //   final String feature = "\"Feature\"";
+  //   // TDLog.v( "export as GeoJSON " + file.getName() );
+  //   List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, true, false ); // true: ellipsoid altitude, false no convergence
+  //   if ( TDUtil.isEmpty(nums) ) {
+  //     TDLog.Error( "Failed GeoJSON export: no geolocalized station");
+  //     return 2;
+  //   }
 
-    // now write the GeoJSON
-    try {
-      // TDLog.Log( TDLog.LOG_IO, "export GeoJSON " + file.getName() );
-      // BufferedWriter bw = TDFile.getMSwriter( "json", surveyname + ".json", "text/json" );
-      PrintWriter pw = new PrintWriter( bw );
+  //   // now write the GeoJSON
+  //   try {
+  //     // TDLog.Log( TDLog.LOG_IO, "export GeoJSON " + file.getName() );
+  //     // BufferedWriter bw = TDFile.getMSwriter( "json", surveyname + ".json", "text/json" );
+  //     PrintWriter pw = new PrintWriter( bw );
 
-      pw.format("const geojsonObject = {\n");
-      pw.format("  \"name\": \"%s\",\n", info.name );
-      pw.format("  \"created\": \"%s - TopoDroid v %s\",\n",  TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
-      pw.format("  %s \"FeatureCollection\",\n", type );
-      pw.format("  \"features\": [\n");
-      
-      for ( TDNum num : nums ) {
-        List< NumShot >    shots = num.getShots();
-        for ( NumShot sh : shots ) {
-          NumStation from = sh.from;
-          NumStation to   = sh.to;
-          if ( from.has3DCoords() && to.has3DCoords() ) {
-            pw.format("    {\n");
-            pw.format("      %s %s,\n", type, feature );
-            pw.format("      %s \"centerline\",\n", item );
-            pw.format("      %s \"%s %s\",\n", name, from.name, to.name );
-            pw.format("      %s \"LineString\",\n", geom );
-            pw.format(Locale.US, "      %s [ [ %.8f, %.8f, %.1f ], [ %.8f, %.8f, %.1f ] ]\n", coords, from.e, from.s, from.v, to.e, to.s, to.v );
-            pw.format("    },\n");
-          }
-        }
-      }
-      if ( TDSetting.mKmlSplays ) {
-        for ( TDNum num : nums ) {
-          List< NumSplay >   splays = num.getSplays();
-          for ( NumSplay sp : splays ) {
-            NumStation from = sp.from;
-            pw.format("    {\n");
-            pw.format("      %s %s,\n", type, feature );
-            pw.format("      %s \"splay\",\n", item );
-            pw.format("      %s \"%s\",\n", name, from.name );
-            pw.format("      %s \"LineString\",\n", geom );
-            pw.format(Locale.US, "     %s [ [ %.8f, %.8f, %.1f ], [ %.8f, %.8f, %.1f ] ]\n", coords, from.e, from.s, from.v, sp.e, sp.s, sp.v );
-            pw.format("    },\n");
-          }
-        }
-      }
-      if ( TDSetting.mKmlStations ) {
-        for ( TDNum num : nums ) {
-          List< NumStation > stations = num.getStations();
-          for ( NumStation st : stations ) {
-            pw.format("    {\n");
-            pw.format("      %s %s,\n", type, feature );
-            pw.format("      %s \"station\",\n", item );
-            pw.format("      %s \"%s\",\n", name, st.name );
-            pw.format("      %s \"Point\",\n", geom );
-            pw.format(Locale.US, "      %s [ %.8f %.8f %.1f ]\n", coords, st.e, st.s, st.v );
-            pw.format("    },\n");
-          }
-        }
-      }
-      pw.format("    { }\n"); // add a null feature
-      pw.format("  ]\n");     // close features array
-      pw.format("};\n");      // close geojson object
-      bw.flush();
-      bw.close();
-      return 1;
-    } catch ( IOException e ) {
-      TDLog.Error( "Failed GeoJSON export: " + e.getMessage() );
-      return 0;
-    }
-  }
+  //     pw.format("const geojsonObject = {\n");
+  //     pw.format("  \"name\": \"%s\",\n", info.name );
+  //     pw.format("  \"created\": \"%s - TopoDroid v %s\",\n",  TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
+  //     pw.format("  %s \"FeatureCollection\",\n", type );
+  //     pw.format("  \"features\": [\n");
+  //     
+  //     for ( TDNum num : nums ) {
+  //       List< NumShot >    shots = num.getShots();
+  //       for ( NumShot sh : shots ) {
+  //         NumStation from = sh.from;
+  //         NumStation to   = sh.to;
+  //         if ( from.has3DCoords() && to.has3DCoords() ) {
+  //           pw.format("    {\n");
+  //           pw.format("      %s %s,\n", type, feature );
+  //           pw.format("      %s \"centerline\",\n", item );
+  //           pw.format("      %s \"%s %s\",\n", name, from.name, to.name );
+  //           pw.format("      %s \"LineString\",\n", geom );
+  //           pw.format(Locale.US, "      %s [ [ %.8f, %.8f, %.1f ], [ %.8f, %.8f, %.1f ] ]\n", coords, from.e, from.s, from.v, to.e, to.s, to.v );
+  //           pw.format("    },\n");
+  //         }
+  //       }
+  //     }
+  //     if ( TDSetting.mKmlSplays ) {
+  //       for ( TDNum num : nums ) {
+  //         List< NumSplay >   splays = num.getSplays();
+  //         for ( NumSplay sp : splays ) {
+  //           NumStation from = sp.from;
+  //           pw.format("    {\n");
+  //           pw.format("      %s %s,\n", type, feature );
+  //           pw.format("      %s \"splay\",\n", item );
+  //           pw.format("      %s \"%s\",\n", name, from.name );
+  //           pw.format("      %s \"LineString\",\n", geom );
+  //           pw.format(Locale.US, "     %s [ [ %.8f, %.8f, %.1f ], [ %.8f, %.8f, %.1f ] ]\n", coords, from.e, from.s, from.v, sp.e, sp.s, sp.v );
+  //           pw.format("    },\n");
+  //         }
+  //       }
+  //     }
+  //     if ( TDSetting.mKmlStations ) {
+  //       for ( TDNum num : nums ) {
+  //         List< NumStation > stations = num.getStations();
+  //         for ( NumStation st : stations ) {
+  //           pw.format("    {\n");
+  //           pw.format("      %s %s,\n", type, feature );
+  //           pw.format("      %s \"station\",\n", item );
+  //           pw.format("      %s \"%s\",\n", name, st.name );
+  //           pw.format("      %s \"Point\",\n", geom );
+  //           pw.format(Locale.US, "      %s [ %.8f %.8f %.1f ]\n", coords, st.e, st.s, st.v );
+  //           pw.format("    },\n");
+  //         }
+  //       }
+  //     }
+  //     pw.format("    { }\n"); // add a null feature
+  //     pw.format("  ]\n");     // close features array
+  //     pw.format("};\n");      // close geojson object
+  //     bw.flush();
+  //     bw.close();
+  //     return 1;
+  //   } catch ( IOException e ) {
+  //     TDLog.Error( "Failed GeoJSON export: " + e.getMessage() );
+  //     return 0;
+  //   }
+  // }
 
   // -------------------------------------------------------------------
   // TRACK FILE GPX
@@ -3062,7 +3063,7 @@ public class TDExporter
       if ( from != null && from.length() > 0 && to != null && to.length() > 0 ) { 
         trb.put( from, null );
         trb.put( to, null );
-        trb.addShot( item );
+        // trb.addShot( item );
         shots.add( item );
       }
     }
@@ -3079,6 +3080,8 @@ public class TDExporter
     while ( repeat1 ) {
       repeat1 = false;
       TDLog.v("TRB make series " + series + " start " + start_series + "." + start_point );
+      TrbSeries trb_series = new TrbSeries( series, start_series, start_point );
+      trb.addSeries( trb_series );
       int point  = 0;
       boolean repeat2 = true;
       while ( repeat2 ) {
@@ -3088,19 +3091,21 @@ public class TDExporter
           item = shots.get( k );
           String from = item.mFrom;
           String to   = item.mTo;
-          TDLog.v("TRB shot " + k + "/" + shots.size() + ": " + from + "-" + to );
+          // TDLog.v("TRB shot " + k + "/" + shots.size() + ": " + from + "-" + to );
           if ( from.equals( st ) && trb.get( to ) == null ) {
             point ++;
-            TDLog.v("TRB put " + to + " as " + series + "." + point );
+            // TDLog.v("TRB forward shot " + from + "-" + to + " put " + to + " as " + series + "." + point );
             trb.put( to, String.format("%d.%d", series, point ) );
+            trb_series.appendShot( item, true );
             st = to;
             shots.remove( k );
             repeat2 = true;
             break;
           } else if ( to.equals( st ) && trb.get( from ) == null ) {
             point ++;
-            TDLog.v("TRB put " + from + " as " + series + "." + point );
+            // TDLog.v("TRB backward shot " + from + "-" + to + " put " + from + " as " + series + "." + point );
             trb.put( from, String.format("%d.%d", series, point ) );
+            trb_series.appendShot( item, false );
             st = from;
             shots.remove( k );
             repeat2 = true;
@@ -3110,10 +3115,9 @@ public class TDExporter
           }
         }
       }
-      TDLog.v("TRB done series " + series + " points " + point );
-      trb.addSeries( new TrbSeries( series, point, start_series, start_point ) );
+      trb_series.setPoints( point );
 
-      for ( int k = 0; k < shots.size(); ) {
+      for ( int k = 0; k < shots.size(); ) { // check for a new series
         item = shots.get( k );
         String from = item.mFrom;
         String to   = item.mTo;
@@ -3125,7 +3129,6 @@ public class TDExporter
           start_series = getTrbSeries( spf );
           start_point  = getTrbStation( spf );
           st = from;
-          // trb.put( to, String.format("%d.%d", series, 1 ) );
           break;
         } else if ( spt != null && spf == null ) { // new series
           ++ series;
@@ -3133,13 +3136,87 @@ public class TDExporter
           start_series = getTrbSeries( spt );
           start_point  = getTrbStation( spt );
           st = to;
-          // trb.put( from, String.format("%d.%d", series, 1 ) );
           break;
         }
       }
     }
-    TDLog.v("TRB make series: " + trb.getNrSeries() + " stations " + trb.getNrStations() + " shots " + trb.getNrShots() );
+    TDLog.v("TRB done make series: " + trb.getNrSeries() + " stations " + trb.getNrStations() );
     return trb;
+  }
+
+      
+  private static void writeTrbSeries1( PrintWriter pw, List< DBlock > list, TrbStruct trb, String comment ) 
+  {
+    TDLog.v("TRB write trb: nr. series " + trb.getSeries().size() );
+    for ( TrbSeries sr : trb.getSeries() ) {
+      TDLog.v("TRB series " + sr.series + " start " + sr.start_series + "." + sr.start_point + " pts " + sr.points );
+      sr.dumpBlocks(); // DEBUG
+      pw.format("\r\n" );
+      pw.format("%d\t-1\t%d\t%d\t%d\t%d\t%d\t0\t0\t%s\r\n", sr.series, sr.start_series, sr.start_point, sr.series, sr.points, sr.points, comment );
+      int fs = sr.start_series;
+      int fp = sr.start_point;
+      int ts = sr.series; // this is fix
+      boolean atFrom = true;
+      TrbShot shot = sr.getShots(); // get the first shot of the series
+      LRUD lrud = computeLRUD( shot.block, list, shot.forward ); // forwrad: at FROM
+      pw.format( Locale.US, "%s\t0\t1\t1\t%.2f\t%.1f\t%.1f\t%.2f\t%.2f\t%.2f\t%.2f\r\n", ts, 0.0f, 0.0f, 0.0f, lrud.l, lrud.r, lrud.u, lrud.d );
+      int tp = 1;
+      for ( ; shot != null; shot = shot.next ) {
+        DBlock item = shot.block;
+        String spf = trb.get( shot.forward ? item.mFrom : item.mTo   );
+        String spt = trb.get( shot.forward ? item.mTo   : item.mFrom );
+        int sf = getTrbSeries( spf );
+        int pf = getTrbStation( spf );
+        int st = getTrbSeries( spt );
+        int pt = getTrbStation( spt );
+        TDLog.v("TRB " + fs + "." + fp + " -- " + st + "." + tp + " item " + item.mFrom + "-" + item.mTo + " < " + spf + " " + sf + "." + pf + " -- " + spt + " " + st + "." + pt + " > " + shot.forward );
+        AverageLeg leg = computeAverageLeg( item, list );
+        assert( leg != null );
+        lrud = computeLRUD( item, list, (! shot.forward) ); // not forward: at TO -- forward: at FROM
+        // write block ... TODO
+        // series point topo code L A C L R U D comment
+        pw.format( Locale.US, "%s\t%s\t1\t1\t%.2f\t%.1f\t%.1f\t%.2f\t%.2f\t%.2f\t%.2f", ts, pt, leg.length(), leg.bearing(), leg.clino(), lrud.l, lrud.r, lrud.u, lrud.d );
+        if ( item.mComment != null ) {
+          pw.format( "\t%s\r\n", item.mComment );
+        } else {
+          pw.format( "\r\n" );
+        }
+        fs = ts;
+        fp = tp;
+        ++ tp;
+      } // end of series
+    }
+  }
+
+  private static AverageLeg computeAverageLeg( DBlock blk, List< DBlock > list )
+  {
+    TDLog.v("TRB average leg: block " +  blk.mFrom + "-" + blk.mTo + " list size " + list.size() );
+    if ( TDString.isNullOrEmpty( blk.mFrom ) || TDString.isNullOrEmpty( blk.mTo ) ) return null;
+    for ( int k = 0; k < list.size(); ++k ) {
+      DBlock item = list.get( k );
+      // if ( blk == list.get( k ) )
+      if ( blk.mFrom.equals( item.mFrom ) && blk.mTo.equals( item.mTo ) ) {
+        int k0 = k; // DEBUG
+        AverageLeg leg = new AverageLeg(0);
+        // TDLog.v("TRB " + k + " add block " + item.mId + " to leg " );
+        leg.add( blk.mLength, blk.mBearing, blk.mClino );
+        ++k;
+        while ( k < list.size() ) {
+          item = list.get( k );
+          if ( /* ( TDString.isNullOrEmpty( item.mFrom ) || TDString.isNullOrEmpty( item.mTo ) ) && item.isSecLeg() && */ item.isRelativeDistance( blk ) ) {
+            // TDLog.v("TRB " + k + " add block " + item.mId + " to leg " );
+            leg.add( item.mLength, item.mBearing, item.mClino );
+            ++ k;
+          } else {
+            break;
+          }
+        }
+        TDLog.v("TRB average leg: items " + k0 + " ... " + k );
+        return leg;
+      } 
+    }
+    TDLog.v("TRB average leg: null " );
+    return null;
   }
 
   static int exportSurveyAsTrb( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
@@ -3226,81 +3303,6 @@ public class TDExporter
       return 0;
     }
   }
-
-      
-  private static void writeTrbSeries1( PrintWriter pw, List< DBlock > list, TrbStruct trb, String comment ) 
-  {
-    for ( TrbSeries sr : trb.getSeries() ) {
-      TDLog.v("TRB series " + sr.series + " " + sr.start_series + " " + sr.start_point + " pts " + sr.points );
-      pw.format("\r\n" );
-      pw.format("%d\t-1\t%d\t%d\t%d\t%d\t%d\t0\t0\t%s\r\n",
-        sr.series, sr.start_series, sr.start_point, sr.series, sr.points, sr.points, comment );
-      int fs = sr.start_series;
-      int fp = sr.start_point;
-      int ts = sr.series; // this is fix
-      boolean atFrom = true;
-      DBlock from = trb.getShots().get(0);
-      LRUD lrud = computeLRUD( from, list, true ); // at FROM
-      pw.format( Locale.US, "%s\t0\t1\t1\t%.2f\t%.1f\t%.1f\t%.2f\t%.2f\t%.2f\t%.2f\r\n", ts, 0.0f, 0.0f, 0.0f, lrud.l, lrud.r, lrud.u, lrud.d );
-      for ( int tp = 1; tp <= sr.points; ++tp ) {
-        // this is inefficient because the shots are traversed sr.points times
-        for ( DBlock item : trb.getShots() ) { 
-          String spf = trb.get( item.mFrom );
-          int sf = getTrbSeries( spf );
-          int pf = getTrbStation( spf );
-          TDLog.v("TRB try item " + item.mFrom + " -> " + spf + " S " + sf + " P " + pf );
-          if ( sf == fs ) {
-            // int pf = getTrbStation( spf );
-            if ( pf == fp ) {
-              String spt = trb.get( item.mTo );
-              int st = getTrbSeries( spt );
-              if ( st == ts ) {
-                int pt = getTrbStation( spt );
-                if ( pt == tp ) {
-                  AverageLeg leg = computeAverageLeg( item, list );
-                  lrud = computeLRUD( item, list, false ); // at TO
-                  // write block ... TODO
-                  // series point topo code L A C L R U D comment
-                  pw.format( Locale.US, "%s\t%s\t1\t1\t%.2f\t%.1f\t%.1f\t%.2f\t%.2f\t%.2f\t%.2f", ts, pt, leg.length(), leg.bearing(), leg.clino(), lrud.l, lrud.r, lrud.u, lrud.d );
-                  if ( item.mComment != null ) {
-                    pw.format( "\t%s\r\n", item.mComment );
-                  } else {
-                    pw.format( "\r\n" );
-                  }
-                  fs = ts;
-                  fp = tp;
-                  break;
-                }
-              }
-            }
-          }
-        }
-      } // end of series
-    }
-  }
-
-  private static AverageLeg computeAverageLeg( DBlock blk, List< DBlock > list )
-  {
-    if ( TDString.isNullOrEmpty( blk.mFrom ) || TDString.isNullOrEmpty( blk.mTo ) ) return null;
-    for ( int k = 0; k < list.size(); ++k ) {
-      if ( blk == list.get( k ) ) {
-        AverageLeg leg = new AverageLeg(0);
-        leg.add( blk.mLength, blk.mBearing, blk.mClino );
-        ++k;
-        while ( k < list.size() ) {
-          DBlock item = list.get( k );
-          if ( TDString.isNullOrEmpty( item.mFrom ) && TDString.isNullOrEmpty( item.mTo ) && ( item.isSecLeg() || item.isRelativeDistance( blk ) ) ) {
-            leg.add( item.mLength, item.mBearing, item.mClino );
-          } else {
-            break;
-          }
-        }
-        return leg;
-      } 
-    }
-    return null;
-  }
-    
    
 
   // private static void writeTrbSeries0( PrintWriter pw, List< DBlock > list, int trip ) 
@@ -3448,153 +3450,153 @@ public class TDExporter
   // commented flag not supported
   //   surface flag treated as duplicate
 
-  private static void printShotToSur( PrintWriter pw, AverageLeg leg, LRUD lrud, String comment )
-  {
-    if ( TDSetting.mSwapLR ) {
-      pw.format(Locale.US, "%.2f %.1f %.1f %.2f %.2f %.2f %.2f", 
-        leg.length(), leg.bearing(), leg.clino(), lrud.r, lrud.l, lrud.u, lrud.d );
-    } else {
-      pw.format(Locale.US, "%.2f %.1f %.1f %.2f %.2f %.2f %.2f", 
-        leg.length(), leg.bearing(), leg.clino(), lrud.l, lrud.r, lrud.u, lrud.d );
-    }
-    leg.reset();
-    if ( comment != null && comment.length() > 0 ) {
-      pw.format(" %s", comment );
-    }
-    pw.format( "\r\n" );
-  }
+  // private static void printShotToSur( PrintWriter pw, AverageLeg leg, LRUD lrud, String comment )
+  // {
+  //   if ( TDSetting.mSwapLR ) {
+  //     pw.format(Locale.US, "%.2f %.1f %.1f %.2f %.2f %.2f %.2f", 
+  //       leg.length(), leg.bearing(), leg.clino(), lrud.r, lrud.l, lrud.u, lrud.d );
+  //   } else {
+  //     pw.format(Locale.US, "%.2f %.1f %.1f %.2f %.2f %.2f %.2f", 
+  //       leg.length(), leg.bearing(), leg.clino(), lrud.l, lrud.r, lrud.u, lrud.d );
+  //   }
+  //   leg.reset();
+  //   if ( comment != null && comment.length() > 0 ) {
+  //     pw.format(" %s", comment );
+  //   }
+  //   pw.format( "\r\n" );
+  // }
 
-  static private void writeSurFromTo( PrintWriter pw, String prefix, String from, String to, boolean duplicate )
-  {
-    if ( duplicate ) {
-      pw.format("X ");
-    } else {
-      pw.format("N ");
-    }
-    if ( prefix != null && prefix.length() > 0 ) {
-      pw.format("%s-%s %s-%s ", prefix, from, prefix, to );
-    } else {
-      pw.format("%s %s ", from, to );
-    }
-  }
+  // static private void writeSurFromTo( PrintWriter pw, String prefix, String from, String to, boolean duplicate )
+  // {
+  //   if ( duplicate ) {
+  //     pw.format("X ");
+  //   } else {
+  //     pw.format("N ");
+  //   }
+  //   if ( prefix != null && prefix.length() > 0 ) {
+  //     pw.format("%s-%s %s-%s ", prefix, from, prefix, to );
+  //   } else {
+  //     pw.format("%s %s ", from, to );
+  //   }
+  // }
 
-  static int exportSurveyAsSur( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname, String prefix )
-  {
-    // TDLog.v( "export as winkarst: " + file.getName() + " swap LR " + TDSetting.mSwapLR );
-    List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
-    checkShotsClino( list );
-    try {
-      // TDLog.Log( TDLog.LOG_IO, "export WinKarst " + file.getName() );
-      // BufferedWriter bw = TDFile.getMSwriter( "sur", surveyname + ".sur", "text/sur" );
-      PrintWriter pw = new PrintWriter( bw );
-  
-      // FIXME 
-      pw.format("#FILE AUTHOR: TopoDroid v %s\r\n", TDVersion.string() );
-      pw.format("#FILE DATE: %s\r\n", TDUtil.getDateString("MM dd yyyy") );
-      pw.format("\r\n"); 
-      pw.format("#SURVEY NAME: %s\r\n", info.name );
-      String date = info.date;
-      int y = 0;
-      int m = 0;
-      int d = 0;
-      if ( date != null && date.length() == 10 ) {
-        try {
-          y = Integer.parseInt( date.substring(0,4) );
-          m = Integer.parseInt( date.substring(5,7) );
-          d = Integer.parseInt( date.substring(8,10) );
-        } catch ( NumberFormatException e ) {
-          TDLog.Error( "export survey as DAT date parse error " + date );
-        }
-      }
-      pw.format("#SURVEY DATE: %02d %02d %04d\r\n", m, d, y ); // format "MM DD YYYY"
-      if ( info.comment != null ) {
-        pw.format("#COMMENT: %s\r\n", info.comment );
-      }
+  // static int exportSurveyAsSur( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname, String prefix )
+  // {
+  //   // TDLog.v( "export as winkarst: " + file.getName() + " swap LR " + TDSetting.mSwapLR );
+  //   List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
+  //   checkShotsClino( list );
+  //   try {
+  //     // TDLog.Log( TDLog.LOG_IO, "export WinKarst " + file.getName() );
+  //     // BufferedWriter bw = TDFile.getMSwriter( "sur", surveyname + ".sur", "text/sur" );
+  //     PrintWriter pw = new PrintWriter( bw );
+  // 
+  //     // FIXME 
+  //     pw.format("#FILE AUTHOR: TopoDroid v %s\r\n", TDVersion.string() );
+  //     pw.format("#FILE DATE: %s\r\n", TDUtil.getDateString("MM dd yyyy") );
+  //     pw.format("\r\n"); 
+  //     pw.format("#SURVEY NAME: %s\r\n", info.name );
+  //     String date = info.date;
+  //     int y = 0;
+  //     int m = 0;
+  //     int d = 0;
+  //     if ( date != null && date.length() == 10 ) {
+  //       try {
+  //         y = Integer.parseInt( date.substring(0,4) );
+  //         m = Integer.parseInt( date.substring(5,7) );
+  //         d = Integer.parseInt( date.substring(8,10) );
+  //       } catch ( NumberFormatException e ) {
+  //         TDLog.Error( "export survey as DAT date parse error " + date );
+  //       }
+  //     }
+  //     pw.format("#SURVEY DATE: %02d %02d %04d\r\n", m, d, y ); // format "MM DD YYYY"
+  //     if ( info.comment != null ) {
+  //       pw.format("#COMMENT: %s\r\n", info.comment );
+  //     }
 
-      if ( info.team != null && info.team.length() > 0 ) {
-        pw.format("#SURVEY TEAM: %s\r\n", info.team );
-      }
+  //     if ( info.team != null && info.team.length() > 0 ) {
+  //       pw.format("#SURVEY TEAM: %s\r\n", info.team );
+  //     }
 
-      List< FixedInfo > fixeds = data.selectAllFixed( sid, TDStatus.NORMAL );
-      if ( fixeds.size() > 0 ) {
-        pw.format("#DATUM: WGS 84\r\n");
-        for ( FixedInfo fixed : fixeds ) {
-          pw.format(Locale.US, "#CONTROL POINT: %s %.10f E %.10f N %.1f M\r\n",
-            fixed.name, fixed.lng, fixed.lat, fixed.h_geo );
-        }
-      }
-      pw.format("\r\n" );
-      if ( info.hasDeclination() ) {
-        pw.format(Locale.US, "#DECLINATION: %.4f\r\n", info.getDeclination() ); // DECLINATION WinKarst
-      // } else {
-      //   pw.format(Locale.US, "#DECLINATION: AUTO\r\n" ); // WinKarst calculates the magnetic declination
-      }
-      pw.format("\r\n" );
-      pw.format("#SHOT STATION STATION LENGTH AZIMUTH VERTICAL LEFT RIGHT UP DOWN COMMENT\r\n" );
-      pw.format("#CODE FROM TO M DEG DEG M M M M\r\n" );
+  //     List< FixedInfo > fixeds = data.selectAllFixed( sid, TDStatus.NORMAL );
+  //     if ( fixeds.size() > 0 ) {
+  //       pw.format("#DATUM: WGS 84\r\n");
+  //       for ( FixedInfo fixed : fixeds ) {
+  //         pw.format(Locale.US, "#CONTROL POINT: %s %.10f E %.10f N %.1f M\r\n",
+  //           fixed.name, fixed.lng, fixed.lat, fixed.h_geo );
+  //       }
+  //     }
+  //     pw.format("\r\n" );
+  //     if ( info.hasDeclination() ) {
+  //       pw.format(Locale.US, "#DECLINATION: %.4f\r\n", info.getDeclination() ); // DECLINATION WinKarst
+  //     // } else {
+  //     //   pw.format(Locale.US, "#DECLINATION: AUTO\r\n" ); // WinKarst calculates the magnetic declination
+  //     }
+  //     pw.format("\r\n" );
+  //     pw.format("#SHOT STATION STATION LENGTH AZIMUTH VERTICAL LEFT RIGHT UP DOWN COMMENT\r\n" );
+  //     pw.format("#CODE FROM TO M DEG DEG M M M M\r\n" );
 
-      AverageLeg leg = new AverageLeg(0);
-      DBlock ref_item = null;
+  //     AverageLeg leg = new AverageLeg(0);
+  //     DBlock ref_item = null;
 
-      int extra_cnt = 0;
-      boolean in_splay = false;
-      boolean duplicate = false;
-      LRUD lrud;
+  //     int extra_cnt = 0;
+  //     boolean in_splay = false;
+  //     boolean duplicate = false;
+  //     LRUD lrud;
 
-      for ( DBlock item : list ) {
-        String from = item.mFrom;
-        String to   = item.mTo;
-        if ( TDString.isNullOrEmpty( from ) ) {
-          if ( TDString.isNullOrEmpty( to ) ) { // no station: not exported
-            if ( ref_item != null && 
-               ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
-              leg.add( item.mLength, item.mBearing, item.mClino );
-            }
-          } else { // only TO station
-            if ( leg.mCnt > 0 && ref_item != null ) {
-              lrud = computeLRUD( ref_item, list, true );
-              writeSurFromTo( pw, prefix, ref_item.mFrom, ref_item.mTo, duplicate );
-              printShotToSur( pw, leg, lrud, ref_item.mComment );
-              duplicate = false;
-              ref_item = null; 
-            }
-          }
-        } else { // with FROM station
-          if ( TDString.isNullOrEmpty( to ) ) { // splay shot
-            if ( leg.mCnt > 0 && ref_item != null ) { // write previous leg shot
-              lrud = computeLRUD( ref_item, list, true );
-              writeSurFromTo( pw, prefix, ref_item.mFrom, ref_item.mTo, duplicate );
-              printShotToSur( pw, leg, lrud, ref_item.mComment );
-              duplicate = false;
-              ref_item = null; 
-            }
-          } else {
-            if ( leg.mCnt > 0 && ref_item != null ) {
-              lrud = computeLRUD( ref_item, list, true );
-              writeSurFromTo( pw, prefix, ref_item.mFrom, ref_item.mTo, duplicate );
-              printShotToSur( pw, leg, lrud, ref_item.mComment );
-            }
-            ref_item = item;
-            duplicate = item.isDuplicate() || item.isSurface();
-            leg.set( item.mLength, item.mBearing, item.mClino );
-          }
-        }
-      }
-      if ( leg.mCnt > 0 && ref_item != null ) {
-        lrud = computeLRUD( ref_item, list, true );
-        writeSurFromTo( pw, prefix, ref_item.mFrom, ref_item.mTo, duplicate );
-        printShotToSur( pw, leg, lrud, ref_item.mComment );
-      }
-      pw.format( "#END\r\n" );
+  //     for ( DBlock item : list ) {
+  //       String from = item.mFrom;
+  //       String to   = item.mTo;
+  //       if ( TDString.isNullOrEmpty( from ) ) {
+  //         if ( TDString.isNullOrEmpty( to ) ) { // no station: not exported
+  //           if ( ref_item != null && 
+  //              ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
+  //             leg.add( item.mLength, item.mBearing, item.mClino );
+  //           }
+  //         } else { // only TO station
+  //           if ( leg.mCnt > 0 && ref_item != null ) {
+  //             lrud = computeLRUD( ref_item, list, true );
+  //             writeSurFromTo( pw, prefix, ref_item.mFrom, ref_item.mTo, duplicate );
+  //             printShotToSur( pw, leg, lrud, ref_item.mComment );
+  //             duplicate = false;
+  //             ref_item = null; 
+  //           }
+  //         }
+  //       } else { // with FROM station
+  //         if ( TDString.isNullOrEmpty( to ) ) { // splay shot
+  //           if ( leg.mCnt > 0 && ref_item != null ) { // write previous leg shot
+  //             lrud = computeLRUD( ref_item, list, true );
+  //             writeSurFromTo( pw, prefix, ref_item.mFrom, ref_item.mTo, duplicate );
+  //             printShotToSur( pw, leg, lrud, ref_item.mComment );
+  //             duplicate = false;
+  //             ref_item = null; 
+  //           }
+  //         } else {
+  //           if ( leg.mCnt > 0 && ref_item != null ) {
+  //             lrud = computeLRUD( ref_item, list, true );
+  //             writeSurFromTo( pw, prefix, ref_item.mFrom, ref_item.mTo, duplicate );
+  //             printShotToSur( pw, leg, lrud, ref_item.mComment );
+  //           }
+  //           ref_item = item;
+  //           duplicate = item.isDuplicate() || item.isSurface();
+  //           leg.set( item.mLength, item.mBearing, item.mClino );
+  //         }
+  //       }
+  //     }
+  //     if ( leg.mCnt > 0 && ref_item != null ) {
+  //       lrud = computeLRUD( ref_item, list, true );
+  //       writeSurFromTo( pw, prefix, ref_item.mFrom, ref_item.mTo, duplicate );
+  //       printShotToSur( pw, leg, lrud, ref_item.mComment );
+  //     }
+  //     pw.format( "#END\r\n" );
 
-      bw.flush();
-      bw.close();
-      return 1;
-    } catch ( IOException e ) {
-      TDLog.Error( "Failed WinKarst export: " + e.getMessage() );
-      return 0;
-    }
-  }
+  //     bw.flush();
+  //     bw.close();
+  //     return 1;
+  //   } catch ( IOException e ) {
+  //     TDLog.Error( "Failed WinKarst export: " + e.getMessage() );
+  //     return 0;
+  //   }
+  // }
 
   // =======================================================================
   // GHTOPO EXPORT
@@ -3885,122 +3887,122 @@ public class TDExporter
   // GROTTOLF EXPORT
   // commented flag supported for legs
 
-  // write RLDU and the cross-section points
-  static private void writeGrtProfile( PrintWriter pw, LRUDprofile lrud )
-  {
-    pw.format(Locale.US, "%.2f %.2f %.2f %.2f\n", lrud.r, lrud.l, lrud.d, lrud.u );
-    pw.format(Locale.US, "# %d %.1f\n", lrud.size(), lrud.bearing );
-    int size = lrud.size();
-    for ( int k = 0; k<size; ++k ) {
-      pw.format(Locale.US, "# %.1f %.2f\n", lrud.getClino(k), lrud.getDistance(k) );
-    }
-  }
+  // // write RLDU and the cross-section points
+  // static private void writeGrtProfile( PrintWriter pw, LRUDprofile lrud )
+  // {
+  //   pw.format(Locale.US, "%.2f %.2f %.2f %.2f\n", lrud.r, lrud.l, lrud.d, lrud.u );
+  //   pw.format(Locale.US, "# %d %.1f\n", lrud.size(), lrud.bearing );
+  //   int size = lrud.size();
+  //   for ( int k = 0; k<size; ++k ) {
+  //     pw.format(Locale.US, "# %.1f %.2f\n", lrud.getClino(k), lrud.getDistance(k) );
+  //   }
+  // }
 
-  static private void writeGrtLeg( PrintWriter pw, AverageLeg leg, String fr, String to, boolean first,
-                                   DBlock item, List< DBlock > list )
-  {
-    LRUDprofile lrud = null;
-    if ( item.isCommented() ) pw.format("; ");
-    if ( first ) {
-      pw.format(Locale.US, "%s %s 0.000 0.000 0.000 ", fr, fr );
-      lrud = computeLRUDprofile( item, list, true );
-      writeGrtProfile( pw, lrud );
-    }
-    pw.format(Locale.US, "%s %s %.1f %.1f %.2f ", fr, to, leg.bearing(), leg.clino(), leg.length() );
-    lrud = computeLRUDprofile( item, list, false );
-    writeGrtProfile( pw, lrud );
-    leg.reset();
-  }
+  // static private void writeGrtLeg( PrintWriter pw, AverageLeg leg, String fr, String to, boolean first,
+  //                                  DBlock item, List< DBlock > list )
+  // {
+  //   LRUDprofile lrud = null;
+  //   if ( item.isCommented() ) pw.format("; ");
+  //   if ( first ) {
+  //     pw.format(Locale.US, "%s %s 0.000 0.000 0.000 ", fr, fr );
+  //     lrud = computeLRUDprofile( item, list, true );
+  //     writeGrtProfile( pw, lrud );
+  //   }
+  //   pw.format(Locale.US, "%s %s %.1f %.1f %.2f ", fr, to, leg.bearing(), leg.clino(), leg.length() );
+  //   lrud = computeLRUDprofile( item, list, false );
+  //   writeGrtProfile( pw, lrud );
+  //   leg.reset();
+  // }
 
-  static private void writeGrtFix( PrintWriter pw, String station, List< FixedInfo > fixed )
-  {
-    if ( fixed.size() > 0 ) {
-      for ( FixedInfo fix : fixed ) {
-        if ( station.equals( fix.name ) ) {
-          pw.format(Locale.US, "%.8f %.8f %.1f\n", fix.lng, fix.lat, fix.h_geo );
-          return;
-        }
-      }
-    }
-    pw.format("0.00 0.00 0.00\n");
-  }
+  // static private void writeGrtFix( PrintWriter pw, String station, List< FixedInfo > fixed )
+  // {
+  //   if ( fixed.size() > 0 ) {
+  //     for ( FixedInfo fix : fixed ) {
+  //       if ( station.equals( fix.name ) ) {
+  //         pw.format(Locale.US, "%.8f %.8f %.1f\n", fix.lng, fix.lat, fix.h_geo );
+  //         return;
+  //       }
+  //     }
+  //   }
+  //   pw.format("0.00 0.00 0.00\n");
+  // }
 
-  static int exportSurveyAsGrt( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String name )
-  {
-    try {
-      // TDLog.Log( TDLog.LOG_IO, "export Grottolf " + file.getName() );
-      // BufferedWriter bw = TDFile.getMSwriter( "grt", name + ".grt", "text/grt" );
-      PrintWriter pw = new PrintWriter( bw );
-  
-      pw.format("%s\n", info.name );
-      pw.format(";\n");
-      pw.format("; %s created by TopoDroid v %s \n", TDUtil.getDateString("yyyy/MM/dd"), TDVersion.string() );
-      pw.format(Locale.US, "360.00 360.00 %.2f 1.00\n", info.getDeclination() ); // degrees degrees decl. meters
+  // static int exportSurveyAsGrt( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String name )
+  // {
+  //   try {
+  //     // TDLog.Log( TDLog.LOG_IO, "export Grottolf " + file.getName() );
+  //     // BufferedWriter bw = TDFile.getMSwriter( "grt", name + ".grt", "text/grt" );
+  //     PrintWriter pw = new PrintWriter( bw );
+  // 
+  //     pw.format("%s\n", info.name );
+  //     pw.format(";\n");
+  //     pw.format("; %s created by TopoDroid v %s \n", TDUtil.getDateString("yyyy/MM/dd"), TDVersion.string() );
+  //     pw.format(Locale.US, "360.00 360.00 %.2f 1.00\n", info.getDeclination() ); // degrees degrees decl. meters
 
-      List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
-      boolean first = true; // first station
-      List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
-      checkShotsClino( list );
-      // int extend = 1;
-      AverageLeg leg = new AverageLeg(0);
-      DBlock ref_item = null;
-      String ref_from = null;
-      String ref_to   = null;
-      for ( DBlock item : list ) {
-        String from    = item.mFrom;
-        String to      = item.mTo;
-        if ( TDString.isNullOrEmpty( from ) ) {
-          if ( TDString.isNullOrEmpty( to ) ) { // no station: not exported
-            if ( ref_item != null &&
-               ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
-              leg.add( item.mLength, item.mBearing, item.mClino );
-            }
-          } else { // only TO station
-            if ( leg.mCnt > 0 && ref_item != null ) {
-              if ( first ) writeGrtFix( pw, ref_from, fixed );
-              writeGrtLeg( pw, leg, ref_from, ref_to, first, ref_item, list );
-              first = false;
-              ref_item = null; 
-              ref_from = null;
-              ref_to   = null;
-            }
-          }
-        } else { // with FROM station
-          if ( TDString.isNullOrEmpty( to ) ) { // splay shot
-            if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
-              if ( first ) writeGrtFix( pw, ref_from, fixed );
-              writeGrtLeg( pw, leg, ref_from, ref_to, first, ref_item, list );
-              first = false;
-              ref_item = null; 
-              ref_from = null;
-              ref_to   = null;
-            }
-          } else {
-            if ( leg.mCnt > 0 && ref_item != null ) {
-              if ( first ) writeGrtFix( pw, ref_from, fixed );
-              writeGrtLeg( pw, leg, ref_from, ref_to, first, ref_item, list );
-              first = false;
-            }
-            ref_item = item;
-            ref_from = from;
-            ref_to   = to;
-            leg.set( item.mLength, item.mBearing, item.mClino );
-          }
-        }
-      }
-      if ( leg.mCnt > 0 && ref_item != null ) {
-        if ( first ) writeGrtFix( pw, ref_from, fixed );
-        writeGrtLeg( pw, leg, ref_from, ref_to, first, ref_item, list );
-      }
+  //     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
+  //     boolean first = true; // first station
+  //     List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
+  //     checkShotsClino( list );
+  //     // int extend = 1;
+  //     AverageLeg leg = new AverageLeg(0);
+  //     DBlock ref_item = null;
+  //     String ref_from = null;
+  //     String ref_to   = null;
+  //     for ( DBlock item : list ) {
+  //       String from    = item.mFrom;
+  //       String to      = item.mTo;
+  //       if ( TDString.isNullOrEmpty( from ) ) {
+  //         if ( TDString.isNullOrEmpty( to ) ) { // no station: not exported
+  //           if ( ref_item != null &&
+  //              ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
+  //             leg.add( item.mLength, item.mBearing, item.mClino );
+  //           }
+  //         } else { // only TO station
+  //           if ( leg.mCnt > 0 && ref_item != null ) {
+  //             if ( first ) writeGrtFix( pw, ref_from, fixed );
+  //             writeGrtLeg( pw, leg, ref_from, ref_to, first, ref_item, list );
+  //             first = false;
+  //             ref_item = null; 
+  //             ref_from = null;
+  //             ref_to   = null;
+  //           }
+  //         }
+  //       } else { // with FROM station
+  //         if ( TDString.isNullOrEmpty( to ) ) { // splay shot
+  //           if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
+  //             if ( first ) writeGrtFix( pw, ref_from, fixed );
+  //             writeGrtLeg( pw, leg, ref_from, ref_to, first, ref_item, list );
+  //             first = false;
+  //             ref_item = null; 
+  //             ref_from = null;
+  //             ref_to   = null;
+  //           }
+  //         } else {
+  //           if ( leg.mCnt > 0 && ref_item != null ) {
+  //             if ( first ) writeGrtFix( pw, ref_from, fixed );
+  //             writeGrtLeg( pw, leg, ref_from, ref_to, first, ref_item, list );
+  //             first = false;
+  //           }
+  //           ref_item = item;
+  //           ref_from = from;
+  //           ref_to   = to;
+  //           leg.set( item.mLength, item.mBearing, item.mClino );
+  //         }
+  //       }
+  //     }
+  //     if ( leg.mCnt > 0 && ref_item != null ) {
+  //       if ( first ) writeGrtFix( pw, ref_from, fixed );
+  //       writeGrtLeg( pw, leg, ref_from, ref_to, first, ref_item, list );
+  //     }
 
-      bw.flush();
-      bw.close();
-      return 1;
-    } catch ( IOException e ) {
-      TDLog.Error( "Failed Walls export: " + e.getMessage() );
-      return 0;
-    }
-  }
+  //     bw.flush();
+  //     bw.close();
+  //     return 1;
+  //   } catch ( IOException e ) {
+  //     TDLog.Error( "Failed Walls export: " + e.getMessage() );
+  //     return 0;
+  //   }
+  // }
 
   // =======================================================================
   // WALLS EXPORT 

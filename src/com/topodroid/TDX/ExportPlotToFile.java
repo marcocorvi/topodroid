@@ -20,7 +20,7 @@ import com.topodroid.io.dxf.DrawingDxf;
 import com.topodroid.io.shp.DrawingShp;
 import com.topodroid.io.svg.DrawingSvg;
 import com.topodroid.io.svg.DrawingSvgWalls;
-import com.topodroid.io.svg.DrawingTunnel;
+// import com.topodroid.io.svg.DrawingTunnel;
 
 // import java.io.FileWriter;
 import java.io.BufferedWriter;
@@ -135,10 +135,10 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
               bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
               // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
               DrawingXvi.writeXvi( bw, mNum, mCommand, mType );
-            } else if ( mExt.equals("xml") ) {
-              bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
-              // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
-              (new DrawingTunnel()).writeXml( bw, mInfo, mNum, mCommand, mType );
+            // } else if ( mExt.equals("xml") ) { // NO_TUNNEL
+            //   bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
+            //   // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+            //   (new DrawingTunnel()).writeXml( bw, mInfo, mNum, mCommand, mType );
             // } else if ( mExt.equals("c3d") ) { // NO_C3D
             //   // TDLog.v("C3D export to Cave3D: " + mFullName );
             //   bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );

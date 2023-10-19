@@ -180,7 +180,7 @@
       />
   </LinearLayout>
 
-  <LinearLayout android:id="@+id/layout_winkarst"
+  <!-- LinearLayout android:id="@+id/layout_winkarst"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="vertical" 
@@ -194,7 +194,7 @@
       android:importantForAutofill="no"
       android:inputType="text"
       />
-  </LinearLayout>
+  </LinearLayout -->
 
   <LinearLayout android:id="@+id/layout_csv"
     android:layout_width="match_parent" 

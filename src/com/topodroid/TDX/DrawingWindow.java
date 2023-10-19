@@ -8421,7 +8421,7 @@ public class DrawingWindow extends ItemDrawer
       case TDConst.SURVEY_FORMAT_SVG: saveWithExt( uri, type, "svg" ); break;
       case TDConst.SURVEY_FORMAT_SHP: saveWithExt( uri, type, "shz" ); break;
       case TDConst.SURVEY_FORMAT_XVI: saveWithExt( uri, type, "xvi" ); break;
-      case TDConst.SURVEY_FORMAT_TNL: saveWithExt( uri, type, "xml" ); break;
+      // case TDConst.SURVEY_FORMAT_TNL: saveWithExt( uri, type, "xml" ); break; // NO_TUNNEL
       // case TDConst.SURVEY_FORMAT_C3D: // NO_C3D
       //   // TDLog.v("export c3d");
       //   // if ( ! PlotType.isAnySection( type ) )

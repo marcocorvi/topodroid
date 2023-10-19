@@ -1079,12 +1079,15 @@ public class ShotWindow extends Activity
     updateDisplay( ); 
   }
 
-  // @from PhotoInserter
+  /** insert the photo that has been just taken
+   * @from PhotoInserter interface
+   */
   public void insertPhoto( )
   {
     // FIXME TITLE has to go
     mApp_mData.insertPhoto( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getShotId(), "", TDUtil.currentDate(), mMediaManager.getComment(), mMediaManager.getCamera() );
     // FIXME NOTIFY ? no
+    updateDisplay( ); 
   }
 
   // void deletePhoto( PhotoInfo photo ) 

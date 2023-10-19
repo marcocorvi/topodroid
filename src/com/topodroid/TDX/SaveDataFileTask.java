@@ -143,13 +143,13 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
               ret = TDExporter.exportSurveyAsDxf( bw, mSid, mData, mInfo, num, mSurvey );
             }
             break;
-          case TDConst.SURVEY_FORMAT_GRT: // Grottolf
-            // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getGrtFileWithExt( mSurvey ) ) );
-            bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
-            pathname = mSurvey + ".grt";
-            // TDToast.make( "WARNING Grottolf export is untested" );
-            ret = TDExporter.exportSurveyAsGrt( bw, mSid, mData, mInfo, mSurvey );
-            break;
+          // case TDConst.SURVEY_FORMAT_GRT: // Grottolf
+          //   // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getGrtFileWithExt( mSurvey ) ) );
+          //   bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+          //   pathname = mSurvey + ".grt";
+          //   // TDToast.make( "WARNING Grottolf export is untested" );
+          //   ret = TDExporter.exportSurveyAsGrt( bw, mSid, mData, mInfo, mSurvey );
+          //   break;
           case TDConst.SURVEY_FORMAT_GTX: // GHTopo
             // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getGtxFileWithExt( mSurvey ) ) );
             bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
@@ -163,12 +163,12 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
             pathname = mSurvey + ".kml";
             ret = TDExporter.exportSurveyAsKml( bw, mSid, mData, mInfo, mSurvey );
             break;
-          case TDConst.SURVEY_FORMAT_JSON: // GeoJSON
-            // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getJsonFileWithExt( mSurvey ) ) );
-            bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
-            pathname = mSurvey + ".json";
-            ret = TDExporter.exportSurveyAsJson( bw, mSid, mData, mInfo, mSurvey );
-            break;
+          // case TDConst.SURVEY_FORMAT_JSON: // GeoJSON
+          //   // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getJsonFileWithExt( mSurvey ) ) );
+          //   bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+          //   pathname = mSurvey + ".json";
+          //   ret = TDExporter.exportSurveyAsJson( bw, mSid, mData, mInfo, mSurvey );
+          //   break;
           case TDConst.SURVEY_FORMAT_SHP: // Shapefile
             // fos = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( TDPath.getShpFileWithExt( mSurvey ) );
             fos = TDsafUri.docFileOutputStream( pfd );
@@ -199,13 +199,13 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
             pathname = mSurvey + ".srv";
             ret = TDExporter.exportSurveyAsSrv( bw, mSid, mData, mInfo, mSurvey );
             break;
-          case TDConst.SURVEY_FORMAT_SUR: // WinKarst
-            // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getSurFileWithExt( mSurvey ) ) );
-            bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
-            pathname = mSurvey + ".sur";
-            // TDToast.make( "WARNING WinKarst export is untested" );
-            ret = TDExporter.exportSurveyAsSur( bw, mSid, mData, mInfo, mSurvey, mPrefix );
-            break;
+          // case TDConst.SURVEY_FORMAT_SUR: // WinKarst
+          //   // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getSurFileWithExt( mSurvey ) ) );
+          //   bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+          //   pathname = mSurvey + ".sur";
+          //   // TDToast.make( "WARNING WinKarst export is untested" );
+          //   ret = TDExporter.exportSurveyAsSur( bw, mSid, mData, mInfo, mSurvey, mPrefix );
+          //   break;
           case TDConst.SURVEY_FORMAT_SVX: // Survex
             // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getSvxFileWithExt( mSurvey ) ) );
             bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );

@@ -18,35 +18,48 @@ import com.topodroid.TDX.DBlock;
 
 public class TrbStruct
 {
-  ArrayList< TrbSeries > mTrbSeries;
-  ArrayList< DBlock > mShots;
-  HashMap< String, String > mMap;
+  ArrayList< TrbSeries > mTrbSeries; // array of series
+  HashMap< String, String > mMap;    // TopoDroid to TopoRobot station names map
 
+  /** cstr
+   */
   public TrbStruct()
   {
     mMap = new HashMap< String, String >();
-    mShots  = new ArrayList< DBlock >();
     mTrbSeries = new ArrayList< TrbSeries >();
   }
 
+  /** @return the TopoRobot name for a station
+   * @param st TopoDroid station name
+   */
   public String getTrb( String st ) { return mMap.get( st ); }
 
-  public void addShot( DBlock b ) { mShots.add( b ); }
-
+  /** insert a series
+   * @param sr TopoRobot series
+   */
   public void addSeries( TrbSeries sr ) { mTrbSeries.add( sr ); }
 
+  /** insert a TopoRobot station name
+   * @param k TopoDroid station name
+   * @param v TopoRobot station name
+   */
   public void put( String k, String v ) { mMap.put( k, v ); }
 
+  /** @return the TopoRobot station name for a TopoDroid station name
+   * @param k TopoDroid station name
+   */
   public String get( String k ) { return mMap.get( k ); }
 
+  /** @return the array of series
+   */
   public ArrayList< TrbSeries > getSeries() { return mTrbSeries; }
 
-  public ArrayList< DBlock > getShots() { return mShots; }
-
+  /** @return the number of series
+   */
   public int getNrSeries() { return mTrbSeries.size(); }
 
+  /** @return the number of stations
+   */
   public int getNrStations() { return mMap.size(); }
-
-  public int getNrShots() { return mShots.size(); }
 
 }

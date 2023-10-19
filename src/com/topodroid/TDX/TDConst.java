@@ -41,13 +41,13 @@ public class TDConst
   public static final int SURVEY_FORMAT_CAV = 17; // Topo      CavFile
   public static final int SURVEY_FORMAT_GRT = 18; // Grottolf
   public static final int SURVEY_FORMAT_GTX = 19; // GHTopo    GtxFile
-  public static final int SURVEY_FORMAT_SUR = 20; // WinKarst  SurFile
+  // public static final int SURVEY_FORMAT_SUR = 20; // WinKarst  SurFile
   public static final int SURVEY_FORMAT_TRB = 21; // TopoRobot TrbFile
-  public static final int SURVEY_FORMAT_JSON = 22; // GeoJSON  JsonFile
+  // public static final int SURVEY_FORMAT_JSON = 22; // GeoJSON  JsonFile
   public static final int SURVEY_FORMAT_SHP = 23; // Shapefile ShpFile
   public static final int SURVEY_FORMAT_XVI = 24; // xtherion  XviFile
-  public static final int SURVEY_FORMAT_TNL = 25; // Tunnel    TnlFile
-  public static final int SURVEY_FORMAT_C3D = 26; // Cave3D    C3dFile
+  // public static final int SURVEY_FORMAT_TNL = 25; // Tunnel    TnlFile
+  // public static final int SURVEY_FORMAT_C3D = 26; // Cave3D    C3dFile
   public static final int SURVEY_FORMAT_PDF = 27; // PDF
   public static final int SURVEY_FORMAT_SNP = 28; // CaveSniper
   // public static final int SURVEY_FORMAT_TROX = 29; // VisualTopo X
@@ -71,7 +71,7 @@ public class TDConst
     "text/csv",                 //  5 *CSV
     "application/dxf",          //  6 *DXF
     "application/octet-stream", //  7 *cSurvey
-    "application/octet-stream", //  8 PocketTopo
+    null, // "application/octet-stream", //  8 PocketTopo
     "application/octet-stream", //  9 Walls
     "application/vnd",          // 10 *KML
     // "application/octet-stream", //    trackfile (.plt)
@@ -83,15 +83,15 @@ public class TDConst
 
     "application/octet-stream", // 16 Polygon (.cave)
     "application/octet-stream", // 17 Topo (.cav)
-    "application/octet-stream", // 18 Grottolf
+    null, // "application/octet-stream", // 18 Grottolf
     "application/octet-stream", // 19 GhTopo
-    "application/octet-stream", // 20 WinKarst
+    null, // "application/octet-stream", // 20 WinKarst
     "application/octet-stream", // 21 TopoRobot
-    "application/json",         // 22 *Json
+    null, // "application/json",         // 22 *Json
     "application/shp",          // 23
     "application/xvi",          // 24
-    "application/xml",          // 25 *Tunnel
-    "application/octet-stream", // 26 *Cave3D
+    null, // "application/xml",          // 25 *Tunnel
+    null, // "application/octet-stream", // 26 *Cave3D
     "application/pdf",          // 27 *PDF
     "application/octet-stream", // 28 CaveSniper
     "application/octet_stream", // 29 *trox
@@ -213,13 +213,13 @@ public class TDConst
   public final static int SURVEY_POS_VTOPO     =  9;
   public final static int SURVEY_POS_VTOPOX    = -9;
   public final static int SURVEY_POS_WALLS     = 10;
-  public final static int SURVEY_POS_WINKARST  = 11;
-  public final static int SURVEY_POS_CSV       = 12;
-  public final static int SURVEY_POS_DXF       = 13;
-  public final static int SURVEY_POS_KML       = 14;
-  public final static int SURVEY_POS_GPX       = 15;
-  public final static int SURVEY_POS_GEOJSON   = 16;
-  public final static int SURVEY_POS_SHAPEFILE = 17;
+  // public final static int SURVEY_POS_WINKARST  = 11;
+  public final static int SURVEY_POS_CSV       = 11;
+  public final static int SURVEY_POS_DXF       = 12;
+  public final static int SURVEY_POS_KML       = 13;
+  public final static int SURVEY_POS_GPX       = 14;
+  // public final static int SURVEY_POS_GEOJSON   = 16;
+  public final static int SURVEY_POS_SHAPEFILE = 15;
 
   public static final String[] mSurveyExportTypes = { "ZIP", 
     "Compass",   // 1
@@ -234,13 +234,13 @@ public class TDConst
     "TopoRobot",  //  8
     "VisualTopo",
     "Walls", 
-    "WinKarst",   // 11
+    // "WinKarst",   // 11
     "CSV",
     "DXF",
     "KML",        // 14
     // "OziExplorer",
     "GPX",
-    "GeoJSON",
+    // "GeoJSON",
     "Shapefile",
   };
 
@@ -257,13 +257,13 @@ public class TDConst
     "TopoRobot",
     "VisualTopo",
     "Walls", 
-    "WinKarst",
+    // "WinKarst",
     "CSV",
     "DXF"
     // "KML",
     // // "OziExplorer",
     // "GPX",
-    // "GeoJSON",
+    // // "GeoJSON",
     // "Shapefile"
   };
 
@@ -281,13 +281,13 @@ public class TDConst
     SURVEY_FORMAT_TRB,
     SURVEY_FORMAT_TRO,
     SURVEY_FORMAT_SRV,
-    SURVEY_FORMAT_SUR,
+    // SURVEY_FORMAT_SUR,
     SURVEY_FORMAT_CSV,
     SURVEY_FORMAT_DXF,
     SURVEY_FORMAT_KML,
     // SURVEY_FORMAT_PLT,
     SURVEY_FORMAT_GPX,
-    SURVEY_FORMAT_JSON,
+    // SURVEY_FORMAT_JSON,
     SURVEY_FORMAT_SHP
   };
 
@@ -306,21 +306,21 @@ public class TDConst
       // case SURVEY_POS_GROTTOLF: return survey + ".grt";
       // case SURVEY_POS_PTOPO:    return survey + ".top";
       case SURVEY_POS_POLYGON:   return survey + ".cave";
-      case SURVEY_POS_SURVEX:    return survey + ".svx";
+      case SURVEY_POS_SURVEX:    return survey + ".svx"; // 5
       case SURVEY_POS_THERION:   return survey + ".th";
       case SURVEY_POS_TOPO:      return survey + ".cav";
       case SURVEY_POS_TOPOROBOT: return survey + ".trb";
       case SURVEY_POS_VTOPO:     return survey + ".tro";
-      case SURVEY_POS_WALLS:     return survey + ".srv";
-      case SURVEY_POS_WINKARST:  return survey + ".sur";
+      case SURVEY_POS_WALLS:     return survey + ".srv"; // 10
+      // case SURVEY_POS_WINKARST:  return survey + ".sur";
       case SURVEY_POS_CSV:       return survey + ".csv";
       case SURVEY_POS_DXF:       return survey + ".dxf";
       case SURVEY_POS_KML:       return survey + ".kml";
       // case 17: return survey + ".plt";
       case SURVEY_POS_GPX:       return survey + ".gpx";
-      case SURVEY_POS_GEOJSON:   return survey + ".json";
-      case SURVEY_POS_SHAPEFILE: return survey + ".shz";
-      case SURVEY_POS_VTOPOX:    return survey + ".trox";
+      // case SURVEY_POS_GEOJSON:   return survey + ".json";
+      case SURVEY_POS_SHAPEFILE: return survey + ".shz"; // 15
+      case SURVEY_POS_VTOPOX:    return survey + ".trox"; // -9
     }
     return null;
   }
@@ -333,7 +333,7 @@ public class TDConst
   public final static int PLOT_POS_SHAPEFILE = 4;
   public final static int PLOT_POS_PDF       = 5;
   public final static int PLOT_POS_XVI       = 6;
-  public final static int PLOT_POS_TUNNEL    = 7;
+  // public final static int PLOT_POS_TUNNEL    = 7;
 
   public static final String[] mPlotExportTypes = {
       "Therion",
@@ -344,7 +344,7 @@ public class TDConst
       // "PNG", // NO_PNG
       "PDF",
       "XVI",
-      "Tunnel",
+      // "Tunnel",
       // "Cave3D",
       // "PNM", NO_PNM
   };
@@ -358,7 +358,7 @@ public class TDConst
     // SURVEY_FORMAT_PNG, // NO_PNG
     SURVEY_FORMAT_PDF,
     SURVEY_FORMAT_XVI,
-    SURVEY_FORMAT_TNL,
+    // SURVEY_FORMAT_TNL,
     // SURVEY_FORMAT_C3D, // NO_C3D
     // SURVEY_FORMAT_PNM, // NO_PNM
   };
@@ -372,7 +372,7 @@ public class TDConst
     // "png", // NO_PNG
     "pdf",
     "xvi",
-    "xml",
+    // "xml", // NO_TUNNEL
     // "c3d", // NO_C3D
     // "pnm", // NO_PNM
   };
@@ -392,7 +392,7 @@ public class TDConst
       // case PLOT_POS_PNG: return name + ".png"; // NO_PNG
       case PLOT_POS_PDF:    return name + ".pdf";
       case PLOT_POS_XVI:    return name + ".xvi";
-      case PLOT_POS_TUNNEL: return name + ".xml"; // Tunnel
+      // case PLOT_POS_TUNNEL: return name + ".xml"; // Tunnel
       // case PLOT_POS_C3D: return name + ".c3d";
       // case PLOT_POS_PNM: return name + ".pnm"; NO_PNM
     }

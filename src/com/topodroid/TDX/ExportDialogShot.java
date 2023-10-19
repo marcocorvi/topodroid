@@ -64,7 +64,7 @@ public class ExportDialogShot extends MyDialog
   private LinearLayout mLayoutDxf;
   private LinearLayout mLayoutKml;
   private LinearLayout mLayoutShp;
-  private LinearLayout mLayoutWinkarst;
+  // private LinearLayout mLayoutWinkarst;
 
   /** cstr
    * @param context     context
@@ -108,7 +108,7 @@ public class ExportDialogShot extends MyDialog
     mLayoutDxf      = (LinearLayout) findViewById( R.id.layout_dxf );
     mLayoutKml      = (LinearLayout) findViewById( R.id.layout_kml );
     mLayoutShp      = (LinearLayout) findViewById( R.id.layout_shp );
-    mLayoutWinkarst = (LinearLayout) findViewById( R.id.layout_winkarst );
+    // mLayoutWinkarst = (LinearLayout) findViewById( R.id.layout_winkarst );
 
     mBtnOk   = (Button) findViewById(R.id.button_ok );
     mBtnOk.setOnClickListener( this );
@@ -204,7 +204,7 @@ public class ExportDialogShot extends MyDialog
     mLayoutDxf.setVisibility( View.GONE );
     mLayoutKml.setVisibility( View.GONE );
     mLayoutShp.setVisibility( View.GONE );
-    mLayoutWinkarst.setVisibility( View.GONE );
+    // mLayoutWinkarst.setVisibility( View.GONE );
     switch ( mSelectedPos ) { // indices in mSurveyExportTypes
       case TDConst.SURVEY_POS_ZIP: mLayoutZip.setVisibility( View.VISIBLE ); break;
       case TDConst.SURVEY_POS_COMPASS: mLayoutCompass.setVisibility( View.VISIBLE ); break;
@@ -219,12 +219,12 @@ public class ExportDialogShot extends MyDialog
       // case TDConst.SURVEY_POS_TOPOROBOT: // TopoRobot
       case TDConst.SURVEY_POS_VTOPO:    mLayoutVTopo.setVisibility( View.VISIBLE ); break;
       case TDConst.SURVEY_POS_WALLS:    mLayoutWalls.setVisibility( View.VISIBLE ); break;
-      case TDConst.SURVEY_POS_WINKARST: mLayoutWinkarst.setVisibility( View.VISIBLE ); break;
+      // case TDConst.SURVEY_POS_WINKARST: mLayoutWinkarst.setVisibility( View.VISIBLE ); break; // WinKarst
       case TDConst.SURVEY_POS_CSV:      mLayoutCsv.setVisibility( View.VISIBLE ); break;
       case TDConst.SURVEY_POS_DXF:      mLayoutDxf.setVisibility( View.VISIBLE ); break;
       case TDConst.SURVEY_POS_KML: // KML (same as GeoJson)
       // case TDConst.SURVEY_POS_GPX: // GPX
-      case TDConst.SURVEY_POS_GEOJSON: mLayoutKml.setVisibility( View.VISIBLE ); break; // GeoJson
+      // case TDConst.SURVEY_POS_GEOJSON: mLayoutKml.setVisibility( View.VISIBLE ); break; // GeoJson
       case TDConst.SURVEY_POS_SHAPEFILE: if ( TDLevel.overExpert) mLayoutShp.setVisibility( View.VISIBLE ); break;
     }
   }
@@ -296,11 +296,11 @@ public class ExportDialogShot extends MyDialog
           TDSetting.mWallsSplays = ((CheckBox) findViewById( R.id.walls_splays )).isChecked();
         }
         break;
-      case TDConst.SURVEY_POS_WINKARST: // Winkarst
-        {
-          setExportPrefix( ((EditText) findViewById( R.id.winkarst_prefix )).getText() );
-        }
-        break;
+      // case TDConst.SURVEY_POS_WINKARST: // Winkarst
+      //   {
+      //     setExportPrefix( ((EditText) findViewById( R.id.winkarst_prefix )).getText() );
+      //   }
+      //   break;
       case TDConst.SURVEY_POS_CSV: //CSV
         {
           TDSetting.mCsvRaw = ((CheckBox) findViewById( R.id.csv_rawdata )).isChecked();
@@ -314,7 +314,7 @@ public class ExportDialogShot extends MyDialog
         break;
       case TDConst.SURVEY_POS_KML: // KML
       // case TDConst.SURVEY_POS_GPX: // GPX
-      case TDConst.SURVEY_POS_GEOJSON: // GeoJSON
+      // case TDConst.SURVEY_POS_GEOJSON: // GeoJSON
         {
           TDSetting.mKmlSplays = ((CheckBox) findViewById( R.id.kml_splays )).isChecked();
           TDSetting.mKmlStations = ((CheckBox) findViewById( R.id.kml_stations )).isChecked();
