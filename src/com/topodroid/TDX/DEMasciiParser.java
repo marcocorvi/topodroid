@@ -126,6 +126,7 @@ class DEMasciiParser extends ParserDEM
         for ( ; k < rows && j >= 0; ++k, --j ) {
           String line = mBr.readLine();
           String[] vals = TDString.splitOnSpaces( line );
+          if ( vals.length < xoff + mNr1 ) throw new DemException("invalid row");
           if ( flip_horz ) {
             for ( int ii=0; ii<mNr1; ++ii ) mZ[j*mNr1 + mNr1-1-ii] = Float.parseFloat( vals[xoff+ii] );
           } else {
@@ -138,6 +139,9 @@ class DEMasciiParser extends ParserDEM
       mValid = false;
     } catch ( NumberFormatException e2 ) {
       TDLog.Error("DEM ascii number error " + e2.getMessage() );
+      mValid = false;
+    } catch ( DemException e3 ) {
+      TDLog.Error("DEM ascii error " + e3.getMessage() );
       mValid = false;
     } finally {
       tryCloseStream();
@@ -168,32 +172,38 @@ class DEMasciiParser extends ParserDEM
       // BufferedReader mBr = new BufferedReader( mIsr );
       String line = mBr.readLine();
       String[] vals = TDString.splitOnSpaces( line );
+      if ( vals.length <= 1 ) return false;
       cols = Integer.parseInt( vals[1] ); // number cols
 
       line = mBr.readLine();
       vals = TDString.splitOnSpaces( line );
+      if ( vals.length <= 1 ) return false;
       rows = Integer.parseInt( vals[1] ); // number rows
 
       line = mBr.readLine();
       vals = TDString.splitOnSpaces( line );
+      if ( vals.length <= 1 ) return false;
       // int pos = vals[1].indexOf('.');
       // if ( pos > 0 && pos + 4 > vals[1].length() ) xll_degrees = true;
       xll  = Double.parseDouble( vals[1] ); // xll corner
 
       line = mBr.readLine();
       vals = TDString.splitOnSpaces( line );
+      if ( vals.length <= 1 ) return false;
       // pos = vals[1].indexOf('.');
       // if ( pos > 0 && pos + 4 > vals[1].length() ) yll_degrees = true;
       yll  = Double.parseDouble( vals[1] ); // yll corner
 
       line = mBr.readLine();
       vals = TDString.splitOnSpaces( line );
+      if ( vals.length <= 1 ) return false;
       // pos = vals[1].indexOf('.');
       // if ( pos > 0 && pos + 4 > vals[1].length() ) xdim_degrees = ydim_degrees = true;
       mDim2 = mDim1 = Double.parseDouble( vals[1] ); // cell-size
 
       line = mBr.readLine();
       vals = TDString.splitOnSpaces( line );
+      if ( vals.length <= 1 ) return false;
       nodata = Double.parseDouble( vals[1] ); // nodata.value
       // fr.close();
     } catch ( IOException e1 ) { 
