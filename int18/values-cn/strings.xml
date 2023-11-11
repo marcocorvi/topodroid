@@ -1212,6 +1212,7 @@
     <string name="title_plot_scraps">草图层</string>
     <string name="title_profile_flip">翻转剖面草图 ?</string>
     <string name="title_projection">投影剖面方位 %1$d</string>
+    <string name="title_projection_oblique">投影剖面方位 %1$d / %2$d</string>
     <string name="title_reduction_errors">测量数据减少异常</string>
     <string name="title_refs">草图参考</string>
     <string name="title_scraps">绘制草图</string>

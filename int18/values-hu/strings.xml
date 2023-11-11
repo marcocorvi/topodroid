@@ -1219,6 +1219,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="title_plot_scraps">Vázlat szintek</string>
     <string name="title_profile_flip">Nézeti vázlat 180 fokos forgatása</string>
     <string name="title_projection">Vetített oldalnézet irányszöge %1$d</string>
+    <string name="title_projection_oblique">Vetített oldalnézet irányszöge %1$d / %2$d</string>
     <string name="title_reduction_errors">Mérés adat-redukálás anomalia</string>
     <string name="title_refs">Vázlat rajzelemek</string>
     <string name="title_scraps">Felmérés vázlatok</string>

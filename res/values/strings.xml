@@ -1229,6 +1229,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="title_plot_scraps">Sketch scraps</string>
     <string name="title_profile_flip">Flip profile sketch ?</string>
     <string name="title_projection">Projected azimuth %1$d</string>
+    <string name="title_projection_oblique">Projected azimuth %1$d / %2$d</string>
     <string name="title_reduction_errors">Data-reduction anomalies</string>
     <string name="title_refs">Sketch References</string>
     <string name="title_scraps">Survey sketches</string>

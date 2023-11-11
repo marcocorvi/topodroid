@@ -1208,6 +1208,7 @@
     <string name="title_plot_scraps">Scarti di disegno</string>
     <string name="title_profile_flip">Capovolgo il profilo del disegno?</string>
     <string name="title_projection">Proiezione azimutale profilo %1$d</string>
+    <string name="title_projection_oblique">Proiezione azimutale profilo %1$d / %2$d</string>
     <string name="title_reduction_errors">Anomalie riduzione dati</string>
     <string name="title_refs">Riferimenti grafici</string>
     <string name="title_scraps">Disegni</string>

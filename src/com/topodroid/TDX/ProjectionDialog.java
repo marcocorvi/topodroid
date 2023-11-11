@@ -95,6 +95,7 @@ class ProjectionDialog extends MyDialog
   private List< DBlock > mList = null;
 
   private boolean mETazimuthChanged = false;
+  private boolean mWithOblique;
 
   /** cstr
    * @param context context
@@ -114,6 +115,7 @@ class ProjectionDialog extends MyDialog
     mAzimuth = 0;
     mOblique = 0;
     // mApp     = mParent.getApp();
+    mWithOblique = TDLevel.overExpert && TDSetting.mObliqueMax > 10;
   }
 
   /** update the text in the edit field with the current value of the azimuth
@@ -316,8 +318,16 @@ class ProjectionDialog extends MyDialog
     }
 
     // mProjectionSurface.commitReferences();... ); // DoubleBuffer NOT NEEDED
+    setTheTitle();
+  }
 
-    setTitle( String.format( mContext.getResources().getString(R.string.title_projection), mAzimuth ) );
+  private void setTheTitle()
+  {
+    if ( mWithOblique ) {
+      setTitle( String.format( mContext.getResources().getString(R.string.title_projection_oblique), mAzimuth, mOblique ) );
+    } else {
+      setTitle( String.format( mContext.getResources().getString(R.string.title_projection), mAzimuth ) );
+    }
   }
 
   // --------------------------------------------------------------
@@ -397,20 +407,22 @@ class ProjectionDialog extends MyDialog
         mAzimuth = (160 + progress)%360;
         if ( progress < 10 ) {
           seekbar.setProgress( progress + 360 );
+          setTheTitle();
         } else if ( progress > 390 ) {
           seekbar.setProgress( progress - 360 );
+          setTheTitle();
         } else {
-          computeReferences();
+          computeReferences(); // this calls setTheTitle
           if ( ! mETazimuthChanged ) updateEditText();
 	  mETazimuthChanged = false;
         }
-        TDLog.v( "set azimuth: oblique " + mOblique + " azimuth " + mAzimuth );
+        // TDLog.v( "set azimuth: oblique " + mOblique + " azimuth " + mAzimuth );
       }
       public void onStartTrackingTouch(SeekBar seekbar) { }
       public void onStopTrackingTouch(SeekBar seekbar) { }
     } );
 
-    if ( TDLevel.overExpert && TDSetting.mObliqueMax > 10 ) {
+    if ( mWithOblique ) {
       mBtnReset.setOnClickListener( this );
       mProjBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener() {
         public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
@@ -424,8 +436,8 @@ class ProjectionDialog extends MyDialog
           } else if ( progress > 390 ) {
             seekbar.setProgress( progress - 360 );
           } 
-          computeReferences();
-          TDLog.v( "set project: oblique " + mOblique + " azimuth " + mAzimuth );
+          computeReferences(); // this calls setTheTitle
+          // TDLog.v( "set project: oblique " + mOblique + " azimuth " + mAzimuth );
         }
         public void onStartTrackingTouch(SeekBar seekbar) { }
         public void onStopTrackingTouch(SeekBar seekbar) { }
@@ -500,7 +512,7 @@ class ProjectionDialog extends MyDialog
     mAzimuth = a;
     if ( mAzimuth < 0 || mAzimuth >= 360 ) { mAzimuth = 0; edit_text = true; }
     mETazimuthChanged = ! edit_text;
-    computeReferences();
+    computeReferences(); // this calls setTheTitle
     mSeekBar.setProgress( ( mAzimuth < 180 )? 200 + mAzimuth : mAzimuth - 160 );
     if ( edit_text ) updateEditText();
   }
@@ -762,12 +774,14 @@ class ProjectionDialog extends MyDialog
       mParent.doProjectedProfile( mName, mFrom, mAzimuth, mOblique );
       dismiss();
     } else if ( b == mBtnPlus ) {
-      setAzimuth( mAzimuth + 1, true );
+      setAzimuth( mAzimuth + 1, true ); // calls computeReferences which calls setTheTitle
     } else if ( b == mBtnMinus ) {
       setAzimuth( mAzimuth - 1, true );
-    } else if ( b == mBtnReset ) {
+    } else if ( mWithOblique && b == mBtnReset ) {
+      TDLog.v("reset oblique to 0");
       mOblique = 0;
       mProjBar.setProgress( 200 );
+      computeReferences();
     }
   }
 

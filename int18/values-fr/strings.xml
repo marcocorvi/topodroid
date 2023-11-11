@@ -1222,6 +1222,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="title_plot_scraps">Scraps de croquis</string>
     <string name="title_profile_flip">Basculer la coupe ?</string>
     <string name="title_projection">Azimut coupe projetée %1$d</string>
+    <string name="title_projection_oblique">Azimut coupe projetée %1$d / %2$d</string>
     <string name="title_reduction_errors">Anomalies compression des données</string>
     <string name="title_refs">Références du dessin</string>
     <string name="title_scraps">Croquis du relevé</string>

@@ -584,7 +584,10 @@ public class Archiver
       // first line is version
       line = br.readLine().trim();
       ret = checkVersionLine( line );
-      if ( ret < 0 ) return ret;
+      if ( ret < 0 ) {
+        TDLog.Error( "MANIFEST failed version line check" );
+        return ret;
+      }
 
       line = br.readLine().trim();
       try {

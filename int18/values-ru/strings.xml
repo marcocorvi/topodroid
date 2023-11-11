@@ -1212,6 +1212,7 @@
     <string name="title_plot_scraps">Скрапы в абрисе</string>
     <string name="title_profile_flip">Развернуть разрез ?</string>
     <string name="title_projection">Проекция разреза на вертикальную плоскость Аз. %1$d</string>
+    <string name="title_projection_oblique">Проекция разреза на вертикальную плоскость Аз. %1$d / %2$d</string>
     <string name="title_reduction_errors">Аномалии структуры данных съёмки</string>
     <string name="title_refs">Вид</string>
     <string name="title_scraps">Абрисы в съёмке</string>
