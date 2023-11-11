@@ -1659,8 +1659,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_graph_paper_scale_summary">mm-papír skála beállítás</string>
   <string name="pref_slant_xsection_title">Megdöntött keresztmetszetek</string>
   <string name="pref_slant_xsection_summary">Oldalnézetek megdöntött keresztmezszetei</string>
-  <!-- TODO string name="pref_oblique_projection_title">Oblique projected</string -->
-  <!-- TODO string name="pref_oblique_projection_summary">Maximum oblique projected angle</string -->
+  <string name="pref_oblique_projection_title">Ferde vetítés</string>
+  <string name="pref_oblique_projection_summary">Maximális ferde vetítési szög</string>
   <string name="pref_weeddistance_title">Pont távolság</string>
   <string name="pref_weeddistance_summary">Maximális távolság a vonal és az összehúzott pont között összeolvasztásnál [m]</string>
   <string name="pref_weedlength_title">Szegmens hossz</string>
