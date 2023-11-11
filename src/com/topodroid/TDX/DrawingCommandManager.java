@@ -1892,27 +1892,28 @@ public class DrawingCommandManager
   // @param full_name   file name without extension, which is also scrap_name for single scrap 
   // @param proj_name   
   // @param proj_dir    direction of projected profile (if applicable)
+  // @param oblique     oblique projection angle (projected profile only)
   // @param multiscrap  whether the sketch has several scraps
   // @param th2_edit    therion th2 editing TH2EDIT
-  void exportTherion( int type, BufferedWriter out, String full_name, String proj_name, int proj_dir, boolean multisketch, boolean th2_edit ) 
+  void exportTherion( int type, BufferedWriter out, String full_name, String proj_name, int proj_dir, int oblique, boolean multisketch, boolean th2_edit ) 
   {
     // TDLog.v("Export Therion " + full_name + " splays " + mSplaysStack.size() );
     RectF bbox = getBoundingBox( );
     if ( multisketch ) {
       // TDLog.v( "multi scrap export stack size " + mCurrentStack.size() );
       // BBox computed by export multiscrap
-      DrawingIO.exportTherionMultiPlots( type, out, full_name, proj_name, proj_dir, /* bbox, mNorthLine, */ mScraps, mStations, mSplaysStack );
+      DrawingIO.exportTherionMultiPlots( type, out, full_name, proj_name, proj_dir, oblique, /* bbox, mNorthLine, */ mScraps, mStations, mSplaysStack );
                                          // mCurrentStack, mUserStations, mStations, mSplaysStack 
     } else { 
-      DrawingIO.exportTherion( type, out, full_name, proj_name, proj_dir, bbox, mNorthLine, mScraps, mStations, mSplaysStack, th2_edit );
+      DrawingIO.exportTherion( type, out, full_name, proj_name, proj_dir, oblique, bbox, mNorthLine, mScraps, mStations, mSplaysStack, th2_edit );
                                  // scrap, mCurrentStack, mUserStations, mStations, mSplaysStack 
     }
   }
    
-  void exportDataStream( int type, DataOutputStream dos, PlotInfo info, String scrap_name, int proj_dir )
+  void exportDataStream( int type, DataOutputStream dos, PlotInfo info, String scrap_name, int proj_dir, int oblique )
   {
     RectF bbox = getBoundingBox( ); // global bbox
-    DrawingIO.exportDataStream( type, dos, info, scrap_name, proj_dir, bbox, mNorthLine, mScraps, mStations /* , mFixeds */ );
+    DrawingIO.exportDataStream( type, dos, info, scrap_name, proj_dir, oblique, bbox, mNorthLine, mScraps, mStations /* , mFixeds */ );
                                 // mCurrentStack, mUserStations, mStations 
   }
 
@@ -2070,10 +2071,10 @@ public class DrawingCommandManager
     return num.getCave3Dz( smin, best.mBlock );
   }
 
-  void exportCave3D( int type, PrintWriter pw, TDNum num, String scrap_name, int proj_dir, float xoff, float yoff, float zoff )
+  void exportCave3D( int type, PrintWriter pw, TDNum num, String scrap_name, int proj_dir, int oblique, float xoff, float yoff, float zoff )
   {
     prepareCave3Dlegs();
-    DrawingIO.exportCave3D( type, pw, this, num, scrap_name, proj_dir, mScraps, xoff, yoff, zoff );
+    DrawingIO.exportCave3D( type, pw, this, num, scrap_name, proj_dir, oblique, mScraps, xoff, yoff, zoff );
   }
 
   boolean exportCave3DXSection( int type, PrintWriter pw, String scrap_name, int azimuth, int clino, 

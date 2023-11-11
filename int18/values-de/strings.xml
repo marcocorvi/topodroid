@@ -1527,6 +1527,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_graph_paper_scale_summary">Anzeige auf Zeichenpapier anpassen</string>
   <string name="pref_slant_xsection_title">Geneigte Profile</string>
   <string name="pref_slant_xsection_summary">Profile dürfen geneigt sein</string>
+  <!-- TODO string name="pref_oblique_projection_title">Oblique projected</string -->
+  <!-- TODO string name="pref_oblique_projection_summary">Maximum oblique projected angle</string -->
   <string name="pref_weeddistance_title">Punktereduktion: Distanz</string>
   <string name="pref_weeddistance_summary">Max. Distanz für Punktereduktion</string>
   <string name="pref_weedlength_title">Punktereduktion: Segmentlänge</string>

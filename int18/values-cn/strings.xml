@@ -1651,6 +1651,8 @@
   <string name="pref_graph_paper_scale_summary">方格纸比例调整</string>
   <string name="pref_slant_xsection_title">倾斜截面</string>
   <string name="pref_slant_xsection_summary">倾斜截面图</string>
+  <!-- TODO string name="pref_oblique_projection_title">Oblique projected</string -->
+  <!-- TODO string name="pref_oblique_projection_summary">Maximum oblique projected angle</string -->
   <string name="pref_weeddistance_title">点清除段距离</string>
   <string name="pref_weeddistance_summary">线中清除点的最大距离[m]</string>
   <string name="pref_weedlength_title">点清除的分段长度</string>

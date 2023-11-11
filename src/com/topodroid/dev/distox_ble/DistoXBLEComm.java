@@ -69,7 +69,7 @@ import android.content.res.Resources;
 public class DistoXBLEComm extends TopoDroidComm
                            implements BleComm 
 {
-  private final static boolean LOG = false; 
+  private final static boolean LOG = true;
   private final static boolean USE_MTU = false;
 
   final static int DATA_PRIM = 1;   // same as Bric DATA_PRIM
@@ -111,7 +111,7 @@ public class DistoXBLEComm extends TopoDroidComm
   public DistoXBLEComm(Context ctx,TopoDroidApp app, String address, BluetoothDevice bt_device )
   {
     super( app );
-    // TDLog.v( "XBLE cstr" );
+    if ( LOG ) TDLog.v( "XBLE cstr" );
     // mRemoteAddress = address;
     mRemoteBtDevice  = bt_device;
     mContext = ctx;
@@ -130,7 +130,7 @@ public class DistoXBLEComm extends TopoDroidComm
               continue;
             }
             // ++mNrReadPackets; this is incremented once for DATA and once for VECTOR by TopoDroidComm
-            // TDLog.v( "XBLE comm: buffer PRIM read " + mNrReadPackets );
+            if ( LOG ) TDLog.v( "XBLE comm: buffer PRIM read " + mNrReadPackets );
             int res = ((DistoXBLEProtocol)mProtocol).packetProcess( buffer.data );
             if ( res == DistoXBLEProtocol.PACKET_FLASH_BYTES_1 ) continue;   // first-half of firmware block received
             synchronized (mNewDataFlag) {
@@ -146,7 +146,7 @@ public class DistoXBLEComm extends TopoDroidComm
       }
     };
     mConsumer.start();
-    // TDLog.v( "XBLE comm: cstr, addr " + address );
+    if ( LOG ) TDLog.v( "XBLE comm: cstr, addr " + address );
     // mOps = new ConcurrentLinkedQueue<BleOperation>();
     // clearPending();
   }
@@ -190,11 +190,11 @@ public class DistoXBLEComm extends TopoDroidComm
     if ( mRemoteBtDevice == null ) {
       TDToast.makeBad( R.string.ble_no_remote );
       // TDLog.Error("XBLE comm ERROR null remote device");
-      // TDLog.v( "XBLE comm - connect Device: null = [3b] status DISCONNECTED" );
+      if ( LOG ) TDLog.v( "XBLE comm - connect Device: null = [3b] status DISCONNECTED" );
       notifyStatus( ConnectionState.CONN_DISCONNECTED );
       return false;
     }
-    // TDLog.v("XBLE comm - connect device status WAITING");
+    if ( LOG ) TDLog.v("XBLE comm - connect device status WAITING");
     notifyStatus( ConnectionState.CONN_WAITING );
     mReconnect   = true;
     mOps         = new ConcurrentLinkedQueue< BleOperation >();
@@ -206,7 +206,7 @@ public class DistoXBLEComm extends TopoDroidComm
     // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
     // clearPending();
 
-    // TDLog.v( "XBLE comm connect device = [3a] status WAITING" );
+    if ( LOG ) TDLog.v( "XBLE comm connect device = [3a] status WAITING" );
     int ret = enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
     if ( LOG ) TDLog.v( "XBLE connect device ... " + ret);
     clearPending();
@@ -423,7 +423,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void readedDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
-    // TDLog.v( "XBLE comm: readed desc - bytes " + bytes.length );
+    if ( LOG ) TDLog.v( "XBLE comm: readed desc - bytes " + bytes.length );
   }
 
   /** notified that bytes have been written
@@ -457,7 +457,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void completedReliableWrite()
   {
-    // TDLog.v( "DistoXBLE comm: reliable write" );
+    if ( LOG ) TDLog.v( "DistoXBLE comm: reliable write" );
   }
 
   /** read a characteristics
@@ -468,7 +468,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public boolean readChrt(UUID srvUuid, UUID chrtUuid )
   {
-    // TDLog.v( "XBLE comm: read chrt " + chrtUuid.toString() );
+    if ( LOG ) TDLog.v( "XBLE comm: read chrt " + chrtUuid.toString() );
     return mCallback.readChrt( srvUuid, chrtUuid );
   }
 
@@ -481,7 +481,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public boolean writeChrt( UUID srvUuid, UUID chrtUuid, byte[] bytes )
   {
-    // TDLog.v( "XBLE comm: write chrt " + chrtUuid.toString() );
+    if ( LOG ) TDLog.v( "XBLE comm: write chrt " + chrtUuid.toString() );
     return mCallback.writeChrt( srvUuid, chrtUuid, bytes );
   }
 
@@ -540,7 +540,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public boolean enablePIndicate( UUID srvUuid, UUID chrtUuid )
   {
-    // TDLog.v("XBLE enable P indicate");
+    if ( LOG ) TDLog.v("XBLE enable P indicate");
     return mCallback.enablePIndicate( srvUuid, chrtUuid );
   }
 
@@ -621,7 +621,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void failure( int status, String extra, String what )
   {
-    // TDLog.v( "XBLE comm Failure: disconnect and close GATT ...");
+    if ( LOG ) TDLog.v( "XBLE comm Failure: disconnect and close GATT ...");
     // notifyStatus( ConnectionState.CONN_DISCONNECTED ); // this will be called by disconnected
     clearPending();
     closeDevice( false );
@@ -635,7 +635,7 @@ public class DistoXBLEComm extends TopoDroidComm
   @Override
   public void notifyStatus( int status )
   {
-    // TDLog.v("XBLE notify status " + status + " skip " + mSkipNotify );
+    if ( LOG ) TDLog.v("XBLE notify status " + status + " skip " + mSkipNotify );
     if ( mSkipNotify ) return;
     mApp.notifyListerStatus( mLister, status );
   }
@@ -1047,7 +1047,7 @@ public class DistoXBLEComm extends TopoDroidComm
   @Override
   public int downloadData( String address, ListerHandler lister, int data_type, int timeout ) // FIXME_LISTER
   {
-    // TDLog.v("XBLE comm batch download " + address );
+    if ( LOG ) TDLog.v("XBLE comm batch download " + address );
     // mConnectionMode = 0;
     mDataType = data_type;
     if ( ! tryConnectDevice( address, lister, 0 ) ) return -1; 
@@ -1062,7 +1062,7 @@ public class DistoXBLEComm extends TopoDroidComm
         if ( syncWait( 2000, "data download" ) ) {
           if ( mPacketType == DistoXBLEProtocol.PACKET_MEASURE_DATA ) {
             mPacketType = DistoXBLEProtocol.PACKET_NONE; // reset
-            // TDLog.v("XBLE got packet " + mNrReadPackets );
+            if ( LOG ) TDLog.v("XBLE got packet " + mNrReadPackets );
           } else {
             if ( LOG ) TDLog.v("XBLE no packet " );
             break;
@@ -1099,7 +1099,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public boolean tryConnectDevice( String address, ListerHandler lister, int data_type )
   {
-    // TDLog.v("XBLE comm try connect " + address );
+    if ( LOG ) TDLog.v("XBLE comm try connect " + address );
     if ( ! mBTConnected ) {
       int timeout = 10;
       if ( ! connectDevice( address, lister, data_type, timeout ) ) {

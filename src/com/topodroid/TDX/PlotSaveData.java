@@ -26,6 +26,7 @@ class PlotSaveData
   final String name;   
   final String filename;  // filename
   final int azimuth;   // projected profile azimuth (0 for plan and extended profile)
+  final int clino;     // clino or oblique projection angle
   final int suffix;    // plot save mode
   final int rotate;    // number of backups to rotate (??)
 
@@ -39,6 +40,7 @@ class PlotSaveData
     name  = nam;
     filename = file_name; // fullname
     azimuth = (int)p.azimuth;
+    clino   = (int)p.clino;
     suffix  = s;
     rotate  = r;
   }

@@ -1557,14 +1557,14 @@ public class DrawingWindow extends ItemDrawer
     if ( psd2 != null ) {
       // TDLog.Log( TDLog.LOG_IO, "save plot [2] " + psd2.fname );
       try { 
-        (new SavePlotFileTask( mActivity, null, this, null, psd2.num, /* psd2.util, */ psd2.cm, psd2.plot, psd2.filename, psd2.type, psd2.azimuth, psd2.suffix, r, mTh2Edit )).execute(); // TH2EDIT
+        (new SavePlotFileTask( mActivity, null, this, null, psd2.num, /* psd2.util, */ psd2.cm, psd2.plot, psd2.filename, psd2.type, psd2.azimuth, psd2.clino, psd2.suffix, r, mTh2Edit )).execute(); // TH2EDIT
       } catch ( RejectedExecutionException e ) { 
         TDLog.Error("rejected exec save plot " + psd2.filename );
       }
     }
     try { 
       // TDLog.Log( TDLog.LOG_IO, "save plot [1] " + psd1.fname );
-      (new SavePlotFileTask( mActivity, null, this, saveHandler, psd1.num, /* psd1.util, */ psd1.cm, psd1.plot, psd1.filename, psd1.type, psd1.azimuth, psd1.suffix, r, mTh2Edit )).execute(); // TH2EDIT
+      (new SavePlotFileTask( mActivity, null, this, saveHandler, psd1.num, /* psd1.util, */ psd1.cm, psd1.plot, psd1.filename, psd1.type, psd1.azimuth, psd1.clino, psd1.suffix, r, mTh2Edit )).execute(); // TH2EDIT
     } catch ( RejectedExecutionException e ) { 
       TDLog.Error("rejected exec save plot " + psd1.filename );
       -- mNrSaveTh2Task;
@@ -1615,8 +1615,17 @@ public class DrawingWindow extends ItemDrawer
         // return;
         // TDLog.v( "EXT offset at " + mOffset.x + " " + mOffset.y );
       } else { // if ( type == PlotType.PLOT_PROJECTED ) 
-        double cosp = TDMath.cosDd( mPlot2.azimuth );
-        double sinp = TDMath.sinDd( mPlot2.azimuth );
+        // double cosp = TDMath.cosDd( mPlot2.azimuth );
+        // double sinp = TDMath.sinDd( mPlot2.azimuth );
+        // OBLIQUE
+        float sina = TDMath.sind( mPlot2.azimuth );
+        float cosa = TDMath.cosd( mPlot2.azimuth ); // N~ = ( cosp, sinp )
+        float sinb = TDMath.sind( mPlot2.azimuth + mPlot2.clino ); // P  = ( sinb, cosb )
+        float cosb = TDMath.cosd( mPlot2.azimuth + mPlot2.clino ); 
+        float gamma = ( - sinb * cosa + cosb * sina ) / ( sinb * sina + cosb * cosa );
+        float cosp = cosa + gamma * sina;
+        float sinp = sina - gamma * cosa;
+
         if ( set_zoom ) mZoom = mPlot2.zoom;
 	double xx = st.e * cosp + st.s * sinp;
         mOffset.x = TopoDroidApp.mDisplayWidth/(2 * mZoom)  - DrawingUtil.toSceneX( xx, st.v );
@@ -1676,8 +1685,16 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.addScaleRef( manager_type, type, decl );
 
     if ( type == PlotType.PLOT_PROJECTED ) {
-      cosp = TDMath.cosd( mPlot2.azimuth );
-      sinp = TDMath.sind( mPlot2.azimuth );
+      // cosp = TDMath.cosd( mPlot2.azimuth );
+      // sinp = TDMath.sind( mPlot2.azimuth );
+      // OBLIQUE
+      float sina = TDMath.sind( mPlot2.azimuth );
+      float cosa = TDMath.cosd( mPlot2.azimuth ); // N~ = ( cosp, sinp )
+      float sinb = TDMath.sind( mPlot2.azimuth + mPlot2.clino ); // P  = ( sinb, cosb )
+      float cosb = TDMath.cosd( mPlot2.azimuth + mPlot2.clino ); 
+      float gamma = ( - sinb * cosa + cosb * sina ) / ( sinb * sina + cosb * cosa );
+      cosp = cosa + gamma * sina;
+      sinp = sina - gamma * cosa;
     }
 
     List< NumStation > stations = num.getStations();
@@ -7774,6 +7791,7 @@ public class DrawingWindow extends ItemDrawer
 
     int save_mode = PlotSave.EXPORT;
     int azimuth = 0;
+    int oblique = 0;
     String name = null;
     PlotInfo info = null;
     if ( type == PlotType.PLOT_PLAN ) {
@@ -7781,6 +7799,7 @@ public class DrawingWindow extends ItemDrawer
       info = mPlot1;
     } else if ( PlotType.isProfile( type ) ) {
       azimuth = (int)mPlot2.azimuth;
+      oblique = (int)mPlot2.clino;
       name = mFullName2;
       info = mPlot2;
     } else {
@@ -7809,9 +7828,9 @@ public class DrawingWindow extends ItemDrawer
       // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
       if ( mTh2Edit ) { // TH2EDIT 
         // set type by the scrap projection 
-        (new SavePlotFileTask( mActivity, uri, this, th2Handler, null, manager, null, name, type, 0, PlotSave.EXPORT, 0, true )).execute();
+        (new SavePlotFileTask( mActivity, uri, this, th2Handler, null, manager, null, name, type, 0, 0, PlotSave.EXPORT, 0, true )).execute();
       } else {
-        (new SavePlotFileTask( mActivity, uri, this, th2Handler, mNum, manager, info, name, type, azimuth, save_mode, 0, false )).execute();
+        (new SavePlotFileTask( mActivity, uri, this, th2Handler, mNum, manager, info, name, type, azimuth, oblique, save_mode, 0, false )).execute();
       }
     } catch ( RejectedExecutionException e ) {
       TDLog.Error("Sketch saving exec rejected");
@@ -8238,10 +8257,12 @@ public class DrawingWindow extends ItemDrawer
 	} else {
           if ( mNum != null ) {
             float azimuth = -1;
+            float oblique = 0;
             if ( isProfileProjected() ) {
               azimuth = mPlot2.azimuth;
+              oblique = mPlot2.clino;
             }
-            new DrawingStatDialog( mActivity, mNum, mPlot1.start, azimuth, mApp_mData.getSurveyStat( TDInstance.sid ) ).show();
+            new DrawingStatDialog( mActivity, mNum, mPlot1.start, azimuth, oblique, mApp_mData.getSurveyStat( TDInstance.sid ) ).show();
           } else {
             TDToast.makeBad( R.string.no_data_reduction );
 	  }
@@ -9501,12 +9522,13 @@ public class DrawingWindow extends ItemDrawer
 
     boolean extended = (mPlot2.type == PlotType.PLOT_EXTENDED);
     int azimuth = (int)mPlot2.azimuth; 
-    long pid = mApp.insert2dPlot( TDInstance.sid, mSplitName, mSplitStationName, extended, azimuth );
+    int oblique = (int)mPlot2.clino;
+    long pid = mApp.insert2dPlot( TDInstance.sid, mSplitName, mSplitStationName, extended, azimuth, oblique );
     String name = mSplitName + ( ( mType == PlotType.PLOT_PLAN )? "p" : "s" );
     String fullname = TDInstance.survey + "-" + name;
     // TDLog.v("Split Plot " + paths.size() + " paths to <" + name + ">" );
     PlotInfo info = mApp_mData.getPlotInfo( TDInstance.sid, name );
-    (new SavePlotFileTask( mActivity, null, this, null, mNum, paths, info, fullname, mType, azimuth ) ).execute();
+    (new SavePlotFileTask( mActivity, null, this, null, mNum, paths, info, fullname, mType, azimuth, oblique ) ).execute();
     // TODO
     // [1] create the database record
     // [2] save the Tdr for the new plot and remove the items from the commandManager

@@ -324,7 +324,7 @@ class ParserPocketTopo extends ImportParser
         // BufferedOutputStream b_fos = new BufferedOutputStream( fos );
         // DataOutputStream dos = new DataOutputStream( b_fos );
         DataOutputStream dos = TDFile.getTopoDroidFileOutputStream( filename );
-	DrawingIO.exportDataStream( (int)type, dos, null, scrap_name, 0, bbox, paths, 0 ); // proj_dir not used, scrap = 0
+	DrawingIO.exportDataStream( (int)type, dos, null, scrap_name, 0, 0, bbox, paths, 0 ); // proj_dir = 0, oblique = 0, scrap = 0
         dos.close();
         // fos.close();
 

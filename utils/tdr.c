@@ -83,9 +83,11 @@ void readScrap( FILE * fp )
 {
   long pos = ftell( fp );
   int type, j, k;
+  int azimuth = 0;
   printf("%ld= SCRAP\n", pos);
   readString( "  Name ", fp );
   type = readInt( fp );
+  if ( type == 8 ) azimuth = readInt( fp ); // type PROJECTED
   printf("  Type %d \n", type );
   for ( int k=0; k<3; ++k ) {
     // j = readInt( fp );
@@ -331,7 +333,7 @@ int main( int argc, char ** argv )
       case 'A': // area
         readArea( fp );
         break;
-      case 'D': // pot data
+      case 'D': // plot data
         readPlotData( fp );
         break;
       case 'E':

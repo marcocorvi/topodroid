@@ -541,6 +541,7 @@ public class TDSetting
   public static int mWithLevels = 0;  // 0: no, 1: by class, 2: by item
   public static int mGraphPaperScale = 0;  // correction subtracted to the system display density
   public static boolean mSlantXSection = false; // whether to allow profile slanted xsections
+  public static int mObliqueMax = 0; // in [10,80] if enabled, or 0 if disabled
 
   public static float mStationSize    = 20;   // size of station names [pt]
   public static float mLabelSize      = 24;   // size of labels [pt]
@@ -1251,6 +1252,7 @@ public class TDSetting
     mWithLevels     = tryInt( prefs,   keyGPlot[ 8],      defGPlot[ 8] );   // DISTOX_WITH_LEVELS
     mGraphPaperScale = tryInt( prefs,   keyGPlot[ 9],      defGPlot[ 9] );  // DISTOX_GRAPH_PAPER_SCALE
     mSlantXSection  = prefs.getBoolean( keyGPlot[10], bool(defGPlot[10]) ); // DISTOX_SLANT_XSECTION
+    mObliqueMax     = tryInt( prefs,   keyGPlot[11],       defGPlot[11] );  // DISTOX_OBLIQUE_PROJECTED
     // TDLog.v("SETTING load secondary GEEK plot done");
 
     String[] keyGPlotSplay = TDPrefKey.GEEKsplay;
@@ -1846,11 +1848,11 @@ public class TDSetting
     } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_BACKUP_NUMBER
       mBackupNumber  = tryIntValue( hlp, k, v, def[ 3 ] ); 
       if ( mBackupNumber <  4 ) { mBackupNumber =  4; ret = Integer.toString( mBackupNumber ); }
-      if ( mBackupNumber > 10 ) { mBackupNumber = 10; ret = Integer.toString( mBackupNumber ); }
+      else if ( mBackupNumber > 10 ) { mBackupNumber = 10; ret = Integer.toString( mBackupNumber ); }
     } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_BACKUP_INTERVAL
       mBackupInterval = tryIntValue( hlp, k, v, def[ 4 ] );  
       if ( mBackupInterval <  10 ) { mBackupInterval =  10; ret = Integer.toString( mBackupInterval ); }
-      if ( mBackupInterval > 600 ) { mBackupInterval = 600; ret = Integer.toString( mBackupInterval ); }
+      else if ( mBackupInterval > 600 ) { mBackupInterval = 600; ret = Integer.toString( mBackupInterval ); }
     // } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_AUTO_XSECTIONS
     //   mAutoXSections = tryBooleanValue( hlp, k, v, bool(def[ 5 ]) );
     } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_SAVED_STATIONS
@@ -1865,6 +1867,10 @@ public class TDSetting
     //   mGraphPaperScale = tryIntValue( hlp, k, v, def[ 9 ] );
     } else if ( k.equals( key[10 ] ) ) { // DISTOX_SLANT_XSECTION
       mSlantXSection = tryBooleanValue( hlp, k, v, bool(def[10 ]) );
+    } else if ( k.equals( key[11 ] ) ) { // DISTOX_OBLIQUE_PROJECTED
+      mObliqueMax = tryIntValue( hlp, k, v, def[ 11 ] );
+      if ( mObliqueMax < 10 )  { mObliqueMax = 0; ret = Integer.toString( mObliqueMax ); }
+      else if ( mObliqueMax > 80 ) { mObliqueMax = 80; ret = Integer.toString( mObliqueMax ); }
     } else {
       TDLog.Error("missing GEEK_PLOT key: " + k );
     }
@@ -3160,8 +3166,8 @@ public class TDSetting
       pw.printf(Locale.US, "ThumbSize %d, SavedStations %c, LegonlyUpdate %c, WithAzimuth %c, WithSensors %c, Bedding %c \n", // TdManager %c\n",
         mThumbSize, tf(mSavedStations), tf(mLegOnlyUpdate), tf(mWithAzimuth), tf(mWithSensors), tf(mBedding) ); // , tf(mWithTdManager) );
 
-      pw.printf(Locale.US, "Plot: zoom %d, drag %c, fix-origin %c, split %c, shift %c, levels %d, affine %c, stylus %d, slant-xsection %c\n",
-        mZoomCtrl, tf(mSideDrag), tf(mFixedOrigin), tf(mPlotSplit), tf(mPlotShift), mWithLevels, tf(mFullAffine), mStylusSize, tf(mSlantXSection) );
+      pw.printf(Locale.US, "Plot: zoom %d, drag %c, fix-origin %c, split %c, shift %c, levels %d, affine %c, stylus %d, slant-xsection %c, oblique %d\n",
+        mZoomCtrl, tf(mSideDrag), tf(mFixedOrigin), tf(mPlotSplit), tf(mPlotShift), mWithLevels, tf(mFullAffine), mStylusSize, tf(mSlantXSection), mObliqueMax );
       pw.printf(Locale.US, "Units: icon %.2f, line %.2f, grid %.2f, ruler %.2f\n", mUnitIcons, mUnitLines, mUnitGrid, mUnitMeasure );
       pw.printf(Locale.US, "Size: station %.1f, label %.1f, fixed %.1f line %.1f\n", mStationSize, mLabelSize, mFixedThickness, mLineThickness );
       pw.printf(Locale.US, "Select: radius %.2f, pointing %d, shift %d, dot %.1f, multiple %c \n",
@@ -3792,6 +3798,9 @@ public class TDSetting
             setStylusSize( getInt( vals, 16, 0 ) ); setPreference( editor, "DISTOX_STYLUS_SIZE", mStylusSize );
             if ( vals.length > 18 ) {
               mSlantXSection = getBoolean( vals, 18 ); setPreference( editor, "DISTOX_SLANT_XSECTION", mSlantXSection );
+              if ( vals.length > 20 ) {
+                mObliqueMax = getInt( vals, 20, 0 ); setPreference( editor, "DISTOX_OBLIQUE_PROJECTED", mObliqueMax );
+              }
             }
           }
           continue;

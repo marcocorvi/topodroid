@@ -1228,7 +1228,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="title_plot_reload">Reload sketch</string -->
     <string name="title_plot_scraps">Sketch scraps</string>
     <string name="title_profile_flip">Flip profile sketch ?</string>
-    <string name="title_projection">Projected profile azimuth %1$d</string>
+    <string name="title_projection">Projected azimuth %1$d</string>
     <string name="title_reduction_errors">Data-reduction anomalies</string>
     <string name="title_refs">Sketch References</string>
     <string name="title_scraps">Survey sketches</string>
@@ -1671,6 +1671,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_graph_paper_scale_summary">Graph-paper scale adjustment</string>
   <string name="pref_slant_xsection_title">Slant xsections</string>
   <string name="pref_slant_xsection_summary">Profile view slant xsections</string>
+  <string name="pref_oblique_projection_title">Oblique projected</string>
+  <string name="pref_oblique_projection_summary">Maximum oblique projected angle</string>
   <string name="pref_weeddistance_title">Weeding point distance</string>
   <string name="pref_weeddistance_summary">Max distance from segment to weed points [m]</string>
   <string name="pref_weedlength_title">Weeding segment length</string>

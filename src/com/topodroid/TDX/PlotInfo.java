@@ -34,7 +34,7 @@ public class PlotInfo
   float yoffset; // display Y-offset
   float zoom;    // display zoom
   float azimuth; // vertical x-section azimuth / projected-profile azimuth
-  float clino;   // inclination (0 for plan x-sections)
+  float clino;   // inclination (0 for plan x-sections) / oblique-angle (projected profile)
   int csxIndex = -1;  // numerical index for cSurvey xsection exports
   int orientation = ORIENTATION_PORTRAIT;
   int maxscrap; // max index of a scrap

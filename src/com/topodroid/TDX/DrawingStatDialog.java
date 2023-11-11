@@ -43,17 +43,27 @@ class DrawingStatDialog extends MyDialog
     private TDNum mNum;
     private String mOrigin;
     private float mAzimuth;
+    private float mOblique;
     private SurveyStat mStat;
 
     // private Button mBtnBack;
 
-    DrawingStatDialog( Context context, TDNum num, String origin, float azimuth, SurveyStat stat )
+    /** cstr
+     * @param context   context
+     * @param num       data reduction
+     * @param origin    plot origin
+     * @param azimuth   plot azimuth (projected profile)
+     * @param oblique   oblique projection angle (projected profile)
+     * @param stat      ???
+     */
+    DrawingStatDialog( Context context, TDNum num, String origin, float azimuth, float oblique, SurveyStat stat )
     {
       super( context, null, R.string.DrawingStatDialog ); // null app
-      mNum    = num;
-      mOrigin = origin;
+      mNum     = num;
+      mOrigin  = origin;
       mAzimuth = azimuth;
-      mStat   = stat;
+      mOblique = oblique; // TODO not used yet
+      mStat    = stat;
     }
 
     @Override

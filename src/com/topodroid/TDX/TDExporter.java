@@ -3244,8 +3244,8 @@ public class TDExporter
       PrintWriter pw = new PrintWriter( bw );
   
       // FIXME 
-      pw.format("# TopoDroid v %s\r\n", TDVersion.string() );
-      pw.format("# %s\r\n", TDUtil.getDateString("MM dd yyyy") );
+      // pw.format("# TopoDroid v %s\r\n", TDVersion.string() );
+      // pw.format("# %s\r\n", TDUtil.getDateString("MM dd yyyy") );
 
       //           5 11 15 19 23
       pw.format(Locale.US, "-6\t1\t%s\r\n", info.name ); // -6 1 cave_name
@@ -3282,13 +3282,18 @@ public class TDExporter
       // OLD pw.format(Locale.US, "%6d%6d%4d%4d%4d %02d/%02d/%02d\r\n", -4, 1, 1, 1, 1, d, m, y );
       String team = (info.team != null)? info.team : "-";
       if ( team.length() > 26 ) team = team.substring(0,26);
-      float decl = (info.hasDeclination()? info.getDeclination() : 0); // DECLINATION TopoRobot: 0 = provided, 1 = to be calculated
+      // DECLINATION TopoRobot: 0 = provided, 1 = to be calculated ???
+      // 0 if declination not known, negative of declination (if known)
+      float decl = (info.hasDeclination()? -info.getDeclination() : 0);
       String comment = info.comment;
       if ( comment == null ) comment = "-";
       pw.format(Locale.US, "-2\t1\t%d\t%d\t%d\t...\t%s\t0\t%.2f\t0\t1\t%s\r\n", d, m, y, team, decl, comment );
       // OLD if ( info.comment != null ) {                   // [-4, -3]A bla-bla
       //       pw.format(Locale.US, "%6d%6d%4d%4d%4d %s\r\n", -3, 1, 1, 1, 1, info.comment );
       //     }
+
+      // TODO FIXME check this is ok
+      pw.format(Locale.US, "-3\t1\t1\t1\t1\t1\tTopoDroid v %s - %s\r\n",  TDVersion.string(), TDUtil.getDateString("MM dd yyyy") );
 
       // OLD String team = (info.team != null)? info.team : "";
       //     if ( team.length() > 26 ) team = team.substring(0,26);

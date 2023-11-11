@@ -1570,6 +1570,7 @@ public class TDPrefKey
     "DISTOX_WITH_LEVELS",     // 0 no, 1 by class, 2 by instance
     "DISTOX_GRAPH_PAPER_SCALE",
     "DISTOX_SLANT_XSECTION",  // whether to allow slanted xsections in clino degrees 5 by 5
+    "DISTOX_OBLIQUE_PROJECTED", // maximum oblique projection angle ( 0: perpendicular )
     null
   };
 
@@ -1588,6 +1589,7 @@ public class TDPrefKey
     R.string.pref_with_levels_title,
     R.string.pref_graph_paper_scale_title,
     R.string.pref_slant_xsection_title,
+    R.string.pref_oblique_projection_title,
     -1
   };
 
@@ -1606,6 +1608,7 @@ public class TDPrefKey
     R.string.pref_with_levels_summary,
     R.string.pref_graph_paper_scale_summary,
     R.string.pref_slant_xsection_summary,
+    R.string.pref_oblique_projection_summary,
     -1
   };
 
@@ -1624,6 +1627,7 @@ public class TDPrefKey
     TDString.ZERO,
     TDString.ZERO,
     FALSE,
+    TDString.ZERO,
     null
   };
 

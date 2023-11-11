@@ -26,6 +26,7 @@ class ParserTherionState
   boolean in_scrap;
   boolean in_line;
   boolean in_area;
+  boolean in_grade;
 
   float mUnitLen,   mScaleLen,   mZeroLen;
   float mUnitBer,   mScaleBer,   mZeroBer;
@@ -66,8 +67,9 @@ class ParserTherionState
     in_map = false;
     in_surface = false;
     in_scrap = false;
-    in_line = false;
-    in_area = false;
+    in_line  = false;
+    in_area  = false;
+    in_grade = false;
     data_type = 0; // DATA_NONE
   }
 

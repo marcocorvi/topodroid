@@ -1644,7 +1644,9 @@
   <string name="pref_graph_paper_scale_title">Scala carta millimetrata</string>
   <string name="pref_graph_paper_scale_summary">Correzione scala carta millimetrata</string>
   <string name="pref_slant_xsection_title">Sezioni inclinate</string>
-  <string name="pref_slant_xsection_summary">Sezione inclinate nella vista profilo</string>
+  <string name="pref_slant_xsection_summary">Sezioni inclinate nella vista profilo</string>
+  <string name="pref_oblique_projection_title">Profilo obliquo</string>
+  <string name="pref_oblique_projection_summary">Massimo angolo di proiezione obliqua</string>
   <string name="pref_weeddistance_title">Buffer segmento di pulizia punti</string>
   <string name="pref_weeddistance_summary">Distanza massima da un segmento ai punti superflui</string>
   <string name="pref_weedlength_title">Lunghezza massima segmento di pulizia punti</string>

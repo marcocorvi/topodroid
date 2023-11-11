@@ -1662,6 +1662,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_graph_paper_scale_summary">Ajustement de l\'échelle du papier millimétré</string>
   <string name="pref_slant_xsection_title">Section transverses inclinées </string>
   <string name="pref_slant_xsection_summary">Sections transverses vue en coupe </string>
+  <!-- TODO string name="pref_oblique_projection_title">Oblique projected</string -->
+  <!-- TODO string name="pref_oblique_projection_summary">Maximum oblique projected angle</string -->
     <string name="pref_weeddistance_title">Distance des points superflus</string>
     <string name="pref_weeddistance_summary">Distance maximale entre le segment et les points superflus [m]</string>
     <string name="pref_weedlength_title">Longueur maximale du segment de ligne</string>

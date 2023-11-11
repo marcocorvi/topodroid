@@ -24,6 +24,29 @@
       android:background="#666666"
       android:progressDrawable="@xml/progress2"
     />
+    <LinearLayout android:id="@+id/layoutproj"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      >
+      <Button android:id="@+id/btn_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp" 
+        android:layout_marginEnd="@dimen/marginh"
+        style="@style/button_default"
+        android:text="@string/zero"
+      />
+      <SeekBar android:id="@+id/projbar"
+        android:layout_width="fill_parent"
+        android:layout_height="20dp" 
+        android:layout_marginStart="@dimen/marginsmall"
+        android:layout_marginEnd="@dimen/marginsmall"
+        android:layout_marginBottom="@dimen/marginv"
+        android:max="400"
+        android:background="#666666"
+        android:progressDrawable="@xml/progress3"
+      />
+    </LinearLayout>
     <LinearLayout android:id="@+id/help"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"

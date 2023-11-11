@@ -4760,7 +4760,7 @@ public class DataHelper extends DataSetObservable
    * @param yoffset display Y offset
    * @param zoom    display zoom
    * @param azimuth azimuth (xsection / projected profile)
-   * @param clino   clino (xsection)
+   * @param clino   clino (xsection) / oblique-angle (projected profile)
    * @param hide    hiding stations (plan/profile), parent plot (xsection)
    * @param nick    comment (xsection)
    * @param orientation plot orientation, either PORTRAIT (0) or LANDSCAPE (1)
@@ -4785,7 +4785,7 @@ public class DataHelper extends DataSetObservable
    * @param yoffset display Y offset
    * @param zoom    display zoom
    * @param azimuth azimuth (xsection / projected profile)
-   * @param clino   clino (xsection)
+   * @param clino   clino (xsection) / oblique angle (projected profile)
    * @param hide    hiding stations (plan/profile), parent plot (xsection)
    * @param nick    comment (xsection)
    * @param orientation plot orientation, either PORTRAIT (0) or LANDSCAPE (1)

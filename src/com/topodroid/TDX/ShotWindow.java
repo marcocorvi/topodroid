@@ -2677,9 +2677,15 @@ public class ShotWindow extends Activity
     new ProjectionDialog( mActivity, this, TDInstance.sid, name, start ).show();
   }
 
-  void doProjectedProfile( String name, String start, int azimuth )
+  /**
+   * @param name    profile name
+   * @param start   origin station
+   * @param azimuth plane azimuth
+   * @param oblique oblique projection relative to azimuth (0 perpendicular)
+   */
+  void doProjectedProfile( String name, String start, int azimuth, int oblique )
   {
-    makeNewPlot( name, start, false, azimuth );
+    makeNewPlot( name, start, false, azimuth, oblique );
   }
 
   void deletePlot( long pid1, long pid2 )
@@ -2694,9 +2700,16 @@ public class ShotWindow extends Activity
     return mApp_mData.hasSurveyPlot( TDInstance.sid, name+"p" );
   }
  
-  public void makeNewPlot( String name, String start, boolean extended, int project )
+  /**
+   * @param name    profile name
+   * @param start   origin station
+   * @param extended whether profile is extended
+   * @param azimuth plane azimuth
+   * @param oblique oblique projection angle relative to azimuth (0 perpendicular)
+   */
+  public void makeNewPlot( String name, String start, boolean extended, int azimuth, int oblique )
   {
-    long mPIDp = mApp.insert2dPlot( TDInstance.sid, name, start, extended, project );
+    long mPIDp = mApp.insert2dPlot( TDInstance.sid, name, start, extended, azimuth, oblique );
 
     if ( mPIDp >= 0 ) {
       long mPIDs = mPIDp + 1L; // FIXME !!! this is true but not guaranteed

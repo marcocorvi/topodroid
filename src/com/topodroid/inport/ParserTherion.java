@@ -207,17 +207,20 @@ class ParserTherion extends ImportParser
             String cmd = vals[0];
             
             if ( cmd.equals("encoding" ) ) { 
-              // TDLog.v("Warning: theron encoding ignored");
+              // TDLog.v("Warning: therion encoding ignored");
             } else if ( cmd.equals("import") ) {
-              // TDLog.v("Warning: theron import ignored");
+              // TDLog.v("Warning: therion import ignored");
             } else if ( ! state.in_centerline && cmd.equals("grade") ) {
-              // TDLog.v("Warning: theron grade ignored");
+              // TDLog.v("Warning: therion grade ignored");
             } else if ( cmd.equals("revise") ) {
-              // TDLog.v("Warning: theron revise ignored");
+              // TDLog.v("Warning: therion revise ignored");
             } else if ( cmd.equals("join") ) {
-              // TDLog.v("Warning: theron join ignored");
+              // TDLog.v("Warning: therion join ignored");
+            } else if ( cmd.equals("grade") ) {
+              // TDLog.v("Warning: therion grade ignored");
+              state.in_grade = true;
             } else if ( cmd.equals("input") ) { // ignore
-              // TDLog.v("Warning: theron input ignored");
+              // TDLog.v("Warning: therion input ignored");
               // int j = 1;
               // while ( vals[j] != null ) {
               //   if ( vals[j].length() > 0 ) {
@@ -254,22 +257,19 @@ class ParserTherion extends ImportParser
 
             } else if ( state.in_line && cmd.equals("endline") ) { 
               state.in_line = false;
-              // TDLog.v("Theron end line");
             } else if ( state.in_area && cmd.equals("endarea" ) ) {
               state.in_area = false;
-              // TDLog.v("Theron end area");
             } else if ( state.in_scrap && cmd.equals("endscrap" ) ) {
               state.in_scrap = false;
-              // TDLog.v("Theron end scrap");
             } else if ( state.in_map && cmd.equals("endmap" ) ) {
               state.in_map = false;
-              // TDLog.v("Theron end map");
             } else if ( state.in_surface && cmd.equals("endsurface" ) ) {
               state.in_surface = false;
-              // TDLog.v("Theron end surface");
-            } else if ( state.in_map || state.in_surface || state.in_scrap || state.in_line || state.in_area ) {
+            } else if ( state.in_grade && cmd.equals("endgrade") ) {
+              state.in_grade = false;
+            } else if ( state.in_map || state.in_surface || state.in_scrap || state.in_line || state.in_area || state.in_grade ) {
               // ignore
-              // TDLog.v("Warning: theron ignored " + line);
+              // TDLog.v("Warning: therion ignored " + line);
 
             } else if ( cmd.equals("survey") ) {
               survey_pos[ks] = path.length(); // set current survey pos in pathname

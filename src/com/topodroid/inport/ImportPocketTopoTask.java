@@ -68,7 +68,7 @@ public class ImportPocketTopoTask extends ImportTask
       // TDLog.Log( TDLog.LOG_PTOPO, "SID " + sid + " inserted shots. return " + id );
 
       if ( parser.mStartFrom != null ) {
-        mApp.get().insert2dPlot( sid, "1", parser.mStartFrom, true, 0 ); // true = plan-extended plot, 0 = proj_dir
+        mApp.get().insert2dPlot( sid, "1", parser.mStartFrom, true, 0, 0 ); // true = plan-extended plot, 0 = proj_dir
       }
 
       // DBlock blk = mApp.get().mData.selectShot( 1, sid );

@@ -31,6 +31,7 @@ import android.graphics.PointF;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Button;
 import android.widget.ZoomButtonsController;
 import android.widget.ZoomButtonsController.OnZoomListener;
@@ -60,10 +61,13 @@ class ProjectionDialog extends MyDialog
 
   private ProjectionSurface mProjectionSurface;
   private SeekBar mSeekBar;
+  private SeekBar mProjBar;
   private Button  mBtnOk;
   private Button  mBtnPlus;
   private Button  mBtnMinus;
+  private Button  mBtnReset;
   private EditText mETazimuth;
+  // private EditText mETproject;
   private TDNum mNum = null;
 
   private ZoomButtonsController mZoomBtnsCtrl = null;
@@ -85,7 +89,8 @@ class ProjectionDialog extends MyDialog
   private long   mSid;  // survey id
   private String mName;
   private String mFrom;
-  private int  mAzimuth = 0;
+  private int  mAzimuth = 0; // azimuth of the projection plane
+  private int  mOblique = 0; // oblique projection direction
 
   private List< DBlock > mList = null;
 
@@ -107,6 +112,7 @@ class ProjectionDialog extends MyDialog
     mName   = name;
     mFrom   = from;
     mAzimuth = 0;
+    mOblique = 0;
     // mApp     = mParent.getApp();
   }
 
@@ -115,6 +121,7 @@ class ProjectionDialog extends MyDialog
   private void updateEditText()
   { 
     mETazimuth.setText( String.format(Locale.US, "%d", mAzimuth ) );
+    // mETproject.setText( String.format(Locale.US, "%d", mOblique ) );
     // TDLog.v( "set azimuth " + mAzimuth );
   }
 
@@ -215,6 +222,32 @@ class ProjectionDialog extends MyDialog
   }
 
   // --------------------------------------------------------------------------------------
+  //        ^ N
+  //  `-.   |
+  //     `-.|
+  // -------+----------> E
+  //       /|`-.
+  //      / |   `-. x
+  //   n /  v S    
+  //      a
+  //
+  // n = ( -sin(a), cos(a) ) [E-S frame] normal to the projection plane
+  // x = (  cos(a), sin(a) )
+  // p = ( -sin(b), cos(b) ) projection direction
+  //
+  // P=(E,S) projects to Q=(E',S') s.t.
+  //   Q = P + t * p
+  // ie,
+  //   E' = E - t sin(b)
+  //   S' = S + t cos(b)
+  // and Q * n = 0, ie, - E' sin(a) + S' cos(a) = 0
+  //    -E sin(a) + S cos(a) + t ( sin(b) sin(a) + cos(b) cos(a) ) = 0
+  //    t = ( E sin(a) - S cos(a) ) / ( sb sa + ccb ca )
+  // Therefore
+  //   x = E' cos(a) + S' sin(a) 
+  //     = E ca + S sa + (E sa - S ca) * ( - sb ca + cb sa )/( sb sa + cb ca )
+  // let g = ( - sb ca + cb sa )/( sb sa + cb ca )
+  //   x = E ( ca + g sa ) + S ( oa - g ca )
 
   /** compute the midline projection 
    */
@@ -224,8 +257,16 @@ class ProjectionDialog extends MyDialog
     // TDLog.v( "refs " + mOffset.x + " " + mOffset.y + " " + mZoom + " " + mAzimuth );
     // mProjectionSurface.newReferences( ... ); DoubleBuffer NOT NEEDED
 
-    float cosp = TDMath.cosd( mAzimuth );
-    float sinp = TDMath.sind( mAzimuth );
+    float sina = TDMath.sind( mAzimuth );
+    float cosa = TDMath.cosd( mAzimuth ); // N~ = ( cosp, sinp )
+    float sinb = TDMath.sind( mAzimuth + mOblique ); // P  = ( sinb, cosb )
+    float cosb = TDMath.cosd( mAzimuth + mOblique ); 
+    float gamma = ( - sinb * cosa + cosb * sina ) / ( sinb * sina + cosb * cosa );
+
+    // TDLog.v("Gamma " + gamma );
+
+    float cx = cosa + gamma * sina;
+    float sx = sina - gamma * cosa;
 
     List< NumStation > stations = mNum.getStations();
     List< NumShot > shots       = mNum.getShots();
@@ -239,8 +280,8 @@ class ProjectionDialog extends MyDialog
       NumStation st1 = sh.from;
       NumStation st2 = sh.to;
       if ( st1.show() && st2.show() ) {
-	double x1 = st1.e * cosp + st1.s * sinp; // - dx;
-	double x2 = st2.e * cosp + st2.s * sinp; // - dx;
+	double x1 = st1.e * cx + st1.s * sx; // - dx;
+	double x2 = st2.e * cx + st2.s * sx; // - dx;
 	double y1 = st1.v; // - dy;
 	double y2 = st2.v; // - dy;
         h1 = DrawingUtil.toSceneX( x1, y1 ); // CENTER_X + x1 * SCALE_FIX = 100 + x1 * 20
@@ -253,8 +294,8 @@ class ProjectionDialog extends MyDialog
     for ( NumSplay sp : splays ) {
       NumStation st = sp.from;
       if ( st.show() ) {
-	double x1 = st.e * cosp + st.s * sinp; // - dx;
-	double x2 = sp.e * cosp + sp.s * sinp; // - dx;
+	double x1 = st.e * cx + st.s * sx; // - dx;
+	double x2 = sp.e * cx + sp.s * sx; // - dx;
 	double y1 = st.v; // - dy;
 	double y2 = sp.v; // - dy;
         h1 = DrawingUtil.toSceneX( x1, y1 );
@@ -266,7 +307,7 @@ class ProjectionDialog extends MyDialog
     }
     for ( NumStation st : stations ) {
       if ( st.show() ) {
-	double x1 = st.e * cosp + st.s * sinp; // - dx;
+	double x1 = st.e * cx + st.s * sx; // - dx;
 	double y1 = st.v; // - dy;
         h1 = DrawingUtil.toSceneX( x1, y1 );
         v1 = DrawingUtil.toSceneY( x1, y1 );
@@ -325,10 +366,13 @@ class ProjectionDialog extends MyDialog
 
     setContentView( R.layout.projection_dialog );
     mSeekBar   = (SeekBar) findViewById(R.id.seekbar );
+    mProjBar   = (SeekBar) findViewById(R.id.projbar );
     mETazimuth = (EditText) findViewById( R.id.textform );
+    // mETproject = (EditText) findViewById( R.id.textform );
     mBtnOk     = (Button) findViewById( R.id.btn_ok );
     mBtnPlus   = (Button) findViewById( R.id.btn_plus );
     mBtnMinus  = (Button) findViewById( R.id.btn_minus );
+    mBtnReset  = (Button) findViewById( R.id.btn_reset );
     mBtnOk.setOnClickListener( this );
     mBtnPlus.setOnClickListener( this );
     mBtnMinus.setOnClickListener( this );
@@ -360,11 +404,36 @@ class ProjectionDialog extends MyDialog
           if ( ! mETazimuthChanged ) updateEditText();
 	  mETazimuthChanged = false;
         }
-        // TDLog.v( "set azimuth " + mAzimuth );
+        TDLog.v( "set azimuth: oblique " + mOblique + " azimuth " + mAzimuth );
       }
       public void onStartTrackingTouch(SeekBar seekbar) { }
       public void onStopTrackingTouch(SeekBar seekbar) { }
     } );
+
+    if ( TDLevel.overExpert && TDSetting.mObliqueMax > 10 ) {
+      mBtnReset.setOnClickListener( this );
+      mProjBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener() {
+        public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
+          int max = TDSetting.mObliqueMax;
+          mOblique = (int)(((160 + progress)%360)*max/180.0f); // oblique angle between -60 and 60
+          if ( mOblique > max ) {
+            mOblique = 2*max - mOblique;
+          }
+          if ( progress < 10 ) {
+            seekbar.setProgress( progress + 360 );
+          } else if ( progress > 390 ) {
+            seekbar.setProgress( progress - 360 );
+          } 
+          computeReferences();
+          TDLog.v( "set project: oblique " + mOblique + " azimuth " + mAzimuth );
+        }
+        public void onStartTrackingTouch(SeekBar seekbar) { }
+        public void onStopTrackingTouch(SeekBar seekbar) { }
+      } );
+    } else {
+      LinearLayout layout = (LinearLayout) findViewById( R.id.layoutproj );
+      layout.setVisibility( View.GONE );
+    }
 
     // mETazimuth.setOnFocusChangeListener( new View.OnFocusChangeListener() {
     //   public void onFocusChange( View v, boolean b ) {
@@ -376,6 +445,7 @@ class ProjectionDialog extends MyDialog
     //   }
     // } );
 
+    // TODO mETproject
     mETazimuth.addTextChangedListener( new TextWatcher() {
       @Override
       public void afterTextChanged( Editable e ) { }
@@ -493,6 +563,7 @@ class ProjectionDialog extends MyDialog
       mNum = new TDNum( mList, mFrom, "", "", 0.0f, null ); // null formatClosure
       mNum.recenter();
       mSeekBar.setProgress( 200 );
+      mProjBar.setProgress( 200 );
       if ( mProjectionSurface != null ) {
         setSize( mProjectionSurface.width(), mProjectionSurface.height() );
       }
@@ -688,12 +759,15 @@ class ProjectionDialog extends MyDialog
     Button b = (Button)view;
     if ( b == mBtnOk ) {
       mProjectionSurface.stopDrawingThread();
-      mParent.doProjectedProfile( mName, mFrom, mAzimuth );
+      mParent.doProjectedProfile( mName, mFrom, mAzimuth, mOblique );
       dismiss();
     } else if ( b == mBtnPlus ) {
       setAzimuth( mAzimuth + 1, true );
     } else if ( b == mBtnMinus ) {
       setAzimuth( mAzimuth - 1, true );
+    } else if ( b == mBtnReset ) {
+      mOblique = 0;
+      mProjBar.setProgress( 200 );
     }
   }
 

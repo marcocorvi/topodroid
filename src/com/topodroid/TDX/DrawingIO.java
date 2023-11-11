@@ -503,26 +503,30 @@ public class DrawingIO
    * @param fullname  full scrap name ( filename without extension )
    * @param projname  ...
    * @param proj_dir  projection direction (for projected profile)
+   * @param oblique   oblique projection angle (not used)
    * @param multisketch multisketch ...
    * @param th2_edit    therion th2 editor TH2EDIT
    */
-  static void exportTherionExport( DrawingCommandManager manager, int type, File file, String fullname, String projname, int proj_dir, boolean multisketch, boolean th2_edit )
+  static void exportTherionExport( DrawingCommandManager manager, int type, File file, String fullname, String projname, int proj_dir, int oblique, boolean multisketch, boolean th2_edit )
   {
     // TDLog.Log( TDLog.LOG_IO, "export therion " + fullname + " file " + file.getPath() );
     // TDLog.v( "EXPORT THERION " + fullname + " file " + file.getPath() );
     try {
       FileWriter fw = TDFile.getFileWriter( file );
       BufferedWriter bw = new BufferedWriter( fw );
-      exportTherion( manager, type, bw, fullname, projname, proj_dir, multisketch, th2_edit ); // TH2EDIT
+      exportTherion( manager, type, bw, fullname, projname, proj_dir, oblique, multisketch, th2_edit ); // TH2EDIT
     } catch ( IOException e ) {
       TDLog.Error( "THERION export i/o error [1] " + e.getMessage() );
     }
   }
 
-  static void exportTherion( DrawingCommandManager manager, int type, BufferedWriter bw, String fullname, String projname, int proj_dir, boolean multisketch, boolean th2_edit )  // TH2EDIT
+  /**
+   * @param oblique   oblique projection angle (not used)
+   */
+  static void exportTherion( DrawingCommandManager manager, int type, BufferedWriter bw, String fullname, String projname, int proj_dir, int oblique, boolean multisketch, boolean th2_edit )  // TH2EDIT
   {
     try {
-      manager.exportTherion( type, bw, fullname, projname, proj_dir, multisketch, th2_edit );  // TH2EDIT
+      manager.exportTherion( type, bw, fullname, projname, proj_dir, oblique, multisketch, th2_edit );  // TH2EDIT
       bw.flush();
       bw.close();
     } catch ( IOException e ) {
@@ -531,7 +535,7 @@ public class DrawingIO
   }
 
   // entry point to export data-stream
-  public static void exportDataStreamFile( DrawingCommandManager manager, int type, PlotInfo info, DataOutputStream dos, String fullname, int proj_dir )
+  public static void exportDataStreamFile( DrawingCommandManager manager, int type, PlotInfo info, DataOutputStream dos, String fullname, int proj_dir, int oblique )
     throws IOException
   {
     // try {
@@ -539,7 +543,7 @@ public class DrawingIO
       // // ByteArrayOutputStream bos = new ByteArrayOutputStream( 4096 );
       // BufferedOutputStream bfos = new BufferedOutputStream( fos );
       // DataOutputStream dos = new DataOutputStream( bfos );
-      manager.exportDataStream( type, dos, info, fullname, proj_dir );
+      manager.exportDataStream( type, dos, info, fullname, proj_dir, oblique );
       // dos.close();
 
       // CACHE add filename/bos.toByteArray to cache
@@ -556,7 +560,7 @@ public class DrawingIO
   }
 
   // entry point to export a set of paths to data-stream
-  public static void exportDataStreamFile( List< DrawingPath > paths, int type, PlotInfo info, DataOutputStream dos, String fullname, int proj_dir, int scrap )
+  public static void exportDataStreamFile( List< DrawingPath > paths, int type, PlotInfo info, DataOutputStream dos, String fullname, int proj_dir, int oblique, int scrap )
     throws IOException
   {
     // try {
@@ -576,7 +580,7 @@ public class DrawingIO
       RectF bbox = new RectF( xmin, ymin, xmax, ymax );
 
       // TDLog.v("export data stream: paths " + paths.size() );
-      exportDataStream( type, dos, info, fullname, proj_dir, bbox, paths, scrap );
+      exportDataStream( type, dos, info, fullname, proj_dir, oblique, bbox, paths, scrap );
 
       // dos.close();
       // fos.close();
@@ -614,11 +618,14 @@ public class DrawingIO
           flag |= 0x01;
           version = dis.readInt();
 	  // TDLog.v("TDR header version: " + version );
-        } else if ( what == 'S' ) {
+        } else if ( what == 'S' ) { // scrap
           flag |= 0x02;
           String name = dis.readUTF();
           type = dis.readInt();
-          if ( type == PlotType.PLOT_PROJECTED ) /* dir = */ dis.readInt();
+          if ( type == PlotType.PLOT_PROJECTED ) {
+            /* dir = */ dis.readInt();
+            // OBLIQUE if ( version > 602029 ) dis.readInt();
+          }
           /* String lib = */ dis.readUTF();
           /* lib = */ dis.readUTF();
           /* lib = */ dis.readUTF();
@@ -734,11 +741,14 @@ public class DrawingIO
                 // TDLog.Log(TDLog.LOG_PLOT, "TDR bbox " + xmin + "-" + xmax + " " + ymin + "-" + ymax );
               }
               break;
-            case 'S':
+            case 'S': // SCRAP
               {
                 String name = dis.readUTF();
                 int type = dis.readInt();
-                if ( type == PlotType.PLOT_PROJECTED ) /* project_dir = */ dis.readInt();
+                if ( type == PlotType.PLOT_PROJECTED ) {
+                  /* project_dir = */ dis.readInt();
+                  // OBLIQUE if ( version > 602029 ) /* oblique */ dis.readInt();
+                }
                 // read palettes
                 String points = dis.readUTF();
                 String[] vals = points.split(",");
@@ -872,11 +882,14 @@ public class DrawingIO
                 // TDLog.Log(TDLog.LOG_PLOT, "TDR bbox " + xmin + "-" + xmax + " " + ymin + "-" + ymax );
               }
               break;
-            case 'S':
+            case 'S': // SCRAP
               {
                 dis.readUTF();
                 int type = dis.readInt();
-                if ( type == PlotType.PLOT_PROJECTED ) dis.readInt();
+                if ( type == PlotType.PLOT_PROJECTED ) {
+                  dis.readInt();
+                  // OBLIQUE if ( version > 602029 ) dis.readInt();
+                }
                 // read palettes
                 dis.readUTF();
                 dis.readUTF();
@@ -998,16 +1011,19 @@ public class DrawingIO
   }
 
   // used by ParserPocketTopo
-  public static void exportDataStream( int type, DataOutputStream dos, PlotInfo info, String scrap_name, int proj_dir,
+  public static void exportDataStream( int type, DataOutputStream dos, PlotInfo info, String scrap_name, int proj_dir, int oblique,
                                 RectF bbox, List< DrawingPath > paths, int scrap )
   {
     try { 
       dos.write( 'V' ); // version
       dos.writeInt( TDVersion.code() );
-      dos.write( 'S' );
+      dos.write( 'S' ); // scrap
       dos.writeUTF( scrap_name );
       dos.writeInt( type );
-      if ( type == PlotType.PLOT_PROJECTED ) dos.writeInt( proj_dir );
+      if ( type == PlotType.PLOT_PROJECTED ) {
+        dos.writeInt( proj_dir );
+        // OBLIQUE dos.writeInt( oblique );
+      }
       BrushManager.toDataStream( dos );
 
       dos.write('I');
@@ -1083,6 +1099,7 @@ public class DrawingIO
       PlotInfo info,
       String scrap_name,
       int proj_dir,
+      int oblique,
       RectF bbox,
       DrawingPath north,
       // final List< ICanvasCommand > cstack,
@@ -1095,10 +1112,13 @@ public class DrawingIO
     try { 
       dos.write( 'V' ); // version
       dos.writeInt( TDVersion.code() );
-      dos.write( 'S' );
+      dos.write( 'S' ); // scrap
       dos.writeUTF( scrap_name );
       dos.writeInt( type );
-      if ( type == PlotType.PLOT_PROJECTED ) dos.writeInt( proj_dir );
+      if ( type == PlotType.PLOT_PROJECTED ) {
+        dos.writeInt( proj_dir );
+        // OBLIQUE dos.writeInt( oblique );
+      }
       BrushManager.toDataStream( dos );
 
       dos.write('I');
@@ -1254,7 +1274,7 @@ public class DrawingIO
    * @param scrap_options scrap therion options
    */
   static private void exportTherionScrapHeader( BufferedWriter out,
-         int type, String scrap_name, String proj_name, int project_dir,
+         int type, String scrap_name, String proj_name, int project_dir, int oblique,
          boolean do_north, float x1, float y1, float x2, float y2, String scrap_options ) throws IOException // TH2EDIT no scrap_options
   {
     float oneMeter  = DrawingUtil.SCALE_FIX * TDSetting.mToTherion;
@@ -1425,7 +1445,7 @@ public class DrawingIO
    * @param stations    auto stations
    * @param splays      splays lines
    */
-  static void exportTherion( int type, BufferedWriter out, String full_name, String proj_name, int project_dir,
+  static void exportTherion( int type, BufferedWriter out, String full_name, String proj_name, int project_dir, int oblique,
         RectF bbox,
         DrawingPath north,
         List< Scrap > scraps,
@@ -1444,9 +1464,9 @@ public class DrawingIO
         for ( Scrap scrap : scraps ) {
           String name = (scrap_nr == 0)? full_name : full_name + scrap_nr;
           if ( north != null ) { 
-            exportTherionScrapHeader( out, type, name, proj_name, 0, true, north.x1, north.y1, north.x2, north.y2, scrap.mScrapOptions ); // TH2EDIT
+            exportTherionScrapHeader( out, type, name, proj_name, 0, 0, true, north.x1, north.y1, north.x2, north.y2, scrap.mScrapOptions ); // TH2EDIT
           } else {
-            exportTherionScrapHeader( out, type, name, proj_name, project_dir, false, 0, 0, 0, 0, scrap.mScrapOptions ); // TH2EDIT
+            exportTherionScrapHeader( out, type, name, proj_name, project_dir, oblique, false, 0, 0, 0, 0, scrap.mScrapOptions ); // TH2EDIT
           }
 
           RectF scrap_bbox = scrap.getBBox(); // IMPORTANT BBox must have been properly computed before
@@ -1543,7 +1563,7 @@ public class DrawingIO
   // @param full_name    filename without extension
   // @param proj_name    
   // @param project_dir  projected profile direction
-  static void exportTherionMultiPlots( int type, BufferedWriter out, String full_name, String proj_name, int project_dir,
+  static void exportTherionMultiPlots( int type, BufferedWriter out, String full_name, String proj_name, int project_dir, int oblique,
         // RectF bbox,
         // DrawingPath north, // no x-section
         // List< ICanvasCommand > cstack,
@@ -1631,10 +1651,10 @@ public class DrawingIO
         // if ( north != null ) { 
         //   exportTherionScrapHeader( out, type, full_name, proj_name, 0, true, north.x1, north.y1, north.x2, north.y2, null ); // TH2EDIT no null last param
         // } else {
-        //   exportTherionScrapHeader( out, type, plot, proj_name, project_dir, false, 0, 0, 0, 0, null ); // TH2EDIT no null last param
+        //   exportTherionScrapHeader( out, type, plot, proj_name, project_dir, oblique, false, 0, 0, 0, 0, null ); // TH2EDIT no null last param
         // }
 
-        exportTherionScrapHeader( out, type, plot_name, proj_name, project_dir, false, 0, 0, 0, 0, null ); // TH2EDIT no null last param
+        exportTherionScrapHeader( out, type, plot_name, proj_name, project_dir, oblique, false, 0, 0, 0, 0, null ); // TH2EDIT no null last param
         // all the scraps of the plot together
         // RectF scraps_bbox = null;
         synchronized( scraps ) {
@@ -1737,11 +1757,14 @@ public class DrawingIO
   //             }
   //           }
   //           break;
-  //         case 'S':
+  //         case 'S': // scrap
   //           {
   //             String name = dis.readUTF();
   //             int type = dis.readInt();
-  //             if ( type == PlotType.PLOT_PROJECTED ) dis.readInt();
+  //             if ( type == PlotType.PLOT_PROJECTED ) {
+  //               dis.readInt();
+  //               // OBLIQUE if ( version > 602029 ) dis.readInt();
+  //             }
   //             // read palettes
   //             dis.readUTF();
   //             dis.readUTF();
@@ -1824,6 +1847,7 @@ public class DrawingIO
     int type = 0;
     boolean project = false;
     int project_dir = 0;
+    int oblique = 0;
     // String points = "";
     // String lines  = "";
     // String areas  = "";
@@ -1862,21 +1886,24 @@ public class DrawingIO
                 if ( bbox != null ) exportTherionGlobalHeader( out, type, bbox, file_name );
                 // exportTherionHeader2( out, points, lines, areas );
                 String proj = PlotType.projName( type );
-                exportTherionScrapHeader( out, type, xsection_name, proj, project_dir, do_north, north_x1, north_y1, north_x2, north_y2, null ); // TH2EDIT no null last param
+                exportTherionScrapHeader( out, type, xsection_name, proj, project_dir, oblique, do_north, north_x1, north_y1, north_x2, north_y2, null ); // TH2EDIT no null last param
                 // if ( do_north ) { 
-                //   exportTherionScrapHeader( out, type, scrap_name, proj, 0, true, north_x1, north_y1, north_x2, north_y2, null ); // TH2EDIT no null last param
+                //   exportTherionScrapHeader( out, type, scrap_name, proj, 0, 0, true, north_x1, north_y1, north_x2, north_y2, null ); // TH2EDIT no null last param
                 // } else {
-                //   exportTherionScrapHeader( out, type, scrap_name, proj, project_dir, false, 0, 0, 0, 0, null ); // TH2EDIT no null last param
+                //   exportTherionScrapHeader( out, type, scrap_name, proj, project_dir, oblique, false, 0, 0, 0, 0, null ); // TH2EDIT no null last param
                 // }
                 // in_scrap = true; // UNUSED HERE
               }
               break;
-            case 'S':
+            case 'S': // scrap
               {
                 // String name = // 20230213 discard name read from the file - use arg
                   dis.readUTF();
                 type = dis.readInt();
-                if ( type == PlotType.PLOT_PROJECTED ) project_dir = dis.readInt();
+                if ( type == PlotType.PLOT_PROJECTED ) {
+                  project_dir = dis.readInt();
+                  // OBLIQUE if ( version > 602029 ) oblique = dis.readInt();
+                }
                 // read palettes
                 /* points = */ dis.readUTF();
                 /* lines  = */ dis.readUTF();
@@ -2318,6 +2345,7 @@ public class DrawingIO
       TDNum num,
       String scrap_name,
       int proj_dir,
+      int oblique, // TODO OBLIQUE not used
       final List< Scrap > scraps,
       float xoff, float yoff, float zoff
   )
@@ -2397,13 +2425,13 @@ public class DrawingIO
       zoff = (float)(fix.h_ell + fixed.v);
     }
     int azimuth = (int)(plot.azimuth);
+    int clino   = (int)(plot.clino);
 
     if ( PlotType.isAnySection( plot.type ) ) {
       if ( TDString.isNullOrEmpty( plot.start ) ) return false;
       NumStation start = num.getStation( plot.start );
       if ( start == null ) return false;
 
-      int clino = (int)(plot.clino);
       // TDLog.v( "azimuth " + azimuth + " clino " + clino );
       float cc = TDMath.cosd( clino ); 
       float sc = TDMath.sind( clino ); 
@@ -2440,7 +2468,7 @@ public class DrawingIO
       manager.exportCave3DXSection( plot.type, pw, fullname, azimuth, clino, center, V1, V2, viewed, ratio );
     } else {
       PrintWriter pw = new PrintWriter( bw );
-      manager.exportCave3D( plot.type, pw, num, fullname, azimuth, xoff, yoff, zoff );
+      manager.exportCave3D( plot.type, pw, num, fullname, azimuth, clino, xoff, yoff, zoff );
     }
     return true;
   }

@@ -19,9 +19,10 @@ interface INewPlot
    * @param name     plot name
    * @param start    origin station
    * @param extended whether the plot is extended profile
-   * @param project  projection azimuth (for projected profile) ?
+   * @param azimuth  projection azimuth (for projected profile) ?
+   * @param oblique  projection oblique angle (for projected profile) ?
    */
-  void makeNewPlot( String name, String start, boolean extended, int project );
+  void makeNewPlot( String name, String start, boolean extended, int azimuth, int oblique );
 
   /* FIXME_SKETCH_3D *
   void makeNewSketch3d(  String name, String start, String next );

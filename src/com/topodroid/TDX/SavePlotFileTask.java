@@ -54,7 +54,8 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   private String mFullName; // file fullname, or shp basepath
   private int mType;        // plot type
   private PlotInfo mInfo;   // plot info (can be null for th2 export/overview)
-  private int mProjDir;
+  private int mProjDir; // projection azimuth
+  private int mOblique; // oblique projection angle
   private int mSuffix;
   private int mRotate;  // nr. backups to rotate
   private String origin = null;
@@ -80,7 +81,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   SavePlotFileTask( Context context, Uri uri, DrawingWindow parent, Handler handler,
 		    TDNum num,
 		    DrawingCommandManager manager, PlotInfo info,
-                    String fullname, long type, int proj_dir, int suffix, int rotate, boolean th2_edit )
+                    String fullname, long type, int proj_dir, int oblique, int suffix, int rotate, boolean th2_edit )
   {
      mUri      = uri;
      mFormat   = context.getResources().getString(R.string.saved_file_2);
@@ -93,6 +94,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mFullName = fullname;
      mType     = (int)type;
      mProjDir  = proj_dir;
+     mOblique  = oblique;
      mSuffix   = suffix;    // plot save mode
      mRotate   = rotate;
      mTh2Edit  = th2_edit;
@@ -117,7 +119,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   SavePlotFileTask( Context context, Uri uri, DrawingWindow parent, Handler handler,
 		    TDNum num,
 		    List< DrawingPath > paths, PlotInfo info,
-                    String fullname, long type, int proj_dir )
+                    String fullname, long type, int proj_dir, int oblique )
   {
      mUri      = uri;
      mFormat   = context.getResources().getString(R.string.saved_file_2);
@@ -130,6 +132,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mFullName = fullname;
      mType     = (int)type;
      mProjDir  = proj_dir;
+     mOblique  = oblique;
      mSuffix   = PlotSave.CREATE;
      mRotate   = 0;
      mTh2Edit  = false;
@@ -149,7 +152,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
     if ( mSuffix == PlotSave.EXPORT ) {
       // TDLog.v( "save plot Therion file EXPORT " + mFullName );
       // File file2 = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
-      // DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
+      // DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, mOblique, false ); // single sketch
       ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( mUri );
       if ( pfd == null ) return false;
       float point_spacing = TDSetting.mBezierStep; // TH2EDIT save params that are temporarily changed
@@ -159,7 +162,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         }
         // BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getTh2FileWithExt( mFullName ) ) );
         BufferedWriter bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
-        DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, false, mTh2Edit ); // single sketch
+        DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, mOblique, false, mTh2Edit ); // single sketch
         // bw.flush(); // FIXME system error
         bw.close();
       } catch ( IOException e ) {
@@ -176,13 +179,13 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
     } else if ( mSuffix == PlotSave.OVERVIEW ) {
       // TDLog.v( "save plot OVERVIEW " + mFullName );
       // File file = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
-      // DrawingIO.exportTherion( mManager, mType, file, mFullName, PlotType.projName( mType ), mProjDir, true ); // multi-sketch
+      // DrawingIO.exportTherion( mManager, mType, file, mFullName, PlotType.projName( mType ), mProjDir, mOblique, true ); // multi-sketch
       ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( mUri );
       if ( pfd == null ) return false;
       try {
         // BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getTh2FileWithExt( mFullName ) ) );
         BufferedWriter bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
-        DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, true, false ); // multi-sketch, no th2_edit
+        DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, mOblique, true, false ); // multi-sketch, no th2_edit
         // bw.flush(); // FIXME necessary ???
         bw.close();
       } catch ( IOException e ) {
@@ -206,7 +209,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
           case TDConst.SURVEY_FORMAT_TH2:
             // TDLog.v("EXPORT AUTO th2 " + mFullName );
             File file2 = TDPath.getOutExportFile( mFullName + ".th2" ); // FIXME move to DrawingIO
-            DrawingIO.exportTherionExport( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false, false ); // false= single sketch
+            DrawingIO.exportTherionExport( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, mOblique, false, false ); // false= single sketch
             break;
           case TDConst.SURVEY_FORMAT_DXF:
             if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) { // APP_OUT_DIR was ! parent.isFinishing()
@@ -294,9 +297,9 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         DataOutputStream dos = TDFile.getExternalTempFileOutputStream( tempname1 );
         if ( mSuffix == PlotSave.CREATE ) {
           // TDLog.v("Save Plot CREATE temp file, paths " + mPaths.size() );
-          DrawingIO.exportDataStreamFile( mPaths, mType, mInfo, dos, mFullName, mProjDir, 0 ); // set path scrap to 0
+          DrawingIO.exportDataStreamFile( mPaths, mType, mInfo, dos, mFullName, mProjDir, mOblique, 0 ); // set path scrap to 0
         } else {
-          DrawingIO.exportDataStreamFile( mManager, mType, mInfo, dos, mFullName, mProjDir );
+          DrawingIO.exportDataStreamFile( mManager, mType, mInfo, dos, mFullName, mProjDir, mOblique );
         }
         dos.close();
       } catch ( IOException e ) {

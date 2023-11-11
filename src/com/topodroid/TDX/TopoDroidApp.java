@@ -2825,10 +2825,11 @@ public class TopoDroidApp extends Application
    * @param name     plot name
    * @param start    plot base station (origin)
    * @param extended whether the plot is extended profile
-   * @param project  projection angle (for profile)
+   * @param azimuth  projection plane (for profile)
+   * @param oblique  projection oblique angle (for profile, 0 normal)
    * @return plot ID
    */
-  public long insert2dPlot( long sid , String name, String start, boolean extended, int project )
+  public long insert2dPlot( long sid , String name, String start, boolean extended, int azimuth, int oblique )
   {
     // PlotInfo.ORIENTATION_PORTRAIT = 0
     // TDLog.Log( TDLog.LOG_PLOT, "new plot " + name + " start " + start );
@@ -2839,7 +2840,7 @@ public class TopoDroidApp extends Application
                    PlotType.PLOT_EXTENDED, 0L, start, TDString.EMPTY, 0, 0, mScaleFactor, 0, 0, TDString.EMPTY, TDString.EMPTY, 0 );
     } else {
       long pid_s = mData.insertPlot( sid, -1L, name+"s",
-                   PlotType.PLOT_PROJECTED, 0L, start, TDString.EMPTY, 0, 0, mScaleFactor, project, 0, TDString.EMPTY, TDString.EMPTY, 0 );
+                   PlotType.PLOT_PROJECTED, 0L, start, TDString.EMPTY, 0, 0, mScaleFactor, azimuth, oblique, TDString.EMPTY, TDString.EMPTY, 0 );
     }
     return pid_p;
   }

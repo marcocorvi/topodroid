@@ -114,7 +114,7 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
             System.arraycopy( mPacketBytes, 9, mMeasureDataPacket2, 0, 8);
             int res1 = handlePacket(mMeasureDataPacket1);
             int res2 = handlePacket(mMeasureDataPacket2);
-            // TDLog.v("XBLE proto 17-length data - type " + databuf[0] + " res " + res1 + " " + res2 );
+            TDLog.v("XBLE proto 17-length data - type " + databuf[0] + " res " + res1 + " " + res2 );
             if ( res1 != PACKET_NONE && res2 != PACKET_NONE ) {
               mComm.sendCommand(( mMeasureDataPacket1[0] & 0x80 ) | 0x55);
               mComm.handleRegularPacket(res1, mLister, 0);
@@ -135,7 +135,7 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
         int addr = (databuf[2] << 8 | (databuf[1] & 0xff)) & 0xFFFF;
         int len = databuf[3];
         mRepliedData = new byte[len];
-        // TDLog.v("XBLE command packet " + command + " length " + len );
+        TDLog.v("XBLE command packet " + command + " length " + len );
         for (int i = 0; i < len; i++)
           mRepliedData[i] = databuf[i + 4];
         if (addr == DistoXBLEDetails.FIRMWARE_ADDRESS) {
