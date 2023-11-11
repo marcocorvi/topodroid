@@ -72,7 +72,7 @@
      <item name="none">Nada</item>
      <item name="convex">Convexa</item>
      <item name="delaunay">Todo</item>
-  </string-array-->
+  </string-array -->
 
   <string-array name="zoomCtrl">
      <item name="0">Ocultar</item>
@@ -90,7 +90,7 @@
      <item>Vert.</item>
      <item>Drch.</item>
      <item>- -</item>
-  </string-array-->
+  </string-array -->
 
   <!-- UNUSED string-array name="exportShots">
      <item name="none">Nada</item>
