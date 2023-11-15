@@ -24,41 +24,27 @@
     <string name="tdm_config_project">proyecto.tdconfig</string>
     <string name="double_back">Para salir presione ATRAS nuevamente</string>
     <string name="new_survey_label">Nueva topografía</string>
-    <!-- NO string name="distox_label">DistoX</string -->
-    <!-- NO string name="cave3d_label">Cave3D</string -->
-<!-- UNUSED string name="r_title">Aviso importante sobre Android R</string-->
-<!-- UNUSED string name="r_dialog">
-Con Android-R TopoDroid debe utilizar la carpeta "Android/data".\NTopoDroid no la ha encontrado y ha creado esta carpeta.\NPuedes importar los archivos zip de tus antiguas topografías.\NCuidado con los archivos de la nueva carpeta de TopoDroid que se eliminan cuando desinstalas TopoDroid.\N
-Consulte las páginas web para más detalles..\n
-  </string-->
-<!-- UNUSED string name="r_checkboxes">Debe confirmar las casillas de verificación.</string -->
-<!-- UNUSED string name="r_i_understood">He entendido perfectamente este aviso</string -->
-<!-- UNUSED string name="r_disclaimer">Acepto que el autor o autores de la aplicación no son responsables de ningún daño o pérdida de datos.</string -->
-<!-- UNUSED string name="r_continue">CONTINUAR</string-->
-
+    <!-- OK string name="distox_label">DistoX</string -->
+    <!-- OK string name="cave3d_label">Cave3D</string -->
     <!-- UNUSED string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string -->
     <string name="symbols_ask">¿Quiere instalar simbologías para el croquis v.%1$s?\n(Actualiza v.%2$s)</string>
-    <!-- UNUSED string name="version_check">Last version</string -->
-    <!-- UNUSED string name="version_check_failed">Failed version check</string -->
-    <!-- UNUSED string name="version_check_latest">Version already at latest</string -->
+    <!-- UNUSED string name="version_check">Ultima versión</string -->
+    <!-- UNUSED string name="version_check_failed">Comprobación de versión fallida</string -->
+    <!-- UNUSED string name="version_check_latest">Esta es la última versión</string -->
     <string name="version_check_newer">Versión más reciente disponible: %1$d</string>
-
+    <string name="version_check_newer">Disponible nueva versión: %1$d</string>
     <string name="setup_textsize_title">Configuración de TopoDroid. Tamano del texto</string>
     <string name="setup_buttonsize_title">Configuración de TopoDroid. Tamaño del botón</string>
     <string name="setup_drawingunit_title">Configuración de TopoDroid. Tamaño de los iconos</string>
     <string name="setup_done_title">Configuración de TopoDroid. Hecho</string>
     <string name="setup_buttonsample">Tamaño del botón</string>
-
-    <string name="setup_textsize">Establezca el tamaño del texto. \ Puede cambiarlo más tarde a través de la configuración de la ventana principal.</string>
-    <string name="setup_buttonsize">Establezca el tamaño del botón. \ Puede cambiarlo más tarde a través de la configuración de la ventana principal.</string>
-    <string name="setup_drawingunit">Establezca el tamaño del icono de boceto. \ Puede cambiarlo más tarde a través de la configuración de la ventana de croquis.</string>
+    <string name="setup_textsize">Establezca el tamaño del texto. \nPuede cambiarlo más tarde a través de la configuración de la ventana principal.</string>
+    <string name="setup_buttonsize">Establezca el tamaño del botón. \nPuede cambiarlo más tarde a través de la configuración de la ventana principal.</string>
+    <string name="setup_drawingunit">Establezca el tamaño del icono de boceto. \nPuede cambiarlo más tarde a través de la configuración de la ventana de croquis.</string>
     <string name="setup_done">La configuración básica está lista.\n\n
-	    Si tiene problemas con la conexión DistoX, intente configurar el modo de conexión emparejamiento inestable.\n\n
-Otras configuraciones se refieren a la presentación en la ventana de dibujo (tamaño del icono, tamaño de la etiqueta, ancho de línea, etc.)
-debe ajustarlos a sus necesidades./n/n
-    </string>
+	    Si tiene problemas con la conexión DistoX, intente configurar el modo de conexión emparejamiento inestable.\n\n Otras configuraciones se refieren a la presentación en la ventana de dibujo (tamaño del icono, tamaño de la etiqueta, ancho de línea, etc.)
+debe ajustarlos a sus necesidades./n/n </string>
     <!-- NO TRANSLATION string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
-
     <string name="POINT">Punto</string>
     <string name="LINE">Línea</string>
     <string name="AREA">Área</string>
@@ -69,17 +55,14 @@ debe ajustarlos a sus necesidades./n/n
     <string name="xsplay">Xsplay</string>
     <string name="hsplay">Hsplay</string>
     <string name="vsplay">Vsplay</string>
-
     <string name="cut">Cortar</string>
     <string name="copy">Copiar</string>
     <string name="paste">Pegar</string>
     <string name="copied">Copiado %1$s al portapapeles</string>
-
-    <string name="memoryA3">Memoria DistoX A3</string>
-    <string name="memoryX310">Memoria DistoX X310</string>
-    <string name="memoryXBLE">Memoria DistoX-BLE</string>
+    <string name="memoryA3">DistoX A3</string>
+    <string name="memoryX310">DistoX X310</string>
+    <string name="memoryXBLE">DistoX-BLE</string>
     <!-- UNUSED string name="memory_data">Datos DistoX</string -->
-
     <string name="thp_user">Usuario</string>
     <string name="thp_label">Texto</string>
     <string name="thp_section">sección</string>
