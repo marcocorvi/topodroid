@@ -1652,8 +1652,8 @@
   <string name="pref_graph_paper_scale_summary">Регулировка масштаба миллиметровки</string>
   <string name="pref_slant_xsection_title">Наклонные сечения</string>
   <string name="pref_slant_xsection_summary">Наклонные поперечные сечения на разрезах</string>
-  <!-- TODO string name="pref_oblique_projection_title">Oblique projected</string -->
-  <!-- TODO string name="pref_oblique_projection_summary">Maximum oblique projected angle</string -->
+  <string name="pref_oblique_projection_title">Наклонная проекция</string>
+  <string name="pref_oblique_projection_summary">Максимальный угол наклонной проекции</string>
   <string name="pref_weeddistance_title">Буфер сегмента прореживания точек</string>
   <string name="pref_weeddistance_summary">Макс. расстояние от сегмента до точек прореживания</string>
   <string name="pref_weedlength_title">Длина сегмента прореживания</string>
