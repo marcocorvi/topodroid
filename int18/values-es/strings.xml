@@ -211,7 +211,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="export_model_title">Exportar modelo 3D</string>
     <string name="export_tdconfig_title">Exportar proyecto</string>
 
-    <!-- UNUSED string name="import_wait">Importando archivo, espere&#8230;</string -->
+    <!-- UNUSED string name="import_wait">Importar archivo&#8230; attendi&#8230;</string -->
     <string name="import_already">Topografía importada con éxito</string>
     <string name="import_bad">Archivo de importación no válido</string>
     <string name="import_none">No hay archivo a importar</string>
@@ -227,8 +227,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="import_zip_newer">ZIP importado de una versión más reciente</string>
     <!-- UNUSED string name="import_zip_wait">El archivo ZIP importado puede tardar mucho tiempo. Por favor espere &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Exportando dibujo &#8230; espere &#8230;</string -->
-    <!-- TODO string name="GPS_position_none">No GPS position data</string -->
-    <!-- TODO string name="GPX_record_none">No GPX point record</string -->
+    <string name="GPS_position_none">No hay datos de posición GPS/string>
+    <string name="GPX_record_none">No hay registro de puntos GPX</string>
     <string name="MT_points_none">No hay punto GPS</string>
     <string name="MT_bad_file">Archivo de topografía del móvil corrupto</string>
     <string name="bad_manifest">Archivo de manifiesto corrupto</string>
@@ -258,20 +258,20 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="longitude">Long. </string>
     <!-- UNUSED string name="h_ellipsoid_hint">H elipsoide [metros]</string -->
     <string name="h_geoid_hint">H geoide [metros]</string>
-    <!-- TODO string name="accuracy_hint">Accuracy [m]</string -->
+    <string name="accuracy_hint">Precisión [m]</string>
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
     <string name="loop_closure_errors">Error en cierre de bucle</string>
     <string name="loop_none">No hay Bucle</string>
-    <!-- TODO string name="loops_bad">Inaccurate loops: %1$d</string -->
+    <string name="loops_bad">Bucles inexactos: %1$d</string>
     <!-- UNUSED string name="long_lat">Longitud-Latitud</string -->
 
-    <!-- TODO string name="error_m">Accuracy [m]</string -->
-    <!-- TODO string name="fmt_error_h">Accuracy: %1$.1f m</string -->
-    <!-- TODO string name="fmt_error_m">Accuracy: H %1$.1f V %2$.1f m</string -->
+    <string name="error_m">Precisión [m]</string>
+    <string name="fmt_error_h">Precisión: %1$.1f m</string>
+    <string name="fmt_error_m">Precisión: H %1$.1f V %2$.1f m</string>
     <string name="fmt_h_geoid">Error %1$.0f m</string>
     <!-- UNUSED string name="fmt_h_ellipsoid">Error %1$.0f m</string -->
-    <!-- TODO string name="location_start_fine">Starting fine location</string -->
+    <string name="location_start_fine">Inicio de precisión de posicionamiento</string>
     <!-- UNUSED string name="depth_error">Waring. Data depth error</string -->
 
     <string name="error_azimuth_required">Introducir rumbo</string>
@@ -294,10 +294,10 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="error_name_invalid">Nombre de proyecto no válido</string>
     <string name="error_name_required">Introducir nombre</string>
     <!-- UNUSED string name="error_text_required">Text required</string -->
-    <!-- TODO string name="error_station_number">Wrong number of stations</string -->
+    <string name="error_station_number">Número incorrecto de estaciones</string>
     <string name="error_name_duplicate">Nombre duplicado</string>
     <string name="error_no_section_in_section">No X-seccion en X-seccion</string>
-    <!-- TODO string name="error_profile_slant_section">Slanted Xsection not enabled in profile view</string -->
+    <string name="error_profile_slant_section">Tramos inclinados deshabilitados en perfil</string>
     <string name="error_team_required">Faltan nombres de detectores</string>
 
     <!-- UNUSED string name="error_dir_exists">El directorio ya existe</string -->
@@ -305,7 +305,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="error_start_required">Introducir referencia de estación</string>
     <!-- UNUSED string name="error_station_already_fixed">La estación ya tiene coordenadas</string -->
     <string name="error_station_required">Introducir estación</string>
-    <!-- TODO string name="error_station_fixed">Georefenced station</string -->
+    <string name="error_station_fixed">Estación georreferenciada</string>
     <string name="error_station_non_existing">No existe estación</string>
     <string name="error_sensor_required">Introducir sensor</string>
     <string name="error_value_required">Introducir valor</string>
@@ -362,7 +362,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="no_calib_check">Ninguna toma de calibración</string>
     <string name="no_calibration">Calibración no seleccionada</string>
     <!-- UNUSED string name="no_capture_app">No hay aplicaciones de foto</string -->
-    <string name="no_cave3d">Visor 3D No instalado</string>
+    <string name="no_cave3d">Cave3D No instalado</string>
     <string name="no_data_reduction">Sin reducción de datos</string>
     <string name="no_db">No hay base de datos</string>
     <string name="no_device_address">Dispositivo no seleccionado</string>
@@ -376,6 +376,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="no_leg_first">La selección no comienza con un trayecto</string>
     <string name="no_leg_intersection">La línea de la sección no atraviesa ninguna visual</string>
     <string name="no_location_data">Sin datos de calibración</string>
+    <string name="no_native_lib">Falta la biblioteca nativa</string>
     <!-- UNUSED string name="no_paired_device">Dispositivo no emparejado.\nEscanee y empareje DistoX</string-->
     <string name="no_photos">Topografía sin foto</string>
     <string name="no_plots">Topografía sin croquis</string>
@@ -383,7 +384,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="no_proj4">Proj4 no instalado</string>
     <string name="no_sensors">Topografía sin mediciones</string>
     <!-- UNUSED string name="no_shots">Topografía sin mediciones.\nPulse el botón para descargar mediciones</string -->
-    <!-- TODO string name="no_search_result">No search_result.</string -->
+    <string name="no_search_result">No hay resultado de búsqueda.</string>
     <string name="no_survey">Topografía no seleccionada</string>
     <string name="no_symbols">Sin paleta de símbolos.</string>
     <!-- UNUSED string name="no_thmanager">ThManager no instalado</string -->
@@ -394,14 +395,14 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Clino %5$.1f"</string>
     <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
 
-    <string name="menu_3d">Visor 3D</string>
-    <string name="menu_about">Acerca de &#8230;</string>
+    <string name="menu_3d">Cave3D</string>
+    <string name="menu_about">INFO</string>
     <string name="menu_area">Área</string>
     <string name="menu_audio">AUDIO</string>
     <!-- UNUSED string name="menu_attach">Conectar</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
-    <!-- UNUSED string name="menu_backups">LIMPIAR COPIAS DE SEGURIDAD</string-->
+    <!-- UNUSED string name="menu_backups">ELIMINAR COPIAS DE SEGURIDAD</string-->
     <string name="menu_calib_check">Verificar calibración</string>
     <string name="menu_close">Cerrar</string>
     <!-- UNUSED string name="menu_clear">CLEAR</string -->
@@ -414,7 +415,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="menu_device">Dispositivo</string>
     <string name="menu_export">Exportar</string>
     <string name="menu_firmware">Firmware</string>
-    <!-- TODO string name="menu_geopoint_app">GEOPOINT APP</string -->
+    <string name="menu_geopoint_app">APP GNSS</string>
     <string name="menu_recover">Tomas eliminadas</string>
     <string name="menu_recover_paste">Restaurar/Pegar</string>
     <string name="menu_reload">Importar</string>
@@ -432,6 +433,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="menu_pair">Emparejar</string-->
     <string name="menu_palette">Simbología</string>
     <string name="menu_photo">Tomas con foto</string>
+    <string name="menu_sections">Secciónes</string>
     <string name="menu_sensor">Tomas con sensor</string>
     <!-- UNUSED string name="menu_scan">Escanear</string -->
     <!-- UNUSED string name="menu_scan_ble">ESCANEAR BTLE</string -->
