@@ -474,7 +474,6 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="popup_remove_pt">Eliminar punto</string>
     <string name="popup_append_line">Agregar a la línea</string>
     <string name="popup_multiselect">Multiselección</string>
-    <!-- Doble string name="popup_finish">final</string -->
     <string name="popup_finish">final</string>
     <string name="popup_delete">Cancelar</string>
     <string name="popup_decimate">Diezmar</string>
@@ -492,11 +491,11 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="popup_select_shot">Seleccionar tomas</string>
     <string name="popup_select_station">Seleccionar estación</string>
 
-    <string name="popup_cont_none">Nada</string>
-    <string name="popup_cont_start">Inicio de punto</string>
-    <string name="popup_cont_end">final de punto</string>
-    <string name="popup_cont_both">Ambos puntos</string>
-    <string name="popup_cont_continue">Continuar</string>
+    <!-- UNUSED string name="popup_cont_none">Nada</string-->
+    <!-- UNUSED string name="popup_cont_start">Inicio de punto</string-->
+    <!-- UNUSED string name="popup_cont_end">final de punto</string-->
+    <!-- UNUSED string name="popup_cont_both">Ambos puntos</string-->
+    <!-- UNUSED string name="popup_cont_continue">Continuar</string-->
 
     <!-- UNUSED string name="connection_error">Error DE conexión</string-->
     <!-- UNUSED string name="connecting">Conectando &#8230;</string-->
