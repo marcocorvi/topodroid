@@ -662,7 +662,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="zoom_in_out">Zoom aumentar/disminuir</string -->
 
     <string name="survey_info">Info Topografía</string>
-    <!-- TODO string name="stat_devices">Devices %1$d: %2$s</string -->
+    <string name="stat_dates">De %1$s a %2$s</string>
+    <string name="stat_devices">Devices %1$d: %2$s</string>
     <string name="stat_stddev_m">M desv. estandar %1$.1f %%</string>
     <string name="stat_stddev_g">G desv. estandar %1$.1f %%</string>
     <string name="stat_stddev_dip">Dip desv. estandar %1$.1f deg. (promedio %2$.1f deg.)</string>
@@ -680,9 +681,10 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="stat_shot">Tomas  %1$d,   Duplicada %2$d,   Superficie %3$d</string -->
     <string name="stat_splay">Tomas laterales %1$d # %2$d</string>
     <string name="stat_station">Estaciones %1$d # %2$d</string>
-    <!-- TODO string name="stat_leg_sigma">Leg sigma %1$.1f cm</string -->
+    <string name="stat_leg_sigma">Toma sigma %1$.1f cm</string>
     <string name="stat_dangling">Tomas colgadas %1$d %2$.1f %3$s</string>
-    <string name="stat_surface">mediciones Superficie %1$d # %2$d %3$.1f %4$s</string>
+    <!-- UNUSED string name="stat_surface">mediciones Superficie %1$d # %2$d %3$.1f %4$s</string -->
+    <string name="stat_survey_z">Rilievo: Z %1$.1f %2$.1f %3$s</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]"</string>
     <string name="stat_angle_error">Error de ángulo %1$.2f ± %2$.2f"</string>
     <string name="shot_title">Toma %1$s - %2$s"</string>
@@ -707,7 +709,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="fmt_profile">%1$s: PROYECCIÓN</string>
 
     <!-- UNUSED string name="extended_profile">Alzado extendido</string -->
-    <!-- TODO string name="projected_profile">Projected profile</string -->
+    <string name="projected_profile">Alzado proyectado</string>
     <!-- UNUSED string name="x_section">X-SECTION</string -->
     <!-- UNUSED string name="v_section">V-sección</string -->
     <!-- UNUSED string name="h_section">H-sección</string -->
@@ -794,9 +796,9 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_clear_memory">limpiar la memoria</string>
     <string name="button_save"      >Guardar   </string>
     <!-- UNUSED string name="button_select"    >Seleccionar </string -->
-    <!-- TODO string name="button_leg_station">Leg stations</string -->
-    <!-- TODO string name="button_all_station">All stations</string -->
-    <!-- TODO string name="button_leg_search">Leg search</string -->
+    <string name="button_leg_station">Estación de principal</string>
+    <string name="button_all_station">Todas las estaciones</string>
+    <string name="button_leg_search">Buscar estaciones</string>
     <string name="button_search"    >Buscar    </string>
     <string name="button_merge"     >Unir     </string>
     <string name="button_saved"     >Estación guardada</string>
@@ -807,13 +809,13 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="button_start"     >Inicio</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Cargar    </string>
-    <!-- TODO string name="button_download"  >Download</string -->
+    <string name="button_download"  >Descarga</string>
     <string name="button_view"      >Ver       </string>
     <!-- UNUSED string name="button_zoomfit"   >Ajuste de zoom  </string -->
     <!-- UNUSED string name="button_landscape" >Paisaje </string -->
     <!-- UNUSED string name="button_portrait"  >Retrato  </string -->
     <string name="button_splays">Tomas</string>
-    <!-- TODO string name="button_wait">Wait</string -->
+    <string name="button_wait">Espere</string>
 
 
     <string name="button_write"     >Enviar calibración a distoX</string>
@@ -830,6 +832,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="mode_fixed">Desplazar objetos</string>
     <string name="mode_outline">Solo poligonal</string>
     <string name="mode_scale_ref">Barra de referencia de escala</string>
+    <string name="mode_walls">Paredes</string>
+    <string name="mode_refs">Referencia</string>
 
     <string name="layer_floor">Suelo</string>
     <string name="layer_fill">Rellenos</string>
@@ -942,7 +946,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="man_export">13.  Importar / exportar </string>
     <string name="man_project">14. Topografias de cuevas</string>
     <string name="man_threed">15. Visor Cave3D </string>
-    <string name="man_index">16. Índice </string>
+    <string name="man_content">16. Índice</string>
+    <string name="man_index">17. Índice analítico</string>
     <string name="man_website">* Sitio web </string>
 
     <string name="help_help">Ayuda</string>
@@ -958,7 +963,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_close_app">Cerrar la app</string>
     <string name="help_coeff">Mostrar coeficientes de calibración</string>
     <string name="help_color">Colores claros</string>
-    <string name="help_continue">Continuar el dibujo de una línea</string>
+    <string name="help_join">Unir líneas</string>
+    <!-- UNUSED string name="help_continue">Continuare il disegno di una linea</string -->
     <!-- NO string name="help_contour">Editar Contorno</string -->
     <string name="help_current_station">Última estación guardada</string>
     <string name="help_azimuth">Asistente referencia del rumbo</string>
@@ -966,7 +972,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_device">Opciones del dispositivo distoX</string>
     <string name="help_add_topodroid">Crear nueva Topografía/calibración</string>
     <string name="help_import">Importar archivo zip o Therion</string>
-    <!-- TODO string name="help_geopoint_app">Geopoint external app</string -->
+    <string name="help_geopoint_app">Aplicación externa Geopoint</string>
     <string name="help_symbol">Activar/desactivar los símbolos de dibujo</string>
     <string name="help_therion">Gestor topografías cuevas</string>
     <string name="help_cave3d">Cave3D, visualización 3D</string>
@@ -988,18 +994,20 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_remote">Control remoto DistoX</string>
     <string name="help_add_shot">Introducir una toma manualmente</string>
     <string name="help_info_shot">Estadísticas de topografía</string>
-    <!-- TODO string name="help_gps_surveys">Surveys informations</string -->
-    <string name="help_survey_info">Información topografía</string>
+    <string name="help_gps_surveys">Información de topografía</string>
+    <string name="help_survey_info">Dato general de topografía</string>
     <string name="help_undelete">Recuperar datos eliminados</string>
     <string name="help_photo">Ajustes de Fotos</string>
     <string name="help_sensor">Ajustes de medidas</string>
     <string name="help_3d">Visualizar en 3D(Cave3D)</string>
     <!-- UNUSED string name="help_move">Modo Mover/zoom</string -->
     <string name="help_draw">Seleccinar herramienta de dibujo</string>
-    <!-- TODO string name="help_drawing">Drawing</string -->
+    <string name="help_drawing">Dibujo</string>
     <string name="help_edit">Seleccionar modo de edición</string>
     <string name="help_refs">Ajustes de visualización del dibujo</string>
     <string name="help_rename">Cambio nombre topografía</string>
+    <string name="help_plot_close">Cerrar dibujo</string>
+    <string name="help_plot_delete">Eliminar dibujo</string>
     <string name="help_plot_rename">Eliminar/Renombrar dibujo</string>
     <string name="help_plot_scrap">Residuos de dibujo</string>
     <string name="help_plot_switch">Activación dibujo</string>
@@ -1013,6 +1021,9 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_redo">Rehacer última acción de dibujo</string>
     <string name="help_symbol_plot">Seleccionar los símbolos</string>
     <string name="help_delete_item">Eliminar símbolos del dibujo</string>
+    <string name="help_section_type">Tipo scción</string>
+    <string name="help_section_item">Objeto de sección</string>
+    <string name="help_select_clear">Cancelar selección de dibujo</string>
     <string name="help_range">Mover una parte de la línea</string>
     <!-- UNUSED string name="help_clear">Borrar selección</string -->
     <string name="help_eraser">Borrar dibujo</string>
@@ -1069,15 +1080,18 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_delete_config">Eliminar topografía</string>
     <string name="help_add_equate">Agregar relieves similares</string>
     <string name="help_equates">Lista relieves similares</string>
+    <string name="help_stations_minus">Mostrar menos estaciones</string>
+    <string name="help_stations_plus">Mostrar más estaciones</string>
 
     <!-- UNUSED string name="export_bgcolor">Color de fondo</string -->
-    <!-- TODO string name="export_bothviews">Plan and profile</string -->
+    <string name="export_bothviews">Planta y secciones</string>
     <string name="export_config">Comandos de configuración</string>
     <string name="export_csv_rawdata">Datos sin procesar</string>
     <string name="export_dxf_blocks">Bloques DXF</string>
     <string name="export_dxf_version">Versión</string>
     <string name="export_georeference">Georeferencia</string>
     <string name="export_grid">Cuadrícula</string>
+    <string name="export_layers">Capas</string>
     <string name="export_linedir">Línea de dirección</string>
     <string name="export_lrud">LRUD</string>
     <string name="export_lrud_from">LRUD a estación DA</string>
@@ -1122,6 +1136,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="import_lrud">Importar LRUD</string>
     <string name="import_leg_first">Pulsación de tecla antes de los LRUD</string>
     <string name="import_diving_datamode">Modo de datos de inmersión</string>
+    <string name="import_therion_path">Con ruta de topografía</string>
 
     <string name="title_azimut">Referencia declinación Magnética</string>
     <string name="title_audio">Comentario de audio</string>
@@ -1136,7 +1151,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="title_coord">Introduzca las coordenadas del punto:</string -->
     <string name="title_current_station">Última estación guardada</string>
     <string name="title_search">Búsqueda de estación/toma</string>
-    <!-- TODO string name="title_gm_search">Calib data search</string -->
+    <string name="title_gm_search">Calib data search</string>
     <string name="title_dangling">Tomas no adjuntadas</string>
     <string name="title_device">Dispositivo DistoX</string>
     <string name="title_device_select">Selecciona DistoX</string>
@@ -1151,14 +1166,16 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_edit_station">Editar estación</string>
     <string name="title_erase">Borrar</string>
     <string name="title_fixed">Fijar puntos</string>
-    <!-- TODO string name="title_fixed_mt">Geo points [Mobile Topographer]</string -->
-    <!-- TODO string name="title_fixed_gpx_rec">Geo points [GPX Recorder]</string -->
-    <!-- TODO string name="title_fixed_gps_pos">Geo points [GPS Position]</string -->
-    <!-- TODO string name="title_fixed_gps_test">Geo points [GPS Test]</string -->
+    <string name="title_fixed_mt">Geopunto [Mobile Topographer]</string>
+    <string name="title_fixed_gpx_rec">Geopunto [GPX Recorder]</string>
+    <string name="title_fixed_gps_pos">Geopunto [GPS Position]</string>
+    <string name="title_fixed_gps_test">Geopunto [GPS Test]</string>
+    <string name="title_fixed_gps_logger">Geopunto[GPS Logger]</string>
+    <string name="title_fixed_gps_point">Geopunto [GPS Point]</string>
     <string name="title_fixed_edit">Punto de edición</string>
     <string name="title_fixed_import">Punto de importación fijado</string>
-    <string name="title_fixed_gps">Punto fijo: GPS</string>
-    <string name="title_fixed_add">Punto fijo: insertar</string>
+    <string name="title_fixed_gps">Geopunto: GPS</string>
+    <string name="title_fixed_add">Geopunto: insertar</string>
     <string name="title_manual">Manual Usuario TopoDroid</string>
     <string name="title_mode">Modo de visualización</string>
     <string name="title_move">Mover</string>
@@ -1192,8 +1209,10 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_settings_svg">Configuración de exportación SVG</string>
     <string name="title_settings_dxf">Configuración de exportación DXF</string>
     <string name="title_settings_shp">Configuración de exportación Shapefile</string>
-    <string name="title_settings_png">Configuración de exportación PNG</string>
-    <string name="title_settings_kml">Configuración de exportación KML</string>
+    <!-- UNUSED string name="title_settings_png">Configuración de exportación PNG</string-->
+    <string name="title_settings_gpx">GPX: configuración de exportación</string>
+    <string name="title_settings_kml">KML: configuración de exportación</string>
+    <string name="title_settings_srv">Configuración de exportación de paredes</string>
 
     <string name="title_settings_sketch">Ajuste de dibujo 3D en TopoDroid</string>
     <string name="title_settings_survey">Ajustes de la topografía en TopoDroid</string>
