@@ -1266,8 +1266,8 @@ debe ajustarlos a sus necesidades./n/n </string>
 
   <string name="title_import_shot">Importar Topografía</string>
   <string name="title_import_gps">Importar punto GPS</string>
-    <!-- TODO string name="title_import_th2">Therion th2 file</string -->
-    <!-- TODO string name="title_infos">Surveys info</string -->
+  <string name="title_import_th2">Archivo Therion th2</string>
+  <string name="title_infos">info topografía</string>
   <string name="title_graph_paper">Papel milimétrico en escala 1: 100</string>
   <string name="graph_paper_scale">Ajusta la línea a 5 cm</string>
 	
@@ -1284,8 +1284,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_export_shots_summary">Formato de exportación de datos predeterminado</string>
   <string name="pref_auto_plot_export_title">Formato de exportación de croquis automático</string>
   <string name="pref_auto_plot_export_summary">Formato de exportación automática de dibujos</string>
-  <!-- TODO string name="pref_lrud_count_title">LRUD splay count</string -->
-  <!-- TODO string name="pref_lrud_count_summary">Number of splays used for LRUD</string -->
+  <string name="pref_lrud_count_title">contador de tomas LRUD</string>
+  <string name="pref_lrud_count_summary">Número de tomas utilizados para LRUD</string>
 	
   <string name="pref_cat_survey">Ajustes de topografía</string>
   <string name="pref_cat_splay">DATOS TOMAS</string>
@@ -1305,7 +1305,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_cat_calib">Ajustes de calibración</string>
   <string name="pref_cat_device">Ajustes de distoX</string>
   <string name="pref_cat_cave3d">VISOR 3D</string>
-  <string name="pref_cat_geek">Ajustes para frikis</string>
+  <string name="pref_cat_geek">Ajustes para principiantes</string>
+  <string name="pref_cat_sketch">ESQUIZO 3D</string>
   <!-- UNUSED string name="pref_cat_log">Ajustes de dibujo</string -->
 
   <string name="pref_locale_title">Idioma</string>
@@ -1354,6 +1355,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_palettes_summary">Activar paletas adicionales</string>
   <string name="pref_packet_logger_title">Registro de paquetes</string>
   <string name="pref_packet_logger_summary">Habilitar el registro de paquetes</string>
+  <string name="pref_th2_edit_title">Edición de dibujo</string>
+  <string name="pref_th2_edit_summary">Cargando y editando dibujos</string>
 
   <string name="pref_bezier_step_title">Espaciado de puntos</string>
   <string name="pref_bezier_step_summary">Distancia entre puntos en una línea de exportación [m]</string>
@@ -1369,6 +1372,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_station_prefix_summary">Prefijo estación de exportación cSurvey</string>
   <string name="pref_compass_splays_title">Muestra Compass</string>
   <string name="pref_compass_splays_summary">Exportar reproducciones en archivos de Compass</string>
+  <string name="pref_walls_splays_title">Muestra Walls</string>
+  <string name="pref_walls_splays_summary">Exportar reproducciones en archivos de walls</string>
   <string name="pref_vtopo_splays_title">Muestra VisualTopo</string>
   <string name="pref_vtopo_splays_summary">Exportar reproducciones en archivos de VisualTopo</string>
   <string name="pref_vtopo_lrud_title">A partir de LRUD</string>
@@ -1427,6 +1432,9 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_csv_sep_summary">Filas separadas CSV</string>
   <string name="pref_csv_eol_title">CSV conocido</string>
   <string name="pref_csv_eol_summary">Grabar separación CSV</string>
+  <string name="pref_gpx_single_track_title">GPX de tramo única</string>
+  <string name="pref_gpx_single_track_summary">Topografía de proyectos en un solo track</string>
+	    
   <string name="pref_sock_type_title">Emparejar</string>
   <string name="pref_sock_type_summary">Crear emparejamiento</string>
   <!-- UNUSED string name="pref_device_type_title">Tipo Disto</string -->
