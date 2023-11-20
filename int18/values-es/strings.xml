@@ -1481,6 +1481,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_bric_mode_summary">Modo operativo BRIC</string>
   <string name="pref_bric_zero_length_title">Toma cero BRIC </string>
   <string name="pref_bric_zero_length_summary">Grabar toma BRIC de longitud cero</string>
+  <string name="pref_sap5_bit16_bug_title">SAP5: anomalia bit-16</string>
+  <string name="pref_sap5_bit16_bug_summary">SAP5: reparar anomalía bit-16</string>
 
   <string name="pref_plot_screen_title">Ajustes de pantalla de croquis</string>
   <string name="pref_tool_line_title">Ajustes de línea</string>
@@ -1515,6 +1517,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_splay_dash_color_summary">Color de las líneas de puntos</string>
   <string name="pref_splay_dot_color_title">Color punteado</string>
   <string name="pref_splay_dot_color_summary">Color de las líneas punteadas</string>
+  <string name="pref_splay_latest_color_title">línea a color recientes</string>
+  <string name="pref_splay_latest_color_summary">Color de las líneas más recientes.</string>
 
   <!-- UNUSED string name="pref_data_backup_title">Autoexportación de datos</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Exportación automática de datos (necesita formato predeterminado)</string -->
@@ -1540,8 +1544,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_mag_thr_summary">Precisión sobre las mediciones del campo magnético</string>
   <string name="pref_dip_thr_title">Tolerancia magnética de la inclinación</string>
   <string name="pref_dip_thr_summary">Precisión sobre mediciones magnética de la inclinación</string>
-  <!-- TODO string name="pref_sibling_thr_title">Sibling threshold</string -->
-  <!-- TODO string name="pref_sibling_thr_summary">Threshold for sibling shots [&#37;]</string -->
+  <string name="pref_sibling_thr_title">Umbral de semejanza</string>
+  <string name="pref_sibling_thr_summary">Umbral de semejanza entre tomas [&#37;]</string>
 
   <string name="pref_leg_title">Precisión de visual</string>
   <string name="pref_leg_summary">Precisión entre las mediciones de una visual</string>
@@ -1585,6 +1589,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_acad_version_summary">Versión de DXF</string>
   <string name="pref_acad_spline_title">Spline DXF</string>
   <string name="pref_acad_spline_summary">DXF interpolado cúbico</string>
+  <string name="pref_acad_layer_title">Capas de vistas</string>
+  <string name="pref_acad_layer_summary">Vista DXF por capas</string>
   <string name="pref_dxf_reference_title">Referencia DXF</string>
   <string name="pref_dxf_reference_summary">Los ejes X-Y son exportaciones de dibujos DXF</string>
   <!-- UNUSED string name="pref_dxf_scale_title">Escala de dibujo DXF</string -->
@@ -1596,7 +1602,6 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_thumbnail_title">Tamaño miniaturas</string>
   <string name="pref_thumbnail_summary">Tamaño de las imágenes en miniatura</string>
   <string name="pref_shot_timer_title">Contador de tiempo</string> 
-	
   <string name="pref_shot_timer_summary">Tiempo en segundos antes de medir la dirección</string>
   <string name="pref_beep_volume_title">Volumen del sonido del contador</string>
   <string name="pref_beep_volume_summary">Nivel %% del volumen del pitido del contador</string>
@@ -1612,16 +1617,16 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_segment_message">Distancia Mínima entre dos puntos de una línea en el dibujo</string>
   <string name="pref_linestyle_title">Nº de puntos en línea</string>
   <string name="pref_linestyle_summary">Número de puntos en la línea dibujada</string>
-  <string name="pref_linecontinue_title">Línea continua</string>
-  <string name="pref_linecontinue_summary">Línea predeterminada en modo continuo</string>
+  <!-- UNUSED string name="pref_linecontinue_title">Línea continua</string -->
+  <!-- UNUSED string name="pref_linecontinue_summary">Línea predeterminada en modo continuo</string -->
   <string name="pref_lineacc_title">Precisión Bezier</string>
   <string name="pref_lineacc_summary">Precisión Bezier interpolación cúbica</string>
   <string name="pref_linecorner_title">Esquina Bezier</string>
   <string name="pref_linecorner_summary">Detección del límite del ángulo de línea Bezier</string>
   <string name="pref_graph_paper_scale_title">Escala de papel cuadriculado</string>
   <string name="pref_graph_paper_scale_summary">Corrección de escala de papel cuadriculado</string>
-  <!-- TODO string name="pref_slant_xsection_title">Slant xsections</string -->
-  <!-- TODO string name="pref_slant_xsection_summary">Profile view slant xsections</string -->
+  <string name="pref_slant_xsection_title">Sección inclinada</string>
+  <string name="pref_slant_xsection_summary">Secciones x inclinadas de vista de perfil</string>
   <string name="pref_weeddistance_title">Distancia del punto de desmalezado</string>
   <string name="pref_weeddistance_summary">Distancia máxima desde el segmento hasta los puntos de desmalezado [m]</string>
   <string name="pref_weedlength_title">Longitud del segmento de entramado puntual</string>
@@ -1648,6 +1653,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_line_thickness_summary">Grosor de la línea</string>
   <string name="pref_line_units_title">Unidades lineales</string>
   <string name="pref_line_units_summary">Dibujar unidades de línea</string>
+  <string name="pref_line_close_title">Línea completa cerrada</string>
+  <string name="pref_line_close_summary">Cerrar líneas de tipo "cerrado"</string>
   <string name="pref_linesnap_title">Ajuste de línea/área</string>
   <string name="pref_linesnap_summary">Habilitar acción de alineación de línea/área</string>
   <string name="pref_linecurve_title">Segmento liso/derecho</string>
@@ -1658,6 +1665,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_path_multiselect_summary">Acción de multiselección de ruta</string>
   <string name="pref_composite_actions_title">Acciones compuestas</string>
   <string name="pref_composite_actions_summary">Habilitar acciones de toque prolongado por línea/área</string>
+  <string name="pref_with_continue_line_title">unión de línea</string>
+  <string name="pref_with_continue_line_summary">Habilitar unión de línea</string>
   <string name="pref_plane_interpolation_title">Interpolación plana</string>
   <string name="pref_plane_interpolation_summary">Acción de interpolación plana</string>
   <string name="pref_plot_split_title">Dibujar dividir/fusionar</string>
@@ -1702,8 +1711,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_full_affine_summary">Habilitar transformación afín de dibujos</string>
   <string name="pref_loopClosure_title">Cierre de bucle</string>
   <string name="pref_loopClosure_summary">Error en cierre de bucle</string>
-  <!-- TODO string name="pref_loop_thr_title">Loop threshold</string -->
-  <!-- TODO string name="pref_loop_thr_summary">Loop compensation threshold</string -->
+  <string name="pref_loop_thr_title">Umbral de bucle</string>
+  <string name="pref_loop_thr_summary">Umbral de compensación de bucle</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Estimate splay extend</string -->
   <string name="pref_swapLR_title">Cambiar LR en Compass</string>
@@ -1777,39 +1786,39 @@ debe ajustarlos a sus necesidades./n/n </string>
   <!-- NO string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string -->
   <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
-
-<!-- LEAVE LOG STUFF IN ENGLISH es correcto, pero necesito usar inglés
-  <string name="pref_log_stream_summary">Salida secuencia de registros</string>
-  <string name="pref_log_stream_title">Secuencia de registros</string>
+	  
+<!-- LEAVE LOG STUFF IN ENGLISH
+  <string name="pref_log_stream_summary">Log output stream</string>
+  <string name="pref_log_stream_title">Log stream</string>
   <string name="pref_log_bt">Bluetooth</string>
-  <string name="pref_log_bezier">Curvas Bézier</string>
-  <string name="pref_log_calib">Calibración</string>
-  <string name="pref_log_comm">Communicación BT</string>
-  <string name="pref_log_csurvey">CSurvey</string>
-  <string name="pref_log_data">Datos</string>
-  <string name="pref_log_db">Base de datos</string>
-  <string name="pref_log_debug">Depurar</string>
-  <string name="pref_log_device">Ventana dispositivo</string>
+  <string name="pref_log_bezier">Curve Bezier</string>
+  <string name="pref_log_calib">Calibrazione</string>
+  <string name="pref_log_comm">Comunicazione BT</string>
+  <string name="pref_log_csurvey">cSurvey</string>
+  <string name="pref_log_data">Dati</string>
+  <string name="pref_log_db">Database</string>
+  <string name="pref_log_debug">Debug</string>
+  <string name="pref_log_device">Finestra DistoX</string>
   <string name="pref_log_distox">DistoX</string>
-  <string name="pref_log_err">Error</string>
-  <string name="pref_log_fixed">Puntos fijos</string>
-  <string name="pref_log_input">Entrada usuario</string>
+  <string name="pref_log_err">Errori</string>
+  <string name="pref_log_fixed">Punti GPS</string>
+  <string name="pref_log_input">Input utente</string>
   <string name="pref_log_io">Sketch i/o</string>
-  <string name="pref_log_loc">Posicionamiento</string>
-  <string name="pref_log_num">Reducción de datos</string>
-  <string name="pref_log_path">Rutas de archivos</string>
-  <string name="pref_log_perm">Permisos</string>
+  <string name="pref_log_loc">Posizioni GPS</string>
+  <string name="pref_log_num">Riduzione poligonale</string>
+  <string name="pref_log_path">Percorso file</string>
+  <string name="pref_log_perm">Permessi</string>
   <string name="pref_log_photo">Foto</string>
-  <string name="pref_log_plot">Dibujo</string>
-  <string name="pref_log_proto">Protocolo DistoX</string>
+  <string name="pref_log_plot">Disegni</string>
+  <string name="pref_log_proto">Protocollo DistoX</string>
   <string name="pref_log_ptopo">PocketTopo</string>
-  <string name="pref_log_sensor">Sensores</string>
-  <string name="pref_log_shot">Toma</string>
-  <string name="pref_log_sync">Topografía Conjunta</string>
-  <string name="pref_log_survey">Topografía</string>
+  <string name="pref_log_sensor">Sensori</string>
+  <string name="pref_log_shot">Tiri</string>
+  <string name="pref_log_sync">Cosurveying</string>
+  <string name="pref_log_survey">Rilievi</string>
   <string name="pref_log_therion">Therion</string>
-  <string name="pref_log_units">Unidades</string>
-  <string name="pref_log_zip">Zip</string>
+  <string name="pref_log_units">Unità</string>
+  <string name="pref_log_zip">ZIP</string>
 -->
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
@@ -1832,7 +1841,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="perm_camera">\nCámara</string>
     <string name="perm_microphone">\nMicrófono</string>
 
-    <!-- OK string name="welcome_title">Bienvenido a TopoDroid %1$s</string -->
+ <string name="welcome_db_version">DB v. %1$d, %2$d</string>
+    <!-- NO string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopoDroid es una aplicación de código abierto destinado a dispositivos Android, con la finalidad de hacer topografías en cavidades con el dispositivo DistoX.
 \nNo existen garantías: Al utilizar TopoDoid, usted acepta las condiciones de uso. El autor no se hace responsable de las pédidas de datos que puedan ocurrir.
@@ -1866,13 +1876,13 @@ debe ajustarlos a sus necesidades./n/n </string>
    <string name="firmware_file_missing">No hay archivo firmware</string>
    <!-- UNUSED string name="ask_dump">¿Quiere cargar el firmware?</string -->
    <string name="ask_upload">¿Quiere subir el firmware?</string>
-   <!-- TODO string name="ask_download">Download firmware? (be patient)</string -->
+   <string name="ask_download">¿Descargar firmware? (ser paciente)</string>
    <string name="ask_upload_not_compatible">Firmware el archivo no parece correcto. \n¿Quiere probar a cargarlo?</string>
    <string name="firmware_upload_no_sign">Error al verificar dell\'HW el DistoX</string>
    <string name="firmware_upload_bad_sign">HW DistoX incompatible</string>
    <!-- UNUSED string name="firmware_file_dumped">Archivo de firmware guardado %1$s tamaño %2$d</string -->
    <string name="firmware_file_uploaded">Archivo de firmware cargado %1$s escribir %2$d / %3$d</string>
-   <!-- TODO string name="firmware_file_downloaded">Downloaded firmware file %1$s read %2$d</string -->
+   <string name="firmware_file_downloaded">Archivo de firmware descargado %1$s leído %2$d</string>
    <!-- UNUSED string name="firmware_file_dump_fail">Error al descargar el firmware</string -->
    <string name="firmware_file_upload_fail">Error al cargar el firmware</string>
    <!-- TODO string name="firmware_file_download_fail">Failed firmware download</string -->
