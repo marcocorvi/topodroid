@@ -1885,10 +1885,10 @@ debe ajustarlos a sus necesidades./n/n </string>
    <string name="firmware_file_downloaded">Archivo de firmware descargado %1$s leído %2$d</string>
    <!-- UNUSED string name="firmware_file_dump_fail">Error al descargar el firmware</string -->
    <string name="firmware_file_upload_fail">Error al cargar el firmware</string>
-   <!-- TODO string name="firmware_file_download_fail">Failed firmware download</string -->
+   <string name="firmware_file_download_fail">Descarga de firmware fallida</string>
    <string name="firmware_not_supported">El dispositivo no admite funciones de firmware</string>
-   <!-- TODO string name="firmware_uploaded">%1$s firmware: uploaded %2$d</string -->
-   <!-- TODO string name="firmware_downloaded">%1$s firmware: downloaded %2$d</string -->
+   <string name="firmware_uploaded">%1$s firmware: subido %2$d</string>
+   <string name="firmware_downloaded">%1$s firmware: descargado %2$d</string>
 
     <string name="project">Proyecto %1$s</string>
     <string name="no_editor">Editor no encontrado</string>
@@ -1911,7 +1911,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="menu_new">NUEVO</string -->
     <!-- UNUSED string name="menu_equate">AGREGAR EQUIVALENTE</string -->
     <!-- UNUSED string name="menu_equates">EQUIVALENTE</string -->
-    <!-- TODO string name="menu_open">OPEN</string -->
+    <string name="menu_open">ABRIR</string>
     <string name="menu_save">GUARDAR</string>
 
     <!-- UNUSED string name="overwrite">Sobrescribir</string -->
@@ -1948,7 +1948,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="cmenu_ico">Diagrama ico</string>
     <string name="cmenu_rose">Diagrama de rosas</string>
     <string name="cmenu_wall">Modo con paredes</string>
-    <string name="cmenu_sketch">Dibujos</string>
+    <!-- UNUSED string name="cmenu_sketch">Dibujos</string -->
     <!-- NO string name="cmenu_fractal">Fractal counts</string -->
 
     <!-- NO string name="fractal_title">Computo frattale</string -->
@@ -1969,32 +1969,34 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="info_shot">toma</string>
     <string name="info_station">Estación</string>
     <string name="info_length">Longitud</string>
+    <string name="info_surface">Longitud de los topes de superficie</string>
     <string name="info_depth">Profundidad</string>
     <string name="info_volume">Volumen</string>
 
     <string name="info_east">Este</string>
     <string name="info_north">Norte</string>
     <string name="info_z">Altitud</string>
-    <!-- TODO string name="info_origin">Origin</string -->
-    <!-- TODO string name="info_lonlat">coords.</string -->
-    <!-- TODO string name="info_radii">radii</string -->
+    <string name="info_origin">Original</string>
+    <string name="info_lonlat">coordnadas</string>
+    <string name="info_radii">radio</string>
     <string name="info_grid_value">%1$.0f m</string>
     <string name="info_view_value">A. %1$.0f C. %2$.0f</string>
     <string name="info_survey_value">%1$d</string>
     <string name="info_shot_value">Toma %1$d, lateral %2$d</string>
     <string name="info_station_value">%1$d</string>
     <string name="info_length_value">%1$.1f m</string>
+    <string name="info_surface_value">%1$.1f m</string>
     <string name="info_depth_value">%1$.1f m</string>
-    <!-- string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
+    <!-- UNUSED string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
     <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
     <string name="info_east_value">W %1$.1f E %2$.1f</string>
     <string name="info_north_value">S %1$.1f N %2$.1f</string>
     <string name="info_z_value">%1$.1f  %2$.1f</string>
-    <!-- TODO string name="info_origin_value">x %1$.0f y %2$.0f z %3$.0f</string -->
-    <!-- TODO string name="info_origin_none">undefined</string -->
-    <!-- TODO string name="info_lonlat_geovalue">lon %1$.7f lat %2$.7f</string -->
-    <!-- TODO string name="info_lonlat_prjvalue">lon %1$.1f lat %2$.1f</string -->
-    <!-- TODO string name="info_radii_value">EW %1$.1f NS %2$.1f</string -->
+    <string name="info_origin_value">x %1$.0f y %2$.0f z %3$.0f</string>
+    <string name="info_origin_none">indefinido</string>
+    <string name="info_lonlat_geovalue">lon %1$.7f lat %2$.7f</string>
+    <string name="info_lonlat_prjvalue">lon %1$.1f lat %2$.1f</string>
+    <string name="info_radii_value">EW %1$.1f NS %2$.1f</string>
 	
     <string name="legs_surface">Superficiales</string>
     <string name="legs_duplicate">Duplicadas</string>
@@ -2028,8 +2030,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="surface_east">Este</string>
     <string name="surface_north">Norte</string>
     <!-- NO string name="dem_file">DEM %1$s</string -->
-    <string name="dem_load">cargar</string>
-    <!-- TODO string name="dem_loading">Loading surface ... please wait</string -->
+    <string name="dem_load">cargar DEM</string>
+    <string name="dem_loading">Superficie de carga...por favor espera</string>
 
     <string name="dem_failed">ERROR: DEM cargando</string>
     <string name="dem_ok">Lectura DEM</string>
@@ -2038,14 +2040,16 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="texture_load">cargando texturas</string>
     <string name="texture_failed">ERROR: carga de textura</string>
     <string name="texture_ok">Leyendo archivo de textura</string>
-    <!-- TODO string name="texture">DTM</string -->
-    <string name="sketch_load">cargar</string>
-    <string name="sketch_failed">ERROR: cargando dibujo</string>
-    <string name="sketch_ok">Dibujo de lectura</string>
+    <string name="texture">DTM</string>
+    <!-- UNUSED string name="sketch_load">cargar</string -->
+    <!-- UNUSED string name="sketch_failed">ERROR: cargando dibujo</string -->
+    <!-- UNUSED string name="sketch_ok">Dibujo de lectura</string -->
 
     <string name="ctitle">%1$s  Clino: %2$.0f  Azimut: %3$.0f</string>
     <string name="ctitle_surface_alpha">Opacidad DEM</string>
-    <string name="ctitle_sketches">Dibujos</string>
+    <!-- UNUSED string name="ctitle_sketches">Dibujos</string -->
+    <string name="ctitle_sketch_h">[H]</string>
+    <string name="ctitle_sketch_v">[V]</string>
     <string name="ctitle_legs">Visual</string>
     <!-- UNUSED string name="ctitle_manual_leg">nueva poligonal</string -->
     <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
@@ -2071,10 +2075,10 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="cave_length">Longitud de la cueva: %1$.2f %2$.1f %3$.1f</string>
     <string name="cave_angle">Rumbo: %1$.0f  inclinación: %2$.0f</string>
 
-  <!-- TODO string name="east">E</string -->
-  <!-- TODO string name="north">N</string -->
-  <!-- TODO string name="west">W</string -->
-  <!-- TODO string name="south">S</string -->
+  <string name="east">E</string>
+  <string name="north">N</string>
+  <string name="west">W</string>
+  <string name="south">S</string>
 
     <!-- UNUSED string name="SURVEYS">R E L I E V E</string -->
     <string name="INFO">I N F O R M A C I Ó N</string>
@@ -2086,7 +2090,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="select_export_file">Seleccionar archivo de exportación</string>
     <string name="select_dem_file">Seleccionar DEM</string>
     <string name="select_texture_file">Seleccionar textura</string>
-    <string name="select_sketch_file">Seleccionar diseño</string>
+    <!-- UNUSED string name="select_sketch_file">Seleccionar diseño</string -->
 
     <string name="view_title">PUNTOS DE VISTA</string>
     <string name="view_top">Parte superior</string>
@@ -2135,9 +2139,9 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="warning_not_las">Advertencia: No hay archivo %1$s</string -->
     <!-- UNUSED string name="warning_not_cgal">Advertencia: No hay archivo de texto CGAL %1$s</string -->
     <!-- UNUSED string name="warning_not_stl">Advertencia: No hay archivo stl %1$s</string -->
-    <string name="warning_no_cwd">Advertencia: la carpeta base no existe</string>
-    <string name="warning_no_parent">Advertencia: no es posible subir una carpeta</string>
-    <!-- TODO string name="warning_nogrant_camera">Camera permission has not been granted</string -->
+    <!-- UNUSED tring name="warning_no_cwd">Advertencia: la carpeta base no existe</string -->
+    <!-- UNUSED string name="warning_no_parent">Advertencia: no es posible subir una carpeta</string -->
+    <string name="warning_nogrant_camera">No se ha concedido el permiso de la cámara</string>
     <string name="no_permissions">La aplicación no puede ejecutarse sin los permisos requeridos</string>
 
     <!-- UNUSED string name="done_fractals">Tamaño de fractal calculado</string -->
