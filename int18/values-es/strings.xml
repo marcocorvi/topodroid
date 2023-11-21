@@ -597,8 +597,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="shot_delete">¿Quiere eliminar la toma?</string>
     <string name="shots_delete">¿Quiere eliminar las tomas?</string>
     <string name="shots_delete_unsafe">Estaciones a las que hacen referencia las secciones transversales.\n¿Eliminar tomas?</string>
-    <string name="shot_rename_unsafe">Estaciones a las que hacen referencia las secciones transversales:%1$s.\n¿Renombrar toma?</string>
-    <string name="shots_rename_unsafe">Estaciones a las que hacen referencia las secciones transversales:\n%1$s.\n¿Renombrar tomas?</string>
+    <string name="shot_rename_unsafe">Estación de referencia de sección transversal:%1$s.\n¿Renombrar toma?</string>
+    <string name="shots_rename_unsafe">Estaciones de referencia de secciones transversales:\n%1$s.\n¿Renombrar tomas?</string>
     <string name="shot_check">¿Marcar como una toma?</string>
     <string name="shot_from">Toma desde</string>
     <string name="shot_info">Introducir datos Toma</string>
@@ -2041,7 +2041,6 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="info_length_value">%1$.1f m</string>
     <string name="info_surface_value">%1$.1f m</string>
     <string name="info_depth_value">%1$.1f m</string>
-    <!-- UNUSED string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
     <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
     <string name="info_east_value">W %1$.1f E %2$.1f</string>
     <string name="info_north_value">S %1$.1f N %2$.1f</string>
