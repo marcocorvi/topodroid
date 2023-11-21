@@ -1,31 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+	
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs/2.7-es-UserManual.pdf</string -->
     <string name="no_manual">No se puede recuperar el manual de usuario de la web</string>
     <string name="user_man_ok">Instalado traducción manual de usuario</string>
     <string name="user_man_fail">Error al instalar la traducción del manual del usuario</string>
+	
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->
+	
     <!-- DONT TRANSLATE string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string -->
     <!-- UNUSED string name="desc_user_man">Manual usuario</string -->
     <!-- UNUSED string name="desc_points">Puntos</string -->
-    <!-- UNUSED string name="desc_lines">Lineas</string -->
+	
+    <!-- UNUSED string name="desc_user_man">User manual</string -->
+    <!-- UNUSED string name="desc_points">Points</string -->
+    <!-- UNUSED string name="desc_lines">Lines</string -->
     <!-- UNUSED string name="desc_areas">Areas</string -->
     <string name="desc_menu">Menu</string>
+	
    <string name="r_title">Android-13+: Aviso importante</string>
-   <string name="r_dialog">Con Android-13, TopoDroid debe almacenar las mediciones en una carpeta de aplicaciones en "Android/data". Tenga en cuenta que esta carpeta se eliminará si desinstala la aplicación. Para confirmar digitar\n "%1$s"\n en el campo y a continuación presione el botón.</string>
+   <!-- UNUSED string name="r_dialog_1">
+  On Android-11+ storage access must be granted to TopoDroid.\nYou can do this with the PC program "adb".\nOn Android: enable developer settings and usb-debug.\nConnect Android to the PC with a USB cable.\nOn the PC type "adb shell appops set com.topodroid.TDX MANAGE_EXTERNAL_STORAGE allow".
+   </string -->
+   <string name="r_dialog">
+   Con Android-13, TopoDroid debe almacenar las mediciones en una carpeta de aplicaciones en "Android/data". Tenga en cuenta que esta carpeta se eliminará si desinstala la aplicación. Para confirmar digitar\n "%1$s"\n en el campo y a continuación presione el botón.
+   </string>
    <!-- UNUSED string name="r_checkboxes">Debes confirmar a través de las casillas de verificación.</string -->
    <!-- UNUSED string name="r_disclaimer">Reconozco que los autores de la aplicación no son responsables de ningún daño o pérdida de datos.</string -->
    <string name="r_continue">CONTINUAR</string>
    <string name="r_quit">SALIR</string>
-	
+
     <!-- NO TRANSLATION string name="app_name">TopoDroid</string -->
     <string name="tdm_title">TopoDroid Manager</string>
     <string name="tdm_config_project">proyecto.tdconfig</string>
     <string name="double_back">Para salir presione ATRAS nuevamente</string>
     <string name="new_survey_label">Nueva topografía</string>
+
     <!-- OK string name="distox_label">DistoX</string -->
     <!-- OK string name="cave3d_label">Cave3D</string -->
+
     <!-- UNUSED string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string -->
     <string name="symbols_ask">¿Quiere instalar simbologías para el croquis v.%1$s?\n(Actualiza v.%2$s)</string>
     <!-- UNUSED string name="version_check">Ultima versión</string -->
@@ -38,6 +53,7 @@
     <string name="setup_drawingunit_title">Configuración de TopoDroid. Tamaño de los iconos</string>
     <string name="setup_done_title">Configuración de TopoDroid. Hecho</string>
     <string name="setup_buttonsample">Tamaño del botón</string>
+	
     <string name="setup_textsize">Establezca el tamaño del texto. \nPuede cambiarlo más tarde a través de la configuración de la ventana principal.</string>
     <string name="setup_buttonsize">Establezca el tamaño del botón. \nPuede cambiarlo más tarde a través de la configuración de la ventana principal.</string>
     <string name="setup_drawingunit">Establezca el tamaño del icono de boceto. \nPuede cambiarlo más tarde a través de la configuración de la ventana de croquis.</string>
@@ -55,14 +71,17 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="xsplay">Xsplay</string>
     <string name="hsplay">Hsplay</string>
     <string name="vsplay">Vsplay</string>
+	
     <string name="cut">Cortar</string>
     <string name="copy">Copiar</string>
     <string name="paste">Pegar</string>
     <string name="copied">Copiado %1$s al portapapeles</string>
+	
     <string name="memoryA3">DistoX A3</string>
     <string name="memoryX310">DistoX X310</string>
     <string name="memoryXBLE">DistoX-BLE</string>
     <!-- UNUSED string name="memory_data">Datos DistoX</string -->
+	
     <string name="thp_user">Usuario</string>
     <string name="thp_label">Texto</string>
     <string name="thp_section">sección</string>
@@ -483,12 +502,10 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="popup_delete">Cancelar</string>
     <string name="popup_decimate">Diezmar</string>
     <string name="popup_join">Unirse</string>
-
     <string name="popup_erase_all">Borrar Todo</string>
     <string name="popup_erase_point">Borrar puntos</string>
     <string name="popup_erase_line">Borrar líneas</string>
     <string name="popup_erase_area">Borrar áreas</string>
-
     <string name="popup_select_all">Seleccionar todo</string>
     <string name="popup_select_point">Seleccionar puntos</string>
     <string name="popup_select_line">Seleccionar líneas</string>
@@ -496,18 +513,18 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="popup_select_shot">Seleccionar tomas</string>
     <string name="popup_select_station">Seleccionar estación</string>
 
-    <!-- UNUSED string name="popup_cont_none">Nada</string-->
-    <!-- UNUSED string name="popup_cont_start">Inicio de punto</string-->
-    <!-- UNUSED string name="popup_cont_end">final de punto</string-->
-    <!-- UNUSED string name="popup_cont_both">Ambos puntos</string-->
-    <!-- UNUSED string name="popup_cont_continue">Continuar</string-->
+     <!-- UNUSED string name="popup_cont_none">None</string -->
+    <!-- UNUSED string name="popup_cont_start">Start point</string -->
+    <!-- UNUSED string name="popup_cont_end">End point</string -->
+    <!-- UNUSED string name="popup_cont_both">Both points</string -->
+    <!-- UNUSED string name="popup_cont_continue" copyable="fr">Continue</string -->
 
-    <!-- UNUSED string name="connection_error">Error DE conexión</string-->
-    <!-- UNUSED string name="connecting">Conectando &#8230;</string-->
-    <!-- UNUSED string name="connected_none">No conctado</string -->
-    <!-- UNUSED string name="connected_already">Ya esta conectado</string -->
+    <!-- UNUSED string name="connection_error">Connection error</string -->
+    <!-- UNUSED string name="connecting">Connecting &#8230;</string -->
+    <!-- UNUSED string name="connected_none">Not connected</string -->
+    <!-- UNUSED string name="connected_already">Already connected</string -->
 
-    <!-- UNUSED string name="not_available">BT No disponible</string-->
+    <!-- UNUSED string name="not_available">BT not available</string -->
     <string name="not_enabled">BT No habilitado</string>
 
     <!-- UNUSED string name="not_implemented">No implantado</string -->
@@ -689,7 +706,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="stat_leg_sigma">Toma sigma %1$.1f cm</string>
     <string name="stat_dangling">Tomas colgadas %1$d %2$.1f %3$s</string>
     <!-- UNUSED string name="stat_surface">mediciones Superficie %1$d # %2$d %3$.1f %4$s</string -->
-    <string name="stat_survey_z">Rilievo: Z %1$.1f %2$.1f %3$s</string>
+    <string name="stat_survey_z">Desnivel de la cueva: Z %1$.1f %2$.1f %3$s</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]"</string>
     <string name="stat_angle_error">Error de ángulo %1$.2f ± %2$.2f"</string>
     <string name="shot_title">Toma %1$s - %2$s"</string>
@@ -811,8 +828,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_station"   >Centro at</string>
     <string name="button_store"     >Recibir   </string>
     <string name="button_swap"      >Cambiar      </string>
-    <!-- UNUSED string name="button_start"     >Inicio</string -->
-    <!-- UNUSED string name="button_stop"      >Stop</string -->
+    <string name="button_start"     >Inicio</string>
+    <string name="button_stop"      >Stop</string>
     <string name="button_upload"    >Cargar    </string>
     <string name="button_download"  >Descarga</string>
     <string name="button_view"      >Ver       </string>
@@ -821,7 +838,6 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="button_portrait"  >Retrato  </string -->
     <string name="button_splays">Tomas</string>
     <string name="button_wait">Espere</string>
-
 
     <string name="button_write"     >Enviar calibración a distoX</string>
     <string name="button_xsection"  >Secciones transversales</string>
@@ -837,6 +853,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="mode_fixed">Desplazar objetos</string>
     <string name="mode_outline">Solo poligonal</string>
     <string name="mode_scale_ref">Barra de referencia de escala</string>
+    <string name="mode_sections">Secciones</string>
     <string name="mode_walls">Paredes</string>
     <string name="mode_refs">Referencia</string>
 
@@ -847,7 +864,6 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="layer_form">Formas</string -->
     <!-- UNUSED string name="layer_water">Agua</string -->
     <!-- UNUSED string name="layer_text">Texto</string -->
-
 
     <!-- UNUSED string name="remote_title">Control remoto del dispositivo</string -->
     <string name="remote_on">Láser ON</string>
@@ -950,7 +966,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="man_overview">12. Pantalla de descripción general </string>
     <string name="man_export">13.  Importar / exportar </string>
     <string name="man_project">14. Topografias de cuevas</string>
-    <string name="man_threed">15. Visor Cave3D </string>
+    <string name="man_threed">15. Vista 3D </string>
     <string name="man_content">16. Índice</string>
     <string name="man_index">17. Índice analítico</string>
     <string name="man_website">* Sitio web </string>
@@ -962,15 +978,15 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_measure_undo">Suelta el último punto de polilínea</string>
     
     <string name="help_audio">Lista de grabaciones de audio</string>
-    <!-- UNUSED string name="help_backups">Eliminar copia de seguridad de croquis</string-->
+    <!-- UNUSED string name="help_backups">Delete sketch backups</string-->
     <string name="help_calib_check">Calibración: compruebe las tomas</string>
     <string name="help_close">Cerrar ventana</string>
     <string name="help_close_app">Cerrar la app</string>
     <string name="help_coeff">Mostrar coeficientes de calibración</string>
     <string name="help_color">Colores claros</string>
     <string name="help_join">Unir líneas</string>
-    <!-- UNUSED string name="help_continue">Continuare il disegno di una linea</string -->
-    <!-- NO string name="help_contour">Editar Contorno</string -->
+    <!-- UNUSED string name="help_continue">Continuar el dibujo de una línea</string -->
+    <!-- UNUSED string name="help_contour">Editar Contorno</string -->
     <string name="help_current_station">Última estación guardada</string>
     <string name="help_azimuth">Asistente referencia del rumbo</string>
     <string name="help_refresh">Actualizar pantalla</string>
@@ -1104,10 +1120,11 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="export_prefix">Prefijo de cueva en nombres de destino</string>
     <string name="export_prefix_hint">prefijo</string>
     <string name="export_suffix_hint">sufijo</string>
-    <string name="export_roundtrip">Ida y vuelta </string>
+    <string name="export_roundtrip">Ida y vuelta </string
+    <string name="export_share">Share</string>
     <!-- UNUSED string name="export_scale_png">Resolución </string -->
     <string name="export_scale_th">Escala 1:</string>
-    <!-- TODO string name="export_spacing_th">Point spacing</string -->
+    <string name="export_spacing_th">Espaciado de puntos</string>
     <string name="export_splays">Tomas</string>
     <string name="export_splays_named">Mostrar con nombre</string>
     <string name="export_stations">Estaciones</string>
@@ -1312,6 +1329,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_cat_cave3d">VISOR 3D</string>
   <string name="pref_cat_geek">Ajustes para principiantes</string>
   <string name="pref_cat_sketch">ESQUIZO 3D</string>
+	    
   <!-- UNUSED string name="pref_cat_log">Ajustes de dibujo</string -->
 
   <string name="pref_locale_title">Idioma</string>
@@ -1335,7 +1353,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <!-- UNUSED string name="pref_cosurvey_summary">Activar/Desactivar topografías compartidas</string -->
   <string name="pref_import_datamode_title"> Formato de importación</string>
   <string name="pref_import_datamode_summary">Formato de datos de importación</string>
-
+	    
   <string name="pref_therion_config_title">Comandos de configuración de Therion</string>
   <string name="pref_therion_config_summary">Insertar comandos de configuración de Therion</string>
   <string name="pref_therion_maps_title">Mapa Therion primero</string>
@@ -1362,7 +1380,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_packet_logger_summary">Habilitar el registro de paquetes</string>
   <string name="pref_th2_edit_title">Edición de dibujo</string>
   <string name="pref_th2_edit_summary">Cargando y editando dibujos</string>
-
+	    
   <string name="pref_bezier_step_title">Espaciado de puntos</string>
   <string name="pref_bezier_step_summary">Distancia entre puntos en una línea de exportación [m]</string>
   <string name="pref_leg_shots_title">Repeticiones de una visual</string>
@@ -1377,7 +1395,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_station_prefix_summary">Prefijo estación de exportación cSurvey</string>
   <string name="pref_compass_splays_title">Muestra Compass</string>
   <string name="pref_compass_splays_summary">Exportar reproducciones en archivos de Compass</string>
-  <string name="pref_walls_splays_title">Muestra Walls</string>
+  <string name="pref_walls_splays_title">Muestra walls</string>
   <string name="pref_walls_splays_summary">Exportar reproducciones en archivos de walls</string>
   <string name="pref_vtopo_splays_title">Muestra VisualTopo</string>
   <string name="pref_vtopo_splays_summary">Exportar reproducciones en archivos de VisualTopo</string>
@@ -1439,7 +1457,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_csv_eol_summary">Grabar separación CSV</string>
   <string name="pref_gpx_single_track_title">GPX de tramo única</string>
   <string name="pref_gpx_single_track_summary">Topografía de proyectos en un solo track</string>
-	    
+  
   <string name="pref_sock_type_title">Emparejar</string>
   <string name="pref_sock_type_summary">Crear emparejamiento</string>
   <!-- UNUSED string name="pref_device_type_title">Tipo Disto</string -->
@@ -1456,8 +1474,10 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_wait_conn_summary">Retraso en espera de que los datos estén listos [ms]</string>
   <string name="pref_conn_mode_title">Modo Conexión</string>
   <string name="pref_conn_mode_summary">Modo conexión con DistoX</string>
+	    
   <!-- UNUSED string name="pref_auto_reconnect_title">Autoconectar</string -->
   <!-- UNUSED string name="pref_auto_reconnect_summary">Vuelva a conectar si se pierde la conexión</string -->
+  
   <string name="pref_second_distox_title">Topografía con 2 DistoX</string>
   <string name="pref_second_distox_summary">Detectar con 2 DistoX</string>
   <string name="pref_auto_pair_title">Emparejamiento automático</string>
@@ -1480,15 +1500,16 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_fine_location_summary">Tiempo de posicionamiento preciso [s]</string>
   <string name="pref_geoimport_app_title">App Geopunto</string>
   <string name="pref_geoimport_app_summary">App externa Geopunto/string>
+	  
   <!-- UNUSED string name="pref_gps_averaging_title">Promedio GPS</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Uso promedio GPS</string -->
+	  
   <string name="pref_bric_mode_title">Modo BRIC</string>
   <string name="pref_bric_mode_summary">Modo operativo BRIC</string>
   <string name="pref_bric_zero_length_title">Toma cero BRIC </string>
   <string name="pref_bric_zero_length_summary">Grabar toma BRIC de longitud cero</string>
   <string name="pref_sap5_bit16_bug_title">SAP5: anomalia bit-16</string>
   <string name="pref_sap5_bit16_bug_summary">SAP5: reparar anomalía bit-16</string>
-
   <string name="pref_plot_screen_title">Ajustes de pantalla de croquis</string>
   <string name="pref_tool_line_title">Ajustes de línea</string>
   <string name="pref_tool_point_title">Ajustes de Puntos</string>
@@ -1497,7 +1518,9 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_shot_data_title">Ajustes de visuales</string>
   <string name="pref_shot_units_title">Unidades de medida</string>
   <string name="pref_cwd_title">Directorio principal</string>
+	  
   <!-- UNUSED string name="pref_cwd_summary">Introducir el directorio principal TopoDroid</string -->
+	  
   <string name="pref_pt_color_map_title">PocketTopo color mapa</string>
   <string name="pref_pt_color_map_summary">Mapa de colores PocketTopo (Importación PocketTopo)</string>
   <string name="pref_text_size_title">Tamaño del texto</string>
@@ -1527,6 +1550,7 @@ debe ajustarlos a sus necesidades./n/n </string>
 
   <!-- UNUSED string name="pref_data_backup_title">Autoexportación de datos</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Exportación automática de datos (necesita formato predeterminado)</string -->
+  
   <string name="pref_editable_stations_title">Puntos de referencia editables </string>
   <string name="pref_editable_stations_summary">Puntos de referencia editables en la lista de datos</string>
   <string name="pref_zipped_symbols_title">Archivo de símbolos en formato ZIP</string>
@@ -1540,7 +1564,6 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_reduce_angle_title">Ángulo de enderezamiento</string>
   <string name="pref_reduce_angle_summary">Líneas de enderezamiento de ángulo de segmento mínimo</string>
 
-
   <string name="pref_survey_stations_title">Definición de estaciones y visuales</string>
   <string name="pref_survey_stations_summary">Estaciones topográficas automáticas</string>
   <string name="pref_accel_thr_title">Precisión Aceleración</string>
@@ -1551,7 +1574,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_dip_thr_summary">Precisión sobre mediciones magnética de la inclinación</string>
   <string name="pref_sibling_thr_title">Umbral de semejanza</string>
   <string name="pref_sibling_thr_summary">Umbral de semejanza entre tomas [&#37;]</string>
-
+	  
   <string name="pref_leg_title">Precisión de visual</string>
   <string name="pref_leg_summary">Precisión entre las mediciones de una visual</string>
   <string name="pref_max_shot_title">Longitud máxima de la toma</string>
@@ -1564,8 +1587,10 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_backshot_summary">Invertir puntos de destino en datos de backshot</string>
   <string name="pref_prev_next_title">Añadir botón Ant./Sig.</string>
   <string name="pref_prev_next_summary">Añade un botón Anterior/Sguiente en diálogo de toma</string>
+	  
   <!-- UNUSED string name="pref_mag_anomaly_title">Compensación magnética</string -->
   <!-- UNUSED string name="pref_mag_anomaly_summary">Compensar declinación magnética local</string -->
+	  
   <string name="pref_azimuth_manual_title">"extender" manual</string>
   <string name="pref_azimuth_manual_summary">Establecer "extender" las líneas manualmente</string>
 
@@ -1586,10 +1611,12 @@ debe ajustarlos a sus necesidades./n/n </string>
 
   <string name="pref_hthr_title">Tolerancia de las secciones Transversales</string>
   <string name="pref_hthr_summary">Tolerancia de las secciones transversales horizontales</string>
+	  
   <!-- UNUSED string name="pref_bitmap_scale_title">Escala PNG</string -->
   <!-- UNUSED string name="pref_bitmap_scale_summary">Tamaño de escala de exportación del dibujo PNG</string -->
   <!-- UNUSED string name="pref_bitmap_bgcolor_title">Color de Fondo PNG</string -->
   <!-- UNUSED string name="pref_bitmap_bgcolor_summary">Color de fondo de imagen PNG en dibujos</string -->
+	  
   <string name="pref_acad_version_title">Versión de DXF</string>
   <string name="pref_acad_version_summary">Versión de DXF</string>
   <string name="pref_acad_spline_title">Spline DXF</string>
@@ -1598,8 +1625,10 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_acad_layer_summary">Vista DXF por capas</string>
   <string name="pref_dxf_reference_title">Referencia DXF</string>
   <string name="pref_dxf_reference_summary">Los ejes X-Y son exportaciones de dibujos DXF</string>
+	  
   <!-- UNUSED string name="pref_dxf_scale_title">Escala de dibujo DXF</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Factor de escala del dibujo DXF</string -->
+	  
   <string name="pref_dxf_blocks_title">Puntos finales de exportación tomas laterales DXF </string>
   <string name="pref_dxf_blocks_summary">Puntos finales de exploración DXF</string>
   <string name="pref_shp_georef_title">Exportar dibujos georreferenciados</string>
@@ -1622,8 +1651,10 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_segment_message">Distancia Mínima entre dos puntos de una línea en el dibujo</string>
   <string name="pref_linestyle_title">Nº de puntos en línea</string>
   <string name="pref_linestyle_summary">Número de puntos en la línea dibujada</string>
+	  
   <!-- UNUSED string name="pref_linecontinue_title">Línea continua</string -->
   <!-- UNUSED string name="pref_linecontinue_summary">Línea predeterminada en modo continuo</string -->
+	  
   <string name="pref_lineacc_title">Precisión Bezier</string>
   <string name="pref_lineacc_summary">Precisión Bezier interpolación cúbica</string>
   <string name="pref_linecorner_title">Esquina Bezier</string>
@@ -1680,8 +1711,10 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_stylus_size_summary">Tamaño del lápiz óptico [0: ignorar]</string>
   <string name="pref_fixed_thickness_title">Grosor de la línea topografía</string>
   <string name="pref_fixed_thickness_summary">Grosor de la línea topografía</string>
+	  
   <!-- UNUSED string name="pref_device_title">Dispositivo</string -->
   <!-- UNUSED string name="pref_device_summary">Nombre dirección DistoX</string -->
+
   <string name="pref_checkBT_title">Bluetooth</string>
   <string name="pref_checkBT_summary">Bluetooth encendido/apagado </string>
   <string name="pref_checkAttached_title">Verificar poligonal</string>
@@ -1694,10 +1727,12 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_backup_number_summary">Número de copias de seguridad de los archivos de dibujo</string>
   <string name="pref_backup_interval_title">Intervalo de copia de seguridad</string>
   <string name="pref_backup_interval_summary">Intervalo mínimo entre dos copias de seguridad [s]</string>
+	  
   <!-- UNUSED string name="pref_backups_clear_title">Eliminar copias de seguridad</string -->
   <!-- UNUSED string name="pref_backups_clear_summary">Habilitar copias de seguridad de croquis borrar menú</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">Áreas Xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Guardar áreas a xtherion</string -->
+	  
   <string name="pref_therion_splays_title">Radiales therion</string>
   <string name="pref_therion_splays_summary">Añadir líneas en la pantalla de archivo Th2</string>
   <string name="pref_th2_scale_title">Escala Therion</string>
@@ -1718,8 +1753,10 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_loopClosure_summary">Error en cierre de bucle</string>
   <string name="pref_loop_thr_title">Umbral de bucle</string>
   <string name="pref_loop_thr_summary">Umbral de compensación de bucle</string>
+	  
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Estimate splay extend</string -->
+	  
   <string name="pref_swapLR_title">Cambiar LR en Compass</string>
   <string name="pref_swapLR_summary">Cambiar LR en Compass al exportar</string>
   <string name="pref_LRExtend_title">Ampliación izq./drch. estimada</string>
@@ -1727,11 +1764,15 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_diving_mode_title">Modo de buceo</string>
   <string name="pref_diving_mode_summary">Habilitar el modo de buceo</string>
   <string name="pref_splay_classes_title">clases de tomas secundarias</string>
-  <string name="pref_splay_classes_summary">Habilitar clases y colores de tomas secundarias</string>
-  <!-- UNUSED string name="pref_splay_as_dot_title">Finale di splay</string -->
-  <!-- UNUSED string name="pref_splay_as_dot_summary">Mostra splay come finali</string -->
+  <string name="pref_splay_classes_summary">Habilitar clases y colores de tomas secundarias</string>  
   <string name="pref_splay_color_title">Colores de tomas secundarias</string>
-  <string name="pref_splay_color_summary">Habilitar colores de tomas secundarias</string>
+  <string name="pref_splay_color_summary">Habilitar colores de tomas secundarias</string
+									  
+  <!-- UNUSED string name="pref_splay_as_dot_title">Splay endpoint</string -->
+  <!-- UNUSED string name="pref_splay_as_dot_summary">Display splays as endpoints</string -->
+  <!-- UNUSED string name="pref_splay_active_title">Splay at active station</string -->
+  <!-- UNUSED string name="pref_splay_active_summary">Enable splay at the active station</string -->
+	  
   <string name="pref_plot_shift_title">Cambio de croquis / escala</string>
   <string name="pref_plot_shift_summary">Habilitar cambio de croquis y escala</string>
   <string name="pref_splay_alpha_title">Transparencia de tomas secundarias</string>
@@ -1743,6 +1784,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <!-- UNUSED string name="pref_triple_toolbar_summary">Triple drawing tools bar</string -->
   <!-- UNUSED string name="pref_section_stations_title">X-Sección estaciones</string -->
   <!-- UNUSED string name="pref_section_stations_summary">X-Estaciones de la sección de referencia</string -->
+  
   <string name="pref_station_size_title">Tamaño de la etiqueta de la estación</string>
   <string name="pref_station_size_summary">Tamaño de la etiqueta de la estación</string>
   <string name="pref_zoom_controls_title">Visualizar botón del Zoom</string>
@@ -1753,8 +1795,10 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_unit_grid_summary">Tamaño de celda de la cuadrícula del dibujo</string>
   <string name="pref_unit_measure_title">Unidad de distancia</string>
   <string name="pref_unit_measure_summary">Unidad de distancia</string>
+	  
   <!-- UNUSED string name="pref_recent_nr_title">Herramientas utilizadas recientemente</string -->
   <!-- UNUSED string name="pref_recent_nr_summary">Número de herramientas más recientes seleccionadas</string -->
+  
   <string name="pref_area_border_title">Visibilidad borde área</string> 
   <string name="pref_area_border_summary">Visibilidad predeterminada en el borde de área</string>
   <string name="pref_auto_section_pt_title">Punto de sección</string>
@@ -1791,6 +1835,11 @@ debe ajustarlos a sus necesidades./n/n </string>
   <!-- NO string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string -->
   <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
+
+  <string name="pref_3d_sketch_title">3D modeling</string>
+  <string name="pref_3d_sketch_summary">Enable 3D modeling (debug build only)</string>
+  <string name="pref_sketch_splay_buffer_title">Splay buffer</string>
+  <string name="pref_sketch_splay_buffer_summary">Section splay buffer [m]</string>
 	  
 <!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Log output stream</string>
@@ -1974,7 +2023,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="info_shot">toma</string>
     <string name="info_station">Estación</string>
     <string name="info_length">Longitud</string>
-    <string name="info_surface">Longitud de los topes de superficie</string>
+    <string name="info_surface">Longitud de est. superficie</string>
     <string name="info_depth">Profundidad</string>
     <string name="info_volume">Volumen</string>
 
@@ -2123,14 +2172,18 @@ debe ajustarlos a sus necesidades./n/n </string>
 
     <!-- UNUSED string name="no_planview">No plan view</string -->
     <!-- UNUSED string name="no_surface">No surface DEM</string -->
+	  
     <string name="no_model">Sin modelo 3D</string>
     <string name="no_topodroid_model">Modelo no TopoDroid</string>
 
     <!-- UNUSED string name="error_file_not_found">Errore: Archivo %1$s no encontrado</string -->
     <!-- UNUSED string name="error_file_not_readable">Error: archivo %1$s no legible</string -->
+	  
     <string name="error_file_read">Error: No se pudo leer el archivo %1$s</string>
     <string name="error_survey_read">Error: no se pudo leer la topografía %1$s</string>
+	  
     <!-- UNUSED string name="error_io_exception">Error: error de I/O %1$s</string -->
+	  
     <string name="error_parser_error">Error: error de lectura %1$s</string>
     <string name="error_export_failed">Error: exportación fallida %1$s</string>
     <string name="unsupported_format">Formato de archivo no admitido</string>
@@ -2146,10 +2199,12 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="warning_not_stl">Advertencia: No hay archivo stl %1$s</string -->
     <!-- UNUSED tring name="warning_no_cwd">Advertencia: la carpeta base no existe</string -->
     <!-- UNUSED string name="warning_no_parent">Advertencia: no es posible subir una carpeta</string -->
+	  
     <string name="warning_nogrant_camera">No se ha concedido el permiso de la cámara</string>
     <string name="no_permissions">La aplicación no puede ejecutarse sin los permisos requeridos</string>
 
     <!-- UNUSED string name="done_fractals">Tamaño de fractal calculado</string -->
+	  
     <string name="done_convexhull">Sobre convexo calculado</string>
     <string name="fail_convexhull">Cálculo de envolvente convexa falló</string>
     <string name="done_powercrust">Powercrust calculado </string>
@@ -2163,19 +2218,23 @@ debe ajustarlos a sus necesidades./n/n </string>
 
     <string name="no_database">Base de datos no encontrada\n</string>
     <string name="cno_survey">topografía %1$s no encontrada\n</string>
+	  
     <!-- UNUSED string name="cno_file">Archivo %1$s no encontrado\n</string -->
+	  
     <string name="empty_survey">Topografia %1$s vacia\n</string>
 
     <string name="viewing_at">Punto de vista hacia clino %1$.0f azimut %2$.0f</string>
 
     <string name="cpref_dem3d">DEM</string>
-    <string name="cpref_walls3d">MODELO DE PAREDES</string>
+    <string name="cpref_walls3d">MODELO DE PAREDES</string
+							  
     <!-- UNUSED string name="cpref_base_path_title">Directorio de la base de datos</string -->
     <!-- UNUSED string name="cpref_base_path_summary">Directorio que contiene los archivos de Therion.</string -->
     <!-- UNUSED string name="cpref_text_size_title">Tamaño Texto</string -->
     <!-- UNUSED string name="cpref_text_size_summary">Tamaño de la etiqueta estación</string -->
     <!-- UNUSED string name="cpref_size_buttons_title">Tamaño botones</string -->
     <!-- UNUSED string name="cpref_size_buttons_summary">Tamaño botones</string -->
+	  
     <string name="cpref_selection_radius_title">Selección radio</string>
     <string name="cpref_selection_radius_summary">Selección radio</string>
 
