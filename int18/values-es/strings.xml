@@ -144,6 +144,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="calib_reset">¿Quiere restablecer la calibración DistoX?</string>
     <string name="calib_min_error">Mínimo error</string>
     <string name="magn_dip">Dip Magnetica: &#8230;</string>
+    <string name="auto_calib">Auto Calibración</string>
+    <string name="autocalib_not_supported">Cálculo de calibración requerido</string>
 
     <string name="algorithm">Algoritmo:</string>
     <string name="auto">Auto</string>
@@ -283,6 +285,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="error_begin_required">Introducir dirección de inicio</string>
     <string name="error_declination_number">La declinación debe ser un número</string>
     <string name="error_end_required">Introducir dirección final</string>
+    <string name="error_fixes_nocs">Fijar puntos sin CS %1$s:\n%2$s</string>
     <string name="error_from_required">Introducir primera estación</string>
     <string name="error_group_required">Se requiere un número de grupo</string>
     <string name="error_group_non_integer">El grupo debe ser el número entero</string>
@@ -430,7 +433,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="menu_manual_calibration">Calibración</string>
     <string name="menu_options">Ajustes</string>
     <string name="menu_overview">Pantalla Medidas</string>
-    <string name="menu_packets">Paquetes</string>
+    <string name="menu_packets">Paquetes</string
+    <string name="menu_calib_auto">AUTO-CALIB</string>
     <!-- UNUSED string name="menu_pair">Emparejar</string-->
     <string name="menu_palette">Simbología</string>
     <string name="menu_photo">Tomas con foto</string>
