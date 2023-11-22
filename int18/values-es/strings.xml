@@ -36,8 +36,8 @@
     <string name="tdm_title">TopoDroid Manager</string>
     <string name="tdm_config_project">proyecto.tdconfig</string>
     <string name="double_back">Para salir presione ATRAS nuevamente</string>
-    <string name="new_survey_label">Nueva topografía</string>
 
+    <string name="new_survey_label">Nueva topografía</string>
     <!-- OK string name="distox_label">DistoX</string -->
     <!-- OK string name="cave3d_label">Cave3D</string -->
 
@@ -2086,7 +2086,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="surface_north">Norte</string>
     <!-- NO string name="dem_file">DEM %1$s</string -->
     <string name="dem_load">cargar DEM</string>
-    <string name="dem_loading">Superficie de carga...por favor espera</string>
+    <string name="dem_loading">Superficie de carga, por favor espera</string>
 
     <string name="dem_failed">ERROR: DEM cargando</string>
     <string name="dem_ok">Lectura DEM</string>
@@ -2175,7 +2175,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="no_surface">No surface DEM</string -->
 	  
     <string name="no_model">Sin modelo 3D</string>
-    <string name="no_topodroid_model">Modelo no TopoDroid</string>
+    <!-- UNUSED string name="no_topodroid_model">Not a TopoDroid model</string -->
 
     <!-- UNUSED string name="error_file_not_found">Errore: Archivo %1$s no encontrado</string -->
     <!-- UNUSED string name="error_file_not_readable">Error: archivo %1$s no legible</string -->
