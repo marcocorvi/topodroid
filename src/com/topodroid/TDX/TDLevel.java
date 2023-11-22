@@ -39,7 +39,7 @@ public class TDLevel
   public static boolean overAdvanced = false;
   public static boolean overExpert   = false;
   public static boolean overTester   = false;
-  private static boolean test_debug = true;
+  private static boolean test_debug = false; // true;
   private static boolean debug = false;
 
   /** set the activity level
