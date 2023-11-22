@@ -58,15 +58,13 @@
      <item name="tf">piés</item>
   </string-array>
 
-  <!-- TODO
   <string-array name="loopClosure">
      <item name="none">Nada</item>
      <item name="normal">Normal</item>
      <item name="weighted">ponderado</item>
-     <item name="selective">Selective</item>
+     <item name="selective">Selectivo</item>
      <item name="triangles">Triángulos</item>
   </string-array>
-  -->
 
   <!-- UNUSED string-array name="wallsType">
      <item name="none">Nada</item>

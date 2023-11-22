@@ -979,7 +979,7 @@
     <string name="help_close_app">Chiude l\'app</string>
     <string name="help_coeff">Coefficienti della calibrazione</string>
     <string name="help_color">Pulisci i colori degli splay</string>
-    <!-- TODO string name="help_join">Join lines</string -->
+    <string name="help_join">Unione linee</string>
     <!-- UNUSED string name="help_continue">Continuare il disegno di una linea</string -->
     <!-- NO string name="help_contour">Contour editing</string -->
     <string name="help_current_station">Capisaldi salvati</string>
@@ -1153,7 +1153,7 @@
     <string name="import_lrud">Importa LRUD</string>
     <string name="import_leg_first">Battuta prima degli LRUD</string>
     <string name="import_diving_datamode">Modo dati da immersione</string>
-    <!-- TODO string name="import_therion_path">With survey path</string -->
+    <string name="import_therion_path">Con percorso del rilievo</string>
 
     <string name="title_azimut">Riferimento Extend</string>
     <string name="title_audio">Commento audio</string>
@@ -1230,7 +1230,7 @@
     <!-- UNUSED string name="title_settings_png">PNG: Imposta export</string -->
     <string name="title_settings_gpx">GPX: impostazioni export</string>
     <string name="title_settings_kml">KML: Imposta export</string>
-    <!-- TODO string name="title_settings_srv">Walls export settings</string -->
+    <string name="title_settings_srv">Export impostazioni Walls</string>
 
     <string name="title_settings_sketch">Impostazione disegno 3D</string>
     <string name="title_settings_survey">Impostazione rilievo</string>
@@ -1391,8 +1391,8 @@
   <string name="pref_station_prefix_summary">Esporta caposaldi con prefisso [Compass]</string>
   <string name="pref_compass_splays_title">Splay Compass</string>
   <string name="pref_compass_splays_summary">Esporta splay in file Compass</string>
-  <!-- TODO string name="pref_walls_splays_title">Walls splays</string -->
-  <!-- TODO string name="pref_walls_splays_summary">Export splays in Walls files</string -->
+  <string name="pref_walls_splays_title">Splay di Walls</string>
+  <string name="pref_walls_splays_summary">Export splay nel file Walls</string>
   <string name="pref_vtopo_splays_title">Splay VisualTopo</string>
   <string name="pref_vtopo_splays_summary">Esporta splay in VisualTopo</string>
   <string name="pref_vtopo_lrud_title">LRUD al DA</string>
@@ -1686,8 +1686,8 @@
   <string name="pref_path_multiselect_summary">Azione di selezione multipla</string>
   <string name="pref_composite_actions_title">Azioni composite</string>
   <string name="pref_composite_actions_summary">Azioni long-tap linea/area</string>
-  <!-- TODO string name="pref_with_continue_line_title">Line join</string -->
-  <!-- TODO string name="pref_with_continue_line_summary">Enable line join</string -->
+  <string name="pref_with_continue_line_title">Unisci linea</string>
+  <string name="pref_with_continue_line_summary">Abilita unione linea</string>
   <string name="pref_plane_interpolation_title">Interpolazione piana</string>
   <string name="pref_plane_interpolation_summary">Azione di interpolazione piana</string>
   <string name="pref_plot_split_title">Divisione/Unione disegno</string>
