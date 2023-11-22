@@ -210,9 +210,9 @@ public class TDPrefActivity extends Activity
       case TDPrefCat.PREF_GEEK_SPLAY:         mPrefs = TDPref.makeGeekSplayPrefs( this, hlp ); break;
       case TDPrefCat.PREF_GEEK_PLOT:          mPrefs = TDPref.makeGeekPlotPrefs( this, hlp ); break;
       case TDPrefCat.PREF_GEEK_LINE:          mPrefs = TDPref.makeGeekLinePrefs( this, hlp ); break;
-      case TDPrefCat.PREF_GEEK_IMPORT:        mPrefs = TDPref.makeGeekImportPrefs( this, hlp ); break;
       case TDPrefCat.PREF_GEEK_DEVICE:        mPrefs = TDPref.makeGeekDevicePrefs( this, hlp ); break;
-      case TDPrefCat.PREF_CATEGORY_SKETCH:    mPrefs = TDPref.makeSketchPrefs(   this, hlp ); break; // FIXME_SKETCH_3D
+      case TDPrefCat.PREF_GEEK_IMPORT:        mPrefs = TDPref.makeGeekImportPrefs( this, hlp ); break;
+      case TDPrefCat.PREF_GEEK_SKETCH:        mPrefs = TDPref.makeSketchPrefs(   this, hlp ); break; // FIXME_SKETCH_3D
       // case TDPrefCat.PREF_CATEGORY_LOG:       mPrefs = TDPref.makeLogPrefs(      this, hlp ); break; // NO_LOGS
       default:                      mPrefs = TDPref.makeMainPrefs(     this, hlp ); break;
     }
@@ -303,6 +303,7 @@ public class TDPrefActivity extends Activity
       linkPreference( "DISTOX_DEM3D_PREF",          TDPrefCat.PREF_DEM3D );
       linkPreference( "DISTOX_WALLS3D_PREF",        TDPrefCat.PREF_WALLS3D );
     } else if (mPrefCategory == TDPrefCat.PREF_CATEGORY_GEEK ) {
+      // TDLog.v("PREF link GEEK sub-categories");
       linkPreference( "DISTOX_GEEK_SHOT",           TDPrefCat.PREF_GEEK_SHOT );
       linkPreference( "DISTOX_GEEK_SPLAY",          TDPrefCat.PREF_GEEK_SPLAY );
       linkPreference( "DISTOX_GEEK_PLOT",           TDPrefCat.PREF_GEEK_PLOT );
@@ -310,7 +311,7 @@ public class TDPrefActivity extends Activity
       // linkPreference( "DISTOX_PLOT_WALLS",          TDPrefCat.PREF_PLOT_WALLS ); // AUTOWALLS
       linkPreference( "DISTOX_GEEK_DEVICE",         TDPrefCat.PREF_GEEK_DEVICE );
       linkPreference( "DISTOX_GEEK_IMPORT",         TDPrefCat.PREF_GEEK_IMPORT );
-      linkPreference( "DISTOX_SKETCH_PREF",         TDPrefCat.PREF_CATEGORY_SKETCH ); // FIXME_SKETCH_3D
+      linkPreference( "DISTOX_SKETCH_PREF",         TDPrefCat.PREF_GEEK_SKETCH ); // FIXME_SKETCH_3D
     } else if (mPrefCategory == TDPrefCat.PREF_GEEK_PLOT ) {
       mGraphPaperScalePref = findPreference( "DISTOX_GRAPH_PAPER_SCALE" );
       if ( mGraphPaperScalePref != null ) {

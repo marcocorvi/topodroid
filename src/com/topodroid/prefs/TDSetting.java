@@ -1393,7 +1393,7 @@ public class TDSetting
       case TDPrefCat.PREF_CATEGORY_PLOT:   return updatePrefPlot( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_CALIB:  return updatePrefCalib( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_DEVICE: return updatePrefDevice( hlp, k, v );
-      // case TDPrefCat.PREF_CATEGORY_SKETCH: return updatePrefSketch( hlp, k, v ); // SKETCH_3D
+      // case TDPrefCat.PREF_CATEGORY_SKETCH: return updatePrefSketch( hlp, k, v ); // SKETCH_3D --> moved to GEEK SKETCH
       case TDPrefCat.PREF_CATEGORY_EXPORT: return updatePrefExport( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_IMPORT: return updatePrefImport( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_SVX:    return updatePrefSvx( hlp, k, v );
@@ -1428,6 +1428,7 @@ public class TDSetting
       case TDPrefCat.PREF_GEEK_LINE:       return updatePrefGeekLine( hlp, k, v );
       case TDPrefCat.PREF_GEEK_IMPORT:     return updatePrefGeekImport( hlp, k, v );
       case TDPrefCat.PREF_GEEK_DEVICE:     return updatePrefGeekDevice( hlp, k, v );
+      case TDPrefCat.PREF_GEEK_SKETCH:     return updatePrefSketch( hlp, k, v );
       // case TDPrefCat.PREF_CATEGORY_LOG:    return updatePrefLog( hlp, k, v ); // NO_LOGS
       default:
         TDLog.Error("Cave3XPref. unhandled setting, cat " + cat + " key " + k + " val <" + v + ">" );
@@ -2724,8 +2725,10 @@ public class TDSetting
     String[] def = TDPrefKey.SKETCHdef;
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_3D_SKETCH
       m3Dsketch = tryBooleanValue( hlp, k, v, bool(def[0]) );
+      TDLog.Error("3D sketch: " + m3Dsketch );
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SKETCH_SPLAY_BUFFER
       mSplayBuffer = tryFloatValue( hlp, k, v, def[1] );
+      TDLog.Error("3D sketch buffer: " + mSplayBuffer );
     } else {
       TDLog.Error("missing SKETCH key: " + k );
     }

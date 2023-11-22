@@ -60,7 +60,8 @@ public class GlNames extends GlShape
   { 
     stationMode = (stationMode + 1)%STATION_MAX; 
     if ( stationMode == STATION_LEG ) {
-      if ( ! ( TDLevel.overTester && TDSetting.m3Dsketch ) ) stationMode = (stationMode + 1)%STATION_MAX;
+      if ( ! ( TDLevel.overTester && TDSetting.m3Dsketch ) ) { stationMode = (stationMode + 1)%STATION_MAX; }
+      else { TDLog.v("Station LEG"); }
     }
     if ( GlModel.mStationPoints && ((stationMode % 2) == 1) ) stationMode = (stationMode + 1)%STATION_MAX; 
     // if ( ! hasNames() ) stationMode = STATION_NONE;

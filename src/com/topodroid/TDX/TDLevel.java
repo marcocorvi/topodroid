@@ -60,7 +60,7 @@ public class TDLevel
         TDLog.Error( e.getMessage() );
       }
       test_debug = false;
-      // TDLog.v("DEBUG " + debug );
+      TDLog.v("DEBUG: " + debug );
     }
     overBasic    = mLevel > BASIC;
     overNormal   = mLevel > NORMAL;
@@ -71,7 +71,8 @@ public class TDLevel
     if ( overExpert && debug ) {
       overTester = true;
       TglParser.setWallMax();
-      // mLevel = DEBUG; // this causes all DEBUG settings
+      mLevel = DEBUG; // N.B. this causes all DEBUG settings FIXME_FIXME
+      TDLog.v("LEVEL: over tester");
     }
   }
 }

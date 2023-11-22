@@ -125,6 +125,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    */
   View getView( Context context, LayoutInflater li, ViewGroup parent )
   {
+    // TDLog.v("PREF get view " + title );
     View v = null;
     Spinner spinner;
     CheckBox checkbox;
@@ -379,6 +380,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    */ 
   private static TDPref makeFwd( int cat, String nm, int tit, int lvl, Context ctx, TDPrefHelper hlp )
   { 
+    // TDLog.v("PREF make fwd: " + nm + " level " + lvl );
     return new TDPref( cat, nm, FORWARD, tit, -1, lvl, PREF, null, null, ctx, hlp );
   }
 
@@ -1591,7 +1593,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       // makeFwd( cat, key[7], tit[7],          T,          ctx, hlp ), // PLOT_WALLS AUTOWALLS
       makeFwd( cat, key[7], tit[7],          A,          ctx, hlp ), // GEEK_DEVICE
       makeFwd( cat, key[8], tit[8],          T,          ctx, hlp ), // GEEK_IMPORT
-      makeFwd( cat, key[8], tit[8],          D,          ctx, hlp )  // SKETCH // FIXME_SKETCH_3D
+      makeFwd( cat, key[9], tit[9],          D,          ctx, hlp )  // SKETCH // FIXME_SKETCH_3D FIXME_FIXME
     };
   }
 
@@ -1671,14 +1673,14 @@ public class TDPref implements AdapterView.OnItemSelectedListener
 
   public static TDPref[] makeSketchPrefs( Context ctx, TDPrefHelper hlp )
   {
-    int cat = TDPrefCat.PREF_CATEGORY_SKETCH;
+    int cat = TDPrefCat.PREF_GEEK_SKETCH;
     String[] key = TDPrefKey.SKETCH;
     int[] tit    = TDPrefKey.SKETCHtitle;
     int[] dsc    = TDPrefKey.SKETCHdesc;
     String[] def = TDPrefKey.SKETCHdef;
     return new TDPref[ ] {
-      makeEdt( cat, key[0], tit[0], dsc[0], D, def[0], FLOAT,   ctx, hlp ),
-      makeCbx( cat, key[1], tit[1], dsc[1], D, def[1],          ctx, hlp ), // DISTOX_3D_SKETCH
+      makeCbx( cat, key[0], tit[0], dsc[0], D, def[0],          ctx, hlp ), // DISTOX_3D_SKETCH
+      makeEdt( cat, key[1], tit[1], dsc[1], D, def[1], FLOAT,   ctx, hlp ),
     };
   }
 

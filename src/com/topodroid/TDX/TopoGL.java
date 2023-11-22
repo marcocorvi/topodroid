@@ -1121,6 +1121,7 @@ public class TopoGL extends Activity
    */
   private void setButtonStation()
   {
+    TDLog.v("GL set button station - select " + mSelectStation + " station " + GlNames.getStationMode() );
     if ( mSelectStation ) {
       switch ( GlNames.getStationMode() ) {
         case GlNames.STATION_NONE:

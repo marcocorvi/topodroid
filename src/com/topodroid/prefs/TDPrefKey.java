@@ -36,7 +36,7 @@ public class TDPrefKey
     "DISTOX_DEVICE_PREF",   // FORWARD
     "DISTOX_CAVE3D_PREF",   // FORWARD
     "DISTOX_GEEK_PREF",     // FORWARD
-    // "DISTOX_SKETCH_PREF",   // FORWARD
+    // "DISTOX_SKETCH_PREF",   // FORWARD moved to GEEK
     "DISTOX_EXPORT_SETTINGS", // 15
     null
   };
