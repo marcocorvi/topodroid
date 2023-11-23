@@ -1214,7 +1214,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_plot_scraps">topografías bloc de notas</string>
     <string name="title_profile_flip">¿Quiere cambiar al alzado del dibujo?</string>
     <string name="title_projection">Perfil de proyeccción de brújula %1$d</string>
-    <string name="title_projection_oblique">Proyeccion de brújula %1$d / %2$d</string>
+    <string name="title_projection_oblique">Proyección brújula %1$d / %2$d</string>
     <string name="title_reduction_errors">Anomalías de reducción de datos</string>
     <string name="title_refs">Referencias de dibujo</string>
     <string name="title_scraps">Dibujo</string>
