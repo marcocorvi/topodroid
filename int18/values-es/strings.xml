@@ -717,7 +717,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="survey_stat_duplicate">Mediciones duplicadas %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Tomas laterales %1$d</string>
     <string name="survey_stat_station">Estaciones %1$d</string>
-    <string name="survey_stat_surface">mediciones Superficie %1$d %2$.1f %3$s</string>
+    <string name="stat_surface">Tomas de superficie %1$d # %2$d %3$.1f %4$s</string>
 
     <string name="hide_blank">Visualizar tomas en blanco</string>
     <string name="hide_leg">Visualizar tomas repetidas</string>
