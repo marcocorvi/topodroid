@@ -38,8 +38,8 @@
     <string name="double_back">Para salir presione ATRAS nuevamente</string>
 
     <string name="new_survey_label">Nueva topografía</string>
-    <!-- OK string name="distox_label">DistoX</string -->
-    <!-- OK string name="cave3d_label">Cave3D</string -->
+    <!-- NO string name="distox_label">DistoX</string -->
+    <!-- NO string name="cave3d_label">Cave3D</string -->
 
     <!-- UNUSED string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string -->
     <string name="symbols_ask">¿Quiere instalar simbologías para el croquis v.%1$s?\n(Actualiza v.%2$s)</string>
