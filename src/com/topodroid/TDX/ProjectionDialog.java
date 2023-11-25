@@ -403,8 +403,9 @@ class ProjectionDialog extends MyDialog
     updateEditText();
 
     mSeekBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener() {
+      // progress ranges in [0, 400] see layoit/projection_dialog.xml
       public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
-        mAzimuth = (160 + progress)%360;
+        mAzimuth = (160 + progress)%360; // when progress = 200, azimuth = 0
         if ( progress < 10 ) {
           seekbar.setProgress( progress + 360 );
           setTheTitle();
@@ -425,17 +426,10 @@ class ProjectionDialog extends MyDialog
     if ( mWithOblique ) {
       mBtnReset.setOnClickListener( this );
       mProjBar.setOnSeekBarChangeListener( new OnSeekBarChangeListener() {
+        // progress ranges in [0, 400] see layoit/projection_dialog.xml
         public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
-          int max = TDSetting.mObliqueMax;
-          mOblique = (int)(((160 + progress)%360)*max/180.0f); // oblique angle between -60 and 60
-          if ( mOblique > max ) {
-            mOblique = 2*max - mOblique;
-          }
-          if ( progress < 10 ) {
-            seekbar.setProgress( progress + 360 );
-          } else if ( progress > 390 ) {
-            seekbar.setProgress( progress - 360 );
-          } 
+          int max = TDSetting.mObliqueMax; 
+          mOblique = (int)( progress/200.0f*max - max); // oblique angle between -max and +max (thx HB)
           computeReferences(); // this calls setTheTitle
           // TDLog.v( "set project: oblique " + mOblique + " azimuth " + mAzimuth );
         }

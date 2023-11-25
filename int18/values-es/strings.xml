@@ -717,7 +717,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="survey_stat_duplicate">Mediciones duplicadas %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Tomas laterales %1$d</string>
     <string name="survey_stat_station">Estaciones %1$d</string>
-    <string name="stat_surface">Tomas de superficie %1$d # %2$d %3$.1f %4$s</string>
+    <string name="survey_stat_surface">Tomas de superficie %1$d # %2$d %3$.1f %4$s</string>
 
     <string name="hide_blank">Visualizar tomas en blanco</string>
     <string name="hide_leg">Visualizar tomas repetidas</string>
@@ -1665,6 +1665,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_graph_paper_scale_summary">Corrección de escala de papel cuadriculado</string>
   <string name="pref_slant_xsection_title">Sección inclinada</string>
   <string name="pref_slant_xsection_summary">Secciones x inclinadas de vista de perfil</string>
+  <!-- TODO string name="pref_oblique_projection_title">Oblique projected</string -->
+  <!-- TODO string name="pref_oblique_projection_summary">Maximum oblique projected angle</string -->
   <string name="pref_weeddistance_title">Distancia del punto de desmalezado</string>
   <string name="pref_weeddistance_summary">Distancia máxima desde el segmento hasta los puntos de desmalezado [m]</string>
   <string name="pref_weedlength_title">Longitud del segmento de entramado puntual</string>

@@ -20,6 +20,10 @@ res/layout/dblock_row_noedit.xml:31: Warning: android:editable is deprecated: Us
 res/layout/dblock_row_noedit.xml:54: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
     android:editable="false"
     ~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-es/strings.xml:720: Error: Inconsistent formatting types for argument #2 in format string survey_stat_surface ('%2$d'): Found both 'd' here and 'f' in values/strings.xml [StringFormatMatches]
+    <string name="survey_stat_surface">Tomas de superficie %1$d # %2$d %3$.1f %4$s</string>
+                                                                  ~~~~
+    res/values/strings.xml:731: Conflicting argument type (`f') here
 res/values-fr/plurals.xml:3: Error: For locale "fr" (French) the following quantities should also be defined: many [MissingQuantity]
   <plurals name="calib_saturated_values">
   ^
@@ -65,9 +69,6 @@ res/values/strings.xml:465: Error: "menu_sections" is not translated in "fr" (Fr
 res/values/strings.xml:698: Error: "stat_dates" is not translated in "fr" (French) [MissingTranslation]
     <string name="stat_dates">From %1$s to %2$s</string>
             ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:719: Error: "stat_surface" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="stat_surface">Surface shots %1$d # %2$d %3$.1f %4$s</string>
-            ~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:721: Error: "stat_survey_z" is not translated in "fr" (French) [MissingTranslation]
     <string name="stat_survey_z">Cave denivelation %1$.1f %2$.1f %3$s</string>
             ~~~~~~~~~~~~~~~~~~~~
@@ -152,9 +153,6 @@ res/values/strings.xml:1211: Error: "title_fixed_gps_logger" is not translated i
 res/values/strings.xml:1212: Error: "title_fixed_gps_point" is not translated in "cn" or "fr" (French) [MissingTranslation]
     <string name="title_fixed_gps_point">Geo points [GPS Point]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1232: Error: "title_projection_oblique" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="title_projection_oblique">Projected azimuth %1$d / %2$d</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:1253: Error: "title_settings_gpx" is not translated in "fr" (French) [MissingTranslation]
     <string name="title_settings_gpx">GPX export settings</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -287,9 +285,6 @@ res/values-de/array.xml:41: Error: The array "lineContinue" in values-de has no 
 res/values-es/array.xml:41: Error: The array "lineContinue" in values-es has no declaration in the base values folder; this can lead to crashes when the resource is queried in a configuration that does not match this qualifier [ExtraTranslation]
   <string-array name="lineContinue">
                 ~~~~~~~~~~~~~~~~~~~
-res/values-es/strings.xml:2176: Error: "no_topodroid_model" is translated here but not found in default locale [ExtraTranslation]
-    <string name="no_topodroid_model">Modelo no TopoDroid</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values-fr/plurals.xml:4: Error: The quantity 'one' matches more than one specific number in this locale (0, 1), but the message did not include a formatting argument (such as %d). This is usually an internationalization error. See full issue explanation for more. [ImpliedQuantity]
     <item quantity="one">ATTENTION. Une donnée saturée</item>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -311,7 +306,11 @@ res/values/strings.xml:609: Warning: Inconsistent number of arguments in formatt
     <string name="shots_rename_unsafe">Stations referenced by xsections:\n%1$s.\nRename shots ?</string>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     res/values-fr/strings.xml:604: Conflicting number of arguments (0) here
-res/values-es/strings.xml:2044: Warning: Inconsistent number of arguments in formatting string info_volume_value; found both 2 here and 1 in values/strings.xml [StringFormatCount]
+res/values-es/strings.xml:720: Warning: Inconsistent number of arguments in formatting string survey_stat_surface; found both 4 here and 3 in values/strings.xml [StringFormatCount]
+    <string name="survey_stat_surface">Tomas de superficie %1$d # %2$d %3$.1f %4$s</string>
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    res/values/strings.xml:731: Conflicting number of arguments (3) here
+res/values-es/strings.xml:2046: Warning: Inconsistent number of arguments in formatting string info_volume_value; found both 2 here and 1 in values/strings.xml [StringFormatCount]
     <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     res/values/strings.xml:2062: Conflicting number of arguments (1) here
@@ -381,18 +380,12 @@ res/values/strings.xml:461: Warning: The resource R.string.menu_calib_auto appea
 res/values/strings.xml:2009: Warning: The resource R.string.cbtn_bind appears to be unused [UnusedResources]
     <string name="cbtn_bind">Rebind</string>
             ~~~~~~~~~~~~~~~~
-res/values-es/strings.xml:2176: Warning: The resource R.string.no_topodroid_model appears to be unused [UnusedResources]
-    <string name="no_topodroid_model">Modelo no TopoDroid</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:2310: Warning: The resource R.string.help_sketch_3d appears to be unused [UnusedResources]
     <string name="help_sketch_3d">3D sketch lifting</string>
             ~~~~~~~~~~~~~~~~~~~~~
 res/values-pt/strings.xml:1294: Warning: Replace "-" with an "en dash" character (–, &#8211;) ? [TypographyDashes]
   <string name="pref_compass_splays_summary">Exportar medidas auxiliares em arquivos Compass/Walls como "12 12-1" ou como "12 -".</string>
                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-es/strings.xml:2087: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
-    <string name="dem_loading">Superficie de carga...por favor espera</string>
-                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values-pt/strings.xml:802: Warning: Replace (c) with copyright symbol © (&#169;) ? [TypographyOther]
   <string name="layer_ceil">Cobertura (C)</string>
                             ~~~~~~~~~~~~~
@@ -427,4 +420,4 @@ res/layout/auto_calib_dialog.xml:61: Warning: Hardcoded string "AMz", should use
 res/layout/auto_calib_dialog.xml:68: Warning: Hardcoded string "nl", should use @string resource [HardcodedText]
         android:text="nl"
         ~~~~~~~~~~~~~~~~~
-81 errors, 61 warnings
+79 errors, 60 warnings
