@@ -38,13 +38,14 @@
      <item name="tab">tabular</item>
   </string-array>
 
-  <string-array name="lineContinue">
-     <item name="none">nada</item>
-     <item name="start">unir con punto de inicio</item>
-     <item name="end">unir con punto final</item>
-     <item name="both">unir con ambos extremos</item>
-     <item name="continue">continuar</item>
-  </string-array>
+  <!-- UNUSED string-array name="lineContinue">
+     <item name="none">none</item>
+     <item name="start">join with start point</item>
+     <item name="end">join with end point</item>
+     <item name="both">join with both ends</item>
+     <item name="continue">continue</item>
+  </string-array -->
+  
   <string-array name="unitGrid">
      <item name="meter">metros</item>
      <item name="yard">yarda</item>
