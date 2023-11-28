@@ -101,10 +101,7 @@ TopoDroid exports survey data to the following cave-program formats:
 <li><a href="#trobot">TopoRobot</a></li>
 <li><a href="#vtopo">VisualTopo</a></li>
 <li><a href="#walls">Walls</a></li>
-<li><a href="#winkarst">WinKarst</a></li>
 <li><a href="#ghtopo">GHTopo</a></li>
-<li><a href="#grottolf">Grottolf</a></li>
-<li><a href="#ptopo">PocketTopo</a></li>
 <li><a href="#polygon">Polygon</a></li>
 <li><a href="#topo">Topo</a></li>
 </ul>
@@ -114,9 +111,7 @@ Furthermore it exports survey data as
 <li><a href="#csv">CSV</a></li>
 <li><a href="#dxf">DXF</a></li>
 <li><a href="#kml">KML</a></li>
-<li><a href="#geojson">GeoJSON</a></li>
-<!-- li><a href="#plt">trackfile</a></li -->
-<li><a href="#gpx">GPS track</a></li>
+<li><a href="#gpx">GPX track</a></li>
 <li><a href="#shp">shapefile</a></li>
 </ul>
 If the survey is not georeferenced the survey data cannot be exported in the last four export formats.
@@ -126,6 +121,16 @@ Georeference points are exported with coordinates latitude-longitude [decimal de
 mean sea level [m].<br>
 H/V-splays are treated as normal splays in the exports.<br><p>
 
+
+The following export formats are no longer supported:
+<ul>
+<li><a href="">WinKarst</a></li>
+<li><a href="">Grottolf</a></li>
+<li><a href="">PocketTopo</a></li>
+<li><a href="">PLT file (OziExplorer)</a></li>
+<li><a href="">GeoJSON</a></li>
+</ul>
+<br><p>
 
 <b id="compass">Compass</b> (.dat)<br>
 <i>Compass</i> data file are supported both in import and in export.<br>
@@ -240,6 +245,7 @@ Settings:<ul style="margin-top=0">
 </ul>
 <br><p>
 
+<!--
 <b id="winkarst">WinKarst</b> (.sur)<br>
 Survey data can be exported as <i>WinKarst</i> files (untested).<br><p>
 
@@ -247,14 +253,17 @@ Settings:<ul style="margin-top=0">
 <li><u>Station prefix</u>: if given it is prepended to the station names</li>
 </ul>
 <br><p>
+-->
 
 <b id="ptopo">PocketTopo</b> (.top)<br>
-TopoDroid supports <i>PocketTopo</i> both in import and in export.<br><p>
+TopoDroid supports <i>PocketTopo</i> only in import.<br><p>
 
+<!--
 PocketTopo export contains only the survey data.<br><p>
 If the station naming policy is set to "TopoRobot" and the station names follow TopoRobot convention "series.number"
 these are used in the export, otherwise the names are converted to numbers.
 Alphabetic characters are replaces each character with two digits. More precisely 'a' goes to '00', 'b' to '01' and so on, 'A' to '50', 'B' to '51', and so on. Every other character (i.e., non-alphanumeric) goes to '99'.<br><p>
+-->
 
 The "outline" and "profile" sketches are imported.
 <i>PocketTopo</i> uses only a few colors to differentiate line types.
@@ -272,12 +281,13 @@ Fixed points are exported as lat-long.<br><p>
 <b id="ghtopo">GHTopo</b> (.gtx)<br>
 TopoDroid can export survey data in <i>GHTopo</i> format (partially tested).<br><p>
 
-
+<!-- 
 <b id="grottolf">Grottolf</b> (.grt)<br>
 TopoDroid can export survey data in <i>Grottolf</i> format (untested). 
 If the first station has geographical coordinates these are exported, otherwise local coordinates are used.
 The profile at the stations are computed by projecting the splay shots onto a vertical plane perpendicular to the
 leg.<br><p>
+-->
 
 
 <b id="topo">Topo</b> (.cav)<br>
@@ -346,6 +356,7 @@ Settings:<ul style="margin-top=0">
 </ul>
 <br><p>
 
+<!--
 <b id="geojson">GeoJSON</b> (.json)<br>
 Survey data can be exported as GeoJSON file (<i>RFC 7946</i>) if you have georeferenced at least a station.
 Shots are exported as <i>LineString</i>, stations as <i>Point</i>. 
@@ -357,8 +368,9 @@ Settings:<ul style="margin-top=0">
 <li><u>splays</u></li>
 </ul>
 <br><p>
+-->
 
-<b id="gpx">GPS track</b> (.gpx)<br>
+<b id="gpx">GPX track</b> (.gpx)<br>
 The GPX export includes the stations (as waypoints) and the midline (as a track).<br>
 The data coordinate system is WGS-84 geographic.
 <br><p>
@@ -401,15 +413,20 @@ TopoDroid exports survey sketches to the following formats:
 <ul>
 <li><a href="#csx">cSurvey</a></li>
 <li><a href="#th2">Therion</a></li>
-<li><a href="#tunnel">Tunnel</a></li>
 <li><a href="#xvi">xtherion</a></li>
-<li><a href="#cave3d">Cave3D</a></li>
 <li><a href="#dxf2">DXF</a></li>
-<!-- li><a href="#png">PNG image</a></li -->
+<li><a href="#svg">SVG</a></li>
 <li><a href="#pdf">PDF file</a></li>
 <li><a href="#shp2">shapefile</a></li>
-<li><a href="#svg">SVG</a></li>
+<li><a href="#tunnel">Tunnel</a></li>
 </ul>
+
+The following sketch export formats are non longer supported:
+<ul>
+<li><a href="">PNG image</a></li>
+<li><a href="">Cave3D</a></li>
+</ul>
+<br><p>
 
 
 <b id="csx">cSurvey</b> (.csx)<br>
@@ -495,9 +512,11 @@ the section drawing is inserted in the xvi file, at the "section" point</li>
 <li>export <u>scale</u>. Default 1:100</li>
 </ul><p>
 
+<!--
 <b id="cave3d">Cave3D</b> (.c3d)<br>
 Sketch exported in "c3d" format can be lifted in the 3D model inside the 3D viewer.<br>
 <br><p>
+-->
 
 <b id="dxf2">DXF</b> (.dxf)<br>
 Sketches can be exported as 2D DXF files. You can assign layers to individual symbol types (point, line, area) or levels.
