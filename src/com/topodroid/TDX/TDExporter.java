@@ -3268,6 +3268,7 @@ public class TDExporter
       }
       // OLD pw.format("\r\n" );
 
+      // TODO FIXME check if -4 and -3 are ok - both are no longer used
       String date = info.date;
       int y = 0;
       int m = 0;
@@ -3280,6 +3281,10 @@ public class TDExporter
         } catch ( NumberFormatException e ) { }
       }
       // OLD pw.format(Locale.US, "%6d%6d%4d%4d%4d %02d/%02d/%02d\r\n", -4, 1, 1, 1, 1, d, m, y );
+
+      // -3 1 1 1 1 
+      // pw.format(Locale.US, "-3\t1\t1\t1\t1\tTopoDroid v %s - %s\r\n",  TDVersion.string(), TDUtil.getDateString("MM dd yyyy") );
+
       String team = (info.team != null)? info.team : "-";
       if ( team.length() > 26 ) team = team.substring(0,26);
       // DECLINATION TopoRobot: 0 = provided, 1 = to be calculated ???
@@ -3291,9 +3296,6 @@ public class TDExporter
       // OLD if ( info.comment != null ) {                   // [-4, -3]A bla-bla
       //       pw.format(Locale.US, "%6d%6d%4d%4d%4d %s\r\n", -3, 1, 1, 1, 1, info.comment );
       //     }
-
-      // TODO FIXME check this is ok
-      pw.format(Locale.US, "-3\t1\t1\t1\t1\t1\tTopoDroid v %s - %s\r\n",  TDVersion.string(), TDUtil.getDateString("MM dd yyyy") );
 
       // OLD String team = (info.team != null)? info.team : "";
       //     if ( team.length() > 26 ) team = team.substring(0,26);
