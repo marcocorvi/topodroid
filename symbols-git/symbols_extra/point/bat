@@ -12,25 +12,23 @@ th_name bat
 group bat
 color 0xffcc33
 path
-  addCircle 0 -2 2
-  moveTo 0 0
-  cubicTo 2 0 2 6 0 6
-  cubicTo -2 6 -2 0 0 0
-  moveTo -2 -2
-  lineTo -2 -4
-  lineTo -1 -2.7
-  moveTo 2 -2
-  lineTo 2 -4
-  lineTo 1 -2.7
-  moveTo -1 0
-  lineTo -5 -2
-  lineTo -7 4
-  lineTo -7 5
-  cubicTo -6 4 -3 2 -2 3
-  moveTo 1 0
-  lineTo 5 -2
-  lineTo 7 4
-  lineTo 7 5
-  cubicTo 6 4 3 2 2 3
+  moveTo -1.5 2.6
+  cubicTo -2.2 1.3 -3.8 -0.9 -4.5 0.7
+  cubicTo -5 -1.4 -6.3 -1.1 -7 -1.2
+  cubicTo -7.3 -1.2 -7.8 -1 -7.3 -1.4
+  cubicTo -6.8 -1.9 -6.2 -2.4 -5.5 -2.6
+  cubicTo -4.5 -3 -4.2 -2.6 -3.5 -1.8
+  cubicTo -2.7 -1 -1.9 -0.3 -0.8 0
+  cubicTo -0.8 -0.3 -1 -2.7 -0.5 -1
+  cubicTo -0.5 -1.4 0.4 -1.7 0.5 -1.1
+  cubicTo 0.7 -1.5 0.9 -1.9 0.9 -1.4
+  cubicTo 0.8 -0.7 1 -0.3 1 0
+  cubicTo 2.1 -0.8 2.8 -2.4 4.2 -2.7
+  cubicTo 5.4 -2.9 6.4 -2.2 7.2 -1.4
+  cubicTo 7.4 -1.2 7.8 -0.9 7.2 -1.1
+  cubicTo 6.1 -1.2 4.4 -1.7 4.2 0.3
+  cubicTo 2.9 -0.9 1.8 1.5 1.6 2.6
+  cubicTo 0.6 1.6 0 3.2 -0.3 2.6
+  cubicTo -0.5 2.1 -1.2 2.4 -1.5 2.6
 endpath
 endsymbol
