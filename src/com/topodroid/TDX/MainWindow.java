@@ -1386,11 +1386,14 @@ public class MainWindow extends Activity
               if ( manifest_ok >= 0 ) {
                 ParcelFileDescriptor pfd2 = TDsafUri.docReadFileDescriptor( uri );
                 FileInputStream fis2 = TDsafUri.docFileInputStream( pfd2 );
-                Archiver.unArchive( mApp, fis2 ); 
+                int ret = Archiver.unArchive( mApp, fis2 ); 
                 try { fis2.close(); } catch ( IOException e ) {
                   TDLog.Error( e.getMessage() );
                 }
                 TDsafUri.closeFileDescriptor( pfd2 );
+                if ( ret > 0 ) { // Archiver.ERR_OK_WITH_COLOR_RESET
+                  TDToast.makeWarn( R.string.archive_reset_color );
+                }
               } else {
                 // TDLog.Error("ZIP import: failed manifest " + manifest_ok );
                 TDToast.makeBad( String.format( getResources().getString( R.string.bad_manifest ), (-manifest_ok) ) );

@@ -31,7 +31,7 @@ Main functions:<br>
 </ul>
 <br><p>
 
-<h3>DistoX2 - X310</h3>
+<h3>DistoX2 /DistoXBLE - X310</h3>
 
 <ul>
 <li>TIMER (laser on): start timer (automatic measurement)</li>
@@ -41,37 +41,37 @@ Main functions:<br>
 </ul>
 <br><p>
 
-Two seconds:<br>
+Two seconds (keys pressed together):<br>
 <ul>
 <li>DIST (with laser on): measure</li>
 <li>CLR: power off</li>
-<li>CLR+SMART: toggle calib. mode</li>
-<li>CLR+MEM: clear unsent memory</li>
-<li>CLR+FUNC: toggle bluetooth</li>
-<li>CLR+MINUS: locked power off</li>
+<li>CLR-SMART: toggle calib. mode</li>
+<li>CLR-MEM: clear unsent memory</li>
+<li>CLR-FUNC: toggle bluetooth</li>
+<li>CLR-MINUS: locked power off</li>
 <li>REF: front reference</li>
-<li>REF+FUNC: back reference</li>
-<li>REF+PLUS: toggle display light</li>
-<li>REF+MINUS: toggle beep</li>
+<li>REF-FUNC: back reference</li>
+<li>REF-PLUS: toggle display light</li>
+<li>REF-MINUS: toggle beep</li>
 <li>MEM: distance units</li>
-<li>MEM+SMART: angle units (deg/grad)</li>
-<li>MEM+FUNC: toggle silent mode (shot not transferred)</li>
-<li>MEM+MINUS: toggle backsight mode [2.4]</li>
-<li>SMART+MINUS: toggle triple-shot check [2.4]</li>
-<li>DIST+PLUS: continuous measurement, CLEAR off [2.6]</li>
+<li>MEM-SMART: angle units (deg/grad)</li>
+<li>MEM-FUNC: toggle silent mode (shot not transferred)</li>
+<li>MEM-MINUS: toggle backsight mode [2.4]</li>
+<li>SMART-MINUS: toggle triple-shot check [2.4]</li>
+<li>DIST-PLUS: continuous measurement, CLEAR off [2.6]</li>
 </ul>
 <br><p>
 
-Five seconds:<br>
+Five seconds (keys pressed together):<br>
 <ul>
-<li>FUNC+SMART: change battery type</li>
-<li>FUNC+CLR+MEM: factory reset</li>
-<li>DIST+PLUS+MINUS (switching on): bootloader mode</li>
+<li>FUNC-SMART: change battery type</li>
+<li>FUNC-CLR-MEM: factory reset</li>
+<li>DIST-PLUS-MINUS (switching on): bootloader mode</li>
 </ul>
 <br><p>
 
 
-Extra measure info:<br>
+Extra measure info (SMART key):<br>
 <ol>
 <li>azimuth, H distance, V distance, distance</li>
 <li>roll, dip</li>
@@ -90,7 +90,9 @@ Extra measure info:<br>
 </ol>
 <br><p>
 
-Device info:<br>
+(*) only last data, not for memory data 
+
+Device info (FUNC key):<br>
 <ol>
 <li>battery</li>
 <li>hw/fw version, serial number</li>
@@ -105,9 +107,10 @@ Device info:<br>
 <ul>
 <li>AREA (back ref.): continuous display of azimuth+clino (*)</li>
 <li>AREA+REF (front ref.): continuous display of roll+dip (*)</li>
-<li>AREA*2: firmware version and serial number</li>
+<li>AREA+AREA: firmware version and serial number</li>
 <li>UNITS: toggle display light</li>
-<li>AREA*2+REF*2+CLR: toggle silent mode</li>
+<li>AREA+AREA+REF+RE+CLR: toggle silent mode</li>
+<li>MEM[10 times]+UNITS: toggle calib. mode</li>
 </ul>
 (*) Do not take measurements in this mode
 <br><p>
@@ -116,17 +119,16 @@ Two seconds:<br>
 <ul>
 <li>UNITS (in back ref.): distance units</li>
 <li>UNITS (in front ref.): cycle angle units / BT</li>
-<li>MEM*10+UNITS: toggle calib. mode</li>
 </ul>
 <br>
 
-Five seconds:<br>
+Five seconds (keys pressed together):<br>
 <ul>
-<li>CLR+PLUS: toggle beep</li>
+<li>CLR-PLUS: toggle beep</li>
 </ul>
 <br>
 
-"Angle units / BT" cycle<br>
+"Angle units / Bluetooth" cycle (UNITS key)<br>
 <ul>
 <li>compass off, BT off</li>
 <li>compass on (deg), BT off</li>

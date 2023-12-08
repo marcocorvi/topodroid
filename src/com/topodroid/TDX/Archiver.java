@@ -66,6 +66,7 @@ public class Archiver
   private String mZipname;
   // private static String mManifestPath = null;
 
+  private final static int ERR_OK_WITH_COLOR_RESET = 1;
   private final static int ERR_OK         =   0;
   private final static int ERR_IO         =  -1;
   private final static int ERR_TD_OLD     =  -2;
@@ -835,12 +836,15 @@ public class Archiver
     } catch ( ClassCastException e ) {
       TDLog.Error( "ZIP 7 cast: " + e.getMessage() );
     }
-    if ( ok_manifest == 0 && ! sql_success ) {
-      TDLog.Error( "ZIP 7 sql error" );
-      // tell user that there was a problem
-      return ERR_SQL;
+    if ( ok_manifest == ERR_OK ) {
+      if ( ! sql_success ) {
+        TDLog.Error( "ZIP 7 sql error" );
+        // tell user that there was a problem
+        return ERR_SQL;
+      }
+      if ( DataHelper.hasResetColor() ) ok_manifest = ERR_OK_WITH_COLOR_RESET;
     }
-    return ok_manifest; // return 0 or 1
+    return ok_manifest; // return error code (neg) or success (zero or positive)
   }
 
   /** check if manifest file is OK
@@ -896,6 +900,7 @@ public class Archiver
   static public int unArchive( TopoDroidApp app, InputStream fis )
   {
     int ok_manifest = 0;
+    boolean sql_success = false;
     String pathname;
     ZipEntry ze;
     DataHelper app_data = TopoDroidApp.mData;
@@ -964,7 +969,8 @@ public class Archiver
             } else {
               if ( sql ) {
                 // TDLog.Log( TDLog.LOG_ZIP, "Zip sqlfile \"" + pathname + "\" DB version " + mManifestDbVersion );
-                if ( app_data.loadFromFile( pathname, mManifestDbVersion ) < 0 ) ok_manifest = ERR_NAME;
+                sql_success = ( app_data.loadFromFile( pathname, mManifestDbVersion ) >= 0 );
+                if ( ! sql_success ) ok_manifest = ERR_SQL; // ERR_NAME;
                 TDFile.deleteFile( pathname );
               }
             }
@@ -984,7 +990,10 @@ public class Archiver
       TDLog.Error("TODO manifest result " + ok_manifest );
     }
     TDLog.v( "unarchive stream returns " + ok_manifest );
-    return ok_manifest; // return 0 or 1
+    if ( ok_manifest == ERR_OK ) {
+      if ( sql_success  && DataHelper.hasResetColor() ) ok_manifest = ERR_OK_WITH_COLOR_RESET;
+    } 
+    return ok_manifest; // return neg (failure) non-neg (success)
   }
 
 }

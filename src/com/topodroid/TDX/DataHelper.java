@@ -1800,7 +1800,7 @@ public class DataHelper extends DataSetObservable
    * @param sid       survey ID
    * @param id        shot ID
    * @param millis    millis/1000 ie seconds
-   * @param color
+   * @param color     custom color
    * @param d         distance [m]
    * @param b         azimuth [degree]
    * @param c         clino [degree]
@@ -2181,7 +2181,7 @@ public class DataHelper extends DataSetObservable
   // @param sid           survey ID
   // @param id            shot id
   // @param millis        timestamp
-  // param color          splay color
+  // @param color         custom color (splay)
   // @param d, b, c, r    distance, bearing, clino, roll
   // @param extend
   // @param stretch       fractional extend
@@ -5608,7 +5608,7 @@ public class DataHelper extends DataSetObservable
                      TDString.escape( cursor.getString(14) ),  // comment
                      cursor.getLong(15),    // type
                      cursor.getLong(16),    // millis
-                     0, // cursor.getLong(17) // COLOR is not exported
+                     cursor.getLong(17),    // custom color 
 		     cursor.getDouble(18),  // stretch
                      TDString.escape( cursor.getString(19) )   // address
            );
@@ -5699,9 +5699,16 @@ public class DataHelper extends DataSetObservable
      }
    }
 
+   static boolean mColorReset = false; // whether custom colors have been reset on survey load
+
+   /** @return true if some custom colors have been reset
+    */
+   static boolean hasResetColor() { return mColorReset; }
+
    /** load survey data from a sql file
     * @param filename    name of the sql file
     * @param db_version  current database version
+    * @return survey ID on success, negative on failure
     */
    long loadFromFile( String filename, int db_version )
    {
@@ -5710,6 +5717,8 @@ public class DataHelper extends DataSetObservable
      long id, status, shotid;
      String station, title, date, name, comment;
      String line;
+
+     mColorReset = false;
      try {
        // TDLog.Log( TDLog.LOG_IO, "load survey from sql file " + filename );
        FileReader fr = TDFile.getFileReader( filename ); // DistoX-SAF
@@ -5877,7 +5886,15 @@ public class DataHelper extends DataSetObservable
                // FIXME N.B. shot_type is not saved before 22
                long type   = 0; if ( db_version > 21 ) type   = scanline1.longValue( 0 ); // 0: DistoX
 	       long millis = 0; if ( db_version > 31 ) millis = scanline1.longValue( 0 );
-	       long color  = 0; if ( db_version > 33 ) color  = scanline1.longValue( 0 );
+	       long color  = 0; if ( db_version > 33 ) {
+                 color  = scanline1.longValue( 0 );
+                 if ( color != 0 ) {
+                   if ( ! TDSetting.mSplayColor ) {
+                     color = 0;
+                     mColorReset = true;
+                   }
+                 }
+               }
 	       double stretch = 0; if ( db_version > 35 ) stretch = scanline1.doubleValue( 0.0 );
 	       String addr = ""; if ( db_version > 37 ) addr = TDString.unescape( scanline1.stringValue( ) );
 
