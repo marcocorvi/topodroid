@@ -192,7 +192,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="save_as">mentés mint</string>
     <string name="nickname">Becenév</string>
     <string name="unknown_device_type">Ismeretlen műszer típus %1$d</string>
-    <!-- TODO string name="unsupported_device_type">Unsupported device type</string -->
+    <string name="unsupported_device_type">Nem támogatott műszer típus</string>
 
     <string name="comment">megjegyzés</string> <!-- KÉRDÉS jegyzet, megjegyzés, magyarázat-->
     <!-- UNUSED string name="flag">Zászló</string -->
@@ -249,7 +249,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="MT_points_none">Nincs MobileTopographer pont</string>
     <string name="MT_bad_file">Rossz MobileTopographer fájl</string>
     <string name="bad_manifest">Hibás manifest fájl [%1$d]</string>
-    <!-- TODO string name="archive_reset_color">Warning. Custon colors resetted</string -->
+    <string name="archive_reset_color">Figyelem! A felhasználói színek visszaállítva</string>
  
     <string name="pleasewait">Kérjük várjál</string>
     <string name="processing">feldolgozva &#8230;</string>
