@@ -258,7 +258,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="MT_points_none">No MobileTopographer point file</string>
     <string name="MT_bad_file">Bad MobileTopographer file</string>
     <string name="bad_manifest">Bad manifest file [%1$d]</string>
-    <string name="archive_reset_color">Warning. Custon colors resetted</string>
+    <string name="archive_reset_color">Warning. Custom colors resetted</string>
  
     <string name="pleasewait">Please wait</string>
     <string name="processing">processing &#8230;</string>
