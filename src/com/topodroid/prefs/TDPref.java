@@ -13,6 +13,7 @@ package com.topodroid.prefs;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyColorPicker;
+import com.topodroid.TDX.TDLevel;
 import com.topodroid.TDX.TDConst;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.R;
@@ -118,6 +119,8 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     commit   = false;
   }
 
+  final static int mDebugColor = 0xff3399cc;
+
   /** @return the view that displays this preference
    * @param context   context
    * @param li        layout inflater
@@ -133,16 +136,25 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     switch ( widget_type ) {
       case FORWARD:
         v = li.inflate( R.layout.pref_forward, parent, false );
+        if ( level > TDLevel.TESTER ) {
+          ((TextView)v.findViewById(R.id.title)).setTextColor( mDebugColor );
+        }
         break;
       case BUTTON:
         v = li.inflate( R.layout.pref_button, parent, false );
         ( (TextView) v.findViewById( R.id.value ) ).setText( stringValue() );
+        if ( level > TDLevel.TESTER ) {
+          ((TextView)v.findViewById(R.id.title)).setTextColor( mDebugColor );
+        }
         break;
       case CHECKBOX:
         v = li.inflate( R.layout.pref_checkbox, parent, false );
 	checkbox = (CheckBox) v.findViewById( R.id.checkbox );
 	checkbox.setChecked( booleanValue() );
 	checkbox.setOnClickListener( this );
+        if ( level > TDLevel.TESTER ) {
+          ((TextView)v.findViewById(R.id.title)).setTextColor( mDebugColor );
+        }
         break;
       case EDITTEXT:
         v = li.inflate( R.layout.pref_edittext, parent, false );
@@ -163,7 +175,9 @@ public class TDPref implements AdapterView.OnItemSelectedListener
         mEdittext.addTextChangedListener( this );
         mEdittext.setOnKeyListener(this);
         mEdittext.setOnFocusChangeListener(this);
-
+        if ( level > TDLevel.TESTER ) {
+          ((TextView)v.findViewById(R.id.title)).setTextColor( mDebugColor );
+        }
         break;
       case LIST:
         v = li.inflate( R.layout.pref_spinner, parent, false );
@@ -1581,20 +1595,39 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     int[] tit    = TDPrefKey.GEEKtitle;
     int[] dsc    = TDPrefKey.GEEKdesc;
     String[] def = TDPrefKey.GEEKdef;
-    return new TDPref[ ] {
-      makeCbx( cat, key[0], tit[0], dsc[0],  T, def[0],  ctx, hlp ), // PALETTES
-      // makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // BACKUP CLEAR - CLEAR_BACKUPS
-      makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // PACKET LOGGER
-      makeCbx( cat, key[2], tit[2], dsc[2],  T, def[2],  ctx, hlp ), // TH2EDIT
-      makeFwd( cat, key[3], tit[3],          A,          ctx, hlp ), // GEEK_SHOT
-      makeFwd( cat, key[4], tit[4],          T,          ctx, hlp ), // GEEK_SPLAY
-      makeFwd( cat, key[5], tit[5],          A,          ctx, hlp ), // GEEK_PLOT
-      makeFwd( cat, key[6], tit[6],          A,          ctx, hlp ), // GEEK_LINE
-      // makeFwd( cat, key[7], tit[7],          T,          ctx, hlp ), // PLOT_WALLS AUTOWALLS
-      makeFwd( cat, key[7], tit[7],          A,          ctx, hlp ), // GEEK_DEVICE
-      makeFwd( cat, key[8], tit[8],          T,          ctx, hlp ), // GEEK_IMPORT
-      makeFwd( cat, key[9], tit[9],          D,          ctx, hlp )  // SKETCH // FIXME_SKETCH_3D FIXME_FIXME
-    };
+    if ( TDLevel.isDebugBuild( ) ) {
+      TDLog.v("Length " + key.length + " " + tit.length + " " + dsc.length + " " + def.length );
+      return new TDPref[ ] {
+        makeCbx( cat, key[0], tit[0], dsc[0],  T, def[0],  ctx, hlp ), // PALETTES
+        // makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // BACKUP CLEAR - CLEAR_BACKUPS
+        makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // PACKET LOGGER
+        makeCbx( cat, key[2], tit[2], dsc[2],  T, def[2],  ctx, hlp ), // TH2EDIT
+        makeFwd( cat, key[3], tit[3],          A,          ctx, hlp ), // GEEK_SHOT
+        makeFwd( cat, key[4], tit[4],          T,          ctx, hlp ), // GEEK_SPLAY
+        makeFwd( cat, key[5], tit[5],          A,          ctx, hlp ), // GEEK_PLOT
+        makeFwd( cat, key[6], tit[6],          A,          ctx, hlp ), // GEEK_LINE
+        // makeFwd( cat, key[7], tit[7],          T,          ctx, hlp ), // PLOT_WALLS AUTOWALLS
+        makeFwd( cat, key[7], tit[7],          A,          ctx, hlp ), // GEEK_DEVICE
+        makeFwd( cat, key[8], tit[8],          T,          ctx, hlp ), // GEEK_IMPORT
+        makeFwd( cat, key[9], tit[9],          D,          ctx, hlp ), // SKETCH // FIXME_SKETCH_3D FIXME_FIXME
+        makeCbx( cat, key[10], tit[10], dsc[10],  T, def[10],  ctx, hlp ), // WITH DEBUG
+      };
+    } else {
+      return new TDPref[ ] {
+        makeCbx( cat, key[0], tit[0], dsc[0],  T, def[0],  ctx, hlp ), // PALETTES
+        // makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // BACKUP CLEAR - CLEAR_BACKUPS
+        makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // PACKET LOGGER
+        makeCbx( cat, key[2], tit[2], dsc[2],  T, def[2],  ctx, hlp ), // TH2EDIT
+        makeFwd( cat, key[3], tit[3],          A,          ctx, hlp ), // GEEK_SHOT
+        makeFwd( cat, key[4], tit[4],          T,          ctx, hlp ), // GEEK_SPLAY
+        makeFwd( cat, key[5], tit[5],          A,          ctx, hlp ), // GEEK_PLOT
+        makeFwd( cat, key[6], tit[6],          A,          ctx, hlp ), // GEEK_LINE
+        // makeFwd( cat, key[7], tit[7],          T,          ctx, hlp ), // PLOT_WALLS AUTOWALLS
+        makeFwd( cat, key[7], tit[7],          A,          ctx, hlp ), // GEEK_DEVICE
+        makeFwd( cat, key[8], tit[8],          T,          ctx, hlp ), // GEEK_IMPORT
+        makeFwd( cat, key[9], tit[9],          D,          ctx, hlp )  // SKETCH // FIXME_SKETCH_3D FIXME_FIXME
+      };
+    }
   }
 
   /** construct the "3D viewer" preferences array

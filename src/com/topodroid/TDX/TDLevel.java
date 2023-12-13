@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.prefs.TDSetting;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -39,8 +40,21 @@ public class TDLevel
   public static boolean overAdvanced = false;
   public static boolean overExpert   = false;
   public static boolean overTester   = false;
-  private static boolean test_debug = false; // true;
-  private static boolean debug = false;
+  private static boolean mDebug = false;
+
+  /** @return true if the app is debug-build
+   */
+  public static boolean isDebugBuild( )
+  {
+    Context ctx = TDInstance.context;
+    try {
+      final PackageInfo info = ctx.getPackageManager().getPackageInfo( ctx.getPackageName(), 0);
+      return (info.applicationInfo.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+    } catch ( NameNotFoundException e ) {
+      TDLog.Error( e.getMessage() );
+    }
+    return false;
+  }
 
   /** set the activity level
    * @param ctx    context
@@ -51,28 +65,39 @@ public class TDLevel
     mLevel = level;
 
     // FIXME_DEVELOPER
-    if ( test_debug ) {
-      // mAndroidId = Secure.getString( ctx.getContentResolver(), Secure.ANDROID_ID );
-      try {
-        final PackageInfo info = ctx.getPackageManager().getPackageInfo( ctx.getPackageName(), 0);
-        debug = (info.applicationInfo.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
-      } catch ( NameNotFoundException e ) {
-        TDLog.Error( e.getMessage() );
-      }
-      test_debug = false;
-      TDLog.v("DEBUG: " + debug );
-    }
+    mDebug = ( TDSetting.mWithDebug )? isDebugBuild( ) : false;
     overBasic    = mLevel > BASIC;
     overNormal   = mLevel > NORMAL;
     overAdvanced = mLevel > ADVANCED;
     overExpert   = mLevel > EXPERT;
     // overTester  = mLevel > TESTER;
     // FIXME_DEVELOPER
-    if ( overExpert && debug ) {
+    if ( overExpert && mDebug && TDSetting.mWithDebug ) {
       overTester = true;
       TglParser.setWallMax();
       mLevel = DEBUG; // N.B. this causes all DEBUG settings FIXME_FIXME
       TDLog.v("LEVEL: over tester");
     }
   }
+
+  public static void setLevelWithDebug( boolean with_debug )
+  {
+    if ( ! with_debug ) { 
+      overTester = false;
+      if ( overTester ) { // lower level
+        mLevel = TESTER;
+      }
+    } else {
+      if ( overExpert ) {
+        if ( ! overTester ) { // raise level
+          overTester = true;
+          TglParser.setWallMax();
+          mLevel = DEBUG; // N.B. this causes all DEBUG settings FIXME_FIXME
+        }
+      } else {
+        overTester = false;
+      }
+    }
+  }
+    
 }

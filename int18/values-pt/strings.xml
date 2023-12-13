@@ -179,6 +179,8 @@ no campo abaixo e aperte o botão.
   <string name="save_as">Gravar como</string>
   <string name="nickname">Apelido</string>
   <string name="unknown_device_type">Tipo dispositivo desconhecido %1$d</string>
+    <!-- TODO string name="unsupported_device_type">Unsupported device type</string -->
+
   <string name="comment">comentário</string>
   <!-- UNUSED string name="flag">Flag</string -->
   <!-- UNUSED string name="backshot">Contramedida</string -->
@@ -231,6 +233,8 @@ no campo abaixo e aperte o botão.
   <string name="MT_points_none">Nenhum ponto MobileTopographer</string>
   <string name="MT_bad_file">Arquivo MobileTopographer inválido</string>
   <string name="bad_manifest">Arquivo de manifesto inválido [%1$d]</string>
+    <!-- TODO string name="archive_reset_color">Warning. Custon colors resetted</string -->
+
   <string name="pleasewait">Por favor espere</string>
   <string name="processing">processando …</string>
   <!-- UNUSED string name="head_tail">Memória: </string -->

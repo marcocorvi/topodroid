@@ -667,10 +667,12 @@ public class DeviceActivity extends Activity
           DistoXBLEInfoDialog info =  new DistoXBLEInfoDialog( this, this, currDeviceA(), mApp );
           info.show();
           (new DistoXBLEInfoReadTask( mApp, info )).execute();
-        } else if ( currDeviceA().mType == Device.DISTO_BRIC4 ) {
+        } else if ( currDeviceA().mType == Device.DISTO_BRIC4 || currDeviceA().mType == Device.DISTO_BRIC5 ) {
           BricInfoDialog info = new BricInfoDialog( this, this, getResources(), currDeviceA() );
           info.show();
           (new InfoReadBricTask( mApp, info )).execute();
+        } else if ( currDeviceA().mType == Device.DISTO_SAP5 || currDeviceA().mType == Device.DISTO_SAP6 ) {
+          TDToast.makeBad( R.string.unsupported_device_type );
         } else {
           // TDLog.Error( "Unknown device type " + currDeviceA().mType );
           TDToast.makeBad( String.format(Locale.US, getResources().getString( R.string.unknown_device_type ), currDeviceA().mType ) );
@@ -707,10 +709,12 @@ public class DeviceActivity extends Activity
           new DeviceA3MemoryDialog( this, this ).show();
         } else if ( currDeviceA().mType == Device.DISTO_X310 ) {
           new DeviceX310MemoryDialog( this, this ).show();
-        } else if ( currDeviceA().mType == Device.DISTO_BRIC4 ) {
+        } else if ( currDeviceA().mType == Device.DISTO_BRIC4 || currDeviceA().mType == Device.DISTO_BRIC5 ) {
           (new BricMemoryDialog( this, this, getResources() ) ).show();
         } else if ( currDeviceA().mType == Device.DISTO_XBLE ) { // SIWEI
           new DistoXBLEMemoryDialog(this,this).show();
+        } else if ( currDeviceA().mType == Device.DISTO_SAP5 || currDeviceA().mType == Device.DISTO_SAP6 ) {
+          TDToast.makeBad( R.string.unsupported_device_type );
         } else {
           TDToast.makeBad( String.format(Locale.US, getResources().getString( R.string.unknown_device_type ), currDeviceA().mType ) );
         }

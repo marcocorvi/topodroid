@@ -169,6 +169,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="save_as">Speichern als</string>
   <string name="nickname">Anzeigename</string>
   <string name="unknown_device_type">Unbekanntes Gerät %1$d</string>
+    <!-- TODO string name="unsupported_device_type">Unsupported device type</string -->
+
   <string name="comment">Notizen</string>
   <!-- UNUSED string name="flag">Flag</string -->
   <!-- UNUSED string name="backshot">Rückmessung</string -->
@@ -221,6 +223,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="MT_points_none">Keine MobileTopographer Punkte</string>
   <string name="MT_bad_file">Kein MobileTopographer File</string>
   <string name="bad_manifest">Nicht unterstütztes Manifest [%1$d]</string>
+    <!-- TODO string name="archive_reset_color">Warning. Custon colors resetted</string -->
+
   <string name="pleasewait">Bitte warten</string>
   <string name="processing">bearbeite &#8230;</string>
   <!-- UNUSED string name="head_tail">Memory: </string -->

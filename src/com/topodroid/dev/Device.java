@@ -49,8 +49,8 @@ public class Device
   public final static int DISTO_SAP6  = 8; 
   public final static int DISTO_BRIC5 = 9;
 
-  // SIWEI_TIAN
-  final static String[] typeString = { "Unknown", "A3", "X310", "X000", "BLEX", "SAP5", "BRIC4", "XBLE", "SAP6", "BRIC5" };
+  // SIWEI_TIAN                                       0          1         2          3          4       5       6        7            8       9
+  final static String[] typeString               = { "Unknown", "A3",     "X310",    "X000",    "BLEX", "SAP5", "BRIC4", "XBLE",      "SAP6", "BRIC5" };
   private final static String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0", "BleX", "Sap5", "Bric4", "DistoXBLE", "Sap6", "Bric5" };
   
   public static String typeToString( int type )

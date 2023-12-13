@@ -202,6 +202,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="save_as">save as</string>
     <string name="nickname">Nickname</string>
     <string name="unknown_device_type">Unknown device type %1$d</string>
+    <string name="unsupported_device_type">Unsupported device type</string>
 
     <string name="comment">comment</string>
     <!-- UNUSED string name="flag">Flag</string -->
@@ -1345,7 +1346,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_cat_calib">CALIBRATIONS</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
   <string name="pref_cat_device">DEVICES</string>
-  <string name="pref_cat_cave3d">3D VIEWER</string>
+  <string name="pref_cat_cave3d" copyable="all">3D VIEWER</string>
   <string name="pref_cat_geek">CUSTOM SETTINGS</string>
   <string name="pref_cat_sketch">3D SKETCH</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
@@ -1402,6 +1403,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_packet_logger_summary">Enable packets logging</string>
   <string name="pref_th2_edit_title">Sketch editing</string>
   <string name="pref_th2_edit_summary">Enable sketch editing</string>
+  <string name="pref_with_debug_title" translatable="false">Dev</string>
+  <string name="pref_with_debug_summary" translatable="false">Enable dev mode</string>
 
   <string name="pref_bezier_step_title">Point spacing</string>
   <string name="pref_bezier_step_summary">Max. point spacing (polyline approx. of curves) [m]</string>
@@ -1475,7 +1478,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_csv_raw_summary">Export raw data to CSV</string>
   <string name="pref_csv_sep_title">CSV separator</string>
   <string name="pref_csv_sep_summary">CSV fields separator</string>
-  <string name="pref_csv_eol_title">CSV eol</string>
+  <string name="pref_csv_eol_title" copyable="all">CSV eol</string>
   <string name="pref_csv_eol_summary">CSV records separator</string>
   <string name="pref_gpx_single_track_title">GPX single track</string>
   <string name="pref_gpx_single_track_summary">Export project surveys as a single GPX track</string>
@@ -2171,11 +2174,11 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="view_zoom" copyable="fr hu it pt">Zoom 1</string>
 
     <string name="walls_title">WALLS</string>
-    <string name="walls_convexhull">Convex Hull</string>
+    <string name="walls_convexhull" copyable="all">Convex Hull</string>
     <string name="walls_powercrust" translatable="false">Powercrust</string>
-    <string name="walls_hull">Hull</string>
-    <string name="walls_bubble">Bubble</string>
-    <string name="walls_tube">Tube</string>
+    <string name="walls_hull" copyable="all">Hull</string>
+    <string name="walls_bubble" copyable="all">Bubble</string>
+    <string name="walls_tube" copyable="all">Tube</string>
     <!-- UNUSED string name="walls_delaunay" translatable="false">Delaunay</string -->
 
     <!-- UNUSED string name="powercrust_few_splays">Powercrust: too few splays</string -->

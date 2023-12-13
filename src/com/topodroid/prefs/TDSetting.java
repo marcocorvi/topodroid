@@ -78,6 +78,8 @@ public class TDSetting
   private static int FLAG_LEVEL  = FLAG_BUTTON | FLAG_MENU;
   private static int mMainFlag = 0xff; // Main Window flag
 
+  public static boolean mWithDebug = false;
+
   /** reset MainWindow flag
    */
   public static void resetFlag() 
@@ -912,6 +914,7 @@ public class TDSetting
     // setBackupsClear( prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ) ); // DISTOX_BACKUPS_CLEAR CLEAR_BACKUPS
     mPacketLog = prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ); // DISTOX_PACKET_LOGGER
     mTh2Edit   = prefs.getBoolean( keyGeek[2], bool(defGeek[2]) ); // DISTOX_TH2_EDIT
+    mWithDebug = TDLevel.isDebugBuild() ? prefs.getBoolean( keyGeek[10], bool(defGeek[10]) ) : false; // DISTOX_WITH_DEBUG
 
     // String[] keyGPlot = TDPrefKey.GEEKPLOT;
     // String[] defGPlot = TDPrefKey.GEEKPLOTdef;
@@ -1766,6 +1769,9 @@ public class TDSetting
     } else if ( k.equals( key[2] ) ) {
       mTh2Edit = tryBooleanValue( hlp, k, v, bool(def[2]) ); // DISTOX_TH2_EDIT
       mMainFlag |= FLAG_BUTTON;
+    } else if ( TDLevel.isDebugBuild() && k.equals( key[10] ) ) {
+      mWithDebug =  tryBooleanValue( hlp, k, v, bool(def[10]) ); // DISTOX_WITH_DEBUG
+      TDLevel.setLevelWithDebug( mWithDebug );
     } else {
       TDLog.Error("missing GEEK key: " + k );
     }
@@ -3138,7 +3144,7 @@ public class TDSetting
       pw.printf(Locale.US, "Connection mode %d Z6 %c, feedback %d\n", mConnectionMode, tf(mZ6Workaround), mConnectFeedback );
       // pw.printf(Locale.US, "Communication autoreconnect %c, DistoX-B %c, retry %d, head/tail %c\n", tf(mAutoReconnect), tf(mSecondDistoX), mCommRetry, tf(mHeadTail) );
       pw.printf(Locale.US, "Communication DistoX-B %c, retry %d, head/tail %c\n", tf(mSecondDistoX), mCommRetry, tf(mHeadTail) );
-      pw.printf(Locale.US, "Packet log %c Th2Edit %c\n", tf(mPacketLog), tf(mTh2Edit) );
+      pw.printf(Locale.US, "Packet log %c Th2Edit %c WithDebug %c\n", tf(mPacketLog), tf(mTh2Edit), tf(mWithDebug) );
       pw.printf(Locale.US, "Wait: laser %d, shot %d, data %d, conn %d, command %d\n", mWaitLaser, mWaitShot, mWaitData, mWaitConn, mWaitCommand );
 
       pw.printf(Locale.US, "Calib groups %d, distance %.2f\n", mGroupBy, mGroupDistance);
@@ -3559,6 +3565,9 @@ public class TDSetting
             if ( vals.length > 4 ) {
               mTh2Edit = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_TH2_EDIT", mTh2Edit );
             }
+            // if ( vals.length > 6 ) { // WITH_DEBUG is not importable
+            //   mWithDebug = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_WITH_DEBUG", mWithDebug );
+            // }
           }
           continue;
         }

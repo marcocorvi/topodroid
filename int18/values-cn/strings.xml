@@ -190,6 +190,7 @@
     <string name="save_as">另存为</string>
     <string name="nickname">别称</string>
     <string name="unknown_device_type">无法识别的设备 %1$d</string>
+    <!-- TODO string name="unsupported_device_type">Unsupported device type</string -->
 
     <string name="comment">注释</string>
     <!-- UNUSED string name="flag">Flag</string -->
@@ -246,6 +247,7 @@
     <string name="MT_points_none">无GPS坐标点</string>
     <string name="MT_bad_file">错误的移动地形图文件</string>
     <string name="bad_manifest">错误的清单文件 [%1$d]</string>
+    <!-- TODO string name="archive_reset_color">Warning. Custon colors resetted</string -->
  
     <string name="pleasewait">请稍后</string>
     <string name="processing">处理 &#8230;</string>

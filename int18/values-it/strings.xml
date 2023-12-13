@@ -189,6 +189,7 @@
     <string name="save_as">salva come</string>
     <string name="nickname">Nome</string>
     <string name="unknown_device_type">Tipo dispositivo non noto: %1$d</string>
+    <!-- TODO string name="unsupported_device_type">Unsupported device type</string -->
 
     <string name="comment">commento</string>
     <!-- UNUSED string name="flag">Flag</string -->
@@ -245,6 +246,7 @@
     <string name="MT_points_none">Punto GPS mancante</string>
     <string name="MT_bad_file">File MobileTopographer corrotto</string>
     <string name="bad_manifest">File manifesto corrotto [%1$d]</string>
+    <!-- TODO string name="archive_reset_color">Warning. Custon colors resetted</string -->
 
     <string name="pleasewait">Attendere &#8230;</string>
     <string name="processing">elaborazione &#8230;</string>

@@ -1832,6 +1832,7 @@ public class TDPrefKey
     "DISTOX_GEEK_DEVICE",     // FORWARD
     "DISTOX_GEEK_IMPORT",     // FORWARD
     "DISTOX_SKETCH_PREF",     // FORWARD FIXME_SKETCH_3D
+    "DISTOX_WITH_DEBUG",
     null
   };
 
@@ -1848,6 +1849,7 @@ public class TDPrefKey
     R.string.pref_cat_device,
     R.string.pref_cat_import_export,
     R.string.pref_cat_sketch,
+    R.string.pref_with_debug_title,
     -1
   };
 
@@ -1864,6 +1866,8 @@ public class TDPrefKey
     -1,
     -1
     -1, // SKETCH
+    R.string.pref_with_debug_summary,
+    -1
   };
 
   public static String[] GEEKdef = {
@@ -1879,6 +1883,7 @@ public class TDPrefKey
     TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
+    FALSE,
     null
   };
 

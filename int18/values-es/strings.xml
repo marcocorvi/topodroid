@@ -198,6 +198,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="save_as">Guardar como</string>
     <string name="nickname">Seudónimo</string>
     <string name="unknown_device_type">Tipo de dispositivo desconocido: %1$d</string>
+    <!-- TODO string name="unsupported_device_type">Unsupported device type</string -->
 
     <string name="comment">Comentario</string>
     <!-- UNUSED string name="flag">Bandera</string -->
@@ -254,6 +255,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="MT_points_none">No hay punto GPS</string>
     <string name="MT_bad_file">Archivo de topografía del móvil corrupto</string>
     <string name="bad_manifest">Archivo de manifiesto corrupto</string>
+    <!-- TODO string name="archive_reset_color">Warning. Custon colors resetted</string -->
 
     <string name="pleasewait">Por favor espere &#8230;</string>
     <string name="processing">procesando &#8230;</string>

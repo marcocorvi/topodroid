@@ -198,6 +198,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="save_as">Enregistrer sous</string>
     <string name="nickname">Alias</string>
     <string name="unknown_device_type">Appareil inconnu type %1$d</string>
+    <!-- TODO string name="unsupported_device_type">Unsupported device type</string -->
 
     <string name="comment">Commentaires</string>
     <!-- UNUSED string name="flag">Point Drapeau</string -->
@@ -253,6 +254,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="MT_points_none">Pas de point Mobile Topographer</string>
     <string name="MT_bad_file">Mauvais fichier MobileTopographer</string>
     <string name="bad_manifest">Mauvais fichier Manifest [%1$d]</string>
+    <!-- TODO string name="archive_reset_color">Warning. Custon colors resetted</string -->
 
     <string name="pleasewait">Attendre SVP</string>
     <string name="processing">Travail en cours &#8230;</string>
