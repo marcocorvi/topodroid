@@ -469,7 +469,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="menu_sync">Sincro</string -->
     <!-- UNUSED string name="menu_tdr2th2">Dibujos Th2</string -->
     <string name="menu_validate">Validar</string>
-    <string name="menu_zoom_fit">Ajustar a pantalla</string>
+    <string name="menu_zoom_fit">Centrar en pantalla</string>
 
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Papel cuadriculado</string>
@@ -1968,9 +1968,9 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="equate_no_stations">Muy pocos puntos fuertes</string>
     <string name="equate_no_nearby">No hay punto fuerte</string>
 
-    <!-- UNUSED string name="menu_new">NUEVO</string -->
-    <!-- UNUSED string name="menu_equate">AGREGAR EQUIVALENTE</string -->
-    <!-- UNUSED string name="menu_equates">EQUIVALENTE</string -->
+    <!-- UNUSED string name="menu_new">Nuevo</string -->
+    <!-- UNUSED string name="menu_equate">Agregar equivalente</string -->
+    <!-- UNUSED string name="menu_equates">Equivalente</string -->
     <string name="menu_open">Abrir</string>
     <string name="menu_save">Guardar</string>
 
@@ -2007,7 +2007,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="cmenu_info">Información</string>
     <string name="cmenu_ico">Diagrama ico</string>
     <string name="cmenu_rose">Diagrama de rosas</string>
-    <string name="cmenu_wall">Modo con paredes</string>
+    <string name="cmenu_wall">Visualizar paredes</string>
     <!-- UNUSED string name="cmenu_sketch">Dibujos</string -->
     <!-- NO string name="cmenu_fractal">Fractal counts</string -->
 
@@ -2101,7 +2101,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="texture_ok">Leyendo archivo de textura</string>
     <string name="texture">DTM</string>
     <!-- UNUSED string name="sketch_load">cargar</string -->
-    <!-- UNUSED string name="sketch_failed">ERROR: cargando dibujo</string -->
+    <!-- UNUSED string name="sketch_failed">ERROR: al cargar dibujo</string -->
     <!-- UNUSED string name="sketch_ok">Dibujo de lectura</string -->
 
     <string name="ctitle">%1$s  Clino: %2$.0f  Azimut: %3$.0f</string>
@@ -2139,12 +2139,12 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="west">W</string>
   <string name="south">S</string>
 
-    <!-- UNUSED string name="SURVEYS">R E L I E V E</string -->
+    <!-- UNUSED string name="SURVEYS">Relieve</string -->
     <string name="INFO">Información</string>
     <string name="STATIONS">Estación</string>
     <string name="STATIONS_DISTANCE">Distancia estación</string>
-    <!-- UNUSED string name="DISTANCE">DISTANCIA</string -->
-    <!-- UNUSED string name="CENTER">CENTRO</string -->
+    <!-- UNUSED string name="DISTANCE">Distancia</string -->
+    <!-- UNUSED string name="CENTER">Centro</string -->
     <string name="select_survey_file">Seleccionar archivo de topografía</string>
     <string name="select_export_file">Seleccionar archivo de exportación</string>
     <string name="select_dem_file">Seleccionar DEM</string>
@@ -2231,7 +2231,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="viewing_at">Punto de vista hacia clino %1$.0f azimut %2$.0f</string>
 
     <string name="cpref_dem3d">DEM</string>
-    <string name="cpref_walls3d">MODELO DE PAREDES</string>
+    <string name="cpref_walls3d">Modelo de paredes</string>
 							  
     <!-- UNUSED string name="cpref_base_path_title">Directorio de la base de datos</string -->
     <!-- UNUSED string name="cpref_base_path_summary">Directorio que contiene los archivos de Therion.</string -->
@@ -2258,8 +2258,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="cpref_grid_above_summary">Situar la cuadrícula en la parte superior</string>
     <string name="cpref_grid_extent_title">Extensión de cuadrícula</string>
     <string name="cpref_grid_extent_summary">Extensión de cuadrícula alrededor del relieve</string>
-    <string name="cpref_neg_clino_title">Vistas por debajo del horizonte</string>
-    <string name="cpref_neg_clino_summary">Permitir puntos de vista por debajo del horizonte</string>
+    <string name="cpref_neg_clino_title">Vista por debajo del horizonte</string>
+    <string name="cpref_neg_clino_summary">Permitir punto de vista por debajo del horizonte</string>
     <string name="cpref_dem_buffer_title">buffer del DEM</string>
     <string name="cpref_dem_buffer_summary">Extensión DEM alrededor del relieve</string>
    
