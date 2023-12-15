@@ -66,8 +66,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="AREA">Área</string>
     <string name="HELP">Ayuda</string>
     <string name="STATION">Estación</string>
-    <string name="UP">HACIA ARRIBA</string>
-    <string name="DOWN">HACIA ABAJO</string>
+    <string name="UP">Hacia arriba</string>
+    <string name="DOWN">Hacia bajo</string>
     <string name="xsplay">Xsplay</string>
     <string name="hsplay">Hsplay</string>
     <string name="vsplay">Vsplay</string>
@@ -421,17 +421,17 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
 
     <string name="menu_3d">Cave3D</string>
-    <string name="menu_about">INFO</string>
+    <string name="menu_about">Info</string>
     <string name="menu_area">Área</string>
-    <string name="menu_audio">AUDIO</string>
+    <string name="menu_audio">Audio</string>
     <!-- UNUSED string name="menu_attach">Conectar</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
-    <!-- UNUSED string name="menu_backups">ELIMINAR COPIAS DE SEGURIDAD</string-->
+    <!-- UNUSED string name="menu_backups">Eliminar copias de seguridad</string-->
     <string name="menu_calib_check">Verificar calibración</string>
     <string name="menu_close">Cerrar</string>
     <!-- UNUSED string name="menu_clear">CLEAR</string -->
-    <string name="menu_color">LIMPIAR COLOR</string>
+    <string name="menu_color">Limpiar color</string>
     <string name="menu_delete">Eliminar</string>
     <string name="menu_detach">Desconectar</string>
     <!-- UNUSED string name="menu_display">Pantalla</string -->
@@ -462,7 +462,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="menu_sections">Secciónes</string>
     <string name="menu_sensor">Tomas con sensor</string>
     <!-- UNUSED string name="menu_scan">Escanear</string -->
-    <!-- UNUSED string name="menu_scan_ble">ESCANEAR BTLE</string -->
+    <!-- UNUSED string name="menu_scan_ble">Escanear BTLE</string -->
     <!-- UNUSED string name="menu_station">Estación</string -->
     <string name="menu_stats">Estadísticas</string>
     <string name="menu_survey">Info. topografía</string>
@@ -727,11 +727,11 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="hide_splay">Visualizar las tomas radiales</string>
 
     <!-- UNUSED string name="plan">Planta</string -->
-   <string name="extended">SECCIÓN LONG.</string>
-    <string name="profile">PROYECCIÓN</string>
-    <string name="fmt_plan">%1$s: PLANTA</string>
-    <string name="fmt_extended">%1$s: SECCIÓN LONG.</string>
-    <string name="fmt_profile">%1$s: PROYECCIÓN</string>
+   <string name="extended">Sección Long.</string>
+    <string name="profile">Proyección</string>
+    <string name="fmt_plan">%1$s: Planta</string>
+    <string name="fmt_extended">%1$s: Sección long.</string>
+    <string name="fmt_profile">%1$s: Proyección</string>
 
     <!-- UNUSED string name="extended_profile">Alzado extendido</string -->
     <string name="projected_profile">Alzado proyectado</string>
@@ -1314,10 +1314,10 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_lrud_count_summary">Número de tomas utilizados para LRUD</string>
 	
   <string name="pref_cat_survey">Ajustes de topografía</string>
-  <string name="pref_cat_splay">DATOS TOMAS</string>
+  <string name="pref_cat_splay">Datos de tomas</string>
   <string name="pref_cat_drawing">Ajustes de dibujo</string>
   <string name="pref_cat_import_export">Importar/Exportar</string>
-  <string name="pref_cat_exportimport">IMPORTAR</string>
+  <string name="pref_cat_exportimport">Importar</string>
   <!-- OK string name="pref_cat_exportth">Therion</string -->
   <!-- OK string name="pref_cat_exportdat">Compass</string -->
   <!-- OK string name="pref_cat_exporttro">VisualTopo</string -->
@@ -1971,8 +1971,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="menu_new">NUEVO</string -->
     <!-- UNUSED string name="menu_equate">AGREGAR EQUIVALENTE</string -->
     <!-- UNUSED string name="menu_equates">EQUIVALENTE</string -->
-    <string name="menu_open">ABRIR</string>
-    <string name="menu_save">GUARDAR</string>
+    <string name="menu_open">Abrir</string>
+    <string name="menu_save">Guardar</string>
 
     <!-- UNUSED string name="overwrite">Sobrescribir</string -->
 
@@ -2021,7 +2021,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="illegal_value">Valor inaceptable</string>
 	
     <!-- UNUSED string name="info_title">Información</string -->
-    <string name="info_surveys">TOPOGRAFÍA</string>
+    <string name="info_surveys">Topografía</string>
     <!-- UNUSED string name="info_axes">Ejes: Norte azul, Este verde</string -->
     <string name="info_grid">Cuadros de la cuadrícula (m)</string>
     <string name="info_view">Punto de vista</string>
@@ -2119,7 +2119,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="cbtn_start">Start</string -->
     <!-- UNUSED string name="cbtn_stop">Stop</string -->
 
-    <string name="survey_list">RELIEVE</string>
+    <string name="survey_list">Relieve</string>
     <string name="survey_legs"> Visual: </string>
     <string name="survey_legs_length"> Longitud toma: </string>
     <string name="survey_splays"> Tomas laterales: </string>
@@ -2140,9 +2140,9 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="south">S</string>
 
     <!-- UNUSED string name="SURVEYS">R E L I E V E</string -->
-    <string name="INFO">I N F O R M A C I Ó N</string>
-    <string name="STATIONS">E S T A C I Ó N</string>
-    <string name="STATIONS_DISTANCE">DISTANCIA ESTACIÓN</string>
+    <string name="INFO">Información</string>
+    <string name="STATIONS">Estación</string>
+    <string name="STATIONS_DISTANCE">Distancia estación</string>
     <!-- UNUSED string name="DISTANCE">DISTANCIA</string -->
     <!-- UNUSED string name="CENTER">CENTRO</string -->
     <string name="select_survey_file">Seleccionar archivo de topografía</string>
@@ -2151,7 +2151,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="select_texture_file">Seleccionar textura</string>
     <!-- UNUSED string name="select_sketch_file">Seleccionar diseño</string -->
 
-    <string name="view_title">PUNTOS DE VISTA</string>
+    <string name="view_title">Punto de vista</string>
     <string name="view_top">Parte superior</string>
     <string name="view_east">Este</string>
     <string name="view_north">Norte</string>
