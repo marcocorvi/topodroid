@@ -191,7 +191,7 @@
     <string name="save_as">сохранить как</string>
     <string name="nickname">Псевдоним</string>
     <string name="unknown_device_type">Неизвестный тип устройства %1$d</string>
-    <!-- TODO string name="unsupported_device_type">Unsupported device type</string -->
+    <string name="unsupported_device_type">Данное устройство не поддерживается</string>
 
     <string name="comment">комментарий</string>
     <!-- UNUSED string name="flag">Флаг</string -->
@@ -248,7 +248,7 @@
     <string name="MT_points_none">Нет точки MobileTopographer</string>
     <string name="MT_bad_file">Плохойй файл MobileTopographer</string>
     <string name="bad_manifest">Неверный файл манифеста [%1$d]</string>
-    <!-- TODO string name="archive_reset_color">Warning. Custon colors resetted</string -->
+    <string name="archive_reset_color">Внимание. Настройки цветов сброшены</string>
  
     <string name="pleasewait">Пожалуйста подождите</string>
     <string name="processing">обработка &#8230;</string>
