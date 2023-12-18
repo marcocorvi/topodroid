@@ -298,6 +298,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="error_sensor_required">Sensor erforderlich</string>
   <string name="error_value_required">Wert erforderlich</string>
   <string name="error_bad_fixes">Fixpunkte nicht in der Vermessung enthalten</string>
+    <!-- TODO string name="error_bad_name">Filename modified</string -->
+
   <string name="group_title">Den Kalibrierungsdaten Gruppen zuweisen</string>
   <!-- UNUSED string name="group_policy_four">Jeweils 4 Messungen</string -->
   <!-- UNUSED string name="group_policy_sixteen">Vier mal 4 Messungen, Rest einzeln</string -->

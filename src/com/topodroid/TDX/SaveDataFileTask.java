@@ -18,6 +18,7 @@ import com.topodroid.utils.TDStatus;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
+import com.topodroid.common.ExportInfo;
 
 // import java.lang.ref.WeakReference;
 
@@ -42,8 +43,8 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
   private SurveyInfo mInfo;
   private String mSurvey;
   private Device mDevice;   // only for SVX
-  private int mType;        // export type
-  private String mPrefix;   // station names prefix - Compass VTopo Winkarst
+  private ExportInfo mExportInfo;
+  private String mSurveyName; // export survey name - TopoRobot
   private boolean mToast;
   private Uri mUri = null;
 
@@ -55,11 +56,10 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
    * @param data        DB helper class
    * @param survey      survey name
    * @param device      active device (A) - only for SVX
-   * @param type        export type (index)
-   * @param prefix      station names prefix (Compass, VTopo, Winkarst)
+   * @param export_info export info (type, prefix, name ...)
    * @param toast       whether to toast
    */
-  SaveDataFileTask( Uri uri, String format, long sid, SurveyInfo info, DataHelper data, String survey, Device device, int type, String prefix, boolean toast )
+  SaveDataFileTask( Uri uri, String format, long sid, SurveyInfo info, DataHelper data, String survey, Device device, ExportInfo export_info, boolean toast )
   {
     /* if ( TDSetting.mExportUri ) */ mUri = uri; // FIXME_URI
     mFormat  = format;
@@ -68,10 +68,22 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
     mData    = data;
     mSurvey  = survey;
     mDevice  = device;
-    mType    = type;
-    mPrefix  = prefix;
+    mExportInfo = export_info;
     mToast   = toast;
-    // TDLog.v( "save data file task - type " + mType);
+    setSurveyName();
+    // TDLog.v( "save data file task - type " + export_info.index + " name " + export_info.name );
+  }
+
+  /** set the survey-name
+   */
+  private void setSurveyName()
+  {
+    if ( mExportInfo.name != null ) { // only for TopoRobot
+      int pos = mExportInfo.name.lastIndexOf('.');
+      mSurveyName = ( pos > 0 )? mExportInfo.name.substring( 0, pos ) : mExportInfo.name;
+    } else {
+      mSurveyName = mSurvey;
+    }
   }
 
   // async exec
@@ -92,10 +104,13 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
     BufferedWriter bw = null;
     FileOutputStream fos  = null;
     ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( mUri ); // mUri null handled by TDsafUri
-    if ( pfd == null ) return null;
+    if ( pfd == null ) {
+      TDLog.e( "save data file task - null fd");
+      return null;
+    }
     synchronized ( TDFile.mFilesLock ) { // too-big synch
       try {
-        switch ( mType ) {
+        switch ( mExportInfo.index ) {
           // case TDConst.SURVEY_FORMAT_TLX:
           //   filename = exportSurveyAsTlx();
           //   break;
@@ -125,7 +140,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
             // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getDatFileWithExt( mSurvey ) ) );
             bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
             pathname = mSurvey + ".dat";
-            ret = TDExporter.exportSurveyAsDat( bw, mSid, mData, mInfo, mSurvey, mPrefix );
+            ret = TDExporter.exportSurveyAsDat( bw, mSid, mData, mInfo, mSurvey, mExportInfo.prefix );
             // TDLog.v( "save DAT " + ret );
             break;
           case TDConst.SURVEY_FORMAT_DXF:
@@ -204,7 +219,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
           //   bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
           //   pathname = mSurvey + ".sur";
           //   // TDToast.make( "WARNING WinKarst export is untested" );
-          //   ret = TDExporter.exportSurveyAsSur( bw, mSid, mData, mInfo, mSurvey, mPrefix );
+          //   ret = TDExporter.exportSurveyAsSur( bw, mSid, mData, mInfo, mSurvey, mExportInfo.prefix );
           //   break;
           case TDConst.SURVEY_FORMAT_SVX: // Survex
             // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getSvxFileWithExt( mSurvey ) ) );
@@ -217,20 +232,20 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
               // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getTroxFileWithExt( mSurvey ) ) );
               bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
               pathname = mSurvey + ".trox";
-              ret = TDExporter.exportSurveyAsTrox( bw, mSid, mData, mInfo, mSurvey, mPrefix );
+              ret = TDExporter.exportSurveyAsTrox( bw, mSid, mData, mInfo, mSurvey, mExportInfo.prefix );
             } else {
               // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getTroFileWithExt( mSurvey ) ) );
               bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
               pathname = mSurvey + ".tro";
-              ret = TDExporter.exportSurveyAsTro( bw, mSid, mData, mInfo, mSurvey, mPrefix );
+              ret = TDExporter.exportSurveyAsTro( bw, mSid, mData, mInfo, mSurvey, mExportInfo.prefix );
             }
             break;
           case TDConst.SURVEY_FORMAT_TRB: // TopoRobot
             // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getTrbFileWithExt( mSurvey ) ) );
             bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
-            pathname = mSurvey + ".trb";
+            pathname = (mExportInfo.name != null )? mExportInfo.name : mSurvey + ".trb";
             // TDToast.make( "WARNING TopoRobot export is untested" );
-            ret = TDExporter.exportSurveyAsTrb( bw, mSid, mData, mInfo, mSurvey );
+            ret = TDExporter.exportSurveyAsTrb( bw, mSid, mData, mInfo, mSurveyName );
             break;
           case TDConst.SURVEY_FORMAT_TOP: // PocketTopo
             // fos = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( TDPath.getTopFileWithExt( mSurvey ) );
@@ -263,6 +278,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
   @Override
   protected void onPostExecute( String filename )
   {
+    // TDLog.v( "save data file task post exec - filename " + filename );
     if ( mToast ) { 
       if ( filename == null ) {
         TDToast.makeBad( R.string.saving_file_failed );

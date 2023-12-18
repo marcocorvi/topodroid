@@ -335,6 +335,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="error_sensor_required">Capteur nécessaire</string>
     <string name="error_value_required">Valeur nécessaire</string>
     <string name="error_bad_fixes">Corriger les points qui ne figurent pas dans le relevé</string>
+    <!-- TODO string name="error_bad_name">Filename modified</string -->
     
     <string name="group_title">Définir les groupes de données pour l\'étalonnage </string>
     <!-- UNUSED string name="group_policy_four">Règle : grouper par 4</string -->

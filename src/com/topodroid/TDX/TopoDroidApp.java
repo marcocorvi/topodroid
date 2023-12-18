@@ -48,6 +48,7 @@ import com.topodroid.dev.PairingRequest;
 import com.topodroid.common.LegType;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.PlotType;
+import com.topodroid.common.ExportInfo;
 // import com.topodroid.calib.CalibCoeffDialog;
 // import com.topodroid.calib.CalibReadTask;
 import com.topodroid.calib.CalibInfo;
@@ -516,10 +517,10 @@ public class TopoDroidApp extends Application
    */
   boolean checkCalibrationDeviceMatch() 
   {
-    CalibInfo info = mDData.selectCalibInfo( TDInstance.cid  );
-    // TDLog.Log( TDLog.LOG_CALIB, "info.device " + ((info == null)? "null" : info.device) );
+    CalibInfo calib_info = mDData.selectCalibInfo( TDInstance.cid  );
+    // TDLog.Log( TDLog.LOG_CALIB, "calib_info.device " + ((calib_info == null)? "null" : calib_info.device) );
     // TDLog.Log( TDLog.LOG_CALIB, "device " + ((mDevice == null)? "null" : mDevice.getAddress()) );
-    return ( TDInstance.getDeviceA() == null || ( info != null && info.device.equals( TDInstance.deviceAddress() ) ) );
+    return ( TDInstance.getDeviceA() == null || ( calib_info != null && calib_info.device.equals( TDInstance.deviceAddress() ) ) );
   }
 
   /** @return the list of the survey names
@@ -718,7 +719,7 @@ public class TopoDroidApp extends Application
   public void notifyConnectionState( int state )
   {
     // TODO
-    TDLog.v( "App: notify conn state " + state + " >>>>> TODO" );
+    TDLog.e( "App: notify conn state " + state + " >>>>> TODO" );
   }
   // end FIXME_COMM
 
@@ -872,10 +873,10 @@ public class TopoDroidApp extends Application
     //   mComm = new VirtualDistoXComm( this, mVirtualDistoX );
     // } else {
       if ( TDInstance.isDeviceX310() ) {
-        TDLog.v( "App: create DistoX2 comm");
+        // TDLog.v( "App: create DistoX2 comm");
         mComm = new DistoX310Comm( this );
       } else if ( TDInstance.isDeviceA3() ) {
-        TDLog.v( "App: create DistoX1 comm");
+        // TDLog.v( "App: create DistoX1 comm");
         mComm = new DistoXA3Comm( this );
       } else if ( TDInstance.isDeviceSap() ) {
         String address = TDInstance.deviceAddress();
@@ -893,7 +894,7 @@ public class TopoDroidApp extends Application
       //   // TDLog.v( "App: create ble comm. address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
       //   mComm = new BleComm( this, address, bt_device );
       } else if (TDInstance.isDeviceXBLE()){ // SIWEI_TIAN changed on Jun 2022
-        TDLog.v( "App: create DistoX-BLE comm");
+        // TDLog.v( "App: create DistoX-BLE comm");
         String address = TDInstance.deviceAddress();
         BluetoothDevice bt_device = TDInstance.getBleDevice();
         mComm = new DistoXBLEComm( this,this, address, bt_device );
@@ -1075,7 +1076,7 @@ public class TopoDroidApp extends Application
   static  boolean initEnvironmentSecond( )
   {
     if ( done_init_env_second ) return true;
-    TDLog.v("App Init Env [2]");
+    // TDLog.v("App Init Env [2]");
     done_init_env_second = true;
     // TDLog.v("APP init env. second " );
 
@@ -1112,7 +1113,7 @@ public class TopoDroidApp extends Application
 
   static boolean initEnvironmentThird()
   {
-    TDLog.v("App Init Env [3]");
+    // TDLog.v("App Init Env [3]");
     // TDLog.Profile("TDApp DB"); 
     // ***** DATABASE MUST COME BEFORE PREFERENCES
     // if ( ! with_dialog_r ) {
@@ -1125,7 +1126,7 @@ public class TopoDroidApp extends Application
         Thread loader = new Thread() {
           @Override
           public void run() {
-            TDLog.v("App loading palette");
+            // TDLog.v("App loading palette");
             Resources res = TDInstance.getResources();
             BrushManager.reloadPointLibrary( TDInstance.context, res ); // reload symbols
             BrushManager.reloadLineLibrary( res );
@@ -1161,7 +1162,7 @@ public class TopoDroidApp extends Application
   void initEnvironmentFirst(  ) // TDPrefHelper prefHlp 
   {
     if ( done_init_env_first ) return;
-    TDLog.v("App Init Env [1]");
+    // TDLog.v("App Init Env [1]");
     done_init_env_first = true;
 
     // TDLog.v( "APP init env. first " );
@@ -1272,7 +1273,7 @@ public class TopoDroidApp extends Application
   public static void setCWD( String cwd /* , String cbd */ )
   {
     if ( TDString.isNullOrEmpty( cwd ) ) cwd = TDInstance.cwd;
-    TDLog.v( "App set CWD " + cwd /* + " CBD " + cbd */ );
+    // TDLog.v( "App set CWD " + cwd /* + " CBD " + cbd */ );
 
     if ( cwd.equals( TDInstance.cwd ) ) return;
     // TDInstance.cbd = cbd;
@@ -1336,7 +1337,7 @@ public class TopoDroidApp extends Application
   public boolean readCalibCoeff( byte[] coeff )
   {
     if ( mComm == null || TDInstance.getDeviceA() == null ) {
-      TDLog.v("No comm or no device");
+      TDLog.e("No comm or no device");
       return false;
     }
     boolean ret = mComm.readCoeff( TDInstance.deviceAddress(), coeff );
@@ -1442,7 +1443,7 @@ public class TopoDroidApp extends Application
    */
   public void writeManifestFile()
   {
-    SurveyInfo info = mData.selectSurveyInfo( TDInstance.sid );
+    SurveyInfo survey_info = mData.selectSurveyInfo( TDInstance.sid );
     try {
       String filename = TDPath.getManifestFile();
       // TDPath.checkPath( filename );
@@ -1450,7 +1451,7 @@ public class TopoDroidApp extends Application
       PrintWriter pw = new PrintWriter( fw );
       pw.format( "%s %d\n",  TDVersion.string(), TDVersion.code() );
       pw.format( "%s\n", TDVersion.DB_VERSION );
-      pw.format( "%s\n", info.name );
+      pw.format( "%s\n", survey_info.name );
       pw.format("%s\n", TDUtil.currentDate() );
       fw.flush();
       fw.close();
@@ -1961,8 +1962,8 @@ public class TopoDroidApp extends Application
    */
   static void exportSurveyAsCsxAsync( Context context, Uri uri, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
   {
-    SurveyInfo info = getSurveyInfo();
-    if ( info == null ) {
+    SurveyInfo survey_info = getSurveyInfo();
+    if ( survey_info == null ) {
       TDLog.Error("Error: null survey info");
       // TDLog.v( "null survey info");
       return;
@@ -1972,7 +1973,7 @@ public class TopoDroidApp extends Application
     // String filename = TDPath.getSurveyCsxFile( fullname );
     // TDLog.Log( TDLog.LOG_IO, "exporting as CSX " + fullname + " " + filename );
     // TDLog.Log( TDLog.LOG_IO, "exporting as CSX " + fullname );
-    (new SaveFullFileTask( context, uri, TDInstance.sid, mData, info, psd1, psd2, origin, /* filename, */ fullname, 
+    (new SaveFullFileTask( context, uri, TDInstance.sid, mData, survey_info, psd1, psd2, origin, /* filename, */ fullname, 
        /* TDPath.getCsxFile(""), */ toast )).execute();
   }
 
@@ -1980,14 +1981,14 @@ public class TopoDroidApp extends Application
   // this is called sync to pass the therion file to the 3D viewer
   // static boolean exportSurveyAsThSync( )
   // {
-  //   SurveyInfo info = getSurveyInfo();
-  //   if ( info == null ) return false;
+  //   SurveyInfo survey_info = getSurveyInfo();
+  //   if ( survey_info == null ) return false;
   //   // if ( async ) {
   //   //   String saving = context.getResources().getString(R.string.saving_);
-  //   //   (new SaveDataFileTask( saving, TDInstance.sid, info, mData, TDInstance.survey, null, TDConst.SURVEY_FORMAT_TH, toast )).execute();
+  //   //   (new SaveDataFileTask( saving, TDInstance.sid, survey_info, mData, TDInstance.survey, null, TDConst.SURVEY_FORMAT_TH, toast )).execute();
   //   //   return true;
   //   // }
-  //   return ( TDExporter.exportSurveyAsTh( TDInstance.sid, mData, info, TDPath.getSurveyThFile( TDInstance.survey ) ) != null );
+  //   return ( TDExporter.exportSurveyAsTh( TDInstance.sid, mData, survey_info, TDPath.getSurveyThFile( TDInstance.survey ) ) != null );
   // }
 
   // FIXME_SYNC ok because calib files are small
@@ -3081,61 +3082,59 @@ public class TopoDroidApp extends Application
 
   // ==================================================================
   
-  /** export survey data in a user-chosen URI
+  /** export survey data in a user-chosen URI --- unused URI_EXPORT
    * @param context         context
    * @param uri             output URI
-   * @param exportIndex     export type
-   * @param exportPrefix    station names export prefix (Compass, VTopo, Winkarst
+   * @param export_info     export info
    * @param toast           whether to toast a message
    * @note called by (ShotWindow and) SurveyWindow on export
-   */
-  boolean doExportDataAsync( Context context, Uri uri, int exportIndex, String exportPrefix, boolean toast )
+   *
+  boolean doExportDataAsync( Context context, Uri uri, ExportInfo export_info, boolean toast )
   {
-    if ( exportIndex < 0 ) return false; // extra safety
-    if ( exportIndex == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
-      // TDLog.v("APP URI export zip");
+    // TDLog.v( "APP URI-export - index " + export_info.index );
+    if ( export_info.index < 0 ) return false; // extra safety
+    if ( export_info.index == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
+      // TDLog.v( "APP URIr-export zip");
       // this is SurveyWindow.doArchive
       while ( ! TopoDroidApp.mEnableZip ) Thread.yield();
       (new ExportZipTask( context, this, uri )).execute();
     } else {
-      SurveyInfo info = getSurveyInfo( );
-      if ( info == null ) return false;
-      // TDLog.v( "APP async-export survey " + TDInstance.survey + " Index " + exportIndex );
+      SurveyInfo survey_info = getSurveyInfo( );
+      if ( survey_info == null ) return false;
+      // TDLog.v( "APP URI-export survey " + TDInstance.survey + " Index " + export_info.index );
       String format = context.getResources().getString(R.string.saved_file_1);
       // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
-      (new SaveDataFileTask( uri, format, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.getDeviceA(), exportIndex, exportPrefix, toast )).execute();
+      (new SaveDataFileTask( uri, format, TDInstance.sid, survey_info, mData, TDInstance.survey, TDInstance.getDeviceA(), export_info, toast )).execute();
     }
     return true;
   }
+  */
   
-  /** export survey data in the "out" subfolder
-   * ----- APP_OUT_DATA
+  /** export survey data in the "out" subfolder --- APP_OUT_DATA
    * @param context         context
-   * @param filename        output filename
-   * @param exportIndex     export type
-   * @param exportPrefix    station names export prefix (Compass, VTopo, Winkarst)
+   * @param export_info     export info
    * @param toast           whether to toast a message
    * @note called by SurveyWindow on export
    */
-  boolean doExportDataAsync( Context context, String filename, int exportIndex, String exportPrefix, boolean toast )
+  boolean doExportDataAsync( Context context, ExportInfo export_info, boolean toast )
   {
-    if ( exportIndex < 0 ) return false; // extra safety
-    if ( exportIndex == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
-      // String filepath = TDPath.getOutFile( filename );
-      // TDLog.v("APP file export zip " + filename );
+    // TDLog.v( "APP async-export - index " + export_info.index );
+    if ( export_info.index < 0 ) return false; // extra safety
+    if ( export_info.index == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
       while ( ! TopoDroidApp.mEnableZip ) Thread.yield();
       (new ExportZipTask( context, this, null )).execute();
       // return false;
       return true;
     } else {
-      SurveyInfo info = getSurveyInfo( );
-      if ( info == null ) return false;
-      // TDLog.v( "APP async-export survey " + TDInstance.survey + " Index " + exportIndex );
+      String filename = export_info.name;
+      SurveyInfo survey_info = getSurveyInfo( );
+      if ( survey_info == null ) return false;
+      // TDLog.v( "APP async-export survey " + TDInstance.survey + " Index " + export_info.index );
       String format = context.getResources().getString(R.string.saved_file_1);
       Uri uri = Uri.fromFile( new File( TDPath.getOutFile( filename ) ) );
       if ( uri != null ) {
-        // TDLog.v("EXPORT " + TDPath.getOutFile( filename ) );
-        (new SaveDataFileTask( uri, format, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.getDeviceA(), exportIndex, exportPrefix, toast )).execute();
+        // TDLog.v("EXPORT " + filename + " info " + export_info.index + " " + export_info.name );
+        (new SaveDataFileTask( uri, format, TDInstance.sid, survey_info, mData, TDInstance.survey, TDInstance.getDeviceA(), export_info, toast )).execute();
         return true;
       }
     }
@@ -3145,7 +3144,7 @@ public class TopoDroidApp extends Application
   void shareZip( Uri uri0 )
   {
     String zipname = TDPath.getSurveyZipFile( TDInstance.survey );
-    TDLog.v("Zip file " + zipname );
+    // TDLog.v("Zip file " + zipname );
     // Uri uri = Uri.fromFile( TDFile.getFile( zipname ) );
     Uri uri = MyFileProvider.fileToUri( this, TDFile.getFile( zipname ) );
 
@@ -3163,11 +3162,11 @@ public class TopoDroidApp extends Application
   // {
   //   if ( exportType < 0 ) return;
   //   if ( TDInstance.sid >= 0 ) {
-  //     SurveyInfo info = getSurveyInfo( );
-  //     if ( info == null ) return;
+  //     SurveyInfo survey_info = getSurveyInfo( );
+  //     if ( survey_info == null ) return;
   //     TDLog.Log( TDLog.LOG_IO, "sync-export survey " + TDInstance.survey + " type " + exportType );
   //     // String saving = null; // because toast is false
-  //     (new SaveDataFileTask( null, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.getDeviceA(), exportType, false )).immed_exec();
+  //     (new SaveDataFileTask( null, TDInstance.sid, survey_info, mData, TDInstance.survey, TDInstance.getDeviceA(), exportType, false )).immed_exec();
   //   }
   // }
 

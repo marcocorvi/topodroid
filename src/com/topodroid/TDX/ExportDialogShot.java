@@ -51,7 +51,8 @@ public class ExportDialogShot extends MyDialog
   private final int mTitle;
   private int mSelectedPos;
   private String    mSurvey;
-  private String    mExportPrefix;
+  private String    mExportPrefix = null;
+  private String    mExportName = null;
 
   private LinearLayout mLayoutZip;
   private LinearLayout mLayoutCompass;
@@ -59,6 +60,7 @@ public class ExportDialogShot extends MyDialog
   private LinearLayout mLayoutSurvex;
   private LinearLayout mLayoutTherion;
   private LinearLayout mLayoutWalls;
+  private LinearLayout mLayoutTRobot;
   private LinearLayout mLayoutVTopo;
   private LinearLayout mLayoutCsv;
   private LinearLayout mLayoutDxf;
@@ -82,6 +84,7 @@ public class ExportDialogShot extends MyDialog
     mTitle = title;
     mSurvey = survey;
     mExportPrefix = null;
+    mExportName   = null;
   }
 
 // -------------------------------------------------------------------
@@ -103,6 +106,7 @@ public class ExportDialogShot extends MyDialog
     mLayoutSurvex   = (LinearLayout) findViewById( R.id.layout_survex );
     mLayoutTherion  = (LinearLayout) findViewById( R.id.layout_therion );
     mLayoutWalls    = (LinearLayout) findViewById( R.id.layout_walls );
+    mLayoutTRobot   = (LinearLayout) findViewById( R.id.layout_trobot );
     mLayoutVTopo    = (LinearLayout) findViewById( R.id.layout_vtopo );
     mLayoutCsv      = (LinearLayout) findViewById( R.id.layout_csv );
     mLayoutDxf      = (LinearLayout) findViewById( R.id.layout_dxf );
@@ -180,9 +184,13 @@ public class ExportDialogShot extends MyDialog
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
       TDLog.v("Survey format selected " + mSelected + " " + TDConst.mSurveyExportIndex[ mSelectedPos ] );
-      setOptions();
+      if ( ! setOptions() ) return;
       int selected_pos = ( mSelectedPos == TDConst.SURVEY_POS_VTOPO && TDSetting.mVTopoTrox )? -mSelectedPos : mSelectedPos;
-      mParent.doExport( mSelected, TDConst.getSurveyFilename( selected_pos, mSurvey ), mExportPrefix, false ); // second = false
+      if ( mExportName != null ) {
+        mParent.doExport( mSelected, mExportName, mExportPrefix, false ); // second = false
+      } else {
+        mParent.doExport( mSelected, TDConst.getSurveyFilename( selected_pos, mSurvey ), mExportPrefix, false ); // second = false
+      }
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
     }
@@ -199,6 +207,7 @@ public class ExportDialogShot extends MyDialog
     mLayoutSurvex.setVisibility( View.GONE );
     mLayoutTherion.setVisibility( View.GONE );
     mLayoutWalls.setVisibility( View.GONE );
+    mLayoutTRobot.setVisibility( View.GONE );
     mLayoutVTopo.setVisibility( View.GONE );
     mLayoutCsv.setVisibility( View.GONE );
     mLayoutDxf.setVisibility( View.GONE );
@@ -216,7 +225,7 @@ public class ExportDialogShot extends MyDialog
       case TDConst.SURVEY_POS_SURVEX:   mLayoutSurvex.setVisibility( View.VISIBLE ); break;
       case TDConst.SURVEY_POS_THERION:  mLayoutTherion.setVisibility( View.VISIBLE ); break;
       // case TDConst.SURVEY_POS_TOPO:  // Topo
-      // case TDConst.SURVEY_POS_TOPOROBOT: // TopoRobot
+      case TDConst.SURVEY_POS_TOPOROBOT: mLayoutTRobot.setVisibility( View.VISIBLE ); break;
       case TDConst.SURVEY_POS_VTOPO:    mLayoutVTopo.setVisibility( View.VISIBLE ); break;
       case TDConst.SURVEY_POS_WALLS:    mLayoutWalls.setVisibility( View.VISIBLE ); break;
       // case TDConst.SURVEY_POS_WINKARST: mLayoutWinkarst.setVisibility( View.VISIBLE ); break; // WinKarst
@@ -226,6 +235,81 @@ public class ExportDialogShot extends MyDialog
       // case TDConst.SURVEY_POS_GPX: // GPX
       // case TDConst.SURVEY_POS_GEOJSON: mLayoutKml.setVisibility( View.VISIBLE ); break; // GeoJson
       case TDConst.SURVEY_POS_SHAPEFILE: if ( TDLevel.overExpert) mLayoutShp.setVisibility( View.VISIBLE ); break;
+    }
+  }
+
+  /** set the TRobot export filename
+   * @param type   export type
+   * @param view   the name edit text-field
+   * @return false if name is illegal
+   */
+  private boolean setExportName( int type, EditText view )
+  {
+    Editable name = view.getText();
+    if ( name == null ) {
+      mExportName = null;
+      return true;
+    } else {
+      String export_name =name.toString().trim();
+      int len = export_name.length();
+      if ( len == 0 ) {
+        mExportName = null;
+        return true;
+      } else {
+        boolean ok = true;
+        int n_ch = 0;
+        StringBuilder sb = new StringBuilder();
+        int dots = 0;
+        for ( int i = 0; i<len; ++i ) if ( export_name.charAt( i ) == '.' ) dots++;
+        for ( int i = 0; i<len; ++i ) {
+          char ch = export_name.charAt( i );
+          if ( ch >= 'A' && ch <= 'Z' ) {
+            if ( n_ch < 8 || dots == 1 ) {
+              sb.append( ch );
+              ++ n_ch;
+            } else {
+              ok = false;
+            }
+          } else if ( ch >= 'a' && ch <= 'z' ) { // a-z
+            if ( n_ch < 8 || dots == 1 ) {
+              sb.append( ch );
+              ++ n_ch;
+            } else {
+              ok = false;
+            }
+          } else if ( ch >= '0' && ch <= '9' ) { // 0-9
+            if ( n_ch < 8 || dots == 1 ) {
+              sb.append( ch );
+              ++ n_ch;
+            } else {
+              ok = false;
+            }
+          } else if ( ch == '.' ) {
+            if ( dots == 1 ) {
+              sb.append( ch );
+            } else {
+              ok = false;
+              -- dots;
+            }
+          } else {
+            ok = false;
+          }
+        }
+        export_name = sb.toString();
+        TDLog.v( "export name " + export_name + " ok " + ok );
+        if ( ! ok ) {
+          view.setError( mContext.getResources().getString( R.string.error_bad_name ) );
+          view.setText( export_name );
+        }
+        len = export_name.length();
+        if ( len == 0 ) {
+          mExportName = null;
+        } else {
+          mExportName = export_name;
+        }
+        view.setText( export_name );
+        return ok;
+      }
     }
   }
 
@@ -243,8 +327,9 @@ public class ExportDialogShot extends MyDialog
   }
 
   /** set the options for the selected export
+   * @return true if options are OK, false otherwise
    */
-  private void setOptions()
+  private boolean setOptions()
   {
     switch ( mSelectedPos ) {
       case TDConst.SURVEY_POS_ZIP: // Zip 
@@ -283,6 +368,12 @@ public class ExportDialogShot extends MyDialog
         break;
       // case 7: // Topo
       // case 8: // TopoRobot
+      case TDConst.SURVEY_POS_TOPOROBOT:
+        {
+          EditText name = (EditText) findViewById( R.id.trobot_name );
+          if ( ! setExportName( TDConst.SURVEY_POS_TOPOROBOT, name ) ) return false;
+        }
+        break;
       case TDConst.SURVEY_POS_VTOPO: // VTopo
         {
           TDSetting.mVTopoTrox = ((CheckBox) findViewById( R.id.vtopo_trox )).isChecked();
@@ -328,6 +419,7 @@ public class ExportDialogShot extends MyDialog
         }
         break;
     }
+    return true;
   }
 
   /** initialize the options widgets
@@ -365,6 +457,8 @@ public class ExportDialogShot extends MyDialog
     ((CheckBox) findViewById( R.id.shp_splays )).setChecked( TDSetting.mKmlSplays );
     ((CheckBox) findViewById( R.id.shp_stations )).setChecked( TDSetting.mKmlStations );
     // ((CheckBox) findViewById( R.id.shp_georeference )).setChecked( TDSetting.mShpGeoref );
+
+    ((EditText) findViewById( R.id.trobot_name )).setHint( mSurvey + ".trb");
 
   }
 

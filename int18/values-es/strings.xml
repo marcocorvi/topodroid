@@ -335,6 +335,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="error_sensor_required">Introducir sensor</string>
     <string name="error_value_required">Introducir valor</string>
     <string name="error_bad_fixes">Geo-puntos no presentes en la topografía</string>
+    <!-- TODO string name="error_bad_name">Filename modified</string -->
     
     <string name="group_title">Asignar grupos de datos de calibración</string>
     <!-- UNUSED string name="group_policy_four">Política: Grupo de cuatro</string -->

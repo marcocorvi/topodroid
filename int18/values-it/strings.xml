@@ -326,6 +326,7 @@
     <string name="error_sensor_required">Sensore mancante</string>
     <string name="error_value_required">Valore mancante</string>
     <string name="error_bad_fixes">Geo-punti non presenti nel rilievo</string>
+    <!-- TODO string name="error_bad_name">Filename modified</string -->
     
     <string name="group_title">Assegna i gruppi ai dati calibrazione</string>
     <!-- UNUSED string name="group_policy_four">Metodo: gruppi di quattro</string -->

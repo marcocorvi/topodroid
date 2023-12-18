@@ -149,6 +149,27 @@
       />
   </LinearLayout>
 
+  <LinearLayout android:id="@+id/layout_trobot"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    >
+    <!-- CheckBox android:id="@+id/walls_splays"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_splays"
+      / -->
+    <EditText android:id="@+id/trobot_name"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:importantForAutofill="no"
+      android:inputType="text"
+      />
+      <!-- android:hint="@string/trobot_name_hint" -->
+  </LinearLayout>
+
   <LinearLayout android:id="@+id/layout_vtopo"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"

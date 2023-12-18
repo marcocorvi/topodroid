@@ -308,6 +308,8 @@ no campo abaixo e aperte o botão.
   <string name="error_sensor_required">Sensor exigido</string>
   <string name="error_value_required">Valor exigido</string>
   <string name="error_bad_fixes">Ponto fixos não estão na topo</string>
+    <!-- TODO string name="error_bad_name">Filename modified</string -->
+
   <string name="group_title">Grupos dados calibração</string>
   <!-- UNUSED string name="group_policy_four">Regra: agrupar 4 a 4</string -->
   <!-- UNUSED string name="group_policy_sixteen">Regra: 4 grupos de 4, o restante isolados</string -->

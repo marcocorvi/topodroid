@@ -19,6 +19,7 @@ import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDUtil;
 // import com.topodroid.utils.TDVersion;
+import com.topodroid.common.ExportInfo;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
@@ -572,8 +573,12 @@ public class SurveyWindow extends Activity
    */
   public void doExport( String type, String filename, String prefix, boolean second )
   {
-    if ( ! saveSurvey( false ) ) return;
-    mExportPrefix = prefix;
+    // TDLog.v( "SURVEY do export - name " + filename );
+    if ( ! saveSurvey( false ) ) {
+      TDLog.e( "SURVEY do export - name " + filename + " : save survey failed" );
+      return;
+    }
+    mExportInfo = null;
     int index = TDConst.surveyFormatIndex( type );
     // TDLog.v( "SURVEY do export: type " + type + " index " + index );
     // if ( index == TDConst.SURVEY_FORMAT_ZIP ) {
@@ -583,17 +588,18 @@ public class SurveyWindow extends Activity
       if ( TDInstance.sid < 0 ) {
         TDToast.makeBad( R.string.no_survey );
       } else {
+        mExportInfo = new ExportInfo( index, prefix, filename );
         // APP_OUT_DIR
-        // // if ( TDSetting.mExportUri ) { // FIXME-URI
+        // // if ( TDSetting.mExportUri ) { // FIXME-URI unused URI_EXPORT
         //   selectExportFromProvider( index, filename );
         // // } else {
-        // //   mApp.doExportDataAsync( getApplicationContext(), null, index, true ); // uri = null
+        // //   mApp.doExportDataAsync( getApplicationContext(), mExportInfo, true ); // uri = null
         // // }
         if ( index == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
           // selectExportFromProvider( index, filename );
-          mApp.doExportDataAsync( getApplicationContext(), filename, index, mExportPrefix, true ); // uri = null
+          mApp.doExportDataAsync( getApplicationContext(), mExportInfo, true ); // uri = null
         } else {
-          mApp.doExportDataAsync( getApplicationContext(), filename, index, mExportPrefix, true ); // uri = null
+          mApp.doExportDataAsync( getApplicationContext(), mExportInfo, true ); // uri = null
         }
       }
     } else {
@@ -601,9 +607,10 @@ public class SurveyWindow extends Activity
     }
   }
 
-  private static int mExportIndex; // index of the export-type 
-  private static String mExportPrefix = null; // station names export prefix
+  private static ExportInfo mExportInfo; // index of the export-type 
 
+  /* unused URI_EXPORT
+   *
   // FIXME_URI
   private void selectExportFromProvider( int index, String filename ) // EXPORT
   {
@@ -616,7 +623,7 @@ public class SurveyWindow extends Activity
     Intent intent = TDandroid.getOpenDocumentIntent( index ); // 20230118 replace previous 4 lines
     // intent.putExtra( "exporttype", index ); // index is not returned to the app
     intent.putExtra( Intent.EXTRA_TITLE, filename );
-    mExportIndex = index;
+    mExportInfo.setIndex( index );
     startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_data_title ) ), TDRequest.REQUEST_GET_EXPORT );
   }
 
@@ -631,12 +638,12 @@ public class SurveyWindow extends Activity
         if ( result == Activity.RESULT_OK ) {
           // int index = intent.getIntExtra( "exporttype", -1 );
           Uri uri = intent.getData();
-          // TDLog.v( "SURVEY export: index " + mExportIndex + " uri " + uri.toString() );
-          mApp.doExportDataAsync( getApplicationContext(), uri, mExportIndex, mExportPrefix, true );
+          // TDLog.v( "SURVEY export: index " + mExportInfor.index + " uri " + uri.toString() );
+          mApp.doExportDataAsync( getApplicationContext(), uri, mExportInfo, true );
         }
     }
   }
-  //
+  */
 
   private void doDelete()
   {
