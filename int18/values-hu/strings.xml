@@ -331,7 +331,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="error_sensor_required">Szenzor szükséges</string>
     <string name="error_value_required">Érték szükséges</string>
     <string name="error_bad_fixes">A fix pont nincs a mérésben</string>
-    <!-- TODO string name="error_bad_name">Filename modified</string -->
+    <string name="error_bad_name">Módosult fájlnév</string>
     
     <string name="group_title">Kalibrációs adat csoportok</string>
     <!-- UNUSED string name="group_policy_four">Négyesével csoportosítva</string -->
