@@ -249,6 +249,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="import_calib_mismatch">Calibration-device mismatch</string>
     <string name="import_calib_no_data">Calibration file: no data</string>
     <string name="import_calib_io_error">Calibration file: read error</string>
+    <string name="imported_file">Imported %1$s</string>
     <string name="import_zip_ok">ZIP file imported</string>
     <string name="import_zip_newer">Imported zip from more recent version</string>
     <!-- UNUSED string name="import_zip_wait">Imported zip file may take long. Please wait &#8230;</string -->

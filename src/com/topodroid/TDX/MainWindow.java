@@ -1073,6 +1073,8 @@ public class MainWindow extends Activity
   //          --> onSaveInstanceState --> onPause [ off/on ] --> onResume
   //          --> onPause --> onStop --> onDestroy
 
+  Intent mZipIntent = null; // ACTION_VIEW for zip intent
+
   @Override
   public void onStart()
   {
@@ -1153,6 +1155,42 @@ public class MainWindow extends Activity
     TDLocale.resetTheLocale();
     setMenuAdapter( );
     closeMenu();
+
+    Intent intent = getIntent();
+    if ( intent != null ) {
+      String action = intent.getAction();
+      if ( action != null ) {
+        // this code is for the action "TopoDroid.intent.action.Import"
+        if ( action.equals("TopoDroid.intent.action.Import") ) {
+          // boolean ok = false;
+          Bundle extras = getIntent().getExtras();  
+          if ( extras != null ) {
+            String request  = extras.getString( "REQUEST" );
+            if ( request != null && request.equals("unarchive") ) {
+              Uri data = intent.getData();
+              if ( data != null ) {
+                mZipIntent = intent;
+                // ok = true;
+              }
+            }
+          }
+          // if ( ! ok ) {
+          //   // setResult( RESULT_CANCELED, new Intent() );
+          //   finish();
+          // }
+        }
+        // this code is for the action "android.intent.action.VIEW"
+        // else if ( action.equals("android.intent.action.VIEW") ) {
+        //   Uri data = intent.getData();
+        //   if ( data != null ) {
+        //     mZipIntent = intent;
+        //     TDLog.v("MAIN got intent " + action + " - mZipPath " + data.getPath() );
+        //   } else {
+        //     TDLog.v("MAIN got intent " + action + " - null data");
+        //   }
+        // }
+      }
+    }
   }
 
   @Override
@@ -1208,6 +1246,15 @@ public class MainWindow extends Activity
     if ( TopoDroidApp.mCheckManualTranslation ) {
       TopoDroidApp.mCheckManualTranslation = false;
       checkManualTranslation();
+    }
+
+    if ( mZipIntent != null ) {
+      String filename = importFile( mZipIntent );
+      mZipIntent = null;
+      if ( filename != null ) {
+        updateDisplay();
+        TDToast.make( String.format( getResources().getString( R.string.imported_file ), filename ) );
+      }
     }
   }
 
@@ -1339,87 +1386,99 @@ public class MainWindow extends Activity
         break;
       case TDRequest.REQUEST_GET_IMPORT: // handle a survey/zip import 
         if ( result == Activity.RESULT_OK ) {
-          String filename;              // import filename
-          Uri uri = intent.getData();   // import uri - may NullPointerException
-          String mimetype = TDsafUri.getDocumentType( uri );
-          if ( mimetype == null ) {
-            String path = TDsafUri.getDocumentPath(this, uri);
-            if (path == null) {
-              // filename = FilenameUtils.getName(uri.toString());
-              filename = uri.getLastPathSegment();
-              int ros = filename.indexOf(":"); // drop the "content" header
-              if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
-              // TDLog.v("import path NULL filename " + filename );
-              // if ( filename != null ) { // always true
-                int pos = filename.lastIndexOf("/");
-                filename = filename.substring( pos+1 );
-              // }
-              // TDLog.v( "URI to import: " + uri.toString() + " null mime, null path, filename <" + filename + ">" );
-            } else {
-              // filename = (new File(path)).getName(); // FILE to get the survey name
-              int pos = path.lastIndexOf('/');
-              filename = ( pos >= 0 )? path.substring(pos+1) : path;
-              int ros = filename.indexOf(":"); // drop the "content" header
-              if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
-              // TDLog.v("import path " + path + " filename " + filename );
-              // TDLog.v( "URI to import: " + uri.toString() + " null mime, filename <" + filename + ">" );
-            }
-          } else { // mime not null
-            filename = uri.getLastPathSegment();
-            // TDLog.v( "URI to import: " + uri.toString() + " mime " + mimetype + " filename <" + filename + ">" );
-            int ros = filename.indexOf(":"); // drop the "content" header
-            if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
-            int pos   = filename.lastIndexOf("."); 
-            int qos_1 = filename.lastIndexOf("/") + 1;
-            String ext  = (pos >= 0 )? filename.substring( pos ).toLowerCase( Locale.getDefault() ) : ""; // extension with leading '.'
-            String name = TDString.spacesToUnderscore( (pos > qos_1 )? filename.substring( qos_1, pos ) : filename.substring( qos_1 ) );
-            // TDLog.v( "URI to import: " + filename + " mime " + mimetype + " name <" + name + "> ext <" + ext + ">" );
-            if ( mimetype.equals("application/zip") ) {
-              ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
-              FileInputStream fis = TDsafUri.docFileInputStream( pfd );
-              // if ( fis.markSupported() ) fis.mark();
-              int manifest_ok = Archiver.getOkManifest( mApp, fis );
-              try { fis.close(); } catch ( IOException e ) {
-                TDLog.Error( e.getMessage() );
-              }
-              TDsafUri.closeFileDescriptor( pfd );
-              if ( manifest_ok >= 0 ) {
-                ParcelFileDescriptor pfd2 = TDsafUri.docReadFileDescriptor( uri );
-                FileInputStream fis2 = TDsafUri.docFileInputStream( pfd2 );
-                int ret = Archiver.unArchive( mApp, fis2 ); 
-                try { fis2.close(); } catch ( IOException e ) {
-                  TDLog.Error( e.getMessage() );
-                }
-                TDsafUri.closeFileDescriptor( pfd2 );
-                if ( ret > 0 ) { // Archiver.ERR_OK_WITH_COLOR_RESET
-                  TDToast.makeWarn( R.string.archive_reset_color );
-                }
-              } else {
-                // TDLog.Error("ZIP import: failed manifest " + manifest_ok );
-                TDToast.makeBad( String.format( getResources().getString( R.string.bad_manifest ), (-manifest_ok) ) );
-              }
-            } else {
-              // TDLog.v( "import non-zip, ext " + ext );
-              String type = TDPath.checkImportTypeStream( ext );
-              if ( type != null ) {
-                // TDLog.v( "import stream type " + type + " name " + name );
-                importStream( uri, name, type );
-              } else {
-                type = TDPath.checkImportTypeReader( ext );
-                if ( type != null ) {
-                  // TDLog.v( "import reader type " + type + " filename " + filename );
-                  importReader( uri, name, type, mImportData );
-                } else {
-                  TDLog.Error("import unsupported " + ext);
-                }
-              }
-            }
-          }
+          importFile( intent );
         } else {
           TDLog.Error("IMPORT canceled");
         }
         break;
     }
+  }
+
+  /** import data from a file
+   * @param intent   import intent
+   * @return filename or null if fail
+   */
+  private String importFile( Intent intent )
+  {
+    String filename = null;       // import filename
+    Uri uri = intent.getData();   // import uri - may NullPointerException
+    String mimetype = TDsafUri.getDocumentType( uri );
+    if ( mimetype == null ) {
+      String path = TDsafUri.getDocumentPath(this, uri);
+      if (path == null) {
+        // filename = FilenameUtils.getName(uri.toString());
+        filename = uri.getLastPathSegment();
+        int ros = filename.indexOf(":"); // drop the "content" header
+        if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
+        // TDLog.v("import path NULL filename " + filename );
+        // if ( filename != null ) { // always true
+          int pos = filename.lastIndexOf("/");
+          filename = filename.substring( pos+1 );
+        // }
+        // TDLog.v( "URI to import: " + uri.toString() + " null mime, null path, filename <" + filename + ">" );
+      } else {
+        // filename = (new File(path)).getName(); // FILE to get the survey name
+        int pos = path.lastIndexOf('/');
+        filename = ( pos >= 0 )? path.substring(pos+1) : path;
+        int ros = filename.indexOf(":"); // drop the "content" header
+        if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
+        // TDLog.v("import path " + path + " filename " + filename );
+        // TDLog.v( "URI to import: " + uri.toString() + " null mime, filename <" + filename + ">" );
+      }
+    } else { // mime not null
+      filename = uri.getLastPathSegment();
+      // TDLog.v( "URI to import: " + uri.toString() + " mime " + mimetype + " filename <" + filename + ">" );
+      int ros = filename.indexOf(":"); // drop the "content" header
+      if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
+      int pos   = filename.lastIndexOf("."); 
+      int qos_1 = filename.lastIndexOf("/") + 1;
+      String ext  = (pos >= 0 )? filename.substring( pos ).toLowerCase( Locale.getDefault() ) : ""; // extension with leading '.'
+      String name = TDString.spacesToUnderscore( (pos > qos_1 )? filename.substring( qos_1, pos ) : filename.substring( qos_1 ) );
+      // TDLog.v( "URI to import: " + filename + " mime " + mimetype + " name <" + name + "> ext <" + ext + ">" );
+      if ( mimetype.equals("application/zip") ) {
+        ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
+        FileInputStream fis = TDsafUri.docFileInputStream( pfd );
+        // if ( fis.markSupported() ) fis.mark();
+        int manifest_ok = Archiver.getOkManifest( mApp, fis );
+        try { fis.close(); } catch ( IOException e ) {
+          TDLog.Error( e.getMessage() );
+        }
+        TDsafUri.closeFileDescriptor( pfd );
+        if ( manifest_ok >= 0 ) {
+          ParcelFileDescriptor pfd2 = TDsafUri.docReadFileDescriptor( uri );
+          FileInputStream fis2 = TDsafUri.docFileInputStream( pfd2 );
+          int ret = Archiver.unArchive( mApp, fis2 ); 
+          try { fis2.close(); } catch ( IOException e ) {
+            TDLog.Error( e.getMessage() );
+          }
+          TDsafUri.closeFileDescriptor( pfd2 );
+          if ( ret > 0 ) { // Archiver.ERR_OK_WITH_COLOR_RESET
+            TDToast.makeWarn( R.string.archive_reset_color );
+          }
+        } else {
+          // TDLog.Error("ZIP import: failed manifest " + manifest_ok );
+          TDToast.makeBad( String.format( getResources().getString( R.string.bad_manifest ), (-manifest_ok) ) );
+          return null;
+        }
+      } else {
+        // TDLog.v( "import non-zip, ext " + ext );
+        String type = TDPath.checkImportTypeStream( ext );
+        if ( type != null ) {
+          // TDLog.v( "import stream type " + type + " name " + name );
+          importStream( uri, name, type );
+        } else {
+          type = TDPath.checkImportTypeReader( ext );
+          if ( type != null ) {
+            // TDLog.v( "import reader type " + type + " filename " + filename );
+            importReader( uri, name, type, mImportData );
+          } else {
+            TDLog.Error("import unsupported " + ext);
+            return null;
+          }
+        }
+      }
+    }
+    return filename;
   }
 
   /** handle a HW key press

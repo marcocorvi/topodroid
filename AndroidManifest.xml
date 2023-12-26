@@ -37,10 +37,11 @@
          API-31 = Android 12
          API-32 = Android 12.1
          API-33 = Android 13    Tiramisu
+         API-34 = Android 14 
     -->
     <uses-sdk
        android:minSdkVersion="18"
-       android:targetSdkVersion="33"
+       android:targetSdkVersion="34"
        tools:ignore="GradleOverrides,OldTargetApi"
     />
     <!-- android:maxSdkVersion="29" -->
@@ -142,6 +143,16 @@
           <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
+          </intent-filter>
+          <!-- intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <data android:mimeType="application/zip" />
+          </intent-filter -->
+          <intent-filter>
+            <action android:name="TopoDroid.intent.action.Import" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <data android:mimeType="application/zip" />
           </intent-filter>
           <meta-data android:name="android.app.shortcuts"
                      android:resource="@xml/shortcuts"
