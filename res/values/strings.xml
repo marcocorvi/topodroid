@@ -1405,8 +1405,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_packet_logger_summary">Enable packets logging</string>
   <string name="pref_th2_edit_title">Sketch editing</string>
   <string name="pref_th2_edit_summary">Enable sketch editing</string>
-  <string name="pref_with_debug_title" translatable="false">Dev</string>
-  <string name="pref_with_debug_summary" translatable="false">Enable dev mode</string>
+  <string name="pref_with_debug_title" translatable="false">Developer mode</string>
+  <string name="pref_with_debug_summary" translatable="false">Enable developer mode</string>
 
   <string name="pref_bezier_step_title">Point spacing</string>
   <string name="pref_bezier_step_summary">Max. point spacing (polyline approx. of curves) [m]</string>

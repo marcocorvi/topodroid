@@ -58,6 +58,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   static final int EDITTEXT = 3;
   static final int LIST     = 4;
   static final int COLORBOX = 5;
+  static final int SPECIAL  = 6;
 
   static final int PREF     = 0;
   static final int INTEGER  = 1;
@@ -120,6 +121,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   }
 
   final static int mDebugColor = 0xff3399cc;
+  final static int mSpecialColor = 0xff6699ff; // pref_category
 
   /** @return the view that displays this preference
    * @param context   context
@@ -191,6 +193,16 @@ public class TDPref implements AdapterView.OnItemSelectedListener
 	mButton = (Button) v.findViewById( R.id.button );
 	mButton.setOnClickListener( this );
         setColor( value );
+        break;
+      case SPECIAL: // checkbox
+        v = li.inflate( R.layout.pref_checkbox, parent, false );
+	checkbox = (CheckBox) v.findViewById( R.id.checkbox );
+	checkbox.setChecked( booleanValue() );
+	checkbox.setOnClickListener( this );
+        // if ( level > TDLevel.TESTER ) {
+          ((TextView)v.findViewById(R.id.title)).setTextColor( mSpecialColor );
+        // } 
+
         break;
     }
     textview = (TextView) v.findViewById( R.id.title ); // FIXME may null pointer
@@ -396,6 +408,23 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   { 
     // TDLog.v("PREF make fwd: " + nm + " level " + lvl );
     return new TDPref( cat, nm, FORWARD, tit, -1, lvl, PREF, null, null, ctx, hlp );
+  }
+ 
+  /** factory cstr a "special" preference
+   * @param cat   category
+   * @param nm    preference name
+   * @param tit   preference title
+   * @param lvl   activity level
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   */ 
+  private static TDPref makeSpecial( int cat, String nm, int tit, int sum, int lvl, String def_str, Context ctx, TDPrefHelper hlp )
+  { 
+    // TDLog.v("PREF make special: " + nm + " level " + lvl );
+    boolean val = hlp.getBoolean( nm, def_str.startsWith("t") );
+    TDPref ret = new TDPref( cat, nm, SPECIAL, tit, sum, lvl, BOOLEAN, (val? "true" : "false"), def_str, ctx, hlp );
+    ret.b_value = val;
+    return ret;
   }
 
   /** factory cstr a "button" preference
@@ -1610,7 +1639,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
         makeFwd( cat, key[7], tit[7],          A,          ctx, hlp ), // GEEK_DEVICE
         makeFwd( cat, key[8], tit[8],          T,          ctx, hlp ), // GEEK_IMPORT
         makeFwd( cat, key[9], tit[9],          D,          ctx, hlp ), // SKETCH // FIXME_SKETCH_3D FIXME_FIXME
-        makeCbx( cat, key[10], tit[10], dsc[10],  T, def[10],  ctx, hlp ), // WITH DEBUG
+        makeSpecial( cat, key[10], tit[10], dsc[10],  T, def[10],  ctx, hlp ), // WITH DEBUG
       };
     } else {
       return new TDPref[ ] {
