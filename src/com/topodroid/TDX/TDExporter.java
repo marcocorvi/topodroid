@@ -2865,7 +2865,7 @@ public class TDExporter
    * Notes.
    * Names must limited to 14 characters: this include the "prefix" and the station FROM and TO names.
    * Distances are in feet.
-   * The flags string is composed as "#|...#", Flags characters: L (duplicate) P (no plot) X (surface).
+   * The flags string is composed as "#|...#", Flags characters: L (duplicate) P (no plot) X (surface), S (splay).
    * Splay shots are not exported, they may be used to find transversal dimensions, if LRUD are not provided  
    * Multisurvey file is possible.
    */
@@ -2902,7 +2902,7 @@ public class TDExporter
       c = -c;
     }
     writeDatFromTo( pw, prefix, from, to );
-    pw.format(Locale.US, "%.2f %.1f %.1f -9.90 -9.90 -9.90 -9.90 #|L#", blk.mLength*TDUtil.M2FT, b, c );
+    pw.format(Locale.US, "%.2f %.1f %.1f -9.90 -9.90 -9.90 -9.90 #|S#", blk.mLength*TDUtil.M2FT, b, c );
 
     // if ( duplicate ) {
     //   pw.format(" #|L#");

@@ -500,7 +500,7 @@ public class TDSetting
   public static float mEraseness = 36f;             // eraser radius
   public static int mMinShift = 60;                 // shift sensitivity
   public static int mPointingRadius = 24;
-  public static boolean mStylusOnly = true;         // stylus only sketching
+  public static boolean mStylusOnly = false;        // stylus only sketching - false by default
   public static int mStylusSize = 12;               // stylus size
 
   // public static final String LINE_SHIFT = "20.0";
@@ -2004,8 +2004,6 @@ public class TDSetting
       mPathMultiselect = tryBooleanValue(   hlp, k, v, bool(def[9]) );
     } else if ( k.equals( key[10 ] ) ) { // DISTOX_COMPOSITE_ACTIONS (bool)
       mCompositeActions = tryBooleanValue(  hlp, k, v, bool(def[10]) );
-    } else if ( k.equals( key[11 ] ) ) { // DISTOX_WITH_CONTINUE_LINE (bool)
-      mWithLineJoin = tryBooleanValue(  hlp, k, v, bool(def[11]) );
 
     } else {
       TDLog.Error("missing DEVICE key: " + k );
@@ -2564,8 +2562,10 @@ public class TDSetting
       mAutoSectionPt = tryBooleanValue( hlp, k, v, bool(def[6]) );
     // } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_LINE_CONTINUE (choice)
     //   mContinueLine  = tryIntValue( hlp, k, v, def[6] );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_AREA_BORDER (bool)
-      mAreaBorder = tryBooleanValue( hlp, k, v, bool(def[7]) );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_WITH_CONTINUE_LINE (bool)
+      mWithLineJoin = tryBooleanValue(  hlp, k, v, bool(def[7]) );
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_AREA_BORDER (bool)
+      mAreaBorder = tryBooleanValue( hlp, k, v, bool(def[8]) );
     } else {
       TDLog.Error("missing LINE key: " + k );
     }

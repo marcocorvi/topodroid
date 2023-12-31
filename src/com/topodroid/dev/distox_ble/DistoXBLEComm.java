@@ -69,7 +69,7 @@ import android.content.res.Resources;
 public class DistoXBLEComm extends TopoDroidComm
                            implements BleComm 
 {
-  private final static boolean LOG = true;
+  private final static boolean LOG = false;
   private final static boolean USE_MTU = false;
 
   final static int DATA_PRIM = 1;   // same as Bric DATA_PRIM
