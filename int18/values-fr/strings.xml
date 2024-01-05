@@ -617,7 +617,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="station">Station</string>
     <string name="station_ask">Insérer station ?</string>
     <string name="station_del">Supprimer la station du croquis ?</string>
-    <string name="station_set">Continuer le relevé depuis cette station ?</string>
+    <!-- TODO string name="station_reset">Don\'t continue survey from here</string -->
+    <string name="station_set">Continuer le relevé depuis cette station</string>
     <!-- UNUSED string name="station_base">Station de référence</string -->
     <!-- UNUSED string name="station_next">next station</string -->
     <!-- UNUSED string name="station_viewed">station consultée</string -->

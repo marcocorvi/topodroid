@@ -34,6 +34,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 class DrawingStationDialog extends MyDialog
                            implements View.OnClickListener
@@ -45,6 +46,7 @@ class DrawingStationDialog extends MyDialog
     // private TextView mCoords;
     private Button mBtnOK;
     private Button mBtnCurrent;
+    private TextView mTextCurrent;
     private Button mBtnBarrier;
     private Button mBtnHidden;
     private CheckBox mCbSplaysOn;
@@ -112,12 +114,13 @@ class DrawingStationDialog extends MyDialog
       TextView mCoords       = (TextView) findViewById(R.id.coords);
       mCoords.setText( mStation.getCoordsString() );
 
-      mBtnBarrier  = (Button) findViewById(R.id.btn_break );
+      mBtnBarrier  = (Button) findViewById(R.id.btn_barrier );
       mBtnHidden = (Button) findViewById(R.id.btn_hidden );
       mCbSplaysOn  = (CheckBox) findViewById(R.id.btn_splays_on );
       mCbSplaysOff = (CheckBox) findViewById(R.id.btn_splays_off );
       mBtnOK       = (Button) findViewById(R.id.btn_ok);
       mBtnCurrent  = (Button) findViewById(R.id.btn_set);
+      mTextCurrent = (TextView) findViewById(R.id.station_set);
       mBtnSaved    = (Button) findViewById(R.id.btn_saved);
       mBtnCancel   = (Button) findViewById(R.id.btn_cancel);
 
@@ -150,13 +153,16 @@ class DrawingStationDialog extends MyDialog
       mClino   = 0;
       if ( mParent.isAnySection() ) {
         mBtnOK.setVisibility( View.GONE );
-        mBtnCurrent.setVisibility( View.GONE );
-        mBtnBarrier.setVisibility( View.GONE );
-        mBtnHidden.setVisibility( View.GONE );
-        mBarrierLabel.setVisibility( View.GONE );
-        mHiddenLabel.setVisibility( View.GONE );
+        ((LinearLayout)findViewById( R.id.layout_set )).setVisibility( View.GONE );
+        // mBtnCurrent.setVisibility( View.GONE );
+        // ((TextView)findViewById(R.id.station_set)).setVisibility( View.GONE );
+        ((LinearLayout)findViewById( R.id.layout_barrier )).setVisibility( View.GONE );
+        // mBtnBarrier.setVisibility( View.GONE );
+        // mBarrierLabel.setVisibility( View.GONE );
+        ((LinearLayout)findViewById( R.id.layout_hidden )).setVisibility( View.GONE );
+        // mBtnHidden.setVisibility( View.GONE );
+        // mHiddenLabel.setVisibility( View.GONE );
         mLabel.setVisibility( View.GONE );
-        ((TextView)findViewById(R.id.station_set)).setVisibility( View.GONE );
         mCbSplaysOn.setOnClickListener( this );
         mCbSplaysOff.setOnClickListener( this );
 	mCbSplaysOn.setChecked( mParent.isStationSplaysOn( mStationName ) );
@@ -181,6 +187,9 @@ class DrawingStationDialog extends MyDialog
           mBtnOK.setOnClickListener( this );
         }
         mBtnCurrent.setOnClickListener( this );
+        if ( mStationName.equals( StationName.getCurrentStationName() ) ) {
+          mTextCurrent.setText( R.string.station_reset );
+        }
         mCbSplaysOn.setOnClickListener( this );
         mCbSplaysOff.setOnClickListener( this );
 	mCbSplaysOn.setChecked( mParent.isStationSplaysOn( mStationName ) );

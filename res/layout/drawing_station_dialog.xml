@@ -55,7 +55,7 @@
     />
   </LinearLayout>
 
-  <LinearLayout tools:ignore="ButtonOrder"
+  <LinearLayout android:id="@+id/layout_set" tools:ignore="ButtonOrder"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/marginv"
@@ -65,7 +65,7 @@
     <Button android:id="@+id/btn_set" 
       android:layout_marginEnd="@dimen/marginh"
       style="@style/button_default"
-      android:text="@string/button_ok"
+      android:text="@string/button_apply"
     />
     <!--  android:background="@drawable/ic_gps" -->
 
@@ -76,14 +76,14 @@
     />
   </LinearLayout>
 
-  <LinearLayout tools:ignore="ButtonOrder"
+  <LinearLayout android:id="@+id/layout_barrier" tools:ignore="ButtonOrder"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/marginv"
     android:orientation="horizontal" 
     >
 
-    <Button android:id="@+id/btn_break"
+    <Button android:id="@+id/btn_barrier"
       android:layout_marginTop="@dimen/marginv"
       style="@style/button_default"
       android:text="@string/button_ok"
@@ -97,7 +97,7 @@
       />
   </LinearLayout>
 
-  <LinearLayout tools:ignore="ButtonOrder"
+  <LinearLayout android:id="@+id/layout_hidden" tools:ignore="ButtonOrder"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/marginh"
@@ -105,7 +105,7 @@
       >
 
       <Button android:id="@+id/btn_hidden"
-	      android:layout_marginEnd="@dimen/marginh"
+	android:layout_marginEnd="@dimen/marginh"
         style="@style/button_default"
         android:text="@string/button_ok"
       />

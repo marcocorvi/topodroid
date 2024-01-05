@@ -614,6 +614,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="station">Estación</string>
     <string name="station_ask">¿Quiere Insertar estación?</string>
     <string name="station_del">¿Quiere quitar la estación del dibujo?</string>
+    <!-- TODO string name="station_reset">Don\'t continue survey from here</string -->
     <string name="station_set">¿Quiere continuar la topo desde aquí?</string>
     <!-- UNUSED string name="station_base">Estación referencia</string -->
     <!-- UNUSED string name="station_next">Siguiente estación</string -->

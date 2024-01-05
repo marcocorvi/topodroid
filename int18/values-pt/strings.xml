@@ -571,6 +571,7 @@ no campo abaixo e aperte o botão.
   <string name="station">Base</string>
   <string name="station_ask">Inserir base no croqui?</string>
   <string name="station_del">Remover base do croqui?</string>
+    <!-- TODO string name="station_reset">Don\'t continue survey from here</string -->
   <string name="station_set">Continuar linha de trena desta base?</string>
   <!-- UNUSED string name="station_base">base de referência</string -->
   <!-- UNUSED string name="station_next">próxima base</string -->

@@ -610,6 +610,7 @@
     <string name="station">测点</string>
     <string name="station_ask">插入测点到草图?</string>
     <string name="station_del">从草图删除测点?</string>
+    <!-- TODO string name="station_reset">Don\'t continue survey from here</string -->
     <string name="station_set">从这里开始测量?</string>
     <!-- UNUSED string name="station_base">reference station</string -->
     <!-- UNUSED string name="station_next">next station</string -->

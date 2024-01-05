@@ -614,6 +614,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="station">mérési pont</string>
     <string name="station_ask">Beilleszt mérési pontot a vázlatba?</string>
     <string name="station_del">Eltávolítja a mérési pontot a vázlatból?</string>
+    <!-- TODO string name="station_reset">Don\'t continue survey from here</string -->
     <string name="station_set">Folytatja innen a felmérést?</string>
     <!-- UNUSED string name="station_base">referencia álláspont</string -->
     <!-- UNUSED string name="station_next">következő álláspont</string -->

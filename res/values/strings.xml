@@ -623,7 +623,8 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="station" copyable="fr">station</string>
     <string name="station_ask">Insert station in sketch?</string>
     <string name="station_del">Remove station from sketch?</string>
-    <string name="station_set">Continue survey from here?</string>
+    <string name="station_reset">Don\'t continue survey from here</string>
+    <string name="station_set">Continue survey from here</string>
     <!-- UNUSED string name="station_base">reference station</string -->
     <!-- UNUSED string name="station_next">next station</string -->
     <!-- UNUSED string name="station_viewed">viewed station</string -->
