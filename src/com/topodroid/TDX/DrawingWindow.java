@@ -4699,7 +4699,7 @@ public class DrawingWindow extends ItemDrawer
                         lp1 = mCurrentLinePath;
                       }
                     }
-                    if ( add && lp1.size() > 1 ) {
+                    if ( add && lp1 != null && lp1.size() > 1 ) {
                       // TDLog.v("line nr points " + lp1.size() );
                       lp1.computeUnitNormal();
                       if ( mSymbol == SymbolType.LINE && BrushManager.isLineClosed( mCurrentLine ) ) {
@@ -4725,7 +4725,7 @@ public class DrawingWindow extends ItemDrawer
                       // add = DrawingPointLineFilter.copy( mCurrentAreaPath.mFirst, mCurrentAreaPath.mLast, ap );
                       ap = mCurrentAreaPath;
                     }
-                    if ( add && ap.size() > 2 ) {
+                    if ( add && ap != null && ap.size() > 2 ) {
                       ap.closePath();
                       ap.shiftShaderBy( mOffset.x, mOffset.y, mZoom );
                       mDrawingSurface.addDrawingPath( ap );

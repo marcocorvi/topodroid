@@ -493,7 +493,8 @@ public class ShotWindow extends Activity
         // TDLog.v("DATA " + "shot window got a leg. ret " + ret );
         TopoDroidApp.notifyDrawingUpdateDisplay( blk_id, ret );
       } else if ( ! StationPolicy.isSurveyBackward1() ) {
-        if ( TDLevel.overExpert || ! TDSetting.mLegOnlyUpdate ) {
+        if ( ! TDLevel.overExpert || ! TDSetting.mLegOnlyUpdate ) {
+          TDLog.v("DATA notify update drawing");
           TopoDroidApp.notifyDrawingUpdateDisplay( blk_id, ret );
         }
       }
