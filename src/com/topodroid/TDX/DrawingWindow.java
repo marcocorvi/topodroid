@@ -472,6 +472,7 @@ public class DrawingWindow extends ItemDrawer
   private DataDownloader mDataDownloader;
   private MediaManager   mMediaManager;
   private boolean mTh2Edit = false;  // whether to skip saving at modifications // TH2EDIT
+  private float mStylusSizeDpi = 1000;  // stylus size in dpi
 
   private boolean mLandscape;
   private boolean audioCheck;
@@ -2499,7 +2500,9 @@ public class DrawingWindow extends ItemDrawer
     mApp  = (TopoDroidApp)getApplication();
     mActivity = this;
     mApp_mData = TopoDroidApp.mData; 
-    mMediaManager = new MediaManager( mApp_mData );
+    mMediaManager  = new MediaManager( mApp_mData );
+    // mStylusSizeDpi = TDSetting.mStylusSize * TopoDroidApp.getDisplayDensityDpi() / 25; // STYLUS_MM
+    mStylusSizeDpi = TDSetting.mStylusSize;
 
     mFormatClosure = getResources().getString(R.string.format_closure );
 
@@ -4545,7 +4548,7 @@ public class DrawingWindow extends ItemDrawer
       int np = event.getPointerCount();
       for ( id = 0; id < np; ++id ) {
         // TDLog.v("STYLUS tool " + id + " size " + rawEvent.getSize( id ) + " " + rawEvent.getToolMajor( id ) + " " + TDSetting.mStylusSize );
-        if ( rawEvent.getToolMajor( id ) < TDSetting.mStylusSize ) {
+        if ( rawEvent.getToolMajor( id ) < mStylusSizeDpi ) {
           break;
         }
       }

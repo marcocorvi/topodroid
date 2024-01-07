@@ -501,7 +501,7 @@ public class TDSetting
   public static int mMinShift = 60;                 // shift sensitivity
   public static int mPointingRadius = 24;
   public static boolean mStylusOnly = false;        // stylus only sketching - false by default
-  public static int mStylusSize = 12;               // stylus size
+  public static float mStylusSize = 0;              // stylus size
 
   // public static final String LINE_SHIFT = "20.0";
   public static float mUnitGrid    = 1;         // 1: meter, 0.9... yard
@@ -841,6 +841,7 @@ public class TDSetting
     return ret;
   }
 
+  // private static String setStylusSize( float s ) // STYLUS_MM
   private static String setStylusSize( int s ) 
   {
     if ( s <= 0 ) { 
@@ -850,7 +851,7 @@ public class TDSetting
     }
     mStylusOnly = true;
     mStylusSize = s;
-    return Integer.toString( s );
+    return Float.toString( s );
   }
 
   // called only by TopoDroidApp.setButtonSize and internally
@@ -1245,7 +1246,8 @@ public class TDSetting
     String[] defGPlot = TDPrefKey.GEEKPLOTdef;
     mPlotShift     = prefs.getBoolean( keyGPlot[ 0], bool(defGPlot[ 0]) ); // DISTOX_PLOT_SHIFT
     mPlotSplit     = prefs.getBoolean( keyGPlot[ 1], bool(defGPlot[ 1]) ); // DISTOX_PLOT_SPLIT
-    setStylusSize(    tryInt( prefs,   keyGPlot[ 2],      defGPlot[ 2] ) );  // DISTOX_STYLUS_SIZE
+    // setStylusSize(  tryFloat( prefs,   keyGPlot[ 2],      defGPlot[ 2] ) );  // DISTOX_STYLUS_SIZE // STYLUS_MM
+    setStylusSize(  tryInt( prefs,   keyGPlot[ 2],      defGPlot[ 2] ) );  // DISTOX_STYLUS_SIZE
     mBackupNumber   = tryInt( prefs,   keyGPlot[ 3],      defGPlot[ 3] );  // DISTOX_BACKUP_NUMBER
     mBackupInterval = tryInt( prefs,   keyGPlot[ 4],      defGPlot[ 4] );  // DISTOX_BACKUP_INTERVAL
     // mAutoXSections  = prefs.getBoolean( keyGPlot[ 5], bool(defGPlot[ 5]) ); // DISTOX_AUTO_XSECTIONS
@@ -1851,6 +1853,7 @@ public class TDSetting
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_PLOT_SPLIT
       mPlotSplit = tryBooleanValue( hlp, k, v, bool(def[ 1 ]) );
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_STYLUS_SIZE
+      // setStylusSize( tryFloatValue( hlp, k, v, def[ 2] ) ); // STYLUS_MM
       setStylusSize( tryIntValue( hlp, k, v, def[ 2] ) );
     } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_BACKUP_NUMBER
       mBackupNumber  = tryIntValue( hlp, k, v, def[ 3 ] ); 
@@ -3175,6 +3178,7 @@ public class TDSetting
       pw.printf(Locale.US, "ThumbSize %d, SavedStations %c, LegonlyUpdate %c, WithAzimuth %c, WithSensors %c, Bedding %c \n", // TdManager %c\n",
         mThumbSize, tf(mSavedStations), tf(mLegOnlyUpdate), tf(mWithAzimuth), tf(mWithSensors), tf(mBedding) ); // , tf(mWithTdManager) );
 
+      // pw.printf(Locale.US, "Plot: zoom %d, drag %c, fix-origin %c, split %c, shift %c, levels %d, affine %c, stylus %.1f, slant-xsection %c, oblique %d\n", // STYLUS_MM
       pw.printf(Locale.US, "Plot: zoom %d, drag %c, fix-origin %c, split %c, shift %c, levels %d, affine %c, stylus %d, slant-xsection %c, oblique %d\n",
         mZoomCtrl, tf(mSideDrag), tf(mFixedOrigin), tf(mPlotSplit), tf(mPlotShift), mWithLevels, tf(mFullAffine), mStylusSize, tf(mSlantXSection), mObliqueMax );
       pw.printf(Locale.US, "Units: icon %.2f, line %.2f, grid %.2f, ruler %.2f\n", mUnitIcons, mUnitLines, mUnitGrid, mUnitMeasure );
@@ -3807,6 +3811,7 @@ public class TDSetting
             mPlotShift   = getBoolean( vals, 10 ); setPreference( editor, "DISTOX_PLOT_SHIFT",   mPlotShift );
             mWithLevels  = getInt( vals, 12, 0 );  setPreference( editor, "DISTOX_WITH_LEVELS",  mWithLevels );
             mFullAffine  = getBoolean( vals, 14 ); setPreference( editor, "DISTOX_FULL_AFFINE",  mFullAffine );
+            // setStylusSize( getFloat( vals, 16, 0 ) ); setPreference( editor, "DISTOX_STYLUS_SIZE", mStylusSize ); // STYLUS_MM
             setStylusSize( getInt( vals, 16, 0 ) ); setPreference( editor, "DISTOX_STYLUS_SIZE", mStylusSize );
             if ( vals.length > 18 ) {
               mSlantXSection = getBoolean( vals, 18 ); setPreference( editor, "DISTOX_SLANT_XSECTION", mSlantXSection );

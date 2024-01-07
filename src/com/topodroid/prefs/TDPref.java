@@ -1568,6 +1568,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     return new TDPref[ ] {
       makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], T, def[ 0],          ctx, hlp ), // PLOT_SHIFT
       makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1],          ctx, hlp ), // PLOT_SPLIT_MERGE
+      // makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], FLOAT,   ctx, hlp ), // STYLUS_SIZE // STYLUS_MM
       makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], INTEGER, ctx, hlp ), // STYLUS_SIZE
       makeLst( cat, key[ 3], tit[ 3], dsc[ 3], A, def[ 3], R.array.backupNumber, R.array.backupNumberValue, ctx, hlp ),
       makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], A, def[ 4], INTEGER, ctx, hlp ), // BACKUP_INTERVAL
