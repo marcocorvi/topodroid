@@ -2503,6 +2503,7 @@ public class DrawingWindow extends ItemDrawer
     mMediaManager  = new MediaManager( mApp_mData );
     // mStylusSizeDpi = TDSetting.mStylusSize * TopoDroidApp.getDisplayDensityDpi() / 25; // STYLUS_MM
     mStylusSizeDpi = TDSetting.mStylusSize;
+    // TDLog.v("STYLUS size " + mStylusSizeDpi + " flag " + TDSetting.mStylusOnly );
 
     mFormatClosure = getResources().getString(R.string.format_closure );
 
@@ -4547,17 +4548,23 @@ public class DrawingWindow extends ItemDrawer
     if ( TDSetting.mStylusOnly ) {
       int np = event.getPointerCount();
       for ( id = 0; id < np; ++id ) {
-        // TDLog.v("STYLUS tool " + id + " size " + rawEvent.getSize( id ) + " " + rawEvent.getToolMajor( id ) + " " + TDSetting.mStylusSize );
+        // TDLog.v("STYLUS tool " + id + " size " + rawEvent.getSize( id ) + " major " + rawEvent.getToolMajor( id ) );
         if ( rawEvent.getToolMajor( id ) < mStylusSizeDpi ) {
           break;
         }
       }
-      if ( id == np ) return true;
+      if ( id == np ) {
+        // TDLog.v("STYLUS only: no point found");
+        return true;
+      }
       if (action == MotionEvent.ACTION_POINTER_DOWN) {
         action = MotionEvent.ACTION_DOWN;
       } else if ( action == MotionEvent.ACTION_POINTER_UP) {
         action = MotionEvent.ACTION_UP;
+      } else {
+        // TDLog.v("on touch - unhandled action " + action );
       }
+      // TDLog.v("STYLUS action " + action + " of " + act );
     } else {
       if (action == MotionEvent.ACTION_POINTER_DOWN) {
         threePointers = (event.getPointerCount() == 3);
@@ -4588,6 +4595,7 @@ public class DrawingWindow extends ItemDrawer
     float y_canvas = event.getY(id);
     float x_scene = x_canvas/mZoom - mOffset.x;
     float y_scene = y_canvas/mZoom - mOffset.y;
+    // TDLog.v("STYLUS action " + action + " at " + x_canvas + " " + y_canvas + " scene " + x_scene + " " + y_scene );
 
     if (action == MotionEvent.ACTION_DOWN) { // ---------------------------------------- DOWN
       return onTouchDown( x_canvas, y_canvas, x_scene, y_scene );
@@ -4597,6 +4605,8 @@ public class DrawingWindow extends ItemDrawer
 
     } else if (action == MotionEvent.ACTION_UP) { // ----------------------------------- UP
       return onTouchUp( x_canvas, y_canvas, x_scene, y_scene );
+    } else {
+      TDLog.v("on touch - unhandled action " + action );
     }
     return true;
   }
@@ -4641,9 +4651,9 @@ public class DrawingWindow extends ItemDrawer
           if ( mSymbol == SymbolType.LINE ) {
             if ( mCurrentLinePath != null ) { // SAFETY CHECK
               if ( squared_shift > TDSetting.mLineSegment2 || ( mPointCnt % mLinePointStep ) > 0 ) {
-                if ( ( ! TDSetting.mStylusOnly ) || squared_shift < 10 * TDSetting.mLineSegment2 ) {
+                // if ( ( ! TDSetting.mStylusOnly ) || squared_shift < 25 * TDSetting.mLineSegment2 ) { // STYLUS_ONLY
                   mCurrentLinePath.addPoint( xs, ys );
-                }
+                // }
               }
               if ( mLandscape ) mCurrentLinePath.landscapeToPortrait();
             }
@@ -5173,7 +5183,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private boolean onTouchMove( float xc, float yc, float xs, float ys, MotionEventWrap event, boolean threePointers )
   {
-    // TDLog.v( "action MOVE mode " + mMode + " touch-mode " + mTouchMode + " rotate azimuth " + mRotateAzimuth );
+    // TDLog.v( "STYLUS action MOVE mode " + mMode + " touch " + mTouchMode + " (" + xc + " " + yc + ") " );
     if ( mTouchMode == MODE_MOVE) {
       float x_shift = xc - mSaveX; // compute shift
       float y_shift = yc - mSaveY;
@@ -5182,9 +5192,9 @@ public class DrawingWindow extends ItemDrawer
       // mSaveY = yc;
       if ( mMode == MODE_DRAW ) {
         float squared_shift = x_shift*x_shift + y_shift*y_shift;
-        if ( TDSetting.mStylusOnly ) {
-          if ( squared_shift > 10 * TDSetting.mLineSegment2 ) return false;
-        }
+        // if ( TDSetting.mStylusOnly ) { // STYLUS_ONLY
+        //   if ( squared_shift > 25 * TDSetting.mLineSegment2 ) return false; // a jump in stylus points five times the line spacing
+        // }
         if ( mSymbol == SymbolType.LINE ) {
           if ( squared_shift > TDSetting.mLineSegment2 ) {
             if ( ++mPointCnt % mLinePointStep == 0 ) {
