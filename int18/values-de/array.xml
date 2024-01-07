@@ -62,6 +62,7 @@
      <item name="none">Keine</item>
      <item name="normal">Normal</item>
      <item name="weighted">Gewichtet</item>
+     <item name="selective">Selektiv</item>
      <item name="triangles">Dreiecke</item>
   </string-array>
 

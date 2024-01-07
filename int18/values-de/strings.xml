@@ -38,7 +38,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="setup_buttonsize_title">TopoDroid setup. Knopfgröße</string>
   <string name="setup_drawingunit_title">TopoDroid setup. Icongröße</string>
   <string name="setup_done_title">TopoDroid setup. Fertig</string>
-  <string name="setup_buttonsample">Knopfgrösse</string>
+  <string name="setup_buttonsample">Knopfgröße</string>
   <string name="setup_textsize">Definiert die Textgröße.\nKann später über das Einstellungsmenü geändert werden.</string>
   <string name="setup_buttonsize">Definiert die Knopfgröße.\nKann später über das Einstellungsmenü geändert werden.</string>
   <string name="setup_drawingunit">Definiert die Icongröße auf der Skizze.\nKann später über das Einstellungsmenü geändert werden.</string>
@@ -169,7 +169,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="save_as">Speichern als</string>
   <string name="nickname">Anzeigename</string>
   <string name="unknown_device_type">Unbekanntes Gerät %1$d</string>
-    <!-- TODO string name="unsupported_device_type">Unsupported device type</string -->
+  <string name="unsupported_device_type">Unbekannter Gerätetyp</string>
 
   <string name="comment">Notizen</string>
   <!-- UNUSED string name="flag">Flag</string -->
@@ -223,7 +223,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="MT_points_none">Keine MobileTopographer Punkte</string>
   <string name="MT_bad_file">Kein MobileTopographer File</string>
   <string name="bad_manifest">Nicht unterstütztes Manifest [%1$d]</string>
-    <!-- TODO string name="archive_reset_color">Warning. Custon colors resetted</string -->
+  <string name="archive_reset_color">Warnung. Benutzerdefinierte Farben zurückgesetzt</string>
 
   <string name="pleasewait">Bitte warten</string>
   <string name="processing">bearbeite &#8230;</string>
@@ -298,7 +298,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="error_sensor_required">Sensor erforderlich</string>
   <string name="error_value_required">Wert erforderlich</string>
   <string name="error_bad_fixes">Fixpunkte nicht in der Vermessung enthalten</string>
-    <!-- TODO string name="error_bad_name">Filename modified</string -->
+  <string name="error_bad_name">Dateiname geändert</string>
 
   <string name="group_title">Den Kalibrierungsdaten Gruppen zuweisen</string>
   <!-- UNUSED string name="group_policy_four">Jeweils 4 Messungen</string -->
@@ -322,7 +322,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="splays_on_off">Hilfszüge</string>
   <!-- UNUSED string name="including_splays">including splays</string -->
   <string name="with_splays">mit Hilfszügen</string>
-  <string name="cell_size">Zellengrösse [m]</string>
+  <string name="cell_size">Zellengröße [m]</string>
   <string name="legs">Messzüge</string>
   <string name="stations">Messpunkte</string>
   <string name="splays">Hilfszüge</string>
@@ -560,7 +560,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="station">Messpunkt</string>
   <string name="station_ask">Messpunkt in Skizze anlegen?</string>
   <string name="station_del">Messpunkt aus Skizze entfernen?</string>
-    <!-- TODO string name="station_reset">Don\'t continue survey from here</string -->
+  <string name="station_reset">Nicht als Ausgangspunkt setzen</string>
   <string name="station_set">Als Ausgangspunkt setzen</string>
   <!-- UNUSED string name="station_base">Bezugsmesspunkt</string -->
   <!-- UNUSED string name="station_next">Nächster Messpunkt</string -->
@@ -772,7 +772,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="button_upload">Schreiben</string>
   <string name="button_download">Herunterladen</string>
   <string name="button_view">Anzeigen      </string>
-  <!-- UNUSED string name="button_zoomfit"   >Grösse anpassen  </string -->
+  <!-- UNUSED string name="button_zoomfit"   >Größe anpassen  </string -->
   <!-- UNUSED string name="button_landscape" >Querformat </string -->
   <!-- UNUSED string name="button_portrait"  >Hochformat  </string -->
   <string name="button_splays">Hilfszüge</string>
@@ -833,14 +833,14 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="length">Length [m]</string -->
   <!-- UNUSED string name="azimuth">Azimuth [deg]</string -->
   <!-- UNUSED string name="clino">Clino [deg]</string -->
-  <string name="hint_cellsize">Zellengrösse</string>
+  <string name="hint_cellsize">Zellengröße</string>
   <string name="hint_cwd">Arbeitsverzeichnis</string>
   <string name="hint_distance">Distanz</string>
   <string name="hint_length">Länge</string>
   <string name="hint_line">Linie</string>
   <string name="hint_origin">Basisstation</string>
   <string name="hint_point">Punkt</string>
-  <string name="hint_textsize">Textgrösse</string>
+  <string name="hint_textsize">Textgröße</string>
   <string name="hint_units">Einheiten</string>
   <string name="hint_value">Wert</string>
   <string name="hint_notes">Notizen</string>
@@ -950,7 +950,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="help_edit">Bearbeitungsmodus</string>
   <string name="help_refs">Skizzenelemente anzeigen</string>
   <string name="help_rename">Ändere Vermessungsname</string>
-  <string name="help_plot_close">Skizze schliessen</string>
+  <string name="help_plot_close">Skizze schließen</string>
   <string name="help_plot_delete">Skizze löschen</string>
   <string name="help_plot_rename">Skizze umbenennen/löschen</string>
   <string name="help_plot_scrap">Teilskizzen</string>
@@ -974,7 +974,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="help_select_mode">Auswahlmodus</string>
   <string name="help_erase_mode">Löschmodus</string>
   <string name="help_erase_size">Löschgröße [S/M/L]</string>
-  <string name="help_select_size">Werkzeuggrösse [S/M/L]</string>
+  <string name="help_select_size">Werkzeuggröße [S/M/L]</string>
   <string name="help_previous">Vorheriger Punkt</string>
   <string name="help_next">Nächster Punkt</string>
   <string name="help_recover">Die Skizze wiederherstellen</string>
@@ -1337,8 +1337,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_svg_line_dir_summary">Ausrichtungslinienpfeile in SVG Export</string>
   <string name="pref_svg_stationsize_title">Messpunktgröße</string>
   <string name="pref_svg_stationsize_summary">Textgröße der Messpunktnamen</string>
-  <string name="pref_svg_labelsize_title">Beschriftungsgrösse</string>
-  <string name="pref_svg_labelsize_summary">Grösse des Beschriftungstextes</string>
+  <string name="pref_svg_labelsize_title">Beschriftungsgröße</string>
+  <string name="pref_svg_labelsize_summary">Größe des Beschriftungstextes</string>
   <string name="pref_kml_stations_title">KML/GeoJson: Messpunkte</string>
   <string name="pref_kml_stations_summary">Messpunkte zu KML/GeoJson Export hinzufügen</string>
   <string name="pref_kml_splays_title">KML/GeoJson: Hilfszüge</string>
@@ -1535,8 +1535,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_graph_paper_scale_summary">Anzeige auf Zeichenpapier anpassen</string>
   <string name="pref_slant_xsection_title">Geneigte Profile</string>
   <string name="pref_slant_xsection_summary">Profile dürfen geneigt sein</string>
-  <!-- TODO string name="pref_oblique_projection_title">Oblique projected</string -->
-  <!-- TODO string name="pref_oblique_projection_summary">Maximum oblique projected angle</string -->
+  <string name="pref_oblique_projection_title">Projiziertes Profil</string>
+  <string name="pref_oblique_projection_summary">Max. Winkel für projiziertes Profil</string>
   <string name="pref_weeddistance_title">Punktereduktion: Distanz</string>
   <string name="pref_weeddistance_summary">Max. Distanz für Punktereduktion</string>
   <string name="pref_weedlength_title">Punktereduktion: Segmentlänge</string>
@@ -1563,8 +1563,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_line_thickness_summary">Dicke der gezeichneten Linien</string>
   <string name="pref_line_units_title">Lineneinheiten</string>
   <string name="pref_line_units_summary">Einheiten der gezeichneten Linien</string>
-  <string name="pref_line_close_title">Schliesse geschlossene Linien</string>
-  <string name="pref_line_close_summary">Schliesse Linien vom geschlossenen Typ automatisch</string>
+  <string name="pref_line_close_title">Schließe geschloßene Linien</string>
+  <string name="pref_line_close_summary">Schließe Linien vom geschloßenen Typ automatisch</string>
   <string name="pref_linesnap_title">Linien/Bereiche Verbinden</string>
   <string name="pref_linesnap_summary">Punkteigenschaften: Verbinden mit nähester Hilfsmessung</string>
   <string name="pref_linecurve_title">Linienpunkt rund/eckig</string>
@@ -1574,15 +1574,15 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_path_multiselect_title">Pfad Mehrfachauswahl</string>
   <string name="pref_path_multiselect_summary">Erlaube mehrere Pfade auszuwählen</string>
   <string name="pref_composite_actions_title">Zusammengesetzte Aktionen</string>
-  <string name="pref_composite_actions_summary">Erlaube zusammengsetzte Aktionen für Linien/Flächen</string>
-  <string name="pref_with_continue_line_title">Linie forsetzen</string>
+  <string name="pref_composite_actions_summary">Erlaube zusammengesetzte Aktionen für Linien/Flächen</string>
+  <string name="pref_with_continue_line_title">Linie fortsetzen</string>
   <string name="pref_with_continue_line_summary">Setzt eine bestehende Linie fort</string>
   <string name="pref_plane_interpolation_title">Ebene interpolieren</string>
   <string name="pref_plane_interpolation_summary">Interpoliere die Ebene anhand der Hilfszüge</string>
   <string name="pref_plot_split_title">Skizzen aufteilen</string>
   <string name="pref_plot_split_summary">Erlaube Skizzen aufzuteilen</string>
-  <string name="pref_stylus_size_title">Stiftgrösse</string>
-  <string name="pref_stylus_size_summary">Stiftgrösse [0: ignoriere]</string>
+  <string name="pref_stylus_size_title">Stiftgröße</string>
+  <string name="pref_stylus_size_summary">Stiftgröße in Pixel [0: ignoriere]</string>
   <string name="pref_fixed_thickness_title">Liniendicke Messstrecke</string>
   <string name="pref_fixed_thickness_summary">Liniendicke der Messstrecken</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->
@@ -1593,8 +1593,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_checkAttached_summary">Prüfe ob alle Messpunkte verbunden sind</string>
   <string name="pref_checkExtend_title">Messzug Ausrichtung Check</string>
   <string name="pref_checkExtend_summary">Prüfe ob alle Messzüge eine Ausrichtung im Seitenriss haben</string>
-  <string name="pref_toolbarSize_title">Icon Grösse</string>
-  <string name="pref_toolbarSize_summary">Grösse der Icons in der Leiste</string>
+  <string name="pref_toolbarSize_title">Icon Größe</string>
+  <string name="pref_toolbarSize_summary">Größe der Icons in der Leiste</string>
   <string name="pref_backup_number_title">Anzahl Backups</string>
   <string name="pref_backup_number_summary">Anzahl Skizzenbackups</string>
   <string name="pref_backup_interval_title">Backup Intervall</string>
@@ -2026,10 +2026,10 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="cpref_station_toast_summary">Dialog mit Messpunktdaten statt einer Box [n]</string>
   <string name="cpref_station_points_title">Messpunkt anzeigen</string>
   <string name="cpref_station_points_summary">Messpunkte immer anzeigen [n]</string>
-  <string name="cpref_station_point_size_title">Messpunkt Grösse</string>
-  <string name="cpref_station_point_size_summary">Grösse der Messpunkte [8 px]</string>
-  <string name="cpref_station_text_size_title">Messpunktnamen Grösse</string>
-  <string name="cpref_station_text_size_summary">Schriftgrösse der Messpunktnamen [20 pt]</string>
+  <string name="cpref_station_point_size_title">Messpunkt Größe</string>
+  <string name="cpref_station_point_size_summary">Größe der Messpunkte [8 px]</string>
+  <string name="cpref_station_text_size_title">Messpunktnamen Größe</string>
+  <string name="cpref_station_text_size_summary">Schriftgröße der Messpunktnamen [20 pt]</string>
   <string name="cpref_measure_dialog_title">Distanzmeldung</string>
   <string name="cpref_measure_dialog_summary">Distanzmeldung statt Dialog [n]</string>
   <string name="cpref_grid_above_title">Gitternetz oben</string>
@@ -2040,7 +2040,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="cpref_neg_clino_summary">Erlaube Ansichten von unterhalb des Horizonts [n]</string>
   <string name="cpref_dem_buffer_title">DEM Puffer</string>
   <string name="cpref_dem_buffer_summary">Erweiterung des DEM-Modells um die Vermessung [200]</string>
-  <string name="cpref_dem_maxsize_title">DEM max. Grösse</string>
+  <string name="cpref_dem_maxsize_title">DEM max. Größe</string>
   <string name="cpref_dem_maxsize_summary">Maximale Anzahl Zellen [400]</string>
   <string name="cpref_dem_reduce_title">DEM Reduktion</string>
   <string name="cpref_dem_reduce_summary">DEM Reduktionsmodus [Reduzieren]</string>
@@ -2051,7 +2051,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="cpref_splay_proj_title">Projizierte Hilfszüge</string>
   <string name="cpref_splay_proj_summary">Ob Hilfszüge auf den Plan projiziert werden sollen [n]</string>
   <string name="cpref_splay_thr_title">Hilfszug Grenzwert</string>
-  <string name="cpref_splay_thr_summary">Hilfszüge ausserhalb der Messung behalten [0.5]</string>
+  <string name="cpref_splay_thr_summary">Hilfszüge außerhalb der Messung behalten [0.5]</string>
   <string name="cpref_split_triangles_title">Dreiecke aufteilen</string>
   <string name="cpref_split_triangles_summary">Überschneidende Wanddreiecke aufteilen [y]</string>
   <string name="cpref_split_random_title">Punkte randomisieren</string>
@@ -2059,7 +2059,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="cpref_split_stretch_title">Wandpunkte strecken</string>
   <string name="cpref_split_stretch_summary">Wandpunkte entlang der Messzüge strecken [0.1]</string>
   <string name="cpref_powercrust_delta_title">Powercrust Delta</string>
-  <string name="cpref_powercrust_delta_summary">Hilfszüge ausschliessen, die von nahen Hilfszügen zu verschieden sind [0.1]</string>
+  <string name="cpref_powercrust_delta_summary">Hilfszüge ausschließen, die von nahen Hilfszügen zu verschieden sind [0.1]</string>
   <!--  string name="cpref_convex_hull_title">Convexe Hülle</string -->
   <!-- UNUSED string name="TopoGLPerms">Permissions</string -->
   <!-- UNUSED string name="cperms_mandatory">Cave3D cannot run without:</string -->
