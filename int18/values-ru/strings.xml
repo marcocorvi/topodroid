@@ -1701,7 +1701,7 @@
   <string name="pref_plot_split_title">Разделить/Склеить абрис</string>
   <string name="pref_plot_split_summary">Разделить абрис на куски или склеить несколько абрисов в один</string>
   <string name="pref_stylus_size_title">Размер точки стилуса</string>
-  <string name="pref_stylus_size_summary">Размер точки касания стилуса [0: игнорировать касания]</string>
+  <string name="pref_stylus_size_summary">Размер точки касания стилуса [пиксели, 0: игнорировать касания]</string>
   <string name="pref_fixed_thickness_title">Толщина нитки хода</string>
   <string name="pref_fixed_thickness_summary">Толщина нитки хода</string>
   <!-- UNUSED string name="pref_device_title">Устройство</string -->
