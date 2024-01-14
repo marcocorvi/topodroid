@@ -4651,9 +4651,9 @@ public class DrawingWindow extends ItemDrawer
           if ( mSymbol == SymbolType.LINE ) {
             if ( mCurrentLinePath != null ) { // SAFETY CHECK
               if ( squared_shift > TDSetting.mLineSegment2 || ( mPointCnt % mLinePointStep ) > 0 ) {
-                // if ( ( ! TDSetting.mStylusOnly ) || squared_shift < 25 * TDSetting.mLineSegment2 ) { // STYLUS_ONLY
-                  mCurrentLinePath.addPoint( xs, ys );
-                // }
+                if ( ( ! TDSetting.mStylusOnly ) || squared_shift < 25 * TDSetting.mLineSegment2 ) { // STYLUS_ONLY: to intercept artifacts
+                  mCurrentLinePath.addPoint( xs, ys ); // a jump in stylus points five times the line spacing
+                }
               }
               if ( mLandscape ) mCurrentLinePath.landscapeToPortrait();
             }
@@ -5192,9 +5192,9 @@ public class DrawingWindow extends ItemDrawer
       // mSaveY = yc;
       if ( mMode == MODE_DRAW ) {
         float squared_shift = x_shift*x_shift + y_shift*y_shift;
-        // if ( TDSetting.mStylusOnly ) { // STYLUS_ONLY
-        //   if ( squared_shift > 25 * TDSetting.mLineSegment2 ) return false; // a jump in stylus points five times the line spacing
-        // }
+        if ( TDSetting.mStylusOnly ) { // STYLUS_ONLY: to intercept artifacts
+          if ( squared_shift > 25 * TDSetting.mLineSegment2 ) return false; // a jump in stylus points five times the line spacing
+        }
         if ( mSymbol == SymbolType.LINE ) {
           if ( squared_shift > TDSetting.mLineSegment2 ) {
             if ( ++mPointCnt % mLinePointStep == 0 ) {

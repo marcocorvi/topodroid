@@ -229,6 +229,8 @@ class ParserVisualTopoX extends ImportParser
     boolean inCavite  = false;
     boolean inMesures = false;
     boolean inVisee   = false;
+    boolean withProf  = false;
+    float   prevProf  = 0;
     String value;
 
     try {
@@ -250,7 +252,13 @@ class ParserVisualTopoX extends ImportParser
           mStation = ( (splayAtFrom || isSplay )? mFrom : mTo );
           mLength  = getFloatValue("Long=\"", line, 0) * ul; 
           mBearing = angle( getFloatValue("Az=\"", line, 0), ub, dmb); 
-          mClino   = angle( getFloatValue("Pte=\"", line, 0), uc, dmc);
+          if ( withProf ) {
+            float prof = getFloatValue("Pte=\"", line, 0) * ul;
+            mClino = ( mLength > 0.001 )? TDMath.asind( (prof - prevProf) / mLength ) : 0;
+            prevProf = prof;
+          } else {
+            mClino   = angle( getFloatValue("Pte=\"", line, 0), uc, dmc);
+          }
           mBearing = TDMath.in360( mBearing );
           if ( mLrud && ! isSplay ) {
             mLeft  = getFloatValue( "G=\"", line, -1 ) * ul;
@@ -284,7 +292,7 @@ class ParserVisualTopoX extends ImportParser
             }
           }
           inVisee = false;
-        } else if ( line.startsWith("<Param>") && inMesures ) {
+        } else if ( line.startsWith("<Param") && inMesures ) {
           if ( "Deca".equals( getValue( "InstrDist=\"", line ) ) ) {
             ub = 1; dmb = false;
             uc = 1; dmc = false;
@@ -308,6 +316,9 @@ class ParserVisualTopoX extends ImportParser
                 TDLog.v("VTopo X: Degd: nothing"); // uc = 1, dmc = false
               }
             }
+          } else if ( "Prof".equals( getValue( "InstrPte=\"", line ) ) ) {
+            withProf = true;
+            // units profondeur ?
           }
           mDeclination = getFloatValue( "Declin=\"", line, SurveyInfo.DECLINATION_UNSET );
           if ( ( value = getValue( "DeclinAuto=\"", line ) ) != null ) {

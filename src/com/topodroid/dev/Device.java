@@ -68,8 +68,8 @@ public class Device
   }
 
   public boolean isBT( )  { return mType == DISTO_X310  || mType == DISTO_A3; }
-  public boolean isBLE( ) { return mType == DISTO_BRIC4 || mType == DISTO_SAP5 || mType == DISTO_XBLE || mType == DISTO_SAP6; } // SIWEI_TIAN
-  public static boolean isBle( int type ) { return type == DISTO_BRIC4 || type == DISTO_SAP5 || type == DISTO_XBLE || type == DISTO_SAP6; } // SIWEI_TIAN
+  public boolean isBLE( ) { return mType == DISTO_XBLE || mType == DISTO_BRIC4 || mType == DISTO_BRIC5 || mType == DISTO_SAP5 || mType == DISTO_SAP6; } // SIWEI_TIAN
+  public static boolean isBle( int type ) { return type == DISTO_XBLE || type == DISTO_BRIC4 || type == DISTO_BRIC5 ||  type == DISTO_SAP5 || type == DISTO_SAP6; } // SIWEI_TIAN
 
   public boolean isDistoX( )    { return mType == DISTO_X310  || mType == DISTO_A3; }
   public boolean isA3( )        { return mType == DISTO_A3; }
@@ -90,8 +90,8 @@ public class Device
   public static boolean isSap6( int type )      { return type == DISTO_SAP6; }
 
   // SIWEI_TIAN
-  public boolean canSendCommand() { return mType == DISTO_X310 || mType == DISTO_BRIC4 || mType == DISTO_BRIC5 || mType == DISTO_SAP6; }
-  public static boolean canSendCommand( int type ) { return type == DISTO_X310 || type == DISTO_BRIC4 || type == DISTO_BRIC5 || type == DISTO_SAP6; }
+  // public boolean canSendCommand() { return mType == DISTO_X310 mType == DISTO_XBLE || mType == DISTO_BRIC4 || mType == DISTO_BRIC5 || mType == DISTO_SAP6; }
+  // public static boolean canSendCommand( int type ) { return type == DISTO_X310 || type == DISTO_XBLE type == DISTO_BRIC4 || type == DISTO_BRIC5 || type == DISTO_SAP6; }
 
   /** @return the device name given the model string
    * @param model   model string

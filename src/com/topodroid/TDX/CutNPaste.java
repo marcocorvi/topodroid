@@ -418,7 +418,7 @@ public class CutNPaste
         if ( ww > w ) w = ww;
       }
     }
-    else if ( TDInstance.deviceType() == Device.DISTO_BRIC4 ) // -----------------------------------------------------
+    else if ( TDInstance.isDeviceBric() ) // -----------------------------------------------------
     {
       // ----- TURN LASER ON/OFF
       //
