@@ -1711,7 +1711,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_plot_split_title">Vázlat felosztás / egyesítés</string>
   <string name="pref_plot_split_summary">Vázlat felosztás és egyesítés akciók</string>
   <string name="pref_stylus_size_title">Toll méret</string>
-  <string name="pref_stylus_size_summary">Toll méret [0: nincs]</string>
+  <string name="pref_stylus_size_summary">Toll méret [pxl, 0: nincs]</string>
   <string name="pref_fixed_thickness_title">Poligonvonal vastagsága</string>
   <string name="pref_fixed_thickness_summary">Poligonvonal vastagsága</string>
   <!-- UNUSED string name="pref_device_title">Műszer</string -->
