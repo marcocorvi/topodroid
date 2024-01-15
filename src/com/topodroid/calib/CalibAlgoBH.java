@@ -53,6 +53,7 @@ public class CalibAlgoBH extends CalibAlgo
     super( coeff, nonLinear );
     // mNonLinear = nonLinear;
     // coeffToNL( coeff, nL );
+    TDLog.v("CALIB BH: coeff, nl " + nonLinear );
   }
 
 
@@ -62,6 +63,7 @@ public class CalibAlgoBH extends CalibAlgo
   {
     super( N, nonLinear );
     // mNonLinear = nonLinear;
+    TDLog.v("CALIB BH: N " + N + ", nl " + nonLinear );
   }
 
   // void setAlgorithm( boolean nonLinear ) { mNonLinear = nonLinear; }
@@ -137,6 +139,9 @@ public class CalibAlgoBH extends CalibAlgo
     if ( mNonLinear ) {
       gl = new TDVector[nn]; // linearized g values
       gs = new TDMatrix[nn]; // Diagonal(g^2 - 1/2)
+      TDLog.v("CALIB BH optimize non-linear");
+    } else {
+      TDLog.v("CALIB BH optimize linear");
     }
 
     TDMatrix aG0;

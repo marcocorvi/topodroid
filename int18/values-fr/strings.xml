@@ -1675,8 +1675,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_weedlength_summary">Longueur maximale d\'un segment de ligne</string>
     <string name="pref_weedbuffer_title">Weeding segment buffer</string>
     <string name="pref_weedbuffer_summary">Mémoire tampon autour d\'un segment de ligne [pxl]</string>
-    <string name="pref_calib_algo_title">Algorithme</string>
-    <string name="pref_calib_algo_summary">Algorithme d\'étalonnage</string>
+    <!-- UNUSED string name="pref_calib_algo_title">Algorithme</string -->
+    <!-- UNUSED string name="pref_calib_algo_summary">Algorithme d\'étalonnage</string -->
     <string name="pref_group_by_title">Principe de groupage</string>
     <string name="pref_group_by_summary">Principe de groupage des données d\'étalonnage</string>
     <string name="pref_group_title">Groupe de tolérance</string>

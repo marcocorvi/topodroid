@@ -253,6 +253,18 @@ public class GMActivity extends Activity
   {    
     long cid = TDInstance.cid;
     switch ( mAlgo ) {
+      case CalibInfo.ALGO_AUTO:
+        { // 2024-01-15 added
+          int algo = mApp.getCalibAlgoFromDevice();
+          TDLog.v("GM algo --> " + algo );
+          if ( algo == CalibInfo.ALGO_NON_LINEAR ) {
+            mCalibration = new CalibAlgoBH( 0, true );
+          } else {
+            mCalibration = new CalibAlgoBH( 0, false );
+          }
+        }
+        break;
+      // app.setGMdownload( true ); // GM_DOWNLOAD
       case CalibInfo.ALGO_NON_LINEAR:
         mCalibration = new CalibAlgoBH( 0, true );
         // FIXME set the calibration algorithm (whether non-linear or linear)
@@ -1103,10 +1115,11 @@ public class GMActivity extends Activity
       if ( TDInstance.cid >= 0 ) {
         setTitle( R.string.calib_compute_coeffs );
         setTitleColor( TDColor.COMPUTE );
-        if ( mAlgo == CalibInfo.ALGO_AUTO ) { 
-          mAlgo = ( TDSetting.mCalibAlgo != CalibInfo.ALGO_AUTO ) ? TDSetting.mCalibAlgo : CalibInfo.ALGO_LINEAR;
-          mApp.updateCalibAlgo( mAlgo );
-        }
+        // 2024-01-15 commented
+        // if ( mAlgo == CalibInfo.ALGO_AUTO ) { 
+        //   mAlgo = ( TDSetting.mCalibAlgo != CalibInfo.ALGO_AUTO ) ? TDSetting.mCalibAlgo : CalibInfo.ALGO_LINEAR;
+        //   mApp.updateCalibAlgo( mAlgo );
+        // }
         new CalibComputer( this, -1L, 0, CalibComputer.CALIB_COMPUTE_CALIB ).execute();
       } else {
         TDToast.makeBad( R.string.no_calibration );

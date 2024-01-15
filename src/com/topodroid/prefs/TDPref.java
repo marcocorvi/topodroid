@@ -837,15 +837,15 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], A, def[ 4], ctx, hlp ),
     // r[ ] = makeCbx( cat, key[  ], tit[  ], dsc[  ], X, def[  ], ctx, hlp );
       makeLst( cat, key[ 5], tit[ 5], dsc[ 5], A, def[ 5], R.array.rawCData, R.array.rawCDataValue, ctx, hlp ),
-      makeLst( cat, key[ 6], tit[ 6], dsc[ 6], E, def[ 6], R.array.calibAlgo, R.array.calibAlgoValue, ctx, hlp ),
+      // makeLst( cat, key[ 6], tit[ 6], dsc[ 6], E, def[ 6], R.array.calibAlgo, R.array.calibAlgoValue, ctx, hlp ),
+      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], D, def[ 6], FLOAT, ctx, hlp ),
       makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], D, def[ 7], FLOAT, ctx, hlp ),
       makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], D, def[ 8], FLOAT, ctx, hlp ),
       makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], D, def[ 9], FLOAT, ctx, hlp ),
-      makeEdt( cat, key[10], tit[10], dsc[10], D, def[10], FLOAT, ctx, hlp ),
-      makeEdt( cat, key[11], tit[11], dsc[11], D, def[11], FLOAT, ctx, hlp ), // AUTO_CAL
+      makeEdt( cat, key[10], tit[10], dsc[10], D, def[10], FLOAT, ctx, hlp ), // AUTO_CAL
+      makeEdt( cat, key[11], tit[11], dsc[11], D, def[11], FLOAT, ctx, hlp ),
       makeEdt( cat, key[12], tit[12], dsc[12], D, def[12], FLOAT, ctx, hlp ),
-      makeEdt( cat, key[13], tit[13], dsc[13], D, def[13], FLOAT, ctx, hlp ),
-      makeEdt( cat, key[14], tit[14], dsc[14], D, def[14], FLOAT, ctx, hlp )
+      makeEdt( cat, key[13], tit[13], dsc[13], D, def[13], FLOAT, ctx, hlp )
     };
   }
 

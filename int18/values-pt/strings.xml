@@ -1553,8 +1553,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_weedlength_summary">Comprimento máximo de um segmento de linha na simplificação de linhas</string>
   <string name="pref_weedbuffer_title">Zona tampão seg ref</string>
   <string name="pref_weedbuffer_summary">Zona tampão em torno de segmento de linha para simplificação de linhas [pxl]</string>
-  <string name="pref_calib_algo_title">Algoritmo</string>
-  <string name="pref_calib_algo_summary">Algoritmo de calibração</string>
+  <!-- UNUSED string name="pref_calib_algo_title">Algoritmo</string -->
+  <!-- UNUSED string name="pref_calib_algo_summary">Algoritmo de calibração</string -->
   <string name="pref_group_by_title">Regra agrupamento</string>
   <string name="pref_group_by_summary">Regra para agrupamento dos dados de calibração</string>
   <string name="pref_group_title">Toler grupos</string>

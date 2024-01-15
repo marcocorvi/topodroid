@@ -260,7 +260,7 @@ public class TDPrefKey
     "DISTOX_CALIB_SHOT_DOWNLOAD", // remote calib data immediately downloaded
     // "DISTOX_RAW_DATA",
     "DISTOX_RAW_CDATA",      // 5 // whether to display also raw calib data
-    "DISTOX_CALIB_ALGO",          // calib algo [auto, linear, non-linear]
+    // "DISTOX_CALIB_ALGO",          // calib algo [auto, linear, non-linear]
     "DISTOX_ALGO_MIN_ALPHA",      // min-algo params: alpha
     "DISTOX_ALGO_MIN_BETA",       //                  beta
     "DISTOX_ALGO_MIN_GAMMA",      //                  gamma
@@ -280,7 +280,7 @@ public class TDPrefKey
     R.string.pref_calib_shot_download_title,
     // R.string.pref_raw_data_title,
     R.string.pref_raw_data_title,
-    R.string.pref_calib_algo_title,
+    // R.string.pref_calib_algo_title,
     R.string.pref_algo_min_alpha_title,
     R.string.pref_algo_min_beta_title, 
     R.string.pref_algo_min_gamma_title,
@@ -299,7 +299,7 @@ public class TDPrefKey
     R.string.pref_calib_shot_download_summary,
     // R.string.pref_raw_data_summary,
     R.string.pref_raw_data_summary,
-    R.string.pref_calib_algo_summary,
+    // R.string.pref_calib_algo_summary,
     R.string.pref_algo_min_alpha_summary,
     R.string.pref_algo_min_beta_summary,
     R.string.pref_algo_min_gamma_summary,
@@ -318,7 +318,7 @@ public class TDPrefKey
     TRUE,
     // FALSE,
     TDString.ZERO,
-    TDString.ZERO,
+    // TDString.ZERO,
     "0.1",
     "4.0",
     "1.0",

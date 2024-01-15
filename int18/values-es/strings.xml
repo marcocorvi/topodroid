@@ -1677,8 +1677,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_weedlength_summary">Longitud máxima de un segmento de línea.</string>
   <string name="pref_weedbuffer_title">Búfer de segmento de eliminación</string>
   <string name="pref_weedbuffer_summary">Zona de influencia alrededor de los segmentos de eliminación [pxl]</string>
-  <string name="pref_calib_algo_title">Algoritmo</string>
-  <string name="pref_calib_algo_summary">Algoritmo Calibración</string>
+  <!-- UNUSED string name="pref_calib_algo_title">Algoritmo</string -->
+  <!-- UNUSED string name="pref_calib_algo_summary">Algoritmo Calibración</string -->
   <string name="pref_group_by_title">Política del grupo</string>
   <string name="pref_group_by_summary">Política de grupo de datos calibración</string>
   <string name="pref_group_title">Precisión grupo</string>

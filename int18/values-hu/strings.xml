@@ -1672,8 +1672,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_weedlength_summary">Maximális vonal szegmens hossz összeolvasztásnál [m]</string>
   <string name="pref_weedbuffer_title">Szegmens puffer</string>
   <string name="pref_weedbuffer_summary">Puffer a vonal szegmens körül összeolvasztásnál [pxl]</string>
-  <string name="pref_calib_algo_title">Algoritmus</string>
-  <string name="pref_calib_algo_summary">Kalibrációs algoritmus</string>
+  <!-- UNUSED string name="pref_calib_algo_title">Algoritmus</string -->
+  <!-- UNUSED string name="pref_calib_algo_summary">Kalibrációs algoritmus</string -->
   <string name="pref_group_by_title">Csoportosítási szabály</string>
   <string name="pref_group_by_summary">Szabály a kalibrációs adatok csoportosításához</string>
   <string name="pref_group_title">Csoport elemek tűrése</string>

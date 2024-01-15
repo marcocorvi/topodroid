@@ -1543,8 +1543,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_weedlength_summary">Max. Segmentlänge für Punktereduktion</string>
   <string name="pref_weedbuffer_title">WPunktereduktion: Puffer</string>
   <string name="pref_weedbuffer_summary">Puffer um ein Liniensegment [pxl]</string>
-  <string name="pref_calib_algo_title">Algorithmus</string>
-  <string name="pref_calib_algo_summary">Kalibrierung-Algorithmus</string>
+  <!-- UNUSED string name="pref_calib_algo_title">Algorithmus</string -->
+  <!-- UNUSED string name="pref_calib_algo_summary">Kalibrierung-Algorithmus</string -->
   <string name="pref_group_by_title">Gruppierung</string>
   <string name="pref_group_by_summary">Gruppierung</string>
   <string name="pref_group_title">Gruppierungs-Toleranz</string>

@@ -1658,8 +1658,8 @@
   <string name="pref_weedlength_summary">Lunghezza massima di un segmento di linea</string>
   <string name="pref_weedbuffer_title">Buffer segmenti weeding</string>
   <string name="pref_weedbuffer_summary">Buffer intorno ai segmenti weeding [pxl]</string>
-  <string name="pref_calib_algo_title">Algoritmo</string>
-  <string name="pref_calib_algo_summary">Algortimo di calibrazione</string>
+  <!-- UNUSED string name="pref_calib_algo_title">Algoritmo</string -->
+  <!-- UNUSED string name="pref_calib_algo_summary">Algortimo di calibrazione</string -->
   <string name="pref_group_by_title">Politica gruppi</string>
   <string name="pref_group_by_summary">Politica raggruppamento dati calibrazione</string>
   <string name="pref_group_title">Tolleranza gruppi</string>

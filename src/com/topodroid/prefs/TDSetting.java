@@ -332,7 +332,7 @@ public class TDSetting
 
   // public static boolean mRawData = false;   // whether to display calibration raw data as well
   public static int   mRawCData  = 0;
-  public static int   mCalibAlgo = 0;   // calibration algorithm: 0 auto, 1 linear, 2 non-linear
+  // public static int   mCalibAlgo = 0;   // calibration algorithm: 0 auto, 1 linear, 2 non-linear
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // DEVICE
@@ -983,22 +983,22 @@ public class TDSetting
 
     String[] keyCalib = TDPrefKey.CALIB;
     String[] defCalib = TDPrefKey.CALIBdef;
-    mGroupBy       = tryInt(   prefs,      keyCalib[0],      defCalib[0] );  // DISTOX_GROUP_BY choice: 0, 1, 2
-    mGroupDistance = tryFloat( prefs,      keyCalib[1],      defCalib[1] );  // DISTOX_GROUP_DISTANCE
-    mCalibEps      = tryFloat( prefs,      keyCalib[2],      defCalib[2] );  // DISTOX_CAB_EPS
-    mCalibMaxIt    = tryInt(   prefs,      keyCalib[3],      defCalib[3] );  // DISTOX_CALIB_MAX_IT
-    mCalibShotDownload = prefs.getBoolean( keyCalib[4], bool(defCalib[4]) ); // DISTOX_CALIB_SHOT_DOWNLOAD
+    mGroupBy       = tryInt(   prefs,      keyCalib[ 0],     defCalib[ 0] );  // DISTOX_GROUP_BY choice: 0, 1, 2
+    mGroupDistance = tryFloat( prefs,      keyCalib[ 1],     defCalib[ 1] );  // DISTOX_GROUP_DISTANCE
+    mCalibEps      = tryFloat( prefs,      keyCalib[ 2],     defCalib[ 2] );  // DISTOX_CAB_EPS
+    mCalibMaxIt    = tryInt(   prefs,      keyCalib[ 3],     defCalib[ 3] );  // DISTOX_CALIB_MAX_IT
+    mCalibShotDownload = prefs.getBoolean( keyCalib[ 4], bool(defCalib[ 4]) ); // DISTOX_CALIB_SHOT_DOWNLOAD
     // mRawData       = prefs.getBoolean( keyCalib[], bool(defCalib[]) );    // DISTOX_RAW_DATA 20
-    mRawCData      = tryInt( prefs,        keyCalib[5],      defCalib[5] );  // DISTOX_RAW_CDATA 20
-    mCalibAlgo     = tryInt( prefs,        keyCalib[6],      defCalib[6] );  // DISTOX_CALIB_ALGO choice: 0, 1, 2
-    mAlgoMinAlpha  = tryFloat( prefs,      keyCalib[7],      defCalib[7] );  // DISTOX_ALGO_MIN_ALPHA
-    mAlgoMinBeta   = tryFloat( prefs,      keyCalib[8],      defCalib[8] );  // DISTOX_ALGO_MIN_BETA
-    mAlgoMinGamma  = tryFloat( prefs,      keyCalib[9],      defCalib[9] );  // DISTOX_ALGO_MIN_GAMMA
-    mAlgoMinDelta  = tryFloat( prefs,      keyCalib[10],     defCalib[10] ); // DISTOX_ALGO_MIN_DELTA
-    mAutoCalBeta   = tryFloat( prefs,      keyCalib[11],     defCalib[11] ); // DISTOX_AUTO_CAL_BETA
-    mAutoCalEta    = tryFloat( prefs,      keyCalib[12],     defCalib[12] ); // DISTOX_AUTO_CAL_ETA
-    mAutoCalGamma  = tryFloat( prefs,      keyCalib[13],     defCalib[13] ); // DISTOX_AUTO_CAL_GAMMA
-    mAutoCalDelta  = tryFloat( prefs,      keyCalib[14],     defCalib[14] ); // DISTOX_AUTO_CAL_DELTA
+    mRawCData      = tryInt( prefs,        keyCalib[ 5],     defCalib[ 5] );  // DISTOX_RAW_CDATA 20
+    // mCalibAlgo     = tryInt( prefs,        keyCalib[ 6],      defCalib[ 6] );  // DISTOX_CALIB_ALGO choice: 0, 1, 2
+    mAlgoMinAlpha  = tryFloat( prefs,      keyCalib[ 6],     defCalib[ 6] );  // DISTOX_ALGO_MIN_ALPHA
+    mAlgoMinBeta   = tryFloat( prefs,      keyCalib[ 7],     defCalib[ 7] );  // DISTOX_ALGO_MIN_BETA
+    mAlgoMinGamma  = tryFloat( prefs,      keyCalib[ 8],     defCalib[ 8] );  // DISTOX_ALGO_MIN_GAMMA
+    mAlgoMinDelta  = tryFloat( prefs,      keyCalib[ 9],     defCalib[ 9] ); // DISTOX_ALGO_MIN_DELTA
+    mAutoCalBeta   = tryFloat( prefs,      keyCalib[10],     defCalib[10] ); // DISTOX_AUTO_CAL_BETA
+    mAutoCalEta    = tryFloat( prefs,      keyCalib[11],     defCalib[11] ); // DISTOX_AUTO_CAL_ETA
+    mAutoCalGamma  = tryFloat( prefs,      keyCalib[12],     defCalib[12] ); // DISTOX_AUTO_CAL_GAMMA
+    mAutoCalDelta  = tryFloat( prefs,      keyCalib[13],     defCalib[13] ); // DISTOX_AUTO_CAL_DELTA
     // TDLog.v("SETTING load calib done");
 
     String[] keyDevice = TDPrefKey.DEVICE;
@@ -1586,8 +1586,8 @@ public class TDSetting
     } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_RAW_CDATA
       // mRawData       = tryBooleanValue( hlp, k, v, false );  // DISTOX_RAW_DATA (choice)
       mRawCData      = tryIntValue( hlp, k, v, def[5] ); 
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_CALIB_ALGO (choice)
-      mCalibAlgo     = tryIntValue( hlp, k, v, def[6] );
+    // } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_CALIB_ALGO (choice)
+    //   mCalibAlgo     = tryIntValue( hlp, k, v, def[6] );
     } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_ALGO_MIN_ALPHA
       mAlgoMinAlpha   = tryFloatValue( hlp, k, v, def[7] );
       if ( mAlgoMinAlpha < 0 ) { mAlgoMinAlpha = 0; ret = TDString.ZERO; }
@@ -3148,7 +3148,8 @@ public class TDSetting
       pw.printf(Locale.US, "Wait: laser %d, shot %d, data %d, conn %d, command %d\n", mWaitLaser, mWaitShot, mWaitData, mWaitConn, mWaitCommand );
 
       pw.printf(Locale.US, "Calib groups %d, distance %.2f\n", mGroupBy, mGroupDistance);
-      pw.printf(Locale.US, "Calib algo %d, eps %f, iter %d\n", mCalibAlgo, mCalibEps, mCalibMaxIt );
+      // pw.printf(Locale.US, "Calib algo %d, eps %f, iter %d\n", mCalibAlgo, mCalibEps, mCalibMaxIt );
+      pw.printf(Locale.US, "Calib algo %d, eps %f, iter %d\n", 0, mCalibEps, mCalibMaxIt );
       pw.printf(Locale.US, "Calib shot download %c, raw data %d \n", tf(mCalibShotDownload), mRawCData );
       pw.printf(Locale.US, "Min_Algo alpha %.1f, beta %.1f, gamma %.1f, delta %.1f \n", mAlgoMinAlpha, mAlgoMinBeta, mAlgoMinGamma, mAlgoMinDelta );
 
@@ -3592,7 +3593,7 @@ public class TDSetting
         }
         if ( line.startsWith("Calib algo") ) {
           if ( vals.length > 6 ) {
-            mCalibAlgo  = getInt( vals, 2, 0 );   setPreference( editor, "DISTOX_CALIB_ALGO", mCalibAlgo );
+            // mCalibAlgo  = getInt( vals, 2, 0 );   setPreference( editor, "DISTOX_CALIB_ALGO", mCalibAlgo );
             mCalibEps   = getFloat( vals, 4, 0.000001f ); setPreference( editor, "DISTOX_CALIB_EPS", mCalibEps );
             mCalibMaxIt = getInt( vals, 6, 200 );   setPreference( editor, "DISTOX_CALIB_MAX_IT", mCalibMaxIt );
           }

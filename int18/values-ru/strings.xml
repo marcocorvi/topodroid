@@ -1662,8 +1662,8 @@
   <string name="pref_weedlength_summary">Макс. длина сегмента в линии</string>
   <string name="pref_weedbuffer_title">Буфер сегмента прореживания</string>
   <string name="pref_weedbuffer_summary">Буфер вокруг сегмента линии [pxl]</string>
-  <string name="pref_calib_algo_title">Алгоритм</string>
-  <string name="pref_calib_algo_summary">Алгоритм вычисления калибровки</string>
+  <!-- UNUSED string name="pref_calib_algo_title">Алгоритм</string -->
+  <!-- UNUSED string name="pref_calib_algo_summary">Алгоритм вычисления калибровки</string -->
   <string name="pref_group_by_title">Группирование данных калибровки</string>
   <string name="pref_group_by_summary">Способ группирования замеров калибровки по направлениям</string>
   <string name="pref_group_title">Допуск в группе</string>

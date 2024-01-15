@@ -1687,8 +1687,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_weedlength_summary">Max length of a line segment [m]</string>
   <string name="pref_weedbuffer_title">Weeding segment buffer</string>
   <string name="pref_weedbuffer_summary">Buffer around a line segment [pxl]</string>
-  <string name="pref_calib_algo_title">Algorithm</string>
-  <string name="pref_calib_algo_summary">Calibration algorithm</string>
+  <!-- UNUSED string name="pref_calib_algo_title">Algorithm</string -->
+  <!-- UNUSED string name="pref_calib_algo_summary">Calibration algorithm</string -->
   <string name="pref_group_by_title">Group policy</string>
   <string name="pref_group_by_summary">Policy to group calibration data</string>
   <string name="pref_group_title">Group tolerance</string>

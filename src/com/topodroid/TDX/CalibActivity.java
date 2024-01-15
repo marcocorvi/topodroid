@@ -296,6 +296,7 @@ public class CalibActivity extends Activity
         // FIXME use alert dialog
         TDToast.makeBad( R.string.calib_device_mismatch );
       }
+      saveCalibAlgo();
       doOpen();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) { // COEFF
       showCoeffs();
@@ -395,13 +396,19 @@ public class CalibActivity extends Activity
         TDToast.makeBad( R.string.calib_no_name );
       }
     }
+    saveCalibAlgo();
+    setButtons();
+  }
+
+  /** store the choice of calib algo in the database
+   */
+  private void saveCalibAlgo()
+  {
     int algo = 0;
     if ( mCBAlgoLinear.isChecked() )         algo = 1;
     else if ( mCBAlgoNonLinear.isChecked() ) algo = 2;
     // else if ( mCBAlgoMinimum.isChecked() )   algo = 3;
     TopoDroidApp.mDData.updateCalibAlgo( TDInstance.cid, algo );
-
-    setButtons();
   }
   
   /** make the name field editable

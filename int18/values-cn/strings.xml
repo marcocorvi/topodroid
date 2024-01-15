@@ -1664,8 +1664,8 @@
   <string name="pref_weedlength_summary">线分段的最大长度[m]</string>
   <string name="pref_weedbuffer_title">清除分段缓冲</string>
   <string name="pref_weedbuffer_summary">围绕线段的缓冲区 [pxl]</string>
-  <string name="pref_calib_algo_title">算法</string>
-  <string name="pref_calib_algo_summary">校准算法</string>
+  <!-- UNUSED string name="pref_calib_algo_title">算法</string -->
+  <!-- UNUSED string name="pref_calib_algo_summary">校准算法</string -->
   <string name="pref_group_by_title">组原则</string>
   <string name="pref_group_by_summary">对校准数据进行分组的原则</string>
   <string name="pref_group_title">组容差</string>
