@@ -46,4 +46,34 @@ class SurveyStat
 
   long minMillis;
   long maxMillis;
+
+  /** default cstr - everything zero, except ID
+   * @param sid   survey ID
+   */
+  public SurveyStat( long sid )
+  {
+    id = sid;
+    lengthLeg  = 0.0f;
+    extLength  = 0.0f;
+    planLength = 0.0f;
+    lengthDuplicate = 0.0f;
+    lengthSurface   = 0.0f;
+    countLeg = 0;
+    countDuplicate = 0;
+    countSurface   = 0;
+    countSplay     = 0;
+    countStation   = 0;
+    countLoop      = 0;
+    countComponent = 0;
+    averageM = 0;
+    averageG = 0;
+    averageD = 0;
+    stddevM  = 0;
+    stddevG  = 0;
+    stddevD  = 0;
+    nrMGD = 0;
+    deviceNr = 0;
+    deviceCnt = "";
+  }
+
 }

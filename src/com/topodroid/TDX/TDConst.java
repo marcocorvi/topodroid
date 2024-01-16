@@ -41,7 +41,7 @@ public class TDConst
   public static final int SURVEY_FORMAT_CAV = 17; // Topo      CavFile
   public static final int SURVEY_FORMAT_GRT = 18; // Grottolf
   public static final int SURVEY_FORMAT_GTX = 19; // GHTopo    GtxFile
-  // public static final int SURVEY_FORMAT_SUR = 20; // WinKarst  SurFile
+  public static final int SURVEY_FORMAT_SUR = 20; // WinKarst  SurFile
   public static final int SURVEY_FORMAT_TRB = 21; // TopoRobot TrbFile
   // public static final int SURVEY_FORMAT_JSON = 22; // GeoJSON  JsonFile
   public static final int SURVEY_FORMAT_SHP = 23; // Shapefile ShpFile
@@ -213,13 +213,13 @@ public class TDConst
   public final static int SURVEY_POS_VTOPO     =  9;
   public final static int SURVEY_POS_VTOPOX    = -9;
   public final static int SURVEY_POS_WALLS     = 10;
-  // public final static int SURVEY_POS_WINKARST  = 11;
-  public final static int SURVEY_POS_CSV       = 11;
-  public final static int SURVEY_POS_DXF       = 12;
-  public final static int SURVEY_POS_KML       = 13;
-  public final static int SURVEY_POS_GPX       = 14;
+  public final static int SURVEY_POS_WINKARST  = 11;
+  public final static int SURVEY_POS_CSV       = 12;
+  public final static int SURVEY_POS_DXF       = 13;
+  public final static int SURVEY_POS_KML       = 14;
+  public final static int SURVEY_POS_GPX       = 15;
   // public final static int SURVEY_POS_GEOJSON   = 16;
-  public final static int SURVEY_POS_SHAPEFILE = 15;
+  public final static int SURVEY_POS_SHAPEFILE = 16;
 
   public static final String[] mSurveyExportTypes = { "ZIP", 
     "Compass",   // 1
@@ -234,7 +234,7 @@ public class TDConst
     "TopoRobot",  //  8
     "VisualTopo",
     "Walls", 
-    // "WinKarst",   // 11
+    "WinKarst",   // 11
     "CSV",
     "DXF",
     "KML",        // 14
@@ -257,7 +257,7 @@ public class TDConst
     "TopoRobot",
     "VisualTopo",
     "Walls", 
-    // "WinKarst",
+    "WinKarst",
     "CSV",
     "DXF"
     // "KML",
@@ -281,7 +281,7 @@ public class TDConst
     SURVEY_FORMAT_TRB,
     SURVEY_FORMAT_TRO,
     SURVEY_FORMAT_SRV,
-    // SURVEY_FORMAT_SUR,
+    SURVEY_FORMAT_SUR,
     SURVEY_FORMAT_CSV,
     SURVEY_FORMAT_DXF,
     SURVEY_FORMAT_KML,
@@ -312,7 +312,7 @@ public class TDConst
       case SURVEY_POS_TOPOROBOT: return survey + ".trb";
       case SURVEY_POS_VTOPO:     return survey + ".tro";
       case SURVEY_POS_WALLS:     return survey + ".srv"; // 10
-      // case SURVEY_POS_WINKARST:  return survey + ".sur";
+      case SURVEY_POS_WINKARST:  return survey + ".sur";
       case SURVEY_POS_CSV:       return survey + ".csv";
       case SURVEY_POS_DXF:       return survey + ".dxf";
       case SURVEY_POS_KML:       return survey + ".kml";

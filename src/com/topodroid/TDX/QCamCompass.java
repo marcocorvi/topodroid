@@ -194,8 +194,8 @@ class QCamCompass extends Dialog
 
     mBDcameraRed = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_camera_red );
     mBDcamera    = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_camera ); 
-    mBDsaveok    = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_save );
-    mBDsaveoff   = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_save_off );
+    mBDsaveok    = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_floppy ); // iz_save
+    mBDsaveoff   = MyButton.getButtonBackground( mContext, mContext.getResources(), R.drawable.iz_floppy_no ); // iz_save_off
 
     LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 0, 10, 20, 10 );
     LinearLayout ll_help = (LinearLayout) findViewById( R.id.help );

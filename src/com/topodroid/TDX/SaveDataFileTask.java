@@ -214,13 +214,13 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
             pathname = mSurvey + ".srv";
             ret = TDExporter.exportSurveyAsSrv( bw, mSid, mData, mInfo, mSurvey );
             break;
-          // case TDConst.SURVEY_FORMAT_SUR: // WinKarst
-          //   // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getSurFileWithExt( mSurvey ) ) );
-          //   bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
-          //   pathname = mSurvey + ".sur";
-          //   // TDToast.make( "WARNING WinKarst export is untested" );
-          //   ret = TDExporter.exportSurveyAsSur( bw, mSid, mData, mInfo, mSurvey, mExportInfo.prefix );
-          //   break;
+          case TDConst.SURVEY_FORMAT_SUR: // WinKarst
+            // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getSurFileWithExt( mSurvey ) ) );
+            bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+            pathname = mSurvey + ".sur";
+            // TDToast.make( "WARNING WinKarst export is untested" );
+            ret = TDExporter.exportSurveyAsSur( bw, mSid, mData, mInfo, mSurvey, mExportInfo.prefix );
+            break;
           case TDConst.SURVEY_FORMAT_SVX: // Survex
             // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getSvxFileWithExt( mSurvey ) ) );
             bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );

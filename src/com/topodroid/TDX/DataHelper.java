@@ -564,29 +564,7 @@ public class DataHelper extends DataSetObservable
     int nl = 0;
     int nv = 0;
 
-    SurveyStat stat = new SurveyStat();
-    stat.id = sid;
-    stat.lengthLeg  = 0.0f;
-    stat.extLength  = 0.0f;
-    stat.planLength = 0.0f;
-    stat.lengthDuplicate = 0.0f;
-    stat.lengthSurface   = 0.0f;
-    stat.countLeg = 0;
-    stat.countDuplicate = 0;
-    stat.countSurface   = 0;
-    stat.countSplay     = 0;
-    stat.countStation   = 0;
-    stat.countLoop      = 0;
-    stat.countComponent = 0;
-    stat.averageM = 0;
-    stat.averageG = 0;
-    stat.averageD = 0;
-    stat.stddevM  = 0;
-    stat.stddevG  = 0;
-    stat.stddevD  = 0;
-    stat.nrMGD = 0;
-    stat.deviceNr = 0;
-    stat.deviceCnt = "";
+    SurveyStat stat = new SurveyStat( sid );
 
     if ( myDB == null ) return stat;
 
@@ -597,12 +575,12 @@ public class DataHelper extends DataSetObservable
     Cursor cursor; // = null;
     if ( datamode == 0 ) {
       // cursor = myDB.query( SHOT_TABLE,
-      //     		   new String[] { "flag", "acceleration", "magnetic", "dip" },
+      //     		   new String[] { "flag", "acceleration", "magnetic", "dip", "address" },
       //                      "surveyId=? AND status=0 AND acceleration > 1 ",
       //                      new String[] { Long.toString(sid) },
       //                      null, null, null );
       cursor = myDB.rawQuery( qSurveysStat1, args );
-      int nrMGD = 0;
+      int nr_mgd = 0;
       if (cursor.moveToFirst()) {
         int nr = cursor.getCount();
         stat.G = new float[ nr ];
@@ -612,19 +590,10 @@ public class DataHelper extends DataSetObservable
         do {
           String address = cursor.getString(4);
           if ( address.length() > 0 ) {
-            float a = (float)( cursor.getDouble(1) );
-            float m = (float)( cursor.getDouble(2) );
-            float d = (float)( cursor.getDouble(3) );
-            stat.averageM += m;
-            stat.averageG += a;
-            stat.averageD += d;
-            stat.stddevM  += m * m;
-            stat.stddevG  += a * a;
-            stat.stddevD  += d * d;
-            stat.G[nrMGD]  = a;
-            stat.M[nrMGD]  = m;
-            stat.D[nrMGD]  = d;
-            ++nrMGD;
+            stat.G[nr_mgd] = (float)( cursor.getDouble(1) );
+            stat.M[nr_mgd] = (float)( cursor.getDouble(2) );
+            stat.D[nr_mgd] = (float)( cursor.getDouble(3) );
+            ++nr_mgd;
             Integer cnt = (Integer) cnts.get( address );
             if ( cnt == null ) {
               cnts.put( address, new Integer(1) );
@@ -633,15 +602,23 @@ public class DataHelper extends DataSetObservable
             }
           }
         } while ( cursor.moveToNext() );
-        stat.nrMGD = nrMGD;
-        if ( nrMGD > 0 ) {
-          stat.averageM /= nrMGD;
-          stat.averageG /= nrMGD;
-          stat.averageD /= nrMGD;
-          stat.stddevM   = (float)Math.sqrt( stat.stddevM / nrMGD - stat.averageM * stat.averageM );
-          stat.stddevG   = (float)Math.sqrt( stat.stddevG / nrMGD - stat.averageG * stat.averageG );
-          stat.stddevD   = (float)Math.sqrt( stat.stddevD / nrMGD - stat.averageD * stat.averageD );
-          stat.stddevM  *= 100/stat.averageM;
+        SurveyAccuracy accu = new SurveyAccuracy();
+        stat.nrMGD = accu.setBlocks( stat, nr_mgd );
+        if ( stat.nrMGD > 0 ) {
+          for ( int k = 0; k < nr_mgd; ++ k ) {
+            if ( stat.G[k] > 10.0f ) {
+              float m = stat.M[k] - stat.averageM;
+              float g = stat.G[k] - stat.averageG;
+              float d = stat.D[k] - stat.averageD;
+              stat.stddevM += m * m;
+              stat.stddevG += g * g;
+              stat.stddevD += d * d;
+            }
+          }
+          stat.stddevM   = (float)Math.sqrt( stat.stddevM / stat.nrMGD );
+          stat.stddevG   = (float)Math.sqrt( stat.stddevG / stat.nrMGD );
+          stat.stddevD   = (float)Math.sqrt( stat.stddevD / stat.nrMGD );
+          stat.stddevM  *= 100/stat.averageM;  // percent of average
           stat.stddevG  *= 100/stat.averageG;
           stat.deviceNr  = cnts.size();
           StringBuilder sb = new StringBuilder();
