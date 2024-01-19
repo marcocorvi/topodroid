@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="topodroid" translatable="false">TopoDroid</string>
+  <string name="compass" translatable="false">Compass</string>
+  <string name="csurvey" translatable="false">cSurvey</string>
+  <string name="ghtopo" translatable="false">GHTopo</string>
+  <!-- string name="grottolf" translatable="false">GrottoLF</string -->
   <string name="pockettopo" translatable="false">PocketTopo</string>
+  <string name="polygon" translatable="false">Polygon</string>
+  <string name="survex" translatable="false">Survex</string>
+  <string name="therion" translatable="false">Therion</string>
+  <string name="topo" translatable="false">Topo</string>
+  <string name="toporobot" translatable="false">TopoRobot</string>
+  <string name="visualtopo" translatable="false">VisualTopo</string>
+  <string name="walls" translatable="false">Walls</string>
+  <string name="winkarst" translatable="false">WinKarst</string>
+  <string name="csv" translatable="false">CSV</string>
+  <string name="dxf" translatable="false">DXF</string>
+  <string name="kml" translatable="false">KML</string>
+  <!-- string name="oziexplorer" translatable="false">OziExplorer</string -->
+  <string name="gpx" translatable="false">GPX</string>
+  <!-- string name="geojason" translatable="false">GeoJSOM</string -->
+  <string name="shapefile" translatable="false">Shapefile</string>
+
   <!-- UNUSED string name="number_sign" translatable="false"> # </string -->
   <!-- UNUSED string name="char_x" translatable="false"> X </string -->
   <!-- UNUSED string name="char_less" translatable="false">&lt;</string -->

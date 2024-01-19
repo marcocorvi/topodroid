@@ -398,6 +398,80 @@ public class TDPrefKey
   };
 
   // ==============================================================================
+  public static String[] EXPORT_ENABLE = { // ZIP always enabled
+    "EXPORT_DATA_COMPASS",
+    "EXPORT_DATA_CSURVEY",
+    "EXPORT_DATA_GHTOPO",
+    // "EXPORT_DATA_GROTTOLF",
+    // "EXPORT_DATA_POCKETTOPO",
+    "EXPORT_DATA_POLYGON",
+    "EXPORT_DATA_SURVEX",
+    "EXPORT_DATA_THERION",
+    "EXPORT_DATA_TOPO",
+    "EXPORT_DATA_TOPOROBOT",
+    "EXPORT_DATA_VISUALTOPO",
+    "EXPORT_DATA_WALLS",
+    "EXPORT_DATA_WINKARST",
+    "EXPORT_DATA_CVS",
+    "EXPORT_DATA_DXF",
+    "EXPORT_DATA_KML",
+    // "EXPORT_DATA_OZIEXPLORER",
+    "EXPORT_DATA_GPX",
+    // "EXPORT_DATA_GEOJSON",
+    "EXPORT_DATA_SHAPEFILE"
+  };
+
+  public static int[] EXPORT_ENABLEtitle = {
+    R.string.compass,
+    R.string.csurvey,
+    R.string.ghtopo,
+    // R.string.grottolf,
+    // R.string.pockettopo,
+    R.string.polygon,
+    R.string.survex,
+    R.string.therion,
+    R.string.topo,
+    R.string.toporobot,
+    R.string.visualtopo,
+    R.string.walls,
+    R.string.winkarst,
+    R.string.csv,
+    R.string.dxf,
+    R.string.kml,
+    // R.string.oziexplorer,
+    R.string.gpx,
+    // R.string.geojson,
+    R.string.shapefile,
+  };
+
+  // public static int[] EXPORT_ENABLEdesc = {
+  // };
+
+  public static String[] EXPORT_ENABLEdef = {
+    TRUE,
+    FALSE,
+    FALSE,
+    // FALSE,
+    // FALSE,
+    FALSE,
+    TRUE,
+    TRUE, // therion
+    FALSE,
+    FALSE,
+    TRUE, // VTopo
+    TRUE,
+    FALSE,
+    TRUE, // CSV
+    FALSE,
+    FALSE,
+    // FALSE,
+    FALSE,
+    // FALSE,
+    FALSE,
+  };
+
+
+  // ===================================================================
   public static String[] EXPORT = { // [16] [32]
     "DISTOX_EXPORT_SHOTS",    // 0 // default data export format
     "DISTOX_EXPORT_PLOT",          // default plot export format
@@ -406,6 +480,7 @@ public class TDPrefKey
     "DISTOX_LRUD_VERTICAL", 
     "DISTOX_LRUD_HORIZONTAL", // 4 
     "DISTOX_BEZIER_STEP",           // max step between interpolating points for bezier in export (cSurvey)
+    "DISTOX_EXPORT_ENABLE_PREF",
     "DISTOX_EXPORT_IMPORT_PREF", // 6
     "DISTOX_EXPORT_SVX_PREF",
     "DISTOX_EXPORT_TH_PREF",
@@ -431,6 +506,7 @@ public class TDPrefKey
     R.string.pref_lrud_vertical_title,
     R.string.pref_lrud_horizontal_title,
     R.string.pref_bezier_step_title,
+    R.string.pref_cat_exportenable,
     R.string.pref_cat_exportimport,
     R.string.pref_cat_exportsvx,
     R.string.pref_cat_exportth,
@@ -465,6 +541,7 @@ public class TDPrefKey
     -1,
     -1,
     -1,
+    -1,
     // -1, // NO_PNG
     -1,
     -1,
@@ -479,6 +556,7 @@ public class TDPrefKey
     TDString.ZERO,
     TDString.NINETY,
     "0.2",
+    TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,

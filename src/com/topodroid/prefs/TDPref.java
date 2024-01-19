@@ -904,12 +904,44 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeFwd( cat, key[11], tit[11],          N,                  ctx, hlp ),
       makeFwd( cat, key[12], tit[12],          N,                  ctx, hlp ),
       makeFwd( cat, key[13], tit[13],          N,                  ctx, hlp ),
-      makeFwd( cat, key[14], tit[14],          T,                  ctx, hlp ), // shp
-      makeFwd( cat, key[15], tit[15],          T,                  ctx, hlp ), // dxf
+      makeFwd( cat, key[14], tit[14],          N,                  ctx, hlp ),
+      makeFwd( cat, key[15], tit[15],          T,                  ctx, hlp ), // shp
+      makeFwd( cat, key[16], tit[16],          T,                  ctx, hlp ), // dxf
       // makeFwd( cat, key[16], tit[16],          T,                  ctx, hlp ), // png NO_PNG
-      makeFwd( cat, key[16], tit[16],          T,                  ctx, hlp ),
       makeFwd( cat, key[17], tit[17],          T,                  ctx, hlp ),
-      makeFwd( cat, key[18], tit[18],          T,                  ctx, hlp )
+      makeFwd( cat, key[18], tit[18],          T,                  ctx, hlp ),
+      makeFwd( cat, key[19], tit[19],          T,                  ctx, hlp )
+    };
+  }
+
+  /** construct the "export_enable" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "export" preferences
+   */
+  public static TDPref[] makeExportEnablePrefs( Context ctx, TDPrefHelper hlp )
+  {
+    int cat = TDPrefCat.PREF_CATEGORY_EXPORT_ENABLE;
+    String[] key = TDPrefKey.EXPORT_ENABLE;
+    int[] tit = TDPrefKey.EXPORT_ENABLEtitle;
+    // int[] dsc = TDPrefKey.EXPORT_ENABLEdesc;
+    String[] def = TDPrefKey.EXPORT_ENABLEdef;
+    return new TDPref[ ] {
+      makeCbx( cat, key[ 0], tit[ 0], -1, T, def[ 0], ctx, hlp ), // compass
+      makeCbx( cat, key[ 1], tit[ 1], -1, T, def[ 1], ctx, hlp ),
+      makeCbx( cat, key[ 2], tit[ 2], -1, T, def[ 2], ctx, hlp ),
+      makeCbx( cat, key[ 3], tit[ 3], -1, T, def[ 3], ctx, hlp ), // polygon
+      makeCbx( cat, key[ 4], tit[ 4], -1, T, def[ 4], ctx, hlp ),
+      makeCbx( cat, key[ 5], tit[ 5], -1, T, def[ 5], ctx, hlp ), // therion
+      makeCbx( cat, key[ 6], tit[ 6], -1, T, def[ 6], ctx, hlp ),
+      makeCbx( cat, key[ 7], tit[ 7], -1, T, def[ 7], ctx, hlp ),
+      makeCbx( cat, key[ 8], tit[ 8], -1, T, def[ 8], ctx, hlp ), // walls
+      makeCbx( cat, key[ 9], tit[ 9], -1, T, def[ 9], ctx, hlp ),
+      makeCbx( cat, key[10], tit[10], -1, T, def[10], ctx, hlp ), // csv
+      makeCbx( cat, key[11], tit[11], -1, T, def[11], ctx, hlp ),
+      makeCbx( cat, key[12], tit[12], -1, T, def[12], ctx, hlp ), // kml
+      makeCbx( cat, key[13], tit[13], -1, T, def[13], ctx, hlp ),
+      makeCbx( cat, key[14], tit[14], -1, T, def[14], ctx, hlp ), // shapefile
     };
   }
 

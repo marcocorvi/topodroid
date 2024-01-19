@@ -59,6 +59,10 @@ public class SurveyInfo
     return ret;
   }
 
+  /** @return true if the data-mode is diving
+   */
+  boolean isDivingMode() { return datamode == DATAMODE_DIVING; }
+
   // boolean isSectionPrivate() { return xsection == 1; }
 
   static boolean isExtendLeft( int extend ) { return extend < -999; }

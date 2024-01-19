@@ -178,6 +178,7 @@ public class TDPrefActivity extends Activity
       case TDPrefCat.PREF_CATEGORY_EXPORT:    mPrefs = TDPref.makeExportPrefs(   this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_IMPORT:    mPrefs = TDPref.makeImportPrefs(   this, hlp ); break;
       // case TDPrefCat.PREF_CATEGORY_3D:        mPrefs = TDPref.make3DPrefs(       this, hlp ); break; // TODO
+      case TDPrefCat.PREF_CATEGORY_EXPORT_ENABLE: mPrefs = TDPref.makeExportEnablePrefs(   this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_SVX:       mPrefs = TDPref.makeSvxPrefs(      this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_TH:        mPrefs = TDPref.makeThPrefs(       this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_DAT:       mPrefs = TDPref.makeDatPrefs(      this, hlp ); break;
@@ -274,6 +275,7 @@ public class TDPrefActivity extends Activity
 	}
       }
     } else if (mPrefCategory == TDPrefCat.PREF_CATEGORY_EXPORT ) {
+      linkPreference( "DISTOX_EXPORT_ENABLE_PREF",  TDPrefCat.PREF_CATEGORY_EXPORT_ENABLE );
       linkPreference( "DISTOX_EXPORT_IMPORT_PREF",  TDPrefCat.PREF_CATEGORY_IMPORT );
       linkPreference( "DISTOX_EXPORT_SVX_PREF",     TDPrefCat.PREF_CATEGORY_SVX );
       linkPreference( "DISTOX_EXPORT_TH_PREF",      TDPrefCat.PREF_CATEGORY_TH );

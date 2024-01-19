@@ -221,6 +221,66 @@ public class TDConst
   // public final static int SURVEY_POS_GEOJSON   = 16;
   public final static int SURVEY_POS_SHAPEFILE = 16;
 
+
+  public static boolean[] mSurveyExportEnable = { true, // "ZIP", 
+    true,  // "Compass",   // 1
+    false, // "cSurvey",
+    false, // "GHTopo",
+    // false, // "Grottolf",
+    // false, // "PocketTopo", // 5
+    false, // "Polygon",    //  4
+    false, // "Survex",     //  5
+    true,  // "Therion",    //  6
+    false, // "Topo",
+    false, // "TopoRobot",  //  8
+    true,  // "VisualTopo",
+    false, // "Walls", 
+    false, // "WinKarst",   // 11
+    true,  // "CSV",
+    false, // "DXF",
+    false, // "KML",        // 14
+    // false, // "OziExplorer",
+    false, // "GPX",
+    // false, // "GeoJSON",
+    false, // "Shapefile",
+  };
+
+  /** @return the array of enabled export types
+   * @param with_geo  whether to include geo-types
+   */
+  public static String[] surveyExportTypes( boolean with_geo )
+  {
+    int nr = 0;
+    int kk = with_geo? 17 : 14;
+    for ( int k = 0; k < kk; ++k ) if ( mSurveyExportEnable[k] ) ++ nr;
+    String[] ret = new String[nr];
+    int n = 0;
+    for ( int k = 0; k < kk; ++k ) {
+      if ( mSurveyExportEnable[k] ) {
+        ret[n ++] = mSurveyExportTypes[k];
+      }
+    }
+    assert( n == nr );
+    return ret;
+  }
+
+  /** @return the array export index from the position of the enabled export list
+   * @param pos   position
+   */
+  public static int surveyIndex( int pos )
+  {
+    int ppos = 0;
+    for ( int k = 0; k < mSurveyExportTypes.length; ++k ) {
+      TDLog.v("Pos " + pos + " k " + k + " " +  mSurveyExportEnable[k] );
+      if ( mSurveyExportEnable[k] ) {
+        if ( pos == 0 ) return ppos;
+        pos --;
+      } 
+      ppos ++;
+    }
+    return -1;
+  }
+
   public static final String[] mSurveyExportTypes = { "ZIP", 
     "Compass",   // 1
     "cSurvey",
@@ -239,9 +299,9 @@ public class TDConst
     "DXF",
     "KML",        // 14
     // "OziExplorer",
-    "GPX",
+    "GPX",        // 15
     // "GeoJSON",
-    "Shapefile",
+    "Shapefile",  // 16
   };
 
   public static final String[] mSurveyExportTypesNoGeo = { "ZIP", 

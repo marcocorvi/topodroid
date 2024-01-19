@@ -25,26 +25,27 @@ public class TDPrefCat
   public static final int PREF_CATEGORY_EXPORT    =  6;
   public static final int PREF_CATEGORY_IMPORT    =  7;
   public static final int PREF_CATEGORY_CAVE3D    =  8;
-  public static final int PREF_CATEGORY_SVX       =  9;
-  public static final int PREF_CATEGORY_TH        = 10;
-  public static final int PREF_CATEGORY_DAT       = 11;
-  public static final int PREF_CATEGORY_CSX       = 12;
-  public static final int PREF_CATEGORY_TRO       = 13;
-  public static final int PREF_CATEGORY_SVG       = 14;
-  public static final int PREF_CATEGORY_SHP       = 15;
-  public static final int PREF_CATEGORY_DXF       = 16;
+  public static final int PREF_CATEGORY_EXPORT_ENABLE = 9;
+  public static final int PREF_CATEGORY_SVX       = 10;
+  public static final int PREF_CATEGORY_TH        = 11;
+  public static final int PREF_CATEGORY_DAT       = 12;
+  public static final int PREF_CATEGORY_CSX       = 13;
+  public static final int PREF_CATEGORY_TRO       = 14;
+  public static final int PREF_CATEGORY_SVG       = 15;
+  public static final int PREF_CATEGORY_SHP       = 16;
+  public static final int PREF_CATEGORY_DXF       = 17;
   // public static final int PREF_CATEGORY_PNG       = 17; // NO_PNG
-  public static final int PREF_CATEGORY_GPX       = 17;
-  public static final int PREF_CATEGORY_KML       = 18;
-  public static final int PREF_CATEGORY_CSV       = 19;
-  public static final int PREF_CATEGORY_SRV       = 20;
-  public static final int PREF_SHOT_DATA          = 21; 
-  public static final int PREF_SHOT_UNITS         = 22; 
-  public static final int PREF_ACCURACY           = 23; 
-  public static final int PREF_LOCATION           = 24; 
-  public static final int PREF_PLOT_SCREEN        = 25; 
-  public static final int PREF_TOOL_LINE          = 26; 
-  public static final int PREF_TOOL_POINT         = 27; 
+  public static final int PREF_CATEGORY_GPX       = 18;
+  public static final int PREF_CATEGORY_KML       = 19;
+  public static final int PREF_CATEGORY_CSV       = 20;
+  public static final int PREF_CATEGORY_SRV       = 21;
+  public static final int PREF_SHOT_DATA          = 22; 
+  public static final int PREF_SHOT_UNITS         = 23; 
+  public static final int PREF_ACCURACY           = 24; 
+  public static final int PREF_LOCATION           = 25; 
+  public static final int PREF_PLOT_SCREEN        = 26; 
+  public static final int PREF_TOOL_LINE          = 27; 
+  public static final int PREF_TOOL_POINT         = 28; 
   // public static final int PREF_PLOT_WALLS         = 28;  // AUTOWALLS UNUSED
   public static final int PREF_PLOT_DRAW          = 29; 
   public static final int PREF_PLOT_ERASE         = 30; 
@@ -72,6 +73,7 @@ public class TDPrefCat
     R.string.title_settings_export,
     R.string.title_settings_import,
     R.string.title_settings_3d,
+    R.string.title_settings_export_enable,
     R.string.title_settings_svx,
     R.string.title_settings_th,
     R.string.title_settings_dat,

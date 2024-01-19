@@ -1589,6 +1589,12 @@ public class DataHelper extends DataSetObservable
     final int colorCol    = ih.getColumnIndex( "color" );
     final int stretchCol  = ih.getColumnIndex( "stretch" );
     final int addressCol  = ih.getColumnIndex( "address" );
+    final int rawMxCol    = ih.getColumnIndex( "rawMx" );
+    final int rawMyCol    = ih.getColumnIndex( "rawMy" );
+    final int rawMzCol    = ih.getColumnIndex( "rawMz" );
+    final int rawGxCol    = ih.getColumnIndex( "rawGx" );
+    final int rawGyCol    = ih.getColumnIndex( "rawGy" );
+    final int rawGzCol    = ih.getColumnIndex( "rawGz" );
     try {
       // myDB.execSQL("PRAGMA synchronous=OFF");
       // myDB.setLockingEnabled( false );
@@ -1619,7 +1625,13 @@ public class DataHelper extends DataSetObservable
         ih.bind( millisCol, millis );
         ih.bind( colorCol, color );
 	ih.bind( stretchCol, 0.0 );
-	ih.bind( stretchCol, "" );
+	ih.bind( addressCol, "" );
+	ih.bind( rawMxCol, 0 );
+	ih.bind( rawMyCol, 0 );
+	ih.bind( rawMzCol, 0 );
+	ih.bind( rawGxCol, 0 );
+	ih.bind( rawGyCol, 0 );
+	ih.bind( rawGzCol, 0 );
         ih.execute();
         ++id;
       }
@@ -1710,7 +1722,35 @@ public class DataHelper extends DataSetObservable
     return insertImportShots( sid, id, shots );
   }
 
-  /** insert a BRIC4 shot
+  /** insert a Cavway shot
+   * @param sid     survey ID
+   * @param id      shot ID or -1
+   * @param d       distance
+   * @param b       azimuth
+   * @param c       clino
+   * @param r       roll
+   * @param mag     magnetic abs. value
+   * @param acc     acceleration abs. value
+   * @param dip     dip angle
+   * @param extend  extend (int)
+   * @param leg     leg-type
+   * @param status  status
+   * @param comment shot comment
+   * @param addr    BRIC4 address
+   * @return inserted shot ID
+   */
+  public long insertCavwayShot( long sid, long id, double d, double b, double c, double r, double mag, double acc, double dip, long extend, int leg, long status, String comment, String addr,
+                                int rawMx, int rawMy, int rawMz, int rawGx, int rawGy, int rawGz )
+  { // 0L=leg, status, 0L=type DISTOX
+    // stretch = 0.0;
+    // return doInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, "", "",  d, b, c, r, extend, 0.0, DBlock.FLAG_SURVEY, 0L, status, 0L, "", addr );
+    if ( id >= 0 && hasShotId( sid, id ) ) { // if shot ID is already present, use a new ID
+      id = -1L;
+    }
+    return doCavwayInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, d, b, c, r, mag, acc, dip, extend, 0.0, leg, status, comment, 0L, addr, rawMx, rawMy, rawMz, rawGx, rawGy, rawGz );
+  }
+
+  /** insert a BRIC shot
    * @param sid     survey ID
    * @param id      shot ID or -1
    * @param d       distance
@@ -1734,7 +1774,7 @@ public class DataHelper extends DataSetObservable
     if ( id >= 0 && hasShotId( sid, id ) ) { // if shot ID is already present, use a new ID
       id = -1L;
     }
-    return doCompleteInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, d, b, c, r, mag, acc, dip, extend, 0.0, leg, status, comment, 0L, addr );
+    return doBricInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, d, b, c, r, mag, acc, dip, extend, 0.0, leg, status, comment, 0L, addr );
   }
 
   /** insert a DistoX shot
@@ -1768,7 +1808,8 @@ public class DataHelper extends DataSetObservable
     // 0L = color, 0 = status
     ContentValues cv = makeShotContentValues( sid, myNextId, blk.mTime, 0L, blk.mFrom, blk.mTo, 
                          blk.mLength, blk.mBearing, blk.mClino, blk.mRoll, blk.mMagnetic, blk.mAcceleration, blk.mDip, 
-                         blk.mExtend, blk.getStretch(), blk.mFlag, blk.getLegType(), 0, blk.getShotType(), blk.mComment, blk.getAddress() );
+                         blk.mExtend, blk.getStretch(), blk.mFlag, blk.getLegType(), 0, blk.getShotType(), blk.mComment, blk.getAddress(),
+                         blk.mRawMx, blk.mRawMy, blk.mRawMz, blk.mRawGx, blk.mRawGy, blk.mRawGz );
     doInsert( SHOT_TABLE, cv, "dblock insert" );
     return myNextId;
   }
@@ -2092,6 +2133,12 @@ public class DataHelper extends DataSetObservable
     cv.put( "color",    color );
     cv.put( "stretch",  stretch );
     cv.put( "address",  "" );
+    cv.put( "rawMx",    0.0 );
+    cv.put( "rawMy",    0.0 );
+    cv.put( "rawMz",    0.0 );
+    cv.put( "rawGx",    0.0 );
+    cv.put( "rawGy",    0.0 );
+    cv.put( "rawGz",    0.0 );
 
     doInsert( SHOT_TABLE, cv, "insert at" );
     return at;
@@ -2099,7 +2146,8 @@ public class DataHelper extends DataSetObservable
 
   private ContentValues makeShotContentValues( long sid, long id, long millis, long color, String from, String to, 
                           double d, double b, double c, double r, double acc, double mag, double dip,
-                          long extend, double stretch, long flag, long leg, long status, long shot_type, String comment, String addr )
+                          long extend, double stretch, long flag, long leg, long status, long shot_type, String comment, String addr,
+                          int rawMx, int rawMy, int rawMz, int rawGx, int rawGy, int rawGz )
   {
     ContentValues cv = new ContentValues();
     cv.put( "surveyId", sid );
@@ -2123,6 +2171,12 @@ public class DataHelper extends DataSetObservable
     cv.put( "color",    color );
     cv.put( "stretch",  stretch );
     cv.put( "address",  addr );
+    cv.put( "rawMx",    rawMx );
+    cv.put( "rawMy",    rawMy );
+    cv.put( "rawMz",    rawMz );
+    cv.put( "rawGx",    rawGx );
+    cv.put( "rawGy",    rawGy );
+    cv.put( "rawGz",    rawGz );
     return cv;
   }
 
@@ -2146,7 +2200,7 @@ public class DataHelper extends DataSetObservable
     }
     if (addr == null) addr = "";
     ContentValues cv = makeShotContentValues( sid, id, millis, color, from, to, d, b, c, r, 0.0, 0.0, 0.0,
-		    extend, stretch, flag, leg, status, shot_type, comment, addr );
+		    extend, stretch, flag, leg, status, shot_type, comment, addr, 0, 0, 0, 0, 0, 0 );
     doInsert( SHOT_TABLE, cv, "insert" );
     return id;
   }
@@ -2185,13 +2239,12 @@ public class DataHelper extends DataSetObservable
       myNextId = id;
     }
     if (addr == null) addr = "";
-    ContentValues cv = makeShotContentValues( sid, id, millis, color, "", "", d, b, c, r, 0.0, 0.0, 0.0,
-		    extend, stretch, DBlock.FLAG_SURVEY, leg, status, shot_type, "", addr );
+    ContentValues cv = makeShotContentValues( sid, id, millis, color, "", "", d, b, c, r, 0.0, 0.0, 0.0, extend, stretch, DBlock.FLAG_SURVEY, leg, status, shot_type, "", addr, 0, 0, 0, 0, 0, 0 );
     doInsert( SHOT_TABLE, cv, "simple insert" );
     return id;
   }
 
-  private long doCompleteInsertShot( long sid, long id, long millis, long color, 
+  private long doBricInsertShot( long sid, long id, long millis, long color, 
                           double d, double b, double c, double r, double mag, double acc, double dip,
                           long extend, double stretch, long leg, long status, String comment, long shot_type, String addr )
   {
@@ -2206,8 +2259,29 @@ public class DataHelper extends DataSetObservable
     }
     if (addr == null) addr = "";
     ContentValues cv = makeShotContentValues( sid, id, millis, color, "", "", d, b, c, r, mag, acc, dip,
-		    extend, stretch, DBlock.FLAG_SURVEY, leg, status, shot_type, comment, addr );
-    doInsert( SHOT_TABLE, cv, "complete insert" );
+		    extend, stretch, DBlock.FLAG_SURVEY, leg, status, shot_type, comment, addr, 0, 0, 0, 0, 0, 0 );
+    doInsert( SHOT_TABLE, cv, "bric insert" );
+    return id;
+  }
+
+  private long doCavwayInsertShot( long sid, long id, long millis, long color, 
+                          double d, double b, double c, double r, double mag, double acc, double dip,
+                          long extend, double stretch, long leg, long status, String comment, long shot_type, String addr,
+                          int rawMx, int rawMy, int rawMz, int rawGx, int rawGy, int rawGz )
+  {
+    // TDLog.Log( TDLog.LOG_DB, "insert shot <" + id + "> " + from + "-" + to + " extend " + extend );
+    // TDLog.v("DB complete insert shot id " + id + " d " + d + " b " + b + " c " + c );
+    if ( myDB == null ) return -1L;
+    if ( id == -1L ) {
+      ++ myNextId;
+      id = myNextId;
+    } else {
+      myNextId = id;
+    }
+    if (addr == null) addr = "";
+    ContentValues cv = makeShotContentValues( sid, id, millis, color, "", "", d, b, c, r, mag, acc, dip,
+		    extend, stretch, DBlock.FLAG_SURVEY, leg, status, shot_type, comment, addr, rawMx, rawMy, rawMz, rawGx, rawGy, rawGz );
+    doInsert( SHOT_TABLE, cv, "cavway insert" );
     return id;
   }
 
@@ -5559,13 +5633,13 @@ public class DataHelper extends DataSetObservable
        cursor = myDB.query( SHOT_TABLE, 
                             new String[] { "id", "fStation", "tStation", "distance", "bearing", "clino", "roll",
                                            "acceleration", "magnetic", "dip",
-                                           "extend", "flag", "leg", "status", "comment", "type", "millis", "color", "stretch", "address" },
+                                           "extend", "flag", "leg", "status", "comment", "type", "millis", "color", "stretch", "address", "rawMx", "rawMy", "rawMz", "rawGx", "rawGy", "rawGz" },
                             "surveyId=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
          do {
            pw.format(Locale.US,
-                     "INSERT into %s values( %d, %d, \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %d, %d, %d, %d, \"%s\", %d, %d, %d, %.2f, \"%s\" );\n",
+                     "INSERT into %s values( %d, %d, \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %d, %d, %d, %d, \"%s\", %d, %d, %d, %.2f, \"%s\", %d, %d, %d, %d, %d, %d );\n",
                      SHOT_TABLE,
                      sid,
                      cursor.getLong(0),
@@ -5587,7 +5661,13 @@ public class DataHelper extends DataSetObservable
                      cursor.getLong(16),    // millis
                      cursor.getLong(17),    // custom color 
 		     cursor.getDouble(18),  // stretch
-                     TDString.escape( cursor.getString(19) )   // address
+                     TDString.escape( cursor.getString(19) ),    // address
+                     cursor.getLong(20),    // rawMx
+                     cursor.getLong(21),
+                     cursor.getLong(22),
+                     cursor.getLong(23),    // rawGx
+                     cursor.getLong(24),
+                     cursor.getLong(25)
            );
          } while (cursor.moveToNext());
        }
@@ -5874,13 +5954,28 @@ public class DataHelper extends DataSetObservable
                }
 	       double stretch = 0; if ( db_version > 35 ) stretch = scanline1.doubleValue( 0.0 );
 	       String addr = ""; if ( db_version > 37 ) addr = TDString.unescape( scanline1.stringValue( ) );
+               int rawMx = 0;
+               int rawMy = 0;
+               int rawMz = 0;
+               int rawGx = 0;
+               int rawGy = 0;
+               int rawGz = 0;
+               if ( db_version > 49 ) {
+                 rawMx = (int)( scanline1.longValue( 0 ) ); 
+                 rawMy = (int)( scanline1.longValue( 0 ) );
+                 rawMz = (int)( scanline1.longValue( 0 ) );
+                 rawGx = (int)( scanline1.longValue( 0 ) );
+                 rawGy = (int)( scanline1.longValue( 0 ) );
+                 rawGz = (int)( scanline1.longValue( 0 ) );
+               }
 
                // if ( doInsertShot( sid, id, millis, color, from, to, d, b, c, r, extend, stretch, flag, leg, status, type, comment, addr, false ) >= 0 ) {
                //   success &= updateShotAMDR( id, sid, acc, mag, dip, r, false );
 	       // } else {
 	       //   success = false;
 	       // }
-               cv = makeShotContentValues( sid, id, millis, color, from, to, d, b, c, r, acc, mag, dip, extend, stretch, flag, leg, status, type, comment, addr );
+               cv = makeShotContentValues( sid, id, millis, color, from, to, d, b, c, r, acc, mag, dip, extend, stretch, flag, leg, status, type, comment, addr,
+                                           rawMx, rawMy, rawMz, rawGx, rawGy, rawGz );
                myDB.insert( SHOT_TABLE, null, cv ); 
 
                // TDLog.v( "DB insert shot " + from + "-" + to + ": " + success );
@@ -6336,7 +6431,13 @@ public class DataHelper extends DataSetObservable
             +   " millis INTEGER, "   // timestamp
             +   " color INTEGER, "     // custom color
             +   " stretch REAL default 0, " // extend stretch, default ExtendType.STRETCH_NONE
-            +   " address TEXT default \"\" " // distox address
+            +   " address TEXT default \"\", " // distox address
+            +   " rawMx INTEGER default 0, "
+            +   " rawMy INTEGER default 0, "
+            +   " rawMz INTEGER default 0, "
+            +   " rawGx INTEGER default 0, "
+            +   " rawGy INTEGER default 0, "
+            +   " rawGz INTEGER default 0 "
             // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
             // +   " ON DELETE CASCADE "
             +   ")"
@@ -6600,6 +6701,13 @@ public class DataHelper extends DataSetObservable
              db.execSQL( "ALTER TABLE fixeds ADD COLUMN m_to_units REAL default 1" ); 
              db.execSQL( "ALTER TABLE fixeds ADD COLUMN m_to_vunits REAL default 1" ); 
 	   case 49:
+             db.execSQL( "ALTER TABLE shots ADD COLUMN rawMx INTEGER default 0 " );
+             db.execSQL( "ALTER TABLE shots ADD COLUMN rawMy INTEGER default 0 " );
+             db.execSQL( "ALTER TABLE shots ADD COLUMN rawMz INTEGER default 0 " );
+             db.execSQL( "ALTER TABLE shots ADD COLUMN rawGx INTEGER default 0 " );
+             db.execSQL( "ALTER TABLE shots ADD COLUMN rawGy INTEGER default 0 " );
+             db.execSQL( "ALTER TABLE shots ADD COLUMN rawGz INTEGER default 0 " );
+           case 50:
              // TDLog.v( "current version " + oldVersion );
            default:
              break;

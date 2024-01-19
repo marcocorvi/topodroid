@@ -22,6 +22,7 @@ import com.topodroid.utils.TDUtil;
 // import com.topodroid.utils.TDColor;
 import com.topodroid.help.UserManDownload;
 import com.topodroid.TDX.TDLevel;
+import com.topodroid.TDX.TDConst;
 import com.topodroid.TDX.TDandroid;
 // import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.TDAzimuth;
@@ -1093,6 +1094,14 @@ public class TDSetting
     // mExportTcsx     = prefs.getBoolean(     keyGeekImport[ 2], bool(defGeekImport[ 2]) ); // DISTOX_TRANSFER_CSURVEY
     // TDLog.v("SETTING load secondary GEEK import done");
 
+    String[] keyEnable = TDPrefKey.EXPORT_ENABLE;
+    String[] defEnable = TDPrefKey.EXPORT_ENABLEdef;
+    for ( int k = 0; k < keyEnable.length; ++ k ) {
+      b = prefs.getBoolean( keyEnable[ k], bool(defEnable[ k]) );
+      TDConst.mSurveyExportEnable[ 1 + k ] = b;
+      TDLog.v("SETTING enable " + (1+k) + " " + b );
+    }
+
     String[] keyExport = TDPrefKey.EXPORT;
     String[] defExport = TDPrefKey.EXPORTdef;
     mExportShotsFormat = tryInt(   prefs,      keyExport[ 0],      defExport[ 0] );  // DISTOX_EXPORT_SHOTS choice: 
@@ -1399,6 +1408,7 @@ public class TDSetting
       // case TDPrefCat.PREF_CATEGORY_SKETCH: return updatePrefSketch( hlp, k, v ); // SKETCH_3D --> moved to GEEK SKETCH
       case TDPrefCat.PREF_CATEGORY_EXPORT: return updatePrefExport( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_IMPORT: return updatePrefImport( hlp, k, v );
+      case TDPrefCat.PREF_CATEGORY_EXPORT_ENABLE: return updatePrefExportEnable( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_SVX:    return updatePrefSvx( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_TH:     return updatePrefTh( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_DAT:    return updatePrefDat( hlp, k, v );
@@ -1434,7 +1444,7 @@ public class TDSetting
       case TDPrefCat.PREF_GEEK_SKETCH:     return updatePrefSketch( hlp, k, v );
       // case TDPrefCat.PREF_CATEGORY_LOG:    return updatePrefLog( hlp, k, v ); // NO_LOGS
       default:
-        TDLog.Error("Cave3XPref. unhandled setting, cat " + cat + " key " + k + " val <" + v + ">" );
+        TDLog.Error("SETTINGS unhandled: cat " + cat + " key " + k + " val <" + v + ">" );
     }
     return null;
   }
@@ -2024,6 +2034,20 @@ public class TDSetting
       mLRExtend = tryBooleanValue( hlp, k, v, bool(def[ 1]) ); 
     } else {
       TDLog.Error("missing IMPORT key: " + k );
+    }
+    return null;
+  }
+
+  private static String updatePrefExportEnable( TDPrefHelper hlp, String k, String v )
+  {
+    String[] key = TDPrefKey.EXPORT_ENABLE;
+    String[] def = TDPrefKey.EXPORT_ENABLEdef;
+    for ( int n = 0; n < key.length; ++ n ) {
+      if ( k.equals( key[n] ) ) {
+        boolean b = tryBooleanValue( hlp, k, v, bool(def[n]) ); 
+        TDConst.mSurveyExportEnable[ 1 + n ] = b;
+        return b ? TDPrefKey.TRUE : TDPrefKey.FALSE;
+      }
     }
     return null;
   }

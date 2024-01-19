@@ -2685,55 +2685,56 @@ public class TDExporter
   //   commented flag not supported
   //   surface flag handled as duplicate
 
-  static private LRUDprofile computeLRUDprofile( DBlock b, List< DBlock > list, boolean at_from )
-  {
-    LRUDprofile lrud = new LRUDprofile( b.mBearing );
-    float n0  = TDMath.cosd( b.mBearing );
-    float e0  = TDMath.sind( b.mBearing );
-    float cc0 = TDMath.cosd( b.mClino );
-    float sc0 = TDMath.sind( b.mClino );
-    float cb0 = n0;
-    float sb0 = e0;
-    String station = ( at_from ) ? b.mFrom : b.mTo;
-    
-    for ( DBlock item : list ) {
-      String from = item.mFrom;
-      String to   = item.mTo;
-      if ( TDString.isNullOrEmpty( from ) ) { // skip blank
-        // if ( TDString.isNullOrEmpty( to ) ) continue;
-        continue;
-      } else { // skip leg
-        if ( to != null && to.length() > 0 ) continue;
-      }
-      if ( station.equals( from ) ) {
-        float cb = TDMath.cosd( item.mBearing );
-        float sb = TDMath.sind( item.mBearing );
-        float cc = TDMath.cosd( item.mClino );
-        float sc = TDMath.sind( item.mClino );
-        float len = item.mLength;
-
-        // skip splays too close to shot direction // FIXME setting
-        // this test aims to use only splays that are "orthogonal" to the shot
-        if ( TDSetting.mOrthogonalLRUD ) {
-          float cbb1 = sc*sc0*(sb*sb0 + cb*cb0) + cc*cc0; // cosine of angle between block and item
-          if ( Math.abs( cbb1 ) > TDSetting.mOrthogonalLRUDCosine ) continue; 
-        }
-
-        float z1 = len * sc;
-        float n1 = len * cc * cb;
-        float e1 = len * cc * sb;
-        if ( z1 > 0.0 ) { if ( z1 > lrud.u ) lrud.u = z1; }
-        else            { if ( -z1 > lrud.d ) lrud.d = -z1; }
-
-        float rl = e1 * n0 - n1 * e0;
-        if ( rl > 0.0 ) { if ( rl > lrud.r ) lrud.r = rl; }
-        else            { if ( -rl > lrud.l ) lrud.l = -rl; }
-        lrud.addData( z1, rl, len );
-      }
-    }
-    // TDLog.v( "<" + b.mFrom + "-" + b.mTo + "> at " + station + ": " + lrud.l + " " + lrud.r );
-    return lrud;
-  }
+  // unused
+  // static private LRUDprofile computeLRUDprofile( DBlock b, List< DBlock > list, boolean at_from )
+  // {
+  //   LRUDprofile lrud = new LRUDprofile( b.mBearing );
+  //   float n0  = TDMath.cosd( b.mBearing );
+  //   float e0  = TDMath.sind( b.mBearing );
+  //   float cc0 = TDMath.cosd( b.mClino );
+  //   float sc0 = TDMath.sind( b.mClino );
+  //   float cb0 = n0;
+  //   float sb0 = e0;
+  //   String station = ( at_from ) ? b.mFrom : b.mTo;
+  //   
+  //   for ( DBlock item : list ) {
+  //     String from = item.mFrom;
+  //     String to   = item.mTo;
+  //     if ( TDString.isNullOrEmpty( from ) ) { // skip blank
+  //       // if ( TDString.isNullOrEmpty( to ) ) continue;
+  //       continue;
+  //     } else { // skip leg
+  //       if ( to != null && to.length() > 0 ) continue;
+  //     }
+  //     if ( station.equals( from ) ) {
+  //       float cb = TDMath.cosd( item.mBearing );
+  //       float sb = TDMath.sind( item.mBearing );
+  //       float cc = TDMath.cosd( item.mClino );
+  //       float sc = TDMath.sind( item.mClino );
+  //       float len = item.mLength;
+  //
+  //       // skip splays too close to shot direction // FIXME setting
+  //       // this test aims to use only splays that are "orthogonal" to the shot
+  //       if ( TDSetting.mOrthogonalLRUD ) {
+  //         float cbb1 = sc*sc0*(sb*sb0 + cb*cb0) + cc*cc0; // cosine of angle between block and item
+  //         if ( Math.abs( cbb1 ) > TDSetting.mOrthogonalLRUDCosine ) continue; 
+  //       }
+  // 
+  //       float z1 = len * sc;
+  //       float n1 = len * cc * cb;
+  //       float e1 = len * cc * sb;
+  //       if ( z1 > 0.0 ) { if ( z1 > lrud.u ) lrud.u = z1; }
+  //       else            { if ( -z1 > lrud.d ) lrud.d = -z1; }
+  // 
+  //       float rl = e1 * n0 - n1 * e0;
+  //       if ( rl > 0.0 ) { if ( rl > lrud.r ) lrud.r = rl; }
+  //       else            { if ( -rl > lrud.l ) lrud.l = -rl; }
+  //       lrud.addData( z1, rl, len );
+  //     }
+  //   }
+  //   // TDLog.v( "<" + b.mFrom + "-" + b.mTo + "> at " + station + ": " + lrud.l + " " + lrud.r );
+  //   return lrud;
+  // }
 
   /** compute the LRUD for a leg
    * @param b       leg
@@ -2942,6 +2943,8 @@ public class TDExporter
   static int exportSurveyAsDat( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String survey_name, String prefix )
   {
     // TDLog.v( "export as compass: " + survey_name + " swap LR " + TDSetting.mSwapLR );
+    boolean not_diving = ! info.isDivingMode();
+
     List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
     try {
@@ -2982,7 +2985,11 @@ public class TDExporter
       pw.format(Locale.US, "DECLINATION: %.4f  ", info.getDeclination() ); // DECLINATION Compass does not have undefined declination
       pw.format("FORMAT: DMMDLUDRLADN  CORRECTIONS:  0.00 0.00 0.00\r\n" );
       pw.format("\r\n" );
-      pw.format("FROM TO LENGTH BEARING INC LEFT UP DOWN RIGHT FLAGS COMMENTS\r\n" );
+      if ( info.isDivingMode() ) {
+        pw.format("FROM TO DEPTH BEARING LENGTH FLAGS COMMENTS\r\n" );
+      } else {
+        pw.format("FROM TO LENGTH BEARING INC LEFT UP DOWN RIGHT FLAGS COMMENTS\r\n" );
+      }
       pw.format( "\r\n" );
 
       AverageLeg leg = new AverageLeg(0);
@@ -3012,7 +3019,7 @@ public class TDExporter
               duplicate = false;
               ref_item = null; 
             }
-	    if ( TDSetting.mCompassSplays ) {
+	    if ( TDSetting.mCompassSplays && not_diving ) {
 	      int ii = nextSplayInt( splay_stations, to );
 	      printSplayToDat( pw, prefix, to, to + "ss" + ii, item, true ); // reverse
 	    }
@@ -3026,7 +3033,7 @@ public class TDExporter
               duplicate = false;
               ref_item = null; 
             }
-	    if ( TDSetting.mCompassSplays ) {
+	    if ( TDSetting.mCompassSplays && not_diving ) {
 	      int ii = nextSplayInt( splay_stations, from );
 	      printSplayToDat( pw, prefix, from, from + "ss" + ii, item, false ); // not reverse
 	    }
@@ -4907,7 +4914,7 @@ public class TDExporter
   }
 
   // -----------------------------------------------------------------------
-  // VISUALTOPO EXPORT 
+  // VISUALTOPO EXPORT - VTOPO
   // FIXME photos
   // FIXME not sure declination written in the right place
   // shot flags are not supported
@@ -4986,6 +4993,33 @@ public class TDExporter
     pw.format("\r\n");
   }
 
+  static private void printShotToTroxDiving( PrintWriter pw, DBlock item, AverageLeg leg, String suffix ) // , int ref, int suiv )
+  {
+    if ( item == null ) return; // false;
+    // TDLog.v( "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
+    pw.format("<Visee");
+    if ( TDString.isNullOrEmpty( suffix ) ) {
+      pw.format(" Dep=\"%s\"", item.mFrom );
+      pw.format(" Arr=\"%s\"", item.mTo );
+    } else {
+      pw.format(" Dep=\"%s%s\"", item.mFrom, suffix );
+      pw.format(" Arr=\"%s%s\"", item.mTo, suffix );
+    }
+    pw.format(Locale.US, " Long=\"%.2f\"", leg.clino() ); 
+    pw.format(Locale.US, " Az=\"%.1f\"",   leg.bearing() );
+    pw.format(Locale.US, " Pte=\"%.1f\"",  - leg.length() ); // VTopo has prof instead of depth
+    leg.reset();
+    // pw.format(" Ref=\"%d\"",  ref );
+    // pw.format(" Suiv=\"%d\"", suiv );
+    if ( item.isDuplicate() ) pw.format(" Exc=\"E\"");
+    // if ( surface ) pw.forma(" #|S#");
+    pw.format(">");
+    if ( item.mComment != null && item.mComment.length() > 0 ) {
+      pw.format("<Commentaire>%s</Commentaire>", item.mComment );
+    }
+    pw.format("</Visee>\r\n");
+  }
+
   static private void printShotToTrox( PrintWriter pw, DBlock item, AverageLeg leg, LRUD lrud, String suffix ) // , int ref, int suiv )
   {
     if ( item == null ) return; // false;
@@ -5048,9 +5082,43 @@ public class TDExporter
     pw.format("\r\n");
   }
 
+  static private void printSplayToTroxDiving( PrintWriter pw, DBlock item, boolean direct, String suffix ) // , int ref )
+  {
+    // if ( ! TDSetting.mVTopoSplays ) return; // false; - chekcked before call
+    if ( item == null ) return; // false;
+    // TDLog.v( "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
+    pw.format("    <Visee ");
+    if ( direct ) {
+      if ( TDString.isNullOrEmpty( suffix ) ) {
+        pw.format("Dep=\"%s\" ", item.mFrom );
+      } else {
+        pw.format("Dep=\"%s%s\" ", item.mFrom, suffix );
+      }
+      pw.format(Locale.US, "Long=\"%.2f\" Az=\"%.1f\" Pte=\"%.1f\" ", item.mClino, item.mBearing, - item.mLength ); // VTopo has prof instead of depth
+    } else {
+      // float b = item.mBearing + 180; if ( b >= 360 ) b -= 360;
+      float b = TDMath.add180( item.mBearing );
+      if ( TDString.isNullOrEmpty( suffix ) ) {
+        pw.format("Dep=\"%s\" ", item.mTo );
+      } else {
+        pw.format("Dep=\"%s%s\" ", item.mTo, suffix );
+      }
+      pw.format(Locale.US, "Long=\"%.2f\" Az=\"%.1f\" Pte=\"%.1f\" ", item.mClino, b, - item.mLength ); // VTopo has prof instead of depth
+    }
+    // pw.format(Locale.US, "Ref=\"%d\" ", ref );
+    if (item.isCommented() ) pw.format("Exc=\"E\" ");
+    // if ( duplicate ) pw.format(" #|L#");
+    // if ( surface ) pw.format(" #|S#");
+    pw.format(">");
+    if ( item.mComment != null && item.mComment.length() > 0 ) {
+      pw.format("<Commentaire>%s</Commentaire>", item.mComment );
+    } 
+    pw.format("</Visee>\r\n");
+  }
+
   static private void printSplayToTrox( PrintWriter pw, DBlock item, boolean direct, String suffix ) // , int ref )
   {
-    if ( ! TDSetting.mVTopoSplays ) return; // false;
+    // if ( ! TDSetting.mVTopoSplays ) return; // false; - chekcked before call
     if ( item == null ) return; // false;
     // TDLog.v( "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
     pw.format("    <Visee ");
@@ -5283,6 +5351,8 @@ public class TDExporter
    */ 
   static int exportSurveyAsTrox( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String survey_name, String suffix )
   {
+    boolean diving = info.isDivingMode();
+
     // TDLog.v( "export as visualtopo-X " );
     List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
@@ -5332,8 +5402,12 @@ public class TDExporter
       pw.format("<Param");
       pw.format(" InstrDist=\"Deca\"");
       pw.format(" UnitDir=\"Degd\"");
-      pw.format(" InstrPte=\"Clino\"");
-      pw.format(" UnitPte=\"Degd\"");
+      if ( diving ) {
+        pw.format(" InstrPte=\"Prof\"");
+      } else {
+        pw.format(" InstrPte=\"Clino\"");
+        pw.format(" UnitPte=\"Degd\"");
+      }
       pw.format(Locale.US, " Declin=\"%.4f\"", info.getDeclination() );
       pw.format(" SensDir=\"Dir\"");
       pw.format(" SensPte=\"Dir\"");
@@ -5376,13 +5450,23 @@ public class TDExporter
               pw.format( sw.toString() );
               sw = new StringWriter();
               psw = new PrintWriter( sw );
-              lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
-              printShotToTrox( pw, ref_item, leg, lrud, suffix ); // , ref, suiv );
+              if ( diving ) {
+                printShotToTroxDiving( pw, ref_item, leg, suffix ); // , ref, suiv );
+              } else {
+                lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
+                printShotToTrox( pw, ref_item, leg, lrud, suffix ); // , ref, suiv );
+              }
               // duplicate = false;
               // surface = false;
               ref_item = null; 
             }
-            printSplayToTrox( psw, item, false, suffix ); // , ref );
+            if ( TDSetting.mVTopoSplays ) {
+              if ( diving ) {
+                printSplayToTroxDiving( psw, item, false, suffix ); // , ref );
+              } else {
+                printSplayToTrox( psw, item, false, suffix ); // , ref );
+              }
+            }
           }
         } else { // with FROM station
           if ( TDString.isNullOrEmpty( to ) ) { // splay shot
@@ -5391,21 +5475,35 @@ public class TDExporter
               pw.format( sw.toString() );
               sw = new StringWriter();
               psw = new PrintWriter( sw );
-              lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
-              printShotToTrox( pw, ref_item, leg, lrud, suffix ); // , ref, suiv );
+              if ( diving ) {
+                printShotToTroxDiving( pw, ref_item, leg, suffix ); // , ref, suiv );
+              } else {
+                lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
+                printShotToTrox( pw, ref_item, leg, lrud, suffix ); // , ref, suiv );
+              }
               // duplicate = false;
               // surface = false;
               ref_item = null; 
             }
-            printSplayToTrox( psw, item, true, suffix ); // , ref );
+            if ( TDSetting.mVTopoSplays ) {
+              if ( diving ) {
+                printSplayToTroxDiving( psw, item, true, suffix ); // , ref );
+              } else {
+                printSplayToTrox( psw, item, true, suffix ); // , ref );
+              }
+            }
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
               if ( ! started ) started = printStartShotToTrox( pw, ref_item, list, suffix ); // , ref, suiv );
               pw.format( sw.toString() );
               sw = new StringWriter();
               psw = new PrintWriter( sw );
-              lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
-              printShotToTrox( pw, ref_item, leg, lrud, suffix ); // , ref, suiv );
+              if ( diving ) {
+                printShotToTroxDiving( pw, ref_item, leg, suffix ); // , ref, suiv );
+              } else {
+                lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
+                printShotToTrox( pw, ref_item, leg, lrud, suffix ); // , ref, suiv );
+              }
             }
             ref_item = item;
             // duplicate = item.isDuplicate();
@@ -5418,8 +5516,12 @@ public class TDExporter
       if ( leg.mCnt > 0 && ref_item != null ) {
         if ( ! started ) started = printStartShotToTrox( pw, ref_item, list, suffix ); // , ref, suiv );
         pw.format( sw.toString() );
-        lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
-        printShotToTrox( pw, ref_item, leg, lrud, suffix ); // , ref, suiv );
+        if ( diving ) {
+          printShotToTroxDiving( pw, ref_item, leg, suffix ); // , ref, suiv );
+        } else {
+          lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
+          printShotToTrox( pw, ref_item, leg, lrud, suffix ); // , ref, suiv );
+        }
       } else {
         pw.format( sw.toString() );
       }

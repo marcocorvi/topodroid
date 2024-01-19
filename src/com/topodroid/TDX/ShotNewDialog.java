@@ -146,6 +146,11 @@ class ShotNewDialog extends MyDialog
       mLbacksight.setVisibility( View.GONE );
     }
 
+    if ( diving ) {
+      mETdistance.setHint( R.string.input_depth );
+      mETclino.setHint( R.string.input_length );
+    }
+
     mETleft     = (EditText) findViewById(R.id.shot_left );
     mETright    = (EditText) findViewById(R.id.shot_right );
     mETup       = (EditText) findViewById(R.id.shot_up );
@@ -162,8 +167,6 @@ class ShotNewDialog extends MyDialog
       if ( diving ) {
         MyKeyboard.registerEditText( mKeyboard, mETclino,        MyKeyboard.FLAG_POINT ); // diving length
         MyKeyboard.registerEditText( mKeyboard, mETdistance,     MyKeyboard.FLAG_POINT ); // diving depth 
-	mETdistance.setHint( R.string.input_depth );
-	mETclino.setHint( R.string.input_length );
       } else {
         MyKeyboard.registerEditText( mKeyboard, mETdistance,     MyKeyboard.FLAG_POINT );
         MyKeyboard.registerEditText( mKeyboard, mETclino,        MyKeyboard.FLAG_POINT_SIGN );
@@ -185,8 +188,6 @@ class ShotNewDialog extends MyDialog
       if ( diving ) {
         mETclino.setInputType( TDConst.NUMBER_DECIMAL );    // diving length
         mETdistance.setInputType( TDConst.NUMBER_DECIMAL ); // diving depth
-	mETdistance.setHint( R.string.input_depth );
-	mETclino.setHint( R.string.input_length );
       } else {
         mETdistance.setInputType( TDConst.NUMBER_DECIMAL );
         mETclino.setInputType( TDConst.NUMBER_DECIMAL_SIGNED );

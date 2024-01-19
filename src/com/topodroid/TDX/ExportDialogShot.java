@@ -46,13 +46,15 @@ public class ExportDialogShot extends MyDialog
   // private Button   mBtnBack;
 
   private final IExporter mParent;
-  private String[]  mTypes;
+  private String[]  mTypes; // list of types in drop down 
+  private boolean[] mEnable = TDConst.mSurveyExportEnable;
   private String    mSelected;
   private final int mTitle;
   private int mSelectedPos;
   private String    mSurvey;
   private String    mExportPrefix = null;
   private String    mExportName = null;
+  private boolean   mDiving = false; // diving-mode survey
 
   private LinearLayout mLayoutZip;
   private LinearLayout mLayoutCompass;
@@ -74,15 +76,17 @@ public class ExportDialogShot extends MyDialog
    * @param types       export types, for the options
    * @param title       dialog title (resource)
    * @param survey      survey name
+   * @param diving      whether survey is diving-mode
    */
-  public ExportDialogShot( Context context, IExporter parent, String[] types, int title, String survey )
+  public ExportDialogShot( Context context, IExporter parent, String[] types, int title, String survey, boolean diving )
   {
     super( context, null, R.string.ExportDialog ); // null app
-    mParent = parent;
-    mTypes  = types;
+    mParent   = parent;
+    mTypes    = types;
     mSelected = null;
-    mTitle = title;
-    mSurvey = survey;
+    mTitle    = title;
+    mSurvey   = survey;
+    mDiving   = diving;
     mExportPrefix = null;
     mExportName   = null;
   }
@@ -145,6 +149,8 @@ public class ExportDialogShot extends MyDialog
         }
       }
     }
+    int ppos = TDConst.surveyIndex( pos );
+    if ( ppos < 0 || ppos >= mTypes.length ) ppos = 0;
     mSelected = mTypes[ pos ];
     mSelectedPos = pos;
     spin.setSelection( pos );
@@ -159,9 +165,13 @@ public class ExportDialogShot extends MyDialog
   @Override
   public void onItemSelected( AdapterView av, View v, int pos, long id ) 
   {
-    mSelected = mTypes[ pos ];
-    mSelectedPos = pos;
+    int ppos = TDConst.surveyIndex( pos );
+    TDLog.v( "EXPORT ppos " + ppos );
+    if ( ppos < 0 ) return;
+    mSelected = TDConst.mSurveyExportTypes[ ppos ];
+    mSelectedPos = ppos;
     updateLayouts();
+    TDLog.v( "EXPORT ppos " + ppos + " " + mSelected );
   }
 
   /** react to a deselection
@@ -376,7 +386,11 @@ public class ExportDialogShot extends MyDialog
         break;
       case TDConst.SURVEY_POS_VTOPO: // VTopo
         {
-          TDSetting.mVTopoTrox = ((CheckBox) findViewById( R.id.vtopo_trox )).isChecked();
+          if ( mDiving ) {
+            TDSetting.mVTopoTrox = true;
+          } else {
+            TDSetting.mVTopoTrox = ((CheckBox) findViewById( R.id.vtopo_trox )).isChecked();
+          }
           TDSetting.mVTopoSplays = ((CheckBox) findViewById( R.id.vtopo_splays )).isChecked();
           TDSetting.mVTopoLrudAtFrom = ((CheckBox) findViewById( R.id.vtopo_lrud )).isChecked();
           setExportPrefix( ((EditText) findViewById( R.id.vtopo_suffix )).getText() );
@@ -440,8 +454,11 @@ public class ExportDialogShot extends MyDialog
     ((CheckBox) findViewById( R.id.therion_config )).setChecked( TDSetting.mTherionWithConfig );
     ((CheckBox) findViewById( R.id.therion_maps )).setChecked( TDSetting.mTherionMaps );
     ((CheckBox) findViewById( R.id.therion_lrud )).setChecked( TDSetting.mSurvexLRUD );
-
-    ((CheckBox) findViewById( R.id.vtopo_trox )).setChecked( TDSetting.mVTopoTrox );
+    if ( mDiving ) {
+      ((CheckBox) findViewById( R.id.vtopo_trox )).setVisibility( View.GONE );
+    } else {
+      ((CheckBox) findViewById( R.id.vtopo_trox )).setChecked( TDSetting.mVTopoTrox );
+    }
     ((CheckBox) findViewById( R.id.vtopo_splays )).setChecked( TDSetting.mVTopoSplays );
     ((CheckBox) findViewById( R.id.vtopo_lrud )).setChecked( TDSetting.mVTopoLrudAtFrom );
 
