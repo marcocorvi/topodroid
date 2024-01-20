@@ -686,6 +686,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="unzip_fail_db">Error: La versión de base de datos no coincide</string>
     <string name="unzip_fail_td">Error: Versión TopoDroid no coincide</string>
     <!-- UNUSED string name="zoom_in_out">Zoom aumentar/disminuir</string -->
+    <!-- TODO string name="screenshot_saved">Saved screenshot %1$s</string -->
+    <!-- TODO string name="screenshot_failed">Failed taking screenshot</string -->
 
     <string name="survey_info">Info Topografía</string>
     <string name="stat_dates">De %1$s a %2$s</string>
@@ -1227,6 +1229,7 @@ debe ajustarlos a sus necesidades./n/n </string>
 
     <string name="title_settings_main">Configuración principal de TopoDroid</string>
     <string name="title_settings_export">Configuración de importación / exportación de TopoDroid</string>
+    <!-- TODO string name="title_settings_export_enable">Data export enable settings</string -->
     <string name="title_settings_import">Configuración de importación de TopoDroid</string>
     <string name="title_settings_csv">Configuración de exportación CSV</string>
     <string name="title_settings_svx">Configuración de exportación Survex</string>
@@ -1320,6 +1323,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_cat_drawing">Ajustes de dibujo</string>
   <string name="pref_cat_import_export">Importar/Exportar</string>
   <string name="pref_cat_exportimport">Importar</string>
+  <!-- TODO string name="pref_cat_exportenable">ENABLE</string -->
   <!-- OK string name="pref_cat_exportth">Therion</string -->
   <!-- OK string name="pref_cat_exportdat">Compass</string -->
   <!-- OK string name="pref_cat_exporttro">VisualTopo</string -->

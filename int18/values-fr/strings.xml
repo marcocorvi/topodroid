@@ -691,6 +691,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="unzip_fail_db">Échec : version de base de données incorrecte</string>
     <string name="unzip_fail_td">Échec : version de TopoDroid incorrecte</string>
     <!-- UNUSED string name="zoom_in_out">Zoom +/-</string -->
+    <!-- TODO string name="screenshot_saved">Saved screenshot %1$s</string -->
+    <!-- TODO string name="screenshot_failed">Failed taking screenshot</string -->
     
 
     <string name="survey_info">Information sur le relevé</string>
@@ -1235,6 +1237,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 
     <string name="title_settings_main">Paramètres principaux de TopoDroid</string>
     <string name="title_settings_export">Paramètres d\'importation / exportation de TopoDroid</string>
+    <!-- TODO string name="title_settings_export_enable">Data export enable settings</string -->
     <string name="title_settings_import">Paramètres d\'importation de TopoDroid</string>
     <string name="title_settings_csv">Paramètres d\'exportation CSV</string>
     <string name="title_settings_svx">Paramètres d\'exportation Survex</string>
@@ -1323,6 +1326,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_cat_drawing">OPTIONS DE DESSIN</string>
     <string name="pref_cat_import_export">IMPORT - EXPORT</string>
     <string name="pref_cat_exportimport">IMPORT</string>
+  <!-- TODO string name="pref_cat_exportenable">ENABLE</string -->
     <!-- OK string name="pref_cat_exportsvx" translatable="false">Survex</string -->
     <!-- OK string name="pref_cat_exportth"  translatable="false">Therion</string -->
     <!-- OK string name="pref_cat_exportdat" translatable="false">Compass</string -->

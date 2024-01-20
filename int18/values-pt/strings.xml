@@ -639,6 +639,9 @@ no campo abaixo e aperte o botão.
   <string name="unzip_fail_db">Falha: versão do banco de dados incompatível</string>
   <string name="unzip_fail_td">Falha: versão do TopoDroidX incompatível</string>
   <!-- UNUSED string name="zoom_in_out">Abrir/fechar zoom</string -->
+    <!-- TODO string name="screenshot_saved">Saved screenshot %1$s</string -->
+    <!-- TODO string name="screenshot_failed">Failed taking screenshot</string -->
+
   <string name="survey_info">Informações da topo</string>
   <string name="stat_dates">De %1$s para %2$s</string>
   <string name="stat_devices">Dispositivos %1$d: %2$s</string>
@@ -1146,6 +1149,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="title_select">Selecionar</string -->
   <string name="title_settings_main">Config principais</string>
   <string name="title_settings_export">Config importação/exportação</string>
+    <!-- TODO string name="title_settings_export_enable">Data export enable settings</string -->
   <string name="title_settings_import">Config importação</string>
   <string name="title_settings_csv">Config export CSV</string>
   <string name="title_settings_svx">Config export Survex</string>
@@ -1227,6 +1231,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_cat_drawing">DESENHO CROQUI</string>
   <string name="pref_cat_import_export">IMPORTAR/EXPORTAR</string>
   <string name="pref_cat_exportimport">IMPORTAR</string>
+  <!-- TODO string name="pref_cat_exportenable">ENABLE</string -->
   <!-- UNUSED string name="pref_cat_exportpng" translatable="false">PNG</string NO_PNG -->
   <string name="pref_cat_calib">CALIBRAÇÕES</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->

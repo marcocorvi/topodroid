@@ -678,6 +678,8 @@
     <string name="unzip_fail_db">Fallito: Versione database non corrispondente</string>
     <string name="unzip_fail_td">Fallito: Versione TopoDroid non corrispondente</string>
     <!-- UNUSED string name="zoom_in_out">Zoom in/out</string -->
+    <!-- TODO string name="screenshot_saved">Saved screenshot %1$s</string -->
+    <!-- TODO string name="screenshot_failed">Failed taking screenshot</string -->
 
     <string name="survey_info">Info rilievo</string>
     <string name="stat_dates">Da %1$s a %2$s</string>
@@ -1221,6 +1223,7 @@
 
     <string name="title_settings_main">TopoDroid: Impostazioni principali</string>
     <string name="title_settings_export">Impostazione import/export</string>
+    <!-- TODO string name="title_settings_export_enable">Data export enable settings</string -->
     <string name="title_settings_import">Impostazione import</string>
     <string name="title_settings_csv">Impostazioni export CSV</string>
     <string name="title_settings_svx">Impostazioni export Survex</string>
@@ -1314,6 +1317,7 @@
   <string name="pref_cat_drawing">OPZIONI DISEGNO</string>
   <string name="pref_cat_import_export">OPZIONI IMPORT/EXPORT</string>
   <string name="pref_cat_exportimport">IMPORT</string>
+  <!-- TODO string name="pref_cat_exportenable">ENABLE</string -->
   <!-- NO string name="pref_cat_exportth">Therion</string -->
   <!-- NO string name="pref_cat_exportdat">Compass</string -->
   <!-- NO string name="pref_cat_exporttro">VisualTopo</string -->

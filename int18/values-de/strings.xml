@@ -628,6 +628,9 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="unzip_fail_db">Fehler: Ungültige Datenbank-Version</string>
   <string name="unzip_fail_td">Fehler: Ungültige TopoDroid-Version</string>
   <!-- UNUSED string name="zoom_in_out">Zoom in/out</string -->
+    <!-- TODO string name="screenshot_saved">Saved screenshot %1$s</string -->
+    <!-- TODO string name="screenshot_failed">Failed taking screenshot</string -->
+
   <string name="survey_info">Vermessungsinfo</string>
   <string name="stat_dates">Von %1$s nach %2$s</string>
   <string name="stat_devices">Geräte %1$d: %2$s</string>
@@ -1135,6 +1138,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="title_select">Auswählen</string -->
   <string name="title_settings_main">TopoDroid Einstellungen</string>
   <string name="title_settings_export">Import/Export Einstellungen</string>
+    <!-- TODO string name="title_settings_export_enable">Data export enable settings</string -->
   <string name="title_settings_import">Import Einstellungen</string>
   <string name="title_settings_csv">CSV-Export Einstellungen</string>
   <string name="title_settings_svx">Survex-Export Einstellungen</string>
@@ -1217,6 +1221,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_cat_drawing">Skizzen</string>
   <string name="pref_cat_import_export">Import/Export</string>
   <string name="pref_cat_exportimport">IMPORT</string>
+  <!-- TODO string name="pref_cat_exportenable">ENABLE</string -->
   <!-- UNUSED string name="pref_cat_exportpng">PNG</string -->
   <string name="pref_cat_calib">Kalibrierung</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
