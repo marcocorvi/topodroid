@@ -563,6 +563,23 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
 
   // ------------------ IDrawingSurface -----------------------
 
+  /** draw a canvas - for screenshot 
+   * @param canvas canvas
+   * @return true on success
+   */
+  boolean drawCanvas( Canvas canvas )
+  {
+    try {
+      canvas.drawColor(0, PorterDuff.Mode.CLEAR);
+      commandManager.executeAll( canvas, mZoomer.zoom(), mStationSplay, false ); // false = no inverted_color
+      return true;
+    } catch ( Throwable e ) {
+      e.printStackTrace();
+    }
+    return false;
+  }
+      
+
   /** refresh the surface
    * @param holder   surface holder
    */

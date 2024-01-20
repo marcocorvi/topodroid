@@ -41,6 +41,13 @@ class RawDBlock
   String mAddress; // DistoX address - used only in exports
   // boolean mWasRecent = false; // REVISE_RECENT
 
+  int mRawMx = 0;
+  int mRawMy = 0;
+  int mRawMz = 0;
+  int mRawGx = 0;
+  int mRawGy = 0;
+  int mRawGz = 0;
+
   void setShotType( int shot_type ) { mShotType = shot_type; } 
   
   int getShotType() { return mShotType; }

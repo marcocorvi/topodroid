@@ -118,6 +118,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.Paint;
+// import android.graphics.Canvas;
 import android.graphics.Paint.FontMetrics;
 import android.graphics.PointF;
 import android.graphics.RectF;
@@ -8139,6 +8140,8 @@ public class DrawingWindow extends ItemDrawer
         UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
+        takeScreenshot( mDrawingSurface );
+        return true;
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
         TDLog.Error( "key down: code " + code );

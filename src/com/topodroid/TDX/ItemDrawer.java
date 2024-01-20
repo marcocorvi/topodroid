@@ -11,7 +11,8 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.SymbolType;
 import com.topodroid.common.PointScale;
@@ -20,6 +21,11 @@ import android.app.Activity;
 
 import android.graphics.pdf.PdfDocument.PageInfo;
 import android.graphics.RectF;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+
+import java.io.File;
+import java.io.FileOutputStream;
 
 abstract class ItemDrawer extends Activity
 {
@@ -286,6 +292,43 @@ abstract class ItemDrawer extends Activity
     // TDLog.v( "rect " + bnds.right + " " + bnds.left + " == " + bnds.bottom + " " + bnds.top + " W " + zw + " H " + zh );
     PageInfo.Builder builder = new PageInfo.Builder( zw, zh, 1 ); // API_19
     return builder.create(); // API_19
+  }
+
+  private long mScreenshotTime = 0;
+
+  protected void takeScreenshot( DrawingSurface drawing_surface )
+  {
+    long millis = TDUtil.time();
+    if ( millis < mScreenshotTime ) return;
+    mScreenshotTime = millis + 1500;
+    try {
+      // create bitmap screen capture
+      // View v1 = getWindow().getDecorView().getRootView();
+      // v1.setDrawingCacheEnabled(true);
+      // Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
+      // v1.setDrawingCacheEnabled(false);
+
+      Bitmap bitmap = Bitmap.createBitmap( (int)(TopoDroidApp.mDisplayWidth), (int)(TopoDroidApp.mDisplayHeight), Bitmap.Config.ARGB_4444 );
+      Canvas canvas = new Canvas( bitmap );
+      if ( drawing_surface.drawCanvas( canvas ) ) {
+        String now = TDUtil.currentDateTimeFull();
+        String path = TDPath.getOutFile( now + ".png" );
+        File imageFile = new File(path);
+        FileOutputStream outputStream = new FileOutputStream(imageFile);
+        int quality = 100;
+        // bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, quality, outputStream);
+        outputStream.flush();
+        outputStream.close();
+        TDToast.make( String.format( getResources().getString( R.string.screenshot_saved ), path ) );
+      } else {
+        TDLog.e( "failed drawing canvas" );
+      }
+    } catch (Throwable e) {
+      // Several error may come out with file handling or DOM
+      e.printStackTrace();
+      TDToast.makeWarn( R.string.screenshot_failed );
+    }
   }
 
 

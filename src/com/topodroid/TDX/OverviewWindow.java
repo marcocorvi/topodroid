@@ -1369,8 +1369,10 @@ public class OverviewWindow extends ItemDrawer
       case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;
-      // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
-      // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
+      case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
+        takeScreenshot( mOverviewSurface );
+        return true;
+      case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
         // TDLog.Error( "key down: code " + code );
     }

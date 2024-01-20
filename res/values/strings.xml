@@ -697,6 +697,8 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="unzip_fail_db">Failed: database version mismatch</string>
     <string name="unzip_fail_td">Failed: TopoDroid version mismatch</string>
     <!-- UNUSED string name="zoom_in_out">Zoom in/out</string -->
+    <string name="screenshot_saved">Saved screenshot %1$s</string>
+    <string name="screenshot_failed">Failed taking screenshot</string>
 
 
     <string name="survey_info">Survey info</string>

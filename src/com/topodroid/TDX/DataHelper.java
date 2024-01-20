@@ -153,9 +153,9 @@ public class DataHelper extends DataSetObservable
     { "id", "fStation", "tStation", "distance", "bearing", "clino", "acceleration", "magnetic", "dip",  // 0 .. 8
       "extend", "flag", "leg", "comment", "type", "millis", "color", "stretch" // 9 .. 16
     };
-  static final private String[] mShotRawDataFields =
+  static final private String[] mShotRawDataFields = // used only by selectAllShotsRawData
     { "id", "fStation", "tStation", "distance", "bearing", "clino", "roll", "acceleration", "magnetic", "dip",
-      "type", "millis", "address", "extend", "flag", "leg", "status", "comment"
+      "type", "millis", "address", "extend", "flag", "leg", "status", "comment", "rawMx", "rawMy", "rawMz", "rawGx", "rawGy", "rawGz"
     };
 
   static final private String[] mPlotFieldsFull =
@@ -310,6 +310,7 @@ public class DataHelper extends DataSetObservable
    * @param sid     survey ID
    * @param blk     raw data block
    * @param cursor  values cursor
+   * used only by selectAllShotsRawData
    */
   private void fillBlockRawData( long sid, RawDBlock blk, Cursor cursor )
   {
@@ -332,6 +333,12 @@ public class DataHelper extends DataSetObservable
     blk.mLeg          = (int)(  cursor.getLong(15) );
     blk.mStatus       = (int)(  cursor.getLong(16) );
     blk.mComment      = cursor.getString( 17 );
+    blk.mRawMx        = (int)(  cursor.getLong(18) );
+    blk.mRawMy        = (int)(  cursor.getLong(19) );
+    blk.mRawMz        = (int)(  cursor.getLong(20) );
+    blk.mRawGx        = (int)(  cursor.getLong(21) );
+    blk.mRawGy        = (int)(  cursor.getLong(22) );
+    blk.mRawGz        = (int)(  cursor.getLong(23) );
   }
 
   /** fill a data block with values from the cursor

@@ -90,6 +90,10 @@ The mapping can be modified through a setting.<br><p>
 <b>Compass import</b><br>
 TopoDroid converts imported compass survey from <i>normal</i> datamode to <i>diving</i> datamode [T], if the relative setting is enabled [G].<br><p>
 
+<b>VisualTopo import</b><br>
+TopoDroid can import also VisualTopo surveys with <i>Prof</i> instead of <i>Clino</i> in "trox" format.
+The data are stored in <i>diving</i> datamode.<br><p>
+
 <b>N.B.</b>
 Import may fail (and crash the app) due to failure on the database that TopoDroid cannot intercept.
 If this happens delete the partially imported survey and retry to import it.<br><p>
@@ -104,6 +108,7 @@ TopoDroid exports survey data to the following cave-program formats:
 <li><a href="#trobot">TopoRobot</a></li>
 <li><a href="#vtopo">VisualTopo</a></li>
 <li><a href="#walls">Walls</a></li>
+<li><a href="#winkarst">WinKarst</a></li>
 <li><a href="#ghtopo">GHTopo</a></li>
 <li><a href="#polygon">Polygon</a></li>
 <li><a href="#topo">Topo</a></li>
@@ -124,10 +129,11 @@ Georeference points are exported with coordinates latitude-longitude [decimal de
 mean sea level [m].<br>
 H/V-splays are treated as normal splays in the exports.<br><p>
 
+<i>The settings affecting the exported data/file are listed for each export format.</i><br><p>
+
 
 The following export formats are no longer supported:
 <ul>
-<li><a href="">WinKarst</a></li>
 <li><a href="">Grottolf</a></li>
 <li><a href="">PocketTopo</a></li>
 <li><a href="">PLT file (OziExplorer)</a></li>
@@ -231,10 +237,11 @@ The name of the survey in the file is the filename without extension.<br><p>
 <i>VisualTopo</i> data file are supported both in import and in export.<br>
 VisualTopo splays are included if enabled.<br>
 By default LRUD are at the TO station, but they can be set at the FROM station.<br> 
-Data units are 'meters' and 'degrees'.<br><p>
+Data units are 'meters' and 'degrees'.<br>
+Survey in <i>diving</i> data-mode are exported in "trox" format.<br><p>
 
 Settings:<ul style="margin-top=0">
-<li><u>Trox</u> format. By default data are saved in "tro" format</li>
+<li><u>Tro</u> old format. By default data are saved in "trox" format</li>
 <li><u>Splays</u></li>
 <li><u>LRUD at From</u></li>
 <li><u>Station suffix</u>: if given it is appended to the station names</li>
@@ -253,7 +260,6 @@ Settings:<ul style="margin-top=0">
 </ul>
 <br><p>
 
-<!--
 <b id="winkarst">WinKarst</b> (.sur)<br>
 Survey data can be exported as <i>WinKarst</i> files (untested).<br><p>
 
@@ -261,7 +267,6 @@ Settings:<ul style="margin-top=0">
 <li><u>Station prefix</u>: if given it is prepended to the station names</li>
 </ul>
 <br><p>
--->
 
 <b id="ptopo">PocketTopo</b> (.top)<br>
 TopoDroid supports <i>PocketTopo</i> only in import.<br><p>
@@ -323,6 +328,7 @@ The survey raw data can be exported in CSV format. In this case each record (lin
 <li>acceleration, magnetic field, dip</li>
 <li>timestamp, type (device or manual), device-address</li>
 <li>extend, flag, leg_type, status, comment</li>
+<li>raw data</li>
 </ul><br>
 In the raw data export the leg shots are not averaged, but exported individually.<br><p>
 
