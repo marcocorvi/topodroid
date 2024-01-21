@@ -1130,7 +1130,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="export_bgcolor">White background</string -->
     <string name="export_bothviews">Plan and profile</string>
     <string name="export_config">Config commands</string>
-    <string name="export_csv_rawdata">Raw data</string>
+    <string name="export_csv_rawdata">Full data</string>
     <string name="export_dxf_blocks">Splay endpoints</string>
     <string name="export_dxf_version" copyable="fr">Version</string>
     <string name="export_georeference">Georeference</string>
@@ -1481,8 +1481,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_kml_stations_summary">Add stations to KML/GeoJSON export</string>
   <string name="pref_kml_splays_title">KML/JSON splays</string>
   <string name="pref_kml_splays_summary">Add splays to KML/GeoJSON export</string>
-  <string name="pref_csv_raw_title">Raw CSV</string>
-  <string name="pref_csv_raw_summary">Export raw data to CSV</string>
+  <string name="pref_csv_raw_title">Full CSV</string>
+  <string name="pref_csv_raw_summary">Export full data to CSV</string>
   <string name="pref_csv_sep_title">CSV separator</string>
   <string name="pref_csv_sep_summary">CSV fields separator</string>
   <string name="pref_csv_eol_title" copyable="all">CSV eol</string>

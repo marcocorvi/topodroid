@@ -316,11 +316,11 @@ Survey data can be exported as a list of records with comma-separated fields:
 <ul style="margin-top=0">
 <li>"from" and "to" stations</li>
 <li>distance, azimuth, clino</li>
-<li>flag</li>
+<li>flag (L duplicate, S surface, C commented)</li>
 </ul><br>
 Shot comments are not exported. A brief header is prepended to the data list.<br>
 
-The survey raw data can be exported in CSV format. In this case each record (line) has
+The survey full data can be exported in CSV format. In this case each record (line) has
 <ul style="margin-top=0">
 <li>shot id</li>
 <li>"from" and "to" stations</li>
@@ -328,12 +328,12 @@ The survey raw data can be exported in CSV format. In this case each record (lin
 <li>acceleration, magnetic field, dip</li>
 <li>timestamp, type (device or manual), device-address</li>
 <li>extend, flag, leg_type, status, comment</li>
-<li>raw data</li>
+<li>raw values</li>
 </ul><br>
-In the raw data export the leg shots are not averaged, but exported individually.<br><p>
+In the full data export the leg shots are not averaged, but exported individually.<br><p>
 
 Settings:<ul style="margin-top=0">
-<li><u>raw data</u>: whether to export the raw data</li>
+<li><u>full data</u>: whether to export the full data</li>
 <li><u>separator</u>: fields separator (comma, pipe or tab)</li>
 <li><u>EOL</u>: record separator (Linux or Windows)</li>
 </ul><br><p>

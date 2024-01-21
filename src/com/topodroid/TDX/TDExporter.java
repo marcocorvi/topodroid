@@ -2392,6 +2392,7 @@ public class TDExporter
       PrintWriter pw = new PrintWriter( bw );
       pw.format("# %s [*] created by TopoDroid v %s%s", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string(), newline );
       pw.format("# %s%s", info.name, newline );
+      pw.format("# id from to dist azi clino roll G M dip time type addres extend flag leg-type status Mx, My, Mz, Gx, Gy, Gz comment%s", newline );
       for ( RawDBlock b : list ) {
 	// String f = ( b.mFrom == null )? "" : b.mFrom;
 	// String t = ( b.mTo   == null )? "" : b.mTo;
@@ -2401,8 +2402,9 @@ public class TDExporter
         String address = b.mAddress;
         if ( TDString.isNullOrEmpty( address ) ) address = "-";
         pw.format(Locale.US, "%d%c%d%c%s%c", b.mTime, sep, b.getShotType(), sep, address, sep );
-        pw.format(Locale.US, "%d%c%d%c%d%c%d%c%s%c", b.mExtend, sep, b.mFlag, sep, b.mLeg, sep, b.mStatus, sep, b.mComment, sep );
-        pw.format(Locale.US, "%d%c%d%c%d%c%d%c%d%s%d%ss", b.mRawMx, sep, b.mRawMy, sep, b.mRawMz, sep, b.mRawGx, sep, b.mRawGy, sep, b.mRawGz, newline );
+        pw.format(Locale.US, "%d%c%d%c%d%c%d%c", b.mExtend, sep, b.mFlag, sep, b.mLeg, sep, b.mStatus, sep );
+        pw.format(Locale.US, "%d%c%d%c%d%c%d%c%d%s%d%c", b.mRawMx, sep, b.mRawMy, sep, b.mRawMz, sep, b.mRawGx, sep, b.mRawGy, sep, b.mRawGz, sep );
+        pw.format(Locale.US, "%s%s", b.mComment, newline );
       }
       bw.flush();
       bw.close();
@@ -2446,9 +2448,9 @@ public class TDExporter
       //   }
       // }
       if ( info.hasDeclination() ) { // DECLINATION in CSV
-        pw.format(Locale.US, "# from to tape compass clino extend (declination %.4f)%s", info.declination, newline ); 
+        pw.format(Locale.US, "# from to tape compass clino extend flags (declination %.4f)%s", info.declination, newline ); 
       } else {
-        pw.format(Locale.US, "# from to tape compass clino extend (declination undefined)%s", newline );
+        pw.format(Locale.US, "# from to tape compass clino extend flags (declination undefined)%s", newline );
       }
       pw.format(Locale.US, "# units tape %s compass clino %s%s", uls, uas, newline );
       
