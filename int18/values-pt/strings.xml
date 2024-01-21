@@ -1444,10 +1444,10 @@ no campo abaixo e aperte o botão.
   <string name="pref_horiz_splay_message">Medidas auxiliares divergindo do azimute da visada acima deste limite serão tracejadas nos perfis</string>
   <string name="pref_section_splay_title">Lim tracej ângulo</string>
   <string name="pref_section_splay_message">Abaixo deste ângulo com o plano do corte, a medida auxiliar será tracejada</string>
-  <string name="pref_splay_dash_color_title">Cor aux tracejada</string>
+  <string name="pref_splay_dash_color_title">Cor aux tracej</string>
   <string name="pref_splay_dash_color_summary">Cor das medidas auxiliares quando tracejadas</string>
-  <string name="pref_splay_dot_color_title">Cor aux tracej</string>
-  <string name="pref_splay_dot_color_summary">Cor das medidas auxiliares quando tracejadas</string>
+  <string name="pref_splay_dot_color_title">Cor aux ponth</string>
+  <string name="pref_splay_dot_color_summary">Cor das medidas auxiliares quando pontilhadas</string>
   <string name="pref_splay_latest_color_title">Cor aux recente</string>
   <string name="pref_splay_latest_color_summary">Cor das medidas auxiliares recentes</string>
   <!-- UNUSED string name="pref_data_backup_title">Exportação automática</string -->
