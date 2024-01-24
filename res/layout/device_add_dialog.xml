@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+  <TextView 
+      android:layout_width="wrap_content"
+      android:ems="25"
+      android:layout_height="wrap_content" 
+      android:singleLine="true"
+      android:text="@string/address"
+  />
+  <Spinner android:id="@+id/device_address" 
+    android:layout_marginTop="@dimen/margintiny"
+    android:layout_width="match_parent"
+    android:ems="25"
+    android:layout_height="wrap_content" 
+  />
+  
+  <LinearLayout 
+    android:layout_marginTop="@dimen/margintiny"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <Spinner android:id="@+id/device_model" 
+      android:layout_width="0dp"
+      android:layout_weight="50"
+      android:layout_height="wrap_content" 
+    />
+    <EditText android:id="@+id/device_number" 
+      android:layout_width="0dp"
+      android:layout_weight="50"
+      android:ems="25"
+      android:layout_height="wrap_content" 
+      android:singleLine="true"
+      android:inputType="number"
+      android:hint="0000"
+    />
+  </LinearLayout>
+  <LinearLayout 
+    android:layout_marginTop="@dimen/margintiny"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <TextView 
+      android:layout_width="0dp"
+      android:layout_weight="30"
+      android:ems="25"
+      android:layout_height="wrap_content" 
+      android:singleLine="true"
+      android:text="@string/nickname"
+    />
+    <EditText android:id="@+id/device_nickname" 
+      android:layout_width="0dp"
+      android:layout_weight="60"
+      android:ems="25"
+      android:layout_height="wrap_content" 
+      android:singleLine="true"
+      android:inputType="text"
+      android:hint="@string/nickname"
+    />
+  </LinearLayout>
+
+
+   <LinearLayout android:id="@+id/help"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/marginvbig"
+      android:gravity="start"
+      android:orientation="horizontal"
+      >
+    <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+    />
+    <LinearLayout
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:gravity="end"
+      >
+      <Button android:id="@+id/button_cancel"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
+        />
+      <Button android:id="@+id/button_ok"
+        style="@style/button_default"
+        android:text="@string/button_ok"
+        />
+    </LinearLayout>
+  </LinearLayout>
+
+</LinearLayout>
