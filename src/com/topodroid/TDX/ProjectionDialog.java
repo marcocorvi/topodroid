@@ -18,7 +18,7 @@ import com.topodroid.utils.TDUtil;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
-import com.topodroid.num.NumSplay;
+// import com.topodroid.num.NumSplay;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.MotionEventWrap;
 import com.topodroid.prefs.TDSetting;
@@ -52,6 +52,7 @@ import java.util.Locale;
 class ProjectionDialog extends MyDialog
                        implements View.OnTouchListener
                        , View.OnClickListener
+                       , View.OnLongClickListener
                        , OnZoomListener
                        , IZoomer
 {
@@ -270,9 +271,19 @@ class ProjectionDialog extends MyDialog
     float cx = cosa + gamma * sina;
     float sx = sina - gamma * cosa;
 
+    float e0 = 0;
+    float s0 = 0;
+    float v0 = 0;
+    NumStation origin = mNum.getOrigin();
+    if ( origin != null ) {
+      e0 = (float)origin.e;
+      s0 = (float)origin.s;
+      v0 = (float)origin.v;
+    }
+
     List< NumStation > stations = mNum.getStations();
     List< NumShot > shots       = mNum.getShots();
-    List< NumSplay > splays     = mNum.getSplays();
+    // List< NumSplay > splays     = mNum.getSplays();
 
 
     float h1, h2, v1, v2;
@@ -282,10 +293,10 @@ class ProjectionDialog extends MyDialog
       NumStation st1 = sh.from;
       NumStation st2 = sh.to;
       if ( st1.show() && st2.show() ) {
-	double x1 = st1.e * cx + st1.s * sx; // - dx;
-	double x2 = st2.e * cx + st2.s * sx; // - dx;
-	double y1 = st1.v; // - dy;
-	double y2 = st2.v; // - dy;
+	double x1 = (st1.e - e0) * cx + (st1.s - s0) * sx; // - dx;
+	double x2 = (st2.e - e0) * cx + (st2.s - s0) * sx; // - dx;
+	double y1 = st1.v - v0; // - dy;
+	double y2 = st2.v - v0; // - dy;
         h1 = DrawingUtil.toSceneX( x1, y1 ); // CENTER_X + x1 * SCALE_FIX = 100 + x1 * 20
         h2 = DrawingUtil.toSceneX( x2, y2 ); // CENTER_Y + Y1 * SCALE_FIX = 120 + y1 * 20
         v1 = DrawingUtil.toSceneY( x1, y1 );
@@ -293,24 +304,24 @@ class ProjectionDialog extends MyDialog
         addFixedLegLine( sh.getFirstBlock(), h1, v1, h2, v2 );
       }
     } 
-    for ( NumSplay sp : splays ) {
-      NumStation st = sp.from;
-      if ( st.show() ) {
-	double x1 = st.e * cx + st.s * sx; // - dx;
-	double x2 = sp.e * cx + sp.s * sx; // - dx;
-	double y1 = st.v; // - dy;
-	double y2 = sp.v; // - dy;
-        h1 = DrawingUtil.toSceneX( x1, y1 );
-        h2 = DrawingUtil.toSceneX( x2, y2 );
-        v1 = DrawingUtil.toSceneY( x1, y1 );
-        v2 = DrawingUtil.toSceneY( x2, y2 );
-        addFixedSplayLine( sp.getBlock(), h1, v1, h2, v2 );
-      }
-    }
+    // for ( NumSplay sp : splays ) {
+    //   NumStation st = sp.from;
+    //   if ( st.show() ) {
+    //     double x1 = (st.e - e0) * cx + (st.s - s0) * sx; // - dx;
+    //     double x2 = (sp.e - e0) * cx + (sp.s - s0) * sx; // - dx;
+    //     double y1 = st.v - v0; // - dy;
+    //     double y2 = sp.v - v0; // - dy;
+    //     h1 = DrawingUtil.toSceneX( x1, y1 );
+    //     h2 = DrawingUtil.toSceneX( x2, y2 );
+    //     v1 = DrawingUtil.toSceneY( x1, y1 );
+    //     v2 = DrawingUtil.toSceneY( x2, y2 );
+    //     addFixedSplayLine( sp.getBlock(), h1, v1, h2, v2 );
+    //   }
+    // }
     for ( NumStation st : stations ) {
       if ( st.show() ) {
-	double x1 = st.e * cx + st.s * sx; // - dx;
-	double y1 = st.v; // - dy;
+	double x1 = (st.e -e0) * cx + (st.s - s0) * sx; // - dx;
+	double y1 = st.v - v0; // - dy;
         h1 = DrawingUtil.toSceneX( x1, y1 );
         v1 = DrawingUtil.toSceneY( x1, y1 );
         mProjectionSurface.addDrawingStationName( st, h1, v1 );
@@ -386,6 +397,8 @@ class ProjectionDialog extends MyDialog
     mBtnOk.setOnClickListener( this );
     mBtnPlus.setOnClickListener( this );
     mBtnMinus.setOnClickListener( this );
+    mBtnPlus.setOnLongClickListener( this );
+    mBtnMinus.setOnLongClickListener( this );
 
     mProjectionSurface = (ProjectionSurface) findViewById(R.id.drawingSurface);
     // mProjectionSurface.setZoomer( this );
@@ -536,10 +549,21 @@ class ProjectionDialog extends MyDialog
     int h0 = findViewById( R.id.layout1 ).getHeight();
     
     // mDisplayCenter = new PointF( w / 2 - DrawingUtil.CENTER_X, h / 2 - DrawingUtil.CENTER_Y );
+
+
     mDisplayCenter = new PointF( w / 2.0f, (h + h0)/ 2.0f );
 
     float centerx = ( e1 + e2 )/ 2; // FIXME this is DrawingUtil.CENTER_X = 100
     float centery = ( v1 + v2 )/ 2; // FIXME this is DrawingUtil.CENTER_Y = 120
+
+    NumStation origin = mNum.getOrigin();
+    if ( origin != null ) {
+      centerx -= (float)origin.e;
+      centery -= (float)origin.s;
+    }
+    // TDLog.v("Projection origin " +  (float)origin.e + " " + (float)origin.s + " " +  (float)origin.v );
+    // TDLog.v("Projection center " + centerx + " " + centery );
+    // TDLog.v("Projection display center " + mDisplayCenter.x + " " + mDisplayCenter.y );
 
     // X --> X' = ( sceneX + offsetX ) * zoom 
     //          = ( (CENTER_X + X*SCALE) + offsetX ) * zoom
@@ -566,7 +590,7 @@ class ProjectionDialog extends MyDialog
       TDToast.makeBad( R.string.few_data );
     } else {
       // float decl = mApp.mData.getSurveyDeclination( mSid );
-      mNum = new TDNum( mList, mFrom, "", "", 0.0f, null ); // null formatClosure
+      mNum = new TDNum( mList, mFrom, "", "", 0.0f, null, true ); // null formatClosure, true: midline_only
       mNum.recenter();
       mSeekBar.setProgress( 200 );
       mProjBar.setProgress( 200 );
@@ -751,6 +775,22 @@ class ProjectionDialog extends MyDialog
        }
      }
      return true;
+  }
+
+  /** react to user long-tap 
+   * @param v tapped view
+   */
+  @Override
+  public boolean onLongClick( View v ) 
+  {
+    if ( v.getId() == R.id.btn_plus ) {
+      setAzimuth( mAzimuth + 10, true ); // calls computeReferences which calls setTheTitle
+    } else if ( v.getId() == R.id.btn_minus ) {
+      setAzimuth( mAzimuth - 10, true ); // calls computeReferences which calls setTheTitle
+    } else {
+      return false;
+    }
+    return true;
   }
 
   /** react to a user tap

@@ -41,17 +41,23 @@ public class TDNum
    * @param hide     hiding list
    * @param decl     magnetic declination (possibly including the convergence)
    * @param loop_fmt loop closure report format
+   * @param midline_only  whether to reduce only the midline (no compensation)
    */
-  public TDNum( List< DBlock > data, String start, String view, String hide, float decl, String loop_fmt )
+  public TDNum( List< DBlock > data, String start, String view, String hide, float decl, String loop_fmt, boolean midline_only )
   {
     // TDLog.v( "data reduction: decl " + decl + " start " + start );
     mDecl = decl;
     surveyExtend   = true;
     nrCompensatedLoops = 0;
     nrInaccurateLoops  = 0;
-    surveyAttached = computeNum( data, start, loop_fmt );
+    surveyAttached = computeNum( data, start, loop_fmt, midline_only );
     setStationsHide( hide );
     setStationsBarr( view );
+  }
+
+  public TDNum( List< DBlock > data, String start, String view, String hide, float decl, String loop_fmt )
+  {
+    this( data, start, view, hide, decl, loop_fmt, false );
   }
 
   // public void dump( )
@@ -864,14 +870,15 @@ public class TDNum
    * @param data     survey data
    * @param shots    (temporary) legs
    * @param splays   (temporary) splays
+   * @param complete initialize all shots, not only midline
    * @note mLastLeg remains after the shots have been initialized
    */
-  private void initShots( List< DBlock > data, List< TriShot > shots, List< TriSplay > splays )
+  private void initShots( List< DBlock > data, List< TriShot > shots, List< TriSplay > splays, boolean complete )
   {
     mLastLeg = null;
     for ( DBlock blk : data ) {
       // TDLog.v( "NUM blk type " + blk.mType );
-      if ( blk.isSplay() ) {
+      if ( blk.isSplay() && complete ) {
         mLastLeg = null;  // clear last-leg
         if ( blk.mFrom != null && blk.mFrom.length() > 0 ) { // normal splay
           splays.add( new TriSplay( blk, blk.mFrom, blk.getIntExtend(), +1 ) );
@@ -910,9 +917,10 @@ public class TDNum
    * @param data   shot list
    * @param start  start station
    * @param path_fmt path report format
+   * @param midline_only  whether to reduce only the midline (no compensation)
    * @return true if all shots are attached
    */
-  private boolean computeNum( List< DBlock > data, String start, String path_fmt )
+  private boolean computeNum( List< DBlock > data, String start, String path_fmt, boolean midline_only )
   {
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) { // preprocess: convert diving-mode data to normal form
       HashMap< String, Float > depths = new HashMap< String, Float >();
@@ -958,10 +966,10 @@ public class TDNum
     List< TriShot > tmp_shots   = new ArrayList<>();
     List< TriSplay > tmp_splays = new ArrayList<>();
 
-    initShots( data, tmp_shots, tmp_splays );
+    initShots( data, tmp_shots, tmp_splays, ! midline_only );
     // TDLog.Log( TDLog.LOG_NUM, "data " + data.size() + " shots " + tmp_shots.size() + " splays " + tmp_splays.size() );
 
-    if ( TDSetting.mLoopClosure == TDSetting.LOOP_TRIANGLES ) {
+    if ( ! midline_only && TDSetting.mLoopClosure == TDSetting.LOOP_TRIANGLES ) {
       makeTrilateration( tmp_shots );
     }
 
@@ -1045,7 +1053,7 @@ public class TDNum
     }
 
     // TDLog.v( "compute leg error ...");
-    computeInLegError();
+    if ( ! midline_only ) computeInLegError();
 
     // ---------------------------------- DATA REDUCTION -------------------------------
     mStartStation = new NumStation( start /*, NumStation.STATION_ORIGIN */ );
@@ -1117,6 +1125,9 @@ public class TDNum
       }
     }
 
+    if ( midline_only ) {
+      return (mShots.size() + nrSiblings == tmp_shots.size() );
+    }
     // ---------------------------------- LOOP CLOSURE -------------------------------
     if ( TDSetting.mLoopClosure == TDSetting.LOOP_CYCLES
       || TDSetting.mLoopClosure == TDSetting.LOOP_WEIGHTED 
