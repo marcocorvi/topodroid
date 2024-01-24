@@ -145,8 +145,14 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="algo_minimum">minimum</string -->
   <!-- UNUSED string name="device_algo_failed">Bestimmung fehlgeschlagen.\nVerwendung von linearem Algorithmus</string -->
   <string name="device_address">Adresse %1$s</string>
+    <!-- TODO string name="address">Address</string -->
+    <!-- TODO string name="model_invalid">invalid number</string -->
+    <!-- TODO string name="model_missing">missing number</string -->
   <!-- UNUSED string name="device_busy">Gerät arbeitet</string -->
   <string name="device_illegal_addr">Ungültige Speicheradresse</string>
+    <!-- TODO string name="device_already_present">Device already present</string -->
+    <!-- TODO string name="device_no_name">Device %1$s without name</string -->
+    <!-- TODO string name="device_all_named">No device without name</string -->
   <string name="device_info">Geräte-Info</string>
   <!-- UNUSED string name="device_model_set">Gerätemodell wirklich ändern</string -->
   <!-- UNUSED string name="device_none">Kein DistoX ausgewählt</string -->
@@ -396,6 +402,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="menu_show_deleted">GELÖSCHTE ANZEIGEN</string>
   <string name="menu_hide_deleted">GELÖSCHTE VERSTECKEN</string>
   <string name="menu_device">GERÄT</string>
+    <!-- TODO string name="menu_device_add">ADD DEVICE</string -->
   <string name="menu_export">EXPORTIEREN</string>
   <string name="menu_firmware">FIRMWARE</string>
   <string name="menu_geopoint_app">GPS APP</string>
@@ -916,6 +923,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="help_azimuth">Seitenriss Referenzazimut</string>
   <string name="help_refresh">Anzeige aktualisieren</string>
   <string name="help_device">DistoX Verwalten</string>
+    <!-- TODO string name="help_device_add">Add a device</string -->
   <string name="help_add_topodroid">Neue Vermessung/Kalibrierung starten</string>
   <string name="help_import">Zip oder Datei importieren</string>
   <string name="help_geopoint_app">Externe GPS Apps</string>
@@ -1094,6 +1102,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="title_dangling">Unverbundene Messungen</string>
   <string name="title_device">DistoX Geräte</string>
   <string name="title_device_select">DistoX Gerät auswählen</string>
+    <!-- TODO string name="title_device_add">Add device</string -->
   <!-- UNUSED string name="title_discover">DistoX Geräte suchen&#8230;</string -->
   <!-- UNUSED string name="title_draw">Zeichnen</string -->
   <string name="title_draw_area">FLÄCHE %1$s</string>
@@ -1826,7 +1835,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="image_photo">Foto</string>
   <!-- 3D VIEWER strings -->
   <!-- UNUSED string name="capp_name" translatable="false">Cave3D</string -->
-  <string name="cbtn_bind">Neuzuordnung</string>
+  <!-- UNUSED string name="cbtn_bind">Neuzuordnung</string -->
   <string name="cmenu_open">DATEI ÖFFNEN</string>
   <string name="cmenu_reset">ZURÜCKSETZEN</string>
   <string name="cmenu_alpha">OBERFLÄCHE</string>

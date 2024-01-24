@@ -38,20 +38,21 @@ public class Device
   private int mHead;
   private int mTail;
 
-  public final static int DISTO_NONE  = 0; // device types - used as index in the arrays below
-  public final static int DISTO_A3    = 1;
-  public final static int DISTO_X310  = 2;
-  // public final static int DISTO_X000 = 3; // FIXME VirtualDistoX
-  // public final static int DISTO_BLEX  = 4;
-  public final static int DISTO_SAP5  = 5; 
-  public final static int DISTO_BRIC4 = 6;
-  public final static int DISTO_XBLE  = 7; // SIWEI_TIAN
-  public final static int DISTO_SAP6  = 8; 
-  public final static int DISTO_BRIC5 = 9;
+  public final static int DISTO_NONE   =  0; // device types - used as index in the arrays below
+  public final static int DISTO_A3     =  1;
+  public final static int DISTO_X310   =  2;
+  // public final static int DISTO_X000   =  3; // FIXME VirtualDistoX
+  // public final static int DISTO_BLEX   =  4;
+  public final static int DISTO_SAP5   =  5; 
+  public final static int DISTO_BRIC4  =  6;
+  public final static int DISTO_XBLE   =  7; // SIWEI_TIAN
+  public final static int DISTO_SAP6   =  8; 
+  public final static int DISTO_BRIC5  =  9;
+  public final static int DISTO_CAVWAY = 10;
 
-  // SIWEI_TIAN                                       0          1         2          3          4       5       6        7            8       9
-  final static String[] typeString               = { "Unknown", "A3",     "X310",    "X000",    "BLEX", "SAP5", "BRIC4", "XBLE",      "SAP6", "BRIC5" };
-  private final static String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0", "BleX", "Sap5", "Bric4", "DistoXBLE", "Sap6", "Bric5" };
+  // SIWEI_TIAN                                       0          1         2          3          4       5       6        7            8       9        10
+  final static String[] typeString               = { "Unknown", "A3",     "X310",    "X000",    "BLEX", "SAP5", "BRIC4", "XBLE",      "SAP6", "BRIC5", "CAVWAY" };
+  private final static String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0", "BleX", "Sap5", "Bric4", "DistoXBLE", "Sap6", "Bric5", "Cavway" };
   
   public static String typeToString( int type )
   {
@@ -68,30 +69,45 @@ public class Device
   }
 
   public boolean isBT( )  { return mType == DISTO_X310  || mType == DISTO_A3; }
-  public boolean isBLE( ) { return mType == DISTO_XBLE || mType == DISTO_BRIC4 || mType == DISTO_BRIC5 || mType == DISTO_SAP5 || mType == DISTO_SAP6; } // SIWEI_TIAN
-  public static boolean isBle( int type ) { return type == DISTO_XBLE || type == DISTO_BRIC4 || type == DISTO_BRIC5 ||  type == DISTO_SAP5 || type == DISTO_SAP6; } // SIWEI_TIAN
+  public boolean isBLE( ) { return mType == DISTO_XBLE || mType == DISTO_BRIC4 || mType == DISTO_BRIC5 
+                                || mType == DISTO_SAP5 || mType == DISTO_SAP6  || mType == DISTO_CAVWAY; } // SIWEI_TIAN
+  public static boolean isBle( int type ) { return type == DISTO_XBLE || type == DISTO_BRIC4 || type == DISTO_BRIC5
+                                               ||  type == DISTO_SAP5 || type == DISTO_SAP6  || type == DISTO_CAVWAY ; } // SIWEI_TIAN
 
   public boolean isDistoX( )    { return mType == DISTO_X310  || mType == DISTO_A3; }
   public boolean isA3( )        { return mType == DISTO_A3; }
   public boolean isX310( )      { return mType == DISTO_X310; }
-  public boolean isSap( )       { return mType == DISTO_SAP5 || mType == DISTO_SAP6; }
   public boolean isBric( )      { return mType == DISTO_BRIC4 || mType == DISTO_BRIC5; }
+  public boolean isBric4( )     { return mType == DISTO_BRIC4; }
+  public boolean isBric5( )     { return mType == DISTO_BRIC5; }
   public boolean isDistoXBLE( ) { return mType == DISTO_XBLE; } // SIWEI_TIAN
+  public boolean isSap( )       { return mType == DISTO_SAP5 || mType == DISTO_SAP6; }
   public boolean isSap5( )      { return mType == DISTO_SAP5; }
   public boolean isSap6( )      { return mType == DISTO_SAP6; }
+  public boolean isCavwau()     { return mType == DISTO_CAVWAY; }
 
   public static boolean isDistoX( int type )    { return type == DISTO_X310 || type == DISTO_A3; }
   public static boolean isA3( int type )        { return type == DISTO_A3; }
   public static boolean isX310( int type )      { return type == DISTO_X310; }
-  public static boolean isSap( int type )       { return type == DISTO_SAP5 || type == DISTO_SAP6; }
   public static boolean isBric( int type )      { return type == DISTO_BRIC4 || type == DISTO_BRIC5; }
+  public static boolean isBric4( int type )     { return type == DISTO_BRIC4; }
+  public static boolean isBric5( int type )     { return type == DISTO_BRIC5; }
   public static boolean isDistoXBLE( int type ) { return type == DISTO_XBLE; } // SIWEI_TIAN
+  public static boolean isSap( int type )       { return type == DISTO_SAP5 || type == DISTO_SAP6; }
   public static boolean isSap5( int type )      { return type == DISTO_SAP5; }
   public static boolean isSap6( int type )      { return type == DISTO_SAP6; }
+  public static boolean isCavway( int type )    { return type == DISTO_CAVWAY; }
 
   // SIWEI_TIAN
   // public boolean canSendCommand() { return mType == DISTO_X310 mType == DISTO_XBLE || mType == DISTO_BRIC4 || mType == DISTO_BRIC5 || mType == DISTO_SAP6; }
   // public static boolean canSendCommand( int type ) { return type == DISTO_X310 || type == DISTO_XBLE type == DISTO_BRIC4 || type == DISTO_BRIC5 || type == DISTO_SAP6; }
+
+  // supported BLE models
+  final static String[] mBleModels = { "DistoXBLE-", "BRIC4_", "BRIC5_", "Shetland_", "SAP6_", "CAVWAY-" };
+
+  /** @return the list of the supported BLE models
+   */
+  public static String[] getBleModels() { return mBleModels; }
 
   /** @return the device name given the model string
    * @param model   model string
@@ -105,6 +121,12 @@ public class Device
     if ( model.startsWith("Shetland") ) {
       return model.replace("Shetland_", "" );
     }
+    if ( model.startsWith("SAP5_") ) {
+      return model.replace("SAP5_", "" );
+    }
+    if ( model.startsWith("SAP6_") ) {
+      return model.replace("SAP6_", "" );
+    }
     if ( model.startsWith("BRIC4_") ) {
       return model.replace("BRIC4_", "" );
     }
@@ -113,6 +135,9 @@ public class Device
     }
     if ( model.startsWith("DistoXBLE-") ) { // SIWEI_TIAN
       return model.replace("DistoXBLE-", "" );
+    }
+    if ( model.startsWith("Cavway-") ) { 
+      return model.replace("Cavway-", "" );
     }
     // if ( model.startsWith("Ble-") ) { // FIXME BLE_5
     //   return model.replace("Ble-", "" );
@@ -131,9 +156,10 @@ public class Device
       if ( model.equals( "X310" )  || model.startsWith( "DistoX-" ) )   return DISTO_X310;
       if ( model.equals( "A3" )    || model.equals( "DistoX" ) )        return DISTO_A3;
       if ( model.equals( "BRIC4" ) || model.startsWith( "BRIC4" ) )     return DISTO_BRIC4; 
+      if ( model.equals( "BRIC5" ) || model.startsWith( "BRIC5" ) )     return DISTO_BRIC5; 
       if ( model.equals( "SAP5" )  || model.startsWith( "Shetland_" ) ) return DISTO_SAP5;
       if ( model.equals( "SAP6" )  /* || model.startsWith( "Shetland_" ) */ ) return DISTO_SAP6;
-      if ( model.equals( "BRIC5" ) || model.startsWith( "BRIC5" ) )     return DISTO_BRIC5; 
+      if ( model.equals( "CAVWAY" )|| model.startsWith("Cavway-")     ) return DISTO_CAVWAY;
       // if ( model.equals( "BLEX" ) ) return DISTO_BLEX; // FIXME BLE_5
       // if ( model.equals( "X000" ) || model.equals( "DistoX0" ) ) return DISTO_X000; // FIXME VirtualDistoX
     }
@@ -205,8 +231,9 @@ public class Device
     if ( name.startsWith("SAP6-" ) )     return name.replace("SAP6-", "");
     if ( name.startsWith("SAP-" ) )      return name.replace("SAP-", "");
     if ( name.startsWith("BRIC-" ) )     return name.replace("BRIC-", "");
-    // if ( name.startsWith("BRIC4-" ) )    return name.replace("BRIC4-", "");
-    // if ( name.startsWith("BRIC5-" ) )    return name.replace("BRIC5-", "");
+    if ( name.startsWith("BRIC4-" ) )    return name.replace("BRIC4-", "");
+    if ( name.startsWith("BRIC5-" ) )    return name.replace("BRIC5-", "");
+    if ( name.startsWith("CAVWAY-" ) )   return name.replace("CAVWAY-", "");
     return name;
   }
 

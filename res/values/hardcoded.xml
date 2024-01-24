@@ -94,4 +94,13 @@
   <string name="type_d" translatable="false">&lt; D &gt;</string>
   <string name="type_m" translatable="false">&lt; M &gt;</string>
 
+  <string name="b_g" translatable="false">BG</string>
+  <string name="b_m" translatable="false">BM</string>
+  <string name="a_gx" translatable="false">AGx</string>
+  <string name="a_gy" translatable="false">AGy</string>
+  <string name="a_gz" translatable="false">AGz</string>
+  <string name="a_mx" translatable="false">AMx</string>
+  <string name="a_my" translatable="false">AMy</string>
+  <string name="a_mz" translatable="false">AMz</string>
+  <string name="nl_g" translatable="false">nl</string>
 </resources>

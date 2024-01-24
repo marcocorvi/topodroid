@@ -174,8 +174,14 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     
     <!-- UNUSED string name="device_algo_failed">Échec de détermination automatique de l\'algorithme depuis l\'appareil\n. Utilisation de l\'algorithme linéraire</string -->
     <string name="device_address">Addresse %1$s</string>
+    <!-- TODO string name="address">Address</string -->
+    <!-- TODO string name="model_invalid">invalid number</string -->
+    <!-- TODO string name="model_missing">missing number</string -->
     <!-- UNUSED string name="device_busy">Périphérique occupé</string -->
     <string name="device_illegal_addr">Adresse mémoire non valide</string>
+    <!-- TODO string name="device_already_present">Device already present</string -->
+    <!-- TODO string name="device_no_name">Device %1$s without name</string -->
+    <!-- TODO string name="device_all_named">No device without name</string -->
     <string name="device_info">Informations sur le périphérique</string>
     <!-- UNUSED string name="device_model_set">Êtes-vous sûr de vouloir changer le modèle du périphérique ?</string -->
     <!-- UNUSED string name="device_none">Aucun DistoX sélectionné</string -->
@@ -440,6 +446,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="menu_show_deleted">MONTRER/SUPPR.</string>
     <string name="menu_hide_deleted">CACHER/SUPPR.</string>
     <string name="menu_device">APPAREIL</string>
+    <!-- TODO string name="menu_device_add">ADD DEVICE</string -->
     <string name="menu_export">EXPORTER</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_geopoint_app">APP GEOPOINT</string>
@@ -1006,6 +1013,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="help_azimuth">Azimuth Référence Etendue</string>
     <string name="help_refresh">Rafraîchir l\'affichage</string>
     <string name="help_device">Périphériques DistoX</string>
+    <!-- TODO string name="help_device_add">Add a device</string -->
     <string name="help_add_topodroid">Crée un nouveau relevé/étalonnage</string>
     <string name="help_import">Importe une archive Zip ou un fichier Therion</string>
     <string name="help_geopoint_app">Application externe de géolocalisation</string>
@@ -1192,6 +1200,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="title_dangling">Visée non reliée</string>
     <string name="title_device">Périphériques DistoX</string>
     <string name="title_device_select">Sélectionner le DistoX</string>
+    <!-- TODO string name="title_device_add">Add device</string -->
     <!-- UNUSED string name="title_discover">Recherche de nouveaux DistoX… Patientez</string -->
     <!-- UNUSED string name="title_draw">Dessin</string -->
     <string name="title_draw_area">ZONE %1$s</string>
@@ -1996,7 +2005,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
 
     <!-- 3D VIEWER strings -->
     
-    <string name="cbtn_bind">Relier</string>
+    <!-- UNUSED string name="cbtn_bind">Relier</string -->
     
     <string name="cmenu_open">Ouvrir archive</string>
     <string name="cmenu_reset">Reset</string>

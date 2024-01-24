@@ -218,6 +218,7 @@ public class TDSetting
   public static boolean mNoCursor = false;
   public static boolean mLocalManPages = true;
   public static boolean mPacketLog     = false;
+
   public static boolean mTh2Edit       = false;
   public static float mItemButtonSize  = 5.0f;    // used in ItemButton
   // public static float mItemPathScale   = 2.0f; // referred from DrawingWindow
@@ -1099,7 +1100,7 @@ public class TDSetting
     for ( int k = 0; k < keyEnable.length; ++ k ) {
       b = prefs.getBoolean( keyEnable[ k], bool(defEnable[ k]) );
       TDConst.mSurveyExportEnable[ 1 + k ] = b;
-      TDLog.v("SETTING enable " + (1+k) + " " + b );
+      // TDLog.v("SETTING enable " + (1+k) + " " + b );
     }
 
     String[] keyExport = TDPrefKey.EXPORT;

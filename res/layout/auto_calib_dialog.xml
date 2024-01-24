@@ -15,57 +15,57 @@
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        android:text="BG"
+        android:text="@string/b_g"
         />
     <TextView android:id="@+id/coeff_agx"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        android:text="AGx"
+        android:text="@string/a_gx"
         />
     <TextView android:id="@+id/coeff_agy"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        android:text="AGy"
+        android:text="@string/a_gy"
         />
     <TextView android:id="@+id/coeff_agz"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        android:text="AGz"
+        android:text="@string/a_gz"
         />
 
     <TextView android:id="@+id/coeff_bm"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        android:text="BM"
+        android:text="@string/b_m"
         />
     <TextView android:id="@+id/coeff_amx"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        android:text="AMx"
+        android:text="@string/a_mx"
         />
     <TextView android:id="@+id/coeff_amy"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        android:text="AMy"
+        android:text="@string/a_my"
         />
     <TextView android:id="@+id/coeff_amz"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        android:text="AMz"
+        android:text="@string/a_mz"
         />
 
     <TextView android:id="@+id/coeff_nl"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        android:text="nl"
+        android:text="@string/nl_g"
         />
   </LinearLayout>
 

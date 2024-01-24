@@ -166,8 +166,14 @@
    
     <!-- UNUSED string name="device_algo_failed">Algorithm auto-determination failed\nUsing linear algorithm</string -->
     <string name="device_address">地址 %1$s</string>
+    <!-- TODO string name="address">Address</string -->
+    <!-- TODO string name="model_invalid">invalid number</string -->
+    <!-- TODO string name="model_missing">missing number</string -->
     <!-- UNUSED string name="device_busy">Device busy</string -->
     <string name="device_illegal_addr">非法的存储地址</string>
+    <!-- TODO string name="device_already_present">Device already present</string -->
+    <!-- TODO string name="device_no_name">Device %1$s without name</string -->
+    <!-- TODO string name="device_all_named">No device without name</string -->
     <string name="device_info">设备信息</string>
     <!-- UNUSED string name="device_model_set">你是否想要切换设备</string -->
     <!-- UNUSED string name="device_none">无可供选择DistoX设备</string -->
@@ -432,6 +438,7 @@
     <string name="menu_show_deleted">显示已删除</string>
     <string name="menu_hide_deleted">隐藏已删除</string>
     <string name="menu_device">设备</string>
+    <!-- TODO string name="menu_device_add">ADD DEVICE</string -->
     <string name="menu_export">输出</string>
     <string name="menu_firmware">固件</string>
     <!-- TODO string name="menu_geopoint_app">GEOPOINT APP</string -->
@@ -995,6 +1002,7 @@
     <string name="help_azimuth">"延展"参照</string>
     <string name="help_refresh">更新显示</string>
     <string name="help_device">输入设备激活</string>
+    <!-- TODO string name="help_device_add">Add a device</string -->
     <string name="help_add_topodroid">新建测量/新建校准</string>
     <string name="help_import">输入压缩的存档或者测量文件</string>
     <!-- TODO string name="help_geopoint_app">Geopoint external app</string -->
@@ -1182,6 +1190,7 @@
     <string name="title_dangling">独立测线</string>
     <string name="title_device">DistoX设备</string>
     <string name="title_device_select">选择DistoX设备</string>
+    <!-- TODO string name="title_device_add">Add device</string -->
     <!-- UNUSED string name="title_discover">扫描DistoX设备 &#8230; 等待</string -->
     <!-- UNUSED string name="title_draw">Draw</string -->
     <string name="title_draw_area">区 %1$s</string>
@@ -1971,7 +1980,7 @@
 
     <!-- 3D VIEWER strings -->
 
-    <string name="cbtn_bind">重打包</string>
+    <!-- UNUSED string name="cbtn_bind">重打包</string -->
 
     <string name="cmenu_open">打开文件</string>
     <string name="cmenu_reset">重置</string>

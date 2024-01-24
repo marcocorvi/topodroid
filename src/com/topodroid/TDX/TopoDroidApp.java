@@ -592,43 +592,6 @@ public class TopoDroidApp extends Application
     thisApp = null;
   }
 
-  /** set the model of the bluetooth device
-   * @param device   bluetooth device (must agree with the primary device)
-   * @param model    device type
-   *
-   * @note nothing if the device is not the primary device
-   */
-  static void setDeviceModel( Device device, int model )
-  {
-    if ( device != null && device == TDInstance.getDeviceA() ) {
-      if ( device.mType != model ) {
-        if ( Device.isA3( model ) ) {
-          mDData.updateDeviceModel( device.getAddress(), "DistoX" );
-          device.mType = model;
-        } else if ( Device.isX310( model ) ) {
-          mDData.updateDeviceModel( device.getAddress(), "DistoX-0000" );
-          device.mType = model;
-        } else if ( Device.isSap5( model ) ) { // FIXME_SAP6
-          mDData.updateDeviceModel( device.getAddress(), "Shetland-0000" );
-          device.mType = model;
-        } else if ( Device.isSap6( model ) ) { // FIXME_SAP6
-          TDLog.v("SAP6 set device model: addr " + device.getAddress() + " type " + model );
-          mDData.updateDeviceModel( device.getAddress(), "SAP6-0000" );
-          device.mType = model;
-        } else if ( Device.isBric( model ) ) {
-          mDData.updateDeviceModel( device.getAddress(), "BRIC-0000" );
-          device.mType = model;
-        // } else if ( Device.isX000( model ) ) { // FIXME VirtualDistoX
-        //   mDData.updateDeviceModel( device.getAddress(), "DistoX0" );
-        //   device.mType = model;
-        } else if ( Device.isDistoXBLE( model ) ) { // SIWEI_TIAN
-          mDData.updateDeviceModel(device.getAddress(), "DistoXBLE-0000");
-          device.mType = model;
-        }
-      }
-    }
-  }
-
   /** set the bluetooth device nickname
    * @param device      device
    * @param nickname    device nickname

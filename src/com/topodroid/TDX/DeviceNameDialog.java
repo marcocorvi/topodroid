@@ -88,7 +88,7 @@ class DeviceNameDialog extends MyDialog
     if ( b == mBTok ) {
       if ( mETnickname.getText() != null ) {
         String nickname = mETnickname.getText().toString();
-        mParent.setDeviceName( mDevice, nickname );
+        mParent.setDeviceNickname( mDevice, nickname );
       }
       if ( mCBsecondDevice.isChecked() ) {
         mParent.setSecondDevice( mDevice.getAddress() );

@@ -178,8 +178,14 @@ There are other settings for the presentation of the sketches (icon size, label 
    
     <!-- UNUSED string name="device_algo_failed">Algorithm auto-determination failed\nUsing linear algorithm</string -->
     <string name="device_address">Address %1$s</string>
+    <string name="address">Address</string>
+    <string name="model_invalid">invalid number</string>
+    <string name="model_missing">missing number</string>
     <!-- UNUSED string name="device_busy">Device busy</string -->
     <string name="device_illegal_addr">Illegal memory address</string>
+    <string name="device_already_present">Device already present</string>
+    <string name="device_no_name">Device %1$s without name</string>
+    <string name="device_all_named">No device without name</string>
     <string name="device_info">Device info</string>
     <!-- UNUSED string name="device_model_set">DO YOU REALLY WANT TO CHANGE THE MODEL OF THE DEVICE</string -->
     <!-- UNUSED string name="device_none">No DistoX selected</string -->
@@ -232,7 +238,7 @@ There are other settings for the presentation of the sketches (icon size, label 
 
     <string name="calib_import_title">Calibration import</string>
     <string name="import_title">Survey import</string>
-    <string name="export_data_title">Data export</string>
+    <!-- UNUSED string name="export_data_title">Data export</string -->
     <!-- UNUSED string name="export_plot_title">Sketch export</string -->
     <!-- UNUSED string name="export_overview_title">Overview export</string -->
     <string name="export_model_title">3D model export</string>
@@ -445,6 +451,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="menu_show_deleted">SHOW DELETED</string>
     <string name="menu_hide_deleted">HIDE DELETED</string>
     <string name="menu_device">DEVICE</string>
+    <string name="menu_device_add">ADD DEVICE</string>
     <string name="menu_export">EXPORT</string>
     <string name="menu_firmware" copyable="all">FIRMWARE</string>
     <string name="menu_geopoint_app">GNSS APP</string>
@@ -1013,6 +1020,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="help_azimuth">"Extend" reference</string>
     <string name="help_refresh">Refresh display</string>
     <string name="help_device">Device activity</string>
+    <string name="help_device_add">Add a device</string>
     <string name="help_add_topodroid">New survey</string>
     <string name="help_import">Import zip archive or survey file</string>
     <string name="help_geopoint_app">External GNSS apps</string>
@@ -1130,7 +1138,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="export_bgcolor">White background</string -->
     <string name="export_bothviews">Plan and profile</string>
     <string name="export_config">Config commands</string>
-    <string name="export_csv_rawdata">Full data</string>
+    <string name="export_csv_rawdata">Whole record</string>
     <string name="export_dxf_blocks">Splay endpoints</string>
     <string name="export_dxf_version" copyable="fr">Version</string>
     <string name="export_georeference">Georeference</string>
@@ -1200,6 +1208,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="title_dangling">Unattached shots</string>
     <string name="title_device">DistoX devices</string>
     <string name="title_device_select">Select DistoX device</string>
+    <string name="title_device_add">Add device</string>
     <!-- UNUSED string name="title_discover">Scanning for DistoX devices &#8230; wait</string -->
     <!-- UNUSED string name="title_draw">Draw</string -->
     <string name="title_draw_area">AREA %1$s</string>
@@ -1469,20 +1478,20 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_svg_gridstroke_summary">Width of grid lines</string>
   <string name="pref_svg_shotstroke_title">Shot stroke</string>
   <string name="pref_svg_shotstroke_summary">Width of shot segments</string>
-  <string name="pref_svg_linedirstroke_title">Orientation tick</string>
-  <string name="pref_svg_linedirstroke_summary">Length of orientation ticks</string>
+  <string name="pref_svg_linedirstroke_title">Orientation ticks</string>
+  <string name="pref_svg_linedirstroke_summary">Length of orientation tick</string>
   <string name="pref_svg_line_dir_title">Line orientation</string>
   <string name="pref_svg_line_dir_summary">Add orientation-tick to orientable lines</string>
   <string name="pref_svg_stationsize_title">Station size</string>
   <string name="pref_svg_stationsize_summary">Station names text size</string>
   <string name="pref_svg_labelsize_title">Label size</string>
   <string name="pref_svg_labelsize_summary">Label text size</string>
-  <string name="pref_kml_stations_title">KML/JSON stations</string>
+  <string name="pref_kml_stations_title">KML stations</string>
   <string name="pref_kml_stations_summary">Add stations to KML/GeoJSON export</string>
-  <string name="pref_kml_splays_title">KML/JSON splays</string>
+  <string name="pref_kml_splays_title">KML splays</string>
   <string name="pref_kml_splays_summary">Add splays to KML/GeoJSON export</string>
-  <string name="pref_csv_raw_title">Full CSV</string>
-  <string name="pref_csv_raw_summary">Export full data to CSV</string>
+  <string name="pref_csv_raw_title">Complete CSV</string>
+  <string name="pref_csv_raw_summary">Export whole data to CSV</string>
   <string name="pref_csv_sep_title">CSV separator</string>
   <string name="pref_csv_sep_summary">CSV fields separator</string>
   <string name="pref_csv_eol_title" copyable="all">CSV eol</string>
@@ -2017,7 +2026,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- 3D VIEWER strings -->
     <!-- UNUSED string name="capp_name" translatable="false">Cave3D</string -->
 
-    <string name="cbtn_bind">Rebind</string>
+    <!-- UNUSED string name="cbtn_bind">Rebind</string -->
 
     <string name="cmenu_open">OPEN FILE</string>
     <string name="cmenu_reset">RESET</string>

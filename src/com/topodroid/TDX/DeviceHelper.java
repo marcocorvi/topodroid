@@ -1077,8 +1077,9 @@ public class DeviceHelper extends DataSetObservable
    * @param address  device address
    * @param model    device model
    * @param name     device name
+   * @param nickname device nickname (can be null)
    */
-  void insertDevice( String address, String model, String name )
+  void insertDevice( String address, String model, String name, String nickname )
   {
     if ( myDB == null ) {
       TDLog.Error( ERROR_NULL_DB + "insert device");
@@ -1099,8 +1100,8 @@ public class DeviceHelper extends DataSetObservable
           cv.put( "model",   model );
           cv.put( "head",    0 );
           cv.put( "tail",    0 );
-          cv.put( "name",    name );
-          cv.put( "nickname", TDString.EMPTY );  // DB_NOTE empty nickname
+          cv.put( "name",     (name == null)? TDString.EMPTY : name );
+          cv.put( "nickname", (nickname==null)? TDString.EMPTY : nickname );  // DB_NOTE empty nickname
           myDB.insert( DEVICE_TABLE, null, cv );
         }
       }
@@ -1116,8 +1117,8 @@ public class DeviceHelper extends DataSetObservable
   //   cv.put( "model",   model );
   //   cv.put( "head",    head_tail[0] );
   //   cv.put( "tail",    head_tail[1] );
-  //   cv.put( "name",    name );
-  //   cv.put( "nickname", TDString.EMPTY );  // FIXME empty nickname
+  //   cv.put( "name",     (name == null )? TDSTring.EMPTY : name );
+  //   cv.put( "nickname", TDString.EMPTY ); // FIXME  nickname ?
   //   try {
   //     myDB.insert( DEVICE_TABLE, null, cv );
   //   } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );

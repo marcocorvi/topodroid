@@ -165,8 +165,14 @@
    
     <!-- UNUSED string name="device_algo_failed">Fallita determinazione automatica algoritmo\nUso algoritmo lineare</string -->
     <string name="device_address">Indirizzo %1$s</string>
+    <!-- TODO string name="address">Address</string -->
+    <!-- TODO string name="model_invalid">invalid number</string -->
+    <!-- TODO string name="model_missing">missing number</string -->
     <!-- UNUSED string name="device_busy">Dispositivo occupato</string -->
     <string name="device_illegal_addr">Indirizzo di memoria illegale</string>
+    <!-- TODO string name="device_already_present">Device already present</string -->
+    <!-- TODO string name="device_no_name">Device %1$s without name</string -->
+    <!-- TODO string name="device_all_named">No device without name</string -->
     <string name="device_info">Dati dispositivo</string>
     <!-- UNUSED string name="device_model_set">Vuoi davvero cambiare il modello del dispositivo</string -->
     <!-- UNUSED string name="device_none">Nessun DistoX selezionato</string -->
@@ -430,6 +436,7 @@
     <string name="menu_show_deleted">MOSTRA CANCELLATI</string>
     <string name="menu_hide_deleted">NASCONDI CANCELLATI</string>
     <string name="menu_device">DISPOSITIVO</string>
+    <!-- TODO string name="menu_device_add">ADD DEVICE</string -->
     <string name="menu_export">ESPORTA</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_geopoint_app">APP GNSS</string>
@@ -992,6 +999,7 @@
     <string name="help_azimuth">Riferimento per "extend"</string>
     <string name="help_refresh">Aggiorna schermata</string>
     <string name="help_device">Finestra DistoX</string>
+    <!-- TODO string name="help_device_add">Add a device</string -->
     <string name="help_add_topodroid">Nuovo rilievo/calibr.</string>
     <string name="help_import">Importa zip o file dati rilievo</string>
     <string name="help_geopoint_app">App GNSS esterna</string>
@@ -1178,6 +1186,7 @@
     <string name="title_dangling">Tiri non collegati</string>
     <string name="title_device">Dispositivi DistoX</string>
     <string name="title_device_select">Seleziona DistoX</string>
+    <!-- TODO string name="title_device_add">Add device</string -->
     <!-- UNUSED string name="title_discover">Ricerca DistoX &#8230; attendi</string -->
     <!-- UNUSED string name="title_draw">Disegno</string -->
     <string name="title_draw_area">AREA %1$s</string>
@@ -1965,7 +1974,7 @@
     <string name="image_photo">Foto</string>
 
     <!-- 3D VIEWER strings -->
-    <string name="cbtn_bind">Rebind</string>
+    <!-- UNUSED string name="cbtn_bind">Rebind</string -->
 
     <string name="cmenu_open">Apri file</string>
     <string name="cmenu_reset">Reset</string>
