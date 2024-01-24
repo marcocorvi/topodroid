@@ -1420,6 +1420,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_triple_shot_summary">Retour sonore lors de la reconnaissance d\'une visée de cheminement</string>
     <string name="pref_connect_feedback_title">Infos de connexion</string>
     <string name="pref_connect_feedback_summary">Retour d\'information sur la connexion du dispositif</string>
+  <!-- TODO string name="pref_unnamed_device_title">Unnamed devices</string -->
+  <!-- TODO string name="pref_unnamed_device_summary">Enable menu to enter device name</string -->
     <string name="pref_station_prefix_title">Préfixe station EcSurvey</string>
     <string name="pref_station_prefix_summary">Export préfixe station cSurvey</string>
     <string name="pref_compass_splays_title">Visées latérales d\'habillage Compass</string>

@@ -1143,7 +1143,7 @@ public class DeviceActivity extends Activity
     // ++k; if ( TDLevel.overBasic    ) menu_adapter.add( res.getString( menus[k] ) );
     ++k; if ( TDLevel.overNormal   ) menu_adapter.add( res.getString( menus[k] ) );
     ++k; if ( TDLevel.overAdvanced ) menu_adapter.add( res.getString( menus[k] ) );
-    ++k; if ( TDLevel.overExpert   ) menu_adapter.add( res.getString( menus[k] ) ); // MANUALLY ADD 
+    ++k; if ( TDSetting.mUnnamedDevice ) menu_adapter.add( res.getString( menus[k] ) ); // MANUALLY ADD UNNAMED
     ++k; if ( TDLevel.overExpert && TDSetting.mPacketLog ) menu_adapter.add( res.getString( menus[k] ) ); // PACKET_LOG
     ++k; menu_adapter.add( res.getString( menus[k] ) );
     ++k; menu_adapter.add( res.getString( menus[k] ) );
@@ -1197,7 +1197,7 @@ public class DeviceActivity extends Activity
       } else {
         TDToast.makeLong( R.string.firmware_not_supported );
       }
-    } else if ( TDLevel.overExpert && p++ == pos ) { // DEVICE_ADD
+    } else if ( TDSetting.mUnnamedDevice && p++ == pos ) { // MANUALLY ADD UNNAMED
       if ( mHasNonameDevice ) {
         (new DeviceAddDialog( this, this, mNonameList )).show();
       } else {

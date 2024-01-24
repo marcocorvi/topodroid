@@ -48,9 +48,9 @@ public class TDAzimuth
       double ref = mRefAzimuth;
       while ( bearing < ref ) bearing += 360;
       bearing -= ref;
-      if ( bearing <  90 - TDSetting.mExtendThr ) return +1L;
-      if ( bearing > 270 + TDSetting.mExtendThr ) return +1L;
-      if ( bearing >  90 + TDSetting.mExtendThr && bearing < 270 - TDSetting.mExtendThr ) return -1L;
+      if ( bearing <=  90 - TDSetting.mExtendThr ) return +1L;
+      if ( bearing >= 270 + TDSetting.mExtendThr ) return +1L;
+      if ( bearing >=  90 + TDSetting.mExtendThr && bearing <= 270 - TDSetting.mExtendThr ) return -1L;
       return 0L;
       // return ( bearing > 90 && bearing < 270 )? -1L : 1L; 
     } else if ( mFixedExtend == -1L ) {

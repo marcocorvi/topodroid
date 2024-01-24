@@ -1409,6 +1409,8 @@
   <string name="pref_triple_shot_summary">主线测量识别声反馈</string>
   <string name="pref_connect_feedback_title">连接反馈</string>
   <string name="pref_connect_feedback_summary">设备连接反馈</string>
+  <!-- TODO string name="pref_unnamed_device_title">Unnamed devices</string -->
+  <!-- TODO string name="pref_unnamed_device_summary">Enable menu to enter device name</string -->
   <string name="pref_station_prefix_title">Compass测点前缀</string>
   <string name="pref_station_prefix_summary">输出测点前缀[Compass]</string>
   <string name="pref_compass_splays_title">Compass辐测</string>

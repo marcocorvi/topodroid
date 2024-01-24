@@ -1417,6 +1417,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_triple_shot_summary">Hang visszajelzés a poligon mérés felismerésről</string>
   <string name="pref_connect_feedback_title">Kapcsolat visszajelzés</string>
   <string name="pref_connect_feedback_summary">Visszajelzés a műszer kapcsolatról</string>
+  <!-- TODO string name="pref_unnamed_device_title">Unnamed devices</string -->
+  <!-- TODO string name="pref_unnamed_device_summary">Enable menu to enter device name</string -->
   <string name="pref_station_prefix_title">Pontnév előtag</string>
   <string name="pref_station_prefix_summary">Pontnév előtagok exportálása</string>
   <string name="pref_compass_splays_title">Compass segédmérések</string>

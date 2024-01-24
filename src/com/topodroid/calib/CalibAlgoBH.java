@@ -24,6 +24,7 @@ package com.topodroid.calib;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
@@ -125,6 +126,8 @@ public class CalibAlgoBH extends CalibAlgo
 
   private int Optimize( int nn, TDVector[] g, TDVector [] m )
   {
+    // long start_time = TDUtil.time();
+
     int max_it = TDSetting.mCalibMaxIt;
     float eps  = TDSetting.mCalibEps;
     // TDLog.v( "Calib Algo BH eps " + eps + " iter " + max_it );
@@ -431,6 +434,10 @@ public class CalibAlgoBH extends CalibAlgo
     //   }
     // }
     // mDelta = 100 * (float)Math.sqrt( mDelta*invNum );
+
+    // long end_time = TDUtil.time();
+    // TDLog.v("Elapsed time [ms] " + (end_time - start_time) );
+
     return it;
   }
 

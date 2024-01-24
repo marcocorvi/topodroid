@@ -183,24 +183,11 @@ public class TDSetting
     }
   }
 
-  public static boolean mDxfBlocks = true; // DXF_BLOCKS data-export
-  public static boolean mShpGeoref = false;
-
-  public static float mAlgoMinAlpha = 0.1f;
-  public static float mAlgoMinBeta  = 4.0f;
-  public static float mAlgoMinGamma = 1.0f;
-  public static float mAlgoMinDelta = 1.0f;
-
-  public static float mAutoCalBeta  = 0.004f;
-  public static float mAutoCalEta   = 0.04f;
-  public static float mAutoCalGamma = 0.04f;
-  public static float mAutoCalDelta = 0.04f;
-
   public static String keyDeviceName() { return "DISTOX_DEVICE"; }
 
   // static final  String EXPORT_TYPE    = "th";    // DISTOX_EXPORT_TH
 
-  // prefs default values
+  // ------------ MAIN
   public static String  mDefaultTeam = "";
 
   public static final int MIN_SIZE_BUTTONS = 32; // minimum size of buttons
@@ -217,16 +204,25 @@ public class TDSetting
   public static boolean mKeyboard = true;
   public static boolean mNoCursor = false;
   public static boolean mLocalManPages = true;
-  public static boolean mPacketLog     = false;
-
-  public static boolean mTh2Edit       = false;
   public static float mItemButtonSize  = 5.0f;    // used in ItemButton
   // public static float mItemPathScale   = 2.0f; // referred from DrawingWindow
+
+  public static boolean mPacketLog     = false;
+  public static boolean mTh2Edit       = false;
 
   public static int mOrientation = 0; // 0 unspecified, 1 portrait, 2 landscape
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // IMPORT EXPORT
+  public static int mImportDatamode    = 0;  // SurveyInfo.DATAMODE_NORMAL
+  // public static boolean mExportTcsx    = true;
+  public static int mExportShotsFormat = -1; // DISTOX_EXPORT_NONE this is the preferred format on the shot export dialog
+  public static int mExportPlotFormat  = -1; // DISTOX_EXPORT_NONE this is the preferred format on the plot export dialog
+  public static int mAutoExportPlotFormat  = -1; // DISTOX_EXPORT_NONE
+
+  public static float mBezierStep  = 0.2f;
+  public static float getBezierStep() { return ( mBezierStep < 0.1f )? 0.05f : (mBezierStep/2); }
+
   public static boolean mLRExtend           = true;   // whether to extend LR or not (Compass/VisualTopo input)
   public static float   mLRUDvertical       = 45;     // vertical splay for UD 
   public static float   mLRUDhorizontal     = 45;     // horizontal splay for LR 
@@ -246,6 +242,11 @@ public class TDSetting
   public static boolean mZipWithSymbols       = false;  // whether to add/load symbols to/from archive
   public static boolean mZipShare             = false;  // whether to share exported zip
 
+  // ------------ THERION
+  public static final float THERION_SCALE = 196.8503937f; // 200 * 39.3700787402 / 40;
+  public static int     mTherionScale = 100;
+  public static boolean mTherionMaps   = false;
+  public static float   mToTherion = THERION_SCALE / 100;
   // public static boolean mXTherionAreas = false;
   public static boolean mAutoStations  = true;  // whether to add stations automatically to scrap therion files
   public static boolean mTherionSplays = false; // whether to add splay segments to auto stations
@@ -253,34 +254,52 @@ public class TDSetting
   public static boolean mTherionWithConfig = false; // whether to embed thconfig commands in th file 
   public static boolean mTherionEmbedConfig = false; // whether to write survey.thconfig file (or embedded commands)
   public static boolean mTherionXvi    = false; // whether to add xvi image to th2
+
+  // ------------ COMPASS WALLS
   public static boolean mCompassSplays = true;  // whether to add splays to Compass export
   public static boolean mWallsSplays   = true;  // whether to add splays to Walls export instead of wall shots
   // public static int     mWallsUD     = 80;      // walls UD threshold: Up/Down (angle - degrees)
+
+  // ------------ VTOPO
   public static boolean mVTopoSplays = true;    // whether to add splays to VisualTopo export
   public static boolean mVTopoLrudAtFrom = false; 
   public static boolean mVTopoTrox   = false; 
   // public static boolean mTherionPath = false; // whether to add surveypath to stations on import // NOT YET A SETTING
 
+  // ------------- PDF
   public static final float PDF_SCALE     = 141.73f; // =AI =1/72 in // was 145.56 approx.
-  public static final float THERION_SCALE = 196.8503937f; // 200 * 39.3700787402 / 40;
+  public static float   mToPdf     = PDF_SCALE / 100;
+
+  // ------------- SVG
   public static final float SVG_SCALE_INK = 188.97637795f; // 94.488189f; // 10 * 96 px/in / ( 25.4 mm/in * 40 px/m ) -> scale 1 : 100  Inkscape
   public static final float SVG_SCALE_AI  = 141.73228346f; // 70.866141732f; // A.I. 10 * 72 / ( 25.4 * 40 ) scale 1:100 Adobe Illustrator
   public static float   SVG_SCALE = SVG_SCALE_AI;
-  public static int     mTherionScale = 100;
-  public static float   mToTherion = THERION_SCALE / 100;
   public static float   mToSvg     = SVG_SCALE / 100;
-  public static float   mToPdf     = PDF_SCALE / 100;
 
   public static final int SVG_INKSCAPE    = 0;
   public static final int SVG_ILLUSTRATOR = 1;
   public static int mSvgProgram = SVG_ILLUSTRATOR;
 
-  public static boolean mGPXSingleTrack = false;
+  public static boolean mSvgRoundTrip  = false;
+  public static boolean mSvgGrid       = false;
+  // public static boolean mSvgInHtml     = false;
+  public static boolean mSvgLineDirection = false;
+  public static boolean mSvgSplays        = true;
+  public static float mSvgPointStroke   = 0.1f;
+  public static float mSvgLabelStroke   = 0.3f;   // stroke-width
+  public static float mSvgLineStroke    = 0.5f;
+  public static float mSvgLineDirStroke = 2f;
+  public static float mSvgGridStroke    = 0.5f;
+  public static float mSvgShotStroke    = 0.5f;
+  public static int   mSvgStationSize   = 20;     // font-size
+  public static int   mSvgLabelSize     = 30;     // font-size
 
-  public static float mBezierStep  = 0.2f;
-  public static float getBezierStep() { return ( mBezierStep < 0.1f )? 0.05f : (mBezierStep/2); }
- 
-  // public static float mDxfScale    = 1.0f;
+  // ----------- KML
+  public static boolean mKmlStations   = true;
+  public static boolean mKmlSplays     = false;
+
+  // ----------- GPX
+  public static boolean mGPXSingleTrack = false;
 
   // NO_PNG NO_PNM
   // raster image export has the issue of no control on the resolution (scale)
@@ -289,9 +308,24 @@ public class TDSetting
   // public static float mBitmapScale = 1.5f;
   // public static int mBitmapBgcolor = 0x000000;
 
+  // ------------- DXF
   public static int mAcadVersion = 9;       // AutoCAD version 9, or 13, or 16
   public static boolean mAcadSpline = true; // interpolated cubic
   public static boolean mAcadLayer = true; // HBX_DXF layer or linetype
+  public static boolean mDxfBlocks = true; // DXF_BLOCKS data-export
+  public static boolean mDxfReference    = false;  // whether to include XY reference in the export 
+  // public static float mDxfScale    = 1.0f;
+
+  // ------------- SHP
+  public static boolean mShpGeoref = false;
+
+  // ------------- CSV
+  public static final char CSV_COMMA = ',';
+  public static final char CSV_PIPE  = '|';
+  public static final char CSV_TAB   = '\t';
+  public static final char[] CSV_SEPARATOR = { CSV_COMMA, CSV_PIPE, CSV_TAB };
+  public static boolean mCsvRaw        = false;
+  public static char mCsvSeparator     = CSV_COMMA;
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // LOCATION
@@ -336,6 +370,18 @@ public class TDSetting
   public static int   mRawCData  = 0;
   // public static int   mCalibAlgo = 0;   // calibration algorithm: 0 auto, 1 linear, 2 non-linear
 
+  // ---------- CALIB ALGO MIN
+  public static float mAlgoMinAlpha = 0.1f;
+  public static float mAlgoMinBeta  = 4.0f;
+  public static float mAlgoMinGamma = 1.0f;
+  public static float mAlgoMinDelta = 1.0f;
+
+  // ----------- AUTO CALIB
+  public static float mAutoCalBeta  = 0.004f;
+  public static float mAutoCalEta   = 0.04f;
+  public static float mAutoCalGamma = 0.04f;
+  public static float mAutoCalDelta = 0.04f;
+
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // DEVICE
   private final static int CONN_MODE_BATCH      = 0; // on-demand connection mode
@@ -350,6 +396,7 @@ public class TDSetting
   // public static boolean isConnectionModeDouble() { return mConnectionMode == CONN_MODE_DOUBLE; }
 
   public static boolean mZ6Workaround  = true;
+  public static boolean mUnnamedDevice = false;
 
   public static boolean mAutoReconnect = true;
   public static boolean mSecondDistoX  = false;
@@ -390,33 +437,13 @@ public class TDSetting
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // SHOTS
-  public static float mVThreshold = 80f;   // vertical threshold (LRUD)
+  public static float mVThreshold = 80f;   // vertical threshold (LRUD) - manual shots
   public static float mHThreshold;         // horizontal xsection threshold (if |clino| < mHThreshold)
   // public static boolean mDataBackup = false; // whether to export data when shot-window is closed
   public static boolean mDistoXBackshot   = false;
   public static boolean mEditableStations = false;
   // public static int mTitleColor = TDColor.TITLE_NORMAL;
-  
-  public static final char CSV_COMMA = ',';
-  public static final char CSV_PIPE  = '|';
-  public static final char CSV_TAB   = '\t';
-  public static final char[] CSV_SEPARATOR = { CSV_COMMA, CSV_PIPE, CSV_TAB };
 
-  public static int mImportDatamode    = 0;  // SurveyInfo.DATAMODE_NORMAL
-  // public static boolean mExportTcsx    = true;
-  public static int mExportShotsFormat = -1; // DISTOX_EXPORT_NONE this is the preferred format on the shot export dialog
-  public static int mExportPlotFormat  = -1; // DISTOX_EXPORT_NONE this is the preferred format on the plot export dialog
-  public static int mAutoExportPlotFormat  = -1; // DISTOX_EXPORT_NONE
-  public static boolean mTherionMaps   = false;
-  public static boolean mSvgRoundTrip  = false;
-  public static boolean mSvgGrid       = false;
-  // public static boolean mSvgInHtml     = false;
-  public static boolean mSvgLineDirection = false;
-  public static boolean mSvgSplays        = true;
-  public static boolean mKmlStations   = true;
-  public static boolean mKmlSplays     = false;
-  public static boolean mCsvRaw        = false;
-  public static char mCsvSeparator     = CSV_COMMA;
   public static int mRecentTimeout     = 30; // 30 seconds
 
   // public static int mScreenTimeout = 60000; // 60 secs
@@ -435,7 +462,7 @@ public class TDSetting
   public static int     mMinNrLegShots = 3;
   public static String  mInitStation   = TDString.ZERO; // guaranteed non-null non-empty
   public static boolean mBacksightInput = false;   // whether to add backsight fields in shot manual-input dialog
-  public static float   mSplayVertThrs = 80;
+  public static float   mSplayVertThrs = 80;       // (sketch) include only splay with clino below threshold
   public static boolean mAzimuthManual = false;    // whether to manually set extend / or use reference azimuth
   public static int     mDashSplay     = DASHING_NONE; // whether dash-splay are plan-type (1), profile-type (2), or independent (0)
   public static float   mVertSplay     = 50;
@@ -451,6 +478,7 @@ public class TDSetting
   public static int     mSplayAlpha    = 80;       // splay alpha [default 80 out of 100]
   // public static boolean mSplayAsDot    = false;    // draw splays as dots
 
+  // ----------- LOOP CLOSURE
   public static final int LOOP_NONE       = 0; // coincide with values in array.xml
   public static final int LOOP_CYCLES     = 1;
   public static final int LOOP_TRIANGLES  = 3;
@@ -459,6 +487,7 @@ public class TDSetting
   public static int mLoopClosure = LOOP_NONE;      // loop closure: 0 none, 1 normal, 3 triangles
   public static float mLoopThr = 1.0f; // selective compensation threshold [%]
   
+  // ----------- UNITS
   public static final  String UNIT_LENGTH         = "meters";
   public static final  String UNIT_ANGLE          = "degrees";
   // public static final  String UNIT_ANGLE_GRADS = "grads";
@@ -470,7 +499,7 @@ public class TDSetting
   public static String mUnitAngleStr  = "deg";  // N.B. Therion syntax: "deg", "grad"
 
   // public static final String EXTEND_THR = TDString.TEN; 
-  public static float mExtendThr = 10;          // extend vertically splays in [90-30, 90+30] of the leg
+  public static float mExtendThr = 10;          // extend legs in the interval (-10, +10) ortogonal to the reference azimuth
   public static boolean mBlunderShot  = false;  // skip intermediate leg blunder-shot
   public static boolean mSplayStation = true;   // re-assign station to splays, even if already have it, 
   public static boolean mSplayOnlyForward = false;  //assign station to splay group only forward
@@ -492,8 +521,11 @@ public class TDSetting
   public static boolean mSideDrag = false;
   public static boolean mTripleToolbar = false;
 
+  // ------------- UNIT SIZES
   public static float mUnitIcons = 1.4f; // drawing unit icons
   public static float mUnitLines = 1.4f; // drawing unit lines
+  public static float mUnitGrid    = 1;         // 1: meter, 0.9... yard
+  public static float mUnitMeasure = -1;        // -1: grid-cell
 
   // selection_radius = cutoff + closeness / zoom
   public static final float mCloseCutoff = 0.01f; // minimum selection radius
@@ -506,8 +538,6 @@ public class TDSetting
   public static float mStylusSize = 0;              // stylus size
 
   // public static final String LINE_SHIFT = "20.0";
-  public static float mUnitGrid    = 1;         // 1: meter, 0.9... yard
-  public static float mUnitMeasure = -1;        // -1: grid-cell
 
   // public static final int PICKER_RECENT = 0; // Drawing-tools picker type
   // public static final int PICKER_LIST   = 1; 
@@ -516,7 +546,13 @@ public class TDSetting
   // public static int mPickerType = PICKER_LIST;
   // public static int mRecentNr     = 4;        // nr. most recent symbols
   public static boolean mPalettes = false;   // extra tools palettes
+  public static boolean mCompositeActions = false;
+  public static boolean mWithLineJoin = false;  // with line join
+  public static boolean mLegOnlyUpdate = false; // whether to update display of drawing window at every shot (not just at legs)
+  public static boolean mFullAffine = false; // whether to do full affine transform or shift+scale only
+  // public static boolean mLegProjection = true; // leg inclined-projection
 
+  // ------------ LINES
   public static final int LINE_STYLE_BEZIER = 0;  // drawing line styles
   private static final int LINE_STYLE_ONE    = 1;
   private static final int LINE_STYLE_TWO    = 2;
@@ -531,12 +567,8 @@ public class TDSetting
   public static float mLineCorner    = 20;    // corner threshold
   // public static int   mContinueLine  = DrawingWindow.CONT_NONE; // 0
   public static boolean mLineClose = true;
-  public static boolean mCompositeActions = false;
-  public static boolean mWithLineJoin = false;  // with line join
-  public static boolean mLegOnlyUpdate = false; // whether to update display of drawing window at every shot (not just at legs)
-  public static boolean mFullAffine = false; // whether to do full affine transform or shift+scale only
-  // public static boolean mLegProjection = true; // leg inclined-projection
 
+  // ---------- WEEDING
   public static float mWeedDistance  = 0.5f;  // max weeding distance
   public static float mWeedLength    = 2.0f;  // max weeding length
   public static float mWeedBuffer    = 10;    // weed segment buffer
@@ -558,7 +590,6 @@ public class TDSetting
   public static boolean mFixedOrigin     = false; 
   public static boolean mSharedXSections = false; // default value
   public static boolean mAutoXSections   = true;  // auto save/export xsections with section points
-  public static boolean mDxfReference    = false;  // whether to include XY reference in the export 
   public static boolean mSavedStations   = false;
   // public static boolean mPlotCache       = true;  // default value
   public static float mDotRadius      = 5;  // radius of selection dots - splay dots are 1.5 as big
@@ -583,15 +614,6 @@ public class TDSetting
 
   public static boolean mPlotSplit      = false;
   public static boolean mPlotShift      = false;
-
-  public static float mSvgPointStroke   = 0.1f;
-  public static float mSvgLabelStroke   = 0.3f;   // stroke-width
-  public static float mSvgLineStroke    = 0.5f;
-  public static float mSvgLineDirStroke = 2f;
-  public static float mSvgGridStroke    = 0.5f;
-  public static float mSvgShotStroke    = 0.5f;
-  public static int   mSvgStationSize   = 20;     // font-size
-  public static int   mSvgLabelSize     = 30;     // font-size
 
   // FIXME_SKETCH_3D - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   public static boolean m3Dsketch    = false;  // whether 3D sketch is enabled
@@ -1005,16 +1027,17 @@ public class TDSetting
 
     String[] keyDevice = TDPrefKey.DEVICE;
     String[] defDevice = TDPrefKey.DEVICEdef;
-    mConnectionMode = tryInt( prefs,    keyDevice[ 1],      defDevice[ 1] );   // DISTOX_CONN_MODE choice: 0, 1, 2
+    mConnectionMode  = tryInt( prefs,    keyDevice[ 1],      defDevice[ 1] );   // DISTOX_CONN_MODE choice: 0, 1, 2
     // mAutoReconnect  = prefs.getBoolean( keyDevice[ 2], bool(defDevice[ 2]) );  // DISTOX_AUTO_RECONNECT
-    mHeadTail       = prefs.getBoolean( keyDevice[ 2], bool(defDevice[ 2]) );  // DISTOX_HEAD_TAIL
+    mHeadTail        = prefs.getBoolean( keyDevice[ 2], bool(defDevice[ 2]) );  // DISTOX_HEAD_TAIL
     // TDLog.v("SETTINGS load device skip >" + keyDevice[3] + "< >" + defDevice[3] + "<" );
-    mSockType       = tryInt( prefs,    keyDevice[ 3],      defDevice[ 3] ); // mDefaultSockStrType );  // DISTOX_SOCKET_TYPE choice: 0, 1, (2, 3)
+    mSockType        = tryInt( prefs,    keyDevice[ 3],      defDevice[ 3] ); // mDefaultSockStrType );  // DISTOX_SOCKET_TYPE choice: 0, 1, (2, 3)
     // TDLog.v("SETTING load device next " + keyDevice[4] + " " + defDevice[4] );
-    mZ6Workaround   = prefs.getBoolean( keyDevice[ 4], bool(defDevice[ 4])  ); // DISTOX_Z6_WORKAROUND
-    mAutoPair       = prefs.getBoolean( keyDevice[ 5], bool(defDevice[ 5]) );  // DISTOX_AUTO_PAIR
+    mZ6Workaround    = prefs.getBoolean( keyDevice[ 4], bool(defDevice[ 4])  ); // DISTOX_Z6_WORKAROUND
+    mAutoPair        = prefs.getBoolean( keyDevice[ 5], bool(defDevice[ 5]) );  // DISTOX_AUTO_PAIR
     // TDLog.v("SETTING load device next " + keyDevice[6] + " " + defDevice[6] );
     mConnectFeedback = tryInt( prefs,   keyDevice[ 6],      defDevice[ 6] );   // DISTOX_CONNECT_FEEDBACK
+    mUnnamedDevice   = prefs.getBoolean( keyDevice[ 7], bool(defDevice[ 7])  ); // DISTOX_UNNAMED_DEVICE
     // TDLog.v("SETTING load device done");
 
     String[] keyGDev = TDPrefKey.GEEKDEVICE;
@@ -1659,6 +1682,8 @@ public class TDSetting
       TopoDroidApp.checkAutoPairing();
     } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_CONNECT_FEEDBACK
       mConnectFeedback = tryIntValue( hlp, k, v, def[6] );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_UNNAMED_DEVICE
+      mUnnamedDevice = tryBooleanValue( hlp, k, v, bool(def[7]) );
     } else {
       TDLog.Error("missing DEVICE key: " + k );
     }
@@ -3166,7 +3191,7 @@ public class TDSetting
 
       pw.printf(Locale.US, "BT: check %d, autopair %c \n", mCheckBT, tf(mAutoPair) );
       pw.printf(Locale.US, "Socket: type %d, delay %d\n", mSockType, mConnectSocketDelay );
-      pw.printf(Locale.US, "Connection mode %d Z6 %c, feedback %d\n", mConnectionMode, tf(mZ6Workaround), mConnectFeedback );
+      pw.printf(Locale.US, "Connection mode %d Z6 %c, feedback %d unnamed %c\n", mConnectionMode, tf(mZ6Workaround), mConnectFeedback, tf(mUnnamedDevice) );
       // pw.printf(Locale.US, "Communication autoreconnect %c, DistoX-B %c, retry %d, head/tail %c\n", tf(mAutoReconnect), tf(mSecondDistoX), mCommRetry, tf(mHeadTail) );
       pw.printf(Locale.US, "Communication DistoX-B %c, retry %d, head/tail %c\n", tf(mSecondDistoX), mCommRetry, tf(mHeadTail) );
       pw.printf(Locale.US, "Packet log %c Th2Edit %c WithDebug %c\n", tf(mPacketLog), tf(mTh2Edit), tf(mWithDebug) );
@@ -3568,6 +3593,9 @@ public class TDSetting
               mConnectionMode  = getInt( vals, 2, 0 );     setPreference( editor, "DISTOX_CONN_MODE", mConnectionMode );
               mZ6Workaround    = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_Z6_WORKAROUND", mZ6Workaround );
               mConnectFeedback = getInt( vals, 6, 0 );     setPreference( editor, "DISTOX_CONNECT_FEEDBACK", mConnectFeedback );
+              if ( vals.length > 8 ) {
+                mUnnamedDevice = getBoolean( vals, 8 ); setPreference( editor, "DISTOX_UNNAMED_DEVICE", mUnnamedDevice );
+              }
             }
           }
           continue;

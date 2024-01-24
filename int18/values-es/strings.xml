@@ -1410,6 +1410,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_triple_shot_summary">Avisos sonoros sobre el reconocimiento de la toma de una visual</string>
   <string name="pref_connect_feedback_title">Conectar avisos</string>
   <string name="pref_connect_feedback_summary">Avisos sobre la conexión del dispositivo</string>
+  <!-- TODO string name="pref_unnamed_device_title">Unnamed devices</string -->
+  <!-- TODO string name="pref_unnamed_device_summary">Enable menu to enter device name</string -->
   <string name="pref_station_prefix_title">Prefijo estación de exportación</string>
   <string name="pref_station_prefix_summary">Prefijo estación de exportación cSurvey</string>
   <string name="pref_compass_splays_title">Muestra Compass</string>

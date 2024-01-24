@@ -1309,6 +1309,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_triple_shot_summary">Tipo de aviso ao reconhecer automaticamente visada</string>
   <string name="pref_connect_feedback_title">Feedback conexão</string>
   <string name="pref_connect_feedback_summary">Feedback ao estabelecer conexão com dispositivo</string>
+  <!-- TODO string name="pref_unnamed_device_title">Unnamed devices</string -->
+  <!-- TODO string name="pref_unnamed_device_summary">Enable menu to enter device name</string -->
   <string name="pref_station_prefix_title">Pref base</string>
   <string name="pref_station_prefix_summary">Incluir prefixo nos nomes das bases na exportação Compass/cSurvey/WinKarst</string>
   <string name="pref_compass_splays_title">Aux Compass/Walls</string>

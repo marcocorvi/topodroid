@@ -1404,6 +1404,8 @@
   <string name="pref_triple_shot_summary">Feedback sonoro al riconoscimento di Misura-Tiro</string>
   <string name="pref_connect_feedback_title">Feedback connessione</string>
   <string name="pref_connect_feedback_summary">Feedback alla connessione</string>
+  <!-- TODO string name="pref_unnamed_device_title">Unnamed devices</string -->
+  <!-- TODO string name="pref_unnamed_device_summary">Enable menu to enter device name</string -->
   <string name="pref_station_prefix_title">Esporta il prefisso dei caposaldi</string>
   <string name="pref_station_prefix_summary">Esporta caposaldi con prefisso [Compass]</string>
   <string name="pref_compass_splays_title">Splay Compass</string>

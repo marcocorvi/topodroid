@@ -22,6 +22,7 @@ Custom General settings
 <li>Additional palettes menu</li>
 <li>Packets logging</li>
 <li>Therion th2 editing</li>
+<!-- li>Developer mode</li -->
 </ul>
 </div><br><p>
 
@@ -45,13 +46,15 @@ become effective.<br><p>
   <li>Up/Down minimum splay clino. [0&deg;]</li>
   <li>Left/Right maximum splay clino. [90&deg;]</li>
   <li>Line-point spacing: distance between line points</li>
+  <li>Enabled data export formats: Compass (DAT), cSurvey (CSX), GHTopo (GTX), Polygon (CAVE), Survex (SVX), Therion (TH), Topo (CAV), TopoRobot (TAB), 
+      VisualTopo (TRO, TROX), Walls (SRV), Winkarst (SUR), CSV, DXF, KML, GPX</li>
   </ul>
 </li>
 <li>Import:<br>
   <ul>
   <li><a href="page_pt_cmap.htm">PocketTopo color map</a> Map of PocketTopo colours to TopoDroid types</li>
   <li>Estimate LR extend on import of Compass and VisualTopo files. [yes]</li>
-  <li>Import datamode: normal or diving. Diving applies only to Compass. [normal]</li>
+  <!-- li>Import datamode: normal or diving. Diving applies only to Compass. [normal]</li -->
   </ul>
 </li>
 <li>cSurvey export:<br>
@@ -113,6 +116,7 @@ become effective.<br><p>
   <li>DXF version {6,12,16}. [6]</li>
   <li>Use splines for Bezier segments</li>
   <li>DXF reference</li>
+  <li>Scrap on layers</li>
   </ul>
 </li>
 <!-- li>PNG:<br>
@@ -124,10 +128,15 @@ become effective.<br><p>
   <li>Stations: add stations</li>
   </ul>
 </li -->
-<li>KML/GeoJSON export:<br>
+<li>KML export:<br> <!-- GeoJSON -->
   <ul>
-  <li>Add stations to KML/GeoJSON export. [yes]</li>
-  <li>Add splays to KML/GeoJSON export. [no]</li>
+  <li>Add stations to KML export. [yes]</li>
+  <li>Add splays to KML export. [no]</li>
+  </ul>
+</li>
+<li>GPX export:<br>
+  <ul>
+  <li>GPX single track export [yes]</li>
   </ul>
 </li>
 <li>Shapefile export:<br>
@@ -137,7 +146,7 @@ become effective.<br><p>
 </li>
 <li>CSV export:<br>
   <ul>
-  <li>Raw data: export raw data to csv. [no]</li>
+  <li>Complete data: export whole data to csv. [no]</li>
   <li>field separator [pipe]</li>
   <li>line separator [line-feed]</li>
   </ul>
@@ -205,6 +214,10 @@ Location
 <ul>
 <li>Location units {ddmmss, dec.deg}. [ddmmss]</li>
 <li>CRS. Name of CRS, as used in Proj4. [Long-Lat, ie, geographic WGS84]</li>
+<li>Negative altittudes</li>
+<li>Editable altittude</li>
+<li>Fine-position time</li>
+<li>Preferred GNSS app (Mobile Topographer, GPX Recorder, GPS Position, GPSTest, GPS Logger)</li>
 </ul><br>
 
 Accuracy
@@ -273,10 +286,11 @@ Line Tools
 <li>Lines width (N.B. wall line are twice this). [1 px]</li>
 <li>Line style scale factor</li>
 <li>Line style {Bezier, fine, normal, coarse, simplified}. [normal]</li>
-<li>Line close. Whether to close lines of "closed" type. [yes]</li>
 <li>Line-point spacing. Minimum distance between line points. [10 px]</li>
+<li>Line close. Whether to close lines of "closed" type. [yes]</li>
 <li>Section lines "direction tick" size [1,20]. Default 8 [x unit]</li>
 <li>Section points. Add Therion section point to section line. [yes]</li>
+<li>Line joining</li>
 <li>Area border default visibility. [yes]</li>
 </ul><br>
 
@@ -292,6 +306,8 @@ Custom Sketching settings
 <li>Full affine sketch transforms</li>
 <li>Layers. [no]</li>
 <li>Graph paper scale</li>
+<li>Slant x-sections</li>
+<li>Oblique projected profile</li>
 </ul>
 </div><br>
 
@@ -307,6 +323,7 @@ Custom Splay settings
 <li>Splay dash angle threshold. [60&deg;]</li>
 <li>Color of dash splay</li>
 <li>Color of dot splay</li>
+<li>Color of latest splays</li>
 </ul>
 </div><br>
 
@@ -327,7 +344,7 @@ Custom Line settings
 <ul>
 <li>Straightening angle</li>
 <li>Interpolation accuracy (Bezier)</li>
-<li>Cornet threshold (Bezier)</li>
+<li>Corner threshold (Bezier)</li>
 <li>Max point/segment distance for weeding. [0.5 m]</li>
 <li>Max segment length for weeding. [2.0 m]</li>
 <li>Point weeding segment buffer</li>
@@ -348,7 +365,7 @@ Custom Line settings
 <li>Size of station points</li>
 <li>Size of station text</li>
 <li>Selection radius</li>
-<li>Measure dialog</li>
+<li>Measure dialog or message</li>
 <li>Station message</li>
 <li>Grid above or below 3D model</li>
 <li>Grid extent</li>
@@ -397,6 +414,7 @@ Wall model
 <li>Z6 workaround. [yes]</li>
 <li>Auto-pairing. [yes]</li>
 <li>Connection status feedbacks</li>
+<li>Manually add unnamed devices</li>
 </ul><br>
 
 <div style="font-size:90%">
@@ -411,6 +429,7 @@ Custom Device settings
 <li>Firmware sanity check</li>
 <li>BRIC4 data mode</li>
 <li>BRIC4 zero-length shots</li>
+<li>SAP5 bit-16 bug</li>
 </ul>
 </div><br><p>
 

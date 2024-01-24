@@ -451,7 +451,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="menu_show_deleted">SHOW DELETED</string>
     <string name="menu_hide_deleted">HIDE DELETED</string>
     <string name="menu_device">DEVICE</string>
-    <string name="menu_device_add">ADD DEVICE</string>
+    <string name="menu_device_add">ADD UNNAMED</string>
     <string name="menu_export">EXPORT</string>
     <string name="menu_firmware" copyable="all">FIRMWARE</string>
     <string name="menu_geopoint_app">GNSS APP</string>
@@ -1355,7 +1355,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_cat_exportshp" translatable="false">Shapefile</string>
   <!-- UNUSED string name="pref_cat_exportpng" translatable="false">PNG</string NO_PNG -->
   <string name="pref_cat_exportgpx" translatable="false">GPX</string>
-  <string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string>
+  <string name="pref_cat_exportkml" translatable="false">KML</string>
   <string name="pref_cat_exportcsx" translatable="false">cSurvey</string>
   <string name="pref_cat_exportcsv" translatable="false">CSV</string>
 
@@ -1432,6 +1432,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_triple_shot_summary">Feedback on leg-shot recognition</string>
   <string name="pref_connect_feedback_title">Connect feedback</string>
   <string name="pref_connect_feedback_summary">Feedback on device connect</string>
+  <string name="pref_unnamed_device_title">Unnamed devices</string>
+  <string name="pref_unnamed_device_summary">Enable menu to enter device name</string>
   <string name="pref_station_prefix_title">Station prefix</string>
   <string name="pref_station_prefix_summary">Export station prefix [Compass/cSurvey/WinKarst]</string>
   <string name="pref_compass_splays_title">Compass splays</string>
@@ -1487,9 +1489,9 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_svg_labelsize_title">Label size</string>
   <string name="pref_svg_labelsize_summary">Label text size</string>
   <string name="pref_kml_stations_title">KML stations</string>
-  <string name="pref_kml_stations_summary">Add stations to KML/GeoJSON export</string>
+  <string name="pref_kml_stations_summary">Add stations to KML export</string>
   <string name="pref_kml_splays_title">KML splays</string>
-  <string name="pref_kml_splays_summary">Add splays to KML/GeoJSON export</string>
+  <string name="pref_kml_splays_summary">Add splays to KML export</string>
   <string name="pref_csv_raw_title">Complete CSV</string>
   <string name="pref_csv_raw_summary">Export whole data to CSV</string>
   <string name="pref_csv_sep_title">CSV separator</string>

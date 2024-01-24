@@ -1299,6 +1299,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_triple_shot_summary">Ton abspielen wenn Messzug erkannt</string>
   <string name="pref_connect_feedback_title">Aktion bei Verbindung</string>
   <string name="pref_connect_feedback_summary">Aktion wenn ein Gerät verbunden wird</string>
+  <!-- TODO string name="pref_unnamed_device_title">Unnamed devices</string -->
+  <!-- TODO string name="pref_unnamed_device_summary">Enable menu to enter device name</string -->
   <string name="pref_station_prefix_title">Compass: Prefix</string>
   <string name="pref_station_prefix_summary">Exportiere Messpunkt Prefix (compass)</string>
   <string name="pref_compass_splays_title">Compass: Hilfszüge</string>

@@ -1407,6 +1407,8 @@
   <string name="pref_triple_shot_summary">Звуковой сингал при получении нескольких одинаковых замеров между пикетами.</string>
   <string name="pref_connect_feedback_title">Сигнал подключения</string>
   <string name="pref_connect_feedback_summary">Сигнал при подключении устройства</string>
+  <!-- TODO string name="pref_unnamed_device_title">Unnamed devices</string -->
+  <!-- TODO string name="pref_unnamed_device_summary">Enable menu to enter device name</string -->
   <string name="pref_station_prefix_title">Экспортировать пикеты с префиксом </string>
   <string name="pref_station_prefix_summary">Добавлять префикс к номерам пикетов при экспорте в формат [Compass]</string>
   <string name="pref_compass_splays_title">Сплеи в Compass</string>
