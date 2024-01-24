@@ -10,8 +10,24 @@ orientation no
 color 0xffcc66
 path
   moveTo 0 0
-  lineTo 0.04 0.01
-  lineTo 0.02 -0.03
+  lineTo 0.4 0.1
+  lineTo 0.2 -0.3
   lineTo 0 0
+  moveTo 3 3
+  lineTo 3.4 3.1
+  lineTo 3.2 2.7
+  lineTo 3 3
+  moveTo 2 -4
+  lineTo 2.4 -4.1
+  lineTo 2.2 -4.3
+  lineTo 2 -4
+  moveTo -4 -4
+  lineTo -4.4 -4.1
+  lineTo -4.2 -4.3
+  lineTo -4 -4
+  moveTo -5 -2
+  lineTo -5.4 -2.1
+  lineTo -5.2 -2.3
+  lineTo -5 -2
 endpath
 endsymbol

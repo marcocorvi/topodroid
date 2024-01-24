@@ -3,13 +3,13 @@ symbol point
 name flowstone-floor
 name-de Sinterboden
 name-hu cseppköves_talaj
-name-pt chão_de_escorrimento
+name-pt escorrimento_(piso)
 name-ro cruste_podea
 name-ru натечный_пол
 th_name flowstone:floor
 group flowstone
 orientation no
-color 0xffcc66
+color 0xff6666
 path
   moveTo -6 -2
   lineTo -1 -2
