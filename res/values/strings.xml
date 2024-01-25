@@ -451,7 +451,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="menu_show_deleted">SHOW DELETED</string>
     <string name="menu_hide_deleted">HIDE DELETED</string>
     <string name="menu_device">DEVICE</string>
-    <string name="menu_device_add">ADD UNNAMED</string>
+    <string name="menu_device_add">ADD UNNAMED</string> <!-- KEEP -->
     <string name="menu_export">EXPORT</string>
     <string name="menu_firmware" copyable="all">FIRMWARE</string>
     <string name="menu_geopoint_app">GNSS APP</string>
@@ -1020,7 +1020,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="help_azimuth">"Extend" reference</string>
     <string name="help_refresh">Refresh display</string>
     <string name="help_device">Device activity</string>
-    <string name="help_device_add">Add a device</string>
+    <string name="help_device_add">Add a device</string> <!-- KEEP -->
     <string name="help_add_topodroid">New survey</string>
     <string name="help_import">Import zip archive or survey file</string>
     <string name="help_geopoint_app">External GNSS apps</string>
@@ -1432,8 +1432,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_triple_shot_summary">Feedback on leg-shot recognition</string>
   <string name="pref_connect_feedback_title">Connect feedback</string>
   <string name="pref_connect_feedback_summary">Feedback on device connect</string>
-  <string name="pref_unnamed_device_title">Unnamed devices</string>
-  <string name="pref_unnamed_device_summary">Enable menu to enter device name</string>
+  <string name="pref_unnamed_device_title">Unnamed devices</string> <!-- KEEP -->
+  <string name="pref_unnamed_device_summary">Enable menu to enter device name</string> <!-- KEEP -->
   <string name="pref_station_prefix_title">Station prefix</string>
   <string name="pref_station_prefix_summary">Export station prefix [Compass/cSurvey/WinKarst]</string>
   <string name="pref_compass_splays_title">Compass splays</string>

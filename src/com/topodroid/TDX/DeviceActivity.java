@@ -175,7 +175,7 @@ public class DeviceActivity extends Activity
                         // R.string.menu_pair,
                         R.string.menu_detach,
                         R.string.menu_firmware,
-                        R.string.menu_device_add,
+                        // R.string.menu_device_add, // UNNAMED
                         R.string.menu_packets,
                         R.string.menu_options,
                         R.string.menu_help
@@ -197,7 +197,7 @@ public class DeviceActivity extends Activity
                         // R.string.help_pair,
                         R.string.help_detach,
                         R.string.help_firmware,
-                        R.string.help_device_add,
+                        // R.string.help_device_add, // UNNAMED
                         R.string.help_packets,
                         R.string.help_prefs,
                         R.string.help_help
@@ -1143,7 +1143,7 @@ public class DeviceActivity extends Activity
     // ++k; if ( TDLevel.overBasic    ) menu_adapter.add( res.getString( menus[k] ) );
     ++k; if ( TDLevel.overNormal   ) menu_adapter.add( res.getString( menus[k] ) );
     ++k; if ( TDLevel.overAdvanced ) menu_adapter.add( res.getString( menus[k] ) );
-    ++k; if ( TDSetting.mUnnamedDevice ) menu_adapter.add( res.getString( menus[k] ) ); // MANUALLY ADD UNNAMED
+    // ++k; if ( TDSetting.mUnnamedDevice ) menu_adapter.add( res.getString( menus[k] ) ); // MANUALLY ADD UNNAMED
     ++k; if ( TDLevel.overExpert && TDSetting.mPacketLog ) menu_adapter.add( res.getString( menus[k] ) ); // PACKET_LOG
     ++k; menu_adapter.add( res.getString( menus[k] ) );
     ++k; menu_adapter.add( res.getString( menus[k] ) );
@@ -1197,12 +1197,12 @@ public class DeviceActivity extends Activity
       } else {
         TDToast.makeLong( R.string.firmware_not_supported );
       }
-    } else if ( TDSetting.mUnnamedDevice && p++ == pos ) { // MANUALLY ADD UNNAMED
-      if ( mHasNonameDevice ) {
-        (new DeviceAddDialog( this, this, mNonameList )).show();
-      } else {
-        TDToast.make( R.string.device_all_named );
-      }
+    // } else if ( TDSetting.mUnnamedDevice && p++ == pos ) { // MANUALLY ADD UNNAMED
+    //   if ( mHasNonameDevice ) {
+    //     (new DeviceAddDialog( this, this, mNonameList )).show();
+    //   } else {
+    //     TDToast.make( R.string.device_all_named );
+    //   }
     } else if ( TDLevel.overExpert && TDSetting.mPacketLog && p++ == pos ) { // PACKET_LOG
       (new PacketDialog( this )).show();
 

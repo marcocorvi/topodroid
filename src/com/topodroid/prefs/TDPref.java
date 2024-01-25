@@ -873,8 +873,8 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], N, def[ 4],          ctx, hlp ),
       makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], A, def[ 5],          ctx, hlp ),
       makeLst( cat, key[ 6], tit[ 6], dsc[ 6], E, def[ 6], R.array.feedbackMode, R.array.feedbackModeValue, ctx, hlp ),
-      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], N, def[ 7],          ctx, hlp ),
-      makeFwd( cat, key[ 8], tit[ 8],          B,                   ctx, hlp )
+      // makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], N, def[ 7],          ctx, hlp ), // UNNAMED (change next line too)
+      makeFwd( cat, key[ 7], tit[ 7],          B,                   ctx, hlp )
     };
   }
 
