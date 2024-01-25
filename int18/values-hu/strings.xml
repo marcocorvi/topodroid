@@ -1127,7 +1127,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="export_bgcolor">Fehér háttér</string -->
     <string name="export_bothviews">Alaprajz és oldalnézet</string>
     <string name="export_config">Konfigurációs parancsok</string>
-    <string name="export_csv_rawdata">Nyers adat</string>
+    <string name="export_csv_rawdata">Összes adat</string>
     <string name="export_dxf_blocks">Segédmérés végpont</string>
     <string name="export_dxf_version">Verzió</string>
     <string name="export_georeference">Georeferencia</string>
@@ -1477,8 +1477,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_kml_stations_summary">Mérési pontok hozzáadása KML-fájlhoz</string>
   <string name="pref_kml_splays_title">KML segédmérésekkel</string>
   <string name="pref_kml_splays_summary">segédmérések hozzáadása KML-fájlhoz</string>
-  <string name="pref_csv_raw_title">Nyers CSV</string>
-  <string name="pref_csv_raw_summary">Nyers adatok exportja CSV fájlokba</string>
+  <string name="pref_csv_raw_title">Teljes CSV</string>
+  <string name="pref_csv_raw_summary">Összes adat exportja CSV fájlokba</string>
   <string name="pref_csv_sep_title">CSV határoló</string>
   <string name="pref_csv_sep_summary">CSV mező határoló</string>
   <string name="pref_csv_eol_title">CSV sorvége</string>
