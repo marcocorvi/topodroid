@@ -542,7 +542,7 @@ no campo abaixo e aperte o botão.
   <string name="section_area">Área do corte: %1$.1f</string>
   <string name="section_name">comentário sobre corte</string>
   <string name="scrap_outline">Contorno</string>
-  <string name="scrap_string">Desenho do croqui: %1$d / %2$d</string>
+  <string name="scrap_string">Trecho do croqui: %1$d / %2$d</string>
   <string name="section_point_not_allowed">ponto tipo corte não permitido</string>
   <string name="section_line_not_allowed">linha tipo corte não permitida</string>
   <!-- UNUSED string name="sensor">sensor</string -->
@@ -751,7 +751,7 @@ no campo abaixo e aperte o botão.
   <string name="button_move">Mover</string>
   <string name="button_next">Próximo</string>
   <string name="button_prev">Anterior</string>
-  <string name="button_new">Novo desenho</string>
+  <string name="button_new">Novo trecho</string>
   <string name="button_skip">Ignorar</string>
   <string name="button_done">Fim</string>
   <string name="button_lrud">Incluir EDTC</string>
@@ -975,8 +975,8 @@ no campo abaixo e aperte o botão.
   <string name="help_plot_close">Fechar croqui</string>
   <string name="help_plot_delete">Apagar croqui</string>
   <string name="help_plot_rename">Renomear/apagar croqui</string>
-  <string name="help_plot_scrap">Desenhos croqui</string>
-  <string name="help_plot_switch">Mudar para outro croqui</string>
+  <string name="help_plot_scrap">Trechos croqui</string>
+  <string name="help_plot_switch">Mudar para outro trecho</string>
   <string name="help_search">Pesquisar base</string>
   <string name="help_stats">Estatísticas croqui</string>
   <string name="help_save_plot">Exportar croqui</string>
