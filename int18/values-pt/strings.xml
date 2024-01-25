@@ -1047,7 +1047,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="export_bgcolor">Cor de fundo</string -->
   <string name="export_bothviews">Planta baixa e perfil</string>
   <string name="export_config">Comandos de configuração</string>
-  <string name="export_csv_rawdata">Dados brutos</string>
+  <string name="export_csv_rawdata">Dados brutos CSV</string>
   <string name="export_dxf_blocks">Blocos DXF</string>
   <string name="export_dxf_version">Versão</string>
   <string name="export_georeference">Georeferência</string>
