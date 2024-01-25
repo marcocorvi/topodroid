@@ -168,14 +168,14 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
    
     <!-- UNUSED string name="device_algo_failed">Az algoritmus automatikus kiválasztása nem sikerült\nLineáris eljárás használata</string -->
     <string name="device_address">Cím %1$s</string>
-    <!-- TODO string name="address">Address</string -->
-    <!-- TODO string name="model_invalid">invalid number</string -->
-    <!-- TODO string name="model_missing">missing number</string -->
+    <string name="address">Cím</string>
+    <string name="model_invalid">érvénytelen szám</string>
+    <string name="model_missing">hiányzó szám</string>
     <!-- UNUSED string name="device_busy">A műszer használatban</string -->
     <string name="device_illegal_addr">Helytelen memória cím</string>
-    <!-- TODO string name="device_already_present">Device already present</string -->
-    <!-- TODO string name="device_no_name">Device %1$s without name</string -->
-    <!-- TODO string name="device_all_named">No device without name</string -->
+    <string name="device_already_present">A műszer már jelen van</string>
+    <string name="device_no_name">%1$s műszer név nélkül</string>
+    <string name="device_all_named">Nincs műszer név nélkül</string>
     <string name="device_info">Műszer információ</string>
     <!-- UNUSED string name="device_model_set">Valóban meg akarja változtatni a műszer típusát?</string -->
     <!-- UNUSED string name="device_none">Nincs kiválasztva DistoX</string -->
@@ -442,7 +442,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="menu_show_deleted">TÖRÖLTEK MUTATÁSA</string>
     <string name="menu_hide_deleted">TÖRÖLTEK ELREJTÉSE</string>
     <string name="menu_device">MŰSZER</string>
-    <!-- TODO string name="menu_device_add">ADD DEVICE</string -->
+    <string name="menu_device_add">MŰSZER HOZZÁADÁSA</string>
     <string name="menu_export">EXPORTÁLÁS</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_geopoint_app">GEOPONT APP</string>
@@ -1009,7 +1009,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="help_azimuth">Kiterítési irány</string>
     <string name="help_refresh">Képernyő frissítés</string>
     <string name="help_device">Műszer funkciók</string>
-    <!-- TODO string name="help_device_add">Add a device</string -->
+    <string name="help_device_add">Műszer hozzáadása</string>
     <string name="help_add_topodroid">Új felmérés</string>
     <string name="help_import">ZIP archívum, vagy felmérés importálása</string>
     <string name="help_geopoint_app">Geopont külső app</string>
@@ -1197,7 +1197,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="title_dangling">Csatolatlan mérés</string>
     <string name="title_device">DistoX-ek</string>
     <string name="title_device_select">Válaszd ki a DistoX-et</string>
-    <!-- TODO string name="title_device_add">Add device</string -->
+    <string name="title_device_add">Műszer hozzáadása</string>
     <!-- UNUSED string name="title_discover">DistoX műszerek keresése &#8230; várj!</string -->
     <!-- UNUSED string name="title_draw">Rajzolás</string -->
     <string name="title_draw_area">TERÜLET %1$s</string>
@@ -1417,8 +1417,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_triple_shot_summary">Hang visszajelzés a poligon mérés felismerésről</string>
   <string name="pref_connect_feedback_title">Kapcsolat visszajelzés</string>
   <string name="pref_connect_feedback_summary">Visszajelzés a műszer kapcsolatról</string>
-  <!-- TODO string name="pref_unnamed_device_title">Unnamed devices</string -->
-  <!-- TODO string name="pref_unnamed_device_summary">Enable menu to enter device name</string -->
+  <string name="pref_unnamed_device_title">Név nélküli műszer</string>
+  <string name="pref_unnamed_device_summary">Menü engedélyezése a műszer nevének megadásához</string>
   <string name="pref_station_prefix_title">Pontnév előtag</string>
   <string name="pref_station_prefix_summary">Pontnév előtagok exportálása</string>
   <string name="pref_compass_splays_title">Compass segédmérések</string>
