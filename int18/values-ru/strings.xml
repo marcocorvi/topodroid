@@ -167,14 +167,14 @@
    
     <!-- UNUSED string name="device_algo_failed">Алгоритм автоопределения не сработал\nИспользую линейный алгоритм</string -->
     <string name="device_address">Адрес %1$s</string>
-    <!-- TODO string name="address">Address</string -->
-    <!-- TODO string name="model_invalid">invalid number</string -->
-    <!-- TODO string name="model_missing">missing number</string -->
+    <string name="address">Адрес</string>
+    <string name="model_invalid">неверный номер</string>
+    <string name="model_missing">номер отсутствует</string>
     <!-- UNUSED string name="device_busy">Устройство занято</string -->
     <string name="device_illegal_addr">Недопустимый адрес памяти</string>
-    <!-- TODO string name="device_already_present">Device already present</string -->
-    <!-- TODO string name="device_no_name">Device %1$s without name</string -->
-    <!-- TODO string name="device_all_named">No device without name</string -->
+    <string name="device_already_present">Устройство уже присутствует</string>
+    <string name="device_no_name">Устройство %1$s без названия</string>
+    <string name="device_all_named">Нет устройства без названия</string>
     <string name="device_info">Информация об устройстве</string>
     <!-- UNUSED string name="device_model_set">Вы уверенны что хотите сменить модель прибора</string -->
     <!-- UNUSED string name="device_none">DistoX не выбран</string -->
@@ -438,7 +438,7 @@
     <string name="menu_show_deleted">ПОКАЗАТЬ УДАЛЕННЫЕ</string>
     <string name="menu_hide_deleted">СКРЫТЬ УДАЛЕННЫЕ</string>
     <string name="menu_device">ПРИБОР</string>
-    <!-- TODO string name="menu_device_add">ADD DEVICE</string -->
+    <string name="menu_device_add">ДОБАВИТЬ УСТРОЙСТВО</string>
     <string name="menu_export">Экспорт</string>
     <string name="menu_firmware">Прошивка</string>
     <string name="menu_geopoint_app">ПРИЛОЖЕНИЕ ГЕОПРИВЯЗКИ</string>
@@ -1001,7 +1001,7 @@
     <string name="help_azimuth">Направление развёртки разреза</string>
     <string name="help_refresh">Обновить дисплей</string>
     <string name="help_device">Окно управления устройствами</string>
-    <!-- TODO string name="help_device_add">Add a device</string -->
+    <string name="help_device_add">Добавить устройство</string>
     <string name="help_add_topodroid">Создать новую съёмку/калибровку</string>
     <string name="help_import">Импорт zip архива или файла съёмки</string>
     <string name="help_geopoint_app">Внешнее приложение геопривязки</string>
@@ -1188,7 +1188,7 @@
     <string name="title_dangling">Неприсоединенные замеры</string>
     <string name="title_device">Устройства DistoX</string>
     <string name="title_device_select">Выберите прибор DistoX</string>
-    <!-- TODO string name="title_device_add">Add device</string -->
+    <string name="title_device_add">Добавить устройство</string>
     <!-- UNUSED string name="title_discover">Поиск устройств DistoX &#8230; подождите</string -->
     <!-- UNUSED string name="title_draw">Рисовать</string -->
     <string name="title_draw_area">ОБЛАСТЬ %1$s</string>
@@ -1407,8 +1407,8 @@
   <string name="pref_triple_shot_summary">Звуковой сингал при получении нескольких одинаковых замеров между пикетами.</string>
   <string name="pref_connect_feedback_title">Сигнал подключения</string>
   <string name="pref_connect_feedback_summary">Сигнал при подключении устройства</string>
-  <!-- TODO string name="pref_unnamed_device_title">Unnamed devices</string -->
-  <!-- TODO string name="pref_unnamed_device_summary">Enable menu to enter device name</string -->
+  <string name="pref_unnamed_device_title">Безымянное устройство</string>
+  <string name="pref_unnamed_device_summary">Включить меню для ввода имени устройства</string>
   <string name="pref_station_prefix_title">Экспортировать пикеты с префиксом </string>
   <string name="pref_station_prefix_summary">Добавлять префикс к номерам пикетов при экспорте в формат [Compass]</string>
   <string name="pref_compass_splays_title">Сплеи в Compass</string>
