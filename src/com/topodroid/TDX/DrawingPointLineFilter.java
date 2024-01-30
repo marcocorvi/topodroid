@@ -11,8 +11,8 @@
  */
 package com.topodroid.TDX;
 
+// import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 
 import com.topodroid.math.Point2D;
@@ -99,7 +99,7 @@ class DrawingPointLineFilter
 
     ArrayList< Point2D > points = weeder.simplify( dist, len );
     int k0 = points.size();
-    TDLog.v( " Weeding " + cnt + " -> " + k0 );
+    // TDLog.v( " Weeding " + cnt + " -> " + k0 );
     if ( k0 <= 1 ) return false;
     Point2D p0 = points.get(0);
     path.addStartPoint( p0.x, p0.y );
@@ -126,8 +126,8 @@ class DrawingPointLineFilter
     mBezierInterpolator.fitCurve( pts, pts.size(), TDSetting.mLineAccuracy, TDSetting.mLineCorner );
     ArrayList< BezierCurve > curves = mBezierInterpolator.getCurves();
     int k0 = curves.size();
-    TDLog.v( " Bezier " +  pts.size() + " -> " + k0 );
-    if ( k0 <= 1 ) return false;
+    // TDLog.v( " Bezier " +  pts.size() + " -> " + k0 );
+    if ( k0 < 1 ) return false; // 20240129 with <= short bezier made of just one piece are discarded
     BezierCurve c = curves.get(0);
     Point2D p0 = c.getPoint(0);
     path.addStartPoint( p0.x, p0.y );

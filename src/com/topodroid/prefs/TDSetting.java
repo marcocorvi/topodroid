@@ -241,6 +241,7 @@ public class TDSetting
   public static boolean mExportStationsPrefix = false;  // whether to prepend cave name to station in cSurvey/compass export
   public static boolean mZipWithSymbols       = false;  // whether to add/load symbols to/from archive
   public static boolean mZipShare             = false;  // whether to share exported zip
+  public static boolean mZipShareCategory     = false;  // DISTOX_ZIP_SHARE_CATEGORY
 
   // ------------ THERION
   public static final float THERION_SCALE = 196.8503937f; // 200 * 39.3700787402 / 40;
@@ -1114,6 +1115,8 @@ public class TDSetting
     mImportDatamode = tryInt(   prefs,  keyGeekImport[ 1],      defGeekImport[ 1] );  // DISTOX_IMPORT_DATAMODE
     mAutoXSections  = prefs.getBoolean( keyGeekImport[ 2], bool(defGeekImport[ 2]) ); // DISTOX_AUTO_XSECTIONS
     mAutoStations   = prefs.getBoolean( keyGeekImport[ 3], bool(defGeekImport[ 3]) ); // DISTOX_AUTO_STATIONS
+    mLRUDcount      = prefs.getBoolean( keyGeekImport[ 4], bool(defGeekImport[ 4]) ); // DISTOX_LRUD_COUNT
+    mZipShareCategory = prefs.getBoolean( keyGeekImport[ 5], bool(defGeekImport[ 5]) ); // DISTOX_ZIP_SHARE_CATEGORY
     // mAutoExportPlotFormat = tryInt( prefs,  keyGeekImport[ 4],      defGeekImport[ 4] );  // DISTOX_AUTO_PLOT_EXPORT choice: ...
     // mExportTcsx     = prefs.getBoolean(     keyGeekImport[ 2], bool(defGeekImport[ 2]) ); // DISTOX_TRANSFER_CSURVEY
     // TDLog.v("SETTING load secondary GEEK import done");
@@ -2093,6 +2096,8 @@ public class TDSetting
       mAutoStations = tryBooleanValue( hlp, k, v, bool(def[ 3]) ); 
     } else if ( k.equals( key[ 4 ] ) ) {        // DISTOX_LRUD_COUNT
       mLRUDcount = tryBooleanValue( hlp, k, v, bool(def[ 4]) );
+    } else if ( k.equals( key[ 5 ] ) ) {        // DISTOX_ZIP_SHARE_CATEGORY
+      mZipShareCategory = tryBooleanValue( hlp, k, v, bool(def[ 5]) );
     // } else if ( k.equals( key[ 4 ] ) ) {        // DISTOX_AUTO_PLOT_EXPORT moved to EXPORT
     //   mAutoExportPlotFormat = tryIntValue( hlp, k, v, def[ 4] );
     // } else if ( k.equals( key[ 2 ] ) ) {        // DISTOX_TRANSFER_CSURVEY
@@ -3214,7 +3219,7 @@ public class TDSetting
       pw.printf(Locale.US, "L/R extend %c BlunderShot %c SplayStation %c SplayGroup %c\n", tf(mLRExtend), tf(mBlunderShot), tf(mSplayStation), tf(mSplayOnlyForward) ); 
       pw.printf(Locale.US, "U/D vertical %.1f L/R horizontal %.1f count $c\n", mLRUDvertical, mLRUDhorizontal, tf(mLRUDcount) );
 
-      pw.printf(Locale.US, "Geek Import - data mode %d, zipped symbols %c\n", mImportDatamode, tf( mZipWithSymbols) ); //  tf(mExportTcsx) );
+      pw.printf(Locale.US, "Geek Import - data mode %d, zipped symbols %c category %c\n", mImportDatamode, tf( mZipWithSymbols), tf( mZipShareCategory ) ); //  tf(mExportTcsx) ); DISTOX_ZIP_SHARE_CATEGORY
       pw.printf(Locale.US, "Timer: wait %d, volume %d\n", mTimerWait, mBeepVolume );
       pw.printf(Locale.US, "Recent data %c, timeout %d\n", tf(mShotRecent), mRecentTimeout );
       pw.printf(Locale.US, "Leg: closeness %.2f, nr %d, triple-shot %d, max %.2f, min %.2f\n",
@@ -3763,6 +3768,9 @@ public class TDSetting
           if ( vals.length > 8 ) {
             mImportDatamode = getInt( vals, 5, 0 ); setPreference( editor, "DISTOX_IMPORT_DATAMODE", mImportDatamode );
             mZipWithSymbols = getBoolean( vals, 8 ); setPreference( editor, "DISTOX_ZIP_WITH_SYMBOLS", mZipWithSymbols );
+            if ( vals.length > 10 ) {
+              mZipShareCategory = getBoolean( vals, 10 ); setPreference( editor, "DISTOX_ZIP_SHARE_CATEGORY", mZipShareCategory ); // DISTOX_ZIP_SHARE_CATEGORY
+            }
           }
           continue;
         }

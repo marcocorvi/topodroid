@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyColorPicker;
@@ -240,6 +240,7 @@ class MultishotDialog extends MyDialog
           flag |= DBlock.FLAG_NO_PROFILE;
         }
         mParent.updateSplaysLegType( mBlks, leg_type, flag );
+        // TDLog.v("FLAG " + flag );
       }
     } else if ( mBedding > 0 && b == mButtonBedding ) {
       // if ( mBedding > 1 ) { // warning toast

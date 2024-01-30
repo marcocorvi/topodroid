@@ -234,7 +234,7 @@ debe ajustarlos a sus necesidades./n/n </string>
 
     <string name="calib_import_title">Importar calibración</string>
     <string name="import_title">Importar archivo</string>
-    <string name="export_data_title">Exportación de datos</string>
+    <!-- UNUSED string name="export_data_title">Exportación de datos</string -->
     <!-- UNUSED string name="export_plot_title">Exportación de croquis</string -->
     <!-- UNUSED string name="export_overview_title">Exportación de todo</string -->
     <string name="export_model_title">Exportar modelo 3D</string>

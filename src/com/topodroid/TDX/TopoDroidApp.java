@@ -93,7 +93,7 @@ import android.app.Application;
 import android.content.Context;
 // import android.content.pm.ActivityInfo;
 import android.content.Intent;
-// import android.content.ActivityNotFoundException;
+import android.content.ActivityNotFoundException;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.content.res.Configuration;
@@ -3112,11 +3112,18 @@ public class TopoDroidApp extends Application
 
     Intent intent = new Intent( );
     intent.setAction( Intent.ACTION_SEND );
+    if ( TDSetting.mZipShareCategory ) { // DISTOX_ZIP_SHARE_CATEGORY
+      intent.addCategory( "com.topodroid.TDX.CATEGORY_SURVEY" );
+    }
     intent.putExtra( Intent.EXTRA_STREAM, uri );
     intent.setType( "application/zip" );
     intent.addFlags( Intent.FLAG_GRANT_READ_URI_PERMISSION );
-    mSurveyWindow.startActivity( intent );
-    // mSurveyWindow.startActivity( Intent.createChooser( intent, null ) );
+    try {
+      mSurveyWindow.startActivity( intent );
+      // mSurveyWindow.startActivity( Intent.createChooser( intent, "chooser title" ) );
+    } catch ( ActivityNotFoundException e ) {
+      TDToast.makeWarn( R.string.zip_share_failed );
+    }
   }
 
   // called by zip archiver to export survey data before zip archive if TDSetting.mExportShotFormat >= 0

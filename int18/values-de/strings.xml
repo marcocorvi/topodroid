@@ -203,7 +203,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="gettingble_info">DistoX-BLE wird abgefragt&#8230;</string>
   <string name="calib_import_title">Kalibrierung importieren</string>
   <string name="import_title">Daten Importieren</string>
-  <string name="export_data_title">Datenexport</string>
+  <!-- UNUSED string name="export_data_title">Datenexport</string -->
   <!-- UNUSED string name="export_plot_title">Skizzenexport</string -->
   <!-- UNUSED string name="export_overview_title">Übersichtexport</string -->
   <string name="export_model_title">3D-Modell Export</string>

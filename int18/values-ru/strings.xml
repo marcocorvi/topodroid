@@ -227,7 +227,7 @@
 
     <string name="calib_import_title">Импорт калибровки</string>
     <string name="import_title">Импорт файла</string>
-    <string name="export_data_title">Экспорт данных</string>
+    <!-- UNUSED string name="export_data_title">Экспорт данных</string -->
     <!-- UNUSED string name="export_plot_title">Экспорт абрисов</string -->
     <!-- UNUSED string name="export_overview_title">Экспорт страницы обзора</string -->
     <string name="export_model_title">Экспорт 3D модели</string>

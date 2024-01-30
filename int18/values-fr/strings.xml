@@ -234,7 +234,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 
     <string name="calib_import_title">Import de l\'étalonnage</string>
     <string name="import_title">Import fichier</string>
-    <string name="export_data_title">Exportation de données</string>
+    <!-- UNUSED string name="export_data_title">Exportation de données</string -->
     <!-- UNUSED string name="export_plot_title">Sketch export</string -->
     <!-- UNUSED string name="export_overview_title">Overview export</string -->
     <string name="export_model_title">Exportation de modèle 3D</string>

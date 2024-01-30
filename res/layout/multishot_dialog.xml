@@ -150,12 +150,12 @@
             android:layout_height="wrap_content" 
 	    android:text="@string/display_view"
             />
-      <CheckBox android:id="@+id/rb_noprofile"
+      <CheckBox android:id="@+id/rb_noplan"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
 	    android:text="@string/plan_view"
             />
-      <CheckBox android:id="@+id/rb_noplan"
+      <CheckBox android:id="@+id/rb_noprofile"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
 	    android:text="@string/profile_view"

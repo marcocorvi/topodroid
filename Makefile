@@ -189,3 +189,5 @@ version:
 archive:
 	tar -chvzf ../topodroid-`date -I`.tgz --exclude-vcs $(SRC)
 
+release-archive:
+	tar -chvzf ../topodroidX-`date -I`.tgz --exclude-vcs $(SRC) $(APPVERSION)-$(TARGET_SDK).apk

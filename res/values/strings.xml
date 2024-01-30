@@ -698,6 +698,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="write_ok">Written calibration to DistoX</string>
     <string name="zip_saved">Saved zip archive</string>
     <string name="zip_failed">Failed survey-zip</string>
+    <string name="zip_share_failed">Unable to share zip-archive</string>
     <string name="unzip_fail">Failed survey-unzip</string>
     <string name="unzip_fail_sqlite">Failed SQL: delete survey and retry</string>
     <string name="unzip_fail_survey">Failed: survey name mismatch</string>
@@ -1500,6 +1501,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_csv_eol_summary">CSV records separator</string>
   <string name="pref_gpx_single_track_title">GPX single track</string>
   <string name="pref_gpx_single_track_summary">Export project surveys as a single GPX track</string>
+  <string name="pref_zip_share_category_title">Zip-share category</string>
+  <string name="pref_zip_share_category_summary">Add category to zip-share request</string>
 
   <string name="pref_sock_type_title" copyable="fr it">Socket</string>
   <string name="pref_sock_type_summary">Bluetooth socket type</string>

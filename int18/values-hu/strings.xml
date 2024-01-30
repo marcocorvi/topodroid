@@ -228,7 +228,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
 
     <string name="calib_import_title">Kalibráció importálása</string>
     <string name="import_title">Felmérés importálása</string>
-    <string name="export_data_title">Adat export</string>
+    <!-- UNUSED string name="export_data_title">Adat export</string -->
     <!-- UNUSED string name="export_plot_title">Vázlat export</string -->
     <!-- UNUSED string name="export_overview_title">Áttekintő export</string -->
     <string name="export_model_title">3D modell export</string>

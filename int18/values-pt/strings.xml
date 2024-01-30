@@ -213,7 +213,7 @@ no campo abaixo e aperte o botão.
   <string name="gettingble_info">Obtendo info DistoX-BLE …</string>
   <string name="calib_import_title">Importar calibração</string>
   <string name="import_title">Importar topo</string>
-  <string name="export_data_title">Exportar dados</string>
+  <!-- UNUSED string name="export_data_title">Exportar dados</string -->
   <!-- UNUSED string name="export_plot_title">Exportar croqui</string -->
   <!-- UNUSED string name="export_overview_title">Exportar visão geral</string -->
   <string name="export_model_title">Exportar modelo 3D</string>

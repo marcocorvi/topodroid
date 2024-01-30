@@ -225,7 +225,7 @@
 
     <string name="calib_import_title">Importa calibrazione</string>
     <string name="import_title">Importazione file</string>
-    <string name="export_data_title">File esportazione dati</string>
+    <!-- UNUSED string name="export_data_title">File esportazione dati</string -->
     <!-- UNUSED string name="export_plot_title">File esportazione disegno</string -->
     <!-- UNUSED string name="export_overview_title">File esportazione panoramica</string -->
     <string name="export_model_title">Esporta modello 3D</string>

@@ -30,8 +30,8 @@ import com.topodroid.num.NumSplay;
 // import com.topodroid.mag.Geodetic;
 import com.topodroid.math.TDVector;
 import com.topodroid.math.Point2D;
-import com.topodroid.math.BezierCurve;
-import com.topodroid.math.BezierInterpolator;
+// import com.topodroid.math.BezierCurve;
+// import com.topodroid.math.BezierInterpolator;
 // import com.topodroid.dln.DLNWall;
 // import com.topodroid.dln.DLNSide;
 // import com.topodroid.dln.DLNSite;
@@ -494,7 +494,7 @@ public class DrawingWindow extends ItemDrawer
   private String mSectionName;
   private String mMoveTo; // station of highlighted splay
 
-  private static BezierInterpolator mBezierInterpolator = new BezierInterpolator();
+  // private static BezierInterpolator mBezierInterpolator = new BezierInterpolator();
   private DrawingSurface  mDrawingSurface;
   private DrawingLinePath mCurrentLinePath;
   private DrawingLinePath mLastLinePath = null;
@@ -2148,13 +2148,13 @@ public class DrawingWindow extends ItemDrawer
         mRetraceLine = ! mRetraceLine;
         setButton2( BTN_TOOL, mRetraceLine? mBMtoolsLineCont : mBMtoolsLine );
         setButtonJoinLine( mJoinLine, true );
-        TDLog.v("Toggle RETRACE: mRetraceLine -> " + mRetraceLine );
+        // TDLog.v("Toggle RETRACE: mRetraceLine -> " + mRetraceLine );
         break; 
       case SymbolType.AREA:
         mRetraceArea = ! mRetraceArea;
         setButton2( BTN_TOOL, mRetraceArea? mBMtoolsAreaCont : mBMtoolsArea );
         // setButtonJoinArea( mJoinArea ); // not necessary
-        TDLog.v("Toggle RETRACE: mRetraceArea -> " + mRetraceArea );
+        // TDLog.v("Toggle RETRACE: mRetraceArea -> " + mRetraceArea );
         break; 
     }
   }
@@ -4382,7 +4382,7 @@ public class DrawingWindow extends ItemDrawer
    * @param ap2    is used to get the area to extend - initialized to the current areapath
    * @return true if the area ap1 has been added to the sketch
    */
-  private boolean tryAndJoin( DrawingAreaPath ap1, DrawingAreaPath ap2 )
+  private boolean tryAndJoinArea( DrawingAreaPath ap1, DrawingAreaPath ap2 )
   {
     if ( ! mRetraceArea ) return false;
     if ( ! TDLevel.overTester && TDSetting.isLineStyleComplex() ) return false; // FIXME ONLY DEBUG
@@ -4398,19 +4398,20 @@ public class DrawingWindow extends ItemDrawer
    * @param lp2    is used to get the line to extend - initialized to the current linepath
    * @return true if the line lp1 has been added to the sketch
    */
-  private boolean tryAndJoin( DrawingLinePath lp1, DrawingLinePath lp2 )
+  private boolean tryAndJoinLine( DrawingLinePath lp1, DrawingLinePath lp2 )
   {
-    if ( mRetraceLine ) return tryAndRetrace( lp1, lp2 );
+    if ( mRetraceLine ) return tryAndRetraceLine( lp1, lp2 );
     if ( TDSetting.mWithLineJoin && mJoinLine > JOIN_NONE ) {
-      if ( tryAndContinue( lp1, lp2 ) ) {
-        addLine( lp1 );
-      }
-      return true; // nothing to add
+      // if ( tryAndContinueLine( lp1, lp2 ) ) {
+      //   addLine( lp1 );
+      // }
+      // return true; // nothing to add
+      tryAndContinueLine( lp1, lp2 );
     }
     return false;
   }
 
-  private boolean tryAndRetrace( DrawingLinePath lp1, DrawingLinePath lp2 )
+  private boolean tryAndRetraceLine( DrawingLinePath lp1, DrawingLinePath lp2 )
   {
     // if ( ! mRetraceLine ) return false;
     if ( ! TDLevel.overTester && TDSetting.isLineStyleComplex() ) return false; // FIXME ONLY DEBUG
@@ -4429,7 +4430,7 @@ public class DrawingWindow extends ItemDrawer
    * @param lp2    is used to get the line to join/continue - initialized to the current linepath
    * @return true is the line lp1 must be added to the sketch
    */
-  private boolean tryAndContinue( DrawingLinePath lp1, DrawingLinePath lp2 )
+  private boolean tryAndContinueLine( DrawingLinePath lp1, DrawingLinePath lp2 )
   {
     // if ( mJoinLine <= JOIN_NONE ) return true;
     if ( lp1 == null ) return false;
@@ -4607,7 +4608,7 @@ public class DrawingWindow extends ItemDrawer
     } else if (action == MotionEvent.ACTION_UP) { // ----------------------------------- UP
       return onTouchUp( x_canvas, y_canvas, x_scene, y_scene );
     } else {
-      TDLog.v("on touch - unhandled action " + action );
+      TDLog.e("on touch - unhandled action " + action );
     }
     return true;
   }
@@ -4686,7 +4687,7 @@ public class DrawingWindow extends ItemDrawer
               } else {
                 boolean add = true;
                 if ( mSymbol == SymbolType.LINE ) {
-                  if ( ! tryAndJoin( mCurrentLinePath, mCurrentLinePath ) ) {
+                  if ( ! tryAndJoinLine( mCurrentLinePath, mCurrentLinePath ) ) {
                     DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine, mDrawingSurface.scrapIndex() );
                     lp1.setOptions( BrushManager.getLineDefaultOptions( mCurrentLine ) );
                     if ( BrushManager.isLineStraight( mCurrentLine ) ) {
@@ -4728,7 +4729,7 @@ public class DrawingWindow extends ItemDrawer
                   }
                   mCurrentLinePath = null;
                 } else { // if ( mSymbol == SymbolType.AREA )
-                  if ( ! tryAndJoin( mCurrentAreaPath, mCurrentAreaPath ) ) {
+                  if ( ! tryAndJoinArea( mCurrentAreaPath, mCurrentAreaPath ) ) {
                     DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", TDSetting.mAreaBorder, mDrawingSurface.scrapIndex() ); 
                     ap.setOptions( BrushManager.getAreaDefaultOptions( mCurrentArea ) );
                     if ( TDSetting.isLineStyleBezier() ) {
