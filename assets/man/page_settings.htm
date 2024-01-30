@@ -161,6 +161,7 @@ Custom Import/Export settings
 <li>Insert X-Sections in sketch exports</li>
 <li>Include stations in sketch exports</li>
 <li>LRUD count: number of splays used for LRUD [default false]</li>
+<li>Categorized zip-share [default false]</li> 
 </ul><br>
 If LRUD count is false all splays (within tolerances) are used to compute LRUD. The transverse
 dimension is set to the maximum value of the splay projections on the horizontal or vertical axes.
@@ -169,7 +170,10 @@ If LRUD count is true only the first four splays that satisfy the tolerances are
 splay is used only for the vertical or the horizontal dimensions. Each dimension is set to the
 value of the first acceptable splay. A dimension can be left with value zero by shooting a splay
 in a direction already set.<br>
-By default the tolerances are very permissive: 0&deg; for vertical directions and 90&deg; for horizontal.
+By default the tolerances are very permissive: 0&deg; for vertical directions and 90&deg; for horizontal.<br><p>
+
+If zip archive sharing is categorized only app that handle sharing with category "com.topodroid.TDX.CATEGORY_SURVEY"
+are considered for sharing. If there is no app that can handle sharing, the action fails.<br>
 </div><br><p>
 
 <!-- ========================================== -->

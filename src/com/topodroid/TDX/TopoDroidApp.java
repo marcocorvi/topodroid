@@ -3112,7 +3112,7 @@ public class TopoDroidApp extends Application
 
     Intent intent = new Intent( );
     intent.setAction( Intent.ACTION_SEND );
-    if ( TDSetting.mZipShareCategory ) { // DISTOX_ZIP_SHARE_CATEGORY
+    if ( TDLevel.overExpert && TDSetting.mZipShareCategory ) { // DISTOX_ZIP_SHARE_CATEGORY
       intent.addCategory( "com.topodroid.TDX.CATEGORY_SURVEY" );
     }
     intent.putExtra( Intent.EXTRA_STREAM, uri );
