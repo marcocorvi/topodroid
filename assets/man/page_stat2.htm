@@ -5,7 +5,6 @@
 This dialog is opened from the <i>Stats</i> menu of the <u>Drawing window</u> (plan or profile view).
 It displays both data-reduction statistics and sketch related statistics.<br><p>
 
-
 The data-reduction statistics are
 <ul>
 <li>number of (regular) legs, sketch legs, their total, profile, and plan lengths</li>
@@ -27,8 +26,8 @@ Other sketch related statistics are
 <li>profile-view (3D) midline length</li>
 <li>plan-view midline length</li>
 <li>the sketch extension (West, East, North and South)</li>
-<li>the sketch denivelations, both positive (above the origin) and negative (below the origin)</li>
-<li>the survey data vertical denivelation form the sketch origin</li>
+<li>the sketch denivelations, both positive and negative, relative to the sketch center</li>
+<li>the cave denivelation relative to the sketch origin</li>
 <li>average angle error between shots of the same leg [degrees]</li>
 <li>the number of loops, those used in closure compensation and those not used</li>
 </ul>
@@ -46,8 +45,13 @@ The result, in radians, is converted to degrees. </li>
 </ul>
 <br><p>
 
+Tapping on the loop closure entry switches the text between the closure error, and the list of loop stations.<br><p> 
+
 Length are in the units set in the app settings.<br><p>
 
-Tapping on the loop closure entry switches the text between the closure error, and the list of loop stations.<br><p> 
+<b>Denivelations</b><br>
+The sketch center is the sketch origin, unless the sketch is recentered.<br><p>
+The cave denivelation includes the survey data that are not "surface", "duplicate", or "commented".
+It includes the splays, therefore if you have taken "surface" splays you need to mark them as "surface".<br><p>
 
 </body></html>

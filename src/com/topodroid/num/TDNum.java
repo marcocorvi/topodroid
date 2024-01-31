@@ -245,6 +245,14 @@ public class TDNum
     }
   }
 
+  /** update vertical stats - for splays
+   * @param v   vertical coord of splay endpoimt
+   */
+  private void addToVStats( double v )
+  {
+    if ( v > mVmaxSurvey ) { mVmaxSurvey = v; } else if ( v < mVminSurvey ) { mVminSurvey = v; }
+  }
+
   /** add station Z to stats
    * @param ns station
    * @param reduction_type station reduction type
@@ -254,7 +262,8 @@ public class TDNum
     double v = ns.v;
     switch ( reduction_type ) { 
       case NumStation.STATION_SURVEY:
-        if ( v > mVmaxSurvey ) { mVmaxSurvey = v; } else if ( v < mVminSurvey ) { mVminSurvey = v; }
+        addToVStats( v );
+        // if ( v > mVmaxSurvey ) { mVmaxSurvey = v; } else if ( v < mVminSurvey ) { mVminSurvey = v; }
         break;
       // case NumStation.STATION_SURFACE:
       //   if ( v > mVmaxSurface ) { mVmaxSurface = v; } else if ( v < mVminSurface ) { mVminSurface = v; }
@@ -1299,7 +1308,10 @@ public class TDNum
     NumStation st = getStation( ts.from );
     if ( st != null ) {
       float cosine = st.computeExtend( ts.b( mDecl ), ts.extend );
-      mSplays.add( new NumSplay( st, ts.d(), ts.b( 0 ), ts.c(), cosine, ts.block, mDecl ) );
+      NumSplay splay = new NumSplay( st, ts.d(), ts.b( 0 ), ts.c(), cosine, ts.block, mDecl );
+      mSplays.add( splay );
+      TDLog.v("SPLAY " + ts.block.mId + " flag " + splay.getReducedFlag() + " v " + splay.v );
+      if ( splay.getReducedFlag() == 0 ) addToVStats( splay.v ); // skip DUPLICATE SURFACE COMMENTED
       return true;
     }
     return false;
