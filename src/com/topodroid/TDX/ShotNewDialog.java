@@ -209,6 +209,7 @@ class ShotNewDialog extends MyDialog
     if ( mAt < 0 ) {
       // prev blk is the last leg block of the survey
       if ( mPrevBlk != null ) {
+        // TDLog.v("SHOT NEW prev block " + mPrevBlk.mId );
         if ( StationPolicy.isSurveyForward() ) { // if ( StationPolicy.mSurveyStations == 1 ) FIXME_POLICY
           if ( mPrevBlk.mTo != null && mPrevBlk.mTo.length() > 0 ) {
             mETfrom.setText( mPrevBlk.mTo );
@@ -225,7 +226,13 @@ class ShotNewDialog extends MyDialog
           }
         }
       } else {
-        if ( StationPolicy.isSurveyForward() ) { // if ( StationPolicy.mSurveyStations == 1 ) FIXME_POLICY
+        // TDLog.v("SHOT NEW prev block null");
+        if ( StationPolicy.doTopoRobot() ) {
+          DistoXStationName.mInitialStation = "1.0";
+          DistoXStationName.mSecondStation  = "1.1";
+          mETfrom.setText( DistoXStationName.mInitialStation );
+          mETto.setText( DistoXStationName.mSecondStation );
+        } else if ( StationPolicy.isSurveyForward() ) { // if ( StationPolicy.mSurveyStations == 1 ) FIXME_POLICY
           mETfrom.setText( DistoXStationName.mInitialStation );
           mETto.setText( DistoXStationName.mSecondStation );
         } else {
