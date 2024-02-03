@@ -84,7 +84,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
         TDLog.Error( e.getMessage() );
       }
     }
-    TDLog.v("AREA " + id + " count " + mPrefix + " " + mAreaCnt );
+    // TDLog.v("AREA " + id + " count " + mPrefix + " " + mAreaCnt );
     if ( BrushManager.hasArea( mAreaType ) ) { 
       setPathPaint( BrushManager.getAreaPaint( mAreaType ) );
     // } else {
@@ -106,7 +106,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
     mAreaType = type;
     mAreaCnt  = cnt;
     mPrefix   = (prefix != null && prefix.length() > 0)? prefix : "a";
-    TDLog.v("AREA " + prefix + " count " + cnt );
+    // TDLog.v("AREA " + prefix + " count " + cnt );
     if ( BrushManager.hasArea( mAreaType ) ) { 
       setPathPaint( BrushManager.getAreaPaint( mAreaType ) );
     // } else {
@@ -137,7 +137,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
       int pos = id.lastIndexOf("a") + 1;
       mPrefix  = id.substring(0, pos);
       mAreaCnt = Integer.parseInt( id.substring(pos) );
-      TDLog.v("AREA id <" + id + "> prefix " + mPrefix + " count " + mAreaCnt );
+      // TDLog.v("AREA id <" + id + "> prefix " + mPrefix + " count " + mAreaCnt );
     } catch ( NumberFormatException e ) {
       TDLog.Error( "Drawing Area Path AreaCnt parse int error: " + id.substring(1) );
     }

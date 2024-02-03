@@ -5646,7 +5646,7 @@ public class DataHelper extends DataSetObservable
        if (cursor.moveToFirst()) {
          do {
            pw.format(Locale.US,
-                     "INSERT into %s values( %d, %d, \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %d, %d, %d, %d, \"%s\", %d, %d, %d, %.2f, \"%s\", %d, %d, %d, %d, %d, %d );\n",
+                     "INSERT into %s values( %d, %d, \"%s\", \"%s\", %.3f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %d, %d, %d, %d, \"%s\", %d, %d, %d, %.2f, \"%s\", %d, %d, %d, %d, %d, %d );\n",
                      SHOT_TABLE,
                      sid,
                      cursor.getLong(0),
@@ -5680,6 +5680,8 @@ public class DataHelper extends DataSetObservable
        }
        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
+       // "id", "station", "longitude", "latitude", "altitude", "altimetric", "comment", "status", "source",
+       // "cs_name", "cs_longitude", "cs_latitude", "cs_altitude", "cs_decimals", "convergence", "accuracy", "accuracy_v", "m_to_units", "m_to_vunits"
        cursor = myDB.query( FIXED_TABLE, 
                   mFixedFields,
                   "surveyId=?", new String[] { Long.toString( sid ) },
@@ -5687,7 +5689,7 @@ public class DataHelper extends DataSetObservable
        if (cursor.moveToFirst()) {
          do { // values in the order of the fields of the table
            pw.format(Locale.US,
-             "INSERT into %s values( %d, %d, \"%s\", %.6f, %.6f, %.2f, %.2f \"%s\", %d, %d, \"%s\", %.6f, %.6f, %.1f, %d, %d, %.4f, %.1f, %.1f, %.6f );\n",
+             "INSERT into %s values( %d, %d, \"%s\", %.7f, %.7f, %.2f, %.2f \"%s\", %d, %d, \"%s\", %.7f, %.7f, %.1f, %d, %d, %.4f, %.1f, %.1f, %.6f );\n",
              FIXED_TABLE,
              sid,
              cursor.getLong(0),

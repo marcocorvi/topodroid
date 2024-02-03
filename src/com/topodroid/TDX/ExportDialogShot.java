@@ -89,6 +89,7 @@ public class ExportDialogShot extends MyDialog
     mDiving   = diving;
     mExportPrefix = null;
     mExportName   = null;
+    // TDLog.v("EXPORT SHOT " + survey + " Types " + types.length + " diving " + diving );
   }
 
 // -------------------------------------------------------------------
@@ -166,12 +167,12 @@ public class ExportDialogShot extends MyDialog
   public void onItemSelected( AdapterView av, View v, int pos, long id ) 
   {
     int ppos = TDConst.surveyIndex( pos );
-    TDLog.v( "EXPORT ppos " + ppos );
+    // TDLog.v( "EXPORT ppos " + ppos );
     if ( ppos < 0 ) return;
     mSelected = TDConst.mSurveyExportTypes[ ppos ];
     mSelectedPos = ppos;
     updateLayouts();
-    TDLog.v( "EXPORT ppos " + ppos + " " + mSelected );
+    // TDLog.v( "EXPORT ppos " + ppos + " " + mSelected );
   }
 
   /** react to a deselection
@@ -193,7 +194,7 @@ public class ExportDialogShot extends MyDialog
   {
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
-      TDLog.v("Survey format selected " + mSelected + " " + TDConst.mSurveyExportIndex[ mSelectedPos ] );
+      // TDLog.v("Survey format selected " + mSelected + " " + TDConst.mSurveyExportIndex[ mSelectedPos ] );
       if ( ! setOptions() ) return;
       int selected_pos = ( mSelectedPos == TDConst.SURVEY_POS_VTOPO && TDSetting.mVTopoTrox )? -mSelectedPos : mSelectedPos;
       if ( mExportName != null ) {
@@ -306,7 +307,7 @@ public class ExportDialogShot extends MyDialog
           }
         }
         export_name = sb.toString();
-        TDLog.v( "export name " + export_name + " ok " + ok );
+        // TDLog.v( "export name " + export_name + " ok " + ok );
         if ( ! ok ) {
           view.setError( mContext.getResources().getString( R.string.error_bad_name ) );
           view.setText( export_name );

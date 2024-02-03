@@ -354,7 +354,7 @@ public class SurveyWindow extends Activity
   private void setButtonPhoto( int nr_photo )
   {
     if ( TDLevel.overNormal ) {
-      TDLog.v("nr photo " + nr_photo );
+      // TDLog.v("nr photo " + nr_photo );
       if ( nr_photo == 0 ) {
         TDandroid.setButtonBackground( mButton1[ BTN_PHOTO ], mBMpicture_no );
         mButton1[ BTN_PHOTO ].setOnClickListener( null );
@@ -531,7 +531,7 @@ public class SurveyWindow extends Activity
    */
   private boolean saveSurvey( boolean check_team )
   {
-    TDLog.v("Save warn " + mWarnTeam + " check " + check_team );
+    // TDLog.v("Save warn " + mWarnTeam + " check " + check_team );
     // String name = mTextName.getText().toString(); // RENAME is special
     // if ( name == null || name.length == 0 ) {
     // }

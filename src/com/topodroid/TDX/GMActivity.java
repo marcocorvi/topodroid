@@ -256,7 +256,7 @@ public class GMActivity extends Activity
       case CalibInfo.ALGO_AUTO:
         { // 2024-01-15 added
           int algo = mApp.getCalibAlgoFromDevice();
-          TDLog.v("GM algo --> " + algo );
+          // TDLog.v("GM algo --> " + algo );
           if ( algo == CalibInfo.ALGO_NON_LINEAR ) {
             mCalibration = new CalibAlgoBH( 0, true );
           } else {
@@ -700,7 +700,7 @@ public class GMActivity extends Activity
   @Override
   public void setConnectionStatus( int status )
   {
-    TDLog.v("GM set connection status: " + ConnectionState.statusStr[ status ] ); 
+    // TDLog.v("GM set connection status: " + ConnectionState.statusStr[ status ] ); 
     switch ( status ) {
       case ConnectionState.CONN_CONNECTED:
         TDandroid.setButtonBackground( mButton1[BTN_DOWNLOAD], mBMdownload_on );
@@ -1083,7 +1083,7 @@ public class GMActivity extends Activity
         // new DataDownloadTask( mApp, handler, this, DataType.DATA_CALIB ).execute();
 
         boolean downloading = mApp.mDataDownloader.toggleDownload();
-        TDLog.v("GM downloading " + downloading );
+        // TDLog.v("GM downloading " + downloading );
         // mApp.notifyListerStatus( handler, downloading ? ConnectionState.CONN_WAITING : ConnectionState.CONN_DISCONNECTED );
         mApp.mDataDownloader.doDataDownload( handler, DataType.DATA_CALIB );
 

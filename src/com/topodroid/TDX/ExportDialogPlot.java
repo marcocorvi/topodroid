@@ -363,7 +363,7 @@ public class ExportDialogPlot extends MyDialog
         break;
       case 6: // XVI
         TDSetting.mSvgSplays = ((CheckBox) findViewById( R.id.xvi_splays )).isChecked();
-        TDLog.v("SVG splays: " + TDSetting.mSvgSplays );
+        // TDLog.v("SVG splays: " + TDSetting.mSvgSplays );
         break;
     }
   }

@@ -684,7 +684,7 @@ public class OverviewWindow extends ItemDrawer
   {
     TDNum num = mNum;
     final String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
-    TDLog.v( "OVERVIEW export plot type " + mType + " with extension " + ext + " " + fullname );
+    // TDLog.v( "OVERVIEW export plot type " + mType + " with extension " + ext + " " + fullname );
     DrawingCommandManager manager = mOverviewSurface.getManager( DrawingSurface.DRAWING_OVERVIEW );
 
     // APP_OUT_DIR

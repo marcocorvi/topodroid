@@ -67,7 +67,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
                       TDNum num, DrawingCommandManager command,
                       long type, String name, String ext, boolean toast, GeoReference station )
     {
-      TDLog.v("EXPORT plot to file cstr. Type: " + type + " fullname: " + name + " ext: " + ext );
+      // TDLog.v("EXPORT plot to file cstr. Type: " + type + " fullname: " + name + " ext: " + ext );
       // FIXME assert( ext != null );
       /* if ( TDSetting.mExportUri ) */ mUri = uri; // FIXME_URI
       mFormat    = context.getResources().getString(R.string.saved_file_1);
@@ -89,7 +89,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     @Override
     protected Boolean doInBackground(Void... arg0)
     {
-      TDLog.v("EXPORT plot to file in bkgr. ext " + mExt );
+      // TDLog.v("EXPORT plot to file in bkgr. ext " + mExt );
       // String dirname = null;
       ParcelFileDescriptor pfd = null; 
       if ( mUri != null ) {
@@ -99,7 +99,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
       try {
 	String file_name = mFullName + "." + mExt; // file-name
         String file_path = TDPath.getOutFile( file_name );
-        TDLog.v("EXPORT plot to file " + file_name + " path " + file_path );
+        // TDLog.v("EXPORT plot to file " + file_name + " path " + file_path );
         boolean ret = true;
         synchronized ( TDFile.mFilesLock ) {
           // final FileOutputStream out = TDFile.getFileOutputStream( filename );
@@ -108,7 +108,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
             // FileOutputStream fos = TDsafUri.docFileOutputStream( pfd );
             String dirpath = TDPath.getShpTempRelativeDir();
             if ( dirpath != null ) {
-              TDLog.v("EXPORT shp - dir " + dirpath );
+              // TDLog.v("EXPORT shp - dir " + dirpath );
 	      DrawingShp.writeShp( fos, dirpath, mCommand, mType, mStation );
 	      // DrawingShp.writeShp( fos, mFullName, mCommand, mType, mStation );
               // TDFile.deleteDir( dirpath );

@@ -898,7 +898,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], A, def[ 4], FLOAT,  ctx, hlp ),
       makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], A, def[ 5], FLOAT,  ctx, hlp ),
       makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], E, def[ 6], FLOAT,  ctx, hlp ),
-      makeFwd( cat, key[ 7], tit[ 7],          N,                  ctx, hlp ), // ENABLE
+      makeFwd( cat, key[ 7], tit[ 7],          B,                  ctx, hlp ), // ENABLE
       makeFwd( cat, key[ 8], tit[ 8],          N,                  ctx, hlp ), // IMPORT
       makeFwd( cat, key[ 9], tit[ 9],          N,                  ctx, hlp ), // survex
       makeFwd( cat, key[10], tit[10],          N,                  ctx, hlp ), // therion
@@ -906,13 +906,13 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeFwd( cat, key[12], tit[12],          N,                  ctx, hlp ), // compass
       makeFwd( cat, key[13], tit[13],          N,                  ctx, hlp ), // visualtopo
       makeFwd( cat, key[14], tit[14],          N,                  ctx, hlp ), // walls
-      makeFwd( cat, key[15], tit[15],          T,                  ctx, hlp ), // svg
-      makeFwd( cat, key[16], tit[16],          T,                  ctx, hlp ), // shapefile
-      // makeFwd( cat, key[16], tit[16],          T,                  ctx, hlp ), // png NO_PNG
-      makeFwd( cat, key[17], tit[17],          T,                  ctx, hlp ), // dxf
-      makeFwd( cat, key[18], tit[18],          T,                  ctx, hlp ), // kml
-      makeFwd( cat, key[19], tit[19],          T,                  ctx, hlp ), // gpx
-      makeFwd( cat, key[20], tit[20],          T,                  ctx, hlp )  // cvs
+      makeFwd( cat, key[15], tit[15],          N,                  ctx, hlp ), // svg
+      makeFwd( cat, key[16], tit[16],          N,                  ctx, hlp ), // shapefile
+      // makeFwd( cat, key[16], tit[16],          N,                  ctx, hlp ), // png NO_PNG
+      makeFwd( cat, key[17], tit[17],          N,                  ctx, hlp ), // dxf
+      makeFwd( cat, key[18], tit[18],          N,                  ctx, hlp ), // kml
+      makeFwd( cat, key[19], tit[19],          N,                  ctx, hlp ), // gpx
+      makeFwd( cat, key[20], tit[20],          N,                  ctx, hlp )  // cvs
     };
   }
 
@@ -929,21 +929,21 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     // int[] dsc = TDPrefKey.EXPORT_ENABLEdesc;
     String[] def = TDPrefKey.EXPORT_ENABLEdef;
     return new TDPref[ ] {
-      makeCbx( cat, key[ 0], tit[ 0], -1, T, def[ 0], ctx, hlp ), // compass
-      makeCbx( cat, key[ 1], tit[ 1], -1, T, def[ 1], ctx, hlp ),
-      makeCbx( cat, key[ 2], tit[ 2], -1, T, def[ 2], ctx, hlp ),
-      makeCbx( cat, key[ 3], tit[ 3], -1, T, def[ 3], ctx, hlp ), // polygon
-      makeCbx( cat, key[ 4], tit[ 4], -1, T, def[ 4], ctx, hlp ),
-      makeCbx( cat, key[ 5], tit[ 5], -1, T, def[ 5], ctx, hlp ), // therion
-      makeCbx( cat, key[ 6], tit[ 6], -1, T, def[ 6], ctx, hlp ),
-      makeCbx( cat, key[ 7], tit[ 7], -1, T, def[ 7], ctx, hlp ),
-      makeCbx( cat, key[ 8], tit[ 8], -1, T, def[ 8], ctx, hlp ), // walls
-      makeCbx( cat, key[ 9], tit[ 9], -1, T, def[ 9], ctx, hlp ),
-      makeCbx( cat, key[10], tit[10], -1, T, def[10], ctx, hlp ), // csv
-      makeCbx( cat, key[11], tit[11], -1, T, def[11], ctx, hlp ),
-      makeCbx( cat, key[12], tit[12], -1, T, def[12], ctx, hlp ), // kml
-      makeCbx( cat, key[13], tit[13], -1, T, def[13], ctx, hlp ),
-      makeCbx( cat, key[14], tit[14], -1, T, def[14], ctx, hlp ), // shapefile
+      makeCbx( cat, key[ 0], tit[ 0], -1, B, def[ 0], ctx, hlp ), // compass
+      makeCbx( cat, key[ 1], tit[ 1], -1, B, def[ 1], ctx, hlp ),
+      makeCbx( cat, key[ 2], tit[ 2], -1, B, def[ 2], ctx, hlp ),
+      makeCbx( cat, key[ 3], tit[ 3], -1, B, def[ 3], ctx, hlp ), // polygon
+      makeCbx( cat, key[ 4], tit[ 4], -1, B, def[ 4], ctx, hlp ),
+      makeCbx( cat, key[ 5], tit[ 5], -1, B, def[ 5], ctx, hlp ), // therion
+      makeCbx( cat, key[ 6], tit[ 6], -1, B, def[ 6], ctx, hlp ),
+      makeCbx( cat, key[ 7], tit[ 7], -1, B, def[ 7], ctx, hlp ),
+      makeCbx( cat, key[ 8], tit[ 8], -1, B, def[ 8], ctx, hlp ), // walls
+      makeCbx( cat, key[ 9], tit[ 9], -1, B, def[ 9], ctx, hlp ),
+      makeCbx( cat, key[10], tit[10], -1, B, def[10], ctx, hlp ), // csv
+      makeCbx( cat, key[11], tit[11], -1, B, def[11], ctx, hlp ),
+      makeCbx( cat, key[12], tit[12], -1, B, def[12], ctx, hlp ), // kml
+      makeCbx( cat, key[13], tit[13], -1, B, def[13], ctx, hlp ),
+      makeCbx( cat, key[14], tit[14], -1, B, def[14], ctx, hlp ), // shapefile
     };
   }
 

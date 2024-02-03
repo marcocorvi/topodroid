@@ -271,7 +271,7 @@ public class TDConst
   {
     int ppos = 0;
     for ( int k = 0; k < mSurveyExportTypes.length; ++k ) {
-      TDLog.v("Pos " + pos + " k " + k + " " +  mSurveyExportEnable[k] );
+      // TDLog.v("Pos " + pos + " k " + k + " " +  mSurveyExportEnable[k] );
       if ( mSurveyExportEnable[k] ) {
         if ( pos == 0 ) return ppos;
         pos --;
@@ -357,7 +357,7 @@ public class TDConst
    */
   public static String getSurveyFilename( int type, String survey )
   {
-    TDLog.v("CONST export type " + type );
+    // TDLog.v("CONST export type " + type );
     switch ( type ) {
       case SURVEY_POS_ZIP:       return survey + ".zip";
       case SURVEY_POS_COMPASS:   return survey + ".dat";

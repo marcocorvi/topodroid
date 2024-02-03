@@ -269,7 +269,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
           //   }
           //   break;
           default:
-            TDLog.v("EXPORT AUTO unknown " + mFullName + " " + TDSetting.mAutoExportPlotFormat );
+            TDLog.e("EXPORT AUTO unknown " + mFullName + " " + TDSetting.mAutoExportPlotFormat );
             break;
         }
       }

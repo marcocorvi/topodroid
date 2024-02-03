@@ -1123,7 +1123,7 @@ public class DrawingCommandManager
    */
   void setNorthLine( DrawingPath path )
   { 
-    TDLog.v("Set North line");
+    // TDLog.v("Set North line");
     synchronized( TDPath.mGridsLock ) { mNorthLine = path; }
   }
 
@@ -1165,7 +1165,7 @@ public class DrawingCommandManager
    */
   void addUserStation( DrawingStationUser path ) 
   { 
-    TDLog.v("USER STATION " + path.name() );
+    // TDLog.v("USER STATION " + path.name() );
     setCurrentScrap( path.mScrap );
     mCurrentScrap.addUserStation( path );
   }

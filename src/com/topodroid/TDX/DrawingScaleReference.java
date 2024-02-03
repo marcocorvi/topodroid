@@ -88,7 +88,7 @@ class DrawingScaleReference
     mHasDecl = (Math.abs(decl) > 0.01); 
     mSdecl = TDMath.sind( decl );
     mCdecl = TDMath.cosd( decl );
-    TDLog.v("Scale ref decl " + decl + " " + mHasDecl + " c " + mCdecl + " s " + mSdecl );
+    // TDLog.v("Scale ref decl " + decl + " " + mHasDecl + " c " + mCdecl + " s " + mSdecl );
     mLocation = loc;
     // mUnits = getUnits( TDSetting.mUnitGrid )
     // mExtendAzimuth = with_azimuth;

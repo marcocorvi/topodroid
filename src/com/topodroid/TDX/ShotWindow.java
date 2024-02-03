@@ -494,7 +494,7 @@ public class ShotWindow extends Activity
         TopoDroidApp.notifyDrawingUpdateDisplay( blk_id, ret );
       } else if ( ! StationPolicy.isSurveyBackward1() ) {
         if ( ! TDLevel.overExpert || ! TDSetting.mLegOnlyUpdate ) {
-          TDLog.v("DATA notify update drawing");
+          // TDLog.v("DATA notify update drawing");
           TopoDroidApp.notifyDrawingUpdateDisplay( blk_id, ret );
         }
       }
@@ -2026,7 +2026,7 @@ public class ShotWindow extends Activity
    */
   void doUpdateShotNameAndFlags( String from, String to, int extend, float stretch, long flag, long leg, String comment, DBlock blk )
   {
-    TDLog.v("do update name and flags " + blk.mId + " flag " + flag + " leg " + leg + " / " + blk.getLegType() );
+    // TDLog.v("do update name and flags " + blk.mId + " flag " + flag + " leg " + leg + " / " + blk.getLegType() );
     blk.setBlockName( from, to, (leg == LegType.BACK) );
     blk.setBlockType( (int)leg );
 

@@ -1036,7 +1036,7 @@ public class Scrap
               }
             }
             if ( lp10 != null && lp20 != null ) {
-              TDLog.v("FOUND P1 " + line.indexOf(lp10) + ": " + lp10.x + " " + lp10.y + " P2 " + line.indexOf(lp20) + ": " + lp20.x + " " + lp20.y );
+              // TDLog.v("FOUND P1 " + line.indexOf(lp10) + ": " + lp10.x + " " + lp10.y + " P2 " + line.indexOf(lp20) + ": " + lp20.x + " " + lp20.y );
               lq1 = resetFirst( lq1, lq2, lp10 );
               lq2 = resetLast( lq2, lq1, lp20 );
               /*{{ IF DEF_FILTER_NO_START*/
@@ -1057,21 +1057,21 @@ public class Scrap
                 }
               /*{{ END DEF FILTER_START */
               if ( lq1 != null && lq1.mNext != null && lq2 != null && lq2.mPrev != null ) {
-                TDLog.v("Q1 Q2 ok");
+                // TDLog.v("Q1 Q2 ok");
                 Point2D q1 = new Point2D( lq1.mNext.x - lq1.x, lq1.mNext.y - lq1.y );
                 Point2D q2 = new Point2D( lq2.x - lq2.mPrev.x, lq2.y - lq2.mPrev.y );
                 Point2D p1 = directionNextAt( lp10 );
                 Point2D p2 = directionPrevAt( lp20 );
                 if ( p1 != null && p2 != null ) {
                   if ( idx10 < idx20 ) { // replace forward
-                    TDLog.v("P1 and P2 ok FORWARD " + idx10 + " " + idx20 );
+                    // TDLog.v("P1 and P2 ok FORWARD " + idx10 + " " + idx20 );
                     // while ( lp10 != null && q1.dot( lq1.sub( lp10 ) ) < 0 ) lp10 = lp10.mPrev;
                     lp10 = moveBack1( lp10, q1, lq1, delta );
                     if ( lp10 != null ) {
                       while ( lp20 != null && q2.dot( lq2.sub( lp20 ) ) > 0 ) lp20 = lp20.mNext;
                       lp20 = moveForw2( lp20, q2, lq2, delta );
                       if ( lp20 != null ) {
-                        TDLog.v("P1 and P2 still ok ");
+                        // TDLog.v("P1 and P2 still ok ");
                         mSelection.removePath( line );
                         mCurrentStack.add( new RetraceCommand( line, lp10.mNext, lp20.mPrev, lq1, lq2, lp10, lp20 ) );
                         // if ( lp10.mNext != null ) lp10.mNext.mPrev = null;
@@ -1088,20 +1088,20 @@ public class Scrap
                         mSelection.insertPath( line );
                         return true;
                       } else {
-                        TDLog.v("P1 ok, P2 null");
+                        // TDLog.v("P1 ok, P2 null");
                       }
-                    } else {
-                      TDLog.v("P1 null");
+                    // } else {
+                      // TDLog.v("P1 null");
                     }
                   } else { // replace backward
-                    TDLog.v("P1 and P2 ok BACKWARD " + idx10 + " " + idx20 );
+                    // TDLog.v("P1 and P2 ok BACKWARD " + idx10 + " " + idx20 );
                     // while ( lp10 != null && q1.dot( lq1.sub( lp10 ) ) < 0 ) lp10 = lp10.mNext;
                     lp10 = moveForw1( lp10, q1, lq1, delta );
                     if ( lp10 != null ) {
                       // while ( lp20 != null && q2.dot( lq2.sub( lp20 ) ) > 0 ) lp20 = lp20.mPrev;
                       lp20 = moveBack2( lp20, q2, lq2, delta );
                       if ( lp20 != null ) {
-                        TDLog.v("P1 and P2 still ok ");
+                        // TDLog.v("P1 and P2 still ok ");
                         mSelection.removePath( line );
                         mCurrentStack.add( new RetraceCommand( line, lp20.mNext, lp10.mPrev, lq2, lq1, lp20, lp10 ) );
                         //     lp20 ...  lq2 <--> lq2p ... lq1n <--> lq1 ... lp10
@@ -1129,17 +1129,17 @@ public class Scrap
                         line.retracePath();
                         mSelection.insertPath( line );
                         return true;
-                      } else {
-                        TDLog.v("P1 ok, P2 null");
+                      // } else {
+                        // TDLog.v("P1 ok, P2 null");
                       }
-                    } else {
-                      TDLog.v("P1 null");
+                    // } else {
+                      // TDLog.v("P1 null");
                     }
                   }
                 }
               }
             } else if ( lp10 != null ) {
-              TDLog.v("FOUND P1 " + line.indexOf(lp10) + ": " + lp10.x + " " + lp10.y );
+              // TDLog.v("FOUND P1 " + line.indexOf(lp10) + ": " + lp10.x + " " + lp10.y );
               lq1 = resetFirst( lq1, lq2, lp10 );
               /*{{ IF DEF_FILTER_NO_START*/
                 if ( TDSetting.isLineStyleBezier() ) {
@@ -1159,16 +1159,16 @@ public class Scrap
                 }
               /*{{ END DEF FILTER_START */
               if ( lq1 != null && lq1.mNext != null ) {
-                TDLog.v("Q1 ok ");
+                // TDLog.v("Q1 ok ");
                 Point2D q1 = new Point2D( lq1.mNext.x - lq1.x, lq1.mNext.y - lq1.y );
                 Point2D p1 = directionNextAt( lp10 );
                 if ( p1 != null ) {
                   if ( q1.dot( p1 ) > 0 ) { // replace from P1 forward, direct Q-line
-                    TDLog.v("P1 ok : Q1.P1 " +  q1.dot( p1 ) + " FORWARD " );
+                    // TDLog.v("P1 ok : Q1.P1 " +  q1.dot( p1 ) + " FORWARD " );
                     // while ( lp10 != null && q1.dot( lq1.sub( lp10 ) ) < 0 ) lp10 = lp10.mPrev;
                     lp10 = moveBack1( lp10, q1, lq1, delta );
                     if ( lp10 != null ) {
-                      TDLog.v("pos P1 still ok");
+                      // TDLog.v("pos P1 still ok");
                       mSelection.removePath( line );
                       mCurrentStack.add( new RetraceCommand( line, lp10.mNext, line.last(), lq1, ap.last(), lp10, null ) );
                       // if ( lp10.mNext != null ) lp10.mNext.mPrev = null;
@@ -1180,15 +1180,15 @@ public class Scrap
                       line.retracePath();
                       mSelection.insertPath( line );
                       return true;
-                    } else {
-                      TDLog.v("P1 null");
+                    // } else {
+                      // TDLog.v("P1 null");
                     }
                   } else { // replace from P1 backward reversing Q-line
-                    TDLog.v("P1 ok : Q1.P1 " +  q1.dot( p1 ) + " BACKWARD " );
+                    // TDLog.v("P1 ok : Q1.P1 " +  q1.dot( p1 ) + " BACKWARD " );
                     // while ( lp10 != null && q1.dot( lq1.sub( lp10 ) ) < 0 ) lp10 = lp10.mNext;
                     lp10 = moveForw1( lp10, q1, lq1, delta );
                     if ( lp10 != null ) {
-                      TDLog.v("neg P1 still ok");
+                      // TDLog.v("neg P1 still ok");
                       mSelection.removePath( line );
                       mCurrentStack.add( new RetraceCommand( line, line.first(), lp10.mPrev, ap.last(), lq1, null, lp10 ) );
                       //             lq1n <--> lq1 ... lp10
@@ -1211,14 +1211,14 @@ public class Scrap
                       line.retracePath();
                       mSelection.insertPath( line );
                       return true;
-                    } else {
-                      TDLog.v("P1 null");
+                    // } else {
+                      // TDLog.v("P1 null");
                     }
                   }
                 }
               }
             } else if ( lp20 != null ) {
-              TDLog.v("FOUND P2 " + line.indexOf(lp20) + ": " + lp20.x + " " + lp20.y + " line size " + line.size() );
+              // TDLog.v("FOUND P2 " + line.indexOf(lp20) + ": " + lp20.x + " " + lp20.y + " line size " + line.size() );
               lq2 = resetLast( lq2, lq1, lp20 );
               /*{{ IF DEF_FILTER_NO_START*/
                 if ( TDSetting.isLineStyleBezier() ) {
@@ -1239,18 +1239,18 @@ public class Scrap
               /*{{ END DEF FILTER_START */
               if ( lq2 != null && lq2.mPrev != null ) {
                 // int cnt = 0; for ( LinePoint p = lq2; p != null; p = p.mPrev ) ++cnt;
-                TDLog.v("Q2 ok " + lq2.x + " " + lq2.y ); // + " points before: " + cnt );
+                // TDLog.v("Q2 ok " + lq2.x + " " + lq2.y ); // + " points before: " + cnt );
 
                 Point2D q2 = new Point2D( lq2.x - lq2.mPrev.x, lq2.y - lq2.mPrev.y ); // direction at lq2
                 Point2D p2 = directionPrevAt( lp20 );
                 if ( p2 != null ) {
                   if ( q2.dot( p2 ) > 0 ) { // replace from P2 backward, direct Q-line
-                    TDLog.v("P2 ok : Q2.P2  " + q2.dot( p2 ) + " moving P2 forward "  );
+                    // TDLog.v("P2 ok : Q2.P2  " + q2.dot( p2 ) + " moving P2 forward "  );
                     // while ( lp20 != null && q2.dot( lq2.sub( lp20 ) ) > 0 ) lp20 = lp20.mNext;
                     lp20 = moveForw1( lp20, q2, lq2, delta ); // 20230518 was moveForw2
                     if ( lp20 != null ) {
                       // cnt = 0; for ( LinePoint p = lp20; p != null; p = p.mNext ) ++cnt;
-                      TDLog.v("pos P2 still ok: " + lp20.x + " " + lp20.y ); // + " - points after: " + cnt );
+                      // TDLog.v("pos P2 still ok: " + lp20.x + " " + lp20.y ); // + " - points after: " + cnt );
                       mSelection.removePath( line );
                       mCurrentStack.add( new RetraceCommand( line, line.first(), lp20.mPrev, ap.first(), lq2, null, lp20 ) );
                       // if ( lp20.mPrev != null ) lp20.mPrev.mNext = null;
@@ -1270,15 +1270,15 @@ public class Scrap
                       // TDLog.v("line new size " + line.size() + " last " + line.last().x + " " + line.last().y );
                       mSelection.insertPath( line );
                       return true;
-                    } else {
-                      TDLog.v("P2 null");
+                    // } else {
+                      // TDLog.v("P2 null");
                     }
                   } else { // replace from P2 forward reversing Q-line
-                    TDLog.v("P2 ok : Q2.P2  " + q2.dot( p2 ) + " moving P2 backward" );
+                    // TDLog.v("P2 ok : Q2.P2  " + q2.dot( p2 ) + " moving P2 backward" );
                     // while ( lp20 != null && q2.dot( lq2.sub( lp20 ) ) > 0 ) lp20 = lp20.mPrev;
                     lp20 = moveBack2( lp20, q2, lq2, delta );
                     if ( lp20 != null ) {
-                      TDLog.v("neg P2 still ok");
+                      // TDLog.v("neg P2 still ok");
                       mSelection.removePath( line );
                       mCurrentStack.add( new RetraceCommand( line, lp20.mNext, line.last(), lq2, ap.first(), lp20, null ) );
                       //     lp20 .... lq2 <--> lq2p ...
@@ -1301,8 +1301,8 @@ public class Scrap
                       line.retracePath();
                       mSelection.insertPath( line );
                       return true;
-                    } else {
-                      TDLog.v("P2 null");
+                    // } else {
+                      // TDLog.v("P2 null");
                     }
                   }
                 }
@@ -1391,7 +1391,7 @@ public class Scrap
             LinePoint lp10 = null;
             LinePoint lp20 = null;
             // assert( area.last().mNext == null );
-            TDLog.v("TRY area [" + area.mAreaCnt + "] with size " + area.size() );
+            // TDLog.v("TRY area [" + area.mAreaCnt + "] with size " + area.size() );
             for ( LinePoint lp = area.first(); lp != null; lp = lp.mNext ) {
               if ( lp10 == null ) {
                 float d1min;
@@ -1448,7 +1448,7 @@ public class Scrap
 
               // if ( ( ccw0 && ccw1 ) || ( ! ccw0 && ! ccw1 ) ) 
               if ( cnt12 < cnt21 ) { 
-                TDLog.v("     drop border 1-2 " + cnt12 + " " + cnt21 );
+                // TDLog.v("     drop border 1-2 " + cnt12 + " " + cnt21 );
                 LinePoint lp20n = lp20.mNext; // remove wedge
                 Point2D p2 = new Point2D( lp20n.x - lp20.x, lp20n.y - lp20.y );
                 while ( p2.dot( lq2.sub( lp20 )) > 0 ) {
@@ -1466,7 +1466,7 @@ public class Scrap
                 lq2.mNext  = lp20;
                 area.resetFirstLast( lp20, lq2 );
               } else { 
-                TDLog.v("     drop border 2-1 " + cnt12 + " " + cnt21 );
+                // TDLog.v("     drop border 2-1 " + cnt12 + " " + cnt21 );
                 LinePoint lp20p = lp20.mPrev; // remove wedge
                 Point2D p2 = new Point2D( lp20p.x - lp20.x, lp20p.y - lp20.y );
                 while ( p2.dot( lq2.sub( lp20 )) > 0 ) {

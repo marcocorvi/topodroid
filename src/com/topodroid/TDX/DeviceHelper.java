@@ -1465,7 +1465,7 @@ public class DeviceHelper extends DataSetObservable
       public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
       {  
          // FIXME this is called at each start when the database file exists
-         TDLog.v( "UPGRADE DB old " + oldVersion + " new " + newVersion );
+         // TDLog.v( "UPGRADE DB old " + oldVersion + " new " + newVersion );
          switch ( oldVersion ) {
            case 14: 
              db.execSQL( "ALTER TABLE gms ADD COLUMN status INTEGER default 0" );
@@ -1485,13 +1485,13 @@ public class DeviceHelper extends DataSetObservable
              db.execSQL( "ALTER TABLE calibs ADD COLUMN stddev REAL default 0" );
            case 25:
            case 26:
-             TDLog.v("UPGRADE DB 26");
+             // TDLog.v("UPGRADE DB 26");
              db.execSQL( "ALTER TABLE calibs ADD COLUMN delta_bh REAL default 0" );
            case 27:
-             TDLog.v("UPGRADE DB 27");
+             // TDLog.v("UPGRADE DB 27");
              db.execSQL( "ALTER TABLE calibs ADD COLUMN dip REAL default 999" );
            case 28:
-             TDLog.v("CURRENT DB 28");
+             // TDLog.v("CURRENT DB 28");
              /* current version */
            default:
              break;
