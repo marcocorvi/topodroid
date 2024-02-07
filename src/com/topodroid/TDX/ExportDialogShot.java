@@ -142,16 +142,21 @@ public class ExportDialogShot extends MyDialog
   private void setSelected( Spinner spin )
   {
     int pos = 0;
+    int kpos = -1;
     if ( TDSetting.mExportShotsFormat >= 0 ) {
       for ( int k = 0; k < TDConst.mSurveyExportIndex.length; ++ k ) {
-        if ( TDConst.mSurveyExportIndex[k] == TDSetting.mExportShotsFormat ) {
-          pos = k;
-          break;
+        if ( TDConst.mSurveyExportEnable[k] ) {
+          ++ kpos;
+          if ( TDConst.mSurveyExportIndex[k] == TDSetting.mExportShotsFormat ) {
+            pos = kpos;
+            break;
+          }
         }
       }
     }
-    int ppos = TDConst.surveyIndex( pos );
-    if ( ppos < 0 || ppos >= mTypes.length ) ppos = 0;
+    // int ppos = TDConst.surveyIndex( pos );
+    // TDLog.v("EXPORT Set Selected pos " + pos + " ppos " + ppos );
+    // if ( ppos < 0 || ppos >= mTypes.length ) ppos = 0;
     mSelected = mTypes[ pos ];
     mSelectedPos = pos;
     spin.setSelection( pos );
@@ -167,7 +172,7 @@ public class ExportDialogShot extends MyDialog
   public void onItemSelected( AdapterView av, View v, int pos, long id ) 
   {
     int ppos = TDConst.surveyIndex( pos );
-    // TDLog.v( "EXPORT ppos " + ppos );
+    // TDLog.v( "EXPORT pos " + pos + " ppos " + ppos );
     if ( ppos < 0 ) return;
     mSelected = TDConst.mSurveyExportTypes[ ppos ];
     mSelectedPos = ppos;
