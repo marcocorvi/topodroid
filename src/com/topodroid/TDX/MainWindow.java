@@ -38,6 +38,7 @@ import com.topodroid.inport.ImportTherionTask;
 import com.topodroid.inport.ImportPocketTopoTask;
 import com.topodroid.inport.ImportSurvexTask;
 import com.topodroid.inport.ImportWallsTask;
+import com.topodroid.inport.ImportTRobotTask;
 import com.topodroid.inport.ImportCaveSniperTask;
 import com.topodroid.inport.ImportZipTask;
 // import com.topodroid.inport.ImportDialog;
@@ -596,6 +597,9 @@ public class MainWindow extends Activity
     } else if ( type.equals(".srv") ) {
       setTitleImport();
       new ImportWallsTask( this, pfd ).execute( name ); 
+    } else if ( type.equals(".trb") ) {
+      setTitleImport();
+      new ImportTRobotTask( this, pfd ).execute( name ); 
     } else if ( type.equals(".csn") ) {
       setTitleImport();
       new ImportCaveSniperTask( this, pfd ).execute( name ); 

@@ -115,7 +115,8 @@ public class TDConst
     "VisualTopo",
     // "VisualTopo-X",
     "Walls",
-    "PocketTopo"
+    "PocketTopo",
+    "TopoRobot"
   };
 
   private static final int[] mSurveyImportIndex = {
@@ -127,7 +128,8 @@ public class TDConst
     SURVEY_FORMAT_TRO,
     // SURVEY_FORMAT_TROX,
     SURVEY_FORMAT_SRV,
-    SURVEY_FORMAT_TOP
+    SURVEY_FORMAT_TOP,
+    SURVEY_FORMAT_TRB
   };
 
   // ======= MODEL EXPORT  ====== see TopoGL::getFilename()
