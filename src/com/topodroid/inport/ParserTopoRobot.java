@@ -17,6 +17,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDio;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.utils.TDVersion;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.LegType;
@@ -25,8 +26,10 @@ import com.topodroid.TDX.TDAzimuth;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import android.util.ArraySet;
 
 class ParserTopoRobot extends ImportParser
@@ -39,85 +42,99 @@ class ParserTopoRobot extends ImportParser
     int session; // always 1
     int trip;
 
-    TRobotTags( String[] token, boolean is_comment )
+    TRobotTags( String[] token, boolean is_comment ) throws NumberFormatException
     {
       int k = is_comment? 1 : 0;
-      try {
-        series = Integer.parseInt( token[k++] );
-        point  = Integer.parseInt( token[k++] );
-        code   = Integer.parseInt( token[k++] );
-        session= Integer.parseInt( token[k++] );
-        trip   = Integer.parseInt( token[k++] );
-        // TDLog.v("TR tags " + series + " " + point + " " + code + " " + session + " " + trip );
-      } catch ( NumberFormatException e ) { // TODO
-        TDLog.e("TR parser: bad tags");
-      }
+      series = Integer.parseInt( token[k++] );
+      point  = Integer.parseInt( token[k++] );
+      code   = Integer.parseInt( token[k++] );
+      session= Integer.parseInt( token[k++] );
+      trip   = Integer.parseInt( token[k++] );
+      // TDLog.v("TR tags " + series + " " + point + " " + code + " " + session + " " + trip );
     }
   }
 
-  private class TRobotCode
+  class TRobotCode 
   { 
     int   code;
-    float uAzimuth;
-    float uClino;
-    // float pLength;   // precision
-    // float pAzimuth;
-    // float pClino;
-    // float tape;      // tape correction ? 100 = tape is correct
-    // float winkel;    // for sections
+    float uAzi;
+    float uCln;
+    float pLen;   // precision
+    float pAzi;
+    float pCln;
+    float tape;      // tape correction ? 100 = tape is correct
+    float winkel;    // for sections
 
-    TRobotCode( String[] token )
+    TRobotCode( String[] token ) throws NumberFormatException
     {
-      try {
-        code = Integer.parseInt( token[1] );
-        uAzimuth = 360.0f / Float.parseFloat( token[5] );
-        uClino   = 360.0f / Float.parseFloat( token[6] );
-        // everything else is ignored
-        // TDLog.v("TR code " + code + " A " + uAzimuth + " C " + uClino );
-      } catch ( NumberFormatException e ) { // TODO
-        TDLog.e("TR parser: bad code " + token[1] );
-      }
+      code   = Integer.parseInt( token[1] );
+      uAzi   = 360.0f / Float.parseFloat( token[5] );
+      uCln   = 360.0f / Float.parseFloat( token[6] );
+      pLen   = Float.parseFloat( token[7] );
+      pAzi   = Float.parseFloat( token[8] );
+      pCln   = Float.parseFloat( token[9] );
+      tape   = Float.parseFloat( token[10] ); // 100.00
+      winkel = Float.parseFloat( token[11] ); // 100.00
+      // everything else is ignored
+      // TDLog.v("TR code " + code + " A " + uAzi + " C " + uCln );
+    }
+
+    public String toString()
+    {
+      return String.format(Locale.US, "     -1     %d   1   1   1  %7.2f  %7.2f  %7.2f  %7.2f  %7.2f  %7.2f  %7.2f", code, 360/uAzi, 360/uCln, pLen, pAzi, pCln, tape, winkel );
     }
   }
 
-  private class TRobotTrip
+  class TRobotTrip
   {
     int index = 0;
     String date;
-    int use_declination = 0;
+    String[] name = new String[3];
+    int use_decl = 0;
+    float decl   = 0;
+    int   incl   = 0;
+    int   color         = 1;
 
-    TRobotTrip( String[] token, ArraySet< String > names )
+    TRobotTrip( String[] token, ArraySet< String > names ) throws NumberFormatException
     {
-      try {
+      // try {
         index = Integer.parseInt( token[1] );
-      } catch ( NumberFormatException e ) {
-        TDLog.v("TR parser: bad trip index " + token[1] );
-      } 
+      // } catch ( NumberFormatException e ) {
+      //   TDLog.v("TR parser: bad trip index " + token[1] );
+      // } 
       if ( index > 0 ) {
         date  = token[5];
         int k = 5;
+        int h = 0;
         while ( ++k < token.length )  {
           try {
-            use_declination = Integer.parseInt( token[k] );
+            use_decl = Integer.parseInt( token[k] );
             break;
           } catch ( NumberFormatException e ) {
+            if ( h < 3 ) name[h++] = token[k];
             names.add( token[k] );
           } 
         }
         if ( ++k < token.length ) {
-          if ( use_declination != 0 ) {
+          if ( use_decl != 0 ) {
             try {
-              mDeclination = Float.parseFloat( token[k] );
-              TDLog.v("TR parser: set declination " + mDeclination );
+              decl = Float.parseFloat( token[k] );
+              mDeclination = decl;
+              // TDLog.v("TR parser: set declination " + decl );
             } catch ( NumberFormatException e ) {
               TDLog.e("TR parser: bad declination " + token[k] );
             } 
-          } else {
-            TDLog.v("TR parser: dont use declination");
+          // } else {
+          //   TDLog.v("TR parser: dont use declination");
           }
         }
       }
       // TDLog.v("TR trip " + index + " decl " + mDeclination + " team " + team );
+    }
+
+    public String toString()
+    {
+      return String.format(Locale.US, "    -2     %d   1   1   1 %s %s %s     %d  %7.2f  %d   %d", index, date, name[0], name[1], use_decl, decl, incl, color );
     }
   }
 
@@ -125,6 +142,7 @@ class ParserTopoRobot extends ImportParser
 
   private class TRobotSequence
   {
+    String name = "";
     int series;
     int from_series;
     int from_point;
@@ -132,21 +150,25 @@ class ParserTopoRobot extends ImportParser
     int to_point;
     int nr_point;
 
-    TRobotSequence( String[] token )
+    TRobotSequence( String[] token ) throws NumberFormatException
     {
-      try {
-        series      = Integer.parseInt( token[0] );
-        from_series = Integer.parseInt( token[5] );
-        from_point  = Integer.parseInt( token[6] );
-        to_series   = Integer.parseInt( token[7] );
-        to_point    = Integer.parseInt( token[8] );
-        nr_point    = Integer.parseInt( token[9] );
-      } catch ( NumberFormatException e ) {
-        // TODO
-      }
+      series      = Integer.parseInt( token[0] );
+      from_series = Integer.parseInt( token[5] );
+      from_point  = Integer.parseInt( token[6] );
+      to_series   = Integer.parseInt( token[7] );
+      to_point    = Integer.parseInt( token[8] );
+      nr_point    = Integer.parseInt( token[9] );
     }
 
     String getStation() { return String.format("%d.%d", from_series, from_point ); }
+
+    public String toNameString() { return String.format("   %3d    -2   1   1   1 %s", series, name ); }
+
+    public String toString() 
+    {
+      return String.format(Locale.US, "   %3d    -1   1   1   1     %3d    %4d     %3d    %4d    %4d       3       0", series, from_series, from_point, to_series, to_point, nr_point );
+    }
+     
   }
 
   class TRobotFix
@@ -156,16 +178,13 @@ class ParserTopoRobot extends ImportParser
     double  lng; 
     double  alt;    // geoid altitude [m]
 
-    TRobotFix( String[] token )
+    TRobotFix( String[] token ) throws NumberFormatException
     {
       station = String.format("%s.%s", token[8], token[9] );
-      try { 
-        lat = Double.parseDouble( token[5] );
-        lng = Double.parseDouble( token[6] );
-        alt = Double.parseDouble( token[7] );
-      } catch ( NumberFormatException e ) {
-        TDLog.e("TR parser: bad fix " + station );
-      }
+
+      lat = Double.parseDouble( token[5] );
+      lng = Double.parseDouble( token[6] );
+      alt = Double.parseDouble( token[7] );
     }
    
     void updateLatLng( String str )
@@ -208,6 +227,18 @@ class ParserTopoRobot extends ImportParser
         TDLog.v("TR parser: bad coords");
       }
     }
+
+    public String toString()
+    {
+      return String.format( Locale.US, "    -5     1   1   1   1   %9.2f  %9.2f  %9.2f     1     0", 0.0f, 0.0f, alt );
+    }
+
+    String toCoordString()
+    {
+      char cN = 'N'; if ( lat < 0 ) { cN = 'S'; lat = -lat; }
+      char cE = 'E'; if ( lng < 0 ) { cE = 'W'; lng = -lng; }
+      return String.format( Locale.US, "(   -5     1   1   1   1   %c%.7f/%c%.2f/%.2fm", cN, lat, cE, lng, alt );
+    }
   }
 
       
@@ -226,6 +257,22 @@ class ParserTopoRobot extends ImportParser
     mDate = TDUtil.currentDate();
     readFile( isr, filename );
     checkValid();
+  }
+
+  void writeAnnotation( PrintWriter pw )
+  {
+    pw.println( "    -6     1   1   1   1");
+    if ( fix != null ) {
+      pw.println( fix.toString() );
+      pw.println( fix.toCoordString() );
+    } else {
+      pw.println( "    -5     1   1   1   1        0.00        0.00        0.00     1     0" );
+    }
+    pw.println( String.format("    -4     1   1   1   1 %s TopoDroid v. %s", TDUtil.currentDateTimeTRobot(), TDVersion.string() ) );
+    pw.println( "    -3     1   1   1   1");
+    for ( TRobotTrip trip : trips ) pw.println( trip.toString() );
+    // for ( TRobotCode code : codes ) pw.println( code.toString() );
+    pw.println( "    -1     1   1   1   1  360.00  360.00    0.10    1.00    1.00  100.00  100.00"); // default TRobot code of TopoDroid
   }
 
   TRobotCode getCode( int code )
@@ -281,8 +328,10 @@ class ParserTopoRobot extends ImportParser
     trips = new ArrayList< TRobotTrip >();
     codes = new ArrayList< TRobotCode >();
 
+    int line_nr = 0;
     try {
-      line = nextLine( br );
+      line = nextLine( br ); ++ line_nr;
+      // TDLog.v("TR parser " + line_nr + " first line length " + line.length() );
       while ( line != null ) {
         line = line.trim();
         // TDLog.v( "LINE: " + line );
@@ -296,15 +345,25 @@ class ParserTopoRobot extends ImportParser
           } else {
             is_comment = false;
           }
-          tag = new TRobotTags( token, is_comment );
-          series = tag.series;
+          try {
+            tag = new TRobotTags( token, is_comment );
+            series = tag.series;
+          } catch ( NumberFormatException e ) { // TODO mark parser invalid
+            TDLog.e("TR parser: " + line_nr + " bad tags");
+            return;
+          }
           if ( series == -6 ) { // start TopoRobot file
           } else if ( series == -5 ) { // coords of start point
             // TODO add a fixed
             if ( is_comment ) {
               if ( fix != null ) fix.updateLatLng( token[6] );
             } else {
-              fix = new TRobotFix( token );
+              try {
+                fix = new TRobotFix( token );
+              } catch ( NumberFormatException e ) {
+                TDLog.e("TR parser: " + line_nr + " bad fix ");
+                fix = null;
+              } 
             }
           } else if ( series == -4 ) { // sesion - not used
           } else if ( series == -3 ) { // leftover - not used
@@ -315,7 +374,7 @@ class ParserTopoRobot extends ImportParser
               StringBuilder sb = new StringBuilder();
               for ( String name : names ) sb.append( name ).append(" ");
               mTeam = sb.toString().trim();;
-              TDLog.v("TR parser: team " + mTeam );
+              // TDLog.v("TR parser: " + line_nr + " team " + mTeam );
               names = null;
               // for ( int k = trips.size()-1; k>=0; --k ) { // set the date
               //   TRobotTrip trip = trips.get(k);
@@ -324,7 +383,13 @@ class ParserTopoRobot extends ImportParser
               //   }
               // }
             }
-            codes.add( new TRobotCode( token ) );
+            try {
+              TRobotCode code = new TRobotCode( token );
+              codes.add( code );
+            } catch ( NumberFormatException e ) { // TODO mark parser invalid
+              TDLog.e("TR parser: " + line_nr + " bad code " + token[1] );
+              return;
+            }
           } else { // survey data
             point = tag.point;
             if ( point == -2 ) {
@@ -332,8 +397,21 @@ class ParserTopoRobot extends ImportParser
               for ( int k = 5; k < token.length; ++k ) sb.append( token[k] ).append(" ");
               sequence_comment = sb.toString().trim();
             } else if ( point == -1 ) {
-              sequence = new TRobotSequence( token );
-              from = sequence.getStation();
+              if ( is_comment ) {
+                if ( sequence_comment == null ) {
+                  sequence_comment = comment;
+                } else { 
+                  sequence_comment = sequence_comment + " " + comment;
+                }
+              } else {
+                try {
+                  sequence = new TRobotSequence( token );
+                  from = sequence.getStation();
+                } catch ( NumberFormatException e ) { // TODO mark parser invalid
+                  TDLog.e("TR parser: " + line_nr + " bad sequence " + series );
+                  return;
+                }
+              }
             } else {
               if ( sequence != null ) {
                 if ( is_comment ) {
@@ -341,14 +419,14 @@ class ParserTopoRobot extends ImportParser
                   if ( shot != null ) {
                     shot.comment = comment;
                   } else {
-                    TDLog.e("TR parser: shot for comment not found");
+                    TDLog.e("TR parser: " + line_nr + " shot for comment not found");
                   }
                 } else {
                   try {
                     TRobotCode code = getCode( tag.code ); 
                     length  = Float.parseFloat( token[5] );
-                    azimuth = Float.parseFloat( token[6] ) * code.uAzimuth; 
-                    clino   = Float.parseFloat( token[7] ) * code.uClino;
+                    azimuth = Float.parseFloat( token[6] ) * code.uAzi; 
+                    clino   = Float.parseFloat( token[7] ) * code.uCln;
                     left    = Float.parseFloat( token[8] );
                     right   = Float.parseFloat( token[9] );
                     up      = Float.parseFloat( token[10] );
@@ -382,7 +460,7 @@ class ParserTopoRobot extends ImportParser
                       shots.add( new ParserShot( from, TDString.EMPTY, down, 0.0f, -90.0f, 0.0f, ExtendType.EXTEND_VERT, LegType.XSPLAY, false, false, false, "" ) );
                     }
                   } catch ( NumberFormatException e ) { // TODO
-                    TDLog.e("TR parser data-line " + line );
+                    TDLog.e("TR parser " + line_nr + " data-line " + line );
                   }
                 }
               } else {
@@ -391,10 +469,10 @@ class ParserTopoRobot extends ImportParser
             }
           }
         }
-        line = nextLine( br );
+        line = nextLine( br ); ++ line_nr;
       }
     } catch ( IOException e ) {
-      TDLog.Error( "TR parser: i/o error " + mLineCnt + ": " + line + " " + e.getMessage() );
+      TDLog.Error( "TR parser: " + line_nr + " i/o error " + mLineCnt + ": " + line + " " + e.getMessage() );
       throw new ParserException();
     }
     if ( fix != null ) {

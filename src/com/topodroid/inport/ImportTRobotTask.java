@@ -11,11 +11,15 @@
  */
 package com.topodroid.inport;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.DataHelper;
 import com.topodroid.TDX.SurveyInfo;
 import com.topodroid.TDX.MainWindow;
+import com.topodroid.TDX.TDPath;
+
+import com.topodroid.mag.WorldMagneticModel;
 
 import android.os.ParcelFileDescriptor;
 
@@ -24,6 +28,9 @@ import android.os.ParcelFileDescriptor;
 import java.util.ArrayList;
 
 // import java.io.InputStreamReader;
+import java.io.BufferedWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
   
 // NOTE survey name must be guaranteed not be in the db
 public class ImportTRobotTask extends ImportTask
@@ -57,11 +64,12 @@ public class ImportTRobotTask extends ImportTask
       ParserTopoRobot parser = new ParserTopoRobot( isr, str[0], false ); // apply_declination = false
       if ( ! parser.isValid() ) return -2L;
       if ( mApp.get() == null ) return -1L;
-      if ( hasSurveyName( parser.mName ) ) {
+      String survey = parser.mName;
+      if ( hasSurveyName( survey ) ) {
         return -1L;
       }
 
-      sid = mApp.get().setSurveyFromName( parser.mName, SurveyInfo.DATAMODE_NORMAL, false );
+      sid = mApp.get().setSurveyFromName( survey, SurveyInfo.DATAMODE_NORMAL, false );
 
       DataHelper app_data = TopoDroidApp.mData;
       app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle );
@@ -78,19 +86,27 @@ public class ImportTRobotTask extends ImportTask
       ArrayList< ParserShot > splays = parser.getSplays();
       app_data.insertImportShots( sid, id, splays );
 
-      // FIXME this suppose CS long-lat, ie, e==long, n==lat
-      // WorldMagneticModel wmm = new WorldMagneticModel( mApp.get() );
-      // ArrayList< ParserWalls.Fix > fixes = parser.getFixes();
-      // for ( ParserWalls.Fix fix : fixes ) {
-      //   // double h_geo = fix.z;
-      //   double h_ell = wmm.geoidToEllipsoid( fix.n, fix.e, fix.z );
-      //   app_data.insertFixed( sid, -1L, fix.name, fix.e, fix.n, h_ell, fix.z, "", 0 );
-      // }
+      ParserTopoRobot.TRobotFix fix = parser.fix;
+      // runOnUiThread( new Runnable() {
+        if ( fix != null ) {
+          WorldMagneticModel wmm = new WorldMagneticModel( mApp.get() );
+          double h_ell = wmm.geoidToEllipsoid( fix.lat, fix.lng, fix.alt ); 
+          app_data.insertFixed( sid, -1L, fix.station, fix.lng, fix.lat, h_ell, fix.alt, "", 0, 0, -1, -1 ); // status=0 source=0 (unknown) accur=-1,-1 (undef)
+        }
 
-      // ArrayList< ParserWalls.Station > stations = parser.getStations();
-      // for ( ParserWalls.Station st : stations ) {
-      //   app_data.insertStation( sid, st.name, st.comment, st.flag );
-      // }
+        try {
+          String notepath = TDPath.getNoteTRobotFile( survey );
+          BufferedWriter bw = TDFile.getTopoDroidFileWriter( notepath );
+          if ( bw != null ) {
+            PrintWriter pw = new PrintWriter( bw );
+            parser.writeAnnotation( pw );
+            pw.flush();
+            pw.close();
+          }
+        } catch ( IOException e ) {
+          TDLog.e("TR parser task error " + e.getMessage() );
+        }
+      // } );
 
     } catch ( ParserException e ) {
       // TDToast.makeBad( R.string.file_parse_fail );

@@ -1476,7 +1476,8 @@ public class MainWindow extends Activity
             // TDLog.v( "import reader type " + type + " filename " + filename );
             importReader( uri, name, type, mImportData );
           } else {
-            TDLog.Error("import unsupported " + ext);
+            // TDLog.Error("import unsupported " + ext);
+            TDToast.makeBad( String.format( getResources().getString( R.string.unsupported_extension ), ext ) );
             return null;
           }
         }

@@ -9202,7 +9202,8 @@ public class DrawingWindow extends ItemDrawer
                 finish();
               }
             } else {
-              TDLog.Error("DRAW import unsupported " + ext);
+              // TDLog.Error("DRAW import unsupported " + ext);
+              TDToast.makeBad( String.format( getResources().getString( R.string.unsupported_extension ), ext ) );
               finish();
             }
           // } else if ( (type = TDPath.checkImportTypeStream( ext ) ) != null ) {
@@ -9239,7 +9240,8 @@ public class DrawingWindow extends ItemDrawer
                 finish();
               }
             } else {
-              TDLog.Error("DRAW export unsupported extension " + ext);
+              // TDLog.Error("DRAW export unsupported extension " + ext);
+              TDToast.makeBad( String.format( getResources().getString( R.string.unsupported_extension ), ext ) );
               finish();
             }
           // } else if ( (type = TDPath.checkImportTypeStream( ext ) ) != null ) {

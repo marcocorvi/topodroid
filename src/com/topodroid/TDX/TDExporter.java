@@ -3209,6 +3209,7 @@ public class TDExporter
       // TDLog.v("TRB series " + sr.series + " start " + sr.start_series + "." + sr.start_point + " pts " + sr.points );
       // sr.dumpBlocks(); // DEBUG
       pw.format("\r\n" );
+      // N.B. all topodroid series are open-end
       pw.format("%d\t-1\t%d\t%d\t%d\t%d\t%d\t0\t0\t%s\r\n", sr.series, sr.start_series, sr.start_point, sr.series, sr.points, sr.points, comment );
       int fs = sr.start_series;
       int fp = sr.start_point;
@@ -3294,7 +3295,8 @@ public class TDExporter
       // pw.format("# %s\r\n", TDUtil.getDateString("MM dd yyyy") );
 
       //           5 11 15 19 23
-      pw.format(Locale.US, "-6\t1\t%s\r\n", survey_name ); // info.name // -6 1 cave_name
+      pw.format( "-6\t1\t1\t1\t1\r\n" );
+      // pw.format(Locale.US, "-6\t1\t%s\r\n", survey_name ); // info.name // -6 1 cave_name
       // OLD pw.format(Locale.US, "%6d%6d%4d%4d%4d %s\r\n", -6, 1, 1, 1, 1, info.name ); // [-6] cave name
 
       List< FixedInfo > fixeds = data.selectAllFixed( sid, TDStatus.NORMAL );
@@ -3315,7 +3317,6 @@ public class TDExporter
       }
       // OLD pw.format("\r\n" );
 
-      // TODO FIXME check if -4 and -3 are ok - both are no longer used
       String date = info.date;
       int y = 0;
       int m = 0;
@@ -3327,19 +3328,25 @@ public class TDExporter
           d = Integer.parseInt( date.substring(8,10) );
         } catch ( NumberFormatException e ) { }
       }
-      // OLD pw.format(Locale.US, "%6d%6d%4d%4d%4d %02d/%02d/%02d\r\n", -4, 1, 1, 1, 1, d, m, y );
 
-      // -3 1 1 1 1 
-      // pw.format(Locale.US, "-3\t1\t1\t1\t1\tTopoDroid v %s - %s\r\n",  TDVersion.string(), TDUtil.getDateString("MM dd yyyy") );
+      pw.format("-3\t1\t1\t1\t1\r\n"); // not used - legacy 
+      pw.format(Locale.US, "-4\t1\t1\t1\t1\t$s TopoDroid v %s - %s\r\n",   TDUtil.currentDateTimeTRobot(), TDVersion.string() );
+      // OLD pw.format(Locale.US, "%6d%6d%4d%4d%4d %02d/%02d/%02d\r\n", -4, 1, 1, 1, 1, d, m, y );
 
       String team = (info.team != null)? info.team : "-";
       if ( team.length() > 26 ) team = team.substring(0,26);
       // DECLINATION TopoRobot: 0 = provided, 1 = to be calculated ???
       // 0 if declination not known, negative of declination (if known)
-      float decl = (info.hasDeclination()? -info.getDeclination() : 0);
+      int use_decl = 0;
+      float decl = 0;
+      if (info.hasDeclination() ) {
+        decl =  -info.getDeclination();
+        use_decl = 1;
+      }
       String comment = info.comment;
       if ( comment == null ) comment = "-";
-      pw.format(Locale.US, "-2\t1\t%d\t%d\t%d\t...\t%s\t0\t%.2f\t0\t1\t%s\r\n", d, m, y, team, decl, comment );
+      // TRIP
+      pw.format(Locale.US, "-2\t1\t1\t1\t1\t%02d/%02d/%02d\t%s\t...\t%d\t%.2f\t0\t1\t%s\r\n", d, m, y, team, use_decl, decl, comment ); // 0: inclination, 1: color
       // OLD if ( info.comment != null ) {                   // [-4, -3]A bla-bla
       //       pw.format(Locale.US, "%6d%6d%4d%4d%4d %s\r\n", -3, 1, 1, 1, 1, info.comment );
       //     }
@@ -3347,17 +3354,19 @@ public class TDExporter
       // OLD String team = (info.team != null)? info.team : "";
       //     if ( team.length() > 26 ) team = team.substring(0,26);
       //     int auto_declination = (info.hasDeclination()? 0 : 1); // DECLINATION TopoRobot: 0 = provided, 1 = to be calculated
-      //     pw.format(Locale.US, "%6d%6d%4d%4d%4d %02d/%02d/%02d %26s%4d%8.2f%4d%4d\r\n",
-      //       -2, 1, 1, 1, 1, d, m, y, team, auto_declination, info.getDeclination(), 0, 1 ); 
+      //     pw.format(Locale.US, "%6d%6d%4d%4d%4d %02d/%02d/%02d %26s%4d%8.2f%4d%4d\r\n", -2, 1, 1, 1, 1, d, m, y, team, auto_declination, info.getDeclination(), 0, 1 ); 
 
       //           5 11 15 19 23   31   39   47   55   63   71   79
-      pw.format(Locale.US, "-1\t1\t360\t360\t0.10\t1\t1\t100\t0\r\n" );
-      // OLD pw.format(Locale.US, "%6d%6d%4d%4d%4d%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f\r\n",
-      //       -1, 1, 1, 1, 1, 360.0, 360.0, 0.05, 0.5, 0.5, 100.0, 0.0 );
+
+      // CODE
+      // azimuth degrees (360), clino degrees, precisions (length, azimuth, clino), tape, winkel
+      pw.format(Locale.US, "-1\t1\t360\t360\t0.10\t1\t1\t100\t0\r\n" ); 
+      // OLD pw.format(Locale.US, "%6d%6d%4d%4d%4d%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f\r\n", -1, 1, 1, 1, 1, 360.0, 360.0, 0.05, 0.5, 0.5, 100.0, 0.0 );
       
       TrbStruct trb = makeTrbStations( list );
       // at this point mTrbSeries is populated.
 
+      pw.format(Locale.US, "1\t-2\t1\t1\t1\t%s\r\n", survey_name );
       writeTrbSeries1( pw, list, trb, comment );
 
       bw.flush();

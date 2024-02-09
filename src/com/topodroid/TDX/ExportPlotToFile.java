@@ -145,7 +145,8 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
             //   // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
             //   ret = DrawingIO.exportCave3D( bw, mCommand, mNum, mPlotInfo, mFixedInfo, mFullName );
             } else {
-              TDLog.Error("EXPORT unsupported extension " + mExt );
+              // TDLog.Error("EXPORT unsupported extension " + mExt );
+              TDToast.makeBad( String.format( TDInstance.getResourceString( R.string.unsupported_extension ), mExt ) );
             } 
             if ( bw != null ) {
               bw.flush();

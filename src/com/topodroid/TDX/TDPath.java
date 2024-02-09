@@ -475,6 +475,12 @@ public class TDPath
    */
   static String getNoteFile( String name )  { return APP_NOTE_PATH  + "/" + name; }
 
+  /** @return the survey note file full pathname
+   * @param survey  survey name
+   * @note used by ImportTRobotTask
+   */
+  static public String getNoteTRobotFile( String survey )  { return ROOT_CW_DIR + "/" + survey + "/note/trobot.txt"; }
+
   /** @return a current survey out-file full pathname
    * @param name out filename, eg, <survey>.th
    */

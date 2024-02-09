@@ -2222,6 +2222,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="error_parser_error">Error: parsing %1$s</string>
     <string name="error_export_failed">Error: export %1$s failed</string>
     <string name="unsupported_format">Unsupported file format</string>
+    <string name="unsupported_extension">Unsupported file extension %1$s</string>
 
     <!-- UNUSED string name="export_gltf_ok">Exported glTF file</string -->
     <!-- UNUSED string name="export_gltf_fail">Failed glTf export</string -->

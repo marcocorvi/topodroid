@@ -178,6 +178,14 @@ public class TDUtil
     return sdf.format( new Date() );
   }
 
+  /** @return the current date-time - TopoRobot format "yy/mm/dd hh:mm:ss"
+   */
+  public static String currentDateTimeTRobot()
+  {
+    SimpleDateFormat sdf = new SimpleDateFormat( "yy/MM/dd HH:mm:ss", Locale.US );
+    return sdf.format( new Date() );
+  }
+
   /** @return the current minute-seconds - format "mm:ss"
    */
   public static String currentMinuteSecond()
