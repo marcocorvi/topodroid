@@ -1165,7 +1165,7 @@ public class TDExporter
       return 2;
     }
 
-    // now write the GXP file
+    // now write the GPX file
     try {
       // TDLog.Log( TDLog.LOG_IO, "export trackfile " + file.getName() );
       // BufferedWriter bw = TDFile.getMSwriter( "plt", surveyname + ".plt", "text/plt" );
@@ -3114,87 +3114,116 @@ public class TDExporter
       }
     }
     int nr = shots.size();
-    DBlock item = shots.get( 0 );
-    String st = item.mFrom; // current station
-    trb.put( st, "1.0" );
-    // TDLog.v("TRB shots: " + nr + " start " + item.mFrom + "-" + item.mTo + " put " + st + " as 1.0" );
-    
-    boolean repeat1 = true;
-    int series = 1;
-    int start_series = 1;
-    int start_point  = 0;
-    while ( repeat1 ) {
-      repeat1 = false;
-      // TDLog.v("TRB make series " + series + " start " + start_series + "." + start_point );
-      TrbSeries trb_series = new TrbSeries( series, start_series, start_point );
-      trb.addSeries( trb_series );
-      int point  = 0;
-      boolean repeat2 = true;
-      while ( repeat2 ) {
-        repeat2 = false;
-        
-        for ( int k = 0; k < shots.size(); ) {
-          item = shots.get( k );
-          String from = item.mFrom;
-          String to   = item.mTo;
-          // TDLog.v("TRB shot " + k + "/" + shots.size() + ": " + from + "-" + to );
-          if ( from.equals( st ) && trb.get( to ) == null ) {
-            point ++;
-            // TDLog.v("TRB forward shot " + from + "-" + to + " put " + to + " as " + series + "." + point );
-            trb.put( to, String.format("%d.%d", series, point ) );
-            trb_series.appendShot( item, true );
-            st = to;
-            shots.remove( k );
-            repeat2 = true;
-            break;
-          } else if ( to.equals( st ) && trb.get( from ) == null ) {
-            point ++;
-            // TDLog.v("TRB backward shot " + from + "-" + to + " put " + from + " as " + series + "." + point );
-            trb.put( from, String.format("%d.%d", series, point ) );
-            trb_series.appendShot( item, false );
-            st = from;
-            shots.remove( k );
-            repeat2 = true;
-            break;
+    if ( trb.areStationsAllTopoRobot() ) {
+      trb.copyStations();
+      for ( DBlock shot : shots ) {
+        String from = shot.mFrom;
+        String to   = shot.mTo;
+        int sr = -1, pt = -1;
+        if ( to != null && to.length() > 0 && from != null && from.length() > 0 ) {
+          int pos = to.indexOf('.');
+          try {
+            sr = Integer.parseInt( to.substring(0, pos) );
+            pt = Integer.parseInt( to.substring( pos + 1 ) );
+          } catch ( NumberFormatException e ) {
+            TDLog.e("TROBOT error station " + to );
+          }
+        }
+        if ( sr > 0 && pt >= 0 ) {
+          TrbSeries srs = trb.getSeries( sr );
+          if ( srs != null ) {
+            srs.appendShot( shot, true );
+            srs.increaseNrPoints();
+            srs.setEndPoint( sr, pt );
+            TDLog.v("TROBOT series " + sr + " append " + shot.mId + " endpoint " + pt );
           } else {
-            ++k;
+            TDLog.v("TROBOT no-series station " + to );
           }
         }
       }
-      trb_series.setPoints( point );
+    } else {
+      DBlock item = shots.get( 0 );
+      String st = item.mFrom; // current station
+      trb.put( st, "1.0" );
+      TDLog.v("TRB shots: " + nr + " start " + item.mFrom + "-" + item.mTo + " put " + st + " as 1.0" );
+      
+      boolean repeat1 = true;
+      int series = 1;
+      int start_series = 1;
+      int start_point  = 0;
+      while ( repeat1 ) {
+        repeat1 = false;
+        TDLog.v("TRB make series " + series + " start " + start_series + "." + start_point );
+        TrbSeries trb_series = new TrbSeries( series, start_series, start_point );
+        trb.addSeries( trb_series );
+        int point  = 0;
+        boolean repeat2 = true;
+        while ( repeat2 ) {
+          repeat2 = false;
+          
+          for ( int k = 0; k < shots.size(); ) {
+            item = shots.get( k );
+            String from = item.mFrom;
+            String to   = item.mTo;
+            TDLog.v("TRB shot " + k + "/" + shots.size() + ": " + from + "-" + to );
+            if ( from.equals( st ) && trb.get( to ) == null ) {
+              point ++;
+              TDLog.v("TRB forward shot " + from + "-" + to + " put " + to + " as " + series + "." + point );
+              trb.put( to, String.format("%d.%d", series, point ) );
+              trb_series.appendShot( item, true );
+              st = to;
+              shots.remove( k );
+              repeat2 = true;
+              break;
+            } else if ( to.equals( st ) && trb.get( from ) == null ) {
+              point ++;
+              TDLog.v("TRB backward shot " + from + "-" + to + " put " + from + " as " + series + "." + point );
+              trb.put( from, String.format("%d.%d", series, point ) );
+              trb_series.appendShot( item, false );
+              st = from;
+              shots.remove( k );
+              repeat2 = true;
+              break;
+            } else {
+              ++k;
+            }
+          }
+        }
+        trb_series.setPoints( point );
 
-      // TDLog.v("TRB check new series. shots " + shots.size() );
-      boolean found = false;
-      for ( int k = 0; k < shots.size(); ++k ) { // check for a new series
-        item = shots.get( k );
-        String from = item.mFrom;
-        String to   = item.mTo;
-        String spf  = trb.get( from );
-        String spt  = trb.get( to );
-        if ( shots.size() < 7 ) TDLog.v("TRB try " + from + " " + to + " ==> " + spf + " " + spt );
-        if ( spf != null && spt == null ) { // new series
-          ++ series;
-          repeat1 = true;
-          start_series = getTrbSeries( spf );
-          start_point  = getTrbStation( spf );
-          st = from;
-          found = true;
-          // TDLog.v("TRB new series F " + series + " from " + st + " = " + spf );
-          break;
-        } else if ( spt != null && spf == null ) { // new series
-          ++ series;
-          repeat1 = true;
-          start_series = getTrbSeries( spt );
-          start_point  = getTrbStation( spt );
-          st = to;
-          found = true;
-          // TDLog.v("TRB new series T " + series + " from " + st + " = " + spt );
+        TDLog.v("TRB check new series. shots " + shots.size() );
+        boolean found = false;
+        for ( int k = 0; k < shots.size(); ++k ) { // check for a new series
+          item = shots.get( k );
+          String from = item.mFrom;
+          String to   = item.mTo;
+          String spf  = trb.get( from );
+          String spt  = trb.get( to );
+          if ( shots.size() < 7 ) TDLog.v("TRB try " + from + " " + to + " ==> " + spf + " " + spt );
+          if ( spf != null && spt == null ) { // new series
+            ++ series;
+            repeat1 = true;
+            start_series = getTrbSeries( spf );
+            start_point  = getTrbStation( spf );
+            st = from;
+            found = true;
+            TDLog.v("TRB new series F " + series + " from " + st + " = " + spf );
+            break;
+          } else if ( spt != null && spf == null ) { // new series
+            ++ series;
+            repeat1 = true;
+            start_series = getTrbSeries( spt );
+            start_point  = getTrbStation( spt );
+            st = to;
+            found = true;
+            TDLog.v("TRB new series T " + series + " from " + st + " = " + spt );
+            break;
+          }
+        }
+        if ( ! found ) { 
+          TDLog.e("TRB non-connected shots");
           break;
         }
-      }
-      if ( ! found ) { 
-        TDLog.e("TRB non-connected shots");
-        break;
       }
     }
     // TDLog.v("TRB done make series: " + trb.getNrSeries() + " stations " + trb.getNrStations() );
@@ -3204,45 +3233,58 @@ public class TDExporter
       
   private static void writeTrbSeries1( PrintWriter pw, List< DBlock > list, TrbStruct trb, String comment ) 
   {
-    // TDLog.v("TRB write trb: nr. series " + trb.getSeries().size() );
+    TDLog.v("TRB write trb: nr. series " + trb.getSeries().size() );
+    boolean first = true;
     for ( TrbSeries sr : trb.getSeries() ) {
       // TDLog.v("TRB series " + sr.series + " start " + sr.start_series + "." + sr.start_point + " pts " + sr.points );
       // sr.dumpBlocks(); // DEBUG
-      pw.format("\r\n" );
       // N.B. all topodroid series are open-end
-      pw.format("%d\t-1\t%d\t%d\t%d\t%d\t%d\t0\t0\t%s\r\n", sr.series, sr.start_series, sr.start_point, sr.series, sr.points, sr.points, comment );
+      if ( first ) {
+        pw.format("%6d\t-2\t1\t1\t1\t%s\r\n", sr.series, comment );
+        first = false;
+      }
       int fs = sr.start_series;
       int fp = sr.start_point;
       int ts = sr.series; // this is fix
+      int end_series = sr.end_series;
+      int end_point  = sr.end_point;
+      if (sr.end_series < 1) {
+        end_series = sr.series;
+        end_point  = sr.points;
+      }
+      pw.format("%6d\t-1\t1\t1\t1\t%d\t%d\t%d\t%d\t%d\t0\t0\r\n", sr.series, sr.start_series, sr.start_point, end_series, end_point, sr.points );
       boolean atFrom = true;
+      
       TrbShot shot = sr.getShots(); // get the first shot of the series
-      LRUD lrud = computeLRUD( shot.block, list, shot.forward ); // forwrad: at FROM
-      pw.format( Locale.US, "%s\t0\t1\t1\t%.2f\t%.1f\t%.1f\t%.2f\t%.2f\t%.2f\t%.2f\r\n", ts, 0.0f, 0.0f, 0.0f, lrud.l, lrud.r, lrud.u, lrud.d );
-      int tp = 1;
-      for ( ; shot != null; shot = shot.next ) {
-        DBlock item = shot.block;
-        String spf = trb.get( shot.forward ? item.mFrom : item.mTo   );
-        String spt = trb.get( shot.forward ? item.mTo   : item.mFrom );
-        int sf = getTrbSeries( spf );
-        int pf = getTrbStation( spf );
-        int st = getTrbSeries( spt );
-        int pt = getTrbStation( spt );
-        // TDLog.v("TRB " + fs + "." + fp + " -- " + st + "." + tp + " item " + item.mFrom + "-" + item.mTo + " < " + spf + " " + sf + "." + pf + " -- " + spt + " " + st + "." + pt + " > " + shot.forward );
-        AverageLeg leg = computeAverageLeg( item, list );
-        assert( leg != null );
-        lrud = computeLRUD( item, list, (! shot.forward) ); // not forward: at TO -- forward: at FROM
-        // write block ... TODO
-        // series point topo code L A C L R U D comment
-        pw.format( Locale.US, "%s\t%s\t1\t1\t%.2f\t%.1f\t%.1f\t%.2f\t%.2f\t%.2f\t%.2f", ts, pt, leg.length(), leg.bearing(), leg.clino(), lrud.l, lrud.r, lrud.u, lrud.d );
-        if ( item.mComment != null ) {
-          pw.format( "\t%s\r\n", item.mComment );
-        } else {
-          pw.format( "\r\n" );
-        }
-        fs = ts;
-        fp = tp;
-        ++ tp;
-      } // end of series
+      if ( shot != null ) {
+        LRUD lrud = computeLRUD( shot.block, list, shot.forward ); // forwrad: at FROM
+        pw.format( Locale.US, "%6d\t0\t1\t1\t1\t%.2f\t%.1f\t%.1f\t%.2f\t%.2f\t%.2f\t%.2f\r\n", ts, 0.0f, 0.0f, 0.0f, lrud.l, lrud.r, lrud.u, lrud.d );
+        int tp = 1;
+        for ( ; shot != null; shot = shot.next ) {
+          DBlock item = shot.block;
+          String spf = trb.get( shot.forward ? item.mFrom : item.mTo   );
+          String spt = trb.get( shot.forward ? item.mTo   : item.mFrom );
+          int sf = getTrbSeries(  spf );
+          int pf = getTrbStation( spf );
+          int st = getTrbSeries(  spt );
+          int pt = getTrbStation( spt );
+          // TDLog.v("TRB " + fs + "." + fp + " -- " + st + "." + tp + " item " + item.mFrom + "-" + item.mTo + " < " + spf + " " + sf + "." + pf + " -- " + spt + " " + st + "." + pt + " > " + shot.forward );
+          AverageLeg leg = computeAverageLeg( item, list );
+          assert( leg != null );
+          lrud = computeLRUD( item, list, (! shot.forward) ); // not forward ==> at TO -- forward: at FROM
+          // write block ... TODO
+          // series point topo code L A C L R U D comment
+          pw.format( Locale.US, "%6d\t%d\t1\t1\t1\t%.2f\t%.1f\t%.1f\t%.2f\t%.2f\t%.2f\t%.2f", ts, pt, leg.length(), leg.bearing(), leg.clino(), lrud.l, lrud.r, lrud.u, lrud.d );
+          if ( item.mComment != null ) {
+            pw.format( "\t%s\r\n", item.mComment );
+          } else {
+            pw.format( "\r\n" );
+          }
+          fs = ts;
+          fp = tp;
+          ++ tp;
+        } // end of series
+      }
     }
   }
 
@@ -3277,11 +3319,11 @@ public class TDExporter
     return null;
   }
 
-  static int exportSurveyAsTrb( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String survey_name )
+  static int exportSurveyAsTrb( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String survey_name, long first )
   {
     int trip = 1;
     int code = 1;
-    List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
+    List< DBlock > list = data.selectExportShots( sid, TDStatus.NORMAL, first );
     checkShotsClino( list );
     // TDLog.v( "TRB export: shots " + list.size() );
     char[] line = new char[ TRB_LINE_LENGTH ];
@@ -3295,9 +3337,7 @@ public class TDExporter
       // pw.format("# %s\r\n", TDUtil.getDateString("MM dd yyyy") );
 
       //           5 11 15 19 23
-      pw.format( "-6\t1\t1\t1\t1\r\n" );
-      // pw.format(Locale.US, "-6\t1\t%s\r\n", survey_name ); // info.name // -6 1 cave_name
-      // OLD pw.format(Locale.US, "%6d%6d%4d%4d%4d %s\r\n", -6, 1, 1, 1, 1, info.name ); // [-6] cave name
+      pw.format( "    -6\t1\t1\t1\t1\r\n" );
 
       List< FixedInfo > fixeds = data.selectAllFixed( sid, TDStatus.NORMAL );
       if ( fixeds.size() > 0 ) {
@@ -3306,16 +3346,12 @@ public class TDExporter
           // get TR-station from fixed name
           int pos = fixed.name.indexOf('.');
           int st = (pos < 0)? Integer.parseInt( fixed.name ) : Integer.parseInt( fixed.name.substring( pos+1 ) );
-          pw.format(Locale.US, "-5\t1\t%.2f\t%.2f\t%.2f\t1\t0\t%d\r\n", fixed.lng, fixed.lat, fixed.h_geo, st ); // series=1 point=0 (station)
-          // pw.format(Locale.US, "-5\t1\t%s\r\n", -5, 1, 1, 1, 1, fixed.name );
-          // OLD pw.format(Locale.US, "%6d%6d%4d%4d%4d%12.2f%12.2f%12.2f%8d%8d\r\n", -5, 1, 1, 1, 1, fixed.lng, fixed.lat, fixed.h_geo, 1, st );
-          //     pw.format(Locale.US, "(%5d%6d%4d%4d%4d %s \r\n", -5, 1, 1, 1, 1, fixed.name );
+          pw.format(Locale.US, "    -5\t1\t1\t1\t1\t%.7f\t%.7f\t%.2f\t1\t0\t%d\r\n", fixed.lng, fixed.lat, fixed.h_geo, st ); // series=1 point=0 (station)
         }
       } else {
-        pw.format(Locale.US, "-5\t1\t0.00\t0.00\t0.00\t1\t0\tnone\r\n" );
-        // OLD pw.format(Locale.US, "%6d%6d%4d%4d%4d%12.2f%12.2f%12.2f%8d%8d\r\n", -5, 1, 1, 1, 1, 0.0, 0.0, 0.0, 1, 0 );
+        pw.format(Locale.US, "    -5\t1\t1\t1\t1\t0.00\t0.00\t0.00\t1\t0\tnone\r\n" );
       }
-      // OLD pw.format("\r\n" );
+      pw.format(Locale.US, "(   -5\t1\t1\t1\t1\t%s\r\n", survey_name );
 
       String date = info.date;
       int y = 0;
@@ -3329,9 +3365,8 @@ public class TDExporter
         } catch ( NumberFormatException e ) { }
       }
 
-      pw.format("-3\t1\t1\t1\t1\r\n"); // not used - legacy 
-      pw.format(Locale.US, "-4\t1\t1\t1\t1\t$s TopoDroid v %s - %s\r\n",   TDUtil.currentDateTimeTRobot(), TDVersion.string() );
-      // OLD pw.format(Locale.US, "%6d%6d%4d%4d%4d %02d/%02d/%02d\r\n", -4, 1, 1, 1, 1, d, m, y );
+      pw.format(Locale.US, "    -4\t1\t1\t1\t1\t$s TopoDroid v %s - %s\r\n",   TDUtil.currentDateTimeTRobot(), TDVersion.string() );
+      pw.format("    -3\t1\t1\t1\t1\r\n"); // not used - legacy 
 
       String team = (info.team != null)? info.team : "-";
       if ( team.length() > 26 ) team = team.substring(0,26);
@@ -3345,28 +3380,18 @@ public class TDExporter
       }
       String comment = info.comment;
       if ( comment == null ) comment = "-";
+
       // TRIP
-      pw.format(Locale.US, "-2\t1\t1\t1\t1\t%02d/%02d/%02d\t%s\t...\t%d\t%.2f\t0\t1\t%s\r\n", d, m, y, team, use_decl, decl, comment ); // 0: inclination, 1: color
-      // OLD if ( info.comment != null ) {                   // [-4, -3]A bla-bla
-      //       pw.format(Locale.US, "%6d%6d%4d%4d%4d %s\r\n", -3, 1, 1, 1, 1, info.comment );
-      //     }
-
-      // OLD String team = (info.team != null)? info.team : "";
-      //     if ( team.length() > 26 ) team = team.substring(0,26);
-      //     int auto_declination = (info.hasDeclination()? 0 : 1); // DECLINATION TopoRobot: 0 = provided, 1 = to be calculated
-      //     pw.format(Locale.US, "%6d%6d%4d%4d%4d %02d/%02d/%02d %26s%4d%8.2f%4d%4d\r\n", -2, 1, 1, 1, 1, d, m, y, team, auto_declination, info.getDeclination(), 0, 1 ); 
-
+      pw.format(Locale.US, "    -2\t1\t1\t1\t1\t%02d/%02d/%02d\t%s\t...\t%d\t%.2f\t0\t1\r\n", d, m, y, team, use_decl, decl ); // 0: inclination, 1: color
       //           5 11 15 19 23   31   39   47   55   63   71   79
 
       // CODE
       // azimuth degrees (360), clino degrees, precisions (length, azimuth, clino), tape, winkel
-      pw.format(Locale.US, "-1\t1\t360\t360\t0.10\t1\t1\t100\t0\r\n" ); 
-      // OLD pw.format(Locale.US, "%6d%6d%4d%4d%4d%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f%8.2f\r\n", -1, 1, 1, 1, 1, 360.0, 360.0, 0.05, 0.5, 0.5, 100.0, 0.0 );
+      pw.format(Locale.US, "    -1\t1\t1\t1\t1\t360\t360\t0.10\t1\t1\t100\t0\r\n" ); 
       
       TrbStruct trb = makeTrbStations( list );
       // at this point mTrbSeries is populated.
 
-      pw.format(Locale.US, "1\t-2\t1\t1\t1\t%s\r\n", survey_name );
       writeTrbSeries1( pw, list, trb, comment );
 
       bw.flush();

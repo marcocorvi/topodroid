@@ -167,6 +167,25 @@
       android:importantForAutofill="no"
       android:inputType="text"
       />
+    <LinearLayout
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      >
+      <TextView
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/marginh"
+        android:text="@string/start_index"
+        />
+      <EditText android:id="@+id/trobot_index"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        />
+      </LinearLayout>
+
       <!-- android:hint="@string/trobot_name_hint" -->
   </LinearLayout>
 

@@ -102,6 +102,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="station_not_found">Station introuvable</string>
     <string name="shot_not_found">Visée non trouvée</string>
     <string name="bad_sibling">Mauvaise visée parente</string>
+    <!-- TODO string name="bad_station">Bad station: %1$s</string -->
+    <!-- TODO string name="bad_station_name">Illegal station name</string -->
     <!-- UNUSED string name="missing_area">ZONE</string -->
     <!-- UNUSED string name="missing_hint">Merci d\'installer les symboles avec TdSymbol</string -->
     <!-- UNUSED string name="missing_line">LIGNE</string -->
@@ -251,6 +253,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="import_calib_mismatch">Étalonnage du périphérique incorrect</string>
     <string name="import_calib_no_data">Fichier d\'étalonnage : aucune donnée</string>
     <string name="import_calib_io_error">Fichier d\'étalonnage : erreur de lecture</string>
+    <!-- TODO string name="imported_file">Imported %1$s</string -->
     <string name="import_zip_ok">Fichier zip importé avec succès</string>
     <string name="import_zip_newer">Fichier ZIP importé d\'une version plus récente</string>
     <!-- UNUSED string name="import_zip_wait">L\'importation du fichier zip peut être longue… Patientez…</string -->
@@ -260,6 +263,19 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="MT_points_none">Pas de point Mobile Topographer</string>
     <string name="MT_bad_file">Mauvais fichier MobileTopographer</string>
     <string name="bad_manifest">Mauvais fichier Manifest [%1$d]</string>
+    <!-- TODO string name="bad_manifest_zip">Failed: zip read error</string -->
+    <!-- TODO string name="bad_manifest_td">Failed: TopoDroid version too old</string -->
+    <!-- TODO string name="bad_manifest_db_old">Failed: database version too old</string -->
+    <!-- TODO string name="bad_manifest_db_new">Failed: database version too new</string -->
+    <!-- UNUSED string name="bad_manifest_name">Failed: survey name differ from zip name</string -->
+    <!-- TODO string name="bad_manifest_present">Failed: survey already present</string -->
+    <!-- TODO string name="bad_manifest_db">Failed: cannot open database</string -->
+    <!-- TODO string name="bad_manifest_sql">Failed: SQL error</string -->
+    <!-- TODO string name="bad_manifest_number">Failed: wrong number</string -->
+    <!-- TODO string name="bad_manifest_manifest">Failed: wrong manifest</string -->
+    <!-- TODO string name="bad_manifest_missing">Failed: missing manifest</string -->
+    <!-- TODO string name="bad_manifest_error">Failed: manifest read error</string -->
+    <!-- TODO string name="bad_manifest_other">Failed: unexpected error</string -->
     <!-- TODO string name="archive_reset_color">Warning. Custon colors resetted</string -->
 
     <string name="pleasewait">Attendre SVP</string>
@@ -692,6 +708,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="write_ok">ÉTALONNAGE CHARGÉ DANS LE DISTOX</string>
     <string name="zip_saved">Enregistré </string>
     <string name="zip_failed">Échec lors de la compression du relevé</string>
+    <!-- TODO string name="zip_share_failed">Unable to share zip-archive</string -->
     <string name="unzip_fail">Échec lors de la décompression du relevé</string>
     <string name="unzip_fail_sqlite">Erreur SQL : effacez le relevé et réessayez</string>
     <string name="unzip_fail_survey">Échec : nom du relevé incorrect</string>
@@ -700,6 +717,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="zoom_in_out">Zoom +/-</string -->
     <!-- TODO string name="screenshot_saved">Saved screenshot %1$s</string -->
     <!-- TODO string name="screenshot_failed">Failed taking screenshot</string -->
+    <!-- TODO string name="start_index">Start-shot index</string -->
     
 
     <string name="survey_info">Information sur le relevé</string>
@@ -1488,6 +1506,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_csv_eol_summary">Séparateur d\'enregistrements CSV</string>
   <!-- TODO string name="pref_gpx_single_track_title">GPX single track</string -->
   <!-- TODO string name="pref_gpx_single_track_summary">Export project surveys as a single GPX track</string -->
+  <!-- TODO string name="pref_zip_share_category_title">Zip-share category</string -->
+  <!-- TODO string name="pref_zip_share_category_summary">Add category to zip-share request</string -->
 
     <string name="pref_sock_type_title">Socket</string>
     <string name="pref_sock_type_summary">Créer un socket</string>
@@ -2199,6 +2219,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="error_parser_error">Erreur : analyse %1$s</string>
     <string name="error_export_failed">Erreur : export %1$s en échec</string>
     <string name="unsupported_format">Format de fichier non pris en charge</string>
+    <!-- TODO string name="unsupported_extension">Unsupported file extension %1$s</string -->
     
     <!-- UNUSED string name="export_gltf_ok">Exported glTF file</string -->
     <!-- UNUSED string name="export_gltf_fail">Failed glTf export</string -->

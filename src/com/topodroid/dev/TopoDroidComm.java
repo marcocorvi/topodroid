@@ -110,10 +110,16 @@ public class TopoDroidComm
     // TDLog.v( "TD comm: HANDLE PACKET " + index + " " + d + " " + b + " " + c );
     int leg = ( data_type == DataType.DATA_SCAN )? LegType.SCAN : LegType.NORMAL;
     if ( comment == null ) comment = "";
-    mLastShotId = TopoDroidApp.mData.insertBricShot( TDInstance.sid, index, d, b, c, r, clino_error, azimuth_error, dip, ExtendType.EXTEND_IGNORE, leg, status, comment, TDInstance.deviceAddress() );
+    long id = TopoDroidApp.mData.insertBricShot( TDInstance.sid, index, d, b, c, r, clino_error, azimuth_error, dip, ExtendType.EXTEND_IGNORE, leg, status, comment, TDInstance.deviceAddress() );
     // TopoDroidApp.mData.updateShotAMDR( mLastShotId, TDInstance.sid, clino_error, azimuth_error, dip, r, false );
     // if ( comment != null ) TopoDroidApp.mData.updateShotComment( mLastShotId, TDInstance.sid, comment );
-    
+
+    if ( id == -1L ) {
+      TDLog.e("Handle BRIC packet failure");
+      return false;
+    }
+
+    mLastShotId = id;
     if ( lister != null ) { // FIXME_LISTER sendMessage with mLastShotId only
       Message msg = lister.obtainMessage( Lister.LIST_UPDATE );
       Bundle bundle = new Bundle();

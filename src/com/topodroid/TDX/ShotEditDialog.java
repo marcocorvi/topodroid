@@ -532,7 +532,7 @@ class ShotEditDialog extends MyDialog
 
   /** save the changes to the DBlock
    */
-  private void saveDBlock()
+  private boolean saveDBlock()
   {
     // add LRUD at station if any is checked and data have been entered
     // String station = null;
@@ -567,7 +567,7 @@ class ShotEditDialog extends MyDialog
     if ( mCBlegPrev.isChecked() ) {
       mBlk.setTypeSecLeg();
       mParent.updateShotNameAndFlags( "", "", ExtendType.EXTEND_IGNORE, 0, 0, LegType.EXTRA, "", mBlk, false );
-      return;
+      return true;
       // shot_from = "";
       // shot_to   = "";
       // shot_secleg  = true;
@@ -580,14 +580,22 @@ class ShotEditDialog extends MyDialog
         shot_from = mBlk.mFrom;
         shot_to   = mBlk.mTo;
       }
-      return;
+      return true;
       // leg_next  = true;
       // all_splay = false;
       // set_xsplay = -1;
     } else {
-      shot_from = TDUtil.noSpaces( mETfrom.getText().toString() );
+      shot_from = TDUtil.toStationFromName( mETfrom.getText().toString() );
+      if ( ! TDUtil.isStationName( shot_from ) ) {
+        mETfrom.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+        return false;
+      }
       // if ( shot_from == null ) { shot_from = ""; }
-      shot_to = TDUtil.noSpaces( mETto.getText().toString() );
+      shot_to = TDUtil.toStationToName( mETto.getText().toString() );
+      if ( ! TDUtil.isStationName( shot_to ) ) {
+        mETto.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+        return false;
+      }
       do_backleg = ( shot_from.length() > 0 ) && ( shot_to.length() > 0 );
     }
     // TDLog.v( "<" + shot_from + "-" + shot_to + "> do backleg " + do_backleg + " value " + backleg_val );
@@ -728,6 +736,7 @@ class ShotEditDialog extends MyDialog
 	}
       } catch (NumberFormatException e ) {
         TDLog.Error( e.getMessage() );
+        return false;
       }
     }
 
@@ -735,6 +744,8 @@ class ShotEditDialog extends MyDialog
     //   TDLog.v( "renumber shots after block id " + mBlk.mId );
     //   mParent.renumberShotsAfter( mBlk );
     // }
+
+    return true;
   }
 
 
@@ -836,11 +847,11 @@ class ShotEditDialog extends MyDialog
       dismiss();
       if ( TDLevel.overNormal ) mParent.onBlockLongClick( mBlk );
     } else if ( b == mButtonOK ) { // OK and SAVE close the keyboard
-      saveDBlock();
-      dismiss();
+      if ( saveDBlock() ) dismiss();
     } else if ( b == mButtonSave ) {
-      saveDBlock();
-
+      if ( ! saveDBlock() ) {
+        TDToast.makeWarn( R.string.shot_not_saved );
+      }
     } else if ( b == mButtonPrev ) {
       mCBallSplay.setVisibility( View.GONE );
       setCBxSplay( -1 );
@@ -875,10 +886,16 @@ class ShotEditDialog extends MyDialog
       }
 
     } else if ( b == mButtonReverse ) {
-      shot_from = mETfrom.getText().toString();
-      shot_from = TDUtil.noSpaces( shot_from );
-      shot_to = mETto.getText().toString();
-      shot_to = TDUtil.noSpaces( shot_to );
+      shot_from = TDUtil.toStationFromName( mETfrom.getText().toString() );
+      if ( ! TDUtil.isStationName( shot_from ) ) {
+        mETfrom.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+        return;
+      }
+      shot_to = TDUtil.toStationToName( mETto.getText().toString() );
+      if ( ! TDUtil.isStationName( shot_to ) ) {
+        mETto.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+        return;
+      }
       if ( shot_to.length() > 0 && shot_from.length() > 0 ) { // TODO REVERSE SPLAY ?
         String temp = shot_from; // new String( shot_from );
         shot_from = shot_to;

@@ -579,28 +579,28 @@ public class MainWindow extends Activity
     // TDLog.v( "import with reader <" + name + "> type <" + type + ">" );
     ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
     // InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
-    if ( type.equals(".th") ) {
+    if ( type.equals( TDPath.TH ) ) {
       setTitleImport();
       new ImportTherionTask( this, pfd, data ).execute( name, name );
-    } else if ( type.equals(".dat") ) {
+    } else if ( type.equals( TDPath.DAT ) ) {
       setTitleImport();
       new ImportCompassTask( this, pfd, data ).execute( name, name );
       // (new ImportDatDialog( this, this, pfd, name )).show();
-    } else if ( type.equals(".tro") || type.equals(".trox") ) {
+    } else if ( type.equals( TDPath.TRO ) || type.equals( TDPath.TROX ) ) {
       setTitleImport();
       // TDLog.v("type " + type + " data.trox " + data.mTrox );
       new ImportVisualTopoTask( this, pfd, data ).execute( name, name );
       // (new ImportTroDialog( this, this, pfd, name )).show();
-    } else if ( type.equals(".svx") ) {
+    } else if ( type.equals( TDPath.SVX ) ) {
       setTitleImport();
       new ImportSurvexTask( this, pfd ).execute( name ); 
-    } else if ( type.equals(".srv") ) {
+    } else if ( type.equals( TDPath.SRV ) ) {
       setTitleImport();
       new ImportWallsTask( this, pfd ).execute( name ); 
-    } else if ( type.equals(".trb") ) {
+    } else if ( type.equals( TDPath.TRB ) ) {
       setTitleImport();
       new ImportTRobotTask( this, pfd ).execute( name ); 
-    } else if ( type.equals(".csn") ) {
+    } else if ( type.equals( TDPath.CSN ) ) {
       setTitleImport();
       new ImportCaveSniperTask( this, pfd ).execute( name ); 
     // } else {
@@ -1461,7 +1461,27 @@ public class MainWindow extends Activity
           }
         } else {
           // TDLog.Error("ZIP import: failed manifest " + manifest_ok );
-          TDToast.makeBad( String.format( getResources().getString( R.string.bad_manifest ), (-manifest_ok) ) );
+          int bad = -1;
+          switch ( -manifest_ok ) {
+            case  1: bad = R.string.bad_manifest_zip;      break;
+            case  2: bad = R.string.bad_manifest_td;       break;
+            case  3: bad = R.string.bad_manifest_db_old;   break;
+            case  4: bad = R.string.bad_manifest_db_new;   break;
+            // case  5: bad = R.string.bad_manifest_name;     break;
+            case  6: bad = R.string.bad_manifest_present;  break;
+            case  7: bad = R.string.bad_manifest_db;       break;
+            case  8: bad = R.string.bad_manifest_sql;      break;
+            case  9: bad = R.string.bad_manifest_number;   break;
+            case 10: bad = R.string.bad_manifest_manifest; break;
+            case 11: bad = R.string.bad_manifest_missing;  break;
+            case 12: bad = R.string.bad_manifest_error;    break;
+            case 13: bad = R.string.bad_manifest_other;    break;
+            default:
+              TDToast.makeBad( String.format( getResources().getString( R.string.bad_manifest ), (-manifest_ok) ) );
+          }
+          if ( bad > 0 ) {
+            TDToast.makeBad( bad );
+          }
           return null;
         }
       } else {

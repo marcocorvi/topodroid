@@ -69,23 +69,37 @@ Each survey has a subfolder under "TopoDroid".<br>
 The "TopoDroid" folder contains the database, "distox14.sqlite", the survey folders,
 and the folder of the cave projects, "thconfig",<br><p>
 
+<h4>Hardware features</h4>
+TopoDroid uses the following hardware features: "bluetooth", "camera", "microphone", "GNSS", "multitouch".
+Functions of TopoDroid that require a feature not present in your Android device, are automatically turned off.
+<br>
+Internet connection is used only to install translations of the user manual, and to check if a new version is available.<br><p>
+
+<a href="page_perms.htm">Android permissions</a>
+<br><p>
+
 <h4>Granting access permissions</h4>
 On Android-11 and later, TopoDroid may fail to create the base folder "TDX", or some subfolders or files in it,
 because it does not have enough permission to access the <i>primary external storage</i>.<br>
-In this case you cen grant permissions using "adb" (Android Debug Bridge).<br>
+In this case you can grant permissions using "adb" (Android Debug Bridge).<br>
 <ol>
-<li>download "adb" on your PC</li>
-<li>on Android, enable "Developer options" (go to settings "About Phone", tap seven times the "Build number")</li>
+<li>Download "adb" on your PC</li>
+<li>On Android:
+<ul>
+<li>enable "Developer options" (go to settings "About Phone", tap seven times the "Build number")</li>
 <li>enable "USB debugging" in the "Developer options"</li>
-<li>on the PC start the adb server. Enter the command "adb start-server"</li>
-<li>connect Android to the PC with a USB cable. You might have to allow adb-connection from the PC, on your Android</li>
-<li>on the PC enter the three commands:
+</ul></li>
+<li>On the PC enter the command "adb start-server"</li>
+<li>Connect Android to the PC with a USB cabler:
+<ul>
+<li>on the Android, if asked, allow adb-connection from the PC</li>
+</ul></li>
+<li>On the PC enter the three commands:
 <ul>
 <li>adb shell appops set com.topodroid.TDX READ_EXTERNAL_STORAGE allow</li>
 <li>adb shell appops set com.topodroid.TDX WRITE_EXTERNAL_STORAGE allow</li>
 <li>adb shell appops set com.topodroid.TDX MANAGE_EXTERNAL_STORAGE allow</li>
-</ul>
-</li>
+</ul></li>
 </ol>
 <br><p>
 
@@ -99,14 +113,6 @@ http://marcocorvi.altervista.org/caving/speleoapps/speleoapks/TopoDroidZipScript
 <br><p>
 
 <b>N.B.</b> TopoDroid v.5.1.40 cannot import v.6 zip archives, because of changes in the database.<br><p>
-
-<h4>Hardware features</h4>
-TopoDroid uses the following hardware features: "bluetooth", "camera", "microphone", "GNSS", "multitouch".
-Functions of TopoDroid that require a feature not present in your Android device, are automatically turned off.
-<br>
-Internet connection is used only to install translations of the user manual, and to check if a new version is available.<br>
-<a href="page_perms.htm">Android permissions</a>
-<br><p>
 
 <h4>Native libraries</h4>
 TopoDroid contains a few libraries compiled native only for selected architectures (arm64_v8a, armeabi-v7a, and x86_64).

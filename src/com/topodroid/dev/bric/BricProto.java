@@ -178,7 +178,7 @@ public class BricProto extends TopoDroidProtocol
    */
   void processData()
   {
-    // TDLog.v( "BRIC proto process data - prim todo " + mPrimToDo + " index " + mIndex + " type " + mType );
+    TDLog.v( "BRIC proto process data - prim todo " + mPrimToDo + " index " + mIndex + " type " + mType );
     if ( mPrimToDo ) {
       if ( TDSetting.mBricZeroLength || mDistance > 0.01 ) {
         // TDLog.v( "BRIC proto: process - PrimToDo true: " + mIndex + " prev " + mLastIndex );

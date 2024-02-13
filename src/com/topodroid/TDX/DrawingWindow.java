@@ -8407,10 +8407,11 @@ public class DrawingWindow extends ItemDrawer
    * @param export_type  export type
    * @param filename     export filename
    * @param prefix       station names export-prefix (not used)
+   * @param first        not-used
    * @param second       whether to export the second view instead of the current view (only for plan or profile)
    * @note called from ExportDialogPlot to do the export
    */
-  public void doExport( String export_type, String filename, String prefix, boolean second ) // EXPORT
+  public void doExport( String export_type, String filename, String prefix, long first, boolean second ) // EXPORT
   {
     if ( export_type == null ) return;
     mExportIndex  = TDConst.plotExportIndex( export_type );

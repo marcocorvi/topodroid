@@ -53,7 +53,8 @@ public class ExportDialogShot extends MyDialog
   private int mSelectedPos;
   private String    mSurvey;
   private String    mExportPrefix = null;
-  private String    mExportName = null;
+  private String    mExportName   = null;
+  private long      mExportFirst  = -1L; // index of first shot to export
   private boolean   mDiving = false; // diving-mode survey
 
   private LinearLayout mLayoutZip;
@@ -87,8 +88,9 @@ public class ExportDialogShot extends MyDialog
     mTitle    = title;
     mSurvey   = survey;
     mDiving   = diving;
-    mExportPrefix = null;
-    mExportName   = null;
+    // mExportPrefix = null; // already in declaration
+    // mExportName   = null;
+    // mExportFirst  = -1L;
     // TDLog.v("EXPORT SHOT " + survey + " Types " + types.length + " diving " + diving );
   }
 
@@ -203,9 +205,9 @@ public class ExportDialogShot extends MyDialog
       if ( ! setOptions() ) return;
       int selected_pos = ( mSelectedPos == TDConst.SURVEY_POS_VTOPO && TDSetting.mVTopoTrox )? -mSelectedPos : mSelectedPos;
       if ( mExportName != null ) {
-        mParent.doExport( mSelected, mExportName, mExportPrefix, false ); // second = false
+        mParent.doExport( mSelected, mExportName, mExportPrefix, mExportFirst, false ); // second = false
       } else {
-        mParent.doExport( mSelected, TDConst.getSurveyFilename( selected_pos, mSurvey ), mExportPrefix, false ); // second = false
+        mParent.doExport( mSelected, TDConst.getSurveyFilename( selected_pos, mSurvey ), mExportPrefix, mExportFirst, false ); // second = false
       }
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
@@ -386,6 +388,15 @@ public class ExportDialogShot extends MyDialog
       // case 8: // TopoRobot
       case TDConst.SURVEY_POS_TOPOROBOT:
         {
+          int first = -1;
+          EditText index =  (EditText) findViewById( R.id.trobot_index );
+          if ( index.getText() != null ) {
+            try {
+              first = Integer.parseInt( index.getText().toString() );
+            } catch ( NumberFormatException e ) { first = -1; }
+            if ( first >= mApp.mData.maxShotId( TDInstance.sid ) ) return false;
+          }
+          mExportFirst = first;
           EditText name = (EditText) findViewById( R.id.trobot_name );
           if ( ! setExportName( TDConst.SURVEY_POS_TOPOROBOT, name ) ) return false;
         }
@@ -481,8 +492,8 @@ public class ExportDialogShot extends MyDialog
     ((CheckBox) findViewById( R.id.shp_stations )).setChecked( TDSetting.mKmlStations );
     // ((CheckBox) findViewById( R.id.shp_georeference )).setChecked( TDSetting.mShpGeoref );
 
-    ((EditText) findViewById( R.id.trobot_name )).setHint( mSurvey + ".trb");
-
+    ((EditText) findViewById( R.id.trobot_name )).setHint( mSurvey + TDPath.TRB );
+    ((EditText) findViewById( R.id.trobot_index )).setHint("-1");
   }
 
 

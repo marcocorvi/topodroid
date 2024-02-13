@@ -411,11 +411,18 @@ class ShotNewDialog extends MyDialog
       String shot_to = "";
    
       if ( notDone && mETfrom.getText() != null ) {
-        shot_from = TDUtil.noSpaces( mETfrom.getText().toString() );
+        shot_from = TDUtil.toStationFromName( mETfrom.getText().toString() );
+        if ( ! TDUtil.isStationName( shot_from ) ) {
+          mETfrom.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+          return;
+        }
       }
       if ( notDone && mETto.getText() != null ) {
-        shot_to = TDUtil.noSpaces( mETto.getText().toString() );
-        if ( shot_to.equals(".") || shot_to.equals("-") ) shot_to = "";
+        shot_to = TDUtil.toStationToName( mETto.getText().toString() );
+        if ( ! TDUtil.isStationName( shot_to ) ) {
+          mETto.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+          return;
+        }
       }
 
       // if ( TDString.isNullOrEmpty( shot_from ) && TDString.isNullOrEmpty( shot_to ) ) {

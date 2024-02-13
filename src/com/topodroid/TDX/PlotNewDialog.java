@@ -174,9 +174,13 @@ class PlotNewDialog extends MyDialog
     //   mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
     //   return false;
     // }
-    name = TDUtil.noSpaces( name );
-    if ( name.length() == 0 ) {
+    name = TDUtil.toStationFromName( name );
+    if ( name == null || name.length() == 0 ) {
       mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
+      return false;
+    }
+    if ( ! TDUtil.isStationName( name ) ) {
+      mEditName.setError( mContext.getResources().getString( R.string.bad_station_name ) );
       return false;
     }
     if ( mApp.hasSurveyPlotName( name ) ) {
@@ -189,12 +193,15 @@ class PlotNewDialog extends MyDialog
     //   return false;
     // }
     
-    // start = TDUtil.noSpaces( start );
-    start = start.trim();
+    // start = TDUtil.toStationFromName( start );
     if ( start.length() == 0 ) {
       mEditStart.setError( mContext.getResources().getString( R.string.error_start_required ) );
       return false;
     } 
+    if ( ! TDUtil.isStationName( start ) ) {
+      mEditStart.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+      return false;
+    }
     if ( mMaker.hasSurveyPlot( name ) ) {
       mEditName.setError( mContext.getResources().getString( R.string.plot_duplicate_name ) );
       return false;

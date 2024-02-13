@@ -29,6 +29,41 @@ public class TrbStruct
     mTrbSeries = new ArrayList< TrbSeries >();
   }
 
+  /** @return true if all the station names are already in TopoRobot style
+   */
+  public boolean areStationsAllTopoRobot()
+  {
+    for ( String st : mMap.keySet() ) {
+      int pos = st.indexOf( "." );
+      if ( pos < 1 || pos >= st.length() - 1 ) return false;
+      try {
+        Integer.parseInt( st.substring(0, pos) );
+        Integer.parseInt( st.substring(pos + 1) );
+      } catch ( NumberFormatException e ) { return false; }
+    }
+    return true;
+  }
+
+  /** copy the names of the TopoRobot stations and compute the series (TODO)
+   */
+  public void copyStations()
+  {
+    for ( String st : mMap.keySet() ) {
+      mMap.put( st, st );
+      int pos = st.indexOf( "." );
+      try {
+        int sr = Integer.parseInt( st.substring(0, pos) );
+        int pt = Integer.parseInt( st.substring(pos + 1) );
+        TrbSeries srs = getSeries( sr );
+        if ( srs == null ) {
+          srs = new TrbSeries( sr, sr, pt );
+          mTrbSeries.add( srs );
+        }
+        srs.increaseNrPoints();
+      } catch ( NumberFormatException e ) { /* does not happen */ } 
+    }
+  }
+
   /** @return the TopoRobot name for a station
    * @param st TopoDroid station name
    */
@@ -61,5 +96,14 @@ public class TrbStruct
   /** @return the number of stations
    */
   public int getNrStations() { return mMap.size(); }
+
+  /** @return a series (or null)
+   * @param sr  series number
+   */
+  public TrbSeries getSeries( int sr ) 
+  {
+    for ( TrbSeries srs : mTrbSeries ) if ( srs.series == sr ) return srs;
+    return null;
+  }
 
 }

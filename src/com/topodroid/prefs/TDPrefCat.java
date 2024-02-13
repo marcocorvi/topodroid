@@ -74,12 +74,12 @@ public class TDPrefCat
     R.string.title_settings_import,
     R.string.title_settings_3d,
     R.string.title_settings_export_enable,
-    R.string.title_settings_svx,
+    R.string.title_settings_svx,     // 10
     R.string.title_settings_th,
     R.string.title_settings_dat,
     R.string.title_settings_csx,
     R.string.title_settings_tro,
-    R.string.title_settings_svg,      // 14
+    R.string.title_settings_svg,      // 15
     R.string.title_settings_shp,
     R.string.title_settings_dxf,
     // R.string.title_settings_png, // 17
@@ -88,25 +88,25 @@ public class TDPrefCat
     R.string.title_settings_csv,
     R.string.title_settings_srv,
     R.string.title_settings_shot,     
-    R.string.title_settings_units,    // 21
+    R.string.title_settings_units,    // 23
     R.string.title_settings_accuracy,
     R.string.title_settings_location,
-    R.string.title_settings_screen,   // 24
+    R.string.title_settings_screen,   // 26
     R.string.title_settings_line,
-    R.string.title_settings_point,    // 26
-    -1, // R.string.title_settings_walls, // 27 AUTOWALLS
+    R.string.title_settings_point,    // 28
+    // R.string.title_settings_walls, // 27 AUTOWALLS
     R.string.title_settings_draw,
-    R.string.title_settings_erase,    // 29
+    R.string.title_settings_erase,    // 30
     R.string.title_settings_edit,
     R.string.title_settings_dem,
-    R.string.title_settings_walls3d,
+    R.string.title_settings_walls3d,  // 33
     R.string.title_settings_geek,
-    R.string.title_settings_geek_survey,   // 34
-    R.string.title_settings_geek_splay,    // 35
+    R.string.title_settings_geek_survey,   // 35
+    R.string.title_settings_geek_splay,    // 36
     R.string.title_settings_geek_plot,
-    R.string.title_settings_geek_line,     // 37
-    R.string.title_settings_geek_device,   // 38
-    R.string.title_settings_geek_import,   // 39
-    R.string.title_settings_log       // 40
+    R.string.title_settings_geek_line,     // 38
+    R.string.title_settings_geek_device,   //
+    R.string.title_settings_geek_import,   // 40
+    R.string.title_settings_log       // 41
   };
 }

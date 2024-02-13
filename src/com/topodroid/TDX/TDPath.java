@@ -40,12 +40,23 @@ public class TDPath
   final static String BCK_SUFFIX = ".bck";
 
   final static String C3D = ".c3d";
+  final static String CAV = ".cav"; // 
+  final static String CAVE = ".cave"; // Polygon
   final static String CSN = ".csn";  // CaveSniper
-  // final static String CSV = ".csv";
+  final static String CSV = ".csv";
+  final static String CSX = ".csx"; // cSurvey
   final static String DAT = ".dat"; // Compass
+  final static String DXF = ".dxf"; // 
+  final static String GPX = ".gpx"; // 
+  final static String GTX = ".gtx"; // 
+  final static String KML = ".kml"; // 
+  final static String PDF = ".pdf"; // 
+  final static String SHZ = ".shz"; // shapefile
+  final static String SUR = ".sur"; // WinKarst
+  final static String SVG = ".svx"; // SVG
   final static String SVX = ".svx"; // Survex
   final static String SRV = ".srv"; // Walls
-  final static String TRB = ".trb"; // TopoRobot
+  final static String TRB = ".Text"; // TopoRobot
   final static String TDR = ".tdr";
   final static String TH2 = ".th2"; // TH2EDIT
   // final static private String TMP = ".tmp";
@@ -55,7 +66,13 @@ public class TDPath
   final static String TRO = ".tro"; // VisualTopo
   final static String TROX = ".trox"; // VisualTopo
   final static String TXT = ".txt";
+  final static String XVI = ".xvi";
   final static String ZIP = ".zip";
+
+  final static String GLTF = ".gltf";
+  final static String CGAL = ".cgal";
+  final static String STL  = ".stl";
+  final static String LAS  = ".las";
 
   final static String DIR_BIN   = "bin";
   final static String DIR_CCSV  = "ccsv";

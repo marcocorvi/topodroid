@@ -93,6 +93,7 @@
     <string name="shot_not_found">Замеры не найдены</string>
     <string name="bad_sibling">Плохой замер в группе</string>
     <string name="bad_station">Плохой пикет: %1$s</string>
+    <!-- TODO string name="bad_station_name">Illegal station name</string -->
     <!-- UNUSED string name="missing_area">ОБЛАСТЬ</string -->
     <!-- UNUSED string name="missing_hint">Пожалуйста, подключите недостающие инструменты, либо установите их.</string -->
     <!-- UNUSED string name="missing_line">ЛИНИЯ</string -->
@@ -244,6 +245,7 @@
     <string name="import_calib_mismatch">Калибр.-несоответсвие прибора</string>
     <string name="import_calib_no_data">Файл калиб.: отсутствуют даные</string>
     <string name="import_calib_io_error">Файл калиб.: ошибка чтения</string>
+    <!-- TODO string name="imported_file">Imported %1$s</string -->
     <string name="import_calib_ok">Калибровка успешно импортирована</string>
     <string name="import_zip_ok">Успешно импортирован zip файл</string>
     <string name="import_zip_newer">Импортирован zip более новой версии</string>
@@ -254,6 +256,19 @@
     <string name="MT_points_none">Нет точки MobileTopographer</string>
     <string name="MT_bad_file">Плохойй файл MobileTopographer</string>
     <string name="bad_manifest">Неверный файл манифеста [%1$d]</string>
+    <!-- TODO string name="bad_manifest_zip">Failed: zip read error</string -->
+    <!-- TODO string name="bad_manifest_td">Failed: TopoDroid version too old</string -->
+    <!-- TODO string name="bad_manifest_db_old">Failed: database version too old</string -->
+    <!-- TODO string name="bad_manifest_db_new">Failed: database version too new</string -->
+    <!-- UNUSED string name="bad_manifest_name">Failed: survey name differ from zip name</string -->
+    <!-- TODO string name="bad_manifest_present">Failed: survey already present</string -->
+    <!-- TODO string name="bad_manifest_db">Failed: cannot open database</string -->
+    <!-- TODO string name="bad_manifest_sql">Failed: SQL error</string -->
+    <!-- TODO string name="bad_manifest_number">Failed: wrong number</string -->
+    <!-- TODO string name="bad_manifest_manifest">Failed: wrong manifest</string -->
+    <!-- TODO string name="bad_manifest_missing">Failed: missing manifest</string -->
+    <!-- TODO string name="bad_manifest_error">Failed: manifest read error</string -->
+    <!-- TODO string name="bad_manifest_other">Failed: unexpected error</string -->
     <string name="archive_reset_color">Внимание. Настройки цветов сброшены</string>
  
     <string name="pleasewait">Пожалуйста подождите</string>
@@ -681,6 +696,7 @@
     <string name="write_ok">Запись калибровки в DistoX</string>
     <string name="zip_saved">Сохранено </string>
     <string name="zip_failed">Ошибка survey-zip</string>
+    <!-- TODO string name="zip_share_failed">Unable to share zip-archive</string -->
     <string name="unzip_fail">Ошибка survey-unzip</string>
     <string name="unzip_fail_sqlite">Ошибка SQL: удалите съёмку и попробуйте снова</string>
     <string name="unzip_fail_survey">Ошибка: несовпадение названия съёмки</string>
@@ -689,6 +705,7 @@
     <!-- UNUSED string name="zoom_in_out">Увеличить/уменьшить/string -->
     <string name="screenshot_saved">Сохранен скриншот %1$s</string>
     <string name="screenshot_failed">Не удалось сделать снимок экрана</string>
+    <!-- TODO string name="start_index">Start-shot index</string -->
 
     <string name="survey_info">Статистика съёмки</string>
     <string name="stat_dates">С %1$s по %2$s</string>
@@ -1475,6 +1492,8 @@
   <string name="pref_csv_eol_summary">CSV окончание строки</string>
   <string name="pref_gpx_single_track_title">GPX единый трек</string>
   <string name="pref_gpx_single_track_summary">Экспорт съёмок проекта в единый GPX трек</string>
+  <!-- TODO string name="pref_zip_share_category_title">Zip-share category</string -->
+  <!-- TODO string name="pref_zip_share_category_summary">Add category to zip-share request</string -->
 
   <string name="pref_sock_type_title">Тип соединения</string>
   <string name="pref_sock_type_summary">Тип соединения Bluetooth</string>
@@ -2163,6 +2182,7 @@
     <string name="error_parser_error">Ошибка: ошибка парсера %1$s</string>
     <string name="error_export_failed">Ошибка: неудачный экспорт %1$s</string>
     <string name="unsupported_format">Неподдерживаемый формат файла</string>
+    <!-- TODO string name="unsupported_extension">Unsupported file extension %1$s</string -->
 
     <!-- UNUSED string name="export_gltf_ok">Exported glTF file</string -->
     <!-- UNUSED string name="export_gltf_fail">Failed glTf export</string -->

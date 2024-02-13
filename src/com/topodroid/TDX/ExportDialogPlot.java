@@ -200,12 +200,12 @@ public class ExportDialogPlot extends MyDialog
     if ( b == mBtnOk && mSelected != null ) {
       setOptions();
       if ( mParentType == PARENT_DRAWING ) { // plot
-        mParent.doExport( mSelected, TDConst.getPlotFilename( mSelectedPos, mPlotName1 ), null, false );  // null prefix
+        mParent.doExport( mSelected, TDConst.getPlotFilename( mSelectedPos, mPlotName1 ), null, -1L, false );  // null prefix, -1=first
         if ( mBothViews && mPlotName2 != null ) {
-          mParent.doExport( mSelected, TDConst.getPlotFilename( mSelectedPos, mPlotName2 ), null, true );  // null prefix
+          mParent.doExport( mSelected, TDConst.getPlotFilename( mSelectedPos, mPlotName2 ), null, -1L, true );  // null prefix, -1=first
         }
       } else { // overview
-        mParent.doExport( mSelected, TDConst.getOverviewFilename( mSelectedPos, mPlotName1 ), null, false ); // null prefix
+        mParent.doExport( mSelected, TDConst.getOverviewFilename( mSelectedPos, mPlotName1 ), null, -1L, false ); // null prefix, -1=first
       }
     // } else if ( b == mBtnBack ) {
     //   /* nothing */

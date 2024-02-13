@@ -119,6 +119,27 @@ public class TDUtil
     }
   }
 
+  public static String toStationFromName( String s )
+  {
+    if ( s == null ) return null;
+    return s.replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "").replaceAll(":","-");
+  }
+
+  public static String toStationToName( String s )
+  {
+    if ( s == null ) return null;
+    s = s.replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "").replaceAll(":","-");
+    if ( s.equals(".") || s.equals("-") ) return "";
+    return s;
+  }
+
+  public static boolean isStationName( String s )
+  {
+    if ( s == null || s.length() == 0 ) return true;
+    int ch = s.codePointAt( s.length() - 1);
+    return ( Character.isAlphabetic( ch ) || Character.isDigit( ch ) );
+  }
+
   public static String noSpaces( String s )
   {
     return ( s == null )? null 

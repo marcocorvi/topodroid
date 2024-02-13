@@ -20,6 +20,8 @@ public class TrbSeries
   public int points = 0;
   public int start_series;
   public int start_point;
+  public int end_series;
+  public int end_point;
 
   private TrbShot first_shot;
   private TrbShot last_shot;
@@ -34,6 +36,8 @@ public class TrbSeries
     first_shot = null;
     last_shot  = null;
     nr_shots   = 0;
+    end_series = -1;
+    end_point  = -1;
   }
 
   /** set the number of points (ie shots)
@@ -41,9 +45,24 @@ public class TrbSeries
    */
   public void setPoints( int pts ) 
   {
-    points = pts;
-    TDLog.v("TRB series " + series + " points " + points + " shots " + nr_shots + " start " + start_series + "." + start_point );
+    points    = pts;
+    // TDLog.v("TRB series " + series + " points " + points + " shots " + nr_shots + " start " + start_series + "." + start_point );
   }
+
+  /** set the series end-point
+   * @param sr   end series
+   * @param pt   end point
+   */
+  public void setEndPoint( int sr, int pt )
+  {
+    end_series = sr;
+    end_point  = pt;
+  }
+
+  /** increase the number of points (= nr of shots)
+   */
+  public void increaseNrPoints() { points ++; }
+  
 
   /** append a new shot to the list
    * @param blk   data block
@@ -65,6 +84,10 @@ public class TrbSeries
   /** @return the first shot of the (linked) list of shots
    */
   public TrbShot getShots() { return first_shot; }
+
+  /** @return the number of shots in this series
+   */
+  public int getNrShots() { return nr_shots; }
 
   public void dumpBlocks()
   {

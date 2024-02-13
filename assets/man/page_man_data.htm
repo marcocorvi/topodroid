@@ -24,6 +24,11 @@ the dialog is ready to input the next shot</li>
 <li><b>OK</b> inserts the shot in the survey, and closes the dialog.</li>
 </ul><br><p>
 
+<b>Station names</b><br>
+If a station name contains the following characters, '/', '*', ':', they are replaced with '-', '+', and '-', respectively.
+Multiple spaces are replaced with '_'. Backslashes are dropped.<br>
+If the TO station name is "." or "-", it is replaced with the empty name.<br><p>
+
 <b>Using Android for the direction</b><br>
 Azimuth and clino can be set using the Android sensors [G]:<br>
 <img src="btn_compass.png" width="36" border="1" > the reference axis is the direction of the long side of the device.

@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 // import com.topodroid.utils.TDFile;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyDialog;
@@ -229,6 +230,13 @@ class FixedImportDialog extends MyDialog
         mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
         return;
       }
+      // station = TDUtil.toStationFromName( station );
+      if ( ! TDUtil.isStationName( station ) ) {
+        mETstation.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+        return;
+      }
+      // mETstation.setText( station );
+      
       if ( mParent.hasFixed( station ) ) {
         mETstation.setError( mContext.getResources().getString( R.string.error_station_fixed ) );
         return;

@@ -19,9 +19,10 @@ public interface IExporter
    * @param type         export type
    * @param filename     export filename
    * @param prefix       station names export-prefix
+   * @param first        index of first shot to export (-1: all)
    * @param second       whether to export the second view (only plot or profile in DrawingWindow)
    */
-  void doExport( String type, String filename, String prefix, boolean second );
+  void doExport( String type, String filename, String prefix, long first, boolean second );
 
   // void doExport( Uri uri );
 }

@@ -78,6 +78,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="shot_not_found">Keine Messung gefunden</string>
   <string name="bad_sibling">Messzug weicht stark ab</string>
   <string name="bad_station">Ungültiger Messpunkt: %1$s</string>
+    <!-- TODO string name="bad_station_name">Illegal station name</string -->
   <!-- UNUSED string name="missing_area">FLÄCHE</string -->
   <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
   <!-- UNUSED string name="missing_line">LINIE</string -->
@@ -220,6 +221,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="import_calib_mismatch">Kalibrierungsgerät falsch</string>
   <string name="import_calib_no_data">Kalibrierungsdatei: Keine Daten</string>
   <string name="import_calib_io_error">Kalibrierungsdatei: Lesefehler</string>
+    <!-- TODO string name="imported_file">Imported %1$s</string -->
   <string name="import_zip_ok">Zip-Datei erfolgreich importiert</string>
   <string name="import_zip_newer">Neuere Zip-Datei importiert</string>
   <!-- UNUSED string name="import_zip_wait">Importiere Zip-Datei, bitte warten&#8230;</string -->
@@ -229,6 +231,19 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="MT_points_none">Keine MobileTopographer Punkte</string>
   <string name="MT_bad_file">Kein MobileTopographer File</string>
   <string name="bad_manifest">Nicht unterstütztes Manifest [%1$d]</string>
+    <!-- TODO string name="bad_manifest_zip">Failed: zip read error</string -->
+    <!-- TODO string name="bad_manifest_td">Failed: TopoDroid version too old</string -->
+    <!-- TODO string name="bad_manifest_db_old">Failed: database version too old</string -->
+    <!-- TODO string name="bad_manifest_db_new">Failed: database version too new</string -->
+    <!-- UNUSED string name="bad_manifest_name">Failed: survey name differ from zip name</string -->
+    <!-- TODO string name="bad_manifest_present">Failed: survey already present</string -->
+    <!-- TODO string name="bad_manifest_db">Failed: cannot open database</string -->
+    <!-- TODO string name="bad_manifest_sql">Failed: SQL error</string -->
+    <!-- TODO string name="bad_manifest_number">Failed: wrong number</string -->
+    <!-- TODO string name="bad_manifest_manifest">Failed: wrong manifest</string -->
+    <!-- TODO string name="bad_manifest_missing">Failed: missing manifest</string -->
+    <!-- TODO string name="bad_manifest_error">Failed: manifest read error</string -->
+    <!-- TODO string name="bad_manifest_other">Failed: unexpected error</string -->
   <string name="archive_reset_color">Warnung. Benutzerdefinierte Farben zurückgesetzt</string>
 
   <string name="pleasewait">Bitte warten</string>
@@ -629,6 +644,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="write_ok">DistoX Schreiben erfolgreich</string>
   <string name="zip_saved">Zip-Datei gespeichert</string>
   <string name="zip_failed">Fehler beim Speichern der Zip-Datei</string>
+    <!-- TODO string name="zip_share_failed">Unable to share zip-archive</string -->
   <string name="unzip_fail">Fehler beim Entpacken der Zip-Datei</string>
   <string name="unzip_fail_sqlite">Datenbank-Fehler; Vermessung löschen und erneut versuchen</string>
   <string name="unzip_fail_survey">Fehler: Vermessungsname falsch</string>
@@ -637,6 +653,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="zoom_in_out">Zoom in/out</string -->
     <!-- TODO string name="screenshot_saved">Saved screenshot %1$s</string -->
     <!-- TODO string name="screenshot_failed">Failed taking screenshot</string -->
+    <!-- TODO string name="start_index">Start-shot index</string -->
 
   <string name="survey_info">Vermessungsinfo</string>
   <string name="stat_dates">Von %1$s nach %2$s</string>
@@ -1367,6 +1384,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_csv_eol_summary">CSV Zeilenumbruchzeichen</string>
   <string name="pref_gpx_single_track_title">GPX Einzeltrack</string>
   <string name="pref_gpx_single_track_summary">Exportiere Vermessungen als einzelnen GPX-Track</string>
+  <!-- TODO string name="pref_zip_share_category_title">Zip-share category</string -->
+  <!-- TODO string name="pref_zip_share_category_summary">Add category to zip-share request</string -->
   <string name="pref_sock_type_title">Anschlussart</string>
   <string name="pref_sock_type_summary">Bei Verbindungsproblemen auf \'Unsicher\' wechseln</string>
   <!-- UNUSED string name="pref_device_type_title">DistoX Modell</string -->
@@ -1999,6 +2018,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="error_parser_error">Fehler beim parsen von %1$s</string>
   <string name="error_export_failed">Fehler beim exportieren von %1$s</string>
   <string name="unsupported_format">Dateiformat nicht unterstützt</string>
+    <!-- TODO string name="unsupported_extension">Unsupported file extension %1$s</string -->
   <!-- UNUSED string name="export_gltf_ok">Exported glTF file</string -->
   <!-- UNUSED string name="export_gltf_fail">Failed glTf export</string -->
   <!-- UNUSED string name="warning_not_overwrite">Warning: not overwriting existing file %1$s</string -->

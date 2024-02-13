@@ -117,7 +117,7 @@ public class ExportDialogTdm extends MyDialog
     // TDLog.v("TDM selected " + mSelected );
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
-      mParent.doExport( mSelected, getFilename(), null, false ); // null prefix, false second
+      mParent.doExport( mSelected, getFilename(), null, -1L, false ); // null prefix, false second, -1=first
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
     }

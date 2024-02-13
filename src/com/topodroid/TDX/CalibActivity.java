@@ -516,11 +516,12 @@ public class CalibActivity extends Activity
   /** export this calibration 
    * @param type    export type (string)
    * @param name    calib filename (not used)
-   * @param prefix  station-prefix (not used)
+   * @param prefix  station-prefix (not used)A
+   * @param first   not-used
    * @param second  whether to export the second view (unused)
    * @note implements IExporter
    */
-  public void doExport( String type, String name, String prefix, boolean second )
+  public void doExport( String type, String name, String prefix, long first, boolean second )
   {
     int index = TDConst.calibExportIndex( type );
     if ( index >= 0 ) {

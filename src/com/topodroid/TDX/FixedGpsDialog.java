@@ -14,7 +14,7 @@ package com.topodroid.TDX;
 // import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
-// import com.topodroid.utils.TDUtil;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
@@ -198,6 +198,13 @@ class FixedGpsDialog extends MyDialog
       mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
       return false;
     }
+    name = TDUtil.toStationFromName( name );
+    if ( ! TDUtil.isStationName( name ) ) {
+      mETstation.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+      return false;
+    }
+    mETstation.setText( name );
+
     if ( mParent.hasFixed( name ) ) {
       mETstation.setError( mContext.getResources().getString( R.string.error_station_fixed ) );
       return false;

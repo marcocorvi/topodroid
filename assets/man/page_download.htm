@@ -30,9 +30,10 @@ In this case switch the DistoXBLE off and on, and try again to download data.<br
 The data download from the <i>Bric4</i> can be limited to only the essential values (distance, azimuth, clino, and little more), or
 complete, with all the information transferred by the Bric4 protocol.<br><p>
 
-The complete protocol includes the "index" of the shot. By default TopoDroid uses the <i>Bric4 index</i> as data index
-in the database table, if it receives it. Since the data index must be unique, if TopoDroid receives a shot with an index that
-is already in the database, a novel value is used instead of the <i>Bric4 index</i>.<br>
+The complete protocol includes the "index" of the shot. TopoDroid uses the <i>Bric4 index</i> as data index
+in the database table, if it receives it, and the <i>Bric</i> data mode is set to use also the index.
+Since the data index must be unique, if TopoDroid receives a shot with an index that
+is already in the database, instead of the  <i>Bric4 index</i> it uses a novel value for the data index.<br>
 
 The Bric4 index can be reset with the <i>Advanced menu | Memory clear</i> BRIC4 command.<br>
 

@@ -199,17 +199,17 @@ class MultishotDialog extends MyDialog
 
     Button b = (Button) v;
     if ( b == mButtonRenumber ) {
-      String from = TDUtil.noSpaces( mETfrom.getText().toString() );
-      // if ( /* from == null || */ from.length() == 0 ) {
-      //   mETfrom.setError( mContext.getResources().getString( R.string.error_station_required ) );;
-      //   return;
-      // }
-      String to   = TDUtil.noSpaces( mETto.getText().toString() );
-      // if ( /* to == null || */ to.length() == 0 ) {
-      //   mETto.setError( mContext.getResources().getString( R.string.error_station_required ) );;
-      //   return;
-      // }
-      //
+      String from = TDUtil.toStationFromName( mETfrom.getText().toString() );
+      if ( ! TDUtil.isStationName( from ) ) { 
+        mETfrom.setError( mContext.getResources().getString( R.string.bad_station_name ) );;
+        return;
+      }
+      String to   = TDUtil.toStationToName( mETto.getText().toString() );
+      if ( ! TDUtil.isStationName( to ) ) {
+        mETto.setError( mContext.getResources().getString( R.string.bad_station_name ) );;
+        return;
+      }
+      
       if ( from != null ) { // always true
         // FROM and TO can be empty, but this means no renumbering is made (only station assignment to first block)
         mParent.renumberBlocks(mBlks, from, to);

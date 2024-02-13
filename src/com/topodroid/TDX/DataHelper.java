@@ -78,6 +78,7 @@ public class DataHelper extends DataSetObservable
   private final static String WHERE_SID_ID_MORE = "surveyId=? AND id>=?";
   private final static String WHERE_SID_NAME    = "surveyId=? AND name=?";
   private final static String WHERE_SID_STATUS  = "surveyId=? AND status=?";
+  private final static String WHERE_SID_STATUS_FROM  = "surveyId=? AND status=? AND id>=?";
   // private final static String WHERE_SID_STATUS_LEG  = "surveyId=? AND status=? AND fStation > \"\" AND tStation > \"\"";
   private final static String WHERE_SID_LEG     = "surveyId=? AND fStation > \"\" AND tStation > \"\"";
   private final static String WHERE_SID_FROM    = "surveyId=? AND fStation > \"\"";
@@ -1778,7 +1779,7 @@ public class DataHelper extends DataSetObservable
   { // 0L=leg, status, 0L=type DISTOX
     // stretch = 0.0;
     // return doInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, "", "",  d, b, c, r, extend, 0.0, DBlock.FLAG_SURVEY, 0L, status, 0L, "", addr );
-    if ( id >= 0 && hasShotId( sid, id ) ) { // if shot ID is already present, use a new ID
+    if ( id < maxShotId( sid ) ) { // if shot ID is already present, use a new ID
       id = -1L;
     }
     return doBricInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, d, b, c, r, mag, acc, dip, extend, 0.0, leg, status, comment, 0L, addr );
@@ -1806,7 +1807,7 @@ public class DataHelper extends DataSetObservable
   /** insert a shot copying from a dblock (except surveyId and Id)
    * @param sid    survey ID
    * @param blk    dblock
-   * @return inserted shot ID
+   * @return inserted shot ID (-1 on error)
    */
   public long insertDBlockShot( long sid, DBlock blk )
   {
@@ -1817,7 +1818,7 @@ public class DataHelper extends DataSetObservable
                          blk.mLength, blk.mBearing, blk.mClino, blk.mRoll, blk.mMagnetic, blk.mAcceleration, blk.mDip, 
                          blk.mExtend, blk.getStretch(), blk.mFlag, blk.getLegType(), 0, blk.getShotType(), blk.mComment, blk.getAddress(),
                          blk.mRawMx, blk.mRawMy, blk.mRawMz, blk.mRawGx, blk.mRawGy, blk.mRawGz );
-    doInsert( SHOT_TABLE, cv, "dblock insert" );
+    if ( ! doInsert( SHOT_TABLE, cv, "dblock insert" ) ) return -1L;
     return myNextId;
   }
 
@@ -2147,7 +2148,7 @@ public class DataHelper extends DataSetObservable
     cv.put( "rawGy",    0.0 );
     cv.put( "rawGz",    0.0 );
 
-    doInsert( SHOT_TABLE, cv, "insert at" );
+    if ( ! doInsert( SHOT_TABLE, cv, "insert at" ) ) return -1L;
     return at;
   }
 
@@ -2208,7 +2209,7 @@ public class DataHelper extends DataSetObservable
     if (addr == null) addr = "";
     ContentValues cv = makeShotContentValues( sid, id, millis, color, from, to, d, b, c, r, 0.0, 0.0, 0.0,
 		    extend, stretch, flag, leg, status, shot_type, comment, addr, 0, 0, 0, 0, 0, 0 );
-    doInsert( SHOT_TABLE, cv, "insert" );
+    if ( ! doInsert( SHOT_TABLE, cv, "insert" ) ) return -1L;
     return id;
   }
   */
@@ -2247,7 +2248,7 @@ public class DataHelper extends DataSetObservable
     }
     if (addr == null) addr = "";
     ContentValues cv = makeShotContentValues( sid, id, millis, color, "", "", d, b, c, r, 0.0, 0.0, 0.0, extend, stretch, DBlock.FLAG_SURVEY, leg, status, shot_type, "", addr, 0, 0, 0, 0, 0, 0 );
-    doInsert( SHOT_TABLE, cv, "simple insert" );
+    if ( ! doInsert( SHOT_TABLE, cv, "simple insert" ) ) return -1L;
     return id;
   }
 
@@ -2255,8 +2256,7 @@ public class DataHelper extends DataSetObservable
                           double d, double b, double c, double r, double mag, double acc, double dip,
                           long extend, double stretch, long leg, long status, String comment, long shot_type, String addr )
   {
-    // TDLog.Log( TDLog.LOG_DB, "insert shot <" + id + "> " + from + "-" + to + " extend " + extend );
-    // TDLog.v("DB complete insert shot id " + id + " d " + d + " b " + b + " c " + c );
+    TDLog.v("DB complete insert shot id " + id + " d " + d + " b " + b + " c " + c );
     if ( myDB == null ) return -1L;
     if ( id == -1L ) {
       ++ myNextId;
@@ -2267,7 +2267,7 @@ public class DataHelper extends DataSetObservable
     if (addr == null) addr = "";
     ContentValues cv = makeShotContentValues( sid, id, millis, color, "", "", d, b, c, r, mag, acc, dip,
 		    extend, stretch, DBlock.FLAG_SURVEY, leg, status, shot_type, comment, addr, 0, 0, 0, 0, 0, 0 );
-    doInsert( SHOT_TABLE, cv, "bric insert" );
+    if ( ! doInsert( SHOT_TABLE, cv, "bric insert" ) ) return -1L;
     return id;
   }
 
@@ -2288,7 +2288,7 @@ public class DataHelper extends DataSetObservable
     if (addr == null) addr = "";
     ContentValues cv = makeShotContentValues( sid, id, millis, color, "", "", d, b, c, r, mag, acc, dip,
 		    extend, stretch, DBlock.FLAG_SURVEY, leg, status, shot_type, comment, addr, rawMx, rawMy, rawMz, rawGx, rawGy, rawGz );
-    doInsert( SHOT_TABLE, cv, "cavway insert" );
+    if ( ! doInsert( SHOT_TABLE, cv, "cavway insert" ) ) return -1L;
     return id;
   }
 
@@ -3939,6 +3939,33 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
+  /** get the export shots after a given shot-id
+   * @param sid     surveyId
+   * @param status  shot status
+   * @param first   id of first shot to export
+   * @return list of shots
+   * @note used by TopoRobot export only
+   */
+  List< DBlock > selectExportShots( long sid, long status, long first )
+  {
+    // TDLog.v( "B3 select shots all");
+    List< DBlock > list = new ArrayList<>();
+    if ( myDB == null ) return list;
+    Cursor cursor = myDB.query(SHOT_TABLE, mFullShotFields,
+                    WHERE_SID_STATUS_FROM, new String[]{ Long.toString(sid), Long.toString(status), Long.toString(first) },
+                    null, null, "id" );
+    if (cursor.moveToFirst()) {
+      do {
+        DBlock block = new DBlock();
+        fullFillBlock( sid, block, cursor );
+        list.add( block );
+      } while (cursor.moveToNext());
+    }
+    // TDLog.Log( TDLog.LOG_DB, "select All Shots list size " + list.size() );
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return list;
+  }
+
   /** get the last non-blank shot
    * @param sid    survey ID
    * // param backshot  whether the DistoX is in backshot mode
@@ -4239,7 +4266,7 @@ public class DataHelper extends DataSetObservable
       cv.put( "day",      "" );
       cv.put( "comment",  "" );
       cv.put( "datamode", datamode );
-      doInsert( table, cv, "set name" );
+      if ( ! doInsert( table, cv, "set name" ) ) return -1L;
     }
     return id;
   }
@@ -4468,15 +4495,15 @@ public class DataHelper extends DataSetObservable
    * @param date      date
    * @param comment   comment
    * @param camera    camera type
+   * @return id of the record (-1 on error)
    */
-  void insertPhoto( long sid, long id, long shotid, String title, String date, String comment, int camera )
+  long insertPhoto( long sid, long id, long shotid, String title, String date, String comment, int camera )
   {
-    if ( myDB == null ) return; // -1L;
+    if ( myDB == null ) return -1L;
     if ( id == -1L ) id = maxId( PHOTO_TABLE, sid );
     ContentValues cv = makePhotoContentValues( sid, id, shotid, TDStatus.NORMAL, title, date, comment, camera );
-    doInsert( PHOTO_TABLE, cv, "photo insert" );
-    // if ( ! doInsert( PHOTO_TABLE, cv, "photo insert" ) ) return -1L;
-    // return id;
+    if ( ! doInsert( PHOTO_TABLE, cv, "photo insert" ) ) return -1L;
+    return id;
   }
 
   /** @return the next ID for a photo
@@ -4561,15 +4588,15 @@ public class DataHelper extends DataSetObservable
    * @param comment   comment
    * @param type      sensor type
    * @param value     sensor value
+   * @return id of the record (-1 on error)
    */
-  void insertSensor( long sid, long id, long shotid, String title, String date, String comment, String type, String value )
+  long insertSensor( long sid, long id, long shotid, String title, String date, String comment, String type, String value )
   {
-    if ( myDB == null ) return; // -1L;
+    if ( myDB == null ) return -1L;
     if ( id == -1L ) id = maxId( SENSOR_TABLE, sid );
     ContentValues cv = makeSensorContentValues( sid, id, shotid, TDStatus.NORMAL, title, date, comment, type, value );
-    doInsert( SENSOR_TABLE, cv, "sensor insert" );
-    // if ( ! doInsert( SENSOR_TABLE, cv, "sensor insert" ) ) return -1L;
-    // return id;
+    if ( ! doInsert( SENSOR_TABLE, cv, "sensor insert" ) ) return -1L;
+    return id;
   }
 
   /** @return the next ID for a sensor-data
@@ -4872,6 +4899,14 @@ public class DataHelper extends DataSetObservable
       id = -1L;
     }
     return id;
+  }
+
+  /** @return the max shot id of a survey (max = one past the largest)
+   * @param sid   survey id
+   */
+  long maxShotId( long sid )
+  {
+    return maxId( SHOT_TABLE, sid );
   }
 
   /** @return the maximum ID in a table for a given survey
@@ -6086,10 +6121,10 @@ public class DataHelper extends DataSetObservable
    * @param flag         station flag
    * @param presentation station presentation string
    */
-  public void insertStation( long sid, String name, String comment, long flag, String presentation )
+  public boolean insertStation( long sid, String name, String comment, long flag, String presentation )
   {
-    if ( myDB == null ) return; // false;
-    // boolean ret = false;
+    if ( myDB == null ) return false;
+    boolean ret = false;
     if ( comment == null ) comment = TDString.EMPTY;
     Cursor cursor = myDB.query( STATION_TABLE, mStationFields,
                            "surveyId=? and name=?", new String[] { Long.toString( sid ), name },
@@ -6125,11 +6160,10 @@ public class DataHelper extends DataSetObservable
       // doStatement( updateStationCommentStmt, "station update" );
     } else {
       ContentValues cv = makeStationContentValues( sid, name, comment, flag, ((presentation == null)? name : presentation) );
-      // ret =
-      doInsert( STATION_TABLE, cv, "station insert" );
+      ret = doInsert( STATION_TABLE, cv, "station insert" );
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-    // return ret;
+    return ret;
   }
 
   /** @return a station

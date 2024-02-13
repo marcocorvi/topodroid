@@ -155,10 +155,9 @@ public class TopoDroidProtocol
   {
     if ( TDSetting.mPacketLog ) logPacket( 0L, buffer );
     byte type = (byte)(buffer[0] & 0x3f);
-    // TDLog.v( "TD proto: handle packet: type " + type );
-    // TDLog.v( "TD proto: handle packet type " + type + " " + 
-    //     String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buffer[0], buffer[1], buffer[2],
-    //     buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
+    TDLog.v( "TD proto: handle packet: type " + type );
+    TDLog.v( "TD proto: handle packet type " + type + " " + 
+         String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buffer[0], buffer[1], buffer[2], buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
 
     // int high, low;
     switch ( type ) {

@@ -93,6 +93,8 @@
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <string name="shot_not_found">未发现测线数据</string>
     <string name="bad_sibling">坏的测量簇</string>
+    <!-- TODO string name="bad_station">Bad station: %1$s</string -->
+    <!-- TODO string name="bad_station_name">Illegal station name</string -->
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINE</string -->
@@ -244,6 +246,7 @@
     <string name="import_calib_mismatch">校准-设备不匹配</string>
     <string name="import_calib_no_data">校准-无文件</string>
     <string name="import_calib_io_error">校准文件: 读取错误</string>
+    <!-- TODO string name="imported_file">Imported %1$s</string -->
     <string name="import_zip_ok">成功导入zip文件</string>
     <string name="import_zip_newer">从最近的版本导入zip文件</string>
     <!-- UNUSED string name="import_zip_wait">Imported zip file may take long. Please wait &#8230;</string -->
@@ -253,6 +256,19 @@
     <string name="MT_points_none">无GPS坐标点</string>
     <string name="MT_bad_file">错误的移动地形图文件</string>
     <string name="bad_manifest">错误的清单文件 [%1$d]</string>
+    <!-- TODO string name="bad_manifest_zip">Failed: zip read error</string -->
+    <!-- TODO string name="bad_manifest_td">Failed: TopoDroid version too old</string -->
+    <!-- TODO string name="bad_manifest_db_old">Failed: database version too old</string -->
+    <!-- TODO string name="bad_manifest_db_new">Failed: database version too new</string -->
+    <!-- UNUSED string name="bad_manifest_name">Failed: survey name differ from zip name</string -->
+    <!-- TODO string name="bad_manifest_present">Failed: survey already present</string -->
+    <!-- TODO string name="bad_manifest_db">Failed: cannot open database</string -->
+    <!-- TODO string name="bad_manifest_sql">Failed: SQL error</string -->
+    <!-- TODO string name="bad_manifest_number">Failed: wrong number</string -->
+    <!-- TODO string name="bad_manifest_manifest">Failed: wrong manifest</string -->
+    <!-- TODO string name="bad_manifest_missing">Failed: missing manifest</string -->
+    <!-- TODO string name="bad_manifest_error">Failed: manifest read error</string -->
+    <!-- TODO string name="bad_manifest_other">Failed: unexpected error</string -->
     <!-- TODO string name="archive_reset_color">Warning. Custon colors resetted</string -->
  
     <string name="pleasewait">请稍后</string>
@@ -682,6 +698,7 @@
     <string name="write_ok">校准已输入DistoX</string>
     <string name="zip_saved">已保存 </string>
     <string name="zip_failed">文件压缩失败</string>
+    <!-- TODO string name="zip_share_failed">Unable to share zip-archive</string -->
     <string name="unzip_fail">文件解压失败</string>
     <string name="unzip_fail_sqlite">错误 SQL: 删除测量项目并重试</string>
     <string name="unzip_fail_survey">错误:测量名称不匹配</string>
@@ -690,6 +707,7 @@
     <!-- UNUSED string name="zoom_in_out">Zoom in/out</string -->
     <!-- TODO string name="screenshot_saved">Saved screenshot %1$s</string -->
     <!-- TODO string name="screenshot_failed">Failed taking screenshot</string -->
+    <!-- TODO string name="start_index">Start-shot index</string -->
 
 
     <string name="survey_info">测量信息</string>
@@ -1477,6 +1495,8 @@
   <string name="pref_csv_eol_summary">CSV 记录分隔符</string>
   <string name="pref_gpx_single_track_title">GPX单轨迹</string>
   <string name="pref_gpx_single_track_summary">以GPX单轨迹方式输出测量数据</string>
+  <!-- TODO string name="pref_zip_share_category_title">Zip-share category</string -->
+  <!-- TODO string name="pref_zip_share_category_summary">Add category to zip-share request</string -->
 
   <string name="pref_sock_type_title">信道</string>
   <string name="pref_sock_type_summary">蓝牙信道类型</string>
@@ -2172,6 +2192,7 @@
     <string name="error_parser_error">错误: 解析 %1$s</string>
     <string name="error_export_failed">错误: 输出 %1$s 失败</string>
     <string name="unsupported_format">不支持的文件格式</string>
+    <!-- TODO string name="unsupported_extension">Unsupported file extension %1$s</string -->
 
 
     <!-- UNUSED string name="export_gltf_ok">输出 glTF 文件</string -->

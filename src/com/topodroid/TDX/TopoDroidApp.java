@@ -1866,7 +1866,7 @@ public class TopoDroidApp extends Application
   boolean assignStationsAfter( DBlock blk0, List< DBlock > list )
   { 
     Set<String> sts = mData.selectAllStationsBefore( blk0.mId, TDInstance.sid /*, TDStatus.NORMAL */ );
-    // TDLog.v("DATA " + "assign stations after " + blk0.Name() + " size " + list.size() + " stations " + sts.size() );
+    // TDLog.v("DATA " + "assign stations after " + blk0.mId + " " + blk0.Name() + " size " + list.size() + " stations " + sts.size() );
     // if ( TDSetting.mSurveyStations < 0 ) return;
     StationName.clearCurrentStation();
     if ( StationPolicy.doTopoRobot() ) {

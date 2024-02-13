@@ -285,10 +285,17 @@ class FixedDialog extends MyDialog
 
     if ( b == mButtonSave ) {
       String station = mETstation.getText().toString();
-      if ( /* station == null || */ station.length() == 0 ) {
+      if ( /* station == null || */ station.length() == 0 ) { // FIXME this should never happen: mETstation is TextView
         mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
         return;
       }
+      // station = TDUtil.toStationFromName( station );
+      if ( ! TDUtil.isStationName( station ) ) {
+        mETstation.setError( mContext.getResources().getString( R.string.bad_station_name ) );
+        return;
+      }
+      // mETstation.setText( station );
+      
       String comment = mETcomment.getText().toString();
       // if ( comment == null ) comment = "";
       if ( mButtonDecl.isChecked() && mTVdecl.getText() != null ) {
