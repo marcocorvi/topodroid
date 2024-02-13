@@ -94,7 +94,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="shot_not_found">Mérés nem található</string>
     <string name="bad_sibling">Rossz mérés ismétlés</string>
     <string name="bad_station">Hibás mérési pont: %1$s</string>
-    <!-- TODO string name="bad_station_name">Illegal station name</string -->
+    <string name="bad_station_name">Illegális mérési pont név</string>
     <!-- UNUSED string name="missing_area">TERÜLET</string -->
     <!-- UNUSED string name="missing_hint">Engedélyezd vagy installáld a hiányzó ezközöket</string -->
     <!-- UNUSED string name="missing_line">VONAL</string -->
@@ -247,7 +247,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="import_calib_mismatch">Kalib. műszer nem egyezik</string>
     <string name="import_calib_no_data">Kalib. fájl: nincs adat</string>
     <string name="import_calib_io_error">Kalib. fájl: olvasási hiba</string>
-    <!-- TODO string name="imported_file">Imported %1$s</string -->
+    <string name="imported_file">Importált %1$s</string>
     <string name="import_zip_ok">Zip fájl importálása sikerült</string>
     <string name="import_zip_newer">Importált zip az újabb verzióból</string>
     <!-- UNUSED string name="import_zip_wait">A zip fájl importálása több időt vesz igénybe. Kérlek várjál &#8230;</string -->
@@ -257,19 +257,19 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="MT_points_none">Nincs MobileTopographer pont</string>
     <string name="MT_bad_file">Rossz MobileTopographer fájl</string>
     <string name="bad_manifest">Hibás manifest fájl [%1$d]</string>
-    <!-- TODO string name="bad_manifest_zip">Failed: zip read error</string -->
-    <!-- TODO string name="bad_manifest_td">Failed: TopoDroid version too old</string -->
-    <!-- TODO string name="bad_manifest_db_old">Failed: database version too old</string -->
-    <!-- TODO string name="bad_manifest_db_new">Failed: database version too new</string -->
-    <!-- UNUSED string name="bad_manifest_name">Failed: survey name differ from zip name</string -->
-    <!-- TODO string name="bad_manifest_present">Failed: survey already present</string -->
-    <!-- TODO string name="bad_manifest_db">Failed: cannot open database</string -->
-    <!-- TODO string name="bad_manifest_sql">Failed: SQL error</string -->
-    <!-- TODO string name="bad_manifest_number">Failed: wrong number</string -->
-    <!-- TODO string name="bad_manifest_manifest">Failed: wrong manifest</string -->
-    <!-- TODO string name="bad_manifest_missing">Failed: missing manifest</string -->
-    <!-- TODO string name="bad_manifest_error">Failed: manifest read error</string -->
-    <!-- TODO string name="bad_manifest_other">Failed: unexpected error</string -->
+    <string name="bad_manifest_zip">Sikertelen: zip olvasási hiba</string>
+    <string name="bad_manifest_td">Sikertelen: TopoDroid verzió túl régi</string>
+    <string name="bad_manifest_db_old">Sikertelen: adatbázis verzió túl régi</string>
+    <string name="bad_manifest_db_new">Sikertelen: adatbázis verzió túl új</string>
+    <!-- UNUSED string name="bad_manifest_name">Sikertelen: felmérés neve eltér a zip névtől</string -->
+    <string name="bad_manifest_present">Sikertelen: felmérés már létezik</string>
+    <string name="bad_manifest_db">Sikertelen: nem lehet megnyitni az adatbázist</string>
+    <string name="bad_manifest_sql">Sikertelen: SQL hiba</string>
+    <string name="bad_manifest_number">Sikertelen: hibás szám</string>
+    <string name="bad_manifest_manifest">Sikertelen: hibás manifest</string>
+    <string name="bad_manifest_missing">Sikertelen: hiányzó manifest</string>
+    <string name="bad_manifest_error">Sikertelen: manifest olvasási hiba</string>
+    <string name="bad_manifest_other">Sikertelen: váratlan hiba</string>
     <string name="archive_reset_color">Figyelem! A felhasználói színek visszaállítva</string>
  
     <string name="pleasewait">Kérjük várjál</string>
@@ -703,7 +703,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="write_ok">DistoX kalibrációja felülírva</string>
     <string name="zip_saved">Zip archívum mentve</string>
     <string name="zip_failed">Nem sikerült a felmérés tömörítése</string>
-    <!-- TODO string name="zip_share_failed">Unable to share zip-archive</string -->
+    <string name="zip_share_failed">Nem lehet megosztani a zip-archívumot</string>
     <string name="unzip_fail">Nem sikerült a felmérés kitömörítése</string>
     <string name="unzip_fail_sqlite">Sikertelen SQL: törölje a felmérést és próbálkozzon újra</string>
     <string name="unzip_fail_survey">Kitömörítés nem sikerült: felmérés neve nem megfelelő</string>
@@ -712,7 +712,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="zoom_in_out">Nagyítás/kicsinyítés</string -->
     <string name="screenshot_saved">Mentett képernyőkép %1$s</string>
     <string name="screenshot_failed">Sikertelen képernyőkép készítés</string>
-    <!-- TODO string name="start_index">Start-shot index</string -->
+    <string name="start_index">Kezdő mérés (Start-shot) index</string>
 
 	
     <string name="survey_info">Felmérés információ</string>
@@ -1502,8 +1502,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_csv_eol_summary">CSV sor elválasztó</string>
   <string name="pref_gpx_single_track_title">Egy GPX track</string>
   <string name="pref_gpx_single_track_summary">Mérési projek exportálása egy GPX track-ba</string>
-  <!-- TODO string name="pref_zip_share_category_title">Zip-share category</string -->
-  <!-- TODO string name="pref_zip_share_category_summary">Add category to zip-share request</string -->
+  <string name="pref_zip_share_category_title">Zip-megosztás kategória</string>
+  <string name="pref_zip_share_category_summary">Kategória hozzáadása a zip-megosztási kérelemhez</string>
 
   <string name="pref_sock_type_title">Csatlakozás</string>
   <string name="pref_sock_type_summary">Bluetooth socket típus</string>
@@ -2205,7 +2205,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="error_parser_error">Hiba: elemzés %1$s</string>
     <string name="error_export_failed">Hiba: %1$s export hiba</string>
     <string name="unsupported_format">Nem támogatott fájl formátum</string>
-    <!-- TODO string name="unsupported_extension">Unsupported file extension %1$s</string -->
+    <string name="unsupported_extension">Nem támogatott fájl kiterjesztés %1$s</string>
 
     <!-- UNUSED string name="export_gltf_ok">Exportált glTF file</string -->
     <!-- UNUSED string name="export_gltf_fail">Hibás glTf export</string -->
