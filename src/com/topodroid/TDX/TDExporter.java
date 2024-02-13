@@ -2392,7 +2392,7 @@ public class TDExporter
       PrintWriter pw = new PrintWriter( bw );
       pw.format("# %s [*] created by TopoDroid v %s%s", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string(), newline );
       pw.format("# %s%s", info.name, newline );
-      pw.format("# id, from, to, dist, az,i clino, roll, G, M, dip, time, type, addres, extend, flag, leg-type, status, Mx, My, Mz, Gx, Gy, Gz, comment%s", newline );
+      pw.format("# id, from, to, dist, azi, clino, roll, G, M, dip, time, type, addres, extend, flag, leg-type, status, Mx, My, Mz, Gx, Gy, Gz, comment%s", newline );
       for ( RawDBlock b : list ) {
 	// String f = ( b.mFrom == null )? "" : b.mFrom;
 	// String t = ( b.mTo   == null )? "" : b.mTo;
