@@ -252,7 +252,7 @@ public class TDandroid
     if ( PRIVATE_STORAGE ) return true; // skip external storage
     // return ( context.checkSelfPermission( mPermissionManageExternalStorage ) == PackageManager.PERMISSION_GRANTED );
     boolean ret = Environment.isExternalStorageManager();
-    TDLog.v("MANAGE external storage: " + ret );
+    // TDLog.v("MANAGE external storage: " + ret );
     return ret;
   }
 
@@ -267,7 +267,7 @@ public class TDandroid
    */
   static void requestExternalStorage(  Context context, Activity activity )
   {
-    TDLog.v("MANAGE request external storage");
+    // TDLog.v("MANAGE request external storage");
     if ( PRIVATE_STORAGE ) return;
 
     Intent intent = new Intent();
@@ -294,7 +294,7 @@ public class TDandroid
       if ( (k == PERM_WRITE || k == PERM_READ ) && ( PRIVATE_STORAGE || AT_LEAST_API_33 ) ) continue;
       // if ( k == PERM_CAMERA && AT_LEAST_API_21 ) continue; // CAMERA only for API >= 21
       if ( context.checkSelfPermission( perms[k] ) != PackageManager.PERMISSION_GRANTED ) {
-        TDLog.v("TD cannot run because of perm " + permShortNames[k] + " - canRun() returns false" );
+        TDLog.e("TD cannot run because of perm " + permShortNames[k] + " - canRun() returns false" );
         // TDToast.makeLong( permShortNames[k] + " is needed to run. Bye.");
         return false;
       }
@@ -428,7 +428,7 @@ public class TDandroid
       }
       flag *= 2;
     }
-    TDLog.v("PERM Check permission returns " + ret );
+    // TDLog.v("PERM Check permission returns " + ret );
     return ret;
   }
 
@@ -646,6 +646,7 @@ public class TDandroid
   public static Intent getOpenDocumentIntent( int index )
   {
     Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT ); // API_19
+    // TDLog.v("mime type: " + TDConst.mMimeType[ index ] );
     intent.setType( (index < 0)? "*/*" : TDConst.mMimeType[ index ] );
     intent.addCategory(Intent.CATEGORY_OPENABLE);
     intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION); // API_19

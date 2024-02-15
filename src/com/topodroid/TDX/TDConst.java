@@ -86,7 +86,7 @@ public class TDConst
     null, // "application/octet-stream", // 18 Grottolf
     "application/octet-stream", // 19 GhTopo
     null, // "application/octet-stream", // 20 WinKarst
-    "application/octet-stream", // 21 TopoRobot
+    "text/plain", // "application/octet-stream", // 21 TopoRobot
     null, // "application/json",         // 22 *Json
     "application/shp",          // 23
     "application/xvi",          // 24

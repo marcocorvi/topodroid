@@ -3329,7 +3329,7 @@ public class TDExporter
     char[] line = new char[ TRB_LINE_LENGTH ];
     try {
       // TDLog.Log( TDLog.LOG_IO, "export TopoRobot " + file.getName() );
-      // BufferedWriter bw = TDFile.getMSwriter( "trb", survey_name + ".trb", "text/trb" );
+      // BufferedWriter bw = TDFile.getMSwriter( TDPath.TRB.substring(1), survey_name + TDPath.TRB, "text/" + TDPath.TRB.substring(1) );
       PrintWriter pw = new PrintWriter( bw );
   
       // FIXME 

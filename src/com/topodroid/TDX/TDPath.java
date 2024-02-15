@@ -56,7 +56,7 @@ public class TDPath
   final static String SVG = ".svx"; // SVG
   final static String SVX = ".svx"; // Survex
   final static String SRV = ".srv"; // Walls
-  final static String TRB = ".Text"; // TopoRobot
+  final static String TRB = ".text"; // TopoRobot
   final static String TDR = ".tdr";
   final static String TH2 = ".th2"; // TH2EDIT
   // final static private String TMP = ".tmp";
@@ -1039,7 +1039,7 @@ public class TDPath
 
   private static String checkType( String extension, String[] extensions )
   {
-    for ( String e : extensions ) if ( e.equals( extension ) ) return e;
+    for ( String e : extensions ) if ( e.equalsIgnoreCase( extension ) ) return e;
     return null;
   }
 

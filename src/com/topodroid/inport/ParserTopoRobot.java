@@ -224,7 +224,7 @@ class ParserTopoRobot extends ImportParser
         lng += Float.parseFloat( token[1].substring(qos, pos ) ) / 3600.0;
         if ( token[1].charAt(0) == 'W') lng = -lng;
       } catch ( NumberFormatException e ) { 
-        TDLog.v("TR parser: bad coords");
+        TDLog.e("TR parser: bad coords");
       }
     }
 
@@ -311,6 +311,8 @@ class ParserTopoRobot extends ImportParser
     int series;
     int point;
     float length, azimuth, clino, left, up, down, right;
+    float first_left = 0.0f, first_right = 0.0f;
+    String  first_from = null;
 
     boolean is_comment = false;
     String comment = "";
@@ -412,6 +414,9 @@ class ParserTopoRobot extends ImportParser
                   return;
                 }
               }
+              first_left  = 0.0f;
+              first_right = 0.0f;
+              first_from  = null;
             } else {
               if ( sequence != null ) {
                 if ( is_comment ) {
@@ -432,7 +437,25 @@ class ParserTopoRobot extends ImportParser
                     up      = Float.parseFloat( token[10] );
                     down    = Float.parseFloat( token[11] );
                     // add shot and splays
-                    if ( length > 0.0f ) {
+                    if ( length <= 0.00001f ) {
+                      first_from  = from;
+                      first_left  = left;
+                      first_right = right;
+                      first_from  = from;
+                    } else {
+                      if ( first_from != null ) {
+                        if ( first_left > 0.0f ) {
+	                  float ber = TDMath.in360( azimuth + 180 + 90 * dir_w );
+                          extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : ExtendType.EXTEND_UNSET;
+                          shots.add( new ParserShot( first_from, TDString.EMPTY, first_left, ber, 0.0f, 0.0f, extend, LegType.XSPLAY, false, false, false, "" ) );
+                        }
+                        if ( first_right > 0.0f ) {
+	                  float ber = TDMath.in360( azimuth + 180 - 90 * dir_w );
+                          extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : ExtendType.EXTEND_UNSET;
+                          shots.add( new ParserShot( first_from, TDString.EMPTY, first_right, ber, 0.0f, 0.0f, extend, LegType.XSPLAY, false, false, false, "" ) );
+                        }
+                        first_from = null;
+                      }
                       String station = String.format("%d.%d", series, point );
                       extend = ( azimuth < 90 || azimuth > 270 )? 1 : -1;
                       if  ( sequence_comment != null ) {
@@ -442,16 +465,16 @@ class ParserTopoRobot extends ImportParser
                         shots.add( new ParserShot( from, station, length, azimuth, clino, 0.0f, extend, LegType.NORMAL, false, false, false, "" ) );
                       }
                       from = station;
-                    }
-                    if ( left > 0.0f ) {
-	              float ber = TDMath.in360( azimuth + 180 + 90 * dir_w );
-                      extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : ExtendType.EXTEND_UNSET;
-                      shots.add( new ParserShot( from, TDString.EMPTY, left, ber, 0.0f, 0.0f, extend, LegType.XSPLAY, false, false, false, "" ) );
-                    }
-                    if ( right > 0.0f ) {
-	              float ber = TDMath.in360( azimuth + 180 - 90 * dir_w );
-                      extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : ExtendType.EXTEND_UNSET;
-                      shots.add( new ParserShot( from, TDString.EMPTY, right, ber, 0.0f, 0.0f, extend, LegType.XSPLAY, false, false, false, "" ) );
+                      if ( left > 0.0f ) {
+	                float ber = TDMath.in360( azimuth + 180 + 90 * dir_w );
+                        extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : ExtendType.EXTEND_UNSET;
+                        shots.add( new ParserShot( from, TDString.EMPTY, left, ber, 0.0f, 0.0f, extend, LegType.XSPLAY, false, false, false, "" ) );
+                      }
+                      if ( right > 0.0f ) {
+	                float ber = TDMath.in360( azimuth + 180 - 90 * dir_w );
+                        extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : ExtendType.EXTEND_UNSET;
+                        shots.add( new ParserShot( from, TDString.EMPTY, right, ber, 0.0f, 0.0f, extend, LegType.XSPLAY, false, false, false, "" ) );
+                      }
                     }
                     if ( up > 0 ) {
                       shots.add( new ParserShot( from, TDString.EMPTY, up, 0.0f, 90.0f, 0.0f, ExtendType.EXTEND_VERT, LegType.XSPLAY, false, false, false, "" ) );
@@ -475,9 +498,9 @@ class ParserTopoRobot extends ImportParser
       TDLog.Error( "TR parser: " + line_nr + " i/o error " + mLineCnt + ": " + line + " " + e.getMessage() );
       throw new ParserException();
     }
-    if ( fix != null ) {
-      TDLog.v("TR parser: fix " + fix.station + " " + fix.lat + " " + fix.lng + " " + fix.alt );
-    }
+    // if ( fix != null ) {
+    //   TDLog.v("TR parser: fix " + fix.station + " " + fix.lat + " " + fix.lng + " " + fix.alt );
+    // }
   }
 
 }
