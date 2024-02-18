@@ -86,7 +86,7 @@ no campo abaixo e aperte o botão.
   <string name="shot_not_found">Medida não encontrada</string>
   <string name="bad_sibling">Visada irmã inválida</string>
   <string name="bad_station">Base ruim: %1$s</string>
-    <!-- TODO string name="bad_station_name">Illegal station name</string -->
+  <string name="bad_station_name">Nome de base não suportado</string>
   <!-- UNUSED string name="missing_area">ÁREA</string -->
   <!-- UNUSED string name="missing_hint">Habilite ou instale os símbolos que estão faltando</string -->
   <!-- UNUSED string name="missing_line">LINHA</string -->
@@ -231,7 +231,7 @@ no campo abaixo e aperte o botão.
   <string name="import_calib_mismatch">Dispositivo de calibração incompatível</string>
   <string name="import_calib_no_data">Arquivo de calibração: nenhuma informação</string>
   <string name="import_calib_io_error">Arquivo de calibração: erro na leitura</string>
-    <!-- TODO string name="imported_file">Imported %1$s</string -->
+  <string name="imported_file">%1$s importado</string>
   <string name="import_zip_ok">Arquivo zip importado com sucesso</string>
   <string name="import_zip_newer">Arquivo zip importado da versão mais recente</string>
   <!-- UNUSED string name="import_zip_wait">A importação do arquivo zip pode demorar. Aguarde &#8230;</string -->
@@ -241,19 +241,19 @@ no campo abaixo e aperte o botão.
   <string name="MT_points_none">Nenhum ponto MobileTopographer</string>
   <string name="MT_bad_file">Arquivo MobileTopographer inválido</string>
   <string name="bad_manifest">Arquivo de manifesto inválido [%1$d]</string>
-    <!-- TODO string name="bad_manifest_zip">Failed: zip read error</string -->
-    <!-- TODO string name="bad_manifest_td">Failed: TopoDroid version too old</string -->
-    <!-- TODO string name="bad_manifest_db_old">Failed: database version too old</string -->
-    <!-- TODO string name="bad_manifest_db_new">Failed: database version too new</string -->
+  <string name="bad_manifest_zip">Falha na leitura de arquivo zip</string>
+  <string name="bad_manifest_td">Falha: versão do Topodroid muito antiga</string>
+  <string name="bad_manifest_db_old">Falha: versão do banco de dados muito antiga</string>
+  <string name="bad_manifest_db_new">Falha: versão do banco de dados muito nova</string>
     <!-- UNUSED string name="bad_manifest_name">Failed: survey name differ from zip name</string -->
-    <!-- TODO string name="bad_manifest_present">Failed: survey already present</string -->
-    <!-- TODO string name="bad_manifest_db">Failed: cannot open database</string -->
-    <!-- TODO string name="bad_manifest_sql">Failed: SQL error</string -->
-    <!-- TODO string name="bad_manifest_number">Failed: wrong number</string -->
-    <!-- TODO string name="bad_manifest_manifest">Failed: wrong manifest</string -->
-    <!-- TODO string name="bad_manifest_missing">Failed: missing manifest</string -->
-    <!-- TODO string name="bad_manifest_error">Failed: manifest read error</string -->
-    <!-- TODO string name="bad_manifest_other">Failed: unexpected error</string -->
+  <string name="bad_manifest_present">Falha: topo já existente</string>
+  <string name="bad_manifest_db">Falha: impossível abrir banco de dados</string>
+  <string name="bad_manifest_sql">Falha: erro SQL</string>
+  <string name="bad_manifest_number">Falha: número errado</string>
+  <string name="bad_manifest_manifest">Falha: arquivo de manifesto inválido</string>
+  <string name="bad_manifest_missing">Falha: arquivo de manifesto inexistente</string>
+  <string name="bad_manifest_error">Falha: erro na leitura do arquivo de manifesto</string>
+  <string name="bad_manifest_other">Falha: erro inesperado</string>
   <string name="archive_reset_color">Alerta! Cores customizadas reiniciadas</string>
 
   <string name="pleasewait">Por favor espere</string>
@@ -655,7 +655,7 @@ no campo abaixo e aperte o botão.
   <string name="write_ok">Calibração gravada na DistoX</string>
   <string name="zip_saved">Gravado</string>
   <string name="zip_failed">Falha na compressão da topo</string>
-    <!-- TODO string name="zip_share_failed">Unable to share zip-archive</string -->
+  <string name="zip_share_failed">Falha ao compartilhar arquivo zip</string>
   <string name="unzip_fail">Falha na decompressão da topo</string>
   <string name="unzip_fail_sqlite">SQL falhou: apague a topo e tente novamente</string>
   <string name="unzip_fail_survey">Falha: nome da topo diferente do nome do arquivo ZIP</string>
@@ -664,7 +664,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="zoom_in_out">Abrir/fechar zoom</string -->
   <string name="screenshot_saved">Captura de tela salva %1$s</string>
   <string name="screenshot_failed">Falha ao capturar tela</string>
-    <!-- TODO string name="start_index">Start-shot index</string -->
+  <string name="start_index">Índice da visada inicial</string>
 
   <string name="survey_info">Informações da topo</string>
   <string name="stat_dates">De %1$s para %2$s</string>
@@ -1394,8 +1394,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_csv_eol_summary">Separador de linhas nos arquivos CSV exportados</string>
   <string name="pref_gpx_single_track_title">GPX track único</string>
   <string name="pref_gpx_single_track_summary">Exportar topos do projeto como um track GPX único</string>
-  <!-- TODO string name="pref_zip_share_category_title">Zip-share category</string -->
-  <!-- TODO string name="pref_zip_share_category_summary">Add category to zip-share request</string -->
+  <string name="pref_zip_share_category_title">Cat compart zip</string>
+  <string name="pref_zip_share_category_summary">Incluir categoria no pedido de compartilhamento de arquivo zip</string>
   <string name="pref_sock_type_title">Soquete DistoX</string>
   <string name="pref_sock_type_summary">Tipo de soquete bluetooth para DistoX</string>
   <!-- UNUSED string name="pref_device_type_title">Tipo de DistoX</string -->
@@ -2036,7 +2036,7 @@ no campo abaixo e aperte o botão.
   <string name="error_parser_error">Erro: erro de parse %1$s</string>
   <string name="error_export_failed">Erro: exportação %1$s falhou</string>
   <string name="unsupported_format">Formato arquivo não suportado</string>
-    <!-- TODO string name="unsupported_extension">Unsupported file extension %1$s</string -->
+  <string name="unsupported_extension">Extensão de arquivo %1$s não suportada</string>
   <!-- UNUSED string name="export_gltf_ok">Exported glTF file</string -->
   <!-- UNUSED string name="export_gltf_fail">Failed glTf export</string -->
   <!-- UNUSED string name="warning_not_overwrite">Alerta: não sobreescrevendo arquivo %1$s</string -->

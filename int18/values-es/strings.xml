@@ -100,7 +100,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="shot_not_found">No se encontró ninguna toma</string>
     <string name="bad_sibling">Toma incorrecta</string>
     <string name="bad_station">Estación incorrecta: %1$s</string>
-    <!-- TODO string name="bad_station_name">Illegal station name</string -->
+    <string name="bad_station_name">Nombre de la estación no admitida</string>
     <!-- UNUSED string name="missing_area">Área</string -->
     <!-- UNUSED string name="missing_hint">Por favor, instale los símbolos con TdSymbol</string -->
     <!-- UNUSED string name="missing_line">Línea</string -->
@@ -175,14 +175,14 @@ debe ajustarlos a sus necesidades./n/n </string>
    
     <!-- UNUSED string name="device_algo_failed">No se pudo obtener el formulario algoritmo dispositivo\ Use el algoritmo lineal</string -->
     <string name="device_address">Dirección %1$s</string>
-    <!-- TODO string name="address">Address</string -->
-    <!-- TODO string name="model_invalid">invalid number</string -->
-    <!-- TODO string name="model_missing">missing number</string -->
+    <string name="address">Dirección</string>
+    <string name="model_invalid">Número invalido</string>
+    <string name="model_missing">Número desconocido</string>
     <!-- UNUSED string name="device_busy">Dispositivo ocupado</string -->
     <string name="device_illegal_addr">Dirección de memoria no válida</string>
-    <!-- TODO string name="device_already_present">Device already present</string -->
-    <!-- TODO string name="device_no_name">Device %1$s without name</string -->
-    <!-- TODO string name="device_all_named">No device without name</string -->
+    <string name="device_already_present">Dispositivo ya existe</string>
+    <string name="device_no_name">Dispositivo %1$s sin nombre</string>
+    <string name="device_all_named">Ningún dispositivo sin nombre</string>
     <string name="device_info">Información del dispositivo</string>
     <!-- UNUSED string name="device_model_set">¿Quiere cambiar de dispositivo?</string -->
     <!-- UNUSED string name="device_none">DistoX no seleccionado</string -->
@@ -205,7 +205,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="save_as">Guardar como</string>
     <string name="nickname">Seudónimo</string>
     <string name="unknown_device_type">Tipo de dispositivo desconocido: %1$d</string>
-    <!-- TODO string name="unsupported_device_type">Unsupported device type</string -->
+    <string name="unsupported_device_type">Tipo de dispositivo no compatible</string>
 
     <string name="comment">Comentario</string>
     <!-- UNUSED string name="flag">Bandera</string -->
@@ -253,7 +253,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="import_calib_mismatch">Desajuste Calib. dispositivo</string>
     <string name="import_calib_no_data">Archivo de calib: sin datos</string>
     <string name="import_calib_io_error">Archivo de calib.: error lectura</string>
-    <!-- TODO string name="imported_file">Imported %1$s</string -->
+    <string name="imported_file">importado %1$s</string>
     <string name="import_zip_ok">Archivo ZIP importados con éxito</string>
     <string name="import_zip_newer">ZIP importado de una versión más reciente</string>
     <!-- UNUSED string name="import_zip_wait">El archivo ZIP importado puede tardar mucho tiempo. Por favor espere &#8230;</string -->
@@ -263,20 +263,20 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="MT_points_none">No hay punto GPS</string>
     <string name="MT_bad_file">Archivo de topografía del móvil corrupto</string>
     <string name="bad_manifest">Archivo de manifiesto corrupto</string>
-    <!-- TODO string name="bad_manifest_zip">Failed: zip read error</string -->
-    <!-- TODO string name="bad_manifest_td">Failed: TopoDroid version too old</string -->
-    <!-- TODO string name="bad_manifest_db_old">Failed: database version too old</string -->
-    <!-- TODO string name="bad_manifest_db_new">Failed: database version too new</string -->
-    <!-- UNUSED string name="bad_manifest_name">Failed: survey name differ from zip name</string -->
-    <!-- TODO string name="bad_manifest_present">Failed: survey already present</string -->
-    <!-- TODO string name="bad_manifest_db">Failed: cannot open database</string -->
-    <!-- TODO string name="bad_manifest_sql">Failed: SQL error</string -->
-    <!-- TODO string name="bad_manifest_number">Failed: wrong number</string -->
-    <!-- TODO string name="bad_manifest_manifest">Failed: wrong manifest</string -->
-    <!-- TODO string name="bad_manifest_missing">Failed: missing manifest</string -->
-    <!-- TODO string name="bad_manifest_error">Failed: manifest read error</string -->
-    <!-- TODO string name="bad_manifest_other">Failed: unexpected error</string -->
-    <!-- TODO string name="archive_reset_color">Warning. Custon colors resetted</string -->
+    <string name="bad_manifest_zip">Error: error de lectura del zip</string>
+    <string name="bad_manifest_td">Error: la versión de TopoDroid es demasiado antigua</string>
+    <string name="bad_manifest_db_old">Error: la versión de la base de datos es demasiado antigua</string>
+    <string name="bad_manifest_db_new">Error: la versión de la base de datos es demasiado nueva</string>
+    <!-- UNUSED string name="bad_manifest_name">Error: el nombre de la topografía difiere del nombre del archivo Zip</string -->
+    <string name="bad_manifest_present">Error: la topografía ya está existe</string>
+    <string name="bad_manifest_db">Error: no se puede abrir la base de datos</string>
+    <string name="bad_manifest_sql">Error: error de SQL</string>
+    <string name="bad_manifest_number">Error: número incorrecto</string>
+    <string name="bad_manifest_manifest">Error: datos incorrecto</string>
+    <string name="bad_manifest_missing">Error: Falta datos</string>
+    <string name="bad_manifest_error">Error: error de lectura de datos</string>
+    <string name="bad_manifest_other">Error: error inesperado</string>
+    <string name="archive_reset_color">Advertencia. Colores personalizados restablecidos</string>
 
     <string name="pleasewait">Por favor espere &#8230;</string>
     <string name="processing">procesando &#8230;</string>
@@ -356,7 +356,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="error_sensor_required">Introducir sensor</string>
     <string name="error_value_required">Introducir valor</string>
     <string name="error_bad_fixes">Geo-puntos no presentes en la topografía</string>
-    <!-- TODO string name="error_bad_name">Filename modified</string -->
+    <string name="error_bad_name">Nombre de archivo modificado</string>
     
     <string name="group_title">Asignar grupos de datos de calibración</string>
     <!-- UNUSED string name="group_policy_four">Política: Grupo de cuatro</string -->
@@ -460,7 +460,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="menu_show_deleted">Mostrar eliminadas</string>
     <string name="menu_hide_deleted">Ocultar eliminadas</string>
     <string name="menu_device">Dispositivo</string>
-    <!-- TODO string name="menu_device_add">ADD DEVICE</string -->
+    <string name="menu_device_add">Añadir dispositivo</string>
     <string name="menu_export">Exportar</string>
     <string name="menu_firmware">Firmware</string>
     <string name="menu_geopoint_app">APP GNSS</string>
@@ -636,7 +636,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="station">Estación</string>
     <string name="station_ask">¿Quiere Insertar estación?</string>
     <string name="station_del">¿Quiere quitar la estación del dibujo?</string>
-    <!-- TODO string name="station_reset">Don\'t continue survey from here</string -->
+    <string name="station_reset">No continúes la topografía desde aquí</string>
     <string name="station_set">¿Quiere continuar la topo desde aquí?</string>
     <!-- UNUSED string name="station_base">Estación referencia</string -->
     <!-- UNUSED string name="station_next">Siguiente estación</string -->
@@ -702,16 +702,16 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="write_ok">Calibración Escrita en DistoX</string>
     <string name="zip_saved">Guardar</string>
     <string name="zip_failed">Error al archivar Topografía</string>
-    <!-- TODO string name="zip_share_failed">Unable to share zip-archive</string -->
+    <string name="zip_share_failed">No se puede compartir el archivo zip</string>
     <string name="unzip_fail">Error al importar archivo</string>
     <string name="unzip_fail_sqlite">Fallo SQL: elimine la topografía y vuelva a intentarlo</string>
     <string name="unzip_fail_survey">Error: El nombre de la topo no coincide</string>
     <string name="unzip_fail_db">Error: La versión de base de datos no coincide</string>
     <string name="unzip_fail_td">Error: Versión TopoDroid no coincide</string>
-    <!-- UNUSED string name="zoom_in_out">Zoom aumentar/disminuir</string -->
-    <!-- TODO string name="screenshot_saved">Saved screenshot %1$s</string -->
-    <!-- TODO string name="screenshot_failed">Failed taking screenshot</string -->
-    <!-- TODO string name="start_index">Start-shot index</string -->
+    <!-- UNUSED string name="zoom_in_out">Zoom aumentar/disminuir</string-->
+    <string name="screenshot_saved">Captura de pantalla guardada %1$s</string>
+    <string name="screenshot_failed">No se pudo tomar la captura de pantalla</string>
+    <string name="start_index">Índice de inicio-toma</string>
 
     <string name="survey_info">Info Topografía</string>
     <string name="stat_dates">De %1$s a %2$s</string>
@@ -1022,7 +1022,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="help_azimuth">Asistente referencia del rumbo</string>
     <string name="help_refresh">Actualizar pantalla</string>
     <string name="help_device">Opciones del dispositivo distoX</string>
-    <!-- TODO string name="help_device_add">Add a device</string -->
+    <string name="help_device_add">Agrega un dispositivo</string>
     <string name="help_add_topodroid">Crear nueva Topografía/calibración</string>
     <string name="help_import">Importar archivo zip o Therion</string>
     <string name="help_geopoint_app">Aplicación externa Geopoint</string>
@@ -1209,7 +1209,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_dangling">Tomas no adjuntadas</string>
     <string name="title_device">Dispositivo DistoX</string>
     <string name="title_device_select">Selecciona DistoX</string>
-    <!-- TODO string name="title_device_add">Add device</string -->
+    <string name="title_device_add">Agrega un dispositivo</string>
     <!-- UNUSED string name="title_discover">Buscar dispositivos DistoX &#8230; espere</string -->
     <!-- UNUSED string name="title_draw">Dibujo</string -->
     <string name="title_draw_area">Área %1$s</string>
@@ -1255,7 +1255,7 @@ debe ajustarlos a sus necesidades./n/n </string>
 
     <string name="title_settings_main">Configuración principal de TopoDroid</string>
     <string name="title_settings_export">Configuración de importación / exportación de TopoDroid</string>
-    <!-- TODO string name="title_settings_export_enable">Data export enable settings</string -->
+    <string name="title_settings_export_enable">Configuración de exportación de datos activada</string>
     <string name="title_settings_import">Configuración de importación de TopoDroid</string>
     <string name="title_settings_csv">Configuración de exportación CSV</string>
     <string name="title_settings_svx">Configuración de exportación Survex</string>
@@ -1349,7 +1349,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_cat_drawing">Ajustes de dibujo</string>
   <string name="pref_cat_import_export">Importar/Exportar</string>
   <string name="pref_cat_exportimport">Importar</string>
-  <!-- TODO string name="pref_cat_exportenable">ENABLE</string -->
+  <string name="pref_cat_exportenable">Activado</string>
   <!-- OK string name="pref_cat_exportth">Therion</string -->
   <!-- OK string name="pref_cat_exportdat">Compass</string -->
   <!-- OK string name="pref_cat_exporttro">VisualTopo</string -->
@@ -1427,8 +1427,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_triple_shot_summary">Avisos sonoros sobre el reconocimiento de la toma de una visual</string>
   <string name="pref_connect_feedback_title">Conectar avisos</string>
   <string name="pref_connect_feedback_summary">Avisos sobre la conexión del dispositivo</string>
-  <!-- TODO string name="pref_unnamed_device_title">Unnamed devices</string -->
-  <!-- TODO string name="pref_unnamed_device_summary">Enable menu to enter device name</string -->
+  <string name="pref_unnamed_device_title">Dispositivos sin nombre</string>
+  <string name="pref_unnamed_device_summary">Habilitar menú para ingresar el nombre del dispositivo</string>
   <string name="pref_station_prefix_title">Prefijo estación de exportación</string>
   <string name="pref_station_prefix_summary">Prefijo estación de exportación cSurvey</string>
   <string name="pref_compass_splays_title">Muestra Compass</string>
@@ -1495,8 +1495,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_csv_eol_summary">Grabar separación CSV</string>
   <string name="pref_gpx_single_track_title">GPX de tramo única</string>
   <string name="pref_gpx_single_track_summary">Topografía de proyectos en un solo track</string>
-  <!-- TODO string name="pref_zip_share_category_title">Zip-share category</string -->
-  <!-- TODO string name="pref_zip_share_category_summary">Add category to zip-share request</string -->
+  <string name="pref_zip_share_category_title">Categoría de zip-share</string>
+  <string name="pref_zip_share_category_summary">Agregar categoría a la solicitud de zip-share</string>
   
   <string name="pref_sock_type_title">Emparejar</string>
   <string name="pref_sock_type_summary">Crear emparejamiento</string>
@@ -1703,8 +1703,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_graph_paper_scale_summary">Corrección de escala de papel cuadriculado</string>
   <string name="pref_slant_xsection_title">Sección inclinada</string>
   <string name="pref_slant_xsection_summary">Secciones x inclinadas de vista de perfil</string>
-  <!-- TODO string name="pref_oblique_projection_title">Oblique projected</string -->
-  <!-- TODO string name="pref_oblique_projection_summary">Maximum oblique projected angle</string -->
+  <string name="pref_oblique_projection_title">Proyectado oblicuo</string>
+  <string name="pref_oblique_projection_summary">Ángulo máximo proyectado oblicuo</string -->
   <string name="pref_weeddistance_title">Distancia del punto de desmalezado</string>
   <string name="pref_weeddistance_summary">Distancia máxima desde el segmento hasta los puntos de desmalezado [m]</string>
   <string name="pref_weedlength_title">Longitud del segmento de entramado puntual</string>
@@ -2228,7 +2228,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="error_parser_error">Error: error de lectura %1$s</string>
     <string name="error_export_failed">Error: exportación fallida %1$s</string>
     <string name="unsupported_format">Formato de archivo no admitido</string>
-    <!-- TODO string name="unsupported_extension">Unsupported file extension %1$s</string -->
+    <string name="unsupported_extension">Extensión de archivo no compatible %1$s</string>
 
     <!-- UNUSED string name="export_gltf_ok">Archivo glTF guardado</string -->
     <!-- UNUSED string name="export_gltf_fail">Error al exportar glTf</string -->
