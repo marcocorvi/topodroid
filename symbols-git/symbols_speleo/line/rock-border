@@ -17,6 +17,6 @@ name-ua кромка_глиби
 th_name rock-border
 closed yes
 style straight x2
-color 0x66ffcc 0xff
+color 0xffcc66 0xff
 width 1
 endsymbol

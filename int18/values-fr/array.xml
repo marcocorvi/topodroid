@@ -10,26 +10,14 @@
      <!-- item name="sequence">Sequence</item -->
      <item name="all">Tous avec index</item>
      <!-- item name="all_zero">All + Zero</ite -->
-     <item name="no_index">Tous sans index</item>
+     <!-- item name="no_index">Tous sans index</item -->
   </string-array>
-  <!-- <string-array name="bricModeValue">
-     <item name="prim_only">1</item>
-     <!- - item name="sequence">2</item - ->
-     <item name="all">3</item>
-     <!- - item name="all_zero">4</item - ->
-     <item name="no_index">5</item>
-  </string-array> -->
   
   <string-array name="orientation">
      <item name="unspecified">Non spécifiée</item>
      <item name="portrait">portrait</item>
      <item name="landscape">paysage</item>
   </string-array>
-  <!-- <string-array name="orientationValue">
-     <item name="unspecified">0</item>
-     <item name="portrait">1</item>
-     <item name="landscape">2</item>
-  </string-array> -->
 
   <string-array name="splayDash">
      <item name="none">aucun</item>
@@ -37,56 +25,30 @@
      <item name="profile">azimut</item>
      <item name="view">vue</item>
   </string-array>
-  <!-- <string-array name="splayDashValue">
-     <item name="none">0</item>
-     <item name="plan">1</item>
-     <item name="profile">2</item>
-     <item name="view">3</item>
-  </string-array> -->
 
   <string-array name="splayColors">
      <item name="none">aucun</item>
      <item name="all">tout</item>
      <item name="palette">palette</item>
   </string-array>
-  <!-- <string-array name="splayColorsValue">
-     <item name="none">0</item>
-     <item name="all">1</item>
-     <item name="palette">2</item>
-  </string-array>-->
   
   <string-array name="feedbackMode">
      <item name="none">aucun</item>
      <item name="sound">son</item>
      <item name="heptic">haptique</item>
   </string-array>
-  <!-- <string-array name="feedbackModeValue">
-     <item name="none">0</item>
-     <item name="sound">1</item>
-     <item name="haptic">2</item>
-  </string-array>-->
 
   <string-array name="canvasLevels">
      <item name="none">aucun</item>
      <item name="class">par symbole</item>
      <item name="instance">par élément</item>
   </string-array>
-  <!-- <string-array name="canvasLevelsValue">
-     <item name="none">0</item>
-     <item name="class">1</item>
-     <item name="instance">2</item>
-  </string-array> -->
 
   <string-array name="csvSeparator">
      <item name="comma">virgule</item>
      <item name="pipe">pipe</item>
      <item name="tab">tabulation</item>
   </string-array>
-  <!-- <string-array name="csvSeparatorValue">
-     <item name="comma">0</item>
-     <item name="pipe">1</item>
-     <item name="tab">2</item>
-  </string-array> -->
 
   <!-- UNUSED string-array name="lineContinue">
      <item name="none">Aucune</item>
@@ -127,12 +89,6 @@
      <item name="s100">1:100</item>
      <item name="s200">1:200</item>
      <item name="s500">1:500</item>
-  </string-array>
-  <string-array name="exportScaleValue">
-     <item name="s50">50</item>
-     <item name="s100">100</item>
-     <item name="s200">200</item>
-     <item name="s500">500</item>
   </string-array -->
   
   <!-- string-array name="wallsType">

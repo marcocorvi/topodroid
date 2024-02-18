@@ -87,7 +87,7 @@ public class TopoDroidComm
   public boolean isConnected() { return mBTConnected; }
 
   /** handle a BRIC packet
-   * @param index      bric shot index
+   * @param index      bric shot-index
    * @param lister     data lister
    * @param data_type bric datatype (0: normal, 1: scan )
    * @param clino_error    error between clino readings
@@ -105,12 +105,13 @@ public class TopoDroidComm
     double r = mProtocol.mRoll;
     double dip  = mProtocol.mDip;
     long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
+    long time   = mProtocol.getTimeStamp();
     // TODO split the data insert in three places: one for each data packet
 
-    // TDLog.v( "TD comm: HANDLE PACKET " + index + " " + d + " " + b + " " + c );
+    TDLog.v( "TD comm: HANDLE PACKET " + index + " " + d + " " + b + " " + c + " time " + time );
     int leg = ( data_type == DataType.DATA_SCAN )? LegType.SCAN : LegType.NORMAL;
     if ( comment == null ) comment = "";
-    long id = TopoDroidApp.mData.insertBricShot( TDInstance.sid, index, d, b, c, r, clino_error, azimuth_error, dip, ExtendType.EXTEND_IGNORE, leg, status, comment, TDInstance.deviceAddress() );
+    long id = TopoDroidApp.mData.insertBricShot( TDInstance.sid, index, d, b, c, r, clino_error, azimuth_error, dip, ExtendType.EXTEND_IGNORE, leg, status, comment, TDInstance.deviceAddress(), index, time );
     // TopoDroidApp.mData.updateShotAMDR( mLastShotId, TDInstance.sid, clino_error, azimuth_error, dip, r, false );
     // if ( comment != null ) TopoDroidApp.mData.updateShotComment( mLastShotId, TDInstance.sid, comment );
 
@@ -135,31 +136,31 @@ public class TopoDroidComm
     return true;
   }
 
-  /** handle zero packet
-   * @param index      ???
-   * @param lister     data lister
-   * @param data_type  packet expected data type (unused)
-   */
-  public void handleZeroPacket( long index, ListerHandler lister, int data_type )
-  {
-    ++mNrReadPackets; // FIXME NON_ATOMIC_ON_VOLATILE incrementNrPacketsRead();
-    TDLog.v( "TD comm: packet ZERO " + mNrReadPackets );
-    double r = mProtocol.mRoll;
-    long status = TDStatus.NORMAL;
-    mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, index, 0, 0, 0, r, ExtendType.EXTEND_IGNORE, status, TDInstance.deviceAddress() );
-    if ( lister != null ) { // FIXME_LISTER sendMessage with mLastShotId only
-      Message msg = lister.obtainMessage( Lister.LIST_UPDATE );
-      Bundle bundle = new Bundle();
-      bundle.putLong( Lister.BLOCK_ID, mLastShotId );
-      msg.setData(bundle);
-      lister.sendMessage(msg);
-      if ( TDInstance.deviceType() == Device.DISTO_A3 && TDSetting.mWaitData > 10 ) {
-        TDUtil.slowDown( TDSetting.mWaitData );
-      }
-    } else {
-      TDLog.e( "TD comm: null Lister");
-    }
-  }
+  // /** handle zero packet
+  //  * @param index      ???
+  //  * @param lister     data lister
+  //  * @param data_type  packet expected data type (unused)
+  //  */
+  // public void handleZeroPacket( long index, ListerHandler lister, int data_type )
+  // {
+  //   ++mNrReadPackets; // FIXME NON_ATOMIC_ON_VOLATILE incrementNrPacketsRead();
+  //   TDLog.v( "TD comm: packet ZERO " + mNrReadPackets );
+  //   double r = mProtocol.mRoll;
+  //   long status = TDStatus.NORMAL;
+  //   mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, index, 0, 0, 0, r, ExtendType.EXTEND_IGNORE, status, TDInstance.deviceAddress(), index );
+  //   if ( lister != null ) { // FIXME_LISTER sendMessage with mLastShotId only
+  //     Message msg = lister.obtainMessage( Lister.LIST_UPDATE );
+  //     Bundle bundle = new Bundle();
+  //     bundle.putLong( Lister.BLOCK_ID, mLastShotId );
+  //     msg.setData(bundle);
+  //     lister.sendMessage(msg);
+  //     if ( TDInstance.deviceType() == Device.DISTO_A3 && TDSetting.mWaitData > 10 ) {
+  //       TDUtil.slowDown( TDSetting.mWaitData );
+  //     }
+  //   } else {
+  //     TDLog.e( "TD comm: null Lister");
+  //   }
+  // }
 
   /** handle regular packet
    * @param res    packet type (as returned by handlePacket / or set by Protocol )
@@ -181,7 +182,7 @@ public class TopoDroidComm
       // TDLog.v( "TD comm: D PACKET " + d + " " + b + " " + c );
       // NOTE type=0 shot is DistoX-type
       long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
-      mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, -1L, d, b, c, r, ExtendType.EXTEND_IGNORE, status, TDInstance.deviceAddress() );
+      mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, -1L, d, b, c, r, ExtendType.EXTEND_IGNORE, status, TDInstance.deviceAddress(), 0 );
       if ( lister != null ) { // FIXME_LISTER sendMessage with mLastShotId only
         Message msg = lister.obtainMessage( Lister.LIST_UPDATE );
         Bundle bundle = new Bundle();

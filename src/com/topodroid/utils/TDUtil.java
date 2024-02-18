@@ -370,6 +370,13 @@ public class TDUtil
     return (new GregorianCalendar()).getTimeInMillis();
   }
 
+  /** @return the timestamp in seconds
+   */
+  public static long getTimeStamp() 
+  {
+    return System.currentTimeMillis() / 1000L;
+  }
+
   /** @return the date from the millis
    * @param millis    millis
    */
@@ -377,7 +384,18 @@ public class TDUtil
   {
     GregorianCalendar calendar = new GregorianCalendar();
     calendar.setTimeInMillis( millis );
-    return String.format("%04d-%02d-%02d", calendar.get( Calendar.YEAR ), calendar.get( Calendar.MONTH ), calendar.get( Calendar.DAY_OF_MONTH ) );
+    return String.format("%04d-%02d-%02d", calendar.get( Calendar.YEAR ), 1+calendar.get( Calendar.MONTH ), calendar.get( Calendar.DAY_OF_MONTH ) );
+  }
+
+  /** @return the date-time from a timestamp
+   * @param time  timestamp [s]
+   */
+  public static String timestampToDateTime( long time )
+  {
+    GregorianCalendar calendar = new GregorianCalendar();
+    calendar.setTimeInMillis( time * 1000L );
+    return String.format("%04d-%02d-%02d %02d:%02d:%02d", calendar.get( Calendar.YEAR ), 1+calendar.get( Calendar.MONTH ), calendar.get( Calendar.DAY_OF_MONTH ),
+      calendar.get( Calendar.HOUR_OF_DAY ), calendar.get( Calendar.MINUTE ), (int)(calendar.get( Calendar.SECOND )) );
   }
 
   /** @return the current year

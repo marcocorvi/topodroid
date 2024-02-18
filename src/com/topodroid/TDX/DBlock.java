@@ -15,6 +15,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.LegType;
@@ -74,6 +75,8 @@ public class DBlock
   int mRawGx = 0;
   int mRawGy = 0;
   int mRawGz = 0;
+
+  int mIndex = 0;
 
   // ------------------------------------------------------------------
   // FLAGS
@@ -435,7 +438,7 @@ public class DBlock
   boolean isRecent( )
   {
     if ( ! TDSetting.mShotRecent ) return false;
-    if ( TDSetting.isConnectionModeContinuous() ) return isTimeRecent( System.currentTimeMillis()/1000 );
+    if ( TDSetting.isConnectionModeContinuous() ) return isTimeRecent( TDUtil.getTimeStamp() );
     return mId >= TDInstance.secondLastShotId;
   }
 

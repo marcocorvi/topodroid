@@ -1566,6 +1566,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_bric_mode_summary">BRIC operating mode</string>
   <string name="pref_bric_zero_length_title">BRIC zero shot</string>
   <string name="pref_bric_zero_length_summary">Record BRIC zero-length shot</string>
+  <string name="pref_bric_index_is_id_title">BRIC index is ID</string>
+  <string name="pref_bric_index_is_id_summary">Use BRIC index as shot ID</string>
   <string name="pref_sap5_bit16_bug_title">SAP5 bit-16 bug</string>
   <string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 bug workaround</string>
 

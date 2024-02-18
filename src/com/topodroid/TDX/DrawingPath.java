@@ -669,7 +669,7 @@ public class DrawingPath extends RectF
    */
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox, int xor_color )
   {
-    draw( canvas, matrix, bbox );
+    draw( canvas, matrix, bbox, xor_color );
   }
 
   /** @return true if this path is associated to a "recent" block
@@ -872,12 +872,16 @@ public class DrawingPath extends RectF
 
   /** @return a paint with xor-ed color
    * @param paint     input paint
-   * @param xor_color xoring color
+   * @param xor_color xoring color (usually 0xffffff ie invert colors)
+   * @note if one of the color components is below 0x99 the original color is returned
+   *       only light colors are inverted
    */
   static Paint xorPaint( Paint paint, int xor_color ) 
   {
+    int col = paint.getColor();
+    if ( ( col & 0xff ) < 0x99 || ( (col >>= 8 ) & 0xff ) < 0x99 || ( ( col >> 16 ) & 0xff ) < 0x99 ) return paint;
     Paint ret = new Paint( paint );
-    ret.setColor( xor_color ^ ret.getColor() );
+    ret.setColor( xor_color ^ col );
     return ret;
   }
 

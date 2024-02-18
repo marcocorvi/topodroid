@@ -2028,6 +2028,7 @@ public class TDPrefKey
     "DISTOX_FIRMWARE_SANITY",       // enforce firmware sanity checks
     "DISTOX_BRIC_MODE",       // 1 prim_only, 3 all, 5 no_index
     "DISTOX_BRIC_ZERO_LENGTH",
+    "DISTOX_BRIC_INDEX_IS_ID", // whether to use the BRIC index as shot ID
     "DISTOX_SAP5_BIT16_BUG",   // SAP5 bit-16 bug workaround
     null
   };
@@ -2042,6 +2043,7 @@ public class TDPrefKey
     R.string.pref_firmware_sanity_title,
     R.string.pref_bric_mode_title,
     R.string.pref_bric_zero_length_title,
+    R.string.pref_bric_index_is_id_title,
     R.string.pref_sap5_bit16_bug_title,
     -1
   };
@@ -2056,6 +2058,7 @@ public class TDPrefKey
     R.string.pref_firmware_sanity_summary,
     R.string.pref_bric_mode_summary,
     R.string.pref_bric_zero_length_summary,
+    R.string.pref_bric_index_is_id_summary,
     R.string.pref_sap5_bit16_bug_summary,
     -1
   };
@@ -2068,7 +2071,8 @@ public class TDPrefKey
     "2000",
     "2000",
     TRUE,
-    TDString.FIVE,
+    TDString.THREE,
+    FALSE,
     FALSE,
     TRUE,
     null

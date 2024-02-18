@@ -67,6 +67,7 @@ class ShotEditDialog extends MyDialog
   private EditText mETclino;    // clino | distance
 
   private TextView mTVextra;
+  private TextView mTVshotTime;
 
   private EditText mETfrom;
   private EditText mETto;
@@ -114,6 +115,7 @@ class ShotEditDialog extends MyDialog
   private String shot_extra;
   private int  shot_extend;
   private long shot_flag;
+  private String shot_time;
   private String shot_comment;
 
   private MyKeyboard mKeyboard = null;
@@ -212,6 +214,7 @@ class ShotEditDialog extends MyDialog
     shot_stretch = blk.getStretch(); // FIXME_STRETCH
     shot_flag    = blk.getFlag();
     shot_comment = blk.mComment;
+    shot_time    = TDUtil.timestampToDateTime( blk.mTime );
 
     // shot_secleg  = blk.isSecLeg(); // DBlock.BLOCK_SEC_LEG;
     // shot_backleg = blk.isBackLeg();
@@ -243,6 +246,7 @@ class ShotEditDialog extends MyDialog
       //   mRBto.setVisibility( View.GONE );
       // }
     }
+    mTVshotTime.setText( shot_time );
     mETcomment.setText( ((shot_comment != null)? shot_comment : "") );
    
     // if ( DBlock.isSurvey(shot_flag) ) { mRBreg.setChecked( true ); }
@@ -356,6 +360,7 @@ class ShotEditDialog extends MyDialog
     mETfrom    = (EditText) findViewById(R.id.shot_from );
     mETto      = (EditText) findViewById(R.id.shot_to );
     mETcomment = (EditText) findViewById(R.id.shot_comment );
+    mTVshotTime = (TextView) findViewById(R.id.shot_time );
 
     // mRBfrom = (RadioButton) findViewById( R.id.station_from );
     // mRBto   = (RadioButton) findViewById( R.id.station_to );

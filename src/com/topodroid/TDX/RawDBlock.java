@@ -48,6 +48,8 @@ class RawDBlock
   int mRawGy = 0;
   int mRawGz = 0;
 
+  int mIndex = 0;
+
   void setShotType( int shot_type ) { mShotType = shot_type; } 
   
   int getShotType() { return mShotType; }

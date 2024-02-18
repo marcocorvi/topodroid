@@ -93,6 +93,10 @@ public class TopoDroidProtocol
     if ( mPacketLogger != null ) mPacketLogger.closeDatabase();
   }
 
+  /** @return the timestamp of the last data
+   */
+  public long getTimeStamp() { return TDUtil.getTimeStamp(); }
+
   // PACKET LOGGER ----------------------------------------------------------------
   protected void logPacket( long dir, byte[] buf )
   {

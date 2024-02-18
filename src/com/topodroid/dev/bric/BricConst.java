@@ -62,7 +62,9 @@ public class BricConst
   static short getSamples( byte[] bytes )  { return BleUtils.getShort( bytes, 16 ); }  // measurement samples
   static int   getType( byte[] bytes )     { return BleUtils.getChar(  bytes, 18 ); }  // measurement type
 
-  // get the timestamp in msec
+  /** @return the timestamp in msec
+   * @param bytes   timestamp bytes
+   */
   static long  getTimestamp( byte[] bytes ) 
   {
     int yy = BleUtils.getShort( bytes, 0 );
