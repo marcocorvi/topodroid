@@ -1893,7 +1893,7 @@ public class TopoDroidApp extends Application
     Set<String> sts = mData.selectAllStations( TDInstance.sid );
     int sz = list.size();
     if ( sz == 0 ) return false;
-    // TDLog.v("DATA " + "assign stations all: size " + sz + " blk[0] id " + list.get(0).mId );
+    TDLog.v("DATA " + "assign stations all: size " + sz + " blk[0] id " + list.get(0).mId );
 
     // if ( TDSetting.mSurveyStations < 0 ) return;
     if ( StationPolicy.doTopoRobot() ) {

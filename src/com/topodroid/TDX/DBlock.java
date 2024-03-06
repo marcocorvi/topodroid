@@ -43,7 +43,7 @@ public class DBlock
 
   // shot data:
   public long   mId;
-  public long   mTime;
+  public long   mTime;     // database time
   private long  mSurveyId;
   // private String mName;
   public String mFrom;     // N.B. mfrom and mTo must be not null - can be empty
@@ -76,7 +76,8 @@ public class DBlock
   int mRawGy = 0;
   int mRawGz = 0;
 
-  int mIndex = 0;
+  int mIndex = 0;      // device index
+  long mDeviceTime = 0; // device tiem [s]
 
   // ------------------------------------------------------------------
   // FLAGS
@@ -92,6 +93,17 @@ public class DBlock
 
   static final long FLAG_NO_EXTEND     = 257; // used only in search dialog 256+1
   static final long FLAG_REVERSE_SPLAY = 258; // used only in search dialog 256+2
+
+  /** @return the block ID or the bric-index if the proper setting is active
+   * @nore used only by the DBlockAdapter
+   */
+  long getBlockIndexOrId() 
+  {
+    if ( TDSetting.mBricIndexIsId ) {
+      return ( mIndex > 0 )? mIndex : mId;
+    } 
+    return mId;
+  }
 
 
   /** test if a flag is set

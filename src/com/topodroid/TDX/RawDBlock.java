@@ -31,7 +31,7 @@ class RawDBlock
 
   int  mExtend;
   long mFlag;     
-  int  mLeg;       // ? mBlockType;   
+  int  mLeg;       // NOTE mLeg is not mBlockType: see setBlockType()
   private int  mShotType;  // 0: DistoX, 1: manual, -1: DistoX backshot
   int  mStatus;    // FIXME used only to export CSV raw data
   // boolean mWithPhoto;
@@ -49,6 +49,7 @@ class RawDBlock
   int mRawGz = 0;
 
   int mIndex = 0;
+  long mDeviceTime = 0L;
 
   void setShotType( int shot_type ) { mShotType = shot_type; } 
   

@@ -67,41 +67,41 @@ class CalibAlgoMin extends CalibAlgo
   // public int nrCoeff() { return mNonLinear ? 52 : 48; }
 
 
-  /** @return clino
-   * @param gs   g (sensor)
-   * @param ms   m (sensor)
-   */
-  float clino( TDVector gs, TDVector ms )
-  {
-    TDVector g = bG.plus( aG.timesV( gs ) );
-    g.normalize();
-    return (float)Math.acos( g.x ) * TDMath.RAD2DEG;
-  }
+  // /** @return clino + 90 degrees
+  //  * @param gs   g (sensor)
+  //  * @param ms   m (sensor)
+  //  */
+  // float clino( TDVector gs, TDVector ms )
+  // {
+  //   TDVector g = bG.plus( aG.timesV( gs ) );
+  //   g.normalize();
+  //   return (float)Math.acos( g.x ) * TDMath.RAD2DEG;
+  // }
 
-  /** @return azimuth
-   * @param gs   g (sensor)
-   * @param ms   m (sensor)
-   */
-  float azimuth( TDVector gs, TDVector ms )
-  {
-    TDVector g = bG.plus( aG.timesV( gs ) );
-    g.normalize();
-    float gx = g.x;
-
-    TDVector m = bM.plus( aM.timesV( ms ) );
-    m.normalize();
-    float gm = g.dot( m );
- 
-    return (float)Math.acos( (gx*gm - m.x)/Math.sqrt((1-gx*gx)*(1-gm*gm)) ) * TDMath.RAD2DEG;
-
-    // TDVector e = g ^ m;
-    // TDVector n = e ^ g;
-    // n.normalize();
-    // TDVector x(1,0,0);
-    // TDVector xh = x - g * g.x;
-    // xh.normalize();
-    // return acos( xh * n ) * 180 / M_PI;
-  }
+  // /** @return azimuth if in [0,180], and 360-azimuth if in [180,360]
+  //  * @param gs   g (sensor)
+  //  * @param ms   m (sensor)
+  //  */
+  // float azimuth( TDVector gs, TDVector ms )
+  // {
+  //   TDVector g = bG.plus( aG.timesV( gs ) );
+  //   g.normalize();
+  //   float gx = g.x;
+  //
+  //   TDVector m = bM.plus( aM.timesV( ms ) );
+  //   m.normalize();
+  //   float gm = g.dot( m );
+  // 
+  //   return (float)Math.acos( (gx*gm - m.x)/Math.sqrt((1-gx*gx)*(1-gm*gm)) ) * TDMath.RAD2DEG;
+  //
+  //   // TDVector e = g ^ m;
+  //   // TDVector n = e ^ g;
+  //   // n.normalize();
+  //   // TDVector x(1,0,0);
+  //   // TDVector xh = x - g * g.x;
+  //   // xh.normalize();
+  //   // return acos( xh * n ) * 180 / M_PI;
+  // }
 
   /** @return calibrated G (device frame)
    * @param n  data index
@@ -113,7 +113,8 @@ class CalibAlgoMin extends CalibAlgo
    */
   private TDVector M( int n ) { return bM.plus( aM.timesV( m[n] ) ); }
 
-  /** @return mean dip (using calibrated G, M)
+  /** @return mean dip (using calibrated G, M) [radians]
+   * @note this is the complementary to the M dip-angle
    */
   private float mean_dip()
   {
@@ -128,7 +129,7 @@ class CalibAlgoMin extends CalibAlgo
   {
     TDVector sum = new TDVector();
     for (int i=0; i<idx; ++i ) sum.plusEqual( g[i] );
-    sum.timesEqual( invNN );
+    sum.timesEqual( invNN ); // invNN = 1/idx
     return sum;
   }
   
@@ -143,6 +144,7 @@ class CalibAlgoMin extends CalibAlgo
   }
   
   /** return mean (g x g) matrix (sensor)
+   * @note the m[h,k] = Sum_(i,j) g{i]_h g[j]_k where h,k are x,y,z  
    */
   private TDMatrix mean_gg()
   {
@@ -294,6 +296,9 @@ class CalibAlgoMin extends CalibAlgo
     return sum;
   }
 
+  /** vector sum of the vector differences of the average M^X of the group with the M^X in the group
+   *                    weighted by the differences of the average (G^M)x and (G^M)x
+   */
   private TDVector dbGGM()
   {
     TDVector sum = new TDVector();
@@ -310,8 +315,8 @@ class CalibAlgoMin extends CalibAlgo
         while ( i < idx && (group[i] <= 0 || group[i] == group0) ) {
           if ( group[i] > 0 ) {
             TDVector MM = M(i);
-            GMx += cross_x( G(i), MM );     // [ G(i) ^ M(i) ]_x
-            XX.plusEqual( MM.crossX() );
+            GMx += cross_x( G(i), MM );     // average [ G(i) ^ M(i) ]_x
+            XX.plusEqual( MM.crossX() );    // average vector M(i) ^ X   maybe
             ++c;
           }
           ++ i;
@@ -332,6 +337,10 @@ class CalibAlgoMin extends CalibAlgo
     return sum;
   }
 
+  /** matrix sum of the matrix differences of the average [G % M^X] of the group
+   *                    with the [G % M^X] in the group
+   *                    weighted by the differences of the average (G^M)x and (G^M)x
+   */
   private TDMatrix daGGM()
   {
     TDMatrix sum = new TDMatrix();
@@ -374,6 +383,9 @@ class CalibAlgoMin extends CalibAlgo
     return sum;
   }
 
+  /** vector sum of the vector differences of the average G^X of the group with the G^X in the group
+   *                    weighted by the differences of the average (G^M)x and (G^M)x
+   */
   private TDVector dbMGM()
   {
     TDVector sum = new TDVector();
@@ -412,6 +424,10 @@ class CalibAlgoMin extends CalibAlgo
     return sum;
   }
 
+  /** matrix sum of the matrix differences of the average [M % G^X] of the group
+   *                    with the [M % G^X] in the group
+   *                    weighted by the differences of the average (G^M)x and (G^M)x
+   */
   private TDMatrix daMGM()
   {
     TDMatrix sum = new TDMatrix();

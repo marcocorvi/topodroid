@@ -408,7 +408,7 @@ public class TDSetting
   public static boolean mFirmwareSanity = true; // enforce firmware sanity checks
   public static int mBricMode = BricMode.MODE_ALL;
   public static boolean mBricZeroLength = false; // whether to handle 0-length data
-  public static boolean mBricIndexIsId  = false; // whether to use BRIC index as id
+  public static boolean mBricIndexIsId  = false; // whether to display BRIC index instead of id
   public static boolean mSap5Bit16Bug   = true;  // whether to apply SAP5 bit-16 bug workaround
 
   // public static final boolean CHECK_BT = true;

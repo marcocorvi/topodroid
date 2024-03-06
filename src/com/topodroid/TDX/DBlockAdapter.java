@@ -516,7 +516,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     void setViewText( DBlock b, OnLongClickListener listener )
     {
       if ( b == null ) return;
-      tvId.setText( String.format(Locale.US, "%1$d", b.mId ) );
+      tvId.setText( String.format(Locale.US, "%1$d", b.getBlockIndexOrId() ) );
       tvFrom.setText( b.mFrom );
       tvTo.setText( b.mTo );
       if ( diving ) {

@@ -126,7 +126,7 @@ public class BricProto extends TopoDroidProtocol
       if ( mPrimToDo ) {        // and there is a previous Prim unprocessed
         processData();
       }
-      mTime     = mThisTime / 1000L;
+      mTime     = mThisTime / 1000L; // seconds
       mDistance = BricConst.getDistance( bytes );
       mBearing  = BricConst.getAzimuth( bytes );
       mClino    = BricConst.getClino( bytes );
@@ -223,7 +223,7 @@ public class BricProto extends TopoDroidProtocol
   {
     if ( checkPrim( bytes ) ) { // if Prim is new
       // TDLog.v( "BRIC proto: add Prim and process" );
-      mTime     = mThisTime / 1000L;
+      mTime     = mThisTime / 1000L; // seconds
       mDistance = BricConst.getDistance( bytes );
       mBearing  = BricConst.getAzimuth( bytes );
       mClino    = BricConst.getClino( bytes );

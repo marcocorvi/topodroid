@@ -2402,7 +2402,7 @@ public class TDExporter
         String address = b.mAddress;
         if ( TDString.isNullOrEmpty( address ) ) address = "-";
         pw.format(Locale.US, "%d%c%d%c%s%c", b.mTime, sep, b.getShotType(), sep, address, sep );
-        pw.format(Locale.US, "%d%c%d%c%d%c%d%c", b.mExtend, sep, b.mFlag, sep, b.mLeg, sep, b.mStatus, sep );
+        pw.format(Locale.US, "%d%c%d%c%d%c%d%c", b.mExtend, sep, b.mFlag, sep, b.mLeg, sep, b.mStatus, sep );  // NOTE mLeg is not mBlockType
         pw.format(Locale.US, "%d%c%d%c%d%c%d%c%d%s%d%c", b.mRawMx, sep, b.mRawMy, sep, b.mRawMz, sep, b.mRawGx, sep, b.mRawGy, sep, b.mRawGz, sep );
         pw.format(Locale.US, "%s%s", b.mComment, newline );
       }

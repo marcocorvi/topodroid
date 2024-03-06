@@ -454,6 +454,7 @@ public class ShotWindow extends Activity
   @Override
   synchronized public void updateBlockList( long blk_id )
   {
+    TDLog.v("update block list " + blk_id );
     DBlock blk = mApp_mData.selectLastShot( blk_id, TDInstance.sid );
     if ( blk == null || mDataAdapter == null ) {
       // TDLog.v("DATA " + "null block");

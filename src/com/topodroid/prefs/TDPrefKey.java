@@ -319,11 +319,11 @@ public class TDPrefKey
     // FALSE,
     TDString.ZERO,
     // TDString.ZERO,
-    "0.1",
-    "4.0",
-    "1.0",
-    "1.0",
-    "0.004",
+    "0.05",  // MIN CAL N.B. this is 1-alpha of the C++ code
+    "3.0",
+    "0.05",
+    "0.05",  // N.B. delta was not included in the C++ code
+    "0.004", // AUTO_CAL
     "0.04",
     "0.04",
     "0.04",

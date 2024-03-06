@@ -105,13 +105,13 @@ public class TopoDroidComm
     double r = mProtocol.mRoll;
     double dip  = mProtocol.mDip;
     long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
-    long time   = mProtocol.getTimeStamp();
+    long time   = mProtocol.getTimeStamp(); // BRIC time of the shot [seconds]
     // TODO split the data insert in three places: one for each data packet
 
     TDLog.v( "TD comm: HANDLE PACKET " + index + " " + d + " " + b + " " + c + " time " + time );
     int leg = ( data_type == DataType.DATA_SCAN )? LegType.SCAN : LegType.NORMAL;
     if ( comment == null ) comment = "";
-    long id = TopoDroidApp.mData.insertBricShot( TDInstance.sid, index, d, b, c, r, clino_error, azimuth_error, dip, ExtendType.EXTEND_IGNORE, leg, status, comment, TDInstance.deviceAddress(), index, time );
+    long id = TopoDroidApp.mData.insertBricShot( TDInstance.sid, /* index, */ d, b, c, r, clino_error, azimuth_error, dip, ExtendType.EXTEND_IGNORE, leg, status, comment, TDInstance.deviceAddress(), index, time );
     // TopoDroidApp.mData.updateShotAMDR( mLastShotId, TDInstance.sid, clino_error, azimuth_error, dip, r, false );
     // if ( comment != null ) TopoDroidApp.mData.updateShotComment( mLastShotId, TDInstance.sid, comment );
 

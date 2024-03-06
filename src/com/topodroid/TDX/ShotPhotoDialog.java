@@ -48,7 +48,7 @@ class ShotPhotoDialog extends MyDialog
 
   /**
    * @param context   context
-   * @param parent    parent shot list activityA
+   * @param parent    parent shot list activity
    * @param sid       shot id
    * @param name      shot name
    */
