@@ -753,6 +753,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="hide_leg">Visualizar tomas repetidas</string>
     <string name="hide_ids">Visualizar enumeración de las tomas</string>
     <string name="hide_splay">Visualizar las tomas radiales</string>
+    <!-- TODO string name="slope_lside">Slope l-side</string -->
 
     <!-- UNUSED string name="plan">Planta</string -->
    <string name="extended">Sección Long.</string>
@@ -1723,6 +1724,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_iter_summary">Número máximo de iteraciones</string>
   <string name="pref_label_size_title">Tamaño del texto</string>
   <string name="pref_label_size_summary">Tamaño del texto</string>
+  <!-- TODO string name="pref_slope_lside_title">Slope line l-side</string -->
+  <!-- TODO string name="pref_slope_lside_summary">Slope lines default l-side</string -->
   <string name="pref_arrow_length_title">Corte seccional</string>
   <string name="pref_arrow_length_message">Tamaño de la línea del corte de sección</string>
   <string name="pref_dot_radius_title">Puntos de nodo</string>

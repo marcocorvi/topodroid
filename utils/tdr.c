@@ -15,6 +15,7 @@ int sf = sizeof( float );
 uint32_t s32 = sizeof( uint32_t );
 
 int VERSION = 0;
+int max = 1170;  // max pos read
 
 int toLE( int * pi )
 {
@@ -36,6 +37,7 @@ void readString( char * hdr, FILE * fp )
   for ( j=0; j<len; ++j ) {
     fread( &ch, sc, 1, fp );
     printf("%c", ch, ch );
+    if ( ftell( fp ) > max ) break;
   }
   printf(">\n");
 }
@@ -49,6 +51,7 @@ void read4ch( FILE * fp, int skip )
   for ( j=0; j<skip; ++j ) {
     fread( &ch, sc, 1, fp );
     printf(" %02x ", ch );
+    if ( ftell( fp ) > max ) break;
   }
   printf("\n");
 }
@@ -95,6 +98,7 @@ void readScrap( FILE * fp )
     readString( "", fp );
     // printf("\n");
     // read4ch( fp, 2 ); printf("\n");
+    if ( ftell( fp ) > max ) break;
   }
 }
 
@@ -185,6 +189,9 @@ void readLinePoint( FILE * fp )
   printf("\n");
 }
 
+/** read a line:
+  name, group, closed. reversed. outline, lside, level, scrap, options, nr_points, points
+ */
 void readLine( FILE * fp )
 {
   long pos = ftell( fp );
@@ -196,15 +203,22 @@ void readLine( FILE * fp )
   fread( &closed, sc, 1, fp );
   fread( &reversed, sc, 1, fp );
   int outline = readInt( fp );
+  int lside = (VERSION >= 602055 )? readInt( fp ) : -1;
   int lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff;
   int scrap = ( VERSION >= 401160 )? readInt( fp ) : 0;
-  printf("  Closed %d Rev. %d Outline %d Level %02x Scrap %d\n", closed, reversed, outline, lvl, scrap );
+  printf("  Closed %d Rev. %d LSide %d Outline %d Level %02x Scrap %d\n", closed, reversed, lside, outline, lvl, scrap );
   readString( "  Options ", fp );     // options
   np = readInt( fp );   // nr. points
   printf("  Nr. Points %d\n", np );
-  for ( int k=0; k<np; ++k ) readLinePoint( fp );
+  for ( int k=0; k<np; ++k ) {
+    readLinePoint( fp );
+    if ( ftell( fp ) > max ) break;
+  }
 }
 
+/** read an area object:
+  name, group, prefix, counter, border_visibility, orientation, levle, scrap, nr_points, point
+ */
 void readArea( FILE * fp )
 {
   long pos = ftell( fp );
@@ -220,7 +234,10 @@ void readArea( FILE * fp )
   int scrap = ( VERSION >= 401160 )? readInt( fp ) : 0;
   int np = readInt( fp );       // nr points
   printf("  Counter %d Visibility %d Orientation %.2f Level %02x Scrap %d Nr.Points %d\n", cnt, ch, orient, lvl, scrap, np );
-  for ( int k=0; k<np; ++k ) readLinePoint( fp );
+  for ( int k=0; k<np; ++k ) {
+    readLinePoint( fp );
+    if ( ftell( fp ) > max ) break;
+  }
 }
 
 void readAutoStation( FILE * fp )
@@ -384,6 +401,7 @@ int main( int argc, char ** argv )
 	break;
       default:
         printf("%ld= Unexpected char %02x <%c>\n", pos, ch, ch );
+        return 1;
         break;
     }
     pos = ftell( fp );

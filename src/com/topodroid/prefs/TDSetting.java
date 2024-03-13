@@ -183,6 +183,13 @@ public class TDSetting
     }
   }
 
+  public static String setSlopeLSide( int f )
+  {
+    mSlopeLSide = ( f < 1 )? 20 : f;
+    return Integer.toString( mSlopeLSide );
+  }
+     
+
   public static String keyDeviceName() { return "DISTOX_DEVICE"; }
 
   // static final  String EXPORT_TYPE    = "th";    // DISTOX_EXPORT_TH
@@ -596,6 +603,8 @@ public class TDSetting
   // public static boolean mPlotCache       = true;  // default value
   public static float mDotRadius      = 5;  // radius of selection dots - splay dots are 1.5 as big
   public static float mArrowLength    = 8;
+  public static int   mSlopeLSide     = 20;  // l-side of slope lines
+
 
   // NOTE not used, but could set a default for section splays
   // public static int mSectionStations = 3; // 1: From, 2: To, 3: both
@@ -1397,11 +1406,12 @@ public class TDSetting
     setLineStyleAndType( prefs.getString( keyLine[2],   defLine[2] ) ); // DISTOX_LINE_STYLE
     setLineSegment( tryInt(    prefs,  keyLine[3],      defLine[3] ) ); // DISTOX_LINE_SEGMENT
     mLineClose     = prefs.getBoolean( keyLine[4], bool(defLine[4]) );  // DISTOX_LINE_CLOSE
-    mArrowLength   = tryFloat( prefs,  keyLine[5],      defLine[5] );   // DISTOX_ARROW_LENGTH
-    mAutoSectionPt = prefs.getBoolean( keyLine[6], bool(defLine[6]) );  // DISTOX_AUTO_SECTION_PT
-    // mContinueLine  = tryInt(   prefs,  keyLine[6],      defLine[6] );   // DISTOX_LINE_CONTINUE
-    mWithLineJoin  = prefs.getBoolean( keyLine[7], bool(defLine[7]) );  // DISTOX_WITH_CONTINUE_LINE
-    mAreaBorder    = prefs.getBoolean( keyLine[8], bool(defLine[8]) );  // DISTOX_AREA_BORDER
+    mSlopeLSide    = tryInt(   prefs,  keyLine[5],      defLine[5] );   // DISTOX_SLOPE_LSIDE
+    mArrowLength   = tryFloat( prefs,  keyLine[6],      defLine[6] );   // DISTOX_ARROW_LENGTH
+    mAutoSectionPt = prefs.getBoolean( keyLine[7], bool(defLine[7]) );  // DISTOX_AUTO_SECTION_PT
+    // mContinueLine  = tryInt(   prefs,  keyLine[7],      defLine[7] );   // DISTOX_LINE_CONTINUE
+    mWithLineJoin  = prefs.getBoolean( keyLine[8], bool(defLine[8]) );  // DISTOX_WITH_CONTINUE_LINE
+    mAreaBorder    = prefs.getBoolean( keyLine[9], bool(defLine[9]) );  // DISTOX_AREA_BORDER
 
     String[] keyPoint = TDPrefKey.POINT;
     String[] defPoint = TDPrefKey.POINTdef;
@@ -2615,16 +2625,18 @@ public class TDSetting
       ret = setLineSegment( tryIntValue(   hlp, k, v, def[3] ) );
     } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_LINE_CLOSE
       mLineClose = tryBooleanValue( hlp, k, v, bool(def[4]) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_ARROW_LENGTH
-      ret = setArrowLength( tryFloatValue( hlp, k, v, def[5] ) );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_AUTO_SECTION_PT (bool)
-      mAutoSectionPt = tryBooleanValue( hlp, k, v, bool(def[6]) );
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_SLOPE_LSIDE
+      ret = setSlopeLSide( tryIntValue( hlp, k, v, def[5] ) );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_ARROW_LENGTH
+      ret = setArrowLength( tryFloatValue( hlp, k, v, def[6] ) );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_AUTO_SECTION_PT (bool)
+      mAutoSectionPt = tryBooleanValue( hlp, k, v, bool(def[7]) );
     // } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_LINE_CONTINUE (choice)
-    //   mContinueLine  = tryIntValue( hlp, k, v, def[6] );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_WITH_CONTINUE_LINE (bool)
-      mWithLineJoin = tryBooleanValue(  hlp, k, v, bool(def[7]) );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_AREA_BORDER (bool)
-      mAreaBorder = tryBooleanValue( hlp, k, v, bool(def[8]) );
+    //   mContinueLine  = tryIntValue( hlp, k, v, def[7] );
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_WITH_CONTINUE_LINE (bool)
+      mWithLineJoin = tryBooleanValue(  hlp, k, v, bool(def[8]) );
+    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_AREA_BORDER (bool)
+      mAreaBorder = tryBooleanValue( hlp, k, v, bool(def[9]) );
     } else {
       TDLog.Error("missing LINE key: " + k );
     }
@@ -3246,7 +3258,7 @@ public class TDSetting
       // pw.printf(Locale.US, "Picker: type %d\n", mPickerType );
       pw.printf(Locale.US, "Point: unscaled %c\n", tf(mUnscaledPoints) );
       // pw.printf(Locale.US, "Line: style %d, type %d, segment %d, continue %d, arrow %.1f\n", mLineStyle, mLineType, mLineSegment, mContinueLine, mArrowLength );
-      pw.printf(Locale.US, "Line: style %d, type %d, segment %d, continue 0, arrow %.1f, close %c\n", mLineStyle, mLineType, mLineSegment, mArrowLength, tf(mLineClose) );
+      pw.printf(Locale.US, "Line: style %d, type %d, segment %d, continue 0, arrow %.1f, close %c, l-side %d\n", mLineStyle, mLineType, mLineSegment, mArrowLength, tf(mLineClose), mSlopeLSide );
       pw.printf(Locale.US, "Bezier: step %.2f, accuracy %.2f, corner %.2f\n", mBezierStep, mLineAccuracy, mLineCorner );
       pw.printf(Locale.US, "Weed: distance %.2f, length %.2f, buffer %.2f\n", mWeedDistance, mWeedLength, mWeedBuffer );
       pw.printf(Locale.US, "Area: border %c\n", tf(mAreaBorder) );
@@ -3953,6 +3965,9 @@ public class TDSetting
             mArrowLength  = getFloat( vals, 10, 10.0f ); setPreference( editor, "DISTOX_ARROW_LENGTH", mArrowLength );
             if ( vals.length > 12 ) {
               mLineClose = getBoolean( vals, 12 ); setPreference( editor, "DISTOX_LINE_CLOSE", mLineClose );
+            }
+            if ( vals.length > 14 ) {
+              mSlopeLSide = getInt( vals, 12, 20 ); setPreference( editor, "DISTOX_SLOPE_LSIDE", mSlopeLSide );
             }
           }
           continue;

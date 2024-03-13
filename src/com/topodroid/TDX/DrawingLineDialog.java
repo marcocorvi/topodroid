@@ -31,6 +31,8 @@ import android.widget.ArrayAdapter;
 
 import android.view.View;
 
+import java.util.Locale;
+
 class DrawingLineDialog extends MyDialog
                         implements View.OnClickListener
                         , AdapterView.OnItemSelectedListener
@@ -42,6 +44,7 @@ class DrawingLineDialog extends MyDialog
 
   private int mType;              // line type - initialized from line item's type
   private int mTypeSection;
+  private int mTypeSlope;
 
   // GUI widgets
   private Spinner  mETtype;
@@ -69,6 +72,9 @@ class DrawingLineDialog extends MyDialog
   // private CheckBox mCBwater = null;
   // private CheckBox mCBtext  = null;
 
+  private LinearLayout mLLlside;
+  private EditText mETlside;
+
 
   DrawingLineDialog( Context context, DrawingWindow parent, DrawingLinePath line, LinePoint lp )
   {
@@ -78,6 +84,7 @@ class DrawingLineDialog extends MyDialog
     mPoint = lp;
     mType  = mLine.mLineType;
     mTypeSection = BrushManager.getLineSectionIndex();
+    mTypeSlope   = BrushManager.getLineSlopeIndex();
     mDoOptions = TDLevel.overAdvanced;
   }
 
@@ -101,6 +108,10 @@ class DrawingLineDialog extends MyDialog
     } catch ( UnsupportedOperationException e2 ) {
       TDLog.Error( e2.getMessage() );
     }
+
+    mLLlside = (LinearLayout) findViewById( R.id.layout_lside );
+    mETlside = (EditText) findViewById( R.id.line_lside );
+    setEditTextLSide();
 
     mEToptions = (EditText) findViewById( R.id.line_options );
     if ( mDoOptions ) {
@@ -169,6 +180,16 @@ class DrawingLineDialog extends MyDialog
     }
   }
 
+  private void setEditTextLSide()
+  {
+    if ( mType == mTypeSlope ) {
+      mETlside.setText( Integer.toString( mLine.getLSide() ) );
+      mLLlside.setVisibility( View.VISIBLE );
+    } else {
+      mLLlside.setVisibility( View.GONE );
+    }
+  }
+
   private void setCBlayers()
   {
     mCBbase  = (CheckBox) findViewById( R.id.cb_layer_base  );
@@ -207,7 +228,9 @@ class DrawingLineDialog extends MyDialog
   @Override
   public void onItemSelected( AdapterView av, View v, int pos, long id ) 
   { 
+    int type = mType;
     mType = ( pos >= mTypeSection )? pos+1 : pos;
+    if ( type == mTypeSlope || mType == mTypeSlope ) setEditTextLSide();
     // av.setSelection( pos );
   }
 
@@ -250,6 +273,11 @@ class DrawingLineDialog extends MyDialog
     
     } else if ( b == mBtnOk ) {
       if ( mType != mLine.mLineType && mType != mTypeSection ) mLine.setLineType( mType );
+      if ( mType == mTypeSlope ) {
+        try { 
+          mLine.setLSide( Integer.parseInt( mETlside.getText().toString() ) );
+        } catch ( NumberFormatException e ) { }
+      }
 
       if ( mDoOptions && mEToptions.getText() != null ) {
         String options = mEToptions.getText().toString().trim();

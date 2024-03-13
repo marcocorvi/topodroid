@@ -746,6 +746,7 @@
     <string name="hide_leg">Battute ripetute</string>
     <string name="hide_ids">ID misure</string>
     <string name="hide_splay">Misure laterali</string>
+    <!-- TODO string name="slope_lside">Slope l-side</string -->
 
     <!-- UNUSED string name="plan">PIANTA</string -->
     <string name="extended">SEZIONE LONG.</string>
@@ -1705,6 +1706,8 @@
   <string name="pref_iter_summary">Massimo numero iterazioni</string>
   <string name="pref_label_size_title">Dimensione scritte</string>
   <string name="pref_label_size_summary">Dimensione delle scritte</string>
+  <!-- TODO string name="pref_slope_lside_title">Slope line l-side</string -->
+  <!-- TODO string name="pref_slope_lside_summary">Slope lines default l-side</string -->
   <string name="pref_arrow_length_title">Direzione di sezione</string>
   <string name="pref_arrow_length_message">Lunghezza direzione di sezione</string>
   <string name="pref_dot_radius_title">Raggio punti selezione</string>

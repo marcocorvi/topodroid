@@ -760,6 +760,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="hide_leg">Visées de cheminement répétées</string>
     <string name="hide_ids">ID de visées</string>
     <string name="hide_splay">Visées latérales d\'habillage</string>
+    <!-- TODO string name="slope_lside">Slope l-side</string -->
 
     <!-- THESE MUST AGREE WITH THE FMT STRINGS -->
     <!-- UNUSED string name="plan">PLAN</string -->
@@ -1722,6 +1723,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_iter_summary">Nombre de répétitions maxi</string>
     <string name="pref_label_size_title">Taille étiquettes</string>
     <string name="pref_label_size_summary">Taille des étiquettes</string>
+  <!-- TODO string name="pref_slope_lside_title">Slope line l-side</string -->
+  <!-- TODO string name="pref_slope_lside_summary">Slope lines default l-side</string -->
     <string name="pref_arrow_length_title">Ligne de section pointillé</string>
     <string name="pref_arrow_length_message">Épaisseur ligne de section en pointillés</string>
     <string name="pref_dot_radius_title">Points mode édition</string>

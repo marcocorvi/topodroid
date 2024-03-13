@@ -24,6 +24,28 @@
       android:importantForAutofill="no"
     />
 
+    <LinearLayout android:id="@+id/layout_lside"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:layout_marginTop="@dimen/marginv"
+      >
+      <TextView 
+        style="@style/edit_text_light"
+        android:layout_width="0dp"
+        android:layout_weight="50"
+        android:layout_height="wrap_content"
+        android:text="@string/slope_lside"
+      />
+      <EditText android:id="@+id/line_lside"
+        style="@style/edit_text_light"
+        android:layout_width="0dp"
+        android:layout_weight="50"
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+      />
+    </LinearLayout>
+
     <!-- CheckBox android:id="@+id/line_reversed"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
@@ -35,6 +57,7 @@
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
+      android:layout_marginTop="@dimen/marginv"
       >
         <TextView 
            android:layout_width="wrap_content"

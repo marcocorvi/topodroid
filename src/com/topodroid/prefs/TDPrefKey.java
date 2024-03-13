@@ -1236,6 +1236,7 @@ public class TDPrefKey
     "DISTOX_LINE_STYLE",           // line style: 0 bezier, 1 fine, 2 normal, 3 coarse
     "DISTOX_LINE_SEGMENT",         // minimum distance between consecutive points on a line
     "DISTOX_LINE_CLOSE",           // close lines of closed type
+    "DISTOX_SLOPE_LSIDE",          // slope line l-side
     "DISTOX_ARROW_LENGTH",    // 3 // length of the tick at the first line-point (when applicable)
     "DISTOX_AUTO_SECTION_PT",      // whether to add section point when tracing a section line
     // "DISTOX_LINE_CONTINUE",   // 6 // default line continuation set
@@ -1251,6 +1252,7 @@ public class TDPrefKey
     R.string.pref_linestyle_title,
     R.string.pref_segment_title,
     R.string.pref_line_close_title,
+    R.string.pref_slope_lside_title,
     R.string.pref_arrow_length_title,
     R.string.pref_auto_section_pt_title,
     // R.string.pref_linecontinue_title,
@@ -1266,6 +1268,7 @@ public class TDPrefKey
     R.string.pref_linestyle_summary,
     R.string.pref_segment_message,
     R.string.pref_line_close_title,
+    R.string.pref_slope_lside_summary,
     R.string.pref_arrow_length_message,
     R.string.pref_auto_section_pt_summary,
     // R.string.pref_linecontinue_summary,
@@ -1281,6 +1284,7 @@ public class TDPrefKey
     TDString.TWO,
     TDString.TEN,
     TRUE,
+    "20",
     "8",
     TRUE,
     // TDString.ZERO,

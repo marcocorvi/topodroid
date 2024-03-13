@@ -17,7 +17,7 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.num.TDNum;
 import com.topodroid.math.TDVector;
-// import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.TDSetting;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -40,6 +40,7 @@ public class DrawingLinePath extends DrawingPointLinePath
   public static final int OUTLINE_NONE = 0;
   public static final int OUTLINE_UNDEF = -2;
 
+
   /** test whether the line has the outline
    * @return true if the line has either outline OUT or IN
    */
@@ -50,6 +51,7 @@ public class DrawingLinePath extends DrawingPointLinePath
   int mLineType;
   public int mOutline; // TH2EDIT package
   private boolean mReversed;
+  private int mLSide = -1;
 
   // FIXME-COPYPATH
   // @Override 
@@ -61,6 +63,13 @@ public class DrawingLinePath extends DrawingPointLinePath
   //   ret.mReversed = mReversed;
   //   return ret;
   // }
+
+  void setLSide( int lside ) 
+  {
+    mLSide = ( lside < 1 )? -1 : lside;
+  }
+
+  int getLSide() { return mLSide; }
 
   /** cstr
    * @param line_type   type of the line
@@ -93,6 +102,7 @@ public class DrawingLinePath extends DrawingPointLinePath
     int outline;
     int level = DrawingLevel.LEVEL_DEFAULT;
     int scrap = 0;
+    int lside = -1;
     String thname, options;
     String group = null;
     try {
@@ -102,6 +112,7 @@ public class DrawingLinePath extends DrawingPointLinePath
       // visible= (dis.read() == 1);
       reversed = (dis.read() == 1);
       outline = dis.readInt();
+      if ( version >= 602055 ) lside = dis.readInt();
       if ( version >= 401090 ) level = dis.readInt();
       if ( version >= 401160 ) scrap = dis.readInt();
       options = dis.readUTF();
@@ -119,6 +130,7 @@ public class DrawingLinePath extends DrawingPointLinePath
       ret.mLevel    = level;
       ret.mOptions  = options;
       ret.setReversed( reversed );
+      ret.setLSide( lside );
 
       int npt = dis.readInt();
       // TDLog.Log( TDLog.LOG_PLOT, "L: " + thname + " T " + type + " R" + reversed + " C" + closed + " NP " + npt );
@@ -496,7 +508,7 @@ public class DrawingLinePath extends DrawingPointLinePath
     toTherionPoints( pw, isClosed() );
 
     if ( BrushManager.isLineSlope( mLineType ) ) {
-      pw.format("  l-size 40\n");
+      pw.format("  l-size %d\n", ( ( mLSide < 0 )? TDSetting.mSlopeLSide : mLSide ) );
     }
     pw.format("endline\n");
     return sw.getBuffer().toString();
@@ -524,6 +536,7 @@ public class DrawingLinePath extends DrawingPointLinePath
       // dos.write( isVisible()? 1 : 0 );
       dos.write( mReversed? 1 : 0 );
       dos.writeInt( mOutline );
+      dos.writeInt( mLSide );
       // if ( version >= 401090 )
         dos.writeInt( mLevel );
       // if ( version >= 401160 )

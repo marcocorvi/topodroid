@@ -755,6 +755,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="hide_leg">Ismételt poligonmérések</string>
     <string name="hide_ids">Mérés azonosítók</string>
     <string name="hide_splay">Segéd mérések</string>
+    <!-- TODO string name="slope_lside">Slope l-side</string -->
 
     <!-- UNUSED string name="plan">ALAPRAJZ</string -->
     <string name="extended">KIT.OLDALNÉZET</string>
@@ -1718,6 +1719,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_iter_summary">Iterációk maximális száma</string>
   <string name="pref_label_size_title">Címke méret</string>
   <string name="pref_label_size_summary">Címkék mérete</string>
+  <!-- TODO string name="pref_slope_lside_title">Slope line l-side</string -->
+  <!-- TODO string name="pref_slope_lside_summary">Slope lines default l-side</string -->
   <string name="pref_arrow_length_title">Metszet-jelölő</string>
   <string name="pref_arrow_length_message">Keresztszelvény-jelölő mérete</string>
   <string name="pref_dot_radius_title">Zöld pontok mérete</string>
