@@ -291,6 +291,7 @@ public class BrushManager
   // fixedGridPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
   // fixedGrid10Paint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
   public static final Paint mSectionPaint = makePaint( TDColor.ORANGE, 2 * WIDTH_FIXED, Paint.Style.FILL_AND_STROKE );
+  public static final Paint mLSidePaint   = makePaint( TDColor.WHITE, 2 * WIDTH_FIXED, Paint.Style.FILL_AND_STROKE );
   // public static final Paint stationPaint = null;
 
   // static BitmapDrawable mSymbolHighlight = null;

@@ -2948,12 +2948,12 @@ public class Scrap
               if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
                 Paint paint = new Paint( BrushManager.mSectionPaint );
                 paint.setColor( xor_color ^ paint.getColor() );
-                LinePoint lp = line.mFirst;
-                Path path1 = new Path();
-                path1.moveTo( lp.x, lp.y );
-                path1.lineTo( lp.x+line.mDx*TDSetting.mArrowLength, lp.y+line.mDy*TDSetting.mArrowLength );
-                path1.transform( matrix );
-                canvas.drawPath( path1, paint );
+                drawDirectionTick( canvas, matrix, line, TDSetting.mArrowLength, paint );
+              } else if ( BrushManager.isLineSlope( line.mLineType ) ) {
+                Paint paint = new Paint( BrushManager.mLSidePaint );
+                paint.setColor( xor_color ^ paint.getColor() );
+                float lside = line.getLSide(); if ( lside < 1 ) lside = TDSetting.mSlopeLSide;
+                drawDirectionTick( canvas, matrix, line, lside*0.5f, paint ); // lside is divided by 2 to make it roughly long as in therion pdf
               }
             }
           }
@@ -2969,12 +2969,12 @@ public class Scrap
                 if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
                   Paint paint = new Paint( BrushManager.mSectionPaint );
                   paint.setColor( xor_color ^ paint.getColor() );
-                  LinePoint lp = line.mFirst;
-                  Path path1 = new Path();
-                  path1.moveTo( lp.x, lp.y );
-                  path1.lineTo( lp.x+line.mDx*TDSetting.mArrowLength, lp.y+line.mDy*TDSetting.mArrowLength );
-                  path1.transform( matrix );
-                  canvas.drawPath( path1, paint );
+                  drawDirectionTick( canvas, matrix, line, TDSetting.mArrowLength, paint );
+                } else if ( BrushManager.isLineSlope( line.mLineType ) ) {
+                  Paint paint = new Paint( BrushManager.mLSidePaint );
+                  paint.setColor( xor_color ^ paint.getColor() );
+                  float lside = line.getLSide(); if ( lside < 1 ) lside = TDSetting.mSlopeLSide;
+                  drawDirectionTick( canvas, matrix, line, lside*0.5f, paint );
                 }
               }
             }
@@ -2982,6 +2982,23 @@ public class Scrap
         }
       }
     }
+  }
+
+  /** draw the direction tick of a section line or the lside tick of a slope line
+   * @param canvas   canvas
+   * @param matrix   transform matrix
+   * @param line     line
+   * @param len      tick length
+   * @param paint    tick paint
+   */
+  private void drawDirectionTick( Canvas canvas, Matrix matrix, DrawingLinePath line, float len, Paint paint )
+  {
+    LinePoint lp = line.mFirst;
+    Path path1 = new Path();
+    path1.moveTo( lp.x, lp.y );
+    path1.lineTo( lp.x+line.mDx*len, lp.y+line.mDy*len );
+    path1.transform( matrix );
+    canvas.drawPath( path1, paint );
   }
 
   /** draw all sketch items
@@ -3002,12 +3019,10 @@ public class Scrap
             if ( path.isLine() ) { // path instanceof DrawingLinePath
               DrawingLinePath line = (DrawingLinePath)path;
               if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
-                LinePoint lp = line.mFirst;
-                Path path1 = new Path();
-                path1.moveTo( lp.x, lp.y );
-                path1.lineTo( lp.x+line.mDx*TDSetting.mArrowLength, lp.y+line.mDy*TDSetting.mArrowLength );
-                path1.transform( matrix );
-                canvas.drawPath( path1, BrushManager.mSectionPaint );
+                drawDirectionTick( canvas, matrix, line, TDSetting.mArrowLength, BrushManager.mSectionPaint );
+              } else if ( BrushManager.isLineSlope( line.mLineType ) ) {
+                float lside = line.getLSide(); if ( lside < 1 ) lside = TDSetting.mSlopeLSide;
+                drawDirectionTick( canvas, matrix, line, lside*0.5f, BrushManager.mLSidePaint );
               }
             }
           }
@@ -3021,12 +3036,10 @@ public class Scrap
               if ( path.isLine() ) { // path instanceof DrawingLinePath
                 DrawingLinePath line = (DrawingLinePath)path;
                 if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
-                  LinePoint lp = line.mFirst;
-                  Path path1 = new Path();
-                  path1.moveTo( lp.x, lp.y );
-                  path1.lineTo( lp.x+line.mDx*TDSetting.mArrowLength, lp.y+line.mDy*TDSetting.mArrowLength );
-                  path1.transform( matrix );
-                  canvas.drawPath( path1, BrushManager.mSectionPaint );
+                  drawDirectionTick( canvas, matrix, line, TDSetting.mArrowLength, BrushManager.mSectionPaint );
+                } else if ( BrushManager.isLineSlope( line.mLineType ) ) {
+                  float lside = line.getLSide(); if ( lside < 1 ) lside = TDSetting.mSlopeLSide;
+                  drawDirectionTick( canvas, matrix, line, lside*0.5f, BrushManager.mLSidePaint );
                 }
               }
             }
