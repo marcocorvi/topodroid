@@ -168,7 +168,7 @@
    
     <!-- UNUSED string name="device_algo_failed">Algorithm auto-determination failed\nUsing linear algorithm</string -->
     <string name="device_address">地址 %1$s</string>
-    <TODO string name="address">地址</string>
+    <string name="address">地址</string>
     <string name="model_invalid">无效数字</string>
     <string name="model_missing">数据丢失</string>
     <!-- UNUSED string name="device_busy">Device busy</string -->
