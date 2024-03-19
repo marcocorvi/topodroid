@@ -578,7 +578,7 @@ public class DrawingPath extends RectF
 
   /** draw the path on a canvas
    * @param canvas   canvas - N.B. canvas is guaranteed not null
-   * @param xor_color xoring color
+   * @param xor_color xor colors
    */
   public void draw( Canvas canvas, int xor_color )
   {
@@ -603,7 +603,7 @@ public class DrawingPath extends RectF
   /** draw the path on a canvas
    * @param canvas   canvas - N.B. canvas is guaranteed not null
    * @param bbox     clipping rectangle
-   * @param xor_color xoring color
+   * @param xor_color xor color
    */
   public void draw( Canvas canvas, RectF bbox, int xor_color )
   {
@@ -878,10 +878,11 @@ public class DrawingPath extends RectF
    */
   static Paint xorPaint( Paint paint, int xor_color ) 
   {
-    int col = paint.getColor();
-    if ( ( col & 0xff ) < 0x99 || ( (col >>= 8 ) & 0xff ) < 0x99 || ( ( col >> 16 ) & 0xff ) < 0x99 ) return paint;
     Paint ret = new Paint( paint );
-    ret.setColor( xor_color ^ col );
+    if ( xor_color > 0 ) ret.setColor( BrushManager.xorColor( paint.getColor() ) );
+    // int col = paint.getColor();
+    // if ( ( col & 0xff ) < 0x99 || ( (col >>= 8 ) & 0xff ) < 0x99 || ( ( col >> 16 ) & 0xff ) < 0x99 ) return paint;
+    // ret.setColor( xor_color ^ col );
     return ret;
   }
 

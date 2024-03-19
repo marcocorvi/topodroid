@@ -187,7 +187,7 @@ public class DrawingSplayPath extends DrawingPath
   // @Override
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox, int xor_color )
   {
-    draw( canvas, matrix, scale, bbox, true );
+    draw( canvas, matrix, scale, bbox, xor_color );
   }
 
   /** draw the splay on the canvas

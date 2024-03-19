@@ -198,8 +198,12 @@ class DrawingPointDialog extends MyDialog
     // TDLog.Log( TDLog.LOG_INPUT, "DrawingPointDialog onClick() " + b.getText().toString() );
 
     if ( b == mBtnOk ) {
-      if ( mDoOptions && mEToptions.getText() != null ) {
-        mPoint.mOptions = mEToptions.getText().toString().trim();
+      if ( mDoOptions ) {
+        if ( mEToptions.getText() == null ) {
+          mPoint.setOptions( "" );
+        } else {
+          mPoint.setOptions( mEToptions.getText().toString().trim() );
+        }
       }
       if ( mBtnScaleXS.isChecked() )      mPoint.setScale( PointScale.SCALE_XS );
       else if ( mBtnScaleS.isChecked() )  mPoint.setScale( PointScale.SCALE_S  );

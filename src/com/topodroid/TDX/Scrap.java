@@ -2932,7 +2932,7 @@ public class Scrap
    * @param matrix    transform matrix
    * @param scale     rescaling factor
    * @param bbox      clipping rectangle
-   * @param xor_color xor for colors
+   * @param xor_color xor colors
    */
   void drawAll( Canvas canvas, Matrix matrix, float scale, RectF bbox, int xor_color )
   {
@@ -2947,11 +2947,13 @@ public class Scrap
               DrawingLinePath line = (DrawingLinePath)path;
               if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
                 Paint paint = new Paint( BrushManager.mSectionPaint );
-                paint.setColor( xor_color ^ paint.getColor() );
+                // paint.setColor( xor_color ^ paint.getColor() );
+                paint.setColor( BrushManager.xorColor( paint.getColor() ) );
                 drawDirectionTick( canvas, matrix, line, TDSetting.mArrowLength, paint );
               } else if ( BrushManager.isLineSlope( line.mLineType ) ) {
                 Paint paint = new Paint( BrushManager.mLSidePaint );
-                paint.setColor( xor_color ^ paint.getColor() );
+                // paint.setColor( xor_color ^ paint.getColor() );
+                paint.setColor( BrushManager.xorColor( paint.getColor() ) );
                 float lside = line.getLSide(); if ( lside < 1 ) lside = TDSetting.mSlopeLSide;
                 drawDirectionTick( canvas, matrix, line, lside*0.5f, paint ); // lside is divided by 2 to make it roughly long as in therion pdf
               }
@@ -2968,11 +2970,13 @@ public class Scrap
                 DrawingLinePath line = (DrawingLinePath)path;
                 if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
                   Paint paint = new Paint( BrushManager.mSectionPaint );
-                  paint.setColor( xor_color ^ paint.getColor() );
+                  // paint.setColor( xor_color ^ paint.getColor() );
+                  paint.setColor( BrushManager.xorColor( paint.getColor() ) );
                   drawDirectionTick( canvas, matrix, line, TDSetting.mArrowLength, paint );
                 } else if ( BrushManager.isLineSlope( line.mLineType ) ) {
                   Paint paint = new Paint( BrushManager.mLSidePaint );
-                  paint.setColor( xor_color ^ paint.getColor() );
+                  // paint.setColor( xor_color ^ paint.getColor() );
+                  paint.setColor( BrushManager.xorColor( paint.getColor() ) );
                   float lside = line.getLSide(); if ( lside < 1 ) lside = TDSetting.mSlopeLSide;
                   drawDirectionTick( canvas, matrix, line, lside*0.5f, paint );
                 }

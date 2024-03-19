@@ -617,4 +617,21 @@ public class BrushManager
     if ( mAreaLib  != null ) { mAreaLib.toDataStream(dos);  } else { try { dos.writeUTF(""); } catch (IOException e) { TDLog.Error("IO " + e.getMessage() ); } }
   }
 
+  /** @return the xored color
+   * @param color input color
+   */
+  static int xorColor( int color )
+  {
+    int a = color & 0xff000000; 
+    int r = (color >> 16) & 0xff; int r1 = 0xff - r;
+    int g = (color >>  8) & 0xff; int g1 = 0xff - g;
+    int b = (color      ) & 0xff; int b1 = 0xff - b;
+    float m = (( r1 > g1 )? ( ( r1 > b1 )? r1 : b1 ) : ( (g1 > b1 )? g1 : b1 ) ) / 256.0f;
+    r = (int)( r * m ) & 0xff;
+    g = (int)( g * m ) & 0xff;
+    b = (int)( b * m ) & 0xff;
+    int ret = a | ( r << 16 ) | ( g << 8 ) | b;
+    return ret;
+  }
+    
 }

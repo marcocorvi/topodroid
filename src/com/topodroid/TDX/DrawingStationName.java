@@ -194,6 +194,7 @@ public class DrawingStationName extends DrawingPointPath
       // TDLog.v( "PLOT station name " + mName + " xor color " + xor_color );
       // Paint paint = DrawingPath.xorPaint( mPaint, xor_color );
       Paint paint = new Paint( mPaint );
+      if ( xor_color > 0 ) paint.setColor( BrushManager.xorColor( mPaint.getColor() ) );
       paint.setTextSize( PDF_SCALE * mPaint.getTextSize() );
       canvas.drawTextOnPath( mName, mPath, 0f, 0f, paint );
       if ( mXSectionType != PlotType.PLOT_NULL ) {

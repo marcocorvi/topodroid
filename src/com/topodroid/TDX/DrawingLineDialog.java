@@ -276,12 +276,17 @@ class DrawingLineDialog extends MyDialog
       if ( mType == mTypeSlope ) {
         try { 
           mLine.setLSide( Integer.parseInt( mETlside.getText().toString() ) );
-        } catch ( NumberFormatException e ) { }
+        } catch ( NumberFormatException e ) { 
+          TDLog.v( "LLSide error " + e.getMessage() );
+        }
       }
 
-      if ( mDoOptions && mEToptions.getText() != null ) {
-        String options = mEToptions.getText().toString().trim();
-        if ( options.length() > 0 ) mLine.setOptions( options );
+      if ( mDoOptions ) {
+        if ( mEToptions.getText() == null ) {
+          mLine.setOptions( "" );
+        } else {
+          mLine.setOptions( mEToptions.getText().toString().trim() );
+        }
       }
       if ( mBtnOutlineOut.isChecked() ) mLine.mOutline = DrawingLinePath.OUTLINE_OUT;
       else if ( mBtnOutlineIn.isChecked() ) mLine.mOutline = DrawingLinePath.OUTLINE_IN;

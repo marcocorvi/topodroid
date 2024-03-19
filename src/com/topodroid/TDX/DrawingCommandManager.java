@@ -1469,8 +1469,8 @@ public class DrawingCommandManager
         Paint paint_grid    = BrushManager.fixedGridPaint;
         Paint paint_grid100 = BrushManager.fixedGrid100Paint;
         if ( inverted_colors ) {
-          paint_grid    = DrawingPath.xorPaint( paint_grid, 0xffffff );
-          paint_grid100 = DrawingPath.xorPaint( paint_grid100, 0xffffff );
+          paint_grid    = DrawingPath.xorPaint( paint_grid, 1 );
+          paint_grid100 = DrawingPath.xorPaint( paint_grid100, 1 );
         }
         if ( isFixedZoom() ) {
           // the sketch is scaled with zoom computed in DrawingWindow
@@ -1512,10 +1512,10 @@ public class DrawingCommandManager
         } else {
           if ( isPDFpage ) {
             if ( pdf_scale > 1.41729f ) { // PDF_SCALE - eps
-              for ( DrawingPath p1 : mGridStack1 ) p1.draw( canvas, mm, bbox, 0xffffffff );
+              for ( DrawingPath p1 : mGridStack1 ) p1.draw( canvas, mm, bbox, 1 );
             }
-            for ( DrawingPath p10 : mGridStack10 ) p10.draw( canvas, mm, bbox, 0xffffffff );
-            for ( DrawingPath p100 : mGridStack100 ) p100.draw( canvas, mm, bbox, 0xffffffff );
+            for ( DrawingPath p10 : mGridStack10 ) p10.draw( canvas, mm, bbox, 1 );
+            for ( DrawingPath p100 : mGridStack100 ) p100.draw( canvas, mm, bbox, 1 );
           } else {
             if ( scale < 1 ) {
               for ( DrawingPath p1 : mGridStack1 ) p1.draw( canvas, mm, bbox );
@@ -1529,7 +1529,7 @@ public class DrawingCommandManager
       }
       if ( mNorthLine != null ) {
         if ( inverted_colors ) {
-          mNorthLine.draw( canvas, mm, bbox, 0xffffff );
+          mNorthLine.draw( canvas, mm, bbox, 1 );
         } else {
           mNorthLine.draw( canvas, mm, bbox );
         }
@@ -1538,12 +1538,12 @@ public class DrawingCommandManager
         float sketch_unit = isFixedZoom()? 1.0f : TDSetting.mUnitGrid;
         if ( inverted_colors ) {
           if ( sidebars ) {
-            mScaleRef.draw(canvas, zoom, mLandscape, sketch_unit, 0xffffff );
+            mScaleRef.draw(canvas, zoom, mLandscape, sketch_unit, 1 );
           } else {
             if ( isPDFpage ) { // HBX 20-> PDF 1/72 inch
-              mScaleRef.draw(canvas, zoom, mLandscape, 20, (bbox.bottom - bbox.top)*pdf_scale-20, sketch_unit, 0xffffff );
+              mScaleRef.draw(canvas, zoom, mLandscape, 20, (bbox.bottom - bbox.top)*pdf_scale-20, sketch_unit, 1 );
             } else {
-              mScaleRef.draw(canvas, zoom, mLandscape, 20, bbox.bottom - bbox.top, sketch_unit, 0xffffff );
+              mScaleRef.draw(canvas, zoom, mLandscape, 20, bbox.bottom - bbox.top, sketch_unit, 1 );
             }
           }
         } else {
@@ -1563,7 +1563,7 @@ public class DrawingCommandManager
     synchronized( TDPath.mShotsLock ) {
       if ( legs && mLegsStack != null ) {
         if ( inverted_colors ) {
-          for ( DrawingPath leg: mLegsStack ) leg.draw( canvas, mm, bbox, 0xffffff );
+          for ( DrawingPath leg: mLegsStack ) leg.draw( canvas, mm, bbox, 1 );
         } else {
           for ( DrawingPath leg: mLegsStack ) leg.draw( canvas, mm, bbox );
         }
@@ -1572,7 +1572,7 @@ public class DrawingCommandManager
         if ( station_splay == null ) {
           if ( splays ) {
             if ( inverted_colors ) {
-              for ( DrawingSplayPath path : mSplaysStack ) path.draw( canvas, mm, scale, bbox, ! mDisplayPoints, 0xffffff );
+              for ( DrawingSplayPath path : mSplaysStack ) path.draw( canvas, mm, scale, bbox, ! mDisplayPoints, 1 );
             } else {
               for ( DrawingSplayPath path : mSplaysStack ) path.draw( canvas, mm, scale, bbox, ! mDisplayPoints );
             }
@@ -1607,7 +1607,7 @@ public class DrawingCommandManager
       if ( mStations != null ) {  
         synchronized( TDPath.mStationsLock ) {
           if ( inverted_colors ) {
-            for ( DrawingStationName st : mStations ) st.draw( canvas, mm, bbox, 0xffffff );
+            for ( DrawingStationName st : mStations ) st.draw( canvas, mm, bbox, 1 );
           } else {
             for ( DrawingStationName st : mStations ) st.draw( canvas, mm, bbox );
           }
@@ -1632,7 +1632,7 @@ public class DrawingCommandManager
       } else {
         synchronized( mSyncScrap ) {
           if ( inverted_colors ) {
-            for ( Scrap scrap : mScraps ) scrap.drawAll( canvas, mm, scale, bbox, 0xffffff );
+            for ( Scrap scrap : mScraps ) scrap.drawAll( canvas, mm, scale, bbox, 1 );
           } else {
             for ( Scrap scrap : mScraps ) scrap.drawAll( canvas, mm, scale, bbox );
           }
@@ -1646,7 +1646,7 @@ public class DrawingCommandManager
             scrap.drawGreyOutline( canvas, mm, bbox );
           }
           if ( inverted_colors ) {
-            mCurrentScrap.drawAll( canvas, mm, scale, bbox, 0xffffff );
+            mCurrentScrap.drawAll( canvas, mm, scale, bbox, 1 );
           } else { 
             mCurrentScrap.drawAll( canvas, mm, scale, bbox );
           }
