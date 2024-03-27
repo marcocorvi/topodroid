@@ -13,7 +13,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.mag.Geodetic;
 
 import java.io.DataOutputStream;
@@ -163,21 +163,22 @@ public class Cave3DFix extends Vector3D
    */
   boolean hasWGS84() { return hasWGS84; }
 
-  /** @return north coord from the latitude
-   * @param lat WGS84 latitude
-   * @param h_ell WGS84 altitude
+  /** @return north (Y) coord of a point from its latitude and altitude
+   * @param lat   WGS84 latitude
+   * @param h_ell WGS84 ellipsoid altitude
    */
   public double latToNorth( double lat, double h_ell ) 
   {
     double s_radius = Geodetic.meridianRadiusExact( lat, h_ell ); // this is the radius * PI/180
+    TDLog.v(" lat to N delta = " + (lat - latitude) * s_radius );
     return hasWGS84()? y + (lat - latitude) * s_radius : 0.0;
   }
 
-  /** @return east coord from the longitude
-   * @param lng WGS84 longitude
-   * @param lat WGS84 latitude
-   * @param h_ell WGS84 altitude
-   * @param north north coordinate
+  /** @return east (X) coord of a point from its longitude, latitude, altitude
+   * @param lng   WGS84 point longitude
+   * @param lat   WGS84 point latitude
+   * @param h_ell WGS84 point ellipsoid altitude
+   * @param north north differece between the point and this point
    *
    * ref. T. Soler, R.J. Fury PS alignment surveys and meridian convergence, J. Surveying Eng., Aug. 2000 69
    *    dt = ds sin(A) tan(phi) / N
@@ -196,6 +197,7 @@ public class Cave3DFix extends Vector3D
   {
     double e_radius = Geodetic.parallelRadiusExact( lat, h_ell ); // this is the radius * PI/180
     double conv = Geodetic.meridianConvergenceFactor( latitude );
+    TDLog.v(" lng to E delta = " + (lng - longitude) * e_radius * (1 + north*conv) );
     return hasWGS84()? x + (lng - longitude) * e_radius * (1 + north*conv) : 0.0;
   }
 

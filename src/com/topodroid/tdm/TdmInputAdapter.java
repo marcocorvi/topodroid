@@ -152,7 +152,6 @@ class TdmInputAdapter extends ArrayAdapter< TdmInput >
       holder.textView.setTextSize( TDSetting.mTextSize );
       holder.colorBtn = (Button) convertView.findViewById( R.id.tdinput_color );
       convertView.setTag( holder );
-      holder.colorBtn.setOnClickListener( holder );
     } else {
       holder = (ViewHolder) convertView.getTag();
     }
@@ -160,6 +159,7 @@ class TdmInputAdapter extends ArrayAdapter< TdmInput >
     holder.checkBox.setChecked( b.isChecked() );
     holder.textView.setText( b.getSurveyName() );
     holder.colorBtn.setBackgroundColor( b.getColor() );
+    holder.colorBtn.setOnClickListener( holder );
     holder.mInput = b;
     return convertView;
   }

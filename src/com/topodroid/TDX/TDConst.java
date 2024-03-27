@@ -71,7 +71,7 @@ public class TDConst
     "text/csv",                 //  5 *CSV
     "application/dxf",          //  6 *DXF
     "application/octet-stream", //  7 *cSurvey
-    null, // "application/octet-stream", //  8 PocketTopo
+    "application/octet-stream", //  8 PocketTopo
     "application/octet-stream", //  9 Walls
     "application/vnd",          // 10 *KML
     // "application/octet-stream", //    trackfile (.plt)
