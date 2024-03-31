@@ -126,6 +126,11 @@ The model can be also serialized in a text file.<br><p>
 The GPX export of projects can have all the project surveys in a single track, or include a track
 for each survey. The behavior is determined by the GXP export setting "single-track".<br><p>
 
+The model is exported in a projected metric reference system, centered at the first fixed point.
+The Y axis is the geographic or the magnetic North depending whether the magnetic declination
+is specified or not. It the model is georeferenced the center has an offset computed from the central meridian and
+the equator.<br><p>
+
 <b>GRID/FRAME</b><br>
 The cartesian grid/frame lines are green (west-east), blue (south-north), and red (vertical).<br>
 In perspective the grid lines look greenish to the north/south because the green lines stack together closer.
@@ -249,6 +254,7 @@ if fixed under rotations and the
 selected station is highlighted orange.
 <br><p>
 
+<!--
 <b>SKETCH LIFTING</b> (Experimental)<br>
 With surveys and cave-projects opened from TopoDroid it is possible to "lift" 2D sketches to the 3D model.
 The sketch must be exported (in TopoDroid) in "Cave3D" format. The exported file is in the "c3d" folder
@@ -261,6 +267,7 @@ the display of the sketch, the second to remove the sketch. The choices must be 
 There is a button to load a new sketch.<br>
 Finally there is a button to rebind the point icons, if they go black.
 <br><p>
+-->
 
 
 <a href="manual14.htm">&lt; Cave Projects</a> |

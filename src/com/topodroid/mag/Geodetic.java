@@ -60,13 +60,14 @@ public class Geodetic
   // https://www2.unb.ca/gge/Pubs/LN39.pdf
   // exact
 
-  // get the meridian radius times PI/180
-  // @param latitude   latitude [deg]
-  // @param h_ellip    ellipsoidic altitude [m]
+  /** @return the meridian radius times PI/180
+   * @param latitude   latitude [deg]
+   * @param h_ellip    ellipsoidic altitude [m]
+   */
   static public double meridianRadiusExact( double latitude, double h_ellip )
   {
-    double a_lat = Math.abs( latitude );
-    double s = Math.sin( a_lat * Math.PI / 180.0 );
+    double a_lat = Math.abs( latitude ) * Math.PI / 180.0; // radians
+    double s = Math.sin( a_lat );
     double W = Math.sqrt( 1 - EARTH_E2 * s * s );
     // RADIUS_WE = EARTH_A / W; // principal radius of curvature in the prime vertical plane (N)
     //double RADIUS_NS = EARTH_A * EARTH_1E2 / ( W * W * W ); // ! W3 meridian radius of curvature (M)
@@ -74,18 +75,19 @@ public class Geodetic
     return (RADIUS_NS * Math.PI / 180.0);
   }
 
-  // get the parallel radius times PI/180 - horizontal X-Y radius
-  // @param latitude   latitude [deg]
-  // @param h_ellip    ellipsoidic altitude [m]
+  /** @return get the parallel radius times PI/180 - horizontal X-Y radius
+   * @param latitude   latitude [deg]
+   * @param h_ellip    ellipsoidic altitude [m]
+   */
   static public double parallelRadiusExact( double latitude, double h_ellip )
   {
-    double a_lat = Math.abs( latitude );
-    double s = Math.sin( a_lat * Math.PI / 180.0 );
+    double a_lat = Math.abs( latitude ) * Math.PI / 180.0; // radian
+    double s = Math.sin( a_lat );
     double W = Math.sqrt( 1 - EARTH_E2 * s * s );
     //double RADIUS_WE = EARTH_A / W; // principal radius of curvature in the prime vertical plane (N) 
     double RADIUS_WE = (EARTH_A / W) + h_ellip; // ellipsoid altitude
     // RADIUS_NS = EARTH_A * EARTH_1E2 / ( W * W * W );    
-    return (RADIUS_WE * Math.cos( a_lat * Math.PI / 180 ) * Math.PI / 180.0);
+    return (RADIUS_WE * Math.cos( a_lat ) * Math.PI / 180.0);
   }
 
   /** @return approximate WGS84 meridian convergence factor
@@ -263,4 +265,80 @@ public class Geodetic
     return ( r - EARTH_A * t) * Math.cos( phi ) + ( z - EARTH_B ) * Math.sin( phi );
   }
   */
+
+  /* 1975 T. Vincenty Direct and inverse of geodesics on the ellipsoid with application of nested equations
+
+     @see https://www.movable-type.co.uk/scripts/latlong-vincenty.html
+
+
+  */
+
+  public static double equatorialDistance( double lat ) // , double lng )
+  {
+    lat *= Math.PI / 180.0;
+    // lng *= Math.PI / 180.0;
+    double F = 1/FLATTENING; // (A - B) / A
+    double L0 = 0;   // difference in longitude ( lng1 == lng2 )
+    double tU1 = 0; // equator lat1 = 0 // only for generalizations
+    double cU1 = 1;
+    double sU1 = 0;
+    double tU2 = (1 - F) * Math.tan( lat ); // reduced latitude_2
+    double cU2 = 1.0 / Math.sqrt( 1 + tU2 * tU2 );
+    double sU2 = tU2 * cU2;
+
+    double S;
+    double sS, cS;
+    double sL, cL;
+    double sA, cA2; // Aeq = azimuth of the geodesic at the equator
+    double c2Sm; // Sm angular distance on the sphere from the equator to the midpoint of the line
+
+    double L1;
+    double L = L0; // difference in longitude on an auxiliary sphere
+    do {
+      L1 = L;
+      sL = Math.sin( L );
+      cL = Math.cos( L );
+      double x1 = cU2 * sL;
+      double x2 = cU1 * sU2 - sU1 * cU2 * cL;
+      sS  = Math.sqrt( x1 * x1 + x2 * x2 );
+      cS  = sU1 * sU2 + cU1 * cU2 * cL;
+      S   = Math.atan2( sS, cS );
+      sA  = cU1 * cU2 * sL / sS;
+      cA2 = 1 - sA * sA;
+      c2Sm = cS - 2 * sU1 * sU2 / cA2;
+      double C = F/16 * cA2 * ( 4 + F * ( 4 - 3 * cA2 ) );
+      L  = L0 + (1-C) * F * sA * ( S + C * sS * ( c2Sm + C * cS * ( -1 + 2 * c2Sm * c2Sm ) ) );
+    } while ( Math.abs( L - L1 ) > 1e-10 );
+    double AA = EARTH_A * EARTH_A;
+    double BB = EARTH_B * EARTH_B;
+    double u2 = cA2 * ( AA - BB ) / BB;
+    double A  = 1 + u2/16384 * ( 4096 + u2 * ( -768 + u2 * (320 - 175 * u2) ) );
+    double B  =     u2/1024  * (  256 + u2 * ( -128 + u2 * ( 74 -  47 * u2) ) );
+    double DS = B * sS * (c2Sm + B/4 * ( cS * (-1 + 2*c2Sm*c2Sm) - B/6 * c2Sm * (-3 + 4*sS*sS)*(-3 + 4*c2Sm*c2Sm)));
+    double s  = EARTH_B * A * ( S - DS ); // length of geodetic
+    // double a1 = Math.atan2( cU2 * sL,   cU1 * sU2 - sU1 * cU2 * cL ); // initial azimuth
+    // double a2 = Math.atan2( cU1 * sL, - sU1 * cU2 + cU1 * sU2 * cL ); // final azimuth
+    return s;
+  }
+
+  /** @return meridian radius on the ellipsoid (multiplied by pi/180)
+   * @param lat   latitude [deg]
+   * @param h_ell ellipsoidic altitude [m]
+   */
+  public static double meridianRadiusEllipsoid( double lat, double h_ell ) 
+  {
+    return meridianRadiusExact( lat, 0 );
+  }
+
+  /** @return parallel radius on the ellipsoid (multiplied by pi/180)
+   * @param lat   latitude [deg]
+   * @param h_ell ellipsoidic altitude [m]
+   */
+  public static double parallelRadiusEllipsoid( double lat, double h_ell )
+  {
+    // return parallelRadiusExact( lat, 0 );
+    double tl = Math.tan( lat * Math.PI / 180.0 ) * EARTH_B / EARTH_A;
+    return EARTH_A / Math.sqrt( 1 + tl * tl ) * Math.PI / 180;
+  }
+
 }

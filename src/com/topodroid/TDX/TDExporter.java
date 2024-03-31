@@ -714,8 +714,8 @@ public class TDExporter
       lat = origin.lat;
       lng = origin.lng;
       h_geo = ellipsoid_h ? origin.h_ell : origin.h_geo; // KML uses Geoid altitude (unless altitudeMode is set)
-      mSRadius = 1 / Geodetic.meridianRadiusExact( lat, origin.h_ell );
-      mERadius = 1 / Geodetic.parallelRadiusExact( lat, origin.h_ell );
+      mSRadius = 1 / Geodetic.meridianRadiusExact( lat, origin.h_ell ); // TODO 1 / Geodetic.meridianRadiusEllipsoid( lat, origin.h_ell );
+      mERadius = 1 / Geodetic.parallelRadiusExact( lat, origin.h_ell ); //      1 / Geodetic.parallelRadiusEllipsoid( lat, origin.h_ell );
       // TDLog.v( "radius S " + (mSRadius / s_radius_e) + " E " + (mERadius / e_radius_a ) );
     }
 

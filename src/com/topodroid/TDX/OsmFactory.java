@@ -160,8 +160,8 @@ public class OsmFactory
 
     double a = ( a_lat < 0 )? -a_lat : a_lat;
     // KML radius is already multiplied by PI/180
-    s_radius = Geodetic.meridianRadiusExact( a_lat, a_ell );
-    e_radius = Geodetic.parallelRadiusExact( a_lat, a_ell );
+    s_radius = Geodetic.meridianRadiusExact( a_lat, a_ell ); // TODO Geodetic.meridianRadiusEllipsoid( a_lat, a_ell );
+    e_radius = Geodetic.parallelRadiusExact( a_lat, a_ell ); //      Geodetic.parallelRadiusEllipsoid( a_lat, a_ell );
     // xmlParserFactory = XmlPullParserFactory.newInstance();
     mXres = mYres = 0.5f;
     width  = (int)( (x2 - x1 )/mXres );
