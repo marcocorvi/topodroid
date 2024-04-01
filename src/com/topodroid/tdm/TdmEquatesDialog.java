@@ -66,6 +66,8 @@ class TdmEquatesDialog extends MyDialog
     super.onCreate( savedInstanceState );
     initLayout( R.layout.tdequates_dialog, R.string.title_equates );
 
+    // Button add  = (Button)findViewById( R.id.button_add );
+    // add.setOnClickListener( this );
     Button back = (Button)findViewById( R.id.button_back );
     back.setOnClickListener( this );
 
@@ -121,6 +123,8 @@ class TdmEquatesDialog extends MyDialog
   public void onClick( View v ) 
   {
     // if ( v.getId() == R.id.button_back ) {
+    // } else if ( v.getId() == R.id.button_add ) {
+    //   mActivity.doEquateAddDialog();
     // }
     dismiss();
   }

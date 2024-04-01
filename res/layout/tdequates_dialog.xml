@@ -19,6 +19,7 @@
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
+      android:layout_marginTop="20dp" 
       android:gravity="start"
       >
       <Button android:id="@+id/button_help"
@@ -35,6 +36,11 @@
           android:layout_marginEnd="@dimen/marginh"
           android:text="@string/button_close"
         />
+        <!-- Button android:id="@+id/button_add"
+          style="@style/button_default"
+          android:layout_marginEnd="@dimen/marginh"
+          android:text="@string/button_add"
+        / -->
       </LinearLayout>
     </LinearLayout>
 

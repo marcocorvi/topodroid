@@ -2533,7 +2533,7 @@ public class DataHelper extends DataSetObservable
   private static final String qHasFixedStation = "select id from fixeds where surveyId=? and station=? and id!=? and status=0 ";
   private static final String qjShots       =
     "select s.flag, s.distance, s.fStation, s.tStation, s.clino, z.clino, s.extend from shots as s join shots as z on z.fStation=s.tStation where s.surveyId=? AND z.surveyId=? AND s.fStation!=\"\" AND s.tStation!=\"\" AND s.status=0 ";
-  private static final String qFixeds = "select A.station, A.latitude, A.longitude, A.altitude, A.altimetric, A.cs_name, A.cs_latitude, A.cs_longitude, A.cs_altitude, A.convergence, A.accuracy, A.accuracy_v, A.m_to_units, A.m_to_vunits from fixeds as A join surveys as B where A.surveyId=B.id and B.name=?";
+  private static final String qFixeds = "select A.station, A.latitude, A.longitude, A.altitude, A.altimetric, A.cs_name, A.cs_latitude, A.cs_longitude, A.cs_altitude, A.convergence, A.accuracy, A.accuracy_v, A.m_to_units, A.m_to_vunits, A.status from fixeds as A join surveys as B where A.surveyId=B.id AND B.name=?";
   // private static final String qLength = "select count(), sum(A.distance) from shots as A, surveys as B where A.surveyId=B.id and B.name=? and A.fStation!=\"\" and A.tStation!=\"\"";
 
   List< SensorInfo > selectAllSensors( long sid, long status )
@@ -2889,255 +2889,260 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
-  /**
+  /** @return first fixed data of the survey (station lat-long-h_geo cs and cs lat-long-h_geo)
    * @param name   survey name
-   * @return first fixed data of the survey (station lat-long-h_geo cs and cs lat-long-h_geo)
+   * @param status status of selected fixeds
    * @note h_geo is geoid altitude
    */
-  public FixedInfo selectSurveyFixed( String name )
+  public FixedInfo selectSurveyFixed( String name, int status )
   {
     // ArrayList< FixedInfo > ret = new ArrayList<>();
     FixedInfo info = null;
     Cursor cursor = myDB.rawQuery( qFixeds, new String[]{ name } );
     if (cursor.moveToFirst()) {
-      // do {
-        info = new FixedInfo( -1, cursor.getString(0), // station
-          cursor.getDouble(1), // latitude
-          cursor.getDouble(2),
-          cursor.getDouble(3), // ellipsoid h (altitude)
-          cursor.getDouble(4), // geoid altitude (altimetric)
-          "", -1,              // comment - source
-          cursor.getString(5), // cs_name
-          cursor.getDouble(6), // cs_latitude
-          cursor.getDouble(7),
-          cursor.getDouble(8), // cs_altitude (geoid)
-          0,                   // nr decimals
-          cursor.getDouble(9),  // convergence
-          cursor.getDouble(10), // accuracy
-          cursor.getDouble(11), // accuracy_v
-          cursor.getDouble(12), // meters to units
-          cursor.getDouble(13)  // meters to vert units
-        );
-        // ret.add( info );
-      // } while (cursor.moveToNext());
+      do {
+        if ( cursor.getLong(14) == status ) {
+          info = new FixedInfo( -1, cursor.getString(0), // station
+            cursor.getDouble(1), // latitude
+            cursor.getDouble(2),
+            cursor.getDouble(3), // ellipsoid h (altitude)
+            cursor.getDouble(4), // geoid altitude (altimetric)
+            "", -1,              // comment - source
+            cursor.getString(5), // cs_name
+            cursor.getDouble(6), // cs_latitude
+            cursor.getDouble(7),
+            cursor.getDouble(8), // cs_altitude (geoid)
+            0,                   // nr decimals
+            cursor.getDouble(9),  // convergence
+            cursor.getDouble(10), // accuracy
+            cursor.getDouble(11), // accuracy_v
+            cursor.getDouble(12), // meters to units
+            cursor.getDouble(13)  // meters to vert units
+          );
+          break;
+          // ret.add( info );
+        }
+      } while (cursor.moveToNext());
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return info;
   }
 
+  /** @return the list of fixeds at a given station
+   * @param sid   survey ID
+   * @param name  station name
+   */
+  private List< FixedInfo > selectFixedAtStation( long sid, String name )
+  {
+    List< FixedInfo > list = new ArrayList<>();
+    if ( myDB == null ) return list;
+    Cursor cursor = myDB.query( FIXED_TABLE,
+                                mFixedFields,
+                                "surveyId=? and station=?",  // selection = WHERE clause (without "WHERE")
+                                new String[] { Long.toString(sid), name },     // selectionArgs
+                                null,  // groupBy
+                                null,  // having
+                                null ); // order by
+    if (cursor.moveToFirst()) {
+      do {
+        list.add( new FixedInfo( cursor.getLong(0),
+                                 cursor.getString(1),
+                                 cursor.getDouble(2),
+                                 cursor.getDouble(3),
+                                 cursor.getDouble(4),
+                                 cursor.getDouble(5),
+                                 cursor.getString(6),
+                                 // skip status
+                                 cursor.getLong(8),  // source
+                                 cursor.getString(9),
+                                 cursor.getDouble(10),
+                                 cursor.getDouble(11),
+                                 cursor.getDouble(12),
+       			  cursor.getLong(13),  // cs_decimals
+                                 cursor.getDouble(14),
+                                 cursor.getDouble(15),
+                                 cursor.getDouble(16),
+                                 cursor.getDouble(17), // meters to units
+                                 cursor.getDouble(18)  // meters to vert units
+        ) );
+      } while (cursor.moveToNext());
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    // TDLog.Log( TDLog.LOG_DB, "select all fixeds " + sid + " size " + list.size() );
+    return list;
+  }
+
+  boolean hasSurveyPlot( long sid, String name )
+  {
+    boolean ret = false;
+    if ( myDB != null ) {
+      // Cursor cursor = myDB.query( PLOT_TABLE, new String[]{ "id", "name" },
+      //     WHERE_SID_NAME, new String[]{ Long.toString( sid ), name },
+      //     null, null, "id" );
+      Cursor cursor = myDB.rawQuery( qHasPlot, new String[]{ Long.toString( sid ), name } );
+      if (cursor.moveToFirst()) ret = true;
+      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    }
+    return ret;
+  }
+
+  boolean hasSurveyStation( long sid, String start )
+  {
+    boolean ret = false;
+    if ( myDB != null ) {
+      // Cursor cursor = myDB.query( SHOT_TABLE,
+      //     new String[]{ "id", "fStation", "tStation" },
+      //     "surveyId=? and ( fStation=? or tStation=? )",
+      //     new String[]{ Long.toString( sid ), start, start },
+      //     null, null, "id" );
+      Cursor cursor = myDB.rawQuery( qHasStation, new String[]{ Long.toString( sid ), start, start } );
+      if (cursor.moveToFirst()) ret = true;
+      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    }
+    return ret;
+  }
+
+  String getFirstStation( long sid )
+  {
+    String ret = null;
+    if ( myDB != null ) {
+      // Cursor cursor = myDB.query( SHOT_TABLE,
+      //     new String[]{ "fStation" },
+      //     "surveyId=? and ( fStation!=\"\" and tStation!=\"\" )",
+      //     new String[]{ Long.toString( sid ) },
+      //     null, null, null ); // limit 1
+      Cursor cursor = myDB.rawQuery( qFirstStation, new String[]{ Long.toString( sid ) } );
+      if (cursor.moveToFirst()) ret = cursor.getString( 0 );
+      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    }
+    return ret;
+  }
 
 
-   private List< FixedInfo > selectFixedAtStation( long sid, String name )
-   {
-     List< FixedInfo > list = new ArrayList<>();
-     if ( myDB == null ) return list;
-     Cursor cursor = myDB.query( FIXED_TABLE,
-                                 mFixedFields,
-                                 "surveyId=? and station=?",  // selection = WHERE clause (without "WHERE")
-                                 new String[] { Long.toString(sid), name },     // selectionArgs
-                                 null,  // groupBy
-                                 null,  // having
-                                 null ); // order by
-     if (cursor.moveToFirst()) {
-       do {
-         list.add( new FixedInfo( cursor.getLong(0),
-                                  cursor.getString(1),
-                                  cursor.getDouble(2),
-                                  cursor.getDouble(3),
-                                  cursor.getDouble(4),
-                                  cursor.getDouble(5),
-                                  cursor.getString(6),
-                                  // skip status
-                                  cursor.getLong(8),  // source
-                                  cursor.getString(9),
-                                  cursor.getDouble(10),
-                                  cursor.getDouble(11),
-                                  cursor.getDouble(12),
-				  cursor.getLong(13),  // cs_decimals
-                                  cursor.getDouble(14),
-                                  cursor.getDouble(15),
-                                  cursor.getDouble(16),
-                                  cursor.getDouble(17), // meters to units
-                                  cursor.getDouble(18)  // meters to vert units
-         ) );
-       } while (cursor.moveToNext());
-     }
-     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-     // TDLog.Log( TDLog.LOG_DB, "select all fixeds " + sid + " size " + list.size() );
-     return list;
-   }
+  int maxPlotIndex( long sid )
+  {
+    int ret = 0;
+    if ( myDB == null ) return ret;
+    // Cursor cursor = myDB.query(PLOT_TABLE, new String[] { "id", "name", "type" },
+    //                            WHERE_SID, new String[] { Long.toString(sid) }, 
+    //                            null, null, "id" );
+    Cursor cursor = myDB.rawQuery( qMaxPlotIndex, new String[] { Long.toString(sid), TDString.ONE } ); // type == 1 (PLOT_PLAN)
+    if (cursor.moveToFirst()) {
+      do {
+        // int type = cursor.getInt(2);     
+        // if ( type == PlotType.PLOT_PLAN ) { // FIXME || type == PlotType.PLOT_EXTENDED || type == PlotType.PLOT_PROJECTED
+          int r = 0;
+          byte[] name = cursor.getString(1).getBytes();
+          for ( int k=0; k<name.length; ++k ) {
+            if ( name[k] >= 0x30 && name[k] <= 0x39 ) {
+              r = 10*r + ( name[k] - 0x30 );
+            } else {
+              break;
+            }
+          }
+          if ( r > ret ) ret = r;
+        // }
+      } while (cursor.moveToNext());
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return ret;
+  }
 
-   boolean hasSurveyPlot( long sid, String name )
-   {
-     boolean ret = false;
-     if ( myDB != null ) {
-       // Cursor cursor = myDB.query( PLOT_TABLE, new String[]{ "id", "name" },
-       //     WHERE_SID_NAME, new String[]{ Long.toString( sid ), name },
-       //     null, null, "id" );
-       Cursor cursor = myDB.rawQuery( qHasPlot, new String[]{ Long.toString( sid ), name } );
-       if (cursor.moveToFirst()) ret = true;
-       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-     }
-     return ret;
-   }
-
-   boolean hasSurveyStation( long sid, String start )
-   {
-     boolean ret = false;
-     if ( myDB != null ) {
-       // Cursor cursor = myDB.query( SHOT_TABLE,
-       //     new String[]{ "id", "fStation", "tStation" },
-       //     "surveyId=? and ( fStation=? or tStation=? )",
-       //     new String[]{ Long.toString( sid ), start, start },
-       //     null, null, "id" );
-       Cursor cursor = myDB.rawQuery( qHasStation, new String[]{ Long.toString( sid ), start, start } );
-       if (cursor.moveToFirst()) ret = true;
-       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-     }
-     return ret;
-   }
-
-   String getFirstStation( long sid )
-   {
-     String ret = null;
-     if ( myDB != null ) {
-       // Cursor cursor = myDB.query( SHOT_TABLE,
-       //     new String[]{ "fStation" },
-       //     "surveyId=? and ( fStation!=\"\" and tStation!=\"\" )",
-       //     new String[]{ Long.toString( sid ) },
-       //     null, null, null ); // limit 1
-       Cursor cursor = myDB.rawQuery( qFirstStation, new String[]{ Long.toString( sid ) } );
-       if (cursor.moveToFirst()) ret = cursor.getString( 0 );
-       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-     }
-     return ret;
-   }
+  private PlotInfo makePlotInfo( long sid, Cursor cursor )
+  {
+    PlotInfo plot = new  PlotInfo ();
+    plot.surveyId = sid;
+    plot.id      = cursor.getLong(0);
+    plot.name    = cursor.getString(1);
+    plot.type    = cursor.getInt(2);
+    plot.start   = cursor.getString(3);
+    plot.view    = cursor.getString(4);
+    plot.xoffset = (float)(cursor.getDouble(5));
+    plot.yoffset = (float)(cursor.getDouble(6));
+    plot.zoom    = (float)(cursor.getDouble(7));
+    plot.azimuth = (float)(cursor.getDouble(8));
+    plot.clino   = (float)(cursor.getDouble(9));
+    plot.hide    = cursor.getString(10);
+    plot.nick    = cursor.getString(11);
+    plot.orientation = (int)(cursor.getLong(12));
+    plot.maxscrap = (int)(cursor.getLong(13));
+    plot.intercept = (float)(cursor.getDouble(14));
+    plot.center = new Vector3D( (float)(cursor.getDouble(15)), (float)(cursor.getDouble(16)), (float)(cursor.getDouble(17)) );
+    return plot;
+  }
 
 
-   int maxPlotIndex( long sid )
-   {
-     int ret = 0;
-     if ( myDB == null ) return ret;
-     // Cursor cursor = myDB.query(PLOT_TABLE, new String[] { "id", "name", "type" },
-     //                            WHERE_SID, new String[] { Long.toString(sid) }, 
-     //                            null, null, "id" );
-     Cursor cursor = myDB.rawQuery( qMaxPlotIndex, new String[] { Long.toString(sid), TDString.ONE } ); // type == 1 (PLOT_PLAN)
-     if (cursor.moveToFirst()) {
-       do {
-         // int type = cursor.getInt(2);     
-         // if ( type == PlotType.PLOT_PLAN ) { // FIXME || type == PlotType.PLOT_EXTENDED || type == PlotType.PLOT_PROJECTED
-           int r = 0;
-           byte[] name = cursor.getString(1).getBytes();
-           for ( int k=0; k<name.length; ++k ) {
-             if ( name[k] >= 0x30 && name[k] <= 0x39 ) {
-               r = 10*r + ( name[k] - 0x30 );
-             } else {
-               break;
-             }
-           }
-           if ( r > ret ) ret = r;
-         // }
-       } while (cursor.moveToNext());
-     }
-     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-     return ret;
-   }
+  private List< PlotInfo > doSelectAllPlots( long sid, String where_str, String[] where )
+  {
+    List< PlotInfo > list = new ArrayList<>();
+    if ( myDB == null ) return list;
+    Cursor cursor = myDB.query( PLOT_TABLE, mPlotFields, where_str, where, null, null, "id" );
+    if (cursor.moveToFirst()) {
+      do {
+        list.add( makePlotInfo( sid, cursor ) );
+      } while (cursor.moveToNext());
+    }
+    // TDLog.Log( TDLog.LOG_DB, "select All Plots list size " + list.size() );
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return list;
+  }
 
-   private PlotInfo makePlotInfo( long sid, Cursor cursor )
-   {
-     PlotInfo plot = new  PlotInfo ();
-     plot.surveyId = sid;
-     plot.id      = cursor.getLong(0);
-     plot.name    = cursor.getString(1);
-     plot.type    = cursor.getInt(2);
-     plot.start   = cursor.getString(3);
-     plot.view    = cursor.getString(4);
-     plot.xoffset = (float)(cursor.getDouble(5));
-     plot.yoffset = (float)(cursor.getDouble(6));
-     plot.zoom    = (float)(cursor.getDouble(7));
-     plot.azimuth = (float)(cursor.getDouble(8));
-     plot.clino   = (float)(cursor.getDouble(9));
-     plot.hide    = cursor.getString(10);
-     plot.nick    = cursor.getString(11);
-     plot.orientation = (int)(cursor.getLong(12));
-     plot.maxscrap = (int)(cursor.getLong(13));
-     plot.intercept = (float)(cursor.getDouble(14));
-     plot.center = new Vector3D( (float)(cursor.getDouble(15)), (float)(cursor.getDouble(16)), (float)(cursor.getDouble(17)) );
-     return plot;
-   }
+  public List< String > selectAllPlotNames( String survey )
+  {
+    List< String > list = new ArrayList<>();
+    if ( myDB == null ) return list;
 
+    Cursor cursor = myDB.query( SURVEY_TABLE, new String[] { "id" }, "name=?", new String[] { survey }, null, null, "id" );
+    if ( ! cursor.moveToFirst()) return list;
+    String sid = Long.toString( cursor.getLong(0) );
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
-   private List< PlotInfo > doSelectAllPlots( long sid, String where_str, String[] where )
-   {
-     List< PlotInfo > list = new ArrayList<>();
-     if ( myDB == null ) return list;
-     Cursor cursor = myDB.query( PLOT_TABLE, mPlotFields, where_str, where, null, null, "id" );
-     if (cursor.moveToFirst()) {
-       do {
-         list.add( makePlotInfo( sid, cursor ) );
-       } while (cursor.moveToNext());
-     }
-     // TDLog.Log( TDLog.LOG_DB, "select All Plots list size " + list.size() );
-     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-     return list;
-   }
+    cursor = myDB.query( PLOT_TABLE, new String[] { "name" }, "surveyId=?", new String[] { sid }, null, null, "id" );
+    if (cursor.moveToFirst()) {
+      do {
+        list.add( cursor.getString(0) );
+      } while (cursor.moveToNext());
+    }
+    // TDLog.Log( TDLog.LOG_DB, "select All Plots list size " + list.size() );
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return list;
+  }
 
-   public List< String > selectAllPlotNames( String survey )
-   {
-     List< String > list = new ArrayList<>();
-     if ( myDB == null ) return list;
+  /** @return the list of plots for a given survey
+   * @param sid    survey ID
+   */
+  List< PlotInfo > selectAllPlots( long sid )
+  {
+    return doSelectAllPlots( sid, 
+                             WHERE_SID,
+                             new String[] { Long.toString(sid) }
+    );
+  }
 
-     Cursor cursor = myDB.query( SURVEY_TABLE, new String[] { "id" }, "name=?", new String[] { survey }, null, null, "id" );
-     if ( ! cursor.moveToFirst()) return list;
-     String sid = Long.toString( cursor.getLong(0) );
-     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+  /** @return the list of plots for a given survey and with given status
+   * @param sid    survey ID
+   * @param status plot status
+   */
+  List< PlotInfo > selectAllPlots( long sid, long status )
+  {
+    return doSelectAllPlots( sid, 
+                             WHERE_SID_STATUS,
+                             new String[] { Long.toString(sid), Long.toString(status) }
+    );
+  }
 
-     cursor = myDB.query( PLOT_TABLE, new String[] { "name" }, "surveyId=?", new String[] { sid }, null, null, "id" );
-     if (cursor.moveToFirst()) {
-       do {
-         list.add( cursor.getString(0) );
-       } while (cursor.moveToNext());
-     }
-     // TDLog.Log( TDLog.LOG_DB, "select All Plots list size " + list.size() );
-     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-     return list;
-   }
-
-   /** @return the list of plots for a given survey
-    * @param sid    survey ID
-    */
-   List< PlotInfo > selectAllPlots( long sid )
-   {
-     return doSelectAllPlots( sid, 
-                              WHERE_SID,
-                              new String[] { Long.toString(sid) }
-     );
-   }
-
-   /** @return the list of plots for a given survey and with given status
-    * @param sid    survey ID
-    * @param status plot status
-    */
-   List< PlotInfo > selectAllPlots( long sid, long status )
-   {
-     return doSelectAllPlots( sid, 
-                              WHERE_SID_STATUS,
-                              new String[] { Long.toString(sid), Long.toString(status) }
-     );
-   }
-
-   /** @return the list of plots for a given survey and with given status, and type
-    * @param sid    survey ID
-    * @param status plot status
-    * @param type   plot type
-    */
-   List< PlotInfo > selectAllPlotsWithType( long sid, long status, long type )
-   {
-     return doSelectAllPlots( sid, 
-                              "surveyId=? and status=? and type=? ",
-                              new String[] { Long.toString(sid), Long.toString(status), Long.toString(type) }
-     );
-   }
+  /** @return the list of plots for a given survey and with given status, and type
+   * @param sid    survey ID
+   * @param status plot status
+   * @param type   plot type
+   */
+  List< PlotInfo > selectAllPlotsWithType( long sid, long status, long type )
+  {
+    return doSelectAllPlots( sid, 
+                             "surveyId=? and status=? and type=? ",
+                             new String[] { Long.toString(sid), Long.toString(status), Long.toString(type) }
+    );
+  }
 
    // NOT USED
    // List< PlotInfo > selectAllPlotsWithTypeOrientation( long sid, long status, long type, boolean landscape )

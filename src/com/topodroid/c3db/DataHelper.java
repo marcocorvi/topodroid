@@ -196,6 +196,9 @@ public class DataHelper extends DataSetObservable
     return info;
   }
 
+  /** @return the fixed points of the survey - only those with status "0" (non deleted)
+   * @param sid  survey ID
+   */
   public List<SurveyFixed> getSurveyFixeds( long sid )
   {
     // TDLog.v("DB get fixed stations" );
@@ -203,7 +206,7 @@ public class DataHelper extends DataSetObservable
     List<SurveyFixed> ret = new ArrayList<>();
     Cursor cursor = myDB.query( "fixeds", // FIXED_TABLE,
                                new String[] { "station", "longitude", "latitude", "altitude", "altimetric", "cs_name", "cs_longitude", "cs_latitude", "cs_altitude", "convergence", "m_to_units", "m_to_vunits" }, // columns
-                               WHERE_SID, new String[] { Long.toString(sid) },
+                               WHERE_SID_STATUS, new String[] { Long.toString(sid), "0" },
                                null, null, null );
     if (cursor.moveToFirst()) {
       do {
