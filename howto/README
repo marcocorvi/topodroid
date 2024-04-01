@@ -1,0 +1,39 @@
+TopoDroid sources folder.
+
+* AndroidManifest.xml  app manifest file
+* ant/                 ant build and local properties files
+* aosp/                Android Open Source Project source files
+* assets/              app assets files
+  bbin/                bundle bin build folder (UNUSED)
+- bin/                 app bin build folder
+  build/lint-resources-all.xml                 (OBSOLETE)
+* build.xml            build script
+  COPYING
+* firmware/            folder with DistoX2/BLE firmwares
+- gen/                 build generated files
+  howto/               howto folder
+* int18/               internationaliation
+* jni/                 C/C++ sources
+* lib/                 native libs
++ libs                 s-link to lib
+  LICENSE
+  lint.out             output of latest lint run
+* Makefile
+  manual.pdf           PDF user manual
+- obj/                 build object files
+* proguard.cfg         Proguard config file
+* project.properties   project properties file
+  README.md            github readme
+* res/                 app resources
+  save/                saved files
+* src/                 app sources
+  studio/              studio project file(s)
+  symbols-git/         symbols files under GIT
+  TDmanual.pdf         temporary user manual PDF
+  unused/              unused source files
+  utils/               misc utils (scripts)
+  values-sw600dp/      600 dp values (UNUSED)
+  values-sw720dp/      720 dp values (UNUSED)
+
+* Necessary source files
+- folder created by the build
