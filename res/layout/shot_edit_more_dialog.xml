@@ -184,6 +184,11 @@
       android:layout_height="wrap_content"
       android:gravity="end"
       >
+      <Button android:id="@+id/btn_color"
+        style="@style/button_default"
+        android:text="@string/button_color"
+        android:layout_marginEnd="@dimen/marginh"
+      />
       <Button android:id="@+id/button_cancel"
         style="@style/button_default"
         android:text="@string/button_cancel"

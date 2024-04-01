@@ -2180,17 +2180,21 @@ public class ShotWindow extends Activity
     if ( ! blk.isLeg() ) return null;
     ArrayList<String> names = mApp_mData.getXSectionStations( TDInstance.sid );
     TreeSet< String > stations = new TreeSet<>();
-    if ( from != null && from.length() > 0 && names.contains( from ) ) {
-      stations.add(from);
+    if ( from != null && ! from.equals( blk.mFrom ) ) {
+      if ( from.length() > 0 && names.contains( from ) ) {
+        stations.add(from);
+      }
+      if ( blk.mFrom != null && blk.mFrom.length() > 0 && names.contains( blk.mFrom ) ) {
+        stations.add(blk.mFrom);
+      }
     }
-    if ( to != null && to.length() > 0 && names.contains( to ) ) {
-      stations.add(to);
-    }
-    if ( blk.mFrom != null && blk.mFrom.length() > 0 && names.contains( blk.mFrom ) ) {
-      stations.add(blk.mFrom);
-    }
-    if ( blk.mTo != null && blk.mTo.length() > 0 && names.contains( blk.mTo ) ) {
-      stations.add(blk.mTo);
+    if ( to != null && ! to.equals( blk.mTo ) ) {
+      if ( to.length() > 0 && names.contains( to ) ) {
+        stations.add(to);
+      }
+      if ( blk.mTo != null && blk.mTo.length() > 0 && names.contains( blk.mTo ) ) {
+        stations.add(blk.mTo);
+      }
     }
     if ( stations.size() == 0 ) return null;
     StringBuilder sb = new StringBuilder();
@@ -2857,6 +2861,16 @@ public class ShotWindow extends Activity
   {
     super.onConfigurationChanged( new_cfg );
     TDLocale.resetTheLocale();
+  }
+
+  /** called by Drawing Shot Dialog to change shot color
+   *   @param blk   data block
+   *   @param color color (0 to clear)
+   */
+  void updateBlockColor( DBlock blk, int color )
+  {
+    blk.setPaintColor( color );
+    mApp_mData.updateShotColor( blk.mId, TDInstance.sid, color );
   }
 
   // ------------------------------------------------------------------

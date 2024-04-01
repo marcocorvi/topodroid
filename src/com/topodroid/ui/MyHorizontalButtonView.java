@@ -57,5 +57,10 @@ public class MyHorizontalButtonView
       return (View)mButtons[position];
     }
   };
+
+  // public void invalidate()
+  // {
+  //   mAdapter.notifyDataSetInvalidated();
+  // }
 }
 

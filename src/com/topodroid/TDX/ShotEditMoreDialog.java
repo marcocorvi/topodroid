@@ -19,6 +19,7 @@ import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDLayout;
+import com.topodroid.ui.MyColorPicker;
 import com.topodroid.prefs.TDSetting;
 
 // import android.app.Dialog;
@@ -42,10 +43,11 @@ import android.widget.TextView;
 import android.widget.CheckBox;
 
 class ShotEditMoreDialog extends MyDialog
-                                implements View.OnClickListener
+                         implements View.OnClickListener
+                         , MyColorPicker.IColorChanged
 {
   private final ShotWindow mParent;
-  private final DBlock mBlk;
+  private final DBlock mBlock;
 
   // private boolean audioCheck = false;
   // private boolean photoCheck = false; // not used: can take photo with "camera" app
@@ -78,7 +80,11 @@ class ShotEditMoreDialog extends MyDialog
   private MyHorizontalButtonView mButtonView;
   private Button[] mButton;
 
+  private Button mBtnColor;  // user-set color (tester level)
   private Button mBtnCancel;
+
+  private int mColor;    // block color
+  private boolean hideColorBtn = true;
 
   /**
    * @param context   context
@@ -87,8 +93,9 @@ class ShotEditMoreDialog extends MyDialog
   ShotEditMoreDialog( Context context, ShotWindow parent, DBlock blk )
   {
     super( context, null, R.string.ShotEditMoreDialog ); // null app
-    mParent  = parent;
-    mBlk = blk;
+    mParent = parent;
+    mBlock  = blk;
+    mColor  = mBlock.getPaintColor();
     // TDLog.Log( TDLog.LOG_PHOTO, "Shot EditMore Dialog");
   }
 
@@ -120,7 +127,7 @@ class ShotEditMoreDialog extends MyDialog
     mETdown  = (EditText)findViewById( R.id.shot_down );
     mBTlrud  = (Button)findViewById( R.id.btn_ok );
 
-    int nr_buttons = 5; // ( mBlk.type() == DBlock.BLOCK_MAIN_LEG )? 7 : 6;
+    int nr_buttons = 5; // ( mBlock.type() == DBlock.BLOCK_MAIN_LEG )? 7 : 6;
     mButton = new Button[nr_buttons];
     int pos = 0;
 
@@ -181,14 +188,27 @@ class ShotEditMoreDialog extends MyDialog
     layout4b.addView( mButtonDelete );
     mButtonDelete.setLayoutParams( lp );
 
+    mBtnColor = (Button) findViewById( R.id.btn_color );
+    if ( TDLevel.overExpert ) {
+      if ( mBlock.isSplay() ) {
+	if ( TDSetting.mSplayColor ) {
+          mBtnColor.setBackgroundColor( mColor ); 
+          mBtnColor.setOnClickListener( this );
+          hideColorBtn = false;
+        }
+      }
+    }
+    if ( hideColorBtn ) mBtnColor.setVisibility( View.GONE );
+
+
     LinearLayout layout4c = (LinearLayout) findViewById( R.id.layout4c );
-    if ( mBlk.isMainLeg() ) {
+    if ( mBlock.isMainLeg() ) {
       mCBleg = new CheckBox( mContext );
       mCBleg.setText( R.string.delete_whole_leg );
       mCBleg.setChecked( false );
       layout4b.addView( mCBleg );
       mCBleg.setLayoutParams( lp );
-      if ( TDLevel.overAdvanced && mBlk.isDistoX() ) {
+      if ( TDLevel.overAdvanced && mBlock.isDistoX() ) {
         layout4c.setMinimumHeight( size + 20 );
         mButtonCheck  = new MyCheckBox( mContext, size, R.drawable.iz_compute_transp, R.drawable.iz_compute_transp );
         mButtonCheck.setOnClickListener( this );
@@ -206,18 +226,18 @@ class ShotEditMoreDialog extends MyDialog
 
     mTVstations = (TextView) findViewById( R.id.photo_shot_stations );
     mTVdata = (TextView) findViewById( R.id.photo_shot_data );
-    mTVstations.setText( String.format( mContext.getResources().getString( R.string.shot_name ), mBlk.Name() ) );
+    mTVstations.setText( String.format( mContext.getResources().getString( R.string.shot_name ), mBlock.Name() ) );
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_NORMAL ) {
-      mTVdata.setText( mBlk.dataStringNormal( mContext.getResources().getString(R.string.shot_data) ) );
+      mTVdata.setText( mBlock.dataStringNormal( mContext.getResources().getString(R.string.shot_data) ) );
     } else { // SurveyInfo.DATAMODE_DIVING
-      mTVdata.setText( mBlk.dataStringDiving( mContext.getResources().getString(R.string.shot_data) ) );
+      mTVdata.setText( mBlock.dataStringDiving( mContext.getResources().getString(R.string.shot_data) ) );
     }
 
-    if ( mBlk.mFrom.length() > 0 ) {
-      mRBfrom.setText( mBlk.mFrom );
+    if ( mBlock.mFrom.length() > 0 ) {
+      mRBfrom.setText( mBlock.mFrom );
       mRBfrom.setChecked( true );
-      if ( mBlk.mTo.length() > 0 ) {
-        mRBto.setText( mBlk.mTo );
+      if ( mBlock.mTo.length() > 0 ) {
+        mRBto.setText( mBlock.mTo );
         mETat.setText( TDString.ZERO );
       } else {
         mRBto.setVisibility( View.GONE );
@@ -236,8 +256,18 @@ class ShotEditMoreDialog extends MyDialog
       mETdown.setVisibility( View.GONE );
       mBTlrud.setVisibility( View.GONE );
     }
+  }
 
-
+  /** update after a color change
+   * @param color    new color
+   */
+  @Override
+  public void colorChanged( int color )
+  {
+    if ( hideColorBtn ) return;
+    mColor = color;
+    mParent.updateBlockColor( mBlock, mColor );
+    mBtnColor.setBackgroundColor( mColor );
   }
 
   @Override
@@ -246,29 +276,32 @@ class ShotEditMoreDialog extends MyDialog
     Button b = (Button) v;
     // TDLog.Log(  TDLog.LOG_INPUT, "PhotoSensorDialog onClick() " + b.getText().toString() );
 
-    if ( b == mBTlrud ) { // AT-STATION LRUD
+    if ( (! hideColorBtn) && b == mBtnColor ) {
+      new MyColorPicker( mContext, this, mColor ).show();
+      return;
+    } else if ( b == mBTlrud ) { // AT-STATION LRUD
       float d = -1;
-      long at = mBlk.mId;
+      long at = mBlock.mId;
       String station = null;
       String from = null;
       if ( mRBto.isChecked() ) { // TO
-        station = mBlk.mTo;
+        station = mBlock.mTo;
       } else if ( mRBfrom.isChecked() ) { // FROM
-        station = mBlk.mFrom;
+        station = mBlock.mFrom;
       } else { 
 	String dstr = mETat.getText().toString().replace(',','.');
 	try { d = Float.parseFloat( dstr ); } catch ( NumberFormatException e ) {
       TDLog.Error("Non-number value");
     }
-        // add a duplicate leg d, mBlk.mBearing, mBlk.mClino
-	from = mBlk.mFrom;
+        // add a duplicate leg d, mBlock.mBearing, mBlock.mClino
+	from = mBlock.mFrom;
 	station = from + "-" + dstr;
         // at should be -1L in this case
         at = -1L;
       }
       if ( station != null ) {
         // try insert intermediate LRUD
-        if ( mParent.insertLRUDatStation( at, station, mBlk.mBearing, mBlk.mClino, 
+        if ( mParent.insertLRUDatStation( at, station, mBlock.mBearing, mBlock.mClino, 
           mETleft.getText().toString().replace(',','.') ,
           mETright.getText().toString().replace(',','.') ,
           mETup.getText().toString().replace(',','.') ,
@@ -276,27 +309,27 @@ class ShotEditMoreDialog extends MyDialog
           ) ) {
           if ( from != null ) {
             // TDLog.v("LRUD " + "insert dup leg from " + from + " station " + station ); 
-            mParent.insertDuplicateLeg( from, station, d, mBlk.mBearing, mBlk.mClino, mBlk.getIntExtend() );
+            mParent.insertDuplicateLeg( from, station, d, mBlock.mBearing, mBlock.mClino, mBlock.getIntExtend() );
           }
         }
       }
       dismiss();
     // } else if ( b == mButtonPlot ) {       // PHOTO
-    //   mParent.highlightBlock( mBlk );
+    //   mParent.highlightBlock( mBlock );
     //   dismiss();
     } else if ( mButtonPhoto != null && b == mButtonPhoto ) {  // PHOTO
-      mParent.askPhotoComment( mBlk );
+      mParent.askPhotoComment( mBlock );
       dismiss();
     } else if ( mButtonAudio != null && b == mButtonAudio ) {  // AUDIO
-      mParent.startAudio( mBlk );
+      mParent.startAudio( mBlock );
       dismiss();
     } else if ( mButtonSensor != null && b == mButtonSensor ) { // SENSOR
-      mParent.askSensor( mBlk );
+      mParent.askSensor( mBlock );
       dismiss();
     // } else if ( b == mButtonExternal ) {
     //   mParent.askExternal( );
     } else if ( b == mButtonShot ) {  // INSERT SHOT
-      mParent.dialogInsertShotAt( mBlk );
+      mParent.dialogInsertShotAt( mBlock );
       dismiss();
     } else if ( mButtonSurvey != null && b == mButtonSurvey ) { // SPLIT
       if ( TDLevel.overExpert ) {
@@ -318,7 +351,7 @@ class ShotEditMoreDialog extends MyDialog
         new DialogInterface.OnClickListener() {
           @Override
           public void onClick( DialogInterface dialog, int btn ) {
-            mParent.doDeleteShot( mBlk.mId, mBlk, TDStatus.CHECK, true );
+            mParent.doDeleteShot( mBlock.mId, mBlock, TDStatus.CHECK, true );
             dismiss();
           }
         } );
@@ -327,11 +360,11 @@ class ShotEditMoreDialog extends MyDialog
         new DialogInterface.OnClickListener() {
           @Override
           public void onClick( DialogInterface dialog, int btn ) {
-            mParent.doDeleteShot( mBlk.mId, mBlk, TDStatus.DELETED, (mCBleg != null && mCBleg.isChecked()) );
+            mParent.doDeleteShot( mBlock.mId, mBlock, TDStatus.DELETED, (mCBleg != null && mCBleg.isChecked()) );
             dismiss();
           }
         } );
-      // mParent.doDeleteShot( mBlk.mId );
+      // mParent.doDeleteShot( mBlock.mId );
 
     } else if ( b == mBtnCancel ) {
       /* nothing */

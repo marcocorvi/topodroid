@@ -1556,7 +1556,7 @@ public class TDExporter
           BufferedWriter bcw = new BufferedWriter( new FileWriter( thconfig ) );
           PrintWriter pcw = new PrintWriter( bcw );
           pcw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
-          pcw.format("source \"../th/%s.th\"\n\n", info.name );
+          pcw.format("source \"./%s.th\"\n\n", info.name );
           pcw.format("layout topodroid\n");
           pcw.format("  legend on\n");
           pcw.format("  symbol-hide group centerline\n");

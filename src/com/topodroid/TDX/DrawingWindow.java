@@ -209,10 +209,11 @@ public class DrawingWindow extends ItemDrawer
   private static final int IC_TOOLS_AREA_TILDE = IC_MEDIUM+30;
   private static final int IC_MENU_RED        = IC_MEDIUM+31;
 
-  private static final int BTN_DOWNLOAD = 3;  // index of mButton1 download button
+  private static final int BTN_DOWNLOAD  = 3; // index of mButton1 download button
   private static final int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
-  private static final int BTN_PLAN   = 6;    // index of mButton1 plot button
-  private static final int BTN_DIAL   = 8;    // index of mButton1 azimuth button (level > normal)
+  private static final int BTN_PLAN      = 6; // index of mButton1 plot button
+  private static final int BTN_DIAL      = 8; // index of mButton1 azimuth button (level > normal)
+  private static final int BTN_REFRESH   = 9; // index of mButton1 azimuth button (level > normal)
 
   private static final int BTN_TOOL   = 5;    // index of mButton2 tools
   private static final int BTN_SPLAYS = 6;    // index of mButton2 splays
@@ -671,14 +672,17 @@ public class DrawingWindow extends ItemDrawer
   // private Button mButtonHelp;
   private int mButtonSize;
   private Button[] mButton1; // primary
+  private Button[] mButton1x; // primary x-sections
   private Button[] mButton2; // draw
   private Button[] mButton3; // edit
   private Button[] mButton5; // eraser
   private int mNrButton1 = TDLevel.overNormal? NR_BUTTON1 : 8; // main-primary [8: if level <= normal]
+  private int mNrButton1x;
   private int mNrButton2 = TDLevel.overNormal? NR_BUTTON2 : 7; // draw
   private int mNrButton3 = TDLevel.overAdvanced ? NR_BUTTON3 : ( TDLevel.overNormal ? 8 : 6); // edit [6 if level <= normal, 8 if level <= advanced]
   private int mNrButton5 = NR_BUTTON5; // erase
   private MyHorizontalButtonView mButtonView1;
+  private MyHorizontalButtonView mButtonView1x;
   private MyHorizontalButtonView mButtonView2;
   private MyHorizontalButtonView mButtonView3;
   private MyHorizontalButtonView mButtonView5;
@@ -2323,17 +2327,24 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v("Make Buttons 1: " + mNrButton1 + " 2: " + mNrButton2 + " 3: " + mNrButton3 + " 5: " + mNrButton5 );
 
     // if ( ! TDLevel.overNormal ) mNrButton1 -= 2; // AZIMUTH, REFRESH requires advanced level
-    mButton1 = new Button[ mNrButton1 + 1 ]; // MOVE
+    mNrButton1x = mNrButton1 - 1;
+    mButton1  = new Button[ mNrButton1  + 1 ]; // MOVE
+    mButton1x = new Button[ mNrButton1x + 1 ]; // MOVE
     int off = 0;
     int ic = 0;
+    int kx = 0;
     for ( int k=0; k<mNrButton1; ++k ) {
       ic = ( k <3 )? k : off+k;
-      mButton1[k] = MyButton.getButton( mActivity, this, izons[ic] );
+      mButton1[k]  = MyButton.getButton( mActivity, this, izons[ic] );
+      if ( k != BTN_DIAL ) {
+        mButton1x[kx++] = mButton1[k];
+      }
       if ( ic == IC_DOWNLOAD )  { mBMdownload = MyButton.getButtonBackground( this, res, izons[ic] ); }
       else if ( ic == IC_BLUETOOTH ) { mBMbluetooth = MyButton.getButtonBackground( this, res, izons[ic] ); }
       else if ( ic == IC_PLAN ) { mBMplan     = MyButton.getButtonBackground( this, res, izons[ic] ); }
     }
-    mButton1[ mNrButton1 ] = MyButton.getButton( mActivity, null, R.drawable.iz_empty );
+    mButton1[ mNrButton1 ]   = MyButton.getButton( mActivity, null, R.drawable.iz_empty );
+    mButton1x[ mNrButton1x ] = MyButton.getButton( mActivity, null, R.drawable.iz_empty );
 
     // FIXME_AZIMUTH_DIAL 1,2
     mBMdial          = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp ); 
@@ -2448,10 +2459,11 @@ public class DrawingWindow extends ItemDrawer
     setButtonEraseSize( Drawing.SCALE_MEDIUM );
     setButtonSelectSize( Drawing.SCALE_MEDIUM );
 
-    mButtonView1 = new MyHorizontalButtonView( mButton1 );
-    mButtonView2 = new MyHorizontalButtonView( mButton2 );
-    mButtonView3 = new MyHorizontalButtonView( mButton3 );
-    mButtonView5 = new MyHorizontalButtonView( mButton5 );
+    mButtonView1  = new MyHorizontalButtonView( mButton1 );
+    mButtonView1x = new MyHorizontalButtonView( mButton1x );
+    mButtonView2  = new MyHorizontalButtonView( mButton2 );
+    mButtonView3  = new MyHorizontalButtonView( mButton3 );
+    mButtonView5  = new MyHorizontalButtonView( mButton5 );
   }
 
   /** set the params of the tools toolbar
@@ -2847,7 +2859,11 @@ public class DrawingWindow extends ItemDrawer
 
     // mButton1[ BTN_PLAN ].setVisibility( View.VISIBLE );
     if ( ! TDLevel.overExpert && BTN_PLAN < mNrButton1 ) mButton1[ BTN_PLAN ].setOnLongClickListener( this );
-    if ( TDLevel.overNormal && BTN_DIAL < mNrButton1 ) mButton1[ BTN_DIAL ].setVisibility( View.VISIBLE );
+    if ( TDLevel.overNormal ) {
+      mListView.setAdapter( mButtonView1.mAdapter );
+      // if ( BTN_DIAL < mNrButton1 ) mButton1[ BTN_DIAL ].setVisibility( View.VISIBLE );
+      // if ( BTN_REFRESH < mNrButton1 ) mButton1[ BTN_REFRESH ].setVisibility( View.VISIBLE );
+    }
   }
 
   /** push the status info when a xsection is opened
@@ -2888,7 +2904,11 @@ public class DrawingWindow extends ItemDrawer
 
     // mButton1[ BTN_PLAN ].setVisibility( View.GONE );
     if ( ! TDLevel.overExpert && BTN_PLAN < mNrButton1 ) mButton1[BTN_PLAN].setOnLongClickListener( null );
-    if ( TDLevel.overNormal && BTN_DIAL < mNrButton1 ) mButton1[ BTN_DIAL ].setVisibility( View.GONE );
+    if ( TDLevel.overNormal ) {
+      mListView.setAdapter( mButtonView1x.mAdapter );
+      // if (  BTN_DIAL < mNrButton1 ) mButton1[ BTN_DIAL ].setVisibility( View.GONE );
+      // if (  BTN_REFRESH < mNrButton1 ) mButton1[ BTN_REFRESH ].setVisibility( View.GONE );
+    }
   }
 
   /** update the display of the splays - for XSections
@@ -7331,10 +7351,13 @@ public class DrawingWindow extends ItemDrawer
           mDataDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_SHOT );
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BLUETOOTH
+        // TDLog.v("Button BLUETOOTH");
         doBluetooth( b, dismiss );
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // DISPLAY MODE 
+        // TDLog.v("Button MODE");
         new DrawingModeDialog( mActivity, this, mDrawingSurface ).show();
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // TOGGLE PLAN/EXTENDED
+        // TDLog.v("Button PLAV/EXTENDED");
         if ( PlotType.isSketch2D( mType ) ) { 
           // TDLog.v( "saving TOGGLE ...");
           startSaveTdrTask( mType, PlotSave.TOGGLE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP ); 
@@ -7346,9 +7369,11 @@ public class DrawingWindow extends ItemDrawer
           updateSplays( (mApp.mSplayMode + 2)%4 );
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { //  NOTE
+        // TDLog.v("Button NOTE");
         (new DialogAnnotations( mActivity, mApp_mData.getSurveyFromId(mSid) )).show();
 
       } else if ( TDLevel.overNormal && k1 < mNrButton1 && b == mButton1[k1++] ) { //  AZIMUTH
+        // TDLog.v("Button AZIMUTH");
         if ( PlotType.isSketch2D( mType ) ) { 
           if ( TDSetting.mAzimuthManual ) {
             setRefAzimuth( 0, - TDAzimuth.mFixedExtend );
@@ -7358,6 +7383,7 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       } else if ( TDLevel.overNormal && k1 < mNrButton1 && b == mButton1[k1++] ) { //  REFRESH
+        // TDLog.v("Button REFRESH");
         updateDisplay();
       }
     }
