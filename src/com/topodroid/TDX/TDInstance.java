@@ -162,14 +162,12 @@ public class TDInstance
 
   /** @return true if the primary device is LE
    * SIWEI_TIAN
-   * FIXME_SAP6 this is OK
    */
   static boolean isDeviceBLE()    { return deviceA != null && ( deviceA.isBric() || deviceA.isSap() || deviceA.isDistoXBLE()); }
 
   /** @return true if the device is LE
    * @param device   bluetooth device
    * SIWEI_TIAN
-   * FIXME_SAP6 this is OK
    */
   private static boolean isDeviceBLE( Device device )    { return device != null && ( device.isBric() || device.isSap() || device.isDistoXBLE()); }
 

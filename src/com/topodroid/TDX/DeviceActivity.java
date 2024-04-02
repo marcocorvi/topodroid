@@ -510,36 +510,42 @@ public class DeviceActivity extends Activity
 //         }
 // ----------- END DEBUG
         if ( dev == null ) {
-          String model = null;
+          String bt_name = null;
           try {
-            model = device.getName();
+            bt_name = device.getName();
           } catch( SecurityException e ) {
             TDLog.Error("SECURITY " + e.getMessage() );
           }
-          if ( model == null ) {
+          if ( bt_name == null ) {
             if ( device.getType() == 2 ) { // Bluetooth LE
               TDToast.makeWarn( String.format( getResources().getString( R.string.device_no_name ), addr ) );
               TDLog.v( "WARNING. Null name for device " + addr );
             }
           } else {
-            String name = Device.modelToName( model );
-            // TDLog.v("BLE " + "Device Activity: model <" + model + "> name <" + name + ">" );
-            if ( model.startsWith( "DistoX", 0 ) ) {
-              mApp_mDData.insertDevice( addr, model, name, null );
+            String name = Device.btnameToName( bt_name );
+            // TDLog.v("BLE " + "Device Activity: bt name <" + bt_name + "> name <" + name + ">" );
+            if ( bt_name.startsWith( "DistoX", 0 ) ) {
+              mApp_mDData.insertDevice( addr, bt_name, name, null );
               dev = mApp_mDData.getDevice( addr );
-            } else if ( model.startsWith( "Shetland", 0 ) ) { // FIXME SHETLAND FIXME_SAP6
+            } else if ( bt_name.startsWith( "Shetland", 0 ) ) { // FIXME SHETLAND FIXME_SAP6
               // if ( TDLevel.overExpert ) {
-                TDLog.v("SAP6 BT device name " + model + " --> name " + name );
-                mApp_mDData.insertDevice( addr, model, name, null );
+                TDLog.v("SAP6 Shetland device name " + bt_name + " --> name " + name );
+                mApp_mDData.insertDevice( addr, bt_name, name, null );
                 dev = mApp_mDData.getDevice( addr );
               // }
-            } else if ( model.startsWith( "BRIC", 0 ) ) { // FIXME BRIC
+            } else if ( bt_name.startsWith( "SAP", 0 ) ) { // FIXME SHETLAND FIXME_SAP6
               // if ( TDLevel.overExpert ) {
-                mApp_mDData.insertDevice( addr, model, name, null );
+                TDLog.v("SAP6 SAP device name " + bt_name + " --> name " + name );
+                mApp_mDData.insertDevice( addr, bt_name, name, null );
                 dev = mApp_mDData.getDevice( addr );
               // }
-            // } else if ( model.startsWith( "Ble", 0 ) ) { // FIXME BLEX
-            //   mApp_mDData.insertDevice( addr, model, name, null );
+            } else if ( bt_name.startsWith( "BRIC", 0 ) ) { // FIXME BRIC
+              // if ( TDLevel.overExpert ) {
+                mApp_mDData.insertDevice( addr, bt_name, name, null );
+                dev = mApp_mDData.getDevice( addr );
+              // }
+            // } else if ( bt_name.startsWith( "Ble", 0 ) ) { // FIXME BLEX
+            //   mApp_mDData.insertDevice( addr, bt_name, name, null );
             //   dev = mApp_mDData.getDevice( addr );
             }
           }
@@ -820,18 +826,18 @@ public class DeviceActivity extends Activity
 
   /** add a device that has been manually entered
    * @param address   device address
-   * @param model     device model-number
+   * @param bt_name   device BT name (model-number)
    * @param nickname  device nickname (can be null)
    */ 
-  public void addDevice( String address, String model, String nickname )
+  public void addDevice( String address, String bt_name, String nickname )
   {
-    TDLog.v( "add device: " + address + " " + model + " " + nickname );
+    TDLog.v( "add device: " + address + " " + bt_name + " " + nickname );
     Device device = mApp_mDData.getDevice( address );
     if ( device != null ) {
       TDToast.makeWarn( R.string.device_already_present );
       return;
     }
-    mApp_mDData.insertDevice( address, model, Device.modelToName( model ), nickname );
+    mApp_mDData.insertDevice( address, bt_name, Device.btnameToName( bt_name ), nickname );
     updateList( false );
   }
 
