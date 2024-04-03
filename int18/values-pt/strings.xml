@@ -704,7 +704,7 @@ no campo abaixo e aperte o botão.
   <string name="hide_leg">Visadas repetidas</string>
   <string name="hide_ids">IDs medidas</string>
   <string name="hide_splay">Medidas auxiliares</string>
-    <!-- TODO string name="slope_lside">Slope l-side</string -->
+  <string name="slope_lside">Lado l desnível</string>
   <!-- THESE MUST AGREE WITH THE FMT STRINGS -->
   <!-- UNUSED string name="plan">PLANTA</string -->
   <string name="extended">RETIFICADO</string>
@@ -1601,8 +1601,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_iter_summary">Quantidade máxima de iterações no cálculo dos coeficientes</string>
   <string name="pref_label_size_title">Tam rótulo</string>
   <string name="pref_label_size_summary">Tamanho dos textos dos rótulos</string>
-  <!-- TODO string name="pref_slope_lside_title">Slope line l-side</string -->
-  <!-- TODO string name="pref_slope_lside_summary">Slope lines default l-side</string -->
+  <string name="pref_slope_lside_title">Lado linha desnível</string>
+  <string name="pref_slope_lside_summary">Lado padrão das linhas de desnível</string>
   <string name="pref_arrow_length_title">Tam marca corte</string>
   <string name="pref_arrow_length_message">Tamanho da marca indicando direção do corte</string>
   <string name="pref_dot_radius_title">Raio ponto verde</string>
