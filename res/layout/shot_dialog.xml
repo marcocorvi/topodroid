@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-<RelativeLayout
+<LinearLayout
   android:layout_width="match_parent" 
   android:layout_height="wrap_content"
   android:orientation="vertical"
@@ -27,7 +27,7 @@
       style="@style/edit_decimal"
       android:layout_width="0sp"
       android:layout_weight="30"
-      android:textSize="@dimen/textsizebig"
+      android:textSize="@dimen/textsize"
       android:layout_marginEnd="@dimen/marginh"
       android:nextFocusDown="@+id/shot_bearing"
       android:hint="@string/hint_distance"
@@ -37,7 +37,7 @@
       style="@style/edit_decimal"
       android:layout_width="0sp"
       android:layout_weight="30"
-      android:textSize="@dimen/textsizebig"
+      android:textSize="@dimen/textsize"
       android:layout_marginEnd="@dimen/marginh"
       android:nextFocusDown="@+id/shot_clino"
       android:hint="@string/hint_azimuth"
@@ -47,7 +47,7 @@
       style="@style/edit_signeddecimal"
       android:layout_width="0sp"
       android:layout_weight="30"
-      android:textSize="@dimen/textsizebig"
+      android:textSize="@dimen/textsize"
       android:layout_marginEnd="@dimen/marginh"
       android:nextFocusDown="@+id/shot_from"
       android:hint="@string/hint_clino"
@@ -59,7 +59,7 @@
     android:layout_below="@id/layout1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" 
-    android:textSize="@dimen/textsizebig"
+    android:textSize="@dimen/textsizesmall"
     android:text="@string/shot_info"
     />
 
@@ -67,7 +67,7 @@
     android:layout_below="@id/shot_extra"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" 
-    android:textSize="@dimen/textsizebig"
+    android:textSize="@dimen/textsizesmall"
     />
 
   <LinearLayout android:id="@+id/layout2"
@@ -187,121 +187,144 @@
     />
   </LinearLayout>
 
-<!--
-  <LinearLayout android:id="@+id/layout8"
+  <LinearLayout android:id="@+id/layout_more"
     android:layout_below="@id/layout4"
     android:layout_width="match_parent" 
-    android:layout_height="50sp"
-    android:paddingStart="@dimen/paddingh"
-    android:paddingEnd="@dimen/paddingh"
-    android:orientation="horizontal" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     >
-    <TextView 
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content" 
-      android:text="LRUD at"
-    />
-    <RadioGroup 
-      android:id="@+id/station"
-      android:layout_width="wrap_content" 
-      android:layout_height="wrap_content"
+    <LinearLayout android:id="@+id/layout_lrud"
+      android:layout_width="match_parent" 
+      android:layout_height="50sp"
+      android:paddingStart="@dimen/paddingh"
+      android:paddingEnd="@dimen/paddingh"
       android:orientation="horizontal" 
       >
-      <RadioButton android:id="@+id/station_from"
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
+      <Button android:id="@+id/btn_ok"
+        style="@style/button_default"
+        android:text="@string/button_lrud"
+        android:singleLine="true"
+        android:layout_marginEnd="@dimen/marginh"
       />
-      <RadioButton android:id="@+id/station_to"
+      <RadioGroup 
+        android:id="@+id/station"
         android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        >
+        <RadioButton android:id="@+id/station_from"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:layout_marginEnd="@dimen/marginh"
+        />
+        <RadioButton android:id="@+id/station_to"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:layout_marginEnd="@dimen/marginh"
+        />
+        <RadioButton android:id="@+id/station_at"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+        />
+      </RadioGroup>
+      <EditText android:id="@+id/station_distance" 
+        style="@style/edit_signeddecimal_light"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" 
+        android:maxLines="1" 
+        android:singleLine="true"
+        android:hint="@string/hint_distance"
+        android:importantForAutofill="no"
       />
-    </RadioGroup>
-    <!- - LinearLayout 
+    </LinearLayout>
+    <LinearLayout android:id="@+id/layout_lrud_data"
+    android:layout_below="@id/layout_lrud"
+      android:layout_width="match_parent" 
+      android:layout_height="50sp"
+      android:paddingStart="@dimen/paddingh"
+      android:paddingEnd="@dimen/paddingh"
+      android:orientation="horizontal" 
+      >
+      <EditText android:id="@+id/shot_left" 
+        style="@style/edit_decimal_light"
+        android:maxLines="1" 
+        android:layout_width="0dp"
+        android:layout_weight="25"
+        android:layout_height="wrap_content" 
+        android:hint="@string/arrow_left" 
+        android:nextFocusRight="@+id/shot_right"
+        android:singleLine="true"
+        android:importantForAutofill="no"
+        />
+      <EditText android:id="@id/shot_right" 
+        style="@style/edit_decimal_light"
+        android:maxLines="1" 
+        android:layout_width="0dp"
+        android:layout_weight="25"
+        android:layout_height="wrap_content" 
+        android:hint="@string/arrow_right"
+        android:nextFocusRight="@+id/shot_up"
+        android:singleLine="true"
+        android:importantForAutofill="no"
+        />
+      <EditText android:id="@id/shot_up" 
+        style="@style/edit_decimal_light"
+        android:maxLines="1" 
+        android:layout_width="0dp"
+        android:layout_weight="25"
+        android:layout_height="wrap_content" 
+        android:hint="@string/arrow_up" 
+        android:nextFocusRight="@+id/shot_down"
+        android:singleLine="true"
+        android:importantForAutofill="no"
+        />
+      <EditText android:id="@id/shot_down" 
+        style="@style/edit_decimal_light"
+        android:maxLines="1" 
+        android:layout_width="0dp"
+        android:layout_weight="25"
+        android:layout_height="wrap_content" 
+        android:hint="@string/arrow_down" 
+        android:singleLine="true"
+        android:importantForAutofill="no"
+        />
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/layout4x"
+      android:layout_below="@id/layout_lrud_data"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/marginv"
+      android:layout_marginBottom="@dimen/marginv"
       android:orientation="horizontal" 
-      android:gravity="end"
-      android:layout_marginTop="@dimen/marginvbig"
       >
-      <Button android:id="@+id/btn_lrud"
+      <com.topodroid.ui.MyHorizontalListView android:id="@+id/listviewx"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/marginv"
+        android:layout_marginBottom="@dimen/marginv"
+        android:layout_height="50dp"
+      />
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/layout4b"
+      android:layout_below="@id/layout4x"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/marginv"
+      android:layout_marginBottom="@dimen/marginv"
+      android:orientation="horizontal" 
+      >
+      <Button android:id="@+id/btn_color"
         style="@style/button_default"
-        android:text="@string/button_ok"
-        android:singleLine="true"
+        android:text="@string/button_color"
+        android:layout_marginEnd="@dimen/marginh"
       />
-    </LinearLayout - ->
+    </LinearLayout>
+
   </LinearLayout>
 
-  <LinearLayout android:id="@+id/layout10"
-    android:layout_below="@id/layout8"
-    android:layout_width="match_parent" 
-    android:layout_height="50sp"
-    android:paddingStart="@dimen/paddingh"
-    android:paddingEnd="@dimen/paddingh"
-    android:orientation="horizontal" 
-    >
-    <EditText android:id="@+id/shot_left" 
-      style="@style/edit_text"
-      android:maxLines="1" 
-      android:layout_width="0dp"
-      android:layout_weight="25"
-      android:layout_height="wrap_content" 
-      android:hint="&#x21A4;"
-      android:nextFocusEnd="@+id/shot_right"
-      android:singleLine="true"
-      android:importantForAutofill="no"
-      />
-    <EditText android:id="@id/shot_right" 
-      style="@style/edit_text"
-      android:maxLines="1" 
-      android:layout_width="0dp"
-      android:layout_weight="25"
-      android:layout_height="wrap_content" 
-      android:hint="&#x21A6;"
-      android:nextFocusEnd="@+id/shot_up"
-      android:singleLine="true"
-      android:importantForAutofill="no"
-      />
-    <EditText android:id="@id/shot_up" 
-      style="@style/edit_text"
-      android:maxLines="1" 
-      android:layout_width="0dp"
-      android:layout_weight="25"
-      android:layout_height="wrap_content" 
-      android:hint="&#x21A5;"
-      android:nextFocusEnd="@+id/shot_down"
-      android:singleLine="true"
-      android:importantForAutofill="no"
-      />
-    <EditText android:id="@id/shot_down" 
-      style="@style/edit_text"
-      android:maxLines="1" 
-      android:layout_width="0dp"
-      android:layout_weight="25"
-      android:layout_height="wrap_content" 
-      android:hint="&#x21A7;"
-      android:singleLine="true"
-      android:importantForAutofill="no"
-      />
-  </LinearLayout>
-
-  <LinearLayout android:id="@+id/layout9"
-    android:layout_below="@id/layout10"
-    android:layout_width="match_parent" 
-    android:layout_height="50sp"
-    android:paddingStart="@dimen/paddingh"
-    android:paddingEnd="@dimen/paddingh"
-    android:orientation="horizontal" 
-    />
-
-  <CheckBox android:id="@+id/delete_leg"
-    android:layout_below="@id/layout9"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" 
-    android:text="@string/delete_whole_leg"
-    />
--->
   <LinearLayout android:id="@+id/help"
-    android:layout_below="@id/layout4"
+    android:layout_below="@id/layout_more"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal" 
@@ -338,10 +361,9 @@
     </LinearLayout>
   </LinearLayout>
 
-
   <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"
     style="@style/keyboard"
   />
 
-</RelativeLayout>
+</LinearLayout>
 </ScrollView>

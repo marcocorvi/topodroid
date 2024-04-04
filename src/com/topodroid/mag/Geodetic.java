@@ -321,6 +321,58 @@ public class Geodetic
     return s;
   }
 
+  /** @return the WGS84 latitude [degrees] from the equatorial distance {m}
+   * @param dist  equatorial distance [m]
+   * 
+   * tan(U1) = (1-f) tan(phi1) // reduced latitude
+   * sigma1 = atan( tan(U1) / cos(a1) )   // a1 first point bearing
+   * sin(a) = cos(U1) sin(a1)
+   * u^2 = cos^2(a) * (a^2-b^2)/b^2
+   * ...
+   *  phi2 = Math.atan( sin U1 · cos σ + cos U1 · sin σ · cos α1 / (1−f) · √sin² α + (sin U1 · sin σ − cos U1 · cos σ · cos α1)² )
+   *                      0                1                0                           0                1                0
+   */
+  public double equatorialLatitude( double dist )
+  {
+    double F = 1/FLATTENING; // (A - B) / A
+
+    double tu1 = 0; // latitude phi1 = 0
+    double cu1 = 1; // cos(U1)
+    double su1 = 0; // sin(U1)
+
+    double sigma1 = 0;
+
+    double sa1 = 0; // 
+    double ca1 = 1; // cos(a1) = cos( 0 ) first point bearing
+
+    double sa  = 0; // sin(a) = cu1 * sa1
+    double c2a = 1; // cos^2(a)
+    double u2  = (EARTH_A * EARTH_A - EARTH_B * EARTH_B )/(EARTH_B * EARTH_B); // cos^2(a) * (a^2-b^2)/b^2
+    double A = 1 + u2/16384 * (4096 + u2 * (-768 + u2 * (320 -175 * u2)));
+    double B =     u2/ 1024 * ( 256 + u2 * (-128 + u2 * ( 74 - 47 * u2)));
+    double sigma0 = dist/( EARTH_B * A );
+    double sigma  = sigma0;
+    double ss, cs, c2sm, c2sm2;
+    double dsigma = 0;
+    do {
+      c2sm = Math.cos( 2 * sigma1 + sigma );
+      c2sm2 = c2sm * c2sm;
+      ss = Math.sin(sigma);
+      cs = Math.cos(sigma);
+      dsigma = B * ss * ( c2sm + B/4 * ( cs * (-1 + 2 * c2sm2) - B/6 * c2sm*( -3 + 4 * ss * ss ) * (-3 + 4 * c2sm2) ) );
+      sigma = sigma0 + dsigma;
+    } while ( Math.abs( dsigma ) > 1e-10 );
+    double x = - cs; // su1 * ss - cu1 * cs * ca1;
+    // x = Math.sqrt( sa * sa + x * x );
+    double phi2 = Math.atan2( su1 * cs + cu1 * ss * ca1, (1-F) * Math.abs( x ) );
+    // double lambda = Math.atan2( ss * sa1, cu1 * cs - su1 * ss * ca1 );
+    // double C = f/16 * c2a * ( 4 + f *( 4 - 3 * c2a ) );
+    // double L = lambda - (1-C) * f * sa * (sigma + C * ss * (c2sm + C * cs * (-1+ 2 * c2sm2) ) );
+    // double lambda2 = lambda1 + L;
+    // double a2 = Math.atan2( ss, -x );
+    return phi2;
+  }
+
   /** @return meridian radius on the ellipsoid (multiplied by pi/180)
    * @param lat   latitude [deg]
    * @param h_ell ellipsoidic altitude [m]
@@ -336,6 +388,7 @@ public class Geodetic
    */
   public static double parallelRadiusEllipsoid( double lat, double h_ell )
   {
+    // FIXME
     // return parallelRadiusExact( lat, 0 );
     double tl = Math.tan( lat * Math.PI / 180.0 ) * EARTH_B / EARTH_A;
     return EARTH_A / Math.sqrt( 1 + tl * tl ) * Math.PI / 180;

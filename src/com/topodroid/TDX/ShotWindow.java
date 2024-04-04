@@ -388,6 +388,9 @@ public class ShotWindow extends Activity
       }
     }
   }
+
+  private List< DBlock > mMyBlocks = null;
+  private List< PhotoInfo > mMyPhotos = null;
     
   /** update the display 
    */
@@ -396,12 +399,12 @@ public class ShotWindow extends Activity
     // TDLog.v("SHOT update display");
     // highlightBlocks( null );
     if ( mApp_mData != null && TDInstance.sid >= 0 ) {
-      List< DBlock > list = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.NORMAL );
-      mSurveyAccuracy = new SurveyAccuracy( list ); 
-      // if ( list.size() > 4 ) SurveyAccuracy.setBlocks( list );
+      mMyBlocks = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.NORMAL );
+      mSurveyAccuracy = new SurveyAccuracy( mMyBlocks ); 
+      // if ( mMyBlocks.size() > 4 ) SurveyAccuracy.setBlocks( mMyBlocks );
 
-      List< PhotoInfo > photos = mApp_mData.selectAllPhotos( TDInstance.sid, TDStatus.NORMAL );
-      updateShotList( list, photos );
+      mMyPhotos = mApp_mData.selectAllPhotos( TDInstance.sid, TDStatus.NORMAL );
+      updateShotList( mMyBlocks, mMyPhotos );
       
       setTheTitle( );
     } else {
@@ -512,6 +515,7 @@ public class ShotWindow extends Activity
    */
   private void updateShotList( List< DBlock > list, List< PhotoInfo > photos )
   {
+    if ( list == null ) return;
     // TDLog.Log( TDLog.LOG_SHOT, "updateShotList shots " + list.size() + " photos " + photos.size() );
     mDataAdapter.clear();
     // mList.setAdapter( mDataAdapter );
@@ -520,7 +524,9 @@ public class ShotWindow extends Activity
       return;
     }
     processShotList( list );
-    mDataAdapter.reviseBlockWithPhotos( photos );
+    if ( photos != null && ! photos.isEmpty() ) {
+      mDataAdapter.reviseBlockWithPhotos( photos );
+    }
   }
 
   /** process the list of shot data and fill the adapter for the display list
@@ -823,15 +829,15 @@ public class ShotWindow extends Activity
   }
 
   // called by ShotEditDialog "More" button
-  void onBlockLongClick( DBlock blk )
-  {
-    mShotId = blk.mId; // save shot id
-    if ( TDLevel.overNormal ) {
-      (new ShotEditMoreDialog(mActivity, this, blk ) ).show();
-    } else {
-      (new ShotDeleteDialog( mActivity, this, blk ) ).show();
-    }
-  }
+  // void onBlockLongClick( DBlock blk )
+  // {
+  //   mShotId = blk.mId; // save shot id
+  //   if ( TDLevel.overNormal ) {
+  //     (new ShotEditMoreDialog(mActivity, this, blk ) ).show();
+  //   } else {
+  //     (new ShotDeleteDialog( mActivity, this, blk ) ).show();
+  //   }
+  // }
 
   // ----------------------------------------------------------------------------
   // MENU
@@ -2871,6 +2877,7 @@ public class ShotWindow extends Activity
   {
     blk.setPaintColor( color );
     mApp_mData.updateShotColor( blk.mId, TDInstance.sid, color );
+    updateShotList( mMyBlocks, mMyPhotos );
   }
 
   // ------------------------------------------------------------------

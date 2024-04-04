@@ -832,6 +832,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Draw</string>
+    <string name="button_less"    >Less</string>
     <string name="button_more"    >More</string>
     <string name="button_move"    >Move</string>
     <string name="button_next"    >Next</string>

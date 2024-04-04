@@ -101,8 +101,11 @@ public class ExportGPX
     h_geo = origin.z; // GPX uses Geoid altitude (unless altitudeMode is set)
     // TDLog.v( "GPX origin " + lat + " N " + lng + " E " + h_geo );
 
-    s_radius = 1.0 / Geodetic.meridianRadiusExact( lat, h_ell ); // TODO 1.0 / Geodetic.meridianRadiusEllipsoid( lat, h_ell );
-    e_radius = 1.0 / Geodetic.parallelRadiusExact( lat, h_ell ); //      1.0 / Geodetic.parallelRadiusEllipsoid( lat, h_ell );
+    // cave3D uses ellipsoid radii 
+    s_radius = 1.0 / Geodetic.meridianRadiusExact( lat, h_ell );
+    e_radius = 1.0 / Geodetic.parallelRadiusExact( lat, h_ell );
+    // s_radius = 1.0 / Geodetic.meridianRadiusEllipsoid( lat, h_ell );
+    // e_radius = 1.0 / Geodetic.parallelRadiusEllipsoid( lat, h_ell );
 
     return true;
   }

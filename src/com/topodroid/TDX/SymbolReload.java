@@ -105,11 +105,11 @@ class SymbolReload extends MyDialog
       mCBbio.setVisibility( View.GONE );
       mCBkarst.setVisibility( View.GONE );
       mBtnInstall.setVisibility( View.GONE );
-      String version = TopoDroidApp.mDData.getValue( "symbol_version" );
-      tv.setText( String.format( mApp.getResources().getString(R.string.symbols_ask), TDVersion.SYMBOL_VERSION, version ) );
     } else {
       mBtnInstall.setOnClickListener( this );
     }
+    String version = TopoDroidApp.mDData.getValue( "symbol_version" );
+    tv.setText( String.format( mApp.getResources().getString(R.string.symbols_ask), TDVersion.SYMBOL_VERSION, version ) );
   }
 
   /** react to a user tap - either "install" or "replace" have effect
