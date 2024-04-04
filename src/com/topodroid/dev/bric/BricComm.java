@@ -851,7 +851,7 @@ public class BricComm extends TopoDroidComm
   private void printOps()
   {
     StringBuilder sb = new StringBuilder();
-    sb.append( "BRIC comm Ops: ");
+    sb.append( "  BRIC comm Ops: ");
     for ( BleOperation op : mOps ) sb.append( op.name() ).append(" ");
     TDLog.v( sb.toString() );
   }

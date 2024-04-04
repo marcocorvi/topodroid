@@ -2572,12 +2572,14 @@ public class TopoGL extends Activity
     // TDLog.v("starting bluetooth - remote " + mBtRemoteName );
     if ( mBluetoothComm == null ) {
       // mBluetoothComm = new BluetoothComm( this, this, mBtRemoteDevice );
-      if ( mBtRemoteName.startsWith("BRIC4_" ) || mBtRemoteName.startsWith("BRIC5_ ) {
+      if ( Device.isBric( mBtRemoteName ) ) {
         mBluetoothComm = new BricComm( this, this, mBtRemoteDevice );
-      } else if ( mBtRemoteName.startsWith("Shetland_" ) ) {
+      } else if ( Device.isSap( mBtRemoteName ) ) {
         mBluetoothComm = new SapComm( this, this, mBtRemoteDevice );
-      } else if ( mBtRemoteName.startsWith("DistoX-" ) ) {
+      } else if ( mBtRemoteName.startsWith( Device.NAME_DISTOX2 ) ) {
         mBluetoothComm = new DistoXComm( this, this, mBtRemoteDevice, mBtRemoteDevice.getAddress() );
+      } else if ( mBtRemoteName.startsWith( Device.NAME_DISTOXBLE ) ) {
+        mBluetoothComm = new DistoXBLEComm( this, this, mBtRemoteDevice, mBtRemoteDevice.getAddress() );
       }
       // if ( mBluetoothComm != null ) {
       //   mDataType = DATA_NONE;

@@ -328,32 +328,32 @@ public class DeviceActivity extends Activity
     if ( device != null && device == TDInstance.getDeviceA() ) {
       if ( device.mType != model ) {
         if ( Device.isA3( model ) ) {
-          mApp_mDData.updateDeviceModel( device.getAddress(), "DistoX" );
+          mApp_mDData.updateDeviceModel( device.getAddress(), Device.NAME_DISTOX1 );
           device.mType = model;
         } else if ( Device.isX310( model ) ) {
-          mApp_mDData.updateDeviceModel( device.getAddress(), "DistoX-0000" );
+          mApp_mDData.updateDeviceModel( device.getAddress(), Device.NAME_DISTOX2 + "0000" );
           device.mType = model;
-        } else if ( Device.isSap5( model ) ) { // FIXME_SAP6
-          mApp_mDData.updateDeviceModel( device.getAddress(), "Shetland-0000" );
+        } else if ( Device.isSap5( model ) ) { 
+          mApp_mDData.updateDeviceModel( device.getAddress(), Device.NAME_SAP5 + "0000" );
           device.mType = model;
         } else if ( Device.isSap6( model ) ) { // FIXME_SAP6
           TDLog.v("SAP6 set device model: addr " + device.getAddress() + " type " + model );
-          mApp_mDData.updateDeviceModel( device.getAddress(), "SAP6-0000" );
+          mApp_mDData.updateDeviceModel( device.getAddress(), Device.NAME_SAP6 + "0000" );
           device.mType = model;
         } else if ( Device.isBric4( model ) ) {
-          mApp_mDData.updateDeviceModel( device.getAddress(), "BRIC4_0000" );
+          mApp_mDData.updateDeviceModel( device.getAddress(), Device.NAME_BRIC4 + "0000" );
           device.mType = model;
         } else if ( Device.isBric5( model ) ) {
-          mApp_mDData.updateDeviceModel( device.getAddress(), "BRIC5_0000" );
+          mApp_mDData.updateDeviceModel( device.getAddress(), Device.NAME_BRIC5 + "0000" );
           device.mType = model;
         // } else if ( Device.isX000( model ) ) { // FIXME VirtualDistoX
-        //   mDData.updateDeviceModel( device.getAddress(), "DistoX0" );
+        //   mDData.updateDeviceModel( device.getAddress(), Device.NAME_DISTOX_0" );
         //   device.mType = model;
         } else if ( Device.isDistoXBLE( model ) ) { // SIWEI_TIAN
-          mApp_mDData.updateDeviceModel(device.getAddress(), "DistoXBLE-0000");
+          mApp_mDData.updateDeviceModel(device.getAddress(), Device.NAME_DISTOXBLE + "0000");
           device.mType = model;
         } else if ( Device.isCavway( model ) ) {
-          mApp_mDData.updateDeviceModel( device.getAddress(), "CAVWAY_0000" );
+          mApp_mDData.updateDeviceModel( device.getAddress(), Device.NAME_CAVWAY + "0000" );
           device.mType = model;
         }
       }
@@ -524,29 +524,20 @@ public class DeviceActivity extends Activity
           } else {
             String name = Device.btnameToName( bt_name );
             // TDLog.v("BLE " + "Device Activity: bt name <" + bt_name + "> name <" + name + ">" );
-            if ( bt_name.startsWith( "DistoX", 0 ) ) {
+            if ( Device.isDistoX( bt_name ) ) {
               mApp_mDData.insertDevice( addr, bt_name, name, null );
               dev = mApp_mDData.getDevice( addr );
-            } else if ( bt_name.startsWith( "Shetland", 0 ) ) { // FIXME SHETLAND FIXME_SAP6
+            } else if ( Device.isSap( bt_name ) ) { // FIXME SHETLAND FIXME_SAP6
               // if ( TDLevel.overExpert ) {
-                TDLog.v("SAP6 Shetland device name " + bt_name + " --> name " + name );
+                TDLog.v("SAP shetland device name " + bt_name + " --> name " + name );
                 mApp_mDData.insertDevice( addr, bt_name, name, null );
                 dev = mApp_mDData.getDevice( addr );
               // }
-            } else if ( bt_name.startsWith( "SAP", 0 ) ) { // FIXME SHETLAND FIXME_SAP6
-              // if ( TDLevel.overExpert ) {
-                TDLog.v("SAP6 SAP device name " + bt_name + " --> name " + name );
-                mApp_mDData.insertDevice( addr, bt_name, name, null );
-                dev = mApp_mDData.getDevice( addr );
-              // }
-            } else if ( bt_name.startsWith( "BRIC", 0 ) ) { // FIXME BRIC
+            } else if ( Device.isBric( bt_name ) ) {
               // if ( TDLevel.overExpert ) {
                 mApp_mDData.insertDevice( addr, bt_name, name, null );
                 dev = mApp_mDData.getDevice( addr );
               // }
-            // } else if ( bt_name.startsWith( "Ble", 0 ) ) { // FIXME BLEX
-            //   mApp_mDData.insertDevice( addr, bt_name, name, null );
-            //   dev = mApp_mDData.getDevice( addr );
             }
           }
         } else {
@@ -556,9 +547,9 @@ public class DeviceActivity extends Activity
         }
         if ( dev != null ) {
           // // TDLog.Error( "device " + name );
-          // if ( dev.mModel.startsWith("DistoX-") ) {      // DistoX2 X310
+          // if ( dev.mModel.startsWith( Device.NAME_DISTOX2 ) ) {      // DistoX2 X310
           //   mArrayAdapter.add( " X310 " + dev.mName + " " + addr );
-          // } else if ( dev.mModel.equals("DistoX") ) {    // DistoX A3
+          // } else if ( dev.mModel.equals( Device.NAME_DISTOX1 ) ) {    // DistoX A3
           //   mArrayAdapter.add( " A3 " + dev.mName + " " + addr );
           // } else {
           //   // do not add
@@ -593,28 +584,24 @@ public class DeviceActivity extends Activity
       return;
     }
     CharSequence item = ((TextView) view).getText();
-    // String value = item.toString();
-    // if ( value.startsWith( "DistoX", 0 ) ) 
-    {
-      StringBuffer buf = new StringBuffer( item );
-      int k = buf.lastIndexOf(" ");
-      String[] vals = item.toString().split(" ", 3 );
+    StringBuffer buf = new StringBuffer( item );
+    int k = buf.lastIndexOf(" ");
+    String[] vals = item.toString().split(" ", 3 );
 
-      // FIXME VirtualDistoX
-      // String address = ( vals[0].equals("X000") )? Device.ZERO_ADDRESS : vals[2];
-      String model   = vals[0];
-      String name    = vals[1];
-      String address = vals[2];
+    // FIXME VirtualDistoX
+    // String address = ( vals[0].equals("X000") )? Device.ZERO_ADDRESS : vals[2];
+    String model   = vals[0];
+    String name    = vals[1];
+    String address = vals[2];
 
-      // if ( vals.length != 3 ) { TODO } // FIXME
-      // TDLog.v( "Addr/Name <" + vals[2] + ">");
-      if ( currDeviceA() == null || ! currDeviceA().hasAddressOrNickname( address ) ) {
-        mApp.setDevicePrimary( address, model, name, null );
-        // mCurrDevice = TDInstance.getDeviceA();
-        mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
-        setState( false );
-        showDistoXButtons();
-      }
+    // if ( vals.length != 3 ) { TODO } // FIXME
+    // TDLog.v( "Addr/Name <" + vals[2] + ">");
+    if ( currDeviceA() == null || ! currDeviceA().hasAddressOrNickname( address ) ) {
+      mApp.setDevicePrimary( address, model, name, null );
+      // mCurrDevice = TDInstance.getDeviceA();
+      mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
+      setState( false );
+      showDistoXButtons();
     }
   }
 

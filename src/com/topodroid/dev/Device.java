@@ -18,6 +18,26 @@ package com.topodroid.dev;
 // SIWEI_TIAN changed on Jun 2022
 public class Device
 {
+  /** the device BT model strings are defined only here
+   *
+   * These strings (without the underscore/dash) can appear also in log statements
+   */
+  // public final static String NAME_DISTOX_0  = "DistoX0";
+  public final static String NAME_DISTOX1   = "DistoX";     // all DistoX1 are advertised as "DistoX" without device code
+  public final static String NAME_DISTOX2   = "DistoX-";
+  public final static String NAME_DISTOXBLE = "DistoXBLE-";
+  public final static String NAME_BRIC      = "BRIC-";
+  public final static String NAME_BRIC4     = "BRIC4-";
+  public final static String NAME_BRIC5     = "BRIC5-";
+  public final static String NAME_SAP5      = "Shetland_";
+  public final static String NAME_SAP5_2    = "SAP5_";
+  public final static String NAME_SAP6      = "SAP6_";
+  public final static String NAME_SAP6_2    = "SAP_";
+  public final static String NAME_CAVWAY    = "CAVWAY-";
+  
+  // supported BLE models
+  final static String[] mBleModels = { NAME_DISTOXBLE, NAME_BRIC4, NAME_BRIC5, NAME_SAP5, NAME_SAP6, NAME_CAVWAY };
+
   // DistoX2 / SAP6 commands
   public static final int LASER_ON         =  1; // 0x36
   public static final int LASER_OFF        =  0; // 0x37
@@ -98,12 +118,14 @@ public class Device
   public static boolean isSap6( int type )      { return type == DISTO_SAP6; } // FIXME_SAP6
   public static boolean isCavway( int type )    { return type == DISTO_CAVWAY; }
 
+  public static boolean isDistoX( String bt_name ) { return bt_name.startsWith("DistoX"); }
+  public static boolean isSap( String bt_name ) { return bt_name.startsWith("Shetland") || bt_name.startsWith("SAP"); }
+  public static boolean isBric( String bt_name ) { return bt_name.startsWith("BRIC"); }
+
   // SIWEI_TIAN
   // public boolean canSendCommand() { return mType == DISTO_X310 mType == DISTO_XBLE || mType == DISTO_BRIC4 || mType == DISTO_BRIC5 || mType == DISTO_SAP6; }
   // public static boolean canSendCommand( int type ) { return type == DISTO_X310 || type == DISTO_XBLE type == DISTO_BRIC4 || type == DISTO_BRIC5 || type == DISTO_SAP6; }
 
-  // supported BLE models
-  final static String[] mBleModels = { "DistoXBLE-", "BRIC4_", "BRIC5_", "Shetland_", "SAP6_", "CAVWAY-" };
 
   /** @return the list of the supported BLE models
    */
@@ -116,30 +138,16 @@ public class Device
   public static String btnameToName( String bt_name )
   {
     // TDLog.v("DEVICE model to name <" + bt_name + ">");
-    if ( bt_name.startsWith("DistoX-") ) {
-      return bt_name.replace("DistoX-", "" );
-    } 
-    if ( bt_name.startsWith("Shetland") ) {
-      return bt_name.replace("Shetland_", "" );
-    }
-    if ( bt_name.startsWith("SAP5_") ) {
-      return bt_name.replace("SAP5_", "" );
-    }
-    if ( bt_name.startsWith("SAP_") ) {
-      return bt_name.replace("SAP_", "" );
-    }
-    if ( bt_name.startsWith("BRIC4_") ) {
-      return bt_name.replace("BRIC4_", "" );
-    }
-    if ( bt_name.startsWith("BRIC5_") ) {
-      return bt_name.replace("BRIC5_", "" );
-    }
-    if ( bt_name.startsWith("DistoXBLE-") ) { // SIWEI_TIAN
-      return bt_name.replace("DistoXBLE-", "" );
-    }
-    if ( bt_name.startsWith("Cavway-") ) { 
-      return bt_name.replace("Cavway-", "" );
-    }
+    if ( bt_name.startsWith( NAME_DISTOX2 ) ) return bt_name.replace( NAME_DISTOX2, "" );
+    if ( bt_name.startsWith( NAME_DISTOXBLE ) ) return bt_name.replace( NAME_DISTOXBLE , "" );
+    if ( bt_name.startsWith( NAME_CAVWAY ) )    return bt_name.replace( NAME_CAVWAY, "" );
+    // NAME_DISTOX1 left unchnaged
+    if ( bt_name.startsWith( NAME_BRIC4 ) )   return bt_name.replace( NAME_BRIC4, "" );
+    if ( bt_name.startsWith( NAME_BRIC5 ) )   return bt_name.replace( NAME_BRIC5, "" );
+    if ( bt_name.startsWith( NAME_SAP5 ) )    return bt_name.replace( NAME_SAP5, "" );
+    if ( bt_name.startsWith( NAME_SAP5_2 ) )  return bt_name.replace( NAME_SAP5_2, "" );
+    if ( bt_name.startsWith( NAME_SAP6 ) )    return bt_name.replace( NAME_SAP6, "" );
+    if ( bt_name.startsWith( NAME_SAP6_2 ) )  return bt_name.replace( NAME_SAP6_2, "" );
     // if ( bt_name.startsWith("Ble-") ) { // FIXME BLE_5
     //   return bt_name.replace("Ble-", "" );
     // }
@@ -153,14 +161,16 @@ public class Device
   {
     if ( bt_name != null ) {
       // TDLog.v( "DEVICE btnameToType " + bt_name );
-      if ( bt_name.equals( "XBLE" )  || bt_name.startsWith( "DistoXBLE-" ) )  return DISTO_XBLE; // SIWEI_TIAN
-      if ( bt_name.equals( "X310" )  || bt_name.startsWith( "DistoX-" ) )   return DISTO_X310;
-      if ( bt_name.equals( "A3" )    || bt_name.equals( "DistoX" ) )        return DISTO_A3;
-      if ( bt_name.equals( "BRIC4" ) || bt_name.startsWith( "BRIC4" ) )     return DISTO_BRIC4; 
-      if ( bt_name.equals( "BRIC5" ) || bt_name.startsWith( "BRIC5" ) )     return DISTO_BRIC5; 
-      if ( bt_name.equals( "SAP5" )  || bt_name.startsWith( "Shetland_" ) ) return DISTO_SAP5;
-      if ( bt_name.equals( "SAP6" )  || bt_name.startsWith( "SAP_" )  )     return DISTO_SAP6;
-      if ( bt_name.equals( "CAVWAY" )|| bt_name.startsWith("Cavway-")     ) return DISTO_CAVWAY;
+      if ( bt_name.equals( "XBLE" )  || bt_name.startsWith( NAME_DISTOXBLE ) ) return DISTO_XBLE; // SIWEI_TIAN
+      if ( bt_name.equals( "X310" )  || bt_name.startsWith( NAME_DISTOX2 ) )   return DISTO_X310;
+      if ( bt_name.equals( "A3" )    || bt_name.equals( NAME_DISTOX1 ) )       return DISTO_A3;
+      if ( bt_name.equals( "BRIC4" ) || bt_name.startsWith( NAME_BRIC4 ) )     return DISTO_BRIC4; 
+      if ( bt_name.equals( "BRIC5" ) || bt_name.startsWith( NAME_BRIC5 ) )     return DISTO_BRIC5; 
+      if ( bt_name.equals( "SAP5" )  || bt_name.startsWith( NAME_SAP5 ) )      return DISTO_SAP5;
+      if ( bt_name.startsWith( NAME_SAP5_2 ) )                                 return DISTO_SAP5;
+      if ( bt_name.equals( "SAP6" )  || bt_name.startsWith( NAME_SAP6 ) )      return DISTO_SAP6;
+      if ( bt_name.startsWith( NAME_SAP6_2 ) ) return DISTO_SAP6;
+      if ( bt_name.startsWith( NAME_CAVWAY ) ) return DISTO_CAVWAY;
       // if ( bt_name.equals( "BLEX" ) ) return DISTO_BLEX; // FIXME BLE_5
       // if ( bt_name.equals( "X000" ) || bt_name.equals( "DistoX0" ) ) return DISTO_X000; // FIXME VirtualDistoX
     }
@@ -227,14 +237,14 @@ public class Device
     if ( name == null || name.length() == 0 || name.equals("null") ){
       name = mModel;
     }
-    if ( name.startsWith("DistoXBLE-") ) return name.replace("DistoXBLE-", ""); // SIWEI_TIAN
-    if ( name.startsWith("DistoX-") )    return name.replace("DistoX-", "");
-    if ( name.startsWith("SAP6_" ) )     return name.replace("SAP6_", ""); // FIXME_SAP6
-    if ( name.startsWith("SAP-" ) )      return name.replace("SAP-", "");
-    if ( name.startsWith("BRIC-" ) )     return name.replace("BRIC-", "");
-    if ( name.startsWith("BRIC4-" ) )    return name.replace("BRIC4-", "");
-    if ( name.startsWith("BRIC5-" ) )    return name.replace("BRIC5-", "");
-    if ( name.startsWith("CAVWAY-" ) )   return name.replace("CAVWAY-", "");
+    if ( name.startsWith( NAME_DISTOXBLE ) ) return name.replace( NAME_DISTOXBLE, ""); // SIWEI_TIAN
+    if ( name.startsWith( NAME_DISTOX2 ) )   return name.replace( NAME_DISTOX2, "");
+    if ( name.startsWith( NAME_SAP6 ) )      return name.replace( NAME_SAP6, ""); // FIXME_SAP6
+    if ( name.startsWith( NAME_SAP6_2 ) )    return name.replace( NAME_SAP6_2, "");
+    if ( name.startsWith( NAME_BRIC ) )      return name.replace( NAME_BRIC, "");
+    if ( name.startsWith( NAME_BRIC4 ) )     return name.replace( NAME_BRIC4, "");
+    if ( name.startsWith( NAME_BRIC5 ) )     return name.replace( NAME_BRIC5, "");
+    if ( name.startsWith( NAME_CAVWAY ) )    return name.replace( NAME_CAVWAY, "");
     return name;
   }
 

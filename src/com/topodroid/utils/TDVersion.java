@@ -28,7 +28,7 @@ public class TDVersion
 
   // symbol version of installed symbols is stored in the database
   // symbol version of the current  symbols is in the app
-  public static final String SYMBOL_VERSION = "41";
+  public static final String SYMBOL_VERSION = "42";
 
   // increase to install last version of DistoX2 firmware
   public static final String FIRMWARE_VERSION = "28";
