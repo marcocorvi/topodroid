@@ -84,6 +84,7 @@ no campo abaixo e aperte o botão.
   <string name="station_not_found">Base não encontrada</string>
   <string name="station_coords">L %1$.2f | N %2$.2f | Z %3$.2f</string>
   <string name="shot_not_found">Medida não encontrada</string>
+  <string name="shot_not_saved">Visada não gravada</string>
   <string name="bad_sibling">Visada irmã inválida</string>
   <string name="bad_station">Base ruim: %1$s</string>
   <string name="bad_station_name">Nome de base não suportado</string>
@@ -186,8 +187,7 @@ no campo abaixo e aperte o botão.
   <string name="save_as">Gravar como</string>
   <string name="nickname">Apelido</string>
   <string name="unknown_device_type">Tipo dispositivo desconhecido %1$d</string>
-    <string name="unsupported_device_type">Tipo de dispositivo não suportado</string>
-
+  <string name="unsupported_device_type">Tipo de dispositivo não suportado</string>
   <string name="comment">comentário</string>
   <!-- UNUSED string name="flag">Flag</string -->
   <!-- UNUSED string name="backshot">Contramedida</string -->
@@ -245,7 +245,7 @@ no campo abaixo e aperte o botão.
   <string name="bad_manifest_td">Falha: versão do Topodroid muito antiga</string>
   <string name="bad_manifest_db_old">Falha: versão do banco de dados muito antiga</string>
   <string name="bad_manifest_db_new">Falha: versão do banco de dados muito nova</string>
-    <!-- UNUSED string name="bad_manifest_name">Failed: survey name differ from zip name</string -->
+  <!-- UNUSED string name="bad_manifest_name">Failed: survey name differ from zip name</string -->
   <string name="bad_manifest_present">Falha: topo já existente</string>
   <string name="bad_manifest_db">Falha: impossível abrir banco de dados</string>
   <string name="bad_manifest_sql">Falha: erro SQL</string>
@@ -255,7 +255,6 @@ no campo abaixo e aperte o botão.
   <string name="bad_manifest_error">Falha: erro na leitura do arquivo de manifesto</string>
   <string name="bad_manifest_other">Falha: erro inesperado</string>
   <string name="archive_reset_color">Alerta! Cores customizadas reiniciadas</string>
-
   <string name="pleasewait">Por favor espere</string>
   <string name="processing">processando …</string>
   <!-- UNUSED string name="head_tail">Memória: </string -->
@@ -330,7 +329,6 @@ no campo abaixo e aperte o botão.
   <string name="error_value_required">Valor exigido</string>
   <string name="error_bad_fixes">Ponto fixos não estão na topo</string>
   <string name="error_bad_name">Nome do arquivo alterado</string>
-
   <string name="group_title">Grupos dados calibração</string>
   <!-- UNUSED string name="group_policy_four">Regra: agrupar 4 a 4</string -->
   <!-- UNUSED string name="group_policy_sixteen">Regra: 4 grupos de 4, o restante isolados</string -->
@@ -428,6 +426,7 @@ no campo abaixo e aperte o botão.
   <string name="menu_hide_deleted">OCULTAR APAGADOS</string>
   <string name="menu_device">DISPOSITIVO</string>
   <string name="menu_device_add">INCLUIR DISPOSITIVO</string>
+  <!-- KEEP -->
   <string name="menu_export">EXPORTAR</string>
   <string name="menu_firmware">FIRMWARE</string>
   <string name="menu_geopoint_app">APP GNSS</string>
@@ -665,7 +664,6 @@ no campo abaixo e aperte o botão.
   <string name="screenshot_saved">Captura de tela salva %1$s</string>
   <string name="screenshot_failed">Falha ao capturar tela</string>
   <string name="start_index">Índice da visada inicial</string>
-
   <string name="survey_info">Informações da topo</string>
   <string name="stat_dates">De %1$s para %2$s</string>
   <string name="stat_devices">Dispositivos %1$d: %2$s</string>
@@ -704,7 +702,7 @@ no campo abaixo e aperte o botão.
   <string name="hide_leg">Visadas repetidas</string>
   <string name="hide_ids">IDs medidas</string>
   <string name="hide_splay">Medidas auxiliares</string>
-    <!-- TODO string name="slope_lside">Slope l-side</string -->
+  <string name="slope_lside">Lado l desnível</string>
   <!-- THESE MUST AGREE WITH THE FMT STRINGS -->
   <!-- UNUSED string name="plan">PLANTA</string -->
   <string name="extended">RETIFICADO</string>
@@ -953,6 +951,7 @@ no campo abaixo e aperte o botão.
   <string name="help_refresh">Redesenhar tela</string>
   <string name="help_device">Editar dispositivo em uso</string>
   <string name="help_device_add">Incluir um dispositivo</string>
+  <!-- KEEP -->
   <string name="help_add_topodroid">Nova topo</string>
   <string name="help_import">Importar arquivo zip ou arquivo de topo</string>
   <string name="help_geopoint_app">Apps GNSS externas</string>
@@ -1328,11 +1327,13 @@ no campo abaixo e aperte o botão.
   <string name="pref_connect_feedback_title">Feedback conexão</string>
   <string name="pref_connect_feedback_summary">Feedback ao estabelecer conexão com dispositivo</string>
   <string name="pref_unnamed_device_title">Dispositivos sem nome</string>
+  <!-- KEEP -->
   <string name="pref_unnamed_device_summary">Habilitar menu para cadastrar nomes de dispositivos</string>
+  <!-- KEEP -->
   <string name="pref_station_prefix_title">Pref base</string>
   <string name="pref_station_prefix_summary">Incluir prefixo nos nomes das bases na exportação Compass/cSurvey/WinKarst</string>
   <string name="pref_compass_splays_title">Aux Compass/Walls</string>
-  <string name="pref_compass_splays_summary">Exportar medidas auxiliares em arquivos Compass/Walls como "12 12&#8211;1" ou como "12 &#8211;".</string>
+  <string name="pref_compass_splays_summary">Exportar medidas auxiliares em arquivos Compass/Walls como "12 12–1" ou como "12 –".</string>
   <string name="pref_walls_splays_title">Med aux Walls</string>
   <string name="pref_walls_splays_summary">Incluir medidas auxiliares nos arquivos Walls exportados</string>
   <string name="pref_vtopo_splays_title">Aux VisualTopo</string>
@@ -1444,6 +1445,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_bric_mode_summary">Modo de download de dados do BRIC4</string>
   <string name="pref_bric_zero_length_title">Visada zerada BRIC4</string>
   <string name="pref_bric_zero_length_summary">Registrar visadas com comprimento zero do BRIC4</string>
+  <string name="pref_bric_index_is_id_title">Índice BRIC é ID</string>
+  <string name="pref_bric_index_is_id_summary">Usar índice BRIC como ID</string>
   <string name="pref_sap5_bit16_bug_title">Bug bit 16 SAP5</string>
   <string name="pref_sap5_bit16_bug_summary">Gambiarra para lidar com bug bit 16 no SAP5</string>
   <string name="pref_plot_screen_title">DESENHO</string>
@@ -1601,8 +1604,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_iter_summary">Quantidade máxima de iterações no cálculo dos coeficientes</string>
   <string name="pref_label_size_title">Tam rótulo</string>
   <string name="pref_label_size_summary">Tamanho dos textos dos rótulos</string>
-  <!-- TODO string name="pref_slope_lside_title">Slope line l-side</string -->
-  <!-- TODO string name="pref_slope_lside_summary">Slope lines default l-side</string -->
+  <string name="pref_slope_lside_title">Lado linha desnível</string>
+  <string name="pref_slope_lside_summary">Lado padrão das linhas de desnível</string>
   <string name="pref_arrow_length_title">Tam marca corte</string>
   <string name="pref_arrow_length_message">Tamanho da marca indicando direção do corte</string>
   <string name="pref_dot_radius_title">Raio ponto verde</string>
@@ -2117,12 +2120,17 @@ no campo abaixo e aperte o botão.
   <string name="cpref_split_stretch_summary">Distância a alongar pontos das paredes na direção da visada</string>
   <string name="cpref_powercrust_delta_title">Delta Powercrust</string>
   <string name="cpref_powercrust_delta_summary">Parâmetro "delta" do algoritmo powercrust</string>
-  <!--  <string name="cpref_convex_hull_title">Convex hull</string>
+  <!-- UNUSED <string name="cpref_convex_hull_title">Convex hull</string>
     <string name="cpref_convex_hull_summary">Convex hull walls</string>
     <string name="cpref_delaunay_title" translatable="false">Delaunay</string>
     <string name="cpref_delaunay_summary">Delaunay walls</string>
     <string name="cpref_hull_title">Hull</string>
     <string name="cpref_hull_summary">Hull walls</string> -->
+  <!-- UNUSED string name="cpref_convex_hull_summary">Convex hull walls</string -->
+  <!-- UNUSED string name="cpref_delaunay_title" translatable="false">Delaunay</string -->
+  <!-- UNUSED string name="cpref_delaunay_summary">Delaunay walls</string -->
+  <!-- UNUSED string name="cpref_hull_title">Hull</string -->
+  <!-- UNUSED string name="cpref_hull_summary">Hull walls</string -->
   <!-- UNUSED string name="TopoGLPerms">Permissions</string -->
   <!-- UNUSED string name="cperms_mandatory">Cave3D não pode ser executado sem as seguintes permissões:</string -->
   <!-- UNUSED string name="cperms_optional">Cave3D may fail without these permissions:</string -->
