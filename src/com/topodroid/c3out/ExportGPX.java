@@ -38,12 +38,9 @@ import java.io.PrintWriter;
 // import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class ExportGPX
+public class ExportGPX extends ExportGeo
 {
   ArrayList<CWFacet> mFacets;
-  double lat, lng, h_geo;
-  double s_radius, e_radius;
-  Cave3DStation zero;
   public ArrayList< Triangle3D > mTriangles;
 
   public ExportGPX()
@@ -57,57 +54,6 @@ public class ExportGPX
   public void add( CWPoint v1, CWPoint v2, CWPoint v3 )
   {
      mFacets.add( new CWFacet( v1, v2, v3 ) );
-  }
-
-  /** compute the geo-referenced origin station and the long-lat conversion parameters
-   * @param data        data parser
-   * @param decl        magnetic declination
-   * @param h_geo_factor ??? (unused)
-   * @return true if data can be geolocalized
-   */
-  private boolean getGeolocalizedData( TglParser data, double decl, double h_geo_factor )
-  {
-    // TDLog.v( "GPX get geo-localized data. Declination " + decl );
-    List< Cave3DFix > fixes = data.getFixes();
-    if ( fixes.size() == 0 ) {
-      // TDLog.v( "GPX no geo-localization");
-      return false;
-    }
-
-    Cave3DFix origin = null;
-    for ( Cave3DFix fix : fixes ) {
-      if ( ! fix.hasWGS84 ) continue;
-      // if ( fix.cs == null ) continue;
-      // if ( ! fix.cs.name.equals("long-lat") ) continue;
-      for ( Cave3DStation st : data.getStations() ) {
-        if ( st.getFullName().equals( fix.getFullName() ) ) {
-          origin = fix;
-          zero   = st;
-          break;
-        }
-      }
-      if ( origin != null ) break;
-    }
-    if ( origin == null ) {
-      // TDLog.v( "GPX no geolocalized origin");
-      return false;
-    }
-
-    // origin has coordinates ( e, n, z ) these are assumed lat-long
-    // altitude is assumed wgs84
-    lat = origin.latitude;
-    lng = origin.longitude;
-    double h_ell = origin.a_ellip;
-    h_geo = origin.z; // GPX uses Geoid altitude (unless altitudeMode is set)
-    // TDLog.v( "GPX origin " + lat + " N " + lng + " E " + h_geo );
-
-    // cave3D uses ellipsoid radii 
-    s_radius = 1.0 / Geodetic.meridianRadiusExact( lat, h_ell );
-    e_radius = 1.0 / Geodetic.parallelRadiusExact( lat, h_ell );
-    // s_radius = 1.0 / Geodetic.meridianRadiusEllipsoid( lat, h_ell );
-    // e_radius = 1.0 / Geodetic.parallelRadiusEllipsoid( lat, h_ell );
-
-    return true;
   }
 
   public boolean exportASCII( BufferedWriter osw, TglParser data, boolean do_splays, boolean do_walls, boolean do_station )
@@ -134,8 +80,8 @@ public class ExportGPX
     double minlon = Double.MAX_VALUE;
     double maxlon = Double.MIN_VALUE;
     for ( Cave3DStation st : stations ) {
-      double e = lng + (st.x - zero.x) * e_radius;
-      double n = lat + (st.y - zero.y) * s_radius;
+      double e = getE( st );
+      double n = getN( st );
       if ( e < minlon ) minlon = e;
       if ( e > maxlon ) maxlon = e;
       if ( n < minlat ) minlat = n;
@@ -175,9 +121,9 @@ public class ExportGPX
           // pw.format(Locale.US, "<Folder>\n");
           // pw.format(Locale.US, "  <name>stations</name>\n" );
           for ( Cave3DStation st : stations ) {
-            double e = lng + (st.x - zero.x) * e_radius;
-            double n = lat + (st.y - zero.y) * s_radius;
-            double z = h_geo + (st.z - zero.z);
+            double e = getE( st );
+            double n = getN( st );
+            double z = getZ( st );
             pw.format(Locale.US, "  <wpt lat=\"%.7f\" lon=\"%.7f\">\n", e, n );
             pw.format(Locale.US, "    <ele>%.0f</ele>\n", z );
             pw.format(Locale.US, "    <name>%s</name>\n", st.getFullName() );
@@ -201,14 +147,14 @@ public class ExportGPX
           } else if ( last != sf ) {
             pw.format(Locale.US, "    </trkseg>\n");
             pw.format(Locale.US, "    <trkseg>\n");
-            double ef = lng + (sf.x - zero.x) * e_radius;
-            double nf = lat + (sf.y - zero.y) * s_radius;
-            double zf = h_geo + (sf.z - zero.z);
+            double ef = getE( sf );
+            double nf = getN( sf );
+            double zf = getZ( sf );
             pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.1f</ele></trkpt>\n", ef, nf, zf ); 
           }
-          double et = lng + (st.x - zero.x) * e_radius;
-          double nt = lat + (st.y - zero.y) * s_radius;
-          double zt = h_geo + (st.z - zero.z);
+          double et = getE( st );
+          double nt = getN( st );
+          double zt = getZ( st );
           // pw.format(Locale.US, "    <name>%s-%s</name>\n", sf.getFullName(), st.getFullName() );
           pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.1f</ele></trkpt>\n", et, nt, zt ); 
           last = st;
@@ -222,13 +168,13 @@ public class ExportGPX
           for ( Cave3DShot sp : splays ) {
             Cave3DStation sf = sp.from_station;
             if ( sf == null ) continue;
-            Vector3D v = sp.toVector3D();
-            double ef = lng + (sf.x - zero.x) * e_radius;
-            double nf = lat + (sf.y - zero.y) * s_radius;
-            double zf = h_geo + (sf.z - zero.z);
-            double et = lng + (sf.x + v.x - zero.x) * e_radius;
-            double nt = lat + (sf.y + v.y - zero.y) * s_radius;
-            double zt = h_geo + (sf.z + v.z - zero.z);
+            Vector3D v = sf.sum( sp.toVector3D() );
+            double ef = getE( sf );
+            double nf = getN( sf );
+            double zf = getZ( sf );
+            double et = getE( v );
+            double nt = getN( v );
+            double zt = getZ( v );
             pw.format(Locale.US, "    <trkseg>\n");
             pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.1f</ele></trkpt>\n", ef, nf, zf ); 
             pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.1f</ele></trkpt>\n", et, nt, zt ); 

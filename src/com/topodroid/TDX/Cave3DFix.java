@@ -149,14 +149,16 @@ public class Cave3DFix extends Vector3D
    */
   public double getSNradius() 
   { 
-    return isWGS84()? Geodetic.meridianRadiusEllipsoid( latitude, a_ellip ) : 1.0;
+    return isWGS84()? Geodetic.meridianRadiusExact( latitude, a_ellip ) : 1.0;
+    // return isWGS84()? Geodetic.meridianRadiusEllipsoid( latitude, a_ellip ) : 1.0; // FIXME_ELLIPSOID
   }
 
   /** @return the west-east radius
    */
   public double getWEradius() 
   { 
-    return isWGS84()? Geodetic.parallelRadiusEllipsoid( latitude, a_ellip ) : 1.0;
+    return isWGS84()? Geodetic.parallelRadiusExact( latitude, a_ellip ) : 1.0;
+    // return isWGS84()? Geodetic.parallelRadiusEllipsoid( latitude, a_ellip ) : 1.0; // FIXME_ELLIPSOID
   }
 
   /** @return true if the 3D fix has WGS84 coords
@@ -169,7 +171,8 @@ public class Cave3DFix extends Vector3D
    */
   public double latToNorth( double lat, double h_ell ) 
   {
-    double s_radius = Geodetic.meridianRadiusEllipsoid( lat, h_ell ); // this is the radius * PI/180
+    double s_radius = Geodetic.meridianRadiusExact( lat, h_ell ); // this is the radius * PI/180
+    // double s_radius = Geodetic.meridianRadiusEllipsoid( lat, h_ell ); // FIXME_ELLIPSOID
     TDLog.v(" lat to N s_radius " + s_radius );
     return hasWGS84()? y + (lat - latitude) * s_radius : 0.0;
   }
@@ -195,11 +198,14 @@ public class Cave3DFix extends Vector3D
    */
   public double lngToEast( double lng, double lat, double h_ell, double north )
   {
-    double e_radius = Geodetic.parallelRadiusEllipsoid( lat, h_ell ); // this is the radius * PI/180
-    double e0_radius = Geodetic.parallelRadiusEllipsoid( latitude, a_ellip );
+    double e_radius = Geodetic.parallelRadiusExact( lat, h_ell ); // this is the radius * PI/180
+    // double e0_radius = Geodetic.parallelRadiusExact( latitude, a_ellip ); // FIXME_ELLIPSOID
+    // double e_radius = Geodetic.parallelRadiusEllipsoid( lat, h_ell );
+    // double e0_radius = Geodetic.parallelRadiusEllipsoid( latitude, a_ellip );
     double conv = Geodetic.meridianConvergenceFactor( latitude );
     TDLog.v(" lng to E radius = " + e_radius + " north " + north + " conv " + conv );
-    return hasWGS84()? x + (lng * e_radius - longitude * e0_radius) * (1 + north*conv) : 0.0;
+    return hasWGS84()? x + (lng - longitude) * e_radius * (1 + north*conv) : 0.0;
+    // return hasWGS84()? x + (lng * e_radius - longitude * e0_radius) * (1 + north*conv) : 0.0; // FIXME_ELLIPSOID
   }
 
 }

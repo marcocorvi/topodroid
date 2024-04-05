@@ -36,12 +36,9 @@ import java.io.PrintWriter;
 // import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class ExportKML
+public class ExportKML extends ExportGeo
 {
   ArrayList<CWFacet> mFacets;
-  double lat, lng, h_geo;
-  double s_radius, e_radius;
-  Cave3DStation zero;
   public ArrayList< Triangle3D > mTriangles;
 
   public ExportKML()
@@ -55,56 +52,6 @@ public class ExportKML
   public void add( CWPoint v1, CWPoint v2, CWPoint v3 )
   {
      mFacets.add( new CWFacet( v1, v2, v3 ) );
-  }
-
-  /** ???
-   * @param data        data parser
-   * @param decl        magnetic declination
-   * @param h_geo_factor ??? (unused)
-   */
-  private boolean getGeolocalizedData( TglParser data, double decl, double h_geo_factor )
-  {
-    // TDLog.v( "KML get geo-localized data. Declination " + decl );
-    List< Cave3DFix > fixes = data.getFixes();
-    if ( fixes.size() == 0 ) {
-      // TDLog.v( "KML no geo-localization");
-      return false;
-    }
-
-    Cave3DFix origin = null;
-    for ( Cave3DFix fix : fixes ) {
-      if ( ! fix.hasWGS84 ) continue;
-      // if ( fix.cs == null ) continue;
-      // if ( ! fix.cs.name.equals("long-lat") ) continue;
-      for ( Cave3DStation st : data.getStations() ) {
-        if ( st.getFullName().equals( fix.getFullName() ) ) {
-          origin = fix;
-          zero   = st;
-          break;
-        }
-      }
-      if ( origin != null ) break;
-    }
-    if ( origin == null ) {
-      // TDLog.v( "KML no geolocalized origin");
-      return false;
-    }
-
-    // origin has coordinates ( e, n, z ) these are assumed lat-long
-    // altitude is assumed wgs84
-    lat = origin.latitude;
-    lng = origin.longitude;
-    double h_ell = origin.a_ellip;
-    h_geo = origin.z; // KML uses Geoid altitude (unless altitudeMode is set)
-    // TDLog.v( "KML origin " + lat + " N " + lng + " E " + h_geo );
-
-    // cave3D uses ellipsoid radii 
-    s_radius = 1.0 / Geodetic.meridianRadiusExact( lat, h_ell );
-    e_radius = 1.0 / Geodetic.parallelRadiusExact( lat, h_ell );
-    // s_radius = 1.0 / Geodetic.meridianRadiusEllipsoid( lat, h_ell );
-    // e_radius = 1.0 / Geodetic.parallelRadiusEllipsoid( lat, h_ell );
-
-    return true;
   }
 
   public boolean exportASCII( BufferedWriter osw, TglParser data, boolean do_splays, boolean do_walls, boolean do_station )
@@ -220,9 +167,9 @@ public class ExportKML
           pw.format(Locale.US, "  <name>stations</name>\n" );
           // pw.format(Locale.US, "  <MultiGeometry>\n");
           for ( Cave3DStation st : stations ) {
-            double e = lng + (st.x - zero.x) * e_radius;
-            double n = lat + (st.y - zero.y) * s_radius;
-            double z = h_geo + (st.z - zero.z);
+            double e = getE( st );
+            double n = getN( st );
+            double z = getZ( st );
             pw.format(Locale.US, "<Placemark>\n");
             pw.format(Locale.US, "  <name>%s</name>\n", st.getFullName() );
             pw.format(Locale.US, "  <styleUrl>#station</styleUrl>\n");
@@ -248,12 +195,12 @@ public class ExportKML
           Cave3DStation sf = sh.from_station;
           Cave3DStation st = sh.to_station;
           if ( sf == null || st == null ) continue;
-          double ef = lng + (sf.x - zero.x) * e_radius;
-          double nf = lat + (sf.y - zero.y) * s_radius;
-          double zf = h_geo + (sf.z - zero.z);
-          double et = lng + (st.x - zero.x) * e_radius;
-          double nt = lat + (st.y - zero.y) * s_radius;
-          double zt = h_geo + (st.z - zero.z);
+          double ef = getE( sf );
+          double nf = getN( sf );
+          double zf = getZ( sf );
+          double et = getE( st );
+          double nt = getN( st );
+          double zt = getZ( st );
           pw.format(Locale.US, "    <LineString id=\"%s-%s\"> <coordinates>\n", sf.getFullName(), st.getFullName() );
           // pw.format(Locale.US, "      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
           // pw.format(Locale.US, "      <extrude>1</extrude>\n"); // extends the line down to the ground
@@ -273,13 +220,13 @@ public class ExportKML
           for ( Cave3DShot sp : splays ) {
             Cave3DStation sf = sp.from_station;
             if ( sf == null ) continue;
-            Vector3D v = sp.toVector3D();
-            double ef = lng + (sf.x - zero.x) * e_radius;
-            double nf = lat + (sf.y - zero.y) * s_radius;
-            double zf = h_geo + (sf.z - zero.z);
-            double et = lng + (sf.x + v.x - zero.x) * e_radius;
-            double nt = lat + (sf.y + v.y - zero.y) * s_radius;
-            double zt = h_geo + (sf.z + v.z - zero.z);
+            Vector3D v = sf.sum( sp.toVector3D() );
+            double ef = getE( sf );
+            double nf = getN( sf );
+            double zf = getZ( sf );
+            double et = getE( v );
+            double nt = getN( v );
+            double zt = getZ( v );
             pw.format(Locale.US, "    <LineString> <coordinates>\n" );
             // pw.format(Locale.US, "      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
             // pw.format(Locale.US, "      <extrude>1</extrude>\n"); // extends the line down to the ground
@@ -301,15 +248,15 @@ public class ExportKML
         pw.format(Locale.US, "  <altitudeMode>absolute</altitudeMode>\n");
         pw.format(Locale.US, "  <MultiGeometry>\n");
         for ( CWFacet facet : mFacets ) {
-          double e1 = lng + (facet.v1.x - zero.x) * e_radius;
-          double n1 = lat + (facet.v1.y - zero.y) * s_radius;
-          double z1 = h_geo + (facet.v1.z - zero.z);
-          double e2 = lng + (facet.v2.x - zero.x) * e_radius;
-          double n2 = lat + (facet.v2.y - zero.y) * s_radius;
-          double z2 = h_geo + (facet.v2.z - zero.z);
-          double e3 = lng + (facet.v3.x - zero.x) * e_radius;
-          double n3 = lat + (facet.v3.y - zero.y) * s_radius;
-          double z3 = h_geo + (facet.v3.z - zero.z);
+          double e1 = getE( facet.v1 );
+          double n1 = getN( facet.v1 );
+          double z1 = getZ( facet.v1 );
+          double e2 = getE( facet.v2 );
+          double n2 = getN( facet.v2 );
+          double z2 = getZ( facet.v2 );
+          double e3 = getE( facet.v3 );
+          double n3 = getN( facet.v3 );
+          double z3 = getZ( facet.v3 );
           pw.format(Locale.US, "    <Polygon>\n");
           pw.format(Locale.US, "      <outerBoundaryIs> <LinearRing> <coordinates>\n");
           pw.format(Locale.US, "             %f,%f,%.3f\n", e1,n1,z1);
@@ -321,16 +268,16 @@ public class ExportKML
         }
         if ( mTriangles != null ) {
           for ( Triangle3D t : mTriangles ) {
-            double e0 = lng + (t.vertex[t.size-1].x - zero.x) * e_radius;
-            double n0 = lat + (t.vertex[t.size-1].y - zero.y) * s_radius;
-            double z0 = h_geo + (t.vertex[t.size-1].z - zero.z);
+            double e0 = getE( t.vertex[t.size-1] );
+            double n0 = getN( t.vertex[t.size-1] );
+            double z0 = getZ( t.vertex[t.size-1] );
             pw.format(Locale.US, "    <Polygon>\n");
             pw.format(Locale.US, "      <outerBoundaryIs> <LinearRing> <coordinates>\n");
             pw.format(Locale.US, "             %f,%f,%.3f\n", e0,n0,z0); // last point
             for ( int k = 0; k < t.size; ++k ) {
-              double e1 = lng + (t.vertex[k].x - zero.x) * e_radius;
-              double n1 = lat + (t.vertex[k].y - zero.y) * s_radius;
-              double z1 = h_geo + (t.vertex[k].z - zero.z);
+              double e1 = getE( t.vertex[k] );
+              double n1 = getN( t.vertex[k] );
+              double z1 = getZ( t.vertex[k] );
               pw.format(Locale.US, "             %f,%f,%.3f\n", e1,n1,z1);
             }
             pw.format(Locale.US, "      </coordinates> </LinearRing> </outerBoundaryIs>\n");
@@ -346,15 +293,15 @@ public class ExportKML
         pw.format(Locale.US, "  <altitudeMode>absolute</altitudeMode>\n");
         pw.format(Locale.US, "  <MultiGeometry>\n");
         for ( CWFacet facet : mFacets ) {
-          double e1 = lng + (facet.v1.x - zero.x) * e_radius;
-          double n1 = lat + (facet.v1.y - zero.y) * s_radius;
-          double z1 = h_geo + (facet.v1.z - zero.z);
-          double e2 = lng + (facet.v2.x - zero.x) * e_radius;
-          double n2 = lat + (facet.v2.y - zero.y) * s_radius;
-          double z2 = h_geo + (facet.v2.z - zero.z);
-          double e3 = lng + (facet.v3.x - zero.x) * e_radius;
-          double n3 = lat + (facet.v3.y - zero.y) * s_radius;
-          double z3 = h_geo + (facet.v3.z - zero.z);
+          double e1 = getE( facet.v1 );
+          double n1 = getN( facet.v1 );
+          double z1 = getZ( facet.v1 );
+          double e2 = getE( facet.v2 );
+          double n2 = getN( facet.v2 );
+          double z2 = getZ( facet.v2 );
+          double e3 = getE( facet.v3 );
+          double n3 = getN( facet.v3 );
+          double z3 = getZ( facet.v3 );
           pw.format(Locale.US, "    <LineString> <coordinates>\n");
           pw.format(Locale.US, "             %f,%f,%.3f %f,%f,%.3f", e1,n1,z1, e2,n2,z2 );
           pw.format(Locale.US, "    </coordinates> </LineString>\n");
@@ -367,13 +314,13 @@ public class ExportKML
         }
         if ( mTriangles != null ) {
           for ( Triangle3D t : mTriangles ) {
-            double e0 = lng + (t.vertex[t.size-1].x - zero.x) * e_radius;
-            double n0 = lat + (t.vertex[t.size-1].y - zero.y) * s_radius;
-            double z0 = h_geo + (t.vertex[t.size-1].z - zero.z);
+            double e0 = getE( t.vertex[t.size-1] );
+            double n0 = getN( t.vertex[t.size-1] );
+            double z0 = getZ( t.vertex[t.size-1] );
             for ( int k = 0; k < t.size; ++k ) { // border (e0,n0,z0) set at last point
-              double e1 = lng + (t.vertex[k].x - zero.x) * e_radius;
-              double n1 = lat + (t.vertex[k].y - zero.y) * s_radius;
-              double z1 = h_geo + (t.vertex[k].z - zero.z);
+              double e1 = getE( t.vertex[k] );
+              double n1 = getN( t.vertex[k] );
+              double z1 = getZ( t.vertex[k] );
               pw.format(Locale.US, "    <LineString> <coordinates>\n");
               pw.format(Locale.US, "             %f,%f,%.3f %f,%f,%.3f", e0,n0,z0, e1,n1,z1 );
               pw.format(Locale.US, "    </coordinates> </LineString>\n");

@@ -291,14 +291,17 @@ public class ParserTh extends TglParser
         double a_lat = fx.mLatitude;
         double a_ell = fx.mEllipAlt; // FIXME Therion altitude are geodetic not ellipsoidic
         // KML radius is already pre-multiplied by PI/180
-        double s_radius = Geodetic.meridianRadiusEllipsoid( a_lat, a_ell );
-        double e_radius = Geodetic.parallelRadiusEllipsoid( a_lat, a_ell );
+        double s_radius = Geodetic.meridianRadiusExact( a_lat, a_ell );
+        double e_radius = Geodetic.parallelRadiusExact( a_lat, a_ell );
+        // double s_radius = Geodetic.meridianRadiusEllipsoid( a_lat, a_ell ); FIXME_ELLIPSOID
+        // double e_radius = Geodetic.parallelRadiusEllipsoid( a_lat, a_ell );
         TDLog.v("E radius " + e_radius + " S radius " + s_radius + " lon " + fx.mLongitude + " lat " + fx.mLatitude );
 
         // TODO use a_lng a_lat a_ell
 
         x0 = fx.mLongitude * e_radius;
-        y0 = Geodetic.equatorialDistance( fx.mLatitude ); // fx.mLatitude  * s_radius;
+        y0 = fx.mLatitude  * s_radius;
+        // y0 = Geodetic.equatorialDistance( fx.mLatitude ); // FIXME_ELLIPSOID
         z0 = fx.mGeoidAlt; // 20221201 use geoid altitude
         // TDLog.v( "Th fix Long-Lat " + x0 + " " + y0 + " " + z0 + " cs1 <" + ((fx.mCsName!=null)?fx.mCsName:"null") + ">" );
         if ( mOrigin == null ) {
