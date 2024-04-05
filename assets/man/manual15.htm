@@ -126,10 +126,14 @@ The model can be also serialized in a text file.<br><p>
 The GPX export of projects can have all the project surveys in a single track, or include a track
 for each survey. The behavior is determined by the GXP export setting "single-track".<br><p>
 
+<!--
 The model is exported in a projected metric reference system, centered at the first fixed point.
 The Y axis is the geographic or the magnetic North depending whether the magnetic declination
 is specified or not. If the model is georeferenced the center has an offset computed from the central meridian and
 the equator.<br><p>
+-->
+
+If the model is georeferenced the KML, GPX and shapefile exports are in WGS84 geographic coordinates.<br><p>
 
 <b>GRID/FRAME</b><br>
 The cartesian grid/frame lines are green (west-east), blue (south-north), and red (vertical).<br>
