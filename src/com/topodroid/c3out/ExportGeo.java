@@ -39,7 +39,7 @@ public class ExportGeo
 
   /** ???
    * @param data        data parser
-   * @param decl        magnetic declination
+   * @param decl        magnetic declination (unused)
    * @param h_geo_factor ??? (unused)
    */
   boolean getGeolocalizedData( TglParser data, double decl, double h_geo_factor )

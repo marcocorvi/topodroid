@@ -96,11 +96,11 @@ public class ExportSHP
     // this is dirname
     // String filepath = TDPath.getC3exportPath( name ); // export temporary folder for shp files - fullpath
 
-    if ( ret )             ret &= exportStations( filepath, files, data.getStations() );
-    if ( ret && b_legs )   ret &= exportShots( filepath, files, data.getShots(), "leg" );
-    if ( ret && b_splays ) ret &= exportShots( filepath, files, data.getSplays(), "splay" );
+    if ( ret )             ret &= exportStations( filepath, files, data.getStations(), data );
+    if ( ret && b_legs )   ret &= exportShots( filepath, files, data.getShots(), "leg", data );
+    if ( ret && b_splays ) ret &= exportShots( filepath, files, data.getSplays(), "splay", data );
     if ( ret && b_walls ) {
-      ret &= exportFacets( filepath, files, mFacets );
+      ret &= exportFacets( filepath, files, mFacets, data );
       if ( ret ) ret &= exportTriangles( filepath, files, mTriangles );
     }
 
@@ -150,13 +150,14 @@ public class ExportSHP
     return false;
   }
 
-  private boolean exportStations( String filepath, List<String> files, List< Cave3DStation> stations )
+  private boolean exportStations( String filepath, List<String> files, List< Cave3DStation> stations, TglParser parser )
   {
     if ( stations == null || stations.size() == 0 ) return true;
     // TDLog.v( "SHP Export stations " + stations.size() + " path " + filepath );
     boolean ret = false;
     try {
       ShpPointz shp = new ShpPointz( filepath + "/station", "station",  files );
+      shp.getGeolocalizedData( parser, 0, 0 );
       // shp.setYYMMDD( info.date );
       ret = shp.writeStations( stations );
     } catch ( IOException e ) {
@@ -165,13 +166,14 @@ public class ExportSHP
     return ret;
   }
     
-  private boolean exportShots( String filepath, List<String> files, List< Cave3DShot> shots, String name )
+  private boolean exportShots( String filepath, List<String> files, List< Cave3DShot> shots, String name, TglParser parser )
   {
     if ( shots == null || shots.size() == 0 ) return true;
     // TDLog.v( "SHP Export " + name + " shots " + shots.size() );
     boolean ret = false;
     try {
       ShpPolylinez shp = new ShpPolylinez( filepath + "/" + name, name, files );
+      shp.getGeolocalizedData( parser, 0, 0 );
       // shp.setYYMMDD( info.date );
       ret = shp.writeShots( shots, name );
     } catch ( IOException e ) {
@@ -180,13 +182,14 @@ public class ExportSHP
     return ret;
   }
 
-  private boolean exportFacets( String filepath, List<String> files, List< CWFacet > facets )
+  private boolean exportFacets( String filepath, List<String> files, List< CWFacet > facets, TglParser parser )
   {
     if ( facets == null || facets.size() == 0 ) return true;
     // TDLog.v( "SHP Export facets " + facets.size() );
     boolean ret = false;
     try {
       ShpPolygonz shp = new ShpPolygonz( filepath + "/facet", "facet", files );
+      shp.getGeolocalizedData( parser, 0, 0 );
       // shp.setYYMMDD( info.date );
       ret = shp.writeFacets( facets );
     } catch ( IOException e ) {
