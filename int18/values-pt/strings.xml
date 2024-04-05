@@ -716,7 +716,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="v_section">CORTE V</string -->
   <!-- UNUSED string name="h_section">CORTE H</string -->
   <!-- UNUSED string name="landscape">paisagem</string -->
-  <string name="display_view">Display</string>
+  <string name="display_view">Mostrar em</string>
   <string name="plan_view">planta baixa</string>
   <string name="profile_view">perfil</string>
   <string name="distox_err_ok">OK</string>
@@ -783,7 +783,7 @@ no campo abaixo e aperte o botão.
   <string name="button_dump">Baixar    </string>
   <!-- UNUSED string name="button_rename"    >Renomear  </string -->
   <string name="button_renumber">Renumerar </string>
-  <string name="button_bedding">Plano de acamamento</string>
+  <string name="button_bedding">Plano acamamento</string>
   <string name="button_replace">Substituir</string>
   <string name="button_reset">Reiniciar </string>
   <string name="button_left">ESQUERDA</string>
@@ -812,7 +812,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="button_zoomfit"   >Zoom fit  </string -->
   <!-- UNUSED string name="button_landscape" >Landscape </string -->
   <!-- UNUSED string name="button_portrait"  >Portrait  </string -->
-  <string name="button_splays">Medidas auxiliares</string>
+  <string name="button_splays">Tipo med aux</string>
   <string name="button_wait">Espere</string>
   <string name="button_write">Enviar</string>
   <string name="button_xsection">Corte</string>
