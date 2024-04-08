@@ -1266,7 +1266,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_cat_geek">ESPECIAIS</string>
   <string name="pref_cat_sketch">CROQUI 3D</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
-  <string name="pref_locale_title">Língua</string>
+  <string name="pref_locale_title">Idioma</string>
   <string name="pref_locale_summary">Idioma do aplicativo</string>
   <string name="pref_orientation_title">Orient tela</string>
   <string name="pref_orientation_summary">Orientação da tela do aplicativo</string>
