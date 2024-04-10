@@ -5750,7 +5750,7 @@ public class DrawingWindow extends ItemDrawer
    */
   public void insertPhoto( )
   {
-    mApp_mData.insertPhoto( TDInstance.sid, mMediaManager.getPhotoId(), -1, "", TDUtil.currentDate(), mMediaManager.getComment(), mMediaManager.getCamera() );
+    mApp_mData.insertPhoto( TDInstance.sid, mMediaManager.getPhotoId(), -1, "", TDUtil.currentDateTime(), mMediaManager.getComment(), mMediaManager.getCamera() );
     // FIXME NOTIFY ? no
     createPhotoPoint();
   }
