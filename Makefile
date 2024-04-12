@@ -22,7 +22,9 @@ VERSION_TARGET = $(VERSION)-$(TARGET_SDK)
 
 LANGS := cn fr hu it pt ru
 
-default:
+default: debug-signed
+
+debug:
 	$(ANT) debug
 
 release:
@@ -57,7 +59,6 @@ signed-31:
 debug-signed:
 	$(ANT) debug
 	./howto/sign-debug.sh
-	@mv $(APPNAME)-debug-keysigned.apk $(APPVERSION)-debug.apk
 
 perms:
 	adb shell appops set com.topodroid.TDX READ_EXTERNAL_STORAGE allow
@@ -71,15 +72,18 @@ bundle:
 	$(ANT) release
 	./howto/bundle.sh
 
-install:
+install-nosigned:
 	adb install -r bin/$(APPNAME)-debug.apk
+
+install:
+	adb install -r bin/$(APPNAME)-debug-keysigned.apk
 
 uninstall:
 	adb uninstall $(PACKAGE)
 
 reinstall:
 	adb uninstall $(PACKAGE)
-	adb install -r bin/$(APPNAME)-debug.apk
+	adb install -r bin/$(APPNAME)-debug-keysigned.apk
 
 rebuild:
 	$(ANT) clean

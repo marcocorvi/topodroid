@@ -174,7 +174,7 @@ public class ExportKML extends ExportGeo
             pw.format(Locale.US, "  <name>%s</name>\n", st.getFullName() );
             pw.format(Locale.US, "  <styleUrl>#station</styleUrl>\n");
             pw.format(Locale.US, "  <Point id=\"%s\">\n", st.getFullName() );
-            pw.format(Locale.US, "    <coordinates>%f,%f,%f</coordinates>\n", e, n, z );
+            pw.format(Locale.US, "    <coordinates>%.8f,%.8f,%.8f</coordinates>\n", e, n, z );
             pw.format(Locale.US, "  </Point>\n");
             pw.format(Locale.US, "</Placemark>\n");
           }
@@ -204,7 +204,7 @@ public class ExportKML extends ExportGeo
           pw.format(Locale.US, "    <LineString id=\"%s-%s\"> <coordinates>\n", sf.getFullName(), st.getFullName() );
           // pw.format(Locale.US, "      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
           // pw.format(Locale.US, "      <extrude>1</extrude>\n"); // extends the line down to the ground
-          pw.format(Locale.US, "        %f,%f,%f %f,%f,%f\n", ef, nf, zf, et, nt, zt );
+          pw.format(Locale.US, "        %.8f,%.8f,%.8f %.8f,%.8f,%.8f\n", ef, nf, zf, et, nt, zt );
           pw.format(Locale.US, "    </coordinates> </LineString>\n");
         }
         pw.format(Locale.US, "  </MultiGeometry>\n");
@@ -230,7 +230,7 @@ public class ExportKML extends ExportGeo
             pw.format(Locale.US, "    <LineString> <coordinates>\n" );
             // pw.format(Locale.US, "      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
             // pw.format(Locale.US, "      <extrude>1</extrude>\n"); // extends the line down to the ground
-            pw.format(Locale.US, "        %f,%f,%f %f,%f,%f\n", ef, nf, zf, et, nt, zt );
+            pw.format(Locale.US, "        %.8f,%.8f,%.8f %.8f,%.8f,%.8f\n", ef, nf, zf, et, nt, zt );
             pw.format(Locale.US, "    </coordinates> </LineString>\n");
           }
           pw.format(Locale.US, "  </MultiGeometry>\n");
@@ -259,10 +259,10 @@ public class ExportKML extends ExportGeo
           double z3 = getZ( facet.v3 );
           pw.format(Locale.US, "    <Polygon>\n");
           pw.format(Locale.US, "      <outerBoundaryIs> <LinearRing> <coordinates>\n");
-          pw.format(Locale.US, "             %f,%f,%.3f\n", e1,n1,z1);
-          pw.format(Locale.US, "             %f,%f,%.3f\n", e2,n2,z2);
-          pw.format(Locale.US, "             %f,%f,%.3f\n", e3,n3,z3);
-          pw.format(Locale.US, "             %f,%f,%.3f\n", e1,n1,z1); // repeat first point
+          pw.format(Locale.US, "             %.8f,%.8f,%.3f\n", e1,n1,z1);
+          pw.format(Locale.US, "             %.8f,%.8f,%.3f\n", e2,n2,z2);
+          pw.format(Locale.US, "             %.8f,%.8f,%.3f\n", e3,n3,z3);
+          pw.format(Locale.US, "             %.8f,%.8f,%.3f\n", e1,n1,z1); // repeat first point
           pw.format(Locale.US, "      </coordinates> </LinearRing> </outerBoundaryIs>\n");
           pw.format(Locale.US, "    </Polygon>\n");
         }
@@ -273,12 +273,12 @@ public class ExportKML extends ExportGeo
             double z0 = getZ( t.vertex[t.size-1] );
             pw.format(Locale.US, "    <Polygon>\n");
             pw.format(Locale.US, "      <outerBoundaryIs> <LinearRing> <coordinates>\n");
-            pw.format(Locale.US, "             %f,%f,%.3f\n", e0,n0,z0); // last point
+            pw.format(Locale.US, "             %.8f,%.8f,%.3f\n", e0,n0,z0); // last point
             for ( int k = 0; k < t.size; ++k ) {
               double e1 = getE( t.vertex[k] );
               double n1 = getN( t.vertex[k] );
               double z1 = getZ( t.vertex[k] );
-              pw.format(Locale.US, "             %f,%f,%.3f\n", e1,n1,z1);
+              pw.format(Locale.US, "             %.8f,%.8f,%.3f\n", e1,n1,z1);
             }
             pw.format(Locale.US, "      </coordinates> </LinearRing> </outerBoundaryIs>\n");
             pw.format(Locale.US, "    </Polygon>\n");
@@ -303,13 +303,13 @@ public class ExportKML extends ExportGeo
           double n3 = getN( facet.v3 );
           double z3 = getZ( facet.v3 );
           pw.format(Locale.US, "    <LineString> <coordinates>\n");
-          pw.format(Locale.US, "             %f,%f,%.3f %f,%f,%.3f", e1,n1,z1, e2,n2,z2 );
+          pw.format(Locale.US, "             %.8f,%.8f,%.3f %.8f,%.8f,%.3f", e1,n1,z1, e2,n2,z2 );
           pw.format(Locale.US, "    </coordinates> </LineString>\n");
           pw.format(Locale.US, "    <LineString> <coordinates>\n");
-          pw.format(Locale.US, "             %f,%f,%.3f %f,%f,%.3f", e2,n2,z2, e3,n3,z3 );
+          pw.format(Locale.US, "             %.8f,%.8f,%.3f %.8f,%.8f,%.3f", e2,n2,z2, e3,n3,z3 );
           pw.format(Locale.US, "    </coordinates> </LineString>\n");
           pw.format(Locale.US, "    <LineString> <coordinates>\n");
-          pw.format(Locale.US, "             %f,%f,%.3f %f,%f,%.3f", e3,n3,z3, e1,n1,z1 );
+          pw.format(Locale.US, "             %.8f,%.8f,%.3f %.8f,%.8f,%.3f", e3,n3,z3, e1,n1,z1 );
           pw.format(Locale.US, "    </coordinates> </LineString>\n");
         }
         if ( mTriangles != null ) {
@@ -322,7 +322,7 @@ public class ExportKML extends ExportGeo
               double n1 = getN( t.vertex[k] );
               double z1 = getZ( t.vertex[k] );
               pw.format(Locale.US, "    <LineString> <coordinates>\n");
-              pw.format(Locale.US, "             %f,%f,%.3f %f,%f,%.3f", e0,n0,z0, e1,n1,z1 );
+              pw.format(Locale.US, "             %.8f,%.8f,%.3f %.8f,%.8f,%.3f", e0,n0,z0, e1,n1,z1 );
               pw.format(Locale.US, "    </coordinates> </LineString>\n");
               e0 = e1;
               n0 = n1;

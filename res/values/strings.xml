@@ -1760,10 +1760,10 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_composite_actions_summary">Enable line/area long-tap actions</string>
   <string name="pref_with_continue_line_title">Line join</string>
   <string name="pref_with_continue_line_summary">Enable line join</string>
-  <string name="pref_plane_interpolation_title">Plane interpolation</string>
-  <string name="pref_plane_interpolation_summary">Enable plane interpolation action</string>
+  <string name="pref_plane_interpolation_title">Plane fitting</string>
+  <string name="pref_plane_interpolation_summary">Enable plane fitting of splays</string>
   <string name="pref_plot_split_title">Sketch split/merge</string>
-  <string name="pref_plot_split_summary">Enable sketch split and merge actions</string>
+  <string name="pref_plot_split_summary">Enable sketch split and merge</string>
   <string name="pref_stylus_size_title">Stylus only drawing</string>
   <string name="pref_stylus_size_summary">Stylus maximum size [pxl, 0: ignore]</string>
   <string name="pref_fixed_thickness_title">Survey line width</string>

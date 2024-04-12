@@ -119,7 +119,15 @@ public class TglParser
   boolean hasOrigin() { return mOrigin != null; }
   public boolean isWGS84() { return mOrigin != null && mOrigin.isWGS84(); }
   boolean hasWGS84() { return mOrigin != null && mOrigin.hasWGS84(); }
+
+  /** @return the S-N radius (meridian local radius) multiplied by PI/180
+   * @note used for the DEM Y-unit
+   */
   double getSNradius() { return ( mOrigin != null )? mOrigin.getSNradius() : 1.0f; }
+
+  /** @return the W-E radius (parallel local radius) multiplied by PI/180
+   * @note used for the DEM X-unit
+   */
   double getWEradius() { return ( mOrigin != null )? mOrigin.getWEradius() : 1.0f; }
 
   /** @return east coord from the longitude

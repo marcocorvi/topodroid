@@ -80,7 +80,8 @@ public class ExportGeo
 
     s_radius = 1.0 / Geodetic.meridianRadiusExact( lat, h_ell );
     e_radius = 1.0 / Geodetic.parallelRadiusExact( lat, h_ell );
-    // s_radius = 1.0 / Geodetic.meridianRadiusEllipsoid( lat, h_ell ); // FIXME_ELLIPSOID - cave3D uses ellipsoid radii 
+// FIXME_ELLIPSOID
+    // s_radius = 1.0 / Geodetic.meridianRadiusEllipsoid( lat, h_ell );
     // e_radius = 1.0 / Geodetic.parallelRadiusEllipsoid( lat, h_ell );
     hasGeo = true;
     return true;
