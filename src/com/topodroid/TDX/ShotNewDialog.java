@@ -621,7 +621,7 @@ class ShotNewDialog extends MyDialog
             mExif.writeExif( filepath );
             TopoDroidApp.mData.insertPhoto( TDInstance.sid, photo_id, blk.mId,
                                     "",
-                                    TDUtil.currentDate(),
+                                    TDUtil.currentDateTime(),
                                     "snap " + shot_from + " " + shot_to,
                                     PhotoInfo.CAMERA_TOPODROID ); // FIXME TITLE has to go
           } catch ( IOException e ) {

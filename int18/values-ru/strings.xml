@@ -747,7 +747,7 @@
     <string name="hide_leg">Повторные измерения</string>
     <string name="hide_ids">ID замеров</string>
     <string name="hide_splay">Боковые замеры</string>
-    <!-- TODO string name="slope_lside">Slope l-side</string -->
+    <string name="slope_lside">Уклон l-направление</string>
 
     <!-- UNUSED string name="plan">ПЛАН</string -->
     <string name="extended">РАЗРЕЗ-РАЗВЕРТКА</string>
@@ -1709,8 +1709,8 @@
   <string name="pref_iter_summary">Максимальное число итераций расчета калибровки</string>
   <string name="pref_label_size_title">Размер подписей</string>
   <string name="pref_label_size_summary">Размер шрифта в подписях</string>
-  <!-- TODO string name="pref_slope_lside_title">Slope line l-side</string -->
-  <!-- TODO string name="pref_slope_lside_summary">Slope lines default l-side</string -->
+  <string name="pref_slope_lside_title">Линия уклона l-направление</string>
+  <string name="pref_slope_lside_summary">l-направление линии уклона по умолчанию</string>
   <string name="pref_arrow_length_title">Бергштрих сечения</string>
   <string name="pref_arrow_length_message">Размер штриха направления линии сечений</string>
   <string name="pref_dot_radius_title">Радиус зеленых точек</string>

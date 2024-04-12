@@ -530,9 +530,9 @@ no campo abaixo e aperte o botão.
   <string name="item_delete">Apagar item %1$s?</string>
   <string name="splay_delete">Apagar medida auxiliar %1$s ?</string>
   <string name="plot_duplicate_name">Nome de croqui repetido</string>
-  <string name="plot_dangling">Croqui desconectado</string>
+  <string name="plot_dangling">Croqui solto</string>
   <!-- UNUSED string name="plot_name">Nome do croqui</string -->
-  <string name="plot_new">Novo</string>
+  <string name="plot_new">Novo croqui</string>
   <string name="plot_not_found">Croqui não encontrado</string>
   <!-- UNUSED string name="plot_null_name">Croqui sem nome</string -->
   <!-- UNUSED string name="plot_null_start">Croqui sem base inicial</string -->
@@ -589,7 +589,7 @@ no campo abaixo e aperte o botão.
   <string name="shot_note">comentário</string>
   <string name="shot_reverse">inverter</string>
   <string name="shot_to">Para</string>
-  <string name="station">Base</string>
+  <string name="station">Base referência</string>
   <string name="station_ask">Inserir base no croqui?</string>
   <string name="station_del">Remover base do croqui?</string>
   <string name="station_reset">Não continuar topo deste ponto</string>
@@ -1266,7 +1266,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_cat_geek">ESPECIAIS</string>
   <string name="pref_cat_sketch">CROQUI 3D</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
-  <string name="pref_locale_title">Língua</string>
+  <string name="pref_locale_title">Idioma</string>
   <string name="pref_locale_summary">Idioma do aplicativo</string>
   <string name="pref_orientation_title">Orient tela</string>
   <string name="pref_orientation_summary">Orientação da tela do aplicativo</string>
@@ -1281,7 +1281,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_no_cursor_title">Sem cursor</string>
   <string name="pref_no_cursor_summary">Desabilitar o cursor do teclado especial do TopoDroidX</string>
   <string name="pref_local_help_title">Manual traduzido</string>
-  <string name="pref_local_help_summary">Habilitar manual traduzido</string>
+  <string name="pref_local_help_summary">Tradução do manual [conexão de internet necessária]</string>
   <!-- UNUSED string name="pref_cosurvey_title">Topo colaborativa</string -->
   <!-- UNUSED string name="pref_cosurvey_summary">Habilitar topo colaborativa</string -->
   <string name="pref_import_datamode_title">Form dado importação</string>
