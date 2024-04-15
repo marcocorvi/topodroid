@@ -526,8 +526,8 @@ public class TDSetting
   public static float mReduceCosine = 0.7f;  // cosine of mReduceAngle
 
   // public static boolean mZoomControls = false;
-  public static int mZoomCtrl = 1;
-  public static boolean mSideDrag = false;
+  public static int mZoomCtrl = 0; // 0: gone, 1: temporary, 2: permanent
+  public static boolean mSideDrag = true;
   public static boolean mTripleToolbar = false;
 
   // ------------- UNIT SIZES

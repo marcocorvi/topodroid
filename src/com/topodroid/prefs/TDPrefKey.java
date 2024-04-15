@@ -237,7 +237,7 @@ public class TDPrefKey
     // FALSE,
     // TDString.FOUR, 
     TRUE, 
-    TDString.ONE,
+    TDString.ZERO,
     // TDString.THREE,
     "70",
     FALSE,
