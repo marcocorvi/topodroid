@@ -878,7 +878,9 @@ public class SketchWindow extends ItemDrawer
   public void onBackPressed () // askClose
   {
     // if ( dismissPopups() != DISMISS_NONE ) return;
-    if ( doubleBack ) {
+    if ( TDSetting.mSingleBack ) {
+      super.onBackPressed();
+    } else if ( doubleBack ) {
       if ( doubleBackToast != null ) doubleBackToast.cancel();
       doubleBackToast = null;
       // TDLog.v( "double back pressed ...");
@@ -1516,6 +1518,9 @@ public class SketchWindow extends ItemDrawer
     // TDLog.v( "Drawing activity onDestroy");
     TopoDroidApp.mDrawingWindow = null;
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on destroy done");
+    if ( doubleBackHandler != null ) {
+      doubleBackHandler.removeCallbacks( doubleBackRunnable );
+    }
   }
 
   /** lifecycle: implement RESUME

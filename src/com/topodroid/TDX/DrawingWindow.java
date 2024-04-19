@@ -1414,10 +1414,11 @@ public class DrawingWindow extends ItemDrawer
         doStart( false, -1, null );
         // FIXME_POP-INFO recomputeReferences( mNum, mZoom );
       } else {
-        if ( doubleBack ) {
+        if ( TDSetting.mSingleBack ) {
+          super.onBackPressed();
+        } else if ( doubleBack ) {
           if ( doubleBackToast != null ) doubleBackToast.cancel();
           doubleBackToast = null;
-          // TDLog.v( "double back pressed ...");
           super.onBackPressed();
         } else {
           doubleBack = true;

@@ -1665,34 +1665,36 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     if ( TDLevel.isDebugBuild( ) ) {
       TDLog.v("Length " + key.length + " " + tit.length + " " + dsc.length + " " + def.length );
       return new TDPref[ ] {
-        makeCbx( cat, key[0], tit[0], dsc[0],  T, def[0],  ctx, hlp ), // PALETTES
+        makeCbx( cat, key[0], tit[0], dsc[0],  A, def[0],  ctx, hlp ), // SINGLE_BACK
+        makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // PALETTES
         // makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // BACKUP CLEAR - CLEAR_BACKUPS
-        makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // PACKET LOGGER
-        makeCbx( cat, key[2], tit[2], dsc[2],  T, def[2],  ctx, hlp ), // TH2EDIT
-        makeFwd( cat, key[3], tit[3],          A,          ctx, hlp ), // GEEK_SHOT
-        makeFwd( cat, key[4], tit[4],          T,          ctx, hlp ), // GEEK_SPLAY
-        makeFwd( cat, key[5], tit[5],          A,          ctx, hlp ), // GEEK_PLOT
-        makeFwd( cat, key[6], tit[6],          A,          ctx, hlp ), // GEEK_LINE
+        makeCbx( cat, key[2], tit[2], dsc[2],  T, def[2],  ctx, hlp ), // PACKET LOGGER
+        makeCbx( cat, key[3], tit[3], dsc[3],  T, def[3],  ctx, hlp ), // TH2EDIT
+        makeFwd( cat, key[4], tit[4],          A,          ctx, hlp ), // GEEK_SHOT
+        makeFwd( cat, key[5], tit[5],          T,          ctx, hlp ), // GEEK_SPLAY
+        makeFwd( cat, key[6], tit[6],          A,          ctx, hlp ), // GEEK_PLOT
+        makeFwd( cat, key[7], tit[7],          A,          ctx, hlp ), // GEEK_LINE
         // makeFwd( cat, key[7], tit[7],          T,          ctx, hlp ), // PLOT_WALLS AUTOWALLS
-        makeFwd( cat, key[7], tit[7],          A,          ctx, hlp ), // GEEK_DEVICE
-        makeFwd( cat, key[8], tit[8],          T,          ctx, hlp ), // GEEK_IMPORT
-        makeFwd( cat, key[9], tit[9],          D,          ctx, hlp ), // SKETCH // FIXME_SKETCH_3D FIXME_FIXME
-        makeSpecial( cat, key[10], tit[10], dsc[10],  T, def[10],  ctx, hlp ), // WITH DEBUG
+        makeFwd( cat, key[8], tit[8],          A,          ctx, hlp ), // GEEK_DEVICE
+        makeFwd( cat, key[9], tit[9],          T,          ctx, hlp ), // GEEK_IMPORT
+        makeFwd( cat, key[10], tit[10],        D,          ctx, hlp ), // SKETCH // FIXME_SKETCH_3D FIXME_FIXME
+        makeSpecial( cat, key[11], tit[11], dsc[11],  T, def[11],  ctx, hlp ), // WITH DEBUG
       };
     } else {
       return new TDPref[ ] {
-        makeCbx( cat, key[0], tit[0], dsc[0],  T, def[0],  ctx, hlp ), // PALETTES
+        makeCbx( cat, key[0], tit[0], dsc[0],  A, def[0],  ctx, hlp ), // SINGLE_BACK
+        makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // PALETTES
         // makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // BACKUP CLEAR - CLEAR_BACKUPS
-        makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // PACKET LOGGER
-        makeCbx( cat, key[2], tit[2], dsc[2],  T, def[2],  ctx, hlp ), // TH2EDIT
-        makeFwd( cat, key[3], tit[3],          A,          ctx, hlp ), // GEEK_SHOT
-        makeFwd( cat, key[4], tit[4],          T,          ctx, hlp ), // GEEK_SPLAY
-        makeFwd( cat, key[5], tit[5],          A,          ctx, hlp ), // GEEK_PLOT
-        makeFwd( cat, key[6], tit[6],          A,          ctx, hlp ), // GEEK_LINE
+        makeCbx( cat, key[2], tit[2], dsc[2],  T, def[2],  ctx, hlp ), // PACKET LOGGER
+        makeCbx( cat, key[3], tit[3], dsc[3],  T, def[3],  ctx, hlp ), // TH2EDIT
+        makeFwd( cat, key[4], tit[4],          A,          ctx, hlp ), // GEEK_SHOT
+        makeFwd( cat, key[5], tit[5],          T,          ctx, hlp ), // GEEK_SPLAY
+        makeFwd( cat, key[6], tit[6],          A,          ctx, hlp ), // GEEK_PLOT
+        makeFwd( cat, key[7], tit[7],          A,          ctx, hlp ), // GEEK_LINE
         // makeFwd( cat, key[7], tit[7],          T,          ctx, hlp ), // PLOT_WALLS AUTOWALLS
-        makeFwd( cat, key[7], tit[7],          A,          ctx, hlp ), // GEEK_DEVICE
-        makeFwd( cat, key[8], tit[8],          T,          ctx, hlp ), // GEEK_IMPORT
-        makeFwd( cat, key[9], tit[9],          D,          ctx, hlp )  // SKETCH // FIXME_SKETCH_3D FIXME_FIXME
+        makeFwd( cat, key[8], tit[8],          A,          ctx, hlp ), // GEEK_DEVICE
+        makeFwd( cat, key[9], tit[9],          T,          ctx, hlp ), // GEEK_IMPORT
+        makeFwd( cat, key[10], tit[10],        D,          ctx, hlp ), // SKETCH // FIXME_SKETCH_3D FIXME_FIXME
       };
     }
   }

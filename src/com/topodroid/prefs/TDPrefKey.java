@@ -1906,6 +1906,7 @@ public class TDPrefKey
   // ------------------------------------------------------------------------
 
   public static String[] GEEK = {
+    "DISTOX_SINGLE_BACK",    
     "DISTOX_PALETTES",
     // "DISTOX_BACKUPS_CLEAR", // CLEAR_BACKUPS
     "DISTOX_PACKET_LOGGER",
@@ -1923,6 +1924,7 @@ public class TDPrefKey
   };
 
   static int[] GEEKtitle = {
+    R.string.pref_single_back_title,
     R.string.pref_palettes_title,
     // R.string.pref_backups_clear_title, // CLEAR_BACKUPS
     R.string.pref_packet_logger_title,
@@ -1940,6 +1942,7 @@ public class TDPrefKey
   };
 
   static int[] GEEKdesc = {
+    R.string.pref_single_back_summary,
     R.string.pref_palettes_summary,
     // R.string.pref_backups_clear_summary, // CLEAR_BACKUPS
     R.string.pref_packet_logger_summary,
@@ -1957,6 +1960,7 @@ public class TDPrefKey
   };
 
   public static String[] GEEKdef = {
+    FALSE,
     FALSE,
     // FALSE, // CLEAR_BACKUPS
     FALSE,

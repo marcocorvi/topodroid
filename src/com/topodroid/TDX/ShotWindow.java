@@ -1420,21 +1420,25 @@ public class ShotWindow extends Activity
       clearMultiSelect();
       return;
     }
-
-    if ( doubleBack ) {
-      if ( doubleBackToast != null ) doubleBackToast.cancel();
-      doubleBackToast = null;
+    if ( TDSetting.mSingleBack ) {
       DrawingSurface.clearManagersCache();
-
       new DataStopTask( mApp, this, mDataDownloader ).execute();
       // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
       TopoDroidApp.mShotWindow = null;
       super.onBackPressed();
-      return;
+    } else if ( doubleBack ) {
+      if ( doubleBackToast != null ) doubleBackToast.cancel();
+      doubleBackToast = null;
+      DrawingSurface.clearManagersCache();
+      new DataStopTask( mApp, this, mDataDownloader ).execute();
+      // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
+      TopoDroidApp.mShotWindow = null;
+      super.onBackPressed();
+    } else {
+      doubleBack = true;
+      doubleBackToast = TDToast.makeToast( R.string.double_back );
+      doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
     }
-    doubleBack = true;
-    doubleBackToast = TDToast.makeToast( R.string.double_back );
-    doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
   }
 
   // --------------------------------------------------------------

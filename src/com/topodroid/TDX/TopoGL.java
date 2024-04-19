@@ -350,6 +350,9 @@ public class TopoGL extends Activity
   {
     super.onDestroy();
     ((TopoDroidApp)getApplication()).mTopoGL = null;
+    if ( doubleBackHandler != null ) {
+      doubleBackHandler.removeCallbacks( doubleBackRunnable );
+    }
   }
 
   @Override
@@ -557,16 +560,18 @@ public class TopoGL extends Activity
       closeMenu();
       return;
     }
-    if ( doubleBack ) {
+    if ( TDSetting.mSingleBack ) {
+      super.onBackPressed();
+    } else if ( doubleBack ) {
       if ( doubleBackToast != null ) doubleBackToast.cancel();
       doubleBackToast = null;
       super.onBackPressed();
-      return;
+    } else {
+      doubleBack = true;
+      doubleBackToast = Toast.makeText( this, R.string.double_back, Toast.LENGTH_SHORT );
+      doubleBackToast.show();
+      doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
     }
-    doubleBack = true;
-    doubleBackToast = Toast.makeText( this, R.string.double_back, Toast.LENGTH_SHORT );
-    doubleBackToast.show();
-    doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
   }
 
   // ----------------------------------------------------------------

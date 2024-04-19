@@ -36,6 +36,9 @@ import java.lang.Math;
 
 public class CalibTransform
 {
+  // final static float G_SCALE = 667;
+  // final static float M_SCALE = 4876;
+
   protected TDMatrix aG = null;
   protected TDMatrix aM = null;
   protected TDVector bG = null;
@@ -45,6 +48,21 @@ public class CalibTransform
 
   protected float b0=0.0f, c0=0.0f; // bearing and clino
 
+  // /** @return the value of |G| in units of g (9.81 m/s^2)
+  //  * @param g     calibrated G vector
+  //  */
+  // float absG( TDVector g )
+  // {
+  //   return (G_SCALE / aG[0][0]) * g.length();
+  // }
+
+  // /** @return the value of |M| in units of uT
+  //  * @param m     calibrated M vector
+  //  */
+  // float absM( TDVector m )
+  // {
+  //   return (M_SCALE / aM[0][0]) * m.length();
+  // }
 
   /** construct a CalibTransform from the saved coefficients
    * @param coeff   coefficients array

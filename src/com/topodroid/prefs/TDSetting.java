@@ -554,6 +554,7 @@ public class TDSetting
   // public static final int PICKER_GRID_3 = 3;
   // public static int mPickerType = PICKER_LIST;
   // public static int mRecentNr     = 4;        // nr. most recent symbols
+  public static boolean mSingleBack = false; // with single back
   public static boolean mPalettes = false;   // extra tools palettes
   public static boolean mCompositeActions = false;
   public static boolean mWithLineJoin = false;  // with line join
@@ -945,11 +946,12 @@ public class TDSetting
 
     String[] keyGeek = TDPrefKey.GEEK;
     String[] defGeek = TDPrefKey.GEEKdef;
-    setPalettes(  prefs.getBoolean( keyGeek[0], bool(defGeek[0]) ) ); // DISTOX_PALETTES
+    mSingleBack = prefs.getBoolean( keyGeek[0], bool(defGeek[0]) ); // DISTOX_SINGLE_BACK
+    setPalettes(  prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ) ); // DISTOX_PALETTES
     // setBackupsClear( prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ) ); // DISTOX_BACKUPS_CLEAR CLEAR_BACKUPS
-    mPacketLog = prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ); // DISTOX_PACKET_LOGGER
-    mTh2Edit   = prefs.getBoolean( keyGeek[2], bool(defGeek[2]) ); // DISTOX_TH2_EDIT
-    mWithDebug = TDLevel.isDebugBuild() ? prefs.getBoolean( keyGeek[10], bool(defGeek[10]) ) : false; // DISTOX_WITH_DEBUG
+    mPacketLog = prefs.getBoolean( keyGeek[2], bool(defGeek[2]) ); // DISTOX_PACKET_LOGGER
+    mTh2Edit   = prefs.getBoolean( keyGeek[3], bool(defGeek[3]) ); // DISTOX_TH2_EDIT
+    mWithDebug = TDLevel.isDebugBuild() ? prefs.getBoolean( keyGeek[11], bool(defGeek[11]) ) : false; // DISTOX_WITH_DEBUG
 
     // String[] keyGPlot = TDPrefKey.GEEKPLOT;
     // String[] defGPlot = TDPrefKey.GEEKPLOTdef;
@@ -1811,17 +1813,19 @@ public class TDSetting
     // TDLog.v("update pref data: " + k );
     String[] key = TDPrefKey.GEEK;
     String[] def = TDPrefKey.GEEKdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_PALETTES
-      setPalettes( tryBooleanValue( hlp, k, v, bool(def[0]) ) );
+    if ( k.equals( key[0] ) ) {
+      mSingleBack = tryBooleanValue( hlp, k, v, bool(def[0]) ); // DISTOX_SINGLE_BACK
+    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_PALETTES
+      setPalettes( tryBooleanValue( hlp, k, v, bool(def[1]) ) );
     // } else if ( k.equals( key[1] ) ) { // CLEAR_BACKUPS
     //   setBackupsClear( tryBooleanValue( hlp, k, v, bool(def[1]) ) ); // DISTOX_BACKUPS_CLEAR
-    } else if ( k.equals( key[1] ) ) {
-      mPacketLog = tryBooleanValue( hlp, k, v, bool(def[1]) ); // DISTOX_PACKET_LOGGER
     } else if ( k.equals( key[2] ) ) {
-      mTh2Edit = tryBooleanValue( hlp, k, v, bool(def[2]) ); // DISTOX_TH2_EDIT
+      mPacketLog = tryBooleanValue( hlp, k, v, bool(def[2]) ); // DISTOX_PACKET_LOGGER
+    } else if ( k.equals( key[3] ) ) {
+      mTh2Edit = tryBooleanValue( hlp, k, v, bool(def[3]) ); // DISTOX_TH2_EDIT
       mMainFlag |= FLAG_BUTTON;
-    } else if ( TDLevel.isDebugBuild() && k.equals( key[10] ) ) {
-      mWithDebug =  tryBooleanValue( hlp, k, v, bool(def[10]) ); // DISTOX_WITH_DEBUG
+    } else if ( TDLevel.isDebugBuild() && k.equals( key[11] ) ) {
+      mWithDebug =  tryBooleanValue( hlp, k, v, bool(def[11]) ); // DISTOX_WITH_DEBUG
       TDLevel.setLevelWithDebug( mWithDebug );
     } else {
       TDLog.Error("missing GEEK key: " + k );
@@ -1829,6 +1833,7 @@ public class TDSetting
     // if ( ret != null ) hlp.update( k, ret );
     return ret;
   }
+
   private static String updatePrefGeekShot( TDPrefHelper hlp, String k, String v )
   {
     String ret = null;

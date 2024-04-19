@@ -1322,15 +1322,17 @@ public class MainWindow extends Activity
       closeMenu();
       return;
     }
-    if ( doubleBack ) {
+    if ( TDSetting.mSingleBack ) {
+      super.onBackPressed();
+    } else if ( doubleBack ) {
       if ( doubleBackToast != null ) doubleBackToast.cancel();
       doubleBackToast = null;
       super.onBackPressed();
-      return;
+    } else {
+      doubleBack = true;
+      doubleBackToast = TDToast.makeToast( R.string.double_back );
+      doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
     }
-    doubleBack = true;
-    doubleBackToast = TDToast.makeToast( R.string.double_back );
-    doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
   }
 
   public void doCloseApp()
