@@ -29,6 +29,7 @@ import android.content.Context;
 // import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattCharacteristic;
 
+import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
@@ -116,13 +117,13 @@ class SapProtocol extends TopoDroidProtocol
       addToWriteBuffer( ack );
 
       // DATA
-      ByteBuffer byte_buffer = ByteBuffer.wrap( buffer );
+      ByteBuffer byte_buffer = ByteBuffer.wrap( buffer ).order(ByteOrder.LITTLE_ENDIAN);
       FloatBuffer float_buffer = byte_buffer.asFloatBuffer();
       mBearing  = float_buffer.get(0); // decimal degrees
       mClino    = float_buffer.get(1);
       mRoll     = float_buffer.get(2);
       mDistance = float_buffer.get(3); // meters
-      TDLog.v( "SAP6 proto data: " + String.format(Locale.US, "%2d %2d %2d", mDistance, mBearing, mClino ) );
+      TDLog.v( "SAP6 proto data: " + String.format(Locale.US, "%2f %2f %2f", mDistance, mBearing, mClino ) );
       return DataType.PACKET_DATA;
     }
     return DataType.PACKET_NONE;
