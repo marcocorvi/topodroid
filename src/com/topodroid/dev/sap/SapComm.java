@@ -371,6 +371,7 @@ public class SapComm extends TopoDroidComm
     if ( mPendingOp != null ) {
       TDLog.v( "SAP comm: polled, exec pending " + mPendingOp.name() + ", ops " + mOps.size() );
       mPendingOp.execute();
+      mPendingOp = null; //Remove the pending op after we execute.  Otherwise, the ops just stack up in the queue
     } else {
       TDLog.v( "SAP comm: polled, no pending, ops " + mOps.size() );
     }
@@ -396,12 +397,16 @@ public class SapComm extends TopoDroidComm
    */
   public void changedChrt( BluetoothGattCharacteristic chrt )
   {
+    //TODO: Implement SAP 6 handling of data
     TDLog.v( "SAP comm: changedChrt" );
     String uuid_str = chrt.getUuid().toString();
-    if ( uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_STR ) ) {
+    if ( uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_STR ) || uuid_str.equals( SapConst.SAP6_CHRT_READ_UUID_STR )) {
       int res = mSapProto.handleReadNotify( chrt );
       if ( res == DataType.PACKET_DATA ) {
-        // mSapProto.handleWrite( mWriteChrt ); // ACKNOWLEDGMENT
+        if(uuid_str.equals( SapConst.SAP6_CHRT_READ_UUID_STR )) {
+          byte[] ackByte = mSapProto.handleWrite(); // ACKNOWLEDGMENT
+          mCallback.writeChrt( mServiceUUID, mWriteUUID, ackByte );
+        }
         handleRegularPacket( res, mLister, DataType.DATA_SHOT );
       }
       // readSapPacket();
