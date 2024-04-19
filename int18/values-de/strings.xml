@@ -1261,6 +1261,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_locale_summary">Auswahl der Sprache</string>
   <string name="pref_orientation_title">Bildschirmausrichtung</string>
   <string name="pref_orientation_summary">Bildschirmausrichtung fixieren oder automatisch</string>
+  <!-- TODO string name="pref_single_back_title">Single back</string -->
+  <!-- TODO string name="pref_single_back_summary">Close windows with single back</string -->
   <string name="pref_raw_data_title">Rohdaten anzeigen</string>
   <string name="pref_raw_data_summary">Rohdaten anzeigen</string>
   <string name="pref_calib_shot_download_title">Daten herunterladen</string>

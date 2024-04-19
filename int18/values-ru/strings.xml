@@ -1369,6 +1369,8 @@
   <string name="pref_locale_summary">Переключить язык интерфейса программы</string>
   <string name="pref_orientation_title">Ориентация экрана</string>
   <string name="pref_orientation_summary">Настройки ориентации экрана приложения</string>
+  <!-- TODO string name="pref_single_back_title">Single back</string -->
+  <!-- TODO string name="pref_single_back_summary">Close windows with single back</string -->
 
   <string name="pref_raw_data_title">Сырые данные</string>
   <string name="pref_raw_data_summary">Показывать сырые данные калибровочных измерений</string>

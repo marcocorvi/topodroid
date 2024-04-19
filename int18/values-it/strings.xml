@@ -1368,6 +1368,8 @@
   <string name="pref_locale_summary">Lingua</string>
   <string name="pref_orientation_title">Orientazione display</string>
   <string name="pref_orientation_summary">Orientazione display</string>
+  <!-- TODO string name="pref_single_back_title">Single back</string -->
+  <!-- TODO string name="pref_single_back_summary">Close windows with single back</string -->
 
   <string name="pref_raw_data_title">Dati grezzi</string>
   <string name="pref_raw_data_summary">Mostra dati grezzi</string>

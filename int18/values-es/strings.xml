@@ -1373,6 +1373,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_locale_summary">Seleccione idioma</string>
   <string name="pref_orientation_title">Orientación de Pantalla</string>
   <string name="pref_orientation_summary">Orientación Pantalla App </string>
+  <!-- TODO string name="pref_single_back_title">Single back</string -->
+  <!-- TODO string name="pref_single_back_summary">Close windows with single back</string -->
 
   <string name="pref_raw_data_title">Datos sin procesar</string>
   <string name="pref_raw_data_summary">Mostrar datos sin procesar</string>
