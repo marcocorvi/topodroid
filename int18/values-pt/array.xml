@@ -11,7 +11,7 @@
     <item name="mobile_topographer">Mobile Topographer</item>
     <item name="gpx_recorder">GPX Recorder</item>
     <item name="gps_position">GPS Position</item>
-    <item name="gps_test">GPSTest</item>
+    <item name="gps_test">GPS Test</item>
     <item name="gps_logger">GPS Logger</item>
   </string-array>
   <string-array name="orientation">

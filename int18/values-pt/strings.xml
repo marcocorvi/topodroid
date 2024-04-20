@@ -1145,7 +1145,7 @@ no campo abaixo e aperte o botão.
   <string name="title_fixed_mt">Geopontos [Mobile Topographer]</string>
   <string name="title_fixed_gpx_rec">Geopontos [GPX Recorder]</string>
   <string name="title_fixed_gps_pos">Geopontos [GPS Position]</string>
-  <string name="title_fixed_gps_test">Geopontos [GPSTest]</string>
+  <string name="title_fixed_gps_test">Geopontos [GPS Test]</string>
   <string name="title_fixed_gps_logger">Geopontos [GPS Logger]</string>
   <string name="title_fixed_gps_point">Geopontos [GPS Point]</string>
   <string name="title_fixed_edit">Editar coordenadas</string>
