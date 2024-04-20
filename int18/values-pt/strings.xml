@@ -1166,8 +1166,8 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="title_plot_reload">Recarregar croqui</string -->
   <string name="title_plot_scraps">Desenhos croqui</string>
   <string name="title_profile_flip">Espelhar perfil?</string>
-  <string name="title_projection">Azimute do perfil projetado %1$d</string>
-  <string name="title_projection_oblique">Azimute do perfil projetado %1$d / %2$d</string>
+  <string name="title_projection">Azimute perfil projetado %1$d</string>
+  <string name="title_projection_oblique">Azimute perfil projetado %1$d / %2$d</string>
   <string name="title_reduction_errors">Anomalias redução dados</string>
   <string name="title_refs">Mostrar</string>
   <string name="title_scraps">Desenhos</string>
