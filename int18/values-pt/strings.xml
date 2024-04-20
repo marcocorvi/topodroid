@@ -1141,7 +1141,7 @@ no campo abaixo e aperte o botão.
   <string name="title_edit_user_station">Alterar base do usuário </string>
   <string name="title_edit_station">Alterar base </string>
   <string name="title_erase">Apagar</string>
-  <string name="title_fixed">Pontos georeferenciados</string>
+  <string name="title_fixed">Geopontos</string>
   <string name="title_fixed_mt">Geopontos [Mobile Topographer]</string>
   <string name="title_fixed_gpx_rec">Geopontos [GPX Recorder]</string>
   <string name="title_fixed_gps_pos">Geopontos [GPS Position]</string>
