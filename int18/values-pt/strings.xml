@@ -1271,7 +1271,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_orientation_title">Orient tela</string>
   <string name="pref_orientation_summary">Orientação da tela do aplicativo</string>
   <string name="pref_single_back_title">"Voltar" único</string>
-  <string name="pref_single_back_summary">Feche a janela com um único clique no botão "Voltar" do dispositivo Android</string>
+  <string name="pref_single_back_summary">Fechar a janela com um único clique no botão "Voltar" do dispositivo Android</string>
   <string name="pref_raw_data_title">Dado bruto</string>
   <string name="pref_raw_data_summary">Exibir dados brutos</string>
   <string name="pref_calib_shot_download_title">Download dado remoto</string>
