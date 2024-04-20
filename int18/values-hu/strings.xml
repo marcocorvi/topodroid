@@ -1376,8 +1376,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_locale_summary">Nyelv</string>
   <string name="pref_orientation_title">Képernyő irány</string>
   <string name="pref_orientation_summary">App képernyő irány</string>
-  <!-- TODO string name="pref_single_back_title">Single back</string -->
-  <!-- TODO string name="pref_single_back_summary">Close windows with single back</string -->
+  <string name="pref_single_back_title">Egy vissza</string>
+  <string name="pref_single_back_summary">Ablak bezárása egy vissza gombbal</string>
 
   <string name="pref_raw_data_title">Nyers adat</string>
   <string name="pref_raw_data_summary">Mutassa a nyers adatot</string>
