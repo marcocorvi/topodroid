@@ -1315,7 +1315,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_palettes_title">Paleta</string>
   <string name="pref_palettes_summary">Habilitar paletas adicionais</string>
   <string name="pref_packet_logger_title">Log pacote</string>
-  <string name="pref_packet_logger_summary">Habilitar log de pacotes da DistoX</string>
+  <string name="pref_packet_logger_summary">Habilitar log de pacotes</string>
   <string name="pref_th2_edit_title">Editor croqui</string>
   <string name="pref_th2_edit_summary">Habilitar editor de croquis avulsos</string>
   <string name="pref_bezier_step_title">Espaçamento ponto</string>
