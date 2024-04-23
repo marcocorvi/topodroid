@@ -1692,7 +1692,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="pref_splay_as_dot_summary">Display splays as endpoints</string -->
   <!-- UNUSED string name="pref_splay_active_title">Splay at active station</string -->
   <!-- UNUSED string name="pref_splay_active_summary">Enable splay at the active station</string -->
-  <string name="pref_plot_shift_title">Escalar/deslocar croqui</string>
+  <string name="pref_plot_shift_title">Escalonar/deslocar croqui</string>
   <string name="pref_plot_shift_summary">Habilita o escalonamento e o deslocamento de croquis</string>
   <string name="pref_splay_alpha_title">Transp aux</string>
   <string name="pref_splay_alpha_summary">Transparência aplicada às medidas auxiliares [0: transparente, 100: opaca]</string>
