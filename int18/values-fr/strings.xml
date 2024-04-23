@@ -9,9 +9,6 @@
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->    
     
-    <string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string>
-    <!-- UNUSED string name="target_sdk" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nFinish ?</string -->
-    <!-- UNUSED string name="target_sdk_stale" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nThis version cannot access the old folder and must stop.\nSee http://marcocorvi.altervista.org/TopoDroidAndAndroid11.html.</string -->
 
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
@@ -27,19 +24,15 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 Avec Android-R TopoDroid doit utiliser son dossier sous "Android/data". Attention, ce dossier est généralement supprimé lorsque l'application est désinstallée. Pour confirmer, tapez \n"%1$s"\nin dans le champ ci-dessous et appuyez sur le bouton.
      </string>
      <!-- UNUSED string name="r_checkboxes">You must confirm the checkbox to continue.</string -->
-     <string name="r_i_understood" translatable="false">I UNDERSTOOD</string> <!-- FIXME FIXME FIXME -->
      <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
 	<string name="r_continue">CONTINUER</string>
 	<string name="r_quit">QUITTER</string>
   
-    <string name="app_name" translatable="false">TopoDroid-X</string>
     <string name="tdm_title" copyable="fr hu ru">TopoDroid Manager</string>
     <string name="tdm_config_project" copyable="fr ru">project.tdconfig</string>
     <string name="double_back">Cliquez à nouveau sur RETOUR pour quitter</string>
 
     <string name="new_survey_label">Nouveau relevé tpographique</string>
-    <string name="distox_label" translatable="false">DistoX</string>
-    <string name="cave3d_label" translatable="false">Cave3D</string>
 
     <!-- UNUSED string name="version_ask">Vous être en train de mettre à jour vers une nouvelle version de TopoDroid.\n Voulez-vous réinstaller les symboles de dessins ?</string -->
     <string name="symbols_ask">Installer les outils de dessin v.%1$s?\n ? (v. actuelle: v.%2$s) </string>
@@ -61,7 +54,6 @@ Avec Android-R TopoDroid doit utiliser son dossier sous "Android/data". Attentio
 Si vous rencontrez des problèmes avec la connexion du DistoX, essayez de choisir le mode non sécurisé.\n\n
 D\'autres paramètres concernent la présentation dans la fenêtre de croquis (taille des icônes, taille des étiquettes, largeur des lignes, etc.); vous devriez les adapter à vos besoins./n/n
     </string>
-    <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string>
 
     <string name="POINT">POINT</string>
     <string name="LINE">LIGNE</string>
@@ -174,7 +166,6 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="auto">automatique</string>
     <string name="linear">linéaire</string>
     <string name="non_linear">non-linéaire</string>
-    <!-- UNUSED string name="algo_minimum" translatable="false">minimum</string -->
     
     <!-- UNUSED string name="device_algo_failed">Échec de détermination automatique de l\'algorithme depuis l\'appareil\n. Utilisation de l\'algorithme linéraire</string -->
     <string name="device_address">Addresse %1$s</string>
@@ -444,7 +435,6 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="no_undelete_paste">Aucun élément à récupérer/coller</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Azimut %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Pente %5$.1f"</string>
-    <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: [%3$d] %4$.1f/%5$.1f (%6$.1f %7$.1f) %8$.1f %% (%9$.1f\u00b0)</string -->
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">A PROPOS</string>
@@ -682,7 +672,6 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="accuracy_medium">Précision faible</string>
     <!-- UNUSED string name="accuracy_high">Good accuracy</string -->
     <string name="accuracy_unreliable">Capteur douteux</string>
-    <string name="accuracy_amd" translatable="false">A %1$.1f %% M %2$.1f %% D %3$.1f &#xb0;</string>
 
     <string name="empty_clipboard">Presse-papier vide</string>
     <string name="cannot_rename">Impossible de renommer le relevé</string>
@@ -821,7 +810,6 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_eval_cal"  >Évaluation avec étalonnage</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
-	<string name="button_help" translatable="false">\?</string>
 	<!-- UNUSED INCLINED_LEG string name="button_leg">Proj</string -->
     <string name="button_manual"    >Manuel</string>
     <!-- UNUSED string name="button_measure"   >Mesure   </string -->
@@ -871,7 +859,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_split"     >Diviser</string>
     <string name="button_station"   >Centrer sur</string>
     <string name="button_store"     >Stocker</string>
-    <string name="button_swap"      >Échanger/string>
+    <string name="button_swap"      >Échanger</string>
     <string name="button_start"     >Démarrer</string>
     <string name="button_stop"      >Arrêter</string>>
     <string name="button_upload"    >Téléverser</string>
@@ -1267,7 +1255,6 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="title_scraps">Croquis du relevé</string>
     <string name="title_scraps_outline">Contours croquis</string>
     <!-- UNUSED string name="title_select">Sélectionner</string -->
-	<string name="select_size" translatable="false"> %1$d &lt;&gt;</string>
 
     <string name="title_settings_main">Paramètres principaux de TopoDroid</string>
     <string name="title_settings_export">Paramètres d\'importation / exportation de TopoDroid</string>
@@ -1361,19 +1348,6 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_cat_import_export">IMPORT - EXPORT</string>
     <string name="pref_cat_exportimport">IMPORT</string>
     <string name="pref_cat_exportenable">AUTORISER</string>
-    <string name="pref_cat_exportsvx" translatable="false">Survex</string>
-    <string name="pref_cat_exportth"  translatable="false">Therion</string>
-    <string name="pref_cat_exportdat" translatable="false">Compass</string>
-    <string name="pref_cat_exporttro" translatable="false">VisualTopo</string>
-    <string name="pref_cat_exportsrv" translatable="false">Walls</string>
-    <string name="pref_cat_exportsvg" translatable="false">SVG</string>
-    <string name="pref_cat_exportdxf" translatable="false">DXF</string>
-    <string name="pref_cat_exportshp" translatable="false">Shapefile</string>
-    <!-- UNUSED string name="pref_cat_exportpng" translatable="false">PNG</string NO_PNG -->
-    <string name="pref_cat_exportgpx" translatable="false">GPX</string>
-    <string name="pref_cat_exportkml" translatable="false">KML</string>
-    <string name="pref_cat_exportcsx" translatable="false">cSurvey</string>
-    <string name="pref_cat_exportcsv" translatable="false">CSV</string>
    
     <string name="pref_cat_calib">OPTIONS D\'ÉTALONNAGE</string>
     <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->      
@@ -1437,8 +1411,6 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_packet_logger_summary">Activer la journalisation des paquets de données</string>
     <string name="pref_th2_edit_title">Édition croquis</string>
     <string name="pref_th2_edit_summary">Active l\'édition du croquis</string>
-	<string name="pref_with_debug_title" translatable="false">Developer mode</string>
-    <string name="pref_with_debug_summary" translatable="false">Enable developer mode</string>
   
     <string name="pref_bezier_step_title">Espacement des points</string>
     <string name="pref_bezier_step_summary">Distance entre les points lors de l\'export ligne [m]</string>
@@ -1871,69 +1843,10 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
   <!-- UNUSED string name="pref_walls_xstep_title">Step</string -->
   <!-- UNUSED string name="pref_walls_xstep_summary">Separation of points along the wall [m]</string -->
 
-  <string name="pref_algo_min_alpha_title" translatable="false">Min-algo alpha</string>
-  <string name="pref_algo_min_alpha_summary" translatable="false">Min-algo adjustment factor (in [0,1])</string>
-  <string name="pref_algo_min_beta_title" translatable="false">Min-algo beta</string>
-  <string name="pref_algo_min_beta_summary" translatable="false">Min-algo M dip weight</string>
-  <string name="pref_algo_min_gamma_title" translatable="false">Min-algo gamma</string>
-  <string name="pref_algo_min_gamma_summary" translatable="false">Min-algo group G.x M.x weight</string>
-  <string name="pref_algo_min_delta_title" translatable="false">Min-algo delta</string>
-  <string name="pref_algo_min_delta_summary" translatable="false">Min-algo group G^M.x weight</string>
-
-  <string name="pref_auto_cal_beta_title" translatable="false">Auto-cal B</string>
-  <string name="pref_auto_cal_beta_summary" translatable="false">Auto-cal B (average)</string>
-  <string name="pref_auto_cal_eta_title" translatable="false">Auto-cal E</string>
-  <string name="pref_auto_cal_eta_summary" translatable="false">Auto-cal E (sum)</string>
-  <string name="pref_auto_cal_gamma_title" translatable="false">Auto-cal G</string>
-  <string name="pref_auto_cal_gamma_summary" translatable="false">Auto-cal G (matrix)</string>
-  <string name="pref_auto_cal_delta_title" translatable="false">Auto-cal D</string>
-  <string name="pref_auto_cal_delta_summary" translatable="false">Auto-cal D (ellipse)</string>
-
   <string name="pref_3d_sketch_title">modélisation 3D</string>
   <string name="pref_3d_sketch_summary">Activer la modélisation 3D (version de débogage uniquement)</string>
   <string name="pref_sketch_splay_buffer_title">Buffer habillage</string>
   <string name="pref_sketch_splay_buffer_summary">Mémoire tampon des visées d'habillage [m]</string>
-
-<!-- UNUSED NO_LOGS
-    <string name="pref_log_stream_summary" translatable="false">Log output stream</string>
-    <string name="pref_log_stream_title" translatable="false">Log stream</string>
-    <string name="pref_log_append" translatable="false">append logs</string>
-
-    <string name="pref_log_debug" translatable="false">Debug</string>
-    <string name="pref_log_err" translatable="false">Error</string>
-    <string name="pref_log_main" translatable="false">Main window</string>
-    <string name="pref_log_perm" translatable="false">Permissions</string>
-    <string name="pref_log_prefs" translatable="false">Preferences</string>
-    <string name="pref_log_input" translatable="false">User input</string>
-    <string name="pref_log_path" translatable="false">File paths</string>
-    <string name="pref_log_io" translatable="false">Sketch i/o</string>
-    <string name="pref_log_bt" translatable="false">Bluetooth</string>
-    <string name="pref_log_comm" translatable="false">BT communication</string>
-    <string name="pref_log_distox" translatable="false">BT device</string>
-    <string name="pref_log_proto" translatable="false">BT protocol</string>
-    <string name="pref_log_device" translatable="false">Device window</string>
-    <string name="pref_log_calib" translatable="false">Calibration</string>
-    <string name="pref_log_db" translatable="false">Database</string>
-    <string name="pref_log_units" translatable="false">Units</string>
-    <string name="pref_log_data" translatable="false">Shot data</string>
-    <string name="pref_log_shot" translatable="false">Shot management</string>
-    <string name="pref_log_name" translatable="false">Station naming</string>
-    <string name="pref_log_survey" translatable="false">Surveys</string>
-    <string name="pref_log_note" translatable="false">Survey notes</string>
-    <string name="pref_log_stats" translatable="false">Statistics</string>
-    <string name="pref_log_num" translatable="false">Data reduction</string>
-    <string name="pref_log_fixed" translatable="false">Fixed points</string>
-    <string name="pref_log_loc" translatable="false">Geolocation</string>
-    <string name="pref_log_photo" translatable="false">Photo</string>
-    <string name="pref_log_sensor" translatable="false">Sensors</string>
-    <string name="pref_log_plot" translatable="false">Sketches</string>
-    <string name="pref_log_bezier" translatable="false">Bezier curves</string>
-    <string name="pref_log_therion" translatable="false">Therion</string>
-    <string name="pref_log_csurvey" translatable="false">cSurvey</string>
-    <string name="pref_log_ptopo" translatable="false">PocketTopo</string>
-    <string name="pref_log_zip" translatable="false">ZIP</string>
-    <!- - UNUSED string name="pref_log_sync" translatable="false">Cosurveying</string - ->
--->
 
     <!-- UNUSED string name="line_bezier">Bezier</string -->
     <!-- UNUSED string name="line_fine">fine</string -->
@@ -1955,7 +1868,6 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="perm_microphone">\nMicrophone</string>
 
     <string name="welcome_db_version">Base de données v. %1$d, %2$d</string>
-    <string name="welcome_title" translatable="false">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nMerci d'avoir choisi TopoDroid.
 \n\nTopodroid est une application Open Source pour réaliser des relevés topographiques de cavités souterraines avec un DistoX, un BRIC et un SAP.
@@ -2070,12 +1982,6 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <!-- UNUSED string name="cmenu_sketch">CROQUIS</string -->
     <!-- UNUSED string name="cmenu_fractal">Fractal counts</string -->
     
-    <string name="fractal_title" translatable="false">Fractal result</string>
-    <string name="fractal_cnt_total" translatable="false">count</string>
-    <string name="fractal_cnt_six" translatable="false">6-neighbor</string>
-    <string name="fractal_cnt_twentysix" translatable="false">26-neighbor</string>
-    <string name="fractal_failed" translatable="false">Fractal compute failed</string>
-    <string name="fractal_dimension" translatable="false">Fractal dimension</string>
     <string name="illegal_value">Valeur incorrecte</string>
    
     <!-- UNUSED string name="info_title">MODEL INFO</string -->
@@ -2125,7 +2031,6 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <string name="proj_side">Coté</string>
     <!-- UNUSED string name="proj_near">Near</string -->
     <!-- UNUSED string name="proj_far">Far</string -->
-    <string name="focal" translatable="false">S</string>
 
     <!-- UNUSED string name="query" formatted="false">Surveys: %d Shots: %d Stations: %d\nLength: %d Depth: %d</string -->
     <!-- UNUSED string name="cno_files">No files</string -->
@@ -2146,7 +2051,6 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <string name="surface_gps">Trace GPS</string>
     <string name="surface_east">Est</string>
     <string name="surface_north">Nord</string>
-    <string name="dem_file" translatable="false">%1$s</string>
     <string name="dem_load">Chargement MNE</string>
     <string name="dem_loading">Chargement surface en cours &#8230; patience</string>
     <string name="dem_failed">Échec du chargement MNE</string>
@@ -2221,7 +2125,6 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <string name="walls_hull">Enveloppe Hull simple</string>
     <string name="walls_bubble">Bulle</string>
     <string name="walls_tube">Tube</string>
-    <!-- UNUSED string name="walls_delaunay" translatable="false">Delaunay</string -->
 
     <!-- UNUSED string name="powercrust_few_splays">Enveloppe Powercrust : très peu de visées latérales</string -->
     <!-- UNUSED string name="powercrust_failed">Enveloppe Powercrust en échec</string -->
@@ -2261,7 +2164,6 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <string name="warning_nogrant_camera">L\'autorisation caméra n\'a pas été accordée</string>
     <string name="no_permissions">L\'application ne peut pas fonctionner sans les autorisations requises.</string>
     
-    <string name="done_fractals" translatable="false">Dimension fractionnée calculée</string>
     <string name="done_convexhull">Parois enveloppe convexe terminées</string>
     <string name="fail_convexhull">Erreur parois enveloppe convexe</string>
     <string name="done_powercrust">Parois powercrust terminées</string>
@@ -2333,7 +2235,6 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
 
     <!-- UNUSED string name="cpref_convex_hull_title">Convex hull</string -->
     <!-- UNUSED string name="cpref_convex_hull_summary">Convex hull walls</string -->
-    <!-- UNUSED string name="cpref_delaunay_title" translatable="false">Delaunay</string -->
     <!-- UNUSED string name="cpref_delaunay_summary">Delaunay walls</string -->
     <!-- UNUSED string name="cpref_hull_title">Hull</string -->
     <!-- UNUSED string name="cpref_hull_summary">Hull walls</string -->
