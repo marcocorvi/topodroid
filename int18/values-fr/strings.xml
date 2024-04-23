@@ -21,7 +21,7 @@
 On Android-11+ storage access must be granted to TopoDroid.\nYou can do this with the PC program "adb".\nOn Android: enable developer settings and usb-debug.\nConnect Android to the PC with a USB cable.\nOn the PC type "adb shell appops set com.topodroid.TDX MANAGE_EXTERNAL_STORAGE allow".
      </string -->
      <string name="r_dialog">
-Avec Android-R TopoDroid doit utiliser son dossier sous "Android/data". Attention, ce dossier est généralement supprimé lorsque l'application est désinstallée. Pour confirmer, tapez \n"%1$s"\nin dans le champ ci-dessous et appuyez sur le bouton.
+Avec Android-R TopoDroid doit utiliser son dossier sous "Android/data". Attention, ce dossier est généralement supprimé lorsque l\'application est désinstallée. Pour confirmer, tapez \n"%1$s"\nin dans le champ ci-dessous et appuyez sur le bouton.
      </string>
      <!-- UNUSED string name="r_checkboxes">You must confirm the checkbox to continue.</string -->
      <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
@@ -92,7 +92,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="missing_station">Station manquante</string>
 	<string name="station_not_found">Station non trouvée</string>
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
-    <string name="station_not_found">Station introuvable</string>
+    <!-- TODO REPEATED string name="station_not_found">Station introuvable</string -->
     <string name="shot_not_found">Visée non trouvée</string>
     <string name="bad_sibling">Mauvaise visée parente</string>
     <string name="bad_station">Mauvaise station: %1$s</string>
@@ -199,7 +199,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="save_as">Enregistrer sous</string>
     <string name="nickname">Alias</string>
     <string name="unknown_device_type">Appareil inconnu type %1$d</string>
-    <string name="unsupported_device_type">Type d'appareil non reconnu</string>
+    <string name="unsupported_device_type">Type d\'appareil non reconnu</string>
 
     <string name="comment">Commentaires</string>
     <!-- UNUSED string name="flag">Point Drapeau</string -->
@@ -262,7 +262,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="bad_manifest_db_new">Échec: version trop récente de la base de données</string>
     <!-- UNUSED string name="bad_manifest_name">Échec : le nom du relevé diffère de celui du fichier zip</string -->
     <string name="bad_manifest_present">Échec : le relevé est déjà présent</string>
-    <string name="bad_manifest_db">Échec : impossible d'ouvrir la base de données</string>
+    <string name="bad_manifest_db">Échec : impossible d\'ouvrir la base de données</string>
     <string name="bad_manifest_sql">Échec: erreur SQL</string>
     <string name="bad_manifest_number">Échec: mauvais nombre</string>
     <string name="bad_manifest_manifest">Échec: mauvais fichier Manifest</string>
@@ -861,7 +861,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_store"     >Stocker</string>
     <string name="button_swap"      >Échanger</string>
     <string name="button_start"     >Démarrer</string>
-    <string name="button_stop"      >Arrêter</string>>
+    <string name="button_stop"      >Arrêter</string>
     <string name="button_upload"    >Téléverser</string>
     <string name="button_download"  >Télécharger</string>
     <string name="button_view">Vue</string>
@@ -1489,7 +1489,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_csv_eol_title">CSV fin de ligne</string>
     <string name="pref_csv_eol_summary">Séparateur d\'enregistrements CSV</string>
     <string name="pref_gpx_single_track_title">Trace GPX unique</string>
-    <string name="pref_gpx_single_track_summary">Exporter les relevés du projet sous forme d'une seule piste GPX</string>
+    <string name="pref_gpx_single_track_summary">Exporter les relevés du projet sous forme d\'une seule piste GPX</string>
     <string name="pref_zip_share_category_title">Catégorie Zip-share</string>
     <string name="pref_zip_share_category_summary">Ajouter une catégorie à une demande de partage de fichier zip</string>
 
@@ -1541,7 +1541,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_bric_zero_length_title">BRIC visée nulle</string>
     <string name="pref_bric_zero_length_summary">BRIC enregistrer la visée de longueur nulle</string>
 	<string name="pref_bric_index_is_id_title">Index BRIC pour ID</string>
-    <string name="pref_bric_index_is_id_summary">Utiliser l'index du BRIC comme identifiant des visées</string>
+    <string name="pref_bric_index_is_id_summary">Utiliser l\'index du BRIC comme identifiant des visées</string>
     <string name="pref_sap5_bit16_bug_title">Bug SAP5 bit-16 </string>
     <string name="pref_sap5_bit16_bug_summary">Contournement SAP5 bit-16 bug X</string>
 
@@ -1846,7 +1846,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
   <string name="pref_3d_sketch_title">modélisation 3D</string>
   <string name="pref_3d_sketch_summary">Activer la modélisation 3D (version de débogage uniquement)</string>
   <string name="pref_sketch_splay_buffer_title">Buffer habillage</string>
-  <string name="pref_sketch_splay_buffer_summary">Mémoire tampon des visées d'habillage [m]</string>
+  <string name="pref_sketch_splay_buffer_summary">Mémoire tampon des visées d\'habillage [m]</string>
 
     <!-- UNUSED string name="line_bezier">Bezier</string -->
     <!-- UNUSED string name="line_fine">fine</string -->
@@ -1869,11 +1869,11 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 
     <string name="welcome_db_version">Base de données v. %1$d, %2$d</string>
     <string name="welcome_text">
-\nMerci d'avoir choisi TopoDroid.
+\nMerci d\'avoir choisi TopoDroid.
 \n\nTopodroid est une application Open Source pour réaliser des relevés topographiques de cavités souterraines avec un DistoX, un BRIC et un SAP.
 \n\nAucune garantie : en utilisant ce logiciel vous acceptez que l\'auteur ne puisse être responsable d\'une quelconque perte de données, dommages ou quoi que ce soit d\'autre.
 \n\nAide disponible via la touche MENU -> AIDE.
-\nPages de manuel : Icône de livre dans la boîte de dialogue d'aide
+\nPages de manuel : Icône de livre dans la boîte de dialogue d\'aide
 \nDocumentation : http://sites.google.com/site/speleoapps
 \nPolitique de confidentialité : http://marcocorvi.altervista.org/policy/TopoDroid-PrivacyPolicy.txt
 \nCommentaires, rapports de bugs, demandes de fonctionnalités à : marco.corvi@gmail.com
@@ -2121,7 +2121,7 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
 
     <string name="walls_title">Parois</string>
     <string name="walls_convexhull">Enveloppe Convexe</string>
-    <string name="walls_powercrust">Enveloppe Powercrust</string>
+    <!-- UNUSED string name="walls_powercrust">Enveloppe Powercrust</string -->
     <string name="walls_hull">Enveloppe Hull simple</string>
     <string name="walls_bubble">Bulle</string>
     <string name="walls_tube">Tube</string>
