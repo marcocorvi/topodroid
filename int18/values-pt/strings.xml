@@ -1296,7 +1296,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_extra_buttons_summary">Nível de recursos habilitados</string>
   <string name="pref_size_buttons_title">Tam botões</string>
   <string name="pref_size_buttons_summary">Tamanho dos botões da barra de ações</string>
-  <string name="pref_with_sensors_title">Sensor</string>
+  <string name="pref_with_sensors_title">Sensores</string>
   <string name="pref_with_sensors_summary">Habilitar sensores do Android</string>
   <!-- UNUSED string name="pref_tdmanager_title">TdManager</string -->
   <!-- UNUSED string name="pref_tdmanager_summary">Use TdManager</string -->
