@@ -85,17 +85,29 @@ public class TDInstance
    */
   public static boolean isDeviceDistoX() { return deviceA != null && deviceA.isDistoX(); }
 
-  /** @return true if the primary device is set and is of type SAP5
+  /** @return true if the primary device is set and is of type SAP (SAP5 or SAP6)
    */
   public static boolean isDeviceSap()    { return deviceA != null && deviceA.isSap(); } // FIXME_SAP6
 
+  /** @return true if the primary device is set and is of type SAP5
+   */
   public static boolean isDeviceSap5()   { return deviceA != null && deviceA.isSap5(); }
 
+  /** @return true if the primary device is set and is of type SAP6
+   */
   public static boolean isDeviceSap6()   { return deviceA != null && deviceA.isSap6(); }
+
+  /** @return true if the primary device is set and is of type BRIC (BRIC4 or BRIC5)
+   */
+  public static boolean isDeviceBric()   { return deviceA != null && deviceA.isBric(); }
 
   /** @return true if the primary device is set and is of type BRIC4
    */
-  public static boolean isDeviceBric()   { return deviceA != null && deviceA.isBric(); }
+  public static boolean isDeviceBric4()   { return deviceA != null && deviceA.isBric4(); }
+
+  /** @return true if the primary device is set and is of type BRIC5
+   */
+  public static boolean isDeviceBric5()   { return deviceA != null && deviceA.isBric5(); }
 
   /** @return true if the primary device is set and is of type DistoXBLE
    * SIWEI_TIAN

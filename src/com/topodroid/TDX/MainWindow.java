@@ -136,7 +136,9 @@ public class MainWindow extends Activity
   private BitmapDrawable  mButtonDistoX2;
   private BitmapDrawable  mButtonDistoX3;
   private BitmapDrawable  mButtonSap5;
+  private BitmapDrawable  mButtonSap6;
   private BitmapDrawable  mButtonBric4;
+  private BitmapDrawable  mButtonBric5;
 
   private final  int BTN_DEVICE = 0;
 
@@ -985,7 +987,9 @@ public class MainWindow extends Activity
     mButtonDistoX2 = MyButton.getButtonBackground( this, res, R.drawable.iz_disto2b );
     mButtonDistoX3 = MyButton.getButtonBackground( this, res, R.drawable.iz_disto3b );
     mButtonSap5    = MyButton.getButtonBackground( this, res, R.drawable.iz_sap5 );
+    mButtonSap6    = MyButton.getButtonBackground( this, res, R.drawable.iz_sap6 );
     mButtonBric4   = MyButton.getButtonBackground( this, res, R.drawable.iz_bric4 );
+    mButtonBric5   = MyButton.getButtonBackground( this, res, R.drawable.iz_bric5 );
 
     // mButton1[2].setOnLongClickListener( this ); // IMPORT ZIP
     setButtonDevice();
@@ -1024,10 +1028,14 @@ public class MainWindow extends Activity
       TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonDistoX3 );
     } else if ( TDInstance.isDeviceA3() ) {
       TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonDistoX1 );
-    } else if ( TDInstance.isDeviceSap() ) {
-      TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonSap5 );
-    } else if ( TDInstance.isDeviceBric() ) {
+    } else if ( TDInstance.isDeviceBric4() ) {
       TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonBric4 );
+    } else if ( TDInstance.isDeviceBric5() ) {
+      TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonBric5 );
+    } else if ( TDInstance.isDeviceSap5() ) {
+      TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonSap5 );
+    } else if ( TDInstance.isDeviceSap6() ) {
+      TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonSap6 );
     } else {
       TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonDistoX0 );
     }
