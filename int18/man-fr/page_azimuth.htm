@@ -3,15 +3,17 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
 </HEAD>
 <body>
+
 <h4>RÉFÉRENCE D'EXTENSION DE DIRECTION</h4>
 
-<p>Cette boîte de dialogue s'ouvre en appuyant sur le bouton <em>Azimut</em> <img src="btn_azimut.png"> 
-  soit dans la fenêtre de <u>données du relevé topographique</u> soit dans<i> 
-  </i><u>la fenêtre de croquis</u>.</p>
+<p>Cette boîte de dialogue s'ouvre en appuyant sur le<u></u> bouton azimut <img src="btn_azimut.png"> 
+  soit dans la <a href="manual06.htm"><em>Fenêtre des visées du relevé topo</em></a> 
+  soit dans<i> la <em><a href="manual09.htm">Fen&ecirc;tre d</a></em><a href="manual09.htm"><em>e 
+  croquis</em></a> (esquisse)</i>.</p>
 <p>La référence d'extension est utilisée pour affecter un profil de &quot;direction 
-  étendue&quot; à la ligne de cheminement médiane afin de tracer correctement 
-  la coupe développée. </p>
-<p> Le bouton <em>Azimut</em> affiche soit une longue flèche à l'intérieur d'un 
+  étendue&quot; à la ligne de cheminement médiane lors de la conception d’une 
+  coupe développée. . </p>
+<p> Le bouton <em>azimut</em> affiche soit une longue flèche à l'intérieur d'un 
   cercle, orientée dans la direction actuelle, soit une petite flèche dirigée 
   vers la gauche ou la droite (pour une &quot;extension&quot; fixe).<br>
   Lorsque le profil de &quot;direction&quot; est calculé en utilisant la &quot;référence 
@@ -30,42 +32,45 @@
   <li><b>Boussole</b> :<b> </b> définir la valeur en utilisant les capteurs magnétiques 
     Android </li>
   <li><b>GAUCHE</b> : forcer l'&quot;extension" à gauche (-1) </li>
-  <li><b>OK</b>&#160;: utiliser l'azimut pour l'&quot;extension&quot; </li>
   <li><b>DROITE</b> : forcer l'"extension" à droite (&#160;+1) </li>
+  <li><b>OK</b>&#160;: utiliser l'azimut pour l'&quot;extension&quot; </li>
 </ul>
 <p>&nbsp;</p>
-<p><strong>Mode de référence d'extension du croquis</strong><br>
-  L'azimut de référence étendu peut également être modifié dans la vue en plan 
-  d'un croquis [E]. Une longue pression sur le bouton Azimut fait passer la fenêtre 
-  en mode &quot;référence extension&quot;. Dans ce mode, un glissement du doigt 
-  sur l'écran fait tourner l'azimut de référence (le fond n'est pas déplacé). 
-  Pour sortir de ce mode, il faut retirer le doigt de l'écran. <br>
+<p><strong>Mode d'extension de la référence sur un croquis</strong></p>
+<p> L'azimut de référence étendue peut également être modifié dans la vue en plan 
+  d'un croquis [E]. Un appui long sur le bouton Azimut fait passer la fenêtre 
+  en mode &quot;Référence d'Extension&quot;. Dans ce mode, un glissement de doigt 
+  sur l'écran fait pivoter l'azimut de référence (le fond n'est pas déplacé). 
+  Pour sortir de ce mode, levez le doigt de l'écran.<br>
 </p>
-<p> <b>Direction (d'extension) des visées de cheminement</b><br>
-  Lorsqu'une nouvelle visée est téléchargée TopoDroid définit automatiquement 
-  sa "direction". Il en est de même pour les visées saisies manuellement, sans 
-  spécifier de &quot;direction&quot; dans la boîte de dialogue des visées. Par 
-  défaut, la "direction" est soit &quot;DROITE&quot;, soit &quot;GAUCHE&quot;, 
+<p> <b>Direction d'extension des visées de cheminement</b>
+<p> Lorsqu'une nouvelle visée est téléchargée TopoDroid définit automatiquement 
+  sa &quot;direction&quot;. Il en est de même pour les visées saisies manuellement, 
+  sans spécifier de &quot;direction&quot; dans la boîte de dialogue des visées. 
+  Par défaut, la &quot;direction&quot; est soit &quot;DROITE&quot;, soit &quot;GAUCHE&quot;, 
   soit &quot;VERT&quot; (pour verticale), selon l'angle que la visée fait avec 
-  un azimut de référence. <br>
-  Si l'angle est inférieur à 90° moins le <em>seuil vertical d'extension </em>, 
-  la visée de cheminement est étendue à DROITE. S'il est supérieur à 90° plus 
-  le <em>seuil vertical d'extension</em>, la visée de cheminement est étendue 
-  à GAUCHE. Sinon, elle est étendue VERT(icalement).
-<p align="justify"> La boîte de dialogue &quot;<em>Référence d'extension</em>&quot; 
+  un azimut de référence. La boîte de dialogue &quot;Référence d'extension&quot; 
   permet de modifier l'azimut de référence, en le tournant dans le sens horaire 
   ou antihoraire. L'azimut de référence peut également être réglé en utilisant 
-  les capteurs de la boussole Android. Un avertissement est affiché si la précision 
-  du capteur est faible ou s'il y a une défaillance du capteur. 
-<p> Il est également possible de fixer l'"extension" pour les prochaines visées 
-  soit à gauche soit à droite, en sélectionnant le bouton approprié dans la boîte 
-  de dialogue. <br>
-
-<p><b>Direction (d'extension) des visées latérales d'habillage </b><br>
-  La &quot;direction&quot; des visées latérales à une station donnée est déterminée 
+  les capteurs de la boussole Android.
+<p>Il est également possible de fixer l'&quot;extension&quot; pour les prochaines 
+  visées soit à gauche soit à droite, en sélectionnant le bouton approprié dans 
+  la boîte de dialogue. </p>
+<p>&nbsp;</p>
+<p><b>Direction d'extension des visées latérales d'habillage </b>
+<p> La &quot;direction&quot; des visées latérales à une station donnée est déterminée 
   en fonction de celle du cheminement et de l'azimut entre l'habillage et le cheminement. 
-  La visée latérale d'habillage<b> </b>est étendue comme si ellel était projetée 
-  sur le plus proche des plans verticaux passant par les visées de cheminement.
+  Le cercle d'azimuts est divisé en quatre régions : deux &quot;cônes&quot; un 
+  autour des directions à 90 degrés avec le cheminement et les secteurs restants, 
+  un autour de la direction de cheminement, l'autre autour de la direction inverse. 
+  Le paramètre de seuil vertical des visées latérales définit la largeur de ces 
+  deux cônes. 
+<p>Lorsque l'angle entre la visée latérale et le cheminement est plus proche de 
+  cette valeur que de 90 degrés, la visée obtient une &quot;extension verticale&quot;. 
+  Dans le cas contraire, elle a soit la même extension que le cheminement soit 
+  l'inverse, en fonction du secteur dans lequel s'inscrit l'angle.<br>
+</p>
+<p><br>
 <p>
 
 </body></html>

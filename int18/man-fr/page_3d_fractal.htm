@@ -1,37 +1,40 @@
 <html><body>
-<h4>3D VIEWER - Fractal Analysis</h4>
+<h4><strong>VISIONNEUSE 3D - ANALYSE FRACTALE</strong></h4>
 
-The fractal analysis considers the 3D space divided into cubes and counts the number of cubes
-that cover the cave (midline and splays).
-For a 3-dimensional object, when the cube side halves, i.e. is divided by 2,
-the number of cubes that cover the cave increase by 8 = 2<sup>3</sup>.
-The fractal exponent at a given side is the power of 2 (ie, 3 in the example).<br><p>
-
-The fractal analysis finds this exponent for varying length of the cube side,
-and displays the result as a graph.<br><p>
-
-The <i>Fractal</i> dialog is opened from the <i>Fractal</i> menu of the <i>3D viewer</i> window.<br>
-It displays the result of the last fractal computation or starts a new fractal computation.<br><p>
-
-The result is a graph plotting the variation of the computed dimension as the size of the unit
-cubic cell varies.<br><p>
-
-The computation depends on
+<p> L'analyse fractale consid&egrave;re l'espace 3D divis&eacute; en cubes et 
+  compte le nombre de cubes qui couvrent la cavit&eacute; (ligne m&eacute;diane 
+  et habillage). Pour un objet tridimensionnel, lorsque le c&ocirc;t&eacute; du 
+  cube est coup&eacute; en deux, c'est-&agrave;-dire divis&eacute; par 2, le nombre 
+  de cubes qui couvrent la cavit&eacute; augmente de 8 = 2<sup>3</sup>. L'exposant 
+  fractal d'un c&ocirc;t&eacute; donn&eacute; est la puissance de 2 (ici 3 par 
+  exemple).</p>
+<p> L'analyse fractale trouve cet exposant pour une longueur variable du c&ocirc;t&eacute; 
+  du cube et affiche le r&eacute;sultat sous forme de graphique. </p>
+<p>La bo&icirc;te de dialogue Fractal s'ouvre &agrave; partir du menu Fractal 
+  de la fen&ecirc;tre de la visionneuse 3D.<br>
+  Elle affiche le r&eacute;sultat du dernier calcul fractal ou lance un nouveau 
+  calcul fractal. </p>
+<p>Le r&eacute;sultat est un graphique repr&eacute;sentant la variation de la 
+  dimension calcul&eacute;e lorsque la taille de la cellule cubique unitaire varie. 
+  <br>
+  Le calcul d&eacute;pend :</p>
 <ul>
-<li><i>counting</i> mode</li>
-<li>whether to consider also the <i>splays</i> or only the legs</li>
-<li>the starting <i>cell size</i><li>
-</ul><br> 
-
-<b>Counting</b><br>
-
-There are three counting modes:
+  <li> du mode de d&eacute;compte </li>
+  <li>que l'on utilise l'habillage ou seulement le cheminement</li>
+  <li>de la taille de la cellule de d&eacute;part</li>
+</ul>
+<p><strong>D&eacute;compte</strong><br>
+  Il existe trois modes de d&eacute;compte : </p>
 <ul>
-<li>counting the number of filled boxes</li>
-<li>counting the number of filled box-pair along X, Y, or Z directions (6 pairs)</li>
-<li>counting the number of filled box-pair along X, Y, or Z as well as the diagonal directions (26 pairs)</li>
-</ul><br>
-
-The cell (box) size is increased by sqrt(2) at each step.<br><p>
+  <li>le d&eacute;compte du nombre de cases remplies</li>
+  <li> le d&eacute;compte du nombre de paires de cases remplies dans les directions 
+    X, Y ou Z (6 paires)</li>
+  <li> le d&eacute;compte du nombre de paires de cases remplies le long des directions 
+    X, Y ou Z ainsi que des directions diagonales (26 paires).</li>
+</ul>
+<p> La taille de la cellule est augment&eacute;e de sqrt(2) &agrave; chaque &eacute;tape.</p>
+<p><br>
+</p>
+<p>
 
 </body></html>
