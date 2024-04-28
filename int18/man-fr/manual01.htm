@@ -2,109 +2,127 @@
 <body>
 <h3>[1] INTRODUCTION</h3>
 
-<h4>Niveaux d'utilisation</h4>
-L'interface de TopoDroid comprend plusieurs niveaux d'utilisation, qui diffèrent par le nombre d'actions qui sont activées.
+<h4>Niveaux d'utilisation </h4>
+L'interface de TopoDroid comprend plusieurs niveaux d'utilisation, qui diffÃ¨rent 
+par le nombre d'actions qui sont activÃ©es. 
 <ul style="margin-top=0">
-  <li>Au niveau <b>basique</b> [B] le dessin est limité aux lignes, sans aucune 
-    action d'édition.</li>
-<li>Le niveau <b>normal</b> [N] comprend toutes les fonctions pour un relevé de cavité détaillé.</li>
-<li>Le niveau <b>avancé</b> [A] comprend des fontionnalités avancées complémentaires.</li>
-<li>Le niveau <b>expert</b> [E] comprend toutes les fontionnalités du logiciel.</li>
+  <li>Au niveau <b>basique</b> [B] le dessin est limitÃ© aux lignes, sans aucune 
+    action d'Ã©dition.</li>
+  <li>Le niveau <b>normal</b> [N] comprend toutes les fonctions pour un relevÃ© 
+    de cavitÃ© dÃ©taillÃ©.</li>
+  <li>Le niveau <b>avancÃ©</b> [A] comprend des fontionnalitÃ©s avancÃ©es complÃ©mentaires.</li>
+  <li>Le niveau <b>expert</b> [E] comprend toutes les fontionnalitÃ©s du logiciel.</li>
   <li>Le niveau <b>testeur</b> [T] est utilis&eacute; uniquement pour les tests 
-    liés au dévelopement. Il active des fonctionnalités non finalis&eacute;es. 
-    Ces fonctionnalités sont partiellement débogées et peuvent provoquer le plantage 
-    de l'application. Merci de signaler tout problème lié à ces fonctions.</li>
-</ul><br>
-Par défaut, TopoDroid est configuré pour une utilisation en mode <b>normal</b>, mais vous pouvez changer le niveau d'activité en fonction de vos besoins cela sans quitter le programme. Ce manuel décrit toutes les fonctionnalité de TopoDroid. Les fonctions d'un niveaux autre que <i>basique</i> sont indiquées par les symboles :[N], [A], [E], ou [T].
-Les paramètres affichés dans les <u>fenêtres de préférences</u> dépendent du niveau d'activité sélectionné.<br><p>
+    liÃ©s au dÃ©velopement. Il active des fonctionnalitÃ©s non finalis&eacute;es. 
+    Ces fonctionnalitÃ©s sont partiellement dÃ©bogÃ©es et peuvent provoquer le plantage 
+    de l'application. Merci de signaler tout problÃ¨me liÃ© Ã  ces fonctions.</li>
+  <li>Les fonctionnalit&eacute;s de niveau <strong>d&eacute;veloppeur</strong> 
+    [D] ne sont activ&eacute;es que dans la version de d&eacute;bogage de l'application.</li>
+</ul>
+<br>
+Par dÃ©faut, TopoDroid est configurÃ© pour une utilisation en mode <b>normal</b>, mais vous pouvez changer le niveau d'activitÃ© en fonction de vos besoins cela sans quitter le programme. Ce manuel dÃ©crit toutes les fonctionnalitÃ© de TopoDroid. Les fonctions d'un niveaux autre que <i>basique</i> sont indiquÃ©es par les symboles :[N], [A], [E], ou [T].
+Les paramÃ¨tres affichÃ©s dans les <u>fenÃªtres de prÃ©fÃ©rences</u> dÃ©pendent du niveau d'activitÃ© sÃ©lectionnÃ©.<br><p>
 
-<h4>Fenêtres</h4>
-TopoDroid possède une <u>fenêtre principale</u> depuis laquelle vous pouvez basculer vers les autres activités. Les activités principales sont :
+<h4>FenÃªtres</h4>
+TopoDroid possÃ¨de une <u>fenÃªtre principale</u> depuis laquelle vous pouvez basculer 
+vers les autres activitÃ©s. Les activitÃ©s principales sont : 
 <ul style="margin-top=0">
-  <li><b>Relevé</b> : gestion des données du relevé (<u>infos</u> et <u>fenêtre 
-    des données</u>)</li>
-<li><b>Croquis</b> : <u>fenêtre de croquis</u>, est une sous-actitivé du relevé.</li>
-<li><b>Appareils</b> :  <u>fenêtre des périphériques</u></li>
-<li><b>Etalonnage</b> des DistoX (<u>info</u> et <u>données</u> d'étalonnage) sont des sous-activités du mode Appareils.</li>
-</ul><br>
+  <li><b>RelevÃ©</b> : gestion des donnÃ©es du relevÃ© (<u>infos</u> et <u>fenÃªtre 
+    des donnÃ©es</u>)</li>
+  <li><b>Croquis</b> : <u>fenÃªtre de croquis</u>, est une sous-actitivÃ© du relevÃ©.</li>
+  <li><strong>3D viewe</strong>r.</li>
+  <li><b>P&eacute;riph&eacute;riques</b> : <u>fenÃªtre des appareils pÃ©riphÃ©riques</u></li>
+  <li><b>Etalonnage</b> des DistoX (<u>info</u> et <u>donnÃ©es</u> d'Ã©talonnage) 
+    sont des sous-activitÃ©s du mode Appareils.</li>
+  <li><strong>Cave projects</strong>.</li>
+</ul>
+<br>
 
 <img src="windows.png"><br>
-<p> Les fenêtres de TopoDroid possèdent des barres de défillement en haut, pour 
-  les actions les plus fréquentes et un bouton de menu en haut à droite. Les fenêtres 
-  de dialgues ont généralement un bouton de confirmation (<i>OK</i> ou <i>Enregistrer</i>). 
-  Si les deux sont présents, <i>OK</i> enregistre les données et ferme la fenêtre 
-  de dialogue, alors que <i>Enregistrer</i> sauvegardes les données saisies et 
-  conserve la fenêtre de dialogue ouverte pour une nouvelle saisie. Certaines 
-  fenêtres ont également un bouton <i>Retour</i> (ou <i>Annuler</i>). Si ils ne 
-  sont pas présents, le bouton <i>RETOUR</i> d'Android enregistre les changements 
-  et ferme la fenêtre de dialogue. Autrement, cela ferme juste la fenêtre de dialogue 
+<p> Les fenÃªtres de TopoDroid possÃ¨dent des barres de dÃ©fillement en haut, pour 
+  les actions les plus frÃ©quentes et un bouton de menu en haut Ã  droite. Les fenÃªtres 
+  de dialgues ont gÃ©nÃ©ralement un bouton de confirmation (<i>OK</i> ou <i>Enregistrer</i>). 
+  Si les deux sont prÃ©sents, <i>OK</i> enregistre les donnÃ©es et ferme la fenÃªtre 
+  de dialogue, alors que <i>Enregistrer</i> sauvegardes les donnÃ©es saisies et 
+  conserve la fenÃªtre de dialogue ouverte pour une nouvelle saisie. Certaines 
+  fenÃªtres ont Ã©galement un bouton <i>Retour</i> (ou <i>Annuler</i>). Si ils ne 
+  sont pas prÃ©sents, le bouton <i>RETOUR</i> d'Android enregistre les changements 
+  et ferme la fenÃªtre de dialogue. Autrement, cela ferme juste la fenÃªtre de dialogue 
   sans enregistrer.<br>
 <p>
 
 
 
 <h4>Aide et manuel utilisateur</h4>
-Les fenêtres de TopoDroid comportent un bouton de menu en haut à droite (trois 
+Les fenÃªtres de TopoDroid comportent un bouton de menu en haut Ã  droite (trois 
 points verticaux). Le dernier menu ouvre une aide rapide concernant les actions 
-de la fenêtres et les menus. Le dialogue d'aide possède un bouton en forme de 
-"livre" en haut à droite qui ouvre le manuel utilisateur à la page concernée. 
-Un appui long sur l'icône ouvre le manuel à la première page. Si votre appareil 
-Android possède un bouton <i>Menu</i>, vous pouvez également l'utiliser pour ouvrir 
+de la fenÃªtres et les menus. Le dialogue d'aide possÃ¨de un bouton en forme de 
+"livre" en haut Ã  droite qui ouvre le manuel utilisateur Ã  la page concernÃ©e. 
+Un appui long sur l'icÃ´ne ouvre le manuel Ã  la premiÃ¨re page. Si votre appareil 
+Android possÃ¨de un bouton <i>Menu</i>, vous pouvez Ã©galement l'utiliser pour ouvrir 
 le manuel. <br>
-<p> Pour les fenêtres de dialogue, le bouton de <i>volume +</i> ouvre le <i>manuel 
-  utilisateur</i> à la page concernée. Si votre appareil Android possède également 
-  un bouton <i>Menu</i>, utilisez-le de la même manière. Pour les fenêtres de 
-  dialogue avec une ligne de boutons d'action d'une couleur légèrement plus sombre, 
-  la page du manuel peut être ouverte par un appui long sur cette ligne. 
+<p> Pour les fenÃªtres de dialogue, le bouton de <i>volume +</i> ouvre le <i>manuel 
+  utilisateur</i> Ã  la page concernÃ©e. Si votre appareil Android possÃ¨de Ã©galement 
+  un bouton <i>Menu</i>, utilisez-le de la mÃªme maniÃ¨re. Pour les fenÃªtres de 
+  dialogue avec une ligne de boutons d'action d'une couleur lÃ©gÃ¨rement plus sombre, 
+  la page du manuel peut Ãªtre ouverte par un appui long sur cette ligne. 
 <p>
 
 
-<h4>Paramètres</h4>
-TopoDroid possède un grand nombre de paramètres. Ceux-ci sont séparés en catégories 
-et sous-catégories. 
+<h4>ParamÃ¨tres</h4>
+TopoDroid possÃ¨de un grand nombre de paramÃ¨tres. Ceux-ci sont sÃ©parÃ©s en catÃ©gories 
+et sous-catÃ©gories. 
 <ul>
-<li>Géneral</li>
-<li>Données de relevé</li>
-<li>Croquis</li>
-<li>Appareils et étalonnage</li>
-<li>Import/Export</li>
-</ul><p>
-
-Le nombre de paramètres affichés par la fenêtre de "Paramètres" dépend du niveau d'activité sélectionné.<br><p> 
+  <li>GÃ©neral</li>
+  <li>Import/Export</li>
+  <li>DonnÃ©es de relevÃ©</li>
+  <li>Croquis</li>
+  <li>Appareils et Ã©talonnage</li>
+  <li>3D viewer</li>
+</ul>
+<p> Le nombre de paramÃ¨tres affichÃ©s par la fenÃªtre de "ParamÃ¨tres" dÃ©pend du 
+  niveau d'activitÃ© sÃ©lectionnÃ©.<br>
+<p> Les param&egrave;tres num&eacute;riques peuvent avoir des valeurs minimales 
+  et maximales. Si la valeur saisie est en dehors des limites, la valeur limite 
+  est alors attribu&eacute;e au param&egrave;tre.<br>
+  Les param&egrave;tres de l'application peuvent &ecirc;tre export&eacute;s vers 
+  un fichier &quot;settings.txt&quot;, au format texte. Ce fichier est stock&eacute; 
+  dans le dossier priv&eacute; de l'application. Les param&egrave;tres peuvent 
+  &ecirc;tre r&eacute;initialis&eacute;s ult&eacute;rieurement en important les 
+  valeurs de ce fichier.
+<p> 
 
 <div style="font-size: 90%">
-D'autres paramètres plus ésotériques (<a href="page_geek.htm">Geek</a>) sont signalés par le symbole [G].
-Ils sont rassemblés sous la section <i>Paramètres personnalisés</i>.
+D'autres paramÃ¨tres plus Ã©sotÃ©riques (<a href="page_geek.htm">Geek</a>) sont signalÃ©s par le symbole [G].
+Ils sont rassemblÃ©s sous la section <i>ParamÃ¨tres personnalisÃ©s</i>.
 </div>
 <br><p>
 
 
 <h4>Taille des textes et boutons</h4>
-Le paramètre"taille des textes" indique la dimention des listes texte, en particulier 
-la liste des relevés, des visées et des données d'étalonnage. Il existe cinq choix 
+Le paramÃ¨tre"taille des textes" indique la dimention des listes texte, en particulier 
+la liste des relevÃ©s, des visÃ©es et des donnÃ©es d'Ã©talonnage. Il existe cinq choix 
 pour la taille des bouton "Petit", "Normal", "Moyen", "Grand" et "&Eacute;norme". 
-La taille "Normal" est adaptée aux téléphone (écran 5"). C'est la taille par défaut. 
-La taille "Grand" est adaptée aux tablettes (écran 7"). 
+La taille "Normal" est adaptÃ©e aux tÃ©lÃ©phone (Ã©cran 5"). C'est la taille par dÃ©faut. 
+La taille "Grand" est adaptÃ©e aux tablettes (Ã©cran 7"). 
 <p>
 
 <h4>Outils de dessin (palette)</h4>
-TopoDroid est fourni avec un nombre considérable d'outils de dessin. Par défaut, 
-seul les outils les plus basiques sont activés. Vous pouvez activer d'autres outils 
-lorsque le besoin s'en fera sentir avec le bouton <i>palette</i> de la <u>fenêtre 
-principale</u>. Par ce biais, vous vous habituerez à "l'iconographie" de TopoDroid 
-peu à peu. <br>
+TopoDroid est fourni avec un nombre considÃ©rable d'outils de dessin. Par dÃ©faut, 
+seul les outils les plus basiques sont activÃ©s. Vous pouvez activer d'autres outils 
+lorsque le besoin s'en fera sentir avec le bouton <i>palette</i> de la <u>fenÃªtre 
+principale</u>. Par ce biais, vous vous habituerez Ã  "l'iconographie" de TopoDroid 
+peu Ã  peu. <br>
 <p>
-D'autres outils de dessin peuvent être installés dans la palette.
-Des outils personnalisés peuvent également être créés et ajoutés à la palette. Les outils non utilisés peuvent être retirés.<br><p>
-
-
-<a href="page_subdirs.htm">Sous-dossiers de TopoDroid</a><br>
-<a href="page_database.htm">Base de données TopoDroid</a><br>
+D'autres outils de dessin peuvent Ãªtre installÃ©s dans la palette.
+Des outils personnalisÃ©s peuvent Ã©galement Ãªtre crÃ©Ã©s et ajoutÃ©s Ã  la palette. Les outils non utilisÃ©s peuvent Ãªtre retirÃ©s.<br>
+<p> <a href="page_subdirs.htm">Sous-rÃ©pertoires de TopoDroid</a><br>
+<a href="page_database.htm">Base de donnÃ©es TopoDroid</a><br>
 <a href="page_aux.htm">Application additionnelles</a><br>
 
 <p>
 
-<a href="manual00.htm">&lt; Préface</a> |
-<a href="manual02.htm">Fenêtre principale &gt;</a>
+<a href="manual00.htm">&lt; PrÃ©face</a> |
+<a href="manual02.htm">FenÃªtre principale &gt;</a>
 
 </body></html>

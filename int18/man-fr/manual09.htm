@@ -5,9 +5,9 @@
 <body>
 <h3>[9] FENÊTRE DE CROQUIS</h3>
 
-<div align="left">
+<div align="left"> 
   <p>Le bouton &quot;<em>Croquis</em>&quot; du relevé topo&nbsp;<img src="btn_croquis.png"> 
-    de la <em><a href="manual06.htm">fenêtre de données du relevé topographique</a></em> 
+    de la <em><u><a href="manual06.htm"><em>Fenêtre des visées du relevé topo</em></a></u></em> 
     ouvre la boîte de dialogue avec la liste des croquis déjà présents ainsi qu'un 
     bouton &quot;<em>Nouveau croquis</em>&quot;. Appuyez sur ce bouton pour créer 
     un nouveau croquis pour ce relevé. </p>
@@ -48,7 +48,7 @@
 <p>Les différentes couleurs d'affichage sont [E/G] 
 <ul>
   <li>commentée : vert foncé</li>
-  <li> x-splay transversale (LRUD) : vert</li>
+  <li> x-splay en croix (LRUD) : vert</li>
   <li> h-splay horizontale : bleu marine (plan), bleu foncé (coupe)</li>
   <li> v-splay verticale : bleu foncé (plan), bleu marine (coupe)</li>
   <li> autres : gris clair</li>
@@ -106,7 +106,7 @@
 </ul>
 <p></p>
 <p> <strong>Modes d'interaction</strong><br>
-  La fenêtre de croquis possède quatre modes :</p>
+  La fenêtre de dessin de croquis (esquisse) possède quatre modes :</p>
 <ul style="margin-top=0">
   <li><b>Déplacement </b>[par défaut] : vous pouvez déplacer la page écran et 
     effectuer un zoom avant/arrière. Si dans la boîte de dialogue Références les 
@@ -157,9 +157,10 @@
   <li><img src="btn_mode.png"> <a href="page_drawing_refs.htm">Références</a>&#160; 
     : au choix, afficher sur le croquis / Cheminements / Visées latérales / Stations 
     / Grille / Échelle...</li>
-  <li><img src="btn_plan.png"> <em>Coupe / Plan</em> : commutateur permettant 
-    d'alterner entre les deux types de croquis. Mode d'affichage des visées latérales 
-    pour les sections transverses. </li>
+  <li><img src="btn_plan.png"      width="36" border="1"> <em>Coupe / Plan</em> 
+    : commutateur permettant d'alterner entre les deux types de croquis. Mode 
+    d'affichage des visées latérales pour les sections transverses. <img src = "btn_splay_group.png" width="36" border="1"> 
+    <i>Affichage des visés d'habillage</i>, pour les sections transverses.</li>
   <li><img src="btn_note.png"> <a href="page_survey_notes.htm">Notes</a> : informations 
     sur le relevé topo </li>
   <li><img src="btn_azimuth.png"> <a href="page_azimuth.htm">Référence "extension"</a> 
@@ -167,16 +168,38 @@
   <li><img src="btn_refresh.png"> Rafraîchir l'affichage de la ligne centrale 
     de cheminement.</li>
 </ul>
-<br>
+<p>&nbsp;</p>
+<p>Le mode <strong>Dessin</strong> comporte, outre les boutons verts : </p>
+<ul style="margin-top=0">
+  <li><img src="btn_undo.png"  width="36" border="1"> <u> Annuler</u> : supprime 
+    un par un les derniers éléments que vous avez dessiné. </li>
+  <li><img src="btn_redo.png"  width="36" border="1"> <u>Refaire</u> : réintègre 
+    un par un sur le dessin les éléments supprimés. La liste des éléments supprimés 
+    est effacée lorsque vous dessinez quelque chose de nouveau. Ponctuellement 
+    des actions d'édition peuvent aussi affecter cette liste. </li>
+  <li><img src="btn_tools.png" width="36" border="1"> <a href="page_tools_recent.htm"> 
+    Outil de dessin</a> </li>
+  <li><img src="btn_splay_display_mode.png" width="36" border="1"> Mode d'affichage 
+    : par segment ou par point.</li>
+  <li><img src="btn_cont.png"  width="36" border="1"> Jointure ou continuation 
+    de lignes (uniquement si activée dans les paramètres généraux)</li>
+</ul>
+<p> L'icône du bouton des outils reflète le type actuel d'outils de dessin : points, 
+  lignes ou zones.<br>
+  L'icône du bouton sélecteur d'outils est variable, elle reflète le type d'outils 
+  de dessin en cours : points, lignes ou zones. La jonction de lignes n'est affichée 
+  que lorsque le &quot;retraçage&quot; n'est pas actif (les modes &quot;retraçage&quot; 
+  et &quot;jonction&quot; de lignes s’excluant l’un l’autre). Si le mode &quot;jonction&quot; 
+  est actif, une nouvelle ligne commençant et/ou se terminant à proximité de lignes 
+  du même groupe est jointe à ces dernières.<br>
+  La &quot;jonction de lignes&quot; n'a pas d'effet sur des lignes qui ne peuvent 
+  pas être jointes (par exemple les lignes de &quot;section&quot;).<br>
+<p>&nbsp;
 <p> Le mode <b>Effacer</b> ou supprimer (gomme) possède quatre autres boutons 
   en plus des boutons verts&#160; : 
 <ul style="margin-top=0">
-  <li><img src="btn_undo.png"><u> Annuler</u> : supprime un par un les derniers 
-    éléments que vous avez dessiné. </li>
-  <li><img src="btn_redo.png"> <u>Refaire</u> : réintègre un par un sur le dessin 
-    les éléments supprimés. La liste des éléments supprimés est effacée lorsque 
-    vous dessinez quelque chose de nouveau. Ponctuellement des actions d'édition 
-    peuvent aussi affecter cette liste. </li>
+  <li><img src="btn_undo.png"><u> Annuler</u></li>
+  <li><img src="btn_redo.png"> <u>Refaire</u></li>
   <li><img src="btn_tools.png"> <a href="page_tools_recent.htm"> Outil de dessin</a> 
     : filtre pour limiter la gomme à un seul type d'éléments : points, lignes 
     ou zones </li>
@@ -240,10 +263,11 @@
 
 
 <h4>MENU DÉROULANT DE DROITE</h4>
-<p>Lorsque des anomalies ont été détectées dans la compilation des données du 
-  relevé topo, le bouton &quot;menu&quot; (trois points à la verticale) comporte 
-  un point d'exclamation rouge. Appuyez longuement sur le bouton pour afficher 
-  une information sur ces anomalies.</p>
+<p><img src="btn_sketch_anomalies.png" width="36" border="1" style="float:left;margin:5px 10px 0 0;"> 
+  Lorsque des anomalies ont été détectées dans la compilation des données du relevé 
+  topo, le bouton &quot;menu&quot; (trois points à la verticale) comporte un point 
+  d'exclamation rouge. Appuyez longuement sur le bouton pour afficher une information 
+  sur ces anomalies.</p>
 <ul style="margin-top=0">
   <li><u>BASCULER/FERMER</u> : passer à un autre croquis ou fermer la fenêtre 
     de croquis. </li>
@@ -258,9 +282,11 @@
     de sauvegarde</a>. </li>
   <li><u>ZOOM</u> : adapter le croquis à l'écran en faisant varier le facteur 
     de zoom ou faire alterner portrait / paysage.</li>
-  <li><u>RENOMMER/SUPPRIMER</u>&nbsp; : le croquis. Les croquis supprimés peuvent 
-    être récupérés ("RECHARGER" dans ce menu déroulant) </li>
-  <li> <u>PALETTE</u> : tous les outils de dessin </li>
+  <li><u>RENOMMER/SUPPRIMER/FRACTIONNER</u>&nbsp; : le croquis. Les croquis supprimés 
+    peuvent être récupérés ("RECHARGER" dans ce menu déroulant). Le fractionnement 
+    n'affecte que la vue actuelle.</li>
+  <li> <u>SCRAPS</u> : ajouter un calque Therion à un croquis.</li>
+  <li> <u>PALETTE</u> : affiche tous les outils de dessin disponibles</li>
   <li><u>APERÇU</u> : fenêtre d'aperçu montrant une vue d'ensemble de tous les 
     croquis topographiques réunis. [Uniquement disponible pour le plan et la coupe 
     projetée]</li>
@@ -306,7 +332,7 @@
         interpol&eacute;e), simplifiée</li>
       <li><em>Espacement des points de ligne</em> : distance minimale entre les 
         points de ligne dans le style normal [5 px]</li>
-      <li><em>Longueur de la coche de direction</em> pour les lignes de section 
+      <li><em>Longueur de la coche de direction</em> pour pour les lignes de section 
         transverse [5 px]</li>
       <li><em>Points de section</em> : ajout automatique ou non d'un point de 
         section pour les lignes de section transverse [oui par défaut].</li>
@@ -370,8 +396,9 @@ Cependant, s'il y a plusieurs points proches de l'endroit où vous appuyez, ils
 risquent d'être tous sélectionnés, mais un seul d'entre eux sera en cours de modification 
 (&quot;actif&quot;). Parmi l'ensemble de points sélectionnés, vous pourrez changer 
 de point &quot;actif&quot; avec les boutons <em>Précédent et Suivant</em>.<br>
+<p><img src="btn_multiselection_previous.png" width="36" border="1"> <img 
+  src="btn_multiselection_next.png" width="36" border="1">
 <p>
-
 <h4>Style de ligne </h4>
 TopoDroid dispose de quatre styles de ligne. Avec le style 'Normale' [Par défaut], 
 les lignes sont dessinées comme des polylignes. Avec le style 'Fine' les segments 
@@ -382,35 +409,24 @@ dépassent à leurs deux extrémités et possèdent deux points de contrôle per
 de modifier la courbure. Si vous exportez le dessin dans DXF avec <em>AutoCAD</em> 
 version 6, n'utilisez pas de courbes de Bezier car elles sont exportées en tant 
 que polylignes.<br>
-<p>
-
-<h4>Continuation/jonction de ligne </h4>
-<p>Le bouton de jonction est un bouton multi-états. La jonction de lignes ne peut 
-  se faire qu'avec d'autres lignes des mêmes segments de calque (scraps). Les 
-  lignes qui sont jointes doivent appartenir au même groupe. Si vous devez &quot;joindre&quot; 
-  deux points de lignes de groupes différents, vous devez déplacer un point pour 
-  qu'il coïncide avec l'autre.</p>
-<ul>
-  <li><em>off</em> : les lignes de type courant ne peuvent pas être jointes </li>
-  <li><em>non</em> : la ligne de type courant ne sera pas jointe</li>
-  <li><em>début</em> : la ligne de type courant sera jointe à une ligne du même 
-    groupe si son point de départ est proche de l'un de ses points de terminaison</li>
-  <li><em>fin</em> : la ligne de type courant sera jointe à une ligne du même 
-    groupe par son point final</li>
-  <li><em>les deux</em> : la ligne de type courant sera jointe à une ligne du 
-    même groupe par son point début et par son point final</li>
-  <li><em>continuer</em> : la ligne de type courant continuera par une ligne du 
-    même groupe si son point de départ est suffisamment proche d'un point d'extrémité 
-    de cette ligne.</li>
-</ul>
-<p><br>
-  Lorsque la jonction est réglée sur &quot;<em>continuer</em>&quot;, la dernière 
-  ligne qui a été dessinée peut être modifiée comme dans Adobe Illustrator, c'est-à-dire 
-  en redessinant un morceau de la ligne.<br>
-  L'option &quot;<em>continuer</em>&quot; a une incidence sur la pile d'annulation, 
-  car la ligne continuée peut être déplacée au sommet de la pile. </p>
-<p><strong>Actions composées </strong>[T]</p>
-<p>Les actions composées sont des actions ponctuelles par appui long<br>
+<p><strong>Retraçage</strong>
+<p>Si le style de tracé n'est pas complexe (Bézier ou simplifiées), les lignes 
+  et les zones peuvent être dessinées en mode &quot;retraçage&quot;. Un appui 
+  long sur le bouton des outils permet d'activer/désactiver le retraçage. Lorsque 
+  le retraçage est actif, la ligne/zone au-dessus du bouton de l'outil correspondant 
+  devient blanche. La partie retracée d'une ligne/zone n'est pas transformée (courbe 
+  de Bézier, simplifiée, décimation, etc.).</p>
+<p> Pour retracer une partie de ligne, tracez une autre ligne qui commence ou 
+  se termine à proximité de la première. Les lignes de type &quot;section&quot; 
+  ne peuvent pas être retracées.<br>
+  Les zones peuvent être &quot;retracées&quot; en traçant une ligne qui commence 
+  et se termine près du bord de la zone. La zone peut ainsi être agrandie ou réduite, 
+  et une concavité peut être remplie (figure ci-dessous).</p>
+<p> Le tracé peut être annulé et refait.<br>
+</p>
+<p><strong>Actions composites </strong>[T]</p>
+<p>Les actions composites (effectuant plusieurs actions simultanément) sont des 
+  actions ponctuelles par appui long.<br>
   Actuellement, la seule action d'appui long permet d'insérer un point pour une 
   ligne/zone et de l'accrocher à un point voisin en même temps. Le point sélectionné 
   est d'abord déplacé vers le point voisin, puis il est dupliqué et le nouveau 

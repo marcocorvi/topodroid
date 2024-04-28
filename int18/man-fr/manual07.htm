@@ -7,14 +7,13 @@
 <h3>[7] TABLEAU DES DONNÉES DU RELEVÉ TOPOGRAPHIQUE</h3>
 	
 	Les mesures des visées sont affichées dans un tableau. Ce tableau n'a pas 
-d'entête afin d'économiser de l'espace. Les informations disponibles sur les visées 
+d'entête pour économiser de l'espace. Les informations disponibles sur les visées 
 sont : 
 <ul style="margin-top=0">
   <li>Numéro d'indexation (facultatif&#160;: il n'est affiché que si ce choix 
-    est coché dans la boite de dialogue <a href="page_displaymode.htm">mode d'affichage</a>) 
-  </li>
-  <li>Station DEPUIS</li>
-  <li>Station VERS</li>
+    est coché dans la boite de dialogue <u> Mode d'affichage</u>) </li>
+  <li>À partir de la station (DEPUIS)</li>
+  <li>Vers la station (VERS)</li>
   <li>Distance </li>
   <li>Azimut </li>
   <li>Pente</li>
@@ -23,10 +22,14 @@ sont :
     est présente uniquement si elle est explicitement définie par l'utilisateur 
     dans l'une des boites de dialogue d'édition des visées. </li>
 </ul>
-Il peut y avoir des caractères supplémentaires comme marqueurs et la présence 
-d'une photo (#). On y trouve aussi le début du commentaire, le cas échéant. Le 
-marqueur peut indiquer : une visée prise en double (*), une visée de surface (÷), 
-coupe uniquement (§), plan uniquement (_).<br>
+<p>Il peut y avoir des caractères supplémentaires comme marqueurs et la présence 
+  d'une photo (#). On y trouve aussi le début du commentaire, le cas échéant. 
+  Le marqueur peut indiquer : une visée prise en double (*), une visée de surface 
+  (÷), coupe uniquement (§), plan uniquement (_).</p>
+<p>Par défaut, un index est attribué à chaque visée du relevé. Il est possible 
+  d'utiliser l'index du BRIC à la place. L'index du relevé est garanti comme étant 
+  unique pour chaque visée. L'index de type BRIC n'est pas unique car la mémoire 
+  du BRIC peut être réinitialisée. </p>
 <p> Les visées peuvent être &quot;à blanc&quot; ou bien &quot;cachées&quot;. Les 
   visées latérales d'habillage peuvent également être masquées pour alléger la 
   liste. Cependant, même si elles ne sont pas affichées, vous pouvez les voir 
@@ -38,61 +41,63 @@ coupe uniquement (§), plan uniquement (_).<br>
   <br>
 <p> <b>Sous-menus du tableau des visées (appui court ou long)</b> 
 <ul style="margin-top=0">
-  <li>Un appui court sur le nom d'une station active ou désactive l'affichage 
-    des visées latérales d'habillage sur cette station (uniquement si elles ne 
-    sont pas affichées au départ) </li>
+  <li>Un appui court sur le nom d'une station passe en mode édition et la station 
+    est soulignée (si l'édition des stations est activée leur nom peut être édité). 
+    La modification du nom de la station doit être terminée avec la touche ENTRÉE.</li>
+  <li>Lorsque la station est soulignée, quelques appuis courts activent ou désactivent 
+    l'affichage des visées latérales d'habillage sur cette station (uniquement 
+    si elles ne sont pas affichées au départ) </li>
   <li>Un appui court sur la visée ouvre la boite de dialogue <a href="page_shot_edit1.htm"> 
     Édition des visées</a>, dans laquelle vous pouvez définir les stations ainsi 
     que d'autres attributs de la visée. </li>
   <li>Un appui long sur le nom d'une station sélectionne cette<a href="page_current.htm"></a> 
     station comme active (station courante) et son affichage passe au vert. Un 
     nouvel appui long la désélectionne.</li>
-  <li>Un appui long sur une visée latérale d'habillage ouvre le dernier croquis, 
-    le cas échéant, avec la visée latérale représentée par un segment violet.</li>
   <li>Un appui long sur les données d'une visée lance le <a href="#mv">mode de 
-    sélection multivisées</a> (noms des visées sélectionnées affichés sur fond 
+    sélection multi-visées</a> (noms des visées sélectionnées affichés sur fond 
     gris)</li>
 </ul>
 	
-<p> Si vous utilisez <a href="page_station_policy.htm">le nommage automatique 
+<p> Si vous utilisez <a href="page_station_policy.htm">la dénomination automatique 
   des stations</a> de TopoDroid, il est probable que vous n'aurez besoin de la 
   boîte de dialogue des visées que pour écrire un commentaire et changer le sens 
   de l'&quot;extension&quot;. Ces deux actions peuvent également être effectuées 
   à partir de la fenêtre de dessin, en sélectionnant la visée en mode &quot;Edition&quot; 
   [A] et en choisissant le bouton <u><a href="page_survey_notes.htm">Note</a></u>. 
-  (Ceci est décrit dans le manuel dans la section de la <a href="manual09.htm">fenêtre 
-  de croquis</a>).<br>
+  (Ceci est décrit dans le manuel dans la section <u><a href="manual09.htm">Esquisse 
+  de croquis</a></u>).<br>
 
-<p> <b><a name="mv"></a>Mode de sélection multivisées</b> 
+<p> <b><a name="mv"></a>Mode de sélection multi-visées</b> 
 <p> Les noms des visées sélectionnées sont sur fond gris (mais généralement pas 
-  le fond des données de ces visées). Une fois le mode de sélection multivisées 
+  le fond des données de ces visées). Une fois le mode de sélection multi-visées 
   démarré, appuyer brièvement sur la ligne de données d'une visée ajoute ou supprime 
   cette visée à la sélection. Dans ce mode, la barre de boutons du haut change 
   et affiche alors des boutons spécifiques : 
 <ul>
-  <li><img src="mv1.png" width="42" height="42"> Applique à toutes les visées 
-    sélectionnées le sens d'extension vers la "gauche" </li>
-  <li><img src="mv2.png" width="42" height="42"> Permute le sens d'extension de 
-    toutes les visées sélectionnées</li>
-  <li><img src="mv3.png" width="42" height="41"> Applique à toutes les visées 
+  <li><img src="btn_left.png"     width="36" border="1"> Applique à toutes les 
+    visées sélectionnées le sens d'extension vers la "gauche" </li>
+  <li><img src="btn_multishot_flip_extend.png"     width="36" border="1"> Permute 
+    le sens d'extension de toutes les visées sélectionnées</li>
+  <li><img src="btn_right.png"  width="36" border="1"> Applique à toutes les visées 
     sélectionnées le sens d'extension vers la "droite" </li>
-  <li><img src="btn_actions.png" width="43" height="45">&nbsp;Actions spéciales</li>
-  <li><img src="mv4.png" width="44" height="42"> Renommer ou échanger les noms 
-    des stations sélectionnées (&quot;Annuler&quot; pour ne rien faire)</li>
-  <li><img src="mv5.png" width="42" height="42"> Supprimer toutes les visées sélectionnées. 
-    ATTENTION&#160;: les visées latérales cachées sont également supprimées lorsque 
-    la visée dont elles dépendent est supprimée </li>
-  <li><img src="mv6.png" width="42" height="42"> Fermer la sélection multivisées 
+  <li><img src="btn_multishot_special_actions.png" width="36" border="1">&nbsp;Actions 
+    spéciales</li>
+  <li><img src="btn_delete.png" width="36" border="1"> Renommer ou échanger les 
+    noms des stations sélectionnées (&quot;Annuler&quot; pour ne rien faire)</li>
+  <li><img src="btn_copy.png"   width="36" border="1"> Supprimer toutes les visées 
+    sélectionnées. ATTENTION&#160;: les visées latérales cachées sont également 
+    supprimées lorsque la visée dont elles dépendent est supprimée </li>
+  <li><img src="btn_clear.png"  width="36" border="1"> Fermer la sélection multi-visées 
     et revenir au tableau des visées de la fenêtre des données</li>
 </ul>
 <p>&nbsp;</p>
-<p>La boîte de dialogue des actions spéciales comprend [T] : </p>
+<p>La boîte de dialogue des actions spéciales permet de [T] : </p>
 <ul>
   <li>renuméroter les visées sélectionnées</li>
   <li> permuter les stations de chaque visée</li>
   <li> définir la couleur du croquis des visées latérales d'habillage sélectionnées</li>
-  <li> marquer les visées latérales d'habillage en tant que X (transverses) ou 
-    H/V , ou les rendre standard</li>
+  <li> marquer les visées latérales d'habillage en tant que X (en croix) ou H/V 
+    , ou les rendre standard</li>
   <li> calculer l'inclinaison et le pendage du plan contenant les visées.</li>
 </ul>
 <p><br>
@@ -110,6 +115,6 @@ coupe uniquement (§), plan uniquement (_).<br>
   est affiché dans la boîte de dialogue et ajouté (remplacé s'il est déjà présent) 
   au commentaire de la première visée sélectionnée. </p>
 <br>
-<p> <a href="manual06.htm"> &lt; Données du relevé topographique</a> | <a href="manual08.htm">Informations 
+<p> <a href="manual06.htm"> &lt; Visées du relevé topographique</a> | <a href="manual08.htm">Informations 
   du relevé topo&#160;&gt;</a> 
 </body></html>
