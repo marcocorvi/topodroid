@@ -3,55 +3,65 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
 </HEAD>
 <body>
-
 <h4>STATISTIQUES DU CROQUIS</h4>
 
 Cette boîte de dialogue s'ouvre en appuyant sur le<u></u> bouton &quot;STATS&quot; 
-du menu latéral de la <a href="manual09.htm">fenêtre de croquis.</a><br>
+du menu latéral de la<i></i> fenêtre d'esquisses (dessin du plan ou de la coupe). 
+<br>
 <p> Les statistiques du relevé topographique sont :
 <ul>
-  <li>Nombre de visées normales et longueur totale du cheminement</li>
-  <li>Nombre de visées dupliquées (multiples) et longueur cumulée</li>
-  <li>Nombre de visées de surface et longueur cumulée</li>
-  <li>Nombre de visées latérales et de visées latérales du croquis</li>
-  <li>Nombre de stations et de stations du croquis</li>
-  <li>Nombre de visées non reliées au croquis (le cas échéant) et leur longueur 
-    totale. Si vous appuyez sur cette ligne, la boîte de dialogue contenant la 
-    liste des visées non reliées s'ouvre. </li>
-  <li>Nombre de cycles (y compris les cycles de visées arrière), le cas échéant. 
-  </li>
-  <li>Nombre d'éléments du relevé non reliés s'il est supérieur à 1. (Il est de 
-    1 si les visées sont toutes liées ensemble dans un seul relevé). </li>
+  <li>Nombre total de visées normales, visées normales du croquis et longueur 
+    totale du cheminement</li>
+  <li>Nombre total de visées dupliquées (multiples), visées multiples du croquis 
+    et longueur cumulée</li>
+  <li>Nombre total de visées de surface, visées de surface du croquis et longueur 
+    cumulée</li>
+  <li>Nombre total de visées latérales d'habillage et visées d'habillage du croquis</li>
+  <li>Nombre total de stations et stations du croquis</li>
+  <li>Nombre de visées non reliées au croquis, le cas échéant, et leur longueur 
+    totale. Le fait d'appuyer sur cette ligne ouvre la boîte de dialogue avec 
+    la liste des visées non reliées.</li>
+  <li>Nombre de boucles </li>
+  <li>Nombre de relev&eacute;s topographiques d&eacute;connect&eacute;s (not&eacute; 
+    &quot;Composants 1&quot; si les vis&eacute;es sont toutes reli&eacute;es dans 
+    un m&ecirc;me relev&eacute; topo)</li>
 </ul>
-<p>&nbsp;</p>
-<p>Les statistiques relatives au croquis sont : 
+<p>Les statistiques relatives à l'esquisse sont : 
 <ul>
   <li>Station d'origine (point zéro) </li>
-  <li>Longueur de la ligne médiane de cheminement</li>
-  <li>Longueur de la ligne médiane vue en coupe (3D)</li>
-  <li>Longueur de la ligne médiane vue en plan</li>
+  <li>Longueur du relevé topographique</li>
   <li>Extension du relevé topographique (Est, Ouest, Nord et Sud)</li>
   <li>Profondeurs du relevé topographique, positives (au-dessus de la station 
     zéro) et négatives (au-dessous de la station zéro) 
-  <li>Nombre de boucles </li>
+  <li>Le nombre de stations </li>
+  <li>Le nombre de visées par type (normales, dupliquées et de surface) </li>
+  <li>Nombre de visées latérales</li>
+  <li>Erreur angulaire (+- en degrés)</li>
+  <li>Nombre de boucles (celles qui sont utilisées dans la compensation d'erreur 
+    de bouclage et celles qui ne sont pas utilisées)</li>
 </ul>
-<p>&nbsp;</p>
-Pour chaque boucle : 
+<p>Pour chaque boucle : </p>
 <ul>
-  <li>visée de bouclage</li>
-  <li>nombre de visées contenues dans la boucle</li>
-  <li>erreur de fermeture : longueur 3D divisée par la longueur totale de la boucle</li>
-  <li>longueurs de l'erreur horizontale et verticale</li>
-  <li>pourcentage d'erreur : rapport entre l'erreur et la longueur de la boucle</li>
-  <li>erreur angulaire de visée estimée [degrés]. Il s'agit de l'erreur multipliée 
+  <li> visée de bouclage</li>
+  <li> nombre de visées de la boucle</li>
+  <li> erreur de bouclage : longueur 3D sur longueur totale de la boucle</li>
+  <li>erreurs de longueurs horizontale et verticale</li>
+  <li> pourcentage d'erreur : rapport entre l'erreur et la longueur de la boucle</li>
+  <li> erreur d'angle de visée estimée [degrés]. Il s'agit de l'erreur multipliée 
     par la racine carrée du nombre de visées et divisée par la longueur. Le résultat, 
-    en radians, est ensuite converti en degrés. </li>
+    en radians, est converti en degrés. </li>
 </ul>
-<p></p>
 <p><br>
-  Les unités de longueur affichées dans cette fenêtre sont définies avec les paramètres 
-  principaux de l'application.</p>
-<p><br>
-  En appuyant sur l'entrée de la fermeture de la boucle, le texte passe de l'erreur 
-  de fermeture à la liste des stations de la boucle. </p>
+  En tapant sur l'entrée relative à la fermeture de la boucle, le texte passe 
+  de l'erreur de bouclage à la liste des stations de la boucle. Les longueurs 
+  sont exprimées dans les unités définies dans les paramètres de l'application.</p>
+<p><strong>Dénivellations</strong><br>
+  Le centre du croquis est l'origine du croquis, sauf si le croquis est recentré. 
+  La dénivellation de la cavité comprend les données qui ne sont pas &quot;de 
+  surface&quot;, &quot;dupliquées&quot; ou &quot;commentées&quot;. Elle inclut 
+  les visées d'habillage, donc si vous avez pris des visées d'habillages en surface, 
+  vous devez les marquer comme étant de &quot;surface&quot;.</p>
+<p> <br>
+<p>
+
 </body></html>

@@ -5,12 +5,13 @@
 <body>
 <h4>OUTILS ZONES</h4>
 <p>Les outils &quot;zones&quot; sont d&eacute;finis dans des fichiers texte.</p>
-<p> Deux outils de zone, &quot;utilisateur&quot; et &quot;eau&quot;, sont intégrés 
-  dans le programme. Les autres sont chargés à partir du répertoire privé de TopoDroid. 
-  Ce r&eacute;pertoire contient les outils de points compil&eacute;s dans l'apk 
-  de distribution. Vous pouvez supprimer les outils dont vous n'avez pas besoin, 
-  modifier ceux que vous souhaitez modifier et en ajouter de nouveaux qui ne sont 
-  pas fournis dans l'apk.</p>
+<p> Deux outils de zone, &quot;utilisateur&quot; et &quot;eau&quot;, sont int&eacute;gr&eacute;s 
+  au programme. Les autres fichiers &quot;zones&quot; sont t&eacute;l&eacute;charg&eacute;s 
+  &agrave; partir du sous-r&eacute;pertoire <em>symbol/area</em> de TopoDroid. 
+  Ce r&eacute;pertoire est rempli avec les outils de points compil&eacute;s dans 
+  l'apk de distribution. Vous pouvez supprimer les outils dont vous n'avez pas 
+  besoin, modifier ceux que vous souhaitez modifier et en ajouter de nouveaux 
+  qui ne sont pas fournis dans l'apk.</p>
 <p><br>
   Le fichier d'outil de zone contient des lignes sp&eacute;cifiant la propri&eacute;t&eacute; 
   de l'outil de dessin.</p>
@@ -25,47 +26,48 @@
     [obligatoire]</li>
   <li>&quot;close-horizontal&quot; [facultatif, faux si manquant]</li>
   <li>&quot;orientable&quot; [facultatif, faux si manquant]</li>
+  <li>&quot;level&quot; marqueur de vue [optionnel, 1 si manquant]</li>
   <li>&quot;bitmap WIDTH HEIGHT X_TILE Y_TILE&quot; d&eacute;marre le motif bitmap. 
     Les modes mosa&iuml;que peuvent &ecirc;tre M (miroir) ou R (r&eacute;p&eacute;tition). 
     Cette ligne doit &ecirc;tre suivie par des lignes HEIGHT de longueur WIDTH 
     avec les pixels bitmap (1: premier plan, 0 : arri&egrave;re plan).</li>
   <li>&quot;endbitmap&quot; marque la fin d'un bitmap</li>
-  <li>&quot;<em>cSurvey</em> LAYER CATEGORY PEN BRUSH&quot;</li>
+  <li>"roundtrip VALUE" [optionnel, pour SVG-roundtrip, VALUE peut être 1 (walls_shp), 
+    2 (walls_sym), 3 (detail_shp), 4 (detail_sym) - default 3]</li>
   <li>&quot;Endsymbol&quot;</li>
 </ul>
-<p><b>Nom<br>
-  </b>Reportez-vous à la page <a href="page_symbol_point.htm">outil points</a> 
-  pour savoir comment spécifier les noms. </p>
+<p><strong>Nom</strong><br>
+  Reportez-vous à l'<a href="page_symbol_point.htm">outil POINTS</a> pour savoir 
+  comment spécifier les noms. </p>
 <p><br>
   <strong>Fermer-horizontal</strong><br>
   Si cet attribut est défini, la bordure de zone est fermée horizontalement dans 
-  la vue en coupe et dans les sections transverses.<br>
+  la vue en coupe et dans les sections transverses. <br>
   Si la coordonnée Y du dernier point de la ligne tracée est proche de celle du 
-  premier alors le bord de la zone s'arrête au premier point dont la coordonnée 
-  Y est proche de celui-ci. Vous pouvez ainsi dessiner des zones avec un profil 
-  supérieur (ou inférieur) horizontal plat.<br>
-  Si les coordonnées Y des extrémités de la ligne tracée diffèrent trop, la bordure 
-  est fermée par un segment oblique.<br>
-</p>
-<p>Actuellement, cet attribut est seulement utilisé pour l'outil &quot;eau&quot; 
+  premier point, la bordure de la zone est interrompue au premier point dont la 
+  coordonnée Y est proche de celle du premier point. Vous pouvez ainsi dessiner 
+  des zones dont le profil supérieur (ou inférieur) est plat et horizontal. <br>
+  Actuellement, cet attribut est seulement utilisé pour l'outil &quot;eau&quot; 
   intégré.</p>
 <p><br>
   <strong>Modèle bitmap</strong><br>
   Avec cette option, vous pouvez spécifier un motif de fond, par exemple, pour 
-  différencier les formations rocheuses.</p>
-<p> Cet attribut n'est utilisé dans aucun des outils inclus dans l'apk.</p>
+  différencier les formations rocheuses.<br>
+  Cet attribut n'est utilisé dans aucun des outils inclus dans l'apk.</p>
 <p><br>
   <strong>Orientation</strong><br>
   Si l'attribut &quot;orientable&quot; est défini, le motif de zone peut être 
   pivoté dans la boîte de dialogue d'édition de zone.<br>
-  Les motifs de zone ne sont pas utilisés dans le jeu de symboles par défaut. 
-  L'ombrage est préféré pour améliorer la performance.</p>
-<br>
-<strong>Niveau</strong><br>
-L'attribut &quot;level&quot; prend la valeur du marqueur pour les vues activées 
-ici.<br>
-L'indicateur est un nombre dont la somme est 1 (niveau de base), 2 (plancher), 
-4 (remplissages), 8 (plafond) et 16 (artefacts). 
+  Les motifs de surface ne sont pas utilisés dans le jeu de symboles par défaut. 
+  L'ombrage est préférable pour des raisons de performance.</p>
+<p><strong>Niveau</strong><br>
+  L'attribut &quot;level&quot; prend la valeur du marqueur des vues activées sur 
+  les éléments de cette zone. <br>
+  Le marqueur est la somme des nombres suivants : 1 (base), 2 (sol), 4 (remplissage), 
+  8 (plafond) et 16 (artefacts). </p>
+<h4><br>
+</h4>
+
 <p>
 
 
