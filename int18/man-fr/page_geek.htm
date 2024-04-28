@@ -3,33 +3,36 @@
 
 <h4>PARAM&Egrave;TRES PERSONNALIS&Eacute;S</h4>
 
-<div style="font-size=90%"> Les<em> paramètres personnalisés</em> sont utilis&eacute;s 
-  pour les fonctions &eacute;sot&eacute;riques de TopoDroid.<br>
+<div style="font-size=90%"> Les<em> param&egrave;tres personnalis&eacute;s</em> 
+  sont utilis&eacute;s pour les fonctions &eacute;sot&eacute;riques de TopoDroid.<br>
   Ils ne sont accessibles qu'au niveau du testeur T.<br>
   Cependant, leurs effets peuvent &ecirc;tre visibles &agrave; un niveau inf&eacute;rieur 
   (indiqu&eacute; entre crochets).<br>
   Par d&eacute;faut, les marqueurs sont d&eacute;sactiv&eacute;s. <br>
   <p> <strong>Param&egrave;tres g&eacute;n&eacute;raux</strong></div>
 <ul>
+  <li><em>Retour simple</em> : fermer les fen&ecirc;tres d'un simple appui sur 
+    le bouton RETOUR</li>
   <li> 
     <div style="font-size=90%"> <em>Jeux d'outils suppl&eacute;mentaires </em>: 
       pour installer des outils provenant d'autres jeux que le jeu d'outils de 
       base de la cavit&eacute; en cours. </div>
   </li>
   <li> 
-    <div style="font-size=90%"><em>Effacement des sauvegardes de croquis</em> 
-      : la fen&ecirc;tre des vis&eacute;es poss&egrave;de un menu pour effacer 
-      les sauvegardes de croquis. </div>
-  </li>
-  <li> 
-    <div style="font-size=90%"><em>Enregistrement des paquets</em> : les paquets 
-      de donn&eacute;es brutes sont copi&eacute;s dans la base de donn&eacute;es. 
+    <div style="font-size=90%"> 
+      <div style="font-size=90%"><em>Enregistrement des paquets</em> : les paquets 
+        de donn&eacute;es brutes sont copi&eacute;s dans la base de donn&eacute;es 
+        compil&eacute;e. </div>
     </div>
   </li>
+  <li><em>&Eacute;dition de croquis</em> : active l'outil d'&eacute;dition de 
+    croquis dans la fen&ecirc;tre principale. </li>
 </ul>
 <div style="font-size=90%"> 
-  <p>&nbsp; </p>
-  <p> <b>Param&egrave;tres des donn&eacute;es</b><br>
+  <p><br>
+    <br>
+    <b>Param&egrave;tres des donn&eacute;es</b><br>
+  </p>
   <ul>
     <li>M<em>ode plong&eacute;e</em> : permet d'obtenir des donn&eacute;es en 
       &quot;mode plong&eacute;e&quot; : distance, azimut et profondeur.</li>
@@ -45,10 +48,17 @@
       lat&eacute;rales. </li>
     <li> <em>Mesures des capteurs</em> [A]</li>
     <li> <em>Bouclage</em> (fermeture de boucle) [E]</li>
+    <li>Seuil de boucle : seuil utilis&eacute; dans la compensation s&eacute;lective 
+      de la boucle [E].</li>
     <li> Utilisation du <em>compas/clino</em> d'Android [A]</li>
-    <li> T&eacute;l&eacute;commande du <em>timer</em> de vis&eacute;e [E]</li>
+    <li> <em>T&eacute;l&eacute;commande du minuteur</em> de vis&eacute;e (timer) 
+      [E] [10 s]</li>
+    <li><em>T&eacute;l&eacute;commande du volume sonore</em> de la minuterie (timer) 
+      [E] {10,100}. [50%]</li>
     <li> <em>Volume</em> sonore de la t&eacute;l&eacute;commande du timer [E]</li>
     <li> <em>Vis&eacute;es de cheminement erron&eacute;es</em> [T]</li>
+    <li><em>R&eacute;affectation</em> des stations d'affichage</li>
+    <li> <em>Renommer</em> un groupe de vis&eacute;es d&#8217;habillage </li>
   </ul>
   <p>&nbsp; </p>
   <p> <b>Param&egrave;tres des vis&eacute;es lat&eacute;rales d'habillage</b><br>
@@ -78,15 +88,17 @@
     <li> <em>Seuil angulaire des vis&eacute;es lat&eacute;rales en pointill&eacute;s</em> 
       : les vis&eacute;es lat&eacute;rales dont l'angle est inf&eacute;rieur &agrave; 
       ce seuil sont mises en pointill&eacute;s sur les sections transerses. [60&deg;].</li>
+    <li><em>Couleur du tiret </em>pour les vis&eacute;es d&#8217;habillage</li>
+    <li><em>Couleur du point</em> pour les vis&eacute;es d&#8217;habillage C</li>
+    <li><em>Couleur de la derni&egrave;re vis&eacute;e d&#8217;habillage<br>
+      </em><br>
+    </li>
   </ul>
-  <br>
   <p> <b>Param&egrave;tres de croquis</b><br>
   <ul>
     <li><em>D&eacute;calage et mise &agrave; l'&eacute;chelle</em> d'un croquis.</li>
-    <li> <em>Division/fusion</em> de croquis</li>
-    <li> <em>Taille du stylet</em> [0 : ignorer] : affiner le toucher du doigt 
-      lorsque vous dessinez avec un stylet [T]</li>
-    <li> Nombre de <em>sauvegardes</em> de croquis, conserv&eacute;es en boucle 
+    <li> <em>Fractionnement / Fusion</em> de croquis</li>
+    <li>Nombre de <em>sauvegardes</em> de croquis, conserv&eacute;es en boucle 
       dans une liste [5] [A]</li>
     <li> <em>Intervalle minimum</em> entre deux sauvegardes [60 s] [A]</li>
     <li> <em>Inclusion automatique des sections transverses</em> dans les exportations 
@@ -98,19 +110,31 @@
       lorsqu'une vis&eacute;e de cheminement est t&eacute;l&eacute;charg&eacute;e 
       (en mode de t&eacute;l&eacute;chargement de donn&eacute;es continu) [non 
       T].</li>
-    <li> Transformation affine : active la transformation affine des croquis.</li>
-    <li> <em>Niveaux de toile de fond (Canvas)</em> : aucun, par item, par type 
-      [aucun]. </li>
+    <li> <em>Transformation affine</em> : active la transformation affine des 
+      croquis.</li>
+    <li> <em>Niveaux de fond d'&eacute;cran (Canvas)</em> : aucun, par item, par 
+      type [aucun]. </li>
+    <li><em>Ajustement de l'&eacute;chelle</em> du papier millim&eacute;tr&eacute; 
+      [0]</li>
+    <li><em>Sections transverses inclin&eacute;es</em> : autoriser ou non les 
+      sections obliques sur les vues en coupe [non] </li>
   </ul>
-  <p> Le rafra&icirc;chissement incr&eacute;mentiel du cheminement (<i>Leg-only</i>) 
-    n'affecte pas le mode de t&eacute;l&eacute;chargement de donn&eacute;es &agrave; 
-    la demande. Il n'est pas non plus utilis&eacute; au niveau testeur [T], car, 
+  <p> <br>
+    L'actualisation par &eacute;tapes du cheminement (<i>Leg-only</i>) n'affecte 
+    pas le mode de t&eacute;l&eacute;chargement des donn&eacute;es &agrave; la 
+    demande. Il n'est pas non plus utilis&eacute; au niveau testeur [T], car, 
     &agrave; ce niveau, il existe un rafra&icirc;chissement incr&eacute;mentiel 
-    exp&eacute;rimental.<br>
+    exp&eacute;rimental.
+  <p>Si l'option sections obliques est activ&eacute;e, le plan des sections obliques 
+    dans les coupes peut pr&eacute;senter une inclinaison. Seules les inclinaisons 
+    multiples de 10 sont utilis&eacute;es. Si les sections obliques ne sont pas 
+    activ&eacute;es, les lignes de section trac&eacute;es sup&eacute;rieures &agrave; 
+    la valeur de <em>HThreshold</em> sont des sections verticales, sinon ce sont 
+    des sections horizontales.<br>
   
   <p> <b>Param&egrave;tres de lignes</b><br>
   <ul>
-    <li><em>Angle de coin minimal </em>pour rendre les lignes droites (quatri&egrave;me 
+    <li><em>Angle de coin minimal </em>pour redresser les lignes (quatri&egrave;me 
       bouton de la bo&icirc;te de dialogue d'&eacute;dition des &eacute;l&eacute;ments 
       de ligne) [45&deg;]. </li>
     <li><em>Pr&eacute;cision d'interpolation</em> pour les segments cubiques de 
@@ -119,60 +143,58 @@
     <li> <em>Distance maximale point/segment</em> pour les points superflus de 
       lissage [0,5 m].</li>
     <li> <em>Longueur maximale du segment</em> pour le lissage [2,0 m].</li>
+    <li><em>M&eacute;moire tampon d&#8217;&eacute;limination</em> : tampon autour 
+      d'un segment de ligne &agrave; simplifier [10 pxl].</li>
     <li> Actions d<em>'accrochage des lignes/zones</em></li>
     <li> Actions<em> </em>de<em> lissage/redressement</em> de segment</li>
     <li> Action<em> </em>de<em> redressement </em>de ligne enti&egrave;re</li>
-    <li> Actions<em> multifonctions</em></li>
-    <li> Actions<em> composites</em></li>
+    <li> Action de<em> multis&eacute;lection</em></li>
+    <li> Actions<em> composites</em> </li>
   </ul>
-  <br>
-  <p> <b>Param&egrave;tres de parois auto</b><br>
-  <ul>
-    <li>Type de <em>paroi automatique</em> (aucune, convexe, Delaunay) [aucune]. 
-    </li>
-    <li><em>Pente maximale</em> pour les vis&eacute;es lat&eacute;rales en plan 
-      [70&deg;]. </li>
-    <li><em>Pente</em> <em>minimale</em> epour les vis&eacute;es lat&eacute;rales 
-      en coupe [45&deg;]. </li>
-    <li><em>S&eacute;paration maximale</em> des points de la paroi le long de 
-      la vis&eacute;e [0,1]. </li>
-    <li><em>Concavit&eacute; maximale</em> [0.1] </li>
-    <li><em>Distance</em> entre les points de la ligne de paroi [1.0] 
-      <p>&nbsp;</p>
-    </li>
-  </ul>
+  <div style="font-size=90%">
+<p>&nbsp;</p>
+  </div>
 </div>
+<div style="font-size=90%"></div>
 <div style="font-size=90%"><b>Param&egrave;tres de l'appareil p&eacute;riph&eacute;riqe</b><br>
 </div>
-<div style="font-size=90%">
+<div style="font-size=90%"> 
   <ul>
-    <li><i>Délai de connexion </i>: délai [en 1/10 de secondes] avant d'essayer 
-      de se connecter au DistoX [par défaut, aucun délai] [B]</li>
+    <li><i>D&eacute;lai de connexion </i>: d&eacute;lai [en 1/10 de secondes] avant d'essayer 
+      de se connecter au DistoX [par d&eacute;faut, aucun d&eacute;lai] [B]</li>
     <li><em>Second DistoX</em> : si l'on souhaite travailler avec deux appareils 
       distincts (DistoX uniquement)</li>
-    <li><em>Pause acquisition des données</em>&#160;: pause après chaque téléchargement 
-      de données [valeur par défaut 250 ms] [A]</li>
-    <li><i>Pause validation des données</i>&#160;: délai d'attente pour v&eacute;rifier 
-      la validation des données [valeur par défaut 500 ms] [A]</li>
-    <li><em>Pause laser</em>&#160;: pause après avoir mis en marche le laser [valeur 
-      par défaut 1000 ms] [A]</li>
+    <li><em>Pause acquisition des donn&eacute;es</em>&#160;: pause apr&egrave;s chaque t&eacute;l&eacute;chargement 
+      de donn&eacute;es [valeur par d&eacute;faut 250 ms] [A]</li>
+    <li><i>Pause validation des donn&eacute;es</i>&#160;: d&eacute;lai d'attente pour v&eacute;rifier 
+      la validation des donn&eacute;es [valeur par d&eacute;faut 500 ms] [A]</li>
+    <li><em>Pause laser</em>&#160;: pause apr&egrave;s avoir mis en marche le laser [valeur 
+      par d&eacute;faut 1000 ms] [A]</li>
     <li><em>Pause</em> <em>vis&eacute;e </em> : pause apr&egrave;s la commande 
       de vis&eacute;e &agrave; distance [2000 ms] [A]</li>
     <li><em>V&eacute;rification du firmware</em> [oui]<i> </i>[A]</li>
-    <li><i>Mode Bric4 </i>: soit les donn&eacute;es primaires uniquement, toutes 
+    <li><i>Mode BRIC4 </i>: soit les donn&eacute;es primaires uniquement, toutes 
       les donn&eacute;es, ou toutes les donn&eacute;es sauf l'index. Avec toutes 
-      les donn&eacute;es, TopoDroid utilise comme index de vis&eacute;e la valeur 
-      du Bric4. [tous] [T]</li>
+      les donn&eacute;es, <em>TopoDroid</em> utilise comme index de vis&eacute;e 
+      la valeur du BRIC4. [tous] [T]</li>
+    <li><em>Donn&eacute;es nulles BRIC4</em> : enregistre ou non les vis&eacute;es 
+      de longueur nulle [no] [N]</li>
+    <li> <em>Bug SAP5 bit16</em> : solution de contournement [T]<br>
+      <br>
+      Remarque. Si les d&eacute;lais apr&egrave;s les commandes &agrave; distance 
+      &quot;pause laser&quot; et &quot;pause vis&eacute;e&quot; sont trop courts, 
+      les commandes peuvent &eacute;chouer. </li>
   </ul>
-  <p><br>
-  </p>
   <p> <b>Param&egrave;tres d'Import-Export </b><br>
   <ul>
     <li>Inclure les <em>fichiers outils</em> dans l'archive zip </li>
     <li>Mode des <em>donn&eacute;es du relev&eacute; topo</em> &agrave; l'importation 
       (normal, plong&eacute;e) [normal]. </li>
     <li>Exportation de csx au format <em>cSurvey-transfer</em> (n&eacute;cessite 
-      cSurvey 1.20) 
+      cSurvey 1.20) </li>
+    <li>Stations : ajout automatique de stations aux fichiers th2</li>
+    <li> <em>LRUD splay count</em> : nombre de vis&eacute;es d'habillage utilis&eacute;es 
+      pour LURD 
       <p>&nbsp;</p>
       <p>&nbsp;</p>
       <br>

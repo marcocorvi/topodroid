@@ -4,33 +4,88 @@
 </HEAD>
 
 <body>
-<h3>IMPORTATION DE POINTS GÉOLOCALISÉS<em></em></h3>
-Cette boîte de dialogue s'ouvre en appuyant sur le bouton <em>Importer</em> de 
-la fenêtre de <a href="page_fixed_list.htm">liste des points géolocalisés</a>. 
-<br>
-<p> Avec cette boîte de dialogue, vous pouvez importer dans TopoDroid les coordonnées 
-  d'un point à partir d'un fichier de la liste des points géolocalisés. 
-<ol>
-  <li><img src="mobiletopographer_flag.png" width="36" height="37">&nbsp;Ouvrez 
-    <em>Mobile Topographer</em> et trouvez les coordonnées du point (icône &quot;drapeau&quot; 
-    sur la gauche).</li>
-  <li><img src="mobiletopographer_plus.png" width="36" height="37">&nbsp;Lorsque 
-    vous avez atteint une précision suffisante dans les coordonnées, enregistrez 
-    le point (troisième icône &quot;doc avec plus&quot;).</li>
-  <li><img src="mobiletopographer_points.png" width="36" height="37">&nbsp;Vous 
-    pouvez également saisir les coordonnées du point à la main (et sauvegarder 
-    le point). </li>
-  <li><img src="mobiletopographer_disk.png" width="36" height="37">&nbsp;Sauvegardez 
-    la liste (quatrième icône &quot;disquette&quot;). Le fichier est enregistré 
-    dans &quot;<em>MobileTopographer / pointlist</em>&quot;</li>
-  <li>Importez les coordonnées dans TopoDroid. Les points enregistrés sont affichés 
-    dans une liste; appuyez sur le point à importer.</li>
-</ol>
-&nbsp;<img src="mobiletopographer_updown.png"> Si vous le souhaitez, vous pouvez 
-aller à la liste de points enregistrés dans <em>MobileTopographer</em> (quatrième 
-icône "doc"), et déplacez le point que vous avez obtenu vers le haut avec les 
-flèches. <br>
-<p>
-
+<h4>IMPORTATION DE POINT GÉOLOCALISÉ</h4>
+Cette boîte de dialogue s'ouvre en appuyant sur le bouton GNSS (GPS) <br>
+<p> Cette boîte de dialogue s'ouvre en appuyant sur le bouton &quot;Importer&quot; 
+  <img src="btn_import.png" width="36" height="36"> de la <a href="page_fixed_list.htm">Liste 
+  des Points Géolocalisés</a>.<br>
+  Avec cette boîte de dialogue, vous pouvez importer dans <em>TopoDroid</em> les 
+  coordonnées d'un point acquis avec l'une des applications GNSS prises en charge.<br>
+  <img src="gnss_apps.png"> <br>
+  <br>
+  <strong>MobileTopographer</strong> 
+<p> <em>TopoDroid</em> lit les coordonnées du point à partir d'un fichier de liste 
+  de points MobileTopographer. <br>
+  Si vous ne sélectionnez pas un fichier de liste de points MobileTopographer 
+  le comportement de l'application n'est pas défini. 
+<p>1.<img src="mobiletopographer_flag.png"> Ouvrez <em>Mobile Topographe</em>r 
+  et recherchez les coordonnées du point.<br>
+  2.<img src="mobiletopographer_plus.png"> Lorsque les coordonnées sont suffisamment 
+  précises, enregistrez le point.<br>
+  3.<img src="mobiletopographer_points.png"> Vous pouvez également saisir les 
+  coordonnées du point à la main (et enregistrer le point).<br>
+  4.<img src="mobiletopographer_disk.png"> Enregistrez la liste des points. La 
+  liste est enregistrée dans un fichier &quot;MobileTopographer/pointlist&quot;. 
+  <br>
+  5. Importez les coordonnées dans TopoDroid. Les points enregistrés sont affichés 
+  dans une liste; appuyez sur le point à importer.</p>
+<p> <img src="mobiletopographer_updown.png">Si vous le souhaitez, vous pouvez 
+  aller à la liste de points enregistrés dans MobileTopographer (quatrième icône 
+  &quot;doc&quot;), et déplacer le point que vous avez obtenu vers le haut à l’aide 
+  des flèches vertes.</p>
+<p><br>
+  <strong>GPS Logger</strong><br>
+  L'application affiche les coordonnées des points et d'autres informations. Les 
+  fichiers de suivi sont enregistrés dans le dossier &quot;gnss_log&quot;. Ils 
+  contiennent un en-tête avec des informations sur l'appareil, et les données 
+  des points dans des enregistrements CSV : constellation, latitude, longitude, 
+  altitude, vitesse, précision et heure. Le journal peut également contenir des 
+  mesures GNSS brutes, des messages de navigation et des &quot;phrases NMEA&quot;.</p>
+<p> 1. <img src="gpslogger_btn1.png"> Commencez à enregistrer les points de trace. 
+  <br>
+  2. <img src="gpslogger_btn2.png"> Arrêtez l'enregistrement de la trace. <br>
+  3. Finaliser la piste. La piste est ajoutée à la &quot;tracklist&quot;.</p>
+<p><br>
+  <strong>GPSTest</strong><br>
+  L'application affiche les coordonnées du point et les données satellites : fix, 
+  constellation, fréquences porteuses, rapport porteuse/bruit, drapeaux, élévation, 
+  azimut. Le point peut être affiché sur la carte (option dans les &quot;réglages&quot;).</p>
+<p> 1. <img src="gpstest_btn1.png"> Ouvrez la boîte de dialogue de partage/exportation.<br>
+  2.<img src="gpstest_btn2.png"> Les coordonnées du point peuvent être copiées 
+  dans le presse-papiers<br>
+  3. <img src="gpstest_btn3.png"> ou enregistrées dans un fichier. Il est important 
+  de cocher la case &quot;Inclure l'altitude&quot;.</p>
+<p><br>
+  <strong>GPX Recorder</strong><br>
+  Les coordonnées des points sont enregistrées dans un fichier de suivi qui peut 
+  être lu par TopoDroid. Les fichiers de trace se trouvent dans le dossier &quot;gpx_recorder&quot;. 
+  Le fichier est au format.xml et les données des points sont la latitude, la 
+  longitude, l'altitude et l'heure.</p>
+<p> 1. <img src="gpxrecorder_start.png"> Démarrer l'enregistrement des coordonnées 
+  des points.<br>
+  2. <img src="gpxrecorder_stop.png"> Arrêter l'enregistrement.</p>
+<p><br>
+  <strong>GPS Point</strong><br>
+  TopoDroid lit les coordonnées exportées dans un fichier de points : latitude, 
+  longitude, altitude et précision.</p>
+<p> 1. L'application affiche une liste des points enregistrés<br>
+  2. <img src="gpspoint_btn1.png"> Ouvrir l'interface GNSS<br>
+  3. <img src="gpspoint_btn2.png"> Acquérir la position GNSS<br>
+  4. L'application affiche le point avec le cercle d'incertitude sur la carte. 
+  Les coordonnées du point et d'autres informations sont affichées dans une boîte.<br>
+  5. Enregistrez le point lorsque vous avez terminé.<br>
+  6. Sélectionner le point dans la liste et l'exporter dans un fichier (texte).</p>
+<p> <img src="gpspoint_point.png"></p>
+<p><br>
+  <strong>GPS Position</strong><br>
+  L'application affiche les coordonnées du point et les données satellites.</p>
+<p> 1. <img src="gpsposition_btn1.png"><br>
+  2. <img src="gpsposition_btn3.png"> Afficher les données des satellites : coordonnées, 
+  azimut, élévation, rapport porteuse/bruit, et marqueurs (almanach, éphémérides).<br>
+  3. <img src="gpsposition_btn2.png"> La position peut être copiée dans le presse-papiers 
+  <br>
+  4. ou bien enregistrée dans un fichier.<br>
+</p>
+<p> 
 </body>
 </html>

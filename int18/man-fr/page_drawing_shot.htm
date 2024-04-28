@@ -3,22 +3,22 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
 </HEAD>
 <body>
-<h4>PROPRIÉTÉS DES VISÉES D'HABILLAGE DU CROQUIS</h4>
+<h4>PROPRIÉTÉS DES VISÉES DU CROQUIS<br>
+  Boîte de dialogue </h4>
 
 <p> Cette bo&icirc;te de dialogue s'ouvre lorsque vous s&eacute;lectionnez une 
-  visée d'habillage H (Up) et appuyez sur l'icône <em>Propriétés de l'él&eacute;ment</em> 
-  <img src="btn_item.png" width="36" height="36"> (dans la <a href="manual09.htm">fen&ecirc;tre 
-  de croquis</a> en mode &quot;Modifier&quot;).<br>
-<p>Propri&eacute;t&eacute;s de la vis&eacute;e :</p>
+  visée d'habillage H (Up) et appuyez sur l'icône <u>Propriétés de l'él&eacute;ment</u> 
+  (dans la <em>fen&ecirc;tre d'Esquisse</em> en mode &quot;Modifier&quot;).<br>
+<p>Propri&eacute;t&eacute;s de la vis&eacute;e latérale :</p>
 <ul>
-  <li>Longueur, azimut et pente</li>
+  <li><strong>Longueur, azimut et pente</strong></li>
   <li><b>Nom de station </b>associée</li>
-  <li><strong>Type</strong> de visée (D avant, B arrière, M manuel).</li>
+  <li> <strong>Type de mesure</strong> (D visée avant, B visée arrière, M saisie 
+    manuelle).</li>
   <li><b>Commentaire</b></li>
-  <li><b>Extension</b> de la coupe développée : &quot;Gauche&quot;, &quot;Verticale&quot; 
-    ou &quot;Droite&quot;</li>
-  <li>Curseur d'<strong>extension fractionnée </strong> de la coupe développée 
-    (visées de cheminement uniquement) [T].</li>
+  <li><b>Extension</b> : &quot;Gauche&quot;, &quot;Verticale&quot; ou &quot;Droite&quot;</li>
+  <li><strong>Curseur d'extension fractionnée</strong> de la coupe (uniquement 
+    pour les visées en coupe développée) [T]</li>
   <li><img src="btn_duplicate.png" width="34" height="33" valighn="bottom"> ic&ocirc;ne 
     vis&eacute;e &quot;dupliqu&eacute;e&quot;</li>
   <li><img src="btn_surface.png" width="34" height="33" valighn="bottom"> ic&ocirc;ne 
@@ -27,75 +27,53 @@
     vis&eacute;e &quot;comment&eacute;e&quot;</li>
   <li><strong>Masquer depuis</strong>... : deux cases &agrave; cocher pour <b>masquer</b> 
     la ligne de cheminement</li>
-  <li><strong>couleur</strong>, si activée (visées d'habillage uniquement)</li>
+  <li><strong>Couleur</strong>, si elle est activée (affichage uniquement)</li>
 </ul>
-<p></p>
-<p>Le <strong>type de visée </strong>est orange si la visée est incompatible avec 
-  ses voisines (visées parentes) et rouge s'il y a un éventuel problème magnétique. 
-</p>
-<p><br>
-  <b>Cacher une partie de la ligne de cheminement médiane </b><br>
-  Pour les visées de cheminement il y a deux cases &agrave; cocher avec le nom 
-  des stations à côté afin de pouvoir masquer l'affichage d'une portion de la 
-  ligne de cheminement (utile pour <em>Therion</em>). Les stations &quot;butoirs&quot; 
-  sont affich&eacute;es ensuite en rouge ou en violet sur le dessin. On peut annuler 
-  la disparition de la portion de cheminement et les stations &quot;butoirs&quot; 
-  via la bo&icirc;te de dialogue d'<a href="page_sketch_station.htm">édition des 
-  stations du croquis</a>.</p>
-<p><br>
-  <b>Enregistrer</b> confirme les modifications et ferme la bo&icirc;te de dialogue.<br>
-  Il y a un avertissement si, lors de l'enregistrement d'une visée de cheminement 
-  celle-ci diffère d'une autre visée des mêmes stations de plus d'un quart de 
-  la longueur ou de plus de 15°.</p>
-<p><br>
-  <b>Annuler</b> et la touche Retour d'Android ferment la bo&icirc;te de dialogue 
-  sans enregistrer les modifications.</p>
-<p><br>
-  <b>Visée de cheminement &eacute;tendue</b> [T] <br>
-  Dans coupe développée, les visées sont généralement dessinées soit vers la gauche, 
-  soit à la verticale, soit vers la droite (ou ne sont pas dessinées du tout). 
-  Le choix parmi ces options dépend de la valeur &quot;extend&quot;, qui spécifie 
-  si la visée est étendue à gauche (-1), verticalement (0), ou à droite (+1). 
-  Lorsqu'une visée est sélectionnée sur la coupe développée, un segment horizontal 
-  de couleur jaune est dessin&eacute; sur son point central. En faisant glisser 
-  le point central le long de ce segment, l'utilisateur peut rapidement modifier 
-  l'&quot;extension&quot; de la visée et ainsi adapter l'aspect de sa coupe. </p>
-<p><br>
-  <strong>Extension fractionnelle</strong> [T]<br>
-  Il est également possible de définir une &quot;extension fractionnelle&quot; 
-  : une valeur comprise entre -1,5 et 1,5, au lieu des seules valeurs entières 
-  -1 (gauche), 0 (verticale) et 1 (droite). Par défaut, l'&quot;extension&quot; 
-  a une valeur entière et la partie fractionnaire est égale à zéro. Le curseur 
-  sous les cases à cocher &quot;extend&quot; change la partie entière et la partie 
-  fractionnaire de l'extension de la visée.
-<p><br>
-  La partie fractionnaire de l'extension de la visée est fixée à zéro lorsque 
-</p>
+<p>Le type de mesure est orange si la visée de cheminement est incohérente avec 
+  les visée parentes, et rouge s'il y a un possible problème magnétique.</p>
+<p><strong>Enregistrer</strong> confirme les modifications et ferme la boîte de 
+  dialogue.</p>
+<p><strong>Annuler</strong> et la touche &quot;Retour&quot; du périphérique Android 
+  ferment la boîte de dialogue sans enregistrer les modifications. </p>
+<p><strong>Cacher</strong> une partie de la ligne médiane de cheminement </p>
+<p> Pour les visées de cheminement il y a deux cases à cocher avec le nom des 
+  stations à côté afin de pouvoir masquer l'affichage d'une portion de la ligne 
+  de cheminement (utile pour Therion). Les stations &quot;butoirs&quot; sont affichées 
+  ensuite en rouge ou en violet sur le dessin. On peut annuler la disparition 
+  de la portion de cheminement et les stations &quot;butoirs&quot; via la boîte 
+  de dialogue d'Édition des stations du croquis. </p>
+<p><strong>Visée de cheminement étendue </strong>[E]<br>
+  Lorsqu'un segment de cheminement est sélectionné sur une coupe développée, une 
+  coche horizontale de couleur jaune est dessiné sur son point central. En faisant 
+  glisser le point milieu le long du segment, l'utilisateur peut rapidement changer 
+  l'extension de la branche. </p>
+<p><strong>Extension fractionnée </strong>[T]<br>
+  Il est également possible de définir une &quot;extension fractionnée&quot; ayant 
+  une valeur comprise entre -1,5 et 1,5, au lieu des seules valeurs entières suivantes 
+  : -1 (gauche), 0 (vertical), et 1 (droit). Par défaut, l'&quot;extension&quot; 
+  possède une valeur entière et la partie fractionnaire est égale à zéro. Le curseur 
+  sous les cases à cocher &quot;extend&quot; modifie la partie entière et la partie 
+  fractionnaire de l’extension de la visée.<br>
+  La partie fractionnée de l’extension de la visée est fixée à zéro lorsque :</p>
 <ul>
-  <li> l'extension de la visée est définie par une action multi-sélection (à l'exception 
-    de l'action &quot;flip&quot;)</li>
-  <li> l'extension de la visée est modifiée dans la fenêtre de croquis à l'aide 
-    de la ligne d'extension jaune</li>
+  <li> l'extension de la visée est définie par une action multivisées (à l'exception 
+    de l'action &quot;retourner&quot;)</li>
+  <li> l'extension de la visée est modifiée dans la fenêtre de dessin de croquis 
+    à l'aide de la ligne d'extension jaune</li>
   <li> l'extension de la visée est modifiée dans la boîte de dialogue d'édition 
-    de visée (de la fenêtre des données d'arpentage)</li>
-  <li> l'extension de la visée est attribuée par TopoDroid.</li>
+    de visée (de la fenêtre des données du relevé topographique)</li>
+  <li> l'extension du plan est attribuée par <em>TopoDroid</em>.</li>
 </ul>
-<p><br>
-  Pour définir une extension fractionnée, vous devez activer le paramètre relatif. 
+<p> Pour définir une extension fractionnée, vous devez activer le paramètre relatif. 
   Comme la plupart des programmes de dessin cartographique ne prennent pas en 
-  charge les extensions fractionnées, ce paramètre est désactivé par défaut. </p>
-<p><br>
-  <strong>Couleur d'affichage</strong> [T]<br>
-  Il est possible d'attribuer une couleur à chaque visée latérale d'habillage. 
-  La couleur est stockée dans la base de données et est donc partagée entre les 
-  différents croquis.<br>
-  La couleur d'affichage est déterminée par un paramètre [G] : elle est soit désactivée, 
-  soit sélectionnable à l'aide d'un sélecteur de couleur, soit choisie parmi une 
-  palette de couleurs.<br>
-  La boîte de dialogue des couleurs comporte également un bouton permettant d'effacer 
-  la couleur d'affichage. </p>
-<p>&nbsp; 
-<p>
-
+  charge l'&quot;exportation&quot; fractionnée, ce paramètre est désactivé par 
+  défaut.</p>
+<p><strong>Couleur d'affichage</strong> [T]<br>
+  Il est possible d'attribuer une couleur à chaque visée d’habillage. La couleur 
+  est stockée dans la base de données et est donc partagée entre les différents 
+  croquis .<br>
+  <br>
+  La boîte de dialogue des couleurs comporte un bouton bleu EFFACER permettant 
+  d'effacer la couleur d'affichage.</p>
 </body>
 </html>

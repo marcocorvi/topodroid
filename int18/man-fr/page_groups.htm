@@ -3,33 +3,40 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
 </HEAD>
 <body>
-<h4>GROUPES DE DONNÉES D'ÉTALONNAGE du DistoX</h4>
-Cette boîte de dialogue s'ouvre en appuyant sur le bouton <em>Groupe</em> de la 
-<u> fenêtre Données d'étalonnage</u>. <img src="btn_grouper.png"><br>
+<h4>GROUPES DES DONNÉES D'ÉTALONNAGE</h4>
+Cette boîte de dialogue s'ouvre en appuyant sur le bouton <u>Groupe</u> de la 
+<em><a href="manual05.htm">Fenêtre</a></em> <a href="manual05.htm"><em>des Données 
+d'étalonnage</em></a>. <br>
 <p> Avant de calculer le coefficient d'étalonnage les données d'étalonnage doivent 
   être subdivisées en groupes de données ayant le même azimut et inclinaison (rotations 
   différentes). <br>
-  Attention, une mauvaise affectation de groupe peut entraîner l'échec du calcul 
-  des coefficients d'étalonnage (généralement dû à un trop grand nombre d'itérations 
-  dans l'algorithme). 
-<p> Les groupes sont identifiés par un nombre entier à partir de 1. <br>
+<p>
+
+Les groupes sont identifiés par un nombre entier à partir de 1. <br>
   Les données identifiées par un&nbsp;0 sont répertoriées mais exclues du coefficient 
   de calcul. <br>
-  Les données supprimées ont un numéro de groupe négatif, donc définir le numéro 
-  de groupe -1 revient à marquer les données comme &quot;Supprimées&quot;.
-<p> Il existe deux stratégies d'affectation automatique des groupes : 
+  Les données "Supprimées" sont identifiées par le numéro -1.
+<p> <br>
+  Vous pouvez assigner le numéro de groupe à chaque donnée d'étalonnage à la main 
+  (avec la boîte de dialogue d'édition des données d'étalonnage), ou laisser <em>TopoDroid</em> 
+  assigner les numéros de groupe pour vous. <br>
+  Il existe deux stratégies d'attribution automatique des groupes : 
 <ol>
-  <li><em>TopoDroid</em> : quatre données à la fois pour chaque groupe ;</li>
+  <li> <em>TopoDroid</em> : quatre données à la fois pour chaque groupe ;</li>
   <li> <em>PocketTopo</em> : quatre à la fois pour les 16 premières données (quatre 
-    groupes), puis chaque donnée est un groupe à part entière ; 
-    <!-- li>groups based on the relative angle distance (direction difference).</li -->
-  </li>
+    groupes), puis chaque donnée est un groupe à part entière ;</li>
 </ol>
-<p> <strong>Actions</strong>&#160;: 
+<p> Les deux stratégies donnent des étalonnages équivalents, mais avec la stratégie 
+  <em>TopoDroid</em>, l'application peut calculer la déviation des données calibrées 
+  par rapport aux valeurs attendues, sur un plus grand nombre de données, et créer 
+  un histogramme plus détaillé des erreurs résiduelles. </p>
+<p>
+
+Actions&#160;:
 <ul>
-  <li><em>Réinitialiser</em> tous les groupes&#160;: les groupes de données sont 
+  <li><b>Réinitialiser</b> tous les groupes&#160;: les groupes de données sont 
     remis à zéro </li>
-  <li><em>OK</em>&#160;: des groupes sont affectés (uniquement possible pour les 
+  <li><b>OK</b>&#160;: des groupes sont affectés (uniquement possible pour les 
     données qui n'ont pas de groupe) </li>
 </ul>
 <br><p>
