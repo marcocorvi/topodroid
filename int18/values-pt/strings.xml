@@ -355,7 +355,7 @@ no campo abaixo e aperte o botão.
   <string name="cell_size">Tamanho célula [m]</string>
   <string name="legs">Visadas</string>
   <string name="stations">Bases</string>
-  <string name="splays">medidas auxiliares</string>
+  <string name="splays">Medidas auxiliares</string>
   <!-- UNUSED string name="fmt_listen">OUVIR | %1$s</string -->
   <string name="fmt_id">ID %1$s</string>
   <string name="fmt_latitude_dd_dms">Latitude: %1$s [%2$s]</string>
