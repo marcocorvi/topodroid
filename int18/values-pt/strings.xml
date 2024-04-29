@@ -1126,7 +1126,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="title_contour">Contorno</string -->
   <!-- UNUSED string name="title_coord">Inserir as coordenadas do ponto:</string -->
   <string name="title_current_station">Bases gravadas</string>
-  <string name="title_search">Pesquisa de bases e visadas</string>
+  <string name="title_search">Pesquisa bases e medidas</string>
   <string name="title_gm_search">Pesquisa dados calibração</string>
   <string name="title_dangling">Medidas desconectadas</string>
   <string name="title_device">Dispositivos DistoX</string>

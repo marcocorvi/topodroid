@@ -27,7 +27,7 @@ public class Device
   public final static String NAME_DISTOX2   = "DistoX-";
   public final static String NAME_DISTOXBLE = "DistoXBLE-";
   public final static String NAME_BRIC      = "BRIC-";
-  public final static String NAME_BRIC4     = "BRIC4-";
+  public final static String NAME_BRIC4     = "BRIC4_";
   public final static String NAME_BRIC5     = "BRIC5-";
   public final static String NAME_SAP5      = "Shetland_";
   public final static String NAME_SAP5_2    = "SAP5_";
