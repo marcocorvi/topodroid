@@ -26,9 +26,9 @@ public class Device
   public final static String NAME_DISTOX1   = "DistoX";     // all DistoX1 are advertised as "DistoX" without device code
   public final static String NAME_DISTOX2   = "DistoX-";
   public final static String NAME_DISTOXBLE = "DistoXBLE-";
-  public final static String NAME_BRIC      = "BRIC_";
+  public final static String NAME_BRIC      = "BRIC-";
   public final static String NAME_BRIC4     = "BRIC4_";
-  public final static String NAME_BRIC5     = "BRIC5_";
+  public final static String NAME_BRIC5     = "BRIC5-";
   public final static String NAME_SAP5      = "Shetland_";
   public final static String NAME_SAP5_2    = "SAP5_";
   public final static String NAME_SAP6      = "SAP6_";
