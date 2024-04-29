@@ -145,6 +145,7 @@ no campo abaixo e aperte o botão.
   <string name="calib_precision">Precisão</string>
   <string name="calib_iter">Iterações: %1$d</string>
   <string name="calib_dip">Inclinação mag.: %1$.1f °</string>
+    <!-- TODO string name="calib_roll">Roll diff.: %1$.2f &#xb0;</string -->
   <string name="calib_reset">Reiniciar a calibração da DistoX?</string>
   <string name="calib_min_error">Erro mínimo</string>
   <string name="magn_dip">Inclinação mag. …</string>

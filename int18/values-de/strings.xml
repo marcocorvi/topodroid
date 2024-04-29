@@ -136,6 +136,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="calib_precision">Präzision</string>
   <string name="calib_iter">Iterationen: %1$d</string>
   <string name="calib_dip">Magn. dip: %1$.1f °</string>
+    <!-- TODO string name="calib_roll">Roll diff.: %1$.2f &#xb0;</string -->
   <string name="calib_reset">DistoX-Kalibrierung zurücksetzen?</string>
   <string name="calib_min_error">Minimum error</string>
   <string name="magn_dip">Magn. dip &#8230;</string>

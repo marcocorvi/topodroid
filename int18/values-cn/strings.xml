@@ -156,6 +156,7 @@
     <string name="calib_precision">精度</string>
     <string name="calib_iter">迭代次数: %1$d</string>
     <string name="calib_dip">磁倾角(dip): %1$.1f</string>
+    <!-- TODO string name="calib_roll">Roll diff.: %1$.2f &#xb0;</string -->
     <string name="calib_reset">重置DistoX校准 ?</string>
     <string name="calib_min_error">最小误差</string>
     <string name="magn_dip">磁倾角(dip) &#8230;</string>

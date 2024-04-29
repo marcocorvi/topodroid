@@ -323,7 +323,7 @@ public class CalibActivity extends Activity
    
       CalibResult res = new CalibResult();
       TopoDroidApp.mDData.selectCalibError( TDInstance.cid, res );
-      (new CalibCoeffDialog( this, null, vG, mG, vM, mM, nL, null, res.delta_bh, res.error, res.stddev, res.max_error, res.iterations, res.dip, coeff /*, false */ )).show();
+      (new CalibCoeffDialog( this, null, vG, mG, vM, mM, nL, null, res.delta_bh, res.error, res.stddev, res.max_error, res.iterations, res.dip, res.roll, coeff /*, false */ )).show();
     } else {
       TDToast.make( R.string.calib_no_coeff );
     }

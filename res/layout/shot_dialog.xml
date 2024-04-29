@@ -200,7 +200,7 @@
       android:paddingEnd="@dimen/paddingh"
       android:orientation="horizontal" 
       >
-      <Button android:id="@+id/btn_ok"
+      <Button android:id="@+id/lrud_ok"
         style="@style/button_default"
         android:text="@string/button_lrud"
         android:singleLine="true"

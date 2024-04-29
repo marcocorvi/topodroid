@@ -19,6 +19,7 @@ public class CalibResult
   public float max_error;      // [deg]
   public int iterations;  
   public float dip; // dip [degrees]
+  public float roll; // iroll max difference [degrees]
 
   public CalibResult()
   {
@@ -28,6 +29,7 @@ public class CalibResult
     max_error  = 0.0f;
     iterations = 0;
     dip        = 0.0f;
+    roll       = 0.0f;
   }
 }
 

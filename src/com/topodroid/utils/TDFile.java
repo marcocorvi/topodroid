@@ -564,7 +564,11 @@ public class TDFile
   /** @return file writer
    * @param name    file fullpath
    */
-  public static FileWriter getFileWriter( String name ) throws IOException { return new FileWriter( name ); }
+  public static FileWriter getFileWriter( String name ) throws IOException 
+  { 
+    TDLog.v("get file writer: " + name );
+    return new FileWriter( name );
+  }
 
   /** @return file writer
    * @param file    file 

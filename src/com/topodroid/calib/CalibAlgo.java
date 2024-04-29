@@ -76,6 +76,51 @@ public class CalibAlgo extends CalibTransform
     if ( N > 0 ) Reset( N );
   }
 
+  float computeRoll( TDVector v0, TDVector v )
+  {
+    float s = v0.y * v.z - v0.z * v.y;
+    float c = v0.y * v.y + v0.z * v.z;
+    float d = TDMath.sqrt( s*s + c*c );
+    float r = TDMath.atan2( s/d, c/d ) * TDMath.RAD2DEG;
+    return ( r < 0 )? r + 360 : r;
+  }
+
+  /** compute the maximum roll difference between G vector and M vector of groups
+   */
+  public float rollDifference()
+  {
+    float max = 0;
+    int ns = g.length;
+    long grp = -1L;
+    TDVector g10 = null;
+    TDVector m10 = null;
+    int n = 0;
+    float roll = 0;
+    for ( int k = 0; k < ns; ++k ) {
+      if ( group[k] <= 0 ) continue;
+      if ( group[k] != grp ) {
+        g10 = getTransformedG( g[k] );
+        m10 = getTransformedM( m[k] );
+        grp = group[k];
+      } else {
+        TDVector g1 = getTransformedG( g[k] );
+        TDVector m1 = getTransformedM( m[k] );
+        if ( g10 != null ) {
+          float g_roll = computeRoll( g10, g1 );
+          float m_roll = computeRoll( m10, m1 );
+          float x = TDMath.abs( g_roll - m_roll );
+          if ( x > max ) max = x;
+          roll += x;
+          n ++;
+        }
+      }
+    }
+    roll /= n;
+    TDLog.v("Max roll difference " + max + " average " + roll );
+    return roll;
+  }
+    
+
   // void setAlgorithm( boolean nonLinear ) { mNonLinear = nonLinear; }
 
   /** @return the BH delta value

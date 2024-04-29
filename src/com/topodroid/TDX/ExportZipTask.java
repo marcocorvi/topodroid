@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 
 import com.topodroid.prefs.TDSetting;
 
@@ -40,6 +40,14 @@ class ExportZipTask extends AsyncTask< Void, Void, Boolean >
     mUri   = uri;
     // mSaved    = context.getResources().getString( R.string.zip_saved );
   }
+
+  boolean doInForeground( )
+  {
+    mArchiver = new Archiver( );
+    boolean ret = mArchiver.archive( mApp, mUri );
+    onPostExecute( ret );
+    return ret;
+  }
   
   /** execute the task in background
    * @param args  args (unused)
@@ -48,6 +56,7 @@ class ExportZipTask extends AsyncTask< Void, Void, Boolean >
   protected Boolean doInBackground( Void... args )
   {
     // TopoDroidApp.doExportDataSync( TDSetting.mExportShotsFormat );
+    TDLog.v("export zip task exec ...");
     mArchiver = new Archiver( );
     return mArchiver.archive( mApp, mUri );
   }
@@ -61,10 +70,12 @@ class ExportZipTask extends AsyncTask< Void, Void, Boolean >
   @Override
   protected void onPostExecute( Boolean res )
   {
+    TDLog.v("Export zip task post-exec res " + res );
     if ( res ) {
       // TDToast.make( mSaved + " " + mArchiver.getZipname() );
       TDToast.make( R.string.zip_saved );
       if ( TDSetting.mZipShare ) {
+        TDLog.v("share zip");
         mApp.shareZip( mUri );
       }
     } else {

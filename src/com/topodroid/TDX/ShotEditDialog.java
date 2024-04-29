@@ -11,7 +11,6 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.utils.TDString;
@@ -616,6 +615,7 @@ class ShotEditDialog extends MyDialog
     //     mETdown.getText().toString().replace(',','.') 
     //   );
     // }
+    // TDLog.v("SAVE block");
 
     boolean do_backleg = false;
     boolean backleg_val = mCBbackLeg != null && mCBbackLeg.isChecked();
@@ -924,7 +924,11 @@ class ShotEditDialog extends MyDialog
         }
       }
     } else if ( b == mButtonOK ) { // OK and SAVE close the keyboard
-      if ( saveDBlock() ) dismiss();
+      if ( saveDBlock() ) {
+        dismiss();
+      } else {
+        TDLog.Error("OK failed to save block");
+      }
     } else if ( b == mButtonSave ) {
       if ( ! saveDBlock() ) {
         TDToast.makeWarn( R.string.shot_not_saved );
@@ -1111,7 +1115,7 @@ class ShotEditDialog extends MyDialog
     mETright = (EditText)findViewById( R.id.shot_right );
     mETup    = (EditText)findViewById( R.id.shot_up );
     mETdown  = (EditText)findViewById( R.id.shot_down );
-    mBTlrud  = (Button)findViewById( R.id.btn_ok );
+    mBTlrud  = (Button)findViewById( R.id.lrud_ok );
   }
 
   private void updateLayoutLRUD()

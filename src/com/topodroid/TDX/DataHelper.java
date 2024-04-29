@@ -5566,9 +5566,12 @@ public class DataHelper extends DataSetObservable
 
    void dumpToFile( String filename, long sid )
    {
-     // TDLog.v( "dump DB to file " + filename );
+     TDLog.v( "dump DB to file " + filename + " survey ID " + sid );
      // String where = "surveyId=" + Long.toString(sid);
-     if ( myDB == null ) return;
+     if ( myDB == null ) {
+       TDLog.Error("dump DB to file: null DB ");
+       return;
+     }
      try {
        TDPath.checkPath( filename );
        FileWriter fw = TDFile.getFileWriter( filename ); // DistoX-SAF
@@ -5578,6 +5581,7 @@ public class DataHelper extends DataSetObservable
                             "id=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
+         TDLog.v("dump SURVEY");
          do {
            pw.format(Locale.US,
                      "INSERT into %s values( %d, \"%s\", \"%s\", \"%s\", %.4f, \"%s\", \"%s\", %d, %d, %d );\n",
@@ -5603,6 +5607,7 @@ public class DataHelper extends DataSetObservable
        //                      null, null, null );
        cursor = myDB.rawQuery( qAudiosAll, new String[] { Long.toString(sid) } );
        if (cursor.moveToFirst()) {
+         TDLog.v("dump AUDIO");
          do {
            pw.format(Locale.US,
                      "INSERT into %s values( %d, %d, %d, \"%s\" );\n",
@@ -5622,6 +5627,7 @@ public class DataHelper extends DataSetObservable
        //                      null, null, null );
        cursor = myDB.rawQuery( qPhotosAll, new String[] { Long.toString(sid) } );
        if (cursor.moveToFirst()) {
+         TDLog.v("dump PHOTO");
          do {
            pw.format(Locale.US,
                      "INSERT into %s values( %d, %d, %d, %d, \"%s\", \"%s\", \"%s\", %d );\n",
@@ -5644,6 +5650,7 @@ public class DataHelper extends DataSetObservable
                             "surveyId=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
+         TDLog.v("dump PLOT");
          do {
            pw.format(Locale.US,
              "INSERT into %s values( %d, %d, \"%s\", %d, %d, \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f, \"%s\", \"%s\", %d, %d, %.2f, %.2f, %.2f, %.2f );\n",
@@ -5718,9 +5725,11 @@ public class DataHelper extends DataSetObservable
                             "surveyId=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
+         TDLog.v("dump SHOT cols " + cursor.getColumnCount() + " rows " + cursor.getCount() );
          do {
            pw.format(Locale.US,
-            "INSERT into %s values( %d, %d, \"%s\", \"%s\", %.3f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %d, %d, %d, %d, \"%s\", %d, %d, %d, %.2f, \"%s\", %d, %d, %d, %d, %d, %d, %d, %ld );\n",
+            //           TABLE      SID ID  FROM    TO      dist  bear  clino roll  acc   mag   dip   ext flg leg sts comment typ mse col str.  addr    mx          gx          idx time
+            "INSERT into %s values( %d, %d, \"%s\", \"%s\", %.3f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %d, %d, %d, %d, \"%s\", %d, %d, %d, %.2f, \"%s\", %d, %d, %d, %d, %d, %d, %d, %d );\n",
                      SHOT_TABLE,
                      sid,
                      cursor.getLong(0),
@@ -5729,15 +5738,15 @@ public class DataHelper extends DataSetObservable
                      cursor.getDouble(3),
                      cursor.getDouble(4),
                      cursor.getDouble(5),
-                     cursor.getDouble(6),
+                     cursor.getDouble(6),   // roll
                      cursor.getDouble(7),
                      cursor.getDouble(8),
-                     cursor.getDouble(9),
+                     cursor.getDouble(9),   // dip
                      cursor.getLong(10),    // extend
                      cursor.getLong(11),    // flag
                      cursor.getLong(12),    // leg
                      cursor.getLong(13),    // status
-                     TDString.escape( cursor.getString(14) ),  // comment
+                     TDString.escape( cursor.getString(14) ), // comment
                      cursor.getLong(15),    // type
                      cursor.getLong(16),    // millis [s]
                      cursor.getLong(17),    // custom color 
@@ -5752,6 +5761,7 @@ public class DataHelper extends DataSetObservable
                      cursor.getLong(26),    // idx
                      cursor.getLong(27)     // time [s]
            );
+           pw.flush();
          } while (cursor.moveToNext());
        }
        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
@@ -5763,6 +5773,7 @@ public class DataHelper extends DataSetObservable
                   "surveyId=?", new String[] { Long.toString( sid ) },
                   null, null, null );
        if (cursor.moveToFirst()) {
+         TDLog.v("dump FIXED");
          do { // values in the order of the fields of the table
            pw.format(Locale.US,
              "INSERT into %s values( %d, %d, \"%s\", %.7f, %.7f, %.2f, %.2f \"%s\", %d, %d, \"%s\", %.7f, %.7f, %.1f, %d, %d, %.4f, %.1f, %.1f, %.6f );\n",
@@ -5796,6 +5807,7 @@ public class DataHelper extends DataSetObservable
                             "surveyId=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
+         TDLog.v("dump STATION");
          do {
            // STATION_TABLE does not have field "id"
            pw.format(Locale.US,
@@ -5816,6 +5828,7 @@ public class DataHelper extends DataSetObservable
                             "surveyId=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
+         TDLog.v("dump SENSOR");
          do {
            pw.format(Locale.US,
                      "INSERT into %s values( %d, %d, %d, %d, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\" );\n",
@@ -5834,11 +5847,15 @@ public class DataHelper extends DataSetObservable
        }
        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
+       TDLog.v("dump file close");
        fw.flush();
        fw.close();
      } catch ( FileNotFoundException e ) {// DistoX-SAF
+       TDLog.Error("dump file not found " + e.getMessage() );
      } catch ( IOException e ) {// FIXME
+       TDLog.Error("dump i/o error " + e.getMessage() );
      }
+     TDLog.v("dump file done");
    }
 
    static boolean mColorReset = false; // whether custom colors have been reset on survey load

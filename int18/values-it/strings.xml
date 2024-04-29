@@ -155,6 +155,7 @@
     <string name="calib_precision">Precisione</string>
     <string name="calib_iter">Iterazioni: %1$d</string>
     <string name="calib_dip">Dip Magnetica: %1$.1f</string>
+    <!-- TODO string name="calib_roll">Roll diff.: %1$.2f &#xb0;</string -->
     <string name="calib_reset">Resetta calibrazione sul DistoX?</string>
     <string name="calib_min_error">Minimo errore</string>
     <string name="magn_dip">Dip Magnetica &#8230;</string>

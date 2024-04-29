@@ -287,6 +287,8 @@ public class GMActivity extends Activity
     // TDLog.v("Calib Iter " + iter );
 
     if ( iter > 0 && iter < TDSetting.mCalibMaxIt ) {
+      mCalibration.rollDifference();
+
       float[] errors = mCalibration.Errors();
       for ( int k = 0; k < list.size(); ++k ) {
         CBlock cb = list.get( k );
@@ -516,7 +518,8 @@ public class GMActivity extends Activity
 
           (new CalibCoeffDialog( this, this, bg, ag, bm, am, nL, errors,
                                  mCalibration.DeltaBH(), mCalibration.Delta(), mCalibration.Delta2(), mCalibration.MaxError(), 
-                                 result, mCalibration.Dip(), coeff /* , saturated */ ) ).show();
+                                 result, mCalibration.Dip(), mCalibration.rollDifference(), // FIXME ROLL_DIFFERENCE
+                                 coeff /* , saturated */ ) ).show();
         } else if ( result == 0 ) {
           TDToast.makeBad( R.string.few_iter );
           return;
@@ -963,7 +966,7 @@ public class GMActivity extends Activity
    */
   public void displayCoeff( TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nL )
   {
-    (new CalibCoeffDialog( this, null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0.0f, 0, 0.0f, null /*, false */ ) ).show();
+    (new CalibCoeffDialog( this, null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0.0f, 0, 0.0f, 0.0f, null /*, false */ ) ).show();
   }
 
   /** enable or disable the buttons

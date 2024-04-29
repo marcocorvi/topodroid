@@ -402,6 +402,7 @@ public class TDPath
    */
   static String getSqlFile() 
   {
+    TDLog.v("SQL file: " + APP_SURVEY_PATH + "/survey.sql" );
     return APP_SURVEY_PATH + "/survey.sql";
   }
 

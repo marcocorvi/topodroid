@@ -166,6 +166,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="calib_precision">Precision</string>
     <string name="calib_iter">Iterations: %1$d</string>
     <string name="calib_dip">Magn. dip: %1$.1f &#xb0;</string>
+    <string name="calib_roll">Roll diff.: %1$.2f &#xb0;</string>
     <string name="calib_reset">Reset DistoX calibration ?</string>
     <string name="calib_min_error">Minimum error</string>
     <string name="magn_dip">Magn. dip &#8230;</string>

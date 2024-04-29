@@ -3080,11 +3080,12 @@ public class TopoDroidApp extends Application
    */
   boolean doExportDataAsync( Context context, ExportInfo export_info, boolean toast )
   {
-    // TDLog.v( "APP async-export - index " + export_info.index );
+    TDLog.v( "APP async-export - index " + export_info.index );
     if ( export_info.index < 0 ) return false; // extra safety
     if ( export_info.index == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
       while ( ! TopoDroidApp.mEnableZip ) Thread.yield();
       (new ExportZipTask( context, this, null )).execute();
+      // (new ExportZipTask( context, this, null )).doInForeground();
       // return false;
       return true;
     } else {
@@ -3106,7 +3107,7 @@ public class TopoDroidApp extends Application
   void shareZip( Uri uri0 )
   {
     String zipname = TDPath.getSurveyZipFile( TDInstance.survey );
-    // TDLog.v("Zip file " + zipname );
+    TDLog.v("Zip share file " + zipname );
     // Uri uri = Uri.fromFile( TDFile.getFile( zipname ) );
     Uri uri = MyFileProvider.fileToUri( this, TDFile.getFile( zipname ) );
 

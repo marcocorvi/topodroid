@@ -520,7 +520,7 @@ public class DeviceHelper extends DataSetObservable
     Cursor cursor = null;
     try {
       cursor = myDB.query( CALIB_TABLE,
-                           new String[] { "error", "max_error", "iterations", "stddev", "delta_bh", "dip" }, // columns
+                           new String[] { "error", "max_error", "iterations", "stddev", "delta_bh", "dip" }, // columns FIXME ROLL_DIFFERENCE
                            "id=?",
                            new String[] { Long.toString(cid) },
                            null, null, null );
@@ -539,6 +539,8 @@ public class DeviceHelper extends DataSetObservable
           if ( str != null ) res.delta_bh = Float.parseFloat( str );
           str = cursor.getString(5);
           if ( str != null ) res.dip = Float.parseFloat( str );
+          // str = cursor.getString(6);                               // FIXME ROLL_DIFFERENCE
+          // if ( str != null ) res.roll = Float.parseFloat( str );
         } catch ( NumberFormatException e ) {
           TDLog.Error( "selectCalibError parse Float error: calib ID " + cid );
         }
@@ -1420,6 +1422,7 @@ public class DeviceHelper extends DataSetObservable
              +   " stddev REAL default 0, "
              +   " delta_bh REAL default 0, "
              +   " dip REAL default 999 "
+             // +    " roll READ default 0 " // FIXME ROLL_DIFFERENCE
              +   ")"
            );
 
@@ -1491,7 +1494,9 @@ public class DeviceHelper extends DataSetObservable
              // TDLog.v("UPGRADE DB 27");
              db.execSQL( "ALTER TABLE calibs ADD COLUMN dip REAL default 999" );
            case 28:
+             // db.execSQL( "ALTER TABLE calibs ADD COLUMN roll REAL default 0" ); // FIXME ROLL_DIFFERENCE
              // TDLog.v("CURRENT DB 28");
+           // case 29: // FIXME ROLL_DIFFERENCE
              /* current version */
            default:
              break;
