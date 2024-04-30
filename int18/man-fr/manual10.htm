@@ -1,127 +1,206 @@
-<html><body>
-<h3>[10] SKETCH DRAWING</h3>
+	<html>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+<body>
+	
+<h3>[10] DESSINER UN CROQUIS</h3>
+	
+	La page montre la ligne médiane de cheminement (polygonale) avec les visées 
+latérales d'habillage. On peut la déplacer en la faisant glisser avec un (ou deux) 
+doigt(s) et zoomer avant / arrière avec deux doigts. Le Nord du plan et la verticale 
+de la coupe sont vers le haut. Il n'est pas possible de faire pivoter la page. 
+<p>Appuyez sur le bouton <strong>Dessiner</strong> : l'application passe en mode 
+  dessin et le bouton est surligné d'une bordure blanche. Maintenant, vous pouvez 
+  dessiner avec votre doigt (toujours deux doigts pour faire un panoramique et 
+  un zoom). Avec les boutons <u>Annuler</u> et <u>Rétablir</u>, vous pouvez annuler 
+  ou remettre les derniers objets dessinés ou supprimés.</p>
+<p> En mode dessin, la page peut également être déplacée en la faisant glisser 
+  depuis le côté de la page et agrandie avec les commandes de zoom si ces fonctions 
+  ont été activées via les paramètres. Cela vous permet de travailler avec le 
+  stylet sans avoir besoin des doigts. 
+<p> Avec le bouton <u>sélecteur d'outil</u> (pot de pinceaux) vous changez d'outil 
+  de dessin&#160;: ligne, zone (une région ombrée), ou point symbole. <br>
+<p> <b>Outils Point </b><br>
+  Les outils Point sont de petites icônes. Pour ajouter un symbole à votre esquisse 
+  appuyez sur la page à l'endroit où vous voulez le placer. Si le point est orientable, 
+  il est dessiné avec l'orientation définie (sélectionnable à l'aide du curseur 
+  dans la boîte de dialogue du sélecteur d'icônes). Cette orientation peut être 
+  modifiée en touchant l'écran et en le faisant glisser légèrement dans l'orientation 
+  souhaitée. L'utilisateur peut également régler l'échelle de l'icône en plus 
+  de l'orientation. En tirant plus longtemps, le symbole du point apparaît et 
+  sa direction et sa taille peuvent être ajustées.<br>
+  Avec les &quot;étiquettes&quot;, vous devez également saisir le texte dans la 
+  boîte de dialogue suivante.
+<p><img src="point_gesture.png" alt="Point item drawing" width="140" border="1"><br>
+<p> <b>Outils Ligne </b><br>
+  Les outils Ligne se présentent sous forme de différents styles de ligne. 
+<p>Les lignes ont une orientation (lorsqu'une ligne est sélectionnée, en mode 
+  édition, son orientation est indiquée par un coche jaune pointant à l'extrémité 
+  gauche de la ligne). 
+<p>L'épaisseur de la ligne est l'un des <u> paramètres</u> que l'on peut modifier. 
+  Il y a des options différentes pour l'épaisseur du tracé de l'axe de cheminement 
+  et des visées d'habillage. <br>
+<p> <strong>Ligne de &quot;section transverse&quot;<br>
+  </strong>La ligne de &quot;section transverse&quot; est spéciale car elle est 
+  toujours dessinée avec un segment rectiligne pointillé ayant une courte coche 
+  indiquant la direction de la coupe. Un point de &quot;section&quot; est automatiquement 
+  ajouté près de la fin de la ligne de section transverse. Ce point possède l'option 
+  &quot;scrap&quot; (calque <em>Therion</em>) préréglée pour la ligne de &quot;scrap&quot; 
+  (calque<em> Therion</em>) et est supprimé lorsque vous supprimez la ligne de 
+  section transverse.
+<p>Les lignes de section ne peuvent pas être effacées avec l'outil de gomme. Pour 
+  supprimer une ligne de section, sélectionnez-la avec l'outil d'édition et supprimez-la 
+  avec le bouton &quot;supprimer&quot;. Ses points ne peuvent pas être déplacés 
+  dans le canevas, comme les points des autres lignes et ne peuvent pas non plus 
+  être supprimés. Les actions affectant les points ne s'appliquent pas aux extrémités 
+  des lignes de &quot;section&quot;.<br>
 
-The canvas shows the midline with the splay shots.  It can be moved around dragging it with one (or two) finger(s), zoom in/out with two fingers.
-The plan-view North and the profile-view vertical are upward.
-It is not possible to rotate the canvas.<br><p>
+<p> <b>Outils Zone </b><br>
+  Les outils de Zone sont des surfaces. Pour dessiner une zone il suffit de tracer 
+  son contour. Vous n'avez pas besoin d'être très précis car TopoDroid va la fermer 
+  automatiquement.<br>
+  La zone d'eau est particulière parce qu'elle est « fermée horizontalement » 
+  dans l'esquisse d'une coupe et dans les sections transverses : en effet la surface 
+  de l'eau est horizontale. Pour dessiner une zone d'eau (sur une coupe), tracez 
+  donc uniquement la ligne du bas de la zone noyée.<br>
 
-Tap the <i>draw</i> button: the app goes in <b>draw</b> mode and the button is highlighted with a bright green. Now you can draw with your finger (two fingers still pan and zoom). With the <i>undo</i> and <i>redo</i> button you cancel the last drawn or deleted objects and put them back again.<br><p>
-
-There are three types of drawing tools: point (icons), line, area (shaded region).
-Labels are a "point" tool.
-<br><p>
-
-The list of the six most recently used drawing tools is shown in the toolbar at the bottom of the screen.
-<!-- If the triple toolbar setting is enabled, there are three toolbars, for points, lines and areas. -->
-To select a tool tap on its icon in the bottom toolbar.
-<!-- With the single toolbar, a -->A tap on the <i>tools</i> button cycles through "points", "lines", and "areas".<br>
-A long-tap on this button reverts the order of rotation of the bottom toolbar<br><p>
-
-While in draw mode, the sketch can also be moved by dragging it from the corners of the canvas and zoomed with zoom controls if these function have been enabled through the settings. This lets you work with a stylus without the need for two-finger actions.<br><p>
-
-
-<b>Point tools</b><br>
-Point tools are iconic symbols. To add a symbol to the sketch touch the canvas where you want to put the point.<br>
-If the point is orientable, it is drawn with the set orientation (selectable with the slider in the icon picker dialog).
-This orientation can be overridden with a touch of the display slightly dragged in the desired orientation.<br>
-With "labels" you must also enter the text in the coming dialog.<br><p>
-
-<b>Line tools</b><br>
-Line tools are line-drawing styles. 
-Lines have an orientation: when a line is selected, in edit mode, its orientation is shown by a yellow tick pointing to the left side.<br><p>
-
-The line thickness is one of the <i>settings</i>. There are separate options for the centerline/splays and the drawing line thickness.<br><p>
-
-<b>Section lines</b><br>
-The "section" line is special as it is always made into a straight segment with a short tick showing the direction of view.
-A "section" point is automatically added connected to the end of the section line. This point has the "scrap" option preset to the line scrap and is deleted when you delete the section line.<br><p>
-
-"Section" lines cannot be erased with the <i>eraser</i> tool.
-To remove a "section" line, select it with the <i>edit</i> tool and delete it with the "delete" button.<br><p>
-
-Its points cannot be moved in the canvas, like for points of other lines, neither they can be removed.
-The pointwise actions do not apply to the endpoints of "section" lines.<br><p>
-
-<b>Area tools</b><br>
-Area tools are region shaders. To draw an area trace its contour. You do not need to be very precise as TopoDroid will close it.<br>
-The water area is special because it can be "closed horizontally" in the profile sketch and in the x-sections, because the surface of a pond is usually horizontal. To draw a water area (in the profile sketch) trace only the lower bottom line of the pond.<br><p>
-
-<b>Undo, redo, erase and edit</b><br><p>
-
-Drawing mistakes can be corrected. The <i>undo</i> button removes the last item. To erase a line or a symbol drawn long ago, without loosing all the intermediate work, there are two choices: the <i>erase</i> mode and the <i>edit</i> mode.<br><p>
-
-The <i>eraser</i> is very intuitive: it cancels everything you pass your finger over, except stations, shots, and section lines. Just like a real eraser on the paper: if you pass it in the middle of a line it erases only the central portion (thus leaving two lines). However erasing can be filtered to erase only items of one type: points, lines, or areas.<br><p>
-
-The <i>edit</i> [A] button is not so intuitive, but it is very powerful, as it allows pointwise editing operations. In this mode all the drawn items are shown as little green dots. To select the item to edit tap on one of its green dots (icons have only one dot). If there are several dots close together, they will all be selected (and shown with a pink circle), but only one will be chosen for editing (big green circle). If it is not what you wanted, cycle through the selected points with the <i>previous/next</i> buttons.<br>
-
-Except for the endpoints of "section" lines, the points of the the drawn items can be moved on the canvas by dragging them.<br>
-
-The edit tool can be filtered to select only dots of one type: points, lines, areas, shots, or stations.<br><p>
-
-The size of the green dots and the selection radius are two <i>settings</i>.<br><p>
-
-Segments of Bezier lines have two control points. These are stored with the segment end-point and when this is the selected editing point the two control points are shown as pink circles. Each of them can be moved around by dragging it with the finger.<br><p>
-
-To clear the selection tap somewhere else in the canvas. The item can be deleted (removed) or its <a href="page_item_edit.htm">properties</a> changed ("tool" button). Editing applies also to shots and stations.
-<br><p>
-
-Editing an orientable point, its icon can be rotated also with a up/down swipe from the corners of the canvas (if corner-drag is enabled).<br><p>
-
-A survey shot (leg or splay) has a green dot in the middle to select it. When a leg is selected in the profile view, a horizontal yellow segment is also displayed on the side opposite to the leg "extend", or on both sides if the leg is extended vertically. The leg extend can be set by tapping the left or right end of this segment, or the middle.<br><p>
-
-<h4>Pointwise edit actions [A]</h4>
-
-The pointwise edit actions (fourth to the right button) apply only to drawing items.
-The button has a drop-down menu of editing actions, for either points [P], lines (except "section" lines) [L], and areas [A]:
+<p> <b>Annuler, Répéter, effacer et modifier </b><br>
+  Les erreurs de dessin peuvent être corrigées. Le bouton <u>Annuler</u> supprime 
+  le dernier élément. Pour effacer une ligne ou un symbole dessiné depuis longtemps, 
+  sans perdre tout le travail intermédiaire, il y a deux possibilités : le mode 
+  <u>Effacer</u> et le mode <u>Édition</u>. 
+<p> Le mode <u>Effacer</u> est tr&egrave;s intuitif : il supprime tout ce qui 
+  se trouve sous votre doigt quand vous le passez sur l'écran, comme une vraie 
+  gomme sur du papier. Si vous la passez au milieu d'une ligne, elle efface seulement 
+  la partie centrale (laissant ainsi deux bouts de lignes de chaque côté). Cependant, 
+  l'effacement peut &ecirc;tre filtr&eacute; pour effacer uniquement les &eacute;l&eacute;ments 
+  d'une seule et unique classe : les points, les lignes ou les zones.</p>
+<p> Le bouton <u>Edit</u> [A] n'est pas tr&egrave;s intuitif, mais il est tr&egrave;s 
+  puissant, car il permet des op&eacute;rations d'&eacute;dition point par point. 
+  Le bouton le plus à droite de la barre de boutons &quot;Modifier&quot; doit 
+  être activé en mode &quot;ponctuel&quot; c'est à dire que son icône est un petit 
+  segment pointu de couleur bleue (pour les autres modes, voir plus bas). Dans 
+  ce mode, tous les &eacute;l&eacute;ments dessin&eacute;s sont repr&eacute;sent&eacute;s 
+  par des petits points verts. Pour s&eacute;lectionner l'&eacute;l&eacute;ment 
+  &agrave; modifier, appuyez sur l'un de ses points verts (les ic&ocirc;nes ne 
+  comportent qu'un seul point). S'il y a plusieurs points rapproch&eacute;s, ils 
+  seront tous s&eacute;lectionn&eacute;s (et repérés par un cercle rose), mais 
+  un seul sera choisi pour l'&eacute;dition (celui avec un grand cercle vert). 
+  Si ce n'est pas ce que vous vouliez, d&eacute;placez-vous parmi les points s&eacute;lectionn&eacute;s 
+  avec les boutons <u>Précédent-Suivant</u>.<br>
+  L'outil d'&eacute;dition peut &ecirc;tre filtr&eacute; pour s&eacute;lectionner 
+  uniquement les points d'une seule et unique classe : les points, les lignes, 
+  les zones, les plans ou les stations.</p>
+<p> La taille des points verts et le rayon de s&eacute;lection sont deux <u>param&egrave;tres</u> 
+  réglables.</p>
+<p> Les segments de lignes de B&eacute;zier ont deux points de contr&ocirc;le. 
+  Ceux-ci sont stock&eacute;s avec le point de fin de segment et lorsque c'est 
+  le point d'&eacute;dition qui est s&eacute;lectionn&eacute;, les deux points 
+  de contr&ocirc;le sont repr&eacute;sent&eacute;s par des cercles roses. Chacun 
+  d'eux peut &ecirc;tre d&eacute;plac&eacute; en le faisant glisser avec le doigt.</p>
+<p> Pour sortir de la s&eacute;lection et l'&quot;éteindre&quot;, appuyez sur 
+  un autre endroit de la page. Pour d&eacute;placer le point d'&eacute;dition, 
+  faites-le glisser avec le doigt. Un &eacute;l&eacute;ment peut &ecirc;tre supprim&eacute; 
+  (bouton &quot;Supprimer&quot;) ou ses <a href="page_item_edit.htm">propri&eacute;t&eacute;s</a> 
+  modifi&eacute;es (bouton &quot;outil&quot;). L'&eacute;dition s'applique &eacute;galement 
+  aux plans et aux stations.</p>
+<p> Une fois s&eacute;lectionn&eacute;es, les ic&ocirc;nes de points orientables 
+  peuvent &ecirc;tre pivot&eacute;es avec un glissement lat&eacute;ral.</p>
+<p>Une visée (de cheminement ou d'abillage) comporte un point vert au milieu pour 
+  pouvoir la sélectionner. Lorsqu'un cheminement est sélectionné sur la coupe, 
+  une coche jaune horizontale est également affiché du côté opposé à l'&quot;extension&quot; 
+  du segment, ou des deux côtés si le segment est étendu verticalement. L'extension 
+  de cette visée peut être définie en touchant l'extrémité gauche / droite de 
+  cette coche ou son milieu.</p>
+<p>&nbsp;</p>
+<p><b>Action d'édition par point</b> [A] <br>
+  Le deuxième bouton à droite s'applique uniquement aux éléments de dessin et 
+  possède un menu déroulant des actions d'édition avancées, que ce soit pour des 
+  points <em>[P]</em>, les lignes <em>[L],</em> ou les zones <em>[Z]</em> 
 <ul style="margin-top=0">
-<li><i>Snap to nearby point</i> [P,L,A]: move the point to coincide with the nearest point of the current scrap. No action if there is no nearby point</li>
-<li><i>Snap to nearby splays/line</i> [L,A:T]. Lines are deformed to pass through the splay endpoints that are close enough. If an area point is close to a line point, and the pieces of the area border before and after it are replaced with pieces that follow the line path. This feature requires the proper setting enabled</li>
-<li><i>Insert</i> point(s) [L:A]. When a single point is selected, the new point is inserted "after" the selected point, and it is added to the selection set, and you can select it with the Prev-Next buttons. When a range is selected, new points are inserted between every two points of the range. A <u>long-tap</u> moves the selected point to the nearest point and inserts another point, "after" the selected point [T/G]</li>
-<li><i>Cut</i> [L] the line at the point, thus making two lines</li>
-<li><i>Straighten</i> [L:T] the line segment removing the control points</li>
-<li><i>Smoothen</i> [L:T] the line segment inserting control points at 1/3 and 2/3 the segment length. Further editing can move them and give any wanted curvature to the segment</li>
-<li><i>Remove</i> [L:A] the line/area point. The selected line/area point can be removed also with a long-tap on the "delete" button.</li>
-<li><i>Append</i> [L:T, except "section"] to another line of same type. Only for line end-points and the other line end-point must be close to the selected point.</li>
-<li>enter <i>multiselection</i> mode [P,L,A:T]
-</ul><br><p>
-
-<h4>Multiselection mode [T]</h4>
-Drawing items multiselection is disabled by default. It can be enabled in a "Sketch | Line" custom setting.<br>
-The multiselection mode allows to select several objects of the same type (point/line/area) and act on them all:
-<ul style="margin-top=0">
-<li><i>Delete</i> the selected items [P,L,A]</li>
-<li><i>Reduce</i> the number of points of the selected items [L,A]</li>
-<li><i>Join</i> the selected item [L]</li>
-<li><i>Exit</i> multiselection mode</li>
-</ul><br><p>
-
-<h4>Range selection</h4>
-Lines and areas points can be selected individually (point selection mode) or as a range.
-To select a range on a line, the last button in the "edit" button-bar must be either "soft" or "hard" range.
-Select first one endpoint of the range, then the other endpoint.
+  <li><i>Relier au point le plus proche</i> <em>[P,L,Z]</em>&#160;: déplacer le 
+    point pour qu'il coïncide avec le point le plus proche (inactif s'il n'y a 
+    pas de point à proximité).</li>
+  <li><i>Relier au cheminement le plus proche</i> <em>[L,Z]</em> : les lignes 
+    sont déformées pour passer à travers les points d'extrémité des visées latérales 
+    d'habillage qui sont assez proches. Pour les zones, le point est déplacé pour 
+    coïncider avec le point de ligne le plus proche, et les morceaux de la bordure 
+    de la zone avant et après sont remplacés par des morceaux de bordure qui suivent 
+    le tracé de la ligne.</li>
+  <li><em>Dupliquer le point</em> <em>[L,Z]</em> : le nouveau point est inséré 
+    "après" le point sélectionné. Il est ajouté à la sélection, et vous pouvez 
+    le sélectionner avec les boutons <u>Précédent-Suivant</u>.</li>
+  <li><em>Couper la ligne</em> <em>[L]</em> : coupe la ligne au niveau du point, 
+    en créant ainsi deux lignes distinctes.</li>
+  <li><i>Redresser le segment</i> <em>[L,Z]</em> : redresse le segment de ligne 
+    en supprimant les points de contr&ocirc;le.</li>
+  <li><em>Lisser le segment</em> <em>[L,Z]</em> : lisse le segment de ligne en 
+    ins&eacute;rant les points de contr&ocirc;le au 1/3 et 2/3 de la longueur 
+    du segment. Une autre &eacute;dition peut ensuite les d&eacute;placer et donner 
+    ainsi la courbure d&eacute;sir&eacute;e au segment.</li>
+  <li><em>Supprimer le point</em> <em>[L,Z]</em> : le point de ligne ou de zone 
+    s&eacute;lectionn&eacute; peut &eacute;galement &ecirc;tre supprim&eacute; 
+    en appuyant longuement sur le bouton <u>Supprimer</u>. </li>
+  <li><em>Ajouter</em> <em>[L</em>:T, sauf &quot;section&quot;] à une autre ligne 
+    du même type. Uniquement pour les extrémités de ligne (l'autre extrémité de 
+    ligne doit être proche du point sélectionné). 
+  <li><em>Entrer</em> dans le mode multi-s&eacute;lection <em>[P,L,Z</em>:T] 
+</ul>
+<p>&nbsp;</p>
+<p><strong>Mode multisélection</strong> [T]<br>
+  La multisélection des éléments de dessin est désactivée par défaut. Elle peut 
+  être activée dans un paramètre personnalisé &quot;Esquisse | Ligne&quot;.<br>
+  Le mode multisélection permet de sélectionner plusieurs objets du même type 
+  (point/ligne/zone) et d'agir sur l'ensemble : </p>
+<ul>
+  <li>Supprimer les éléments sélectionnés <em>[P,L,Z]</em></li>
+  <li> Réduire le nombre de points des éléments sélectionnés <em>[L,Z]</em></li>
+  <li> Rejoindre l'élément sélectionné <em>[L]</em></li>
+  <li> Quitter le mode multisélection</li>
+</ul>
+<p>&nbsp; </p>
+<strong>Mode de sélection de plage<br>
+</strong> Les lignes et les zones peuvent être sélectionnées individuellement 
+(mode de sélection par point) ou par lot pour l’ensemble d’une plage.<br>
+<ul>
+  <li><img src="btn_range.png" width="36" border="1"> sélection d'un seul point</li>
+  <li><img src="btn_range_soft.png" width="36" border="1"> sélection de plage 
+    « douce » (limites relatives)</li>
+  <li><img src="btn_range_hard.png" width="36" border="1"> sélection de plage 
+    « dure » (limites strictes)</li>
+  <li><img src="btn_range_itemwise.png" width="36" border="1"> sélection d'une 
+    ligne ou d'une zone entière</li>
+</ul>
 <br>
+Pour spécifier une plage, sélectionnez d'abord la première extrémité de la plage, 
+puis l'autre. Toute la plage est alors surlignée en orange. Son point médian est 
+mis en évidence par un gros point vert qui contrôle la déformation de la ligne 
+: les points de la plage sont décalés d'une valeur qui dépend de la distance au 
+point central. La plage peut avoir des limites strictes (icône « hard » : segment 
+bleu en escalier) ou relatives (icône « soft » : segment bleu arrondi ). Avec 
+des limites strictes, le lot est déplacé dans son ensemble. Avec les limites relatives, 
+les points aux extrémités du lot sont déplacés d'une valeur proportionnelle à 
+leur distance par rapport à l'extrémité.<br>
+<br>
+<p><strong>Croquis dessiné au stylet [T]<br>
+  </strong>La fonction de dessin au stylet vous permet de maintenir un doigt sur 
+  l'écran tout en dessinant avec un stylet. Pour activer cette fonction, vous 
+  devez définir une &quot;taille de stylet&quot; positive. Une valeur de 1 est 
+  suffisante pour un stylet à pointe fine. Une valeur d'environ 5 peut convenir 
+  à un stylet à pointe large. Des valeurs plus grandes confondront votre doigt 
+  avec un stylet.<br>
+  <br>
+  <strong><font color="#990000">ATTENTION</font></strong> : certains stylets pour 
+  tablettes ou smartphones ne sont pas « inertes » d’un point de vue électromagnétique 
+  et peuvent perturber de façon importante votre périphérique (DistoX ou autre) 
+  s’il est situé à proximité ! La topographie en serait alors irrémédiablement 
+  faussée.<br>
 
-The range is highlighted orange. Its midpoint gets the big green dot, and it controls how the line range is deformed.
-The range can have hard or soft bounds. With hard bounds the range is moved as a whole. With soft bounds the points at the ends of the range are moved by an amount proportional to their distance from the end.
-<br><p>
-
-The range can also be "item-wise", ie, the whole item.
-In this case you select a point on the line/area, and act (eg, shift) on the whole item.
-<br><p>
-
-<div style="font-size:90%">
-<h4>Stylus-only sketching</h4>
-Stylus-only sketching allows you to hold a finger on the screen while drawing with a stylus.<br>
-To enable this feature you must set a positive "stylus size". A value of 1 is enough for a fine-tip stylus.
-A value about 5 might work with a fat-tip stylus. Larger values will confuse your finger for a stylus.
-</div><br><p>
-
-
-<a href="page_sketch_station.htm">Sketch station editing</a><br>
-<a href="page_tools.htm">Drawing tools</a><br>
-<a href="page_walls.htm">Auto walls</a><br>
 <p>
-<a href="manual09.htm">&lt; Sketch window</a> |
-<a href="manual11.htm">X-sections &gt;</a>
-
+<p> <a href="page_sketch_station.htm">Édition des stations d'un croquis</a><br>
+  <a href="page_tools.htm">Palette d'o</a><a href="page_tools.htm">utils de dessin</a><br>
+  <a href="page_walls.htm">Parois auto</a><br>
+<p> <a href="manual09.htm">&#160;&lt; Fenêtre Croquis</a> | <a href="manual11.htm">Sections 
+  transverses&#160;&gt;</a> 
 </body></html>

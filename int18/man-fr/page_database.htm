@@ -1,21 +1,20 @@
 <html> <HEAD> <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" /> </HEAD> <body>
-<h4>BASE DE DONNÉES TopoDroid</h4>
+<h4>BASES DE DONNÉES TOPODROID</h4>
 <p>Il est utile d'avoir une id&eacute;e approximative de l'organisation de l'information 
   et des donn&eacute;es dans les bases de donn&eacute;es. Les unit&eacute;s de 
   travail dans TopoDroid sont les relev&eacute;s topographiques et les &eacute;talonnages. 
   Un relev&eacute; repr&eacute;sente une session unique de topo d'une portion 
   de cavit&eacute;. Un &eacute;talonnage est un &eacute;talonnage DistoX unique.<br>
-  Les enqu&ecirc;tes sont stock&eacute;es dans la base de donn&eacute;es &quot;distox14.sqlite&quot;. 
+  Les relevés sont stock&eacute;es dans la base de donn&eacute;es &quot;distox14.sqlite&quot;. 
   Il y a une telle base de donn&eacute;es dans chaque r&eacute;pertoire de travail.<br>
   Les &eacute;talonnages sont stock&eacute;s dans la base de donn&eacute;es &quot;device10.sqlite&quot;, 
   avec les informations du DistoX. Cette base de donn&eacute;es est globale et 
-  n'est pr&eacute;sente que dans le r&eacute;pertoire &quot;TopoDroid&quot;.<br>
-  En cons&eacute;quence, la table la plus importante dans la base de donn&eacute;es 
+  n'est pr&eacute;sente que dans le r&eacute;pertoire &quot;TopoDroid&quot;. </p>
+<p>En cons&eacute;quence, la table la plus importante dans la base de donn&eacute;es 
   du relev&eacute; est :</p>
 <ul>
   <li><b>surveys</b> : informations du relev&eacute; topo</li>
 </ul>
-<p></p>
 <p> Les dossiers de relev&eacute;s contiennent le nom du relev&eacute; topo, la 
   date, l'&eacute;quipe, la d&eacute;clinaison magn&eacute;tique, le nom de la 
   station initiale et &eacute;ventuellement un commentaire.<br>
@@ -28,9 +27,7 @@
   <li><b>audios</b> : commentaires audio associ&eacute;s aux vis&eacute;es du 
     relev&eacute; </li>
   <li><b>sensors</b> : mesures associ&eacute;es aux vis&eacute;es du relev&eacute;</li>
-  <li><b>fixeds</b> : stations g&eacute;olocalis&eacute;es 
-    <!-- li><b>sketches</b>: 3D models</li -->
-  </li>
+  <li><b>fixeds</b> : stations g&eacute;olocalis&eacute;es</li>
 </ul>
 <p>Les tables les plus importantes dans la base de donn&eacute;es de l'appareil 
   sont :</p>

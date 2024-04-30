@@ -3,31 +3,42 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
 </HEAD>
 	<body>
-<h4>LOCALISATION GPS par le périphérique Android</h4>
-Cette boîte de dialogue s'ouvre en appuyant sur le bouton GPS de la fenêtre de 
-<a href="page_fixed_list.htm">Liste des Points Géolocalisés</a>. <br>
-<p align="justify"> Pour utiliser le GPS d'Android, cette option doit être activée. 
-  Pour des raisons de sécurité une application générique comme TopoDroid ne peut 
-  pas activer le GPS. S'il n'est pas activé, TopoDroid affiche une boîte de dialogue 
-  qui vous demande si vous voulez l'activer (par l'application "<em>Paramètres 
-  de réglages</em>"). N'oubliez pas de le désactiver lorsque vous avez terminé 
-  pour économiser la batterie. <br>
-<p> Cette boite de dialogue contient :
+	
+<h4>GNSS POINT GÉOLOCALISÉ</h4>
+Cette boîte de dialogue s'ouvre en appuyant sur le bouton GNSS (GPS) de la <a href="page_fixed_list.htm">Liste 
+des Points Géolocalisés</a>. <br>
+<p> Pour utiliser le GNSS (GPS) d'Android, cette option doit être activée. Pour 
+  des raisons de sécurité dans une application générique comme <em>TopoDroid</em>, 
+  le GPS est inactif. S'il n'est pas activé, <em>TopoDroid</em> affiche une boîte 
+  de dialogue qui vous demande si vous voulez l'activer (par l'application "<em>Réglages</em>"). 
+  N'oubliez pas de le désactiver lorsque vous avez terminé pour économiser la 
+  batterie. <br>
+<p> Cette boite de dialogue contient les champs : 
 <ul>
   <li><b>Nom</b> de la station </li>
   <li><b>Commentaire </b></li>
 </ul>
-<p>Boutons : </p>
+<p>et les boutons :</p>
 <ul>
-  <li><b> GPS</b> démarrage/arrêt du pointage</li>
-  <li><b>Voir</b> le point sur la carte d'une application cartographique spécifique</li>
+  <li><b> GNSS</b> démarrage/arrêt du pointage GPS</li>
+  <li><b>Voir</b> le point sur la carte d'une appli spécifique</li>
   <li><b>Enregistrer</b> le point </li>
 </ul>
-<div align="justify">Lors de la recherche des satellites le bouton "GPS" devient 
-  rouge (ou vert) indiquant le nombre de satellites visibles. Lorsque suffisamment 
-  de satellites sont en vue, le bouton devient vert et les coordonnées sont affichées 
-  en dessous. Vous devez attendre que ce bouton devienne vert pour que les coordonnées 
-  soient stables et que l'erreur de localisation soit suffisamment faible. Arrêter 
-  ensuite le pointage GPS en appuyant à nouveau sur le bouton. <br>
-</div>
+
+<p>Lors de la recherche de satellites, le bouton &quot;GNSS&quot; devient rouge 
+  (ou vert) et affiche le nombre de satellites visibles. Lorsque suffisamment 
+  de satellites sont reçus, le bouton devient vert et les coordonnées sont affichées 
+  en dessous. Attendez que les valeurs des coordonnées soient stables et que la 
+  précision de la localisation soit affichée. Ensuite, arrêtez la localisation 
+  GNSS en appuyant à nouveau sur le bouton &quot;GNSS&quot;.</p>
+<p> La précision affichée dépend du matériel du téléphone et de l'environnement.<br>
+  Sur Android avant API-26, seule la précision horizontale est affichée. Sur Android 
+  API-26 et les versions ultérieures, la précision horizontale et verticale est 
+  affichée.</p>
+<p><strong>Paramètres<br>
+  </strong>Durée de la localisation fine : durée pendant laquelle l'application 
+  doit effectuer la localisation fine d'un point géographique [par défaut 60 s]. 
+</p>
+<p>
+
 </body></html>

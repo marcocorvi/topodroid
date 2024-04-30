@@ -1,45 +1,45 @@
-<html><body>
-
-<h4>DistoX MEMORY</h4>
-
-This dialog is opened from the <i>Memory</i> button of the <u>device window</u>.<br><p>
-
-<b>Memory dump</b><br><p>
-
-The <i>Dump</i> button reads the content of the DistoX memory.
-Reading the DistoX memory directly is a slow process, and the DistoX must be kept "ON" while doing it.
-It is advisable to read a small portion of memory, say 20 entries, at a time:
-enter the initial and final data memory index in the two text fields to the right.
-Data are read from the initial index up to one before the final index.
-For the DistoX2 the memory indices range from 0 included to 1064 excluded.<br>
-For the DistoX version 1 the memory they range from 0 included to 4096 excluded.<br>
-<p>
-
-If you have entered a filename the memory dump is also saved to a file (in the "dump" folder).<br><p>
-
-The result of the memory dump is shown in a list at the bottom of the dialog.
-Each line contains 
+<html>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+<body>
+<h4>MÉMOIRE DU DISTOX </h4>
+<p>Cette boîte de dialogue s'ouvre en appuyant sur le bouton <u>Mémoire</u>&nbsp;<img src="btn_memory.png"> 
+  de la <em><a href="manual03.htm">Fenêtre des Périphériques</a></em>. </p>
+<p> <b>Dump de la mémoire</b> 
+<p> Le bouton texte <em>Dump</em> lit le contenu int&eacute;gral de la m&eacute;moire 
+  du DistoX. La lecture directe de la m&eacute;moire du DistoX est un processus 
+  lent, et le DistoX doit &ecirc;tre maintenu sur &quot;ON&quot; tout en le faisant. 
+  Il est conseill&eacute; de ne lire qu'une partie de la m&eacute;moire &agrave; 
+  la fois, par exemple 50 mesures. Saisissez l'emplacement du d&eacute;but et 
+  de la fin de la sauvegarde m&eacute;moire dans les deux champs de texte &agrave; 
+  droite. Si vous avez entr&eacute; un nom de fichier pour ce t&eacute;l&eacute;chargement, 
+  il est &eacute;galement enregistr&eacute; dans un fichier de stockage (dans 
+  le dossier &quot;<em>dump</em>&quot;). 
+<p> L'inspection de la m&eacute;moire n&eacute;cessite une certaine connaissance 
+  des composants internes du DistoX : au minimum l'espace d'adressage et la mani&egrave;re 
+  dont les donn&eacute;es sont stock&eacute;es. Il est fortement conseill&eacute; 
+  d'avoir lu la documentation du DistoX avant de l'utiliser.</p>
+<p> Le r&eacute;sultat du téléchargement de la m&eacute;moire est affich&eacute; 
+  dans une liste en bas de la bo&icirc;te de dialogue. Chaque ligne contient :</p>
 <ul>
-<li>the memory location</li>
-<li>a letter-code: foresight shot ('d'), backsight ('b'), calibration data ('g' or 'm')</li>
-<li>the values of the memory.</li>
+  <li>l'emplacement de la m&eacute;moire</li>
+  <li>un code-lettre indiquant s'il s'agit d'une vis&eacute;e topo ('d') ou d'une 
+    donn&eacute;e d'&eacute;talonnage ('g')</li>
+  <li>les valeurs de la m&eacute;moire.</li>
 </ul>
-<br><p>
-
-Uppercase letter code denotes data that have not been downloaded yet.<br>
-Shot are shown as length (meters), azimuth and clino (degrees).<br>
-The "accuracy" data of the DistoX2 are not shown.<br>
-For the calibration data, the raw values are shown. The 'm' data are not shown for the DistoX2.<br>
-Entries without a recognized type are marked with a question-mark ('?') code.<br><p>
-
-<!-- anything special to XBLE ? -->
-
-
-<b>Only for DistoX A3</b><br>
+<p></p>
+<p> Les entr&eacute;es vides sont marqu&eacute;es d'un point d'interrogation ('?').<br>
+  Les valeurs de vis&eacute;es topo sont repr&eacute;sent&eacute;es par leur longueur 
+  (m&egrave;tres), leur azimut et leur pente (degr&eacute;s).<br>
+  Les donn&eacute;es de &quot;pr&eacute;cision&quot; du DistoX2 ne sont pas affich&eacute;es.<br>
+  Pour les donn&eacute;es d'&eacute;talonnage, les valeurs sont affich&eacute;es 
+  brutes (les donn&eacute;es 'm' ne sont pas affich&eacute;es pour le DistoX2).</p>
+<p> <strong>Disponible uniquement pour le DistoX A3</strong> :</p>
 <ul>
-<li><b>Read</b> the memory cursors</li>
-<li><b>Store</b> the memory cursors</li>
-<li><b>Reset</b> a portion of memory, ie, marks it "to-be-downloaded"</li>
+  <li> <b>Lire</b> les zones de m&eacute;moire</li>
+  <li><b>Stocker</b> les zones de m&eacute;moire</li>
+  <li><b>R&eacute;initialiser</b> une partie de la m&eacute;moire, c'est-&agrave;-dire 
+    les marquer &quot;&agrave; t&eacute;l&eacute;charger&quot;</li>
 </ul>
-
 </body></html>

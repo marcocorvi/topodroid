@@ -1,36 +1,40 @@
 <html><body>
-<h4>3D VIEWER - Surface DEM</h4>
-
-A surface DEM (Digital Elevation Model) can be shown if it is enclosed in the model file (eg, in a lox file), 
-or has been added to the model.<br><p>
-
-The <i>Surface</i> button of the <i>3D viewer</i> window toggles the DEM display on and off.<br><p>
-
-This dialog is opened from the <i>Surface</i> menu of the <i>3D viewer</i> window.<br><p>
-It is used to load a DEM, a surface texture to overlay on te DEM, and adjust its opacity.<br>
- 
-It contains
+<h4><strong>VISIONNEUSE 3D -</strong> <strong></strong> MNE DE SURFACE</h4>
+<p>Un mod&egrave;le num&eacute;rique d'&eacute;l&eacute;vation (MNE) de surface 
+  peut &ecirc;tre ajout&eacute; aux mod&egrave;les <em>TopoDroid</em> ou peut 
+  &ecirc;tre affich&eacute; s'il est inclus dans un fichier de mod&egrave;le charg&eacute; 
+  (par exemple, dans un fichier lox).
+<p> Le bouton <em>Surface</em>&nbsp;<img src="btn_3d_surface_on.png" width="36" height="36"> 
+  de la fen&ecirc;tre du visualisateur 3D permet d'activer ou de d&eacute;sactiver 
+  l'affichage du MNE.
+<p> Cette bo&icirc;te de dialogue s'ouvre &agrave; partir du menu <em>Surface</em> 
+  de la <em>Fen&ecirc;tre de la visionneuse 3D</em>.
+<p> Elle est utilis&eacute;e pour charger un MNE, une texture de surface &agrave; 
+  superposer sur le MNE et pour ajuster son opacit&eacute;.
 <ul>
-<li>a button to select a DEM file</li>
-<li>a button to select a texture file, if the model has a DEM</li>
-<li>a slider to adjust the opacity</li>
-<li>a checkbox to activate the display of the projection of the model on the DEM</li>
-<li>a checkbox to activate the display of the surface texture (if there is one)</li>
-</ul><br>
-
-<b>DEM file</b><br>
-
-The 3D viewer supports DEM file in ascii format, or Therion grid format.<br><p>
-
-<b>Texture file</b><br>
-
-The 3D viewer supports texture GeoTIFF image files, and OSM map files.<br><p>
-
-The DEM and texture X-Y coordinates must be in the Coordinate Reference System of the model,
-because the 3D viewer does not perform coordinate conversions.<br><p>
-
-OSM files are in WGS84 geographical coordinates. The values can be used with models
-in UTM cartographic, but the conversion is approximate.<br><p>
-
-
+  <li> un bouton pour s&eacute;lectionner un fichier DEM</li>
+  <li> un bouton pour s&eacute;lectionner un fichier de texture, apr&egrave;s 
+    le chargement d'un MNE (ou si le mod&egrave;le poss&egrave;de d&eacute;j&agrave; 
+    un MNE)</li>
+  <li> un curseur pour r&eacute;gler l'opacit&eacute;</li>
+  <li> une case &agrave; cocher pour activer l'affichage de la projection du mod&egrave;le 
+    sur le MNE</li>
+  <li> une case &agrave; cocher pour activer l'affichage de la texture de la surface 
+    (s'il y en a une).</li>
+</ul>
+<p> <strong>Fichier MNE</strong><br>
+  La visionneuse 3D prend en charge les fichiers MNE au format ASCII ou au format 
+  de grille Therion (voir le manuel pour plus de d&eacute;tails sur les formats 
+  de fichier et les syst&egrave;mes de r&eacute;f&eacute;rence de coordonn&eacute;es).</p>
+<p> <strong>Fichier de texture</strong><br>
+  La visionneuse 3D prend en charge les fichiers d'image GeoTIFF de texture et 
+  les fichiers de carte OSM. </p>
+<p>Les coordonn&eacute;es X-Y du MNE et de la texture doivent &ecirc;tre dans 
+  le syst&egrave;me de r&eacute;f&eacute;rence de coordonn&eacute;es du mod&egrave;le 
+  (qui peut &ecirc;tre modifi&eacute; dans la bo&icirc;te de dialogue de la station 
+  g&eacute;olocalis&eacute;e), car la visionneuse 3D n'effectue pas de conversions 
+  de coordonn&eacute;es. </p>
+<p>Les fichiers OSM sont en coordonn&eacute;es g&eacute;ographiques WGS84. Les 
+  valeurs peuvent &ecirc;tre utilis&eacute;es avec des mod&egrave;les en UTM cartographique, 
+  mais la conversion est approximative.</p>
 </body></html>

@@ -1,40 +1,50 @@
-<html>
-<body>
 
-<h4>GEO-POINT EDIT</h4>
-
-This dialog is opened tapping a fixed point entry in the <a href="page_fixed_list.htm">Geo-points list</a> window.<br><p>
-
-The dialog shows
+	<html>
+	<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
+</HEAD>
+	<body>
+<h4> MODIFIER LES COORDONNÉES D'UN POINT GÉOLOCALISÉ</h4>
+Cette boîte de dialogue s'ouvre en appuyant brièvement sur un point de la <a href="page_fixed_list.htm">liste 
+des points géolocalisés</a>. <br>
+<p> La boîte de dialogue affiche :
 <ul>
-<li>longitude, latitude and geoid altitude. WGS84 ellipsoid altitude in square brackets</li>
-<li>point <b>name</b> and <b>comment</b></li>
-<li>magnetic <b>declination</b> at the point (at the current date)</li>
-</ul><br><p>
-
-Buttons
-<ul>
-<li><b>View</b> the point in a Location app (provided you have one installed)</li>
-<li><b>Clear</b> converted coordinates. This action is immediate.</li>
-<li><b>Convert</b> the geo-point coordinates to another reference system (using the app Proj4)</li>
-<li><b>Delete</b> the geo-point record</li>
+  <li> la <strong>longitude</strong>, la <strong>latitude</strong> et <strong>l'altitude</strong> 
+    du géoïde</li>
+  <li> le <strong>nom</strong> et le <strong>commentaire</strong> du point</li>
+  <li> la <strong>déclinaison magnétiqu</strong>e du point (à la date actuelle).</li>
 </ul>
-
-If the coordinates of the geo-point have been entered manually, they can be edited.
-Coordinates taken with GNSS or imported from <i>MobileTopographer</i> cannot be changed.<br><p>
-
-The orthometric altitude is computed from the ellipsoidic altitude using the geoid model EGM2008.<br><p>
-
-The <b>Convert</b> button computes the geo-point coordinates in another Coordinate Reference System,
-using the app Proj4. The geoid altitude is used in the conversion.
-The converted coordinates are displayed and stored in the database with the geo-point.<br><p>
-
-The magnetic declination is computed using the World Magnetic Model for 2020-2025 (this is replaced 
-with a more recent WMM when it is released).
-The uncertainty of the WMM model declination can be as large as 0.4 degrees in temperate regions.<br>
-Check the <b>save</b> box to set the magnetic declination into the survey.<br><p>
-
-The <b>Save</b> button commits the changes to the database.<br><p>
+<p><br>
+  Boutons </p>
+<ul>
+  <li><b>Vue </b>: montre le point avec une application spécifique (à condition 
+    de l'avoir installée) </li>
+  <li><strong>Effacer</strong> les coordonnées converties. Cette action est immédiate.</li>
+  <li><b>Convertir</b> les coordonnées de ce point dans un autre système de référence 
+    (en utilisant l'appli <b>Proj4</b> si installée) </li>
+  <li><b>Supprimer</b> l'enregistrement du point</li>
+</ul>
+<p>Si les coordonnées du géopoint ont été saisies manuellement, elles peuvent 
+  être modifiées. </p>
+<p>Les coordonnées prises avec le GNSS ou importées d'une application GNSS ne 
+  peuvent pas être modifiées. L'altitude du géoïde est modifiable, quelle que 
+  soit la méthode de saisie, si le paramètre approprié est défini.</p>
+<p> Un appui long sur la longitude ou la latitude change l'affichage de DMS en 
+  degré et vice versa. L'altitude du géoïde est calculée à partir de l'altitude 
+  ellipsoïdale en utilisant le modèle de géoïde EGM2008. </p>
+<p>Le bouton <b>Convertir</b> calcule les coordonnées du point dans un autre système 
+  de référence de coordonnées, en utilisant l''appli <b>Proj4</b> (à condition 
+  de l'avoir installée). Les coordonnées converties sont affichées et stockées 
+  avec le point. </p>
+<p>La déclinaison magnétique est calculée en utilisant le World Magnetic Model 
+  pour les années 2020-2025 (il est remplacé par un modèle WMM plus récent lorsqu'il 
+  est publié). L'incertitude de la déclinaison du modèle WMM peut atteindre 0,4 
+  degré dans les régions tempérées.<br>
+  Cochez la case de <strong>sauvegarder</strong> pour définir la déclinaison magnétique 
+  dans le relevé topographique. </p>
+<p> Le bouton <b>Enregistrer</b> sauvegarde les modifications dans la 
+  base de données. <br>
+<p>
 
 
 </body>

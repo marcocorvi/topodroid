@@ -4,87 +4,89 @@
 </HEAD>
 <body>
 <h3>[12] FENÊTRE D'APERÇU</h3>
-On entre dans la fenêtre d'aperçu en choisissant "APERÇU" dans le menu déroulant 
-de droite de la <a href="manual09.htm">fenêtre de croquis</a>.<br>
-<p> La fenêtre d'aperçu affiche les croquis, soit en plan soit en coupe en fonction 
-  de la vue en cours dans la fenêtre de croquis. Cette fenêtre peut être en mode 
-  normal (changement de vue et zoom) ou en mode de mesure. <br>
-<p> <strong>BOUTONS</strong>
+À partir de la <a href="manual09.htm"><em>Fenêtre d'esquisse ou de croquis</em></a>, 
+on entre dans la fenêtre d'aperçu en choisissant "APERÇU" dans le menu déroulant 
+de droite. <br>
+<p> La fenêtre de visualisation d'aperçu affiche les esquisses, soit en plan soit 
+  en coupe en fonction de la vue en cours dans la fenêtre de dessin. Cette fenêtre 
+  peut être en mode normal (changement de vue et zoom) ou en mode de mesure. <br>
+<p> <strong>BOUTONS</strong>&#160;: 
 <ul style="margin-top=0">
-  <li><img src="btn_measure.png" width="36" height="36">&nbsp;<i>Mode mesure</i> 
+  <li><i><img src="btn_measure.png" width="36" border="1">&nbsp;Mode mesure</i> 
     : fait permuter les modes &quot;aperçu&quot; et "mesure" </li>
-  <li><img src="btn_mode.png" width="36" height="36"><i>&nbsp;Références</i> : 
+  <li><i><img src="btn_mode.png" width="36" border="1">&nbsp;Références</i> : 
     affiche la boîte de dialogue des références du dessin pour activer ou désactiver 
     l'affichage de la ligne médiane de cheminement, des visées latérales, des 
-    noms de stations, de la grille métrique et de l'échelle. Cette boîte de dialogue 
-    possède également tout en bas une case à cocher pour masquer les détails de 
-    la cavité et afficher uniquement son contour.</li>
-  <li><img src="btn_angle.png"><em>&nbsp;Mesure</em> : l'icône &quot;<em>angle</em>&quot; 
-    permet de mesurer la distance et l'angle entre deux points et l'icône &quot;<em>polyline</em>&quot; 
-    permet de mesurer la longueur totale d'une polyligne en appuyant brièvement 
-    sur les positions de ses extrémités. </li>
-  <li> <em><img src="undo.png" width="37" height="37">&nbsp;Annuler</em> : supprime 
-    le dernier point de la polyligne. </li>
+    noms de stations, de la grille et de l'échelle. Cette boîte de dialogue possède 
+    également tout en bas une case à cocher pour masquer les détails de la cavité 
+    et afficher uniquement son contour.</li>
+  <li><em><img src="btn_angle.png" height="36" border="1">&nbsp;Mesures </em> 
+    : Avec &quot;Angle&quot;, vous mesurez la distance et l'angle entre deux points. 
+    Avec &quot;Polyligne&quot;, vous mesurez la longueur totale d'une polygonale 
+    tracée en tapant sur les positions des nœuds aux extrémités de celle-ci.</li>
+  <li><img src="btn_undo.png" width="36" border="1"> <em>Annuler</em>. Il supprime 
+    le dernier point de la polyligne.</li>
 </ul>
 <p>Lorsque la fenêtre est en mode mesure, le premier bouton a une couleur verte 
-  vive. Dans ce mode, le croquis peut être translaté à l'aide de la fonction corner-drag 
-  (si elle est activée) et agrandi à l'aide des boutons de zoom (si la fonction 
-  est activée). </p>
+  vive. Dans ce mode, le dessin peut être déplacé à l'aide de la fonction de déplacement 
+  des coins (si elle est activée) et agrandi à l'aide des boutons d'agrandissement 
+  (si elle est activée). 
 <p> 
 <h4>Mesure du segment </h4>
 	
-<p>Lorsque la fenêtre d'aperçu est en mode mesure, vous pouvez mesurer la distance 
+<p>Lorsque la fenêtre Aperçu est en mode mesure, vous pouvez mesurer la distance 
   entre deux points sur le quadrillage. Pour ce faire, appuyez d'abord sur un 
   premier point : il s'affiche une croix entourée de rose. Ensuite, vous tapez 
   sur le deuxième point : il s'affiche alors une croix bleue et la distance 2D 
   s'inscrit dans la barre de titre (tout en haut de l'écran sur une ligne grisée), 
   avec les différences le long des axes X et Y, et l'orientation (plan) ou l'inclinaison 
-  (coupe). Les unités de distance sont les unités du quadrillage du croquis (mètre, 
-  yard ou 2 pieds). L'angle s'affiche avec les unités d'angle en cours (degrés 
-  ou grades).<br>
+  (coupe). Les unités de distance sont les unités du quadrillage de l'esquisse 
+  (mètre, yard ou 2 pieds). L'angle s'affiche avec les unités d'angle en cours 
+  (degrés ou grades).<br>
   Toute autre frappe modifie le deuxième point (et par conséquent les mesures).</p>
 <p> Pour mettre fin à la mesure, tapez sur le bouton &quot;Mode mesure&quot; (le 
   premier à gauche avec une icône de règle graduée).</p>
 <p> La distance est calculée dans le plan de la page. En plan, c'est la distance 
-  horizontale. En coupe la distance sur l'axe Y correspond à la différence d'altitude.<br>
-</p>
+  horizontale. En coupe la distance sur l'axe Y correspond à la différence d'altitude.</p>
 <h4>Mesure de la polyligne </h4>
 	
 <p>La mesure d'une polyligne est utile pour obtenir une estimation de la &quot;longueur&quot; 
   de la cavité qui, même si elle est subjective, est plus significative que la 
   longueur de la polygonale de cheminement. Appuyez sur le point de départ de 
   la polyligne et de proche en proche sur les nœuds.</p>
-<p> La barre de titre affiche dans cet ordre : la distance entre les deux extrémités, 
+<p><br>
+  La barre de titre affiche dans cet ordre : la distance entre les deux extrémités, 
   la longueur de la polyligne, le déplacement X-Y entre les deux extrémités ainsi 
   que l'orientation. Voir image ci-dessous.</p>
-<p> <img src="polyline.png" alt="polyline measure"> <br>
+<p> <img src="polyline.png" alt="polyline measure"> 
 <p><strong>MENUS</strong>
 <ul>
-  <li> Fermer la fenêtre</li>
+  <li>Fermer la fenêtre</li>
   <li> Exporter [T]</li>
   <li> Paramètres</li>
   <li> Aide</li>
 </ul>
-<p><br>
-  <strong>Exportation</strong><br>
-  La vue d'ensemble peut être exportée aux formats suivants : </p>
+<p> <strong>Exporter</strong><br>
+  La synthèse peut être exportée dans les formats suivants : </p>
 <ul>
-  <li><em>Therion</em></li>
+  <li> <em>Therion</em></li>
   <li> SVG</li>
   <li> DXF (<em>LibreCAD</em>)</li>
-  <li> shapefile SIG (<em>QGIS</em>)</li>
+  <li> shapefile (<em>QGIS</em>)</li>
   <li> xvi (<em>xtherion</em>)</li>
+  <li> PDF</li>
 </ul>
 <p><br>
-  Chaque croquis est associé à un &quot;scrap&quot; dans l'exportation Therion. 
-  Pour les autres formats d'exportation, les croquis sont placés dans un seul 
-  dessin.<br>
+  Chaque croquis est associé à un &quot;scrap&quot; dans l'export <em>Therion</em>. 
+  Pour les autres formats d'exportation, tous les croquis sont placés dans un 
+  seul dessin.<br>
   Les points de station ne sont pas inclus automatiquement dans l'exportation 
-  Therion ; seules les stations définies par l'utilisateur sont ajoutées.<br>
+  <em>Therion</em> ; seules les stations définies par l'utilisateur sont ajoutées.<br>
   Les stations sont ajoutées automatiquement aux exportations SVG, DXF, shapefile, 
-  et xvi.<br>
-  S'il y a des points de &quot;section&quot;, les sections transverses sont incluses.<br>
+  PDF et xvi.<br>
+  S'il y a des points de &quot;section&quot;, les sections transverses sont incluses. 
 </p>
+<p>&nbsp;
 <p> <a href="manual11.htm">&#160;&lt; Sections transverses</a> | <a href="manual13.htm">Importer 
   / Exporter &#160;&gt;</a> 
 </body></html>

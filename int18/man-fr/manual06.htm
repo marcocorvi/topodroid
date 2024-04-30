@@ -3,44 +3,46 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
 </HEAD>
 <body>
-<h3>[6] FENÊTRE DES DONNÉES DU RELEVÉ TOPOGRAPHIQUE</h3>
+<h3>[6] FENÊTRE DES VISÉES DU RELEVÉ TOPOGRAPHIQUE</h3>
 
 <p>La fenêtre des données du relevé topographique affiche le tableau des mesures 
   [Figure 5] effectuées lors du relevé topo. 
 <p>Le titre affiche le nom du relevé topographique et, en mode multi/double appareil, 
-  l'appareil actuellement actif. La couleur du titre dépend de la &quot;politique&quot; 
-  actuelle d'affectation des stations :<br>
-  - bleu : toutes les visées vers l’avant (sens du cheminement)<br>
-  - bleu foncé : toutes les visées vers l’arrière (sens inverse au cheminement)<br>
-  - rose : visées effectuées au trépied<br>
-  - violet : &quot;politique&quot; de visées doubles avant plus arrière (cheminement 
-  et sens inverse)<br>
-  - rouge : &quot;politique&quot; d’anomalie magnétique<br>
-  - orange : &quot;politique&quot; de type Toporobot</p>
+  l'appareil actuellement actif. La couleur du titre dépend de la &quot;stratégie&quot; 
+  (convention) actuelle d'affectation des stations :</p>
+<ul>
+  <li> bleu : toutes les visées vers l’avant (sens du cheminement)</li>
+  <li>bleu foncé : toutes les visées vers l’arrière (sens inverse au cheminement)</li>
+  <li>rose : visées effectuées au trépied</li>
+  <li> violet : &quot;convention&quot; de visées doubles avant + arrière (cheminement 
+    et sens inverse)</li>
+  <li> rouge : &quot;convention&quot; de type anomalie magnétique</li>
+  <li> orange : &quot;convention&quot; de type Toporobot</li>
+</ul>
 <p>Les propriétés des différentes visées sont indiquées par la couleur de l'avant-plan 
   et de l'arrière-plan des données mesurées ainsi que par la couleur des noms 
   de stations.</p>
-<p>TopoDroid distingue quatre types de visées (affichés avec des couleurs différentes) 
-  : &quot;visée de cheminement&quot;, &quot;visée répétée&quot;, &quot;visée latérale 
-  d’habillage&quot;, et &quot;vide&quot;. De plus les visées latérales d'&quot;habillage&quot; 
-  peuvent être classées en croisées (X), horizontales (H), verticales (V), et 
-  &quot;scan&quot; (plans acquis en mode scanner). Les classes X-H-V sont désactivées 
-  par défaut [G]. </p>
+<p><em>TopoDroid</em> distingue quatre types de visées (affichés avec des couleurs 
+  différentes) : &quot;visée de cheminement&quot;, &quot;visée répétée&quot;, 
+  &quot;visée latérale d’habillage&quot;, et &quot;vide&quot;. De plus les visées 
+  latérales d'&quot;habillage&quot; peuvent être classées en croisées (X), horizontales 
+  (H), verticales (V), et &quot;scan&quot; (plans acquis en mode scanner). Les 
+  classes X-H-V sont désactivées par défaut [G]. </p>
 <p> 1. <strong>Couleurs de premier plan des données </strong>
-<blockquote>
+<blockquote> 
   <p>• [blanc] : données des visées de cheminement (première prise de vue d'un 
     groupe de mesures répétées) : ces visées sont associées aux stations &quot;DEPUIS&quot; 
     et &quot;VERS&quot;.<br>
     • [gris] : données de visées répétées (visées suivantes d'un groupe de mesures 
     de cheminement) : ces visées n'ont pas de stations associées.<br>
-    • [bleu]: visées latérales d’habillage. Associées généralement à une seule 
+    • [bleu] : visées latérales d’habillage. Associées généralement à une seule 
     station &quot;DEPUIS&quot;.<br>
-    • [vert] : visées d’habillage de type croisé X<br>
-    • [bleu foncé] : visées d’habillage de type H/V<br>
-    • [vert clair] : visées d’habillage de type scan <br>
+    • [vert] : visées d’habillage type X-splay (en croix LRUD)<br>
+    • [bleu foncé] : visées d’habillage de type H/V-splay (Hor. et Vert.)<br>
+    • [vert clair] : visées d’habillage de type balayage<br>
     • [orange] : visées vierges, c'est-à-dire visées dont les stations ne sont 
     pas encore définies.<br>
-    • [jaune] : visée arrière (&quot;politique&quot; de visée vers l’arrière ou 
+    • [jaune] : visée arrière (&quot;stratégie&quot; de visée vers l’arrière ou 
     « inversée »)<br>
     • [violet] : visée vide</p>
 </blockquote>
@@ -50,8 +52,7 @@
     à dire des visées avec une intensité &quot;anormale&quot; du champ magnétique 
     (seulement pour le DistoX2) <br>
     • [Orange] : visées les plus courtes<br>
-    • [Gris] : visée commentée<br>
-  </p>
+    • [Gris] : visée commentée </p>
 </blockquote>
 <p> 3. <strong>Couleur de premier plan du nom de la station :</strong>
 <blockquote>
@@ -64,9 +65,7 @@
     • [jaune foncé] : données de visées arrière du DistoX<br>
   </p>
 </blockquote>
-<p>
-
-<img src="shots_list.png" alt="shots list"/>
+<p> <img src="shots_list.png" alt="shots list"/> 
 <p>
 <p><strong>Remarque sur les noms des stations</strong>
 <p>Les noms des stations sont des propriétés des visées, comme l'azimut ou la 
@@ -95,19 +94,26 @@
 <p> 
 <h4>BOUTONS</h4>
 <ul style="margin-top:0">
-  <li><a href="page_download.htm">Téléchargement de données</a> depuis le DistoX. 
-    Bouton grisé et inactif si aucun DistoX n'est sélectionné.</li>
-  <li><a href="page_bluetooth.htm">Bluetooth</a></li>
-  <li> <a href="page_displaymode.htm">Mode d'affichage des données</a></li>
-  <li> <a href="page_plot_list.htm">Croquis du relevé topo</a> (croquis en PLAN 
-    et en COUPE) </li>
-  <li> <a href="page_survey_notes.htm">Commentaires (notes) du relevé topo</a></li>
-  <li><u><a href="page_man_data.htm">Saisie manuelle</a></u> de données (infos 
-    de visée)</li>
-  <li><a href="page_saved_station.htm">Stations sauvegardées</a></li>
-  <li><a href="page_azimuth.htm">Référence extension</a></li>
-  <li><a href="page_station_search.htm">Recherche de stations</a> (absent suivant 
-    versions)</li>
+  <li><img src="btn_download.png" width="42" height="42"> <a href="page_download.htm">Téléchargement 
+    de données</a> depuis le DistoX. Bouton grisé et inactif si aucun DistoX n'est 
+    sélectionné.</li>
+  <li><img src="btn_bluetooth.png" width="42" height="42"> <a href="page_bluetooth.htm">Bluetooth</a></li>
+  <li><img src="btn_mode.png" width="42" height="42"> <a href="page_displaymode.htm">Mode 
+    d'affichage des données</a></li>
+  <li><img src="btn_sketch.png" width="42" height="42"> <a href="page_plot_list.htm">Croquis 
+    du relevé topo</a> (croquis en PLAN et en COUPE) </li>
+  <li><img src="btn_note.png" width="42" height="42"> <a href="page_survey_notes.htm">Notes 
+    du relevé topo</a></li>
+  <li><img src="btn_plus.png" width="42" height="42"> <u><a href="page_man_data.htm">Saisie 
+    manuelle</a></u> de données (infos de visées)</li>
+  <li><img src="btn_station.png" width="42" height="42"> <a href="page_saved_station.htm">Stations 
+    sauvegardées</a></li>
+  <li><img src="btn_azimuth.png" width="42" height="42"> <a href="page_azimuth.htm">Référence 
+    extension</a></li>
+  <li><img src="btn_search.png" width="42" height="42"> <a href="page_station_search.htm">Recherche 
+    de stations / visées</a></li>
+  <li><img src="btn_refresh.png" width="42" height="42"> Rafraîchir la liste des 
+    données [T]. </li>
 </ul>
 <br>
 <p> 5. <strong>Appuis longs sur les boutons</strong>
@@ -116,7 +122,7 @@
   • &quot;Saisie manuelle de données&quot; : ouvre la boite de dialogue d'étalonnage 
   des instruments de mesure<br>
   • &quot;Chercher une station&quot; : passe à la ligne de données de la visée 
-  suivante (uniquement visible en mode utilisateur 'Testeur&quot;) </p>
+  suivante (mode 'Testeur&quot;) </p>
 <br>
 <p> <b><a name="mv"></a>Mode de sélection multivisées</b> 
 <p> Les noms des visées sélectionnées sont sur fond gris (mais généralement pas 
@@ -124,19 +130,25 @@
   démarré, appuyer brièvement sur la ligne de données d'une visée ajoute ou supprime 
   cette visée à la sélection. Dans ce mode, la barre de boutons du haut change 
   et affiche alors des boutons spécifiques : 
-<p><img src="mv1.png" width="42" height="42"> Applique à toutes les visées sélectionnées 
-  le sens d'extension vers la "gauche" </p>
-<p><img src="mv2.png" width="42" height="42"> Permute le sens d'extension de toutes 
-  les visées sélectionnées</p>
-<p><img src="mv3.png" width="42" height="41"> Applique à toutes les visées sélectionnées 
-  le sens d'extension vers la "droite" </p>
-<p><img src="mv4.png" width="44" height="42"> Renommer ou échager les noms des 
-  stations sélectionnées (&quot;Annuler&quot; pour ne rien faire)</p>
-<p><img src="mv5.png" width="42" height="42"> Supprimer toutes les visées sélectionnées. 
-  ATTENTION&#160;: les visées latérales cachées sont également supprimées lorsque 
-  la visée dont elles dépendent est supprimée </p>
-<p><img src="mv6.png" width="42" height="42"> Fermer la sélection multi-visées 
-  et revenir au tableau des visées de la fenêtre des données </p>
+<ul>
+  <li><font size="+1"><img src="btn_left.png"     width="36" border="1"></font> 
+    Appliquer à toutes les visées sélectionnées le sens d'extension vers la "gauche"<font size="+1">.</font></li>
+  <li><font size="+1"><img src="btn_multishot_flip_extend.png"     width="36" border="1"></font> 
+    Permuter le sens d'extension de toutes les visées sélectionnées.</li>
+  <li><font size="+1"><img src="btn_right.png"  width="36" border="1"></font> 
+    Appliquer à toutes les visées sélectionnées le sens d'extension vers la "droite"<font size="+1">.</font></li>
+  <li><font size="+1"><img src="btn_multishot_special_actions.png" width="36" border="1"></font> 
+    <a href="page_multishot.htm">Actions spéciales</a> sur les visées sélectionnées.</li>
+  <li><font size="+1"><img src="btn_delete.png" width="36" border="1"></font> 
+    Supprimer toutes les visées sélectionnées. ATTENTION&#160;: les visées latérales 
+    d'habillage cachées sont également supprimées lorsque la visée dont elles 
+    dépendent est supprimée.</li>
+  <li><font size="+1"><img src="btn_copy.png"   width="36" border="1"> </font>Copier 
+    la visée dans la mémoire tampon.</li>
+  <li><font size="+1"><img src="btn_clear.png"  width="36" border="1"></font> 
+    Fermer la sélection multi-visées et revenir au tableau des visées de la fenêtre 
+    des données.</li>
+</ul>
 <p> 
 <h4>Boite de dialogue croquis (ou esquisse)</h4>
 La boite de dialogue croquis (ou esquisse) permet de créer un nouveau croquis 
@@ -149,18 +161,18 @@ ouverte.
 <p>&nbsp; 
 <h4>MENU DÉROULANT DE DROITE</h4>
 <ul style="margin-top:0">
+  <li><u>FERMER</u> : ferme le relevé actuel</li>
   <li><u>INFO RELEVÉ</u> : fenêtre d'information du relevé topographique</li>
   <li><u>RÉCUPÉRER</u>&#160;: <a href="page_undelete.htm">récupération</a> d'un 
-    élément supprimé (une visée ou un croquis) </li>
+    élément supprimé (une visée ou un croquis) <font size="+1">[N]/[E]</font></li>
   <li><u>PHOTO</u>&#160;: photographies prises pour ce relevé topo (le cas échéant, 
-    sinon message d'avertissement)</li>
-  <li><u>CAPTEUR</u> : données des capteurs concernant ce relevé topo (le cas 
-    échéant, sinon message d'avertissement)</li>
-  <li><u>3D</u>&#160;: topographie en 3D (cet affichage du relevé nécessite l'appli 
-    <a page="manual14.htm">Cave3D</a>) </li>
-  <li><u>DISTOX</u>&#160;: passe à la fenêtre du périphérique connecté</li>
-  <li><u>OPTIONS</u> : paramètres généraux du relevé topo</li>
-  <li><u>AIDE</u></li>
+    sinon message d'avertissement) <font size="+1">[A]</font></li>
+  <li><u>AUDIO</u> : fichiers audios enregistrés dans le cadre de ce relevé [T].</li>
+  <li><u>CAPTEUR</u> : données des capteurs concernant ce relevé topo <font size="+1">[E]</font></li>
+  <li><u>3D</u>&#160;: visionneuse 3D <font size="+1">[N]</font></li>
+  <li><u>PÉRIPHÉRIQUE</u>&#160;: passe à la fenêtre du périphérique laser connecté</li>
+  <li><u>OPTIONS</u> : paramètres généraux du relevé topographique</li>
+  <li><u>AIDE</u> <font size="+1">[N]</font></li>
 </ul>
 <br>
 <p><b>DÉTAIL DES OPTIONS ou PARAMÈTRES DU RELEVÉ TOPO</b> 
@@ -175,18 +187,22 @@ ouverte.
     automatique des stations</a> de votre choix [par défaut visées "lat. habillage&#160;+ 
     cheminement"].</li>
   <li><i>Noms des stations : </i> indique le type&#160;de nom de station, soit 
-    alphanumérique soit numérique [par défaut "alphanumérique"]</li>
+    alphanumérique soit numérique [par défaut "alphanumérique"] </li>
   <li><em>Nom par défaut première station</em>&#160;: nom de la station initiale 
     utilisé par défaut. C'est aussi celui attribué à la première station pour 
     de nouveaux relevés. Il peut être modifié dans la boite de dialogue <i>Nouveau 
-    relevé</i> [par défaut vide].</li>
+    relevé</i> [par défaut 0].</li>
   <li><i>Taille des miniatures</i>&#160;: taille des vignettes photo [par défaut 
-    200, min 80, max 400] </li>
+    200, min 80, max 400] <font size="+1">[A]</font></li>
+  <li><em>Stations modifiables</em> : définit si les noms des stations sont modifiables 
+    dans la liste des visées [par défaut, non] [E]</li>
   <li><i>Data auto-export </i>: sauvegarde des données automatique; si vous souhaitez 
     exporter les données du relevé topo chaque fois que la fenêtre de données 
     est fermée [par défaut non].</li>
-  <li><i>Shared x-sections</i>&#160;: partager les visées latérales d'habillage 
-    de la station &quot;Vers&quot; entre les croquis [par défaut non].</li>
+  <li><em>Origine de l'esquisse </em>: suggérer toujours la même origine ou non 
+    [par défaut : non]</li>
+  <li><em>Partage sections transverses</em>&#160;: partager les sections transverses 
+    de la station &quot;VERS&quot; entre les différents croquis [par défaut non].</li>
   <li><i>UNITÉS</i> 
     <ul style="margin-top:0; margin-bottom:0">
       <li><i>Unités de distance</i>&#160;: longueurs en mètres ou en pieds [mètres 
@@ -195,49 +211,53 @@ ouverte.
         par défaut].</li>
       <li><em>Unités des croquis</em>&#160;: mètres, yards, 2-feets, [mètres par 
         défaut].</li>
+      <li><em>Unités de la règle graduée </em>: soit les mêmes que celles du croquis 
+        (cellule du quadrillage), soit des mètres ou des feets [cellule de la 
+        grille par défaut].</li>
     </ul>
   </li>
-  <li><i>OPTIONS DONNÉES VISÉE</i> 
+  <li><i>OPTIONS DONNÉES VISÉES</i> 
     <ul style="margin-top:0; margin-bottom:0">
+      <li><i>Tolérance du cheminement</i>&#160;: tolérance angulaire (en pourcentage) 
+        entre plusieurs visées d'un même cheminement [par défaut 0,05 et min. 
+        0]</li>
       <li><i>Longueur max cheminement</i>&#160;: les visées les plus longues sont 
         définies comme "dépassées" [par défaut 50 m, min 20 m].</li>
       <li><i>Longueur min cheminement </i>: les visées les plus courtes sont mises 
-        en évidence sur un fond orange [0,5 m par défaut].</li>
-      <li><i>Tolérance du cheminement</i>&#160;: tolérance angulaire (en pourcentage) 
-        entre plusieurs visées d'un même cheminement [par défaut 0,05° et min. 
-        0]</li>
+        en évidence sur un fond orange [0 m par défaut].</li>
       <li><i>Nombre mini de visées</i>&#160;: nombre minimum de visées identiques 
-        pour changer de station [2 par défaut, min 2, max 4].</li>
+        pour changer de station [3 par défaut, min 2, max 4]. [E]</li>
       <li><i>Seuil vertical vis. latérales : </i> seuil d'angle autour de 90 degrés 
         pour définir l'<a href="page_azimuth.htm">"extension"</a> des visées latérales 
         [par défaut 10°, min 0, max 90°].</li>
       <li><i>Seuil visées verticales</i> (Therion "vthreshold")&#160;: le GDHB 
         pour les visées saisies manuellement est considéré comme Ouest-Est-Nord-Sud 
         lorsque l'inclinaison de la visée dépasse ce seuil vertical [par défaut 
-        80°, min 0, max 90°]</li>
+        80°, min 0, max 90°] <font size="+1">[N]</font></li>
       <li><i>Définition manuelle d'extension</i>&#160;: fixe ou par rapport à 
-        la <a href="page_azimuth.htm">l'extension</a> [relative par défaut].</li>
-      <li><em>Bouclage</em> : compensation d'erreur de bouclage. Il est conseillé 
-        de ne pas faire la compensation, car cela permet de voir graphiquement 
-        les erreurs et aussi de repérer les erreurs possibles au sein du relevé 
-        [par défaut &quot;non&quot;]. La compensation de boucle spéciale basée 
-        sur les &quot;triangles&quot; est pour la <a href="page_trilateration.htm">trilatération</a> 
-        [E].</li>
+        la <a href="page_azimuth.htm">l'extension</a> [relative par défaut]. <font size="+1">[A]</font></li>
       <li><em>Icônes Précédent/Suivant</em> : afficher les boutons Précédent/Suivant 
-        dans la boîte de dialogue d'Edition de nouvelle visée [oui par défaut].</li>
+        dans la boîte de dialogue d'Edition de nouvelle visée [oui par défaut]. 
+        [A]</li>
       <li><i>Visée inverse : </i> afficher les champs de visée inverse dans la 
-        boîte de dialogue d'Edition de nouvelle visée [N] [non par défaut].</li>
-      <li><em>Anomalie magnétique</em> : compensation de l'anomalie. Celle-ci 
-        nécessite une stratégie automatique ou convention de visées de cheminement 
-        inverses [non par défaut]. </li>
+        boîte de dialogue d'Edition de nouvelle visée [non par défaut]. <font size="+1">[N]</font></li>
+      <li><em>Information sur les visées</em> : retour d'information pour la reconnaissance 
+        des visées : &quot;aucun&quot;, &quot;sonore&quot; ou &quot;tactile&quot; 
+        [par défaut &quot;aucun&quot;]. [N]</li>
+      <li><i>Visée arrière DistoX : </i> DistoX en mode de visées arrière. [non 
+        par défaut]. <font size="+1">[N]</font></li>
+      <li><em> Bouclage :</em> Compensation des erreurs de bouclage. Il est conseillé 
+        de ne pas effectuer la compensation car cela permet de voir graphiquement 
+        les erreurs de fermeture et de repérer les éventuelles erreurs du relevé 
+        [par défaut &quot;aucune&quot;] [N]</li>
       <li><i>Minuterie boussole</i>&#160;: délai en secondes avant de mesurer 
-        les directions avec les capteurs Android [par défaut [0], 10 min] </li>
+        les directions avec les capteurs Android [par défaut [0], 10 min]. <font size="+1">[N]</font></li>
       <li><em>Volume bip retardateur </em>: volume &quot;bip bip&quot; du timer 
-        [N] [par défaut 50, 10 min, max 100] </li>
+        [par défaut 10, min 0, max 100]. <font size="+1">[N]</font></li>
     </ul>
   </li>
-  <li><i> <a href="page_fixed_list.htm">Paramètres de géolocalisation</a></i></li>
-  <li><i> <a href="page_accuracy.htm">Paramètres de précision</a></i> </li>
+  <li><i> <a href="page_fixed_list.htm">Paramètres de GÉOCALISATION</a></i></li>
+  <li><i> <a href="page_accuracy.htm">Paramètres de PRÉCISION</a></i> </li>
 </ul>
 <p><a href="page_geek.htm"><strong>Paramètres personnalisés</strong></a>: : Dernières 
   visées et leur délai d'attente, Extension fractionnée, Classes d'exposition 
@@ -250,7 +270,23 @@ ouverte.
 <p> <strong>Attention</strong> : Il se peut que la première visée de la liste 
   ne soit pas mise à jour après une édition ou un appui court, en raison d'un 
   problème lié à Android. Le bouton &quot;Rafraîchir&quot; peut être utilisé pour 
-  demander un rechargement de la liste si cela se produit.
+  demander un rechargement de la liste si cela se produit. 
+<p><strong>Compensation des erreurs de bouclage</strong> 
+<p> Il est conseillé de ne pas effectuer la compensation, car cela permet de voir 
+  graphiquement les erreurs de fermeture et de repérer les éventuelles erreurs 
+  du relevé. C'est le comportement par défaut.<br>
+  Néanmoins, <em>TopoDroid</em> met en œuvre quelques stratégies de &quot;compensation 
+  des erreurs de bouclage&quot;.<br>
+  La stratégie <em>normale</em> [E] distribue les erreurs de fermeture de boucle 
+  sur les branches du réseau qui forment les boucles.<br>
+  Dans la stratégie <em>pondérée</em> [E], les erreurs de fermeture de boucle 
+  sont pondérées en fonction de la &quot;pertinence de la branche&quot;.<br>
+  La compensation <em>sélective</em> [T] n'applique que les corrections des boucles 
+  dont les erreurs de fermeture sont inférieures à un certain pourcentage (le 
+  paramètre dit &quot;seuil de boucle&quot;) de la longueur de la boucle. Les 
+  boucles supérieures au seuil sont affichées en violet. <br>
+  Enfin, la compensation spéciale de boucle basée sur les triangles est destinée 
+  à la <a href="page_trilateration.htm">trilatération</a> [T]. 
 <p><a href="manual05.htm">&lt; Données d'étalonnage</a> | <a href="manual07.htm"> 
   Tableau des visées&nbsp; &gt;</a> </p>
 </body></html>

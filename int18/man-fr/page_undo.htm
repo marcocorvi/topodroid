@@ -2,22 +2,21 @@
 
 <h4>PILE D'ANNULATION</h4>
 
-<p>TopoDroid pilote les fonctions 'Annuler / Refaire' gr&acirc;ce &agrave; une 
-  suite d'actions 'dessine / supprime / &eacute;dite' qui sont stock&eacute;es 
+<p><em>TopoDroid</em> pilote les fonctions 'Annuler / Refaire' gr&acirc;ce &agrave; 
+  une suite d'actions 'dessine / supprime / &eacute;dite' qui sont stock&eacute;es 
   empil&eacute;es. Lorsque vous dessinez quelque chose, une action de dessin est 
   plac&eacute;e sur le haut de la pile. Son annulation revient &agrave; d&eacute;placer 
   le pointeur de la pile vers le bas de celle-ci (en plus de modifier le dessin 
-  du croquis &agrave; l'&eacute;cran). Refaire d&eacute;place le pointeur de 
-  la pile vers le haut (et bien entendu rajoute le dessin &agrave; le croquis).<br>
+  de l'esquisse &agrave; l'&eacute;cran). Refaire d&eacute;place le pointeur de 
+  la pile vers le haut (et bien entendu rajoute le dessin &agrave; l'esquisse). 
 </p>
 <p>La fonction &quot;continuation&quot; du dessin ne cr&eacute;&eacute;e pas une 
   nouvelle ligne dans la pile d'annulation mais la ligne qui a &eacute;t&eacute; 
   continu&eacute;e est d&eacute;plac&eacute;e sur le dessus de la pile d'annulation. 
-  <br>
 </p>
 <p> Les actions d'effacement et d'&eacute;dition peuvent &eacute;galement &ecirc;tre 
   annul&eacute;es ou refaites. Cependant, leur effet sur la pile n'est pas aussi 
-  simple que pour le dessin.<br>
+  simple que pour le dessin. 
 <p> L'effacement est une op&eacute;ration matricielle alors que le dessin est 
   constitu&eacute; d'&eacute;l&eacute;ments vectoriels. Les points des &eacute;l&eacute;ments 
   vectoriels qui se trouvent inclus dans la r&eacute;gion effac&eacute;e sont 
@@ -27,10 +26,9 @@
   replace l'objet, mais en haut de la pile. Effacer le milieu d'une ligne supprime 
   l'objet ligne de la pile et le remplace par deux items qui sont ajout&eacute;s 
   en haut de la pile.</p>
-<p><br>
-  En cons&eacute;quence, l'effacement d'une ligne peut changer la position de 
+<p> En cons&eacute;quence, l'effacement d'une ligne peut changer la position de 
   celle-ci dans la pile d'annulation. Effacer le milieu d'une ligne supprime la 
   ligne de la pile et place ses deux extr&eacute;mit&eacute;s en haut de la pile. 
   L' &quot;Annulation&quot; suivante supprimera les deux extr&eacute;mit&eacute;s 
-  et restituera la ligne, mais cette fois en haut de la pile. 
+  et restituera la ligne, mais cette fois en haut de la pile. </p>
 </body></html>

@@ -3,50 +3,35 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
 </HEAD>
 <body>
-<h4>IMPORTATION D'UN RELEVÉ TOPOGRAPHIQUE</h4>
-Cette boîte de dialogue s'ouvre en appuyant sur le bouton <em>Import fichier</em> 
-de la <u>fenêtre principale</u>. <br>
-<p> Elle affiche la liste des formats de fichiers d'importation pris en charge 
-  : 
-<ul>
-  <li><em>Therion </em>: fichiers de donn&eacute;es &quot;.th&quot;, avec un format 
-    de donn&eacute;es simple (&quot;normal, de, vers, longueur, pente&quot; et 
-    optionnellement GDHB). Les brouillons de <em>Therion</em> ne sont pas import&eacute;s.</li>
-  <li><i>Compass</i> : fichiers &quot;.dat&quot; de <i>Compass</i>.</li>
-  <li><em>VisualTopo : </em> fichiers &quot;.tro&quot; et &quot;trox&quot;</li>
-  <li><em>PocketTopo</em> : fichiers &quot;.top&quot; . Les donn&eacute;es et 
-    les dessins sont import&eacute;s.</li>
-  <li><em>Archives ZIP</em> de TopoDroid. Ce sont des fichiers zip sp&eacute;ciaux 
-    contenant toutes les informations pour alimenter la base de donn&eacute;es, 
-    les dessins (fichiers &quot;.tdr&quot;), le fichier d'annotation et les photos.</li>
-</ul>
-<p> Le fichier d'importation est sélectionné avec le fournisseur de contenu du 
-  système.
-<p>Pour certains formats, il est possible de personnaliser l'importation grâce 
-  à quelques marqueurs.
-<p> <strong>Options d'importation de Compass (dat) </strong> 
-<ul>
-  <li><em>LRUD</em> (GDHB) si activé les valeurs LRUD sont importées et converties 
-    en visées d'habillage.</li>
-  <li> <em>Leg first</em> (cheminement en premier) si activé, les visées latérales 
-    LRUD sont placées après le cheminement.</li>
-  <li> <em>Diving datamode</em> (mode plongée) valide le mode plongée des données 
-    dans le fichier Compass [T].</li>
-</ul>
-<p><br>
-  <strong>Options d'importation de VisualTopo (tro, trox) </strong></p>
-<ul>
-  <li><em>LRUD</em> si activé les valeurs LRUD sont importées et converties en 
-    visées d'habillage.</li>
-  <li> <em>Leg first</em> (cheminement en premier) si activé, les visées latérales 
-    LRUD sont placées après le cheminement.<br>
-  </li>
-</ul>
-<p> <strong>N.B.</strong> L'importation peut échouer (et faire planter l'application) 
-  en raison d'une défaillance de la base de données que TopoDroid ne peut pas 
-  intercepter. Si cela se produit, supprimez le relevé partiellement importé et 
-  réessayez de l'importer à nouveau.</p>
-<p><br>
-<p>
 
+<h4>IMPORTATION D'UN RELEVÉ TOPOGRAPHIQUE</h4>
+
+<p>Cette boîte de dialogue s'ouvre en appuyant sur le bouton <u>Import fichier</u> 
+  de la <em><a href="manual02.htm">Fenêtre principale</a></em>. </p>
+<p> Elle affiche la liste des formats de fichiers d'importation pris en charge 
+  : dat (<em>Compass</em>), svx (<em>Survex</em>), th (<em>Therion</em>), tro 
+  et trox (<em>VisualTopo</em>), csn (<em>CaveSniper</em>), top (<em>PocketTopo</em>), 
+  et les archives zip de <em>TopoDroid</em>.<br>
+  Pour certains formats, il est possible de personnaliser l'importation à l'aide 
+  de quelques marqueurs. </p>
+<p>Options d’importation <strong>Compass</strong></p>
+<ul>
+  <li> <em>LRUD</em> si l'option est activée les valeurs LRUD sont importées et 
+    converties en visées d’habillage.</li>
+  <li> <em>Leg first </em>si l'option est activée les visées latérales LRUD sont 
+    placées après le cheminement. </li>
+  <li><em>Diving datamode</em> : active le mode des données de plongée dans le 
+    fichier Compass [T].</li>
+</ul>
+<p>Options d'importation <strong>VisualTopo</strong> (tro, trox)</p>
+<ul>
+  <li> <em>LRUD</em> si les valeurs LRUD sont importées et converties en visées 
+    d’habillage</li>
+  <li> <em>Leg first</em> si les visées d’habillage LRUD sont placés après le 
+    cheminement</li>
+</ul>
+<p><strong>NB</strong> : L'importation peut échouer (et faire planter l'application) 
+  en raison d'une défaillance de la base de données que TopoDroid ne peut pas 
+  interpréter. Si cela se produit, supprimez le relevé partiellement importé et 
+  essayez de l'importer à nouveau.</p>
 </body></html>

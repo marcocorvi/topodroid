@@ -3,70 +3,71 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
 </HEAD>
 <body>
-<h4>PHOTO VISÉE / CROQUIS</h4>
-<p>Cette boîte de dialogue s'ouvre à partir du bouton <em>Photo</em> de la <a href="page_shot_edit2.htm">seconde 
-  boîte de dialogue d'édition des visées</a>, ou lorsqu'un point &quot;photo&quot; 
-  ou une photo de section transverse sont insérés dans la <a href="manual09.htm">fenêtre 
-  de croquis</a>. </p>
-<p>Il y a un champ de texte pour le commentaire de la photo que vous allez prendre, 
-  et une case à cocher pour le choix de l'implémentation de l'appareil photo.</p>
-<p><br>
-  Boutons : </p>
+<h4>POINT PHOTO DU CROQUIS OU D'UNE VISÉE<br>
+  Boîte de dialogue </h4>
+
+<p>Cette boîte de dialogue s'ouvre à partir du bouton Photo&nbsp;<img src="btn_photo.png" width="36" height="36"> 
+  de la boîte de dialogue d'<em><a href="page_shot_edit2.htm">Édition secondaire 
+  des visées</a></em>, ou lorsqu'un point &quot;photo&quot; ou une &quot;photo&quot; 
+  de section transverse sont insérés dans la <em><a href="manual09.htm">Fen&ecirc;tre 
+  de croquis</a></em>.<br>
+  Il y a un champ de texte pour le commentaire de la photo que vous allez prendre, 
+  et une case à cocher pour le choix de la mise en œuvre de l'appareil photo.</p>
+<strong>Boutons</strong> 
 <ul>
-  <li><strong>OK</strong> ferme la boîte de dialogue et commence à prendre une 
-    photo.</li>
-  <li><strong>Annuler</strong> ferme la boîte de dialogue.</li>
+  <li> Enregistrer : sauvegarde les modifications dans les propriétés de la photo.</li>
+  <li> Supprimer : supprime la photo (s'il s'agit d'une prise de vue associée 
+    à un point topo).<br>
+  </li>
 </ul>
-<p><br>
-  TopoDroid contient une implémentation simple d'un appareil photo. Sa caractéristique 
-  unique est qu'il stocke l'azimut et l'inclinaison de l'appareil dans les balises 
-  exif du fichier image. L'azimut est stocké en tant que GPS_LONGITUDE et l'inclinaison 
-  en tant que GPS_LATITUDE (avec signe). <br>
-  Les balises exif suivantes sont définies par TopoDroid : </p>
+<p> <em>TopoDroid</em> contient une implémentation simple d'un appareil photo. 
+  Sa caractéristique unique est qu'elle stocke l'azimut et l'inclinaison de l'appareil 
+  dans les balises exif du fichier image. <br>
+  L'azimut est stocké comme GPS_LONGITUDE et l'inclinaison comme GPS_LATITUDE 
+  (avec le signe + ou -).</p>
+<p> La date et l'heure sont également enregistrées dans les balises exif. Les 
+  balises exif suivantes sont définies par <em>TopoDroid</em> : <br>
+</p>
 <ul>
-  <li><em>Logiciel</em> : &quot;TopoDroid&quot; et sa version, séparés par un 
+  <li><em>Software </em>: &quot;TopoDroid&quot; et sa version, séparés par un 
     espace [Android 7 et plus].</li>
   <li><em>Orientation</em></li>
-  <li><em>Date et heure</em> [aaaa.MM.jj]</li>
-  <li><em>Latitude</em> GPS : inclinaison [1/100°].</li>
-  <li><em>Réf. de la latitude</em> GPS : &quot;N&quot; ou &quot;S&quot;.</li>
-  <li><em>Longitude</em> GPS : azimut [1/100°]</li>
-  <li><em>Réf. de longitude</em> GPS : &quot;E&quot;.</li>
-  <li><em>Description de l'image</em> : azimut et inclinaison au 1/100°, séparés 
-    par un espace.</li>
+  <li> <em>Datetime</em> [yyyy.MM.dd]</li>
+  <li> <em>Latitude</em> GPS : inclinaison [1/100°]</li>
+  <li> <em>Réf. latitude</em> GPS : &quot;N&quot; ou &quot;S&quot;</li>
+  <li> <em>Longitude</em> GPS : azimut [1/100°]</li>
+  <li> <em>Réf. longitude</em> GPS : &quot;E&quot;</li>
+  <li> <em>Description de l'image</em> : azimut et inclinaison en 1/100°, séparés 
+    par un espace</li>
 </ul>
-<p></p>
-<p> Pour le point &quot;photo&quot; ou la photo de section transverse, l'affichage 
-  de l'appareil photo de TopoDroid comporte un réticule centré superposé.</p>
 <p><br>
-  TopoDroid utilise les capteurs Android pour obtenir la direction (azimut et 
-  pente). Un avertissement s'affiche si la précision du capteur est faible ou 
-  s'il y a une défaillance du capteur.</p>
-<p> L'appareil photo de TopoDroid comporte trois boutons en bas à droite. </p>
+  Pour les &quot;photo&quot; d’un point topo ou d’une section transverse, l'affichage 
+  de l'appareil photo de <em>TopoDroid</em> montre un pointeur centré en surimpression.</p>
+<p> <em>TopoDroid</em> utilise les capteurs Android pour obtenir la direction 
+  (azimut et pente). Un avertissement s'affiche si la précision du capteur est 
+  faible ou s'il y a une défaillance du capteur.</p>
+<p> L'appareil photo de TopoDroid comporte trois boutons en bas à droite :</p>
 <ul>
-  <li><strong>appareil photo</strong>. Rouge : prêt, appuyez pour prendre une 
-    photo. Bleu : en attente, appuyez pour activer l'appareil photo.</li>
-  <li><strong>Enregistrer</strong> : enregistre la photo. Grisé jusqu'à ce qu'une 
-    photo ait été prise.</li>
-  <li><strong>Retour</strong> ferme la fenêtre sans enregistrer la photo.</li>
+  <li> <strong>Appareil photo rouge</strong> = prêt, appuyez pour prendre une 
+    photo.</li>
+  <li> <strong>Appareil photo bleu</strong> = en attente, appuyez pour activer 
+    l'appareil photo.</li>
+  <li> <strong>Sauvegarder</strong> : enregistre la prise de vue.</li>
+  <li> <strong>Retour</strong> : ferme cette fenêtre sans enregistrer la photo.</li>
 </ul>
-<p></p>
-<p>Lorsque l'écran est tourné vers le haut, la photo est en format portrait. Lorsque 
-  l'écran est tourné vers la gauche ou la droite, l'image est en mode paysage.<br>
-  Les boutons de zoom s'affichent en tapant sur l'écran en bas et au milieu. Pour 
-  passer d'une niveau de zoom à l'autre appuyez rapidement sur les boutons de 
-  zoom à plusieurs reprises.</p>
-<p><br>
-  <strong>Implémentation de l'appareil photo</strong><br>
-  TopoDroid dispose de deux implémentations d'appareil photo : la première utilise 
-  l'ancienne API d'appareil photo Android, la seconde utilise la nouvelle API 
-  d'appareil photo Android2.<br>
-  L'ancienne caméra est utilisée par défaut.</p>
-<p><br>
-  Avec la nouvelle API camera2, il y a une limite de cinq tentatives de capture 
-  d'image, après quoi le bouton de l'appareil photo n'est plus disponible.</p>
-<p><br>
-  Un avertissement s'affiche si l'enregistrement de l'image JPEG échoue.</p>
-<br><p>
+<p>Les boutons de zoom s'affichent en tapant sur l'écran dans la partie inférieure 
+  centrale. Pour passer d'un facteur de zoom à un autre, appuyez rapidement sur 
+  les boutons + ou - du zoom à plusieurs reprises.<br>
+</p>
+<p><strong>Implémentation de la caméra</strong></p>
+<p> <em>TopoDroid</em> dispose de deux implémentations de l'appareil photo : la 
+  première utilise l'ancienne API de l'appareil photo d'Android, la seconde utilise 
+  la nouvelle API de l'appareil photo d'Android (camera2). </p>
+<p>Avec la nouvelle API camera2, il y a une limite de cinq tentatives de capture 
+  d'image, après quoi le bouton de l'appareil photo n'est plus disponible. </p>
+<p>Un avertissement s'affiche si l'enregistrement de l'image JPEG échoue.<br>
+</p>
+<br>
+<p>
 
 </body></html>

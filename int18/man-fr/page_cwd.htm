@@ -3,21 +3,31 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
 </HEAD>
 <body>
-<h4>RÉPERTOIRE DE TRAVAIL de TopoDroid</h4>
-<p>Afin de gérer les projets d'étude de cavités impliquant plusieurs sessions 
-  de topographie, il est conseillé d'utiliser un répertoire de travail (dossier) 
-  spécifique pour chaque projet.<em> </em><br>
-  Le nom de tout répertoire de travail doit commencer par &quot;TopoDroid&quot; 
-  (indépendamment de la casse). <br>
-  Les dossiers du projet sont créés à l'intérieur du dossier de base de <em>TopoDroid</em> 
-  &quot;Documents/TDX&quot;. </p>
-<p>Les fichiers de symboles de dessin et les fichiers liés aux appareils (base 
-  de données, firmware, vidages de mémoire, étalonnages) sont stockés uniquement 
-  dans le dossier &quot;<em>files</em>&quot; privé de l'application (dans le stockage 
-  externe). Les dossiers du relevé ne contiennent que des bases de données de 
-  relevés topographiques et des fichiers de relevé topographiques.</p>
-<p> Le choix du répertoire de travail actuel est l'un des paramètres généraux 
-  de l'application dans la <em>fenêtre principale</em>. </p>
-<p>&nbsp;</p>
-<p> 
+
+<h4>RÉPERTOIRE DE TRAVAIL ACTUEL</h4>
+
+TopoDroid ne gère pas les projets topographiques complexes. Cependant, il est 
+possible de spécifier un répertoire de travail courant différent (CWD) pour les 
+fichiers de données. Le répertoire de base des répertoires TopoDroid est la mémoire 
+externe principale, mais il peut être modifié [T]. Chaque CWD est un sous-répertoire 
+du répertoire de base et il est créé s'il n'existe pas. Le nom des répertoires 
+de travail actuels doit commencer par &quot;TopoDroid&quot;. Si vous spécifiez 
+un nom ne commençant pas par &quot;TopoDroid&quot;, il sera automatiquement ajouté 
+au début. 
+<p>Les fichiers de symboles de dessin et les fichiers relatifs au DistoX (base 
+  de données des appareils, firmwares, vidages mémoire, étalonnages) sont 
+  installés uniquement dans le répertoire par défaut &quot;TopoDroid&quot;. Les 
+  autres répertoires de travail actuels ne contiennent que des bases de données 
+  de relevés topographiques et des fichiers de relevé topographiques.</p>
+<p>Vous pouvez utiliser différents répertoires pour différents projets de relevés 
+  topographiques. Mais vous pouvez aussi avoir un répertoire &quot;TopoDroid&quot; 
+  pour chaque projet et passer à celui sur lequel vous devez travailler lorsque 
+  vous avez besoin de renommer les répertoires avec un gestionnaire de fichiers. 
+  Mais avec cette technique les fichiers utilitaires communs sont dupliqués.</p>
+<p>Le choix du répertoire de travail actuel est l'un des paramètres généraux de 
+  l'application (<em><a href="manual02.htm">Fenêtre principale</a></em>).</p>
+<p><strong>Avertissement</strong><br>
+  Les versions récentes d'Android pourraient forcer le dossier du projet à se 
+  trouver sous le dossier &quot;files&quot; privé de l'application (donc difficilement 
+  accessible via les applis gestionnaires de fichiers).</p>
 </body></html>

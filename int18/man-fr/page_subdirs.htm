@@ -4,99 +4,45 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
 </HEAD>
 	<body>
-<h4>SOUS-RÉPERTOIRES de TopoDroid</h4>
-<p><strong><font color="#990000">ATTENTION</font></strong> : les informations 
-  ci-dessous sur la fa&ccedil;on dont les donn&eacute;es du relev&eacute; topo, 
-  les donn&eacute;es d'&eacute;talonnage et les croquis sont stock&eacute;s en 
-  sous-répertoires dépendent de votre configuration Android. Ils peuvent se trouver 
-  soit sur votre mémoire interne (téléphone ou tablette) soit sur la carte SD 
-  additionnelle si vous en avez une voire répartis sur les deux. Explorez les 
-  mémoires de votre appareil avec un explorateur de fichiers pour vous en assurer.</p>
-<p align="justify"> L'application cr&eacute;e son r&eacute;pertoire de base par 
-  d&eacute;faut, nomm&eacute; &quot;TopoDroid&quot;, dans la m&eacute;moire principale 
-  &quot;Documents/TDX&quot;. Ce r&eacute;pertoire n'est pas supprim&eacute; lorsque 
-  vous d&eacute;sinstallez l'application. Dans ce r&eacute;pertoire, l'application 
-  cr&eacute;e la base de données SQLite &quot;distox14.sqlite&quot; qui stocke 
-  les données, les fichiers de croquis et les autres fichiers du relevé topographique. 
-</p>
+<h4>SOUS-RÉPERTOIRES TOPODROID</h4>
+<p>Voici quelques informations sur la façon dont les données du relevé topo, les 
+  données d'étalonnage et les croquis sont stockés. Vous pouvez ignorer en toute 
+  sécurité les deux sections suivantes, et y revenir plus tard si nécessaire.</p>
+<p>L'application crée son répertoire de base par défaut dans la mémoire externe 
+  publique primaire, &quot;Documents/TDX&quot;. Ce répertoire n'est pas supprimé 
+  lorsque vous désinstallez l'application. Dans ce répertoire, l'application crée 
+  le dossier de relevés topos &quot;TopoDroid&quot; avec la base de données SQLite 
+  &quot;distox14.sqlite&quot; qui stocke les données des topographies, les fichiers 
+  de croquis et les autres fichiers des relevés.</p>
 <p>L'application crée également des sous-répertoires pour les différents types 
-  de fichiers.<br>
-  Les sous-répertoires suivants sont généralement créés dans le répertoire privé 
-  de l'application, c'est-à-dire &quot;Android/data/com.topodroid.TDX/files&quot; 
-  dans la mémoire externe primaire (g&eacute;n&eacute;ralement / sdcard/ ou ailleurs 
-  <strong>voir note ci-dessus</strong>). </p>
+  de fichiers. Ces sous-répertoires sont créés uniquement dans le répertoire privé 
+  de l'application dans la mémoire externe primaire, c'est-à-dire &quot;Android/data/com.topodroid.TDX/files&quot; 
+  : </p>
 <ul>
-  <li><strong>bin</strong> : fichiers de firmware DistoX2</li>
-  <li><strong>ccsv</strong> : fichiers texte CSV des &eacute;talonnages export&eacute;s</li>
-  <li><strong>dump</strong> : fichiers de vidage de m&eacute;moire du DistoX</li>
-  <li><strong>symbol</strong> : fichiers d'outils de dessin (points, lignes, zones)</li>
-  <li><strong>man</strong> : traduction du manuel utilisateur</li>
+  <li> <strong>bin</strong> : fichiers de firmware (DistoX2 uniquement)</li>
+  <li><strong>csv</strong> : fichiers texte CSV des étalonnages exportés (DistoX2 
+    uniquement)</li>
+  <li> <strong>dump</strong> : fichiers de vidage de la mémoire cachée (DistoX2 
+    uniquement)</li>
+  <li> <strong>symbol</strong> : fichiers d'outils de dessin (points, lignes, 
+    zones)</li>
+  <li> <strong>man</strong> : traduction du manuel utilisateur</li>
 </ul>
-<p align="left">Le sous-r&eacute;pertoire &quot;bin&quot; est utilis&eacute; pour 
-  stocker les fichiers de firmware, &agrave; la fois les fichiers par d&eacute;faut 
-  inclus dans TopoDroid et ceux issus du vidage de la m&eacute;moire r&eacute;cup&eacute;r&eacute;e 
-  &agrave; partir d'un DistoX2. <br>
-  La base de données &quot;device10.sqlite&quot;, contenant les données d'étalonnage 
-  et les informations sur les appareils, se trouve dans ce répertoire.</p>
-<p> 
-  <!-- A <b>zip</b> folder is created in the project folder "TDX/TopoDroid". -->
-  Pour chaque relevé topo, un dossier spécifique nommé d'après le nom de ce relevé 
-  est créé. Il contient les dossiers suivants : </p>
+<p><br>
+  Le sous-répertoire &quot;bin&quot; est utilisé pour stocker les fichiers de 
+  firmware, à la fois les fichiers par défaut inclus dans TopoDroid ainsi que 
+  ceux issus du vidage de la mémoire récupérée à partir d'un DistoX2. <br>
+  La base de données &quot;device10.sqlite&quot;, qui contient les données d'étalonnage 
+  et les informations relatives à l'appareil, se trouve dans ce répertoire.<br>
+  <br>
+  Pour chaque relevé topographique, un dossier de relevé (nommé d'après le nom 
+  de la topographie) est créé, avec les dossiers suivants :</p>
 <ul>
-  <li><strong>audio</strong> : commentaires <em>audio</em> (fichiers .wav)</li>
-  <li><strong>note</strong> : fichiers texte d'annotations du relev&eacute; topo</li>
-  <li><strong>photo</strong> : images du relev&eacute; topo (fichiers .jpg)</li>
-  <li><strong>tdr</strong> : fichiers de croquis binaires</li>
-  <li><strong>out</strong> : fichiers exportés (cav, cave, csx, dat, dxf, png, 
-    svx, th, th2, top, tro).</li>
-  <li><strong>c3d</strong> : exportation de croquis pour la représentation 3D 
-    (temporairement inutilisé).</li>
-</ul>
-<p align="justify">Le sous-r&eacute;pertoire &quot;zip&quot; est utilis&eacute; 
-  pour stocker les archives compress&eacute;es afin de les lire et de les d&eacute;compresser 
-  dans TopoDroid. Lorsque vous souhaitez importer un relev&eacute; topo r&eacute;alis&eacute; 
-  avec un autre programme (<em>Therion, Compass, VisualTopo ou PocketTopo</em>), 
-  vous devez le placer dans le sous-r&eacute;pertoire &quot;import&quot;.</p>
-<p><font face="Arial, Helvetica, sans-serif"><strong>NOTA BENE IMPORTANT : </strong></font></p>
-<p align="justify">Dans les versions récentes de TopoDroid, les fichiers ci-dessous 
-  sont stockés et répartis dans les sous-répertoires de chaque relevé topographique 
-  inclus dans &quot;Documents/TDX/Topodroid&quot;. Mais sur les versions plus 
-  anciennes ils étaient stockés dans &quot;Documents/Topodroid&quot; et regroupés 
-  dans un sous-répertoire spécifique à chaque type de fichier (contenant chacun 
-  les fichiers exportés de différents relevés).<br>
-  En effet, les anciennes versions utilisaient le dossier de base &quot;Topodroid&quot; 
-  alors que les versions récentes utilisent le dossier de base &quot;TDX&quot;. 
-  Ils ne doivent pas se mélanger et les deux version (&lt; 5.1.40 et ultérieures) 
-  peuvent coexister.<br>
-  Donc si vous avez utilisé une version plus ancienne, ces fichiers exportés précédemment 
-  sont restés stockés à l'ancien emplacement, pensez-y si vous les recherchez.</p>
-<ul>
-  <li>cave : fichiers <em>Polygon</em></li>
-  <li>cav : fichiers <em>Topo</em></li>
-  <li>csv : fichiers texte <em>CSV</em> des relev&eacute;s topographiques export&eacute;s</li>
-  <li>csx : fichiers <em>cSurvey</em> (relev&eacute;s topographiques export&eacute;es 
-    et croquis)</li>
-  <li>dat : Fichiers de boussole (relev&eacute;s topographiques export&eacute;s)</li>
-  <li>dxf : fichiers <em>DXF</em> (relev&eacute;s topographiques et croquis export&eacute;s)</li>
-  <li>grt : fichiers <em>Grottolf</em> (relev&eacute;s topographiques export&eacute;s)</li>
-  <li>gtx : fichiers <em>GHTopo</em> (relev&eacute;s topographiques export&eacute;s)</li>
-  <li>import : fichiers de relev&eacute; topo &agrave; importer (format <em>Therion</em>, 
-    <em>Compass</em>, <em>VisualTopo</em> et <em>PocketTopo</em>)</li>
-  <li>kml : <em>GoogleEarth</em> exporte [A]</li>
-  <li>plt : exportation de fichier trace <em>OziExplorer</em> [A]</li>
-  <li>png : fichiers image <em>PNG</em> (croquis export&eacute;s)</li>
-  <li>srv : fichiers <em>Walls</em> (relev&eacute;s topographiques export&eacute;es)</li>
-  <li>svg : fichiers <em>SVG</em> (croquis export&eacute;s)</li>
-  <li>sur : Fichiers <em>WinKarst</em> (relev&eacute;s topographiques export&eacute;s)</li>
-  <li>svx : fichiers <em>Survex</em> (relev&eacute;s topographiques export&eacute;s)</li>
-  <li>Th : Fichiers <em>Therion</em> (relev&eacute;s topographiques export&eacute;s)</li>
-  <li>th2 pour les fichiers calques de <em>Therion</em> (croquis sauvegard&eacute;s)</li>
-  <li>th3 pour les fichiers de mod&egrave;le 3D</li>
-  <li>tmp : pour les fichiers temporaires. Tout fichier restant dans ce r&eacute;pertoire 
-    peut &ecirc;tre supprim&eacute; en toute s&eacute;curit&eacute;.</li>
-  <li>top : fichiers <em>PocketTopo</em> (relev&eacute;s topographiques export&eacute;s)</li>
-  <li> tro : fichiers <em>VisualTopo</em> (relev&eacute;s topographiques export&eacute;s)</li>
-  <li>zip : archives <em>ZIP</em> des relev&eacute;s topographiques (export&eacute;s 
-    et import&eacute;s)</li>
+  <li> <strong>audio</strong> : commentaires audio (fichiers .wav)</li>
+  <li> <strong>note</strong> : fichier texte d'annotations sur le relevé topo 
+    µ</li>
+  <li><strong>photo</strong> : images du relevé topo (fichiers .jpg)</li>
+  <li> <strong>tdr</strong> : fichiers croquis binaires</li>
+  <li> <strong>out</strong> : fichiers exportés</li>
 </ul>
 </body></html>

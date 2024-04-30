@@ -3,9 +3,9 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
 </HEAD>
 <body>
-<h4><b>PARAMÈTRES</b> de TopoDroid </h4>
+<h4>PAPAMÈTRES ET CONFIGURATION DE TOPODROID</h4>
 
-<b>Paramètres Généraux</b> 
+<b><em>PARAMÈTRES GÉNÉRAUX</em></b><br>
 <ul>
   <li><a href="page_cwd.htm">Répertoire de travail.</a> Valeur par défaut "unset" 
     (par exemple "TopoDroid") </li>
@@ -13,215 +13,200 @@
     1. Défaut 14 </li>
   <li>La taille des boutons {petit, normal, moyen, grand, immense}. Par défaut 
     : normal </li>
-  <li>Niveau utilisateur {de base, normal, avancé, expert). Par défaut : normal 
-  </li>
+  <li>Niveau de fonctionnalités {de base, normal, avancé, expert). Par défaut 
+    : normal </li>
   <li>Clavier. Activer <a href="page_keypad.htm">les claviers personnalisés</a> 
     au lieu du clavier par défaut d'Andorid. </li>
-  <li>Curseur du clavier personnalisé 
-    <!-- li>Cosurveying service. Default OFF</li -->
-  </li>
-  <li>Traduction du manuel de l'utilisateur </li>
-  <li><a href="page_language.htm">Langue</a> {défaut, en, fr, es, il, ru, de, 
+  <li> Curseur de clavier personnalisé</li>
+  <li>Traduction du manuel de l'utilisateur</li>
+  <li> <a href="page_language.htm">Langue</a> {défaut, en, fr, es, il, ru, de, 
     pg, slo, bg, cn, ukr, hu}. Par défaut : paramètres régionaux (c'est à dire 
     "défaut") </li>
-  <li>Orientation de l'écran (non spécifié, portrait, paysage) [non spécifié].
-    <!-- li>Backup clear menu</li -->
-  </li>
+  <li> Orientation de l'écran (non spécifiée, portrait, paysage) [non spécifiée].</li>
 </ul>
-<em><strong>Paramètres généraux personnalisés : </strong></em> 
-<ul>
-  <li>Menu de palettes supplémentaires</li>
-  <li> Enregistrement des paquets</li>
-  <li> Edition Therion th2</li>
-</ul>
-<p>&nbsp;</p>
-<p><strong>Importation et exportation de paramètres</strong><br>
-  <br>
-  Les paramètres peuvent être exportés vers le fichier &quot;settings.txt&quot; 
-  (dans le dossier TopoDroid). Il s'agit d'un fichier texte répertoriant les valeurs 
-  de tous les paramètres.<br>
-  Les paramètres peuvent être importés à partir du même fichier. Il est possible 
-  de choisir d'importer tous les paramètres ou seulement les paramètres fonctionnels.<br>
-  S'il y a un problème d'analyse du fichier, les paramètres ne sont pas modifiés.<br>
-  Certains paramètres de l'interface (comme la taille des boutons) nécessitent 
-  le redémarrage de l'application pour être effectifs.<br>
+<strong>Paramètres généraux personnalisés </strong> 
+<p>• Menu palettes supplémentaires<br>
+  • Enregistrement des paquets<br>
+  • Edition <em>Therion</em> th2 <br>
 </p>
-
-
-<b>Import/Export</b><br>
+<p> <strong><em>IMPORTATION / EXPORTATION DES PARAMÈTRES</em></strong> 
+<p>Les paramètres peuvent être exportés vers le fichier &quot;settings.txt&quot; 
+  (dans le dossier <em>TopoDroid</em>). Il s'agit d'un fichier texte listant les 
+  valeurs de tous les paramètres. Les paramètres peuvent être importés à partir 
+  de ce même fichier. Il est possible de choisir d'importer tous les paramètres 
+  ou seulement les paramètres fonctionnels. S'il y a un problème d'analyse du 
+  fichier, les paramètres ne sont pas modifiés. Certains paramètres de l'interface 
+  (comme la taille des boutons) nécessitent de redémarrer l'application pour être 
+  effectifs. 
+<p><b>Import/Export</b></p>
 <ul>
-  <li>Généraux : 
+  <li>Général : 
     <ul>
-      <li>Type d'exportation de données par défaut {cave,cav,csv,csx,dat,dxf,grt,gtx,srv,sur,svg,svx,th,top,tro} 
+      <li> Type d'exportation de données par défaut {cave,cav,csv,csx,dat,dxf,grt,gtx,srv,sur,svg,svx,th,top,tro} 
         [none]</li>
-      <li>Type d'exportation de croquis par défaut {none,th,csx,dxf,svg,xvi} [none]</li>
-      <li>Format d'exportation automatique de croquis [none]</li>
-      <li>Compass LRUD angle d'évasement. Angle d'évasement minimal des visées 
+      <li> Type d'exportation de croquis par défaut {none,th,csx,dxf,svg,png,xvi} 
+        [aucun]</li>
+      <li> Format d'exportation automatique de l'esquisse [aucun]</li>
+      <li> Angle d'écartement du compas LRUD. Angle minimum des visées d’habillage 
         LRUD.</li>
-      <li>Haut/Bas pente minimum des visées latérales d'habillage. [0&deg;]</li>
-      <li>Gauche/Droite pente maximum des visées latérales d'habillage. [90&deg;]</li>
-      <li>Espacement des points : distance entre les points de la ligne<br>
+      <li> Angle minimum de pente pour les visées haut/bas. [0°]</li>
+      <li> Angle maximum de pente pour les visées gauche/droite. [90°]</li>
+      <li> Espacement des points : distance entre les points d’une ligne discontinue</li>
+      <li>Formats d'exportation de données actifs : Compass (DAT), cSurvey (CSX), 
+        GHTopo (GTX), Polygon (CAVE), Survex (SVX), Therion (TH), Topo (CAV), 
+        TopoRobot (TAB), VisualTopo (TRO, TROX), Walls (SRV), Winkarst (SUR), 
+        CSV, DXF, KML, GPX<br>
       </li>
     </ul>
   </li>
-  <li>Import : 
+  <li> Importation :</li>
+  <ul>
+    <li> Carte des couleurs PocketTopo : Palette de couleurs PocketTopo pour TopoDroid</li>
+    <li> Estimation de l'extension LR lors de l'importation de fichiers Compass 
+      et VisualTopo. [oui]</li>
+    <li> Mode de données d'importation : normal ou plongée. Le mode « plongée 
+      » s'applique uniquement à Compass. [normal]<br>
+    </li>
+  </ul>
+  <li> cSurvey export :</li>
+  <ul>
+    <li> Préfixe de station [aucun]<br>
+    </li>
+  </ul>
+  <li> Survex export :</li>
+  <ul>
+    <li> Terminaison de ligne Survex/Topo {Linux, Windows}. [Linux]</li>
+    <li> Splays TO station : habillage attaché à la station « VERS ». [non]</li>
+    <li> LRUD. Ajouter LRUD à l'exportation de Survex/Therion. [non]<br>
+    </li>
+  </ul>
+  <li> Therion export : 
     <ul>
-      <li><a href="page_pt_cmap.htm">Palette de couleurs PocketTopo</a> Carte 
-        des couleurs de PocketTopo appliquée aux objets de TopoDroid</li>
-      <li>Estimer l'extension G/D lors de l'importation de fichiers Compass et 
-        VisualTopo. [oui]</li>
-      <li>Mode de données d'importation : normal ou plongée. Le mode plongée ne 
-        s'applique que pour Compass. [normal]<br>
-      </li>
-    </ul>
-  </li>
-  <li>cSurvey export : 
-    <ul>
-      <li>Préfixe station [aucun]<br>
-      </li>
-    </ul>
-  </li>
-  <li>Survex export : 
-    <ul>
-      <li>Fin de ligne {Linux,Windows}. [Linux]</li>
-      <li>Visées d'habillage à la station VERS. [non]</li>
-      <li>Ajouter LRUD (GDHB) à l'export. [non]<br>
-      </li>
-    </ul>
-  </li>
-  <li>Therion export : 
-    <ul>
-      <li>Créer thconfig [non]</li>
-      <li>Placez les commandes de carte Therion avant les données de report topo. 
+      <li> Maps first : exporter les cartes Therion avant les données de la topographie. 
         [non]</li>
-      <li>Visées latérales d'habillage : les ajouter aux scraps de Therion. [oui]</li>
-      <li>LRUD : Ajouter LRUD (GDHB) à l'export. [non]</li>
-      <li>Échelle : Exporter l'échelle. [1:100]</li>
-      <li>xvi référence : insérer une référence dans l'image xvi dans les fichiers 
+      <li> Stations : Ajoutez des points de station à des calques Therion. [oui]</li>
+      <li> Habillage : Ajouter des visés d’habillage aux calques Therion. [oui]</li>
+      <li> LRUD. Ajouter les visées latérales LRUD à l'exportation aux formats 
+        Survex/Therion. [non]</li>
+      <li> Échelle. Échelle d'exportation. [1:100]</li>
+      <li> Référence xvi : insérer une référence à l'image xvi dans les fichiers 
         th2.<br>
       </li>
     </ul>
   </li>
-  <li>Compass export : 
+  <li> Compass export : 
     <ul>
-      <li>Préfixe des stations Compass. [non]</li>
-      <li>Ajouter les visées latérales d'habillage aux fichiers Compass </li>
-      <li>Échanger gauche et droite pour l'exportation Compass. [non]<br>
+      <li> Préfixe de station Compass. [non]</li>
+      <li> Compass splays : ajouter les visées d’habillage aux fichiers Compass.</li>
+      <li> Compass swap LR. Échanger L et R lors de l'export Compass. [non]<br>
       </li>
     </ul>
   </li>
-  <li>VisualTopo export : 
+  <li> VisualTopo export : 
     <ul>
-      <li>Ajouter les visées latérales d'habillage aux fichiers VisualTopo </li>
-      <li>Visées d'habillage à la station &quot;DEPUIS&quot;. [non]</li>
-      <li>Format de fichier : tro or trox<br>
+      <li>VisualTopo splays : ajouter les visées d’habillage aux fichiers VisualTopo.</li>
+      <li> LRUD attachés à la station « DEPUIS »<br>
       </li>
     </ul>
   </li>
-  <li>SVG export : 
+  <li> SVG export : 
     <ul>
-      <li>SVG aller-retour [non]</li>
-      <li>Ajouter une grille à l'exportation SVG. [non]</li>
-      <li>Orientation des lignes. [non]</li>
-      <li> Inclure les visées latérales d'habillage. [non]</li>
-      <li> Épaisseur du point. [0.5]</li>
-      <li> Épaisseur de l'étiquette. [1.5]</li>
-      <li> Épaisseur de la ligne. [2.5]</li>
-      <li> Épaisseur de la grille. [2.5]</li>
-      <li> Épaisseur de la visée. [2.5]</li>
-      <li> Taille de la marque d'orientation. [12]</li>
-      <li> Taille des stations. [32]</li>
-      <li> Taille des étiquettes. [48]</li>
-      <li> Programme SVG cible. Inkscape ou Illustrator<br>
-      </li>
+      <li> SVG aller-retour [non]</li>
+      <li> Grid. Ajouter une grille à l'exportation SVG. [non]</li>
+      <li> Orientation des lignes. [non]</li>
+      <li> Habillage. Inclure les visées d’habillage. [non]</li>
+      <li> Taille du point. [0.5]</li>
+      <li> Ligne de l'étiquette. [1.5]</li>
+      <li> Épaisseur de ligne. [2.5]</li>
+      <li> Épaisseur de grille (quadrillage). [2.5] </li>
+      <li> Ligne de visée. [2.5] </li>
     </ul>
   </li>
-  <li>DXF export : 
-    <ul>
-      <li>DXF points terminaux des visées latérales. [oui]</li>
-      <li>DXF version {6,12,16}. [6]</li>
-      <li>Utiliser les visées latérales pour les segments de Bezier </li>
-      <li>DXF référence</li>
-    </ul>
-  </li>
-  <!-- li>PNG:<br>
   <ul>
-  <li>Image resolution [0.5, 100]. Default 1.5 [x200 px]</li>
-  <li>Background color (RGB in 0-100). [0 0 0, ie, black]</li>
-  <li>Grid: add metric grid</li>
-  <li>Splays: add splay lines</li>
-  <li>Stations: add stations</li>
+    <li> Taille de la coche d'orientation. [12]</li>
+    <li> Taille des stations. [32]</li>
+    <li> Taille des étiquettes. [48]</li>
+    <li> Programme SVG cible. Inkscape ou Illustrator<br>
+    </li>
   </ul>
-</li -->
-  <li>KML/GeoJSON export : 
+  <li> DXF export : 
     <ul>
-      <li>Ajouter des stations à l'export KML/GeoJSON. [oui]</li>
-      <li> Ajouter des splays à l'export KML/GeoJSON. [non]<br>
+      <li> DXF point final de visées d’habillage. [oui]</li>
+      <li> Version DXF {6,12,16}. [6]</li>
+      <li> Utiliser des splines pour les segments de Bézier</li>
+      <li> Référence DXF<br>
       </li>
     </ul>
   </li>
-  <li>Shapefile export : 
+  <li> KML/GeoJSON export : 
     <ul>
-      <li>Exporter un croquis en plan géoréférencé [non].<br>
+      <li> Stations. Ajouter des stations à l'exportation KML/GeoJSON. [oui]</li>
+      <li> Habillage. Ajoute les visées d’habillage à l'exportation KML/GeoJSON. 
+        [non]<br>
       </li>
     </ul>
   </li>
-  <li>CSV export : 
+  <li> Fichiers Shapefile export : 
     <ul>
-      <li>Données brutes : exporter les données brutes en csv. [non]</li>
-      <li> Séparateur de champs [barre verticale]</li>
-      <li>Séparateur de ligne [saut de ligne].</li>
+      <li> Exportation de croquis géolocalisés [non]<br>
+      </li>
+    </ul>
+  </li>
+  <li> CSV export : 
+    <ul>
+      <li> Données brutes : exportez les données brutes en csv. [non]</li>
+      <li> Séparateur de champs [caractère « pipe » (ligne verticale)]</li>
+      <li> Séparateur de ligne [saut de ligne]</li>
     </ul>
   </li>
 </ul>
-<br>
-<div style="font-size:90%"> <em><strong>Paramètres personnalisés d'import/export 
-  : </strong></em></div>
+<p><strong>Paramètres personnalisés d'import / export :</strong></p>
 <ul>
-  <li> 
-    <div style="font-size:90%">Symboles zippés dans les archives zip</div>
-  </li>
-  <li> 
-    <div style="font-size:90%">Importation du mode de données</div>
-  </li>
-  <li> 
-    <div style="font-size:90%"> Insérer des Sections Transverses</div>
-  </li>
-  <li> 
-    <div style="font-size:90%"> Inclure des stations</div>
-  </li>
+  <li>Symboles zippés dans les archives zip</li>
+  <li> Importer le datamode</li>
+  <li> Insérer des sections transverses dans les exportations de croquis</li>
+  <li> Inclure les stations dans les exportations de croquis</li>
+  <li> Comptage LRUD : nombre de visées d’habillage utilisées pour évaluer les 
+    dimensions GDHB (LRUD) [faux par défaut].</li>
 </ul>
-<p>&nbsp;</p>
-<p> <b>Données du Relevé Topographique</b>
+<p>Si la valeur de LRUD est fixée à &quot;faux&quot;, toutes les visées d’habillage 
+  (dans la limite des tolérances) sont utilisées pour calculer les dimensions 
+  GDHB (LRUD). La dimension transversale est fixée à la valeur maximale des projections 
+  de l'habillage sur les axes horizontaux ou verticaux. Si &quot;Comptage LRUD&quot; 
+  est fixé à &quot;vrai&quot;, seules les quatre premières visées d’habillage 
+  qui satisfont aux tolérances sont utilisées, et une visée d’habillage dans les 
+  tolérances n'est utilisée que pour les dimensions verticales ou horizontales. 
+  Chaque dimension est réglée sur la valeur de la première visée d’habillage acceptable. 
+  Par défaut, les tolérances sont très permissives : 0° pour les directions verticales 
+  et 90° pour les directions horizontales. </p>
+<p>Le transfert de fichier Zip peut être spécifié afin de limiter son traitement 
+  à des applications spécifiques. Si aucune application ne peut gérer le processus, 
+  l'action échoue.<br>
+</p>
+<p><b><em>LES DONNÉES DU RELEVÉ TOPOGRAPHIQUE</em></b> </p>
 <ul>
   <li>Équipe : membres de l'équipe du relevé topographique. Par défaut : "Unset" 
   </li>
   <li>Stratégie de stations :&nbsp; conventions d'affectation des noms de stations 
     dans le relevé topo, {aucun, latérales+avant, latérales+arrière, avant+latérales, 
     arrière+latérales, arrière+latérales&#160;+trépied,}. Par défaut : "latérales+avant&quot;</li>
-  <li>Noms de stations {alphanumérique, numérique}. Par défaut : alphanumérique</li>
+  <li>Noms de stations {numérique, alphanumérique}. Par défaut : alphanumérique</li>
   <li>Nom de la station initiale. Par défaut : "Unset"</li>
   <li>Taille des vignettes de photos [80 400]. Par défaut : 200 pxl </li>
-  <li> Stations éditables en ligne [non]</li>
-  <li> Origine du croquis</li>
-  <li> Sections transverses partagées</li>
 </ul>
-Unités 
+UNITÉS 
 <ul>
-  <li>Unités de longueur {m, feet}. Par défaut : mètre</li>
+  <li>Unités de longueur {m, feet}. Par Défaut : mètre</li>
   <li>Unités d'angle {deg, grad}. Par défaut : degré</li>
-  <li>Unités de grille quadrillée sous le croquis {m, yard, 2ft}. Pardéfaut :&nbsp; 
+  <li>Unités de grille quadrillée sous l'esquisse {m, yard, 2ft}. Par Défaut :&nbsp; 
     mètre</li>
-  <li>Unités de la réglette de mesure {cell, m, ft}.</li>
 </ul>
-Données des visées 
+DONNÉES DES VISÉES 
 <ul>
   <li>Tolérance de cheminement. La tolérance entre les visées d'un même cheminement&#160;&gt; 
     0 [p. 100]. 0.05 Par défaut : 5&#160;%</li>
-  <li> Longueur maximale de visée[50 m].</li>
-  <li> Longueur minimale du visée [30 cm].</li>
-  <li>Nombre minimum de visées par cheminement&#160;&gt;&#160;=2. Par défaut : 
-    2</li>
+  <li>Visées minimum. Nombre minimum de visées par cheminement&#160;&gt;&#160;=2. 
+    Par défaut : 2</li>
   <li>Seuil vertical de visée latérale. Limite de l'étendue verticale des visées 
     latérales [0,90]. Par défaut : 10°</li>
   <li>Seuil vertical de cheminement. Seuil vertical de visée de cheminement [0,90]. 
@@ -233,79 +218,45 @@ Données des visées
   <li>Visée inverse dans la boîte de dialogue des visées de l'utilisateur. Par 
     défaut : non</li>
   <li>Compensation d'anomalie magnétique. Par défaut : non</li>
-  <li>Retour d'identification des visées de cheminement [non]</li>
+  <li>Délai de déclenchement de visée (temporisation). Par défaut : 10s </li>
+  <li>Volume du bip de temporisation [10 100]. Par défaut : 50 &#160;%</li>
 </ul>
-Géolocalisation 
+GÉOLOCALISATION 
 <ul>
   <li>Unités de positionnement {ddmmss, dec.deg}. Par défaut : ddmmss </li>
   <li>CRS. Nom de CRS comme dans <em>Proj4</em>. Par défaut : Long-Lat </li>
 </ul>
-Précision 
+PRÉCISION 
 <ul>
   <li>Tolérance d'accélération &#160;&gt; 0. Par défaut : 400</li>
   <li> Tolérance du champ magnétique &#160;&gt; 0. Par défaut : 300</li>
   <li> Tolérance du dipôle d'inclinaison magnétique &#160;&gt; 0. Par défaut : 
-    3 deg </li>
-  <li>Tolérance de parenté &gt; 0. [10 %]</li>
+    3 deg <br>
+  </li>
 </ul>
-<em><strong>Paramètres de données personnalisés :</strong></em> 
+<p> <b><em>ESQUISSES / CROQUIS</em></b> 
 <ul>
-  <li>Mode plongée</li>
-  <li> Mise en évidence des données récentes</li>
-  <li> Délai d'attente des données récentes</li>
-  <li> Extension fractionnée</li>
-  <li> DistoX rétroactif. [non]</li>
-  <li> Interpolation plane</li>
-  <li> Capteurs Android [non]</li>
-  <li> Fermeture de boucle : aucune, normale, pondérée, sélective, triangulation 
-    [non].</li>
-  <li> Seuil de fermeture sélective de la boucle (pourcentage de la longueur de 
-    la boucle)</li>
-  <li> Boussole/clino de l'appareil Android</li>
-  <li> Compte à rebours de la direction de visée. [10 s]</li>
-  <li> Volume du bip de de temporisation de visée [10,100]. [50%]</li>
-  <li> Détection des visées ratées</li>
-  <li> Maintien assigned splay stations lors d'une renumérotation.</li>
-  <li> Attribution de splay group-station uniquement vers l'avant</li>
-</ul>
-<br>
-<p> <b> 
-  <!-- ========================================== -->
-  Croquis</b> 
-<ul>
-  <!-- li>Drawing tool picker {recent,list,grid,triple grid}. [most-recent]</li -->
-
-  <li>Déplacement coin. Active le déplacement des coins dans la <u>fenêtre de 
-    croquis</u> et la <u>fenêtre de vue d'ensemble</u>. [non]</li>
-  <li> Contrôles du zoom {désactivé, temporaire, permanent}. [désactivé].</li>
-  <li> Seuil horizontal des sections transverses</li>
-  <li> Vérification de la ligne médiane de cheminement. Vérifie si les stations 
-    sont bien attachées à la ligne médiane. [oui]</li>
-  <li> Vérification de l'extension des visées de cheminement. [oui]</li>
+  <li>Sélecteur d'outil de dessin {récent, liste, grille/tableau, triple-grille/tableaux}. 
+    Par défaut : récent</li>
   <li>Nombre d'outils récents {3, 4, 5, 6}. Par défaut : 4</li>
+  <li>Ascenseur latéral. Activer le curseur d'ascenseur latéral dans la fenêtre 
+    d'esquisse. Par défaut : désactivé</li>
+  <li>Commandes de zoom {off, permanente, temporaire}. Par défaut : permanent</li>
+  <li>Vérifier la ligne médiane. Vérifier si les stations sont jointes à la ligne 
+    de cheminement. Par défaut : oui</li>
+  <li>Nombre de sauvegardes. Par défaut : 5 </li>
+  <li>Intervalle de sauvegarde. Par défaut : 60 </li>
 </ul>
-<p>Éléments du croquis</p>
-<ul>
-  <li>Largeur de la ligne de croquis [0.5,10]. [1 pxl].</li>
-  <li> Taille du nom de la station. [24 pxl]</li>
-  <li> Rayon des points verts [0.5,100]. [5 pxl]</li>
-  <li> Rayon de sélection. [24 pxl]</li>
-  <li> Taille de la gomme. [36 pxl]</li>
-  <li> Sensibilité au décalage. [60 pxl]</li>
-  <li> Rayon de pointage. [16 pxl]</li>
-  <li> Transparence de l'affichage. [80% d'opacité].</li>
-</ul>
-Outils point 
+OUTILS POINT 
 <ul>
   <li>Icônes point non zoomables. Par défaut : non</li>
   <li>Échelle des outils points. Par défaut : 1.2</li>
   <li>Taille des étiquettes. Par défaut : 24 px</li>
 </ul>
-Outils ligne 
+OUTILS LIGNE 
 <ul>
   <li>Largeur des lignes (N.B : les lignes de parois sont le double de celle-ci). 
     Par défaut : 1 px </li>
-  <li>Facteur d'échelle du style de lignes</li>
   <li>Style de ligne {Bezier, fine, normal, épaisse}. Par défaut : normal </li>
   <li>Espacement de ligne-pointillée. Distance minimale entre les points de la 
     ligne. Par défaut : 10 px</li>
@@ -313,131 +264,61 @@ Outils ligne
     [1,20]. Par défaut : 8 unités</li>
   <li>Points de section transverse. Ajouter les points de section <em>Therion</em> 
     à la ligne de section. Par défaut : oui</li>
-  <li>Ligne de jointure par défaut {aucune, début, fin, les deux, continue}. [aucune]</li>
-  <li> Visibilité par défaut de la bordure de la zone. [oui]</li>
+  <li>Visibilité de la limite des zones. Par défaut : oui</li>
+  <li>Précision des lignes de Bézier. Par défaut : 1 </li>
+  <li>Ligne de Bézier seuil d'angle. Par défaut : 20</li>
 </ul>
-<p><em><strong>Paramètres de croquis personnalisés :</strong></em></p>
+RÉGLAGES DE L'ESQUISSE 
 <ul>
-  <li>Décalage/échelle du croquis</li>
-  <li> Division/fusion des croquis</li>
-  <li> Nombre de sauvegardes. [5]</li>
-  <li>Intervalle de sauvegarde. [60 s]</li>
-  <li> Coloration des stations sauvegardées</li>
-  <li> Mise à jour de la ligne médiane uniquement sur lors des nouvelles visées 
-    de cheminement.</li>
-  <li> Transformations affines complètes de croquis</li>
-  <li> Couches. [non]</li>
-  <li> Échelle du papier millimétré</li>
+  <li>Épaisseur de ligne de la topographie [0.5,10]. Par défaut : 1 px </li>
+  <li>Taille du nom de station. Par défaut : 24 px</li>
+  <li>Rayon des points verts [0.5,100]. Par défaut : 5 px </li>
+  <li>Rayon de sélection &#160;&gt;&#160;= 0. Par défaut : 24</li>
+  <li>Taille de la gomme. Par défaut : 36</li>
+  <li>Sensibilité de déplacement. Par défaut : 60 </li>
+  <li>Rayon de pointage. Par défaut : 16</li>
+  <li>Seuil des visées latérales sur une vue en plan [0,90]. Par défaut : 80 deg 
+  </li>
+  <li>Seuil d'inclinaison des visées latérales en pointillés [0,90]. Par défaut 
+    : 50 deg</li>
+  <li>Seuil d'angle des visées latérales de sections transverses en pointillés 
+    [0,90]. Par défaut : 60 deg </li>
+  <li>Seuil de hauteur des sections transverses [0,90]. Par défaut : 70 deg </li>
 </ul>
-<p><em><strong>Paramètres personnalisés des visées latérales d'habillage :</strong></em></p>
+PAROIS-AUTO 
 <ul>
-  <li>Classes d'affichage</li>
-  <li> Coloration de l'affichage</li>
-  <li> Seuil d'affichage de la vue en plan. [80°]</li>
-  <li>Mode discontinu (tirets ou pointillés) : aucun, suivant l'azimut, suivant 
-    la pente, suivant la vue. [aucun]</li>
-  <li> Seuil de pente de visées latérales discontinues. [50°]</li>
-  <li> Seuil d'azimut des visées latérales discontinues. [60°]</li>
-  <li> Seuil d'angle des visées latérales discontinues. [60°]</li>
-  <li> Couleur du tiret des visées latérales discontinues.</li>
-  <li> Couleur du point des visées latérales discontinues.<br>
+  <li> Type de murs {aucun, convexes,}. Par défaut : aucun </li>
+  <li>Inclinaison visées latérales sur un plan. Par défaut : 70 deg</li>
+  <li> Inclinaison visées latérales sur une coupe. Par défaut : 45 deg</li>
+  <li>Séparation. Par défaut : 0,1 m</li>
+  <li>Concavité. Par défaut : 0,1 m</li>
+  <li>Pas. Par défaut&#160;: 1 m<br>
   </li>
 </ul>
-<p><em><strong>Parois automatiques </strong></em></p>
-<ul>
-  <li>Type de paroi. [aucun]</li>
-  <li> Pente des visées latérales en plan</li>
-  <li> Pente des visées latérales en coupe</li>
-  <li> Séparation minimale le long de la visée</li>
-  <li> Concavité Par défaut : 0,1 m</li>
-  <li> Séparation ponctuelle sur la paroi </li>
-</ul>
-<p><br>
-  <strong><em>Paramètres de ligne personnalisés :</em></strong></p>
-<ul>
-  <li>Angle de lissage</li>
-  <li> Précision de l'interpolation (ligne de Bézier) Par défaut : 1 </li>
-  <li> Seuil d'angle (ligne de Bézier) Par défaut : 20</li>
-  <li> Distance maximale point/segment pour le lissage. [0.5 m]</li>
-  <li> Longueur maximale du segment pour le lissage. [2.0 m]</li>
-  <li> Tampon de segment de lissage de point</li>
-  <li>Détacher ligne/zone. [non]</li>
-  <li> Lisser/redresser les segments</li>
-  <li> Redressement des lignes</li>
-  <li> Mode multi-sélection </li>
-  <li>Actions composées</li>
-</ul>
-<p>&nbsp;</p>
-<p><strong>
-  <!-- ========================================== -->
-  Visionneuse 3D</strong></p>
-<ul>
-  <li> Vues inclinaison négative</li>
-  <li> Points de station</li>
-  <li> Taille des points de station</li>
-  <li> Taille du texte de la station</li>
-  <li> Rayon de sélection</li>
-  <li> Dialogue de mesure</li>
-  <li> Message de la station</li>
-  <li> Grille au-dessus ou au-dessous du modèle 3D</li>
-  <li> Étendue de la grille</li>
-</ul>
-<p><br>
-  Surface de MNE</p>
-<ul>
-  <li>Taille tampon du MNE autour du modèle</li>
-  <li> Taille maximale du MNE</li>
-  <li> Mode de réduction du MNE</li>
-</ul>
-<p>Modèle de paroi </p>
-<ul>
-  <li>Utilisation des visées latérales d'habillage</li>
-  <li> Toutes les visées latérales</li>
-  <li> Visées latérales projetées</li>
-  <li> Seuil des visées latérales</li>
-  <li> Triangles fractionnés</li>
-  <li> Fractionnement aléatoire</li>
-  <li> Fractionnement par étirement</li>
-  <li> Paramètre Powercrust</li>
-</ul>
-<p><br>
-</p>
-<p> <b>Périphérique (distancemètre laser)</b> 
+<p> <b><em>PÉRIPHÉRIQUE (DISTO X)</em></b> 
 <ul>
   <li>Bluetooth. Vérifier si le BT est activé au démarrage. Par défaut : Oui</li>
   <li> Mode de connexion des données {à la demande, continue}. Par défaut : à 
     la demande</li>
-  <li>Nombre de nouvelles données : obtenir le nombre de nouvelles données avant 
-    le téléchargement par lot.</li>
-  <li> Type de socket BT {normal, non sécurisé}. [défaut dépendant du périphérique].</li>
-  <li> Solution de contournement Z6. [oui]</li>
-  <li> Autopairage (association automatique). [oui]</li>
-  <li> Retour d'information sur l'état de la connexion</li>
-</ul>
-<p><em><strong>Paramètres personnalisés du dispositif :</strong></em></p>
-<ul>
+  <li>Reconnexion automatique (en mode continu). Par défaut : Non</li>
+  <li>Type de connexion Bluetooth {normal, non sécurisée}. Par défaut : normal</li>
+  <li>Contournement&nbsp;des problèmes smartphone Z6. Par défaut : Oui</li>
   <li>Délai de connexion &#160;&gt;&#160;= 0. Par défaut : 2</li>
-  <li> Second DistoX</li>
-  <li> Pause saisie des données [ms]. Par défaut : 50</li>
+  <li>Couplage automatique. Par défaut : Oui</li>
+  <li>Pause saisie des données [ms]. Par défaut : 50</li>
   <li>Délai d'attente pour données prêtes [ms]. Par défaut : 100 </li>
-  <li> Pause laser [ms]. Par défaut : 1000 </li>
-  <li>Pause visée [ms]. Par défaut : 4000</li>
-  <li> Vérification du firmware</li>
-  <li> Mode données BRIC4</li>
-  <li> Visées de longueur zéro BRIC4<br>
-    <br>
+  <li>Pause laser [ms]. Par défaut : 1000 </li>
+  <li>Pause visée [ms]. Par défaut : 4000<br>
   </li>
 </ul>
-<p> <b>Paramètres d'étalonnage</b> 
+<p> <b><em>PARAMÈTRES D'ÉTALONNAGE</em></b> 
 <ul>
-  <li>Stratégie de groupe par défaut {TopoDroid, PocketTopo). [TopoDroid]
-  <li>Tolérance du groupe. Par défaut : 40°</li>
-  <li>Erreur de l'algorithme. Par défaut : 0,000001</li>
+  <li>Stratégie de groupe {4x4+M, Nx4, distance angulaire). Par défaut : Nx4 
+  <li>Tolérance du groupe. Par défaut : 40 [deg] </li>
+  <li>Epsilon d'étalonnage. Erreur de l'algorithme. Par défaut : 0,000001</li>
   <li>Nombre maximum d'itérations d'étalonnage. Par défaut : 200</li>
-  <li>Télécharger immédiatement les données d'étalonnage à distance</li>
   <li>Afficher les données brutes d'étalonnage. Par défaut : Non</li>
-  <li>Algorithme d'étalonnage {automatique, linéaire, non linéaire}. Par défaut 
-    : auto </li>
+  <!-- li>Default calibration algorithm {auto,linear,non-linear}. [auto]</li -->
+  <!-- li>Parameters for the min-algo: alpha, beta, gamma, delta</li -->
 </ul>
-<p>&nbsp;</p>
 </body></html>

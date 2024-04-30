@@ -8,70 +8,61 @@
 <p>Deux entr&eacute;es spécifiques : &quot;user&quot; et &quot;paroi&quot;, sont 
   int&eacute;gr&eacute;es dans le programme. Les autres fichiers &quot;lignes&quot; 
   sont t&eacute;l&eacute;charg&eacute;s &agrave; partir du sous-r&eacute;pertoire 
-  <em>symbol/line</em> de TopoDroid. Ce r&eacute;pertoire est rempli avec les 
-  outils de points compil&eacute;s dans l'apk de distribution. Vous pouvez supprimer 
-  les outils dont vous n'avez pas besoin, modifier ceux que vous souhaitez modifier 
-  et en ajouter de nouveaux qui ne sont pas fournis dans l'apk.</p>
+  <em>symbol/line</em> de <em>TopoDroid</em>. Ce r&eacute;pertoire est rempli 
+  avec les outils de points compil&eacute;s dans l'apk de distribution. Vous pouvez 
+  supprimer les outils dont vous n'avez pas besoin, modifier ceux que vous souhaitez 
+  modifier et en ajouter de nouveaux qui ne sont pas fournis dans l'apk.</p>
 <p><br>
   Le fichier d'outil de ligne contient des lignes sp&eacute;cifiant la propri&eacute;t&eacute; 
   de l'outil de dessin.</p>
 <ul>
   <li>"symbol line" [obligatoire]</li>
   <li>"name NAME", where NAME is the area default name [obligatoire]</li>
-  <li>translated names, eg, "name-es ..." [facultatif]</li>
-  <li>"th_name NAME", o&ugrave; NAME est le nom de type Therion et doit &ecirc;tre 
-    le m&ecirc;me que le nom de fichier Therion sans l'éventuel préfixe &quot;u&quot; 
-    [obligatoire]</li>
+  <li>translated names, eg, "name-es ..." [optionnel]</li>
+  <li>"th_name NAME", where NAME is the Therion name, and must be the same as 
+    the filename [obligatoire]</li>
   <lI>"group GROUP", specifies the group this line belongs to [optionnel, default 
     no group]</li>
-  <li>"color rgb alpha" (RVB et alphanumérique au format hexadécimal, par exemple 
-    '0x00ff00' est le vert, et '0xff' est complètement opaque) [RVB obligatoire, 
-    la partie alpha est facultative, si non spécifié 0xff est utilisé].</li>
-  <li>"width SIZE", largeur de ligne en unités du paramètre de largeur de ligne 
-    [facultatif, par défaut 1]. </li>
-  <li>"dash PATTERN" exemple &quot;15 5&quot; [motif de tiret facultatif].</li>
-  <li>"style STYLE" où STYLE peut être &quot;droit&quot; ou &quot;xN&quot;.[facultatif]</li>
-  <li>&quot;effect&quot; commence la ligne path-effect, est suivi par des commandes 
-    path puis et fermé par &quot;endeffect&quot;</li>
+  <li>"color rgb alpha" (rgb and alpha in hex format) [rgb obligatoire, alpha 
+    is optionnel]</li>
+  <li>"width SIZE" [optionnel, multiple of "base line width"]</li>
+  <li>"dash PATTERN" [optionnel dash pattern]</li>
+  <li>"style STYLE" where STYLE can be 'straight' or 'xN'</li>
+  <li>"effect" begins the line path-effect and is followed by path commands, and 
+    closed by</li>
   <li>"endeffect"</li>
-  <li>&quot;roundtrip VALUE&quot; [facultatif, pour SVG-roundtrip, VALUE peut 
-    être 1 (walls_shp), 2 (walls_sym), 3 (detail_shp), 4 (detail_sym) - par défaut 
-    3]. </li>
-  <li>&quot;level&quot; marqueur d'affichage [facultatif, 1 si absent]. </li>
-  <li>"endsymbol" </li>
+  <li>"roundtrip VALUE" [optionnel, pour SVG-roundtrip, VALUE peut être 1 (walls_shp), 
+    2 (walls_sym), 3 (detail_shp), 4 (detail_sym) - default 3]</li>
+  <li>&quot;level&quot; marqueur de vue [optionnel, 1 si manquant]</li>
+  <li>"endsymbol"</li>
 </ul>
-<p><b>Nom<br>
-  </b>Reportez-vous à la page <a href="page_symbol_point.htm">outil points</a> 
-  pour savoir comment spécifier les noms. <br>
-</p>
-<p><b> Groupe</b><br>
-  Les types de ligne dans le m&ecirc;me groupe peuvent &ecirc;tre joints par &quot;continuation&quot;.</p>
-<p> Cela permet de sp&eacute;cifier que plusieurs lignes de &quot;parois&quot;, 
-  bien qu'ayant des types différents, peuvent &ecirc;tre réunies les unes aux 
-  autres.<br>
-</p>
+<p><strong>Nom</strong><br>
+  Reportez-vous à l'<a href="page_symbol_point.htm">outil POINTS</a> pour savoir 
+  comment spécifier les noms. </p>
+<p><b>Groupe</b><br>
+  Cet attribut est utilisé pour remplacer un symbole manquant par le symbole du 
+  groupe.</p>
 <p><strong>Tiret</strong><br>
-  La directive &quot;dash&quot; spécifie que la ligne est dessinée avec un trait 
-  en pointillés. Par exemple, &quot;dash 15 5&quot; signifie que la ligne est 
+  La propriété &quot;dash&quot; spécifie que la ligne est dessinée avec un schéma 
+  en pointillés. Par exemple, &quot;tiret 15 5&quot; signifie que la ligne est 
   dessinée avec des segments de 15 unités, séparés par des espaces de 5 unités. 
-  <br>
 </p>
 <p><strong>Style</strong><br>
-  La directive &quot;style&quot; est utilisée pour dessiner des lignes en utilisant 
-  moins de points. Un &quot;style x3&quot; signifie par exemple que la ligne est 
-  dessinée en utilisant un point sur trois. <br>
-  L'effet résultant est que la ligne est moins &quot;courbée&quot;. Si vous voulez 
-  des segments vraiment droits, utilisez &quot;style straight&quot; (redresser 
-  ligne). <br>
-</p>
+  La propriété &quot;style&quot; permet de dessiner des lignes en utilisant des 
+  points épars.<br>
+  Un &quot;style x3&quot; signifie que la ligne est dessinée en utilisant un point 
+  sur trois. L'effet est que la ligne est moins &quot;courbe&quot;.<br>
+  Si vous voulez des segments droits, utilisez &quot;style straight&quot;. </p>
 <p><b>Effet de tracé (Effect path)</b><br>
   Cette option est utilis&eacute;e pour d&eacute;finir des lignes avec un style 
-  complexe.<br>
-</p>
+  complexe.</p>
 <p><strong>Niveau</strong><br>
-  L'attribut &quot;level&quot; prend la valeur du marqueur pour les vues activées 
-  ici.<br>
-  L'indicateur est un nombre dont la somme est 1 (niveau de base), 2 (plancher), 
-  4 (remplissages), 8 (plafond) et 16 (artefacts). <br>
+  L'attribut &quot;level&quot; prend la valeur de l'indicateur des vues activées 
+  sur ce poste.<br>
+  L'indicateur est un nombre composé de 1 (base), 2 (plancher), 4 (remplissages), 
+  8 (plafond) et 16 (artefacts). </p>
+<p><br>
 </p>
+<p>
+
 </body></html>

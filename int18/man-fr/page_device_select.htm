@@ -4,94 +4,92 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
 </HEAD>
 <body>
-<h4> APPAREILS DE MESURE (ou DISPOSITIFS) PÉRIPHÉRIQUES </h4>
-<p>TopoDroid supporte les appareils suivants : </p>
+<h4> SÉLECTION ET COMMUTATION D'UN PÉRIPHÉRIQUE LASER</h4>
+<p> TopoDroid supporte les appareils suivants : </p>
 <ul>
-  <li>DistoX (première version basée sur Leica DistoA3)</li>
-  <li> DistoX2 (deuxième version basée sur Leica DistoX310)</li>
-  <li> Sap5 (Shetland Attack Pony), seulement les modèles avec Bluetooth, fabriqué 
-    en GB</li>
-  <li> Bric4 (Bluetooth Ruggerized Integrated Cartographer), fabriqué aux USA</li>
+  <li>DistoX (première version)</li>
+  <li> DistoX2 (deuxième version)</li>
+  <li> DistoXBLE (troisième version)</li>
+  <li> SAP5 (Shetland Attack Pony), seulement les modèles avec bluetooth</li>
+  <li> BRIC4 (Bluetooth Ruggerized Integrated Cartographer)</li>
 </ul>
-<p>Tous les appareils doivent être appairés avec Android.</p>
-<p> Normalement, TopoDroid ne fonctionne qu'avec un seul appareil à la fois. Les 
-  données peuvent être téléchargées en continu (<em>mode continu</em>) ou en lot 
-  (<em>mode à la demande</em>). La différence entre ces deux modes est que le 
-  mode <em>continu</em> reste actif lorsque le téléchargement des données est 
-  terminé ou que la connexion avec l'appareil est perdue, tandis que le mode <em>à 
-  la demande</em> est fermé. </p>
-<p>Sap5 et Bric4 ne téléchargent les données qu'en <em>mode continu</em>. </p>
-<p>Avec TopoDroid et le DistoX, il est possible de travailler avec plusieurs appareils 
-  en même temps, bien que les données ne soient téléchargées que depuis un seul 
-  appareil à la fois.<br>
-  Le mode de téléchargement des données doit être réglé sur <em>multi</em>. Lorsque 
-  c'est le cas, un appui long sur le bouton de téléchargement fait apparaître 
-  une boîte de dialogue permettant de choisir le DistoX à partir duquel télécharger 
-  les données.</p>
-<p>&nbsp;</p>
-<p><strong>Shetland Attack Pony</strong><br>
-  TopoDroid supporte le modèle du Shetland Attack Pony, version 5 (Sap5), avec 
-  le Bluetooth.<br>
-  L'appareil doit avoir été préalablement &quot;appairé&quot; avec Android, en 
-  utilisant le menu <em>Paramètres</em> de l'application. Le code PIN est &quot;000000&quot; 
-  (six zéros).<br>
-  Ensuite, le Sap5 est répertorié parmi les appareils connus dans la fenêtre des 
-  appareils périphériques. Il apparaît comme &quot;SAP XX MAC-address&quot;, où 
-  &quot;XX&quot; est le code à deux lettres du Sap5, par exemple &quot;HG&quot;.<br>
-  Pour sélectionner le Sap5 comme dispositif actuel, tapez sur son entrée dans 
-  la liste.</p>
-<p>Lorsqu'il est connecté, le Sap5 transfère la lecture des valeurs de visées 
-  à l'application, que les données de ces visées soient stockées ou non sur le 
-  dispositif. Le protocole de transmission de données de Sap5 ne comprend pas 
-  d'accusé de réception des données. Par conséquent, si le Sap5 n'est pas connecté, 
-  les valeurs des visées ne sont pas transférées à l'application. </p>
-<p>ATTENTION : lors de sa reconnexion, le Sap5 ne transfère pas les données des 
-  visées stockées lorsqu'il n'était pas encore connecté.</p>
-<p> Le Sap5 conserve dans sa mémoire interne les données qui ont été &quot;stockées&quot;. 
-  Celles-ci peuvent être récupérées sous forme de fichier Survex, en utilisant 
-  le programme <em>Sap PonyTrainer</em>.</p>
-<p>L'étalonnage du Sap5 est effectué par l'appareil lui-même et ne nécessite pas 
-  de programme externe.</p>
-<p>&nbsp;</p>
-<p><strong>Bric4</strong><br>
-  TopoDroid supporte la version 4 du Bric.<br>
-  L'appareil doit avoir été préalablement &quot;appairé&quot; avec Android, en 
-  utilisant le menu <em>Paramètres</em> de l'application.<br>
-  Ensuite, le Bric4 est répertorié parmi les appareils connus dans la fenêtre 
-  des appareils. Elle apparaît comme &quot;Bric4 code MAC-address&quot;, où le 
-  code est le code à quatre chiffres du Bric4, par exemple &quot;0039&quot;.<br>
-  Pour sélectionner le Bric4 comme appareil courant, tapez sur son entrée dans 
-  la liste.</p>
-<p>Une fois connecté à un client, le Bric4 se souvient de la connexion, même s'il 
-  est éteint, il reste donc &quot;toujours connecté&quot;.<br>
-  Lorsque TopoDroid est connecté, les relevés des visées sont immédiatement transférés 
-  vers Android. Si TopoDroid n'est pas connecté, les données sont conservées en 
-  mémoire et transférées lors de la prochaine connexion de l'application.</p>
-<p>Le protocole de transmission des données Bric4 inclut un accusé de réception 
-  pour Android, mais il n'inclut pas d'accusé de réception des données par l'application. 
-  Le protocole prévoit un délai de quelques secondes entre la connexion et le 
-  premier transfert de données et TopoDroid prévoit un délai d'une seconde après 
-  la dernière donnée avant de fermer la connexion. De cette manière aucune photo 
-  n'est perdue, bien que cela ne soit pas garanti et que des photos soient perdues 
-  si l'application n'est pas notifiée par Android avant l'arrivée de la photo 
-  suivante. </p>
-<p>Le Bric4 stocke les données dans la mémoire interne dans des fichiers CSV. 
-  S'il est connecté à un PC via USB, l'appareil apparaît comme une mémoire externe 
-  et les fichiers CSV peuvent être copiés sur le PC.</p>
-<p>L'étalonnage du Bric4 est effectué par l'appareil et ne nécessite pas de programme 
+<p>Tous les appareils doivent être couplés avec l'Android.</p>
+<p align="justify"> Normalement, <em>TopoDroid</em> fonctionne avec un seul appareil. 
+  Les données peuvent être téléchargées en continu (mode continu) ou par lots 
+  (mode à la demande). La différence entre les deux modes est que le mode continu 
+  reste actif lorsque le téléchargement des données est terminé ou que la connexion 
+  avec l'appareil est perdue, alors que le mode à la demande est fermé. </p>
+<p align="justify">e SAP5 et le BRIC4 ne téléchargent les données qu'en mode continu. 
+</p>
+<p align="justify">Avec <em>TopoDroid</em> et un DistoX, il est possible de travailler 
+  avec plus d'un appareil à la fois, bien que les données ne soient téléchargées 
+  qu'à partir d'un seul appareil à la fois.<br>
+  Le mode de téléchargement des données doit être réglé sur multi. Lorsque c'est 
+  le cas, un appui long sur le bouton de téléchargement fait apparaître une boîte 
+  de dialogue permettant de choisir le DistoX à partir duquel les données doivent 
+  être téléchargées.</p>
+<p><strong>Shetland Attack Pony</strong></p>
+<p> <em>TopoDroid</em> supporte le modèle du Shetland Attack Pony, version 5 (SAP5), 
+  avec Bluetooth.<br>
+  L'appareil doit avoir été préalablement &quot;apparié&quot; avec Android, à 
+  l'aide de l'application Paramètres. Le code PIN est &quot;000000&quot; (six 
+  zéros).<br>
+  Ensuite, le SAP5 est listé parmi les appareils connus dans la fenêtre des périphériques. 
+  Il apparaît sous la forme &quot;SAP XX MAC-address&quot;, où &quot;XX&quot; 
+  est le code à deux lettres du SAP5, par exemple &quot;HG&quot;.<br>
+  Pour sélectionner le SAP5 en tant qu'appareil courant, tapez sur son entrée 
+  dans la liste. Lorsqu'il est connecté, le SAP5 transfère la lecture des valeurs 
+  de visées à l'application, que les données de visées soient stockées ou non 
+  sur l'appareil. Le protocole de transmission des données du SAP5 ne comprend 
+  pas d'accusé de réception des données. Par conséquent :</p>
+<ul>
+  <li>si le SAP5 n'est pas connecté, les valeurs ne sont pas transférées à l'application. 
+  </li>
+  <li>Lors de la reconnexion, le SAP5 ne transfère pas les données stockées lorsqu'il 
+    n'était pas connecté. </li>
+</ul>
+<p>Le SAP5 conserve dans sa mémoire interne les données qui ont été &quot;stockées&quot;. 
+  Celles-ci peuvent être récupérées sous forme de fichier <em>Survex</em>, en 
+  utilisant le programme SAP PonyTrainer. </p>
+<p> L'étalonnage du SAP5 est effectué par l'appareil et ne nécessite pas de programme 
   externe.</p>
-<p>Le Bric4 peut être contrôlé à partir de l'application TopoDroid. Il est notamment 
-  possible d'allumer/éteindre le laser, et de prendre des photos. </p>
-<p>Le Bric4 dispose également d'un &quot;<em>mode scan</em>&quot; dans lequel 
-  les relevés sont effectués en continu, environ deux par seconde.</p>
-<p>TopoDroid peut suivre trois protocoles d'acquisition de données différents 
-  (selon un réglage personnalisé &quot;<em>custom set</em>&quot;). Le premier 
-  ne reçoit que les données primaires (distance, azimut et pente) qui ne comprennent 
-  pas le numéro d'identification des données attribué par le Bric4. Les deux autres 
-  reçoivent les données complètes. La différence est que TopoDroid utilise le 
-  numéro d'identification fourni par le Bric4 ou attribue ses propres numéros 
-  aux visées. </p>
-<p>Lorsque les données complètes sont reçues, TopoDroid enregistre les codes d'erreur 
-  et les valeurs du Bric4 dans le commentaire de la visée. <br>
+<p><strong>BRIC4</strong></p>
+<p> <em>TopoDroid</em> supporte la version 4 du BRIC.<br>
+  L'appareil doit avoir été préalablement &quot;apparié&quot; avec Android, en 
+  utilisant l'application Paramètres.<br>
+  Ensuite, le BRIC4 est listé parmi les appareils connus dans la fenêtre des appareils. 
+  Il apparaît sous la forme &quot;BRIC4 code MAC-address&quot;, où le code est 
+  le code à quatre chiffres du BRIC4, par exemple &quot;0039&quot;.<br>
+  Pour sélectionner le Bric4 comme appareil actuel, tapez sur son entrée dans 
+  la liste.</p>
+<p>Une fois connecté à un client, le BRIC4 se souvient de la connexion, même s'il 
+  est éteint, et reste donc &quot;toujours connecté&quot;.<br>
+  Lorsque <em>TopoDroid</em> est connecté, les données de visées sont immédiatement 
+  transférées vers Android. Si <em>TopoDroid</em> n'est pas connecté, les données 
+  sont conservées en mémoire et transférées lors de la prochaine connexion. </p>
+<p>Le protocole de transmission des données BRIC4 inclut l'accusé de réception 
+  par Android, mais pas l'accusé de réception des données par l'application. Le 
+  protocole prévoit un délai de quelques secondes entre la connexion et le premier 
+  transfert de données, et <em>TopoDroid</em> prévoit un délai d'une seconde après 
+  la dernière donnée, avant de fermer la connexion. De cette manière, aucune prise 
+  de vue n'est généralement perdue, bien que cela ne soit pas garanti et que des 
+  prises de vue soient perdues si l'application n'est pas notifiée par Android 
+  avant l'arrivée de la prise de vue suivante. Le BRIC4 stocke les données dans 
+  sa mémoire interne sous forme de fichiers CSV. S'il est connecté à un PC via 
+  USB, l'appareil apparaît comme une mémoire externe et les fichiers CSV peuvent 
+  être copiés sur le PC. L'étalonnage du BRIC4 est effectué par l'appareil et 
+  ne nécessite pas de programme externe. </p>
+<p>Le BRIC4 peut être contrôlé à partir de l'application. Il est notamment possible 
+  d'activer/désactiver le laser et de prendre des visées. Le BRIC4 dispose également 
+  d'un mode &quot;scan&quot; dans lequel les relevés sont effectués en continu, 
+  environ deux par seconde. </p>
+<p><em>TopoDroid</em> peut suivre trois protocoles de données différents (selon 
+  un réglage dans le set &quot;custom&quot;). Le premier ne reçoit que les données 
+  primaires (distance, azimut et pente) qui n'incluent pas le numéro d'identification 
+  des données attribué par le BRIC4. Les deux autres reçoivent les données complètes. 
+  Ils diffèrent selon que TopoDroid utilise le numéro d'identification fourni 
+  ou attribue ses propres numéros. <br>
+  Lorsque les données complètes sont reçues, TopoDroid enregistre les codes d'erreur 
+  et les valeurs du BRIC4 dans le commentaire de la visée. <br>
 </p>
 </body></html>

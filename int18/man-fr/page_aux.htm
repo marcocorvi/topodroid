@@ -1,58 +1,74 @@
 <html><body>
-<h4>APPLICATIONS AUXILIAIRES POUR TopoDroid</h4>
-<p>Lorsque vous travaillez avec TopoDroid, certaines applications compl&eacute;mentaires 
+<h4>APPLICATIONS AUXILIAIRES &Agrave; TopoDroid</h4>
+<p>Lorsque vous travaillez avec <em>TopoDroid</em>, certaines applications compl&eacute;mentaires 
   et auxiliaires peuvent vous &ecirc;tre utiles :</p>
 <ul>
-  <li><em>Proj4</em> est une application de conversion de coordonn&eacute;es (tr&egrave;s 
-    simple), utilis&eacute;e par TopoDroid pour convertir des valeurs de latitudes 
-    et longitudes en d'autres syst&egrave;mes de coordonn&eacute;es.</li>
-  <li><em>MobileTopographer</em> est une application de localisation. Vous pouvez 
-    l'utiliser pour relever les coordonn&eacute;es du point et demander &agrave; 
-    TopoDroid de les lire &agrave; partir du fichier de points dans la liste de 
-    points de <em>MobileTopographer</em>.</li>
-  <li><em>CrowdMag</em> est une application du NOAA National Geophysical Data 
+  <li> <em>Proj4</em> est une application de conversion de coordonn&eacute;es 
+    (tr&egrave;s simple), utilis&eacute;e par <em>TopoDroid</em> pour convertir 
+    des valeurs de latitudes et longitudes en d'autres syst&egrave;mes de coordonn&eacute;es.</li>
+  <li>Une application GNSS. Vous pouvez l'utiliser pour prendre les coordonn&eacute;es 
+    GPS d'un point et les importer dans <em>TopoDroid</em>.</li>
+  <li> <em>CrowdMag</em> est une application du NOAA National Geophysical Data 
     Center, utile pour obtenir des informations sur l'&eacute;tat actuel du champ 
     magn&eacute;tique terrestre.</li>
   <li>Une application pour prendre des photos (g&eacute;n&eacute;ralement il y 
     a une application <em>Camera</em>).</li>
-  <li>Un bon gestionnaire de fichiers, tel que <em>MiXplorer</em>, pour examiner 
-    les fichiers et faire des copies de sauvegarde.</li>
   <li><em>SQLiteViewer</em> (ou toute autre application de gestion <em>SQLite</em>) 
-    peut &ecirc;tre utile pour inspecter la base de donn&eacute;es TopoDroid.</li>
+    peut &ecirc;tre utile pour inspecter la base de donn&eacute;es <em>TopoDroid</em>.</li>
+  <li>un gestionnaire de fichiers correct tel que <em>MiXplorer</em>, pour examiner 
+    les fichiers et faire des copies de sauvegarde.</li>
+  <li><em>SQLiteViewer</em> (ou toute autre application de gestion SQLite) peut 
+    &ecirc;tre utile pour inspecter les bases de donn&eacute;es <em>TopoDroid</em>.</li>
 </ul>
 <p><br>
-  En outre, selon la fa&ccedil;on dont vous traitez vos relev&eacute;s topographiques, 
+  <strong>Applications GNSS</strong></p>
+<ul>
+  <li><em>GPSTest</em> est consid&eacute;r&eacute; comme &quot;l'application GNSS&quot; 
+    de r&eacute;f&eacute;rence. TopoDroid lit les coordonn&eacute;es &agrave; 
+    partir d'un fichier journal de GPSTest. Les coordonn&eacute;es peuvent &eacute;galement 
+    &ecirc;tre stock&eacute;es dans le presse-papiers et coll&eacute;es dans la 
+    bo&icirc;te de dialogue d'insertion de points g&eacute;olocalis&eacute;s de 
+    TopoDroid.</li>
+  <li> <i>GPX Recorder</i> et <i>GPS Position</i> : TopoDroid lit les traces enregistr&eacute;es 
+    (fichiers gpx et csv, respectivement) et utilise les coordonn&eacute;es du 
+    dernier point.</li>
+  <li> <em>GPS Point</em> : TopoDroid lit les coordonn&eacute;es export&eacute;es 
+    dans un fichier de points (en texte clair).</li>
+  <li> <em>MobileTopographer</em> : TopoDroid lit les coordonn&eacute;es du fichier 
+    de points dans la liste de points de MobileTopographer. Malheureusement, cette 
+    application n'est plus gratuite.</li>
+</ul>
+<p>En outre, selon la fa&ccedil;on dont vous traitez vos relev&eacute;s topos, 
   vous voudrez peut-&ecirc;tre installer :</p>
 <ul>
   <li>une visionneuse / &eacute;diteur d'images (g&eacute;n&eacute;ralement, il 
-    y a une visionneuse d'image pr&eacute;install&eacute;e : <i>Gallery</i>)</li>
-  <li>un visualiseur / &eacute;diteur DXF (par exemple <em>TurboViewer</em>)</li>
-  <li>un visualiseur / &eacute;diteur de feuille de calcul (par exemple <em>Google 
-    Sheets</em>)</li>
-  <li>une visionneuse <em>SVG</em> (par exemple <i>SVG viewer</i>)</li>
-  <li>un archiveur <em>ZIP</em> (par exemple <em>ZArchiver</em>)</li>
-  <li><em>GoogleEarth 
-    <!-- li><i>AndroWish</i> si vous voulez vraiment utiliser <i>xtherion</i> sur Android (mais il n'exécutera pas Therion) </li -->
-    </em></li>
-  <li>une visionneuse de fichiers de traces (par exemple, <em>Androzic</em>)</li>
-</ul>
-<h4>&nbsp;</h4>
-<b>Proj4<br>
-</b>TopoDroid stocke les coordonn&eacute;es des points dans le syst&egrave;me 
-de r&eacute;f&eacute;rence g&eacute;ographique long.-lat. WGS-84. Les altitudes 
-sont stock&eacute;es &agrave; la fois par rapport &agrave; l'ellipso&iuml;de et 
-au g&eacute;o&iuml;de. 
-<p> L'application Proj4 est utilis&eacute;e par TopoDroid de deux mani&egrave;res 
-  diff&eacute;rentes pour transformer les coordonn&eacute;es entre le WGS-84 et 
-  d'autres syst&egrave;mes de coordonn&eacute;es. 
-<ul>
-  <li> pour <a href="page_fixed.htm">convertir</a> les coordonn&eacute;es d'un 
-    point du longitude (WGS-84) &agrave; un autre syst&egrave;me de r&eacute;f&eacute;rence 
-    de coordonn&eacute;es.</li>
-  <li> pour <a href="page_fixed_add.htm">saisir</a> les coordonn&eacute;es d'un 
-    point dans un syst&egrave;me de coordonn&eacute;es diff&eacute;rent.</li>
+    y a une visionneuse d'image pr&eacute;install&eacute;e)</li>
+  <li>un visualiseur / &eacute;diteur DXF </li>
+  <li>un visualiseur / &eacute;diteur de feuille de calcul </li>
+  <li>une visionneuse <em>SVG</em> </li>
+  <li>un archiveur <em>ZIP</em> </li>
+  <li><em>GoogleEarth</em></li>
+  <li>une visionneuse de fichier de traces gpx</li>
 </ul>
 <p>&nbsp;</p>
-<br><p>
+<p><strong>Proj4</strong><br>
+  TopoDroid stocke les coordonn&eacute;es des points dans le syst&egrave;me de 
+  r&eacute;f&eacute;rence g&eacute;ographique long-lat WGS-84. Les altitudes sont 
+  stock&eacute;es par rapport &agrave; l'ellipso&iuml;de et au g&eacute;o&iuml;de.</p>
+<p>L'application Proj4 est utilis&eacute;e par TopoDroid de deux mani&egrave;res 
+  pour transformer les coordonn&eacute;es entre le WGS-84 et d'autres syst&egrave;mes 
+  de coordonn&eacute;es :</p>
+<ul>
+  <li> pour convertir les coordonn&eacute;es d'un point long-lat (WGS-84) vers 
+    un autre syst&egrave;me de r&eacute;f&eacute;rence de coordonn&eacute;es.</li>
+  <li> pour saisir les coordonn&eacute;es d'un point dans un syst&egrave;me de 
+    coordonn&eacute;es diff&eacute;rent.</li>
+</ul>
+<p> La syntaxe proj pour les syst&egrave;mes de r&eacute;f&eacute;rence de coordonn&eacute;es 
+  peut &ecirc;tre trouv&eacute;e sur spatialreference.org. </p>
+<h4><br>
+</h4>
+
+<p>
 
 </body></html>

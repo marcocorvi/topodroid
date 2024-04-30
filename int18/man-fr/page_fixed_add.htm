@@ -3,50 +3,67 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" />
 </HEAD>
 	<body>
-<h4>AJOUTER UN POINT</h4>
+<h4>AJOUTER UN POINT GÉOLOCALISÉ</h4>
 
-Cette boîte de dialogue s'ouvre en appuyant sur le bouton <em>Ajouter</em> dans 
-la boîte de dialogue <u>Liste des Points Géolocalisés</u>. <br>
+Cette boîte de dialogue s'ouvre en appuyant sur le bouton <u>Ajouter</u> dans 
+la boîte de dialogue <em><a href="page_fixed_list.htm">Liste des Points Géolocalisés</a></em>. 
+<br>
 <p>
 
 Ce dialogue a quatre champs de texte&#160;:
 <ul>
-  <li>La longitude </li>
+  <li>Nom</li>
+  <li>Longitude </li>
   <li>Latitude </li>
-  <li>Altitude ellipsoïdale</li>
-  <li>Altitude orthométrique </li>
+  <li>Altitude géoïde (m)</li>
+  <li>Précision (m)</li>
+  <li>Commentaire</li>
 </ul>
+<p>Le nom ne doit pas nécessairement être celui d'une station du relevé. </p>
 <p> À la gauche de la<b> longitude</b> se trouve un bouton pour spécifier si la 
   longitude est EST (positive) ou OUEST (négative). En appuyant sur le bouton 
-  on bascule entre "E" et "W". <br>
+  on bascule entre "E" et "W". 
 <p> À la gauche de la<b> latitude</b> se trouve un bouton pour spécifier si la 
   latitude est NORD (positive) ou SUD (négative). En appuyant sur le bouton on 
-  bascule entre "N" et "S". <br>
-<p>
-
-La longitude et la latitude peuvent être saisies en degrés-minutes-secondes (jj:mm:ss.ss) ou en degrés décimaux. <br>
-<p> Les altitudes sont entrées en mètres. Quand la longitude et la latitude sont 
-  spécifiées, la saisie d'une des deux altitudes force TopoDroid à calculer et 
-  afficher automatiquement l'autre. <br>
-
-<p> Boutons : 
+  bascule entre "N" et "S". 
+<p> La longitude et la latitude peuvent être saisies en degrés-minutes-secondes 
+  (jj:mm:ss.ss) ou en degrés décimaux. Les séparateurs alternatifs pour les deux 
+  points sont l'espace, le guillemet simple et le symbole du degré. Les séparateurs 
+  alternatifs pour la virgule sont la virgule et la barre oblique. La longitude 
+  et la latitude peuvent avoir un signe négatif.
+<p> Les altitudes sont entrées en mètres. Les altitudes sont rapportées au géoïde 
+  et peuvent être négatives.
+<p> <b>Boutons</b>
 <ul>
   <li><strong>Presse-papiers</strong> : les coordonnées enregistrées dans le presse-papiers 
-    sous la forme &quot;lat,long[,alt]&quot; sont copiées du presse-papiers dans 
-    les champs de texte respectifs. Avec ce bouton, vous pouvez utiliser l'application 
-    GPS-Impetus pour obtenir les coordonnées (l'altitude doit être saisie manuellement).</li>
-  <li><b>Vue </b>appelle une appli cartographique pour afficher le point (à condition 
+    sous la forme &quot;lat,long[,alt]&quot; sont copiées du presse-papiers vers 
+    les champs de texte respectifs. Ce bouton vous permet d'utiliser l'application 
+    GPSTest pour obtenir les coordonnées (l'altitude doit être cochée lors de 
+    l'enregistrement des données dans le presse-papiers de GPSTest).</li>
+  <li> <b>Vue </b>appelle une appli cartographique pour afficher le point (à condition 
     que vous en ayez installée une). Sinon la fenêtre se ferme.</li>
-  <li><b>Proj4</b> permet de convertir les coordonnées dans un autre système de 
-    référence (à condition que l'appli soit installée sinon un message d'avertissement 
-    s'affiche). L'appli <em>Proj4</em> est appelée, ensuite vous sélectionnez 
-    le système souhaité et entrez les coordonnées dans la colonne de gauche. Enfin, 
-    vous appuyez sur la flèche de conversion : les coordonnées long-lat sont alors 
-    converties et renvoyées à TopoDroid. </li>
-  <li><strong>Enregistrer</strong> permet de sauvegarder un enregistrement avec 
-    les données du point géolocalisé dans la base de données.<br>
-  </li>
+  <li> <strong>Proj4</strong> permet de saisir les coordonnées dans un autre système 
+    de référence de coordonnées. L'application <em>Proj4</em> est ouverte et vous 
+    devez sélectionner le SCR et entrer les coordonnées sur le côté gauche : longitude/Est, 
+    latitude/Nord, et altitude du géoïde. Les unités d'altitude et de coordonnées 
+    cartographiques sont des mètres. Les unités de coordonnées géographiques peuvent 
+    être des degrés décimaux ou des degrés-minute-secondes. Ensuite, vous touchez 
+    la flèche de conversion et les coordonnées sont converties en coordonnées 
+    géographiques WGS84 et renvoyées à <em>TopoDroid</em>.</li>
+  <li> <strong>Enregistrer</strong> sauvegarde les données de la station fixe 
+    dans la base de données.</li>
 </ul>
+<p><br>
+
+<p> Avec le<b></b> bouton <b>Proj4</b> vous pouvez convertir les coordonnées dans 
+  un autre système de référence (à condition que l'appli soit installée sinon 
+  un message d'avertissement s'affiche). L'appli <b>Proj4</b> est appelée, ensuite 
+  vous sélectionnez le système souhaité et entrez les coordonnées dans la colonne 
+  de gauche. Enfin, vous appuyez sur la flèche de conversion : les coordonnées 
+  long-lat sont alors converties et renvoyées à TopoDroid. <br>
+
+<p> <b>ENREGISTRER</b> sauvegarde un fichier contenant le point géolocalisé dans 
+  la base de données. <br>
 <p>
 
 </body>
