@@ -4,22 +4,22 @@
 </HEAD>
 	<body>
 
-<h3>SAISIE MANUELLE DES DONNÉES</h3>
-
-<p>Si vous n'avez pas de DistoX, il est toujours possible de saisir manuellement 
-  les données du relevé. Appuyez sur le bouton <u>Ajouter</u> pour ouvrir la fenêtre 
-  de saisie des infos de visée. Il est nécessaire de saisir les noms des stations 
-  (&quot;Depuis&quot; et &quot;Vers&quot;) et les données de la visée (longueur, 
-  azimut et pente). Le bouton &quot;reverse&quot; vous permet d'échanger les stations, 
-  c'est-à-dire, d'inverser le sens de la visée.</p>
-<p> Si seuls les premiers champs sont remplis (les champs vers l'avant sont laissés 
-  vides), la mesure est insérée uniquement avec les données saisies.</p>
-<p> Pour ajouter une visée latérale d'habillage, entrez &quot;.&quot; (point) 
-  ou &quot;-&quot; (tiret) dans la station &quot;Vers&quot;. Des visées GDHB (LRUD) 
-  peuvent être ajoutées à une visée de cheminement en fournissant des infos de 
-  visées supplémentaires. Dans ce cas, les données GDHB sont reliées à la station 
-  'DEPUIS&quot;.</p>
-<p><strong>Boutons</strong> : </p>
+<h4>SAISIE MANUELLE DES DONNÉES </h4>
+<div align="justify">
+  <p>Si vous n'avez pas de DistoX, il est toujours possible de saisir manuellement 
+    les données du relevé. Appuyez sur le bouton <u>Ajouter</u> pour ouvrir la 
+    fenêtre de saisie des infos de visée. Il est nécessaire de saisir les noms 
+    des stations (&quot;DEPUIS&quot; et &quot;VERS&quot;) et les données de la 
+    visée (longueur, azimut et pente). Le bouton &quot;reverse&quot; vous permet 
+    d'échanger les stations, c'est-à-dire, d'inverser le sens de la visée. Si 
+    seuls les premiers champs sont remplis (les champs vers l'avant sont laissés 
+    vides), la mesure est insérée uniquement avec les données saisies. Pour ajouter 
+    une visée latérale d'habillage, entrez &quot;.&quot; (point) ou &quot;-&quot; 
+    (tiret) dans la station &quot;Vers&quot;. Des visées GDHB (LRUD) peuvent être 
+    ajoutées à une visée de cheminement en fournissant des infos de visées supplémentaires. 
+    Dans ce cas, les données GDHB sont reliées à la station 'DEPUIS&quot;.</p>
+  <p><strong>Boutons</strong> : </p>
+</div>
 <ul>
   <li> <u>ENREGISTRER</u>en bas de la fenêtre insère la visée dans le relevé et 
     met à jour les noms des stations en les incrémentant afin que la boîte de 
@@ -28,45 +28,45 @@
     dialogue.</li>
 </ul>
 <p><br>
-  <strong>Utiliser Android pour les mesures</strong></p>
-<p> L'azimut et la pente peuvent être définis à l'aide des capteurs Android :<br>
+  <strong>Utiliser Android pour les mesures</strong> </p>
+<p>L'azimut et la pente peuvent être définis à l'aide des capteurs Android :<br>
   Méthode 1 : <img src = "btn_compass.png" width="35" height="35" valign = "bottom"> 
   Mesure l'azimut du côté long du périphérique de mesure Android (GPS smartphone 
   par exemple). Un compte à rebours (10 secondes par défaut) vous permet de pointer 
   l'appareil avant la mesure.<br>
   Méthode 2 : <img src = "btn_photo.png" valign = "bottom"> L'appareil photo Android 
   s'ouvre. Regardez la station &quot;VERS&quot; sur l'écran et démarrez le compte 
-  à rebours lorsque la station apparaît dans le viseur.</p>
-<p><br>
-  <b>Données GDHB (LRUD)</b><br>
+  à rebours lorsque la station apparaît dans le viseur.<br>
+</p>
+<p><b>Données GDHB (LRUD)</b><br>
   Si les données GDHB sont spécifiées, les visées latérales d'habillage correspondantes 
   sont également saisies. Il est aussi possible d'indiquer si elles se réfèrent 
-  à la station &quot;Depuis&quot; [par défaut] ou à la station &quot;Vers&quot;.</p>
-<p><br>
+  à la station &quot;DEPUIS&quot; [par défaut] ou à la station &quot;VERS&quot;.<br>
   Si la mesure de l'inclinaison de la visée est inférieure au seuil vertical défini 
   dans les paramètres, les visées GDHB sont situées sur un plan vertical : H (Up) 
   est vers le haut, B (Down) vers le bas, G (Left) horizontalement vers la gauche 
   de la visée (c'est à dire avec l'azimut de la visée moins 90 degrés), et D (Right) 
-  horizontalement vers la droite de la visée.</p>
-<p><br>
+  horizontalement vers la droite de la visée.<br>
   Si la mesure d'inclinaison de la visée est supérieure au seuil vertical défini, 
   les visées GDHB sont situées sur un plan horizontal : G (Left) est à l'ouest, 
-  D (Right) est à l'est, H (Up) est au nord et B (Down) est au sud.</p>
-<p><br>
-  <b>Unités</b><br>
+  D (Right) est à l'est, H (Up) est au nord et B (Down) est au sud.<br>
+</p>
+<p><b>Unités</b><br>
   Les données doivent être entrées avec les unités actuelles. Par exemple, si 
   les unités de longueur sont des «mètres», les distances doivent également être 
-  entrées dans «mètres».</p>
-<p><strong><br>
-  Mode plongée</strong> [T/G]<br>
+  entrées dans «mètres».<strong><br>
+  </strong></p>
+<p><strong>Mode plongée</strong> [T/G]<br>
   En mode plongée, les données des visées sont la profondeur, l'azimut et la distance. 
   L'azimut est supposé être pris avec un compas normal, la graduation augmentant 
   dans le sens des aiguilles d'une montre. Les entrées d'azimut sont converties 
   comme si elles avaient été prises avec un compas de spéléologie (géologique). 
   Par exemple, un azimut de 340° est converti en 20°.<br>
-  Le mode plongée est activé par un réglage personnalisé.</p>
-<p><br>
-<p>
-
+  Le mode plongée est activé par un réglage personnalisé. </p>
+<h4>
+  <h4>
+    <p><br>
+    <p> </h4>
+</h4>
 </body>
 </html>

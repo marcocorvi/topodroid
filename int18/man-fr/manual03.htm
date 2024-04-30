@@ -3,10 +3,10 @@
 
 <p><strong>IMPORTANT</strong> Avant de vous lancer dans un relevé topographique, 
   vous devez connecter et apairer votre appareil Android avec votre périphérique 
-  et l'étalonner. Appuyez sur le bouton <i>Périphériques</i> dans la <u>Fenêtre 
-  principale</u> afin d'ouvrir la <i>Fenêtre périphériques</i> La liste des périphériques 
-  connus est affichée. Les périphériques supportés sont les suivants : DistoX, 
-  DistoX2, DistoX-BLE, SAP5 et BRIC4.</p>
+  et l'étalonner. Appuyez sur le bouton <i>Périphériques</i> dans la <u><a href="manual02.htm"><em>Fenêtre 
+  principale</em></a></u> afin d'ouvrir la <i>Fenêtre des périphériques.</i> La 
+  liste des périphériques connus est affichée. Les périphériques supportés sont 
+  les suivants : DistoX, DistoX2, DistoX-BLE, SAP5 et BRIC4 (ou 5).</p>
 <p><img src="btn_devices.png" height="36" border="1"><br>
   S'il n'est pas apparié automatiquement, le code PIN du DistoX est &quot;0000&quot;, 
   quatre zéros.<br>
@@ -43,7 +43,7 @@
 
 
 <b>Nom du périphérique</b><br>
-  Par défaut, <em>TopoDroid</em> utilisé l'adress MAC bluetooth comme nom de périphérique. 
+  Par défaut, <em>TopoDroid</em> utilisé l'adress MAC Bluetooth comme nom de périphérique. 
   Les périphériques peuvent être identifiés par un alias pour les distinguer entre 
   eux plus facilement. 
 <p> <i>Nota : Les boutons et menus marqués d'une [*] sont spécifique aux DistoX 
@@ -62,9 +62,9 @@
 <h4>BOUTONS</h4>
 <ul style="margin-top=0">
   <li><img src="btn_bluetooth.png"> Réinitialise la connexion Bluetooth.</li>
-  <li><img src="btn_info.png"> Information du périphérique[N,*]</li>
+  <li><img src="btn_info.png"> Information du périphérique [N,*]</li>
   <li><img src="btn_memory.png"> Fonctions mémoire des <a href="page_memory.htm">DistoX</a> 
-    ou <a href="page_bric_memory.htm">BRIC4</a>[*]</li>
+    ou <a href="page_bric_memory.htm">BRIC4</a> [*]</li>
   <li><img src="btn_toggle.png"> Active/désactive le mode d'étalonnage du DistoX 
     [*]</li>
   <li><img src="btn_compute.png"> <a href="page_calib_dialog.htm">Étalonnage</a> 
@@ -89,7 +89,7 @@
 <li><u>Déconnecte</u> déconnecte le périphérique actif [A]</li>
   <li>Télécharge des <a href="page_firmware.htm">firmwares</a> vers le DistoX 
     (v. 2 and BLE) [E,*]</li>
-<li>Affiche les journaux des paquets du DistoX[T]</li>
+  <li>Affiche les journaux des paquets du DistoX [T]</li>
 <li><u>Paramètres</u></li>
 <li><u>Aide</u></li>
 </ul><br>
@@ -117,11 +117,13 @@ Les paramètres suivants ne s'appliquent qu'au DistoX (qui utilise une connexion
 <p>
 
 <b>Mode de connexion</b><br>
-Il existe trois modes de connexion pour les DistoX
+  Il existe trois modes de connexion pour les DistoX :
 <ul>
 <li>Mode <i>À-la-demande</i>, les données sont téléchargées en rafale et quand il n'y à plus aucune données à télécharger, la connexion est fermée.</li>
-<li>Mode <i>continu</i>, TopoDroid reste connecté au DistoX et les visées sont téléchargées dès leur prise.
-Si le DistoX ou l'apareil Android se déconnecter, TopoDroid tente de se reconnecter. Sinon, la connexion Bluetooth est fermée.</li>
+  <li>Mode <i>continu</i>, TopoDroid reste connecté au DistoX et les visées sont 
+    téléchargées dès leur prise. Si le DistoX ou l'apareil Android se déconnecter, 
+    <em>TopoDroid</em> tente de se reconnecter. Sinon, la connexion Bluetooth 
+    est fermée.</li>
 <li>Mode <i>multiple</i>, ce mode resemble au mode "A-la-demande" mais un appuie long sur le bouton "Télécharger" dans le fenêtre de <i>visées</i> ou de <i>dessin</i> change de DistoX. Si vous avez défini un "second" DistoX (dans la fenêtre <i>Périphériques</i>), il est changé par le DistoX actuel. Autrement, il vous est proposé une liste DistoX appairés dans laquelle vous pouvez choisir le bon.</li>
 </ul>
 <br>
@@ -129,7 +131,7 @@ Avec l'option "Multiple", le DistoX courant est affiché dans le titre de la fen
 <i>visées</i> et <i>Dessin</i>. <br>
 Le mode de connexion ne s'applique uniquement au téléchargements des données. 
 Les autres fonctions utilisent un mode d'intérogation unique. <br>
-<p> Les SAP5 and BRIC4 sont toujours connectés en mode <i>continu</i><br>
+<p> Les SAP5 and BRIC4 sont toujours connectés en mode <i>continu</i>.<br>
 <p>
 
 <a href="page_geek.htm">Paramètres personnalisés</a>: <i>Délai de connexion</i>, <i>Second DistoX</i>, <i>Data pause</i>, <i>Data-ready wait</i>, <i>Laser pause</i>, <i>Shot pause</i>.<br><p>
