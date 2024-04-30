@@ -154,7 +154,7 @@
     <string name="calib_precision">Точность</string>
     <string name="calib_iter">Итераций: %1$d</string>
     <string name="calib_dip">Магн. наклон: %1$.1f</string>
-    <!-- TODO string name="calib_roll">Roll diff.: %1$.2f &#xb0;</string -->
+    <string name="calib_roll">Разница разворота.: %1$.2f &#xb0;</string>
     <string name="calib_reset">Сбросить калибровку DistoX ?</string>
     <string name="calib_min_error">Минимальная ошибка</string>
     <string name="magn_dip">Магн. наклон &#8230;</string>
@@ -1370,8 +1370,8 @@
   <string name="pref_locale_summary">Переключить язык интерфейса программы</string>
   <string name="pref_orientation_title">Ориентация экрана</string>
   <string name="pref_orientation_summary">Настройки ориентации экрана приложения</string>
-  <!-- TODO string name="pref_single_back_title">Single back</string -->
-  <!-- TODO string name="pref_single_back_summary">Close windows with single back</string -->
+  <string name="pref_single_back_title">Однократное назад</string>
+  <string name="pref_single_back_summary">Закрыть окна однократным нажатием кнопки назад</string>
 
   <string name="pref_raw_data_title">Сырые данные</string>
   <string name="pref_raw_data_summary">Показывать сырые данные калибровочных измерений</string>
