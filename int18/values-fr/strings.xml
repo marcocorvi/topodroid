@@ -90,7 +90,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
 
     <!-- UNUSED string name="make_walls">Parois</string -->
     <string name="missing_station">Station manquante</string>
-	<string name="station_not_found">Station non trouvée</string>
+    <string name="station_not_found">Station non trouvée</string>
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <!-- TODO REPEATED string name="station_not_found">Station introuvable</string -->
     <string name="shot_not_found">Visée non trouvée</string>
@@ -156,11 +156,11 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="calib_precision">Précision</string>
     <string name="calib_iter">Itérations : %1$d</string>
     <string name="calib_dip">Inclin. magn. : %1$.1f &#xb0;</string>
-    <!-- TODO string name="calib_roll">Roll diff.: %1$.2f &#xb0;</string -->
-	<string name="calib_reset">Réinitialiser l\'étalonnage du DistoX ?</string>
+    <string name="calib_roll">Roulis diff. : %1$.2f &#xb0;</string>
+    <string name="calib_reset">Réinitialiser l\'étalonnage du DistoX ?</string>
     <string name="calib_min_error">Erreur Minimum</string>
     <string name="magn_dip">Inclin. magn. &#8230;</string>
-	<string name="auto_calib">Étalonnage automatique</string>
+    <string name="auto_calib">Étalonnage automatique</string>
     <string name="autocalib_not_supported">Calcul de l\'étalonnage requis</string>
 
     <string name="algorithm">algorithme:</string>
@@ -473,7 +473,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="menu_options">OPTIONS</string>
     <string name="menu_overview">APERÇU</string>
     <string name="menu_packets">PAQUETS</string>
-	<string name="menu_calib_auto">ÉTALONNAGE AUTO</string>
+    <string name="menu_calib_auto">ÉTALONNAGE AUTO</string>
     <!-- UNUSED string name="menu_pair">PAIR</string -->
     <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">PHOTO</string>
@@ -819,7 +819,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Dessin</string>
-	<string name="button_less"    >Moins</string>
+    <string name="button_less"    >Moins</string>
     <string name="button_more"    >Plus</string>
     <string name="button_move"    >Déplacer</string>
     <string name="button_next"    >Suivant</string>
@@ -829,7 +829,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_done"    >Effectué</string>
     <string name="button_lrud"  copyable="all">Ajouter GDHB LRUD</string>
     <string name="button_ok"  copyable="all">OK</string>
-	<string name="button_off"       >Off</string>
+    <string name="button_off"       >Off</string>
     <string name="button_on"        >On</string>
     <string name="button_open"      >Ouvrir</string>
     <string name="button_read"      >Lecture</string>
@@ -872,7 +872,6 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_splays">Visées latérales d\'habillage</string>
     <string name="button_wait">Patientez</string>
 	
-	<!-- J'EN SUIS LA !-->
     <string name="button_write"     >Upload</string>
     <string name="button_xsection"  >X-Section</string>
     <string name="xsection">Section Transverse</string>
@@ -927,7 +926,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="symbol_geo">Géologie</string>
     <string name="symbol_karst">Karstologie</string>
     <string name="symbol_mine">Mine</string>
-	<string name="symbol_paleo">Paléo</string>
+    <string name="symbol_paleo">Paléo</string>
     <string name="symbol_speleo">Spéléo</string>
     <string name="symbol_extra">Spéléo (2)</string>
 
@@ -1157,7 +1156,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="export_prefix_hint">préfixe</string>
     <string name="export_suffix_hint">suffixe</string>
     <string name="export_roundtrip">Aller-retour</string>
-    <!-- TODO string name="export_share">Share</string -->
+    <string name="export_share">Partager</string>
     <!-- UNUSED string name="export_scale_png">Resolution</string -->
     <string name="export_scale_th">Echelle 1 :</string>
     <string name="export_spacing_th">Espacement des points</string>
@@ -1213,7 +1212,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="title_dangling">Visée non reliée</string>
     <string name="title_device">Périphériques DistoX</string>
     <string name="title_device_select">Sélectionner le DistoX</string>
-    <!-- TODO string name="title_device_add">Add device</string -->
+    <string name="title_device_add">Ajouter un périphérique</string>
     <!-- UNUSED string name="title_discover">Recherche de nouveaux DistoX… Patientez</string -->
     <!-- UNUSED string name="title_draw">Dessin</string -->
     <string name="title_draw_area">ZONE %1$s</string>
@@ -1362,7 +1361,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_locale_summary">Langue de l\'application</string>
     <string name="pref_orientation_title">Orientation écran</string>
     <string name="pref_orientation_summary">Orientation de l\'écran de l\'application</string>
-	<string name="pref_single_back_title">Simple retour arrière</string>
+    <string name="pref_single_back_title">Simple retour arrière</string>
     <string name="pref_single_back_summary">Fermer la fenêtre avec un seul retour arrière</string>
 
     <string name="pref_raw_data_title">Données brutes</string>
@@ -1541,7 +1540,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_bric_mode_summary">BRIC mode de fonctionnement</string>
     <string name="pref_bric_zero_length_title">BRIC visée nulle</string>
     <string name="pref_bric_zero_length_summary">BRIC enregistrer la visée de longueur nulle</string>
-	<string name="pref_bric_index_is_id_title">Index BRIC pour ID</string>
+    <string name="pref_bric_index_is_id_title">Index BRIC pour ID</string>
     <string name="pref_bric_index_is_id_summary">Utiliser l\'index du BRIC comme identifiant des visées</string>
     <string name="pref_sap5_bit16_bug_title">Bug SAP5 bit-16 </string>
     <string name="pref_sap5_bit16_bug_summary">Contournement SAP5 bit-16 bug X</string>
@@ -1596,7 +1595,6 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="xsections_private">Sections transverses privées</string>
     <string name="pref_reduce_angle_title">Angle redressement</string>
     <string name="pref_reduce_angle_summary">Angle de segment minimal pour obtenir un redressement des lignes</string>
-    
     
     <string name="pref_survey_stations_title">Stations du relevé</string>
     <string name="pref_survey_stations_summary">Stations automatiques</string>
@@ -2095,9 +2093,9 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <string name="cave_angle"> Azimut : %1$.0f  Pente : %2$.0f</string>
 
     <string name="east" copyable="true">E</string>
-	<string name="north" copyable="true">N</string>
-	<string name="west" copyable="true">O</string>
-	<string name="south" copyable="true">S</string>
+    <string name="north" copyable="true">N</string>
+    <string name="west" copyable="true">O</string>
+    <string name="south" copyable="true">S</string>
 
     <!-- UNUSED string name="SURVEYS">T o p o g r a p h i e</string -->
     <string name="INFO">INFO</string>
