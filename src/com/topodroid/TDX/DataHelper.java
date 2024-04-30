@@ -6048,7 +6048,7 @@ public class DataHelper extends DataSetObservable
 	       long color  = 0; if ( db_version > 33 ) {
                  color  = scanline1.longValue( 0 );
                  if ( color != 0 ) {
-                   if ( ! TDSetting.mSplayColor ) {
+                   if ( ! TDSetting.mSplayColor ) { // FIXME SPLAY_COLOR
                      color = 0;
                      mColorReset = true;
                    }
