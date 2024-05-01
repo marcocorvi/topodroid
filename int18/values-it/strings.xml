@@ -780,7 +780,7 @@
     <!-- UNUSED string name="ask_backups_clear">Cancellare backup disegni?</string -->
     <string name="ask_manual_update">Aggiornare la traduzione del manuale?\nAttuale v. %1$d Istallata v. %2$d</string>
 
-    <!-- UNUSED string name="button_add"       >Inserisci </string -->
+    <string name="button_add"       >Inserisci</string>
     <string name="button_apply"     >Applica</string>
     <string name="button_back"      >Indietro  </string>
     <string name="button_cancel"    >Annulla   </string>
@@ -931,6 +931,12 @@
     <!-- UNUSED string name="length">Lunghezza [m]</string -->
     <!-- UNUSED string name="azimuth">Azimut [deg]</string -->
     <!-- UNUSED string name="clino">Inclinazione [deg]</string -->
+
+    <!-- TODO string name="bt_alias_title">Bluetooth aliases</string -->
+    <!-- TODO string name="hint_bt_alias">BT alias</string -->
+    <!-- TODO string name="hint_bt_code">Device code</string -->
+    <!-- TODO string name="bt_alias_missing">BT alias missing</string -->
+    <!-- TODO string name="bt_code_missing">Device code missing</string -->
 
     <string name="hint_cellsize">lato cella</string>
     <string name="hint_cwd">folder di lavoro</string>
@@ -1497,6 +1503,7 @@
   <string name="pref_zip_share_category_title">Categoria Zip-share</string>
   <string name="pref_zip_share_category_summary">Aggiungi categoria a richiesta zip-share</string>
 
+  <!-- TODO string name="pref_bt_alias_title">BT aliases</string -->
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Crea socket</string>
   <!-- UNUSED string name="pref_device_type_title">Tipo DistoX</string -->

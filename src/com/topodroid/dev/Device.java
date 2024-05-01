@@ -35,6 +35,10 @@ public class Device
   public final static String NAME_SAP6_2    = "SAP_";
   public final static String NAME_CAVWAY    = "CAVWAY-";
   
+  // supported models and their common names
+  public final static String[] mModels = { NAME_DISTOX1, NAME_DISTOX2, NAME_DISTOXBLE, NAME_BRIC4, NAME_BRIC5, NAME_SAP5, NAME_SAP6, NAME_CAVWAY };
+  public final static String[] mModelNames = { "DistoX A3", "DistoX X310", "DistoX BLE", "BRIC 4", "BRIC 5", "SAP 5", "SAP 6", "Cavway X1" };
+
   // supported BLE models
   final static String[] mBleModels = { NAME_DISTOXBLE, NAME_BRIC4, NAME_BRIC5, NAME_SAP5, NAME_SAP6, NAME_CAVWAY };
 

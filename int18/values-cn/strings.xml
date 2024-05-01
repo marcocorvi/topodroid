@@ -784,7 +784,7 @@
     <!-- UNUSED string name="ask_backups_clear">删除草图备份?</string -->
     <string name="ask_manual_update">升级用户手册翻译?\n现在安装 v. %1$d 已经安装 v. %2$d</string>
 
-    <!-- UNUSED string name="button_add"       >Add       </string -->
+    <!-- TODO string name="button_add"       >Add       </string -->
     <string name="button_apply"     >应用</string>
     <string name="button_back"      >返回      </string>
     <string name="button_cancel"    >取消    </string>
@@ -934,6 +934,12 @@
     <!-- UNUSED string name="length">Length [m]</string -->
     <!-- UNUSED string name="azimuth">Azimuth [deg]</string -->
     <!-- UNUSED string name="clino">Clino [deg]</string -->
+
+    <!-- TODO string name="bt_alias_title">Bluetooth aliases</string -->
+    <!-- TODO string name="hint_bt_alias">BT alias</string -->
+    <!-- TODO string name="hint_bt_code">Device code</string -->
+    <!-- TODO string name="bt_alias_missing">BT alias missing</string -->
+    <!-- TODO string name="bt_code_missing">Device code missing</string -->
 
     <string name="hint_cellsize">栅格尺寸</string>
     <string name="hint_cwd">工作文件夹</string>
@@ -1502,6 +1508,7 @@
   <string name="pref_zip_share_category_title">Zip文件分享类别</string>
   <string name="pref_zip_share_category_summary">添加类别到zip分享请求</string>
 
+  <!-- TODO string name="pref_bt_alias_title">BT aliases</string -->
   <string name="pref_sock_type_title">信道</string>
   <string name="pref_sock_type_summary">蓝牙信道类型</string>
   <!-- UNUSED string name="pref_device_type_title">Disto type</string -->

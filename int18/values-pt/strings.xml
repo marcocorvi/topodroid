@@ -731,7 +731,7 @@ no campo abaixo e aperte o botão.
   <string name="ask_gps_service">Configurar o serviço GPS?</string>
   <!-- UNUSED string name="ask_backups_clear">Apagar backups dos croquis?</string -->
   <string name="ask_manual_update">Atualizar tradução do manual do usuário?\nVersão disponível %1$d Versão instalada %2$d</string>
-  <!-- UNUSED string name="button_add"       >Novo       </string -->
+  <string name="button_add"       >Novo</string>
   <string name="button_apply">Aplicar</string>
   <string name="button_back">Voltar     </string>
   <string name="button_cancel">Cancelar   </string>
@@ -871,6 +871,12 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="length">Comprimento [m]</string -->
   <!-- UNUSED string name="azimuth">Azimute [deg]</string -->
   <!-- UNUSED string name="clino">Inclinação [deg]</string -->
+    <!-- TODO string name="bt_alias_title">Bluetooth aliases</string -->
+    <!-- TODO string name="hint_bt_alias">BT alias</string -->
+    <!-- TODO string name="hint_bt_code">Device code</string -->
+    <!-- TODO string name="bt_alias_missing">BT alias missing</string -->
+    <!-- TODO string name="bt_code_missing">Device code missing</string -->
+
   <string name="hint_cellsize">tamanho célula</string>
   <string name="hint_cwd">pasta de trabalho</string>
   <string name="hint_distance">distância</string>
@@ -1401,6 +1407,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_gpx_single_track_summary">Exportar topos do projeto como um track GPX único</string>
   <string name="pref_zip_share_category_title">Cat compart zip</string>
   <string name="pref_zip_share_category_summary">Incluir categoria no pedido de compartilhamento de arquivo zip</string>
+  <!-- TODO string name="pref_bt_alias_title">BT aliases</string -->
   <string name="pref_sock_type_title">Soquete DistoX</string>
   <string name="pref_sock_type_summary">Tipo de soquete bluetooth para DistoX</string>
   <!-- UNUSED string name="pref_device_type_title">Tipo de DistoX</string -->

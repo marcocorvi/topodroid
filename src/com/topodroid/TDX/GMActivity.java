@@ -287,7 +287,7 @@ public class GMActivity extends Activity
     // TDLog.v("Calib Iter " + iter );
 
     if ( iter > 0 && iter < TDSetting.mCalibMaxIt ) {
-      mCalibration.rollDifference();
+      mCalibration.rollDifference();  // FIXME ROLL_DIFFERENCE
 
       float[] errors = mCalibration.Errors();
       for ( int k = 0; k < list.size(); ++k ) {
@@ -304,6 +304,7 @@ public class GMActivity extends Activity
              mCalibration.Delta2(),
              mCalibration.MaxError(),
              mCalibration.Dip(),
+             mCalibration.Roll(),
              iter );
 
       // DEBUG:
@@ -518,7 +519,7 @@ public class GMActivity extends Activity
 
           (new CalibCoeffDialog( this, this, bg, ag, bm, am, nL, errors,
                                  mCalibration.DeltaBH(), mCalibration.Delta(), mCalibration.Delta2(), mCalibration.MaxError(), 
-                                 result, mCalibration.Dip(), mCalibration.rollDifference(), // FIXME ROLL_DIFFERENCE
+                                 result, mCalibration.Dip(), mCalibration.Roll(), // FIXME ROLL_DIFFERENCE
                                  coeff /* , saturated */ ) ).show();
         } else if ( result == 0 ) {
           TDToast.makeBad( R.string.few_iter );

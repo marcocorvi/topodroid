@@ -9,6 +9,7 @@
   <string name="SketchWindow" translatable="false">page_sketch.htm</string>
 
   <string name="FixedActivity" translatable="false">page_fixed_list.htm</string>
+  <string name="BtAliasActivity" translatable="false">page_bt_alias.htm</string>
 
   <string name="MainWindow" translatable="false">manual02.htm</string>
   <string name="DeviceActivity" translatable="false">manual03.htm</string>

@@ -288,6 +288,14 @@
 	  <!-- android:screenOrientation="portrait" -->
         </activity>
 
+        <activity android:name=".BtAliasActivity"
+	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
+          android:exported="false"
+          >
+	  <!-- android:screenOrientation="portrait" -->
+        </activity>
+
         <activity android:name=".PtCmapActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"

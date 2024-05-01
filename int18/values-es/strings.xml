@@ -787,15 +787,15 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="ask_backups_clear">Cancellare backup disegni?</string -->
     <string name="ask_manual_update">¿Actualizar la traducción del manual?\nActual V. %1$d Instalado v. %2$d</string>
 
-    <!-- UNUSED string name="button_add"       >Añadir    </string -->
+    <string name="button_add"       >Añadir</string>
     <string name="button_apply"     >Applicar</string>
-    <string name="button_back"      >Atrás     </string>
-    <string name="button_cancel"    >Cancelar  </string>
-    <!-- UNUSED string name="button_change"    >Cambio    </string -->
+    <string name="button_back"      >Atrás</string>
+    <string name="button_cancel"    >Cancelar</string>
+    <!-- UNUSED string name="button_change">Cambio</string -->
     <string name="button_clipboard" >Notas</string>
-    <string name="button_close"     >Cerrar     </string>
-    <!-- UNUSED string name="button_create"    >Crear    </string -->
-    <string name="button_color"     >Color  </string>
+    <string name="button_close"     >Cerrar</string>
+    <!-- UNUSED string name="button_create">Crear    </string -->
+    <string name="button_color"     >Color</string>
     <string name="button_compute"   >Calcular</string>
     <string name="button_clear_convert">Limpiar la conversión</string>
     <string name="button_convert"   >Convertir </string>
@@ -936,6 +936,12 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="length">Longitud [m]</string -->
     <!-- UNUSED string name="azimuth">Rumbo [deg]</string -->
     <!-- UNUSED string name="clino">Clino [deg]</string -->
+
+    <!-- TODO string name="bt_alias_title">Bluetooth aliases</string -->
+    <!-- TODO string name="hint_bt_alias">BT alias</string -->
+    <!-- TODO string name="hint_bt_code">Device code</string -->
+    <!-- TODO string name="bt_alias_missing">BT alias missing</string -->
+    <!-- TODO string name="bt_code_missing">Device code missing</string -->
 
     <string name="hint_cellsize">Lado de la celda</string>
     <string name="hint_cwd">Carpeta de trabajo</string>
@@ -1502,6 +1508,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_zip_share_category_title">Categoría de zip-share</string>
   <string name="pref_zip_share_category_summary">Agregar categoría a la solicitud de zip-share</string>
   
+  <!-- TODO string name="pref_bt_alias_title">BT aliases</string -->
   <string name="pref_sock_type_title">Emparejar</string>
   <string name="pref_sock_type_summary">Crear emparejamiento</string>
   <!-- UNUSED string name="pref_device_type_title">Tipo Disto</string -->

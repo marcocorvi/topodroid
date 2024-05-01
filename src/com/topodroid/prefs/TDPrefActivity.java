@@ -57,6 +57,7 @@ public class TDPrefActivity extends Activity
   private int mPrefCategory = TDPrefCat.PREF_CATEGORY_ALL; // preference category
 
   private TDPref mCwdPref;
+  // private TDPref mBtAliasPref;
   private TDPref mPtCmapPref;
   private TDPref mGraphPaperScalePref;
 
@@ -326,6 +327,18 @@ public class TDPrefActivity extends Activity
             new OnClickListener() {
               @Override
               public void onClick( View v ) { startActivityForResult( pt_intent, REQUEST_GRAPH_PAPER_SCALE ); }
+          } );
+        }
+      }
+    } else if (mPrefCategory == TDPrefCat.PREF_GEEK_DEVICE ) {
+      TDPref mBtAliasPref = findPreference( "DISTOX_BT_ALIAS" );
+      if ( mBtAliasPref != null ) {
+        View v = mBtAliasPref.getView();
+        if ( v != null ) {
+          final Intent bt_alias_intent = new Intent( mCtx, com.topodroid.TDX.BtAliasActivity.class ); // this
+          v.setOnClickListener( new OnClickListener() {
+            @Override
+            public void onClick( View v ) { startActivity( bt_alias_intent ); }
           } );
         }
       }

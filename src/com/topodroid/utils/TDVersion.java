@@ -38,7 +38,7 @@ public class TDVersion
   public static final int DATABASE_VERSION = 52;
   public static final int DATABASE_VERSION_MIN = 21; // was 14
 
-  public static final int DEVICE_DATABASE_VERSION = 28;
+  public static final int DEVICE_DATABASE_VERSION = 30; // FIXME ROLL_DIFFERENCE BT_ALIAS
   // public static final int DEVICE_DATABASE_VERSION_MIN = 21; // was 14
 
   public static final int PACKET_DATABASE_VERSION = 1;

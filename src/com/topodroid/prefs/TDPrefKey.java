@@ -2027,6 +2027,7 @@ public class TDPrefKey
 
   // -------------------------------------------------------------------------------
   public static String[] GEEKDEVICE = {
+    "DISTOX_BT_ALIAS",         // open dialog for BT aliases
     "DISTOX_SOCKET_DELAY",         // delay before a socket-connection attempt
     "DISTOX_SECOND_DISTOX",        // enable the two-disto survey
     "DISTOX_WAIT_DATA",       // 8 // msec wait after a data/vector packet
@@ -2042,6 +2043,7 @@ public class TDPrefKey
   };
 
   static int[] GEEKDEVICEtitle = {
+    R.string.pref_bt_alias_title,
     R.string.pref_socket_delay_title,
     R.string.pref_second_distox_title,
     R.string.pref_wait_data_title,
@@ -2057,6 +2059,7 @@ public class TDPrefKey
   };
 
   static int[] GEEKDEVICEdesc = {
+    -1,
     R.string.pref_socket_delay_summary,
     R.string.pref_second_distox_summary,
     R.string.pref_wait_data_summary,
@@ -2072,6 +2075,7 @@ public class TDPrefKey
   };
 
   public static String[] GEEKDEVICEdef = {
+    null,
     TDString.ZERO,
     FALSE,
     "250",

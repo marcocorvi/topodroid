@@ -781,23 +781,23 @@
     <!-- UNUSED string name="ask_backups_clear">Удалить резервные копии абрисов?</string -->
     <string name="ask_manual_update">Обновить перевод руководства пользователя?\nТекущая v. %1$d Установленная v. %2$d</string>
 
-    <!-- UNUSED string name="button_add"       >Добавить  </string -->
+    <string name="button_add"       >Добавить</string>
     <string name="button_apply"     >Применить</string>
-    <string name="button_back"      >Назад     </string>
-    <string name="button_cancel"    >Отмена    </string>
-    <!-- UNUSED string name="button_change"    >Изменить    </string -->
-    <string name="button_clipboard" >Вставить  </string>
-    <string name="button_close"     >Закрыть   </string>
-    <!-- UNUSED string name="button_create"    >Создать    </string -->
-    <string name="button_color"     >Цвет	</string>
+    <string name="button_back"      >Назад</string>
+    <string name="button_cancel"    >Отмена</string>
+    <!-- UNUSED string name="button_change">Изменить</string -->
+    <string name="button_clipboard" >Вставить</string>
+    <string name="button_close"     >Закрыть</string>
+    <!-- UNUSED string name="button_create"    >Создать</string -->
+    <string name="button_color"     >Цвет</string>
     <string name="button_compute"   >Расчитать</string>
     <string name="button_clear_convert">Очистить пересчет</string>
     <string name="button_convert"   >Конвертир.</string>
     <string name="button_copy"      >Копировать</string>
-    <string name="button_current"   >Текущий   </string>
-    <string name="button_delete"    >Удалить   </string>
-    <string name="button_duplicate" >Дубликаты </string>
-    <string name="button_surface"   >Поверхностные   </string>
+    <string name="button_current"   >Текущий</string>
+    <string name="button_delete"    >Удалить</string>
+    <string name="button_duplicate" >Дубликаты</string>
+    <string name="button_surface"   >Поверхностные</string>
     <string name="button_no_extend" >Нет напр. развертки </string>
     <string name="button_eval"      >Вычислить    </string>
     <string name="button_evalg"     >G      </string>
@@ -932,6 +932,12 @@
     <!-- UNUSED string name="length">Длина [м]</string -->
     <!-- UNUSED string name="azimuth">Азимут [грд]</string -->
     <!-- UNUSED string name="clino">Угол [грд]</string -->
+
+    <!-- TODO string name="bt_alias_title">Bluetooth aliases</string -->
+    <!-- TODO string name="hint_bt_alias">BT alias</string -->
+    <!-- TODO string name="hint_bt_code">Device code</string -->
+    <!-- TODO string name="bt_alias_missing">BT alias missing</string -->
+    <!-- TODO string name="bt_code_missing">Device code missing</string -->
 
     <string name="hint_cellsize">размер ячейки</string>
     <string name="hint_cwd">рабочая папка</string>
@@ -1499,6 +1505,7 @@
   <string name="pref_zip_share_category_title">Zip-share категория</string>
   <string name="pref_zip_share_category_summary">Добавить категорию в запрос на обмен zip-файлами</string>
 
+  <!-- TODO string name="pref_bt_alias_title">BT aliases</string -->
   <string name="pref_sock_type_title">Тип соединения</string>
   <string name="pref_sock_type_summary">Тип соединения Bluetooth</string>
   <!-- UNUSED string name="pref_device_type_title">Тип Disto</string -->

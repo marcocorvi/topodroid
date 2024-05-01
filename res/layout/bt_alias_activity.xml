@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/td_layout"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  >
+
+  <Spinner android:id="@+id/bt_model"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginvbig"
+    android:drawSelectorOnTop="true"
+  />
+
+  <EditText android:id="@+id/bt_code"
+    style="@style/edit_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginv"
+    android:textSize="@dimen/textsizebig"
+    android:inputType="text"
+    android:hint="@string/hint_bt_code"
+    android:importantForAutofill="no"
+  />
+
+  <EditText android:id="@+id/bt_alias"
+    style="@style/edit_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="@dimen/textsizebig"
+    android:inputType="text"
+    android:hint="@string/hint_bt_alias"
+    android:importantForAutofill="no"
+  />
+      				  
+  <LinearLayout android:id="@+id/help"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    android:gravity="start"
+    >
+    <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+    />
+    <LinearLayout 
+      android:orientation="horizontal" 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:gravity="end"
+      >
+      <Button android:id="@+id/button_close"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          style="@style/button_default"
+	  android:text="@string/button_close"
+	  android:layout_marginEnd="@dimen/marginh"
+      />
+      <Button android:id="@+id/button_add"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          style="@style/button_default"
+          android:text="@string/button_add"
+      />
+    </LinearLayout>
+  </LinearLayout>
+
+  <ListView android:id="@+id/alias_list"
+        style="@style/list_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginvbig"
+  />
+
+</LinearLayout>

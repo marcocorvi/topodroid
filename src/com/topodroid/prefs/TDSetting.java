@@ -1055,17 +1055,17 @@ public class TDSetting
 
     String[] keyGDev = TDPrefKey.GEEKDEVICE;
     String[] defGDev = TDPrefKey.GEEKDEVICEdef;
-    mConnectSocketDelay = tryInt(prefs, keyGDev[ 0],      defGDev[ 0] );   // DISTOX_SOCKET_DELAY
-    mSecondDistoX   = prefs.getBoolean( keyGDev[ 1], bool(defGDev[ 1]) );  // DISTOX_SECOND_DISTOX
-    mWaitData       = tryInt( prefs,    keyGDev[ 2],      defGDev[ 2] );   // DISTOX_WAIT_DATA
-    mWaitConn       = tryInt( prefs,    keyGDev[ 3],      defGDev[ 3] );   // DISTOX_WAIT_CONN
-    mWaitLaser      = tryInt( prefs,    keyGDev[ 4],      defGDev[ 4] );   // DISTOX_WAIT_LASER
-    mWaitShot       = tryInt( prefs,    keyGDev[ 5],      defGDev[ 5] );   // DISTOX_WAIT_SHOT
-    mFirmwareSanity = prefs.getBoolean( keyGDev[ 6], bool(defGDev[ 6]) );  // DISTOX_FIRMWARE_SANITY
-    mBricMode       = tryInt( prefs,    keyGDev[ 7],      defGDev[ 7] );   // DISTOX_BRIC_MODE
-    mBricZeroLength = prefs.getBoolean( keyGDev[ 8], bool(defGDev[ 8]) );  // DISTOX_BRIC_ZERO_LENGTH
-    mBricIndexIsId  = prefs.getBoolean( keyGDev[ 9], bool(defGDev[ 9]) );  // DISTOX_BRIC_INDEX_IS_ID
-    mSap5Bit16Bug   = prefs.getBoolean( keyGDev[10], bool(defGDev[10]) );  // DISTOX_SAP5_BIT16_BUG
+    mConnectSocketDelay = tryInt(prefs, keyGDev[ 1],      defGDev[ 1] );   // DISTOX_SOCKET_DELAY
+    mSecondDistoX   = prefs.getBoolean( keyGDev[ 2], bool(defGDev[ 2]) );  // DISTOX_SECOND_DISTOX
+    mWaitData       = tryInt( prefs,    keyGDev[ 3],      defGDev[ 3] );   // DISTOX_WAIT_DATA
+    mWaitConn       = tryInt( prefs,    keyGDev[ 4],      defGDev[ 4] );   // DISTOX_WAIT_CONN
+    mWaitLaser      = tryInt( prefs,    keyGDev[ 5],      defGDev[ 5] );   // DISTOX_WAIT_LASER
+    mWaitShot       = tryInt( prefs,    keyGDev[ 6],      defGDev[ 6] );   // DISTOX_WAIT_SHOT
+    mFirmwareSanity = prefs.getBoolean( keyGDev[ 7], bool(defGDev[ 7]) );  // DISTOX_FIRMWARE_SANITY
+    mBricMode       = tryInt( prefs,    keyGDev[ 8],      defGDev[ 8] );   // DISTOX_BRIC_MODE
+    mBricZeroLength = prefs.getBoolean( keyGDev[ 9], bool(defGDev[ 9]) );  // DISTOX_BRIC_ZERO_LENGTH
+    mBricIndexIsId  = prefs.getBoolean( keyGDev[10], bool(defGDev[10]) );  // DISTOX_BRIC_INDEX_IS_ID
+    mSap5Bit16Bug   = prefs.getBoolean( keyGDev[11], bool(defGDev[11]) );  // DISTOX_SAP5_BIT16_BUG
     // TDLog.v("SETTING load geek device done");
 
     String[] keyCave3D = TDPrefKey.CAVE3D;
@@ -1996,38 +1996,39 @@ public class TDSetting
     String ret = null;
     String[] key = TDPrefKey.GEEKDEVICE;
     String[] def = TDPrefKey.GEEKDEVICEdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_SOCKET_DELAY
-      mConnectSocketDelay = tryIntValue( hlp, k, v, def[0] );  
+    int j = 0;
+    if ( k.equals( key[ ++j ] ) ) { // DISTOX_SOCKET_DELAY index 1
+      mConnectSocketDelay = tryIntValue( hlp, k, v, def[j] );  
       if ( mConnectSocketDelay < 0  ) { mConnectSocketDelay =  0; ret = TDString.ZERO; }
       if ( mConnectSocketDelay > 60 ) { mConnectSocketDelay = 60; ret = TDString.SIXTY; } // was 100
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SECOND_DISTOX (bool)
-      mSecondDistoX = tryBooleanValue( hlp, k, v, bool(def[1]) );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_WAIT_DATA
-      mWaitData = tryIntValue( hlp, k, v, def[2] ); 
+    } else if ( k.equals( key[ ++j] ) ) { // DISTOX_SECOND_DISTOX (bool)
+      mSecondDistoX = tryBooleanValue( hlp, k, v, bool(def[j]) );
+    } else if ( k.equals( key[ ++j] ) ) { // DISTOX_WAIT_DATA
+      mWaitData = tryIntValue( hlp, k, v, def[j] ); 
       if ( mWaitData <    0 ) { mWaitData =    0; ret = Integer.toString( mWaitData ); }
       if ( mWaitData > 2000 ) { mWaitData = 2000; ret = Integer.toString( mWaitData ); }
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_WAIT_CONN
-      mWaitConn = tryIntValue( hlp, k, v, def[3] );
+    } else if ( k.equals( key[ ++j] ) ) { // DISTOX_WAIT_CONN
+      mWaitConn = tryIntValue( hlp, k, v, def[j] );
       if ( mWaitConn <   50 ) { mWaitConn =   50; ret = Integer.toString( mWaitConn ); }
       if ( mWaitConn > 2000 ) { mWaitConn = 2000; ret = Integer.toString( mWaitConn ); }
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_WAIT_LASER
-      mWaitLaser = tryIntValue( hlp, k, v, def[4] );
+    } else if ( k.equals( key[ ++j] ) ) { // DISTOX_WAIT_LASER
+      mWaitLaser = tryIntValue( hlp, k, v, def[j] );
       if ( mWaitLaser <  500 ) { mWaitLaser =  500; ret = Integer.toString( mWaitLaser ); }
       if ( mWaitLaser > 5000 ) { mWaitLaser = 5000; ret = Integer.toString( mWaitLaser ); }
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_WAIT_SHOT
-      mWaitShot  = tryIntValue( hlp, k, v, def[5] );
+    } else if ( k.equals( key[ ++j] ) ) { // DISTOX_WAIT_SHOT
+      mWaitShot  = tryIntValue( hlp, k, v, def[j] );
       if ( mWaitShot <   500 ) { mWaitShot =   500; ret = Integer.toString( mWaitShot ); }
       if ( mWaitShot > 10000 ) { mWaitShot = 10000; ret = Integer.toString( mWaitShot ); }
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_FIRMWARE_SANITY
-      mFirmwareSanity = tryBooleanValue( hlp, k, v, bool(def[6]) );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_BRIC_MODE
-      mBricMode = tryIntValue( hlp, k, v, def[7] );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_BRIC_ZERO_LENGTH
-      mBricZeroLength = tryBooleanValue( hlp, k, v, bool(def[8]) );
-    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_BRIC_INDEX_IS_ID
-      mBricIndexIsId = tryBooleanValue( hlp, k, v, bool(def[9]) );
-    } else if ( k.equals( key[10 ] ) ) { // DISTOX_SAP5_BIT16_BUG
-      mSap5Bit16Bug = tryBooleanValue( hlp, k, v, bool(def[10]) );
+    } else if ( k.equals( key[ ++j] ) ) { // DISTOX_FIRMWARE_SANITY
+      mFirmwareSanity = tryBooleanValue( hlp, k, v, bool(def[j]) );
+    } else if ( k.equals( key[ ++j] ) ) { // DISTOX_BRIC_MODE
+      mBricMode = tryIntValue( hlp, k, v, def[j] );
+    } else if ( k.equals( key[ ++j] ) ) { // DISTOX_BRIC_ZERO_LENGTH
+      mBricZeroLength = tryBooleanValue( hlp, k, v, bool(def[j]) );
+    } else if ( k.equals( key[ ++j] ) ) { // DISTOX_BRIC_INDEX_IS_ID
+      mBricIndexIsId = tryBooleanValue( hlp, k, v, bool(def[j]) );
+    } else if ( k.equals( key[ ++j] ) ) { // DISTOX_SAP5_BIT16_BUG
+      mSap5Bit16Bug = tryBooleanValue( hlp, k, v, bool(def[j]) );
     } else {
       TDLog.Error("missing DEVICE key: " + k );
     }

@@ -722,14 +722,14 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="ask_gps_service">GPS aktiveren?</string>
   <!-- UNUSED string name="ask_backups_clear">Skizzenbackups löschen?</string -->
   <string name="ask_manual_update">Übersetztes Handbuch updaten?\nAktuell v%1$d Installiert v%2$d</string>
-  <!-- UNUSED string name="button_add"       >Erstellen       </string -->
+  <string name="button_add">Erstellen</string>
   <string name="button_apply">Anwenden</string>
-  <string name="button_back">Zurück    </string>
+  <string name="button_back">Zurück</string>
   <string name="button_cancel">Abbrechen </string>
-  <!-- UNUSED string name="button_change">Ändern    </string -->
+  <!-- UNUSED string name="button_change">Ändern</string -->
   <string name="button_clipboard">Zwischenablage</string>
-  <string name="button_close">Schließen     </string>
-  <!-- UNUSED string name="button_create"    >Erstellen    </string -->
+  <string name="button_close">Schließen</string>
+  <!-- UNUSED string name="button_create">Erstellen</string -->
   <string name="button_color">Farbe</string>
   <string name="button_compute">Berechnen</string>
   <string name="button_clear_convert">Konvertierung löschen</string>
@@ -862,6 +862,12 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="length">Length [m]</string -->
   <!-- UNUSED string name="azimuth">Azimuth [deg]</string -->
   <!-- UNUSED string name="clino">Clino [deg]</string -->
+    <!-- TODO string name="bt_alias_title">Bluetooth aliases</string -->
+    <!-- TODO string name="hint_bt_alias">BT alias</string -->
+    <!-- TODO string name="hint_bt_code">Device code</string -->
+    <!-- TODO string name="bt_alias_missing">BT alias missing</string -->
+    <!-- TODO string name="bt_code_missing">Device code missing</string -->
+
   <string name="hint_cellsize">Zellengröße</string>
   <string name="hint_cwd">Arbeitsverzeichnis</string>
   <string name="hint_distance">Distanz</string>
@@ -1390,6 +1396,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_gpx_single_track_summary">Exportiere Vermessungen als einzelnen GPX-Track</string>
   <!-- TODO string name="pref_zip_share_category_title">Zip-share category</string -->
   <!-- TODO string name="pref_zip_share_category_summary">Add category to zip-share request</string -->
+  <!-- TODO string name="pref_bt_alias_title">BT aliases</string -->
   <string name="pref_sock_type_title">Anschlussart</string>
   <string name="pref_sock_type_summary">Bei Verbindungsproblemen auf \'Unsicher\' wechseln</string>
   <!-- UNUSED string name="pref_device_type_title">DistoX Modell</string -->

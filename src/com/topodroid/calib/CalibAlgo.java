@@ -52,6 +52,7 @@ public class CalibAlgo extends CalibTransform
   protected float mMaxError = 0.0f; // max error [degrees]
   protected float mDeltaBH  = 0.0f; // original delta BH algo
   protected float mDip      = 0.0f; // magnetic dip angle [degrees]
+  protected float mRoll     = 0.0f; // average roll discrepancy [degrees]
 
   // ==============================================================
 
@@ -87,15 +88,15 @@ public class CalibAlgo extends CalibTransform
 
   /** compute the maximum roll difference between G vector and M vector of groups
    */
-  public float rollDifference()
+  public void rollDifference()
   {
-    float max = 0;
+    // float max = 0;
     int ns = g.length;
     long grp = -1L;
     TDVector g10 = null;
     TDVector m10 = null;
     int n = 0;
-    float roll = 0;
+    mRoll = 0;
     for ( int k = 0; k < ns; ++k ) {
       if ( group[k] <= 0 ) continue;
       if ( group[k] != grp ) {
@@ -109,15 +110,15 @@ public class CalibAlgo extends CalibTransform
           float g_roll = computeRoll( g10, g1 );
           float m_roll = computeRoll( m10, m1 );
           float x = TDMath.abs( g_roll - m_roll );
-          if ( x > max ) max = x;
-          roll += x;
+          // if ( x > max ) max = x;
+          mRoll += x;
           n ++;
         }
       }
     }
-    roll /= n;
-    TDLog.v("Max roll difference " + max + " average " + roll );
-    return roll;
+    mRoll /= n;
+    // TDLog.v("Max roll difference " + max + " average " + roll );
+    // return roll;
   }
     
 
@@ -148,6 +149,10 @@ public class CalibAlgo extends CalibTransform
   /** @return the dip angle [degrees]
    */
   public float Dip() { return mDip; }
+
+  /** @return the average roll discrepancy [degrees] 
+   */
+  public float Roll() { return mRoll; } // FIXME ROLL_DIFFERENCE
 
   // public int nrCoeff() { return mNonLinear ? 52 : 48; }
 

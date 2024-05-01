@@ -34,6 +34,8 @@ import android.database.sqlite.SQLiteDiskIOException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 // import java.util.Locale;
 // import java.util.HashMap;
 
@@ -50,6 +52,7 @@ public class DeviceHelper extends DataSetObservable
   private static final String CALIB_TABLE  = "calibs";
   private static final String GM_TABLE     = "gms";
   private static final String DEVICE_TABLE = "devices";
+  private static final String ALIAS_TABLE  = "btalias";
 
   private static final String WHERE_CID_ID = "calibId=? AND id=?";
   private static final String WHERE_CID_IDMORE = "calibId=? AND id>? AND status=0";
@@ -61,6 +64,8 @@ public class DeviceHelper extends DataSetObservable
   private long           myNextCId;  // id of next calib-data
 
   private SQLiteStatement updateConfig;
+  private SQLiteStatement updateAlias;
+  private SQLiteStatement deleteAlias;
   // private SQLiteStatement updateGMGroupStmt = null;
   // private SQLiteStatement updateGMErrorStmt = null;
   // private SQLiteStatement updateCalibStmt = null;
@@ -128,6 +133,7 @@ public class DeviceHelper extends DataSetObservable
       // }
 
       updateConfig = myDB.compileStatement( "UPDATE configs SET value=? WHERE key=?" );
+      updateAlias  = myDB.compileStatement( "UPDATE btalias SET name=? WHERE alias=?" );
 
     } catch ( SQLiteException e ) {
       myDB = null;
@@ -488,7 +494,7 @@ public class DeviceHelper extends DataSetObservable
     Cursor cursor = null;
     try {
       cursor = myDB.query( CALIB_TABLE,
-                           new String[] { "name", "day", "device", "comment", "algo", "dip" }, // columns
+                           new String[] { "name", "day", "device", "comment", "algo", "dip", "roll" }, // columns
                            "id=?",
                            new String[] { Long.toString(cid) },
                            null, null, null ); 
@@ -500,7 +506,9 @@ public class DeviceHelper extends DataSetObservable
                 cursor.getString( 2 ),
                 cursor.getString( 3 ),
                 (int)cursor.getLong( 4 ),
-                (float)cursor.getDouble( 5 ) );
+                (float)cursor.getDouble( 5 ),
+                (float)cursor.getDouble( 6 )  // FIXME ROLL_DIFFERENCE
+        );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
@@ -520,7 +528,7 @@ public class DeviceHelper extends DataSetObservable
     Cursor cursor = null;
     try {
       cursor = myDB.query( CALIB_TABLE,
-                           new String[] { "error", "max_error", "iterations", "stddev", "delta_bh", "dip" }, // columns FIXME ROLL_DIFFERENCE
+                           new String[] { "error", "max_error", "iterations", "stddev", "delta_bh", "dip", "roll" }, // columns FIXME ROLL_DIFFERENCE
                            "id=?",
                            new String[] { Long.toString(cid) },
                            null, null, null );
@@ -539,8 +547,8 @@ public class DeviceHelper extends DataSetObservable
           if ( str != null ) res.delta_bh = Float.parseFloat( str );
           str = cursor.getString(5);
           if ( str != null ) res.dip = Float.parseFloat( str );
-          // str = cursor.getString(6);                               // FIXME ROLL_DIFFERENCE
-          // if ( str != null ) res.roll = Float.parseFloat( str );
+          str = cursor.getString(6);                               // FIXME ROLL_DIFFERENCE
+          if ( str != null ) res.roll = Float.parseFloat( str );
         } catch ( NumberFormatException e ) {
           TDLog.Error( "selectCalibError parse Float error: calib ID " + cid );
         }
@@ -648,7 +656,7 @@ public class DeviceHelper extends DataSetObservable
     Cursor cursor = null;
     try {
       cursor = myDB.query( CALIB_TABLE,
-                           new String[] { "id", "name", "day", "comment", "algo", "dip" }, // columns
+                           new String[] { "id", "name", "day", "comment", "algo", "dip", "roll" }, // columns
                            "device=?",
                            new String[] { device },
                            null, null, null );
@@ -661,12 +669,133 @@ public class DeviceHelper extends DataSetObservable
             device,
             cursor.getString(3),
             (int)cursor.getLong(4),
-            (float)cursor.getDouble(5) ) );
+            (float)cursor.getDouble(5),
+            (float)cursor.getDouble(6)   // FIXME ROLL_DIFFERENCE
+          ) );
         } while (cursor.moveToNext());
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
     return ret;
+  }
+
+  // ----------------------------------------------------------------------
+  // BT ALIAS
+
+  /** @return the hashmap of ( alias, name ) pairs [not null, but can be empty]
+   */
+  Map< String, String > selectAllAlias()
+  {
+    Map< String, String > ret = new HashMap< String, String >();
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "select alias" );
+      return ret;
+    }
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( ALIAS_TABLE,
+                           new String[] { "alias", "name" }, // columns
+                           null, null, null, null, null );
+      if (cursor != null && cursor.moveToFirst() ) {
+        do {
+          ret.put( cursor.getString(0), cursor.getString(1) );
+        } while (cursor.moveToNext());
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+    return ret;
+  }
+
+  /** set the name for an alias
+   * @param alias  alias
+   * @param name   bluetooth name of the device
+   * @note this is like setValue of configs
+   */
+  void setAlias( String alias, String name )
+  {
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "set alias" );
+      return;
+    }
+    if ( TDString.isNullOrEmpty( alias ) ) {
+      TDLog.Error( "DeviceHelper::setAlias null alias");
+      return;
+    }
+    if ( TDString.isNullOrEmpty( name ) ) {
+      TDLog.Error( "DeviceHelper::setAlias null name");
+      return;
+    }
+
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( ALIAS_TABLE,
+                           new String[] { "name" }, // columns
+                           "alias = ?", new String[] { alias }, null, null, null );
+      if ( cursor != null ) {
+        if (cursor.moveToFirst()) {
+          updateAlias.bindString( 1, name );
+          updateAlias.bindString( 2, alias );
+          try {
+            updateAlias.execute();
+          } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+          } catch (SQLiteException e ) { logError( "update alias " + alias + ":" + name, e ); }
+        } else {
+          ContentValues cv = new ContentValues();
+          cv.put( "alias",  alias );
+          cv.put( "name",   name );
+          myDB.insert( ALIAS_TABLE, null, cv );
+        }
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+  }
+
+  /** @return the name of an alias of null if there is none
+   * @param alias
+   */
+  String getAliasName( String alias )
+  {
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "get alias name" );
+      return null;
+    }
+    if ( TDString.isNullOrEmpty( alias ) ) {
+      TDLog.Error( "DeviceHelper::getAliasName null alias");
+      return null;
+    }
+    String ret = null;
+    Cursor cursor = null;
+    try {
+      cursor = myDB.query( ALIAS_TABLE,
+                           new String[] { "name" }, // columns
+                           "alias = ?", new String[] { alias }, null, null, null );
+      if ( cursor != null ) {
+        if (cursor.moveToFirst()) {
+          ret = cursor.getString( 0 );
+        }
+      }
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+    return ret;
+  }
+
+  void deleteAlias( String alias )
+  {
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "delete alias" );
+      return;
+    }
+    if ( TDString.isNullOrEmpty( alias ) ) {
+      TDLog.Error( "DeviceHelper::deleteAlias null alias");
+      return;
+    }
+    if ( deleteAlias == null )
+      deleteAlias = myDB.compileStatement( "DELETE FROM btalias WHERE alias=?" );
+    deleteAlias.bindString( 1, alias );
+    try {
+      deleteAlias.execute();
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e ) { logError( "delete Alias " + alias, e ); }
   }
 
   // ----------------------------------------------------------------------
@@ -1318,7 +1447,7 @@ public class DeviceHelper extends DataSetObservable
     * @param dip        magnetic dip [degrees]
     * @param iterations calibration iterations
     */
-   void updateCalibError( long id, double delta_bh, double error, double stddev, double max_error, double dip, int iterations )
+   void updateCalibError( long id, double delta_bh, double error, double stddev, double max_error, double dip, double roll, int iterations )
    {
      ContentValues cv = new ContentValues();
      cv.put( "delta_bh", delta_bh );
@@ -1327,6 +1456,7 @@ public class DeviceHelper extends DataSetObservable
      cv.put( "max_error", max_error );
      cv.put( "iterations", iterations );
      cv.put( "dip", dip );
+     cv.put( "roll", roll ); // FIXME ROLL_DIFFERENCE
      doUpdate( "calibs", cv, WHERE_ID, new String[] { Long.toString(id) }, "error" );
 
      // // TDLog.Log( TDLog.LOG_DB, "updateCalibCoeff id " + id + " coeff. " + coeff );
@@ -1421,8 +1551,8 @@ public class DeviceHelper extends DataSetObservable
              +   " algo INTEGER default 0, "
              +   " stddev REAL default 0, "
              +   " delta_bh REAL default 0, "
-             +   " dip REAL default 999 "
-             // +    " roll READ default 0 " // FIXME ROLL_DIFFERENCE
+             +   " dip REAL default 999, "
+             +   " roll REAL default 0 " // FIXME ROLL_DIFFERENCE
              +   ")"
            );
 
@@ -1455,6 +1585,12 @@ public class DeviceHelper extends DataSetObservable
              +   ")"
            );
 
+           db.execSQL(
+               create_table + ALIAS_TABLE
+             + " ( name TEXT, "
+             +   " alias TEXT "
+             +   ")"
+           );
 
            db.setTransactionSuccessful();
          } catch ( SQLException e ) { TDLog.Error( "createTables exception " + e.toString() );
@@ -1494,9 +1630,11 @@ public class DeviceHelper extends DataSetObservable
              // TDLog.v("UPGRADE DB 27");
              db.execSQL( "ALTER TABLE calibs ADD COLUMN dip REAL default 999" );
            case 28:
-             // db.execSQL( "ALTER TABLE calibs ADD COLUMN roll REAL default 0" ); // FIXME ROLL_DIFFERENCE
+             db.execSQL( "ALTER TABLE calibs ADD COLUMN roll REAL default 0" ); // ROLL_DIFFERENCE
              // TDLog.v("CURRENT DB 28");
-           // case 29: // FIXME ROLL_DIFFERENCE
+           case 29: 
+             db.execSQL( "CREATE TABLE btalias ( name TEXT, alias TEXT )" ); // BT_ALIAS
+           case 30:
              /* current version */
            default:
              break;

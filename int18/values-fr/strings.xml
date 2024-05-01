@@ -786,15 +786,15 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="ask_backups_clear">Delete sketch backups?</string -->
     <string name="ask_manual_update">Mise à jour de la traduction du manuel d\'utilisation ?\nCourant v. %1$d Installé v. %2$d</string>
 
-    <!-- UNUSED string name="button_add"       >Ajouter       </string -->
+    <string name="button_add"       >Ajouter</string>
     <string name="button_apply"     >Appliquer</string>
-    <string name="button_back"      >Retour     </string>
-    <string name="button_cancel"    >Annuler    </string>
-    <!-- UNUSED string name="button_change"    >Change</string -->
+    <string name="button_back"      >Retour</string>
+    <string name="button_cancel"    >Annuler</string>
+    <!-- UNUSED string name="button_change">Change</string -->
     <string name="button_clipboard" >Presse-papiers</string>
-    <string name="button_close"     >Fermer     </string>
-    <!-- UNUSED string name="button_create"    >Créer    </string -->
-    <string name="button_color"     >Couleur  </string>
+    <string name="button_close"     >Fermer</string>
+    <!-- UNUSED string name="button_create">Créer</string -->
+    <string name="button_color"     >Couleur</string>
     <string name="button_compute"   >Calculer</string>
     <string name="button_clear_convert">Effacer convertir</string>
     <string name="button_convert"   >Convertir   </string>
@@ -937,6 +937,12 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="azimuth">Azimut [deg]</string -->
     <!-- UNUSED string name="clino">Clino [deg]</string -->
     
+    <!-- TODO string name="bt_alias_title">Bluetooth aliases</string -->
+    <!-- TODO string name="hint_bt_alias">BT alias</string -->
+    <!-- TODO string name="hint_bt_code">Device code</string -->
+    <!-- TODO string name="bt_alias_missing">BT alias missing</string -->
+    <!-- TODO string name="bt_code_missing">Device code missing</string -->
+
     <string name="hint_cellsize">taille cellule</string>
     <string name="hint_cwd">dossier de travail</string>
     <string name="hint_distance">distance</string>
@@ -1493,6 +1499,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_zip_share_category_title">Catégorie Zip-share</string>
     <string name="pref_zip_share_category_summary">Ajouter une catégorie à une demande de partage de fichier zip</string>
 
+  <!-- TODO string name="pref_bt_alias_title">BT aliases</string -->
     <string name="pref_sock_type_title">Socket</string>
     <string name="pref_sock_type_summary">Créer un socket</string>
     <!-- UNUSED string name="pref_device_type_title">Type de Disto</string -->
