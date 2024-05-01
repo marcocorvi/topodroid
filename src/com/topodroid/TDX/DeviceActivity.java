@@ -207,7 +207,7 @@ public class DeviceActivity extends Activity
 
   private ListItemAdapter mArrayAdapter; // populated by updateList
   private ListView mList;
-  private ArrayList< BluetoothDevice > mNonameList = null;
+  // private ArrayList< BluetoothDevice > mNonameList = null;  // BT_NONAME
   private boolean mHasNonameDevice = false;
 
   private Device currDeviceA() { return TDInstance.getDeviceA(); }
@@ -230,27 +230,26 @@ public class DeviceActivity extends Activity
     }
   };
 
-
-  /** update the list of devices with no name
-   * @return true if there is at least one device with no name
-   */
-  private boolean updateNonameList()
-  {
-    if ( mNonameList == null ) {
-      mNonameList = new ArrayList< BluetoothDevice >();
-    } else {
-      mNonameList.clear();
-    }
-    Set<BluetoothDevice> device_set = DeviceUtil.getBondedDevices(); // get paired devices
-    if ( device_set == null || device_set.isEmpty() ) return false;
-    for ( BluetoothDevice device : device_set ) {
-      if ( device.getName() == null && device.getType() == 2 ) { // only type 2 (BLE)
-        mNonameList.add( device );
-      }
-    }
-    return ! mNonameList.isEmpty();
-  }
-    
+  // // BT_NONAME
+  // /** update the list of devices with no name
+  //  * @return true if there is at least one device with no name
+  //  */
+  // private boolean updateNonameList()
+  // {
+  //   if ( mNonameList == null ) {
+  //     mNonameList = new ArrayList< BluetoothDevice >();
+  //   } else {
+  //     mNonameList.clear();
+  //   }
+  //   Set<BluetoothDevice> device_set = DeviceUtil.getBondedDevices(); // get paired devices
+  //   if ( device_set == null || device_set.isEmpty() ) return false;
+  //   for ( BluetoothDevice device : device_set ) {
+  //     if ( device.getName() == null && device.getType() == 2 ) { // only type 2 (BLE)
+  //       mNonameList.add( device );
+  //     }
+  //   }
+  //   return ! mNonameList.isEmpty();
+  // }
 
 // -------------------------------------------------------------------
   /** set the state of the interface
@@ -485,6 +484,8 @@ public class DeviceActivity extends Activity
     // if ( TDLevel.overTester ) { // FIXME VirtualDistoX
     //   mArrayAdapter.add( "X000" );
     // }
+    // Map< String, String > bt_aliases = TopoDroid.mDData.selectAllAlias(); // BT_ALIAS
+
     Set<BluetoothDevice> device_set = DeviceUtil.getBondedDevices(); // get paired devices
     if ( device_set == null || device_set.isEmpty() ) {
       // TDToast.make(R.string.no_paired_device );
@@ -522,8 +523,12 @@ public class DeviceActivity extends Activity
               TDLog.v( "WARNING. Null name for device " + addr );
             }
           } else {
+            // String aliased = (String)bt_aliases.get( bt_name ); // BT_ALIAS
+            String aliased = TopoDroidApp.mDData.getAliasName( bt_name );
+            if ( aliased != null ) bt_name = aliased;
+
             String name = Device.btnameToName( bt_name );
-            // TDLog.v("BLE " + "Device Activity: bt name <" + bt_name + "> name <" + name + ">" );
+            TDLog.v("BLE " + "Device Activity: bt name <" + bt_name + "> name <" + name + ">" );
             if ( Device.isDistoX( bt_name ) ) {
               mApp_mDData.insertDevice( addr, bt_name, name, null );
               dev = mApp_mDData.getDevice( addr );
@@ -1190,7 +1195,7 @@ public class DeviceActivity extends Activity
       } else {
         TDToast.makeLong( R.string.firmware_not_supported );
       }
-    // } else if ( TDSetting.mUnnamedDevice && p++ == pos ) { // MANUALLY ADD UNNAMED
+    // } else if ( TDSetting.mUnnamedDevice && p++ == pos ) { // MANUALLY ADD UNNAMED BT_NONAME
     //   if ( mHasNonameDevice ) {
     //     (new DeviceAddDialog( this, this, mNonameList )).show();
     //   } else {
