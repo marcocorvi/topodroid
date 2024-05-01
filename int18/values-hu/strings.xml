@@ -156,7 +156,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="calib_precision">Precizitás</string>
     <string name="calib_iter">Iterációk száma: %1$d</string>
     <string name="calib_dip">Mágn. lehajlás: %1$.1f</string>
-    <!-- TODO string name="calib_roll">Roll diff.: %1$.2f &#xb0;</string -->
+    <string name="calib_roll">Forgás kül.: %1$.2f &#xb0;</string>
     <string name="calib_reset">Visszaállítja a DistoX kalibrációját?</string>
     <string name="calib_min_error">Minimális hiba</string>
     <string name="magn_dip">Mágn. lehajlás &#8230;</string>
