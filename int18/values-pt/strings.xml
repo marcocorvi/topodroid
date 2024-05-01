@@ -871,11 +871,11 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="length">Comprimento [m]</string -->
   <!-- UNUSED string name="azimuth">Azimute [deg]</string -->
   <!-- UNUSED string name="clino">Inclinação [deg]</string -->
-    <!-- TODO string name="bt_alias_title">Bluetooth aliases</string -->
-    <!-- TODO string name="hint_bt_alias">BT alias</string -->
-    <!-- TODO string name="hint_bt_code">Device code</string -->
-    <!-- TODO string name="bt_alias_missing">BT alias missing</string -->
-    <!-- TODO string name="bt_code_missing">Device code missing</string -->
+  <string name="bt_alias_title">ID Bluetooth</string>
+  <string name="hint_bt_alias">ID BT</string>
+  <string name="hint_bt_code">Código do dispositivo</string>
+  <string name="bt_alias_missing">ID BT faltando</string>
+  <string name="bt_code_missing">Código do dispositivo faltando</string>
 
   <string name="hint_cellsize">tamanho célula</string>
   <string name="hint_cwd">pasta de trabalho</string>
@@ -1407,7 +1407,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_gpx_single_track_summary">Exportar topos do projeto como um track GPX único</string>
   <string name="pref_zip_share_category_title">Cat compart zip</string>
   <string name="pref_zip_share_category_summary">Incluir categoria no pedido de compartilhamento de arquivo zip</string>
-  <!-- TODO string name="pref_bt_alias_title">BT aliases</string -->
+  <string name="pref_bt_alias_title">IDs BT</string>
   <string name="pref_sock_type_title">Soquete DistoX</string>
   <string name="pref_sock_type_summary">Tipo de soquete bluetooth para DistoX</string>
   <!-- UNUSED string name="pref_device_type_title">Tipo de DistoX</string -->
