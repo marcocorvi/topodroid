@@ -404,7 +404,7 @@ public class TDSetting
   // public static boolean isConnectionModeDouble() { return mConnectionMode == CONN_MODE_DOUBLE; }
 
   public static boolean mZ6Workaround  = true;
-  public static boolean mUnnamedDevice = false; // UNNAMED
+  public static boolean mUnnamedDevice = false; // BT_NONAME
 
   public static boolean mAutoReconnect = true;
   public static boolean mSecondDistoX  = false;
@@ -1050,7 +1050,7 @@ public class TDSetting
     mAutoPair        = prefs.getBoolean( keyDevice[ 5], bool(defDevice[ 5]) );  // DISTOX_AUTO_PAIR
     // TDLog.v("SETTING load device next " + keyDevice[6] + " " + defDevice[6] );
     mConnectFeedback = tryInt( prefs,   keyDevice[ 6],      defDevice[ 6] );   // DISTOX_CONNECT_FEEDBACK
-    // mUnnamedDevice   = prefs.getBoolean( keyDevice[ 7], bool(defDevice[ 7])  ); // DISTOX_UNNAMED_DEVICE
+    mUnnamedDevice   = prefs.getBoolean( keyDevice[ 7], bool(defDevice[ 7])  ); // DISTOX_UNNAMED_DEVICE BT_NONAME
     // TDLog.v("SETTING load device done");
 
     String[] keyGDev = TDPrefKey.GEEKDEVICE;
@@ -1699,8 +1699,8 @@ public class TDSetting
       TopoDroidApp.checkAutoPairing();
     } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_CONNECT_FEEDBACK
       mConnectFeedback = tryIntValue( hlp, k, v, def[6] );
-    // } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_UNNAMED_DEVICE
-    //   mUnnamedDevice = tryBooleanValue( hlp, k, v, bool(def[7]) );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_UNNAMED_DEVICE 
+      mUnnamedDevice = tryBooleanValue( hlp, k, v, bool(def[7]) ); // BT_NONAME
     } else {
       TDLog.Error("missing DEVICE key: " + k );
     }
@@ -3218,8 +3218,7 @@ public class TDSetting
 
       pw.printf(Locale.US, "BT: check %d, autopair %c \n", mCheckBT, tf(mAutoPair) );
       pw.printf(Locale.US, "Socket: type %d, delay %d \n", mSockType, mConnectSocketDelay );
-      // pw.printf(Locale.US, "Connection mode %d Z6 %c, feedback %d unnamed %c\n", mConnectionMode, tf(mZ6Workaround), mConnectFeedback, tf(mUnnamedDevice) ); // UNNAMED
-      pw.printf(Locale.US, "Connection mode %d Z6 %c, feedback %d \n", mConnectionMode, tf(mZ6Workaround), mConnectFeedback );
+      pw.printf(Locale.US, "Connection mode %d Z6 %c, feedback %d unnamed %c\n", mConnectionMode, tf(mZ6Workaround), mConnectFeedback, tf(mUnnamedDevice) ); // BT_NONAME
       // pw.printf(Locale.US, "Communication autoreconnect %c, DistoX-B %c, retry %d, head/tail %c\n", tf(mAutoReconnect), tf(mSecondDistoX), mCommRetry, tf(mHeadTail) );
       pw.printf(Locale.US, "Communication DistoX-B %c, retry %d, head/tail %c \n", tf(mSecondDistoX), mCommRetry, tf(mHeadTail) );
       pw.printf(Locale.US, "Packet log %c Th2Edit %c WithDebug %c \n", tf(mPacketLog), tf(mTh2Edit), tf(mWithDebug) );
@@ -3621,9 +3620,9 @@ public class TDSetting
               mConnectionMode  = getInt( vals, 2, 0 );     setPreference( editor, "DISTOX_CONN_MODE", mConnectionMode );
               mZ6Workaround    = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_Z6_WORKAROUND", mZ6Workaround );
               mConnectFeedback = getInt( vals, 6, 0 );     setPreference( editor, "DISTOX_CONNECT_FEEDBACK", mConnectFeedback );
-              // if ( vals.length > 8 ) { // UNNAMED
-              //   mUnnamedDevice = getBoolean( vals, 8 ); setPreference( editor, "DISTOX_UNNAMED_DEVICE", mUnnamedDevice );
-              // }
+              if ( vals.length > 8 ) { // BT_NONAME
+                mUnnamedDevice = getBoolean( vals, 8 ); setPreference( editor, "DISTOX_UNNAMED_DEVICE", mUnnamedDevice );
+              }
             }
           }
           continue;

@@ -175,7 +175,7 @@ public class DeviceActivity extends Activity
                         // R.string.menu_pair,
                         R.string.menu_detach,
                         R.string.menu_firmware,
-                        // R.string.menu_device_add, // UNNAMED
+                        R.string.menu_device_add, // BT_NONAME
                         R.string.menu_packets,
                         R.string.menu_options,
                         R.string.menu_help
@@ -207,7 +207,8 @@ public class DeviceActivity extends Activity
 
   private ListItemAdapter mArrayAdapter; // populated by updateList
   private ListView mList;
-  // private ArrayList< BluetoothDevice > mNonameList = null;  // BT_NONAME
+
+  private ArrayList< BluetoothDevice > mNonameList = null;  // BT_NONAME
   private boolean mHasNonameDevice = false;
 
   private Device currDeviceA() { return TDInstance.getDeviceA(); }
@@ -230,26 +231,26 @@ public class DeviceActivity extends Activity
     }
   };
 
-  // // BT_NONAME
-  // /** update the list of devices with no name
-  //  * @return true if there is at least one device with no name
-  //  */
-  // private boolean updateNonameList()
-  // {
-  //   if ( mNonameList == null ) {
-  //     mNonameList = new ArrayList< BluetoothDevice >();
-  //   } else {
-  //     mNonameList.clear();
-  //   }
-  //   Set<BluetoothDevice> device_set = DeviceUtil.getBondedDevices(); // get paired devices
-  //   if ( device_set == null || device_set.isEmpty() ) return false;
-  //   for ( BluetoothDevice device : device_set ) {
-  //     if ( device.getName() == null && device.getType() == 2 ) { // only type 2 (BLE)
-  //       mNonameList.add( device );
-  //     }
-  //   }
-  //   return ! mNonameList.isEmpty();
-  // }
+  // BT_NONAME
+  /** update the list of devices with no name
+   * @return true if there is at least one device with no name
+   */
+  private boolean updateNonameList()
+  {
+    if ( mNonameList == null ) {
+      mNonameList = new ArrayList< BluetoothDevice >();
+    } else {
+      mNonameList.clear();
+    }
+    Set<BluetoothDevice> device_set = DeviceUtil.getBondedDevices(); // get paired devices
+    if ( device_set == null || device_set.isEmpty() ) return false;
+    for ( BluetoothDevice device : device_set ) {
+      if ( device.getName() == null && device.getType() == 2 ) { // only type 2 (BLE)
+        mNonameList.add( device );
+      }
+    }
+    return ! mNonameList.isEmpty();
+  }
 
 // -------------------------------------------------------------------
   /** set the state of the interface
@@ -479,7 +480,7 @@ public class DeviceActivity extends Activity
   private void updateList( boolean check_noname )
   {
     // TDLog.v("device activity update list - check noname " + check_noname );
-    if ( check_noname ) mHasNonameDevice = updateNonameList();
+    if ( check_noname ) mHasNonameDevice = updateNonameList(); // BT_NONAME
     mArrayAdapter.clear();
     // if ( TDLevel.overTester ) { // FIXME VirtualDistoX
     //   mArrayAdapter.add( "X000" );
@@ -1141,7 +1142,7 @@ public class DeviceActivity extends Activity
     // ++k; if ( TDLevel.overBasic    ) menu_adapter.add( res.getString( menus[k] ) );
     ++k; if ( TDLevel.overNormal   ) menu_adapter.add( res.getString( menus[k] ) );
     ++k; if ( TDLevel.overAdvanced ) menu_adapter.add( res.getString( menus[k] ) );
-    // ++k; if ( TDSetting.mUnnamedDevice ) menu_adapter.add( res.getString( menus[k] ) ); // MANUALLY ADD UNNAMED
+    ++k; if ( TDSetting.mUnnamedDevice ) menu_adapter.add( res.getString( menus[k] ) ); // BT_NONAME
     ++k; if ( TDLevel.overExpert && TDSetting.mPacketLog ) menu_adapter.add( res.getString( menus[k] ) ); // PACKET_LOG
     ++k; menu_adapter.add( res.getString( menus[k] ) );
     ++k; menu_adapter.add( res.getString( menus[k] ) );
@@ -1195,12 +1196,12 @@ public class DeviceActivity extends Activity
       } else {
         TDToast.makeLong( R.string.firmware_not_supported );
       }
-    // } else if ( TDSetting.mUnnamedDevice && p++ == pos ) { // MANUALLY ADD UNNAMED BT_NONAME
-    //   if ( mHasNonameDevice ) {
-    //     (new DeviceAddDialog( this, this, mNonameList )).show();
-    //   } else {
-    //     TDToast.make( R.string.device_all_named );
-    //   }
+    } else if ( TDSetting.mUnnamedDevice && p++ == pos ) { // MANUALLY ADD UNNAMED // BT_NONAME
+      if ( mHasNonameDevice ) {
+        (new DeviceAddDialog( this, this, mNonameList )).show();
+      } else {
+        TDToast.make( R.string.device_all_named );
+      }
     } else if ( TDLevel.overExpert && TDSetting.mPacketLog && p++ == pos ) { // PACKET_LOG
       (new PacketDialog( this )).show();
 

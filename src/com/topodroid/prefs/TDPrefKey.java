@@ -342,7 +342,7 @@ public class TDPrefKey
     "DISTOX_Z6_WORKAROUND",   // 4 // whether to enable Z6 workaround
     "DISTOX_AUTO_PAIR",       // 5 // whether to auto-pair the discovered DistoX
     "DISTOX_CONNECT_FEEDBACK", // 6
-    // "DISTOX_UNNAMED_DEVICE",   // 7 whether to show the menu to enter te name of a UNNAMED device
+    "DISTOX_UNNAMED_DEVICE",   // 7 whether to show the menu to enter te name of a UNNAMED device
     // "DISTOX_SOCKET_DELAY",         // delay before a socket-connection attempt
     "DISTOX_CALIB_PREF",      // FORWARD
     null
@@ -360,7 +360,7 @@ public class TDPrefKey
     R.string.pref_z6_workaround_title,
     R.string.pref_auto_pair_title,
     R.string.pref_connect_feedback_title,
-    // R.string.pref_unnamed_device_title, // UNNAMED
+    R.string.pref_unnamed_device_title, // BT_NONAME
     // R.string.pref_socket_delay_title,
     R.string.pref_cat_calib,
     -1
@@ -378,7 +378,7 @@ public class TDPrefKey
     R.string.pref_z6_workaround_summary,
     R.string.pref_auto_pair_summary,
     R.string.pref_connect_feedback_summary,
-    // R.string.pref_unnamed_device_summary, // UNNAMED
+    R.string.pref_unnamed_device_summary, // BT_NONAME
     // R.string.pref_socket_delay_summary,
     -1,
     -1
@@ -396,7 +396,7 @@ public class TDPrefKey
     TRUE,
     FALSE,
     TDString.ZERO,
-    // FALSE, // UNNAMED
+    FALSE, // BT_NONAME
     // TDString.ZERO,
     TDString.EMPTY
   };
