@@ -85,8 +85,8 @@ class DrawingPointSectionDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
     
-    initLayout(R.layout.drawing_point_section_dialog, 
-      "POINT " + BrushManager.getPointName( mPoint.mPointType ) );
+    initLayout(R.layout.drawing_point_section_dialog,
+            mContext.getResources().getString(R.string.POINT) + " " + BrushManager.getPointName( mPoint.mPointType ) );
 
     // mTVtype = (TextView) findViewById( R.id.point_type );
     mEToptions = (TextView) findViewById( R.id.point_options );
