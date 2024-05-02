@@ -1808,7 +1808,7 @@ no campo abaixo e aperte o botão.
   <string name="perm_microphone">\nMicrofone</string>
   <string name="welcome_db_version">Banco de dados ver. %1$d, %2$d</string>
   <string name="welcome_text">
-\nTopoDroidX é um aplicativo Android open source para mapeamento de cavernas com DistoX, BRIC4 e SAP5.
+\nTopoDroidX é um aplicativo Android open source para mapeamento de cavernas com DistoX DistoX2, DistoBLE, BRIC4, BRIC5, SAP5 e SAP6.
 \n\nNenhuma garantia: utilizando o aplicativo, você concorda com o fato de que o autor não é responsável por qualquer perda de dados ou quaisquer outros danos.
 \n\nAjuda: menu "Ajuda"
 \nPágina principal: botão MENU
