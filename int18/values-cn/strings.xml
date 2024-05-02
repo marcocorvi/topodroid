@@ -600,6 +600,7 @@
     <string name="section_line_not_allowed">截面线不被允许</string>
 
     <!-- UNUSED string name="sensor">sensor</string -->
+    <!-- TODO string name="sensor_title">Add sensor measurement</string -->
     <string name="sensor_gravity">重力</string>
     <!-- UNUSED string name="sensor_humidity">humidity</string -->
     <string name="sensor_light">光线</string>

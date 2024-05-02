@@ -612,6 +612,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="section_line_not_allowed">section line not allowed</string>
 
     <!-- UNUSED string name="sensor">sensor</string -->
+    <string name="sensor_title">Add sensor measurement</string>
     <string name="sensor_gravity">gravity</string>
     <!-- UNUSED string name="sensor_humidity">humidity</string -->
     <string name="sensor_light">light</string>

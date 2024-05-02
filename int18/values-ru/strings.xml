@@ -598,6 +598,7 @@
     <string name="section_line_not_allowed">точка сечения недопустима</string>
 
     <!-- UNUSED string name="sensor">датчик</string -->
+    <!-- TODO string name="sensor_title">Add sensor measurement</string -->
     <string name="sensor_gravity">ускорение</string>
     <!-- UNUSED string name="sensor_humidity">влажность</string -->
     <string name="sensor_light">освещенность</string>

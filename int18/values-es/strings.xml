@@ -603,6 +603,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="section_line_not_allowed">Línea de sección no permitida</string>
 
     <!-- UNUSED string name="sensor">Sensor</string -->
+    <!-- TODO string name="sensor_title">Add sensor measurement</string -->
     <string name="sensor_gravity">Gravedad</string>
     <!-- UNUSED string name="sensor_humidity">Humedad</string -->
     <string name="sensor_light">Luz</string>

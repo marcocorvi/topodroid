@@ -561,6 +561,7 @@ no campo abaixo e aperte o botão.
   <string name="section_point_not_allowed">ponto tipo corte não permitido</string>
   <string name="section_line_not_allowed">linha tipo corte não permitida</string>
   <!-- UNUSED string name="sensor">sensor</string -->
+  <string name="sensor_title">Criar medida com sensor</string>
   <string name="sensor_gravity">gravidade</string>
   <!-- UNUSED string name="sensor_humidity">humidade</string -->
   <string name="sensor_light">luz</string>
