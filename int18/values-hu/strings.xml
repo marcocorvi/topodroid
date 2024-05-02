@@ -603,7 +603,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="section_line_not_allowed">metszet vonal nem engedélyezett</string>
 
     <!-- UNUSED string name="sensor">szenzor</string -->
-    <!-- TODO string name="sensor_title">Add sensor measurement</string -->
+    <string name="sensor_title">Szenzor mérés hozzáadása</string>
     <string name="sensor_gravity">gravitációs szenzor</string>
     <!-- UNUSED string name="sensor_humidity">páratartalom</string -->
     <string name="sensor_light">fényerősség</string>
@@ -823,7 +823,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="button_direction">Irány/Lejtés</string -->
     <!-- UNUSED string name="button_azimuth">Irány</string -->
     <string name="button_plot"    >Rajzol</string>
-    <!-- TODO string name="button_less">Less</string -->
+    <string name="button_less">Kevesebb</string>
     <string name="button_more"    >Több</string>
     <string name="button_move"    >Mozgat</string>
     <string name="button_next"    >Következő</string>
