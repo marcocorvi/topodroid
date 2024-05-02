@@ -820,6 +820,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="button_direction">Rumbo/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Rumbo</string -->
     <string name="button_plot"    >Dibujo</string>
+    <!-- TODO string name="button_less">Less</string -->
     <string name="button_more"    >Más</string>
     <string name="button_move"    >Mueve</string>
     <string name="button_next"    >Siguiente</string>

@@ -822,6 +822,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="button_direction">Irány/Lejtés</string -->
     <!-- UNUSED string name="button_azimuth">Irány</string -->
     <string name="button_plot"    >Rajzol</string>
+    <!-- TODO string name="button_less">Less</string -->
     <string name="button_more"    >Több</string>
     <string name="button_move"    >Mozgat</string>
     <string name="button_next"    >Következő</string>

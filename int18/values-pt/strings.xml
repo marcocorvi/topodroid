@@ -764,6 +764,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="button_direction">Azimute/Clinômetro</string -->
   <!-- UNUSED string name="button_azimuth">Azimute</string -->
   <string name="button_plot">Croqui</string>
+  <string name="button_less">Menos</string>
   <string name="button_more">Mais</string>
   <string name="button_move">Mover</string>
   <string name="button_next">Próximo</string>

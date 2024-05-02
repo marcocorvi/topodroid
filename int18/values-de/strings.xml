@@ -755,6 +755,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="button_direction">Azimut/Neigung</string -->
   <!-- UNUSED string name="button_azimuth">Azimut</string -->
   <string name="button_plot">Skizze</string>
+  <!-- TODO string name="button_less">Less</string -->
   <string name="button_more">Mehr</string>
   <string name="button_move">Verschieben</string>
   <string name="button_next">Nächste</string>

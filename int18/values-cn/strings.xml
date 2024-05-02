@@ -817,6 +817,7 @@
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >草图</string>
+    <!-- TODO string name="button_less">Less</string -->
     <string name="button_more"    >更多</string>
     <string name="button_move"    >移动</string>
     <string name="button_next"    >下一步</string>
