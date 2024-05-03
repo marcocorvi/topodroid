@@ -53,6 +53,9 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   private final boolean diving;
   private SearchResult mSearch;
 
+  private int lastPosAdd;
+  private int lastPosRemove;
+
   /** cstr
    * @param ctx     context
    * @param parent  parent window
@@ -73,6 +76,9 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     diving = (TDInstance.datamode == SurveyInfo.DATAMODE_DIVING);
     // TDLog.v( "DBlock Adapter, diving " + diving );
     mSearch = new SearchResult();
+
+    lastPosAdd = -1;
+    lastPosRemove = -1;
   }
 
   /** search the data-blocks with a specified station 
@@ -173,39 +179,50 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       DBlock b = (DBlock)( getItem( pos ) );
       if ( b != null ) {
         if ( mSelect.size() > 0 ) {
+          int newPos = pos;
           if ( mSelect.remove( b ) ) {
             b.mMultiSelected = false;
             b.setBackgroundColor( TDColor.TRANSPARENT );
             // TDLog.v("multiselect remove " + b.mFrom + " " + b.mTo + " " + mSelect.size() );
-            if ( long_tap ) { // continue to de-select blocks all way before as long as possible
-              while ( --pos >= 0 ) {
-                b = (DBlock)( getItem( pos ) );
-                if ( ! b.mMultiSelected ) break;
-                mSelect.remove( b );
-                b.mMultiSelected = false;
-                b.setBackgroundColor( TDColor.TRANSPARENT );
+            if ( long_tap && ( lastPosRemove > -1 ) ) { // continue to de-select blocks all way to the last de-selected item
+              if (pos > lastPosRemove) {
+                while ( --pos >= lastPosRemove ) {
+                  removeItem(pos);
+                }
+              } else {
+                while ( ++pos <= lastPosRemove ) {
+                  removeItem(pos);
+                }
               }
             }
+            lastPosAdd = -1;
+            lastPosRemove = newPos;
           } else {
             mSelect.add( b );
             b.mMultiSelected = true;
             b.setBackgroundColor( TDColor.GRID );
             // TDLog.v("multiselect add " + b.mFrom + " " + b.mTo + " " + mSelect.size() );
-            if ( long_tap ) { // continue to select block all te way before as long as possible
-              while ( --pos >= 0 ) {
-                b = (DBlock)( getItem( pos ) );
-                if ( b.mMultiSelected ) break;
-                mSelect.add( b );
-                b.mMultiSelected = true;
-                b.setBackgroundColor( TDColor.GRID );
+            if ( long_tap  && ( lastPosAdd > -1 ) ) { // continue to select block all the way to the last selected item
+              if ( pos > lastPosAdd ) {
+                while ( --pos > lastPosAdd ) {
+                  addItem(pos);
+                }
+              } else {
+                while ( ++pos < lastPosAdd ) {
+                  addItem(pos);
+                }
               }
             }
+            lastPosAdd = newPos;
+            lastPosRemove = -1;
           }
         } else {
           mSelect.add( b );
           b.mMultiSelected = true;
           b.setBackgroundColor( TDColor.GRID );
           // TDLog.v("multiselect start " + b.mFrom + " " + b.mTo + " " + mSelect.size() );
+          lastPosAdd = pos;
+          lastPosRemove = -1;
         }
       }
     // } else {
@@ -213,6 +230,22 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     }
    
     return ( mSelect.size() > 0 );
+  }
+
+  private void removeItem(int pos) {
+    DBlock b = (DBlock)( getItem( pos ) );
+    if ( ! b.mMultiSelected ) return;
+    mSelect.remove( b );
+    b.mMultiSelected = false;
+    b.setBackgroundColor( TDColor.TRANSPARENT );
+  }
+
+  private void addItem(int pos) {
+    DBlock b = (DBlock) getItem(pos);
+    if (b.mMultiSelected) return;
+    mSelect.add(b);
+    b.mMultiSelected = true;
+    b.setBackgroundColor(TDColor.GRID);
   }
 
   /** @return the number of items on selection
