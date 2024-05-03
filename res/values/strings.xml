@@ -1725,8 +1725,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_linecorner_summary">Bezier corner detection threshold</string>
   <string name="pref_graph_paper_scale_title">Graph-paper scale</string>
   <string name="pref_graph_paper_scale_summary">Graph-paper scale adjustment</string>
-  <string name="pref_slant_xsection_title">Slant xsections</string>
-  <string name="pref_slant_xsection_summary">Profile view slant xsections</string>
+  <string name="pref_slant_xsection_title">Slant x-sections</string>
+  <string name="pref_slant_xsection_summary">Profile view slant x-sections</string>
   <string name="pref_oblique_projection_title">Oblique projected</string>
   <string name="pref_oblique_projection_summary">Maximum oblique projected angle</string>
   <string name="pref_weeddistance_title">Weeding point distance</string>
