@@ -1275,7 +1275,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_cat_geek">ESPECIAIS</string>
   <string name="pref_cat_sketch">CROQUI 3D</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
-  <string name="pref_locale_title">Idioma</string>
+  <string name="pref_locale_title">Idioma app</string>
   <string name="pref_locale_summary">Idioma do aplicativo</string>
   <string name="pref_orientation_title">Orient tela</string>
   <string name="pref_orientation_summary">Orientação da tela do aplicativo</string>
@@ -1291,8 +1291,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_mkeyboard_summary">Habilitar teclados especiais do TopoDroidX</string>
   <string name="pref_no_cursor_title">Sem cursor</string>
   <string name="pref_no_cursor_summary">Desabilitar o cursor do teclado especial do TopoDroidX</string>
-  <string name="pref_local_help_title">Manual traduzido</string>
-  <string name="pref_local_help_summary">Tradução do manual [conexão de internet necessária]</string>
+  <string name="pref_local_help_title">Idioma manual</string>
+  <string name="pref_local_help_summary">Idioma do manual do TopoDroidX [conexão de internet necessária]</string>
   <!-- UNUSED string name="pref_cosurvey_title">Topo colaborativa</string -->
   <!-- UNUSED string name="pref_cosurvey_summary">Habilitar topo colaborativa</string -->
   <string name="pref_import_datamode_title">Form dado importação</string>
