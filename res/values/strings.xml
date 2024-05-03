@@ -1569,8 +1569,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_neg_altitude_summary">Allow negative altitudes</string>
   <string name="pref_edit_altitude_title">Editable altitude</string>
   <string name="pref_edit_altitude_summary">Allow editable altitudes</string>
-  <string name="pref_fine_location_title">Fine position [s]</string>
-  <string name="pref_fine_location_summary">Fine position time [s]</string>
+  <string name="pref_fine_location_title">Fine position</string>
+  <string name="pref_fine_location_summary">Fine position time in seconds</string>
   <string name="pref_geoimport_app_title" copyable="all">GNSS app</string>
   <string name="pref_geoimport_app_summary">External GNSS app</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
