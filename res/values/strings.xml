@@ -1742,7 +1742,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_group_title">Group tolerance</string>
   <string name="pref_group_summary">Tolerance among shots in the same group</string>
   <string name="pref_error_title">Algorithm error</string>
-  <string name="pref_error_summary">Calib. algorithm termination error</string>
+  <string name="pref_error_summary">Calibration algorithm termination error</string>
   <string name="pref_iter_title">Algorithm iterations</string>
   <string name="pref_iter_summary">Maximum number of iterations</string>
   <string name="pref_label_size_title">Labels size</string>
