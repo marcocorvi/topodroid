@@ -1524,8 +1524,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_leg_summary">Tolerância entre as medições de uma visada</string>
   <string name="pref_max_shot_title">Compr máx medida</string>
   <string name="pref_max_shot_summary">Comprimento máximo de medidas [m]</string>
-  <string name="pref_min_leg_title">Compr mín medida</string>
-  <string name="pref_min_leg_summary">Comprimeto mínimo de medidas [m]</string>
+  <string name="pref_min_leg_title">Compr mín visada</string>
+  <string name="pref_min_leg_summary">Comprimeto mínimo de visadas [m]</string>
   <string name="pref_backsight_title">Contra visada</string>
   <string name="pref_backsight_summary">Campos de contra azimute e inclinação invertida para inserção manual de medida</string>
   <string name="pref_backshot_title">Contra visada DistoX</string>
