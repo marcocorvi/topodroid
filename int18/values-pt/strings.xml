@@ -1403,8 +1403,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_csv_raw_summary">Exportar dados completos no CSV</string>
   <string name="pref_csv_sep_title">Separ campo CSV</string>
   <string name="pref_csv_sep_summary">Separador de campos nos arquivos CSV exportados</string>
-  <string name="pref_csv_eol_title">Separ linha CSV</string>
-  <string name="pref_csv_eol_summary">Separador de linhas nos arquivos CSV exportados</string>
+  <string name="pref_csv_eol_title">Final linha CSV</string>
+  <string name="pref_csv_eol_summary">Caracter usado para marcar final de linhas nos arquivos CSV exportados</string>
   <string name="pref_gpx_single_track_title">GPX track único</string>
   <string name="pref_gpx_single_track_summary">Exportar topos do projeto como um track GPX único</string>
   <string name="pref_zip_share_category_title">Cat compart zip</string>
