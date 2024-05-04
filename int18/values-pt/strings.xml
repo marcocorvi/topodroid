@@ -1387,8 +1387,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_svg_gridstroke_summary">Espessura das linhas da grade nos arquivos SVG exportados</string>
   <string name="pref_svg_shotstroke_title">Espess medida</string>
   <string name="pref_svg_shotstroke_summary">Espessura das linhas de medidas nos arquivos SVG exportados</string>
-  <string name="pref_svg_linedirstroke_title">Espess orient linha</string>
-  <string name="pref_svg_linedirstroke_summary">ESpessura das orientações de linha nos arquivos SVG exportados</string>
+  <string name="pref_svg_linedirstroke_title">Tam orient linha</string>
+  <string name="pref_svg_linedirstroke_summary">Tamanho da indicação de orientações de linha nos arquivos SVG exportados</string>
   <string name="pref_svg_line_dir_title">Orient linha</string>
   <string name="pref_svg_line_dir_summary">Incluir indicadores de orientação de linha nos arquivos SVG exportados</string>
   <string name="pref_svg_stationsize_title">Tam base</string>
