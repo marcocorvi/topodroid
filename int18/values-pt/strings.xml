@@ -1718,9 +1718,9 @@ no campo abaixo e aperte o botão.
   <string name="pref_zoom_controls_summary">Controle do zoom em telas multitoque</string>
   <string name="pref_side_drag_title">Arrastar canto</string>
   <string name="pref_side_drag_summary">Habilitar o arrasto do croqui pelos cantos na tela de desenho</string>
-  <string name="pref_unit_grid_title">Unidade grade croqui</string>
-  <string name="pref_unit_grid_summary">Tamanho das células da grade do croqui</string>
-  <string name="pref_unit_measure_title">Unidade régua</string>
+  <string name="pref_unit_grid_title">Grade croqui</string>
+  <string name="pref_unit_grid_summary">Unidade usada para células da grade do croqui</string>
+  <string name="pref_unit_measure_title">Régua</string>
   <string name="pref_unit_measure_summary">Unidade de comprimento da ferramenta de medição</string>
   <!-- UNUSED string name="pref_recent_nr_title">Número símbolos recentes</string -->
   <!-- UNUSED string name="pref_recent_nr_summary">Número de símbolos mais recentes na tela de seleção</string -->
@@ -1728,9 +1728,9 @@ no campo abaixo e aperte o botão.
   <string name="pref_area_border_summary">Visibilidade padrão das bordas de áreas</string>
   <string name="pref_auto_section_pt_title">Ponto corte</string>
   <string name="pref_auto_section_pt_summary">Criar automaticamente ponto de corte atrelado a cada novo corte indicando posição onde apresentar o croqui do corte</string>
-  <string name="pref_unit_length_title">Unidade distância</string>
+  <string name="pref_unit_length_title">Distância</string>
   <string name="pref_unit_length_summary">Unidade para visualização de distâncias</string>
-  <string name="pref_unit_angle_title">Unidade ângulo</string>
+  <string name="pref_unit_angle_title">Ângulo</string>
   <string name="pref_unit_angle_summary">Unidade para visualização de ângulos</string>
   <string name="pref_unit_location_title">Unidade coordenada</string>
   <string name="pref_unit_location_summary">Unidade para visualização de coordenadas</string>
