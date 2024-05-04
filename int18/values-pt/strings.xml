@@ -1671,7 +1671,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_th2_scale_title">Escala Therion</string>
   <string name="pref_th2_scale_summary">Escala da exportação de arquivos th2/xvi</string>
   <string name="pref_th2_xvi_title">Imagem XVI</string>
-  <string name="pref_th2_xvi_summary">Incluir um comando xTherion no arquivo th2 para ler a imagem XVI do croqui</string>
+  <string name="pref_th2_xvi_summary">Incluir chamada no arquivo th2 para a imagem XVI</string>
   <string name="pref_autoStations_title">Bases</string>
   <string name="pref_autoStations_summary">Incluir automaticamente bases nos arquivos Therion (th2)</string>
   <string name="pref_auto_xsections_title">Corte ao exportar</string>
