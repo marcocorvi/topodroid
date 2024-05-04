@@ -1399,8 +1399,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_kml_stations_summary">Incluir bases nos arquivos KML/GeoJSON/ShapeFile exportados</string>
   <string name="pref_kml_splays_title">Incluir aux</string>
   <string name="pref_kml_splays_summary">Incluir medidas auxiliares nos arquivos KML/GeoJSON/ShapeFile exportados</string>
-  <string name="pref_csv_raw_title">CSV bruto</string>
-  <string name="pref_csv_raw_summary">Exportar dados brutos no CSV</string>
+  <string name="pref_csv_raw_title">CSV completo</string>
+  <string name="pref_csv_raw_summary">Exportar dados completos no CSV</string>
   <string name="pref_csv_sep_title">Separ campo CSV</string>
   <string name="pref_csv_sep_summary">Separador de campos nos arquivos CSV exportados</string>
   <string name="pref_csv_eol_title">Separ linha CSV</string>
