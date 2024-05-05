@@ -1622,7 +1622,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_arrow_length_message">Tamanho da marca indicando direção do corte</string>
   <string name="pref_dot_radius_title">Raio ponto verde</string>
   <string name="pref_dot_radius_message">Raio dos pontos verdes no modo "edição" da tela de desenho</string>
-  <string name="pref_line_thickness_title">Espessura linha</string>
+  <string name="pref_line_thickness_title">Espess linha</string>
   <string name="pref_line_thickness_summary">Espessura das linhas no desenho</string>
   <string name="pref_line_units_title">Escala linha</string>
   <string name="pref_line_units_summary">Escala para desenho da simbologia das linhas</string>
