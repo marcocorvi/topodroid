@@ -1050,22 +1050,22 @@ public class TDSetting
     mAutoPair        = prefs.getBoolean( keyDevice[ 5], bool(defDevice[ 5]) );  // DISTOX_AUTO_PAIR
     // TDLog.v("SETTING load device next " + keyDevice[6] + " " + defDevice[6] );
     mConnectFeedback = tryInt( prefs,   keyDevice[ 6],      defDevice[ 6] );   // DISTOX_CONNECT_FEEDBACK
-    mUnnamedDevice   = prefs.getBoolean( keyDevice[ 7], bool(defDevice[ 7])  ); // DISTOX_UNNAMED_DEVICE BT_NONAME
     // TDLog.v("SETTING load device done");
 
     String[] keyGDev = TDPrefKey.GEEKDEVICE;
     String[] defGDev = TDPrefKey.GEEKDEVICEdef;
-    mConnectSocketDelay = tryInt(prefs, keyGDev[ 1],      defGDev[ 1] );   // DISTOX_SOCKET_DELAY
-    mSecondDistoX   = prefs.getBoolean( keyGDev[ 2], bool(defGDev[ 2]) );  // DISTOX_SECOND_DISTOX
-    mWaitData       = tryInt( prefs,    keyGDev[ 3],      defGDev[ 3] );   // DISTOX_WAIT_DATA
-    mWaitConn       = tryInt( prefs,    keyGDev[ 4],      defGDev[ 4] );   // DISTOX_WAIT_CONN
-    mWaitLaser      = tryInt( prefs,    keyGDev[ 5],      defGDev[ 5] );   // DISTOX_WAIT_LASER
-    mWaitShot       = tryInt( prefs,    keyGDev[ 6],      defGDev[ 6] );   // DISTOX_WAIT_SHOT
-    mFirmwareSanity = prefs.getBoolean( keyGDev[ 7], bool(defGDev[ 7]) );  // DISTOX_FIRMWARE_SANITY
-    mBricMode       = tryInt( prefs,    keyGDev[ 8],      defGDev[ 8] );   // DISTOX_BRIC_MODE
-    mBricZeroLength = prefs.getBoolean( keyGDev[ 9], bool(defGDev[ 9]) );  // DISTOX_BRIC_ZERO_LENGTH
-    mBricIndexIsId  = prefs.getBoolean( keyGDev[10], bool(defGDev[10]) );  // DISTOX_BRIC_INDEX_IS_ID
-    mSap5Bit16Bug   = prefs.getBoolean( keyGDev[11], bool(defGDev[11]) );  // DISTOX_SAP5_BIT16_BUG
+    mUnnamedDevice  = prefs.getBoolean( keyGDev[ 1], bool(defGDev[ 1])  ); // DISTOX_UNNAMED_DEVICE BT_NONAME
+    mConnectSocketDelay = tryInt(prefs, keyGDev[ 2],      defGDev[ 2] );   // DISTOX_SOCKET_DELAY
+    mSecondDistoX   = prefs.getBoolean( keyGDev[ 3], bool(defGDev[ 3]) );  // DISTOX_SECOND_DISTOX
+    mWaitData       = tryInt( prefs,    keyGDev[ 4],      defGDev[ 4] );   // DISTOX_WAIT_DATA
+    mWaitConn       = tryInt( prefs,    keyGDev[ 5],      defGDev[ 5] );   // DISTOX_WAIT_CONN
+    mWaitLaser      = tryInt( prefs,    keyGDev[ 6],      defGDev[ 6] );   // DISTOX_WAIT_LASER
+    mWaitShot       = tryInt( prefs,    keyGDev[ 7],      defGDev[ 7] );   // DISTOX_WAIT_SHOT
+    mFirmwareSanity = prefs.getBoolean( keyGDev[ 8], bool(defGDev[ 8]) );  // DISTOX_FIRMWARE_SANITY
+    mBricMode       = tryInt( prefs,    keyGDev[ 9],      defGDev[ 9] );   // DISTOX_BRIC_MODE
+    mBricZeroLength = prefs.getBoolean( keyGDev[10], bool(defGDev[10]) );  // DISTOX_BRIC_ZERO_LENGTH
+    mBricIndexIsId  = prefs.getBoolean( keyGDev[11], bool(defGDev[11]) );  // DISTOX_BRIC_INDEX_IS_ID
+    mSap5Bit16Bug   = prefs.getBoolean( keyGDev[12], bool(defGDev[12]) );  // DISTOX_SAP5_BIT16_BUG
     // TDLog.v("SETTING load geek device done");
 
     String[] keyCave3D = TDPrefKey.CAVE3D;
@@ -1699,8 +1699,6 @@ public class TDSetting
       TopoDroidApp.checkAutoPairing();
     } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_CONNECT_FEEDBACK
       mConnectFeedback = tryIntValue( hlp, k, v, def[6] );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_UNNAMED_DEVICE 
-      mUnnamedDevice = tryBooleanValue( hlp, k, v, bool(def[7]) ); // BT_NONAME
     } else {
       TDLog.Error("missing DEVICE key: " + k );
     }
@@ -1997,7 +1995,9 @@ public class TDSetting
     String[] key = TDPrefKey.GEEKDEVICE;
     String[] def = TDPrefKey.GEEKDEVICEdef;
     int j = 0;
-    if ( k.equals( key[ ++j ] ) ) { // DISTOX_SOCKET_DELAY index 1
+    if ( k.equals( key[ ++j ] ) ) { // DISTOX_UNNAMED_DEVICE 
+      mUnnamedDevice = tryBooleanValue( hlp, k, v, bool(def[j]) ); // BT_NONAME
+    } else if ( k.equals( key[ ++j ] ) ) { // DISTOX_SOCKET_DELAY index 1
       mConnectSocketDelay = tryIntValue( hlp, k, v, def[j] );  
       if ( mConnectSocketDelay < 0  ) { mConnectSocketDelay =  0; ret = TDString.ZERO; }
       if ( mConnectSocketDelay > 60 ) { mConnectSocketDelay = 60; ret = TDString.SIXTY; } // was 100

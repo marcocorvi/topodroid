@@ -342,7 +342,6 @@ public class TDPrefKey
     "DISTOX_Z6_WORKAROUND",   // 4 // whether to enable Z6 workaround
     "DISTOX_AUTO_PAIR",       // 5 // whether to auto-pair the discovered DistoX
     "DISTOX_CONNECT_FEEDBACK", // 6
-    "DISTOX_UNNAMED_DEVICE",   // 7 whether to show the menu to enter te name of a UNNAMED device
     // "DISTOX_SOCKET_DELAY",         // delay before a socket-connection attempt
     "DISTOX_CALIB_PREF",      // FORWARD
     null
@@ -360,7 +359,6 @@ public class TDPrefKey
     R.string.pref_z6_workaround_title,
     R.string.pref_auto_pair_title,
     R.string.pref_connect_feedback_title,
-    R.string.pref_unnamed_device_title, // BT_NONAME
     // R.string.pref_socket_delay_title,
     R.string.pref_cat_calib,
     -1
@@ -378,7 +376,6 @@ public class TDPrefKey
     R.string.pref_z6_workaround_summary,
     R.string.pref_auto_pair_summary,
     R.string.pref_connect_feedback_summary,
-    R.string.pref_unnamed_device_summary, // BT_NONAME
     // R.string.pref_socket_delay_summary,
     -1,
     -1
@@ -396,7 +393,6 @@ public class TDPrefKey
     TRUE,
     FALSE,
     TDString.ZERO,
-    FALSE, // BT_NONAME
     // TDString.ZERO,
     TDString.EMPTY
   };
@@ -2028,6 +2024,7 @@ public class TDPrefKey
   // -------------------------------------------------------------------------------
   public static String[] GEEKDEVICE = {
     "DISTOX_BT_ALIAS",         // open dialog for BT aliases
+    "DISTOX_UNNAMED_DEVICE",   // 7 whether to show the menu to enter te name of a UNNAMED device
     "DISTOX_SOCKET_DELAY",         // delay before a socket-connection attempt
     "DISTOX_SECOND_DISTOX",        // enable the two-disto survey
     "DISTOX_WAIT_DATA",       // 8 // msec wait after a data/vector packet
@@ -2044,6 +2041,7 @@ public class TDPrefKey
 
   static int[] GEEKDEVICEtitle = {
     R.string.pref_bt_alias_title,
+    R.string.pref_unnamed_device_title, // BT_NONAME
     R.string.pref_socket_delay_title,
     R.string.pref_second_distox_title,
     R.string.pref_wait_data_title,
@@ -2060,6 +2058,7 @@ public class TDPrefKey
 
   static int[] GEEKDEVICEdesc = {
     -1,
+    R.string.pref_unnamed_device_summary, // BT_NONAME
     R.string.pref_socket_delay_summary,
     R.string.pref_second_distox_summary,
     R.string.pref_wait_data_summary,
@@ -2076,6 +2075,7 @@ public class TDPrefKey
 
   public static String[] GEEKDEVICEdef = {
     null,
+    FALSE, // BT_NONAME
     TDString.ZERO,
     FALSE,
     "250",
