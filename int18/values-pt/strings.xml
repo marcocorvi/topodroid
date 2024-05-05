@@ -1626,7 +1626,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_line_thickness_summary">Espessura das linhas no desenho</string>
   <string name="pref_line_units_title">Escala linha</string>
   <string name="pref_line_units_summary">Escala para desenho da simbologia das linhas</string>
-  <string name="pref_line_close_title">Fechar linh fecháveis</string>
+  <string name="pref_line_close_title">Fechar linhas fecháveis</string>
   <string name="pref_line_close_summary">Fechar linhas cujos tipos sejam fecháveis</string>
   <string name="pref_linesnap_title">Colar linha/área</string>
   <string name="pref_linesnap_summary">Habilitar opções de atração e união de linhas/áreas</string>
