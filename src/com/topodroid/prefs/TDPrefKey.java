@@ -1263,7 +1263,7 @@ public class TDPrefKey
     R.string.pref_line_units_summary,
     R.string.pref_linestyle_summary,
     R.string.pref_segment_message,
-    R.string.pref_line_close_title,
+    R.string.pref_line_close_summary,
     R.string.pref_slope_lside_summary,
     R.string.pref_arrow_length_message,
     R.string.pref_auto_section_pt_summary,

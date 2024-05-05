@@ -612,6 +612,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="section_line_not_allowed">section line not allowed</string>
 
     <!-- UNUSED string name="sensor">sensor</string -->
+    <string name="sensor_title">Add sensor measurement</string>
     <string name="sensor_gravity">gravity</string>
     <!-- UNUSED string name="sensor_humidity">humidity</string -->
     <string name="sensor_light">light</string>
@@ -1568,8 +1569,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_neg_altitude_summary">Allow negative altitudes</string>
   <string name="pref_edit_altitude_title">Editable altitude</string>
   <string name="pref_edit_altitude_summary">Allow editable altitudes</string>
-  <string name="pref_fine_location_title">Fine position [s]</string>
-  <string name="pref_fine_location_summary">Fine position time [s]</string>
+  <string name="pref_fine_location_title">Fine position</string>
+  <string name="pref_fine_location_summary">Fine position time in seconds</string>
   <string name="pref_geoimport_app_title" copyable="all">GNSS app</string>
   <string name="pref_geoimport_app_summary">External GNSS app</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
@@ -1724,8 +1725,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_linecorner_summary">Bezier corner detection threshold</string>
   <string name="pref_graph_paper_scale_title">Graph-paper scale</string>
   <string name="pref_graph_paper_scale_summary">Graph-paper scale adjustment</string>
-  <string name="pref_slant_xsection_title">Slant xsections</string>
-  <string name="pref_slant_xsection_summary">Profile view slant xsections</string>
+  <string name="pref_slant_xsection_title">Slant x-sections</string>
+  <string name="pref_slant_xsection_summary">Profile view slant x-sections</string>
   <string name="pref_oblique_projection_title">Oblique projected</string>
   <string name="pref_oblique_projection_summary">Maximum oblique projected angle</string>
   <string name="pref_weeddistance_title">Weeding point distance</string>
@@ -1741,7 +1742,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_group_title">Group tolerance</string>
   <string name="pref_group_summary">Tolerance among shots in the same group</string>
   <string name="pref_error_title">Algorithm error</string>
-  <string name="pref_error_summary">Calib. algorithm termination error</string>
+  <string name="pref_error_summary">Calibration algorithm termination error</string>
   <string name="pref_iter_title">Algorithm iterations</string>
   <string name="pref_iter_summary">Maximum number of iterations</string>
   <string name="pref_label_size_title">Labels size</string>

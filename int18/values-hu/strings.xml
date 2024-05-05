@@ -603,6 +603,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="section_line_not_allowed">metszet vonal nem engedélyezett</string>
 
     <!-- UNUSED string name="sensor">szenzor</string -->
+    <string name="sensor_title">Szenzor mérés hozzáadása</string>
     <string name="sensor_gravity">gravitációs szenzor</string>
     <!-- UNUSED string name="sensor_humidity">páratartalom</string -->
     <string name="sensor_light">fényerősség</string>
@@ -822,6 +823,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="button_direction">Irány/Lejtés</string -->
     <!-- UNUSED string name="button_azimuth">Irány</string -->
     <string name="button_plot"    >Rajzol</string>
+    <string name="button_less">Kevesebb</string>
     <string name="button_more"    >Több</string>
     <string name="button_move"    >Mozgat</string>
     <string name="button_next"    >Következő</string>
@@ -941,11 +943,11 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="azimuth">Irányszög [fok]</string -->
     <!-- UNUSED string name="clino">Lejtszög [fok]</string -->
 
-    <!-- TODO string name="bt_alias_title">Bluetooth aliases</string -->
-    <!-- TODO string name="hint_bt_alias">BT alias</string -->
-    <!-- TODO string name="hint_bt_code">Device code</string -->
-    <!-- TODO string name="bt_alias_missing">BT alias missing</string -->
-    <!-- TODO string name="bt_code_missing">Device code missing</string -->
+    <string name="bt_alias_title">Bluetooth aliasok</string>
+    <string name="hint_bt_alias">BT alias</string>
+    <string name="hint_bt_code">Műszer kód</string>
+    <string name="bt_alias_missing">BT alias hiányzik</string>
+    <string name="bt_code_missing">Műszer kód hiányzik</string>
 
     <string name="hint_cellsize">cella méret</string>
     <string name="hint_cwd">munka könyvtár</string>
@@ -1515,7 +1517,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_zip_share_category_title">Zip-megosztás kategória</string>
   <string name="pref_zip_share_category_summary">Kategória hozzáadása a zip-megosztási kérelemhez</string>
 
-  <!-- TODO string name="pref_bt_alias_title">BT aliases</string -->
+  <string name="pref_bt_alias_title">BT aliasok</string>
   <string name="pref_sock_type_title">Csatlakozás</string>
   <string name="pref_sock_type_summary">Bluetooth socket típus</string>
   <!-- UNUSED string name="pref_device_type_title">Disto típus</string -->
@@ -1935,7 +1937,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- NO string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nKöszönjük, hogy a TopoDroidot választotta.
-\nTopoDroid egy Nyílt forráskódú Android alkalmazás DistoX, BRIC4 és Sap5 műszerekkel történő barlangfelmérésre.
+\nTopoDroid egy Nyílt forráskódú Android alkalmazás DistoX, BRIC és SAP műszerekkel történő barlangfelmérésre.
 \n\nNincs garancia: A szoftver használatával elfogadja azt, hogy a szerző nem vállal felelősséget semmilyen felmerülő adatvesztésért vagy bekövetkezett kárért.
 \n\nSegítség: menü "súgó, ?"
 \nFelhasználói kézikönyv: Könyv ikon a súgó ablakban

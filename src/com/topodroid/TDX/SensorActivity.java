@@ -73,6 +73,7 @@ public class SensorActivity extends Activity
     TDandroid.setScreenOrientation( this );
 
     setContentView(R.layout.sensor_activity);
+    setTitle(R.string.sensor_title);
     // mApp = (TopoDroidApp) getApplication();
     mSensorManager = (SensorManager)getSystemService( Context.SENSOR_SERVICE );
 

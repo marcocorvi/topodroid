@@ -551,6 +551,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="section_point_not_allowed">Profilpunkt nicht erlaubt</string>
   <string name="section_line_not_allowed">Profillinie nicht erlaubt</string>
   <!-- UNUSED string name="sensor">Sensor</string -->
+  <!-- TODO string name="sensor_title">Add sensor measurement</string -->
   <string name="sensor_gravity">Schwerkraft</string>
   <!-- UNUSED string name="sensor_humidity">Luftfeuchtigkeit</string -->
   <string name="sensor_light">Licht</string>
@@ -755,6 +756,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="button_direction">Azimut/Neigung</string -->
   <!-- UNUSED string name="button_azimuth">Azimut</string -->
   <string name="button_plot">Skizze</string>
+  <!-- TODO string name="button_less">Less</string -->
   <string name="button_more">Mehr</string>
   <string name="button_move">Verschieben</string>
   <string name="button_next">Nächste</string>

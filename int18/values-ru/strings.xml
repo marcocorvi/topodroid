@@ -598,6 +598,7 @@
     <string name="section_line_not_allowed">точка сечения недопустима</string>
 
     <!-- UNUSED string name="sensor">датчик</string -->
+    <!-- TODO string name="sensor_title">Add sensor measurement</string -->
     <string name="sensor_gravity">ускорение</string>
     <!-- UNUSED string name="sensor_humidity">влажность</string -->
     <string name="sensor_light">освещенность</string>
@@ -814,6 +815,7 @@
     <!-- UNUESD string name="button_direction">Азимут/угол</string -->
     <!-- UNUSED string name="button_azimuth">Азимут</string -->
     <string name="button_plot"    >Абрис</string>
+    <!-- TODO string name="button_less">Less</string -->
     <string name="button_more"    >Ещё</string>
     <string name="button_move"    >Переместить</string>
     <string name="button_next"    >Далее</string>

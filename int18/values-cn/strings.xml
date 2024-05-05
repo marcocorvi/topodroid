@@ -600,6 +600,7 @@
     <string name="section_line_not_allowed">截面线不被允许</string>
 
     <!-- UNUSED string name="sensor">sensor</string -->
+    <!-- TODO string name="sensor_title">Add sensor measurement</string -->
     <string name="sensor_gravity">重力</string>
     <!-- UNUSED string name="sensor_humidity">humidity</string -->
     <string name="sensor_light">光线</string>
@@ -817,6 +818,7 @@
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >草图</string>
+    <!-- TODO string name="button_less">Less</string -->
     <string name="button_more"    >更多</string>
     <string name="button_move"    >移动</string>
     <string name="button_next"    >下一步</string>

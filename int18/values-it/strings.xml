@@ -596,6 +596,7 @@
     <string name="section_line_not_allowed">Linea sezione non permessa</string>
 
     <!-- UNUSED string name="sensor">sensore</string -->
+    <!-- TODO string name="sensor_title">Add sensor measurement</string -->
     <string name="sensor_gravity">gravità</string>
     <!-- UNUSED string name="sensor_humidity">umidità</string -->
     <string name="sensor_light">luce</string>
@@ -813,6 +814,7 @@
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Disegno</string>
+    <!-- TODO string name="button_less">Less</string -->_
     <string name="button_more"    >Altro</string>
     <string name="button_move"    >Muovi</string>
     <string name="button_next"    >Prossimo</string>

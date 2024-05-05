@@ -561,6 +561,7 @@ no campo abaixo e aperte o botão.
   <string name="section_point_not_allowed">ponto tipo corte não permitido</string>
   <string name="section_line_not_allowed">linha tipo corte não permitida</string>
   <!-- UNUSED string name="sensor">sensor</string -->
+  <string name="sensor_title">Criar medida com sensor</string>
   <string name="sensor_gravity">gravidade</string>
   <!-- UNUSED string name="sensor_humidity">humidade</string -->
   <string name="sensor_light">luz</string>
@@ -764,6 +765,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="button_direction">Azimute/Clinômetro</string -->
   <!-- UNUSED string name="button_azimuth">Azimute</string -->
   <string name="button_plot">Croqui</string>
+  <string name="button_less">Menos</string>
   <string name="button_more">Mais</string>
   <string name="button_move">Mover</string>
   <string name="button_next">Próximo</string>
@@ -871,11 +873,11 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="length">Comprimento [m]</string -->
   <!-- UNUSED string name="azimuth">Azimute [deg]</string -->
   <!-- UNUSED string name="clino">Inclinação [deg]</string -->
-    <!-- TODO string name="bt_alias_title">Bluetooth aliases</string -->
-    <!-- TODO string name="hint_bt_alias">BT alias</string -->
-    <!-- TODO string name="hint_bt_code">Device code</string -->
-    <!-- TODO string name="bt_alias_missing">BT alias missing</string -->
-    <!-- TODO string name="bt_code_missing">Device code missing</string -->
+  <string name="bt_alias_title">ID Bluetooth</string>
+  <string name="hint_bt_alias">ID BT</string>
+  <string name="hint_bt_code">Código do dispositivo</string>
+  <string name="bt_alias_missing">ID BT faltando</string>
+  <string name="bt_code_missing">Código do dispositivo faltando</string>
 
   <string name="hint_cellsize">tamanho célula</string>
   <string name="hint_cwd">pasta de trabalho</string>
@@ -1227,7 +1229,7 @@ no campo abaixo e aperte o botão.
   <string name="title_settings_log">Config log</string>
   <string name="title_shift">Deslocar</string>
   <string name="title_shot_delete">Apagar medida?</string>
-  <string name="title_sensor_edit">Sensor</string>
+  <string name="title_sensor_edit">Edição de medida de sensor</string>
   <string name="title_split">Dividir croqui</string>
   <string name="title_stats">Estatísticas croqui</string>
   <!-- UNUSED string name="title_step">Passo</string -->
@@ -1273,7 +1275,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_cat_geek">ESPECIAIS</string>
   <string name="pref_cat_sketch">CROQUI 3D</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
-  <string name="pref_locale_title">Idioma</string>
+  <string name="pref_locale_title">Idioma app</string>
   <string name="pref_locale_summary">Idioma do aplicativo</string>
   <string name="pref_orientation_title">Orient tela</string>
   <string name="pref_orientation_summary">Orientação da tela do aplicativo</string>
@@ -1289,13 +1291,13 @@ no campo abaixo e aperte o botão.
   <string name="pref_mkeyboard_summary">Habilitar teclados especiais do TopoDroidX</string>
   <string name="pref_no_cursor_title">Sem cursor</string>
   <string name="pref_no_cursor_summary">Desabilitar o cursor do teclado especial do TopoDroidX</string>
-  <string name="pref_local_help_title">Manual traduzido</string>
-  <string name="pref_local_help_summary">Tradução do manual [conexão de internet necessária]</string>
+  <string name="pref_local_help_title">Idioma manual</string>
+  <string name="pref_local_help_summary">Idioma do manual do TopoDroidX [conexão de internet necessária]</string>
   <!-- UNUSED string name="pref_cosurvey_title">Topo colaborativa</string -->
   <!-- UNUSED string name="pref_cosurvey_summary">Habilitar topo colaborativa</string -->
   <string name="pref_import_datamode_title">Form dado importação</string>
   <string name="pref_import_datamode_summary">Formato de dados para importação de topos</string>
-  <string name="pref_therion_config_title">Comando config Therion</string>
+  <string name="pref_therion_config_title">Criar arq config Therion</string>
   <string name="pref_therion_config_summary">Criar arquivo thconfig simples com comandos de configuração Therion</string>
   <string name="pref_therion_maps_title">Mapa Therion início</string>
   <string name="pref_therion_maps_summary">Mapas Therion antes dos dados da topo</string>
@@ -1371,7 +1373,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_svg_grid_summary">Incluir grade no arquivo SVG/XVI exportado</string>
   <string name="pref_svg_roundtrip_title">Circuito SVG</string>
   <string name="pref_svg_roundtrip_summary">Exportar SVG preparado para circuito</string>
-  <string name="pref_svg_splays_title">Medidas auxiliares SVG</string>
+  <string name="pref_svg_splays_title">Med aux SVG</string>
   <string name="pref_svg_splays_summary">Incluir medidas auxiliares nos arquivos SVG exportados</string>
   <!-- UNUSED string name="pref_svg_in_html_title">SVG em HTML</string -->
   <!-- UNUSED string name="pref_svg_in_html_summary">Incorporar arquivo SVG exportado em HTML</string -->
@@ -1385,8 +1387,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_svg_gridstroke_summary">Espessura das linhas da grade nos arquivos SVG exportados</string>
   <string name="pref_svg_shotstroke_title">Espess medida</string>
   <string name="pref_svg_shotstroke_summary">Espessura das linhas de medidas nos arquivos SVG exportados</string>
-  <string name="pref_svg_linedirstroke_title">Espess orient linha</string>
-  <string name="pref_svg_linedirstroke_summary">ESpessura das orientações de linha nos arquivos SVG exportados</string>
+  <string name="pref_svg_linedirstroke_title">Tam orient linha</string>
+  <string name="pref_svg_linedirstroke_summary">Tamanho da indicação de orientações de linha nos arquivos SVG exportados</string>
   <string name="pref_svg_line_dir_title">Orient linha</string>
   <string name="pref_svg_line_dir_summary">Incluir indicadores de orientação de linha nos arquivos SVG exportados</string>
   <string name="pref_svg_stationsize_title">Tam base</string>
@@ -1397,17 +1399,17 @@ no campo abaixo e aperte o botão.
   <string name="pref_kml_stations_summary">Incluir bases nos arquivos KML/GeoJSON/ShapeFile exportados</string>
   <string name="pref_kml_splays_title">Incluir aux</string>
   <string name="pref_kml_splays_summary">Incluir medidas auxiliares nos arquivos KML/GeoJSON/ShapeFile exportados</string>
-  <string name="pref_csv_raw_title">CSV bruto</string>
-  <string name="pref_csv_raw_summary">Exportar dados brutos no CSV</string>
+  <string name="pref_csv_raw_title">CSV completo</string>
+  <string name="pref_csv_raw_summary">Exportar dados completos no CSV</string>
   <string name="pref_csv_sep_title">Separ campo CSV</string>
   <string name="pref_csv_sep_summary">Separador de campos nos arquivos CSV exportados</string>
-  <string name="pref_csv_eol_title">Separ linha CSV</string>
-  <string name="pref_csv_eol_summary">Separador de linhas nos arquivos CSV exportados</string>
+  <string name="pref_csv_eol_title">Final linha CSV</string>
+  <string name="pref_csv_eol_summary">Caracter usado para marcar final de linhas nos arquivos CSV exportados</string>
   <string name="pref_gpx_single_track_title">GPX track único</string>
   <string name="pref_gpx_single_track_summary">Exportar topos do projeto como um track GPX único</string>
   <string name="pref_zip_share_category_title">Cat compart zip</string>
   <string name="pref_zip_share_category_summary">Incluir categoria no pedido de compartilhamento de arquivo zip</string>
-  <!-- TODO string name="pref_bt_alias_title">BT aliases</string -->
+  <string name="pref_bt_alias_title">IDs BT</string>
   <string name="pref_sock_type_title">Soquete DistoX</string>
   <string name="pref_sock_type_summary">Tipo de soquete bluetooth para DistoX</string>
   <!-- UNUSED string name="pref_device_type_title">Tipo de DistoX</string -->
@@ -1517,13 +1519,13 @@ no campo abaixo e aperte o botão.
   <string name="pref_dip_thr_title">Toler merg magnético</string>
   <string name="pref_dip_thr_summary">Tolerância de diferença de valores de mergulho do campo magnético em relação a seu valor médio acima do qual a medida será considerada pouco confiável (somente DistoX2). Unidade: graus.</string>
   <string name="pref_sibling_thr_title">Lim irmã</string>
-  <string name="pref_sibling_thr_summary">Diferença percentual máxima nos valores de visadas acima do qual são consideradas irmãs "ruins" [%]</string>
+  <string name="pref_sibling_thr_summary">Diferença percentual máxima entre os valores de visadas acima do qual são consideradas irmãs "ruins" [%]</string>
   <string name="pref_leg_title">Toler visadas</string>
   <string name="pref_leg_summary">Tolerância entre as medições de uma visada</string>
   <string name="pref_max_shot_title">Compr máx medida</string>
   <string name="pref_max_shot_summary">Comprimento máximo de medidas [m]</string>
-  <string name="pref_min_leg_title">Compr mín medida</string>
-  <string name="pref_min_leg_summary">Comprimeto mínimo de medidas [m]</string>
+  <string name="pref_min_leg_title">Compr mín visada</string>
+  <string name="pref_min_leg_summary">Comprimeto mínimo de visadas [m]</string>
   <string name="pref_backsight_title">Contra visada</string>
   <string name="pref_backsight_summary">Campos de contra azimute e inclinação invertida para inserção manual de medida</string>
   <string name="pref_backshot_title">Contra visada DistoX</string>
@@ -1564,7 +1566,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="pref_dxf_scale_summary">Fator de escala croqui DXF</string -->
   <string name="pref_dxf_blocks_title">Final aux</string>
   <string name="pref_dxf_blocks_summary">Marcar final de medida auxiliar DXF com cruzes</string>
-  <string name="pref_shp_georef_title">Croqui georeferenciado</string>
+  <string name="pref_shp_georef_title">Croqui georreferenciado</string>
   <string name="pref_shp_georef_summary">Croqui exportado em WGS84 long-lat</string>
   <string name="pref_thumbnail_title">Tam miniatura</string>
   <string name="pref_thumbnail_summary">Tamanho das fotos miniatura</string>
@@ -1614,17 +1616,17 @@ no campo abaixo e aperte o botão.
   <string name="pref_iter_summary">Quantidade máxima de iterações no cálculo dos coeficientes</string>
   <string name="pref_label_size_title">Tam rótulo</string>
   <string name="pref_label_size_summary">Tamanho dos textos dos rótulos</string>
-  <string name="pref_slope_lside_title">Lado linha desnível</string>
-  <string name="pref_slope_lside_summary">Lado padrão das linhas de desnível</string>
+  <string name="pref_slope_lside_title">Tam desnível</string>
+  <string name="pref_slope_lside_summary">Tamanho padrão do desnível em linhas tipo desnível</string>
   <string name="pref_arrow_length_title">Tam marca corte</string>
   <string name="pref_arrow_length_message">Tamanho da marca indicando direção do corte</string>
   <string name="pref_dot_radius_title">Raio ponto verde</string>
   <string name="pref_dot_radius_message">Raio dos pontos verdes no modo "edição" da tela de desenho</string>
-  <string name="pref_line_thickness_title">Espessura linha</string>
+  <string name="pref_line_thickness_title">Espess linha</string>
   <string name="pref_line_thickness_summary">Espessura das linhas no desenho</string>
   <string name="pref_line_units_title">Escala linha</string>
   <string name="pref_line_units_summary">Escala para desenho da simbologia das linhas</string>
-  <string name="pref_line_close_title">Fechar linh fecháveis</string>
+  <string name="pref_line_close_title">Fechar linhas fecháveis</string>
   <string name="pref_line_close_summary">Fechar linhas cujos tipos sejam fecháveis</string>
   <string name="pref_linesnap_title">Colar linha/área</string>
   <string name="pref_linesnap_summary">Habilitar opções de atração e união de linhas/áreas</string>
@@ -1669,7 +1671,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_th2_scale_title">Escala Therion</string>
   <string name="pref_th2_scale_summary">Escala da exportação de arquivos th2/xvi</string>
   <string name="pref_th2_xvi_title">Imagem XVI</string>
-  <string name="pref_th2_xvi_summary">Incluir um comando xTherion no arquivo th2 para ler a imagem XVI do croqui</string>
+  <string name="pref_th2_xvi_summary">Incluir chamada no arquivo th2 para a imagem XVI</string>
   <string name="pref_autoStations_title">Bases</string>
   <string name="pref_autoStations_summary">Incluir automaticamente bases nos arquivos Therion (th2)</string>
   <string name="pref_auto_xsections_title">Corte ao exportar</string>
@@ -1716,9 +1718,9 @@ no campo abaixo e aperte o botão.
   <string name="pref_zoom_controls_summary">Controle do zoom em telas multitoque</string>
   <string name="pref_side_drag_title">Arrastar canto</string>
   <string name="pref_side_drag_summary">Habilitar o arrasto do croqui pelos cantos na tela de desenho</string>
-  <string name="pref_unit_grid_title">Unidade grade croqui</string>
-  <string name="pref_unit_grid_summary">Tamanho das células da grade do croqui</string>
-  <string name="pref_unit_measure_title">Unidade régua</string>
+  <string name="pref_unit_grid_title">Grade croqui</string>
+  <string name="pref_unit_grid_summary">Unidade usada para células da grade do croqui</string>
+  <string name="pref_unit_measure_title">Régua</string>
   <string name="pref_unit_measure_summary">Unidade de comprimento da ferramenta de medição</string>
   <!-- UNUSED string name="pref_recent_nr_title">Número símbolos recentes</string -->
   <!-- UNUSED string name="pref_recent_nr_summary">Número de símbolos mais recentes na tela de seleção</string -->
@@ -1726,9 +1728,9 @@ no campo abaixo e aperte o botão.
   <string name="pref_area_border_summary">Visibilidade padrão das bordas de áreas</string>
   <string name="pref_auto_section_pt_title">Ponto corte</string>
   <string name="pref_auto_section_pt_summary">Criar automaticamente ponto de corte atrelado a cada novo corte indicando posição onde apresentar o croqui do corte</string>
-  <string name="pref_unit_length_title">Unidade distância</string>
+  <string name="pref_unit_length_title">Distância</string>
   <string name="pref_unit_length_summary">Unidade para visualização de distâncias</string>
-  <string name="pref_unit_angle_title">Unidade ângulo</string>
+  <string name="pref_unit_angle_title">Ângulo</string>
   <string name="pref_unit_angle_summary">Unidade para visualização de ângulos</string>
   <string name="pref_unit_location_title">Unidade coordenada</string>
   <string name="pref_unit_location_summary">Unidade para visualização de coordenadas</string>
@@ -1807,7 +1809,7 @@ no campo abaixo e aperte o botão.
   <string name="perm_microphone">\nMicrofone</string>
   <string name="welcome_db_version">Banco de dados ver. %1$d, %2$d</string>
   <string name="welcome_text">
-\nTopoDroidX é um aplicativo Android open source para mapeamento de cavernas com DistoX, BRIC4 e SAP5.
+\nTopoDroidX é um aplicativo Android open source para mapeamento de cavernas com DistoX DistoX2, DistoBLE, BRIC4, BRIC5, SAP5 e SAP6.
 \n\nNenhuma garantia: utilizando o aplicativo, você concorda com o fato de que o autor não é responsável por qualquer perda de dados ou quaisquer outros danos.
 \n\nAjuda: menu "Ajuda"
 \nPágina principal: botão MENU
