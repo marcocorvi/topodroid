@@ -1519,7 +1519,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_dip_thr_title">Toler merg magnético</string>
   <string name="pref_dip_thr_summary">Tolerância de diferença de valores de mergulho do campo magnético em relação a seu valor médio acima do qual a medida será considerada pouco confiável (somente DistoX2). Unidade: graus.</string>
   <string name="pref_sibling_thr_title">Lim irmã</string>
-  <string name="pref_sibling_thr_summary">Diferença percentual máxima nos valores de visadas acima do qual são consideradas irmãs "ruins" [%]</string>
+  <string name="pref_sibling_thr_summary">Diferença percentual máxima entre os valores de visadas acima do qual são consideradas irmãs "ruins" [%]</string>
   <string name="pref_leg_title">Toler visadas</string>
   <string name="pref_leg_summary">Tolerância entre as medições de uma visada</string>
   <string name="pref_max_shot_title">Compr máx medida</string>
