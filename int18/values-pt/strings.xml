@@ -1474,14 +1474,14 @@ no campo abaixo e aperte o botão.
   <string name="pref_pt_color_map_summary">Mapa de cores do PocketTopo (importação PocketTopo)</string>
   <string name="pref_text_size_title">Tam texto</string>
   <string name="pref_text_size_summary">Tamanho do texto dos itens de lista</string>
-  <string name="pref_closeness_title">Raio de seleção</string>
+  <string name="pref_closeness_title">Raio seleção</string>
   <string name="pref_closeness_message">Raio da ferramenta de seleção do croqui</string>
   <string name="pref_eraseness_title">Tam borracha</string>
   <string name="pref_eraseness_message">Raio da ferramenta borracha</string>
   <string name="pref_min_shift_title">Sensib desloc</string>
   <string name="pref_min_shift_message">Sensibilidade do deslocamento [pxl/passo]</string>
   <string name="pref_pointing_title">Desloc máx selec</string>
-  <string name="pref_pointing_message">Máximo deslocamento entre toque e destoque para selecionar</string>
+  <string name="pref_pointing_message">Deslocamento máximo entre início e fim de um toque na seleção</string>
   <string name="pref_dash_splay_title">Tracej aux</string>
   <string name="pref_dash_splay_message">Tracejamento de medidas auxiliares na planta baixa, nos perfis ou em ambos</string>
   <string name="pref_vert_splay_title">Lim tracej clino</string>
