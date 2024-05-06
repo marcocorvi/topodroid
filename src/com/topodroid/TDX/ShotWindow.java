@@ -1643,24 +1643,26 @@ public class ShotWindow extends Activity
           blk.setExtend( ExtendType.EXTEND_LEFT, ExtendType.STRETCH_NONE );
           mApp_mData.updateShotExtend( blk.mId, TDInstance.sid, ExtendType.EXTEND_LEFT, ExtendType.STRETCH_NONE );
         }
+        mDataAdapter.updateSelectBlocksView();
         clearMultiSelect( );
-        updateDisplay();
+        // updateDisplay(); // REPLACED
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // FLIP
         for ( DBlock blk : mDataAdapter.mSelect ) {
           if ( blk.flipExtendAndStretch() ) {
             mApp_mData.updateShotExtend( blk.mId, TDInstance.sid, blk.getIntExtend(), blk.getStretch() );
           }
         }
+        mDataAdapter.updateSelectBlocksView();
         clearMultiSelect( );
-        updateDisplay(); // to see the change in the list immediately
+        // updateDisplay(); // REPLACED
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // RIGHT reset stretch
         for ( DBlock blk : mDataAdapter.mSelect ) {
           blk.setExtend( ExtendType.EXTEND_RIGHT, ExtendType.STRETCH_NONE );
           mApp_mData.updateShotExtend( blk.mId, TDInstance.sid, ExtendType.EXTEND_RIGHT, ExtendType.STRETCH_NONE );
         }
+        mDataAdapter.updateSelectBlocksView();
         clearMultiSelect( );
-        updateDisplay();
-        // mList.invalidate(); // NOTE not enough to see the change in the list immediately
+        // updateDisplay(); REPLACED
       } else if ( TDLevel.overExpert && kf < mNrButtonF && b == mButtonF[kf++] ) { // MULTISHOT
         // ( blks == null || blks.size() == 0 ) cannot happen // TDUtil.isEmpty(blks)
         (new MultishotDialog( mActivity, this, mDataAdapter.mSelect )).show();
@@ -1822,7 +1824,7 @@ public class ShotWindow extends Activity
       }
     }
     clearMultiSelect( );
-    updateDisplay( ); 
+    // updateDisplay( ); REPLACED
   }
 
   // ------------------------------------------------------------------
@@ -2288,7 +2290,9 @@ public class ShotWindow extends Activity
         b.setBlockName( from, to );
         updateShotName( b.mId, from, to );
       }
-      updateDisplay();
+      // updateDisplay();
+      mDataAdapter.updateSelectBlocksView(); // REPLACED updateDisplay
+      clearMultiSelect();
       return;
     }
 
@@ -2308,11 +2312,12 @@ public class ShotWindow extends Activity
         b.setBlockName( from, to );
         updateShotName( b.mId, from, to );
       }
-      updateDisplay();
+      // updateDisplay();
+      mDataAdapter.updateSelectBlocksView(); // REPLACED updateDisplay
     } else {
       TDToast.makeBad( R.string.no_leg_first );
     }
-    clearMultiSelect( );
+    clearMultiSelect( ); // can move inside ?
   }
 
   void swapBlocksName( List< DBlock > blks )  // SWAP SELECTED BLOCKS STATIONS
@@ -2352,7 +2357,9 @@ public class ShotWindow extends Activity
       checkSiblings( blk, from, to, blk.mLength, blk.mBearing, blk.mClino );
     }
     mApp_mData.updateShotsName( blks, TDInstance.sid );
-    updateDisplay();
+    // updateDisplay();
+    mDataAdapter.updateSelectBlocksView(); // REPLACED updateDisplay
+    mDataAdapter.clearMultiSelect();
   }
 
   /** bedding: 

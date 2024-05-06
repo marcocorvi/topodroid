@@ -780,6 +780,23 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
 
   @Override
   public int getItemViewType(int pos) { return AdapterView.ITEM_VIEW_TYPE_IGNORE; }
+
+  void updateSelectBlocksView()
+  {
+    for ( DBlock b : mSelect ) {
+      View v = b.getView();
+      // TDLog.v( "DBlock adapter " + b.mId + " get type: view is " + ((v == null)? "null" : "non-null") );
+      if ( v != null ) {
+        ViewHolder holder = (ViewHolder) v.getTag();
+        if ( holder != null ) {
+          // TDLog.v( "holder set view text <" + b.mFrom + "> <" + b.mTo + ">" );
+          holder.setViewText( b, this );
+        }
+        v.setVisibility( b.getVisible() );
+        v.invalidate();
+      }
+    }
+  }
  
   /** called by ShotWindow::updateShot()
    * @param blk_id  block id
