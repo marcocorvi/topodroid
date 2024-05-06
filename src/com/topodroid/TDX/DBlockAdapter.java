@@ -285,6 +285,14 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       b.mMultiSelected = false;
     }
     mSelect.clear();
+    lastPosAdd = -1;
+    lastPosRemove = -1;
+  }
+
+  @Override
+  public void clear() {
+    super.clear();
+    clearMultiSelect();
   }
 
   /** clear the search-result
