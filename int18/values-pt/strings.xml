@@ -1316,7 +1316,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_splay_station_title">Reatribuir base aux</string>
   <string name="pref_splay_station_summary">Manter medidas auxiliares relacionadas ao renumerar</string>
   <string name="pref_splay_group_title">Renomear grupo aux</string>
-  <string name="pref_splay_group_summary">renomear em grupo atuar somente nas medidas auxiliares subsequentes e não nas anteriores</string>
+  <string name="pref_splay_group_summary">Renomear em grupo atuar somente nas medidas auxiliares subsequentes e não nas anteriores</string>
   <string name="pref_with_levels_title">Camadas</string>
   <string name="pref_with_levels_summary">Criar camadas (layers) nos arquivos exportados</string>
   <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->
@@ -1485,15 +1485,15 @@ no campo abaixo e aperte o botão.
   <string name="pref_dash_splay_title">Tracej aux</string>
   <string name="pref_dash_splay_message">Tracejamento de medidas auxiliares na planta baixa, nos perfis ou em ambos</string>
   <string name="pref_vert_splay_title">Lim tracej clino</string>
-  <string name="pref_vert_splay_message">Acima desta inclinação as medidas auxiliares serão tracejadas</string>
+  <string name="pref_vert_splay_message">Acima desta inclinação as medidas auxiliares serão tracejadas nas plantas baixas</string>
   <string name="pref_horiz_splay_title">Lim tracej azimute</string>
   <string name="pref_horiz_splay_message">Medidas auxiliares divergindo do azimute da visada acima deste limite serão tracejadas nos perfis</string>
   <string name="pref_section_splay_title">Lim tracej ângulo</string>
-  <string name="pref_section_splay_message">Abaixo deste ângulo com o plano do corte, a medida auxiliar será tracejada</string>
+  <string name="pref_section_splay_message">Abaixo deste ângulo com o plano do corte, a medida auxiliar será tracejada nos cortes</string>
   <string name="pref_splay_dash_color_title">Cor aux tracej</string>
-  <string name="pref_splay_dash_color_summary">Cor das medidas auxiliares quando tracejadas</string>
+  <string name="pref_splay_dash_color_summary">Cor das medidas auxiliares tracejadas</string>
   <string name="pref_splay_dot_color_title">Cor aux ponth</string>
-  <string name="pref_splay_dot_color_summary">Cor das medidas auxiliares quando pontilhadas</string>
+  <string name="pref_splay_dot_color_summary">Cor das medidas auxiliares pontilhadas</string>
   <string name="pref_splay_latest_color_title">Cor aux recente</string>
   <string name="pref_splay_latest_color_summary">Cor das medidas auxiliares recentes</string>
   <!-- UNUSED string name="pref_data_backup_title">Exportação automática</string -->
@@ -1695,7 +1695,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_diving_mode_title">Modo mergulho</string>
   <string name="pref_diving_mode_summary">Habilitar modo mergulho</string>
   <string name="pref_splay_classes_title">Classes aux</string>
-  <string name="pref_splay_classes_summary">Habilitar classes e coloração de medidas auxiliares</string>
+  <string name="pref_splay_classes_summary">Habilitar classes de medidas auxiliares</string>
   <string name="pref_splay_color_title">Cores aux</string>
   <string name="pref_splay_color_summary">Habilitar coloração de medidas auxiliares</string>
   <!-- UNUSED string name="pref_splay_as_dot_title">Splay endpoint</string -->
