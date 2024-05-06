@@ -159,7 +159,7 @@ public class CBlockAdapter extends ArrayAdapter< CBlock >
       Rect bounds = new Rect();
       String text = id + group + error + data;
       paint.getTextBounds( text, 0, text.length(), bounds );
-      layout.setMinimumWidth( (int)( bounds.right * 1.2f) ); // 60 = 4 * marginh
+      layout.setMinimumWidth( (int)( (bounds.right-bounds.left) * 1.6f) ); // 60 = 4 * marginh
 
       // tw.setWidth( (int)(TopoDroidApp.mDisplayWidth * 1.5) );
 

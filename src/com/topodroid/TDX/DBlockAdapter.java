@@ -53,8 +53,9 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   private final boolean diving;
   private SearchResult mSearch;
 
-  private int lastPosAdd;
-  private int lastPosRemove;
+  private int lastPosAdd    = -1;
+  private int lastPosRemove = -1;
+  private DBlock lastMultiselectedBlock = null;
 
   /** cstr
    * @param ctx     context
@@ -77,8 +78,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     // TDLog.v( "DBlock Adapter, diving " + diving );
     mSearch = new SearchResult();
 
-    lastPosAdd = -1;
-    lastPosRemove = -1;
+    // lastPosAdd = -1;
+    // lastPosRemove = -1;
   }
 
   /** search the data-blocks with a specified station 
@@ -182,6 +183,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
           int newPos = pos;
           if ( mSelect.remove( b ) ) {
             b.mMultiSelected = false;
+            // TDLog.v("last MS block color transp.: id " + b.mId );
             b.setBackgroundColor( TDColor.TRANSPARENT );
             // TDLog.v("multiselect remove " + b.mFrom + " " + b.mTo + " " + mSelect.size() );
             if ( long_tap && ( lastPosRemove > -1 ) ) { // continue to de-select blocks all way to the last de-selected item
@@ -224,14 +226,32 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
           lastPosAdd = pos;
           lastPosRemove = -1;
         }
+        lastMultiselectedBlock = b;
       }
     // } else {
       // TDLog.v( "adapter multiselect. null blk. size " + mSelect.size() );
     }
    
-    return ( mSelect.size() > 0 );
+    if ( mSelect.size() > 0 ) {
+      return true;
+    } else {
+      clearLastMultiselected();
+      return false;
+    }
   }
 
+  /** clear multiselected status
+   */
+  private void clearLastMultiselected()
+  {
+    lastPosAdd    = -1;
+    lastPosRemove = -1;
+    lastMultiselectedBlock = null;
+  }
+
+  /** remove a block from the multiselection set
+   * @param pos   block position
+   */
   private void removeItem(int pos) {
     DBlock b = (DBlock)( getItem( pos ) );
     if ( ! b.mMultiSelected ) return;
@@ -240,6 +260,9 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     b.setBackgroundColor( TDColor.TRANSPARENT );
   }
 
+  /** add a block to the multiselection set
+   * @param pos   block position
+   */
   private void addItem(int pos) {
     DBlock b = (DBlock) getItem(pos);
     if (b.mMultiSelected) return;
@@ -256,6 +279,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
    */
   void clearMultiSelect() 
   { 
+    clearLastMultiselected();
     for ( DBlock b : mSelect ) {
       b.setBackgroundColor( TDColor.TRANSPARENT );
       b.mMultiSelected = false;
@@ -614,9 +638,15 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
    {
       if ( b == null ) return;
       int col = b.getColorByType();
-      tvFrom.setTextColor( ( mParent.isCurrentStationName( b.mFrom ) )? TDColor.LIGHT_GREEN : col );
-      tvTo.setTextColor(   ( mParent.isCurrentStationName( b.mTo   ) )? TDColor.LIGHT_GREEN : col );
-      tvLength.setTextColor( col );
+      if ( b == lastMultiselectedBlock ) {
+        TDLog.v("Block " + b.mId + " is last MS " + b.mMultiSelected );
+        tvFrom.setTextColor( TDColor.LIGHT_YELLOW );
+        tvTo.setTextColor( TDColor.LIGHT_YELLOW );
+      } else {
+        tvFrom.setTextColor( ( mParent.isCurrentStationName( b.mFrom ) )? TDColor.LIGHT_GREEN : col );
+        tvTo.setTextColor(   ( mParent.isCurrentStationName( b.mTo   ) )? TDColor.LIGHT_GREEN : col );
+        tvLength.setTextColor( col );
+      }
 
       if (b.mMultiSelected ) {
         b.setBackgroundColor( TDColor.GRID );

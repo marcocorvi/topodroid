@@ -1679,7 +1679,8 @@ public class ShotWindow extends Activity
         doMultiCopy();
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // CANCEL
         clearMultiSelect( );
-        mList.invalidate();
+        updateDisplay();
+        // mList.invalidate();
       }
     }
   }
@@ -1764,7 +1765,8 @@ public class ShotWindow extends Activity
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
           clearMultiSelect( );
-          mList.invalidate();
+          updateDisplay();
+          // mList.invalidate();
         } }
     );
   }

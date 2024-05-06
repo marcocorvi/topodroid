@@ -44,6 +44,7 @@ public class TDColor
   public static final int LIGHT_GRAY   = 0xffcccccc;
   public static final int DARK_GRID    = 0x99666666;
   public static final int GRID         = 0x99999999;
+  public static final int GRID_MS      = 0x99ff9999;
   public static final int LIGHT_GRID   = 0x99cccccc;
   public static final int REDDISH      = 0xffff66cc;
   public static final int FULL_RED     = 0xffff0000;
@@ -96,7 +97,8 @@ public class TDColor
   public static final int SYMBOL_TAB   = 0xff80cbc4;
   public static final int SYMBOL_ON    = LIGHT_BLUE;
 
-  public static final int TRANSPARENT  = 0x00000000;
+  public static final int TRANSPARENT    = 0x00000000;
+  public static final int TRANSPARENT_MS = 0x99ff3333;
 
   public static final int SPLAY_LIGHT   = BLUE;
   public static final int SPLAY_NORMAL  = MID_BLUE;
