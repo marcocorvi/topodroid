@@ -300,15 +300,16 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     }
   }
 
-  // /** remove all items from the list - not necessary
-  //  */
-  // @Override
-  // public void clear() {
-  //   super.clear();
-  //   mSelect.clear();
-  //   mSearch.reset( null, false );
-  //   TDLog.v("DBlockAdapter :: CLEAR");
-  // }
+  /** remove all items from the list, and reset the state variables
+   */
+  @Override
+  public void clear() {
+    super.clear();
+    clearLastMultiselected();
+    mSelect.clear();
+    mSearch.reset( null, false );
+    TDLog.v("DBlockAdapter :: CLEAR");
+  }
 
   /** clear the search-result
    */
