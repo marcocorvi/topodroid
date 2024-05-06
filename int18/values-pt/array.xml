@@ -68,7 +68,7 @@
     <item name="normal">Normal</item>
     <item name="weighted">Proporcional</item>
     <item name="selective">Seletiva</item>
-    <item name="triangles">Triângulos</item>
+    <item name="triangles">Por triângulos</item>
   </string-array>
   <string-array name="survexEol">
     <item name="lf">Linux</item>
