@@ -279,21 +279,36 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
    */
   void clearMultiSelect() 
   { 
+    DBlock blk = lastMultiselectedBlock;
     clearLastMultiselected();
     for ( DBlock b : mSelect ) {
-      b.setBackgroundColor( TDColor.TRANSPARENT );
       b.mMultiSelected = false;
+      b.setBackgroundColor( TDColor.TRANSPARENT );
     }
     mSelect.clear();
-    lastPosAdd = -1;
-    lastPosRemove = -1;
+    if ( blk != null ) {
+      TDLog.v("Last MS block " + blk.mId );
+      // blk.setBackgroundColor( TDColor.TRANSPARENT );
+      View v = blk.getView();
+      if ( v != null ) {
+        TextView tvFrom = (TextView) v.findViewById( R.id.from );
+        TextView tvTo   = (TextView) v.findViewById( R.id.to );
+        int col = blk.getColorByType( );
+        tvFrom.setTextColor( col );
+        tvTo.setTextColor( col );
+      }
+    }
   }
 
-  @Override
-  public void clear() {
-    super.clear();
-    clearMultiSelect();
-  }
+  // /** remove all items from the list - not necessary
+  //  */
+  // @Override
+  // public void clear() {
+  //   super.clear();
+  //   mSelect.clear();
+  //   mSearch.reset( null, false );
+  //   TDLog.v("DBlockAdapter :: CLEAR");
+  // }
 
   /** clear the search-result
    */

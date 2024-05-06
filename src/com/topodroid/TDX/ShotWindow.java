@@ -1652,7 +1652,7 @@ public class ShotWindow extends Activity
           }
         }
         clearMultiSelect( );
-        updateDisplay();
+        updateDisplay(); // to see the change in the list immediately
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // RIGHT reset stretch
         for ( DBlock blk : mDataAdapter.mSelect ) {
           blk.setExtend( ExtendType.EXTEND_RIGHT, ExtendType.STRETCH_NONE );
@@ -1679,8 +1679,6 @@ public class ShotWindow extends Activity
         doMultiCopy();
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // CANCEL
         clearMultiSelect( );
-        updateDisplay();
-        // mList.invalidate();
       }
     }
   }
@@ -1765,8 +1763,6 @@ public class ShotWindow extends Activity
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
           clearMultiSelect( );
-          updateDisplay();
-          // mList.invalidate();
         } }
     );
   }
