@@ -2,8 +2,8 @@
 <!--suppress CheckTagEmptyBody -->
 <resources>
   <string-array name="bricMode">
-    <item name="prim_only">Só principais</item>
-    <item name="all">Todos</item>
+    <item name="prim_only">só principais</item>
+    <item name="all">todos</item>
     <!-- item name="no_index">Todos exceto índice</item -->
   </string-array>
   <string-array name="geoImportApp">
@@ -26,7 +26,7 @@
     <item name="view">visualização</item>
   </string-array>
   <string-array name="splayColors">
-    <item name="none">nenhuma</item>
+    <item name="none">nenhum</item>
     <item name="all">livre</item>
     <item name="palette">paleta</item>
   </string-array>
@@ -64,11 +64,11 @@
     <item name="tf">pés</item>
   </string-array>
   <string-array name="loopClosure">
-    <item name="none">Nenhuma</item>
-    <item name="normal">Normal</item>
-    <item name="weighted">Proporcional</item>
-    <item name="selective">Seletiva</item>
-    <item name="triangles">Triângulos</item>
+    <item name="none">nenhuma</item>
+    <item name="normal">normal</item>
+    <item name="weighted">proporcional</item>
+    <item name="selective">seletiva</item>
+    <item name="triangles">por triângulos</item>
   </string-array>
   <string-array name="survexEol">
     <item name="lf">Linux</item>
@@ -97,13 +97,13 @@
      <item name="delaunay">2</item>
   </string-array -->
   <string-array name="zoomCtrl">
-    <item name="0">Desligado</item>
-    <item name="1">Temporário</item>
-    <item name="2">Permanente</item>
+    <item name="0">desligado</item>
+    <item name="1">temporário</item>
+    <item name="2">permanente</item>
   </string-array>
   <string-array name="stationNames">
-    <item name="alpha">Alfanumérico</item>
-    <item name="number">Numérico</item>
+    <item name="alpha">alfanumérico</item>
+    <item name="number">numérico</item>
   </string-array>
   <!-- UNUSED string-array name="extend_name">
      <item>Left</item>
@@ -176,19 +176,19 @@
      <item name="svg">12</item>
   </string-array -->
   <string-array name="extraButtons">
-    <item name="basic">Básico</item>
-    <item name="normal">Normal</item>
-    <item name="advanced">Avançado</item>
-    <item name="expert">Especialista</item>
-    <item name="tester">Teste</item>
+    <item name="basic">básico</item>
+    <item name="normal">normal</item>
+    <item name="advanced">avançado</item>
+    <item name="expert">especialista</item>
+    <item name="tester">teste</item>
     <!-- item name="complete">Completo</item -->
   </string-array>
   <string-array name="sizeButtons">
-    <item name="small">Pequeno</item>
-    <item name="normal">Normal</item>
-    <item name="medium">Médio</item>
-    <item name="large">Grande</item>
-    <item name="huge">Enorme</item>
+    <item name="small">pequeno</item>
+    <item name="normal">normal</item>
+    <item name="medium">médio</item>
+    <item name="large">grande</item>
+    <item name="huge">extra grande</item>
   </string-array>
   <!-- UNUSED string-array name="logStream" translatable="false">
      <item name="android">System log</item>
@@ -199,13 +199,13 @@
      <item name="file">1</item>
   </string-array -->
   <string-array name="connMode">
-    <item name="batch">Sob demanda</item>
-    <item name="continuous">Contínua</item>
-    <item name="multi">Multi</item>
+    <item name="batch">sob demanda</item>
+    <item name="continuous">contínua</item>
+    <item name="multi">multi</item>
   </string-array>
   <string-array name="sockType">
-    <item name="default">Padrão</item>
-    <item name="Insecure">Inseguro</item>
+    <item name="default">padrão</item>
+    <item name="Insecure">inseguro</item>
     <!-- item name="Port">Porta</item -->
     <!-- item name="InsecurePort">Inseguro/Porta</item -->
   </string-array>
@@ -214,14 +214,14 @@
        and consistent through all the arrays on the names
   -->
   <string-array name="surveyStations">
-    <item name="no">Não</item>
-    <item name="for">Aux, visada</item>
-    <item name="back">Aux, contra</item>
-    <item name="backsight">Contra, aux, visada</item>
-    <item name="tripod">Tripé</item>
-    <item name="anomaly">Anomalia magnética</item>
-    <item name="for2">Visada, aux</item>
-    <item name="back2">Contra, aux</item>
+    <item name="no">não</item>
+    <item name="for">aux, visada</item>
+    <item name="back">aux, contra</item>
+    <item name="backsight">contra, aux, visada</item>
+    <item name="tripod">tripé</item>
+    <item name="anomaly">anomalia magnética</item>
+    <item name="for2">visada, aux</item>
+    <item name="back2">contra, aux</item>
     <item name="toporobot">TopoRobot</item>
   </string-array>
   <!--
@@ -294,9 +294,9 @@
      <item name="X310">2</item>
   </string-array -->
   <string-array name="deviceBT">
-    <item name="0">Desativado</item>
-    <item name="1">Verificar ao abrir app</item>
-    <item name="2">Ativado</item>
+    <item name="0">desativado</item>
+    <item name="1">verificar ao abrir app</item>
+    <item name="2">ativado</item>
   </string-array>
   <!-- string-array name="exportType">
      <item name="th">Therion</item>
@@ -311,16 +311,16 @@
      <item name="tro">tro</item>
   </string-array -->
   <string-array name="lineStyle">
-    <item name="none">Detalhada</item>
-    <item name="two">Normal</item>
-    <item name="three">Grosseira</item>
-    <item name="bezier">Bézier (curva)</item>
-    <item name="simplified">Simplificada</item>
+    <item name="none">detalhada</item>
+    <item name="two">normal</item>
+    <item name="three">grosseira</item>
+    <item name="bezier">curva Bézier</item>
+    <item name="simplified">simplificada</item>
   </string-array>
   <string-array name="groupBy">
     <!-- item name="distance">Distância</item -->
-    <item name="four">De 4 em 4</item>
-    <item name="only16">Só os primeiros 16</item>
+    <item name="four">de 4 em 4</item>
+    <item name="only16">só os primeiros 16</item>
   </string-array>
   <string-array name="unitLength">
     <item name="meters">metros</item>
@@ -339,19 +339,19 @@
     <item name="ddmmss">graus, minutos, segundos</item>
   </string-array>
   <string-array name="calibAlgo">
-    <item name="auto">Automático</item>
-    <item name="linear">Linear</item>
-    <item name="nonlinear">Não linear</item>
+    <item name="auto">automático</item>
+    <item name="linear">linear</item>
+    <item name="nonlinear">não linear</item>
     <!-- item name="minimum">Mínimo</item -->
   </string-array>
   <string-array name="rawCData">
-    <item name="none">Nenhum</item>
-    <item name="dec">Decimal</item>
-    <item name="hex">Hex</item>
-    <item name="decg">G Decimal</item>
-    <item name="hexg">G Hex</item>
-    <item name="decm">M Decimal</item>
-    <item name="hexm">M Hex</item>
+    <item name="none">nenhum</item>
+    <item name="dec">decimal</item>
+    <item name="hex">hex</item>
+    <item name="decg">G decimal</item>
+    <item name="hexg">G hex</item>
+    <item name="decm">M decimal</item>
+    <item name="hexm">M hex</item>
   </string-array>
   <!-- FIXME_SKETCH_3D string-array name="modelType">
      <item name="none">None</item>
@@ -365,12 +365,12 @@
   </string-array -->
   <!-- 3D VIEWER array strings -->
   <string-array name="demReduce">
-    <item name="shrink">Subamostragem</item>
-    <item name="cut">Cortar</item>
+    <item name="shrink">subamostragem</item>
+    <item name="cut">cortar</item>
   </string-array>
   <string-array name="splayUse">
-    <item name="skip">Pular</item>
-    <item name="normal">Normal</item>
-    <item name="xsection">Seção X</item>
+    <item name="skip">ignorar</item>
+    <item name="normal">normal</item>
+    <item name="xsection">corte</item>
   </string-array>
 </resources>
