@@ -1339,7 +1339,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_connect_feedback_summary">Feedback ao estabelecer conexão com dispositivo</string>
   <string name="pref_unnamed_device_title">Dispositivos sem nome</string>
   <!-- KEEP -->
-  <string name="pref_unnamed_device_summary">Habilitar menu para cadastrar nomes de dispositivos</string>
+  <string name="pref_unnamed_device_summary">Habilitar opção para cadastrar nomes de dispositivos</string>
   <!-- KEEP -->
   <string name="pref_station_prefix_title">Pref base</string>
   <string name="pref_station_prefix_summary">Incluir prefixo nos nomes das bases na exportação Compass/cSurvey/WinKarst</string>
@@ -1432,9 +1432,9 @@ no campo abaixo e aperte o botão.
   <string name="pref_second_distox_title">2 DistoX</string>
   <string name="pref_second_distox_summary">Topografando com duas Disto-X simultaneamente</string>
   <string name="pref_auto_pair_title">Pareamento automático</string>
-  <string name="pref_auto_pair_summary">Parear com o dispositivo após a busca</string>
-  <string name="pref_head_tail_title">Quantidade dados novos</string>
-  <string name="pref_head_tail_summary">Obtenha a quantidade de novos dados antes de baixá-los</string>
+  <string name="pref_auto_pair_summary">Parear automaticamente após a busca com os novos dispositivos encontrados</string>
+  <string name="pref_head_tail_title">Quant dados novos</string>
+  <string name="pref_head_tail_summary">Obter a quantidade de novos dados antes de baixá-los</string>
   <string name="pref_socket_delay_title">Atraso conexão</string>
   <string name="pref_socket_delay_summary">Tempo de espera da conexão para permitir o pareamento [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Gambiarra Z6 DistoX</string>
