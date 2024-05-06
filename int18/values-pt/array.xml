@@ -369,8 +369,8 @@
     <item name="cut">Cortar</item>
   </string-array>
   <string-array name="splayUse">
-    <item name="skip">Pular</item>
+    <item name="skip">Ignorar</item>
     <item name="normal">Normal</item>
-    <item name="xsection">Seção X</item>
+    <item name="xsection">Corte</item>
   </string-array>
 </resources>
