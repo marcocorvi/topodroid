@@ -676,36 +676,30 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         b.setBackgroundColor( TDColor.GRID );
       } else {
         if ( b.isBacksight() ) {
-          if ( b.isRecent() ) { 
-            // b.mWasRecent = true;
-            if ( b.isSplay() && ( col = b.getPaintColor() ) != 0 ) {
-              tvFrom.setBackgroundColor( col & 0x99ffffff );
-            } else {
-              tvFrom.setBackgroundColor( TDColor.GREEN );
-            }
-            tvTo.setBackgroundColor( TDColor.GREEN );
-          } else {
-            if ( b.isSplay() && ( col = b.getPaintColor() ) != 0 ) {
-              tvFrom.setBackgroundColor( col & 0x99ffffff );
-            } else {
-              tvFrom.setBackgroundColor( TDColor.BACK_YELLOW );
-            }
-            tvTo.setBackgroundColor( TDColor.BACK_YELLOW );
-          } 
-        } else {
-          if ( b.isRecent() ) { 
-            // b.mWasRecent = true;
-            if ( b.isSplay() && ( col = b.getPaintColor() ) != 0 ) {
-              tvFrom.setBackgroundColor( col & 0x99ffffff );
-            } else {
-              tvFrom.setBackgroundColor( TDColor.DARK_GREEN );
-            }
-            tvTo.setBackgroundColor( TDColor.DARK_GREEN );
-          } else {
-            if ( b.isSplay() && ( col = b.getPaintColor() ) != 0 ) {
-              tvFrom.setBackgroundColor( col & 0x99ffffff );
+          int color = b.isRecent()? TDColor.GREEN : TDColor.BACK_YELLOW;
+          tvTo.setBackgroundColor( color );
+          if ( b.isSplay() ) {
+            if ( b.failBacksplay() ) {
+              color = TDColor.VIOLET;
+            } else if ( ( col = b.getPaintColor() ) != 0 ) {
+              color = col & 0x99ffffff;
             }
           }
+          tvFrom.setBackgroundColor( color );
+        } else {
+          int color = 0;
+          if ( b.isRecent() ) {
+            color = TDColor.DARK_GREEN;
+            tvTo.setBackgroundColor( color );
+          }
+          if ( b.isSplay() ) {
+            if ( b.failBacksplay() ) {
+              color = TDColor.VIOLET;
+            } else if ( ( col = b.getPaintColor() ) != 0 ) {
+              color = col & 0x99ffffff;
+            }
+          }
+          if ( color > 0 ) tvFrom.setBackgroundColor( color );
         }
       }
 

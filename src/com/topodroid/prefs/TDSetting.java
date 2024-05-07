@@ -511,7 +511,8 @@ public class TDSetting
   public static float mExtendThr = 10;          // extend legs in the interval (-10, +10) ortogonal to the reference azimuth
   public static boolean mBlunderShot  = false;  // skip intermediate leg blunder-shot
   public static boolean mSplayStation = true;   // re-assign station to splays, even if already have it, 
-  public static boolean mSplayOnlyForward = false;  //assign station to splay group only forward
+  public static boolean mSplayOnlyForward = false;  // assign station to splay group only forward
+  public static boolean mBacksightSplay   = false;  // whether first splay is backsight check
 
   public static int mThumbSize = 200;           // thumbnail size
   public static boolean mWithSensors = false;   // whether sensors are enabled
@@ -1272,21 +1273,22 @@ public class TDSetting
 
     String[] keyGShot = TDPrefKey.GEEKSHOT;
     String[] defGShot = TDPrefKey.GEEKSHOTdef;
-    mDivingMode    = prefs.getBoolean( keyGShot[ 0], bool(defGShot[ 0]) ); // DISTOX_DIVING_MODE
-    mShotRecent    = prefs.getBoolean( keyGShot[ 1], bool(defGShot[ 1]) ); // DISTOX_RECENT_SHOT
-    mRecentTimeout = tryInt(   prefs,  keyGShot[ 2],      defGShot[ 2] );  // DISTOX_RECENT_TIMEOUT
-    mExtendFrac    = prefs.getBoolean( keyGShot[ 3], bool(defGShot[ 3]) ); // DISTOX_EXTEND_FRAC
-    mDistoXBackshot= prefs.getBoolean( keyGShot[ 4], bool(defGShot[ 4]) ); // DISTOX_BACKSHOT
-    mBedding       = prefs.getBoolean( keyGShot[ 5], bool(defGShot[ 5]) ); // DISTOX_BEDDING
-    mWithSensors   = prefs.getBoolean( keyGShot[ 6], bool(defGShot[ 6]) ); // DISTOX_WITH_SENSORS
-    setLoopClosure( tryInt(   prefs,   keyGShot[ 7],      defGShot[ 7] ) );// DISTOX_LOOP_CLOSURE_VALUE
-    mLoopThr       = tryFloat( prefs,  keyGShot[ 8],      defGShot[ 8] );  // DISTOX_LOOP_THR
-    mWithAzimuth   = prefs.getBoolean( keyGShot[ 9], bool(defGShot[ 9]) ); // DISTOX_ANDROID_AZIMUTH
-    mTimerWait     = tryInt(   prefs,  keyGShot[10],      defGShot[10] );  // DISTOX_SHOT_TIMER
-    mBeepVolume    = tryInt(   prefs,  keyGShot[11],      defGShot[11] );  // DISTOX_BEEP_VOLUME
-    mBlunderShot   = prefs.getBoolean( keyGShot[12], bool(defGShot[12]) ); // DISTOX_BLUNDER_SHOT
-    mSplayStation  = prefs.getBoolean( keyGShot[13], bool(defGShot[13]) ); // DISTOX_SPLAY_STATION
-    mSplayOnlyForward    = prefs.getBoolean( keyGShot[14], bool(defGShot[14]) ); // DISTOX_SPLAY_GROUP
+    mDivingMode       = prefs.getBoolean( keyGShot[ 0], bool(defGShot[ 0]) ); // DISTOX_DIVING_MODE
+    mBacksightSplay   = prefs.getBoolean( keyGShot[ 1], bool(defGShot[ 1]) ); // DISTOX_BACKSIGHT_SPLAY
+    mShotRecent       = prefs.getBoolean( keyGShot[ 2], bool(defGShot[ 2]) ); // DISTOX_RECENT_SHOT
+    mRecentTimeout    = tryInt(   prefs,  keyGShot[ 3],      defGShot[ 3] );  // DISTOX_RECENT_TIMEOUT
+    mExtendFrac       = prefs.getBoolean( keyGShot[ 4], bool(defGShot[ 4]) ); // DISTOX_EXTEND_FRAC
+    mDistoXBackshot   = prefs.getBoolean( keyGShot[ 5], bool(defGShot[ 5]) ); // DISTOX_BACKSHOT
+    mBedding          = prefs.getBoolean( keyGShot[ 6], bool(defGShot[ 6]) ); // DISTOX_BEDDING
+    mWithSensors      = prefs.getBoolean( keyGShot[ 7], bool(defGShot[ 7]) ); // DISTOX_WITH_SENSORS
+    setLoopClosure( tryInt(   prefs,      keyGShot[ 8],      defGShot[ 8] ) );// DISTOX_LOOP_CLOSURE_VALUE
+    mLoopThr          = tryFloat( prefs,  keyGShot[ 9],      defGShot[ 9] );  // DISTOX_LOOP_THR
+    mWithAzimuth      = prefs.getBoolean( keyGShot[10], bool(defGShot[10]) ); // DISTOX_ANDROID_AZIMUTH
+    mTimerWait        = tryInt(   prefs,  keyGShot[11],      defGShot[11] );  // DISTOX_SHOT_TIMER
+    mBeepVolume       = tryInt(   prefs,  keyGShot[12],      defGShot[12] );  // DISTOX_BEEP_VOLUME
+    mBlunderShot      = prefs.getBoolean( keyGShot[13], bool(defGShot[13]) ); // DISTOX_BLUNDER_SHOT
+    mSplayStation     = prefs.getBoolean( keyGShot[14], bool(defGShot[14]) ); // DISTOX_SPLAY_STATION
+    mSplayOnlyForward = prefs.getBoolean( keyGShot[15], bool(defGShot[15]) ); // DISTOX_SPLAY_GROUP
     // mWithTdManager = prefs.getBoolean( keyGShot[13], bool(defGShot[13]) ); // DISTOX_TDMANAGER
     // TDLog.v("SETTING load secondary GEEK data done");
 
@@ -1840,36 +1842,38 @@ public class TDSetting
     String[] def = TDPrefKey.GEEKSHOTdef;
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_DIVING_MODE
       mDivingMode   = tryBooleanValue( hlp, k, v, bool(def[0]) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_RECENT_SHOT
-      mShotRecent   = tryBooleanValue( hlp, k, v, bool(def[1]) );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_RECENT_TIMEOUT
-      mRecentTimeout = tryIntValue( hlp, k, v, def[2] );
+    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_BACKSIGHT_SPLAY
+      mBacksightSplay = tryBooleanValue( hlp, k, v, bool(def[1]) );
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_RECENT_SHOT
+      mShotRecent   = tryBooleanValue( hlp, k, v, bool(def[2]) );
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_RECENT_TIMEOUT
+      mRecentTimeout = tryIntValue( hlp, k, v, def[3] );
       if ( mRecentTimeout < 0 ) { mRecentTimeout = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_EXTEND_FRAC
-      mExtendFrac   = tryBooleanValue( hlp, k, v, bool(def[ 3]) );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_BACKSHOT (bool)
-      mDistoXBackshot = tryBooleanValue( hlp, k, v, bool(def[4]) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_BEDDING
-      mBedding      = tryBooleanValue( hlp, k, v, bool(def[ 5]) );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_WITH_SENSORS
-      mWithSensors  = tryBooleanValue( hlp, k, v, bool(def[ 6]) );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_LOOP_CLOSURE_VALUE
-      setLoopClosure( tryIntValue( hlp, k, v, def[ 7] ) );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_LOOP_THR
-      mLoopThr = tryFloatValue( hlp, k, v, def[ 8] );
-    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_ANDROID_AZIMUTH
-      mWithAzimuth  = tryBooleanValue( hlp, k, v, bool(def[ 9]) );
-    } else if ( k.equals( key[10  ] ) ) { // DISTOX_SHOT_TIMER [3 ..)
-      mTimerWait        = tryIntValue( hlp, k, v, def[10] );
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_EXTEND_FRAC
+      mExtendFrac   = tryBooleanValue( hlp, k, v, bool(def[ 4]) );
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_BACKSHOT (bool)
+      mDistoXBackshot = tryBooleanValue( hlp, k, v, bool(def[5]) );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_BEDDING
+      mBedding      = tryBooleanValue( hlp, k, v, bool(def[ 6]) );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_WITH_SENSORS
+      mWithSensors  = tryBooleanValue( hlp, k, v, bool(def[ 7]) );
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_LOOP_CLOSURE_VALUE
+      setLoopClosure( tryIntValue( hlp, k, v, def[ 8] ) );
+    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_LOOP_THR
+      mLoopThr = tryFloatValue( hlp, k, v, def[ 9] );
+    } else if ( k.equals( key[10 ] ) ) { // DISTOX_ANDROID_AZIMUTH
+      mWithAzimuth  = tryBooleanValue( hlp, k, v, bool(def[10]) );
+    } else if ( k.equals( key[11  ] ) ) { // DISTOX_SHOT_TIMER [3 ..)
+      mTimerWait        = tryIntValue( hlp, k, v, def[11] );
       if ( mTimerWait < 0 ) { mTimerWait = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
-      ret = setBeepVolume( tryIntValue( hlp, k, v, def[11] ) );
-    } else if ( k.equals( key[ 12 ] ) ) { // DISTOX_BLUNDER_SHOT
-      mBlunderShot = tryBooleanValue( hlp, k, v, bool(def[12]) );
-    } else if ( k.equals( key[ 13 ] ) ) { // DISTOX_SPLAY_STATION 
-      mSplayStation = tryBooleanValue( hlp, k, v, bool(def[13]) );
-    } else if ( k.equals( key[ 14 ] ) ) { // DISTOX_SPLAY_GROUP
-      mSplayOnlyForward = tryBooleanValue( hlp, k, v, bool(def[14]) );
+    } else if ( k.equals( key[ 12 ] ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
+      ret = setBeepVolume( tryIntValue( hlp, k, v, def[12] ) );
+    } else if ( k.equals( key[ 13 ] ) ) { // DISTOX_BLUNDER_SHOT
+      mBlunderShot = tryBooleanValue( hlp, k, v, bool(def[13]) );
+    } else if ( k.equals( key[ 14 ] ) ) { // DISTOX_SPLAY_STATION 
+      mSplayStation = tryBooleanValue( hlp, k, v, bool(def[14]) );
+    } else if ( k.equals( key[ 15 ] ) ) { // DISTOX_SPLAY_GROUP
+      mSplayOnlyForward = tryBooleanValue( hlp, k, v, bool(def[15]) );
     // } else if ( k.equals( key[13 ] ) ) { // DISTOX_TDMANAGER
     //   mWithTdManager = tryBooleanValue( hlp, k, v, bool(def[13]) );
 

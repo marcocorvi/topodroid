@@ -4353,6 +4353,7 @@ public class DrawingWindow extends ItemDrawer
       f = (det12 * y0 + det20 * y1 + det01 * y2)/det;
     } 
     // apply affine transform to sketch
+    TDLog.v("Affine Transform C " + c + " F " + f ); 
     mDrawingSurface.affineTransformDrawing( a, b, c, d, e, f );
     return 0;
   }
@@ -4546,7 +4547,6 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-
   /** react to a touch event
    * @param view  touched view
    * @param rawEvent raw event
@@ -4566,7 +4566,6 @@ public class DrawingWindow extends ItemDrawer
     int act = event.getAction();
     int action = act & MotionEvent.ACTION_MASK;
     int id = 0;
-    boolean threePointers = false;
 
     if ( TDSetting.mStylusOnly ) {
       int np = event.getPointerCount();
@@ -4590,7 +4589,6 @@ public class DrawingWindow extends ItemDrawer
       // TDLog.v("STYLUS action " + action + " of " + act );
     } else {
       if (action == MotionEvent.ACTION_POINTER_DOWN) {
-        threePointers = (event.getPointerCount() == 3);
         if ( mTouchMode == MODE_MOVE ) {
           if ( mMode == MODE_ERASE ) {
             finishErasing();
@@ -4603,7 +4601,6 @@ public class DrawingWindow extends ItemDrawer
         return true;
       } else if ( action == MotionEvent.ACTION_POINTER_UP) {
         int np = event.getPointerCount();
-        threePointers = (np > 3);
         if ( np > 2 ) return true;
         mTouchMode = MODE_MOVE;
         id = 1 - ((act & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT);
@@ -4624,7 +4621,7 @@ public class DrawingWindow extends ItemDrawer
       return onTouchDown( x_canvas, y_canvas, x_scene, y_scene );
 
     } else if ( action == MotionEvent.ACTION_MOVE ) { // ------------------------------- MOVE
-      return onTouchMove( x_canvas, y_canvas, x_scene, y_scene, event, threePointers );
+      return onTouchMove( x_canvas, y_canvas, x_scene, y_scene, event );
 
     } else if (action == MotionEvent.ACTION_UP) { // ----------------------------------- UP
       return onTouchUp( x_canvas, y_canvas, x_scene, y_scene );
@@ -5201,10 +5198,9 @@ public class DrawingWindow extends ItemDrawer
    * @param xs   scene X coord
    * @param ys   scene Y coord
    * @param event motion event
-   * @param threePointers whether the event has three pointers
    * @return ...
    */
-  private boolean onTouchMove( float xc, float yc, float xs, float ys, MotionEventWrap event, boolean threePointers )
+  private boolean onTouchMove( float xc, float yc, float xs, float ys, MotionEventWrap event )
   {
     // TDLog.v( "STYLUS action MOVE mode " + mMode + " touch " + mTouchMode + " (" + xc + " " + yc + ") " );
     if ( mTouchMode == MODE_MOVE) {
@@ -5384,10 +5380,9 @@ public class DrawingWindow extends ItemDrawer
         // } else {
         //   moveCanvas( x_shift, y_shift );
         }
-        if ( threePointers ) {
-            // int ret =
-            affineTransformByEvent( event );
-            // TDLog.v("affine transform returns " + ret );
+        if ( event.getPointerCount() == 3 ) {
+            int ret = affineTransformByEvent( event );
+            TDLog.v("affine transform returns " + ret );
             // mDrawingSurface.scaleDrawing( 1+(factor-1)*0.01f );
             saveEventPoint( event );
         } else {

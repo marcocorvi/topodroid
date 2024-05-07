@@ -52,6 +52,11 @@ class StationNameDefault extends StationName
 
     boolean forward_shots = ( survey_stations == 1 );
     boolean shot_after_splays = StationPolicy.mShotAfterSplays;
+
+    // NOTE on renumber the backsight-splay is not checeked
+    // boolean backsight_splay   = forward_shots && shot_after_splays && TDSetting.mBacksightSplay;
+    // DBlock  first_splay       = null;
+
     // String  current_station = mCurrentStationName;
     // TDLog.v( "default assign stations after. blk0 " + blk0.mId + " bs " + bs + " survey_stations " + survey_stations + " shot_after_splay " + shot_after_splays );
 
@@ -198,8 +203,11 @@ class StationNameDefault extends StationName
     NativeName mNativeName = new NativeName();
 
     boolean ret = false;
-    boolean forward_shots = ( survey_stations == 1 );
+    boolean forward_shots    = ( survey_stations == 1 );
     boolean shot_after_splay = StationPolicy.mShotAfterSplays;
+    boolean backsight_splay  = forward_shots && shot_after_splay && TDSetting.mBacksightSplay;
+    DBlock  first_splay      = null; // forward leg
+
     String  current_station  = mCurrentStationName; // steal current station name
     mCurrentStationName = null;
 
@@ -248,6 +256,7 @@ class StationNameDefault extends StationName
             prev = blk;
             // blk.mFrom = station;
             setSplayName( blk, station );
+            first_splay = null;
             // TDLog.v("  null prev: splay " + id(blk) + " : " + station );
           } else {
             if ( prev.isRelativeDistance( blk ) ) {
@@ -291,6 +300,7 @@ class StationNameDefault extends StationName
                 current_station = null;
                 if ( TDLog.isStreamFile() ) TDLog.f("  set leg " + name(prev) + " => " + from + " " + to + " {" + station + "}" );
                 setLegName( prev, from, to );
+                first_splay = prev;
                 ret = true;
                 setLegExtend( prev );
                 if ( forward_shots ) {
@@ -332,6 +342,10 @@ class StationNameDefault extends StationName
                 setSecLegName( blk );
               }
             } else { // distance from prev > "closeness" setting
+              if ( backsight_splay && first_splay != null ) {
+                blk.doBacksightSplayCheck( first_splay );
+                first_splay = null;
+              }
               if ( TDLog.isStreamFile() ) TDLog.f("  set splay " + id(blk) + " : " + station + " / prev " + id(prev) + " => " + id(blk) );
               nrLegShots = 0;
               setSplayName( blk, station );
@@ -396,9 +410,11 @@ class StationNameDefault extends StationName
             // TDLog.v(" BCK set station " + station );
           }
           nrLegShots = TDSetting.mMinNrLegShots;
+          first_splay = blk;
           if ( TDLog.isStreamFile() ) TDLog.f("  already leg " + name(blk) + " {" + from + " " + to + " " + station + "}" );
           // TDLog.v("  already leg " + name(blk) + " {" + from + " " + to + " " + station + "}" );
         } else { // FROM non-empty, TO empty --> SPLAY
+          first_splay = null;
           nrLegShots = 0;
           if ( TDLog.isStreamFile() ) TDLog.f("  already splay " + name(blk) + " will set prev : old " + id(prev) );
           // TDLog.v("  already splay " + name(blk) + " will set prev : old " + id(prev) );

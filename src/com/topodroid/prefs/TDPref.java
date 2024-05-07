@@ -1571,23 +1571,24 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     String[] def = TDPrefKey.GEEKSHOTdef;
     return new TDPref[ ] {
       makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], T, def[ 0],          ctx, hlp ), // DIVING_MODE
-      makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1],          ctx, hlp ), // RECENT_SHOT
-      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], INTEGER, ctx, hlp ), // RECENT TIMEOUT
-      makeCbx( cat, key[ 3], tit[ 3], dsc[ 3], T, def[ 3],          ctx, hlp ), // EXTEND FRACTIONAL
-      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4],          ctx, hlp ), // BACKSHOT
-      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5],          ctx, hlp ), // BEDDING PLANE
-      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6],          ctx, hlp ), // WITH SENSORS
-      makeLst( cat, key[ 7], tit[ 7], dsc[ 7], E, def[ 7], R.array.loopClosure, R.array.loopClosureValue, ctx, hlp ),
-      makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], E, def[ 8], FLOAT,   ctx, hlp ), // LOOP THR
+      makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1],          ctx, hlp ), // BACKSIGHT_SPLAY
+      makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2],          ctx, hlp ), // RECENT_SHOT
+      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], T, def[ 3], INTEGER, ctx, hlp ), // RECENT TIMEOUT
+      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4],          ctx, hlp ), // EXTEND FRACTIONAL
+      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5],          ctx, hlp ), // BACKSHOT
+      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6],          ctx, hlp ), // BEDDING PLANE
+      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          ctx, hlp ), // WITH SENSORS
+      makeLst( cat, key[ 8], tit[ 8], dsc[ 8], E, def[ 8], R.array.loopClosure, R.array.loopClosureValue, ctx, hlp ),
+      makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], E, def[ 9], FLOAT,   ctx, hlp ), // LOOP THR
       // makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9], FLOAT,   ctx, hlp ), // DIST/ANGLE TOLERANCE
       // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp )  // SPLAYS AT ACTIVE STATION
       // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp )  // WITH RENAME
-      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp ),// WITH ANDROID AZIMUTH
-      makeEdt( cat, key[10], tit[10], dsc[10], E, def[10], INTEGER, ctx, hlp ), // TIMER
-      makeEdt( cat, key[11], tit[11], dsc[11], E, def[11], INTEGER, ctx, hlp ), // VOLUME
-      makeCbx( cat, key[12], tit[12], dsc[12], T, def[12],          ctx, hlp ), // BLUNDER SHOT
-      makeCbx( cat, key[13], tit[13], dsc[13], T, def[13],          ctx, hlp ), // SPLAY STATION
-      makeCbx( cat, key[14], tit[14], dsc[14], T, def[14],          ctx, hlp ), // SPLAY GROUP
+      makeCbx( cat, key[10], tit[10], dsc[10], A, def[10],          ctx, hlp ),// WITH ANDROID AZIMUTH
+      makeEdt( cat, key[11], tit[11], dsc[11], E, def[11], INTEGER, ctx, hlp ), // TIMER
+      makeEdt( cat, key[12], tit[12], dsc[12], E, def[12], INTEGER, ctx, hlp ), // VOLUME
+      makeCbx( cat, key[13], tit[13], dsc[13], T, def[13],          ctx, hlp ), // BLUNDER SHOT
+      makeCbx( cat, key[14], tit[14], dsc[14], T, def[14],          ctx, hlp ), // SPLAY STATION
+      makeCbx( cat, key[15], tit[15], dsc[15], T, def[15],          ctx, hlp ), // SPLAY GROUP
       // makeCbx( cat, key[13], tit[13], dsc[13], T, def[13],          ctx, hlp )  // TDMANAGER
     };
   }

@@ -474,7 +474,7 @@ public class TDNum
     if ( st == null ) return;
     st.mBarrierAndHidden = ( st.mHidden == -1 && hide == 1 );
     st.mHidden += hide;
-    TDLog.v( "station " + st.name + " hide " + st.mHidden );
+    // TDLog.v( "station " + st.name + " hide " + st.mHidden );
     hide *= 2;
     // st = st.parent(); // 20230318 fixed
     // while ( st != null ) {
@@ -486,19 +486,19 @@ public class TDNum
     if ( mStartStation.name.equals( name ) ) return;
     Stack<NumStation> stack = new Stack<NumStation>();
     stack.push( mStartStation );
-    TDLog.v("push " + mStartStation.name );
+    // TDLog.v("push " + mStartStation.name );
     while ( ! stack.empty() ) {
       st = stack.pop();
-      TDLog.v("pop " + st.name );
+      // TDLog.v("pop " + st.name );
       if ( ! st.name.equals( name ) ) {
         st.mHidden += hide;
         if ( st.sibling() != null ) {
           stack.push( st.sibling() );
-          TDLog.v("push sibling " + st.sibling().name );
+          // TDLog.v("push sibling " + st.sibling().name );
         }
         if ( st.child() != null ) {
           stack.push( st.child() );
-          TDLog.v("push child " + st.child().name );
+          // TDLog.v("push child " + st.child().name );
         }
       }
     }    
@@ -525,7 +525,7 @@ public class TDNum
     // TDLog.v( "Set Station barrier: " + barrier );
     NumStation st = getStation( name );
     if ( st == null ) return;
-    TDLog.v( "station " + st.name + " barr " + st.mHidden );
+    // TDLog.v( "station " + st.name + " barr " + st.mHidden );
     st.mBarrierAndHidden = ( st.mHidden == 1 && barrier == 1 );
     st.mHidden -= barrier;
     if ( mStartStation == st ) return;
@@ -538,18 +538,18 @@ public class TDNum
     if ( st.child() != null ) {
       Stack<NumStation> stack = new Stack<NumStation>();
       stack.push( st.child() );
-      TDLog.v("push " + st.name );
+      // TDLog.v("push " + st.name );
       while ( ! stack.empty() ) {
         st = stack.pop();
-        TDLog.v("pop " + st.name );
+        // TDLog.v("pop " + st.name );
         st.mHidden -= barrier;
         if ( st.sibling() != null ) {
           stack.push( st.sibling() );
-          TDLog.v("push sibling " + st.sibling().name );
+          // TDLog.v("push sibling " + st.sibling().name );
         }
         if ( st.child() != null ) {
           stack.push( st.child() );
-          TDLog.v("push child " + st.child().name );
+          // TDLog.v("push child " + st.child().name );
         }
       }
     }
@@ -1003,13 +1003,13 @@ public class TDNum
       for ( int j=i+1; j < tmp_shots.size(); ++j ) {
         TriShot ts2 = tmp_shots.get( j );
         if ( from.equals( ts2.from ) && to.equals( ts2.to ) ) { 
-          TDLog.v( "chain a positive sibling " + from + " " + to );
+          // TDLog.v( "chain a positive sibling " + from + " " + to );
           ts1.sibling = ts2;
           ts1 = ts2;
           ts2.backshot = 1;
 	  ++ nrSiblings;
         } else if ( from.equals( ts2.to ) && to.equals( ts2.from ) ) { 
-          TDLog.v( "chain a negative sibling " + from + " " + to );
+          // TDLog.v( "chain a negative sibling " + from + " " + to );
           ts1.sibling = ts2;
           ts1 = ts2;
           ts2.backshot = -1;
@@ -1018,7 +1018,7 @@ public class TDNum
       }
 
       if ( ts0.sibling != null ) { 
-        TDLog.v( "check sibling shots agreement " + ts0.from + " " + ts0.to );
+        // TDLog.v( "check sibling shots agreement " + ts0.from + " " + ts0.to );
         float dmax = 0.0f;
         float cc = TDMath.cosd( blk0.mClino );
         float sc = TDMath.sind( blk0.mClino );
@@ -1039,7 +1039,7 @@ public class TDNum
           ts1 = ts1.sibling;
         }
         if ( ( ! StationPolicy.doMagAnomaly() ) && ( dmax > TDSetting.mSiblingThrD /* TDSetting.mCloseDistance */ ) ) {
-          TDLog.v("Bad Block " + blk0.mFrom + " " + blk0.mTo + " dist " + dmax + " CloseDist " + TDSetting.mCloseDistance + " Sibling " + TDSetting.mSiblingThrD );
+          // TDLog.v("Bad Block " + blk0.mFrom + " " + blk0.mTo + " dist " + dmax + " CloseDist " + TDSetting.mCloseDistance + " Sibling " + TDSetting.mSiblingThrD );
           blk0.setMultiBad( true );
         }
         
@@ -1310,7 +1310,7 @@ public class TDNum
       float cosine = st.computeExtend( ts.b( mDecl ), ts.extend );
       NumSplay splay = new NumSplay( st, ts.d(), ts.b( 0 ), ts.c(), cosine, ts.block, mDecl );
       mSplays.add( splay );
-      TDLog.v("SPLAY " + ts.block.mId + " flag " + splay.getReducedFlag() + " v " + splay.v );
+      // TDLog.v("SPLAY " + ts.block.mId + " flag " + splay.getReducedFlag() + " v " + splay.v );
       if ( splay.getReducedFlag() == 0 ) addToVStats( splay.v ); // skip DUPLICATE SURFACE COMMENTED
       return true;
     }
@@ -1858,15 +1858,15 @@ public class TDNum
         }
       }
     }
-    for ( NumBranch b : branches ) {
-      TDLog.v("BRANCH: " + b.toString( 1 ) );
-    }
+    // for ( NumBranch b : branches ) {
+    //   TDLog.v("BRANCH: " + b.toString( 1 ) );
+    // }
 
     ArrayList< NumCycle > cycles = makeIndependentCycles( branches );
-    TDLog.v("NUM independent loops " + cycles.size() );
-    for ( NumCycle cy : cycles ) {
-      TDLog.v("CYCLE: " + cy.toString() );
-    }
+    // TDLog.v("NUM independent loops " + cycles.size() );
+    // for ( NumCycle cy : cycles ) {
+    //   TDLog.v("CYCLE: " + cy.toString() );
+    // }
 
     // TDLog.v("Branches " + branches.size() + " single " + singleBranches.size() + " cycles " + cycles.size() );
     // This is not necessary as the cycles are already independent
@@ -2116,7 +2116,7 @@ public class TDNum
           double dy = p2.y - p1.y; // north
           double a = Math.atan2( dx, dy ) * 180 / Math.PI;
           if ( a < 0 ) a += 360;
-          TDLog.v("TRI leg " + p1.name + " " + p2.name + " angle " + a );
+          // TDLog.v("TRI leg " + p1.name + " " + p2.name + " angle " + a );
           leg.shot.mAvgLeg.mDecl = (float)(a - leg.a); // per shot declination
         }
       }

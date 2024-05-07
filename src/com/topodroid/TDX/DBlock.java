@@ -63,6 +63,7 @@ public class DBlock
   int  mBlockType;     // data type: BLANK, LEG, SEC_LEG, BACKLEG, SPLAY
   private int  mShotType;      // 0: DistoX, 1: manual, -1: DistoX backshot
   boolean mWithPhoto;
+  boolean mFailBacksplay;  // whether this splay failed to backsight the preceeding leg
 
   private boolean mMultiBad; // whether it disagree with siblings
   private float mStretch;
@@ -129,6 +130,8 @@ public class DBlock
   public static boolean isNoProfile(long flag) { return (flag & FLAG_NO_PROFILE) == FLAG_NO_PROFILE; }
   public static boolean isNone(long flag)      { return (flag & FLAG_NONE)       == FLAG_NONE; }
   // static boolean isBackshot(int flag) { return (flag & FLAG_BACKSHOT) == FLAG_BACKSHOT; }
+
+  public boolean failBacksplay()  { return mFailBacksplay; }
 
   // void resetFlag() { mFlag = FLAG_SURVEY; }
 
@@ -499,18 +502,18 @@ public class DBlock
    */
   Paint getPaint() { return mPaint; }
 
-  /** @return the block paint (foreground) color
+  /** @return the block paint (foreground) user-set color
    */
   int getPaintColor() { return (mPaint==null)? 0 : mPaint.getColor(); }
 
-  /** reset the block paint - set the paint null
+  /** reset the block user-set paint - set the paint null
    */
   void clearPaint() { 
     // TDLog.v( "Block " + mId + " clear paint");
     mPaint = null;
   }
 
-  /** set the block paint (foreground) color
+  /** set the block paint (foreground) user-set color
    * @param color   new foreground color
    */
   void setPaintColor( int color )
@@ -993,6 +996,29 @@ public class DBlock
     double y = h1 * TDMath.sind( mBearing ) - h2 * TDMath.sind( blk.mBearing );
     return x*x + y*y + z*z;
   }
+
+  /** check if this shot is a splay backsight check for a leg
+   * @param b  leg shot
+   */ 
+  void doBacksightSplayCheck( DBlock b ) 
+  {
+    float cc, sc, cb, sb;
+    float alen = mLength;
+    cc = TDMath.cosd( mClino );
+    sc = TDMath.sind( mClino );
+    cb = TDMath.cosd( mBearing ); 
+    sb = TDMath.sind( mBearing ); 
+    TDVector v1 = new TDVector( alen * cc * sb, alen * cc * cb, alen * sc );
+    float blen = b.mLength;
+    cc =   TDMath.cosd( b.mClino );
+    sc = - TDMath.sind( b.mClino );
+    cb = - TDMath.cosd( b.mBearing ); 
+    sb = - TDMath.sind( b.mBearing ); 
+    TDVector v2 = new TDVector( blen * cc * sb, blen * cc * cb, blen * sc );
+    float d = (v1.minus(v2)).length();
+    mFailBacksplay = ( d/alen + d/blen > 2 * TDSetting.mCloseDistance );
+  }
+    
 
 }
 
