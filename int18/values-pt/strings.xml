@@ -1331,6 +1331,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_bezier_step_summary">Distância máxima entre pontos em uma linha suave exportada [m]</string>
   <string name="pref_leg_shots_title">Qt mín medidas/visada</string>
   <string name="pref_leg_shots_summary">Quantidade mínima de medidas similares para uma nova base ser criada automaticamente</string>
+  <string name="pref_backsight_splay_title">Med aux contra visada</string>
+  <string name="pref_backsight_splay_summary">Verificar se a primeira medida auxiliar obtida após uma nova visada é uma contra visada</string>
   <string name="pref_recent_timeout_title">Lim aux recente</string>
   <string name="pref_recent_timeout_summary">Limite de tempo após o qual as medidas auxiliares não serão mais consideradas recentes [s]</string>
   <string name="pref_triple_shot_title">Aviso visada</string>

@@ -1430,6 +1430,8 @@
   <string name="pref_bezier_step_summary">Маскисмальное расстояние между точками при апроксимации кривых полилиниями [м]</string>
   <string name="pref_leg_shots_title">Мин. кол-во измерений между пикетами</string>
   <string name="pref_leg_shots_summary">Количество одинаковых повторяющихся замеров на отрезке между пикетами</string>
+  <!-- TODO string name="pref_backsight_splay_title">Backsight splay</string -->
+  <!-- TODO string name="pref_backsight_splay_summary">Backsight check with first splay</string -->
   <string name="pref_recent_timeout_title">Время свежести замеров</string>
   <string name="pref_recent_timeout_summary">Отрезок времени после скачивания в течении которого данные считаются новыми. [с]</string>
   <string name="pref_triple_shot_title">Сигнал одинаковых измерений</string>
