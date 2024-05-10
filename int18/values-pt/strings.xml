@@ -1313,10 +1313,10 @@ no campo abaixo e aperte o botão.
   <string name="pref_with_android_azimuth_summary">Habilitar bússola/clino do Android</string>
   <string name="pref_blunder_shot_title">Medida com erro</string>
   <string name="pref_blunder_shot_summary">Ignorar medidas com erro</string>
-  <string name="pref_splay_station_title">Reatribuir base aux</string>
-  <string name="pref_splay_station_summary">Manter medidas auxiliares relacionadas ao renumerar</string>
-  <string name="pref_splay_group_title">Renomear grupo aux</string>
-  <string name="pref_splay_group_summary">Renomear em grupo atuar somente nas medidas auxiliares subsequentes e não nas anteriores</string>
+  <string name="pref_splay_station_title">Renomear base aux</string>
+  <string name="pref_splay_station_summary">Renomear bases das medidas auxiliares para mantê-las relacionadas à mesma base</string>
+  <string name="pref_splay_group_title">Renomear aux só próx</string>
+  <string name="pref_splay_group_summary">Somente renomear medidas auxiliares subsequentes e não anteriores ao usar \u0022renomear grupo\u0022 na edição de medidas</string>
   <string name="pref_with_levels_title">Camadas</string>
   <string name="pref_with_levels_summary">Organizar croquis em camadas (layers)</string>
   <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->

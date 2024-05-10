@@ -33,7 +33,7 @@
   <string-array name="feedbackMode">
     <item name="none">nenhum</item>
     <item name="sound">som</item>
-    <item name="heptic">vibração</item>
+    <item name="heptic">vibrar</item>
   </string-array>
   <string-array name="canvasLevels">
     <item name="none">nenhuma</item>
