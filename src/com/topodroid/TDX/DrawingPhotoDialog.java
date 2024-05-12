@@ -34,6 +34,7 @@ class DrawingPhotoDialog extends MyDialog
                          implements View.OnClickListener
 {
   private EditText mComment;
+  private EditText mSize;
   private CheckBox mCamera;
   private boolean  cameraCheck;
 
@@ -57,6 +58,7 @@ class DrawingPhotoDialog extends MyDialog
     initLayout( R.layout.drawing_photo_dialog, R.string.photo_title );
 
     mComment = (EditText) findViewById(R.id.photo_comment);
+    mSize    = (EditText) findViewById(R.id.photo_size );
     mCamera  = (CheckBox) findViewById( R.id.photo_camera );
     if ( ! cameraCheck ) {
       mCamera.setVisibility( View.GONE );
@@ -68,6 +70,7 @@ class DrawingPhotoDialog extends MyDialog
     ((Button) findViewById(R.id.photo_cancel)).setOnClickListener( this );
 
     mComment.setTextSize( TDSetting.mTextSize );
+    mSize.setTextSize( TDSetting.mTextSize );
   }
 
   @Override
@@ -76,7 +79,16 @@ class DrawingPhotoDialog extends MyDialog
     // TDLog.Log( TDLog.LOG_INPUT, "Drawing Photo Dialog onClick() " + view.toString() );
     if (view.getId() == R.id.photo_ok ) {
       int camera = ( cameraCheck && mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_TOPODROID_2;
-      mActivity.addPhotoPoint( mComment.getText().toString(), mX, mY, camera );
+
+      float size = 1.0f; // 1 meter
+      if ( mSize.getText() != null ) {
+        try {
+          size = Float.parseFloat( mSize.getText().toString() );
+        } catch ( NumberFormatException e ) {
+          size = 1;
+        }
+      }
+      mActivity.addPhotoPoint( mComment.getText().toString(), size, mX, mY, camera );
     // } else if ( view.getId() == R.id.photo_cancel ) {
     //   /* nothing */
     }

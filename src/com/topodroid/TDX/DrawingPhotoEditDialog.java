@@ -25,6 +25,8 @@ import android.widget.ImageView;
 import android.widget.Button;
 import android.view.View;
 
+import java.util.Locale;
+
 class DrawingPhotoEditDialog extends MyDialog
                              implements View.OnClickListener
 {
@@ -34,6 +36,7 @@ class DrawingPhotoEditDialog extends MyDialog
   private String mFilename; // = null;
 
   private EditText mETcomment;  // photo comment
+  private EditText mETsize;     // photo size (horizontal width) [m]
   // private ImageView mIVimage;   // photo image
   // private Button   mButtonOK;
   // private Button   mButtonDelete;
@@ -71,6 +74,7 @@ class DrawingPhotoEditDialog extends MyDialog
 
     ImageView iVimage = (ImageView) findViewById( R.id.photo_image );
     mETcomment        = (EditText) findViewById( R.id.photo_comment );
+    mETsize           = (EditText) findViewById( R.id.photo_size );
     Button buttonOK   = (Button) findViewById( R.id.photo_ok );
     // mButtonDelete = (Button) findViewById( R.id.photo_delete );
     // mButtonCancel = (Button) findViewById( R.id.photo_cancel );
@@ -82,6 +86,7 @@ class DrawingPhotoEditDialog extends MyDialog
     if ( mPhoto.mPointText != null ) {
       mETcomment.setText( mPhoto.mPointText );
     }
+    mETsize.setText( String.format(Locale.US, "%.2f", mPhoto.mPhotoSize ) );
     if ( mTdImage.fillImageView( iVimage, mTdImage.width()/8, mTdImage.height()/8, true ) ) {
       iVimage.setOnClickListener( this );
     } else {
@@ -110,6 +115,12 @@ class DrawingPhotoEditDialog extends MyDialog
     if ( vid == R.id.photo_ok ) {
       String comment = ( mETcomment.getText() == null )? "" : mETcomment.getText().toString();
       mPhoto.setPointText( comment );
+      try {
+        float size = Float.parseFloat( mETsize.getText().toString() );
+        if ( size < 1 ) size = 1; // min size 1 meter
+        mPhoto.setPhotoSize( size );
+      } catch ( NumberFormatException e ) {
+      }
       TopoDroidApp.mData.updatePhoto( TDInstance.sid, mPhoto.mId, comment );
     // } else if ( vid == R.id.photo_delete ) {
     //   mParent.dropPhoto( mPhoto );

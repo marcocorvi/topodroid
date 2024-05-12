@@ -973,6 +973,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="hint_notes">notes</string>
     <string name="hint_label">label</string>
     <string name="hint_comment">comment</string>
+    <string name="hint_size">size [m]</string>
     <string name="hint_text">text</string>
     <string name="hint_options" copyable="fr">options</string>
     <string name="hint_name">name</string>

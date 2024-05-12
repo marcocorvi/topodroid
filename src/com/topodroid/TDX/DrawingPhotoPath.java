@@ -27,6 +27,7 @@ import android.util.Base64;
 public class DrawingPhotoPath extends DrawingPointPath
 {
   long mId; // id of the photo 
+  float mPhotoSize; // photo size (horizontal width) [m]
   // private Paint paint;
 
   // FIXME-COPYPATH
@@ -38,10 +39,11 @@ public class DrawingPhotoPath extends DrawingPointPath
   //   return ret;
   // }
 
-  DrawingPhotoPath( String text, float off_x, float off_y, int scale, String options, long id, int scrap )
+  DrawingPhotoPath( String text, float size, float off_x, float off_y, int scale, String options, long id, int scrap )
   {
     super( BrushManager.getPointPhotoIndex(), off_x, off_y, scale, text, options, scrap );
     mId = id;
+    mPhotoSize = size;
 
     // mPointText = text;
     // setPaint( BrushManager.pointPaint[ BrushManager.POINT_LABEL ] );
@@ -54,6 +56,11 @@ public class DrawingPhotoPath extends DrawingPointPath
     // paint.setStrokeCap(Paint.Cap.ROUND);
     // paint.setStrokeWidth( WIDTH_CURRENT );
   }
+
+  /** set the photo size
+   * @param size   new photo size (horizontal width) [m]
+   */
+  void setPhotoSize( float size ) { mPhotoSize = size; }
 
   public static DrawingPhotoPath loadDataStream( int version, DataInputStream dis, float x, float y )
   {
@@ -77,9 +84,10 @@ public class DrawingPhotoPath extends DrawingPointPath
       text = dis.readUTF();
       options = dis.readUTF();
       id = dis.readInt();
+      float size = ( version >= 602066 )? dis.readFloat() : 1;
 
       // TDLog.Log( TDLog.LOG_PLOT, "Label <" + text + " " + ccx + " " + ccy + " scale " + scale + " (" + options + ")" );
-      DrawingPhotoPath ret = new DrawingPhotoPath( text, ccx, ccy, scale, options, id, scrap );
+      DrawingPhotoPath ret = new DrawingPhotoPath( text, size, ccx, ccy, scale, options, id, scrap );
       ret.setOrientation( orientation );
       ret.mLevel = lvl;
       return ret;
@@ -97,14 +105,16 @@ public class DrawingPhotoPath extends DrawingPointPath
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format(Locale.US, "point %.2f %.2f photo -text \"%s\" -photo %d.jpg ",
-         cx*TDSetting.mToTherion, -cy*TDSetting.mToTherion, ((mPointText==null)?"":mPointText), (int)mId );
+    pw.format(Locale.US, "point %.2f %.2f u:photo -text \"%s\" -size %.2f -photo %d.jpg ",
+         cx*TDSetting.mToTherion, -cy*TDSetting.mToTherion, ((mPointText==null)?"":mPointText), 
+         mPhotoSize, (int)mId );
     toTherionOrientation( pw );
     toTherionOptions( pw );
     pw.format("\n");
     return sw.getBuffer().toString();
   }
 
+  // FIXME PHOTO_SIZE
   @Override
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   { 
@@ -147,6 +157,7 @@ public class DrawingPhotoPath extends DrawingPointPath
       dos.writeUTF( ( mPointText != null )? mPointText : "" );
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
       dos.writeInt( ((int)mId) );
+      dos.writeFloat( (float)mPhotoSize );
       // TDLog.Log( TDLog.LOG_PLOT, "T " + " " + cx + " " + cy );
     } catch ( IOException e ) {
       TDLog.Error( "PHOTO out error " + e.toString() );

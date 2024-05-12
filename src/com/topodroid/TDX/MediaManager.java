@@ -30,6 +30,7 @@ class MediaManager
   private long    mPhotoId = -1;
   private long    mAudioId = 0;  // audio-negative id
   private String  mComment;
+  private float   mSize = 1;     // photo size (horizontal width) [m]
   private int     mCamera = PhotoInfo.CAMERA_UNDEFINED;
   private long    mShotId;   // photo/sensor shot id
   // private File    mImageFile;
@@ -45,10 +46,11 @@ class MediaManager
     mAudioFilepath = null;
   }
 
-  long prepareNextPhoto( long sid, String comment, int camera )
+  long prepareNextPhoto( long sid, String comment, float size, int camera )
   {
     mShotId  = sid;
     mComment = comment;
+    mSize    = size;
     mCamera  = camera;
     mPhotoId = mData.nextPhotoId( TDInstance.sid );
     mImageFilepath = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhotoId) ); // photo file is "survey/id.jpg"
@@ -90,6 +92,10 @@ class MediaManager
   /** @return media comment
    */
   String getComment() { return mComment; }
+
+  /** @return photo size (horizontal width) [m]
+   */
+  float getPhotoSize() { return mSize; }
 
   /** @return photo ID
    */

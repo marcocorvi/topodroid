@@ -5721,7 +5721,11 @@ public class DrawingWindow extends ItemDrawer
    */
   private void createPhotoPoint()
   {
-    DrawingPhotoPath photo = new DrawingPhotoPath( mMediaManager.getComment(), mMediaManager.getX(), mMediaManager.getY(), mPointScale, null, mMediaManager.getPhotoId(), mDrawingSurface.scrapIndex() );
+    DrawingPhotoPath photo = new DrawingPhotoPath( mMediaManager.getComment(),
+      mMediaManager.getPhotoSize(),
+      mMediaManager.getX(), mMediaManager.getY(), mPointScale,
+      "", // String.format(Locale.US, "-size %.2f", mMediaManager.getPhotoSize() ),
+      mMediaManager.getPhotoId(), mDrawingSurface.scrapIndex() );
     photo.mLandscape = mLandscape;
     mDrawingSurface.addDrawingPath( photo );
     modified();
@@ -5791,11 +5795,12 @@ public class DrawingWindow extends ItemDrawer
 
   /** insert a "photo" point
    * @param comment  photo comment
+   * @param size   photo size (horizontal width) [m]
    * @param x      X coord
    * @param y      Y coord
    * @param camera camera type (API)
    */
-  public void addPhotoPoint( String comment, float x, float y, int camera )
+  public void addPhotoPoint( String comment, float size, float x, float y, int camera )
   {
     // TDLog.v("addPhoto " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null );
@@ -5804,7 +5809,7 @@ public class DrawingWindow extends ItemDrawer
     } else {
       mMediaManager.setPoint( x, y );
     }
-    mMediaManager.prepareNextPhoto( -1, ((comment == null)? "" : comment), camera );
+    mMediaManager.prepareNextPhoto( -1, ((comment == null)? "" : comment), size, camera );
     // mMediaComment = (comment == null)? "" : comment;
     // mMediaId = mApp_mData.nextPhotoId( TDInstance.sid );
     // File imagefile = TDFile.getFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mMediaId) ) );

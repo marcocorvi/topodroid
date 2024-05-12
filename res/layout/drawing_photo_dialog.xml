@@ -27,6 +27,17 @@
     android:hint="@string/hint_comment"
     android:importantForAutofill="no"
     />
+      				  
+  <EditText android:id="@+id/photo_size"
+    style="@style/edit_text"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:singleLine="true"
+    android:inputType="numberDecimal"
+    android:hint="@string/hint_size"
+    android:importantForAutofill="no"
+    />
 
   <CheckBox android:id="@+id/photo_camera" 
     android:layout_marginTop="@dimen/marginv"

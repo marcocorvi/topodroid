@@ -951,7 +951,7 @@ public class ShotWindow extends Activity
   void doTakePhoto( long sid, String comment, int camera )
   {
     // camera = 1;
-    mMediaManager.prepareNextPhoto( sid, comment, camera );
+    mMediaManager.prepareNextPhoto( sid, comment, 1, camera ); // size 1 m
 
     // imageFile := PHOTO_DIR / surveyId / photoId .jpg
     // TDLog.Log( TDLog.LOG_SHOT, "photo " + imagefile.toString() );

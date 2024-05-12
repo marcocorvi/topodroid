@@ -46,6 +46,18 @@
     android:importantForAutofill="no"
   />
 
+  <EditText android:id="@+id/photo_size"
+    style="@style/edit_text"
+    android:layout_marginTop="@dimen/margintiny"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:singleLine="true"
+    android:inputType="numberDecimal"
+    android:hint="@string/hint_size"
+    android:scrollHorizontally="true"
+    android:importantForAutofill="no"
+  />
+
   <LinearLayout android:id="@+id/help"
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content"
