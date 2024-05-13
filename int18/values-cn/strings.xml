@@ -957,6 +957,7 @@
     <string name="hint_notes">注释</string>
     <string name="hint_label">标签</string>
     <string name="hint_comment">评论</string>
+    <!-- TODO string name="hint_size">size [m]</string -->
     <string name="hint_text">正文</string>
     <string name="hint_options">选择</string>
     <string name="hint_name">名称</string>
@@ -1433,6 +1434,8 @@
   <string name="pref_bezier_step_summary">最大点间距(多条曲线) [m]</string>
   <string name="pref_leg_shots_title">最少主线测量</string>
   <string name="pref_leg_shots_summary">最少主线测量次数</string>
+  <!-- TODO string name="pref_backsight_splay_title">Backsight splay</string -->
+  <!-- TODO string name="pref_backsight_splay_summary">Backsight check with first splay</string -->
   <string name="pref_recent_timeout_title">最近的数据超时</string>
   <string name="pref_recent_timeout_summary">超时之后，数据不再是最近的 [s]</string>
   <string name="pref_triple_shot_title">主线测量提示声</string>

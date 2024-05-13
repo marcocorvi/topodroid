@@ -883,6 +883,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="hint_notes">Notizen</string>
   <string name="hint_label">Beschriftung</string>
   <string name="hint_comment">Kommentar</string>
+    <!-- TODO string name="hint_size">size [m]</string -->
   <string name="hint_text">Text</string>
   <string name="hint_options">Optionen</string>
   <string name="hint_name">Name</string>
@@ -1322,6 +1323,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_bezier_step_summary">Max. Punkteabstand auf exportierter Linie [m]</string>
   <string name="pref_leg_shots_title">Minimum für Messzüge</string>
   <string name="pref_leg_shots_summary">Minimale Anzahl Messungen zur Erkennung als Messzug</string>
+  <!-- TODO string name="pref_backsight_splay_title">Backsight splay</string -->
+  <!-- TODO string name="pref_backsight_splay_summary">Backsight check with first splay</string -->
   <string name="pref_recent_timeout_title">Zeitdauer neue Daten</string>
   <string name="pref_recent_timeout_summary">Zeit nach welcher Daten nicht mehr als \'neu\' markiert werden</string>
   <string name="pref_triple_shot_title">Messzug Ton</string>

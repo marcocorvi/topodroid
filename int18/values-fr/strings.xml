@@ -957,6 +957,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="hint_notes">notes</string>
     <string name="hint_label">étiquette</string>
     <string name="hint_comment">commentaire</string>
+    <!-- TODO string name="hint_size">size [m]</string -->
     <string name="hint_text">texte</string>
     <string name="hint_options">options</string>
     <string name="hint_name">nom</string>
@@ -1422,6 +1423,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_bezier_step_summary">Distance entre les points lors de l\'export ligne [m]</string>
     <string name="pref_leg_shots_title">Nombre mini. visées</string>
     <string name="pref_leg_shots_summary">Nombre minimum de visées successives pour identifier un cheminement</string>
+  <!-- TODO string name="pref_backsight_splay_title">Backsight splay</string -->
+  <!-- TODO string name="pref_backsight_splay_summary">Backsight check with first splay</string -->
     <string name="pref_recent_timeout_title">Expiration donnée récente</string>
     <string name="pref_recent_timeout_summary">Délai d\'expiration au-delà duquel une donnée n\'est plus considérée comme récente</string>
     <string name="pref_triple_shot_title">Bip visée de cheminement</string>

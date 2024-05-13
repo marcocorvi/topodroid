@@ -954,6 +954,7 @@
     <string name="hint_notes">note</string>
     <string name="hint_label">etichetta</string>
     <string name="hint_comment">commento</string>
+    <!-- TODO string name="hint_size">size [m]</string -->
     <string name="hint_text">testo</string>
     <string name="hint_options">opzioni</string>
     <string name="hint_name">nome</string>
@@ -1428,6 +1429,8 @@
   <string name="pref_bezier_step_summary">Distanza tra punti in una linea di export [m]</string>
   <string name="pref_leg_shots_title">Misure per battuta</string>
   <string name="pref_leg_shots_summary">Minimo numero di misure per tiro di poligonale</string>
+  <!-- TODO string name="pref_backsight_splay_title">Backsight splay</string -->
+  <!-- TODO string name="pref_backsight_splay_summary">Backsight check with first splay</string -->
   <string name="pref_recent_timeout_title">Dati Timeout recenti</string>
   <string name="pref_recent_timeout_summary">Tempo dopo il quale un dato non e\' piu\' recente [s]</string>
   <string name="pref_triple_shot_title">Suono Misura-Tiro</string>

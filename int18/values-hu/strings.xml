@@ -963,6 +963,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="hint_notes">jegyzetek</string>
     <string name="hint_label">címke</string>
     <string name="hint_comment">megjegyzés</string>
+    <!-- TODO string name="hint_size">size [m]</string -->
     <string name="hint_text">szöveg</string>
     <string name="hint_options">opciók</string>
     <string name="hint_name">név</string>
@@ -1440,6 +1441,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_bezier_step_summary">Pontok közötti távolság az exportált vonalon [m]</string>
   <string name="pref_leg_shots_title">Minimális poligon mérés</string>
   <string name="pref_leg_shots_summary">Poligon mérések minmális száma poligonhosszanként</string>
+  <!-- TODO string name="pref_backsight_splay_title">Backsight splay</string -->
+  <!-- TODO string name="pref_backsight_splay_summary">Backsight check with first splay</string -->
   <string name="pref_recent_timeout_title">Legutolsó adat</string>
   <string name="pref_recent_timeout_summary">Időkorlát ami után az adatok már nem frissek [s]</string>
   <string name="pref_triple_shot_title">Poligon mérés jelzés</string>

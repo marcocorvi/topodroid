@@ -959,6 +959,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="hint_notes">Nota</string>
     <string name="hint_label">Etiqueta</string>
     <string name="hint_comment">Comentario</string>
+    <!-- TODO string name="hint_size">size [m]</string -->
     <string name="hint_text">Texto</string>
     <string name="hint_options">Opciones</string>
     <string name="hint_name">Nombre</string>
@@ -1433,6 +1434,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_bezier_step_summary">Distancia entre puntos en una línea de exportación [m]</string>
   <string name="pref_leg_shots_title">Repeticiones de una visual</string>
   <string name="pref_leg_shots_summary">Número mínimo de tomas por visual</string>
+  <!-- TODO string name="pref_backsight_splay_title">Backsight splay</string -->
+  <!-- TODO string name="pref_backsight_splay_summary">Backsight check with first splay</string -->
   <string name="pref_recent_timeout_title">Tiempo de espera de datos reciente</string>
   <string name="pref_recent_timeout_summary">Tiempo de espera después del cual los datos ya no son recientes</string>
   <string name="pref_triple_shot_title">Campana de la toma de una visual</string>
