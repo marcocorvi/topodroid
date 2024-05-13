@@ -892,7 +892,7 @@ no campo abaixo e aperte o botão.
   <string name="hint_notes">observações</string>
   <string name="hint_label">Texto do rótulo</string>
   <string name="hint_comment">comentário</string>
-    <!-- TODO string name="hint_size">size [m]</string -->
+  <string name="hint_size">tamanho [m]</string>
   <string name="hint_text">texto</string>
   <string name="hint_options">opções</string>
   <string name="hint_name">nome</string>
