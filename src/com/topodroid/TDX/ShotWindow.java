@@ -2486,7 +2486,7 @@ public class ShotWindow extends Activity
   }
   
   // NOTE called only by ShotEditDialog.saveDBlock() with to.length() == 0 ie to == "" and blk splay shot
-  // update stations for all splay blocks with sme from as this block
+  // update stations for all splay blocks with same from as this block
   // @param extend   this block new extend
   // @param flag     this block new flag
   // ...
