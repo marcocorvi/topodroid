@@ -663,7 +663,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       if ( b == null ) return;
       int col = b.getColorByType();
       if ( b == lastMultiselectedBlock ) {
-        TDLog.v("Block " + b.mId + " is last MS " + b.mMultiSelected );
+        // TDLog.v("Block " + b.mId + " is last MS " + b.mMultiSelected );
         tvFrom.setTextColor( TDColor.LIGHT_YELLOW );
         tvTo.setTextColor( TDColor.LIGHT_YELLOW );
       } else {
@@ -699,7 +699,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
               color = col & 0x99ffffff;
             }
           }
-          if ( color > 0 ) tvFrom.setBackgroundColor( color );
+          if ( color != 0 ) tvFrom.setBackgroundColor( color );
         }
       }
 
