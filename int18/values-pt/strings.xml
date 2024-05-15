@@ -666,7 +666,7 @@ no campo abaixo e aperte o botão.
   <string name="screenshot_saved">Captura de tela salva %1$s</string>
   <string name="screenshot_failed">Falha ao capturar tela</string>
   <string name="start_index">Índice da visada inicial</string>
-  <string name="survey_info">Informações da topo</string>
+  <string name="survey_info">Estatísticas da topo</string>
   <string name="stat_dates">De %1$s para %2$s</string>
   <string name="stat_devices">Dispositivos %1$d: %2$s</string>
   <string name="stat_stddev_m">Desvio padrão M: %1$.1f %%</string>
@@ -985,7 +985,7 @@ no campo abaixo e aperte o botão.
   <string name="help_bluetooth">Reiniciar conexão Bluetooth</string>
   <string name="help_remote">Controle remoto da DistoX</string>
   <string name="help_add_shot">Criar uma medida inserindo manualmente os dados</string>
-  <string name="help_info_shot">Resumo topo</string>
+  <string name="help_info_shot">Estatísticas da topo</string>
   <string name="help_gps_surveys">Pontos fixos da topo</string>
   <string name="help_survey_info">Informações sobre a topo</string>
   <string name="help_undelete">Recuperar itens apagados</string>
