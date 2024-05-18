@@ -25,9 +25,12 @@ import java.util.Locale;
 import android.util.Base64;
 
 public class DrawingPhotoPath extends DrawingPointPath
+                              implements IDrawingLink
 {
   long mId; // id of the photo 
-  float mPhotoSize; // photo size (horizontal width) [m]
+  // float mPhotoSize; // photo size (horizontal width) [m]
+  DrawingPicturePath mPicture;
+  String mCode; // geomorphology code
   // private Paint paint;
 
   // FIXME-COPYPATH
@@ -39,11 +42,13 @@ public class DrawingPhotoPath extends DrawingPointPath
   //   return ret;
   // }
 
-  DrawingPhotoPath( String text, float size, float off_x, float off_y, int scale, String options, long id, int scrap )
+  DrawingPhotoPath( String text, float off_x, float off_y, int scale, String options, long id, int scrap )
   {
     super( BrushManager.getPointPhotoIndex(), off_x, off_y, scale, text, options, scrap );
     mId = id;
-    mPhotoSize = size;
+    // mPhotoSize = size;
+    mPicture = null;
+    mCode    = "";
 
     // mPointText = text;
     // setPaint( BrushManager.pointPaint[ BrushManager.POINT_LABEL ] );
@@ -57,10 +62,60 @@ public class DrawingPhotoPath extends DrawingPointPath
     // paint.setStrokeWidth( WIDTH_CURRENT );
   }
 
+  /** set the geomorphology code
+   * @param code  new code
+   */
+  void setCode( String code ) { mCode = code; }
+
+  /** @return the geomorphology code
+   */
+  String getCode() { return mCode; }
+
   /** set the photo size
    * @param size   new photo size (horizontal width) [m]
    */
-  void setPhotoSize( float size ) { mPhotoSize = size; }
+  void setPhotoSize( float size ) 
+  { 
+    // mPhotoSize = size;
+    if ( mPicture != null ) mPicture.mPhotoSize = size;
+  }
+
+  /** @return the size of the picture of this photo
+   */
+  float getPhotoSize() 
+  {
+    return ( mPicture != null )? mPicture.mPhotoSize : 0;
+  }
+
+  /** link this photo to a picture
+   * @param picture   picture path
+   */
+  void setPicture( DrawingPicturePath picture ) 
+  { 
+    if ( mPicture == picture ) return;
+    if ( mPicture != null ) {
+      mPicture.setLink( null );
+      mPicture.setId( 0 );
+      // TODO remove picture ?
+    }
+    if ( picture  != null ) {
+      DrawingPhotoPath path = (DrawingPhotoPath)(picture.getLink());
+      if ( path != null ) path.mPicture = null;
+      picture.setLink( this );
+      picture.setId( this.mId );
+    }
+    mPicture = picture;
+  }
+
+  /** @return the picture of this photo
+   */
+  DrawingPicturePath getPicture() { return mPicture; }
+
+  
+  /** @return the photo-ID  of this photo
+   */
+  public long getId() { return mId; }
+
 
   public static DrawingPhotoPath loadDataStream( int version, DataInputStream dis, float x, float y )
   {
@@ -71,6 +126,7 @@ public class DrawingPhotoPath extends DrawingPointPath
     // int type;
     String text, options;
     int id;
+    int with_picture = 0;
     try {
       ccx = x + dis.readFloat( );
       ccy = y + dis.readFloat( );
@@ -84,12 +140,25 @@ public class DrawingPhotoPath extends DrawingPointPath
       text = dis.readUTF();
       options = dis.readUTF();
       id = dis.readInt();
-      float size = ( version >= 602066 )? dis.readFloat() : 1;
+      // float size = ( version >= 602066 )? dis.readFloat() : 1;
 
       // TDLog.Log( TDLog.LOG_PLOT, "Label <" + text + " " + ccx + " " + ccy + " scale " + scale + " (" + options + ")" );
-      DrawingPhotoPath ret = new DrawingPhotoPath( text, size, ccx, ccy, scale, options, id, scrap );
+      DrawingPhotoPath ret = new DrawingPhotoPath( text, ccx, ccy, scale, options, id, scrap );
       ret.setOrientation( orientation );
       ret.mLevel = lvl;
+      if ( version >= 602067 ) {
+        ret.setCode( dis.readUTF() );
+        with_picture = dis.readInt();
+        // TDLog.v("Photo with picture " + with_picture );
+        if ( with_picture == 1 ) {
+          ccx = x + dis.readFloat( );
+          ccy = y + dis.readFloat( );
+          float size = dis.readFloat( );
+          DrawingPicturePath picture = new DrawingPicturePath( size, ccx, ccy, id, scrap );
+          picture.mLevel = lvl;
+          ret.setPicture( picture );
+        }
+      }
       return ret;
     } catch ( IOException e ) {
       TDLog.Error( "LABEL in error " + e.getMessage() );
@@ -98,23 +167,23 @@ public class DrawingPhotoPath extends DrawingPointPath
     return null;
   }
 
-  public long getId() { return mId; }
-
   @Override
   public String toTherion( )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
-    pw.format(Locale.US, "point %.2f %.2f u:photo -text \"%s\" -size %.2f -photo %d.jpg ",
-         cx*TDSetting.mToTherion, -cy*TDSetting.mToTherion, ((mPointText==null)?"":mPointText), 
-         mPhotoSize, (int)mId );
+    pw.format(Locale.US, "point %.2f %.2f u:photo -text \"%s\" -photo %d.jpg ",
+         cx*TDSetting.mToTherion, -cy*TDSetting.mToTherion, ((mPointText==null)?"":mPointText), (int)mId );
+    if ( mPicture != null ) {
+      pw.format(Locale.US, "[%.1f %.1f %.1f] ", mPicture.cx*TDSetting.mToTherion, -mPicture.cy*TDSetting.mToTherion, mPicture.mPhotoSize*TDSetting.mToTherion );
+    }
     toTherionOrientation( pw );
     toTherionOptions( pw );
     pw.format("\n");
     return sw.getBuffer().toString();
   }
 
-  // FIXME PHOTO_SIZE
+  // FIXME PHOTO PICTURE
   @Override
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   { 
@@ -157,11 +226,23 @@ public class DrawingPhotoPath extends DrawingPointPath
       dos.writeUTF( ( mPointText != null )? mPointText : "" );
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
       dos.writeInt( ((int)mId) );
-      dos.writeFloat( (float)mPhotoSize );
-      // TDLog.Log( TDLog.LOG_PLOT, "T " + " " + cx + " " + cy );
+      dos.writeUTF( (mCode != null)? mCode : "" );
+      TDLog.v( "PHOTO id " + mId + " (" + cx + " " + cy + ") code <" + mCode + ">" );
+      if ( mPicture != null ) {
+        dos.writeInt( 1 );
+        dos.writeFloat( mPicture.cx );
+        dos.writeFloat( mPicture.cy );
+        dos.writeFloat( mPicture.mPhotoSize );
+      } else {
+        dos.writeInt( 0 );
+      }
     } catch ( IOException e ) {
       TDLog.Error( "PHOTO out error " + e.toString() );
     }
   }
+
+  // IDrawingLink
+  public float getLinkX() { return cx; }
+  public float getLinkY() { return cy; }
 }
 

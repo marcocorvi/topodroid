@@ -38,6 +38,7 @@ public class SymbolLibrary
   public final static String WATER   = "water";
   public final static String AUDIO   = "audio";
   public final static String PHOTO   = "photo";
+  public final static String PICTURE = "picture";
   public final static String ARROW   = "arrow";
   public final static String BORDER  = "border";
   public final static String CHIMNEY = "chimney";

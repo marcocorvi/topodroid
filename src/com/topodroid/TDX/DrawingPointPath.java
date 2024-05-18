@@ -382,6 +382,10 @@ public class DrawingPointPath extends DrawingPath
    */
   void setLink( IDrawingLink link ) { mLink = link; }
 
+  /** @return the linked item (or null)
+   */
+  IDrawingLink getLink() { return mLink; }
+
   /** @return the point color
    */
   int pointColor( ) { return BrushManager.getPointColor( mPointType ); }

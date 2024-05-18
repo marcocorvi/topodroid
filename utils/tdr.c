@@ -7,6 +7,7 @@
 */
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 #include <arpa/inet.h>
 
 int sc = sizeof( char );
@@ -15,12 +16,21 @@ int sf = sizeof( float );
 uint32_t s32 = sizeof( uint32_t );
 
 int VERSION = 0;
-int max = 1170;  // max pos read
+int max = INT_MAX - 2;  // max pos read
 
 int toLE( int * pi )
 {
   unsigned char * ch = (unsigned char*)pi;
   return (int)( ( ((int)ch[0])<<24 ) | ( ((int)ch[1]) << 16 ) | ( ((int)ch[2]) << 8 ) | ( ((int)ch[3]) ) );
+}
+
+int checkFilePos( FILE * fp )
+{
+  if ( ftell( fp ) > max ) {
+    printf("Exceeded maximum file size.\n");
+    return 1;
+  }
+  return 0;
 }
 
 void readString( char * hdr, FILE * fp )
@@ -37,7 +47,7 @@ void readString( char * hdr, FILE * fp )
   for ( j=0; j<len; ++j ) {
     fread( &ch, sc, 1, fp );
     printf("%c", ch, ch );
-    if ( ftell( fp ) > max ) break;
+    if ( checkFilePos( fp ) ) break;
   }
   printf(">\n");
 }
@@ -51,7 +61,7 @@ void read4ch( FILE * fp, int skip )
   for ( j=0; j<skip; ++j ) {
     fread( &ch, sc, 1, fp );
     printf(" %02x ", ch );
-    if ( ftell( fp ) > max ) break;
+    if ( checkFilePos( fp ) ) break;
   }
   printf("\n");
 }
@@ -98,7 +108,7 @@ void readScrap( FILE * fp )
     readString( "", fp );
     // printf("\n");
     // read4ch( fp, 2 ); printf("\n");
-    if ( ftell( fp ) > max ) break;
+    if ( checkFilePos( fp ) ) break;
   }
 }
 
@@ -169,7 +179,7 @@ void readLabel( FILE * fp )
   readString( "  Options ", fp );      // options
 }
 
-void readLinePoint( FILE * fp )
+void readLinePoint( FILE * fp, int k )
 {
   long pos = ftell( fp );
   char ch;
@@ -177,7 +187,7 @@ void readLinePoint( FILE * fp )
   float y = readFloat( fp );
   fread( &ch, sc, 1, fp );
   // int lvl = (VERSION >= 401090 )? readInt( fp ) : 0xff; N.B. Line Points do not have level
-  printf("  %ld= %.2f %.2f %d ", pos, x, y, ch );
+  printf("  %ld= [%d] %.2f %.2f %d ", pos, k, x, y, ch );
   if ( ch == 1 ) {
     x = readFloat( fp );
     y = readFloat( fp );
@@ -211,8 +221,8 @@ void readLine( FILE * fp )
   np = readInt( fp );   // nr. points
   printf("  Nr. Points %d\n", np );
   for ( int k=0; k<np; ++k ) {
-    readLinePoint( fp );
-    if ( ftell( fp ) > max ) break;
+    readLinePoint( fp, k );
+    if ( checkFilePos( fp ) ) break;
   }
 }
 
@@ -235,8 +245,8 @@ void readArea( FILE * fp )
   int np = readInt( fp );       // nr points
   printf("  Counter %d Visibility %d Orientation %.2f Level %02x Scrap %d Nr.Points %d\n", cnt, ch, orient, lvl, scrap, np );
   for ( int k=0; k<np; ++k ) {
-    readLinePoint( fp );
-    if ( ftell( fp ) > max ) break;
+    readLinePoint( fp, k );
+    if ( checkFilePos( fp ) ) break;
   }
 }
 
@@ -297,7 +307,7 @@ void readFixedPoint( FILE * fp ) // special path has no group
   printf("%ld= FIXED: %.2f Y %.2f Level %02x Scrap %d\n", pos, x, y, lvl, scrap );
 }
 
-void readSpecialPoint( FILE * fp, const char * type )  // audio - photo
+void readSpecialPoint( FILE * fp, const char * type, int what )  // audio - photo
 {
   long pos = ftell( fp );
   float x = readFloat( fp );
@@ -312,6 +322,20 @@ void readSpecialPoint( FILE * fp, const char * type )  // audio - photo
   readString( "  Options ", fp ); // options
   int id = readInt( fp );
   printf("  Orientation %.2f Scale %d X %.2f Y %.2f ID %d\n", o, s, x, y, id );
+  if ( what == 1 ) { // photo
+    if ( VERSION >= 602067 ) {
+      readString( "  Code ", fp ); // geocode
+      int with_picture = readInt( fp );
+      if ( with_picture == 1 ) {
+        x = readFloat( fp );
+        y = readFloat( fp );
+        float z = readFloat( fp );
+        printf("With picture %.2f %.2f size %.2f \n", x, y, z );
+      } else {
+        printf("Without picture \n");
+      }
+    }
+  }
 }
 
 void readScrapIndex( FILE * fp ) 
@@ -394,10 +418,10 @@ int main( int argc, char ** argv )
         readAutoStation( fp );
         break;
       case 'Y': // photo
-	readSpecialPoint( fp, "Photo" );
+	readSpecialPoint( fp, "Photo", 1 );
 	break;
       case 'Z': // audio
-	readSpecialPoint( fp, "Audio" );
+	readSpecialPoint( fp, "Audio", 2 );
 	break;
       default:
         printf("%ld= Unexpected char %02x <%c>\n", pos, ch, ch );

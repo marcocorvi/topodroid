@@ -83,7 +83,7 @@ public class ImportTherionTask extends ImportTask
 
       ArrayList< ParserTherion.Station > stations = parser.getStations();
       for ( ParserTherion.Station st : stations ) {
-        app_data.insertStation( sid, st.name, st.comment, st.flag, st.name ); // PRESENTATION
+        app_data.insertStation( sid, st.name, st.comment, st.flag, st.name, "" ); // PRESENTATION, empty code
       }
     } catch ( ParserException e ) {
       // TDToast.makeBad( R.string.file_parse_fail );

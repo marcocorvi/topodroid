@@ -947,11 +947,12 @@ public class ShotWindow extends Activity
   /**
    * @param comment  photo comment
    * @param camera   camera type: 0 use URI, 1 use TopoDroid - not used
+   * @param geomorphology code
    */
-  void doTakePhoto( long sid, String comment, int camera )
+  void doTakePhoto( long sid, String comment, int camera, String code )
   {
     // camera = 1;
-    mMediaManager.prepareNextPhoto( sid, comment, 1, camera ); // size 1 m
+    mMediaManager.prepareNextPhoto( sid, comment, 1, camera, code ); // size 1 m
 
     // imageFile := PHOTO_DIR / surveyId / photoId .jpg
     // TDLog.Log( TDLog.LOG_SHOT, "photo " + imagefile.toString() );
@@ -1093,7 +1094,8 @@ public class ShotWindow extends Activity
   public void insertPhoto( )
   {
     // FIXME TITLE has to go
-    mApp_mData.insertPhoto( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getShotId(), "", TDUtil.currentDateTime(), mMediaManager.getComment(), mMediaManager.getCamera() );
+    mApp_mData.insertPhoto( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getShotId(), "", TDUtil.currentDateTime(),
+      mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode() );
     // FIXME NOTIFY ? no
     updateDisplay( ); 
   }

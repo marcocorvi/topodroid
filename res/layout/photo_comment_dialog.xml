@@ -63,6 +63,11 @@
         android:text="@string/button_cancel"
         android:layout_marginEnd="@dimen/marginh"
       />
+      <Button android:id="@+id/photo_code"
+        style="@style/button_default"
+        android:text="@string/button_geocode"
+        android:layout_marginEnd="@dimen/marginh"
+      />
       <Button android:id="@+id/photo_comment_ok"
         style="@style/button_default"
         android:text="@string/button_ok"

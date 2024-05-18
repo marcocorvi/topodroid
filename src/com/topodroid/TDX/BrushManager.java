@@ -194,6 +194,7 @@ public class BrushManager
   public static boolean isPointPhoto( int index )   { return mPointLib != null && index == mPointLib.mPointPhotoIndex; }
   public static boolean isPointAudio( int index )   { return mPointLib != null && index == mPointLib.mPointAudioIndex; }
   public static boolean isPointSection( int index ) { return mPointLib != null && index == mPointLib.mPointSectionIndex; }
+  public static boolean isPointPicture( int index ) { return mPointLib != null && index == mPointLib.mPointPictureIndex; }
 
   static boolean isPointEnabled( String name ) { return mPointLib != null && mPointLib.isSymbolEnabled( name ); }
   static boolean isLineEnabled( String name )  { return mLineLib  != null && mLineLib.isSymbolEnabled( name ); }
@@ -203,6 +204,7 @@ public class BrushManager
   static int getPointPhotoIndex()   { return (mPointLib == null)? 0 : mPointLib.mPointPhotoIndex; }
   static int getPointAudioIndex()   { return (mPointLib == null)? 0 : mPointLib.mPointAudioIndex; }
   static int getPointSectionIndex() { return (mPointLib == null)? 2 : mPointLib.mPointSectionIndex; }
+  static int getPointPictureIndex() { return (mPointLib == null)? 0 : mPointLib.mPointPictureIndex; }
 
   static String getPointName( int idx ) { return (mPointLib == null)? "" : mPointLib.getSymbolName( idx ); } 
   static String getLineName( int idx )  { return (mLineLib  == null)? "" : mLineLib.getSymbolName( idx ); } 

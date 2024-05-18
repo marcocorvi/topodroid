@@ -184,10 +184,11 @@ public class PhotoListDialog extends MyDialog
    * @param photo    info of the photo
    * @param comment  photo comment
    */
-  public void updatePhoto( PhotoInfo photo, String comment )
+  public void updatePhoto( PhotoInfo photo, String comment, String code )
   {
     // TDLog.Log( TDLog.LOG_PHOTO, "updatePhoto comment " + comment );
-    if ( mApp_mData.updatePhoto( photo.sid, photo.id, comment ) ) {
+    if ( mApp_mData.updatePhoto( photo.sid, photo.id, comment, code ) ) {
+      // need to update the PhotoInfo ?
       updateDisplay( ); // FIXME
     } else {
       TDToast.makeBad( R.string.no_db );

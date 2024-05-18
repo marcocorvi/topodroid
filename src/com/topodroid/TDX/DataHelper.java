@@ -178,7 +178,7 @@ public class DataHelper extends DataSetObservable
     "cs_name", "cs_longitude", "cs_latitude", "cs_altitude", "cs_decimals", "convergence", "accuracy", "accuracy_v", "m_to_units", "m_to_vunits"
   };
 
-  static final private String[] mStationFields = { "name", "comment", "flag", "presentation" };
+  static final private String[] mStationFields = { "name", "comment", "flag", "presentation", "code" };
 
   // private DataListenerSet mListeners; // IF_COSURVEY
 
@@ -2513,12 +2513,12 @@ public class DataHelper extends DataSetObservable
   private static final String qSensors2     = "select id, shotId, title, date, comment, type, value from sensors where surveyId=? AND shotId=? ";
   private static final String qShotAudio    = "select id, date from audios where surveyId=? AND shotId=? ";
   private static final String qAudiosAll    = "select id, shotId, date from audios where surveyId=? ";
-  private static final String qPhotosAll    = "select id, shotId, status, title, date, comment, camera from photos where surveyId=? ";
+  private static final String qPhotosAll    = "select id, shotId, status, title, date, comment, camera, code from photos where surveyId=? ";
   private static final String qjPhotos      =
-    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and p.status=? ";
+    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and p.status=? ";
   // private static String qShotPhoto    = "select id, shotId, title, date, comment from photos where surveyId=? AND shotId=? ";
   private static final String qjShotPhoto   =
-    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera from photos as p join shots as s on p.shotId=s.id where p.surveyId=? AND s.surveyId=? AND p.shotId=? ";
+    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code from photos as p join shots as s on p.shotId=s.id where p.surveyId=? AND s.surveyId=? AND p.shotId=? ";
   private static final String cntPhotos      =
     "select count(p.id) from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and p.status=? ";
 
@@ -2777,7 +2777,8 @@ public class DataHelper extends DataSetObservable
                                  name,              // shot name
                                  cursor.getString(5),
                                  cursor.getString(6),
-                                 (int)(cursor.getLong(7))
+                                 (int)(cursor.getLong(7)), // camera
+                                 cursor.getString(8)       // code
                  ) );
       } while (cursor.moveToNext());
     }
@@ -2818,7 +2819,8 @@ public class DataHelper extends DataSetObservable
                                  name,              // shot name
                                  cursor.getString(5),
                                  cursor.getString(6),
-                                 (int)(cursor.getLong(7))
+                                 (int)(cursor.getLong(7)),
+                                 cursor.getString(8)
                  ) );
       } while (cursor.moveToNext());
     }
@@ -4509,9 +4511,10 @@ public class DataHelper extends DataSetObservable
    * @param date      date
    * @param comment   comment
    * @param camera    camera type
+   * @param code      geomophology code
    * @return content-value set
    */
-  private ContentValues makePhotoContentValues( long sid, long id, long shotid, long status, String title, String date, String comment, long camera )
+  private ContentValues makePhotoContentValues( long sid, long id, long shotid, long status, String title, String date, String comment, long camera, String code )
   {
     ContentValues cv = new ContentValues();
     cv.put( "surveyId",  sid );
@@ -4522,6 +4525,7 @@ public class DataHelper extends DataSetObservable
     cv.put( "date",      date );
     cv.put( "comment",   (comment == null)? TDString.EMPTY : comment );
     cv.put( "camera",    camera );
+    cv.put( "code",      (code == null)? TDString.EMPTY : code );
     return cv;
   }
 
@@ -4533,13 +4537,14 @@ public class DataHelper extends DataSetObservable
    * @param date      date
    * @param comment   comment
    * @param camera    camera type
+   * @param code      geomophology code
    * @return id of the record (-1 on error)
    */
-  long insertPhoto( long sid, long id, long shotid, String title, String date, String comment, int camera )
+  long insertPhoto( long sid, long id, long shotid, String title, String date, String comment, int camera, String code )
   {
     if ( myDB == null ) return -1L;
     if ( id == -1L ) id = maxId( PHOTO_TABLE, sid );
-    ContentValues cv = makePhotoContentValues( sid, id, shotid, TDStatus.NORMAL, title, date, comment, camera );
+    ContentValues cv = makePhotoContentValues( sid, id, shotid, TDStatus.NORMAL, title, date, comment, camera, code );
     if ( ! doInsert( PHOTO_TABLE, cv, "photo insert" ) ) return -1L;
     return id;
   }
@@ -4556,13 +4561,15 @@ public class DataHelper extends DataSetObservable
    * @param sid     survey ID
    * @param id      photo ID
    * @param comment new photo comment
+   * @param code    new photo geocode
    * @return true if successful
    */
-  boolean updatePhoto( long sid, long id, String comment )
+  boolean updatePhoto( long sid, long id, String comment, String code )
   {
     if ( myDB == null ) return false;
     ContentValues cv = new ContentValues();
     cv.put( "comment", comment );
+    cv.put( "code",    code );
     try {
       myDB.beginTransaction();
       myDB.update( PHOTO_TABLE, cv, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
@@ -5630,7 +5637,7 @@ public class DataHelper extends DataSetObservable
          TDLog.v("dump PHOTO");
          do {
            pw.format(Locale.US,
-                     "INSERT into %s values( %d, %d, %d, %d, \"%s\", \"%s\", \"%s\", %d );\n",
+                     "INSERT into %s values( %d, %d, %d, %d, \"%s\", \"%s\", \"%s\", %d, \"%s\" );\n",
                      PHOTO_TABLE,
                      sid,
                      cursor.getLong(0),   // id
@@ -5639,7 +5646,8 @@ public class DataHelper extends DataSetObservable
                      TDString.escape( cursor.getString(3) ), // title
                      TDString.escape( cursor.getString(4) ), // date
                      TDString.escape( cursor.getString(5) ), // comment
-                     cursor.getLong(6)
+                     cursor.getLong(6),
+                     TDString.escape( cursor.getString(7) )  // code
            );
          } while (cursor.moveToNext());
        }
@@ -5811,13 +5819,14 @@ public class DataHelper extends DataSetObservable
          do {
            // STATION_TABLE does not have field "id"
            pw.format(Locale.US,
-             "INSERT into %s values( %d, 0, \"%s\", \"%s\", %d, \"%s\" );\n",
+             "INSERT into %s values( %d, 0, \"%s\", \"%s\", %d, \"%s\", \"%s\" );\n",
              STATION_TABLE,
              sid, 
              TDString.escape( cursor.getString(0) ),
              TDString.escape( cursor.getString(1) ),
              cursor.getLong(2),
-             TDString.escape( cursor.getString(3) )
+             TDString.escape( cursor.getString(3) ),
+             TDString.escape( cursor.getString(4) )
            );
          } while (cursor.moveToNext());
        }
@@ -5965,7 +5974,8 @@ public class DataHelper extends DataSetObservable
                  date    = TDString.unescape( scanline1.stringValue( ) );
                  comment = TDString.unescape( scanline1.stringValue( ) );
                  long camera = (db_version > 39)? scanline1.longValue( 0 ) : 0 ;
-                 cv = makePhotoContentValues( sid, id, shotid, TDStatus.NORMAL, title, date, comment, camera );
+                 String code = (db_version > 52)? scanline1.stringValue( ) : "" ;
+                 cv = makePhotoContentValues( sid, id, shotid, TDStatus.NORMAL, title, date, comment, camera, code );
                  myDB.insert( PHOTO_TABLE, null, cv ); 
                  // TDLog.Log( TDLog.LOG_DB, "load from file photo " + sid + " " + id + " " + title + " " + name );
                }
@@ -6145,9 +6155,11 @@ public class DataHelper extends DataSetObservable
                comment = TDString.unescape( scanline1.stringValue( ) );
                long flag = ( db_version > 25 )? scanline1.longValue( 0 ) : 0;
                String presentation = name;
+               String code = "";
                if ( db_version > 45 ) presentation = TDString.unescape( scanline1.stringValue( ) );
+               if ( db_version > 52 ) code = TDString.unescape( scanline1.stringValue( ) );
                // success &= insertStation( sid, name, comment, flag );
-               cv = makeStationContentValues( sid, name, comment, flag, presentation );
+               cv = makeStationContentValues( sid, name, comment, flag, presentation, code );
                myDB.insert( STATION_TABLE, null, cv ); 
              }
            }
@@ -6170,7 +6182,7 @@ public class DataHelper extends DataSetObservable
    }
 
    // ----------------------------------------------------------------------
-  private ContentValues makeStationContentValues( long sid, String name, String comment, long flag, String presentation )
+  private ContentValues makeStationContentValues( long sid, String name, String comment, long flag, String presentation, String code )
   {
     ContentValues cv = new ContentValues();
     cv.put( "surveyId",  sid );
@@ -6178,6 +6190,7 @@ public class DataHelper extends DataSetObservable
     cv.put( "comment",   comment );
     cv.put( "flag",      flag );
     cv.put( "presentation", presentation );
+    cv.put( "code",      (code == null)? "" : code );
     return cv;
   }
 
@@ -6188,7 +6201,7 @@ public class DataHelper extends DataSetObservable
    * @param flag         station flag
    * @param presentation station presentation string
    */
-  public boolean insertStation( long sid, String name, String comment, long flag, String presentation )
+  public boolean insertStation( long sid, String name, String comment, long flag, String presentation, String code )
   {
     if ( myDB == null ) return false;
     boolean ret = false;
@@ -6206,6 +6219,7 @@ public class DataHelper extends DataSetObservable
       cv.put("comment", comment );
       cv.put("flag", flag );
       cv.put("presentation", ( presentation == null )? name : presentation );
+      cv.put("code", (code == null)? "" : code );
       doUpdate( STATION_TABLE, cv, "surveyId=? AND name=?", new String[]{ Long.toString(sid), name }, "station" );
       // try {
       //   myDB.beginTransaction();
@@ -6226,7 +6240,7 @@ public class DataHelper extends DataSetObservable
       // // ret =
       // doStatement( updateStationCommentStmt, "station update" );
     } else {
-      ContentValues cv = makeStationContentValues( sid, name, comment, flag, ((presentation == null)? name : presentation) );
+      ContentValues cv = makeStationContentValues( sid, name, comment, flag, ((presentation == null)? name : presentation), ((code == null)? "" : code) );
       ret = doInsert( STATION_TABLE, cv, "station insert" );
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
@@ -6247,14 +6261,14 @@ public class DataHelper extends DataSetObservable
           "surveyId=? and name=?", new String[]{ Long.toString( sid ), name },
           null, null, null );
       if (cursor.moveToFirst()) {
-        cs = new StationInfo( cursor.getString( 0 ), cursor.getString( 1 ), cursor.getLong( 2 ), cursor.getString(3) );
+        cs = new StationInfo( cursor.getString( 0 ), cursor.getString( 1 ), cursor.getLong( 2 ), cursor.getString(3), cursor.getString(4) );
       }
       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     }
     if ( cs == null && presentation != null ) {
-      ContentValues cv = makeStationContentValues( sid, name, TDString.EMPTY, 0, presentation );
+      ContentValues cv = makeStationContentValues( sid, name, TDString.EMPTY, 0, presentation, null );
       if ( doInsert( STATION_TABLE, cv, "station insert" ) ) {
-        cs = new StationInfo( name, TDString.EMPTY, 0, presentation );
+        cs = new StationInfo( name, TDString.EMPTY, 0, presentation, "" );
       }
     }
     return cs;
@@ -6273,7 +6287,7 @@ public class DataHelper extends DataSetObservable
                            null, null, null );
     if (cursor.moveToFirst()) {
       do {
-        ret.add( new StationInfo( cursor.getString(0), cursor.getString(1), cursor.getLong(2), cursor.getString(3) ) );
+        ret.add( new StationInfo( cursor.getString(0), cursor.getString(1), cursor.getLong(2), cursor.getString(3), cursor.getString(4) ) );
       } while (cursor.moveToNext());
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
@@ -6588,7 +6602,8 @@ public class DataHelper extends DataSetObservable
             +   " name TEXT, "          // PRIMARY KEY
             +   " comment TEXT, "
             +   " flag INTEGER default 0, "
-            +   " presentation TEXT default NIL "
+            +   " presentation TEXT default NIL, "
+            +   " code TEXT default NIL "      // geo-morphology code(s)
             +   ")"
           );
            
@@ -6657,7 +6672,8 @@ public class DataHelper extends DataSetObservable
             +   " title TEXT, "
             +   " date TEXT, "
             +   " comment TEXT, "
-            +   " camera INTEGER "  // source type
+            +   " camera INTEGER default 0, "  // source type
+            +   " code TEXT default NIL "      // geo-morphology code(s)
             // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
             // +   " ON DELETE CASCADE "
             +   ")"
@@ -6824,6 +6840,9 @@ public class DataHelper extends DataSetObservable
            case 51:
              db.execSQL( "ALTER TABLE shots ADD COLUMN time INTEGER default 0 " );
            case 52:
+             db.execSQL( "ALTER TABLE photos ADD COLUMN code TEXT default NIL" );
+             db.execSQL( "ALTER TABLE stations ADD COLUMN code TEXT default NIL" );
+           case 53:
              // TDLog.v( "current version " + oldVersion );
            default:
              break;

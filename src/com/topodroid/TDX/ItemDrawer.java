@@ -75,6 +75,7 @@ abstract class ItemDrawer extends Activity
   static void updateRecentPoint( int point )
   {
     if ( BrushManager.isPointSection( point ) ) return;
+    if ( BrushManager.isPointPicture( point ) ) return;
     updateRecent( BrushManager.getPointByIndex( point ), mRecentPoint, mRecentPointAge );
   }
 

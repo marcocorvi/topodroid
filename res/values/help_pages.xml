@@ -73,6 +73,7 @@
   <string name="AutoCalibDialog" translatable="false">page_todo.htm</string>
   <string name="FirmwareDialog" translatable="false">page_firmware.htm</string>
   <string name="FirmwareFileDialog" translatable="false">page_firmware.htm</string>
+  <string name="GeoCodeDialog" translatable="false">page_geocode.htm</string>
   <string name="FixedDialog" translatable="false">page_fixed.htm</string>
   <string name="FixedAddDialog" translatable="false">page_fixed_add.htm</string>
   <string name="FixedGpsDialog" translatable="false">page_fixed_gps.htm</string>

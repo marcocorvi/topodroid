@@ -32,15 +32,18 @@ import android.widget.EditText;
 
 class DrawingPhotoDialog extends MyDialog
                          implements View.OnClickListener
+                         , IGeoCoder
 {
   private EditText mComment;
   private EditText mSize;
   private CheckBox mCamera;
+  private Button   mBtCode;
   private boolean  cameraCheck;
 
   private final DrawingWindow mActivity;
   private final float mX;
   private final float mY;
+  private String mCode = "";
 
   DrawingPhotoDialog( Context context, DrawingWindow activity, float x, float y )
   {
@@ -68,6 +71,11 @@ class DrawingPhotoDialog extends MyDialog
 
     ((Button) findViewById(R.id.photo_ok)).setOnClickListener( this );
     ((Button) findViewById(R.id.photo_cancel)).setOnClickListener( this );
+    if ( TDLevel.overExpert ) {
+      ((Button) findViewById(R.id.photo_code)).setOnClickListener( this );
+    } else {
+      ((Button) findViewById(R.id.photo_code)).setVisibility( View.GONE );
+    }
 
     mComment.setTextSize( TDSetting.mTextSize );
     mSize.setTextSize( TDSetting.mTextSize );
@@ -88,12 +96,17 @@ class DrawingPhotoDialog extends MyDialog
           size = 1;
         }
       }
-      mActivity.addPhotoPoint( mComment.getText().toString(), size, mX, mY, camera );
+      mActivity.addPhotoPoint( mComment.getText().toString(), size, mX, mY, camera, mCode );
+    } else if ( view.getId() == R.id.photo_code ) {
+      (new GeoCodeDialog( mContext, this, mCode )).show();
+      return;
     // } else if ( view.getId() == R.id.photo_cancel ) {
     //   /* nothing */
     }
     dismiss();
   }
+
+  public void setGeoCode( String code ) { mCode = (code == null)? "" : code; }
 }
         
 

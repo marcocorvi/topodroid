@@ -130,6 +130,14 @@ public class TopoDroidApp extends Application
   // static final String EMPTY = "";
   static private TopoDroidApp thisApp = null;
 
+  static private GeoCodes mGeoCodes = null; // singleton
+
+  static synchronized GeoCodes getGeoCodes()
+  {
+    if ( mGeoCodes == null ) mGeoCodes = new GeoCodes();
+    return mGeoCodes;
+  }
+
   /** check if the app has the database helper
    * @return true if the app has the database helper
    */

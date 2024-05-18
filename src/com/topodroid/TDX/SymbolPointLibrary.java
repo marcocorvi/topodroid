@@ -38,6 +38,7 @@ public class SymbolPointLibrary extends SymbolLibrary
   int mPointUserIndex; 
   int mPointLabelIndex;
   int mPointPhotoIndex;
+  int mPointPictureIndex;
   int mPointAudioIndex;
   // int mPointDangerIndex;
   int mPointSectionIndex;
@@ -50,6 +51,7 @@ public class SymbolPointLibrary extends SymbolLibrary
     mPointUserIndex   = 0;
     mPointLabelIndex  = -1;
     mPointPhotoIndex  = -1;
+    mPointPictureIndex = -1;
     mPointAudioIndex  = -1;
     // mPointDangerIndex = -1;
     mPointSectionIndex = -1;
@@ -65,6 +67,7 @@ public class SymbolPointLibrary extends SymbolLibrary
     mPointUserIndex   = 0;
     mPointLabelIndex  = -1;
     mPointPhotoIndex  = -1;
+    mPointPictureIndex = -1;
     mPointAudioIndex  = -1;
     // mPointDangerIndex = -1;
     mPointSectionIndex = -1;
@@ -132,6 +135,7 @@ public class SymbolPointLibrary extends SymbolLibrary
   static final private String p_label   = "moveTo 0 3 lineTo 0 -6 lineTo -3 -6 lineTo 3 -6"; // "T" shape
   static final private String p_user    = "addCircle 0 0 6";                                  // "o" shape
   static final private String p_section = "moveTo -5 -5 lineTo -5 5 lineTo 5 5 lineTo 5 -5 lineTo -5 -5"; // square
+  static final private String p_picture = "moveTo -5 -5 lineTo -5 5 lineTo 5 5 lineTo 5 -5 lineTo -5 -5 lineTo 5 5"; // square with diagonal
 
   /** load the system points, "user", "label", "section"
    * @param res   resources
@@ -154,6 +158,11 @@ public class SymbolPointLibrary extends SymbolLibrary
     mPointSectionIndex = mSymbols.size();
     // String section = res.getString( R.string.p_section );
     symbol = new SymbolPoint( res.getString(R.string.thp_section), SECTION, null, SECTION, 0xffcccccc, p_section, false, 0, DrawingLevel.LEVEL_USER, Symbol.W2D_DETAIL_SYM );
+    addSymbol( symbol );
+
+    mPointPictureIndex = mSymbols.size();
+    // String section = res.getString( R.string.p_section );
+    symbol = new SymbolPoint( res.getString(R.string.thp_picture), PICTURE, null, PICTURE, 0xffcccccc, p_picture, false, 0, DrawingLevel.LEVEL_USER, Symbol.W2D_DETAIL_SYM );
     addSymbol( symbol );
 
     // TDLog.v("PointLibrary user " + mPointUserIndex + " label " + mPointLabelIndex + " section " + mPointSectionIndex );
@@ -183,6 +192,7 @@ public class SymbolPointLibrary extends SymbolLibrary
         String fname = file.getName();
 
         if ( fname.equals( PHOTO ) && ! TDandroid.checkCamera( ctx ) ) continue;
+        // if ( fname.equals( PICTURE ) && ! TDandroid.checkCamera( ctx ) ) continue;
         if ( fname.equals( AUDIO ) && ! TDandroid.checkMicrophone( ctx ) ) continue;
 
         // if ( fname.equals(USER) || fname.equals(LABEL) || fname.equals(SECTION) ) continue;
@@ -265,6 +275,7 @@ public class SymbolPointLibrary extends SymbolLibrary
     mPointUserIndex    = getSymbolIndexByThName( USER );
     mPointLabelIndex   = getSymbolIndexByThName( LABEL );
     mPointPhotoIndex   = getSymbolIndexByThName( PHOTO );
+    mPointPictureIndex = getSymbolIndexByThName( PICTURE );
     mPointAudioIndex   = getSymbolIndexByThName( AUDIO );
     // mPointDangerIndex  = getSymbolIndexByThName( "danger" );
     mPointSectionIndex = getSymbolIndexByThName( SECTION ); 

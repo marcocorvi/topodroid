@@ -52,11 +52,15 @@ class CurrentStationDialog extends MyDialog
                            implements View.OnClickListener
                            , View.OnLongClickListener
                            , OnItemClickListener
+                           , IGeoCoder
 {
   private final ShotWindow mParent;
   private String mStation;    // station name
   private EditText mName;
   private EditText mComment;
+  private Button   mBtnCode;
+ 
+  private String mCode = "";
 
   private Button mBtnPush;
   private Button mBtnPop;
@@ -121,6 +125,13 @@ class CurrentStationDialog extends MyDialog
     mBtnPop     = (Button) findViewById(R.id.button_pop );
     mBtnOK      = (Button) findViewById(R.id.button_current );
     mBtnClear   = (Button) findViewById(R.id.button_clear );
+    mBtnCode    = (Button) findViewById(R.id.button_code );
+
+    if ( TDLevel.overExpert ) {
+      mBtnCode.setOnClickListener( this );
+    } else {
+      mBtnCode.setVisibility( View.GONE );
+    }
 
     mBtnPush.setOnClickListener( this ); // STORE
     mBtnPop.setOnClickListener( this );  // DELETE
@@ -290,7 +301,7 @@ class CurrentStationDialog extends MyDialog
       }
 
       mStation = name;
-      TopoDroidApp.mData.insertStation( TDInstance.sid, name, comment, flag, name ); // PRESENTATION = name
+      TopoDroidApp.mData.insertStation( TDInstance.sid, name, comment, flag, name, mCode ); // PRESENTATION = name
       updateList();
       return;
 
@@ -313,7 +324,9 @@ class CurrentStationDialog extends MyDialog
         mApp.setCurrentStationName( null );
       }
       if ( mParent != null ) mParent.updateDisplay();
-
+    } else if ( b == mBtnCode ) {
+      (new GeoCodeDialog( mContext, this, mCode )).show();
+      return;
     // } else if ( b == mBtnCancel ) {
     //   /* nothing : dismiss */
     }
@@ -327,5 +340,7 @@ class CurrentStationDialog extends MyDialog
     if ( MyKeyboard.close( mKeyboard ) ) return;
     dismiss();
   }
+
+  public void setGeoCode( String code ) { mCode = (code == null)? "" : code; }
 
 }

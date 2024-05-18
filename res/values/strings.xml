@@ -89,6 +89,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="thp_user">user</string>
     <string name="thp_label">label</string>
     <string name="thp_section">section</string>
+    <string name="thp_picture">picture</string>
     <string name="thp_station" copyable="fr">station</string>
     <!-- UNUSED string name="thp_danger">danger</string -->
     <string name="thl_user">user</string>
@@ -295,6 +296,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="datamode_diving">Diving data-mode</string>
     <string name="illegal_data_value">Illegal data value</string>
 
+    <string name="geocode_title">Geomorphology Code</string>
     <string name="photo_title" copyable="fr">Photo</string>
     <string name="photo_text">Enter photo comment</string>
     <string name="photo_failed">Failed photo</string>
@@ -804,6 +806,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="button_apply"     >Apply</string>
     <string name="button_back"      >Back</string>
     <string name="button_cancel"    >Cancel</string>
+    <string name="button_geocode"   >GeoCode</string>
     <!-- UNUSED string name="button_change"    >Change</string -->
     <string name="button_clipboard" >Clipboard</string>
     <string name="button_close"     >Close</string>

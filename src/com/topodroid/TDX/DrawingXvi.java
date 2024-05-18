@@ -324,6 +324,7 @@ class DrawingXvi
     float x1, y1, x2, y2;
 
     if ( BrushManager.isPointSection( idx ) ) return;
+    if ( BrushManager.isPointPicture( idx ) ) return;
     if ( BrushManager.isPointLabel( idx ) ) {
       String label = point.getPointText().toUpperCase( Locale.getDefault() );
       int len = label.length();

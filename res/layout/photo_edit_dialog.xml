@@ -68,6 +68,11 @@
         android:text="@string/button_delete"
         android:layout_marginEnd="@dimen/marginh"
       />
+      <Button android:id="@+id/photo_geocode"
+        style="@style/button_default"
+        android:text="@string/button_geocode"
+        android:layout_marginEnd="@dimen/marginh"
+      />
       <Button android:id="@+id/photo_ok"
         style="@style/button_default"
         android:text="@string/button_save"

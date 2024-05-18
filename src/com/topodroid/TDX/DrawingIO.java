@@ -814,10 +814,18 @@ public class DrawingIO
             if ( path.mScrap == scrap_index ) {
               // if ( plotName != null ) 
 	        path.mPlotName = plotName;
-              if ( what == 'U' ) {
+              if ( path instanceof DrawingStationUser ) { // what == 'U' - USER
                 surface.addDrawingStationUser( (DrawingStationUser)path );
               } else {
                 surface.addDrawingPath( path );
+                if ( path instanceof DrawingPhotoPath ) { // what == 'Y' - PHOTO
+                  DrawingPhotoPath photo = (DrawingPhotoPath)path;
+                  DrawingPicturePath picture = photo.getPicture();
+                  if ( picture != null ) {
+                    picture.mPlotName = plotName;
+                    surface.addDrawingPath( picture );
+                  }
+                }
               }
             } else {
               TDLog.Error("Scrap/Path index mismatch " + scrap_index + " " + path.mScrap );

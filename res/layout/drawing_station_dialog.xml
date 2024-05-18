@@ -210,6 +210,11 @@
           android:text="@string/button_cancel"
           android:layout_gravity="start"
           />
+        <Button android:id="@+id/station_code"
+          style="@style/button_default"
+          android:text="@string/button_geocode"
+          android:layout_gravity="start"
+          />
         <Button android:id="@+id/btn_saved"
           style="@style/button_default"
           android:text="@string/button_saved"

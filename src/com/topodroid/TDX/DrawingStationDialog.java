@@ -39,6 +39,7 @@ import android.widget.LinearLayout;
 class DrawingStationDialog extends MyDialog
                            implements View.OnClickListener
                            , IBearingAndClino
+                           , IGeoCoder
 {
     // private TextView mLabel;
     // private TextView mBarrierLabel;
@@ -63,6 +64,7 @@ class DrawingStationDialog extends MyDialog
     private Button mBtnOkComment; // saved station dialog
     private Button mBtnSaved; // saved station dialog
     private Button mBtnCancel;
+    private Button mBtnCode;
 
     private final DrawingWindow mParent;
     private final DrawingStationName mStation; // num station point
@@ -76,6 +78,7 @@ class DrawingStationDialog extends MyDialog
     // private boolean mGlobalXSections; // unused
     private float mBearing;
     private float mClino;
+    private String mCode = "";
     private List< DBlock > mBlk;
 
     // cannot use disabled compass, otherwise there is no way to choose x-section at junction station
@@ -320,6 +323,13 @@ class DrawingStationDialog extends MyDialog
           mHiddenLabel.setVisibility( View.GONE );
         }
       }
+
+      mBtnCode = (Button) findViewById( R.id.station_code );
+      if ( TDLevel.overExpert ) {
+        mBtnCode.setOnClickListener( this );
+      } else {
+        mBtnCode.setVisibility( View.GONE );
+      }
     }
 
     @Override
@@ -335,13 +345,16 @@ class DrawingStationDialog extends MyDialog
         } else {
           mParent.removeStationPoint( mStation, mPath );
         }
+      } else if ( /* TDLevel.overExpert && */ b == mBtnCode ) {
+        (new GeoCodeDialog( mContext, this, mCode )).show();
+        return;
       } else if ( /* TDLevel.overExpert && */ b == mBtnOkComment ) {
         boolean fail = true;
         if ( mComment.getText() != null ) {
           String comment = mComment.getText().toString().trim();
           if ( comment.length() > 0 ) {
             // set/change saved-station comment - leave flags unchanged
-            TopoDroidApp.mData.insertStation( TDInstance.sid, mStationName, comment, mFlag, mStationName ); // PRESENTATION
+            TopoDroidApp.mData.insertStation( TDInstance.sid, mStationName, comment, mFlag, mStationName, mCode ); // PRESENTATION
             fail = false;
           } 
         } 
@@ -434,6 +447,8 @@ class DrawingStationDialog extends MyDialog
    */
   public boolean setJpegData( byte[] data ) { return false; }
   
+  public void setGeoCode( String code ) { mCode = (code == null)? "" : code; }
+
 }
         
 

@@ -4040,6 +4040,7 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v( "delete point type " + point.mPointType );
     if ( point instanceof DrawingPhotoPath ) { 
       DrawingPhotoPath photo = (DrawingPhotoPath)point;
+      if ( photo.mPicture != null ) mDrawingSurface.deletePath( photo.mPicture ); // delete associated picture
       mApp_mData.deletePhoto( TDInstance.sid, photo.mId );
       TDFile.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString( photo.mId ) ) );
     } else if ( point instanceof DrawingAudioPath ) { 
@@ -5721,13 +5722,22 @@ public class DrawingWindow extends ItemDrawer
    */
   private void createPhotoPoint()
   {
-    DrawingPhotoPath photo = new DrawingPhotoPath( mMediaManager.getComment(),
-      mMediaManager.getPhotoSize(),
-      mMediaManager.getX(), mMediaManager.getY(), mPointScale,
+    float x = mMediaManager.getX();
+    float y = mMediaManager.getY();
+    float s = mMediaManager.getPhotoSize();
+    long id = mMediaManager.getPhotoId();
+    int scrap = mDrawingSurface.scrapIndex();
+    DrawingPhotoPath photo = new DrawingPhotoPath( mMediaManager.getComment(), x, y, mPointScale, 
       "", // String.format(Locale.US, "-size %.2f", mMediaManager.getPhotoSize() ),
-      mMediaManager.getPhotoId(), mDrawingSurface.scrapIndex() );
+      id, scrap );
     photo.mLandscape = mLandscape;
     mDrawingSurface.addDrawingPath( photo );
+
+    DrawingPicturePath picture = new DrawingPicturePath( s, x+1, y+1, id, scrap );
+    picture.setLink( photo );
+    photo.setPicture( picture );
+    mDrawingSurface.addDrawingPath( picture );
+
     modified();
   }
 
@@ -5750,7 +5760,8 @@ public class DrawingWindow extends ItemDrawer
    */
   public void insertPhoto( )
   {
-    mApp_mData.insertPhoto( TDInstance.sid, mMediaManager.getPhotoId(), -1, "", TDUtil.currentDateTime(), mMediaManager.getComment(), mMediaManager.getCamera() );
+    mApp_mData.insertPhoto( TDInstance.sid, mMediaManager.getPhotoId(), -1, "", TDUtil.currentDateTime(), 
+      mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode() );
     // FIXME NOTIFY ? no
     createPhotoPoint();
   }
@@ -5799,8 +5810,9 @@ public class DrawingWindow extends ItemDrawer
    * @param x      X coord
    * @param y      Y coord
    * @param camera camera type (API)
+   # @param code   geomorphology code
    */
-  public void addPhotoPoint( String comment, float size, float x, float y, int camera )
+  public void addPhotoPoint( String comment, float size, float x, float y, int camera, String code )
   {
     // TDLog.v("addPhoto " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null );
@@ -5809,7 +5821,7 @@ public class DrawingWindow extends ItemDrawer
     } else {
       mMediaManager.setPoint( x, y );
     }
-    mMediaManager.prepareNextPhoto( -1, ((comment == null)? "" : comment), size, camera );
+    mMediaManager.prepareNextPhoto( -1, ((comment == null)? "" : comment), size, camera, ((code == null)? "" : code) );
     // mMediaComment = (comment == null)? "" : comment;
     // mMediaId = mApp_mData.nextPhotoId( TDInstance.sid );
     // File imagefile = TDFile.getFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mMediaId) ) );
@@ -7275,6 +7287,14 @@ public class DrawingWindow extends ItemDrawer
               // TDLog.v( "edit point type " + point.mPointType );
               if ( point instanceof DrawingPhotoPath ) { // BrushManager.isPointPhoto( point.mPointType )
                 new DrawingPhotoEditDialog( mActivity, (DrawingPhotoPath)point ).show();
+              } else if ( point instanceof DrawingPicturePath ) { // BrushManager.isPointPhoto( point.mPointType )
+                // TODO
+                DrawingPhotoPath photo = (DrawingPhotoPath)(point.getLink() );
+                if ( photo != null ) {
+                  new DrawingPhotoEditDialog( mActivity, photo ).show();
+                } else {
+                  TDLog.Error("Picture without photo");
+                }
               } else if ( point instanceof DrawingAudioPath ) { // BrushManager.isPointAudio( point.mPointType )
                 if ( audioCheck ) {
                   DrawingAudioPath audio = (DrawingAudioPath)point;

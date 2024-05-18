@@ -287,7 +287,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     }
     mSelect.clear();
     if ( blk != null ) {
-      TDLog.v("Last MS block " + blk.mId );
+      // TDLog.v("Last MS block " + blk.mId );
       // blk.setBackgroundColor( TDColor.TRANSPARENT );
       View v = blk.getView();
       if ( v != null ) {
@@ -308,7 +308,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     clearLastMultiselected();
     mSelect.clear();
     mSearch.reset( null, false );
-    TDLog.v("DBlockAdapter :: CLEAR");
+    // TDLog.v("DBlockAdapter :: CLEAR");
   }
 
   /** clear the search-result

@@ -96,6 +96,11 @@
         android:text="@string/button_close"
         android:layout_marginEnd="@dimen/marginh"
       />
+      <Button android:id="@+id/button_code"
+        style="@style/button_default"
+        android:text="@string/button_geocode"
+        android:layout_marginEnd="@dimen/marginh"
+      />
       <Button android:id="@+id/button_current"
         style="@style/button_default"
         android:text="@string/button_current"

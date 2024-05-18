@@ -623,7 +623,9 @@ class ShotNewDialog extends MyDialog
                                     "",
                                     TDUtil.currentDateTime(),
                                     "snap " + shot_from + " " + shot_to,
-                                    PhotoInfo.CAMERA_TOPODROID ); // FIXME TITLE has to go
+                                    PhotoInfo.CAMERA_TOPODROID,
+                                    ""  // TODO geomorphology code
+            ); // FIXME TITLE has to go
           } catch ( IOException e ) {
             TDLog.Error( "IO exception " + e.getMessage() );
           }

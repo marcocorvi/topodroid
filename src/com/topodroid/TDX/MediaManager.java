@@ -30,6 +30,7 @@ class MediaManager
   private long    mPhotoId = -1;
   private long    mAudioId = 0;  // audio-negative id
   private String  mComment;
+  private String  mCode;
   private float   mSize = 1;     // photo size (horizontal width) [m]
   private int     mCamera = PhotoInfo.CAMERA_UNDEFINED;
   private long    mShotId;   // photo/sensor shot id
@@ -46,10 +47,14 @@ class MediaManager
     mAudioFilepath = null;
   }
 
-  long prepareNextPhoto( long sid, String comment, float size, int camera )
+  /**
+   * @param code    geomorphology code
+   */
+  long prepareNextPhoto( long sid, String comment, float size, int camera, String code )
   {
     mShotId  = sid;
     mComment = comment;
+    mCode    = code;
     mSize    = size;
     mCamera  = camera;
     mPhotoId = mData.nextPhotoId( TDInstance.sid );
@@ -66,6 +71,7 @@ class MediaManager
   {
     mShotId  = sid;
     mComment = comment;
+    mCode    = null;
     mAudioId = mData.nextAudioNegId( TDInstance.sid ); // negative id's are for sketch audios
     mAudioFilepath = TDPath.getSurveyWavFile( TDInstance.survey, Long.toString(mAudioId) ); // audio file is "survey/id.wav"
     // mAudioFile = TDFile.getTopoDroidFile( mAudioFilepath );
@@ -92,6 +98,10 @@ class MediaManager
   /** @return media comment
    */
   String getComment() { return mComment; }
+
+  /** @return media geomorphology code
+   */
+  String getCode() { return mCode; }
 
   /** @return photo size (horizontal width) [m]
    */
@@ -139,7 +149,7 @@ class MediaManager
   //       bitmap.compress( Bitmap.CompressFormat.JPEG, compression, fos );
   //       fos.flush();
   //       fos.close();
-  //       mData.insertPhoto( TDInstance.sid, mPhotoId, mShotId, "", TDUtil.currentDate(), mComment, mCamera );
+  //       mData.insertPhoto( TDInstance.sid, mPhotoId, mShotId, "", TDUtil.currentDate(), mComment, mCamera, mCode );
   //       ret = true;
   //     } catch ( FileNotFoundException e ) {
   //       TDLog.Error("cannot save photo: file not found");

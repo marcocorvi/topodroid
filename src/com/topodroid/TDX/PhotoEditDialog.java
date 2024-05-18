@@ -26,16 +26,18 @@ import android.view.View;
 
 class PhotoEditDialog extends MyDialog
                       implements View.OnClickListener
+                      , IGeoCoder
 {
   // private final PhotoActivity mParent;
   private final PhotoListDialog mParent;
   private PhotoInfo mPhoto;
   private String mFilename;
+  private String mCode; // geocode
 
   private EditText mETcomment;  // photo comment
   private ImageView mIVimage;   // photo image
-  private Button   mButtonOK;
-  private Button   mButtonDelete;
+  // private Button   mButtonOK;
+  // private Button   mButtonDelete;
   // private Button   mButtonCancel;
   // private int mOrientation = 0;
   // private String mDate = "";
@@ -56,6 +58,7 @@ class PhotoEditDialog extends MyDialog
     mPhoto  = photo;
     // mFilename = filename;
     mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhoto.id) );
+    mCode     = mPhoto.getCode();
     mAtShot   = (mPhoto.shotid >= 0);
     // TDLog.v("PhotoEditDialog " + mFilename);
     mTdImage = new TDImage( mFilename );
@@ -74,8 +77,9 @@ class PhotoEditDialog extends MyDialog
     // TDLog.v( "photo edit dialog on create");
     mIVimage      = (ImageView) findViewById( R.id.photo_image );
     mETcomment    = (EditText) findViewById( R.id.photo_comment );
-    mButtonOK     = (Button) findViewById( R.id.photo_ok );
-    mButtonDelete = (Button) findViewById( R.id.photo_delete );
+    Button buttonOK     = (Button) findViewById( R.id.photo_ok );
+    Button buttonDelete = (Button) findViewById( R.id.photo_delete );
+    Button buttonCode = (Button) findViewById( R.id.photo_geocode );
     // mButtonCancel = (Button) findViewById( R.id.photo_cancel );
     
     float a = mTdImage.azimuth();
@@ -96,11 +100,16 @@ class PhotoEditDialog extends MyDialog
       mIVimage.setVisibility( View.GONE );
     }
 
-    mButtonOK.setOnClickListener( this );
-    if ( mAtShot ) {
-      mButtonDelete.setOnClickListener( this );
+    buttonOK.setOnClickListener( this );
+    if ( TDLevel.overExpert ) {
+      buttonCode.setOnClickListener( this );
     } else {
-      mButtonDelete.setVisibility( View.GONE );
+      buttonCode.setVisibility( View.GONE );
+    }
+    if ( mAtShot ) {
+      buttonDelete.setOnClickListener( this );
+    } else {
+      buttonDelete.setVisibility( View.GONE );
     }
     // mButtonCancel.setOnClickListener( this );
     
@@ -119,14 +128,17 @@ class PhotoEditDialog extends MyDialog
     int vid = v.getId();
     if ( vid == R.id.photo_ok ) {
       if ( mETcomment.getText() == null ) {
-        mParent.updatePhoto( mPhoto, "" );
+        mParent.updatePhoto( mPhoto, "", mCode );
       } else {
-        mParent.updatePhoto( mPhoto, mETcomment.getText().toString() );
+        mParent.updatePhoto( mPhoto, mETcomment.getText().toString(), mCode );
       }
     } else if ( vid == R.id.photo_delete ) {
       mParent.dropPhoto( mPhoto );
     } else if ( vid == R.id.photo_image ) {
       (new PhotoViewDialog( mContext, mPhoto )).show();
+      return;
+    } else if ( vid == R.id.photo_geocode ) {
+      (new GeoCodeDialog( mContext, this, mCode )).show();
       return;
     }
     if ( mTdImage != null ) mTdImage.recycleImages();
@@ -142,5 +154,10 @@ class PhotoEditDialog extends MyDialog
     dismiss();
   }
 
+  // interface IGeoCoder
+  public void setGeoCode( String code )
+  {
+    mCode = code;
+  }
 }
 

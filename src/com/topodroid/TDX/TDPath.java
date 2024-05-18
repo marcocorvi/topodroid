@@ -646,6 +646,10 @@ public class TDPath
    */
   public static  void deleteAreaFile( String name )  { TDFile.deletePrivateFile( DIR_AREA,  name ); }
 
+  /** @return geocodes file
+   */
+  public static File getGeocodesFile( )  { return TDFile.getPrivateFile( null, "geocodes" ); }
+
 
   // ---------------------------------------------------------------------------------------
 
