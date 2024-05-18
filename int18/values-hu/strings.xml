@@ -963,7 +963,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="hint_notes">jegyzetek</string>
     <string name="hint_label">címke</string>
     <string name="hint_comment">megjegyzés</string>
-    <!-- TODO string name="hint_size">size [m]</string -->
+    <string name="hint_size">méret [m]</string>
     <string name="hint_text">szöveg</string>
     <string name="hint_options">opciók</string>
     <string name="hint_name">név</string>

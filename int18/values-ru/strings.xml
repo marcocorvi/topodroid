@@ -598,7 +598,7 @@
     <string name="section_line_not_allowed">точка сечения недопустима</string>
 
     <!-- UNUSED string name="sensor">датчик</string -->
-    <!-- TODO string name="sensor_title">Add sensor measurement</string -->
+    <string name="sensor_title">Добавить измерение c датчика</string>
     <string name="sensor_gravity">ускорение</string>
     <!-- UNUSED string name="sensor_humidity">влажность</string -->
     <string name="sensor_light">освещенность</string>
@@ -815,7 +815,7 @@
     <!-- UNUESD string name="button_direction">Азимут/угол</string -->
     <!-- UNUSED string name="button_azimuth">Азимут</string -->
     <string name="button_plot"    >Абрис</string>
-    <!-- TODO string name="button_less">Less</string -->
+    <string name="button_less">Меньше</string>
     <string name="button_more"    >Ещё</string>
     <string name="button_move"    >Переместить</string>
     <string name="button_next"    >Далее</string>
@@ -935,11 +935,11 @@
     <!-- UNUSED string name="azimuth">Азимут [грд]</string -->
     <!-- UNUSED string name="clino">Угол [грд]</string -->
 
-    <!-- TODO string name="bt_alias_title">Bluetooth aliases</string -->
-    <!-- TODO string name="hint_bt_alias">BT alias</string -->
-    <!-- TODO string name="hint_bt_code">Device code</string -->
-    <!-- TODO string name="bt_alias_missing">BT alias missing</string -->
-    <!-- TODO string name="bt_code_missing">Device code missing</string -->
+    <string name="bt_alias_title">Псевдонимы Bluetooth</string>
+    <string name="hint_bt_alias">BT псевдоним</string>
+    <string name="hint_bt_code">Код устройства</string>
+    <string name="bt_alias_missing">BT псевдоним отсутствует</string>
+    <string name="bt_code_missing">>Код устройства отсутствует</string>
 
     <string name="hint_cellsize">размер ячейки</string>
     <string name="hint_cwd">рабочая папка</string>
@@ -955,7 +955,7 @@
     <string name="hint_notes">примечания</string>
     <string name="hint_label">подпись</string>
     <string name="hint_comment">коментарий</string>
-    <!-- TODO string name="hint_size">size [m]</string -->
+    <string name="hint_size">размер [м]</string>
     <string name="hint_text">текст</string>
     <string name="hint_options">опции</string>
     <string name="hint_name">название</string>
@@ -1431,8 +1431,8 @@
   <string name="pref_bezier_step_summary">Маскисмальное расстояние между точками при апроксимации кривых полилиниями [м]</string>
   <string name="pref_leg_shots_title">Мин. кол-во измерений между пикетами</string>
   <string name="pref_leg_shots_summary">Количество одинаковых повторяющихся замеров на отрезке между пикетами</string>
-  <!-- TODO string name="pref_backsight_splay_title">Backsight splay</string -->
-  <!-- TODO string name="pref_backsight_splay_summary">Backsight check with first splay</string -->
+  <string name="pref_backsight_splay_title">Сплей обратного замера</string>
+  <string name="pref_backsight_splay_summary">Проверка обратным замером с помощью первого сплеея</string>
   <string name="pref_recent_timeout_title">Время свежести замеров</string>
   <string name="pref_recent_timeout_summary">Отрезок времени после скачивания в течении которого данные считаются новыми. [с]</string>
   <string name="pref_triple_shot_title">Сигнал одинаковых измерений</string>
@@ -1510,7 +1510,7 @@
   <string name="pref_zip_share_category_title">Zip-share категория</string>
   <string name="pref_zip_share_category_summary">Добавить категорию в запрос на обмен zip-файлами</string>
 
-  <!-- TODO string name="pref_bt_alias_title">BT aliases</string -->
+  <string name="pref_bt_alias_title">BT псевдонимы</string>
   <string name="pref_sock_type_title">Тип соединения</string>
   <string name="pref_sock_type_summary">Тип соединения Bluetooth</string>
   <!-- UNUSED string name="pref_device_type_title">Тип Disto</string -->
