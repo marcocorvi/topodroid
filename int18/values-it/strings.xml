@@ -283,6 +283,7 @@
     <string name="datamode_diving">Modo dati profondo</string>
     <string name="illegal_data_value">Dati non corretti</string>
 
+    <!-- TODO string name="geocode_title">Geomorphology Code</string -->
     <string name="photo_title">FOTO</string>
     <string name="photo_text">Inserisci commento</string>
     <string name="photo_failed">Fallito salvataggio foto</string>
@@ -785,6 +786,7 @@
     <string name="button_apply"     >Applica</string>
     <string name="button_back"      >Indietro  </string>
     <string name="button_cancel"    >Annulla   </string>
+    <!-- TODO string name="button_geocode"   >GeoCode</string -->
     <!-- UNUSED string name="button_change"    >Cambia    </string -->
     <string name="button_clipboard" >Appunti</string>
     <string name="button_close"     >Chiudi    </string>

@@ -265,6 +265,7 @@ no campo abaixo e aperte o botão.
   <string name="datamode_normal">Modo normal de dados</string>
   <string name="datamode_diving">Modo mergulho de dados</string>
   <string name="illegal_data_value">Dado inválido</string>
+    <!-- TODO string name="geocode_title">Geomorphology Code</string -->
   <string name="photo_title">FOTO</string>
   <string name="photo_text">Entre comentário para foto</string>
   <string name="photo_failed">Foto falhou</string>
@@ -736,6 +737,7 @@ no campo abaixo e aperte o botão.
   <string name="button_apply">Aplicar</string>
   <string name="button_back">Voltar     </string>
   <string name="button_cancel">Cancelar   </string>
+    <!-- TODO string name="button_geocode"   >GeoCode</string -->
   <!-- UNUSED string name="button_change">Alterar    </string -->
   <string name="button_clipboard">Colar</string>
   <string name="button_close">Fechar     </string>

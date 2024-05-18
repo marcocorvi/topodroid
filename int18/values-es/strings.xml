@@ -291,6 +291,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="datamode_diving">Modo de datos profundos</string>
     <string name="illegal_data_value">Valores de datos no válidos</string>
 	
+    <!-- TODO string name="geocode_title">Geomorphology Code</string -->
     <string name="photo_title">FOTO</string>
     <string name="photo_text">Introducir comentario de foto</string>
     <string name="photo_failed">foto fallida</string>
@@ -792,6 +793,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_apply"     >Applicar</string>
     <string name="button_back"      >Atrás</string>
     <string name="button_cancel"    >Cancelar</string>
+    <!-- TODO string name="button_geocode"   >GeoCode</string -->
     <!-- UNUSED string name="button_change">Cambio</string -->
     <string name="button_clipboard" >Notas</string>
     <string name="button_close"     >Cerrar</string>

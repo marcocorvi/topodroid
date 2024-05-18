@@ -284,6 +284,7 @@
     <string name="datamode_diving">Режим данных - подводный</string>
     <string name="illegal_data_value">Недопустимое значение</string>
 
+    <!-- TODO string name="geocode_title">Geomorphology Code</string -->
     <string name="photo_title">ФОТО</string>
     <string name="photo_text">Введите коментарий к фото</string>
     <string name="photo_failed">Ошибка фото</string>
@@ -786,6 +787,7 @@
     <string name="button_apply"     >Применить</string>
     <string name="button_back"      >Назад</string>
     <string name="button_cancel"    >Отмена</string>
+    <!-- TODO string name="button_geocode"   >GeoCode</string -->
     <!-- UNUSED string name="button_change">Изменить</string -->
     <string name="button_clipboard" >Вставить</string>
     <string name="button_close"     >Закрыть</string>

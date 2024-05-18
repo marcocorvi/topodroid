@@ -284,6 +284,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="datamode_diving">Mode de données Plongée</string>
     <string name="illegal_data_value">Valeur de donnée incorrecte</string>
     
+    <!-- TODO string name="geocode_title">Geomorphology Code</string -->
     <string name="photo_title">Photo</string>
     <string name="photo_text">Saisir un commentaire pour la photo</string>
     <string name="photo_failed">Échec de la photo</string>
@@ -790,6 +791,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_apply"     >Appliquer</string>
     <string name="button_back"      >Retour</string>
     <string name="button_cancel"    >Annuler</string>
+    <!-- TODO string name="button_geocode"   >GeoCode</string -->
     <!-- UNUSED string name="button_change">Change</string -->
     <string name="button_clipboard" >Presse-papiers</string>
     <string name="button_close"     >Fermer</string>

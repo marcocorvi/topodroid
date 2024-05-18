@@ -256,6 +256,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="datamode_normal">Normaler Modus</string>
   <string name="datamode_diving">Tauchmodus</string>
   <string name="illegal_data_value">Unzulässiger Datenwert</string>
+    <!-- TODO string name="geocode_title">Geomorphology Code</string -->
   <string name="photo_title">FOTO</string>
   <string name="photo_text">Foto-Kommentar eingeben</string>
   <string name="photo_failed">Foto fehlgeschlagen</string>
@@ -727,6 +728,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="button_apply">Anwenden</string>
   <string name="button_back">Zurück</string>
   <string name="button_cancel">Abbrechen </string>
+    <!-- TODO string name="button_geocode"   >GeoCode</string -->
   <!-- UNUSED string name="button_change">Ändern</string -->
   <string name="button_clipboard">Zwischenablage</string>
   <string name="button_close">Schließen</string>

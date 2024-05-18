@@ -284,6 +284,7 @@
     <string name="datamode_diving">洞潜数据模式</string>
     <string name="illegal_data_value">非法的数值</string>
 
+    <!-- TODO string name="geocode_title">Geomorphology Code</string -->
     <string name="photo_title">照片</string>
     <string name="photo_text">输入照片注释</string>
     <string name="photo_failed">照片失败</string>
@@ -789,6 +790,7 @@
     <string name="button_apply"     >应用</string>
     <string name="button_back"      >返回      </string>
     <string name="button_cancel"    >取消    </string>
+    <!-- TODO string name="button_geocode"   >GeoCode</string -->
     <!-- UNUSED string name="button_change"    >更换    </string -->
     <string name="button_clipboard" >剪贴板 </string>
     <string name="button_close"     >关闭     </string>
