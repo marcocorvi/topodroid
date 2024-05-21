@@ -285,7 +285,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="datamode_diving">Búvár adat-móde</string>
     <string name="illegal_data_value">Helytelen adat érték</string>
 
-    <!-- TODO string name="geocode_title">Geomorphology Code</string -->
+    <string name="geocode_title">Geomorfológiaqi kód</string>
     <string name="photo_title">FÉNYKÉP</string>
     <string name="photo_text">Írd be a fénykép megjegyzését</string>
     <string name="photo_failed">Sikertelen fotó</string>
@@ -795,7 +795,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="button_apply"     >Alkalmaz</string>
     <string name="button_back"      >Vissza</string>
     <string name="button_cancel"    >Mégse</string>
-    <!-- TODO string name="button_geocode"   >GeoCode</string -->
+    <string name="button_geocode"   >GeoKód</string>
     <!-- UNUSED string name="button_change"    >Változtat</string -->
     <string name="button_clipboard" >Vágólap</string>
     <string name="button_close"     >Bezár</string>
