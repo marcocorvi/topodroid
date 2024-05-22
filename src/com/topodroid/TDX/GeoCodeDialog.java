@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date may 2024
  *
- * @brief TopoDroid geo codes dialog
+ * @brief TopoDroid geocodes dialog
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -34,26 +34,26 @@ class GeoCodeDialog extends MyDialog
                     implements View.OnClickListener
 {
 
-  private final IGeoCoder mCoder;
+  private final IGeoCoder mGeoCoder;
 
   private GeoCodeAdapter mAdapter = null;
-  private GeoCodes mCodes;
+  private GeoCodes mGeoCodes;
 
   /** cstr
    * @param context  context
    * @param coder    geomorphology coder
-   * @param code     current code (in the coder)
+   * @param geocode     current geocode (in the coder)
    */
-  GeoCodeDialog( Context context, IGeoCoder coder, String code )
+  GeoCodeDialog( Context context, IGeoCoder geocoder, String geocode )
   {
     super( context, null, R.string.GeoCodeDialog ); // null app
-    mCoder = coder;
-    mCodes = TopoDroidApp.getGeoCodes();
-    mCodes.resetSelected();
-    if ( code != null && code.length() > 0 ) {
-      String [] codes = code.split(" ");
-      for ( String cd : codes ) {
-        mCodes.setSelected( cd );
+    mGeoCoder = geocoder;
+    mGeoCodes = TopoDroidApp.getGeoCodes();
+    mGeoCodes.resetSelected();
+    if ( geocode != null && geocode.length() > 0 ) {
+      String [] geocodes = geocode.split(" ");
+      for ( String cd : geocodes ) {
+        mGeoCodes.setSelected( cd );
       }
     }
   }
@@ -70,8 +70,8 @@ class GeoCodeDialog extends MyDialog
     ListView list = (ListView)findViewById(R.id.code_list );
     list.setDividerHeight( 2 );
 
-    if ( mCodes.size() > 0 ) {
-      mAdapter = new GeoCodeAdapter( mContext, R.layout.geocode_row, mCodes.getCodes() );
+    if ( mGeoCodes.size() > 0 ) {
+      mAdapter = new GeoCodeAdapter( mContext, R.layout.geocode_row, mGeoCodes.getGeoCodes() );
       list.setAdapter( mAdapter );
     }
   }
@@ -81,9 +81,9 @@ class GeoCodeDialog extends MyDialog
   {
     // TDLog.Log( TDLog.LOG_INPUT, "Drawing Photo Dialog onClick() " + view.toString() );
     if (view.getId() == R.id.code_ok ) {
-      String code = (mAdapter == null)? "" : mAdapter.makeCode();
-      TDLog.v("GeoCode <" + code + ">" );
-      mCoder.setGeoCode( code );
+      String geocode = (mAdapter == null)? "" : mAdapter.makeCode();
+      TDLog.v("GeoCode <" + geocode + ">" );
+      mGeoCoder.setGeoCode( geocode );
     // } else if ( view.getId() == R.id.photo_cancel ) {
     //   /* nothing */
     }

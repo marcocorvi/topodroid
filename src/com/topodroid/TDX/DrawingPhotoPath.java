@@ -30,7 +30,7 @@ public class DrawingPhotoPath extends DrawingPointPath
   long mId; // id of the photo 
   // float mPhotoSize; // photo size (horizontal width) [m]
   DrawingPicturePath mPicture;
-  String mCode; // geomorphology code
+  String mGeoCode; // geomorphology code
   // private Paint paint;
 
   // FIXME-COPYPATH
@@ -48,7 +48,7 @@ public class DrawingPhotoPath extends DrawingPointPath
     mId = id;
     // mPhotoSize = size;
     mPicture = null;
-    mCode    = "";
+    mGeoCode    = "";
 
     // mPointText = text;
     // setPaint( BrushManager.pointPaint[ BrushManager.POINT_LABEL ] );
@@ -63,13 +63,13 @@ public class DrawingPhotoPath extends DrawingPointPath
   }
 
   /** set the geomorphology code
-   * @param code  new code
+   * @param geocode  new geocode
    */
-  void setCode( String code ) { mCode = code; }
+  void setCode( String geocode ) { mGeoCode = geocode; }
 
   /** @return the geomorphology code
    */
-  String getCode() { return mCode; }
+  String getCode() { return mGeoCode; }
 
   /** set the photo size
    * @param size   new photo size (horizontal width) [m]
@@ -226,8 +226,8 @@ public class DrawingPhotoPath extends DrawingPointPath
       dos.writeUTF( ( mPointText != null )? mPointText : "" );
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
       dos.writeInt( ((int)mId) );
-      dos.writeUTF( (mCode != null)? mCode : "" );
-      TDLog.v( "PHOTO id " + mId + " (" + cx + " " + cy + ") code <" + mCode + ">" );
+      dos.writeUTF( (mGeoCode != null)? mGeoCode : "" );
+      // TDLog.v( "PHOTO id " + mId + " (" + cx + " " + cy + ") geocode <" + mGeoCode + ">" );
       if ( mPicture != null ) {
         dos.writeInt( 1 );
         dos.writeFloat( mPicture.cx );

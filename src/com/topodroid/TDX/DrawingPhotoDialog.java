@@ -37,13 +37,12 @@ class DrawingPhotoDialog extends MyDialog
   private EditText mComment;
   private EditText mSize;
   private CheckBox mCamera;
-  private Button   mBtCode;
   private boolean  cameraCheck;
 
   private final DrawingWindow mActivity;
   private final float mX;
   private final float mY;
-  private String mCode = "";
+  private String mGeoCode = "";
 
   DrawingPhotoDialog( Context context, DrawingWindow activity, float x, float y )
   {
@@ -72,7 +71,12 @@ class DrawingPhotoDialog extends MyDialog
     ((Button) findViewById(R.id.photo_ok)).setOnClickListener( this );
     ((Button) findViewById(R.id.photo_cancel)).setOnClickListener( this );
     if ( TDLevel.overExpert ) {
-      ((Button) findViewById(R.id.photo_code)).setOnClickListener( this );
+      GeoCodes geocodes = TopoDroidApp.getGeoCodes();
+      if ( geocodes.size() > 0 ) {
+        ((Button) findViewById(R.id.photo_code)).setOnClickListener( this );
+      } else {
+        ((Button) findViewById(R.id.photo_code)).setVisibility( View.GONE );
+      }
     } else {
       ((Button) findViewById(R.id.photo_code)).setVisibility( View.GONE );
     }
@@ -96,9 +100,9 @@ class DrawingPhotoDialog extends MyDialog
           size = 1;
         }
       }
-      mActivity.addPhotoPoint( mComment.getText().toString(), size, mX, mY, camera, mCode );
+      mActivity.addPhotoPoint( mComment.getText().toString(), size, mX, mY, camera, mGeoCode );
     } else if ( view.getId() == R.id.photo_code ) {
-      (new GeoCodeDialog( mContext, this, mCode )).show();
+      (new GeoCodeDialog( mContext, this, mGeoCode )).show();
       return;
     // } else if ( view.getId() == R.id.photo_cancel ) {
     //   /* nothing */
@@ -106,7 +110,7 @@ class DrawingPhotoDialog extends MyDialog
     dismiss();
   }
 
-  public void setGeoCode( String code ) { mCode = (code == null)? "" : code; }
+  public void setGeoCode( String geocode ) { mGeoCode = (geocode == null)? "" : geocode; }
 }
         
 

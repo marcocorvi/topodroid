@@ -32,7 +32,7 @@ class PhotoEditDialog extends MyDialog
   private final PhotoListDialog mParent;
   private PhotoInfo mPhoto;
   private String mFilename;
-  private String mCode; // geocode
+  private String mGeoCode; // geocode
 
   private EditText mETcomment;  // photo comment
   private ImageView mIVimage;   // photo image
@@ -58,7 +58,7 @@ class PhotoEditDialog extends MyDialog
     mPhoto  = photo;
     // mFilename = filename;
     mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhoto.id) );
-    mCode     = mPhoto.getCode();
+    mGeoCode     = mPhoto.getGeoCode();
     mAtShot   = (mPhoto.shotid >= 0);
     // TDLog.v("PhotoEditDialog " + mFilename);
     mTdImage = new TDImage( mFilename );
@@ -102,7 +102,12 @@ class PhotoEditDialog extends MyDialog
 
     buttonOK.setOnClickListener( this );
     if ( TDLevel.overExpert ) {
-      buttonCode.setOnClickListener( this );
+      GeoCodes geocodes = TopoDroidApp.getGeoCodes();
+      if ( geocodes.size() > 0 ) {
+        buttonCode.setOnClickListener( this );
+      } else {
+        buttonCode.setVisibility( View.GONE );
+      }
     } else {
       buttonCode.setVisibility( View.GONE );
     }
@@ -128,9 +133,9 @@ class PhotoEditDialog extends MyDialog
     int vid = v.getId();
     if ( vid == R.id.photo_ok ) {
       if ( mETcomment.getText() == null ) {
-        mParent.updatePhoto( mPhoto, "", mCode );
+        mParent.updatePhoto( mPhoto, "", mGeoCode );
       } else {
-        mParent.updatePhoto( mPhoto, mETcomment.getText().toString(), mCode );
+        mParent.updatePhoto( mPhoto, mETcomment.getText().toString(), mGeoCode );
       }
     } else if ( vid == R.id.photo_delete ) {
       mParent.dropPhoto( mPhoto );
@@ -138,7 +143,7 @@ class PhotoEditDialog extends MyDialog
       (new PhotoViewDialog( mContext, mPhoto )).show();
       return;
     } else if ( vid == R.id.photo_geocode ) {
-      (new GeoCodeDialog( mContext, this, mCode )).show();
+      (new GeoCodeDialog( mContext, this, mGeoCode )).show();
       return;
     }
     if ( mTdImage != null ) mTdImage.recycleImages();
@@ -155,9 +160,6 @@ class PhotoEditDialog extends MyDialog
   }
 
   // interface IGeoCoder
-  public void setGeoCode( String code )
-  {
-    mCode = code;
-  }
+  public void setGeoCode( String geocode ) { mGeoCode = (geocode == null)? "" : geocode; }
 }
 

@@ -41,11 +41,11 @@ class ShotPhotoDialog extends MyDialog
 
   private EditText mETcomment;     // photo comment
   private Button   mButtonOK;
-  private Button   mBtnCode;       // geomorphology coding
+  private Button   mBtnGeoCode;       // geomorphology coding
   private CheckBox mCamera;        // whether to use camera or camera2
   private long     mSid;           // shot id
   private String   mName;          // shot name
-  private String   mCode;          // geomorphology code
+  private String   mGeoCode;       // geomorphology code
   // private Button   mButtonCancel;
   private boolean  cameraAPI;
 
@@ -61,7 +61,7 @@ class ShotPhotoDialog extends MyDialog
     mParent = parent;
     mSid    = sid;
     mName   = name;
-    mCode   = "";
+    mGeoCode   = "";
     // TDLog.Log( TDLog.LOG_PHOTO, "PhotoComment");
   }
 
@@ -92,11 +92,16 @@ class ShotPhotoDialog extends MyDialog
         mCamera.setChecked( true );  // checked = use old Camera API
       }
 
-      mBtnCode = (Button) findViewById(R.id.photo_code );
+      mBtnGeoCode = (Button) findViewById(R.id.photo_code );
       if ( TDLevel.overExpert ) {
-        mBtnCode.setOnClickListener( this );
+        GeoCodes geocodes = TopoDroidApp.getGeoCodes();
+        if ( geocodes.size() > 0 ) {
+          mBtnGeoCode.setOnClickListener( this );
+        } else {
+          mBtnGeoCode.setVisibility( View.GONE );
+        }
       } else {
-        mBtnCode.setVisibility( View.GONE );
+        mBtnGeoCode.setVisibility( View.GONE );
       }
       // mButtonCancel = (Button) findViewById(R.id.photo_comment_cancel );
       // mButtonCancel.setOnClickListener( this );
@@ -119,9 +124,9 @@ class ShotPhotoDialog extends MyDialog
       int camera = ( cameraAPI || mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_TOPODROID_2;
       // TDLog.v("camera " + camera + " old-API " + cameraAPI + ", checked " + mCamera.isChecked() );
       // int camera = PhotoInfo.CAMERA_TOPODROID;
-      mParent.doTakePhoto( mSid, comment, camera, mCode );
-    } else if ( TDLevel.overExpert && b == mBtnCode ) {
-      (new GeoCodeDialog( mContext, this, mCode )).show();
+      mParent.doTakePhoto( mSid, comment, camera, mGeoCode );
+    } else if ( TDLevel.overExpert && b == mBtnGeoCode ) {
+      (new GeoCodeDialog( mContext, this, mGeoCode )).show();
       return;
     // } else if ( b == mButtonCancel ) {
       /* nothing */
@@ -129,7 +134,7 @@ class ShotPhotoDialog extends MyDialog
     dismiss();
   }
 
-  public void setGeoCode( String code ) { mCode = (code == null)? "" : code; }
+  public void setGeoCode( String geocode ) { mGeoCode = (geocode == null)? "" : geocode; }
 
 }
 

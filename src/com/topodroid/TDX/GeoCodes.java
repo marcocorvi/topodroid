@@ -29,13 +29,13 @@ import java.io.IOException;
 class GeoCodes
 {
   // TODO use HashMap if the codes are many
-  private ArrayList< GeoCode > mCodes;
+  private ArrayList< GeoCode > mGeoCodes;
 
   /** cstr
    */
   GeoCodes( )
   {
-    mCodes = new ArrayList< GeoCode >();
+    mGeoCodes = new ArrayList< GeoCode >();
     File file = TDPath.getGeocodesFile();
     if ( file.exists() ) {
       try {
@@ -54,8 +54,8 @@ class GeoCodes
             } catch ( NumberFormatException e ) {
               // TODO
             }
-            GeoCode code = new GeoCode( type, vals[1], vals[2].trim() );
-            mCodes.add( code );
+            GeoCode geocode = new GeoCode( type, vals[1], vals[2].trim() );
+            mGeoCodes.add( geocode );
           }
         }
         fr.close();
@@ -67,36 +67,36 @@ class GeoCodes
 
   void resetSelected()
   {
-    for ( GeoCode code : mCodes ) code.mSelected = false;
+    for ( GeoCode geocode : mGeoCodes ) geocode.setSelected( false );
   }
 
   /** @return the list of geocodes
    */
-  ArrayList< GeoCode > getCodes() { return mCodes; }
+  ArrayList< GeoCode > getGeoCodes() { return mGeoCodes; }
 
   /** @return the geocode for a given code (or null if not found)
    * @param code  code of the geocode
    */
   GeoCode getGeoCode( String code )
   {
-    for ( GeoCode geocode : mCodes ) if ( geocode.mCode.equals( code ) ) return geocode;
+    if ( code != null ) { 
+      for ( GeoCode geocode : mGeoCodes ) if ( geocode.hasGeoCode( code ) ) return geocode;
+    }
     return null;
   }
 
   /** @return the number of geocodes
    */
-  int size() { return mCodes.size(); }
+  int size() { return mGeoCodes.size(); }
 
   /** set "selected" to the geocode with a given code
    * @param code   code of the geocode
    */
   void setSelected( String code )
   {
-    for ( GeoCode geocode : mCodes ) {
-      if ( geocode.mCode.equals( code ) ) {
-        geocode.mSelected = true;
-        return;
-      }
+    if ( code == null ) return;
+    for ( GeoCode geocode : mGeoCodes ) {
+      if ( geocode.selectByGeoCode( code ) ) return;
     }
   }
 

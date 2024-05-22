@@ -23,7 +23,7 @@ public class StationInfo
   String mComment;   // comment / description
   StationFlag mFlag; // flags
   String mPresentation;  // presentation string
-  String mCode;          // geomorphology code
+  String mGeoCode;          // geomorphology code
 
   /** @return true if the station info flag is "fixed"
    */
@@ -54,7 +54,7 @@ public class StationInfo
     mComment = (comment == null)? TDString.EMPTY : comment;
     mFlag    = new StationFlag( (int)flag );
     mPresentation = presentation;
-    mCode    = code;
+    mGeoCode    = code;
   }
 
   /** @return string presentation of the station info
@@ -80,11 +80,11 @@ public class StationInfo
 
   /** @return geomorphology code
    */
-  public String getCode() { return mCode; }
+  public String getGeoCode() { return mGeoCode; }
 
   /** set the geomorphology code
    * @param code   new code
    */
-  public void setCode( String code ) { mCode = code; }
+  public void setGeoCode( String geocode ) { mGeoCode = (geocode == null)? "" : geocode; }
 
 }

@@ -58,14 +58,14 @@ class CurrentStationDialog extends MyDialog
   private String mStation;    // station name
   private EditText mName;
   private EditText mComment;
-  private Button   mBtnCode;
  
-  private String mCode = "";
+  private String mGeoCode = "";
 
   private Button mBtnPush;
   private Button mBtnPop;
   private Button mBtnOK;
   private Button mBtnClear;
+  private Button mBtnGeoCode;
   // private Button mBtnCancel;
 
   private CheckBox mBtnFixed;
@@ -125,12 +125,17 @@ class CurrentStationDialog extends MyDialog
     mBtnPop     = (Button) findViewById(R.id.button_pop );
     mBtnOK      = (Button) findViewById(R.id.button_current );
     mBtnClear   = (Button) findViewById(R.id.button_clear );
-    mBtnCode    = (Button) findViewById(R.id.button_code );
+    mBtnGeoCode = (Button) findViewById(R.id.button_code );
 
     if ( TDLevel.overExpert ) {
-      mBtnCode.setOnClickListener( this );
+      GeoCodes geocodes = TopoDroidApp.getGeoCodes();
+      if ( geocodes.size() > 0 ) {
+        mBtnGeoCode.setOnClickListener( this );
+      } else {
+        mBtnGeoCode.setVisibility( View.GONE );
+      }
     } else {
-      mBtnCode.setVisibility( View.GONE );
+      mBtnGeoCode.setVisibility( View.GONE );
     }
 
     mBtnPush.setOnClickListener( this ); // STORE
@@ -301,7 +306,7 @@ class CurrentStationDialog extends MyDialog
       }
 
       mStation = name;
-      TopoDroidApp.mData.insertStation( TDInstance.sid, name, comment, flag, name, mCode ); // PRESENTATION = name
+      TopoDroidApp.mData.insertStation( TDInstance.sid, name, comment, flag, name, mGeoCode ); // PRESENTATION = name
       updateList();
       return;
 
@@ -324,8 +329,8 @@ class CurrentStationDialog extends MyDialog
         mApp.setCurrentStationName( null );
       }
       if ( mParent != null ) mParent.updateDisplay();
-    } else if ( b == mBtnCode ) {
-      (new GeoCodeDialog( mContext, this, mCode )).show();
+    } else if ( b == mBtnGeoCode ) {
+      (new GeoCodeDialog( mContext, this, mGeoCode )).show();
       return;
     // } else if ( b == mBtnCancel ) {
     //   /* nothing : dismiss */
@@ -341,6 +346,6 @@ class CurrentStationDialog extends MyDialog
     dismiss();
   }
 
-  public void setGeoCode( String code ) { mCode = (code == null)? "" : code; }
+  public void setGeoCode( String geocode ) { mGeoCode = (geocode == null)? "" : geocode; }
 
 }

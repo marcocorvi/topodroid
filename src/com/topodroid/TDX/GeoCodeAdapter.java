@@ -37,7 +37,7 @@ import java.util.Locale;
 class GeoCodeAdapter extends ArrayAdapter< GeoCode >
 {
   private final LayoutInflater mLayoutInflater;
-  private ArrayList< GeoCode > mCodes;
+  private ArrayList< GeoCode > mGeoCodes;
 
   /** cstr
    * @param ctx     context
@@ -49,14 +49,14 @@ class GeoCodeAdapter extends ArrayAdapter< GeoCode >
     super( ctx, id );
     // mContext = ctx;
     // mItems   = items;
-    mCodes = items;
+    mGeoCodes = items;
     addAll( items );
     mLayoutInflater = (LayoutInflater)ctx.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
   }
 
   /** @return the list of the items in the adapter
    */
-  List< GeoCode > getItems() { return mCodes; }
+  List< GeoCode > getItems() { return mGeoCodes; }
 
 
   /** @return the block at the given position
@@ -78,34 +78,34 @@ class GeoCodeAdapter extends ArrayAdapter< GeoCode >
     int      pos;
     CheckBox cbSelected;
     TextView tvDesc;
-    GeoCode  mCode;   // used to make sure blocks do not hold ref to a view, that does not belong to them REVISE_RECENT
+    GeoCode  mGeoCode;   // used to make sure blocks do not hold ref to a view, that does not belong to them REVISE_RECENT
 
     ViewHolder( CheckBox cb, TextView desc )
     {
       pos        = 0;
       cbSelected = cb;
       tvDesc     = desc;
-      mCode      = null; // REVISE_RECENT
+      mGeoCode   = null; // REVISE_RECENT
       cb.setOnClickListener( this );
     }
 
     public void onClick( View v ) 
     {
       if ( v instanceof CheckBox ) {
-        if ( mCode != null ) {
-          mCode.mSelected = cbSelected.isChecked();
+        if ( mGeoCode != null ) {
+          mGeoCode.setSelected( cbSelected.isChecked() );
         }
       }
     }
 
-    // /** set the color of a code
+    // /** set the color of a geocode
     //  * @param b  geocode
     //  * @note this implements the TopoDroid data coloring policy
     //  */
-    // void setColor( GeoCode code )
+    // void setColor( GeoCode geocode )
     // {
-    //   if ( code == null ) return;
-    //   int col = code.getColorByType();
+    //   if ( geocode == null ) return;
+    //   int col = geocode.getColorByType();
     //   tvDesc.setBackgroundColor( col );
     // }
   } // ViewHolder
@@ -120,7 +120,7 @@ class GeoCodeAdapter extends ArrayAdapter< GeoCode >
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )
   {
-    GeoCode code = (GeoCode)(getItem( pos ));
+    GeoCode geocode = (GeoCode)(getItem( pos ));
 
     ViewHolder holder; // = null;
     if ( convertView == null ) {
@@ -132,14 +132,14 @@ class GeoCodeAdapter extends ArrayAdapter< GeoCode >
     } else {
       holder = (ViewHolder) convertView.getTag();
     }
-    holder.pos   = pos;
-    holder.mCode = code;
+    holder.pos      = pos;
+    holder.mGeoCode = geocode;
 
-    if ( code != null ) {
-      holder.cbSelected.setChecked( code.mSelected );
-      holder.tvDesc.setText( code.mDesc );
-      convertView.setBackgroundColor( code.getColorByType() );
-      // convertView.setVisibility( code.getVisible() );
+    if ( geocode != null ) {
+      holder.cbSelected.setChecked( geocode.isSelected() );
+      holder.tvDesc.setText( geocode.getDescription() );
+      convertView.setBackgroundColor( geocode.getColorByType() );
+      // convertView.setVisibility( geocode.getVisible() );
     }
     return convertView;
   }
@@ -171,10 +171,10 @@ class GeoCodeAdapter extends ArrayAdapter< GeoCode >
   {
     StringBuilder sb = new StringBuilder();
     boolean first = true;
-    for ( GeoCode code : mCodes ) {
-      if ( code.mSelected ) {
+    for ( GeoCode geocode : mGeoCodes ) {
+      if ( geocode.isSelected() ) {
         if ( !first ) sb.append(" ");
-        sb.append( code.mCode );
+        sb.append( geocode.getGeoCode() );
         first = false;
       }
     }

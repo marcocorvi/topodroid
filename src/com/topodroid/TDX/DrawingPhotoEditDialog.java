@@ -35,7 +35,7 @@ class DrawingPhotoEditDialog extends MyDialog
   // private final DrawingWindow mParent;
   private DrawingPhotoPath mPhoto;
   private String mFilename; // = null;
-  private String mCode;     // geocode
+  private String mGeoCode;     // geocode
 
   private EditText mETcomment;  // photo comment
   private EditText mETsize;     // photo size (horizontal width) [m]
@@ -61,8 +61,8 @@ class DrawingPhotoEditDialog extends MyDialog
     // mApp    = app;
     mPhoto    = photo;
     mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhoto.mId) );
-    mCode     = mPhoto.getCode();
-    TDLog.v( "DrawingPhotoEditDialog code <" + mCode + ">" );
+    mGeoCode     = mPhoto.getCode();
+    // TDLog.v( "DrawingPhotoEditDialog code <" + mGeoCode + ">" );
     
     mTdImage = new TDImage( mFilename );
   }
@@ -124,14 +124,14 @@ class DrawingPhotoEditDialog extends MyDialog
     if ( vid == R.id.photo_ok ) {
       String comment = ( mETcomment.getText() == null )? "" : mETcomment.getText().toString();
       mPhoto.setPointText( comment );
-      mPhoto.setCode( mCode );
+      mPhoto.setCode( mGeoCode );
       try {
         float size = Float.parseFloat( mETsize.getText().toString() );
         if ( size < 1 ) size = 1; // min size 1 meter
         mPhoto.setPhotoSize( size );
       } catch ( NumberFormatException e ) {
       }
-      TopoDroidApp.mData.updatePhoto( TDInstance.sid, mPhoto.mId, comment, mCode );
+      TopoDroidApp.mData.updatePhoto( TDInstance.sid, mPhoto.mId, comment, mGeoCode );
     // } else if ( vid == R.id.photo_delete ) {
     //   mParent.dropPhoto( mPhoto );
     //   break;
@@ -142,7 +142,7 @@ class DrawingPhotoEditDialog extends MyDialog
       }
       return;
     } else if ( vid == R.id.photo_geocode ) {
-      (new GeoCodeDialog( mContext, this, mCode )).show();
+      (new GeoCodeDialog( mContext, this, mGeoCode )).show();
       return;
     }
     if ( mTdImage != null ) mTdImage.recycleImages();
@@ -159,9 +159,6 @@ class DrawingPhotoEditDialog extends MyDialog
   }
 
   // interface IGeoCoder
-  public void setGeoCode( String code )
-  {
-    mCode = code;
-  }
+  public void setGeoCode( String geocode ) { mGeoCode = (geocode == null)? "" : geocode; }
 }
 
