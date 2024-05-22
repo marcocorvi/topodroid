@@ -700,7 +700,7 @@ no campo abaixo e aperte o botão.
   <string name="survey_stat_duplicate">Visadas duplicadas - Qt: %1$d Ext: %2$.1f %3$s</string>
   <string name="survey_stat_splay">Medidas auxiliares: %1$d</string>
   <string name="survey_stat_station">Bases: %1$d</string>
-  <string name="survey_stat_surface">Medidas na superfície - Qt: %1$d Ext: %2$.1f %3$s</string>
+  <string name="survey_stat_surface">Visadas de superfície - Qt: %1$d Ext: %2$.1f %3$s</string>
   <string name="hide_blank">Medidas vazias</string>
   <string name="hide_leg">Visadas repetidas</string>
   <string name="hide_ids">IDs medidas</string>
