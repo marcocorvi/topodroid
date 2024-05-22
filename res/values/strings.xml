@@ -740,7 +740,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="stat_leg" tools:ignore="PluralsCandidate">Legs %1$d Length %2$.1f %3$.1f H-length %4$.1f %5$s</string>
     <string name="stat_length">Sketch length %1$.1f %2$s</string>
     <string name="stat_extlen">3D length %1$.1f %2$s</string>
-    <string name="stat_projlen">plan length %1$.1f %2$s</string>
+    <string name="stat_projlen">Plan length %1$.1f %2$s</string>
     <string name="stat_cycle">Cycles %1$d</string>
     <string name="stat_loop">Loops %1$d [%2$d %3$d]</string>
     <string name="stat_origin">Sketch origin station: %1$s</string>
