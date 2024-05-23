@@ -1314,8 +1314,8 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="pref_tdmanager_summary">Use TdManager</string -->
   <string name="pref_with_android_azimuth_title">Bússola/clino Android</string>
   <string name="pref_with_android_azimuth_summary">Habilitar bússola/clino do Android</string>
-  <string name="pref_blunder_shot_title">Medida com erro</string>
-  <string name="pref_blunder_shot_summary">Ignorar medidas com erro</string>
+  <string name="pref_blunder_shot_title">Medida errada intra visada</string>
+  <string name="pref_blunder_shot_summary">Tentar identificar automaticamente e ignorar medidas erradas obtidas durante criação de visada</string>
   <string name="pref_splay_station_title">Renomear base aux</string>
   <string name="pref_splay_station_summary">Renomear bases das medidas auxiliares para mantê-las relacionadas à mesma base</string>
   <string name="pref_splay_group_title">Renomear aux só próx</string>
