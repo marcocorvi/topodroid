@@ -214,7 +214,7 @@
        and consistent through all the arrays on the names
   -->
   <string-array name="surveyStations">
-    <item name="no">não</item>
+    <item name="no">nenhum</item>
     <item name="for">aux, visada</item>
     <item name="back">aux, contra</item>
     <item name="backsight">contra, aux, visada</item>
