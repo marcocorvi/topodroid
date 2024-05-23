@@ -227,8 +227,9 @@ public class DrawingPhotoPath extends DrawingPointPath
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
       dos.writeInt( ((int)mId) );
       dos.writeUTF( (mGeoCode != null)? mGeoCode : "" );
-      // TDLog.v( "PHOTO id " + mId + " (" + cx + " " + cy + ") geocode <" + mGeoCode + ">" );
+      // TDLog.v( "PHOTO id " + mId + " (" + cx + " " + cy + ") geocode <" + mGeoCode + ">");
       if ( mPicture != null ) {
+        TDLog.v( "PHOTO id " + mId + " picture size " + mPicture.mPhotoSize );
         dos.writeInt( 1 );
         dos.writeFloat( mPicture.cx );
         dos.writeFloat( mPicture.cy );

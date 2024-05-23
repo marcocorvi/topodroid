@@ -219,6 +219,9 @@ public class TDSetting
 
   public static int mOrientation = 0; // 0 unspecified, 1 portrait, 2 landscape
 
+  public static float mPictureMin =   5.0f; 
+  public static float mPictureMax = 100.0f;
+
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // IMPORT EXPORT
   public static int mImportDatamode    = 0;  // SurveyInfo.DATAMODE_NORMAL

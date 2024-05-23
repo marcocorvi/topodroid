@@ -92,10 +92,12 @@ class DrawingPhotoDialog extends MyDialog
     if (view.getId() == R.id.photo_ok ) {
       int camera = ( cameraCheck && mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_TOPODROID_2;
 
-      float size = 1.0f; // 1 meter
+      float size = 2 * TDSetting.mPictureMin; // pixels: 10 pixels means a square of size 10+10 = 20 = 1 meter
       if ( mSize.getText() != null ) {
         try {
           size = Float.parseFloat( mSize.getText().toString() );
+          if ( size < TDSetting.mPictureMin ) size = TDSetting.mPictureMin;
+          if ( size > TDSetting.mPictureMax ) size = TDSetting.mPictureMax;
         } catch ( NumberFormatException e ) {
           size = 1;
         }

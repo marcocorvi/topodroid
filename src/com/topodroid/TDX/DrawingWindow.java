@@ -2688,7 +2688,9 @@ public class DrawingWindow extends ItemDrawer
     mScaleBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
       public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
         if ( fromUser ) {
-          setPointScaleProgress( progress );
+          if ( setPointScaleProgress( progress ) ) {
+            seekbar.setProgress( 100 );
+          }
         }
       }
       public void onStartTrackingTouch(SeekBar seekbar) { }
@@ -9744,15 +9746,22 @@ public class DrawingWindow extends ItemDrawer
 
   /** set the hot-item point scale
    * @param progress  scalebar progress value
+   * @return true if the progress need to be reset
    */
-  void setPointScaleProgress( int progress )
+  boolean setPointScaleProgress( int progress )
   {
-    if ( mHotPath == null ) return;
-    if ( mHotPath instanceof DrawingPointPath ) {
+    if ( mHotPath == null ) return false;
+    if ( mHotPath instanceof DrawingPicturePath ) {
+      DrawingPicturePath picture = (DrawingPicturePath)mHotPath;
+      float scale = 1 + 0.001f * (progress - 100);
+      picture.scalePhotoSize( scale );
+      return true;
+    } else if ( mHotPath instanceof DrawingPointPath ) {
       int scale = (int)(progress / 40) - 2;
       ((DrawingPointPath)mHotPath).setScale( scale );
       // TDLog.v("set point scale " + progress + " scale " + scale );
     }
+    return false;
   }
     
   void setPointScale( int scale )

@@ -99,7 +99,12 @@ class DrawingPhotoEditDialog extends MyDialog
 
     buttonOK.setOnClickListener( this );
     if ( TDLevel.overExpert ) {
-      buttonCode.setOnClickListener( this );
+      GeoCodes geocodes = TopoDroidApp.getGeoCodes();
+      if ( geocodes.size() > 0 ) {
+        buttonCode.setOnClickListener( this );
+      } else {
+        buttonCode.setVisibility( View.GONE );
+      }
     } else {
       buttonCode.setVisibility( View.GONE );
     }

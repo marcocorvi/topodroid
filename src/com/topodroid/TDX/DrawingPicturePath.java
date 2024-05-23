@@ -22,7 +22,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Locale;
 
-import android.util.Base64;
+// import android.util.Base64;
+import android.graphics.Path;
 
 public class DrawingPicturePath extends DrawingPointPath
 {
@@ -36,6 +37,8 @@ public class DrawingPicturePath extends DrawingPointPath
     super( BrushManager.getPointPictureIndex(), off_x, off_y, 0, "", "", scrap );
     mId = id;
     mPhotoSize = size;
+    makePath();
+    TDLog.v("PICTURE size " + size );
   }
 
   /** @return the photo ID
@@ -44,12 +47,40 @@ public class DrawingPicturePath extends DrawingPointPath
 
   void setId( long id ) { mId = id; }
 
-  /** set the photo size
+  /** set the size of the picture
    * @param size   new photo size (horizontal width) [m]
    */
   void setPhotoSize( float size ) { mPhotoSize = size; }
 
-  /** thsi is called by the DrawingPhotoPath.loadDataStream()
+  /** @return the size of the picture
+   */
+  float getPhotoSize() { return mPhotoSize; }
+
+  /** scale the size of the picture
+   * @param scale  scale factor
+   */
+  void scalePhotoSize( float scale )
+  { 
+    mPhotoSize *= scale;
+    if ( mPhotoSize < TDSetting.mPictureMin ) mPhotoSize = TDSetting.mPictureMin; // min max sizes in meters
+    else if ( mPhotoSize > TDSetting.mPictureMax ) mPhotoSize = TDSetting.mPictureMax;
+    // TDLog.v("PICTURE new size " + mPhotoSize + " scale " + scale );
+    makePath();
+  }
+
+  private void makePath()
+  {
+    mPath = new Path();
+    mPath.moveTo( -mPhotoSize, -mPhotoSize );
+    mPath.lineTo(  mPhotoSize, -mPhotoSize );
+    mPath.lineTo(  mPhotoSize,  mPhotoSize );
+    mPath.lineTo( -mPhotoSize,  mPhotoSize );
+    mPath.lineTo( -mPhotoSize, -mPhotoSize );
+    mPath.lineTo(  mPhotoSize,  mPhotoSize );
+    mPath.offset( cx, cy );
+  }
+
+  /** this is called by the DrawingPhotoPath.loadDataStream()
    */
   public static DrawingPicturePath loadDataStream( int version, DataInputStream dis, float x, float y )
   {
