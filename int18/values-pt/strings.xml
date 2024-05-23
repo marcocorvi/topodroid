@@ -696,7 +696,7 @@ no campo abaixo e aperte o botão.
   <string name="stat_angle_error">Erro médio azimute visadas: %1$.2f° ± %2$.2f°</string>
   <string name="shot_title">MEDIDA %1$s - %2$s</string>
   <string name="shot_data">D %1$.2f | A %2$.1f | I %3$.1f</string>
-  <string name="survey_split_move_title">Mover/dividir topografia</string>
+  <string name="survey_split_move_title">Mover/dividir topo</string>
   <string name="survey_stat_duplicate">Visadas duplicadas - Qt: %1$d Ext: %2$.1f %3$s</string>
   <string name="survey_stat_splay">Medidas auxiliares: %1$d</string>
   <string name="survey_stat_station">Bases: %1$d</string>
