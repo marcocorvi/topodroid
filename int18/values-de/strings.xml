@@ -1608,6 +1608,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_iter_summary">Max. Iterationen für die Kalibrierung</string>
   <string name="pref_label_size_title">Schriftgröße</string>
   <string name="pref_label_size_summary">Schriftgröße der Beschriftung</string>
+  <!-- TODO string name="pref_scalable_label_title">Scaling labels</string -->
+  <!-- TODO string name="pref_scalable_label_summary">Labels scale with the zoom</string -->
   <!-- TODO string name="pref_slope_lside_title">Slope line l-side</string -->
   <!-- TODO string name="pref_slope_lside_summary">Slope lines default l-side</string -->
   <string name="pref_arrow_length_title">Profillänge</string>

@@ -81,6 +81,11 @@
         android:text="@string/button_clear"
         android:layout_marginEnd="@dimen/marginh"
       />
+      <Button android:id="@+id/button_code"
+        style="@style/button_default"
+        android:text="@string/button_geocode"
+        android:layout_marginEnd="@dimen/marginh"
+      />
       <Button android:id="@+id/button_push"
         style="@style/button_default"
         android:text="@string/button_save"
@@ -94,11 +99,6 @@
       <Button android:id="@+id/button_cancel"
         style="@style/button_default"
         android:text="@string/button_close"
-        android:layout_marginEnd="@dimen/marginh"
-      />
-      <Button android:id="@+id/button_code"
-        style="@style/button_default"
-        android:text="@string/button_geocode"
         android:layout_marginEnd="@dimen/marginh"
       />
       <Button android:id="@+id/button_current"

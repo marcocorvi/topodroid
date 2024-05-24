@@ -55,7 +55,7 @@ class CurrentStationDialog extends MyDialog
                            , IGeoCoder
 {
   private final ShotWindow mParent;
-  private String mStation;    // station name
+  private String mStationName;    // station name
   private EditText mName;
   private EditText mComment;
  
@@ -72,6 +72,7 @@ class CurrentStationDialog extends MyDialog
   private CheckBox mBtnPainted;
 
   private ListView mList;
+  private StationInfoAdapter mAdapter;
 
   private MyKeyboard mKeyboard = null;
 
@@ -85,7 +86,7 @@ class CurrentStationDialog extends MyDialog
   {
     super( context, app, R.string.CurrentStationDialog );
     mParent  = parent;
-    mStation = ( station == null )? mApp.getCurrentOrLastStation() : station ;
+    mStationName = ( station == null )? mApp.getCurrentOrLastStation() : station ;
   }
 
   @Override
@@ -160,8 +161,8 @@ class CurrentStationDialog extends MyDialog
       }
     }
 
-    mName.setText( mStation );
-    setComment( mStation );
+    mName.setText( mStationName );
+    setCommentFlagsAndCode( mStationName );
 
     updateList();
 
@@ -172,13 +173,10 @@ class CurrentStationDialog extends MyDialog
    */
   private void updateList()
   {
-    MyStringAdapter adapter = new MyStringAdapter( mContext, R.layout.message );
     // mApp.fillCurrentStationAdapter( adapter );
     ArrayList< StationInfo > stations = TopoDroidApp.mData.getStations( TDInstance.sid );
-    for ( StationInfo st : stations ) {
-      adapter.add( st.toString() );
-    }
-    mList.setAdapter( adapter );
+    mAdapter = new StationInfoAdapter( mContext, R.layout.message, stations );
+    mList.setAdapter( mAdapter );
   }
 
   /** react to user tap on an item in the list
@@ -200,6 +198,9 @@ class CurrentStationDialog extends MyDialog
     name = name.trim();
     // TDLog.v( "STATION <" + name + ">" );
     setNameAndComment( name );
+
+    // StationInfo station = mAdapter.get( position );
+    // setNameAndComment( station.mName );
   }
 
   
@@ -210,14 +211,16 @@ class CurrentStationDialog extends MyDialog
   private void setNameAndComment( String name )
   {
     if ( TDString.isNullOrEmpty( name ) ) return; // safety check
-    mStation = name;
+    mStationName = name;
     StationInfo cs = TopoDroidApp.mData.getStation( TDInstance.sid, name, null ); // null: do not create
     if ( cs == null ) {
       mName.setText( TDString.EMPTY );
       mComment.setText( null );
+      mGeoCode = "";
     } else {
       mName.setText( cs.mName );
       mComment.setText( cs.mComment );
+      mGeoCode = cs.getGeoCode();
     }
     setFlags( cs );
   }
@@ -225,11 +228,12 @@ class CurrentStationDialog extends MyDialog
   /** set the display comment field
    * @param name   station name
    */
-  private void setComment( String name )
+  private void setCommentFlagsAndCode( String name )
   {
     StationInfo cs = TopoDroidApp.mData.getStation( TDInstance.sid, name, null ); // null: do not create
     mComment.setText( ( cs == null )? null : cs.mComment );
     setFlags( cs );
+    mGeoCode = cs.getGeoCode();
   }
 
   /** set the display flags boxes
@@ -251,7 +255,8 @@ class CurrentStationDialog extends MyDialog
    */
   private void clear()
   {
-    mStation = TDString.EMPTY;
+    mStationName = TDString.EMPTY;
+    mGeoCode = "";
     mName.setText(TDString.EMPTY);
     mComment.setText(TDString.EMPTY);
     mBtnFixed.setChecked( false );
@@ -305,7 +310,7 @@ class CurrentStationDialog extends MyDialog
         comment = mComment.getText().toString().trim();
       }
 
-      mStation = name;
+      mStationName = name;
       TopoDroidApp.mData.insertStation( TDInstance.sid, name, comment, flag, name, mGeoCode ); // PRESENTATION = name
       updateList();
       return;
@@ -319,17 +324,17 @@ class CurrentStationDialog extends MyDialog
       clear();
       updateList();
       return;
-    } else if ( b == mBtnClear ) {
+    } else if ( b == mBtnClear ) { // CLEAR
       clear();
       return;
-    } else if ( b == mBtnOK ) {
+    } else if ( b == mBtnOK ) { // ACTIVE
       if ( name.length() > 0 ) {
         mApp.setCurrentStationName( name );
       } else {
         mApp.setCurrentStationName( null );
       }
       if ( mParent != null ) mParent.updateDisplay();
-    } else if ( b == mBtnGeoCode ) {
+    } else if ( b == mBtnGeoCode ) { // GEOCODE
       (new GeoCodeDialog( mContext, this, mGeoCode )).show();
       return;
     // } else if ( b == mBtnCancel ) {
@@ -346,6 +351,12 @@ class CurrentStationDialog extends MyDialog
     dismiss();
   }
 
-  public void setGeoCode( String geocode ) { mGeoCode = (geocode == null)? "" : geocode; }
+  public void setGeoCode( String geocode ) 
+  { 
+    mGeoCode = (geocode == null)? "" : geocode;
+    if ( mStationName != null ) {
+      mApp.mData.updateStationGeocode( TDInstance.sid, mStationName, mGeoCode );
+    }
+  }
 
 }

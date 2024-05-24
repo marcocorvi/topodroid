@@ -1295,25 +1295,29 @@ public class TDPrefKey
     "DISTOX_UNSCALED_POINTS", // 0 // whether drawing point items should stay unscaled when zooming
     "DISTOX_DRAWING_UNIT",    // 1 // plot unit
     "DISTOX_LABEL_SIZE",      // 2 // size of labels [pt]
+    "DISTOX_SCALABLE_LABEL",
     null
   };
 
   static int[] POINTtitle = {
     R.string.pref_unscaled_points_title,
     R.string.pref_drawing_unit_title,
-    R.string.pref_label_size_title
+    R.string.pref_label_size_title,
+    R.string.pref_scalable_label_title
   };
 
   static int[] POINTdesc = {
     R.string.pref_unscaled_points_summary,
     R.string.pref_drawing_unit_summary,
-    R.string.pref_label_size_summary
+    R.string.pref_label_size_summary,
+    R.string.pref_scalable_label_summary
   };
 
   public static String[] POINTdef = {
     FALSE,
     "1.2",
-    TDString.TWENTYFOUR
+    TDString.TWENTYFOUR,
+    FALSE
   };
 
 

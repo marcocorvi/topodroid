@@ -6247,6 +6247,23 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
+  /** update the station geocode
+   * @param sid      survey ID
+   * @param name     station name (ID)
+   * @param geocode  new station geocode
+   */
+  void updateStationGeocode( long sid, String name, String geocode )
+  {
+    if ( TDString.isNullOrEmpty( name ) ) return;
+    if ( myDB == null ) return;
+    ContentValues cv = new ContentValues();
+    // cv.put("comment", comment );
+    // cv.put("flag", flag );
+    // cv.put("presentation", ( presentation == null )? name : presentation );
+    cv.put("code", (geocode == null)? "" : geocode );
+    doUpdate( STATION_TABLE, cv, "surveyId=? AND name=?", new String[]{ Long.toString(sid), name }, "station geocode" );
+  }
+   
   /** @return a station
    * @param sid          survey ID
    * @param name         station name (ID)
@@ -6266,7 +6283,7 @@ public class DataHelper extends DataSetObservable
       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     }
     if ( cs == null && presentation != null ) {
-      ContentValues cv = makeStationContentValues( sid, name, TDString.EMPTY, 0, presentation, null );
+      ContentValues cv = makeStationContentValues( sid, name, TDString.EMPTY, 0, presentation, "" );
       if ( doInsert( STATION_TABLE, cv, "station insert" ) ) {
         cs = new StationInfo( name, TDString.EMPTY, 0, presentation, "" );
       }

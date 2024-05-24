@@ -593,13 +593,14 @@ public class TDSetting
   public static boolean mSlantXSection = false; // whether to allow profile slanted xsections
   public static int mObliqueMax = 0; // in [10,80] if enabled, or 0 if disabled
 
-  public static float mStationSize    = 20;   // size of station names [pt]
-  public static float mLabelSize      = 24;   // size of labels [pt]
-  public static float mFixedThickness = 1;    // width of fixed lines
-  public static float mLineThickness  = 1;    // width of drawing lines
+  public static float mStationSize     = 20;   // size of station names [pt]
+  public static float mLabelSize       = 24;   // size of labels [pt]
+  public static boolean mScalableLabel = false; // whether labels scale with the drawing
+  public static float mFixedThickness  = 1;    // width of fixed lines
+  public static float mLineThickness   = 1;    // width of drawing lines
   public static boolean mAutoSectionPt = false;
-  public static int   mBackupNumber   = 5;
-  public static int   mBackupInterval = 60;
+  public static int   mBackupNumber    = 5;
+  public static int   mBackupInterval  = 60;
   // public static boolean mBackupsClear = false; // CLEAR_BACKUPS
   public static boolean mFixedOrigin     = false; 
   public static boolean mSharedXSections = false; // default value
@@ -1425,6 +1426,7 @@ public class TDSetting
     mUnscaledPoints = prefs.getBoolean( keyPoint[0], bool(defPoint[0]) ); // DISTOX_UNSCALED_POINTS
     mUnitIcons     = tryFloat( prefs,   keyPoint[1], defPoint[1] );       // DISTOX_DRAWING_UNIT 
     mLabelSize     = tryFloat( prefs,   keyPoint[2], defPoint[2] );       // DISTOX_LABEL_SIZE
+    mScalableLabel = prefs.getBoolean(  keyPoint[3], bool(defPoint[3]) ); // DISTOX_SCALABLE_LABEL
     // mPlotCache  = prefs.getBoolean( keyPoint[], bool(defPoint[]) );    // DISTOX_PLOT_CACHE
 
     // AUTOWALLS
@@ -2679,6 +2681,8 @@ public class TDSetting
       }
       // FIXME changing label size affects only new labels; not existing labels (until they are edited)
       ret = String.format(Locale.US, "%.2f", mLabelSize );
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SCALABLE_LABEL
+      mScalableLabel = tryBooleanValue( hlp, k, v, bool(def[3]) );
     } else {
       TDLog.Error("missing POINT key: " + k );
     }
@@ -3263,7 +3267,8 @@ public class TDSetting
       pw.printf(Locale.US, "Plot: zoom %d, drag %c, fix-origin %c, split %c, shift %c, levels %d, affine %c, stylus %.1f, slant-xsection %c, oblique %d\n", // STYLUS_MM
         mZoomCtrl, tf(mSideDrag), tf(mFixedOrigin), tf(mPlotSplit), tf(mPlotShift), mWithLevels, tf(mFullAffine), mStylusSize, tf(mSlantXSection), mObliqueMax );
       pw.printf(Locale.US, "Units: icon %.2f, line %.2f, grid %.2f, ruler %.2f\n", mUnitIcons, mUnitLines, mUnitGrid, mUnitMeasure );
-      pw.printf(Locale.US, "Size: station %.1f, label %.1f, fixed %.1f line %.1f\n", mStationSize, mLabelSize, mFixedThickness, mLineThickness );
+      pw.printf(Locale.US, "Size: station %.1f, label %.1f, fixed %.1f line %.1f, scaleable_label %c\n",
+        mStationSize, mLabelSize, mFixedThickness, mLineThickness, tf(mScalableLabel) );
       pw.printf(Locale.US, "Select: radius %.2f, pointing %d, shift %d, dot %.1f, multiple %c \n",
         mSelectness, mPointingRadius, mMinShift, mDotRadius, tf(mPathMultiselect) );
       pw.printf(Locale.US, "Erase: radius %.2f\n", mEraseness );
@@ -3926,6 +3931,9 @@ public class TDSetting
               mLabelSize      = getFloat( vals, 4, 24.0f ); setPreference( editor, "DISTOX_LABEL_SIZE", mLabelSize );
               mFixedThickness = getFloat( vals, 6, 1.0f );  setPreference( editor, "DISTOX_FIXED_THICKNESS", mFixedThickness );
               mLineThickness  = getFloat( vals, 8, 1.0f );  setPreference( editor, "DISTOX_LINE_THICKNESS", mLineThickness );
+              if ( vals.length > 10 ) {
+                mScalableLabel = getBoolean( vals, 10 ); setPreference( editor, "DISTOX_SCALABLE_LABEL", mScalableLabel );
+              }
             }
           }
           continue;

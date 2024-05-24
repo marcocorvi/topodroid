@@ -34,6 +34,7 @@ import java.util.Locale;
 public class DrawingLabelPath extends DrawingPointPath
 {
   private final static float PDF_SCALE = 0.4f;
+  private float mTextSize;
 
   /** cstr
    * @param text     label text
@@ -58,6 +59,7 @@ public class DrawingLabelPath extends DrawingPointPath
     // paint.setStrokeWidth( WIDTH_CURRENT );
 
     // makeStraightPath( 0, 0, 20*mPointText.length(), 0, cx, cy );
+    mTextSize = TDSetting.mLabelSize;
     doSetScale( mScale );
   }
 
@@ -136,17 +138,19 @@ public class DrawingLabelPath extends DrawingPointPath
   /** draw the label on the screen
    * @param canvas   canvas
    * @param matrix   transform matrix
-   * @param scale    scaling factor - not used
+   * @param scale    scaling factor, (smaller = zoom-in, larger = zoom_out) - not-used
    * @param bbox     clipping rectangle
    * @note scale is not used but this signature is necessary because DrawingLabelPath extends DrawingPointPath
    */
   @Override
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
+    // TDLog.v("LABEL DRAW scale " + scale );
     Paint paint = (bbox != null)? mPaint : BrushManager.blackPaint;
     if ( intersects( bbox ) ) {
       // TDLog.Log( TDLog.LOG_PATH, "Drawing Label Path::draw[matrix] " + mPointText );
-      setTextSize();
+      if ( TDSetting.mScalableLabel ) mTextSize = TDSetting.mLabelSize * 0.1f / scale;
+      setTextSize( );
       mTransformedPath = new Path( mPath );
       if ( mLandscape ) {
         Matrix rot = new Matrix();
@@ -232,7 +236,7 @@ public class DrawingLabelPath extends DrawingPointPath
     mScale = scale;
     float f = fontSize();
     mPaint = BrushManager.labelPaint; // was new Paint( ... )
-    mPaint.setTextSize( TDSetting.mLabelSize * f );
+    mPaint.setTextSize( mTextSize * f );
     makeLabelPath( /* f */ );
   }
 
@@ -257,7 +261,7 @@ public class DrawingLabelPath extends DrawingPointPath
       case PointScale.SCALE_L:  f = 1.41f; break;
       case PointScale.SCALE_XL: f = 2.00f; break;
     }
-    mPaint.setTextSize( TDSetting.mLabelSize * f );
+    mPaint.setTextSize( mTextSize * f );
   }
 
   /** @return Therion string representation of the label point

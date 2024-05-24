@@ -1728,6 +1728,8 @@
   <string name="pref_iter_title">算法迭代</string>
   <string name="pref_iter_summary">最大迭代次数</string>
   <string name="pref_label_size_title">标注尺寸</string>
+  <!-- TODO string name="pref_scalable_label_title">Scaling labels</string -->
+  <!-- TODO string name="pref_scalable_label_summary">Labels scale with the zoom</string -->
   <string name="pref_label_size_summary">标注尺寸</string>
   <string name="pref_slope_lside_title">斜坡线 l-尺寸</string>
   <string name="pref_slope_lside_summary">默认斜坡线 l-尺寸</string>
