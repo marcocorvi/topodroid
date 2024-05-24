@@ -7,18 +7,17 @@ It displays both data-reduction statistics and sketch related statistics.<br><p>
 
 The data-reduction statistics are
 <ul>
-<li><i>Legs</i>: number of (regular) legs, sketch legs, their total and horizontal lengths.</li>
+<li><i>Legs</i>: number of (regular) legs, sketch legs, their total, profile, and plan lengths.</li>
 <li><i>Duplicate shots</i>: number of duplicate legs and their total length.</li>
 <li><i>Surface shots</i>: number of surface leg and their total length.</li>
-<li><i>Splays</i>: number of splay shots.</li>
-<li><i>Stations</i>: number of stations.</li>
+<li><i>Splays</i>: number of splay shots, and sketch splay shots.</li>
+<li><i>Stations</i>: number of stations, and sketch stations.</li>
 <li><i>Leg sigma</i>: average position error between repeated shots.</li>
 <li>
   <i>Dangling shots</i>: number of shots not attached to the sketch if any, and their total length.
   Tapping this line opens the dialog with the list of unattached shots.</li>
 <li>
   <i>Cycles</i>: number of cycles (including the backshot-cycles) if any.
-  That's not the 3 repeated shots that automatically define a leg, it's different legs between the same stations. 
   This item is only shown if there is at least one loop defined.
 </li>
 <li>
@@ -37,8 +36,10 @@ The data-reduction statistics are
 </ul>
 
 <p>
-  When there are two values separated by a number sign (#), the first value is the total survey value, and the second is the data reduction value, i.e., the value for the continous segment of midline that contains the reference station of this sketch.
-  These two values are different when the survey midline data contains more than one continous segment.
+When there are two values separated by a number sign (#), the first value is the total survey value,
+and the second is the data reduction value, i.e., the value for the connected component that contains
+the reference station of sketch.
+These two values are different when the survey midline data contains more than one connected component.
 </p>
 
 For each loop:
