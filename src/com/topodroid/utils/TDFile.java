@@ -566,7 +566,7 @@ public class TDFile
    */
   public static FileWriter getFileWriter( String name ) throws IOException 
   { 
-    TDLog.v("get file writer: " + name );
+    // TDLog.v("get file writer: " + name );
     return new FileWriter( name );
   }
 
@@ -789,7 +789,11 @@ public class TDFile
   // =========================================================================
   // GENERIC INTERFACE relative to TDPath.getPathBase() (CWD)
 
-  public static File getMSfile( String name ) { return new File( TDPath.getPathBase() + "/" + name ); }
+  public static File getMSfile( String name ) 
+  { 
+    // TDLog.v("MSfile: " + TDPath.getPathBase() + "/" + name );
+    return new File( TDPath.getPathBase() + "/" + name );
+  }
 
   public static File getMSfile( String subdir, String name ) 
   { 
@@ -870,7 +874,7 @@ public class TDFile
     return new BufferedWriter( new OutputStreamWriter( os ) );
   }
 
-  /**
+  /** @return a FileInputStream
    * @param subdir    subdir relative to app base
    * @param filename  file name
    * @param mimetype  not used
@@ -878,18 +882,22 @@ public class TDFile
   static public FileInputStream getMSinput( String subdir, String filename, String mimetype ) throws IOException
   {
     if ( ! hasMSdir( subdir ) ) {
-      TDLog.Error("failed: no subdir " + subdir );
+      TDLog.Error("Get MS input - failed: no subdir " + subdir );
       throw new IOException("failed: no subdir");
     }
     return new FileInputStream( getMSfile( subdir, filename ) );
   }
 
-  // get a reader for the FileInputStream
-  // then we can read  
+  /**
+   * @return get a reader for the FileInputStream, then we can read  
+   * @param subdir    subdir relative to app base
+   * @param filename  file name
+   * @param mimetype  not used
+   */
   static public BufferedReader getMSReader( String subdir, String filename, String mimetype ) throws IOException
   {
     if ( ! hasMSdir( subdir ) ) {
-      TDLog.Error("failed: no subdir " + subdir );
+      TDLog.Error("Get MS reader - failed: no subdir " + subdir );
       throw new IOException("failed: no subdir");
     }
     FileInputStream is = new FileInputStream( getMSfile( subdir, filename ) );

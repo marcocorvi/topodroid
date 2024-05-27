@@ -24,8 +24,8 @@ public class TDPrefKey
     "DISTOX_TEXT_SIZE",     // size of text [pt]
     "DISTOX_SIZE_BUTTONS",  // size of buttons (S, N, M, L, XL)
     "DISTOX_EXTRA_BUTTONS", // Activity Level
-    "DISTOX_MKEYBOARD",     // whether to use TopoDroid keypads
-    "DISTOX_NO_CURSOR",     // no cursor for custom keyboard
+    // "DISTOX_MKEYBOARD",     // whether to use TopoDroid keypads
+    // "DISTOX_NO_CURSOR",     // no cursor for custom keyboard
     "DISTOX_LOCAL_MAN",     // enable local man pages
     "DISTOX_LOCALE",        // language
     "DISTOX_ORIENTATION",   // 0 unspecified, 1 portrait, 2 landscape
@@ -46,8 +46,8 @@ public class TDPrefKey
     R.string.pref_text_size_title,
     R.string.pref_size_buttons_title,
     R.string.pref_extra_buttons_title,
-    R.string.pref_mkeyboard_title,
-    R.string.pref_no_cursor_title,
+    // R.string.pref_mkeyboard_title,
+    // R.string.pref_no_cursor_title,
     R.string.pref_local_help_title,
     R.string.pref_locale_title,
     R.string.pref_orientation_title,
@@ -68,8 +68,8 @@ public class TDPrefKey
     R.string.pref_text_size_summary,
     R.string.pref_size_buttons_summary,
     R.string.pref_extra_buttons_summary,
-    R.string.pref_mkeyboard_summary,
-    R.string.pref_no_cursor_summary,
+    // R.string.pref_mkeyboard_summary,
+    // R.string.pref_no_cursor_summary,
     R.string.pref_local_help_summary,
     R.string.pref_locale_summary,
     R.string.pref_orientation_summary,
@@ -90,8 +90,8 @@ public class TDPrefKey
      TDString.TWENTY, // TEXT_SIZE
      TDString.ONE,    // BUTTON_SIZE
      TDString.ONE,    // SYMBOL_SIZE
-     FALSE,           // CUSTOM KEYBOARD
-     TRUE,            // NO CURSOR
+     // FALSE,           // CUSTOM KEYBOARD
+     // TRUE,            // NO CURSOR
      TDString.ZERO,   // USER MANUAL
      TDString.EMPTY,  // LOCALE
      TDString.ZERO,   // SCREEN ORIENTATION
@@ -1913,6 +1913,8 @@ public class TDPrefKey
     "DISTOX_SINGLE_BACK",    
     "DISTOX_PALETTES",
     // "DISTOX_BACKUPS_CLEAR", // CLEAR_BACKUPS
+    "DISTOX_MKEYBOARD",     // whether to use TopoDroid keypads
+    "DISTOX_NO_CURSOR",     // no cursor for custom keyboard
     "DISTOX_PACKET_LOGGER",
     "DISTOX_TH2_EDIT",         // SKETCH EDIT
     "DISTOX_GEEK_SHOT",       // FORWARD
@@ -1931,6 +1933,8 @@ public class TDPrefKey
     R.string.pref_single_back_title,
     R.string.pref_palettes_title,
     // R.string.pref_backups_clear_title, // CLEAR_BACKUPS
+    R.string.pref_mkeyboard_title,
+    R.string.pref_no_cursor_title,
     R.string.pref_packet_logger_title,
     R.string.pref_th2_edit_title,
     R.string.pref_cat_survey,
@@ -1949,6 +1953,8 @@ public class TDPrefKey
     R.string.pref_single_back_summary,
     R.string.pref_palettes_summary,
     // R.string.pref_backups_clear_summary, // CLEAR_BACKUPS
+    R.string.pref_mkeyboard_summary,
+    R.string.pref_no_cursor_summary,
     R.string.pref_packet_logger_summary,
     R.string.pref_th2_edit_summary,
     -1,
@@ -1957,7 +1963,7 @@ public class TDPrefKey
     -1,
     // -1, // AUTOWALLS
     -1,
-    -1
+    -1,
     -1, // SKETCH
     R.string.pref_with_debug_summary,
     -1
@@ -1967,6 +1973,8 @@ public class TDPrefKey
     FALSE,
     FALSE,
     // FALSE, // CLEAR_BACKUPS
+    FALSE,           // CUSTOM KEYBOARD
+    TRUE,            // NO CURSOR
     FALSE,
     FALSE,
     TDString.EMPTY,

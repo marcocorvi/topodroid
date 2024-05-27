@@ -208,8 +208,8 @@ public class TDSetting
   public static int mSizeBtns     = 0;      // action bar buttons scale (3: medium)
   public static int mSizeButtons  = BTN_SIZE_UNUSED;     // default 52 
   public static int mTextSize     = 16;     // list text size 
-  public static boolean mKeyboard = true;
-  public static boolean mNoCursor = false;
+  public static boolean mKeyboard = false;
+  public static boolean mNoCursor = true;
   public static boolean mLocalManPages = true;
   public static float mItemButtonSize  = 5.0f;    // used in ItemButton
   // public static float mItemPathScale   = 2.0f; // referred from DrawingWindow
@@ -954,6 +954,8 @@ public class TDSetting
     mSingleBack = prefs.getBoolean( keyGeek[0], bool(defGeek[0]) ); // DISTOX_SINGLE_BACK
     setPalettes(  prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ) ); // DISTOX_PALETTES
     // setBackupsClear( prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ) ); // DISTOX_BACKUPS_CLEAR CLEAR_BACKUPS
+    mKeyboard = prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ); // DISTOX_MKEYBOARD
+    mNoCursor = prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ); // DISTOX_NO_CURSOR
     mPacketLog = prefs.getBoolean( keyGeek[2], bool(defGeek[2]) ); // DISTOX_PACKET_LOGGER
     mTh2Edit   = prefs.getBoolean( keyGeek[3], bool(defGeek[3]) ); // DISTOX_TH2_EDIT
     mWithDebug = TDLevel.isDebugBuild() ? prefs.getBoolean( keyGeek[11], bool(defGeek[11]) ) : false; // DISTOX_WITH_DEBUG
@@ -963,11 +965,9 @@ public class TDSetting
 
     setTextSize( tryInt(    prefs,     keyMain[1], defMain[1] ) );      // DISTOX_TEXT_SIZE
     setSizeButtons( tryInt( prefs,     keyMain[2], defMain[2] ) );      // DISTOX_SIZE_BUTTONS
-    mKeyboard      = prefs.getBoolean( keyMain[4], bool(defMain[4]) );  // DISTOX_MKEYBOARD
-    mNoCursor      = prefs.getBoolean( keyMain[5], bool(defMain[5]) );  // DISTOX_NO_CURSOR
-    mLocalManPages = handleLocalUserMan( /* my_app, */ prefs.getString( keyMain[6], defMain[6] ), false ); // DISTOX_LOCAL_MAN
-    setLocale( prefs.getString( keyMain[7], TDString.EMPTY ), false ); // DISTOX_LOCALE
-    mOrientation = Integer.parseInt( prefs.getString( keyMain[8], defMain[8] ) ); // DISTOX_ORIENTATION choice: 0, 1, 2
+    mLocalManPages = handleLocalUserMan( /* my_app, */ prefs.getString( keyMain[4], defMain[4] ), false ); // DISTOX_LOCAL_MAN
+    setLocale( prefs.getString( keyMain[5], TDString.EMPTY ), false ); // DISTOX_LOCALE
+    mOrientation = Integer.parseInt( prefs.getString( keyMain[6], defMain[6] ) ); // DISTOX_ORIENTATION choice: 0, 1, 2
     // setLocale( prefs.getString( keyMain[7], defMain[7] ), false ); // DISTOX_LOCALE
     // TDLog.Profile("locale");
     // boolean co_survey = prefs.getBoolean( keyMain[8], bool(defMain[8]) );        // DISTOX_COSURVEY 
@@ -1517,17 +1517,13 @@ public class TDSetting
     } else if ( k.equals( key[ 3 ] ) ) {             // DISTOX_EXTRA_BUTTONS (choice)
       int level = tryIntValue( hlp, k, v, def[3] );
       setActivityBooleans( hlp.getSharedPrefs(), level );
-    } else if ( k.equals( key[ 4 ] ) ) {           // DISTOX_MKEYBOARD (bool)
-      mKeyboard = tryBooleanValue( hlp, k, v, bool(def[4]) );
-    } else if ( k.equals( key[ 5 ] ) ) {           // DISTOX_NO_CURSOR(bool)
-      mNoCursor = tryBooleanValue( hlp, k, v, bool(def[5]) );
-    } else if ( k.equals( key[ 6 ] ) ) {           // DISTOX_LOCAL_MAN (choice)
+    } else if ( k.equals( key[ 4 ] ) ) {           // DISTOX_LOCAL_MAN (choice)
       // TDLog.v("SETTING handle local man pages - key " + k + " default " + def[6] );
-      mLocalManPages = handleLocalUserMan( /* hlp.getApp(), */ tryStringValue( hlp, k, v, def[6] ), true );
-    } else if ( k.equals( key[ 7 ] ) ) {           // DISTOX_LOCALE (choice)
-      setLocale( tryStringValue( hlp, k, v, def[7] ), true );
-    } else if ( k.equals( key[ 8 ] ) ) {           // DISTOX_ORIENTATION (choice)
-      mOrientation = tryIntValue( hlp, k, v, def[8] );
+      mLocalManPages = handleLocalUserMan( /* hlp.getApp(), */ tryStringValue( hlp, k, v, def[4] ), true );
+    } else if ( k.equals( key[ 5 ] ) ) {           // DISTOX_LOCALE (choice)
+      setLocale( tryStringValue( hlp, k, v, def[5] ), true );
+    } else if ( k.equals( key[ 6 ] ) ) {           // DISTOX_ORIENTATION (choice)
+      mOrientation = tryIntValue( hlp, k, v, def[6] );
       TopoDroidApp.setScreenOrientation( );
       TDandroid.setScreenOrientation( TDPrefActivity.mPrefActivityAll );
     /* ---- IF_COSURVEY
@@ -1824,13 +1820,17 @@ public class TDSetting
       setPalettes( tryBooleanValue( hlp, k, v, bool(def[1]) ) );
     // } else if ( k.equals( key[1] ) ) { // CLEAR_BACKUPS
     //   setBackupsClear( tryBooleanValue( hlp, k, v, bool(def[1]) ) ); // DISTOX_BACKUPS_CLEAR
-    } else if ( k.equals( key[2] ) ) {
-      mPacketLog = tryBooleanValue( hlp, k, v, bool(def[2]) ); // DISTOX_PACKET_LOGGER
-    } else if ( k.equals( key[3] ) ) {
-      mTh2Edit = tryBooleanValue( hlp, k, v, bool(def[3]) ); // DISTOX_TH2_EDIT
+    } else if ( k.equals( key[ 2 ] ) ) {           // DISTOX_MKEYBOARD (bool)
+      mKeyboard = tryBooleanValue( hlp, k, v, bool(def[2]) );
+    } else if ( k.equals( key[ 3 ] ) ) {           // DISTOX_NO_CURSOR(bool)
+      mNoCursor = tryBooleanValue( hlp, k, v, bool(def[3]) );
+    } else if ( k.equals( key[4] ) ) {
+      mPacketLog = tryBooleanValue( hlp, k, v, bool(def[4]) ); // DISTOX_PACKET_LOGGER
+    } else if ( k.equals( key[5] ) ) {
+      mTh2Edit = tryBooleanValue( hlp, k, v, bool(def[5]) ); // DISTOX_TH2_EDIT
       mMainFlag |= FLAG_BUTTON;
-    } else if ( TDLevel.isDebugBuild() && k.equals( key[11] ) ) {
-      mWithDebug =  tryBooleanValue( hlp, k, v, bool(def[11]) ); // DISTOX_WITH_DEBUG
+    } else if ( TDLevel.isDebugBuild() && k.equals( key[13] ) ) {
+      mWithDebug =  tryBooleanValue( hlp, k, v, bool(def[13]) ); // DISTOX_WITH_DEBUG
       TDLevel.setLevelWithDebug( mWithDebug );
     } else {
       TDLog.Error("missing GEEK key: " + k );
