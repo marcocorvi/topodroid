@@ -823,7 +823,7 @@ no campo abaixo e aperte o botão.
   <string name="button_xsection">Corte</string>
   <string name="xsection">Corte</string>
   <string name="buffer_size">Buffer: %1$d dados</string>
-    <!-- TODO string name="buffer_sorted">sorted</string -->
+  <string name="buffer_sorted">ordenado</string>
   <!-- UNUSED string name="buffer_unsorted">desordenado</string -->
   <string name="mode_leg">Visadas</string>
   <string name="mode_splay">Medidas auxiliares</string>
