@@ -47,7 +47,7 @@ class UndeleteDialog extends MyDialog
   private final DataHelper mData;
   private final ShotWindow mParent;
   private DBlockBuffer mDBlockBuffer = null;
-  private CheckBox     mCBbufferUnsort;
+  private CheckBox     mCBbufferSortByID;
 
   // private Button mBtnCancel;
   private Button mBtnStatus;
@@ -66,6 +66,15 @@ class UndeleteDialog extends MyDialog
   private ArrayList< UndeleteItem > mShots4 = null; // blunder BLUNDER
 
   private int mStatus;
+  private boolean mCanRecover = false;
+
+  // FLAGS
+  // private final int RECOVER_SHOTS_DELETED   = 1;
+  // private final int RECOVER_SHOTS_OVERSHOOT = 2;
+  // private final int RECOVER_SHOTS_CHECK     = 4;
+  // private final int RECOVER_SHOTS_BLUNDER   = 8;
+  // private final int RECOVER_PLOTS_DELETED   =16;
+
 
   /** cstr
    * @param context   context
@@ -90,24 +99,28 @@ class UndeleteDialog extends MyDialog
     mSid    = sid;
     mDBlockBuffer = buffer;
     if ( TDUtil.isNonEmpty(shots1) ) {
+      mCanRecover = true;
       mShots1 = new ArrayList< UndeleteItem >();
       for ( DBlock b : shots1 ) {
         mShots1.add( new UndeleteItem( b.mId, String.format(Locale.US, "%d <%s> %.2f %.1f %.1f", b.mId, b.Name(), b.mLength, b.mBearing, b.mClino ), UndeleteItem.UNDELETE_SHOT ) );
       }
     }
     if ( TDUtil.isNonEmpty(shots2) ) {
+      mCanRecover = true;
       mShots2 = new ArrayList< UndeleteItem >();
       for ( DBlock b : shots2 ) {
         mShots2.add( new UndeleteItem( b.mId, String.format(Locale.US, "%d %.2f %.1f %.1f", b.mId, b.mLength, b.mBearing, b.mClino ), UndeleteItem.UNDELETE_OVERSHOOT ) );
       }
     }
     if ( TDUtil.isNonEmpty(shots3) ) {
+      mCanRecover = true;
       mShots3 = new ArrayList< UndeleteItem >();
       for ( DBlock b : shots3 ) {
         mShots3.add( new UndeleteItem( b.mId, String.format(Locale.US, "%d %.2f %.1f %.1f", b.mId, b.mLength, b.mBearing, b.mClino ), UndeleteItem.UNDELETE_CALIB_CHECK ) );
       }
     }
     if ( TDSetting.mBlunderShot && TDUtil.isNonEmpty(shots4) ) { // BLUNDER
+      mCanRecover = true;
       mShots4 = new ArrayList< UndeleteItem >();
       for ( DBlock b : shots4 ) {
         mShots4.add( new UndeleteItem( b.mId, String.format(Locale.US, "%d %.2f %.1f %.1f", b.mId, b.mLength, b.mBearing, b.mClino ), UndeleteItem.UNDELETE_BLUNDER ) );
@@ -116,6 +129,7 @@ class UndeleteDialog extends MyDialog
     if ( plots != null ) {
       int np = plots.size();
       if ( np > 0 && (np%2) == 0 ) {
+        mCanRecover = true;
         mPlots  = new ArrayList< UndeleteItem >();
         for ( int k=0; k<np; k+=2 ) {
           PlotInfo plan = plots.get(k);
@@ -185,7 +199,7 @@ class UndeleteDialog extends MyDialog
   {
     // TDLog.v("Append buffer " + mDBlockBuffer.size() );
     if ( mDBlockBuffer == null || mDBlockBuffer.size() == 0 ) return;
-    if ( ! mCBbufferUnsort.isChecked() ) mDBlockBuffer.sort();
+    if ( mCBbufferSortByID.isChecked() ) mDBlockBuffer.sort();
     for ( DBlock blk : mDBlockBuffer.getBuffer() ) {
       mData.insertDBlockShot( mSid, blk );
     }
@@ -249,7 +263,8 @@ class UndeleteDialog extends MyDialog
   {
     super.onCreate( savedInstanceState );
 
-    setContentView(R.layout.undelete_dialog);
+    initLayout(R.layout.undelete_dialog, ((mDBlockBuffer != null)? R.string.undelete_paste_text : R.string.undelete_text ) );
+
     if ( mPlots  != null ) mArrayAdapter0 = new UndeleteAdapter( mContext, this, R.layout.undelete_row, mPlots );
     if ( mShots1 != null ) mArrayAdapter1 = new UndeleteAdapter( mContext, this, R.layout.undelete_row, mShots1 );
     if ( mShots2 != null ) mArrayAdapter2 = new UndeleteAdapter( mContext, this, R.layout.undelete_row, mShots2 );
@@ -265,10 +280,16 @@ class UndeleteDialog extends MyDialog
     ( (Button) findViewById( R.id.button_cancel ) ).setOnClickListener( this );
 
     mBtnStatus = (Button) findViewById( R.id.button_status );
-    mBtnStatus.setOnClickListener( this );
-    ((Button) findViewById( R.id.button_ok )).setOnClickListener( this );
+    if ( mCanRecover ) {
+      mBtnStatus.setOnClickListener( this );
+      ((Button) findViewById( R.id.button_ok )).setOnClickListener( this );
+    } else {
+      mList.setVisibility( View.GONE );
+      mBtnStatus.setVisibility( View.GONE );
+      ((Button) findViewById( R.id.button_ok )).setVisibility( View.GONE );
+    }
 
-    mCBbufferUnsort = (CheckBox) findViewById( R.id.buffer_unsort );
+    mCBbufferSortByID = (CheckBox) findViewById( R.id.buffer_sorted );
     LinearLayout layout_buffer = (LinearLayout)findViewById( R.id.buffer );
     if ( mDBlockBuffer != null ) {
       int buffer_size = mDBlockBuffer.size();
@@ -281,11 +302,9 @@ class UndeleteDialog extends MyDialog
       } else {
         layout_buffer.setVisibility( View.GONE );
       }
-      setTitle( R.string.undelete_paste_text );
     } else {
       // TDLog.v("null buffer" );
       layout_buffer.setVisibility( View.GONE );
-      setTitle( R.string.undelete_text );
     }
 
     mStatus = 0;
@@ -335,6 +354,7 @@ class UndeleteDialog extends MyDialog
    */
   private void incrementStatus( )
   {
+    if ( ! mCanRecover ) return;
     for ( int k=0; k<MAX_STATUS; ++k) {
       mStatus = (mStatus + 1) % MAX_STATUS;
       if ( mStatus == 0 ) {

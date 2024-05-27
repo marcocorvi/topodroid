@@ -895,7 +895,8 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="button_xsection" copyable="fr">X-Section</string>
     <string name="xsection" copyable="fr">X-Section</string>
     <string name="buffer_size">Buffer size: %1$d</string>
-    <string name="buffer_unsorted">unsorted</string>
+    <string name="buffer_sorted">sorted</string>
+    <!-- UNUSED string name="buffer_unsorted">unsorted</string -->
 
     <string name="mode_leg">Legs</string>
     <string name="mode_splay" copyable="all">Splays</string>

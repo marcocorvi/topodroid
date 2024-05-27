@@ -28,10 +28,10 @@
         android:layout_marginTop="@dimen/marginsmall"
         android:gravity="start"
         >
-        <CheckBox android:id="@+id/buffer_unsort"
+        <CheckBox android:id="@+id/buffer_sorted"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="@string/buffer_unsorted"
+          android:text="@string/buffer_sorted"
         />
         <LinearLayout
           android:layout_width="fill_parent" 

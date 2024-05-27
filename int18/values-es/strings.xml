@@ -880,7 +880,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_xsection"  >Secciones transversales</string>
     <string name="xsection">Secciones transversales</string>
     <string name="buffer_size">Búfer: %1$d datos</string>
-    <string name="buffer_unsorted">Sin clasificar</string>
+    <!-- TODO string name="buffer_sorted">sorted</string -->
+    <!-- UNUSED string name="buffer_unsorted">Sin clasificar</string -->
 
     <string name="mode_leg">Visuales</string>
     <string name="mode_splay">Radiales</string>

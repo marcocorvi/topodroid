@@ -874,7 +874,8 @@
     <string name="button_xsection"  >Sezione trasversale</string>
     <string name="xsection">Sezione trasversale</string>
     <string name="buffer_size">Buffer: %1$d dati</string>
-    <string name="buffer_unsorted">non ordinati</string>
+    <!-- TODO string name="buffer_sorted">sorted</string -->
+    <!-- UNUSED string name="buffer_unsorted">non ordinati</string -->
 
     <string name="mode_leg">Battute</string>
     <string name="mode_splay">Splay</string>

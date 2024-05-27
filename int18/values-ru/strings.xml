@@ -875,7 +875,8 @@
     <string name="button_xsection"  >Сечение</string>
     <string name="xsection">Сечение</string>
     <string name="buffer_size">Буфер: %1$d записей</string>
-    <string name="buffer_unsorted">не отсортировано</string>
+    <!-- TODO string name="buffer_sorted">sorted</string -->
+    <!-- UNUSED string name="buffer_unsorted">не отсортировано</string -->
 
     <string name="mode_leg">Нитка хода</string>
     <string name="mode_splay">Сплеи</string>

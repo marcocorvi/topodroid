@@ -878,7 +878,8 @@
     <string name="button_xsection"  >截面</string>
     <string name="xsection">截面</string>
     <string name="buffer_size">缓存: %1$d 数据</string>
-    <string name="buffer_unsorted">未分类</string>
+    <!-- TODO string name="buffer_sorted">sorted</string -->
+    <!-- UNUSED string name="buffer_unsorted">未分类</string -->
 
     <string name="mode_leg">主线测段</string>
     <string name="mode_splay">辐测</string>

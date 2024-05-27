@@ -814,7 +814,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="button_xsection">Profil</string>
   <string name="xsection">Querschnitt</string>
   <string name="buffer_size">Zwischenspeicher: %1$d Daten</string>
-  <string name="buffer_unsorted">unsortiert</string>
+    <!-- TODO string name="buffer_sorted">sorted</string -->
+  <!-- UNUSED string name="buffer_unsorted">unsortiert</string -->
   <string name="mode_leg">Messstrecken</string>
   <string name="mode_splay">Hilfszüge</string>
   <string name="mode_latest">Letzte Hilfszüge</string>
