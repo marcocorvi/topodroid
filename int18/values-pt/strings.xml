@@ -593,8 +593,8 @@ no campo abaixo e aperte o botão.
   <string name="shot_reverse">inverter</string>
   <string name="shot_to">Para</string>
   <string name="station">Base referência</string>
-  <string name="station_ask">Inserir base no croqui?</string>
-  <string name="station_del">Remover base do croqui?</string>
+  <string name="station_ask">Inserir base no arquivo th2 exportado?</string>
+  <string name="station_del">Remover base do arquivo th2 exportado?</string>
   <string name="station_reset">Não continuar topo deste ponto</string>
   <string name="station_set">Continuar linha de trena desta base?</string>
   <!-- UNUSED string name="station_base">base de referência</string -->
