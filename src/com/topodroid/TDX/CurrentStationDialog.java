@@ -161,7 +161,7 @@ class CurrentStationDialog extends MyDialog
       }
     }
 
-    mName.setText( mStationName );
+    mName.setText( (mStationName == null)? "" : mStationName );
     setCommentFlagsAndCode( mStationName );
 
     updateList();
@@ -212,7 +212,7 @@ class CurrentStationDialog extends MyDialog
   {
     if ( TDString.isNullOrEmpty( name ) ) return; // safety check
     mStationName = name;
-    StationInfo cs = TopoDroidApp.mData.getStation( TDInstance.sid, name, null ); // null: do not create
+    StationInfo cs = ( name == null )? null : TopoDroidApp.mData.getStation( TDInstance.sid, name, null ); // null: do not create
     if ( cs == null ) {
       mName.setText( TDString.EMPTY );
       mComment.setText( null );
@@ -230,10 +230,16 @@ class CurrentStationDialog extends MyDialog
    */
   private void setCommentFlagsAndCode( String name )
   {
-    StationInfo cs = TopoDroidApp.mData.getStation( TDInstance.sid, name, null ); // null: do not create
-    mComment.setText( ( cs == null )? null : cs.mComment );
-    setFlags( cs );
-    mGeoCode = cs.getGeoCode();
+    StationInfo cs = ( name == null )? null : TopoDroidApp.mData.getStation( TDInstance.sid, name, null ); // null: do not create
+    if ( cs == null ) {
+      mComment.setText( "" );
+      setFlags( null );
+      mGeoCode = "";
+    } else {
+      mComment.setText( ( cs == null )? "" : cs.mComment );
+      setFlags( cs );
+      mGeoCode = cs.getGeoCode();
+    }
   }
 
   /** set the display flags boxes
