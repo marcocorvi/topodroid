@@ -883,7 +883,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="button_xsection"  >Keresztmetszet</string>
     <string name="xsection">Kereszmetszetek</string>
     <string name="buffer_size">Puffer: %1$d adat</string>
-    <!-- TODO string name="buffer_sorted">sorted</string -->
+    <string name="buffer_sorted">rendezett</string>
     <!-- UNUSED string name="buffer_unsorted">rendezetlen</string -->
 
     <string name="mode_leg">Poligonok</string>
