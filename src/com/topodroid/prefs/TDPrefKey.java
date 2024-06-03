@@ -399,26 +399,26 @@ public class TDPrefKey
 
   // ==============================================================================
   public static String[] EXPORT_ENABLE = { // ZIP always enabled
-    "EXPORT_DATA_COMPASS",
+    "EXPORT_DATA_COMPASS",    // 0
     "EXPORT_DATA_CSURVEY",
     "EXPORT_DATA_GHTOPO",
     // "EXPORT_DATA_GROTTOLF",
     // "EXPORT_DATA_POCKETTOPO",
-    "EXPORT_DATA_POLYGON",
+    "EXPORT_DATA_POLYGON",    // 3
     "EXPORT_DATA_SURVEX",
     "EXPORT_DATA_THERION",
-    "EXPORT_DATA_TOPO",
+    "EXPORT_DATA_TOPO",       // 6
     "EXPORT_DATA_TOPOROBOT",
     "EXPORT_DATA_VISUALTOPO",
-    "EXPORT_DATA_WALLS",
+    "EXPORT_DATA_WALLS",      // 9
     "EXPORT_DATA_WINKARST",
     "EXPORT_DATA_CVS",
-    "EXPORT_DATA_DXF",
+    "EXPORT_DATA_DXF",        // 12
     "EXPORT_DATA_KML",
     // "EXPORT_DATA_OZIEXPLORER",
     "EXPORT_DATA_GPX",
     // "EXPORT_DATA_GEOJSON",
-    "EXPORT_DATA_SHAPEFILE"
+    "EXPORT_DATA_SHAPEFILE"   // 15
   };
 
   public static int[] EXPORT_ENABLEtitle = {

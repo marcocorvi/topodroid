@@ -312,6 +312,10 @@ public class ShotWindow extends Activity
   private boolean isButton1( Button b, int idx ) { return idx - boff < mNrButton1 && b == button1( idx ); }
 
   // --------------------------------------------------------------------------------
+  /** set the reference azimuth
+   * @param azimuth  reference azimuth [degrees]
+   * @param fixed_extend   whether "extend" is fixed (-1 LEFT, 1 RIGHT) or not (0)
+   */
   public void setRefAzimuth( float azimuth, long fixed_extend )
   {
     // TDLog.v( "set Ref Azimuth " + fixed_extend + " " + azimuth );
@@ -327,7 +331,9 @@ public class ShotWindow extends Activity
     if ( BTN_AZIMUTH - boff >= mNrButton1 ) return;
 
     // TDLog.v( "set RefAzimuthButton extend " + TDAzimuth.mFixedExtend + " " + TDAzimuth.mRefAzimuth );
-    if ( ! TDSetting.mAzimuthManual /* TDAzimuth.mFixedExtend == 0 */ ) {
+
+    // The ref azimuth can be fixed either by the setting or by the choice in the azimuth dialog 
+    if ( ! TDSetting.mAzimuthManual && TDAzimuth.mFixedExtend == 0 ) { // FIXME FIXED_EXTEND 20240603 the mFixedExtend test was commented
       // FIXME_AZIMUTH_DIAL 2
       // android.graphics.Matrix m = new android.graphics.Matrix();
       // m.postRotate( TDAzimuth.mRefAzimuth - 90 );
@@ -1022,28 +1028,30 @@ public class ShotWindow extends Activity
     return true;
   }
 
-  // called by PhotoSensorDialog to split the survey
-  // void askSurvey( )
+  // /** called by PhotoSensorDialog to split the survey
+  //  * @param shot_id   id of the shot at which to split
+  //  */
+  // void askSurvey( long shot_id )
   // {
   //   String new_survey = null; // new survey name
   //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.survey_split,
   //     new DialogInterface.OnClickListener() {
   //       @Override
   //       public void onClick( DialogInterface dialog, int btn ) {
-  //         doSplitOrMoveSurvey( new_survey );
+  //         doSplitOrMoveSurvey( shot_id, new_survey );
   //       }
   //   } );
   // }
-  void doSplitOrMoveSurvey()
+  void doSplitOrMoveDialog( long shot_id )
   {
-    (new SurveySplitOrMoveDialog( this, this )).show();
+    (new SurveySplitOrMoveDialog( this, this, shot_id )).show();
   }
   
-  void doSplitOrMoveSurvey( String new_survey )
+  void doSplitOrMoveSurvey( long shot_id, String new_survey )
   {
     long old_sid = TDInstance.sid;
-    long old_id  = mShotId;
-    // TDLog.v( "split survey " + old_sid + " " + old_id + " new " + ((new_survey == null)? "null" : new_survey) );
+    // long old_id  = shot_id; // mShotId;
+    // TDLog.v( "SPLIT survey Old: " + old_sid + " " + shot_id + " New: " + ((new_survey == null)? "null" : new_survey) );
     if ( TopoDroidApp.mShotWindow != null ) {
       // // if ( TDSetting.mDataBackup ) TopoDroidApp.doExportDataAsync( getApplicationContext(), TDSetting.mExportShotsFormat, false ); // try_save
       TopoDroidApp.mShotWindow.doFinish();
@@ -1054,9 +1062,11 @@ public class ShotWindow extends Activity
       TopoDroidApp.mSurveyWindow = null;
     }
     if ( new_survey == null ) {
-      TopoDroidApp.mMainActivity.startSplitSurvey( old_sid, old_id ); // SPLIT SURVEY
+      TDLog.v( "SPLIT survey " + old_sid + " " + shot_id );
+      TopoDroidApp.mMainActivity.startSplitSurvey( old_sid, shot_id ); // SPLIT SURVEY
     } else {
-      TopoDroidApp.mMainActivity.startMoveSurvey( old_sid, old_id, new_survey ); // MOVE SURVEY
+      TDLog.v( "MOVE survey Old: " + old_sid + " " + shot_id + " New: " + new_survey );
+      TopoDroidApp.mMainActivity.startMoveSurvey( old_sid, shot_id, new_survey ); // MOVE SURVEY
     }
   }
 
@@ -1615,7 +1625,7 @@ public class ShotWindow extends Activity
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // AZIMUTH
         if ( TDLevel.overNormal ) {
-          if ( TDSetting.mAzimuthManual ) {
+          if ( TDSetting.mAzimuthManual ) { // toggle between LEFT and RIGHT "extend"
             setRefAzimuth( TDAzimuth.mRefAzimuth, - TDAzimuth.mFixedExtend );
           } else {
             (new AzimuthDialog( mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show();
@@ -1789,6 +1799,7 @@ public class ShotWindow extends Activity
             if ( b == null || ! b.isSecLeg() ) { // != DBlock.BLOCK_SEC_LEG
               break;
 	    }
+            if ( TDLevel.overAdvanced ) mDBlockBuffer.add( b );
             mApp_mData.deleteShot( id, TDInstance.sid, TDStatus.DELETED );
             // mSurveyAccuracy.removeBlockAMD( b );
           }
@@ -1802,28 +1813,33 @@ public class ShotWindow extends Activity
         }
       }
     }
+    TDLog.v("BUFFER after cut: size " + mDBlockBuffer.size() );
     clearMultiSelect( );
     updateDisplay( ); 
   }
 
   /** copy a set of shots to the buffer
+   * @note copying shots in the DBlockBuffer is done only at level TESTER
    */
   void doMultiCopy()
   {
-    if ( TDLevel.overAdvanced ) mDBlockBuffer.clear();
-    for ( DBlock blk : mDataAdapter.mSelect ) {
-      if ( TDLevel.overAdvanced ) mDBlockBuffer.add( blk );
-      if ( /* blk != null && */ blk.isMainLeg() ) { // == DBlock.BLOCK_MAIN_LEG 
-        if ( mFlagLeg ) {
-          for ( long id = blk.mId+1; ; ++id ) {
-            DBlock b = mApp_mData.selectShot( id, TDInstance.sid );
-            if ( b == null || ! b.isSecLeg() ) { // != DBlock.BLOCK_SEC_LEG
-              break;
-	    }
-            if ( TDLevel.overAdvanced ) mDBlockBuffer.add( b );
+    if ( TDLevel.overAdvanced ) {
+      mDBlockBuffer.clear();
+      for ( DBlock blk : mDataAdapter.mSelect ) {
+        mDBlockBuffer.add( blk );
+        if ( /* blk != null && */ blk.isMainLeg() ) { // == DBlock.BLOCK_MAIN_LEG 
+          if ( mFlagLeg ) {
+            for ( long id = blk.mId+1; ; ++id ) {
+              DBlock b = mApp_mData.selectShot( id, TDInstance.sid );
+              if ( b == null || ! b.isSecLeg() ) { // != DBlock.BLOCK_SEC_LEG
+                break;
+              }
+              mDBlockBuffer.add( b );
+            }
           }
         }
       }
+      TDLog.v("BUFFER after copy: size " + mDBlockBuffer.size() );
     }
     clearMultiSelect( );
     // updateDisplay( ); REPLACED

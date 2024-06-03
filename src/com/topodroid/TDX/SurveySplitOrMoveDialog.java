@@ -49,12 +49,14 @@ class SurveySplitOrMoveDialog extends MyDialog
 
   private String mSelected = null;
   private String[] mSurveys = null;
+  private long mShotId;
 
-  SurveySplitOrMoveDialog( Context context, ShotWindow parent )
+  SurveySplitOrMoveDialog( Context context, ShotWindow parent, long shot_id )
   {
     super( context, null, R.string.SurveySplitOrMoveDialog ); // null app
-    mParent  = parent;
+    mParent   = parent;
     mSelected = null;
+    mShotId   = shot_id;
   }
 
   @Override
@@ -108,7 +110,7 @@ class SurveySplitOrMoveDialog extends MyDialog
         new DialogInterface.OnClickListener() {
           @Override
           public void onClick( DialogInterface dialog, int btn ) {
-            mParent.doSplitOrMoveSurvey( null );  // null: split
+            mParent.doSplitOrMoveSurvey( mShotId, null );  // null: split
             dismiss();
           }
         }
@@ -120,7 +122,7 @@ class SurveySplitOrMoveDialog extends MyDialog
         new DialogInterface.OnClickListener() {
           @Override
           public void onClick( DialogInterface dialog, int btn ) {
-            mParent.doSplitOrMoveSurvey( mSelected );
+            mParent.doSplitOrMoveSurvey( mShotId, mSelected );
             dismiss();
           }
         }

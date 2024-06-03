@@ -373,6 +373,7 @@ public class MainWindow extends Activity
 
   void startSplitSurvey( long old_sid, long old_id )
   {
+    TDLog.v( "start split survey");
     mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true ); // FIXME CO-SURVEY
     (new SurveyNewDialog( mActivity, this, old_sid, old_id )).show(); // WITH SPLIT
   }
@@ -384,7 +385,7 @@ public class MainWindow extends Activity
    */
   void startMoveSurvey( long old_sid, long old_id, String new_survey )
   {
-    // TDLog.v( "start move survey");
+    TDLog.v( "start move survey");
     if ( mApp.moveSurveyData( old_sid, old_id, new_survey ) ) {
       mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, true ); // FIXME CO-SURVEY
     // } else {

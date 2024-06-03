@@ -1571,9 +1571,9 @@ public class TopoDroidApp extends Application
         // TDInstance.extend = 
         int extend = mData.getSurveyExtend( TDInstance.sid );
         // TDLog.v( "set SurveyFromName extend: " + extend );
-        if ( SurveyInfo.isExtendLeft( extend ) ) { 
+        if ( SurveyInfo.isSurveyExtendLeft( extend ) ) { 
           TDAzimuth.mFixedExtend = -1L;
-        } else if ( SurveyInfo.isExtendRight( extend ) ) { 
+        } else if ( SurveyInfo.isSurveyExtendRight( extend ) ) { 
           TDAzimuth.mFixedExtend = 1L;
         } else {
           TDAzimuth.mFixedExtend = 0;
@@ -1595,7 +1595,7 @@ public class TopoDroidApp extends Application
   {
     if ( mData == null ) return false;
     long new_sid = mData.getSurveyId( new_survey );
-    // TDLog.v( "SID " + old_sid + " " + new_sid + " ID " + old_id );
+    TDLog.v( "MOVE data: " + old_sid + "/" + old_id + " to " + new_sid );
     if ( new_sid <= 0 || new_sid == old_sid ) return false;
     return mData.moveShotsBetweenSurveys( old_sid, old_id, new_sid );
   }

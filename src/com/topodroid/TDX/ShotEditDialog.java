@@ -1051,14 +1051,14 @@ class ShotEditDialog extends MyDialog
       dismiss();
     } else if ( mButtonSurvey != null && b == mButtonSurvey ) { // SPLIT
       if ( TDLevel.overExpert ) {
-        mParent.doSplitOrMoveSurvey( );
+        mParent.doSplitOrMoveDialog( mBlk.mId );
         dismiss();
       } else {
         TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(), R.string.survey_split,
           new DialogInterface.OnClickListener() {
             @Override
             public void onClick( DialogInterface dialog, int btn ) {
-              mParent.doSplitOrMoveSurvey( null );  // null: split
+              mParent.doSplitOrMoveSurvey( mBlk.mId, null );  // null: split
               dismiss();
             }
           } );

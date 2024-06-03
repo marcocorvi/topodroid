@@ -160,7 +160,8 @@ class UndeleteDialog extends MyDialog
       return;
     } else if ( v.getId() == R.id.button_ok ) {
       recoverData();
-    } else if ( mDBlockBuffer != null ) { 
+    } else if ( mDBlockBuffer != null && mDBlockBuffer.size() > 0 ) { 
+      TDLog.v("BUFFER append: size " + mDBlockBuffer.size() );
       if ( v.getId() == R.id.button_buffer_copy ) {
         appendBuffer( );
       } else if ( v.getId() == R.id.button_buffer_move ) {

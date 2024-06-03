@@ -298,11 +298,11 @@ class ShotNewDialog extends MyDialog
     // adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
     // mExtend.setAdapter( adapter );
 
-    // if ( TDAzimuth.mFixedExtend == -1L ) {
-    //   mRadioLeft.setChecked( true );
-    // } else if ( TDAzimuth.mFixedExtend == 1L ) {
-    //   mRadioRight.setChecked( true );
-    // }
+    if ( TDAzimuth.mFixedExtend == -1L ) {  // FIXME FIXED_EXTEND 20240603 these five lines were commented
+      mRadioLeft.setChecked( true );
+    } else if ( TDAzimuth.mFixedExtend == 1L ) {
+      mRadioRight.setChecked( true );
+    }
 
     mBtnOk.setOnClickListener( this );
     mBtnSave.setOnClickListener( this );

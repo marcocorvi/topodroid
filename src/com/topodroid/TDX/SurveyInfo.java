@@ -33,15 +33,15 @@ public class SurveyInfo
   public final static float DECLINATION_UNSET = 1080; // three times 360
 
   public long id;
-  public String name;
+  public String name;  // survey name
   public String date;  // YYYY.MM.DD
-  String team;
+  String team;         // surveyors names
   float  declination;  // declination [degree]
-  String comment;
-  String initStation;
-  int xsections; // 0: shared, 1: private
-  int datamode;
-  int mExtend;
+  String comment;      // comment - description
+  String initStation;  // start station
+  int xsections;       // 0: shared, 1: private
+  int datamode;        // normal or diving
+  int mExtend;         // survey extend
 
   SurveyInfo copy() 
   {
@@ -65,13 +65,33 @@ public class SurveyInfo
 
   // boolean isSectionPrivate() { return xsection == 1; }
 
-  static boolean isExtendLeft( int extend ) { return extend < -999; }
-  static boolean isExtendRight( int extend ) { return extend  > 999; }
+  /** @return true if the specified extend if LEFT ( ie, less than -999 )
+   * @param extend  the specified extend
+   */
+  static boolean isSurveyExtendLeft( int extend ) { return extend < -999; }
 
-  boolean isExtendLeft( )  { return mExtend < -999; }
-  boolean isExtendRight( ) { return mExtend  > 999; }
-  int getExtend() { return mExtend; }
-  void setExtend( int extend ) { mExtend = TDMath.in360( extend ); }
+  /** @return true if the specified extend if RIGHT ( ie, greater than +999 )
+   * @param extend  the specified extend
+   */
+  static boolean isSurveyExtendRight( int extend ) { return extend  > 999; }
+
+  // /** @return true if the survey extend if LEFT ( ie, less than -999 )
+  //  */
+  // boolean isSurveyExtendLeft( )  { return mExtend < -999; }
+
+  // /** @return true if the survey extend if RIGHT ( ie, greater than +999 )
+  //  */
+  // boolean isSurveyExtendRight( ) { return mExtend  > 999; }
+
+  // /** @return the survey "extend"
+  //  */
+  // int getSurveyExtend() { return mExtend; }
+
+  // /** set the survey "extend" 
+  //  * @param extend   new extend value
+  //  * @note the extend is always set in the range [0,360)
+  //  */
+  // void setSurveyExtend( int extend ) { mExtend = TDMath.in360( extend ); }
 
   /** @return true if declination is set
    */

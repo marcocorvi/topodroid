@@ -4997,15 +4997,21 @@ public class DataHelper extends DataSetObservable
     return id - 1L; // decrement
   }
   
+  /** move all shots records, starting with a given ID, from one survey to another
+   * @param old_sid   survey ID of source survey
+   * @param old_id    ID of starting shot
+   * @param new_sid   survey ID of target survey
+   * @return true if success
+   */
   boolean moveShotsBetweenSurveys( long old_sid, long old_id, long new_sid )
   {
     boolean ret = false;
-    long offset = getLastShotId( new_sid ) + 1 - old_id;
+    long offset = getLastShotId( new_sid ) + 1 - old_id; 
     // update shots set id=id+offset, surveyId=new_sid where surveyId=old_sid && id >= old_id;
     StringWriter sw = new StringWriter();
     PrintWriter  pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET id=id+%d, surveyId=%d WHERE surveyId=%d AND id>=%d", offset, new_sid, old_sid, old_id );
-    // TDLog.v("DB " + sw.toString() );
+    TDLog.v("DB " + sw.toString() );
     try {
       myDB.beginTransaction();
       myDB.execSQL( sw.toString() );
