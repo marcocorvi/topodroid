@@ -29,6 +29,7 @@ public class Device
   public final static String NAME_BRIC      = "BRIC-";
   public final static String NAME_BRIC4     = "BRIC4_";
   public final static String NAME_BRIC5     = "BRIC5-";
+  public final static String NAME_BRIC5_2   = "BRIC5_";
   public final static String NAME_SAP5      = "Shetland_";
   public final static String NAME_SAP5_2    = "SAP5_";
   public final static String NAME_SAP6      = "SAP6_";
@@ -36,11 +37,17 @@ public class Device
   public final static String NAME_CAVWAY    = "CAVWAY-";
   
   // supported models and their common names
-  public final static String[] mModels = { NAME_DISTOX1, NAME_DISTOX2, NAME_DISTOXBLE, NAME_BRIC4, NAME_BRIC5, NAME_SAP5, NAME_SAP6, NAME_CAVWAY };
-  public final static String[] mModelNames = { "DistoX A3", "DistoX X310", "DistoX BLE", "BRIC 4", "BRIC 5", "SAP 5", "SAP 6", "Cavway X1" };
+  public final static String[] mModels = { NAME_DISTOX1, NAME_DISTOX2, NAME_DISTOXBLE,
+    NAME_BRIC4, NAME_BRIC5, NAME_BRIC5_2,
+    NAME_SAP5, NAME_SAP5_2, NAME_SAP6, NAME_SAP6_2,
+    NAME_CAVWAY };
+  public final static String[] mModelNames = { "DistoX A3", "DistoX X310", "DistoX BLE",
+    "BRIC 4", "BRIC 5", "BRIC 5",
+    "SAP 5",  "SAP 5",  "SAP 6",  "SAP 6",
+    "Cavway X1" };
 
   // supported BLE models
-  final static String[] mBleModels = { NAME_DISTOXBLE, NAME_BRIC4, NAME_BRIC5, NAME_SAP5, NAME_SAP6, NAME_CAVWAY };
+  final static String[] mBleModels = { NAME_DISTOXBLE, NAME_BRIC4, NAME_BRIC5, NAME_BRIC5_2, NAME_SAP5, NAME_SAP5_2, NAME_SAP6, NAME_SAP6_2, NAME_CAVWAY };
 
   // DistoX2 / SAP6 commands
   public static final int LASER_ON         =  1; // 0x36
@@ -148,6 +155,7 @@ public class Device
     // NAME_DISTOX1 left unchnaged
     if ( bt_name.startsWith( NAME_BRIC4 ) )   return bt_name.replace( NAME_BRIC4, "" );
     if ( bt_name.startsWith( NAME_BRIC5 ) )   return bt_name.replace( NAME_BRIC5, "" );
+    if ( bt_name.startsWith( NAME_BRIC5_2 ) ) return bt_name.replace( NAME_BRIC5_2, "" );
     if ( bt_name.startsWith( NAME_SAP5 ) )    return bt_name.replace( NAME_SAP5, "" );
     if ( bt_name.startsWith( NAME_SAP5_2 ) )  return bt_name.replace( NAME_SAP5_2, "" );
     if ( bt_name.startsWith( NAME_SAP6 ) )    return bt_name.replace( NAME_SAP6, "" );
@@ -160,20 +168,26 @@ public class Device
 
   /** @return the integer code given the BT name
    * @param bt_name   BT name (model plus code)
+   * @note try to order by number of devices in usage
+   *    A3     about  600, but it is very old
+   *    X310   maybe 3000
+   *    XBLE   about  600
+   *    BRIC4  about  500, superceded by BRIC5
+   *    BRIC5  ?
+   *    SAP5   very few, maybe a dozen
+   *    SAP6   some, but still not much, probably a couple of dozens
    */
   private static int btnameToType( String bt_name ) 
   {
     if ( bt_name != null ) {
       // TDLog.v( "DEVICE btnameToType " + bt_name );
-      if ( bt_name.equals( "XBLE" )  || bt_name.startsWith( NAME_DISTOXBLE ) ) return DISTO_XBLE; // SIWEI_TIAN
       if ( bt_name.equals( "X310" )  || bt_name.startsWith( NAME_DISTOX2 ) )   return DISTO_X310;
-      if ( bt_name.equals( "A3" )    || bt_name.equals( NAME_DISTOX1 ) )       return DISTO_A3;
+      if ( bt_name.equals( "XBLE" )  || bt_name.startsWith( NAME_DISTOXBLE ) ) return DISTO_XBLE; // SIWEI_TIAN
+      if ( bt_name.equals( "BRIC5" ) || bt_name.startsWith( NAME_BRIC5 ) || bt_name.startsWith( NAME_BRIC5_2 ) ) return DISTO_BRIC5;
       if ( bt_name.equals( "BRIC4" ) || bt_name.startsWith( NAME_BRIC4 ) )     return DISTO_BRIC4; 
-      if ( bt_name.equals( "BRIC5" ) || bt_name.startsWith( NAME_BRIC5 ) )     return DISTO_BRIC5; 
-      if ( bt_name.equals( "SAP5" )  || bt_name.startsWith( NAME_SAP5 ) )      return DISTO_SAP5;
-      if ( bt_name.startsWith( NAME_SAP5_2 ) )                                 return DISTO_SAP5;
-      if ( bt_name.equals( "SAP6" )  || bt_name.startsWith( NAME_SAP6 ) )      return DISTO_SAP6;
-      if ( bt_name.startsWith( NAME_SAP6_2 ) ) return DISTO_SAP6;
+      if ( bt_name.equals( "SAP6" )  || bt_name.startsWith( NAME_SAP6 )  || bt_name.startsWith( NAME_SAP6_2 ) )  return DISTO_SAP6;
+      if ( bt_name.equals( "SAP5" )  || bt_name.startsWith( NAME_SAP5 )  || bt_name.startsWith( NAME_SAP5_2 ) )  return DISTO_SAP5;
+      if ( bt_name.equals( "A3" )    || bt_name.equals( NAME_DISTOX1 ) )       return DISTO_A3;
       if ( bt_name.startsWith( NAME_CAVWAY ) ) return DISTO_CAVWAY;
       // if ( bt_name.equals( "BLEX" ) ) return DISTO_BLEX; // FIXME BLE_5
       // if ( bt_name.equals( "X000" ) || bt_name.equals( "DistoX0" ) ) return DISTO_X000; // FIXME VirtualDistoX
@@ -248,6 +262,7 @@ public class Device
     if ( name.startsWith( NAME_BRIC ) )      return name.replace( NAME_BRIC, "");
     if ( name.startsWith( NAME_BRIC4 ) )     return name.replace( NAME_BRIC4, "");
     if ( name.startsWith( NAME_BRIC5 ) )     return name.replace( NAME_BRIC5, "");
+    if ( name.startsWith( NAME_BRIC5_2 ) )   return name.replace( NAME_BRIC5_2, "");
     if ( name.startsWith( NAME_CAVWAY ) )    return name.replace( NAME_CAVWAY, "");
     return name;
   }
