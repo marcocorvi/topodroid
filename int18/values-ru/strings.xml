@@ -284,7 +284,7 @@
     <string name="datamode_diving">Режим данных - подводный</string>
     <string name="illegal_data_value">Недопустимое значение</string>
 
-    <!-- TODO string name="geocode_title">Geomorphology Code</string -->
+    <string name="geocode_title">Код геоморфологии</string>
     <string name="photo_title">ФОТО</string>
     <string name="photo_text">Введите коментарий к фото</string>
     <string name="photo_failed">Ошибка фото</string>
@@ -787,7 +787,7 @@
     <string name="button_apply"     >Применить</string>
     <string name="button_back"      >Назад</string>
     <string name="button_cancel"    >Отмена</string>
-    <!-- TODO string name="button_geocode"   >GeoCode</string -->
+    <string name="button_geocode"   >ГеоКод</string>
     <!-- UNUSED string name="button_change">Изменить</string -->
     <string name="button_clipboard" >Вставить</string>
     <string name="button_close"     >Закрыть</string>
@@ -875,7 +875,7 @@
     <string name="button_xsection"  >Сечение</string>
     <string name="xsection">Сечение</string>
     <string name="buffer_size">Буфер: %1$d записей</string>
-    <!-- TODO string name="buffer_sorted">sorted</string -->
+    <string name="buffer_sorted">отсортировано</string>
     <!-- UNUSED string name="buffer_unsorted">не отсортировано</string -->
 
     <string name="mode_leg">Нитка хода</string>
@@ -1727,8 +1727,8 @@
   <string name="pref_iter_summary">Максимальное число итераций расчета калибровки</string>
   <string name="pref_label_size_title">Размер подписей</string>
   <string name="pref_label_size_summary">Размер шрифта в подписях</string>
-  <!-- TODO string name="pref_scalable_label_title">Scaling labels</string -->
-  <!-- TODO string name="pref_scalable_label_summary">Labels scale with the zoom</string -->
+  <string name="pref_scalable_label_title">Масштабирование подписей</string>
+  <string name="pref_scalable_label_summary">Масштабирование подписей при зуме</string>
   <string name="pref_slope_lside_title">Линия уклона l-направление</string>
   <string name="pref_slope_lside_summary">l-направление линии уклона по умолчанию</string>
   <string name="pref_arrow_length_title">Бергштрих сечения</string>
