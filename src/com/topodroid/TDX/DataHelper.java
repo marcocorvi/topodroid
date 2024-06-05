@@ -2515,7 +2515,7 @@ public class DataHelper extends DataSetObservable
   private static final String qAudiosAll    = "select id, shotId, date from audios where surveyId=? ";
   private static final String qPhotosAll    = "select id, shotId, status, title, date, comment, camera, code from photos where surveyId=? ";
   private static final String qjPhotos      =
-    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code from photos as p left join shots as s on p.shotId=s.id where p.surveyId=? and (s.surveyId=? OR p.shotId=-1) and p.status=? ";
+    "select p.id, COALESCE(s.id, -1), p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code from photos as p left join shots as s on p.shotId=s.id where p.surveyId=? and (s.surveyId=? OR p.shotId=-1) and p.status=? ";
   // private static String qShotPhoto    = "select id, shotId, title, date, comment from photos where surveyId=? AND shotId=? ";
   private static final String qjShotPhoto   =
     "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code from photos as p join shots as s on p.shotId=s.id where p.surveyId=? AND s.surveyId=? AND p.shotId=? ";
