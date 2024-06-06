@@ -29,7 +29,6 @@ import com.topodroid.num.NumShot;
 import com.topodroid.num.NumSplay;
 // import com.topodroid.mag.Geodetic;
 import com.topodroid.math.TDVector;
-import com.topodroid.math.Point2D;
 // import com.topodroid.math.BezierCurve;
 // import com.topodroid.math.BezierInterpolator;
 // import com.topodroid.dln.DLNWall;
@@ -5762,7 +5761,7 @@ public class DrawingWindow extends ItemDrawer
    */
   public void insertPhoto( )
   {
-    mApp_mData.insertPhoto( TDInstance.sid, mMediaManager.getPhotoId(), -1, "", TDUtil.currentDateTime(), 
+    mApp_mData.insertSketchPhoto( TDInstance.sid, mMediaManager.getPhotoId(), mName, "", TDUtil.currentDateTime(),
       mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode() );
     // FIXME NOTIFY ? no
     createPhotoPoint();

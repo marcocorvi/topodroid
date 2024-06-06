@@ -29,6 +29,8 @@ class PhotoInfo
   int mCamera;
   String mGeoCode;   // geomorphology code
 
+  String mSketch;   // sketch where this photo is attached to
+
   /** cstr
    * @param _sid     survey id
    * @param _id      id 
@@ -40,7 +42,7 @@ class PhotoInfo
    * @param camera   camera type
    * @param code     geomorphology code
    */
-  PhotoInfo( long _sid, long _id, long _shotid, String t, String sn, String dt, String cmt, int camera, String code )
+  PhotoInfo( long _sid, long _id, long _shotid, String t, String sn, String dt, String cmt, int camera, String code, String sketch )
   {
     sid    = _sid;
     id     = _id;
@@ -51,6 +53,7 @@ class PhotoInfo
     mComment = cmt;
     mCamera  = camera;
     mGeoCode    = (code == null)? "" : code;
+    mSketch    = (sketch == null)? "" : sketch;
   }
 
   // String getPhotoName() 
@@ -62,7 +65,7 @@ class PhotoInfo
    */
   public String toString()
   {
-    return id 
+    return id
            + " <" + ( (mShotName == null)? "-" : mShotName )
            + "> " + mComment; 
   }

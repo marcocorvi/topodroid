@@ -2515,10 +2515,10 @@ public class DataHelper extends DataSetObservable
   private static final String qAudiosAll    = "select id, shotId, date from audios where surveyId=? ";
   private static final String qPhotosAll    = "select id, shotId, status, title, date, comment, camera, code from photos where surveyId=? ";
   private static final String qjPhotos      =
-    "select p.id, COALESCE(s.id, -1), p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code from photos as p left join shots as s on p.shotId=s.id where p.surveyId=? and (s.surveyId=? OR p.shotId=-1) and p.status=? ";
+    "select p.id, COALESCE(s.id, -1), p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code, p.sketch from photos as p left join shots as s on p.shotId=s.id where p.surveyId=? and (s.surveyId=? OR p.shotId=-1) and p.status=? ";
   // private static String qShotPhoto    = "select id, shotId, title, date, comment from photos where surveyId=? AND shotId=? ";
   private static final String qjShotPhoto   =
-    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code from photos as p join shots as s on p.shotId=s.id where p.surveyId=? AND s.surveyId=? AND p.shotId=? ";
+    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code, p.sketch from photos as p join shots as s on p.shotId=s.id where p.surveyId=? AND s.surveyId=? AND p.shotId=? ";
   private static final String cntPhotos      =
     "select count(p.id) from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and p.status=? ";
 
@@ -2769,7 +2769,9 @@ public class DataHelper extends DataSetObservable
     Cursor cursor = myDB.rawQuery( qjPhotos, new String[] { Long.toString(sid), Long.toString(sid), Long.toString(status) } );
     if (cursor.moveToFirst()) {
       do {
-        String name = cursor.getString(3) + "-" + cursor.getString(4);
+        String name = (cursor.getLong(1) == -1) ?
+                cursor.getString(9) :
+                cursor.getString(3) + "-" + cursor.getString(4);
         list.add( new PhotoInfo( sid, 
                                  cursor.getLong(0), // id
                                  cursor.getLong(1),
@@ -2778,7 +2780,8 @@ public class DataHelper extends DataSetObservable
                                  cursor.getString(5),
                                  cursor.getString(6),
                                  (int)(cursor.getLong(7)), // camera
-                                 cursor.getString(8)       // code
+                                 cursor.getString(8), // code
+                                 cursor.getString(9) // sketch
                  ) );
       } while (cursor.moveToNext());
     }
@@ -2811,7 +2814,9 @@ public class DataHelper extends DataSetObservable
     Cursor cursor = myDB.rawQuery( qjShotPhoto, new String[] { Long.toString(sid), Long.toString(sid), Long.toString(shotid) } );
     if (cursor.moveToFirst()) {
       do {
-        String name = cursor.getString(3) + "-" + cursor.getString(4);
+        String name = (cursor.getLong(1) == -1) ?
+                cursor.getString(9) :
+                cursor.getString(3) + "-" + cursor.getString(4);
         list.add( new PhotoInfo( sid, 
                                  cursor.getLong(0), // id
                                  cursor.getLong(1),
@@ -2820,7 +2825,8 @@ public class DataHelper extends DataSetObservable
                                  cursor.getString(5),
                                  cursor.getString(6),
                                  (int)(cursor.getLong(7)),
-                                 cursor.getString(8)
+                                 cursor.getString(8),
+                                 cursor.getString(9)
                  ) );
       } while (cursor.moveToNext());
     }
@@ -4514,7 +4520,7 @@ public class DataHelper extends DataSetObservable
    * @param code      geomophology code
    * @return content-value set
    */
-  private ContentValues makePhotoContentValues( long sid, long id, long shotid, long status, String title, String date, String comment, long camera, String code )
+  private ContentValues makePhotoContentValues(long sid, long id, long shotid, long status, String title, String date, String comment, long camera, String code, String sketch )
   {
     ContentValues cv = new ContentValues();
     cv.put( "surveyId",  sid );
@@ -4526,6 +4532,7 @@ public class DataHelper extends DataSetObservable
     cv.put( "comment",   (comment == null)? TDString.EMPTY : comment );
     cv.put( "camera",    camera );
     cv.put( "code",      (code == null)? TDString.EMPTY : code );
+    cv.put( "sketch",    (sketch == null)? TDString.EMPTY : sketch );
     return cv;
   }
 
@@ -4540,11 +4547,31 @@ public class DataHelper extends DataSetObservable
    * @param code      geomophology code
    * @return id of the record (-1 on error)
    */
-  long insertPhoto( long sid, long id, long shotid, String title, String date, String comment, int camera, String code )
+  long insertShotPhoto(long sid, long id, long shotid, String title, String date, String comment, int camera, String code )
   {
     if ( myDB == null ) return -1L;
     if ( id == -1L ) id = maxId( PHOTO_TABLE, sid );
-    ContentValues cv = makePhotoContentValues( sid, id, shotid, TDStatus.NORMAL, title, date, comment, camera, code );
+    ContentValues cv = makePhotoContentValues( sid, id, shotid, TDStatus.NORMAL, title, date, comment, camera, code, TDString.EMPTY );
+    if ( ! doInsert( PHOTO_TABLE, cv, "photo insert" ) ) return -1L;
+    return id;
+  }
+
+  /** insert a photo
+   * @param sid       survey id
+   * @param id        photo id (or -1)
+   * @param shotid    shot id
+   * @param title     photo title
+   * @param date      date
+   * @param comment   comment
+   * @param camera    camera type
+   * @param code      geomophology code
+   * @return id of the record (-1 on error)
+   */
+  long insertSketchPhoto( long sid, long id, String sketch, String title, String date, String comment, int camera, String code )
+  {
+    if ( myDB == null ) return -1L;
+    if ( id == -1L ) id = maxId( PHOTO_TABLE, sid );
+    ContentValues cv = makePhotoContentValues( sid, id, -1, TDStatus.NORMAL, title, date, comment, camera, code, sketch );
     if ( ! doInsert( PHOTO_TABLE, cv, "photo insert" ) ) return -1L;
     return id;
   }
@@ -5981,7 +6008,8 @@ public class DataHelper extends DataSetObservable
                  comment = TDString.unescape( scanline1.stringValue( ) );
                  long camera = (db_version > 39)? scanline1.longValue( 0 ) : 0 ;
                  String code = (db_version > 52)? scanline1.stringValue( ) : "" ;
-                 cv = makePhotoContentValues( sid, id, shotid, TDStatus.NORMAL, title, date, comment, camera, code );
+                 String sketch = (db_version > 53)? scanline1.stringValue( ) : "" ;
+                 cv = makePhotoContentValues( sid, id, shotid, Long.valueOf(TDStatus.NORMAL), title, date, comment, camera, code, sketch );
                  myDB.insert( PHOTO_TABLE, null, cv ); 
                  // TDLog.Log( TDLog.LOG_DB, "load from file photo " + sid + " " + id + " " + title + " " + name );
                }
@@ -6696,7 +6724,8 @@ public class DataHelper extends DataSetObservable
             +   " date TEXT, "
             +   " comment TEXT, "
             +   " camera INTEGER default 0, "  // source type
-            +   " code TEXT default NIL "      // geo-morphology code(s)
+            +   " code TEXT default NIL, "      // geo-morphology code(s)
+            +   " sketch TEXT default "        // sketch where this photo is referenced
             // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
             // +   " ON DELETE CASCADE "
             +   ")"
@@ -6866,6 +6895,8 @@ public class DataHelper extends DataSetObservable
              db.execSQL( "ALTER TABLE photos ADD COLUMN code TEXT default NIL" );
              db.execSQL( "ALTER TABLE stations ADD COLUMN code TEXT default NIL" );
            case 53:
+             db.execSQL( "ALTER TABLE photos ADD COLUMN sketch TEXT" );
+           case 54:
              // TDLog.v( "current version " + oldVersion );
            default:
              break;
