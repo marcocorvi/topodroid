@@ -385,7 +385,7 @@ class ProjectionDialog extends MyDialog
 
     // mIsNotMultitouch = ! TDandroid.checkMultitouch( this );
 
-    setContentViewAndHelpLayout( R.layout.projection_dialog );
+    setContentView( R.layout.projection_dialog );
     mSeekBar   = (SeekBar) findViewById(R.id.seekbar );
     mProjBar   = (SeekBar) findViewById(R.id.projbar );
     mETazimuth = (EditText) findViewById( R.id.textform );
