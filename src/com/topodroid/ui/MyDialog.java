@@ -149,6 +149,15 @@ public class MyDialog extends Dialog
     setHelpLayout();
   }
 
+  /** set both the content view and the help layout
+   * @param layout_resource layout resource id
+   */
+  protected void setContentViewAndHelpLayout(int layout_resource)
+  {
+    setContentView( layout_resource );
+    setHelpLayout();
+  }
+
   @Override 
   // public boolean onKeyLongPress( int code, KeyEvent ev )
   public boolean onKeyDown( int code, KeyEvent ev )
