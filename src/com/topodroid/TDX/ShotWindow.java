@@ -318,7 +318,7 @@ public class ShotWindow extends Activity
    */
   public void setRefAzimuth( float azimuth, long fixed_extend )
   {
-    // TDLog.v( "set Ref Azimuth " + fixed_extend + " " + azimuth );
+    TDLog.v( "set Ref Azimuth " + TDAzimuth.mFixedExtend + " -> " + fixed_extend + " azimuth " + azimuth );
     TDAzimuth.mFixedExtend = fixed_extend;
     TDAzimuth.mRefAzimuth  = azimuth;
     setRefAzimuthButton();
@@ -333,7 +333,7 @@ public class ShotWindow extends Activity
     // TDLog.v( "set RefAzimuthButton extend " + TDAzimuth.mFixedExtend + " " + TDAzimuth.mRefAzimuth );
 
     // The ref azimuth can be fixed either by the setting or by the choice in the azimuth dialog 
-    if ( ! TDSetting.mAzimuthManual && TDAzimuth.mFixedExtend == 0 ) { // FIXME FIXED_EXTEND 20240603 the mFixedExtend test was commented
+    if ( ( ! TDSetting.mAzimuthManual ) && TDAzimuth.mFixedExtend == 0 ) { // FIXME FIXED_EXTEND 20240603 the mFixedExtend test was commented
       // FIXME_AZIMUTH_DIAL 2
       // android.graphics.Matrix m = new android.graphics.Matrix();
       // m.postRotate( TDAzimuth.mRefAzimuth - 90 );

@@ -27,16 +27,22 @@ public class TDAzimuth
    * @param window   reference to the Shot Window
    * @param azimuth  value of reference azimuth [degrees]
    */
-  public static void resetRefAzimuth( final ShotWindow window, float azimuth )
+  public static void resetRefAzimuth( final ShotWindow window, float azimuth, boolean azimuth_manual )
   {
     mRefAzimuth  = azimuth;
-    mFixedExtend = ( TDSetting.mAzimuthManual )? 1L : 0L;
-    // TDLog.v( "reset Ref Azimuth: " + azimuth + " fixed: " + mFixedExtend + " < " +  TDSetting.mAzimuthManual );
+    mFixedExtend = ( azimuth_manual )? 1L : 0L;
+    TDLog.v( "reset Ref Azimuth: " + azimuth + " fixed: " + mFixedExtend + " < " +  TDSetting.mAzimuthManual );
     if ( window != null ) {
       window.runOnUiThread( new Runnable() { public void run() { window.setRefAzimuthButton(); } } );
     }
     // DrawingWindow does not have the RefAzimuth setting
   }
+
+  // public static void setAzimuthManual( boolean azimuth_manual ); // FIXME FIXED_EXTEND 20240603
+  // {
+  //   if ( azimuth_manual && mFixedExtend == 0 ) mFixedExtend = 1L;
+  // }
+    
 
   /** @return the value of "extend" of a leg
    * @param bearing  leg azimuth [degrees]

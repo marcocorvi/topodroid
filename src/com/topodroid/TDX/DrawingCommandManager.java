@@ -106,6 +106,9 @@ public class DrawingCommandManager
   private boolean mLandscape = false;
   private String  mPlotName;
 
+  private int mMaxAreaIndex = 0; // index for area borders is managed here for all scraps in the drawing
+
+
   /** cstr
    * @param mode        command manager type
    * @param plot_name   plot name
@@ -716,7 +719,11 @@ public class DrawingCommandManager
 
   /** @return the next index for the ID of the area border
    */
-  int getNextAreaIndex() { return mCurrentScrap.getNextAreaIndex(); }
+  int getNextAreaIndex() 
+  {
+    ++mMaxAreaIndex;
+    return mMaxAreaIndex;
+  }
 
   /** get the shots that intersect a line portion
    * @param p1 first point of the line portion
@@ -1173,7 +1180,14 @@ public class DrawingCommandManager
   /** add a drawing item (and set the current scrap)
    * @param path    item
    */
-  void addCommand( DrawingPath path ) { 
+  void addCommand( DrawingPath path ) 
+  { 
+    if ( path instanceof DrawingAreaPath ) {
+      DrawingAreaPath area = (DrawingAreaPath)path;
+      if ( area.mAreaCnt > mMaxAreaIndex ) {
+        mMaxAreaIndex = area.mAreaCnt;
+      }
+    }
     setCurrentScrap( path.mScrap );
     mCurrentScrap.addCommand( path ); 
   }

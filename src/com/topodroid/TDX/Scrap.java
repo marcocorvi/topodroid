@@ -39,7 +39,7 @@ public class Scrap
   private int mMultiselectionType = -1;  // current multiselection type (DRAWING_PATH_POINT / LINE / AREA
   private List< DrawingPath > mMultiselected;
   boolean isMultiselection = false; 
-  private int mMaxAreaIndex;             // max index of areas in this scrap
+  // private int mMaxAreaIndex;             // max index of areas in this scrap - 20240604 moved to commandmanager
   public String mPlotName;              // name of the plot this scrap belongs to
   public int mScrapIdx;
   private RectF mBBox;   // this scrap bbox
@@ -59,7 +59,7 @@ public class Scrap
     mMultiselected = new ArrayList< DrawingPath >();
     mScrapIdx     = idx;
     mBBox = null;
-    mMaxAreaIndex = 0;
+    // mMaxAreaIndex = 0;
     mPlotName = plot_name;
   }
 
@@ -81,13 +81,13 @@ public class Scrap
     if ( b0.bottom < b1.bottom ) b0.bottom = b1.bottom;
   }
 
-  /** @return the next index for an area item
-   */
-  int getNextAreaIndex() 
-  {
-    ++mMaxAreaIndex;
-    return mMaxAreaIndex;
-  }
+  // /** @return the next index for an area item - 20240604 moved to commandmanager
+  //  */
+  // int getNextAreaIndex() 
+  // {
+  //   ++mMaxAreaIndex;
+  //   return mMaxAreaIndex;
+  // }
 
   /** clear the sketch items in this scrap
    */
@@ -819,6 +819,9 @@ public class Scrap
   }
   // end USER STATION ---------------------------------------------------------
 
+  /** add a drawing item 
+   * @param path    drawing item
+   */
   void addCommand( DrawingPath path ) 
   {
     // TDLog.Log( TDLog.LOG_PLOT, "addCommand stack size  " + mCurrentStack.size() );
@@ -827,12 +830,12 @@ public class Scrap
 
     mRedoStack.clear();
 
-    if ( path.isArea() ) { // path instanceof DrawingAreaPath
-      DrawingAreaPath area = (DrawingAreaPath)path;
-      if ( area.mAreaCnt > mMaxAreaIndex ) {
-        mMaxAreaIndex = area.mAreaCnt;
-      }
-    }
+    // if ( path.isArea() ) { // path instanceof DrawingAreaPath // 20240604 moved to commandmanager
+    //   DrawingAreaPath area = (DrawingAreaPath)path;
+    //   if ( area.mAreaCnt > mMaxAreaIndex ) {
+    //     mMaxAreaIndex = area.mAreaCnt;
+    //   }
+    // }
 
     // if ( path.isLine() ) { // path instanceof DrawingLinePath
     //   DrawingLinePath line = (DrawingLinePath)path;

@@ -341,6 +341,16 @@ class ProjectionDialog extends MyDialog
     }
   }
 
+  /** @return the title string 
+   */
+  private String getTheTitle()
+  {
+    if ( mWithOblique ) {
+      return String.format( mContext.getResources().getString(R.string.title_projection_oblique), mAzimuth, mOblique );
+    } 
+    return String.format( mContext.getResources().getString(R.string.title_projection), mAzimuth );
+  }
+
   // --------------------------------------------------------------
 
   /** switch the visibility of zoom-controls
@@ -385,7 +395,9 @@ class ProjectionDialog extends MyDialog
 
     // mIsNotMultitouch = ! TDandroid.checkMultitouch( this );
 
-    setContentView( R.layout.projection_dialog );
+    // setContentView( R.layout.projection_dialog );
+    initLayout( R.layout.projection_dialog, getTheTitle() );
+
     mSeekBar   = (SeekBar) findViewById(R.id.seekbar );
     mProjBar   = (SeekBar) findViewById(R.id.projbar );
     mETazimuth = (EditText) findViewById( R.id.textform );

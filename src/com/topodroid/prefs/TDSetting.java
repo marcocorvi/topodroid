@@ -982,7 +982,8 @@ public class TDSetting
     String[] keyData = TDPrefKey.DATA;
     String[] defData = TDPrefKey.DATAdef;
     mAzimuthManual = prefs.getBoolean( keyData[6], bool(defData[6]) );   // DISTOX_AZIMUTH_MANUAL 
-    TDAzimuth.resetRefAzimuth( null, SurveyInfo.SURVEY_EXTEND_NORMAL ); // BUG ?? may call setRefAzimuthButton on non-UI thread
+    // TDAzimuth.setAzimuthManual( mAzimuthManual ); // FIXME FIXED_EXTEND 20240603
+    TDAzimuth.resetRefAzimuth( null, SurveyInfo.SURVEY_EXTEND_NORMAL, mAzimuthManual ); // BUG ?? may call setRefAzimuthButton on non-UI thread
     
     // ------------------- DEVICE PREFERENCES -def--fallback--min-max
     String[] keyDevice = TDPrefKey.DEVICE;
@@ -2474,7 +2475,8 @@ public class TDSetting
       if ( mVThreshold > 90 ) { mVThreshold = 90; ret = TDString.NINETY; }
     } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_AZIMUTH_MANUAL (bool)
       mAzimuthManual  = tryBooleanValue( hlp, k, v, bool(def[6]) ); 
-      TDAzimuth.resetRefAzimuth( TopoDroidApp.mShotWindow, TDAzimuth.mRefAzimuth );
+      // TDAzimuth.setAzimuthManual( mAzimuthManual ); // FIXME FIXED_EXTEND 20240603
+      TDAzimuth.resetRefAzimuth( TopoDroidApp.mShotWindow, TDAzimuth.mRefAzimuth, mAzimuthManual ); // FIXME FIXED_EXTEND 20240603
     } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_PREV_NEXT (bool)
       mPrevNext = tryBooleanValue( hlp, k, v, bool(def[ 7]) );
     } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_BACKSIGHT (bool)
