@@ -76,8 +76,8 @@ class SensorEditDialog extends MyDialog
     // mButtonCancel = (Button) findViewById( R.id.sensor_cancel );
 
     tVtitle.setText( mSensor.mTitle );
-    tVtype.setText( mSensor.mType );
-    tVvalue.setText( mSensor.mValue );
+    tVtype.setText( mSensor.getSensorType() );
+    tVvalue.setText( mSensor.getValue() );
     tVshotname.setText( mSensor.mShotName );
     // public String mSensor.mDate;
     if ( mSensor.mComment != null ) {

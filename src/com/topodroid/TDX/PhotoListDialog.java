@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import android.os.Bundle;
 // import android.os.Handler;
 // import android.os.Message;
+import android.os.AsyncTask;
 
 import android.content.Context;
 
@@ -96,7 +97,7 @@ public class PhotoListDialog extends MyDialog
   {
     // TDLog.Log( TDLog.LOG_PHOTO, "updateDisplay() status: " + StatusName() + " forcing: " + force_update );
     if ( mApp_mData != null && TDInstance.sid >= 0 ) {
-      List< PhotoInfo > list = mApp_mData.selectAllPhotos( TDInstance.sid, TDStatus.NORMAL );
+      List< PhotoInfo > list = mApp_mData.selectAllPhotosShot( TDInstance.sid, TDStatus.NORMAL );
       // TDLog.Log( TDLog.LOG_PHOTO, "update shot list size " + list.size() );
       updatePhotoList( list );
       setTitle( TDInstance.survey );
@@ -175,8 +176,30 @@ public class PhotoListDialog extends MyDialog
    */
   public void dropPhoto( PhotoInfo photo )
   {
-    mApp_mData.deletePhoto( photo.sid, photo.id );
+    long photo_id = photo.getId();
+    mApp_mData.deletePhoto( photo.getSurveyId(), photo_id );
     TDFile.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo.id) ) );
+    if ( photo.getItemType() == MediaInfo.TYPE_PLOT ) {
+      // get the plot tdr file
+      new AsyncTask<PhotoInfo,Void,Boolean>() {
+        @Override protected Boolean doInBackground(PhotoInfo... args)
+        {
+          ShotWindow.mWaitPlot = true;
+          PhotoInfo photo = args[0];
+          long photo_id = photo.getId();
+          long pid = photo.getItemId(); // plot ID
+          String plot_name = mApp_mData.getPlotName( TDInstance.sid, pid );
+          String plot_file = TDPath.getSurveyPlotTdrFile( TDInstance.survey, plot_name ); // full path
+          boolean ret = DrawingIO.changeTdrFileDropMedia( plot_file, MediaInfo.MEDIA_PHOTO, photo_id ); 
+          ShotWindow.mWaitPlot = false;
+          return ret;
+        }
+        
+        @Override protected void onPostExecute( Boolean result )
+        { // TODO
+        }
+      }.execute( photo );
+    }
     updateDisplay( ); // FIXME
   }
 

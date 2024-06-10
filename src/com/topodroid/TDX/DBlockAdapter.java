@@ -408,7 +408,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       DBlock b = (DBlock)( getItem( pos ) );
       b.mWithPhoto = false; 
       for ( PhotoInfo p : photos ) { // mark block with p.shotid
-        if ( b.mId == p.shotid ) { 
+        if ( b.mId == p.getItemId() ) { 
           b.mWithPhoto = true;
           break;
         }

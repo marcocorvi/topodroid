@@ -58,8 +58,8 @@ class PhotoEditDialog extends MyDialog
     mPhoto  = photo;
     // mFilename = filename;
     mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhoto.id) );
-    mGeoCode     = mPhoto.getGeoCode();
-    mAtShot   = (mPhoto.shotid >= 0);
+    mGeoCode  = mPhoto.getGeoCode();
+    mAtShot   = ( mPhoto.getItemType() == MediaInfo.TYPE_SHOT );
     // TDLog.v("PhotoEditDialog " + mFilename);
     mTdImage = new TDImage( mFilename );
     // TDLog.v( "photo edit dialog: " + photo.debugString() + " image width " + mTdImage.width() );
@@ -111,11 +111,12 @@ class PhotoEditDialog extends MyDialog
     } else {
       buttonCode.setVisibility( View.GONE );
     }
-    if ( mAtShot ) {
+    // if ( mAtShot ) {
       buttonDelete.setOnClickListener( this );
-    } else {
-      buttonDelete.setVisibility( View.GONE );
-    }
+    // } else {
+    //   buttonDelete.setVisibility( View.GONE );
+    // }
+
     // mButtonCancel.setOnClickListener( this );
     
     // TDLog.v( "photo edit dialog on create done");

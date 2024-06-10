@@ -34,6 +34,7 @@ class DrawingPhotoDialog extends MyDialog
                          implements View.OnClickListener
                          , IGeoCoder
 {
+  private long mPid; // plot ID
   private EditText mComment;
   private EditText mSize;
   private CheckBox mCamera;
@@ -44,10 +45,11 @@ class DrawingPhotoDialog extends MyDialog
   private final float mY;
   private String mGeoCode = "";
 
-  DrawingPhotoDialog( Context context, DrawingWindow activity, float x, float y )
+  DrawingPhotoDialog( Context context, DrawingWindow activity, long pid, float x, float y )
   {
     super(context, null, R.string.DrawingPhotoDialog ); // null app
     mActivity = activity;
+    mPid = pid;
     mX = x; 
     mY = y;
   }
@@ -102,7 +104,7 @@ class DrawingPhotoDialog extends MyDialog
           size = 1;
         }
       }
-      mActivity.addPhotoPoint( mComment.getText().toString(), size, mX, mY, camera, mGeoCode );
+      mActivity.addPhotoPoint( mPid, mComment.getText().toString(), size, mX, mY, camera, mGeoCode );
     } else if ( view.getId() == R.id.photo_code ) {
       (new GeoCodeDialog( mContext, this, mGeoCode )).show();
       return;

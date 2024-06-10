@@ -33,7 +33,8 @@ class MediaManager
   private String  mCode;
   private float   mSize = 1;     // photo size (horizontal width) [m]
   private int     mCamera = PhotoInfo.CAMERA_UNDEFINED;
-  private long    mShotId;   // photo/sensor shot id
+  private long    mItemId;   // photo/sensor reference item ID: shot ID or plot ID
+  private long    mItemType; // reference item type
   // private File    mImageFile;
   // private File    mAudioFile;
   private String  mImageFilepath;
@@ -48,31 +49,40 @@ class MediaManager
   }
 
   /**
-   * @param code    geomorphology code
+   * @param item_id  item ID
+   * @param comment  description
+   * @param size     TODO
+   * @param camera   camera type
+   * @param code     geomorphology code
+   * @param type     reference item type
    */
-  long prepareNextPhoto( long sid, String comment, float size, int camera, String code )
+  long prepareNextPhoto( long item_id, String comment, float size, int camera, String code, long type )
   {
-    mShotId  = sid;
-    mComment = comment;
-    mCode    = code;
-    mSize    = size;
-    mCamera  = camera;
-    mPhotoId = mData.nextPhotoId( TDInstance.sid );
+    mItemId   = item_id;
+    mItemType = type;
+    mComment  = comment;
+    mCode     = code;
+    mSize     = size;
+    mCamera   = camera;
+    mPhotoId  = mData.nextPhotoId( TDInstance.sid );
     mImageFilepath = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhotoId) ); // photo file is "survey/id.jpg"
     // mImageFile = TDFile.getTopoDroidFile( mImageFilepath );
     return mPhotoId;
   }
 
-  /** return the next negative audio index (ID)
-   * @param sid        shot id
+  /** @return the next negative audio index (ID)
+   * @param item_id    reference item ID: plot ID because this method is not used for shot ID
    * @param comment    audio comment
+   * @param type       reference item type (always TYPE_PLOT)
+   * @note this is used only be DrawingWindow which calls it with item_id = pid
    */
-  long prepareNextAudioNeg( long sid, String comment )
+  long prepareNextAudioNeg( long item_id, String comment, long type )
   {
-    mShotId  = sid;
-    mComment = comment;
-    mCode    = null;
-    mAudioId = mData.nextAudioNegId( TDInstance.sid ); // negative id's are for sketch audios
+    mItemId   = item_id;
+    mItemType = type;
+    mComment  = comment;
+    mCode     = null;
+    mAudioId  = mData.nextAudioNegId( TDInstance.sid, mItemId, type ); // negative id's are for sketch audios
     mAudioFilepath = TDPath.getSurveyWavFile( TDInstance.survey, Long.toString(mAudioId) ); // audio file is "survey/id.wav"
     // mAudioFile = TDFile.getTopoDroidFile( mAudioFilepath );
     return mAudioId;
@@ -91,9 +101,21 @@ class MediaManager
    */
   int getCamera()  { return mCamera; }
 
-  /** @return shot ID
+  /** set reference item ID and type
    */
-  long getShotId()  { return mShotId; }
+  void setReferenceItem( long id, long type )
+  {
+    mItemId   = id;
+    mItemType = type;
+  }
+
+  /** @return reference item ID
+   */
+  long getItemId()  { return mItemId; }
+
+  /** @return the reference item type, either TYPE_SHOT or TYPE_PLOT
+   */
+  long getItemType() { return mItemType; }
 
   /** @return media comment
    */
@@ -149,7 +171,7 @@ class MediaManager
   //       bitmap.compress( Bitmap.CompressFormat.JPEG, compression, fos );
   //       fos.flush();
   //       fos.close();
-  //       mData.insertPhoto( TDInstance.sid, mPhotoId, mShotId, "", TDUtil.currentDate(), mComment, mCamera, mCode );
+  //       mData.insertPhoto( TDInstance.sid, mPhotoId, mItemId, "", TDUtil.currentDate(), mComment, mCamera, mCode );
   //       ret = true;
   //     } catch ( FileNotFoundException e ) {
   //       TDLog.Error("cannot save photo: file not found");

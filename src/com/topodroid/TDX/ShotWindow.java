@@ -104,6 +104,8 @@ public class ShotWindow extends Activity
                         , INewPlot
                         , IPhotoInserter
 {
+  static boolean mWaitPlot = false; // global flag to prevent opening a plot
+
   final static private int BTN_DOWNLOAD  = 0;
   final static private int BTN_BLUETOOTH = 1;
   final static private int BTN_PLOT      = 3;
@@ -951,6 +953,7 @@ public class ShotWindow extends Activity
   }
 
   /**
+   * @param sid      shot ID
    * @param comment  photo comment
    * @param camera   camera type: 0 use URI, 1 use TopoDroid - not used
    * @param geomorphology code
@@ -958,7 +961,7 @@ public class ShotWindow extends Activity
   void doTakePhoto( long sid, String comment, int camera, String code )
   {
     // camera = 1;
-    mMediaManager.prepareNextPhoto( sid, comment, 1, camera, code ); // size 1 m
+    mMediaManager.prepareNextPhoto( sid, comment, 1, camera, code, MediaInfo.TYPE_SHOT ); // size 1 m
 
     // imageFile := PHOTO_DIR / surveyId / photoId .jpg
     // TDLog.Log( TDLog.LOG_SHOT, "photo " + imagefile.toString() );
@@ -1104,8 +1107,8 @@ public class ShotWindow extends Activity
   public void insertPhoto( )
   {
     // FIXME TITLE has to go
-    mApp_mData.insertPhoto( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getShotId(), "", TDUtil.currentDateTime(),
-      mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode() );
+    mApp_mData.insertPhoto( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(),
+      mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), PhotoInfo.TYPE_SHOT );
     // FIXME NOTIFY ? no
     updateDisplay( ); 
   }
@@ -1157,7 +1160,8 @@ public class ShotWindow extends Activity
                                   TDUtil.currentDateTime(),
                                   comment,
                                   type,
-                                  value );
+                                  value,
+                                  MediaInfo.TYPE_SHOT );
             // FIXME NOTIFY ? no
           }
         }
@@ -1538,11 +1542,15 @@ public class ShotWindow extends Activity
         }
         ret = true;
       } else if ( isButton1( b, BTN_PLOT ) ) {
-        if ( TDInstance.recentPlot != null ) {
-          startExistingPlot( TDInstance.recentPlot, TDInstance.recentPlotType, null );
+        if ( mWaitPlot ) {
+          TDToast.make( R.string.pleasewait );
         } else {
-          // onClick( view ); // fall back to onClick
-          new PlotListDialog( mActivity, this, mApp, null ).show();
+          if ( TDInstance.recentPlot != null ) {
+            startExistingPlot( TDInstance.recentPlot, TDInstance.recentPlotType, null );
+          } else {
+            // onClick( view ); // fall back to onClick
+            new PlotListDialog( mActivity, this, mApp, null ).show();
+          }
         }
         ret = true;
       } else if ( isButton1( b, BTN_MANUAL ) ) {
@@ -1611,7 +1619,11 @@ public class ShotWindow extends Activity
         // mSearch = null; // invalidate search
         new ShotDisplayDialog( mActivity, this ).show();
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // PLOT LIST
-        new PlotListDialog( mActivity, this, mApp, null ).show();
+        if ( mWaitPlot ) {
+          TDToast.make( R.string.pleasewait );
+        } else {
+          new PlotListDialog( mActivity, this, mApp, null ).show();
+        }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // NOTE
         if ( TDInstance.survey != null ) {
           (new DialogAnnotations( mActivity, TDInstance.survey )).show();
@@ -2913,7 +2925,7 @@ public class ShotWindow extends Activity
    */
   void startAudio( DBlock blk )
   {
-    (new AudioDialog( mActivity, /* this */ null, blk.mId, blk )).show();
+    (new AudioDialog( mActivity, /* this */ null, blk.mId, blk, MediaInfo.TYPE_SHOT )).show();
   }
 
 }

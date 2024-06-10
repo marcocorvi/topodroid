@@ -11,20 +11,16 @@
  */
 package com.topodroid.TDX;
 
-class PhotoInfo
+class PhotoInfo extends MediaInfo
 {
   static final int CAMERA_UNDEFINED   = 0;
   static final int CAMERA_TOPODROID   = 1;
   static final int CAMERA_TOPODROID_2 = 2;
   static final int CAMERA_INTENT      = 3;       // camera type
 
-  long sid;       // survey id
-  long id;        // photo id
-  long shotid;    // shot id
   String mTitle;   // photo title FIXME TITLE
-  String mShotName; // shot name
+  String mItemName; // shot name
   // public String mName; // photo filename without extension ".jpg" and survey prefix dir = photo id
-  String mDate;
   String mComment;
   int mCamera;
   String mGeoCode;   // geomorphology code
@@ -32,25 +28,23 @@ class PhotoInfo
   /** cstr
    * @param _sid     survey id
    * @param _id      id 
-   * @param _shotid  shot id
+   * @param item_id  reference item ID: shot id or plot ID
    * @param t        title
-   * @param sn       shot name
+   * @param sn       reference name: shot name or plot name
    * @param dt       datetime
    * @param cmt      comment
    * @param camera   camera type
    * @param code     geomorphology code
+   * @param type     reference item type
    */
-  PhotoInfo( long _sid, long _id, long _shotid, String t, String sn, String dt, String cmt, int camera, String code )
+  PhotoInfo( long _sid, long _id, long item_id, String t, String sn, String dt, String cmt, int camera, String code, int type )
   {
-    sid    = _sid;
-    id     = _id;
-    shotid = _shotid;
+    super( MediaInfo.MEDIA_PHOTO, _sid, _id, item_id, dt, type );
     mTitle  = t; // FIXME TITLE
-    mShotName = sn;
-    mDate = dt;
+    mItemName = sn;
     mComment = cmt;
     mCamera  = camera;
-    mGeoCode    = (code == null)? "" : code;
+    mGeoCode = (code == null)? "" : code;
   }
 
   // String getPhotoName() 
@@ -60,10 +54,11 @@ class PhotoInfo
 
   /** @return string presentation
    */
+  @Override
   public String toString()
   {
     return id 
-           + " <" + ( (mShotName == null)? "-" : mShotName )
+           + " <" + ( (mItemName == null)? "-" : mItemName )
            + "> " + mComment; 
   }
 
@@ -81,7 +76,7 @@ class PhotoInfo
   String debugString()
   {
     return id  
-           + " <" + ( (mShotName == null)? "-" : mShotName )
+           + " <" + ( (mItemName == null)? "-" : mItemName )
            + "> " + mComment + " " + ((mTitle == null)? "-" : mTitle); 
   }
 

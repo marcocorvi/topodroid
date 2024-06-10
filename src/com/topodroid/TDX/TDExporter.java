@@ -214,7 +214,7 @@ public class TDExporter
   static private void writeCsxShotAttachments( PrintWriter pw, DataHelper data, String survey, long sid, DBlock blk )
   {
     long bid = blk.mId;
-    AudioInfo audio = data.getAudio( sid, bid );
+    AudioInfo audio = data.getAudioAtShot( sid, bid );
     List< PhotoInfo > photos = data.selectPhotoAtShot( sid, bid );
     if ( audio == null && photos.size() == 0 ) return;
     pw.format("      <attachments>\n");

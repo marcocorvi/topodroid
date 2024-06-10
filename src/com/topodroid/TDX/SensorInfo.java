@@ -11,31 +11,32 @@
  */
 package com.topodroid.TDX;
 
-class SensorInfo
+class SensorInfo extends MediaInfo
 {
-  long sid;       // survey id
-  long id;        // photo id
-  long shotid;    // shot id
-  String mTitle;     // sensor title
+  String mTitle;    // sensor title
   String mShotName; // shot name
-  String mDate;     // data
   String mComment;  // comment
-  String mType;     // sensor type
+  private String mSensor;     // sensor type
   String mValue;    // sensor value
   // public String mUnit;
 
-  SensorInfo( long _sid, long _id, long _shotid, String title, String shotname, String date, String comment, String type, String value )
+  SensorInfo( long _sid, long _id, long _shotid, String title, String shotname, String date, String comment, String sensor, String value, int type )
   {
-    sid    = _sid;
-    id     = _id;
-    shotid = _shotid;
-    mTitle  = title;
+    super( MediaInfo.MEDIA_SENSOR, _sid, _id, _shotid, date, type );
+    mTitle    = title;
     mShotName = shotname;
-    mDate    = date;
-    mComment = comment;
-    mType    = type;
-    mValue   = value;
+    mComment  = comment;
+    mSensor   = sensor;
+    mValue    = value;
   }
+
+  /** @return the type of the sensor
+   */
+  String getSensorType() { return mSensor; }
+
+  /** @return the value of the sensor
+   */
+  String getValue() { return mValue; }
 
   // String getSensorName() 
   // {
@@ -46,7 +47,7 @@ class SensorInfo
   {
     return id 
            + " <" + ( (mShotName == null)? "-" : mShotName )
-           + "> " + mType + " " + mDate + ": " + mValue;
+           + "> " + mSensor + " " + mDate + ": " + mValue;
   }
 
 }

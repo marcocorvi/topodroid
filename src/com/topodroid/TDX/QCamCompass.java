@@ -358,7 +358,7 @@ class QCamCompass extends Dialog
       if ( mHasBearingAndClino ) {
         if ( mCallback != null ) {
           // TDLog.v( "Orientation " + mOrientation + " " + mBearing + " " + mClino );
-          if ( mSurface != null ) {
+          if ( mSurface != null ) { // save JPEG file
             mCallback.setBearingAndClino( mBearing, mClino, mOrientation, mAccuracy, 1 ); // camera API
             mHasSaved = mCallback.setJpegData( mSurface.getJpegData() );
           } else if ( mTexture != null ) {
