@@ -166,13 +166,26 @@ public class TDString
   public static String escape( String str )
   {
     if ( str == null ) return "";
-    return str.replace('"', '\u001b' );
+    return str.replace('"', '\u001b' ); // replace all occurrences
   }
 
   public static String unescape( String str )
   {
     if ( str == null ) return "";
-    return str.replace('\u001b', '"' );
+    return str.replace('\u001b', '"' ); // replace all occurrences
+  }
+
+  /** escape CSV separator
+   * @param separator   separator (char)
+   * @param str         string where to replace
+   * @return string with replacements
+   */
+  public static String escapeSeparator( char sep, String str )
+  {
+    if ( str == null ) return "";
+    String separator = String.format("%c", sep );
+    String replacement = String.format("\\%c", sep );
+    return str.replace( separator, replacement ); // replace each comma with backslash-comma
   }
 
   // -----------------------------------------------------------

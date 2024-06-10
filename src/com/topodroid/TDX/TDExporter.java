@@ -1555,6 +1555,7 @@ public class TDExporter
           // BufferedWriter bcw = TDFile.getMSwriter( "thconfig", surveyname + ".thconfig", "text/thconfig" );
           BufferedWriter bcw = new BufferedWriter( new FileWriter( thconfig ) );
           PrintWriter pcw = new PrintWriter( bcw );
+          pcw.format("encoding uft-8\n");
           pcw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
           pcw.format("source \"./%s.th\"\n\n", info.name );
           pcw.format("layout topodroid\n");
@@ -1600,6 +1601,7 @@ public class TDExporter
       }
       PrintWriter pw = new PrintWriter( bw );
 
+      pw.format("encoding utf-8\n");
       pw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
 
       if ( embed_thconfig /* && TDSetting.mExportUri */ ) { // embed thconfig
@@ -2337,41 +2339,46 @@ public class TDExporter
    */
   static private void writeCsvLeg( PrintWriter pw, AverageLeg leg, float ul, float ua, int leg_extend, char sep )
   {
-    pw.format(Locale.US, "%c%.2f%c%.1f%c%.1f%c,%d", sep, leg.length() * ul, sep, leg.bearing() * ua, sep, leg.clino() * ua, sep, leg_extend );
+    pw.format(Locale.US, "%c%.2f%c%.1f%c%.1f%c%d", sep, leg.length() * ul, sep, leg.bearing() * ua, sep, leg.clino() * ua, sep, leg_extend );
     leg.reset();
     // leg_extend is not to be reset
   }
 
-  static private void writeCsvFlag( PrintWriter pw, boolean dup, boolean sur, boolean cmtd, char sep, String newline )
+  static private void writeCsvFlag( PrintWriter pw, boolean dup, boolean sur, boolean cmtd, String comment, char sep, String newline )
   {
     if ( dup ) {
       if ( sur ) {
         if ( cmtd ) {
-          pw.format("%cLSC%s", sep, newline );
+          pw.format("%cLSC", sep );
         } else {
-          pw.format("%cLS%s", sep, newline );
+          pw.format("%cLS", sep );
         }
       } else {
         if ( cmtd ) {
-          pw.format("%cLC%s", sep, newline );
+          pw.format("%cLC", sep );
         } else {
-          pw.format("%cL%s", sep, newline );
+          pw.format("%cL", sep );
         }
       }
     } else {
       if ( sur ) {
         if ( cmtd ) {
-          pw.format("%cSC%s", sep, newline );
+          pw.format("%cSC", sep );
         } else {
-          pw.format("%cS%s", sep, newline );
+          pw.format("%cS", sep );
         }
       } else {
         if ( cmtd ) {
-          pw.format("%cC%s", sep, newline );
+          pw.format("%cC", sep );
         } else {
-          pw.format("%c%s", sep, newline );
+          pw.format("%c", sep );
         }
       }
+    }
+    if ( comment == null ) {
+      pw.format("%c%s", sep, newline );
+    } else {
+      pw.format("%c%s%s", sep, TDString.escapeSeparator(sep, comment), newline );
     }
   }
 
@@ -2384,8 +2391,8 @@ public class TDExporter
    */ 
   static int exportSurveyAsRawCsv( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String survey_name )
   {
-    List< RawDBlock > list = data.selectAllShotsRawData( sid );
     char sep = TDSetting.mCsvSeparator;
+    List< RawDBlock > list = data.selectAllShotsRawData( sid );
     String newline = TDSetting.mSurvexEol;
     try {
       // BufferedWriter bw = TDFile.getMSwriter( "csv", survey_name + ".csv", "text/csv" );
@@ -2404,7 +2411,7 @@ public class TDExporter
         pw.format(Locale.US, "%d%c%d%c%s%c", b.mTime, sep, b.getShotType(), sep, address, sep );
         pw.format(Locale.US, "%d%c%d%c%d%c%d%c", b.mExtend, sep, b.mFlag, sep, b.mLeg, sep, b.mStatus, sep );  // NOTE mLeg is not mBlockType
         pw.format(Locale.US, "%d%c%d%c%d%c%d%c%d%s%d%c", b.mRawMx, sep, b.mRawMy, sep, b.mRawMz, sep, b.mRawGx, sep, b.mRawGy, sep, b.mRawGz, sep );
-        pw.format(Locale.US, "%s%s", b.mComment, newline );
+        pw.format(Locale.US, "%s%s", TDString.escapeSeparator(sep, b.mComment), newline );
       }
       bw.flush();
       bw.close();
@@ -2460,6 +2467,7 @@ public class TDExporter
       boolean surface   = false;
       boolean splays = false;
       int leg_extend = 1; // RIGHT
+      int extend;
       for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
@@ -2472,7 +2480,7 @@ public class TDExporter
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
               writeCsvLeg( pw, leg, ul, ua, leg_extend, sep );
-              writeCsvFlag( pw, duplicate, surface, ref_item.isCommented(), sep, newline );
+              writeCsvFlag( pw, duplicate, surface, ref_item.isCommented(), ref_item.mComment, sep, newline );
               duplicate = false; // reset flags
               surface   = false;
               ref_item = null; 
@@ -2484,9 +2492,11 @@ public class TDExporter
             if ( ! splays ) {
               splays = true;
             }
-            pw.format(Locale.US, "-%c%s@%s%c%.2f%c%.1f%c%.1f%c%d",
-                      sep, to, info.name, sep, item.mLength * ul, sep, item.mBearing * ua, sep, item.mClino * ua, sep, item.getIntExtend() );
-            writeCsvFlag( pw, false, false, item.isCommented(), sep, newline );
+            pw.format(Locale.US, "-%c%s@%s%c%.2f%c%.1f%c%.1f%c",
+                      sep, to, info.name, sep, item.mLength * ul, sep, item.mBearing * ua, sep, item.mClino * ua, sep );
+            extend = item.getIntExtend();
+            if ( extend <= 1 ) pw.format("%d", extend );
+            writeCsvFlag( pw, false, false, item.isCommented(), item.mComment, sep, newline );
 
             // if ( item.mComment != null && item.mComment.length() > 0 ) {
             //   pw.format(",\"%s\"\n", item.mComment );
@@ -2496,7 +2506,7 @@ public class TDExporter
           if ( TDString.isNullOrEmpty( to ) ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
               writeCsvLeg( pw, leg, ul, ua, leg_extend, sep );
-              writeCsvFlag( pw, duplicate, surface, ref_item.isCommented(), sep, newline );
+              writeCsvFlag( pw, duplicate, surface, ref_item.isCommented(), item.mComment, sep, newline );
               duplicate = false; // reset flags
               surface   = false;
               ref_item = null; 
@@ -2508,16 +2518,18 @@ public class TDExporter
             if ( ! splays ) {
               splays = true;
             }
-            pw.format(Locale.US, "%s@%s%c-%c%.2f%c%.1f%c%.1f%c%d",
-                      from, info.name, sep, sep, item.mLength * ul, sep, item.mBearing * ua, sep, item.mClino * ua, sep, item.getIntExtend() );
-            writeCsvFlag( pw, false, false, item.isCommented(), sep, newline );
+            pw.format(Locale.US, "%s@%s%c-%c%.2f%c%.1f%c%.1f%c",
+                      from, info.name, sep, sep, item.mLength * ul, sep, item.mBearing * ua, sep, item.mClino * ua, sep );
+            extend = item.getIntExtend();
+            if ( extend <= 1 ) pw.format("%d", extend );
+            writeCsvFlag( pw, false, false, item.isCommented(), item.mComment, sep, newline );
             // if ( item.mComment != null && item.mComment.length() > 0 ) {
             //   pw.format(",\"%s\"\n", item.mComment );
             // }
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
               writeCsvLeg( pw, leg, ul, ua, leg_extend, sep );
-              writeCsvFlag( pw, duplicate, surface, ref_item.isCommented(), sep, newline );
+              writeCsvFlag( pw, duplicate, surface, ref_item.isCommented(), ref_item.mComment, sep, newline );
               duplicate = false; // reset flags
               surface   = false;
               // n = 0;
@@ -2536,7 +2548,7 @@ public class TDExporter
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
         writeCsvLeg( pw, leg, ul, ua, leg_extend, sep );
-        writeCsvFlag( pw, duplicate, surface, ref_item.isCommented(), sep, newline );
+        writeCsvFlag( pw, duplicate, surface, ref_item.isCommented(), ref_item.mComment, sep, newline );
         // duplicate = false; // reset flags
         // surface   = false;
       }
