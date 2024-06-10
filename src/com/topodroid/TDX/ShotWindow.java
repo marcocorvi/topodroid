@@ -318,7 +318,7 @@ public class ShotWindow extends Activity
    */
   public void setRefAzimuth( float azimuth, long fixed_extend )
   {
-    TDLog.v( "set Ref Azimuth " + TDAzimuth.mFixedExtend + " -> " + fixed_extend + " azimuth " + azimuth );
+    // TDLog.v( "set Ref Azimuth " + TDAzimuth.mFixedExtend + " -> " + fixed_extend + " azimuth " + azimuth );
     TDAzimuth.mFixedExtend = fixed_extend;
     TDAzimuth.mRefAzimuth  = azimuth;
     setRefAzimuthButton();
@@ -463,7 +463,7 @@ public class ShotWindow extends Activity
   @Override
   synchronized public void updateBlockList( long blk_id )
   {
-    TDLog.v("update block list " + blk_id );
+    // TDLog.v("update block list " + blk_id );
     DBlock blk = mApp_mData.selectLastShot( blk_id, TDInstance.sid );
     if ( blk == null || mDataAdapter == null ) {
       // TDLog.v("DATA " + "null block");
@@ -1003,10 +1003,12 @@ public class ShotWindow extends Activity
   //   startActivityForResult( intent, TDRequest.EXTERNAL_ACTIVITY );
   // }
 
-  // called to insert a manual shot after a given shot
+  /** called to insert a manual shot after a given shot
+   * @param blk  shot after which to insert the new shot
+   */
   void dialogInsertShotAt( DBlock blk )
   {
-    (new ShotNewDialog( this, mApp, this, blk, mShotId )).show();
+    (new ShotNewDialog( this, mApp, this, blk, blk.mId /* mShotId */ )).show();
   }
 
   // insert a manual intermediate leg
@@ -1062,10 +1064,10 @@ public class ShotWindow extends Activity
       TopoDroidApp.mSurveyWindow = null;
     }
     if ( new_survey == null ) {
-      TDLog.v( "SPLIT survey " + old_sid + " " + shot_id );
+      // TDLog.v( "SPLIT survey " + old_sid + " " + shot_id );
       TopoDroidApp.mMainActivity.startSplitSurvey( old_sid, shot_id ); // SPLIT SURVEY
     } else {
-      TDLog.v( "MOVE survey Old: " + old_sid + " " + shot_id + " New: " + new_survey );
+      // TDLog.v( "MOVE survey Old: " + old_sid + " " + shot_id + " New: " + new_survey );
       TopoDroidApp.mMainActivity.startMoveSurvey( old_sid, shot_id, new_survey ); // MOVE SURVEY
     }
   }
@@ -1813,7 +1815,7 @@ public class ShotWindow extends Activity
         }
       }
     }
-    TDLog.v("BUFFER after cut: size " + mDBlockBuffer.size() );
+    // TDLog.v("BUFFER after cut: size " + mDBlockBuffer.size() );
     clearMultiSelect( );
     updateDisplay( ); 
   }
@@ -1839,7 +1841,7 @@ public class ShotWindow extends Activity
           }
         }
       }
-      TDLog.v("BUFFER after copy: size " + mDBlockBuffer.size() );
+      // TDLog.v("BUFFER after copy: size " + mDBlockBuffer.size() );
     }
     clearMultiSelect( );
     // updateDisplay( ); REPLACED

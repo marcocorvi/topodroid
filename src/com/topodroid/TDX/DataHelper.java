@@ -2173,7 +2173,7 @@ public class DataHelper extends DataSetObservable
     cv.put( "rawGx",    0.0 );
     cv.put( "rawGy",    0.0 );
     cv.put( "rawGz",    0.0 );
-    cv.put( "index",    0 );
+    cv.put( "idx",      0 );
     cv.put( "time",     0L ); // [s]
 
     if ( ! doInsert( SHOT_TABLE, cv, "insert at" ) ) return -1L;
