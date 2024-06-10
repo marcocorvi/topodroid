@@ -1046,7 +1046,7 @@ class ShotEditDialog extends MyDialog
       dismiss();
     // } else if ( b == mButtonExternal ) {
     //   mParent.askExternal( );
-    } else if ( b == mButtonShot ) {  // INSERT SHOT
+    } else if ( b == mButtonShot ) {  // INSERT NEW SHOT
       mParent.dialogInsertShotAt( mBlk );
       dismiss();
     } else if ( mButtonSurvey != null && b == mButtonSurvey ) { // SPLIT

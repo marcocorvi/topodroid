@@ -488,6 +488,7 @@ class ShotNewDialog extends MyDialog
         if ( shot_to.length() > 0 ) {
           mLRUDatTo = mCBsplayAtTo.isChecked();
           String splay_station = mLRUDatTo ? shot_to : shot_from;
+          // TDLog.v("manual shot at " + mAt + " with TO: " + shot_to + " splays at " + splay_station );
           if ( distance.length() == 0 ) {
             distance = backdistance;
           } else if ( backdistance.length() == 0 ) {

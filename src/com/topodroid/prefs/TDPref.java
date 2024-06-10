@@ -444,7 +444,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     return new TDPref( cat, nm, BUTTON, tit, sum, lvl, PREF, val, def_val, ctx, hlp );
   }
 
-  /** factory cstr a "checkbox" preference
+  /** factory cstr a "checkbox" preference - not used
    * @param cat     category
    * @param nm      preference name
    * @param tit     preference title
@@ -454,13 +454,14 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param ctx     context
    * @param hlp     shared preferences helper
    */ 
-  private static TDPref makeCbx( int cat, String nm, int tit, int sum, int lvl, boolean def_val, Context ctx, TDPrefHelper hlp )
-  { 
-    boolean val = hlp.getBoolean( nm, def_val );
-    TDPref ret = new TDPref( cat, nm, CHECKBOX, tit, sum, lvl, BOOLEAN, (val? "true" : "false"), (def_val? "true" : "false"), ctx, hlp );
-    ret.b_value = val;
-    return ret;
-  }
+  // private static TDPref makeCbx( int cat, String nm, int tit, int sum, int lvl, boolean def_val, Context ctx, TDPrefHelper hlp )
+  // { 
+  //   boolean val = hlp.getBoolean( nm, def_val );
+  //   TDPref ret = new TDPref( cat, nm, CHECKBOX, tit, sum, lvl, BOOLEAN, (val? "true" : "false"), (def_val? "true" : "false"), ctx, hlp );
+  //   ret.b_value = val;
+  //   // TDLog.v("make CBX " + nm + " value " + val );
+  //   return ret;
+  // }
 
   /** factory cstr a "checkbox" preference
    * @param cat     category
@@ -1671,9 +1672,9 @@ public class TDPref implements AdapterView.OnItemSelectedListener
         makeCbx( cat, key[0], tit[0], dsc[0],  A, def[0],  ctx, hlp ), // SINGLE_BACK
         makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // PALETTES
         // makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // BACKUP CLEAR - CLEAR_BACKUPS
-        makeCbx( cat, key[2], tit[2], dsc[2],  T, def[2],  ctx, hlp ), // KEUBOARD
+        makeCbx( cat, key[2], tit[2], dsc[2],  T, def[2],  ctx, hlp ), // KEYBOARD
         makeCbx( cat, key[3], tit[3], dsc[3],  T, def[3],  ctx, hlp ), // CURSOR
-        makeCbx( cat, key[3], tit[4], dsc[4],  T, def[4],  ctx, hlp ), // PACKET LOGGER
+        makeCbx( cat, key[4], tit[4], dsc[4],  T, def[4],  ctx, hlp ), // PACKET LOGGER
         makeCbx( cat, key[5], tit[5], dsc[5],  T, def[5],  ctx, hlp ), // TH2EDIT
         makeFwd( cat, key[6], tit[6],          A,          ctx, hlp ), // GEEK_SHOT
         makeFwd( cat, key[7], tit[7],          T,          ctx, hlp ), // GEEK_SPLAY

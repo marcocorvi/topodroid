@@ -1901,7 +1901,7 @@ public class TopoDroidApp extends Application
     Set<String> sts = mData.selectAllStations( TDInstance.sid );
     int sz = list.size();
     if ( sz == 0 ) return false;
-    TDLog.v("DATA " + "assign stations all: size " + sz + " blk[0] id " + list.get(0).mId );
+    // TDLog.v("DATA " + "assign stations all: size " + sz + " blk[0] id " + list.get(0).mId );
 
     // if ( TDSetting.mSurveyStations < 0 ) return;
     if ( StationPolicy.doTopoRobot() ) {
@@ -2291,6 +2291,7 @@ public class TopoDroidApp extends Application
         // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( 270 ) : ExtendType.EXTEND_UNSET;
         if ( at >= 0L ) {
           id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, l, 270.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
+          // TDLog.v("APP insert at " + at + " return " + id + " incrementing at [2]" );
           ++at;
         } else {
           id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, l, 270.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
@@ -2303,6 +2304,7 @@ public class TopoDroidApp extends Application
         // b = in360( b );
         if ( at >= 0L ) {
           id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, l, b, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
+          // TDLog.v("APP insert at " + at + " return " + id + " incrementing at [3]" );
           ++at;
         } else {
           id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, l, b, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
@@ -2318,6 +2320,7 @@ public class TopoDroidApp extends Application
         // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( 90 ) : ExtendType.EXTEND_UNSET;
         if ( at >= 0L ) {
           id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, r, 90.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
+          // TDLog.v("APP insert at " + at + " return " + id + " incrementing at [4]" );
           ++at;
         } else {
           id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, r, 90.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
@@ -2329,6 +2332,7 @@ public class TopoDroidApp extends Application
         // extend = ( TDSetting.mLRExtend )? TDAzimuth.computeSplayExtend( b ) : ExtendType.EXTEND_UNSET;
         if ( at >= 0L ) {
           id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, r, b, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
+          // TDLog.v("APP insert at " + at + " return " + id + " incrementing at [5]" );
           ++at;
         } else {
           id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, r, b, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
@@ -2343,6 +2347,7 @@ public class TopoDroidApp extends Application
       if ( horizontal ) {
         if ( at >= 0L ) {
           id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, u, 0.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
+          // TDLog.v("APP insert at " + at + " return " + id + " incrementing at [6]" );
           ++at;
         } else {
           id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, u, 0.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
@@ -2350,6 +2355,7 @@ public class TopoDroidApp extends Application
       } else {
         if ( at >= 0L ) {
           id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, u, 0.0f, 90.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
+          // TDLog.v("APP insert at " + at + " return " + id + " incrementing at [7]" );
           ++at;
         } else {
           id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, u, 0.0f, 90.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
@@ -2363,6 +2369,7 @@ public class TopoDroidApp extends Application
       if ( horizontal ) {
         if ( at >= 0L ) {
           id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, d, 180.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
+          // TDLog.v("APP insert at " + at + " return " + id + " incrementing at [8]" );
           ++at;
         } else {
           id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, d, 180.0f, 0.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
@@ -2370,6 +2377,7 @@ public class TopoDroidApp extends Application
       } else {
         if ( at >= 0L ) {
           id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, d, 0.0f, -90.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
+          // TDLog.v("APP insert at " + at + " return " + id + " incrementing at [9]" );
           ++at;
         } else {
           id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, d, 0.0f, -90.0f, 0.0f, extend, 0.0, LegType.XSPLAY, 1 );
@@ -2415,6 +2423,7 @@ public class TopoDroidApp extends Application
     clino    = clino    / TDSetting.mUnitAngle  - ManualCalibration.mClino;
     float b  = bearing  / TDSetting.mUnitAngle;
 
+    // TDLog.v("APP insert manual shot " + from + "-" + to + " at " + at + " D " + distance + " B " + bearing + " C " + clino );
 
     if ( ( distance < 0.0f ) ||
          ( clino < -90.0f || clino > 90.0f ) ||
@@ -2438,6 +2447,7 @@ public class TopoDroidApp extends Application
 
           if ( at >= 0L ) {
             id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, distance, bearing, clino, 0.0f, extend0, 0.0, LegType.NORMAL, 1 );
+            // TDLog.v("APP insert at " + at + " return " + id );
           } else {
             id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, distance, bearing, clino, 0.0f, extend0, 0.0, LegType.NORMAL, 1 );
           }
@@ -2454,6 +2464,7 @@ public class TopoDroidApp extends Application
           // TDLog.v( "[2] manual-shot Data " + distance + " " + bearing + " " + clino );
           if ( at >= 0L ) {
             id = mData.insertManualShotAt( TDInstance.sid, at, time, 0, distance, bearing, clino, 0.0f, extend0, 0.0, LegType.NORMAL, 1 );
+            // TDLog.v("APP insert at " + at + " return " + id + " incrementing at [1]" );
             ++ at;
           } else {
             id = mData.insertManualShot( TDInstance.sid, -1L, time, 0, distance, bearing, clino, 0.0f, extend0, 0.0, LegType.NORMAL, 1 );
