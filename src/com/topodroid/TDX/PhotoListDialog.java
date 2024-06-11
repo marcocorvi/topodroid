@@ -97,8 +97,8 @@ public class PhotoListDialog extends MyDialog
   {
     // TDLog.Log( TDLog.LOG_PHOTO, "updateDisplay() status: " + StatusName() + " forcing: " + force_update );
     if ( mApp_mData != null && TDInstance.sid >= 0 ) {
-      List< PhotoInfo > list = mApp_mData.selectAllPhotosShot( TDInstance.sid, TDStatus.NORMAL );
-      // TDLog.Log( TDLog.LOG_PHOTO, "update shot list size " + list.size() );
+      List< PhotoInfo > list = mApp_mData.selectAllPhotos( TDInstance.sid, TDStatus.NORMAL );
+      // TDLog.v( "update photos list size " + list.size() );
       updatePhotoList( list );
       setTitle( TDInstance.survey );
     // } else {

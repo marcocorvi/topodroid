@@ -2527,23 +2527,29 @@ public class DataHelper extends DataSetObservable
   private static final String qAudiosAll    = "select id, shotId, date, reftype from audios where surveyId=? ";
   private static final String qPhotosAll    = "select id, shotId, status, title, date, comment, camera, code, reftype from photos where surveyId=? ";
 
+  private static final String qjPhoto       = "select id, shotId from photos where surveyId=? and id=? and reftype=?";
+
   // used in selectAllPhotosShot
   private static final String qjPhotosShot  =
-    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code, p.reftype from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and p.status=? ";
+    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code, p.reftype from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and p.status=? and p.reftype=1";
   //  "select p.id, COALESCE(s.id, -1), p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code from photos as p left join shots as s on p.shotId=s.id where p.surveyId=? and (s.surveyId=? OR p.shotId=-1) and p.status=? ";
   // private static String qShotPhoto    = "select id, shotId, title, date, comment from photos where surveyId=? AND shotId=? ";
 
   // used in selectAllPhotosPlot
   private static final String qjPhotosPlot  =
-    "select p.id, s.id, p.title, q.name, p.date, p.comment, p.camera, p.code, p.reftype from photos as p join plots as q on p.shotId=q.id where p.surveyId=? and s.surveyId=? and p.status=? ";
+    "select p.id, q.id, p.title, q.name, p.date, p.comment, p.camera, p.code, p.reftype from photos as p join plots as q on p.shotId=q.id where p.surveyId=? and q.surveyId=? and p.status=? and p.reftype=2";
 
   // used in selectAllPhotoAtShot
   private static final String qjShotPhotos  =
-    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code, p.reftype from photos as p join shots as s on p.shotId=s.id where p.surveyId=? AND s.surveyId=? AND p.shotId=? ";
+    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code, p.reftype from photos as p join shots as s on p.shotId=s.id where p.surveyId=? AND s.surveyId=? AND p.shotId=? AND p.reftype=1";
+
+  // used in selectAllPhotoXSection
+  private static final String qjPhotosXSection  =
+    "select p.id, x.id, p.title, x.name, p.date, p.comment, p.camera, p.code, p.reftype from photos as p join plots as x on p.shotId=x.id where p.surveyId=? AND x.surveyId=? AND p.status=? AND p.reftype=3";
 
   // used in countAllShotPhotos
   private static final String cntShotPhotos      =
-    "select count(p.id) from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and p.status=? ";
+    "select count(p.id) from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and p.status=? AND p.reftype=1";
 
   private static final String qFirstStation = "select fStation from shots where surveyId=? AND fStation!=\"\" AND tStation!=\"\" limit 1 ";
   private static final String qHasStation   = "select id, fStation, tStation from shots where surveyId=? and ( fStation=? or tStation=? ) order by id ";
@@ -2871,7 +2877,35 @@ public class DataHelper extends DataSetObservable
     }
     // TDLog.Log( TDLog.LOG_DB, "select All Photos Plot list size " + list.size() );
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return list;
+  }
 
+  /** @return the photos at xsections of a survey
+   * @param sid      survey ID
+   * @param status   photo status
+   */
+  List< PhotoInfo > selectAllPhotosXSection( long sid, long status )
+  {
+    List< PhotoInfo > list = new ArrayList<>();
+    if ( myDB == null ) return list;
+    Cursor cursor = myDB.rawQuery( qjPhotosXSection, new String[] { Long.toString(sid), Long.toString(sid), Long.toString(status) } );
+    if (cursor.moveToFirst()) {
+      do {
+        list.add( new PhotoInfo( sid, 
+                                 cursor.getLong(0), // id
+                                 cursor.getLong(1),
+                                 cursor.getString(2),
+                                 cursor.getString(3),      // plot name
+                                 cursor.getString(4),
+                                 cursor.getString(5),
+                                 (int)(cursor.getLong(6)), // camera
+                                 cursor.getString(7),      // code
+                                 (int)(cursor.getLong(8))  // reftype
+                 ) );
+      } while (cursor.moveToNext());
+    }
+    // TDLog.Log( TDLog.LOG_DB, "select All Photos Plot list size " + list.size() );
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return list;
   }
 
@@ -2915,10 +2949,42 @@ public class DataHelper extends DataSetObservable
     if ( myDB != null ) {
       list.addAll( selectAllPhotosShot( sid, status ) );
       list.addAll( selectAllPhotosPlot( sid, status ) );
+      list.addAll( selectAllPhotosXSection( sid, status ) );
     }
     return list;
   }
 
+  /** insert or update a photo
+   * @param sid       survey id
+   * @param id        photo id (or -1)
+   * @param item_id   reference item ID: shot ID or plot ID
+   * @param title     photo title
+   * @param date      date
+   * @param comment   comment
+   * @param camera    camera type
+   * @param code      geomophology code
+   * @param reftype   reference item type
+   * @return id of the record (-1 on error)
+   * @note used only for x-sections - could it be used also for shots and plots ?
+   */
+  long insertOrUpdatePhoto( long sid, long id, long item_id, String title, String date, String comment, int camera, String geocode, int reftype )
+  {
+    if ( myDB == null ) return -1;
+    boolean insert = (id < 0);
+    Cursor cursor = null;
+    if ( ! insert ) {
+      cursor = myDB.rawQuery( qjPhoto, new String[] { Long.toString(sid), Long.toString(id), Long.toString(reftype) } );
+      if ( cursor.moveToFirst() ) { // update
+        updatePhoto( sid, id, title, date, comment, camera, geocode );
+        // TODO handle return
+      } else {
+        insert = true;
+      }
+      if ( ! cursor.isClosed() ) cursor.close();
+    } 
+    if ( insert ) id = insertPhotoRecord( sid, id, item_id, title, date, comment, camera, geocode, reftype );
+    return id;
+  }
 
   /** @return the photos of a survey at a shot
    * @param sid      survey ID
@@ -4687,7 +4753,7 @@ public class DataHelper extends DataSetObservable
    * @param reftype   reference item type
    * @return id of the record (-1 on error)
    */
-  long insertPhoto( long sid, long id, long item_id, String title, String date, String comment, int camera, String code, int reftype )
+  long insertPhotoRecord( long sid, long id, long item_id, String title, String date, String comment, int camera, String code, int reftype )
   {
     if ( myDB == null ) return -1L;
     if ( id == -1L ) id = maxId( PHOTO_TABLE, sid );
@@ -4707,16 +4773,22 @@ public class DataHelper extends DataSetObservable
   /** update a photo comment
    * @param sid     survey ID
    * @param id      photo ID
+   * @param title   new title
+   * @param date    new datetime
    * @param comment new photo comment
-   * @param code    new photo geocode
+   * @param camera  new camera type
+   * @param geocode new photo geocode
    * @return true if successful
    */
-  boolean updatePhoto( long sid, long id, String comment, String code )
+  boolean updatePhoto( long sid, long id, String title, String date, String comment, int camera, String geocode )
   {
     if ( myDB == null ) return false;
     ContentValues cv = new ContentValues();
+    cv.put( "title",   title );
+    cv.put( "date",    date );
     cv.put( "comment", comment );
-    cv.put( "code",    code );
+    cv.put( "camera",  camera );
+    cv.put( "code",    geocode );
     try {
       myDB.beginTransaction();
       myDB.update( PHOTO_TABLE, cv, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
@@ -7026,7 +7098,7 @@ public class DataHelper extends DataSetObservable
              db.execSQL( "ALTER TABLE stations ADD COLUMN code TEXT default NIL" );
            case 53:
              db.execSQL( "ALTER TABLE photos ADD COLUMN reftype INTEGER default 0" );
-             db.execSQL( "ALTER TABLE photos ADD COLUMN reftype INTEGER default 0" );
+             db.execSQL( "ALTER TABLE audios ADD COLUMN reftype INTEGER default 0" );
              db.execSQL( "ALTER TABLE sensors ADD COLUMN reftype INTEGER default 0" );
            case 54:
              // TDLog.v( "current version " + oldVersion );

@@ -1084,7 +1084,7 @@ public class TopoDroidApp extends Application
 
   static boolean initEnvironmentThird()
   {
-    // TDLog.v("App Init Env [3]");
+    TDLog.v("App init env [3] loaded palette " + done_loaded_palette );
     // TDLog.Profile("TDApp DB"); 
     // ***** DATABASE MUST COME BEFORE PREFERENCES
     // if ( ! with_dialog_r ) {
@@ -1097,7 +1097,7 @@ public class TopoDroidApp extends Application
         Thread loader = new Thread() {
           @Override
           public void run() {
-            // TDLog.v("App loading palette");
+            TDLog.v("App loading palette");
             Resources res = TDInstance.getResources();
             BrushManager.reloadPointLibrary( TDInstance.context, res ); // reload symbols
             BrushManager.reloadLineLibrary( res );
@@ -1110,7 +1110,7 @@ public class TopoDroidApp extends Application
         loader.setPriority( Thread.MIN_PRIORITY );
         loader.start();
       } else {
-        TDLog.Error("App database not opened");
+        TDLog.Error("App init env [3] database not opened");
       }
     }
     // mStationName = new StationName();

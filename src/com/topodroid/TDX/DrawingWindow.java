@@ -5754,7 +5754,7 @@ public class DrawingWindow extends ItemDrawer
   //   assert( mLastLinePath == null );
   //   if ( mMediaManager.savePhotoFile( bitmap, 90 ) ) { // compression = 90
   //     // // FIXME TITLE has to go
-  //     // mApp_mData.insertPhoto( TDInstance.sid, mMediaId, -1, "", TDUtil.currentDate(), mMediaComment, mMediaCamera );
+  //     // mApp_mData.insertPhotoRecord( TDInstance.sid, mMediaId, -1, "", TDUtil.currentDate(), mMediaComment, mMediaCamera );
   //     // // FIXME NOTIFY ? no
   //     createPhotoPoint();
   //   } else {
@@ -5767,7 +5767,7 @@ public class DrawingWindow extends ItemDrawer
    */
   public void insertPhoto( )
   {
-    mApp_mData.insertPhoto( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(), 
+    mApp_mData.insertPhotoRecord( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(), 
       mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), MediaInfo.TYPE_PLOT );
     // FIXME NOTIFY ? no
     createPhotoPoint();
@@ -5786,24 +5786,17 @@ public class DrawingWindow extends ItemDrawer
    * @param insert      whether to insert the photo-point item
    * @param pid         reference item ID (x-section plot ID, or -1)
    * @param type        reference item type
+   * @note this method returns before the QCamCompass is finished
    */
   private void doTakePointPhoto( String imagefile, boolean insert, long pid, long type )
   {
+    TDLog.v("do take point photo: <" + imagefile + "> insert " + insert + " pid " + pid + " type " + type );
     // if ( TDandroid.AT_LEAST_API_21 && TDandroid.checkCamera( mApp ) ) { // canTakeasPhoto
       boolean with_box = true; // ! insert;
       mMediaManager.setCamera( PhotoInfo.CAMERA_TOPODROID );
       if ( pid > 0 ) mMediaManager.setReferenceItem( pid, type );
       MyBearingAndClino callback = new MyBearingAndClino( mApp, imagefile );
-      new QCamCompass( this, this, callback, (insert ? this : null), with_box, false, PhotoInfo.CAMERA_TOPODROID ).show(); // false=with_delay
-      // TODO 
-      // if ( callback.hasSaved() ) {
-      //   // insert or update
-      //   mApp_mData.insertOrUpdatePhoto( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(), 
-      //     mMediaManager.getComment(), mMediaManager.getCamera(), "", MediaInfo.TYPE_XSECTION );
-      // } else { 
-      //   // if ( type == MediaInfo.TYPE_PLOT ) { // delete photo-point ??? already done
-      //   // } else if ( type == MediaInfo.TYPE_XSECTION ) { // TODO make sure x-section is not deleted
-      //   // }
+      new QCamCompass( this, this, callback, (insert ? this : null), with_box, false, PhotoInfo.CAMERA_TOPODROID, mMediaManager ).show(); // false=with_delay
       // }
 
     // } else {
@@ -7541,7 +7534,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void makePhotoXSection( DrawingLinePath line, String id, long type, String from, String to, String nick, float azimuth, float clino )
   {
-    // TDLog.v("make photo x-section " + id );
+    TDLog.v("make photo x-section " + id );
     long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
     if ( pid >= 0 ) {
       // imageFile := survey / photo / sectionId .jpg
@@ -9216,7 +9209,7 @@ public class DrawingWindow extends ItemDrawer
       //     Bitmap bitmap = (Bitmap) extras.get("data");
       //     if ( mMediaManager.savePhotoFile( bitmap, 90 ) ) { // compression = 90
       //       // // FIXME TITLE has to go
-      //       // mApp_mData.insertPhoto( TDInstance.sid, mMediaId, -1, "", TDUtil.currentDate(), mMediaComment, mMediaCamera );
+      //       // mApp_mData.insertPhotoRecord( TDInstance.sid, mMediaId, -1, "", TDUtil.currentDate(), mMediaComment, mMediaCamera );
       //       // // FIXME NOTIFY ? no
       //       createPhotoPoint();
       //     } else {

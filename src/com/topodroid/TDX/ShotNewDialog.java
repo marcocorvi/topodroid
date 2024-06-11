@@ -620,7 +620,7 @@ class ShotNewDialog extends MyDialog
             // fos.flush();
             fos.close();
             mExif.writeExif( filepath );
-            TopoDroidApp.mData.insertPhoto( TDInstance.sid, photo_id, blk.mId,
+            TopoDroidApp.mData.insertPhotoRecord( TDInstance.sid, photo_id, blk.mId,
                                     "",
                                     TDUtil.currentDateTime(),
                                     "snap " + shot_from + " " + shot_to,

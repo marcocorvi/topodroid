@@ -54,6 +54,7 @@ class QCamCompass extends Dialog
 
   private Activity mParent; // parent activity;
   private IPhotoInserter mInserter;
+  private MediaManager   mMediaManager;
   private QCamDrawingSurface mSurface = null;
   private QCamDrawingTexture mTexture = null; // TEXTURE
   // private QCamBox mBox;
@@ -91,6 +92,7 @@ class QCamCompass extends Dialog
    * @param with_box   ...
    * @param with_delay ...
    * @param camera     camera API (1 or 2)
+   * @param media_manager media manager (can be null)
    *
    * @note QCamCompass is used by
    *   - DrawingWindow to take photo (with old Camera API)
@@ -101,7 +103,8 @@ class QCamCompass extends Dialog
    *   - 2: Camera2: QCamDrawingTexture
    *   - 3: Android camera (intent) UNUSED
    */
-  QCamCompass( Context context, Activity parent, IBearingAndClino callback, IPhotoInserter inserter, boolean with_box, boolean with_delay, int camera )
+  QCamCompass( Context context, Activity parent, IBearingAndClino callback, IPhotoInserter inserter, boolean with_box, boolean with_delay, int camera,
+               MediaManager media_manager )
   {
     super( context );
     mContext   = context;
@@ -115,6 +118,7 @@ class QCamCompass extends Dialog
     mHasSaved  = false;
     mHasShot   = false;
     mCamera    = camera;
+    mMediaManager = media_manager;
     // TDLog.Log( TDLog.LOG_PHOTO, "QCAM compass. Box " + mWithBox + " delay " + mWithDelay );
   }
 
@@ -365,7 +369,13 @@ class QCamCompass extends Dialog
             mCallback.setBearingAndClino( mBearing, mClino, mOrientation, mAccuracy, 2 ); // camera2 API
             mHasSaved = mCallback.setJpegData( mTexture.getJpegData() );
           }
-          if ( ! mHasSaved ) {
+          if ( mHasSaved ) {
+            if ( mMediaManager != null ) {
+              TDLog.v("insert or update photo record in database: id " + mMediaManager.getPhotoId() + " item_id " + mMediaManager.getItemId() );
+              TopoDroidApp.mData.insertOrUpdatePhoto( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(), 
+                mMediaManager.getComment(), mMediaManager.getCamera(), "", MediaInfo.TYPE_XSECTION );
+            }
+          } else {
             TDToast.makeBad( mContext.getResources().getString( R.string.photo_failed ) );
             dismiss = false;
           }

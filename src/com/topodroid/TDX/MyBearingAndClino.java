@@ -37,7 +37,7 @@ public class MyBearingAndClino implements IBearingAndClino
   private String mFilepath;  // file full pathname
   // long  mPid;             // plot id
   private ExifInfo mExif;
-  private boolean  mHasSaved = false;
+  private boolean  mHasSaved = false; // whether the JPEG file has beeen written
 
   /** cstr
    * @param app         application
@@ -83,13 +83,12 @@ public class MyBearingAndClino implements IBearingAndClino
       fos.flush();
       fos.close();
       mExif.writeExif( mFilepath );
-      // TDLog.v("set JPEG data - file: " + mFilepath );
       mHasSaved = true;
-      return true;
     } catch ( IOException e ) {
       TDLog.Error( "IO exception " + e.getMessage() );
     }
-    return false;
+      TDLog.v("set JPEG data: " + mHasSaved + " - file: " + mFilepath );
+    return mHasSaved;
   }
 
   /** @return true if this has saved a JPEG image

@@ -171,7 +171,7 @@ class MediaManager
   //       bitmap.compress( Bitmap.CompressFormat.JPEG, compression, fos );
   //       fos.flush();
   //       fos.close();
-  //       mData.insertPhoto( TDInstance.sid, mPhotoId, mItemId, "", TDUtil.currentDate(), mComment, mCamera, mCode );
+  //       mData.insertPhotoRecord( TDInstance.sid, mPhotoId, mItemId, "", TDUtil.currentDate(), mComment, mCamera, mCode );
   //       ret = true;
   //     } catch ( FileNotFoundException e ) {
   //       TDLog.Error("cannot save photo: file not found");

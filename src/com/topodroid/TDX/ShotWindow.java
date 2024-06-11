@@ -1109,7 +1109,7 @@ public class ShotWindow extends Activity
   public void insertPhoto( )
   {
     // FIXME TITLE has to go
-    mApp_mData.insertPhoto( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(),
+    mApp_mData.insertPhotoRecord( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(),
       mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), PhotoInfo.TYPE_SHOT );
     // FIXME NOTIFY ? no
     updateDisplay( ); 
