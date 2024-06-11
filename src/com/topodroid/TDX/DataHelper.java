@@ -2524,10 +2524,17 @@ public class DataHelper extends DataSetObservable
   private static final String qAudioShot    = "select id, date from audios where surveyId=? AND shotId=? AND reftype=1 "; // shot-item = 1
   private static final String qAudioPlot    = "select id, date from audios where surveyId=? AND id=? AND shotId=? AND reftype=2 "; // plot-item = 1
 
-  private static final String qAudiosAll    = "select id, shotId, date, reftype from audios where surveyId=? ";
+  private static final String qAudioId      = "select id from audios where surveyId=? AND shotId=? AND reftype=? "; 
+
+  private static final String qAudiosAll    = "select id, shotId, date, reftype from audios where surveyId=? order by reftype";
+
+  private static final String qAudiosByReftype = "select id, shotId, date from audios where surveyId=? and reftype=?";
+
   private static final String qPhotosAll    = "select id, shotId, status, title, date, comment, camera, code, reftype from photos where surveyId=? ";
 
   private static final String qjPhoto       = "select id, shotId from photos where surveyId=? and id=? and reftype=?";
+
+  private static final String qjCountPhoto  = "select count() from photos where surveyId=? and status=?";
 
   // used in selectAllPhotosShot
   private static final String qjPhotosShot  =
@@ -2659,7 +2666,7 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
-  /** @return audio info
+  /** @return audio info for a given shot
    * @param sid   survey ID
    * @param bid   shot ID
    */
@@ -2684,7 +2691,7 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
-  /** @return audio info
+  /** @return audio info of a plot
    * @param sid   survey ID
    * @param aid   audio ID
    * @param bid   plot ID
@@ -2717,7 +2724,7 @@ public class DataHelper extends DataSetObservable
    * @param item_id    reference item ID: use 0 
    * @param reftype    reference item type
    */
-  long nextAudioNegId( long sid, long item_id, long reftype )
+  long nextAudioId( long sid, long item_id, long reftype )
   {
     // long id = minId( AUDIO_TABLE, sid );
     long id = maxId( AUDIO_TABLE, sid );  // FIXME replaced min with max
@@ -2725,6 +2732,26 @@ public class DataHelper extends DataSetObservable
     insertAudio( sid, id, item_id, TDUtil.currentDate(), reftype );
     return id;
   }
+
+  /** @return the audio ID for given item ID and reference type
+   * @param sid     survey ID
+   * @param item_id item ID
+   * @param reftype reference type
+   */
+  long getAudioId( long sid, long item_id, long reftype )
+  {
+    if ( myDB == null ) return -1L;
+    long ret = -1;
+    Cursor cursor = myDB.rawQuery( qAudioId, new String[] { Long.toString(sid), Long.toString(item_id), Long.toString(reftype) } );
+    if (cursor.moveToFirst()) { // update
+      ret = cursor.getLong(0);
+    } else {
+      ret = nextAudioId( sid, item_id, reftype );
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return ret;
+  }
+    
 
   private ContentValues makeAudioContentValues( long sid, long id, long item_id, String date, long reftype )
   {
@@ -2784,6 +2811,9 @@ public class DataHelper extends DataSetObservable
     // return ret;
   }
 
+  /** @return the list of all the audio of a survey (ordered by reference type)
+   * @param sid   survey ID
+   */
   List< AudioInfo > selectAllAudios( long sid )
   {
     List< AudioInfo > list = new ArrayList<>();
@@ -2808,8 +2838,38 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
-  // @param sid survey id
-  // @param bid shot-id is positive, sketch audio index if negative
+  /** @return the list of all the audio of a survey of a given reference type
+   * @param sid     survey IDA
+   * @param reftype reference type
+   */
+  List< AudioInfo > selectAllAudios( long sid, int reftype )
+  {
+    List< AudioInfo > list = new ArrayList<>();
+    if ( myDB == null ) return list;
+    // Cursor cursor = myDB.query( AUDIO_TABLE,
+    //                             new String[] { "id", "shotId", "date" }, // columns
+    //                             WHERE_SID, new String[] { Long.toString(sid) },
+    //                             null, null,  null ); 
+    Cursor cursor = myDB.rawQuery( qAudiosByReftype, new String[] { Long.toString(sid), Long.toString(reftype) } );
+    if (cursor.moveToFirst()) {
+      do {
+        list.add( new AudioInfo( sid, 
+                                 cursor.getLong(0),   // id
+                                 cursor.getLong(1),   // shotId
+                                 cursor.getString(2), // date
+                                 reftype
+                               ) );
+      } while (cursor.moveToNext());
+    }
+    // TDLog.Log( TDLog.LOG_DB, "select All Photos list size " + list.size() );
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return list;
+  }
+
+  /** drop an audio record
+   * @param sid   survey id
+   * @param bid   shot-id is positive, sketch audio index if negative
+   */
   void deleteAudio( long sid, long bid )
   {
     if ( myDB == null ) return;
@@ -2952,6 +3012,22 @@ public class DataHelper extends DataSetObservable
       list.addAll( selectAllPhotosXSection( sid, status ) );
     }
     return list;
+  }
+
+  /** @return the number of photos of a survey with a given status
+   * @param sid    survey ID
+   * @param status photo status
+   */
+  int countAllPhotos( long sid, long status )
+  {
+    if ( myDB == null ) return -1;
+    int ret = 0;
+    Cursor cursor = myDB.rawQuery( qjCountPhoto, new String[] { Long.toString(sid), Long.toString(status) } );
+    if ( cursor.moveToFirst() ) { // update
+      ret = (int)cursor.getLong(0);
+    }
+    if ( ! cursor.isClosed() ) cursor.close();
+    return ret;
   }
 
   /** insert or update a photo
@@ -4788,6 +4864,29 @@ public class DataHelper extends DataSetObservable
     cv.put( "date",    date );
     cv.put( "comment", comment );
     cv.put( "camera",  camera );
+    cv.put( "code",    geocode );
+    try {
+      myDB.beginTransaction();
+      myDB.update( PHOTO_TABLE, cv, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
+      myDB.setTransactionSuccessful();
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e) { logError("photo update", e); 
+    } finally { myDB.endTransaction(); }
+    return true;
+  }
+
+  /** update a photo comment and geocode
+   * @param sid     survey ID
+   * @param id      photo ID
+   * @param comment new photo comment
+   * @param geocode new photo geocode
+   * @return true if successful
+   */
+  boolean updatePhotoCommentAndCode( long sid, long id, String comment, String geocode )
+  {
+    if ( myDB == null ) return false;
+    ContentValues cv = new ContentValues();
+    cv.put( "comment", comment );
     cv.put( "code",    geocode );
     try {
       myDB.beginTransaction();

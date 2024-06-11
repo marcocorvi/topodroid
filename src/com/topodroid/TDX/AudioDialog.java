@@ -70,24 +70,24 @@ class AudioDialog extends MyDialog
   private boolean canPlay;
   private DBlock  mBlk;  // this is used only for the presentation "name"
   private int isRecPlay; // 0: idle, 1: rec, 2: play
-  private long mType;    // reference item type
+  private long mReftype;    // reference item type
   // private long mItemId; // TODO maybe
   // AudioInfo mAudio;
 
   /** cstr
    * @param ctx       context
    * @param parent    parent window
-   * @param audio_id  audio ID
+   * @param audio_id  audio ID (record must exist in the table)
    * @param blk       data block (or null)
-   * @param type      reference item type
+   * @param reftype   reference item type
    */
-  AudioDialog( Context ctx, IAudioInserter parent, long audio_id, DBlock blk, long type )
+  AudioDialog( Context ctx, IAudioInserter parent, long audio_id, DBlock blk, long reftype )
   {
     super( ctx, null, R.string.AudioDialog ); // null app
 
-    mParent  = parent;
-    mAudioId = audio_id;
-    mType    = type;
+    mParent   = parent;
+    mAudioId  = audio_id;
+    mReftype  = reftype;
     // mAudio = mApp.mData.getAudio( TDInstance.sid, mAudioId );
     mFilepath = TDPath.getSurveyWavFile( TDInstance.survey, Long.toString(mAudioId) );
     hasFile   = (TDFile.getTopoDroidFile( mFilepath )).exists();
@@ -305,7 +305,7 @@ class AudioDialog extends MyDialog
       mBtnConfirm.setText( R.string.audio_paused );
       canPlay = true;
       hasFile = true;
-      TopoDroidApp.mData.setAudio( TDInstance.sid, mAudioId, TDUtil.currentDateTime(), mType );
+      TopoDroidApp.mData.setAudio( TDInstance.sid, mAudioId, TDUtil.currentDateTime(), mReftype );
       if ( mParent != null ) mParent.stopRecordAudio( mAudioId );
       isRecPlay = STATUS_IDLE;
     } catch ( IllegalStateException e ) {

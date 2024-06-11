@@ -891,7 +891,11 @@ public class ShotWindow extends Activity
       // updateDisplay( );
     } else if ( TDLevel.overNormal && p++ == pos ) { // PHOTO
       // mActivity.startActivity( new Intent( mActivity, PhotoActivity.class ) );
-      (new PhotoListDialog( this, mApp_mData )).show();
+      if ( mApp_mData.countAllPhotos( TDInstance.sid, TDStatus.NORMAL ) > 0 ) {
+        (new PhotoListDialog( this, mApp_mData )).show();
+      } else {
+        TDToast.makeWarn( R.string.no_photos );
+      }
     } else if ( TDLevel.overExpert && p++ == pos ) { // AUDIO
       List< AudioInfo > audios = mApp_mData.selectAllAudios( TDInstance.sid );
       if ( audios.size() > 0 ) {  
@@ -969,7 +973,8 @@ public class ShotWindow extends Activity
     // if ( mMediaManager.isTopoDroidCamera() ) {
       // TDLog.v("take photo with TopoDroid");
       // new QCamCompass( this, this, (new MyBearingAndClino( mApp, mMediaManager.getImageFilepath()) ), this, false, false).show();  // false = with_box, false=with_delay
-      new QCamCompass( this, this, (new MyBearingAndClino( mApp, mMediaManager.getImageFilepath()) ), this, false, false, camera).show();  // false = with_box, false=with_delay
+      MyBearingAndClino bearing_clino = new MyBearingAndClino( mApp, mMediaManager.getImageFilepath());
+      new QCamCompass( this, this, bearing_clino, this, false, false, camera, mMediaManager).show();  // false = with_box, false=with_delay
     // } else {
     //   // TDLog.v("take photo with Android");
     //   try {
@@ -2927,7 +2932,9 @@ public class ShotWindow extends Activity
    */
   void startAudio( DBlock blk )
   {
-    (new AudioDialog( mActivity, /* this */ null, blk.mId, blk, MediaInfo.TYPE_SHOT )).show();
+    // (new AudioDialog( mActivity, /* this */ null, blk.mId, blk, MediaInfo.TYPE_SHOT )).show();
+    long audio_id = mApp_mData.getAudioId( TDInstance.sid, blk.mId, MediaInfo.TYPE_SHOT );
+    (new AudioDialog( mActivity, /* this */ null, audio_id, blk, MediaInfo.TYPE_SHOT )).show();
   }
 
 }

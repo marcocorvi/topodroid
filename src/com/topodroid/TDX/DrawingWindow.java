@@ -5862,8 +5862,8 @@ public class DrawingWindow extends ItemDrawer
     } else {
       mMediaManager.setPoint( x, y );
     }
-    long audio_id = mMediaManager.prepareNextAudioNeg( pid, "", MediaInfo.TYPE_PLOT );
-    // mMediaId = mApp_mData.nextAudioNegId( TDInstance.sid );
+    long audio_id = mMediaManager.prepareNextAudio( pid, "", MediaInfo.TYPE_PLOT );
+    // mMediaId = mApp_mData.nextAudioId( TDInstance.sid, MediaInfo.TYPE_PLOT );
     // File file = TDFile.getFile( TDPath.getSurveyWavFile( TDInstance.survey, Long.toString(mMediaId) ) );
     // TODO RECORD AUDIO
     new AudioDialog( mActivity, this, audio_id, null, MediaInfo.TYPE_PLOT ).show();

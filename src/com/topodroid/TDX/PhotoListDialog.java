@@ -56,6 +56,7 @@ public class PhotoListDialog extends MyDialog
   String mPhotoStation;
   String mPhotoComment;
   long   mPhotoId;
+  // List< PhotoInfo > mPhotos;
 
   /** cstr
    * @param ctx         context
@@ -65,6 +66,7 @@ public class PhotoListDialog extends MyDialog
   {
     super( ctx, null, R.string.PhotoListDialog ); // null app
     mApp_mData = data_helper;
+    // mPhotos    = photos;
   }
 
 
@@ -200,6 +202,7 @@ public class PhotoListDialog extends MyDialog
         }
       }.execute( photo );
     }
+    // mPhotos.remove( photo );
     updateDisplay( ); // FIXME
   }
 
@@ -210,7 +213,7 @@ public class PhotoListDialog extends MyDialog
   public void updatePhoto( PhotoInfo photo, String comment, String code )
   {
     // TDLog.Log( TDLog.LOG_PHOTO, "updatePhoto comment " + comment );
-    if ( mApp_mData.updatePhoto( photo.sid, photo.id, comment, code ) ) {
+    if ( mApp_mData.updatePhotoCommentAndCode( photo.sid, photo.id, comment, code ) ) {
       // need to update the PhotoInfo ?
       updateDisplay( ); // FIXME
     } else {

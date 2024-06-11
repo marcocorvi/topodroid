@@ -136,7 +136,7 @@ class DrawingPhotoEditDialog extends MyDialog
         mPhoto.setPhotoSize( size );
       } catch ( NumberFormatException e ) {
       }
-      TopoDroidApp.mData.updatePhoto( TDInstance.sid, mPhoto.mId, comment, mGeoCode );
+      TopoDroidApp.mData.updatePhotoCommentAndCode( TDInstance.sid, mPhoto.mId, comment, mGeoCode );
     // } else if ( vid == R.id.photo_delete ) {
     //   mParent.dropPhoto( mPhoto );
     //   break;

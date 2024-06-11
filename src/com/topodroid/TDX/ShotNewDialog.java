@@ -650,8 +650,9 @@ class ShotNewDialog extends MyDialog
       mTimer = new TimerTask( this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
       mTimer.execute();
     } else if ( cameraCheck && b == mBtnCamera ) {
-      new QCamCompass( mContext, TopoDroidApp.mShotWindow, this, null, true, true, PhotoInfo.CAMERA_TOPODROID ).show();
+      new QCamCompass( mContext, TopoDroidApp.mShotWindow, this, null, true, true, PhotoInfo.CAMERA_TOPODROID, null ).show();
                        // null inserter, with_box, with_delay
+                       // NOTE null MediaManager : do not insert photo record in table
     } else if ( b == mBtnBack ) {
       dismiss();
     }

@@ -70,19 +70,19 @@ class MediaManager
     return mPhotoId;
   }
 
-  /** @return the next negative audio index (ID)
+  /** @return the next audio index (ID)
    * @param item_id    reference item ID: plot ID because this method is not used for shot ID
    * @param comment    audio comment
    * @param type       reference item type (always TYPE_PLOT)
    * @note this is used only be DrawingWindow which calls it with item_id = pid
    */
-  long prepareNextAudioNeg( long item_id, String comment, long type )
+  long prepareNextAudio( long item_id, String comment, long type )
   {
     mItemId   = item_id;
     mItemType = type;
     mComment  = comment;
     mCode     = null;
-    mAudioId  = mData.nextAudioNegId( TDInstance.sid, mItemId, type ); // negative id's are for sketch audios
+    mAudioId  = mData.nextAudioId( TDInstance.sid, mItemId, type );
     mAudioFilepath = TDPath.getSurveyWavFile( TDInstance.survey, Long.toString(mAudioId) ); // audio file is "survey/id.wav"
     // mAudioFile = TDFile.getTopoDroidFile( mAudioFilepath );
     return mAudioId;
