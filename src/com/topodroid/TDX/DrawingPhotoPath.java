@@ -245,5 +245,12 @@ public class DrawingPhotoPath extends DrawingPointPath
   // IDrawingLink
   public float getLinkX() { return cx; }
   public float getLinkY() { return cy; }
+
+  // destructor
+  void destructor()
+  {
+    TopoDroidApp.mData.deletePhotoRecord( TDInstance.sid, mId );
+    TDFile.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString( mId ) ) );
+  }
 }
 

@@ -258,7 +258,7 @@ class AudioDialog extends MyDialog
   {
     assert( isRecPlay == STATUS_IDLE );
     TDFile.deleteFile( mFilepath );
-    TopoDroidApp.mData.deleteAudio( TDInstance.sid, mAudioId );
+    TopoDroidApp.mData.deleteAudioRecord( TDInstance.sid, mAudioId );
     if ( mParent != null ) mParent.deletedAudio( mAudioId );
   }
 

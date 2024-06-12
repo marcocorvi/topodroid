@@ -4043,12 +4043,13 @@ public class DrawingWindow extends ItemDrawer
     if ( point instanceof DrawingPhotoPath ) { 
       DrawingPhotoPath photo = (DrawingPhotoPath)point;
       if ( photo.mPicture != null ) mDrawingSurface.deletePath( photo.mPicture ); // delete associated picture
-      mApp_mData.deletePhoto( TDInstance.sid, photo.mId );
-      TDFile.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString( photo.mId ) ) );
+      photo.destructor();
     } else if ( point instanceof DrawingAudioPath ) { 
       DrawingAudioPath audio = (DrawingAudioPath)point;
-      mApp_mData.deleteNegAudio( TDInstance.sid, audio.mId );
-      TDFile.deleteFile( TDPath.getSurveyWavFile( TDInstance.survey, Long.toString( audio.mId ) ) );
+      audio.destructor();
+    // } else if ( point instanceof DrawingSensorPath ) { 
+    //   DrawingSensorPath sensor = (DrawingSensorPath)point;
+    //   mApp_mData.deleteSensorRecord( TDInstance.sid, sensor.mId );
     } else if ( BrushManager.isPointSection( point.mPointType ) ) {
       mDrawingSurface.clearXSectionOutline( TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) ) );
     }

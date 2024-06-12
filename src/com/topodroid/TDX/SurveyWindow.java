@@ -346,7 +346,7 @@ public class SurveyWindow extends Activity
     mApp_mData = TopoDroidApp.mData;
     if ( mApp_mData != null ) {
       doSetDeclination( mApp_mData.getSurveyDeclination( TDInstance.sid ) );
-      nrPhoto = mApp_mData.countAllShotPhotos( TDInstance.sid, TDStatus.NORMAL );
+      nrPhoto = mApp_mData.countAllPhotos( TDInstance.sid, TDStatus.NORMAL );
     }
     setButtonPhoto( nrPhoto );
   }

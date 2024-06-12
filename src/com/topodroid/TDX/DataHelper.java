@@ -2554,9 +2554,9 @@ public class DataHelper extends DataSetObservable
   private static final String qjPhotosXSection  =
     "select p.id, x.id, p.title, x.name, p.date, p.comment, p.camera, p.code, p.reftype from photos as p join plots as x on p.shotId=x.id where p.surveyId=? AND x.surveyId=? AND p.status=? AND p.reftype=3";
 
-  // used in countAllShotPhotos
-  private static final String cntShotPhotos      =
-    "select count(p.id) from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and p.status=? AND p.reftype=1";
+  // // used in countAllShotPhotos
+  // private static final String cntShotPhotos      =
+  //   "select count(p.id) from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and p.status=? AND p.reftype=1";
 
   private static final String qFirstStation = "select fStation from shots where surveyId=? AND fStation!=\"\" AND tStation!=\"\" limit 1 ";
   private static final String qHasStation   = "select id, fStation, tStation from shots where surveyId=? and ( fStation=? or tStation=? ) order by id ";
@@ -2665,6 +2665,8 @@ public class DataHelper extends DataSetObservable
     }
     return list;
   }
+
+  // AUDIO -----------------------------------------------------------
 
   /** @return audio info for a given shot
    * @param sid   survey ID
@@ -2866,46 +2868,71 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
+  // /** drop an audio record
+  //  * @param sid   survey id
+  //  * @param bid   shot-id is positive, sketch audio index if negative
+  //  */
+  // void deleteAudio( long sid, long bid ) 
+  // {
+  //   if ( myDB == null ) return;
+  //   try {
+  //     myDB.delete( AUDIO_TABLE, WHERE_SID_SHOTID, new String[]{ Long.toString(sid), Long.toString(bid) } );
+  //   } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+  //   } catch (SQLiteException e) { logError("audio delete", e); }
+  // }
+
   /** drop an audio record
-   * @param sid   survey id
-   * @param bid   shot-id is positive, sketch audio index if negative
+   * @param sid   survey ID
+   * @param id    audio ID
    */
-  void deleteAudio( long sid, long bid )
-  {
-    if ( myDB == null ) return;
-    try {
-      myDB.delete( AUDIO_TABLE, WHERE_SID_SHOTID, new String[]{ Long.toString(sid), Long.toString(bid) } );
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch (SQLiteException e) { logError("audio delete", e); }
-  }
+  void deleteAudioRecord( long sid, long id ) { deleteFromTable( sid, id, AUDIO_TABLE ); }
 
-  // delete a neg audio record 
-  // @param sid   survey id
-  // @param id    audio id (neg)
-  void deleteNegAudio( long sid, long id )
-  {
-    if ( myDB == null ) return;
-    try {
-      myDB.delete( AUDIO_TABLE, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e ); 
-    } catch (SQLiteException e) { logError("photo delete", e); }
-  }
+  // // delete a neg audio record 
+  // // @param sid   survey id
+  // // @param id    audio id (neg)
+  // void deleteNegAudio( long sid, long id )
+  // {
+  //   if ( myDB == null ) return;
+  //   try {
+  //     myDB.delete( AUDIO_TABLE, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
+  //   } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e ); 
+  //   } catch (SQLiteException e) { logError("photo delete", e); }
+  // }
 
-  /** @return the number of shot photos of a survey
+  // PHOTO ---------------------------------------------------------------------------
+
+  /** @return the number of photos of a survey with a given status
    * @param sid    survey ID
    * @param status photo status
+   * @note the number of photos is used to avoid opening the photo-list dialog in case there is no photo
    */
-  int countAllShotPhotos( long sid, long status )
+  int countAllPhotos( long sid, long status )
   {
-    if ( myDB == null ) return 0;
+    if ( myDB == null ) return -1;
     int ret = 0;
-    Cursor cursor = myDB.rawQuery( cntShotPhotos, new String[] { Long.toString(sid), Long.toString(sid), Long.toString(status) } );
-    if (cursor.moveToFirst()) {
-      ret = (int)( cursor.getLong(0) );
+    Cursor cursor = myDB.rawQuery( qjCountPhoto, new String[] { Long.toString(sid), Long.toString(status) } );
+    if ( cursor.moveToFirst() ) { // update
+      ret = (int)cursor.getLong(0);
     }
-    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    if ( ! cursor.isClosed() ) cursor.close();
     return ret;
   }
+
+  // /** @return the number of shot photos of a survey
+  //  * @param sid    survey ID
+  //  * @param status photo status
+  //  */
+  // int countAllShotPhotos( long sid, long status )
+  // {
+  //   if ( myDB == null ) return 0;
+  //   int ret = 0;
+  //   Cursor cursor = myDB.rawQuery( cntShotPhotos, new String[] { Long.toString(sid), Long.toString(sid), Long.toString(status) } );
+  //   if (cursor.moveToFirst()) {
+  //     ret = (int)( cursor.getLong(0) );
+  //   }
+  //   if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+  //   return ret;
+  // }
 
   //
   // select p.id, p.shotId, p.title, s.fStation, s.tStation, p.date, p.comment from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and p.status=?
@@ -2955,7 +2982,7 @@ public class DataHelper extends DataSetObservable
                                  cursor.getLong(0), // id
                                  cursor.getLong(1),
                                  cursor.getString(2),
-                                 cursor.getString(3),      // plot name
+                                 cursor.getString(3),      // xsection plot name
                                  cursor.getString(4),
                                  cursor.getString(5),
                                  (int)(cursor.getLong(6)), // camera
@@ -3012,22 +3039,6 @@ public class DataHelper extends DataSetObservable
       list.addAll( selectAllPhotosXSection( sid, status ) );
     }
     return list;
-  }
-
-  /** @return the number of photos of a survey with a given status
-   * @param sid    survey ID
-   * @param status photo status
-   */
-  int countAllPhotos( long sid, long status )
-  {
-    if ( myDB == null ) return -1;
-    int ret = 0;
-    Cursor cursor = myDB.rawQuery( qjCountPhoto, new String[] { Long.toString(sid), Long.toString(status) } );
-    if ( cursor.moveToFirst() ) { // update
-      ret = (int)cursor.getLong(0);
-    }
-    if ( ! cursor.isClosed() ) cursor.close();
-    return ret;
   }
 
   /** insert or update a photo
@@ -3108,6 +3119,17 @@ public class DataHelper extends DataSetObservable
 
     return list;
   }
+
+
+  /** delete a photo record
+   * @param sid   survey ID
+   * @param id    photo ID
+   */
+  void deletePhotoRecord( long sid, long id ) { deleteFromTable( sid, id, PHOTO_TABLE ); }
+
+
+
+  // FIXED -------------------------------------------------------------------
 
   boolean hasFixed( long sid, int status )
   {
@@ -3241,19 +3263,7 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
-  boolean hasSurveyPlot( long sid, String name )
-  {
-    boolean ret = false;
-    if ( myDB != null ) {
-      // Cursor cursor = myDB.query( PLOT_TABLE, new String[]{ "id", "name" },
-      //     WHERE_SID_NAME, new String[]{ Long.toString( sid ), name },
-      //     null, null, "id" );
-      Cursor cursor = myDB.rawQuery( qHasPlot, new String[]{ Long.toString( sid ), name } );
-      if (cursor.moveToFirst()) ret = true;
-      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-    }
-    return ret;
-  }
+  // STATION ------------------------------------------------------------------
 
   boolean hasSurveyStation( long sid, String start )
   {
@@ -3287,6 +3297,108 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
+  /** @return the name of the TO station of the shot with the given FROM station (or null if the shot was not found)
+   * @param sid    survey ID
+   * @param fStation FROM station
+   * @note the returned TO station can be empty
+   */
+  String nextStation( long sid, String fStation )
+  {
+    if ( myDB == null ) return null;
+    // Cursor cursor = myDB.query( SHOT_TABLE,
+    //       new String[] { "tStation" }, // columns
+    //       "surveyId=? and fStation=? ", 
+    //       new String[] { Long.toString(sid), fStation },
+    //       null, null, null );  // groupBy, having, order by
+    Cursor cursor = myDB.rawQuery( qNextStation, new String[] { Long.toString(sid), fStation } );
+    String ret = null;
+    if ( cursor.moveToFirst() ) {
+      do {
+        ret = cursor.getString( 0 );
+      } while ( ret.length() == 0 && cursor.moveToNext());
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return ret;
+  }
+
+  /** @return the name of the last station
+   * @param sid    survey ID
+   */
+  String getLastStationName( long sid )
+  {
+    if ( myDB == null ) return null;
+    // Cursor cursor = myDB.query(SHOT_TABLE,
+    //   new String[] { "fStation", "tStation" },
+    //   WHERE_SID, new String[] { Long.toString(sid) },
+    //   null,  // groupBy
+    //   null,  // having
+    //   "id DESC" // order by
+    // );
+    Cursor cursor = myDB.rawQuery( qLastStation, new String[] { Long.toString(sid) } );
+    String ret = DistoXStationName.mInitialStation;
+    if (cursor.moveToFirst()) {
+      do {
+        String from = cursor.getString(0);
+        String to = cursor.getString(1);
+        if ( from.length() > 0 && to.length() > 0 ) {
+          ret = ( from.compareTo(to) > 0 )? from : to;
+          break;
+        }
+      } while (cursor.moveToNext());
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return ret;
+  }
+
+  // FIXME this is ok only for numbers
+  // String getNextStationName( long sid )
+  // {
+  //   if ( myDB == null ) return null;
+  //   Cursor cursor = myDB.query(SHOT_TABLE,
+  //     new String[] { "fStation", "tStation" },
+  //      WHERE_SID,
+  //     new String[] { Long.toString(sid) },
+  //     null,  // groupBy
+  //     null,  // having
+  //     "id DESC" // order by
+  //   );
+  //   int ret = -1;
+  //   if (cursor.moveToFirst()) {
+  //     do {
+  //       try {
+  //         if ( cursor.getString(0).length() > 0 ) {
+  //           int f = Integer.parseInt( cursor.getString(0) );
+  //           if ( f > ret ) ret = f;
+  //         }
+  //         if ( cursor.getString(1).length() > 0 ) {
+  //           int t = Integer.parseInt( cursor.getString(1) );
+  //           if ( t > ret ) ret = t;
+  //         }
+  //       } catch ( NumberFormatException e ) {
+  //         TDLog.Error( "getNextStationName parseInt error: " + cursor.getString(0) + " " + cursor.getString(1) );
+  //       }
+  //     } while (cursor.moveToNext());
+  //   }
+  //   if (cursor != null && !cursor.isClosed()) cursor.close();
+  //   ++ ret;
+  //   return Integer.toString(ret);
+  // }
+
+  // PLOT ------------------------------------------------------------------
+
+  boolean hasSurveyPlot( long sid, String name )
+  {
+    boolean ret = false;
+    if ( myDB != null ) {
+      // Cursor cursor = myDB.query( PLOT_TABLE, new String[]{ "id", "name" },
+      //     WHERE_SID_NAME, new String[]{ Long.toString( sid ), name },
+      //     null, null, "id" );
+      Cursor cursor = myDB.rawQuery( qHasPlot, new String[]{ Long.toString( sid ), name } );
+      if (cursor.moveToFirst()) ret = true;
+      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    }
+    return ret;
+  }
 
   int maxPlotIndex( long sid )
   {
@@ -3340,7 +3452,11 @@ public class DataHelper extends DataSetObservable
     return plot;
   }
 
-
+  /** @return the list of all plots of a survey
+   * @param sid        survey ID
+   * @param where_str  WHERE string
+   * @param where      WHERE args
+   */
   private List< PlotInfo > doSelectAllPlots( long sid, String where_str, String[] where )
   {
     List< PlotInfo > list = new ArrayList<>();
@@ -3356,6 +3472,9 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
+  /** @return the list of all plot names of a survey
+   * @param survey     survey name
+   */
   public List< String > selectAllPlotNames( String survey )
   {
     List< String > list = new ArrayList<>();
@@ -3382,10 +3501,7 @@ public class DataHelper extends DataSetObservable
    */
   List< PlotInfo > selectAllPlots( long sid )
   {
-    return doSelectAllPlots( sid, 
-                             WHERE_SID,
-                             new String[] { Long.toString(sid) }
-    );
+    return doSelectAllPlots( sid, WHERE_SID, new String[] { Long.toString(sid) } );
   }
 
   /** @return the list of plots for a given survey and with given status
@@ -3394,10 +3510,7 @@ public class DataHelper extends DataSetObservable
    */
   List< PlotInfo > selectAllPlots( long sid, long status )
   {
-    return doSelectAllPlots( sid, 
-                             WHERE_SID_STATUS,
-                             new String[] { Long.toString(sid), Long.toString(status) }
-    );
+    return doSelectAllPlots( sid, WHERE_SID_STATUS, new String[] { Long.toString(sid), Long.toString(status) } );
   }
 
   /** @return the list of plots for a given survey and with given status, and type
@@ -3506,6 +3619,160 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
+  void updatePlotName( long sid, long pid, String name )
+  {
+    // if ( updatePlotNameStmt == null ) {
+    //   updatePlotNameStmt = myDB.compileStatement( "UPDATE plots set name=? WHERE surveyId=? AND id=?" );
+    // }
+    // updatePlotNameStmt.bindString( 1, name );
+    // updatePlotNameStmt.bindLong( 2, sid );
+    // updatePlotNameStmt.bindLong( 3, pid );
+    // doStatement( updatePlotNameStmt, "plot name" );
+
+    ContentValues cv = new ContentValues();
+    cv.put( "name", name );
+    doUpdate( PLOT_TABLE, cv, "surveyId=? AND id=?", new String[] { Long.toString(sid), Long.toString(pid) }, "plot name" );
+  }
+
+  void updatePlotMaxScrap( long sid, long pid, int maxscrap )
+  {
+    ContentValues cv = new ContentValues();
+    cv.put( "maxscrap", maxscrap );
+    doUpdate( PLOT_TABLE, cv, "surveyId=? AND id=?", new String[] { Long.toString(sid), Long.toString(pid) }, "plot maxscrap" );
+  }
+
+  void updatePlotOrientation( long sid, long pid, int orient )
+  {
+    // if ( updatePlotOrientationStmt == null ) {
+    //   updatePlotOrientationStmt = myDB.compileStatement( "UPDATE plots set orientation=? WHERE surveyId=? AND id=?" );
+    // }
+    // updatePlotOrientationStmt.bindLong( 1, orient );
+    // updatePlotOrientationStmt.bindLong( 2, sid );
+    // updatePlotOrientationStmt.bindLong( 3, pid );
+    // doStatement( updatePlotOrientationStmt, "plot orientation" );
+
+    ContentValues cv = new ContentValues();
+    cv.put( "orientation", orient );
+    doUpdate( PLOT_TABLE, cv, "surveyId=? AND id=?", new String[] { Long.toString(sid), Long.toString(pid) }, "plot orient" );
+  }
+
+  void updatePlotAzimuthClino( long sid, long pid, float b, float c )
+  {
+    // if ( updatePlotAzimuthClinoStmt == null ) {
+    //   updatePlotAzimuthClinoStmt = myDB.compileStatement( "UPDATE plots set azimuth=?, clino=? WHERE surveyId=? AND id=?" );
+    // }
+    // updatePlotAzimuthClinoStmt.bindDouble( 1, b );
+    // updatePlotAzimuthClinoStmt.bindDouble( 2, c );
+    // updatePlotAzimuthClinoStmt.bindLong( 3, sid );
+    // updatePlotAzimuthClinoStmt.bindLong( 4, pid );
+    // return doStatement( updatePlotAzimuthClinoStmt, "plot azi+clino" );
+
+    ContentValues cv = new ContentValues();
+    cv.put( "azimuth", b );
+    cv.put( "clino", c );
+    doUpdate( PLOT_TABLE, cv, "surveyId=? AND id=?", new String[] { Long.toString(sid), Long.toString(pid) }, "plot dir" );
+    // return true; // FIXME
+  }
+ 
+  /** @return the plot name 
+   * @param sid   survey ID
+   * @param pid   plot ID
+   */
+  String getPlotName( long sid, long pid )
+  {
+    if ( myDB == null ) return null;
+    String ret = null;
+    Cursor cursor = myDB.query( PLOT_TABLE, mPlotName,
+              WHERE_SID_ID,
+              new String[] { Long.toString(sid), Long.toString(pid) },
+              null, null, null );
+    if (cursor != null ) {
+      if (cursor.moveToFirst() ) ret = cursor.getString(0);
+      if (!cursor.isClosed()) cursor.close();
+    }
+    return ret;
+  }
+
+  /** @return the info of a plot
+   * @param sid    survey ID
+   * @param name   plot name
+   */
+  PlotInfo getPlotInfo( long sid, String name )
+  {
+    PlotInfo plot = null;
+    if ( myDB != null && name != null ) {
+      Cursor cursor = myDB.query( PLOT_TABLE, mPlotFields,
+                WHERE_SID_NAME,
+                new String[] { Long.toString(sid), name },
+                null, null, null );
+      if (cursor != null ) {
+        if (cursor.moveToFirst() ) plot = makePlotInfo( sid, cursor );
+        if (!cursor.isClosed()) cursor.close();
+      }
+    }
+    return plot;
+  }
+ 
+  /** @return the info of a plot
+   * @param sid    survey ID
+   * @param pid    plot ID
+   */
+  PlotInfo getPlotInfo( long sid, long pid )
+  {
+    PlotInfo plot = null;
+    if ( myDB != null && pid >= 0 ) {
+      Cursor cursor = myDB.query( PLOT_TABLE, mPlotFields,
+                WHERE_SID_ID,
+                new String[] { Long.toString(sid), Long.toString(pid) },
+                null, null, null );
+      if (cursor != null ) {
+        if (cursor.moveToFirst() ) plot = makePlotInfo( sid, cursor );
+        if (!cursor.isClosed()) cursor.close();
+      }
+    }
+    return plot;
+  }
+
+  // XSECTION ------------------------------------------------------------
+
+  // FIXME 'xx' is the prefix-name for sections
+  private static final String prefix = "xx";
+  private static final int prefix_length = 2; // prefix.length();
+
+  String getNextSectionId( long sid )
+  {
+    int max = 0; 
+    if ( myDB == null ) return "xx0"; // FIXME null
+    // TDLog.v( "DB getNextSectionId sid " + sid + " prefix " + prefix );
+    Cursor cursor = myDB.query( PLOT_TABLE, 
+                new String[] { "id", "type", "name" },
+                WHERE_SID,
+                new String[] { Long.toString(sid) },
+                null, null, null );
+    if (cursor != null ) {
+      if (cursor.moveToFirst() ) {
+        do {
+          long plot_type = cursor.getInt(1);    // plot_type is not used
+          String name   = cursor.getString(2);
+          // TDLog.v( "DB plot name " + name + " prefix " + prefix );
+          if ( name.startsWith( prefix ) /* && ( plot_type == PlotType.PLOT_PHOTO || plot_type == PlotType.PLOT_SECTION ) */ ) {
+            try {
+              int k = Integer.parseInt( name.substring( prefix_length ) );
+              if ( k >= max ) max = k+1;
+            } catch ( NumberFormatException e ) {
+              TDLog.Error( "DB getNextSectionId parse Int error: survey ID " + sid );
+            }
+          }
+        } while (cursor.moveToNext());
+      }
+      if (!cursor.isClosed()) cursor.close();
+    }
+    // return prefix + Integer.toString(max);
+    return String.format(Locale.US, "%s%d", prefix, max );
+  }
+
+  // SHOT -------------------------------------------------------------
+
   /** @return true if the given survey has a shot ID
    * @param sid    survey ID
    * @param id     shot ID
@@ -3536,30 +3803,6 @@ public class DataHelper extends DataSetObservable
     //   null ); // order by
     Cursor cursor = myDB.rawQuery( qHasShot, new String[] { Long.toString(sid), fStation, tStation, tStation, fStation } );
     boolean ret = cursor.moveToFirst();
-    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-    return ret;
-  }
-
-  /** @return the name of the TO station of the shot with the given FROM station (or null if the shot was not found)
-   * @param sid    survey ID
-   * @param fStation FROM station
-   * @note the returned TO station can be empty
-   */
-  String nextStation( long sid, String fStation )
-  {
-    if ( myDB == null ) return null;
-    // Cursor cursor = myDB.query( SHOT_TABLE,
-    //       new String[] { "tStation" }, // columns
-    //       "surveyId=? and fStation=? ", 
-    //       new String[] { Long.toString(sid), fStation },
-    //       null, null, null );  // groupBy, having, order by
-    Cursor cursor = myDB.rawQuery( qNextStation, new String[] { Long.toString(sid), fStation } );
-    String ret = null;
-    if ( cursor.moveToFirst() ) {
-      do {
-        ret = cursor.getString( 0 );
-      } while ( ret.length() == 0 && cursor.moveToNext());
-    }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return ret;
   }
@@ -3723,69 +3966,6 @@ public class DataHelper extends DataSetObservable
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return block;
   }
-
-  /** @return the name of the last station
-   * @param sid    survey ID
-   */
-  String getLastStationName( long sid )
-  {
-    if ( myDB == null ) return null;
-    // Cursor cursor = myDB.query(SHOT_TABLE,
-    //   new String[] { "fStation", "tStation" },
-    //   WHERE_SID, new String[] { Long.toString(sid) },
-    //   null,  // groupBy
-    //   null,  // having
-    //   "id DESC" // order by
-    // );
-    Cursor cursor = myDB.rawQuery( qLastStation, new String[] { Long.toString(sid) } );
-    String ret = DistoXStationName.mInitialStation;
-    if (cursor.moveToFirst()) {
-      do {
-        String from = cursor.getString(0);
-        String to = cursor.getString(1);
-        if ( from.length() > 0 && to.length() > 0 ) {
-          ret = ( from.compareTo(to) > 0 )? from : to;
-          break;
-        }
-      } while (cursor.moveToNext());
-    }
-    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-    return ret;
-  }
-
-  // FIXME this is ok only for numbers
-  // String getNextStationName( long sid )
-  // {
-  //   if ( myDB == null ) return null;
-  //   Cursor cursor = myDB.query(SHOT_TABLE,
-  //     new String[] { "fStation", "tStation" },
-  //      WHERE_SID,
-  //     new String[] { Long.toString(sid) },
-  //     null,  // groupBy
-  //     null,  // having
-  //     "id DESC" // order by
-  //   );
-  //   int ret = -1;
-  //   if (cursor.moveToFirst()) {
-  //     do {
-  //       try {
-  //         if ( cursor.getString(0).length() > 0 ) {
-  //           int f = Integer.parseInt( cursor.getString(0) );
-  //           if ( f > ret ) ret = f;
-  //         }
-  //         if ( cursor.getString(1).length() > 0 ) {
-  //           int t = Integer.parseInt( cursor.getString(1) );
-  //           if ( t > ret ) ret = t;
-  //         }
-  //       } catch ( NumberFormatException e ) {
-  //         TDLog.Error( "getNextStationName parseInt error: " + cursor.getString(0) + " " + cursor.getString(1) );
-  //       }
-  //     } while (cursor.moveToNext());
-  //   }
-  //   if (cursor != null && !cursor.isClosed()) cursor.close();
-  //   ++ ret;
-  //   return Integer.toString(ret);
-  // }
 
   DBlock selectNextLegShot( long shot_id, long sid )
   {
@@ -4325,6 +4505,8 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
+  // SURVEY ------------------------------------------------------------------------------
+
   SurveyInfo selectSurveyInfo( long sid )
   {
     SurveyInfo info = null;
@@ -4349,6 +4531,11 @@ public class DataHelper extends DataSetObservable
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return info;
   }
+
+  /** @return the list of surveys
+   */
+  public List< String > selectAllSurveys() { return selectAllNames( SURVEY_TABLE ); }
+
   // ----------------------------------------------------------------------
   // SELECT: LIST SURVEY / CALIB NAMES
 
@@ -4376,7 +4563,6 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
-  public List< String > selectAllSurveys() { return selectAllNames( SURVEY_TABLE ); }
 
   // ----------------------------------------------------------------------
   // CONFIG DATA
@@ -4457,8 +4643,7 @@ public class DataHelper extends DataSetObservable
     }
   }
 
-  // ----------------------------------------------------------------------
-  // symbols
+  // SYMBOLS ------------------------------------------------------------------
 
   /** store a symbol state (enabled/disabled)
    * @param name    symbol name
@@ -4504,7 +4689,7 @@ public class DataHelper extends DataSetObservable
    */
   boolean hasSymbolName( String name ) { return ( getValue( name ) != null ); }
 
-  // ----------------------------------------------------------------------
+  // UTILITIES ----------------------------------------------------------------------
   /* Set the current survey/calib name.
    * If the survey/calib name does not exist a new record is inserted in the table
    */
@@ -4576,156 +4761,6 @@ public class DataHelper extends DataSetObservable
       if ( ! doInsert( table, cv, "set name" ) ) return -1L;
     }
     return id;
-  }
-
-  // FIXME 'xx' is the prefix-name for sections
-  private static final String prefix = "xx";
-  private static final int prefix_length = 2; // prefix.length();
-
-  String getNextSectionId( long sid )
-  {
-    int max = 0; 
-    if ( myDB == null ) return "xx0"; // FIXME null
-    // TDLog.v( "DB getNextSectionId sid " + sid + " prefix " + prefix );
-    Cursor cursor = myDB.query( PLOT_TABLE, 
-                new String[] { "id", "type", "name" },
-                WHERE_SID,
-                new String[] { Long.toString(sid) },
-                null, null, null );
-    if (cursor != null ) {
-      if (cursor.moveToFirst() ) {
-        do {
-          long plot_type = cursor.getInt(1);    // plot_type is not used
-          String name   = cursor.getString(2);
-          // TDLog.v( "DB plot name " + name + " prefix " + prefix );
-          if ( name.startsWith( prefix ) /* && ( plot_type == PlotType.PLOT_PHOTO || plot_type == PlotType.PLOT_SECTION ) */ ) {
-            try {
-              int k = Integer.parseInt( name.substring( prefix_length ) );
-              if ( k >= max ) max = k+1;
-            } catch ( NumberFormatException e ) {
-              TDLog.Error( "DB getNextSectionId parse Int error: survey ID " + sid );
-            }
-          }
-        } while (cursor.moveToNext());
-      }
-      if (!cursor.isClosed()) cursor.close();
-    }
-    // return prefix + Integer.toString(max);
-    return String.format(Locale.US, "%s%d", prefix, max );
-  }
-
-  void updatePlotName( long sid, long pid, String name )
-  {
-    // if ( updatePlotNameStmt == null ) {
-    //   updatePlotNameStmt = myDB.compileStatement( "UPDATE plots set name=? WHERE surveyId=? AND id=?" );
-    // }
-    // updatePlotNameStmt.bindString( 1, name );
-    // updatePlotNameStmt.bindLong( 2, sid );
-    // updatePlotNameStmt.bindLong( 3, pid );
-    // doStatement( updatePlotNameStmt, "plot name" );
-
-    ContentValues cv = new ContentValues();
-    cv.put( "name", name );
-    doUpdate( PLOT_TABLE, cv, "surveyId=? AND id=?", new String[] { Long.toString(sid), Long.toString(pid) }, "plot name" );
-  }
-
-  void updatePlotMaxScrap( long sid, long pid, int maxscrap )
-  {
-    ContentValues cv = new ContentValues();
-    cv.put( "maxscrap", maxscrap );
-    doUpdate( PLOT_TABLE, cv, "surveyId=? AND id=?", new String[] { Long.toString(sid), Long.toString(pid) }, "plot maxscrap" );
-  }
-
-  void updatePlotOrientation( long sid, long pid, int orient )
-  {
-    // if ( updatePlotOrientationStmt == null ) {
-    //   updatePlotOrientationStmt = myDB.compileStatement( "UPDATE plots set orientation=? WHERE surveyId=? AND id=?" );
-    // }
-    // updatePlotOrientationStmt.bindLong( 1, orient );
-    // updatePlotOrientationStmt.bindLong( 2, sid );
-    // updatePlotOrientationStmt.bindLong( 3, pid );
-    // doStatement( updatePlotOrientationStmt, "plot orientation" );
-
-    ContentValues cv = new ContentValues();
-    cv.put( "orientation", orient );
-    doUpdate( PLOT_TABLE, cv, "surveyId=? AND id=?", new String[] { Long.toString(sid), Long.toString(pid) }, "plot orient" );
-  }
-
-  void updatePlotAzimuthClino( long sid, long pid, float b, float c )
-  {
-    // if ( updatePlotAzimuthClinoStmt == null ) {
-    //   updatePlotAzimuthClinoStmt = myDB.compileStatement( "UPDATE plots set azimuth=?, clino=? WHERE surveyId=? AND id=?" );
-    // }
-    // updatePlotAzimuthClinoStmt.bindDouble( 1, b );
-    // updatePlotAzimuthClinoStmt.bindDouble( 2, c );
-    // updatePlotAzimuthClinoStmt.bindLong( 3, sid );
-    // updatePlotAzimuthClinoStmt.bindLong( 4, pid );
-    // return doStatement( updatePlotAzimuthClinoStmt, "plot azi+clino" );
-
-    ContentValues cv = new ContentValues();
-    cv.put( "azimuth", b );
-    cv.put( "clino", c );
-    doUpdate( PLOT_TABLE, cv, "surveyId=? AND id=?", new String[] { Long.toString(sid), Long.toString(pid) }, "plot dir" );
-    // return true; // FIXME
-  }
- 
-  /** @return the plot name 
-   * @param sid   survey ID
-   * @param pid   plot ID
-   */
-  String getPlotName( long sid, long pid )
-  {
-    if ( myDB == null ) return null;
-    String ret = null;
-    Cursor cursor = myDB.query( PLOT_TABLE, mPlotName,
-              WHERE_SID_ID,
-              new String[] { Long.toString(sid), Long.toString(pid) },
-              null, null, null );
-    if (cursor != null ) {
-      if (cursor.moveToFirst() ) ret = cursor.getString(0);
-      if (!cursor.isClosed()) cursor.close();
-    }
-    return ret;
-  }
-
-  /** @return the info of a plot
-   * @param sid    survey ID
-   * @param name   plot name
-   */
-  PlotInfo getPlotInfo( long sid, String name )
-  {
-    PlotInfo plot = null;
-    if ( myDB != null && name != null ) {
-      Cursor cursor = myDB.query( PLOT_TABLE, mPlotFields,
-                WHERE_SID_NAME,
-                new String[] { Long.toString(sid), name },
-                null, null, null );
-      if (cursor != null ) {
-        if (cursor.moveToFirst() ) plot = makePlotInfo( sid, cursor );
-        if (!cursor.isClosed()) cursor.close();
-      }
-    }
-    return plot;
-  }
- 
-  /** @return the info of a plot
-   * @param sid    survey ID
-   * @param pid    plot ID
-   */
-  PlotInfo getPlotInfo( long sid, long pid )
-  {
-    PlotInfo plot = null;
-    if ( myDB != null && pid >= 0 ) {
-      Cursor cursor = myDB.query( PLOT_TABLE, mPlotFields,
-                WHERE_SID_ID,
-                new String[] { Long.toString(sid), Long.toString(pid) },
-                null, null, null );
-      if (cursor != null ) {
-        if (cursor.moveToFirst() ) plot = makePlotInfo( sid, cursor );
-        if (!cursor.isClosed()) cursor.close();
-      }
-    }
-    return plot;
   }
  
   // NEW X_SECTIONS
@@ -4898,21 +4933,21 @@ public class DataHelper extends DataSetObservable
     return true;
   }
 
-  /** delete a photo
-   * @param sid     survey ID
-   * @param id      photo ID
-   */
-  void deletePhoto( long sid, long id )
-  {
-    if ( myDB == null ) return;
-    try {
-      myDB.beginTransaction();
-      myDB.delete( PHOTO_TABLE, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
-      myDB.setTransactionSuccessful();
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch (SQLiteException e) { logError("photo delete", e); 
-    } finally { myDB.endTransaction(); }
-  }
+  // /** delete a photo
+  //  * @param sid     survey ID
+  //  * @param id      photo ID
+  //  */
+  // void deletePhoto( long sid, long id )
+  // {
+  //   if ( myDB == null ) return;
+  //   try {
+  //     myDB.beginTransaction();
+  //     myDB.delete( PHOTO_TABLE, WHERE_SID_ID, new String[]{ Long.toString(sid), Long.toString(id) } );
+  //     myDB.setTransactionSuccessful();
+  //   } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+  //   } catch (SQLiteException e) { logError("photo delete", e); 
+  //   } finally { myDB.endTransaction(); }
+  // }
 
   /** make the content-value set for a sensor data
    * @param sid       survey id
@@ -5273,49 +5308,6 @@ public class DataHelper extends DataSetObservable
   long maxShotId( long sid )
   {
     return maxId( SHOT_TABLE, sid );
-  }
-
-  /** @return the maximum ID in a table for a given survey
-   * @param table   table
-   * @param sid     survey ID
-   */
-  private long maxId( String table, long sid )
-  {
-    long id = 1;
-    if ( myDB == null ) return 1L;
-    Cursor cursor = myDB.query( table, new String[] { "max(id)" },
-                         "surveyId=?", 
-                         new String[] { Long.toString(sid) },
-                         null, null, null );
-    if (cursor != null ) {
-      if (cursor.moveToFirst() ) {
-        id = 1 + cursor.getLong(0);
-      }
-      if (!cursor.isClosed()) cursor.close();
-    }
-    return id;
-  }
-
-  /** @return the minimum ID in a table for a given survey
-   * @param table   table
-   * @param sid     survey ID
-   * @note used only for AUDIO table to get negative indices
-   */
-  private long minId( String table, long sid )
-  {
-    if ( myDB == null ) return -2L;
-    long id = -1L;
-    Cursor cursor = myDB.query( table, new String[] { "min(id)" },
-                         "surveyId=?", 
-                         new String[] { Long.toString(sid) },
-                         null, null, null );
-    if (cursor != null ) {
-      if (cursor.moveToFirst() ) {
-        if ( cursor.getLong(0) < id ) id = cursor.getLong(0);
-      }
-      if (!cursor.isClosed()) cursor.close();
-    }
-    return id - 1L; // decrement
   }
   
   /** move all shots records, starting with a given ID, from one survey to another
@@ -6828,6 +6820,66 @@ public class DataHelper extends DataSetObservable
 
   // ----------------------------------------------------------------------
   // DATABASE TABLES
+
+  /** delete a record from a table
+   * @param sid   survey ID
+   * @param id    record ID
+   * @param table table name
+   */
+  private void deleteFromTable( long sid, long id, String table )
+  {
+    if ( myDB == null ) return;
+    try {
+      myDB.beginTransaction();
+      myDB.execSQL( "DELETE FROM " + table + " WHERE surveyId=" + sid + " AND id=" + id );
+      myDB.setTransactionSuccessful();
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch (SQLiteException e) { logError("delete from table", e);
+    } finally { myDB.endTransaction(); }
+  }
+
+  /** @return the maximum ID in a table for a given survey
+   * @param table   table
+   * @param sid     survey ID
+   */
+  private long maxId( String table, long sid )
+  {
+    long id = 1;
+    if ( myDB == null ) return 1L;
+    Cursor cursor = myDB.query( table, new String[] { "max(id)" },
+                         "surveyId=?", 
+                         new String[] { Long.toString(sid) },
+                         null, null, null );
+    if (cursor != null ) {
+      if (cursor.moveToFirst() ) {
+        id = 1 + cursor.getLong(0);
+      }
+      if (!cursor.isClosed()) cursor.close();
+    }
+    return id;
+  }
+
+  // /** @return the minimum ID in a table for a given survey
+  //  * @param table   table
+  //  * @param sid     survey ID
+  //  * @note used only for AUDIO table to get negative indices
+  //  */
+  // private long minId( String table, long sid )
+  // {
+  //   if ( myDB == null ) return -2L;
+  //   long id = -1L;
+  //   Cursor cursor = myDB.query( table, new String[] { "min(id)" },
+  //                        "surveyId=?", 
+  //                        new String[] { Long.toString(sid) },
+  //                        null, null, null );
+  //   if (cursor != null ) {
+  //     if (cursor.moveToFirst() ) {
+  //       if ( cursor.getLong(0) < id ) id = cursor.getLong(0);
+  //     }
+  //     if (!cursor.isClosed()) cursor.close();
+  //   }
+  //   return id - 1L; // decrement
+  // }
 
   private static class DistoXOpenHelper // extends SQLiteOpenHelper
   {

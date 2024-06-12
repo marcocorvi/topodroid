@@ -1,4 +1,4 @@
-   /* @file Scrap.java
+/** @file Scrap.java
  *
  * @author marco corvi
  * @date oct 2019
@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.utils.TDFile;
 import com.topodroid.ui.TDGreenDot;
 import com.topodroid.math.Point2D;
 import com.topodroid.prefs.TDSetting;
@@ -90,11 +91,24 @@ public class Scrap
   // }
 
   /** clear the sketch items in this scrap
+   * @note this is like DrawingWindow::deletePoint - TODO factorize
    */
   void clearSketchItems()
   {
     synchronized( TDPath.mSelectionLock ) { mSelection.clearSelectionPoints(); }
-    synchronized( TDPath.mCommandsLock ) { mCurrentStack.clear(); }
+    synchronized( TDPath.mCommandsLock ) { 
+      for ( ICanvasCommand cmd : mCurrentStack ) {
+        if ( cmd instanceof DrawingPhotoPath ) {
+          DrawingPhotoPath photo = (DrawingPhotoPath)cmd;
+          photo.destructor();
+        } else if ( cmd instanceof DrawingAudioPath ) {
+          DrawingAudioPath audio = (DrawingAudioPath)cmd;
+          audio.destructor();
+        // else if ( cmd instanceof DrawingSensorPath ) {
+        }
+      }
+      mCurrentStack.clear();
+    }
     synchronized( TDPath.mStationsLock ) { mUserStations.clear(); }
     mRedoStack.clear();
     syncClearSelected();

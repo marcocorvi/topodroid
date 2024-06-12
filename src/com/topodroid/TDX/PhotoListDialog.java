@@ -179,7 +179,7 @@ public class PhotoListDialog extends MyDialog
   public void dropPhoto( PhotoInfo photo )
   {
     long photo_id = photo.getId();
-    mApp_mData.deletePhoto( photo.getSurveyId(), photo_id );
+    mApp_mData.deletePhotoRecord( photo.getSurveyId(), photo_id );
     TDFile.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo.id) ) );
     if ( photo.getItemType() == MediaInfo.TYPE_PLOT ) {
       // get the plot tdr file
