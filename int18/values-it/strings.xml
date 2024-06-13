@@ -155,7 +155,7 @@
     <string name="calib_precision">Precisione</string>
     <string name="calib_iter">Iterazioni: %1$d</string>
     <string name="calib_dip">Dip Magnetica: %1$.1f</string>
-    <!-- TODO string name="calib_roll">Roll diff.: %1$.2f &#xb0;</string -->
+    <string name="calib_roll">Rot. diff.: %1$.2f &#xb0;</string>
     <string name="calib_reset">Resetta calibrazione sul DistoX?</string>
     <string name="calib_min_error">Minimo errore</string>
     <string name="magn_dip">Dip Magnetica &#8230;</string>
@@ -283,7 +283,7 @@
     <string name="datamode_diving">Modo dati profondo</string>
     <string name="illegal_data_value">Dati non corretti</string>
 
-    <!-- TODO string name="geocode_title">Geomorphology Code</string -->
+    <string name="geocode_title">Codice Geomorfologico</string>
     <string name="photo_title">FOTO</string>
     <string name="photo_text">Inserisci commento</string>
     <string name="photo_failed">Fallito salvataggio foto</string>
@@ -597,7 +597,7 @@
     <string name="section_line_not_allowed">Linea sezione non permessa</string>
 
     <!-- UNUSED string name="sensor">sensore</string -->
-    <!-- TODO string name="sensor_title">Add sensor measurement</string -->
+    <string name="sensor_title">Aggiungi misura sensore</string>
     <string name="sensor_gravity">gravità</string>
     <!-- UNUSED string name="sensor_humidity">umidità</string -->
     <string name="sensor_light">luce</string>
@@ -749,7 +749,7 @@
     <string name="hide_leg">Battute ripetute</string>
     <string name="hide_ids">ID misure</string>
     <string name="hide_splay">Misure laterali</string>
-    <!-- TODO string name="slope_lside">Slope l-side</string -->
+    <string name="slope_lside">Pendenza lato sx</string>
 
     <!-- UNUSED string name="plan">PIANTA</string -->
     <string name="extended">SEZIONE LONG.</string>
@@ -786,7 +786,7 @@
     <string name="button_apply"     >Applica</string>
     <string name="button_back"      >Indietro  </string>
     <string name="button_cancel"    >Annulla   </string>
-    <!-- TODO string name="button_geocode"   >GeoCode</string -->
+    <string name="button_geocode"   >Codice Geo</string>
     <!-- UNUSED string name="button_change"    >Cambia    </string -->
     <string name="button_clipboard" >Appunti</string>
     <string name="button_close"     >Chiudi    </string>
@@ -816,7 +816,7 @@
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Disegno</string>
-    <!-- TODO string name="button_less">Less</string -->
+    <string name="button_less">Meno</string>
     <string name="button_more"    >Altro</string>
     <string name="button_move"    >Muovi</string>
     <string name="button_next"    >Prossimo</string>
@@ -874,7 +874,7 @@
     <string name="button_xsection"  >Sezione trasversale</string>
     <string name="xsection">Sezione trasversale</string>
     <string name="buffer_size">Buffer: %1$d dati</string>
-    <!-- TODO string name="buffer_sorted">sorted</string -->
+    <string name="buffer_sorted">ordinato</string>
     <!-- UNUSED string name="buffer_unsorted">non ordinati</string -->
 
     <string name="mode_leg">Battute</string>
@@ -937,11 +937,11 @@
     <!-- UNUSED string name="azimuth">Azimut [deg]</string -->
     <!-- UNUSED string name="clino">Inclinazione [deg]</string -->
 
-    <!-- TODO string name="bt_alias_title">Bluetooth aliases</string -->
-    <!-- TODO string name="hint_bt_alias">BT alias</string -->
-    <!-- TODO string name="hint_bt_code">Device code</string -->
-    <!-- TODO string name="bt_alias_missing">BT alias missing</string -->
-    <!-- TODO string name="bt_code_missing">Device code missing</string -->
+    <string name="bt_alias_title">Alias Bluetooth</string>
+    <string name="hint_bt_alias">Alias BT</string>
+    <string name="hint_bt_code">Codice Device</string>
+    <string name="bt_alias_missing">Alias BT mancante</string>
+    <string name="bt_code_missing">Codice Device mancante</string>
 
     <string name="hint_cellsize">lato cella</string>
     <string name="hint_cwd">folder di lavoro</string>
@@ -957,7 +957,7 @@
     <string name="hint_notes">note</string>
     <string name="hint_label">etichetta</string>
     <string name="hint_comment">commento</string>
-    <!-- TODO string name="hint_size">size [m]</string -->
+    <string name="hint_size">misura [m]</string>
     <string name="hint_text">testo</string>
     <string name="hint_options">opzioni</string>
     <string name="hint_name">nome</string>
@@ -1381,8 +1381,8 @@
   <string name="pref_locale_summary">Lingua</string>
   <string name="pref_orientation_title">Orientazione display</string>
   <string name="pref_orientation_summary">Orientazione display</string>
-  <!-- TODO string name="pref_single_back_title">Single back</string -->
-  <!-- TODO string name="pref_single_back_summary">Close windows with single back</string -->
+  <string name="pref_single_back_title">Indietro singolo</string>
+  <string name="pref_single_back_summary">Chiudi window con indietro singolo</string>
 
   <string name="pref_raw_data_title">Dati grezzi</string>
   <string name="pref_raw_data_summary">Mostra dati grezzi</string>
@@ -1432,8 +1432,8 @@
   <string name="pref_bezier_step_summary">Distanza tra punti in una linea di export [m]</string>
   <string name="pref_leg_shots_title">Misure per battuta</string>
   <string name="pref_leg_shots_summary">Minimo numero di misure per tiro di poligonale</string>
-  <!-- TODO string name="pref_backsight_splay_title">Backsight splay</string -->
-  <!-- TODO string name="pref_backsight_splay_summary">Backsight check with first splay</string -->
+  <string name="pref_backsight_splay_title">Splay indietro</string>
+  <string name="pref_backsight_splay_summary">Controllo indietro con primo splay</string>
   <string name="pref_recent_timeout_title">Dati Timeout recenti</string>
   <string name="pref_recent_timeout_summary">Tempo dopo il quale un dato non e\' piu\' recente [s]</string>
   <string name="pref_triple_shot_title">Suono Misura-Tiro</string>
@@ -1511,7 +1511,7 @@
   <string name="pref_zip_share_category_title">Categoria Zip-share</string>
   <string name="pref_zip_share_category_summary">Aggiungi categoria a richiesta zip-share</string>
 
-  <!-- TODO string name="pref_bt_alias_title">BT aliases</string -->
+  <string name="pref_bt_alias_title">Alias BT</string>
   <string name="pref_sock_type_title">Socket</string>
   <string name="pref_sock_type_summary">Crea socket</string>
   <!-- UNUSED string name="pref_device_type_title">Tipo DistoX</string -->
@@ -1724,10 +1724,10 @@
   <string name="pref_iter_summary">Massimo numero iterazioni</string>
   <string name="pref_label_size_title">Dimensione scritte</string>
   <string name="pref_label_size_summary">Dimensione delle scritte</string>
-  <!-- TODO string name="pref_scalable_label_title">Scaling labels</string -->
-  <!-- TODO string name="pref_scalable_label_summary">Labels scale with the zoom</string -->
-  <!-- TODO string name="pref_slope_lside_title">Slope line l-side</string -->
-  <!-- TODO string name="pref_slope_lside_summary">Slope lines default l-side</string -->
+  <string name="pref_scalable_label_title">Etichetta scala</string>
+  <string name="pref_scalable_label_summary">Etichetta scala con zoom</string>
+  <string name="pref_slope_lside_title">Linea pendenza lato sx</string>
+  <string name="pref_slope_lside_summary">Default linea pendenza lato sx</string>
   <string name="pref_arrow_length_title">Direzione di sezione</string>
   <string name="pref_arrow_length_message">Lunghezza direzione di sezione</string>
   <string name="pref_dot_radius_title">Raggio punti selezione</string>
