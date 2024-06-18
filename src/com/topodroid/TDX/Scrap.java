@@ -92,8 +92,9 @@ public class Scrap
 
   /** clear the sketch items in this scrap
    * @note this is like DrawingWindow::deletePoint - TODO factorize
+   * @note called by DrawingCommandManager when the drawing is cleared
    */
-  void clearSketchItems()
+  void clearSketchItems( )
   {
     synchronized( TDPath.mSelectionLock ) { mSelection.clearSelectionPoints(); }
     synchronized( TDPath.mCommandsLock ) { 

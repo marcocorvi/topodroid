@@ -682,6 +682,7 @@ public class DrawingCommandManager
   }
 
   /** clear the drawing: clear the references and the sketch items
+   * @note called only for th2 drawing import 
    */
   void clearDrawing()
   {
