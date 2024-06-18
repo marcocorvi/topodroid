@@ -2320,7 +2320,7 @@ public class DrawingWindow extends ItemDrawer
   {
    
     Resources res = getResources();
-    if ( ! TDSetting.mWithLineJoin ) {
+    if ( ! TDSetting.mWithLineJoin && ! mTh2Edit ) {
       // TDLog.v("not with line join");
       mNrButton2 --;
     }
@@ -6987,7 +6987,7 @@ public class DrawingWindow extends ItemDrawer
   public boolean onLongClick( View view ) 
   {
     Button b = (Button)view;
-    if ( TDLevel.overAdvanced && b == mButton1[ BTN_DOWNLOAD ] ) {
+    if ( TDLevel.overAdvanced && BTN_DOWNLOAD < mNrButton1 && b == mButton1[ BTN_DOWNLOAD ] ) {
       if ( mDataDownloader != null ) { // TH2EDIT added this test 
         if (  ! mDataDownloader.isDownloading() && TDSetting.isConnectionModeMulti() && TopoDroidApp.mDData.getDevices().size() > 1 ) {
           if ( TDSetting.mSecondDistoX && TDInstance.getDeviceB() != null ) {
@@ -7003,14 +7003,14 @@ public class DrawingWindow extends ItemDrawer
           mDataDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_SHOT );
         }
       }
-    } else if ( TDLevel.overAdvanced && b == mButton1[ BTN_DIAL ] ) {
+    } else if ( TDLevel.overAdvanced && BTN_DIAL < mNrButton1 && b == mButton1[ BTN_DIAL ] ) {
       if ( /* TDLevel.overAdvanced && */ mType == PlotType.PLOT_PLAN && TDAzimuth.mFixedExtend == 0 ) {
         mRotateAzimuth = true;
         setButtonAzimuth();
       } else {
         onClick( view );
       }
-    } else if ( b == mButton1[ BTN_PLAN ] ) {
+    } else if ( BTN_PLAN < mNrButton1 && b == mButton1[ BTN_PLAN ] ) {
       if ( PlotType.isSketch2D( mType ) ) {
         if ( /* TDLevel.overBasic && */ mType == PlotType.PLOT_EXTENDED ) {
           new DrawingProfileFlipDialog( mActivity, this ).show();
@@ -7035,7 +7035,7 @@ public class DrawingWindow extends ItemDrawer
         onClick( view ); // execute rotateRecentToolset();
       }
 
-    } else if ( TDLevel.overBasic && b == mButton3[ BTN_REMOVE ] ) {
+    } else if ( TDLevel.overBasic && BTN_REMOVE < mNrButton3 && b == mButton3[ BTN_REMOVE ] ) {
       SelectionPoint sp = mDrawingSurface.hotItem();
       if ( sp != null ) {
         int t = sp.type();
@@ -7063,7 +7063,7 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       }
-    } else if ( TDLevel.overAdvanced && b == mButton3[ BTN_ITEM_EDIT ] ) { // item edit dialog
+    } else if ( TDLevel.overAdvanced && BTN_ITEM_EDIT < mNrButton3 && b == mButton3[ BTN_ITEM_EDIT ] ) { // item edit dialog
       SelectionPoint sp = mDrawingSurface.hotItem();
       if ( sp != null ) {
         DrawingPath item = sp.mItem;
