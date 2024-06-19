@@ -7017,7 +7017,7 @@ public class DrawingWindow extends ItemDrawer
           mDataDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_SHOT );
         }
       }
-    } else if ( TDLevel.overAdvanced && BTN_DIAL < mNrButtion1 && b == mButton1[ BTN_DIAL ] ) {
+    } else if ( TDLevel.overAdvanced && BTN_DIAL < mNrButton1 && b == mButton1[ BTN_DIAL ] ) {
       if ( /* TDLevel.overAdvanced && */ mType == PlotType.PLOT_PLAN && TDAzimuth.mFixedExtend == 0 ) {
         mRotateAzimuth = true;
         setButtonAzimuth();

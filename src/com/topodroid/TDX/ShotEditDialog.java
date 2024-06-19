@@ -144,16 +144,17 @@ class ShotEditDialog extends MyDialog
 
   // MORE -------------------------------------------
   private LinearLayout mLayoutMore;
-  private RadioButton mRBfrom;
-  private RadioButton mRBto;
-  private RadioButton mRBat;
+  private RadioButton mRBfrom = null;
+  private RadioButton mRBto   = null;
+  private RadioButton mRBat   = null;
   private EditText mETat;
   private EditText mETleft;
   private EditText mETright;
   private EditText mETup;
   private EditText mETdown;
-  private Button mBTlrud;
+  private Button mBTlrud  = null;
   private CheckBox mCBleg = null;
+  private boolean mHasLRUD = false; // could be replaced by (mBTlrud != null)
 
   // private MyCheckBox mButtonPlot;
   private MyCheckBox mButtonPhoto  = null;
@@ -165,7 +166,7 @@ class ShotEditDialog extends MyDialog
   private MyCheckBox mButtonDelete = null;
   private MyCheckBox mButtonCheck  = null;
 
-  private Button mBtnColor;  // user-set color (tester level)
+  private Button mBtnColor = null;  // user-set color (tester level)
 
   private int mColor;    // block color
   private boolean hideColorBtn = true;
@@ -994,10 +995,10 @@ class ShotEditDialog extends MyDialog
           // shot_extend = ExtendType.EXTEND_LEFT;
 	}
        }
-    } else if ( (! hideColorBtn) && b == mBtnColor ) {
+    } else if ( (! hideColorBtn) && mBtnColor != null && b == mBtnColor ) {
       new MyColorPicker( mContext, this, mColor ).show();
       return; // dismiss only after the color change
-    } else if ( b == mBTlrud ) { // AT-STATION LRUD
+    } else if ( mHasLRUD && b == mBTlrud ) { // AT-STATION LRUD
       float d = -1;
       long at = mBlk.mId;
       String station = null;
@@ -1107,6 +1108,7 @@ class ShotEditDialog extends MyDialog
 
   private void createLayoutLRUD( int size )
   {
+    mHasLRUD = true;
     mRBfrom  = (RadioButton)findViewById( R.id.station_from );
     mRBto    = (RadioButton)findViewById( R.id.station_to );
     mRBat    = (RadioButton)findViewById( R.id.station_at );
@@ -1133,7 +1135,7 @@ class ShotEditDialog extends MyDialog
     if ( hide_lrud ) {
       ((LinearLayout)findViewById( R.id.layout_lrud )).setVisibility( View.GONE );
       ((LinearLayout)findViewById( R.id.layout_lrud_data )).setVisibility( View.GONE );
-    } else {
+    } else if ( mHasLRUD ) {
       mRBfrom.setText( mBlk.mFrom );
       mRBfrom.setChecked( true );
       mRBto.setText( mBlk.mTo );
@@ -1226,32 +1228,42 @@ class ShotEditDialog extends MyDialog
 
   private void updateDeleteCheckButtons()
   {
-    if ( TDLevel.overExpert ) {
-      if ( mBlk.isSplay() ) {
-	if ( TDSetting.mSplayColor ) {
-          mBtnColor.setBackgroundColor( mColor ); 
-          mBtnColor.setOnClickListener( this );
-          hideColorBtn = false;
+    if ( mBtnColor != null ) {
+      if ( TDLevel.overExpert ) {
+        if ( mBlk.isSplay() ) {
+          if ( TDSetting.mSplayColor ) {
+            mBtnColor.setBackgroundColor( mColor ); 
+            mBtnColor.setOnClickListener( this );
+            hideColorBtn = false;
+          }
         }
       }
-    }
-    if ( hideColorBtn ) {
-      mBtnColor.setVisibility( View.GONE );
-    } else {
-      mBtnColor.setVisibility( View.VISIBLE );
+      if ( hideColorBtn ) {
+        mBtnColor.setVisibility( View.GONE );
+      } else {
+        mBtnColor.setVisibility( View.VISIBLE );
+      }
     }
 
-    if ( mBlk.isMainLeg() ) {
-      mCBleg.setChecked( false );
-      mCBleg.setVisibility( View.VISIBLE );
-      if ( TDLevel.overAdvanced && mBlk.isDistoX() ) {
-        mButtonCheck.setVisibility( View.VISIBLE );
+    if ( mCBleg != null ) {
+      if ( mBlk.isMainLeg() ) {
+        mCBleg.setChecked( false );
+        mCBleg.setVisibility( View.VISIBLE );
+      } else {
+        mCBleg.setVisibility( View.GONE );
+      }
+    }
+
+    if ( mButtonCheck != null ) {
+      if ( mBlk.isMainLeg() ) {
+        if ( TDLevel.overAdvanced && mBlk.isDistoX() ) {
+          mButtonCheck.setVisibility( View.VISIBLE );
+        } else {
+          mButtonCheck.setVisibility( View.GONE );
+        }
       } else {
         mButtonCheck.setVisibility( View.GONE );
       }
-    } else {
-      mButtonCheck.setVisibility( View.GONE );
-      mCBleg.setVisibility( View.GONE );
     }
   }
     
