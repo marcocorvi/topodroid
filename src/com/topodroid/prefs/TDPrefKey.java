@@ -1498,7 +1498,7 @@ public class TDPrefKey
     "DISTOX_WEED_BUFFER",
     "DISTOX_LINE_SNAP",       // whether to show line-snap action
     "DISTOX_LINE_CURVE",      // whether to show line- smooth/straighten action
-    "DISTOX_LINE_STRAIGHT",   // whether to show lines straighten button
+    "DISTOX_LINE_STRAIGHT",   // whether to show line-straighten (more "rocky") button
     "DISTOX_PATH_MULTISELECT",// path multiselection
     "DISTOX_COMPOSITE_ACTIONS",
     null
