@@ -621,7 +621,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       tvFrom.setOnClickListener( this );
       tvTo.setOnClickListener( this );
       tvLength.setOnClickListener( this );
-      if ( TDLevel.overNormal ) tvLength.setOnLongClickListener( this );
+      if ( TDLevel.overBasic ) tvLength.setOnLongClickListener( this );
 
       if ( TDLevel.overBasic ) {
         tvFrom.setOnLongClickListener( listener );
@@ -883,7 +883,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   public boolean onLongClick( View view ) 
   {
     // TDLog.v( "onLongClick " + view.getId() );
-    if ( TDLevel.overNormal ) {
+    if ( TDLevel.overBasic ) {
       TextView tv = (TextView) view;
       if ( tv != null ) {
         String st = tv.getText().toString();
