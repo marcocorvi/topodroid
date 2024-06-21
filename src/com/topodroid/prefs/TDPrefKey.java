@@ -1933,7 +1933,7 @@ public class TDPrefKey
     R.string.pref_single_back_title,
     R.string.pref_palettes_title,
     // R.string.pref_backups_clear_title, // CLEAR_BACKUPS
-    R.string.pref_mkeyboard_title,
+    R.string.pref_mkeyboard_title,        // 2 MKEYBOARD
     R.string.pref_no_cursor_title,
     R.string.pref_packet_logger_title,
     R.string.pref_th2_edit_title,
@@ -1945,7 +1945,7 @@ public class TDPrefKey
     R.string.pref_cat_device,
     R.string.pref_cat_import_export,
     R.string.pref_cat_sketch,
-    R.string.pref_with_debug_title,
+    R.string.pref_with_debug_title,    // 13
     -1
   };
 
