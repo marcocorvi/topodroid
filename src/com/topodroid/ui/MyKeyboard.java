@@ -518,7 +518,7 @@ public class MyKeyboard // FIXME DIALOG extends Dialog
 
   public static boolean close( MyKeyboard kbd )
   {
-    if ( kbd == null ) return false;
+    if ( (! TDSetting.mKeyboard) || kbd == null ) return false;
     kbd.clearCursor();
     if ( kbd.isVisible() ) {
       kbd.hide();
