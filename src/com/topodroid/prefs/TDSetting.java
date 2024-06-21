@@ -954,11 +954,11 @@ public class TDSetting
     mSingleBack = prefs.getBoolean( keyGeek[0], bool(defGeek[0]) ); // DISTOX_SINGLE_BACK
     setPalettes(  prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ) ); // DISTOX_PALETTES
     // setBackupsClear( prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ) ); // DISTOX_BACKUPS_CLEAR CLEAR_BACKUPS
-    mKeyboard = prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ); // DISTOX_MKEYBOARD
-    mNoCursor = prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ); // DISTOX_NO_CURSOR
-    mPacketLog = prefs.getBoolean( keyGeek[2], bool(defGeek[2]) ); // DISTOX_PACKET_LOGGER
-    mTh2Edit   = prefs.getBoolean( keyGeek[3], bool(defGeek[3]) ); // DISTOX_TH2_EDIT
-    mWithDebug = TDLevel.isDebugBuild() ? prefs.getBoolean( keyGeek[11], bool(defGeek[11]) ) : false; // DISTOX_WITH_DEBUG
+    mKeyboard = prefs.getBoolean( keyGeek[2], bool(defGeek[2]) ); // DISTOX_MKEYBOARD
+    mNoCursor = prefs.getBoolean( keyGeek[3], bool(defGeek[3]) ); // DISTOX_NO_CURSOR
+    mPacketLog = prefs.getBoolean( keyGeek[4], bool(defGeek[4]) ); // DISTOX_PACKET_LOGGER
+    mTh2Edit   = prefs.getBoolean( keyGeek[5], bool(defGeek[5]) ); // DISTOX_TH2_EDIT
+    mWithDebug = TDLevel.isDebugBuild() ? prefs.getBoolean( keyGeek[13], bool(defGeek[13]) ) : false; // DISTOX_WITH_DEBUG
 
     // String[] keyGPlot = TDPrefKey.GEEKPLOT;
     // String[] defGPlot = TDPrefKey.GEEKPLOTdef;
