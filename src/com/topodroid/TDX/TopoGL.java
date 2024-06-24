@@ -1918,7 +1918,7 @@ public class TopoGL extends Activity
   static final String CAVE3D_MEASURE_DIALOG     = "CAVE3D_MEASURE_DIALOG";
   static final String CAVE3D_STATION_TOAST      = "CAVE3D_STATION_TOAST";
   static final String CAVE3D_GRID_ABOVE         = "CAVE3D_GRID_ABOVE";
-  static final String CAVE3D_GRID_EXTENT        = "CAVE3D_GRID_EXTEND";
+  static final String CAVE3D_GRID_EXTENT        = "CAVE3D_GRID_EXTENT";
 
   // static final String CAVE3D_BLUETOOTH_DEVICE = "CAVE3D_BLUETOOTH_DEVICE"; // FIXME BLUETOOTH SETTING
 
