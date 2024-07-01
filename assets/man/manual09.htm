@@ -119,15 +119,15 @@ The last download shots can be highlighted blue to help distinguish them from th
 <li><img src="btn_mode.png"      width="36" border="1"> drawing <a href="page_drawing_refs.htm">references</a>: legs, splays, stations, sketch grid, scalebar, and sketch outline.</li>
 <li><img src="btn_plan.png"      width="36" border="1"> <i>plan/profile</i> switch. <img src = "btn_splay_group.png" width="36" border="1"> <i>Splay-display mode</i>, for x-sections</li>
 <li><img src="btn_azimuth.png"   width="36" border="1"> <a href="page_azimuth.htm">"extend" reference</a></li>
-<li><img src="btn_refresh.png"   width="36" border="1"> refresh the centerline</li>
+<li><img src="btn_refresh.png"   width="36" border="1"> <i>refresh</i> of the centerline</li>
 </ul><br><p>
 
 The <b>draw</b> mode has, besides the green buttons:
 <ul style="margin-top=0">
-<li><img src="btn_undo.png"  width="36" border="1"> removes the last items you have drawn, one at a time.</li>
-<li><img src="btn_redo.png"  width="36" border="1"> puts the removed item back in the sketch, one at a time. The list of removed items is emptied when you draw something new. Point-wise editing actions may also affect the list of redo.</li>
-<li><img src="btn_tools.png" width="36" border="1"> Drawing tool switcher.</li>
-<li><img src="btn_splay_display_mode.png" width="36" border="1"> splay display mode: as segment or a point.</li>
+<li><img src="btn_undo.png"  width="36" border="1"> <i>undo</u> removes the last items you have drawn, one at a time.</li>
+<li><img src="btn_redo.png"  width="36" border="1"> <i>redo</i> puts the removed item back in the sketch, one at a time. The list of removed items is emptied when you draw something new. Point-wise editing actions may also affect the list of redo.</li>
+<li><img src="btn_tools.png" width="36" border="1"> Drawing <i>tools</i> switcher.</li>
+<li><img src="btn_splay_display_mode.png" width="36" border="1"> <i>splay</i> display mode: as segment or a point.</li>
 <li><img src="btn_cont.png"  width="36" border="1"> Line <i>join</i> (only for line and if enabled)</li>
 </ul><br><p>
 The icon of the <i>tools</i> button reflects the current type of drawing tools: points, lines, or areas.<br>
@@ -138,18 +138,18 @@ The <b>erase</b> mode has, besides the green buttons:
 <ul style="margin-top=0">
 <li><img src="btn_undo.png"  width="36" border="1"> <i>undo</i></li>
 <li><img src="btn_redo.png"  width="36" border="1"> <i>redo</i></li>
-<li><img src="btn_erase_all.png" width="36" border="1"> type of erasable items: all, points, lines, areas</li>
-<li><img src="btn_size.png"  width="36" border="1"> eraser size [S, M, L]</li>
+<li><img src="btn_erase_all.png" width="36" border="1"> <i>type</i> of erasable items: all, points, lines, areas</li>
+<li><img src="btn_size.png"  width="36" border="1"> <i>size</i> of the eraser [S, M, L]</li>
 </ul><br><p>
 
 The <b>edit</b> [A] mode has, besides the green buttons:
 <ul style="margin-top=0">
-<li><img src="btn_select_all.png" width="36" border="1"> type of selectable items: all, points, lines, areas, shots, stations</li>
-<li><img src="btn_size.png"   width="36" border="1"> size of the selection tool [S, M, L]</li>
-<li><img src="btn_delete.png" width="36" border="1"> delete the item from the sketch (it asks for confirmation, and can be "undone").</li>
-<li><img src="btn_point.png"  width="36" border="1"> point-wise and special actions</li>
-<li><img src="btn_item.png"   width="36" border="1"> item properties edit</li>
-<li><img src="btn_range.png"  width="36" border="1"> range selection: either point-wise or local (only for lines and areas).</li>
+<li><img src="btn_select_all.png" width="36" border="1"> <i>type</i> of selectable items: all, points, lines, areas, shots, stations</li>
+<li><img src="btn_size.png"   width="36" border="1"> <i>size</i> of the selection tool [S, M, L]</li>
+<li><img src="btn_delete.png" width="36" border="1"> <i>delete</i> the item from the sketch (it asks for confirmation, and can be "undone").</li>
+<li><img src="btn_point.png"  width="36" border="1"> point-wise and <i>special actions</i></li>
+<li><img src="btn_item.png"   width="36" border="1"> item <i>properties</i> edit</li>
+<li><img src="btn_range.png"  width="36" border="1"> <i>range</i> selection: either point-wise or local (only for lines and areas).</li>
 </ul><br><p>
 When there are selected items the first two buttons become <i>previous/next</i> navigation buttons in the set
 of the selected items.<br><p>
@@ -166,11 +166,12 @@ Accordingly, the drawing references dialog has no box for the splays.
 <li>The <i>download</i> button switches the device, in multi device mode [E].</li>
 <li>In plan view, a long tap on the <i>extend reference</i> button makes the reference azimuth 
 graphically editable by sliding the finger across the display.  The button turns green [E].</li>
-<li>In the extended profile view, a long tap on the <i>display mode</i> button flips the sketch [N].</li>
-<li>With x-sections it toggles the display of splays that are off the section plane [T].</li>
+<li>In the extended profile view, a long tap on the <i>display mode</i> button flips the sketch [N].
+If the checkbox <I>Fix refs</i> of the reference dialog is not set, the "extend" of the shots is also reversed.</li>
+<li>For x-sections it toggles the display of splays that are off the section plane [T].</li>
 <li>A long tap on the <i>tools</i> button toggles retracing on/off (only for line and areas) [A]</li>
-<li>A long tap on the <i>delete</i> button removes the selected line/area point [N].</li>
-<li>A long tap on the item <i>properties edit</i> button, when the selected item is a section point, opens the xsection sketch [T].</li>
+<li>A long tap on the <i>delete</i> button removes the selected point of a line or an area [N].</li>
+<li>When the selected item is a "section" point, a long tap on the item <i>properties</i> button opens the xsection sketch [T].</li>
 </ul><br><p>
 
 
