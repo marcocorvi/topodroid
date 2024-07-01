@@ -704,7 +704,7 @@ public class TDFile
     if ( f1.exists() ) {
       if ( ! f1.renameTo( f2 ) ) TDLog.Error("file move: failed " + oldname + " to " + newname );
     } else {
-      TDLog.Error("file move: no-exist " + oldname );
+      TDLog.Error("file move: no-exist " + oldname ); // this may be OK
     }
   }
 

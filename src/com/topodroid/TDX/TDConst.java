@@ -68,7 +68,7 @@ public class TDConst
     "application/octet-stream", //    Compass
     "application/octet-stream", //    Survex
     "application/octet-stream", //    VisualTopo
-    "text/csv",                 //  5 *CSV
+    "text/comma-separated-values",    //  5 *CSV
     "application/dxf",          //  6 *DXF
     "application/octet-stream", //  7 *cSurvey
     "application/octet-stream", //  8 PocketTopo
@@ -116,7 +116,8 @@ public class TDConst
     // "VisualTopo-X",
     "Walls",
     "PocketTopo",
-    "TopoRobot"
+    "TopoRobot",
+    "BRIC csv"
   };
 
   private static final int[] mSurveyImportIndex = {
@@ -129,7 +130,8 @@ public class TDConst
     // SURVEY_FORMAT_TROX,
     SURVEY_FORMAT_SRV,
     SURVEY_FORMAT_TOP,
-    SURVEY_FORMAT_TRB
+    SURVEY_FORMAT_TRB,
+    SURVEY_FORMAT_CSV
   };
 
   // ======= MODEL EXPORT  ====== see TopoGL::getFilename()

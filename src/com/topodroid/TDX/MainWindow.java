@@ -32,6 +32,7 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.dev.DeviceUtil;
 import com.topodroid.inport.ImportData;
+import com.topodroid.inport.ImportBricCsvTask;
 import com.topodroid.inport.ImportCompassTask;
 import com.topodroid.inport.ImportVisualTopoTask;
 import com.topodroid.inport.ImportTherionTask;
@@ -579,7 +580,7 @@ public class MainWindow extends Activity
   public void importReader( Uri uri, String name, String type, ImportData data )
   {
     // FIXME connect-title string
-    // TDLog.v( "import with reader <" + name + "> type <" + type + ">" );
+    TDLog.v( "import with reader <" + name + "> type <" + type + ">" );
     ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
     // InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
     if ( type.equals( TDPath.TH ) ) {
@@ -606,6 +607,9 @@ public class MainWindow extends Activity
     } else if ( type.equals( TDPath.CSN ) ) {
       setTitleImport();
       new ImportCaveSniperTask( this, pfd ).execute( name ); 
+    } else if ( type.equals( TDPath.CSV ) ) {
+      setTitleImport();
+      new ImportBricCsvTask( this, pfd ).execute( name ); 
     // } else {
     //   setTheTitle( );
     }
@@ -1706,8 +1710,8 @@ public class MainWindow extends Activity
    */
   public void doImport( String type, ImportData data )
   {
-    int index = TDConst.surveyImportFormatIndex( type );
-    // TDLog.v( "MAIN import " + type + " " + index );
+    int index = TDConst.surveyImportFormatIndex( type ); // get the format index as in TDConst
+    TDLog.v( "MAIN import " + type + " " + index );
     selectImportFromProvider( index, data );
   }
 

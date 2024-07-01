@@ -124,6 +124,15 @@
     >
   </LinearLayout>
 
+  <LinearLayout android:id="@+id/layout_csv"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    >
+  </LinearLayout>
+
   <LinearLayout android:id="@+id/help"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"

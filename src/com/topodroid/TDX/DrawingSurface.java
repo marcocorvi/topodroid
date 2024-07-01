@@ -855,7 +855,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   public void addDrawingPath (DrawingPath drawingPath) { commandManager.addCommand(drawingPath); }
 
   // public void addDrawingDotPath (DrawingPath drawingPath) { commandManager.addDotCommand(drawingPath); }
-  public void addDrawingDotPath (DrawingPath drawingPath) { commandManager.addCommand(drawingPath); }
+  public void addDrawingDotPath (DrawingPath drawingPath) { commandManager.addDotCommand(drawingPath); }
 
   public void addScrapOutlinePath( DrawingLinePath path ) { commandManager.addScrapOutlinePath( path ); }
 

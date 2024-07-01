@@ -166,6 +166,7 @@ public class Scrap
       final ICanvasCommand cmd;
       synchronized( TDPath.mCommandsLock ) {
         cmd = mCurrentStack.get(  length - 1  );
+        if ( length == 1 && cmd instanceof DrawingSpecialPath ) return;
         mCurrentStack.remove( length - 1 );
         // cmd.undoCommand();
       }
@@ -851,7 +852,24 @@ public class Scrap
         mSelection.insertPath( path );
       }
     }
-    
+    // checkLines();
+  }
+
+  /** add a drawing special item 
+   * @param path    drawing special item
+   */
+  void addSpecialCommand( DrawingPath path ) 
+  {
+    if ( mCurrentStack.size() > 0 ) return;
+    mRedoStack.clear(); 
+    synchronized( TDPath.mCommandsLock ) {
+      mCurrentStack.add( path );
+    }
+    if ( path.mType != DrawingPath.DRAWING_PATH_NORTH ) { // this is probably unnecessary
+      synchronized( TDPath.mSelectionLock ) {
+        mSelection.insertPath( path );
+      }
+    }
     // checkLines();
   }
 

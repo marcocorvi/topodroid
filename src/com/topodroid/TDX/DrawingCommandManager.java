@@ -1192,6 +1192,19 @@ public class DrawingCommandManager
     mCurrentScrap.addCommand( path ); 
   }
 
+  /** add a drawing special item (and set the current scrap)
+   * @param path    item
+   */
+  void addDotCommand( DrawingPath path ) 
+  { 
+    if ( path instanceof DrawingSpecialPath ) { 
+      setCurrentScrap( path.mScrap );
+      mCurrentScrap.addSpecialCommand( path ); 
+    } else {
+      addCommand( path );
+    }
+  }
+
   /** delete a point "section"
    * @param scrap_name  name of the scrap (?)
    * @param cmd         erase command

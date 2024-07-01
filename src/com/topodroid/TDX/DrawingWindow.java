@@ -3251,6 +3251,7 @@ public class DrawingWindow extends ItemDrawer
   /** start the sketch display 
    * @param do_load whether to load plot from file
    * @param tt      used only by leg x-sections when created to insert leg intersection point
+   * @param center  plot center - for multileg x-section
    * @note called by onCreate, switchPlotType, onBackPressed and pushInfo
    * 
    * FIXME null ptr in 5.1.40 on ANDROID-11 at line 2507 

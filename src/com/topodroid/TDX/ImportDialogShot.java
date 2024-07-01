@@ -60,6 +60,7 @@ public class ImportDialogShot extends MyDialog
   // private LinearLayout mLayoutVTopoX;
   private LinearLayout mLayoutPTopo;
   private LinearLayout mLayoutTRobot;
+  private LinearLayout mLayoutCsv;
 
   private CheckBox mCBtroxTro; // VTopo
   private CheckBox mCBlrudTro;
@@ -104,6 +105,7 @@ public class ImportDialogShot extends MyDialog
     // mLayoutVTopoX  = (LinearLayout) findViewById( R.id.layout_vtopox );
     mLayoutPTopo   = (LinearLayout) findViewById( R.id.layout_pockettopo );
     mLayoutTRobot  = (LinearLayout) findViewById( R.id.layout_toporobot );
+    mLayoutCsv     = (LinearLayout) findViewById( R.id.layout_csv );
 
     mBtnOk   = (Button) findViewById(R.id.button_ok );
     mBtnOk.setOnClickListener( this );
@@ -162,6 +164,7 @@ public class ImportDialogShot extends MyDialog
     // mLayoutVTopoX.setVisibility( View.GONE );
     mLayoutPTopo.setVisibility( View.GONE );
     mLayoutTRobot.setVisibility( View.GONE );
+    mLayoutCsv.setVisibility( View.GONE );
     switch ( mSelectedPos ) {
       case 0: mLayoutZip.setVisibility( View.VISIBLE );        break;
       case 1: mLayoutCompass.setVisibility( View.VISIBLE );    break;
@@ -172,6 +175,7 @@ public class ImportDialogShot extends MyDialog
       // case x: mLayoutVTopoX.setVisibility( View.VISIBLE );  break;
       case 6: mLayoutPTopo.setVisibility( View.VISIBLE );      break;
       case 7: mLayoutTRobot.setVisibility( View.VISIBLE );      break;
+      case 8: mLayoutCsv.setVisibility( View.VISIBLE );      break;
     }
   }
 

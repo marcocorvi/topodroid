@@ -680,7 +680,7 @@ public class TDPath
   // NOTA BENE extensions include the dot, eg, ".th"
   // static final String[] IMPORT_EXT        = { TH, TOP, DAT, TRO, CSN, SVX, SRV, TRB };
   static final String[] IMPORT_EXT_STREAM = { TOP, ZIP };
-  static final String[] IMPORT_EXT_READER = { TH, DAT, TRO, TROX, CSN, SVX, SRV, TRB, TH2 }; // TH2EDIT added TH2
+  static final String[] IMPORT_EXT_READER = { TH, DAT, TRO, TROX, CSN, SVX, SRV, TRB, TH2, CSV }; // TH2EDIT added TH2
 
   // static File[] getImportFiles() // DistoX-SAF
   // { 
