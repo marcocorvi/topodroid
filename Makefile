@@ -38,7 +38,7 @@ signed:
 	@echo "Version $(VERSION)"
 	./howto/sign.sh
 	@mv $(APPNAME)-release-keysigned.apk $(APPVERSION)-$(TARGET_SDK).apk
-	@rm TopoDroidX-release-keysigned.apk.idsig
+	@rm $(APPNAME)-release-keysigned.apk.idsig
 
 md5:
 	@echo "Version $(VERSION) target $(TARGET_SDK)"
@@ -61,12 +61,12 @@ debug-signed:
 	./howto/sign-debug.sh
 
 perms:
-	adb shell appops set com.topodroid.TDX READ_EXTERNAL_STORAGE allow
-	adb shell appops set com.topodroid.TDX WRITE_EXTERNAL_STORAGE allow
-	adb shell appops set com.topodroid.TDX MANAGE_EXTERNAL_STORAGE allow
+	adb shell appops set $(PACKAGE) READ_EXTERNAL_STORAGE allow
+	adb shell appops set $(PACKAGE) WRITE_EXTERNAL_STORAGE allow
+	adb shell appops set $(PACKAGE) MANAGE_EXTERNAL_STORAGE allow
 
 # interactively it could be
-#	adb shell if [[ `getprop ro.vendor.build.version.sdk` > 29 ]]; then appops set com.topodroid.TDX MANAGE_EXTERNAL_STORAGE allow ; fi
+#	adb shell if [[ `getprop ro.vendor.build.version.sdk` > 29 ]]; then appops set $(PACKAGE) MANAGE_EXTERNAL_STORAGE allow ; fi
 
 bundle:
 	$(ANT) release

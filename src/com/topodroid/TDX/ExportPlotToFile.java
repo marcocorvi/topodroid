@@ -99,7 +99,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
       try {
 	String file_name = mFullName + "." + mExt; // file-name
         String file_path = TDPath.getOutFile( file_name );
-        // TDLog.v("EXPORT plot to file " + file_name + " path " + file_path );
+        // TDLog.v("EXPORT plot to file <" + file_name + "> path " + file_path );
         boolean ret = true;
         synchronized ( TDFile.mFilesLock ) {
           // final FileOutputStream out = TDFile.getFileOutputStream( filename );

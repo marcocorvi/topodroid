@@ -53,7 +53,7 @@ public class TDPath
   final static String PDF = ".pdf"; // 
   final static String SHZ = ".shz"; // shapefile
   final static String SUR = ".sur"; // WinKarst
-  final static String SVG = ".svx"; // SVG
+  final static String SVG = ".svg"; // SVG
   final static String SVX = ".svx"; // Survex
   final static String SRV = ".srv"; // Walls
   final static String TRB = ".text"; // TopoRobot
