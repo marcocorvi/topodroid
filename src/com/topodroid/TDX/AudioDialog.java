@@ -62,35 +62,39 @@ class AudioDialog extends MyDialog
   // private Button mBtnClose;
 
   private final IAudioInserter mParent;
-  private final long mBid;        // data block ID - each block has only one audio file
+  private final long mAudioId;    // ??? data block ID - each block has only one audio file
   private final String mFilepath; // pathname of audio-file - 
   private boolean hasFile;
   private boolean hadNoFile;
   private boolean canRec;
   private boolean canPlay;
-  private DBlock  mBlk;
+  private DBlock  mBlk;  // this is used only for the presentation "name"
   private int isRecPlay; // 0: idle, 1: rec, 2: play
+  private long mReftype;    // reference item type
+  // private long mItemId; // TODO maybe
   // AudioInfo mAudio;
 
   /** cstr
-   * @param ctx    context
-   * @param parent parent window
-   * @param bid    block Id
-   * @param blk    data block
+   * @param ctx       context
+   * @param parent    parent window
+   * @param audio_id  audio ID (record must exist in the table)
+   * @param blk       data block (or null)
+   * @param reftype   reference item type
    */
-  AudioDialog( Context ctx, IAudioInserter parent, long bid, DBlock blk )
+  AudioDialog( Context ctx, IAudioInserter parent, long audio_id, DBlock blk, long reftype )
   {
     super( ctx, null, R.string.AudioDialog ); // null app
 
-    mParent = parent;
-    mBid = bid;
-    // mAudio = mApp.mData.getAudio( TDInstance.sid, mBid );
-    mFilepath = TDPath.getSurveyWavFile( TDInstance.survey, Long.toString(mBid) );
+    mParent   = parent;
+    mAudioId  = audio_id;
+    mReftype  = reftype;
+    // mAudio = mApp.mData.getAudio( TDInstance.sid, mAudioId );
+    mFilepath = TDPath.getSurveyWavFile( TDInstance.survey, Long.toString(mAudioId) );
     hasFile   = (TDFile.getTopoDroidFile( mFilepath )).exists();
     hadNoFile = ! hasFile;
     mBlk      = blk;
     isRecPlay = STATUS_IDLE;
-    // TDLog.v( "audio dialog " + bid + " file: " + mFilepath );
+    // TDLog.v( "audio dialog " + audio_id + " file: " + mFilepath );
   }
 
 
@@ -112,7 +116,7 @@ class AudioDialog extends MyDialog
     if ( mBlk != null ) {
       ( (TextView) findViewById( R.id.audio_id ) ).setText( String.format( mContext.getResources().getString( R.string.audio_id_shot ), mBlk.mFrom, mBlk.mTo ) );
     } else { 
-      ( (TextView) findViewById( R.id.audio_id ) ).setText( String.format( mContext.getResources().getString( R.string.audio_id_plot ), mBid ) );
+      ( (TextView) findViewById( R.id.audio_id ) ).setText( String.format( mContext.getResources().getString( R.string.audio_id_plot ), mAudioId ) );
     }
 
     mBtnRec    = new MyStateBox( mContext, R.drawable.iz_audio_rec, R.drawable.iz_audio_rec_on );
@@ -254,8 +258,8 @@ class AudioDialog extends MyDialog
   {
     assert( isRecPlay == STATUS_IDLE );
     TDFile.deleteFile( mFilepath );
-    TopoDroidApp.mData.deleteAudio( TDInstance.sid, mBid );
-    if ( mParent != null ) mParent.deletedAudio( mBid );
+    TopoDroidApp.mData.deleteAudioRecord( TDInstance.sid, mAudioId );
+    if ( mParent != null ) mParent.deletedAudio( mAudioId );
   }
 
   /** start recording audio
@@ -266,7 +270,7 @@ class AudioDialog extends MyDialog
     assert( isRecPlay == STATUS_IDLE );
     try {
       isRecPlay = STATUS_RECORD;
-      // if ( mParent != null ) mParent.startRecordAudio( mBid ); // startRecordAudio has empty implementation
+      // if ( mParent != null ) mParent.startRecordAudio( mAudioId ); // startRecordAudio has empty implementation
       mMR = new MediaRecorder();
       mMR.setAudioSource(MediaRecorder.AudioSource.MIC);
       mMR.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
@@ -301,8 +305,8 @@ class AudioDialog extends MyDialog
       mBtnConfirm.setText( R.string.audio_paused );
       canPlay = true;
       hasFile = true;
-      TopoDroidApp.mData.setAudio( TDInstance.sid, mBid, TDUtil.currentDateTime() );
-      if ( mParent != null ) mParent.stopRecordAudio( mBid );
+      TopoDroidApp.mData.setAudio( TDInstance.sid, mAudioId, TDUtil.currentDateTime(), mReftype );
+      if ( mParent != null ) mParent.stopRecordAudio( mAudioId );
       isRecPlay = STATUS_IDLE;
     } catch ( IllegalStateException e ) {
       TDLog.Error("Illegal state " + e.getMessage() );

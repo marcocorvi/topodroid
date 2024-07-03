@@ -371,8 +371,15 @@ class ItemPickerDialog extends MyDialog
       for ( int i=0; i<np; ++i ) {
       if ( mParent.get().forbidPointSection( i ) ) continue;
         SymbolPoint p = (SymbolPoint)mPointLib.getSymbolByIndex( i );
-        if ( p.isEnabled() && ( /* TDLevel.overAdvanced || */ ! p.isThName( SymbolLibrary.SECTION ) ) ) { // FIXME_SECTION_POINT 
-          mPointAdapter.add( new ItemSymbol( mContext, this, SymbolType.POINT, i, p ) );
+        if ( p.isEnabled() ) {
+          // FIXME photo and audio cannot be selected if the hardware is not granted
+          if ( p.isThName( SymbolLibrary.PHOTO ) && TDandroid.checkCamera( mContext ) ) {
+            mPointAdapter.add( new ItemSymbol( mContext, this, SymbolType.POINT, i, p ) );
+          } else if ( p.isThName( SymbolLibrary.AUDIO ) && TDandroid.checkMicrophone( mContext ) ) {
+            mPointAdapter.add( new ItemSymbol( mContext, this, SymbolType.POINT, i, p ) );
+          } else if ( ! p.isThName( SymbolLibrary.SECTION ) ) { // FIXME_SECTION_POINT 
+            mPointAdapter.add( new ItemSymbol( mContext, this, SymbolType.POINT, i, p ) );
+          }
         }
       }
     }

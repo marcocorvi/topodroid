@@ -4044,12 +4044,13 @@ public class DrawingWindow extends ItemDrawer
     if ( point instanceof DrawingPhotoPath ) { 
       DrawingPhotoPath photo = (DrawingPhotoPath)point;
       if ( photo.mPicture != null ) mDrawingSurface.deletePath( photo.mPicture ); // delete associated picture
-      mApp_mData.deletePhoto( TDInstance.sid, photo.mId );
-      TDFile.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString( photo.mId ) ) );
+      photo.destructor();
     } else if ( point instanceof DrawingAudioPath ) { 
       DrawingAudioPath audio = (DrawingAudioPath)point;
-      mApp_mData.deleteNegAudio( TDInstance.sid, audio.mId );
-      TDFile.deleteFile( TDPath.getSurveyWavFile( TDInstance.survey, Long.toString( audio.mId ) ) );
+      audio.destructor();
+    // } else if ( point instanceof DrawingSensorPath ) { 
+    //   DrawingSensorPath sensor = (DrawingSensorPath)point;
+    //   mApp_mData.deleteSensorRecord( TDInstance.sid, sensor.mId );
     } else if ( BrushManager.isPointSection( point.mPointType ) ) {
       mDrawingSurface.clearXSectionOutline( TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) ) );
     }
@@ -4117,7 +4118,12 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.deleteSectionLine( line, scrap_name );
     // TDPath.deletePlotFileWithBackups( TDPath.getTh2File( scrap_name + ".th2" ) );
     TDPath.deletePlotFileWithBackups( TDPath.getTdrFile( scrap_name + ".tdr" ) );
-    TDFile.deleteFile( TDPath.getJpgFile( xs_id + ".jpg" ) );
+    String jpg_path = TDPath.getJpgFile( xs_id + ".jpg" );
+    if ( TDFile.hasTopoDroidFile( jpg_path ) ) {
+      // TODO delete record from photos table: WHAT IS THE ID ?
+      // mApp_mData.dropPhoto( TDInstance.sid, id, MediaInfo.TYPE_XSECTION );
+      TDFile.deleteFile( jpg_path );
+    }
     // section point is deleted automatically
     // deleteSectionPoint( xs_id ); // delete section point and possibly clear section outline
     mDrawingSurface.clearXSectionOutline( scrap_name ); // clear outline if any
@@ -4946,10 +4952,10 @@ public class DrawingWindow extends ItemDrawer
               if ( BrushManager.isPointLabel( mCurrentPoint ) ) {
                 new DrawingLabelDialog( mActivity, this, xs, ys ).show();
               } else if ( BrushManager.isPointPhoto( mCurrentPoint ) ) {
-                new DrawingPhotoDialog( mActivity, this, xs, ys ).show();
+                new DrawingPhotoDialog( mActivity, this, mPid, xs, ys ).show();
               } else if ( BrushManager.isPointAudio( mCurrentPoint ) ) {
 	        if ( audioCheck ) {
-                  addAudioPoint( xs, ys );
+                  addAudioPoint( mPid, xs, ys );
 	        } else {
                   TDToast.makeWarn( R.string.no_feature_audio );
                 }
@@ -5672,7 +5678,7 @@ public class DrawingWindow extends ItemDrawer
         }
       }
       // cross-section does not exist yet
-    String section_id = mApp_mData.getNextSectionId( TDInstance.sid );
+    String section_id = mApp_mData.getNextSectionId( TDInstance.sid ); // xxN where N is a number
     currentLine.addOption( "-id " + section_id );
     mDrawingSurface.addDrawingPath( currentLine );
 
@@ -5750,7 +5756,7 @@ public class DrawingWindow extends ItemDrawer
   //   assert( mLastLinePath == null );
   //   if ( mMediaManager.savePhotoFile( bitmap, 90 ) ) { // compression = 90
   //     // // FIXME TITLE has to go
-  //     // mApp_mData.insertPhoto( TDInstance.sid, mMediaId, -1, "", TDUtil.currentDate(), mMediaComment, mMediaCamera );
+  //     // mApp_mData.insertPhotoRecord( TDInstance.sid, mMediaId, -1, "", TDUtil.currentDate(), mMediaComment, mMediaCamera );
   //     // // FIXME NOTIFY ? no
   //     createPhotoPoint();
   //   } else {
@@ -5763,8 +5769,8 @@ public class DrawingWindow extends ItemDrawer
    */
   public void insertPhoto( )
   {
-    mApp_mData.insertPhoto( TDInstance.sid, mMediaManager.getPhotoId(), -1, "", TDUtil.currentDateTime(), 
-      mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode() );
+    mApp_mData.insertPhotoRecord( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(), 
+      mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), MediaInfo.TYPE_PLOT );
     // FIXME NOTIFY ? no
     createPhotoPoint();
   }
@@ -5780,14 +5786,21 @@ public class DrawingWindow extends ItemDrawer
   /** take a photo
    * @param imagefile   photo image file
    * @param insert      whether to insert the photo-point item
-   * @param pid         plot ID
+   * @param pid         reference item ID (x-section plot ID, or -1)
+   * @param type        reference item type
+   * @note this method returns before the QCamCompass is finished
    */
-  private void doTakePointPhoto( String imagefile, boolean insert, long pid )
+  private void doTakePointPhoto( String imagefile, boolean insert, long pid, long type )
   {
-    // if ( TDandroid.AT_LEAST_API_21 && TDandroid.checkCamera( mApp ) ) { // hasPhoto
+    TDLog.v("do take point photo: <" + imagefile + "> insert " + insert + " pid " + pid + " type " + type );
+    // if ( TDandroid.AT_LEAST_API_21 && TDandroid.checkCamera( mApp ) ) { // canTakeasPhoto
       boolean with_box = true; // ! insert;
       mMediaManager.setCamera( PhotoInfo.CAMERA_TOPODROID );
-      new QCamCompass( this, this, (new MyBearingAndClino( mApp, imagefile )), (insert ? this : null), with_box, false, PhotoInfo.CAMERA_TOPODROID ).show(); // false=with_delay
+      if ( pid > 0 ) mMediaManager.setReferenceItem( pid, type );
+      MyBearingAndClino callback = new MyBearingAndClino( mApp, imagefile );
+      new QCamCompass( this, this, callback, (insert ? this : null), with_box, false, PhotoInfo.CAMERA_TOPODROID, mMediaManager ).show(); // false=with_delay
+      // }
+
     // } else {
     //   try {
     //     Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
@@ -5808,6 +5821,7 @@ public class DrawingWindow extends ItemDrawer
   }
 
   /** insert a "photo" point
+   * @param pid      plot ID
    * @param comment  photo comment
    * @param size   photo size (horizontal width) [m]
    * @param x      X coord
@@ -5815,7 +5829,7 @@ public class DrawingWindow extends ItemDrawer
    * @param camera camera type (API)
    # @param code   geomorphology code
    */
-  public void addPhotoPoint( String comment, float size, float x, float y, int camera, String code )
+  public void addPhotoPoint( long pid, String comment, float size, float x, float y, int camera, String code )
   {
     // TDLog.v("addPhoto " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null );
@@ -5824,19 +5838,19 @@ public class DrawingWindow extends ItemDrawer
     } else {
       mMediaManager.setPoint( x, y );
     }
-    mMediaManager.prepareNextPhoto( -1, ((comment == null)? "" : comment), size, camera, ((code == null)? "" : code) );
+    mMediaManager.prepareNextPhoto( pid, ((comment == null)? "" : comment), size, camera, ((code == null)? "" : code), MediaInfo.TYPE_PLOT );
     // mMediaComment = (comment == null)? "" : comment;
     // mMediaId = mApp_mData.nextPhotoId( TDInstance.sid );
     // File imagefile = TDFile.getFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mMediaId) ) );
-    // TODO TD_XSECTION_PHOTO
-    doTakePointPhoto( mMediaManager.getImageFilepath(), true, -1L ); // with inserter, no pid
+    doTakePointPhoto( mMediaManager.getImageFilepath(), true, -1L, MediaInfo.TYPE_PLOT ); // with inserter, no pid
   }
 
   /** insert a "audio" point
+   * @param pid    plot ID 
    * @param x      X coord
    * @param y      Y coord
    */
-  private void addAudioPoint( float x, float y )
+  private void addAudioPoint( long pid, float x, float y )
   {
     // TDLog.v("add Audio Point " + x + " " + y );
     assert( mLastLinePath == null );
@@ -5850,11 +5864,11 @@ public class DrawingWindow extends ItemDrawer
     } else {
       mMediaManager.setPoint( x, y );
     }
-    long audio_id = mMediaManager.prepareNextAudioNeg( -1, "" );
-    // mMediaId = mApp_mData.nextAudioNegId( TDInstance.sid );
+    long audio_id = mMediaManager.prepareNextAudio( pid, "", MediaInfo.TYPE_PLOT );
+    // mMediaId = mApp_mData.nextAudioId( TDInstance.sid, MediaInfo.TYPE_PLOT );
     // File file = TDFile.getFile( TDPath.getSurveyWavFile( TDInstance.survey, Long.toString(mMediaId) ) );
     // TODO RECORD AUDIO
-    new AudioDialog( mActivity, this, audio_id, null ).show();
+    new AudioDialog( mActivity, this, audio_id, null, MediaInfo.TYPE_PLOT ).show();
   }
 
   /** delete an audio record
@@ -7301,7 +7315,7 @@ public class DrawingWindow extends ItemDrawer
               } else if ( point instanceof DrawingAudioPath ) { // BrushManager.isPointAudio( point.mPointType )
                 if ( audioCheck ) {
                   DrawingAudioPath audio = (DrawingAudioPath)point;
-                  new AudioDialog( mActivity, this, audio.mId, null ).show();
+                  new AudioDialog( mActivity, this, audio.mId, null, MediaInfo.TYPE_PLOT ).show();
                 } else {
                   TDToast.makeWarn( R.string.no_feature_audio );
                 }
@@ -7482,7 +7496,7 @@ public class DrawingWindow extends ItemDrawer
   }
 
   /** prepare a (leg) xsection - retrieve the ID or create a new section plot and return the ID
-   * @param id    section name
+   * @param id    section name, eg, xx0
    * @param type  parent plot type
    * @param from  FROM station
    * @param to    TO station
@@ -7504,6 +7518,7 @@ public class DrawingWindow extends ItemDrawer
     mSectionName = id;
     long pid = mApp_mData.getPlotId( TDInstance.sid, mSectionName );
     if ( pid < 0 ) { 
+      // TDLog.v("insert 2D section");
       pid = mApp.insert2dSection( TDInstance.sid, mSectionName, type, from, to, azimuth, clino, ( TDInstance.xsections? null : mName), nick );
     }
     return pid;
@@ -7521,13 +7536,14 @@ public class DrawingWindow extends ItemDrawer
    */
   void makePhotoXSection( DrawingLinePath line, String id, long type, String from, String to, String nick, float azimuth, float clino )
   {
+    TDLog.v("make photo x-section " + id );
     long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
     if ( pid >= 0 ) {
-      // imageFile := PHOTO_DIR / surveyId / photoId .jpg
+      // imageFile := survey / photo / sectionId .jpg
       String image_filepath = TDPath.getSurveyJpgFile( TDInstance.survey, id ); // 20230118 local var "image_filepath"
       // File imagefile = TDFile.getTopoDroidFile( image_filepath );
       // TODO TD_XSECTION_PHOTO
-      doTakePointPhoto( image_filepath, false, pid ); // without inserter
+      doTakePointPhoto( image_filepath, false, pid, MediaInfo.TYPE_XSECTION ); // without inserter
     }
   }
 
@@ -9195,7 +9211,7 @@ public class DrawingWindow extends ItemDrawer
       //     Bitmap bitmap = (Bitmap) extras.get("data");
       //     if ( mMediaManager.savePhotoFile( bitmap, 90 ) ) { // compression = 90
       //       // // FIXME TITLE has to go
-      //       // mApp_mData.insertPhoto( TDInstance.sid, mMediaId, -1, "", TDUtil.currentDate(), mMediaComment, mMediaCamera );
+      //       // mApp_mData.insertPhotoRecord( TDInstance.sid, mMediaId, -1, "", TDUtil.currentDate(), mMediaComment, mMediaCamera );
       //       // // FIXME NOTIFY ? no
       //       createPhotoPoint();
       //     } else {

@@ -145,6 +145,12 @@ public class DrawingAudioPath extends DrawingPointPath
       TDLog.Error( "AUDIO out error " + e.toString() );
     }
   }
+
+  void destructor()
+  {
+    TopoDroidApp.mData.deleteAudioRecord( TDInstance.sid, mId );
+    TDFile.deleteFile( TDPath.getSurveyWavFile( TDInstance.survey, Long.toString( mId ) ) );
+  }
 }
 
 

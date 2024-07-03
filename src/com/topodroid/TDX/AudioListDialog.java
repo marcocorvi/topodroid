@@ -68,8 +68,9 @@ class AudioListDialog extends MyDialog
    */
   private String getAudioDescription( AudioInfo audio )
   {
-    if ( audio.fileIdx >= 0 ) {
-      for ( DBlock blk : mShots ) if ( blk.mId == audio.fileIdx ) {
+    long item_id = audio.getItemId();
+    if ( item_id >= 0 ) {
+      for ( DBlock blk : mShots ) if ( blk.mId == item_id ) {
         return audio.getFullString( blk.mFrom + " " + blk.mTo );
       }
     }
@@ -82,8 +83,9 @@ class AudioListDialog extends MyDialog
    */
   private DBlock getAudioBlock( AudioInfo audio )
   {
-    if ( audio.fileIdx >= 0 ) {
-      for ( DBlock blk : mShots ) if ( blk.mId == audio.fileIdx ) return blk;
+    long item_id = audio.getItemId();
+    if ( item_id >= 0 ) {
+      for ( DBlock blk : mShots ) if ( blk.mId == item_id ) return blk;
     }
     return null;
   }
@@ -159,9 +161,10 @@ class AudioListDialog extends MyDialog
     AudioInfo audio = mAudios.get( pos );
     if ( audio != null ) { 
       String subdir = TDInstance.survey + "/audio"; // "audio/" + TDInstance.survey;
-      String name   = Long.toString( audio.fileIdx ) + ".wav";
+      long item_id = audio.getItemId();  // FIXME this is ok for shot-audio, fix it for plot-audio
+      String name   = Long.toString( item_id ) + ".wav";
       if ( TDFile.hasMSfile( subdir, name ) ) { // if ( file.exists() )
-        String filepath = TDPath.getSurveyWavFile( TDInstance.survey, Long.toString( audio.fileIdx ) );
+        String filepath = TDPath.getSurveyWavFile( TDInstance.survey, Long.toString( item_id ) );
         startPlay( filepath );
       // } else {
       //   // TDLog.Error("audio file does not exist");

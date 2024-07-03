@@ -13,50 +13,27 @@ package com.topodroid.TDX;
 
 // import androidx.annotation.RecentlyNonNull;
 
-class AudioInfo
+class AudioInfo extends MediaInfo
 {
-  private final long sid;  // survey id (assigned but never used)
-  final long id;           // audio id
-  final long fileIdx;      // shot id
-  private final String mDate;
-
   /** cstr
-   * @param _sid    survey ID
-   * @param _id     audio ID
-   * @param fileidx shot ID
+   * @param sid    survey ID
+   * @param id     audio ID
+   * @param item_id reference item ID
    * @param dt      date
+   * @param type    reference item type
    */
-  AudioInfo( long _sid, long _id, long fileidx, String dt )
+  AudioInfo( long sid, long id, long item_id, String dt, int type )
   {
-    sid     = _sid;
-    id      = _id;
-    fileIdx = fileidx;
-    mDate   = dt;
+    super( MediaInfo.MEDIA_AUDIO, sid, id, item_id, dt, type );
   }
 
   // /** @return the shot ID
   //  */
-  // int getFileNumber() { return (int)fileIdx; }
+  // int getFileNumber() { return (int)mItemId; }
 
   // String getAudioName() 
   // {
   //   return String.format( "%d-%03d", sid, id );
   // }
-
-  // @RecentlyNonNull
-  /** @return the string presentation of this audio info
-   */
-  public String toString()
-  {
-    return id + " <" + mDate  + "> ";
-  }
-
-  /** @return the full string presentation of this audio info
-   * @param shot_name   name of the shot
-   */
-  public String getFullString( String shot_name )
-  {
-    return id + ": " + shot_name + " <" + mDate  + "> ";
-  }
 
 }

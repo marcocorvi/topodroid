@@ -780,6 +780,9 @@ public class DrawingIO
             case 'Z':
               path = DrawingAudioPath.loadDataStream( version, dis, dx, dy );
               break;
+            // case 'W':
+            //   path = DrawingSensorPath.loadDataStream( version, dis, dx, dy );
+            //   break;
             case 'L':
               path = DrawingLinePath.loadDataStream( version, dis, dx, dy /*, missingSymbols */ );
               // TDLog.v("add path ... " + ((DrawingLinePath)path).mFirst.mX + " " + ((DrawingLinePath)path).mFirst.mY );
@@ -935,6 +938,10 @@ public class DrawingIO
             case 'Z':
               DrawingAudioPath.loadDataStream( version, dis, dx, dy );
               break;
+            // case 'W':
+            //   path = DrawingSensorPath.loadDataStream( version, dis, dx, dy );
+            //   break;
+
             // case 'G':
             //   DrawingFixedName.loadDataStream( version, dis ); // consume DrawingFixedName data
             //   break;
@@ -968,8 +975,8 @@ public class DrawingIO
   }
 
   /** change the scrap name into a tdr file
-   * @param old_name   existing tdr file (deleted at the end)
-   * @param new_name   new tdr file (created)
+   * @param old_name   existing tdr file (deleted at the end) - full pathname
+   * @param new_name   new tdr file (created) - full pathname
    * @param scrap_name new scrap name
    * @return true if successful
    */
@@ -1008,6 +1015,173 @@ public class DrawingIO
       fis.close();
       fos.close();
       old_file.delete();
+    } catch ( FileNotFoundException e ) {
+      e.printStackTrace();
+      return false;
+    } catch ( IOException e ) {
+      e.printStackTrace();
+      return false;
+    }
+    return true;
+  }
+
+  /** change a tdr file: drop a media point
+   * @param old_name   existing tdr file (deleted at the end) - full pathname
+   * @param media_type media type
+   * @param media_id   media ID
+   * @return true if successful
+   */
+  static boolean changeTdrFileDropMedia( String old_name, int media_type, long media_id )
+  {
+    File old_file = TDFile.getTopoDroidFile( old_name );
+    if ( ! old_file.exists() ) return false;
+    File new_file = TDFile.getTopoDroidFile( old_name + "_x" ); // FIXME use tmpfile
+    if ( new_file.exists() ) { 
+      TDLog.Error("tdr file " + old_name + " - drop media " + media_type + " id " + media_id );
+      return false;
+    }
+    byte[] buffer = new byte[4096];
+    int n, i, j;
+    float f, dx=0, dy=0;
+    String s;
+    DrawingPath path;
+    try {
+      FileInputStream  fis = new FileInputStream(  old_file );
+      DataInputStream  dis = new DataInputStream(  fis );
+      int what = dis.read();
+      if ( what != 'V' ) {
+        TDLog.e("ERROR missing version code ");
+        fis.close();
+        return false;
+      }
+      FileOutputStream fos = new FileOutputStream( new_file );
+      DataOutputStream dos = new DataOutputStream( fos );
+      dos.write( 'V' );
+      int version = dis.readInt(); dos.writeInt( version );
+      boolean todo = true;
+      while ( todo ) {
+        what = dis.read();
+        // TDLog.v( "Read " + what );
+        switch ( what ) {
+          case 'I': // plot info: bounding box
+          {
+            dos.write( 'I' );
+            f = dis.readFloat(); dos.writeFloat( f );
+            f = dis.readFloat(); dos.writeFloat( f );
+            f = dis.readFloat(); dos.writeFloat( f );
+            f = dis.readFloat(); dos.writeFloat( f );
+            i = dis.readInt();   dos.writeInt( i );
+            if ( i == 1 ) {
+              f = dis.readFloat(); dos.writeFloat( f );
+              f = dis.readFloat(); dos.writeFloat( f );
+              f = dis.readFloat(); dos.writeFloat( f );
+              f = dis.readFloat(); dos.writeFloat( f );
+            }
+                // TDLog.Log(TDLog.LOG_PLOT, "TDR bbox " + xmin + "-" + xmax + " " + ymin + "-" + ymax );
+          }
+          break;
+          case 'S': // SCRAP
+            {
+              dos.write( 'S' );
+              s = dis.readUTF(); dos.writeUTF( s );
+              i = dis.readInt(); dos.writeInt( i );
+              if ( i == PlotType.PLOT_PROJECTED ) {
+                j = dis.readInt(); dos.writeInt( j );
+                // OBLIQUE if ( version > 602029 ) dis.readInt();
+              }
+              // read palettes
+              s = dis.readUTF(); dos.writeUTF( s );
+              s = dis.readUTF(); dos.writeUTF( s );
+              s = dis.readUTF(); dos.writeUTF( s );
+              // in_scrap = true; // not used
+            }
+            break;
+          case 'N':
+            dos.write( 'N' );
+            /* scrap_index = */ i = dis.readInt(); dos.writeInt( i );
+            break;
+          case 'P':
+            DrawingPointPath point = DrawingPointPath.loadDataStream( version, dis, dx, dy /*, null */ );
+            point.toDataStream( dos, -1 ); // -1: use point scrap
+            break;
+          case 'T':
+            DrawingLabelPath label = DrawingLabelPath.loadDataStream( version, dis, dx, dy );
+            label.toDataStream( dos, -1 ); // -1: use label scrap
+            break;
+          case 'L':
+            DrawingLinePath line = DrawingLinePath.loadDataStream( version, dis, dx, dy /*, null */ );
+            line.toDataStream( dos, -1 ); // -1:  use line scrap
+            break;
+          case 'A':
+            DrawingAreaPath area = DrawingAreaPath.loadDataStream( version, dis, dx, dy /*, null */ );
+            area.toDataStream( dos, -1 ); // -1: use area scrap
+            break;
+          case 'J':
+            DrawingSpecialPath special = DrawingSpecialPath.loadDataStream( version, dis, dx, dy );
+            special.toDataStream( dos, -1 ); // -1: use special mScrap
+            break;
+          case 'U':
+            DrawingStationUser user = DrawingStationUser.loadDataStream( version, dis ); // consume DrawingStationName data
+            user.toDataStream( dos, -1 ); // -1L use station-user scrap
+            break;
+          case 'X':
+            DrawingStationName name = DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data
+            name.toDataStream( dos, -1 ); // -1: use station-name scrap
+            break;
+          case 'Y':
+            DrawingPhotoPath photo = DrawingPhotoPath.loadDataStream( version, dis, dx, dy );
+            if ( media_type == MediaInfo.MEDIA_PHOTO ) {
+              if ( media_id == photo.mId ) {
+                todo = false;
+              } else {
+                photo.toDataStream( dos, -1 ); // -1: use photo mScra
+              }
+            }
+            break;
+          case 'Z':
+            DrawingAudioPath audio = DrawingAudioPath.loadDataStream( version, dis, dx, dy );
+            if ( media_type == MediaInfo.MEDIA_AUDIO ) {
+              if ( media_id == audio.mId ) {
+                todo = false;
+              } else {
+                audio.toDataStream( dos, -1 ); // -1: use audio mScrap
+              }
+            }
+            break;
+          // case 'W':
+          //   DrawingSensorPath sensor = DrawingSensorPath.loadDataStream( version, dis, dx, dy );
+          //   if ( media_type == MediaInfo.MEDIA_SENSOR ) {
+          //     if ( media_id == sensor.mId ) {
+          //       todo = false;
+          //     } else {
+          //       sensor.toDataStream( dos, -1 ); -1: use sensor mScrap
+          //     }
+          //   }
+          //   break;
+
+          // case 'G':
+          //   DrawingFixedName.loadDataStream( version, dis ); // consume DrawingFixedName data
+          //   break;
+          case 'F':
+          case 'E':
+          default:
+            todo = false;
+            // TDLog.Error( "ERROR " + filename + " bad input (3) " + (int)what );
+            break;
+        } 
+      }
+      while ( ( n = dis.read( buffer ) ) > 0 ) {
+        dos.write( buffer, 0, n );
+      }
+      dos.flush();
+      // dos.close(); // does nothing
+      // dis.close(); // does nothing
+      fis.close();
+      fos.close();
+      if ( ! new_file.renameTo( old_file ) ) {
+        TDLog.e("ERROR file rename " + old_name );
+        return false;
+      }
     } catch ( FileNotFoundException e ) {
       e.printStackTrace();
       return false;
@@ -1981,6 +2155,12 @@ public class DrawingIO
               if ( audiopath != null ) {
               }
               break;
+            // case 'W':
+            //   DrawingSensorPath sensorpath = DrawingSensorPath.loadDataStream( version, dis, dx, dy );
+            //   if ( sensorpath != null ) {
+            //   }
+            //   break;
+
             // case 'G':
             //   DrawingFixedName.loadDataStream( version, dis ); // consume DrawingFixedName data
             //   break;
@@ -2108,6 +2288,10 @@ public class DrawingIO
             case 'Z':
               DrawingAudioPath.loadDataStream( version, dis, 0, 0 );
               break;
+            // case 'W':
+            //   DrawingSensorPath.loadDataStream( version, dis, dx, dy );
+            //   break;
+
             // case 'G':
             //   DrawingFixedName.loadDataStream( version, dis ); // consume DrawingFixedName data
             //   break;

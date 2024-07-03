@@ -488,7 +488,7 @@ class ShotNewDialog extends MyDialog
         if ( shot_to.length() > 0 ) {
           mLRUDatTo = mCBsplayAtTo.isChecked();
           String splay_station = mLRUDatTo ? shot_to : shot_from;
-          TDLog.v("manual shot at " + mAt + " with TO: " + shot_to + " splays at " + splay_station );
+          // TDLog.v("manual shot at " + mAt + " with TO: " + shot_to + " splays at " + splay_station );
           if ( distance.length() == 0 ) {
             distance = backdistance;
           } else if ( backdistance.length() == 0 ) {
@@ -620,12 +620,13 @@ class ShotNewDialog extends MyDialog
             // fos.flush();
             fos.close();
             mExif.writeExif( filepath );
-            TopoDroidApp.mData.insertPhoto( TDInstance.sid, photo_id, blk.mId,
+            TopoDroidApp.mData.insertPhotoRecord( TDInstance.sid, photo_id, blk.mId,
                                     "",
                                     TDUtil.currentDateTime(),
                                     "snap " + shot_from + " " + shot_to,
                                     PhotoInfo.CAMERA_TOPODROID,
-                                    ""  // TODO geomorphology code
+                                    "",  // TODO geomorphology code
+                                    PhotoInfo.TYPE_SHOT
             ); // FIXME TITLE has to go
           } catch ( IOException e ) {
             TDLog.Error( "IO exception " + e.getMessage() );
@@ -649,8 +650,9 @@ class ShotNewDialog extends MyDialog
       mTimer = new TimerTask( this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
       mTimer.execute();
     } else if ( cameraCheck && b == mBtnCamera ) {
-      new QCamCompass( mContext, TopoDroidApp.mShotWindow, this, null, true, true, PhotoInfo.CAMERA_TOPODROID ).show();
+      new QCamCompass( mContext, TopoDroidApp.mShotWindow, this, null, true, true, PhotoInfo.CAMERA_TOPODROID, null ).show();
                        // null inserter, with_box, with_delay
+                       // NOTE null MediaManager : do not insert photo record in table
     } else if ( b == mBtnBack ) {
       dismiss();
     }

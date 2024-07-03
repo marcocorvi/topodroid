@@ -65,7 +65,7 @@ class DrawingLineSectionDialog extends MyDialog
   private ImageView mIVimage;   // photo image
   private boolean mHSection;
   private boolean mExists;
-  private boolean hasPhoto;     // whether the xsection can have a photo
+  private boolean canTakePhoto;     // whether the xsection can have a photo
   private float mTT; // intersection abscissa
 
   private TDImage mTdImage = null;
@@ -125,7 +125,7 @@ class DrawingLineSectionDialog extends MyDialog
         if ( mTT > 1.0 ) mCenter = mPlotInfo.center;
       }
     }
-    hasPhoto = ( mTT <= 1.0 ) && TDandroid.checkCamera( context );
+    canTakePhoto = ( mTT <= 1.0 ) && TDandroid.checkCamera( context );
     // TDLog.v( "line id " + mId );
   }
 
@@ -163,7 +163,7 @@ class DrawingLineSectionDialog extends MyDialog
 
     mIVimage = (ImageView) findViewById( R.id.line_image );
     // mBtnFoto = (Button) findViewById( R.id.button_foto );
-    if ( hasPhoto ) {
+    if ( canTakePhoto ) {
       mBtnFoto = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); 
       button_list.addView( mBtnFoto );
       TDLayout.setMargins( mBtnFoto, 0, -10, 40, 10 );
@@ -239,7 +239,7 @@ class DrawingLineSectionDialog extends MyDialog
       long type = mHSection ? PlotType.PLOT_H_SECTION : PlotType.PLOT_SECTION;
       mNick = ( mETnick.getText() != null )? mETnick.getText().toString() : "";
       MyCheckBox cb = (MyCheckBox)v;
-      if ( hasPhoto && cb == mBtnFoto ) {
+      if ( canTakePhoto && cb == mBtnFoto ) {
         mParent.makePhotoXSection( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino );
       } else if ( cb == mBtnDraw ) {
         mParent.makePlotXSection( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino, mTT, mCenter );

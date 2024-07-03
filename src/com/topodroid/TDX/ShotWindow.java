@@ -104,6 +104,8 @@ public class ShotWindow extends Activity
                         , INewPlot
                         , IPhotoInserter
 {
+  static boolean mWaitPlot = false; // global flag to prevent opening a plot
+
   final static private int BTN_DOWNLOAD  = 0;
   final static private int BTN_BLUETOOTH = 1;
   final static private int BTN_PLOT      = 3;
@@ -889,7 +891,11 @@ public class ShotWindow extends Activity
       // updateDisplay( );
     } else if ( TDLevel.overNormal && p++ == pos ) { // PHOTO
       // mActivity.startActivity( new Intent( mActivity, PhotoActivity.class ) );
-      (new PhotoListDialog( this, mApp_mData )).show();
+      if ( mApp_mData.countAllPhotos( TDInstance.sid, TDStatus.NORMAL ) > 0 ) {
+        (new PhotoListDialog( this, mApp_mData )).show();
+      } else {
+        TDToast.makeWarn( R.string.no_photos );
+      }
     } else if ( TDLevel.overExpert && p++ == pos ) { // AUDIO
       List< AudioInfo > audios = mApp_mData.selectAllAudios( TDInstance.sid );
       if ( audios.size() > 0 ) {  
@@ -951,6 +957,7 @@ public class ShotWindow extends Activity
   }
 
   /**
+   * @param sid      shot ID
    * @param comment  photo comment
    * @param camera   camera type: 0 use URI, 1 use TopoDroid - not used
    * @param geomorphology code
@@ -958,7 +965,7 @@ public class ShotWindow extends Activity
   void doTakePhoto( long sid, String comment, int camera, String code )
   {
     // camera = 1;
-    mMediaManager.prepareNextPhoto( sid, comment, 1, camera, code ); // size 1 m
+    mMediaManager.prepareNextPhoto( sid, comment, 1, camera, code, MediaInfo.TYPE_SHOT ); // size 1 m
 
     // imageFile := PHOTO_DIR / surveyId / photoId .jpg
     // TDLog.Log( TDLog.LOG_SHOT, "photo " + imagefile.toString() );
@@ -966,7 +973,8 @@ public class ShotWindow extends Activity
     // if ( mMediaManager.isTopoDroidCamera() ) {
       // TDLog.v("take photo with TopoDroid");
       // new QCamCompass( this, this, (new MyBearingAndClino( mApp, mMediaManager.getImageFilepath()) ), this, false, false).show();  // false = with_box, false=with_delay
-      new QCamCompass( this, this, (new MyBearingAndClino( mApp, mMediaManager.getImageFilepath()) ), this, false, false, camera).show();  // false = with_box, false=with_delay
+      MyBearingAndClino bearing_clino = new MyBearingAndClino( mApp, mMediaManager.getImageFilepath());
+      new QCamCompass( this, this, bearing_clino, this, false, false, camera, mMediaManager).show();  // false = with_box, false=with_delay
     // } else {
     //   // TDLog.v("take photo with Android");
     //   try {
@@ -1106,8 +1114,8 @@ public class ShotWindow extends Activity
   public void insertPhoto( )
   {
     // FIXME TITLE has to go
-    mApp_mData.insertPhoto( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getShotId(), "", TDUtil.currentDateTime(),
-      mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode() );
+    mApp_mData.insertPhotoRecord( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(),
+      mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), PhotoInfo.TYPE_SHOT );
     // FIXME NOTIFY ? no
     updateDisplay( ); 
   }
@@ -1159,7 +1167,8 @@ public class ShotWindow extends Activity
                                   TDUtil.currentDateTime(),
                                   comment,
                                   type,
-                                  value );
+                                  value,
+                                  MediaInfo.TYPE_SHOT );
             // FIXME NOTIFY ? no
           }
         }
@@ -1540,11 +1549,15 @@ public class ShotWindow extends Activity
         }
         ret = true;
       } else if ( isButton1( b, BTN_PLOT ) ) {
-        if ( TDInstance.recentPlot != null ) {
-          startExistingPlot( TDInstance.recentPlot, TDInstance.recentPlotType, null );
+        if ( mWaitPlot ) {
+          TDToast.make( R.string.pleasewait );
         } else {
-          // onClick( view ); // fall back to onClick
-          new PlotListDialog( mActivity, this, mApp, null ).show();
+          if ( TDInstance.recentPlot != null ) {
+            startExistingPlot( TDInstance.recentPlot, TDInstance.recentPlotType, null );
+          } else {
+            // onClick( view ); // fall back to onClick
+            new PlotListDialog( mActivity, this, mApp, null ).show();
+          }
         }
         ret = true;
       } else if ( isButton1( b, BTN_MANUAL ) ) {
@@ -1613,7 +1626,11 @@ public class ShotWindow extends Activity
         // mSearch = null; // invalidate search
         new ShotDisplayDialog( mActivity, this ).show();
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // PLOT LIST
-        new PlotListDialog( mActivity, this, mApp, null ).show();
+        if ( mWaitPlot ) {
+          TDToast.make( R.string.pleasewait );
+        } else {
+          new PlotListDialog( mActivity, this, mApp, null ).show();
+        }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // NOTE
         if ( TDInstance.survey != null ) {
           (new DialogAnnotations( mActivity, TDInstance.survey )).show();
@@ -2915,7 +2932,9 @@ public class ShotWindow extends Activity
    */
   void startAudio( DBlock blk )
   {
-    (new AudioDialog( mActivity, /* this */ null, blk.mId, blk )).show();
+    // (new AudioDialog( mActivity, /* this */ null, blk.mId, blk, MediaInfo.TYPE_SHOT )).show();
+    long audio_id = mApp_mData.getAudioId( TDInstance.sid, blk.mId, MediaInfo.TYPE_SHOT );
+    (new AudioDialog( mActivity, /* this */ null, audio_id, blk, MediaInfo.TYPE_SHOT )).show();
   }
 
 }
