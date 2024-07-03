@@ -579,6 +579,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="photo_survey">split survey</string -->
     <!-- UNUSED string name="picture_no_station">Station name required</string -->
     <string name="plot_delete">Delete sketch ?</string>
+    <string name="scrap_delete">Delete scrap ?</string>
     <string name="item_delete">Delete item %1$s ?</string>
     <string name="splay_delete">Delete splay %1$s ?</string>
     <string name="plot_duplicate_name">Duplicate sketch name</string>

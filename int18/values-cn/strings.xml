@@ -566,6 +566,7 @@
     <!-- UNUSED string name="photo_survey">split survey</string -->
     <!-- UNUSED string name="picture_no_station">Station name required</string -->
     <string name="plot_delete">删除草图 ?</string>
+    <!-- TODO string name="scrap_delete">Delete scrap ?</string -->
     <string name="item_delete">删除项目 %1$s ?</string>
     <string name="splay_delete">删除辐侧 %1$s ?</string>
     <string name="plot_duplicate_name">重复的草图名称</string>

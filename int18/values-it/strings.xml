@@ -562,6 +562,7 @@
     <!-- UNUSED string name="photo_survey">dividi rilievo</string -->
     <!-- UNUSED string name="picture_no_station">Caposaldo o nome mancante</string -->
     <string name="plot_delete">Elimina disegno ?</string>
+    <string name="scrap_delete">Elimina scrap ?</string>
     <string name="item_delete">Cancellare elemento %1$s ?</string>
     <string name="splay_delete">Cancello splay %1$s ?</string>
     <string name="plot_duplicate_name">Nome disegno già presente</string>

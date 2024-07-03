@@ -564,6 +564,7 @@
     <!-- UNUSED string name="photo_survey">разорвать съёмку</string -->
     <!-- UNUSED string name="picture_no_station">Требуется номер пикета</string -->
     <string name="plot_delete">Удалить абрис ?</string>
+    <!-- TODO string name="scrap_delete">Delete scrap ?</string -->
     <string name="item_delete">Удалить пункт %1$s ?</string>
     <string name="splay_delete">Удалить сплей %1$s ?</string>
     <string name="plot_duplicate_name">Абрис с таким названием уже существует</string>

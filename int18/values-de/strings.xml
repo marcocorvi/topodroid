@@ -519,6 +519,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="photo_survey">Messzug teilen</string -->
   <!-- UNUSED string name="picture_no_station">Name erforderlich</string -->
   <string name="plot_delete">Skizze löschen?</string>
+    <!-- TODO string name="scrap_delete">Delete scrap ?</string -->
   <string name="item_delete">Element löschen: %1$s?</string>
   <string name="splay_delete">Hilfszug %1$s löschen?</string>
   <string name="plot_duplicate_name">Doppelter Name</string>

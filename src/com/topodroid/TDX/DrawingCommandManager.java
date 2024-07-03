@@ -89,7 +89,7 @@ public class DrawingCommandManager
   float mOffx = 0;
   float mOffy = 0;
 
-  private int mScrapIdx = 0; // scrap index
+  // private int mScrapIdx = 0; // scrap index
   private List< Scrap > mScraps;
   private Scrap mCurrentScrap; // mScraps[ mScrapIdx ]
 
@@ -182,56 +182,166 @@ public class DrawingCommandManager
 
   // ----------------------------------------------------------------
   // SCRAPS management
-  int scrapIndex() { return mScrapIdx; }
 
+  int scrapIndex() { return ( mCurrentScrap == null )? -1 : mCurrentScrap.mScrapIdx; }
+
+  /** @return the scrap number (in the list) for a given scap index, or -1 if not found
+   * @param idx   scrap index
+   */
+  private int getScrapNr( int idx )
+  {
+    int nr = 0;
+    for ( Scrap s : mScraps ) {
+      if ( s.mScrapIdx == idx ) return nr;
+      ++ nr;
+    }
+    return -1;
+  }
+
+  /** @return the maximum scrap index, or -1 if the scrap list is empty
+   */
+  private int getMaxScrapIdx()
+  { 
+    int size = mScraps.size();
+    return ( size == 0 )? -1 : mScraps.get( size-1 ).mScrapIdx; 
+  }
+
+  /** set the current scrap
+   * @param s  scrap that us set to current
+   */
+  private void setCurrentScrapByScrap( Scrap s )
+  { 
+    mCurrentScrap = s;
+    // mScrapIdx = mCurrentScrap.mScrapIdx;
+    TDLog.v("set current scrap by scrap " + mCurrentScrap.mScrapIdx );
+  }
+
+  /** set the current scrap
+   * @param nr   order-number of the scrap in the list (neg: first, more than size: last)
+   */
+  private void setCurrentScrapByNr( int nr )
+  {
+    if ( mMode >= 3 ) return;
+    int size = mScraps.size();
+    if ( size == 0 ) return;
+    if ( nr >= size ) { nr = 0; } 
+    else if ( nr < 0 ) { nr = size - 1; }
+    mCurrentScrap = mScraps.get( nr );
+    // mScrapIdx = mCurrentScrap.mScrapIdx;
+    TDLog.v("set current scrap by nr " + nr + " idx " + mCurrentScrap.mScrapIdx );
+  }
+
+  private void setCurrentScrapByIdx( int idx ) // force = false // TH2EDIT no force
+  {
+    if ( idx < 0 ) return; // -1;
+    if ( mCurrentScrap != null && idx == mCurrentScrap.mScrapIdx ) return;
+    // if ( mMode >= 3 && idx > 0 ) { // TODO CHECK
+    //   TDLog.v("Xsection scrap idx " + idx );
+    //   return;
+    // }
+    for ( Scrap s : mScraps ) {
+      if ( s.mScrapIdx == idx ) {
+        setCurrentScrapByScrap( s );
+        return;
+      }
+    }
+    // if ( idx >= getMaxScrapIdx() ) newScrapIndex( false ); // TH2EDIT no false
+    addScrap( idx ); // TH2EDIT no false
+    // mScrapIdx = idx;
+    mCurrentScrap = mScraps.get( idx );
+    // TDLog.v("set current scrap by idx " + mScrapIdx );
+  }
+
+  /** change current scrap
+   * @param k   advance step (in the list)
+   */
   int toggleScrapIndex( boolean force, int k ) // TH2EDIT no force
   { 
     if ( force || mMode < 3 ) { // TH2EDIT no force
-      int size = mScraps.size();
-      mScrapIdx += k;
-      if ( mScrapIdx >= size ) { mScrapIdx = 0; } 
-      else if ( mScrapIdx < 0 ) { mScrapIdx = size - 1; }
-      mCurrentScrap = mScraps.get( mScrapIdx );
+      int nr = getScrapNr( mCurrentScrap.mScrapIdx ) + k;
+      TDLog.v("toggle scrap nr " + nr + " (current index " + mCurrentScrap.mScrapIdx + ")" );
+      setCurrentScrapByNr( nr );
     }
-    return mScrapIdx;
+    return mCurrentScrap.mScrapIdx;
   }
 
+  /** delete the current scrap
+   * @return true if the scrap has been deleted
+   */
+  boolean deleteCurrentScrap( boolean force ) // TH2EDIT no force
+  { 
+    if ( ( ! force ) && mMode >= 3 ) return false; // TH2EDIT no force
+    if ( mScraps.size() <= 1 ) return false;
+    int idx = mCurrentScrap.mScrapIdx;
+    for ( Scrap s : mScraps ) {
+      if ( s.mScrapIdx == idx ) {
+        mScraps.remove( s );
+        setCurrentScrapByNr( 0 );
+        return true;
+      }    
+    }
+    return false;
+  }
+
+  
   int newScrapIndex( boolean force )  // TH2EDIT no force
   { 
     if ( force || mMode < 3 ) { // TH2EDIT no force
-      // TDLog.v( "plot: " + mPlotName + " - new scrap. currently " + mScraps.size() );
-      mScrapIdx = mScraps.size();
-      mCurrentScrap = new Scrap( mScrapIdx, mPlotName );
-      mScraps.add( mCurrentScrap ); 
+      int idx = getMaxScrapIdx() + 1;
+      // TDLog.v( "plot " + mPlotName + " scrap idx " + idx + ": current nr " + mScraps.size() );
+      addScrap( idx );
+      // mScrapIdx = idx;
       // FIXME-HIDE addShotsToScrapSelection( mCurrentScrap );
     }
-    return mScrapIdx;
+    return mCurrentScrap.mScrapIdx;
   }
 
-  private void setCurrentScrap( int idx ) // force = false // TH2EDIT no force
+  private int addScrap( int idx )
   {
-    if ( mMode < 3 ) {
-      if ( idx != mScrapIdx ) {
-        if ( idx < 0 ) return; // -1;
-        while ( idx >= mScraps.size() ) newScrapIndex( false ); // TH2EDIT no false
-        mScrapIdx = idx;
-        mCurrentScrap = mScraps.get( mScrapIdx );
-      }
-    }
-    // return mScrapIdx;
+    mCurrentScrap = new Scrap( idx, mPlotName );
+    mScraps.add( mCurrentScrap ); 
+    return mCurrentScrap.mScrapIdx; // idx
   }
 
-  public int scrapMaxIndex() { return mScraps.size(); }
 
-  // for export classes
+  /** @return the maximum scrap index plus one (this was the list.size() when the scrap indices were consecutive)
+   * @note used by DXF export
+   */
+  public int scrapMaxIndex() 
+  { 
+    int max = -1;
+    for ( Scrap s : mScraps ) if ( s.mScrapIdx > max ) max = s.mScrapIdx;
+    return max + 1;
+  }
+
+  /** @return the number of scraps in the list
+   */
+  public int scrapNumber() { return mScraps.size(); }
+
+  /** @return the number of the current scrap in the list, or -1 if the current scrap is not in the list
+   */
+  public int currentScrapNumber() 
+  { 
+    int idx = mCurrentScrap.mScrapIdx;
+    int nr = 0;
+    for ( Scrap s : mScraps ) {
+      if ( s.mScrapIdx == idx ) return nr;
+      ++ nr;
+    }
+    return -1;
+  }
+
+  /** @return the list of scraps
+   * @note for export classes
+   */
   public List< Scrap > getScraps() { return mScraps; }
   
   // TH2EDIT scrap options are used only for TH2EDIT
   public boolean setScrapOptions( int idx, String options )
   {
-    for ( Scrap scrap : mScraps ) {
-      if ( idx == scrap.mScrapIdx ) {
-        scrap.mScrapOptions = options;
+    for ( Scrap s : mScraps ) {
+      if ( idx == s.mScrapIdx ) {
+        s.mScrapOptions = options;
         return true;
       }
     }
@@ -1174,7 +1284,7 @@ public class DrawingCommandManager
   void addUserStation( DrawingStationUser path ) 
   { 
     // TDLog.v("USER STATION " + path.name() );
-    setCurrentScrap( path.mScrap );
+    setCurrentScrapByIdx( path.mScrap );
     mCurrentScrap.addUserStation( path );
   }
 
@@ -1189,7 +1299,7 @@ public class DrawingCommandManager
         mMaxAreaIndex = area.mAreaCnt;
       }
     }
-    setCurrentScrap( path.mScrap );
+    setCurrentScrapByIdx( path.mScrap );
     mCurrentScrap.addCommand( path ); 
   }
 
@@ -1199,7 +1309,7 @@ public class DrawingCommandManager
   void addDotCommand( DrawingPath path ) 
   { 
     if ( path instanceof DrawingSpecialPath ) { 
-      setCurrentScrap( path.mScrap );
+      setCurrentScrapByIdx( path.mScrap );
       mCurrentScrap.addSpecialCommand( path ); 
     } else {
       addCommand( path );

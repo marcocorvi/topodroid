@@ -6259,6 +6259,20 @@ public class DrawingWindow extends ItemDrawer
       );
     }
 
+    /** scrap delete confirmation dialog
+     */
+    void askDeleteScrap()
+    {
+      TopoDroidAlertDialog.makeAlert( mActivity, getResources(), R.string.scrap_delete,
+        new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick( DialogInterface dialog, int btn ) {
+            doScrapDelete();
+          }
+        }
+      );
+    }
+
     /** clear the hot path and show/hide the tool layout
      * @param visibility  tool layout visibility
      */
@@ -9393,13 +9407,21 @@ public class DrawingWindow extends ItemDrawer
   // ------------------------------------------------------------------
   // SCRAPS, X-SECTIONS, OUTLINES 
 
-  /** @return the index of the active scrap of the current ploy
-   */
-  int getScrapIndex() { return mDrawingSurface.scrapIndex(); }
+  // /** @return the index of the active scrap of the current plot
+  //  */
+  // int getScrapIndex() { return mDrawingSurface.scrapIndex(); }
 
-  /** @return the maximum index of the scraps of the current ploy
+  // /** @return the maximum index of the scraps of the current plot
+  //  */
+  // int getScrapMaxIndex() { return mDrawingSurface.scrapMaxIndex(); }
+
+  /** @return the number of the scraps of the current plot
    */
-  int getScrapMaxIndex() { return mDrawingSurface.scrapMaxIndex(); }
+  int getScrapNumber() { return mDrawingSurface.scrapNumber(); }
+
+  /** @return the number (index in the list) of the current scrap
+   */
+  int getCurrentScrapNumber() { return mDrawingSurface.currentScrapNumber(); }
 
   /** switch to the next scrap of the current ploy
    */
@@ -9414,8 +9436,17 @@ public class DrawingWindow extends ItemDrawer
   void scrapNew() 
   { 
     int scrap_idx = mDrawingSurface.newScrapIndex( false ); // TH2EDIT no false param
+    TDLog.v("new scrap index " + scrap_idx );
     mApp_mData.updatePlotMaxScrap( mSid, mPid, scrap_idx );
   }
+
+  /** ask whether to delete the current scrap
+   */
+  void scrapDelete() { askDeleteScrap(); }
+
+  /** delete the current scrap
+   */
+  void doScrapDelete() { mDrawingSurface.deleteCurrentScrap( mTh2Edit ); }
 
   /** prepare for the dialog about the scrap outline:
    * select the plots with same type as the current plot and open the dialog

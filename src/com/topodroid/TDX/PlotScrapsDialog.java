@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
 import com.topodroid.ui.MyDialog;
 
@@ -34,6 +34,7 @@ class PlotScrapsDialog extends MyDialog
   private Button   mBtnBack;
   private Button   mBtnPrev;
   private Button   mBtnNew;
+  private Button   mBtnDelete;
 
   private final DrawingWindow mParent;
 
@@ -55,19 +56,29 @@ class PlotScrapsDialog extends MyDialog
     mBtnPrev   = (Button) findViewById(R.id.btn_prev );
     mBtnNew    = (Button) findViewById(R.id.btn_new );
     mBtnBack   = (Button) findViewById(R.id.btn_back );
+    mBtnDelete = (Button) findViewById(R.id.btn_delete );
 
     mTvScraps = (TextView) findViewById( R.id.scraps_nr );
-    int idx = mParent.getScrapIndex() + 1; // people count from 1
-    int max = mParent.getScrapMaxIndex();
-    mTvScraps.setText( String.format( mContext.getResources().getString( R.string.scrap_string ), idx, max ) );
+    // int idx = mParent.getScrapIndex() + 1; // people count from 1
+    // int max = mParent.getScrapMaxIndex();
+    int nr  = mParent.getScrapNumber();
+    int nr0 = mParent.getCurrentScrapNumber() + 1;
+    mTvScraps.setText( String.format( mContext.getResources().getString( R.string.scrap_string ), nr0, nr ) );
 
+    // TDLog.v("Scrap " + nr0 + " of " + nr );
 
-    if ( idx < max ) {
+    if ( nr <= 1 ) { 
+      mBtnDelete.setVisibility( View.GONE );
+    } else {
+      mBtnDelete.setOnClickListener( this );
+    }
+
+    if ( nr0 < nr /* idx < max */ ) { 
       mBtnNext.setOnClickListener( this );
     } else {
       mBtnNext.setBackgroundColor( TDColor.MID_GRAY );
     }
-    if ( idx > 1 ) {
+    if ( nr0 > 1 /* idx > 1 */ ) {
       mBtnPrev.setOnClickListener( this );
     } else {
       mBtnPrev.setBackgroundColor( TDColor.MID_GRAY );
@@ -89,6 +100,8 @@ class PlotScrapsDialog extends MyDialog
       mParent.scrapPrev( );
     } else if ( b == mBtnNew ) {
       mParent.scrapNew( );
+    } else if ( b == mBtnDelete ) {
+      mParent.scrapDelete( );
     // } else if ( b == mBtnBack ) {
       /* nothing */
     }

@@ -88,11 +88,19 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
 
   /** get the current scrap index
    */
-  int scrapIndex()              { return ( commandManager == null )? 0 : commandManager.scrapIndex(); }
+  int scrapIndex() { return ( commandManager == null )? 0 : commandManager.scrapIndex(); }
 
-  /** get the maximum scrap index
+  // /** get the maximum scrap index
+  //  */
+  // int scrapMaxIndex() { return ( commandManager == null )? 0 : commandManager.scrapMaxIndex(); }
+
+  /** get the number of scraps
    */
-  int scrapMaxIndex()           { return ( commandManager == null )? 0 : commandManager.scrapMaxIndex(); }
+  int scrapNumber() { return ( commandManager == null )? -1 : commandManager.scrapNumber(); }
+
+  /** get the number (index in the list) of the current scrap
+   */
+  int currentScrapNumber() { return ( commandManager == null )? -1 : commandManager.currentScrapNumber(); }
 
   /** get a new scrap index 
    * @param force   whether to do also for command-3 // TH2EDIT no force param
@@ -101,9 +109,19 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
 
   /** toggle the scrap index
    * @param force   whether to do also for command-3 // TH2EDIT no force param
-   * @param k  ...
+   * @param k       advance step
    */
   int toggleScrapIndex( boolean force, int k ) { return ( commandManager == null )? 0 : commandManager.toggleScrapIndex( force, k ); }
+
+  /** delete the current scrap
+   * @param force   whether to do also for command-3 // TH2EDIT no force param
+   */
+  void deleteCurrentScrap( boolean force ) 
+  { 
+    if ( commandManager == null ) return;
+    if ( ( ! force ) && commandManager == mCommandManager3 ) return;
+    commandManager.deleteCurrentScrap( force );
+  }
 
   // TH2EDIT
   public boolean setScrapOptions( int idx, String options )

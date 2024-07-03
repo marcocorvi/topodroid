@@ -566,6 +566,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="photo_survey">Découper le relevé</string -->
     <!-- UNUSED string name="picture_no_station">Nom station requis</string -->
     <string name="plot_delete">Supprimer le croquis ?</string>
+    <!-- TODO string name="scrap_delete">Delete scrap ?</string -->
     <string name="item_delete">Supprimer l\'objet %1$s ?</string>
     <string name="splay_delete">Supprimer le cheminement %1$s ?</string>
     <string name="plot_duplicate_name">Dupliquer le nom du relevé</string>

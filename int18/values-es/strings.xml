@@ -569,6 +569,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="photo_survey">Dividir topografía</string -->
     <!-- UNUSED string name="picture_no_station">Necesitas una estación / nombre para la foto</string -->
     <string name="plot_delete">¿Quiere eliminar el croquis?</string>
+    <!-- TODO string name="scrap_delete">Delete scrap ?</string -->
     <string name="item_delete">¿Quiere eliminar elemento %1$s?</string>
     <string name="splay_delete">¿Quiere eliminar tomas radiales %1$s ?</string>
     <string name="plot_duplicate_name">Nombre de croquis duplicado</string>

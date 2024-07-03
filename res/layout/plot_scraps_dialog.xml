@@ -17,31 +17,43 @@
   />
 
   <LinearLayout
-     android:layout_width="wrap_content"
+     android:layout_width="match_parent"
      android:layout_height="wrap_content"
-     android:layout_gravity="end"
-     android:gravity="end"
+     android:gravity="start"
      android:orientation="horizontal"
      android:layout_marginTop="@dimen/marginvbig"
      >
-    <Button android:id="@+id/btn_new"
+    <Button android:id="@+id/btn_delete"
       style="@style/button_default"
       android:layout_marginEnd="@dimen/marginh"
-      android:text="@string/button_new"
+      android:text="@string/button_delete"
+      android:textColor="#ffff0000"
     />
-    <Button android:id="@+id/btn_prev"
-      style="@style/button_default"
-      android:text="@string/button_prev"
-      android:layout_marginEnd="@dimen/marginh"
-    />
-    <Button android:id="@+id/btn_next"
-      style="@style/button_default"
-      android:text="@string/button_next"
-    />
+    <LinearLayout
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:gravity="end"
+       android:orientation="horizontal"
+       >
+      <Button android:id="@+id/btn_new"
+        style="@style/button_default"
+        android:layout_marginEnd="@dimen/marginh"
+        android:text="@string/button_new"
+      />
+      <Button android:id="@+id/btn_prev"
+        style="@style/button_default"
+        android:text="@string/button_prev"
+        android:layout_marginEnd="@dimen/marginh"
+      />
+      <Button android:id="@+id/btn_next"
+        style="@style/button_default"
+        android:text="@string/button_next"
+      />
+    </LinearLayout>
   </LinearLayout>
 
   <LinearLayout android:id="@+id/help"
-     android:layout_width="wrap_content" 
+     android:layout_width="match_parent" 
      android:layout_height="wrap_content"
      android:gravity="start"
      android:orientation="horizontal"
