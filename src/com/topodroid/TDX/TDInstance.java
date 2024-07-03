@@ -177,11 +177,13 @@ public class TDInstance
    */
   static boolean isDeviceBLE()    { return deviceA != null && ( deviceA.isBric() || deviceA.isSap() || deviceA.isDistoXBLE()); }
 
+  public static boolean isDeviceCavway()   { return deviceA != null && deviceA.isCavway(); }
+
   /** @return true if the device is LE
    * @param device   bluetooth device
    * SIWEI_TIAN
    */
-  private static boolean isDeviceBLE( Device device )    { return device != null && ( device.isBric() || device.isSap() || device.isDistoXBLE()); }
+  private static boolean isDeviceBLE( Device device )    { return device != null && ( device.isBric() || device.isSap() || device.isDistoXBLE() || device.isCavway()); }
 
   /** @return true if the connection is set in continuous mode
    */
@@ -197,7 +199,7 @@ public class TDInstance
    */
   static boolean hasDeviceRemoteControl() 
   {
-    return deviceA != null && ( deviceA.isX310() || deviceA.isBric() || deviceA.isDistoXBLE() || deviceA.isSap6() ); // SIWEI - FIXME_SAP6
+    return deviceA != null && ( deviceA.isX310() || deviceA.isBric() || deviceA.isDistoXBLE() || deviceA.isCavway() || deviceA.isSap6()) ; // SIWEI - FIXME_SAP6
   }
 
   // FIXME VirtualDistoX

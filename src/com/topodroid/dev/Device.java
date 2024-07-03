@@ -34,7 +34,7 @@ public class Device
   public final static String NAME_SAP5_2    = "SAP5_";
   public final static String NAME_SAP6      = "SAP6_";
   public final static String NAME_SAP6_2    = "SAP_";
-  public final static String NAME_CAVWAY    = "CAVWAY-";
+  public final static String NAME_CAVWAY    = "CavwayX1-";
   
   // supported models and their common names
   public final static String[] mModels = { NAME_DISTOX1, NAME_DISTOX2, NAME_DISTOXBLE,
@@ -82,8 +82,8 @@ public class Device
   public final static int DISTO_CAVWAY = 10;
 
   // SIWEI_TIAN                                       0          1         2          3          4       5       6        7            8       9        10
-  final static String[] typeString               = { "Unknown", "A3",     "X310",    "X000",    "BLEX", "SAP5", "BRIC4", "XBLE",      "SAP6", "BRIC5", "CAVWAY" };
-  private final static String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0", "BleX", "Sap5", "Bric4", "DistoXBLE", "Sap6", "Bric5", "Cavway" };
+  final static String[] typeString               = { "Unknown", "A3",     "X310",    "X000",    "BLEX", "SAP5", "BRIC4", "XBLE",      "SAP6", "BRIC5", "CVWY1" };
+  private final static String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0", "BleX", "Sap5", "Bric4", "DistoXBLE", "Sap6", "Bric5", "CVWY1" };
   
   public static String typeToString( int type )
   {
@@ -115,7 +115,7 @@ public class Device
   public boolean isSap( )       { return mType == DISTO_SAP5 || mType == DISTO_SAP6; }
   public boolean isSap5( )      { return mType == DISTO_SAP5; }
   public boolean isSap6( )      { return mType == DISTO_SAP6; } // FIXME_SAP6
-  public boolean isCavwau()     { return mType == DISTO_CAVWAY; }
+  public boolean isCavway()     { return mType == DISTO_CAVWAY; }
 
   public static boolean isDistoX( int type )    { return type == DISTO_X310 || type == DISTO_A3; }
   public static boolean isA3( int type )        { return type == DISTO_A3; }
@@ -132,6 +132,7 @@ public class Device
   public static boolean isDistoX( String bt_name ) { return bt_name.startsWith("DistoX"); }
   public static boolean isSap( String bt_name ) { return bt_name.startsWith("Shetland") || bt_name.startsWith("SAP"); }
   public static boolean isBric( String bt_name ) { return bt_name.startsWith("BRIC"); }
+  public static boolean isCavway( String bt_name ) { return bt_name.startsWith("CavwayX1"); }
 
   // SIWEI_TIAN
   // public boolean canSendCommand() { return mType == DISTO_X310 mType == DISTO_XBLE || mType == DISTO_BRIC4 || mType == DISTO_BRIC5 || mType == DISTO_SAP6; }

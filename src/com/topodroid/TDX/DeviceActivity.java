@@ -11,6 +11,8 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.dev.cavway.CavwayInfoDialog;
+import com.topodroid.dev.cavway.CavwayInfoReadTask;
 import com.topodroid.dev.distox_ble.DistoXBLEInfoDialog; // SIWEI
 import com.topodroid.dev.distox_ble.DistoXBLEInfoReadTask;
 import com.topodroid.dev.distox_ble.DistoXBLEMemoryDialog;
@@ -544,6 +546,9 @@ public class DeviceActivity extends Activity
                 mApp_mDData.insertDevice( addr, bt_name, name, null );
                 dev = mApp_mDData.getDevice( addr );
               // }
+            } else if(Device.isCavway( bt_name)){
+              mApp_mDData.insertDevice( addr, bt_name, name, null );
+              dev = mApp_mDData.getDevice( addr );
             }
           }
         } else {
@@ -695,7 +700,7 @@ public class DeviceActivity extends Activity
       if ( TDLevel.overNormal ) {
         TDandroid.setButtonBackground( mButton1[IDX_READ], mBMread_no );
       }
-    } else if ( TDInstance.isDeviceXBLE()) { // SIWEI Changed on Jun 2022
+    } else if ( TDInstance.isDeviceXBLE() || TDInstance.isDeviceCavway()) { // SIWEI Changed on Jun 2022
       for ( int k=1; k<mNrButton1; ++k ) mButton1[k].setVisibility( View.VISIBLE ); // FIXME is this OK ?
       TDandroid.setButtonBackground( mButton1[IDX_TOGGLE], mBMtoggle ); // this should already be enableButtons()
       TDandroid.setButtonBackground( mButton1[IDX_CALIB], mBMcalib );
@@ -767,6 +772,10 @@ public class DeviceActivity extends Activity
           (new InfoReadBricTask( mApp, info )).execute();
         } else if ( currDeviceA().mType == Device.DISTO_SAP5 || currDeviceA().mType == Device.DISTO_SAP6 ) {
           TDToast.makeBad( R.string.unsupported_device_type );
+        } else if (currDeviceA().mType == Device.DISTO_CAVWAY) { //SIWEI TIAN
+          CavwayInfoDialog info = new CavwayInfoDialog(this, this, currDeviceA(), mApp);
+          info.show();
+          (new CavwayInfoReadTask(mApp, info)).execute();
         } else {
           // TDLog.Error( "Unknown device type " + currDeviceA().mType );
           TDToast.makeBad( String.format(Locale.US, getResources().getString( R.string.unknown_device_type ), currDeviceA().mType ) );

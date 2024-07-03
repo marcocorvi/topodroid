@@ -11,6 +11,8 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.dev.cavway.CavwayComm;
+import com.topodroid.dev.cavway.CavwayInfoDialog;
 import com.topodroid.dev.distox_ble.DistoXBLEComm; // SIWEI_TIAN
 // import com.topodroid.dev.distox_ble.DistoXBLEConst;
 import com.topodroid.dev.distox_ble.DistoXBLEInfoDialog;
@@ -869,6 +871,10 @@ public class TopoDroidApp extends Application
         String address = TDInstance.deviceAddress();
         BluetoothDevice bt_device = TDInstance.getBleDevice();
         mComm = new DistoXBLEComm( this,this, address, bt_device );
+      } else if (TDInstance.isDeviceCavway()){
+        String address = TDInstance.deviceAddress();
+        BluetoothDevice bt_device = TDInstance.getBleDevice();
+        mComm = new CavwayComm( this,this, address, bt_device );
       }
     // }
   }
@@ -2553,6 +2559,44 @@ public class TopoDroidApp extends Application
     return false;
   }
 
+  //--------------Cavway Functions------------------------
+  // SIWEI_TIAN Added on Jun 2022
+  /** retrieve the DISTOXBLE info
+   * @param info   info display dialog
+   * @return true if successful
+   */
+  public boolean getCavwayInfo( CavwayInfoDialog info )
+  {
+    if ( mComm != null && mComm instanceof CavwayComm ) {
+      CavwayComm comm = (CavwayComm)mComm;
+      /* // boolean is_connect = comm.isConnected();
+      if ( ! comm.isConnected() ) {
+        connectDevice( lister?, TDInstance.deviceAddress(), DataType.DATA_ALL, timeout );
+        // TDLog.v("BRIC info: wait 4 secs");
+        TDUtil.yieldDown( 1000 ); // FIXME was 4000
+      }
+      int wait_cnt = 0;
+      while( ! comm.isConnected() ) {
+        TDUtil.yieldDown( 500 );
+        wait_cnt++;
+        if ( wait_cnt > 10 ) {
+          TDLog.e("DistoXBLE info: failed to connect");
+          return false;
+        }
+      } */
+      comm.tryConnectDevice( TDInstance.deviceAddress(), null, DataType.DATA_ALL );
+      comm.getCavwayInfo( info );
+
+      if ( comm.isConnected() ) {
+        TDUtil.yieldDown( 1000 ); // 500
+        disconnectComm();
+      }
+      return true;
+    }
+    return false;
+  }
+
+
   // --------------------------------------------------------
 
   // FIXME_SAP6
@@ -2699,6 +2743,35 @@ public class TopoDroidApp extends Application
         return true;
       } else {
         return ((DistoXBLEComm)mComm).setXBLELaser(TDInstance.deviceAddress(), what, nr, lister, data_type, closeBT );
+      }
+    } else {
+      TDLog.Error("set XBLE laser: not XBLE comm");
+    }
+    return false;
+  }
+
+  /** set the Cavway laser
+   * @param what      what to do:  0: off, 1: on, 2: measure
+   * @param nr        number od data to download
+  # @param lister    optional lister
+   * @param data_type type of expected data
+  # @param closeBT   whether to close the connection at the end
+   * @param do_thread whether to run on a thread
+   *                  SIWEI TIAN added on Jul
+   */
+  public boolean setCavwayLaser( int what, int nr, ListerHandler lister, int data_type, boolean closeBT, boolean do_thread ) // FIXME_LISTER
+  {
+    if ( mComm == null || TDInstance.getDeviceA() == null ) return false;
+    if ( mComm instanceof CavwayComm ) {
+      if ( do_thread ) {
+        (new Thread() {
+          public void run() {
+            ((CavwayComm)mComm).setCavwayLaser(TDInstance.deviceAddress(), what, nr, lister, data_type, closeBT );
+          }
+        } ).start();
+        return true;
+      } else {
+        return ((CavwayComm)mComm).setCavwayLaser(TDInstance.deviceAddress(), what, nr, lister, data_type, closeBT );
       }
     } else {
       TDLog.Error("set XBLE laser: not XBLE comm");
