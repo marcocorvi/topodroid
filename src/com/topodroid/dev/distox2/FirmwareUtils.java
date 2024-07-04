@@ -160,7 +160,7 @@ public class FirmwareUtils
       case 2640: len = 25604; break;
       case 2700: len = 15732; break; // 20221016
       case 2701: len = 15828; break; // 20221029
-      case 2710: lenn= 15944; break; // 20240703
+      case 2710: len = 15944; break; // 20240703
     }
     if ( len == 0 ) return false; // bad firmware version
     len /= 4; // number of int to read
