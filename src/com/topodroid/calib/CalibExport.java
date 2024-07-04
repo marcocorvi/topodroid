@@ -53,6 +53,7 @@ public class CalibExport
    */
   public static String exportCalibAsCsv( long cid, DeviceHelper data, CalibInfo ci, String calib_name )
   {
+    boolean two_sensors = ( ci.sensors == 2 ); // TWO_SENSORS
     try {
       // TDLog.Log( TDLog.LOG_IO, "export calibration " + name );
       // TDPath.checkPath( filename );
@@ -67,12 +68,16 @@ public class CalibExport
       pw.format("# %s\n", ci.device );
       pw.format("# %s\n", ci.comment );
       pw.format("# %d\n", ci.algo );
+      pw.format("# %d\n", ci.sensors );
 
       List< CBlock > list = data.selectAllGMs( cid, 1, true ); // status 1: all shots, true: negative_grp too
       for ( CBlock b : list ) {
         b.computeBearingAndClino();
         pw.format(Locale.US, "%d, %d, %d, %d, %d, %d, %d, %d, %.2f, %.2f, %.2f, %.4f, %d\n",
           b.mId, b.gx, b.gy, b.gz, b.mx, b.my, b.mz, b.mGroup, b.mBearing, b.mClino, b.mRoll, b.mError, b.mStatus );
+        if ( two_sensors ) { // TWO_SENSORS add a second line for the second sensor set
+          pw.format(Locale.US, "%d, %d, %d, %d, %d, %d\n", b.gx2, b.gy2, b.gz2, b.mx2, b.my2, b.mz2 );
+        }
       }
   
       CalibResult res = new CalibResult();
@@ -82,15 +87,15 @@ public class CalibExport
 
       String coeff_str = data.selectCalibCoeff( cid );
       if ( coeff_str != null ) {
-        byte[] coeff = CalibAlgo.stringToCoeff( coeff_str );
+        byte[] coeff1 = CalibAlgo.stringToCoeff( coeff_str, false );
         TDMatrix mG = new TDMatrix();
         TDMatrix mM = new TDMatrix();
         TDVector vG = new TDVector();
         TDVector vM = new TDVector();
         TDVector nL = new TDVector();
-        CalibAlgo.coeffToG( coeff, vG, mG );
-        CalibAlgo.coeffToM( coeff, vM, mM );
-        CalibAlgo.coeffToNL( coeff, nL );
+        CalibAlgo.coeffToG( coeff1, vG, mG );
+        CalibAlgo.coeffToM( coeff1, vM, mM );
+        CalibAlgo.coeffToNL( coeff1, nL );
         pw.format(Locale.US, "# GB %.4f %.4f %.4f\n", vG.x,   vG.y,   vG.z );
         pw.format(Locale.US, "# GA %.4f %.4f %.4f\n", mG.x.x, mG.x.y, mG.x.z );
         pw.format(Locale.US, "#    %.4f %.4f %.4f\n", mG.y.x, mG.y.y, mG.y.z );
@@ -100,6 +105,23 @@ public class CalibExport
         pw.format(Locale.US, "#    %.4f %.4f %.4f\n", mM.y.x, mM.y.y, mM.y.z );
         pw.format(Locale.US, "#    %.4f %.4f %.4f\n", mM.z.x, mM.z.y, mM.z.z );
         pw.format(Locale.US, "# NL %.4f %.4f %.4f\n", nL.x,   nL.y,   nL.z );
+        if ( two_sensors ) { // TWO_SENSORS
+          byte[] coeff2 = CalibAlgo.stringToCoeff( coeff_str, true );
+          if ( coeff2 != null ) {
+            CalibAlgo.coeffToG( coeff2, vG, mG );
+            CalibAlgo.coeffToM( coeff2, vM, mM );
+            CalibAlgo.coeffToNL( coeff2, nL );
+            pw.format(Locale.US, "# GB %.4f %.4f %.4f\n", vG.x,   vG.y,   vG.z );
+            pw.format(Locale.US, "# GA %.4f %.4f %.4f\n", mG.x.x, mG.x.y, mG.x.z );
+            pw.format(Locale.US, "#    %.4f %.4f %.4f\n", mG.y.x, mG.y.y, mG.y.z );
+            pw.format(Locale.US, "#    %.4f %.4f %.4f\n", mG.z.x, mG.z.y, mG.z.z );
+            pw.format(Locale.US, "# MB %.4f %.4f %.4f\n", vM.x,   vM.y,   vM.z );
+            pw.format(Locale.US, "# MA %.4f %.4f %.4f\n", mM.x.x, mM.x.y, mM.x.z );
+            pw.format(Locale.US, "#    %.4f %.4f %.4f\n", mM.y.x, mM.y.y, mM.y.z );
+            pw.format(Locale.US, "#    %.4f %.4f %.4f\n", mM.z.x, mM.z.y, mM.z.z );
+            pw.format(Locale.US, "# NL %.4f %.4f %.4f\n", nL.x,   nL.y,   nL.z );
+          }
+        }
       }
       bw.flush();
       bw.close();
@@ -139,6 +161,9 @@ public class CalibExport
   // static int importCalibFromCsv( DeviceHelper data, String filename, String device_name )
   static public  int importCalibFromCsv( DeviceHelper data, File file, String device_name ) // PRIVATE FILE
   {
+    int version = 0; // TopoDroid version of the CSV file
+    int sensors = 1; // default one sensor set
+    boolean two_sensors = false;
     int ret = 0;
     try {
       // TDPath.checkPath( filename );
@@ -151,6 +176,16 @@ public class CalibExport
       if ( line == null || ! line.contains("TopoDroid") ) {
         ret = -1; // NOT TOPODROID CSV
       } else {
+        line.trim();
+        int pos = line.indexOf("TopoDroid v" );
+        String v_str = line.substring( pos+11 );
+        String[] vals = v_str.split("\\.");
+        int v1 = Integer.parseInt( vals[0] );
+        int v2 = Integer.parseInt( vals[1] );
+        int v3 = Integer.parseInt( vals[2] );
+        version = v1 * 100000 + v2 * 1000 + v3;
+        TDLog.v("CSV version " + version );
+ 
         br.readLine(); // skip empty line
         String name = nextLineAtPos( br, 2 );
         if ( data.hasCalibName( name ) ) {
@@ -172,18 +207,27 @@ public class CalibExport
                 algo = Long.parseLong( line.substring(2) );
               } catch ( NumberFormatException e ) { TDLog.v("Error " + e.getMessage() ); }
               line = br.readLine();
+              if ( version > 602078 && line != null && line.charAt(0) == '#' ) { // TWO_SENSORS
+                try {
+                  sensors = Integer.parseInt( line.substring(2) );
+                  two_sensors = ( sensors == 2 );
+                } catch ( NumberFormatException e ) { TDLog.v("Error " + e.getMessage() ); }
+                line = br.readLine();
+              }
+
+                
             }
             if ( line == null ) {
               ret = -4;
             } else {
-              long cid = data.insertCalibInfo( name, date, device, comment, algo );
+              long cid = data.insertCalibInfo( name, date, device, comment, algo, sensors ); // TWO_SENSORS
               while ( line != null ) {
                 if ( ! line.startsWith("#") ) {
                   // FIXME
                   //   (1) replace ' '* with nothing
                   //   (2) split on ','
                   line = line.replaceAll( " ", "" );
-                  String[] vals = line.split(",");
+                  vals = line.split(",");
                   if ( vals.length > 7 ) {
                     // TDLog.v("Calib " + vals.length + " <" + vals[1] + "><" + vals[2] + "><" + vals[3] + ">" );
                     try {
@@ -196,9 +240,23 @@ public class CalibExport
                       long gid = data.insertGM( cid, gx, gy, gz, mx, my, mz );
                       String grp = vals[7].trim();
                       data.updateGMName( gid, cid, grp );
+                      if ( two_sensors ) {
+                        line = br.readLine();
+                        line = line.replaceAll( " ", "" );
+                        vals = line.split(",");
+                        gx = Long.parseLong( vals[1] );
+                        gy = Long.parseLong( vals[2] );
+                        gz = Long.parseLong( vals[3] );
+                        mx = Long.parseLong( vals[4] );
+                        my = Long.parseLong( vals[5] );
+                        mz = Long.parseLong( vals[6] );
+                        data.updateGMsecond( gid, cid, gx, gy, gz, mx, my, mz );
+                      }
                     } catch ( NumberFormatException e ) { 
                       TDLog.Error( e.getMessage() );
                     }
+                  } else {
+                    // ERROR
                   }
                 }
                 line = br.readLine();

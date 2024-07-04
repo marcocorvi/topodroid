@@ -656,8 +656,8 @@ public class DeviceActivity extends Activity
 
   // @Implements
   public void displayCoeff( TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nL )
-  {
-    (new CalibCoeffDialog( this, null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0.0f, 0, 0.0f, 0.0f, null /*, false */ ) ).show();
+  { // null coeff, null coeff2
+    (new CalibCoeffDialog( this, null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0.0f, 0, 0.0f, 0.0f, null, null /*, false */ ) ).show();
   }
 
   // @Implements
@@ -801,7 +801,7 @@ public class DeviceActivity extends Activity
         TDToast.makeBad( R.string.no_device_address );
       } else {
         enableButtons( false );
-        new CalibReadTask( this, mApp, CalibReadTask.PARENT_DEVICE ).execute();
+        new CalibReadTask( this, mApp, CalibReadTask.PARENT_DEVICE, false ).execute(); // TODO TWO_SENSORS
       }
 
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // DISTOX MEMORY TDLevel.overAdvanced
@@ -1270,7 +1270,7 @@ public class DeviceActivity extends Activity
       coeff[49] = zeroNL;
       coeff[50] = zeroNL;
       coeff[51] = zeroNL;
-      mApp.uploadCalibCoeff( coeff, false, b );
+      mApp.uploadCalibCoeff( coeff, false, b, false ); // TODO TWO_SENSORS
     }
   }
 

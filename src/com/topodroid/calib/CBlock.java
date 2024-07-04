@@ -53,6 +53,14 @@ public class CBlock
   // float   mFarCosine;  // cos(angle) of farness (default 0 is ok)
   private boolean mOffGroup;
 
+  private boolean mTwoSensors = false; // TWO_SENSORS
+  public long gx2 = 0;
+  public long gy2 = 0;
+  public long gz2 = 0;
+  public long mx2 = 0;
+  public long my2 = 0;
+  public long mz2 = 0;
+
   private View mView = null;
 
   /** set the view that displays this block
@@ -68,6 +76,7 @@ public class CBlock
    */
   public boolean isSaturated()
   { 
+    if ( mTwoSensors && ( mx2 >= 32768 || my2 >= 32768 || mz2 >= 32768 ) ) return true; // TWO_SENSORS
     return ( mx >= 32768 || my >= 32768 || mz >= 32768 );
   }
 
@@ -75,6 +84,7 @@ public class CBlock
    */
   public boolean isGZero()
   {
+    if ( mTwoSensors && ( gx2 != 0 || gy2 != 0 || gz2 != 0 ) ) return false; // TWO_SENSORS
     return ( gx == 0 && gy == 0 && gz == 0 );
   }
 
@@ -181,6 +191,24 @@ public class CBlock
     mz = ( mz0 > TDUtil.ZERO ) ? mz0 - TDUtil.NEG : mz0;
   } 
 
+  public void setDataSecond( long gx0, long gy0, long gz0, long mx0, long my0, long mz0 ) // TWO_SENSORS
+  {
+    if ( gx0 != 0 || gy0 != 0 || gz0 != 0 ) {
+      mTwoSensors = true;
+      gx2 = ( gx0 > TDUtil.ZERO ) ? gx0 - TDUtil.NEG : gx0;
+      gy2 = ( gy0 > TDUtil.ZERO ) ? gy0 - TDUtil.NEG : gy0;
+      gz2 = ( gz0 > TDUtil.ZERO ) ? gz0 - TDUtil.NEG : gz0;
+      mx2 = ( mx0 > TDUtil.ZERO ) ? mx0 - TDUtil.NEG : mx0;
+      my2 = ( my0 > TDUtil.ZERO ) ? my0 - TDUtil.NEG : my0;
+      mz2 = ( mz0 > TDUtil.ZERO ) ? mz0 - TDUtil.NEG : mz0;
+    }
+  } 
+
+  public void clearDataTwo() // TWO_SENSORS
+  {
+    mTwoSensors = false;
+  }
+
   public void computeBearingAndClino()
   {
     float f = TDUtil.FV;
@@ -191,6 +219,22 @@ public class CBlock
     TDVector g = new TDVector( gx/f, gy/f, gz/f );
     TDVector m = new TDVector( mx/f, my/f, mz/f );
     doComputeBearingAndClino( g, m );
+  }
+
+  public double computeDiscrepancy() // TWO_SENSORS
+  {
+    computeBearingAndClino();
+    if ( ! mTwoSensors ) return 0;
+    float f = TDUtil.FV;
+    TDVector g2 = new TDVector( gx2/f, gy2/f, gz2/f );
+    TDVector m2 = new TDVector( mx2/f, my2/f, mz2/f );
+    doComputeBearingAndClino( g2, m2 );
+    TDVector v2 = new TDVector( TDMath.cosd( mClino ) * TDMath.cosd( mBearing ), TDMath.cosd( mClino ) * TDMath.sind( mBearing ), TDMath.sind( mClino ) );
+    TDVector g = new TDVector( gx/f, gy/f, gz/f );
+    TDVector m = new TDVector( mx/f, my/f, mz/f );
+    doComputeBearingAndClino( g, m );
+    TDVector v1 = new TDVector( TDMath.cosd( mClino ) * TDMath.cosd( mBearing ), TDMath.cosd( mClino ) * TDMath.sind( mBearing ), TDMath.sind( mClino ) );
+    return TDMath.acosd( v1.dot( v2 ) ); // angle [degrees] with cosine V1 * V2
   }
 
   public void computeBearingAndClino( CalibAlgo calib )

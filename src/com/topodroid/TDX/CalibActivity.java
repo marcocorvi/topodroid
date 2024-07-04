@@ -311,19 +311,20 @@ public class CalibActivity extends Activity
   {
     String coeff_str = TopoDroidApp.mDData.selectCalibCoeff( TDInstance.cid );
     if ( coeff_str != null ) {
-      byte[] coeff = CalibAlgo.stringToCoeff( coeff_str );
+      byte[] coeff1 = CalibAlgo.stringToCoeff( coeff_str, false ); // TWO_SENSORS
+      byte[] coeff2 = CalibAlgo.stringToCoeff( coeff_str, true );
       TDMatrix mG = new TDMatrix();
       TDMatrix mM = new TDMatrix();
       TDVector vG = new TDVector();
       TDVector vM = new TDVector();
       TDVector nL = new TDVector();
-      CalibAlgo.coeffToG( coeff, vG, mG );
-      CalibAlgo.coeffToM( coeff, vM, mM );
-      CalibAlgo.coeffToNL( coeff, nL );
+      CalibAlgo.coeffToG( coeff1, vG, mG ); // FIXME using first sensor set to compute G-M vector/matrix for display 
+      CalibAlgo.coeffToM( coeff1, vM, mM );
+      CalibAlgo.coeffToNL( coeff1, nL );
    
       CalibResult res = new CalibResult();
       TopoDroidApp.mDData.selectCalibError( TDInstance.cid, res );
-      (new CalibCoeffDialog( this, null, vG, mG, vM, mM, nL, null, res.delta_bh, res.error, res.stddev, res.max_error, res.iterations, res.dip, res.roll, coeff /*, false */ )).show();
+      (new CalibCoeffDialog( this, null, vG, mG, vM, mM, nL, null, res.delta_bh, res.error, res.stddev, res.max_error, res.iterations, res.dip, res.roll, coeff1, coeff2 /*, false */ )).show();
     } else {
       TDToast.make( R.string.calib_no_coeff );
     }

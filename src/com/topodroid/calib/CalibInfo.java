@@ -28,8 +28,9 @@ public class CalibInfo
   final public int    algo;       //!< calibration algo
   final public float  dip;        //!< magnetic dip [deg]
   final public float  roll;       //!< average roll discrepancy [deg]
+  final public int    sensors;    //!< number of sensors
 
-  public CalibInfo( Long _id, String _name, String _date, String _device, String _comment, int _algo, float _dip, float _roll ) 
+  public CalibInfo( Long _id, String _name, String _date, String _device, String _comment, int _algo, float _dip, float _roll, int _sensors ) 
   {
     id = _id;
     name = _name;
@@ -39,6 +40,7 @@ public class CalibInfo
     algo = _algo;
     dip  = _dip;
     roll = _roll;
+    sensors = _sensors;
   }
 
   // void debug()

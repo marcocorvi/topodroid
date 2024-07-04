@@ -432,14 +432,14 @@ public class TopoDroidComm
    * @param coeff     calib coeff array
    * @return ???
    */
-  public boolean writeCoeff( String address, byte[] coeff ) { return false; }
+  public boolean writeCoeff( String address, byte[] coeff, boolean second ) { return false; }
 
   /** read DistoX calibration coeffs
    * @param address   device address
    * @param coeff     calib coeff array
    * @return ???
    */
-  public boolean readCoeff( String address, byte[] coeff ) { return false; }
+  public boolean readCoeff( String address, byte[] coeff, boolean second ) { return false; }
 
   /** read DistoX (??? bytes) memory
    * @param address   device address

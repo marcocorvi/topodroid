@@ -90,7 +90,9 @@ public class GMActivity extends Activity
 
   public static boolean mGMActivityVisible = false;
 
-  private CalibAlgo mCalibration = null;
+  private CalibAlgo mCalibration  = null;
+  private CalibAlgo mCalibration2 = null;
+  private boolean   mTwoSensors   = false; // whether there is a second set of sensors
 
   private CBlock mSaveCBlock = null;  // data of the saved GM
   // private long mGMid = -1;     // id of the GM = mSaveCBlock.mId
@@ -212,6 +214,11 @@ public class GMActivity extends Activity
    */
   public int getAlgo() { return mAlgo; }
 
+  /** set whether there is a second set of sensors
+   * @param b    whether there is a second set of sensors
+   */
+  public void setSecondSensors( boolean b ) { mTwoSensors = b; }
+
   /** set the calibration algorithm
    * @param algo   index of the calibration algorithm
    */
@@ -252,12 +259,13 @@ public class GMActivity extends Activity
   private int doComputeCalib( List< CBlock > list )
   {    
     long cid = TDInstance.cid;
-    switch ( mAlgo ) {
+    int algo = mTwoSensors ? CalibInfo.ALGO_LINEAR : mAlgo;
+    switch ( algo ) {
       case CalibInfo.ALGO_AUTO:
         { // 2024-01-15 added
-          int algo = mApp.getCalibAlgoFromDevice();
+          int dev_algo = mApp.getCalibAlgoFromDevice();
           // TDLog.v("GM algo --> " + algo );
-          if ( algo == CalibInfo.ALGO_NON_LINEAR ) {
+          if ( dev_algo == CalibInfo.ALGO_NON_LINEAR ) {
             mCalibration = new CalibAlgoBH( 0, true );
           } else {
             mCalibration = new CalibAlgoBH( 0, false );
@@ -268,7 +276,7 @@ public class GMActivity extends Activity
       case CalibInfo.ALGO_NON_LINEAR:
         mCalibration = new CalibAlgoBH( 0, true );
         // FIXME set the calibration algorithm (whether non-linear or linear)
-        // mCalibration.setAlgorithm( mAlgo == 2 ); // CALIB_AUTO_NON_LINEAR
+        // mCalibration.setAlgorithm( algo == 2 ); // CALIB_AUTO_NON_LINEAR
         break;
       // case CalibInfo.ALGO_MINIMUM:
       //   if ( TDLevel.overTester ) {
@@ -280,32 +288,55 @@ public class GMActivity extends Activity
     }
 
     mCalibration.Reset( list.size() );
-    for ( CBlock item : list ) mCalibration.AddValues( item );
+    for ( CBlock item : list ) mCalibration.AddValues( item, false );
     // TDLog.v("Calib Data " + list.size() + " ok " + ng );
-    
+
     int iter = mCalibration.Calibrate();
     // TDLog.v("Calib Iter " + iter );
 
+    if ( mTwoSensors && iter > 0 && iter < TDSetting.mCalibMaxIt ) {
+      mCalibration2 = new CalibAlgoBH( 0, false );
+      mCalibration2.Reset( list.size() );
+      for ( CBlock item : list ) mCalibration2.AddValues( item, true );
+      int iter2 = mCalibration2.Calibrate();
+      if ( iter2 > iter ) iter = iter2;
+    }
+
     if ( iter > 0 && iter < TDSetting.mCalibMaxIt ) {
       mCalibration.rollDifference();  // FIXME ROLL_DIFFERENCE
-
       float[] errors = mCalibration.Errors();
+      float deltaBH = mCalibration.DeltaBH();
+      float delta   = mCalibration.Delta();
+      float delta2  = mCalibration.Delta2();
+      float maxErr  = mCalibration.MaxError();
+      float dip     = mCalibration.Dip();
+      float roll    = mCalibration.Roll();
+      byte[] coeff  = mCalibration.GetCoeff(); // TWO_SENSORS this is 52 byte long
+
+      if ( mTwoSensors ) {
+        mCalibration2.rollDifference();  // FIXME ROLL_DIFFERENCE
+        float[] errors2 = mCalibration2.Errors();
+        for ( int k = 0; k < list.size(); ++k ) errors[k] = ( errors[k] + errors2[k] ) / 2;
+        // TODO could use discrepancies ?
+        // TODO update coeff of second calibration in the DB and residual errors
+        byte[] coeff2 = mCalibration2.GetCoeff();
+        if ( mCalibration2.DeltaBH() > deltaBH ) deltaBH = mCalibration2.DeltaBH();
+        if ( mCalibration2.Delta()   > delta   ) delta   = mCalibration2.Delta();
+        if ( mCalibration2.Delta2()  > delta2  ) delta2  = mCalibration2.Delta2();
+        if ( mCalibration2.MaxError() > maxErr ) maxErr  = mCalibration2.MaxError();
+        dip  = ( dip + mCalibration2.Dip() )/2;
+        roll = ( roll + mCalibration2.Roll() )/2;
+        mApp_mDData.updateCalibCoeff( cid, CalibAlgo.coeffToString( coeff, coeff2 ) );
+      } else {
+        mApp_mDData.updateCalibCoeff( cid, CalibAlgo.coeffToString( coeff, null ) );
+      }
       for ( int k = 0; k < list.size(); ++k ) {
         CBlock cb = list.get( k );
         mApp_mDData.updateGMError( cb.mId, cid, errors[k] );
         // cb.setError( errors[k] );
       }
 
-      byte[] coeff = mCalibration.GetCoeff();
-      mApp_mDData.updateCalibCoeff( cid, CalibAlgo.coeffToString( coeff ) );
-      mApp_mDData.updateCalibError( cid, 
-             mCalibration.DeltaBH(),
-             mCalibration.Delta(),
-             mCalibration.Delta2(),
-             mCalibration.MaxError(),
-             mCalibration.Dip(),
-             mCalibration.Roll(),
-             iter );
+      mApp_mDData.updateCalibError( cid, deltaBH, delta, delta2, maxErr, dip, roll, iter );
 
       // DEBUG:
       // Calibration.logCoeff( coeff );
@@ -344,7 +375,7 @@ public class GMActivity extends Activity
     CalibAlgo calib1 = null;
     switch ( algo ) {
       case CalibInfo.ALGO_NON_LINEAR:
-        calib1 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr ), true );
+        calib1 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr, false ), true ); // TODO TWO_SENSORS
         break;
       // case CalibInfo.ALGO_MINIMUM:
       //   if ( TDLevel.overTester ) {
@@ -352,7 +383,7 @@ public class GMActivity extends Activity
       //     break;
       //   }
       default:
-        calib1 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr ), false );
+        calib1 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr, false ), false );
     }
     // TDLog.v( "Calib-1 algo " + algo );
     // calib1.dump();
@@ -363,7 +394,7 @@ public class GMActivity extends Activity
     CalibAlgo calib0 = null;
     switch ( algo ) {
       case CalibInfo.ALGO_NON_LINEAR:
-        calib0 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr ), true );
+        calib0 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr, false ), true );
         break;
       // case CalibInfo.ALGO_MINIMUM:
       //   if ( TDLevel.overTester ) {
@@ -371,7 +402,7 @@ public class GMActivity extends Activity
       //     break;
       //   }
       default:
-        calib0 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr ), false );
+        calib0 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr, false ), false );
     }
     // TDLog.v( "Calib-0 algo " + algo );
     // calib0.dump();
@@ -514,13 +545,20 @@ public class GMActivity extends Activity
           TDVector bm = mCalibration.GetBM();
           TDMatrix am = mCalibration.GetAM();
           TDVector nL = mCalibration.GetNL();
-          byte[] coeff = mCalibration.GetCoeff();
+          byte[]  coeff1 = mCalibration.GetCoeff();
           float[] errors = mCalibration.Errors();
+
+          byte[] coeff2 = null; // TWO_SENSORS
+          if ( mTwoSensors ) {
+            coeff2 = mCalibration2.GetCoeff();
+            float[] errors2 = mCalibration.Errors();
+            for ( int k = 0; k < errors.length; ++k ) errors[k] = ( errors[k] + errors2[k] )/2;
+          } 
 
           (new CalibCoeffDialog( this, this, bg, ag, bm, am, nL, errors,
                                  mCalibration.DeltaBH(), mCalibration.Delta(), mCalibration.Delta2(), mCalibration.MaxError(), 
                                  result, mCalibration.Dip(), mCalibration.Roll(), // FIXME ROLL_DIFFERENCE
-                                 coeff /* , saturated */ ) ).show();
+                                 coeff1, coeff2 /* , saturated */ ) ).show();
         } else if ( result == 0 ) {
           TDToast.makeBad( R.string.few_iter );
           return;
@@ -887,7 +925,9 @@ public class GMActivity extends Activity
     }
     mButton1[mNrButton1] = MyButton.getButton( this, null, R.drawable.iz_empty );
     if ( TDLevel.overAdvanced ) {
-      if ( TDInstance.deviceType() == Device.DISTO_X310 ) mButton1[ BTN_BLUETOOTH ].setOnLongClickListener( this );
+      if ( TDInstance.deviceType() == Device.DISTO_X310 ) { // FIXME add other devices that support remote comtrol
+        mButton1[ BTN_BLUETOOTH ].setOnLongClickListener( this );
+      }
       mButton1[ BTN_SEARCH ].setOnLongClickListener( this );
     }
 
@@ -966,8 +1006,8 @@ public class GMActivity extends Activity
    * @param nL    non-linear coefficients
    */
   public void displayCoeff( TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nL )
-  {
-    (new CalibCoeffDialog( this, null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0.0f, 0, 0.0f, 0.0f, null /*, false */ ) ).show();
+  { // TWO_SENSORS null coeff1 null coeff2
+    (new CalibCoeffDialog( this, null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0.0f, 0, 0.0f, 0.0f, null, null /*, false */ ) ).show();
   }
 
   /** enable or disable the buttons
@@ -1039,7 +1079,15 @@ public class GMActivity extends Activity
     if ( b == mButton1[ BTN_BLUETOOTH ] ) {
       // TDLog.v( "BT button long click");
       // enableBluetoothButton(false);
-      new DeviceX310TakeShot( this, (TDSetting.mCalibShotDownload ? new ListerHandler(this) : null), mApp, 1, DataType.DATA_CALIB ).execute();
+      if ( TDInstance.isDeviceX310() ) {
+        new DeviceX310TakeShot( this, (TDSetting.mCalibShotDownload ? new ListerHandler(this) : null), mApp, 1, DataType.DATA_CALIB ).execute();
+      // } else if ( TDInstance.isDeviceXBLE() ) { // FIXME
+      //   new DeviceX310TakeShot( this, (TDSetting.mCalibShotDownload ? new ListerHandler(this) : null), mApp, 1, DataType.DATA_CALIB ).execute();
+      // } else if ( TDInstance.isDeviceCavway() ) { // FIXME
+      //   return false;
+      } else {
+        return false;
+      }
       return true;
     } else if ( b == mButton1[ BTN_SEARCH ] ) {
       clearSearchResult();
@@ -1143,7 +1191,7 @@ public class GMActivity extends Activity
 
     } else if ( TDLevel.overNormal && b == mButton1[BTN_READ] ) { // READ
       enableButtons( false );
-      new CalibReadTask( this, mApp, CalibReadTask.PARENT_GM ).execute(); // 
+      new CalibReadTask( this, mApp, CalibReadTask.PARENT_GM, false ).execute(); // TODO TWO_SENSORS
 
     } else if (TDLevel.overNormal &&  b == mButton1[BTN_WRITE] ) { // WRITE
       // if ( mEnableWrite ) {
@@ -1156,7 +1204,15 @@ public class GMActivity extends Activity
           } else {
             setTitle( R.string.calib_write_coeffs );
             setTitleColor( TDColor.CONNECTED );
-            uploadCoefficients( mCalibration.Delta(), coeff, true, b );
+            float delta = mCalibration.Delta();
+            if ( mTwoSensors ) {
+              if ( mCalibration2.Delta() > delta ) delta = mCalibration2.Delta();
+              uploadCoefficients( delta, coeff, true, b, false );
+              coeff = mCalibration2.GetCoeff();
+              uploadCoefficients( 0, coeff, true, b, true );
+            } else {
+              uploadCoefficients( delta, coeff, true, b, false );
+            }
             resetTitle( );
           }
         }
@@ -1197,8 +1253,9 @@ public class GMActivity extends Activity
    * @param coeff   calibration coefficients
    * @param mode    ...
    * @param b       ...
+   * @param second  whether second sensor set
    */
-  public void uploadCoefficients( float delta, final byte[] coeff, final boolean mode, final Button b )
+  public void uploadCoefficients( float delta, final byte[] coeff, final boolean mode, final Button b, final boolean second )
   {
     String warning = null;
     // if ( warning == null ) { // check coverage
@@ -1215,11 +1272,11 @@ public class GMActivity extends Activity
       TopoDroidAlertDialog.makeAlert( this, getResources(), warning,
         new DialogInterface.OnClickListener() {
           @Override public void onClick( DialogInterface d, int btn ) {
-            mApp.uploadCalibCoeff( coeff, mode, b );
+            mApp.uploadCalibCoeff( coeff, mode, b, second ); // TWO_SENSORS
           }
         } );
     } else {
-      mApp.uploadCalibCoeff( coeff, mode, b );
+      mApp.uploadCalibCoeff( coeff, mode, b, second );
     }
   }
 

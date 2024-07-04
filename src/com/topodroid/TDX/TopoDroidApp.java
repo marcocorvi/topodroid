@@ -1270,9 +1270,10 @@ public class TopoDroidApp extends Application
    * @param coeff    calibration coefficients
    * @param check    whether to check that the calibration matches the device 
    * @param b        "write" button - to update its state at the end
+   * @param second   whether second sensor set
    * @note called by GMActivity and by CalibCoeffDialog and DeviceActivity (to reset coeffs)
    */
-  public void uploadCalibCoeff( byte[] coeff, boolean check, Button b )
+  public void uploadCalibCoeff( byte[] coeff, boolean check, Button b, boolean second )
   {
     // TODO this writeCoeff should be run in an AsyncTask
     if ( b != null ) b.setEnabled( false );
@@ -1280,12 +1281,12 @@ public class TopoDroidApp extends Application
       TDToast.makeBad( R.string.no_device_address );
     } else if ( check && ! checkCalibrationDeviceMatch() ) {
       TDToast.makeBad( R.string.calib_device_mismatch );
-    } else if ( ! mComm.writeCoeff( TDInstance.deviceAddress(), coeff ) ) {
+    } else if ( ! mComm.writeCoeff( TDInstance.deviceAddress(), coeff, second ) ) {
       TDToast.makeBad( R.string.write_failed );
     } else {
       int len = coeff.length;
       byte[] coeff2 = new byte[ len ];
-      if ( ! mComm.readCoeff( TDInstance.deviceAddress(), coeff2 ) ) {
+      if ( ! mComm.readCoeff( TDInstance.deviceAddress(), coeff2, second ) ) {
         TDToast.makeBad( R.string.read_failed );
       } else {
         boolean success = true;
@@ -1311,13 +1312,13 @@ public class TopoDroidApp extends Application
    * @return true if successful
    * @note called by CalibReadTask.onPostExecute
    */
-  public boolean readCalibCoeff( byte[] coeff )
+  public boolean readCalibCoeff( byte[] coeff, boolean second )
   {
     if ( mComm == null || TDInstance.getDeviceA() == null ) {
       TDLog.e("No comm or no device");
       return false;
     }
-    boolean ret = mComm.readCoeff( TDInstance.deviceAddress(), coeff );
+    boolean ret = mComm.readCoeff( TDInstance.deviceAddress(), coeff, second );
     resetComm();
     return ret;
   }
@@ -2753,9 +2754,9 @@ public class TopoDroidApp extends Application
   /** set the Cavway laser
    * @param what      what to do:  0: off, 1: on, 2: measure
    * @param nr        number od data to download
-  # @param lister    optional lister
+   # @param lister    optional lister
    * @param data_type type of expected data
-  # @param closeBT   whether to close the connection at the end
+   # @param closeBT   whether to close the connection at the end
    * @param do_thread whether to run on a thread
    *                  SIWEI TIAN added on Jul
    */

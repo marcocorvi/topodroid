@@ -358,7 +358,7 @@ public class AutoCalibDialog extends MyDialog
     mBTback  = (Button) findViewById( R.id.button_close );
 
     byte[] coeff0 = new byte[ 52 ];
-    if ( ! mApp.readCalibCoeff( coeff0 ) ) {
+    if ( ! mApp.readCalibCoeff( coeff0, false ) ) { // TWO_SENOSRS
       TDLog.v("Error: could not read coeffs");
       mBTstart.setVisibility( View.GONE );
       mBTwrite.setVisibility( View.GONE );

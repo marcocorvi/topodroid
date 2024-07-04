@@ -36,6 +36,8 @@ import java.lang.Math;
 
 public class CalibTransform
 {
+  final static int COEFF_DIM  =  52;
+  final static int COEFF_DIM2 = 104; // 52 * 2
   // final static float G_SCALE = 667;
   // final static float M_SCALE = 4876;
 
@@ -259,7 +261,7 @@ public class CalibTransform
   public byte[] GetCoeff()
   {
     if ( aG == null ) return null;
-    byte[] coeff = new byte[ 52 ]; // FIXME nrCoeff()
+    byte[] coeff = new byte[ COEFF_DIM ]; // FIXME nrCoeff()
     long v;
     v  = roundV( bG.x );
     coeff[ 0] = (byte)(v & 0xff);
@@ -357,13 +359,14 @@ public class CalibTransform
    * @param coeff  byte array of coefficients
    * @note the string will have the length of the coeff array
    */
-  public static String coeffToString( byte[] coeff )
+  public static String coeffToString( byte[] coeff1, byte[] coeff2 ) // TWO_SENSORS
   {
-    int kk = (coeff == null)? 0 : coeff.length;
-    StringBuilder cs = new StringBuilder( kk );
-    for ( int k=0; k<kk; ++k ) {
-      cs.insert(k, (char)(coeff[k]) );
-    }
+    int kk1 = (coeff1 == null)? 0 : coeff1.length;
+    TDLog.v("coeff to string: len " + kk1 );
+    int kk2 = (coeff2 == null)? 0 : coeff2.length;
+    StringBuilder cs = new StringBuilder( kk1+kk2 );
+    for ( int k=0; k<kk1; ++k ) cs.insert(k, (char)(coeff1[k]) );
+    for ( int k=0; k<kk2; ++k ) cs.insert(kk1+k, (char)(coeff2[k]) );
     // TDLog.v( "coeff to string " + coeff[48] + " " + coeff[49] + " " + coeff[50] + " " + coeff[51] );
     return cs.toString();
   }
@@ -382,17 +385,25 @@ public class CalibTransform
   // }
 
   /** @return the byte array of coefficients for the string presentation
-   * @param cs   string presentation of the coefficients
+   * @param cs     string presentation of the coefficients
+   * @param second whether to return the second sensor set, or null
    */
-  public static byte[] stringToCoeff( String cs )
+  public static byte[] stringToCoeff( String cs, boolean second ) // TWO_SENOSRS
   {
-    byte[] coeff = new byte[ 52 ]; // N.B. return 52 calib coeff
+    if ( second && cs == null ) return null;
+    byte[] coeff = new byte[ COEFF_DIM ]; // N.B. return 52 calib coeff
     coeff[48] = coeff[49] = coeff[50] = coeff[51] = (byte)(0xff); // default values
     if ( cs == null ) {
       for ( int k=0; k<48; ++k ) coeff[k] = (byte)(0);
     } else {
-      int kk = cs.length();
-      for ( int k=0; k<kk; ++k ) coeff[k] = (byte)( cs.charAt(k) );
+      int kk = cs.length(); // COEFF_DIM or COEFF_DIM2
+      if ( second ) {
+        if ( kk < COEFF_DIM2 ) return null;
+        for ( int k=COEFF_DIM; k<COEFF_DIM2; ++k ) coeff[k] = (byte)( cs.charAt(k) );
+      } else {
+        if ( kk > COEFF_DIM ) kk = COEFF_DIM;
+        for ( int k=0; k<kk; ++k ) coeff[k] = (byte)( cs.charAt(k) );
+      }
       // TDLog.v( "string to coeff " + coeff[48] + " " + coeff[49] + " " + coeff[50] + " " + coeff[51] );
     }
     return coeff;

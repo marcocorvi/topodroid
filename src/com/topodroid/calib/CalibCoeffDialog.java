@@ -64,17 +64,20 @@ public class CalibCoeffDialog extends MyDialog
   private final String iter0;
   private final String dip0;
   private final String roll0; // FIXME ROLL_DIFFERENCE
-  private final byte[] mCoeff;
+  private final byte[] mCoeff1;
+  private final byte[] mCoeff2; // TWO_SENSORS
   private final float mDelta;
   // private boolean mSaturated;
 
+  // TWO_SENSORS coeff2 is null if there is only one sensor set
   public CalibCoeffDialog( Context context, GMActivity parent,
                     TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nl, float[] errors,
-                    float delta_bh, float delta, float delta2, float error, long iter, float dip, float roll, byte[] coeff /*, boolean saturated */ )
+                    float delta_bh, float delta, float delta2, float error, long iter, float dip, float roll, byte[] coeff, byte[] coeff2 /*, boolean saturated */ )
   {
     super( context, null, R.string.CalibCoeffDialog ); // null app
     mParent = new WeakReference<GMActivity>( parent );
-    mCoeff = coeff;
+    mCoeff1 = coeff;
+    mCoeff2 = coeff2;
 
     bg0 = String.format(Locale.US, "bG   %8.4f %8.4f %8.4f", bg.x, bg.y, bg.z );
     agx = String.format(Locale.US, "aGx  %8.4f %8.4f %8.4f", ag.x.x, ag.x.y, ag.x.z );
@@ -235,7 +238,7 @@ public class CalibCoeffDialog extends MyDialog
       // if ( mSaturated ) {
       //   mButtonWrite.setEnabled( false );
       // } else {
-        mButtonWrite.setEnabled( mCoeff != null );
+        mButtonWrite.setEnabled( mCoeff1 != null );
       // }
     } else {
       image.setVisibility( View.GONE );
@@ -256,7 +259,8 @@ public class CalibCoeffDialog extends MyDialog
     if ( id == R.id.button_coeff_write ) { 
       GMActivity parent = mParent.get();
       if ( parent != null ) {
-        parent.uploadCoefficients( mDelta, mCoeff, true, mButtonWrite );
+        if ( mCoeff2 != null ) parent.uploadCoefficients( mDelta, mCoeff2, true, null, true ); // TWO_SENSORS
+        if ( mCoeff1 != null ) parent.uploadCoefficients( mDelta, mCoeff1, true, mButtonWrite, false );
       } else {
         TDLog.Error("Calib Coeff Dialog null parent");
       }

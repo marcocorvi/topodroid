@@ -279,6 +279,22 @@ public class DeviceHelper extends DataSetObservable
     // } catch (SQLiteException e ) { logError( "update GM error", e ); }
     // // return 0;
   }
+  
+  public void updateGMsecond( long gid, long cid, long gx, long gy, long gz, long mx, long my, long mz )
+  {
+    if ( myDB == null ) {
+      TDLog.Error( ERROR_NULL_DB + "update GM second");
+      return;
+    }
+    ContentValues cv = new ContentValues();
+    cv.put( "gxt", gx );
+    cv.put( "gyt", gy );
+    cv.put( "gzt", gz );
+    cv.put( "mxt", mx );
+    cv.put( "myt", my );
+    cv.put( "mzt", mz );
+    doUpdate( "gms", cv, WHERE_CID_ID, new String[] { Long.toString(cid), Long.toString(gid) }, "GM secod" );
+  }
 
   /** insert a calibration data
    * @param cid     calibration ID
@@ -358,7 +374,8 @@ public class DeviceHelper extends DataSetObservable
     Cursor cursor = null;
     try {
       cursor = myDB.query(GM_TABLE,
-                          new String[] { "id", "gx", "gy", "gz", "mx", "my", "mz", "grp", "error", "status" }, // columns
+                          new String[] { "id", "gx", "gy", "gz", "mx", "my", "mz", "grp", "error", "status", 
+                                        "gxt", "gyt", "gzt", "mxt", "myt", "mzt" }, // columns
                           "calibId=?",
                           new String[] { Long.toString(cid) },
                           null, null, "id" );
@@ -381,6 +398,13 @@ public class DeviceHelper extends DataSetObservable
               block.setGroup( cursor.getLong(7) );
               block.setError( (float)( cursor.getDouble(8) ) );
               block.setStatus( cursor.getLong(9) );
+              block.setDataSecond( 
+                cursor.getLong(10),
+                cursor.getLong(11),
+                cursor.getLong(12),
+                cursor.getLong(13),
+                cursor.getLong(14),
+                cursor.getLong(15) );
               list.add( block );
             }
           }
@@ -405,7 +429,8 @@ public class DeviceHelper extends DataSetObservable
     Cursor cursor = null;
     try { 
       cursor = myDB.query(GM_TABLE,
-                               new String[] { "id", "gx", "gy", "gz", "mx", "my", "mz", "grp", "error", "status" }, // columns
+                               new String[] { "id", "gx", "gy", "gz", "mx", "my", "mz", "grp", "error", "status",
+                                        "gxt", "gyt", "gzt", "mxt", "myt", "mzt" }, // columns
                                "calibId=? and id=?", 
                                new String[] { Long.toString(cid), Long.toString(id) },
                                null,  // groupBy
@@ -424,6 +449,13 @@ public class DeviceHelper extends DataSetObservable
         block.setGroup( cursor.getLong(7) );
         block.setError( (float)( cursor.getDouble(8) ) );
         block.setStatus( cursor.getLong(9) );
+        block.setDataSecond( 
+                cursor.getLong(10),
+                cursor.getLong(11),
+                cursor.getLong(12),
+                cursor.getLong(13),
+                cursor.getLong(14),
+                cursor.getLong(15) );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
@@ -494,7 +526,7 @@ public class DeviceHelper extends DataSetObservable
     Cursor cursor = null;
     try {
       cursor = myDB.query( CALIB_TABLE,
-                           new String[] { "name", "day", "device", "comment", "algo", "dip", "roll" }, // columns
+                           new String[] { "name", "day", "device", "comment", "algo", "dip", "roll", "sensors" }, // columns
                            "id=?",
                            new String[] { Long.toString(cid) },
                            null, null, null ); 
@@ -507,7 +539,8 @@ public class DeviceHelper extends DataSetObservable
                 cursor.getString( 3 ),
                 (int)cursor.getLong( 4 ),
                 (float)cursor.getDouble( 5 ),
-                (float)cursor.getDouble( 6 )  // FIXME ROLL_DIFFERENCE
+                (float)cursor.getDouble( 6 ), // FIXME ROLL_DIFFERENCE
+                (int)cursor.getLong( 7 )      // NUMBER of SENSOR SETS
         );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -656,7 +689,7 @@ public class DeviceHelper extends DataSetObservable
     Cursor cursor = null;
     try {
       cursor = myDB.query( CALIB_TABLE,
-                           new String[] { "id", "name", "day", "comment", "algo", "dip", "roll" }, // columns
+                           new String[] { "id", "name", "day", "comment", "algo", "dip", "roll", "sensors" }, // columns
                            "device=?",
                            new String[] { device },
                            null, null, null );
@@ -670,7 +703,8 @@ public class DeviceHelper extends DataSetObservable
             cursor.getString(3),
             (int)cursor.getLong(4),
             (float)cursor.getDouble(5),
-            (float)cursor.getDouble(6)   // FIXME ROLL_DIFFERENCE
+            (float)cursor.getDouble(6),  // FIXME ROLL_DIFFERENCE
+            (int)cursor.getLong(7)       // NUMBER OF SENSOR SETS
           ) );
         } while (cursor.moveToNext());
       }
@@ -962,9 +996,10 @@ public class DeviceHelper extends DataSetObservable
    * @param device  calibration device
    * @param comment calibration description
    * @param algo    calibration algorithm
+   * @param sensors number of sensor sets
    * @note this must be called when the calib name is not yet in the db
    */
-  public long insertCalibInfo( String name, String date, String device, String comment, long algo )
+  public long insertCalibInfo( String name, String date, String device, String comment, long algo, int sensors )
   {
     if ( myDB == null ) {
       TDLog.Error( ERROR_NULL_DB + "insert calib info");
@@ -988,6 +1023,7 @@ public class DeviceHelper extends DataSetObservable
     cv.put( "device",  device );
     cv.put( "comment", comment );
     cv.put( "algo",    algo );
+    cv.put( "sensors", sensors );
     try {
       myDB.insert( "calibs", null, cv );
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -1032,6 +1068,7 @@ public class DeviceHelper extends DataSetObservable
         cv.put( "name",    name );
         cv.put( "day",     TDString.EMPTY );
         cv.put( "comment", TDString.EMPTY );
+        // cv.put( "sensors", 1 );
         myDB.insert( CALIB_TABLE, null, cv );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -1415,6 +1452,17 @@ public class DeviceHelper extends DataSetObservable
      // // return true;
    }
 
+   /** update the calibration number of sensor sets
+    * @param id      calibration ID
+    * @param sensors number of sensor sets
+    */
+   void updateCalibSensors( long id, int sensors )
+   {
+     ContentValues cv = new ContentValues();
+     cv.put( "sensors", sensors );
+     doUpdate( "calibs", cv, WHERE_ID, new String[] { Long.toString(id) }, "sensors" );
+   }
+
    /** update the calibration coefficients
     * @param id      calibration ID
     * @param coeff   calibration coefficients (as a string)
@@ -1552,7 +1600,8 @@ public class DeviceHelper extends DataSetObservable
              +   " stddev REAL default 0, "
              +   " delta_bh REAL default 0, "
              +   " dip REAL default 999, "
-             +   " roll REAL default 0 " // FIXME ROLL_DIFFERENCE
+             +   " roll REAL default 0, " // FIXME ROLL_DIFFERENCE
+             +   " sensors INTEGER defulat 1 "
              +   ")"
            );
 
@@ -1568,7 +1617,13 @@ public class DeviceHelper extends DataSetObservable
              +   " mz INTEGER, "
              +   " grp INTEGER, "
              +   " error REAL default 0, "
-             +   " status INTEGER default 0"
+             +   " status INTEGER default 0, "
+             +   " gxt INTEGER default 0, "
+             +   " gyt INTEGER default 0, "
+             +   " gzt INTEGER default 0, "
+             +   " mxt INTEGER default 0, "
+             +   " myt INTEGER default 0, "
+             +   " mzt INTEGER default 0 "
              // +   " calibId REFERENCES " + CALIB_TABLE + "(id)"
              // +   " ON DELETE CASCADE "
              +   ")"
@@ -1635,6 +1690,14 @@ public class DeviceHelper extends DataSetObservable
            case 29: 
              db.execSQL( "CREATE TABLE btalias ( name TEXT, alias TEXT )" ); // BT_ALIAS
            case 30:
+             db.execSQL( "ALTER TABLE calibs ADD COLUMN sensors INTEGER default 1" ); // NUMBER OF SENSOR SETS
+             db.execSQL( "ALTER TABLE gms ADD COLUMN gxt INTEGER default 0" ); 
+             db.execSQL( "ALTER TABLE gms ADD COLUMN gyt INTEGER default 0" );
+             db.execSQL( "ALTER TABLE gms ADD COLUMN gzt INTEGER default 0" );
+             db.execSQL( "ALTER TABLE gms ADD COLUMN mxt INTEGER default 0" );
+             db.execSQL( "ALTER TABLE gms ADD COLUMN myt INTEGER default 0" );
+             db.execSQL( "ALTER TABLE gms ADD COLUMN mzt INTEGER default 0" );
+           case 31:
              /* current version */
            default:
              break;

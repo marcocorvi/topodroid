@@ -1122,17 +1122,18 @@ public class CavwayComm extends TopoDroidComm
   /** read the calibration coeff from the device
    * @param address   device address
    * @param coeff     array of 52 calibration coeffs (filled by the read)
+   * @param second    whether second sensor set
    * @return true if success
    */
   @Override
-  public boolean readCoeff( String address, byte[] coeff )
+  public boolean readCoeff( String address, byte[] coeff, boolean second )
   {
     // TDLog.v("XBLE comm read coeff " + address );
     if ( coeff == null ) return false;
     int  len  = coeff.length;
     if ( len > 52 ) len = 52; // FIXME force max length of calib coeffs
     if ( ! tryConnectDevice( address, null, 0 ) ) return false;
-    int addr = 0x8010;
+    int addr = 0x8010; // FIXME the addr for the second set
     byte[] buff = new byte[4];
     int k = 0;
     byte[] coeff_tmp = readMemory( addr, 52 ); // 20230118 local var "coeff_tmp"
@@ -1147,17 +1148,18 @@ public class CavwayComm extends TopoDroidComm
   /** write the calibration coeff to the device
    * @param address   device address
    * @param coeff     array of 52 calibration coeffs
+   * @param second    whether second sensor set
    * @return true if success
    */
   @Override
-  public boolean writeCoeff( String address, byte[] coeff )
+  public boolean writeCoeff( String address, byte[] coeff, boolean second )
   {
     // TDLog.v("XBLE comm write coeff " + address );
     if ( coeff == null ) return false;
     int  len  = coeff.length;
     if( ! tryConnectDevice( address, null, 0 )) return false;
     int k = 0;
-    int addr = 0x8010;
+    int addr = 0x8010; // FIXME the addr for the second set
     boolean ret = writeMemory(addr, coeff, 52);
     disconnectDevice();
     return ret;

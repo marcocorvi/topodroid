@@ -560,7 +560,7 @@ public class DistoXComm extends TopoDroidComm
    * @return true on success
    */
   @Override
-  public boolean writeCoeff( String address, byte[] coeff )
+  public boolean writeCoeff( String address, byte[] coeff, boolean second )
   {
     if ( ! isCommThreadNull() ) return false;
     boolean ret = false;
@@ -584,7 +584,7 @@ public class DistoXComm extends TopoDroidComm
    * @pre coeff preallocated not null 
    */
   @Override
-  public boolean readCoeff( String address, byte[] coeff )
+  public boolean readCoeff( String address, byte[] coeff, boolean second )
   {
     if ( ! isCommThreadNull() ) return false;
     boolean ret = false;

@@ -38,26 +38,33 @@ public class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
   // public static final int PARENT_AUTO   = 3; // AUTO-CALIB
 
   private byte[]   coeff;
+  private byte[]   coeff2;
   private final WeakReference<TopoDroidApp> mApp; // FIXME LEAK
   // private final WeakReference<Context> mContext;  // FIXME LEAK
   private final WeakReference< ICoeffDisplayer > mParent;
   private final int mParentType;
+  private final boolean mTwoSensors;
   // String comp_name;
 
-  public CalibReadTask( ICoeffDisplayer parent, TopoDroidApp app, int parent_type )
+  public CalibReadTask( ICoeffDisplayer parent, TopoDroidApp app, int parent_type, boolean two_sensors ) // TWO_SENSORS
   {
     // mContext = new WeakReference<Context>( context );
     mParent = new WeakReference<ICoeffDisplayer>( parent );
     mApp    = new WeakReference<>( app );
-    coeff = new byte[52]; // always read 52 bytes
+    coeff   = new byte[52]; // always read 52 bytes
+    coeff2  = new byte[52]; // second set of coeffs
     mParentType = parent_type;
+    mTwoSensors = two_sensors;
     // comp_name = "ComponentInfo{com.topodroid.TDX/com.topodroid.DistoX." + act_name + "}";
   }
 
   @Override
   protected Boolean doInBackground(Void... v)
   {
-    return mApp.get() != null && mApp.get().readCalibCoeff( coeff );
+    if ( mApp.get() == null ) return false;
+    boolean ret = mApp.get().readCalibCoeff( coeff, false );
+    if ( mTwoSensors ) ret &= mApp.get().readCalibCoeff( coeff2, true );
+    return ret;
   }
 
   // @Override
@@ -65,6 +72,7 @@ public class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
   // {
   // }
 
+  // TODO TWO_SENSORS use second set of coeffs
   @Override
   protected void onPostExecute( Boolean result )
   {

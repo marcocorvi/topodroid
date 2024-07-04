@@ -1121,10 +1121,11 @@ public class DistoXBLEComm extends TopoDroidComm
   /** read the calibration coeff from the device
    * @param address   device address
    * @param coeff     array of 52 calibration coeffs (filled by the read)
+   * @param second    unused
    * @return true if success
    */
   @Override
-  public boolean readCoeff( String address, byte[] coeff )
+  public boolean readCoeff( String address, byte[] coeff, boolean second )
   {
     // TDLog.v("XBLE comm read coeff " + address );
     if ( coeff == null ) return false;
@@ -1146,10 +1147,11 @@ public class DistoXBLEComm extends TopoDroidComm
   /** write the calibration coeff to the device
    * @param address   device address
    * @param coeff     array of 52 calibration coeffs
+   * @param second    unused
    * @return true if success
    */
   @Override
-  public boolean writeCoeff( String address, byte[] coeff )
+  public boolean writeCoeff( String address, byte[] coeff, boolean second )
   {
     // TDLog.v("XBLE comm write coeff " + address );
     if ( coeff == null ) return false;

@@ -158,11 +158,16 @@ public class CalibAlgo extends CalibTransform
 
   /** add a calib data
    * @param b calib data
+   * @param second  whether to add second sensors values
    */
-  public void AddValues( CBlock b )
+  public void AddValues( CBlock b, boolean second )
   {
     // add also group-0 CBlocks to keep CBlock list and calib vectors aligned
-    AddValues( b.gx, b.gy, b.gz, b.mx, b.my, b.mz, b.mGroup );
+    if ( second ) {
+      AddValues( b.gx2, b.gy2, b.gz2, b.mx2, b.my2, b.mz2, b.mGroup );
+    } else {
+      AddValues( b.gx, b.gy, b.gz, b.mx, b.my, b.mz, b.mGroup );
+    }
   }
 
   /** insert G-M values
