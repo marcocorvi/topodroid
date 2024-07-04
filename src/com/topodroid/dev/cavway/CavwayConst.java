@@ -1,9 +1,9 @@
 /* @file DistoXBLEConst.java
  *
  * @author siwei tian
- * @date aug 2022
+ * @date jul 2024
  *
- * @brief TopoDroid DistoX BLE constants
+ * @brief TopoDroid Cavway BLE constants
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.

@@ -1,9 +1,9 @@
 /* @file DeviceCavwayMemoryDialog.java
  *
  * @author Siwei Tian
- * @date aug 2022
+ * @date july 2024
  *
- * @brief TopoDroid DistoX XBLE memory dialog
+ * @brief TopoDroid Cavway XBLE memory dialog
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -54,7 +54,7 @@ public class CavwayMemoryDialog extends MyDialog
    */
   public CavwayMemoryDialog( Context context, DeviceActivity parent )
   {
-    super( context, null, R.string.DeviceXBLEMemoryDialog ); // null app FIXME DeviceCavwayMemoryDialog dialog help page
+    super( context, null, R.string.DeviceCavwayMemoryDialog ); // null app FIXME DeviceCavwayMemoryDialog dialog help page
     mParent = parent;
   }
 
@@ -62,7 +62,7 @@ public class CavwayMemoryDialog extends MyDialog
   public void onCreate( Bundle bundle )
   {
     super.onCreate( bundle );
-    initLayout( R.layout.device_x310_memory_dialog, R.string.memoryXBLE );
+    initLayout( R.layout.device_cavway_memory_dialog, R.string.memoryCavway );
 
     mETdumpfrom  = (EditText) findViewById( R.id.et_dumpfrom );
     mETdumpto    = (EditText) findViewById( R.id.et_dumpto );

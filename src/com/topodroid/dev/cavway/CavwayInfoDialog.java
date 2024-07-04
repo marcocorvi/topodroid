@@ -1,9 +1,9 @@
 /* @file DistoXBLEInfoDialog.java
  *
  * @author siwei tian
- * @date aug 2022
+ * @date july 2024
  *
- * @brief TopoDroid DistoX BLE info dialog
+ * @brief TopoDroid Cavway info dialog
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -58,7 +58,7 @@ public class CavwayInfoDialog extends MyDialog
    */
   public CavwayInfoDialog(Context context, DeviceActivity parent, Device device, TopoDroidApp app )
   {
-    super( context, null, R.string.DeviceXBLEInfoDialog ); // null app FIXME DeviceXBLEInfoDialog is the help page of this dialog (need writing)
+    super( context, null, R.string.CavwayInfoDialog ); // null app FIXME DeviceXBLEInfoDialog is the help page of this dialog (need writing)
     mParent = parent;
     mDevice = device;
     mApp    = new WeakReference<TopoDroidApp>( app );
@@ -69,7 +69,7 @@ public class CavwayInfoDialog extends MyDialog
   public void onCreate( Bundle bundle )
   {
     super.onCreate( bundle );
-    initLayout( R.layout.device_x310_info_dialog, R.string.device_info );
+    initLayout( R.layout.device_cavway_info_dialog, R.string.device_info );
 
     Resources res = mParent.getResources();
 

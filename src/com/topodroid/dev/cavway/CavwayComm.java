@@ -1,9 +1,9 @@
 /* @file CavwayComm.java
  *
  * @author siwei tian
- * @date aug 2022
+ * @date july 2024
  *
- * @brief TopoDroid DistoX BLE comm class
+ * @brief TopoDroid Cavway BLE comm class
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.

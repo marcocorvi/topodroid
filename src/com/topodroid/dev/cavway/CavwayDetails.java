@@ -1,9 +1,9 @@
 /* @file CavwayDetails.java
  *
  * @author siwei tian
- * @date aug 2022
+ * @date july 2024
  *
- * @brief TopoDroid DistoX BLE internal details
+ * @brief TopoDroid Cavway BLE internal details
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.

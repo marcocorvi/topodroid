@@ -1,7 +1,7 @@
 /* @file DeviceCavwayTakeShot.java
  *
  * @author siwei tian
- * @date aug 2022
+ * @date july 2024
  *
  * @brief TopoDroid Cavway shooting class
  * --------------------------------------------------------

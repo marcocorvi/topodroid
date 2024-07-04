@@ -1,7 +1,7 @@
 /* @file DeviceXBLEProtocol.java
  *
  * @author Siwei Tian
- * @date aug 2022
+ * @date July 2024
  *
  * @brief TopoDroid Cavway data protocol
  * --------------------------------------------------------

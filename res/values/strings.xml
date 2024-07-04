@@ -84,6 +84,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="memoryA3">DistoX A3 memory</string>
     <string name="memoryX310">DistoX X310 memory</string>
     <string name="memoryXBLE">DistoX-BLE memory</string>
+    <string name="memoryCavway">Cavway memory</string>
     <!-- UNUSED string name="memory_data">DistoX data</string -->
 
     <string name="thp_user">user</string>

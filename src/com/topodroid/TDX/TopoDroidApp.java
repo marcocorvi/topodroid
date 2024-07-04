@@ -2560,8 +2560,8 @@ public class TopoDroidApp extends Application
   }
 
   //--------------Cavway Functions------------------------
-  // SIWEI_TIAN Added on Jun 2022
-  /** retrieve the DISTOXBLE info
+  // SIWEI_TIAN Added on Jun 2024
+  /** retrieve the Cavway info
    * @param info   info display dialog
    * @return true if successful
    */

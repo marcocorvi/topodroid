@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<LinearLayout
+  style="@style/base_padding"
+  android:layout_width="match_parent" 
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  >
+
+  <!-- RadioGroup 
+    android:id="@+id/device_model"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginv"
+    android:orientation="horizontal" 
+    >
+
+    <RadioButton android:id="@+id/rb_a3" 
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" 
+      android:paddingStart="@dimen/paddingh"
+      android:paddingEnd="@dimen/paddingh"
+      android:text="@string/a3"
+    />
+    <RadioButton android:id="@+id/rb_x310" 
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" 
+      android:paddingStart="@dimen/paddingh"
+      android:paddingEnd="@dimen/paddingh"
+      android:checked="true"
+      android:text="@string/x310"
+    />
+
+    <Button android:id="@+id/btn_ok"
+      android:layout_marginStart="@dimen/marginh"
+      style="@style/button_default"
+      android:text="@string/button_save"
+    />
+
+  </RadioGroup -->
+
+  <TextView android:id="@+id/tv_address" 
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="200dp"
+    android:ems="25"
+    android:layout_height="wrap_content" 
+    android:singleLine="true"
+  />
+
+  <TextView android:id="@+id/tv_code" 
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="match_parent"
+    android:ems="25"
+    android:layout_height="wrap_content" 
+    android:singleLine="true"
+  />
+  <TextView android:id="@+id/tv_firmware" 
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="match_parent"
+    android:ems="25"
+    android:layout_height="wrap_content" 
+    android:singleLine="true"
+  />
+  <TextView android:id="@+id/tv_hardware" 
+    android:layout_marginTop="@dimen/marginsmall"
+    android:layout_width="match_parent"
+    android:ems="25"
+    android:layout_height="wrap_content" 
+    android:singleLine="true"
+  />
+
+  <LinearLayout android:id="@+id/help"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginvbig"
+    android:gravity="start"
+    >
+    <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+    />
+    <LinearLayout
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:gravity="end"
+      >
+      <Button android:id="@+id/button_cancel"
+        style="@style/button_default"
+        android:text="@string/button_close"
+        />
+    </LinearLayout>
+  </LinearLayout>
+
+</LinearLayout>
+</ScrollView>

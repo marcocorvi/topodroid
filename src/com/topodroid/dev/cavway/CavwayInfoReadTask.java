@@ -1,9 +1,9 @@
 /* @file DistoCavwayInfoReadTask.java
  *
  * @author Siwei Tian
- * @date Jul 2022
+ * @date Jul 2024
  *
- * @brief TopoDroid DistoX BLE info read-task
+ * @brief TopoDroid Cavway BLE info read-task
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
