@@ -1302,7 +1302,7 @@ public class DeviceActivity extends Activity
   }
 
   /** open a calibration
-   * @param name   calibration name
+   * @param name   calibration name, null to create a new calibration
    */
   public void openCalibration( String name )
   {

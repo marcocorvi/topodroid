@@ -48,6 +48,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 
 import android.view.View;
 // import android.view.View.OnClickListener;
@@ -110,14 +111,15 @@ public class CalibActivity extends Activity
 
   private MyDateSetListener mDateListener;
 
-  private RadioButton mCBAlgoAuto;
-  private RadioButton mCBAlgoLinear;
-  private RadioButton mCBAlgoNonLinear;
+  private RadioButton mCBAlgoAuto      = null;
+  private RadioButton mCBAlgoLinear    = null;
+  private RadioButton mCBAlgoNonLinear = null;
   // private RadioButton mCBAlgoMinimum;
 
 
   private TopoDroidApp mApp;
-  private boolean isSaved;
+  private boolean isSaved; // whether the calibration is saved in the database
+  private boolean mTwoSensors = false; // whether the device has two sensor sets
 
   /** set the buttons icon
    */
@@ -157,6 +159,7 @@ public class CalibActivity extends Activity
 
     mApp     = (TopoDroidApp)getApplication();
     setContentView(R.layout.calib_activity);
+    mTwoSensors = TDInstance.isDeviceTwoSensors();
     mEditName    = (EditText) findViewById(R.id.calib_name);
     mEditDate    = (Button) findViewById(R.id.calib_date);
     // mEditDevice  = (TextView) findViewById(R.id.calib_device);
@@ -166,10 +169,15 @@ public class CalibActivity extends Activity
     mDateListener = new MyDateSetListener( mEditDate );
     mEditDate.setOnClickListener( this );
 
-    mCBAlgoAuto      = (RadioButton) findViewById( R.id.calib_algo_auto );
-    mCBAlgoLinear    = (RadioButton) findViewById( R.id.calib_algo_linear );
-    mCBAlgoNonLinear = (RadioButton) findViewById( R.id.calib_algo_non_linear );
-    // mCBAlgoMinimum   = (RadioButton) findViewById( R.id.calib_algo_minimum );
+    if ( mTwoSensors ) {
+      LinearLayout layout = (LinearLayout)findViewById( R.id.layout_algo );
+      layout.setVisibility( View.GONE );
+    } else {
+      mCBAlgoAuto      = (RadioButton) findViewById( R.id.calib_algo_auto );
+      mCBAlgoLinear    = (RadioButton) findViewById( R.id.calib_algo_linear );
+      mCBAlgoNonLinear = (RadioButton) findViewById( R.id.calib_algo_non_linear );
+      // mCBAlgoMinimum   = (RadioButton) findViewById( R.id.calib_algo_minimum );
+    }
 
     // if ( ! TDLevel.overTester ) {
     //   mCBAlgoMinimum.setVisibility( View.GONE );
@@ -196,7 +204,7 @@ public class CalibActivity extends Activity
     mListView.setAdapter( mButtonView1.mAdapter );
 
     // TDLog.Log( TDLog.LOG_CALIB, "app TDInstance.cid " + TDInstance.cid );
-    setNameEditable( TDInstance.cid >= 0 );
+    setNameEditable( TDInstance.cid >= 0 ); // this is neg. when a new calibration is to be created
     if ( isSaved ) {
       CalibInfo info = mApp.getCalibInfo();
       mEditName.setText( info.name );
@@ -214,12 +222,14 @@ public class CalibActivity extends Activity
       } else {
         mEditComment.setHint( R.string.description );
       }
-      switch ( info.algo ) {
-        // case 0: mCBAlgoAuto.setChecked( true ); break;
-        case 1: mCBAlgoLinear.setChecked( true ); break;
-        case 2: mCBAlgoNonLinear.setChecked( true ); break;
-        // case 3: mCBAlgoMinimum.setChecked( true ); break;
-        default: mCBAlgoAuto.setChecked( true ); break;
+      if ( ! mTwoSensors ) {
+        switch ( info.algo ) {
+          // case 0: mCBAlgoAuto.setChecked( true ); break;
+          case 1: mCBAlgoLinear.setChecked( true ); break;
+          case 2: mCBAlgoNonLinear.setChecked( true ); break;
+          // case 3: mCBAlgoMinimum.setChecked( true ); break;
+          default: mCBAlgoAuto.setChecked( true ); break;
+        }
       }
       if ( info.dip < 180 ) {
         mTVdip.setText( String.format(Locale.US, getResources().getString( R.string.calib_dip), info.dip ) );
@@ -231,7 +241,9 @@ public class CalibActivity extends Activity
       // mEditDevice.setText( mDeviceAddress );
 
       mEditComment.setHint( R.string.description );
-      mCBAlgoAuto.setChecked( true );
+      if ( ! mTwoSensors ) {
+        mCBAlgoAuto.setChecked( true );
+      }
     }
 
     setButtons();
@@ -370,8 +382,8 @@ public class CalibActivity extends Activity
       return;
     }
 
-    String date = mEditDate.getText().toString();
-    String device = mDeviceAddress; // mEditDevice.getText().toString();
+    String date    = mEditDate.getText().toString();
+    String device  = mDeviceAddress; // mEditDevice.getText().toString();
     String comment = mEditComment.getText().toString();
     /* if ( date != null ) */ { date    = date.trim(); }  // date != null always true
     if ( device  != null ) { device  = device.trim(); }
@@ -390,6 +402,8 @@ public class CalibActivity extends Activity
         } else {
           mApp.setCalibFromName( name );
           TopoDroidApp.mDData.updateCalibInfo( TDInstance.cid, date, device, comment );
+          int nr_sensor = mTwoSensors ? 2 : 1;
+          TopoDroidApp.mDData.updateCalibSensors( TDInstance.cid, nr_sensor );
           setNameEditable( true );
           TDToast.make( R.string.calib_saved );
         }
@@ -397,7 +411,9 @@ public class CalibActivity extends Activity
         TDToast.makeBad( R.string.calib_no_name );
       }
     }
-    saveCalibAlgo();
+    if ( mTwoSensors ) { // TWO_SENSORS
+      saveCalibAlgo();
+    }
     setButtons();
   }
 
@@ -406,9 +422,11 @@ public class CalibActivity extends Activity
   private void saveCalibAlgo()
   {
     int algo = 0;
-    if ( mCBAlgoLinear.isChecked() )         algo = 1;
-    else if ( mCBAlgoNonLinear.isChecked() ) algo = 2;
-    // else if ( mCBAlgoMinimum.isChecked() )   algo = 3;
+    if ( ! mTwoSensors ) {
+      if ( mCBAlgoLinear.isChecked() )         algo = 1;
+      else if ( mCBAlgoNonLinear.isChecked() ) algo = 2;
+      // else if ( mCBAlgoMinimum.isChecked() )   algo = 3;
+    }
     TopoDroidApp.mDData.updateCalibAlgo( TDInstance.cid, algo );
   }
   

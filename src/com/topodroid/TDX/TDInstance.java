@@ -114,6 +114,11 @@ public class TDInstance
    */
   public static boolean isDeviceXBLE()   { return deviceA != null && deviceA.isDistoXBLE(); }
 
+  /** @return true if the device has two sensor sets  
+   * @note this is used only for Cavway, although BRIC too has two sensor sets
+   */
+  public static boolean isDeviceTwoSensors() { return deviceA != null && deviceA.isCavway(); }
+
   /** @return primary bluetooth device
    */
   public static Device getDeviceA() 

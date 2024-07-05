@@ -1635,6 +1635,9 @@ public class TopoDroidApp extends Application
     return ( mDData != null ) && mDData.hasCalibName( name );
   }
 
+  /** set the active calibration
+   * @param calib    calibration name, or null when creating a new calibration
+   */
   void /*long*/ setCalibFromName( String calib ) // RETURN value not used
   {
     TDInstance.cid = -1;
