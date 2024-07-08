@@ -569,7 +569,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="photo_survey">mérés megfordítása</string -->
     <!-- UNUSED string name="picture_no_station">Álláspont név szükséges</string -->
     <string name="plot_delete">Törlöd a vázlatot?</string>
-    <!-- TODO string name="scrap_delete">Delete scrap ?</string -->
+    <string name="scrap_delete">Törlöd a szintet?</string>
     <string name="item_delete">Törlöd a %1$s elemet?</string>
     <string name="splay_delete">Törlöd a %1$s segédmérést?</string>
     <string name="plot_duplicate_name">Vázlat nevének megkettőzése</string>
