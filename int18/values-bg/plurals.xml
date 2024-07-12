@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <plurals name="calib_saturated_values">
-    <item quantity="one">ПРЕДУПРЕЖДЕНИЕ: Едни наситени данни</item>
-    <item quantity="other">ПРЕДУПРЕЖДЕНИЕ: %1$d наситени данни</item>
+    <item quantity="one">ВНИМАНИЕ: Едни наситени данни</item>
+    <item quantity="other" >ВНИМАНИЕ: %1$d наситени данни</item>
   </plurals>
-
   <plurals name="read_data">
     <item quantity="zero">Няма прочетени измервания</item>
-    <item quantity="one">едно</item>
     <item quantity="other">Прочетени %1$d измервания</item>
   </plurals>
-
   <plurals name="read_calib_data">
-    <item quantity="zero">Няма прочетени измервания</item>
-    <item quantity="one">едно</item>
+    <item quantity="zero">Няма прочетени данни от калибрацията</item>
     <item quantity="other">Прочетени %1$d измервания (%2$d пакети)</item>
   </plurals>
+  <plurals name="found_calib_groups">
+    <item quantity="zero">Няма намерени групи</item>
+    <item quantity="one">Намерена %1$d група</item>
+    <item quantity="other">Намерени %1$d групи</item>
+  </plurals>
+
 </resources>
