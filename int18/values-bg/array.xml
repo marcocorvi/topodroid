@@ -104,10 +104,10 @@
 
   <!-- UNUSED string-array name="lineContinue">
      <item name="none">без</item>
-     <item name="start">join with start point</item>
-     <item name="end">join with end point</item>
-     <item name="both">join with both ends</item>
-     <item name="continue">continue</item>
+     <item name="start">свързване с начална точка</item>
+     <item name="end">свързване с крайна точка</item>
+     <item name="both">свързване в двата края</item>
+     <item name="continue">продължи</item>
   </string-array -->
   <!-- UNUSED string-array name="lineContinueValue" translatable="false"> <! - - must agree with DrawingWindow.CONT_XXX - - >
      <string-array name="none">0<item name="start">1</item>
@@ -168,7 +168,7 @@
      <!-- item name="polish">Polski</item -->
      <!-- item name="ukrainian">Українська</item -->en<!-- item name="slovak">Slovenčina</item -->
      <!-- item name="french">fr</item -->
-     <!-- item name="bulgarian">Български</item -->es</item>
+     <!-- item name="bulgarian">български</item -->es</item>
      <item name="13" name="italian">it</item>
      <item name="16" name="russian">ru</item>
      <item name="zoomCtrl" name="russian">
@@ -217,7 +217,7 @@
      <!-- item name="png">PNG</item -->Пълни<item name="exportShots" name="four">
      <!-- shot default export -->Експертни<!-- item name="c3d">Cave3D</item -->
      <!-- item name="png">12</item -->Тестови<!-- item name="pdf">27</item -->
-     <!-- item name="complete">Завършени</item -->
+     <!-- item name="complete">Завършено</item -->
   </item>
   <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
      <!-- UNUSED string-array name="exportSketch">
