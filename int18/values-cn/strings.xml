@@ -284,7 +284,7 @@
     <string name="datamode_diving">洞潜数据模式</string>
     <string name="illegal_data_value">非法的数值</string>
 
-    <!-- TODO string name="geocode_title">Geomorphology Code</string -->
+    <string name="geocode_title">地貌代码</string>
     <string name="photo_title">照片</string>
     <string name="photo_text">输入照片注释</string>
     <string name="photo_failed">照片失败</string>
@@ -566,7 +566,7 @@
     <!-- UNUSED string name="photo_survey">split survey</string -->
     <!-- UNUSED string name="picture_no_station">Station name required</string -->
     <string name="plot_delete">删除草图 ?</string>
-    <!-- TODO string name="scrap_delete">Delete scrap ?</string -->
+    <string name="scrap_delete">清除剪贴板 ?</string>
     <string name="item_delete">删除项目 %1$s ?</string>
     <string name="splay_delete">删除辐侧 %1$s ?</string>
     <string name="plot_duplicate_name">重复的草图名称</string>
@@ -602,7 +602,7 @@
     <string name="section_line_not_allowed">截面线不被允许</string>
 
     <!-- UNUSED string name="sensor">sensor</string -->
-    <!-- TODO string name="sensor_title">Add sensor measurement</string -->
+    <string name="sensor_title">添加传感器测量</string>
     <string name="sensor_gravity">重力</string>
     <!-- UNUSED string name="sensor_humidity">humidity</string -->
     <string name="sensor_light">光线</string>
@@ -787,11 +787,11 @@
     <!-- UNUSED string name="ask_backups_clear">删除草图备份?</string -->
     <string name="ask_manual_update">升级用户手册翻译?\n现在安装 v. %1$d 已经安装 v. %2$d</string>
 
-    <!-- TODO string name="button_add"       >Add       </string -->
+    <string name="button_add"       >添加       </string>
     <string name="button_apply"     >应用</string>
     <string name="button_back"      >返回      </string>
     <string name="button_cancel"    >取消    </string>
-    <!-- TODO string name="button_geocode"   >GeoCode</string -->
+    <string name="button_geocode"   >地理编码</string>
     <!-- UNUSED string name="button_change"    >更换    </string -->
     <string name="button_clipboard" >剪贴板 </string>
     <string name="button_close"     >关闭     </string>
@@ -821,7 +821,7 @@
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >草图</string>
-    <!-- TODO string name="button_less">Less</string -->
+    <string name="button_less6"   >减少</string>
     <string name="button_more"    >更多</string>
     <string name="button_move"    >移动</string>
     <string name="button_next"    >下一步</string>
@@ -879,7 +879,7 @@
     <string name="button_xsection"  >截面</string>
     <string name="xsection">截面</string>
     <string name="buffer_size">缓存: %1$d 数据</string>
-    <!-- TODO string name="buffer_sorted">sorted</string -->
+    <string name="buffer_sorted">已排序</string>
     <!-- UNUSED string name="buffer_unsorted">未分类</string -->
 
     <string name="mode_leg">主线测段</string>
@@ -941,11 +941,11 @@
     <!-- UNUSED string name="azimuth">Azimuth [deg]</string -->
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
-    <!-- TODO string name="bt_alias_title">Bluetooth aliases</string -->
-    <!-- TODO string name="hint_bt_alias">BT alias</string -->
-    <!-- TODO string name="hint_bt_code">Device code</string -->
-    <!-- TODO string name="bt_alias_missing">BT alias missing</string -->
-    <!-- TODO string name="bt_code_missing">Device code missing</string -->
+    <string name="bt_alias_title">蓝牙别名</string>
+    <string name="hint_bt_alias">BT 别名</string>
+    <string name="hint_bt_code">设备代码</string>
+    <string name="bt_alias_missing">BT 别名丢失</string>
+    <string name="bt_code_missing">设备代码丢失</string>
 
     <string name="hint_cellsize">栅格尺寸</string>
     <string name="hint_cwd">工作文件夹</string>
@@ -961,7 +961,7 @@
     <string name="hint_notes">注释</string>
     <string name="hint_label">标签</string>
     <string name="hint_comment">评论</string>
-    <!-- TODO string name="hint_size">size [m]</string -->
+    <string name="hint_size">尺寸 [m]</string>
     <string name="hint_text">正文</string>
     <string name="hint_options">选择</string>
     <string name="hint_name">名称</string>
@@ -1385,8 +1385,8 @@
   <string name="pref_locale_summary">软件语言</string>
   <string name="pref_orientation_title">屏幕适应</string>
   <string name="pref_orientation_summary">软件屏幕适应</string>
-  <!-- TODO string name="pref_single_back_title">Single back</string -->
-  <!-- TODO string name="pref_single_back_summary">Close windows with single back</string -->
+  <string name="pref_single_back_title">单次操作返回</string>
+  <string name="pref_single_back_summary">单次操作返回关闭窗口</string>
 
   <string name="pref_raw_data_title">原始数据</string>
   <string name="pref_raw_data_summary">显示原始测量数据</string>
@@ -1438,8 +1438,8 @@
   <string name="pref_bezier_step_summary">最大点间距(多条曲线) [m]</string>
   <string name="pref_leg_shots_title">最少主线测量</string>
   <string name="pref_leg_shots_summary">最少主线测量次数</string>
-  <!-- TODO string name="pref_backsight_splay_title">Backsight splay</string -->
-  <!-- TODO string name="pref_backsight_splay_summary">Backsight check with first splay</string -->
+  <string name="pref_backsight_splay_title">后视侧辐射线</string>
+  <string name="pref_backsight_splay_summary">使用第一个侧辐射线进行后视检查</string>
   <string name="pref_recent_timeout_title">最近的数据超时</string>
   <string name="pref_recent_timeout_summary">超时之后，数据不再是最近的 [s]</string>
   <string name="pref_triple_shot_title">主线测量提示声</string>
@@ -1517,7 +1517,7 @@
   <string name="pref_zip_share_category_title">Zip文件分享类别</string>
   <string name="pref_zip_share_category_summary">添加类别到zip分享请求</string>
 
-  <!-- TODO string name="pref_bt_alias_title">BT aliases</string -->
+  <string name="pref_bt_alias_title">蓝牙别名</string>
   <string name="pref_sock_type_title">信道</string>
   <string name="pref_sock_type_summary">蓝牙信道类型</string>
   <!-- UNUSED string name="pref_device_type_title">Disto type</string -->
@@ -1730,8 +1730,8 @@
   <string name="pref_iter_title">算法迭代</string>
   <string name="pref_iter_summary">最大迭代次数</string>
   <string name="pref_label_size_title">标注尺寸</string>
-  <!-- TODO string name="pref_scalable_label_title">Scaling labels</string -->
-  <!-- TODO string name="pref_scalable_label_summary">Labels scale with the zoom</string -->
+  <string name="pref_scalable_label_title">缩放标签</string>
+  <string name="pref_scalable_label_summary">标签随缩放而缩放</string>
   <string name="pref_label_size_summary">标注尺寸</string>
   <string name="pref_slope_lside_title">斜坡线 l-尺寸</string>
   <string name="pref_slope_lside_summary">默认斜坡线 l-尺寸</string>
@@ -1877,8 +1877,8 @@
 
   <string name="pref_3d_sketch_title">3D建模</string>
   <string name="pref_3d_sketch_summary">启用3D建模(内测版本适用)</string>
-  <!-- TODO string name="pref_sketch_splay_buffer_title">Splay buffer</string -->
-  <!-- TODO string name="pref_sketch_splay_buffer_summary">Section splay buffer [m]</string -->
+  <string name="pref_sketch_splay_buffer_title">侧辐射线缓冲区</string>
+  <string name="pref_sketch_splay_buffer_summary">横断面侧辐射线缓冲区 [m]</string>
 
   <!-- NO string name="pref_log_stream_summary" translatable="false">Log output stream</string -->
   <!-- NO string name="pref_log_stream_title" translatable="false">Log stream</string -->
