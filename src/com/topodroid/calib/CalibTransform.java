@@ -175,7 +175,7 @@ public class CalibTransform
    * @param b     B vector
    * @param a     A matrix
    */
-  public void EnforceMax2( TDVector b, TDMatrix a )
+  public static void EnforceMax2( TDVector b, TDMatrix a )
   {
     double max = Math.abs( b.x );
     double m;
@@ -415,7 +415,7 @@ public class CalibTransform
    * @param a        A matrix
    * @param off      offset in the array of coefficients
    */
-  private static void coeffToBA( byte[] coeff, TDVector b, TDMatrix a, int off )
+  protected static void coeffToBA( byte[] coeff, TDVector b, TDMatrix a, int off )
   {
     long v;
     long c0 = (int)(coeff[off/*+ 0*/]); if ( c0 < 0 ) c0 = 256+c0;
@@ -579,7 +579,7 @@ public class CalibTransform
 
 /* ============================================================ */
 
-  protected void checkOverflow( TDVector v, TDMatrix m )
+  static protected void checkOverflow( TDVector v, TDMatrix m )
   {
     float mv = v.maxAbsValue() * TDUtil.FV;
     float mm = m.maxAbsValue() * TDUtil.FM;

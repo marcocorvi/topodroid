@@ -560,7 +560,7 @@ public class ShotWindow extends Activity
           mApp_mData.updateShotLeg( cur.mId, TDInstance.sid, LegType.EXTRA ); // cur.mType ); // FIXME 20140616
         }
         else if ( ! cur.isSecLeg() ) { // FIXME 20201118
-          // if ( prev != null && prev.isBlank() ) prev.setBlockType( DBlock.BLOCK_BLANK_LEG );
+          // if ( prev != null && prev.isBlank() ) prev.setBlockLegType( DBlock.BLOCK_BLANK_LEG );
           if ( prev != null ) prev.setTypeBlankLeg();
         }
 
@@ -754,7 +754,7 @@ public class ShotWindow extends Activity
     if ( blk == null || ! blk.isSplay() ) return;
     do {
       // TDLog.v("toggle splay type " + pos + " is splay " + blk.isSplay() + " leg " + blk.getLegType() );
-      blk.setBlockType( (int)leg1 );
+      blk.setBlockLegType( (int)leg1 );
       mApp_mData.updateShotLeg( blk.mId, TDInstance.sid, leg1 );
       mDataAdapter.updateBlockView( blk.mId );
       if ( (--pos) < 0 ) break;
@@ -800,7 +800,7 @@ public class ShotWindow extends Activity
           break;
       }
       // TDLog.v("toggle splay type " + pos + " is splay " + blk.isSplay() + " leg " + blk.getLegType() );
-      blk.setBlockType( (int)leg1 );
+      blk.setBlockLegType( (int)leg1 );
       mApp_mData.updateShotLeg( blk.mId, TDInstance.sid, leg1 );
       mDataAdapter.updateBlockView( blk.mId );
       if ( (--pos) < 0 ) break;
@@ -811,25 +811,30 @@ public class ShotWindow extends Activity
   }
 
   // FIXME_X3_SPLAY from ShotEditDialog
-  // @param leg1  new leg type
+  /** update the leg-type and block-type of a splay
+   * @param blk   data block
+   * @param leg1  new leg type
+   */
   void updateSplayLegType( DBlock blk, long leg1 )
   {
     // TDLog.v("update splay " + blk.mId + " leg type " + leg1 );
-    int block_type = DBlock.blockOfSplayLegType[ (int)leg1 ];
-    // long leg_type = DBlock.legOfBlockType[ block_type ];
     mApp_mData.updateShotLeg( blk.mId, TDInstance.sid, leg1 );
-    blk.setBlockType( block_type );
+    // int block_type = DBlock.blockOfSplayLegType[ (int)leg1 ];
+    // // long leg_type = DBlock.legOfBlockType[ block_type ];
+    // blk.setBlockType( block_type ); // FIXME 20240716
+    blk.setBlockLegType( (int)leg1 );
     updateDisplay();
   }
 
   // from MultiselectDialog
   void updateSplaysLegType( List< DBlock > blks, int leg_type, long flag )
   {
-    int block_type = DBlock.blockOfSplayLegType[ leg_type ];
+    // int block_type = DBlock.blockOfSplayLegType[ leg_type ];
     for ( DBlock blk : blks ) {
       // long leg_type = DBlock.legOfBlockType[ block_type ];
       mApp_mData.updateShotLegFlag( blk.mId, TDInstance.sid, leg_type, flag );
-      blk.setBlockType( block_type );
+      // blk.setBlockType( block_type ); // FIXME 20240716
+      blk.setBlockLegType( leg_type );
       blk.resetFlag( flag );
     }
     updateDisplay();
@@ -2076,7 +2081,7 @@ public class ShotWindow extends Activity
   {
     // TDLog.v("do update name and flags " + blk.mId + " flag " + flag + " leg " + leg + " / " + blk.getLegType() );
     blk.setBlockName( from, to, (leg == LegType.BACK) );
-    blk.setBlockType( (int)leg );
+    blk.setBlockLegType( (int)leg );
 
     int ret = mApp_mData.updateShotNameAndData( blk.mId, TDInstance.sid, from, to, extend, flag, leg, comment );
 
@@ -2108,7 +2113,7 @@ public class ShotWindow extends Activity
       blk3.setExtend( extend, stretch );
       blk3.resetFlag( flag );
       blk3.mComment = comment;
-      // FIXME if ( leg == LegType.EXTRA ) blk3.setBlockType( DBlock.BLOCK_SEC_LEG );
+      // FIXME if ( leg == LegType.EXTRA ) blk3.setBlockLegType( DBlock.BLOCK_SEC_LEG );
       mDataAdapter.updateBlockView( blk3.mId );
     }
   }

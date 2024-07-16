@@ -355,7 +355,7 @@ public class DBlock
   /** set the block type from the leg-type
    * @param leg_type    leg type
    */
-  void setBlockType( int leg_type )
+  void setBlockLegType( int leg_type )
   {
      switch ( leg_type ) {
        case LegType.EXTRA:   mBlockType = BLOCK_SEC_LEG;     break;

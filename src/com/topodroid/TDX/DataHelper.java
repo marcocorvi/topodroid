@@ -374,7 +374,7 @@ public class DataHelper extends DataSetObservable
     
     blk.setExtend( (int)cursor.getLong(9), (float)( cursor.getDouble(16) ) );
     blk.resetFlag( cursor.getLong(10) );
-    blk.setBlockType( (int)leg );
+    blk.setBlockLegType( (int)leg );
     blk.mComment  = cursor.getString(12);
     blk.setShotType( (int)cursor.getLong(13) );
     blk.mTime     = cursor.getLong(14);

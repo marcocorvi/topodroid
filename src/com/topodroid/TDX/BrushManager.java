@@ -257,14 +257,14 @@ public class BrushManager
   public static final Paint fixedYellowPaint = makePaint( TDColor.FIXED_YELLOW, WIDTH_CURRENT, Paint.Style.STROKE);
   public static final Paint fixedOrangePaint = makePaint( TDColor.FIXED_ORANGE, WIDTH_CURRENT, Paint.Style.STROKE);
 
-  public static final Paint paintSplayLRUD    = makePaint( TDColor.SPLAY_LRUD,    WIDTH_CURRENT, Paint.Style.STROKE);
-  public static final Paint paintSplayXB      = makePaint( TDColor.SPLAY_LIGHT,   WIDTH_CURRENT, Paint.Style.STROKE);
-  public static final Paint paintSplayComment = makePaint( TDColor.SPLAY_COMMENT, WIDTH_CURRENT, Paint.Style.STROKE);
-  public static final Paint paintSplayXViewed = makePaint( TDColor.SPLAY_NORMAL,  WIDTH_CURRENT, Paint.Style.STROKE);
-  public static final Paint paintSplayXBdash  = makePaint( TDColor.SPLAY_LIGHT,   WIDTH_CURRENT, Paint.Style.STROKE);
-  public static final Paint paintSplayXBdot   = makePaint( TDColor.SPLAY_LIGHT,   WIDTH_CURRENT, Paint.Style.STROKE);
-  public static final Paint paintSplayXVdash  = makePaint( TDColor.SPLAY_NORMAL,  WIDTH_CURRENT, Paint.Style.STROKE);
-  public static final Paint paintSplayXVdot   = makePaint( TDColor.SPLAY_NORMAL,  WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint paintSplayLRUD    = makePaint( TDColor.SPLAY_LRUD,    WIDTH_CURRENT, Paint.Style.STROKE);  // GREEN
+  public static final Paint paintSplayXB      = makePaint( TDColor.SPLAY_LIGHT,   WIDTH_CURRENT, Paint.Style.STROKE);  // BLUE
+  public static final Paint paintSplayComment = makePaint( TDColor.SPLAY_COMMENT, WIDTH_CURRENT, Paint.Style.STROKE);  // VERYDARK_GRAY
+  public static final Paint paintSplayXViewed = makePaint( TDColor.SPLAY_NORMAL,  WIDTH_CURRENT, Paint.Style.STROKE);  // MID_BLUE
+  public static final Paint paintSplayXBdash  = makePaint( TDColor.SPLAY_LIGHT,   WIDTH_CURRENT, Paint.Style.STROKE);  // BLUE
+  public static final Paint paintSplayXBdot   = makePaint( TDColor.SPLAY_LIGHT,   WIDTH_CURRENT, Paint.Style.STROKE);  // BLUE
+  public static final Paint paintSplayXVdash  = makePaint( TDColor.SPLAY_NORMAL,  WIDTH_CURRENT, Paint.Style.STROKE);  // MID_BLUE
+  public static final Paint paintSplayXVdot   = makePaint( TDColor.SPLAY_NORMAL,  WIDTH_CURRENT, Paint.Style.STROKE);  // MID_BLUE
   public static final Paint paintSplayLatest  = makePaint( TDColor.SPLAY_LATEST,  WIDTH_CURRENT, Paint.Style.STROKE);
 
   public static final Paint fixedGridPaint    = makePaint( TDColor.DARK_GRID,   WIDTH_FIXED, Paint.Style.STROKE);

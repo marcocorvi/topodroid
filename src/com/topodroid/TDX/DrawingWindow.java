@@ -1189,11 +1189,11 @@ public class DrawingWindow extends ItemDrawer
       if ( blk.isXSplay() ) {
         dpath.setPathPaint( BrushManager.paintSplayLRUD );    // GREEN
       } else if ( angle > TDSetting.mSectionSplay ) {
-        dpath.setPathPaint( BrushManager.paintSplayXVdot );   // BLUE dashed-4  -- -- -- --
+        dpath.setPathPaint( BrushManager.paintSplayXVdot );   // MID_BLUE dashed-4  -- -- -- --
       } else if ( angle < -TDSetting.mSectionSplay ) {
-        dpath.setPathPaint( BrushManager.paintSplayXVdash );  // BLUE dashed-3  --- --- ---
+        dpath.setPathPaint( BrushManager.paintSplayXVdash );  // MID_BLUE dashed-3  --- --- ---
       } else {
-        dpath.setPathPaint( BrushManager.paintSplayXViewed ); // BLUE
+        dpath.setPathPaint( BrushManager.paintSplayXViewed ); // MID_BLUE
       }
     } else {
       if ( blk.isXSplay() ) {

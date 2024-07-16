@@ -49,6 +49,9 @@ public class DrawingSplayPath extends DrawingPath
 
   public float xEnd, yEnd; // drawing circle center = endpoint (scene coords)
 
+  private static final Paint H_SPLAY_PAINT = BrushManager.darkBluePaint;
+  private static final Paint V_SPLAY_PAINT = BrushManager.deepBluePaint;
+
   /** toggle the display mode of splays , between LINE and POINT
    */
   static int toggleSplayMode()
@@ -238,8 +241,8 @@ public class DrawingSplayPath extends DrawingPath
   // -------------------------------------------------------------------------------------------------
 
   /** set splay paint - default behaviour
-   * @param h_paint  H-splay paint
-   * @param v_paint  V-splay paint
+   * @param h_paint  paint used for H-splay
+   * @param v_paint  paint used for V-splay
    * @return true if a special paint has been set
    *
    * @note called by DrawingCommandManager when TDSetting.mDashSplay == DASHING_NONE
@@ -249,7 +252,7 @@ public class DrawingSplayPath extends DrawingPath
   private boolean setSplayPaintDefault( DBlock blk, Paint h_paint, Paint v_paint )
   {
     if ( blk == null ) {
-      mPaint = BrushManager.paintSplayXB;
+      mPaint = BrushManager.paintSplayXB; // BLUE
       return true;
     }
     // if ( blk.isHighlighted() ) {
@@ -258,11 +261,11 @@ public class DrawingSplayPath extends DrawingPath
     // }
     if ( TDLevel.overAdvanced ) {
       if ( blk.isCommented() ) { // FIXME_COMMENTED
-        mPaint = BrushManager.paintSplayComment;
+        mPaint = BrushManager.paintSplayComment; // VERYDARK_GRAY
         return true;
       } 
-      if ( blk.isXSplay() ) {
-        mPaint = BrushManager.paintSplayLRUD;
+      if ( blk.isXSplay() ) { 
+        mPaint = BrushManager.paintSplayLRUD; // GREEN
         return true;
       } 
       if ( blk.isHSplay() ) {
@@ -274,15 +277,15 @@ public class DrawingSplayPath extends DrawingPath
         return true;
       } 
     }
-    mPaint = BrushManager.paintSplayXB;
+    mPaint = BrushManager.paintSplayXB; // BLUE
     // TDLog.v("paint: none is false");
     return false;
   }
 
   /** set splay paint according to the azimuth (plan)
    * @param cosine   cos(angle_splay-leg) used for plan-dashing
-   * @param h_paint  H-splay paint
-   * @param v_paint  V-splay paint
+   * @param h_paint  paint used for H-splay
+   * @param v_paint  paint used for V-splay
    * @note called by DrawingCommandManager when TDSetting.mDashSplay == DASHING_AZIMUTH, or DASHING_VIEW for profile
    */
   private void setSplayPaintAzimuth( DBlock blk, float cosine, Paint h_paint, Paint v_paint )
@@ -304,8 +307,8 @@ public class DrawingSplayPath extends DrawingPath
   }
   
   /** set splay paint according to the clino (profile)
-   * @param h_paint  H-splay paint
-   * @param v_paint  V-splay paint
+   * @param h_paint  paint used for H-splay
+   * @param v_paint  paint used for V-splay
    * @note called by DrawingCommandManager when TDSetting.mDashSplay == DASHING_CLINO, or DASHING_VIEW for plan
    */
   private void setSplayPaintClino( DBlock blk, Paint h_paint, Paint v_paint )
@@ -381,23 +384,23 @@ public class DrawingSplayPath extends DrawingPath
     // TDLog.v("splay paint " + TDSetting.mDashSplay + " cos " + this.getCosine() );
     switch ( TDSetting.mDashSplay ) {
       case TDSetting.DASHING_AZIMUTH:
-        this.setSplayPaintAzimuth( blk, this.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        this.setSplayPaintAzimuth( blk, this.getCosine(), H_SPLAY_PAINT, V_SPLAY_PAINT );
         break;
       case TDSetting.DASHING_CLINO:
-        this.setSplayPaintClino( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        this.setSplayPaintClino( blk, H_SPLAY_PAINT, V_SPLAY_PAINT );
         break;
       case TDSetting.DASHING_VIEW:
         if ( PlotType.isPlan( type ) ) {
-          this.setSplayPaintClino( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+          this.setSplayPaintClino( blk, H_SPLAY_PAINT, V_SPLAY_PAINT );
         } else if ( PlotType.isExtended( type ) ) {
-          this.setSplayPaintAzimuth( blk, this.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+          this.setSplayPaintAzimuth( blk, this.getCosine(), H_SPLAY_PAINT, V_SPLAY_PAINT );
         } else if ( PlotType.isProjected( type ) ) {
-          this.setSplayPaintProjected( blk, this.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+          this.setSplayPaintProjected( blk, this.getCosine(), H_SPLAY_PAINT, V_SPLAY_PAINT );
         }
         break;
       // case TDSetting.DASHING_NONE:
       default:
-        this.setSplayPaintDefault( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        this.setSplayPaintDefault( blk, H_SPLAY_PAINT, V_SPLAY_PAINT ); // H_splay DARK_BLUE, V_splay DEEP_BLUE
         break;
     }
   }
