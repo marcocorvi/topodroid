@@ -1,173 +1,690 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--suppress CheckTagEmptyBody -->
 <resources>
-  <!-- TODO string-array name="orientation">
-     <item name="unspecified">unspecified</item>
-     <item name="portrait">portrait</item>
-     <item name="landscape">landscape</item>
-  </string-array -->
+  <string-array name="bricMode">
+     <item name="prim_only">Прим. само</item>
+     <!-- item name="sequence">Sequence</item -->
+     <item name="all">Пълна информация</item>
+     <!-- item name="all_zero">Всички + нула</ite -->
+     <!-- item name="no_index">Всички с изключение на индекса</item -->
+  </string-array>
+  <string-array name="bricModeValue" translatable="false">
+     <item name="prim_only">1</item>
+     <!-- item name="sequence">2</item -->
+     <item name="all">3</item>
+     <!-- item name="all_zero">4</item -->
+     <!-- item name="no_index">5</item -->
+  </string-array>
+  
+  <string-array name="geoImportApp">
+     <item name="none">неуточнени</item>
+     <item name="mobile_topographer">Мобилен топограф</item>
+     <item name="gpx_recorder">GPX записващо устройство</item>
+     <item name="gps_position">GPS позиция</item>
+     <item name="gps_test">GPSTest</item>
+     <item name="gps_logger">GPS регистратор</item>
+  </string-array>
+  <string-array name="geoImportAppValue" translatable="false"> <!-- values must agree with flags in FixedActivity -->
+     <item name="none">0</item>
+     <item name="mobile_topographer">1</item>
+     <item name="gpx_recorder">2</item>
+     <item name="gps_position">4</item>
+     <item name="gps_test">8</item>
+     <item name="gps_logger">16</item>
+  </string-array>
+  
+  <string-array name="orientation">
+     <item name="unspecified">неуточнено</item>
+     <item name="portrait">портрет</item>
+     <item name="landscape">пейзаж</item>
+  </string-array>
+  <string-array name="orientationValue" translatable="false">
+     <item name="unspecified">0</item>
+     <item name="portrait">1</item>
+     <item name="landscape">2</item>
+  </string-array>
+  
+  <string-array name="splayDash">
+     <item name="none">без</item>
+     <item name="plan">наклон</item>
+     <item name="profile">азимут</item>
+     <item name="view">изглед</item>
+  </string-array>
+  <string-array name="splayDashValue" translatable="false">
+     <item name="none">0</item>
+     <item name="plan">1</item>
+     <item name="profile">2</item>
+     <item name="view">3</item>
+  </string-array>
+  
+  <string-array name="splayColors">
+     <item name="none">без</item>
+     <item name="all">избор</item>
+     <item name="palette">палитра</item>
+  </string-array>
+  <string-array name="splayColorsValue" translatable="false">
+     <item name="none">0</item>
+     <item name="all">1</item>
+     <item name="palette">2</item>
+  </string-array>
 
-  <!-- TODO string-array name="splayDash">
-     <item name="none">none</item>
-     <item name="plan">clino</item>
-     <item name="profile">azimuth</item>
-     <item name="view">view</item>
-  </string-array -->
+  <string-array name="feedbackMode">
+     <item name="none">без</item>
+     <item name="sound">звук</item>
+     <item name="haptic">хаптичен</item>
+  </string-array>
+  <string-array name="feedbackModeValue" translatable="false">
+     <item name="none">0</item>
+     <item name="sound">1</item>
+     <item name="haptic">2</item>
+  </string-array>
+  
+  <string-array name="canvasLevels">
+     <item name="none">без</item>
+     <item name="class">по символ</item>
+     <item name="instance">по вид</item>
+  </string-array>
+  <string-array name="canvasLevelsValue" translatable="false">
+     <item name="none">0</item>
+     <item name="class">1</item>
+     <item name="instance">2</item>
+  </string-array>
 
-  <!-- TODO string-array name="splayColors">
-     <item name="none">none</item>
-     <item name="all">all</item>
-     <item name="palette">palette</item>
-  </string-arrayi -->
+  <string-array name="csvSeparator">
+     <item name="comma">запетая</item>
+     <item name="pipe">черта</item>
+     <item name="tab">раздел</item>
+  </string-array>
+  <string-array name="csvSeparatorValue" translatable="false">
+     <item name="comma">0</item>
+     <item name="pipe">1</item>
+     <item name="tab">2</item>
+  </string-array>
 
-  <!-- TODO string-array name="feedbackMode">
-     <item name="none">none</item>
-     <item name="sound">sound</item>
-     <item name="heptic">haptic</item>
+  <!-- UNUSED string-array name="lineContinue">
+     <item name="none">без</item>
+     <item name="start">свързване с начална точка</item>
+     <item name="end">свързване с крайна точка</item>
+     <item name="both">свързване в двата края</item>
+     <item name="continue">продължи</item>
   </string-array -->
+  <!-- UNUSED string-array name="lineContinueValue" translatable="false"> <! - - must agree with DrawingWindow.CONT_XXX - - >
+     <string-array name="none">0<item name="start">1</item>
+     <item name="end">2</item>
+     <item name="both">3</item>
+     <item name="continue">4</item>
+  </string-array>
 
-  <!-- TODO string-array name="canvasLevels">
-     <item name="none">none</item>
-     <item name="class">by symbol</item>
-     <item name="instance">by item</item>
-  </string-array -->
-
-  <!-- TODO string-array name="csvSeparator">
-     <item name="comma">comma</item>
-     <item name="pipe">pipe</item>
-     <item name="tab">tab</item>
-  </string-array -->
-
-  <!-- TODO string-array name="lineContinue">
-     <item name="none">none</item>
-     <item name="start">join with start point</item>
-     <item name="end">join with end point</item>
-     <item name="both">join with both ends</item>
-     <item name="continue">continue</item>
-  </string-array -->
   <string-array name="unitGrid">
      <item name="meter">Метри</item>
      <item name="yard">Ярдове</item>
      <item name="two_tf">2 фута</item>
      <item name="ten_cm">10 cm</item>
   </string-array>
-  <!-- TODO string-array name="unitMeasure">
-     <item name="grid_cell">grid cell</item>
-     <item name="meter">meter</item>
-     <item name="tf">feet</item>
-  </string-array -->
-
-  <string-array name="loopClosure">
-     <item name="none">Изключено</item>
-     <item name="normal">Нормално</item>
-     <item name="weighted">Weighted</item>
-     <item name="triangles">Триъгълници</item>
+  <string-array name="unitGridValue" translatable="false" name="normal">1<item name="meter" name="weighted">4</item>
+     <item name="yard" name="selective">5</item>
+     <item name="two_tf" name="triangles">
+  </item>
   </string-array>
 
-  <!-- UNUSED string-array name="wallsType">
+  <string-array name="survexEol" name="lfcr">LFCR<item name="lf">Linux</item>
+
+  <!-- string-array name="exportScale">
+     <item name="s50">1:50</item>
+     <item name="s100">1:100</item>
+     <item name="s200">1:200</item>
+     <item name="s500">1:500</item>
+  </string-array>
+  <string-array name="exportScaleValue">
+     <item name="s50">50</item>
+     <item name="s100">100</item>
+     <item name="s200">200</item>
+     <item name="s500">500</item>
+  </string-array -->
+
+  <item name="lfcr" name="inkscape">
+     </item>
+  <item name="survexEolValue" translatable="false" name="illustrator">Илюстратор</item>
+  </string-array>
+  <string-array name="svgProgramValue" translatable="false">
+     <item name="inkscape">0</item>
+     <item name="illustrator">1</item>
+  <item name="acadVersion" translatable="false">
+     <!-- string-array name="wallsType">
      <item name="none">Изключени</item>
      <item name="convex">Вдлъбнати</item>
      <item name="delaunay">Делоне</item>
-  </string-array -->
-
-  <string-array name="zoomCtrl">
-     <item name="0">Изключени</item>
-     <item name="1">Временни</item>
-     <item name="2">Постоянни</item>
   </string-array>
-
-  <string-array name="stationNames">
-     <item name="alpha">С букви и цифри</item>
-     <item name="number">С цифри</item>
+  <string-array name="wallsTypeValue" translatable="false">
+     <item name="none">0</item>
+     <item name="convex">1</item>
+     <item name="delaunay">2</item>
+  </string-array -->R12 (AC1009)</item>
+     <item name="13">R13 (AC1012)</item>
+     <item name="16">R14 (AC1014)</item>
   </string-array>
-  
-  <!-- UNUSED string-array name="extend_name">
-     <item>Наляво</item>
+  <string-array name="acadVersionValue" translatable="false" name="german">Deutsch<item name="9" name="localeValue" translatable="false">
+     <!-- item name="polish">Polski</item -->
+     <!-- item name="ukrainian">Українська</item -->en<!-- item name="slovak">Slovenčina</item -->
+     <!-- item name="french">fr</item -->
+     <!-- item name="bulgarian">български</item -->es</item>
+     <item name="13" name="italian">it</item>
+     <item name="16" name="russian">ru</item>
+     <item name="zoomCtrl" name="russian">
+     <!-- UNUSED string-array name="extend_name">
+     <item>Ляво</item>
      <item>Вертикално</item>
-     <item>Надясно</item>
-     <item>- -</item>
+     <item>Дясно</item>
+     <item>Без</item>
   </string-array -->
+     <!-- item name="ukrainian">ua</item -->Magyar<!-- item name="slovak">sk</item -->
+     <!-- item name="slovenian">sl</item -->Français<!-- item name="bulgarian">bg</item -->
+     <!-- DISTOX_LOCAL_HELP -->Português</item>
 
-  <!-- DO NOT TRANSLATE string-array name="legShots">
-  </string-array -->
+  <item name="1" name="chinese">中文</item>
+     <!-- item name="slovak">Slovenčina</item -->
+  </string-array>
+  <string-array name="localUserManValue" translatable="false" name="french">5<item name="english" name="portuguese">6</item>
+     <item name="spanish" name="chinese">7</item>
+     <!-- item name="slovak">6</item -->
+  </string-array>
 
-  <!-- UNUSED string-array name="exportShots">
-     <item name="none">Без експорт</item>
+  <string-array name="importDatamode">
+     <item name="normal">нормално</item>
+     <item name="diving">подводно</item>
+  </string-array>
+
+  <!-- string-array name="exportScale">
+     <item name="s50">1:50</item>
+     <item name="s100">1:100</item>
+     <item name="s200">1:200</item>
+     <item name="s500">1:500</item>
+  </string-array>
+  <string-array name="exportScaleValue">
+     <item name="s50">50</item>
+     <item name="s100">100</item>
+     <item name="s200">200</item>
+     <item name="s500">500</item>
+  </string-array --> <!-- see SurveyInfo.DATAMODE_xxx -->
+     <string-array name="normal" name="eight">8<item name="diving" name="seven">7<!-- item name="kml">KML</item -->
+     <!-- item name="c3d">26</item -->8<!-- item name="png">PNG</item -->
+  <!-- item name="pdf">PDF</item -->
+
+  <!-- item name="track">11</item -->
+     <!-- item name="json">22</item -->Основни<!-- item name="shp">23</item -->
+     <!-- item name="png">12</item -->Нормални</item>
+     <!-- item name="png">PNG</item -->Пълни<item name="exportShots" name="four">
+     <!-- shot default export -->Експертни<!-- item name="c3d">Cave3D</item -->
+     <!-- item name="png">12</item -->Тестови<!-- item name="pdf">27</item -->
+     <!-- item name="complete">Завършено</item -->
+  </item>
+  <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
+     <!-- UNUSED string-array name="exportSketch">
      <item name="therion">Therion</item>
-     <item name="compass">Compass</item>
-     <item name="csurvey">cSurvey</item>
-     <item name="ghtopo">GHTopo</item>
-     <item name="grottolf">Grottolf</item>
-     <item name="pockettopo">PocketTopo</item>
-     <item name="polygon">Polygon</item>
-     <item name="survex">Survex</item>
-     <item name="topo">Topo</item>
-     <item name="toporobot">TopoRobot</item>
-     <item name="visualtopo">VisualTopo</item>
-     <item name="walls">Walls</item>
-     <item name="winkarst">Winkarst</item>
-     <item name="csv">CSV</item>
-     <item name="dxf">DXF</item>
-  </string-array -->
-
-  <!-- UNUSED string-array name="exportPlot">
-     <item name="none">Без експорт</item>
-     <item name="therion">Therion</item>
      <item name="csurvey">cSurvey</item>
      <item name="dxf">DXF</item>
-     <item name="svg">SVG</item>
-     <item name="shp">SHP</item>
      <item name="png">PNG</item>
-  </string-array -->
-
-  <string-array name="extraButtons">
-     <item name="basic">Базови</item>
-     <item name="normal">Нормални</item>
-     <item name="advanced">Пълни</item>
-     <item name="expert">Експертни</item>
-     <item name="tester">Тестови</item>
-     <!-- DO NOT TRANSLATE item name="complete">Complete</item -->
+     <item name="svg">SVG</item>
+  </string-array>
+  <string-array name="exportSketchValue">
+     <item name="therion">0</item>
+     <item name="csurvey">7</item>
+     <item name="dxf">6</item>
+     <item name="png">11</item>
+     <item name="svg">12</item>
+  </string-array -->0</string-array>
+     <string-array name="normal" name="medium">3<item name="advanced" name="sizeButtonsValue" translatable="false">
+     <!-- item name="complete">5</item -->4</item>
+     <item name="expert" name="huge">2</item>
   </string-array>
 
-  <string-array name="sizeButtons">
-     <item name="small">Малки</item>
-     <item name="normal">Нормални</item>
-     <item name="medium">Средни</item>
-     <item name="large">Големи</item>
-     <item name="huge">Огромни</item>
-  </string-array>
-
-  <!-- DO NOT TRANSLATE string-array name="logStream">
+  <!-- UNUSED string-array name="logStream" translatable="false">
      <item name="android">Системен лог</item>
      <item name="file">Файлов лог</item>
+  </string-array>
+  <string-array name="logStreamValue" translatable="false">
+     <item name="android">0</item>
+     <item name="file">1</item>
   </string-array -->
 
   <string-array name="connMode">
      <item name="batch">Ръчна</item>
      <item name="continuous">Постоянна</item>
-     <item name="multi">Мулти-Дисто</item>
+     <item name="multi">Мулти</item>
+  </string-array>
+  <string-array name="connModeValue" translatable="false">
+     <item name="batch">0</item>
+     <item name="continuous">1</item>
+     <item name="multi">2</item>
   </string-array>
 
-  <!-- UNUSED string-array name="altitudeType">
-    <item name="wgs84">WGS84 елипсоидна</item>
-    <item name="asl">Ортометрична</item>
-  </string-array -->
-
-  <string-array name="sockType">
-     <item name="default">Стандартен</item>
-     <item name="Insecure">Без парола</item>
+  <string-array name="sockType" name="for">1<item name="default" name="backsight">5<!-- item name="Port">2</item -->
+     <!-- item name="InsecurePort">3</item -->6</item>
+     <!--
+       the order of options must be increasing with the enabling level
+       and consistent through all the arrays on the names
+  -->8<item name="Insecure" name="for2">3</item>
+     <!-- item name="Port">Port</item -->4<!--
+  <string-array name="surveyStationsB">
+     <item name="no">Изключени</item>
+     <item name="for">Странични, права отсечка</item>
+     <item name="back">Странични, обратна отсечка</item>
+     <item name="backsight">Обратна отсечка, странични, права</item>
   </string-array>
-
-  <string-array name="surveyStations">
+  <string-array name="surveyStationsN">
+     <item name="no">Изключени</item>
+     <item name="for">Странични, права отсечка</item>
+     <item name="back">Странични, обратна отсечка</item>
+     <item name="backsight">Обратна отсечка, странични, права</item>
+  </string-array>
+  <string-array name="surveyStationsA">
      <item name="no">Изключени</item>
      <item name="for">Странични, права отсечка</item>
      <item name="back">Странични, обратна отсечка</item>
      <item name="backsight">Обратна отсечка, странични, права</item>
      <item name="tripod">Статив</item>
-     <item name="anomaly">Magn. anomaly</item>
+  </string-array>
+  <string-array name="surveyStationsE">
+     <item name="no">Изключени</item>
+     <item name="for">Странични, права отсечка</item>
+     <item name="back">Странични, обратна отсечка</item>
+     <item name="backsight">Обратна отсечка, странични, права</item>
+     <item name="tripod">Статив</item>
+     <item name="anomaly">Магнитна аномалия</item>
      <item name="for2">Права отсечка, странични</item>
      <item name="back2">Обратна отсечка, странични</item>
-     <item name="toporobot">TopoRobot</item>
+  </string-array>
+-->
+     <item name="sockTypeValue" translatable="false" name="toporobot">7</item>
+  </string-array>
+
+  <!-- string-array name="pickerType">
+     <item name="recent">Последно използвани</item>
+     <item name="list">Списъци</item>
+     <item name="grid">Таблици</item>
+     <item name="grid3">Тройна таблица</item>
+  </string-array>
+  <string-array name="pickerTypeValue" translatable="false">
+     <item name="recent">0</item>
+     <item name="list">1</item>
+     <item name="grid">2</item>
+     <item name="grid3">3</item>
+  </string-array -->
+
+  <!-- string-array name="sectionStations">
+     <item name="both">В двата</item>
+     <item name="from">В заден</item>
+     <item name="to">В преден</item>
+  </string-array>
+  <string-array name="sectionStationsValue" translatable="false">
+     <item name="both">3</item>
+     <item name="from">1</item>
+     <item name="to">2</item>
+  </string-array -->
+
+  <!-- string-array name="recentNr" translatable="false">
+     <item name="3">3</item>
+     <item name="4">4</item>
+     <item name="5">5</item>
+     <item name="6">6</item>
+  </string-array -->
+
+  <!-- string-array name="deviceType">
+     <item name="none">Без</item>
+     <item name="A3">A3</item>
+     <item name="X310">X310</item>
+  </string-array>
+  <string-array name="deviceTypeValue" translatable="false">
+     <item name="none">0</item>
+     <item name="A3">1</item>
+     <item name="X310">2</item>
+  </string-array -->
+
+  <string-array name="deviceBT">
+     <item name="0">Изключен</item>
+     <item name="1">Проверка при старт</item>
+     <item name="2">Включен</item>
+  </string-array>
+  <string-array name="deviceBTValue" translatable="false" name="two">Нормални<item name="0" name="three">Груби</item>
+     <!-- string-array name="exportType">
+     <item name="th">Therion</item>
+     <item name="dat">Compass</item>
+     <item name="svx">Survex</item>
+     <item name="tro">VisualTopo</item>
+  </string-array>
+  <string-array name="exportTypeValue" translatable="false">
+     <item name="th">th</item>
+     <item name="dat">dat</item>
+     <item name="svx">svx</item>
+     <item name="tro">tro</item>
+  </string-array -->"Безие" криви<item name="1" name="simplified">Опростени</item>
+  </string-array>
+  <string-array name="lineStyleValue" translatable="false" name="three">3<item name="none" name="bezier">0</item>
+     <item name="two" name="simplified">4</item>
+  </string-array>
+
+  <!-- UNUSED string-array name="extend_name">
+     <item>Ляво</item>
+     <item>Вертикално</item>
+     <item>Дясно</item>
+     <item>Без</item>
+  </string-array -->
+     <!-- item name="distance">Разстояние</item -->
+     <string-array name="four" name="cut">2<item name="only16" name="hexg">G Hex</item>
+
+  <item name="groupByValue" translatable="false" name="splayUse">
+     <!-- item name="distance">0</item -->Skip</item>
+     <!-- item name="french">Français</item -->Normal<item name="meters" name="xsection">X-Section</item>
+  <item name="feet" name="skip">
+     </item>
+  <item name="unitLengthValue" translatable="false" name="normal">1</item>
+     <item name="feet" name="xsection">2</item>
+  <!-- item name="polish">Polski</item -->
+
+<!-- string-array name="unitLengthNumber">
+     <item name="meters">1</item>
+     <item name="feet">3.28084</item>
+  </string-array -->
+<!-- item name="minimum">Minimum</item -->21<item name="unitAngle" name="hexm">22</item>
+  <!-- item name="romanian">Română</item -->
+
+  <!-- FIXME_SKETCH_3D string-array name="modelType">
+     <item name="none">None</item>
+     <item name="convexhull">Convex Hull</item>
+     <item name="powercrust">Powercrust</item>
+  </string-array>
+  <string-array name="modelTypeValue" translatable="false">
+     <item name="none">0</item>
+     <item name="convexhull">1</item>
+     <item name="powercrust">2</item>
+  </string-array -->
+
+  <!-- 3D VIEWER array strings -->
+
+  <!-- item name="bulgarian">Български</item -->
+     <!-- item name="minimum">3</item -->Subsample<item name="degrees" name="cut">Clip</item>
+  <!-- item name="ukrainian">Українська</item -->
+  <item name="hex" name="shrink">
+     </item>
+     </string-array>
+  <string-array>
+     <item></item>
+     <item>en</item>
+     <!-- item name="french">fr</item -->
+     <item>es</item>
+     <item>it</item>
+     <item>ru</item>
+     <item>de</item>
+     <!-- item name="polish">pl</item -->
+     <item>pt</item>
+     <!-- item name="romanian">ro</item -->
+     <!-- item name="slovak">sk</item -->
+     <!-- item name="slovenian">sl</item -->
+     <!-- item name="bulgarian">bg</item -->
+     <item>cn</item>
+     <!-- item name="ukrainian">ua</item -->
+     <item>hu</item>
+  </string-array>
+
+  <!-- DISTOX_LOCAL_HELP -->
+  <string-array>
+     <item>English</item>
+     <item>Español</item>
+     <item>Italiano</item>
+     <item>Русский</item>
+     <item>Magyar</item>
+     <item>Français</item>
+     <item>Português</item>
+     <item>中文</item>
+     <!-- item name="slovak">Slovenčina</item -->
+  </string-array>
+  <string-array>
+     <item>0</item>
+     <item>1</item>
+     <item>2</item>
+     <item>3</item>
+     <item>4</item>
+     <item>5</item>
+     <item>6</item>
+     <item>7</item>
+     <!-- item name="slovak">6</item -->
+  </string-array>
+
+  <string-array>
+     <item>normal</item>
+     <item>diving</item>
+  </string-array>
+
+  <string-array> <!-- see SurveyInfo.DATAMODE_xxx -->
+     <item>0</item>
+     <item>1</item>
+  </string-array>
+
+  <!-- shot default export -->
+  <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
+  <string-array>
+     <item>none</item>
+     <item>Therion</item>
+     <item>Compass</item>
+     <item>cSurvey</item>
+     <item>GHTopo</item>
+     <item>Grottolf</item>
+     <item>PocketTopo</item>
+     <item>Polygon</item>
+     <item>Survex</item>
+     <item>Topo</item>
+     <item>TopoRobot</item>
+     <item>VisualTopo</item>
+     <item>Walls</item>
+     <item>Winkarst</item>
+     <item>CSV</item>
+     <item>DXF</item>
+     <!-- item name="kml">KML</item -->
+     <!-- item name="track">Track file</item -->
+     <!-- item name="json">GeoJSON</item -->
+     <!-- item name="shp">Shapefile</item -->
+  </string-array>
+  <string-array>
+     <item>-1</item>
+     <item>0</item>
+     <item>2</item>
+     <item>7</item>
+     <item>19</item>
+     <item>18</item>
+     <item>8</item>
+     <item>16</item>
+     <item>3</item>
+     <item>17</item>
+     <item>21</item>
+     <item>4</item>
+     <item>9</item>
+     <item>20</item>
+     <item>5</item>
+     <item>6</item>
+     <!-- item name="kml">10</item -->
+     <!-- item name="track">11</item -->
+     <!-- item name="json">22</item -->
+     <!-- item name="shp">23</item -->
+  </string-array>
+
+  <!-- plot default export -->
+  <string-array>
+     <item>none</item>
+     <item>Therion</item>
+     <item>cSurvey</item>
+     <item>Tunnel</item>
+     <item>xtherion</item>
+     <item>DXF</item>
+     <item>SVG</item>
+     <item>SHP</item>
+     <!-- item name="png">PNG</item -->
+     <item>PDF</item>
+     <!-- item name="c3d">Cave3D</item -->
+  </string-array>
+  <string-array>
+     <item>-1</item>
+     <item>14</item>
+     <item>7</item>
+     <item>25</item>
+     <item>24</item>
+     <item>6</item>
+     <item>13</item>
+     <item>23</item>
+     <!-- item name="png">12</item -->
+     <item>27</item>
+     <!-- item name="c3d">26</item -->
+  </string-array>
+
+
+  <!-- plot auto export -->
+  <string-array>
+     <item>none</item>
+     <item>Therion</item>
+     <item>cSurvey</item>
+     <item>Tunnel</item>
+     <item>xtherion</item>
+     <item>DXF</item>
+     <item>SVG</item>
+     <item>SHP</item>
+     <!-- item name="png">PNG</item -->
+     <!-- item name="pdf">PDF</item --> 
+  </string-array>
+  <string-array>
+     <item>-1</item>
+     <item>14</item>
+     <item>7</item>
+     <item>25</item>
+     <item>24</item>
+     <item>6</item>
+     <item>13</item>
+     <item>23</item>
+     <!-- item name="png">12</item -->
+     <!-- item name="pdf">27</item --> 
+  </string-array>
+   
+
+  <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
+  <!-- UNUSED string-array name="exportSketch">
+     <item name="therion">Therion</item>
+     <item name="csurvey">cSurvey</item>
+     <item name="dxf">DXF</item>
+     <item name="png">PNG</item>
+     <item name="svg">SVG</item>
+  </string-array>
+  <string-array name="exportSketchValue">
+     <item name="therion">0</item>
+     <item name="csurvey">7</item>
+     <item name="dxf">6</item>
+     <item name="png">11</item>
+     <item name="svg">12</item>
+  </string-array -->
+
+  <string-array>
+     <item>2</item>
+     <item>3</item>
+     <item>4</item>
+  </string-array>
+  <string-array>
+     <item>2</item>
+     <item>3</item>
+     <item>4</item>
+  </string-array>
+
+  <string-array>
+     <item>4</item>
+     <item>5</item>
+     <item>6</item>
+     <item>7</item>
+     <item>8</item>
+  </string-array>
+  <string-array>
+     <item>4</item>
+     <item>5</item>
+     <item>6</item>
+     <item>7</item>
+     <item>8</item>
+  </string-array>
+
+  <string-array>
+     <item>Basic</item>
+     <item>Normal</item>
+     <item>Advanced</item>
+     <item>Expert</item>
+     <item>Tester</item>
+     <!-- item name="complete">Завършено</item -->
+  </string-array>
+  <string-array>
+     <item>0</item>
+     <item>1</item>
+     <item>2</item>
+     <item>3</item>
+     <item>4</item>
+     <!-- item name="complete">5</item -->
+  </string-array>
+
+  <string-array>
+     <item>Small</item>
+     <item>Normal</item>
+     <item>Medium</item>
+     <item>Large</item>
+     <item>Huge</item>
+  </string-array>
+  <string-array>
+     <item>0</item>
+     <item>1</item>
+     <item>3</item>
+     <item>4</item>
+     <item>2</item>
+  </string-array>
+
+  <!-- UNUSED string-array name="logStream" translatable="false">
+     <item name="android">Системен лог</item>
+     <item name="file">Файлов лог</item>
+  </string-array>
+  <string-array name="logStreamValue" translatable="false">
+     <item name="android">0</item>
+     <item name="file">1</item>
+  </string-array -->
+
+  <string-array>
+     <item>On-demand</item>
+     <item>Continuous</item>
+     <item>Multi</item>
+  </string-array>
+  <string-array>
+     <item>0</item>
+     <item>1</item>
+     <item>2</item>
+  </string-array>
+
+  <string-array>
+     <item>Default</item>
+     <item>Insecure</item>
+     <!-- item name="Port">Port</item -->
+     <!-- item name="InsecurePort">Insecure/Port</item -->
+  </string-array>
+  <string-array>
+     <item>0</item>
+     <item>1</item>
+     <!-- item name="Port">2</item -->
+     <!-- item name="InsecurePort">3</item -->
+  </string-array>
+
+  <!--
+       the order of options must be increasing with the enabling level
+       and consistent through all the arrays on the names
+  -->
+  <string-array>
+     <item>No</item>
+     <item>Splays, forward leg</item>
+     <item>Splays, backward leg</item>
+     <item>Backsight</item>
+     <item>Tripod</item>
+     <item>Magn. anomaly</item>
+     <item>Forward leg, splays</item>
+     <item>Backward leg, splays</item>
+     <item>TopoRobot</item>
   </string-array>
 
 <!--
@@ -196,100 +713,210 @@
      <item name="back">Странични, обратна отсечка</item>
      <item name="backsight">Обратна отсечка, странични, права</item>
      <item name="tripod">Статив</item>
-     <item name="anomaly">Magn. anomaly</item>
+     <item name="anomaly">Магнитна аномалия</item>
      <item name="for2">Права отсечка, странични</item>
      <item name="back2">Обратна отсечка, странични</item>
   </string-array>
 -->
 
-  <!-- UNUSED string-array name="pickerType">
-     <item name="recent">Последни използвани</item>
+  <string-array>
+     <item>0</item>
+     <item>1</item>
+     <item>2</item>
+     <item>5</item>
+     <item>6</item>
+     <item>8</item>
+     <item>3</item>
+     <item>4</item>
+     <item>7</item>
+  </string-array>
+
+  <!-- string-array name="pickerType">
+     <item name="recent">Последно използвани</item>
      <item name="list">Списъци</item>
      <item name="grid">Таблици</item>
      <item name="grid3">Тройна таблица</item>
+  </string-array>
+  <string-array name="pickerTypeValue" translatable="false">
+     <item name="recent">0</item>
+     <item name="list">1</item>
+     <item name="grid">2</item>
+     <item name="grid3">3</item>
   </string-array -->
 
-  <!-- UNUSED string-array name="sectionStations">
+  <!-- string-array name="sectionStations">
      <item name="both">В двата</item>
      <item name="from">В заден</item>
      <item name="to">В преден</item>
+  </string-array>
+  <string-array name="sectionStationsValue" translatable="false">
+     <item name="both">3</item>
+     <item name="from">1</item>
+     <item name="to">2</item>
   </string-array -->
 
-  <!-- UNUSED string-array name="deviceType">
-     <item name="none">Няма</item>
+  <!-- string-array name="recentNr" translatable="false">
+     <item name="3">3</item>
+     <item name="4">4</item>
+     <item name="5">5</item>
+     <item name="6">6</item>
+  </string-array -->
+
+  <!-- string-array name="deviceType">
+     <item name="none">Без</item>
      <item name="A3">A3</item>
      <item name="X310">X310</item>
+  </string-array>
+  <string-array name="deviceTypeValue" translatable="false">
+     <item name="none">0</item>
+     <item name="A3">1</item>
+     <item name="X310">2</item>
   </string-array -->
 
-  <string-array name="deviceBT">
-     <item name="0">Изключен</item>
-     <item name="1">Проверка при старт</item>
-     <item name="2">Включен</item>
+  <string-array>
+     <item>Disabled</item>
+     <item>Check on start</item>
+     <item>Enabled</item>
+  </string-array>
+  <string-array>
+     <item>0</item>
+     <item>1</item>
+     <item>2</item>
   </string-array>
 
-  <!-- UNUSED string-array name="exportType">
+  <!-- string-array name="exportType">
      <item name="th">Therion</item>
      <item name="dat">Compass</item>
      <item name="svx">Survex</item>
      <item name="tro">VisualTopo</item>
+  </string-array>
+  <string-array name="exportTypeValue" translatable="false">
+     <item name="th">th</item>
+     <item name="dat">dat</item>
+     <item name="svx">svx</item>
+     <item name="tro">tro</item>
   </string-array -->
 
-  <string-array name="lineStyle">
-     <item name="none">Фини</item>
-     <item name="two">Нормални</item>
-     <item name="two">Груби</item>
-     <item name="bezier">"Безие" криви</item>
-     <item name="simplified">Simplified</item> <!-- TODO -->
+  <string-array>
+     <item>Fine</item>
+     <item>Normal</item>
+     <item>Coarse</item>
+     <item>Bezier</item>
+     <item>Simplified</item>
+  </string-array>
+  <string-array>
+     <item>1</item>
+     <item>2</item>
+     <item>3</item>
+     <item>0</item>
+     <item>4</item>
   </string-array>
 
-  <string-array name="groupBy">
+  <string-array>
      <!-- item name="distance">Разстояние</item -->
-     <item name="four">Групи по четири</item>
-     <item name="only16">Само първите 16</item>
+     <item>Four at a time</item>
+     <item>Only first 16</item>
+  </string-array>
+  <string-array>
+     <!-- item name="distance">0</item -->
+     <item>1</item>
+     <item>2</item>
   </string-array>
 
-  <string-array name="unitLength">
-     <item name="meters">Метри</item>
-     <item name="feet">Футове</item>
+  <string-array>
+     <item>meters</item>
+     <item>feet</item>
+  </string-array>
+  <string-array>
+     <item>meters</item>
+     <item>feet</item>
+  </string-array>
+  <!-- string-array name="unitLengthNumber">
+     <item name="meters">1</item>
+     <item name="feet">3.28084</item>
+  </string-array -->
+
+  <string-array>
+     <item>decimal degrees</item>
+     <item>decimal grads</item>
+  </string-array>
+  <string-array>
+     <item>degrees</item>
+     <item>grads</item>
   </string-array>
 
-  <string-array name="unitAngle">
-     <item name="degrees">Градуси</item>
-     <item name="grads">Гради</item>
+  <string-array>
+     <item>decimal degrees</item>
+     <item>degree, minute, seconds</item>
+  </string-array>
+  <string-array>
+     <item>degrees</item>
+     <item>ddmmss</item>
   </string-array>
 
-  <string-array name="unitLocation">
-     <item name="degrees">градуси</item>
-     <item name="ddmmss">градуси, минути, секунди</item>
+  <string-array>
+     <item>Auto</item>
+     <item>Linear</item>
+     <item>Non-linear</item>
+     <!-- item name="minimum">Minimum</item -->
+  </string-array>
+  <string-array>
+     <item>0</item>
+     <item>1</item>
+     <item>2</item>
+     <!-- item name="minimum">3</item -->
   </string-array>
 
-  <string-array name="calibAlgo">
-     <item name="auto">Автоматичен</item>
-     <item name="linear">Линеен</item>
-     <item name="nonlinear">Нелинеен</item>
+  <string-array>
+     <item>None</item>
+     <item>Decimal</item>
+     <item>Hex</item>
+     <item>G Decimal</item>
+     <item>G Hex</item>
+     <item>M Decimal</item>
+     <item>M Hex</item>
+  </string-array>
+  <string-array>
+     <item>0</item>
+     <item>1</item>
+     <item>2</item>
+     <item>11</item>
+     <item>12</item>
+     <item>21</item>
+     <item>22</item>
   </string-array>
 
-  <!-- FIXME string-array name="rawCData">
-     <item name="none">Скрити</item>
-     <item name="dec">Десетични</item>
-     <item name="hex">Шестнайсетични</item>
-     <item name="decg">G Decimal</item>
-     <item name="hexg">G Hex</item>
-     <item name="decm">M Decimal</item>
-     <item name="hexm">M Hex</item>
+  <!-- FIXME_SKETCH_3D string-array name="modelType">
+     <item name="none">Без</item>
+     <item name="convexhull">Изпъкнал</item>
+     <item name="powercrust">Powercrust</item>
+  </string-array>
+  <string-array name="modelTypeValue" translatable="false">
+     <item name="none">0</item>
+     <item name="convexhull">1</item>
+     <item name="powercrust">2</item>
   </string-array -->
 
   <!-- 3D VIEWER array strings -->
 
-  <!-- TODO string-array name="demReduce">
-     <item name="shrink">Subsample</item>
-     <item name="cut">Clip</item>
-  </string-array -->
+  <string-array>
+     <item>Subsample</item>
+     <item>Clip</item>
+  </string-array>
+  <string-array>
+     <item>1</item>
+     <item>2</item>
+  </string-array>
 
-  <!-- TODO string-array name="splayUse">
-     <item name="skip">Skip</item>
-     <item name="normal">Normal</item>
-     <item name="xsection">X-Section</item>
-  </string-array -->
+  <string-array>
+     <item>Skip</item>
+     <item>Normal</item>
+     <item>X-Section</item>
+  </string-array>
+  <string-array>
+     <item>0</item>
+     <item>1</item>
+     <item>2</item>
+  </string-array>
 
 </resources>
