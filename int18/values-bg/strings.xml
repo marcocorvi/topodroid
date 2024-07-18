@@ -231,290 +231,290 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="lrud" copyable="it pt">LRUD</string>
     <string name="strike_dip">Strike %1$.0f Dip %2$.0f</string>
 
-    <string name="few_data">Too few calibration data</string>
-    <string name="few_iter">Failed: too many iterations\nCheck your data</string>
-    <string name="few_groups">Not enough data with group</string>
-    <!-- UNUSED string name="found_groups" tools:ignore="PluralsCandidate">Found %1$d groups</string -->
+    <string name="few_data">Няма достатъчно данни за калибрация</string>
+    <string name="few_iter">ГРЕШКА: прекалено много итерации \nПроверете данните</string>
+    <string name="few_groups">Недостатъчно данни в групите</string>
+    <!-- UNUSED string name="found_groups" tools:ignore="PluralsCandidate">Намерени %1$d групи</string -->
     <string name="regroup">No regroup</string>
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
-    <string name="few_calibs">Not enough calibrations</string>
-    <string name="getting_info">Getting DistoX info &#8230;</string>
-    <string name="gettingble_info">Getting DistoX-BLE info &#8230;</string>
-    <string name="gettingCavway_info">Getting Cavway info &#8230;</string>
+    <string name="few_calibs">Няма достатъчно калибрации</string>
+    <string name="getting_info">Прочитане на DistoX информация &#8230;</string>
+    <string name="gettingble_info">Прочитане на DistoX-BLE информация &#8230;</string>
+    <string name="gettingCavway_info">Прочитане на Cavway информация &#8230;</string>
 
-    <string name="calib_import_title">Calibration import</string>
-    <string name="import_title">Survey import</string>
+    <string name="calib_import_title">Импортиране на калибрация</string>
+    <string name="import_title">Импортиране на картировка</string>
     <!-- UNUSED string name="export_data_title">Data export</string -->
     <!-- UNUSED string name="export_plot_title">Sketch export</string -->
     <!-- UNUSED string name="export_overview_title">Overview export</string -->
-    <string name="export_model_title">3D model export</string>
-    <string name="export_tdconfig_title">Project export</string>
+    <string name="export_model_title">Експортиране на 3D модел</string>
+    <string name="export_tdconfig_title">Експортиране на картировка</string>
     <!-- UNUSED string name="import_wait">Importing file &#8230; please wait &#8230;</string -->
-    <string name="import_already">Survey name already present</string>
-    <string name="import_bad">Invalid import file</string>
-    <string name="import_none">No file to import</string>
-    <string name="import_failed">Failed: file import</string>
-    <string name="file_not_found">File not found</string>
-    <string name="import_calib_ok">Calibration imported</string>
-    <string name="import_calib_no_header">Calibration file: bad header</string>
-    <string name="import_calib_already">Calibration name already present</string>
-    <string name="import_calib_mismatch">Calibration-device mismatch</string>
-    <string name="import_calib_no_data">Calibration file: no data</string>
-    <string name="import_calib_io_error">Calibration file: read error</string>
-    <string name="imported_file">Imported %1$s</string>
-    <string name="import_zip_ok">ZIP file imported</string>
-    <string name="import_zip_newer">Imported zip from more recent version</string>
+    <string name="import_already">Картировката е вече импортирана</string>
+    <string name="import_bad">Невалиден файл</string>
+    <string name="import_none">Няма файлове за импортиране</string>
+    <string name="import_failed">Файлът не е импортиран</string>
+    <string name="file_not_found">Файлът не е намерен</string>
+    <string name="import_calib_ok">Калибрацията е импортирана успешно</string>
+    <string name="import_calib_no_header">Калибрационен файл: невалиден файл</string>
+    <string name="import_calib_already">Тази калибрация вече съществува</string>
+    <string name="import_calib_mismatch">Устройството за калибрация не съвпада</string>
+    <string name="import_calib_no_data">Калибрационен файл: няма данни</string>
+    <string name="import_calib_io_error">Калибрационен файл: грешка при четене</string>
+    <string name="imported_file">Импортирани %1$s</string>
+    <string name="import_zip_ok">ZIP файлът е импортиран</string>
+    <string name="import_zip_newer">Импортиран zip от по-нова версия</string>
     <!-- UNUSED string name="import_zip_wait">Imported zip file may take long. Please wait &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
-    <string name="GPS_position_none">No GPS position data</string>
-    <string name="GPX_record_none">No GPX point record</string>
-    <string name="MT_points_none">No MobileTopographer point file</string>
-    <string name="MT_bad_file">Bad MobileTopographer file</string>
-    <string name="bad_manifest">Bad manifest file [%1$d]</string>
-    <string name="bad_manifest_zip">Failed: zip read error</string>
-    <string name="bad_manifest_td">Failed: TopoDroid version too old</string>
-    <string name="bad_manifest_db_old">Failed: database version too old</string>
-    <string name="bad_manifest_db_new">Failed: database version too new</string>
+    <string name="GPS_position_none">Няма данни за GPS позиция</string>
+    <string name="GPX_record_none">Няма запис на GPX точки</string>
+    <string name="MT_points_none">Няма файл с точки на MobileTopographer</string>
+    <string name="MT_bad_file">Повреден файл на MobileTopographer</string>
+    <string name="bad_manifest">Повреден файл [%1$d]</string>
+    <string name="bad_manifest_zip">Неуспешно: грешка при четене на zip</string>
+    <string name="bad_manifest_td">Неуспешно: версията на TopoDroid е стара</string>
+    <string name="bad_manifest_db_old">Неуспешно: версията на базата данни е твърде стара</string>
+    <string name="bad_manifest_db_new">Неуспешно: версията на базата данни е твърде нова</string>
     <!-- UNUSED string name="bad_manifest_name">Failed: survey name differ from zip name</string -->
-    <string name="bad_manifest_present">Failed: duplicate survey name</string>
-    <string name="bad_manifest_db">Failed: cannot open database</string>
-    <string name="bad_manifest_sql">Failed: SQL error</string>
-    <string name="bad_manifest_number">Failed: wrong number</string>
-    <string name="bad_manifest_manifest">Failed: wrong manifest</string>
-    <string name="bad_manifest_missing">Failed: missing manifest</string>
-    <string name="bad_manifest_error">Failed: manifest read error</string>
-    <string name="bad_manifest_other">Failed: unexpected error</string>
-    <string name="archive_reset_color">Warning. Custom colors resetted</string>
+    <string name="bad_manifest_present">Неуспешно: дублирано име на картировката</string>
+    <string name="bad_manifest_db">Неуспешно: базата данни не може да се зареди </string>
+    <string name="bad_manifest_sql">Неуспешно: SQL грешка</string>
+    <string name="bad_manifest_number">Неуспешно: грешен номер</string>
+    <string name="bad_manifest_manifest">Неуспешно: грешен манифест</string>
+    <string name="bad_manifest_missing">Неуспешно: липсващ манифест</string>
+    <string name="bad_manifest_error">Неуспешно: грешка при четене</string>
+    <string name="bad_manifest_other">Неуспешно: неочаквана грешкаr</string>
+    <string name="archive_reset_color">Внимание. Персонализираните цветове са нулирани</string>
  
-    <string name="pleasewait">Please wait</string>
-    <string name="processing">processing &#8230;</string>
+    <string name="pleasewait">Моля, изчакайте</string>
+    <string name="processing">обработка &#8230;</string>
 
     <!-- UNUSED string name="head_tail">Memory: </string -->
-    <string name="head_tail_failed">Failed to read DistoX memory index</string>
-    <string name="head_tail_store_failed">Failed to store DistoX memory index</string>
+    <string name="head_tail_failed">Неуспешен прочит на индекс от DistoX паметта</string>
+    <string name="head_tail_store_failed">Неуспешен запис на индекс от DistoX паметта</string>
     <!-- UNUSED string name="pairing_failed">Failed pairing</string -->
 
-    <string name="datamode_normal">Normal data-mode</string>
-    <string name="datamode_diving">Diving data-mode</string>
-    <string name="illegal_data_value">Illegal data value</string>
+    <string name="datamode_normal">Нормален режим на данни</string>
+    <string name="datamode_diving">Подводен режим на данни</string>
+    <string name="illegal_data_value">Неправилна стойност на данните</string>
 
-    <string name="geocode_title">Geomorphology Code</string>
-    <string name="photo_title" copyable="fr">Photo</string>
-    <string name="photo_text">Enter photo comment</string>
-    <string name="photo_failed">Failed photo</string>
-    <string name="photo_max_captures">Reached maximum capture limit</string>
-    <string name="label_title">Label</string>
-    <string name="label_text">Enter the label text</string>
+    <string name="geocode_title">Геоморфологичен код</string>
+    <string name="photo_title" copyable="fr">Снимка</string>
+    <string name="photo_text">Въведете коментар за снимката</string>
+    <string name="photo_failed">Неуспешна снимка</string>
+    <string name="photo_max_captures">Достигнато максимално ограничение</string>
+    <string name="label_title">Етикет</string>
+    <string name="label_text">Въведете заглавие</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
     <!-- UNUSED string name="h_ellipsoid">H ellipsoid </string -->
-    <string name="h_geoid">H geoid </string>
-    <string name="latitude" copyable="pt">Latitude </string>
-    <string name="longitude" copyable="pt">Longitude </string>
+    <string name="h_geoid">Височинен геоид </string>
+    <string name="latitude" copyable="pt">Географска ширина </string>
+    <string name="longitude" copyable="pt">Географска дължина </string>
     <!-- UNUSED string name="h_ellipsoid_hint">H ellipsoid [m]</string -->
-    <string name="h_geoid_hint">H geoid [m]</string>
-    <string name="accuracy_hint">Accuracy [m]</string>
-    <string name="latitude_hint">Latitude dd:mm:ss.sss</string>
-    <string name="longitude_hint">Longitude dd:mm:ss.sss</string>
-    <string name="loop_closure_errors">Loop closure errors</string>
-    <string name="loop_none">no loop</string>
-    <string name="loops_bad">Inaccurate loops: %1$d</string>
+    <string name="h_geoid_hint">Височинен геоид [m]</string>
+    <string name="accuracy_hint">Точност [m]</string>
+    <string name="latitude_hint">Географска ширина dd:mm:ss.sss</string>
+    <string name="longitude_hint">Географска дължина dd:mm:ss.sss</string>
+    <string name="loop_closure_errors">Грешка при затваряне на полигона</string>
+    <string name="loop_none">няма полигон</string>
+    <string name="loops_bad">Неточни полигони: %1$d</string>
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
     <!-- UNUSED string name="multistation_plane">Multiple-station plane</string -->
 
-    <string name="error_m">Accuracy [m]</string>
-    <string name="fmt_error_h">Accuracy: %1$.1f m</string>
-    <string name="fmt_error_m">Accuracy: H %1$.1f V %2$.1f m</string>
+    <string name="error_m">Точност [m]</string>
+    <string name="fmt_error_h">Точност: %1$.1f m</string>
+    <string name="fmt_error_m">Точност: H %1$.1f V %2$.1f m</string>
     <string name="fmt_h_geoid">Geoid alt.: %1$.0f m</string>
     <!-- UNUSED string name="fmt_h_ellipsoid">Ellipsoid alt.: %1$.0f m</string -->
-    <string name="location_start_fine">Starting fine position</string>
+    <string name="location_start_fine">Начална добра позиция</string>
     <!-- UNUSED string name="depth_error">Warning. Data depth error</string -->
 
-    <string name="error_azimuth_required">Azimuth required</string>
-    <string name="error_length_required">Length required</string>
-    <string name="error_depth_required">Depth required</string>
-    <string name="error_clino_required">Clino required</string>
-    <string name="error_comment_required">Comment required</string>
-    <string name="error_begin_required">Start address required</string>
-    <string name="error_declination_number">Declination must be a number</string>
-    <string name="error_end_required">Final address required</string>
-    <string name="error_fixes_nocs">Fix points without CS %1$s:\n%2$s</string>
-    <string name="error_from_required">First station required</string>
-    <string name="error_group_required">Group number required</string>
-    <string name="error_group_non_integer">Group must be integer number</string>
-    <string name="error_alt_required">Altitude required</string>
-    <string name="error_invalid_number">Invalid number</string>
+    <string name="error_azimuth_required">Необходим азимут</string>
+    <string name="error_length_required">Необходима дължина</string>
+    <string name="error_depth_required">Необходима дълбочина</string>
+    <string name="error_clino_required">Необходим наклон</string>
+    <string name="error_comment_required">Необходим коментар</string>
+    <string name="error_begin_required">Необходим начален адрес</string>
+    <string name="error_declination_number">Деклинацията трябва да е число</string>
+    <string name="error_end_required">Необходим краен адрес</string>
+    <string name="error_fixes_nocs">Фиксирани точки без CS %1$s:\n%2$s</string>
+    <string name="error_from_required">Необходим начален репер</string>
+    <string name="error_group_required">Необходим номер на група</string>
+    <string name="error_group_non_integer">Номерът на група трябва да е цяло число</string>
+    <string name="error_alt_required">Изисква се надморска височина</string>
+    <string name="error_invalid_number">Грешно число</string>
     <!-- UNUSED string name="error_invalid_name">Invalid name</string -->
-    <string name="error_lat_required">Latitude required</string>
-    <string name="error_long_required">Longitude required</string>
-    <string name="error_name_exists">Project name already used</string>
-    <string name="error_name_invalid">Invalid project name</string>
-    <string name="error_name_required">Name required</string>
+    <string name="error_lat_required">Изисква се географска ширина</string>
+    <string name="error_long_required">Изисква се географска дължина</string>
+    <string name="error_name_exists">Името на картировката вече е използвано</string>
+    <string name="error_name_invalid">Невалидно име на картировката</string>
+    <string name="error_name_required">Необходимо е име</string>
     <!-- UNUSED string name="error_text_required">Text required</string -->
-    <string name="error_station_number">Wrong number of stations</string>
-    <string name="error_name_duplicate">Duplicate name</string>
-    <string name="error_no_section_in_section">Xsection in xsection not allowed</string>
-    <string name="error_profile_slant_section">Slanted Xsection not enabled in profile view</string>
-    <string name="error_team_required">Team required</string>
+    <string name="error_station_number">Грешен брой на реперите</string>
+    <string name="error_name_duplicate">Дублирано име</string>
+    <string name="error_no_section_in_section">Сечение в сечение не е позволено</string>
+    <string name="error_profile_slant_section">Наклоненото сечение не е активирано в плана</string>
+    <string name="error_team_required">Изисква се екип</string>
 
     <!-- UNUSED string name="error_dir_exists">Directory already exists</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
-    <string name="error_start_required">Reference station required</string>
+    <string name="error_start_required">Изисква се репер</string>
     <!-- UNUSED string name="error_station_already_fixed">Station already with coordinates</string -->
-    <string name="error_station_required">Station required</string>
-    <string name="error_station_fixed">Georeferenced station</string>
-    <string name="error_station_non_existing">Non existing station</string>
-    <string name="error_sensor_required">Sensor required</string>
-    <string name="error_value_required">Value required</string>
-    <string name="error_bad_fixes">Fix points not in the survey</string>
-    <string name="error_bad_name">Filename modified</string>
+    <string name="error_station_required">Изисква се репер</string>
+    <string name="error_station_fixed">Геореферирана станция</string>
+    <string name="error_station_non_existing">Несъществуващ репер</string>
+    <string name="error_sensor_required">Необходим сензор</string>
+    <string name="error_value_required">Необходима стойност</string>
+    <string name="error_bad_fixes">Фиксираните точки не са включени в картировката</string>
+    <string name="error_bad_name">Името на файла е променено</string>
 
-    <string name="group_title">Calibration data groups</string>
+    <string name="group_title">Групиране на данните за калибрацията</string>
     <!-- UNUSED string name="group_policy_four">Policy: group by four</string -->
     <!-- UNUSED string name="group_policy_sixteen">Policy: four groups of four, other single</string -->
     <!-- UNUSED string name="group_policy_distance">Policy: group by angular distance</string -->
-    <string name="group_reset">Reset groups</string>
+    <string name="group_reset">Изчистване на групите</string>
 
     <!-- UNUSED string name="scale">scale</string -->
     <!-- UNUSED string name="reversed">reversed</string -->
-    <string name="options" copyable="fr">options</string>
-    <string name="outline">outline</string>
-    <string name="out">out</string>
-    <string name="in" copyable="it">in</string>
+    <string name="options" copyable="fr">опции</string>
+    <string name="outline">контур</string>
+    <string name="out">на вън</string>
+    <string name="in" copyable="it">на вътре</string>
     <!-- UNUSED string name="none">none</string -->
     <!-- UNUSED string name="barrier_add">Hide following shots</string -->
-    <string name="hide_from">Hide from</string>
+    <string name="hide_from">Скриване от</string>
     <!-- UNUSED string name="barrier_del">Show following shots</string -->
     <!-- UNUSED string name="hidden_add">Hide previous shots</string -->
     <!-- UNUSED string name="hidden_del">Show previous shots</string -->
-    <string name="hidden_show">Show shots beyond station</string>
+    <string name="hidden_show">Показване на измервания след репер</string>
     <!-- UNUSED string name="splays_toggle">Toggle splays display</string -->
-    <string name="splays_on_off" copyable="it pt">Splays</string>
+    <string name="splays_on_off" copyable="it pt">Странични измервания</string>
     <!-- UNUSED string name="including_splays">including splays</string -->
-    <string name="with_splays">with splays</string>
-    <string name="cell_size">Cell size [m]</string>
+    <string name="with_splays">със странични изм</string>
+    <string name="cell_size">Размер [m]</string>
 
-    <string name="legs">Legs</string>
-    <string name="stations" copyable="fr">Station</string>
-    <string name="splays" copyable="it pt">Splays</string>
+    <string name="legs">Отсечка</string>
+    <string name="stations" copyable="fr">Репер</string>
+    <string name="splays" copyable="it pt">Странични измервания</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id" copyable="pt">ID %1$s</string>
-    <string name="fmt_latitude_dd_dms" copyable="pt">Latitude: %1$s [%2$s]</string>
-    <string name="fmt_longitude_dd_dms" copyable="pt">Longitude: %1$s [%2$s]</string>
+    <string name="fmt_latitude_dd_dms" copyable="pt">Географска ширина: %1$s [%2$s]</string>
+    <string name="fmt_longitude_dd_dms" copyable="pt">Географска дължина: %1$s [%2$s]</string>
     <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string --> 
 
-    <string name="fixed">fixed</string>
-    <string name="painted">painted</string>
+    <string name="fixed">фиксиран</string>
+    <string name="painted">боядисан</string>
 
     <!-- UNUSED string name="cbd_title">Base directory</string -->
-    <string name="cwd">TopoDroid project directory</string>
-    <string name="empty_cwd">Empty project name</string>
+    <string name="cwd">TopoDroid директория за картировки</string>
+    <string name="empty_cwd">Празно име на картировка</string>
     <!-- UNUSED string name="bad_cbd">Base directory non-existent or not writable</string -->
-    <string name="bad_cwd">Project name cannot be path</string>
-    <string name="bad_line">Bad line type</string>
-    <string name="bad_point">Bad point type</string>
-    <string name="index_oob">Index out of bounds %1$d</string>
+    <string name="bad_cwd">Името на картировката не може да бъде директория</string>
+    <string name="bad_line">Невалиден тип линия</string>
+    <string name="bad_point">Невалиден тип точка</string>
+    <string name="index_oob">Индекс извън границите %1$d</string>
 
-    <string name="no_audio">No audio record</string>
-    <string name="no_bt" copyable="it">No Bluetooth</string>
-    <string name="no_calib">No calibration</string>
-    <string name="no_calib_check">No calibration-check shot</string>
-    <string name="no_calibration">No calibration selected</string>
+    <string name="no_audio">Няма аудио запис</string>
+    <string name="no_bt" copyable="it">Няма Bluetooth</string>
+    <string name="no_calib">Липсва калибрация</string>
+    <string name="no_calib_check">Липсва контролно измерване</string>
+    <string name="no_calibration">Не е избрана калибрация</string>
     <!-- UNUSED string name="no_capture_app">No image capture app</string -->
-    <string name="no_cave3d">Cave3D not installed</string>
-    <string name="no_data_reduction">No data reduction</string>
-    <string name="no_db">No database</string>
-    <string name="no_device_address">Device not selected</string>
-    <string name="no_device_window">Device window not available while downloading</string>
+    <string name="no_cave3d">Cave3D не е инсталиран</string>
+    <string name="no_data_reduction">Без намаляване на данните</string>
+    <string name="no_db">Липсва база данни</string>
+    <string name="no_device_address">Устройството не е избрано</string>
+    <string name="no_device_window">Прозорецът на устройството не е наличен по време на изтегляне</string>
     <!-- UNUSED string name="no_device_found">Found no device</string -->
-    <string name="no_feature_audio">Audio not supported</string>
-    <string name="no_feature_pdf">PDF not supported</string>
-    <string name="no_gms">Calibration has no data.\nUse Download button</string>
-    <string name="no_geo_station">Failed: no geolocalized station</string>
+    <string name="no_feature_audio">Аудиото не се поддържа</string>
+    <string name="no_feature_pdf">PDF не се поддържа</string>
+    <string name="no_gms">Калибрацията на съдържа данни.\nИзползвайте бутона за изтегляне на данни</string>
+    <string name="no_geo_station">Грешка: няма георефериран репер</string>
     <!-- UNUSED string name="no_geopoint_app">No GNSS app</string -->
-    <string name="no_leg_first">Selection does not start with a leg</string>
-    <string name="no_leg_intersection">Section line crosses no leg</string>
-    <string name="no_location_data">No location data</string>
-    <string name="no_native_lib">Missing native library</string>
+    <string name="no_leg_first">Изборът не започва с отсечка</string>
+    <string name="no_leg_intersection">Линията на сечението не пресича нито една отсечка</string>
+    <string name="no_location_data">Няма данни за местоположение</string>
+    <string name="no_native_lib">Липсва основна библиотека</string>
     <!-- UNUSED string name="no_paired_device">No paired device.\nScan and pair a DistoX</string -->
-    <string name="no_photos">Survey has no photo</string>
-    <string name="no_plots">Survey has no sketch\nUse Add button to make one</string>
-    <string name="no_profile_overview">No overview for projected profiles</string>
-    <string name="no_proj4">Proj4 not installed</string>
-    <string name="no_sensors">Survey has no measurement</string>
+    <string name="no_photos">Картировката не съдържа снимка</string>
+    <string name="no_plots">Картировката не съдържа скици\nДобавете нов</string>
+    <string name="no_profile_overview">Няма общ преглед за проектиран разрези</string>
+    <string name="no_proj4">Proj4 не е инсталиран</string>
+    <string name="no_sensors">Картировката не съдържа измервания</string>
     <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
-    <string name="no_search_result">No search_result.</string>
-    <string name="no_survey">No survey selected.</string>
-    <string name="no_symbols">No symbol palette.</string>
+    <string name="no_search_result">Няма резултат от търсенето.</string>
+    <string name="no_survey">Не е избрана картировка.</string>
+    <string name="no_symbols">Няма палитра със символи.</string>
     <!-- UNUSED string name="no_thmanager">ThManager not installed</string -->
     <!-- UNUSED string name="no_db_viewer">DB_viewer app not found</string -->
-    <string name="no_undelete">No item to recover</string>
-    <string name="no_undelete_paste">No item to recover/paste</string>
-    <string name="format_measure_plan" copyable="all">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
-    <string name="format_measure_profile" copyable="all">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
+    <string name="no_undelete">Няма елементи за възстановяване</string>
+    <string name="no_undelete_paste">Няма елементи за възстановяване/поставяне</string>
+    <string name="format_measure_plan" copyable="all">D %1$.2f %2$.2f X %3$.2f Y %4$.2f Азимут %5$.1f"</string>
+    <string name="format_measure_profile" copyable="all">D %1$.2f %2$.2f X %3$.2f Y %4$.2f Наклон %5$.1f"</string>
     <string name="format_closure" translatable="false">%1$s-%2$s: [%3$d] %4$.1f/%5$.1f (%6$.1f %7$.1f) %8$.1f %% (%9$.1f\u00b0)</string>
 
     <string name="menu_3d" copyable="all">3D</string>
-    <string name="menu_about">ABOUT</string>
-    <string name="menu_area" copyable="it">AREA</string>
-    <string name="menu_audio" copyable="fr it">AUDIO</string>
+    <string name="menu_about">ЗА ПРОГРАМАТА</string>
+    <string name="menu_area" copyable="it">ПЛОЩ</string>
+    <string name="menu_audio" copyable="fr it">АУДИО</string>
     <!-- UNUSED string name="menu_attach">CONNECT</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
     <!-- UNUSED string name="menu_backups">CLEAR BACKUPS</string -->
-    <string name="menu_calib_check">CALIB. CHECK</string>
-    <string name="menu_close">CLOSE</string>
+    <string name="menu_calib_check">ПРОВЕРКА НА КАЛИБРАЦИЯТА</string>
+    <string name="menu_close">ЗАТВАРЯНЕ</string>
     <!-- UNUSED string name="menu_clear">CLEAR</string -->
-    <string name="menu_color">CLEAR COLOR</string>
-    <string name="menu_delete">DELETE</string>
-    <string name="menu_detach">DISCONNECT</string>
+    <string name="menu_color">ИЗЧИСТВАНЕ НА ЦВЯТ</string>
+    <string name="menu_delete">ИЗТРИВАНЕ</string>
+    <string name="menu_detach">ПРЕКЪСВАНЕ НА ВРЪЗКАТА</string>
     <!-- UNUSED string name="menu_display">DISPLAY</string -->
-    <string name="menu_show_deleted">SHOW DELETED</string>
-    <string name="menu_hide_deleted">HIDE DELETED</string>
-    <string name="menu_device">DEVICE</string>
-    <string name="menu_device_add">ADD UNNAMED</string> <!-- KEEP -->
-    <string name="menu_export">EXPORT</string>
+    <string name="menu_show_deleted">ПОКАЖИ ИЗТРИТИТЕ</string>
+    <string name="menu_hide_deleted">СКРИЙ ИЗТРИТИТЕ</string>
+    <string name="menu_device">УСТРОЙСТВО</string>
+    <string name="menu_device_add">ДОБАВЯНЕ НА НЕПОЗНАТ</string> <!-- KEEP -->
+    <string name="menu_export">ЕКСПОРТИРАНЕ</string>
     <string name="menu_firmware" copyable="all">FIRMWARE</string>
-    <string name="menu_geopoint_app">GNSS APP</string>
-    <string name="menu_recover">RECOVER</string>
-    <string name="menu_recover_paste">RECOVER/PASTE</string>
-    <string name="menu_reload">RELOAD</string>
-    <string name="menu_rename_delete">RENAME/DELETE</string>
-    <string name="menu_rename">RENAME</string>
-    <string name="menu_plot_scrap" copyable="cn fr it">SCRAPS</string>
-    <string name="menu_switch">SWITCH/CLOSE</string>
-    <string name="menu_help">HELP</string>
+    <string name="menu_geopoint_app">GNSS ПРИЛОЖЕНИЕ</string>
+    <string name="menu_recover">ВЪЗСТАНОВЯВАНЕ</string>
+    <string name="menu_recover_paste">ВЪЗСТАНОВЯВАНЕ/ПОСТАВЯНЕ</string>
+    <string name="menu_reload">ПРЕЗАРЕДИ</string>
+    <string name="menu_rename_delete">ПРЕИМЕНУВАНЕ/ИЗТРИВАНЕ</string>
+    <string name="menu_rename">ПРЕИМЕНУВАНЕ</string>
+    <string name="menu_plot_scrap" copyable="cn fr it">ОТРЯЗЪЦИ</string>
+    <string name="menu_switch">ПРЕВКЛЮЧВАНЕ/ЗАТВАРЯНЕ</string>
+    <string name="menu_help">ПОМОЩ</string>
     <!-- UNUSED string name="menu_join_survey">CO-SURVEY</string -->
     <!-- UNUSED string name="menu_logs">LOGS</string -->
-    <string name="menu_manual_calibration">INSTR. OFFSET</string>
-    <string name="menu_options">SETTINGS</string>
-    <string name="menu_overview">OVERVIEW</string>
-    <string name="menu_packets">PACKETS</string>
-    <string name="menu_calib_auto">AUTO-CALIB</string>
+    <string name="menu_manual_calibration">ИНСТР. ИЗМЕСТВАНЕ</string>
+    <string name="menu_options">НАСТРОЙКИ</string>
+    <string name="menu_overview">ПРЕГЛЕД</string>
+    <string name="menu_packets">ПАКЕТИ</string>
+    <string name="menu_calib_auto">АВТОМАТИЧНА КАЛИБРАЦИЯ</string>
     <!-- UNUSED string name="menu_pair">PAIR</string -->
-    <string name="menu_palette" copyable="fr it">PALETTE</string>
-    <string name="menu_photo" copyable="fr">PHOTO</string>
-    <string name="menu_sections">SECTIONS</string>
-    <string name="menu_sensor" copyable="pt">SENSOR</string>
+    <string name="menu_palette" copyable="fr it">ПАЛИТРА</string>
+    <string name="menu_photo" copyable="fr">СНИМКА</string>
+    <string name="menu_sections">СЕЧЕНИЯ</string>
+    <string name="menu_sensor" copyable="pt">СЕНЗОРИ</string>
     <!-- UNUSED string name="menu_scan">SCAN</string -->
     <!-- UNUSED string name="menu_scan_ble">SCAN BTLE</string -->
     <!-- UNUSED string name="menu_station" copyable="fr">STATIONS</string -->
-    <string name="menu_stats">STATS</string>
-    <string name="menu_survey">SURVEY INFO</string>
+    <string name="menu_stats">СТАТИСТИКА</string>
+    <string name="menu_survey">ИНФОРМАЦИЯ ЗА КАРТИРОВКАТА</string>
     <!-- UNUSED string name="menu_sync">SYNC</string -->
     <!-- UNUSED string name="menu_tdr2th2">TH2 SKETCHES</string -->
     <!-- UPDATES string name="menu_updates">CHECK UPDATES</string -->
-    <string name="menu_validate">VALIDATE</string>
-    <string name="menu_zoom_fit">ZOOM FIT</string>
+    <string name="menu_validate">ПРОВЕРКА</string>
+    <string name="menu_zoom_fit">ОПТИМАЛНО УВЕЛИЧАВАНЕ</string>
 
     <!-- FIXED_ZOOM -->
-    <string name="zoom_fixed">Graph-paper</string>
+    <string name="zoom_fixed">Милиметрова хартия</string>
 
     <!-- UNUSED string name="start_scan">Start scan</string -->
     <!-- UNUSED string name="stop_scan">Stop scan</string -->
     <!-- UNUSED string name="title_scan">BLE scan</string -->
     <!-- UNUSED string name="ble_scan_failed">Failed BLE scan</string -->
     <!-- UNUSED string name="ble_gatt_failure">BLE failure</string -->
-    <string name="ble_no_remote">No remote device</string>
+    <string name="ble_no_remote">Няма дистанционно устройство</string>
     <!-- UNUSED string name="ble_control">Control</string -->
     <!-- UNUSED string name="ble_connect">Connect</string -->
     <!-- UNUSED string name="ble_disconnect">Disconnect</string -->
@@ -522,35 +522,35 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="bric_shot">Shot</string -->
     <!-- UNUSED string name="bric_laser">Laser</string -->
     <!-- UNUSED string name="bric_off">Off</string -->
-    <string name="bric_memory">BRIC memory</string>
+    <string name="bric_memory">BRIC памет</string>
 
-    <string name="popup_join_pt">Snap to point</string>
-    <string name="popup_snap_ln">Snap to line</string>
-    <string name="popup_snap_to_splays">Snap to splays</string>
-    <string name="popup_split_pt">Insert point</string>
-    <string name="popup_split_pts">Adds points</string>
-    <string name="popup_split_ln">Split line</string>
-    <string name="popup_sharp_pt">Straighten segment</string>
-    <string name="popup_curve_pt">Smoothen segment</string>
-    <string name="popup_remove_pt">Remove point</string>
-    <string name="popup_append_line">Attach to line</string>
-    <string name="popup_multiselect" copyable="fr">Multiselection</string>
-    <string name="popup_finish">Finish</string>
-    <string name="popup_delete">Delete</string>
-    <string name="popup_decimate">Decimate</string>
-    <string name="popup_join">Join</string>
+    <string name="popup_join_pt">Прикачване към точка</string>
+    <string name="popup_snap_ln">Прикачване към  линия</string>
+    <string name="popup_snap_to_splays">Прикачване към странични измервания</string>
+    <string name="popup_split_pt">Вмъкване на точка</string>
+    <string name="popup_split_pts">Добавяне на точки</string>
+    <string name="popup_split_ln">Разделяне на линия</string>
+    <string name="popup_sharp_pt">Изправяне (премахване Безие)</string>
+    <string name="popup_curve_pt">Изглаждане (с Безие)</string>
+    <string name="popup_remove_pt">Изтриване на точка</string>
+    <string name="popup_append_line">Прикрепване към линия</string>
+    <string name="popup_multiselect" copyable="fr">Мултиселекция</string>
+    <string name="popup_finish">Завършване</string>
+    <string name="popup_delete">Изтриване</string>
+    <string name="popup_decimate">Унищожи</string>
+    <string name="popup_join">Присъединяване</string>
 
-    <string name="popup_erase_all">Erase all</string>
-    <string name="popup_erase_point">Erase points</string>
-    <string name="popup_erase_line">Erase lines</string>
-    <string name="popup_erase_area">Erase areas</string>
+    <string name="popup_erase_all">Изтрий всичко</string>
+    <string name="popup_erase_point">Изтрий точки</string>
+    <string name="popup_erase_line">Изтрий линии</string>
+    <string name="popup_erase_area">Изтрий площи</string>
 
-    <string name="popup_select_all">Select all</string>
-    <string name="popup_select_point">Select points</string>
-    <string name="popup_select_line">Select lines</string>
-    <string name="popup_select_area">Select areas</string>
-    <string name="popup_select_shot">Select shots</string>
-    <string name="popup_select_station">Select stations</string>
+    <string name="popup_select_all">Избери всичко</string>
+    <string name="popup_select_point">Избери точки</string>
+    <string name="popup_select_line">Избери линии</string>
+    <string name="popup_select_area">Избери площи</string>
+    <string name="popup_select_shot">Избери отсечки</string>
+    <string name="popup_select_station">Избери репери</string>
 
     <!-- UNUSED string name="popup_cont_none">None</string -->
     <!-- UNUSED string name="popup_cont_start">Start point</string -->
@@ -564,14 +564,14 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="connected_already">Already connected</string -->
 
     <!-- UNUSED string name="not_available">BT not available</string -->
-    <string name="not_enabled">BT not enabled</string>
+    <string name="not_enabled">Bluetooth не е включен</string>
 
     <!-- UNUSED string name="not_implemented">Not implemented yet</string -->
-    <string name="null_bitmap">Cannot create image [OOM error]</string>
-    <string name="photo" copyable="fr">photo</string>
-    <string name="photo_camera">Old camera</string>
-    <string name="photo_comment_prompt">Enter the photo comment</string>
-    <string name="photo_azimuth_clino">Azimuth: %1$.1f Clino %2$.1f</string>
+    <string name="null_bitmap">Не може да бъде създадено изображение. Недостатъчна памет</string>
+    <string name="photo" copyable="fr">снимка</string>
+    <string name="photo_camera">Стара камера</string>
+    <string name="photo_comment_prompt">Въведете коментар към снимката</string>
+    <string name="photo_azimuth_clino">Азимут: %1$.1f Наклон %2$.1f</string>
     <!-- UNUSED string name="photo_name">station/name</string -->
     <!-- UNUSED string name="photo_photo">photo</string -->
     <!-- UNUSED string name="photo_sensor">sensor</string -->
@@ -580,21 +580,21 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="photo_shot">add shot</string -->
     <!-- UNUSED string name="photo_survey">split survey</string -->
     <!-- UNUSED string name="picture_no_station">Station name required</string -->
-    <string name="plot_delete">Delete sketch ?</string>
-    <string name="scrap_delete">Delete scrap ?</string>
-    <string name="item_delete">Delete item %1$s ?</string>
-    <string name="splay_delete">Delete splay %1$s ?</string>
-    <string name="plot_duplicate_name">Duplicate sketch name</string>
-    <string name="plot_dangling">Dangling sketch</string>
+    <string name="plot_delete">Изтриване на скица?</string>
+    <string name="scrap_delete">Изтриване на отрязък?</string>
+    <string name="item_delete">Изтриване на елемент %1$s ?</string>
+    <string name="splay_delete">Изтриване на странично измерване %1$s ?</string>
+    <string name="plot_duplicate_name">Дублирано име на скица</string>
+    <string name="plot_dangling">Висяща скица</string>
     <!-- UNUSED string name="plot_name">Sketch name</string -->
-    <string name="plot_new">New sketch</string>
-    <string name="plot_not_found">Sketch not found</string>
+    <string name="plot_new">Нова скица</string>
+    <string name="plot_not_found">Скицата не е намерена</string>
     <!-- UNUSED string name="plot_null_name">Missing sketch name</string -->
     <!-- UNUSED string name="plot_null_start">Missing base station</string -->
     <!-- UNUSED string name="plot_recover">Reload sketch from backup?</string -->
-    <string name="plot_start">Origin station</string>
+    <string name="plot_start">Начален репер</string>
     <!-- UNUSED string name="plot_view">Viewed station</string -->
-    <string name="read_fail_with_code">Read failure: error code </string>
+    <string name="read_fail_with_code">Грешка при четене: грешен код </string>
     <string name="read_failed">Failed DistoX-read</string>
     <string name="swap_hotbit_ok">Swapped data hot bit</string>
     <!-- UNUSED string name="reading_file_failed">Failed file-read</string -->
@@ -839,29 +839,29 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="button_sensor"  >Sensors</string -->
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
-    <string name="button_plot"    >Draw</string>
-    <string name="button_less"    >Less</string>
-    <string name="button_more"    >More</string>
-    <string name="button_move"    >Move</string>
-    <string name="button_next"    >Next</string>
-    <string name="button_prev"    >Previous</string>
-    <string name="button_new"     >New scrap</string>
-    <string name="button_skip"    >Skip</string>
-    <string name="button_done"    >Done</string>
+    <string name="button_plot"    >Рисунка</string>
+    <string name="button_less"    >По-малко</string>
+    <string name="button_more"    >Още</string>
+    <string name="button_move"    >Премести</string>
+    <string name="button_next"    >Следващ</string>
+    <string name="button_prev"    >Предишен</string>
+    <string name="button_new"     >Нов отрязък</string>
+    <string name="button_skip"    >Пропусни</string>
+    <string name="button_done"    >Готово</string>
     <string name="button_lrud"  copyable="all">+ LRUD</string>
     <string name="button_ok"  copyable="all">OK</string>
-    <string name="button_off"       >off</string>
-    <string name="button_on"        >on</string>
-    <string name="button_open"      >Open</string>
-    <string name="button_read"      >Read</string>
-    <string name="button_recover"   >Recover</string>
-    <string name="button_reverse"   >Reverse</string>
+    <string name="button_off"       >изключено</string>
+    <string name="button_on"        >включено</string>
+    <string name="button_open"      >Отваряне</string>
+    <string name="button_read"      >Четене</string>
+    <string name="button_recover"   >Възстановяване</string>
+    <string name="button_reverse"   >Обръщане</string>
     <!-- UNUSED string name="button_redo"      >Redo</string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
-    <string name="button_dump"      >Dump</string>
+    <string name="button_dump"      >Изхвърляне</string>
     <!-- UNUSED string name="button_rename"    >Rename</string -->
     <string name="button_renumber"  >Renumber</string>
-    <string name="button_bedding"   >Fitting plane</string>
+    <string name="button_bedding"   >Fitting pla33ne</string>
     <string name="button_replace"   >Replace</string>
     <string name="button_reset"     >Reset</string>
     <string name="button_left"      >LEFT</string>
