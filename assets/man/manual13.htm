@@ -3,11 +3,6 @@
 When you are done, export the survey data and the sketches in your favourite format and transfer the
 exported files to your PC, to finish up drafting the cave maps.<br><p>
 
-For safety make a TopoDroid zip archive and transfer it to your PC.
-The zip archive is a complete backup of your survey, and it
-contains the command to restore the survey data and other information in the database.
-You can use it to transfer the survey to a TopoDroid on another Android.<br><p>
-
 Survey data, and zip archive, are exported from the <u>Survey Info window</u>.<br>
 Survey sketches are exported from the <u>Drawing window</u> (single sketch) and from the <u>Overview window</u> (all sketches of a view in one file).<br><p>
 
@@ -32,31 +27,20 @@ When the default sketch export format is set, the sketches are exported in this 
 For cSurvey x-sections are saved as PNG images.<br><p>
 -->
 
-<h4>SURVEY IMPORT</h4>
-TopoDroid imports survey data from TopoDroid zip archives or from external files.<br>
-To import files or zip archives tap on the "Import" button.
-Files and zip archives are selected through a system filemanager.<br>
-The name of the file must not contain a colon ':'.<br><p>
+<h4>ZIP ARCHIVES</h4>
+For safety make a TopoDroid zip archive and transfer it to your PC.
+The zip archive is a complete backup of your survey, and it
+contains the command to restore the survey data and other information in the database.
+You can use it to transfer the survey to a TopoDroid on another Android.<br><p>
 
-The following import formats are supported:
-<ul>
-<li>Compass</li>
-<li>Survex</li>
-<li>Therion. Only data</li>
-<li>VisualTopo</li>
-<li>Walls</li>
-<li>TopoRobot</li>
-<li>PocketTopo, including sketches</li>
-<li>CaveSniper</li>
-<li>BRIC csv</li>
-<li>TopoDroid zip archives</li>
-</ul>
+Zip archives are exported from the <u>Survey Indo window</u>, from the "Export" menu.<br>
 
-A file import fails if a survey with the same name is already in TopoDroid.<br><p>
+When exporting a zip archive you can check to immediately share it afterward.
+If you have a custom app to handle exported zip archives you can override the default
+system sharing apps and have it invoked specifing its "category".<br><p>
 
-On import from file formats that have LRUD values, these are converted to x-splays (shown in green).<br><p>
+Zip archives are imported from the <u>Main window</u> with the "Import" button.<br><p>
 
-<b>Zip import</b><br>
 Zip import fails if the zip has a database version that is too old or is newer than the one in TopoDroid.
 The error codes are
 <ul>
@@ -77,6 +61,30 @@ The error codes are
 
 Note, splay custom colors are not imported unless the appropriate setting is enabled.
 <br><p>
+
+<h4>SURVEY IMPORT</h4>
+TopoDroid imports survey data from TopoDroid zip archives or from external files.<br>
+To import files or zip archives tap on the "Import" button.
+Files and zip archives are selected through a system filemanager.<br>
+The name of the file must not contain a colon ':'.<br><p>
+
+The following import formats are supported, besides TopoDroid zip archives:
+<ul>
+<li>Compass</li>
+<li>Survex</li>
+<li>Therion. Only data</li>
+<li>VisualTopo</li>
+<li>Walls</li>
+<li>TopoRobot</li>
+<li>PocketTopo, including sketches</li>
+<li>CaveSniper</li>
+<li>BRIC csv</li>
+<li>TopoDroid zip archives</li>
+</ul>
+
+A file import fails if a survey with the same name is already in TopoDroid.<br><p>
+
+On import from file formats that have LRUD values, these are converted to x-splays (shown in green).<br><p>
 
 <b>Therion import</b><br>
 Only Therion survey files with data in "normal" datamode are importable.<br>
