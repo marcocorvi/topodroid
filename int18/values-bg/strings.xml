@@ -364,76 +364,76 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="error_station_fixed">Геореферирана станция</string>
     <string name="error_station_non_existing">Несъществуващ репер</string>
     <string name="error_sensor_required">Необходим сензор</string>
-    <string name="error_value_required">Value required</string>
-    <string name="error_bad_fixes">Fix points not in the survey</string>
-    <string name="error_bad_name">Filename modified</string>
+    <string name="error_value_required">Необходима стойност</string>
+    <string name="error_bad_fixes">Фиксираните точки не са включени в картировката</string>
+    <string name="error_bad_name">Името на файла е променено</string>
 
-    <string name="group_title">Calibration data groups</string>
+    <string name="group_title">Групиране на данните за калибрацията</string>
     <!-- UNUSED string name="group_policy_four">Policy: group by four</string -->
     <!-- UNUSED string name="group_policy_sixteen">Policy: four groups of four, other single</string -->
     <!-- UNUSED string name="group_policy_distance">Policy: group by angular distance</string -->
-    <string name="group_reset">Reset groups</string>
+    <string name="group_reset">Изчистване на групите</string>
 
     <!-- UNUSED string name="scale">scale</string -->
     <!-- UNUSED string name="reversed">reversed</string -->
-    <string name="options" copyable="fr">options</string>
-    <string name="outline">outline</string>
-    <string name="out">out</string>
-    <string name="in" copyable="it">in</string>
+    <string name="options" copyable="fr">опции</string>
+    <string name="outline">контур</string>
+    <string name="out">на вън</string>
+    <string name="in" copyable="it">на вътре</string>
     <!-- UNUSED string name="none">none</string -->
     <!-- UNUSED string name="barrier_add">Hide following shots</string -->
-    <string name="hide_from">Hide from</string>
+    <string name="hide_from">Скриване от</string>
     <!-- UNUSED string name="barrier_del">Show following shots</string -->
     <!-- UNUSED string name="hidden_add">Hide previous shots</string -->
     <!-- UNUSED string name="hidden_del">Show previous shots</string -->
-    <string name="hidden_show">Show shots beyond station</string>
+    <string name="hidden_show">Показване на измервания след репер</string>
     <!-- UNUSED string name="splays_toggle">Toggle splays display</string -->
-    <string name="splays_on_off" copyable="it pt">Splays</string>
+    <string name="splays_on_off" copyable="it pt">Странични измервания</string>
     <!-- UNUSED string name="including_splays">including splays</string -->
-    <string name="with_splays">with splays</string>
-    <string name="cell_size">Cell size [m]</string>
+    <string name="with_splays">със странични изм</string>
+    <string name="cell_size">Размер [m]</string>
 
-    <string name="legs">Legs</string>
-    <string name="stations" copyable="fr">Station</string>
-    <string name="splays" copyable="it pt">Splays</string>
+    <string name="legs">Отсечка</string>
+    <string name="stations" copyable="fr">Репер</string>
+    <string name="splays" copyable="it pt">Странични измервания</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id" copyable="pt">ID %1$s</string>
-    <string name="fmt_latitude_dd_dms" copyable="pt">Latitude: %1$s [%2$s]</string>
-    <string name="fmt_longitude_dd_dms" copyable="pt">Longitude: %1$s [%2$s]</string>
+    <string name="fmt_latitude_dd_dms" copyable="pt">Географска ширина: %1$s [%2$s]</string>
+    <string name="fmt_longitude_dd_dms" copyable="pt">Географска дължина: %1$s [%2$s]</string>
     <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string --> 
 
-    <string name="fixed">fixed</string>
-    <string name="painted">painted</string>
+    <string name="fixed">фиксиран</string>
+    <string name="painted">боядисан</string>
 
     <!-- UNUSED string name="cbd_title">Base directory</string -->
-    <string name="cwd">TopoDroid project directory</string>
-    <string name="empty_cwd">Empty project name</string>
+    <string name="cwd">TopoDroid директория за картировки</string>
+    <string name="empty_cwd">Празно име на картировка</string>
     <!-- UNUSED string name="bad_cbd">Base directory non-existent or not writable</string -->
-    <string name="bad_cwd">Project name cannot be path</string>
-    <string name="bad_line">Bad line type</string>
-    <string name="bad_point">Bad point type</string>
-    <string name="index_oob">Index out of bounds %1$d</string>
+    <string name="bad_cwd">Името на картировката не може да бъде директория</string>
+    <string name="bad_line">Невалиден тип линия</string>
+    <string name="bad_point">Невалиден тип точка</string>
+    <string name="index_oob">Индекс извън границите %1$d</string>
 
-    <string name="no_audio">No audio record</string>
-    <string name="no_bt" copyable="it">No Bluetooth</string>
-    <string name="no_calib">No calibration</string>
-    <string name="no_calib_check">No calibration-check shot</string>
-    <string name="no_calibration">No calibration selected</string>
+    <string name="no_audio">Няма аудио запис</string>
+    <string name="no_bt" copyable="it">Няма Bluetooth</string>
+    <string name="no_calib">Липсва калибрация</string>
+    <string name="no_calib_check">Липсва контролно измерване</string>
+    <string name="no_calibration">Не е избрана калибрация</string>
     <!-- UNUSED string name="no_capture_app">No image capture app</string -->
-    <string name="no_cave3d">Cave3D not installed</string>
-    <string name="no_data_reduction">No data reduction</string>
-    <string name="no_db">No database</string>
-    <string name="no_device_address">Device not selected</string>
-    <string name="no_device_window">Device window not available while downloading</string>
+    <string name="no_cave3d">Cave3D не е инсталиран</string>
+    <string name="no_data_reduction">Без намаляване на данните</string>
+    <string name="no_db">Липсва база данни</string>
+    <string name="no_device_address">Устройството не е избрано</string>
+    <string name="no_device_window">Прозорецът на устройството не е наличен по време на изтегляне</string>
     <!-- UNUSED string name="no_device_found">Found no device</string -->
-    <string name="no_feature_audio">Audio not supported</string>
-    <string name="no_feature_pdf">PDF not supported</string>
-    <string name="no_gms">Calibration has no data.\nUse Download button</string>
-    <string name="no_geo_station">Failed: no geolocalized station</string>
+    <string name="no_feature_audio">Аудиото не се поддържа</string>
+    <string name="no_feature_pdf">PDF не се поддържа</string>
+    <string name="no_gms">Калибрацията на съдържа данни.\nИзползвайте бутона за изтегляне на данни</string>
+    <string name="no_geo_station">Грешка: няма георефериран репер</string>
     <!-- UNUSED string name="no_geopoint_app">No GNSS app</string -->
-    <string name="no_leg_first">Selection does not start with a leg</string>
-    <string name="no_leg_intersection">Section line crosses no leg</string>
-    <string name="no_location_data">No location data</string>
+    <string name="no_leg_first">Изборът не започва с отсечка</string>
+    <string name="no_leg_intersection">Линията на сечението не пресича нито една отсечка</string>
+    <string name="no_location_data">Няма данни за местоположение</string>
     <string name="no_native_lib">Missing native library</string>
     <!-- UNUSED string name="no_paired_device">No paired device.\nScan and pair a DistoX</string -->
     <string name="no_photos">Survey has no photo</string>
