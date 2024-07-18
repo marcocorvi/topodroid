@@ -434,87 +434,87 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="no_leg_first">Изборът не започва с отсечка</string>
     <string name="no_leg_intersection">Линията на сечението не пресича нито една отсечка</string>
     <string name="no_location_data">Няма данни за местоположение</string>
-    <string name="no_native_lib">Missing native library</string>
+    <string name="no_native_lib">Липсва основна библиотека</string>
     <!-- UNUSED string name="no_paired_device">No paired device.\nScan and pair a DistoX</string -->
-    <string name="no_photos">Survey has no photo</string>
-    <string name="no_plots">Survey has no sketch\nUse Add button to make one</string>
-    <string name="no_profile_overview">No overview for projected profiles</string>
-    <string name="no_proj4">Proj4 not installed</string>
-    <string name="no_sensors">Survey has no measurement</string>
+    <string name="no_photos">Картировката не съдържа снимка</string>
+    <string name="no_plots">Картировката не съдържа скици\nДобавете нов</string>
+    <string name="no_profile_overview">Няма общ преглед за проектиран разрези</string>
+    <string name="no_proj4">Proj4 не е инсталиран</string>
+    <string name="no_sensors">Картировката не съдържа измервания</string>
     <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
-    <string name="no_search_result">No search_result.</string>
-    <string name="no_survey">No survey selected.</string>
-    <string name="no_symbols">No symbol palette.</string>
+    <string name="no_search_result">Няма резултат от търсенето.</string>
+    <string name="no_survey">Не е избрана картировка.</string>
+    <string name="no_symbols">Няма палитра със символи.</string>
     <!-- UNUSED string name="no_thmanager">ThManager not installed</string -->
     <!-- UNUSED string name="no_db_viewer">DB_viewer app not found</string -->
-    <string name="no_undelete">No item to recover</string>
-    <string name="no_undelete_paste">No item to recover/paste</string>
-    <string name="format_measure_plan" copyable="all">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
-    <string name="format_measure_profile" copyable="all">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
+    <string name="no_undelete">Няма елементи за възстановяване</string>
+    <string name="no_undelete_paste">Няма елементи за възстановяване/поставяне</string>
+    <string name="format_measure_plan" copyable="all">D %1$.2f %2$.2f X %3$.2f Y %4$.2f Азимут %5$.1f"</string>
+    <string name="format_measure_profile" copyable="all">D %1$.2f %2$.2f X %3$.2f Y %4$.2f Наклон %5$.1f"</string>
     <string name="format_closure" translatable="false">%1$s-%2$s: [%3$d] %4$.1f/%5$.1f (%6$.1f %7$.1f) %8$.1f %% (%9$.1f\u00b0)</string>
 
     <string name="menu_3d" copyable="all">3D</string>
-    <string name="menu_about">ABOUT</string>
-    <string name="menu_area" copyable="it">AREA</string>
-    <string name="menu_audio" copyable="fr it">AUDIO</string>
+    <string name="menu_about">ЗА ПРОГРАМАТА</string>
+    <string name="menu_area" copyable="it">ПЛОЩ</string>
+    <string name="menu_audio" copyable="fr it">АУДИО</string>
     <!-- UNUSED string name="menu_attach">CONNECT</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
     <!-- UNUSED string name="menu_backups">CLEAR BACKUPS</string -->
-    <string name="menu_calib_check">CALIB. CHECK</string>
-    <string name="menu_close">CLOSE</string>
+    <string name="menu_calib_check">ПРОВЕРКА НА КАЛИБРАЦИЯТА</string>
+    <string name="menu_close">ЗАТВАРЯНЕ</string>
     <!-- UNUSED string name="menu_clear">CLEAR</string -->
-    <string name="menu_color">CLEAR COLOR</string>
-    <string name="menu_delete">DELETE</string>
-    <string name="menu_detach">DISCONNECT</string>
+    <string name="menu_color">ИЗЧИСТВАНЕ НА ЦВЯТ</string>
+    <string name="menu_delete">ИЗТРИВАНЕ</string>
+    <string name="menu_detach">ПРЕКЪСВАНЕ НА ВРЪЗКАТА</string>
     <!-- UNUSED string name="menu_display">DISPLAY</string -->
-    <string name="menu_show_deleted">SHOW DELETED</string>
-    <string name="menu_hide_deleted">HIDE DELETED</string>
-    <string name="menu_device">DEVICE</string>
-    <string name="menu_device_add">ADD UNNAMED</string> <!-- KEEP -->
-    <string name="menu_export">EXPORT</string>
+    <string name="menu_show_deleted">ПОКАЖИ ИЗТРИТИТЕ</string>
+    <string name="menu_hide_deleted">СКРИЙ ИЗТРИТИТЕ</string>
+    <string name="menu_device">УСТРОЙСТВО</string>
+    <string name="menu_device_add">ДОБАВЯНЕ НА НЕПОЗНАТ</string> <!-- KEEP -->
+    <string name="menu_export">ЕКСПОРТИРАНЕ</string>
     <string name="menu_firmware" copyable="all">FIRMWARE</string>
-    <string name="menu_geopoint_app">GNSS APP</string>
-    <string name="menu_recover">RECOVER</string>
-    <string name="menu_recover_paste">RECOVER/PASTE</string>
-    <string name="menu_reload">RELOAD</string>
-    <string name="menu_rename_delete">RENAME/DELETE</string>
-    <string name="menu_rename">RENAME</string>
-    <string name="menu_plot_scrap" copyable="cn fr it">SCRAPS</string>
-    <string name="menu_switch">SWITCH/CLOSE</string>
-    <string name="menu_help">HELP</string>
+    <string name="menu_geopoint_app">GNSS ПРИЛОЖЕНИЕ</string>
+    <string name="menu_recover">ВЪЗСТАНОВЯВАНЕ</string>
+    <string name="menu_recover_paste">ВЪЗСТАНОВЯВАНЕ/ПОСТАВЯНЕ</string>
+    <string name="menu_reload">ПРЕЗАРЕДИ</string>
+    <string name="menu_rename_delete">ПРЕИМЕНУВАНЕ/ИЗТРИВАНЕ</string>
+    <string name="menu_rename">ПРЕИМЕНУВАНЕ</string>
+    <string name="menu_plot_scrap" copyable="cn fr it">ОТРЯЗЪЦИ</string>
+    <string name="menu_switch">ПРЕВКЛЮЧВАНЕ/ЗАТВАРЯНЕ</string>
+    <string name="menu_help">ПОМОЩ</string>
     <!-- UNUSED string name="menu_join_survey">CO-SURVEY</string -->
     <!-- UNUSED string name="menu_logs">LOGS</string -->
-    <string name="menu_manual_calibration">INSTR. OFFSET</string>
-    <string name="menu_options">SETTINGS</string>
-    <string name="menu_overview">OVERVIEW</string>
-    <string name="menu_packets">PACKETS</string>
-    <string name="menu_calib_auto">AUTO-CALIB</string>
+    <string name="menu_manual_calibration">ИНСТР. ИЗМЕСТВАНЕ</string>
+    <string name="menu_options">НАСТРОЙКИ</string>
+    <string name="menu_overview">ПРЕГЛЕД</string>
+    <string name="menu_packets">ПАКЕТИ</string>
+    <string name="menu_calib_auto">АВТОМАТИЧНА КАЛИБРАЦИЯ</string>
     <!-- UNUSED string name="menu_pair">PAIR</string -->
-    <string name="menu_palette" copyable="fr it">PALETTE</string>
-    <string name="menu_photo" copyable="fr">PHOTO</string>
-    <string name="menu_sections">SECTIONS</string>
-    <string name="menu_sensor" copyable="pt">SENSOR</string>
+    <string name="menu_palette" copyable="fr it">ПАЛИТРА</string>
+    <string name="menu_photo" copyable="fr">СНИМКА</string>
+    <string name="menu_sections">СЕЧЕНИЯ</string>
+    <string name="menu_sensor" copyable="pt">СЕНЗОРИ</string>
     <!-- UNUSED string name="menu_scan">SCAN</string -->
     <!-- UNUSED string name="menu_scan_ble">SCAN BTLE</string -->
     <!-- UNUSED string name="menu_station" copyable="fr">STATIONS</string -->
-    <string name="menu_stats">STATS</string>
-    <string name="menu_survey">SURVEY INFO</string>
+    <string name="menu_stats">СТАТИСТИКА</string>
+    <string name="menu_survey">ИНФОРМАЦИЯ ЗА КАРТИРОВКАТА</string>
     <!-- UNUSED string name="menu_sync">SYNC</string -->
     <!-- UNUSED string name="menu_tdr2th2">TH2 SKETCHES</string -->
     <!-- UPDATES string name="menu_updates">CHECK UPDATES</string -->
-    <string name="menu_validate">VALIDATE</string>
-    <string name="menu_zoom_fit">ZOOM FIT</string>
+    <string name="menu_validate">ПРОВЕРКА</string>
+    <string name="menu_zoom_fit">ОПТИМАЛНО УВЕЛИЧАВАНЕ</string>
 
     <!-- FIXED_ZOOM -->
-    <string name="zoom_fixed">Graph-paper</string>
+    <string name="zoom_fixed">Милиметрова хартия</string>
 
     <!-- UNUSED string name="start_scan">Start scan</string -->
     <!-- UNUSED string name="stop_scan">Stop scan</string -->
     <!-- UNUSED string name="title_scan">BLE scan</string -->
     <!-- UNUSED string name="ble_scan_failed">Failed BLE scan</string -->
     <!-- UNUSED string name="ble_gatt_failure">BLE failure</string -->
-    <string name="ble_no_remote">No remote device</string>
+    <string name="ble_no_remote">Няма дистанционно устройство</string>
     <!-- UNUSED string name="ble_control">Control</string -->
     <!-- UNUSED string name="ble_connect">Connect</string -->
     <!-- UNUSED string name="ble_disconnect">Disconnect</string -->
@@ -522,35 +522,35 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="bric_shot">Shot</string -->
     <!-- UNUSED string name="bric_laser">Laser</string -->
     <!-- UNUSED string name="bric_off">Off</string -->
-    <string name="bric_memory">BRIC memory</string>
+    <string name="bric_memory">BRIC памет</string>
 
-    <string name="popup_join_pt">Snap to point</string>
-    <string name="popup_snap_ln">Snap to line</string>
-    <string name="popup_snap_to_splays">Snap to splays</string>
-    <string name="popup_split_pt">Insert point</string>
-    <string name="popup_split_pts">Adds points</string>
-    <string name="popup_split_ln">Split line</string>
-    <string name="popup_sharp_pt">Straighten segment</string>
-    <string name="popup_curve_pt">Smoothen segment</string>
-    <string name="popup_remove_pt">Remove point</string>
-    <string name="popup_append_line">Attach to line</string>
-    <string name="popup_multiselect" copyable="fr">Multiselection</string>
-    <string name="popup_finish">Finish</string>
-    <string name="popup_delete">Delete</string>
-    <string name="popup_decimate">Decimate</string>
-    <string name="popup_join">Join</string>
+    <string name="popup_join_pt">Прикачване към точка</string>
+    <string name="popup_snap_ln">Прикачване към  линия</string>
+    <string name="popup_snap_to_splays">Прикачване към странични измервания</string>
+    <string name="popup_split_pt">Вмъкване на точка</string>
+    <string name="popup_split_pts">Добавяне на точки</string>
+    <string name="popup_split_ln">Разделяне на линия</string>
+    <string name="popup_sharp_pt">Изправяне (премахване Безие)</string>
+    <string name="popup_curve_pt">Изглаждане (с Безие)</string>
+    <string name="popup_remove_pt">Изтриване на точка</string>
+    <string name="popup_append_line">Прикрепване към линия</string>
+    <string name="popup_multiselect" copyable="fr">Мултиселекция</string>
+    <string name="popup_finish">Завършване</string>
+    <string name="popup_delete">Изтриване</string>
+    <string name="popup_decimate">Унищожи</string>
+    <string name="popup_join">Присъединяване</string>
 
-    <string name="popup_erase_all">Erase all</string>
-    <string name="popup_erase_point">Erase points</string>
-    <string name="popup_erase_line">Erase lines</string>
-    <string name="popup_erase_area">Erase areas</string>
+    <string name="popup_erase_all">Изтрий всичко</string>
+    <string name="popup_erase_point">Изтрий точки</string>
+    <string name="popup_erase_line">Изтрий линии</string>
+    <string name="popup_erase_area">Изтрий площи</string>
 
-    <string name="popup_select_all">Select all</string>
-    <string name="popup_select_point">Select points</string>
-    <string name="popup_select_line">Select lines</string>
-    <string name="popup_select_area">Select areas</string>
-    <string name="popup_select_shot">Select shots</string>
-    <string name="popup_select_station">Select stations</string>
+    <string name="popup_select_all">Избери всичко</string>
+    <string name="popup_select_point">Избери точки</string>
+    <string name="popup_select_line">Избери линии</string>
+    <string name="popup_select_area">Избери площи</string>
+    <string name="popup_select_shot">Избери отсечки</string>
+    <string name="popup_select_station">Избери репери</string>
 
     <!-- UNUSED string name="popup_cont_none">None</string -->
     <!-- UNUSED string name="popup_cont_start">Start point</string -->
@@ -564,14 +564,14 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="connected_already">Already connected</string -->
 
     <!-- UNUSED string name="not_available">BT not available</string -->
-    <string name="not_enabled">BT not enabled</string>
+    <string name="not_enabled">Bluetooth не е включен</string>
 
     <!-- UNUSED string name="not_implemented">Not implemented yet</string -->
-    <string name="null_bitmap">Cannot create image [OOM error]</string>
-    <string name="photo" copyable="fr">photo</string>
-    <string name="photo_camera">Old camera</string>
-    <string name="photo_comment_prompt">Enter the photo comment</string>
-    <string name="photo_azimuth_clino">Azimuth: %1$.1f Clino %2$.1f</string>
+    <string name="null_bitmap">Не може да бъде създадено изображение. Недостатъчна памет</string>
+    <string name="photo" copyable="fr">снимка</string>
+    <string name="photo_camera">Стара камера</string>
+    <string name="photo_comment_prompt">Въведете коментар към снимката</string>
+    <string name="photo_azimuth_clino">Азимут: %1$.1f Наклон %2$.1f</string>
     <!-- UNUSED string name="photo_name">station/name</string -->
     <!-- UNUSED string name="photo_photo">photo</string -->
     <!-- UNUSED string name="photo_sensor">sensor</string -->
@@ -580,21 +580,21 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="photo_shot">add shot</string -->
     <!-- UNUSED string name="photo_survey">split survey</string -->
     <!-- UNUSED string name="picture_no_station">Station name required</string -->
-    <string name="plot_delete">Delete sketch ?</string>
-    <string name="scrap_delete">Delete scrap ?</string>
-    <string name="item_delete">Delete item %1$s ?</string>
-    <string name="splay_delete">Delete splay %1$s ?</string>
-    <string name="plot_duplicate_name">Duplicate sketch name</string>
-    <string name="plot_dangling">Dangling sketch</string>
+    <string name="plot_delete">Изтриване на скица?</string>
+    <string name="scrap_delete">Изтриване на отрязък?</string>
+    <string name="item_delete">Изтриване на елемент %1$s ?</string>
+    <string name="splay_delete">Изтриване на странично измерване %1$s ?</string>
+    <string name="plot_duplicate_name">Дублирано име на скица</string>
+    <string name="plot_dangling">Висяща скица</string>
     <!-- UNUSED string name="plot_name">Sketch name</string -->
-    <string name="plot_new">New sketch</string>
-    <string name="plot_not_found">Sketch not found</string>
+    <string name="plot_new">Нова скица</string>
+    <string name="plot_not_found">Скицата не е намерена</string>
     <!-- UNUSED string name="plot_null_name">Missing sketch name</string -->
     <!-- UNUSED string name="plot_null_start">Missing base station</string -->
     <!-- UNUSED string name="plot_recover">Reload sketch from backup?</string -->
-    <string name="plot_start">Origin station</string>
+    <string name="plot_start">Начален репер</string>
     <!-- UNUSED string name="plot_view">Viewed station</string -->
-    <string name="read_fail_with_code">Read failure: error code </string>
+    <string name="read_fail_with_code">Грешка при четене: грешен код </string>
     <string name="read_failed">Failed DistoX-read</string>
     <string name="swap_hotbit_ok">Swapped data hot bit</string>
     <!-- UNUSED string name="reading_file_failed">Failed file-read</string -->
@@ -839,29 +839,29 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="button_sensor"  >Sensors</string -->
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
-    <string name="button_plot"    >Draw</string>
-    <string name="button_less"    >Less</string>
-    <string name="button_more"    >More</string>
-    <string name="button_move"    >Move</string>
-    <string name="button_next"    >Next</string>
-    <string name="button_prev"    >Previous</string>
-    <string name="button_new"     >New scrap</string>
-    <string name="button_skip"    >Skip</string>
-    <string name="button_done"    >Done</string>
+    <string name="button_plot"    >Рисунка</string>
+    <string name="button_less"    >По-малко</string>
+    <string name="button_more"    >Още</string>
+    <string name="button_move"    >Премести</string>
+    <string name="button_next"    >Следващ</string>
+    <string name="button_prev"    >Предишен</string>
+    <string name="button_new"     >Нов отрязък</string>
+    <string name="button_skip"    >Пропусни</string>
+    <string name="button_done"    >Готово</string>
     <string name="button_lrud"  copyable="all">+ LRUD</string>
     <string name="button_ok"  copyable="all">OK</string>
-    <string name="button_off"       >off</string>
-    <string name="button_on"        >on</string>
-    <string name="button_open"      >Open</string>
-    <string name="button_read"      >Read</string>
-    <string name="button_recover"   >Recover</string>
-    <string name="button_reverse"   >Reverse</string>
+    <string name="button_off"       >изключено</string>
+    <string name="button_on"        >включено</string>
+    <string name="button_open"      >Отваряне</string>
+    <string name="button_read"      >Четене</string>
+    <string name="button_recover"   >Възстановяване</string>
+    <string name="button_reverse"   >Обръщане</string>
     <!-- UNUSED string name="button_redo"      >Redo</string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
-    <string name="button_dump"      >Dump</string>
+    <string name="button_dump"      >Изхвърляне</string>
     <!-- UNUSED string name="button_rename"    >Rename</string -->
     <string name="button_renumber"  >Renumber</string>
-    <string name="button_bedding"   >Fitting plane</string>
+    <string name="button_bedding"   >Fitting pla33ne</string>
     <string name="button_replace"   >Replace</string>
     <string name="button_reset"     >Reset</string>
     <string name="button_left"      >LEFT</string>
