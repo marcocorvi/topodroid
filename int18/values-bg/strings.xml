@@ -1714,7 +1714,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_beep_volume_title">Сила на звука на таймера</string>
   <string name="pref_beep_volume_summary">Сила на звука на таймера в проценти</string>
   <string name="pref_extend_frac_title">Фракционно разширение</string>
-  <string name="pref_extend_frac_summary">\"разширението\" може да има десетична дроб</string>
+  <string name="pref_extend_frac_summary">\"разширението\" може да има точка</string>
   <string name="pref_recent_shot_title">Скорошни измервания</string>
   <string name="pref_recent_shot_summary">Акцентирайте върху последните измервания</string>
   <string name="pref_drawing_unit_title">Мащаб на уредите за точки</string>
