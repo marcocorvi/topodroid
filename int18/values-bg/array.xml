@@ -374,8 +374,8 @@
      <string-array name="four" name="cut">2<item name="only16" name="hexg">G Hex</item>
 
   <item name="groupByValue" translatable="false" name="splayUse">
-     <!-- item name="distance">0</item -->Skip</item>
-     <!-- item name="french">Français</item -->Normal<item name="meters" name="xsection">X-Section</item>
+     <!-- item name="distance">0</item -->Прескочи</item>
+     <!-- item name="french">Français</item -->Нормален<item name="meters" name="xsection">Сечение</item>
   <item name="feet" name="skip">
      </item>
   <item name="unitLengthValue" translatable="false" name="normal">1</item>
@@ -402,8 +402,8 @@
 
   <!-- 3D VIEWER array strings -->
 
-  <!-- item name="bulgarian">Български</item -->
-     <!-- item name="minimum">3</item -->Subsample<item name="degrees" name="cut">Clip</item>
+  <!-- item name="bulgarian">български</item -->
+     <!-- item name="minimum">3</item -->Подпроба<item name="degrees" name="cut">Изрежи</item>
   <!-- item name="ukrainian">Українська</item -->
   <item name="hex" name="shrink">
      </item>
@@ -452,8 +452,8 @@
   </string-array>
 
   <string-array>
-     <item>normal</item>
-     <item>diving</item>
+     <item>нормален</item>
+     <item>подводен</item>
   </string-array>
 
   <string-array> <!-- see SurveyInfo.DATAMODE_xxx -->
@@ -510,7 +510,7 @@
 
   <!-- plot default export -->
   <string-array>
-     <item>none</item>
+     <item>без</item>
      <item>Therion</item>
      <item>cSurvey</item>
      <item>Tunnel</item>
@@ -539,7 +539,7 @@
 
   <!-- plot auto export -->
   <string-array>
-     <item>none</item>
+     <item>без</item>
      <item>Therion</item>
      <item>cSurvey</item>
      <item>Tunnel</item>
@@ -607,11 +607,11 @@
   </string-array>
 
   <string-array>
-     <item>Basic</item>
-     <item>Normal</item>
-     <item>Advanced</item>
-     <item>Expert</item>
-     <item>Tester</item>
+     <item>Базови</item>
+     <item>Нормални</item>
+     <item>Пълни</item>
+     <item>Експертни</item>
+     <item>Тестови</item>
      <!-- item name="complete">Завършено</item -->
   </string-array>
   <string-array>
@@ -624,11 +624,11 @@
   </string-array>
 
   <string-array>
-     <item>Small</item>
-     <item>Normal</item>
-     <item>Medium</item>
-     <item>Large</item>
-     <item>Huge</item>
+     <item>Малки</item>
+     <item>Нормални</item>
+     <item>Средни</item>
+     <item>Големи</item>
+     <item>Огромни</item>
   </string-array>
   <string-array>
      <item>0</item>
@@ -648,9 +648,9 @@
   </string-array -->
 
   <string-array>
-     <item>On-demand</item>
-     <item>Continuous</item>
-     <item>Multi</item>
+     <item>На поискване</item>
+     <item>Непрекъснат</item>
+     <item>Мулти</item>
   </string-array>
   <string-array>
      <item>0</item>
@@ -659,8 +659,8 @@
   </string-array>
 
   <string-array>
-     <item>Default</item>
-     <item>Insecure</item>
+     <item>По подразбиране</item>
+     <item>Несигурен</item>
      <!-- item name="Port">Port</item -->
      <!-- item name="InsecurePort">Insecure/Port</item -->
   </string-array>
@@ -676,14 +676,14 @@
        and consistent through all the arrays on the names
   -->
   <string-array>
-     <item>No</item>
-     <item>Splays, forward leg</item>
-     <item>Splays, backward leg</item>
-     <item>Backsight</item>
-     <item>Tripod</item>
-     <item>Magn. anomaly</item>
-     <item>Forward leg, splays</item>
-     <item>Backward leg, splays</item>
+     <item>без</item>
+     <item>Странични, права отсечка</item>
+     <item>Странични, обратна отсечка</item>
+     <item>Обратен азимут</item>
+     <item>Статив</item>
+     <item>Магнитна аномалия</item>
+     <item>Права отсечка, странични</item>
+     <item>Обратна отсечка, странични</item>
      <item>TopoRobot</item>
   </string-array>
 
@@ -774,9 +774,9 @@
   </string-array -->
 
   <string-array>
-     <item>Disabled</item>
-     <item>Check on start</item>
-     <item>Enabled</item>
+     <item>Изключен</item>
+     <item>Проверка при стартиране</item>
+     <item>Включено</item>
   </string-array>
   <string-array>
      <item>0</item>
@@ -798,11 +798,11 @@
   </string-array -->
 
   <string-array>
-     <item>Fine</item>
-     <item>Normal</item>
-     <item>Coarse</item>
-     <item>Bezier</item>
-     <item>Simplified</item>
+     <item>Фино</item>
+     <item>Нормално</item>
+     <item>Грубо</item>
+     <item>Безие</item>
+     <item>Опростено</item>
   </string-array>
   <string-array>
      <item>1</item>
@@ -814,8 +814,8 @@
 
   <string-array>
      <!-- item name="distance">Разстояние</item -->
-     <item>Four at a time</item>
-     <item>Only first 16</item>
+     <item>Четири наведнъж</item>
+     <item>Само първите 16</item>
   </string-array>
   <string-array>
      <!-- item name="distance">0</item -->
@@ -824,12 +824,12 @@
   </string-array>
 
   <string-array>
-     <item>meters</item>
-     <item>feet</item>
+     <item>метри</item>
+     <item>фут</item>
   </string-array>
   <string-array>
-     <item>meters</item>
-     <item>feet</item>
+     <item>метри</item>
+     <item>фут</item>
   </string-array>
   <!-- string-array name="unitLengthNumber">
      <item name="meters">1</item>
@@ -837,27 +837,27 @@
   </string-array -->
 
   <string-array>
-     <item>decimal degrees</item>
-     <item>decimal grads</item>
+     <item>десети от градуса 360</item>
+     <item>десети от града 400</item>
   </string-array>
   <string-array>
-     <item>degrees</item>
-     <item>grads</item>
+     <item>градуси 360</item>
+     <item>гради 400</item>
   </string-array>
 
   <string-array>
-     <item>decimal degrees</item>
-     <item>degree, minute, seconds</item>
+     <item>десети от градуса</item>
+     <item>градуси, минути, секунди</item>
   </string-array>
   <string-array>
-     <item>degrees</item>
+     <item>градуси</item>
      <item>ddmmss</item>
   </string-array>
 
   <string-array>
-     <item>Auto</item>
-     <item>Linear</item>
-     <item>Non-linear</item>
+     <item>Автоматично</item>
+     <item>Линейно</item>
+     <item>Нелинейно</item>
      <!-- item name="minimum">Minimum</item -->
   </string-array>
   <string-array>
@@ -868,8 +868,8 @@
   </string-array>
 
   <string-array>
-     <item>None</item>
-     <item>Decimal</item>
+     <item>без</item>
+     <item>Десетична</item>
      <item>Hex</item>
      <item>G Decimal</item>
      <item>G Hex</item>
@@ -900,8 +900,8 @@
   <!-- 3D VIEWER array strings -->
 
   <string-array>
-     <item>Subsample</item>
-     <item>Clip</item>
+     <item>Подпроба</item>
+     <item>Изрежи</item>
   </string-array>
   <string-array>
      <item>1</item>
@@ -909,9 +909,9 @@
   </string-array>
 
   <string-array>
-     <item>Skip</item>
-     <item>Normal</item>
-     <item>X-Section</item>
+     <item>Прескочи</item>
+     <item>Нормален</item>
+     <item>Сечение</item>
   </string-array>
   <string-array>
      <item>0</item>
