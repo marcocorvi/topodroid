@@ -1,7 +1,7 @@
 encoding utf-8
 symbol line
 name wall_ice
-name-bg стена_изо_льда
+name-bg стена_с_лед
 name-cn 冰积洞壁
 name-de Eiswand
 name-es paredes_de_hielo
