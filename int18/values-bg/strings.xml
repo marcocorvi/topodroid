@@ -101,9 +101,9 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="missing_station">Липсващ репер</string>
     <string name="station_not_found">Реперът не е намерен</string>
     <string copyable="all" name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
-    <string name="shot_not_found">Няма открити замервания</string>
-    <string name="shot_not_saved">Замерванията не са запаметени</string>
-    <string name="bad_sibling">Лоши замервания</string>
+    <string name="shot_not_found">Няма открити измервания</string>
+    <string name="shot_not_saved">Измерванията не са запаметени</string>
+    <string name="bad_sibling">Лоши измервания</string>
     <string name="bad_station">Лош репер: %1$s</string>
     <string name="bad_station_name">Непозволено име на репер</string>
     <!-- UNUSED string name="missing_area">ПЛОЩ</string -->
@@ -121,8 +121,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <string name="bric_device">Устройство %1$s</string>
     <string copyable="all" name="bric_ble">BLE %1$s</string>
-    <string copyable="pt" name="bric_fw">Firmware %1$s</string>
-    <string copyable="pt" name="bric_hw">Hardware %1$s</string>
+    <string copyable="pt" name="bric_fw">Фърмуер %1$s</string>
+    <string copyable="pt" name="bric_hw">Хардуер %1$s</string>
     <string name="bric_battery">Батерия %1$d %%</string>
     <string name="bric_battery_wait">Батерия …</string>
     <string name="bric_reset_time">Нулиране на времето</string>
@@ -747,7 +747,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="stat_origin">Начален репер на скицата: %1$s</string>
     <string name="stat_azimuth">Профилна проекция азимут: %1$.1f</string>
     <!-- UNUSED string name="stat_shot">Shots %1$d, Duplicate %2$d, Surface %3$d</string -->
-    <string name="stat_splay">Странични замервания %1$d # %2$d</string>
+    <string name="stat_splay">Странични измервания %1$d # %2$d</string>
     <string copyable="fr" name="stat_station">Репери %1$d # %2$d</string>
     <string name="stat_leg_sigma">Сигма на отсечката %1$.1f см</string>
     <string name="stat_dangling">Висящи измервания %1$d %2$.1f %3$s</string>
@@ -803,7 +803,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="ask_backups_clear">Delete sketch backups?</string -->
     <string name="ask_manual_update" tools:ignore="PluralsCandidate">Актуализиране на ръководството за потребителя\?\nТекуща версия  %1$d Инсталирана версия %2$d</string>
 
-    <string name="button_add">Добави </string>
+    <string name="button_add">Добави</string>
     <string name="button_apply">Прилагане</string>
     <string name="button_back">Назад</string>
     <string name="button_cancel">Отказ</string>
@@ -1171,7 +1171,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="export_bothviews">План и разрез</string>
     <string name="export_config">Конфигурирай команди</string>
     <string name="export_csv_rawdata">Цялостен запис</string>
-    <string name="export_dxf_blocks">Крайни точки на странични замервания</string>
+    <string name="export_dxf_blocks">Крайни точки на странични измервания</string>
     <string copyable="fr" name="export_dxf_version">Версия</string>
     <string name="export_georeference">Геопрепратка</string>
     <string name="export_grid">Решетка</string>
@@ -1460,7 +1460,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_bezier_step_summary">Макс. разстояние между точките (полилиния приблизително на криви) [m]</string>
   <string name="pref_leg_shots_title">Минимални странични измервания за отсечка</string>
   <string name="pref_leg_shots_summary">Брой минимални странични измервания за отсечка</string>
-  <string name="pref_backsight_splay_title">Странични замервания за обратен азимут</string>
+  <string name="pref_backsight_splay_title">Странични измервания за обратен азимут</string>
   <string name="pref_backsight_splay_summary">Проверка на първото странично измерване за обратен азимут</string>
   <string name="pref_recent_timeout_title">Изтичане на времето за скорошни данни</string>
   <string name="pref_recent_timeout_summary">Времето, след което данните повече не се смятат за скорошни [s]</string>
