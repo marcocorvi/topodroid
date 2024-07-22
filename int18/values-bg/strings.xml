@@ -436,7 +436,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="no_paired_device">No paired device.\nScan and pair a DistoX</string -->
     <string name="no_photos">Картировката не съдържа снимка</string>
     <string name="no_plots">Картировката не съдържа скици\nДобавете нов</string>
-    <string name="no_profile_overview">Няма общ преглед за проектиран разрези</string>
+    <string name="no_profile_overview">Няма общ преглед за проектирани разрези</string>
     <string name="no_proj4">Proj4 не е инсталиран</string>
     <string name="no_sensors">Картировката не съдържа измервания</string>
     <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
@@ -773,14 +773,14 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <!-- THESE MUST AGREE WITH THE FMT STRINGS -->
     <!-- UNUSED string name="plan" copyable="fr">PLAN</string -->
-    <string name="extended">ПРОФИЛ</string>
-    <string name="profile">ПРОЕКТИРАН</string>
+    <string name="extended">РАЗРЕЗ</string>
+    <string name="profile">ПЛАН</string>
     <string copyable="fr" name="fmt_plan">%1$s: ПЛАН</string>
-    <string name="fmt_extended">%1$s: ПРОФИЛ</string>
-    <string name="fmt_profile">%1$s: ПРОЕКТИРАН</string>
+    <string name="fmt_extended">%1$s: РАЗРЕЗ</string>
+    <string name="fmt_profile">%1$s: ПЛАН</string>
 
     <!-- UNUSED string name="extended_profile">Extended profile</string -->
-    <string name="projected_profile">Проектиран профил</string>
+    <string name="projected_profile">Проектиран план</string>
     <!-- UNUSED string name="x_section">X-SECTION</string -->
     <!-- UNUSED string name="v_section">V-SECTION</string -->
     <!-- UNUSED string name="h_section">H-SECTION</string -->
@@ -1026,7 +1026,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="man_xsection">11. Напречни сечения</string>
     <string name="man_overview">12. Прозорец за преглед</string>
     <string name="man_export">13. Импорт/експорт</string>
-    <string name="man_project">14. Пещери</string>
+    <string name="man_project">14. Пещерни проекти</string>
     <string name="man_threed">15. 3D визуализатор</string>
     <string name="man_content">16. Съдържание</string>
     <string name="man_index">17. Индекс</string>
@@ -1226,7 +1226,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_azimut">Препратка за разширен азимут</string>
     <string name="title_audio">Аудио коментар</string>
     <string name="title_audio_list">Аудио записи</string>
-    <string name="title_calib">Calibrations</string>
+    <string name="title_calib">Калибрации</string>
     <string name="title_calib_check">Калибриране - проверка на измерванията</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Разпределение на данни за калибрирането</string>
@@ -1301,7 +1301,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="title_settings_png">PNG export settings</string -->
     <string name="title_settings_gpx">Настройки за експортиране на GPX</string>
     <string name="title_settings_kml">Настройки за експортиране на KML</string>
-    <string name="title_settings_srv">Настройки за експортиране на стени</string>
+    <string name="title_settings_srv">Настройки за експортиране на Walls</string>
 
     <string name="title_settings_sketch">Настройки на 3D скица</string>
     <string name="title_settings_survey">Настройки на картировката</string>
