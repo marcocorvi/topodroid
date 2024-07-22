@@ -327,7 +327,7 @@ public class DistoX310Protocol extends DistoXProtocol
   public void uploadFirmware( File fp, TDProgress progress )
   {
     // TDLog.f( "Firmware upload: protocol starts. file " + fp.getPath() );
-    TDLog.v( "X310-proto fw upload: starts. file " + fp.getPath() );
+    TDLog.f( "X310-proto fw upload: starts. file " + fp.getPath() );
     boolean is_log_file = TDLog.isStreamFile();
     if ( ! is_log_file ) TDLog.setLogStream( TDLog.LOG_FILE ); // set log to file if necessary
 
