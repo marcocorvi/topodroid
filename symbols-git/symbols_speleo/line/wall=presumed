@@ -1,7 +1,7 @@
 encoding utf-8
 symbol line
 name wall_presumed
-name-bg предполагаема
+name-bg предполагаема_стена
 name-cn 推断的洞壁
 name-de Vermutetete_Wand
 name-es contorno_estimado
