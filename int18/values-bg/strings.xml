@@ -16,7 +16,7 @@
     <!-- UNUSED string name="desc_points">Точки</string -->
     <!-- UNUSED string name="desc_lines">Линии</string -->
     <!-- UNUSED string name="desc_areas">Площи</string -->
-    <string copyable="fr it pt" name="desc_menu">Меню</string>
+    <string name="desc_menu">Меню</string>
 
   <string name="r_title">Android-13+ ВНИМАНИЕ</string>
   <!-- UNUSED string name="r_dialog_1">
@@ -32,8 +32,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="r_quit">ИЗХОД</string>
 
     <string name="app_name" translatable="false">TopoDroid-X</string>
-    <string copyable="fr hu ru" name="tdm_title">TopoDroid Manager</string>
-    <string copyable="fr ru" name="tdm_config_project">project.tdconfig</string>
+    <string name="tdm_title">TopoDroid Manager</string>
+    <string name="tdm_config_project">project.tdconfig</string>
     <string name="double_back">Натиснете НАЗАД отново, за да излезете</string>
 
     <string name="new_survey_label">Нова картировка</string>
@@ -62,17 +62,17 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     </string>
     <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string>
 
-    <string copyable="fr" name="POINT">ТОЧКА</string>
+    <string name="POINT">ТОЧКА</string>
     <string name="LINE">ЛИНИЯ</string>
-    <string copyable="it" name="AREA">ПЛОЩ</string>
+    <string name="AREA">ПЛОЩ</string>
     <string name="HELP">ПОМОЩ</string>
     <string name="STATION">РЕПЕР </string>
     <string name="UP">НАГОРЕ</string>
     <string name="DOWN">НАДОЛУ</string>
 
-    <string copyable="all" name="xsplay">X</string>
-    <string copyable="all" name="hsplay">H</string>
-    <string copyable="all" name="vsplay">V</string>
+    <string name="xsplay">X</string>
+    <string name="hsplay">H</string>
+    <string name="vsplay">V</string>
 
     <string name="cut">ИЗРЯЗВАНЕ</string>
     <string name="copy">КОПИРАНЕ</string>
@@ -89,7 +89,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="thp_label">надпис</string>
     <string name="thp_section">сечение</string>
     <string name="thp_picture">снимка</string>
-    <string copyable="fr" name="thp_station">репер</string>
+    <string name="thp_station">репер</string>
     <!-- UNUSED string name="thp_danger">опасност</string -->
     <string name="thl_user">потребител</string>
     <string name="thl_wall">стена</string>
@@ -100,7 +100,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="make_walls">Стени</string -->
     <string name="missing_station">Липсващ репер</string>
     <string name="station_not_found">Реперът не е намерен</string>
-    <string copyable="all" name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
+    <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <string name="shot_not_found">Няма открити измервания</string>
     <string name="shot_not_saved">Измерванията не са запаметени</string>
     <string name="bad_sibling">Лоши измервания</string>
@@ -120,9 +120,9 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="failed_append_to_line">Неуспешно прикачане към друга линия</string>
 
     <string name="bric_device">Устройство %1$s</string>
-    <string copyable="all" name="bric_ble">BLE %1$s</string>
-    <string copyable="pt" name="bric_fw">Фърмуер %1$s</string>
-    <string copyable="pt" name="bric_hw">Хардуер %1$s</string>
+    <string name="bric_ble">BLE %1$s</string>
+    <string name="bric_fw">Фърмуер %1$s</string>
+    <string name="bric_hw">Хардуер %1$s</string>
     <string name="bric_battery">Батерия %1$d %%</string>
     <string name="bric_battery_wait">Батерия …</string>
     <string name="bric_reset_time">Нулиране на времето</string>
@@ -174,8 +174,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="autocalib_not_supported">Изисква се изчисление на калибрирането</string>
     
     <string name="algorithm">Алгоритъм:</string>
-    <string copyable="it pt" name="auto">автоматичен</string>
-    <string copyable="pt" name="linear">линеен</string>
+    <string name="auto">автоматичен</string>
+    <string name="linear">линеен</string>
     <string name="non_linear">нелинеен</string>
     <!-- UNUSED string name="algo_minimum" translatable="false">минимум</string -->
    
@@ -196,8 +196,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="device_reset">Изчистване на паметта на DistoX \?</string>
     <string name="device_clear">Изчистване на паметта на DistoX</string>
     <string name="device_code">DistoX код %1$4d</string>
-    <string copyable="pt" name="device_firmware">Фърмуер %1$d.%2$d</string>
-    <string copyable="pt" name="device_hardware">Хардуер %1$d.%2$d</string>
+    <string name="device_firmware">Фърмуер %1$d.%2$d</string>
+    <string name="device_hardware">Хардуер %1$d.%2$d</string>
     <!-- UNUSED string name="device_memory">Памет %1$02x.%2$02x</string -->
     <string name="device_status_angle_grad">Ъгли: град</string>
     <string name="device_status_angle_degree">Ъгли: градуси</string>
@@ -226,7 +226,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="extend_vert">Вертикално</string>
     <!-- UNUSED string name="external_prompt">Въвеждане на измервания</string -->
     <string name="splay_at_to">Ляво/дясно/горе/долу при репер ДО</string>
-    <string copyable="it pt" name="lrud">Ляво/дясно/горе/долу</string>
+    <string name="lrud">Ляво/дясно/горе/долу</string>
     <string name="strike_dip">Strike %1$.0f Dip %2$.0f</string>
 
     <string name="few_data">Няма достатъчно данни за калибрация</string>
@@ -297,7 +297,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="illegal_data_value">Неправилна стойност на данните</string>
 
     <string name="geocode_title">Геоморфологичен код</string>
-    <string copyable="fr" name="photo_title">Снимка</string>
+    <string name="photo_title">Снимка</string>
     <string name="photo_text">Въведете коментар за снимката</string>
     <string name="photo_failed">Неуспешна снимка</string>
     <string name="photo_max_captures">Достигнато максимално ограничение</string>
@@ -306,8 +306,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="altitude">Alt. </string -->
     <!-- UNUSED string name="h_ellipsoid">H ellipsoid </string -->
     <string name="h_geoid">Височинен геоид </string>
-    <string copyable="pt" name="latitude">Географска ширина </string>
-    <string copyable="pt" name="longitude">Географска дължина </string>
+    <string name="latitude">Географска ширина </string>
+    <string name="longitude">Географска дължина </string>
     <!-- UNUSED string name="h_ellipsoid_hint">H ellipsoid [m]</string -->
     <string name="h_geoid_hint">Височинен геоид [m]</string>
     <string name="accuracy_hint">Точност [m]</string>
@@ -374,10 +374,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <!-- UNUSED string name="scale">scale</string -->
     <!-- UNUSED string name="reversed">reversed</string -->
-    <string copyable="fr" name="options">опции</string>
+    <string name="options">опции</string>
     <string name="outline">контур</string>
     <string name="out">навън</string>
-    <string copyable="it" name="in">навътре</string>
+    <string name="in">навътре</string>
     <!-- UNUSED string name="none">none</string -->
     <!-- UNUSED string name="barrier_add">Hide following shots</string -->
     <string name="hide_from">Скриване от</string>
@@ -386,18 +386,18 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="hidden_del">Show previous shots</string -->
     <string name="hidden_show">Показване на измервания след репер</string>
     <!-- UNUSED string name="splays_toggle">Toggle splays display</string -->
-    <string copyable="it pt" name="splays_on_off">Странични измервания</string>
+    <string name="splays_on_off">Странични измервания</string>
     <!-- UNUSED string name="including_splays">including splays</string -->
     <string name="with_splays">със странични измервания</string>
     <string name="cell_size">Размер [m]</string>
 
     <string name="legs">Отсечка</string>
-    <string copyable="fr" name="stations">Репер</string>
-    <string copyable="it pt" name="splays">Странични измервания</string>
+    <string name="stations">Репер</string>
+    <string name="splays">Странични измервания</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
-    <string copyable="pt" name="fmt_id">ID %1$s</string>
-    <string copyable="pt" name="fmt_latitude_dd_dms">Географска ширина: %1$s [%2$s]</string>
-    <string copyable="pt" name="fmt_longitude_dd_dms">Географска дължина: %1$s [%2$s]</string>
+    <string name="fmt_id">ID %1$s</string>
+    <string name="fmt_latitude_dd_dms">Географска ширина: %1$s [%2$s]</string>
+    <string name="fmt_longitude_dd_dms">Географска дължина: %1$s [%2$s]</string>
     <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string --> 
 
     <string name="fixed">фиксиран</string>
@@ -413,7 +413,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="index_oob">Индекс извън границите %1$d</string>
 
     <string name="no_audio">Няма аудио запис</string>
-    <string copyable="it" name="no_bt">Няма Bluetooth</string>
+    <string name="no_bt">Няма Bluetooth</string>
     <string name="no_calib">Липсва калибрация</string>
     <string name="no_calib_check">Липсва контролно измерване</string>
     <string name="no_calibration">Не е избрана калибрация</string>
@@ -447,14 +447,14 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="no_db_viewer">DB_viewer app not found</string -->
     <string name="no_undelete">Няма елементи за възстановяване</string>
     <string name="no_undelete_paste">Няма елементи за възстановяване/поставяне</string>
-    <string copyable="all" name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f Азимут %5$.1f\"</string>
-    <string copyable="all" name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f Наклон %5$.1f\"</string>
+    <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f Азимут %5$.1f\"</string>
+    <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f Наклон %5$.1f\"</string>
     <string name="format_closure" translatable="false">%1$s-%2$s: [%3$d] %4$.1f/%5$.1f (%6$.1f %7$.1f) %8$.1f %% (%9$.1f\u00b0)</string>
 
-    <string copyable="all" name="menu_3d">3D</string>
+    <string name="menu_3d">3D</string>
     <string name="menu_about">ЗА ПРОГРАМАТА</string>
-    <string copyable="it" name="menu_area">ПЛОЩ</string>
-    <string copyable="fr it" name="menu_audio">АУДИО</string>
+    <string name="menu_area">ПЛОЩ</string>
+    <string name="menu_audio">АУДИО</string>
     <!-- UNUSED string name="menu_attach">CONNECT</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
@@ -471,14 +471,14 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="menu_device">УСТРОЙСТВО</string>
     <string name="menu_device_add">ДОБАВЯНЕ НА НЕПОЗНАТ</string> <!-- KEEP -->
     <string name="menu_export">ЕКСПОРТИРАНЕ</string>
-    <string copyable="all" name="menu_firmware">ФЪРМУЕР</string>
+    <string name="menu_firmware">ФЪРМУЕР</string>
     <string name="menu_geopoint_app">GNSS ПРИЛОЖЕНИЕ</string>
     <string name="menu_recover">ВЪЗСТАНОВЯВАНЕ</string>
     <string name="menu_recover_paste">ВЪЗСТАНОВЯВАНЕ/ПОСТАВЯНЕ</string>
     <string name="menu_reload">ПРЕЗАРЕДИ</string>
     <string name="menu_rename_delete">ПРЕИМЕНУВАНЕ/ИЗТРИВАНЕ</string>
     <string name="menu_rename">ПРЕИМЕНУВАНЕ</string>
-    <string copyable="cn fr it" name="menu_plot_scrap">ОТРЯЗЪЦИ</string>
+    <string name="menu_plot_scrap">ОТРЯЗЪЦИ</string>
     <string name="menu_switch">ПРЕВКЛЮЧВАНЕ/ЗАТВАРЯНЕ</string>
     <string name="menu_help">ПОМОЩ</string>
     <!-- UNUSED string name="menu_join_survey">CO-SURVEY</string -->
@@ -489,10 +489,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="menu_packets">ПАКЕТИ</string>
     <string name="menu_calib_auto">АВТОМАТИЧНА КАЛИБРАЦИЯ</string>
     <!-- UNUSED string name="menu_pair">PAIR</string -->
-    <string copyable="fr it" name="menu_palette">ПАЛИТРА</string>
-    <string copyable="fr" name="menu_photo">СНИМКА</string>
+    <string name="menu_palette">ПАЛИТРА</string>
+    <string name="menu_photo">СНИМКА</string>
     <string name="menu_sections">СЕЧЕНИЯ</string>
-    <string copyable="pt" name="menu_sensor">СЕНЗОРИ</string>
+    <string name="menu_sensor">СЕНЗОРИ</string>
     <!-- UNUSED string name="menu_scan">SCAN</string -->
     <!-- UNUSED string name="menu_scan_ble">SCAN BTLE</string -->
     <!-- UNUSED string name="menu_station" copyable="fr">STATIONS</string -->
@@ -532,7 +532,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="popup_curve_pt">Изглаждане (с Безие)</string>
     <string name="popup_remove_pt">Изтриване на точка</string>
     <string name="popup_append_line">Прикрепване към линия</string>
-    <string copyable="fr" name="popup_multiselect">Мултиселекция</string>
+    <string name="popup_multiselect">Мултиселекция</string>
     <string name="popup_finish">Завършване</string>
     <string name="popup_delete">Изтриване</string>
     <string name="popup_decimate">Унищожи</string>
@@ -566,7 +566,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <!-- UNUSED string name="not_implemented">Not implemented yet</string -->
     <string name="null_bitmap">Не може да бъде създадено изображение. Недостатъчна памет</string>
-    <string copyable="fr" name="photo">снимка</string>
+    <string name="photo">снимка</string>
     <string name="photo_camera">Стара камера</string>
     <string name="photo_comment_prompt">Въведете коментар към снимката</string>
     <string name="photo_azimuth_clino">Азимут: %1$.1f Наклон %2$.1f</string>
@@ -624,7 +624,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="sensor_pressure">налягане</string>
     <string name="sensor_temperature">температура</string>
     <string name="sensor_extern">външни</string>
-    <string copyable="fr" name="sensor_type">вид</string>
+    <string name="sensor_type">вид</string>
     <string name="sensor_value">стойност</string>
     <string name="sensor_comment">коментар</string>
     <!-- UNUSED string name="insufficient_data">insufficient sensor data</string -->
@@ -647,7 +647,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="shot_reverse">обръщане</string>
     <string name="shot_to">до</string>
 
-    <string copyable="fr" name="station">репер</string>
+    <string name="station">репер</string>
     <string name="station_ask">Вмъкване на репер в скицата\?</string>
     <string name="station_del">Премахване на репер от скицата\?</string>
     <string name="station_reset">Не продължавай картировката оттук</string>
@@ -748,7 +748,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="stat_azimuth">Профилна проекция азимут: %1$.1f</string>
     <!-- UNUSED string name="stat_shot">Shots %1$d, Duplicate %2$d, Surface %3$d</string -->
     <string name="stat_splay">Странични измервания %1$d # %2$d</string>
-    <string copyable="fr" name="stat_station">Репери %1$d # %2$d</string>
+    <string name="stat_station">Репери %1$d # %2$d</string>
     <string name="stat_leg_sigma">Сигма на отсечката %1$.1f см</string>
     <string name="stat_dangling">Висящи измервания %1$d %2$.1f %3$s</string>
     <string name="stat_surface">Повърхностни измервания %1$d # %2$d %3$.1f %4$s</string>
@@ -762,7 +762,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <string name="survey_stat_duplicate">Дублирани измервания %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Странични измервания %1$d</string>
-    <string copyable="fr" name="survey_stat_station">Репери %1$d</string>
+    <string name="survey_stat_station">Репери %1$d</string>
     <string name="survey_stat_surface">Измервания на повърхността %1$d %2$.1f %3$s</string>
 
     <string name="hide_blank">Празни измервания</string>
@@ -775,7 +775,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="plan" copyable="fr">PLAN</string -->
     <string name="extended">РАЗРЕЗ</string>
     <string name="profile">ПЛАН</string>
-    <string copyable="fr" name="fmt_plan">%1$s: ПЛАН</string>
+    <string name="fmt_plan">%1$s: ПЛАН</string>
     <string name="fmt_extended">%1$s: РАЗРЕЗ</string>
     <string name="fmt_profile">%1$s: ПЛАН</string>
 
@@ -787,10 +787,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="landscape">landscape</string -->
 
     <string name="display_view">Дисплей</string>
-    <string copyable="fr" name="plan_view">план</string>
+    <string name="plan_view">план</string>
     <string name="profile_view">профил</string>
 
-    <string copyable="all" name="distox_err_ok">OK</string>
+    <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Неуспешно четене на паметта на DistoX</string>
     <string name="distox_err_headtail_io">DistoX грешка в паметта</string>
     <string name="distox_err_headtail_eof">DistoX грешка в паметта</string>
@@ -820,14 +820,14 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_current">Активен</string>
     <string name="button_delete">Изтрий</string>
     <string name="button_duplicate">Дубликат</string>
-    <string copyable="fr" name="button_surface">Повърхност</string>
+    <string name="button_surface">Повърхност</string>
     <string name="button_no_extend">Без удължаване</string>
     <string name="button_eval">Необработен</string>
-    <string copyable="hu" name="button_evalg">G</string>
-    <string copyable="hu" name="button_evalm">M</string>
+    <string name="button_evalg">G</string>
+    <string name="button_evalm">M</string>
     <string name="button_evalroll">Руло</string>
     <string name="button_eval_cal">Калибриран</string>
-    <string copyable="all" name="button_gps_start">GPS</string>
+    <string name="button_gps_start">GPS</string>
     <!-- UNUSED string name="button_gps_stop"  >Stop</string -->
     <string name="button_help" translatable="false">\?</string>
     <!-- UNUSED INCLINED_LEG string name="button_leg">Proj</string -->
@@ -846,8 +846,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_new">Нов отрязък</string>
     <string name="button_skip">Пропусни</string>
     <string name="button_done">Готово</string>
-    <string copyable="all" name="button_lrud">+ ляво/дясно/горе/долу</string>
-    <string copyable="all" name="button_ok">OK</string>
+    <string name="button_lrud">+ ляво/дясно/горе/долу</string>
+    <string name="button_ok">OK</string>
     <string name="button_off">изключено</string>
     <string name="button_on">включено</string>
     <string name="button_open">Отваряне</string>
@@ -888,21 +888,21 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="button_zoomfit"   >Zoom fit</string -->
     <!-- UNUSED string name="button_landscape" >Landscape</string --> 
     <!-- UNUSED string name="button_portrait"  >Portrait</string -->
-    <string copyable="all" name="button_splays">Странични измервания</string>
+    <string name="button_splays">Странични измервания</string>
     <string name="button_wait">Изчакай</string>
 
 
     <string name="button_write">Качване</string>
-    <string copyable="fr" name="button_xsection">Сечение</string>
-    <string copyable="fr" name="xsection">Сечение</string>
+    <string name="button_xsection">Сечение</string>
+    <string name="xsection">Сечение</string>
     <string name="buffer_size">Размер на буфера: %1$d</string>
     <string name="buffer_sorted">сортиран</string>
     <!-- UNUSED string name="buffer_unsorted">unsorted</string -->
 
     <string name="mode_leg">Отсечки</string>
-    <string copyable="all" name="mode_splay">Странични измервания</string>
+    <string name="mode_splay">Странични измервания</string>
     <string name="mode_latest">Последни странични измервания</string>
-    <string copyable="fr" name="mode_station">Репери</string>
+    <string name="mode_station">Репери</string>
     <string name="mode_grid">Решетка</string>
     <string name="mode_fixed">Коригиране на референции</string>
     <string name="mode_outline">Само контур</string>
@@ -920,8 +920,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="layer_text">Text</string -->
 
     <!-- UNUSED string name="remote_title">Device Remote Control</string -->
-    <string copyable="it" name="remote_on">Лазерът е ВКЛЮЧЕН</string>
-    <string copyable="it" name="remote_off">Лазерът е ИЗКЛЮЧЕН</string>
+    <string name="remote_on">Лазерът е ВКЛЮЧЕН</string>
+    <string name="remote_off">Лазерът е ИЗКЛЮЧЕН</string>
     <!-- UNUSED string name="remote_measure">Measure</string -->
     <string name="remote_reset">Рестартиране на Bluetooth</string>
     <!-- UNUSED string name="download">Download</string -->
@@ -930,7 +930,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="popup_do_leg">Измервания на отсечки</string>
     <string name="popup_do_gm_data">Калиб. измервания</string>
     <string name="popup_do_gm_group">Калиб. група</string>
-    <string copyable="fr it pt" name="popup_do_laser">Лазер</string>
+    <string name="popup_do_laser">Лазер</string>
     <string name="popup_do_scan">Сканиране</string>
     <string name="popup_do_shot">Измерване</string>
     <string name="popup_do_clear">Изчисти</string>
@@ -945,11 +945,11 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="symbol_anthro">Антро</string>
     <string name="symbol_bio">Биология</string>
     <string name="symbol_geo">Геология</string>
-    <string copyable="es" name="symbol_karst">Карст</string>
+    <string name="symbol_karst">Карст</string>
     <string name="symbol_mine">Добивна промишленост</string>
     <string name="symbol_paleo">Палео</string>
-    <string copyable="it" name="symbol_speleo">Спелео</string>
-    <string copyable="it" name="symbol_extra">Спелео (2)</string>
+    <string name="symbol_speleo">Спелео</string>
+    <string name="symbol_extra">Спелео (2)</string>
 
     <string name="symbol_reload">Инструменти за рисуване</string>
     <string name="warning_no_palette">Предупреждение: палитрата все още не е заредена</string>
@@ -966,11 +966,11 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <string name="hint_cellsize">размер на клетка</string>
     <string name="hint_cwd">работна папка</string>
-    <string copyable="fr" name="hint_distance">разстояние</string>
+    <string name="hint_distance">разстояние</string>
     <string name="hint_length">дължина</string>
     <string name="hint_line">линия</string>
     <string name="hint_origin">начален репер</string>
-    <string copyable="fr" name="hint_point">точка</string>
+    <string name="hint_point">точка</string>
     <string name="hint_textsize">размер на текста</string>
     <string name="hint_units">символни единици</string>
     <string name="hint_value">стойност</string>
@@ -980,7 +980,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="hint_comment">коментар</string>
     <string name="hint_size">размер [m]</string>
     <string name="hint_text">текст</string>
-    <string copyable="fr" name="hint_options">опции</string>
+    <string name="hint_options">опции</string>
     <string name="hint_name">име</string>
     <string name="hint_from">от</string>
     <string name="hint_to">до</string>
@@ -991,16 +991,16 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="hint_month">месец</string>
     <string name="hint_day">ден</string>
     <string name="hint_hour">час</string>
-    <string copyable="fr" name="hint_minute">минута</string>
+    <string name="hint_minute">минута</string>
     <string name="hint_second">секунда</string>
     <!-- UNUSED string name="hint_latitude">latitude</string -->
     <!-- UNUSED string name="hint_longitude">longitude</string -->
     <!-- UNUSED string name="hint_altitude">altitude</string -->
     <!-- UNUSED string name="hint_altitude_asl">altitude (asl)</string -->
     <!-- UNUSED string name="hint_declination">declination</string -->
-    <string copyable="fr" name="hint_station">репер</string>
+    <string name="hint_station">репер</string>
 
-    <string copyable="fr" name="orientation">ориентация</string>
+    <string name="orientation">ориентация</string>
     <string name="contents">съдържание</string>
     <string name="error_distribution">разпределение на грешки</string>
     <string name="angle_distribution">ъглово разпределение</string>
@@ -1010,10 +1010,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="split_nothing">Няма нищо за разделяне</string>
     <string name="flip_shots">Завърти измерванията</string>
     <string name="copy_items">Копиране на елементи</string>
-    <string copyable="es" name="current_station_format">E %1$.1f N %2$.1f H %3$.1f</string>
+    <string name="current_station_format">E %1$.1f N %2$.1f H %3$.1f</string>
 
     <string name="man_preface">Предговор</string>
-    <string copyable="fr" name="man_intro">1. Въведение</string>
+    <string name="man_intro">1. Въведение</string>
     <string name="man_main">2. Основен прозорец</string>
     <string name="man_device">3. Прозорец на устройството</string>
     <string name="man_calib">4. Прозорец за калибриране</string>
@@ -1030,7 +1030,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="man_threed">15. 3D визуализатор</string>
     <string name="man_content">16. Съдържание</string>
     <string name="man_index">17. Индекс</string>
-    <string copyable="all" name="man_website">* Уебсайт</string>
+    <string name="man_website">* Уебсайт</string>
 
     <string name="help_help">Тази помощ</string>
     <!-- UNUSED string name="help_manual">User manual</string -->
@@ -1063,7 +1063,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_prefs">Предпочитания</string>
     <!-- UNUSED string name="help_log">Logging preferences</string -->
     <!-- UNUSED string name="help_join_survey">Joint surveying</string -->
-    <string copyable="fr" name="help_info_topodroid">Информация за TopoDroid</string>
+    <string name="help_info_topodroid">Информация за TopoDroid</string>
     <string name="help_download">Изтегляне на данни</string>
     <!-- UNUSED string name="help_splay">Assign stations to splays automatically</string -->
     <string name="help_display">Режим на показване</string>
@@ -1081,7 +1081,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_survey_info">Информация за картировката</string>
     <string name="help_undelete">Възстановяване на изтрити елементи</string>
     <!-- UPDATES string name="help_updates">Check for app version updates</string -->
-    <string copyable="fr" name="help_photo">Снимки</string>
+    <string name="help_photo">Снимки</string>
     <string name="help_sensor">Измервания</string>
     <string name="help_3d">3D изглед (Cave3D)</string>
     <!-- UNUSED string name="help_move">Move/zoom mode</string -->
@@ -1172,26 +1172,26 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="export_config">Конфигурирай команди</string>
     <string name="export_csv_rawdata">Цялостен запис</string>
     <string name="export_dxf_blocks">Крайни точки на странични измервания</string>
-    <string copyable="fr" name="export_dxf_version">Версия</string>
+    <string name="export_dxf_version">Версия</string>
     <string name="export_georeference">Геопрепратка</string>
     <string name="export_grid">Решетка</string>
     <string name="export_layers">Слоеве на отрязъци</string>
     <string name="export_linedir">Посока на линията</string>
-    <string copyable="all" name="export_lrud">Ляво/дясно/горе/долу</string>
+    <string name="export_lrud">Ляво/дясно/горе/долу</string>
     <string name="export_lrud_from">Ляво/дясно/горе/долу на репер ОТ</string>
     <string name="export_maps">Карти преди данните</string>
     <string name="export_prefix">Представка с името на пещерата в наименованието на реперите</string>
     <string name="export_prefix_hint">представка</string>
     <string name="export_suffix_hint">наставка</string>
-    <string copyable="all" name="export_roundtrip">Отиване и връщане</string>
+    <string name="export_roundtrip">Отиване и връщане</string>
     <string name="export_share">Сподели</string>
     <!-- UNUSED string name="export_scale_png">Resolution</string -->
     <string name="export_scale_th">Мащаб 1 :</string>
     <string name="export_spacing_th">Разстояние между точките</string>
     <string name="export_splays">Странични измервания</string>
     <string name="export_splays_named">Наименувани странични измервания</string>
-    <string copyable="fr" name="export_stations">Репери</string>
-    <string copyable="fr" name="export_surface">Повърхност</string>
+    <string name="export_stations">Репери</string>
+    <string name="export_surface">Повърхност</string>
     <string name="export_swap_lr">Обърни ляво/дясно</string>
     <string name="export_trox">Формат на Trox</string>
     <string name="export_walls">Стени</string>
@@ -1269,8 +1269,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_packet_dialog">Пакети</string>
     <string name="title_photo">Редактирай още измервания</string>
     <string name="title_photo_comment">Данни за снимката</string>
-    <string copyable="fr" name="title_photo_list">Снимки</string>
-    <string copyable="fr" name="title_photo_view">Снимка</string>
+    <string name="title_photo_list">Снимки</string>
+    <string name="title_photo_view">Снимка</string>
     <string name="title_plot_save">Експортирай скицата</string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
     <!-- UNUSED string name="title_plot_reload">Reload sketch</string -->
@@ -1334,7 +1334,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <string name="title_shift">Отместване</string>
     <string name="title_shot_delete">Изтриване на измерването \?</string>
-    <string copyable="pt" name="title_sensor_edit">Сензор</string>
+    <string name="title_sensor_edit">Сензор</string>
     <string name="title_split">Разделяне на скицата</string>
 
     <string name="title_stats">Статистика за скицата</string>
@@ -1394,7 +1394,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_cat_calib">КАЛИБРАЦИИ</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
   <string name="pref_cat_device">УСТОЙСТВА</string>
-  <string copyable="all" name="pref_cat_cave3d">3D ВИЗУАЛИЗАТОР</string>
+  <string name="pref_cat_cave3d">3D ВИЗУАЛИЗАТОР</string>
   <string name="pref_cat_geek">ПОТРЕБИТЕЛСКИ НАСТРОЙКИ</string>
   <string name="pref_cat_sketch">3D СКИЦА</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
@@ -1447,7 +1447,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_with_levels_summary">Слоеве на платното</string>
   <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->
   <!-- UNUSED string name="pref_with_rename_summary">Enable "survey renaming" menu</string -->
-  <string copyable="fr" name="pref_palettes_title">Палитри</string>
+  <string name="pref_palettes_title">Палитри</string>
   <string name="pref_palettes_summary">Активирай допълнителни палитри</string>
   <string name="pref_packet_logger_title">Регистър на пакетите</string>
   <string name="pref_packet_logger_summary">Активирай регистъра на пакетите</string>
@@ -1500,7 +1500,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_svg_program_summary">Насочи програмата SVG</string>
   <string name="pref_svg_grid_title">Решетка</string>
   <string name="pref_svg_grid_summary">Добави решетка за експорт в SVG</string>
-  <string copyable="all" name="pref_svg_roundtrip_title">Отиване и връщане в SVG</string>
+  <string name="pref_svg_roundtrip_title">Отиване и връщане в SVG</string>
   <string name="pref_svg_roundtrip_summary">Отиване и връщане в готовност за експорт в SVG</string>
   <string name="pref_svg_splays_title">Странични измервания в SVG</string>
   <string name="pref_svg_splays_summary">Включи странични измервания в експорта в SVG</string>
@@ -1532,7 +1532,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_csv_raw_summary">Експортирай всичките данни в CSV</string>
   <string name="pref_csv_sep_title">Разделител за CSV</string>
   <string name="pref_csv_sep_summary">Разделител за полетата в CSV</string>
-  <string copyable="all" name="pref_csv_eol_title">CSV eol</string>
+  <string name="pref_csv_eol_title">CSV eol</string>
   <string name="pref_csv_eol_summary">Разделител за записите в CSV</string>
   <string name="pref_gpx_single_track_title">Единичен трак в GPX</string>
   <string name="pref_gpx_single_track_summary">Експортирай картировките в проекта като единичен трак в GPX</string>
@@ -1540,7 +1540,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_zip_share_category_summary">Добави категория за искане за споделяне в ZIP</string>
 
   <string name="pref_bt_alias_title">BT псевдоними</string>
-  <string copyable="fr it" name="pref_sock_type_title">Връзки</string>
+  <string name="pref_sock_type_title">Връзки</string>
   <string name="pref_sock_type_summary">Тип връзки за Bluetooth</string>
   <!-- UNUSED string name="pref_device_type_title">Disto type</string -->
   <!-- UNUSED string name="pref_device_type_summary">Model of the DistoX</string -->
@@ -1571,7 +1571,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_z6_workaround_summary">Z6 workaround – сваляне на данни</string>
   <string name="pref_firmware_sanity_title">Проверка на фърмуера</string>
   <string name="pref_firmware_sanity_summary">Прилагане на проверки на годност на фърмуера</string>
-  <string copyable="cn fr it pt" name="pref_crs_title">C R S </string>
+  <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">CRS име, като в Proj4</string>
   <string name="pref_neg_altitude_title">Отрицателна надморска височина</string>
   <string name="pref_neg_altitude_summary">Позволи отрицателна надморска височина</string>
@@ -1579,11 +1579,11 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_edit_altitude_summary">Позволи изменяне на надморската височина</string>
   <string name="pref_fine_location_title">Фина позиция</string>
   <string name="pref_fine_location_summary">Време за фина позиция в секунди</string>
-  <string copyable="all" name="pref_geoimport_app_title">Приложение за ГНСС</string>
+  <string name="pref_geoimport_app_title">Приложение за ГНСС</string>
   <string name="pref_geoimport_app_summary">Външно приложение за ГНСС</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Use GPSAveraging</string -->
-  <string copyable="fr" name="pref_bric_mode_title">Режим за BRIC</string>
+  <string name="pref_bric_mode_title">Режим за BRIC</string>
   <string name="pref_bric_mode_summary">Операционен режим за BRIC</string>
   <string name="pref_bric_zero_length_title">Нулево измерване с BRIC</string>
   <string name="pref_bric_zero_length_summary">Запиши измерване с нулева дължина с BRIC</string>
@@ -1594,7 +1594,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
   <string name="pref_plot_screen_title">СКИЦА</string>
   <string name="pref_tool_line_title">ЛИНИИ</string>
-  <string copyable="fr" name="pref_tool_point_title">ТОЧКИ</string>
+  <string name="pref_tool_point_title">ТОЧКИ</string>
   <string name="pref_location_title">МЕСТОПОЛОЖЕНИЕ</string>
   <string name="pref_accuracy_title">ТОЧНОСТ</string>
   <string name="pref_shot_data_title">ДАННИ ЗА ИЗМЕРВАНЕТО</string>
@@ -1661,7 +1661,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_max_shot_summary">Максимална дължина на измерване [m]</string>
   <string name="pref_min_leg_title">Минимална дължина на отсечка</string>
   <string name="pref_min_leg_summary">Минимална дължина на отсечките [m]</string>
-  <string copyable="" name="pref_backsight_title">Обратен азимут</string>
+  <string name="pref_backsight_title">Обратен азимут</string>
   <string name="pref_backsight_summary">Полета за обратен азимут в диалогов прозорец за ново измерване</string>
   <string name="pref_backshot_title">Обратен азимут за DistoX</string>
   <string name="pref_backshot_summary">Смяна на репери с обратни измервания с DistoX</string>
@@ -1791,7 +1791,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_fixed_thickness_summary">Дебелина на линиите в картировката</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->
   <!-- UNUSED string name="pref_device_summary">DistoX address name</string -->
-  <string copyable="all" name="pref_checkBT_title">Bluetooth</string>
+  <string name="pref_checkBT_title">Bluetooth</string>
   <string name="pref_checkBT_summary">Активирай проверка на Bluetooth при старт</string>
   <string name="pref_checkAttached_title">Проверка на средната линия</string>
   <string name="pref_checkAttached_summary">Проверете дали реперите са прикачени</string>
@@ -1813,7 +1813,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_th2_scale_summary">Мащаб на експорта в th2/xvi </string>
   <string name="pref_th2_xvi_title">xvi изображение</string>
   <string name="pref_th2_xvi_summary">Вмъкване на xvi изображение в th2</string>
-  <string copyable="fr" name="pref_autoStations_title">Репери</string>
+  <string name="pref_autoStations_title">Репери</string>
   <string name="pref_autoStations_summary">Добави автоматично репери към th2 файлове</string>
   <string name="pref_auto_xsections_title">Автоматични сечения</string>
   <string name="pref_auto_xsections_summary">Добави автоматични сечения при запис/експорт в [csx/svg/dxf/xvi]</string>
@@ -1973,7 +1973,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="perms_optional">Някои функции няма да работят, ако липсват следните разрешения:</string>
     <string name="perm_location">\nМестоположение</string>
     <string name="perm_camera">\nКамера</string>
-    <string copyable="fr" name="perm_microphone">\nМикрофон</string>
+    <string name="perm_microphone">\nМикрофон</string>
 
     <string name="welcome_db_version">База данни версия %1$d, %2$d</string>
     <string name="welcome_title" translatable="false">TopoDroid %1$s</string>
@@ -2061,7 +2061,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="export_failed">Неуспешен експорт</string>
 
     <string name="image_diagram">Схема на посоката</string>
-    <string copyable="fr" name="image_photo">Снимка</string>
+    <string name="image_photo">Снимка</string>
 
     <!-- 3D VIEWER strings -->
     <!-- UNUSED string name="capp_name" translatable="false">Cave3D</string -->
@@ -2077,7 +2077,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="cmenu_files">Surveys</string -->
     <!-- UNUSED string name="cmenu_frame">Frame</string -->
     <!-- UNUSED string name="cmenu_color">Color</string -->
-    <string copyable="fr it pt" name="cmenu_info">ИНФОРМАЦИЯ</string>
+    <string name="cmenu_info">ИНФОРМАЦИЯ</string>
     <string name="cmenu_ico">3D ДИАГРАМА НА РОЗАТА</string>
     <string name="cmenu_rose">ДИАГРАМА НА РОЗАТА</string>
     <string name="cmenu_wall">СТЕНИ</string>
@@ -2099,43 +2099,43 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="info_view">Гледна точка</string>
     <string name="info_survey">Картировки</string>
     <string name="info_shot">Измервания</string>
-    <string copyable="fr" name="info_station">Репери</string>
+    <string name="info_station">Репери</string>
     <string name="info_length">Дължина на пещерата</string>
     <string name="info_surface">Дължина на повърхността</string>
     <string name="info_depth">Денивилация</string>
-    <string copyable="fr it pt" name="info_volume">Обем</string>
+    <string name="info_volume">Обем</string>
     <string name="info_east">Изток</string>
     <string name="info_north">Север</string>
-    <string copyable="fr pt" name="info_z">Надморска височина</string>
+    <string name="info_z">Надморска височина</string>
     <string name="info_origin">Произход</string>
-    <string copyable="pt" name="info_lonlat">координати</string>
+    <string name="info_lonlat">координати</string>
     <string name="info_radii">радиуси</string>
-    <string copyable="all" name="info_grid_value">%1$.0f m</string>
+    <string name="info_grid_value">%1$.0f m</string>
     <string name="info_view_value">Азимут %1$.0f Наклон %2$.0f</string>
-    <string copyable="all" name="info_survey_value">%1$d</string>
+    <string name="info_survey_value">%1$d</string>
     <string name="info_shot_value">Отсечки %1$d, странични измервания %2$d</string>
-    <string copyable="all" name="info_station_value">%1$d</string>
-    <string copyable="all" name="info_length_value">%1$.1f m</string>
-    <string copyable="all" name="info_surface_value">%1$.1f m</string>
-    <string copyable="all" name="info_depth_value">%1$.1f m</string>
+    <string name="info_station_value">%1$d</string>
+    <string name="info_length_value">%1$.1f m</string>
+    <string name="info_surface_value">%1$.1f m</string>
+    <string name="info_depth_value">%1$.1f m</string>
     <!-- TRYME string name="info_volume_value_tryme">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
-    <string copyable="all" name="info_volume_value">%1$.0f m³</string>
-    <string copyable="all" name="info_east_value">З %1$.1f И %2$.1f</string>
-    <string copyable="all" name="info_north_value">Ю %1$.1f С %2$.1f</string>
-    <string copyable="all" name="info_z_value">%1$.1f  %2$.1f</string>
-    <string copyable="all" name="info_origin_value">x %1$.0f y %2$.0f z %3$.0f</string>
+    <string name="info_volume_value">%1$.0f m³</string>
+    <string name="info_east_value">З %1$.1f И %2$.1f</string>
+    <string name="info_north_value">Ю %1$.1f С %2$.1f</string>
+    <string name="info_z_value">%1$.1f  %2$.1f</string>
+    <string name="info_origin_value">x %1$.0f y %2$.0f z %3$.0f</string>
     <string name="info_origin_none">недефиниран</string>
-    <string copyable="pt" name="info_lonlat_geovalue">дължина %1$.7f ширина %2$.7f</string>
-    <string copyable="pt" name="info_lonlat_prjvalue">дължина %1$.1f ширина %2$.1f</string>
-    <string copyable="all" name="info_radii_value">ИЗ %1$.1f СЮ %2$.1f</string>
+    <string name="info_lonlat_geovalue">дължина %1$.7f ширина %2$.7f</string>
+    <string name="info_lonlat_prjvalue">дължина %1$.1f ширина %2$.1f</string>
+    <string name="info_radii_value">ИЗ %1$.1f СЮ %2$.1f</string>
 
-    <string copyable="fr" name="legs_surface">Повърхност</string>
+    <string name="legs_surface">Повърхност</string>
     <string name="legs_duplicate">Дубликат</string>
     <string name="legs_commented">Със забележки</string>
 
     <string name="proj_perspective">Параметри на перспективата</string>
     <string name="proj_orthographic">Ортографични параметри</string>
-    <string copyable="pt" name="proj_focal">Фокален</string>
+    <string name="proj_focal">Фокален</string>
     <string name="proj_side">Страничен</string>
     <!-- UNUSED string name="proj_near">Near</string -->
     <!-- UNUSED string name="proj_far">Far</string -->
@@ -2146,9 +2146,9 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="reading_file">Четене на файл %1$s</string>
     <string name="read_survey">Четене на картировка %1$s\n</string>
     <!-- UNUSED string name="clear">Clear</string -->
-    <string copyable="fr" name="plan_proj">План</string>
+    <string name="plan_proj">План</string>
     <string name="profile_proj">Разрез</string>
-    <string copyable="all" name="dist_no_path">%1$s %2$s: D %3$.2f (%4$.2f %5$.2f %6$.2f) %7$.2f %8$.2f</string>
+    <string name="dist_no_path">%1$s %2$s: D %3$.2f (%4$.2f %5$.2f %6$.2f) %7$.2f %8$.2f</string>
     <string name="dist_path">%1$s %2$s: D %3$.2f (%4$.2f %5$.2f %6$.2f) %7$.2f %8$.2f Path %9$.2f</string>
     <!-- UNUSED string name="measure">measure</string -->
 
@@ -2165,12 +2165,12 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="dem_loading">Зареждане на повърхност ... моля, изчакайте</string>
     <string name="dem_failed">Неуспешно зареждане на дигитален модел на височините</string>
     <string name="dem_ok">Четене на данни за дигитален модел на височините</string>
-    <string copyable="all" name="dem">Дигитален модел на височините (DEM)</string>
+    <string name="dem">Дигитален модел на височините (DEM)</string>
     <string name="texture_file" translatable="false">%1$s</string>
     <string name="texture_load">Зареди дигитален теренен модел</string>
     <string name="texture_failed">Неуспешно зареждане на дигитален теренен модел</string>
     <string name="texture_ok">Чети файл с дигитален теренен модел</string>
-    <string copyable="all" name="texture">Дигитален теренен модел</string>
+    <string name="texture">Дигитален теренен модел</string>
     <!-- UNUSED string name="sketch_load">Load</string -->
     <!-- UNUSED string name="sketch_failed">Failed sketch loading</string -->
     <!-- UNUSED string name="sketch_ok">Read sketch data</string -->
@@ -2178,8 +2178,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="ctitle">%1$s  Наклон: %2$.0f  Азимут: %3$.0f</string>
     <string name="ctitle_surface_alpha">Модел на повърността</string>
     <!-- UNUSED string name="ctitle_sketches">Sketches</string -->
-    <string copyable="all" name="ctitle_sketch_h">[H]</string>
-    <string copyable="all" name="ctitle_sketch_v">[V]</string>
+    <string name="ctitle_sketch_h">[H]</string>
+    <string name="ctitle_sketch_v">[V]</string>
     <string name="ctitle_legs">Видимост на отсечките</string>
     <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
     <!-- UNUSED string name="ctitle_bluetooth" copyable="all">Bluetooth</string -->
@@ -2193,23 +2193,23 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="survey_list">КАРТИРОВКИ</string>
     <string name="survey_legs"> Отсечки: </string>
     <string name="survey_legs_length">Дължина на отсечките: </string>
-    <string copyable="all" name="survey_splays">Странични измервания: </string>
+    <string name="survey_splays">Странични измервания: </string>
     <string name="survey_splays_length">Дължина на страничните измервания: </string>
-    <string copyable="all" name="cave_east"> E: %1$.2f</string>
-    <string copyable="all" name="cave_north"> N: %1$.2f</string>
-    <string copyable="all" name="cave_vert"> Z: %1$.2f</string>
+    <string name="cave_east"> E: %1$.2f</string>
+    <string name="cave_north"> N: %1$.2f</string>
+    <string name="cave_vert"> Z: %1$.2f</string>
     <string name="cave_distance"> 3D разстояние: %1$.2f</string>
     <string name="horz_distance"> 2D хоризонтално разстояние: %1$.2f</string>
     <string name="cave_length"> Дължина на пещерата: %1$.1f D+ %2$.1f D- %3$.1f</string>
     <string name="cave_angle"> Азимут: %1$.1f  Наклон: %2$.1f</string>
 
-  <string copyable="all" name="east">И</string>
-  <string copyable="all" name="north">С</string>
-  <string copyable="all" name="west">З</string>
-  <string copyable="all" name="south">Ю</string>
+  <string name="east">И</string>
+  <string name="north">С</string>
+  <string name="west">З</string>
+  <string name="south">Ю</string>
 
     <!-- UNUSED string name="SURVEYS">S U R V E Y S</string -->
-    <string copyable="fr it pt" name="INFO">И Н Ф О</string>
+    <string name="INFO">И Н Ф О</string>
     <string name="STATIONS">Р Е П Е Р</string>
     <string name="STATIONS_DISTANCE">РАЗСТОЯНИЕ МЕЖДУ РЕПЕРИТЕ</string>
     <!-- UNUSED string name="DISTANCE">DISTANCE</string -->
@@ -2227,14 +2227,14 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="view_west">Запад</string>
     <string name="view_south">Юг</string>
     <!-- UNUSED string name="view_point">Viewpoint</string -->
-    <string copyable="fr hu it pt" name="view_zoom">Увеличение 1</string>
+    <string name="view_zoom">Увеличение 1</string>
 
     <string name="walls_title">СТЕНИ</string>
-    <string copyable="all" name="walls_convexhull">Изпъкнало тяло</string>
+    <string name="walls_convexhull">Изпъкнало тяло</string>
     <string name="walls_powercrust" translatable="false">Powercrust</string>
-    <string copyable="all" name="walls_hull">Тяло</string>
-    <string copyable="all" name="walls_bubble">Балон</string>
-    <string copyable="all" name="walls_tube">Тръба</string>
+    <string name="walls_hull">Тяло</string>
+    <string name="walls_bubble">Балон</string>
+    <string name="walls_tube">Тръба</string>
     <!-- UNUSED string name="walls_delaunay" translatable="false">Delaunay</string -->
 
     <!-- UNUSED string name="powercrust_few_splays">Powercrust: too few splays</string -->
@@ -2294,7 +2294,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <string name="viewing_at">Разглеждане с наклон %1$.0f азимут %2$.0f</string>
 
-    <string copyable="all" name="cpref_dem3d">Дигитален модел на височините (DEM)</string>
+    <string name="cpref_dem3d">Дигитален модел на височините (DEM)</string>
     <string name="cpref_walls3d">МОДЕЛ НА СТЕНИТЕ</string>
     <!-- UNUSED string name="cpref_base_path_title">App base path</string -->
     <!-- UNUSED string name="cpref_base_path_summary">Directory containing the survey files</string -->
@@ -2342,7 +2342,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="cpref_split_stretch_title">Разтегляне на стени</string>
     <string name="cpref_split_stretch_summary">Разтегляне на стенните точки по отсечката [0.1]</string>
 
-    <string copyable="all" name="cpref_powercrust_delta_title">Powercrust Delta</string>
+    <string name="cpref_powercrust_delta_title">Powercrust Delta</string>
     <string name="cpref_powercrust_delta_summary">Изключи странични измервания, които се различават значително от съседните [0.1]</string>
 
     <!-- UNUSED string name="cpref_convex_hull_title">Convex hull</string -->
@@ -2359,23 +2359,23 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <string name="help_open_3d">Отвори 3D файл</string>
     <string name="help_export_3d">Експортирай 3D файл</string>
-    <string copyable="fr" name="help_info_3d">3D информация</string>
+    <string name="help_info_3d">3D информация</string>
     <string name="help_ico_3d">разпределение на 3D отсечки</string>
     <string name="help_rose_3d">Диаграма на розата</string>
     <string name="help_reset_3d">Нулиране на 3D изгледа</string>
     <string name="help_viewpoint_3d">3D гледна точка</string>
-    <string copyable="all" name="help_alpha_3d">Дигитален модел на височините (D.E.M.)</string>
+    <string name="help_alpha_3d">Дигитален модел на височините (D.E.M.)</string>
     <string name="help_wall_3d">3D модел</string>
     <!-- UNUSED string name="help_temperature">Temperature</string -->
-    <string copyable="all" name="help_sketch_3d">повдигане на 3D скица</string>
+    <string name="help_sketch_3d">повдигане на 3D скица</string>
     <!-- UNUSED string name="help_fractal" translatable="false">Fractal analysis</string -->
 
     <string name="help_light_3d">Панорама и осветление</string>
-    <string copyable="fr" name="help_projection_3d">3D проекция</string>
-    <string copyable="fr" name="help_stations_3d">Репери</string>
-    <string copyable="all" name="help_splays_3d">Странични измервания</string>
+    <string name="help_projection_3d">3D проекция</string>
+    <string name="help_stations_3d">Репери</string>
+    <string name="help_splays_3d">Странични измервания</string>
     <string name="help_walls_3d">Стени</string>
-    <string copyable="fr" name="help_surface_3d">Терен</string>
+    <string name="help_surface_3d">Терен</string>
     <string name="help_color_3d">Цветове</string>
     <string name="help_frame_3d">Рамка</string>
 

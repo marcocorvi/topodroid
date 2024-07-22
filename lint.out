@@ -1,3 +1,6 @@
+res/layout/gm_activity.xml:52: Warning: This ListView should use android:layout_width="wrap_content" [ScrollViewSize]
+        android:layout_width="fill_parent"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/layout/shot_activity.xml:57: Warning: This ListView should use android:layout_width="wrap_content" [ScrollViewSize]
         android:layout_width="fill_parent"
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -25,15 +28,21 @@ res/layout/dblock_row_noedit.xml:31: Warning: android:editable is deprecated: Us
 res/layout/dblock_row_noedit.xml:54: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
     android:editable="false"
     ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-es/strings.xml:750: Error: Inconsistent formatting types for argument #2 in format string survey_stat_surface ('%2$d'): Found both 'd' here and 'f' in values/strings.xml [StringFormatMatches]
+res/values-es/strings.xml:754: Error: Inconsistent formatting types for argument #2 in format string survey_stat_surface ('%2$d'): Found both 'd' here and 'f' in values/strings.xml [StringFormatMatches]
     <string name="survey_stat_surface">Tomas de superficie %1$d # %2$d %3$.1f %4$s</string>
                                                                   ~~~~
-    res/values/strings.xml:761: Conflicting argument type (`f') here
+    res/values/strings.xml:768: Conflicting argument type (`f') here
 res/values-fr/plurals.xml:3: Error: For locale "fr" (French) the following quantities should also be defined: many [MissingQuantity]
   <plurals name="calib_saturated_values">
   ^
+res/values-bg/plurals.xml:7: Error: For locale "bg" (Bulgarian) the following quantities should also be defined: one [MissingQuantity]
+  <plurals name="read_data">
+  ^
 res/values-fr/plurals.xml:7: Error: For locale "fr" (French) the following quantities should also be defined: many, one [MissingQuantity]
   <plurals name="read_data">
+  ^
+res/values-bg/plurals.xml:11: Error: For locale "bg" (Bulgarian) the following quantities should also be defined: one [MissingQuantity]
+  <plurals name="read_calib_data">
   ^
 res/values-fr/plurals.xml:11: Error: For locale "fr" (French) the following quantities should also be defined: many, one [MissingQuantity]
   <plurals name="read_calib_data">
@@ -41,342 +50,384 @@ res/values-fr/plurals.xml:11: Error: For locale "fr" (French) the following quan
 res/values-fr/plurals.xml:15: Error: For locale "fr" (French) the following quantities should also be defined: many [MissingQuantity]
   <plurals name="found_calib_groups">
   ^
-res/values/strings.xml:105: Error: "shot_not_saved" is not translated in "de" (German), "ru" (Russian), "pt" (Portuguese), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:87: Error: "memoryCavway" is not translated in "de" (German), "ru" (Russian), "pt" (Portuguese), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+    <string name="memoryCavway">Cavway memory</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:93: Error: "thp_picture" is not translated in "de" (German), "ru" (Russian), "pt" (Portuguese), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+    <string name="thp_picture">picture</string>
+            ~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:107: Error: "shot_not_saved" is not translated in "de" (German), "ru" (Russian), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
     <string name="shot_not_saved">Shot not saved</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:107: Error: "bad_station" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
-    <string name="bad_station">Bad station: %1$s</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:108: Error: "bad_station_name" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:110: Error: "bad_station_name" is not translated in "de" (German) [MissingTranslation]
     <string name="bad_station_name">Illegal station name</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:172: Error: "auto_calib" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:171: Error: "calib_roll" is not translated in "de" (German), "cn", "es" (Spanish) [MissingTranslation]
+    <string name="calib_roll">Roll diff.: %1$.2f &#xb0;</string>
+            ~~~~~~~~~~~~~~~~~
+res/values/strings.xml:175: Error: "auto_calib" is not translated in "de" (German), "cn", "it" (Italian) [MissingTranslation]
     <string name="auto_calib">Auto Calib</string>
             ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:173: Error: "autocalib_not_supported" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:176: Error: "autocalib_not_supported" is not translated in "de" (German), "cn", "it" (Italian) [MissingTranslation]
     <string name="autocalib_not_supported">Required calibration computation</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:183: Error: "address" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:186: Error: "address" is not translated in "de" (German) [MissingTranslation]
     <string name="address">Address</string>
             ~~~~~~~~~~~~~~
-res/values/strings.xml:184: Error: "model_invalid" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:187: Error: "model_invalid" is not translated in "de" (German) [MissingTranslation]
     <string name="model_invalid">invalid number</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:185: Error: "model_missing" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:188: Error: "model_missing" is not translated in "de" (German) [MissingTranslation]
     <string name="model_missing">missing number</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:188: Error: "device_already_present" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:191: Error: "device_already_present" is not translated in "de" (German) [MissingTranslation]
     <string name="device_already_present">Device already present</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:189: Error: "device_no_name" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:192: Error: "device_no_name" is not translated in "de" (German) [MissingTranslation]
     <string name="device_no_name">Device %1$s without name</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:190: Error: "device_all_named" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:193: Error: "device_all_named" is not translated in "de" (German) [MissingTranslation]
     <string name="device_all_named">No device without name</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:213: Error: "unsupported_device_type" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
-    <string name="unsupported_device_type">Unsupported device type</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:260: Error: "imported_file" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:243: Error: "gettingCavway_info" is not translated in "de" (German), "ru" (Russian), "pt" (Portuguese), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+    <string name="gettingCavway_info">Getting Cavway info &#8230;</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:264: Error: "imported_file" is not translated in "de" (German) [MissingTranslation]
     <string name="imported_file">Imported %1$s</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:270: Error: "bad_manifest_zip" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:274: Error: "bad_manifest_zip" is not translated in "de" (German) [MissingTranslation]
     <string name="bad_manifest_zip">Failed: zip read error</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:271: Error: "bad_manifest_td" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:275: Error: "bad_manifest_td" is not translated in "de" (German) [MissingTranslation]
     <string name="bad_manifest_td">Failed: TopoDroid version too old</string>
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:272: Error: "bad_manifest_db_old" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:276: Error: "bad_manifest_db_old" is not translated in "de" (German) [MissingTranslation]
     <string name="bad_manifest_db_old">Failed: database version too old</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:273: Error: "bad_manifest_db_new" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:277: Error: "bad_manifest_db_new" is not translated in "de" (German) [MissingTranslation]
     <string name="bad_manifest_db_new">Failed: database version too new</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:275: Error: "bad_manifest_present" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:279: Error: "bad_manifest_present" is not translated in "de" (German) [MissingTranslation]
     <string name="bad_manifest_present">Failed: duplicate survey name</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:276: Error: "bad_manifest_db" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:280: Error: "bad_manifest_db" is not translated in "de" (German) [MissingTranslation]
     <string name="bad_manifest_db">Failed: cannot open database</string>
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:277: Error: "bad_manifest_sql" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:281: Error: "bad_manifest_sql" is not translated in "de" (German) [MissingTranslation]
     <string name="bad_manifest_sql">Failed: SQL error</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:278: Error: "bad_manifest_number" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:282: Error: "bad_manifest_number" is not translated in "de" (German) [MissingTranslation]
     <string name="bad_manifest_number">Failed: wrong number</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:279: Error: "bad_manifest_manifest" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:283: Error: "bad_manifest_manifest" is not translated in "de" (German) [MissingTranslation]
     <string name="bad_manifest_manifest">Failed: wrong manifest</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:280: Error: "bad_manifest_missing" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:284: Error: "bad_manifest_missing" is not translated in "de" (German) [MissingTranslation]
     <string name="bad_manifest_missing">Failed: missing manifest</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:281: Error: "bad_manifest_error" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:285: Error: "bad_manifest_error" is not translated in "de" (German) [MissingTranslation]
     <string name="bad_manifest_error">Failed: manifest read error</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:282: Error: "bad_manifest_other" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:286: Error: "bad_manifest_other" is not translated in "de" (German) [MissingTranslation]
     <string name="bad_manifest_other">Failed: unexpected error</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:283: Error: "archive_reset_color" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
-    <string name="archive_reset_color">Warning. Custom colors resetted</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:324: Error: "location_start_fine" is not translated in "cn" [MissingTranslation]
-    <string name="location_start_fine">Starting fine position</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:335: Error: "error_fixes_nocs" is not translated in "cn" [MissingTranslation]
-    <string name="error_fixes_nocs">Fix points without CS %1$s:\n%2$s</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:359: Error: "error_station_fixed" is not translated in "cn" [MissingTranslation]
-    <string name="error_station_fixed">Georeferenced station</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:364: Error: "error_bad_name" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
-    <string name="error_bad_name">Filename modified</string>
-            ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:432: Error: "no_native_lib" is not translated in "fr" (French) [MissingTranslation]
-    <string name="no_native_lib">Missing native library</string>
+res/values/strings.xml:301: Error: "geocode_title" is not translated in "de" (German), "fr" (French), "es" (Spanish) [MissingTranslation]
+    <string name="geocode_title">Geomorphology Code</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:469: Error: "menu_device_add" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:474: Error: "menu_device_add" is not translated in "de" (German) [MissingTranslation]
     <string name="menu_device_add">ADD UNNAMED</string> <!-- KEEP -->
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:472: Error: "menu_geopoint_app" is not translated in "cn" [MissingTranslation]
-    <string name="menu_geopoint_app">GNSS APP</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:487: Error: "menu_calib_auto" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:492: Error: "menu_calib_auto" is not translated in "de" (German), "cn", "it" (Italian) [MissingTranslation]
     <string name="menu_calib_auto">AUTO-CALIB</string>
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:491: Error: "menu_sections" is not translated in "fr" (French) [MissingTranslation]
-    <string name="menu_sections">SECTIONS</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:648: Error: "station_reset" is not translated in "cn", "it" (Italian), "fr" (French) [MissingTranslation]
-    <string name="station_reset">Don\'t continue survey from here</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:716: Error: "zip_share_failed" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:584: Error: "scrap_delete" is not translated in "de" (German), "ru" (Russian), "fr" (French), "es" (Spanish) [MissingTranslation]
+    <string name="scrap_delete">Delete scrap ?</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:620: Error: "sensor_title" is not translated in "de" (German), "fr" (French), "es" (Spanish) [MissingTranslation]
+    <string name="sensor_title">Add sensor measurement</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:723: Error: "zip_share_failed" is not translated in "de" (German) [MissingTranslation]
     <string name="zip_share_failed">Unable to share zip-archive</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:723: Error: "screenshot_saved" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:730: Error: "screenshot_saved" is not translated in "de" (German) [MissingTranslation]
     <string name="screenshot_saved">Saved screenshot %1$s</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:724: Error: "screenshot_failed" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:731: Error: "screenshot_failed" is not translated in "de" (German) [MissingTranslation]
     <string name="screenshot_failed">Failed taking screenshot</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:725: Error: "start_index" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:732: Error: "start_index" is not translated in "de" (German) [MissingTranslation]
     <string name="start_index">Start-shot index</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:728: Error: "stat_dates" is not translated in "fr" (French) [MissingTranslation]
-    <string name="stat_dates">From %1$s to %2$s</string>
-            ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:751: Error: "stat_survey_z" is not translated in "fr" (French) [MissingTranslation]
-    <string name="stat_survey_z">Cave denivelation %1$.1f %2$.1f %3$s</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:875: Error: "button_start" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:774: Error: "slope_lside" is not translated in "de" (German) or "es" (Spanish) [MissingTranslation]
+    <string name="slope_lside">Slope l-side</string>
+            ~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:812: Error: "button_geocode" is not translated in "de" (German), "fr" (French), "es" (Spanish) [MissingTranslation]
+    <string name="button_geocode"   >GeoCode</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:843: Error: "button_less" is not translated in "de" (German) or "es" (Spanish) [MissingTranslation]
+    <string name="button_less"    >Less</string>
+            ~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:885: Error: "button_start" is not translated in "de" (German), "cn", "it" (Italian) [MissingTranslation]
     <string name="button_start"     >Start</string>
             ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:876: Error: "button_stop" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:886: Error: "button_stop" is not translated in "de" (German), "cn", "it" (Italian) [MissingTranslation]
     <string name="button_stop"      >Stop</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:901: Error: "mode_sections" is not translated in "fr" (French) [MissingTranslation]
-    <string name="mode_sections">Sections</string>
+res/values/strings.xml:901: Error: "buffer_sorted" is not translated in "de" (German), "fr" (French), "es" (Spanish) [MissingTranslation]
+    <string name="buffer_sorted">sorted</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:902: Error: "mode_walls" is not translated in "fr" (French) [MissingTranslation]
-    <string name="mode_walls">Walls</string>
-            ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:903: Error: "mode_refs" is not translated in "cn" or "fr" (French) [MissingTranslation]
-    <string name="mode_refs">Frame</string>
+res/values/strings.xml:963: Error: "bt_alias_title" is not translated in "de" (German), "fr" (French), "es" (Spanish) [MissingTranslation]
+    <string name="bt_alias_title">Bluetooth aliases</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:964: Error: "hint_bt_alias" is not translated in "de" (German), "fr" (French), "es" (Spanish) [MissingTranslation]
+    <string name="hint_bt_alias">BT alias</string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:965: Error: "hint_bt_code" is not translated in "de" (German), "fr" (French), "es" (Spanish) [MissingTranslation]
+    <string name="hint_bt_code">Device code</string>
+            ~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:966: Error: "bt_alias_missing" is not translated in "de" (German), "fr" (French), "es" (Spanish) [MissingTranslation]
+    <string name="bt_alias_missing">BT alias missing</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:967: Error: "bt_code_missing" is not translated in "de" (German), "fr" (French), "es" (Spanish) [MissingTranslation]
+    <string name="bt_code_missing">Device code missing</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:983: Error: "hint_size" is not translated in "de" (German), "fr" (French), "es" (Spanish) [MissingTranslation]
+    <string name="hint_size">size [m]</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1014: Error: "man_threed" is not translated in "fr" (French) [MissingTranslation]
-    <string name="man_threed">15. 3D viewer</string>
-            ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1015: Error: "man_content" is not translated in "fr" (French) [MissingTranslation]
-    <string name="man_content">16. Content</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1016: Error: "man_index" is not translated in "fr" (French) [MissingTranslation]
-    <string name="man_index">17. Index</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1032: Error: "help_join" is not translated in "cn" or "fr" (French) [MissingTranslation]
-    <string name="help_join">Join lines</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1039: Error: "help_device_add" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:1057: Error: "help_device_add" is not translated in "de" (German) [MissingTranslation]
     <string name="help_device_add">Add a device</string> <!-- KEEP -->
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1042: Error: "help_geopoint_app" is not translated in "cn" [MissingTranslation]
-    <string name="help_geopoint_app">External GNSS apps</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1077: Error: "help_plot_close" is not translated in "fr" (French) [MissingTranslation]
-    <string name="help_plot_close">Close sketch</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1078: Error: "help_plot_delete" is not translated in "fr" (French) [MissingTranslation]
-    <string name="help_plot_delete">Delete sketch</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1092: Error: "help_section_type" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:1110: Error: "help_section_type" is not translated in "fr" (French) [MissingTranslation]
     <string name="help_section_type">Sketch section type</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1093: Error: "help_section_item" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:1111: Error: "help_section_item" is not translated in "fr" (French) [MissingTranslation]
     <string name="help_section_item">Sketch section item</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1094: Error: "help_select_clear" is not translated in "fr" (French) [MissingTranslation]
+res/values/strings.xml:1112: Error: "help_select_clear" is not translated in "fr" (French) [MissingTranslation]
     <string name="help_select_clear">Clear sketch selection</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1151: Error: "help_stations_minus" is not translated in "fr" (French) [MissingTranslation]
-    <string name="help_stations_minus">Show fewer stations</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1152: Error: "help_stations_plus" is not translated in "fr" (French) [MissingTranslation]
-    <string name="help_stations_plus">Show more stations</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1162: Error: "export_layers" is not translated in "cn" [MissingTranslation]
-    <string name="export_layers">Scrap layers</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1171: Error: "export_share" is not translated in "fr" (French) [MissingTranslation]
-    <string name="export_share">Share</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1174: Error: "export_spacing_th" is not translated in "cn" [MissingTranslation]
-    <string name="export_spacing_th">Point spacing</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1208: Error: "import_therion_path" is not translated in "cn" or "fr" (French) [MissingTranslation]
-    <string name="import_therion_path">With survey path</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1227: Error: "title_device_add" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:1245: Error: "title_device_add" is not translated in "de" (German) [MissingTranslation]
     <string name="title_device_add">Add device</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1239: Error: "title_fixed_mt" is not translated in "cn" [MissingTranslation]
-    <string name="title_fixed_mt">Geo points [Mobile Topographer]</string>
-            ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1240: Error: "title_fixed_gpx_rec" is not translated in "cn" [MissingTranslation]
-    <string name="title_fixed_gpx_rec">Geo points [GPX Recorder]</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1241: Error: "title_fixed_gps_pos" is not translated in "cn" [MissingTranslation]
-    <string name="title_fixed_gps_pos">Geo points [GPS Position]</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1242: Error: "title_fixed_gps_test" is not translated in "cn" [MissingTranslation]
-    <string name="title_fixed_gps_test">Geo points [GPSTest]</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1243: Error: "title_fixed_gps_logger" is not translated in "cn" [MissingTranslation]
-    <string name="title_fixed_gps_logger">Geo points [GPS Logger]</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1244: Error: "title_fixed_gps_point" is not translated in "cn" or "fr" (French) [MissingTranslation]
-    <string name="title_fixed_gps_point">Geo points [GPS Point]</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1274: Error: "title_settings_export_enable" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:1292: Error: "title_settings_export_enable" is not translated in "de" (German) [MissingTranslation]
     <string name="title_settings_export_enable">Data export enable settings</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1286: Error: "title_settings_gpx" is not translated in "fr" (French) [MissingTranslation]
-    <string name="title_settings_gpx">GPX export settings</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1288: Error: "title_settings_srv" is not translated in "cn" or "fr" (French) [MissingTranslation]
-    <string name="title_settings_srv">Walls export settings</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1363: Error: "pref_cat_exportenable" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:1381: Error: "pref_cat_exportenable" is not translated in "de" (German) [MissingTranslation]
   <string name="pref_cat_exportenable">ENABLE</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1383: Error: "pref_cat_sketch" is not translated in "fr" (French) [MissingTranslation]
-  <string name="pref_cat_sketch">3D SKETCH</string>
-          ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1451: Error: "pref_unnamed_device_title" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:1408: Error: "pref_single_back_title" is not translated in "de" (German) or "es" (Spanish) [MissingTranslation]
+  <string name="pref_single_back_title">Single back</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1409: Error: "pref_single_back_summary" is not translated in "de" (German) or "es" (Spanish) [MissingTranslation]
+  <string name="pref_single_back_summary">Close windows with single back</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1465: Error: "pref_backsight_splay_title" is not translated in "de" (German), "fr" (French), "es" (Spanish) [MissingTranslation]
+  <string name="pref_backsight_splay_title">Backsight splay</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1466: Error: "pref_backsight_splay_summary" is not translated in "de" (German), "fr" (French), "es" (Spanish) [MissingTranslation]
+  <string name="pref_backsight_splay_summary">Backsight check with first splay</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1473: Error: "pref_unnamed_device_title" is not translated in "de" (German) [MissingTranslation]
   <string name="pref_unnamed_device_title">Unnamed devices</string> <!-- KEEP -->
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1452: Error: "pref_unnamed_device_summary" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:1474: Error: "pref_unnamed_device_summary" is not translated in "de" (German) [MissingTranslation]
   <string name="pref_unnamed_device_summary">Enable menu to enter device name</string> <!-- KEEP -->
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1457: Error: "pref_walls_splays_title" is not translated in "cn" or "fr" (French) [MissingTranslation]
-  <string name="pref_walls_splays_title">Walls splays</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1458: Error: "pref_walls_splays_summary" is not translated in "cn" or "fr" (French) [MissingTranslation]
-  <string name="pref_walls_splays_summary">Export splays in Walls files</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1517: Error: "pref_gpx_single_track_title" is not translated in "fr" (French) [MissingTranslation]
-  <string name="pref_gpx_single_track_title">GPX single track</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1518: Error: "pref_gpx_single_track_summary" is not translated in "fr" (French) [MissingTranslation]
-  <string name="pref_gpx_single_track_summary">Export project surveys as a single GPX track</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1519: Error: "pref_zip_share_category_title" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:1541: Error: "pref_zip_share_category_title" is not translated in "de" (German) [MissingTranslation]
   <string name="pref_zip_share_category_title">Zip-share category</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1520: Error: "pref_zip_share_category_summary" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:1542: Error: "pref_zip_share_category_summary" is not translated in "de" (German) [MissingTranslation]
   <string name="pref_zip_share_category_summary">Add category to zip-share request</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1559: Error: "pref_fine_location_title" is not translated in "cn" [MissingTranslation]
-  <string name="pref_fine_location_title">Fine position [s]</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1560: Error: "pref_fine_location_summary" is not translated in "cn" [MissingTranslation]
-  <string name="pref_fine_location_summary">Fine position time [s]</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1561: Error: "pref_geoimport_app_title" is not translated in "cn" [MissingTranslation]
-  <string name="pref_geoimport_app_title" copyable="all">GNSS app</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1562: Error: "pref_geoimport_app_summary" is not translated in "cn" [MissingTranslation]
-  <string name="pref_geoimport_app_summary">External GNSS app</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1569: Error: "pref_bric_index_is_id_title" is not translated in "de" (German), "ru" (Russian), "pt" (Portuguese), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1544: Error: "pref_bt_alias_title" is not translated in "de" (German), "fr" (French), "es" (Spanish) [MissingTranslation]
+  <string name="pref_bt_alias_title">BT aliases</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1592: Error: "pref_bric_index_is_id_title" is not translated in "de" (German), "ru" (Russian), "cn", "it" (Italian), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
   <string name="pref_bric_index_is_id_title">BRIC index is ID</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1570: Error: "pref_bric_index_is_id_summary" is not translated in "de" (German), "ru" (Russian), "pt" (Portuguese), "cn", "it" (Italian), "fr" (French), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1593: Error: "pref_bric_index_is_id_summary" is not translated in "de" (German), "ru" (Russian), "cn", "it" (Italian), "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
   <string name="pref_bric_index_is_id_summary">Use BRIC index as shot ID</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1607: Error: "pref_splay_latest_color_title" is not translated in "cn" [MissingTranslation]
-  <string name="pref_splay_latest_color_title">Splay latest color</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1608: Error: "pref_splay_latest_color_summary" is not translated in "cn" [MissingTranslation]
-  <string name="pref_splay_latest_color_summary">Color of latest splay lines</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1679: Error: "pref_acad_layer_title" is not translated in "cn" [MissingTranslation]
-  <string name="pref_acad_layer_title">Scrap layers</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1680: Error: "pref_acad_layer_summary" is not translated in "cn" [MissingTranslation]
-  <string name="pref_acad_layer_summary">DXF layers by scraps</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1717: Error: "pref_oblique_projection_title" is not translated in "cn" or "fr" (French) [MissingTranslation]
-  <string name="pref_oblique_projection_title">Oblique projected</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1718: Error: "pref_oblique_projection_summary" is not translated in "cn" or "fr" (French) [MissingTranslation]
-  <string name="pref_oblique_projection_summary">Maximum oblique projected angle</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1745: Error: "pref_line_close_title" is not translated in "cn" or "fr" (French) [MissingTranslation]
-  <string name="pref_line_close_title">Close closed lines</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1746: Error: "pref_line_close_summary" is not translated in "cn" or "fr" (French) [MissingTranslation]
-  <string name="pref_line_close_summary">Close lines of closed type</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1757: Error: "pref_with_continue_line_title" is not translated in "cn" or "fr" (French) [MissingTranslation]
-  <string name="pref_with_continue_line_title">Line join</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1758: Error: "pref_with_continue_line_summary" is not translated in "cn" or "fr" (French) [MissingTranslation]
-  <string name="pref_with_continue_line_summary">Enable line join</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1888: Error: "pref_3d_sketch_title" is not translated in "fr" (French) [MissingTranslation]
-  <string name="pref_3d_sketch_title">3D modeling</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1889: Error: "pref_3d_sketch_summary" is not translated in "fr" (French) [MissingTranslation]
-  <string name="pref_3d_sketch_summary">Enable 3D modeling (debug build only)</string>
+res/values/strings.xml:1760: Error: "pref_scalable_label_title" is not translated in "de" (German), "fr" (French), "es" (Spanish) [MissingTranslation]
+  <string name="pref_scalable_label_title">Scaling labels</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1761: Error: "pref_scalable_label_summary" is not translated in "de" (German), "fr" (French), "es" (Spanish) [MissingTranslation]
+  <string name="pref_scalable_label_summary">Labels scale with the zoom</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1762: Error: "pref_slope_lside_title" is not translated in "de" (German) or "es" (Spanish) [MissingTranslation]
+  <string name="pref_slope_lside_title">Slope line l-side</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1890: Error: "pref_sketch_splay_buffer_title" is not translated in "cn" or "fr" (French) [MissingTranslation]
-  <string name="pref_sketch_splay_buffer_title">Splay buffer</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1891: Error: "pref_sketch_splay_buffer_summary" is not translated in "cn" or "fr" (French) [MissingTranslation]
-  <string name="pref_sketch_splay_buffer_summary">Section splay buffer [m]</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1953: Error: "welcome_db_version" is not translated in "fr" (French) [MissingTranslation]
-    <string name="welcome_db_version">Database v. %1$d, %2$d</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2086: Error: "info_surface" is not translated in "fr" (French) [MissingTranslation]
-    <string name="info_surface">Surface length</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2163: Error: "ctitle_sketch_h" is not translated in "fr" (French) [MissingTranslation]
-    <string name="ctitle_sketch_h" copyable="all">[H]</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2164: Error: "ctitle_sketch_v" is not translated in "fr" (French) [MissingTranslation]
-    <string name="ctitle_sketch_v" copyable="all">[V]</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2242: Error: "unsupported_extension" is not translated in "de" (German), "cn", "it" (Italian), "fr" (French) [MissingTranslation]
+res/values/strings.xml:1763: Error: "pref_slope_lside_summary" is not translated in "de" (German) or "es" (Spanish) [MissingTranslation]
+  <string name="pref_slope_lside_summary">Slope lines default l-side</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:2269: Error: "unsupported_extension" is not translated in "de" (German) or "cn" [MissingTranslation]
     <string name="unsupported_extension">Unsupported file extension %1$s</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2302: Error: "cpref_grid_extent_summary" is not translated in "fr" (French) [MissingTranslation]
-    <string name="cpref_grid_extent_summary">Grid extent around the survey plan-view</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-pt/strings.xml:1665: Warning: "afim" is a common misspelling; did you mean "a fim"? [Typos]
+res/values-pt/strings.xml:1692: Warning: "afim" is a common misspelling; did you mean "a fim"? [Typos]
   <string name="pref_full_affine_title">Transformação afim</string>
                                                       ^
-res/values-pt/strings.xml:1666: Warning: "afim" is a common misspelling; did you mean "a fim"? [Typos]
-  <string name="pref_full_affine_summary">Habilita transformação afim em croquis (permite distorcer alterando proporções e posição)</string>
-                                                                 ^
+res/values-pt/strings.xml:1693: Warning: "afim" is a common misspelling; did you mean "a fim"? [Typos]
+  <string name="pref_full_affine_summary">Habilitar transformação afim em croquis (permite distorcer alterando proporções e posição)</string>
+                                                                  ^
+res/values-cn/array.xml:66: Error: The array "闭环关闭" in values-cn has no declaration in the base values folder; this can lead to crashes when the resource is queried in a configuration that does not match this qualifier [ExtraTranslation]
+  <string-array name="闭环关闭">
+                ~~~~~~~~~~~
+res/values-bg/strings.xml:11: Warning: The resource string "tdx_stale" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+    <string name="tdx_stale" translatable="false">TopoDroid няма достъп до старата си папка .\nЗатворете приложението и дайте ДОСТЪП ДО ФАЙЛОВЕ през Настройки.\n\nВижте http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string>
+                             ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:29: Warning: The resource string "r_i_understood" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="r_i_understood" translatable="false">РАЗБРАХ</string> <!-- FIXME FIXME FIXME -->
+                                ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:34: Warning: The resource string "app_name" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+    <string name="app_name" translatable="false">TopoDroid-X</string>
+                            ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:40: Warning: The resource string "distox_label" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+    <string name="distox_label" translatable="false">DistoX</string>
+                                ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:41: Warning: The resource string "cave3d_label" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+    <string name="cave3d_label" translatable="false">Cave3D</string>
+                                ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:63: Warning: The resource string "lorem_ipsum" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+    <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string>
+                               ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:452: Warning: The resource string "format_closure" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+    <string name="format_closure" translatable="false">%1$s-%2$s: [%3$d] %4$.1f/%5$.1f (%6$.1f %7$.1f) %8$.1f %% (%9$.1f\u00b0)</string>
+                                  ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:692: Warning: The resource string "accuracy_amd" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+    <string name="accuracy_amd" translatable="false">A %1$.1f %% M %2$.1f %% D %3$.1f °</string>
+                                ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:832: Warning: The resource string "button_help" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+    <string name="button_help" translatable="false">\?</string>
+                               ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1286: Warning: The resource string "select_size" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+    <string name="select_size" translatable="false">  &lt;&lt; %1$d >></string>
+                               ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1380: Warning: The resource string "pref_cat_exportsvx" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_cat_exportsvx" translatable="false">Survex</string>
+                                    ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1381: Warning: The resource string "pref_cat_exportth" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_cat_exportth" translatable="false">Therion</string>
+                                   ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1382: Warning: The resource string "pref_cat_exportdat" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_cat_exportdat" translatable="false">Compass</string>
+                                    ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1383: Warning: The resource string "pref_cat_exporttro" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_cat_exporttro" translatable="false">VisualTopo</string>
+                                    ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1384: Warning: The resource string "pref_cat_exportsrv" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_cat_exportsrv" translatable="false">Walls</string>
+                                    ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1385: Warning: The resource string "pref_cat_exportsvg" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_cat_exportsvg" translatable="false">SVG</string>
+                                    ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1386: Warning: The resource string "pref_cat_exportdxf" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_cat_exportdxf" translatable="false">DXF</string>
+                                    ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1387: Warning: The resource string "pref_cat_exportshp" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_cat_exportshp" translatable="false">Shapefile</string>
+                                    ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1389: Warning: The resource string "pref_cat_exportgpx" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_cat_exportgpx" translatable="false">GPX</string>
+                                    ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1390: Warning: The resource string "pref_cat_exportkml" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_cat_exportkml" translatable="false">KML</string>
+                                    ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1391: Warning: The resource string "pref_cat_exportcsx" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_cat_exportcsx" translatable="false">cSurvey</string>
+                                    ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1392: Warning: The resource string "pref_cat_exportcsv" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_cat_exportcsv" translatable="false">CSV</string>
+                                    ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1456: Warning: The resource string "pref_with_debug_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_with_debug_title" translatable="false">Developer mode</string>
+                                       ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1457: Warning: The resource string "pref_with_debug_summary" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_with_debug_summary" translatable="false">Enable developer mode</string>
+                                         ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1895: Warning: The resource string "pref_algo_min_alpha_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_algo_min_alpha_title" translatable="false">Min-algo alpha</string>
+                                           ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1896: Warning: The resource string "pref_algo_min_alpha_summary" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_algo_min_alpha_summary" translatable="false">Min-algo adjustment factor (in [0,1])</string>
+                                             ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1897: Warning: The resource string "pref_algo_min_beta_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_algo_min_beta_title" translatable="false">Min-algo beta</string>
+                                          ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1898: Warning: The resource string "pref_algo_min_beta_summary" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_algo_min_beta_summary" translatable="false">Min-algo M dip weight</string>
+                                            ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1899: Warning: The resource string "pref_algo_min_gamma_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_algo_min_gamma_title" translatable="false">Min-algo gamma</string>
+                                           ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1900: Warning: The resource string "pref_algo_min_gamma_summary" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_algo_min_gamma_summary" translatable="false">Min-algo group G.x M.x weight</string>
+                                             ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1901: Warning: The resource string "pref_algo_min_delta_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_algo_min_delta_title" translatable="false">Min-algo delta</string>
+                                           ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1902: Warning: The resource string "pref_algo_min_delta_summary" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_algo_min_delta_summary" translatable="false">Min-algo group G^M.x weight</string>
+                                             ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1904: Warning: The resource string "pref_auto_cal_beta_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_auto_cal_beta_title" translatable="false">Auto-cal B</string>
+                                          ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1905: Warning: The resource string "pref_auto_cal_beta_summary" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_auto_cal_beta_summary" translatable="false">Auto-cal B (average)</string>
+                                            ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1906: Warning: The resource string "pref_auto_cal_eta_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_auto_cal_eta_title" translatable="false">Auto-cal E</string>
+                                         ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1907: Warning: The resource string "pref_auto_cal_eta_summary" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_auto_cal_eta_summary" translatable="false">Auto-cal E (sum)</string>
+                                           ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1908: Warning: The resource string "pref_auto_cal_gamma_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_auto_cal_gamma_title" translatable="false">Auto-cal G</string>
+                                           ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1909: Warning: The resource string "pref_auto_cal_gamma_summary" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_auto_cal_gamma_summary" translatable="false">Auto-cal G (matrix)</string>
+                                             ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1910: Warning: The resource string "pref_auto_cal_delta_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_auto_cal_delta_title" translatable="false">Auto-cal D</string>
+                                           ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1911: Warning: The resource string "pref_auto_cal_delta_summary" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+  <string name="pref_auto_cal_delta_summary" translatable="false">Auto-cal D (ellipse)</string>
+                                             ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:1979: Warning: The resource string "welcome_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+    <string name="welcome_title" translatable="false">TopoDroid %1$s</string>
+                                 ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:2087: Warning: The resource string "fractal_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+    <string name="fractal_title" translatable="false">Fractal result</string>
+                                 ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:2088: Warning: The resource string "fractal_cnt_total" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+    <string name="fractal_cnt_total" translatable="false">count</string>
+                                     ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:2089: Warning: The resource string "fractal_cnt_six" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+    <string name="fractal_cnt_six" translatable="false">6-neighbor</string>
+                                   ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:2090: Warning: The resource string "fractal_cnt_twentysix" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+    <string name="fractal_cnt_twentysix" translatable="false">26-neighbor</string>
+                                         ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:2091: Warning: The resource string "fractal_failed" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+    <string name="fractal_failed" translatable="false">Fractal compute failed</string>
+                                  ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:2092: Warning: The resource string "fractal_dimension" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+    <string name="fractal_dimension" translatable="false">Fractal dimension</string>
+                                     ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:2142: Warning: The resource string "focal" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+    <string name="focal" translatable="false">S</string>
+                         ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:2163: Warning: The resource string "dem_file" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+    <string name="dem_file" translatable="false">%1$s</string>
+                            ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:2169: Warning: The resource string "texture_file" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+    <string name="texture_file" translatable="false">%1$s</string>
+                                ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:2234: Warning: The resource string "walls_powercrust" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+    <string name="walls_powercrust" translatable="false">Powercrust</string>
+                                    ~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:2278: Warning: The resource string "done_fractals" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
+    <string name="done_fractals" translatable="false">Done fractals dims</string>
+                                 ~~~~~~~~~~~~~~~~~~~~
 res/values-fr/plurals.xml:4: Error: The quantity 'one' matches more than one specific number in this locale (0, 1), but the message did not include a formatting argument (such as %d). This is usually an internationalization error. See full issue explanation for more. [ImpliedQuantity]
     <item quantity="one">ATTENTION. Une donnée saturée</item>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -386,26 +437,29 @@ res/values-pt/plurals.xml:4: Error: The quantity 'one' matches more than one spe
 res/values-pt/plurals.xml:9: Error: The quantity 'one' matches more than one specific number in this locale (0, 1), but the message did not include a formatting argument (such as %d). This is usually an internationalization error. See full issue explanation for more. [ImpliedQuantity]
     <item quantity="one">1 dado lido</item>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:269: Warning: Inconsistent number of arguments in formatting string bad_manifest; found both 1 here and 0 in values-es/strings.xml [StringFormatCount]
+res/values/strings.xml:273: Warning: Inconsistent number of arguments in formatting string bad_manifest; found both 1 here and 0 in values-es/strings.xml [StringFormatCount]
     <string name="bad_manifest">Bad manifest file [%1$d]</string>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    res/values-es/strings.xml:265: Conflicting number of arguments (0) here
-res/values/strings.xml:634: Warning: Inconsistent number of arguments in formatting string shot_rename_unsafe; found both 1 here and 0 in values-fr/strings.xml [StringFormatCount]
+    res/values-es/strings.xml:266: Conflicting number of arguments (0) here
+res/values/strings.xml:641: Warning: Inconsistent number of arguments in formatting string shot_rename_unsafe; found both 1 here and 0 in values-fr/strings.xml [StringFormatCount]
     <string name="shot_rename_unsafe">Stations referenced by xsections:%1$s.\nRename shot ?</string>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    res/values-fr/strings.xml:629: Conflicting number of arguments (0) here
-res/values/strings.xml:635: Warning: Inconsistent number of arguments in formatting string shots_rename_unsafe; found both 1 here and 0 in values-fr/strings.xml [StringFormatCount]
+    res/values-fr/strings.xml:625: Conflicting number of arguments (0) here
+res/values/strings.xml:642: Warning: Inconsistent number of arguments in formatting string shots_rename_unsafe; found both 1 here and 0 in values-fr/strings.xml [StringFormatCount]
     <string name="shots_rename_unsafe">Stations referenced by xsections:\n%1$s.\nRename shots ?</string>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    res/values-fr/strings.xml:630: Conflicting number of arguments (0) here
-res/values-es/strings.xml:750: Warning: Inconsistent number of arguments in formatting string survey_stat_surface; found both 4 here and 3 in values/strings.xml [StringFormatCount]
+    res/values-fr/strings.xml:626: Conflicting number of arguments (0) here
+res/values-es/strings.xml:754: Warning: Inconsistent number of arguments in formatting string survey_stat_surface; found both 4 here and 3 in values/strings.xml [StringFormatCount]
     <string name="survey_stat_surface">Tomas de superficie %1$d # %2$d %3$.1f %4$s</string>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    res/values/strings.xml:761: Conflicting number of arguments (3) here
-res/values-es/strings.xml:2086: Warning: Inconsistent number of arguments in formatting string info_volume_value; found both 2 here and 1 in values/strings.xml [StringFormatCount]
+    res/values/strings.xml:768: Conflicting number of arguments (3) here
+res/values-es/strings.xml:2110: Warning: Inconsistent number of arguments in formatting string info_volume_value; found both 2 here and 1 in values/strings.xml [StringFormatCount]
     <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    res/values/strings.xml:2104: Conflicting number of arguments (1) here
+    res/values/strings.xml:2131: Conflicting number of arguments (1) here
+res/values-bg/plurals.xml:7: Warning: For language "bg" (Bulgarian) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="read_data">
+  ^
 res/values-de/plurals.xml:7: Warning: For language "de" (German) the following quantities are not relevant: zero [UnusedQuantity]
   <plurals name="read_data">
   ^
@@ -414,6 +468,9 @@ res/values-fr/plurals.xml:7: Warning: For language "fr" (French) the following q
   ^
 res/values-pt/plurals.xml:7: Warning: For language "pt" (Portuguese) the following quantities are not relevant: zero [UnusedQuantity]
   <plurals name="read_data">
+  ^
+res/values-bg/plurals.xml:11: Warning: For language "bg" (Bulgarian) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="read_calib_data">
   ^
 res/values-fr/plurals.xml:11: Warning: For language "fr" (French) the following quantities are not relevant: zero [UnusedQuantity]
   <plurals name="read_calib_data">
@@ -424,12 +481,162 @@ res/values-de/plurals.xml:12: Warning: For language "de" (German) the following 
 res/values-pt/plurals.xml:12: Warning: For language "pt" (Portuguese) the following quantities are not relevant: zero [UnusedQuantity]
   <plurals name="read_calib_data">
   ^
+res/values-bg/plurals.xml:15: Warning: For language "bg" (Bulgarian) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="found_calib_groups">
+  ^
 res/values-fr/plurals.xml:15: Warning: For language "fr" (French) the following quantities are not relevant: zero [UnusedQuantity]
   <plurals name="found_calib_groups">
   ^
 res/values-pt/plurals.xml:17: Warning: For language "pt" (Portuguese) the following quantities are not relevant: zero [UnusedQuantity]
   <plurals name="found_calib_groups">
   ^
+res/layout/drawing_shot_dialog.xml:25: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/shot_label"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/drawing_shot_dialog.xml:66: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout1"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/drawing_shot_dialog.xml:75: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/shot_comment"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/drawing_shot_dialog.xml:107: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout2"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/drawing_shot_dialog.xml:117: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/stretchbar"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/drawing_shot_dialog.xml:143: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout3"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/drawing_shot_dialog.xml:159: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout3b"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/fixed_add_dialog.xml:25: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+      android:layout_below="@id/edit_name"
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/fixed_add_dialog.xml:48: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+      android:layout_below="@id/layout1"
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/fixed_add_dialog.xml:97: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+      android:layout_below="@id/layout2"
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/fixed_add_dialog.xml:126: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+      android:layout_below="@id/layout3b"
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/fixed_add_dialog.xml:156: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout3c"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/fixed_add_dialog.xml:165: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/edit_comment"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/fixed_dialog.xml:40: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout0"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/fixed_dialog.xml:93: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout1"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/fixed_dialog.xml:120: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout3"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/fixed_dialog.xml:137: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout3b"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/fixed_dialog.xml:167: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout4"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/fixed_dialog.xml:204: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout5"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/fixed_dialog.xml:225: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout6"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/fixed_dialog.xml:245: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout7"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/multishot_dialog.xml:63: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout_renumber"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/multishot_dialog.xml:84: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout_swap"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/multishot_dialog.xml:105: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout_color"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/multishot_dialog.xml:167: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout_splays"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/multishot_dialog.xml:188: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout_bedding"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/plot_new_dialog.xml:45: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+       android:layout_below="@id/layout1"
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/plot_new_dialog.xml:78: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+      android:layout_below="@id/layout2"
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/plot_new_dialog.xml:111: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+      android:layout_below="@id/layout4"
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/projection_dialog.xml:102: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+     android:layout_below="@id/layout1"
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/shot_dialog.xml:59: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout1"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/shot_dialog.xml:67: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/shot_extra"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/shot_dialog.xml:74: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/shot_time"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/shot_dialog.xml:100: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+      android:layout_below="@id/layout2"
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/shot_dialog.xml:137: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout3"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/shot_dialog.xml:147: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/shot_comment"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/shot_dialog.xml:175: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout5"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/shot_dialog.xml:191: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout4"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/shot_dialog.xml:241: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout_lrud"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/shot_dialog.xml:294: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+      android:layout_below="@id/layout_lrud_data"
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/shot_dialog.xml:310: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+      android:layout_below="@id/layout4x"
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/shot_dialog.xml:327: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout_more"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/shot_new_dialog.xml:29: Warning: Invalid layout param in a LinearLayout: layout_alignParentTop [ObsoleteLayoutParam]
+      android:layout_alignParentTop="true"
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/shot_new_dialog.xml:66: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+      android:layout_below="@id/layout1"
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/shot_new_dialog.xml:123: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+      android:layout_below="@id/layout2"
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/shot_new_dialog.xml:176: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+      android:layout_below="@id/shot_backsight"
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/shot_new_dialog.xml:233: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+      android:layout_below="@id/layout3"
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/shot_new_dialog.xml:259: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+      android:layout_below="@id/radio5"
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/shot_new_dialog.xml:299: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+      android:layout_below="@id/layout4"
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/layout/survey_stat_dialog.xml:62: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
     <LinearLayout 
      ~~~~~~~~~~~~
@@ -439,12 +646,15 @@ res/layout/survey_stat_dialog.xml:83: Warning: This tag and its children can be 
 res/layout/survey_stat_dialog.xml:103: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
     <LinearLayout 
      ~~~~~~~~~~~~
-src/com/topodroid/TDX/DataHelper.java:609: Warning: Use Integer.valueOf(1) instead [UseValueOf]
+src/com/topodroid/TDX/DataHelper.java:613: Warning: Use Integer.valueOf(1) instead [UseValueOf]
               cnts.put( address, new Integer(1) );
                                  ~~~~~~~~~~~~~~
-src/com/topodroid/TDX/DataHelper.java:611: Warning: Use Integer.valueOf(cnt.intValue() + 1) instead [UseValueOf]
+src/com/topodroid/TDX/DataHelper.java:615: Warning: Use Integer.valueOf(cnt.intValue() + 1) instead [UseValueOf]
               cnts.put( address, new Integer( cnt.intValue() + 1 ) );
                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/geocode_dialog.xml:39: Warning: Use a layout_height of 0dp instead of fill_parent for better performance [InefficientWeight]
+     android:layout_height="fill_parent"
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/layout/menu.xml:11: Warning: Possible overdraw: Root element paints background @color/menu_background with a theme that also paints a background (inferred theme is @android:style/Theme.Holo) [Overdraw]
     android:background="@color/menu_background"
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -453,6 +663,9 @@ res/layout/tdinput_adapter.xml:6: Warning: Possible overdraw: Root element paint
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/raw/area_acolor_fragment.glsl: Warning: The resource R.raw.area_acolor_fragment appears to be unused [UnusedResources]
 res/raw/area_acolor_vertex.glsl: Warning: The resource R.raw.area_acolor_vertex appears to be unused [UnusedResources]
+res/values-cn/array.xml:66: Warning: The resource R.array.闭环关闭 appears to be unused [UnusedResources]
+  <string-array name="闭环关闭">
+                ~~~~~~~~~~~
 res/values/array.xml:704: Warning: The resource R.array.calibAlgo appears to be unused [UnusedResources]
   <string-array name="calibAlgo">
                 ~~~~~~~~~~~~~~~~
@@ -462,38 +675,41 @@ res/values/array.xml:710: Warning: The resource R.array.calibAlgoValue appears t
 res/layout/cave3d_openfile.xml:3: Warning: The resource R.layout.cave3d_openfile appears to be unused [UnusedResources]
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 ^
+res/values/help_pages.xml:94: Warning: The resource R.string.ShotEditMoreDialog appears to be unused [UnusedResources]
+  <string name="ShotEditMoreDialog" translatable="false">page_shot_edit2.htm</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~
 res/mipmap-anydpi-v26/ic_launcher_round.xml:2: Warning: The resource R.mipmap.ic_launcher_round appears to be unused [UnusedResources]
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
 ^
 res/raw/name_pos_hl_geometry.glsl: Warning: The resource R.raw.name_pos_hl_geometry appears to be unused [UnusedResources]
-res/values/strings.xml:173: Warning: The resource R.string.autocalib_not_supported appears to be unused [UnusedResources]
+res/values/strings.xml:176: Warning: The resource R.string.autocalib_not_supported appears to be unused [UnusedResources]
     <string name="autocalib_not_supported">Required calibration computation</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:190: Warning: The resource R.string.device_all_named appears to be unused [UnusedResources]
-    <string name="device_all_named">No device without name</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:469: Warning: The resource R.string.menu_device_add appears to be unused [UnusedResources]
-    <string name="menu_device_add">ADD UNNAMED</string> <!-- KEEP -->
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:487: Warning: The resource R.string.menu_calib_auto appears to be unused [UnusedResources]
+res/values/strings.xml:492: Warning: The resource R.string.menu_calib_auto appears to be unused [UnusedResources]
     <string name="menu_calib_auto">AUTO-CALIB</string>
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1039: Warning: The resource R.string.help_device_add appears to be unused [UnusedResources]
+res/values/strings.xml:1057: Warning: The resource R.string.help_device_add appears to be unused [UnusedResources]
     <string name="help_device_add">Add a device</string> <!-- KEEP -->
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1451: Warning: The resource R.string.pref_unnamed_device_title appears to be unused [UnusedResources]
-  <string name="pref_unnamed_device_title">Unnamed devices</string> <!-- KEEP -->
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1452: Warning: The resource R.string.pref_unnamed_device_summary appears to be unused [UnusedResources]
-  <string name="pref_unnamed_device_summary">Enable menu to enter device name</string> <!-- KEEP -->
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2352: Warning: The resource R.string.help_sketch_3d appears to be unused [UnusedResources]
+res/values/strings.xml:1272: Warning: The resource R.string.title_photo appears to be unused [UnusedResources]
+    <string name="title_photo">More shot edit</string>
+            ~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:2379: Warning: The resource R.string.help_sketch_3d appears to be unused [UnusedResources]
     <string name="help_sketch_3d" copyable="all">3D sketch lifting</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values-pt/strings.xml:836: Warning: Replace (c) with copyright symbol © (&#169;) ? [TypographyOther]
+res/values-bg/strings.xml:2053: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
+    <string name="title_equate_new">Добави сравняване ...</string>
+                                    ~~~~~~~~~~~~~~~~~~~~~
+res/values-bg/strings.xml:2165: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
+    <string name="dem_loading">Зареждане на повърхност ... моля, изчакайте</string>
+                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values-pt/strings.xml:842: Warning: Replace (c) with copyright symbol © (&#169;) ? [TypographyOther]
   <string name="layer_ceil">Cobertura (C)</string>
                             ~~~~~~~~~~~~~
-res/values/strings.xml:907: Warning: Replace (c) with copyright symbol © (&#169;) ? [TypographyOther]
+res/values-fr/strings.xml:899: Warning: Replace (c) with copyright symbol © (&#169;) ? [TypographyOther]
+    <string name="layer_ceil">Ceiling (C) plafond</string>
+                              ~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:918: Warning: Replace (c) with copyright symbol © (&#169;) ? [TypographyOther]
     <string name="layer_ceil">Ceiling (C)</string>
                               ~~~~~~~~~~~
 res/mipmap-xhdpi/ic_launcher.png: Warning: The following unrelated icon files have identical contents: iz_topodroid.png, ic_launcher.png [IconDuplicates]
@@ -506,4 +722,4 @@ res/layout/device_add_dialog.xml:57: Warning: Missing autofillHints attribute [A
 res/layout/device_add_dialog.xml:40: Warning: Hardcoded string "0000", should use @string resource [HardcodedText]
       android:hint="0000"
       ~~~~~~~~~~~~~~~~~~~
-118 errors, 52 warnings
+82 errors, 160 warnings

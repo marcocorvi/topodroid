@@ -9,7 +9,8 @@
 # BUILD_TOOLDIR="../../../build-tools/30.0.2"
 # BUILD_TOOLDIR="../../../build-tools/31.0.0"
 # BUILD_TOOLDIR="../../../build-tools/33.0.0-rc2"
-BUILD_TOOLDIR="../../../build-tools/34.0.0"
+# BUILD_TOOLDIR="../../../build-tools/34.0.0"
+BUILD_TOOLDIR="../../../build-tools/35.0.0"
 
 APP_NAME=TopoDroidX
 APP_RELEASE=${APP_NAME}-release

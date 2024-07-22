@@ -34,8 +34,8 @@ With Android-13 TopoDroid must store surveys in the app private folder under "An
   <string name="r_quit">QUIT</string>
 
     <string name="app_name" translatable="false">TopoDroid-X</string>
-    <string name="tdm_title" copyable="fr hu ru">TopoDroid Manager</string>
-    <string name="tdm_config_project" copyable="fr ru">project.tdconfig</string>
+    <string name="tdm_title" copyable="bg fr hu ru">TopoDroid Manager</string>
+    <string name="tdm_config_project" copyable="bg fr ru">project.tdconfig</string>
     <string name="double_back">Click BACK again to exit</string>
 
     <string name="new_survey_label">New survey</string>
@@ -825,8 +825,8 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="button_surface"    copyable="fr">Surface</string>
     <string name="button_no_extend" >No extend</string>
     <string name="button_eval"      >Raw</string>
-    <string name="button_evalg" copyable="hu">G</string>
-    <string name="button_evalm" copyable="hu">M</string>
+    <string name="button_evalg" copyable="all">G</string>
+    <string name="button_evalm" copyable="all">M</string>
     <string name="button_evalroll"  >Roll</string>
     <string name="button_eval_cal"  >Calibrated</string>
     <string name="button_gps_start" copyable="all">GPS</string>
@@ -1012,7 +1012,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="split_nothing">Nothing to split</string>
     <string name="flip_shots">Flip shots</string>
     <string name="copy_items">Copy items</string>
-    <string name="current_station_format" copyable="es">E %1$.1f N %2$.1f H %3$.1f</string>
+    <string name="current_station_format" copyable="all">E %1$.1f N %2$.1f H %3$.1f</string>
 
     <string name="man_preface">Preface</string>
     <string name="man_intro" copyable="fr">1. Introduction</string>
@@ -1425,7 +1425,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_import_datamode_title">Import datamode</string>
   <string name="pref_import_datamode_summary">Datamode for importing surveys</string>
 
-  <string name="pref_therion_config_title">Therion config</string>
+  <string name="pref_therion_config_title" copyable="bg" >Therion config</string>
   <string name="pref_therion_config_summary">Embed Therion config commands</string>
   <string name="pref_therion_maps_title">Therion maps first</string>
   <string name="pref_therion_maps_summary">Put Therion maps before survey data</string>
@@ -1498,7 +1498,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_survex_splay_summary">Add TO station to splays in Survex</string>
   <string name="pref_survex_lrud_title">Survex/Therion LRUD</string>
   <string name="pref_survex_lrud_summary">Add LRUD to Survex/Therion export</string>
-  <string name="pref_svg_program_title">SVG program</string>
+  <string name="pref_svg_program_title" copyable="bg">SVG program</string>
   <string name="pref_svg_program_summary">Target SVG program</string>
   <string name="pref_svg_grid_title">Grid</string>
   <string name="pref_svg_grid_summary">Add grid to SVG export</string>
@@ -1569,11 +1569,11 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_head_tail_summary">Get the number of new data before downloading them</string>
   <string name="pref_socket_delay_title">Connection delay</string>
   <string name="pref_socket_delay_summary">Connection delay to allow pairing [0.1 sec]</string>
-  <string name="pref_z6_workaround_title">Z6 workaround</string>
+  <string name="pref_z6_workaround_title" copyable="bg">Z6 workaround</string>
   <string name="pref_z6_workaround_summary">Z6 workaround data-download</string>
   <string name="pref_firmware_sanity_title">Firmware check</string>
   <string name="pref_firmware_sanity_summary">Enforce firmware sanity checks</string>
-  <string name="pref_crs_title" copyable="cn fr it pt">C R S </string>
+  <string name="pref_crs_title" copyable="bg cn fr it pt">C R S </string>
   <string name="pref_crs_summary">CRS name, as in Proj4</string>
   <string name="pref_neg_altitude_title">Neg. altitudes</string>
   <string name="pref_neg_altitude_summary">Allow negative altitudes</string>
@@ -1591,8 +1591,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_bric_zero_length_summary">Record BRIC zero-length shot</string>
   <string name="pref_bric_index_is_id_title">BRIC index is ID</string>
   <string name="pref_bric_index_is_id_summary">Use BRIC index as shot ID</string>
-  <string name="pref_sap5_bit16_bug_title">SAP5 bit-16 bug</string>
-  <string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 bug workaround</string>
+  <string name="pref_sap5_bit16_bug_title" copyable="bg">SAP5 bit-16 bug</string>
+  <string name="pref_sap5_bit16_bug_summary" copyable="bg">SAP5 bit-16 bug workaround</string>
 
   <string name="pref_plot_screen_title">SKETCH</string>
   <string name="pref_tool_line_title">LINES</string>
@@ -1697,7 +1697,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <!-- UNUSED string name="pref_bitmap_bgcolor_summary">Background color of PNG image of sketches</string -->
   <string name="pref_acad_version_title">DXF version</string>
   <string name="pref_acad_version_summary">DXF version</string>
-  <string name="pref_acad_spline_title">DXF splines</string>
+  <string name="pref_acad_spline_title" copyable="bg">DXF splines</string>
   <string name="pref_acad_spline_summary">DXF interpolated cubics</string>
   <string name="pref_acad_layer_title">Scrap layers</string>
   <string name="pref_acad_layer_summary">DXF layers by scraps</string>
