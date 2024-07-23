@@ -8,7 +8,7 @@
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->
 
-    <string name="tdx_stale" translatable="false">TopoDroid няма достъп до старата си папка .\nЗатворете приложението и дайте ДОСТЪП ДО ФАЙЛОВЕ през Настройки.\n\nВижте http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string>
+    <!-- DONT TRANSLATE string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string -->
     <!-- UNUSED string name="target_sdk" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nFinish ?</string -->
     <!-- UNUSED string name="target_sdk_stale" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nThis version cannot access the old folder and must stop.\nSee http://marcocorvi.altervista.org/TopoDroidAndAndroid11.html.</string -->
 
@@ -26,19 +26,15 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 С Android-13 TopoDroid трябва да съхранява картировките в отделна папка в „Android/data“. Имайте предвид, че тази папка обикновено се изтрива, когато деинсталирате приложението. За да потвърдите, въведете\n\"%1$s\"\в полето по-долу и натиснете бутона
   </string>
   <!-- UNUSED string name="r_checkboxes">You must confirm the checkbox to continue.</string -->
-  <string name="r_i_understood" translatable="false">РАЗБРАХ</string> <!-- FIXME FIXME FIXME -->
   <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
   <string name="r_continue">ПРОДЪЛЖИ</string>
   <string name="r_quit">ИЗХОД</string>
 
-    <string name="app_name" translatable="false">TopoDroid-X</string>
     <string name="tdm_title">TopoDroid Manager</string>
     <string name="tdm_config_project">project.tdconfig</string>
     <string name="double_back">Натиснете НАЗАД отново, за да излезете</string>
 
     <string name="new_survey_label">Нова картировка</string>
-    <string name="distox_label" translatable="false">DistoX</string>
-    <string name="cave3d_label" translatable="false">Cave3D</string>
 
     <!-- UNUSED string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string -->
     <string name="symbols_ask">Инсталиране на елементи за рисуване v.%1$s\?\n(Текущи v.%2$s)</string>
@@ -60,7 +56,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 Ако имате проблеми с връзката с DistoX, опитайте връзка \"без парола\".\n\n
 Има и други настройки за скиците (размер на икони, надписи, широчина на линии и др.), можете да ги зададете по-късно.\n
     </string>
-    <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string>
 
     <string name="POINT">ТОЧКА</string>
     <string name="LINE">ЛИНИЯ</string>
@@ -449,7 +444,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="no_undelete_paste">Няма елементи за възстановяване/поставяне</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f Азимут %5$.1f\"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f Наклон %5$.1f\"</string>
-    <string name="format_closure" translatable="false">%1$s-%2$s: [%3$d] %4$.1f/%5$.1f (%6$.1f %7$.1f) %8$.1f %% (%9$.1f\u00b0)</string>
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">ЗА ПРОГРАМАТА</string>
@@ -689,7 +683,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="accuracy_medium">Ниска точност</string>
     <!-- UNUSED string name="accuracy_high">Good accuracy</string -->
     <string name="accuracy_unreliable">Ненадеждни сензори</string>
-    <string name="accuracy_amd" translatable="false">A %1$.1f %% M %2$.1f %% D %3$.1f °</string>
 
     <string name="empty_clipboard">Празен клипборд</string>
     <string name="cannot_rename">Не може да преименувате картировката</string>
@@ -829,7 +822,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_eval_cal">Калибриран</string>
     <string name="button_gps_start">GPS</string>
     <!-- UNUSED string name="button_gps_stop"  >Stop</string -->
-    <string name="button_help" translatable="false">\?</string>
     <!-- UNUSED INCLINED_LEG string name="button_leg">Proj</string -->
     <string name="button_manual">Ръководство за потребителя</string>
     <!-- UNUSED string name="button_measure"   >Measure</string -->
@@ -1283,7 +1275,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_scraps">Скици в картировката</string>
     <string name="title_scraps_outline">Контури на скицата</string>
     <!-- UNUSED string name="title_select">Select</string -->
-    <string name="select_size" translatable="false">  &lt;&lt; %1$d >></string>
 
     <string name="title_settings_main">Основни настройки на TopoDroid</string>
     <string name="title_settings_export">Настройки за импортиране/експортиране на TopoDroid</string>
@@ -1377,19 +1368,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_cat_import_export">ИМПОРТ/ЕКСПОРТ</string>
   <string name="pref_cat_exportimport">ИМПОРТ</string>
   <string name="pref_cat_exportenable">АКТИВИРАНЕ</string>
-  <string name="pref_cat_exportsvx" translatable="false">Survex</string>
-  <string name="pref_cat_exportth" translatable="false">Therion</string>
-  <string name="pref_cat_exportdat" translatable="false">Compass</string>
-  <string name="pref_cat_exporttro" translatable="false">VisualTopo</string>
-  <string name="pref_cat_exportsrv" translatable="false">Walls</string>
-  <string name="pref_cat_exportsvg" translatable="false">SVG</string>
-  <string name="pref_cat_exportdxf" translatable="false">DXF</string>
-  <string name="pref_cat_exportshp" translatable="false">Shapefile</string>
-  <!-- UNUSED string name="pref_cat_exportpng" translatable="false">PNG</string NO_PNG -->
-  <string name="pref_cat_exportgpx" translatable="false">GPX</string>
-  <string name="pref_cat_exportkml" translatable="false">KML</string>
-  <string name="pref_cat_exportcsx" translatable="false">cSurvey</string>
-  <string name="pref_cat_exportcsv" translatable="false">CSV</string>
 
   <string name="pref_cat_calib">КАЛИБРАЦИИ</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
@@ -1453,8 +1431,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_packet_logger_summary">Активирай регистъра на пакетите</string>
   <string name="pref_th2_edit_title">Редактирай скици</string>
   <string name="pref_th2_edit_summary">Активирай редактиране на скици</string>
-  <string name="pref_with_debug_title" translatable="false">Developer mode</string>
-  <string name="pref_with_debug_summary" translatable="false">Enable developer mode</string>
 
   <string name="pref_bezier_step_title">Разстояние между точките</string>
   <string name="pref_bezier_step_summary">Макс. разстояние между точките (полилиния приблизително на криви) [m]</string>
@@ -1892,24 +1868,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <!-- UNUSED string name="pref_walls_xstep_title">Step</string -->
   <!-- UNUSED string name="pref_walls_xstep_summary">Separation of points along the wall [m]</string -->
 
-  <string name="pref_algo_min_alpha_title" translatable="false">Min-algo alpha</string>
-  <string name="pref_algo_min_alpha_summary" translatable="false">Min-algo adjustment factor (in [0,1])</string>
-  <string name="pref_algo_min_beta_title" translatable="false">Min-algo beta</string>
-  <string name="pref_algo_min_beta_summary" translatable="false">Min-algo M dip weight</string>
-  <string name="pref_algo_min_gamma_title" translatable="false">Min-algo gamma</string>
-  <string name="pref_algo_min_gamma_summary" translatable="false">Min-algo group G.x M.x weight</string>
-  <string name="pref_algo_min_delta_title" translatable="false">Min-algo delta</string>
-  <string name="pref_algo_min_delta_summary" translatable="false">Min-algo group G^M.x weight</string>
-
-  <string name="pref_auto_cal_beta_title" translatable="false">Auto-cal B</string>
-  <string name="pref_auto_cal_beta_summary" translatable="false">Auto-cal B (average)</string>
-  <string name="pref_auto_cal_eta_title" translatable="false">Auto-cal E</string>
-  <string name="pref_auto_cal_eta_summary" translatable="false">Auto-cal E (sum)</string>
-  <string name="pref_auto_cal_gamma_title" translatable="false">Auto-cal G</string>
-  <string name="pref_auto_cal_gamma_summary" translatable="false">Auto-cal G (matrix)</string>
-  <string name="pref_auto_cal_delta_title" translatable="false">Auto-cal D</string>
-  <string name="pref_auto_cal_delta_summary" translatable="false">Auto-cal D (ellipse)</string>
-
   <string name="pref_3d_sketch_title">3D моделиране</string>
   <string name="pref_3d_sketch_summary">Активирай 3D моделиране (само във версията за отстраняване на грешки)</string>
   <string name="pref_sketch_splay_buffer_title">Буфер за странични измервания</string>
@@ -1976,7 +1934,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="perm_microphone">\nМикрофон</string>
 
     <string name="welcome_db_version">База данни версия %1$d, %2$d</string>
-    <string name="welcome_title" translatable="false">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nБлагодарим Ви, че избрахте TopoDroid.
 \n\nTopoDroid е приложение с Open Source за Android за картиране на пещери с помощта на DistoX, BRIC и SAP.
@@ -2084,12 +2041,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="cmenu_sketch">SKETCHES</string -->
     <!-- UNUSED string name="cmenu_fractal" translatable="false">FRACTAL DIM.</string -->
 
-    <string name="fractal_title" translatable="false">Fractal result</string>
-    <string name="fractal_cnt_total" translatable="false">count</string>
-    <string name="fractal_cnt_six" translatable="false">6-neighbor</string>
-    <string name="fractal_cnt_twentysix" translatable="false">26-neighbor</string>
-    <string name="fractal_failed" translatable="false">Fractal compute failed</string>
-    <string name="fractal_dimension" translatable="false">Fractal dimension</string>
     <string name="illegal_value">Невалидна стойност</string>
 
     <!-- UNUSED string name="info_title">MODEL INFO</string -->
@@ -2139,7 +2090,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="proj_side">Страничен</string>
     <!-- UNUSED string name="proj_near">Near</string -->
     <!-- UNUSED string name="proj_far">Far</string -->
-    <string name="focal" translatable="false">S</string>
 
     <!-- UNUSED string name="query" formatted="false">Surveys: %d Shots: %d Stations: %d\nLength: %d Depth: %d</string -->
     <!-- UNUSED string name="cno_files">No files</string -->
@@ -2160,13 +2110,11 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="surface_gps">GPS трак</string>
     <string name="surface_east">Изток</string>
     <string name="surface_north">Север</string>
-    <string name="dem_file" translatable="false">%1$s</string>
     <string name="dem_load">Зареди дигитален модел на височините</string>
     <string name="dem_loading">Зареждане на повърхност ... моля, изчакайте</string>
     <string name="dem_failed">Неуспешно зареждане на дигитален модел на височините</string>
     <string name="dem_ok">Четене на данни за дигитален модел на височините</string>
     <string name="dem">Дигитален модел на височините (DEM)</string>
-    <string name="texture_file" translatable="false">%1$s</string>
     <string name="texture_load">Зареди дигитален теренен модел</string>
     <string name="texture_failed">Неуспешно зареждане на дигитален теренен модел</string>
     <string name="texture_ok">Чети файл с дигитален теренен модел</string>
@@ -2231,7 +2179,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
     <string name="walls_title">СТЕНИ</string>
     <string name="walls_convexhull">Изпъкнало тяло</string>
-    <string name="walls_powercrust" translatable="false">Powercrust</string>
     <string name="walls_hull">Тяло</string>
     <string name="walls_bubble">Балон</string>
     <string name="walls_tube">Тръба</string>
@@ -2275,7 +2222,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="warning_nogrant_camera">Няма разрешение за използване на камерата</string>
     <string name="no_permissions">Приложението не може да работи без необходимите разрешения</string>
 
-    <string name="done_fractals" translatable="false">Done fractals dims</string>
     <string name="done_convexhull">Стените на изпъкналото тяло са готови</string>
     <string name="fail_convexhull">Стените на изпъкналото тяло не могат да бъдат завършени</string>
     <string name="done_powercrust">Стените за powercrust са готови</string>
