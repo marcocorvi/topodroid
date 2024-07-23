@@ -8,7 +8,7 @@
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->
 
-    <string name="tdx_stale" translatable="false">TopoDroid няма достъп до старата си папка .\nЗатворете приложението и дайте ДОСТЪП ДО ФАЙЛОВЕ през Настройки.\n\nВижте http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string>
+    <!-- DONT TRANSLATE string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string -->
     <!-- UNUSED string name="target_sdk" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nFinish ?</string -->
     <!-- UNUSED string name="target_sdk_stale" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nThis version cannot access the old folder and must stop.\nSee http://marcocorvi.altervista.org/TopoDroidAndAndroid11.html.</string -->
 
