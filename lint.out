@@ -272,162 +272,6 @@ res/values-pt/strings.xml:1693: Warning: "afim" is a common misspelling; did you
 res/values-cn/array.xml:66: Error: The array "闭环关闭" in values-cn has no declaration in the base values folder; this can lead to crashes when the resource is queried in a configuration that does not match this qualifier [ExtraTranslation]
   <string-array name="闭环关闭">
                 ~~~~~~~~~~~
-res/values-bg/strings.xml:11: Warning: The resource string "tdx_stale" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-    <string name="tdx_stale" translatable="false">TopoDroid няма достъп до старата си папка .\nЗатворете приложението и дайте ДОСТЪП ДО ФАЙЛОВЕ през Настройки.\n\nВижте http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string>
-                             ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:29: Warning: The resource string "r_i_understood" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="r_i_understood" translatable="false">РАЗБРАХ</string> <!-- FIXME FIXME FIXME -->
-                                ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:34: Warning: The resource string "app_name" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-    <string name="app_name" translatable="false">TopoDroid-X</string>
-                            ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:40: Warning: The resource string "distox_label" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-    <string name="distox_label" translatable="false">DistoX</string>
-                                ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:41: Warning: The resource string "cave3d_label" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-    <string name="cave3d_label" translatable="false">Cave3D</string>
-                                ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:63: Warning: The resource string "lorem_ipsum" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-    <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string>
-                               ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:452: Warning: The resource string "format_closure" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-    <string name="format_closure" translatable="false">%1$s-%2$s: [%3$d] %4$.1f/%5$.1f (%6$.1f %7$.1f) %8$.1f %% (%9$.1f\u00b0)</string>
-                                  ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:692: Warning: The resource string "accuracy_amd" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-    <string name="accuracy_amd" translatable="false">A %1$.1f %% M %2$.1f %% D %3$.1f °</string>
-                                ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:832: Warning: The resource string "button_help" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-    <string name="button_help" translatable="false">\?</string>
-                               ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1286: Warning: The resource string "select_size" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-    <string name="select_size" translatable="false">  &lt;&lt; %1$d >></string>
-                               ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1380: Warning: The resource string "pref_cat_exportsvx" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_cat_exportsvx" translatable="false">Survex</string>
-                                    ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1381: Warning: The resource string "pref_cat_exportth" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_cat_exportth" translatable="false">Therion</string>
-                                   ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1382: Warning: The resource string "pref_cat_exportdat" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_cat_exportdat" translatable="false">Compass</string>
-                                    ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1383: Warning: The resource string "pref_cat_exporttro" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_cat_exporttro" translatable="false">VisualTopo</string>
-                                    ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1384: Warning: The resource string "pref_cat_exportsrv" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_cat_exportsrv" translatable="false">Walls</string>
-                                    ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1385: Warning: The resource string "pref_cat_exportsvg" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_cat_exportsvg" translatable="false">SVG</string>
-                                    ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1386: Warning: The resource string "pref_cat_exportdxf" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_cat_exportdxf" translatable="false">DXF</string>
-                                    ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1387: Warning: The resource string "pref_cat_exportshp" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_cat_exportshp" translatable="false">Shapefile</string>
-                                    ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1389: Warning: The resource string "pref_cat_exportgpx" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_cat_exportgpx" translatable="false">GPX</string>
-                                    ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1390: Warning: The resource string "pref_cat_exportkml" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_cat_exportkml" translatable="false">KML</string>
-                                    ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1391: Warning: The resource string "pref_cat_exportcsx" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_cat_exportcsx" translatable="false">cSurvey</string>
-                                    ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1392: Warning: The resource string "pref_cat_exportcsv" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_cat_exportcsv" translatable="false">CSV</string>
-                                    ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1456: Warning: The resource string "pref_with_debug_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_with_debug_title" translatable="false">Developer mode</string>
-                                       ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1457: Warning: The resource string "pref_with_debug_summary" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_with_debug_summary" translatable="false">Enable developer mode</string>
-                                         ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1895: Warning: The resource string "pref_algo_min_alpha_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_algo_min_alpha_title" translatable="false">Min-algo alpha</string>
-                                           ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1896: Warning: The resource string "pref_algo_min_alpha_summary" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_algo_min_alpha_summary" translatable="false">Min-algo adjustment factor (in [0,1])</string>
-                                             ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1897: Warning: The resource string "pref_algo_min_beta_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_algo_min_beta_title" translatable="false">Min-algo beta</string>
-                                          ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1898: Warning: The resource string "pref_algo_min_beta_summary" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_algo_min_beta_summary" translatable="false">Min-algo M dip weight</string>
-                                            ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1899: Warning: The resource string "pref_algo_min_gamma_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_algo_min_gamma_title" translatable="false">Min-algo gamma</string>
-                                           ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1900: Warning: The resource string "pref_algo_min_gamma_summary" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_algo_min_gamma_summary" translatable="false">Min-algo group G.x M.x weight</string>
-                                             ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1901: Warning: The resource string "pref_algo_min_delta_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_algo_min_delta_title" translatable="false">Min-algo delta</string>
-                                           ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1902: Warning: The resource string "pref_algo_min_delta_summary" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_algo_min_delta_summary" translatable="false">Min-algo group G^M.x weight</string>
-                                             ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1904: Warning: The resource string "pref_auto_cal_beta_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_auto_cal_beta_title" translatable="false">Auto-cal B</string>
-                                          ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1905: Warning: The resource string "pref_auto_cal_beta_summary" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_auto_cal_beta_summary" translatable="false">Auto-cal B (average)</string>
-                                            ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1906: Warning: The resource string "pref_auto_cal_eta_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_auto_cal_eta_title" translatable="false">Auto-cal E</string>
-                                         ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1907: Warning: The resource string "pref_auto_cal_eta_summary" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_auto_cal_eta_summary" translatable="false">Auto-cal E (sum)</string>
-                                           ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1908: Warning: The resource string "pref_auto_cal_gamma_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_auto_cal_gamma_title" translatable="false">Auto-cal G</string>
-                                           ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1909: Warning: The resource string "pref_auto_cal_gamma_summary" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_auto_cal_gamma_summary" translatable="false">Auto-cal G (matrix)</string>
-                                             ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1910: Warning: The resource string "pref_auto_cal_delta_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_auto_cal_delta_title" translatable="false">Auto-cal D</string>
-                                           ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1911: Warning: The resource string "pref_auto_cal_delta_summary" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-  <string name="pref_auto_cal_delta_summary" translatable="false">Auto-cal D (ellipse)</string>
-                                             ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:1979: Warning: The resource string "welcome_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-    <string name="welcome_title" translatable="false">TopoDroid %1$s</string>
-                                 ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:2087: Warning: The resource string "fractal_title" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-    <string name="fractal_title" translatable="false">Fractal result</string>
-                                 ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:2088: Warning: The resource string "fractal_cnt_total" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-    <string name="fractal_cnt_total" translatable="false">count</string>
-                                     ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:2089: Warning: The resource string "fractal_cnt_six" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-    <string name="fractal_cnt_six" translatable="false">6-neighbor</string>
-                                   ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:2090: Warning: The resource string "fractal_cnt_twentysix" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-    <string name="fractal_cnt_twentysix" translatable="false">26-neighbor</string>
-                                         ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:2091: Warning: The resource string "fractal_failed" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-    <string name="fractal_failed" translatable="false">Fractal compute failed</string>
-                                  ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:2092: Warning: The resource string "fractal_dimension" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-    <string name="fractal_dimension" translatable="false">Fractal dimension</string>
-                                     ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:2142: Warning: The resource string "focal" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-    <string name="focal" translatable="false">S</string>
-                         ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:2163: Warning: The resource string "dem_file" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-    <string name="dem_file" translatable="false">%1$s</string>
-                            ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:2169: Warning: The resource string "texture_file" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-    <string name="texture_file" translatable="false">%1$s</string>
-                                ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:2234: Warning: The resource string "walls_powercrust" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-    <string name="walls_powercrust" translatable="false">Powercrust</string>
-                                    ~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:2278: Warning: The resource string "done_fractals" is marked as translatable="false", but is translated to "bg" (Bulgarian) here [Untranslatable]
-    <string name="done_fractals" translatable="false">Done fractals dims</string>
-                                 ~~~~~~~~~~~~~~~~~~~~
 res/values-fr/plurals.xml:4: Error: The quantity 'one' matches more than one specific number in this locale (0, 1), but the message did not include a formatting argument (such as %d). This is usually an internationalization error. See full issue explanation for more. [ImpliedQuantity]
     <item quantity="one">ATTENTION. Une donnée saturée</item>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -697,10 +541,10 @@ res/values/strings.xml:1272: Warning: The resource R.string.title_photo appears 
 res/values/strings.xml:2379: Warning: The resource R.string.help_sketch_3d appears to be unused [UnusedResources]
     <string name="help_sketch_3d" copyable="all">3D sketch lifting</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:2053: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
+res/values-bg/strings.xml:2010: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
     <string name="title_equate_new">Добави сравняване ...</string>
                                     ~~~~~~~~~~~~~~~~~~~~~
-res/values-bg/strings.xml:2165: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
+res/values-bg/strings.xml:2114: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
     <string name="dem_loading">Зареждане на повърхност ... моля, изчакайте</string>
                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values-pt/strings.xml:842: Warning: Replace (c) with copyright symbol © (&#169;) ? [TypographyOther]
@@ -722,4 +566,4 @@ res/layout/device_add_dialog.xml:57: Warning: Missing autofillHints attribute [A
 res/layout/device_add_dialog.xml:40: Warning: Hardcoded string "0000", should use @string resource [HardcodedText]
       android:hint="0000"
       ~~~~~~~~~~~~~~~~~~~
-82 errors, 160 warnings
+82 errors, 108 warnings
