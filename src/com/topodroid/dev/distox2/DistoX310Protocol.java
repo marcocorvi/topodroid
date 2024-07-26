@@ -335,8 +335,9 @@ public class DistoX310Protocol extends DistoXProtocol
     Resources res   = TDInstance.getResources();
     Handler handler = new Handler();
 
-    (new Thread() {
-      public void run() {
+    // FIXME cannot run on thread because the socket is closed by the DistoX310Comm
+    // (new Thread() {
+    //   public void run() {
         byte[] buf = new byte[259];
         buf[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte)0x3b;
         buf[1] = (byte)0;
@@ -431,8 +432,8 @@ public class DistoX310Protocol extends DistoXProtocol
             }
           } );
         }
-      }
-    } ).start();
+    //   }
+    // } ).start();
   }
 
   // @Override
@@ -444,8 +445,9 @@ public class DistoX310Protocol extends DistoXProtocol
     Resources res   = TDInstance.getResources();
     Handler handler = new Handler();
 
-    (new Thread() {
-      public void run() {
+    // FIXME cannot run on thread because the socket is closed by the DistoX310Comm
+    // (new Thread() {
+    //   public void run() {
         String filename = fp.getName();
         byte[] buf = new byte[256];
         boolean ok = true;
@@ -533,8 +535,8 @@ public class DistoX310Protocol extends DistoXProtocol
             }
           } );
         }
-      }
-    } ).start();
+    //   }
+    // } ).start();
   }
 
   // read a block (256 bytes) of firmware from the DistoX

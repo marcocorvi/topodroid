@@ -11,7 +11,7 @@
  */
 package com.topodroid.ui;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 // import com.topodroid.ui.MyDialog;
 import com.topodroid.TDX.TopoDroidApp;
 // import com.topodroid.TDX.TDandroid;
