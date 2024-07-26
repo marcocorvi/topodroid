@@ -238,7 +238,7 @@ public class DistoX310Comm extends DistoXComm
     if ( blk == 0 ) return null;
     if ( connectSocketAny( address ) ) {
       if ( mProtocol instanceof DistoX310Protocol ) {
-        TDLog.v( "X310 comm firmware signature hw " + hw);
+        TDLog.v( "X310 comm firmware signature hw " + hw + " block " + blk );
         ret = ((DistoX310Protocol)mProtocol).readFirmwareBlock( blk );
       }
     }

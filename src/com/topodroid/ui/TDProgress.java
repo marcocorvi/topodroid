@@ -117,6 +117,7 @@ public class TDProgress extends MyDialog // Activity
         mBtnOk.setText( R.string.button_wait );
         mBtnClose.setVisibility( View.GONE );
         if ( mWhat == PROGRESS_UPLOAD ) {
+          TDLog.v("Progress: upload fw <" + mFilename + ">" );
           mApp.uploadFirmware( mFilename, this );
         } else {
           mApp.dumpFirmware( mFilename, this );

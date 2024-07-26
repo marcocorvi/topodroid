@@ -107,6 +107,7 @@ public class FirmwareDialog extends MyDialog
    */
   public void setFirmwareFile( String filename )
   {
+    TDLog.v("firmware dialog set file <" + filename + ">" );
     mETfile.setText( filename );
   }
 
