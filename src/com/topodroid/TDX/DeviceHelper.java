@@ -190,7 +190,7 @@ public class DeviceHelper extends DataSetObservable
   // ----------------------------------------------------------------------
   // CALIBRATION DATA
 
-  /** mark a calibration data "deleted"
+  /** mark a calibration data status (either "delete" or "normal")
    * @param cid    calibration ID
    * @param id     data ID
    * @param delete whether to mark the date "deleted" or "normal"

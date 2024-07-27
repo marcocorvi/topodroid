@@ -250,7 +250,7 @@
      <!-- item name="romanian">Română</item -->
      <!-- item name="slovak">Slovenčina</item -->
      <!-- item name="slovenian">Slovenščina</item -->
-     <!-- item name="bulgarian">Български</item -->
+     <item name="bulgarian">Български</item>
      <item name="chinese">中文</item>
      <!-- item name="ukrainian">Українська</item -->
      <item name="hungarian">Magyar</item>
@@ -268,7 +268,7 @@
      <!-- item name="romanian">ro</item -->
      <!-- item name="slovak">sk</item -->
      <!-- item name="slovenian">sl</item -->
-     <!-- item name="bulgarian">bg</item -->
+     <item name="bulgarian">bg</item>
      <item name="chinese">cn</item>
      <!-- item name="ukrainian">ua</item -->
      <item name="hungarian">hu</item>

@@ -3063,7 +3063,7 @@ public class TDSetting
 
   private static void setLocale( String locale, boolean load_symbols )
   {
-    // TDLog.v("SETTING set locale " + locale );
+    TDLog.v("SETTING set locale <" + locale + ">" );
     TDLocale.setTheLocale( locale );
     Resources res = TDInstance.getResources();
     if ( load_symbols ) {

@@ -240,6 +240,11 @@ public class CalibExport
                       long gid = data.insertGM( cid, gx, gy, gz, mx, my, mz );
                       String grp = vals[7].trim();
                       data.updateGMName( gid, cid, grp );
+                      if ( vals.length > 12 ) { // status can be only 0:normal or 1:delete
+                        if ( Integer.parseInt( vals[12] ) == 1 ) {
+                          data.deleteGM( cid, gid, true );
+                        }
+                      }
                       if ( two_sensors ) {
                         line = br.readLine();
                         line = line.replaceAll( " ", "" );
