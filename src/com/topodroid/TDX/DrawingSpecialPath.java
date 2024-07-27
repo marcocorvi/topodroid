@@ -67,7 +67,7 @@ public class DrawingSpecialPath extends DrawingPath
       // TDLog.v( "Drawing Special Path load data stream T " + t + " X " + ccx + " Y " + ccy );
       return new DrawingSpecialPath( t, ccx, ccy, lvl, scrap );
     } catch ( IOException e ) {
-      TDLog.Error( "SPECIAL in error " + e.getMessage() );
+      TDLog.e( "SPECIAL in error " + e.getMessage() );
     }
     return null;
   }
@@ -81,7 +81,7 @@ public class DrawingSpecialPath extends DrawingPath
   //     if ( version >= 401090 ) dis.readInt();
   //     if ( version >= 401160 ) dis.readInt();
   //   } catch ( IOException e ) {
-  //     TDLog.Error( "SPECIAL in error " + e.getMessage() );
+  //     TDLog.e( "SPECIAL in error " + e.getMessage() );
   //   }
   // }
 
@@ -222,7 +222,7 @@ public class DrawingSpecialPath extends DrawingPath
         dos.writeInt( (scrap >= 0)? scrap : mScrap );
       // TDLog.Log( TDLog.LOG_PLOT, "P " + name + " " + cx + " " + cy );
     } catch ( IOException e ) {
-      TDLog.Error( "POINT out error " + e.toString() );
+      TDLog.e( "POINT out error " + e.toString() );
     }
   }
 

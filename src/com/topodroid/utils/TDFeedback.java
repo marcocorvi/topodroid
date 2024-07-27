@@ -97,7 +97,7 @@ public class TDFeedback
       ToneGenerator toneG = new ToneGenerator( AudioManager.STREAM_ALARM, TDSetting.mBeepVolume );
       toneG.startTone( ToneGenerator.TONE_PROP_PROMPT, duration ); 
     } catch ( RuntimeException e ) {
-      TDLog.Error("ring the bell: exception " + e.getMessage() );
+      TDLog.e("ring the bell: exception " + e.getMessage() );
     }
   }
 
@@ -107,9 +107,9 @@ public class TDFeedback
       Vibrator vibrator = (Vibrator)ctx.getSystemService( Context.VIBRATOR_SERVICE );
       vibrator.vibrate(duration);
     } catch ( NullPointerException e ) {
-      TDLog.Error("vibrate: null pointer " + e.getMessage() );
+      TDLog.e("vibrate: null pointer " + e.getMessage() );
     } catch ( RuntimeException e ) {
-      TDLog.Error("vibrate: exception " + e.getMessage() );
+      TDLog.e("vibrate: exception " + e.getMessage() );
     }
   }
 

@@ -86,7 +86,7 @@ public class CommThread extends Thread
             TDUtil.slowDown( TDSetting.mWaitConn, "RF comm thread sleep interrupt");
           }
         } else if ( res == DistoX.DISTOX_ERR_OFF ) {
-          // TDLog.Error( "RF comm read_packet returns ERR_OFF " );
+          // TDLog.e( "RF comm read_packet returns ERR_OFF " );
           // if ( TDSetting.mCommType == 1 && TDSetting.mAutoReconnect ) { // FIXME ACL_DISCONNECT
           //   mApp.mDataDownloader.setConnected( false );
           //   mApp.notifyStatus();

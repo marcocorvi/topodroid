@@ -342,7 +342,7 @@ class ParserSurvex extends ImportParser
 	                    ++k;
 	                    break;
                           } catch ( NumberFormatException e ) {
-	                    TDLog.Error("SVX [E] " + line_nr + " Non-number units " + vals[k] );
+	                    TDLog.e("SVX [E] " + line_nr + " Non-number units " + vals[k] );
                           }
 		        }
 		        if ( k + 1 == vals_len ) {
@@ -350,11 +350,11 @@ class ParserSurvex extends ImportParser
                             scale  = Float.parseFloat( vals[k] );
 	                    break;
                           } catch ( NumberFormatException e ) {
-                            TDLog.Error("SVX [E] " + line_nr + " Non-number scale " + vals[k]);
+                            TDLog.e("SVX [E] " + line_nr + " Non-number scale " + vals[k]);
                           }
 		        }
                       } catch ( NumberFormatException e ) {
-                        TDLog.Error("SVX [E] " + line_nr + " Non-number zero " + vals[k]);
+                        TDLog.e("SVX [E] " + line_nr + " Non-number zero " + vals[k]);
                       }
                     }
 
@@ -406,7 +406,7 @@ class ParserSurvex extends ImportParser
                         factor = Float.parseFloat( vals[k] );
 		        ++k;
                       } catch ( NumberFormatException e ) {
-                        TDLog.Error( "SVX [E] " + line_nr + " units without factor " + line ); // this is OK
+                        TDLog.e( "SVX [E] " + line_nr + " units without factor " + line ); // this is OK
                       }
 		    }
 		    if ( k + 1 == vals_len ) {
@@ -438,7 +438,7 @@ class ParserSurvex extends ImportParser
                       state.mDeclination = declination;
                       if ( ! mApplyDeclination ) mDeclination = state.mDeclination;
                     } catch ( NumberFormatException e ) {
-                      TDLog.Error( "SVX [E] " + line_nr + " declination " + line );
+                      TDLog.e( "SVX [E] " + line_nr + " declination " + line );
 	            }
                   }      
                 }      
@@ -473,7 +473,7 @@ class ParserSurvex extends ImportParser
                                         Float.parseFloat( vals[3] ),
                                         Float.parseFloat( vals[4] ) ) );
                   } catch ( NumberFormatException e ) {
-                    TDLog.Error( "SVX [E] " + line_nr + " fix " + line );
+                    TDLog.e( "SVX [E] " + line_nr + " fix " + line );
                   }
                 }
               } else if ( cmd.equals("equate") ) {
@@ -533,7 +533,7 @@ class ParserSurvex extends ImportParser
 	        if ( ks > 0 ) {
                   --ks;
                 } else {
-                  TDLog.Error("SVX [E] " + line_nr + " endsurvey out of survey");
+                  TDLog.e("SVX [E] " + line_nr + " endsurvey out of survey");
 	        }
                 // path = path.substring(survey_pos[ks]); // return to previous survey_pos in path
 	      }
@@ -563,7 +563,7 @@ class ParserSurvex extends ImportParser
                     cln = cln * state.mScaleCln * state.mUnitCln - state.mZeroCln;
 
                   } catch ( NumberFormatException e ) {
-                    TDLog.Error( "SVX [E] " + line_nr + " data " + line );
+                    TDLog.e( "SVX [E] " + line_nr + " data " + line );
                   }
                   in_station = true;
 		}
@@ -621,7 +621,7 @@ class ParserSurvex extends ImportParser
                       shots.add( new ParserShot( from, to, len, ber, cln, 0.0f, ExtendType.EXTEND_RIGHT, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                   } catch ( NumberFormatException e ) {
-                    TDLog.Error( "SVX [E] " + line_nr + " data " + line );
+                    TDLog.e( "SVX [E] " + line_nr + " data " + line );
                   }
                 }
                 // FIXME other data types

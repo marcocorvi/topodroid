@@ -95,14 +95,14 @@ class ParserBricCsv extends ImportParser
 					ExtendType.EXTEND_UNSET, LegType.INVALID, false, false, false, "" ) );
             }
           } catch ( NumberFormatException e ) {
-            TDLog.Error( "ERROR " + mLineCnt + ": " + line + e.getMessage() );
+            TDLog.e( "ERROR " + mLineCnt + ": " + line + e.getMessage() );
           }
         }
         line = nextLine( br );
       }
     } catch ( IOException e ) {
       // TODO
-      TDLog.Error( "ERROR " + mLineCnt + ": " + line );
+      TDLog.e( "ERROR " + mLineCnt + ": " + line );
       throw new ParserException();
     }
     // TDLog.v( "Parser CSV shots "+ shots.size() + " splays "+ splays.size() );

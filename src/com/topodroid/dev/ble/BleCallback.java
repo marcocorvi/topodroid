@@ -90,7 +90,7 @@ public class BleCallback extends BluetoothGattCallback
   @Override
   public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic chrt, int status)
   {
-    // TDLog.f("BLE on chrt read: " + status );
+    // TDLog.t("BLE on chrt read: " + status );
     if ( isSuccess( status, "onCharacteristicRead" ) ) {
       String uuid_str = chrt.getUuid().toString();
       mComm.readedChrt( uuid_str, chrt.getValue() );
@@ -114,7 +114,7 @@ public class BleCallback extends BluetoothGattCallback
   @Override
   public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic chrt, int status)
   {
-    // TDLog.f("BLE on chrt write: " + status );
+    // TDLog.t("BLE on chrt write: " + status );
     if ( isSuccess( status, "onCharacteristicWrite" ) ) {
       String uuid_str = chrt.getUuid().toString();
       mComm.writtenChrt( uuid_str, chrt.getValue() );
@@ -169,7 +169,7 @@ public class BleCallback extends BluetoothGattCallback
       }
         
     } else {
-      TDLog.Error("BLE callback onConnectionStateChange error - status " + status );
+      TDLog.t("BLE callback onConnectionStateChange error - status " + status );
       mComm.notifyStatus( ConnectionState.CONN_WAITING );
       if ( status == CONNECTION_TIMEOUT  // 8
         || status == CONNECTION_133      // low level error
@@ -246,7 +246,7 @@ public class BleCallback extends BluetoothGattCallback
       String uuid_chrt_str = desc.getCharacteristic().getUuid().toString();
       mComm.writtenDesc( uuid_str, uuid_chrt_str, desc.getValue() );
     } else {
-      TDLog.Error( "BLE callback: desc write error - status " + status );
+      TDLog.t( "BLE callback: desc write error - status " + status );
       mComm.error( status, desc.getUuid().toString(), "onDescriptorWrite" );
     }
   }
@@ -263,7 +263,7 @@ public class BleCallback extends BluetoothGattCallback
     if ( isSuccess( status, "onMtuChanged" ) ) {
       mComm.changedMtu( mtu );
     } else {
-      TDLog.Error( "BLE callback: MTU change error");
+      TDLog.t( "BLE callback: MTU change error");
       mComm.error( status, "onMtuChange", "onMtuChanged" );
     }
   }
@@ -280,7 +280,7 @@ public class BleCallback extends BluetoothGattCallback
     if ( isSuccess( status, "onReadRemoteRssi" ) ) {
       mComm.readedRemoteRssi( rssi );
     } else {
-      TDLog.Error( "BLE callback: read RSSI error");
+      TDLog.t( "BLE callback: read RSSI error");
       mComm.error( status, "onReadRemoteRssi", "onReadRemoteRssi" );
     }
   }
@@ -325,7 +325,7 @@ public class BleCallback extends BluetoothGattCallback
   public void connectGatt( Context ctx, BluetoothDevice device )
   {
     closeGatt();
-    // TDLog.f( "BLE connect gatt");
+    // TDLog.t( "BLE connect gatt");
     // device.connectGatt( ctx, mAutoConnect, this );
     mDevice = device;
     try { 
@@ -345,7 +345,7 @@ public class BleCallback extends BluetoothGattCallback
    */
   public void disconnectCloseGatt( )
   { 
-    TDLog.f( "BLE disconnect close GATT");
+    TDLog.t( "BLE disconnect close GATT");
     // mWriteInitialized = false; 
     // mReadInitialized  = false; 
     if ( mGatt != null ) {
@@ -367,18 +367,18 @@ public class BleCallback extends BluetoothGattCallback
     // mWriteInitialized = false; 
     // mReadInitialized  = false; 
     if ( mGatt != null ) {
-      TDLog.f( "BLE disconnect GATT");
+      TDLog.t( "BLE disconnect GATT");
       try {
         mGatt.disconnect();
         // FIXME mGapp.close();
       } catch ( SecurityException e ) {
-        TDLog.Error("SECURITY GATT disconnect " + e.getMessage() );
+        TDLog.t("SECURITY GATT disconnect " + e.getMessage() );
         // TDToast.makeBad("Security error: GATT disconnect");
         // mComm.failure( ... );
       }
       mGatt = null;
     } else {
-      TDLog.f( "BLE disconnect GATT - already null");
+      TDLog.t( "BLE disconnect GATT - already null");
     }
   }
   // ---------------------------------------------------------------------
@@ -518,7 +518,7 @@ public class BleCallback extends BluetoothGattCallback
 
   public boolean readChrt( UUID srvUuid, UUID chrtUuid )
   {
-    // TDLog.f( "BLE read chrt");
+    // TDLog.t( "BLE read chrt");
     BluetoothGattCharacteristic chrt = getReadChrt( srvUuid, chrtUuid );
     try {
       return chrt != null && mGatt.readCharacteristic( chrt );
@@ -537,15 +537,15 @@ public class BleCallback extends BluetoothGattCallback
    */
   public boolean writeChrt(  UUID srvUuid, UUID chrtUuid, byte[] bytes )
   {
-    // TDLog.f( "BLE write chrt");
+    // TDLog.t( "BLE write chrt");
     BluetoothGattCharacteristic chrt = getWriteChrt( srvUuid, chrtUuid );
     if ( chrt == null ) {
-      TDLog.Error( "BLE callback writeChrt null chrt ");
+      TDLog.t( "BLE callback writeChrt null chrt ");
       return false;
     }
     int write_type = BleUtils.getChrtWriteType( chrt );
     if ( write_type < 0 ) {
-      TDLog.Error( "BLE callback writeChrt neg type " + write_type );
+      TDLog.t( "BLE callback writeChrt neg type " + write_type );
       return false;
     }
     chrt.setWriteType( write_type );
@@ -612,7 +612,7 @@ public class BleCallback extends BluetoothGattCallback
 
   public BluetoothGattCharacteristic getReadChrt( UUID srvUuid, UUID chrtUuid )
   {
-    // TDLog.f( "BLE get read chrt");
+    // TDLog.t( "BLE get read chrt");
     if ( mGatt == null ) {
       // TDLog.v( "BLE callback: null gatt");
       return null;
@@ -636,7 +636,7 @@ public class BleCallback extends BluetoothGattCallback
 
   public BluetoothGattCharacteristic getWriteChrt( UUID srvUuid, UUID chrtUuid )
   {
-    // TDLog.f( "BLE get write chrt");
+    // TDLog.t( "BLE get write chrt");
     if ( mGatt == null ) return null;
     BluetoothGattService srv = mGatt.getService( srvUuid );
     if ( srv  == null ) return null;
@@ -678,7 +678,7 @@ public class BleCallback extends BluetoothGattCallback
           ret = (boolean)refresh.invoke( mGatt );
         }
       } catch ( Exception e ) {
-        TDLog.Error("BLE failed refresh" );
+        TDLog.t("BLE failed refresh" );
       }
     }
     return ret;

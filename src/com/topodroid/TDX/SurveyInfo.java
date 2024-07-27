@@ -119,7 +119,7 @@ public class SurveyInfo
           decl = Float.parseFloat( decl_str );
 	  if ( decl < -360 || decl > 360 ) decl = DECLINATION_UNSET;
         } catch ( NumberFormatException e ) {
-          TDLog.Error( "parse Float error: declination " + decl_str );
+          TDLog.e( "parse Float error: declination " + decl_str );
         }
       }
     }
@@ -139,7 +139,7 @@ public class SurveyInfo
         float decl = Float.parseFloat( decl_str );
         if ( decl < -360 || decl > 360 ) return true;
       } catch ( NumberFormatException e ) {
-        TDLog.Error( "parse Float error: declination " + decl_str );
+        TDLog.e( "parse Float error: declination " + decl_str );
         return true;
       }
     }

@@ -189,7 +189,7 @@ class CurrentStationDialog extends MyDialog
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
     if ( ! ( view instanceof TextView ) ) {
-      TDLog.Error("current station view instance of " + view.toString() );
+      TDLog.e("current station view instance of " + view.toString() );
       return;
     }
     String name = ((TextView) view).getText().toString();

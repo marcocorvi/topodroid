@@ -653,7 +653,7 @@ public class GlLines extends GlShape
     //     bindDataUColor( mvpMatrix, acolor );
     //   }
     } else { 
-      TDLog.Error("Lines unexpected color mode " + mColorMode );
+      TDLog.e("Lines unexpected color mode " + mColorMode );
       return; 
     }
 

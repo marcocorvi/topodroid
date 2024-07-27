@@ -170,7 +170,7 @@ class GeomagLib
       if ( UTMParameters != null ) {
         elements.GV = elements.Decl - UTMParameters.ConvergenceOfMeridians;
       } else {
-        TDLog.Error("Null UTM params");
+        TDLog.e("Null UTM params");
         elements.GV = elements.Decl;
       }
     }

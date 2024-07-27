@@ -124,7 +124,7 @@ public class DeviceHelper extends DataSetObservable
     try {
       myDB = openHelper.getWritableDatabase();
       if ( myDB == null ) {
-        TDLog.Error( "failed get writable database " + database_name );
+        TDLog.e( "failed get writable database " + database_name );
         return;
       }
 
@@ -137,7 +137,7 @@ public class DeviceHelper extends DataSetObservable
 
     } catch ( SQLiteException e ) {
       myDB = null;
-      TDLog.Error( "Failed to get device DB " + e.getMessage() );
+      TDLog.e( "Failed to get device DB " + e.getMessage() );
     }
   }
   
@@ -147,7 +147,7 @@ public class DeviceHelper extends DataSetObservable
    */
   private void logError( String msg, SQLiteException e )
   {
-    TDLog.Error("DB " + msg + ": " + e.getMessage() );
+    TDLog.e("DB " + msg + ": " + e.getMessage() );
   }
 
   /** handle disk I/O error
@@ -155,7 +155,7 @@ public class DeviceHelper extends DataSetObservable
    */
   private void handleDiskIOError( SQLiteDiskIOException e )
   {
-    TDLog.Error("DB disk error " + e.getMessage() );
+    TDLog.e("DB disk error " + e.getMessage() );
     if ( TopoDroidApp.mMainActivity != null ) {
       TopoDroidApp.mMainActivity.runOnUiThread( new Runnable() { public void run() { TDToast.makeBad( R.string.disk_io_error ); } } );
     }
@@ -171,7 +171,7 @@ public class DeviceHelper extends DataSetObservable
   private boolean doUpdate( String table, ContentValues cv, String where, String[] args, String msg )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "do update");
+      TDLog.e( ERROR_NULL_DB + "do update");
       return false; 
     }
     boolean ret = false;
@@ -198,7 +198,7 @@ public class DeviceHelper extends DataSetObservable
   void deleteGM( long cid, long id, boolean delete )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "delete GM");
+      TDLog.e( ERROR_NULL_DB + "delete GM");
       return;
     }
     if ( deleteGMStmt == null )
@@ -218,7 +218,7 @@ public class DeviceHelper extends DataSetObservable
   void doDeleteCalib( long cid )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "delete calib");
+      TDLog.e( ERROR_NULL_DB + "delete calib");
       return;
     }
     if ( doDeleteGMStmt == null )
@@ -283,7 +283,7 @@ public class DeviceHelper extends DataSetObservable
   public void updateGMsecond( long gid, long cid, long gx, long gy, long gz, long mx, long my, long mz )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "update GM second");
+      TDLog.e( ERROR_NULL_DB + "update GM second");
       return;
     }
     ContentValues cv = new ContentValues();
@@ -309,7 +309,7 @@ public class DeviceHelper extends DataSetObservable
   public long insertGM( long cid, long gx, long gy, long gz, long mx, long my, long mz )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "insert GM");
+      TDLog.e( ERROR_NULL_DB + "insert GM");
       return -1L;
     }
     ++ myNextCId;
@@ -368,7 +368,7 @@ public class DeviceHelper extends DataSetObservable
   {
     List< CBlock > list = new ArrayList<>();
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "select all GM");
+      TDLog.e( ERROR_NULL_DB + "select all GM");
       return list;
     }
     Cursor cursor = null;
@@ -422,7 +422,7 @@ public class DeviceHelper extends DataSetObservable
   CBlock selectGM( long id, long cid )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "select GM");
+      TDLog.e( ERROR_NULL_DB + "select GM");
       return null;
     }
     CBlock block = null;
@@ -468,7 +468,7 @@ public class DeviceHelper extends DataSetObservable
   public int selectCalibAlgo( long cid )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "select algo");
+      TDLog.e( ERROR_NULL_DB + "select algo");
       return CalibInfo.ALGO_AUTO;
     }
     int algo = CalibInfo.ALGO_AUTO;  // default 
@@ -494,7 +494,7 @@ public class DeviceHelper extends DataSetObservable
   long getCalibCID( String name, String device )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "get CID");
+      TDLog.e( ERROR_NULL_DB + "get CID");
       return -1L;
     }
     long id = -1L;
@@ -519,7 +519,7 @@ public class DeviceHelper extends DataSetObservable
   public CalibInfo selectCalibInfo( long cid )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "select calib info");
+      TDLog.e( ERROR_NULL_DB + "select calib info");
       return null;
     }
     CalibInfo info = null;
@@ -555,7 +555,7 @@ public class DeviceHelper extends DataSetObservable
   public void selectCalibError( long cid, CalibResult res )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "select calib error");
+      TDLog.e( ERROR_NULL_DB + "select calib error");
       return;
     }
     Cursor cursor = null;
@@ -583,7 +583,7 @@ public class DeviceHelper extends DataSetObservable
           str = cursor.getString(6);                               // FIXME ROLL_DIFFERENCE
           if ( str != null ) res.roll = Float.parseFloat( str );
         } catch ( NumberFormatException e ) {
-          TDLog.Error( "selectCalibError parse Float error: calib ID " + cid );
+          TDLog.e( "selectCalibError parse Float error: calib ID " + cid );
         }
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -596,7 +596,7 @@ public class DeviceHelper extends DataSetObservable
   public String selectCalibCoeff( long cid )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "select calib coeff");
+      TDLog.e( ERROR_NULL_DB + "select calib coeff");
       return null;
     }
     String coeff = null;
@@ -626,7 +626,7 @@ public class DeviceHelper extends DataSetObservable
     // TDLog.Log( TDLog.LOG_DB, "selectAllNames table " + table );
     List< String > list = new ArrayList<>();
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "select all names");
+      TDLog.e( ERROR_NULL_DB + "select all names");
       return list;
     }
     Cursor cursor = null;
@@ -656,7 +656,7 @@ public class DeviceHelper extends DataSetObservable
   {
     List< String > ret = new ArrayList<>();
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "select calibs");
+      TDLog.e( ERROR_NULL_DB + "select calibs");
       return ret;
     }
     Cursor cursor = null;
@@ -683,7 +683,7 @@ public class DeviceHelper extends DataSetObservable
   {
     List< CalibInfo > ret = new ArrayList<>();
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "select calibs info");
+      TDLog.e( ERROR_NULL_DB + "select calibs info");
       return ret;
     }
     Cursor cursor = null;
@@ -722,7 +722,7 @@ public class DeviceHelper extends DataSetObservable
   {
     Map< String, String > ret = new HashMap< String, String >();
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "select alias" );
+      TDLog.e( ERROR_NULL_DB + "select alias" );
       return ret;
     }
     Cursor cursor = null;
@@ -748,15 +748,15 @@ public class DeviceHelper extends DataSetObservable
   void setAlias( String alias, String name )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "set alias" );
+      TDLog.e( ERROR_NULL_DB + "set alias" );
       return;
     }
     if ( TDString.isNullOrEmpty( alias ) ) {
-      TDLog.Error( "DeviceHelper::setAlias null alias");
+      TDLog.e( "DeviceHelper::setAlias null alias");
       return;
     }
     if ( TDString.isNullOrEmpty( name ) ) {
-      TDLog.Error( "DeviceHelper::setAlias null name");
+      TDLog.e( "DeviceHelper::setAlias null name");
       return;
     }
 
@@ -790,11 +790,11 @@ public class DeviceHelper extends DataSetObservable
   String getAliasName( String alias )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "get alias name" );
+      TDLog.e( ERROR_NULL_DB + "get alias name" );
       return null;
     }
     if ( TDString.isNullOrEmpty( alias ) ) {
-      TDLog.Error( "DeviceHelper::getAliasName null alias");
+      TDLog.e( "DeviceHelper::getAliasName null alias");
       return null;
     }
     String ret = null;
@@ -816,11 +816,11 @@ public class DeviceHelper extends DataSetObservable
   void deleteAlias( String alias )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "delete alias" );
+      TDLog.e( ERROR_NULL_DB + "delete alias" );
       return;
     }
     if ( TDString.isNullOrEmpty( alias ) ) {
-      TDLog.Error( "DeviceHelper::deleteAlias null alias");
+      TDLog.e( "DeviceHelper::deleteAlias null alias");
       return;
     }
     if ( deleteAlias == null )
@@ -841,11 +841,11 @@ public class DeviceHelper extends DataSetObservable
   String getValue( String key )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "get value" );
+      TDLog.e( ERROR_NULL_DB + "get value" );
       return null;
     }
     if ( TDString.isNullOrEmpty( key ) ) {
-      TDLog.Error( "DeviceHelper::getValue null key");
+      TDLog.e( "DeviceHelper::getValue null key");
       return null;
     }
     String value = null;
@@ -870,15 +870,15 @@ public class DeviceHelper extends DataSetObservable
   void setValue( String key, String value )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "set value" );
+      TDLog.e( ERROR_NULL_DB + "set value" );
       return;
     }
     if ( TDString.isNullOrEmpty( key ) ) {
-      TDLog.Error( "DeviceHelper::setValue null key");
+      TDLog.e( "DeviceHelper::setValue null key");
       return;
     }
     if ( TDString.isNullOrEmpty( value ) ) {
-      TDLog.Error( "DeviceHelper::setValue null value");
+      TDLog.e( "DeviceHelper::setValue null value");
       return;
     }
 
@@ -922,7 +922,7 @@ public class DeviceHelper extends DataSetObservable
   boolean isSymbolEnabled( String name )
   { 
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "is symbol enabled" );
+      TDLog.e( ERROR_NULL_DB + "is symbol enabled" );
       return true;
     }
     String enabled = getValue( name );
@@ -953,7 +953,7 @@ public class DeviceHelper extends DataSetObservable
   private String getNameFromId( String table, long id )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "get name from id" );
+      TDLog.e( ERROR_NULL_DB + "get name from id" );
       return null;
     }
     String ret = null;
@@ -973,7 +973,7 @@ public class DeviceHelper extends DataSetObservable
   // private long getIdFromName( String table, String name ) 
   // {
   //   if ( myDB == null ) {
-  //     TDLog.Error( ERROR_NULL_DB + "get id from name" );
+  //     TDLog.e( ERROR_NULL_DB + "get id from name" );
   //     return -1L;
   //   }
   //   long id = -1L;
@@ -1002,7 +1002,7 @@ public class DeviceHelper extends DataSetObservable
   public long insertCalibInfo( String name, String date, String device, String comment, long algo, int sensors )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "insert calib info");
+      TDLog.e( ERROR_NULL_DB + "insert calib info");
       return -1L;
     }
     if ( hasCalibName( name ) ) return -1L;
@@ -1080,7 +1080,7 @@ public class DeviceHelper extends DataSetObservable
   // private long maxId( String table, long sid )
   // {
   //   if ( myDB == null ) {
-  //     TDLog.Error( ERROR_NULL_DB + "max ID");
+  //     TDLog.e( ERROR_NULL_DB + "max ID");
   //     return 1L;
   //   }
   //   long id = 1L;
@@ -1104,7 +1104,7 @@ public class DeviceHelper extends DataSetObservable
   {
     ArrayList< Device > ret = new ArrayList<>();
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "get devices");
+      TDLog.e( ERROR_NULL_DB + "get devices");
       return ret;
     }
     Cursor cursor = null;
@@ -1133,7 +1133,7 @@ public class DeviceHelper extends DataSetObservable
   Device getDevice( String addr )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "get device");
+      TDLog.e( ERROR_NULL_DB + "get device");
       return null;
     }
     Device ret = getDeviceByAddress( addr );
@@ -1199,7 +1199,7 @@ public class DeviceHelper extends DataSetObservable
   int getDeviceTail( String address )
   { 
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "get device tail");
+      TDLog.e( ERROR_NULL_DB + "get device tail");
       return 0;
     }
     int ret = 0;
@@ -1224,7 +1224,7 @@ public class DeviceHelper extends DataSetObservable
   void getDeviceHeadTail( String address, int[] head_tail )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "get device head-tail");
+      TDLog.e( ERROR_NULL_DB + "get device head-tail");
       return;
     }
     Cursor cursor = null;
@@ -1250,7 +1250,7 @@ public class DeviceHelper extends DataSetObservable
   void insertDevice( String address, String model, String name, String nickname )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "insert device");
+      TDLog.e( ERROR_NULL_DB + "insert device");
       return;
     }
     Cursor cursor = null;
@@ -1385,7 +1385,7 @@ public class DeviceHelper extends DataSetObservable
   private boolean hasName( String name, String table )
   {
     if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "has name");
+      TDLog.e( ERROR_NULL_DB + "has name");
       return false;
     }
     boolean ret = false;
@@ -1528,7 +1528,7 @@ public class DeviceHelper extends DataSetObservable
    long setCalib( String calib )
    {
      if ( myDB == null ) {
-      TDLog.Error( ERROR_NULL_DB + "set calib");
+      TDLog.e( ERROR_NULL_DB + "set calib");
        return 0L; 
      }
      myNextCId = 0;
@@ -1648,7 +1648,7 @@ public class DeviceHelper extends DataSetObservable
            );
 
            db.setTransactionSuccessful();
-         } catch ( SQLException e ) { TDLog.Error( "createTables exception " + e.toString() );
+         } catch ( SQLException e ) { TDLog.e( "createTables exception " + e.toString() );
          } finally {
            db.endTransaction();
            // db.setLockingEnabled( true );

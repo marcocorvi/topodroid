@@ -62,7 +62,7 @@ public class ExportKML extends ExportGeo
 
     TDLog.v( "KML export splays " + do_splays + " walls " + do_walls + " stations " + do_station );
     if ( ! getGeolocalizedData( data, 0.0f, 1.0f ) ) { // FIXME declination 0.0f
-      TDLog.Error( "KML no geolocalized station");
+      TDLog.e( "KML no geolocalized station");
       return false;
     }
 
@@ -342,7 +342,7 @@ public class ExportKML extends ExportGeo
       osw.close();
       return true;
     } catch ( IOException e ) {
-      TDLog.Error( "KML IO error " + e.getMessage() );
+      TDLog.e( "KML IO error " + e.getMessage() );
       return false;
     }
   }

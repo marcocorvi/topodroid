@@ -161,7 +161,7 @@ public class DrawingPhotoPath extends DrawingPointPath
       }
       return ret;
     } catch ( IOException e ) {
-      TDLog.Error( "LABEL in error " + e.getMessage() );
+      TDLog.e( "LABEL in error " + e.getMessage() );
       // TDLog.v( "LABEL in error " + e.getMessage() );
     }
     return null;
@@ -238,7 +238,7 @@ public class DrawingPhotoPath extends DrawingPointPath
         dos.writeInt( 0 );
       }
     } catch ( IOException e ) {
-      TDLog.Error( "PHOTO out error " + e.toString() );
+      TDLog.e( "PHOTO out error " + e.toString() );
     }
   }
 

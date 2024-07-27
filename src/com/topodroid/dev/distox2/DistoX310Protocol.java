@@ -327,8 +327,8 @@ public class DistoX310Protocol extends DistoXProtocol
   public void uploadFirmware( File fp, TDProgress progress )
   {
     if ( ! TDLog.isStreamFile() ) TDLog.setLogStream( TDLog.LOG_FILE ); // set log to file
-    // TDLog.f( "Firmware upload: protocol starts. file " + fp.getPath() );
-    TDLog.f( "X310-proto fw upload: starts. file " + fp.getPath() );
+    // TDLog.t( "Firmware upload: protocol starts. file " + fp.getPath() );
+    TDLog.t( "X310-proto fw upload: starts. file " + fp.getPath() );
 
     long len        = fp.length();
     String filename = fp.getName();
@@ -354,12 +354,12 @@ public class DistoX310Protocol extends DistoXProtocol
 
           try {
             for ( int addr = 0; /* addr < end_addr */; ++ addr ) {
-              TDLog.f( "X310-proto fw upload: block " + addr + " offset " + cnt );
+              TDLog.t( "X310-proto fw upload: block " + addr + " offset " + cnt );
               // memset(buf+3, 0, 256)
               for (int k=0; k<256; ++k) buf[3+k] = (byte)0xff;
               int nr = dis.read( buf, 3, 256 );
               if ( nr <= 0 ) {
-                TDLog.f( "X310-proto fw upload: file read failure. Result " + nr );
+                TDLog.t( "X310-proto fw upload: file read failure. Result " + nr );
                 break;
               }
               cnt += nr;
@@ -367,7 +367,7 @@ public class DistoX310Protocol extends DistoXProtocol
                 buf[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte)0x3b;
                 buf[1] = (byte)( addr & 0xff );
                 buf[2] = 0; // not necessary
-                TDLog.f( "X310-proto fw upload: write block " + String.format("%02x %02x %02x", buf[0], buf[1], buf[2] ) );
+                TDLog.t( "X310-proto fw upload: write block " + String.format("%02x %02x %02x", buf[0], buf[1], buf[2] ) );
                 mOut.write( buf, 0, 259 );
                 // if ( TDSetting.mPacketLog ) logPacket8( 1L, buf );
 
@@ -375,15 +375,15 @@ public class DistoX310Protocol extends DistoXProtocol
                 // if ( TDSetting.mPacketLog ) logPacket( 0L );
 
                 int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
-                TDLog.f( "X310-proto fw upload: ack " + String.format("%02x", mBuffer[0]) + " reply-block " + reply_addr ); 
+                TDLog.t( "X310-proto fw upload: ack " + String.format("%02x", mBuffer[0]) + " reply-block " + reply_addr ); 
                 if ( mBuffer[0] != MemoryOctet.BYTE_PACKET_FW_WRITE || addr != reply_addr ) {
                   msg = "X310-proto fw upload: fail at offset " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr;
-                  TDLog.f( msg );
+                  TDLog.t( msg );
                   ok = false;
                   break;
                 } else {
                   String msg1 = String.format( mContext.getResources().getString( R.string.firmware_uploaded ), "X310", cnt );
-                  TDLog.f( msg1 );
+                  TDLog.t( msg1 );
                   int cnt1 = cnt;
                   if ( progress != null ) {
                     handler.post( new Runnable() {
@@ -396,22 +396,22 @@ public class DistoX310Protocol extends DistoXProtocol
                 }
               } else {
                 msg = "X310-proto fw upload: skip offset " + cnt;
-                TDLog.f( msg );
+                TDLog.t( msg );
               }
             }
             fis.close();
           } catch ( EOFException e ) { // OK
-            TDLog.f( "X310-proto fw update: EOF " + e.getMessage() );
+            TDLog.t( "X310-proto fw update: EOF " + e.getMessage() );
           } catch ( IOException e ) { 
-            TDLog.f( "X310-proto fw update: IO error " + e.getMessage() );
+            TDLog.t( "X310-proto fw update: IO error " + e.getMessage() );
             ok = false;
           }
         } catch ( FileNotFoundException e ) {
-          TDLog.f( "X310-proto fw update: Not Found error " + e.getMessage() );
+          TDLog.t( "X310-proto fw update: Not Found error " + e.getMessage() );
           ok = false;
         }
         msg = "X310-proto fw update: result is " + (ok? "OK" : "FAIL") + " count " + cnt;
-        TDLog.f( msg );
+        TDLog.t( msg );
         int ret = ( ok ? cnt : -cnt );
         TDLog.v( "Dialog Firmware upload result: written " + ret + " bytes of " + len );
 
@@ -441,7 +441,7 @@ public class DistoX310Protocol extends DistoXProtocol
   public void dumpFirmware( File fp, TDProgress progress )
   {
     if ( ! TDLog.isStreamFile() ) TDLog.setLogStream( TDLog.LOG_FILE ); // set log to file
-    TDLog.f( "X310-proto fw dump: output file " + fp.getPath() );
+    TDLog.t( "X310-proto fw dump: output file " + fp.getPath() );
     Resources res   = TDInstance.getResources();
     Handler handler = new Handler();
 
@@ -459,7 +459,7 @@ public class DistoX310Protocol extends DistoXProtocol
           DataOutputStream dos = new DataOutputStream( fos );
           try {
             for ( int addr = 0; ; ++ addr ) {
-              TDLog.f( "X310-proto fw dump: block " + addr + " offset " + cnt );
+              TDLog.t( "X310-proto fw dump: block " + addr + " offset " + cnt );
               buf[0] = MemoryOctet.BYTE_PACKET_FW_READ; // (byte)0x3a;
               buf[1] = (byte)( addr & 0xff );
               buf[2] = 0; // not necessary
@@ -470,13 +470,13 @@ public class DistoX310Protocol extends DistoXProtocol
               // if ( TDSetting.mPacketLog ) logPacket( 0L );
 
               int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
-              TDLog.f( "X310-proto fw dump: read " + String.format("%02x", mBuffer[0]) + " reply-block " + reply_addr ); 
+              TDLog.t( "X310-proto fw dump: read " + String.format("%02x", mBuffer[0]) + " reply-block " + reply_addr ); 
               if ( mBuffer[0] != MemoryOctet.BYTE_PACKET_FW_READ || addr != reply_addr ) {
-                TDLog.f( "X310-proto fw dump: fail at offset " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr + " addr " + addr );
+                TDLog.t( "X310-proto fw dump: fail at offset " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr + " addr " + addr );
                 ok = false;
                 break;
               // } else {
-              //   TDLog.f( "Firmware dump: reply addr ok");
+              //   TDLog.t( "Firmware dump: reply addr ok");
               }
 
               mIn.readFully( buf, 0, 256 );
@@ -495,7 +495,7 @@ public class DistoX310Protocol extends DistoXProtocol
               if ( k == 256 ) break; // done if all bytes are 0xFF
               dos.write( buf, 0, 256 );
               String msg1 = String.format( mContext.getResources().getString( R.string.firmware_downloaded ), "X310", cnt );
-              TDLog.f( msg1 );
+              TDLog.t( msg1 );
               int cnt1 = cnt;
               if ( progress != null ) {
                 handler.post( new Runnable() {
@@ -516,7 +516,7 @@ public class DistoX310Protocol extends DistoXProtocol
         } catch ( FileNotFoundException e ) {
           ok = false;
         }
-        TDLog.f( "X310-proto fw dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
+        TDLog.t( "X310-proto fw dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
         int ret = ( ok ? cnt : -cnt );
         boolean ok2 = ok;
         String msg2 = ( ret > 0 )? String.format( res.getString(R.string.firmware_file_downloaded), filename, ret )
@@ -552,7 +552,7 @@ public class DistoX310Protocol extends DistoXProtocol
       buf[0] = MemoryOctet.BYTE_PACKET_FW_READ; // (byte)0x3a;
       buf[1] = (byte)( addr & 0xff );
       buf[2] = 0; // not necessary
-      TDLog.f("X310-proto fw readbloak: block " + addr );
+      TDLog.t("X310-proto fw readbloak: block " + addr );
       mOut.write( buf, 0, 3 );
       // if ( TDSetting.mPacketLog ) logPacket3( 1L, buf );
 
@@ -561,17 +561,17 @@ public class DistoX310Protocol extends DistoXProtocol
       // TDLog.v( "X310 dump firmware: " + String.format(" %02x", mBuffer[0] ) );
 
       int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
-      TDLog.f( "X310-proto fw readblock: buffer[0] " + mBuffer[0] + " reply_addr " + reply_addr );
+      TDLog.t( "X310-proto fw readblock: buffer[0] " + mBuffer[0] + " reply_addr " + reply_addr );
       if ( mBuffer[0] != MemoryOctet.BYTE_PACKET_FW_READ || addr != reply_addr ) {
-        TDLog.f( "X310-proto fw read block " + nr + ": fail buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
+        TDLog.t( "X310-proto fw read block " + nr + ": fail buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
         // ok = false;
       } else {
-        TDLog.f( "X310-proto fw read block " + nr + ": ok");
+        TDLog.t( "X310-proto fw read block " + nr + ": ok");
       }
 
       mIn.readFully( buf, 0, 256 );
     } catch ( IOException e ) {
-      TDLog.f( "X310-proto fw read block IO error " + e.getMessage() );
+      TDLog.t( "X310-proto fw read block IO error " + e.getMessage() );
       // TDLog.e( "X310-proto fw read block IO error " + e.getMessage() );
       // ok = false;
     }

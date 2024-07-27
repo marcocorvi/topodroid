@@ -104,7 +104,7 @@ public class CalibCheckDialog extends MyDialog
   public void onItemClick(AdapterView<?> parent, View view, int position, long idx )
   {
     if ( ! ( view instanceof TextView ) ) {
-      TDLog.Error("calib check view instance of " + view.toString() );
+      TDLog.e("calib check view instance of " + view.toString() );
       return;
     }
     String str = ((TextView) view).getText().toString();

@@ -60,11 +60,11 @@ class DEMasciiParser extends ParserDEM
   {
     // TDLog.v("DEM ascii X " + xwest + " " + xeast + " Y " + ysouth + " " + ynorth );
     if ( ! mValid ) {
-      TDLog.Error("DEM ascii parser read data. Not valid" );
+      TDLog.e("DEM ascii parser read data. Not valid" );
       return mValid;
     }
     if ( mBr == null ) {
-      TDLog.Error("DEM ascii parser read data. Null buffered reader" );
+      TDLog.e("DEM ascii parser read data. Null buffered reader" );
       return false;
     }
     // FileReader fr = null;
@@ -117,7 +117,7 @@ class DEMasciiParser extends ParserDEM
       }
 
       if ( mNr1 <= 1 || mNr2 <= 1 ) {
-        TDLog.Error("DEM size " + mNr1 + "x" + mNr2 + " invalid ");
+        TDLog.e("DEM size " + mNr1 + "x" + mNr2 + " invalid ");
         mValid = false;
       } else {
         // TDLog.v("DEM size " + mNr1 + "x" + mNr2 + " E " + mEast1 + " " + mEast2 + " N " + mNorth1 + " " + mNorth2 );
@@ -135,13 +135,13 @@ class DEMasciiParser extends ParserDEM
         }
       }
     } catch ( IOException e1 ) {
-      TDLog.Error("DEM ascii IO error " + e1.getMessage() );
+      TDLog.e("DEM ascii IO error " + e1.getMessage() );
       mValid = false;
     } catch ( NumberFormatException e2 ) {
-      TDLog.Error("DEM ascii number error " + e2.getMessage() );
+      TDLog.e("DEM ascii number error " + e2.getMessage() );
       mValid = false;
     } catch ( DemException e3 ) {
-      TDLog.Error("DEM ascii error " + e3.getMessage() );
+      TDLog.e("DEM ascii error " + e3.getMessage() );
       mValid = false;
     } finally {
       tryCloseStream();

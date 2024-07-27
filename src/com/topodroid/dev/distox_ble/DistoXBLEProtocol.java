@@ -126,7 +126,7 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
           }
         }
       } else {
-        TDLog.Error("XBLE not downloading");
+        TDLog.t("XBLE not downloading");
         return PACKET_NONE;
       }
     } else { // command packet
@@ -184,7 +184,7 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
           mCheckCRC = ((databuf[132] << 8) | (databuf[131] & 0xff)) & 0xffff;
           return PACKET_FLASH_BYTES_2;
         // } else {
-        //   // TDLog.Error("XBLE ...");
+        //   // TDLog.t("XBLE ...");
         //   return PACKET_ERROR;
         }
       }

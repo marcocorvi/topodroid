@@ -99,7 +99,7 @@ public class DrawingLabelPath extends DrawingPointPath
       ret.setOrientation( orientation );
       return ret;
     } catch ( IOException e ) {
-      TDLog.Error( "LABEL in error " + e.getMessage() );
+      TDLog.e( "LABEL in error " + e.getMessage() );
       // TDLog.v( "LABEL in error " + e.getMessage() );
     }
     return null;
@@ -117,7 +117,7 @@ public class DrawingLabelPath extends DrawingPointPath
   //     dis.readUTF();
   //     dis.readUTF();
   //   } catch ( IOException e ) {
-  //     TDLog.Error( "LABEL in error " + e.getMessage() );
+  //     TDLog.e( "LABEL in error " + e.getMessage() );
   //     // TDLog.v( "LABEL in error " + e.getMessage() );
   //   }
   // }
@@ -343,7 +343,7 @@ public class DrawingLabelPath extends DrawingPointPath
       dos.writeUTF( ( mOptions != null )? mOptions : "" );
       // TDLog.Log( TDLog.LOG_PLOT, "T " + " " + cx + " " + cy );
     } catch ( IOException e ) {
-      TDLog.Error( "LABEL out error " + e.toString() );
+      TDLog.e( "LABEL out error " + e.toString() );
     }
   }
 

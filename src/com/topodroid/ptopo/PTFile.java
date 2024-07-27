@@ -85,7 +85,7 @@ public class PTFile
     try {
       fs.write( b, 0, n );
     } catch ( IOException e ) {
-      TDLog.Error( "IO error on write " + n + " bytes: " + e.toString() );
+      TDLog.e( "IO error on write " + n + " bytes: " + e.toString() );
     }
   }
 
@@ -104,7 +104,7 @@ public class PTFile
 	    toread -= nn;
       } while ( nread < n );
     } catch ( IOException e ) {
-      TDLog.Error( "IO error on read " + n + " bytes: " + e.getMessage() );
+      TDLog.e( "IO error on read " + n + " bytes: " + e.getMessage() );
     } // RunTimeException from FileInputStream::read()
   }
 
@@ -120,7 +120,7 @@ public class PTFile
     try { 
       fs.write( b );
     } catch ( IOException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
   }
 
@@ -331,7 +331,7 @@ public class PTFile
         byte[] header = { 'T', 'o', 'p', (byte)3 };
         fs.write( header, 0, 4 );
       } catch( IOException e ) {
-        TDLog.Error( e.getMessage() );
+        TDLog.e( e.getMessage() );
       }
       PTFile.writeInt( fs, _trips.size() );
       for ( PTTrip t : _trips ) t.write( fs );

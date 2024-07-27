@@ -49,7 +49,10 @@ public class TDLog
     if ( mLogStream == log_stream ) return;
     Log.v( TAG, "LOG setting stream " + log_stream );
     mLogStream = log_stream;
-    if ( mLog == null ) setLogTarget();
+    if ( mLog == null ) {
+      Log.v( TAG, "LOG setting file stream ");
+      setLogTarget();
+    }
   }
 
   /** @return the thread ID string ("T-" followed by the thread id)
@@ -169,17 +172,17 @@ public class TDLog
     Log.v( TAG, msg + " " + millis );
   }
   
-  /** log on file stream
+  /** log with milliseconds prepended
    * @param msg  log message
-   * @note this is the same as Error()
    */
-  static public void f( String msg )
+  static public void t( String msg )
   {
     mMillis = System.currentTimeMillis() % 600000;
     if ( mLogStream == LOG_SYSLOG || mLog == null ) {
       Log.v( TAG, mMillis + " " + msg );
     } else {
       mLog.format( "%d: %s\n", mMillis, msg );
+      // mLog.flush(); // auto-flush ?
     }
   }
   
@@ -187,7 +190,7 @@ public class TDLog
    * @param msg  log message
    * @note this method starts to send logs to file
    */
-  static public void e( String msg )
+  static public void f( String msg )
   {
     if ( mLogStream != LOG_FILE ) {
       mLogStream = LOG_FILE;
@@ -218,14 +221,17 @@ public class TDLog
   //   }
   // }
 
-  static public void Error( String msg )
+  /** basic plain error log, message is prepended with the word "ERROR"
+   * @param msg error message
+   */
+  static public void e( String msg )
   {
     if ( /* LOG_ERR && */ msg != null ) { // NO_LOGS
-      mMillis = System.currentTimeMillis() % 600000;
+      // mMillis = System.currentTimeMillis() % 600000;
       if ( mLogStream == LOG_SYSLOG || mLog == null ) {
-        Log.v( TAG, mMillis + " " + msg );
+        Log.v( TAG, "ERROR " + msg );
       } else {
-        mLog.format( "%d: %s\n", mMillis, msg );
+        mLog.format( "ERROR %s\n", msg );
         // mLog.flush(); // auto-flush ?
       }
     }

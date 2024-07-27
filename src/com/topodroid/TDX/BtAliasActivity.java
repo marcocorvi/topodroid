@@ -85,7 +85,7 @@ public class BtAliasActivity extends Activity
       TopoDroidApp.mDData.setAlias( alias, bt_name );
       return true;
     } else {
-      TDLog.Error("Set Alias " + alias + " null BT name" );
+      TDLog.e("Set Alias " + alias + " null BT name" );
     }
     return false;
   }
@@ -153,7 +153,7 @@ public class BtAliasActivity extends Activity
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
     if ( ! ( view instanceof TextView ) ) {
-      TDLog.Error("BtAlias view instance of " + view.toString() );
+      TDLog.e("BtAlias view instance of " + view.toString() );
       return;
     }
     String item = ((TextView) view).getText().toString();
@@ -225,7 +225,7 @@ public class BtAliasActivity extends Activity
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        // TDLog.Error( "key down: code " + code );
+        // TDLog.e( "key down: code " + code );
     }
     return false;
   }

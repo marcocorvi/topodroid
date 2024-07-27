@@ -150,7 +150,7 @@ public class ProjectionSurface extends SurfaceView
             try {
               sleep(100);
             } catch ( InterruptedException e ) {
-                // TDLog.Error( "Interrupt");
+                // TDLog.e( "Interrupt");
             }
           }
         }

@@ -61,12 +61,12 @@ public class ImportVisualTopoTask extends ImportTask
         parser = new ParserVisualTopo( isr, str[0], true, mLrud, mLegFirst ); // apply_declination = true
       }
       if ( ! parser.isValid() ) {
-        TDLog.Error("invalid parser");
+        TDLog.e("invalid parser");
         return -2L;
       }
       if ( mApp.get() == null ) return -1L;
       if ( hasSurveyName( parser.mName ) ) {
-        TDLog.Error("survey " + parser.mName + " already present");
+        TDLog.e("survey " + parser.mName + " already present");
         return -1L;
       }
 

@@ -59,7 +59,7 @@ public class CavwayTakeShot extends AsyncTask<Integer, Integer, Integer >
       TDUtil.slowDown( TDSetting.mWaitShot );
     }
     for ( ; i>1; --i ) {
-      TDLog.f( "take shot " + i + " wait " + TDSetting.mWaitLaser + "/" + TDSetting.mWaitShot );
+      TDLog.t( "take shot " + i + " wait " + TDSetting.mWaitLaser + "/" + TDSetting.mWaitShot );
       if ( ! mApp.setCavwayLaser( Device.LASER_ON, 0, mLister, mDataType, false, false ) ) return i;
       TDUtil.slowDown( TDSetting.mWaitLaser ); 
       if ( ! mApp.setCavwayLaser( Device.MEASURE, 0, mLister, mDataType, false, false ) ) return i;

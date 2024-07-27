@@ -274,7 +274,7 @@ class FixedImportDialog extends MyDialog
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
     if ( ! ( view instanceof TextView ) ) {
-      TDLog.Error("fixed import view instance of " + view.toString() );
+      TDLog.e("fixed import view instance of " + view.toString() );
       return;
     }
     String item = ((TextView) view).getText().toString();
@@ -296,7 +296,7 @@ class FixedImportDialog extends MyDialog
         mTVh_geo.setText( h_geo_str );
         isSet = true;
       } catch ( NumberFormatException e ) {
-        TDLog.Error("Non-number input");
+        TDLog.e("Non-number input");
       }
     }
   }

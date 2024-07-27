@@ -137,7 +137,7 @@ class SymbolLine extends Symbol
       try {
         return Integer.parseInt( vals[k_val] );
       } catch( NumberFormatException e ) {
-        TDLog.Error("Non-integer value");
+        TDLog.e("Non-integer value");
       }
     }
     throw new NumberFormatException();
@@ -238,7 +238,7 @@ class SymbolLine extends Symbol
                 try {
                   mLevel = ( Integer.parseInt( vals[k] ) );
                 } catch( NumberFormatException e ) {
-                  TDLog.Error("Non-integer level");
+                  TDLog.e("Non-integer level");
                 }
               }
             } else if ( vals[k].equals("roundtrip") ) {
@@ -247,7 +247,7 @@ class SymbolLine extends Symbol
                 try {
                   mRoundTrip = ( Integer.parseInt( vals[k] ) );
                 } catch( NumberFormatException e ) {
-                  TDLog.Error("Non-integer roundtrip");
+                  TDLog.e("Non-integer roundtrip");
                 }
               }
   	    } else if ( vals[k].equals("closed") ) {
@@ -263,7 +263,7 @@ class SymbolLine extends Symbol
                 try {
   	          color = Integer.decode( vals[k] );
                 } catch ( NumberFormatException e ) {
-                  TDLog.Error("Non-integer color");
+                  TDLog.e("Non-integer color");
                 }
               }
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -271,7 +271,7 @@ class SymbolLine extends Symbol
                 try {
   	          alpha = Integer.decode( vals[k] );
                 } catch ( NumberFormatException e ) {
-                  TDLog.Error("Non-integer alpha");
+                  TDLog.e("Non-integer alpha");
                 }
   	      }
   	    } else if ( vals[k].equals("width") ) {
@@ -283,7 +283,7 @@ class SymbolLine extends Symbol
   	        //   width = Integer.parseInt( vals[k] ) * TDSetting.mLineThickness;
                 // }
               } catch ( NumberFormatException e ) {
-                TDLog.Error( filename + " parse width error: " + line );
+                TDLog.e( filename + " parse width error: " + line );
               }
   	    } else if ( vals[k].equals("dash") ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -308,7 +308,7 @@ class SymbolLine extends Symbol
                     }  
                     dash = new DashPathEffect( x, 0 );
                   } catch ( NumberFormatException e ) {
-                   TDLog.Error( filename + " parse dash error: " + line );
+                   TDLog.e( filename + " parse dash error: " + line );
                   }
                 }
               }
@@ -322,7 +322,7 @@ class SymbolLine extends Symbol
                     mStyleX = Integer.parseInt( vals[k].substring(1) );
                     if ( mStyleX <= 0 ) mStyleX = ItemDrawer.POINT_MAX; // FIXME INT_MAX
                   } catch ( NumberFormatException e ) {
-                    TDLog.Error("Non-integer style X");
+                    TDLog.e("Non-integer style X");
                   }
                 }
               }
@@ -367,7 +367,7 @@ class SymbolLine extends Symbol
                         // }
                       // }
                     } catch ( NumberFormatException e ) {
-                      TDLog.Error( filename + " parse moveTo point error: " + line );
+                      TDLog.e( filename + " parse moveTo point error: " + line );
                     }
                   } else if ( vals[k].equals("lineTo") ) { 
                     try {
@@ -391,7 +391,7 @@ class SymbolLine extends Symbol
                       //   }
                       // }
                     } catch ( NumberFormatException e ) {
-                      TDLog.Error( filename + " parse lineTo point error: " + line );
+                      TDLog.e( filename + " parse lineTo point error: " + line );
                     }
                   } else if ( vals[k].equals("cubicTo") ) { 
                     try {
@@ -441,7 +441,7 @@ class SymbolLine extends Symbol
                       //   }
                       // }
                     } catch ( NumberFormatException e ) {
-                      TDLog.Error( filename + " parse lineTo point error: " + line );
+                      TDLog.e( filename + " parse lineTo point error: " + line );
                     }
                   } else if ( vals[k].equals("addCircle") ) { 
                     try {
@@ -455,7 +455,7 @@ class SymbolLine extends Symbol
                       if ( x+r > xmax ) xmax = x+r;
 	              if ( y+r > ymax ) { ymax = y+r; } else if ( y-r < ymin ) { ymin = y-r; }
                     } catch ( NumberFormatException e ) {
-                      TDLog.Error( filename + " parse lineTo point error: " + line );
+                      TDLog.e( filename + " parse lineTo point error: " + line );
                     }
                   } else if ( vals[k].equals("endeffect") ) {
                     // TDLog.v("SL effect ends");

@@ -87,11 +87,11 @@ class GPS implements LocationListener
           mStatus = null;
           // setGPSoff();
           locManager = null;
-          // TDLog.Error( TODO );
+          // TDLog.e( TODO );
         } catch ( UnsupportedOperationException e ) {
           mStatus = null;
           locManager = null;
-          // TDLog.Error( TODO );
+          // TDLog.e( TODO );
         }
       }
     }
@@ -147,7 +147,7 @@ class GPS implements LocationListener
         locManager.removeUpdates( this );
         locManager.removeGpsStatusListener( this );
       } catch ( SecurityException e ) {
-        TDLog.Error( "Location manager error-1 " + e.getMessage() );
+        TDLog.e( "Location manager error-1 " + e.getMessage() );
       }
     }
     mIsLocating = false;
@@ -166,7 +166,7 @@ class GPS implements LocationListener
       locManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 0, this );
       mIsLocating = true;
     } catch ( SecurityException e ) {
-      TDLog.Error( "Location manager error-2 " + e.getMessage() );
+      TDLog.e( "Location manager error-2 " + e.getMessage() );
     }
     mNrSatellites = 0;
     return true;
@@ -223,9 +223,9 @@ class GPS implements LocationListener
           Location loc = locManager.getLastKnownLocation( LocationManager.GPS_PROVIDER );
           if ( loc != null ) assignLocation( loc );
         } catch ( IllegalArgumentException e ) {
-          TDLog.Error("GL onGpsStatusChanged IllegalArgumentException " );
+          TDLog.e("GL onGpsStatusChanged IllegalArgumentException " );
         } catch ( SecurityException e ) {
-          TDLog.Error("GL onGpsStatusChanged SecurityException " );
+          TDLog.e("GL onGpsStatusChanged SecurityException " );
         }
       }
     }

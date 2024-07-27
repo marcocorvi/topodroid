@@ -138,7 +138,7 @@ public class TdmSurvey
       mLoadedData = 1;
       // TDLog.v("Survey " + mName + " loaded data " + mShots.size() );
     } else {
-      TDLog.Error("TdManager survey <" + mName + ">: unable to get survey info");
+      TDLog.e("TdManager survey <" + mName + ">: unable to get survey info");
       mLoadedData = 0;
     }
     return (mLoadedData == 1);

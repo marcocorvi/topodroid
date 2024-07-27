@@ -47,7 +47,7 @@ class ListItemAdapter extends ArrayAdapter< String >
       try {
         v = li.inflate( R.layout.row, parent, false ); // NullPointerException
       } catch ( NullPointerException e ) {
-        TDLog.Error("ListItem adapter inflate view: null pointer");
+        TDLog.e("ListItem adapter inflate view: null pointer");
 	return null;
       }
     }

@@ -277,9 +277,9 @@ public class TDExporter
       bw.flush();
       bw.close();
     } catch ( FileNotFoundException e ) {
-      TDLog.Error("file not found");
+      TDLog.e("file not found");
     } catch ( IOException e ) {
-      TDLog.Error( "io error " + e.getMessage() );
+      TDLog.e( "io error " + e.getMessage() );
     } finally {
       if ( pfd != null ) {
         TDsafUri.closeFileDescriptor( pfd );
@@ -629,7 +629,7 @@ public class TDExporter
       bw.close();
       ret = 1;
     } catch ( IOException e ) {
-      TDLog.Error( "Failed cSurvey export: " + e.getMessage() );
+      TDLog.e( "Failed cSurvey export: " + e.getMessage() );
     }
     return ret;
   }
@@ -778,7 +778,7 @@ public class TDExporter
     // TDLog.v( "export as KML " + file.getFilename() );
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false, false ); // false: geoid altitude, false no convergence
     if ( TDUtil.isEmpty(nums) ) {
-      TDLog.Error( "Failed KML export: no geolocalized station");
+      TDLog.e( "Failed KML export: no geolocalized station");
       return 2;
     }
 
@@ -901,7 +901,7 @@ public class TDExporter
       bw.close();
       return 1;
     } catch ( IOException e ) {
-      TDLog.Error( "Failed KML export: " + e.getMessage() );
+      TDLog.e( "Failed KML export: " + e.getMessage() );
       return 0;
     }
   }
@@ -920,7 +920,7 @@ public class TDExporter
   {
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false, true ); // false: geoid altitude, true with convergence
     if ( TDUtil.isEmpty(nums) ) {
-      TDLog.Error( "Failed SHP export: no geolocalized station");
+      TDLog.e( "Failed SHP export: no geolocalized station");
       return 0;
     }
 
@@ -1023,7 +1023,7 @@ public class TDExporter
         (new Archiver()).compressFiles( os, dirname, files );
       }
     } catch ( IOException e ) {
-      TDLog.Error( "Failed SHP export: " + e.getMessage() );
+      TDLog.e( "Failed SHP export: " + e.getMessage() );
       return 0;
     } finally {
       // TDLog.v( "delete dir " + dirname );
@@ -1055,7 +1055,7 @@ public class TDExporter
   //   // TDLog.v( "export as GeoJSON " + file.getName() );
   //   List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, true, false ); // true: ellipsoid altitude, false no convergence
   //   if ( TDUtil.isEmpty(nums) ) {
-  //     TDLog.Error( "Failed GeoJSON export: no geolocalized station");
+  //     TDLog.e( "Failed GeoJSON export: no geolocalized station");
   //     return 2;
   //   }
 
@@ -1123,7 +1123,7 @@ public class TDExporter
   //     bw.close();
   //     return 1;
   //   } catch ( IOException e ) {
-  //     TDLog.Error( "Failed GeoJSON export: " + e.getMessage() );
+  //     TDLog.e( "Failed GeoJSON export: " + e.getMessage() );
   //     return 0;
   //   }
   // }
@@ -1161,7 +1161,7 @@ public class TDExporter
     // TDLog.v( "export as trackfile: " + file.getName() );
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false, false ); // false: geoid altitude, false no convergence
     if ( TDUtil.isEmpty(nums) ) {
-      TDLog.Error( "Failed KML export: no geolocalized station");
+      TDLog.e( "Failed KML export: no geolocalized station");
       return 2;
     }
 
@@ -1244,7 +1244,7 @@ public class TDExporter
       bw.close();
       return 1;
     } catch ( IOException e ) {
-      TDLog.Error( "Failed GPX export: " + e.getMessage() );
+      TDLog.e( "Failed GPX export: " + e.getMessage() );
       return 0;
     }
   }
@@ -1266,7 +1266,7 @@ public class TDExporter
     // TDLog.v( "export as trackfile: " + file.getName() );
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), TDUtil.M2FT, false, false ); // false geoid alt. - false no convergence
     if ( TDUtil.isEmpty(nums) ) {
-      TDLog.Error( "Failed PLT export: no geolocalized station");
+      TDLog.e( "Failed PLT export: no geolocalized station");
       return 2;
     }
 
@@ -1325,7 +1325,7 @@ public class TDExporter
       bw.close();
       return 1;
     } catch ( IOException e ) {
-      TDLog.Error( "Failed PLT export: " + e.getMessage() );
+      TDLog.e( "Failed PLT export: " + e.getMessage() );
       return 0;
     }
   }
@@ -1365,7 +1365,7 @@ public class TDExporter
     try {
       ptfile.addTrip( Integer.parseInt(vals[0]), Integer.parseInt(vals[1]), Integer.parseInt(vals[2]), info.getDeclination(), info.comment );
     } catch ( NumberFormatException e ) {
-      TDLog.Error( "export survey as TOP date parse error " + info.date );
+      TDLog.e( "export survey as TOP date parse error " + info.date );
     }
 
     List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
@@ -1415,7 +1415,7 @@ public class TDExporter
       os.close();
       return 1;
     } catch ( IOException e ) {
-      TDLog.Error( "Failed PocketTopo export: " + e.getMessage() );
+      TDLog.e( "Failed PocketTopo export: " + e.getMessage() );
       return 0;
     }
   }
@@ -1570,7 +1570,7 @@ public class TDExporter
           bcw.flush();
           bcw.close();
         } catch ( IOException e ) {
-          TDLog.Error( "Failed Therion config export: " + e.getMessage() );
+          TDLog.e( "Failed Therion config export: " + e.getMessage() );
         }
       }
     }
@@ -1596,7 +1596,7 @@ public class TDExporter
       // TDLog.Log( TDLog.LOG_IO, "export Therion " + file.getName() );
       // BufferedWriter bw = TDFile.getMSwriter( "th", surveyname + ".th", "text/th" );
       if ( bw == null ) {
-        TDLog.Error("cannot get MS therion file");
+        TDLog.e("cannot get MS therion file");
         return 0;
       }
       PrintWriter pw = new PrintWriter( bw );
@@ -1910,7 +1910,7 @@ public class TDExporter
 
       return 1;
     } catch ( IOException e ) {
-      TDLog.Error( "Failed Therion export: " + e.getMessage() );
+      TDLog.e( "Failed Therion export: " + e.getMessage() );
       return 0;
     }
   }
@@ -2289,7 +2289,7 @@ public class TDExporter
                     writeSurvexLRUD( pw, blk.mTo, computeLRUD( blk, list, false ), ul );
                     st_name = blk.mTo;
                   } else {
-                    TDLog.Error("ERROR unattached branch shot " + sh.from.name + " " + sh.to.name + " station " + st_name );
+                    TDLog.e("ERROR unattached branch shot " + sh.from.name + " " + sh.to.name + " station " + st_name );
                     break;
                   }
                 }
@@ -2326,7 +2326,7 @@ public class TDExporter
       bw.close();
       return 1;
     } catch ( IOException e ) {
-      TDLog.Error( "Failed Survex export: " + e.getMessage() );
+      TDLog.e( "Failed Survex export: " + e.getMessage() );
       return 0;
     }
   }
@@ -2417,7 +2417,7 @@ public class TDExporter
       bw.close();
       return 1;
     } catch ( IOException e ) {
-      TDLog.Error( "Failed CSV export: " + e.getMessage() );
+      TDLog.e( "Failed CSV export: " + e.getMessage() );
       return 0;
     }
   }
@@ -2556,7 +2556,7 @@ public class TDExporter
       bw.close();
       return 1;
     } catch ( IOException e ) {
-      TDLog.Error( "Failed CSV export: " + e.getMessage() );
+      TDLog.e( "Failed CSV export: " + e.getMessage() );
       return 0;
     }
   }
@@ -2690,7 +2690,7 @@ public class TDExporter
   //     bw.close();
   //     return filename;
   //   } catch ( IOException e ) {
-  //     TDLog.Error( "Failed QTopo export: " + e.getMessage() );
+  //     TDLog.e( "Failed QTopo export: " + e.getMessage() );
   //     return null;
   //   }
   // }
@@ -2982,7 +2982,7 @@ public class TDExporter
           m = Integer.parseInt( date.substring(5,7) );
           d = Integer.parseInt( date.substring(8,10) );
         } catch ( NumberFormatException e ) {
-          TDLog.Error( "export survey as DAT date parse error " + date );
+          TDLog.e( "export survey as DAT date parse error " + date );
         }
       }
       pw.format("SURVEY DATE: %02d %02d %04d", m, d, y ); // format "MM DD YYYY"
@@ -3075,7 +3075,7 @@ public class TDExporter
       bw.close();
       return 1;
     } catch ( IOException e ) {
-      TDLog.Error( "Failed Compass export: " + e.getMessage() );
+      TDLog.e( "Failed Compass export: " + e.getMessage() );
       return 0;
     }
   }
@@ -3410,7 +3410,7 @@ public class TDExporter
       bw.close();
       return 1;
     } catch ( IOException e ) {
-      TDLog.Error( "Failed TopoRobot export: " + e.getMessage() );
+      TDLog.e( "Failed TopoRobot export: " + e.getMessage() );
       return 0;
     }
   }
@@ -3616,7 +3616,7 @@ public class TDExporter
           m = Integer.parseInt( date.substring(5,7) );
           d = Integer.parseInt( date.substring(8,10) );
         } catch ( NumberFormatException e ) {
-          TDLog.Error( "export survey as DAT date parse error " + date );
+          TDLog.e( "export survey as DAT date parse error " + date );
         }
       }
       pw.format("#SURVEY DATE: %02d %02d %04d\r\n", m, d, y ); // format "MM DD YYYY"
@@ -3704,7 +3704,7 @@ public class TDExporter
       bw.close();
       return 1;
     } catch ( IOException e ) {
-      TDLog.Error( "Failed WinKarst export: " + e.getMessage() );
+      TDLog.e( "Failed WinKarst export: " + e.getMessage() );
       return 0;
     }
   }
@@ -3989,7 +3989,7 @@ public class TDExporter
       bw.close();
       return 1;
     } catch ( IOException e ) {
-      TDLog.Error( "Failed Walls export: " + e.getMessage() );
+      TDLog.e( "Failed Walls export: " + e.getMessage() );
       return 0;
     }
   }
@@ -4110,7 +4110,7 @@ public class TDExporter
   //     bw.close();
   //     return 1;
   //   } catch ( IOException e ) {
-  //     TDLog.Error( "Failed Walls export: " + e.getMessage() );
+  //     TDLog.e( "Failed Walls export: " + e.getMessage() );
   //     return 0;
   //   }
   // }
@@ -4171,7 +4171,7 @@ public class TDExporter
           m = Integer.parseInt( date.substring(5,7) );
           d = Integer.parseInt( date.substring(8,10) );
         } catch ( NumberFormatException e ) {
-          TDLog.Error( "export survey as SRV date parse error " + date );
+          TDLog.e( "export survey as SRV date parse error " + date );
         }
       }
    
@@ -4334,7 +4334,7 @@ public class TDExporter
       bw.close();
       return 1;
     } catch ( IOException e ) {
-      TDLog.Error( "Failed Walls export: " + e.getMessage() );
+      TDLog.e( "Failed Walls export: " + e.getMessage() );
       return 0;
     }
   }
@@ -4444,7 +4444,7 @@ public class TDExporter
           m = Integer.parseInt( date.substring(5,7) );
           d = Integer.parseInt( date.substring(8,10) );
         } catch ( NumberFormatException e ) {
-          TDLog.Error( "export survey as CAV date parse error " + date );
+          TDLog.e( "export survey as CAV date parse error " + date );
         }
       }
       pw.format("#survey ^%s%s", info.name, eol ); // NOTE "cav" has '^' in front of the cave name (?)
@@ -4530,7 +4530,7 @@ public class TDExporter
       bw.close();
       return 1;
     } catch ( IOException e ) {
-      TDLog.Error( "Failed Topo (cav) export: " + e.getMessage() );
+      TDLog.e( "Failed Topo (cav) export: " + e.getMessage() );
       return 0;
     }
   }
@@ -4613,7 +4613,7 @@ public class TDExporter
           m = TDUtil.parseMonth( date.substring(5,7) );
           d = TDUtil.parseDay( date.substring(8,10) );
         } catch ( NumberFormatException e ) {
-          TDLog.Error( "export survey as PLG date parse error " + date );
+          TDLog.e( "export survey as PLG date parse error " + date );
         }
       }
       // TDLog.v("Date Y " + y + " M " + m + " d " + d + " " + date );
@@ -4789,7 +4789,7 @@ public class TDExporter
       bw.close();
       return 1;
     } catch ( IOException e ) {
-      TDLog.Error( "Failed Polygon export: " + e.getMessage() );
+      TDLog.e( "Failed Polygon export: " + e.getMessage() );
       return 0;
     }
   }
@@ -4957,7 +4957,7 @@ public class TDExporter
       bw.close();
       return 1;
     } catch ( IOException e ) {
-      TDLog.Error( "Failed DXF export: " + e.getMessage() );
+      TDLog.e( "Failed DXF export: " + e.getMessage() );
       return 0;
     }
   }
@@ -5324,7 +5324,7 @@ public class TDExporter
       bw.close();
       return 1;
     } catch ( IOException e ) {
-      TDLog.Error( "Failed VisualTopo export: " + e.getMessage() );
+      TDLog.e( "Failed VisualTopo export: " + e.getMessage() );
       return 0;
     }
   }
@@ -5581,7 +5581,7 @@ public class TDExporter
       bw.close();
       return 1;
     } catch ( IOException e ) {
-      TDLog.Error( "Failed VisualTopo export: " + e.getMessage() );
+      TDLog.e( "Failed VisualTopo export: " + e.getMessage() );
       return 0;
     }
   }

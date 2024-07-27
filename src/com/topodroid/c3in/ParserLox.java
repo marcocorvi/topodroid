@@ -66,7 +66,7 @@ public class ParserLox extends TglParser
   private void readfile( DataInputStream dis ) throws ParserException
   {
     if ( dis == null ) {
-      TDLog.Error("Parser Lox: null input stream");
+      TDLog.e("Parser Lox: null input stream");
       throw new ParserException( "null LOX input", 0 );
     }
 

@@ -584,7 +584,7 @@ public class SapComm extends TopoDroidComm
    */
   public void error( int status, String extra, String what )
   {
-    TDLog.Error("SAP comm: error " + status + ": " + extra + " what: " + what );
+    TDLog.t("SAP comm: error " + status + ": " + extra + " what: " + what );
     if ( status == 8 ) { // (timeout) is ok
       reconnectDevice();
     }
@@ -597,7 +597,7 @@ public class SapComm extends TopoDroidComm
    */
   public void failure( int status, String extra, String what )
   {
-    TDLog.Error("SAP comm: failure " + status + " " + extra );
+    TDLog.t("SAP comm: failure " + status + " " + extra );
     switch ( status ) {
       case -1:
         // TDLog.e("SAP comm: FAIL no R-desc CCCD ");
@@ -665,7 +665,7 @@ public class SapComm extends TopoDroidComm
    */
   public boolean requestMtu( int mtu )
   {
-    TDLog.Error( "SAP requestMtu not implemented" );
+    TDLog.t( "SAP requestMtu not implemented" );
     return false;
   }
 

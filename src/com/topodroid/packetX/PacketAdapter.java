@@ -51,7 +51,7 @@ class PacketAdapter extends ArrayAdapter< PacketData >
       try { 
         v = li.inflate( R.layout.row, parent, false ); // FIXME inflate may produce NullPointerException
       } catch ( NullPointerException e ) {
-        TDLog.Error("CBlock adapter inflate view: null pointer");
+        TDLog.e("CBlock adapter inflate view: null pointer");
         return null;
       }
     }

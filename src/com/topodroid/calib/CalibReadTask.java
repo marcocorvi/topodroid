@@ -81,7 +81,7 @@ public class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
         mParent.get().enableButtons(true);
       }
     } catch ( NullPointerException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
 
     if ( result ) {

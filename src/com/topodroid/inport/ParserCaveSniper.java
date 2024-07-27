@@ -70,7 +70,7 @@ class ParserCaveSniper extends ImportParser
         // TDLog.v( line );
         if ( line.startsWith("Unit=") ) {
 	  if ( ! line.substring(5).startsWith("Meter") ) {
-            TDLog.Error("unhandled unit line: " + line );
+            TDLog.e("unhandled unit line: " + line );
 	  }
         } else if ( line.startsWith("GPS:") ) {
           // GPS: lng , lat , h_ell
@@ -101,7 +101,7 @@ class ParserCaveSniper extends ImportParser
                 shots.add( new ParserShot( mFrom, mTo, mLength, mBearing, mClino, 0.0f, extend, LegType.NORMAL, false, false, false, mComment ) );
               }
             } catch ( NumberFormatException e ) {
-              TDLog.Error( "ERROR " + mLineCnt + ": " + line + e.getMessage() );
+              TDLog.e( "ERROR " + mLineCnt + ": " + line + e.getMessage() );
             }
           }
         }
@@ -109,7 +109,7 @@ class ParserCaveSniper extends ImportParser
       }
     } catch ( IOException e ) {
       // TODO
-      TDLog.Error( "ERROR " + mLineCnt + ": " + line );
+      TDLog.e( "ERROR " + mLineCnt + ": " + line );
       throw new ParserException();
     }
     // TDLog.Log( TDLog.LOG_THERION, "Parser CaveSniper shots "+ shots.size() +" splays "+ splays.size()  );

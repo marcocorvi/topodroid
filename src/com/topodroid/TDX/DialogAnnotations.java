@@ -69,7 +69,7 @@ class DialogAnnotations extends MyDialog // Activity
       }
       fr.close();
     } catch ( IOException e ) {
-      TDLog.Error(  "load IOexception " + e.toString() );
+      TDLog.e(  "load IOexception " + e.toString() );
     }
   }
 
@@ -86,7 +86,7 @@ class DialogAnnotations extends MyDialog // Activity
       fw.flush();
       fw.close();
     } catch ( IOException e ) {
-      TDLog.Error(  "save IOexception " + e.toString() );
+      TDLog.e(  "save IOexception " + e.toString() );
     }
   }
 
@@ -106,7 +106,7 @@ class DialogAnnotations extends MyDialog // Activity
       fw.flush();
       fw.close();
     } catch ( IOException e ) {
-      TDLog.Error(  "append IOexception " + e.toString() );
+      TDLog.e(  "append IOexception " + e.toString() );
     }
   }
 

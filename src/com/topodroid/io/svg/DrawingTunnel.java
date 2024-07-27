@@ -294,7 +294,7 @@ public class DrawingTunnel extends DrawingSvgBase
       out.write("</tunnelxml>\n");
       out.flush();
     } catch ( IOException e ) {
-      TDLog.Error( "XML io-exception " + e.getMessage() );
+      TDLog.e( "XML io-exception " + e.getMessage() );
     }
   }
 

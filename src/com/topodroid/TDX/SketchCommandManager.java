@@ -661,7 +661,7 @@ public class SketchCommandManager
   void executeAll( Canvas canvas )
   {
     if ( canvas == null ) {
-      TDLog.Error( "SKETCH execute all: null canvas");
+      TDLog.e( "SKETCH execute all: null canvas");
       return;
     }
 
@@ -830,7 +830,7 @@ public class SketchCommandManager
   int getItemAt( float xc, float yc, float size, boolean stations )
   {
     if ( mCurrentScrap != mView ) {
-      TDLog.Error("SKETCH section not selectable");
+      TDLog.e("SKETCH section not selectable");
       return 0;
     }
     TDVector c = toWorld( xc, yc );

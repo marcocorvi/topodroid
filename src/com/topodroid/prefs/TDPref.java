@@ -502,7 +502,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     try {
       color = Integer.parseInt( str );
     } catch ( NumberFormatException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
     ret.setColor( color );
     return ret;
@@ -553,7 +553,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
         ret.f_value = Float.parseFloat( ret.value );
       }
     } catch ( NumberFormatException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
     return ret;
   }
@@ -686,7 +686,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
           b_value = Boolean.parseBoolean( value );
         }
       } catch ( NumberFormatException e ) {
-	TDLog.Error("FIXME number format exception " + e.getMessage() );
+	TDLog.e("FIXME number format exception " + e.getMessage() );
       }
     }
   }

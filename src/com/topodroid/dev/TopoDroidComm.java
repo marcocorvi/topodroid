@@ -448,7 +448,7 @@ public class TopoDroidComm
    */
   public byte[] readMemory( String address, int addr ) 
   {
-    TDLog.Error("TD Comm read memory returns null");
+    TDLog.e("TD Comm read memory returns null");
     return null;
   }
 

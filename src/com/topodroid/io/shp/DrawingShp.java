@@ -67,7 +67,7 @@ public class DrawingShp
     }
 
     if ( ! TDFile.makeMSdir( dirname ) ) {
-      TDLog.Error("mkdir " + dirname + " error");
+      TDLog.e("mkdir " + dirname + " error");
       return false;
     }
     // TDLog.v( "mkdir created MS-dir " + dirname );
@@ -140,7 +140,7 @@ public class DrawingShp
       (new Archiver()).compressFiles( fos, dirname, files );
 
     } catch ( IOException e ) {
-      TDLog.Error( "SHP io-exception " + e.getMessage() );
+      TDLog.e( "SHP io-exception " + e.getMessage() );
       return false;
     } finally {
       TDFile.deleteMSdir( dirname ); // delete temporary shape-dir

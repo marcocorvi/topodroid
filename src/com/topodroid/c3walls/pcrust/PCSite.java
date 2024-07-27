@@ -107,7 +107,7 @@ class PCSite extends Vector3D
   {
     if ( angle == null ) return false;
     if ( angle.next != null ) {
-      // TDLog.Error( "SITE site with more than one angle");
+      // TDLog.e( "SITE site with more than one angle");
       Angle n = angle.next;  // get the tail of the list of angles
       while ( n.next != null ) n = n.next;
       return n.v2 != angle.v1;

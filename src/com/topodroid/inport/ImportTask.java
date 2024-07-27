@@ -88,7 +88,7 @@ abstract class ImportTask extends AsyncTask< String, Integer, Long >
       this.mPfd = pfd.dup();
       this.isr = new InputStreamReader( TDsafUri.docFileInputStream( mPfd ) );
     } catch ( IOException e ) {
-      TDLog.Error("IO error " + e.getMessage() );
+      TDLog.e("IO error " + e.getMessage() );
     }
 
     mMain = new WeakReference<MainWindow>( main );
@@ -108,7 +108,7 @@ abstract class ImportTask extends AsyncTask< String, Integer, Long >
     try {
       if ( mPfd != null ) mPfd.close();
     } catch ( IOException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
 
     mProgress.dismiss();

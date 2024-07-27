@@ -85,7 +85,7 @@ public class MyBearingAndClino implements IBearingAndClino
       mExif.writeExif( mFilepath );
       mHasSaved = true;
     } catch ( IOException e ) {
-      TDLog.Error( "IO exception " + e.getMessage() );
+      TDLog.e( "IO exception " + e.getMessage() );
     }
       TDLog.v("set JPEG data: " + mHasSaved + " - file: " + mFilepath );
     return mHasSaved;

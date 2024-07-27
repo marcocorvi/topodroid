@@ -66,7 +66,7 @@ class FixedAdapter extends ArrayAdapter< FixedInfo >
       try {
         v = li.inflate( R.layout.row, parent, false ); // may produce NullPointerException
       } catch ( NullPointerException e ) {
-        TDLog.Error("Fixed adapter inflate view: null pointer");
+        TDLog.e("Fixed adapter inflate view: null pointer");
 	return null;
       }
     }

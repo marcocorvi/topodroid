@@ -94,13 +94,13 @@ class Scanline
         try {
           ret = Long.parseLong( val.substring( pos, next_pos ) );
         } catch ( NumberFormatException e ) {
-          TDLog.Error( "longValue error: " + val.substring( pos, next_pos ) );
+          TDLog.e( "longValue error: " + val.substring( pos, next_pos ) );
         }
       }
       pos = next_pos;
       skipCommaAndSpaces( );
     } else {
-      TDLog.Error( "longValue pos error: " + val + " " + pos + " " + next_pos );
+      TDLog.e( "longValue pos error: " + val + " " + pos + " " + next_pos );
     }
     return ret;
   }
@@ -116,12 +116,12 @@ class Scanline
         ret = Double.parseDouble( val.substring(pos, next_pos ) );
         // TDLog.Log( TDLog.LOG_DB, "doubleValue " + pos + " " + next_pos + " " + len + " <" + val.substring(pos,next_pos) + ">" );
       } catch ( NumberFormatException e ) {
-        TDLog.Error( "doubleValue error: " + val.substring(pos, next_pos) );
+        TDLog.e( "doubleValue error: " + val.substring(pos, next_pos) );
       }
       pos = next_pos;
       skipCommaAndSpaces( );
     } else {
-      TDLog.Error( "doubleValue pos error: " + val + " " + pos + " " + next_pos );
+      TDLog.e( "doubleValue pos error: " + val + " " + pos + " " + next_pos );
     }
     return ret;
   }

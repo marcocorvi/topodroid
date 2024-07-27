@@ -494,7 +494,7 @@ class ProjectionDialog extends MyDialog
           // updateSeekBar();
           // updateView();
         } catch ( NumberFormatException e ) {
-          TDLog.Error("Non-integer azimuth");
+          TDLog.e("Non-integer azimuth");
         }
       }
     } );

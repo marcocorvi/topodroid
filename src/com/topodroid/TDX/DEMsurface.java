@@ -180,7 +180,7 @@ public class DEMsurface
         ++linenr;
         String line = br.readLine();
         if ( line == null ) {
-          TDLog.Error("Grid surface data missing row " + y + " of " + y2 + " line nr. " + linenr );
+          TDLog.e("Grid surface data missing row " + y + " of " + y2 + " line nr. " + linenr );
           break;
         }
         line = line.trim();
@@ -192,7 +192,7 @@ public class DEMsurface
         if ( line.length() == 0 ) continue;
         if ( line.startsWith("endsurface" ) ) {
           // something went wrong
-          TDLog.Error("Grid surface run out of data");
+          TDLog.e("Grid surface run out of data");
           throw new ParserException( filename, linenr );
         }
         String[] vals = TDString.splitOnSpaces( line );
@@ -237,7 +237,7 @@ public class DEMsurface
         }
       }
     } catch ( IOException e ) {
-      TDLog.Error( "Grid surface error " + e.getMessage() );
+      TDLog.e( "Grid surface error " + e.getMessage() );
       throw new ParserException( filename, linenr );
     }
     // initNormal();

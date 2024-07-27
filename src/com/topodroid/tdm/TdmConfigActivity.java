@@ -144,7 +144,7 @@ public class TdmConfigActivity extends Activity
           TDToast.make( R.string.no_file );
         }
       } else {
-        TDLog.Error( "TdmConfig activity missing TdmConfig path");
+        TDLog.e( "TdmConfig activity missing TdmConfig path");
         TDToast.make( R.string.no_path );
       }
     }
@@ -381,7 +381,7 @@ public class TdmConfigActivity extends Activity
       // TDLog.v("TDM config finish with path " + mTdmConfig.getFilepath() );
       intent.putExtra( TDRequest.TDCONFIG_PATH, mTdmConfig.getFilepath() );
     } else {
-      TDLog.Error("TDM config finish with no path" );
+      TDLog.e("TDM config finish with no path" );
       intent.putExtra( TDRequest.TDCONFIG_PATH, "no_path" );
     }
     setResult( result, intent );
@@ -539,7 +539,7 @@ public class TdmConfigActivity extends Activity
         bw.flush();
         bw.close();
       } catch ( IOException e ) {
-        TDLog.Error("Tdm Config write file - I/O error " + e.getMessage() );
+        TDLog.e("Tdm Config write file - I/O error " + e.getMessage() );
       }
     }
     if ( filepath != null ) {

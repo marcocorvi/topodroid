@@ -280,7 +280,7 @@ public class SurveyWindow extends Activity
     mTextName.setFocusable( false );
 
     if ( ! updateDisplay() ) {
-      TDLog.Error( "opening non-existent survey" );
+      TDLog.e( "opening non-existent survey" );
       setResult( RESULT_CANCELED );
       finish();
     }
@@ -604,7 +604,7 @@ public class SurveyWindow extends Activity
         }
       }
     } else {
-      TDLog.Error("Survey Window export - negative index " + index );
+      TDLog.e("Survey Window export - negative index " + index );
     }
   }
 
@@ -695,7 +695,7 @@ public class SurveyWindow extends Activity
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        // TDLog.Error( "key down: code " + code );
+        // TDLog.e( "key down: code " + code );
     }
     return false;
   }

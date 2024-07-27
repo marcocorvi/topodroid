@@ -166,7 +166,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         // bw.flush(); // FIXME system error
         bw.close();
       } catch ( IOException e ) {
-        TDLog.Error( e.getMessage() );
+        TDLog.e( e.getMessage() );
         e.printStackTrace(); 
         return false;
       } finally {
@@ -189,7 +189,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         // bw.flush(); // FIXME necessary ???
         bw.close();
       } catch ( IOException e ) {
-        TDLog.Error( e.getMessage() );
+        TDLog.e( e.getMessage() );
         e.printStackTrace(); 
         return false;
       } finally {
@@ -255,7 +255,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
           //   // TDLog.v("EXPORT AUTO png " + mFullName );
           //   Bitmap bitmap = mManager.getBitmap();
           //   if (bitmap == null) {
-          //     TDLog.Error( "cannot save PNG: null bitmap" );
+          //     TDLog.e( "cannot save PNG: null bitmap" );
           //     // ret1 = false;
           //   } else {
           //     float scale = mManager.getBitmapScale();
@@ -263,7 +263,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
           //       // FIXME execute must be called from the main thread, current thread is working thread
           //       (new ExportBitmapToFile( null, null, bitmap, scale, mFullName, false )).exec(); // null URI, null toast-format
           //     } else {
-          //       TDLog.Error( "cannot save PNG: negative scale" );
+          //       TDLog.e( "cannot save PNG: negative scale" );
           //       // ret1 = false;
           //     }
           //   }
@@ -307,8 +307,8 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       }
 
       if ( isCancelled() ) {
-        TDLog.Error( "binary save cancelled " + mFullName );
-        // if ( ! file1.delete() ) TDLog.Error("File delete error"); // no need to delete cache file
+        TDLog.e( "binary save cancelled " + mFullName );
+        // if ( ! file1.delete() ) TDLog.e("File delete error"); // no need to delete cache file
         return false;
       } else {
         // TDLog.v( "save binary completed. file " + mFullName );
@@ -318,7 +318,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
           // TDLog.v("failed rename old " + filename1 + TDPath.BCK_SUFFIX );
         }
         if ( ! TDFile.renameExternalTempFile( tempname1, filename1 ) ) {
-          TDLog.Error("failed rename itempfile to " + filename1 );
+          TDLog.e("failed rename itempfile to " + filename1 );
         }
         return true;
       }

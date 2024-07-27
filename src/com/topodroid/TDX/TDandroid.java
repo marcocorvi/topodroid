@@ -277,7 +277,7 @@ public class TDandroid
     try {
       activity.startActivity( intent );
     } catch ( ActivityNotFoundException e ) {
-      TDLog.Error("Error " + e.getMessage() );
+      TDLog.e("Error " + e.getMessage() );
     }
   }
 
@@ -588,7 +588,7 @@ public class TDandroid
       PackageInfo pi = pm.getPackageInfo( package_name, 0 );
       return true;
     } catch ( PackageManager.NameNotFoundException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
     return false;
   }
@@ -605,37 +605,37 @@ public class TDandroid
       PackageInfo pi = pm.getPackageInfo( "gr.stasta.mobiletopographer", 0 );
       ret |= FixedActivity.FLAG_MOBILE_TOPOGRAPHER;
     } catch ( PackageManager.NameNotFoundException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
     try {
       PackageInfo pi = pm.getPackageInfo( "nz.ac.elec.gpsapp", 0 );
       ret |= FixedActivity.FLAG_GPS_POSITION;
     } catch ( PackageManager.NameNotFoundException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
     try {
       PackageInfo pi = pm.getPackageInfo( "com.doitintuitively.gpxrecorder", 0 );
       ret |= FixedActivity.FLAG_GPX_RECORDER;
     } catch ( PackageManager.NameNotFoundException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
     try {
       PackageInfo pi = pm.getPackageInfo( "com.android.gpstest", 0 );
       ret |= FixedActivity.FLAG_GPS_TEST;
     } catch ( PackageManager.NameNotFoundException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
     try {
       PackageInfo pi = pm.getPackageInfo( "eu.basicairdata.graziano.gpslogger", 0 );
       ret |= FixedActivity.FLAG_GPS_LOGGER;
     } catch ( PackageManager.NameNotFoundException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
     try {
       PackageInfo pi = pm.getPackageInfo( "sk.grecnar.gpspoint", 0 );
       ret |= FixedActivity.FLAG_GPS_POINT;
     } catch ( PackageManager.NameNotFoundException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
     return ret;
   }

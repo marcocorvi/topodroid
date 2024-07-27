@@ -78,10 +78,10 @@ public class TRobot
               pf.mBlk = blk;
               pf.mForward = false;
             } else {
-              TDLog.Error("TRobot " + blk.Name() + " closes series " + sf.mNumber );
+              TDLog.e("TRobot " + blk.Name() + " closes series " + sf.mNumber );
             }
           } else { 
-            TDLog.Error("TRobot " + blk.Name() + " joins " + sf.mNumber + " " + st.mNumber );
+            TDLog.e("TRobot " + blk.Name() + " joins " + sf.mNumber + " " + st.mNumber );
           }
         } else if ( sf != null ) { // st == null
           // assert ( pf != null )
@@ -91,10 +91,10 @@ public class TRobot
           pt.mBlk = blk;
           pt.mForward = true;
         } else { // st == null and sf == null
-          TDLog.Error("TRobot unattached block " + blk.Name() );
+          TDLog.e("TRobot unattached block " + blk.Name() );
         }
       } catch ( NumberFormatException e ) {
-        TDLog.Error("TRobot " + e.getMessage() );
+        TDLog.e("TRobot " + e.getMessage() );
         mSeries.clear();
         mPoints.clear();
         return false;

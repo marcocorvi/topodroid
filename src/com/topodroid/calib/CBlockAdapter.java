@@ -224,7 +224,7 @@ public class CBlockAdapter extends ArrayAdapter< CBlock >
       try { 
         v = mLayoutInflater.inflate( R.layout.cblock_row, parent, false ); // FIXME inflate may produce NullPointerException
       } catch ( NullPointerException e ) {
-        TDLog.Error("CBlock adapter inflate view: null pointer");
+        TDLog.e("CBlock adapter inflate view: null pointer");
         return null;
       }
       holder = new ViewHolder( this, v, 

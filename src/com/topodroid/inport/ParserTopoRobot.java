@@ -495,7 +495,7 @@ class ParserTopoRobot extends ImportParser
         line = nextLine( br ); ++ line_nr;
       }
     } catch ( IOException e ) {
-      TDLog.Error( "TR parser: " + line_nr + " i/o error " + mLineCnt + ": " + line + " " + e.getMessage() );
+      TDLog.e( "TR parser: " + line_nr + " i/o error " + mLineCnt + ": " + line + " " + e.getMessage() );
       throw new ParserException();
     }
     // if ( fix != null ) {

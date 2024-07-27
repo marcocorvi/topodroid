@@ -86,13 +86,13 @@ class TimerTask extends AsyncTask<String, Integer, Long >
     mCntMag = 0;
     if ( ! mRun ) return -1L;
     if ( mSensorManager == null ) {
-      TDLog.Error( "Timer task: no sensor manager" );
+      TDLog.e( "Timer task: no sensor manager" );
       return -2L;
     }
     Sensor mAcc = mSensorManager.getDefaultSensor( TYPE_ACC );
     Sensor mMag = mSensorManager.getDefaultSensor( TYPE_MAG );
     if ( mAcc == null || mMag == null ) {
-      TDLog.Error( "Timer task: no sensors" );
+      TDLog.e( "Timer task: no sensors" );
       return -3L;
     }
     mTakeReading = false;
@@ -102,7 +102,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
       toneG.startTone( ToneGenerator.TONE_PROP_BEEP, duration ); 
       TDUtil.slowDown( 1000 - duration );
       if ( isCancelled() ) {
-        TDLog.Error( "Timer task: cancelled" );
+        TDLog.e( "Timer task: cancelled" );
         mRun = false;
         mSensorManager.unregisterListener( this );
         return -4L;
@@ -159,7 +159,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
         mValMag[0] = 0;
         mValMag[1] = 0;
         mValMag[2] = 0;
-        TDLog.Error( "Timer task null direction. Acc. counts " + mCntGrv + " Mag. counts " + mCntMag );
+        TDLog.e( "Timer task null direction. Acc. counts " + mCntGrv + " Mag. counts " + mCntMag );
         TDToast.makeWarn( R.string.sensor_no_readings );
       }
     } else {

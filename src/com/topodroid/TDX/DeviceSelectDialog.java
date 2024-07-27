@@ -114,7 +114,7 @@ class DeviceSelectDialog extends MyDialog
   {
     dismiss();
     if ( ! ( view instanceof TextView ) ) {
-      TDLog.Error("device select view instance of " + view.toString() );
+      TDLog.e("device select view instance of " + view.toString() );
       return;
     }
     CharSequence item = ((TextView) view).getText();

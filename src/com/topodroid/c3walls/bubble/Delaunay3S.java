@@ -24,7 +24,7 @@ public class Delaunay3S
       Point3S pt = pts.get( k );
       ArrayList<Triangle3S> trs2 = getTrianglesBelowPoint( trs, pt );
       if ( trs2.size() == 0 ) {
-        TDLog.Error( "Point inside convex hull ");
+        TDLog.e( "Point inside convex hull ");
         continue;
       }
       ArrayList<HalfSide> hsd2 = getBorder( trs2 );

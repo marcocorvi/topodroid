@@ -351,7 +351,7 @@ public class TglParser
   public Cave3DSurvey getSurveyFromIndex( int k ) 
   { 
     if ( k < 0 || k >= surveys.size() ) {
-      // TDLog.Error("get survey from index " + k );
+      // TDLog.e("get survey from index " + k );
       k = 0;
     }
     return surveys.get(k); 
@@ -451,8 +451,8 @@ public class TglParser
   //       v[k++] = st.z;
   //       v[k++] = st.n;
   //     } else {
-  //       if ( sf == null ) TDLog.Error( " shot has null from station" );
-  //       if ( st == null ) TDLog.Error( " shot has null to station" );
+  //       if ( sf == null ) TDLog.e( " shot has null from station" );
+  //       if ( st == null ) TDLog.e( " shot has null to station" );
   //     }
   //   }
   //   return v;
@@ -477,7 +477,7 @@ public class TglParser
   //       v[k++] = st.z;
   //       v[k++] = st.n;
   //     } else {
-  //       if ( sf == null ) TDLog.Error( " shot has null from station" );
+  //       if ( sf == null ) TDLog.e( " shot has null from station" );
   //     }
   //   }
   //   return v;
@@ -749,7 +749,7 @@ public class TglParser
         dos.flush();
         dos.close();
       } catch ( IOException e ) {
-        TDLog.Error( e.getMessage() );
+        TDLog.e( e.getMessage() );
       }
     }
     return ret;
@@ -838,7 +838,7 @@ public class TglParser
         osw.flush();
         osw.close();
       } catch ( IOException e ) {
-        TDLog.Error( e.getMessage() );
+        TDLog.e( e.getMessage() );
       }
     }
     return ret;
@@ -922,7 +922,7 @@ public class TglParser
           }
         }).execute();
       } else {
-        TDLog.Error( "failed to create convex hull object" );
+        TDLog.e( "failed to create convex hull object" );
       }
     }
     // TDToast.make( "computing convex hull walls" );
@@ -954,7 +954,7 @@ public class TglParser
           }
         }).execute();
       } else {
-        TDLog.Error( "failed to create hull object" );
+        TDLog.e( "failed to create hull object" );
       }
     }
   }
@@ -966,7 +966,7 @@ public class TglParser
   public void makeBubble( )
   {
     if ( shots == null ) {
-      TDLog.Error("make bubble - no shots");
+      TDLog.e("make bubble - no shots");
       return;
     }
     // TDLog.v("make bubble");
@@ -992,7 +992,7 @@ public class TglParser
           }
         }).execute();
       } else {
-        TDLog.Error( "failed to create hull object" );
+        TDLog.e( "failed to create hull object" );
       }
     }
   }
@@ -1023,7 +1023,7 @@ public class TglParser
           }
         }).execute();
       } else {
-        TDLog.Error( "failed to create hull object" );
+        TDLog.e( "failed to create hull object" );
       }
     }
   }
@@ -1104,10 +1104,10 @@ public class TglParser
       dos.close();
       fos.close();
     } catch ( FileNotFoundException e ) {
-      TDLog.Error("Export Data file: " + e.getMessage() );
+      TDLog.e("Export Data file: " + e.getMessage() );
       return false;
     } catch ( IOException e ) {
-      TDLog.Error("Export Data i/o: " + e.getMessage() );
+      TDLog.e("Export Data i/o: " + e.getMessage() );
       return false;
     }
     return true;
@@ -1132,10 +1132,10 @@ public class TglParser
       dis.close();
       fis.close();
     } catch ( FileNotFoundException e ) {
-      TDLog.Error("Import Data file: " + e.getMessage() );
+      TDLog.e("Import Data file: " + e.getMessage() );
       return false;
     } catch ( IOException e ) {
-      TDLog.Error("Import Data i/o: " + e.getMessage() );
+      TDLog.e("Import Data i/o: " + e.getMessage() );
       return false;
     }
     return true;

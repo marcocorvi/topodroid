@@ -231,7 +231,7 @@ class PlotListDialog extends MyDialog
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
     if ( ! ( view instanceof TextView ) ) {
-      TDLog.Error("plot list view instance of " + view.toString() );
+      TDLog.e("plot list view instance of " + view.toString() );
       return;
     }
     String value = ((TextView) view).getText().toString();

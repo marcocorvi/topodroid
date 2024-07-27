@@ -141,9 +141,9 @@ public class Archiver
       zos.closeEntry( );
       ret = true;
     } catch (FileNotFoundException e ) {
-      TDLog.Error( "ZIP 1 file not found " + e.getMessage() );
+      TDLog.e( "ZIP 1 file not found " + e.getMessage() );
     } catch ( IOException e ) {
-      TDLog.Error( "ZIP 1 IO error " + e.getMessage() );
+      TDLog.e( "ZIP 1 IO error " + e.getMessage() );
     } finally {
       if ( bis != null ) try { bis.close(); } catch (IOException e ) { /* ret = false; */ }
     }
@@ -174,9 +174,9 @@ public class Archiver
       zos.closeEntry( );
       ret = true;
     } catch (FileNotFoundException e ) {
-      TDLog.Error( "ZIP 2 file not found " + e.getMessage() );
+      TDLog.e( "ZIP 2 file not found " + e.getMessage() );
     } catch ( IOException e ) {
-      TDLog.Error( "ZIP 2 IO error " + e.getMessage() );
+      TDLog.e( "ZIP 2 IO error " + e.getMessage() );
     } finally {
       if ( bis != null ) try { bis.close(); } catch (IOException e ) { /* ret = false; */ }
     }
@@ -204,9 +204,9 @@ public class Archiver
       }
       zos.closeEntry( );
     } catch (FileNotFoundException e ) {
-      TDLog.Error( "ZIP 3 file not found " + e.getMessage() );
+      TDLog.e( "ZIP 3 file not found " + e.getMessage() );
     } catch ( IOException e ) {
-      TDLog.Error( "ZIP 3 IO error " + e.getMessage() );
+      TDLog.e( "ZIP 3 IO error " + e.getMessage() );
     } finally {
       if ( bis != null ) try { bis.close(); } catch (IOException e ) { TDLog.v("ZIP IO " + e.getMessage() ); }
     }
@@ -252,14 +252,14 @@ public class Archiver
   //     }
   //     // for ( File file : files ) TDFile.deleteFile( file );
   //   } catch ( FileNotFoundException e ) {
-  //     TDLog.Error( "ZIP 4 file not found " + e.getMessage() );
+  //     TDLog.e( "ZIP 4 file not found " + e.getMessage() );
   //   } catch ( IOException e ) {
-  //     TDLog.Error( "ZIP 4 IO error " + e.getMessage() );
+  //     TDLog.e( "ZIP 4 IO error " + e.getMessage() );
   //     // FIXME
   //   } finally {
   //     if ( zos != null ) try { zos.close(); } catch ( IOException e ) { 
   //       ret = false;
-  //       // TDLog.Error("ZIP compress close error");
+  //       // TDLog.e("ZIP compress close error");
   //     }
   //   }
   //   return ret;
@@ -286,15 +286,15 @@ public class Archiver
       }
       // for ( File file : files ) TDFile.deleteFile( file );
     // } catch ( FileNotFoundException e ) {
-    //   TDLog.Error( "ZIP 5 file not found " + e.getMessage() );
+    //   TDLog.e( "ZIP 5 file not found " + e.getMessage() );
     // } catch ( IOException e ) {
-    //   TDLog.Error( "ZIP 5 IO error " + e.getMessage() );
+    //   TDLog.e( "ZIP 5 IO error " + e.getMessage() );
     //   FIXME
     // } finally {
       // if ( zos != null ) // always true
       try { zos.close(); } catch ( IOException e ) {
         ret = false;
-        // TDLog.Error("ZIP compress close error");
+        // TDLog.e("ZIP compress close error");
       }
     // }
     return ret;
@@ -327,7 +327,7 @@ public class Archiver
     } catch ( FileNotFoundException e ) {
       return false;
     } finally {
-      if ( zos != null ) try { zos.close(); } catch ( IOException e ) { TDLog.Error("ZIP-symbol close error"); }
+      if ( zos != null ) try { zos.close(); } catch ( IOException e ) { TDLog.e("ZIP-symbol close error"); }
     }
     return true;
   }
@@ -497,7 +497,7 @@ public class Archiver
       TDLog.v("ZIP 6 IO error " + e.getMessage() );
       // FIXME
     } finally {
-      if ( zos != null ) try { zos.close(); } catch ( IOException e ) { TDLog.Error("ZIP 6 close error"); }
+      if ( zos != null ) try { zos.close(); } catch ( IOException e ) { TDLog.e("ZIP 6 close error"); }
       if ( pfd != null ) TDsafUri.closeFileDescriptor( pfd );
       TDFile.deleteFile( TDPath.getSqlFile() );
     }
@@ -531,7 +531,7 @@ public class Archiver
       // size = decompresser.inflate( buffer );
       // decompresser.end();
     } catch ( IOException e ) {
-      TDLog.Error("ZIP decompress entry: " + e.getMessage() );
+      TDLog.e("ZIP decompress entry: " + e.getMessage() );
       return ERR_IO;
     }
     // TDLog.v( "decompress entry: size " + size );
@@ -549,7 +549,7 @@ public class Archiver
         size += c;
       }
     } catch ( IOException e ) {
-      TDLog.Error("ZIP decompress entry to byte array: " + e.getMessage() );
+      TDLog.e("ZIP decompress entry to byte array: " + e.getMessage() );
       return ERR_IO;
     }
     return size;
@@ -586,7 +586,7 @@ public class Archiver
       line = br.readLine().trim();
       ret = checkVersionLine( line );
       if ( ret < 0 ) {
-        TDLog.Error( "MANIFEST failed version line check" );
+        TDLog.e( "MANIFEST failed version line check" );
         return ret;
       }
 
@@ -594,38 +594,38 @@ public class Archiver
       try {
         mManifestDbVersion = Integer.parseInt( line );
       } catch ( NumberFormatException e ) {
-        TDLog.Error( "MANIFEST DB version format error: " + line );
+        TDLog.e( "MANIFEST DB version format error: " + line );
         return ERR_NUMBER;
       }
       
       if ( ! ( mManifestDbVersion >= TDVersion.DATABASE_VERSION_MIN ) ) {
-        TDLog.Error( "MANIFEST DB version mismatch: found " + mManifestDbVersion + " min " + TDVersion.DATABASE_VERSION_MIN );
+        TDLog.e( "MANIFEST DB version mismatch: found " + mManifestDbVersion + " min " + TDVersion.DATABASE_VERSION_MIN );
         return ERR_DB_OLD;
       }
       if ( ! ( mManifestDbVersion <= TDVersion.DATABASE_VERSION ) ) {
-        TDLog.Error( "MANIFEST DB version mismatch: found " + mManifestDbVersion + " current " + TDVersion.DATABASE_VERSION );
+        TDLog.e( "MANIFEST DB version mismatch: found " + mManifestDbVersion + " current " + TDVersion.DATABASE_VERSION );
         return ERR_DB_NEW;
       }
 
       mManifestSurveyname = TDString.spacesToUnderscore( br.readLine().trim() );
       // TDLog.v("MANIFEST read <" + mManifestSurveyname + ">" );
       if ( TopoDroidApp.mData == null ) {
-        TDLog.Error( "MANIFEST app has no database");
+        TDLog.e( "MANIFEST app has no database");
         return ERR_NO_DB;
       }
       if ( TopoDroidApp.mData.hasSurveyName( mManifestSurveyname ) ) {
-        TDLog.Error( "MANIFEST survey exists: <" + mManifestSurveyname + ">" );
+        TDLog.e( "MANIFEST survey exists: <" + mManifestSurveyname + ">" );
         return ERR_SURVEY;
       }
       // fr.close();
     } catch ( NumberFormatException e ) {
-      TDLog.Error( "MANIFEST error: " + e.getMessage() );
+      TDLog.e( "MANIFEST error: " + e.getMessage() );
       return ERR_NUMBER;
     } catch ( FileNotFoundException e ) {
-      TDLog.Error( "MANIFEST file not found: " + e.getMessage() );
+      TDLog.e( "MANIFEST file not found: " + e.getMessage() );
       return ERR_FILE;
     } catch ( IOException e ) {
-      TDLog.Error( "MANIFEST I/O error: " + e.getMessage() );
+      TDLog.e( "MANIFEST I/O error: " + e.getMessage() );
       return ERR_MF_IO;
     }
     return ret;
@@ -665,7 +665,7 @@ public class Archiver
           major = Integer.parseInt( ver[0] );
           minor = Integer.parseInt( ver[1] );
         } catch ( NumberFormatException e ) {
-          TDLog.Error( "parse error: major/minor " + ver[0] + " " + ver[1] );
+          TDLog.e( "parse error: major/minor " + ver[0] + " " + ver[1] );
           return ERR_FORMAT;
         }
         int k = 0;
@@ -680,7 +680,7 @@ public class Archiver
              || ( major == TDVersion.MAJOR_MIN && minor < TDVersion.MINOR_MIN )
              || ( major == TDVersion.MAJOR_MIN && minor == TDVersion.MINOR_MIN && sub < TDVersion.SUB_MIN ) 
           ) {
-          TDLog.Error( "TopoDroid version mismatch: " + version_line + " < " + TDVersion.MAJOR_MIN + "." + TDVersion.MINOR_MIN + "." + TDVersion.SUB_MIN );
+          TDLog.e( "TopoDroid version mismatch: " + version_line + " < " + TDVersion.MAJOR_MIN + "." + TDVersion.MINOR_MIN + "." + TDVersion.SUB_MIN );
           return ERR_TD_OLD;
         }
         if (    ( major > TDVersion.MAJOR ) 
@@ -701,11 +701,11 @@ public class Archiver
         try {
           version_code = Integer.parseInt( ver[0] );
           if ( version_code < TDVersion.CODE_MIN ) {
-            TDLog.Error( "TopoDroid version mismatch: " + version_line + " < " + TDVersion.CODE_MIN );
+            TDLog.e( "TopoDroid version mismatch: " + version_line + " < " + TDVersion.CODE_MIN );
             return ERR_TD_OLD;
           }
         } catch ( NumberFormatException e ) {
-          TDLog.Error( "parse error: version code " + ver[0] + " " + e.getMessage() );
+          TDLog.e( "parse error: version code " + ver[0] + " " + e.getMessage() );
           return ERR_NUMBER;
         }
         if ( version_code > TDVersion.VERSION_CODE ) ret = 1;
@@ -804,7 +804,7 @@ public class Archiver
               BrushManager.reloadAreaLibrary( app.getResources() );
             }
           } else {
-            TDLog.Error("ZIP 7 unexpected file type " + ze.getName() );
+            TDLog.e("ZIP 7 unexpected file type " + ze.getName() );
             // pathname = null; // already null
           }
           if ( pathname != null ) {
@@ -823,22 +823,22 @@ public class Archiver
               }
             } else {
               TDFile.deleteFile( pathname );
-              TDLog.Error("ZIP 7 failed " + pathname + " ret " + size );
+              TDLog.e("ZIP 7 failed " + pathname + " ret " + size );
             }
           }
         }
       }
       zin.close();
     } catch ( FileNotFoundException e ) {
-      TDLog.Error( "ZIP 7 file not found " + e.getMessage() );
+      TDLog.e( "ZIP 7 file not found " + e.getMessage() );
     } catch ( IOException e ) {
-      TDLog.Error( "ZIP 7 IO: " + e.getMessage() );
+      TDLog.e( "ZIP 7 IO: " + e.getMessage() );
     } catch ( ClassCastException e ) {
-      TDLog.Error( "ZIP 7 cast: " + e.getMessage() );
+      TDLog.e( "ZIP 7 cast: " + e.getMessage() );
     }
     if ( ok_manifest == ERR_OK ) {
       if ( ! sql_success ) {
-        TDLog.Error( "ZIP 7 sql error" );
+        TDLog.e( "ZIP 7 sql error" );
         // tell user that there was a problem
         return ERR_SQL;
       }
@@ -873,7 +873,7 @@ public class Archiver
             ok_manifest = checkManifestFile( app, bout.toString() );
             TDLog.v( "ZIP manifest [1]: \"" + ze.getName() + "\" size " + size + " ok " + ok_manifest + " survey " + mManifestSurveyname );
           } else {
-            TDLog.Error( "ZIP manifest: \"" + ze.getName() + "\" size " + size );
+            TDLog.e( "ZIP manifest: \"" + ze.getName() + "\" size " + size );
           }
           // TDFile.deleteFile( pathname );
           if ( ok_manifest < 0 ) return ok_manifest;
@@ -883,9 +883,9 @@ public class Archiver
         zin.closeEntry();
       }
     } catch ( FileNotFoundException e ) {
-      TDLog.Error( "ZIP 11 file not found " + e.getMessage() );
+      TDLog.e( "ZIP 11 file not found " + e.getMessage() );
     } catch ( IOException e ) {
-      TDLog.Error( "ZIP 11 IO error " + e.getMessage() );
+      TDLog.e( "ZIP 11 IO error " + e.getMessage() );
     }
     return ok_manifest;
   }
@@ -955,7 +955,7 @@ public class Archiver
               BrushManager.reloadAreaLibrary( app.getResources() );
             }
           } else {
-            // TDLog.Error("unexpected file type " + ze.getName() );
+            // TDLog.e("unexpected file type " + ze.getName() );
             // pathname = null; // already null
           }
           if ( pathname != null ) {
@@ -980,14 +980,14 @@ public class Archiver
       }
       zin.close();
     } catch ( FileNotFoundException e ) {
-      TDLog.Error( "ZIP 8 file not found " + e.getMessage() );
+      TDLog.e( "ZIP 8 file not found " + e.getMessage() );
     } catch ( IOException e ) {
-      TDLog.Error( "ZIP 8 IO error " + e.getMessage() );
+      TDLog.e( "ZIP 8 IO error " + e.getMessage() );
     } finally {
       TDPath.setSurveyPaths( null );
     }
     if ( ok_manifest < 0 ) { // delete survey folder
-      TDLog.Error("TODO manifest result " + ok_manifest );
+      TDLog.e("TODO manifest result " + ok_manifest );
     }
     TDLog.v( "unarchive stream returns " + ok_manifest );
     if ( ok_manifest == ERR_OK ) {

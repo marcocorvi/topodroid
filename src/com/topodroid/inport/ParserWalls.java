@@ -224,7 +224,7 @@ class ParserWalls extends ImportParser
                 }
                 shots.add( new ParserShot( from, to, len, ber, cln, 0.0f, extend, LegType.NORMAL ) );
               } catch ( NumberFormatException e ) {
-                TDLog.Error( "walls parser error: data " + line );
+                TDLog.e( "walls parser error: data " + line );
               }
             } else if ( sz >= 2 ) { // station and LRUD 
               String[] lrud = vals[1].substring(1, vals[5].length()-1).split(",");

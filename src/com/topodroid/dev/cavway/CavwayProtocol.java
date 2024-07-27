@@ -166,7 +166,7 @@ public class CavwayProtocol extends TopoDroidProtocol
           }
         }
       } else {
-        TDLog.Error("Cavway not downloading");
+        TDLog.t("Cavway not downloading");
         return PACKET_NONE;
       }
     } else { // command packet
@@ -224,7 +224,7 @@ public class CavwayProtocol extends TopoDroidProtocol
           mCheckCRC = ((databuf[132] << 8) | (databuf[131] & 0xff)) & 0xffff;
           return PACKET_FLASH_BYTES_2;
         // } else {
-        //   // TDLog.Error("Cavway ...");
+        //   // TDLog.t("Cavway ...");
         //   return PACKET_ERROR;
         }
       }

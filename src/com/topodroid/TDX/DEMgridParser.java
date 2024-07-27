@@ -208,7 +208,7 @@ class DEMgridParser extends ParserDEM
           String[] vals = TDString.splitOnSpaces( line );
           if ( vals[1].startsWith("vert") ) {  flip_vert = true; }
           else if ( vals[1].startsWith("horiz") ) { flip_horz = true; }
-          else { TDLog.Error("DEM unknown flip " + vals[1] ); }
+          else { TDLog.e("DEM unknown flip " + vals[1] ); }
           continue;
         }
         // try a data line:

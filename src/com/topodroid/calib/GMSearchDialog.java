@@ -100,7 +100,7 @@ public class GMSearchDialog extends MyDialog
       try { 
         error = Float.parseFloat( mError.getText().toString().trim() );
       } catch ( NumberFormatException e ) {
-        TDLog.Error( e.getMessage() );
+        TDLog.e( e.getMessage() );
       }
       mParent.searchData( error );
     } else if ( b == mBtnClear ) {

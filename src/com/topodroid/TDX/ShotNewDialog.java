@@ -383,7 +383,7 @@ class ShotNewDialog extends MyDialog
         bx = 360 - Float.parseFloat( b.replace(',','.') ); // DIVING_BEARING
         if ( bx >= 360 ) bx -= 360;
       } catch ( NumberFormatException e ) {
-        TDLog.Error( e.getMessage() );
+        TDLog.e( e.getMessage() );
       }
     }
     return bx;
@@ -468,7 +468,7 @@ class ShotNewDialog extends MyDialog
           if ( diving ) { bx = 360 - bx; if ( bx >= 360 ) bx -= 360; } // DIVING_BEARING
           shot_extend = TDAzimuth.computeLegExtend( bx );
         } catch ( NumberFormatException e ) { 
-          // TDLog.Error("Non-number bearing");
+          // TDLog.e("Non-number bearing");
           mETbearing.setError( mContext.getResources().getString( R.string.error_invalid_number ) );
           return;
         }
@@ -604,7 +604,7 @@ class ShotNewDialog extends MyDialog
         }
         mApp.setCurrentStationName( null );
       } catch ( NumberFormatException e ) {
-        TDLog.Error( "parse Float error: distance " + distance + " bearing " + bearing + " clino " + clino );
+        TDLog.e( "parse Float error: distance " + distance + " bearing " + bearing + " clino " + clino );
       }
       if ( blk != null ) {
         notDone = false;
@@ -629,7 +629,7 @@ class ShotNewDialog extends MyDialog
                                     PhotoInfo.TYPE_SHOT
             ); // FIXME TITLE has to go
           } catch ( IOException e ) {
-            TDLog.Error( "IO exception " + e.getMessage() );
+            TDLog.e( "IO exception " + e.getMessage() );
           }
         }
         resetData( shot_to );
@@ -639,7 +639,7 @@ class ShotNewDialog extends MyDialog
         }
         notDone = true;
       } else {
-        TDLog.Error("failed insert manual data block");
+        TDLog.e("failed insert manual data block");
         return;
       }
       

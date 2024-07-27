@@ -737,7 +737,7 @@ class ItemPickerDialog extends MyDialog
     //       }
     //     // }
     //   } else {
-    //     TDLog.Error("View is not ItemButton"); // it is ok
+    //     TDLog.e("View is not ItemButton"); // it is ok
     //   }
     // }
      
@@ -773,7 +773,7 @@ class ItemPickerDialog extends MyDialog
   //       }
   //     }
   //   } else {
-  //     TDLog.Error("long click null view");
+  //     TDLog.e("long click null view");
   //   }
   //   return true;
   // }

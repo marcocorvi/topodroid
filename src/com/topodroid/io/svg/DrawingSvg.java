@@ -359,7 +359,7 @@ public class DrawingSvg extends DrawingSvgBase
 
       out.flush();
     } catch ( IOException e ) {
-      TDLog.Error( "SVG io-exception " + e.getMessage() );
+      TDLog.e( "SVG io-exception " + e.getMessage() );
     }
   }
 
@@ -380,7 +380,7 @@ public class DrawingSvg extends DrawingSvgBase
       }
       out.write( end_grp );
     } catch ( IOException e ) {
-      TDLog.Error( "SVG splay-io exception " + e.getMessage() );
+      TDLog.e( "SVG splay-io exception " + e.getMessage() );
     }
   }
 

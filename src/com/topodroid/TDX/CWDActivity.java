@@ -147,7 +147,7 @@ public class CWDActivity extends Activity
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
     if ( ! ( view instanceof TextView ) ) {
-      TDLog.Error("CWD view instance of " + view.toString() );
+      TDLog.e("CWD view instance of " + view.toString() );
       return;
     }
     CharSequence item = ((TextView) view).getText();
@@ -230,7 +230,7 @@ public class CWDActivity extends Activity
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        // TDLog.Error( "key down: code " + code );
+        // TDLog.e( "key down: code " + code );
     }
     return false;
   }

@@ -81,7 +81,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
         mAreaCnt = Integer.parseInt( id.substring( pos ) );
         mPrefix  = id.substring(0, pos);
       } catch ( NumberFormatException e ) {
-        TDLog.Error( e.getMessage() );
+        TDLog.e( e.getMessage() );
       }
     }
     // TDLog.v("AREA " + id + " count " + mPrefix + " " + mAreaCnt );
@@ -139,7 +139,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
       mAreaCnt = Integer.parseInt( id.substring(pos) );
       // TDLog.v("AREA id <" + id + "> prefix " + mPrefix + " count " + mAreaCnt );
     } catch ( NumberFormatException e ) {
-      TDLog.Error( "Drawing Area Path AreaCnt parse int error: " + id.substring(1) );
+      TDLog.e( "Drawing Area Path AreaCnt parse int error: " + id.substring(1) );
     }
     if ( BrushManager.hasArea( mAreaType ) ) {
       setPathPaint( BrushManager.getAreaPaint( mAreaType ) );
@@ -223,7 +223,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
       ret.retracePath();
       return  ( npt < 3 )? null : ret;
     } catch ( IOException e ) {
-      TDLog.Error( "AREA in error " + e.getMessage() );
+      TDLog.e( "AREA in error " + e.getMessage() );
       // TDLog.v( "AREA in error " + e.getMessage() );
     }
     return null;
@@ -264,7 +264,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
   //       }
   //     }
   //   } catch ( IOException e ) {
-  //     TDLog.Error( "AREA in error " + e.getMessage() );
+  //     TDLog.e( "AREA in error " + e.getMessage() );
   //     // TDLog.v( "AREA in error " + e.getMessage() );
   //   }
   // }
@@ -484,7 +484,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
   {
     String name  = getThName( );
     if ( name == null ) {
-      TDLog.Error("null area name");
+      TDLog.e("null area name");
       name = SymbolLibrary.USER;
     }
     String group = BrushManager.getAreaGroup( mAreaType );
@@ -510,7 +510,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
       }
       // TDLog.Log( TDLog.LOG_PLOT, "A " + name + " " + npt );
     } catch ( IOException e ) {
-      TDLog.Error( "AREA out error " + e.toString() );
+      TDLog.e( "AREA out error " + e.toString() );
     }
     // return 'A';
   }

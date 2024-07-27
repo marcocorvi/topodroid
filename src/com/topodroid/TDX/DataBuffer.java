@@ -145,7 +145,7 @@ class DataBuffer
       DataBuffer db = new DataBuffer( FLOAT, count * 4, count * 4 ); // 4 bytes / float
       return db.mData.asFloatBuffer();
     } catch ( OutOfMemoryError e ) {
-      TDLog.Error("Out of memory [0]");
+      TDLog.e("Out of memory [0]");
     }
     return null;
   }
@@ -163,7 +163,7 @@ class DataBuffer
     try {
       return new DataBuffer( type, type*cap, type*delta );
     } catch ( OutOfMemoryError e ) {
-      TDLog.Error("out of memory [1]");
+      TDLog.e("out of memory [1]");
     }
     return null;
   }
@@ -178,7 +178,7 @@ class DataBuffer
     try {
       return new DataBuffer( type, type*cap, type*cap );
     } catch ( OutOfMemoryError e ) {
-      TDLog.Error("out of memory [2]");
+      TDLog.e("out of memory [2]");
     }
     return null;
   }

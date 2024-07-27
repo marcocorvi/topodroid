@@ -62,7 +62,7 @@ class ListerSet implements ILister
    */
   public void updateBlockList( long blk_id ) 
   {
-    if ( TDLog.isStreamFile() ) TDLog.f("LISTER SET " + TDLog.threadId() + " update block list: blk id " + blk_id );
+    if ( TDLog.isStreamFile() ) TDLog.e("LISTER SET " + TDLog.threadId() + " update block list: blk id " + blk_id );
     for ( ILister lister : mLister ) lister.updateBlockList( blk_id );
   }
 
@@ -71,7 +71,7 @@ class ListerSet implements ILister
    */
   public void setConnectionStatus( int status )
   {
-    // TDLog.Error( "Lister set conn. status " + size() + " " + status );
+    // TDLog.e( "Lister set conn. status " + size() + " " + status );
     for ( ILister lister : mLister ) lister.setConnectionStatus( status );
   }
 
@@ -81,7 +81,7 @@ class ListerSet implements ILister
    */
   public void refreshDisplay( int r, boolean toast )
   {
-    // TDLog.Error( "Lister refresh display " + size() + " R " + r + " " + toast );
+    // TDLog.e( "Lister refresh display " + size() + " R " + r + " " + toast );
     for ( ILister lister : mLister ) lister.refreshDisplay( r, toast );
   }
 

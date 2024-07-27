@@ -381,7 +381,7 @@ public class BezierInterpolator
         i1 = i2;
       }
     } catch ( NullPointerException e ) {
-      TDLog.Error( "Null pointer " );
+      TDLog.e( "Null pointer " );
     }
     return err;
   }

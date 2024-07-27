@@ -95,7 +95,7 @@ public class ExportGltf
     if ( mModel == null ) return false;
 
     if ( ! TDFile.makeMSdir( dirname ) ) {
-      TDLog.Error("mkdir " + dirname + " error");
+      TDLog.e("mkdir " + dirname + " error");
       return false;
     }
     // TDLog.v( "mkdir created MSdir " + dirname );
@@ -117,8 +117,8 @@ public class ExportGltf
       (new Archiver()).compressFiles( zos, subdir, files );
 
     } catch ( IOException e ) {
-      TDLog.Error("TopoGL glTF export error " + e );
-      for ( StackTraceElement ste : e.getStackTrace() ) TDLog.Error(ste.toString() );
+      TDLog.e("TopoGL glTF export error " + e );
+      for ( StackTraceElement ste : e.getStackTrace() ) TDLog.e(ste.toString() );
       return false;
     } finally {
       TDFile.deleteMSdir( dirname ); // delete temporary dir
@@ -627,9 +627,9 @@ public class ExportGltf
       dos.flush();
       dos.close();
     } catch ( FileNotFoundException e ) { 
-      TDLog.Error("Gltf file " + filepath + " not found");
+      TDLog.e("Gltf file " + filepath + " not found");
     } catch ( IOException e ) {
-      TDLog.Error("Gltf file " + filepath + " write failed");
+      TDLog.e("Gltf file " + filepath + " write failed");
     }
     return len;
   }
@@ -669,9 +669,9 @@ public class ExportGltf
       dos.flush();
       dos.close();
     } catch ( FileNotFoundException e ) { 
-      TDLog.Error("Gltf File LINES not found");
+      TDLog.e("Gltf File LINES not found");
     } catch ( IOException e ) {
-      TDLog.Error("Gltf File LINES write failed");
+      TDLog.e("Gltf File LINES write failed");
     }
     return len;
   }
@@ -714,9 +714,9 @@ public class ExportGltf
       dos.flush();
       dos.close();
     } catch ( FileNotFoundException e ) { 
-      TDLog.Error("Gltf File SURFACE not found");
+      TDLog.e("Gltf File SURFACE not found");
     } catch ( IOException e ) {
-      TDLog.Error("Gltf File SURFACE write failed");
+      TDLog.e("Gltf File SURFACE write failed");
     }
     return len;
   }

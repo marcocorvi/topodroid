@@ -760,7 +760,7 @@ public class DrawingPath extends RectF
    * @param dos   output stream
    * @param scrap scrap index
    */
-  void toDataStream( DataOutputStream dos, int scrap ) { TDLog.Error( "ERROR Drawing Path toDataStream with scrap executed"); }
+  void toDataStream( DataOutputStream dos, int scrap ) { TDLog.e( "ERROR Drawing Path toDataStream with scrap executed"); }
 
   /** write the path in cSurvey format - it does nothing by default
    * @param pw     output writer

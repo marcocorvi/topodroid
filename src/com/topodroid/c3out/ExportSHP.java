@@ -80,13 +80,13 @@ public class ExportSHP
   {
     // if ( data == null ) return false;
     if ( ! TDFile.makeMSdir( filepath ) ) {
-      TDLog.Error("mkdir " + filepath + " error");
+      TDLog.e("mkdir " + filepath + " error");
       return false;
     }
 
     boolean ret = TDFile.hasMSdir( filepath );
     if ( ! ret ) {
-      TDLog.Error("no dir " + filepath + " name " + name );
+      TDLog.e("no dir " + filepath + " name " + name );
       return false;
     }
     // TDLog.v("shp export. dirname " + filepath + " name " + name );
@@ -161,7 +161,7 @@ public class ExportSHP
       // shp.setYYMMDD( info.date );
       ret = shp.writeStations( stations );
     } catch ( IOException e ) {
-      TDLog.Error( "SHP Failed station export: " + e.getMessage() );
+      TDLog.e( "SHP Failed station export: " + e.getMessage() );
     }
     return ret;
   }
@@ -177,7 +177,7 @@ public class ExportSHP
       // shp.setYYMMDD( info.date );
       ret = shp.writeShots( shots, name );
     } catch ( IOException e ) {
-      TDLog.Error( "SHP Failed " + name + " export: " + e.getMessage() );
+      TDLog.e( "SHP Failed " + name + " export: " + e.getMessage() );
     }
     return ret;
   }
@@ -193,7 +193,7 @@ public class ExportSHP
       // shp.setYYMMDD( info.date );
       ret = shp.writeFacets( facets );
     } catch ( IOException e ) {
-      TDLog.Error( "SHP Failed facet export: " + e.getMessage() );
+      TDLog.e( "SHP Failed facet export: " + e.getMessage() );
     }
     return ret;
   }
@@ -208,7 +208,7 @@ public class ExportSHP
       // shp.setYYMMDD( info.date );
       ret = shp.writeTriangles( mTriangles );
     } catch ( IOException e ) {
-      TDLog.Error( "SHP Failed triangle export: " + e.getMessage() );
+      TDLog.e( "SHP Failed triangle export: " + e.getMessage() );
     }
     return ret;
   }

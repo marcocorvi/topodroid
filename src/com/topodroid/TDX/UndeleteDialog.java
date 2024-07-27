@@ -139,7 +139,7 @@ class UndeleteDialog extends MyDialog
           int len = name.length() - 1;
           name = name.substring( 0, len );
           if ( ! name.equals( profile.name.substring( 0, len) ) ) {
-            TDLog.Error("UNDELETE plan-profile name mismatch: " + plan.name + " " + profile.name ); 
+            TDLog.e("UNDELETE plan-profile name mismatch: " + plan.name + " " + profile.name ); 
             break;
           }
           mPlots.add( new UndeleteItem( plan.id, profile.id, String.format(Locale.US, "%d-%d <%s>", plan.id, profile.id, name ), UndeleteItem.UNDELETE_PLOT ) );

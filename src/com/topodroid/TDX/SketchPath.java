@@ -72,7 +72,7 @@ public class SketchPath
   /** write the path to a data stream - it does nothing by default
    * @param dos   output stream
    */
-  public void toDataStream( DataOutputStream dos ) throws IOException { TDLog.Error( "ERROR Sketch Path toDataStream"); }
+  public void toDataStream( DataOutputStream dos ) throws IOException { TDLog.e( "ERROR Sketch Path toDataStream"); }
 
   /** read from a stream
    * @param cmd  command manager (unused)
@@ -82,7 +82,7 @@ public class SketchPath
    */
   public int fromDataStream( SketchCommandManager cmd, DataInputStream dis, int version ) throws IOException
   {
-    TDLog.Error( "ERROR Sketch Path fromDataStream");
+    TDLog.e( "ERROR Sketch Path fromDataStream");
     return 0;
   }
 
@@ -154,7 +154,7 @@ public class SketchPath
 
   static void dataCheck( String msg, boolean test )
   {
-    if ( ! test ) TDLog.Error("ERROR failed " + msg );
+    if ( ! test ) TDLog.e("ERROR failed " + msg );
   }
 
   /** draw a pink circle

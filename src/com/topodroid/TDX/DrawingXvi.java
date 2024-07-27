@@ -107,7 +107,7 @@ class DrawingXvi
       out.write( sw.getBuffer().toString() );
       out.flush();
     } catch ( IOException e ) {
-      TDLog.Error( "XVI grid io-exception " + e.getMessage() );
+      TDLog.e( "XVI grid io-exception " + e.getMessage() );
     }
   }
 
@@ -252,7 +252,7 @@ class DrawingXvi
 
     } catch ( IOException e ) {
       // FIXME
-      TDLog.Error( "XVI io-exception " + e.getMessage() );
+      TDLog.e( "XVI io-exception " + e.getMessage() );
     }
   }
 
@@ -421,7 +421,7 @@ class DrawingXvi
                     TDSetting.mToTherion*(xof+x00), TDSetting.mToTherion*(yof-y00), TDSetting.mToTherion*(xof+x01), TDSetting.mToTherion*(yof-y01),
                     TDSetting.mToTherion*(xof+x02), TDSetting.mToTherion*(yof-y02), TDSetting.mToTherion*(xof+x03), TDSetting.mToTherion*(yof-y03) );
 	} else {
-	  TDLog.Error("error xvi format point " + name );
+	  TDLog.e("error xvi format point " + name );
 	}
       }
     }
@@ -499,7 +499,7 @@ class DrawingXvi
             done = true;
             break;
 	  default:
-	    TDLog.Error("TDR2XVI Error. unexpected code=" + what );
+	    TDLog.e("TDR2XVI Error. unexpected code=" + what );
 	    return;
         }
       }

@@ -111,7 +111,7 @@ public class TDVersion
           MINOR = Integer.parseInt( ver[1] );
         } catch ( NumberFormatException e ) {
           ApplicationInfo app_info = context.getApplicationInfo();
-          TDLog.Error( app_info.processName + " parse error: major/minor " + ver[0] + " " + ver[1] );
+          TDLog.e( app_info.processName + " parse error: major/minor " + ver[0] + " " + ver[1] );
         }
         int k = 0;
         SUB = 0;

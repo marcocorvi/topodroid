@@ -200,11 +200,11 @@ public class TDFile
     // TDLog.v("FILE get TD file I stream " + name );
     File file = new File( name ); 
     if ( ! file.exists() ) {
-      TDLog.Error("no file " + name );
+      TDLog.e("no file " + name );
       return null;
     }
     if ( ! file.canRead() ) {
-      TDLog.Error("cannot read file " + name );
+      TDLog.e("cannot read file " + name );
       return null;
     }
     try {
@@ -212,7 +212,7 @@ public class TDFile
       BufferedInputStream bfis = new BufferedInputStream( fis );
       return new DataInputStream( bfis );
     } catch ( FileNotFoundException e ) {
-      TDLog.Error("file not found " + name );
+      TDLog.e("file not found " + name );
     }
     return null;
   }
@@ -226,7 +226,7 @@ public class TDFile
     File file = new File( name ); 
     if ( file.exists() ) {
       if ( ! file.canWrite() ) {
-        TDLog.Error("file exists and cannot write file " + name );
+        TDLog.e("file exists and cannot write file " + name );
         return null;
       }
     }
@@ -235,7 +235,7 @@ public class TDFile
       BufferedOutputStream bfos = new BufferedOutputStream( fos );
       return new DataOutputStream( bfos );
     } catch ( FileNotFoundException e ) {
-      TDLog.Error("file not found " + name );
+      TDLog.e("file not found " + name );
     }
     return null;
   }
@@ -248,14 +248,14 @@ public class TDFile
     // TDLog.v("FILE get TD file reader " + name );
     File file = new File( name ); 
     if ( ! file.exists() || ! file.canRead() ) {
-      TDLog.Error("file does not exist or cannot read file " + name );
+      TDLog.e("file does not exist or cannot read file " + name );
       return null;
     }
     try {
       FileReader fr = new FileReader( file );
       return new BufferedReader( fr );
     } catch ( FileNotFoundException e ) {
-      TDLog.Error("file not found " + name );
+      TDLog.e("file not found " + name );
     }
     return null;
   }
@@ -269,7 +269,7 @@ public class TDFile
     File file = new File( name ); 
     if ( file.exists() ) {
       if ( ! file.canWrite() ) {
-        TDLog.Error("file exists and cannot write file " + name );
+        TDLog.e("file exists and cannot write file " + name );
         return null;
       }
     }
@@ -277,7 +277,7 @@ public class TDFile
       FileWriter fr = new FileWriter( file );
       return new BufferedWriter( fr );
     } catch ( FileNotFoundException e ) {
-      TDLog.Error("file not found " + name );
+      TDLog.e("file not found " + name );
     }
     return null;
   }
@@ -493,7 +493,7 @@ public class TDFile
     File[] files = dir.listFiles();
     if ( files != null ) for ( File f : files ) {
       if ( f.lastModified() < time ) {
-        if ( ! f.delete() ) TDLog.Error("File delete error: " + f.getAbsolutePath() ); // was getPath()
+        if ( ! f.delete() ) TDLog.e("File delete error: " + f.getAbsolutePath() ); // was getPath()
       }
     }
   }
@@ -595,7 +595,7 @@ public class TDFile
     boolean ret = false;
     if ( f != null && f.exists() ) {
       ret = f.delete();
-      if ( ! ret ) TDLog.Error("file delete failed " + f.getName() );
+      if ( ! ret ) TDLog.e("file delete failed " + f.getName() );
     }
     return ret;
   }
@@ -615,17 +615,17 @@ public class TDFile
         if (file.isFile()) {
           if ( ! file.delete() ) {
             ok = false;
-            TDLog.Error("file delete failed " + file.getName() ); 
+            TDLog.e("file delete failed " + file.getName() ); 
           }
         } else {
           ok = false;
-          TDLog.Error("file not regular " + file.getName() ); 
+          TDLog.e("file not regular " + file.getName() ); 
         }
       }
     }
     if ( ok ) {
       ret = dir.delete();
-      if ( ! ret )  TDLog.Error("dir delete failed " + dir.getName() );
+      if ( ! ret )  TDLog.e("dir delete failed " + dir.getName() );
     }
     return ret;
   }
@@ -686,9 +686,9 @@ public class TDFile
     if ( ! f1.exists() ) return;
     File f2 = getTopoDroidFile( newname );
     if ( ! f2.exists() ) {
-      if ( ! f1.renameTo( f2 ) ) TDLog.Error("file rename: failed " + oldname + " to " + newname );
+      if ( ! f1.renameTo( f2 ) ) TDLog.e("file rename: failed " + oldname + " to " + newname );
     } else {
-      TDLog.Error("file rename: " + oldname + " to existing " + newname );
+      TDLog.e("file rename: " + oldname + " to existing " + newname );
     }
   }
 
@@ -702,9 +702,9 @@ public class TDFile
     File f1 = getTopoDroidFile( oldname ); // DistoX-SAF
     File f2 = getTopoDroidFile( newname );
     if ( f1.exists() ) {
-      if ( ! f1.renameTo( f2 ) ) TDLog.Error("file move: failed " + oldname + " to " + newname );
+      if ( ! f1.renameTo( f2 ) ) TDLog.e("file move: failed " + oldname + " to " + newname );
     } else {
-      TDLog.Error("file move: no-exist " + oldname ); // this may be OK
+      TDLog.e("file move: no-exist " + oldname ); // this may be OK
     }
   }
 
@@ -717,7 +717,7 @@ public class TDFile
     File f = new File( pathname );
     if ( ! f.exists() ) {
       if ( ! f.mkdirs() ) {
-        TDLog.Error("mkdir topodroid failed " + pathname );
+        TDLog.e("mkdir topodroid failed " + pathname );
         return null;
       }
     }
@@ -732,7 +732,7 @@ public class TDFile
     File f = getExternalDir( type ); 
     if ( ! f.exists() ) {
       if ( ! f.mkdirs() ) {
-        TDLog.Error("mkdir external failed " + type );
+        TDLog.e("mkdir external failed " + type );
         return null;
       }
     }
@@ -853,7 +853,7 @@ public class TDFile
   static public FileOutputStream getMSoutput( String subdir, String filename, String mimetype ) throws IOException
   {
     if ( ! makeMSdir( subdir ) ) {
-      TDLog.Error("failed to create subdir " + subdir );
+      TDLog.e("failed to create subdir " + subdir );
       throw new IOException("failed to create subdir");
     }
     return new FileOutputStream( getMSfile( subdir, filename ) );
@@ -863,12 +863,12 @@ public class TDFile
   static public BufferedWriter getMSwriter( String subdir, String filename, String mimetype ) throws IOException
   {
     if ( ! makeMSdir( subdir ) ) {
-      TDLog.Error("failed to create subdir " + subdir );
+      TDLog.e("failed to create subdir " + subdir );
       throw new IOException("failed to create subdir");
     }
     FileOutputStream os = new FileOutputStream( getMSfile( subdir, filename ) );
     if ( os == null ) {
-      TDLog.Error("failed to create output stream " + filename );
+      TDLog.e("failed to create output stream " + filename );
       throw new IOException( "failed to create file output stream ");
     }
     return new BufferedWriter( new OutputStreamWriter( os ) );
@@ -882,7 +882,7 @@ public class TDFile
   static public FileInputStream getMSinput( String subdir, String filename, String mimetype ) throws IOException
   {
     if ( ! hasMSdir( subdir ) ) {
-      TDLog.Error("Get MS input - failed: no subdir " + subdir );
+      TDLog.e("Get MS input - failed: no subdir " + subdir );
       throw new IOException("failed: no subdir");
     }
     return new FileInputStream( getMSfile( subdir, filename ) );
@@ -897,12 +897,12 @@ public class TDFile
   static public BufferedReader getMSReader( String subdir, String filename, String mimetype ) throws IOException
   {
     if ( ! hasMSdir( subdir ) ) {
-      TDLog.Error("Get MS reader - failed: no subdir " + subdir );
+      TDLog.e("Get MS reader - failed: no subdir " + subdir );
       throw new IOException("failed: no subdir");
     }
     FileInputStream is = new FileInputStream( getMSfile( subdir, filename ) );
     if ( is == null ) {
-      TDLog.Error("failed to create input stream " + filename );
+      TDLog.e("failed to create input stream " + filename );
       throw new IOException( "failed to create file input stream ");
     }
     return new BufferedReader( new InputStreamReader( is, Charset.forName( "UTF-8" ) ) );
@@ -953,7 +953,7 @@ public class TDFile
       try {
         pfd.close();
       } catch ( IOException e ) {
-        TDLog.Error( e.getMessage() );
+        TDLog.e( e.getMessage() );
       }
     }
   }

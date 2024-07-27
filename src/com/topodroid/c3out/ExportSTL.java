@@ -217,7 +217,7 @@ public class ExportSTL
         }
       }
     } catch( IOException e ) {
-      TDLog.Error( "STL IO error " + e.getMessage() );
+      TDLog.e( "STL IO error " + e.getMessage() );
       ret = false;
     } finally {
       try {

@@ -85,7 +85,7 @@ public class ParserDat extends TglParser
                   throws ParserException
   {
     if ( isr == null ) {
-      TDLog.Error("Parser Mak: null input stream reader");
+      TDLog.e("Parser Mak: null input stream reader");
       return false;
     }
 
@@ -126,15 +126,15 @@ public class ParserDat extends TglParser
               InputStreamReader isr0 = new InputStreamReader( new FileInputStream( filename0 ) );
 	      readFileDat( isr0, survey, station, x, y, z ); // FIXME
 	    } catch ( FileNotFoundException e ) {
-	      TDLog.Error(  "Error DAT file " + filename0 + " not found");
+	      TDLog.e(  "Error DAT file " + filename0 + " not found");
 	    } catch ( NumberFormatException e ) {
-	      TDLog.Error(  "Error MAK file " + pathname + ":" + linenr );
+	      TDLog.e(  "Error MAK file " + pathname + ":" + linenr );
 	    }
 	  }
 	}
       }
     } catch ( IOException e ) {
-      TDLog.Error(  "MAK I/O error " + e.getMessage() );
+      TDLog.e(  "MAK I/O error " + e.getMessage() );
       throw new ParserException( getName(), linenr );
     }
     // TDLog.v( "done read MAK file " + pathname );
@@ -151,7 +151,7 @@ public class ParserDat extends TglParser
     ArrayList< Cave3DShot > temp_splays = new ArrayList<>();
 
     if ( isr == null ) {
-      TDLog.Error("Parser Dat: null input stream reader");
+      TDLog.e("Parser Dat: null input stream reader");
       return false;
     }
 
@@ -184,7 +184,7 @@ public class ParserDat extends TglParser
             declination = Double.parseDouble( vals[idx] );
 	    // TDLog.v( "DAT declination " + declination );
 	  } catch ( NumberFormatException e ) {
-	    TDLog.Error("Non-number declination");
+	    TDLog.e("Non-number declination");
           }
 	} else if ( line.contains("FROM") && line.contains("TO" ) ) {
 	  for ( line = nextLine( br ); line != null; line = nextLine( br ) ) {
@@ -293,7 +293,7 @@ public class ParserDat extends TglParser
                 }
 
 	      } catch ( NumberFormatException e ) {
-	        TDLog.Error("Non-number data value");
+	        TDLog.e("Non-number data value");
               }
 	    }
 	  }
@@ -308,7 +308,7 @@ public class ParserDat extends TglParser
 	fixes.add( new Cave3DFix( station+survey, x, y, z, cs, 1, 1 ) ); // no WGS84 - FIXME M_TO_UNITS
       }
     } catch ( IOException e ) {
-      TDLog.Error( "DAT I/O error " + e.getMessage() );
+      TDLog.e( "DAT I/O error " + e.getMessage() );
       throw new ParserException( getName() + survey, linenr );
     }
     // TDLog.v( "DAT shots " + temp_shots.size() );
@@ -418,12 +418,12 @@ public class ParserDat extends TglParser
             if ( sh.from.equals(s.getFullName() ) ) {
               sf = s;
               if (  sh.from_station == null ) sh.from_station = s;
-              else if ( sh.from_station != s ) TDLog.Error( "shot " + sh.from + " " + sh.to + " from-station mismatch ");
+              else if ( sh.from_station != s ) TDLog.e( "shot " + sh.from + " " + sh.to + " from-station mismatch ");
             } 
             if ( sh.to.equals( s.getFullName() ) )   {
               st = s;
               if (  sh.to_station == null ) sh.to_station = s;
-              else if ( sh.to_station != s ) TDLog.Error( "shot " + sh.from + " " + sh.to + " to-station mismatch ");
+              else if ( sh.to_station != s ) TDLog.e( "shot " + sh.from + " " + sh.to + " to-station mismatch ");
             }
             if ( sf != null && st != null ) break;
           }

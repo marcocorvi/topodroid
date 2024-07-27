@@ -123,7 +123,7 @@ public class DrawingStationUser extends DrawingPath
   private void setScale( int scale )
   {
     if ( scale != mScale ) {
-      // TDLog.Error( "set scale " + scale );
+      // TDLog.e( "set scale " + scale );
       mScale = scale;
       // station point does not have text
       float f = 1.0f;
@@ -177,7 +177,7 @@ public class DrawingStationUser extends DrawingPath
         dos.writeInt( (scrap >= 0)? scrap : mScrap );
       dos.writeUTF( mName );
     } catch ( IOException e ) {
-      TDLog.Error( "ERROR-dos station " + mName );
+      TDLog.e( "ERROR-dos station " + mName );
     }
   }
 
@@ -199,7 +199,7 @@ public class DrawingStationUser extends DrawingPath
       // TDLog.Log( TDLog.LOG_PLOT, "S " + name + " " + x + " " + y );
       return new DrawingStationUser( name, x, y, scale, scrap );
     } catch ( IOException e ) {
-      TDLog.Error( "ERROR-dis station " + e.getMessage() );
+      TDLog.e( "ERROR-dis station " + e.getMessage() );
     }
     return null;
   }
@@ -215,7 +215,7 @@ public class DrawingStationUser extends DrawingPath
   //     if ( version >= 401160 ) dis.readInt();
   //     dis.readUTF();
   //   } catch ( IOException e ) {
-  //     TDLog.Error( "ERROR-dis station " + e.getMessage() );
+  //     TDLog.e( "ERROR-dis station " + e.getMessage() );
   //   }
   // }
 

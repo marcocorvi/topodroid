@@ -60,7 +60,7 @@ class SymbolArea extends Symbol
   {
     if ( mBitmap == null ) return false;
     mOrientation = angle;
-    // TDLog.Error( "ERROR area symbol set orientation " + angle + " not supported" );
+    // TDLog.e( "ERROR area symbol set orientation " + angle + " not supported" );
     android.graphics.Matrix m = new android.graphics.Matrix();
     m.preRotate( (float)mOrientation );
     mShader.setLocalMatrix( m );
@@ -104,7 +104,7 @@ class SymbolArea extends Symbol
   void rotateGradArea( double a ) 
   {
     if ( mOrientable ) {
-      // TDLog.Error( "ERROR area symbol rotate by " + a + " not implemented" );
+      // TDLog.e( "ERROR area symbol rotate by " + a + " not implemented" );
       // mOrientation += a;
       // while ( mOrientation >= 360 ) mOrientation -= 360;
       // while ( mOrientation < 0 ) mOrientation += 360;
@@ -270,7 +270,7 @@ class SymbolArea extends Symbol
                 try {
                   mLevel = ( Integer.parseInt( vals[k] ) );
                 } catch( NumberFormatException e ) {
-                  TDLog.Error("Non-integer level");
+                  TDLog.e("Non-integer level");
                 }
               }
             } else if ( vals[k].equals("roundtrip") ) {
@@ -279,7 +279,7 @@ class SymbolArea extends Symbol
                 try {
                   mRoundTrip = ( Integer.parseInt( vals[k] ) );
                 } catch( NumberFormatException e ) {
-                  TDLog.Error("Non-integer roundtrip");
+                  TDLog.e("Non-integer roundtrip");
                 }
               }
   	    } else if ( vals[k].equals("color") ) {
@@ -288,7 +288,7 @@ class SymbolArea extends Symbol
                 try {
   	          color = Integer.decode( vals[k] );
                 } catch( NumberFormatException e ) {
-                  TDLog.Error("Non-integer color");
+                  TDLog.e("Non-integer color");
                 }
               }
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -296,7 +296,7 @@ class SymbolArea extends Symbol
                 try {
   	          alpha = Integer.decode( vals[k] );
                 } catch( NumberFormatException e ) {
-                  TDLog.Error("Non-integer alpha");
+                  TDLog.e("Non-integer alpha");
                 }
   	      }
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -304,7 +304,7 @@ class SymbolArea extends Symbol
                 try {
   	          alpha_bg = Integer.decode( vals[k] );
                 } catch( NumberFormatException e ) {
-                  TDLog.Error("Non-integer alpha-bg");
+                  TDLog.e("Non-integer alpha-bg");
                 }
   	      }
   	    } else if ( vals[k].equals("bitmap") ) {
@@ -346,7 +346,7 @@ class SymbolArea extends Symbol
                     }
                   }   
                 } catch ( NumberFormatException e ) {
-                  TDLog.Error( filename + " parse bitmap error: " + line );
+                  TDLog.e( filename + " parse bitmap error: " + line );
                 }
               }
   	    } else if ( vals[k].equals("endbitmap") ) {
@@ -381,9 +381,9 @@ class SymbolArea extends Symbol
         line = br.readLine();
       }
     } catch ( FileNotFoundException e ) {
-      TDLog.Error( "File not found: " + e.getMessage() );
+      TDLog.e( "File not found: " + e.getMessage() );
     } catch( IOException e ) {
-      TDLog.Error( "I/O error: " + e.getMessage() );
+      TDLog.e( "I/O error: " + e.getMessage() );
     }
     makeShader( mBitmap, mXMode, mYMode, true );
   }

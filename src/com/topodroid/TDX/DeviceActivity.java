@@ -518,7 +518,7 @@ public class DeviceActivity extends Activity
           try {
             bt_name = device.getName();
           } catch( SecurityException e ) {
-            TDLog.Error("SECURITY " + e.getMessage() );
+            TDLog.e("SECURITY " + e.getMessage() );
           }
           if ( bt_name == null ) {
             if ( device.getType() == 2 ) { // Bluetooth LE
@@ -557,7 +557,7 @@ public class DeviceActivity extends Activity
           // }
         }
         if ( dev != null ) {
-          // // TDLog.Error( "device " + name );
+          // // TDLog.e( "device " + name );
           // if ( dev.mModel.startsWith( Device.NAME_DISTOX2 ) ) {      // DistoX2 X310
           //   mArrayAdapter.add( " X310 " + dev.mName + " " + addr );
           // } else if ( dev.mModel.equals( Device.NAME_DISTOX1 ) ) {    // DistoX A3
@@ -591,7 +591,7 @@ public class DeviceActivity extends Activity
     }
 
     if ( ! ( view instanceof TextView ) ) {
-      TDLog.Error("device activity view instance of " + view.toString() );
+      TDLog.e("device activity view instance of " + view.toString() );
       return;
     }
     CharSequence item = ((TextView) view).getText();
@@ -777,7 +777,7 @@ public class DeviceActivity extends Activity
           info.show();
           (new CavwayInfoReadTask(mApp, info)).execute();
         } else {
-          // TDLog.Error( "Unknown device type " + currDeviceA().mType );
+          // TDLog.e( "Unknown device type " + currDeviceA().mType );
           TDToast.makeBad( String.format(Locale.US, getResources().getString( R.string.unknown_device_type ), currDeviceA().mType ) );
         }
         // setTitleColor( TDColor.TITLE_NORMAL );
@@ -1101,7 +1101,7 @@ public class DeviceActivity extends Activity
   //           setState( true );
   //         }
   //       } else if ( result == RESULT_CANCELED ) {
-  //         TDLog.Error( "CANCELED");
+  //         TDLog.e( "CANCELED");
   //         // finish(); // back to survey
   //       }
   //       mHasNonameDevice = updateNonameList();
@@ -1131,7 +1131,7 @@ public class DeviceActivity extends Activity
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        // TDLog.Error( "key down: code " + code );
+        // TDLog.e( "key down: code " + code );
     }
     return false;
   }

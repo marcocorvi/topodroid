@@ -96,7 +96,7 @@ public class QCamDrawingSurface extends SurfaceView
       DisplayManager dm = (DisplayManager)( mContext.getSystemService( Context.DISPLAY_SERVICE ) );
       mDisplay = dm.getDisplay( Display.DEFAULT_DISPLAY );
     } catch ( ClassCastException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
   }
 
@@ -145,7 +145,7 @@ public class QCamDrawingSurface extends SurfaceView
       setMinimumHeight( h );
       startPreview();
     } catch (Exception e) {
-      TDLog.Error( "QCAM Error setting camera preview: " + e.getMessage());
+      TDLog.e( "QCAM Error setting camera preview: " + e.getMessage());
     }
   }
 
@@ -213,7 +213,7 @@ public class QCamDrawingSurface extends SurfaceView
         mCamera.takePicture( mShutter, mRaw, null, mJpeg);
         ret = true;
       } catch ( RuntimeException e ) {
-        TDLog.Error("QCAM Error take picture " + e.getMessage() );
+        TDLog.e("QCAM Error take picture " + e.getMessage() );
       }
     }
     // mQCam.enableButtons( true );
@@ -295,7 +295,7 @@ public class QCamDrawingSurface extends SurfaceView
   //     try {
   //       mCamera.setDisplayOrientation( 90 );
   //     } catch ( IOException e ) {
-  //       TDLog.Error( "QCAM cannot set preview display " + e.getMessage() );
+  //       TDLog.e( "QCAM cannot set preview display " + e.getMessage() );
   //     }
   //     // if ( mOrientationListener != null ) mOrientationListener.enable( );
   //     startPreview();
@@ -303,7 +303,7 @@ public class QCamDrawingSurface extends SurfaceView
   //   } catch ( RuntimeException e ) { // fail to connect to camera service
   //     if ( mCamera != null ) mCamera.release();
   //     mCamera = null;
-  //     TDLog.Error( "QCAM error: " + e.getMessage() );
+  //     TDLog.e( "QCAM error: " + e.getMessage() );
   //   }
   //   return false;
   // }
@@ -322,7 +322,7 @@ public class QCamDrawingSurface extends SurfaceView
         // if ( mOrientationListener != null ) mOrientationListener.enable( );
         mCamera.startPreview();
       } catch ( Exception e ) {
-        TDLog.Error( "QCAM Error start preview: " + e.getMessage());
+        TDLog.e( "QCAM Error start preview: " + e.getMessage());
       }
     }
   }
@@ -339,7 +339,7 @@ public class QCamDrawingSurface extends SurfaceView
         mCamera.stopPreview();
       } catch ( Exception e ) {
         // ignore: tried to stop a non-existent preview
-        TDLog.Error( "QCAM Error stop preview: " + e.getMessage());
+        TDLog.e( "QCAM Error stop preview: " + e.getMessage());
       }
     }
   }

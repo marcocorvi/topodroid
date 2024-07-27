@@ -202,8 +202,13 @@ public class DrawingCommandManager
    */
   private int getMaxScrapIdx()
   { 
-    int size = mScraps.size();
-    return ( size == 0 )? -1 : mScraps.get( size-1 ).mScrapIdx; 
+    int max = -1;
+    for ( Scrap s : mScraps ) {
+      if ( s.mScrapIdx > max ) max = s.mScrapIdx;
+    }
+    return max;
+    // int size = mScraps.size();
+    // return ( size == 0 )? -1 : mScraps.get( size-1 ).mScrapIdx; 
   }
 
   /** set the current scrap
@@ -233,6 +238,7 @@ public class DrawingCommandManager
 
   private void setCurrentScrapByIdx( int idx ) // force = false // TH2EDIT no force
   {
+    TDLog.v("set current scrap by idx " + idx + " current scrap idx " + ( (mCurrentScrap==null)? "undef." : mCurrentScrap.mScrapIdx ) );
     if ( idx < 0 ) return; // -1;
     if ( mCurrentScrap != null && idx == mCurrentScrap.mScrapIdx ) return;
     // if ( mMode >= 3 && idx > 0 ) { // TODO CHECK
@@ -246,9 +252,10 @@ public class DrawingCommandManager
       }
     }
     // if ( idx >= getMaxScrapIdx() ) newScrapIndex( false ); // TH2EDIT no false
-    addScrap( idx ); // TH2EDIT no false
+    TDLog.v("add scrap - idx " + idx );
+    addScrap( idx ); // TH2EDIT no false // this sets the new scrap as current scrap
     // mScrapIdx = idx;
-    mCurrentScrap = mScraps.get( idx );
+    // mCurrentScrap = mScraps.get( idx );
     // TDLog.v("set current scrap by idx " + mScrapIdx );
   }
 
@@ -282,27 +289,29 @@ public class DrawingCommandManager
     }
     return false;
   }
-
   
   int newScrapIndex( boolean force )  // TH2EDIT no force
   { 
     if ( force || mMode < 3 ) { // TH2EDIT no force
       int idx = getMaxScrapIdx() + 1;
       // TDLog.v( "plot " + mPlotName + " scrap idx " + idx + ": current nr " + mScraps.size() );
-      addScrap( idx );
+      addScrap( idx ); // this sets the new scrap as current scrap
       // mScrapIdx = idx;
       // FIXME-HIDE addShotsToScrapSelection( mCurrentScrap );
     }
     return mCurrentScrap.mScrapIdx;
   }
 
-  private int addScrap( int idx )
+  /** add a new scrap with a specified index, and set it as the current scrap
+   * @param idx   scrap index
+   * @return the new scrap 
+   */
+  private Scrap addScrap( int idx )
   {
     mCurrentScrap = new Scrap( idx, mPlotName );
     mScraps.add( mCurrentScrap ); 
-    return mCurrentScrap.mScrapIdx; // idx
+    return mCurrentScrap;
   }
-
 
   /** @return the maximum scrap index plus one (this was the list.size() when the scrap indices were consecutive)
    * @note used by DXF export
@@ -347,6 +356,17 @@ public class DrawingCommandManager
     }
     return false;
   }
+
+  // /** @return the scrap with given index
+  //  * @param idx   scrap index
+  //  */
+  // private Scrap getScrapByIndex( int idx ) 
+  // {
+  //   for ( Scrap s : mScraps ) {
+  //     if ( idx == s.mScrapIdx ) return s;
+  //   }
+  //   return null;
+  // }
 
   // ----------------------------------------------------------------
   // PATH_MULTISELECT
@@ -1392,7 +1412,7 @@ public class DrawingCommandManager
   //       width  = (int)((bounds.right - bounds.left + 2 * BORDER) * mBitmapScale );
   //       height = (int)((bounds.bottom - bounds.top + 2 * BORDER) * mBitmapScale );
   //     } catch ( IllegalArgumentException e ) {
-  //       TDLog.Error("create bitmap illegal arg " + e.getMessage() );
+  //       TDLog.e("create bitmap illegal arg " + e.getMessage() );
   //       return null;
   //     }
   //   }
@@ -1532,7 +1552,7 @@ public class DrawingCommandManager
   void executeAll( Canvas canvas, float zoom, DrawingStationSplay station_splay, boolean inverted_colors )
   {
     if ( canvas == null ) {
-      TDLog.Error( "drawing execute all: null canvas");
+      TDLog.e( "drawing execute all: null canvas");
       return;
     }
 

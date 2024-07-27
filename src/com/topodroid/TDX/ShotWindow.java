@@ -472,7 +472,7 @@ public class ShotWindow extends Activity
       return;
     }
     if ( TDLog.isStreamFile() ) {
-      TDLog.f("SHOT WINDOW " + TDLog.threadId() + " update block list. Id: " + blk_id + " is scan: " +  blk.isScan() );
+      TDLog.e("SHOT WINDOW " + TDLog.threadId() + " update block list. Id: " + blk_id + " is scan: " +  blk.isScan() );
     }
     // FIXME 3.3.0
     boolean add_block = mDataAdapter.addDataBlock( blk ); // avoid double block-adding
@@ -511,7 +511,7 @@ public class ShotWindow extends Activity
         }
       }
     // } else {
-    //   if ( TDLog.isStreamFile() ) TDLog.f( "block " + blk_id + " already on the list");
+    //   if ( TDLog.isStreamFile() ) TDLog.e( "block " + blk_id + " already on the list");
     }
   }
 
@@ -1485,7 +1485,7 @@ public class ShotWindow extends Activity
       mDataAdapter.show_ids = ( vals.length > 3 ) && vals[3].equals( TDString.ONE );
       mFlagLatest = ( vals.length > 4 ) && vals[4].equals( TDString.ONE );
     } else {
-      TDLog.Error("no saved data");
+      TDLog.e("no saved data");
     }
   }
     
@@ -1619,7 +1619,7 @@ public class ShotWindow extends Activity
             // setConnectionStatus( mDataDownloader.getStatus() );
             mDataDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_SHOT );
           } else {
-            TDLog.Error("Shot Window: null device A");
+            TDLog.e("Shot Window: null device A");
           }
 	  return;
         } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BT RESET
@@ -2578,7 +2578,7 @@ public class ShotWindow extends Activity
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        // TDLog.Error( "key down: code " + code );
+        // TDLog.e( "key down: code " + code );
     }
     return false;
   }

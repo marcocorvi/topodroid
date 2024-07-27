@@ -55,7 +55,7 @@ class  MagModel
       if ( wmm == null ) continue;
       int index = wmm.index();
       if ( index > nTerms ) {
-    	TDLog.Error( ">>>> index > nTerms " + index  + " size " + data.length );
+    	TDLog.e( ">>>> index > nTerms " + index  + " size " + data.length );
       }
       Main_Field_Coeff_G[ index ]  = wmm.v0;
       Main_Field_Coeff_H[ index ]  = wmm.v1;

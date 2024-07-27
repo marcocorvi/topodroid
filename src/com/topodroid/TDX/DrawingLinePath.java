@@ -171,7 +171,7 @@ public class DrawingLinePath extends DrawingPointLinePath
       ret.retracePath();
       return ret;
     } catch ( IOException e ) {
-      TDLog.Error( "LINE in error " + e.getMessage() );
+      TDLog.e( "LINE in error " + e.getMessage() );
       // TDLog.v( "LINE in error " + e.getMessage() );
     }
     return null;
@@ -213,7 +213,7 @@ public class DrawingLinePath extends DrawingPointLinePath
   //       }
   //     }
   //   } catch ( IOException e ) {
-  //     TDLog.Error( "LINE in error " + e.getMessage() );
+  //     TDLog.e( "LINE in error " + e.getMessage() );
   //   }
   // }
 
@@ -523,7 +523,7 @@ public class DrawingLinePath extends DrawingPointLinePath
   {
     String name  = getThName( );
     if ( name == null ) { // should not happen
-      TDLog.Error("null line name");
+      TDLog.e("null line name");
       name = SymbolLibrary.USER;
     }
     String group = BrushManager.getLineGroup( mLineType );
@@ -550,7 +550,7 @@ public class DrawingLinePath extends DrawingPointLinePath
       }
       // TDLog.Log( TDLog.LOG_PLOT, "L " + name + " " + npt );
     } catch ( IOException e ) {
-      TDLog.Error( "LINE out error " + e.toString() );
+      TDLog.e( "LINE out error " + e.toString() );
     }
   }
 

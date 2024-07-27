@@ -817,7 +817,7 @@ public class DrawingWindow extends ItemDrawer
       return;
     }
     if ( PlotType.isAnySection( mType ) ) {
-      TDLog.Error("X-Sections rename not implemented");
+      TDLog.e("X-Sections rename not implemented");
     } else if ( PlotType.isProfile( mType ) || mType == PlotType.PLOT_PLAN ) { 
       String name1 = name + "p";
       String name2 = name + "s";
@@ -1575,14 +1575,14 @@ public class DrawingWindow extends ItemDrawer
       try { 
         (new SavePlotFileTask( mActivity, null, this, null, psd2.num, /* psd2.util, */ psd2.cm, psd2.plot, psd2.filename, psd2.type, psd2.azimuth, psd2.clino, psd2.suffix, r, mTh2Edit )).execute(); // TH2EDIT
       } catch ( RejectedExecutionException e ) { 
-        TDLog.Error("rejected exec save plot " + psd2.filename );
+        TDLog.e("rejected exec save plot " + psd2.filename );
       }
     }
     try { 
       // TDLog.Log( TDLog.LOG_IO, "save plot [1] " + psd1.fname );
       (new SavePlotFileTask( mActivity, null, this, saveHandler, psd1.num, /* psd1.util, */ psd1.cm, psd1.plot, psd1.filename, psd1.type, psd1.azimuth, psd1.clino, psd1.suffix, r, mTh2Edit )).execute(); // TH2EDIT
     } catch ( RejectedExecutionException e ) { 
-      TDLog.Error("rejected exec save plot " + psd1.filename );
+      TDLog.e("rejected exec save plot " + psd1.filename );
       -- mNrSaveTh2Task;
     }
   }
@@ -2835,7 +2835,7 @@ public class DrawingWindow extends ItemDrawer
       try {
         mApp_mData.updatePlot( mPid3, mSid, mOffset.x, mOffset.y, mZoom );
       } catch ( IllegalStateException e ) {
-        TDLog.Error("cannot save plot state: " + e.getMessage() );
+        TDLog.e("cannot save plot state: " + e.getMessage() );
       }
     }
 
@@ -3155,7 +3155,7 @@ public class DrawingWindow extends ItemDrawer
         // TDLog.v("PLOT pause: " + mOffset.x + " " + mOffset.y + " " + mZoom );
         mApp_mData.updatePlot( mPid, mSid, mOffset.x, mOffset.y, mZoom );
       } catch ( IllegalStateException e ) {
-        TDLog.Error("cannot save plot state: " + e.getMessage() );
+        TDLog.e("cannot save plot state: " + e.getMessage() );
       }
     }
     // TODO exec this line in a Thread
@@ -3259,7 +3259,7 @@ public class DrawingWindow extends ItemDrawer
   private void doStart( boolean do_load, float tt, Vector3D center )
   {
     if ( mApp_mData == null ) {
-      TDLog.Error("DrawingWindow start with null DB");
+      TDLog.e("DrawingWindow start with null DB");
       finish();
       return;
     }
@@ -3618,7 +3618,7 @@ public class DrawingWindow extends ItemDrawer
           // TDLog.v("leg " + b.mFrom + " " + xfrom + " " + yfrom + " - " + b.mTo + " " + xto + " " + yto + " cosine " + cosine );
           addFixedLine( mType, b, xfrom, yfrom, xto, yto, cosine, true, false ); // splay, not-selectable
         } else {
-          TDLog.Error( "splay block without station " + b.mFrom );
+          TDLog.e( "splay block without station " + b.mFrom );
         }
       } else {
         // TDLog.v("multileg leg block " + b.mFrom + " " + b.mTo );
@@ -3651,7 +3651,7 @@ public class DrawingWindow extends ItemDrawer
             mDrawingSurface.addDrawingDotPath( path );
           }
         } else {
-          TDLog.Error( "leg block without station " + b.mFrom + " " + b.mTo );
+          TDLog.e( "leg block without station " + b.mFrom + " " + b.mTo );
         }
       }
     }
@@ -4131,7 +4131,7 @@ public class DrawingWindow extends ItemDrawer
     if ( plot != null ) {
       mApp_mData.dropPlot( plot.id, TDInstance.sid );
     } else {
-      TDLog.Error("Delete section line. No plot NAME " + xs_id + " SID " + TDInstance.sid );
+      TDLog.e("Delete section line. No plot NAME " + xs_id + " SID " + TDInstance.sid );
     }
   }
 
@@ -5935,7 +5935,7 @@ public class DrawingWindow extends ItemDrawer
       xs_id = "xh-" + name;
       xtype = PlotType.PLOT_XH_SECTION;
     } else {
-      TDLog.Error("No at-station section to delete. Plot type " + type + " Name " + name + " SID "  + TDInstance.sid );
+      TDLog.e("No at-station section to delete. Plot type " + type + " Name " + name + " SID "  + TDInstance.sid );
       return;
     }
 
@@ -6868,7 +6868,7 @@ public class DrawingWindow extends ItemDrawer
     {
       assert( mLastLinePath == null);
       if ( mPlot3 == null ) {
-        TDLog.Error( "set plot xsection: null plot" );
+        TDLog.e( "set plot xsection: null plot" );
         return;
       }
       // TDLog.v( "PLOT set type 3 mType " + mType );
@@ -6904,7 +6904,7 @@ public class DrawingWindow extends ItemDrawer
       // if ( TopoDroidApp.mShotWindow != null ) {
       //   // TopoDroidApp.mShotWindow.mRecentPlotType = mType;
       // } else {
-      //   TDLog.Error("Null app mShotWindow on recent plot type2");
+      //   TDLog.e("Null app mShotWindow on recent plot type2");
       // }
       setTheTitle();
     } 
@@ -6932,7 +6932,7 @@ public class DrawingWindow extends ItemDrawer
       // if ( TopoDroidApp.mShotWindow != null ) {
       //   // TopoDroidApp.mShotWindow.mRecentPlotType = mType;
       // } else {
-      //   TDLog.Error("Null app mShotWindow on recent plot type1");
+      //   TDLog.e("Null app mShotWindow on recent plot type1");
       // }
       setTheTitle();
     }
@@ -7324,7 +7324,7 @@ public class DrawingWindow extends ItemDrawer
                 if ( photo != null ) {
                   new DrawingPhotoEditDialog( mActivity, photo ).show();
                 } else {
-                  TDLog.Error("Picture without photo");
+                  TDLog.e("Picture without photo");
                 }
               } else if ( point instanceof DrawingAudioPath ) { // BrushManager.isPointAudio( point.mPointType )
                 if ( audioCheck ) {
@@ -7349,7 +7349,7 @@ public class DrawingWindow extends ItemDrawer
                 if ( id != null ) {
                   new DrawingLineSectionDialog( mActivity, this, h_section, true, id, line, null, null, 0, 0, -1, null ).show();
                 } else {
-                  TDLog.Error("edit section line with null id" );
+                  TDLog.e("edit section line with null id" );
                 }
               } else {
                 new DrawingLineDialog( mActivity, this, line, sp.mPoint ).show();
@@ -7368,7 +7368,7 @@ public class DrawingWindow extends ItemDrawer
               }
             }
           } else {
-            TDLog.Error("selected point has null item");
+            TDLog.e("selected point has null item");
           }
         }
         clearSelected();
@@ -7796,7 +7796,7 @@ public class DrawingWindow extends ItemDrawer
       TDToast.make( String.format( getResources().getString(R.string.saved_file_1), fullname ) );
     // } catch ( NoSuchMethodException e ) {
     } catch ( IOException e ) {
-      TDLog.Error("failed PDF export " + e.getMessage() );
+      TDLog.e("failed PDF export " + e.getMessage() );
     } finally {
       TDsafUri.closeFileDescriptor( pfd );
     }
@@ -7958,7 +7958,7 @@ public class DrawingWindow extends ItemDrawer
         (new SavePlotFileTask( mActivity, uri, this, th2Handler, mNum, manager, info, name, type, azimuth, oblique, save_mode, 0, false )).execute();
       }
     } catch ( RejectedExecutionException e ) {
-      TDLog.Error("Sketch saving exec rejected");
+      TDLog.e("Sketch saving exec rejected");
     }
   }
 
@@ -8225,7 +8225,7 @@ public class DrawingWindow extends ItemDrawer
         return true;
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        TDLog.Error( "key down: code " + code );
+        TDLog.e( "key down: code " + code );
     }
     return false;
   }
@@ -8604,7 +8604,7 @@ public class DrawingWindow extends ItemDrawer
         // DrawingSurface.addManagerToCache( mFullName1 );
         setPlotType1( COMPUTE_YES, PARAMS_YES );
       } else {
-        TDLog.Error("null Plot 1");
+        TDLog.e("null Plot 1");
       }
     } else if ( PlotType.isProfile( type ) ) {
       if ( mPlot2 != null ) {
@@ -8614,7 +8614,7 @@ public class DrawingWindow extends ItemDrawer
         // now switch to extended view FIXME-VIEW
         setPlotType2( COMPUTE_YES, PARAMS_YES );
       } else {
-        TDLog.Error("null Plot 2");
+        TDLog.e("null Plot 2");
       }
     } else {
       // TDLog.v("doRecover section" );
@@ -8634,7 +8634,7 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       } else {
-        TDLog.Error("null Plot 3");
+        TDLog.e("null Plot 3");
       }
     }
     mOffset.x = x;
@@ -9230,7 +9230,7 @@ public class DrawingWindow extends ItemDrawer
       //       createPhotoPoint();
       //     } else {
       //       // TDLog.e("failed to save photo");
-      //       TDLog.Error("failed to save photo");
+      //       TDLog.e("failed to save photo");
       //     }
       //   }
       //   break;
@@ -9275,7 +9275,7 @@ public class DrawingWindow extends ItemDrawer
               if ( TDLevel.overExpert ) {
                 mDrawingSurface.clearDrawing();
                 if ( ! importReader( uri ) ) {
-                  TDLog.Error("DRAW import failed " + mFullName3 );
+                  TDLog.e("DRAW import failed " + mFullName3 );
                   finish();
                 }
               } else {
@@ -9283,7 +9283,7 @@ public class DrawingWindow extends ItemDrawer
                 finish();
               }
             } else {
-              // TDLog.Error("DRAW import unsupported " + ext);
+              // TDLog.e("DRAW import unsupported " + ext);
               TDToast.makeBad( String.format( getResources().getString( R.string.unsupported_extension ), ext ) );
               finish();
             }
@@ -9292,7 +9292,7 @@ public class DrawingWindow extends ItemDrawer
           //   // importStream( uri, name, type );
           }
         } else {
-          TDLog.Error("DRAW import canceled");
+          TDLog.e("DRAW import canceled");
           finish();
         }
         break;
@@ -9321,7 +9321,7 @@ public class DrawingWindow extends ItemDrawer
                 finish();
               }
             } else {
-              // TDLog.Error("DRAW export unsupported extension " + ext);
+              // TDLog.e("DRAW export unsupported extension " + ext);
               TDToast.makeBad( String.format( getResources().getString( R.string.unsupported_extension ), ext ) );
               finish();
             }
@@ -9330,7 +9330,7 @@ public class DrawingWindow extends ItemDrawer
           //   // importStream( uri, name, type );
           }
         } else {
-          TDLog.Error("DRAW export canceled");
+          TDLog.e("DRAW export canceled");
           finish();
         }
         break;
@@ -9351,7 +9351,7 @@ public class DrawingWindow extends ItemDrawer
       FileReader fr = TDsafUri.docFileReader( pfd );
       return DrawingTh.doLoadTherion( mDrawingSurface, fr, 0, 0 );
     } else {
-      TDLog.Error("DRAW null fd");
+      TDLog.e("DRAW null fd");
     }
     return false;
   }
@@ -9372,7 +9372,7 @@ public class DrawingWindow extends ItemDrawer
       doSaveTh2( uri, mType, true ); // true = toast
       return true;
     } else {
-      TDLog.Error("DRAW null fd");
+      TDLog.e("DRAW null fd");
     }
     return false;
   }
@@ -9387,7 +9387,7 @@ public class DrawingWindow extends ItemDrawer
   private void selectFromProvider( int index, int request, String mode ) // IMPORT
   {
     if ( index < 0 || index >= TDConst.mMimeType.length ) {
-      TDLog.Error("Bad import index " + index );
+      TDLog.e("Bad import index " + index );
       TDToast.makeBad( String.format( getResources().getString( R.string.index_oob ), index ) );
       return;
     } 
@@ -9455,7 +9455,7 @@ public class DrawingWindow extends ItemDrawer
   void scrapOutlineDialog()
   {
     if ( mType != PlotType.PLOT_PLAN && mType != PlotType.PLOT_EXTENDED ) {
-      TDLog.Error( "outline bad scrap type " + mType );
+      TDLog.e( "outline bad scrap type " + mType );
       return;
     }
     String name = ( mType == PlotType.PLOT_PLAN )? mPlot1.name : mPlot2.name;
@@ -9467,7 +9467,7 @@ public class DrawingWindow extends ItemDrawer
       }
     }
     if ( plots.size() == 0 ) {
-      TDLog.Error( "outline no other scraps" );
+      TDLog.e( "outline no other scraps" );
       return;
     }
     if ( mType == PlotType.PLOT_PLAN ) {

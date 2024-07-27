@@ -51,7 +51,7 @@ public class PTId
         major = Integer.parseInt( vals[0] );
         minor = Integer.parseInt( vals[1] );
       } catch ( NumberFormatException e ) {
-        TDLog.Error( "PTId::set major/minor parse error " + vals[0] + " " + vals[1] );
+        TDLog.e( "PTId::set major/minor parse error " + vals[0] + " " + vals[1] );
         return false;
       }
       setMajorMinor( major, minor );
@@ -60,7 +60,7 @@ public class PTId
         int n = Integer.parseInt( str );
         setNumber( n + 0x80000001 );
       } catch ( NumberFormatException e ) { // should not happen
-        TDLog.Error( "PTId::set setNumber parse error " + str );
+        TDLog.e( "PTId::set setNumber parse error " + str );
         // setNumber( ID_COUNT + 0x80000001 );
         // ++ ID_COUNT;
         return false;

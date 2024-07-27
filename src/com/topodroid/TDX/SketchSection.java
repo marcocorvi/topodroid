@@ -463,7 +463,7 @@ public class SketchSection extends SketchPath
     mH.dump("  H");
     mS.dump("  S");
     mN.dump("  N");
-    // TDLog.Error( "ERROR Sketch Section toDataStream ");
+    // TDLog.e( "ERROR Sketch Section toDataStream ");
     dos.write( 'X' );
     dos.writeInt( mId );
     dos.writeInt( mSectionType );
@@ -527,7 +527,7 @@ public class SketchSection extends SketchPath
         if ( line.getId() > nMaxLineId ) nMaxLineId = line.getId();
         cmd.addLine( mId, line );
       } else {
-        TDLog.Error("Sketch line with " + line.size() + " points" );
+        TDLog.e("Sketch line with " + line.size() + " points" );
       }
     }
     // TDLog.v("READ section " + mId + " max line id " + nMaxLineId + " lines " + nln );

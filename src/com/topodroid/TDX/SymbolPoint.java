@@ -315,7 +315,7 @@ public class SymbolPoint extends Symbol
                 try {
                   mLevel = ( Integer.parseInt( vals[k] ) );
                 } catch( NumberFormatException e ) {
-                  TDLog.Error("Non-integer level");
+                  TDLog.e("Non-integer level");
                 }
               }
             } else if ( vals[k].equals("roundtrip") ) {
@@ -324,7 +324,7 @@ public class SymbolPoint extends Symbol
                 try {
                   mRoundTrip = ( Integer.parseInt( vals[k] ) );
                 } catch( NumberFormatException e ) {
-                  TDLog.Error("Non-integer roundtrip");
+                  TDLog.e("Non-integer roundtrip");
                 }
               }
             } else if ( vals[k].equals("orientation") ) {
@@ -374,7 +374,7 @@ public class SymbolPoint extends Symbol
                 try {
                   color = Integer.decode( vals[k] ) | 0xff000000;
                 } catch ( NumberFormatException e ) {
-                  TDLog.Error("Non-integer color");
+                  TDLog.e("Non-integer color");
                 }
               }
             } else if ( vals[k].equals("csurvey") ) {
@@ -389,11 +389,11 @@ public class SymbolPoint extends Symbol
               }
             } else if ( vals[k].equals("endsymbol") ) {
               if ( name == null ) {
-                TDLog.Error("NULL name " + pathname );
+                TDLog.e("NULL name " + pathname );
               } else if ( th_name == null ) {
-                TDLog.Error("NULL th_name " + pathname );
+                TDLog.e("NULL th_name " + pathname );
               } else if ( path == null ) {
-                TDLog.Error("NULL path " + pathname);
+                TDLog.e("NULL path " + pathname);
               } else {
                 if ( cnt == 0 ) {
                   mName   = name;
@@ -413,7 +413,7 @@ public class SymbolPoint extends Symbol
                 //     mOrientable = true;
                 //   }
                 } else {
-                  TDLog.Error("Only one point per file " + pathname);
+                  TDLog.e("Only one point per file " + pathname);
                 }
                 ++ cnt;
               }
@@ -500,7 +500,7 @@ public class SymbolPoint extends Symbol
             pv1.format(Locale.US, "M %.2f %.2f ", x00*csxScale, y00*csxScale );
           }
         } catch ( NumberFormatException e ) {
-          TDLog.Error( path + " parse moveTo error" );
+          TDLog.e( path + " parse moveTo error" );
         }
       } else if ( "lineTo".equals( vals[k] ) ) {      
         try {
@@ -523,7 +523,7 @@ public class SymbolPoint extends Symbol
             pv1.format(Locale.US, "L %.2f %.2f ", x00*csxScale, y00*csxScale );
           }
         } catch ( NumberFormatException e ) {
-          TDLog.Error( path + " parse lineTo error" );
+          TDLog.e( path + " parse lineTo error" );
         }
       } else if ( "cubicTo".equals( vals[k] ) ) {
         // cp1x cp1y cp2x cp2y p2x p2y
@@ -609,7 +609,7 @@ public class SymbolPoint extends Symbol
                x0*csxdxfScale, y0*csxdxfScale, x1*csxdxfScale, y1*csxdxfScale, x2*csxdxfScale, y2*csxdxfScale );
           }
         } catch ( NumberFormatException e ) {
-          TDLog.Error( path + " parse cubicTo error" );
+          TDLog.e( path + " parse cubicTo error" );
         }
       } else if ( "addCircle".equals( vals[k] ) ) {
         try {
@@ -637,7 +637,7 @@ public class SymbolPoint extends Symbol
               x0*csxdxfScale, y0*csxdxfScale, x1*csxdxfScale );
           }
         } catch ( NumberFormatException e ) {
-          TDLog.Error( path + " parse circle error" );
+          TDLog.e( path + " parse circle error" );
         }
       } else if ( "arcTo".equals( vals[k] ) ) {
         // (x0,y0) top-left corner of rect
@@ -688,7 +688,7 @@ public class SymbolPoint extends Symbol
             pv1.format(Locale.US, "A %.2f %.2f 0 1 %.2f %.2f ", rx*csxdxfScale, ry*csxdxfScale, x00*csxScale, y00*csxScale );
           }
         } catch ( NumberFormatException e ) {
-          TDLog.Error( path + " parse arcTo error" );
+          TDLog.e( path + " parse arcTo error" );
         }
       }
     }

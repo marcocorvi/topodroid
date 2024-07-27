@@ -225,7 +225,7 @@ public class DrawingSvgBase
         out.write( sw.getBuffer().toString() );
         out.flush();
       } catch ( IOException e ) {
-        TDLog.Error( "SVG grid io-exception " + e.getMessage() );
+        TDLog.e( "SVG grid io-exception " + e.getMessage() );
       }
     }
   }
@@ -466,7 +466,7 @@ public class DrawingSvgBase
             done = true;
             break;
 	  default:
-	    TDLog.Error("TDR2SVG Error. unexpected code=" + what );
+	    TDLog.e("TDR2SVG Error. unexpected code=" + what );
 	    return;
         }
       }

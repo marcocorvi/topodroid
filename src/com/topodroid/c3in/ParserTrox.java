@@ -108,7 +108,7 @@ public class ParserTrox extends TglParser
     try {
       return Float.parseFloat( line.substring( pos, qos ) );
     } catch ( NumberFormatException e ) {
-      TDLog.Error("Non-number value");
+      TDLog.e("Non-number value");
     }
     return val;
   }
@@ -124,7 +124,7 @@ public class ParserTrox extends TglParser
   private boolean readFile( InputStreamReader isr ) throws ParserException
   {
     if ( isr == null ) {
-      TDLog.Error("Parser Trox: null input stream reader");
+      TDLog.e("Parser Trox: null input stream reader");
       throw new ParserException( "null TROX input", 0 );
     }
     String mEntrance = null;
@@ -160,7 +160,7 @@ public class ParserTrox extends TglParser
       if ( line == null ) return false;
       line = line.replaceAll("\\s+", " ");
       if ( ! line.startsWith( "<?xml " ) ) { // NOT XML
-        TDLog.Error( "VTopo trox not an xml file");
+        TDLog.e( "VTopo trox not an xml file");
         return false;
       }
 
@@ -333,7 +333,7 @@ public class ParserTrox extends TglParser
         // ignore if ( line.startsWith("<Couleur>") ) continue;
       }
     } catch ( IOException e ) {
-      TDLog.Error( "ERROR " + linenr + ": " + linenr );
+      TDLog.e( "ERROR " + linenr + ": " + linenr );
       throw new ParserException( getName(), linenr );
     }
     return true;
@@ -443,12 +443,12 @@ public class ParserTrox extends TglParser
             if ( s.hasName( sh.from ) ) {
               sf = s;
               if (  sh.from_station == null ) sh.from_station = s;
-              else if ( sh.from_station != s ) TDLog.Error( "TRO shot " + sh.from + " " + sh.to + " from-station mismatch ");
+              else if ( sh.from_station != s ) TDLog.e( "TRO shot " + sh.from + " " + sh.to + " from-station mismatch ");
             } 
             if ( s.hasName( sh.to ) )   {
               st = s;
               if (  sh.to_station == null ) sh.to_station = s;
-              else if ( sh.to_station != s ) TDLog.Error( "TRO shot " + sh.from + " " + sh.to + " to-station mismatch ");
+              else if ( sh.to_station != s ) TDLog.e( "TRO shot " + sh.from + " " + sh.to + " to-station mismatch ");
             }
             if ( sf != null && st != null ) break;
           }

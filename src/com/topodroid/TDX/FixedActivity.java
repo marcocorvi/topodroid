@@ -268,7 +268,7 @@ public class FixedActivity extends Activity
   private void refreshList()
   {
     if ( TopoDroidApp.mData == null ) {
-      TDLog.Error("FIXED refresh list : null Data helper");
+      TDLog.e("FIXED refresh list : null Data helper");
       return;
     }
     List< FixedInfo > fxds = TopoDroidApp.mData.selectAllFixed( TDInstance.sid, TDStatus.NORMAL );
@@ -348,7 +348,7 @@ public class FixedActivity extends Activity
       mFixedAdapter.add( f );
       mList.invalidate();
     } else {
-      TDLog.Error("FIXED failed database insert ");
+      TDLog.e("FIXED failed database insert ");
     }
   }
 
@@ -466,7 +466,7 @@ public class FixedActivity extends Activity
             new FixedGpsDialog( mContext, this ).show();
           }
         } else {
-          TDLog.Error("No location manager" );
+          TDLog.e("No location manager" );
         }
       } else {
         // TODO
@@ -494,7 +494,7 @@ public class FixedActivity extends Activity
         startActivity( intent );
         // startActivityForResult( intent, TDRequest.REQUEST_GPSTEST ); // GpsTest does not set result
       } catch ( RuntimeException e ) {
-        TDLog.Error("ERROR " + e.getMessage() );
+        TDLog.e("ERROR " + e.getMessage() );
       }
     }
     // refreshList();
@@ -712,9 +712,9 @@ public class FixedActivity extends Activity
             TDToast.makeBad( R.string.GPX_record_none );
           }
         } catch ( FileNotFoundException e ) {
-          TDLog.Error( "File not found " + e.getMessage() );
+          TDLog.e( "File not found " + e.getMessage() );
         } catch ( IOException e ) { 
-          TDLog.Error( "IO exception " + e.getMessage() );
+          TDLog.e( "IO exception " + e.getMessage() );
         }
       } else if ( reqCode == TDRequest.REQUEST_GPX_RECORDER ) { 
         Uri uri = intent.getData();
@@ -746,9 +746,9 @@ public class FixedActivity extends Activity
           }
           isr.close();
         } catch ( FileNotFoundException e ) {
-          TDLog.Error( "File not found " + e.getMessage() );
+          TDLog.e( "File not found " + e.getMessage() );
         } catch ( IOException e ) { 
-          TDLog.Error( "IO exception " + e.getMessage() );
+          TDLog.e( "IO exception " + e.getMessage() );
         }
       } else if ( reqCode == TDRequest.REQUEST_GPS_POSITION ) {
         Uri uri = intent.getData();
@@ -784,9 +784,9 @@ public class FixedActivity extends Activity
           }
           isr.close();
         } catch ( FileNotFoundException e ) {
-          TDLog.Error( "File not found " + e.getMessage() );
+          TDLog.e( "File not found " + e.getMessage() );
         } catch ( IOException e ) { 
-          TDLog.Error( "IO exception " + e.getMessage() );
+          TDLog.e( "IO exception " + e.getMessage() );
         }
       } else if ( reqCode == TDRequest.REQUEST_GPS_TEST ) {
         Uri uri = intent.getData();
@@ -810,9 +810,9 @@ public class FixedActivity extends Activity
             TDToast.makeBad( R.string.GPS_position_none );
           }
         } catch ( FileNotFoundException e ) {
-          TDLog.Error( "File not found " + e.getMessage() );
+          TDLog.e( "File not found " + e.getMessage() );
         } catch ( IOException e ) { 
-          TDLog.Error( "IO exception " + e.getMessage() );
+          TDLog.e( "IO exception " + e.getMessage() );
         }
       } else if ( reqCode == TDRequest.REQUEST_GPS_POINT ) { // csv format: type, date-time, lat, long, accur, alt, ...
         Uri uri = intent.getData();
@@ -854,9 +854,9 @@ public class FixedActivity extends Activity
             TDToast.makeBad( R.string.GPX_record_none );
           }
         } catch ( FileNotFoundException e ) {
-          TDLog.Error( "File not found " + e.getMessage() );
+          TDLog.e( "File not found " + e.getMessage() );
         } catch ( IOException e ) { 
-          TDLog.Error( "IO exception " + e.getMessage() );
+          TDLog.e( "IO exception " + e.getMessage() );
         }
       } else if ( reqCode == TDRequest.REQUEST_MOBILE_TOPOGRAPHER ) {
         Uri uri = intent.getData();
@@ -891,9 +891,9 @@ public class FixedActivity extends Activity
           }
           isr.close();
         } catch ( FileNotFoundException e ) {
-          TDLog.Error( "File not found " + e.getMessage() );
+          TDLog.e( "File not found " + e.getMessage() );
         } catch ( IOException e ) { 
-          TDLog.Error( "IO exception " + e.getMessage() );
+          TDLog.e( "IO exception " + e.getMessage() );
         }
       }
     }
@@ -917,7 +917,7 @@ public class FixedActivity extends Activity
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        // TDLog.Error( "key down: code " + code );
+        // TDLog.e( "key down: code " + code );
     }
     return false;
   }

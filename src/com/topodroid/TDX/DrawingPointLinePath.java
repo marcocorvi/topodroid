@@ -243,7 +243,7 @@ public class DrawingPointLinePath extends DrawingPath
     //   ++ size;
     // }
     // if ( size != mSize ) {
-    //   TDLog.Error( "recount size mismatch " + mSize + " " + size );
+    //   TDLog.e( "recount size mismatch " + mSize + " " + size );
     //   // throw new Exception("size mismatch");
     // }
   }
@@ -374,7 +374,7 @@ public class DrawingPointLinePath extends DrawingPath
         prev.mNext = next;
         prev = next;
         if ( next == null ) { 
-          TDLog.Error("Line reduce. Something went wrong: null next at size " + size + " Interrupt");
+          TDLog.e("Line reduce. Something went wrong: null next at size " + size + " Interrupt");
           pt = mLast;
           decimation = 0; // no more decimation
         } else {

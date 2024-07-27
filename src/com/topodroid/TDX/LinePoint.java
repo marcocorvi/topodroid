@@ -298,7 +298,7 @@ public class LinePoint extends Point2D
         dos.write( 0 );
       }
     } catch ( IOException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
   }
 

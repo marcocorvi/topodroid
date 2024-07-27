@@ -64,16 +64,16 @@ class ImportParser
   protected void checkValid() 
   {
     if ( mName == null ) {
-      TDLog.Error("invalid: null name"); 
+      TDLog.e("invalid: null name"); 
       mValid = false;
     } else if ( mName.length() == 0 ) {
-      TDLog.Error("invalid: empty name"); 
+      TDLog.e("invalid: empty name"); 
       mValid = false;
     } else if ( mDate == null ) {
-      TDLog.Error("invalid: null date"); 
+      TDLog.e("invalid: null date"); 
       mValid = false;
     } else if ( shots.size() == 0 ) {
-      TDLog.Error("invalid: no shots" );
+      TDLog.e("invalid: no shots" );
       mValid = false;
     } else {
       mValid = true;
@@ -162,7 +162,7 @@ class ImportParser
       readFile( br );
       fr.close();
     } catch ( IOException e ) {
-      TDLog.Error( "ERROR I/O " + e.toString() );
+      TDLog.e( "ERROR I/O " + e.toString() );
       throw new ParserException();
     }
     TDLog.Log( TDLog.LOG_THERION, "ImportParser shots "+ shots.size() +" splays "+ splays.size()  );
@@ -175,7 +175,7 @@ class ImportParser
       readFile( br );
       fr.close();
     } catch ( IOException e ) {
-      TDLog.Error( "ERROR I/O " + e.toString() );
+      TDLog.e( "ERROR I/O " + e.toString() );
       throw new ParserException();
     }
   }
@@ -197,7 +197,7 @@ class ImportParser
   //     }
   //     return new BufferedReader( isr );
   //   } catch ( FileNotFoundException e ) {
-  //     TDLog.Error("File not found");
+  //     TDLog.e("File not found");
   //   }
   //   return null;
   // }

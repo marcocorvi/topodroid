@@ -188,7 +188,7 @@ public class TdmViewSurface extends SurfaceView
             if ( vt != null ) {
               vst.add( vt );
             } else {
-              TDLog.Error("TdManager survey " + survey_name + " station " + st + " not in cmd-manager" );
+              TDLog.e("TdManager survey " + survey_name + " station " + st + " not in cmd-manager" );
             }
           }
         }

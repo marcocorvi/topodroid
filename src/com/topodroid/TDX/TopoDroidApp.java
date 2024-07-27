@@ -514,7 +514,7 @@ public class TopoDroidApp extends Application
         msg.what = w;
         new Messenger( hdl ).send( msg );
       } catch ( RemoteException e ) {
-        TDLog.Error( e.getMessage() );
+        TDLog.e( e.getMessage() );
       }
     }
   }
@@ -548,7 +548,7 @@ public class TopoDroidApp extends Application
     if ( TDInstance.sid <= 0 ) return null;
     if ( mData == null ) return null;
     return mData.selectSurveyInfo( TDInstance.sid );
-    // if ( info == null ) TDLog.Error("null survey info. sid " + TDInstance.sid );
+    // if ( info == null ) TDLog.e("null survey info. sid " + TDInstance.sid );
   }
 
   /** @return the xsection mode of the current survey: 0 shared, 1 private, -1 error
@@ -1116,7 +1116,7 @@ public class TopoDroidApp extends Application
         loader.setPriority( Thread.MIN_PRIORITY );
         loader.start();
       } else {
-        TDLog.Error("App init env [3] database not opened");
+        TDLog.e("App init env [3] database not opened");
       }
     }
     // mStationName = new StationName();
@@ -1434,9 +1434,9 @@ public class TopoDroidApp extends Application
       fw.flush();
       fw.close();
     } catch ( FileNotFoundException e ) {
-      TDLog.Error("manifest write failure: no file");
+      TDLog.e("manifest write failure: no file");
     } catch ( IOException e ) {
-      TDLog.Error("manifest write failure: " + e.getMessage() );
+      TDLog.e("manifest write failure: " + e.getMessage() );
     }
   }
 
@@ -1944,7 +1944,7 @@ public class TopoDroidApp extends Application
   {
     SurveyInfo survey_info = getSurveyInfo();
     if ( survey_info == null ) {
-      TDLog.Error("Error: null survey info");
+      TDLog.e("Error: null survey info");
       // TDLog.v( "null survey info");
       return;
     }
@@ -1996,7 +1996,7 @@ public class TopoDroidApp extends Application
     InputStream is = TDInstance.getResources().openRawResource( R.raw.firmware );
     firmwareUncompress( is, overwrite );
     try { is.close(); } catch ( IOException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
     mDData.setValue( "firmware_version", TDVersion.FIRMWARE_VERSION );
   }
@@ -2128,7 +2128,7 @@ public class TopoDroidApp extends Application
           if ( overwrite || ! TDFile.existPrivateFile( type, filepath ) ) {
             // APP_SAVE SYMBOLS LOAD_MISSING
             // if ( file.exists() ) {
-            //   if ( ! file.renameTo( TDFile.getFile( TDPath.getSymbolSaveFile( filepath ) ) ) ) TDLog.Error("File rename error");
+            //   if ( ! file.renameTo( TDFile.getFile( TDPath.getSymbolSaveFile( filepath ) ) ) ) TDLog.e("File rename error");
             // }
 
             // TDPath.checkPath( pathname );
@@ -2145,9 +2145,9 @@ public class TopoDroidApp extends Application
       }
       zin.close();
     } catch ( FileNotFoundException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     } catch ( IOException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
   }
 
@@ -2189,9 +2189,9 @@ public class TopoDroidApp extends Application
       }
       zin.close();
     } catch ( FileNotFoundException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     } catch ( IOException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
   }
 
@@ -2268,28 +2268,28 @@ public class TopoDroidApp extends Application
       try {
         l = Float.parseFloat( left ) / TDSetting.mUnitLength - calib;
       } catch ( NumberFormatException e ) {
-        TDLog.Error( "manual-shot parse error: left " + ((left==null)?"null":left) );
+        TDLog.e( "manual-shot parse error: left " + ((left==null)?"null":left) );
       }
     }  
     if ( right != null && right.length() > 0 ) {
       try {
         r = Float.parseFloat( right ) / TDSetting.mUnitLength - calib;
       } catch ( NumberFormatException e ) {
-        TDLog.Error( "manual-shot parse error: right " + ((right==null)?"null":right) );
+        TDLog.e( "manual-shot parse error: right " + ((right==null)?"null":right) );
       }
     }
     if ( up != null && up.length() > 0 ) {
       try {
         u = Float.parseFloat( up ) / TDSetting.mUnitLength - calib;
       } catch ( NumberFormatException e ) {
-        TDLog.Error( "manual-shot parse error: up " + ((up==null)?"null":up) );
+        TDLog.e( "manual-shot parse error: up " + ((up==null)?"null":up) );
       }
     }
     if ( down != null && down.length() > 0 ) {
       try {
         d = Float.parseFloat( down ) / TDSetting.mUnitLength - calib;
       } catch ( NumberFormatException e ) {
-        TDLog.Error( "manual-shot parse error: down " + ((down==null)?"null":down) );
+        TDLog.e( "manual-shot parse error: down " + ((down==null)?"null":down) );
       }
     }
 
@@ -2749,7 +2749,7 @@ public class TopoDroidApp extends Application
         return ((DistoXBLEComm)mComm).setXBLELaser(TDInstance.deviceAddress(), what, nr, lister, data_type, closeBT );
       }
     } else {
-      TDLog.Error("set XBLE laser: not XBLE comm");
+      TDLog.e("set XBLE laser: not XBLE comm");
     }
     return false;
   }
@@ -2778,7 +2778,7 @@ public class TopoDroidApp extends Application
         return ((CavwayComm)mComm).setCavwayLaser(TDInstance.deviceAddress(), what, nr, lister, data_type, closeBT );
       }
     } else {
-      TDLog.Error("set XBLE laser: not XBLE comm");
+      TDLog.e("set XBLE laser: not XBLE comm");
     }
     return false;
   }
@@ -2863,7 +2863,7 @@ public class TopoDroidApp extends Application
   {
     TDLog.v("APP FW upload " + name );
     if ( mComm == null || TDInstance.getDeviceA() == null ) {
-      TDLog.Error("Firmware upload: null device");
+      TDLog.e("Firmware upload: null device");
       return;
     }
     File file = TDPath.getBinFile( name ); // PRIVATE FILE

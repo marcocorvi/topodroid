@@ -308,7 +308,7 @@ class ParserTherion extends ImportParser
                       }
                       if ( ! mApplyDeclination ) mDeclination = state.mDeclination;
                     } catch ( NumberFormatException e ) {
-                      TDLog.Error( "Error therion: -declination " + line );
+                      TDLog.e( "Error therion: -declination " + line );
                     }
 		  }
                 } else if ( vals[j].equals("-title") && j+1 < vals_len ) {
@@ -377,7 +377,7 @@ class ParserTherion extends ImportParser
                     zero = Float.parseFloat( vals[kk] );
 		    break;
                   } catch ( NumberFormatException e ) {
-                    TDLog.Error("Non-number zero");
+                    TDLog.e("Non-number zero");
                   }
 		}
                 while ( kk<vals_len-1 ) {
@@ -386,7 +386,7 @@ class ParserTherion extends ImportParser
                     scale  = Float.parseFloat( vals[kk] );
 		    break;
                   } catch ( NumberFormatException e ) {
-                    TDLog.Error("Non-number scale");
+                    TDLog.e("Non-number scale");
                   }
                 }
 
@@ -449,7 +449,7 @@ class ParserTherion extends ImportParser
                       state.mDeclination = declination;
                       if ( ! mApplyDeclination ) mDeclination = state.mDeclination;
                     } catch ( NumberFormatException e ) {
-                      TDLog.Error( "Error therion declination " + line );
+                      TDLog.e( "Error therion declination " + line );
                     }
 		  }
                 }      
@@ -542,7 +542,7 @@ class ParserTherion extends ImportParser
                                         Float.parseFloat( vals[3] ),
                                         Float.parseFloat( vals[4] ) ) );
                   } catch ( NumberFormatException e ) {
-                    TDLog.Error( "therion parser error: fix " + line );
+                    TDLog.e( "therion parser error: fix " + line );
                   }
                 }
               } else if ( cmd.equals("equate") ) {
@@ -743,7 +743,7 @@ class ParserTherion extends ImportParser
                                            state.mExtend, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                   } catch ( NumberFormatException e ) {
-                    TDLog.Error( "therion parser error: data " + line );
+                    TDLog.e( "therion parser error: data " + line );
                   }
                 }
                 // FIXME other data types
@@ -761,7 +761,7 @@ class ParserTherion extends ImportParser
 	      if ( ks > 0 ) {
                 --ks;
               } else {
-                TDLog.Error("Parser Therion: endsurvey out of survey");
+                TDLog.e("Parser Therion: endsurvey out of survey");
 	      }
               int k_pos = survey_pos[ks];
               path = ( k_pos > 0 )? path.substring(k_pos) : ""; // return to previous survey_pos in path
@@ -775,7 +775,7 @@ class ParserTherion extends ImportParser
 
     } catch ( IOException e ) {
       // TODO
-      TDLog.Error("IO error " + e.getMessage() );
+      TDLog.e("IO error " + e.getMessage() );
       throw new ParserException();
     }
     if ( mDate == null ) {

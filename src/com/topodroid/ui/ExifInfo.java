@@ -155,7 +155,7 @@ public class ExifInfo
       }
       exif.saveAttributes();
     } catch ( IOException e ) {
-      TDLog.Error( "EXIF: IO exception " + e.getMessage() );
+      TDLog.e( "EXIF: IO exception " + e.getMessage() );
       // TDLog.v( "Bearing/Clino IO exception " + e.getMessage() );
     }
   }
@@ -179,7 +179,7 @@ public class ExifInfo
             mCamera = Integer.parseInt( vals[0] );
             mOrientation = Integer.parseInt( vals[1] );
           } catch ( NumberFormatException e ) {
-            TDLog.Error( e.getMessage() );
+            TDLog.e( e.getMessage() );
           }
         }
         TDLog.v("EXIF from MAKER_NOTE orientation " + mOrientation + " camera " + mCamera );
@@ -226,7 +226,7 @@ public class ExifInfo
           try {
             mAzimuth = bsign * Integer.parseInt( azimuth.substring(0,k) ) / 100.0f;
           } catch ( NumberFormatException e ) {
-            TDLog.Error( e.getMessage() );
+            TDLog.e( e.getMessage() );
           }
 	}
         k = clino.indexOf('/');
@@ -234,7 +234,7 @@ public class ExifInfo
           try {
             mClino = csign * Integer.parseInt( clino.substring(0,k) ) / 100.0f;
           } catch ( NumberFormatException e ) {
-            TDLog.Error( e.getMessage() );
+            TDLog.e( e.getMessage() );
           }
 	}
         // TDLog.v( "Long <" + mAzimuth + "> Lat <" + mClino + "> " );
@@ -246,7 +246,7 @@ public class ExifInfo
         mAccuracy = -1; // undefined
       }
     } catch ( IOException e ) {
-      TDLog.Error("EXIF failed exif interface " + filename );
+      TDLog.e("EXIF failed exif interface " + filename );
     }
   }
 

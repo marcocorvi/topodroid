@@ -302,7 +302,7 @@ public class TDUtil
       try {
         return Integer.parseInt( date.substring(0, 4) );
       } catch ( NumberFormatException e ) {
-        TDLog.Error( e.getMessage() );
+        TDLog.e( e.getMessage() );
       }
     }
     return 1970;
@@ -452,7 +452,7 @@ public class TDUtil
       // TDLog.v("SLEEP slow * " + msec );
       Thread.sleep( msec );
     } catch ( InterruptedException e ) {
-      TDLog.Error( msg + " " + e.getMessage() );
+      TDLog.e( msg + " " + e.getMessage() );
       return false;
     }
     return true;

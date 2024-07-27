@@ -278,7 +278,7 @@ class GL
     int id = GLES20.glCreateShader( type );
     if ( id == 0 ) {
       int pos = code.indexOf('\n');
-      TDLog.Error("GL failed create shader " + code.substring(0,pos) );
+      TDLog.e("GL failed create shader " + code.substring(0,pos) );
       return 0;
     }
     GLES20.glShaderSource( id, code );
@@ -287,7 +287,7 @@ class GL
     GLES20.glGetShaderiv( id, GLES20.GL_COMPILE_STATUS, status, 0 );
     if ( status[0] == 0 ) {
       int pos = code.indexOf('\n');
-      TDLog.Error("GL failed compile shader " + code.substring(0,pos) + ": " + GLES20.glGetShaderInfoLog( id ) );
+      TDLog.e("GL failed compile shader " + code.substring(0,pos) + ": " + GLES20.glGetShaderInfoLog( id ) );
       GLES20.glDeleteShader( id );
       return 0;
     }
@@ -298,7 +298,7 @@ class GL
   {
     int program = GLES20.glCreateProgram(); // create empty OpenGL ES Program
     if ( program == 0 ) {
-      TDLog.Error("GL failed create program. vertex " + vertexShader + " fragment " + fragmentShader );
+      TDLog.e("GL failed create program. vertex " + vertexShader + " fragment " + fragmentShader );
       return 0;
     }
     GLES20.glAttachShader(program, vertexShader); // add the vertex shader to program
@@ -307,7 +307,7 @@ class GL
     final int[] status = new int[1];
     GLES20.glGetProgramiv( program, GLES20.GL_LINK_STATUS, status, 0 );
     if ( status[0] == 0 ) {
-      TDLog.Error("GL failed link program: " + GLES20.glGetShaderInfoLog( program ) );
+      TDLog.e("GL failed link program: " + GLES20.glGetShaderInfoLog( program ) );
       GLES20.glDeleteProgram( program );
       return 0;
     }
@@ -319,7 +319,7 @@ class GL
   {
     int program = GLES20.glCreateProgram(); // create empty OpenGL ES Program
     if ( program == 0 ) {
-      TDLog.Error("GL failed create program. vertex " + vertexShader + " fragment " + fragmentShader );
+      TDLog.e("GL failed create program. vertex " + vertexShader + " fragment " + fragmentShader );
       return 0;
     }
     GLES20.glAttachShader(program, vertexShader); // add the vertex shader to program
@@ -329,7 +329,7 @@ class GL
     final int[] status = new int[1];
     GLES20.glGetProgramiv( program, GLES20.GL_LINK_STATUS, status, 0 ); // 20230118 FIXME Programiv ?
     if ( status[0] == 0 ) {
-      TDLog.Error("GL failed link program: " + GLES20.glGetShaderInfoLog( program ) );
+      TDLog.e("GL failed link program: " + GLES20.glGetShaderInfoLog( program ) );
       GLES20.glDeleteProgram( program );
       return 0;
     }
@@ -394,7 +394,7 @@ class GL
   private static int bindBitmap( int target, Bitmap bitmap, int wrap, boolean one_byte )
   {
     // if ( bitmap == null ) {
-    //   TDLog.Error("GL bind null bitmap");
+    //   TDLog.e("GL bind null bitmap");
     //   return -1; // neg. failure
     // }
     final int[] texId = new int[1];
@@ -449,7 +449,7 @@ class GL
       ob.order( ByteOrder.nativeOrder() );
       return ob.asFloatBuffer();
     } catch ( OutOfMemoryError e ) {
-      TDLog.Error("Out of memory" );
+      TDLog.e("Out of memory" );
     }
     return null;
   }

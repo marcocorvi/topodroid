@@ -303,7 +303,7 @@ public class DrawingStationName extends DrawingPointPath
         dos.writeFloat( mClino );
       }
     } catch ( IOException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
   }
 
@@ -336,7 +336,7 @@ public class DrawingStationName extends DrawingPointPath
       }
       return ret;
     } catch ( IOException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
     return null;
   }

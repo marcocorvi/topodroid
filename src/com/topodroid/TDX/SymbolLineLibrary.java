@@ -112,7 +112,7 @@ public class SymbolLineLibrary extends SymbolLibrary
 
         SymbolLine symbol = new SymbolLine( file.getPath(), fname, locale, iso );
         if ( symbol.isThName( null ) ) {
-          TDLog.Error( "Line Symbol with null ThName: " + fname );
+          TDLog.e( "Line Symbol with null ThName: " + fname );
           continue;
         }
         if ( ! hasSymbolByThName( symbol.getThName() ) ) {
@@ -134,14 +134,14 @@ public class SymbolLineLibrary extends SymbolLibrary
           }
           symbol.setEnabled( enable );
         } else {
-          TDLog.Error( "Line Symbol " + symbol.getThName() + " already in library" );
+          TDLog.e( "Line Symbol " + symbol.getThName() + " already in library" );
           // TDLog.v( "line " + symbol.getThname() + " already in library" );
         }
       }
       // mSymbolNr = mSymbols.size();
       sortSymbolByName( systemNr );
     } else {
-      if ( ! dir.mkdirs( ) ) TDLog.Error( "mkdir error" );
+      if ( ! dir.mkdirs( ) ) TDLog.e( "mkdir error" );
     }
   }
 

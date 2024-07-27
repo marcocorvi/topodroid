@@ -1554,7 +1554,7 @@ public class SketchWindow extends ItemDrawer
     //     // TDLog.v("PLOT pause: " + mOffset.x + " " + mOffset.y + " " + zoom );
     //     mApp_mData.updateSketch( mPid, mSid, mOffset.x, mOffset.y, zoom );
     //   } catch ( IllegalStateException e ) {
-    //     TDLog.Error("cannot save plot state: " + e.getMessage() );
+    //     TDLog.e("cannot save plot state: " + e.getMessage() );
     //   }
     // }
 
@@ -1585,7 +1585,7 @@ public class SketchWindow extends ItemDrawer
   private void doStart( )
   {
     if ( mApp_mData == null ) {
-      TDLog.Error("DrawingWindow start with null DB");
+      TDLog.e("DrawingWindow start with null DB");
       finish();
       return;
     }
@@ -2404,7 +2404,7 @@ public class SketchWindow extends ItemDrawer
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        TDLog.Error( "key down: code " + code );
+        TDLog.e( "key down: code " + code );
     }
     return false;
   }

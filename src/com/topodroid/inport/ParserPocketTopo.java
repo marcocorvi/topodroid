@@ -89,10 +89,10 @@ class ParserPocketTopo extends ImportParser
       ptfile.read( fis );
       fis.close();
     } catch ( FileNotFoundException e ) {
-      TDLog.Error( "file not found: " + filename );
+      TDLog.e( "file not found: " + filename );
       throw new ParserException();
     } catch ( IOException e ) { // on close
-      TDLog.Error( "IO exception: " + e );
+      TDLog.e( "IO exception: " + e );
       throw new ParserException();
     }
     int nr_trip = ptfile.tripCount();
@@ -203,7 +203,7 @@ class ParserPocketTopo extends ImportParser
       // TDLog.v( "display " + TopoDroidApp.mDisplayWidth + " " + TopoDroidApp.mDisplayHeight ); 
 
     } else {
-      TDLog.Error( "PT null StartFrom");
+      TDLog.e( "PT null StartFrom");
       // throw new ParserException();
     }
   }
@@ -330,8 +330,8 @@ class ParserPocketTopo extends ImportParser
 
         ret = true;
       } catch ( IOException e ) {
-        TDLog.Error( mName + " scraps IO error " + e );
-        // if ( ! file.delete() ) TDLog.Error("file delete error");
+        TDLog.e( mName + " scraps IO error " + e );
+        // if ( ! file.delete() ) TDLog.e("file delete error");
         TDFile.deleteFile( filename );
         throw new ParserException();
       }

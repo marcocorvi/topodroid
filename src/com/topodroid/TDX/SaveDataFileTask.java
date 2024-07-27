@@ -264,7 +264,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
         if ( bw != null ) bw.close();
         if ( fos != null ) fos.close();
       } catch ( IOException e ) { 
-        TDLog.Error("IO error " + e.getMessage() );
+        TDLog.e("IO error " + e.getMessage() );
       } finally {
         TDsafUri.closeFileDescriptor( pfd );
       }

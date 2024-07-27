@@ -350,7 +350,7 @@ public class ParserTh extends TglParser
       }
       declination -= conv; // correct declination with -convergence
       if ( nocs != null ) {
-        TDLog.Error("Fix points without CS <" + cs1.name + ">: " + nocs.toString() );
+        TDLog.e("Fix points without CS <" + cs1.name + ">: " + nocs.toString() );
         TDToast.makeWarn( String.format( TDInstance.getResourceString( R.string.error_fixes_nocs ), cs1.name, nocs.toString() ) );
       }
     }
@@ -402,7 +402,7 @@ public class ParserTh extends TglParser
 
     // Toast.makeText( mApp, "Reading " + filename, Toast.LENGTH_SHORT ).show();
     if ( isr == null ) {
-      TDLog.Error("Parser Therion: null input stream reader");
+      TDLog.e("Parser Therion: null input stream reader");
       return ERR_NO_FILE;
     }
 
@@ -512,7 +512,7 @@ public class ParserTh extends TglParser
                     use_centerline_declination = true;
                     centerline_declination = decl;
                   } catch ( NumberFormatException e ) {
-                    TDLog.Error( "Th Number error: centerline declination number format exception" );
+                    TDLog.e( "Th Number error: centerline declination number format exception" );
                   }
                 }
               } else if ( cmd.equals("station") ) {
@@ -561,7 +561,7 @@ public class ParserTh extends TglParser
                       try {
                         factor = Double.parseDouble( vals[idx] );
                       } catch ( NumberFormatException e ) { 
-                        TDLog.Error( "Th Number error " + e.getMessage() );
+                        TDLog.e( "Th Number error " + e.getMessage() );
                       }
                     }
                   } 
@@ -595,7 +595,7 @@ public class ParserTh extends TglParser
                       }
                     }
                   } catch ( NumberFormatException e ) {
-                    TDLog.Error( "Th Fix station error: " + e.getMessage() );
+                    TDLog.e( "Th Fix station error: " + e.getMessage() );
                   }
                 }
               } else if ( vals.length >= 5 ) {
@@ -640,7 +640,7 @@ public class ParserTh extends TglParser
                         }
                       }
                     } catch ( NumberFormatException e ) {
-                      TDLog.Error("Th Shot data error: " + e.getMessage() );
+                      TDLog.e("Th Shot data error: " + e.getMessage() );
                     }
                   }
                 } else if ( in_data == DATA_DIMENSION ) {
@@ -686,7 +686,7 @@ public class ParserTh extends TglParser
                     }
                   }
                 } catch ( NumberFormatException e ) {
-                  TDLog.Error( "Th surface grid metadata " + e.getMessage() );
+                  TDLog.e( "Th surface grid metadata " + e.getMessage() );
                 }
                 // and read grid data
                 if ( mSurface != null ) {
@@ -711,7 +711,7 @@ public class ParserTh extends TglParser
                     }
                   }
                 } catch ( NumberFormatException e ) {
-                  TDLog.Error( "Th surface grid units " + e.getMessage() );
+                  TDLog.e( "Th surface grid units " + e.getMessage() );
                 }
               }
             } else if ( cmd.equals("declination") ) {
@@ -722,7 +722,7 @@ public class ParserTh extends TglParser
                   survey_declination = Double.parseDouble( vals[idx] );
                 }
               } catch ( NumberFormatException e ) {
-                TDLog.Error( "Th survey declination " + e.getMessage() );
+                TDLog.e( "Th survey declination " + e.getMessage() );
               }
             } else if ( cmd.equals("input") ) {
               idx = TDString.nextIndex( vals, idx );
@@ -736,11 +736,11 @@ public class ParserTh extends TglParser
                                    use_survey_declination, survey_declination,
                                    units_len, units_ber, units_cln, pw );
                   if ( res != SUCCESS ) {
-                    TDLog.Error( "Th read file " + filename + " failed. Error code " + res );
+                    TDLog.e( "Th read file " + filename + " failed. Error code " + res );
                     TDToast.makeBad( TDInstance.formatString( R.string.error_file_read, filename ) );
                   }
                 } else {
-                  TDLog.Error( "Th Input file <" + filename + "> has no .th extension");
+                  TDLog.e( "Th Input file <" + filename + "> has no .th extension");
                 }
               }
             } else if ( cmd.equals("load") ) { // DATABASE SURVEY
@@ -771,7 +771,7 @@ public class ParserTh extends TglParser
                 }
                 int res = readSurvey( filename, path, use_survey_declination, survey_declination, color, pw );
                 if ( res != SUCCESS ) {
-                  TDLog.Error( "TH read survey " + filename + " failed. Error code " + res );
+                  TDLog.e( "TH read survey " + filename + " failed. Error code " + res );
                   TDToast.makeBad( TDInstance.formatString( R.string.error_survey_read, filename ) );
                 }
               }
@@ -801,7 +801,7 @@ public class ParserTh extends TglParser
             } else if ( cmd.equals("endsurvey") ) {
               --ks;
               if ( ks < 0 ) {
-                TDLog.Error( "Th " + filename + ":" + linenr + " negative survey level" );
+                TDLog.e( "Th " + filename + ":" + linenr + " negative survey level" );
               } else {
                 path = path.substring(0, survey_pos[ks]); // return to previous survey_pos in path
                 // TDLog.v( "Th endsurvey PATH " + path );
@@ -812,10 +812,10 @@ public class ParserTh extends TglParser
         }
       }
     } catch ( IOException e ) {
-      TDLog.Error( "Th IO error " + e.getMessage() );
+      TDLog.e( "Th IO error " + e.getMessage() );
       throw new ParserException( filename, linenr );
     } catch ( NullPointerException e ) { // FIXME ANDROID-11
-      TDLog.Error( "Th IO null ptr " + e.getMessage() ); 
+      TDLog.e( "Th IO null ptr " + e.getMessage() ); 
       throw new ParserException( filename, linenr );
     }
     // TDLog.v( "Th Done readFile " + filename );
@@ -909,7 +909,7 @@ public class ParserTh extends TglParser
         ok_fixes.add( fix );
       } else {
         bad_fixes ++;
-        TDLog.Error("Bad fix " + fix.getFullName() + " CS " + fix.getCSName() );
+        TDLog.e("Bad fix " + fix.getFullName() + " CS " + fix.getCSName() );
       }
     }
     if ( bad_fixes > 0 ) {
@@ -963,12 +963,12 @@ public class ParserTh extends TglParser
             if ( s.hasName( sh.from ) ) {
               sf = s;
               if (  sh.from_station == null ) sh.from_station = s;
-              else if ( sh.from_station != s ) TDLog.Error( "Th shot " + sh.from + " " + sh.to + " from-station mismatch ");
+              else if ( sh.from_station != s ) TDLog.e( "Th shot " + sh.from + " " + sh.to + " from-station mismatch ");
             } 
             if ( s.hasName( sh.to ) )   {
               st = s;
               if (  sh.to_station == null ) sh.to_station = s;
-              else if ( sh.to_station != s ) TDLog.Error( "Th shot " + sh.from + " " + sh.to + " to-station mismatch ");
+              else if ( sh.to_station != s ) TDLog.e( "Th shot " + sh.from + " " + sh.to + " to-station mismatch ");
             }
             if ( sf != null && st != null ) break;
           }

@@ -90,7 +90,7 @@ class SketchModeDialog extends MyDialog
         if ( mCBsections.isChecked() ) mode |= DisplayMode.DISPLAY_OUTLINE;
         if ( mCBwalls.isChecked() )    mode |= DisplayMode.DISPLAY_WALLS;
         if ( mCBscaleRef.isChecked() ) mode |= DisplayMode.DISPLAY_SCALEBAR;
-        // TDLog.Error( "Mode " + mode );
+        // TDLog.e( "Mode " + mode );
         mSurface.setDisplayMode( mode );
       } else if ( vid == R.id.button_back ) {
       //   /* nothing */

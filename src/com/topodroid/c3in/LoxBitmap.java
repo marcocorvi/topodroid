@@ -90,7 +90,7 @@ public class LoxBitmap
     int d2 = height;
     Bitmap ret = Bitmap.createBitmap( d1, d2, Bitmap.Config.ARGB_8888 );
     if ( ret == null ) {
-      TDLog.Error("Bitmap Failed create bitmap " + d1 + "x" + d2 );
+      TDLog.e("Bitmap Failed create bitmap " + d1 + "x" + d2 );
       return null;
     }
     double dx = (e2-e1)/(d1-1);
@@ -144,7 +144,7 @@ public class LoxBitmap
       // TDLog.v("Bitmap PNG image type " + type + " length " + len + " size " + size );
       image = BitmapFactory.decodeByteArray( data, data_offset, size );
     } else {
-      TDLog.Error("Bitmap Unexpected image type " + type );
+      TDLog.e("Bitmap Unexpected image type " + type );
     }
     if ( image != null ) {
       width  = image.getWidth();

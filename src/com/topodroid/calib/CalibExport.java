@@ -127,7 +127,7 @@ public class CalibExport
       bw.close();
       return ci.name;
     } catch ( IOException e ) {
-      TDLog.Error( "Failed CSV export: " + e.getMessage() );
+      TDLog.e( "Failed CSV export: " + e.getMessage() );
       return null;
     }
   }
@@ -253,7 +253,7 @@ public class CalibExport
                         data.updateGMsecond( gid, cid, gx, gy, gz, mx, my, mz );
                       }
                     } catch ( NumberFormatException e ) { 
-                      TDLog.Error( e.getMessage() );
+                      TDLog.e( e.getMessage() );
                     }
                   } else {
                     // ERROR
@@ -267,7 +267,7 @@ public class CalibExport
       }
       fr.close();
     } catch ( IOException e ) {
-      TDLog.Error( "Failed calib CSV import: " + e.getMessage() );
+      TDLog.e( "Failed calib CSV import: " + e.getMessage() );
       ret = -5; // IO Exception
     }
     return ret;

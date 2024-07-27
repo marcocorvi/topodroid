@@ -170,7 +170,7 @@ class ParserVisualTopo extends ImportParser
                 try {
                   mDeclination = angle( Float.parseFloat( vals[k] ), 1, true ); // declination is in degrees.minutes
                 } catch ( NumberFormatException e ) {
-                  TDLog.Error("VTopo: Non-number declination");
+                  TDLog.e("VTopo: Non-number declination");
                 }
               // } else {
                 // ignore colors
@@ -260,7 +260,7 @@ class ParserVisualTopo extends ImportParser
                   }
                 }
               } catch ( NumberFormatException e ) {
-                TDLog.Error( "VTopo: number error " + mLineCnt + ": " + line + " " + e.getMessage() );
+                TDLog.e( "VTopo: number error " + mLineCnt + ": " + line + " " + e.getMessage() );
               }
             }
           }
@@ -268,7 +268,7 @@ class ParserVisualTopo extends ImportParser
         line = nextLine( br );
       }
     } catch ( IOException e ) {
-      TDLog.Error( "VTopo: i/o error " + mLineCnt + ": " + line + " " + e.getMessage() );
+      TDLog.e( "VTopo: i/o error " + mLineCnt + ": " + line + " " + e.getMessage() );
       throw new ParserException();
     }
     // TDLog.Log( TDLog.LOG_THERION, "Parser VisualTopo shots "+ shots.size() +" splays "+ splays.size()  );

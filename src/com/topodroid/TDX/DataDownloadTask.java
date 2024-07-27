@@ -37,7 +37,7 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
    */
   DataDownloadTask( TopoDroidApp app, ListerHandler lister, GMActivity gm_activity, int data_type ) // FIXME_LISTER
   {
-    // TDLog.Error( "Data Download Task cstr" );
+    // TDLog.e( "Data Download Task cstr" );
     // TDLog.v( "data download task cstr");
     mApp        = new WeakReference<TopoDroidApp>( app );
     mGMactivity = new WeakReference<GMActivity>( gm_activity );

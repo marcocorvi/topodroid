@@ -100,7 +100,7 @@ public class MyButton extends Button
         ret = new BitmapDrawable( res, bmx );
         if ( USE_CACHE ) mBitmapCache.append( res_id, ret );
       } catch ( OutOfMemoryError err ) {
-        TDLog.Error("out of memory: " + err.getMessage() );
+        TDLog.e("out of memory: " + err.getMessage() );
         TDToast.makeColor( R.string.out_of_memory, TDColor.FIXED_RED );
         // try { 
         //   InputStream is = ctx.getAssets().open("iz_oom.png");
@@ -128,7 +128,7 @@ public class MyButton extends Button
       Bitmap bmx = Bitmap.createScaledBitmap( bm1, size, size, false );
       return new BitmapDrawable( res, bmx );
     } catch ( OutOfMemoryError err ) {
-      TDLog.Error("out of memory: " + err.getMessage() );
+      TDLog.e("out of memory: " + err.getMessage() );
       TDToast.makeColor( R.string.out_of_memory, TDColor.FIXED_RED );
     }
     return null;

@@ -247,7 +247,7 @@ public class DataHelper extends DataSetObservable
       }
     } catch ( SQLiteException e ) {
       // if it OK to fail
-      TDLog.Error( "ERROR DB " + db_name + " open RW: " + e.getMessage() );
+      TDLog.e( "ERROR DB " + db_name + " open RW: " + e.getMessage() );
     }
     
     try {
@@ -258,10 +258,10 @@ public class DataHelper extends DataSetObservable
         DistoXOpenHelper.createTables( myDB );
         myDB.setVersion( TDVersion.DATABASE_VERSION );
       } else {
-        TDLog.Error( "ERROR DB " + db_name + " failed open/create" );
+        TDLog.e( "ERROR DB " + db_name + " failed open/create" );
       }
     } catch ( SQLiteException e ) {
-      TDLog.Error( "ERROR DB " + db_name + " open/create: " + e.getMessage() );
+      TDLog.e( "ERROR DB " + db_name + " open/create: " + e.getMessage() );
       myDB = null;
     }
   }
@@ -304,7 +304,7 @@ public class DataHelper extends DataSetObservable
         }
       }
     } catch ( SQLiteException e ) {
-      TDLog.Error( "ERROR DB-path open: " + e.getMessage() );
+      TDLog.e( "ERROR DB-path open: " + e.getMessage() );
       myDB = null;
     }
   }
@@ -641,7 +641,7 @@ public class DataHelper extends DataSetObservable
             try { // 20280118 try - catch
               sb.append(((Integer) cnts.get(addr)).intValue()).append(" ");
             } catch ( NullPointerException e ) {
-              TDLog.Error( e.getMessage() );
+              TDLog.e( e.getMessage() );
             }
           }
           stat.deviceCnt = sb.toString();
@@ -921,7 +921,7 @@ public class DataHelper extends DataSetObservable
    */
   private void logError( String msg, Exception e )
   {
-    TDLog.Error("DB " + msg + ": " + e.getMessage() );
+    TDLog.e("DB " + msg + ": " + e.getMessage() );
   }
 
   /** handle a disk error
@@ -1707,7 +1707,7 @@ public class DataHelper extends DataSetObservable
           float depth = depths.get(from).floatValue() - shot.len * TDMath.sind(shot.cln);
           depths.put(to, Float.valueOf(depth));
         } catch ( NullPointerException e ) {
-          TDLog.Error( e.getMessage() );
+          TDLog.e( e.getMessage() );
         }
         // TDLog.v( "processed shot <" + from + "-" + to + "> shots " + stack.size() + "add station <" + to + "> depth " + depth );
       }
@@ -1721,7 +1721,7 @@ public class DataHelper extends DataSetObservable
           float depth = depths.get(to).floatValue() + shot.len * TDMath.sind(shot.cln);
           depths.put( from, Float.valueOf( depth ) );
         } catch ( NullPointerException e ) {
-          TDLog.Error( e.getMessage() );
+          TDLog.e( e.getMessage() );
         }
         // TDLog.v( "processed shot <" + from + "-" + to + "> shots " + stack.size() + "add station <" + from + "> depth " + depth );
       }
@@ -2044,7 +2044,7 @@ public class DataHelper extends DataSetObservable
       for ( ; old_id < max_old_id; ++old_id ) {
         DBlock blk = selectShot( old_id, old_sid );
         if ( blk == null ) {
-          TDLog.Error("null block at ID " + old_id );
+          TDLog.e("null block at ID " + old_id );
           continue;
         }
         if ( transferShotStmt == null ) {
@@ -3375,7 +3375,7 @@ public class DataHelper extends DataSetObservable
   //           if ( t > ret ) ret = t;
   //         }
   //       } catch ( NumberFormatException e ) {
-  //         TDLog.Error( "getNextStationName parseInt error: " + cursor.getString(0) + " " + cursor.getString(1) );
+  //         TDLog.e( "getNextStationName parseInt error: " + cursor.getString(0) + " " + cursor.getString(1) );
   //       }
   //     } while (cursor.moveToNext());
   //   }
@@ -3760,7 +3760,7 @@ public class DataHelper extends DataSetObservable
               int k = Integer.parseInt( name.substring( prefix_length ) );
               if ( k >= max ) max = k+1;
             } catch ( NumberFormatException e ) {
-              TDLog.Error( "DB getNextSectionId parse Int error: survey ID " + sid );
+              TDLog.e( "DB getNextSectionId parse Int error: survey ID " + sid );
             }
           }
         } while (cursor.moveToNext());
@@ -4570,7 +4570,7 @@ public class DataHelper extends DataSetObservable
   String getValue( String key )
   {
     if ( myDB == null ) {
-      // TDLog.Error( "Data Helper::getValue null DB");
+      // TDLog.e( "Data Helper::getValue null DB");
       return null;
     }
     if ( TDString.isNullOrEmpty( key ) ) { // this is not an error
@@ -4598,15 +4598,15 @@ public class DataHelper extends DataSetObservable
   void setValue( String key, String value )
   {
     if ( myDB == null ) {
-      // TDLog.Error( "Data Helper::setValue null DB");
+      // TDLog.e( "Data Helper::setValue null DB");
       return;
     }
     if ( TDString.isNullOrEmpty( key ) ) {
-      TDLog.Error( "DB config: null key");
+      TDLog.e( "DB config: null key");
       return;
     }
     if ( TDString.isNullOrEmpty( value ) ) {
-      TDLog.Error( "DB config: null value");
+      TDLog.e( "DB config: null value");
       return;
     }
 
@@ -4632,7 +4632,7 @@ public class DataHelper extends DataSetObservable
           myDB.insert( CONFIG_TABLE, null, cv );
         }
       } else {
-        TDLog.Error( "DB config: cannot get cursor for " + key + " " + value );
+        TDLog.e( "DB config: cannot get cursor for " + key + " " + value );
       }
       myDB.setTransactionSuccessful();
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e ); 
@@ -5529,7 +5529,7 @@ public class DataHelper extends DataSetObservable
   {
     if ( TDString.isNullOrEmpty( name ) ) return false;
     if ( myDB == null ) {
-      TDLog.Error( DeviceHelper.ERROR_NULL_DB + "DB data has name");
+      TDLog.e( DeviceHelper.ERROR_NULL_DB + "DB data has name");
       return false;
     }
     boolean ret = false;
@@ -5540,7 +5540,7 @@ public class DataHelper extends DataSetObservable
       cursor = myDB.rawQuery( query, new String[] { } );
       ret = ( cursor != null && cursor.moveToFirst() ); 
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch ( RuntimeException e ) { TDLog.Error( e.getMessage() );
+    } catch ( RuntimeException e ) { TDLog.e( e.getMessage() );
     } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
     return ret;
   }
@@ -5554,7 +5554,7 @@ public class DataHelper extends DataSetObservable
   {
     if ( TDString.isNullOrEmpty( name ) ) return false;
     if ( myDB == null ) {
-      TDLog.Error( DeviceHelper.ERROR_NULL_DB + "DB data has name");
+      TDLog.e( DeviceHelper.ERROR_NULL_DB + "DB data has name");
       return false;
     }
     boolean ret = false;
@@ -5895,7 +5895,7 @@ public class DataHelper extends DataSetObservable
      TDLog.v( "dump DB to file " + filename + " survey ID " + sid );
      // String where = "surveyId=" + Long.toString(sid);
      if ( myDB == null ) {
-       TDLog.Error("dump DB to file: null DB ");
+       TDLog.e("dump DB to file: null DB ");
        return;
      }
      try {
@@ -6182,9 +6182,9 @@ public class DataHelper extends DataSetObservable
        fw.flush();
        fw.close();
      } catch ( FileNotFoundException e ) {// DistoX-SAF
-       TDLog.Error("dump file not found " + e.getMessage() );
+       TDLog.e("dump file not found " + e.getMessage() );
      } catch ( IOException e ) {// FIXME
-       TDLog.Error("dump i/o error " + e.getMessage() );
+       TDLog.e("dump i/o error " + e.getMessage() );
      }
      TDLog.v("dump file done");
    }
@@ -6474,7 +6474,7 @@ public class DataHelper extends DataSetObservable
 	     else if ( table.equals(STATION_TABLE) )
 	     {
                // N.B. ONLY IF db_version > 19
-               // TDLog.Error( "v <" + v + ">" );
+               // TDLog.e( "v <" + v + ">" );
                // TDLog.Log( TDLog.LOG_DB, "load from file station " + sid + " " + name + " " + comment + " " + flag  );
                name    = TDString.unescape( scanline1.stringValue( ) );
                comment = TDString.unescape( scanline1.stringValue( ) );
@@ -6497,9 +6497,9 @@ public class DataHelper extends DataSetObservable
        }
        fr.close();
      } catch ( FileNotFoundException e ) { // DistoX-SAF
-       TDLog.Error( e.getMessage() );
+       TDLog.e( e.getMessage() );
      } catch ( IOException e ) {
-       TDLog.Error( e.getMessage() );
+       TDLog.e( e.getMessage() );
      }
      // TDLog.v( "DB success: " + success + " SID " + sid );
 
@@ -6814,7 +6814,7 @@ public class DataHelper extends DataSetObservable
       db.setTransactionSuccessful();
       db.endTransaction();
       // TDLog.v( "DB updated symbols: " + pt + " points, " + ln + " lines, " + ar + " areas");
-    } catch ( SQLException e ) { TDLog.Error( "updateSymbolKeys exception: " + e.getMessage() );
+    } catch ( SQLException e ) { TDLog.e( "updateSymbolKeys exception: " + e.getMessage() );
     }
   }
 
@@ -7130,7 +7130,7 @@ public class DataHelper extends DataSetObservable
           db.setTransactionSuccessful();
           db.endTransaction();
         // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-        } catch ( SQLException e ) { TDLog.Error( "createTables exception: " + e.getMessage() );
+        } catch ( SQLException e ) { TDLog.e( "createTables exception: " + e.getMessage() );
         // } finally {
           // db.setLockingEnabled( true );
         }

@@ -68,21 +68,21 @@ public class TDVersionCheck extends AsyncTask< Void, Integer, Integer >
             version = 10 * version + (int)( ch - '0' );
           }
         } catch ( IOException e ) {
-          TDLog.Error( e.getMessage() );
+          TDLog.e( e.getMessage() );
         }
         // TDLog.v( "last version " + version + " current " + TDVersion.VERSION_CODE );
         isr.close();
         ret = version;
       } else {
-        // TDLog.Error("HTTP error : " + response );
+        // TDLog.e("HTTP error : " + response );
         ret = 0;
       } 
       http.disconnect();
       return ret;
     } catch ( MalformedURLException e1 ) {
-      // TDLog.Error( "ERROR bad URL: " + e1.toString() );
+      // TDLog.e( "ERROR bad URL: " + e1.toString() );
     } catch ( IOException e2 ) {
-      // TDLog.Error( "ERROR I/O exception: " + e2.toString() );
+      // TDLog.e( "ERROR I/O exception: " + e2.toString() );
     }
     return 0;
   }

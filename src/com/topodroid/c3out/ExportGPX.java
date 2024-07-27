@@ -63,7 +63,7 @@ public class ExportGPX extends ExportGeo
     if ( data == null ) return false; // always false
 
     if ( ! getGeolocalizedData( data, 0.0f, 1.0f ) ) { // FIXME declination 0.0f
-      TDLog.Error( "GPX no geolocalized station");
+      TDLog.e( "GPX no geolocalized station");
       return false;
     }
     boolean single_track = TDSetting.mGPXSingleTrack;
@@ -189,7 +189,7 @@ public class ExportGPX extends ExportGeo
       osw.close();
       return true;
     } catch ( IOException e ) {
-      TDLog.Error( "GPX IO error " + e.getMessage() );
+      TDLog.e( "GPX IO error " + e.getMessage() );
       return false;
     }
   }

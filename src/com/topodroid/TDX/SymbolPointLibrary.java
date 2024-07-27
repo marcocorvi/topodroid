@@ -185,7 +185,7 @@ public class SymbolPointLibrary extends SymbolLibrary
       int systemNr = mSymbols.size();
       File[] files = dir.listFiles();
       if ( files == null ) {
-         TDLog.Error("null symbol-file list" );
+         TDLog.e("null symbol-file list" );
 	 return;
       }
       for ( File file : files ) { // there is a null-pointer exception here, but files cannot be null !!!
@@ -199,7 +199,7 @@ public class SymbolPointLibrary extends SymbolLibrary
 
         SymbolPoint symbol = new SymbolPoint( file.getPath(), fname, locale, iso );
         if ( symbol.isThName( null ) ) {
-          TDLog.Error( "Point Symbol with null ThName " + fname );
+          TDLog.e( "Point Symbol with null ThName " + fname );
           continue;
         }
         // TDLog.v("Point Symbol <" + fname + "> th_name <" + symbol.getThName() + ">" );
@@ -224,13 +224,13 @@ public class SymbolPointLibrary extends SymbolLibrary
 	  }
           symbol.setEnabled( enable );
         } else {
-          TDLog.Error( "Point Symbol " + symbol.getThName() + " already in library" );
+          TDLog.e( "Point Symbol " + symbol.getThName() + " already in library" );
         }
       }
       sortSymbolByName( systemNr );
     } else {
-      TDLog.Error( "No symbol directory" );
-      if ( ! dir.mkdirs( ) ) TDLog.Error( "mkdir error" );
+      TDLog.e( "No symbol directory" );
+      if ( ! dir.mkdirs( ) ) TDLog.e( "mkdir error" );
     }
   }
 

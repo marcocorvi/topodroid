@@ -319,7 +319,7 @@ public class FixedInfo extends MagLatLong
         return Double.parseDouble( str );
       }
     } catch (NumberFormatException e ) {
-      TDLog.Error( "string2double parse error: " + str );
+      TDLog.e( "string2double parse error: " + str );
     }
     return -1111.0; // more neg than -1000
   }        
@@ -350,7 +350,7 @@ public class FixedInfo extends MagLatLong
     try {
       return Double.parseDouble( str );
     } catch (NumberFormatException e ) {
-      TDLog.Error( "string2real parse error: " + str );
+      TDLog.e( "string2real parse error: " + str );
     }
     return 0;
   }        

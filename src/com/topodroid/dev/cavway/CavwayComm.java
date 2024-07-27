@@ -126,7 +126,7 @@ public class CavwayComm extends TopoDroidComm
           if ( buffer == null ) continue;
           if ( buffer.type == DATA_PRIM ) {
             if ( buffer.data == null) {
-              TDLog.Error( "Cavway comm: buffer PRIM with null data");
+              TDLog.t( "Cavway comm: buffer PRIM with null data");
               continue;
             }
             // ++mNrReadPackets; this is incremented once for DATA and once for VECTOR by TopoDroidComm
@@ -189,8 +189,7 @@ public class CavwayComm extends TopoDroidComm
     mLister = lister;
     if ( mRemoteBtDevice == null ) {
       TDToast.makeBad( R.string.ble_no_remote );
-      // TDLog.Error("
-      // comm ERROR null remote device");
+      // TDLog.t(" comm ERROR null remote device");
       if ( LOG ) TDLog.v( "Cavway comm - connect Device: null = [3b] status DISCONNECTED" );
       notifyStatus( ConnectionState.CONN_DISCONNECTED );
       return false;
@@ -394,7 +393,7 @@ public class CavwayComm extends TopoDroidComm
     } else if ( uuid_str.equals( CavwayConst.CAVWAY_CHRT_WRITE_UUID_STR ) ) {
       if ( LOG ) TDLog.v( "Cavway comm: changed write chrt" );
     } else {
-      TDLog.Error( "Cavway comm: changed unknown chrt" );
+      TDLog.t( "Cavway comm: changed unknown chrt" );
     }
   }
 
@@ -446,7 +445,7 @@ public class CavwayComm extends TopoDroidComm
           // here we may clear the UUID of the notifying characteristics
         }
       } else {
-        TDLog.Error( "Cavway comm: written null-bytes CCC chrt " + uuid_chrt_str );
+        TDLog.t( "Cavway comm: written null-bytes CCC chrt " + uuid_chrt_str );
       }
     } else {
       if ( LOG ) TDLog.v( "Cavway comm: written normal desc - bytes " + bytes.length + " UUID " + uuid_str + " chrt " + uuid_chrt_str );
@@ -522,7 +521,7 @@ public class CavwayComm extends TopoDroidComm
   {
     boolean ret = mCallback.enablePNotify( srvUuid, chrtUuid );
     if ( ! ret ) {
-      TDLog.Error("Cavway enable PNotify failed ");
+      TDLog.t("Cavway enable PNotify failed ");
       // closeDevice( true );
     } else {
       if ( LOG ) TDLog.v("XBLE enable PNotify success");
@@ -554,19 +553,19 @@ public class CavwayComm extends TopoDroidComm
   {
     switch ( status ) {
       case BluetoothGatt.GATT_INVALID_ATTRIBUTE_LENGTH:
-        TDLog.Error("XBLE COMM: invalid attr length " + extra );
+        TDLog.t("XBLE COMM: invalid attr length " + extra );
         break;
       case BluetoothGatt.GATT_WRITE_NOT_PERMITTED:
-        TDLog.Error("XBLE COMM: write not permitted " + extra );
+        TDLog.t("XBLE COMM: write not permitted " + extra );
         break;
       case BluetoothGatt.GATT_READ_NOT_PERMITTED:
-        TDLog.Error("XBLE COMM: read not permitted " + extra );
+        TDLog.t("XBLE COMM: read not permitted " + extra );
         break;
       // case BluetoothGatt.GATT_INSUFFICIENT_ENCRYPTION: // 20221026 moved to failure()
-      //   TDLog.Error("XBLE COMM: insufficient encrypt " + extra );
+      //   TDLog.t("XBLE COMM: insufficient encrypt " + extra );
       //   break;
       // case BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION:
-      //   TDLog.Error("XBLE COMM: insufficient auth " + extra );
+      //   TDLog.t("XBLE COMM: insufficient auth " + extra );
       //   break;
       case BleCallback.CONNECTION_TIMEOUT:
         if ( LOG ) TDLog.v( "XBLE comm: connection timeout reconnect ...");
@@ -584,7 +583,7 @@ public class CavwayComm extends TopoDroidComm
         reconnectDevice();
         break;
       default:
-        TDLog.Error("XBLE comm ***** ERROR " + status + ": reconnecting ...");
+        TDLog.t("XBLE comm ***** ERROR " + status + ": reconnecting ...");
         reconnectDevice();
     }
     clearPending();
@@ -657,12 +656,12 @@ public class CavwayComm extends TopoDroidComm
       TDUtil.slowDown( 101 ); // 300
     }
     if ( chrt == null ) {
-      TDLog.Error("XBLE comm enlist write: null write chrt");
+      TDLog.t("XBLE comm enlist write: null write chrt");
       return false;
     }
     //Chrt.getPermission() always returns 0, I don't know why. Siwei Tian deleted
     // if ( ! BleUtils.isChrtWrite( chrt ) ) {
-    //   TDLog.Error("XLE comm enlist write: cannot write chrt");
+    //   TDLog.t("XLE comm enlist write: cannot write chrt");
     //   return false;
     // }
     // TDLog.v( "XBLE comm: enlist chrt write " + chrtUuid.toString() );
@@ -724,7 +723,7 @@ public class CavwayComm extends TopoDroidComm
     // Thread laserThread = new Thread() {
     //   @Override public void run() {
         if ( ! tryConnectDevice( address, lister, 0 ) ) {
-          TDLog.Error("XBLE set laser - failed connect device");
+          TDLog.t("XBLE set laser - failed connect device");
           closeDevice( true );
           mSkipNotify = false;
           return false; 
@@ -800,7 +799,7 @@ public class CavwayComm extends TopoDroidComm
   @Override
   public byte[] readMemory( String address, int addr )
   {
-    TDLog.Error("XBLE readMemory( String address, int addr ) not implemented");
+    TDLog.t("XBLE readMemory( String address, int addr ) not implemented");
     return null;
   }
 
@@ -833,7 +832,7 @@ public class CavwayComm extends TopoDroidComm
     if ( (mPacketType & CavwayProtocol.PACKET_REPLY) == CavwayProtocol.PACKET_REPLY ) {
       return ( (CavwayProtocol) mProtocol).mRepliedData;
     } else {
-      TDLog.Error("XBLE read memory: no reply");
+      TDLog.t("XBLE read memory: no reply");
     }
     return null;
   }
@@ -962,7 +961,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public int readXBLEMemory( String address, int start, int end, ArrayList< MemoryOctet > data, IMemoryDialog dialog )
   { 
-    TDLog.Error("XBLE read XBLE memory ...");
+    TDLog.t("XBLE read XBLE memory ...");
     if ( ! tryConnectDevice( address, null, 0 ) ) return -1;
     Handler handler = new Handler( Looper.getMainLooper() );
     int cnt = 0; // number of memory location that have been read
@@ -1222,7 +1221,7 @@ public class CavwayComm extends TopoDroidComm
         try {
           // File fp = new File( filepath );
           if ( ! tryConnectDevice( address, null, 0 ) ) {
-            TDLog.Error("XBLE fw upload - failed connect");
+            TDLog.t("XBLE fw upload - failed connect");
             ok = false; // return 0;
           }
 
@@ -1307,13 +1306,13 @@ public class CavwayComm extends TopoDroidComm
                     repeat = 0; // then the for-loop breaks with repeat = -1 (ie. success)
                   }
                 } else {
-                  TDLog.Error( "XBLE fw upload: fail at " + cnt + " repeat " + repeat + " packet " + mPacketType );
+                  TDLog.t( "XBLE fw upload: fail at " + cnt + " repeat " + repeat + " packet " + mPacketType );
                   // ok = false; // without repeat-for uncomment these two lines
                   // break;
                 }
               }
               if ( repeat == 0 ) {
-                TDLog.Error( "XBLE fw upload: fail after 3 repeats at " + cnt );
+                TDLog.t( "XBLE fw upload: fail after 3 repeats at " + cnt );
                 ok = false;
                 break;
               }
@@ -1322,11 +1321,11 @@ public class CavwayComm extends TopoDroidComm
           } catch ( EOFException e ) { // OK
             TDLog.v("XBLE fw update: EOF " + e.getMessage());
           } catch ( FileNotFoundException e ) {
-            TDLog.Error( "XBLE fw update: Not Found error " + e.getMessage() );
+            TDLog.t( "XBLE fw update: Not Found error " + e.getMessage() );
             ok = false;
           }
         } catch ( IOException e ) {
-          TDLog.Error( "XBLE fw update: IO error " + e.getMessage() );
+          TDLog.t( "XBLE fw update: IO error " + e.getMessage() );
           ok = false;
         }
         closeDevice( false );     //close ble here
@@ -1384,17 +1383,17 @@ public class CavwayComm extends TopoDroidComm
           byte[] ret_buf = ((CavwayProtocol) mProtocol).mFlashBytes; // return buffer
           int crc16 = calCRC16( ret_buf, 256 );
           if ( crc16 == ((CavwayProtocol) mProtocol).mCheckCRC ) {
-            TDLog.Error("XBLE read fw (" + repeat +") OK");
+            TDLog.t("XBLE read fw (" + repeat +") OK");
             return ret_buf; // success
           }
-          TDLog.Error("XBLE read fw (" + repeat +") CRC-16 mismatch: got " + crc16 + " expected " + ((CavwayProtocol) mProtocol).mCheckCRC );
+          TDLog.t("XBLE read fw (" + repeat +") CRC-16 mismatch: got " + crc16 + " expected " + ((CavwayProtocol) mProtocol).mCheckCRC );
         } else {
-          TDLog.Error("XBLE read fw (" + repeat +") bad packet type " + mPacketType );
+          TDLog.t("XBLE read fw (" + repeat +") bad packet type " + mPacketType );
         }
       }
-      TDLog.Error("XBLE read fw: repeatedly failed packet addr " + addr );
+      TDLog.t("XBLE read fw: repeatedly failed packet addr " + addr );
     } catch (Exception e) {
-      TDLog.Error("XBLE error " + e.getMessage() );
+      TDLog.t("XBLE error " + e.getMessage() );
     }
     return null;
   }
@@ -1425,7 +1424,7 @@ public class CavwayComm extends TopoDroidComm
               for ( int addr = 8; ; addr++ ) {
                 buf = readFirmwareBlock(addr);
                 if ( buf == null || buf.length < 256 ) {
-                  TDLog.Error("XBLE fw read - failed at addr " + addr + " cnt " + cnt );
+                  TDLog.t("XBLE fw read - failed at addr " + addr + " cnt " + cnt );
                   ok = false;
                   break;
                 }

@@ -682,7 +682,7 @@ public class DBlock
   void setBlockName( String from, String to, boolean is_backleg )
   {
     if ( from == null || to == null ) {
-      TDLog.Error( "FIXME ERROR DBlock::setName() either from or to is null");
+      TDLog.e( "FIXME ERROR DBlock::setName() either from or to is null");
       return;
     }
     mFrom = from.trim();

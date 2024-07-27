@@ -530,7 +530,7 @@ public class TDConst
     for ( int k=0; k<types.length; ++k ) {
       if ( types[k].equals( type ) ) return index[k];
     }
-    TDLog.Error("Type not found: " + type );
+    TDLog.e("Type not found: " + type );
     return SURVEY_FORMAT_NONE;
   }
 

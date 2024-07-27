@@ -143,7 +143,7 @@ public class FirmwareDialog extends MyDialog
       }
       if ( mBtnDump.isChecked() ) {
         if ( ! filename.endsWith(".bin") ) filename = filename + ".bin";
-        // TDLog.f( "Firmware dump to " + filename );
+        // TDLog.t( "Firmware dump to " + filename );
         TDLog.v( "Firmware dump to " + filename );
         // File fp = new File( TDPath.getBinFile( filename ) );
         File fp = TDPath.getBinFile( filename );
@@ -153,7 +153,7 @@ public class FirmwareDialog extends MyDialog
         }
         askDump( filename );
       } else if ( mBtnUpload.isChecked() ) {
-        // TDLog.f( "Firmware upload from " + filename );
+        // TDLog.t( "Firmware upload from " + filename );
         TDLog.v( "Firmware upload from " + filename );
         // File fp = new File( TDPath.getBinFile( filename ) );
         File fp = TDPath.getBinFile( filename );
@@ -162,7 +162,7 @@ public class FirmwareDialog extends MyDialog
           return;    
         }
         int fw = FirmwareUtils.readFirmwareFirmware( fp ); // guess firmware version
-        // TDLog.f( "Detected Firmware version " + fw );
+        // TDLog.t( "Detected Firmware version " + fw );
         boolean check = (fw > 0) && FirmwareUtils.firmwareChecksum( fw, fp );
         TDLog.v( "Detected Firmware version " + fw + " check " + check );
         askUpload( filename, fw, check );
@@ -186,13 +186,13 @@ public class FirmwareDialog extends MyDialog
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
-          // TDLog.f( "Firmware dump to file " + filename );
+          // TDLog.t( "Firmware dump to file " + filename );
           TDLog.v( "Firmware dump to file " + filename );
           // FIXME ASYNC_FIRMWARE_TASK
           // TDToast.makeLong( R.string.firmware_wait_dump );
           // mApp.dumpFirmware( filename );
           int ret = mApp.dumpFirmware( filename );
-          // TDLog.f( "Firmware dump to " + filename + " result: " + ret );
+          // TDLog.t( "Firmware dump to " + filename + " result: " + ret );
           TDLog.v( "Firmware dump to " + filename + " result: " + ret );
           if ( ret > 0 ) {
             TDToast.makeLong( String.format( mRes.getString(R.string.firmware_file_dumped), filename, ret ) );
@@ -219,7 +219,7 @@ public class FirmwareDialog extends MyDialog
     // final String pathname = TDPath.getBinFile( filename );
     int hw = FirmwareUtils.getHardware( fw );
     boolean compatible = FirmwareUtils.isCompatible( fw );
-    // TDLog.f( "FW/HW compatible " + compatible + " FW check " + check );
+    // TDLog.t( "FW/HW compatible " + compatible + " FW check " + check );
     TDLog.v( "FW " + fw + " compatible " + compatible + " check " + check );
     compatible = compatible && check;
 

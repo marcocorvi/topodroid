@@ -110,7 +110,7 @@ public class CWConvexHull
       Vector3D vm = vt.difference( vf ); 
       double lm = vm.length();
       if ( lm < 0.0001f ) {
-        TDLog.Error( "CW-Hull Error leg too short");
+        TDLog.e( "CW-Hull Error leg too short");
         return;
       }
       vm.scaleBy( GlModel.mSplitStretchDelta / lm );
@@ -201,7 +201,7 @@ public class CWConvexHull
       // for ( Cave3DShot s2 : splays2 ) {
       //   vt.sum( s2.toVector3D() ).dump();
       // }
-      TDLog.Error( "CW-Hull error " + e.getMessage() );
+      TDLog.e( "CW-Hull error " + e.getMessage() );
       throw e;
     }
     // TDLog.v( "CW-Hull " + sf.short_name + "-" + st.short_name 
@@ -559,7 +559,7 @@ public class CWConvexHull
         }          
       }
       if ( k == size ) {
-        TDLog.Error( "CW-Hull Warning next side not found");
+        TDLog.e( "CW-Hull Warning next side not found");
         // for ( int j=0; j<size; ++j  ) {
         //   CWSide side = sideToKeep.get(j);
         //   // TDLog.v( "CW-Hull: " + j + ": " + side.p1.mCnt + " " + side.p2.mCnt );
@@ -859,7 +859,7 @@ public class CWConvexHull
           double a0 = t0.maxAngleOfPoint(p0);
           if (a0 > angle_thr) break;
         } catch ( NullPointerException e ) {
-          TDLog.Error("CW-Hull make concave: " + e.getMessage() );
+          TDLog.e("CW-Hull make concave: " + e.getMessage() );
         }
       }
       // TDLog.v( "CW-Hull concavity T " + t0.mCnt + " P " + p0.x + " " + p0.y + " " + p0.z );
@@ -1173,7 +1173,7 @@ public class CWConvexHull
         else if ( vts[0] == t.v2 ) { w1 = t.v2; w2 = t.v3; w3 = t.v1; z1 = t.s2; z2 = t.s3; z3 = t.s1; }
         else if ( vts[0] == t.v3 ) { w1 = t.v3; w2 = t.v1; w3 = t.v2; z1 = t.s3; z2 = t.s1; z3 = t.s2; }
         else {
-          TDLog.Error( "CW-Hull Error cannot find one vertex");
+          TDLog.e( "CW-Hull Error cannot find one vertex");
           return;
         }
       } else if ( nv == 2 ) {
@@ -1184,7 +1184,7 @@ public class CWConvexHull
         } else if ( ( vts[0] == t.v1 && vts[1] == t.v2 ) || ( vts[0] == t.v2 && vts[1] == t.v1 ) ) {
           w1 = t.v3; w2 = t.v1; w3 = t.v2; z1 = t.s3; z2 = t.s1; z3 = t.s2; 
         } else {
-          TDLog.Error( "CW-Hull Error cannot find two vertex");
+          TDLog.e( "CW-Hull Error cannot find two vertex");
           return;
         }
       }
@@ -1206,7 +1206,7 @@ public class CWConvexHull
             }
           } while ( inside && k < 3*ns );
           if ( k >= 3*ns ) {
-            TDLog.Error( "CW-Hull Error triangle with " + nv + " pts inside. cannot get end intersection");
+            TDLog.e( "CW-Hull Error triangle with " + nv + " pts inside. cannot get end intersection");
             break;
           }
           // TDLog.v( "CW-Hull now process " + start + "--" + end );

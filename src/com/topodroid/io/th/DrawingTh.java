@@ -132,7 +132,7 @@ public class DrawingTh
       if ( vals.length == 0 ) continue;
       if ( vals[0].equals( "scrap" ) ) {
         if ( vals.length < 4 ) {
-          TDLog.Error( "bad scrap cmd: " + line );
+          TDLog.e( "bad scrap cmd: " + line );
         } else {
           // String name = vals[1];
           // skip "-projection" vals[2]
@@ -145,7 +145,7 @@ public class DrawingTh
          TDLog.v("DRAW endscrap");
       } else if ( vals[0].equals( "point" ) ) { // THERION POINT: point X Y type [options]
         if ( vals.length < 4 ) {
-          TDLog.Error( "TH bad point cmd: " + line );
+          TDLog.e( "TH bad point cmd: " + line );
         } else {
           int ptType = BrushManager.getPointLibSize();
           boolean has_orientation = false;
@@ -157,7 +157,7 @@ public class DrawingTh
             x = dx + Float.parseFloat( vals[1] ) / toTherion;
             y = dy - Float.parseFloat( vals[2] ) / toTherion;
           } catch ( NumberFormatException e ) {
-            TDLog.Error( "TH Point error (number fmt) <" + line + ">" );
+            TDLog.e( "TH Point error (number fmt) <" + line + ">" );
             continue;
           }
           thname = vals[3];
@@ -177,7 +177,7 @@ public class DrawingTh
                 orientation = Float.parseFloat( vals[k+1] );
                 has_orientation = true;
               } catch ( NumberFormatException e ) {
-                TDLog.Error( "TH Point orientation error : " + line );
+                TDLog.e( "TH Point orientation error : " + line );
               }
               k += 2;
             } else if ( vals[k].equals( "-scale" ) ) {
@@ -250,7 +250,7 @@ public class DrawingTh
         }
       } else if ( vals[0].equals( "line" ) ) { // THERION LINES 
         if ( vals.length < 2 ) {
-          TDLog.Error( "TH bad line cmd: " + line );
+          TDLog.e( "TH bad line cmd: " + line );
         } else {
           thname = vals[1];
           if ( vals.length >= 6 && thname.equals( "border" ) && vals[2].equals( "-id" ) ) { // THERION AREAS
@@ -271,7 +271,7 @@ public class DrawingTh
                 x = dx + Float.parseFloat( pt[0] ) / toTherion;
                 y = dy - Float.parseFloat( pt[1] ) / toTherion;
               } catch ( NumberFormatException e ) {
-                TDLog.Error( "TH Line error (number fmt) <" + line + ">" );
+                TDLog.e( "TH Line error (number fmt) <" + line + ">" );
                 continue;
               }
               path.addStartPoint( x, y );
@@ -285,10 +285,10 @@ public class DrawingTh
                     path.addPoint( x, y );
                     // TDLog.v( "TH area pt " + x + " " + y);
                   } catch ( NumberFormatException e ) {
-                    TDLog.Error( "TH area line X-Y error (10) <" + line + ">" );
+                    TDLog.e( "TH area line X-Y error (10) <" + line + ">" );
                     continue;
                   } catch ( ArrayIndexOutOfBoundsException e ) {
-                    TDLog.Error( "TH area line X-Y error (11) " + line );
+                    TDLog.e( "TH area line X-Y error (11) " + line );
                     continue;
                   }
                 } else if ( pt2.length == 6 ) {
@@ -302,10 +302,10 @@ public class DrawingTh
                     path.addPoint3( x1, y1, x2, y2, x, y );
                     // TDLog.v( "TH area pt " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + x + " " + y);
                   } catch ( NumberFormatException e ) {
-                    TDLog.Error( "TH area line X-Y error (12) <" + line + ">" );
+                    TDLog.e( "TH area line X-Y error (12) <" + line + ">" );
                     continue;
                   } catch ( ArrayIndexOutOfBoundsException e ) {
-                    TDLog.Error( "TH area line X-Y error (13) " + line );
+                    TDLog.e( "TH area line X-Y error (13) " + line );
                     continue;
                   }
                 }
@@ -375,10 +375,10 @@ public class DrawingTh
                 y = dy - Float.parseFloat( pt0[1] ) / toTherion;
                 path.addStartPoint( x, y );
               } catch ( NumberFormatException e ) {
-                TDLog.Error( "THERION line X-Y error (1) <" + line + ">" );
+                TDLog.e( "THERION line X-Y error (1) <" + line + ">" );
                 continue;
               } catch ( ArrayIndexOutOfBoundsException e ) {
-                TDLog.Error( "THERION line X-Y error (2) " + line );
+                TDLog.e( "THERION line X-Y error (2) " + line );
                 continue;
               }
               // TDLog.v( "  line start point: <" + line + "> " + x + " " + y );
@@ -404,10 +404,10 @@ public class DrawingTh
                       y = dy - Float.parseFloat( pt[1] ) / toTherion;
                       path.addPoint( x, y );
                     } catch ( NumberFormatException e ) {
-                      TDLog.Error( "THERION line X-Y error (3) <" + line + ">" );
+                      TDLog.e( "THERION line X-Y error (3) <" + line + ">" );
                       continue;
                     } catch ( ArrayIndexOutOfBoundsException e ) {
-                      TDLog.Error( "THERION line X-Y error (4) " + line );
+                      TDLog.e( "THERION line X-Y error (4) " + line );
                       continue;
                     }
                   } else if ( pt.length == 6 ) {
@@ -420,10 +420,10 @@ public class DrawingTh
                       y  = dy - Float.parseFloat( pt[5] ) / toTherion;
                       path.addPoint3( x1, y1, x2, y2, x, y );
                     } catch ( NumberFormatException e ) {
-                      TDLog.Error( "THERION line X-Y error (5) <" + line + ">" );
+                      TDLog.e( "THERION line X-Y error (5) <" + line + ">" );
                       continue;
                     } catch ( ArrayIndexOutOfBoundsException e ) {
-                      TDLog.Error( "THERION line X-Y error (6) " + line );
+                      TDLog.e( "THERION line X-Y error (6) " + line );
                       continue;
                     }
                   }

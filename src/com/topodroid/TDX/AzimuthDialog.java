@@ -159,7 +159,7 @@ class AzimuthDialog extends MyDialog
           mAzimuth = azimuth;
           updateSeekBar();
           updateView();
-        } catch ( NumberFormatException e ) { TDLog.Error("Error " + e.getMessage() ); }
+        } catch ( NumberFormatException e ) { TDLog.e("Error " + e.getMessage() ); }
       }
     } );
 

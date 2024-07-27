@@ -274,12 +274,12 @@ public class ExportDialogPlot extends MyDialog
           try { 
             TDSetting.setExportScale( Integer.parseInt( ((EditText) findViewById( R.id.therion_scale )).getText().toString() ) );
           } catch ( NumberFormatException e ) {
-            TDLog.Error("export scale: not integer");
+            TDLog.e("export scale: not integer");
           }
           try { 
             TDSetting.setBezierStep( Float.parseFloat( ((EditText) findViewById( R.id.therion_spacing )).getText().toString() ) );
           } catch ( NumberFormatException e ) {
-            TDLog.Error("export spacing: bad value");
+            TDLog.e("export spacing: bad value");
           }
         }
         break;
@@ -320,7 +320,7 @@ public class ExportDialogPlot extends MyDialog
           try { 
             TDSetting.setExportScale( Integer.parseInt( ((EditText) findViewById( R.id.svg_scale )).getText().toString() ) );
           } catch ( NumberFormatException e ) {
-            TDLog.Error("Not integer export scale");
+            TDLog.e("Not integer export scale");
           }
         }
         break;
@@ -342,7 +342,7 @@ public class ExportDialogPlot extends MyDialog
       //       float sc = Float.parseFloat( ((EditText) findViewById( R.id.png_scale )).getText().toString() );
       //       if ( sc > 0 ) TDSetting.mBitmapScale = sc;
       //     } catch ( NumberFormatException e ) {
-      //       TDLog.Error("Non-number PNG scale");
+      //       TDLog.e("Non-number PNG scale");
       //     }
       //   }
       //   break;
@@ -357,7 +357,7 @@ public class ExportDialogPlot extends MyDialog
           try { 
             TDSetting.setExportScale( Integer.parseInt( ((EditText) findViewById( R.id.pdf_scale )).getText().toString() ) );
           } catch ( NumberFormatException e ) {
-            TDLog.Error("Not integer export scale");
+            TDLog.e("Not integer export scale");
           }
         }
         break;

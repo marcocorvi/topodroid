@@ -79,7 +79,7 @@ public class DrawingAudioPath extends DrawingPointPath
       ret.setOrientation( orientation );
       return ret;
     } catch ( IOException e ) {
-      TDLog.Error( "LABEL in error " + e.getMessage() );
+      TDLog.e( "LABEL in error " + e.getMessage() );
       // TDLog.v( "LABEL in error " + e.getMessage() );
     }
     return null;
@@ -142,7 +142,7 @@ public class DrawingAudioPath extends DrawingPointPath
       dos.writeInt( ((int)mId) );
       // TDLog.Log( TDLog.LOG_PLOT, "T " + " " + cx + " " + cy );
     } catch ( IOException e ) {
-      TDLog.Error( "AUDIO out error " + e.toString() );
+      TDLog.e( "AUDIO out error " + e.toString() );
     }
   }
 

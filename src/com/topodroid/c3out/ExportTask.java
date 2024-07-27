@@ -134,9 +134,9 @@ public class ExportTask extends AsyncTask< Void, Void, Boolean >
       if ( bw != null ) bw.close();
       if ( dos != null ) dos.close();
     } catch ( OutOfMemoryError e ) {
-      TDLog.Error("Export task: Out of memory error" );
+      TDLog.e("Export task: Out of memory error" );
     } catch ( IOException e ) {
-      TDLog.Error("IO error " + e.getMessage() );
+      TDLog.e("IO error " + e.getMessage() );
     } finally {
       TDsafUri.closeFileDescriptor( pfd );
     }

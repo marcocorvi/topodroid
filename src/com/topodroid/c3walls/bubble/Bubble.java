@@ -112,7 +112,7 @@ public class Bubble
           tri3.add( new Triangle3S( p12, p2, p3 ) );
           tri3.add( new Triangle3S( p3, p13, p12 ) );
         } else {
-          TDLog.Error("one point inside but no intersections");
+          TDLog.e("one point inside but no intersections");
         }
       } else if ( tr.inside == 2 ) { // make P1 outside, P2, P3 inside
         ++n2;
@@ -132,7 +132,7 @@ public class Bubble
           Point3S p12 = new Point3S( v2, mCenter );
           tri3.add( new Triangle3S( p1, p12, p13 ) );
         } else {
-          TDLog.Error("two points inside but no intersections");
+          TDLog.e("two points inside but no intersections");
         }
       }
     }

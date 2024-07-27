@@ -159,10 +159,10 @@ public class PowercrustComputer
         computePowercrustProfileView( );
       }
     } catch ( java.lang.UnsatisfiedLinkError e ) {
-      TDLog.Error( "PCrust link error " + e.getMessage() );
+      TDLog.e( "PCrust link error " + e.getMessage() );
       return false;
     } catch ( Exception e ) {
-      TDLog.Error( "PCrust error: " + e.getMessage() );
+      TDLog.e( "PCrust error: " + e.getMessage() );
       return false;
     }
     // TDLog.v( "Powercrust V " + mVertices.length + " F " + mTriangles.size() );
@@ -278,7 +278,7 @@ public class PowercrustComputer
         // B[k] = new DPoint2D( (dy1/d1), -(dx1/d1) );
         B[k] = new DPoint2D( dy1, -dx1 ); // orthogonal: no need to normalize
       } else { // ERROR unattached station
-        TDLog.Error( "PCrust Error: missing station shots at " + st.getFullName() );
+        TDLog.e( "PCrust Error: missing station shots at " + st.getFullName() );
         B[k] = new DPoint2D( 0, 0 ); // ERROR
       }
     }

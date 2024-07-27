@@ -32,7 +32,7 @@ public class TDio
       }
       return new BufferedReader( isr );
     } catch ( FileNotFoundException e ) {
-      TDLog.Error("File not found");
+      TDLog.e("File not found");
     }
     return null;
   }

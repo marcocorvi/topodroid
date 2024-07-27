@@ -106,7 +106,7 @@ class DrawingLineDialog extends MyDialog
       mETtype.setSelection( ( mType < mTypeSection )? mType : mType-1 );
       mETtype.setOnItemSelectedListener( this );
     } catch ( UnsupportedOperationException e2 ) {
-      TDLog.Error( e2.getMessage() );
+      TDLog.e( e2.getMessage() );
     }
 
     mLLlside = (LinearLayout) findViewById( R.id.layout_lside );

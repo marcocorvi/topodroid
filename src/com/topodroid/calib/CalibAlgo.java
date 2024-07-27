@@ -276,7 +276,7 @@ public class CalibAlgo extends CalibTransform
   // must be overridden
   public void addStatErrors( TDVector[] g1, TDVector[] m1, float[] errors )
   {
-    TDLog.Error("calib algo add error stats not overridden");
+    TDLog.e("calib algo add error stats not overridden");
   }
 
   // must be overridden

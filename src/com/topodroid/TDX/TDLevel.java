@@ -51,7 +51,7 @@ public class TDLevel
       final PackageInfo info = ctx.getPackageManager().getPackageInfo( ctx.getPackageName(), 0);
       return (info.applicationInfo.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
     } catch ( NameNotFoundException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
     return false;
   }

@@ -97,7 +97,7 @@ public class CalibValidateListDialog extends MyDialog
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
     if ( ! ( view instanceof TextView ) ) {
-      TDLog.Error("calib validate view instance of " + view.toString() );
+      TDLog.e("calib validate view instance of " + view.toString() );
       return;
     }
     String name = ((TextView) view).getText().toString();

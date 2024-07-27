@@ -103,7 +103,7 @@ public class DrawingPicturePath extends DrawingPointPath
     //   ret.mLevel = lvl;
     //   return ret;
     // } catch ( IOException e ) {
-    //   TDLog.Error( "PICTURE in error " + e.getMessage() );
+    //   TDLog.e( "PICTURE in error " + e.getMessage() );
     // }
     return null;
   }
@@ -170,7 +170,7 @@ public class DrawingPicturePath extends DrawingPointPath
     //   // dos.writeUTF( ( mOptions != null )? mOptions : "" );
     //   // TDLog.Log( TDLog.LOG_PLOT, "T " + " " + cx + " " + cy );
     // } catch ( IOException e ) {
-    //   TDLog.Error( "PHOTO out error " + e.toString() );
+    //   TDLog.e( "PHOTO out error " + e.toString() );
     // }
   }
 }

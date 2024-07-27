@@ -378,7 +378,7 @@ public class TDInstance
   //     ret = DocumentFile.fromTreeUri( context, uri).canWrite();
   //     // TDLog.v("folder " + treeUri + " has permission " + ret );
   //   } catch (Exception e) {
-  //     TDLog.Error("has folder permission error: " + e.getMessage() );
+  //     TDLog.e("has folder permission error: " + e.getMessage() );
   //   }
   //   return ret;
   // }

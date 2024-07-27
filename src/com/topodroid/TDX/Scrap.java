@@ -432,7 +432,7 @@ public class Scrap
     try {
       is_split = line.splitAt( lp, line1, line2, false );
     } catch ( OutOfMemoryError e ) {
-      TDLog.Error("OOM " + e.getMessage() );
+      TDLog.e("OOM " + e.getMessage() );
     }
     if ( is_split ) {
       synchronized( TDPath.mCommandsLock ) {
@@ -446,7 +446,7 @@ public class Scrap
         mSelection.insertLinePath( line2 );
       }
     } else {
-      TDLog.Error("FAILED split line");
+      TDLog.e("FAILED split line");
     }
     // checkLines();
   }
@@ -518,7 +518,7 @@ public class Scrap
     try {
       is_split = line.splitAt( lp, line1, line2, true );
     } catch ( OutOfMemoryError e ) {
-      TDLog.Error("OOM " + e.getMessage() );
+      TDLog.e("OOM " + e.getMessage() );
     }
     if ( is_split ) {
       // TDLog.v( "split " + line.size() + " ==> " + line1.size() + " " + line2.size() );
@@ -541,7 +541,7 @@ public class Scrap
         if ( line2.size() > 1 ) mSelection.insertLinePath( line2 );
       }
     } else {
-      TDLog.Error( "FAILED do split line " + lp.x + " " + lp.y );
+      TDLog.e( "FAILED do split line " + lp.x + " " + lp.y );
     }
     // checkLines();
   }
@@ -1685,7 +1685,7 @@ public class Scrap
       }
       added = true;
     } catch ( OutOfMemoryError e ) {
-      TDLog.Error("OOM " + e.getMessage() );
+      TDLog.e("OOM " + e.getMessage() );
     }
     if ( added ) {
       synchronized( TDPath.mCommandsLock ) {
@@ -1697,7 +1697,7 @@ public class Scrap
         mSelection.insertPath( line );
       }
     } else {
-      TDLog.Error( "FAILED add line to line ");
+      TDLog.e( "FAILED add line to line ");
     }
     /*
     synchronized( TDPath.mSelectionLock ) {
@@ -1754,7 +1754,7 @@ public class Scrap
   //         DrawingLinePath line2 = (DrawingLinePath)path2;
   //         // if every point in line2 overlaps a point in line1 
   //         if ( line1.overlap( line1 ) == line2.size() ) {
-  //           TDLog.Error("LINE OVERLAP " + i1 + "-" + i2 + " total nr. " + size );
+  //           TDLog.e("LINE OVERLAP " + i1 + "-" + i2 + " total nr. " + size );
   //           // for ( int i=0; i<size; ++i ) {
   //           //   ICanvasCommand cmd = mCurrentStack.get( i );
   //           //   if ( cmd.commandType() != 0 ) continue;
@@ -1962,7 +1962,7 @@ public class Scrap
       }
       appended = true;
     } catch ( OutOfMemoryError e ) {
-      TDLog.Error("OOM " + e.getMessage() );
+      TDLog.e("OOM " + e.getMessage() );
     }
     if ( appended ) {
       synchronized( TDPath.mCommandsLock ) {
@@ -1977,7 +1977,7 @@ public class Scrap
         mSelected.clear();
       }
     } else {
-      TDLog.Error( "FAILED append hot item to nearest line");
+      TDLog.e( "FAILED append hot item to nearest line");
     }
     /*
     synchronized ( TDPath.mSelectionLock ) {

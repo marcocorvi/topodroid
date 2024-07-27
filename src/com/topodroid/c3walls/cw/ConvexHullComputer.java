@@ -79,7 +79,7 @@ public class ConvexHullComputer
             // TODO make convex-concave hull
             mWalls.add( cw );
           } catch ( RuntimeException e ) { 
-            TDLog.Error( "CW-Hull compute walls: " + e.getMessage() );
+            TDLog.e( "CW-Hull compute walls: " + e.getMessage() );
             return false;
           }
         }

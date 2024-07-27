@@ -80,7 +80,7 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
     //   temp = File.createTempFile( "tmp", null, TDFile.getFile( mDirname ) );
     // } catch ( IOException e ) { 
     //   // TDLog.v( "cannot create temp file with " + mFullname );
-    //   TDLog.Error("cannot create temp file with " + mFullname );
+    //   TDLog.e("cannot create temp file with " + mFullname );
     //   return null;
     // }
     // if ( temp == null ) return null;

@@ -265,7 +265,7 @@ class Selection
       mPoints.add( sp );
       sp.setBucket( getBucket( sp.X(), sp.Y() ) );
     } catch ( OutOfMemoryError e ) { // unrecoverable error
-      TDLog.Error("OOM " + e.getMessage() );
+      TDLog.e("OOM " + e.getMessage() );
     }
 
     // if ( pt != null ) {

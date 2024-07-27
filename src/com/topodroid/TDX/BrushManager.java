@@ -575,7 +575,7 @@ public class BrushManager
       for ( Symbol p : points.getSymbols() ) if ( p.isEnabled() ) {
         String fname = p.getThName();
         if ( fname == null ) {
-          TDLog.Error("point symbol with null ThName" );
+          TDLog.e("point symbol with null ThName" );
           p.setEnabled( false ); // disable
         } else {
           if ( !  SymbolLibrary.USER.equals(fname) ) palette.addPointFilename( fname );
@@ -587,7 +587,7 @@ public class BrushManager
       for ( Symbol p : lines.getSymbols() ) if ( p.isEnabled() ) {
         String fname = p.getThName();
         if ( fname == null ) {
-          TDLog.Error("line symbol with null ThName" );
+          TDLog.e("line symbol with null ThName" );
           p.setEnabled( false ); // disable
         } else {
           if ( ! SymbolLibrary.USER.equals(fname) ) palette.addLineFilename( fname );
@@ -599,7 +599,7 @@ public class BrushManager
       for ( Symbol p : areas.getSymbols() ) if ( p.isEnabled() ) {
         String fname = p.getThName();
         if ( fname == null ) {
-          TDLog.Error("area symbol with null ThName" );
+          TDLog.e("area symbol with null ThName" );
           p.setEnabled( false ); // disable
         } else {
           if ( ! SymbolLibrary.USER.equals(fname) ) palette.addAreaFilename( fname );
@@ -614,9 +614,9 @@ public class BrushManager
    */
   static void toDataStream( DataOutputStream dos )
   {
-    if ( mPointLib != null ) { mPointLib.toDataStream(dos); } else { try { dos.writeUTF(""); } catch (IOException e) { TDLog.Error("IO " + e.getMessage() ); } }
-    if ( mLineLib  != null ) { mLineLib.toDataStream(dos);  } else { try { dos.writeUTF(""); } catch (IOException e) { TDLog.Error("IO " + e.getMessage() ); } }
-    if ( mAreaLib  != null ) { mAreaLib.toDataStream(dos);  } else { try { dos.writeUTF(""); } catch (IOException e) { TDLog.Error("IO " + e.getMessage() ); } }
+    if ( mPointLib != null ) { mPointLib.toDataStream(dos); } else { try { dos.writeUTF(""); } catch (IOException e) { TDLog.e("IO " + e.getMessage() ); } }
+    if ( mLineLib  != null ) { mLineLib.toDataStream(dos);  } else { try { dos.writeUTF(""); } catch (IOException e) { TDLog.e("IO " + e.getMessage() ); } }
+    if ( mAreaLib  != null ) { mAreaLib.toDataStream(dos);  } else { try { dos.writeUTF(""); } catch (IOException e) { TDLog.e("IO " + e.getMessage() ); } }
   }
 
   /** @return the xored color

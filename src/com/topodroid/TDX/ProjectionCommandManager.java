@@ -198,7 +198,7 @@ class ProjectionCommandManager
   void executeAll( Canvas canvas )
   {
     if ( canvas == null ) {
-      TDLog.Error( "drawing executeAll null canvas");
+      TDLog.e( "drawing executeAll null canvas");
       return;
     }
 

@@ -122,7 +122,7 @@ class ParserVisualTopoX extends ImportParser
     try {
       return Float.parseFloat( line.substring( pos, qos ) );
     } catch ( NumberFormatException e ) {
-      TDLog.Error("VTopo X: Non-number value");
+      TDLog.e("VTopo X: Non-number value");
     }
     return val;
   }
@@ -218,11 +218,11 @@ class ParserVisualTopoX extends ImportParser
     try {
       line = nextLine( br );
       if ( line == null || ! line.startsWith( "<?xml " ) ) { // NOT XML
-        TDLog.Error("VTopo X: not an xml file");
+        TDLog.e("VTopo X: not an xml file");
         return;
       }
     } catch ( IOException e ) {
-      TDLog.Error("VTopo X: i/o error " + mLineCnt + ": " + e.getMessage() );
+      TDLog.e("VTopo X: i/o error " + mLineCnt + ": " + e.getMessage() );
       return;
     }
 
@@ -372,7 +372,7 @@ class ParserVisualTopoX extends ImportParser
         // ignore if ( line.startsWith("<Couleur>") ) continue;
       }
     } catch ( IOException e ) {
-      TDLog.Error( "VTopo X: i/o error " + mLineCnt + ": " + line + " = " + e.getMessage() );
+      TDLog.e( "VTopo X: i/o error " + mLineCnt + ": " + line + " = " + e.getMessage() );
       throw new ParserException();
     }
     // TDLog.Log( TDLog.LOG_THERION, "Parser VisualTopo shots "+ shots.size() +" splays "+ splays.size()  );

@@ -935,7 +935,7 @@ public class GlModel
     // TDLog.v("Model prepare full");
     modelCreated = false;
     if ( parser == null || parser.getShotNumber() == 0 ) {
-      TDLog.Error("Model Error. Cannot create model without shots");
+      TDLog.e("Model Error. Cannot create model without shots");
       return;
     }
     mParser = parser;

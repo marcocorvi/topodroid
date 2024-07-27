@@ -135,7 +135,7 @@ public class SymbolAreaLibrary extends SymbolLibrary
       for ( File file : files ) {
         SymbolArea symbol = new SymbolArea( file.getPath(), file.getName(), locale, iso );
         if ( symbol.isThName( null ) ) {
-          TDLog.Error( "area with null ThName " + file.getName() );
+          TDLog.e( "area with null ThName " + file.getName() );
           continue;
         }
         if ( ! hasSymbolByThName( symbol.getThName() ) ) {
@@ -155,12 +155,12 @@ public class SymbolAreaLibrary extends SymbolLibrary
           }
           symbol.setEnabled( enable );
         } else {
-          TDLog.Error( "area " + symbol.getThName() + " already in library" );
+          TDLog.e( "area " + symbol.getThName() + " already in library" );
         }
       }
       sortSymbolByName( systemNr );
     } else {
-      if ( ! dir.mkdirs( ) ) TDLog.Error( "mkdir error" );
+      if ( ! dir.mkdirs( ) ) TDLog.e( "mkdir error" );
     }
   }
 

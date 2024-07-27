@@ -333,12 +333,12 @@ public class TdManagerActivity extends Activity
           mList.invalidate();
           // updateTdmConfigList();
         } else if ( result == TDRequest.RESULT_TDCONFIG_NONE ) {
-          TDLog.Error( "**** TdmConfig NONE" );
+          TDLog.e( "**** TdmConfig NONE" );
           // nothing
         }
         break;
       default:
-        TDLog.Error( "unexpected request code " + request );
+        TDLog.e( "unexpected request code " + request );
     }
   }
 

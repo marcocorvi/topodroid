@@ -327,7 +327,7 @@ class TdmConfig extends TdmFile
         bw.close(); // close the stream flushing it first
         ret = true;
       } catch ( IOException e ) { 
-        TDLog.Error("Tdm Config write file " + filepath + " I/O error " + e.getMessage() );
+        TDLog.e("Tdm Config write file " + filepath + " I/O error " + e.getMessage() );
       }
       mSave = false;
     }
@@ -392,7 +392,7 @@ class TdmConfig extends TdmFile
     try {
       BufferedReader br = TDFile.getTopoDroidFileReader( filepath );
       if ( br == null ) { // file does not exist (or is not readable)
-        TDLog.Error("file no-exist or no-read: " + filepath );
+        TDLog.e("file no-exist or no-read: " + filepath );
         mSurveyName = getNameFromFilepath( filepath );
         writeTdmConfig( true );
         return;
@@ -459,7 +459,7 @@ class TdmConfig extends TdmFile
       br.close();
     } catch ( IOException e ) {
       // TODO
-      TDLog.Error( "TdManager exception " + e.getMessage() );
+      TDLog.e( "TdManager exception " + e.getMessage() );
     }
     // TDLog.v( "Tdm_Config read file: nr. sources " + getInputsSize() );
   }

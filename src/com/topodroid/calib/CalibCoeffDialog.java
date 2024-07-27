@@ -262,7 +262,7 @@ public class CalibCoeffDialog extends MyDialog
         if ( mCoeff2 != null ) parent.uploadCoefficients( mDelta, mCoeff2, true, null, true ); // TWO_SENSORS
         if ( mCoeff1 != null ) parent.uploadCoefficients( mDelta, mCoeff1, true, mButtonWrite, false );
       } else {
-        TDLog.Error("Calib Coeff Dialog null parent");
+        TDLog.e("Calib Coeff Dialog null parent");
       }
     } else { // id == R.id.coeff_back
       dismiss();

@@ -167,10 +167,10 @@ class AudioListDialog extends MyDialog
         String filepath = TDPath.getSurveyWavFile( TDInstance.survey, Long.toString( item_id ) );
         startPlay( filepath );
       // } else {
-      //   // TDLog.Error("audio file does not exist");
+      //   // TDLog.e("audio file does not exist");
       }
     // } else {
-    //   // TDLog.Error("null audio info");
+    //   // TDLog.e("null audio info");
     }
   }
 
@@ -194,9 +194,9 @@ class AudioListDialog extends MyDialog
       mMP.prepare();
       mMP.start();
     } catch ( IllegalStateException e ) {
-      TDLog.Error("Illegal state " + e.getMessage() );
+      TDLog.e("Illegal state " + e.getMessage() );
     } catch ( IOException e ) {
-      TDLog.Error("I/O error " + e.getMessage() );
+      TDLog.e("I/O error " + e.getMessage() );
     }
   }
 

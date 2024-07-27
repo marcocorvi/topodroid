@@ -1394,7 +1394,7 @@ public class GMActivity extends Activity
   public void updateGM( long value, String name )
   {
     if ( mSaveCBlock == null ) {
-      TDLog.Error( "GM update: null saved cblock" );
+      TDLog.e( "GM update: null saved cblock" );
       return;
     }
     mApp_mDData.updateGMName( mSaveCBlock.mId, TDInstance.cid, name );
@@ -1431,7 +1431,7 @@ public class GMActivity extends Activity
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
       // case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        // TDLog.Error( "key down: code " + code );
+        // TDLog.e( "key down: code " + code );
     }
     return false;
   }

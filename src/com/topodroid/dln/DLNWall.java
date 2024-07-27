@@ -194,7 +194,7 @@ public class DLNWall
         }
       }
       if ( p3 == p2 ) {
-        TDLog.Error("failed next at " + p2.x + " " + p2.y );
+        TDLog.e("failed next at " + p2.x + " " + p2.y );
         break;
       }
     }

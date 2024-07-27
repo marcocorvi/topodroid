@@ -97,16 +97,16 @@ public class ImportPocketTopoTask extends ImportTask
       //     pw2.format("%s", extended );
 
       //   } catch ( IOException e ) {
-      //     TDLog.Error( "SID " + sid + " scraps IO error " + e );
+      //     TDLog.e( "SID " + sid + " scraps IO error " + e );
       //   }
       // }
       
       fis.close(); 
     } catch ( IOException e ) {
-      TDLog.Error( "IO error " + e.getMessage() );
+      TDLog.e( "IO error " + e.getMessage() );
     } catch ( ParserException e ) {
       // TDToast.makeBad( R.string.file_parse_fail );
-      TDLog.Error( "Parser error " + e.getMessage() );
+      TDLog.e( "Parser error " + e.getMessage() );
     } finally {
       TDsafUri.closeFileDescriptor( pfd );
     }

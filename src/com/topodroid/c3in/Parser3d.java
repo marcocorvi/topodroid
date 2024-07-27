@@ -238,7 +238,7 @@ public class Parser3d extends TglParser
       }
       /* if ( dis != null ) */ dis.close(); // test always true
     } catch ( IOException e ) { 
-      TDLog.Error("3d error " + e.getMessage() );
+      TDLog.e("3d error " + e.getMessage() );
     }
   }
 

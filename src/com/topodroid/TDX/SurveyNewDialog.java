@@ -246,7 +246,7 @@ class SurveyNewDialog extends MyDialog
 
     long sid = mApp.setSurveyFromName( name, datamode, true ); // save survey name: tell app to set it into the database
     if ( sid <= 0 ) {
-      TDLog.Error( "Failed to set survey name in DB");
+      TDLog.e( "Failed to set survey name in DB");
       return false;
     }
     // Note TDInstance.sid == sid

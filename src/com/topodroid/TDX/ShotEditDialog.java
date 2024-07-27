@@ -802,7 +802,7 @@ class ShotEditDialog extends MyDialog
           mParent.updateShotDistanceBearingClino( d, b, c, mBlk );
 	}
       } catch (NumberFormatException e ) {
-        TDLog.Error( e.getMessage() );
+        TDLog.e( e.getMessage() );
         return false;
       }
     }
@@ -928,7 +928,7 @@ class ShotEditDialog extends MyDialog
       if ( saveDBlock() ) {
         dismiss();
       } else {
-        TDLog.Error("OK failed to save block");
+        TDLog.e("OK failed to save block");
       }
     } else if ( b == mButtonSave ) {
       if ( ! saveDBlock() ) {
@@ -1010,7 +1010,7 @@ class ShotEditDialog extends MyDialog
       } else { 
 	String dstr = mETat.getText().toString().replace(',','.');
 	try { d = Float.parseFloat( dstr ); } catch ( NumberFormatException e ) {
-          TDLog.Error("Non-number value");
+          TDLog.e("Non-number value");
         }
         // add a duplicate leg d, mBlk.mBearing, mBlk.mClino
 	from = mBlk.mFrom;

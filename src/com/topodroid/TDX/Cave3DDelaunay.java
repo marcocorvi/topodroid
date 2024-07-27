@@ -256,7 +256,7 @@ class Cave3DDelaunay
       for ( DelaunayTriangle tri : mTri ) {
         if ( tri.contains( v, eps ) ) {
           if ( ret != null ) {
-            TDLog.Error( "Delaunay point in many triangles ");
+            TDLog.e( "Delaunay point in many triangles ");
           } else {
             ret = tri;
           }
@@ -468,7 +468,7 @@ class Cave3DDelaunay
       {
         DelaunayTriangle tri = findTriangle( p );
         if ( tri == null ) {
-          TDLog.Error( "Delaunay V on no triangle. " + p.x + " " + p.y + " " + p.z + " S " + mSide.size() + " T " + mTri.size() );
+          TDLog.e( "Delaunay V on no triangle. " + p.x + " " + p.y + " " + p.z + " S " + mSide.size() + " T " + mTri.size() );
           return;
         }
         // TDLog.v( "Delaunay K " + k + " Point " + p.index + " in T " + tri.s1.p1.k + " " + tri.s2.p1.k + " " + tri.s3.p1.k );
@@ -489,7 +489,7 @@ class Cave3DDelaunay
       {
         DelaunayTriangle tri = findTriangle( p );
         if ( tri == null ) {
-          TDLog.Error( "Delaunay V on no triangle. " + p.x + " " + p.y + " " + p.z + " S " + mSide.size() + " T " + mTri.size() );
+          TDLog.e( "Delaunay V on no triangle. " + p.x + " " + p.y + " " + p.z + " S " + mSide.size() + " T " + mTri.size() );
           return;
         }
         // TDLog.v( "Delaunay N " + n + " Point " + p.index + " in T " + tri.s1.p1.k + " " + tri.s2.p1.k + " " + tri.s3.p1.k );

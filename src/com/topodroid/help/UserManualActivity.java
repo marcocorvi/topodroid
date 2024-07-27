@@ -139,7 +139,7 @@ public class UserManualActivity extends Activity
     //   // TDLog.v( "MAN url " +  pageuri.toURL().toString() );
     //   view.loadUrl( pageuri.toURL().toString() );
     // } catch ( MalformedURLException e ) {
-    //   TDLog.Error( "MAN error " + e.getMessage() );
+    //   TDLog.e( "MAN error " + e.getMessage() );
     // }
   }
 
@@ -215,7 +215,7 @@ public class UserManualActivity extends Activity
         try {
           load( view, url );
         } catch ( IOException e ) {
-          TDLog.Error( "UserMan load " + url.toString() + " Error: " + e.getMessage() );
+          TDLog.e( "UserMan load " + url.toString() + " Error: " + e.getMessage() );
         }
         return false;
       }
@@ -223,7 +223,7 @@ public class UserManualActivity extends Activity
       @Override
       public void onReceivedError(WebView view, int errorCode, String description, String failingUrl)
       {
-        TDLog.Error( "UserMan load error " + errorCode + ": " + description + " url " + failingUrl );
+        TDLog.e( "UserMan load error " + errorCode + ": " + description + " url " + failingUrl );
       }
     } );
 
@@ -231,7 +231,7 @@ public class UserManualActivity extends Activity
     try {
       load( mTV_text, page );
     } catch ( IOException e ) { 
-      TDLog.Error( "UserMan load " + page + " Error: " + e.getMessage() );
+      TDLog.e( "UserMan load " + page + " Error: " + e.getMessage() );
     }
 
     mImage  = (ImageView) findViewById( R.id.handle );
@@ -300,7 +300,7 @@ public class UserManualActivity extends Activity
       try { 
         load( mTV_text, String.format(Locale.US, "manual%02d.htm", pos ) );
       } catch ( IOException e ) {
-        TDLog.Error("User-man pos " + pos + " error " + e.getMessage() );
+        TDLog.e("User-man pos " + pos + " error " + e.getMessage() );
       }
     } else if ( pos == 18 ) { // website
       viewUrl( WEBSITE );

@@ -742,7 +742,7 @@ public class TDNum
         // mLastLeg.addBlock( blk );
         return false;
       } else {
-        TDLog.Error("num: append LEG " + blk.mId + " should not happen ");
+        TDLog.e("num: append LEG " + blk.mId + " should not happen ");
         // return appendLeg( blk );
         return false;
       }
@@ -778,7 +778,7 @@ public class TDNum
       addToInLegError( mLastLeg );
       computeInLegError();
     } else {
-      TDLog.Error("num: append should not happen " + leg.mId + " <" + leg.mFrom + "-" + leg.mTo + ">" );
+      TDLog.e("num: append should not happen " + leg.mId + " <" + leg.mFrom + "-" + leg.mTo + ">" );
       return false; // should not happen
     }
     DBlock blk1 = mBuffer.get();
@@ -846,7 +846,7 @@ public class TDNum
   private NumShot makeShotFromTmp( NumStation sf, NumStation st, TriShot ts, int direction, float anomaly, float decl )
   {
     if ( ts.reversed != 1 ) {
-      TDLog.Error( "making shot from reversed temp " + sf.name + " " + st.name );
+      TDLog.e( "making shot from reversed temp " + sf.name + " " + st.name );
     }
     DBlock blk = ts.getFirstBlock();
     // TDLog.v( "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() + " E " + blk.getIntExtend() + " S " + blk.getStretch() );
@@ -862,7 +862,7 @@ public class TDNum
   private NumShot makeShotFromTmpDiving( NumStation sf, NumStation st, TriShot ts, int direction, float anomaly, float decl, float tdepth )
   {
     if ( ts.reversed != 1 ) {
-      TDLog.Error( "making shot from reversed temp " + sf.name + " " + st.name );
+      TDLog.e( "making shot from reversed temp " + sf.name + " " + st.name );
     }
     DBlock blk = ts.getFirstBlock();
     // TDLog.v( "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() + " E " + blk.getIntExtend() + " S " + blk.getStretch() );
@@ -947,7 +947,7 @@ public class TDNum
           float tdepth = depths.get( blk.mTo ).floatValue(); // FIXME may null pointer
 	  if ( ! blk.makeClino( tdepth ) ) {
 	    // depth_error = true;
-	    TDLog.Error("Failed make clino: " +  blk.mFrom + "-" + blk.mTo + " (" + tdepth + ") " );
+	    TDLog.e("Failed make clino: " +  blk.mFrom + "-" + blk.mTo + " (" + tdepth + ") " );
 	  }
         }
       }

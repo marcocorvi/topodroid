@@ -89,7 +89,7 @@ class ParserCompass extends ImportParser
               mDate = String.format(Locale.US, "%04d.%02d.%02d",
                 Integer.parseInt( vals[4] ), Integer.parseInt( vals[2] ), Integer.parseInt( vals[3] ) );
             } catch ( NumberFormatException e ) {
-              TDLog.Error("Non-integer date value");
+              TDLog.e("Non-integer date value");
             }
             if ( vals.length >= 6 ) {
               int com = line.indexOf("COMMENT:");
@@ -201,7 +201,7 @@ class ParserCompass extends ImportParser
                                  extend, LegType.NORMAL, isDuplicate( mFlag ), isSurface(mFlag), isBackshot(mFlag), mComment ) );
               }
             } catch ( NumberFormatException e ) {
-              TDLog.Error( "ERROR " + mLineCnt + ": " + line + e.getMessage() );
+              TDLog.e( "ERROR " + mLineCnt + ": " + line + e.getMessage() );
             }
           }
         }
@@ -209,7 +209,7 @@ class ParserCompass extends ImportParser
       }
     } catch ( IOException e ) {
       // TODO
-      TDLog.Error( "ERROR " + mLineCnt + ": " + line );
+      TDLog.e( "ERROR " + mLineCnt + ": " + line );
       throw new ParserException();
     }
     if ( mDate == null ) {

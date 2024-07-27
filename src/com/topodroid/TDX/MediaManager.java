@@ -174,12 +174,12 @@ class MediaManager
   //       mData.insertPhotoRecord( TDInstance.sid, mPhotoId, mItemId, "", TDUtil.currentDate(), mComment, mCamera, mCode );
   //       ret = true;
   //     } catch ( FileNotFoundException e ) {
-  //       TDLog.Error("cannot save photo: file not found");
+  //       TDLog.e("cannot save photo: file not found");
   //     } catch ( IOException e ) {
-  //      TDLog.Error("cannot save photo: i/o error");
+  //      TDLog.e("cannot save photo: i/o error");
   //     }
   //   } else {
-  //     TDLog.Error("cannot save photo: null file" );
+  //     TDLog.e("cannot save photo: null file" );
   //   }
   //   mImageFilepath = null;
   //   return ret;

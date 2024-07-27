@@ -584,7 +584,7 @@ public class OverviewWindow extends ItemDrawer
   private void doStart()
   {
     if ( mData == null ) {
-      TDLog.Error("OverviewWindow start with null DB");
+      TDLog.e("OverviewWindow start with null DB");
       finish();
       return;
     }
@@ -743,7 +743,7 @@ public class OverviewWindow extends ItemDrawer
     mExportIndex = TDConst.plotExportIndex( export_type );
     mExportExt   = TDConst.plotExportExt( export_type );
     if ( mExportIndex < 0 ) { 
-      TDLog.Error("Error. Overview export: type " + export_type + " index " + mExportIndex + " ext " + mExportExt );
+      TDLog.e("Error. Overview export: type " + export_type + " index " + mExportIndex + " ext " + mExportExt );
       return;
     }
     // TDLog.v("Overview export: type " + export_type + " index " + mExportIndex + " ext " + mExportExt );
@@ -801,7 +801,7 @@ public class OverviewWindow extends ItemDrawer
   //     case TDConst.SURVEY_FORMAT_XVI: saveWithExt( uri, "xvi" ); break;
   //     case TDConst.SURVEY_FORMAT_PDF: savePdf( uri ); break;
   //     default:
-  //       TDLog.Error("Unexpected export index " + mExportIndex );
+  //       TDLog.e("Unexpected export index " + mExportIndex );
   //       break;
   //   }
   // }
@@ -817,7 +817,7 @@ public class OverviewWindow extends ItemDrawer
       DrawingCommandManager manager = mOverviewSurface.getManager( DrawingSurface.DRAWING_OVERVIEW );
       doSavePdf( uri, manager, fullname );
     } else {
-      TDLog.Error("ERROR PDF fullname is null");
+      TDLog.e("ERROR PDF fullname is null");
     }
   }
 
@@ -867,7 +867,7 @@ public class OverviewWindow extends ItemDrawer
       /* if ( fos != null ) */ fos.close(); // test always true
       TDToast.make( String.format( getResources().getString(R.string.saved_file_1), fullname ) ); // PDF
     } catch ( IOException e ) {
-      TDLog.Error("Failed PDF export " + e.getMessage() );
+      TDLog.e("Failed PDF export " + e.getMessage() );
     } finally {
       TDsafUri.closeFileDescriptor( pfd );
     }
@@ -1375,7 +1375,7 @@ public class OverviewWindow extends ItemDrawer
         return true;
       case KeyEvent.KEYCODE_VOLUME_DOWN: // (25)
       default:
-        // TDLog.Error( "key down: code " + code );
+        // TDLog.e( "key down: code " + code );
     }
     return false;
   }

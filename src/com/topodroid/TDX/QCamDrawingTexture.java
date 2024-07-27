@@ -172,7 +172,7 @@ public class QCamDrawingTexture extends TextureView {
         mState = STATE_PICTURE_DONE;
         // mBackgroundHandler.post( new ImageSaver( reader.acquireLatestImage(), mQCam ) );
       } catch (RuntimeException e) {
-        TDLog.Error("CAM2 runtime " + e.getMessage());
+        TDLog.e("CAM2 runtime " + e.getMessage());
         startPreview(); // restart preview
       }
     }
@@ -226,7 +226,7 @@ public class QCamDrawingTexture extends TextureView {
   final CameraCaptureSession.CaptureCallback mCaptureCallback = new CameraCaptureSession.CaptureCallback() {
     @Override
     public void onCaptureBufferLost(CameraCaptureSession session, CaptureRequest request, Surface target, long frameNumber) {
-      TDLog.Error("CAM2 capture buffer lost");
+      TDLog.e("CAM2 capture buffer lost");
     }
 
     @Override
@@ -238,7 +238,7 @@ public class QCamDrawingTexture extends TextureView {
 
     @Override
     public void onCaptureFailed(CameraCaptureSession session, CaptureRequest request, CaptureFailure failure) {
-      TDLog.Error("CAM2 capture failed");
+      TDLog.e("CAM2 capture failed");
     }
 
     @Override
@@ -369,16 +369,16 @@ public class QCamDrawingTexture extends TextureView {
           return false; // throw
         }
         if ( ! TDandroid.checkCamera(mContext) ) {
-          TDLog.Error("No CAMERA permission");
+          TDLog.e("No CAMERA permission");
           return false;
         }
         manager.openCamera(mCameraId, mStateCallback, mBackgroundHandler);
         return true;
       } catch ( CameraAccessException e ) {
-        TDLog.Error("CAM2 " + e.getMessage() );
+        TDLog.e("CAM2 " + e.getMessage() );
         // e.printStackTrace();
       } catch ( InterruptedException e ) {
-        TDLog.Error("CAM2 " + e.getMessage() );
+        TDLog.e("CAM2 " + e.getMessage() );
         // TODO throw
       }
     }
@@ -398,7 +398,7 @@ public class QCamDrawingTexture extends TextureView {
         if ( mCamera         != null ) { mCamera.close();         mCamera = null; }
         if ( mImageReader    != null ) { mImageReader.close();    mImageReader    = null; }
       } catch ( InterruptedException e ) {
-        TDLog.Error("CAM2 " + e.getMessage() );
+        TDLog.e("CAM2 " + e.getMessage() );
         // TODO
       } finally {
         mLock.release();
@@ -436,7 +436,7 @@ public class QCamDrawingTexture extends TextureView {
             mDisplay.getSize( displaySize );
             rot = mDisplay.getRotation();
           } catch ( ClassCastException e ) {
-            TDLog.Error("CAM2 class cast " + e.getMessage() );
+            TDLog.e("CAM2 class cast " + e.getMessage() );
           }
           boolean swapped = false; // whether the swap width and height
           switch ( rot ) {
@@ -449,7 +449,7 @@ public class QCamDrawingTexture extends TextureView {
               if ( mOrientation == 0 || mOrientation == 180 ) swapped = true; // sensor is up or down
               break;
             default:
-              TDLog.Error("CAM2 invalid rotation " + rot );
+              TDLog.e("CAM2 invalid rotation " + rot );
           }
 
           int rot_w = w;
@@ -481,10 +481,10 @@ public class QCamDrawingTexture extends TextureView {
           return;
         }
       } catch ( CameraAccessException e ) {
-        TDLog.Error("CAM2 access " + e.getMessage() );
+        TDLog.e("CAM2 access " + e.getMessage() );
         e.printStackTrace();
       } catch ( NullPointerException e ) {
-        TDLog.Error("CAM2 null ptr " + e.getMessage() );
+        TDLog.e("CAM2 null ptr " + e.getMessage() );
         // camera2 API used but not supported
         e.printStackTrace();
       }
@@ -503,7 +503,7 @@ public class QCamDrawingTexture extends TextureView {
       try {
         SurfaceTexture texture = getSurfaceTexture();
         if ( texture == null ) {
-          TDLog.Error("CAM2 null surface texture");
+          TDLog.e("CAM2 null surface texture");
           return; // or throw
         }
         texture.setDefaultBufferSize( mPreviewSize.getWidth(), mPreviewSize.getHeight() );
@@ -531,12 +531,12 @@ public class QCamDrawingTexture extends TextureView {
             @Override
             public void onConfigureFailed( CameraCaptureSession session )
             {
-              TDLog.Error("CAM2 failed configure");
+              TDLog.e("CAM2 failed configure");
               // TDToast
             }
           }, null );
       } catch ( CameraAccessException e ) {
-        TDLog.Error("CAM2 access " + e.getMessage() );
+        TDLog.e("CAM2 access " + e.getMessage() );
         e.printStackTrace();
       }
     }
@@ -562,7 +562,7 @@ public class QCamDrawingTexture extends TextureView {
         mCaptureSession.setRepeatingRequest( mPreviewRequest, null, mBackgroundHandler ); // null CaptureCallback
         return true;
       } catch ( CameraAccessException e ) {
-        TDLog.Error("CAM2 startPreview access " + e.getMessage() );
+        TDLog.e("CAM2 startPreview access " + e.getMessage() );
         e.printStackTrace();
       }
     }
@@ -580,7 +580,7 @@ public class QCamDrawingTexture extends TextureView {
         mCaptureSession.stopRepeating();
         return true;
       } catch ( CameraAccessException e ) {
-        TDLog.Error("CAM2 access " + e.getMessage() );
+        TDLog.e("CAM2 access " + e.getMessage() );
         e.printStackTrace();
       }
     }
@@ -708,7 +708,7 @@ public class QCamDrawingTexture extends TextureView {
       // TDLog.v("CAM2 state --> WAITING LOCK");
       mCaptureSession.capture( mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler );
     } catch ( CameraAccessException e ) {
-      TDLog.Error("CAM2 access " + e.getMessage() );
+      TDLog.e("CAM2 access " + e.getMessage() );
     }
   }
 
@@ -724,7 +724,7 @@ public class QCamDrawingTexture extends TextureView {
         // TDLog.v("CAM2 state --> WAITING PRECAPTURE");
         mCaptureSession.capture( mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler );
       } catch ( CameraAccessException e ) {
-        TDLog.Error("CAM2 access " + e.getMessage() );
+        TDLog.e("CAM2 access " + e.getMessage() );
       }
     }
   }
@@ -753,7 +753,7 @@ public class QCamDrawingTexture extends TextureView {
         mCaptureSession.abortCaptures(); 
         mCaptureSession.capture( captureBuilder.build(), captureCallback, null );
       } catch ( CameraAccessException e ) {
-        TDLog.Error("CAM2 access " + e.getMessage() );
+        TDLog.e("CAM2 access " + e.getMessage() );
       }
     }
   }
@@ -768,7 +768,7 @@ public class QCamDrawingTexture extends TextureView {
   //     mCaptureSession.abortCaptures(); 
   //     mState = STATE_PREVIEW;
   //   } catch ( CameraAccessException e ) {
-  //     TDLog.Error("CAM2 access " + e.getMessage() );
+  //     TDLog.e("CAM2 access " + e.getMessage() );
   //   }
   // }
 
@@ -794,7 +794,7 @@ public class QCamDrawingTexture extends TextureView {
   //     // TDLog.v("CAM2 state --> PREVIEW");
   //     mCaptureSession.setRepeatingRequest( mPreviewRequest, mCaptureCallback, mBackgroundHandler );
   //   } catch ( CameraAccessException e ) {
-  //     TDLog.Error("CAM2 access " + e.getMessage() );
+  //     TDLog.e("CAM2 access " + e.getMessage() );
   //   }
   // }
 

@@ -66,7 +66,7 @@ public class ImportZipTask extends ImportTask
         ret = (long)Archiver.unArchive( app, fis );
         fis.close(); 
       } catch ( IOException e ) {
-        TDLog.Error("Error " + e.getMessage() );
+        TDLog.e("Error " + e.getMessage() );
       } finally {
         TDsafUri.closeFileDescriptor( pfd );
       }

@@ -208,7 +208,7 @@ public class OsmFactory
     try {
       return Double.parseDouble( getValue( line, pos ) );
     } catch ( NumberFormatException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
     return 0;
   }
@@ -327,11 +327,11 @@ public class OsmFactory
         }
       }
     } catch ( IOException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     } finally {
       if ( isr != null ) {
         try { isr.close(); } catch ( IOException e ) {
-          TDLog.Error( e.getMessage() );
+          TDLog.e( e.getMessage() );
         }
       }
     }

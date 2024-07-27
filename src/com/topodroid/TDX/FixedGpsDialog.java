@@ -559,9 +559,9 @@ class FixedGpsDialog extends MyDialog
         Location loc = mLocManager.getLastKnownLocation( LocationManager.GPS_PROVIDER );
         if ( loc != null ) displayLocation( loc /*, false*/ );
       } catch ( IllegalArgumentException e ) {
-        TDLog.Error( "onGpsStatusChanged IllegalArgumentException " );
+        TDLog.e( "onGpsStatusChanged IllegalArgumentException " );
       } catch ( SecurityException e ) {
-        TDLog.Error( "onGpsStatusChanged SecurityException " );
+        TDLog.e( "onGpsStatusChanged SecurityException " );
       }
     }
   }

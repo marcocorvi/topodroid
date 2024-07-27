@@ -60,7 +60,7 @@ class StationNameTRobot extends StationName
             int r = Integer.parseInt( blk.mFrom.substring( 0, pos ) );
             if ( r > ret ) ret = r;
           } catch ( NumberFormatException e ) {
-            TDLog.Error("TopoROBOT parse error " + blk.mFrom );
+            TDLog.e("TopoROBOT parse error " + blk.mFrom );
           }
         }
       }
@@ -71,7 +71,7 @@ class StationNameTRobot extends StationName
             int r = Integer.parseInt( blk.mTo.substring( 0, pos ) );
             if ( r > ret ) ret = r;
           } catch ( NumberFormatException e ) {
-            TDLog.Error("TopoROBOT parse error " + blk.mTo );
+            TDLog.e("TopoROBOT parse error " + blk.mTo );
           }
         }
       }

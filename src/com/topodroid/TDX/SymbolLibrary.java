@@ -125,7 +125,7 @@ public class SymbolLibrary
             n0 = n0.right;
           }
         } else {
-          TDLog.Error( "Double insertion of symbol " + mPrefix + v.getThName() );
+          TDLog.e( "Double insertion of symbol " + mPrefix + v.getThName() );
           ret = false;
           break;
         }
@@ -390,7 +390,7 @@ public class SymbolLibrary
       // dos.writeInt( str_len );
       dos.writeUTF( sb.toString() );
     } catch ( IOException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
   }
 

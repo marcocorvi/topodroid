@@ -63,7 +63,7 @@ public class DBlock
   public void setBlockName( String from, String to )
   {
     if ( from == null || to == null ) {
-      TDLog.Error( "TopoGL Error DBlock::setName() either from or to is null");
+      TDLog.e( "TopoGL Error DBlock::setName() either from or to is null");
       return;
     }
     mFrom = from.trim();

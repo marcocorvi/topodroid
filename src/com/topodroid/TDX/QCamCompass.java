@@ -385,7 +385,7 @@ class QCamCompass extends Dialog
       mHasSaved = false;
       // TDLog.v( "QCAM compass. Click cancel button");
     } else {
-      TDLog.Error( "QCAM compass. Click unexpected view");
+      TDLog.e( "QCAM compass. Click unexpected view");
     }
     // TDLog.v("QCAM has saved data " + mHasSaved + " dismiss " + dismiss );
     if ( dismiss ) {

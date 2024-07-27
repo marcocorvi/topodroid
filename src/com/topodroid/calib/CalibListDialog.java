@@ -141,7 +141,7 @@ public class CalibListDialog extends MyDialog
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
     if ( ! ( view instanceof TextView ) ) {
-      TDLog.Error("calib list view instance of " + view.toString() );
+      TDLog.e("calib list view instance of " + view.toString() );
       return;
     }
     String name = ((TextView) view).getText().toString();

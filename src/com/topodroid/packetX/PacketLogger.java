@@ -99,7 +99,7 @@ public class PacketLogger extends DataSetObservable
     try {
         myDB = openHelper.getWritableDatabase();
         if ( myDB == null ) {
-          TDLog.Error( "failed get writable packet database" );
+          TDLog.e( "failed get writable packet database" );
           // return;
         }
 
@@ -128,12 +128,12 @@ public class PacketLogger extends DataSetObservable
 
   private void logError( String msg, Exception e )
   {
-    TDLog.Error("PACKET DB " + msg + ": " + e.getMessage() );
+    TDLog.e("PACKET DB " + msg + ": " + e.getMessage() );
   }
 
   private void handleDiskIOError( SQLiteDiskIOException e )
   {
-    TDLog.Error("PACKET DB disk error " + e.getMessage() );
+    TDLog.e("PACKET DB disk error " + e.getMessage() );
   }
 
   private long doInsert( String table, ContentValues cv )
@@ -324,7 +324,7 @@ public class PacketLogger extends DataSetObservable
            db.setTransactionSuccessful();
            db.endTransaction();
          // } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-         } catch ( SQLException e ) { TDLog.Error( "PACKET DB createTables exception: " + e.getMessage() );
+         } catch ( SQLException e ) { TDLog.e( "PACKET DB createTables exception: " + e.getMessage() );
          // } finally {
            // db.setLockingEnabled( true );
          }

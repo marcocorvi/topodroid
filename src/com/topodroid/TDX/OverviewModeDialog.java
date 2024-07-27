@@ -87,7 +87,7 @@ class OverviewModeDialog extends MyDialog
         if ( mCBstation.isChecked() ) mode |= DisplayMode.DISPLAY_STATION;
         if ( mCBgrid.isChecked() )    mode |= DisplayMode.DISPLAY_GRID;
         if ( mCBscaleRef.isChecked() )mode |= DisplayMode.DISPLAY_SCALEBAR;
-        // TDLog.Error( "Mode " + mode );
+        // TDLog.e( "Mode " + mode );
         mSurface.setDisplayMode( mode );
       // } else if ( vid == R.id.button_back ) {
       //   /* nothing */

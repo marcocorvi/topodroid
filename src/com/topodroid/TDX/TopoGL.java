@@ -319,16 +319,16 @@ public class TopoGL extends Activity
               doSketches = true;
               mFileDialog = false;
             } else {
-              TDLog.Error("Cannot open input survey " + mSurveyName );
+              TDLog.e("Cannot open input survey " + mSurveyName );
             }
           } else {
-            TDLog.Error("No input file or survey");
+            TDLog.e("No input file or survey");
           }          
         } else {
-          TDLog.Error("No input base cwd");
+          TDLog.e("No input base cwd");
         }
       // } else {
-      //   TDLog.Error("failed version check " + mVersionCheck );
+      //   TDLog.e("failed version check " + mVersionCheck );
       //   Toast.makeText( this, R.string.no_permissions, Toast.LENGTH_SHORT ).show();
       // }
     } else {
@@ -338,7 +338,7 @@ public class TopoGL extends Activity
         // // openFile();
       } else {
         Toast.makeText( this, R.string.no_permissions, Toast.LENGTH_LONG ).show();
-        TDLog.Error("PERM finishing activity ... perms " + mCheckPerms );
+        TDLog.e("PERM finishing activity ... perms " + mCheckPerms );
         // if ( perms_dialog != null ) perms_dialog.dismiss();
         finish();
       }
@@ -1492,9 +1492,9 @@ public class TopoGL extends Activity
         // }
         return ( mFilename != null );
       } catch ( FileNotFoundException e ) {
-        TDLog.Error("file not found: " + e.getMessage() );
+        TDLog.e("file not found: " + e.getMessage() );
       } catch ( IOException e ) {
-        TDLog.Error("io error: " + e.getMessage() );
+        TDLog.e("io error: " + e.getMessage() );
       }
     } else {
       String path = pathname; // uri.getPath();
@@ -1507,7 +1507,7 @@ public class TopoGL extends Activity
           if ( mRenderer != null ) mRenderer.setParser( mParser, true );
         }
       } catch ( FileNotFoundException e ) {
-        TDLog.Error( e.getMessage() );
+        TDLog.e( e.getMessage() );
       }
       return ( mFilename != null );
     }
@@ -1718,7 +1718,7 @@ public class TopoGL extends Activity
         try { 
           bitmap = (Bitmap)( TiffFactory.getBitmap( pathname, bounds.left, bounds.bottom, bounds.right, bounds.top ) );
         } catch ( java.lang.UnsatisfiedLinkError e ) {
-          TDLog.Error( e.getMessage() );
+          TDLog.e( e.getMessage() );
           return 1; 
         }
         // if ( bitmap != null ) {
@@ -1762,7 +1762,7 @@ public class TopoGL extends Activity
         String file = files[0];
         Cave3DFix origin = mParser.getOrigin();
         if ( origin == null ) {
-          TDLog.Error("OSM with null origin");
+          TDLog.e("OSM with null origin");
           return false;
         } 
 
@@ -1781,7 +1781,7 @@ public class TopoGL extends Activity
           try {
             isr.close();
           } catch ( IOException e ) {
-            TDLog.Error( e.getMessage() );
+            TDLog.e( e.getMessage() );
           }
         }
         if ( b ) {
@@ -2199,7 +2199,7 @@ public class TopoGL extends Activity
     } catch ( ParserException e ) {
       TDToast.makeBad( TDInstance.formatString( R.string.error_parser_error, survey + " " + e.msg() ) );
       mParser = null;
-      // TDLog.Error( "parser exception " + filename );
+      // TDLog.e( "parser exception " + filename );
     }
     return (mParser != null);
   }
@@ -2260,7 +2260,7 @@ public class TopoGL extends Activity
       // if ( mRenderer != null ) mRenderer.setParser( mParser, true );
       // TDLog.v("Station " + mParser.getStationNumber() + " shot " + mParser.getShotNumber() + " splay " + mParser.getSplayNumber() + " surveys " + mParser.getSurveyNumber() );
     } catch ( ParserException e ) {
-      // TDLog.Error("parser exception " + e.msg() );
+      // TDLog.e("parser exception " + e.msg() );
       TDToast.makeBad( TDInstance.formatString( R.string.error_parser_error, e.msg() ) );
       mParser = null;
     }
@@ -2440,7 +2440,7 @@ public class TopoGL extends Activity
       // TDLog.v("TopoGL GPS set location " + e + " " + n + " " + z );
       mRenderer.setLocation( new Vector3D( e, n, z ) );
     } else {
-      TDLog.Error("GPS location " + e + " " + n + " out of DEM" );
+      TDLog.e("GPS location " + e + " " + n + " out of DEM" );
     }
   }
   // end WITH-GPS ------------------------------------------------------------
@@ -2665,12 +2665,12 @@ public class TopoGL extends Activity
 
     BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
     if ( adapter == null ) {
-      TDLog.Error("TopoGL check BT name : no adapter");
+      TDLog.e("TopoGL check BT name : no adapter");
       return false;
     }
     Set< BluetoothDevice > devices = adapter.getBondedDevices();
     if ( devices == null ) {
-      TDLog.Error("TopoGL check BT name : no devices");
+      TDLog.e("TopoGL check BT name : no devices");
       return false;
     }
     for ( BluetoothDevice device : devices ) {
@@ -2699,7 +2699,7 @@ public class TopoGL extends Activity
         }
       } ).execute();
     } else {
-      TDLog.Error("TopoGL Error null BT comm");
+      TDLog.e("TopoGL Error null BT comm");
     }
   }
 

@@ -93,16 +93,16 @@ public class UserManDownload extends AsyncTask< String, Integer, Integer >
 	  }
           ret = 1;
         } else {
-          TDLog.Error("ERROR could not mkdirs" );
+          TDLog.e("ERROR could not mkdirs" );
         }
       } else {
-        TDLog.Error("HTTP error : " + response );
+        TDLog.e("HTTP error : " + response );
       } 
       http.disconnect();
     } catch ( MalformedURLException e1 ) {
-      TDLog.Error( "ERROR bad URL: " + e1.toString() );
+      TDLog.e( "ERROR bad URL: " + e1.toString() );
     } catch ( IOException e2 ) {
-      TDLog.Error( "ERROR I/O exception: " + e2.toString() );
+      TDLog.e( "ERROR I/O exception: " + e2.toString() );
     }
     return ret;
   }

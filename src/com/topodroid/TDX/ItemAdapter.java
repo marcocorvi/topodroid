@@ -300,7 +300,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
         ++pos;
       }
     } else {
-      TDLog.Error("View is neither CheckBox nor ItemButton");
+      TDLog.e("View is neither CheckBox nor ItemButton");
     }
     if ( doubleclick ) mParent.closeDialog();
     mClickMillis = millis;

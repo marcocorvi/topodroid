@@ -120,7 +120,7 @@ class LoxFile
         }
         type = Endian.toIntLEndian( int32 );
         if ( type < 1 || type > 6 ) {
-          TDLog.Error(  "LOX Unexpected chunk type " + type );
+          TDLog.e(  "LOX Unexpected chunk type " + type );
           done = true;
           continue;
         }
@@ -163,7 +163,7 @@ class LoxFile
         }
       }
     } catch( IOException e ) {
-      TDLog.Error( "LOX IO error " + e.getMessage() );
+      TDLog.e( "LOX IO error " + e.getMessage() );
       throw new ParserException( filename, linenr );
     } finally {
       try {

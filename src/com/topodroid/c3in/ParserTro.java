@@ -100,7 +100,7 @@ public class ParserTro extends TglParser
         fixes.add( new Cave3DFix( entrance, x, y, z, new Cave3DCS( vt_cs ), 1, 1 ) ); // no WGS84 - M_TO_UNITS = 1
         return true;
       } catch ( NumberFormatException e ) {
-        TDLog.Error("Non-number param");
+        TDLog.e("Non-number param");
       }
     }
     return false;
@@ -111,7 +111,7 @@ public class ParserTro extends TglParser
   private boolean readFile( InputStreamReader isr ) throws ParserException
   {
     if ( isr == null ) {
-      TDLog.Error("Parser Tro: null input stream reader");
+      TDLog.e("Parser Tro: null input stream reader");
       throw new ParserException( "null TRO input", 0 );
     }
 
@@ -201,7 +201,7 @@ public class ParserTro extends TglParser
               try {
                 declination = angle( Double.parseDouble( vals[k] ), 1, true );
               } catch ( NumberFormatException e ) {
-                TDLog.Error("Non-number declination");
+                TDLog.e("Non-number declination");
               }
             } else {
               // ignore colors
@@ -266,14 +266,14 @@ public class ParserTro extends TglParser
                   }
                 }
               } catch ( NumberFormatException e ) {
-                TDLog.Error( "TRO Error " + linenr + ": " + line + " " + e.getMessage() );
+                TDLog.e( "TRO Error " + linenr + ": " + line + " " + e.getMessage() );
               }
             }
           }
         }
       }
     } catch ( IOException e ) {
-      TDLog.Error( "TRO IO error " + e.getMessage() );
+      TDLog.e( "TRO IO error " + e.getMessage() );
       throw new ParserException( getName(), linenr );
     }
     // TDLog.v( "TRO shots " + shots.size() + " splays " + splays.size() );
@@ -384,12 +384,12 @@ public class ParserTro extends TglParser
             if ( s.hasName( sh.from ) ) {
               sf = s;
               if (  sh.from_station == null ) sh.from_station = s;
-              else if ( sh.from_station != s ) TDLog.Error( "TRO shot " + sh.from + " " + sh.to + " from-station mismatch ");
+              else if ( sh.from_station != s ) TDLog.e( "TRO shot " + sh.from + " " + sh.to + " from-station mismatch ");
             } 
             if ( s.hasName( sh.to ) )   {
               st = s;
               if (  sh.to_station == null ) sh.to_station = s;
-              else if ( sh.to_station != s ) TDLog.Error( "TRO shot " + sh.from + " " + sh.to + " to-station mismatch ");
+              else if ( sh.to_station != s ) TDLog.e( "TRO shot " + sh.from + " " + sh.to + " to-station mismatch ");
             }
             if ( sf != null && st != null ) break;
           }

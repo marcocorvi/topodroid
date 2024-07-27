@@ -79,7 +79,7 @@ public class CalibComputer extends AsyncTask< String, Integer, Integer >
           mParent.get().handleComputeCalibResult(mJob, r);  // MAY NullPointerException
         }
       } catch ( NullPointerException e ) {
-        TDLog.Error( e.getMessage() );
+        TDLog.e( e.getMessage() );
       }
     }
     unlock();

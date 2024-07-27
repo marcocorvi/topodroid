@@ -264,7 +264,7 @@ public class WorldMagneticModel
           mGeoidHeightBuffer[k] = res[k] / 1000.0f;
         }
       } catch ( IOException e ) {
-        TDLog.Error("Input error " + e.getMessage() );
+        TDLog.e("Input error " + e.getMessage() );
       }
       // System.out.println("loaded EGM9615");
     }

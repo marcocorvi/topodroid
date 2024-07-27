@@ -84,7 +84,7 @@ public class DataHelper extends DataSetObservable
         // myDB = openHelper.getReadableDatabase();
         myDB = SQLiteDatabase.openDatabase( database_name, null, SQLiteDatabase.OPEN_READONLY );
         if ( myDB == null ) {
-          TDLog.Error("DB failed get readable database" );
+          TDLog.e("DB failed get readable database" );
           // return;
         } 
         // TDLog.v("DB opened database");
@@ -97,7 +97,7 @@ public class DataHelper extends DataSetObservable
 
      } catch ( SQLiteException e ) {
        myDB = null;
-       TDLog.Error( "DB Data Helper cstr failed to get DB " + e.getMessage() );
+       TDLog.e( "DB Data Helper cstr failed to get DB " + e.getMessage() );
      }
    }
 
@@ -107,7 +107,7 @@ public class DataHelper extends DataSetObservable
   //  */
   // private void logError( String msg, Exception e )
   // {
-  //   TDLog.Error( "DB " + msg + ": " + e.getMessage() );
+  //   TDLog.e( "DB " + msg + ": " + e.getMessage() );
   // }
 
   // /** handle a disk error
@@ -115,7 +115,7 @@ public class DataHelper extends DataSetObservable
   //  */
   // private void handleDiskIOError( SQLiteDiskIOException e )
   // {
-  //   TDLog.Error( "DB disk error " + e.getMessage() );
+  //   TDLog.e( "DB disk error " + e.getMessage() );
   // }
 
   // long getSurveyIdFromName( String name ) 

@@ -40,7 +40,7 @@ public class CalibToggleTask extends AsyncTask<Void, Integer, Boolean>
     try {
       if (mApp.get() != null) return mApp.get().toggleCalibMode();
     } catch ( NullPointerException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
     return false;
   }
@@ -63,7 +63,7 @@ public class CalibToggleTask extends AsyncTask<Void, Integer, Boolean>
         mParent.get().enableButtons(true);
       }
     } catch ( NullPointerException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
   }
 }

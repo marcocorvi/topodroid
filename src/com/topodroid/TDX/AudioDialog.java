@@ -284,9 +284,9 @@ class AudioDialog extends MyDialog
       mBtnConfirm.setText( R.string.audio_recording );
       mMR.start();
     } catch ( IllegalStateException e ) {
-      TDLog.Error("Illegal State " + e.getMessage() );
+      TDLog.e("Illegal State " + e.getMessage() );
     } catch ( IOException e ) {
-      TDLog.Error("I/O error " + e.getMessage() );
+      TDLog.e("I/O error " + e.getMessage() );
     }
   }
 
@@ -309,9 +309,9 @@ class AudioDialog extends MyDialog
       if ( mParent != null ) mParent.stopRecordAudio( mAudioId );
       isRecPlay = STATUS_IDLE;
     } catch ( IllegalStateException e ) {
-      TDLog.Error("Illegal state " + e.getMessage() );
+      TDLog.e("Illegal state " + e.getMessage() );
     } catch ( RuntimeException e ) {
-      TDLog.Error("Runtime error " + e.getMessage() );
+      TDLog.e("Runtime error " + e.getMessage() );
     }
   }
 
@@ -342,9 +342,9 @@ class AudioDialog extends MyDialog
       mBtnConfirm.setText(  R.string.audio_playing );
       mMP.start();
     } catch ( IllegalStateException e ) {
-      TDLog.Error("Illegal state " + e.getMessage() );
+      TDLog.e("Illegal state " + e.getMessage() );
     } catch ( IOException e ) {
-      TDLog.Error("I/O error " + e.getMessage() );
+      TDLog.e("I/O error " + e.getMessage() );
     }
   }
 
@@ -366,9 +366,9 @@ class AudioDialog extends MyDialog
       mBtnPlay.setState( 1 );
       isRecPlay = STATUS_IDLE;
     } catch ( IllegalStateException e ) {
-      TDLog.Error("Illegal state " + e.getMessage() );
+      TDLog.e("Illegal state " + e.getMessage() );
     // } catch ( RuntimeException e ) {
-    //   TDLog.Error("Runtime error " + e.getMessage() );
+    //   TDLog.e("Runtime error " + e.getMessage() );
     }
   }
 

@@ -32,7 +32,7 @@ class DataStopTask extends AsyncTask< String, Void, Void >
    */
   DataStopTask( TopoDroidApp app, ILister lister, DataDownloader data_downloader )
   {
-    // TDLog.Error( "Data Download Task cstr" );
+    // TDLog.e( "Data Download Task cstr" );
     // TDLog.v( "data download task cstr");
     mApp    = new WeakReference<TopoDroidApp>( app );
     mDataDownloader = data_downloader;

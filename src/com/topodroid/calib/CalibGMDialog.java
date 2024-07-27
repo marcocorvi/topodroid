@@ -190,7 +190,7 @@ public class CalibGMDialog extends MyDialog
           }
         }
       } else {
-        TDLog.Error("GM Dialog null parent [1]" );
+        TDLog.e("GM Dialog null parent [1]" );
       }
     } else if ( b == mButtonDelete ) {
       GMActivity parent = mParent.get();
@@ -198,7 +198,7 @@ public class CalibGMDialog extends MyDialog
         TDLog.v("delete GM" );
         parent.deleteGM( true );
       } else {
-        TDLog.Error("GM Dialog null parent [2]" );
+        TDLog.e("GM Dialog null parent [2]" );
       }
     // } else if ( b == mButtonCancel ) {
       /* nothing */

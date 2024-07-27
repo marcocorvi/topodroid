@@ -76,7 +76,7 @@ public class DrawingPointPath extends DrawingPath
         }
         mOptions = "-scrap " + scrapname;
       } else {
-        TDLog.Error("section point without scrap-name");
+        TDLog.e("section point without scrap-name");
         return null;
       }
     }
@@ -225,7 +225,7 @@ public class DrawingPointPath extends DrawingPath
       //   BrushManager.rotateGradPoint( mPointType, -mOrientation );
       // }
     } catch ( IOException e ) {
-      TDLog.Error( "POINT in error " + e.getMessage() );
+      TDLog.e( "POINT in error " + e.getMessage() );
       // TDLog.v( "POINT in error " + e.getMessage() );
     }
     return null;
@@ -245,7 +245,7 @@ public class DrawingPointPath extends DrawingPath
   //     if ( version >= 303066 ) dis.readUTF();
   //     dis.readUTF();
   //   } catch ( IOException e ) {
-  //     TDLog.Error( "POINT in error " + e.getMessage() );
+  //     TDLog.e( "POINT in error " + e.getMessage() );
   //     // TDLog.v( "POINT in error " + e.getMessage() );
   //   }
   // }
@@ -767,7 +767,7 @@ public class DrawingPointPath extends DrawingPath
     String name  = getThName();
     if ( name == null ) {
       name = SymbolLibrary.USER;
-      TDLog.Error( "null point name" );
+      TDLog.e( "null point name" );
     }
     String group = BrushManager.getPointGroup(mPointType);
     try {
@@ -788,7 +788,7 @@ public class DrawingPointPath extends DrawingPath
       dos.writeUTF( (mOptions != null)? mOptions : "" );
       // TDLog.Log( TDLog.LOG_PLOT, "P " + name + " " + cx + " " + cy );
     } catch ( IOException e ) {
-      TDLog.Error( "POINT out error " + e.toString() );
+      TDLog.e( "POINT out error " + e.toString() );
     }
   }
 

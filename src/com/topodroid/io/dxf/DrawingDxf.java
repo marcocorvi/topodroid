@@ -930,7 +930,7 @@ public class DrawingDxf
       out.flush();
     } catch ( IOException e ) {
       // FIXME
-      TDLog.Error( "DXF io-exception " + e.toString() );
+      TDLog.e( "DXF io-exception " + e.toString() );
     }
   }
 
@@ -1050,7 +1050,7 @@ public class DrawingDxf
       try {
         color = DxfColor.rgbToIndex( line2.getColor() );
       } catch ( NullPointerException e ) {
-        TDLog.Error( e.getMessage() );
+        TDLog.e( e.getMessage() );
       }
       // TDLog.v( "HBX_DXF <" + line.getThName() + "> " + String.format("%X %X ", ref_handle, color) + layer + layer2+" "+color);
     } else {
@@ -1107,7 +1107,7 @@ public class DrawingDxf
       try {
         DxfColor.rgbToIndex(area2.getColor());
       } catch ( NullPointerException e ) {
-        TDLog.Error( e.getMessage() );
+        TDLog.e( e.getMessage() );
       }
     } else {
       linetype = DXF.lt_byLayer;
@@ -1213,7 +1213,7 @@ public class DrawingDxf
             done = true;
             break;
 	  default:
-	    TDLog.Error("TDR2DXF Error. unexpected code=" + what );
+	    TDLog.e("TDR2DXF Error. unexpected code=" + what );
 	    return handle;
         }
       }

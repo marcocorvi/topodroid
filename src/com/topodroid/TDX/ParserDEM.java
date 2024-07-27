@@ -153,7 +153,7 @@ class ParserDEM extends DEMsurface
       mIsr = null;
       mBr  = null;
     } catch ( IOException e ) {
-      TDLog.Error( e.getMessage() );
+      TDLog.e( e.getMessage() );
     }
   }
 

@@ -420,7 +420,7 @@ public class TDPrefActivity extends Activity
           mCwdPref.setButtonValue( cwd );
           // TDLog.v("got CWD " + cwd );
         } else if ( result == RESULT_CANCELED ) {
-	  TDLog.Error("could not set CWD");
+	  TDLog.e("could not set CWD");
 	}
         break;
       case REQUEST_PLOT_SCREEN:
@@ -455,11 +455,11 @@ public class TDPrefActivity extends Activity
   // {
   //   super.onConfigurationChanged( cfg );
   //   if ( cfg.orientation == Configuration.ORIENTATION_LANDSCAPE ) {
-  //     TDLog.Error( "landscape" );
+  //     TDLog.e( "landscape" );
   //   } else if ( cfg.orientation == Configuration.ORIENTATION_PORTRAIT ) {
-  //     TDLog.Error( "portrait" );
+  //     TDLog.e( "portrait" );
   //   } else {
-  //     TDLog.Error( "unknown" );
+  //     TDLog.e( "unknown" );
   //   }
   // }
 

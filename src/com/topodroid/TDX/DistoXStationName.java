@@ -109,7 +109,7 @@ public class DistoXStationName
     do {
       name = incrementName( name ); 
     } while ( set.contains( name ) );
-    if ( sb != null ) TDLog.f( sb.toString() + name );
+    if ( sb != null ) TDLog.e( sb.toString() + name );
     return name;
   }
 
@@ -227,19 +227,19 @@ public class DistoXStationName
           try {
             pre = Integer.parseInt( name.substring( 0, pos ) );
           } catch ( NumberFormatException e ) {
-            TDLog.Error( "Non-integer value");
+            TDLog.e( "Non-integer value");
           }
         }
         try {
           return pre * 1000 + Integer.parseInt( name.substring( pos+1 ) );
         } catch ( NumberFormatException e ) {
-          TDLog.Error( "Non-integer value");
+          TDLog.e( "Non-integer value");
         }
       } else {   
         try {
           return Integer.parseInt( name );
         } catch ( NumberFormatException e ) {
-          TDLog.Error( "Non-integer value");
+          TDLog.e( "Non-integer value");
         }
       }
     }
