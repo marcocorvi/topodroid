@@ -192,7 +192,7 @@ public class CalibGMDialog extends MyDialog
       } else {
         TDLog.e("GM Dialog null parent [1]" );
       }
-    } else if ( b == mButtonDelete ) {
+    } else if ( b == mButtonDelete ) { // flag the calib data as "deleted"
       GMActivity parent = mParent.get();
       if ( parent != null ) {
         TDLog.v("delete GM" );
