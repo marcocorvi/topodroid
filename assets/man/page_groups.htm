@@ -8,8 +8,14 @@ Before computing the calibration coefficients the calibration data must be subdi
 Beware that a wrong group assignment can result in a failure to compute the calibration coefficients (usually due to too many iterations in the algorithm).<br><p>
 
 The groups are identified by an integer number starting with 1.<br>
-A data with number 0 is listed but excluded from the coefficients computation.<br>
-Deleted data have negative group number, therefore setting group number -1 amounts to mark the data as "deleted".<br><p>  
+A data with number 0, or negative is listed,
+however negative-group data are excluded from the computation of the calibration coefficients.<br><p>
+
+Data with odd groups are displayed in blue, with even groups in orange.
+Data with 0 or negative group are displayed in gray.<br><p>
+
+Data flagged as "deleted" are normally not listed and even if listed they are excluded both from the 
+assignment of groups and the computation of the coefficients.<br><p>  
 
 You can assign the group number to each calibration data by hand (with the <i>Calibration data edit</i> dialog),
 or let TopoDroid assign the group numbers for you.

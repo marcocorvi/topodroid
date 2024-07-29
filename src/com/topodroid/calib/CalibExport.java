@@ -239,10 +239,10 @@ public class CalibExport
                       long mz = Long.parseLong( vals[6] );
                       long gid = data.insertGM( cid, gx, gy, gz, mx, my, mz );
                       String grp = vals[7].trim();
-                      data.updateGMName( gid, cid, grp );
+                      data.updateGMName( gid, cid, grp );  // this sets the "group"
                       if ( vals.length > 12 ) { // status can be only 0:normal or 1:delete
                         if ( Integer.parseInt( vals[12] ) == 1 ) {
-                          data.deleteGM( cid, gid, true );
+                          data.deleteGM( cid, gid, true ); // this sets the "status" flag
                         }
                       }
                       if ( two_sensors ) {

@@ -172,8 +172,8 @@ public class CBlock
 
   public int color() 
   {
-    if ( mGroup <= 0 ) return colors[0];
-    return colors[ 1 + (int)(mGroup % 2) ];
+    if ( mGroup <= 0 ) return colors[0];    // gray for 0 or negative
+    return colors[ 1 + (int)(mGroup % 2) ]; // blue: odd, orane: even
   }
 
   /** set the block status

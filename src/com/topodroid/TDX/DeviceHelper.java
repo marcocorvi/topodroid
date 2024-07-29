@@ -193,7 +193,7 @@ public class DeviceHelper extends DataSetObservable
   /** mark a calibration data status (either "delete" or "normal")
    * @param cid    calibration ID
    * @param id     data ID
-   * @param delete whether to mark the date "deleted" or "normal"
+   * @param delete whether to mark the date "deleted" (1) or "normal" (0)
    */
   void deleteGM( long cid, long id, boolean delete )
   {
@@ -237,7 +237,7 @@ public class DeviceHelper extends DataSetObservable
   /** update the group of a calibration data
    * @param gid    data ID
    * @param cid    calibration ID
-   * @param grp   data group, as string
+   * @param grp    data group, as string
    */
   public void updateGMName( long gid, long cid, String grp )
   {
@@ -382,9 +382,9 @@ public class DeviceHelper extends DataSetObservable
       if ( cursor != null && cursor.moveToFirst()) {
         do {
           long grp = cursor.getLong(7);
-          long sts = cursor.getLong(9);
-          if ( status >= (int)sts ) { // status == 0 --> only good shots
-                                      // status == 1 --> all shots
+          long sts = cursor.getLong(9); // status 0: normal, 1: deleted
+          if ( status <= (int)sts ) {   // status == 0 --> only good shots
+                                        // status == 1 --> all shots
             if ( negative_too || grp >= 0 ) {
               CBlock block = new CBlock();
               block.setId( cursor.getLong(0), cid );

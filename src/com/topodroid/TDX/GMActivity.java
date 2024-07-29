@@ -233,7 +233,7 @@ public class GMActivity extends Activity
   {
     long cid = TDInstance.cid;
     if ( cid < 0 ) return -2;
-    List< CBlock > list = mApp_mDData.selectAllGMs( cid, 0, false ); // false: skip negative-grp
+    List< CBlock > list = mApp_mDData.selectAllGMs( cid, 0, false ); // include: normal status (0) but no negative-grp (false)
     if ( list.size() < 16 ) {
       return -1;
     }
@@ -360,7 +360,7 @@ public class GMActivity extends Activity
     if ( cid < 0 ) {
       return;
     }
-    List< CBlock > list0 = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // false: skip negative-grp
+    List< CBlock > list0 = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // include: normal status (0) but no negative-grp (false)
     List< CBlock > list1 = mApp_mDData.selectAllGMs( cid, 0, false );
     int size0 = list0.size();
     int size1 = list1.size();
@@ -615,7 +615,7 @@ public class GMActivity extends Activity
     // TDLog.v( "Compute CID " + cid + " from gid " + start_id );
     if ( cid < 0 ) return -2;
     float thr = TDMath.cosd( TDSetting.mGroupDistance );
-    List< CBlock > list = mApp_mDData.selectAllGMs( cid, 0, true ); // true: negative-grp too
+    List< CBlock > list = mApp_mDData.selectAllGMs( cid, 0, true ); // include: normal status (0) but also negative-grp (true)
     if ( list.size() < 4 ) {
       return -1;
     }
@@ -771,7 +771,7 @@ public class GMActivity extends Activity
     resetTitle( );
     mDataAdapter.clear();
     if ( mApp_mDData != null && TDInstance.cid >= 0 ) {
-      List< CBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, mBlkStatus, true ); // true: include negative-grp
+      List< CBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, mBlkStatus, true ); // include: status (mBlkStatus) but also negative-grp (true)
       // TDLog.v( "update Display GMs " + list.size() );
       updateGMList( list );
       setTitle( mCalibName );
@@ -1146,7 +1146,7 @@ public class GMActivity extends Activity
 
     } else if ( b == mButton1[BTN_GROUP] ) { // GROUP
       if ( TDInstance.cid >= 0 ) {
-        List< CBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, true ); // true: include negative-grp
+        List< CBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, true ); // include: normal status (0) but also negative-grp (true)
         if ( list.size() >= 16 ) {
           (new GMGroupsDialog( this, this )).show();
             // // ( TDSetting.mGroupBy == TDSetting.GROUP_BY_DISTANCE )?  getResources().getString( R.string.group_policy_distance ) :
@@ -1181,7 +1181,7 @@ public class GMActivity extends Activity
       // if ( mCalibration == null ) {
       //   TDToast.makeBad( R.string.no_calibration );
       // } else {
-        List< CBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // false: skip negative-grp
+        List< CBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // include: normal status (0) but no negative-grp (false)
         if ( list.size() >= 16 ) {
           ( new CalibCoverageDialog( this, list, mCalibration ) ).show();
         } else {
@@ -1259,7 +1259,7 @@ public class GMActivity extends Activity
   {
     String warning = null;
     // if ( warning == null ) { // check coverage
-      List< CBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // false: skip negative-grp
+      List< CBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // include: normal status (0) but no negative-grp (false)
       CalibCoverage coverage = new CalibCoverage( );
       float cover_value = coverage.evalCoverage( list, null );
       if ( cover_value < 95 ) warning = String.format( getResources().getString( R.string.coverage_warning ), 95 );
