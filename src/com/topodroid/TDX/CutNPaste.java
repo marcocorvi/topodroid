@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 // import com.topodroid.utils.TDLog;
 // import static android.view.Gravity.LEFT;
 
+import com.topodroid.dev.cavway.CavwayTakeShot;
 import com.topodroid.dev.distox_ble.DistoXBLETakeShot; // SIWEI
 
 import com.topodroid.utils.TDString;
@@ -411,6 +412,91 @@ public class CutNPaste
                     // i_lister.enableBluetoothButton(false);
                     // new DistoXBLETakeShot( i_lister, (TDSetting.isConnectionModeContinuous()? lister : null), app, TDSetting.mMinNrLegShots, DataType.DATA_SHOT ).execute();
                     new DistoXBLETakeShot( i_lister, lister, app, TDSetting.mMinNrLegShots, DataType.DATA_SHOT ).execute();
+                    dismissPopupBT();
+                  }
+                } );
+        ww = textview4.getPaint().measureText( text );
+        if ( ww > w ) w = ww;
+      }
+    }else if ( TDInstance.deviceType() == Device.DISTO_CAVWAY ) { // SIWEI
+      // ----- TURN LASER ON
+      text = res.getString(R.string.remote_on);
+      textview1 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+              new View.OnClickListener( ) {
+                @Override public void onClick(View v) {
+                  app.setCavwayLaser( Device.LASER_ON, 0, lister, DataType.DATA_ALL, true, true ); // FIXME check return value
+                  dismissPopupBT();
+                }
+              }
+      );
+      float ww = textview1.getPaint().measureText( text );
+      if ( ww > w ) w = ww;
+
+      // ----- TURN LASER OFF
+      text = res.getString(R.string.remote_off);
+      textview2 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+              new View.OnClickListener( ) {
+                @Override public void onClick(View v) {
+                  app.setCavwayLaser( Device.LASER_OFF, 0, lister, DataType.DATA_ALL,true, true ); // FIXME check return value
+                  dismissPopupBT();
+                }
+              } );
+      ww = textview2.getPaint().measureText( text );
+      if ( ww > w ) w = ww;
+
+      if ( gm_data ) {
+        // ----- MEASURE ONE CALIB DATA AND DOWNLOAD IF MODE IS CONTINUOUS
+        text = res.getString( R.string.popup_do_gm_data );
+        textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+                new View.OnClickListener( ) {
+                  @Override public void onClick(View v) {
+                    // i_lister.enableBluetoothButton(false);
+                    // new DistoXBLETakeShot( i_lister, (TDSetting.mCalibShotDownload ? lister : null), app, 1, DataType.DATA_CALIB ).execute();
+                    new CavwayTakeShot( i_lister, (TDSetting.mCalibShotDownload ? lister : null), app, 1, DataType.DATA_CALIB ).execute();
+                    dismissPopupBT();
+                  }
+                } );
+        ww = textview3.getPaint().measureText( text );
+        if ( ww > w ) w = ww;
+
+        if ( TDSetting.isConnectionModeContinuous() ) {
+          // ----- MEASURE ONE CALIB GROUP AND DOWNLOAD : NEED MODE CONTINUOUS
+          text = res.getString( R.string.popup_do_gm_group );
+          textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+                  new View.OnClickListener( ) {
+                    public void onClick(View v) {
+                      // i_lister.enableBluetoothButton(false);
+                      new CavwayTakeShot( i_lister, lister, app, 4, DataType.DATA_CALIB ).execute();
+                      dismissPopupBT();
+                    }
+                  } );
+          ww = textview3.getPaint().measureText( text );
+          if ( ww > w ) w = ww;
+        }
+
+      } else {
+        // ----- MEASURE ONE SPLAY AND DOWNLOAD IT IF MODE IS CONTINUOUS
+        text = res.getString( R.string.popup_do_splay );
+        textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+                new View.OnClickListener( ) {
+                  public void onClick(View v) {
+                    // i_lister.enableBluetoothButton(false);
+                    // new DistoXBLETakeShot( i_lister, (TDSetting.isConnectionModeContinuous() ? lister : null), app, 1, DataType.DATA_SHOT ).execute();
+                    new CavwayTakeShot( i_lister, lister, app, 1, DataType.DATA_SHOT ).execute();
+                    dismissPopupBT();
+                  }
+                } );
+        ww = textview3.getPaint().measureText( text );
+        if ( ww > w ) w = ww;
+
+        // ----- MEASURE ONE LEG AND DOWNLOAD IT IF MODE IS CONTINUOUS
+        text = res.getString(R.string.popup_do_leg);
+        textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+                new View.OnClickListener( ) {
+                  public void onClick(View v) {
+                    // i_lister.enableBluetoothButton(false);
+                    // new DistoXBLETakeShot( i_lister, (TDSetting.isConnectionModeContinuous()? lister : null), app, TDSetting.mMinNrLegShots, DataType.DATA_SHOT ).execute();
+                    new CavwayTakeShot( i_lister, lister, app, TDSetting.mMinNrLegShots, DataType.DATA_SHOT ).execute();
                     dismissPopupBT();
                   }
                 } );
