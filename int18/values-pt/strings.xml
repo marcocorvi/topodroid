@@ -1655,8 +1655,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_plot_split_summary">Habilitar a função de divisão e união de croquis</string>
   <string name="pref_stylus_size_title">Tam caneta</string>
   <string name="pref_stylus_size_summary">Tamanho da caneta para permitir que a mão toque a tela ao desenhar somente com caneta [0: ignorar]</string>
-  <!-- TODO string name="pref_line_ends_title">Line-end cut</string -->
-  <!-- TODO string name="pref_line_ends_summary">Number of line-points to drop from the ends [0]</string -->
+  <string name="pref_line_ends_title">Cortar fim linha</string>
+  <string name="pref_line_ends_summary">Quantidade de pontos a serem desprezados nas extremidades das linhas [0]</string>
   <string name="pref_fixed_thickness_title">Espessura linha</string>
   <string name="pref_fixed_thickness_summary">Espessura das linhas (visadas e medidas auxiliares)</string>
   <!-- UNUSED string name="pref_device_title">Dispositivo</string -->
