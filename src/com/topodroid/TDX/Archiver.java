@@ -356,7 +356,7 @@ public class Archiver
       ZipEntry sze;
       FileInputStream fis = new FileInputStream( tempfile );
       ZipInputStream szin = new ZipInputStream( fis );
-      while ( ( sze = szin.getNextEntry() ) != null ) {
+      while ( ( sze = szin.getNextEntry() ) != null ) { // NOTE getNextEntry() throws ZipException if zip file entry name contains '..' or starts with '/'
         File symbolfile = TDFile.getPrivateFile( type, sze.getName() );
         // TDLog.v( "ZIP try to uncompress symbol " + type + " " + sze.getName() );
         if ( ! symbolfile.exists() ) { // don't overwrite
@@ -860,7 +860,7 @@ public class Archiver
     try {
       ZipInputStream zin = new ZipInputStream( fis );
       // int nr_entry = 0;
-      while ( ( ze = zin.getNextEntry() ) != null ) {
+      while ( ( ze = zin.getNextEntry() ) != null ) {  // NOTE getNextEntry() throws ZipException if zip file entry name contains '..' or starts with '/'
         // TDLog.v( "ZIP get OK manifest: zentry name " + ze.getName() );
         if ( ze.getName().equals( "manifest" ) ) {
           // String pathname = TDPath.getManifestFile( );
@@ -914,7 +914,7 @@ public class Archiver
       
       ZipInputStream zin = new ZipInputStream( fis );
       // int nr_entry = 0;
-      while ( ( ze = zin.getNextEntry() ) != null ) {
+      while ( ( ze = zin.getNextEntry() ) != null ) {  // NOTE getNextEntry() throws ZipException if zip file entry name contains '..' or starts with '/'
         TDLog.v( "ZIP 8 entry " + ze.getName() ); // entry names do not have directory but only filename with extension
         // ++ nr_entry;
         if ( ze.isDirectory() ) {

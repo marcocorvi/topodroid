@@ -195,7 +195,7 @@ public class DeviceHelper extends DataSetObservable
    * @param id     data ID
    * @param delete whether to mark the date "deleted" (1) or "normal" (0)
    */
-  void deleteGM( long cid, long id, boolean delete )
+  public void deleteGM( long cid, long id, boolean delete )
   {
     if ( myDB == null ) {
       TDLog.e( ERROR_NULL_DB + "delete GM");

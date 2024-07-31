@@ -581,6 +581,7 @@ public class TDSetting
   public static float mLineCorner    = 20;    // corner threshold
   // public static int   mContinueLine  = DrawingWindow.CONT_NONE; // 0
   public static boolean mLineClose = true;
+  public static int     mLineEnds  = 3;       // number of points to drop from line ends
 
   // ---------- WEEDING
   public static float mWeedDistance  = 0.5f;  // max weeding distance
@@ -679,7 +680,7 @@ public class TDSetting
     try {
       int i = Integer.parseInt( ctrl );
       if ( i >= 0 && i <= 2 ) mZoomCtrl = i;
-      if ( mZoomCtrl == 0 && ! is_multitouch ) mZoomCtrl = 1;
+      if ( mZoomCtrl == 0 && ( mStylusOnly || ! is_multitouch ) ) mZoomCtrl = 1;
     } catch ( NumberFormatException e ) {
       TDLog.e( e.getMessage() );
     }
@@ -891,6 +892,7 @@ public class TDSetting
     }
     mStylusOnly = true;
     mStylusSize = s;
+    if ( mZoomCtrl == 0 ) mZoomCtrl = 1;
     return Float.toString( s );
   }
 
@@ -1312,6 +1314,7 @@ public class TDSetting
     mGraphPaperScale = tryInt( prefs,   keyGPlot[ 9],      defGPlot[ 9] );  // DISTOX_GRAPH_PAPER_SCALE
     mSlantXSection  = prefs.getBoolean( keyGPlot[10], bool(defGPlot[10]) ); // DISTOX_SLANT_XSECTION
     mObliqueMax     = tryInt( prefs,   keyGPlot[11],       defGPlot[11] );  // DISTOX_OBLIQUE_PROJECTED
+    mLineEnds       = tryInt( prefs,   keyGPlot[12],      defGPlot[12] );  // DISTOX_LINE_ENDS
     // TDLog.v("SETTING load secondary GEEK plot done");
 
     String[] keyGPlotSplay = TDPrefKey.GEEKsplay;
@@ -1915,7 +1918,7 @@ public class TDSetting
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_PLOT_SPLIT
       mPlotSplit = tryBooleanValue( hlp, k, v, bool(def[ 1 ]) );
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_STYLUS_SIZE
-      setStylusSize( tryFloatValue( hlp, k, v, def[ 2] ) ); // STYLUS_MM
+      setStylusSize( tryFloatValue( hlp, k, v, def[ 2] ) ); // STYLUS_MM - LINE ENDS
     } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_BACKUP_NUMBER
       mBackupNumber  = tryIntValue( hlp, k, v, def[ 3 ] ); 
       if ( mBackupNumber <  4 ) { mBackupNumber =  4; ret = Integer.toString( mBackupNumber ); }
@@ -1942,6 +1945,8 @@ public class TDSetting
       mObliqueMax = tryIntValue( hlp, k, v, def[ 11 ] );
       if ( mObliqueMax < 10 )  { mObliqueMax = 0; ret = Integer.toString( mObliqueMax ); }
       else if ( mObliqueMax > 80 ) { mObliqueMax = 80; ret = Integer.toString( mObliqueMax ); }
+    } else if ( k.equals( key[12 ] ) ) { // DISTOX_LINE_ENDS
+      mLineEnds = tryIntValue( hlp, k, v, def[12 ] );
     } else {
       TDLog.e("missing GEEK_PLOT key: " + k );
     }
@@ -3910,6 +3915,7 @@ public class TDSetting
               mSlantXSection = getBoolean( vals, 18 ); setPreference( editor, "DISTOX_SLANT_XSECTION", mSlantXSection );
               if ( vals.length > 20 ) {
                 mObliqueMax = getInt( vals, 20, 0 ); setPreference( editor, "DISTOX_OBLIQUE_PROJECTED", mObliqueMax );
+                // TODO mLineEnds
               }
             }
           }

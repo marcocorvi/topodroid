@@ -4580,13 +4580,14 @@ public class DrawingWindow extends ItemDrawer
     if ( TDSetting.mStylusOnly ) {
       int np = event.getPointerCount();
       for ( id = 0; id < np; ++id ) {
-        // TDLog.v("STYLUS tool " + id + " size " + rawEvent.getSize( id ) + " major " + rawEvent.getToolMajor( id ) );
+        // could use also getTouchMajor() however these methods are not supported by most devices
+        TDLog.v("STYLUS tool " + id + "/" + np + " size " + rawEvent.getSize( id ) + " major " + rawEvent.getToolMajor( id ) ); 
         if ( rawEvent.getToolMajor( id ) < mStylusSizeDpi ) {
           break;
         }
       }
       if ( id == np ) {
-        // TDLog.v("STYLUS only: no point found");
+        TDLog.v("STYLUS only: no point found");
         return true;
       }
       if (action == MotionEvent.ACTION_POINTER_DOWN) {
@@ -4621,6 +4622,7 @@ public class DrawingWindow extends ItemDrawer
         /* fall through */
       }
     }
+
     float x_canvas = event.getX(id);
     float y_canvas = event.getY(id);
     float x_scene = x_canvas/mZoom - mOffset.x;
@@ -4716,6 +4718,9 @@ public class DrawingWindow extends ItemDrawer
                 boolean add = true;
                 if ( mSymbol == SymbolType.LINE ) {
                   if ( ! tryAndJoinLine( mCurrentLinePath, mCurrentLinePath ) ) {
+                    // TODO this is useful for STYLUS-ONLY, it might be better to skip for complex line modes
+                    if ( /* TDSetting.mStylusOnly && */ TDSetting.mLineEnds > 0 ) mCurrentLinePath.dropEndPoints( TDSetting.mLineEnds );
+
                     DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine, mDrawingSurface.scrapIndex() );
                     lp1.setOptions( BrushManager.getLineDefaultOptions( mCurrentLine ) );
                     if ( BrushManager.isLineStraight( mCurrentLine ) ) {

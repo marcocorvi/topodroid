@@ -1623,6 +1623,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeBtn( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9], ctx, hlp ), // GRAPH_PAPER_SCALE
       makeCbx( cat, key[10], tit[10], dsc[10], T, def[10],          ctx, hlp ), // SLANT_XSECTION
       makeEdt( cat, key[11], tit[11], dsc[11], T, def[11], INTEGER, ctx, hlp ), // OBLIQUE_MAX
+      makeEdt( cat, key[12], tit[12], dsc[12], T, def[12], INTEGER, ctx, hlp ), // LINE ENDS (POINTS)
     };
   }
 

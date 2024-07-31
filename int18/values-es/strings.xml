@@ -1775,6 +1775,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_plot_split_summary">Dibujar acciones de división y fusión</string>
   <string name="pref_stylus_size_title">Tamaño del lápiz</string>
   <string name="pref_stylus_size_summary">Tamaño del lápiz óptico [0: ignorar]</string>
+  <!-- TODO string name="pref_line_ends_title">Line-end cut</string -->
+  <!-- TODO string name="pref_line_ends_summary">Number of line-points to drop from the ends [0]</string -->
   <string name="pref_fixed_thickness_title">Grosor de la línea topografía</string>
   <string name="pref_fixed_thickness_summary">Grosor de la línea topografía</string>
 	  

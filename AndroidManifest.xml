@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
       package="com.topodroid.TDX"
       android:installLocation="auto"
-      android:versionCode="602083"
-      android:versionName="6.2.83"
+      android:versionCode="602084"
+      android:versionName="6.2.84"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
@@ -132,7 +132,7 @@
           -->
 
 	  <!-- android:screenOrientation="portrait" -->
-	  <!-- android:extractNativeLibs="false" -->
+	  <!-- android:extractNativeLibs="false" --> <!-- whether to extract native libs to file system or not -->
           <!-- android:debuggable="false" -->
 
         <activity android:name=".MainWindow"

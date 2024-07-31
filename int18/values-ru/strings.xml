@@ -1760,6 +1760,8 @@
   <string name="pref_plot_split_summary">Разделить абрис на куски или склеить несколько абрисов в один</string>
   <string name="pref_stylus_size_title">Размер точки стилуса</string>
   <string name="pref_stylus_size_summary">Размер точки касания стилуса [пиксели, 0: игнорировать касания]</string>
+  <!-- TODO string name="pref_line_ends_title">Line-end cut</string -->
+  <!-- TODO string name="pref_line_ends_summary">Number of line-points to drop from the ends [0]</string -->
   <string name="pref_fixed_thickness_title">Толщина нитки хода</string>
   <string name="pref_fixed_thickness_summary">Толщина нитки хода</string>
   <!-- UNUSED string name="pref_device_title">Устройство</string -->

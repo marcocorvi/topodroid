@@ -2109,7 +2109,7 @@ public class TopoDroidApp extends Application
       byte[] buffer = new byte[4096];
       ZipEntry ze = null;
       ZipInputStream zin = new ZipInputStream( fis );
-      while ( ( ze = zin.getNextEntry() ) != null ) {
+      while ( ( ze = zin.getNextEntry() ) != null ) {  // NOTE getNextEntry() throws ZipException if zip file entry name contains '..' or starts with '/'
         String filepath = ze.getName();
         if ( filepath.endsWith("README") ) continue;
         if ( ! ze.isDirectory() ) {
@@ -2168,7 +2168,7 @@ public class TopoDroidApp extends Application
       byte[] buffer = new byte[4096];
       ZipEntry ze = null;
       ZipInputStream zin = new ZipInputStream( fis );
-      while ( ( ze = zin.getNextEntry() ) != null ) {
+      while ( ( ze = zin.getNextEntry() ) != null ) {  // NOTE getNextEntry() throws ZipException if zip file entry name contains '..' or starts with '/'
         String filepath = ze.getName();
         // TDLog.v( "firmware uncompress path " + filepath );
         if ( ze.isDirectory() ) continue;

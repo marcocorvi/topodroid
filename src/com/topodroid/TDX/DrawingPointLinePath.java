@@ -1029,5 +1029,27 @@ public class DrawingPointLinePath extends DrawingPath
     return n;
   }
 
+  /** drop points from the end ("last")
+   * @param nr   number of end points to drop
+   * @note probably useful only for stylus-only drawing
+   */
+  void dropEndPoints( int nr )
+  {
+    if ( mSize < nr + 4 ) return;
+    while ( nr > 0 &&  mLast.mPrev != mFirst.mNext ) {
+      mSize -= 2;
+      -- nr;
+      mLast = mLast.mPrev;
+      // if ( mLast.mNext != null ) mLast.mNext.mPrev = null;
+      mLast.mNext = null;
+      mFirst = mFirst.mNext;
+      // if ( mFirst.mPrev != null ) mFirst.mPrev.mNext = null;
+      mFirst.mPrev = null;
+    }
+    retracePath();
+  }
+    
+
+
 }
 

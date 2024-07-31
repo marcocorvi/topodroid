@@ -1763,6 +1763,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_plot_split_summary">Активирай разделяне и обединяване на скици</string>
   <string name="pref_stylus_size_title">Рисуване само с писалка</string>
   <string name="pref_stylus_size_summary">Максимален размер на писалката [pxl, 0: игнориране]</string>
+  <!-- TODO string name="pref_line_ends_title">Line-end cut</string -->
+  <!-- TODO string name="pref_line_ends_summary">Number of line-points to drop from the ends [0]</string -->
   <string name="pref_fixed_thickness_title">Дебелина на линиите в картировката</string>
   <string name="pref_fixed_thickness_summary">Дебелина на линиите в картировката</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->
