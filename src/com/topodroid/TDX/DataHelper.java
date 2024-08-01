@@ -7105,7 +7105,7 @@ public class DataHelper extends DataSetObservable
             +   " id INTEGER, " // PRIMARY KEY AUTOINCREMENT, "
             +   " shotId INTEGER, "
             +   " date TEXT, "
-            +   " reftype INTEGER defualt 0 " //  reference item_type: 0 undefined, 1 shots, 2 plots
+            +   " reftype INTEGER default 0 " //  reference item_type: 0 undefined, 1 shots, 2 plots
             +   ")"
           );
 
