@@ -65,7 +65,6 @@ import java.util.List;
 import android.app.Activity;
 import android.app.Dialog;
 
-import android.content.ActivityNotFoundException;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ParcelFileDescriptor;
@@ -75,6 +74,7 @@ import android.content.Intent;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
+import android.content.ActivityNotFoundException;
 import android.content.res.Resources;
 import android.content.res.Configuration;
 import android.content.pm.PackageManager;
@@ -417,8 +417,9 @@ public class MainWindow extends Activity
   void doOpenSurvey( String name )
   {
     mApp.setSurveyFromName( name, -1, true ); // open survey: tell app to update survey name+id
-    Intent openIntent = new Intent( this, ShotWindow.class );
-    startActivity( openIntent );
+    Intent intent = new Intent( this, ShotWindow.class );
+    intent.setAction( Intent.ACTION_VIEW ); // SDK-35
+    startActivity( intent );
   }
 
   /** react to a user tap on an entry in the survey list
@@ -461,8 +462,9 @@ public class MainWindow extends Activity
   public void startShowWindow( CharSequence item )
   {
     mApp.setSurveyFromName( item.toString(), -1, true ); 
-    Intent openIntent = new Intent( this, ShotWindow.class );
-    startActivity( openIntent );
+    Intent intent = new Intent( this, ShotWindow.class );
+    intent.setAction( Intent.ACTION_VIEW ); // SDK-35
+    startActivity( intent );
   }
 
   /** default window title: current work directory
@@ -715,6 +717,7 @@ public class MainWindow extends Activity
       } else if ( p++ == pos ) { // SETTINGS
         TDSetting.resetFlag();
         intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
+        // intent.setAction( Intent.ACTION_VIEW ); // SDK-35
         intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_ALL );
         startActivityForResult( intent, TDRequest.REQUEST_SETTINGS );
       } else if ( p++ == pos ) { // HELP
@@ -1111,6 +1114,7 @@ public class MainWindow extends Activity
           if ( TDandroid.BELOW_API_31 ) {
             try {
               Intent enableIntent = new Intent(DeviceUtil.ACTION_REQUEST_ENABLE);
+              // enableIntent.setAction( Intent.ACTION_DEFAULT ); // SDK-35
               startActivityForResult(enableIntent, TDRequest.REQUEST_ENABLE_BT);
             } catch ( SecurityException e ) {
               // TDLog.e("SECURITY request bluetooth " + e.getMessage() );

@@ -1601,7 +1601,7 @@ public class DeviceHelper extends DataSetObservable
              +   " delta_bh REAL default 0, "
              +   " dip REAL default 999, "
              +   " roll REAL default 0, " // FIXME ROLL_DIFFERENCE
-             +   " sensors INTEGER defulat 1 "
+             +   " sensors INTEGER default 1 "
              +   ")"
            );
 

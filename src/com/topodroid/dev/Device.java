@@ -18,7 +18,8 @@ package com.topodroid.dev;
 // SIWEI_TIAN changed on Jun 2022
 public class Device
 {
-  /** the device BT model strings are defined only here
+  /** Bluetooth advertised name prefixes
+   * The device BT model strings are defined only here
    *
    * These strings (without the underscore/dash) can appear also in log statements
    */
