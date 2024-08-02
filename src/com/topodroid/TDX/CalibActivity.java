@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.math.TDMatrix;
@@ -159,7 +159,9 @@ public class CalibActivity extends Activity
 
     mApp     = (TopoDroidApp)getApplication();
     setContentView(R.layout.calib_activity);
-    mTwoSensors = TDInstance.isDeviceTwoSensors();
+    mTwoSensors  = TDInstance.isDeviceTwoSensors();
+    TDLog.v("Calib Activity: two-sensors " + mTwoSensors );
+
     mEditName    = (EditText) findViewById(R.id.calib_name);
     mEditDate    = (Button) findViewById(R.id.calib_date);
     // mEditDevice  = (TextView) findViewById(R.id.calib_device);

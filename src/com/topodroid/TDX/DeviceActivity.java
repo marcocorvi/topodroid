@@ -1308,6 +1308,7 @@ public class DeviceActivity extends Activity
   {
     int mustOpen = 0;
     mApp.setCalibFromName( name );
+    TDLog.v("set calib " + (( name == null )? "NEW" : name ) );
     Intent calibIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, CalibActivity.class );
     calibIntent.putExtra( TDTag.TOPODROID_SURVEY, mustOpen ); // FIXME not handled yet
     startActivity( calibIntent );

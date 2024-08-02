@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:orientation="vertical"
-  android:layout_width="match_parent"
+  android:layout_width="fill_parent"
   android:layout_height="match_parent"
   >
      				  
@@ -40,7 +40,7 @@
 
   <FrameLayout 
     style="@style/base_padding"
-    android:layout_width="match_parent" 
+    android:layout_width="fill_parent" 
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
@@ -96,47 +96,47 @@
         android:text="@string/magn_dip"
         android:layout_marginTop="@dimen/marginv"
       />
-    </LinearLayout>
 
-    <LinearLayout android:id="@+id/layout_algo"
-      android:orientation="vertical"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="#111"
-      >
-      <TextView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/algorithm"
-        android:layout_marginTop="@dimen/marginv"
-      />
-      <RadioGroup 
-        android:id="@+id/calib_algo"
-        android:layout_width="match_parent" 
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" 
+      <LinearLayout android:id="@+id/layout_algo"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#111"
         >
-        <RadioButton android:id="@+id/calib_algo_auto"
-              android:layout_width="wrap_content" 
-              android:layout_height="wrap_content" 
-              android:text="@string/auto"
-              />
-        <RadioButton android:id="@+id/calib_algo_linear"
-              android:layout_width="wrap_content" 
-              android:layout_height="wrap_content" 
-              android:text="@string/linear"
-              />
-        <RadioButton android:id="@+id/calib_algo_non_linear"
-              android:layout_width="wrap_content" 
-              android:layout_height="wrap_content" 
-              android:text="@string/non_linear"
-              />
-        <!-- RadioButton android:id="@+id/calib_algo_minimum"
-              android:layout_width="wrap_content" 
-              android:layout_height="wrap_content" 
-              android:text="@string/algo_minimum"
-              / -->
-      </RadioGroup>
+        <TextView 
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/algorithm"
+          android:layout_marginTop="@dimen/marginv"
+        />
+        <RadioGroup 
+          android:id="@+id/calib_algo"
+          android:layout_width="match_parent" 
+          android:layout_height="wrap_content"
+          android:orientation="horizontal" 
+          >
+          <RadioButton android:id="@+id/calib_algo_auto"
+                android:layout_width="wrap_content" 
+                android:layout_height="wrap_content" 
+                android:text="@string/auto"
+                />
+          <RadioButton android:id="@+id/calib_algo_linear"
+                android:layout_width="wrap_content" 
+                android:layout_height="wrap_content" 
+                android:text="@string/linear"
+                />
+          <RadioButton android:id="@+id/calib_algo_non_linear"
+                android:layout_width="wrap_content" 
+                android:layout_height="wrap_content" 
+                android:text="@string/non_linear"
+                />
+          <!-- RadioButton android:id="@+id/calib_algo_minimum"
+                android:layout_width="wrap_content" 
+                android:layout_height="wrap_content" 
+                android:text="@string/algo_minimum"
+                / -->
+        </RadioGroup>
+      </LinearLayout>
     </LinearLayout>
 
 
