@@ -7136,6 +7136,17 @@ public class DataHelper extends DataSetObservable
         }
      }
 
+     static boolean columnExists( SQLiteDatabase db, String tableName, String columnName) {
+        Cursor cursor = db.rawQuery("PRAGMA table_info(" + tableName + ")", null);
+
+        if (cursor == null) {
+          return false;
+        }
+
+        int columnIndex = cursor.getColumnIndex(columnName);
+        cursor.close();
+        return columnIndex != -1;
+    }
 
      static void updateTables( SQLiteDatabase db, int oldVersion, int newVersion)
      {
@@ -7252,6 +7263,16 @@ public class DataHelper extends DataSetObservable
              db.execSQL( "ALTER TABLE audios ADD COLUMN reftype INTEGER default 0" );
              db.execSQL( "ALTER TABLE sensors ADD COLUMN reftype INTEGER default 0" );
            case 54:
+             if ( !columnExists( db, "photos", "reftype" ) ) {
+               db.execSQL( "ALTER TABLE photos ADD COLUMN reftype INTEGER default 0" );
+             }
+             if ( !columnExists( db, "audios", "reftype" ) ) {
+               db.execSQL( "ALTER TABLE audios ADD COLUMN reftype INTEGER default 0" );
+             }
+             if ( !columnExists( db, "sensors", "reftype" ) ) {
+               db.execSQL( "ALTER TABLE sensors ADD COLUMN reftype INTEGER default 0" );
+             }
+             case 55:
              // TDLog.v( "current version " + oldVersion );
            default:
              break;
