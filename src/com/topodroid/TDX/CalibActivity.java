@@ -160,7 +160,7 @@ public class CalibActivity extends Activity
     mApp     = (TopoDroidApp)getApplication();
     setContentView(R.layout.calib_activity);
     mTwoSensors  = TDInstance.isDeviceTwoSensors();
-    TDLog.v("Calib Activity: two-sensors " + mTwoSensors );
+    // TDLog.v("Calib Activity: two-sensors " + mTwoSensors );
 
     mEditName    = (EditText) findViewById(R.id.calib_name);
     mEditDate    = (Button) findViewById(R.id.calib_date);

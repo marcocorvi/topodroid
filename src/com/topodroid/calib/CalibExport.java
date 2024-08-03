@@ -178,8 +178,9 @@ public class CalibExport
       } else {
         line.trim();
         int pos = line.indexOf("TopoDroid v" );
-        String v_str = line.substring( pos+11 );
+        String v_str = line.substring( pos+12 );
         String[] vals = v_str.split("\\.");
+        TDLog.v("<" + line + "> pos " + pos + " " + v_str + " " + vals.length );
         int v1 = Integer.parseInt( vals[0] );
         int v2 = Integer.parseInt( vals[1] );
         int v3 = Integer.parseInt( vals[2] );

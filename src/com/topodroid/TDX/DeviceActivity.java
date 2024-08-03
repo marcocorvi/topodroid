@@ -531,7 +531,7 @@ public class DeviceActivity extends Activity
             if ( aliased != null ) bt_name = aliased;
 
             String name = Device.btnameToName( bt_name );
-            TDLog.v("BLE " + "Device Activity: bt name <" + bt_name + "> name <" + name + ">" );
+            // TDLog.v("BLE " + "Device Activity: bt name <" + bt_name + "> name <" + name + ">" );
             if ( Device.isDistoX( bt_name ) ) {
               mApp_mDData.insertDevice( addr, bt_name, name, null );
               dev = mApp_mDData.getDevice( addr );

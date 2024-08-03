@@ -242,7 +242,7 @@ public class MyFileProvider extends ContentProvider
    */
   private static MyPathStrategy getPathStrategy( Context context, String authority )
   {
-    TDLog.v("Get path strategy for authority " + authority );
+    // TDLog.v("Get path strategy for authority " + authority );
     MyPathStrategy strat;
     synchronized ( sCache ) {
       strat = sCache.get( authority );
@@ -278,7 +278,7 @@ public class MyFileProvider extends ContentProvider
         final String tag  = in.getName();
         final String name = in.getAttributeValue( null, ATTR_NAME );
         String path       = in.getAttributeValue( null, ATTR_PATH );
-        TDLog.v("XML tag " + tag + " name " + name + " path " + path );
+        // TDLog.v("XML tag " + tag + " name " + name + " path " + path );
         File target = null;
         if ( TAG_ROOT_PATH.equals( tag ) ) {
           target = DEVICE_ROOT;
@@ -299,7 +299,7 @@ public class MyFileProvider extends ContentProvider
         //   File[] externalMediaDirs = context.getExternalMediaDirs();
         //   if ( externalMediaDirs.length > 0 ) target = externalMediaDirs[0];
         } else {
-          TDLog.v("Path Strategy unsupported tag " + tag );
+          TDLog.e("Path Strategy unsupported tag " + tag );
         }
         if ( target != null ) {
           strat.addRoot( name, buildPath( target, path ) );
@@ -321,8 +321,8 @@ public class MyFileProvider extends ContentProvider
      */
     MyPathStrategy( String authority )
     {
-        TDLog.v("My PathStrategy authority " + authority );
-        mAuthority = authority;
+      // TDLog.v("My PathStrategy authority " + authority );
+      mAuthority = authority;
     }
 
     /** add an entry to the <name,file> map of roots
