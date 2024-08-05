@@ -698,7 +698,7 @@ public class DeviceActivity extends Activity
       TDandroid.setButtonBackground( mButton1[IDX_TOGGLE], mBMtoggle ); // this should already be enableButtons()
       TDandroid.setButtonBackground( mButton1[IDX_CALIB], mBMcalib );
       if ( TDLevel.overNormal ) {
-        TDandroid.setButtonBackground( mButton1[IDX_READ], mBMread_no );
+        TDandroid.setButtonBackground( mButton1[IDX_READ], mBMread );
       }
     } else if ( TDInstance.isDeviceXBLE() || TDInstance.isDeviceCavway()) { // SIWEI Changed on Jun 2022
       for ( int k=1; k<mNrButton1; ++k ) mButton1[k].setVisibility( View.VISIBLE ); // FIXME is this OK ?

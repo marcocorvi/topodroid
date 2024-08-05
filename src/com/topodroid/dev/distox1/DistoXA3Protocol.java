@@ -52,53 +52,54 @@ public class DistoXA3Protocol extends DistoXProtocol
   // @Override
   public boolean swapA3HotBit( int addr, boolean on_off ) // only A3
   {
+    byte[] buffer = new byte[8];
     try {
-      mBuffer[0] = (byte) MemoryOctet.BYTE_PACKET_REPLY; // 0x38;
-      mBuffer[1] = (byte)( addr & 0xff );
-      mBuffer[2] = (byte)( (addr>>8) & 0xff );
-      mOut.write( mBuffer, 0, 3 );
-      // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
+      buffer[0] = (byte) MemoryOctet.BYTE_PACKET_REPLY; // 0x38;
+      buffer[1] = (byte)( addr & 0xff );
+      buffer[2] = (byte)( (addr>>8) & 0xff );
+      mOut.write( buffer, 0, 3 );
+      // if ( TDSetting.mPacketLog ) logPacket3( 1L, buffer );
 
-      mIn.readFully( mBuffer, 0, 8 );
+      mIn.readFully( buffer, 0, 8 );
       // if ( TDSetting.mPacketLog ) logPacket( 0L );
-      // TDLog.v( "A3 swap hot bit: " + String.format(" %02x", mBuffer[0] ) );
+      // TDLog.v( "A3 swap hot bit: " + String.format(" %02x", buffer[0] ) );
 
-      if ( mBuffer[0] != (byte)MemoryOctet.BYTE_PACKET_REPLY ) { // 0x38 
+      if ( buffer[0] != (byte)MemoryOctet.BYTE_PACKET_REPLY ) { // 0x38 
         TDLog.e( "HotBit-38 wrong reply packet addr " + addr );
         return false;
       }
 
-      int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
+      int reply_addr = MemoryOctet.toInt( buffer[2], buffer[1] );
       // TDLog.v( "A3 proto read ... addr " + addr + " reply addr " + reply_addr );
       if ( reply_addr != addr ) {
         TDLog.e( "HotBit-38 wrong reply addr " + reply_addr + " addr " + addr );
         return false;
       }
-      mBuffer[0] = (byte)MemoryOctet.BYTE_PACKET_REQST; // 0x39;
-      // mBuffer[1] = (byte)( addr & 0xff );
-      // mBuffer[2] = (byte)( (addr>>8) & 0xff );
-      if ( mBuffer[3] == 0x00 ) {
+      buffer[0] = (byte)MemoryOctet.BYTE_PACKET_REQST; // 0x39;
+      // buffer[1] = (byte)( addr & 0xff );
+      // buffer[2] = (byte)( (addr>>8) & 0xff );
+      if ( buffer[3] == 0x00 ) {
         TDLog.e( "HotBit refusing to swap addr " + addr );
         return false;
       }  
 
       if ( on_off ) {
-        mBuffer[3] |= (byte)0x80; // RESET HOT BIT
+        buffer[3] |= (byte)0x80; // RESET HOT BIT
       } else {
-        mBuffer[3] &= (byte)0x7f; // CLEAR HOT BIT
+        buffer[3] &= (byte)0x7f; // CLEAR HOT BIT
       }
-      mOut.write( mBuffer, 0, 7 );
-      // if ( TDSetting.mPacketLog ) logPacket7( 1L, mBuffer );
+      mOut.write( buffer, 0, 7 );
+      // if ( TDSetting.mPacketLog ) logPacket7( 1L, buffer );
 
-      mIn.readFully( mBuffer, 0, 8 );
+      mIn.readFully( buffer, 0, 8 );
       // if ( TDSetting.mPacketLog ) logPacket( 0L );
-      // TDLog.v( "A3 swap hot bit[2]: " + String.format(" %02x", mBuffer[0] ) );
+      // TDLog.v( "A3 swap hot bit[2]: " + String.format(" %02x", buffer[0] ) );
 
-      if ( mBuffer[0] != (byte) MemoryOctet.BYTE_PACKET_REPLY ) {  // 0x38
+      if ( buffer[0] != (byte) MemoryOctet.BYTE_PACKET_REPLY ) {  // 0x38
         TDLog.e( "HotBit-39 wrong reply packet addr " + addr );
         return false;
       }
-      reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
+      reply_addr = MemoryOctet.toInt( buffer[2], buffer[1] );
       // TDLog.v( "A3 proto reset ... addr " + addr + " reply addr " + reply_addr );
       if ( reply_addr != addr ) {
         TDLog.e( "HotBit-39 wrong reply addr " + reply_addr + " addr " + addr );
@@ -129,21 +130,22 @@ public class DistoXA3Protocol extends DistoXProtocol
    */
   String readA3HeadTail( byte[] command, int[] head_tail )
   {
+    byte[] buffer = new byte[8];
     try {
       mOut.write( command, 0, 3 );
       // if ( TDSetting.mPacketLog ) logPacket3( 1L, command );
 
-      mIn.readFully( mBuffer, 0, 8 );
+      mIn.readFully( buffer, 0, 8 );
       // if ( TDSetting.mPacketLog ) logPacket( 0L );
-      // TDLog.v( "A3 read A3 head-tail: " + String.format(" %02x", mBuffer[0] ) );
+      // TDLog.v( "A3 read A3 head-tail: " + String.format(" %02x", buffer[0] ) );
 
-      if ( mBuffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) ) { return null; } // 0x38
-      if ( mBuffer[1] != command[1] ) { return null; }
-      if ( mBuffer[2] != command[2] ) { return null; }
+      if ( buffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) ) { return null; } // 0x38
+      if ( buffer[1] != command[1] ) { return null; }
+      if ( buffer[2] != command[2] ) { return null; }
       // TODO value of Head-Tail in byte[3-7]
-      head_tail[0] = MemoryOctet.toInt( mBuffer[4], mBuffer[3] );
-      head_tail[1] = MemoryOctet.toInt( mBuffer[6], mBuffer[5] );
-      return String.format("%02x%02x-%02x%02x", mBuffer[4], mBuffer[3], mBuffer[6], mBuffer[5] );
+      head_tail[0] = MemoryOctet.toInt( buffer[4], buffer[3] );
+      head_tail[1] = MemoryOctet.toInt( buffer[6], buffer[5] );
+      return String.format("%02x%02x-%02x%02x", buffer[4], buffer[3], buffer[6], buffer[5] );
       // TDLog.Log( TDLog.LOG_PROTO, "read Head Tail " + res );
     } catch ( EOFException e ) {
       TDLog.e( "read Head Tail read() EOF failed" );
@@ -161,20 +163,21 @@ public class DistoXA3Protocol extends DistoXProtocol
   // @Override
   // boolean read8000( byte[] result )
   // {
+  //   byte[] buffer = new byte[8];
   //   try {
   //     mOut.write( mAddr8000, 0, 3 );
   //     // if ( TDSetting.mPacketLog ) logPacket3( 1L, mAddr8000 );
 
-  //     mIn.readFully( mBuffer, 0, 8 );
+  //     mIn.readFully( buffer, 0, 8 );
   //     // if ( TDSetting.mPacketLog ) logPacket( 0L );
 
-  //     if ( mBuffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) ) { return false; } // 0x38
-  //     if ( mBuffer[1] != mAddr8000[1] ) { return false; }
-  //     if ( mBuffer[2] != mAddr8000[2] ) { return false; }
-  //     result[0] = mBuffer[3];
-  //     result[1] = mBuffer[4];
-  //     result[2] = mBuffer[5];
-  //     result[3] = mBuffer[6];
+  //     if ( buffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) ) { return false; } // 0x38
+  //     if ( buffer[1] != mAddr8000[1] ) { return false; }
+  //     if ( buffer[2] != mAddr8000[2] ) { return false; }
+  //     result[0] = buffer[3];
+  //     result[1] = buffer[4];
+  //     result[2] = buffer[5];
+  //     result[3] = buffer[6];
   //   } catch ( EOFException e ) {
   //     TDLog.e( "read 8000 read() EOF failed" );
   //     return false;

@@ -150,6 +150,8 @@ public class TopoDroidProtocol
 
   // PACKETS HANDLING -----------------------------------------------------------
 
+  final static String[] packetType = { "?", "D", "G", "M", "V", "5", "6", "7" };
+
   /** packet dispatcher
    * @param buffer 8-byte packet
    * @return packet type
@@ -159,8 +161,8 @@ public class TopoDroidProtocol
   {
     if ( TDSetting.mPacketLog ) logPacket( 0L, buffer );
     byte type = (byte)(buffer[0] & 0x3f);
-    TDLog.v( "TD proto: handle packet: type " + type );
-    TDLog.v( "TD proto: handle packet type " + type + " " + 
+    // TDLog.v( "TD proto: handle packet: type " + type );
+    TDLog.v( "TD proto: handle packet type " + type + " " + packetType[ type & 0x7 ] + ": " +
          String.format("%02x %02x %02x %02x %02x %02x %02x %02x", buffer[0], buffer[1], buffer[2], buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
 
     // int high, low;
@@ -215,10 +217,6 @@ public class TopoDroidProtocol
         if ( c >= 32768 ) { mClino = (65536 - c) * (-90.0) / 16384.0; }
         mRoll = r * 180.0 / 128.0;
 
-        // if ( TDLog.LOG_PROTO ) {
-        //   TDLog.DoLog( "Proto packet D " +
-        //     String.format(Locale.US, " %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
-        // }
         // TDLog.v( String.format(Locale.US, "TD proto: Packet-D %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
         return DataType.PACKET_DATA;
       case MemoryOctet.BYTE_PACKET_G: // G 0x02
@@ -229,7 +227,7 @@ public class TopoDroidProtocol
           if ( mGX > TDUtil.ZERO ) mGX = mGX - TDUtil.NEG;
           if ( mGY > TDUtil.ZERO ) mGY = mGY - TDUtil.NEG;
           if ( mGZ > TDUtil.ZERO ) mGZ = mGZ - TDUtil.NEG;
-          // TDLog.Log( TDLog.LOG_PROTO, "Proto packet G " + String.format(" %x %x %x", mGX, mGY, mGZ ) );
+          TDLog.v( "Proto packet G " + String.format(" %d %d %d", mGX, mGY, mGZ ) );
           return DataType.PACKET_G;
         }
         break;
@@ -241,7 +239,7 @@ public class TopoDroidProtocol
           if ( mMX > TDUtil.ZERO ) mMX = mMX - TDUtil.NEG;
           if ( mMY > TDUtil.ZERO ) mMY = mMY - TDUtil.NEG;
           if ( mMZ > TDUtil.ZERO ) mMZ = mMZ - TDUtil.NEG;
-          // TDLog.Log( TDLog.LOG_PROTO, "Proto packet M " + String.format(" %x %x %x", mMX, mMY, mMZ ) );
+          TDLog.v( "Proto packet M " + String.format(" %d %d %d", mMX, mMY, mMZ ) );
           return DataType.PACKET_M;
         }
         break;

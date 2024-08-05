@@ -139,98 +139,101 @@ public class DistoX310Protocol extends DistoXProtocol
   // @Override
   public int readX310Memory( int start, int end, List< MemoryOctet > data, IMemoryDialog dialog )
   {
-    // TDLog.v( "X310 memory start " + start + " end " + end );
+    TDLog.v( "X310 memory start " + start + " end " + end );
+    byte[] buffer = new byte[8];
     int cnt = 0;
     int start0 = start;
     Handler handler = new Handler( Looper.getMainLooper() );
     while ( start < end ) {
-      MemoryOctet result = new MemoryOctet( start );
-      // MemoryOctet result2 = new MemoryOctet( start ); // vector data
+      MemoryOctet result1 = new MemoryOctet( start );
+      MemoryOctet result2 = new MemoryOctet( start ); // vector data
       // read only bytes 0-7 and 16-17
       int k = 0;
       int addr = index2addrX310( start );
       int end_addr = addr + BYTE_PER_DATA;
       // TDLog.v( start + " addr " + addr + " end " + end_addr );
       for ( ; addr < end_addr && k < 8; addr += 4, k+=4 ) {
-        mBuffer[0] = (byte)( MemoryOctet.BYTE_PACKET_REPLY );  // 0x38
-        mBuffer[1] = (byte)( addr & 0xff );
-        mBuffer[2] = (byte)( (addr>>8) & 0xff );
+        buffer[0] = (byte)( MemoryOctet.BYTE_PACKET_REPLY );  // 0x38
+        buffer[1] = (byte)( addr & 0xff );
+        buffer[2] = (byte)( (addr>>8) & 0xff );
         try {
-          mOut.write( mBuffer, 0, 3 );
-          // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
+          mOut.write( buffer, 0, 3 );
+          // if ( TDSetting.mPacketLog ) logPacket3( 1L, buffer );
 
-          mIn.readFully( mBuffer, 0, 8 );
+          mIn.readFully( buffer, 0, 8 );
           // if ( TDSetting.mPacketLog ) logPacket( 0L );
-          // TDLog.v( "X310 read-memory[1]: " + String.format(" %02x", mBuffer[0] ) );
+          // TDLog.v( "X310 read-memory[1]: " + String.format(" %02x", buffer[0] ) );
         } catch ( IOException e ) {
           TDLog.e( "read memory() IO failed" );
           break;
         }
-        if ( mBuffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) ) break; // 0x38
-        int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1]);
+        if ( buffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) ) break; // 0x38
+        int reply_addr = MemoryOctet.toInt( buffer[2], buffer[1]);
         if ( reply_addr != addr ) break;
-        // for (int i=3; i<7; ++i) result.data[k+i-3] = mBuffer[i];
-        result.data[k  ] = mBuffer[3];
-        result.data[k+1] = mBuffer[4];
-        result.data[k+2] = mBuffer[5];
-        result.data[k+3] = mBuffer[6];
+        // for (int i=3; i<7; ++i) result1.data[k+i-3] = buffer[i];
+        result1.data[k  ] = buffer[3];
+        result1.data[k+1] = buffer[4];
+        result1.data[k+2] = buffer[5];
+        result1.data[k+3] = buffer[6];
       }
-      // vector packet - need only the first byte
-      // k = 0;
+      // vector packet - need only the first byte - M packet (?)
+      k = 0;
       addr = index2addrX310( start ) + 8;
-      // end_addr = addr + BYTE_PER_DATA;
-      // for ( ; addr < end_addr && k < 8; addr += 4, k+=4 ) {
-        mBuffer[0] = (byte)( MemoryOctet.BYTE_PACKET_REPLY ); // 0x38
-        mBuffer[1] = (byte)( addr & 0xff );
-        mBuffer[2] = (byte)( (addr>>8) & 0xff );
+      end_addr = addr + BYTE_PER_DATA;
+      for ( ; addr < end_addr && k < 8; addr += 4, k+=4 ) {
+        buffer[0] = (byte)( MemoryOctet.BYTE_PACKET_REPLY ); // 0x38
+        buffer[1] = (byte)( addr & 0xff );
+        buffer[2] = (byte)( (addr>>8) & 0xff );
         try {
-          mOut.write( mBuffer, 0, 3 );
-          // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
+          mOut.write( buffer, 0, 3 );
+          // if ( TDSetting.mPacketLog ) logPacket3( 1L, buffer );
 
-          mIn.readFully( mBuffer, 0, 8 );
+          mIn.readFully( buffer, 0, 8 );
           // if ( TDSetting.mPacketLog ) logPacket( 0L );
-          // TDLog.v( "X310 read-memory[2]: " + String.format(" %02x", mBuffer[0] ) );
+          // TDLog.v( "X310 read-memory[2]: " + String.format(" %02x", buffer[0] ) );
         } catch ( IOException e ) {
           TDLog.e( "read memory() IO failed" );
           break;
         }
-      //   if ( mBuffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) ) break; // 0x38
-      //   int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1]);
-      //   if ( reply_addr != addr ) break;
-      //   // for (int i=3; i<7; ++i) result.data[k+i-3] = mBuffer[i];
-      //   result2.data[k  ] = mBuffer[3];
-      //   result2.data[k+1] = mBuffer[4];
-      //   result2.data[k+2] = mBuffer[5];
-      //   result2.data[k+3] = mBuffer[6];
-      // }
-      if ( mBuffer[0] == (byte)( MemoryOctet.BYTE_PACKET_REPLY ) && addr == MemoryOctet.toInt( mBuffer[2], mBuffer[1]) ) { // 0x38
-        if ( ( mBuffer[3] & MemoryOctet.BIT_BACKSIGHT) == MemoryOctet.BIT_BACKSIGHT ) {
-          result.data[0] |= MemoryOctet.BIT_BACKSIGHT2;
+        if ( buffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) ) break; // 0x38
+        int reply_addr = MemoryOctet.toInt( buffer[2], buffer[1]);
+        if ( reply_addr != addr ) break;
+        // for (int i=3; i<7; ++i) result2.data[k+i-3] = buffer[i];
+        result2.data[k  ] = buffer[3];
+        result2.data[k+1] = buffer[4];
+        result2.data[k+2] = buffer[5];
+        result2.data[k+3] = buffer[6];
+        if ( k == 0 ) { // first byte
+          if ( buffer[0] == (byte)( MemoryOctet.BYTE_PACKET_REPLY ) && addr == MemoryOctet.toInt( buffer[2], buffer[1]) ) { // 0x38
+            if ( ( buffer[3] & MemoryOctet.BIT_BACKSIGHT) == MemoryOctet.BIT_BACKSIGHT ) {
+              result1.data[0] |= MemoryOctet.BIT_BACKSIGHT2;
+            }
+          }
         }
       }
 
       if ( k == 8 ) {
         addr = index2addrX310( start ) + 16;
-        mBuffer[0] = (byte)( MemoryOctet.BYTE_PACKET_REPLY ); // 0x38
-        mBuffer[1] = (byte)( addr & 0xff );
-        mBuffer[2] = (byte)( (addr>>8) & 0xff );
+        buffer[0] = (byte)( MemoryOctet.BYTE_PACKET_REPLY ); // 0x38
+        buffer[1] = (byte)( addr & 0xff );
+        buffer[2] = (byte)( (addr>>8) & 0xff );
         try {
-          mOut.write( mBuffer, 0, 3 );
-          // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
+          mOut.write( buffer, 0, 3 );
+          // if ( TDSetting.mPacketLog ) logPacket3( 1L, buffer );
 
-          mIn.readFully( mBuffer, 0, 8 );
+          mIn.readFully( buffer, 0, 8 );
           // if ( TDSetting.mPacketLog ) logPacket( 0L );
-          // TDLog.v( "X310 read-memory[3]: " + String.format(" %02x", mBuffer[0] ) );
+          // TDLog.v( "X310 read-memory[3]: " + String.format(" %02x", buffer[0] ) );
         } catch ( IOException e ) {
           TDLog.e( "read memory() IO failed" );
           break;
         }
-        if ( mBuffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) ) break; // 0x38
-        if ( mBuffer[3] == (byte)( 0xff ) ) result.data[0] |= (byte)( 0x80 ); 
-        data.add( result );
-        // if ( mBuffer[4] == (byte)( 0xff ) ) result2.data[0] |= (byte)( 0x80 ); 
-        // data.add( result2 );
-        // TDLog.v( "X310 memory " + result.toString() + " " + mBuffer[3] );
+        if ( buffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) ) break; // 0x38
+        if ( buffer[3] == (byte)( 0xff ) ) result1.data[0] |= (byte)( 0x80 ); 
+        data.add( result1 );
+        if ( buffer[4] == (byte)( 0xff ) ) result2.data[0] |= (byte)( 0x80 ); 
+        data.add( result2 );
+        // TDLog.v( "X310 memory " + result2.toString() + " " + buffer[3] );
         ++ cnt;
       } else {
         break;
@@ -261,56 +264,57 @@ public class DistoX310Protocol extends DistoXProtocol
   // public int resetX310Memory( int start, int end )
   // {
   //   int cnt = start;
+  //   byte[] buffer = new byte[8];
   //   while ( start < end ) {
   //     int addr = index2addrX310( start ) + 16;
-  //     mBuffer[0] = (byte)( MemoryOctet.BYTE_PACKET_REPLY ); // 0x38
-  //     mBuffer[1] = (byte)( addr & 0xff );
-  //     mBuffer[2] = (byte)( (addr>>8) & 0xff );
-  //     TDLog.e( "resetMemory() address " + mBuffer[1] + " " + mBuffer[2] );
+  //     buffer[0] = (byte)( MemoryOctet.BYTE_PACKET_REPLY ); // 0x38
+  //     buffer[1] = (byte)( addr & 0xff );
+  //     buffer[2] = (byte)( (addr>>8) & 0xff );
+  //     TDLog.e( "resetMemory() address " + buffer[1] + " " + buffer[2] );
   // 
   //     // TODO write and read
   //     try {
-  //       mOut.write( mBuffer, 0, 3 );
-  //       // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
+  //       mOut.write( buffer, 0, 3 );
+  //       // if ( TDSetting.mPacketLog ) logPacket3( 1L, buffer );
   //
-  //       mIn.readFully( mBuffer, 0, 8 );
+  //       mIn.readFully( buffer, 0, 8 );
   //       // if ( TDSetting.mPacketLog ) logPacket( 0L );
   //
   //     } catch ( IOException e ) {
   //       TDLog.e( "resetMemory() IO nr. 1 failed" );
   //       break;
   //     }
-  //     if ( mBuffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) || // 0x38
-  //          mBuffer[1] != (byte)( addr & 0xff ) ||
-  //          mBuffer[2] != (byte)( (addr>>8) & 0xff ) ) {
-  //       TDLog.e( "resetMemory() bad read reply " + mBuffer[0] + " addr " + mBuffer[1] + " " + mBuffer[2] );
+  //     if ( buffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) || // 0x38
+  //          buffer[1] != (byte)( addr & 0xff ) ||
+  //          buffer[2] != (byte)( (addr>>8) & 0xff ) ) {
+  //       TDLog.e( "resetMemory() bad read reply " + buffer[0] + " addr " + buffer[1] + " " + buffer[2] );
   //       break;
   //     }
-  //     TDLog.e( "resetMemory() ok read reply " + mBuffer[3] + " " + mBuffer[4] + " " + mBuffer[5] + " " + mBuffer[6] );
+  //     TDLog.e( "resetMemory() ok read reply " + buffer[3] + " " + buffer[4] + " " + buffer[5] + " " + buffer[6] );
   // 
-  //     mBuffer[0] = (byte)( MemoryOctet.BYTE_PACKET_REQST ); // 0x39
-  //     mBuffer[1] = (byte)( addr & 0xff );
-  //     mBuffer[2] = (byte)( (addr>>8) & 0xff );
-  //     mBuffer[3] = (byte)( 0xff );
-  //     mBuffer[4] = (byte)( 0xff );
+  //     buffer[0] = (byte)( MemoryOctet.BYTE_PACKET_REQST ); // 0x39
+  //     buffer[1] = (byte)( addr & 0xff );
+  //     buffer[2] = (byte)( (addr>>8) & 0xff );
+  //     buffer[3] = (byte)( 0xff );
+  //     buffer[4] = (byte)( 0xff );
   //     try {
-  //       mOut.write( mBuffer, 0, 7 );
-  //       // if ( TDSetting.mPacketLog ) logPacket7( 1L, mBuffer );
+  //       mOut.write( buffer, 0, 7 );
+  //       // if ( TDSetting.mPacketLog ) logPacket7( 1L, buffer );
   //
-  //       mIn.readFully( mBuffer, 0, 8 );
+  //       mIn.readFully( buffer, 0, 8 );
   //       // if ( TDSetting.mPacketLog ) logPacket( 0L );
   //
   //     } catch ( IOException e ) {
   //       TDLog.e( "resetMemory() IO nr. 2 failed" );
   //       break;
   //     }
-  //     if ( mBuffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) || // 0x38
-  //          mBuffer[1] != (byte)( addr & 0xff ) ||
-  //          mBuffer[2] != (byte)( (addr>>8) & 0xff ) ) {
-  //       TDLog.e( "resetMemory() bad write reply " + mBuffer[0] + " addr " + mBuffer[1] + " " + mBuffer[2] );
+  //     if ( buffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) || // 0x38
+  //          buffer[1] != (byte)( addr & 0xff ) ||
+  //          buffer[2] != (byte)( (addr>>8) & 0xff ) ) {
+  //       TDLog.e( "resetMemory() bad write reply " + buffer[0] + " addr " + buffer[1] + " " + buffer[2] );
   //       break;
   //     }
-  //     TDLog.e( "resetMemory() ok write reply " + mBuffer[3] + " " + mBuffer[4] + " " + mBuffer[5] + " " + mBuffer[6] );
+  //     TDLog.e( "resetMemory() ok write reply " + buffer[3] + " " + buffer[4] + " " + buffer[5] + " " + buffer[6] );
   //     ++ start;
   //   }
   //   return start - cnt;
@@ -343,6 +347,7 @@ public class DistoX310Protocol extends DistoXProtocol
         buf[1] = (byte)0;
         buf[2] = (byte)0;
 
+        byte[] buffer = new byte[8];
         String msg; // feedback message
         boolean ok = true;
         int cnt = 0;
@@ -371,13 +376,13 @@ public class DistoX310Protocol extends DistoXProtocol
                 mOut.write( buf, 0, 259 );
                 // if ( TDSetting.mPacketLog ) logPacket8( 1L, buf );
 
-                mIn.readFully( mBuffer, 0, 8 );
+                mIn.readFully( buffer, 0, 8 );
                 // if ( TDSetting.mPacketLog ) logPacket( 0L );
 
-                int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
-                TDLog.t( "X310-proto fw upload: ack " + String.format("%02x", mBuffer[0]) + " reply-block " + reply_addr ); 
-                if ( mBuffer[0] != MemoryOctet.BYTE_PACKET_FW_WRITE || addr != reply_addr ) {
-                  msg = "X310-proto fw upload: fail at offset " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr;
+                int reply_addr = ( ((int)(buffer[2]))<<8 ) + ((int)(buffer[1]));
+                TDLog.t( "X310-proto fw upload: ack " + String.format("%02x", buffer[0]) + " reply-block " + reply_addr ); 
+                if ( buffer[0] != MemoryOctet.BYTE_PACKET_FW_WRITE || addr != reply_addr ) {
+                  msg = "X310-proto fw upload: fail at offset " + cnt + " buffer[0]: " + buffer[0] + " reply_addr " + reply_addr;
                   TDLog.t( msg );
                   ok = false;
                   break;
@@ -450,6 +455,7 @@ public class DistoX310Protocol extends DistoXProtocol
     //   public void run() {
         String filename = fp.getName();
         byte[] buf = new byte[256];
+        byte[] buffer = new byte[8];
         boolean ok = true;
         int cnt = 0;
         try {
@@ -466,13 +472,13 @@ public class DistoX310Protocol extends DistoXProtocol
               mOut.write( buf, 0, 3 );
               // if ( TDSetting.mPacketLog ) logPacket3( 1L, buf );
 
-              mIn.readFully( mBuffer, 0, 8 );
+              mIn.readFully( buffer, 0, 8 );
               // if ( TDSetting.mPacketLog ) logPacket( 0L );
 
-              int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
-              TDLog.t( "X310-proto fw dump: read " + String.format("%02x", mBuffer[0]) + " reply-block " + reply_addr ); 
-              if ( mBuffer[0] != MemoryOctet.BYTE_PACKET_FW_READ || addr != reply_addr ) {
-                TDLog.t( "X310-proto fw dump: fail at offset " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr + " addr " + addr );
+              int reply_addr = ( ((int)(buffer[2]))<<8 ) + ((int)(buffer[1]));
+              TDLog.t( "X310-proto fw dump: read " + String.format("%02x", buffer[0]) + " reply-block " + reply_addr ); 
+              if ( buffer[0] != MemoryOctet.BYTE_PACKET_FW_READ || addr != reply_addr ) {
+                TDLog.t( "X310-proto fw dump: fail at offset " + cnt + " buffer[0]: " + buffer[0] + " reply_addr " + reply_addr + " addr " + addr );
                 ok = false;
                 break;
               // } else {
@@ -481,7 +487,7 @@ public class DistoX310Protocol extends DistoXProtocol
 
               mIn.readFully( buf, 0, 256 );
               // if ( TDSetting.mPacketLog ) logPacket8( 0L, buf );
-              // TDLog.v( "X310 dump firmware[2]: " + String.format(" %02x", mBuffer[0] ) );
+              // TDLog.v( "X310 dump firmware[2]: " + String.format(" %02x", buffer[0] ) );
 
               // boolean last = true;
               // for ( int k=0; last && k<256; ++k ) {
@@ -546,6 +552,7 @@ public class DistoX310Protocol extends DistoXProtocol
   {
     if ( ! TDLog.isStreamFile() ) TDLog.setLogStream( TDLog.LOG_FILE ); // reset log stream if necessary
     byte[] buf = new byte[256];
+    byte[] buffer = new byte[8];
     // boolean ok = true;
     int addr = nr;
     try {
@@ -556,14 +563,14 @@ public class DistoX310Protocol extends DistoXProtocol
       mOut.write( buf, 0, 3 );
       // if ( TDSetting.mPacketLog ) logPacket3( 1L, buf );
 
-      mIn.readFully( mBuffer, 0, 8 );
+      mIn.readFully( buffer, 0, 8 );
       // if ( TDSetting.mPacketLog ) logPacket( 0L );
-      // TDLog.v( "X310 dump firmware: " + String.format(" %02x", mBuffer[0] ) );
+      // TDLog.v( "X310 dump firmware: " + String.format(" %02x", buffer[0] ) );
 
-      int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
-      TDLog.t( "X310-proto fw readblock: buffer[0] " + mBuffer[0] + " reply_addr " + reply_addr );
-      if ( mBuffer[0] != MemoryOctet.BYTE_PACKET_FW_READ || addr != reply_addr ) {
-        TDLog.t( "X310-proto fw read block " + nr + ": fail buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
+      int reply_addr = ( ((int)(buffer[2]))<<8 ) + ((int)(buffer[1]));
+      TDLog.t( "X310-proto fw readblock: buffer[0] " + buffer[0] + " reply_addr " + reply_addr );
+      if ( buffer[0] != MemoryOctet.BYTE_PACKET_FW_READ || addr != reply_addr ) {
+        TDLog.t( "X310-proto fw read block " + nr + ": fail buffer[0]: " + buffer[0] + " reply_addr " + reply_addr );
         // ok = false;
       } else {
         TDLog.t( "X310-proto fw read block " + nr + ": ok");
