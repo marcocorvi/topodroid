@@ -7137,18 +7137,31 @@ public class DataHelper extends DataSetObservable
      }
 
      static boolean columnExists( SQLiteDatabase db, String tableName, String columnName) {
-        Cursor cursor = db.rawQuery("PRAGMA table_info(" + tableName + ")", null);
+      Cursor cursor = null;
+      try {
+        // Query the table_info pragma for the specified table
+        cursor = db.rawQuery("PRAGMA table_info(" + tableName + ")", null);
 
-        if (cursor == null) {
-          return false;
+        // Iterate through the result set to check for the column name
+        if (cursor != null) {
+          int nameIndex = cursor.getColumnIndex("name");
+          while (cursor.moveToNext()) {
+            String currentColumn = cursor.getString(nameIndex);
+            if (currentColumn.equalsIgnoreCase(columnName)) {
+              return true;
+            }
+          }
         }
-
-        int columnIndex = cursor.getColumnIndex(columnName);
-        cursor.close();
-        return columnIndex != -1;
+      } finally {
+        if (cursor != null) {
+          cursor.close();
+        }
+      }
+      return false;
     }
 
-     static void updateTables( SQLiteDatabase db, int oldVersion, int newVersion)
+
+    static void updateTables( SQLiteDatabase db, int oldVersion, int newVersion)
      {
         // FIXME this is called at each start when the database file exists
         // TDLog.Log( TDLog.LOG_DB, "DB open helper - upgrade old " + oldVersion + " new " + newVersion );
