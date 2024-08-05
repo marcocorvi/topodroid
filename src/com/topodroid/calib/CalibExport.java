@@ -53,6 +53,7 @@ public class CalibExport
    */
   public static String exportCalibAsCsv( long cid, DeviceHelper data, CalibInfo ci, String calib_name )
   {
+    // TDLog.v("calib export: id " + ci.getId() + " cid " + cid );
     boolean two_sensors = ( ci.sensors == 2 ); // TWO_SENSORS
     try {
       // TDLog.Log( TDLog.LOG_IO, "export calibration " + name );
@@ -71,6 +72,7 @@ public class CalibExport
       pw.format("# %d\n", ci.sensors );
 
       List< CBlock > list = data.selectAllGMs( cid, 1, true ); // status 1: all shots, true: negative_grp too
+      // TDLog.v("calib export: data " + list.size() );
       for ( CBlock b : list ) {
         b.computeBearingAndClino();
         pw.format(Locale.US, "%d, %d, %d, %d, %d, %d, %d, %d, %.2f, %.2f, %.2f, %.4f, %d\n",
@@ -180,7 +182,7 @@ public class CalibExport
         int pos = line.indexOf("TopoDroid v" );
         String v_str = line.substring( pos+12 );
         String[] vals = v_str.split("\\.");
-        TDLog.v("<" + line + "> pos " + pos + " " + v_str + " " + vals.length );
+        // TDLog.v("<" + line + "> pos " + pos + " " + v_str + " " + vals.length );
         int v1 = Integer.parseInt( vals[0] );
         int v2 = Integer.parseInt( vals[1] );
         int v3 = Integer.parseInt( vals[2] );

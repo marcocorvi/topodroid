@@ -47,4 +47,10 @@ public class CalibInfo
   // {
   //   // TDLog.v("CALIB " + id + " " + name + " " + date + " " + device ); // this is DEBUG
   // }
+
+  // unused
+  // /** @return the ID of this calibration
+  //  */
+  // long getId() { return id; }
+
 }
