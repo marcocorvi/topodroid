@@ -186,12 +186,6 @@ public class CavwayProtocol extends TopoDroidProtocol
           float HardVer = ((float) databuf[4]) / 10;
           mHardVer = Float.toString(HardVer);
           return PACKET_INFO_HARDWARE;
-        } else if (addr == CavwayDetails.STATUS_ADDRESS) {
-            StringBuilder sb = new StringBuilder(); // DEBUG
-            sb.append("STATUS length ").append( Integer.toString( len ) ).append(": ");
-            for (int i=0; i<len; ++i ) sb.append( String.format(" 0x%02x", mRepliedData[i] ) );
-            TDLog.v( sb.toString() );
-          return PACKET_STATUS;
         } else if ( command == MemoryOctet.BYTE_PACKET_3D ) { // 0x3d
           return PACKET_REPLY;
         } else if ( command == MemoryOctet.BYTE_PACKET_3E ) { // 0x3e
