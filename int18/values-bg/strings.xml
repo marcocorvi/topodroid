@@ -1693,11 +1693,11 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_extend_frac_summary">\"разширението\" може да има точка</string>
   <string name="pref_recent_shot_title">Скорошни измервания</string>
   <string name="pref_recent_shot_summary">Акцентирайте върху последните измервания</string>
-  <string name="pref_drawing_unit_title">Мащаб на уредите за точки</string>
-  <string name="pref_drawing_unit_summary">Мащабът на уредите за точка</string>
+  <string name="pref_drawing_unit_title">Мащаб на инструменти за точки</string>
+  <string name="pref_drawing_unit_summary">Мащабът на инструментите за точка</string>
   <string name="pref_unscaled_points_title">Неприближени икони на точка</string>
   <string name="pref_unscaled_points_summary">Иконите на точка не са приближени</string>
-  <string name="pref_segment_title">Разстояние между линия и точка</string>
+  <string name="pref_segment_title">Разстояние между точки в линия</string>
   <string name="pref_segment_message">Минимално разстояние между точките на линия</string>
   <string name="pref_linestyle_title">Стил на линиите</string>
   <string name="pref_linestyle_summary">Стил на изписване на линия</string>
@@ -1732,9 +1732,9 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_label_size_title">Размер на етикетите</string>
   <string name="pref_label_size_summary">Размер на етикетите</string>
   <string name="pref_scalable_label_title">Мащаб на етикетите</string>
-  <string name="pref_scalable_label_summary">Мащаб на етикетите при приближаване</string>
-  <string name="pref_slope_lside_title">Линия на наклона l-страна</string>
-  <string name="pref_slope_lside_summary">Наклонени линии по подразбиране l-страна</string>
+  <string name="pref_scalable_label_summary">Мащабабиране на етикетите при приближаване</string>
+  <string name="pref_slope_lside_title">Начална линия на наклона</string>
+  <string name="pref_slope_lside_summary">Дължина на лявата линия за посоката на наклона</string>
   <string name="pref_arrow_length_title">Размер на стрелката на линията на сечение</string>
   <string name="pref_arrow_length_message">Размер на стрелката на линията на сечение</string>
   <string name="pref_dot_radius_title">Размер на зелените точки</string>
