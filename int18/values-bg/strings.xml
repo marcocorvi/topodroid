@@ -1414,7 +1414,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <!-- UNUSED string name="pref_tdmanager_title">TdManager</string -->
   <!-- UNUSED string name="pref_tdmanager_summary">Use TdManager</string -->
   <string name="pref_with_android_azimuth_title">Компас на Android</string>
-  <string name="pref_with_android_azimuth_summary">Активирай компас на Android/наклон</string>
+  <string name="pref_with_android_azimuth_summary">Активирай компас/наклономер на Android</string>
   <string name="pref_blunder_shot_title">Грешни измервания</string>
   <string name="pref_blunder_shot_summary">Пропускане на грешни измервания в отсечките</string>
   <string name="pref_splay_station_title">Повторно свързване на странични измервания към репер</string>
@@ -1442,8 +1442,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_recent_timeout_summary">Времето, след което данните повече не се смятат за скорошни [s]</string>
   <string name="pref_triple_shot_title">Обратна връзка за странични измервания в отсечката</string>
   <string name="pref_triple_shot_summary">Обратна връзка за разпознаването на странични измервания в отсечката</string>
-  <string name="pref_connect_feedback_title">Свържи обратна връзка</string>
-  <string name="pref_connect_feedback_summary">Свържи обратна връзка за устройство</string>
+  <string name="pref_connect_feedback_title">Индикация за успешна връзка</string>
+  <string name="pref_connect_feedback_summary">Начин за индикиране при успешно свързване на устройството</string>
   <string name="pref_unnamed_device_title">Неназовани устройства</string> <!-- KEEP -->
   <string name="pref_unnamed_device_summary">Активирай менюто за въвеждане на име на устройството</string> <!-- KEEP -->
   <string name="pref_station_prefix_title">Представка за репер</string>
@@ -1528,7 +1528,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_wait_shot_title">Пауза на измервания</string>
   <string name="pref_wait_shot_summary">Спри измерването след [ms]</string>
   <string name="pref_wait_data_title">Пауза на данните</string>
-  <string name="pref_wait_data_summary">Спри изтеглянето на данни след [ms]</string>
+  <string name="pref_wait_data_summary">Пауза след изтеглянето на данни [ms]</string>
   <string name="pref_wait_conn_title">Закъснение за изчакване до готовност на данните</string>
   <string name="pref_wait_conn_summary">Отложи изчакването за готовност на данните с [ms]</string>
   <string name="pref_conn_mode_title">Режим на връзка с данни</string>
@@ -1541,8 +1541,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_auto_pair_summary">Сдвояване с устройството след сканиране</string>
   <string name="pref_head_tail_title">Обем нови данни</string>
   <string name="pref_head_tail_summary">Виж обема на новите данните преди изтегляне</string>
-  <string name="pref_socket_delay_title">Забавяне на свързването</string>
-  <string name="pref_socket_delay_summary">Забавяне на свързването преди позволяване на сдвояване [0.1 sec]</string>
+  <string name="pref_socket_delay_title">Изчакване на свързването</string>
+  <string name="pref_socket_delay_summary">Изчакване на свързването преди позволяване на сдвояване [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Z6 workaround</string>
   <string name="pref_z6_workaround_summary">Z6 workaround – сваляне на данни</string>
   <string name="pref_firmware_sanity_title">Проверка на фърмуера</string>
@@ -1685,7 +1685,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_shp_georef_summary">Експорт на плана на скица в план с WGS84 дължина-ширина</string>
   <string name="pref_thumbnail_title">Размер на умалени изображения</string>
   <string name="pref_thumbnail_summary">Размер на умалените изображения на снимките</string>
-  <string name="pref_shot_timer_title">Таймер за посока на измерването</string>
+  <string name="pref_shot_timer_title">Таймер за измерването на посока</string>
   <string name="pref_shot_timer_summary">Секунди за изчакване преди замерване на посоката на измерването</string>
   <string name="pref_beep_volume_title">Сила на звука на таймера</string>
   <string name="pref_beep_volume_summary">Сила на звука на таймера в проценти</string>
@@ -1777,7 +1777,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_checkExtend_summary">Провери дали е зададена проверка за разширение на отсечката</string>
   <string name="pref_toolbarSize_title">Размер на лентата с инструменти</string>
   <string name="pref_toolbarSize_summary">Размер на лентата с инструменти за рисуване</string>
-  <string name="pref_backup_number_title">Номер на резервно копие</string>
+  <string name="pref_backup_number_title">Брой резервни копия</string>
   <string name="pref_backup_number_summary">Брой файлове с резервни копия на скици</string>
   <string name="pref_backup_interval_title">Честота на създаване на резервни копия</string>
   <string name="pref_backup_interval_summary">Минимален период между две резервни копия [s]</string>
@@ -2270,14 +2270,14 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="cpref_neg_clino_summary">Разреши гледни точки под хоризонта [n]</string>
     <string name="cpref_dem_buffer_title">Буфер за дигитален модел на височините</string>
     <string name="cpref_dem_buffer_summary">Разширение на дигиталния модел на височините около картировката [200]</string>
-    <string name="cpref_dem_maxsize_title">максимален размер на дигиталния модел на височините</string>
+    <string name="cpref_dem_maxsize_title">Максимален размер на дигиталния модел на височините</string>
     <string name="cpref_dem_maxsize_summary">Максимален брой клетки [400]</string>
     <string name="cpref_dem_reduce_title">Намаляване на дигиталния модел на височините</string>
     <string name="cpref_dem_reduce_summary">Режим на намаляване на дигиталния модел на височините [свиване]</string>
     <string name="cpref_all_splay_title">Всички странични измервания</string>
     <string name="cpref_all_splay_summary">Да се използват ли всички странични измервания за стените [y]</string>
     <string name="cpref_splay_use_title">Използване на странични измервания</string>
-    <string name="cpref_splay_use_summary">Използване на странични измервания: не, нормално, сечения [нормално]</string>
+    <string name="cpref_splay_use_summary">Използване на странични измервания: без, нормално, сечения [нормално]</string>
     <string name="cpref_splay_proj_title">Проектирани странични измервания</string>
     <string name="cpref_splay_proj_summary">Да се използват ли странични измервания, проектирани върху нормална равнина [n]</string>
     <string name="cpref_splay_thr_title">Ограничения за странични измервания</string>
