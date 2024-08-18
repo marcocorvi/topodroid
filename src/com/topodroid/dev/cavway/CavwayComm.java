@@ -733,25 +733,25 @@ public class CavwayComm extends TopoDroidComm
         // TDLog.v("XBLE set laser: " + what + " packet " + to_read + " close BT " + closeBT );
         switch ( what ) {
           case DistoX.DISTOX_OFF:
-            sendCommand( (byte)DistoX.DISTOX_OFF );
+            sendCommand( (byte)CavwayConst.DISTOX_OFF );
             break;
           case Device.LASER_ON:
-            sendCommand( (byte)DistoX.LASER_ON );
+            sendCommand( (byte)CavwayConst.LASER_ON );
             break;
           case Device.LASER_OFF:
-            sendCommand( (byte)DistoX.LASER_OFF );
+            sendCommand( (byte)CavwayConst.LASER_OFF );
             break;
           case Device.MEASURE:
             // sendCommand( (byte)DistoX.MEASURE );
             // break;
           case Device.MEASURE_DOWNLOAD:
-            sendCommand( (byte)DistoX.MEASURE );
+            sendCommand( (byte)CavwayConst.MEASURE );
             break;
           case DistoX.CALIB_OFF:
-            sendCommand( (byte)DistoX.CALIB_OFF );
+            sendCommand( (byte)CavwayConst.CALIB_OFF );
             break;
           case DistoX.CALIB_ON:
-            sendCommand( (byte)DistoX.CALIB_ON );
+            sendCommand( (byte)CavwayConst.CALIB_ON );
             break;
         }
         if ( LOG ) TDLog.v("XBLE set laser - slow down after send command");
@@ -1011,13 +1011,8 @@ public class CavwayComm extends TopoDroidComm
     // TDLog.v("XBLE toggle calib");
     boolean ret = false;
     if ( ! tryConnectDevice( address, null, 0 ) ) return false;
-    byte[] result = readMemory( CavwayDetails.STATUS_ADDRESS, 4);
-    if ( result == null ) {
-      closeDevice( false );
-      return false;
-    }
-    ret = setCalibMode( CavwayDetails.isNotCalibMode( result[0] ) );
-    if ( LOG ) TDLog.v("XBLE toggle calib - wait 700 msec before closing device");
+    ret = setCalibMode( 2 );  //convert cali mode
+    if ( LOG ) TDLog.v("Cavway toggle calib - wait 700 msec before closing device");
     TDUtil.slowDown( 701 );
     closeDevice( false );
     return ret;
@@ -1026,14 +1021,23 @@ public class CavwayComm extends TopoDroidComm
 
   /** send the set/unset calib-mode command
    *
-   * @param turn_on   whether to turn on or off the DistoX calibration mode
+   * @param mode   0: quit 1: enter 2: convert
    * @return true if success
    * @note commands: 0x31 calib-ON 0x30 calib-OFF
    */
-  private boolean setCalibMode( boolean turn_on )
+  private boolean setCalibMode( int mode )
   {
-    // TDLog.v("XBLE set calib " + turn_on );
-    return sendCommand( turn_on? DistoX.CALIB_ON : DistoX.CALIB_OFF );
+    switch (mode)
+    {
+      case 0:
+        return sendCommand( CavwayConst.CALIB_OFF );
+      case 1:
+        return sendCommand( CavwayConst.CALIB_ON );
+      case 2:
+        return sendCommand( CavwayConst.CALIB_CONVERT );
+      default:
+        return false;
+    }
   }
 
   /** batch data download

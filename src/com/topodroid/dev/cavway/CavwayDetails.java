@@ -22,7 +22,7 @@ public class CavwayDetails
 
   public final static int FIRMWARE_ADDRESS = 0xe000;
   public final static int HARDWARE_ADDRESS = 0xe004;
-  public final static int STATUS_ADDRESS   = 0xC044;
+  //public final static int STATUS_ADDRESS   = 0xC044;
 
   // head-tail command
   // final static int mHeadTailAddress = 0xe008;
