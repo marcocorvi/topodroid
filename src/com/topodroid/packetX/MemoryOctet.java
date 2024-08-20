@@ -83,6 +83,15 @@ public class MemoryOctet
     if ( l < 0 ) l += 256; // always false
     return (h * 256 + l);
   }
+
+  public static long toLong( byte b3, byte b2, byte b1, byte b0 )
+  {
+    long l3 = (long)(b3 & 0xff);   // high
+    long l2 = (long)(b2 & 0xff);   // low
+    long l1 = (long)(b1 & 0xff);
+    long l0 = (long)(b0 & 0xff);
+    return (l3 << 24 | l2 << 16 | l1 << 8 | l0);
+  }
   // ------------------------------------------------------------
 
   public MemoryOctet( int idx )

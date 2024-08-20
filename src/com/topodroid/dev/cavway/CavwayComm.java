@@ -832,7 +832,7 @@ public class CavwayComm extends TopoDroidComm
     if ( (mPacketType & CavwayProtocol.PACKET_REPLY) == CavwayProtocol.PACKET_REPLY ) {
       return ( (CavwayProtocol) mProtocol).mRepliedData;
     } else {
-      TDLog.t("XBLE read memory: no reply");
+      TDLog.t("Cavway read memory: no reply");
     }
     return null;
   }
@@ -952,7 +952,7 @@ public class CavwayComm extends TopoDroidComm
     return false;
   }
 
-  /** read the DistoX-BLE memory
+  /** read the Cavway memory
    * @param address   device address
    * @param start     from index
    * @param end       to index
@@ -971,10 +971,10 @@ public class CavwayComm extends TopoDroidComm
       // XBLE can read memory in one shot
       byte[] res_buf = readMemory( addr, BYTE_PER_OCTET );
       if ( res_buf == null || res_buf.length != BYTE_PER_OCTET ) {
-        if ( LOG ) TDLog.v("XBLE fail read memory - index " + k );
+        if ( LOG ) TDLog.v("Cavway fail read memory - index " + k );
         break;
       } else {
-        if ( LOG ) TDLog.v("XBLE read memory - index " + k );
+        if ( LOG ) TDLog.v("Cavway read memory - index " + k );
         System.arraycopy( res_buf, 0, result.data, 0, BYTE_PER_OCTET );
         data.add( result );
         ++ cnt;
@@ -1095,7 +1095,7 @@ public class CavwayComm extends TopoDroidComm
     return mNrReadPackets; // each data has two packets: DATA and VECTOR
   }
 
-  /** try to connect to the XBLE device
+  /** try to connect to the Cavway device
    * @param address   device address
    * @param lister    data lister
    * @param data_type expected type of data
@@ -1103,7 +1103,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public boolean tryConnectDevice( String address, ListerHandler lister, int data_type )
   {
-    if ( LOG ) TDLog.v("XBLE comm try connect " + address );
+    if ( LOG ) TDLog.v("Cavway comm try connect " + address );
     if ( ! mBTConnected ) {
       int timeout = 10;
       if ( ! connectDevice( address, lister, data_type, timeout ) ) {
@@ -1112,7 +1112,7 @@ public class CavwayComm extends TopoDroidComm
     }
     int loop_cnt = 50; // 20230118 local var "loop_cnt"
     while( ! mBTConnected ) {
-      if ( LOG ) TDLog.v("XBLE try connect - not connected ... " + loop_cnt );
+      if ( LOG ) TDLog.v("Cavway try connect - not connected ... " + loop_cnt );
       TDUtil.slowDown( 105 );
       if ( loop_cnt-- == 0 ) {
         disconnectGatt();

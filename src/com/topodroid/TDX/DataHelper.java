@@ -1754,14 +1754,14 @@ public class DataHelper extends DataSetObservable
    * @return inserted shot ID
    */
   public long insertCavwayShot( long sid, long id, double d, double b, double c, double r, double mag, double acc, double dip, long extend, int leg, long status, String comment, String addr,
-                                int rawMx, int rawMy, int rawMz, int rawGx, int rawGy, int rawGz )
+                                int rawMx, int rawMy, int rawMz, int rawGx, int rawGy, int rawGz , long time)
   { // 0L=leg, status, 0L=type DISTOX
     // stretch = 0.0;
     // return doInsertShot( sid, id, TDUtil.getTimeStamp(), 0L, "", "",  d, b, c, r, extend, 0.0, DBlock.FLAG_SURVEY, 0L, status, 0L, "", addr );
     if ( id >= 0 && hasShotId( sid, id ) ) { // if shot ID is already present, use a new ID
       id = -1L;
     }
-    return doCavwayInsertShot( sid, id, TDUtil.getTimeStamp(), 0L, d, b, c, r, mag, acc, dip, extend, 0.0, leg, status, comment, 0L, addr, rawMx, rawMy, rawMz, rawGx, rawGy, rawGz );
+    return doCavwayInsertShot( sid, id, time, 0L, d, b, c, r, mag, acc, dip, extend, 0.0, leg, status, comment, 0L, addr, rawMx, rawMy, rawMz, rawGx, rawGy, rawGz );
   }
 
   /** insert a BRIC shot
@@ -2325,7 +2325,7 @@ public class DataHelper extends DataSetObservable
     }
     if (addr == null) addr = "";
     ContentValues cv = makeShotContentValues( sid, id, millis, color, "", "", d, b, c, r, mag, acc, dip,
-		    extend, stretch, DBlock.FLAG_SURVEY, leg, status, shot_type, comment, addr, rawMx, rawMy, rawMz, rawGx, rawGy, rawGz, 0, 0L );
+		    extend, stretch, DBlock.FLAG_SURVEY, leg, status, shot_type, comment, addr, rawMx, rawMy, rawMz, rawGx, rawGy, rawGz, 0, millis );
     if ( ! doInsert( SHOT_TABLE, cv, "cavway insert" ) ) return -1L;
     return id;
   }
