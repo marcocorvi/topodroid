@@ -69,6 +69,14 @@ public class CavwayProtocol extends TopoDroidProtocol
 
   private byte[] mPacketBytes;
 
+  public long mTime = 0;
+
+  /** @return the shot timestamp [s]
+   */
+  @Override
+  public long getTimeStamp() {
+    return mTime; }
+
   /** cstr
    * @param ctx      context
    * @param app      application
@@ -95,6 +103,8 @@ public class CavwayProtocol extends TopoDroidProtocol
     double c = MemoryOctet.toInt( packetdata[8], packetdata[7] );  //INCL
     double r = MemoryOctet.toInt( packetdata[10], packetdata[9] );  //ROLL
 
+    mTime = MemoryOctet.toLong(packetdata[20],packetdata[19],packetdata[18],packetdata[17]);
+    //mTime = ((long)packetdata[20] << 24 | (long)packetdata[19] << 16 | (long)packetdata[18] << 8 | (long)packetdata[17]);
     mDistance = d / 1000.0;
     mBearing  = b * 180.0 / 32768.0; // 180/0x8000;
     mClino    = c * 90.0  / 16384.0; // 90/0x4000;
@@ -154,11 +164,7 @@ public class CavwayProtocol extends TopoDroidProtocol
             int res = handleCavwayPacket(mPacketBytes);
             if ( res != PACKET_NONE) {
               mComm.sendCommand(mPacketBytes[1] | 0x55);
-              if(res == DataType.PACKET_G) {
-                mComm.handleRegularPacket( res, mLister, 0 );
-                res = DataType.PACKET_M;
-              }
-              mComm.handleRegularPacket(res, mLister, 0);
+              mComm.handleCavwayPacket(res, mLister, 0);
               return PACKET_MEASURE_DATA; // with ( PACKET_MEASURE_DATA | databuf[0]) shots would be distinguished from calib
             } else {
               return PACKET_ERROR; // break for loop

@@ -161,6 +161,55 @@ public class TopoDroidComm
   //     TDLog.e( "TD comm: null Lister");
   //   }
   // }
+  /** handle regular packet
+   * @param res    packet type (as returned by handlePacket / or set by Protocol )
+   * @param lister data lister
+   * @param data_type unused
+   */
+  public void handleCavwayPacket( int res, ListerHandler lister, int data_type )
+  {
+    if(res == DataType.PACKET_DATA) {
+      ++mNrReadPackets;
+      double d = mProtocol.mDistance;
+      double b = mProtocol.mBearing;
+      double c = mProtocol.mClino;
+      double r = mProtocol.mRoll;
+      long time = mProtocol.getTimeStamp();
+      long status = (d > TDSetting.mMaxShotLength) ? TDStatus.OVERSHOOT : TDStatus.NORMAL;
+      mLastShotId = TopoDroidApp.mData.insertCavwayShot(TDInstance.sid, -1L, d, b, c, r, mProtocol.mMagnetic,
+              mProtocol.mAcceleration, mProtocol.mDip, 0, 0, 0, "", "",
+              (int) mProtocol.mMX, (int) mProtocol.mMY, (int) mProtocol.mMZ, (int) mProtocol.mGX, (int) mProtocol.mGY, (int) mProtocol.mGZ, time);
+      if (lister != null) { // FIXME_LISTER sendMessage with mLastShotId only
+        Message msg = lister.obtainMessage(Lister.LIST_UPDATE);
+        Bundle bundle = new Bundle();
+        bundle.putLong(Lister.BLOCK_ID, mLastShotId);
+        msg.setData(bundle);
+        lister.sendMessage(msg);
+        if (TDInstance.deviceType() == Device.DISTO_A3 && TDSetting.mWaitData > 10) {
+          TDUtil.slowDown(TDSetting.mWaitData);
+        }
+      }
+      TopoDroidApp.mData.updateShotAMDR(mLastShotId, TDInstance.sid, mProtocol.mAcceleration, mProtocol.mMagnetic, mProtocol.mDip, mProtocol.mRoll, mProtocol.mBackshot);
+      if (TDSetting.mWaitData > 10) {
+        TDUtil.slowDown(TDSetting.mWaitData);
+      }
+    }
+    else if (res == DataType.PACKET_G)  //calib data
+    {
+      ++mNrReadPackets;
+      if ( ! lister.hasDialog() ) {
+        long c_blk = TopoDroidApp.mDData.insertGM(TDInstance.cid, mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ);
+        if (lister != null) {
+          Message msg = lister.obtainMessage(Lister.LIST_UPDATE);
+          Bundle bundle = new Bundle();
+          bundle.putLong(Lister.BLOCK_ID, c_blk);
+          msg.setData(bundle);
+          lister.sendMessage(msg);
+        }
+      }
+    }
+  }
+
 
   /** handle regular packet
    * @param res    packet type (as returned by handlePacket / or set by Protocol )
