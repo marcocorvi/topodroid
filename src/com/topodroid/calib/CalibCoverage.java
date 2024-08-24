@@ -8,6 +8,24 @@
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
+ * Considering the directions in Heeb's calibration cube, 
+ * (1) the angle between two directions of neighboring faces is 90 degrees
+ * (2) the angle between two directions of neighboring corners is about 70 degrees
+ *     twice the angle between the sizes sqrt(3) and sqrt(2) of a right triangle with
+ *     third size 1, thus 2 * arctan( 1/sqrt(2) ) = 70.5 degrees
+ * (3) the angle between a face direction and a corner direction (of a corner of the face)
+ *     is about arctan( sqrt(2)/1 ) = 54.7 degrees.
+ * The minimum solid angle about each Heeb direction so that the whole sphere is covered is 
+ * about 37.5 degrees. With this choice the solid angles centered at two nearby corners, overlap
+ * a little in the middle of the side, so that the soloid angle centered at the center of the
+ * face can be less than 45 degrees.
+ *
+ * The implementation in this class uses a weight over the interval [0,90) instead of an
+ * indicator function over the solid angle [0,theta), with theta>=37.5.
+ * The weight is cos(t)^2. Some values:
+ *   cos(37.5)^2 = 0.629
+ *   cos(45)^2   = 0.5
+ *   cos(50)^2   = 0.413
  */
 package com.topodroid.calib;
 
@@ -30,13 +48,20 @@ public class CalibCoverage
     0x0001, 0x0002, 0x0004, 0x0008, 0x0010, 0x0020, 0x0040, 0x0080, 0x0100, 0x0200, 0x0400, 0x0800
   };
 
+  /** a 3D direction, a point on the sphere in 3D
+   */
   static class Direction
   {
-    final float mCompass;
-    final float mClino;
-    private float mValue;
+    final float mCompass; // azimuth
+    final float mClino;   // clino
+    private float mValue; // coverage value (1: not covered, 0: fully covered)
     private int   mRoll;
 
+    /** cstr
+     * @param cm   direction azimuth
+     * @param cl   direction clino
+     * @param v    direction initial value
+     */
     Direction( float cm, float cl, float v )
     {
       mCompass = cm;
@@ -45,17 +70,27 @@ public class CalibCoverage
       mRoll  = 0; // 12 bits
     }
 
+    /** reset the direction value to 1
+     */
     void resetValue( ) { mValue = 1.0f; }
 
+    /** @return the value oif the direction
+     */
     float getValue() { return mValue; }
 
+    /** update the value of the direction
+     * @param v   value to subtract from the direction value
+     * @param cnt number of shots that sum to the value v
+     */
     void updateValue( float v, int cnt )
     {
       mValue -= (cnt >= 4)? v : v * cnt * 0.25f;
       if ( mValue < 0.0f ) mValue = 0.0f;
     }
 
-    // @param rm roll [degrees]
+    /** update the direction roll using ROLL_3
+     * @param r roll [degrees]
+     */
     void updateRoll3( float r )
     {
       int ir = (int)(r/15); // 0=[0..15), 1=[15..30), 2=[30..45), 3=[45..60), ...
@@ -67,6 +102,9 @@ public class CalibCoverage
       mRoll |= ROLL_3[ir];
     }
 
+    /** update the direction roll using ROLL_2
+     * @param r roll [degrees]
+     */
     void updateRoll2( float r )
     {
       int ir = (int)(r/15); // 0=[0..15), 1=[15..30), 2=[30..45), 3=[45..60), ...
@@ -78,6 +116,9 @@ public class CalibCoverage
       mRoll |= ROLL_2[ir];
     }
 
+    /** update the direction roll using ROLL_1
+     * @param r roll [degrees]
+     */
     void updateRoll1( float r )
     {
       int ir = (int)(r/15); // 0=[0..15), 1=[15..30), 2=[30..45), 3=[45..60), ...
@@ -89,6 +130,8 @@ public class CalibCoverage
       mRoll |= ROLL_1[ir];
     }
 
+    /** @return the roll value of the direction
+     */
     float  getRollValue() 
     {
       int res = 0;
@@ -106,17 +149,18 @@ public class CalibCoverage
 
   private final int[] clino_angles; // clino angles, from +90 to -90 in steps by 5: 5*36 = 180
                                     // angle[0] = 90, angle[1] = 85, ... angle[36] = -90
-  private final int[] t_size;       // t_size[0] = 1,                    t_size[36] = 1 : one cell at the poles
+  private final int[] t_size;       // number of directions for each clino
+                                    // t_size[0] = 1,                    t_size[36] = 1 : one cell at the poles
                                     // t_size[1] = 32,                   t_size[35] = 32 
                                     // t_size[2] = 62,                   t_size[34] = 64
                                     // ...
                                     // t_size[17] = 17*32                t_size[19] = 17*32
                                     // t_size[18] = 18*32
-  private final int[] t_offset;
-  private int t_dim;
+  private final int[] t_offset;     // offset indices of the directions for each clino
+  private int t_dim;                // size of the array of directions
 
-  private Direction[] angles;
-  private float mCoverage;
+  private Direction[] angles;       // array of directions
+  private float mCoverage;          // overall coverage value
 
   public CalibCoverage( )
   {
@@ -130,12 +174,20 @@ public class CalibCoverage
 
   // float getCoverage() { return mCoverage; }
 
+  /** @return the array of directions
+   */
   Direction[] getDirections() { return angles; }
 
+  /** @return the sizes of the array of directions, indiced by the clinos
+   */
   int[] getTSize() { return t_size; }
 
+  /** @return the offsets of the array of directions, indiced by the clinos
+   */
   int[] getTOffset() { return t_offset; }
 
+  /** set up the arrays structs
+   */
   private void setup()
   {
     int i;
@@ -169,7 +221,13 @@ public class CalibCoverage
     }
   }
 
-  // compass and clino in radians
+  /** @return the cosine of the angle between two directions
+   * @param compass1  first direction azimuth
+   * @param clino1    first direction clino  
+   * @param compass2  second direction azimuth
+   * @param clino2    second direction clino  
+   * @note compass and clino in radians
+   */
   private float cosine( float compass1, float clino1, float compass2, float clino2 )
   {
     double h1 = Math.cos( clino1 );
@@ -183,6 +241,11 @@ public class CalibCoverage
     return (float)(x1*x2 + y1*y2 + z1*z2); // cosine of the angle
   }
 
+  /** update the value of the directions
+   * @param compass   input azimuth
+   * @param clino     input clino
+   * @param cnt       number of shots of the input
+   */
   private void updateDirectionValues( float compass, float clino, int cnt )
   {
     for (int j=0; j<t_dim; ++j ) {
@@ -196,6 +259,11 @@ public class CalibCoverage
     }
   }
 
+  /** update the roll of the directions
+   * @param compass   input azimuth
+   * @param clino     input clino
+   * @param roll      input roll
+   */
   private void updateRollValues( float compass, float clino, float roll )
   {
     for (int j=0; j<t_dim; ++j ) {
@@ -291,6 +359,11 @@ public class CalibCoverage
   //   return ret;
   // }
 
+  /** compute the coverage
+   * @param clist     list of calibration data
+   * @param transform calibration transform (null if data must not be transformed)
+   * @return average coverage
+   */
   public float evalCoverage( List< CBlock > clist, CalibAlgo transform )
   {
 
@@ -346,6 +419,11 @@ public class CalibCoverage
     return mCoverage;
   }
 
+  /** compute the coverage roll
+   * @param clist     list of calibration data
+   * @param transform calibration transform (null if data must not be transformed)
+   * @return average roll coverage
+   */
   public float evalCoverageRoll( List< CBlock > clist, CalibAlgo transform )
   {
 
@@ -378,6 +456,11 @@ public class CalibCoverage
     return mCoverage;
   }
 
+  /** compute the coverage G or M
+   * @param clist     list of calibration data
+   * @param mode      0: G, 1: M
+   * @return average G/M coverage
+   */
   // @param clist  list of CBlocks
   // @param mode   0: G,  1: M
   public float evalCoverageGM( List< CBlock > clist, int mode ) 
