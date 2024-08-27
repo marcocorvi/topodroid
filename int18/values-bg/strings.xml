@@ -1753,8 +1753,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_linestraight_summary">Активирай действието за изправяне на цяла линия</string>
   <string name="pref_path_multiselect_title">Избор на множество пътеки</string>
   <string name="pref_path_multiselect_summary">Активирай действието за избор на множество пътеки</string>
-  <string name="pref_composite_actions_title">Композитни действия</string>
-  <string name="pref_composite_actions_summary">Активирай действия с продължително докосване на линия/площ</string>
+  <!-- UNUSED string name="pref_composite_actions_title">Композитни действия</string -->
+  <!-- UNUSED string name="pref_composite_actions_summary">Активирай действия с продължително докосване на линия/площ</string -->
   <string name="pref_with_continue_line_title">Свързване на линии</string>
   <string name="pref_with_continue_line_summary">Активирай свързването на линии</string>
   <string name="pref_plane_interpolation_title">Наместване в равнина</string>

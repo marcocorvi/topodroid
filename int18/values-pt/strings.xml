@@ -1645,8 +1645,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_linestraight_summary">Habilitar opção de transformar linhas inteiras em retas</string>
   <string name="pref_path_multiselect_title">Multisseleção caminho</string>
   <string name="pref_path_multiselect_summary">Habilitar seleção/edição de vários caminhos</string>
-  <string name="pref_composite_actions_title">Ações compostas</string>
-  <string name="pref_composite_actions_summary">Habilitar ações de \u0022clique longo\u0022 para linhas e áreas</string>
+  <!-- UNUSED string name="pref_composite_actions_title">Ações compostas</string -->
+  <!-- UNUSED string name="pref_composite_actions_summary">Habilitar ações de \u0022clique longo\u0022 para linhas e áreas</string -->
   <string name="pref_with_continue_line_title">Unir linha</string>
   <string name="pref_with_continue_line_summary">Habilitar opção para unir linha</string>
   <string name="pref_plane_interpolation_title">Interpolar plano</string>

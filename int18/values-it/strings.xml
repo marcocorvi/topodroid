@@ -1747,8 +1747,8 @@
   <string name="pref_linestraight_summary">Azione per raddrizzare una intera linea</string>
   <string name="pref_path_multiselect_title">Multiselezione</string>
   <string name="pref_path_multiselect_summary">Azione di selezione multipla</string>
-  <string name="pref_composite_actions_title">Azioni composite</string>
-  <string name="pref_composite_actions_summary">Azioni long-tap linea/area</string>
+  <!-- UNUSED string name="pref_composite_actions_title">Azioni composite</string -->
+  <!-- UNUSED string name="pref_composite_actions_summary">Azioni long-tap punti linea/area</string -->
   <string name="pref_with_continue_line_title">Unisci linea</string>
   <string name="pref_with_continue_line_summary">Abilita unione linea</string>
   <string name="pref_plane_interpolation_title">Interpolazione piana</string>

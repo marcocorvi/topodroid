@@ -1779,8 +1779,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_linestraight_summary">Enable straighten whole line action</string>
   <string name="pref_path_multiselect_title">Path multiselection</string>
   <string name="pref_path_multiselect_summary">Enable path multiselection action</string>
-  <string name="pref_composite_actions_title">Composite actions</string>
-  <string name="pref_composite_actions_summary">Enable line/area long-tap actions</string>
+  <!-- UNUSED string name="pref_composite_actions_title">Composite actions</string -->
+  <!-- UNUSED string name="pref_composite_actions_summary">Enable line/area long-tap actions</string -->
   <string name="pref_with_continue_line_title">Line join</string>
   <string name="pref_with_continue_line_summary">Enable line join</string>
   <string name="pref_plane_interpolation_title">Plane fitting</string>

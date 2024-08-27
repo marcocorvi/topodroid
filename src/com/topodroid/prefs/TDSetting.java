@@ -560,7 +560,7 @@ public class TDSetting
   // public static int mRecentNr     = 4;        // nr. most recent symbols
   public static boolean mSingleBack = false; // with single back
   public static boolean mPalettes = false;   // extra tools palettes
-  public static boolean mCompositeActions = false;
+  // public static boolean mCompositeActions = false;
   public static boolean mWithLineJoin = false;  // with line join
   public static boolean mLegOnlyUpdate = false; // whether to update display of drawing window at every shot (not just at legs)
   public static boolean mFullAffine = false; // whether to do full affine transform or shift+scale only
@@ -1351,7 +1351,7 @@ public class TDSetting
     mLineCurve     = prefs.getBoolean( keyGLine[ 7], bool(defGLine[ 7]) );  // DISTOX_LINE_CURVE
     mLineStraight  = prefs.getBoolean( keyGLine[ 8], bool(defGLine[ 8]) );  // DISTOX_LINE_STRAIGHT
     mPathMultiselect = prefs.getBoolean( keyGLine[ 9], bool(defGLine[ 9]) );  // DISTOX_PATH_MULTISELECT
-    mCompositeActions = prefs.getBoolean( keyGLine[10], bool(defGLine[10]) );  // DISTOX_COMPOSITE_ACTIONS
+    // mCompositeActions = prefs.getBoolean( keyGLine[10], bool(defGLine[10]) );  // DISTOX_COMPOSITE_ACTIONS
     // TDLog.v("SETTING load secondary GEEK line done");
 
     String[] keyUnits = TDPrefKey.UNITS;
@@ -2076,8 +2076,8 @@ public class TDSetting
       mLineStraight = tryBooleanValue(      hlp, k, v, bool(def[8]) );
     } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_PATH_MULTISELECT (bool)
       mPathMultiselect = tryBooleanValue(   hlp, k, v, bool(def[9]) );
-    } else if ( k.equals( key[10 ] ) ) { // DISTOX_COMPOSITE_ACTIONS (bool)
-      mCompositeActions = tryBooleanValue(  hlp, k, v, bool(def[10]) );
+    // } else if ( k.equals( key[10 ] ) ) { // DISTOX_COMPOSITE_ACTIONS (bool)
+    //   mCompositeActions = tryBooleanValue(  hlp, k, v, bool(def[10]) );
 
     } else {
       TDLog.e("missing DEVICE key: " + k );

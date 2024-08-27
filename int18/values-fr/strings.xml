@@ -1743,8 +1743,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_linestraight_summary">Action de redresser l\'ensemble de la ligne</string>
     <string name="pref_path_multiselect_title">Chemin multisélection</string>
     <string name="pref_path_multiselect_summary">Active le chemin de multisélection</string>
-    <string name="pref_composite_actions_title">Actions multiples</string>
-    <string name="pref_composite_actions_summary">Permettre des appuis longs sur les lignes et les zones.</string>
+    <!-- UNUSED string name="pref_composite_actions_title">Actions multiples</string -->
+    <!-- UNUSED string name="pref_composite_actions_summary">Permettre des appuis longs sur les lignes et les zones.</string -->
     <string name="pref_with_continue_line_title">Jonction lignes</string>
     <string name="pref_with_continue_line_summary">Activer la jonction de lignes</string>
     <string name="pref_plane_interpolation_title">Interpolation de plan</string>

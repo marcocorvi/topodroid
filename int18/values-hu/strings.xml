@@ -1760,8 +1760,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_linestraight_summary">Egyenesítse az egész vonalat</string>
   <string name="pref_path_multiselect_title">Útvonalas kiválasztás</string>
   <string name="pref_path_multiselect_summary">Útvonalas többes kiválasztás lehetőség</string>
-  <string name="pref_composite_actions_title">Összetett lehetőség</string>
-  <string name="pref_composite_actions_summary">Vonal/terület hosszú érintés akciók</string>
+  <!-- UNUSED string name="pref_composite_actions_title">Összetett lehetőség</string -->
+  <!-- UNUSED string name="pref_composite_actions_summary">Vonal/terület hosszú érintés akciók</string -->
   <string name="pref_with_continue_line_title">Vonal csatlakoztatás</string>
   <string name="pref_with_continue_line_summary">Vonal kapcsolódás engedélyezése</string>
   <string name="pref_plane_interpolation_title">Felület illesztés</string>

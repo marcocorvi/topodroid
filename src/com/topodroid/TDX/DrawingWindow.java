@@ -6582,6 +6582,7 @@ public class DrawingWindow extends ItemDrawer
           //
           final boolean point_wise = SelectionRange.isPoint( mDoEditRange ); // 20230118 local var "point_wise"
           text = getString( point_wise? R.string.popup_split_pt : R.string.popup_split_pts );
+          // TDLog.v("pintwise " + point_wise + " text " + text + " composite " + TDSetting.mCompositeActions );
           myTextView2 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
             new View.OnClickListener( ) {
               public void onClick(View v) {
@@ -6596,19 +6597,19 @@ public class DrawingWindow extends ItemDrawer
                 dismissPopupEdit();
               }
             } );
-          if ( TDLevel.overExpert && TDSetting.mCompositeActions && point_wise ) {
-            myTextView2.setOnLongClickListener( new View.OnLongClickListener() {
-              public boolean onLongClick( View v ) {
-                if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // LINE/AREA
-                  mDrawingSurface.moveHotItemToNearestPoint( TDSetting.mSelectness/2 );
-                  mDrawingSurface.splitPointHotItem();
-                  modified();
-                }
-                dismissPopupEdit();
-                return true;
-              }
-            } );
-          }
+          // if ( TDLevel.overExpert && TDSetting.mCompositeActions && point_wise ) {
+          //   myTextView2.setOnLongClickListener( new View.OnLongClickListener() {
+          //     public boolean onLongClick( View v ) {
+          //       if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) { // LINE/AREA
+          //         mDrawingSurface.moveHotItemToNearestPoint( TDSetting.mSelectness/2 );
+          //         mDrawingSurface.splitPointHotItem();
+          //         modified();
+          //       }
+          //       dismissPopupEdit();
+          //       return true;
+          //     }
+          //   } );
+          // }
           ww = myTextView2.getPaint().measureText( text );
           if ( ww > w ) w = ww;
 

@@ -1500,7 +1500,7 @@ public class TDPrefKey
     "DISTOX_LINE_CURVE",      // whether to show line- smooth/straighten action
     "DISTOX_LINE_STRAIGHT",   // whether to show line-straighten (more "rocky") button
     "DISTOX_PATH_MULTISELECT",// path multiselection
-    "DISTOX_COMPOSITE_ACTIONS",
+    // "DISTOX_COMPOSITE_ACTIONS",
     null
   };
 
@@ -1515,7 +1515,7 @@ public class TDPrefKey
     R.string.pref_linecurve_title,
     R.string.pref_linestraight_title,
     R.string.pref_path_multiselect_title,
-    R.string.pref_composite_actions_title,
+    // R.string.pref_composite_actions_title,
     -1
   };
 
@@ -1530,7 +1530,7 @@ public class TDPrefKey
     R.string.pref_linecurve_summary,
     R.string.pref_linestraight_summary,
     R.string.pref_path_multiselect_summary,
-    R.string.pref_composite_actions_summary,
+    // R.string.pref_composite_actions_summary,
     -1
   };
 
@@ -1545,7 +1545,7 @@ public class TDPrefKey
     FALSE,
     FALSE,
     FALSE,
-    FALSE,
+    // FALSE,
     null
   };
 

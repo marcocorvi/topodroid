@@ -1632,8 +1632,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_linestraight_summary">Punkteigenschaften: Ganze linie begradigen</string>
   <string name="pref_path_multiselect_title">Pfad Mehrfachauswahl</string>
   <string name="pref_path_multiselect_summary">Erlaube mehrere Pfade auszuwählen</string>
-  <string name="pref_composite_actions_title">Zusammengesetzte Aktionen</string>
-  <string name="pref_composite_actions_summary">Erlaube zusammengesetzte Aktionen für Linien/Flächen</string>
+  <!-- UNUSED string name="pref_composite_actions_title">Zusammengesetzte Aktionen</string -->
+  <!-- UNUSED string name="pref_composite_actions_summary">Erlaube zusammengesetzte Aktionen für Linien/Flächen</string -->
   <string name="pref_with_continue_line_title">Linie fortsetzen</string>
   <string name="pref_with_continue_line_summary">Setzt eine bestehende Linie fort</string>
   <string name="pref_plane_interpolation_title">Ebene interpolieren</string>
