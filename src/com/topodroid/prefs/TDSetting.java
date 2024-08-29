@@ -1311,9 +1311,9 @@ public class TDSetting
     mLegOnlyUpdate  = prefs.getBoolean( keyGPlot[ 6], bool(defGPlot[ 6]) ); // DISTOX_LEGONLY_UPDATE
     mFullAffine     = prefs.getBoolean( keyGPlot[ 7], bool(defGPlot[ 7]) ); // DISTOX_FULL_UPDATE
     mWithLevels     = tryInt( prefs,   keyGPlot[ 8],      defGPlot[ 8] );   // DISTOX_WITH_LEVELS
-    mGraphPaperScale = tryInt( prefs,   keyGPlot[ 9],      defGPlot[ 9] );  // DISTOX_GRAPH_PAPER_SCALE
+    mGraphPaperScale = tryInt( prefs,  keyGPlot[ 9],      defGPlot[ 9] );  // DISTOX_GRAPH_PAPER_SCALE
     mSlantXSection  = prefs.getBoolean( keyGPlot[10], bool(defGPlot[10]) ); // DISTOX_SLANT_XSECTION
-    mObliqueMax     = tryInt( prefs,   keyGPlot[11],       defGPlot[11] );  // DISTOX_OBLIQUE_PROJECTED
+    mObliqueMax     = tryInt( prefs,   keyGPlot[11],      defGPlot[11] );  // DISTOX_OBLIQUE_PROJECTED
     mLineEnds       = tryInt( prefs,   keyGPlot[12],      defGPlot[12] );  // DISTOX_LINE_ENDS
     // TDLog.v("SETTING load secondary GEEK plot done");
 
@@ -1668,11 +1668,11 @@ public class TDSetting
       if ( mAutoCalEta < 0.01f ) { mAutoCalEta = 0.01f; ret = "0.01"; }
       if ( mAutoCalEta > 0.99f ) { mAutoCalEta = 0.99f; ret = "0.99"; }
     } else if ( k.equals( key[ 13 ] ) ) { // DISTOX_AUTO_CAL_GAMMA
-      mAutoCalGamma   = tryFloatValue( hlp, k, v, def[12] ); 
+      mAutoCalGamma   = tryFloatValue( hlp, k, v, def[13] ); 
       if ( mAutoCalGamma < 0.01f ) { mAutoCalGamma = 0.01f; ret = "0.01"; }
       if ( mAutoCalGamma > 0.99f ) { mAutoCalGamma = 0.99f; ret = "0.99"; }
-    } else if ( k.equals( key[ 12 ] ) ) { // DISTOX_AUTO_CAL_DELTA
-      mAutoCalDelta   = tryFloatValue( hlp, k, v, def[12] ); 
+    } else if ( k.equals( key[ 14 ] ) ) { // DISTOX_AUTO_CAL_DELTA
+      mAutoCalDelta   = tryFloatValue( hlp, k, v, def[14] ); 
       if ( mAutoCalDelta < 0.01f ) { mAutoCalDelta = 0.01f; ret = "0.01"; }
       if ( mAutoCalDelta > 0.99f ) { mAutoCalDelta = 0.99f; ret = "0.99"; }
     } else {

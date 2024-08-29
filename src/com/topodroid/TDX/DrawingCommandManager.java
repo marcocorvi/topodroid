@@ -92,6 +92,7 @@ public class DrawingCommandManager
   // private int mScrapIdx = 0; // scrap index
   private List< Scrap > mScraps;
   private Scrap mCurrentScrap; // mScraps[ mScrapIdx ]
+  private Scrap mSavedScrap = null;
 
   // final private List< ICanvasCommand >     mCurrentStack;
   // final private List< DrawingStationUser > mUserStations;  // user-inserted stations
@@ -218,7 +219,7 @@ public class DrawingCommandManager
   { 
     mCurrentScrap = s;
     // mScrapIdx = mCurrentScrap.mScrapIdx;
-    TDLog.v("set current scrap by scrap " + mCurrentScrap.mScrapIdx );
+    // TDLog.v("set current scrap by scrap " + mCurrentScrap.mScrapIdx );
   }
 
   /** set the current scrap
@@ -233,12 +234,12 @@ public class DrawingCommandManager
     else if ( nr < 0 ) { nr = size - 1; }
     mCurrentScrap = mScraps.get( nr );
     // mScrapIdx = mCurrentScrap.mScrapIdx;
-    TDLog.v("set current scrap by nr " + nr + " idx " + mCurrentScrap.mScrapIdx );
+    // TDLog.v("set current scrap by nr " + nr + " idx " + mCurrentScrap.mScrapIdx );
   }
 
   private void setCurrentScrapByIdx( int idx ) // force = false // TH2EDIT no force
   {
-    TDLog.v("set current scrap by idx " + idx + " current scrap idx " + ( (mCurrentScrap==null)? "undef." : mCurrentScrap.mScrapIdx ) );
+    // TDLog.v("set current scrap by idx " + idx + " current scrap idx " + ( (mCurrentScrap==null)? "undef." : mCurrentScrap.mScrapIdx ) );
     if ( idx < 0 ) return; // -1;
     if ( mCurrentScrap != null && idx == mCurrentScrap.mScrapIdx ) return;
     // if ( mMode >= 3 && idx > 0 ) { // TODO CHECK
@@ -252,7 +253,7 @@ public class DrawingCommandManager
       }
     }
     // if ( idx >= getMaxScrapIdx() ) newScrapIndex( false ); // TH2EDIT no false
-    TDLog.v("add scrap - idx " + idx );
+    // TDLog.v("add scrap - idx " + idx );
     addScrap( idx ); // TH2EDIT no false // this sets the new scrap as current scrap
     // mScrapIdx = idx;
     // mCurrentScrap = mScraps.get( idx );
@@ -265,8 +266,12 @@ public class DrawingCommandManager
   int toggleScrapIndex( boolean force, int k ) // TH2EDIT no force
   { 
     if ( force || mMode < 3 ) { // TH2EDIT no force
+      if ( isMultiselection() ) {
+        mSavedScrap = mCurrentScrap;
+        // TDLog.v("set saved scrap " + mSavedScrap.mScrapIdx );
+      }
       int nr = getScrapNr( mCurrentScrap.mScrapIdx ) + k;
-      TDLog.v("toggle scrap nr " + nr + " (current index " + mCurrentScrap.mScrapIdx + ")" );
+      // TDLog.v("toggle scrap nr " + nr + " (current index " + mCurrentScrap.mScrapIdx + ")" );
       setCurrentScrapByNr( nr );
     }
     return mCurrentScrap.mScrapIdx;
@@ -293,6 +298,10 @@ public class DrawingCommandManager
   int newScrapIndex( boolean force )  // TH2EDIT no force
   { 
     if ( force || mMode < 3 ) { // TH2EDIT no force
+      if ( isMultiselection() ) {
+        mSavedScrap = mCurrentScrap;
+        // TDLog.v("set saved scrap " + mSavedScrap.mScrapIdx );
+      }
       int idx = getMaxScrapIdx() + 1;
       // TDLog.v( "plot " + mPlotName + " scrap idx " + idx + ": current nr " + mScraps.size() );
       addScrap( idx ); // this sets the new scrap as current scrap
@@ -300,6 +309,21 @@ public class DrawingCommandManager
       // FIXME-HIDE addShotsToScrapSelection( mCurrentScrap );
     }
     return mCurrentScrap.mScrapIdx;
+  }
+
+  // void setSavedScrap() { mSavedScrap = mCurrentScrap; }
+  // void resetSavedScrap() { mSavedScrap = null; }
+
+  /** move multiselection from the saved scrap to the current scrap
+   * @return true if the multiuselection has been moved
+   */
+  boolean moveMultiselection()
+  {
+    if ( mCurrentScrap.moveMultiselection( mSavedScrap ) ) {
+      mSavedScrap = null;
+      return true;
+    }
+    return false;
   }
 
   /** add a new scrap with a specified index, and set it as the current scrap
@@ -2068,10 +2092,18 @@ public class DrawingCommandManager
     }
   }
    
-  void exportDataStream( int type, DataOutputStream dos, PlotInfo info, String scrap_name, int proj_dir, int oblique )
+  /** export plot to data stream
+   * @param type     plot type
+   * @param dos      output data stream
+   * @param info     plot info
+   * @param fullname output fullname
+   * @param proj_dir  direction, for projection profile 
+   * @param oblique   oblique angle [degrees] for oblique projection profile
+   */
+  void exportDataStream( int type, DataOutputStream dos, PlotInfo info, String fullname, int proj_dir, int oblique )
   {
     RectF bbox = getBoundingBox( ); // global bbox
-    DrawingIO.exportDataStream( type, dos, info, scrap_name, proj_dir, oblique, bbox, mNorthLine, mScraps, mStations /* , mFixeds */ );
+    DrawingIO.exportDataStream( type, dos, info, fullname, proj_dir, oblique, bbox, mNorthLine, mScraps, mStations /* , mFixeds */ );
                                 // mCurrentStack, mUserStations, mStations 
   }
 

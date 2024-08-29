@@ -129,9 +129,7 @@ public class Scrap
   {
     mSelected.clear();
     // PATH_MULTISELECT
-    mMultiselected.clear();
-    mMultiselectionType  = -1;
-    isMultiselection = false;
+    resetMultiselection();
   }
 
   /** @return true if this scrap is selectable
@@ -546,6 +544,9 @@ public class Scrap
     // checkLines();
   }
 
+  /** sharpen a point-line path 
+   * @param line   point-line path
+   */
   void sharpenPointLine( DrawingPointLinePath line ) 
   {
     synchronized( TDPath.mCommandsLock ) {
@@ -554,7 +555,10 @@ public class Scrap
     // checkLines();
   }
 
-  // @param decimation   log-decimation 
+  /** decimate a point-line path 
+   * @param line   point-line path
+   * @param decimation   log-decimation 
+   */
   void reducePointLine( DrawingPointLinePath line, int decimation ) 
   {
     if ( decimation <= 0 ) return;
@@ -573,6 +577,9 @@ public class Scrap
   }
 
 
+  /** redraw a point-line path more "rocky"
+   * @param line   point-line path
+   */
   void rockPointLine( DrawingPointLinePath line ) 
   {
     synchronized( TDPath.mSelectionLock ) {
@@ -588,6 +595,9 @@ public class Scrap
     // checkLines();
   }
 
+  /** close a point-line path
+   * @param line   point-line path
+   */
   void closePointLine( DrawingPointLinePath line )
   {
     synchronized( TDPath.mCommandsLock ) {
@@ -752,6 +762,9 @@ public class Scrap
     // return ret;
   }
 
+  /** append an erase command to the command stack
+   * @param cmd   erase command
+   */
   void addEraseCommand( EraseCommand cmd ) 
   { 
     synchronized( TDPath.mCommandsLock ) {
@@ -759,6 +772,10 @@ public class Scrap
     }
   }
 
+  /** @return the list of paths that are inside a given border
+   * @param border  given border
+   * @param remove  whether to drop the paths that are inside the border from this scrap
+   */
   List< DrawingPath > splitPlot( ArrayList< PointF > border, boolean remove ) 
   {
     ArrayList< DrawingPath > paths = new ArrayList<>();
@@ -1376,20 +1393,38 @@ public class Scrap
   }
 
 
+  /** find the line-point Q from Q1 forward to Q2 such that -TQ1*(P10 - Q) is positive, 
+   * where TQ1 is the "tangent" to the line at Q1,
+   * ie, the angle between the tangent to the line at Q1 and (P10-Q) is more than 90 degrees.
+   *
+   * @param lq1    first line-point to check
+   * @param lq2    last line-point
+   * @param lp10   external point
+   * @return the first line-point Q that makes an angle more than 90 degrees
+   */
   private LinePoint resetFirst( LinePoint lq1, LinePoint lq2, LinePoint lp10 )
   {
     LinePoint lq1n = lq1.mNext;
-    Point2D q1 = new Point2D( lq1.x - lq1n.x, lq1.y - lq1n.y );
+    Point2D q1 = new Point2D( lq1.x - lq1n.x, lq1.y - lq1n.y ); // -TQ1
     for ( ; lq1 != lq2; lq1=lq1.mNext ) {
       if ( q1.dot( lp10.sub( lq1 ) ) >= 0 ) break;
     }
     return lq1;
   }
 
+  /** find the line-point Q from Q2 back to Q1 such that TQ2*(P20 - Q) > 0, 
+   * where TQ2 is the "tangent" to the line at Q2,
+   * ie, the angle between the tangent to the line at Q2 and (P20-Q) is less than 90 degrees.
+   *
+   * @param lq2    first line-point to check
+   * @param lq1    last line-point
+   * @param lp20   external point
+   * @return the first line-point Q that makes an angle less than 90 degrees
+   */
   private LinePoint resetLast( LinePoint lq2, LinePoint lq1, LinePoint lp20 )
   {
     LinePoint lq2p = lq2.mPrev;
-    Point2D q2 = new Point2D( lq2.x - lq2p.x, lq2.y - lq2p.y );
+    Point2D q2 = new Point2D( lq2.x - lq2p.x, lq2.y - lq2p.y ); // +TQ2
     for ( ; lq2 != lq1; lq2=lq2.mPrev ) {
       if ( q2.dot( lp20.sub( lq2 ) ) >= 0 ) break;
     }
@@ -3335,7 +3370,7 @@ public class Scrap
 
   void resetMultiselection()
   {
-    // TDLog.v( "reset Multi Selection" );
+    // TDLog.v( "Scrap " + mScrapIdx + " reset multiselection" );
     mMultiselectionType  = -1;
     isMultiselection = false;
     synchronized( TDPath.mSelectionLock ) { mMultiselected.clear(); }
@@ -3343,6 +3378,7 @@ public class Scrap
 
   void startMultiselection()
   {
+    // TDLog.v( "Scrap " + mScrapIdx + " start multiselection" );
     // resetMultiselection();
     if ( isMultiselection ) return; // false;
     SelectionPoint sp = mSelected.mHotItem;
@@ -3393,6 +3429,7 @@ public class Scrap
         }
       }
       for ( DrawingPath path : mMultiselected ) mSelection.insertPath( path );
+      // note: multiselection is not reset
     }
   }
 
@@ -3440,6 +3477,29 @@ public class Scrap
         }
       }
     }
+  }
+
+  /** move the multiselection from a scrap to this scrap
+   * @param scrap   scrap with the multiselection to move
+   */
+  boolean moveMultiselection( Scrap scrap )
+  {
+    if ( scrap == null ) return false;
+    // TDLog.v("scrap " + mScrapIdx + " move from scrap " + scrap.mScrapIdx + " items " + scrap.mMultiselected.size() );
+    synchronized ( TDPath.mSelectionLock ) {
+      for ( DrawingPath path : scrap.mMultiselected ) scrap.mSelection.removePath( path );
+      synchronized( TDPath.mCommandsLock ) {
+        for ( DrawingPath path : scrap.mMultiselected ) {
+          scrap.mCurrentStack.remove( path );
+          this.mCurrentStack.add( path );
+          this.mSelection.insertPath( path );
+          path.mScrap = this.mScrapIdx;  // assign this scrap to the path
+        }
+      }
+      scrap.clearSelected();
+      // scrap.resetMultiselection();
+    }
+    return true; // clear saved scrap in command-manager
   }
   // end PATH_MULTISELECT ACTIONS ------------------------------------------------
 

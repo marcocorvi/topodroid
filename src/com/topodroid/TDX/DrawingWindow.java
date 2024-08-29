@@ -6489,6 +6489,28 @@ public class DrawingWindow extends ItemDrawer
           if ( ww > w ) w = ww;
         }
 
+	// if ( mDrawingSurface.scrapNumber() > 1 ) { // MOVE TO ANOTHER SCRAP
+        //   text = getString(R.string.popup_scrap_move);
+        //   myTextView3 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+        //     new View.OnClickListener( ) {
+        //       public void onClick(View v) {
+        //         // TODO select the scrap
+        //         Scrap scrap = getTargetScrap();
+        //         if ( scrap != null ) {
+        //           mDrawingSurface.moveMultiselection( scrap );
+        //           modified();
+        //         } else if ( scrap.getIndex() == mDrawingSurface.scrapIndex() ) {
+        //           TDLog.v("target scrap is current scrap");
+        //         } else {
+        //           TDLog.v("null target scrap");
+        //         }
+        //         dismissPopupEdit();
+        //       }
+        //     } );
+        //   ww = myTextView3.getPaint().measureText( text );
+        //   if ( ww > w ) w = ww;
+        // }
+
 	// CLEAR MULTISELECTION
         text = getString(R.string.popup_finish);
         myTextView8 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
@@ -6769,8 +6791,13 @@ public class DrawingWindow extends ItemDrawer
             myTextView8 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
             new View.OnClickListener( ) {
               public void onClick(View v) {
-                // TDLog.v( "start multi selection");
-                mDrawingSurface.startMultiselection();
+                if ( mDrawingSurface.moveMultiselection() ) {
+                  TDLog.v("moved multiselection");
+                  modified();
+                } else {
+                  // TDLog.v( "start multi selection");
+                  mDrawingSurface.startMultiselection();
+                }
                 dismissPopupEdit();
               }
             } );

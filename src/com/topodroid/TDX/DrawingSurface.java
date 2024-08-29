@@ -434,6 +434,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   void joinMultiselection( float dmin ) { commandManager.joinMultiselection( dmin ); }
   void deleteMultiselection() { commandManager.deleteMultiselection(); }
   void decimateMultiselection() { commandManager.decimateMultiselection(); }
+  boolean moveMultiselection( ) { return commandManager.moveMultiselection(); }
   // end PATH_MULTISELECTION
 
   /** sharpen a line, in the current manager

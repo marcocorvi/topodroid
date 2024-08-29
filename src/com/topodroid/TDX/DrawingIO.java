@@ -534,7 +534,15 @@ public class DrawingIO
     }
   }
 
-  // entry point to export data-stream
+  /** entry point to export data-stream
+   * @param manager   drawing commands manager
+   * @param type      plot type
+   * @param info      plot info
+   * @param dos       output data stream
+   * @param fullname  output full name
+   * @param proj_dir  direction, for projection profile 
+   * @param oblique   oblique angle [degrees] for oblique projection profile
+   */ 
   public static void exportDataStreamFile( DrawingCommandManager manager, int type, PlotInfo info, DataOutputStream dos, String fullname, int proj_dir, int oblique )
     throws IOException
   {
@@ -1192,7 +1200,15 @@ public class DrawingIO
     return true;
   }
 
-  // used by ParserPocketTopo
+  /** used by ParserPocketTopo
+   * @param type    plot type
+   * @param dos     output data stream
+   * @param info    plot info
+   * @param scrap_name output fullname
+   * @param proj_dir ...
+   * @param oblique  ...
+   * @param scrap   scrap index
+   */
   public static void exportDataStream( int type, DataOutputStream dos, PlotInfo info, String scrap_name, int proj_dir, int oblique,
                                 RectF bbox, List< DrawingPath > paths, int scrap )
   {
@@ -1324,6 +1340,7 @@ public class DrawingIO
           dos.writeInt( scrap.mScrapIdx );
 
           List< ICanvasCommand > cstack = scrap.mCurrentStack;
+          // TDLog.v("export scrap " + scrap.mScrapIdx + " items " + cstack.size() );
           synchronized( TDPath.mCommandsLock ) {
             for ( ICanvasCommand cmd : cstack ) {
               if ( cmd.commandType() != 0 ) continue;
