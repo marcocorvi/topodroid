@@ -6489,29 +6489,20 @@ public class DrawingWindow extends ItemDrawer
           if ( ww > w ) w = ww;
         }
 
-	// if ( mDrawingSurface.scrapNumber() > 1 ) { // MOVE TO ANOTHER SCRAP
-        //   text = getString(R.string.popup_scrap_move);
-        //   myTextView3 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
-        //     new View.OnClickListener( ) {
-        //       public void onClick(View v) {
-        //         // TODO select the scrap
-        //         Scrap scrap = getTargetScrap();
-        //         if ( scrap != null ) {
-        //           mDrawingSurface.moveMultiselection( scrap );
-        //           modified();
-        //         } else if ( scrap.getIndex() == mDrawingSurface.scrapIndex() ) {
-        //           TDLog.v("target scrap is current scrap");
-        //         } else {
-        //           TDLog.v("null target scrap");
-        //         }
-        //         dismissPopupEdit();
-        //       }
-        //     } );
-        //   ww = myTextView3.getPaint().measureText( text );
-        //   if ( ww > w ) w = ww;
-        // }
+	if ( mDrawingSurface.scrapNumber() > 1 ) { // STORE MULTISELECTION AND FINISH
+          text = getString(R.string.popup_store);
+          myTextView3 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
+            new View.OnClickListener( ) {
+              public void onClick(View v) {
+                mDrawingSurface.storeMultiselection();
+                dismissPopupEdit();
+              }
+            } );
+          ww = myTextView3.getPaint().measureText( text );
+          if ( ww > w ) w = ww;
+        }
 
-	// CLEAR MULTISELECTION
+	// CLEAR MULTISELECTION AND FINISH
         text = getString(R.string.popup_finish);
         myTextView8 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
           new View.OnClickListener( ) {
@@ -6786,13 +6777,16 @@ public class DrawingWindow extends ItemDrawer
         if ( TDLevel.overExpert && TDSetting.mPathMultiselect ) {
           if (    mHotItemType == DrawingPath.DRAWING_PATH_POINT
                || mHotItemType == DrawingPath.DRAWING_PATH_LINE 
-               || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
-            text = getString(R.string.popup_multiselect);
+               || mHotItemType == DrawingPath.DRAWING_PATH_AREA 
+               || mDrawingSurface.hasStoredMultiselection()
+              ) {
+            text = getString( mDrawingSurface.hasStoredMultiselection()?  R.string.popup_restore : R.string.popup_multiselect );
             myTextView8 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
             new View.OnClickListener( ) {
               public void onClick(View v) {
-                if ( mDrawingSurface.moveMultiselection() ) {
-                  TDLog.v("moved multiselection");
+                if ( mDrawingSurface.hasStoredMultiselection() ) {
+                  // TDLog.v("restore multiselection");
+                  mDrawingSurface.restoreMultiselection();
                   modified();
                 } else {
                   // TDLog.v( "start multi selection");
@@ -8536,7 +8530,7 @@ public class DrawingWindow extends ItemDrawer
       // } else {
         // APP_OUT_DIR
         // Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
-        // intent.setType( TDConst.mMimeType[ mExportIndex] );
+        // intent.setType( TDConst.getMimeType( mExportIndex ) );
         // intent.addCategory(Intent.CATEGORY_OPENABLE);
         // intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
         // // intent.putExtra( "exporttype", index ); // index is not returned to the app
@@ -9419,15 +9413,15 @@ public class DrawingWindow extends ItemDrawer
    */
   private void selectFromProvider( int index, int request, String mode ) // IMPORT
   {
-    if ( index < 0 || index >= TDConst.mMimeType.length ) {
+    if ( index < 0 || index >= TDConst.getMimeTypeLength() ) {
       TDLog.e("Bad import index " + index );
       TDToast.makeBad( String.format( getResources().getString( R.string.index_oob ), index ) );
       return;
     } 
     // TDLog.v( "DRAW selectFromProvider runs on " + TDLog.threadId() );
     Intent intent = new Intent( mode );
-    intent.setType( TDConst.mMimeType[ index ] );
-    // TDLog.v( "Import from provider. index " + index + " mime " + TDConst.mMimeType[ index ] );
+    intent.setType( TDConst.getMimeType( index ) );
+    // TDLog.v( "Import from provider. index " + index + " mime " + TDConst.getMimeType( index ) );
     intent.addCategory(Intent.CATEGORY_OPENABLE);
     if ( request == TDRequest.REQUEST_GET_EXPORT ) {
       intent.putExtra( Intent.EXTRA_TITLE, mFullName3 );

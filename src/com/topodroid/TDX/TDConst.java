@@ -62,7 +62,7 @@ public class TDConst
   public static final int SURVEY_FORMAT_SERIAL  = 36;
   // public static final int SURVEY_FORMAT_PNM     = 37; // NO_PNM
 
-  public static final String[] mMimeType = {
+  private static final String[] mMimeType = {
     "application/octet-stream", //  0 Therion
     "application/tlx",          //    unused
     "application/octet-stream", //    Compass
@@ -104,6 +104,18 @@ public class TDConst
     "test/plain",               // 36 serialized
     // "image/x-portable-pixmap",  // 37 NO_PNM
   };
+
+  /** @return the mime type given the type index
+   * @param index   type index
+   */
+  public static String getMimeType( int index )
+  {
+    if ( index < 0 || index >= mMimeType.length ) return "*/*";
+    if ( mMimeType[ index ] == null ) return "*/*"; // should it return null ?
+    return mMimeType[ index ];
+  }
+
+  public static int getMimeTypeLength() { return mMimeType.length; }
 
   // ======= IMPORT ======
   public static final String[] mSurveyImportTypes = { 

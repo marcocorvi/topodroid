@@ -426,15 +426,46 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   }
 
   // PATH_MULTISELECTION
+  /** @return true if a multiselection is going on
+   */ 
   boolean isMultiselection()  { return commandManager.isMultiselection(); }
+
+  /** @return the multiselection type (-1 none)
+   */
   int getMultiselectionType() { return commandManager.getMultiselectionType(); }
+
+  /** start the multiselection
+   */
   void startMultiselection()  { commandManager.startMultiselection(); }
 
+  /** clear the multiselection
+   */
   void resetMultiselection() { commandManager.resetMultiselection(); }
+
+  /** store the current multiselection
+   */
+  void storeMultiselection() { commandManager.storeMultiselection(); }
+
+  /** join the lines in the current multiselection
+   * @param dcim     maximum gap for join
+   */
   void joinMultiselection( float dmin ) { commandManager.joinMultiselection( dmin ); }
+
+  /** delete the items in the current multiselection
+   */
   void deleteMultiselection() { commandManager.deleteMultiselection(); }
+
+  /** decimate the lines in the current multiselection
+   */
   void decimateMultiselection() { commandManager.decimateMultiselection(); }
-  boolean moveMultiselection( ) { return commandManager.moveMultiselection(); }
+
+  /** restore the stored multiselection
+   */
+  void restoreMultiselection() { commandManager.restoreMultiselection(); }
+
+  /** @return true if there is a stored multiselection
+   */
+  boolean hasStoredMultiselection() { return commandManager.hasStoredMultiselection(); }
   // end PATH_MULTISELECTION
 
   /** sharpen a line, in the current manager
@@ -1034,12 +1065,21 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   // void shiftHotItem( float dx, float dy, float range ) { commandManager.shiftHotItem( dx, dy, range ); }
   void shiftHotItem( float dx, float dy ) { commandManager.shiftHotItem( dx, dy ); }
 
+  /** rotate the hot item 
+   * @param dy   amount of rotation [degrees]
+   */
   void rotateHotItem( float dy ) { commandManager.rotateHotItem( dy ); }
 
+  /** @return the next selected point
+   */
   SelectionPoint nextHotItem() { return commandManager.nextHotItem(); }
 
+  /** @return the previous selected point
+   */
   SelectionPoint prevHotItem() { return commandManager.prevHotItem(); }
 
+  /** clear the selection
+   */
   void clearSelected() { commandManager.syncClearSelected(); }
 
   void shiftDrawing( float x, float y ) { commandManager.shiftDrawing( x, y ); }

@@ -539,7 +539,8 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="popup_delete">Delete</string>
     <string name="popup_decimate">Decimate</string>
     <string name="popup_join">Join</string>
-    <string name="popup_scrap_move">Scrap-change</string>
+    <string name="popup_store">Store</string>
+    <string name="popup_restore">Restore</string>
 
     <string name="popup_erase_all">Erase all</string>
     <string name="popup_erase_point">Erase points</string>

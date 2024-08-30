@@ -237,6 +237,9 @@ public class DrawingCommandManager
     // TDLog.v("set current scrap by nr " + nr + " idx " + mCurrentScrap.mScrapIdx );
   }
 
+  /** set the current scrap by the index
+   * @param idx   index of the current scrap
+   */
   private void setCurrentScrapByIdx( int idx ) // force = false // TH2EDIT no force
   {
     // TDLog.v("set current scrap by idx " + idx + " current scrap idx " + ( (mCurrentScrap==null)? "undef." : mCurrentScrap.mScrapIdx ) );
@@ -261,12 +264,14 @@ public class DrawingCommandManager
   }
 
   /** change current scrap
+   * @param force  ...
    * @param k   advance step (in the list)
+   * @return the cuurent scrap index
    */
   int toggleScrapIndex( boolean force, int k ) // TH2EDIT no force
   { 
     if ( force || mMode < 3 ) { // TH2EDIT no force
-      if ( isMultiselection() ) {
+      if ( isMultiselection() ) { // implicit multiselection store
         mSavedScrap = mCurrentScrap;
         // TDLog.v("set saved scrap " + mSavedScrap.mScrapIdx );
       }
@@ -278,6 +283,7 @@ public class DrawingCommandManager
   }
 
   /** delete the current scrap
+   * @param force  ...
    * @return true if the scrap has been deleted
    */
   boolean deleteCurrentScrap( boolean force ) // TH2EDIT no force
@@ -295,10 +301,14 @@ public class DrawingCommandManager
     return false;
   }
   
+  /** get a new scrap index
+   * @param force  ...
+   * @return the new scrap index
+   */
   int newScrapIndex( boolean force )  // TH2EDIT no force
   { 
     if ( force || mMode < 3 ) { // TH2EDIT no force
-      if ( isMultiselection() ) {
+      if ( isMultiselection() ) { // implicit multiselection store
         mSavedScrap = mCurrentScrap;
         // TDLog.v("set saved scrap " + mSavedScrap.mScrapIdx );
       }
@@ -311,20 +321,26 @@ public class DrawingCommandManager
     return mCurrentScrap.mScrapIdx;
   }
 
-  // void setSavedScrap() { mSavedScrap = mCurrentScrap; }
-  // void resetSavedScrap() { mSavedScrap = null; }
-
   /** move multiselection from the saved scrap to the current scrap
-   * @return true if the multiuselection has been moved
+   * @return true if the multiselection has been moved (or self-moved)
    */
-  boolean moveMultiselection()
+  boolean restoreMultiselection()
   {
+    if ( mSavedScrap == null ) return false;
+    if ( mCurrentScrap == mSavedScrap ) {
+      mCurrentScrap.resetMultiselection();
+      return true;
+    }
     if ( mCurrentScrap.moveMultiselection( mSavedScrap ) ) {
       mSavedScrap = null;
       return true;
     }
     return false;
   }
+
+  /** @return true if there is a saved scrap
+   */
+  boolean hasStoredMultiselection() { return mSavedScrap != null; }
 
   /** add a new scrap with a specified index, and set it as the current scrap
    * @param idx   scrap index
@@ -394,13 +410,47 @@ public class DrawingCommandManager
 
   // ----------------------------------------------------------------
   // PATH_MULTISELECT
+
+  /** @return true if the current scrap has a multiselection
+   */
   boolean isMultiselection() { return mCurrentScrap.isMultiselection; }
+
+  /** @return the type of the multiselection of the current scrap (-1 if none)
+   */
   int getMultiselectionType() { return mCurrentScrap.getMultiselectionType(); }
-  void resetMultiselection() { mCurrentScrap.resetMultiselection(); }
+
+  /** clear the multiselction of the current scrap
+   */
+  void resetMultiselection() 
+  { 
+    mCurrentScrap.resetMultiselection();
+    mSavedScrap = null;
+  }
+
+  /** store the multiselction of the current scrap
+   * (for later restore in another scrap)
+   */
+  void storeMultiselection() 
+  { 
+    if ( mCurrentScrap.isMultiselection ) {
+      mSavedScrap = mCurrentScrap;
+    }
+  }
+
+  /** start the multiselection in the current scrap
+   */
   void startMultiselection() { mCurrentScrap.startMultiselection(); }
 
+  /** delete the items in the multiselction of the current scrap
+   */
   void deleteMultiselection() { mCurrentScrap.deleteMultiselection(); }
+
+  /** decimate the lines in the multiselction of the current scrap
+   */
   void decimateMultiselection() { mCurrentScrap.decimateMultiselection(); }
+
+  /** join the lines in the multiselction of the current scrap
+   */
   void joinMultiselection( float dmin ) { mCurrentScrap.joinMultiselection( dmin ); }
 
   // ----------------------------------------------------------------
@@ -411,8 +461,10 @@ public class DrawingCommandManager
   DrawingStationName getCurrentStationName( ) { return mCurrentStationName; }
 
   // ----------------------------------------------------------------
-  // used by DrawingDxf and DrawingSvg, and exportAsCsx
-  // return a copy of the drawing objects
+
+  /** @return a list (copy) of the drawing objects
+   * @note used by DrawingDxf and DrawingSvg, and exportAsCsx
+   */
   public List< DrawingPath > getCommands()
   { 
     ArrayList< DrawingPath > ret = new ArrayList<>();
@@ -423,11 +475,23 @@ public class DrawingCommandManager
   }
 
   // accessors used by DrawingDxf and DrawingSvg
+  /** @return the list of legs
+   */
   public List< DrawingPath >        getLegs()         { return mLegsStack;    } 
+
+  /** @return the list of splays
+   */
   public List< DrawingSplayPath >   getSplays()       { return mSplaysStack;  }
+
+  /** @return the list of station names
+   */
   public List< DrawingStationName > getStations()     { return mStations;     } 
+
   // List< DrawingFixedName >   getFixeds()       { return mFixeds;     } 
   // List< DrawingStationUser > getUserStations() { return mUserStations; }
+
+  /** @return the list of user stations
+   */
   public List< DrawingStationUser > getUserStations() 
   {
     ArrayList< DrawingStationUser > ret = new ArrayList<>();
@@ -437,6 +501,8 @@ public class DrawingCommandManager
     return ret;
   }
 
+  /** @return true if there are user stations
+   */
   public boolean hasUserStations() 
   {
     boolean ret = false;
@@ -447,8 +513,16 @@ public class DrawingCommandManager
   }
 
   // accessor for DrawingSvg
+  /** @return the 1-cell grid
+   */
   public List< DrawingPath > getGrid1()   { return mGridStack1; }
+
+  /** @return the 10-cell grid
+   */
   public List< DrawingPath > getGrid10()  { return mGridStack10; }
+
+  /** @return the 100-cell grid
+   */
   public List< DrawingPath > getGrid100() { return mGridStack100; }
 
   private int mSelectMode = Drawing.FILTER_ALL;
@@ -900,7 +974,10 @@ public class DrawingCommandManager
     return ret;
   }
 
-  /* Get the station at (x,y)
+  /** @return the station at the point (x,y)
+   * @param x    X coord of the point
+   * @param y    Y coord of the point
+   * @param size half-side of search square
    * Return the station inside the square centered at (x,y) of side 2*size
    */
   DrawingStationName getStationAt( float x, float y, float size ) // x,y canvas coords
@@ -913,6 +990,9 @@ public class DrawingCommandManager
     return null;
   }
 
+  /** @return a station name by the name
+   * @param name   name of the station
+   */
   DrawingStationName getStation( String name ) 
   {
     for ( DrawingStationName st : mStations ) {
@@ -2023,10 +2103,17 @@ public class DrawingCommandManager
   //
   int snapHotItemToNearestLine() { return mCurrentScrap.snapHotItemToNearestLine(); }
 
+  /** @return the hot item of the selection
+   */
   SelectionPoint hotItem() { return mCurrentScrap.hotItem(); }
 
+  /** @return true if there are selected points in the current scrap
+   */
   boolean hasSelected() { return mCurrentScrap.hasSelected(); }
 
+  /** rotate the hot item 
+   * @param dy   amount of rotation [degrees]
+   */
   void rotateHotItem( float dy ) { mCurrentScrap.rotateHotItem( dy ); }
 
   // void shiftHotItem( float dx, float dy, float range ) 

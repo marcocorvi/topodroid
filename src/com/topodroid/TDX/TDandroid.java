@@ -646,8 +646,7 @@ public class TDandroid
   public static Intent getOpenDocumentIntent( int index )
   {
     Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT ); // API_19
-    TDLog.v("mime type: " + TDConst.mMimeType[ index ] );
-    intent.setType( (index < 0)? "*/*" : TDConst.mMimeType[ index ] );
+    intent.setType(  TDConst.getMimeType( index ) );
     intent.addCategory(Intent.CATEGORY_OPENABLE);
     intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION); // API_19
     return intent;
@@ -659,7 +658,7 @@ public class TDandroid
   public static Intent getCreateDocumentIntent( int index )
   {
     Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT ); // API_19
-    intent.setType( (index < 0)? "*/*" : TDConst.mMimeType[ index ] );
+    intent.setType(  TDConst.getMimeType( index ) );
     intent.addCategory(Intent.CATEGORY_OPENABLE);
     intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION); // API_19
     return intent;

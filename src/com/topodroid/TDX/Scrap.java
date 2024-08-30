@@ -2621,8 +2621,13 @@ public class Scrap
 
   SelectionPoint hotItem() { return mSelected.mHotItem; }
 
+  /** @return true if there are selected points
+   */
   boolean hasSelected() { return mSelected.mPoints.size() > 0; }
 
+  /** rotate the selected hot item 
+   * @param dy   amount of rotation [degrees]
+   */
   void rotateHotItem( float dy )
   { 
     synchronized( TDPath.mSelectionLock ) {
@@ -3366,8 +3371,13 @@ public class Scrap
 
   // PATH MULTISELECT -----------------------------------------------
   // boolean isMultiselection() { return isMultiselection; }
+
+  /** @return the type of the multiselection (-1 if none)
+   */
   int getMultiselectionType() { return mMultiselectionType; }
 
+  /** clear the multiselction
+   */
   void resetMultiselection()
   {
     // TDLog.v( "Scrap " + mScrapIdx + " reset multiselection" );
@@ -3376,6 +3386,8 @@ public class Scrap
     synchronized( TDPath.mSelectionLock ) { mMultiselected.clear(); }
   }
 
+  /** start the multiselction
+   */
   void startMultiselection()
   {
     // TDLog.v( "Scrap " + mScrapIdx + " start multiselection" );
@@ -3394,6 +3406,9 @@ public class Scrap
     // return true;
   }
 
+  /** add an item to the multiselection
+   * @param path  item to add
+   */
   private void addMultiselection( DrawingPath path )
   {
     if ( path.mType == mMultiselectionType ) {
@@ -3402,6 +3417,8 @@ public class Scrap
     // TDLog.v( "add Multi Selection " + mMultiselectionType + " " + mMultiselected.size() );
   }
 
+  /** delete the items in the multiselction 
+   */
   void deleteMultiselection()
   {
     // if ( ! isMultiselection ) return;
@@ -3416,6 +3433,8 @@ public class Scrap
     }
   }
 
+  /** decimate the lines in the multiselction
+   */
   void decimateMultiselection()
   {
     // if ( ! isMultiselection ) return;
@@ -3433,6 +3452,9 @@ public class Scrap
     }
   }
 
+  /** join the lines in the multiselction
+   * @param dcim   maximum gap for join
+   */
   void joinMultiselection( float dmin )
   {
     // if ( ! isMultiselection ) return;
@@ -3535,6 +3557,10 @@ public class Scrap
     return null;
   }
 
+  /** shift the section drawing items (line or point)
+   * @param x   X shift
+   * @param y   Y shift
+   */
   void shiftXSections( float x, float y )
   {
     for ( ICanvasCommand cmd : mCurrentStack ) {

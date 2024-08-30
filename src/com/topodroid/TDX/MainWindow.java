@@ -1726,14 +1726,14 @@ public class MainWindow extends Activity
    */
   private void selectImportFromProvider( int index, ImportData data ) // IMPORT
   {
-    if ( index < 0 || index >= TDConst.mMimeType.length ) {
+    if ( index < 0 || index >= TDConst.getMimeTypeLength() ) {
       TDLog.e("Bad import index " + index );
       TDToast.makeBad( String.format( getResources().getString( R.string.index_oob ), index ) );
       return;
     } 
     // TDLog.v( "selectImportFromProvider runs on " + TDLog.threadId() );
     // Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT ); // API_19
-    // intent.setType( TDConst.mMimeType[ index ] );
+    // intent.setType( TDConst.getMimeType( index ) );
     // intent.addCategory(Intent.CATEGORY_OPENABLE);
     // intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION); // API_19
     Intent intent = TDandroid.getOpenDocumentIntent( index ); // 20230181 replace previous lines

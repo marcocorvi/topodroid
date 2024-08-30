@@ -490,7 +490,11 @@ public class DrawingPath extends RectF
 
   void affineTransformBy( float[] mm, Matrix m ) { }
 
-  // by default does not rotate (return false)
+  /** rotate the path
+   * @param dy   amount of rotation
+   * @return true if the item has rotated
+   * @note by default does not rotate (return false)
+   */
   boolean rotateBy( float dy ) { return false; }
 
   // from ICanvasCommand

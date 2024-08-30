@@ -265,7 +265,7 @@ public class DrawingPointPath extends DrawingPath
   }
 
   /** rotate the point orientation
-   * @param dt   rotation angle
+   * @param dt   rotation angle [degrees]
    * @return true if the point can be rotated
    */
   @Override

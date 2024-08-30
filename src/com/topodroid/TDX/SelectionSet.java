@@ -59,6 +59,9 @@ class SelectionSet
     return mHotItem;
   }
 
+  /** rotate the point of the hot item
+   * @param dy amount of rotation
+   */
   boolean rotateHotItem( float dy )
   {
     return ( mHotItem != null ) && mHotItem.rotateBy( dy );
