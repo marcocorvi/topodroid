@@ -120,6 +120,28 @@ public class DistoX310Protocol extends DistoXProtocol
     index += (int)(addr/BYTE_PER_DATA);
     return index;
   }
+  
+  boolean readX310memory_4byte( int addr )
+  {
+    mBuffer[0] = (byte) (MemoryOctet.BYTE_PACKET_REPLY);  // 0x38
+    mBuffer[1] = (byte) (addr & 0xff);
+    mBuffer[2] = (byte) ((addr >> 8) & 0xff);
+    try {
+      mOut.write(mBuffer, 0, 3);
+      // if ( TDSetting.mPacketLog ) logPacket3( 1L, mBuffer );
+      mIn.readFully(mBuffer, 0, 8);
+      // if ( TDSetting.mPacketLog ) logPacket( 0L );
+      // TDLog.v( "X310 read-memory[1]: " + String.format(" %02x", mBuffer[0] ) );
+    } catch (IOException e) {
+      TDLog.e("read memory() IO failed");
+      return false;
+    }
+    if (mBuffer[0] != (byte) (MemoryOctet.BYTE_PACKET_REPLY)) return false; // 0x38
+    int reply_addr = MemoryOctet.toInt(mBuffer[2], mBuffer[1]);
+    if (reply_addr != addr) return false;
+
+    return true;
+  }
 
   // memory layout
   // byte 0-7  first packet
@@ -147,97 +169,54 @@ public class DistoX310Protocol extends DistoXProtocol
     while ( start < end ) {
       MemoryOctet result1 = new MemoryOctet( start );
       MemoryOctet result2 = new MemoryOctet( start ); // vector data
-      // read only bytes 0-7 and 16-17
-      int k = 0;
+
       int addr = index2addrX310( start );
-      int end_addr = addr + BYTE_PER_DATA;
       // TDLog.v( start + " addr " + addr + " end " + end_addr );
-      for ( ; addr < end_addr && k < 8; addr += 4, k+=4 ) {
-        buffer[0] = (byte)( MemoryOctet.BYTE_PACKET_REPLY );  // 0x38
-        buffer[1] = (byte)( addr & 0xff );
-        buffer[2] = (byte)( (addr>>8) & 0xff );
-        try {
-          mOut.write( buffer, 0, 3 );
-          // if ( TDSetting.mPacketLog ) logPacket3( 1L, buffer );
+      if ( ! readX310memory_4byte( addr )) break;
+      result1.data[k  ] = buffer[3];
+      result.data[0] &= (byte) 0x7f; // ignore sequence bit HB
+      result1.data[k+1] = buffer[4];
+      result1.data[k+2] = buffer[5];
+      result1.data[k+3] = buffer[6];
 
-          mIn.readFully( buffer, 0, 8 );
-          // if ( TDSetting.mPacketLog ) logPacket( 0L );
-          // TDLog.v( "X310 read-memory[1]: " + String.format(" %02x", buffer[0] ) );
-        } catch ( IOException e ) {
-          TDLog.e( "read memory() IO failed" );
-          break;
-        }
-        if ( buffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) ) break; // 0x38
-        int reply_addr = MemoryOctet.toInt( buffer[2], buffer[1]);
-        if ( reply_addr != addr ) break;
-        // for (int i=3; i<7; ++i) result1.data[k+i-3] = buffer[i];
-        result1.data[k  ] = buffer[3];
-        result1.data[k+1] = buffer[4];
-        result1.data[k+2] = buffer[5];
-        result1.data[k+3] = buffer[6];
-      }
-      // vector packet - need only the first byte - M packet (?)
-      k = 0;
-      addr = index2addrX310( start ) + 8;
-      end_addr = addr + BYTE_PER_DATA;
-      for ( ; addr < end_addr && k < 8; addr += 4, k+=4 ) {
-        buffer[0] = (byte)( MemoryOctet.BYTE_PACKET_REPLY ); // 0x38
-        buffer[1] = (byte)( addr & 0xff );
-        buffer[2] = (byte)( (addr>>8) & 0xff );
-        try {
-          mOut.write( buffer, 0, 3 );
-          // if ( TDSetting.mPacketLog ) logPacket3( 1L, buffer );
+      addr = index2addrX310( start ) + 4;
+      if ( ! readX310memory_4byte( addr )) break;
+      result.data[4] = mBuffer[3];
+      result.data[5] = mBuffer[4];
+      result.data[6] = mBuffer[5];
+      result.data[7] = mBuffer[6];
+      
+      addr = index2addrX310( start ) + 8; // second packet HB
+      if ( ! readX310memory_4byte( addr )) break;
+      result2.data[0] = mBuffer[3];
+      result2.data[0] &= (byte) 0x7f; // ignore sequence bit HB
+      result2.data[1] = mBuffer[4];
+      result2.data[2] = mBuffer[5];
+      result2.data[3] = mBuffer[6];
 
-          mIn.readFully( buffer, 0, 8 );
-          // if ( TDSetting.mPacketLog ) logPacket( 0L );
-          // TDLog.v( "X310 read-memory[2]: " + String.format(" %02x", buffer[0] ) );
-        } catch ( IOException e ) {
-          TDLog.e( "read memory() IO failed" );
-          break;
-        }
-        if ( buffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) ) break; // 0x38
-        int reply_addr = MemoryOctet.toInt( buffer[2], buffer[1]);
-        if ( reply_addr != addr ) break;
-        // for (int i=3; i<7; ++i) result2.data[k+i-3] = buffer[i];
-        result2.data[k  ] = buffer[3];
-        result2.data[k+1] = buffer[4];
-        result2.data[k+2] = buffer[5];
-        result2.data[k+3] = buffer[6];
-        if ( k == 0 ) { // first byte
-          if ( buffer[0] == (byte)( MemoryOctet.BYTE_PACKET_REPLY ) && addr == MemoryOctet.toInt( buffer[2], buffer[1]) ) { // 0x38
-            if ( ( buffer[3] & MemoryOctet.BIT_BACKSIGHT) == MemoryOctet.BIT_BACKSIGHT ) {
-              result1.data[0] |= MemoryOctet.BIT_BACKSIGHT2;
-            }
-          }
+      if ( mBuffer[0] == (byte)( MemoryOctet.BYTE_PACKET_REPLY ) && addr == MemoryOctet.toInt( mBuffer[2], mBuffer[1]) ) { // 0x38
+        if ( ( mBuffer[3] & MemoryOctet.BIT_BACKSIGHT) == MemoryOctet.BIT_BACKSIGHT ) {
+          result.data[0] |= MemoryOctet.BIT_BACKSIGHT2; 
         }
       }
+      
+      addr = index2addrX310( start ) + 12; // second packet HB
+      if ( ! readX310memory_4byte( addr )) break;
+      result2.data[4] = mBuffer[3];
+      result2.data[5] = mBuffer[4];
+      result2.data[6] = mBuffer[5];
+      result2.data[7] = mBuffer[6];
 
-      if ( k == 8 ) {
-        addr = index2addrX310( start ) + 16;
-        buffer[0] = (byte)( MemoryOctet.BYTE_PACKET_REPLY ); // 0x38
-        buffer[1] = (byte)( addr & 0xff );
-        buffer[2] = (byte)( (addr>>8) & 0xff );
-        try {
-          mOut.write( buffer, 0, 3 );
-          // if ( TDSetting.mPacketLog ) logPacket3( 1L, buffer );
+      addr = index2addrX310( start ) + 16; // Hot flag bytes
+      if ( ! readX310memory_4byte( addr )) break;
 
-          mIn.readFully( buffer, 0, 8 );
-          // if ( TDSetting.mPacketLog ) logPacket( 0L );
-          // TDLog.v( "X310 read-memory[3]: " + String.format(" %02x", buffer[0] ) );
-        } catch ( IOException e ) {
-          TDLog.e( "read memory() IO failed" );
-          break;
-        }
-        if ( buffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) ) break; // 0x38
-        if ( buffer[3] == (byte)( 0xff ) ) result1.data[0] |= (byte)( 0x80 ); 
-        data.add( result1 );
-        if ( buffer[4] == (byte)( 0xff ) ) result2.data[0] |= (byte)( 0x80 ); 
-        data.add( result2 );
+      if ( buffer[3] == (byte)( 0xff ) ) result1.data[0] |= (byte)( 0x80 ); 
+      data.add( result1 );
+      if ( buffer[4] == (byte)( 0xff ) ) result2.data[0] |= (byte)( 0x80 ); 
+      data.add( result2 );
         // TDLog.v( "X310 memory " + result2.toString() + " " + buffer[3] );
-        ++ cnt;
-      } else {
-        break;
-      }
+      ++ cnt;
+
       if ( dialog != null ) {
         int k1 = start;
         handler.post( new Runnable() {
