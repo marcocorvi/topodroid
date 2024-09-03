@@ -961,12 +961,13 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public int readXBLEMemory( String address, int start, int end, ArrayList< MemoryOctet > data, IMemoryDialog dialog )
   { 
-    TDLog.t("XBLE read XBLE memory ...");
+    TDLog.Error("XBLE read XBLE memory ...");
     if ( ! tryConnectDevice( address, null, 0 ) ) return -1;
     Handler handler = new Handler( Looper.getMainLooper() );
     int cnt = 0; // number of memory location that have been read
     for ( int k = start; k < end; ++k ) {
       MemoryOctet result = new MemoryOctet( k );
+      MemoryOctet result2 = new MemoryOctet( k ); // vector data
       int addr = index2addrXBLE( k );
       // XBLE can read memory in one shot
       byte[] res_buf = readMemory( addr, BYTE_PER_OCTET );
@@ -977,6 +978,26 @@ public class DistoXBLEComm extends TopoDroidComm
         if ( LOG ) TDLog.v("XBLE read memory - index " + k );
         System.arraycopy( res_buf, 0, result.data, 0, BYTE_PER_OCTET );
         data.add( result );
+        ++ cnt;
+        if ( dialog != null ) {
+          int k1 = k;
+          handler.post( new Runnable() {
+            public void run() {
+              dialog.setIndex( k1 );
+            }
+          } );
+        }
+      }
+      addr = index2addrXBLE( k ) + 8;
+      // ignore sequence bit ? Hot flag bytes ? HB
+      res_buf = readMemory( addr, BYTE_PER_OCTET );
+      if ( res_buf == null || res_buf.length != BYTE_PER_OCTET ) {
+        if ( LOG ) TDLog.v("XBLE fail read memory - index " + k );
+        break;
+      } else {
+        if ( LOG ) TDLog.v("XBLE read memory - index " + k );
+        System.arraycopy( res_buf, 0, result2.data, 0, BYTE_PER_OCTET );
+        data.add( result2 );
         ++ cnt;
         if ( dialog != null ) {
           int k1 = k;
