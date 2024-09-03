@@ -173,11 +173,11 @@ public class DistoX310Protocol extends DistoXProtocol
       int addr = index2addrX310( start );
       // TDLog.v( start + " addr " + addr + " end " + end_addr );
       if ( ! readX310memory_4byte( addr )) break;
-      result1.data[k  ] = buffer[3];
+      result.data[0] = mBuffer[3];
       result.data[0] &= (byte) 0x7f; // ignore sequence bit HB
-      result1.data[k+1] = buffer[4];
-      result1.data[k+2] = buffer[5];
-      result1.data[k+3] = buffer[6];
+      result.data[1] = mBuffer[4];
+      result.data[2] = mBuffer[5];
+      result.data[3] = mBuffer[6];
 
       addr = index2addrX310( start ) + 4;
       if ( ! readX310memory_4byte( addr )) break;
