@@ -961,7 +961,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public int readXBLEMemory( String address, int start, int end, ArrayList< MemoryOctet > data, IMemoryDialog dialog )
   { 
-    TDLog.Error("XBLE read XBLE memory ...");
+    TDLog.t("XBLE read XBLE memory ...");
     if ( ! tryConnectDevice( address, null, 0 ) ) return -1;
     Handler handler = new Handler( Looper.getMainLooper() );
     int cnt = 0; // number of memory location that have been read
