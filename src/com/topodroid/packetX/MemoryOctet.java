@@ -15,6 +15,7 @@ import java.io.StringWriter;
 import java.io.PrintWriter;
 
 import java.util.Locale;
+import com.topodroid.utils.TDUtil;
 
 public class MemoryOctet
 {
@@ -124,27 +125,30 @@ public class MemoryOctet
           double dd = toDistance( data[0], data[1], data[2] );
           double bb = toAzimuth( data[3], data[4] );
           double cc = toClino( data[5], data[6] );
+          double rr = toAzimuth( (byte) 0, data[7] ); // rotate HB
           if ( (data[0] & BIT_BACKSIGHT2) == BIT_BACKSIGHT2 ) {
-            pw.format(Locale.US, "%4d %c %.2f %.1f %.1f", index, hot? 'B' : 'b', dd, bb, cc );
+            pw.format(Locale.US, "%4d %c %.2f %.1f %.1f %.1f", index, hot? 'B' : 'b', dd, bb, cc, rr );
           } else {
-            pw.format(Locale.US, "%4d %c %.2f %.1f %.1f", index, hot? 'D' : 'd', dd, bb, cc );
+            pw.format(Locale.US, "%4d %c %.2f %.1f %.1f %.1f", index, hot? 'D' : 'd', dd, bb, cc, rr );
           }
           break;
         case 0x02:
         case 0x03:
-          // long X = toInt( data[2], data[1] );
-          // long Y = toInt( data[4], data[3] );
-          // long Z = toInt( data[6], data[5] );
-          // if ( X > TDUtil.ZERO ) X = X - TDUtil.NEG;
-          // if ( Y > TDUtil.ZERO ) Y = Y - TDUtil.NEG;
-          // if ( Z > TDUtil.ZERO ) Z = Z - TDUtil.NEG;
+          long X = toInt( data[2], data[1] );
+          long Y = toInt( data[4], data[3] );
+          long Z = toInt( data[6], data[5] );
+          int n  = toInt( data[7] ); // cal number HB
+          if ( X > TDUtil.ZERO ) X = X - TDUtil.NEG;
+          if ( Y > TDUtil.ZERO ) Y = Y - TDUtil.NEG;
+          if ( Z > TDUtil.ZERO ) Z = Z - TDUtil.NEG;
           if ( type == 0x02 ) {
-            pw.format("%4d %c %02x %02x %02x %02x %02x %02x", index, hot? 'G' : 'g',
-               data[1], data[2], data[3], data[4], data[5], data[6] );
+            pw.format("%4d %c %6d %6d %6d %3d", index, hot? 'G' : 'g', X, Y, Z, n ); // HB
+            // pw.format("%4d %c %02x %02x %02x %02x %02x %02x", index, hot? 'G' : 'g',
+            //    data[1], data[2], data[3], data[4], data[5], data[6] );
           } else {
-            // pw.format("%4d %c %x %x %x", index, hot? 'M' : 'm', X, Y, Z );
-            pw.format("%4d %c %02x %02x %02x %02x %02x %02x", index, hot? 'M' : 'm',
-               data[1], data[2], data[3], data[4], data[5], data[6] );
+            pw.format("%4d %c %6d %6d %6d %3d", index, hot? 'M' : 'm', X, Y, Z, n ); // HB
+            // pw.format("%4d %c %02x %02x %02x %02x %02x %02x", index, hot? 'M' : 'm',
+            //   data[1], data[2], data[3], data[4], data[5], data[6] );
           }
           break;
         case 0x04:
