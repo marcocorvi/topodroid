@@ -210,7 +210,7 @@ public class DistoX310Protocol extends DistoXProtocol
       addr = index2addrX310( start ) + 16; // Hot flag bytes
       if ( ! readX310memory_4byte( addr )) break;
 
-      if ( buffer[3] == (byte)( 0xff ) ) result1.data[0] |= (byte)( 0x80 ); 
+      if ( buffer[3] == (byte)( 0xff ) ) result.data[0] |= (byte)( 0x80 ); 
       data.add( result );
       if ( buffer[4] == (byte)( 0xff ) ) result2.data[0] |= (byte)( 0x80 ); 
       data.add( result2 );
