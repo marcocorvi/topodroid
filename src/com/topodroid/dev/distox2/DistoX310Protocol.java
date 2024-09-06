@@ -167,7 +167,7 @@ public class DistoX310Protocol extends DistoXProtocol
     int start0 = start;
     Handler handler = new Handler( Looper.getMainLooper() );
     while ( start < end ) {
-      MemoryOctet result1 = new MemoryOctet( start );
+      MemoryOctet result = new MemoryOctet( start );
       MemoryOctet result2 = new MemoryOctet( start ); // vector data
 
       int addr = index2addrX310( start );
@@ -211,7 +211,7 @@ public class DistoX310Protocol extends DistoXProtocol
       if ( ! readX310memory_4byte( addr )) break;
 
       if ( buffer[3] == (byte)( 0xff ) ) result1.data[0] |= (byte)( 0x80 ); 
-      data.add( result1 );
+      data.add( result );
       if ( buffer[4] == (byte)( 0xff ) ) result2.data[0] |= (byte)( 0x80 ); 
       data.add( result2 );
         // TDLog.v( "X310 memory " + result2.toString() + " " + buffer[3] );
