@@ -11,6 +11,8 @@
  */
 package com.topodroid.packetX;
 
+import com.topodroid.prefs.TDSetting;
+
 import java.io.StringWriter;
 import java.io.PrintWriter;
 
@@ -142,13 +144,19 @@ public class MemoryOctet
           if ( Y > TDUtil.ZERO ) Y = Y - TDUtil.NEG;
           if ( Z > TDUtil.ZERO ) Z = Z - TDUtil.NEG;
           if ( type == 0x02 ) {
-            pw.format("%4d %c %6d %6d %6d %3d", index, hot? 'G' : 'g', X, Y, Z, n ); // HB
-            // pw.format("%4d %c %02x %02x %02x %02x %02x %02x", index, hot? 'G' : 'g',
-            //    data[1], data[2], data[3], data[4], data[5], data[6] );
+            if ( TDSetting.mRawCData > 0 ) {
+              pw.format("%4d %c %02x %02x %02x %02x %02x %02x %3d", index, hot? 'G' : 'g',
+                data[1], data[2], data[3], data[4], data[5], data[6], n );
+            } else {
+              pw.format("%4d %c %6d %6d %6d %3d", index, hot? 'G' : 'g', X, Y, Z, n ); // HB
+            }
           } else {
-            pw.format("%4d %c %6d %6d %6d %3d", index, hot? 'M' : 'm', X, Y, Z, n ); // HB
-            // pw.format("%4d %c %02x %02x %02x %02x %02x %02x", index, hot? 'M' : 'm',
-            //   data[1], data[2], data[3], data[4], data[5], data[6] );
+            if ( TDSetting.mRawCData > 0 ) {
+              pw.format("%4d %c %02x %02x %02x %02x %02x %02x %3d", index, hot? 'M' : 'm',
+                data[1], data[2], data[3], data[4], data[5], data[6], n );
+            } else {
+              pw.format("%4d %c %6d %6d %6d %3d", index, hot? 'M' : 'm', X, Y, Z, n ); // HB
+            }
           }
           break;
         case 0x04:
