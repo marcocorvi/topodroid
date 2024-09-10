@@ -157,10 +157,13 @@ class ParserTherion extends ImportParser
   private void readFile( InputStreamReader isr, String filename, String basepath, ParserTherionState state, boolean therionPath ) throws ParserException
   {
     // TDLog.v("Parser TH file " + filename + " base " + basepath );
-    String path = basepath;   // survey pathname(s)
-    int ks = 0;               // survey index
-    int ks_max = 20;
-    int[] survey_pos = new int[ks_max]; // current survey pos in the pathname
+
+    // StringBuilder path; // path = basepath;   // survey pathname(s)
+    // int ks = 0;               // survey index
+    // int ks_max = 20;
+    // int[] survey_pos = new int[ks_max]; // current survey pos in the pathname
+    // if (basepath != null) { path = new StringBuilder(); } else { path = new StringBuilder( basepath ); }
+    TherionPath path = new TherionPath( basepath );
 
     int jFrom    = 0;
     int jTo      = 1;
@@ -172,21 +175,22 @@ class ParserTherion extends ImportParser
     int jUp    = -1;
     int jDown  = -1;
 
+
     Pattern pattern = Pattern.compile( "\\s+" );
     StringBuffer team = new StringBuffer();
-    String surveyPath = therionPath? path : null;
+    String surveyPath = therionPath? path.toString() : null;
 
     try {
       String dirname = "./";
       int i = filename.lastIndexOf('/');
       if ( i > 0 ) dirname = filename.substring(0, i+1);
       // System.out.println("readFile dir " + dirname + " filename " + filename );
-      // TDLog.v( "import read Therion file <" + filename + ">" );
+      TDLog.v( "import read Therion file <" + filename + ">" );
 
       BufferedReader br = TDio.getBufferedReader( isr, filename );
       String line = nextLine( br );
       while ( line != null ) {
-        // TDLog.v( "Parser TH " + state.in_survey + " " + state.in_centerline + " " + state.in_data + " : " + line );
+        // TDLog.v( "Parser TH " + mLineCnt + " (" + state.in_survey + " " + state.in_centerline + " " + state.in_data + "): " + line );
         line = line.trim();
         int pos = line.indexOf( '#' );
         if ( pos >= 0 ) {
@@ -272,16 +276,19 @@ class ParserTherion extends ImportParser
               // TDLog.v("Warning: therion ignored " + line);
 
             } else if ( cmd.equals("survey") ) {
-              survey_pos[ks] = path.length(); // set current survey pos in pathname
-              path = path + "." + vals[1];    // add survey name to path
-              ++ks;
-	      if ( ks >= ks_max ) {
-		    ks_max += 10;
-		    int[] tmp = new int[ks_max];
-		    // for ( int k=0; k<ks; ++k ) tmp[k] = survey_pos[k];
-		    System.arraycopy( survey_pos, 0, tmp, 0, ks );
-		    survey_pos = tmp;
-	      }
+              path.appendSurvey( vals[1] );
+              // survey_pos[ks] = path.length(); // set current survey pos in pathname
+              // TDLog.v("Parser TH survey (" + ks + " " + survey_pos[ks] + "): " + path.toString() + " <" + vals[1] + ">" );
+              // // path = path + "." + vals[1];    // add survey name to path
+              // path.append( "." ).append( vals[1] );
+              // ++ks;
+	      // if ( ks >= ks_max ) {
+	      //       ks_max += 10;
+	      //       int[] tmp = new int[ks_max];
+	      //       // for ( int k=0; k<ks; ++k ) tmp[k] = survey_pos[k];
+	      //       System.arraycopy( survey_pos, 0, tmp, 0, ks );
+	      //       survey_pos = tmp;
+	      // }
               // pushState( state );
               state = new ParserTherionState( state );
               state.mSurveyLevel ++;
@@ -552,13 +559,13 @@ class ParserTherion extends ImportParser
                   int idx = vals[1].indexOf('@');
                   if ( idx > 0 ) {
                     if ( therionPath ) {
-                      from = vals[1].substring( 0, idx ) + "@" + path + "." + vals[1].substring(idx+1);
+                      from = vals[1].substring( 0, idx ) + "@" + path.toString() + "." + vals[1].substring(idx+1);
                     } else {
                       from = vals[1].substring( 0, idx );
                     }
                   } else {
                     if ( therionPath ) {
-                      from = vals[1] + "@" + path;
+                      from = vals[1] + "@" + path.toString();
                     } else {
                       from = vals[1];
                     }
@@ -567,13 +574,13 @@ class ParserTherion extends ImportParser
                     idx = vals[j].indexOf('@');
                     if ( idx > 0 ) {
                       if ( therionPath ) {
-                        to = vals[j].substring( 0, idx ) + "@" + path + "." + vals[j].substring(idx+1);
+                        to = vals[j].substring( 0, idx ) + "@" + path.toString() + "." + vals[j].substring(idx+1);
                       } else {
                         to = vals[j].substring( 0, idx );
                       }
                     } else {
                       if ( therionPath ) {
-                        to = vals[j] + "@" + path;
+                        to = vals[j] + "@" + path.toString();
                       } else {
                         to = vals[j];
                       }
@@ -726,7 +733,7 @@ class ParserTherion extends ImportParser
                     // TODO add shot
                     if ( to.equals("-") || to.equals(".") ) { // splay shot
                       if ( therionPath ) {
-                        from = from + "@" + path;
+                        from = from + "@" + path.toString();
                       }
                       // FIXME splays
                       shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, TDString.EMPTY,
@@ -734,8 +741,8 @@ class ParserTherion extends ImportParser
                                             state.mExtend, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
                     } else {
                       if ( therionPath ) {
-                        from = from + "@" + path;
-                        to   = to + "@" + path;
+                        from = from + "@" + path.toString();
+                        to   = to + "@" + path.toString();
                       }
                       // TDLog.v( "Parser TH add shot " + from + " -- " + to);
                       shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, state.mPrefix + to + state.mSuffix,
@@ -755,17 +762,19 @@ class ParserTherion extends ImportParser
               state.in_centerline = true;
               state.in_data = false;
             } else if ( cmd.equals("endsurvey") ) {
-              // TDLog.v("Therion end survey");
               // state = popState();
               if ( state.mParent != null ) state = state.mParent;
-	      if ( ks > 0 ) {
-                --ks;
-              } else {
-                TDLog.e("Parser Therion: endsurvey out of survey");
-	      }
-              int k_pos = survey_pos[ks];
-              path = ( k_pos > 0 )? path.substring(k_pos) : ""; // return to previous survey_pos in path
-              state.in_survey = ( ks > 0 );
+	      // if ( ks > 0 ) {
+              //   --ks;
+              // } else {
+              //   TDLog.e("Parser Therion: endsurvey out of survey");
+	      // }
+              // int k_pos = survey_pos[ks];
+              // TDLog.v("Parser TH: end survey (" + k_pos + " " + ks + "): " + path.toString() );
+              // // path = ( k_pos > 0 )? path.substring(k_pos) : ""; // return to previous survey_pos in path
+              // if ( k_pos > 0 ) path.setLength( k_pos );
+              // state.in_survey = ( ks > 0 );
+              state.in_survey = path.dropSurvey();
             }
           }
         }
