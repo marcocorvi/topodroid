@@ -220,7 +220,7 @@ public class TopoDroidComm
   {
     if ( res == DataType.PACKET_DATA ) {
       ++mNrReadPackets; // FIXME NON_ATOMIC_ON_VOLATILE incrementNrPacketsRead();
-      // TDLog.v( "TD comm: packet DATA " + mNrReadPackets );
+      TDLog.v( "TD comm: packet DATA " + mNrReadPackets );
       double d = mProtocol.mDistance;
       double b = mProtocol.mBearing;
       double c = mProtocol.mClino;
@@ -305,7 +305,7 @@ public class TopoDroidComm
       setHasG( false );
       
     } else if ( res == DataType.PACKET_REPLY ) {
-      // TDLog.v( "TD comm: packet REPLY");
+      TDLog.v( "TD comm: packet REPLY");
       // TODO handle packet reply
       //
       // byte[] addr = mProtocol.getAddress();
@@ -332,7 +332,7 @@ public class TopoDroidComm
     } else if ( res == DataType.PACKET_VECTOR ) {
       // vector packet do count
       ++mNrReadPackets; // FIXME NON_ATOMIC_ON_VOLATILE
-      // TDLog.v( "TD comm: packet VECTOR " + mNrReadPackets );
+      TDLog.v( "TD comm: packet VECTOR " + mNrReadPackets );
       double acc  = mProtocol.mAcceleration;
       double mag  = mProtocol.mMagnetic;
       double dip  = mProtocol.mDip;

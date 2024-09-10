@@ -339,7 +339,7 @@ public class TDPrefKey
     "DISTOX_HEAD_TAIL",       // 2 // whether to read head-tail to get the number of packets to download
     "DISTOX_SOCKET_TYPE",          // socket type
     // "DISTOX_COMM_RETRY",        // number of socket connection attempts
-    "DISTOX_Z6_WORKAROUND",   // 4 // whether to enable Z6 workaround
+    // "DISTOX_Z6_WORKAROUND",   // 4 // whether to enable Z6 workaround
     "DISTOX_AUTO_PAIR",       // 5 // whether to auto-pair the discovered DistoX
     "DISTOX_CONNECT_FEEDBACK", // 6
     // "DISTOX_SOCKET_DELAY",         // delay before a socket-connection attempt
@@ -356,7 +356,7 @@ public class TDPrefKey
     R.string.pref_head_tail_title,
     R.string.pref_sock_type_title,
     // R.string.pref_comm_retry_title,
-    R.string.pref_z6_workaround_title,
+    // R.string.pref_z6_workaround_title,
     R.string.pref_auto_pair_title,
     R.string.pref_connect_feedback_title,
     // R.string.pref_socket_delay_title,
@@ -373,7 +373,7 @@ public class TDPrefKey
     R.string.pref_head_tail_summary,
     R.string.pref_sock_type_summary,
     // R.string.pref_comm_retry_summary,
-    R.string.pref_z6_workaround_summary,
+    // R.string.pref_z6_workaround_summary,
     R.string.pref_auto_pair_summary,
     R.string.pref_connect_feedback_summary,
     // R.string.pref_socket_delay_summary,
@@ -390,7 +390,7 @@ public class TDPrefKey
     FALSE,
     TDString.ONE, // SOCK_TYPE: 1 = insecure, 0 = default (see TDSetting.java)
     // TDString.ONE,
-    TRUE,
+    // TRUE,
     FALSE,
     TDString.ZERO,
     // TDString.ZERO,

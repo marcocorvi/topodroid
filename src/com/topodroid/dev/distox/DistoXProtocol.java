@@ -146,7 +146,7 @@ public class DistoXProtocol extends TopoDroidProtocol
     final IOException[] maybeException = { null };
     final Thread reader = new Thread() {
       public void run() {
-        // TDLog.Log( TDLog.LOG_PROTO, "reader thread run " + dataRead[0] + "/" + toRead[0] );
+        TDLog.v( "get-available reader thread run " + dataRead[0] + "/" + toRead[0] );
         byte[] buffer = new byte[8];
         try {
           // synchronized( dataRead ) 
@@ -169,7 +169,7 @@ public class DistoXProtocol extends TopoDroidProtocol
     reader.start();
 
     for ( int k=0; k<mMaxTimeout; ++k) {
-      // TDLog.v( "interrupt loop " + k + " " + dataRead[0] + "/" + toRead[0] );
+      TDLog.v( "DistoX get available - interrupt loop " + k + " " + dataRead[0] + "/" + toRead[0] );
       try {
         reader.join( timeout );
       } catch ( InterruptedException e ) { TDLog.v( "reader join-1 interrupted"); }
@@ -181,14 +181,15 @@ public class DistoXProtocol extends TopoDroidProtocol
             // synchronized ( dataRead ) 
             {
               if ( dataRead[0] > 0 && toRead[0] > 0 ) { // FIXME
-                try { wait( 100 ); } catch ( InterruptedException e ) { TDLog.e("Interrupted wait"); }
+                TDLog.v( "interruptor running ... data: read " + dataRead[0] + " to read " + toRead[0] );
+                try { wait( 100 ); } catch ( InterruptedException e ) { TDLog.e("Interruptor wait has been interrupted"); }
               } else {
                 if ( reader.isAlive() ) reader.interrupt(); 
                 break;
               }
             }
           }
-          // TDLog.v( "interruptor done " + dataRead[0] );
+          TDLog.v( "interruptor done - data: read " + dataRead[0] );
         } };
         interruptor.start(); // TODO catch ( OutOfMemoryError e ) { }
 
@@ -236,7 +237,7 @@ public class DistoXProtocol extends TopoDroidProtocol
           }
         }
       }
-      // TDLog.v( "DistoX proto: read packet available " + available );
+      TDLog.v( "DistoX proto: read packet available " + available );
       // if ( available > 0 ) 
       if ( available >= min_available ) {
         byte[] buffer = new byte[8];
@@ -248,7 +249,7 @@ public class DistoXProtocol extends TopoDroidProtocol
 
         // DistoX packets have a sequence bit that flips between 0 and 1
         byte seq  = (byte)(buffer[0] & 0x80); 
-        // TDLog.v( "VD read packet seq bit " + String.format("%02x %02x %02x", buffer[0], seq, mSeqBit ) );
+        TDLog.v( "DistoX proto: read packet seq bit " + String.format("%02x %02x %02x", buffer[0], seq, mSeqBit ) );
         boolean ok = ( seq != mSeqBit );
         mSeqBit = seq;
         // if ( (buffer[0] & 0x0f) != 0 ) // ack every packet

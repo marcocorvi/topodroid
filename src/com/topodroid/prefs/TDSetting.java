@@ -406,7 +406,7 @@ public class TDSetting
   public static boolean isConnectionModeMulti()      { return mConnectionMode == CONN_MODE_MULTI; }
   // public static boolean isConnectionModeDouble() { return mConnectionMode == CONN_MODE_DOUBLE; }
 
-  public static boolean mZ6Workaround  = true;
+  public static boolean mZ6Workaround  = false; // was true - hardcoded false
   public static boolean mUnnamedDevice = false; // BT_NONAME
 
   public static boolean mAutoReconnect = true;
@@ -1054,10 +1054,10 @@ public class TDSetting
     // TDLog.v("SETTINGS load device skip >" + keyDevice[3] + "< >" + defDevice[3] + "<" );
     mSockType        = tryInt( prefs,    keyDevice[ 3],      defDevice[ 3] ); // mDefaultSockStrType );  // DISTOX_SOCKET_TYPE choice: 0, 1, (2, 3)
     // TDLog.v("SETTING load device next " + keyDevice[4] + " " + defDevice[4] );
-    mZ6Workaround    = prefs.getBoolean( keyDevice[ 4], bool(defDevice[ 4])  ); // DISTOX_Z6_WORKAROUND
-    mAutoPair        = prefs.getBoolean( keyDevice[ 5], bool(defDevice[ 5]) );  // DISTOX_AUTO_PAIR
+    // mZ6Workaround    = prefs.getBoolean( keyDevice[ 4], bool(defDevice[ 4])  ); // DISTOX_Z6_WORKAROUND
+    mAutoPair        = prefs.getBoolean( keyDevice[ 4], bool(defDevice[ 4]) );  // DISTOX_AUTO_PAIR
     // TDLog.v("SETTING load device next " + keyDevice[6] + " " + defDevice[6] );
-    mConnectFeedback = tryInt( prefs,   keyDevice[ 6],      defDevice[ 6] );   // DISTOX_CONNECT_FEEDBACK
+    mConnectFeedback = tryInt( prefs,   keyDevice[ 6],      defDevice[ 5] );   // DISTOX_CONNECT_FEEDBACK
     // TDLog.v("SETTING load device done");
 
     String[] keyGDev = TDPrefKey.GEEKDEVICE;
@@ -1699,12 +1699,12 @@ public class TDSetting
       mHeadTail = tryBooleanValue( hlp, k, v, bool(def[2]) ); 
     } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SOCKET_TYPE (choice)
       mSockType = tryIntValue( hlp, k, v, def[3] ); // mDefaultSockStrType ); 
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_Z6_WORKAROUND (bool)
-      mZ6Workaround = tryBooleanValue( hlp, k, v, bool(def[4]) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_AUTO_PAIR (bool)
-      mAutoPair = tryBooleanValue( hlp, k, v, bool(def[5]) );
+    // } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_Z6_WORKAROUND (bool)
+    //   mZ6Workaround = tryBooleanValue( hlp, k, v, bool(def[4]) );
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_AUTO_PAIR (bool)
+      mAutoPair = tryBooleanValue( hlp, k, v, bool(def[4]) );
       TopoDroidApp.checkAutoPairing();
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_CONNECT_FEEDBACK
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_CONNECT_FEEDBACK
       mConnectFeedback = tryIntValue( hlp, k, v, def[6] );
     } else {
       TDLog.e("missing DEVICE key: " + k );
@@ -3637,7 +3637,7 @@ public class TDSetting
           if ( all ) {
             if ( vals.length > 6 ) {
               mConnectionMode  = getInt( vals, 2, 0 );     setPreference( editor, "DISTOX_CONN_MODE", mConnectionMode );
-              mZ6Workaround    = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_Z6_WORKAROUND", mZ6Workaround );
+              // mZ6Workaround    = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_Z6_WORKAROUND", mZ6Workaround );
               mConnectFeedback = getInt( vals, 6, 0 );     setPreference( editor, "DISTOX_CONNECT_FEEDBACK", mConnectFeedback );
               if ( vals.length > 8 ) { // BT_NONAME
                 mUnnamedDevice = getBoolean( vals, 8 ); setPreference( editor, "DISTOX_UNNAMED_DEVICE", mUnnamedDevice );

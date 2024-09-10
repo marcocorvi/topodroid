@@ -487,14 +487,14 @@ public class DistoXComm extends TopoDroidComm
   @Override
   protected boolean startCommThread( int to_read, ListerHandler lister, int data_type, int timeout ) // FIXME_LISTER
   {
-    // TDLog.v( "DistoX comm: start comm thread: to read " + to_read + ", data type " + data_type + ", timeout " + timeout );
+    TDLog.v( "DistoX comm: start comm thread: to read " + to_read + ", data type " + data_type + ", timeout " + timeout );
     if ( mBTSocket != null ) {
       if ( mCommThread == null ) {
         mCommThread = new CommThread( TopoDroidComm.COMM_RFCOMM, this, to_read, lister, data_type, timeout );
         mCommThread.start();
-        // TDLog.Log( TDLog.LOG_COMM, "startRFcommThread started");
+        TDLog.v( "DistoX comm: comm thread started");
       } else {
-        TDLog.e( "start Comm Thread already running");
+        TDLog.e( "DistoX comm: comm thread already running");
       }
       return true;
     } else {
@@ -679,7 +679,7 @@ public class DistoXComm extends TopoDroidComm
       return DistoX.DISTOX_ERR_CONNECTED;
     }
     
-    // TDLog.v( "DistoX comm: download data: ok");
+    TDLog.v( "DistoX comm: download data: ready");
     int ret = -1; // failure
     if ( connectSocket( address, data_type ) ) {
       // TDLog.v("DistoX comm: notify connected" );
@@ -690,7 +690,7 @@ public class DistoXComm extends TopoDroidComm
         byte[] command = ( a3 ? DeviceA3Details.HeadTail : DeviceX310Details.HeadTail );
         int prev_read = -1;
         int to_read = protocol.readToRead( command );
-        // TDLog.v( "download data HT: A3 " + a3 + " to-read " + to_read );
+        TDLog.v( "download data HT: A3 " + a3 + " to-read " + to_read );
         if ( to_read == 0 ) {
           ret = to_read;
 	    } else if ( to_read < 0 ) {
@@ -709,6 +709,7 @@ public class DistoXComm extends TopoDroidComm
           // FIXME asyncTask ?
           // resetNtReadPackets(); // done in CommThread cstr 
 	  int packets = getNrReadPackets();
+          TDLog.v("download data: packets " + packets );
           startCommThread( to_read, lister, data_type, timeout );
           while ( mCommThread != null ) {
 	    packets = getNrReadPackets();
@@ -727,9 +728,10 @@ public class DistoXComm extends TopoDroidComm
       } else {
         startCommThread( -1, lister, data_type, timeout );
         while ( mCommThread != null ) {
+          TDLog.v( "download wait" );
           TDUtil.slowDown( 100 );
         }
-        // TDLog.v( "download done: read " + getNrReadPacket() );
+        TDLog.v( "download done" );
         // cancelCommThread(); // called by closeSocket() which is called by destroySocket()
         ret = getNrReadPackets();
       }
