@@ -1543,8 +1543,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_head_tail_summary">Виж обема на новите данните преди изтегляне</string>
   <string name="pref_socket_delay_title">Изчакване на свързването</string>
   <string name="pref_socket_delay_summary">Изчакване на свързването преди позволяване на сдвояване [0.1 sec]</string>
-  <string name="pref_z6_workaround_title">Z6 workaround</string>
-  <string name="pref_z6_workaround_summary">Z6 workaround – сваляне на данни</string>
+  <!-- UNUSED string name="pref_z6_workaround_title">Z6 workaround</string -->
+  <!-- UNUSED string name="pref_z6_workaround_summary">Z6 workaround – сваляне на данни</string -->
   <string name="pref_firmware_sanity_title">Проверка на фърмуера</string>
   <string name="pref_firmware_sanity_summary">Прилагане на проверки на годност на фърмуера</string>
   <string name="pref_crs_title">C R S </string>

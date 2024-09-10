@@ -1541,8 +1541,8 @@
   <string name="pref_head_tail_summary">Выяснить кол-во новых измерений перед их скачиванием</string>
   <string name="pref_socket_delay_title">Задержка подключения</string>
   <string name="pref_socket_delay_summary">Задержка подключения при сопряжении [0.1 сек]</string>
-  <string name="pref_z6_workaround_title">Решение для Z6</string>
-  <string name="pref_z6_workaround_summary">Решение проблемы загрузки данных с телефонов Z6</string>
+  <!-- UNUSED string name="pref_z6_workaround_title">Решение для Z6</string -->
+  <!-- UNUSED string name="pref_z6_workaround_summary">Решение проблемы загрузки данных с телефонов Z6</string -->
   <string name="pref_firmware_sanity_title">Проверка прошивки</string>
   <string name="pref_firmware_sanity_summary">Принудительная проверка совместимости прошивкиs</string>
   <string name="pref_crs_title">CRS - система координат </string>

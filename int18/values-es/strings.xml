@@ -1546,8 +1546,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_head_tail_summary">Obtener el número de datos antes de descargarlos</string>
   <string name="pref_socket_delay_title">Retardo en la conexión</string>
   <string name="pref_socket_delay_summary">La conexión tarda mucho para emparejarse [0.1 sec]</string>
-  <string name="pref_z6_workaround_title">Solución Z6</string>
-  <string name="pref_z6_workaround_summary">Descarga de datos de solución Z6</string>
+  <!-- UNUSED string name="pref_z6_workaround_title">Solución Z6</string -->
+  <!-- UNUSED string name="pref_z6_workaround_summary">Descarga de datos de solución Z6</string -->
   <string name="pref_firmware_sanity_title">Verificación de firmware</string>
   <string name="pref_firmware_sanity_summary">Realizar comprobaciones de estado\' firmware</string>
   <string name="pref_crs_title">CRS</string>

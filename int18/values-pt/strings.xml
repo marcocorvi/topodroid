@@ -1444,8 +1444,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_head_tail_summary">Obter a quantidade de novos dados antes de baixá-los</string>
   <string name="pref_socket_delay_title">Atraso conexão</string>
   <string name="pref_socket_delay_summary">Tempo de espera da conexão para permitir o pareamento [0.1 sec]</string>
-  <string name="pref_z6_workaround_title">Gambiarra Z6 DistoX</string>
-  <string name="pref_z6_workaround_summary">Gambiarra Z6 para download dos dados da DistoX</string>
+  <!-- UNUSED string name="pref_z6_workaround_title">Gambiarra Z6 DistoX</string -->
+  <!-- UNUSED string name="pref_z6_workaround_summary">Gambiarra Z6 para download dos dados da DistoX</string -->
   <string name="pref_firmware_sanity_title">Verif firmware</string>
   <string name="pref_firmware_sanity_summary">Forçar verificação de integridade de firmware</string>
   <string name="pref_crs_title">SRC</string>

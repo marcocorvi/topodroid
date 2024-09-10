@@ -1539,8 +1539,8 @@
   <string name="pref_head_tail_summary">Ottieni il numero di dati prima di scaricarli</string>
   <string name="pref_socket_delay_title">Ritardo di connessione</string>
   <string name="pref_socket_delay_summary">Ritardo di connessione per permettere la associazione [0.1 sec]</string>
-  <string name="pref_z6_workaround_title">Dati modo Z6</string>
-  <string name="pref_z6_workaround_summary">Scaricamento dati modo Z6</string>
+  <!-- UNUSED string name="pref_z6_workaround_title">Dati modo Z6</string -->
+  <!-- UNUSED string name="pref_z6_workaround_summary">Scaricamento dati modo Z6</string -->
   <string name="pref_firmware_sanity_title">Verifica Firmware</string>
   <string name="pref_firmware_sanity_summary">Effettua verifiche sanita\' firmware</string>
   <string name="pref_crs_title">C R S </string>

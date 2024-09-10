@@ -1552,8 +1552,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_head_tail_summary">Adatok számának lekérdezése letöltés előtt</string>
   <string name="pref_socket_delay_title">Késleltetés</string>
   <string name="pref_socket_delay_summary">Kapcsolódási késleltetés a párosításhoz [0.1 sec]</string>
-  <string name="pref_z6_workaround_title">Áthidaló megoldás</string>
-  <string name="pref_z6_workaround_summary">Áthidaló megoldás adatletöltéshez Z6-hoz</string>
+  <!-- UNUSED string name="pref_z6_workaround_title">Áthidaló megoldás</string -->
+  <!-- UNUSED string name="pref_z6_workaround_summary">Áthidaló megoldás adatletöltéshez Z6-hoz</string -->
   <string name="pref_firmware_sanity_title">Firmware ellenőrzés</string>
   <string name="pref_firmware_sanity_summary">Firmware biztonsági ellenőrzés végrehajtva</string>
   <string name="pref_crs_title">Koordinátarendszer</string>

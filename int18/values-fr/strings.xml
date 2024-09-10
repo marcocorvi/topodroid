@@ -1534,8 +1534,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_head_tail_summary">Voir le nombre de données avant de les télécharger</string>
     <string name="pref_socket_delay_title">Délai de connexion</string>
     <string name="pref_socket_delay_summary">Délai de connexion pour assoc. [0.1 sec]</string>
-    <string name="pref_z6_workaround_title">Contournement Z6</string>
-    <string name="pref_z6_workaround_summary">Contournement Z6 téléchargement données</string>
+    <!-- UNUSED string name="pref_z6_workaround_title">Contournement Z6</string -->
+    <!-- UNUSED string name="pref_z6_workaround_summary">Contournement Z6 téléchargement données</string -->
     <string name="pref_firmware_sanity_title">Contrôle Firmware</string>
     <string name="pref_firmware_sanity_summary">Appliquer les tests de validité du firmware</string>
     <string name="pref_crs_title">S C R </string>

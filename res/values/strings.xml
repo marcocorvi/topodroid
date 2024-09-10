@@ -1571,8 +1571,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_head_tail_summary">Get the number of new data before downloading them</string>
   <string name="pref_socket_delay_title">Connection delay</string>
   <string name="pref_socket_delay_summary">Connection delay to allow pairing [0.1 sec]</string>
-  <string name="pref_z6_workaround_title" copyable="bg">Z6 workaround</string>
-  <string name="pref_z6_workaround_summary">Z6 workaround data-download</string>
+  <!-- UNUSED string name="pref_z6_workaround_title" copyable="bg">Z6 workaround</string -->
+  <!-- UNUSED string name="pref_z6_workaround_summary">Z6 workaround data-download</string -->
   <string name="pref_firmware_sanity_title">Firmware check</string>
   <string name="pref_firmware_sanity_summary">Enforce firmware sanity checks</string>
   <string name="pref_crs_title" copyable="bg cn fr it pt">C R S </string>

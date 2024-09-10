@@ -1433,8 +1433,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_head_tail_summary">Anzahl Datensätze abfragen vor dem Download</string>
   <string name="pref_socket_delay_title">Verbindungsverzögerung</string>
   <string name="pref_socket_delay_summary">Verzögerung vor dem verbinden [0.1 sek] (Standard: 0)</string>
-  <string name="pref_z6_workaround_title">Z6 Workaround</string>
-  <string name="pref_z6_workaround_summary">Bei Problemen mit einem Z6 aktivieren</string>
+  <!-- UNUSED string name="pref_z6_workaround_title">Z6 Workaround</string -->
+  <!-- UNUSED string name="pref_z6_workaround_summary">Bei Problemen mit einem Z6 aktivieren</string -->
   <string name="pref_firmware_sanity_title">Firmware Überprüfung</string>
   <string name="pref_firmware_sanity_summary">Erzwinge Überprüfung der korrekte Firmware</string>
   <string name="pref_crs_title">Koordinatensystem</string>
