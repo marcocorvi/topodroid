@@ -186,7 +186,7 @@ class ParserTherion extends ImportParser
       int i = filename.lastIndexOf('/');
       if ( i > 0 ) dirname = filename.substring(0, i+1);
       // System.out.println("readFile dir " + dirname + " filename " + filename );
-      TDLog.v( "import read Therion file <" + filename + ">" );
+      // TDLog.v( "import read Therion file <" + filename + ">" );
 
       BufferedReader br = TDio.getBufferedReader( isr, filename );
       String line = nextLine( br );
@@ -692,10 +692,10 @@ class ParserTherion extends ImportParser
                     // TODO add shot
                     if ( to.equals("-") || to.equals(".") ) { // splay shot
                       // FIXME splays
-                      TDLog.v( "Therion add shot " + from + " -- ");
+                      // TDLog.v( "Therion add shot " + from + " -- ");
                       shots.add( new ParserShot( from, TDString.EMPTY, len, ber, cln, 0.0f, state.mExtend, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
                     } else {
-                      TDLog.v( "Therion add shot " + from + " " + to);
+                      // TDLog.v( "Therion add shot " + from + " " + to);
                       shots.add( new ParserShot( from, to, len, ber, cln, 0.0f, state.mExtend, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
                     }
                   } catch ( NumberFormatException e ) {
@@ -703,12 +703,16 @@ class ParserTherion extends ImportParser
                   }
                 }
                 // FIXME other data types
+              } else if ( cmd.equals("equate") ) { // NOTE "equate", "fix", "cs" are allowed both in "survey" and in "centerline"
+                handleEquate( vals, vals_len, surveyPath, therionPath, path, state );
+              } else if ( cmd.equals("fix") ) { // ***** fix station east north Z (ignored std-dev's)
+                handleFix( vals, vals_len, surveyPath, therionPath, path  );
+              } else if ( cmd.equals("cs") ) { 
+                handleCs( vals, vals_len, surveyPath, therionPath, path  );
               }
             } else if ( state.in_survey ) { // && ! state.in_centerline
-              // NOTE "equate", "fix", "cs" are allowed both in "survey" and in "centerline"
-
               if ( cmd.equals("centerline") || cmd.equals("centreline") ) {
-                TDLog.v("Therion in centerline");
+                // TDLog.v("Therion in centerline");
                 // pushState( state );
                 state = new ParserTherionState( state );
                 state.in_centerline = true;
@@ -717,7 +721,7 @@ class ParserTherion extends ImportParser
                 if ( state.in_centerline ) {
                   TDLog.e("Parser Therion close survey " + path.toString() + " in centerline");
                 }
-                TDLog.v("Therion endsurvey " + path.toString() );
+                // TDLog.v("Therion endsurvey " + path.toString() );
                 // state = popState();
                 if ( state.mParent != null ) state = state.mParent;
 	        // if ( ks > 0 ) {
@@ -732,64 +736,11 @@ class ParserTherion extends ImportParser
                 // state.in_survey = ( ks > 0 );
                 state.in_survey = path.dropSurvey();
               } else if ( cmd.equals("equate") ) { 
-                TDLog.v("Therion equate vals " + vals_len);
-                if ( vals_len > 2 ) {
-                  String from, to;
-                  int idx = vals[1].indexOf('@');
-                  if ( idx > 0 ) {
-                    if ( therionPath ) {
-                      from = vals[1] + "." + path.toString();
-                      // from = vals[1].substring( 0, idx ) + "@" + path.path2qath( vals[1].substring(idx+1) );
-                    } else {
-                      from = vals[1].substring( 0, idx );
-                    }
-                  } else {
-                    if ( therionPath ) {
-                      from = vals[1] + "@" + path.toString();
-                    } else {
-                      from = vals[1];
-                    }
-                  }
-                  for ( int j=2; j<vals_len; ++j ) {
-                    idx = vals[j].indexOf('@');
-                    if ( idx > 0 ) {
-                      if ( therionPath ) {
-                        to = vals[j] + "." + path.toString();
-                        // to = vals[j].substring( 0, idx ) + "@" + path.path2qath( vals[j].substring(idx+1) );
-                      } else {
-                        to = vals[j].substring( 0, idx );
-                      }
-                    } else {
-                      if ( therionPath ) {
-                        to = vals[j] + "@" + path.toString();
-                      } else {
-                        to = vals[j];
-                      }
-                    }
-                    TDLog.v("Therion equate " + from + " " + to );
-                    if ( therionPath ) {
-                      shots.add( new ParserShot( from, to, 0.0f, 0.0f, 0.0f, 0.0f, 0, LegType.NORMAL, true, false, false, "" ) );
-                    } else {
-                      shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, state.mPrefix + to + state.mSuffix, 0.0f, 0.0f, 0.0f, 0.0f, 0, LegType.NORMAL, true, false, false, "" ) );
-                    }
-                  }
-                }
+                handleEquate( vals, vals_len, surveyPath, therionPath, path, state );
               } else if ( cmd.equals("fix") ) { // ***** fix station east north Z (ignored std-dev's)
-                if ( vals_len > 4 ) {
-                  String name = therionPath ? vals[1] + "." + path.toString(): extractStationName( vals[1], surveyPath );
-                  TDLog.v("Therion fix " + name );
-                  try {
-	            fixes.add( new ThFix( name,
-                                        Float.parseFloat( vals[2] ),
-                                        Float.parseFloat( vals[3] ),
-                                        Float.parseFloat( vals[4] ) ) );
-                  } catch ( NumberFormatException e ) {
-                    TDLog.e( "therion parser error: fix " + line );
-                  }
-                }
+                handleFix( vals, vals_len, surveyPath, therionPath, path  );
               } else if ( cmd.equals("cs") ) { 
-                // TDLog.v("Warning: therion cs ignored" );
-                // TODO cs
+                handleCs( vals, vals_len, surveyPath, therionPath, path  );
               }
             }
           }
@@ -809,5 +760,72 @@ class ParserTherion extends ImportParser
     // TDLog.v( "Parser TH shots "+ shots.size() + " splays "+ splays.size() +" fixes "+  fixes.size() );
   }
 
+  private void handleEquate(String[] vals, int vals_len, String surveyPath, boolean therionPath, TherionPath path, ParserTherionState state )
+  {
+    // TDLog.v("Therion equate vals " + vals_len);
+    if ( vals_len > 2 ) {
+      String from, to;
+      int idx = vals[1].indexOf('@');
+      if ( idx > 0 ) {
+        if ( therionPath ) {
+          from = vals[1] + "." + path.toString();
+          // from = vals[1].substring( 0, idx ) + "@" + path.path2qath( vals[1].substring(idx+1) );
+        } else {
+          from = vals[1].substring( 0, idx );
+        }
+      } else {
+        if ( therionPath ) {
+          from = vals[1] + "@" + path.toString();
+        } else {
+          from = vals[1];
+        }
+      }
+      for ( int j=2; j<vals_len; ++j ) {
+        idx = vals[j].indexOf('@');
+        if ( idx > 0 ) {
+          if ( therionPath ) {
+            to = vals[j] + "." + path.toString();
+            // to = vals[j].substring( 0, idx ) + "@" + path.path2qath( vals[j].substring(idx+1) );
+          } else {
+            to = vals[j].substring( 0, idx );
+          }
+        } else {
+          if ( therionPath ) {
+            to = vals[j] + "@" + path.toString();
+          } else {
+            to = vals[j];
+          }
+        }
+        // TDLog.v("Therion equate " + from + " " + to );
+        if ( therionPath ) {
+          shots.add( new ParserShot( from, to, 0.0f, 0.0f, 0.0f, 0.0f, 0, LegType.NORMAL, true, false, false, "" ) );
+        } else {
+          shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, state.mPrefix + to + state.mSuffix, 0.0f, 0.0f, 0.0f, 0.0f, 0, LegType.NORMAL, true, false, false, "" ) );
+        }
+      }
+    }
+  }
+
+  private void handleFix(String[] vals, int vals_len, String surveyPath, boolean therionPath, TherionPath path )
+  {
+    if ( vals_len > 4 ) {
+      String name = therionPath ? vals[1] + "." + path.toString(): extractStationName( vals[1], surveyPath );
+      TDLog.v("Therion fix " + name );
+      try {
+        fixes.add( new ThFix( name,
+                            Float.parseFloat( vals[2] ),
+                            Float.parseFloat( vals[3] ),
+                            Float.parseFloat( vals[4] ) ) );
+      } catch ( NumberFormatException e ) {
+        TDLog.e( "therion parser error: fix " + vals[1] + " " + vals[2] + " " + vals[3] + " " + vals[4] );
+      }
+    }
+  }
+
+  private void handleCs(String[] vals, int vals_len, String surveyPath, boolean therionPath, TherionPath path )
+  {
+    // TDLog.v("Warning: therion cs ignored" );
+    // TODO cs
+  }
 
 }

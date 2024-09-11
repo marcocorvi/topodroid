@@ -135,7 +135,7 @@ public class ParserTh extends TglParser
     mMarks = new ArrayList< String >();
 
     String path = base + "/distox14.sqlite";
-    TDLog.v( "Th parser DB " + path + " survey " + surveyname );
+    // TDLog.v( "Th parser DB " + path + " survey " + surveyname );
     mData = new DataHelper( app, path, TDVersion.DATABASE_VERSION );
 
     StringWriter sw = new StringWriter();
@@ -254,7 +254,7 @@ public class ParserTh extends TglParser
     long sid = info.id;
 
     List< DBlock > blks = mData.getSurveyShots( sid, 0 );
-    TDLog.v("TH survey: shots " + blks.size() );
+    // TDLog.v("TH survey: shots " + blks.size() );
     if ( blks.size() == 0 ) {
       if ( pw != null ) pw.printf( String.format( mApp.getResources().getString( R.string.empty_survey ), surveyname ) );
       return ERR_NO_SHOTS;
@@ -278,7 +278,7 @@ public class ParserTh extends TglParser
     // ++ks;
 
     List< SurveyFixed > fixeds = mData.getSurveyFixeds( sid );
-    TDLog.v("TH survey: fixed points " + fixeds.size() + " shots " + shots.size() + " splays " + splays.size() );
+    // TDLog.v("TH survey: fixed points " + fixeds.size() + " shots " + shots.size() + " splays " + splays.size() );
 
     if ( fixeds != null && fixeds.size() > 0 ) {
       double PI_180 = (Math.PI / 180);
@@ -380,7 +380,7 @@ public class ParserTh extends TglParser
         }
       }
     }
-    TDLog.v("TH survey: added blocks, shots " + shots.size() + " splays " + splays.size() );
+    // TDLog.v("TH survey: added blocks, shots " + shots.size() + " splays " + splays.size() );
 
     // TDLog.v("Th fixes " + fixes.size() );
     return SUCCESS;
@@ -1028,11 +1028,10 @@ public class ParserTh extends TglParser
       // TDLog.v( "Th after " + fix.getFullName() + " used shot " + used_cnt + " loops " + mLoopCnt );
     } // for ( Cave3DFix fix : ok_fixes )
     // TDLog.v( "Th used shot " + used_cnt + " loops " + mLoopCnt + " total shots " + shots.size() );
-    StringBuilder sb = new StringBuilder();
-    for ( Cave3DStation st : stations ) {
-      // sb.append(" "); sb.append( st.name );
-      TDLog.v( "Th " + st.getFullName() );
-    }
+    // StringBuilder sb = new StringBuilder();
+    // for ( Cave3DStation st : stations ) {
+    //   sb.append(" "); sb.append( st.name );
+    // }
     // TDLog.v( "Th " + sb.toString() );
 
     if ( mSplayUse > SPLAY_USE_SKIP ) {
