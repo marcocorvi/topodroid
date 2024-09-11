@@ -77,7 +77,7 @@ class ShotEditDialog extends MyDialog
   private EditText mETbearing;
   private EditText mETclino;    // clino | distance
 
-  private TextView mTVextra;
+  private TextView mTVextra;    // Magn Acc Dip
   private TextView mTVshotTime;
 
   private EditText mETfrom;
@@ -89,16 +89,16 @@ class ShotEditDialog extends MyDialog
   private MyCheckBox mRBcmtd  = null;  // FIXME_COMMENTED 
   private MyStateBox mRBsplay = null;  // inhibit splay plan/profile display
 
-  private MyCheckBox mCBlegPrev;
-  private MyCheckBox mCBlegNext;
-  private MyCheckBox mCBrenumber;
+  private MyCheckBox mCBlegPrev;  // adjoin to previous leg shot
+  private MyCheckBox mCBlegNext;  // adjoin to next leg shot
+  private MyCheckBox mCBrenumber; // renumber shots after this
   private MyCheckBox mCBallSplay;
   private MyCheckBox mCBxSplay = null;
   // private MyCheckBox mCBhighlight;
   private MyCheckBox mCBbackLeg = null;
 
 
-  private CheckBox mRBleft;
+  private CheckBox mRBleft;   // shot extend
   private CheckBox mRBvert;
   private CheckBox mRBright;
   // private CheckBox mRBignore;

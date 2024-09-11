@@ -314,7 +314,7 @@ public class TopoGL extends Activity
             mFileDialog = false;
             doOpenFile( null, mThconfigName, true ); // asynch
           } else if ( mSurveyName != null ) {
-            // TDLog.v("TopoDroid input survey " + mSurveyName + " mSurveyBase " + mSurveyBase);
+            TDLog.v("TopoDroid input survey " + mSurveyName + " mSurveyBase " + mSurveyBase);
             if ( doOpenSurvey( mSurveyName, mSurveyBase ) ) {
               doSketches = true;
               mFileDialog = false;
@@ -1457,10 +1457,10 @@ public class TopoGL extends Activity
     // // setTitle( pathname );
     // int idx = pathname.lastIndexOf( '/' );
     // final String path = ( idx >= 0 )? pathname.substring( idx+1 ) : pathname;
-    // TDLog.v("do open file: " + path + " asynch " + asynch );
+    // TDLog.v("TopoGL do open file: " + pathname + " asynch " + asynch );
 
     if ( uri == null ) {
-      // TDLog.v("input stream from tdconfig " + pathname );
+      TDLog.v("TopoGL input stream from tdconfig " + pathname );
       // String path = Cave3DFile.THCONFIG_PATH + "/" + pathname + ".tdconfig";
       String path = TDPath.getTdconfigDir() + "/" + pathname + ".tdconfig";
       Toast.makeText( this, String.format( getResources().getString( R.string.reading_file ), path ), Toast.LENGTH_SHORT ).show();
@@ -1498,7 +1498,7 @@ public class TopoGL extends Activity
       }
     } else {
       String path = pathname; // uri.getPath();
-      // TDLog.v("input stream from uri " + path );
+      TDLog.v("TopoGL input stream from uri " + path );
       try { 
         final InputStream is = this.getContentResolver().openInputStream( uri );
         if ( initRendering2( is, path, mSurveyName ) ) {
@@ -2184,7 +2184,7 @@ public class TopoGL extends Activity
    */
   private boolean initRendering1( String survey, String base ) 
   {
-    // TDLog.v("TopoGL init rendering " + survey + " base " + base );
+    TDLog.v("TopoGL init rendering " + survey + " base " + base );
     doSketches = false;
     try {
       // FIXME null InputStream

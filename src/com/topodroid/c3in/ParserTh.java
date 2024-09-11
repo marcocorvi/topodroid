@@ -123,7 +123,7 @@ public class ParserTh extends TglParser
   }
 
   // FIXME isr not used
-  /** cstr - parse a survey from the database
+  /** cstr - parse a single survey from the database
    * @param app        the 3D activity
    * @param isr        input stream (not used)
    * @param surveyname survey name
@@ -135,7 +135,7 @@ public class ParserTh extends TglParser
     mMarks = new ArrayList< String >();
 
     String path = base + "/distox14.sqlite";
-    // TDLog.v( "Th parser DB " + path + " survey " + surveyname );
+    TDLog.v( "Th parser DB " + path + " survey " + surveyname );
     mData = new DataHelper( app, path, TDVersion.DATABASE_VERSION );
 
     StringWriter sw = new StringWriter();
@@ -218,7 +218,9 @@ public class ParserTh extends TglParser
   {
     int index = in.indexOf('@');
     if ( index > 0 ) {
-      return in.substring(0,index) + "@" + path + "." + in.substring(index+1);
+      // 20240910 
+      // return in.substring(0,index) + "@" + path + "." + in.substring(index+1);
+      return in;
     } else {
       return in + "@" + path;
     }
@@ -252,6 +254,7 @@ public class ParserTh extends TglParser
     long sid = info.id;
 
     List< DBlock > blks = mData.getSurveyShots( sid, 0 );
+    TDLog.v("TH survey: shots " + blks.size() );
     if ( blks.size() == 0 ) {
       if ( pw != null ) pw.printf( String.format( mApp.getResources().getString( R.string.empty_survey ), surveyname ) );
       return ERR_NO_SHOTS;
@@ -275,7 +278,7 @@ public class ParserTh extends TglParser
     // ++ks;
 
     List< SurveyFixed > fixeds = mData.getSurveyFixeds( sid );
-    // TDLog.v("TH survey fixed points " + fixeds.size() + " shots " + shots.size() + " splays " + splays.size() );
+    TDLog.v("TH survey: fixed points " + fixeds.size() + " shots " + shots.size() + " splays " + splays.size() );
 
     if ( fixeds != null && fixeds.size() > 0 ) {
       double PI_180 = (Math.PI / 180);
@@ -323,7 +326,7 @@ public class ParserTh extends TglParser
 	    fixes.add( mOrigin );
           }
         } else {
-          TDLog.v( "Th Fix " + name + " with " + x0 + " " + y0 + " " + z0 + " cs1 " + ((fx.mCsName!=null)?fx.mCsName:"null") );
+          TDLog.v( "TH survey: fix " + name + " with " + x0 + " " + y0 + " " + z0 + " cs1 " + ((fx.mCsName!=null)?fx.mCsName:"null") );
           if ( cs1 != null ) {
             if ( cs1.equals( fx.mCsName ) ) {
               x1 = fx.mCsLongitude;
@@ -377,6 +380,7 @@ public class ParserTh extends TglParser
         }
       }
     }
+    TDLog.v("TH survey: added blocks, shots " + shots.size() + " splays " + splays.size() );
 
     // TDLog.v("Th fixes " + fixes.size() );
     return SUCCESS;
@@ -923,7 +927,7 @@ public class ParserTh extends TglParser
  
     int mLoopCnt = 0;
     Cave3DFix fix0 = ok_fixes.get( 0 );
-    // TDLog.v( "Th Process Shots. Fix " + fix0.getFullName() + " " + fix0.x + " " + fix0.y + " " + fix0.z );
+    TDLog.v( "Th Process Shots. Fix " + fix0.getFullName() + " " + fix0.x + " " + fix0.y + " " + fix0.z );
 
     mCaveLength = 0.0f;
     mSurfaceLength = 0.0f;
@@ -935,7 +939,7 @@ public class ParserTh extends TglParser
 
     int used_cnt = 0; // number of used shots
     for ( Cave3DFix fix : ok_fixes ) {
-      // TDLog.v( "Th checking fix " + fix.getFullName() );
+      TDLog.v( "Th checking fix " + fix.getFullName() );
       boolean found = false;
       for ( Cave3DStation s1 : stations ) {
         if ( fix.hasName( s1.getFullName() ) ) { found = true; break; }
@@ -973,7 +977,7 @@ public class ParserTh extends TglParser
             if ( sf != null && st != null ) break;
           }
           if ( sf != null && st != null ) {
-            // TDLog.v( "Th using loop-closing shot " + sh.from + " " + sh.to + " : " + sf.name + " " + st.name );
+            TDLog.v( "Th using loop-closing shot " + sh.from + " " + sh.to + " : " + sf.getFullName() + " " + st.getFullName() );
             sh.setUsed(); // LOOP
 	    ++ used_cnt;
             if ( sh.isSurvey() ) {
@@ -989,11 +993,11 @@ public class ParserTh extends TglParser
             sh.to_station = s;
             repeat = true; // unnecessary
           } else if ( sf != null && st == null ) {
-            // TDLog.v( "Th using forward shot " + sh.from + " " + sh.to + " : " + sf.name + " null" );
+            // TDLog.v( "Th using forward shot " + sh.from + " " + sh.to + " : " + sf.getFullName() + " null" );
             Cave3DStation s = sh.getStationFromStation( sf );
             stations.add( s );
             sh.to_station = s;
-            // TDLog.v( "Th add station TO " + sh.from + " " + sh.to + " " + sh.to_station.name );
+            // TDLog.v( "Th add station TO " + sh.from + " " + sh.to + " " + sh.to_station.getFullName() );
             sh.setUsed();
 	    ++ used_cnt;
             if ( sh.isSurvey() ) {
@@ -1003,7 +1007,7 @@ public class ParserTh extends TglParser
             }
             repeat = true;
           } else if ( sf == null && st != null ) {
-            // TDLog.v( "Th using backward shot " + sh.from + " " + sh.to + " : null " + st.name );
+            // TDLog.v( "Th using backward shot " + sh.from + " " + sh.to + " : null " + st.getFullName() );
             Cave3DStation s = sh.getStationFromStation( st );
             stations.add( s );
             sh.from_station = s;
@@ -1024,8 +1028,11 @@ public class ParserTh extends TglParser
       // TDLog.v( "Th after " + fix.getFullName() + " used shot " + used_cnt + " loops " + mLoopCnt );
     } // for ( Cave3DFix fix : ok_fixes )
     // TDLog.v( "Th used shot " + used_cnt + " loops " + mLoopCnt + " total shots " + shots.size() );
-    // StringBuilder sb = new StringBuilder();
-    // for ( Cave3DStation st : stations ) { sb.append(" "); sb.append( st.name ); }
+    StringBuilder sb = new StringBuilder();
+    for ( Cave3DStation st : stations ) {
+      // sb.append(" "); sb.append( st.name );
+      TDLog.v( "Th " + st.getFullName() );
+    }
     // TDLog.v( "Th " + sb.toString() );
 
     if ( mSplayUse > SPLAY_USE_SKIP ) {

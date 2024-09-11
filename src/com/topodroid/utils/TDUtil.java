@@ -137,7 +137,7 @@ public class TDUtil
   {
     if ( s == null || s.length() == 0 ) return true;
     int ch = s.codePointAt( s.length() - 1);
-    return ( Character.isAlphabetic( ch ) || Character.isDigit( ch ) );
+    return ( Character.isAlphabetic( ch ) || Character.isDigit( ch ) || ch == '.' || ch == '@' );
   }
 
   public static String noSpaces( String s )
