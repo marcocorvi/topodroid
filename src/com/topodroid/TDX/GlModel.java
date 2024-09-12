@@ -277,6 +277,14 @@ public class GlModel
     if ( glSplays != null ) glSplays.setColorMode( GlLines.COLOR_NONE, GlLines.COLOR_MAX );
     clearStationHighlight();
   }
+
+  /** highlight station search
+   * @param prefix  prefix of station name
+   */
+  void highlightStations( String prefix ) 
+  { 
+    if ( glNames  != null ) glNames.highlightStations( prefix );
+  }
   
   /** clear the height of the stations
    */

@@ -2096,6 +2096,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="cmenu_ico">3D-ROSE DIAGRAM</string>
     <string name="cmenu_rose">ROSE DIAGRAM</string>
     <string name="cmenu_wall">WALLS</string>
+    <string name="cmenu_search">SEARCH</string>
     <!-- UNUSED string name="cmenu_sketch">SKETCHES</string -->
     <!-- UNUSED string name="cmenu_fractal" translatable="false">FRACTAL DIM.</string -->
 

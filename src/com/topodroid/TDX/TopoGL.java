@@ -691,6 +691,7 @@ public class TopoGL extends Activity
     // R.string.cmenu_sketch,     // 9  C3D NO_C3D
     // R.string.cmenu_temp,       // 10 TEMPERATURE
     // R.string.cmenu_fractal,    // 11 FRACTAL
+    R.string.cmenu_search,
     R.string.menu_options,
     R.string.menu_help
   };
@@ -708,6 +709,7 @@ public class TopoGL extends Activity
                           // R.string.help_sketch_3d, // NO_C3D
                           // R.string.help_temperature, // TEMPERATURE
                           // R.string.help_fractal, // FRACTAL
+                          R.string.help_search,
                           R.string.help_prefs,
                           R.string.help_help
   };
@@ -830,6 +832,8 @@ public class TopoGL extends Activity
     //   }
     // } else if ( mHasFractal && p++ == pos ) { // FRACTAL
     //   new DialogFractal( this, mParser ).show();
+    } else if ( p++ == pos ) { // SEARCH
+      (new HighlightDialog( this, this )).show();
     } else if ( p++ == pos ) { // OPTIONS
       Intent intent = new Intent( this, com.topodroid.prefs.TDPrefActivity.class );
       intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_CAVE3D );
@@ -840,6 +844,11 @@ public class TopoGL extends Activity
       new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE )).show();
     }
   }
+
+  /** highlight station points with name that starts with a given prefix
+   * @param prefix    station name prefix (null: clear highlight)
+   */
+  void highlightStations( String prefix ) { mRenderer.highlightStations( prefix ); }
 
   // ---------------------------------------------------------------------
 

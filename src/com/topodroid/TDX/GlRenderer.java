@@ -376,6 +376,14 @@ public class GlRenderer implements Renderer
   //   if ( mModel != null ) mModel.setPath( path, mApp.hasBluetoothName() ); 
   // }
 
+  /** highlight station search
+   * @param prefix  prefix of station name
+   */
+  void highlightStations( String prefix ) 
+  { 
+    if ( mModel != null ) mModel.highlightStations( prefix );
+  }
+
   /** clear the highlight of stations
    */
   void clearStationHighlight() 

@@ -67,6 +67,24 @@ public class GlNames extends GlShape
     // if ( ! hasNames() ) stationMode = STATION_NONE;
   } 
 
+  /** highlight station search
+   * @param prefix  prefix of station name
+   */
+  void highlightStations( String prefix ) 
+  { 
+    if ( prefix == null ) {
+      mHighlightStations = null;
+    } else {
+      mHighlightStations = new ArrayList< Integer >();
+      int k = 0;
+      for ( GlName name : mNames ) {
+        if ( name.startsWith( prefix ) ) mHighlightStations.add( new Integer(k) );
+        ++k;
+      }
+    }
+  }
+      
+
   /** @return the stations display-mode
    */
   static int getStationMode() { return stationMode; }
@@ -92,7 +110,11 @@ public class GlNames extends GlShape
     Vector3D pos; // XYZ OpenGL
     String   name;
     String   fullname;
-    GlName( double x, double y, double z, String n, String fn ) { pos = new Vector3D(x,y,z); name = n; fullname = fn; }
+    boolean  highlight;
+
+    GlName( double x, double y, double z, String n, String fn ) { pos = new Vector3D(x,y,z); name = n; fullname = fn; highlight = false; }
+
+    boolean startsWith( String prefix ) { return fullname.startsWith( prefix ); }
   }
 
   final static float TEXT_SIZE  = 5.0f;
@@ -161,6 +183,7 @@ public class GlNames extends GlShape
 
   // private ArrayList< Vector3D > mPos;
   private ArrayList< GlName > mNames;
+  private ArrayList< Integer > mHighlightStations = null;
   private int nameCount = 0;
   private float[] mData;
   private int mTexId = -1;
@@ -371,6 +394,10 @@ public class GlNames extends GlShape
         GL.useProgram( mProgramPosHL );
         bindDataPosHL( mvpMatrix ); 
         GL.drawPoint( mHighlight, 1 ); // use geometry shader
+      } else if ( mHighlightStations != null ) {
+        GL.useProgram( mProgramPosHL );
+        bindDataPosHL( mvpMatrix ); 
+        for ( Integer k: mHighlightStations ) GL.drawPoint( k.intValue(), 1 );
       }
     }
 
