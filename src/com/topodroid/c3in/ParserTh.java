@@ -166,7 +166,7 @@ public class ParserTh extends TglParser
   {
     super( app, filename );
 
-    // TDLog.v( "Th parser, file: " + filename + " type " + type );
+    TDLog.v( "Th parser, file: " + filename + " type " + type );
     mMarks = new ArrayList< String >();
     int pos = filename.indexOf("thconfig");
     if ( pos >= 0 ) {
@@ -182,7 +182,7 @@ public class ParserTh extends TglParser
     PrintWriter  pw = new PrintWriter( sw );
     pw.printf("Read file " + filename + "\n");
     // TDLog.v("TH parser Read file " + filename );
-    int res = readFile( isr, filename, "", false, 0.0f, 1.0, 1.0, 1.0, pw );
+    int res = readFile( isr, filename, "", false, 0.0f, 1.0, 1.0, 1.0, pw, (mData == null) );
     // Toast.makeText( mApp, sw.toString(), Toast.LENGTH_LONG ).show();
 
     if ( res == SUCCESS ) {
@@ -214,13 +214,13 @@ public class ParserTh extends TglParser
    * @param in     parent 
    * @param path   pathname
    */
-  private String makeName( String in, String path )
+  private String makeName( String in, String path, boolean forFile )
   {
     int index = in.indexOf('@');
     if ( index > 0 ) {
       // 20240910 
       // return in.substring(0,index) + "@" + path + "." + in.substring(index+1);
-      return in;
+      return forFile ? in : in + "." + path;
     } else {
       return in + "@" + path;
     }
@@ -242,7 +242,7 @@ public class ParserTh extends TglParser
       return ERR_NO_DB; 
     }
 
-    // TDLog.v("TH read survey " + surveyname + " color " + color );
+    TDLog.v("TH read survey " + surveyname + " color " + color );
     // Toast.makeText( mApp, "Reading " + surveyname, Toast.LENGTH_SHORT ).show();
 
     SurveyInfo info = mData.getSurveyInfo( surveyname );
@@ -274,7 +274,7 @@ public class ParserTh extends TglParser
     // int ks = 0;
     String path = basepath;
     // survey_pos[ks] = path.length();
-    path = path + "." + surveyname;
+    path = surveyname + "." + path;
     // ++ks;
 
     List< SurveyFixed > fixeds = mData.getSurveyFixeds( sid );
@@ -286,7 +286,7 @@ public class ParserTh extends TglParser
       double conv = 0;
       for ( SurveyFixed fx : fixeds ) {
         // fx.log();
-        String name = makeName( fx.station, path );
+        String name = makeName( fx.station, path, false );
         double x0=0, y0=0, z0=0; // long-lat E,N,Z
         double x1=0, y1=0, z1=0; // CS1 E,N,Z
 
@@ -362,9 +362,9 @@ public class ParserTh extends TglParser
       if ( blk.mFrom.length() > 0 ) {
         double ber = blk.mBearing + declination;
         if ( ber >= 360 ) ber -= 360; else if ( ber < 0 ) ber += 360;
-        String from = makeName( blk.mFrom, path );
+        String from = makeName( blk.mFrom, path, false );
         if ( blk.mTo.length() > 0 ) {
-          String to = makeName( blk.mTo, path );
+          String to = makeName( blk.mTo, path, false );
           shots.add( new Cave3DShot( from, to, blk.mLength, ber, blk.mClino, blk.mFlag, blk.mMillis, color ) );
         } else {
           if ( mSplayUse > SPLAY_USE_SKIP ) {
@@ -373,7 +373,7 @@ public class ParserTh extends TglParser
         }
       } else if ( blk.mTo.length() > 0 ) {
         if ( mSplayUse > SPLAY_USE_SKIP ) {
-          String to = makeName( blk.mTo, path );
+          String to = makeName( blk.mTo, path, false );
           double ber = 180 + blk.mBearing + declination;
           if ( ber >= 360 ) ber -= 360;
           splays.add( new Cave3DShot( to, null, blk.mLength, ber, -blk.mClino, blk.mFlag, blk.mMillis, color ) );
@@ -384,7 +384,7 @@ public class ParserTh extends TglParser
 
     // TDLog.v("Th fixes " + fixes.size() );
     return SUCCESS;
-  }
+  } // readSurvey
   
   /** read input file
    * @param usd   whether to use given declination
@@ -392,11 +392,12 @@ public class ParserTh extends TglParser
    * @param ul units of length (as multiple of 1 degree)
    * @param ub units of bearing (as multiple of 1 degree)
    * @param uc units of clino
+   * @param forFile  whether for file or for survey
    * @return success (0) or error code
    */
   private int readFile( InputStreamReader isr, String filename, String basepath,
                         boolean usd, double sd,
-                        double ul, double ub, double uc, PrintWriter pw )
+                        double ul, double ub, double uc, PrintWriter pw, boolean forFile )
                   throws ParserException
   {
     // if ( ! checkPath( filename ) ) {
@@ -460,8 +461,8 @@ public class ParserTh extends TglParser
               idx = TDString.nextIndex( vals, idx );
               if ( idx < vals.length ) {
                 surveyname = vals[idx];
-                survey_pos[ks] = path.length();
-                path = path + "." + vals[idx];
+                survey_pos[ks] = vals[idx].length() + 1; // path.length();
+                path = vals[idx] + "." + path;
                 // TDLog.v( "TH SURVEY " + path );
                 ++ks;
                 in_survey = true;
@@ -579,7 +580,7 @@ public class ParserTh extends TglParser
                 // TDLog.v( "TH command fix");
                 idx = TDString.nextIndex( vals, idx );
                 if ( idx < vals.length ) {
-                  String name = makeName( vals[idx], path );
+                  String name = makeName( vals[idx], path, forFile );
                   // TDLog.v( "TH command fix " + name );
                   try { 
                     idx = TDString.nextIndex( vals, idx );
@@ -627,13 +628,13 @@ public class ParserTh extends TglParser
                             if ( to.equals("-") || to.equals(".") ) {
                               // TODO splay shot
                               if ( mSplayUse > SPLAY_USE_SKIP ) {
-                                from = makeName( from, path );
+                                from = makeName( from, path, forFile );
                                 to = null;
                                 splays.add( new Cave3DShot( from, to, len, ber, cln, flags, millis, mColor ) );
                               }
                             } else {
-                              from = makeName( from, path );
-                              to   = makeName( to, path );
+                              from = makeName( from, path, forFile );
+                              to   = makeName( to, path, forFile );
                               // StringWriter sw = new StringWriter();
                               // PrintWriter pw = new PrintWriter( sw );
                               // pw.format(Locale.US, "%s %s %.2f %.1f %.1f", from, to, len, ber, cln );
@@ -738,7 +739,7 @@ public class ParserTh extends TglParser
                   InputStreamReader isr0 = new InputStreamReader( new FileInputStream( filepath ) );
                   int res = readFile( isr0, filepath, path,
                                    use_survey_declination, survey_declination,
-                                   units_len, units_ber, units_cln, pw );
+                                   units_len, units_ber, units_cln, pw, forFile );
                   if ( res != SUCCESS ) {
                     TDLog.e( "Th read file " + filename + " failed. Error code " + res );
                     TDToast.makeBad( TDInstance.formatString( R.string.error_file_read, filename ) );
@@ -756,7 +757,7 @@ public class ParserTh extends TglParser
                   if ( (idx = TDString.nextIndex( vals, idx )) < vals.length ) color = 0xff000000 | Integer.parseInt( vals[idx] );
                   // TDLog.v("TH parser color " + color + " " + idx + ": " + vals[idx] );
                 }
-                // TDLog.v( "TH load survey " + filename + " color " + color );
+                TDLog.v( "TH load survey " + filename + " color " + color );
                 if ( mData == null ) {
                   String base = null;
                   if ( dirname.toLowerCase( Locale.getDefault() ).endsWith( "tdconfig/" ) ) {
@@ -780,18 +781,19 @@ public class ParserTh extends TglParser
                 }
               }
             } else if ( cmd.equals("equate") ) {
+              TDLog.v( "Th Equate vals " + vals.length + " path <" + path + ">" );
               idx = TDString.nextIndex( vals, idx );
               if ( idx < vals.length ) {
-                String from = makeName( vals[idx], path );
+                String from = makeName( vals[idx], path, forFile );
                 while ( idx < vals.length ) {
                   idx = TDString.nextIndex( vals, idx );
                   if ( idx < vals.length ) {
-		    String to = makeName( vals[idx], path );
+		    String to = makeName( vals[idx], path, forFile );
                     // StringWriter sw = new StringWriter();
                     // PrintWriter pw = new PrintWriter( sw );
                     // pw.format(Locale.US, "EQUATE %s %s 0.00 0.0 0.0", from, to );
                     // TDLog.v( "Th " + sw.getBuffer().toString() );
-                    // TDLog.v( "Th Equate " + from + " " + to );
+                    TDLog.v( "Th Equate " + from + " " + to );
                     shots.add( new Cave3DShot( from, to, 0.0f, 0.0f, 0.0f, 0, 0, mColor ) );
                   }
                 }
@@ -829,7 +831,7 @@ public class ParserTh extends TglParser
       return ERR_NO_SHOTS;
     }
     return SUCCESS;
-  }
+  } // readFile
 
   /** assign the surveys to the leg shots
    */

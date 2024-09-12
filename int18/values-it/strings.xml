@@ -567,7 +567,7 @@
     <string name="splay_delete">Cancello splay %1$s ?</string>
     <string name="plot_duplicate_name">Nome disegno già presente</string>
     <string name="plot_dangling">Disegno dondolante</string>
-    <!-- UNUSED string name="plot_name">Nome del disegno</string -->
+    <string name="plot_name">Nome disegno</string>
     <string name="plot_new">Nuovo disegno</string>
     <string name="plot_not_found">Disegno non trovato</string>
     <!-- UNUSED string name="plot_null_name">Nome del disegno mancante</string -->
@@ -823,6 +823,7 @@
     <string name="button_next"    >Prossimo</string>
     <string name="button_prev"    >Precedente</string>
     <string name="button_new"     >Nuovo scarto</string>
+    <!-- TODO string name="button_rename"  >Rename</string -->
     <string name="button_skip"    >Salta</string>
     <string name="button_done"    >Fatto</string>
     <string name="button_lrud"    >Aggiungi LRUD</string>
@@ -855,6 +856,7 @@
     <string name="button_search"    >Cerca     </string>
     <string name="button_merge"     >Unisci    </string>
     <string name="button_saved"     >Caposaldo salvato</string>
+    <!-- TODO string name="button_scrap"     >Outlines</string -->
     <string name="button_split"     >Dividi    </string>
     <string name="button_station"   >Centra</string>
     <string name="button_store"     >Scrivi    </string>

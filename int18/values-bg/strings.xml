@@ -578,7 +578,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="splay_delete">Изтриване на странично измерване %1$s \?</string>
     <string name="plot_duplicate_name">Дублирано име на скица</string>
     <string name="plot_dangling">Висяща скица</string>
-    <!-- UNUSED string name="plot_name">Име на картировката</string -->
+    <string name="plot_name">Име на картировката</string>
     <string name="plot_new">Нова скица</string>
     <string name="plot_not_found">Скицата не е намерена</string>
     <!-- UNUSED string name="plot_null_name">Липсва име на скицата</string -->
@@ -836,6 +836,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_next">Следващ</string>
     <string name="button_prev">Предишен</string>
     <string name="button_new">Нов отрязък</string>
+    <!-- TODO string name="button_rename"  >Rename</string -->
     <string name="button_skip">Пропусни</string>
     <string name="button_done">Готово</string>
     <string name="button_lrud">+ ляво/дясно/горе/долу</string>
@@ -868,6 +869,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_search">Търсене</string>
     <string name="button_merge">Обединяване</string>
     <string name="button_saved">Запазени репери</string>
+    <!-- TODO string name="button_scrap"     >Outlines</string -->
     <string name="button_split">Раздели</string>
     <string name="button_station">Център на</string>
     <string name="button_store">Магазин</string>

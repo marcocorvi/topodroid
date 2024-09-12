@@ -36,7 +36,7 @@ class DrawingModeDialog extends MyDialog
     private CheckBox mCBstation;  // whether to show stations
     private CheckBox mCBgrid;     // whether to show the grid
     private CheckBox mCBfixed;    // whether to show the grid
-    private CheckBox mCBscrap;
+    // private CheckBox mCBscrap;    // sketch outlines
 
     private CheckBox mCBfloor = null;
     private CheckBox mCBfill  = null;
@@ -99,7 +99,7 @@ class DrawingModeDialog extends MyDialog
       }
 
       mCBscaleRef = (CheckBox) findViewById(R.id.cb_mode_scale_ref);
-      mCBscrap = (CheckBox) findViewById(R.id.cb_scrap);
+      // mCBscrap = (CheckBox) findViewById(R.id.cb_scrap);
 
       ((Button) findViewById(R.id.button_ok)).setOnClickListener( this );
       ((Button) findViewById(R.id.button_back)).setOnClickListener( this );
@@ -109,7 +109,7 @@ class DrawingModeDialog extends MyDialog
         mCBsplay.setVisibility( View.GONE );
         mCBlatest.setVisibility( View.GONE );
         mCBfixed.setVisibility( View.GONE );
-        mCBscrap.setVisibility( View.GONE );
+        // mCBscrap.setVisibility( View.GONE );
       } else {
         mCBsplay.setChecked(   (mode & DisplayMode.DISPLAY_SPLAY) != 0 );
 	if ( TDSetting.mShotRecent ) {
@@ -122,7 +122,7 @@ class DrawingModeDialog extends MyDialog
         } else {
           mCBfixed.setVisibility( View.GONE );
         }
-        if ( ! TDLevel.overNormal ) mCBscrap.setVisibility( View.GONE );
+        // if ( ! TDLevel.overNormal ) mCBscrap.setVisibility( View.GONE );
       }
       mCBleg.setChecked(     (mode & DisplayMode.DISPLAY_LEG) != 0 );
       mCBstation.setChecked( (mode & DisplayMode.DISPLAY_STATION) != 0 );
@@ -165,9 +165,9 @@ class DrawingModeDialog extends MyDialog
         if ( mCBscaleRef.isChecked() )mode |= DisplayMode.DISPLAY_SCALEBAR;
         // TDLog.e( "Mode " + mode );
         mSurface.setDisplayMode( mode );
-        if ( TDLevel.overNormal && mCBscrap.isChecked() && mParent != null ) {
-          mParent.scrapOutlineDialog();
-        }
+        // if ( TDLevel.overNormal && mCBscrap.isChecked() && mParent != null ) {
+        //   mParent.scrapOutlineDialog();
+        // }
         if ( TDSetting.mWithLevels > 0 ) setLevels();
       } else if ( vid == R.id.button_back ) {
       //   /* nothing */

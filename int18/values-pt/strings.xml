@@ -534,7 +534,7 @@ no campo abaixo e aperte o botão.
   <string name="splay_delete">Apagar medida auxiliar %1$s ?</string>
   <string name="plot_duplicate_name">Nome de croqui repetido</string>
   <string name="plot_dangling">Croqui solto</string>
-  <!-- UNUSED string name="plot_name">Nome do croqui</string -->
+  <string name="plot_name">Nome do croqui</string>
   <string name="plot_new">Novo croqui</string>
   <string name="plot_not_found">Croqui não encontrado</string>
   <!-- UNUSED string name="plot_null_name">Croqui sem nome</string -->
@@ -774,6 +774,7 @@ no campo abaixo e aperte o botão.
   <string name="button_next">Próximo</string>
   <string name="button_prev">Anterior</string>
   <string name="button_new">Novo trecho</string>
+    <!-- TODO string name="button_rename"  >Rename</string -->
   <string name="button_skip">Ignorar</string>
   <string name="button_done">Fim</string>
   <string name="button_lrud">Incluir EDTC</string>
@@ -806,6 +807,7 @@ no campo abaixo e aperte o botão.
   <string name="button_search">Pesquisar </string>
   <string name="button_merge">Mesclar   </string>
   <string name="button_saved">Gravar base</string>
+    <!-- TODO string name="button_scrap"     >Outlines</string -->
   <string name="button_split">Dividir   </string>
   <string name="button_station">Centralizar</string>
   <string name="button_store">Armazenar </string>

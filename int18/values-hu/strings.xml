@@ -574,7 +574,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="splay_delete">Törlöd a %1$s segédmérést?</string>
     <string name="plot_duplicate_name">Vázlat nevének megkettőzése</string>
     <string name="plot_dangling">Lógó vázlat</string>
-    <!-- UNUSED string name="plot_name">Vázlat név</string -->
+    <string name="plot_name">Vázlat név</string>
     <string name="plot_new">Új vázlat</string>
     <string name="plot_not_found">Vázlat nem található</string>
     <!-- UNUSED string name="plot_null_name">Hiányzó vázlat név</string -->
@@ -832,6 +832,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="button_next"    >Következő</string>
     <string name="button_prev"    >Előző</string>
     <string name="button_new"     >Új szint</string>
+    <!-- TODO string name="button_rename"  >Rename</string -->
     <string name="button_skip"    >Átugor</string>
     <string name="button_done"    >Kész</string>
     <string name="button_lrud"    >+BJFL</string>
@@ -864,6 +865,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="button_search"    >Keres    </string>
     <string name="button_merge"     >Egyesít     </string>
     <string name="button_saved"     >Mentett pont</string>
+    <!-- TODO string name="button_scrap"     >Outlines</string -->
     <string name="button_split"     >Feloszt     </string>
     <string name="button_station"   >Központ:</string>
     <string name="button_store"     >Tárol</string>

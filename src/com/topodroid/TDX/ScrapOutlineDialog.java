@@ -48,7 +48,7 @@ class ScrapOutlineDialog extends MyDialog
   // private ListItemAdapter mArrayAdapter;
   private Button mBtnBack;
   private Button mBtnClear;
-  private Button mBtnMerge;
+  // private Button mBtnMerge;
   private ListView mList;
   private List< PlotInfo > mPlots;
 
@@ -83,12 +83,12 @@ class ScrapOutlineDialog extends MyDialog
     mBtnBack.setOnClickListener( this );
     mBtnClear = (Button) findViewById(R.id.btn_clear);
     mBtnClear.setOnClickListener( this );
-    mBtnMerge = (Button) findViewById(R.id.btn_merge);
-    if ( TDLevel.overExpert && TDSetting.mPlotSplit ) {
-      mBtnMerge.setOnClickListener( this );
-    } else {
-      mBtnMerge.setVisibility( View.GONE );
-    }
+    // mBtnMerge = (Button) findViewById(R.id.btn_merge);
+    // if ( TDLevel.overExpert && TDSetting.mPlotSplit ) {
+    //   mBtnMerge.setOnClickListener( this );
+    // } else {
+    //   mBtnMerge.setVisibility( View.GONE );
+    // }
 
     updateList();
   }
@@ -116,8 +116,8 @@ class ScrapOutlineDialog extends MyDialog
     Button b = (Button) v;
     if ( b == mBtnClear ) {
       mParent.addScrap( null );
-    } else if ( TDSetting.mPlotSplit && b == mBtnMerge ) {
-      mParent.mergeOutlineScrap( );
+    // } else if ( TDSetting.mPlotSplit && b == mBtnMerge ) {
+    //   mParent.mergeOutlineScrap( );
     // } else if ( b == mBtnBack ) {
       /* nothing */
     }

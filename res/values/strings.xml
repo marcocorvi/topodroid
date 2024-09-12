@@ -478,7 +478,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="menu_recover">RECOVER</string>
     <string name="menu_recover_paste">RECOVER/PASTE</string>
     <string name="menu_reload">RELOAD</string>
-    <string name="menu_rename_delete">RENAME/DELETE</string>
+    <string name="menu_rename_delete">RENAME, ETC.</string>
     <string name="menu_rename">RENAME</string>
     <string name="menu_plot_scrap" copyable="cn fr it">SCRAPS</string>
     <string name="menu_switch">SWITCH/CLOSE</string>
@@ -588,7 +588,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="splay_delete">Delete splay %1$s ?</string>
     <string name="plot_duplicate_name">Duplicate sketch name</string>
     <string name="plot_dangling">Dangling sketch</string>
-    <!-- UNUSED string name="plot_name">Sketch name</string -->
+    <string name="plot_name">Sketch name</string>
     <string name="plot_new">New sketch</string>
     <string name="plot_not_found">Sketch not found</string>
     <!-- UNUSED string name="plot_null_name">Missing sketch name</string -->
@@ -848,6 +848,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="button_next"    >Next</string>
     <string name="button_prev"    >Previous</string>
     <string name="button_new"     >New scrap</string>
+    <string name="button_rename"  >Rename</string>
     <string name="button_skip"    >Skip</string>
     <string name="button_done"    >Done</string>
     <string name="button_lrud"  copyable="all">+ LRUD</string>
@@ -880,6 +881,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="button_search"    >Search</string>
     <string name="button_merge"     >Merge</string>
     <string name="button_saved"     >Saved station</string>
+    <string name="button_scrap"     >Outlines</string>
     <string name="button_split"     >Split</string>
     <string name="button_station"   >Center at</string>
     <string name="button_store"     >Store</string>

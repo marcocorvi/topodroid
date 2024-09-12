@@ -10,13 +10,34 @@
   android:orientation="vertical"
   >
 
-    <EditText android:id="@+id/et_name" 
-      style="@style/edit_text_light"
-      android:layout_width="match_parent" 
+    <LinearLayout 
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:layout_gravity="end"
+      android:orientation="horizontal"
       android:layout_marginTop="@dimen/marginv"
-      android:hint="@string/hint_name"
-      android:importantForAutofill="no"
-    />
+      >
+      <TextView 
+        android:layout_width="0sp" 
+        android:layout_height="wrap_content"
+        android:layout_weight="40"
+        android:text="@string/plot_name"
+      />
+
+      <EditText android:id="@+id/et_name" 
+        style="@style/edit_text_light"
+        android:layout_width="0sp" 
+        android:layout_height="wrap_content"
+	android:layout_weight="60"
+        android:singleLine="true"
+        android:textSize="@dimen/textsize"
+        android:typeface="monospace"
+        android:padding="@dimen/padding"
+        android:inputType="text"
+        android:hint="@string/hint_name"
+        android:importantForAutofill="no"
+      />
+    </LinearLayout>
 
     <LinearLayout 
       android:layout_width="wrap_content" 
@@ -54,26 +75,73 @@
        android:orientation="horizontal"
        android:layout_marginTop="@dimen/marginv"
        >
-
-      <!-- Button android:id="@+id/btn_merge"
+      <Button android:id="@+id/btn_rename"
         android:layout_marginEnd="@dimen/marginh"
         style="@style/button_default"
-        android:text="@string/button_merge"
-        / -->
+        android:text="@string/button_rename"
+      />
+    </LinearLayout>
 
-      <Button android:id="@+id/btn_split"
-        style="@style/button_default"
-        android:layout_marginEnd="@dimen/marginh"
-        android:text="@string/button_split"
-        />
-
+    <LinearLayout 
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content"
+       android:layout_gravity="end"
+       android:orientation="horizontal"
+       android:layout_marginTop="@dimen/marginv"
+       >
       <CheckBox android:id="@+id/cb_copy"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:layout_marginEnd="@dimen/marginh"
         android:text="@string/copy_items"
-        />
+      />
+      <Button android:id="@+id/btn_split"
+        style="@style/button_default"
+        android:layout_marginEnd="@dimen/marginh"
+        android:text="@string/button_split"
+      />
+    </LinearLayout>
 
+    <LinearLayout 
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content"
+       android:layout_gravity="end"
+       android:orientation="horizontal"
+       android:layout_marginTop="@dimen/marginv"
+       >
+      <Button android:id="@+id/btn_scrap"
+        android:layout_marginEnd="@dimen/marginh"
+        style="@style/button_default"
+        android:text="@string/button_scrap"
+      />
+    </LinearLayout>
+
+    <LinearLayout 
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content"
+       android:layout_gravity="end"
+       android:orientation="horizontal"
+       android:layout_marginTop="@dimen/marginv"
+       >
+      <Button android:id="@+id/btn_merge"
+        android:layout_marginEnd="@dimen/marginh"
+        style="@style/button_default"
+        android:text="@string/button_merge"
+      />
+    </LinearLayout>
+
+    <LinearLayout 
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content"
+       android:layout_gravity="end"
+       android:orientation="horizontal"
+       android:layout_marginTop="@dimen/marginv"
+       >
+      <Button android:id="@+id/btn_delete"
+        android:layout_marginEnd="@dimen/marginh"
+        style="@style/button_default"
+        android:text="@string/button_delete"
+      />
     </LinearLayout>
 
     <LinearLayout android:id="@+id/help"
@@ -90,22 +158,22 @@
       <LinearLayout 
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
-        android:gravity="end"
+        android:layout_gravity="end"
         >
         <Button android:id="@+id/btn_back"
           style="@style/button_default"
           android:layout_marginEnd="@dimen/marginh"
           android:text="@string/button_cancel"
           />
-        <Button android:id="@+id/btn_delete"
+        <!-- Button android:id="@+id/btn_delete"
           style="@style/button_default"
           android:layout_marginEnd="@dimen/marginh"
           android:text="@string/button_delete"
-          />
-        <Button android:id="@+id/btn_rename"
+          / -->
+        <!-- Button android:id="@+id/btn_rename"
           style="@style/button_default"
-          android:text="@string/button_apply"
-          />
+          android:text="@string/button_rename"
+          / -->
       </LinearLayout>
     </LinearLayout>
 

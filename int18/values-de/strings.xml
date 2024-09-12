@@ -524,7 +524,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="splay_delete">Hilfszug %1$s löschen?</string>
   <string name="plot_duplicate_name">Doppelter Name</string>
   <string name="plot_dangling">Skizze nicht verbunden</string>
-  <!-- UNUSED string name="plot_name">Name der Skizze</string -->
+  <string name="plot_name">Name der Skizze</string>
   <string name="plot_new">Neue Skizze</string>
   <string name="plot_not_found">Skizze nicht gefunden</string>
   <!-- UNUSED string name="plot_null_name">Missing sketch name</string -->
@@ -765,6 +765,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="button_next">Nächste</string>
   <string name="button_prev">Vorherige</string>
   <string name="button_new">Neue Teilskizze</string>
+    <!-- TODO string name="button_rename"  >Rename</string -->
   <string name="button_skip">Überspringen</string>
   <string name="button_done">Fertig</string>
   <string name="button_lrud">LRUD hinzufügen</string>
@@ -797,6 +798,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="button_search">Suche    </string>
   <string name="button_merge">Zusammenführen     </string>
   <string name="button_saved">Gespeicherte Station</string>
+    <!-- TODO string name="button_scrap"     >Outlines</string -->
   <string name="button_split">Aufteilen     </string>
   <string name="button_station">Zentrieren bei</string>
   <string name="button_store">Speichern</string>

@@ -8451,7 +8451,7 @@ public class DrawingWindow extends ItemDrawer
 	} else {
 	  doZoomFit();
 	}
-      } else if ( TDLevel.overAdvanced && (! mTh2Edit) && PlotType.isSketch2D( mType ) && p++ == pos ) { // TH2EDIT RENAME - DELETE
+      } else if ( TDLevel.overAdvanced && (! mTh2Edit) && PlotType.isSketch2D( mType ) && p++ == pos ) { // TH2EDIT RENAME - DELETE - SPLIT - OUTLINE - MERGE
         //   askDelete();
         (new PlotRenameDialog( mActivity, this )).show();
       } else if ( TDLevel.overAdvanced && ( PlotType.isSketch2D( mType ) || mTh2Edit ) && p++ == pos ) { // TH2EDIT SCRAPS
@@ -9629,21 +9629,6 @@ public class DrawingWindow extends ItemDrawer
       mOutlinePlot2 = null;
     }
   }
-
-  // void mergePlot()
-  // {
-  //   List< PlotInfo > plots = mApp_mData.selectAllPlotsWithType( TDInstance.sid, TDStatus.NORMAL, mType );
-  //   if ( plots.size() <= 1 ) { // nothing to merge in
-  //     return;
-  //   }
-  //   for ( PlotInfo plt : plots ) {
-  //     if ( plt.name.equals( mName ) ) {
-  //       plots.remove( plt );
-  //       break;
-  //     }
-  //   }
-  //   new PlotMergeDialog( mActivity, this, plots ).show();
-  // }
 
   /** merge the items of another plot into the current plot
    * @param plt   the other plot info

@@ -44,10 +44,10 @@
         android:text="@string/button_clear"
         android:layout_marginEnd="@dimen/marginh"
       />
-      <Button android:id="@+id/btn_merge"
+      <!-- Button android:id="@+id/btn_merge"
         style="@style/button_default"
         android:text="@string/button_merge"
-      />
+      / -->
     </LinearLayout>
   </LinearLayout>
 </LinearLayout>

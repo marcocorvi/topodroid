@@ -571,7 +571,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="splay_delete">Supprimer le cheminement %1$s ?</string>
     <string name="plot_duplicate_name">Dupliquer le nom du relevé</string>
     <string name="plot_dangling">Croquis détaché</string>
-    <!-- UNUSED string name="plot_name">Nom du croquis</string -->
+    <string name="plot_name">Nom du croquis</string>
     <string name="plot_new">Nouveau croquis</string>
     <string name="plot_not_found">Dessin introuvable</string>
     <!-- UNUSED string name="plot_null_name">Nom de relevé manquant</string -->
@@ -828,6 +828,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_next"    >Suivant</string>
     <string name="button_prev"    >Précédent</string>
     <string name="button_new"     >Nouveau fragment</string>
+    <!-- TODO string name="button_rename"  >Rename</string -->
     <string name="button_skip"    >Passer</string>
     <string name="button_done"    >Effectué</string>
     <string name="button_lrud"  copyable="all">Ajouter GDHB LRUD</string>
@@ -860,6 +861,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_search"    >Chercher</string>
     <string name="button_merge"     >Fusionner</string>
     <string name="button_saved"     >Station sauvegardée</string>
+    <!-- TODO string name="button_scrap"     >Outlines</string -->
     <string name="button_split"     >Diviser</string>
     <string name="button_station"   >Centrer sur</string>
     <string name="button_store"     >Stocker</string>

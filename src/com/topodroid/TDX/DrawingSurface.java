@@ -1160,10 +1160,10 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
   // }
 
   /** add a sketch loaded from file
-   * @param tdr         tdr file pathname
+   * @param tdr        tdr file pathname
    * @param xdelta     X shift
    * @param ydelta     Y shift
-   * @param plotname   sketch name
+   * @param plotname   sketch name (null for merging)
    * @note called by OverviewWindow
    * @pre tdr != null
    */
@@ -1175,7 +1175,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
       // TDLog.v( "add file " + tdr + " loading ... " + plotname );
       ret = DrawingIO.doLoadDataStream( this, tdr, xdelta, ydelta, /* missingSymbols, */ localPalette, null, false, plotname );
     }
-    if ( ret ) {
+    if ( ret && plotname != null ) {
       if ( plotname.startsWith( TDInstance.survey ) ) {
         int len = TDInstance.survey.length() + 1;
         if ( len < plotname.length() ) {

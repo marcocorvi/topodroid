@@ -34,8 +34,9 @@ class PlotRenameDialog extends MyDialog
   private Button   mBtnBack;
   private Button   mBtnDelete;
   private Button   mBtnSplit;
-  // private Button   mBtnMerge;
   private CheckBox mCBcopy;
+  private Button   mBtnScrap; // sketch outlines
+  private Button   mBtnMerge; // sketch merge outlines
 
   private final DrawingWindow mParent;
   private String mStation;
@@ -59,10 +60,11 @@ class PlotRenameDialog extends MyDialog
     
     mBtnRename = (Button) findViewById(R.id.btn_rename );
     mBtnSplit  = (Button) findViewById(R.id.btn_split );
-    // mBtnMerge  = (Button) findViewById(R.id.btn_merge );
     mBtnDelete = (Button) findViewById(R.id.btn_delete );
     mBtnBack   = (Button) findViewById(R.id.btn_back );
     mCBcopy    = (CheckBox) findViewById( R.id.cb_copy );
+    mBtnScrap  = (Button) findViewById(R.id.btn_scrap );
+    mBtnMerge  = (Button) findViewById(R.id.btn_merge );
 
     mEtName = (EditText) findViewById( R.id.et_name );
     mEtName.setText( mName );
@@ -76,15 +78,18 @@ class PlotRenameDialog extends MyDialog
     mBtnRename.setOnClickListener( this );
     mBtnBack.setOnClickListener( this );
     mBtnDelete.setOnClickListener( this );
-    if ( TDLevel.overExpert && TDSetting.mPlotSplit ) {
-      // mBtnMerge.setOnClickListener( this );
+    if ( TDLevel.overExpert && TDSetting.mPlotSplit && mParent != null && ! mParent.isAnySection() ) {
+      mBtnScrap.setOnClickListener( this );
       mBtnSplit.setOnClickListener( this );
       mBtnSplit.setOnLongClickListener( this );
+      mBtnMerge.setOnClickListener( this );
     } else {
       mCBcopy.setVisibility( View.GONE );
       mBtnSplit.setVisibility( View.GONE );
-      // mBtnMerge.setVisibility( View.GONE );
+      mBtnScrap.setVisibility( View.GONE );
+      mBtnMerge.setVisibility( View.GONE );
     }
+
   }
 
   @Override
@@ -116,8 +121,10 @@ class PlotRenameDialog extends MyDialog
       mParent.askDelete();
     } else if ( TDSetting.mPlotSplit && b == mBtnSplit ) {
       if ( ! handleSplit( true ) ) return;
-    // } else if ( b == mBtnMerge ) {
-    //   mParent.mergePlot();
+    } else if ( b == mBtnScrap ) {
+      mParent.scrapOutlineDialog();
+    } else if ( b == mBtnMerge ) {
+      mParent.mergeOutlineScrap( );
     // } else if ( b == mBtnBack ) {
       /* nothing */
     }

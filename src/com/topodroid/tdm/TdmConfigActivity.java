@@ -474,7 +474,7 @@ public class TdmConfigActivity extends Activity
     } else if ( TDLevel.overNormal && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // 3D
       if ( mTdmConfig.writeTdmConfig( true ) ) {
         try {
-          // TDLog.v( "Cave3D of " + mTdmConfig.getFilepath() );
+          TDLog.v( "Cave3D of " + mTdmConfig.getFilepath() );
           Intent intent = new Intent( Intent.ACTION_VIEW ).setClass( this, com.topodroid.TDX.TopoGL.class );
           intent.putExtra( "INPUT_THCONFIG", mTdmConfig.getSurveyName() ); // thconfig (project) name, without ".thconfig" extension
           intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );          // current work directory

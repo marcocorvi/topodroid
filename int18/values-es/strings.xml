@@ -574,7 +574,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="splay_delete">¿Quiere eliminar tomas radiales %1$s ?</string>
     <string name="plot_duplicate_name">Nombre de croquis duplicado</string>
     <string name="plot_dangling">Croquis colgado</string>
-    <!-- UNUSED string name="plot_name">Nombre dibujo</string -->
+    <string name="plot_name">Nombre dibujo</string>
     <string name="plot_new">Nuevo croquis</string>
     <string name="plot_not_found">No hay croquis</string>
     <!-- UNUSED string name="plot_null_name">Falta nombre dibujo</string -->
@@ -830,6 +830,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_next"    >Siguiente</string>
     <string name="button_prev"    >Atrás</string>
     <string name="button_new"     >nuevo exceso</string>
+    <!-- TODO string name="button_rename"  >Rename</string -->
     <string name="button_skip"    >Omitir</string>
     <string name="button_done"    >Hecho</string>
     <string name="button_lrud"    >Añadir LRUD</string>
@@ -862,6 +863,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_search"    >Buscar    </string>
     <string name="button_merge"     >Unir     </string>
     <string name="button_saved"     >Estación guardada</string>
+    <!-- TODO string name="button_scrap"     >Outlines</string -->
     <string name="button_split"     >Dividir     </string>
     <string name="button_station"   >Centro at</string>
     <string name="button_store"     >Recibir   </string>

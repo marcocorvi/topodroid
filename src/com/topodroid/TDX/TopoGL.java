@@ -290,9 +290,9 @@ public class TopoGL extends Activity
 
   private boolean mFileDialog = true;
   // private int mVersionCheck = -1;
-  private String mSurveyBase = null; // TopoDroid CWD fullpath
-  private String mSurveyName; 
-  private String mThconfigName; 
+  private String mSurveyBase   = null; // TopoDroid CWD fullpath
+  private String mSurveyName   = null; 
+  private String mThconfigName = null; 
 
   /** handle extra parameters
    * @note when called, FeatureChecker.checkPermissions( this ) >= 0
@@ -310,7 +310,7 @@ public class TopoGL extends Activity
           // Cave3DFile.setTopoDroidPaths( mSurveyBase ); // BLUETOOTH
 
           if ( mThconfigName != null ) { // used by TdManager
-            // TDLog.v("TdManager input tdconfig " + mThconfigName );
+            TDLog.v("TdManager input tdconfig " + mThconfigName );
             mFileDialog = false;
             doOpenFile( null, mThconfigName, true ); // asynch
           } else if ( mSurveyName != null ) {
@@ -1460,9 +1460,9 @@ public class TopoGL extends Activity
     // TDLog.v("TopoGL do open file: " + pathname + " asynch " + asynch );
 
     if ( uri == null ) {
-      TDLog.v("TopoGL input stream from tdconfig " + pathname );
       // String path = Cave3DFile.THCONFIG_PATH + "/" + pathname + ".tdconfig";
       String path = TDPath.getTdconfigDir() + "/" + pathname + ".tdconfig";
+      TDLog.v("TopoGL input stream from tdconfig " + pathname + " path " + path );
       Toast.makeText( this, String.format( getResources().getString( R.string.reading_file ), path ), Toast.LENGTH_SHORT ).show();
       try {
         // final InputStream is = new FileInputStream( path );
@@ -2216,18 +2216,18 @@ public class TopoGL extends Activity
     doSketches = false;
     String ext  = TDPath.getExtension( filepath );
     String name = TDPath.getMainname( filepath );
-    // TDLog.v("init rendering (2) file " + filepath + " survey " + surveyname + " name " + name + " ext " + ext );
+    TDLog.v("init rendering (2) file " + filepath + " survey " + surveyname + " name " + name + " ext " + ext );
     try {
       mParser = null;
       if ( mRenderer != null ) mRenderer.clearModel();
       // resetAllPaths();
       if ( ext.equals( "tdconfig" ) ) { // isr not used  // FIXME may null pointer
-        // TDLog.v("init rendering (2) TDCONGIF"); // TopoDroid TDM projects
+        TDLog.v("init rendering (2) TDCONGIF"); // TopoDroid TDM projects
         InputStreamReader isr = ( is == null )? null : new InputStreamReader( is );
         mParser = new ParserTh( this, isr, filepath, ParserTh.TDCONFIG ); // tdconfig files are saved with therion syntax
         doSketches = true;
       } else if ( ext.equals( "thconfig" ) ) { // isr not used
-        // TDLog.v("init rendering (2) THCONGIF");
+        TDLog.v("init rendering (2) THCONGIF");
         InputStreamReader isr = ( is == null )? null : new InputStreamReader( is );
         mParser = new ParserTh( this, isr, filepath, ParserTh.THCONFIG ); 
       } else if ( ext.equals( "th" ) ) { // isr not used

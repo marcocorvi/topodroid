@@ -571,7 +571,7 @@
     <string name="splay_delete">删除辐侧 %1$s ?</string>
     <string name="plot_duplicate_name">重复的草图名称</string>
     <string name="plot_dangling">悬挂草图</string>
-    <!-- UNUSED string name="plot_name">Sketch name</string -->
+    <!-- TODO string name="plot_name">Sketch name</string -->
     <string name="plot_new">新建草图</string>
     <string name="plot_not_found">未发现草图</string>
     <!-- UNUSED string name="plot_null_name">Missing sketch name</string -->
@@ -827,6 +827,7 @@
     <string name="button_next"    >下一步</string>
     <string name="button_prev"    >上一步</string>
     <string name="button_new"     >新建分层</string>
+    <!-- TODO string name="button_rename"  >Rename</string -->
     <string name="button_skip"    >跳过</string>
     <string name="button_done"    >完成</string>
     <string name="button_lrud"    >+ 左右上下</string>
@@ -859,6 +860,7 @@
     <string name="button_search"    >搜索    </string>
     <string name="button_merge"     >合并     </string>
     <string name="button_saved"     >保存站点</string>
+    <!-- TODO string name="button_scrap"     >Outlines</string -->
     <string name="button_split"     >分割     </string>
     <string name="button_station"   >以 为中心</string>
     <string name="button_store"     >存储库     </string>

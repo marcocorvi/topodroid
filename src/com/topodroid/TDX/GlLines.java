@@ -71,7 +71,7 @@ public class GlLines extends GlShape
   {
     Vector3D v1;
     Vector3D v2;
-    int      mCol;    // color value (survey) / index (axis)
+    int      mCol;     // color value (survey) / index (axis)
     int      survey;   // survey index in Parser survey list
     boolean  isSurvey; // survey or axis
     Cave3DShot mShot;  // survey shot
@@ -125,7 +125,7 @@ public class GlLines extends GlShape
      */
     void getLineColor( float[] acolor )
     {
-      // TDLog.v("Line3D is survey " + isSurvey + " (" + survey + ") color " + mCol );
+      TDLog.v("Line3D is survey " + isSurvey + " (" + survey + ") color " + mCol );
       if ( isSurvey ) { 
         if ( mCol < 0 || mCol >= TglColor.SURVEY_COLOR_NR ) {
           TglColor.colorToSurveyColor( mCol, acolor );
@@ -352,6 +352,7 @@ public class GlLines extends GlShape
        // GlRenderer.setParser() if the parser is not null
        // this calls GlRenderer.prepareModel() which calls addLine() on the legs
        // Legs should not have null stations ... [2020-05-23]
+    TDLog.v("GlLines add line-1, survey " + survey + " color " + color );
     lines.add( new Line3D( w1, w2, color, survey, is_survey, shot ) ); 
     if ( lines.size() == 1 ) {
       xmin = xmax = w1.x;
@@ -384,6 +385,7 @@ public class GlLines extends GlShape
   void addLine( Vector3D w1, Vector3D w2, int color, int survey, boolean is_survey, double xmed, double ymed, double zmed, Cave3DShot shot ) 
   { 
     if ( w1 == null || w2 == null ) return; // should not happen
+    TDLog.v("GlLines add line-2, survey " + survey + " color " + color );
     lines.add( new Line3D( w1, w2, color, survey, is_survey, xmed, ymed, zmed, shot ) ); 
   }
 

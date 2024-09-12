@@ -569,7 +569,7 @@
     <string name="splay_delete">Удалить сплей %1$s ?</string>
     <string name="plot_duplicate_name">Абрис с таким названием уже существует</string>
     <string name="plot_dangling">Непривязанный абрис</string>
-    <!-- UNUSED string name="plot_name">Название абриса</string -->
+    <string name="plot_name">Название абриса</string>
     <string name="plot_new">Новый абрис</string>
     <string name="plot_not_found">Абрис не обнаружен</string>
     <!-- UNUSED string name="plot_null_name">Отсутствует название абриса</string -->
@@ -824,6 +824,7 @@
     <string name="button_next"    >Далее</string>
     <string name="button_prev"    >Предыдущий</string>
     <string name="button_new"     >Новый скрап</string>
+    <!-- TODO string name="button_rename"  >Rename</string -->
     <string name="button_skip"    >Пропустить</string>
     <string name="button_done"    >Готово</string>
     <string name="button_lrud"    >Добавить ЛПВН</string>
@@ -856,6 +857,7 @@
     <string name="button_search"    >Поиск    </string>
     <string name="button_merge"     >Объединить     </string>
     <string name="button_saved"     >Сохраненный пикет</string>
+    <!-- TODO string name="button_scrap"     >Outlines</string -->
     <string name="button_split"     >Разделить     </string>
     <string name="button_station"   >По центру</string>
     <string name="button_store"     >Записать   </string>
