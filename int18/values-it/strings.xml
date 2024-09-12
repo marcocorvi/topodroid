@@ -823,7 +823,7 @@
     <string name="button_next"    >Prossimo</string>
     <string name="button_prev"    >Precedente</string>
     <string name="button_new"     >Nuovo scarto</string>
-    <!-- TODO string name="button_rename"  >Rename</string -->
+    <string name="button_rename"  >Renomina</string>
     <string name="button_skip"    >Salta</string>
     <string name="button_done"    >Fatto</string>
     <string name="button_lrud"    >Aggiungi LRUD</string>
@@ -856,7 +856,7 @@
     <string name="button_search"    >Cerca     </string>
     <string name="button_merge"     >Unisci    </string>
     <string name="button_saved"     >Caposaldo salvato</string>
-    <!-- TODO string name="button_scrap"     >Outlines</string -->
+    <string name="button_scrap"     >Outline</string>
     <string name="button_split"     >Dividi    </string>
     <string name="button_station"   >Centra</string>
     <string name="button_store"     >Scrivi    </string>
@@ -1759,8 +1759,8 @@
   <string name="pref_plot_split_summary">Azione per dividere o unire disegni</string>
   <string name="pref_stylus_size_title">Grandezza Stilo</string>
   <string name="pref_stylus_size_summary">Grandezza Stilo [0: ignora]</string>
-  <!-- TODO string name="pref_line_ends_title">Line-end cut</string -->
-  <!-- TODO string name="pref_line_ends_summary">Number of line-points to drop from the ends [0]</string -->
+  <string name="pref_line_ends_title">Taglio fine-linea</string>
+  <string name="pref_line_ends_summary">Numero di punti a fine linea da ignorare [0]</string -->
   <string name="pref_fixed_thickness_title">Spessore poligonale</string>
   <string name="pref_fixed_thickness_summary">Spessore linee di poligonale</string>
   <!-- UNUSED string name="pref_device_title">Dispositivo</string -->
@@ -2039,6 +2039,7 @@
     <string name="cmenu_ico">Ico-diagramma</string>
     <string name="cmenu_rose">Diagramma a rosa</string>
     <string name="cmenu_wall">Modello pareti</string>
+    <string name="cmenu_search">Ricerca</string>
     <!-- UNUSED string name="cmenu_sketch">Disegni</string -->
     <!-- NO string name="cmenu_fractal">Dim. frattale</string -->
 

@@ -2042,6 +2042,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="cmenu_ico">3D ДИАГРАМА НА РОЗАТА</string>
     <string name="cmenu_rose">ДИАГРАМА НА РОЗАТА</string>
     <string name="cmenu_wall">СТЕНИ</string>
+    <!-- TODO string name="cmenu_search">SEARCH</string -->
     <!-- UNUSED string name="cmenu_sketch">SKETCHES</string -->
     <!-- UNUSED string name="cmenu_fractal" translatable="false">FRACTAL DIM.</string -->
 

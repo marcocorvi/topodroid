@@ -2045,6 +2045,7 @@
     <string name="cmenu_ico">3D-玫瑰图</string>
     <string name="cmenu_rose">玫瑰图</string>
     <string name="cmenu_wall">墙模式</string>
+    <!-- TODO string name="cmenu_search">SEARCH</string -->
     <!-- UNUSED string name="cmenu_sketch">草图</string -->
     <!-- NO string name="cmenu_fractal">分形计算</string -->
 

@@ -1998,6 +1998,7 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <string name="cmenu_ico">DIAGRAMME ROSACE-3D</string>
     <string name="cmenu_rose">DIAGRAMME ROSACE</string>
     <string name="cmenu_wall">PAROIS</string>
+    <!-- TODO string name="cmenu_search">SEARCH</string -->
     <!-- UNUSED string name="cmenu_sketch">CROQUIS</string -->
     <!-- UNUSED string name="cmenu_fractal">Fractal counts</string -->
     

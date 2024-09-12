@@ -1897,6 +1897,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="cmenu_ico">3D-ROSENDIAGRAM</string>
   <string name="cmenu_rose">ROSENDIAGRAM</string>
   <string name="cmenu_wall">WÄNDE</string>
+    <!-- TODO string name="cmenu_search">SEARCH</string -->
   <!-- UNUSED string name="cmenu_sketch">Sketches</string -->
   <!-- UNUSED string name="cmenu_fractal">FRACTAL DIM.</string -->
   <string name="illegal_value">Ungültiger Wert</string>

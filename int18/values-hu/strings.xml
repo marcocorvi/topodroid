@@ -2057,6 +2057,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="cmenu_ico">3D-RÓZSA DIAGRAMM</string>
     <string name="cmenu_rose">RÓZSA DIAGRAMM</string>
     <string name="cmenu_wall">FALAK</string>
+    <!-- TODO string name="cmenu_search">SEARCH</string -->
     <!-- UNUSED string name="cmenu_sketch">VÁZLATOK</string -->
     <!-- NO string name="cmenu_fractal">FRAKTÁL SZÁMÍTÁS</string -->
 

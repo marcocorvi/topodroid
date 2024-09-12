@@ -2037,6 +2037,7 @@
     <string name="cmenu_ico">Ico диаграмма</string>
     <string name="cmenu_rose">Rose диаграмма</string>
     <string name="cmenu_wall">Режим стен</string>
+    <!-- TODO string name="cmenu_search">SEARCH</string -->
     <!-- UNUSED string name="cmenu_sketch">АБРИСЫ</string -->
     <!-- NO string name="cmenu_fractal">Кол-во фракталофф</string -->
 

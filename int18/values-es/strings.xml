@@ -2072,6 +2072,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="cmenu_ico">Diagrama ico</string>
     <string name="cmenu_rose">Diagrama de rosas</string>
     <string name="cmenu_wall">Visualizar paredes</string>
+    <!-- TODO string name="cmenu_search">SEARCH</string -->
     <!-- UNUSED string name="cmenu_sketch">Dibujos</string -->
     <!-- NO string name="cmenu_fractal">Fractal counts</string -->
 

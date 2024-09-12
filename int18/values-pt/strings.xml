@@ -1918,6 +1918,7 @@ no campo abaixo e aperte o botão.
   <string name="cmenu_ico">Diagrama Rose 3D</string>
   <string name="cmenu_rose">Diagrama Rose 2D</string>
   <string name="cmenu_wall">Paredes</string>
+    <!-- TODO string name="cmenu_search">SEARCH</string -->
   <!-- UNUSED string name="cmenu_sketch">CROQUIs</string -->
   <!-- UNUSED string name="cmenu_fractal" translatable="false">FRACTAL DIM.</string -->
   <string name="illegal_value">Valor inválido</string>
