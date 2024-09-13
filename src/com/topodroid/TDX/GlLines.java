@@ -504,6 +504,38 @@ public class GlLines extends GlShape
     }
   }
 
+  void setSurveyColors( List< Cave3DSurvey > surveys )
+  {
+    int max = 0;
+    for ( Cave3DSurvey survey : surveys ) {
+      // TDLog.v("Survey " + survey.name + " nr " + survey.number + " id " + survey.mId + " color " + survey.getColor() );
+      if ( survey.number > max ) max = survey.number;
+    }
+    max ++;
+    int[] cols = new int[max];
+    for ( int k=0; k<max; ++k ) cols[k] = 0;
+    for ( Cave3DSurvey survey : surveys ) cols[survey.number] = survey.getColor();
+
+    float[] acolor = new float[ COORDS_PER_COLOR ];
+    int k = 3; // index in the dataBuffer
+    for ( int i = 0; i<lineCount; ++i ) {
+      Line3D line = lines.get( i );
+      // TDLog.v("line " + i + ": survey " + line.survey + " color " + line.mCol + " max " + max );
+      if ( line.survey < max && cols[ line.survey ] != 0 ) {
+        line.mCol = cols[ line.survey ];
+        line.getLineColor( acolor );
+        dataBuffer.put( k, acolor[0] ); k++;
+        dataBuffer.put( k, acolor[1] ); k++;
+        dataBuffer.put( k, acolor[2] ); k+=5;
+        dataBuffer.put( k, acolor[0] ); k++;
+        dataBuffer.put( k, acolor[1] ); k++;
+        dataBuffer.put( k, acolor[2] ); k+=5;
+      } else {
+        k += 14;
+      }
+    }
+  }
+
   /** reduce the coords of the lines to the center
    * @param xmed    center X coord (in OpenGL)
    * @param ymed    center Y coord (in OpenGL)

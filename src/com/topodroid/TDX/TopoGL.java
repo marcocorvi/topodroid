@@ -682,6 +682,7 @@ public class TopoGL extends Activity
     R.string.menu_export,
     // R.string.cmenu_ble, // FIXME BLUETOOTH  MENU
     R.string.cmenu_info,       // 2
+    // R.string.cmenu_surveys,
     R.string.cmenu_ico,
     R.string.cmenu_rose,
     R.string.cmenu_reset,
@@ -700,6 +701,7 @@ public class TopoGL extends Activity
                           R.string.help_open_3d,
                           R.string.help_export_3d,
                           R.string.help_info_3d,
+                          // R.string.help_surveys,
                           R.string.help_ico_3d,
                           R.string.help_rose_3d,
                           R.string.help_reset_3d,
@@ -774,6 +776,12 @@ public class TopoGL extends Activity
       } else {
         Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
       }
+    // } else if ( p++ == pos ) { // SURVEYS
+    //   if ( mParser != null ) {
+    //     new DialogSurveys(this, mParser, mRenderer).show();
+    //   } else {
+    //     Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
+    //   }
     } else if ( p++ == pos ) { // ICO
       if ( mParser != null ) {
         new DialogIco(this, mParser).show();
@@ -833,7 +841,11 @@ public class TopoGL extends Activity
     // } else if ( mHasFractal && p++ == pos ) { // FRACTAL
     //   new DialogFractal( this, mParser ).show();
     } else if ( p++ == pos ) { // SEARCH
-      (new HighlightDialog( this, this )).show();
+      if ( mParser != null ) {
+        (new HighlightDialog( this, this )).show();
+      } else {
+        Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
+      }
     } else if ( p++ == pos ) { // OPTIONS
       Intent intent = new Intent( this, com.topodroid.prefs.TDPrefActivity.class );
       intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_CAVE3D );
@@ -2461,6 +2473,13 @@ public class TopoGL extends Activity
   {
     if ( mRenderer != null ) {
       mRenderer.hideOrShow( surveys );
+    }
+  }
+
+  void setSurveyColors(  List< Cave3DSurvey > surveys )
+  {
+    if ( mRenderer != null ) {
+      mRenderer.setSurveyColors( surveys );
     }
   }
 

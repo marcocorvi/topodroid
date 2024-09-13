@@ -43,6 +43,7 @@ class DialogSurveys extends MyDialog
     super( context, null, R.string.DialogSurveys ); // null app
     mTopoGl  = topogl;
     mSurveys = surveys;
+    for ( Cave3DSurvey survey : surveys ) survey.resetTmpColor();
     mAdapter = new SurveyAdapter( mContext, mTopoGl, R.layout.survey_row, surveys );
   }
 
@@ -74,6 +75,8 @@ class DialogSurveys extends MyDialog
   public void onClick( View v )
   {
     if ( v.getId() == R.id.button_ok ) {
+      for ( Cave3DSurvey survey : mSurveys ) survey.resetColor();
+      mTopoGl.setSurveyColors( mSurveys );
       mTopoGl.hideOrShow( mSurveys );
     } // else only button_cancel
     dismiss();

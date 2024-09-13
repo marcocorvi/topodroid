@@ -788,6 +788,11 @@ public class GlRenderer implements Renderer
     if ( mModel != null ) mModel.hideOrShow( surveys );
   }
 
+  void setSurveyColors( List< Cave3DSurvey > surveys ) 
+  {
+    if ( mModel != null ) mModel.setSurveyColors( surveys );
+  }
+
   // @param pathname export path - can be filepath ending in gltf, or a folder name
   //     filepath.gltf:   additional files saved as filepath-XXX
   //     folder:          additional files saved as folder/XXX, gltf file saved as "folder.gltf"

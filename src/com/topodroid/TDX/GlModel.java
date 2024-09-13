@@ -355,6 +355,13 @@ public class GlModel
     }
   }
 
+  void setSurveyColors( List< Cave3DSurvey > surveys )
+  {
+    synchronized( this ) {
+      glLegs.setSurveyColors( surveys );
+    }
+  }
+
   void draw( float[] mvp_matrix, float[] mv_matrix, Vector3D light ) 
   { 
     if ( ! modelCreated ) return;

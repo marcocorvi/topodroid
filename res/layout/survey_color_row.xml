@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+  >
+  <Button android:id="@+id/btn_color"
+    android:layout_width="20dp"
+    android:layout_height="20dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+  />
+
+  <CheckBox android:id="@+id/cb_survey"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding"
+    android:textSize="@dimen/textsize"
+    android:typeface="monospace"
+    android:gravity="start"
+    android:textColor="#ffffffff"
+    android:singleLine="true"
+  />
+</LinearLayout>

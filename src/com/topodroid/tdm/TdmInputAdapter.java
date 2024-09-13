@@ -131,7 +131,7 @@ class TdmInputAdapter extends ArrayAdapter< TdmInput >
     // IColorChanged
     public void colorChanged( int color )
     {
-      mInput.setColor( color );
+      if ( mInput != null ) mInput.setColor( color );
       colorBtn.setBackgroundColor( color );
     }
 

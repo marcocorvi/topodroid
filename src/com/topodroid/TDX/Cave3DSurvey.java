@@ -33,6 +33,7 @@ public class Cave3DSurvey
   String name;
   boolean visible;
   private int color;
+  private int tmp_color; // temporary color
 
   ArrayList< Cave3DShot > mShots;
   ArrayList< Cave3DShot > mSplays;
@@ -67,6 +68,10 @@ public class Cave3DSurvey
    */
   public void setColor( int col ) { color = col; }
 
+  public int  getTmpColor() { return tmp_color; }
+  public void setTmpColor( int col ) { tmp_color= col; }
+  public void resetTmpColor( ) { tmp_color = color; }
+  public void resetColor( )    { color = tmp_color; }
 
   /** serialize a 3D survey
    * @param dis   input stream
@@ -313,6 +318,7 @@ public class Cave3DSurvey
     visible = true;
     color   = col;
     if ( color == 0 ) color = TglColor.getSurveyColor(); // random survey color
+    tmp_color = color;
     // mNrShots  = 0;
     // mNrSplays = 0;
     mShots    = new ArrayList< Cave3DShot >();

@@ -13,10 +13,13 @@ package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
 
+import com.topodroid.ui.MyColorPicker;
+
 import android.content.Context;
 
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.Button;
 import android.widget.AdapterView;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -47,25 +50,38 @@ class SurveyAdapter extends ArrayAdapter< Cave3DSurvey >
     return ( pos < 0 || pos >= mItems.size() )? null : mItems.get(pos);
   }
 
-  private static class ViewHolder implements OnClickListener
+  private class ViewHolder implements OnClickListener
+                                  , MyColorPicker.IColorChanged
   { 
     int      pos;
     Cave3DSurvey mSurvey;   // used to make sure blocks do not hold ref to a view, that does not belong to them REVISE_RECENT
     CheckBox cbShow;
+    Button   colorBtn;
 
-    ViewHolder( CheckBox show )
+    ViewHolder( CheckBox show, Button color )
     {
       pos      = 0;
       mSurvey  = null; 
       cbShow   = show;
       cbShow.setOnClickListener( this );
+      colorBtn = color;
+    }
+
+    // IColorChanged
+    public void colorChanged( int color )
+    {
+      if ( mSurvey != null ) mSurvey.setTmpColor( color );
+      colorBtn.setBackgroundColor( color );
     }
 
     @Override
     public void onClick( View v )
     {
-      if ( (CheckBox)v == cbShow ) {
+      if ( mSurvey == null ) return;
+      if ( v.getId() == R.id.cb_survey ) {
         mSurvey.visible = cbShow.isChecked();
+      } else if ( v.getId() == R.id.btn_color ){
+        (new MyColorPicker( mContext, this, mSurvey.getTmpColor() )).show();
       }
     }
 
@@ -76,6 +92,7 @@ class SurveyAdapter extends ArrayAdapter< Cave3DSurvey >
       pos     = p;
       cbShow.setChecked( b.visible );
       cbShow.setText( b.name );
+      colorBtn.setBackgroundColor( b.getTmpColor() );
     }
   }
 
@@ -86,15 +103,19 @@ class SurveyAdapter extends ArrayAdapter< Cave3DSurvey >
     Cave3DSurvey b = mItems.get( pos );
     ViewHolder holder = null;
     if ( convertView == null ) {
-      convertView = mLayoutInflater.inflate( R.layout.survey_row, parent, false );
+      convertView = mLayoutInflater.inflate( R.layout.survey_color_row, parent, false );
       holder = new ViewHolder( 
-        (CheckBox)convertView.findViewById( R.id.cb_survey )
+        (CheckBox)convertView.findViewById( R.id.cb_survey ),
+        (Button)convertView.findViewById( R.id.btn_color )
       );
+      // holder.colorBtn = (Button) convertView.findViewById( R.id.btn_color );
       convertView.setTag( holder );
     } else {
       holder = (ViewHolder) convertView.getTag();
     }
     holder.setSurvey( b, pos );
+    holder.colorBtn.setBackgroundColor( b.getTmpColor() );
+    holder.colorBtn.setOnClickListener( holder );
     // b.mView = convertView;
     return convertView;
   }

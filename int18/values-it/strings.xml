@@ -1760,7 +1760,7 @@
   <string name="pref_stylus_size_title">Grandezza Stilo</string>
   <string name="pref_stylus_size_summary">Grandezza Stilo [0: ignora]</string>
   <string name="pref_line_ends_title">Taglio fine-linea</string>
-  <string name="pref_line_ends_summary">Numero di punti a fine linea da ignorare [0]</string -->
+  <string name="pref_line_ends_summary">Numero di punti a fine linea da ignorare [0]</string>
   <string name="pref_fixed_thickness_title">Spessore poligonale</string>
   <string name="pref_fixed_thickness_summary">Spessore linee di poligonale</string>
   <!-- UNUSED string name="pref_device_title">Dispositivo</string -->
