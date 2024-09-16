@@ -833,6 +833,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="button_prev"    >Előző</string>
     <string name="button_new"     >Új szint</string>
     <string name="button_rename"  >Átnevez</string>
+    <!-- TODO string name="button_prefix"  >Prefix</string -->
     <string name="button_skip"    >Átugor</string>
     <string name="button_done"    >Kész</string>
     <string name="button_lrud"    >+BJFL</string>
@@ -846,7 +847,6 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="button_redo"      >Újra      </string -->
     <!-- UNUSED string name="button_regroup"   >Újra csoport</string -->
     <string name="button_dump"      >Letöltés</string>
-    <!-- UNUSED string name="button_rename"    >Átnevez    </string -->
     <string name="button_renumber"  >Átszámoz</string>
     <string name="button_bedding"   >Alap sík</string>
     <string name="button_replace"   >Cserél   </string>
@@ -973,6 +973,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="hint_text">szöveg</string>
     <string name="hint_options">opciók</string>
     <string name="hint_name">név</string>
+    <!-- TODO string name="hint_prefix">prefix</string -->
     <string name="hint_from">kezdőpont</string>
     <string name="hint_to">végpont</string>
     <string name="hint_azimuth">irány</string>

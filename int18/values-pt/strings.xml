@@ -775,6 +775,7 @@ no campo abaixo e aperte o botão.
   <string name="button_prev">Anterior</string>
   <string name="button_new">Novo trecho</string>
     <!-- TODO string name="button_rename"  >Rename</string -->
+    <!-- TODO string name="button_prefix"  >Prefix</string -->
   <string name="button_skip">Ignorar</string>
   <string name="button_done">Fim</string>
   <string name="button_lrud">Incluir EDTC</string>
@@ -788,7 +789,6 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="button_redo"      >Refazer   </string -->
   <!-- UNUSED string name="button_regroup"   >Reagrupar   </string -->
   <string name="button_dump">Baixar    </string>
-  <!-- UNUSED string name="button_rename"    >Renomear  </string -->
   <string name="button_renumber">Renumerar </string>
   <string name="button_bedding">Plano acamamento</string>
   <string name="button_replace">Substituir</string>
@@ -902,6 +902,7 @@ no campo abaixo e aperte o botão.
   <string name="hint_text">texto</string>
   <string name="hint_options">opções</string>
   <string name="hint_name">nome</string>
+    <!-- TODO string name="hint_prefix">prefix</string -->
   <string name="hint_from">de</string>
   <string name="hint_to">para</string>
   <string name="hint_azimuth">azimute</string>

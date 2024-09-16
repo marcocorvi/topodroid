@@ -565,6 +565,31 @@ public class DataHelper extends DataSetObservable
     } finally { myDB.endTransaction(); }
   }
 
+  /** add a prefix to the station names of a survey
+   * @param sid     survey ID
+   * @param prefix  prefix
+   */
+  void prefixSurveyStations( long sid, String prefix )
+  {
+    if ( myDB == null ) return;
+    ContentValues cv;
+    String wSid = "where surveyId=" + sid;
+    try {
+      myDB.beginTransaction();
+      myDB.execSQL( "update plots set hide =\"\" " + wSid );
+      myDB.execSQL( "update plots set start = \""    + prefix + "\" || start "    + wSid );
+      myDB.execSQL( "update plots set view = \""     + prefix + "\" || view "     + wSid + " and view!=\"\" ");
+      myDB.execSQL( "update fixeds set station = \"" + prefix + "\" || station "  + wSid + " and station!=\"\" ");
+      myDB.execSQL( "update stations set name = \""  + prefix + "\" || name "     + wSid + " and name!=\"\" ");
+      myDB.execSQL( "update shots set fStation = \"" + prefix + "\" || fStation " + wSid + " and fStation!=\"\" ");
+      myDB.execSQL( "update shots set tStation = \"" + prefix + "\" || tStation " + wSid + " and tStation!=\"\" ");
+      myDB.setTransactionSuccessful();
+    } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
+    } catch ( SQLiteException e1 )       { logError("prefix survey stations ", e1 ); 
+    } catch ( IllegalStateException e2 ) { logError("prefix survey stations ", e2 );
+    } finally { myDB.endTransaction(); }
+  }
+
   /** @return the survey data statistics
    * @param sid   survey ID
    */

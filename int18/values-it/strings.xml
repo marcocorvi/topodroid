@@ -824,6 +824,7 @@
     <string name="button_prev"    >Precedente</string>
     <string name="button_new"     >Nuovo scarto</string>
     <string name="button_rename"  >Renomina</string>
+    <!-- TODO string name="button_prefix"  >Prefix</string -->
     <string name="button_skip"    >Salta</string>
     <string name="button_done"    >Fatto</string>
     <string name="button_lrud"    >Aggiungi LRUD</string>
@@ -837,7 +838,6 @@
     <!-- UNUSED string name="button_redo"      >Ripeti azione</string -->
     <!-- UNUSED string name="button_regroup"   >Raggruppare   </string -->
     <string name="button_dump"      >Scarica   </string>
-    <!-- UNUSED string name="button_rename"    >Rinomina    </string -->
     <string name="button_renumber"  >Rinumera</string>
     <string name="button_bedding"   >Piano base</string>
     <string name="button_replace"   >Sostituisci</string>
@@ -964,6 +964,7 @@
     <string name="hint_text">testo</string>
     <string name="hint_options">opzioni</string>
     <string name="hint_name">nome</string>
+    <!-- TODO string name="hint_prefix">prefix</string -->
     <string name="hint_from">da</string>
     <string name="hint_to">a</string>
     <string name="hint_azimuth">azimut</string>

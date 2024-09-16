@@ -825,6 +825,7 @@
     <string name="button_prev"    >Предыдущий</string>
     <string name="button_new"     >Новый скрап</string>
     <!-- TODO string name="button_rename"  >Rename</string -->
+    <!-- TODO string name="button_prefix"  >Prefix</string -->
     <string name="button_skip"    >Пропустить</string>
     <string name="button_done"    >Готово</string>
     <string name="button_lrud"    >Добавить ЛПВН</string>
@@ -838,7 +839,6 @@
     <!-- UNUSED string name="button_redo"      >Повторить      </string -->
     <!-- UNUSED string name="button_regroup"   >Перегруппировать   </string -->
     <string name="button_dump"      >Дамп      </string>
-    <!-- UNUSED string name="button_rename"    >Переименовать    </string -->
     <string name="button_renumber"  >Перенумеровать</string>
     <string name="button_bedding"   >Плоскость падения</string>
     <string name="button_replace"   >Замена   </string>
@@ -965,6 +965,7 @@
     <string name="hint_text">текст</string>
     <string name="hint_options">опции</string>
     <string name="hint_name">название</string>
+    <!-- TODO string name="hint_prefix">prefix</string -->
     <string name="hint_from">от</string>
     <string name="hint_to">до</string>
     <string name="hint_azimuth">азимут</string>

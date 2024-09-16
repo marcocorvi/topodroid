@@ -181,6 +181,15 @@ public class SurveyWindow extends Activity
       TDToast.makeBad( R.string.cannot_rename );
     }
   } 
+
+  /** add a prefix to the station names of a survey
+   * @param prefix  prefix
+   */
+  void prefixStations( String prefix )
+  {
+    prefix = TDUtil.noSpaces(prefix );
+    mApp.prefixSurveyStations(TDInstance.sid, prefix );
+  }
     
 
 // -------------------------------------------------------------------

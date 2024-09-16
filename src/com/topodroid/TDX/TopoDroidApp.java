@@ -1527,7 +1527,17 @@ public class TopoDroidApp extends Application
     }
     return false;
   }
-    
+
+  /** add a prefix to the station names of a survey
+   * @param sid     survey ID
+   * @param prefix  prefix
+   */
+  void prefixSurveyStations( long sid, String prefix )
+  {
+    if ( mData == null ) return;
+    mData.prefixSurveyStations( sid, prefix );
+  }
+
   /** update windows title and display
    */
   private static void updateWindows()

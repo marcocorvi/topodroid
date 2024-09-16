@@ -766,6 +766,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="button_prev">Vorherige</string>
   <string name="button_new">Neue Teilskizze</string>
     <!-- TODO string name="button_rename"  >Rename</string -->
+    <!-- TODO string name="button_prefix"  >Prefix</string -->
   <string name="button_skip">Überspringen</string>
   <string name="button_done">Fertig</string>
   <string name="button_lrud">LRUD hinzufügen</string>
@@ -779,7 +780,6 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="button_redo"      >Nochmals      </string -->
   <!-- UNUSED string name="button_regroup"   >Umgruppieren   </string -->
   <string name="button_dump">Lesen</string>
-  <!-- UNUSED string name="button_rename"    >Umbenennen    </string -->
   <string name="button_renumber">Umnummerieren</string>
   <string name="button_bedding">Streichen und Fallen</string>
   <string name="button_replace">Ersetzen   </string>
@@ -893,6 +893,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="hint_text">Text</string>
   <string name="hint_options">Optionen</string>
   <string name="hint_name">Name</string>
+    <!-- TODO string name="hint_prefix">prefix</string -->
   <string name="hint_from">von</string>
   <string name="hint_to">zu</string>
   <string name="hint_azimuth">Azimuth</string>

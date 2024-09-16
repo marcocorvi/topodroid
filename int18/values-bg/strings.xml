@@ -837,6 +837,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_prev">Предишен</string>
     <string name="button_new">Нов отрязък</string>
     <!-- TODO string name="button_rename"  >Rename</string -->
+    <!-- TODO string name="button_prefix"  >Prefix</string -->
     <string name="button_skip">Пропусни</string>
     <string name="button_done">Готово</string>
     <string name="button_lrud">+ ляво/дясно/горе/долу</string>
@@ -850,7 +851,6 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="button_redo"      >Redo</string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump">Изхвърляне</string>
-    <!-- UNUSED string name="button_rename"    >Преименуване</string -->
     <string name="button_renumber">Преномериране</string>
     <string name="button_bedding">Монтаж pla33ne</string>
     <string name="button_replace">Замяна</string>
@@ -976,6 +976,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="hint_text">текст</string>
     <string name="hint_options">опции</string>
     <string name="hint_name">име</string>
+    <!-- TODO string name="hint_prefix">prefix</string -->
     <string name="hint_from">от</string>
     <string name="hint_to">до</string>
     <string name="hint_azimuth">азимут</string>

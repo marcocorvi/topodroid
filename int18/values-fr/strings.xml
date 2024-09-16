@@ -829,6 +829,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="button_prev"    >Précédent</string>
     <string name="button_new"     >Nouveau fragment</string>
     <!-- TODO string name="button_rename"  >Rename</string -->
+    <!-- TODO string name="button_prefix"  >Prefix</string -->
     <string name="button_skip"    >Passer</string>
     <string name="button_done"    >Effectué</string>
     <string name="button_lrud"  copyable="all">Ajouter GDHB LRUD</string>
@@ -842,7 +843,6 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Regrouper   </string -->
     <string name="button_dump"      >Déchargement mémoire    </string>
-    <!-- UNUSED string name="button_rename"    >Renommer    </string -->
     <string name="button_renumber"  >Renuméroter</string>
     <string name="button_bedding"   >Plan de strate</string>
     <string name="button_replace"   >Remplacer</string>
@@ -967,6 +967,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="hint_text">texte</string>
     <string name="hint_options">options</string>
     <string name="hint_name">nom</string>
+    <!-- TODO string name="hint_prefix">prefix</string -->
     <string name="hint_from">de</string>
     <string name="hint_to">vers</string>
     <string name="hint_azimuth">azimut</string>

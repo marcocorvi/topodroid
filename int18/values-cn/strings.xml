@@ -828,6 +828,7 @@
     <string name="button_prev"    >上一步</string>
     <string name="button_new"     >新建分层</string>
     <!-- TODO string name="button_rename"  >Rename</string -->
+    <!-- TODO string name="button_prefix"  >Prefix</string -->
     <string name="button_skip"    >跳过</string>
     <string name="button_done"    >完成</string>
     <string name="button_lrud"    >+ 左右上下</string>
@@ -841,7 +842,6 @@
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >回收站      </string>
-    <!-- UNUSED string name="button_rename"    >重命名    </string -->
     <string name="button_renumber"  >重编号</string>
     <string name="button_bedding"   >层理平面</string>
     <string name="button_replace"   >置换   </string>
@@ -967,6 +967,7 @@
     <string name="hint_text">正文</string>
     <string name="hint_options">选择</string>
     <string name="hint_name">名称</string>
+    <!-- TODO string name="hint_prefix">prefix</string -->
     <string name="hint_from">从</string>
     <string name="hint_to">到</string>
     <string name="hint_azimuth">方位角</string>

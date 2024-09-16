@@ -33,7 +33,9 @@ class SurveyRenameDialog extends MyDialog
                                 implements View.OnClickListener
 {
   private EditText mEtName;
-  private Button   mBtnOK;
+  private EditText mEtPrefix;
+  private Button   mBtnRename;
+  private Button   mBtnPrefix;
   // private Button   mBtnBack;
 
   private final SurveyWindow mParent;
@@ -51,14 +53,20 @@ class SurveyRenameDialog extends MyDialog
     super.onCreate(savedInstanceState);
     initLayout(R.layout.survey_rename_dialog, R.string.title_survey_rename );
     
-    mBtnOK   = (Button) findViewById(R.id.btn_ok );
-    mBtnOK.setOnClickListener( this );
-    // mBtnBack = (Button) findViewById(R.id.btn_back );
-    // mBtnBack.setOnClickListener( this );
+    mBtnRename = (Button) findViewById(R.id.btn_rename );
+    mBtnPrefix = (Button) findViewById(R.id.btn_prefix );
     ( (Button) findViewById(R.id.btn_back ) ).setOnClickListener( this );
+    mBtnRename.setOnClickListener( this );
 
     mEtName = (EditText) findViewById( R.id.et_name );
     mEtName.setText( TDInstance.survey );
+    mEtPrefix = (EditText) findViewById( R.id.et_prefix );
+    if ( TDLevel.overExpert ) {
+      mBtnPrefix.setOnClickListener( this );
+    } else {
+      mBtnPrefix.setVisibility( View.GONE );
+      mEtPrefix.setVisibility( View.GONE );
+    }
   }
 
   @Override
@@ -67,11 +75,7 @@ class SurveyRenameDialog extends MyDialog
     // When the user clicks, just finish this activity.
     // onPause will be called, and we save our data there.
     Button b = (Button) v;
-    if ( b == mBtnOK ) {
-      // if ( mEtName.getText() == null ) {
-      //   mEtName.setError( mContext.getResources().getString( R.string.error_name_required ) );
-      //   return;
-      // }
+    if ( b == mBtnRename ) {
       String name = mEtName.getText().toString();
       if ( /* name == null || */ name.length() == 0 ) {
         mEtName.setError( mContext.getResources().getString( R.string.error_name_required ) );
@@ -83,6 +87,13 @@ class SurveyRenameDialog extends MyDialog
 	  return;
         }
         mParent.renameSurvey( name );
+      }
+    } else if ( TDLevel.overExpert && b == mBtnPrefix ) {
+      String prefix = mEtPrefix.getText().toString();
+      if ( /* prefix == null || */ prefix.length() == 0 ) {
+	/* nothing */
+      } else {
+        mParent.prefixStations( prefix );
       }
     // } else if ( b == mBtnBack ) {
     //   /* nothing */

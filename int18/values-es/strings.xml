@@ -831,6 +831,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="button_prev"    >Atrás</string>
     <string name="button_new"     >nuevo exceso</string>
     <!-- TODO string name="button_rename"  >Rename</string -->
+    <!-- TODO string name="button_prefix"  >Prefix</string -->
     <string name="button_skip"    >Omitir</string>
     <string name="button_done"    >Hecho</string>
     <string name="button_lrud"    >Añadir LRUD</string>
@@ -844,7 +845,6 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="button_redo"      >Rehacer    </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Enviar    </string>
-    <!-- UNUSED string name="button_rename"    >Renombrar </string -->
     <string name="button_renumber"  >Renumerar</string>
     <string name="button_bedding"   >plano de estratificación</string>
     <string name="button_replace"   >Reemplazar</string>
@@ -969,6 +969,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="hint_text">Texto</string>
     <string name="hint_options">Opciones</string>
     <string name="hint_name">Nombre</string>
+    <!-- TODO string name="hint_prefix">prefix</string -->
     <string name="hint_from">de</string>
     <string name="hint_to">a</string>
     <string name="hint_azimuth">Rumbo</string>

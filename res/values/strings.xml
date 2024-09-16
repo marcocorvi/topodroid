@@ -849,6 +849,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="button_prev"    >Previous</string>
     <string name="button_new"     >New scrap</string>
     <string name="button_rename"  >Rename</string>
+    <string name="button_prefix"  >Prefix</string>
     <string name="button_skip"    >Skip</string>
     <string name="button_done"    >Done</string>
     <string name="button_lrud"  copyable="all">+ LRUD</string>
@@ -862,7 +863,6 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="button_redo"      >Redo</string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Dump</string>
-    <!-- UNUSED string name="button_rename"    >Rename</string -->
     <string name="button_renumber"  >Renumber</string>
     <string name="button_bedding"   >Fitting plane</string>
     <string name="button_replace"   >Replace</string>
@@ -988,6 +988,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="hint_text">text</string>
     <string name="hint_options" copyable="fr">options</string>
     <string name="hint_name">name</string>
+    <string name="hint_prefix">prefix</string>
     <string name="hint_from">from</string>
     <string name="hint_to">to</string>
     <string name="hint_azimuth">azimuth</string>
