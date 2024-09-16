@@ -4990,6 +4990,21 @@ public class TDExporter
     return true;
   }
 
+  /** print shot comment, if any, and close "Visee" tag
+   * @param pw    print writer
+   * @param item  shot
+   */
+  static private void printItemComment( PrintWriter pw, DBlock item )
+  {
+    if ( item.mComment != null && item.mComment.length() > 0 ) {
+      pw.format(">\r\n");
+      pw.format("  <Commentaire>%s</Commentaire>\r\n", item.mComment );
+      pw.format("</Visee>\r\n");
+    } else {
+      pw.format("/>\r\n");
+    }
+  }
+
   /** write a shot data to the output file, in TROX form
    * @param pw     writer
    * @param item   reference shot
@@ -5015,10 +5030,8 @@ public class TDExporter
     pw.format(Locale.US, " B=\"%.2f\"", lrud.d );
     // pw.format(" Ref=\"%d\"",  ref );
     // pw.format(" Suiv=\"%d\"", suiv );
-    if ( item.mComment != null && item.mComment.length() > 0 ) {
-      // pw.format(" ;%s", item.mComment );
-    }
-    pw.format("/>\r\n");
+    printItemComment( pw, item );
+    
     return true;
   }
 
@@ -5062,11 +5075,7 @@ public class TDExporter
     // pw.format(" Suiv=\"%d\"", suiv );
     if ( item.isDuplicate() ) pw.format(" Exc=\"E\"");
     // if ( surface ) pw.forma(" #|S#");
-    pw.format(">");
-    if ( item.mComment != null && item.mComment.length() > 0 ) {
-      pw.format("<Commentaire>%s</Commentaire>", item.mComment );
-    }
-    pw.format("</Visee>\r\n");
+    printItemComment( pw, item );
   }
 
   static private void printShotToTrox( PrintWriter pw, DBlock item, AverageLeg leg, LRUD lrud, String suffix ) // , int ref, int suiv )
@@ -5093,11 +5102,7 @@ public class TDExporter
     // pw.format(" Suiv=\"%d\"", suiv );
     if ( item.isDuplicate() ) pw.format(" Exc=\"E\"");
     // if ( surface ) pw.forma(" #|S#");
-    pw.format(">");
-    if ( item.mComment != null && item.mComment.length() > 0 ) {
-      pw.format("<Commentaire>%s</Commentaire>", item.mComment );
-    }
-    pw.format("</Visee>\r\n");
+    printItemComment( pw, item );
   }
 
   static private void printSplayToTro( PrintWriter pw, DBlock item, boolean direct, String suffix )
@@ -5158,11 +5163,7 @@ public class TDExporter
     if (item.isCommented() ) pw.format("Exc=\"E\" ");
     // if ( duplicate ) pw.format(" #|L#");
     // if ( surface ) pw.format(" #|S#");
-    pw.format(">");
-    if ( item.mComment != null && item.mComment.length() > 0 ) {
-      pw.format("<Commentaire>%s</Commentaire>", item.mComment );
-    } 
-    pw.format("</Visee>\r\n");
+    printItemComment( pw, item );
   }
 
   static private void printSplayToTrox( PrintWriter pw, DBlock item, boolean direct, String suffix ) // , int ref )
@@ -5192,11 +5193,7 @@ public class TDExporter
     if (item.isCommented() ) pw.format("Exc=\"E\" ");
     // if ( duplicate ) pw.format(" #|L#");
     // if ( surface ) pw.format(" #|S#");
-    pw.format(">");
-    if ( item.mComment != null && item.mComment.length() > 0 ) {
-      pw.format("<Commentaire>%s</Commentaire>", item.mComment );
-    } 
-    pw.format("</Visee>\r\n");
+    printItemComment( pw, item );
   }
 
   /** export survey data in TRO (VisualTopo) format
@@ -5470,6 +5467,10 @@ public class TDExporter
         pw.format(" DeclinAuto=\"M\"" );
       }
       pw.format(">\r\n" );
+
+      if ( info.comment != null && info.comment.length() > 0 ) {
+        pw.format("<Commentaire>%s</Commentaire>\r\n", info.comment );
+      }
 
       AverageLeg leg = new AverageLeg(0);
       DBlock ref_item = null;
