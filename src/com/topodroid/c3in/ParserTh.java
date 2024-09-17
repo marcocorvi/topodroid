@@ -842,7 +842,7 @@ public class ParserTh extends TglParser
       if ( sf != null && st != null ) {
         String sv = sh.from;
         sv = sv.substring( 1 + sv.indexOf('@', 0) );
-        TDLog.v("Th parser set shot survey: from " + sh.from + " sv " + sv );
+        // TDLog.v("Th parser set shot survey: from " + sh.from + " sv " + sv );
         for ( Cave3DSurvey srv : surveys ) {
           if ( srv.hasName( sv ) ) {
             // sh.mSurvey = srv;

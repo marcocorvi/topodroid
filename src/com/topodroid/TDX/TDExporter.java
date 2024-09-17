@@ -1927,7 +1927,7 @@ public class TDExporter
    *      *units compass clino grads|degrees
    *      *calibrate declination ...
    *      *date yyyy.mm.dd
-   *      ; *fix station long lat alt
+   *      ; *fix station long lat alt-ell
    *      ; *team "teams"
    *      *data normal from to tape compass clino
    *      ...
@@ -2083,7 +2083,7 @@ public class TDExporter
       writeSurvexLine(pw, "  *units compass " + uas );
       writeSurvexLine(pw, "  *units clino " + uas );
       if ( info.hasDeclination() ) { // DECLINATION in Survex
-        pw.format(Locale.US, "  *declination %.2f", info.declination ); // units DEGREES
+        pw.format(Locale.US, "  *declination %.2f degrees", info.declination ); // units DEGREES
         writeSurvexEOL(pw);
       // } else {
       //   pw.format(Locale.US, "  *calibrate declination auto" );
@@ -2094,9 +2094,26 @@ public class TDExporter
       }
 
       if ( fixed.size() > 0 ) {
-        writeSurvexLine(pw, "  ; fix stations as long-lat h_geo");
-        for ( FixedInfo fix : fixed ) {
-          writeSurvexLine(pw, "  ; *fix " + fix.toExportString() );
+        // do we need "*cs out EPSG:..." ?
+        // without "cs out" survex does not process the data, however there is no output-cs in topodroid
+        // the output crs could be the CRS of the first fix, if specified
+        //
+        if ( TDSetting.mSurvexEPSG > 0 ) {
+          writeSurvexLine(pw, "  *cs LONG-LAT");
+          writeSurvexLine(pw, "  *cs out EPSG:" +  TDSetting.mSurvexEPSG);
+          for ( FixedInfo fix : fixed ) {
+            writeSurvexLine(pw, "  *fix " + fix.toExportStringEllipsoid() );
+          }
+        } else {
+          // writeSurvexLine(pw, "  ; fix stations as long-lat h_ell");
+          writeSurvexLine(pw, "  ; *cs LONG-LAT");
+          for ( FixedInfo fix : fixed ) {
+            writeSurvexLine(pw, "  ; *fix " + fix.toExportStringEllipsoid() );
+          }
+          // for ( FixedInfo fix : fixed ) {
+          //   writeSurvexLine(pw, "  *fix " + fix.name );
+          //   break;
+          // }
         }
       }
 

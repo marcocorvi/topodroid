@@ -498,12 +498,13 @@ class ShpPointz extends ShpObject
     int n_pts = (pts != null)? pts.size() : 0;
     if ( n_pts == 0 ) return false;
 
-    int n_fld = 2;
+    int n_fld = 3;
     String[] fields = new String[ n_fld ];
     fields[0] = "name";
     fields[1] = "survey";
-    byte[]   ftypes = { BYTEC, BYTEC };
-    int[]    flens  = { STATION_NAME_LENGTH, SURVEY_NAME_LENGTH };
+    fields[2] = "station";
+    byte[]   ftypes = { BYTEC, BYTEC, BYTEC };
+    int[]    flens  = { STATION_NAME_LENGTH, SURVEY_NAME_LENGTH, SURVEY_NAME_LENGTH };
 
     int shpRecLen = getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );
@@ -542,6 +543,7 @@ class ShpPointz extends ShpObject
       writeShxRecord( offset, shpRecLen );
       fields[0] = pt.getFullName();
       fields[1] = pt.getSurvey();
+      fields[2] = pt.getShortName();
       writeDBaseRecord( n_fld, fields, flens );
       ++cnt;
     }

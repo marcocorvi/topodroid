@@ -1475,6 +1475,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_survex_splay_summary">Добави репер ДО към странични измервания в Survex</string>
   <string name="pref_survex_lrud_title">Ляво/дясно/горе/долу в Survex/Therion</string>
   <string name="pref_survex_lrud_summary">Добави ляво/дясно/горе/долу в експорта в Survex/Therion</string>
+  <!-- TODO string name="pref_survex_epsg_title">EPSG "cs out"</string -->
+  <!-- TODO string name="pref_survex_epsg_summary">EPSG number for Survex "cs out"</string -->
   <string name="pref_svg_program_title">SVG program</string>
   <string name="pref_svg_program_summary">Насочи програмата SVG</string>
   <string name="pref_svg_grid_title">Решетка</string>

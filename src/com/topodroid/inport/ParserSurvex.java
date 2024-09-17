@@ -86,10 +86,11 @@ class ParserSurvex extends ImportParser
   private int jLength  = 2;
   private int jCompass = 3;
   private int jClino   = 4;
-  private int jLeft  = -1;
-  private int jRight = -1;
-  private int jUp    = -1;
-  private int jDown  = -1;
+  private int jLeft    = -1;
+  private int jRight   = -1;
+  private int jUp      = -1;
+  private int jDown    = -1;
+  private int jStation = -1;
 
   // same as in ImportParser.java
   String initStation()
@@ -518,6 +519,8 @@ class ParserSurvex extends ImportParser
                   state.data_type = ParserUtil.DATA_CYLPOLAR;
                 } else if ( what.equals("passage") ) {
                   state.data_type = ParserUtil.DATA_PASSAGE;
+	          setJIndicesPassage( vals, vals_len );
+                  state.interleaved = false;
                 } else if ( what.equals("nosurvey") ) {
                   state.data_type = ParserUtil.DATA_NOSURVEY;
                 } else { // "default"
@@ -569,59 +572,95 @@ class ParserSurvex extends ImportParser
 		}
 	      } else {
 	        if ( vals_len >= 5 ) {
-                  TDLog.v("SVX " + line_nr + " data " + line );
-                  try {
-                    from = checkAlias( ParserUtil.applyCase( state.mCase, vals[jFrom] ) );
-                    to   = checkAlias( ParserUtil.applyCase( state.mCase, vals[jTo] ) );
-                    len  = Float.parseFloat( vals[jLength] );
-                    ber  = Float.parseFloat( vals[jCompass] );
-                    cln  = Float.parseFloat( vals[jClino] );
+                  if ( state.data_type == ParserUtil.DATA_NORMAL
+                    || state.data_type == ParserUtil.DATA_TOPOFIL ) {
+                    // TDLog.v("SVX " + line_nr + " data " + line );
+                    try {
+                      from = checkAlias( ParserUtil.applyCase( state.mCase, vals[jFrom] ) );
+                      to   = checkAlias( ParserUtil.applyCase( state.mCase, vals[jTo] ) );
+                      len  = Float.parseFloat( vals[jLength] );
+                      ber  = Float.parseFloat( vals[jCompass] );
+                      cln  = Float.parseFloat( vals[jClino] );
 
-	            // measure = read * scale - zero;
+	              // measure = read * scale - zero;
+	              float zLen = state.mZeroLen;
+	              float sLen = state.mScaleLen * state.mUnitLen;
+
+                      len = len * sLen - zLen;
+                      ber = ber * state.mScaleBer * state.mUnitBer - state.mZeroBer;
+                      if ( mApplyDeclination ) ber += state.mDeclination;
+	              // if ( ber < 0 ) { ber += 360; } else if ( ber >= 360 ) { ber -= 360; }
+                      ber = TDMath.in360( ber );
+                      cln = cln * state.mScaleCln * state.mUnitCln - state.mZeroCln;
+
+                      float dist, b;
+                      if ( jLeft >= 0 && jLeft < vals_len) {
+                        try {
+                          dist = Float.parseFloat( vals[jLeft] ) * sLen - zLen;
+                          // b = ber - 90; if ( b < 0 ) b += 360;
+                          b = TDMath.in360( ber - 90 );
+                          shots.add( new ParserShot( from, TDString.EMPTY, dist, b, 0, 0.0f, ExtendType.EXTEND_UNSET, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "" ) );
+                        } catch ( NumberFormatException e ) { }
+                      }
+                      if ( jRight >= 0 && jRight < vals_len) {
+                        try {
+                          dist = Float.parseFloat( vals[jRight] ) * sLen - zLen;
+                          // b = ber + 90; if ( b >= 360 ) b -= 360;
+                          b = TDMath.add90( ber );
+                          shots.add( new ParserShot( from, TDString.EMPTY, dist, b, 0, 0.0f, ExtendType.EXTEND_UNSET, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "" ) );
+                        } catch ( NumberFormatException e ) { }
+                      }
+                      if ( jUp >= 0 && jUp < vals_len) {
+                        try {
+                          dist = Float.parseFloat( vals[jUp] ) * sLen - zLen;
+                          shots.add( new ParserShot( from, TDString.EMPTY,
+                                     dist, 0, 90, 0.0f, ExtendType.EXTEND_UNSET, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "" ) );
+                        } catch ( NumberFormatException e ) { }
+                      }
+                      if ( jDown >= 0 && jDown < vals_len) {
+                        try {
+                          dist = Float.parseFloat( vals[jDown] ) * sLen - zLen;
+                          shots.add( new ParserShot( from, TDString.EMPTY,
+                                     dist, 0, -90, 0.0f, ExtendType.EXTEND_UNSET, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "" ) );
+                        } catch ( NumberFormatException e ) { }
+                      }
+
+                      // TODO add shot
+                      if ( to.equals("-") || to.equals(".") ) { // splay shot
+                        // FIXME splays
+                        shots.add( new ParserShot( from, TDString.EMPTY, len, ber, cln, 0.0f, ExtendType.EXTEND_UNSET, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
+                      } else {
+                        // TDLog.v( "Parser Survex add shot " + from + " -- " + to);
+                        shots.add( new ParserShot( from, to, len, ber, cln, 0.0f, ExtendType.EXTEND_RIGHT, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
+                      }
+                    } catch ( NumberFormatException e ) {
+                      TDLog.e( "SVX [E] " + line_nr + " data " + line );
+                    }
+                  } else if ( state.data_type == ParserUtil.DATA_PASSAGE ) {
+                    from = checkAlias( ParserUtil.applyCase( state.mCase, vals[jStation] ) );
 	            float zLen = state.mZeroLen;
 	            float sLen = state.mScaleLen * state.mUnitLen;
-
-                    len = len * sLen - zLen;
-                    ber = ber * state.mScaleBer * state.mUnitBer - state.mZeroBer;
-                    if ( mApplyDeclination ) ber += state.mDeclination;
-	            // if ( ber < 0 ) { ber += 360; } else if ( ber >= 360 ) { ber -= 360; }
-                    ber = TDMath.in360( ber );
-                    cln = cln * state.mScaleCln * state.mUnitCln - state.mZeroCln;
-
-                    float dist, b;
-                    if ( jLeft >= 0 && jLeft < vals_len) {
-                      dist = Float.parseFloat( vals[jLeft] ) * sLen - zLen;
-                      // b = ber - 90; if ( b < 0 ) b += 360;
-                      b = TDMath.in360( ber - 90 );
-                      shots.add( new ParserShot( from, TDString.EMPTY, dist, b, 0, 0.0f, ExtendType.EXTEND_UNSET, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "" ) );
-                    }
-                    if ( jRight >= 0 && jRight < vals_len) {
-                      dist = Float.parseFloat( vals[jRight] ) * sLen - zLen;
-                      // b = ber + 90; if ( b >= 360 ) b -= 360;
-                      b = TDMath.add90( ber );
-                      shots.add( new ParserShot( from, TDString.EMPTY, dist, b, 0, 0.0f, ExtendType.EXTEND_UNSET, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "" ) );
-                    }
+                    float dist;
+                    // if ( jLeft >= 0 && jLeft < vals_len) {
+                    //   dist = Float.parseFloat( vals[jLeft] ) * sLen - zLen;
+                    // }
+                    // if ( jRight >= 0 && jRight < vals_len) {
+                    //   dist = Float.parseFloat( vals[jRight] ) * sLen - zLen;
+                    // }
                     if ( jUp >= 0 && jUp < vals_len) {
-                      dist = Float.parseFloat( vals[jUp] ) * sLen - zLen;
-                      shots.add( new ParserShot( from, TDString.EMPTY,
+                      try {
+                        dist = Float.parseFloat( vals[jUp] ) * sLen - zLen;
+                        shots.add( new ParserShot( from, TDString.EMPTY,
                                  dist, 0, 90, 0.0f, ExtendType.EXTEND_UNSET, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "" ) );
+                      } catch ( NumberFormatException e ) { }
                     }
                     if ( jDown >= 0 && jDown < vals_len) {
-                      dist = Float.parseFloat( vals[jDown] ) * sLen - zLen;
-                      shots.add( new ParserShot( from, TDString.EMPTY,
+                      try {
+                        dist = Float.parseFloat( vals[jDown] ) * sLen - zLen;
+                        shots.add( new ParserShot( from, TDString.EMPTY,
                                  dist, 0, -90, 0.0f, ExtendType.EXTEND_UNSET, LegType.XSPLAY, state.mDuplicate, state.mSurface, false, "" ) );
+                      } catch ( NumberFormatException e ) { }
                     }
-
-                    // TODO add shot
-                    if ( to.equals("-") || to.equals(".") ) { // splay shot
-                      // FIXME splays
-                      shots.add( new ParserShot( from, TDString.EMPTY, len, ber, cln, 0.0f, ExtendType.EXTEND_UNSET, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
-                    } else {
-                      // TDLog.v( "Parser Survex add shot " + from + " -- " + to);
-                      shots.add( new ParserShot( from, to, len, ber, cln, 0.0f, ExtendType.EXTEND_RIGHT, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
-                    }
-                  } catch ( NumberFormatException e ) {
-                    TDLog.e( "SVX [E] " + line_nr + " data " + line );
                   }
                 }
                 // FIXME other data types
@@ -647,6 +686,7 @@ class ParserSurvex extends ImportParser
   {
     jFrom = jTo = jLength = jCompass = jClino = -1;
     jLeft = jUp = jRight  = jDown = -1;
+    jStation = -1;
     int j0 = 0;
     if ( vals[2].equals("station") ) { // station ignoreall newline
       int j=3;
@@ -692,6 +732,33 @@ class ParserSurvex extends ImportParser
     TDLog.v("SVX J-indices: " + jFrom + " " + jTo + " data " + jLength + " " + jCompass + " " + jClino );
     return false;
   }
+
+  private void setJIndicesPassage(String[] vals, int vals_len)
+  {
+    jFrom = jTo = jLength = jCompass = jClino = -1;
+    jLeft = jUp = jRight  = jDown = -1;
+    jStation = -1;
+    int j0 = 0;
+    // TDLog.v("j " + 0 + " vals[0] " + vals[0] );
+    // TDLog.v("j " + 1 + " vals[1] " + vals[1] );
+    for ( int j=2; j < vals_len; ++j ) {
+      // TDLog.v("j " + j + " vals[j] " + vals[j] );
+      if ( vals[j].equals("station") ) {
+        jStation = j0; ++j0;
+      } else if ( vals[j].equals("left") ) {
+        jLeft  = j0; ++j0;
+      } else if ( vals[j].equals("right") ) {
+        jRight = j0; ++j0;
+      } else if ( vals[j].equals("up") ) {
+        jUp    = j0; ++j0;
+      } else if ( vals[j].equals("down") ) {
+        jDown  = j0; ++j0;
+      } else {
+        ++j0;
+      }
+    }
+  }
+
 
   // 2023-03-10 FIX
   private void resetJIndices()

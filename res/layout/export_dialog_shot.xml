@@ -109,6 +109,12 @@
       android:layout_height="wrap_content"
       android:text="@string/export_lrud"
       />
+    <EditText android:id="@+id/survex_epsg"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:importantForAutofill="no"
+      android:inputType="number"
+      />
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout_therion"

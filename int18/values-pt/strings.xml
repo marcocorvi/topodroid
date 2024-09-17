@@ -1377,6 +1377,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_survex_splay_summary">Incluir às medidas auxiliares nos arquivos Survex exportados uma base PARA cujo nome é composto da base DE com uma letra adicionada.</string>
   <string name="pref_survex_lrud_title">EDTC</string>
   <string name="pref_survex_lrud_summary">Incluir EDTC nos arquivos Survex/Therion exportados</string>
+  <!-- TODO string name="pref_survex_epsg_title">EPSG "cs out"</string -->
+  <!-- TODO string name="pref_survex_epsg_summary">EPSG number for Survex "cs out"</string -->
   <string name="pref_svg_program_title">Programa alvo</string>
   <string name="pref_svg_program_summary">Programa SVG alvo para exportação</string>
   <string name="pref_svg_grid_title">Grade</string>

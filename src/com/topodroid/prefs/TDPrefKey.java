@@ -656,24 +656,28 @@ public class TDPrefKey
   public static String[] EXPORT_SVX = { // [8]
     "DISTOX_SURVEX_EOL",            // survex end of line [either Linux or Windows]
     "DISTOX_SURVEX_SPLAY",    // 6  // whether to name endpoint of splays in Survex export
-    "DISTOX_SURVEX_LRUD"            // whether to add LRUD to Survex export
+    "DISTOX_SURVEX_LRUD",           // whether to add LRUD to Survex export
+    "DISTOX_SURVEX_EPSG"            // EPSG number for cs out
   };
   static int[] EXPORT_SVXtitle = {
     R.string.pref_survex_eol_title,
     R.string.pref_survex_splay_title,
     R.string.pref_survex_lrud_title,
+    R.string.pref_survex_epsg_title,
     -1
   };
   static int[] EXPORT_SVXdesc = {
     R.string.pref_survex_eol_summary,
     R.string.pref_survex_splay_summary,
     R.string.pref_survex_lrud_summary,
+    R.string.pref_survex_epsg_summary,
     -1
   };
   public static String[] EXPORT_SVXdef = {
     "lf",
     FALSE,
     FALSE,
+    TDString.ZERO,
     null
   };
 

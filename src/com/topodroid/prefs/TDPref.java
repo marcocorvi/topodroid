@@ -1021,8 +1021,9 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     String[] def = TDPrefKey.EXPORT_SVXdef;
     return new TDPref[ ] {
       makeLst( cat, key[0], tit[0], dsc[0], N, def[0], R.array.survexEol, R.array.survexEolValue, ctx, hlp ),
-      makeCbx( cat, key[1], tit[1], dsc[1], A, def[1],         ctx, hlp ),
-      makeCbx( cat, key[2], tit[2], dsc[2], A, def[2],         ctx, hlp )
+      makeCbx( cat, key[1], tit[1], dsc[1], A, def[1],          ctx, hlp ),
+      makeCbx( cat, key[2], tit[2], dsc[2], A, def[2],          ctx, hlp ),
+      makeEdt( cat, key[3], tit[3], dsc[3], A, def[3], INTEGER, ctx, hlp )
     };
   }
 

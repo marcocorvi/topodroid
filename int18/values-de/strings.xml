@@ -1366,6 +1366,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_survex_splay_summary">Zielstationen zu Hilfszügen zuweisen für Survex-Export</string>
   <string name="pref_survex_lrud_title">Survex LRUD</string>
   <string name="pref_survex_lrud_summary">LRUD-Werte in Survex export</string>
+  <!-- TODO string name="pref_survex_epsg_title">EPSG "cs out"</string -->
+  <!-- TODO string name="pref_survex_epsg_summary">EPSG number for Survex "cs out"</string -->
   <string name="pref_svg_program_title">SVG Kompatibilität</string>
   <string name="pref_svg_program_summary">Zielprogramm für den SVG Export</string>
   <string name="pref_svg_grid_title">Gitter</string>

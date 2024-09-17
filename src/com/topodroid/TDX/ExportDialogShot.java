@@ -375,6 +375,12 @@ public class ExportDialogShot extends MyDialog
         {
           TDSetting.mSurvexSplay = ((CheckBox) findViewById( R.id.survex_splay )).isChecked();
           TDSetting.mSurvexLRUD  = ((CheckBox) findViewById( R.id.survex_lrud )).isChecked();
+          EditText epsg  = (EditText)findViewById( R.id.survex_epsg );
+          if ( epsg.getText() != null ) {
+            try {
+              TDSetting.mSurvexEPSG = Integer.parseInt( epsg.getText().toString() );
+            } catch ( NumberFormatException e ) { } 
+          }
         }
         break;
       case TDConst.SURVEY_POS_THERION: // Therion
@@ -467,6 +473,7 @@ public class ExportDialogShot extends MyDialog
 
     ((CheckBox) findViewById( R.id.survex_splay )).setChecked( TDSetting.mSurvexSplay );
     ((CheckBox) findViewById( R.id.survex_lrud )).setChecked( TDSetting.mSurvexLRUD );
+    ((EditText) findViewById( R.id.survex_epsg )).setText( Integer.toString( TDSetting.mSurvexEPSG ) );
 
     ((CheckBox) findViewById( R.id.therion_config )).setChecked( TDSetting.mTherionWithConfig );
     ((CheckBox) findViewById( R.id.therion_maps )).setChecked( TDSetting.mTherionMaps );

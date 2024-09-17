@@ -238,9 +238,11 @@ public class TDSetting
   public static float   mLRUDhorizontal     = 45;     // horizontal splay for LR 
   public static boolean mLRUDcount          = false;  // LRUD counter (false: use all)
 
-  public static String mSurvexEol           = "\n";
+  public static String  mSurvexEol          = "\n";
   public static boolean mSurvexSplay        = false; // splays with named TO
   public static boolean mSurvexLRUD         = false;
+  public static int     mSurvexEPSG         = 0;     // Survex EPSG cs out
+
   public static boolean mSwapLR             = false; // swap LR in Compass export
   public static boolean mOrthogonalLRUD     = false; // whether angle > 0 
   public static float mOrthogonalLRUDAngle  = 0;     // angle
@@ -1165,9 +1167,10 @@ public class TDSetting
 
     String[] keyExpSvx = TDPrefKey.EXPORT_SVX;
     String[] defExpSvx = TDPrefKey.EXPORT_SVXdef;
-    mSurvexEol         = ( prefs.getString(    keyExpSvx[0],      defExpSvx[0] ).equals("LF") )? "\n" : "\r\n";  // DISTOX_SURVEX_EOL
-    mSurvexSplay       =   prefs.getBoolean(   keyExpSvx[1], bool(defExpSvx[1]) ); // DISTOX_SURVEX_SPLAY
-    mSurvexLRUD        =   prefs.getBoolean(   keyExpSvx[2], bool(defExpSvx[2]) ); // DISTOX_SURVEX_LRUD
+    mSurvexEol         = ( prefs.getString(  keyExpSvx[0],      defExpSvx[0] ).equals("LF") )? "\n" : "\r\n";  // DISTOX_SURVEX_EOL
+    mSurvexSplay       =   prefs.getBoolean( keyExpSvx[1], bool(defExpSvx[1]) ); // DISTOX_SURVEX_SPLAY
+    mSurvexLRUD        =   prefs.getBoolean( keyExpSvx[2], bool(defExpSvx[2]) ); // DISTOX_SURVEX_LRUD
+    mSurvexEPSG        = tryInt(   prefs,    keyExpSvx[3],      defExpSvx[3] );  // DISTOX_SURVEX_EPSG
     // TDLog.v("SETTING load secondary export SVX done");
 
     String[] keyExpTh  = TDPrefKey.EXPORT_TH;
@@ -2191,6 +2194,8 @@ public class TDSetting
       mSurvexSplay = tryBooleanValue( hlp, k, v, bool(def[1]) );
     } else if ( k.equals( key[2] ) ) { // DISTOX_SURVEX_LRUD (bool)
       mSurvexLRUD = tryBooleanValue( hlp, k, v, bool(def[2]) );
+    } else if ( k.equals( key[3] ) ) { // DISTOX_SURVEX_EPSG (int)
+      mSurvexEPSG = tryIntValue( hlp, k, v, def[3] );
     } else {
       TDLog.e("missing EXPORT SVX key: " + k );
     }
@@ -3216,7 +3221,7 @@ public class TDSetting
       pw.printf(Locale.US, "Export-format data %d, plot %d, auto-plot %d \n", mExportShotsFormat, mExportPlotFormat, mAutoExportPlotFormat );
       // pw.printf(Locale.US, "Auto-export %c data %d, plot %d \n", tf(mDataBackup), mExportShotsFormat, mExportPlotFormat );
       String eol = mSurvexEol.equals("\r\n")? eol = "\\r\\n" : "\\n";
-      pw.printf(Locale.US, "Survex: eol \"%s\", splay %c, LRUD %c \n", eol, tf(mSurvexSplay), tf(mSurvexLRUD) );
+      pw.printf(Locale.US, "Survex: eol \"%s\", splay %c, LRUD %c, EPSG %d\n", eol, tf(mSurvexSplay), tf(mSurvexLRUD), mSurvexEPSG );
       pw.printf(Locale.US, "Compass: swap_LR %c, prefix %c, splays %c \n", tf(mSwapLR), tf(mExportStationsPrefix), tf(mCompassSplays) );
       // pw.printf(Locale.US, "Walls: splays %c, wallsUD %d \n", tf(mWallsSplays), mWallsUD );
       pw.printf(Locale.US, "Walls: splays %c \n", tf(mWallsSplays) );
@@ -3492,6 +3497,9 @@ public class TDSetting
             setPreference( editor, "DISTOX_SURVEX_EOL", ( mSurvexEol.equals("\n")? "LF" : "LFCR" ) );
             mSurvexSplay = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_SURVEX_SPLAY", mSurvexSplay );
             mSurvexLRUD  = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_SURVEX_LRUD",  mSurvexLRUD );
+            if ( vals.length > 8 ) {
+              mSurvexEPSG = getInt( vals, 8, 0 ); setPreference( editor, "DISTOX_SURVEX_EPSG", mSurvexEPSG );
+            }
             // TDLog.v("Setting import survex settings " + mSurvexEol + " " + mSurvexSplay + " " + mSurvexLRUD );
           }
           continue;
