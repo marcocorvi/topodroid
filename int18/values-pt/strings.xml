@@ -774,8 +774,8 @@ no campo abaixo e aperte o botão.
   <string name="button_next">Próximo</string>
   <string name="button_prev">Anterior</string>
   <string name="button_new">Novo trecho</string>
-    <!-- TODO string name="button_rename"  >Rename</string -->
-    <!-- TODO string name="button_prefix"  >Prefix</string -->
+  <string name="button_rename">Renomear</string>
+  <string name="button_prefix">Prefixo</string>
   <string name="button_skip">Ignorar</string>
   <string name="button_done">Fim</string>
   <string name="button_lrud">Incluir EDTC</string>
@@ -807,7 +807,7 @@ no campo abaixo e aperte o botão.
   <string name="button_search">Pesquisar </string>
   <string name="button_merge">Mesclar   </string>
   <string name="button_saved">Gravar base</string>
-    <!-- TODO string name="button_scrap"     >Outlines</string -->
+  <string name="button_scrap">Contornos</string>
   <string name="button_split">Dividir   </string>
   <string name="button_station">Centralizar</string>
   <string name="button_store">Armazenar </string>
@@ -902,7 +902,7 @@ no campo abaixo e aperte o botão.
   <string name="hint_text">texto</string>
   <string name="hint_options">opções</string>
   <string name="hint_name">nome</string>
-    <!-- TODO string name="hint_prefix">prefix</string -->
+  <string name="hint_prefix">prefixo</string>
   <string name="hint_from">de</string>
   <string name="hint_to">para</string>
   <string name="hint_azimuth">azimute</string>
@@ -1919,7 +1919,7 @@ no campo abaixo e aperte o botão.
   <string name="cmenu_ico">Diagrama Rose 3D</string>
   <string name="cmenu_rose">Diagrama Rose 2D</string>
   <string name="cmenu_wall">Paredes</string>
-    <!-- TODO string name="cmenu_search">SEARCH</string -->
+  <string name="cmenu_search">PESQUISA</string>
   <!-- UNUSED string name="cmenu_sketch">CROQUIs</string -->
   <!-- UNUSED string name="cmenu_fractal" translatable="false">FRACTAL DIM.</string -->
   <string name="illegal_value">Valor inválido</string>
