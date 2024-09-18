@@ -31,7 +31,15 @@ On import from file formats that have LRUD values, these are converted to x-spla
 
 
 <b>Survex import</b><br>
-Survex syntax for data is only partially supported.<br><p>
+Survex syntax is partially supported.<br>
+
+Only the data modes "normal", "topofil" and "passage" are handled to some extent.
+In particular for the "passage" data mode, the "left" and "right" values are not used because
+they cannot be converted to splays.<br>
+
+TopoDroid has only survey sessions. Therefore, data of multi-session files are merged in a 
+single session.
+<br><p>
 
 <b>Therion import</b><br>
 Only Therion survey files with data in "normal" datamode are importable.<br>

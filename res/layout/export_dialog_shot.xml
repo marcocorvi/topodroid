@@ -109,12 +109,26 @@
       android:layout_height="wrap_content"
       android:text="@string/export_lrud"
       />
-    <EditText android:id="@+id/survex_epsg"
+    <LinearLayout
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
-      android:importantForAutofill="no"
-      android:inputType="number"
-      />
+      android:orientation="horizontal" 
+      >
+      <TextView
+        android:layout_width="0dp" 
+        android:layout_weight="20" 
+        android:layout_height="wrap_content"
+        android:text="@string/epsg"
+        android:layout_marginEnd="@dimen/marginh"
+        />
+      <EditText android:id="@+id/survex_epsg"
+        android:layout_width="0dp" 
+        android:layout_weight="80" 
+        android:layout_height="wrap_content"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        />
+    </LinearLayout>
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout_therion"

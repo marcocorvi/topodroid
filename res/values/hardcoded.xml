@@ -22,6 +22,8 @@
   <!-- string name="geojason" translatable="false">GeoJSOM</string -->
   <string name="shapefile" translatable="false">Shapefile</string>
 
+  <string name="epsg" translatable="false">EPSG</string>
+
   <!-- UNUSED string name="number_sign" translatable="false"> # </string -->
   <!-- UNUSED string name="char_x" translatable="false"> X </string -->
   <!-- UNUSED string name="char_less" translatable="false">&lt;</string -->
