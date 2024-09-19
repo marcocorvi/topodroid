@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.ui.ItemButton;
 
 import java.util.ArrayList;
@@ -105,6 +105,7 @@ class SymbolAdapter extends ArrayAdapter< EnableSymbol >
 
   void updateSymbols( String prefix )
   {
+    // TDLog.v("adapter updates symbols"); // ENABLED_LIST
     if ( mItems.size() > 0 ) mItems.get(0).setEnabled( true ); // user symbols are always enabled
 
     for ( EnableSymbol symbol : mItems ) {

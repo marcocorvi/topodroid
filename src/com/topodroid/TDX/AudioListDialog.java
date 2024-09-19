@@ -69,10 +69,12 @@ class AudioListDialog extends MyDialog
   private String getAudioDescription( AudioInfo audio )
   {
     long item_id = audio.getItemId();
-    if ( item_id >= 0 ) {
+    if ( audio.getItemType() == MediaInfo.TYPE_SHOT ) {
       for ( DBlock blk : mShots ) if ( blk.mId == item_id ) {
         return audio.getFullString( blk.mFrom + " " + blk.mTo );
       }
+    } else if ( audio.getItemType() == MediaInfo.TYPE_PLOT ) {
+      return audio.getFullString( Long.toString( item_id ) );
     }
     // return audio.getFullString( "- -" );
     return null;
@@ -143,13 +145,16 @@ class AudioListDialog extends MyDialog
    * @param pos       item position in the list
    * @param id        ...
    * @return true if tap has been handled
+   * @note only for shot audios
    */
   @Override
   public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
   {
-    DBlock blk = getAudioBlock( mAudios.get( pos ) );
+    AudioInfo audio = mAudios.get( pos );
+    if ( audio.getItemType() != MediaInfo.TYPE_SHOT ) return false;
+    DBlock blk = getAudioBlock( audio );
     if ( blk == null ) return false;
-    mParent.startAudio( blk );
+    mParent.startAudio( audio, blk );
     return true;
   }
 
@@ -161,10 +166,11 @@ class AudioListDialog extends MyDialog
     AudioInfo audio = mAudios.get( pos );
     if ( audio != null ) { 
       String subdir = TDInstance.survey + "/audio"; // "audio/" + TDInstance.survey;
-      long item_id = audio.getItemId();  // FIXME this is ok for shot-audio, fix it for plot-audio
-      String name   = Long.toString( item_id ) + ".wav";
-      if ( TDFile.hasMSfile( subdir, name ) ) { // if ( file.exists() )
-        String filepath = TDPath.getSurveyWavFile( TDInstance.survey, Long.toString( item_id ) );
+      // long item_id = audio.getItemId();  // FIXME this is ok for shot-audio, fix it for plot-audio
+      String audio_name = audio.getMediaName();
+      String filepath = TDPath.getSurveyWavFile( TDInstance.survey, audio_name );
+      // TDLog.v("audio file " + subdir + " " + audio_name + " filepath " + filepath ); 
+      if ( (TDFile.getTopoDroidFile( filepath )).exists() ) {
         startPlay( filepath );
       // } else {
       //   // TDLog.e("audio file does not exist");

@@ -122,6 +122,8 @@ public class Symbol implements SymbolInterface
    */
   boolean isSection() { return mThName.equals("section"); }
 
+  boolean isPicture() { return mSymbolType == TYPE_POINT && mThName.equals("picture"); }
+
   /** @return true if this is a POINT symbol
    */
   boolean isPoint() { return mSymbolType == TYPE_POINT; }

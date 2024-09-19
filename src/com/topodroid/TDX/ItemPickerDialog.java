@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.ui.ItemButton;
@@ -116,6 +116,7 @@ class ItemPickerDialog extends MyDialog
     mSelectedPoint = parent.mCurrentPoint;
     mSelectedLine  = parent.mCurrentLine;
     mSelectedArea  = parent.mCurrentArea;
+
   }
 
   @Override
@@ -254,6 +255,7 @@ class ItemPickerDialog extends MyDialog
 
     setTypeAndItem( mItemType, getAdapterPosition() );
     // setTheTitle();
+    // TDLog.v("Item Picker dialog"); // ENABLED_LIST
   }
 
   // FIXME_SCALE
@@ -377,7 +379,7 @@ class ItemPickerDialog extends MyDialog
             mPointAdapter.add( new ItemSymbol( mContext, this, SymbolType.POINT, i, p ) );
           } else if ( p.isThName( SymbolLibrary.AUDIO ) && TDandroid.checkMicrophone( mContext ) ) {
             mPointAdapter.add( new ItemSymbol( mContext, this, SymbolType.POINT, i, p ) );
-          } else if ( ! p.isThName( SymbolLibrary.SECTION ) ) { // FIXME_SECTION_POINT 
+          } else if ( ! ( p.isThName( SymbolLibrary.SECTION ) || p.isThName( SymbolLibrary.PICTURE ) ) ) { // FIXME_SECTION_POINT 
             mPointAdapter.add( new ItemSymbol( mContext, this, SymbolType.POINT, i, p ) );
           }
         }
@@ -398,6 +400,7 @@ class ItemPickerDialog extends MyDialog
     {
       mAreaAdapter  = new ItemAdapter( mContext, this, SymbolType.AREA, R.layout.item, new ArrayList< ItemSymbol >() );
       int na = mAreaLib.size();
+      // TDLog.v("areas " + na );
       for ( int k=0; k<na; ++k ) {
         SymbolArea a = (SymbolArea)mAreaLib.getSymbolByIndex( k );
         if ( a.isEnabled() ) {

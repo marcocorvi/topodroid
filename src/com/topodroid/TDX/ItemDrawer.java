@@ -92,6 +92,7 @@ abstract class ItemDrawer extends Activity
    */
   static void updateRecentArea( int area )
   {
+    // TDLog.v("update recent area: idx " + area + " " + BrushManager.getAreaByIndex( area ).getThName() );
     updateRecent( BrushManager.getAreaByIndex( area ), mRecentArea, mRecentAreaAge );
   }
 
@@ -101,7 +102,7 @@ abstract class ItemDrawer extends Activity
    */
   static void updateRecentPoint( Symbol point ) 
   {
-    if ( point.isSection() ) return;
+    if ( point.isSection() || point.isPicture() ) return;
     updateRecent( point, mRecentPoint, mRecentPointAge );
   }
 
@@ -114,6 +115,22 @@ abstract class ItemDrawer extends Activity
    * @param area  area symbol
    */
   static void updateRecentArea( Symbol area ) { updateRecent( area, mRecentArea, mRecentAreaAge ); }
+
+  /** set to null disabled recent symbols
+   */
+  static void resetRecentSymbols()
+  {
+    // TDLog.v("reset recent symbols ..."); // ENABLED_LIST
+    for ( int k=0; k<NR_RECENT; ++k ) {
+      if ( mRecentPoint[k] != null && ! BrushManager.isPointEnabled( mRecentPoint[k].getThName() ) ) mRecentPoint[k] = null;
+      if ( mRecentLine[k]  != null && ! BrushManager.isLineEnabled(  mRecentLine[k].getThName()  ) ) mRecentLine[k]  = null;
+      if ( mRecentArea[k]  != null ) {
+        boolean enabled = BrushManager.isAreaEnabled( mRecentArea[k].getThName() );
+        // TDLog.v("area " + mRecentArea[k].getThName() + " enabled " + enabled ); // ENABLED_LIST
+        if ( ! enabled ) mRecentArea[k]  = null;
+      }
+    }
+  }
 
   /** update a set of recent symbols
    * @param symbol    symbol to update

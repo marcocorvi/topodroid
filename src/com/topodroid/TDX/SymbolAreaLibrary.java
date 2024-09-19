@@ -188,9 +188,18 @@ public class SymbolAreaLibrary extends SymbolLibrary
   }
   */
 
+  // @Override
+  // protected void makeEnabledList()
+  // {
+  //   super.makeEnabledList();
+  //   mAreaUserIndex    = getSymbolIndexByThName( USER );
+  //   mAreaWaterIndex   = getSymbolIndexByThName( WATER );
+  // }
+
   void makeEnabledListFromPalette( SymbolsPalette palette, boolean clear )
   {
-    makeEnabledListFromStrings( palette.mPaletteArea, clear );
+    // TDLog.v("palette area: " + palette.mPaletteArea );
+    makeEnabledListFromStrings( palette.mPaletteArea, clear ); // ENABLED_LIST
   }
 
 }    

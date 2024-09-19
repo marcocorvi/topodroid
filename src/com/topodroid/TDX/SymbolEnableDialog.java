@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.common.SymbolType;
@@ -121,7 +121,7 @@ class SymbolEnableDialog extends MyDialog
 	Symbol point = point_lib.getSymbolByIndex( i );
 	// if ( point.isThName( SymbolLibrary.PHOTO && ! TDandroid.checkCamera( mContext ) ) continue; // TODO skip if hw not granted
 	// if ( point.isThName( SymbolLibrary.AUDIO && ! TDandroid.checkMicrophone( mContext ) ) continue;
-	if ( ! point.isThName( SymbolLibrary.SECTION ) ) { // FIXME_SECTION_POINT always enabled
+	if ( ! ( point.isThName( SymbolLibrary.SECTION ) || point.isThName( SymbolLibrary.PICTURE ) ) ) { // FIXME_SECTION_POINT always enabled
           mPointAdapter.add( new EnableSymbol( mContext, SymbolType.POINT, i, point ) );
         }
       }
@@ -266,6 +266,7 @@ class SymbolEnableDialog extends MyDialog
 
     protected Void doInBackground( Void ... v )
     { 
+      // TDLog.v("save symbol make enabled lists ..."); // ENABLED_LIST
       if ( TDLevel.overBasic ) {
         mPtAdapter.updateSymbols( "p_" );
         SymbolPointLibrary point_lib = BrushManager.getPointLib();

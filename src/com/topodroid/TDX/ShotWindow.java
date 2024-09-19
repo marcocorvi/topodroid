@@ -1345,6 +1345,7 @@ public class ShotWindow extends Activity
     }
 
     // mSearch = new SearchResult();
+    // TDLog.v("Shot Window on create sid " + TDInstance.sid );
   }
 
   @Override
@@ -2933,13 +2934,18 @@ public class ShotWindow extends Activity
 
   // ------------------------------------------------------------------
   /** start the audio dialog for a data block
+   * @param audio audio info (used only as check)
    * @param blk   data block
+   *
+   * @note called by ShotEditDialog to open a dialog with "audio" (old) or null (new)
+   *                 AudioListDialog to open a dialog with "audio" (old)
    */
-  void startAudio( DBlock blk )
+  void startAudio( AudioInfo audio, DBlock blk )
   {
-    // (new AudioDialog( mActivity, /* this */ null, blk.mId, blk, MediaInfo.TYPE_SHOT )).show();
-    long audio_id = mApp_mData.getAudioId( TDInstance.sid, blk.mId, MediaInfo.TYPE_SHOT );
-    (new AudioDialog( mActivity, /* this */ null, audio_id, blk, MediaInfo.TYPE_SHOT )).show();
+    long audio_id = (audio == null) ? mApp_mData.getAudioIdByItem( TDInstance.sid, blk.mId, MediaInfo.TYPE_SHOT )
+                                    : audio.getId();
+    // TDLog.v("Shot Window start audio id " + audio_id + " block " + blk.mId );
+    (new AudioDialog( mActivity, /* this */ null, audio_id, blk, blk.mId, MediaInfo.TYPE_SHOT )).show();
   }
 
 }

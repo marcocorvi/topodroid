@@ -1204,7 +1204,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
         // TDLog.v( "file " + tdr1 + " exists: loading ... " + fullname );
         ret = DrawingIO.doLoadDataStream( this, tdr1, 0, 0, /* missingSymbols, */ localPalette, null, false, null ); // no plot_name
         if ( ret ) {
-          BrushManager.makeEnabledListFromPalette( localPalette, false );
+          BrushManager.makeEnabledListFromPalette( localPalette, false ); // ENABLED_LIST false: do not reset symbols "enabled"
           if ( link_sections ) {
             if ( fullname.startsWith( TDInstance.survey ) ) {
               int len = TDInstance.survey.length() + 1;
@@ -1218,9 +1218,13 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
           if ( fullname != null ) addManagerToCache( fullname );
         } else {
           TDLog.e( "file " + tdr1 + " failed to load" );
+          BrushManager.makeEnabledListFromConfig();
+          ItemDrawer.resetRecentSymbols();
         }
       } else {
-        TDLog.e( "file " + tdr1 + " does not exist");
+        // TDLog.v( "file " + tdr1 + " does not exist:  make enabled list from config");
+        BrushManager.makeEnabledListFromConfig();
+        ItemDrawer.resetRecentSymbols();
       }
     }
     return ret;

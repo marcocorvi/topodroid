@@ -330,7 +330,9 @@ public class SymbolLibrary
   protected void makeEnabledList( )
   {
     if ( TopoDroidApp.mData == null ) return;
+    // TDLog.v("Symbol lib make enabled list");
     for ( Symbol symbol : mSymbols ) {
+      // if ( mPrefix.equals("a_") ) TDLog.v("set symbol " + symbol.getThName() + " enabled " + symbol.mEnabled );
       TopoDroidApp.mData.setSymbolEnabled( mPrefix + symbol.getThName(), symbol.mEnabled );
       // if ( symbol.mEnabled ) {
         // TODO what ?
@@ -345,13 +347,26 @@ public class SymbolLibrary
   void makeEnabledListFromStrings( TreeSet<String> symbols, boolean clear )
   {
     if ( clear ) {
-      for ( Symbol symbol : mSymbols ) symbol.setEnabled( false );
+      for ( Symbol symbol : mSymbols ) {
+        // TDLog.v("symbol clear " + symbol.getThName() );
+        symbol.setEnabled( false );
+      }
     }
     for ( String name : symbols ) {
       Symbol symbol = getSymbolByThName( name );
       if ( symbol != null ) symbol.setEnabled( true );
     }
-    makeEnabledList( );
+    makeEnabledList( ); // ENABLED_LIST
+  }
+
+  void makeEnabledListFromConfig( boolean log )
+  {
+    // for ( Symbol symbol : mSymbols ) symbol.setEnabled( false );
+    for ( Symbol symbol : mSymbols ) {
+      boolean enabled = TopoDroidApp.mData.getSymbolEnabled( mPrefix + symbol.getThName() );
+      symbol.mEnabled = enabled;
+      if ( log ) TDLog.v("Symbol " + symbol.getThName() + " enabled " + enabled );
+    }
   }
 
   /** set the array of recently used symbols

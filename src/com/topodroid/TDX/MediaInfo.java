@@ -24,6 +24,9 @@ class MediaInfo
   static final int TYPE_SHOT      = 1;
   static final int TYPE_PLOT      = 2;
   static final int TYPE_XSECTION  = 3; // FIXME when is this used ?
+  static final int TYPE_MAX       = 3; //maximum reference tyep
+
+  static final private String[] mTypeStr = { "u", "s", "p", "x" };
 
   protected final int  mMediaType; // either MEDIA_AUDIO or MEDIA_PHOTO or MEDIA_SENSOR
   protected final long sid;     // survey id (assigned but never used)
@@ -73,6 +76,25 @@ class MediaInfo
    * @param item_id   given item ID
    */
   public boolean hasItemId( long item_id ) { return mItemId == item_id; }
+
+  /** @return name of media file
+   */
+  public String getMediaName()
+  {
+    return Long.toString( id ) + mTypeStr[ mItemType ];
+  }
+
+  /** @return name of media file
+   * @param id     media id
+   * @param tyep   reference item type
+   */
+  static public String getMediaName( long id, int type )
+  {
+    if ( type > TYPE_MAX ) type = TYPE_UNDEFINED;
+    return Long.toString( id ) + mTypeStr[ type ];
+  }
+
+  /** @return the date string
 
   /** @return the date string
    */

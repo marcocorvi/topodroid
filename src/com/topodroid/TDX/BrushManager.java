@@ -373,9 +373,22 @@ public class BrushManager
   static void makeEnabledListFromPalette( SymbolsPalette palette, boolean clear ) 
   {
     if ( palette == null ) return;
+    // TDLog.v("make enable list from palette - clear " + clear );
     if ( mPointLib != null ) mPointLib.makeEnabledListFromPalette( palette, clear );
     if ( mLineLib  != null ) mLineLib.makeEnabledListFromPalette( palette, clear );
     if ( mAreaLib  != null ) mAreaLib.makeEnabledListFromPalette( palette, clear );
+  }
+
+  /** make the list of enabled symbols from configuration
+   * @param palette    set of symbols filenames
+   * @note disable all symbols first
+   */
+  static void makeEnabledListFromConfig( )
+  {
+    // TDLog.v("make enable list from config ");
+    if ( mPointLib != null ) mPointLib.makeEnabledListFromConfig( false );
+    if ( mLineLib  != null ) mLineLib.makeEnabledListFromConfig( false );
+    if ( mAreaLib  != null ) mAreaLib.makeEnabledListFromConfig( true );
   }
 
   /** make a STROKE paint with fixed width (for fixed path)

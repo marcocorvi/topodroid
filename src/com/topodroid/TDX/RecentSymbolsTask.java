@@ -11,6 +11,8 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.utils.TDLog;
+
 // import java.lang.ref.WeakReference;
 
 import android.os.AsyncTask;
@@ -116,7 +118,7 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
    */
   private void loadRecentSymbols()
   {
-    // TDLog.v( "load recent tools");
+    // TDLog.v( "load recent symbols"); // ENABLED_LIST
     BrushManager.setRecentPoints( ItemDrawer.mRecentPoint );
     BrushManager.setRecentLines(  ItemDrawer.mRecentLine );
     BrushManager.setRecentAreas(  ItemDrawer.mRecentArea );
@@ -127,21 +129,31 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
       String[] points = names.split(" ");
       for ( String point : points ) {
         if ( point.equals("section" ) ) continue;
-        ItemDrawer.updateRecent( BrushManager.getPointByThName( point ), ItemDrawer.mRecentPoint, ItemDrawer.mRecentPointAge );
+        Symbol symbol = BrushManager.getPointByThName( point );
+        if ( symbol.mEnabled ) {
+          ItemDrawer.updateRecent( symbol, ItemDrawer.mRecentPoint, ItemDrawer.mRecentPointAge );
+        }
       }
     }
     names = mData.getValue( "recent_lines" );
     if ( names != null ) {
       String[] lines = names.split(" ");
       for ( String line : lines ) {
-        ItemDrawer.updateRecent( BrushManager.getLineByThName( line ), ItemDrawer.mRecentLine, ItemDrawer.mRecentLineAge );
+        Symbol symbol = BrushManager.getLineByThName( line );
+        if ( symbol.mEnabled ) {
+          ItemDrawer.updateRecent( symbol, ItemDrawer.mRecentLine, ItemDrawer.mRecentLineAge );
+        }
       }
     }
     names = mData.getValue( "recent_areas" );
     if ( names != null ) {
       String[] areas = names.split(" ");
       for ( String area : areas ) {
-        ItemDrawer.updateRecent( BrushManager.getAreaByThName( area ), ItemDrawer.mRecentArea, ItemDrawer.mRecentAreaAge );
+        Symbol symbol = BrushManager.getAreaByThName( area );
+        if ( symbol.mEnabled ) {
+          // TDLog.v("load recent area " + area ); // ENABLED_LIST
+          ItemDrawer.updateRecent( symbol, ItemDrawer.mRecentArea, ItemDrawer.mRecentAreaAge );
+        }
       }
     }
   }

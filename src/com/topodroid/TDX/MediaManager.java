@@ -54,12 +54,12 @@ class MediaManager
    * @param size     TODO
    * @param camera   camera type
    * @param code     geomorphology code
-   * @param type     reference item type
+   * @param rettype  reference item type
    */
-  long prepareNextPhoto( long item_id, String comment, float size, int camera, String code, long type )
+  long prepareNextPhoto( long item_id, String comment, float size, int camera, String code, long reftype )
   {
     mItemId   = item_id;
-    mItemType = type;
+    mItemType = reftype;
     mComment  = comment;
     mCode     = code;
     mSize     = size;
@@ -73,17 +73,18 @@ class MediaManager
   /** @return the next audio index (ID)
    * @param item_id    reference item ID: plot ID because this method is not used for shot ID
    * @param comment    audio comment
-   * @param type       reference item type (always TYPE_PLOT)
+   * @param reftype    reference item type (always TYPE_PLOT)
    * @note this is used only be DrawingWindow which calls it with item_id = pid
    */
-  long prepareNextAudio( long item_id, String comment, long type )
+  long prepareNextAudio( long item_id, String comment, long reftype )
   {
     mItemId   = item_id;
-    mItemType = type;
+    mItemType = reftype;
     mComment  = comment;
     mCode     = null;
-    mAudioId  = mData.nextAudioId( TDInstance.sid, mItemId, type );
-    mAudioFilepath = TDPath.getSurveyWavFile( TDInstance.survey, Long.toString(mAudioId) ); // audio file is "survey/id.wav"
+    mAudioId  = mData.nextAudioId( TDInstance.sid ); // , mItemId, mItemType );
+    String audio_name = MediaInfo.getMediaName( mAudioId, (int)mItemType );
+    mAudioFilepath = TDPath.getSurveyWavFile( TDInstance.survey, audio_name ); // audio file is "survey/idX.wav"
     // mAudioFile = TDFile.getTopoDroidFile( mAudioFilepath );
     return mAudioId;
   }
@@ -102,11 +103,13 @@ class MediaManager
   int getCamera()  { return mCamera; }
 
   /** set reference item ID and type
+   * @param id    item ID
+   * @param reftype reference item type
    */
-  void setReferenceItem( long id, long type )
+  void setReferenceItem( long id, long reftype )
   {
     mItemId   = id;
-    mItemType = type;
+    mItemType = reftype;
   }
 
   /** @return reference item ID

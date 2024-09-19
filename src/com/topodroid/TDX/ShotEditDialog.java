@@ -1040,7 +1040,7 @@ class ShotEditDialog extends MyDialog
       mParent.askPhotoComment( mBlk );
       dismiss();
     } else if ( mButtonAudio != null && b == mButtonAudio ) {  // AUDIO
-      mParent.startAudio( mBlk );
+      mParent.startAudio( null, mBlk );
       dismiss();
     } else if ( mButtonSensor != null && b == mButtonSensor ) { // SENSOR
       mParent.askSensor( mBlk );

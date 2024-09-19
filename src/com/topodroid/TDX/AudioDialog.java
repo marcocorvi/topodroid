@@ -71,8 +71,10 @@ class AudioDialog extends MyDialog
   private DBlock  mBlk;  // this is used only for the presentation "name"
   private int isRecPlay; // 0: idle, 1: rec, 2: play
   private long mReftype;    // reference item type
+  private long mBid;        // reference ID
   // private long mItemId; // TODO maybe
   // AudioInfo mAudio;
+  private String mAudioName;
 
   /** cstr
    * @param ctx       context
@@ -81,7 +83,7 @@ class AudioDialog extends MyDialog
    * @param blk       data block (or null)
    * @param reftype   reference item type
    */
-  AudioDialog( Context ctx, IAudioInserter parent, long audio_id, DBlock blk, long reftype )
+  AudioDialog( Context ctx, IAudioInserter parent, long audio_id, DBlock blk, long bid, long reftype )
   {
     super( ctx, null, R.string.AudioDialog ); // null app
 
@@ -89,12 +91,14 @@ class AudioDialog extends MyDialog
     mAudioId  = audio_id;
     mReftype  = reftype;
     // mAudio = mApp.mData.getAudio( TDInstance.sid, mAudioId );
-    mFilepath = TDPath.getSurveyWavFile( TDInstance.survey, Long.toString(mAudioId) );
+    mAudioName = MediaInfo.getMediaName( mAudioId, (int)reftype );
+    mFilepath = TDPath.getSurveyWavFile( TDInstance.survey, mAudioName );
     hasFile   = (TDFile.getTopoDroidFile( mFilepath )).exists();
     hadNoFile = ! hasFile;
     mBlk      = blk;
+    mBid      = bid;  // refrence ID
     isRecPlay = STATUS_IDLE;
-    // TDLog.v( "audio dialog " + audio_id + " file: " + mFilepath );
+    // TDLog.v("Audio dialog: id " + audio_id + " ref " + bid + " type " + reftype + "  file " + mFilepath );
   }
 
 
@@ -144,10 +148,14 @@ class AudioDialog extends MyDialog
     layout2.invalidate();
   }
 
-  private void stopRecPlay()
+  private void stopRecPlay( boolean update )
   {
     if ( isRecPlay == STATUS_RECORD ) {
       stopRec();
+      if ( update ) {
+        // TDLog.v("insert audio record in database: sid " + TDInstance.sid + " id " + mAudioId + " ref ID " + mBid + " type " + mReftype );
+        TopoDroidApp.mData.updateAudio( TDInstance.sid, mAudioId, mBid, null, mReftype ); // null datetime
+      }
     } else if ( isRecPlay == STATUS_PLAY ) {
       stopPlay();
     }
@@ -159,19 +167,22 @@ class AudioDialog extends MyDialog
   public void onClick(View v) 
   {
     if ( v.getId() == R.id.audio_close ) {
-      stopRecPlay();
+      stopRecPlay( false );
       dismiss();
     }
     try {
       MyStateBox b = (MyStateBox)v;
       if ( b == mBtnDelete ) {
-	// TDLog.v( "audio delete: is rec " + isRecPlay );
-        stopRecPlay();
-        if ( hasFile ) { // delete audio file
-	  // TDLog.v( "audio delete ask confirm");
-          mAction = ACTION_DELETE;
-          mBtnConfirm.setText( R.string.audio_delete );
-          return;
+	TDLog.v( "audio delete: is rec " + isRecPlay + " ref type " + mReftype );
+        stopRecPlay( false );
+        if ( mReftype == MediaInfo.TYPE_SHOT ) {
+          if ( hasFile ) { // delete audio file
+	    // TDLog.v( "audio delete ask confirm");
+            mAction = ACTION_DELETE;
+            mBtnConfirm.setText( R.string.audio_delete );
+            return;
+          }
+          deleteAudio(); // delete audio record
         }
 	// TDLog.v( "audio delete has no file");
       } else if ( b == mBtnPlay ) {
@@ -199,7 +210,7 @@ class AudioDialog extends MyDialog
           if ( sr == 1 ) {
 	    // TDLog.v( "audio record stop");
             if ( isRecPlay != STATUS_RECORD ) return;
-            stopRec();
+            stopRecPlay( true );
           } else if ( sr == 0 ) {
             if ( isRecPlay == STATUS_RECORD ) {
               return;
@@ -246,7 +257,7 @@ class AudioDialog extends MyDialog
   @Override
   public void onBackPressed()
   {
-    stopRecPlay();
+    stopRecPlay( false );
     if ( hadNoFile && hasFile ) deleteAudio();
     super.onBackPressed();
   }
@@ -257,6 +268,7 @@ class AudioDialog extends MyDialog
   private void deleteAudio()
   {
     assert( isRecPlay == STATUS_IDLE );
+    // TDLog.v("Audio delete in database: sid " + TDInstance.sid + " id " + mAudioId + " ref ID " + mBid + " file " + mFilepath );
     TDFile.deleteFile( mFilepath );
     TopoDroidApp.mData.deleteAudioRecord( TDInstance.sid, mAudioId );
     if ( mParent != null ) mParent.deletedAudio( mAudioId );
@@ -284,9 +296,9 @@ class AudioDialog extends MyDialog
       mBtnConfirm.setText( R.string.audio_recording );
       mMR.start();
     } catch ( IllegalStateException e ) {
-      TDLog.e("Illegal State " + e.getMessage() );
+      TDLog.e("Illegal State [1] " + e.getMessage() );
     } catch ( IOException e ) {
-      TDLog.e("I/O error " + e.getMessage() );
+      TDLog.e("I/O error [1] " + e.getMessage() );
     }
   }
 
@@ -294,7 +306,7 @@ class AudioDialog extends MyDialog
    */
   private void stopRec()
   {
-    assert( isRecPlay == STATUS_RECORD );
+    // assert( isRecPlay == STATUS_RECORD ); // useless
     try {
       mMR.stop();
       mMR.release();
@@ -305,13 +317,14 @@ class AudioDialog extends MyDialog
       mBtnConfirm.setText( R.string.audio_paused );
       canPlay = true;
       hasFile = true;
-      TopoDroidApp.mData.setAudio( TDInstance.sid, mAudioId, TDUtil.currentDateTime(), mReftype );
+      // TDLog.v("set audio time id " + mAudioId );
+      // TopoDroidApp.mData.setAudioTime( TDInstance.sid, mAudioId, TDUtil.currentDateTime() );
       if ( mParent != null ) mParent.stopRecordAudio( mAudioId );
       isRecPlay = STATUS_IDLE;
     } catch ( IllegalStateException e ) {
-      TDLog.e("Illegal state " + e.getMessage() );
+      TDLog.e("Illegal state [2] " + e.getMessage() );
     } catch ( RuntimeException e ) {
-      TDLog.e("Runtime error " + e.getMessage() );
+      TDLog.e("Runtime error [2] " + e.getMessage() );
     }
   }
 
@@ -342,9 +355,9 @@ class AudioDialog extends MyDialog
       mBtnConfirm.setText(  R.string.audio_playing );
       mMP.start();
     } catch ( IllegalStateException e ) {
-      TDLog.e("Illegal state " + e.getMessage() );
+      TDLog.e("Illegal state [3] " + e.getMessage() );
     } catch ( IOException e ) {
-      TDLog.e("I/O error " + e.getMessage() );
+      TDLog.e("I/O error [3] " + e.getMessage() );
     }
   }
 
@@ -366,9 +379,9 @@ class AudioDialog extends MyDialog
       mBtnPlay.setState( 1 );
       isRecPlay = STATUS_IDLE;
     } catch ( IllegalStateException e ) {
-      TDLog.e("Illegal state " + e.getMessage() );
+      TDLog.e("Illegal state [4] " + e.getMessage() );
     // } catch ( RuntimeException e ) {
-    //   TDLog.e("Runtime error " + e.getMessage() );
+    //   TDLog.e("Runtime error [4] " + e.getMessage() );
     }
   }
 

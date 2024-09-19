@@ -5873,7 +5873,7 @@ public class DrawingWindow extends ItemDrawer
     // mMediaId = mApp_mData.nextAudioId( TDInstance.sid, MediaInfo.TYPE_PLOT );
     // File file = TDFile.getFile( TDPath.getSurveyWavFile( TDInstance.survey, Long.toString(mMediaId) ) );
     // TODO RECORD AUDIO
-    new AudioDialog( mActivity, this, audio_id, null, MediaInfo.TYPE_PLOT ).show();
+    new AudioDialog( mActivity, this, audio_id, null, pid, MediaInfo.TYPE_PLOT ).show();
   }
 
   /** delete an audio record
@@ -7356,7 +7356,7 @@ public class DrawingWindow extends ItemDrawer
               } else if ( point instanceof DrawingAudioPath ) { // BrushManager.isPointAudio( point.mPointType )
                 if ( audioCheck ) {
                   DrawingAudioPath audio = (DrawingAudioPath)point;
-                  new AudioDialog( mActivity, this, audio.mId, null, MediaInfo.TYPE_PLOT ).show();
+                  new AudioDialog( mActivity, this, audio.mId, null, mPid, MediaInfo.TYPE_PLOT ).show(); // null DBlock
                 } else {
                   TDToast.makeWarn( R.string.no_feature_audio );
                 }

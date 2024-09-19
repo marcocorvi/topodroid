@@ -200,7 +200,7 @@ public class DataHelper extends DataSetObservable
   // public DataHelper( Context context, TopoDroidApp app, DataListenerSet listeners ) // IF_COSURVEY
   public DataHelper( Context context /* , TopoDroidApp app */ )
   {
-    TDLog.v("DB cstr");
+    // TDLog.v("DB cstr");
     // mApp     = app;
     // mListeners = listeners; // IF_COSURVEY
     this.openDatabase( context );
@@ -239,7 +239,7 @@ public class DataHelper extends DataSetObservable
       return;
     }
     try {
-      TDLog.v("DB ... try to open RW " + db_name);
+      // TDLog.v("DB ... try to open RW " + db_name);
       myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE );
       if ( myDB != null ) {
         checkUpgrade();
@@ -1064,16 +1064,17 @@ public class DataHelper extends DataSetObservable
   private boolean doUpdateSurvey( long sid, ContentValues cv, String msg )
   {
     if ( myDB == null ) return false;
+    boolean ret = false;
     try {
       myDB.beginTransaction();
       myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(sid) } );
       myDB.setTransactionSuccessful();
-      return true;
+      ret = true;
     } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
     } catch ( SQLiteException e1 )       { logError(msg, e1 ); 
     } catch ( IllegalStateException e2 ) { logError(msg, e2 );
     } finally { myDB.endTransaction(); }
-    return false;
+    return ret;
   }
 
   /** perform a table update
@@ -2299,8 +2300,8 @@ public class DataHelper extends DataSetObservable
                           double d, double b, double c, double r, 
                           long extend, double stretch, long leg, long status, long shot_type, String addr, long idx, long time )
   {
-    TDLog.v("DB simple insert shot id " + id + " d " + d + " b " + b + " c " + c + " extend " + extend + "/" + stretch + " leg " + leg + 
-      " status " + status + " type " + shot_type + " addr " + addr + " idx " + idx + " millis " + millis + " color " + color );
+    // TDLog.v("DB simple insert shot id " + id + " d " + d + " b " + b + " c " + c + " extend " + extend + "/" + stretch + " leg " + leg + 
+    //   " status " + status + " type " + shot_type + " addr " + addr + " idx " + idx + " millis " + millis + " color " + color );
     if ( myDB == null ) return -1L;
     if ( id == -1L ) {
       ++ myNextId;
@@ -2319,7 +2320,7 @@ public class DataHelper extends DataSetObservable
                           double d, double b, double c, double r, double mag, double acc, double dip,
                           long extend, double stretch, long leg, long status, String comment, long shot_type, String addr, long idx, long time )
   {
-    TDLog.v("DB complete insert shot id " + id + " d " + d + " b " + b + " c " + c );
+    // TDLog.v("DB complete insert shot id " + id + " d " + d + " b " + b + " c " + c );
     if ( myDB == null ) return -1L;
     if ( id == -1L ) {
       ++ myNextId;
@@ -2549,7 +2550,7 @@ public class DataHelper extends DataSetObservable
   private static final String qAudioShot    = "select id, date from audios where surveyId=? AND shotId=? AND reftype=1 "; // shot-item = 1
   private static final String qAudioPlot    = "select id, date from audios where surveyId=? AND id=? AND shotId=? AND reftype=2 "; // plot-item = 1
 
-  private static final String qAudioId      = "select id from audios where surveyId=? AND shotId=? AND reftype=? "; 
+  private static final String qAudioIdItem  = "select id from audios where surveyId=? AND shotId=? AND reftype=? "; 
 
   private static final String qAudiosAll    = "select id, shotId, date, reftype from audios where surveyId=? order by reftype";
 
@@ -2751,29 +2752,33 @@ public class DataHelper extends DataSetObservable
    * @param item_id    reference item ID: use 0 
    * @param reftype    reference item type
    */
-  long nextAudioId( long sid, long item_id, long reftype )
+  long nextAudioId( long sid ) // , long item_id, long reftype )
   {
     // long id = minId( AUDIO_TABLE, sid );
     long id = maxId( AUDIO_TABLE, sid );  // FIXME replaced min with max
-    // TDLog.v( "Min audio id " + id );
-    insertAudio( sid, id, item_id, TDUtil.currentDate(), reftype );
+    // TDLog.v( "Next audio sid " + sid + " id " + id );
+    // insertAudio( sid, id, item_id, TDUtil.currentDate(), reftype );
     return id;
   }
 
-  /** @return the audio ID for given item ID and reference type
+  /** @return the audio ID for given item ID and reference type (next audio ID if not found; -1 on error)
    * @param sid     survey ID
    * @param item_id item ID
    * @param reftype reference type
+   * @note this does not insert the audio record in the database
    */
-  long getAudioId( long sid, long item_id, long reftype )
+  long getAudioIdByItem( long sid, long item_id, long reftype )
   {
     if ( myDB == null ) return -1L;
     long ret = -1;
-    Cursor cursor = myDB.rawQuery( qAudioId, new String[] { Long.toString(sid), Long.toString(item_id), Long.toString(reftype) } );
+    // TDLog.v("get audio by item: sid " + sid + " item " + item_id + " type " + reftype );
+    Cursor cursor = myDB.rawQuery( qAudioIdItem, new String[] { Long.toString(sid), Long.toString(item_id), Long.toString(reftype) } );
     if (cursor.moveToFirst()) { // update
       ret = cursor.getLong(0);
+      // TDLog.v("   found " + ret );
     } else {
-      ret = nextAudioId( sid, item_id, reftype );
+      ret = nextAudioId( sid ); // , item_id, reftype );
+      // TDLog.v("   not found " + ret );
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return ret;
@@ -2795,47 +2800,69 @@ public class DataHelper extends DataSetObservable
    * @param sid      survey id
    * @param id       audio ID
    * @param item_id  shot-id or sketch audio index
-   * @param date     date
+   * @param date     date (can be null)
    * @param reftype  reference item type (used only for new audio record)
    */
   private long insertAudio( long sid, long id, long item_id, String date, long reftype )
   {
     if ( myDB == null ) return -1L;
+    // TDLog.v("Insert audio: SID " + sid + " ID " + id + " item " + item_id + " type " + reftype );
     if ( id == -1L ) id = maxId( AUDIO_TABLE, sid );
+    if ( date == null ) date = TDUtil.currentDate();
     ContentValues cv = makeAudioContentValues( sid, id, item_id, date, reftype );
     if ( ! doInsert( AUDIO_TABLE, cv, "insert audio" ) ) return -1L;
     return id;
   }
 
   /** update or insert audio record
-   * @param sid  survey id
-   * @param bid  shot-id or sketch audio index
+   * @param sid  survey ID
+   * @param id   audio ID
+   * @param bid  reference ID (block or plot)
    * @param date date
    * @param reftype reference item type (used only for new audio record)
+   * @note called by AudioDialog (when recording has been stopped)
    */
-  void setAudio( long sid, long bid, String date, long reftype )
+  void updateAudio( long sid, long id, long bid, String date, long reftype )
   {
     if ( myDB == null ) return; // false;
     // boolean ret = false;
-    String[] args = new String[] { Long.toString(sid), Long.toString(bid) };
-    Cursor cursor = myDB.query( AUDIO_TABLE, new String[] { "date" }, WHERE_SID_SHOTID, args, null, null,  null ); 
-    if (cursor.moveToFirst()) { // update
-      String where = "WHERE surveyId=? AND shotId=?";
-      ContentValues cv = new ContentValues();
-      cv.put( "date", date );
-      // ret = ( myDB.update( AUDIO_TABLE, cv, WHERE_SID_SHOTID, args ) > 0 );
-      myDB.update( AUDIO_TABLE, cv, WHERE_SID_SHOTID, args );
-
-      // updateAudioStmt.bindString( 1, date );
-      // updateAudioStmt.bindString( 2, Long.toString(sid) );
-      // updateAudioStmt.bindString( 3, Long.toString(bid) );
-      // ret = doStatement( updateAudioStmt, "audio update" );
-    } else { // insert
-      // ret = ( insertAudio( sid, -1L, bid, date ) >= 0 );
-      insertAudio( sid, -1L, bid, date, reftype );
+    // TDLog.v("Update audio: SID " + sid + " ID " + id + " item " + bid + " type " + reftype );
+    if ( id >= 0 ) {
+      String[] args = new String[] { Long.toString(sid), Long.toString(id) };
+      Cursor cursor = myDB.query( AUDIO_TABLE, new String[] { "date" }, WHERE_SID_ID, args, null, null,  null ); 
+      if (cursor.moveToFirst()) { // update
+        // String where = "WHERE surveyId=? AND id=?";
+        ContentValues cv = new ContentValues();
+        cv.put( "date", date );
+        // ret = ( myDB.update( AUDIO_TABLE, cv, WHERE_SID_SHOTID, args ) > 0 );
+        // TDLog.v("Set audio - update ... sid " + sid + " id " + id + " (bid " + bid + ")" );
+        myDB.update( AUDIO_TABLE, cv, WHERE_SID_ID, args );
+        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+        // updateAudioStmt.bindString( 1, date );
+        // updateAudioStmt.bindString( 2, Long.toString(sid) );
+        // updateAudioStmt.bindString( 3, Long.toString(bid) );
+        // ret = doStatement( updateAudioStmt, "audio update" );
+        return;
+      }
+      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     }
-    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-    // return ret;
+    // insert
+    // TDLog.v("Set audio - insert ... sid " + sid + " id " + id + " bid " + bid );
+    insertAudio( sid, id, bid, date, reftype ); // id was -1
+  }
+
+  /** update a audio record datetime
+   * @param sid     survey ID
+   * @param id      audio ID
+   * @param date    datetime
+   */
+  void setAudioTime( long sid, long id, String date )
+  {
+    if ( myDB == null ) return; // false;
+    String[] args = new String[] { Long.toString(sid), Long.toString(id) };
+    ContentValues cv = new ContentValues();
+    cv.put( "date", date );
+    myDB.update( AUDIO_TABLE, cv, WHERE_SID_ID, args );
   }
 
   /** @return the list of all the audio of a survey (ordered by reference type)
@@ -2849,9 +2876,11 @@ public class DataHelper extends DataSetObservable
     //                             new String[] { "id", "shotId", "date" }, // columns
     //                             WHERE_SID, new String[] { Long.toString(sid) },
     //                             null, null,  null ); 
+    // TDLog.v("Select all audio: sid " + sid );
     Cursor cursor = myDB.rawQuery( qAudiosAll, new String[] { Long.toString(sid) } );
     if (cursor.moveToFirst()) {
       do {
+        // TDLog.v("Select all audio: " + sid + " " + cursor.getLong(0) + " " + cursor.getLong(1) );
         list.add( new AudioInfo( sid, 
                                  cursor.getLong(0),   // id
                                  cursor.getLong(1),   // shotId
@@ -2910,7 +2939,10 @@ public class DataHelper extends DataSetObservable
    * @param sid   survey ID
    * @param id    audio ID
    */
-  void deleteAudioRecord( long sid, long id ) { deleteFromTable( sid, id, AUDIO_TABLE ); }
+  void deleteAudioRecord( long sid, long id ) 
+  { 
+    deleteFromTable( sid, id, AUDIO_TABLE );
+  }
 
   // // delete a neg audio record 
   // // @param sid   survey id
@@ -4677,6 +4709,7 @@ public class DataHelper extends DataSetObservable
   void setSymbolEnabled( String name, boolean enabled ) 
   { 
     // if ( TDString.isNullOrEmpty( name ) ) return; // already handled by setValue
+    // if ( name.startsWith("a_" ) ) TDLog.v("DB set symbol " + name + " enabled " + enabled );
     setValue( name, enabled? TDString.ONE : TDString.ZERO );
   }
 
@@ -5349,7 +5382,7 @@ public class DataHelper extends DataSetObservable
     StringWriter sw = new StringWriter();
     PrintWriter  pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE shots SET id=id+%d, surveyId=%d WHERE surveyId=%d AND id>=%d", offset, new_sid, old_sid, old_id );
-    TDLog.v("DB " + sw.toString() );
+    // TDLog.v("DB " + sw.toString() );
     try {
       myDB.beginTransaction();
       myDB.execSQL( sw.toString() );
@@ -5917,7 +5950,7 @@ public class DataHelper extends DataSetObservable
 
    void dumpToFile( String filename, long sid )
    {
-     TDLog.v( "dump DB to file " + filename + " survey ID " + sid );
+     // TDLog.v( "dump DB to file " + filename + " survey ID " + sid );
      // String where = "surveyId=" + Long.toString(sid);
      if ( myDB == null ) {
        TDLog.e("dump DB to file: null DB ");
@@ -5932,7 +5965,7 @@ public class DataHelper extends DataSetObservable
                             "id=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
-         TDLog.v("dump SURVEY");
+         // TDLog.v("dump SURVEY");
          do {
            pw.format(Locale.US,
                      "INSERT into %s values( %d, \"%s\", \"%s\", \"%s\", %.4f, \"%s\", \"%s\", %d, %d, %d );\n",
@@ -5958,7 +5991,7 @@ public class DataHelper extends DataSetObservable
        //                      null, null, null );
        cursor = myDB.rawQuery( qAudiosAll, new String[] { Long.toString(sid) } );
        if (cursor.moveToFirst()) {
-         TDLog.v("dump AUDIO");
+         // TDLog.v("dump AUDIO");
          do {
            pw.format(Locale.US,
                      "INSERT into %s values( %d, %d, %d, \"%s\", %d );\n",
@@ -5979,7 +6012,7 @@ public class DataHelper extends DataSetObservable
        //                      null, null, null );
        cursor = myDB.rawQuery( qPhotosAll, new String[] { Long.toString(sid) } );
        if (cursor.moveToFirst()) {
-         TDLog.v("dump PHOTO");
+         // TDLog.v("dump PHOTO");
          do {
            pw.format(Locale.US,
                      "INSERT into %s values( %d, %d, %d, %d, \"%s\", \"%s\", \"%s\", %d, \"%s\", %d );\n",
@@ -6004,7 +6037,7 @@ public class DataHelper extends DataSetObservable
                             "surveyId=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
-         TDLog.v("dump PLOT");
+         // TDLog.v("dump PLOT");
          do {
            pw.format(Locale.US,
              "INSERT into %s values( %d, %d, \"%s\", %d, %d, \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f, \"%s\", \"%s\", %d, %d, %.2f, %.2f, %.2f, %.2f );\n",
@@ -6079,7 +6112,7 @@ public class DataHelper extends DataSetObservable
                             "surveyId=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
-         TDLog.v("dump SHOT cols " + cursor.getColumnCount() + " rows " + cursor.getCount() );
+         // TDLog.v("dump SHOT cols " + cursor.getColumnCount() + " rows " + cursor.getCount() );
          do {
            pw.format(Locale.US,
             //           TABLE      SID ID  FROM    TO      dist  bear  clino roll  acc   mag   dip   ext flg leg sts comment typ mse col str.  addr    mx          gx          idx time
@@ -6127,7 +6160,7 @@ public class DataHelper extends DataSetObservable
                   "surveyId=?", new String[] { Long.toString( sid ) },
                   null, null, null );
        if (cursor.moveToFirst()) {
-         TDLog.v("dump FIXED");
+         // TDLog.v("dump FIXED");
          do { // values in the order of the fields of the table
            pw.format(Locale.US,
              "INSERT into %s values( %d, %d, \"%s\", %.7f, %.7f, %.2f, %.2f \"%s\", %d, %d, \"%s\", %.7f, %.7f, %.1f, %d, %d, %.4f, %.1f, %.1f, %.6f );\n",
@@ -6161,7 +6194,7 @@ public class DataHelper extends DataSetObservable
                             "surveyId=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
-         TDLog.v("dump STATION");
+         // TDLog.v("dump STATION");
          do {
            // STATION_TABLE does not have field "id"
            pw.format(Locale.US,
@@ -6183,7 +6216,7 @@ public class DataHelper extends DataSetObservable
                             "surveyId=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
-         TDLog.v("dump SENSOR");
+         // TDLog.v("dump SENSOR");
          do {
            pw.format(Locale.US,
                      "INSERT into %s values( %d, %d, %d, %d, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", %d );\n",
@@ -6203,7 +6236,7 @@ public class DataHelper extends DataSetObservable
        }
        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
-       TDLog.v("dump file close");
+       // TDLog.v("dump file close");
        fw.flush();
        fw.close();
      } catch ( FileNotFoundException e ) {// DistoX-SAF
@@ -6211,7 +6244,7 @@ public class DataHelper extends DataSetObservable
      } catch ( IOException e ) {// FIXME
        TDLog.e("dump i/o error " + e.getMessage() );
      }
-     TDLog.v("dump file done");
+     // TDLog.v("dump file done");
    }
 
    static boolean mColorReset = false; // whether custom colors have been reset on survey load
@@ -6837,9 +6870,10 @@ public class DataHelper extends DataSetObservable
         if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
       }
       db.setTransactionSuccessful();
-      db.endTransaction();
       // TDLog.v( "DB updated symbols: " + pt + " points, " + ln + " lines, " + ar + " areas");
     } catch ( SQLException e ) { TDLog.e( "updateSymbolKeys exception: " + e.getMessage() );
+    } finally {
+      db.endTransaction();
     }
   }
 
@@ -6931,7 +6965,7 @@ public class DataHelper extends DataSetObservable
 
      static void createTables( SQLiteDatabase db )
      {
-       TDLog.v( "BD open helper - create tables");
+       // TDLog.v( "BD open helper - create tables");
        try {
           // db.setLockingEnabled( false );
           db.beginTransaction();
@@ -7128,7 +7162,7 @@ public class DataHelper extends DataSetObservable
               create_table + AUDIO_TABLE
             + " ( surveyId INTEGER, "
             +   " id INTEGER, " // PRIMARY KEY AUTOINCREMENT, "
-            +   " shotId INTEGER, "
+            +   " shotId INTEGER, " // shot ID or plot ID
             +   " date TEXT, "
             +   " reftype INTEGER default 0 " //  reference item_type: 0 undefined, 1 shots, 2 plots
             +   ")"
@@ -7190,7 +7224,7 @@ public class DataHelper extends DataSetObservable
      {
         // FIXME this is called at each start when the database file exists
         // TDLog.Log( TDLog.LOG_DB, "DB open helper - upgrade old " + oldVersion + " new " + newVersion );
-        TDLog.v( "DB open helper - upgrade old " + oldVersion + " new " + newVersion );
+        // TDLog.v( "DB open helper - upgrade old " + oldVersion + " new " + newVersion );
         switch ( oldVersion ) {
           case 14: 
             db.execSQL( "ALTER TABLE surveys ADD COLUMN declination REAL default 0" );
