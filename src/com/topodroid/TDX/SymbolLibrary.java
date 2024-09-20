@@ -326,19 +326,39 @@ public class SymbolLibrary
   //   return true;
   // }
 
-  // prefix: p_ l_ a_
-  protected void makeEnabledList( )
+  /** set the config values of the symbols from the configuration
+   */
+  void makeConfigList()
   {
     if ( TopoDroidApp.mData == null ) return;
-    // TDLog.v("Symbol lib make enabled list");
     for ( Symbol symbol : mSymbols ) {
-      // if ( mPrefix.equals("a_") ) TDLog.v("set symbol " + symbol.getThName() + " enabled " + symbol.mEnabled );
-      TopoDroidApp.mData.setSymbolEnabled( mPrefix + symbol.getThName(), symbol.mEnabled );
-      // if ( symbol.mEnabled ) {
-        // TODO what ?
-      // }
+      symbol.setConfigEnabled( TopoDroidApp.mData.getSymbolEnabled( mPrefix + symbol.getThName() ) );
+      symbol.setEnabledConfig();
     }
   }
+
+  // prefix: p_ l_ a_
+  protected void makeConfigEnabledList( )
+  {
+    if ( TopoDroidApp.mData == null ) return;
+    TDLog.v("makeConfigEnabledList");
+    for ( Symbol symbol : mSymbols ) {
+      // TopoDroidApp.mData.setSymbolEnabled( mPrefix + symbol.getThName(), symbol.isEnabled() ); // CONFIG_ENABLE
+      symbol.setConfigEnabled( ); 
+    }
+  }
+
+  protected void makeSpecialIndices() { }
+
+  // prefix: p_ l_ a_
+  // protected void makeEnabledList( )
+  // {
+  //   if ( TopoDroidApp.mData == null ) return;
+  //   // TDLog.v("Symbol lib make enabled list");
+  //   for ( Symbol symbol : mSymbols ) {
+  //     // TopoDroidApp.mData.setSymbolEnabled( mPrefix + symbol.getThName(), symbol.isEnabled() ); // CONFIG_ENABLE
+  //   }
+  // }
 
   /** make the list of enabled symbols starting from a palette
    * @param symbols    filenames of the palette
@@ -346,6 +366,7 @@ public class SymbolLibrary
    */
   void makeEnabledListFromStrings( TreeSet<String> symbols, boolean clear )
   {
+    TDLog.v("makeEnabledListFromStrings - palette");
     if ( clear ) {
       for ( Symbol symbol : mSymbols ) {
         // TDLog.v("symbol clear " + symbol.getThName() );
@@ -354,18 +375,27 @@ public class SymbolLibrary
     }
     for ( String name : symbols ) {
       Symbol symbol = getSymbolByThName( name );
-      if ( symbol != null ) symbol.setEnabled( true );
+      if ( symbol != null ) {
+        symbol.setEnabled( true );
+        if ( ! symbol.isConfigEnabled() ) {
+          TDLog.v("symbol set config " + name );
+          symbol.setConfigEnabled( true );
+        }
+      }
     }
-    makeEnabledList( ); // ENABLED_LIST
+    // makeEnabledList( ); // ENABLED_LIST - CONFIG_ENABLE not needed, maybe 
+    makeSpecialIndices();
   }
 
   void makeEnabledListFromConfig( boolean log )
   {
+    TDLog.v("makeEnabledListFromConfig");
     // for ( Symbol symbol : mSymbols ) symbol.setEnabled( false );
     for ( Symbol symbol : mSymbols ) {
-      boolean enabled = TopoDroidApp.mData.getSymbolEnabled( mPrefix + symbol.getThName() );
-      symbol.mEnabled = enabled;
-      if ( log ) TDLog.v("Symbol " + symbol.getThName() + " enabled " + enabled );
+      // boolean enabled = TopoDroidApp.mData.getSymbolEnabled( mPrefix + symbol.getThName() );
+      // symbol.setEnabled( enabled );
+      symbol.setEnabledConfig(); // CONFIG_ENABLE
+      // if ( log ) TDLog.v("Symbol " + symbol.getThName() + " enabled " + enabled );
     }
   }
 
@@ -376,7 +406,7 @@ public class SymbolLibrary
   {
     int k = 0;
     for ( Symbol symbol : mSymbols ) {
-      if ( symbol.mEnabled ) {
+      if ( symbol.isEnabled() ) {
         recent[k++] = symbol;
         if ( k >= ItemDrawer.NR_RECENT ) break;
       }

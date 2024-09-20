@@ -1105,10 +1105,11 @@ public class TopoDroidApp extends Application
           public void run() {
             TDLog.v("App loading palette");
             Resources res = TDInstance.getResources();
-            BrushManager.reloadPointLibrary( TDInstance.context, res ); // reload symbols
-            BrushManager.reloadLineLibrary( res );
-            BrushManager.reloadAreaLibrary( res );
-            BrushManager.setHasSymbolLibraries( true );
+            // BrushManager.reloadPointLibrary( TDInstance.context, res ); // reload symbols
+            // BrushManager.reloadLineLibrary( res );
+            // BrushManager.reloadAreaLibrary( res );
+            // BrushManager.setHasSymbolLibraries( true );
+            BrushManager.loadAllLibraries( TDInstance.context, res );
             BrushManager.doMakePaths( );
             MainWindow.enablePaletteButton();
           }
@@ -1118,6 +1119,8 @@ public class TopoDroidApp extends Application
       } else {
         TDLog.e("App init env [3] database not opened");
       }
+    } else {
+      BrushManager.initAllIndices();
     }
     // mStationName = new StationName();
     return mData.hasDB();

@@ -316,7 +316,7 @@ public class Archiver
     try { 
       zos = new ZipOutputStream( new BufferedOutputStream( new FileOutputStream( zipfile ) ) );
       for ( Symbol symbol : symbols ) {
-        if ( symbol.mEnabled ) {
+        if ( symbol.isEnabled() ) {
           String filename = symbol.getThName(); // 2023-01-31 this is already deprifixed_u
           // THERION-U: filename = Symbol.deprefix_u( filename );
           String filepath = type + "/" + filename;

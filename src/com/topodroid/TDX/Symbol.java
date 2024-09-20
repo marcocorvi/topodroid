@@ -55,7 +55,8 @@ public class Symbol implements SymbolInterface
   // public static final int TYPE_EXTRA = 4;
 
   int     mSymbolType; // the Symbol class needs a field for the symbol type, POINT, LINE, AREA
-  boolean mEnabled;  //!< whether the symbol is enabled in the library
+  private boolean mEnabled;  //!< whether the symbol is enabled in the library
+  private boolean mConfig;   // whether the symbol is enabled in the config
   private String  mThName;   // therion name
   private String  mThPrefix = null; // therion prefix ("u:" or null) 2023-01-31
   String  mGroup;    // group of this symbol (null if no group)
@@ -230,10 +231,27 @@ public class Symbol implements SymbolInterface
    */
   public boolean isEnabled() { return mEnabled; }
 
+  /** @return true if the symbol is config-enabled
+   */
+  public boolean isConfigEnabled() { return mConfig; }
+
   /** set the symbol "enabled" flag
    * @param enabled   new enabled flag
    */
   public void setEnabled( boolean enabled ) { mEnabled = enabled; }
+
+  /** set the value of enabled from config-enabled
+   */
+  public void setEnabledConfig() { mEnabled = mConfig; }
+
+  /** set the value of config-enabled
+   * @param enabled    new value of config-enabled
+   */
+  public void setConfigEnabled( boolean enabled ) { mConfig = enabled; }
+
+  /** set the value of config-enabled from enabled value
+   */
+  public void setConfigEnabled( ) { mConfig = mEnabled; }
 
   /** toggle the symbol "enabled" flag between ON and OFF
    */

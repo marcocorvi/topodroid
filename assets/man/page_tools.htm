@@ -11,34 +11,61 @@ The coming dialog tells you the installed and the current version and asks wheth
 
 It is likely you do not need many of them, or maybe you need different ones. You can customize the drawing tools and the way you select them in four ways:
 <ul>
-<li>with the choice of drawing tool dialog</li>
-<li>at the level of the sketch</li>
+<li>with the choice of main drawing tools (dialog)</li>
+<li>at the level of the survey/sketch</li>
 <li>at the level of the project (directory)</li>
 <li>on the file system</li>
 </ul>
 
-<b>Drawing tool dialog</b><br>
+The drawing tools are loaded from files in the app private folder.<br>
+When the drawing tools files are updated, TopoDroid does not install the new tools, automatically.<br><p>
 
-The tools bottom bar contains only six drawing tools (for each type).
-If you need another tool, you must go to the <a href="page_tools_list.htm">drawing tool dialog</a> which display the list of the 
-drawing tools, subdivided under three tabs: Point, Line and Area.<br>
-
-Each tool shows the iconic symbol, the tool name, and the tool-group if any.
-<br><p>
-
-<b>Sketch palette</b><br>
-
-Each sketch has its own palette.  When you close the sketch it is saved with a header listing its palette. When you reopen it, the palette is set to the sketch palette. If the sketch contains items which are not in the palette they are added. If a item is not among the drawing tools it is replaced with the "user" tool. The "user" tools (point, line and area) are always in the palette.<br><p>
-
-The sketch palette is specified through the <i>PALETTE</i> menu of the <u>Drawing window</u>. This opens a dialog that lets you decide which tool enable in the sketch palette. You switch on and off the tools to your needs then close the dialog (with the <i>BACK</i> button) to save the changes. You have to do this independently for points, lines and areas.<br><p>
 
 <b>Global palette</b><br>
 
-Except for the "system" tools, TopoDroid loads the drawing tool from files stored in the "symbol" subdirectory of the base "TopoDroid" home. The system tools are the "user" and "label" points, "user" and "wall" lines, "user" and "water" areas. These are always enabled.<br><p>
+Except for the "system" tools, TopoDroid loads the drawing tool from files stored in the "symbol" subdirectory of
+the app private folder.<br>
+The system tools are the "user", "label" and "section" points, "user", "wall" and "section" lines, "user" and "water" areas.
+These are always enabled.<br><p>
 
-The <i>palette</i> button of the <u>Main window</u> defines the drawing tool files to load. In the coming dialog you select the tools that are loaded.  The list of files to load is saved in the project database. As for the sketch-level palette, you have to do this independently for points, lines, and areas<br><p>
+The <i>tools</i> button of the <u>Main window</u> opens the dialog to enable the drawing tools.<br>
+You have to do this independently for points, lines, and areas<br><p>
 
-When the drawing tools are updated, TopoDroid does not install the new tools, automatically.<br><p>
+When a new sketch is created its palette is initialized with the enabled tools of the global palette.<br><p>
+
+
+<b>Survey drawing tools</b><br>
+
+The drawing tools enabled at survey level are the global palette, by default.<br>
+
+If you open an old sketch that has tools that are not enabled by default, these are added to the survey palette.<br><p>
+
+
+<b>Sketch drawing tools dialog</b><br>
+
+The tools bottom bar contains only six drawing tools (for each type).
+If you need to use another tool, you must go to the <a href="page_tools_list.htm">drawing tools dialog</a>
+which display the list of the drawing tools, subdivided under three tabs: Point, Line and Area.<br>
+
+Each tool shows the iconic symbol, the tool name, and the tool-group if any.
+<br>
+
+When you start a new sketch it gets the tools configured is the survey palette.<br><p> 
+
+
+<b>Sketch palette</b><br>
+
+Each sketch has its own palette.  When you close the sketch it is saved with a header listing its palette.
+When you reopen it, the palette is merged with the survey palette.
+If the sketch contains items which are not enabled in the survey palette they are added to the survey palette.
+If an item' tool is not among the main drawing tools, it is replaced with the "user" tool.
+The "user" tools (point, line and area) are always in the palette.<br><p>
+
+The sketch palette is specified through the <i>PALETTE</i> menu of the <u>Drawing window</u>.
+This opens a dialog that lets you decide which tool enable in the sketch palette.
+You switch on and off the tools to your needs then close the dialog (with the <i>BACK</i> button) to save the changes.
+You have to do this independently for points, lines and areas.<br><p>
+
 
 <b>Custom drawing tools</b><br>
 
@@ -53,5 +80,20 @@ After a cold restart, TopoDroid will see and use them.<br><p>
 If you modify a tool file or write a new tool file that may be useful to other users, consider making a pull request on the TopoDroid github repository.<br><p>
 
 The "system" drawing tools cannot be modified, nor deleted.<br><p>
+
+<b>Addional symbol sets</b><br>
+TopoDroid comes with these additional symbol sets:
+<ul>
+<li>Extra speleo symbols</li>
+<li>Mining symbols</li>
+<li>Geology symbols</li>
+<li>Archeology symbols</li>
+<li>Anthropic symbols</li>
+<li>Paleology symbols</li>
+<li>Biology symbols</li>
+<li>Karst symbols</li>
+</uL><br>
+
+In order to install additional symbol sets, the custom setting "Palette" must be enabled.<br><p>
 
 </body></html>

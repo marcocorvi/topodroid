@@ -45,7 +45,14 @@ public class SymbolLineLibrary extends SymbolLibrary
     mLineSectionIndex = -1;
     loadSystemLines( res );
     loadUserLines();
-    makeEnabledList();
+    initIndices();
+  }
+
+  void initIndices()
+  {
+    // makeEnabledList();
+    makeConfigList();
+    makeSpecialIndices();
   }
 
   // int size() { return mLine.size(); }
@@ -119,17 +126,16 @@ public class SymbolLineLibrary extends SymbolLibrary
           addSymbol( symbol );
           String thname = symbol.getThName();
           String name = mPrefix + thname;
-          boolean enable = false;
+          // boolean enable = false;
+          boolean enable = symbol.isConfigEnabled();
           if ( TopoDroidApp.mData != null ) {
             if ( ! TopoDroidApp.mData.hasSymbolName( name ) ) {
               for ( int k=0; k<DefaultLines.length; ++k ) { 
                 if ( DefaultLines[k].equals( thname ) ) { enable = true; break; }
               }
-              TopoDroidApp.mData.setSymbolEnabled( name, enable );
-              // TDLog.v("Line Symbol " + name + " set enabled " + enable );
-            } else {
-              enable = TopoDroidApp.mData.getSymbolEnabled( name );
-              // TDLog.v("Line Symbol " + name + " enabled " + enable );
+              // TopoDroidApp.mData.setSymbolEnabled( name, enable ); // CONFIG_ENABLE
+            // } else {
+            //   enable = TopoDroidApp.mData.getSymbolEnabled( name );
             }
           }
           symbol.setEnabled( enable );
@@ -175,11 +181,17 @@ public class SymbolLineLibrary extends SymbolLibrary
   }
   */
   
+  // @Override
+  // protected void makeEnabledList()
+  // {
+  //   // mLine.clear();
+  //   super.makeEnabledList(); // CONFIG_ENABLE
+  //   makeSpecialIndices();
+  // }
+
   @Override
-  protected void makeEnabledList()
-  {
-    // mLine.clear();
-    super.makeEnabledList();
+  protected void makeSpecialIndices()
+  {    
     mLineUserIndex    = getSymbolIndexByThName( USER );
     mLineWallIndex    = getSymbolIndexByThName( WALL );
     mLineSlopeIndex   = getSymbolIndexByThName( SLOPE );

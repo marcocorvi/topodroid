@@ -373,7 +373,8 @@ class ItemPickerDialog extends MyDialog
       for ( int i=0; i<np; ++i ) {
       if ( mParent.get().forbidPointSection( i ) ) continue;
         SymbolPoint p = (SymbolPoint)mPointLib.getSymbolByIndex( i );
-        if ( p.isEnabled() ) {
+        if ( p.isConfigEnabled() ) // uncomment to have only config-enabled - or p.isEnabled()
+        {
           // FIXME photo and audio cannot be selected if the hardware is not granted
           if ( p.isThName( SymbolLibrary.PHOTO ) && TDandroid.checkCamera( mContext ) ) {
             mPointAdapter.add( new ItemSymbol( mContext, this, SymbolType.POINT, i, p ) );
@@ -391,7 +392,8 @@ class ItemPickerDialog extends MyDialog
     for ( int j=0; j<nl; ++j ) {
       if ( mParent.get().forbidLineSection( j ) ) continue;
       SymbolLine l = (SymbolLine)mLineLib.getSymbolByIndex( j );
-      if ( l.isEnabled() ) {
+      if ( l.isConfigEnabled() ) // uncomment to have only config-enabled - or l.isEnabled()
+      {
         mLineAdapter.add( new ItemSymbol( mContext, this, SymbolType.LINE, j, l ) );
       }
     }
@@ -403,7 +405,8 @@ class ItemPickerDialog extends MyDialog
       // TDLog.v("areas " + na );
       for ( int k=0; k<na; ++k ) {
         SymbolArea a = (SymbolArea)mAreaLib.getSymbolByIndex( k );
-        if ( a.isEnabled() ) {
+        if ( a.isConfigEnabled() ) // uncomment to have only config-enabled - or a.isEnabled()
+        {
           mAreaAdapter.add( new ItemSymbol( mContext, this, SymbolType.AREA, k, a ) );
         }
       }

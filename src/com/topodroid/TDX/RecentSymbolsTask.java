@@ -130,7 +130,7 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
       for ( String point : points ) {
         if ( point.equals("section" ) ) continue;
         Symbol symbol = BrushManager.getPointByThName( point );
-        if ( symbol.mEnabled ) {
+        if ( symbol.isEnabled() ) {
           ItemDrawer.updateRecent( symbol, ItemDrawer.mRecentPoint, ItemDrawer.mRecentPointAge );
         }
       }
@@ -140,7 +140,7 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
       String[] lines = names.split(" ");
       for ( String line : lines ) {
         Symbol symbol = BrushManager.getLineByThName( line );
-        if ( symbol.mEnabled ) {
+        if ( symbol.isEnabled() ) {
           ItemDrawer.updateRecent( symbol, ItemDrawer.mRecentLine, ItemDrawer.mRecentLineAge );
         }
       }
@@ -150,7 +150,7 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
       String[] areas = names.split(" ");
       for ( String area : areas ) {
         Symbol symbol = BrushManager.getAreaByThName( area );
-        if ( symbol.mEnabled ) {
+        if ( symbol.isEnabled() ) {
           // TDLog.v("load recent area " + area ); // ENABLED_LIST
           ItemDrawer.updateRecent( symbol, ItemDrawer.mRecentArea, ItemDrawer.mRecentAreaAge );
         }

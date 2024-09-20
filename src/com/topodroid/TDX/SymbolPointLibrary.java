@@ -55,6 +55,7 @@ public class SymbolPointLibrary extends SymbolLibrary
     mPointAudioIndex  = -1;
     // mPointDangerIndex = -1;
     mPointSectionIndex = -1;
+    initIndices();
   }
 
   /** cstr
@@ -73,7 +74,14 @@ public class SymbolPointLibrary extends SymbolLibrary
     mPointSectionIndex = -1;
     loadSystemPoints( res );
     loadUserPoints( ctx );
-    makeEnabledList();
+    initIndices();
+  }
+
+  void initIndices()
+  {
+    // makeEnabledList();
+    makeConfigList();
+    makeSpecialIndices();
   }
 
   /** @return true if the point has text value
@@ -207,7 +215,8 @@ public class SymbolPointLibrary extends SymbolLibrary
           addSymbol( symbol );
           String thname = symbol.getThName();
           String name = "p_" + thname;
-          boolean enable = false;
+          // boolean enable = false;
+          boolean enable = symbol.isConfigEnabled();
           if ( symbol.isThName( SECTION ) ) { // FIXME_SECTION_POINT always enabled
             enable = true;
 	  } else if ( TopoDroidApp.mData != null ) {
@@ -215,11 +224,9 @@ public class SymbolPointLibrary extends SymbolLibrary
               for ( int k=0; k<DefaultPoints.length; ++k ) { 
                 if ( DefaultPoints[k].equals( thname ) ) { enable = true; break; }
               }
-              TopoDroidApp.mData.setSymbolEnabled( name, enable );
-              // TDLog.v("Point Symbol " + name + " set enabled " + enable );
-            } else {
-              enable = TopoDroidApp.mData.getSymbolEnabled( name );
-              // TDLog.v("Point Symbol " + name + " enabled " + enable );
+              // TopoDroidApp.mData.setSymbolEnabled( name, enable ); // CONFIG_ENABLE
+            // } else {
+            //   enable = TopoDroidApp.mData.getSymbolEnabled( name );
             }
 	  }
           symbol.setEnabled( enable );
@@ -266,12 +273,18 @@ public class SymbolPointLibrary extends SymbolLibrary
 
 // ------------------------------------------------------------------
   
-  /** make the list of enabled points
-   */
+  // /** make the list of enabled points
+  //  */
+  // @Override
+  // protected void makeEnabledList()
+  // {
+  //   super.makeEnabledList();
+  //   makeSpecialIndices();
+  // }
+
   @Override
-  protected void makeEnabledList()
+  protected void makeSpecialIndices()
   {
-    super.makeEnabledList();
     mPointUserIndex    = getSymbolIndexByThName( USER );
     mPointLabelIndex   = getSymbolIndexByThName( LABEL );
     mPointPhotoIndex   = getSymbolIndexByThName( PHOTO );
@@ -279,11 +292,6 @@ public class SymbolPointLibrary extends SymbolLibrary
     mPointAudioIndex   = getSymbolIndexByThName( AUDIO );
     // mPointDangerIndex  = getSymbolIndexByThName( "danger" );
     mPointSectionIndex = getSymbolIndexByThName( SECTION ); 
-
-    // TDLog.v( "Pt label " + mPointLabelIndex 
-    //                 + " photo " + mPointPhotoIndex
-    //                 + " audio " + mPointAudioIndex
-    //                 + " section " + mPointSectionIndex );
   }
 
   /** make the list of enabled points starting from a palette

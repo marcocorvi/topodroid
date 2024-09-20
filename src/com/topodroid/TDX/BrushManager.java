@@ -335,6 +335,15 @@ public class BrushManager
     mHasSymbolLibraries = true;
   }
 
+  /** reset symbol config-enabled values and all that
+   */
+  static void initAllIndices()
+  {
+    mPointLib.initIndices();
+    mLineLib.initIndices();
+    mAreaLib.initIndices();
+  }
+
   /** reload the point symbols
    * @param ctx   context
    * @param res   resources

@@ -39,9 +39,14 @@ public class SymbolAreaLibrary extends SymbolLibrary
     mAreaUserIndex = 0;
     loadSystemAreas( res );
     loadUserAreas();
-    makeEnabledList();
-    // TDLog.v( "Areas " + size() );
-    // for ( Symbol s : mSymbols ) TDLog.v( "area " + s.getName() + " " + s.getThName() );
+    initIndices();
+  }
+
+  void initIndices()
+  {
+    // makeEnabledList();
+    makeConfigList();
+    makeSpecialIndices();
   }
 
   boolean isCloseHorizontal( int k ) 
@@ -142,15 +147,16 @@ public class SymbolAreaLibrary extends SymbolLibrary
           addSymbol( symbol );
           String thname = symbol.getThName();
           String name   = mPrefix + thname;
-          boolean enable = false;
+          // boolean enable = false;
+          boolean enable = symbol.isConfigEnabled();
           if ( TopoDroidApp.mData != null ) {
             if ( ! TopoDroidApp.mData.hasSymbolName( name ) ) {
               for ( int k=0; k<DefaultAreas.length; ++k ) { 
                 if ( DefaultAreas[k].equals( thname ) ) { enable = true; break; }
               }
-              TopoDroidApp.mData.setSymbolEnabled( name, enable );
-            } else {
-              enable = TopoDroidApp.mData.getSymbolEnabled( name );
+              // TopoDroidApp.mData.setSymbolEnabled( name, enable ); // CONFIG_ENABLE
+            // } else {
+            //   enable = TopoDroidApp.mData.getSymbolEnabled( name );
             }
           }
           symbol.setEnabled( enable );
@@ -192,9 +198,14 @@ public class SymbolAreaLibrary extends SymbolLibrary
   // protected void makeEnabledList()
   // {
   //   super.makeEnabledList();
-  //   mAreaUserIndex    = getSymbolIndexByThName( USER );
-  //   mAreaWaterIndex   = getSymbolIndexByThName( WATER );
-  // }
+  //   makeSpecialIndices();
+
+  @Override
+  protected void makeSpecialIndices()
+  {
+    // mAreaUserIndex    = getSymbolIndexByThName( USER );
+    // mAreaWaterIndex   = getSymbolIndexByThName( WATER );
+  }
 
   void makeEnabledListFromPalette( SymbolsPalette palette, boolean clear )
   {

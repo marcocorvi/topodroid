@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date 
  *
- * @brief TopoDroid drawing symbol: 
+ * @brief TopoDroid drawing symbol: main palette - symbol enable dialog
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -270,17 +270,17 @@ class SymbolEnableDialog extends MyDialog
       if ( TDLevel.overBasic ) {
         mPtAdapter.updateSymbols( "p_" );
         SymbolPointLibrary point_lib = BrushManager.getPointLib();
-        if ( point_lib != null ) point_lib.makeEnabledList();
+        if ( point_lib != null ) point_lib.makeConfigEnabledList();
       }
 
       mLnAdapter.updateSymbols( "l_" );
       SymbolLineLibrary line_lib   = BrushManager.getLineLib();
-      if ( line_lib  != null ) line_lib.makeEnabledList();
+      if ( line_lib  != null ) line_lib.makeConfigEnabledList();
 
       if ( TDLevel.overBasic ) {
         mArAdapter.updateSymbols( "a_" );
         SymbolAreaLibrary area_lib   = BrushManager.getAreaLib();
-        if ( area_lib  != null ) area_lib.makeEnabledList();
+        if ( area_lib  != null ) area_lib.makeConfigEnabledList();
       }
       run = false;
       return null;
