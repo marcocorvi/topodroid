@@ -825,8 +825,8 @@
     <string name="button_next"    >Далее</string>
     <string name="button_prev"    >Предыдущий</string>
     <string name="button_new"     >Новый скрап</string>
-    <!-- TODO string name="button_rename"  >Rename</string -->
-    <!-- TODO string name="button_prefix"  >Prefix</string -->
+    <string name="button_rename"  >Переименовать</string>
+    <string name="button_prefix"  >Префикс</string>
     <string name="button_skip"    >Пропустить</string>
     <string name="button_done"    >Готово</string>
     <string name="button_lrud"    >Добавить ЛПВН</string>
@@ -858,7 +858,7 @@
     <string name="button_search"    >Поиск    </string>
     <string name="button_merge"     >Объединить     </string>
     <string name="button_saved"     >Сохраненный пикет</string>
-    <!-- TODO string name="button_scrap"     >Outlines</string -->
+    <string name="button_scrap"     >Контуры</string>
     <string name="button_split"     >Разделить     </string>
     <string name="button_station"   >По центру</string>
     <string name="button_store"     >Записать   </string>
@@ -966,7 +966,7 @@
     <string name="hint_text">текст</string>
     <string name="hint_options">опции</string>
     <string name="hint_name">название</string>
-    <!-- TODO string name="hint_prefix">prefix</string -->
+    <string name="hint_prefix">префикс</string>
     <string name="hint_from">от</string>
     <string name="hint_to">до</string>
     <string name="hint_azimuth">азимут</string>
@@ -1475,8 +1475,8 @@
   <string name="pref_survex_splay_summary">Добавить пикет ДО к боковым замерам при экспорте в формат Survex</string>
   <string name="pref_survex_lrud_title">Survex/Therion ЛПВН</string>
   <string name="pref_survex_lrud_summary">Расчитать ЛПВН в при экспорте в формат Survex/Therion</string>
-  <!-- TODO string name="pref_survex_epsg_title">EPSG "cs out"</string -->
-  <!-- TODO string name="pref_survex_epsg_summary">EPSG number for Survex "cs out"</string -->
+  <string name="pref_survex_epsg_title">EPSG "cs out"</string>
+  <string name="pref_survex_epsg_summary">EPSG код для Survex "cs out"</string>
   <string name="pref_svg_program_title">SVG версия</string>
   <string name="pref_svg_program_summary">Целевая программа для SVG</string>
   <string name="pref_svg_grid_title">Сетка в SVG/PNG</string>
@@ -2041,7 +2041,7 @@
     <string name="cmenu_ico">Ico диаграмма</string>
     <string name="cmenu_rose">Rose диаграмма</string>
     <string name="cmenu_wall">Режим стен</string>
-    <!-- TODO string name="cmenu_search">SEARCH</string -->
+    <string name="cmenu_search">ПОИСК</string>
     <!-- UNUSED string name="cmenu_sketch">АБРИСЫ</string -->
     <!-- NO string name="cmenu_fractal">Кол-во фракталофф</string -->
 
