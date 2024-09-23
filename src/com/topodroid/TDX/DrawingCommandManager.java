@@ -1850,6 +1850,8 @@ public class DrawingCommandManager
 	    }
 	  }
         }
+      // } else {
+      //   TDLog.v("empty splay stack");
       }
     }
     if ( mMode < DrawingSurface.DRAWING_SECTION ) {

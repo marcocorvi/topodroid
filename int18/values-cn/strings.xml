@@ -617,6 +617,7 @@
     <!-- UNUSED string name="insufficient_data">insufficient sensor data</string -->
     <string name="sensor_no_readings">没有传感器读数</string>
     <string name="sensor_failure">传感器失败: %1$d</string>
+    <!-- TODO string name="sensor_shot">Shot %1$d: %2$s</string -->
 
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">compass</string -->

@@ -2921,7 +2921,8 @@ public class DrawingWindow extends ItemDrawer
   {
     mApp.mSplayMode = mode;
     switch ( mode ) {
-      case 0: // hide splays at FROM and at TO
+      case 0: 
+        TDLog.v("hide splays at FROM and at TO");
         setButton1( BTN_PLAN, (mApp.mShowSectionSplays? mBMsplayNone : mBMsplayNoneBlack) );
         if ( PlotType.isMultilegSection( mType, mTo ) ) {
           for ( String from : mFroms ) mDrawingSurface.hideStationSplays( from );
@@ -2931,7 +2932,8 @@ public class DrawingWindow extends ItemDrawer
           mDrawingSurface.hideStationSplays( mFrom );
         }
         break;
-      case 1: // hide splays at FROM show splays at TO
+      case 1: 
+        TDLog.v("hide splays at FROM show splays at TO");
         setButton1( BTN_PLAN, (mApp.mShowSectionSplays? mBMsplayFront : mBMsplayFrontBlack) );
         if ( PlotType.isMultilegSection( mType, mTo ) ) {
           for ( String from : mFroms ) mDrawingSurface.hideStationSplays( from );
@@ -2941,7 +2943,8 @@ public class DrawingWindow extends ItemDrawer
           mDrawingSurface.hideStationSplays( mFrom );
         }
         break;
-      case 2: // show splays at FROM and at TO
+      case 2: 
+        TDLog.v("show splays at FROM and at TO");
         setButton1( BTN_PLAN, (mApp.mShowSectionSplays? mBMsplayBoth : mBMsplayBothBlack) );
         if ( PlotType.isMultilegSection( mType, mTo ) ) {
           for ( String from : mFroms ) mDrawingSurface.showStationSplays( from );
@@ -2951,7 +2954,8 @@ public class DrawingWindow extends ItemDrawer
           mDrawingSurface.showStationSplays( mFrom );
         }
         break;
-      case 3: // show splays at FROM, hide splays at TO
+      case 3: 
+        TDLog.v("show splays at FROM, hide splays at TO");
         setButton1( BTN_PLAN, (mApp.mShowSectionSplays? mBMsplayBack : mBMsplayBackBlack) );
         if ( PlotType.isMultilegSection( mType, mTo ) ) {
           for ( String from : mFroms ) mDrawingSurface.showStationSplays( from );

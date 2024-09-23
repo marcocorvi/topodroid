@@ -2631,12 +2631,13 @@ public class DataHelper extends DataSetObservable
     }
     // TDLog.Log( TDLog.LOG_DB, "select All Sensors list size " + list.size() );
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-    String[] where = new String[2];
-    where[0] = Long.toString(sid);
+    // String[] where = new String[2];
+    // where[0] = Long.toString(sid);
     for ( SensorInfo si : list ) { // set shot-names to the sensor infos
-      where[1] = Long.toString( si.getItemId() );
+      // where[1] = Long.toString( si.getItemId() );
+      // TDLog.v("shot ID " + si.getItemId() );
       // cursor = myDB.query( SHOT_TABLE, new String[] { "fStation", "tStation" }, WHERE_SID_ID, where, null, null, null );
-      cursor = myDB.rawQuery( qShotStations, where );
+      cursor = myDB.rawQuery( qShotStations, new String[] {  Long.toString(sid),  Long.toString( si.getItemId() ) } );
       if (cursor.moveToFirst()) {
         si.mShotName = cursor.getString(0) + "-" + cursor.getString(1);
       }

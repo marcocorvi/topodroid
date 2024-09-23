@@ -616,6 +616,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="insufficient_data">Données capteur insuffisantes</string -->
     <string name="sensor_no_readings">Aucune données du capteur</string>
     <string name="sensor_failure">Erreur du capteur : %1$d</string>
+    <!-- TODO string name="sensor_shot">Shot %1$d: %2$s</string -->
 
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">compass</string -->

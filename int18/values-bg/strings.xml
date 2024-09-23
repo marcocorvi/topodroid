@@ -624,6 +624,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="insufficient_data">недостатъчни данни от сензора</string -->
     <string name="sensor_no_readings">Няма показания на сензора</string>
     <string name="sensor_failure">Грешка на сензора: %1$d</string>
+    <!-- TODO string name="sensor_shot">Shot %1$d: %2$s</string -->
 
     <!-- UNUSED string name="shot_clino">наклон</string -->
     <!-- UNUSED string name="shot_compass">компас</string -->

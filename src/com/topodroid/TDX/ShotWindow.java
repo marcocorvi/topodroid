@@ -1003,6 +1003,7 @@ public class ShotWindow extends Activity
   void askSensor( DBlock blk )
   {
     mSensorId = mApp_mData.nextSensorId( TDInstance.sid );
+    mShotId   = blk.mId;
     // TDLog.Log( TDLog.LOG_SENSOR, "sensor " + mSensorId );
     Intent intent = new Intent( mActivity, SensorActivity.class );
     startActivityForResult( intent, TDRequest.SENSOR_ACTIVITY_SHOTWINDOW );
@@ -1166,7 +1167,7 @@ public class ShotWindow extends Activity
             String type  = extras.getString( TDTag.TOPODROID_SENSOR_TYPE );
             String value = extras.getString( TDTag.TOPODROID_SENSOR_VALUE );
             String comment = extras.getString( TDTag.TOPODROID_SENSOR_COMMENT );
-            // TDLog.Log( TDLog.LOG_SENSOR, "insert sensor " + type + " " + value + " " + comment );
+            // TDLog.v( "insert sensor " + type + " " + value + " " + comment + " ID " + mSensorId + " shot " + mShotId );
 
             mApp_mData.insertSensor( TDInstance.sid, mSensorId, mShotId, "",
                                   TDUtil.currentDateTime(),

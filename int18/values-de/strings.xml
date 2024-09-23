@@ -568,6 +568,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="insufficient_data">Nicht genügend Sensordaten</string -->
   <string name="sensor_no_readings">Keine Sensordaten</string>
   <string name="sensor_failure">Sensorfehler: %1$d</string>
+    <!-- TODO string name="sensor_shot">Shot %1$d: %2$s</string -->
   <!-- UNUSED string name="shot_clino">Neigung</string -->
   <!-- UNUSED string name="shot_compass">Azimut</string -->
   <string name="shot_delete">Messung löschen?</string>

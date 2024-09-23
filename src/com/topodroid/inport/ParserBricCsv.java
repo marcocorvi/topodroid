@@ -59,6 +59,9 @@ class ParserBricCsv extends ImportParser
    */
   private void readFile( InputStreamReader isr, String filename ) throws ParserException
   {
+    float mOldLength=-10, mOldBearing=-10, mOldClino=0;
+    ParserShot mOldShot = null;
+    boolean mExtendSet = false;
     float mLength, mBearing, mClino;
     String mFlag=null, mComment=null, mFrom=null, mTo=null;
     float ud = 1, ub = 1, uc = 1;
@@ -91,8 +94,27 @@ class ParserBricCsv extends ImportParser
             mBearing = Float.parseFloat( vals[4] ) * ub;
             mClino   = Float.parseFloat( vals[5] ) * uc;;
             if ( mLength > 0.0001f ) {
-              shots.add( new ParserShot( TDString.EMPTY, TDString.EMPTY, mLength, mBearing, mClino, 0.0f, 
-					ExtendType.EXTEND_UNSET, LegType.INVALID, false, false, false, "" ) );
+              float dl = ( mLength - mOldLength );
+              float dc = ( mClino - mOldClino );
+              float db = ( mBearing > mOldBearing + 270 )? mBearing - 360 - mOldBearing
+                       : ( mOldBearing > mBearing + 270 )? mOldBearing - 360 - mBearing
+                       : mBearing - mOldBearing;
+              if ( Math.abs( dl ) < 0.3 && Math.abs( dc ) < 2 && Math.abs( db ) < 2 ) {
+                if ( ! mExtendSet ) {
+                  mOldShot.extend = ExtendType.EXTEND_RIGHT;
+                  mExtendSet = true;
+                }
+                shots.add( new ParserShot( TDString.EMPTY, TDString.EMPTY, mLength, mBearing, mClino, 0.0f, 
+		                           ExtendType.EXTEND_IGNORE, LegType.INVALID, false, false, false, "" ) );
+              } else {
+                mOldShot =  new ParserShot( TDString.EMPTY, TDString.EMPTY, mLength, mBearing, mClino, 0.0f,  
+                                            ExtendType.EXTEND_IGNORE, LegType.INVALID, false, false, false, "" );
+                mExtendSet  = false;
+                mOldLength  = mLength;
+                mOldBearing = mBearing;
+                mOldClino   = mClino;
+                shots.add( mOldShot );
+              }
             }
           } catch ( NumberFormatException e ) {
             TDLog.e( "ERROR " + mLineCnt + ": " + line + e.getMessage() );

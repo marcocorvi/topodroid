@@ -78,7 +78,7 @@ class SensorEditDialog extends MyDialog
     tVtitle.setText( mSensor.mTitle );
     tVtype.setText( mSensor.getSensorType() );
     tVvalue.setText( mSensor.getValue() );
-    tVshotname.setText( mSensor.mShotName );
+    tVshotname.setText( String.format( mContext.getResources().getString(R.string.sensor_shot), mSensor.getItemId(), mSensor.mShotName ) );
     // public String mSensor.mDate;
     if ( mSensor.mComment != null ) {
       mETcomment.setText( mSensor.mComment );

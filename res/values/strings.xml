@@ -634,6 +634,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="insufficient_data">insufficient sensor data</string -->
     <string name="sensor_no_readings">No sensor readings</string>
     <string name="sensor_failure">Sensor failure: %1$d</string>
+    <string name="sensor_shot">Shot %1$d: %2$s</string>
 
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">compass</string -->
@@ -1341,7 +1342,7 @@ There are other settings for the presentation of the sketches (icon size, label 
 
     <string name="title_shift">Shift</string>
     <string name="title_shot_delete">Delete shot ?</string>
-    <string name="title_sensor_edit" copyable="pt">Sensor</string>
+    <string name="title_sensor_edit" copyable="pt">Sensor data</string>
     <string name="title_split">Sketch split</string>
 
     <string name="title_stats">Sketch statistics</string>

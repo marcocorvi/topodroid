@@ -620,6 +620,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="insufficient_data">Datos insuficientes del sensor</string -->
     <string name="sensor_no_readings">Medidas insuficientes</string>
     <string name="sensor_failure">Fallo del sensor: %1$d</string>
+    <!-- TODO string name="sensor_shot">Shot %1$d: %2$s</string -->
 
     <!-- UNUSED string name="shot_clino">Clino</string -->
     <!-- UNUSED string name="shot_compass">Brújula</string -->

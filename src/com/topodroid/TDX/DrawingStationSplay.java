@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDLog;
 
 import java.util.ArrayList;
 
@@ -123,6 +124,7 @@ class DrawingStationSplay
     if ( station == null ) return;
     /* if ( mSplaysOn.contains( station ) ) */ mSplaysOn.remove( station );
     if ( ! mSplaysOff.contains( station ) ) mSplaysOff.add( station );
+    // TDLog.v("hideStationSplays " + station + " on " + mSplaysOn.size() + " off " + mSplaysOff.size() );
   }
 
   /** show splays at a station
@@ -133,6 +135,7 @@ class DrawingStationSplay
     if ( station == null ) return;
     /* if ( mSplaysOff.contains( station ) ) */ mSplaysOff.remove( station );
     if ( ! mSplaysOn.contains( station ) ) mSplaysOn.add( station );
+    // TDLog.v("showStationSplays " + station + " on " + mSplaysOn.size() + " off " + mSplaysOff.size() );
   }
 
 }

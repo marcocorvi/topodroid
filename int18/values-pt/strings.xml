@@ -578,6 +578,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="insufficient_data">informações insuficientes do sensor</string -->
   <string name="sensor_no_readings">Sem leitura dos sensores</string>
   <string name="sensor_failure">Falha no sensor: %1$d</string>
+    <!-- TODO string name="sensor_shot">Shot %1$d: %2$s</string -->
   <!-- UNUSED string name="shot_clino">clinômetro</string -->
   <!-- UNUSED string name="shot_compass">bússola</string -->
   <string name="shot_delete">Apagar medida?</string>

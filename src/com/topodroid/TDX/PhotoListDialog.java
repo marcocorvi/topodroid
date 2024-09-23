@@ -102,7 +102,7 @@ public class PhotoListDialog extends MyDialog
       List< PhotoInfo > list = mApp_mData.selectAllPhotos( TDInstance.sid, TDStatus.NORMAL );
       // TDLog.v( "update photos list size " + list.size() );
       updatePhotoList( list );
-      setTitle( TDInstance.survey );
+      // setTitle( TDInstance.survey );
     // } else {
     //   TDToast.makeBad( R.string.no_survey );
     }
