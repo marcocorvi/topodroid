@@ -620,7 +620,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="insufficient_data">kevés szenzor adat</string -->
     <string name="sensor_no_readings">Nincs érzékelő leolvasás</string>
     <string name="sensor_failure">Szenzor hiba: %1$d</string>
-    <!-- TODO string name="sensor_shot">Shot %1$d: %2$s</string -->
+    <string name="sensor_shot">Mérés %1$d: %2$s</string>
 
     <!-- UNUSED string name="shot_clino">dőlés</string -->
     <!-- UNUSED string name="shot_compass">iránytű</string -->
