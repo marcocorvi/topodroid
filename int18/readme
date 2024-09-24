@@ -128,7 +128,7 @@ TopoDroid downloads the zip and unpack the files in the subdirectory TopoDroid/m
 The download of a translated manual is started selecting the translation in the relevant setting.
 
 When the user opens the manual, TopoDroid searches for the translated page first. 
-If this is not found it falls back to the deafult man page.
+If this is not found it falls back to the default man page.
 The translated man pages can be disabled with a global preference.
 
 Translated user manpages can have a version number to alert the user when there is an update.
