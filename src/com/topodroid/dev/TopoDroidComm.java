@@ -166,7 +166,7 @@ public class TopoDroidComm
    * @param lister data lister
    * @param data_type unused
    */
-  public void handleCavwayPacket( int res, ListerHandler lister, int data_type )
+  public void handleCavwayPacket( int res, ListerHandler lister, int data_type, String comment )
   {
     if(res == DataType.PACKET_DATA) {
       ++mNrReadPackets;
@@ -177,7 +177,7 @@ public class TopoDroidComm
       long time = mProtocol.getTimeStamp();
       long status = (d > TDSetting.mMaxShotLength) ? TDStatus.OVERSHOOT : TDStatus.NORMAL;
       mLastShotId = TopoDroidApp.mData.insertCavwayShot(TDInstance.sid, -1L, d, b, c, r, mProtocol.mMagnetic,
-              mProtocol.mAcceleration, mProtocol.mDip, 0, 0, 0, "", "",
+              mProtocol.mAcceleration, mProtocol.mDip, 0, 0, 0, comment, TDInstance.deviceAddress(),
               (int) mProtocol.mMX, (int) mProtocol.mMY, (int) mProtocol.mMZ, (int) mProtocol.mGX, (int) mProtocol.mGY, (int) mProtocol.mGZ, time);
       if (lister != null) { // FIXME_LISTER sendMessage with mLastShotId only
         Message msg = lister.obtainMessage(Lister.LIST_UPDATE);
