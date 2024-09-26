@@ -449,6 +449,7 @@
     <string name="menu_close">ЗАКРЫТЬ</string>
     <!-- UNUSED string name="menu_clear">ОЧИСТИТЬ</string -->
     <string name="menu_color">ОЧИСТИТЬ ЦВЕТ</string>
+    <!-- TODO string name="menu_cwd">WORK FOLDER</string -->
     <string name="menu_delete">Удалить</string>
     <string name="menu_detach">Отсоединить</string>
     <!-- UNUSED string name="menu_display">Показать</string -->
@@ -1030,6 +1031,7 @@
     <string name="help_close_app">Закрыть приложение</string>
     <string name="help_coeff">Показать коэффициенты калибровки</string>
     <string name="help_color">Сбросить цвет сплеев</string>
+    <!-- TODO string name="help_cwd">Current work folder</string -->
     <string name="help_join">Соединить линии</string>
     <!-- UNUSED string name="help_continue">Продолжить рисовать линию</string -->
     <!-- UNUSED string name="help_contour">Редактировать контуры</string -->
@@ -1577,7 +1579,7 @@
   <string name="pref_accuracy_title">НАСТРОЙКИ ТОЧНОСТИ</string>
   <string name="pref_shot_data_title">НАСТРОЙКИ ДАННЫХ ПИКЕТОВ</string>
   <string name="pref_shot_units_title">ЕДИНИЦЫ ИЗМЕРЕНИЯ</string>
-  <string name="pref_cwd_title">Рабочий каталог</string>
+  <!-- UNUSED string name="pref_cwd_title">Рабочий каталог</string -->
   <!-- UNUSED string name="pref_cwd_summary">Каталог в котором TopoDroid хранит съёмки</string -->
   <string name="pref_pt_color_map_title">Преобразование цветов PocketTopo</string>
   <string name="pref_pt_color_map_summary">Соответствие цветов PocketTopo типам объектов в TopoDtoid при импорте</string>

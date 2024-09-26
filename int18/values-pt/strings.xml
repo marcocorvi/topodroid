@@ -421,6 +421,7 @@ no campo abaixo e aperte o botão.
   <string name="menu_close">FECHAR</string>
   <!-- UNUSED string name="menu_clear">LIMPAR</string -->
   <string name="menu_color">COR PADRÃO</string>
+    <!-- TODO string name="menu_cwd">WORK FOLDER</string -->
   <string name="menu_delete">APAGAR</string>
   <string name="menu_detach">DESCONECTAR</string>
   <!-- UNUSED string name="menu_display">DISPLAY</string -->
@@ -961,6 +962,7 @@ no campo abaixo e aperte o botão.
   <string name="help_close_app">Fechar app</string>
   <string name="help_coeff">Mostrar coeficientes de calibração</string>
   <string name="help_color">Voltar medidas auxiliares para cor padrão</string>
+    <!-- TODO string name="help_cwd">Current work folder</string -->
   <string name="help_join">Unir linhas</string>
   <!-- UNUSED string name="help_continue">Continuar desenho de uma linha</string -->
   <!-- UNUSED string name="help_contour">Editar perfil</string -->
@@ -1481,7 +1483,7 @@ no campo abaixo e aperte o botão.
   <string name="pref_accuracy_title">ACURÁCIA</string>
   <string name="pref_shot_data_title">DADOS MEDIDAS</string>
   <string name="pref_shot_units_title">UNIDADES</string>
-  <string name="pref_cwd_title">Diretório trabalho</string>
+  <!-- UNUSED string name="pref_cwd_title">Diretório trabalho</string -->
   <!-- UNUSED string name="pref_cwd_summary">Diretório de trabalho do TopoDroidX</string -->
   <string name="pref_pt_color_map_title">Mapa cor PocketTopo</string>
   <string name="pref_pt_color_map_summary">Mapa de cores do PocketTopo (importação PocketTopo)</string>

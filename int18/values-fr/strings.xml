@@ -450,6 +450,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="menu_close">FERMER</string>
     <!-- UNUSED string name="menu_clear">EFFACER</string -->
     <string name="menu_color">EFFACER COULEUR</string>
+    <!-- TODO string name="menu_cwd">WORK FOLDER</string -->
     <string name="menu_delete">SUPPRIMER</string>
     <string name="menu_detach">DÉCONNECTER</string>
     <!-- UNUSED string name="menu_display">AFFICHAGE</string -->
@@ -1032,6 +1033,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="help_close_app">Fermer l\'app</string>
     <string name="help_coeff">Montrer les coefficients d\'étalonnage</string>
     <string name="help_color">Effacer la couleur des visées</string>
+    <!-- TODO string name="help_cwd">Current work folder</string -->
     <string name="help_join">Joindre les lignes</string>
     <!-- UNUSED string name="help_continue">Continuer une ligne</string -->
     <!-- UNUSED string name="help_contour">Contour editing</string -->
@@ -1572,7 +1574,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_accuracy_title">PRÉCISION</string>
     <string name="pref_shot_data_title">OPTIONS DONNÉES VISÉES</string>
     <string name="pref_shot_units_title">UNITÉS</string>
-    <string name="pref_cwd_title">Répertoire TopoDroid</string>
+    <!-- UNUSED string name="pref_cwd_title">Répertoire TopoDroid</string -->
     <!-- UNUSED string name="pref_cwd_summary">Répertoire TopoDroid</string -->
     <string name="pref_pt_color_map_title">Couleur topo PocketTopo</string>
     <string name="pref_pt_color_map_summary">Couleur de la topo PocketTopo (PocketTopo import)</string>

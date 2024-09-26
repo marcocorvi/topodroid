@@ -450,6 +450,7 @@
     <string name="menu_close">关闭</string>
     <!-- UNUSED string name="menu_clear">CLEAR</string -->
     <string name="menu_color">清除颜色</string>
+    <!-- TODO string name="menu_cwd">WORK FOLDER</string -->
     <string name="menu_delete">删除</string>
     <string name="menu_detach">断开</string>
     <!-- UNUSED string name="menu_display">DISPLAY</string -->
@@ -1032,6 +1033,7 @@
     <string name="help_close_app">关闭软件</string>
     <string name="help_coeff">显示校准系数</string>
     <string name="help_color">清除副线颜色</string>
+    <!-- TODO string name="help_cwd">Current work folder</string -->
     <string name="help_join">加入线</string>
     <!-- UNUSED string name="help_continue">继续画线</string -->
     <!-- UNUSED string name="help_contour">Contour editing</string -->
@@ -1581,7 +1583,7 @@
   <string name="pref_accuracy_title">精度</string>
   <string name="pref_shot_data_title">测线数据</string>
   <string name="pref_shot_units_title">单位</string>
-  <string name="pref_cwd_title">工作目录</string>
+  <!-- UNUSED string name="pref_cwd_title">工作目录</string -->
   <!-- UNUSED string name="pref_cwd_summary">TopoDroid work directory</string -->
   <string name="pref_pt_color_map_title">PocketTopo地图颜色</string>
   <string name="pref_pt_color_map_summary">PocketTopo地图颜色(PocketTopo输入)</string>

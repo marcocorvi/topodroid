@@ -413,6 +413,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="menu_close">SCHLIEßEN</string>
   <!-- UNUSED string name="menu_clear">SKIZZE LÖSCHEN</string -->
   <string name="menu_color">FARBE ENTF</string>
+    <!-- TODO string name="menu_cwd">WORK FOLDER</string -->
   <string name="menu_delete">LÖSCHEN</string>
   <string name="menu_detach">TRENNEN</string>
   <!-- UNUSED string name="menu_display">ANZEIGEN</string -->
@@ -952,6 +953,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="help_close_app">Beenden</string>
   <string name="help_coeff">Kalibrierungs-Koeffizienten zeigen</string>
   <string name="help_color">Hilfszug-Farben löschen</string>
+    <!-- TODO string name="help_cwd">Current work folder</string -->
   <string name="help_join">Linie fortsetzen</string>
   <!-- UNUSED string name="help_continue">Linien fortsetzen</string -->
   <!-- UNUSED string name="help_contour">Konturen bearbeiten</string -->
@@ -1468,7 +1470,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_accuracy_title">Genauigkeit</string>
   <string name="pref_shot_data_title">Messzug</string>
   <string name="pref_shot_units_title">Einheiten</string>
-  <string name="pref_cwd_title">TopoDroid Ordner</string>
+  <!-- UNUSED string name="pref_cwd_title">TopoDroid Ordner</string -->
   <!-- UNUSED string name="pref_cwd_summary">Die TopoDroid Ordner stellen</string -->
   <string name="pref_pt_color_map_title">PocketTopo Farbkarte</string>
   <string name="pref_pt_color_map_summary">PocketTopo Import Farbzuweisung</string>
