@@ -453,6 +453,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="menu_close">BEZÁR</string>
     <!-- UNUSED string name="menu_clear">TÖRLÉS</string -->
     <string name="menu_color">SZÍN TÖRLÉS</string>
+    <string name="menu_cwd">MUNKA KÖNYVTÁR</string>
     <string name="menu_delete">TÖRÖL</string>
     <string name="menu_detach">SZÉTKAPCSOL</string>
     <!-- UNUSED string name="menu_display">KÉPERNYŐ</string -->
@@ -1038,6 +1039,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="help_close_app">Program bezárása</string>
     <string name="help_coeff">Mutassa a kalibrációs együtthatókat</string>
     <string name="help_color">Mérés szín törlése</string>
+    <string name="help_cwd">Jelenlegi munka könyvtár</string>
     <string name="help_join">Vonal csatlakozás</string>
     <!-- UNUSED string name="help_continue">Vonal folytatása</string -->
     <!-- UNUSED string name="help_contour">Körvonal szerkesztése</string -->
@@ -1588,7 +1590,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_accuracy_title">PONTOSSÁG</string>
   <string name="pref_shot_data_title">MÉRÉSI ADAT</string>
   <string name="pref_shot_units_title">MÉRTÉKEGYSÉGEK</string>
-  <string name="pref_cwd_title">Munkakönyvtár</string>
+  <!-- UNUSED string name="pref_cwd_title">Munkakönyvtár</string -->
   <!-- UNUSED string name="pref_cwd_summary">TopoDroid munka könyvtár</string -->
   <string name="pref_pt_color_map_title">PocketTopo jelkulcs</string>
   <string name="pref_pt_color_map_summary">PocketTopo szín jelkulcs (PocketTopo import)</string>

@@ -45,7 +45,7 @@ public class TDPrefActivity extends Activity
   static TDPrefActivity mPrefActivityAll = null;
   static TDPrefActivity mPrefActivitySurvey = null;
 
-  static final int REQUEST_CWD         = 1;
+  // static final int REQUEST_CWD         = 1;
   static final int REQUEST_PLOT_SCREEN = 2;
   static final int REQUEST_TOOL_SCREEN = 3;
   static final int REQUEST_LOCATION    = 4;
@@ -56,7 +56,7 @@ public class TDPrefActivity extends Activity
 
   private int mPrefCategory = TDPrefCat.PREF_CATEGORY_ALL; // preference category
 
-  private TDPref mCwdPref;
+  // private TDPref mCwdPref;
   // private TDPref mBtAliasPref;
   private TDPref mPtCmapPref;
   private TDPref mGraphPaperScalePref;
@@ -232,18 +232,18 @@ public class TDPrefActivity extends Activity
     if ( cnt == 0 ) return false;
 
     if (mPrefCategory == TDPrefCat.PREF_CATEGORY_ALL ) {
-      mCwdPref = findPreference( "DISTOX_CWD" );
-      if ( mCwdPref != null ) {
-        mCwdPref.setValue( TDInstance.cwd );
-        View v = mCwdPref.getView();
-        if ( v != null ) {
-          final Intent cwd_intent = new Intent( mCtx, com.topodroid.TDX.CWDActivity.class ); // this
-          v.setOnClickListener( new OnClickListener() {
-            @Override
-            public void onClick( View v ) { startActivityForResult( cwd_intent, REQUEST_CWD ); }
-          } );
-        }
-      }
+      // mCwdPref = findPreference( "DISTOX_CWD" );
+      // if ( mCwdPref != null ) {
+      //   mCwdPref.setValue( TDInstance.cwd );
+      //   View v = mCwdPref.getView();
+      //   if ( v != null ) {
+      //     final Intent cwd_intent = new Intent( mCtx, com.topodroid.TDX.CWDActivity.class ); // this
+      //     v.setOnClickListener( new OnClickListener() {
+      //       @Override
+      //       public void onClick( View v ) { startActivityForResult( cwd_intent, REQUEST_CWD ); }
+      //     } );
+      //   }
+      // }
       if ( TDLevel.overAdvanced ) {
         TDPref export_settings = findPreference( "DISTOX_EXPORT_SETTINGS" );
         View v = export_settings.getView();
@@ -414,15 +414,15 @@ public class TDPrefActivity extends Activity
   {
     Bundle extras = (intent != null)? intent.getExtras() : null;
     switch ( request ) {
-      case REQUEST_CWD:
-        if ( result == RESULT_OK && extras != null ) {
-          String cwd = extras.getString( TDTag.TOPODROID_CWD );
-          mCwdPref.setButtonValue( cwd );
-          // TDLog.v("got CWD " + cwd );
-        } else if ( result == RESULT_CANCELED ) {
-	  TDLog.e("could not set CWD");
-	}
-        break;
+      // case REQUEST_CWD:
+      //   if ( result == RESULT_OK && extras != null ) {
+      //     String cwd = extras.getString( TDTag.TOPODROID_CWD );
+      //     mCwdPref.setButtonValue( cwd );
+      //     // TDLog.v("got CWD " + cwd );
+      //   } else if ( result == RESULT_CANCELED ) {
+      //     TDLog.e("could not set CWD");
+      //   }
+      //   break;
       case REQUEST_PLOT_SCREEN:
       case REQUEST_TOOL_SCREEN:
       case REQUEST_LOCATION:

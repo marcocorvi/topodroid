@@ -20,7 +20,7 @@ public class TDPrefKey
   public static final String TRUE  = "true";
 
   public static String[] MAIN = { // [14]
-    "DISTOX_CWD",           // CWD must be the last of primary preferences
+    // "DISTOX_CWD",           // CWD must be the last of primary preferences
     "DISTOX_TEXT_SIZE",     // size of text [pt]
     "DISTOX_SIZE_BUTTONS",  // size of buttons (S, N, M, L, XL)
     "DISTOX_EXTRA_BUTTONS", // Activity Level
@@ -42,7 +42,7 @@ public class TDPrefKey
   };
 
   static int[] MAINtitle = {
-    R.string.pref_cwd_title,
+    // R.string.pref_cwd_title,
     R.string.pref_text_size_title,
     R.string.pref_size_buttons_title,
     R.string.pref_extra_buttons_title,
@@ -64,7 +64,7 @@ public class TDPrefKey
   };
 
   static int[] MAINdesc = {
-    -1,
+    // -1,
     R.string.pref_text_size_summary,
     R.string.pref_size_buttons_summary,
     R.string.pref_extra_buttons_summary,
@@ -86,7 +86,7 @@ public class TDPrefKey
   };
 
   public static String[] MAINdef = {
-     "TopoDroid",
+     // "TopoDroid",
      TDString.TWENTY, // TEXT_SIZE
      TDString.ONE,    // BUTTON_SIZE
      TDString.ONE,    // SYMBOL_SIZE

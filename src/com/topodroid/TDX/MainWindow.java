@@ -157,6 +157,7 @@ public class MainWindow extends Activity
 
   private static final int[] menus = {
                           R.string.menu_close,
+                          R.string.menu_cwd,
                           R.string.menu_palette,
                           // R.string.menu_logs, // NO_LOGS
 			  // R.string.menu_backups, // CLEAR_BACKUPS
@@ -178,6 +179,7 @@ public class MainWindow extends Activity
                           };
   private static final int[] help_menus = {
                           R.string.help_close_app,
+                          R.string.help_cwd,
                           R.string.help_symbol,
                           // R.string.help_log, // NO_LOGS
 			  // R.string.help_backups, // CLEAR_BACKUPS
@@ -659,14 +661,15 @@ public class MainWindow extends Activity
     // TDLog.v("Main Window set menu adapter. With palette " + mWithPalette + " With palettes " + mWithPalettes );
 
     menu_adapter.add( res.getString( menus[0] ) ); // CLOSE
-    if ( mWithPalette ) menu_adapter.add( res.getString( menus[1] ) ); // PALETTE
+    menu_adapter.add( res.getString( menus[1] ) ); // CWD
+    if ( mWithPalette ) menu_adapter.add( res.getString( menus[2] ) ); // PALETTE
     // if ( mWithLogs )    menu_adapter.add( res.getString( menus[2] ) ); // NO_LOGS
     // if ( mWithBackupsClear ) menu_adapter.add( res.getString( menus[3] ) ); // CLEAR_BACKUPS
     // if ( TDLevel.overExpert && mApp_mCosurvey ) menu_adapter.add( res.getString( menus[2] ) ); // IF_COSURVEY
     // if ( TDLevel.overExpert )   menu_adapter.add( res.getString( menus[3] ) ); // UPDATES
-    menu_adapter.add( res.getString( menus[2] ) ); // ABOUT
-    menu_adapter.add( res.getString( menus[3] ) ); // SETTINGS
-    menu_adapter.add( res.getString( menus[4] ) ); // HELP
+    menu_adapter.add( res.getString( menus[3] ) ); // ABOUT
+    menu_adapter.add( res.getString( menus[4] ) ); // SETTINGS
+    menu_adapter.add( res.getString( menus[5] ) ); // HELP
 
     mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
@@ -695,6 +698,9 @@ public class MainWindow extends Activity
             @Override public void onClick( DialogInterface dialog, int btn ) { doCloseApp(); }
           }
         );
+      } else if ( p++ == pos ) { // DISTOX_CWD
+        intent = new Intent( TDInstance.context, com.topodroid.TDX.CWDActivity.class ); // this
+        startActivityForResult( intent, TDRequest.REQUEST_CWD );
       } else if ( mWithPalette && p++ == pos ) { // PALETTE EXTRA SYMBOLS
         // (new SymbolEnableDialog( mActivity )).show();
         (new SymbolReload( mActivity, mApp, mWithPalettes )).show();
@@ -1383,6 +1389,20 @@ public class MainWindow extends Activity
     // TDLog.Log( TDLog.LOG_MAIN, "on Activity Result: request " + mRequestName[request] + " result: " + result );
     Bundle extras = (intent != null )? intent.getExtras() : null;
     switch ( request ) {
+      case TDRequest.REQUEST_CWD:
+        if ( result == RESULT_OK && extras != null ) {
+          String cwd = extras.getString( TDTag.TOPODROID_CWD );
+          TDLog.v("got CWD <" + cwd + ">" );
+          if ( ! TDString.isNullOrEmpty( cwd ) ) {
+            if ( ! ( cwd.equals("TopoDroid") || cwd.startsWith("TopoDroid-") ) ) {
+              cwd = "TopoDroid-" + cwd;
+            }
+            TopoDroidApp.setCWDPreference( cwd );
+          }
+        } else if ( result == RESULT_CANCELED ) {
+	  TDLog.e("could not set CWD");
+	}
+        break;
       case TDRequest.REQUEST_ENABLE_BT:
         // TDLocale.resetTheLocale(); // OK-LOCALE apparently this does not affect locale
         if ( result == Activity.RESULT_OK ) {

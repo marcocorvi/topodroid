@@ -457,6 +457,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="menu_close">ЗАТВАРЯНЕ</string>
     <!-- UNUSED string name="menu_clear">ИЗЧИСТИ</string -->
     <string name="menu_color">ИЗЧИСТВАНЕ НА ЦВЯТ</string>
+    <!-- TODO string name="menu_cwd">WORK FOLDER</string -->
     <string name="menu_delete">ИЗТРИВАНЕ</string>
     <string name="menu_detach">ПРЕКЪСВАНЕ НА ВРЪЗКАТА</string>
     <!-- UNUSED string name="menu_display">ДИСПЛЕЙ</string -->
@@ -1041,6 +1042,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_close_app">Затваряне на приложението</string>
     <string name="help_coeff">Показване на коефициентите за калибриране</string>
     <string name="help_color">Изчистване на цветовете</string>
+    <!-- TODO string name="help_cwd">Current work folder</string -->
     <string name="help_join">Обединение на линии</string>
     <!-- UNUSED string name="help_continue">Continue drawing a line</string -->
     <!-- UNUSED string name="help_contour">Contour editing</string -->
@@ -1581,7 +1583,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_accuracy_title">ТОЧНОСТ</string>
   <string name="pref_shot_data_title">ДАННИ ЗА ИЗМЕРВАНЕТО</string>
   <string name="pref_shot_units_title">МЕРНИ ЕДИНИЦИ</string>
-  <string name="pref_cwd_title">Работна директория</string>
+  <!-- UNUSED string name="pref_cwd_title">Работна директория</string -->
   <!-- UNUSED string name="pref_cwd_summary">TopoDroid work directory</string -->
   <string name="pref_pt_color_map_title">Цветна карта PocketTopo</string>
   <string name="pref_pt_color_map_summary">Цветна карта PocketTopo (импорт от PocketTopo)</string>
