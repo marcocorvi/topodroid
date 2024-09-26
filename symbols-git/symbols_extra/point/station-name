@@ -1,6 +1,7 @@
 encoding utf-8
 symbol point
 name station-name
+name-de Messpunkt-Name
 name-ru имя_пикета
 th_name station-name
 orientation no

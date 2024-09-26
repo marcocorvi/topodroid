@@ -21,6 +21,7 @@ import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 // import android.os.Handler;
 
@@ -33,7 +34,8 @@ public class CavwayProtocol extends TopoDroidProtocol
   private final CavwayComm mComm;
   private final ListerHandler mLister;
 
-
+  public static final float ABSSCALE            = 10000;
+  public static final float ANGLESCALE          = (float)(360.0 / 0xFFFF);
   public static final int PACKET_REPLY          = 0x10;
   public static final int PACKET_INFO_SERIALNUM = 0x11;
   public static final int PACKET_INFO_FIRMWARE  = 0x12;
@@ -70,6 +72,7 @@ public class CavwayProtocol extends TopoDroidProtocol
   private byte[] mPacketBytes;
 
   public long mTime = 0;
+  public String mComment = "";
 
   /** @return the shot timestamp [s]
    */
@@ -133,11 +136,77 @@ public class CavwayProtocol extends TopoDroidProtocol
     if ( mMY > TDUtil.ZERO ) mMY = mMY - TDUtil.NEG;
     if ( mMZ > TDUtil.ZERO ) mMZ = mMZ - TDUtil.NEG;
 
+    byte[] errorbytes = new byte[9];
+    for (int i = 0; i < 9; i++)
+      errorbytes[i] = packetdata[45 + i];
+    mComment = parseErrInfo(errorbytes);
+
     if(packetdata[0] == 0x01)
       return DataType.PACKET_DATA;
     else if(packetdata[0] == 0x02)
       return DataType.PACKET_G;   //definite a new identifier? PACKET_G not suitable
     else return PACKET_NONE;
+  }
+
+  @SuppressLint("DefaultLocale")
+  private String parseErrInfo(byte[] errbytes)
+  {
+    String res = "";
+    //string error_type = "";
+    if (errbytes[0] == 0xFF)
+    {
+      res = "No error";
+      return res;
+    }
+    int err_cnt = 0;
+    if (((errbytes[0] >> 7) & 0x1) == 0x00)  //absG error
+    {
+      res += "absG error:";
+      res += " absG1:" + String.format("%.4f", MemoryOctet.toInt(errbytes[4 * err_cnt + 2] ,errbytes[4 * err_cnt + 1]) / ABSSCALE);
+      res += " ";
+      res += " absG2:" + String.format("%.4f", MemoryOctet.toInt(errbytes[4 * err_cnt + 4] ,errbytes[4 * err_cnt + 3]) / ABSSCALE);
+      res += " ";
+      err_cnt++;
+      if (err_cnt == 2) return res;
+    }
+    if (((errbytes[0] >> 6) & 0x1) == 0x00)  //absM error
+    {
+      res += "absM error:";
+      res += " absM1:" + String.format("%.4f", MemoryOctet.toInt(errbytes[4 * err_cnt + 2] ,errbytes[4 * err_cnt + 1]) / ABSSCALE);
+      res += " ";
+      res += " absM2:" + String.format("%.4f", MemoryOctet.toInt(errbytes[4 * err_cnt + 4] ,errbytes[4 * err_cnt + 3]) / ABSSCALE);
+      res += " ";
+      err_cnt++;
+      if (err_cnt == 2) return res;
+    }
+
+    if (((errbytes[0] >> 5) & 0x1) == 0x00)  //dip error
+    {
+      float ftmp;
+      res += "dip error:";
+      ftmp = MemoryOctet.toInt(errbytes[4 * err_cnt + 2],errbytes[4 * err_cnt + 1]) * ANGLESCALE;
+      if(ftmp > 180) ftmp -= 360f;      //The 2 bytes should be negative here
+      res += " err1:" + String.format("%.2f",ftmp);
+      res += " ";
+      ftmp = MemoryOctet.toInt(errbytes[4 * err_cnt + 4],errbytes[4 * err_cnt + 3]) * ANGLESCALE;
+      if(ftmp > 180) ftmp -= 360f;      //The 2 bytes should be negative here
+      res += " err2:" + String.format("%.2f",ftmp);
+      res += " ";
+      err_cnt++;
+      if (err_cnt == 2) return res;
+    }
+
+    if (((errbytes[0] >> 4) & 0x1) == 0x00)  //angle error
+    {
+      float ftmp;
+      res += "angle error:";
+      ftmp = MemoryOctet.toInt(errbytes[4 * err_cnt + 2],errbytes[4 * err_cnt + 1]) * ANGLESCALE;
+      res += String.format("%.2f",ftmp);
+      res += " ";
+      err_cnt++;
+      if (err_cnt == 2) return res;
+    }
+    return res;
   }
 
   /** process a data array
@@ -164,7 +233,7 @@ public class CavwayProtocol extends TopoDroidProtocol
             int res = handleCavwayPacket(mPacketBytes);
             if ( res != PACKET_NONE) {
               mComm.sendCommand(mPacketBytes[1] | 0x55);
-              mComm.handleCavwayPacket(res, mLister, 0);
+              mComm.handleCavwayPacket(res, mLister, 0, mComment);
               return PACKET_MEASURE_DATA; // with ( PACKET_MEASURE_DATA | databuf[0]) shots would be distinguished from calib
             } else {
               return PACKET_ERROR; // break for loop
