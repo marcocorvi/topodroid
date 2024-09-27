@@ -421,7 +421,7 @@ no campo abaixo e aperte o botão.
   <string name="menu_close">FECHAR</string>
   <!-- UNUSED string name="menu_clear">LIMPAR</string -->
   <string name="menu_color">COR PADRÃO</string>
-    <!-- TODO string name="menu_cwd">WORK FOLDER</string -->
+  <string name="menu_cwd">DIRETÓRIO BASE</string>
   <string name="menu_delete">APAGAR</string>
   <string name="menu_detach">DESCONECTAR</string>
   <!-- UNUSED string name="menu_display">DISPLAY</string -->
@@ -579,7 +579,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="insufficient_data">informações insuficientes do sensor</string -->
   <string name="sensor_no_readings">Sem leitura dos sensores</string>
   <string name="sensor_failure">Falha no sensor: %1$d</string>
-    <!-- TODO string name="sensor_shot">Shot %1$d: %2$s</string -->
+  <string name="sensor_shot">Visada %1$d: %2$s</string>
   <!-- UNUSED string name="shot_clino">clinômetro</string -->
   <!-- UNUSED string name="shot_compass">bússola</string -->
   <string name="shot_delete">Apagar medida?</string>
@@ -962,7 +962,7 @@ no campo abaixo e aperte o botão.
   <string name="help_close_app">Fechar app</string>
   <string name="help_coeff">Mostrar coeficientes de calibração</string>
   <string name="help_color">Voltar medidas auxiliares para cor padrão</string>
-    <!-- TODO string name="help_cwd">Current work folder</string -->
+  <string name="help_cwd">Diretório base atual</string>
   <string name="help_join">Unir linhas</string>
   <!-- UNUSED string name="help_continue">Continuar desenho de uma linha</string -->
   <!-- UNUSED string name="help_contour">Editar perfil</string -->
