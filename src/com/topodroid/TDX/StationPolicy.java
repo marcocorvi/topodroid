@@ -13,6 +13,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDColor;
+import com.topodroid.utils.TDLog;
 
 public class StationPolicy
 {
@@ -26,6 +27,8 @@ public class StationPolicy
   public static int SURVEY_STATION_TRIPOD    = 6;
   public static int SURVEY_STATION_TOPOROBOT = 7;
   public static int SURVEY_STATION_ANOMALY   = 8;
+
+  private static final String[] mPolicyStr = { "zero", "forward", "backward", "forward-2", "backward-2", "backsight", "tripod", "toporobot", "anomaly" };
 
   static boolean mShotAfterSplays = true;
   private static boolean mBacksightShot = false;    // backsight shooting policy
@@ -59,7 +62,7 @@ public class StationPolicy
 		   
   public static boolean policyDowngrade( int level )
   {
-    // TDLog.v( "policy downgrade " + mSavedPolicy + " for level " + level );
+    // TDLog.v( "policy downgrade " + mPolicyStr[mSavedPolicy] + " for level " + level );
     // dump();
     // these checks are done with the old level: if level is lowered commit default policy to DB
     return (    ( doMagAnomaly() && level < TDLevel.EXPERT )
@@ -69,7 +72,7 @@ public class StationPolicy
 
   public static int policyUpgrade( int level )
   {
-    // TDLog.v( "policy upgrade " + mSavedPolicy + " for level " + level );
+    // TDLog.v( "policy upgrade " + mPolicyStr[mSavedPolicy] + " for level " + level );
     // dump();
     // after setting the level, check if it has been raised and the saved policy committed to DB
     switch ( level ) { // order by decreasing level
@@ -87,7 +90,7 @@ public class StationPolicy
 
   public static boolean setPolicy( int policy )
   {
-    // TDLog.v( "policy set from " + mSavedPolicy + " to " + policy );
+    // TDLog.v( "policy set from " + mPolicyStr[mSavedPolicy] + " to " + mPolicyStr[policy] );
     // dump();
     mTitleColor = TDColor.TITLE_NORMAL;
     if ( policy == SURVEY_STATION_TOPOROBOT ) {
@@ -127,7 +130,7 @@ public class StationPolicy
         mMagAnomaly      = false;
         mSurveyStations  = SURVEY_STATION_FOREWARD;
         mTitleColor = TDColor.TITLE_BACKSIGHT;
-	// mSavedPolicy = policy; // not necessary
+	mSavedPolicy = policy; // not necessary
       // } else {
       //   return false;
       // }
@@ -155,10 +158,12 @@ public class StationPolicy
       if ( mSurveyStations > 2 ) {
 	mSurveyStations -= 2;
 	mSavedPolicy = policy;
+      } else {
+	mSavedPolicy = policy;
       }
       if ( mSurveyStations == SURVEY_STATION_FOREWARD ) mTitleColor = TDColor.TITLE_BACKSHOT;
     }
-    // TDLog.v( "set survey stations. policy " + policy );
+    // TDLog.v( "set survey stations. policy " + mPolicyStr[mSavedPolicy] );
     // dump();
     return true;
   }

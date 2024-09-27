@@ -3040,7 +3040,7 @@ public class TDSetting
     if ( TDPrefActivity.mPrefActivityAll != null ) TDPrefActivity.mPrefActivityAll.reloadPreferences();
   }
 
-  private static int parseStationPolicy( TDPrefHelper hlp, String str ) 
+  private static void parseStationPolicy( TDPrefHelper hlp, String str ) 
   {
     int policy = StationPolicy.SURVEY_STATION_FOREWARD;
     try {
@@ -3049,26 +3049,29 @@ public class TDSetting
       policy = StationPolicy.SURVEY_STATION_FOREWARD;
     }
     if ( ! setStationPolicy( policy ) ) {
-      // preference is reset to the last saved policy
+      // TDLog.v("preference is reset to the last saved policy " + StationPolicy.savedPolicy() );
       TDPrefHelper.update( TDPrefKey.SURVEY[1], Integer.toString( StationPolicy.savedPolicy() ) );
       if ( TDPrefActivity.mPrefActivitySurvey != null ) TDPrefActivity.mPrefActivitySurvey.reloadPreferences(); // FIXME_PREF
+    } else {
+      // TDLog.v("preference is set to the policy " + policy );
+      TDPrefHelper.update( TDPrefKey.SURVEY[1], Integer.toString( policy ) );
     }
     // if ( ! mBacksightShot ) clearMagAnomaly( hlp.getSharedPrefs() );
     // TDLog.v("PARSE Policy " + policy + " saved " + StationPolicy.savedPolicy() );
-    return policy;
+    // return policy;
   }
 
   private static boolean setStationPolicy( int policy )
   {
     if ( ! StationPolicy.setPolicy( policy ) ) {
       if ( policy == StationPolicy.SURVEY_STATION_TOPOROBOT ) {
-        TDToast.make( R.string.toporobot_warning );
+        TDToast.make( R.string.toporobot_warning ); // tester level
       } else if ( policy == StationPolicy.SURVEY_STATION_TRIPOD ) {
-        TDToast.make( R.string.tripod_warning );
+        TDToast.make( R.string.tripod_warning );    // advanced level
       // } else if ( policy == StationPolicy.SURVEY_STATION_BACKSIGHT ) {
       //   TDToast.make( R.string.backsight_warning );
       } else if ( policy == StationPolicy.SURVEY_STATION_ANOMALY ) {
-        TDToast.make( R.string.anomaly_warning );
+        TDToast.make( R.string.anomaly_warning );   // expert level
       // } else {
         // nothing
       }

@@ -2890,7 +2890,7 @@ public class DataHelper extends DataSetObservable
                                ) );
       } while (cursor.moveToNext());
     }
-    // TDLog.Log( TDLog.LOG_DB, "select All Photos list size " + list.size() );
+    // TDLog.Log( TDLog.LOG_DB, "select All Audios list size " + list.size() );
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return list;
   }
@@ -2918,7 +2918,7 @@ public class DataHelper extends DataSetObservable
                                ) );
       } while (cursor.moveToNext());
     }
-    // TDLog.Log( TDLog.LOG_DB, "select All Photos list size " + list.size() );
+    // TDLog.Log( TDLog.LOG_DB, "select All Audios list size " + list.size() );
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return list;
   }
@@ -3020,7 +3020,7 @@ public class DataHelper extends DataSetObservable
                  ) );
       } while (cursor.moveToNext());
     }
-    // TDLog.Log( TDLog.LOG_DB, "select All Photos Plot list size " + list.size() );
+    TDLog.v( "select All Photos Plot list size " + list.size() );
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return list;
   }
@@ -3049,7 +3049,7 @@ public class DataHelper extends DataSetObservable
                  ) );
       } while (cursor.moveToNext());
     }
-    // TDLog.Log( TDLog.LOG_DB, "select All Photos Plot list size " + list.size() );
+    TDLog.v( "select All Photos XSection list size " + list.size() );
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return list;
   }
@@ -3079,7 +3079,7 @@ public class DataHelper extends DataSetObservable
                  ) );
       } while (cursor.moveToNext());
     }
-    // TDLog.Log( TDLog.LOG_DB, "select All Photos Shot list size " + list.size() );
+    TDLog.v(  "select All Photos Shot list size " + list.size() );
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return list;
   }
@@ -3115,6 +3115,7 @@ public class DataHelper extends DataSetObservable
   long insertOrUpdatePhoto( long sid, long id, long item_id, String title, String date, String comment, int camera, String geocode, int reftype )
   {
     if ( myDB == null ) return -1;
+    TDLog.v("insert / update Photo: id " + id + " reftype " + reftype );
     boolean insert = (id < 0);
     Cursor cursor = null;
     if ( ! insert ) {
@@ -3127,7 +3128,7 @@ public class DataHelper extends DataSetObservable
       }
       if ( ! cursor.isClosed() ) cursor.close();
     } 
-    if ( insert ) id = insertPhotoRecord( sid, id, item_id, title, date, comment, camera, geocode, reftype );
+    if ( insert ) id = insertPhotoRecord( sid, -1L, item_id, title, date, comment, camera, geocode, reftype );
     return id;
   }
 
@@ -4927,6 +4928,7 @@ public class DataHelper extends DataSetObservable
   {
     if ( myDB == null ) return -1L;
     if ( id == -1L ) id = maxId( PHOTO_TABLE, sid );
+    TDLog.v("do insert Photo: id " + id + " reftype " + reftype );
     ContentValues cv = makePhotoContentValues( sid, id, item_id, TDStatus.NORMAL, title, date, comment, camera, code, reftype );
     if ( ! doInsert( PHOTO_TABLE, cv, "photo insert" ) ) return -1L;
     return id;

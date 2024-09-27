@@ -5778,6 +5778,7 @@ public class DrawingWindow extends ItemDrawer
    */
   public void insertPhoto( )
   {
+    TDLog.v("Drawing Window insert photo type PLOT, id " + mMediaManager.getPhotoId() );
     mApp_mData.insertPhotoRecord( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(), 
       mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), MediaInfo.TYPE_PLOT );
     // FIXME NOTIFY ? no
@@ -7588,6 +7589,7 @@ public class DrawingWindow extends ItemDrawer
       String image_filepath = TDPath.getSurveyJpgFile( TDInstance.survey, id ); // 20230118 local var "image_filepath"
       // File imagefile = TDFile.getTopoDroidFile( image_filepath );
       // TODO TD_XSECTION_PHOTO
+      mMediaManager.setComment( nick ); // save xsection comment in the photo
       doTakePointPhoto( image_filepath, false, pid, MediaInfo.TYPE_XSECTION ); // without inserter
     }
   }

@@ -81,8 +81,9 @@ class QCamCompass extends Dialog
   private IBearingAndClino mCallback;
   private boolean mWithBox;
   private boolean mWithDelay;
-  private boolean mHasSaved;
-  private boolean mHasShot;
+  private boolean mHasSaved    = false;
+  private boolean mHasInserted = false;
+  private boolean mHasShot     = false;
   private int mCamera;
 
   /** cstr
@@ -115,8 +116,6 @@ class QCamCompass extends Dialog
     mInserter  = inserter;
     mWithBox   = with_box;
     mWithDelay = with_delay;
-    mHasSaved  = false;
-    mHasShot   = false;
     mCamera    = camera;
     mMediaManager = media_manager;
     // TDLog.Log( TDLog.LOG_PHOTO, "QCAM compass. Box " + mWithBox + " delay " + mWithDelay );
@@ -370,10 +369,12 @@ class QCamCompass extends Dialog
             mHasSaved = mCallback.setJpegData( mTexture.getJpegData() );
           }
           if ( mHasSaved ) {
-            if ( mMediaManager != null ) {
+            if ( mMediaManager != null && mMediaManager.getItemType() == MediaInfo.TYPE_XSECTION ) {
               TDLog.v("insert or update photo record in database: id " + mMediaManager.getPhotoId() + " item_id " + mMediaManager.getItemId() );
               TopoDroidApp.mData.insertOrUpdatePhoto( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(), 
-                mMediaManager.getComment(), mMediaManager.getCamera(), "", MediaInfo.TYPE_XSECTION );
+                mMediaManager.getComment(), mMediaManager.getCamera(), "", 
+                (int)(mMediaManager.getItemType()) /* MediaInfo.TYPE_XSECTION */ );
+              mHasInserted = true;
             }
           } else {
             TDToast.makeBad( mContext.getResources().getString( R.string.photo_failed ) );
@@ -392,7 +393,7 @@ class QCamCompass extends Dialog
       // if ( mSurface != null ) mSurface.close();
       TDUtil.slowDown( 100 );
 
-      if ( mHasSaved ) {
+      if ( mHasSaved && ! mHasInserted ) {
         if ( mInserter != null ) mInserter.insertPhoto();
         // if ( mDrawer   != null ) mDrawer.notifyAzimuthClino( mPid, mBearing, mClino );
       }

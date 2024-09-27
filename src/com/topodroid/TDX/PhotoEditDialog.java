@@ -57,7 +57,11 @@ class PhotoEditDialog extends MyDialog
     mParent = parent;
     mPhoto  = photo;
     // mFilename = filename;
-    mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhoto.id) );
+    if ( mPhoto.getItemType() == MediaInfo.TYPE_XSECTION ) {
+      mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, mPhoto.mItemName );
+    } else {
+      mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhoto.id) );
+    }
     mGeoCode  = mPhoto.getGeoCode();
     mAtShot   = ( mPhoto.getItemType() == MediaInfo.TYPE_SHOT );
     // TDLog.v("PhotoEditDialog " + mFilename);

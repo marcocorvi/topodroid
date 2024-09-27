@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 // import com.topodroid.utils.TDFile;
 // import com.topodroid.utils.TDUtil;
 
@@ -65,6 +65,7 @@ class MediaManager
     mSize     = size;
     mCamera   = camera;
     mPhotoId  = mData.nextPhotoId( TDInstance.sid );
+    TDLog.v("Media Manager prepare photo id " + mPhotoId );
     mImageFilepath = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhotoId) ); // photo file is "survey/id.jpg"
     // mImageFile = TDFile.getTopoDroidFile( mImageFilepath );
     return mPhotoId;
@@ -123,6 +124,11 @@ class MediaManager
   /** @return media comment
    */
   String getComment() { return mComment; }
+
+  /** set media comment
+   * @param  comment  new media comment
+   */
+  void setComment( String comment ) { mComment = comment; }
 
   /** @return media geomorphology code
    */
