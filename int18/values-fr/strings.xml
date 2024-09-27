@@ -1323,6 +1323,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="title_shift">Décaler</string>
     <string name="title_shot_delete">Supprimer la visée ?</string>
     <string name="title_sensor_edit">Capteur</string>
+    <!-- TODO string name="title_sensor_list">Sensor data</string -->
     <string name="title_split">Diviser le croquis</string>
 
     <string name="title_stats">Statistiques</string>

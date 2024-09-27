@@ -1320,6 +1320,7 @@
     <string name="title_shift">Сдвиг</string>
     <string name="title_shot_delete">Удалить отрезок ?</string>
     <string name="title_sensor_edit">Сенсор</string>
+    <!-- TODO string name="title_sensor_list">Sensor data</string -->
     <string name="title_split">Разделить абрис</string>
 
     <string name="title_stats">Статистика абриса</string>

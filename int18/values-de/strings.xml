@@ -1232,6 +1232,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="title_shift">Verschieben</string>
   <string name="title_shot_delete">Messung löschen ?</string>
   <string name="title_sensor_edit">Sensordaten</string>
+    <!-- TODO string name="title_sensor_list">Sensor data</string -->
   <string name="title_split">Skizze aufteilen</string>
   <string name="title_stats">Statistik</string>
   <!-- UNUSED string name="title_step">Schritt</string -->

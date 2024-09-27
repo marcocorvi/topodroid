@@ -465,7 +465,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="menu_close">CLOSE</string>
     <!-- UNUSED string name="menu_clear">CLEAR</string -->
     <string name="menu_color">CLEAR COLOR</string>
-    <string name="menu_cwd">WORK FOLDER</string>
+    <string name="menu_cwd">FOLDER</string>
     <string name="menu_delete">DELETE</string>
     <string name="menu_detach">DISCONNECT</string>
     <!-- UNUSED string name="menu_display">DISPLAY</string -->
@@ -990,7 +990,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="hint_text">text</string>
     <string name="hint_options" copyable="fr">options</string>
     <string name="hint_name">name</string>
-    <string name="hint_prefix">prefix</string>
+    <string name="hint_prefix">prefix stations</string>
     <string name="hint_from">from</string>
     <string name="hint_to">to</string>
     <string name="hint_azimuth">azimuth</string>
@@ -1345,6 +1345,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="title_shift">Shift</string>
     <string name="title_shot_delete">Delete shot ?</string>
     <string name="title_sensor_edit" copyable="pt">Sensor data</string>
+    <string name="title_sensor_list">Sensor data</string>
     <string name="title_split">Sketch split</string>
 
     <string name="title_stats">Sketch statistics</string>
@@ -1506,7 +1507,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_survex_splay_summary">Add TO station to splays in Survex</string>
   <string name="pref_survex_lrud_title">Survex/Therion LRUD</string>
   <string name="pref_survex_lrud_summary">Add LRUD to Survex/Therion export</string>
-  <string name="pref_survex_epsg_title">EPSG "cs out"</string>
+  <string name="pref_survex_epsg_title" copyable="all">EPSG "cs out"</string>
   <string name="pref_survex_epsg_summary">EPSG number for Survex "cs out"</string>
   <string name="pref_svg_program_title" copyable="bg">SVG program</string>
   <string name="pref_svg_program_summary">Target SVG program</string>

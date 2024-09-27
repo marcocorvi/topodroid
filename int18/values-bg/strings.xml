@@ -1332,6 +1332,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_shift">Отместване</string>
     <string name="title_shot_delete">Изтриване на измерването \?</string>
     <string name="title_sensor_edit">Сензор</string>
+    <!-- TODO string name="title_sensor_list">Sensor data</string -->
     <string name="title_split">Разделяне на скицата</string>
 
     <string name="title_stats">Статистика за скицата</string>

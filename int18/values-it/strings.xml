@@ -448,7 +448,7 @@
     <string name="menu_close">CHIUDI</string>
     <!-- UNUSED string name="menu_clear">PULISCI</string -->
     <string name="menu_color">PULISCI COLORE</string>
-    <!-- TODO string name="menu_cwd">WORK FOLDER</string -->
+    <string name="menu_cwd">FOLDER</string>
     <string name="menu_delete">ELIMINA</string>
     <string name="menu_detach">SCONNETTI</string>
     <!-- UNUSED string name="menu_display">DISPLAY</string -->
@@ -614,7 +614,7 @@
     <!-- UNUSED string name="insufficient_data">Dati sensore insufficienti</string -->
     <string name="sensor_no_readings">Misure insufficienti</string>
     <string name="sensor_failure">Errore nei sensori: %1$d</string>
-    <!-- TODO string name="sensor_shot">Shot %1$d: %2$s</string -->
+    <string name="sensor_shot">Dato %1$d: %2$s</string>
 
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">bussola</string -->
@@ -826,7 +826,7 @@
     <string name="button_prev"    >Precedente</string>
     <string name="button_new"     >Nuovo scarto</string>
     <string name="button_rename"  >Renomina</string>
-    <!-- TODO string name="button_prefix"  >Prefix</string -->
+    <string name="button_prefix"  >Prefisso</string>
     <string name="button_skip"    >Salta</string>
     <string name="button_done"    >Fatto</string>
     <string name="button_lrud"    >Aggiungi LRUD</string>
@@ -966,7 +966,7 @@
     <string name="hint_text">testo</string>
     <string name="hint_options">opzioni</string>
     <string name="hint_name">nome</string>
-    <!-- TODO string name="hint_prefix">prefix</string -->
+    <string name="hint_prefix">prefisso capisaldi</string>
     <string name="hint_from">da</string>
     <string name="hint_to">a</string>
     <string name="hint_azimuth">azimut</string>
@@ -1030,7 +1030,7 @@
     <string name="help_close_app">Chiude l\'app</string>
     <string name="help_coeff">Coefficienti della calibrazione</string>
     <string name="help_color">Pulisci i colori degli splay</string>
-    <!-- TODO string name="help_cwd">Current work folder</string -->
+    <string name="help_cwd">Folder di lavoro</string>
     <string name="help_join">Unione linee</string>
     <!-- UNUSED string name="help_continue">Continuare il disegno di una linea</string -->
     <!-- NO string name="help_contour">Contour editing</string -->
@@ -1319,6 +1319,7 @@
     <string name="title_shift">Sposta</string>
     <string name="title_shot_delete">Rimuovi battuta ?</string>
     <string name="title_sensor_edit">Sensore</string>
+    <string name="title_sensor_list">Dati di sensori</string>
     <string name="title_split">Divisione disegno</string>
 
     <!-- NO string name="title_sketch">[%1$s] %2$s %3$s %4$s</string -->
@@ -1475,8 +1476,8 @@
   <string name="pref_survex_splay_summary">Survex - Aggiungi stazione A agli splay</string>
   <string name="pref_survex_lrud_title">Survex - LRUD</string>
   <string name="pref_survex_lrud_summary">Survex - Aggiungi LRUD alla export</string>
-  <!-- TODO string name="pref_survex_epsg_title">EPSG "cs out"</string -->
-  <!-- TODO string name="pref_survex_epsg_summary">EPSG number for Survex "cs out"</string -->
+  <string name="pref_survex_epsg_title">EPSG "cs out"</string>
+  <string name="pref_survex_epsg_summary">Numero EPSG per Survex "cs out"</string>
   <string name="pref_svg_program_title">Programma SVG</string>
   <string name="pref_svg_program_summary">Programma SVG utilizzato</string>
   <string name="pref_svg_grid_title">Griglia</string>

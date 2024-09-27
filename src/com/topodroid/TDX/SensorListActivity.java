@@ -70,7 +70,7 @@ public class SensorListActivity extends Activity
       List< SensorInfo > list = TopoDroidApp.mData.selectAllSensors( TDInstance.sid, TDStatus.NORMAL );
       // TDLog.Log( TDLog.LOG_PHOTO, "update shot list size " + list.size() );
       updateSensorList( list );
-      setTitle( TDInstance.survey );
+      // setTitle( TDInstance.survey );
     // } else {
     //   TDToast.makeBad( R.string.no_survey );
     }
@@ -125,6 +125,7 @@ public class SensorListActivity extends Activity
     mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
 
+    setTitle( R.string.title_sensor_list );
     updateDisplay( );
   }
 

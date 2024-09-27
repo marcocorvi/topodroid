@@ -1329,6 +1329,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="title_shift">Váltás</string>
     <string name="title_shot_delete">Mérés törlése?</string>
     <string name="title_sensor_edit">Szenzor</string>
+    <!-- TODO string name="title_sensor_list">Sensor data</string -->
     <string name="title_split">Vázlat megosztása</string>
 
     <string name="title_stats">Statisztikák</string>
