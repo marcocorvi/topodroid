@@ -663,11 +663,11 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="out_of_memory">FIGYELEM: megtelt a memória!</string>
     <string name="disk_io_error">KRITIKUS: diszk i/o hiba!</string>
     
-    <string name="toporobot_warning">TopoRobot házirend kísérleti jellegű!</string>
-    <string name="anomaly_warning">Mágneses anomáliák kompenzációja szükséges!</string>
-    <string name="tripod_warning">Állvány szabályok módosultak!</string>
-    <string name="coverage_warning">Szögek különbsége %1$d %% alatt van\nKiírja az eggyütthatókat?</string>
-    <string name="delta_warning">Átlag hiba %1$.1f alatt van\nKiírja az eggyütthatókat?</string>
+    <string name="toporobot_warning">A TopoRobot szabályzat tesztelői szintet igényel!</string>
+    <string name="anomaly_warning">A mágneses anomália kompenzációja szakértői szintet igényel!</string>
+    <string name="tripod_warning">Az állványszabályzat haladó szintet igényel!</string>
+    <string name="coverage_warning">Szögek különbsége %1$d %% alatt van\nFelülírja az eggyütthatókat?</string>
+    <string name="delta_warning">Átlag hiba %1$.1f alatt van\nFelülírja az eggyütthatókat?</string>
     <!-- UNUSED string name="sap_warning">Figyelem\n\nSAP felmérések csak az UISv2 3 fokozatát érik el.</string -->
 
 	
