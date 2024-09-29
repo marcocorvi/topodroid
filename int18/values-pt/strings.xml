@@ -1242,7 +1242,7 @@ no campo abaixo e aperte o botão.
   <string name="title_shift">Deslocar</string>
   <string name="title_shot_delete">Apagar medida?</string>
   <string name="title_sensor_edit">Edição de medida de sensor</string>
-    <!-- TODO string name="title_sensor_list">Sensor data</string -->
+  <string name="title_sensor_list">Dados sensores</string>
   <string name="title_split">Dividir croqui</string>
   <string name="title_stats">Estatísticas croqui</string>
   <!-- UNUSED string name="title_step">Passo</string -->
