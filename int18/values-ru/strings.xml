@@ -267,6 +267,7 @@
     <string name="bad_manifest_sql">Ошибка: ошибка исполнения запроса SQL</string>
     <string name="bad_manifest_number">Ошибка: неправильный номер</string>
     <string name="bad_manifest_manifest">Ошибка: неправильный манифест</string>
+    <!-- TODO string name="bad_manifest_file">Failed: open manifest</string -->
     <string name="bad_manifest_missing">Ошибка: отсутствует манифест</string>
     <string name="bad_manifest_error">Ошибка: ошибка чтения манифеста</string>
     <string name="bad_manifest_other">Ошибка: неожиданная ошибка</string>

@@ -242,6 +242,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="bad_manifest_sql">Fehler: SQL Fehler</string>
   <string name="bad_manifest_number">Fehler: Ungültige Nummer</string>
   <string name="bad_manifest_manifest">Fehler: Ungültiges Manifest</string>
+    <!-- TODO string name="bad_manifest_file">Failed: open manifest</string -->
   <string name="bad_manifest_missing">Fehler: Fehlendes Manifest</string>
   <string name="bad_manifest_error">Fehler: Manifest Lesefehler</string>
   <string name="bad_manifest_other">Fehler: Unerwarteter Fehler</string>

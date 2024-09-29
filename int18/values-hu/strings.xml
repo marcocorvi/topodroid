@@ -268,6 +268,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="bad_manifest_sql">Sikertelen: SQL hiba</string>
     <string name="bad_manifest_number">Sikertelen: hibás szám</string>
     <string name="bad_manifest_manifest">Sikertelen: hibás manifest</string>
+    <!-- TODO string name="bad_manifest_file">Failed: open manifest</string -->
     <string name="bad_manifest_missing">Sikertelen: hiányzó manifest</string>
     <string name="bad_manifest_error">Sikertelen: manifest olvasási hiba</string>
     <string name="bad_manifest_other">Sikertelen: váratlan hiba</string>

@@ -267,6 +267,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="bad_manifest_sql">Échec: erreur SQL</string>
     <string name="bad_manifest_number">Échec: mauvais nombre</string>
     <string name="bad_manifest_manifest">Échec: mauvais fichier Manifest</string>
+    <!-- TODO string name="bad_manifest_file">Failed: open manifest</string -->
     <string name="bad_manifest_missing">Échec: fichier Manifest ommis</string>
     <string name="bad_manifest_error">Échec: erreur de lecture du fichier Manifest</string>
     <string name="bad_manifest_other">Échec: erreur inconnue</string>

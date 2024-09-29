@@ -274,6 +274,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="bad_manifest_sql">Error: error de SQL</string>
     <string name="bad_manifest_number">Error: número incorrecto</string>
     <string name="bad_manifest_manifest">Error: datos incorrecto</string>
+    <!-- TODO string name="bad_manifest_file">Failed: open manifest</string -->
     <string name="bad_manifest_missing">Error: Falta datos</string>
     <string name="bad_manifest_error">Error: error de lectura de datos</string>
     <string name="bad_manifest_other">Error: error inesperado</string>

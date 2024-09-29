@@ -1499,7 +1499,7 @@ public class MainWindow extends Activity
             TDToast.makeWarn( R.string.archive_reset_color );
           }
         } else {
-          // TDLog.e("ZIP import: failed manifest " + manifest_ok );
+          TDLog.e("ZIP import: failed manifest error " + manifest_ok );
           int bad = -1;
           switch ( -manifest_ok ) {
             case  1: bad = R.string.bad_manifest_zip;      break;
@@ -1512,9 +1512,10 @@ public class MainWindow extends Activity
             case  8: bad = R.string.bad_manifest_sql;      break;
             case  9: bad = R.string.bad_manifest_number;   break;
             case 10: bad = R.string.bad_manifest_manifest; break;
-            case 11: bad = R.string.bad_manifest_missing;  break;
+            case 11: bad = R.string.bad_manifest_file;     break;
             case 12: bad = R.string.bad_manifest_error;    break;
-            case 13: bad = R.string.bad_manifest_other;    break;
+            case 13: bad = R.string.bad_manifest_missing;  break;
+            case 14: bad = R.string.bad_manifest_other;    break;
             default:
               TDToast.makeBad( String.format( getResources().getString( R.string.bad_manifest ), (-manifest_ok) ) );
           }

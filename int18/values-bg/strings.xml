@@ -274,6 +274,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="bad_manifest_sql">Неуспешно: SQL грешка</string>
     <string name="bad_manifest_number">Неуспешно: грешен номер</string>
     <string name="bad_manifest_manifest">Неуспешно: грешен манифест</string>
+    <!-- TODO string name="bad_manifest_file">Failed: open manifest</string -->
     <string name="bad_manifest_missing">Неуспешно: липсващ манифест</string>
     <string name="bad_manifest_error">Неуспешно: грешка при четене</string>
     <string name="bad_manifest_other">Неуспешно: неочаквана грешкаr</string>

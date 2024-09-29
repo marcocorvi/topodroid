@@ -80,7 +80,8 @@ public class Archiver
   private final static int ERR_FORMAT     = -10;
   private final static int ERR_FILE       = -11;
   private final static int ERR_MF_IO      = -12;
-  private final static int ERR_UNKNOWN    = -13;
+  private final static int ERR_MF_MISS    = -13;
+  private final static int ERR_UNKNOWN    = -14;
 
 
   private final static String[] mManifestError = {
@@ -97,6 +98,7 @@ public class Archiver
      "mamifest format", // 10
      "manifest not found",
      "manifest IO error",
+     "missing manifest",
      "unexpected error"
   };
 
@@ -857,12 +859,14 @@ public class Archiver
     int ok_manifest = ERR_UNKNOWN;
     ZipEntry ze;
     // mManifestPath = null;
+    boolean missing = true; // missing manifest
     try {
       ZipInputStream zin = new ZipInputStream( fis );
       // int nr_entry = 0;
       while ( ( ze = zin.getNextEntry() ) != null ) {  // NOTE getNextEntry() throws ZipException if zip file entry name contains '..' or starts with '/'
-        // TDLog.v( "ZIP get OK manifest: zentry name " + ze.getName() );
-        if ( ze.getName().equals( "manifest" ) ) {
+        TDLog.v( "ZIP get OK manifest: zentry name <" + ze.getName() + ">" );
+        if ( ze.getName().toLowerCase().equals( "manifest" ) ) {
+          missing = false;
           // String pathname = TDPath.getManifestFile( );
           // TDLog.v( "OK manifest: pathname " + pathname + " entry \"" + ze.getName() + "\"");
           // FileOutputStream fout = TDFile.getFileOutputStream( pathname );
@@ -887,6 +891,8 @@ public class Archiver
     } catch ( IOException e ) {
       TDLog.e( "ZIP 11 IO error " + e.getMessage() );
     }
+    TDLog.v("ZIP 11 missing " + missing );
+    if ( missing ) return ERR_MF_MISS;
     return ok_manifest;
   }
 

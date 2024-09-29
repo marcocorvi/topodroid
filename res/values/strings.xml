@@ -281,6 +281,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="bad_manifest_sql">Failed: SQL error</string>
     <string name="bad_manifest_number">Failed: wrong number</string>
     <string name="bad_manifest_manifest">Failed: wrong manifest</string>
+    <string name="bad_manifest_file">Failed: open manifest</string>
     <string name="bad_manifest_missing">Failed: missing manifest</string>
     <string name="bad_manifest_error">Failed: manifest read error</string>
     <string name="bad_manifest_other">Failed: unexpected error</string>

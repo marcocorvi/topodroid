@@ -267,6 +267,7 @@
     <string name="bad_manifest_sql">Failed: SQL数据库错误</string>
     <string name="bad_manifest_number">Failed: 数字错误</string>
     <string name="bad_manifest_manifest">Failed: 显示错误</string>
+    <!-- TODO string name="bad_manifest_file">Failed: open manifest</string -->
     <string name="bad_manifest_missing">Failed: 显示丢失</string>
     <string name="bad_manifest_error">Failed: 显现读取错误</string>
     <string name="bad_manifest_other">Failed: 意外错误</string>
