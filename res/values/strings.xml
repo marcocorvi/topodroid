@@ -1683,8 +1683,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_prev_next_summary">Prev/Next buttons in the shot dialog</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Magnetic Anomaly</string -->
   <!-- UNUSED string name="pref_mag_anomaly_summary">Compensate Local Magnetic Anomaly</string -->
-  <string name="pref_azimuth_manual_title">Fixed extend reference</string>
-  <string name="pref_azimuth_manual_summary">Fixed L/R or settable extend reference</string>
+  <string name="pref_azimuth_manual_title">Manual extend reference</string>
+  <string name="pref_azimuth_manual_summary">Manual L/R or settable extend reference</string>
 
   <string name="pref_team_title">Team</string>
   <string name="pref_team_summary">Default surveying team</string>

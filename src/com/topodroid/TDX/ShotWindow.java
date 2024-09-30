@@ -306,12 +306,14 @@ public class ShotWindow extends Activity
   // --------------------------------------------------------------------------------
   // get a button-1
   // @param idx    index of the button-1
-  private Button button1( int idx ) { return mButton1[ idx - boff ]; }
+  // private Button button1( int idx ) { return mButton1[ idx - boff ]; }
 
-  // check if a button is a given button-1
-  // @param b    button
-  // @param idx  index of button-1
-  private boolean isButton1( Button b, int idx ) { return idx - boff < mNrButton1 && b == button1( idx ); }
+  /** check if a button is a given button-1
+   * @param b    button
+   * @param idx  index of button-1
+   * @return true if the button is the expected button-1
+   */
+  private boolean isButton1( Button b, int idx ) { return idx - boff < mNrButton1 && b == mButton1[ idx - boff ]; }
 
   // --------------------------------------------------------------------------------
   /** set the reference azimuth
@@ -328,34 +330,23 @@ public class ShotWindow extends Activity
 
   public void setRefAzimuthButton()
   {
-    // TDLog.v( "set Ref Azimuth button, fixed: " + TDAzimuth.mFixedExtend + " azimuth: " + TDAzimuth.mRefAzimuth );
     if ( ! TDLevel.overNormal ) return;
-    if ( BTN_AZIMUTH - boff >= mNrButton1 ) return;
-
-    // TDLog.v( "set RefAzimuthButton extend " + TDAzimuth.mFixedExtend + " " + TDAzimuth.mRefAzimuth );
+    int btn = BTN_AZIMUTH - boff; // button index
+    if ( btn >= mNrButton1 ) return;
+    TDLog.v( "set Ref Azimuth button, manual: " + TDSetting.mAzimuthManual + " fixed: " + TDAzimuth.mFixedExtend + " azimuth: " + TDAzimuth.mRefAzimuth );
 
     // The ref azimuth can be fixed either by the setting or by the choice in the azimuth dialog 
     if ( ( ! TDSetting.mAzimuthManual ) && TDAzimuth.mFixedExtend == 0 ) { // FIXME FIXED_EXTEND 20240603 the mFixedExtend test was commented
-      // FIXME_AZIMUTH_DIAL 2
-      // android.graphics.Matrix m = new android.graphics.Matrix();
-      // m.postRotate( TDAzimuth.mRefAzimuth - 90 );
-
-      // if ( mBMdial != null ) // extra care !!!
-      {
-        int extend = (int)(TDAzimuth.mRefAzimuth);
-        // FIXME_AZIMUTH_DIAL 2
-        // Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
-        // Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
-	Bitmap bm2 = mDialBitmap.getBitmap( extend, mButtonSize );
-
-        TDandroid.setButtonBackground( button1( BTN_AZIMUTH ), new BitmapDrawable( getResources(), bm2 ) );
-        TopoDroidApp.setSurveyExtend( extend );
-      }
+      int extend = (int)(TDAzimuth.mRefAzimuth);
+      Bitmap bm2 = mDialBitmap.getBitmap( extend, mButtonSize );
+      TDandroid.setButtonBackground( mButton1[ btn ], new BitmapDrawable( getResources(), bm2 ) );
+      TopoDroidApp.setSurveyExtend( extend );
     } else if ( TDAzimuth.mFixedExtend == -1L ) {
-      TDandroid.setButtonBackground( mButton1[ BTN_AZIMUTH - boff ], mBMleft );
+      TDandroid.setButtonBackground( mButton1[ btn ], mBMleft );
       TopoDroidApp.setSurveyExtend( SurveyInfo.SURVEY_EXTEND_LEFT );
     } else {
-      TDandroid.setButtonBackground( mButton1[ BTN_AZIMUTH - boff ], mBMright );
+      if ( TDAzimuth.mFixedExtend == 0 ) TDAzimuth.mFixedExtend = 1; // set "right"
+      TDandroid.setButtonBackground( mButton1[ btn ], mBMright );
       TopoDroidApp.setSurveyExtend( SurveyInfo.SURVEY_EXTEND_RIGHT );
     } 
   }

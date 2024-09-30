@@ -7460,7 +7460,7 @@ public class DrawingWindow extends ItemDrawer
         // TDLog.v("Button AZIMUTH");
         if ( PlotType.isSketch2D( mType ) ) { 
           if ( TDSetting.mAzimuthManual ) {
-            setRefAzimuth( 0, - TDAzimuth.mFixedExtend );
+            setRefAzimuth( 0, - TDAzimuth.mFixedExtend ); // flip fixed extend left/right
           } else {
             (new AzimuthDialog( mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show(); // FIXME_AZIMUTH_DIAL 1
             // (new AzimuthDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show(); // FIXME_AZIMUTH_DIAL 2
