@@ -200,21 +200,39 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
             lastPosAdd = -1;
             lastPosRemove = newPos;
           } else {
-            mSelect.add( b );
-            b.mMultiSelected = true;
-            b.setBackgroundColor( TDColor.GRID );
+            // 2024-09-29 reversed the order items are added to the multiselection
+            // mSelect.add( b );
+            // b.mMultiSelected = true;
+            // b.setBackgroundColor( TDColor.GRID );
+            // // TDLog.v("multiselect add " + b.mFrom + " " + b.mTo + " " + mSelect.size() );
+            // if ( long_tap  && ( lastPosAdd > -1 ) ) { // continue to select block all the way to the last selected item
+            //   if ( pos > lastPosAdd ) {
+            //     while ( --pos > lastPosAdd ) {
+            //       addItem(pos);
+            //     }
+            //   } else {
+            //     while ( ++pos < lastPosAdd ) {
+            //       addItem(pos);
+            //     }
+            //   }
+            // }
+            // lastPosAdd = newPos;
+            // lastPosRemove = -1;
             // TDLog.v("multiselect add " + b.mFrom + " " + b.mTo + " " + mSelect.size() );
             if ( long_tap  && ( lastPosAdd > -1 ) ) { // continue to select block all the way to the last selected item
               if ( pos > lastPosAdd ) {
-                while ( --pos > lastPosAdd ) {
-                  addItem(pos);
+                while ( ++lastPosAdd < pos ) {
+                  addItem( lastPosAdd );
                 }
               } else {
-                while ( ++pos < lastPosAdd ) {
-                  addItem(pos);
+                while ( --lastPosAdd > pos) {
+                  addItem( lastPosAdd );
                 }
               }
             }
+            mSelect.add( b );
+            b.mMultiSelected = true;
+            b.setBackgroundColor( TDColor.GRID );
             lastPosAdd = newPos;
             lastPosRemove = -1;
           }
