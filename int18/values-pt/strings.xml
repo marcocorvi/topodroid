@@ -252,7 +252,7 @@ no campo abaixo e aperte o botão.
   <string name="bad_manifest_sql">Falha: erro SQL</string>
   <string name="bad_manifest_number">Falha: número errado</string>
   <string name="bad_manifest_manifest">Falha: arquivo de manifesto inválido</string>
-    <!-- TODO string name="bad_manifest_file">Failed: open manifest</string -->
+  <string name="bad_manifest_file">Falha: abertura arquivo de manifesto</string>
   <string name="bad_manifest_missing">Falha: arquivo de manifesto inexistente</string>
   <string name="bad_manifest_error">Falha: erro na leitura do arquivo de manifesto</string>
   <string name="bad_manifest_other">Falha: erro inesperado</string>
