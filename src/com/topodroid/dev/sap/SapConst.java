@@ -2,6 +2,7 @@
  *
  * @author marco corvi
  * @date nov 2011
+ * revised for SAP6 by J. Brewer 
  *
  * @brief TopoDroid SAP-5, SAP-5 bluetooth LE constants and commands
  * --------------------------------------------------------

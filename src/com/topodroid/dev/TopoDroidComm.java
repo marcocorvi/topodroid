@@ -453,7 +453,7 @@ public class TopoDroidComm
 
   /** send a command 
    * @param cmd   command code
-   * @return ???
+   * @return true if the underlying protocol has put the command on the out-queue
    * 
    * The command code is the app-code of the command.
    * This method invokes the protocol' sendCmd() which should translate the app-code to the
@@ -464,11 +464,11 @@ public class TopoDroidComm
   {
     boolean ret = false;
     if ( mProtocol != null ) {
-      // TDLog.v( "sendCommand " + cmd + " trying three times");
+      // TDLog.v( "send command " + cmd + " trying three times");
       for (int k=0; k<3 && ! ret; ++k ) { // try three times
-        // TDLog.v( "sendCommand " + cmd + " try " + k );
+        // TDLog.v( "send command " + cmd + " try " + k );
         ret = mProtocol.sendCommand( (byte)cmd ); // was ret |= ...
-        // TDLog.v( "sendCommand " + cmd + " " + k + "-ret " + ret );
+        // TDLog.v( "send command " + cmd + " " + k + "-ret " + ret );
         TDUtil.slowDown( TDSetting.mWaitCommand, "send command sleep interrupted"); // it is ok to be interrupted
       }
     }

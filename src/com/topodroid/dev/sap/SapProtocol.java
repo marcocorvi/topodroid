@@ -2,6 +2,7 @@
  *
  * @author marco corvi
  * @date nov 2011
+ * revised for SAP6 by J. Brewer 
  *
  * @brief TopoDroid SAP5 protocol REQUIRES API-18
  * --------------------------------------------------------
@@ -70,6 +71,7 @@ class SapProtocol extends TopoDroidProtocol
   }
 
   /** remove a byte array from the write queue
+   * @returm the byte array, or null if the write queue is empty
    */
   public byte[] handleWrite( )
   {
@@ -82,6 +84,8 @@ class SapProtocol extends TopoDroidProtocol
     }
     return bytes;
   }
+
+  private byte SAP6byte0 = (byte)0xff;
 
   /** handle the reading of a received array of bytes
    * @param bytes  byte array that has been received
@@ -108,6 +112,10 @@ class SapProtocol extends TopoDroidProtocol
         TDLog.v( "SAP6 proto: read " + bytes.length + " bytes:" + sb.toString() );
       }
       if ( bytes.length != 17 ) return DataType.PACKET_NONE;
+
+      if ( bytes[0] == SAP6byte0 ) return DataType.PACKET_NONE; // 2024-10-01 discard if equal to previous packet
+      SAP6byte0 = bytes[0];
+
       byte[] buffer = new byte[16];
       System.arraycopy( bytes, 1, buffer, 0, 16 );
 

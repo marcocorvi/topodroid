@@ -2,6 +2,7 @@
  *
  * @author marco corvi
  * @date nov 2011
+ * revised for SAP6 by J. Brewer 
  *
  * @brief TopoDroid SAP5 communication REQUIRES API-18
  * --------------------------------------------------------
@@ -323,7 +324,8 @@ public class SapComm extends TopoDroidComm
   // public void addChrt( UUID srv_uuid, BluetoothGattCharacteristic chrt );
   // public void addDesc( UUID srv_uuid, UUID chrt_uuid, BluetoothGattDescriptor desc );
 
-  /** try to write: ask the protocol to write
+  /** try to write: 
+   * get a byte array from the write queue of the protocol and put it on the write chracateristic
    */
   private void writeChrt( )
   {
@@ -398,9 +400,9 @@ public class SapComm extends TopoDroidComm
   public void changedChrt( BluetoothGattCharacteristic chrt )
   {
     //TODO: Implement SAP 6 handling of data
-    TDLog.v( "SAP comm: changedChrt" );
     String uuid_str = chrt.getUuid().toString();
     if ( uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_STR ) || uuid_str.equals( SapConst.SAP6_CHRT_READ_UUID_STR )) {
+      TDLog.v( "SAP comm: changed chrt READ" );
       int res = mSapProto.handleReadNotify( chrt );
       if ( res == DataType.PACKET_DATA ) {
         if(uuid_str.equals( SapConst.SAP6_CHRT_READ_UUID_STR )) {
@@ -411,10 +413,13 @@ public class SapComm extends TopoDroidComm
       }
       // readSapPacket();
     } else if ( uuid_str.equals( SapConst.SAP5_CHRT_WRITE_UUID_STR ) ) {
+      TDLog.v( "SAP comm: changed chrt WRITE" );
       byte[] bytes = mSapProto.handleWriteNotify( chrt );
       if ( bytes != null ) {
         mCallback.writeChrt( mServiceUUID, mWriteUUID, bytes );
       }
+    } else {
+      TDLog.e("SAP comm: changed unexpected chrt " + uuid_str );
     }
   }
 
@@ -673,7 +678,7 @@ public class SapComm extends TopoDroidComm
 
   /** sand a 1-byte command - FIXME_SAP6 only
    * @param cmd command byte
-   * @return ...
+   * @return true if the command has been put on the out-queue
    */
   @Override
   public boolean sendCommand( int cmd )

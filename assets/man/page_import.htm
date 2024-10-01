@@ -16,7 +16,7 @@ The dialog displays the list of supported import file formats, besides "zip" arc
 <li>Therion. Only data (th)</li>
 <li>VisualTopo (tro and trox)</li>
 <li>Walls (srv)</li>
-<li>TopoRobot </li>
+<li>TopoRobot</li>
 <li>PocketTopo, including sketches (top)</li>
 <li>CaveSniper (csn)</li>
 <li>BRIC csv (csv)</li>
@@ -27,32 +27,8 @@ For some formats it is possible to customize the import through a few flags.<br>
 A file import fails if a survey with the same name is already in TopoDroid.<br><p>
 The import file is selected with the system content provider.<br><p>
 
-On import from file formats that have LRUD values, these are converted to x-splays (shown in green).<br><p>
+On import from file, LRUD values are converted to x-splays (shown in green).<br><p>
 
-
-<b>Survex import</b><br>
-Survex syntax is partially supported.<br>
-
-Only the data modes "normal", "topofil" and "passage" are handled to some extent.
-In particular for the "passage" data mode, the "left" and "right" values are not used because
-they cannot be converted to splays.<br>
-
-TopoDroid has only single survey sessions. Therefore, data of multi-session files are merged in a 
-single session.
-<br><p>
-
-<b>Therion import</b><br>
-Only Therion survey files with data in "normal" datamode are importable.<br>
-The "declination" command is taken into account: the read azimuth are corrected with the value
-of the declination.<br>
-If the station short-names have no clash the file can be imported with "short-names". 
-Otherwise it must be imported with full names, ie station names qualified by the survey path.<br>
-TopoDroid does not import Therion scraps.<br><p>
-
-<b>PocketTopo import</b><br>
-TopoDroid imports both the survey data and the sketches.
-This import maps PocketTopo colors to TopoDroid drawing tools (points and lines).
-The mapping can be modified through a setting.<br><p>
 
 <b>Compass import</b><br>
 <ul>
@@ -63,7 +39,30 @@ The mapping can be modified through a setting.<br><p>
 
 TopoDroid converts imported compass survey from <i>normal</i> datamode to <i>diving</i> datamode [T], if the relative setting is enabled [G].<br><p>
 
+<b>Survex import</b><br>
+<u>Survex syntax is partially supported</u>.<br>
+
+Only the data modes "normal", "topofil" and "passage" are handled to some extent.
+In particular for the "passage" data mode, the "left" and "right" values are not used because
+they cannot be converted to splays.<br>
+
+TopoDroid has only single survey sessions. Therefore, data of multi-session files are merged in a 
+single session.
+<br><p>
+
+<b>Therion import</b><br>
+<u>Therion syntax is partially supported</u>.<br>
+
+Only Therion survey files with data in "normal" datamode are importable.<br>
+The "declination" command is taken into account: the read azimuth are corrected with the value
+of the declination.<br>
+If the station short-names have no clash the file can be imported with "short-names". 
+Otherwise it must be imported with full names, ie station names qualified by the survey path.<br>
+TopoDroid does not import Therion scraps.<br><p>
+
 <b>VisualTopo import</b><br>
+<u>VisualTopo syntax is partially supported</u>.<br>
+
 VisualTopo (tro, trox) import options:
 <ul>
 <li><i>LRUD</i> if enabled LRUD values are imported and converted to splay shots</li>
@@ -73,12 +72,32 @@ VisualTopo (tro, trox) import options:
 TopoDroid can import also VisualTopo surveys with <i>Prof</i> instead of <i>Clino</i> in "trox" format.
 The data are stored in <i>diving</i> datamode.<br><p>
 
+<b>Walls import</b><br>
+<u>Walls syntax is partially supported</u>.<br>
+
+Importing data from a Walls file can result in disconnected survey.<br><p>
+
+<b>TopoRobot import</b><br>
+TopoRobot import is very experimental.<br><p>
+
+<b>PocketTopo import</b><br>
+TopoDroid imports both the survey data and the sketches.
+This import maps PocketTopo colors to TopoDroid drawing tools (points and lines).
+The mapping can be modified through a setting.<br><p>
+
+<b>CaveSniper import</b><br>
+<br><p>
+
 <b>BRIC csv file</b><br>
+BRIC csv import is experimental.<br>
+
 Survey data imported from BRIC csv files contains only distance, azimuth, and inclination.<br>
 The survey data must be edited after importing to add the other information.<br><p>
 
+<!--
 <b>N.B.</b>
 Import may fail (and crash the app) due to failure on the database that TopoDroid cannot intercept.
 If this happens delete the partially imported survey and retry to import it.<br><p>
+-->
 
 </body></html>
