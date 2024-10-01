@@ -147,7 +147,7 @@ class ParserWalls extends ImportParser
       BufferedReader br = TDio.getBufferedReader( isr, filename );
       String line = nextLine( br );
       while ( line != null ) {
-        // TDLog.v( "Parser Walls " + state.in_survey + " " + state.in_centerline + " " + state.in_data + " : " + line );
+        // TDLog.v( "Parser Walls: " + line );
         line = line.trim();
         int pos = line.indexOf( ';' ); // remove comment (anything after ';')
         if ( pos >= 0 ) {
@@ -158,6 +158,7 @@ class ParserWalls extends ImportParser
         } else if ( line.length() > 0 ) {
           String[] vals = pattern.split(line); // line.split( "\\s+" );
           int sz = vals.length;
+          // TDLog.v( "Parser Walls (" + sz + "): " + line );
           if ( sz > 0 ) {
             String cmd = vals[0].toLowerCase( locale );
             if ( cmd.equals("#units" ) ) { 
@@ -216,6 +217,7 @@ class ParserWalls extends ImportParser
                 ber  = Float.parseFloat( vals[jCompass] );
                 cln  = (sz == 4 )? 0 : Float.parseFloat( vals[jClino] );
                 if ( sz > 5 ) {
+                  // TDLog.v("LRUD str <" + vals[5] + ">" );
                   String[] lrud = vals[5].substring(1, vals[5].length()-1).split(",");
                   if ( lrud.length == 4 ) {
                     String station = lrudAtTo ? to : from;
@@ -227,7 +229,7 @@ class ParserWalls extends ImportParser
                 TDLog.e( "walls parser error: data " + line );
               }
             } else if ( sz >= 2 ) { // station and LRUD 
-              String[] lrud = vals[1].substring(1, vals[5].length()-1).split(",");
+              String[] lrud = vals[1].substring(1, vals[1].length()-1).split(",");
               if ( lrud.length == 4 ) {
                 String station = prefix + vals[0];
                 if ( from != null && from.equals(station) ) {
