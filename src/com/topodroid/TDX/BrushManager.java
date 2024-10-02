@@ -75,27 +75,82 @@ public class BrushManager
   public static SymbolLineLibrary  getLineLib()  { return mLineLib; }
   public static SymbolAreaLibrary  getAreaLib()  { return mAreaLib; }
 
+  /** @return true if the point symbol round-trip has the given value
+   * @param path   symbol instance
+   * @param rt     round-trip value
+   */
   public static boolean isPointRoundTrip( DrawingPointPath path, int rt )
   { return (mPointLib != null) && mPointLib.getSymbolByIndex( path.mPointType ).mRoundTrip == rt; }
+
+  /** @return true if the line symbol round-trip has the given value
+   * @param path   symbol instance
+   * @param rt     round-trip value
+   */
   public static boolean isLineRoundTrip( DrawingLinePath path, int rt )
   { return (mLineLib != null) && mLineLib.getSymbolByIndex( path.mLineType ).mRoundTrip == rt; }
+
+  /** @return true if the area symbol round-trip has the given value
+   * @param path   symbol instance
+   * @param rt     round-trip value
+   */
   public static boolean isAreaRoundTrip( DrawingAreaPath path, int rt )
   { return (mAreaLib != null) && mAreaLib.getSymbolByIndex( path.mAreaType ).mRoundTrip == rt; }
 
+  /** @return the list of the names of the line symbols (or null)
+   */
   static ArrayList< String > getLineNames() { return (mLineLib == null)? (new ArrayList<>()) : mLineLib.getSymbolNames(); }
+
+  /** @return the list of the names of the line symbols, excluding the "section" line (or null)
+   */
   static ArrayList< String > getLineNamesNoSection() { return (mLineLib == null)? (new ArrayList<>()) : mLineLib.getSymbolNamesExcept( SymbolLibrary.SECTION ); }
+
+  /** @return the list of the names of the area symbols (or null)
+   */
   static ArrayList< String > getAreaNames() { return (mAreaLib == null)? (new ArrayList<>()) : mAreaLib.getSymbolNames(); }
 
+  /** @return the index of a point symbol in the library (or -1)
+   * @param point   point symbol
+   */
   static int getPointIndex( Symbol point ) { return (mPointLib == null)? -1 : mPointLib.getSymbolIndex( point ); }
+
+  /** @return the index of a line symbol in the library (or -1)
+   * @param line   line symbol
+   */
   static int getLineIndex( Symbol line )   { return (mLineLib  == null)? -1 : mLineLib.getSymbolIndex( line ); }
+
+  /** @return the index of an area symbol in the library (or -1)
+   * @param area   area symbol
+   */
   static int getAreaIndex( Symbol area )   { return (mAreaLib  == null)? -1 : mAreaLib.getSymbolIndex( area ); }
 
+  /** @return the index of a point symbol in the library by its Therion name (or -1)
+   * @param thname   Therion name of the point
+   */
   public static int getPointIndexByThName( String thname ) { return (mPointLib == null)? -1 : mPointLib.getSymbolIndexByThName( thname ); }
+
+  /** @return the index of a line symbol in the library by its Therion name (or -1)
+   * @param thname   Therion name of the line
+   */
   public static int getLineIndexByThName( String thname )  { return (mLineLib  == null)? -1 : mLineLib.getSymbolIndexByThName( thname ); }
+
+  /** @return the index of an area symbol in the library by its Therion name (or -1)
+   * @param thname   Therion name of the area
+   */
   public static int getAreaIndexByThName( String thname )  { return (mAreaLib  == null)? -1 : mAreaLib.getSymbolIndexByThName( thname ); } // TH2EDIT package
 
+  /** @return a point symbol in the library by its Therion name (or null)
+   * @param thname   Therion name of the point
+   */
   static Symbol getPointByThName( String thname ) { return (mPointLib == null)? null : mPointLib.getSymbolByThName( thname ); }
+
+  /** @return a line symbol in the library by its Therion name (or null)
+   * @param thname   Therion name of the line
+   */
   static Symbol getLineByThName( String thname )  { return (mLineLib  == null)? null : mLineLib.getSymbolByThName( thname ); }
+
+  /** @return an area symbol in the library by its Therion name (or null)
+   * @param thname   Therion name of the area
+   */
   static Symbol getAreaByThName( String thname )  { return (mAreaLib  == null)? null : mAreaLib.getSymbolByThName( thname ); }
 
   public static SymbolPoint getPointByIndex( int idx ) { return (mPointLib == null)? null : (SymbolPoint)mPointLib.getSymbolByIndex( idx ); }
@@ -339,9 +394,9 @@ public class BrushManager
    */
   static void initAllIndices()
   {
-    mPointLib.initIndices();
-    mLineLib.initIndices();
-    mAreaLib.initIndices();
+    if ( mPointLib != null ) mPointLib.initIndices();
+    if ( mLineLib  != null ) mLineLib.initIndices();
+    if ( mAreaLib  != null ) mAreaLib.initIndices();
   }
 
   /** reload the point symbols

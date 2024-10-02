@@ -1099,7 +1099,6 @@ public class TopoDroidApp extends Application
     // }
     if ( ! done_loaded_palette ) {
       if ( mData.hasDB() ) {
-        done_loaded_palette = true;
         Thread loader = new Thread() {
           @Override
           public void run() {
@@ -1112,6 +1111,7 @@ public class TopoDroidApp extends Application
             BrushManager.loadAllLibraries( TDInstance.context, res );
             BrushManager.doMakePaths( );
             MainWindow.enablePaletteButton();
+            done_loaded_palette = true;
           }
         };
         loader.setPriority( Thread.MIN_PRIORITY );
