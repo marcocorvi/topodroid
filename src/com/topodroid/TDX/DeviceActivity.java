@@ -354,7 +354,7 @@ public class DeviceActivity extends Activity
         } else if ( Device.isDistoXBLE( model ) ) { // SIWEI_TIAN
           mApp_mDData.updateDeviceModel(device.getAddress(), Device.NAME_DISTOXBLE + "0000");
           device.mType = model;
-        } else if ( Device.isCavway( model ) ) {
+        } else if ( Device.isCavwayX1( model ) ) {
           mApp_mDData.updateDeviceModel( device.getAddress(), Device.NAME_CAVWAY + "0000" );
           device.mType = model;
         }
@@ -546,7 +546,7 @@ public class DeviceActivity extends Activity
                 mApp_mDData.insertDevice( addr, bt_name, name, null );
                 dev = mApp_mDData.getDevice( addr );
               // }
-            } else if(Device.isCavway( bt_name)){
+            } else if ( Device.isCavway( bt_name ) ){
               mApp_mDData.insertDevice( addr, bt_name, name, null );
               dev = mApp_mDData.getDevice( addr );
             }
@@ -772,7 +772,7 @@ public class DeviceActivity extends Activity
           (new InfoReadBricTask( mApp, info )).execute();
         } else if ( currDeviceA().mType == Device.DISTO_SAP5 || currDeviceA().mType == Device.DISTO_SAP6 ) {
           TDToast.makeBad( R.string.unsupported_device_type );
-        } else if (currDeviceA().mType == Device.DISTO_CAVWAY) { //SIWEI TIAN
+        } else if ( currDeviceA().mType == Device.DISTO_CAVWAYX1 ) { //SIWEI TIAN
           CavwayInfoDialog info = new CavwayInfoDialog(this, this, currDeviceA(), mApp);
           info.show();
           (new CavwayInfoReadTask(mApp, info)).execute();

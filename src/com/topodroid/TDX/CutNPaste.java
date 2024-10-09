@@ -418,7 +418,7 @@ public class CutNPaste
         ww = textview4.getPaint().measureText( text );
         if ( ww > w ) w = ww;
       }
-    }else if ( TDInstance.deviceType() == Device.DISTO_CAVWAY ) { // SIWEI
+    }else if ( TDInstance.deviceType() == Device.DISTO_CAVWAYX1 ) { // SIWEI
       // ----- TURN LASER ON
       text = res.getString(R.string.remote_on);
       textview1 = makePopupButton( context, text, popup_layout, lWidth, lHeight,

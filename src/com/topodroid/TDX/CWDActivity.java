@@ -11,6 +11,7 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.utils.CWDfolder;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDTag;
 // import com.topodroid.utils.TDFile;
@@ -45,20 +46,22 @@ import android.view.KeyEvent;
 
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 
 public class CWDActivity extends Activity
                          implements OnItemClickListener
+                                  , OnItemLongClickListener
                                   , OnClickListener
 
 {
   // private TopoDroidApp mApp;
   private ListView mList;
   private EditText mETcwd;
-  private TextView mTVcbd;
+  // private TextView mTVcbd;
   private Button mBtnOK;
   // private Button mBtnChange;
   private Button mBtnCancel;
-  private LinearLayout mLayoutcbd;
+  // private LinearLayout mLayoutcbd;
   
   // private String mBaseName;
 
@@ -80,29 +83,20 @@ public class CWDActivity extends Activity
 
   private boolean setCwdPreference()
   {
-    String dir_name  = mETcwd.getText().toString();
+    String dir_name = mETcwd.getText().toString();
     // String base_name = TDPath.getCurrentBaseDir();
 
     // CURRENT WORK DIRECTORY
-    // if ( dir_name == null ) { // always false
-    //   TDToast.makeBad( R.string.empty_cwd );
-    //   return false;
-    // } else {
-      dir_name = dir_name.trim();
-      if ( dir_name.length() == 0 ) {
-        TDToast.makeBad( R.string.empty_cwd );
-	    return false;
-      }
-    // }
-    if ( dir_name.contains("/") ) {
+    dir_name = dir_name.trim();
+    int check = CWDfolder.checkName( dir_name );
+    if ( check == CWDfolder.NAME_EMPTY ) {
+      TDToast.makeBad( R.string.empty_cwd );
+      return false;
+    } else if ( check == CWDfolder.NAME_BAD ) {
       TDToast.makeBad( R.string.bad_cwd );
       return false;
     }
-    if ( ! dir_name.toUpperCase(Locale.US).startsWith( "TOPODROID" ) ) {
-      dir_name = "TopoDroid-" + dir_name;
-    } else { 
-      dir_name = "TopoDroid" + dir_name.substring(9);
-    }
+    dir_name = CWDfolder.folderName( dir_name );
 
     // return the result to TDPrefActivity
     if ( TDPath.checkBasePath( dir_name /*, base_name */ ) ) {
@@ -130,13 +124,14 @@ public class CWDActivity extends Activity
     }
     mList.setAdapter( adapter );
     mList.setOnItemClickListener( this );
+    mList.setOnItemLongClickListener( this );
     mList.setDividerHeight( 2 );
 
     mETcwd.setText( TDInstance.cwd );
     // if ( TDLevel.overExpert ) {
     //   mTVcbd.setText( mBaseName );
     // } else{
-      mLayoutcbd.setVisibility( View.GONE );
+      // mLayoutcbd.setVisibility( View.GONE );
     // }
   }
 
@@ -154,13 +149,31 @@ public class CWDActivity extends Activity
     mETcwd.setText( item );
   }
 
+  @Override 
+  public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
+  {
+    if ( ! ( view instanceof TextView ) ) {
+      TDLog.e("CWD view instance of " + view.toString() );
+      return false;
+    }
+    CharSequence item = ((TextView) view).getText();
+    mETcwd.setText( item );
+    setCwdAndFinish();
+    return true;
+  }
+
+  private void setCwdAndFinish()
+  {
+    setCwdPreference();
+    finish();
+  }
+
   @Override
   public void onClick( View v ) 
   {
     Button b = (Button)v;
     if ( b == mBtnOK ) {
-      setCwdPreference();
-      finish();
+      setCwdAndFinish();
     } else if ( b == mBtnCancel ) {
       finish();
     // } else if ( b == mBtnChange ) {
@@ -181,11 +194,11 @@ public class CWDActivity extends Activity
 
     getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN );
 
-    mLayoutcbd = (LinearLayout)findViewById( R.id.layout_cbd );
+    // mLayoutcbd = (LinearLayout)findViewById( R.id.layout_cbd );
 
     mList = (ListView) findViewById( R.id.cwd_list );
     mETcwd = (EditText) findViewById( R.id.cwd_text );
-    mTVcbd = (TextView) findViewById( R.id.cbd_text );
+    // mTVcbd = (TextView) findViewById( R.id.cbd_text );
     mBtnOK = (Button) findViewById( R.id.button_ok );
     mBtnOK.setOnClickListener( this );
     mBtnCancel = (Button) findViewById( R.id.button_cancel );

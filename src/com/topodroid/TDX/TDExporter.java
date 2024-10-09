@@ -3269,7 +3269,11 @@ public class TDExporter
       // sr.dumpBlocks(); // DEBUG
       // N.B. all topodroid series are open-end
       if ( first ) {
-        pw.format("%6d\t-2\t1\t1\t1\t%s\r\n", sr.series, comment );
+        if ( TDSetting.TRobotJB ) {
+          // pw.format("%6d\t-2\t%s\r", sr.series, comment );
+        } else {
+          pw.format("%6d\t-2\t1\t1\t1\t%s\r\n", sr.series, comment );
+        }
         first = false;
       }
       int fs = sr.start_series;
@@ -3281,13 +3285,21 @@ public class TDExporter
         end_series = sr.series;
         end_point  = sr.points;
       }
-      pw.format("%6d\t-1\t1\t1\t1\t%d\t%d\t%d\t%d\t%d\t0\t0\r\n", sr.series, sr.start_series, sr.start_point, end_series, end_point, sr.points );
+      if ( TDSetting.TRobotJB ) {
+        pw.format("%6d\t-1\t%d\t%d\t%d\t%d\t%d\t0\t0\r", sr.series, sr.start_series, sr.start_point, end_series, end_point, sr.points );
+      } else {
+        pw.format("%6d\t-1\t1\t1\t1\t%d\t%d\t%d\t%d\t%d\t0\t0\r\n", sr.series, sr.start_series, sr.start_point, end_series, end_point, sr.points );
+      }
       boolean atFrom = true;
       
       TrbShot shot = sr.getShots(); // get the first shot of the series
       if ( shot != null ) {
         LRUD lrud = computeLRUD( shot.block, list, shot.forward ); // forwrad: at FROM
-        pw.format( Locale.US, "%6d\t0\t1\t1\t1\t%.2f\t%.1f\t%.1f\t%.2f\t%.2f\t%.2f\t%.2f\r\n", ts, 0.0f, 0.0f, 0.0f, lrud.l, lrud.r, lrud.u, lrud.d );
+        if ( TDSetting.TRobotJB ) {
+          pw.format( Locale.US, "%6d\t0\t1\t1\t%.2f\t%.1f\t%.1f\t%.2f\t%.2f\t%.2f\t%.2f\r", ts, 0.0f, 0.0f, 0.0f, lrud.l, lrud.r, lrud.u, lrud.d );
+        } else {
+          pw.format( Locale.US, "%6d\t0\t1\t1\t1\t%.2f\t%.1f\t%.1f\t%.2f\t%.2f\t%.2f\t%.2f\r\n", ts, 0.0f, 0.0f, 0.0f, lrud.l, lrud.r, lrud.u, lrud.d );
+        }
         int tp = 1;
         for ( ; shot != null; shot = shot.next ) {
           DBlock item = shot.block;
@@ -3303,9 +3315,16 @@ public class TDExporter
           lrud = computeLRUD( item, list, (! shot.forward) ); // not forward ==> at TO -- forward: at FROM
           // write block ... TODO
           // series point topo code L A C L R U D comment
-          pw.format( Locale.US, "%6d\t%d\t1\t1\t1\t%.2f\t%.1f\t%.1f\t%.2f\t%.2f\t%.2f\t%.2f", ts, pt, leg.length(), leg.bearing(), leg.clino(), lrud.l, lrud.r, lrud.u, lrud.d );
+          if ( TDSetting.TRobotJB ) {
+            pw.format( Locale.US, "%6d\t%d\t1\t1\t%.2f\t%.1f\t%.1f\t%.2f\t%.2f\t%.2f\t%.2f", ts, pt, leg.length(), leg.bearing(), leg.clino(), lrud.l, lrud.r, lrud.u, lrud.d );
+          } else {
+            pw.format( Locale.US, "%6d\t%d\t1\t1\t1\t%.2f\t%.1f\t%.1f\t%.2f\t%.2f\t%.2f\t%.2f", ts, pt, leg.length(), leg.bearing(), leg.clino(), lrud.l, lrud.r, lrud.u, lrud.d );
+          }
           if ( item.mComment != null ) {
-            pw.format( "\t%s\r\n", item.mComment );
+            pw.format( "\t%s", item.mComment );
+          }
+          if ( TDSetting.TRobotJB ) {
+            pw.format( "\r" );
           } else {
             pw.format( "\r\n" );
           }
@@ -3366,7 +3385,11 @@ public class TDExporter
       // pw.format("# %s\r\n", TDUtil.getDateString("MM dd yyyy") );
 
       //           5 11 15 19 23
-      pw.format( "    -6\t1\t1\t1\t1\r\n" );
+      if ( TDSetting.TRobotJB ) {
+        pw.format( "    -6\t1\r" );
+      } else {
+        pw.format( "    -6\t1\t1\t1\t1\r\n" );
+      }
 
       List< FixedInfo > fixeds = data.selectAllFixed( sid, TDStatus.NORMAL );
       if ( fixeds.size() > 0 ) {
@@ -3375,12 +3398,24 @@ public class TDExporter
           // get TR-station from fixed name
           int pos = fixed.name.indexOf('.');
           int st = (pos < 0)? Integer.parseInt( fixed.name ) : Integer.parseInt( fixed.name.substring( pos+1 ) );
-          pw.format(Locale.US, "    -5\t1\t1\t1\t1\t%.7f\t%.7f\t%.2f\t1\t0\t%d\r\n", fixed.lng, fixed.lat, fixed.h_geo, st ); // series=1 point=0 (station)
+          if ( TDSetting.TRobotJB ) {
+            pw.format(Locale.US, "    -5\t1\t%.7f\t%.7f\t%.2f\t1\t0\t%d\r", fixed.lng, fixed.lat, fixed.h_geo, st ); // series=1 point=0 (station)
+          } else {
+            pw.format(Locale.US, "    -5\t1\t1\t1\t1\t%.7f\t%.7f\t%.2f\t1\t0\t%d\r\n", fixed.lng, fixed.lat, fixed.h_geo, st ); // series=1 point=0 (station)
+          }
         }
       } else {
-        pw.format(Locale.US, "    -5\t1\t1\t1\t1\t0.00\t0.00\t0.00\t1\t0\tnone\r\n" );
+        if ( TDSetting.TRobotJB ) {
+          pw.format(Locale.US, "    -5\t1\t0.00\t0.00\t0.00\t1\t0\tnone\r" );
+        } else {
+          pw.format(Locale.US, "    -5\t1\t1\t1\t1\t0.00\t0.00\t0.00\t1\t0\tnone\r\n" );
+        }
       }
-      pw.format(Locale.US, "(   -5\t1\t1\t1\t1\t%s\r\n", survey_name );
+      if ( TDSetting.TRobotJB ) {
+        // pw.format(Locale.US, "(   -5\t1\t%s\r", survey_name );
+      } else {
+        pw.format(Locale.US, "(   -5\t1\t1\t1\t1\t%s\r\n", survey_name );
+      }
 
       String date = info.date;
       int y = 0;
@@ -3394,9 +3429,12 @@ public class TDExporter
         } catch ( NumberFormatException e ) { }
       }
 
-      pw.format(Locale.US, "    -4\t1\t1\t1\t1\t$s TopoDroid v %s - %s\r\n",   TDUtil.currentDateTimeTRobot(), TDVersion.string() );
-      pw.format("    -3\t1\t1\t1\t1\r\n"); // not used - legacy 
-
+      if ( TDSetting.TRobotJB ) {
+        /* nothing */
+      } else {
+        pw.format(Locale.US, "    -4\t1\t1\t1\t1\t$s TopoDroid v %s - %s\r\n",   TDUtil.currentDateTimeTRobot(), TDVersion.string() );
+        pw.format("    -3\t1\t1\t1\t1\r\n"); // not used - legacy 
+      }
       String team = (info.team != null)? info.team : "-";
       if ( team.length() > 26 ) team = team.substring(0,26);
       // DECLINATION TopoRobot: 0 = provided, 1 = to be calculated ???
@@ -3411,12 +3449,20 @@ public class TDExporter
       if ( comment == null ) comment = "-";
 
       // TRIP
-      pw.format(Locale.US, "    -2\t1\t1\t1\t1\t%02d/%02d/%02d\t%s\t...\t%d\t%.2f\t0\t1\r\n", d, m, y, team, use_decl, decl ); // 0: inclination, 1: color
       //           5 11 15 19 23   31   39   47   55   63   71   79
+      if ( TDSetting.TRobotJB ) {
+        pw.format(Locale.US, "    -2\t1\t%02d\t%02d\t%02d\t%s\t...\t%d\t%.2f\t0\t1\r", d, m, y, team, use_decl, decl ); // 0: inclination, 1: color
+      } else {
+        pw.format(Locale.US, "    -2\t1\t1\t1\t1\t%02d/%02d/%02d\t%s\t...\t%d\t%.2f\t0\t1\r\n", d, m, y, team, use_decl, decl ); // 0: inclination, 1: color
+      }
 
       // CODE
       // azimuth degrees (360), clino degrees, precisions (length, azimuth, clino), tape, winkel
-      pw.format(Locale.US, "    -1\t1\t1\t1\t1\t360\t360\t0.10\t1\t1\t100\t0\r\n" ); 
+      if ( TDSetting.TRobotJB ) {
+        pw.format(Locale.US, "    -1\t1\t360\t360\t0.10\t1\t1\t100\t0\r" ); 
+      } else {
+        pw.format(Locale.US, "    -1\t1\t1\t1\t1\t360\t360\t0.10\t1\t1\t100\t0\r\n" ); 
+      }
       
       TrbStruct trb = makeTrbStations( list );
       // at this point mTrbSeries is populated.

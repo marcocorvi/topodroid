@@ -42,9 +42,15 @@ public class Device
     NAME_BRIC4, NAME_BRIC5, NAME_BRIC5_2,
     NAME_SAP5, NAME_SAP5_2, NAME_SAP6, NAME_SAP6_2,
     NAME_CAVWAY };
+
   public final static String[] mModelNames = { "DistoX A3", "DistoX X310", "DistoX BLE",
     "BRIC 4", "BRIC 5", "BRIC 5",
     "SAP 5",  "SAP 5",  "SAP 6",  "SAP 6",
+    "Cavway X1" };
+
+  public final static String[] mAdvertisedNames = { "DistoX A3", "DistoX X310", "DistoX BLE",
+    "BRIC 4", "BRIC 5", null,
+    "SAP 5",  null, "SAP 6", null,
     "Cavway X1" };
 
   // supported BLE models
@@ -70,17 +76,17 @@ public class Device
   private int mHead;
   private int mTail;
 
-  public final static int DISTO_NONE   =  0; // device types - used as index in the arrays below
-  public final static int DISTO_A3     =  1;
-  public final static int DISTO_X310   =  2;
+  public final static int DISTO_NONE     =  0; // device types - used as index in the arrays below
+  public final static int DISTO_A3       =  1;
+  public final static int DISTO_X310     =  2;
   // public final static int DISTO_X000   =  3; // FIXME VirtualDistoX
   // public final static int DISTO_BLEX   =  4;
-  public final static int DISTO_SAP5   =  5; 
-  public final static int DISTO_BRIC4  =  6;
-  public final static int DISTO_XBLE   =  7; // SIWEI_TIAN
-  public final static int DISTO_SAP6   =  8; 
-  public final static int DISTO_BRIC5  =  9;
-  public final static int DISTO_CAVWAY = 10;
+  public final static int DISTO_SAP5     =  5; 
+  public final static int DISTO_BRIC4    =  6;
+  public final static int DISTO_XBLE     =  7; // SIWEI_TIAN
+  public final static int DISTO_SAP6     =  8; 
+  public final static int DISTO_BRIC5    =  9;
+  public final static int DISTO_CAVWAYX1 = 10;
 
   // SIWEI_TIAN                                       0          1         2          3          4       5       6        7            8       9        10
   final static String[] typeString               = { "Unknown", "A3",     "X310",    "X000",    "BLEX", "SAP5", "BRIC4", "XBLE",      "SAP6", "BRIC5", "CVWY1" };
@@ -102,9 +108,9 @@ public class Device
 
   public boolean isBT( )  { return mType == DISTO_X310  || mType == DISTO_A3; }
   public boolean isBLE( ) { return mType == DISTO_XBLE || mType == DISTO_BRIC4 || mType == DISTO_BRIC5 
-                                || mType == DISTO_SAP5 || mType == DISTO_SAP6  || mType == DISTO_CAVWAY; } // SIWEI_TIAN
+                                || mType == DISTO_SAP5 || mType == DISTO_SAP6  || mType == DISTO_CAVWAYX1; } // SIWEI_TIAN
   public static boolean isBle( int type ) { return type == DISTO_XBLE || type == DISTO_BRIC4 || type == DISTO_BRIC5
-                                               ||  type == DISTO_SAP5 || type == DISTO_SAP6  || type == DISTO_CAVWAY ; } // SIWEI_TIAN
+                                               ||  type == DISTO_SAP5 || type == DISTO_SAP6  || type == DISTO_CAVWAYX1 ; } // SIWEI_TIAN
 
   public boolean isDistoX( )    { return mType == DISTO_X310  || mType == DISTO_A3; }
   public boolean isA3( )        { return mType == DISTO_A3; }
@@ -116,7 +122,8 @@ public class Device
   public boolean isSap( )       { return mType == DISTO_SAP5 || mType == DISTO_SAP6; }
   public boolean isSap5( )      { return mType == DISTO_SAP5; }
   public boolean isSap6( )      { return mType == DISTO_SAP6; } // FIXME_SAP6
-  public boolean isCavway()     { return mType == DISTO_CAVWAY; }
+  public boolean isCavway()     { return mType == DISTO_CAVWAYX1; }
+  public boolean isCavwayX1()   { return mType == DISTO_CAVWAYX1; }
 
   public static boolean isDistoX( int type )    { return type == DISTO_X310 || type == DISTO_A3; }
   public static boolean isA3( int type )        { return type == DISTO_A3; }
@@ -128,12 +135,13 @@ public class Device
   public static boolean isSap( int type )       { return type == DISTO_SAP5 || type == DISTO_SAP6; }
   public static boolean isSap5( int type )      { return type == DISTO_SAP5; }
   public static boolean isSap6( int type )      { return type == DISTO_SAP6; } // FIXME_SAP6
-  public static boolean isCavway( int type )    { return type == DISTO_CAVWAY; }
+  public static boolean isCavway( int type )    { return type == DISTO_CAVWAYX1; }
+  public static boolean isCavwayX1( int type )  { return type == DISTO_CAVWAYX1; }
 
   public static boolean isDistoX( String bt_name ) { return bt_name.startsWith("DistoX"); }
-  public static boolean isSap( String bt_name ) { return bt_name.startsWith("Shetland") || bt_name.startsWith("SAP"); }
-  public static boolean isBric( String bt_name ) { return bt_name.startsWith("BRIC"); }
-  public static boolean isCavway( String bt_name ) { return bt_name.startsWith("CavwayX1"); }
+  public static boolean isSap( String bt_name )    { return bt_name.startsWith("Shetland") || bt_name.startsWith("SAP"); }
+  public static boolean isBric( String bt_name )   { return bt_name.startsWith("BRIC"); }
+  public static boolean isCavway( String bt_name ) { return bt_name.startsWith("Cavway"); }
 
   // SIWEI_TIAN
   // public boolean canSendCommand() { return mType == DISTO_X310 mType == DISTO_XBLE || mType == DISTO_BRIC4 || mType == DISTO_BRIC5 || mType == DISTO_SAP6; }
@@ -190,7 +198,7 @@ public class Device
       if ( bt_name.equals( "SAP6" )  || bt_name.startsWith( NAME_SAP6 )  || bt_name.startsWith( NAME_SAP6_2 ) )  return DISTO_SAP6;
       if ( bt_name.equals( "SAP5" )  || bt_name.startsWith( NAME_SAP5 )  || bt_name.startsWith( NAME_SAP5_2 ) )  return DISTO_SAP5;
       if ( bt_name.equals( "A3" )    || bt_name.equals( NAME_DISTOX1 ) )       return DISTO_A3;
-      if ( bt_name.startsWith( NAME_CAVWAY ) ) return DISTO_CAVWAY;
+      if ( bt_name.startsWith( NAME_CAVWAY ) ) return DISTO_CAVWAYX1;
       // if ( bt_name.equals( "BLEX" ) ) return DISTO_BLEX; // FIXME BLE_5
       // if ( bt_name.equals( "X000" ) || bt_name.equals( "DistoX0" ) ) return DISTO_X000; // FIXME VirtualDistoX
     }

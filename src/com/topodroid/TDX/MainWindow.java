@@ -21,6 +21,7 @@ import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.utils.TDString;
 // import com.topodroid.utils.TDVersion;
+import com.topodroid.utils.CWDfolder;
 
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
@@ -140,6 +141,7 @@ public class MainWindow extends Activity
   private BitmapDrawable  mButtonSap6;
   private BitmapDrawable  mButtonBric4;
   private BitmapDrawable  mButtonBric5;
+  private BitmapDrawable  mButtonCavwayX1;
 
   private final  int BTN_DEVICE = 0;
 
@@ -1004,6 +1006,7 @@ public class MainWindow extends Activity
     mButtonSap6    = MyButton.getButtonBackground( this, res, R.drawable.iz_sap6 );
     mButtonBric4   = MyButton.getButtonBackground( this, res, R.drawable.iz_bric4 );
     mButtonBric5   = MyButton.getButtonBackground( this, res, R.drawable.iz_bric5 );
+    mButtonCavwayX1 = MyButton.getButtonBackground( this, res, R.drawable.iz_cavwayx1 );
 
     // mButton1[2].setOnLongClickListener( this ); // IMPORT ZIP
     setButtonDevice();
@@ -1050,6 +1053,8 @@ public class MainWindow extends Activity
       TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonSap5 );
     } else if ( TDInstance.isDeviceSap6() ) {
       TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonSap6 );
+    } else if ( TDInstance.isDeviceCavwayX1() ) {
+      TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonCavwayX1 );
     } else {
       TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonDistoX0 );
     }
@@ -1394,10 +1399,7 @@ public class MainWindow extends Activity
           String cwd = extras.getString( TDTag.TOPODROID_CWD );
           TDLog.v("got CWD <" + cwd + ">" );
           if ( ! TDString.isNullOrEmpty( cwd ) ) {
-            if ( ! ( cwd.equals("TopoDroid") || cwd.startsWith("TopoDroid-") ) ) {
-              cwd = "TopoDroid-" + cwd;
-            }
-            TopoDroidApp.setCWDPreference( cwd );
+            TopoDroidApp.setCWDPreference( CWDfolder.folderName( cwd ) );
           }
         } else if ( result == RESULT_CANCELED ) {
 	  TDLog.e("could not set CWD");

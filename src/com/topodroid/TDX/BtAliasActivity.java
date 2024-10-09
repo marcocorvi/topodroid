@@ -62,6 +62,7 @@ public class BtAliasActivity extends Activity
 
   private String mModel = null;
   private int mSelectedPos = -1;
+  private int[] mPosToIndex;
   
   private boolean setBtAlias()
   {
@@ -120,7 +121,7 @@ public class BtAliasActivity extends Activity
   @Override
   public void onItemSelected( AdapterView av, View v, int pos, long id ) 
   {
-    mModel = Device.mModels[ pos ];
+    mModel = Device.mModels[ mPosToIndex[pos] ];
     mSelectedPos = pos;
   }
 
@@ -167,6 +168,21 @@ public class BtAliasActivity extends Activity
   {
     super.onCreate( b );
 
+    int cnt = 0;
+    for ( String name : Device.mAdvertisedNames ) {
+      if ( name != null ) ++cnt;
+    }
+    String[] names = new String[ cnt ];
+    mPosToIndex = new int[ cnt ];
+    cnt = 0;
+    for ( int k = 0; k < Device.mAdvertisedNames.length; ++ k ) {
+      if ( Device.mAdvertisedNames[k] != null ) {
+        names[cnt] = Device.mAdvertisedNames[k];
+        mPosToIndex[cnt] = k;
+        ++ cnt;
+      }
+    }
+
     TDandroid.setScreenOrientation( this );
 
     setContentView(R.layout.bt_alias_activity);
@@ -183,7 +199,7 @@ public class BtAliasActivity extends Activity
     mSPmodel = (Spinner) findViewById( R.id.bt_model );
 
     mSPmodel.setOnItemSelectedListener( this );
-    ArrayAdapter adapter = new ArrayAdapter<>( this, R.layout.menu, Device.mModelNames );
+    ArrayAdapter adapter = new ArrayAdapter<>( this, R.layout.menu, names /* Device.mAdvertisedNames */ );
     mSPmodel.setAdapter( adapter );
 
     mBtnAdd = (Button) findViewById( R.id.button_add );

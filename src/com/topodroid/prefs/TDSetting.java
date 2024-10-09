@@ -273,6 +273,9 @@ public class TDSetting
   public static boolean mWallsSplays   = true;  // whether to add splays to Walls export instead of wall shots
   // public static int     mWallsUD     = 80;      // walls UD threshold: Up/Down (angle - degrees)
 
+  // ------------ TOPOROBOT
+  public static boolean TRobotJB = false;  // Jean Botazzi TopoRobot
+
   // ------------ VTOPO
   public static boolean mVTopoSplays = true;    // whether to add splays to VisualTopo export
   public static boolean mVTopoLrudAtFrom = false; 

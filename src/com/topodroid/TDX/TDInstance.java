@@ -119,6 +119,7 @@ public class TDInstance
    */
   public static boolean isDeviceTwoSensors() { return deviceA != null && deviceA.isCavway(); }
 
+
   /** @return primary bluetooth device
    */
   public static Device getDeviceA() 
@@ -180,15 +181,17 @@ public class TDInstance
   /** @return true if the primary device is LE
    * SIWEI_TIAN
    */
-  static boolean isDeviceBLE()    { return deviceA != null && ( deviceA.isBric() || deviceA.isSap() || deviceA.isDistoXBLE()); }
+  static boolean isDeviceBLE()    { return deviceA != null && ( deviceA.isBric() || deviceA.isSap() || deviceA.isDistoXBLE() || deviceA.isCavway() ); }
 
   public static boolean isDeviceCavway()   { return deviceA != null && deviceA.isCavway(); }
+
+  public static boolean isDeviceCavwayX1() { return deviceA != null && deviceA.isCavwayX1(); }
 
   /** @return true if the device is LE
    * @param device   bluetooth device
    * SIWEI_TIAN
    */
-  private static boolean isDeviceBLE( Device device )    { return device != null && ( device.isBric() || device.isSap() || device.isDistoXBLE() || device.isCavway()); }
+  private static boolean isDeviceBLE( Device device )    { return device != null && ( device.isBric() || device.isSap() || device.isDistoXBLE() || device.isCavway() ); }
 
   /** @return true if the connection is set in continuous mode
    */

@@ -181,6 +181,11 @@
       android:layout_height="wrap_content"
       android:text="@string/export_splays"
       / -->
+    <CheckBox android:id="@+id/jean_botazzi"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/jean_botazzi"
+      />
     <EditText android:id="@+id/trobot_name"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"

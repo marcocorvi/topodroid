@@ -21,6 +21,7 @@
   <string name="gpx" translatable="false">GPX</string>
   <!-- string name="geojason" translatable="false">GeoJSOM</string -->
   <string name="shapefile" translatable="false">Shapefile</string>
+  <string name="jean_botazzi" translatable="false">Jean Botazzi</string>
 
   <string name="epsg" translatable="false">EPSG</string>
 

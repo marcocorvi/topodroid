@@ -244,7 +244,7 @@ public class TopoDroidComm
       } else {
         TDLog.e( "TD comm: null Lister");
       }
-      if ( TDInstance.deviceType() == Device.DISTO_CAVWAY) {
+      if ( TDInstance.deviceType() == Device.DISTO_CAVWAYX1) {
         TopoDroidApp.mData.updateShotAMDR(mLastShotId, TDInstance.sid, mProtocol.mAcceleration, mProtocol.mMagnetic, mProtocol.mDip, mProtocol.mRoll, mProtocol.mBackshot);
         if ( TDSetting.mWaitData > 10 ) {
           TDUtil.slowDown( TDSetting.mWaitData );

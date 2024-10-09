@@ -394,6 +394,7 @@ public class ExportDialogShot extends MyDialog
       // case 8: // TopoRobot
       case TDConst.SURVEY_POS_TOPOROBOT:
         {
+          TDSetting.TRobotJB = ((CheckBox)findViewById( R.id.jean_botazzi)).isChecked();
           int first = -1;
           EditText index =  (EditText) findViewById( R.id.trobot_index );
           if ( index.getText() != null ) {
@@ -501,6 +502,8 @@ public class ExportDialogShot extends MyDialog
 
     ((EditText) findViewById( R.id.trobot_name )).setHint( mSurvey + TDPath.TRB );
     ((EditText) findViewById( R.id.trobot_index )).setHint("-1");
+
+    ((CheckBox) findViewById( R.id.jean_botazzi )).setChecked( TDSetting.TRobotJB );
   }
 
 

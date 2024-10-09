@@ -190,6 +190,7 @@ public class DrawingSvg extends DrawingSvgBase
                 if ( blk == null ) continue;
                 normal.add( sh );
               }
+              TDLog.v("SVG splays " + normal.size() );
               writeSplays( out, normal, "splays", "grey", xoff, yoff );
             }
 	  }
