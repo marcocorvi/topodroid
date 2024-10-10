@@ -1216,6 +1216,17 @@ public class DrawingWindow extends ItemDrawer
   // final static String titleLandscape = " L ";
   // final static String titlePortrait  = " P ";
 
+  /** @return true if the index refers to the point "picture" 
+   * @param index   point index (in the symbol library)
+   * @note picture point is always forbidden
+   */
+  @Override
+  public boolean forbidPointPicture( int index )
+  {
+    // return PlotType.isAnySection( mType ) && BrushManager.isPointSection( index );
+    return BrushManager.isPointPicture( index );
+  }
+
   /** @return true if the index refers to the point "section" and the plot is a xsection
    * @param index   point index (in the symbol library)
    * @note section point is always forbidden
@@ -10009,7 +10020,7 @@ public class DrawingWindow extends ItemDrawer
   {
     int index = BrushManager.getPointIndex( mRecentPoint[k] );
     if ( index < 0 ) return false;
-    if ( forbidPointSection( index ) ) return false;
+    if ( forbidPointSection( index ) || forbidPointPicture( index ) ) return false;
     mCurrentPoint = index;
     pointSelected( index, update_recent );
     updateAge( k, mRecentPointAge );

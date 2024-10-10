@@ -284,6 +284,12 @@ abstract class ItemDrawer extends Activity
    */
   public void onRecentSymbolsLoaded() { } 
 
+  /** @return whether the point of the given index is "pictutre" and is forbidden
+   * @param i   point index
+   * @note overridden by DrawingWindow
+   */
+  public boolean forbidPointPicture( int i ) { return false; }
+
   /** @return whether the point of the given index is "section" and is forbidden
    * @param i   point index
    * @note overridden by DrawingWindow

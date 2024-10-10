@@ -371,7 +371,8 @@ class ItemPickerDialog extends MyDialog
       mPointAdapter = new ItemAdapter( mContext, this, SymbolType.POINT, R.layout.item, new ArrayList< ItemSymbol >() );
       int np = mPointLib.size();
       for ( int i=0; i<np; ++i ) {
-      if ( mParent.get().forbidPointSection( i ) ) continue;
+        if ( mParent.get().forbidPointSection( i ) ) continue;
+        if ( mParent.get().forbidPointPicture( i ) ) continue;
         SymbolPoint p = (SymbolPoint)mPointLib.getSymbolByIndex( i );
         if ( p.isConfigEnabled() ) // uncomment to have only config-enabled - or p.isEnabled()
         {
