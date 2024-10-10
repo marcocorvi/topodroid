@@ -9823,7 +9823,7 @@ public class DrawingWindow extends ItemDrawer
       picture.scalePhotoSize( scale );
       return true;
     } else if ( mHotPath instanceof DrawingPointPath ) {
-      int scale = (int)(progress / 40) - 2;
+      int scale = (int)((progress-1)/ 40) - 2;
       ((DrawingPointPath)mHotPath).setScale( scale );
       // TDLog.v("set point scale " + progress + " scale " + scale );
     }

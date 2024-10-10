@@ -29,14 +29,18 @@ public class CWDfolder
 
   public static String folderName( String name )
   {
-    if ( ! name.toUpperCase(Locale.US).startsWith( "TOPODROID" ) ) {
+    if ( name.equals("TopoDroid") ) return name; // "TopoDroid" is OK
+    if ( ! name.toUpperCase(Locale.US).startsWith( "TOPODROID" ) ) { // other folders have name "TopoDroid-XXX"
       return "TopoDroid-" + name;
-    }
-    if ( name.length() > 9 ) {
+    } else if ( name.length() > 9 ) {
       if ( name.charAt(9) == '-' ) {
-        return "TopoDroid" + name.substring(9);
+        if ( name.length() == 10 ) { // "TopoDroid-" not allowed
+          return "TopoDroid";
+        } else {
+          return "TopoDroid" + name.substring(9); // folder "TopoDroid-XXX" for name "TopoDroid-XXX"
+        }
       } 
-      return "TopoDroid-" + name.substring(9);
+      return "TopoDroid-" + name.substring(9); // folder "TopoDroid-XXX" for name "TopoDroidXXX"
     }
     return "TopoDroid";
   }   
