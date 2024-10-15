@@ -1273,7 +1273,7 @@
 
     <string name="title_settings_main">TopoDroid Основные настройки</string>
     <string name="title_settings_export">TopoDroid настройки импорта/экспорта</string>
-    <string name="title_settings_export_enable">Включить настройки экспорта данных</string>
+    <string name="title_settings_export_enable">Выбрать форматы экспорта данных</string>
     <string name="title_settings_import">TopoDroid настройки импорта</string>
     <string name="title_settings_csv">Настройки экспорта в CSV</string>
     <string name="title_settings_svx">Survex настройки экспорта</string>
@@ -1364,7 +1364,7 @@
   <string name="pref_cat_drawing">НАСТРОЙКИ РИСОВАНИЯ </string>
   <string name="pref_cat_import_export">НАСТРОЙКИ ИМПОРТА-ЭКСПОРТА</string>
   <string name="pref_cat_exportimport">ИМПОРТ</string>
-  <string name="pref_cat_exportenable">ВКЛЮЧИТЬ</string>
+  <string name="pref_cat_exportenable">ФОРМАТЫ</string>
 
   <!-- NO string name="pref_cat_exportth">Therion</string -->
   <!-- NO string name="pref_cat_exportdat">Compass</string -->
