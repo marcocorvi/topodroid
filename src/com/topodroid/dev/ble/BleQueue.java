@@ -34,7 +34,7 @@ public class BleQueue
    */
   public void put( int type, byte[] bytes )
   {
-    // TDLog.v( "BLE queue put " + BleUtils.bytesToHexString( bytes ) );
+    TDLog.v( "BLE queue put " + BleUtils.bytesToHexString( bytes ) );
     BleBuffer buffer = new BleBuffer( type, bytes );
     mLock.lock();
     try {

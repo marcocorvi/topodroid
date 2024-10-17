@@ -69,7 +69,7 @@ import android.content.res.Resources;
 public class CavwayComm extends TopoDroidComm
                            implements BleComm 
 {
-  private final static boolean LOG = false;
+  private final static boolean LOG = true;
   private final static boolean USE_MTU = false;
 
   final static int DATA_PRIM = 1;   // same as Bric DATA_PRIM
@@ -111,26 +111,40 @@ public class CavwayComm extends TopoDroidComm
   public CavwayComm(Context ctx,TopoDroidApp app, String address, BluetoothDevice bt_device )
   {
     super( app );
-    if ( LOG ) TDLog.v( "Cavway cstr" );
+    if ( LOG ) TDLog.v( "Cavway comm cstr" );
     // mRemoteAddress = address;
     mRemoteBtDevice  = bt_device;
     mContext = ctx;
     // mNewDataFlag = new Object();
     mQueue = new BleQueue();
+    startConsumerThread();
+    if ( LOG ) TDLog.v( "Cavway comm cstr: addr " + address );
+    // mOps = new ConcurrentLinkedQueue<BleOperation>();
+    // clearPending();
+  }
+
+
+  private void startConsumerThread()
+  {
+    if ( mConsumer != null ) {
+      TDLog.e("Cavway comm start consumer thread with non-null consumer");
+      return;
+    }
     mConsumer = new Thread() { // this is the thread that consumes data on the queue
       @Override public void run() {
         //mThreadConsumerWorking = true;
+        if ( LOG ) TDLog.v("Cavway comm consumer thread start");
         while ( true ) {
-          // TDLog.v( "Cavway comm: Queue size " + mQueue.size );
+          if ( LOG ) TDLog.v( "Cavway comm: Queue size " + mQueue.size );
           BleBuffer buffer = mQueue.get();
           if ( buffer == null ) continue;
           if ( buffer.type == DATA_PRIM ) {
             if ( buffer.data == null) {
-              TDLog.t( "Cavway comm: buffer PRIM with null data");
+              TDLog.t( "Cavway comm: consumer thread - buffer with null data");
               continue;
             }
             // ++mNrReadPackets; this is incremented once for DATA and once for VECTOR by TopoDroidComm
-            if ( LOG ) TDLog.v( "Cavway comm: buffer PRIM read " + mNrReadPackets );
+            if ( LOG ) TDLog.v( "Cavway comm: consumer thread - buffer read " + mNrReadPackets );
             int res = ((CavwayProtocol)mProtocol).packetProcess( buffer.data );
             if ( res == CavwayProtocol.PACKET_FLASH_BYTES_1 ) continue;   // first-half of firmware block received
             synchronized (mNewDataFlag) {
@@ -139,17 +153,26 @@ public class CavwayComm extends TopoDroidComm
               mNewDataFlag.notifyAll(); // wake sleeping threads
             }
           } else if ( buffer.type == DATA_QUIT ) {
-            if ( LOG ) TDLog.v( "Cavway comm: buffer QUIT");
+            if ( LOG ) TDLog.v( "Cavway comm: consumer thread - buffer QUIT");
             break;
           }
+          TDUtil.slowDown(500);
         }
+        if ( LOG ) TDLog.v( "Cavway comm: consumer thread exit");
       }
     };
     mConsumer.start();
-    if ( LOG ) TDLog.v( "Cavway comm: cstr, addr " + address );
-    // mOps = new ConcurrentLinkedQueue<BleOperation>();
-    // clearPending();
   }
+
+  private void stopConsumerThread()
+  {
+    if ( mConsumer != null ) {
+      // put a DATA_QUIT buffer on the queue
+      mQueue.put( DATA_QUIT, new byte[0] );
+    }
+    mConsumer = null;
+  }
+    
 
   /** @return true if it is downloading or in skip-notify mode
    */
@@ -165,11 +188,8 @@ public class CavwayComm extends TopoDroidComm
   @Override
   public void terminate()
   {
-    // TDLog.v("Cavway comm terminate");
-    if ( mConsumer != null ) {
-      // put a DATA_QUIT buffer on the queue
-      mQueue.put( DATA_QUIT, new byte[0] );
-    }
+    if ( LOG ) TDLog.v("Cavway comm terminate");
+    stopConsumerThread();
   }
   // -------------------------------------------------------------
   /**
@@ -189,12 +209,12 @@ public class CavwayComm extends TopoDroidComm
     mLister = lister;
     if ( mRemoteBtDevice == null ) {
       TDToast.makeBad( R.string.ble_no_remote );
-      // TDLog.t(" comm ERROR null remote device");
-      if ( LOG ) TDLog.v( "Cavway comm - connect Device: null = [3b] status DISCONNECTED" );
+      // TDLog.t(" comm ERROR null remote cavway");
+      if ( LOG ) TDLog.v( "Cavway comm - connect cavway: null => status DISCONNECTED" );
       notifyStatus( ConnectionState.CONN_DISCONNECTED );
       return false;
     }
-    if ( LOG ) TDLog.v("Cavway comm - connect device status WAITING");
+    if ( LOG ) TDLog.v("Cavway comm - connect cavway => status WAITING");
     notifyStatus( ConnectionState.CONN_WAITING );
     mReconnect   = true;
     mOps         = new ConcurrentLinkedQueue< BleOperation >();
@@ -206,9 +226,9 @@ public class CavwayComm extends TopoDroidComm
     // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
     // clearPending();
 
-    if ( LOG ) TDLog.v( "Cavway comm connect device = [3a] status WAITING" );
+    if ( LOG ) TDLog.v( "Cavway comm connect cavway: enqueue connect" );
     int ret = enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
-    if ( LOG ) TDLog.v( "Cavway connect device ... " + ret);
+    if ( LOG ) TDLog.v( "Cavway comm connect cavway ... " + ret);
     clearPending();
     return true;
   }
@@ -219,11 +239,11 @@ public class CavwayComm extends TopoDroidComm
    */
   public void connectGatt( Context ctx, BluetoothDevice bt_device ) // called from BleOpConnect
   {
-    if ( LOG ) TDLog.v( "Cavway comm ***** connect GATT");
+    if ( LOG ) TDLog.v( "Cavway comm connect GATT");
     mContext = ctx;
     mCallback.connectGatt( mContext, bt_device );
     // setupNotifications(); // FIXME_Cavway
-    if ( LOG ) TDLog.v( "Cavway comm bond state " + bt_device.getBondState() );
+    if ( LOG ) TDLog.v( "Cavway comm after connect GATT: bond state " + bt_device.getBondState() );
   }
 
   /** connect to the remote Cavway device
@@ -256,20 +276,20 @@ public class CavwayComm extends TopoDroidComm
     mOps.clear();
     // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
     mBTConnected = false;
-    if ( LOG ) TDLog.v( "Cavway comm disconnected status DISCONNECTED - notify");
+    if ( LOG ) TDLog.v( "Cavway comm disconnected => status DISCONNECTED");
     notifyStatus( ConnectionState.CONN_DISCONNECTED );
     // mCallback.closeGatt();
   }
 
   public void connected()
   {
-    if ( LOG ) TDLog.v( "Cavway comm connected - bond state " + mRemoteBtDevice.getBondState() );
+    if ( LOG ) TDLog.v( "Cavway comm connected: bond state " + mRemoteBtDevice.getBondState() );
     clearPending();
   }
 
   public void disconnectGatt()  // called from BleOpDisconnect
   {
-    if ( LOG ) TDLog.v( "Cavway comm disconnect GATT - status DISCONNECTED - close GATT");
+    if ( LOG ) TDLog.v( "Cavway comm disconnect GATT: close GATT => status DISCONNECTED");
     notifyStatus( ConnectionState.CONN_DISCONNECTED );
     mCallback.closeGatt();
   }
@@ -279,7 +299,7 @@ public class CavwayComm extends TopoDroidComm
   @Override
   public boolean disconnectDevice()
   {
-    if ( LOG ) TDLog.v( "Cavway comm ***** disconnect device = connected:" + mBTConnected );
+    if ( LOG ) TDLog.v( "Cavway comm disconnect device: close - connected " + mBTConnected );
     return closeDevice( false );
   }
 
@@ -288,11 +308,11 @@ public class CavwayComm extends TopoDroidComm
   {
     mReconnect = false;
     if ( mBTConnected || force ) {
-      if ( LOG ) TDLog.v( "Cavway close device - connected " + mBTConnected + " force " + force );
+      if ( LOG ) TDLog.v( "Cavway comm close device - connected " + mBTConnected + " force " + force );
       //mThreadConsumerWorking = false;
       mBTConnected = false;
       notifyStatus( ConnectionState.CONN_DISCONNECTED ); // not necessary
-      // TDLog.v( "Cavway comm ***** close device");
+      TDLog.v( "Cavway comm close device: enqueue disconnect => status ISCONNECTED");
       int ret = enqueueOp( new BleOpDisconnect( mContext, this ) ); // exec disconnectGatt
       doNextOp();
       // TDLog.v( "Cavway comm: close Device - disconnect ... ops " + ret );
@@ -312,7 +332,7 @@ public class CavwayComm extends TopoDroidComm
     if ( ! mOps.isEmpty() ) {
       doNextOp();
     } else {
-      if ( LOG ) TDLog.v( "Cavway clear pending: no more ops" );
+      if ( LOG ) TDLog.v( "Cavway comm clear pending: no more ops" );
     }
   }
 
@@ -324,9 +344,9 @@ public class CavwayComm extends TopoDroidComm
   {
     if ( LOG ) {
       if ( mRemoteBtDevice != null ) {
-        TDLog.v( "Cavway enqueue " + op.name() + " bond state " + mRemoteBtDevice.getBondState() );
+        TDLog.v( "Cavway comm enqueue " + op.name() + " bond state " + mRemoteBtDevice.getBondState() );
       } else {
-        TDLog.v( "Cavway enqueue " + op.name() );
+        TDLog.v( "Cavway comm enqueue " + op.name() );
       }
     }
     mOps.add( op );
@@ -363,7 +383,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public void changedMtu( int mtu )
   {
-    if ( LOG ) TDLog.v("Cavway on MTU changed - mtu " + mtu );
+    if ( LOG ) TDLog.v("Cavway comm on MTU changed - mtu " + mtu );
     if ( USE_MTU ) {
       enqueueOp( new BleOpNotify( mContext, this, CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_READ_UUID, true ) );
     }
@@ -375,7 +395,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public void readedRemoteRssi( int rssi )
   {
-    if ( LOG ) TDLog.v("Cavway readed remote RSSI");
+    if ( LOG ) TDLog.v("Cavway comm readed remote RSSI");
     clearPending();
   }
 
@@ -438,14 +458,14 @@ public class CavwayComm extends TopoDroidComm
     if ( uuid_str.equals( BleUtils.CCCD_UUID_STR ) ) { // a notify op - 202301818 using CCCD_UUID_STR
       if ( bytes != null ) {
         if ( bytes[0] != 0 ) { // set notify/indicate
-          if ( LOG ) TDLog.v("Cavway CCC set notify " + bytes[0] + " chrt " + uuid_chrt_str );
+          if ( LOG ) TDLog.v("Cavway comm CCCD set notify " + bytes[0] + " chrt " + uuid_chrt_str );
           // here we may save the UUID of notifying characteristics
         } else { 
-          if ( LOG ) TDLog.v("Cavway CCC clear notify chrt " + uuid_chrt_str );
+          if ( LOG ) TDLog.v("Cavway comm CCCD clear notify chrt " + uuid_chrt_str );
           // here we may clear the UUID of the notifying characteristics
         }
       } else {
-        TDLog.t( "Cavway comm: written null-bytes CCC chrt " + uuid_chrt_str );
+        TDLog.t( "Cavway comm: written null-bytes CCCD chrt " + uuid_chrt_str );
       }
     } else {
       if ( LOG ) TDLog.v( "Cavway comm: written normal desc - bytes " + bytes.length + " UUID " + uuid_str + " chrt " + uuid_chrt_str );
@@ -457,7 +477,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public void completedReliableWrite()
   {
-    if ( LOG ) TDLog.v( "Cavway comm: reliable write" );
+    if ( LOG ) TDLog.v( "Cavway comm: completed reliable write" );
   }
 
   /** read a characteristics
@@ -497,7 +517,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public int servicesDiscovered( BluetoothGatt gatt )
   {
-    if ( LOG ) TDLog.v( "Cavway comm discovered services");
+    if ( LOG ) TDLog.v( "Cavway comm services discovered");
     if ( USE_MTU ) {
       enqueueOp( new BleOpRequestMtu( mContext, this, 400 ) ); // exec requestMtu
     } else {
@@ -521,10 +541,10 @@ public class CavwayComm extends TopoDroidComm
   {
     boolean ret = mCallback.enablePNotify( srvUuid, chrtUuid );
     if ( ! ret ) {
-      TDLog.t("Cavway enable PNotify failed ");
+      TDLog.t("Cavway comm enable PNotify failed ");
       // closeDevice( true );
     } else {
-      if ( LOG ) TDLog.v("XBLE enable PNotify success");
+      if ( LOG ) TDLog.v("Cavway comm: enable PNotify success");
       // 202211XX
       mBTConnected  = true;
       notifyStatus( ConnectionState.CONN_CONNECTED );
@@ -540,7 +560,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public boolean enablePIndicate( UUID srvUuid, UUID chrtUuid )
   {
-    if ( LOG ) TDLog.v("XBLE enable P indicate");
+    if ( LOG ) TDLog.v("Cavway comm: enable P indicate");
     return mCallback.enablePIndicate( srvUuid, chrtUuid );
   }
 
@@ -553,37 +573,37 @@ public class CavwayComm extends TopoDroidComm
   {
     switch ( status ) {
       case BluetoothGatt.GATT_INVALID_ATTRIBUTE_LENGTH:
-        TDLog.t("XBLE COMM: invalid attr length " + extra );
+        TDLog.t("Cavway comm: invalid attr length " + extra );
         break;
       case BluetoothGatt.GATT_WRITE_NOT_PERMITTED:
-        TDLog.t("XBLE COMM: write not permitted " + extra );
+        TDLog.t("Cavway comm: write not permitted " + extra );
         break;
       case BluetoothGatt.GATT_READ_NOT_PERMITTED:
-        TDLog.t("XBLE COMM: read not permitted " + extra );
+        TDLog.t("Cavway comm: read not permitted " + extra );
         break;
       // case BluetoothGatt.GATT_INSUFFICIENT_ENCRYPTION: // 20221026 moved to failure()
-      //   TDLog.t("XBLE COMM: insufficient encrypt " + extra );
+      //   TDLog.t("Cavway comm: insufficient encrypt " + extra );
       //   break;
       // case BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION:
-      //   TDLog.t("XBLE COMM: insufficient auth " + extra );
+      //   TDLog.t("Cavway comm: insufficient auth " + extra );
       //   break;
       case BleCallback.CONNECTION_TIMEOUT:
-        if ( LOG ) TDLog.v( "XBLE comm: connection timeout reconnect ...");
+        if ( LOG ) TDLog.v( "Cavway comm: connection timeout reconnect ...");
         reconnectDevice();
         break;
       case BleCallback.CONNECTION_133: // unfortunately this happens
-        if ( LOG ) TDLog.v( "XBLE comm: connection " + status + " - disconnect");
+        if ( LOG ) TDLog.v( "Cavway comm: connection " + status + " - disconnect");
         TDUtil.slowDown( 111 ); // wait at least 500 msec
         reconnectDevice( );
         break;
       case BleCallback.CONNECTION_19: // unfortunately this too happens (when device is slow respond?)
-        if ( LOG ) TDLog.v( "XBLE comm: connection " + status + " - reconnect");
+        if ( LOG ) TDLog.v( "Cavway comm: connection " + status + " - reconnect");
         // mCallback.clearServiceCache(); // TODO not sure there is a need to clear the service cache
         TDUtil.slowDown( 112 ); // wait at least 500 msec (let xble BT initialize)
         reconnectDevice();
         break;
       default:
-        TDLog.t("XBLE comm ***** ERROR " + status + ": reconnecting ...");
+        TDLog.t("Cavway comm ***** ERROR " + status + ": reconnecting ...");
         reconnectDevice();
     }
     clearPending();
@@ -593,20 +613,20 @@ public class CavwayComm extends TopoDroidComm
    */
   private void reconnectDevice()
   {
-    if ( LOG ) TDLog.v("XBLE reconnect device - close GATT" );
+    if ( LOG ) TDLog.v("Cavway comm: reconnect device - close GATT" );
     mOps.clear();
     // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
     clearPending();
     mCallback.closeGatt();
     notifyStatus( ConnectionState.CONN_DISCONNECTED );
     if ( mReconnect ) {
-      if ( LOG ) TDLog.v( "XBLE reconnect device - reconnecting ... ");
+      if ( LOG ) TDLog.v( "Cavway comm: reconnect device - reconnecting ... ");
       notifyStatus( ConnectionState.CONN_WAITING );
       enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
       doNextOp();
       mBTConnected = true;
     } else {
-      if ( LOG ) TDLog.v( "XBLE reconnect device - disconnected" );
+      if ( LOG ) TDLog.v( "Cavway comm: reconnect device - disconnected" );
       notifyStatus( ConnectionState.CONN_DISCONNECTED );
     }
   }
@@ -621,7 +641,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public void failure( int status, String extra, String what )
   {
-    if ( LOG ) TDLog.v( "XBLE comm Failure: disconnect and close GATT ...");
+    if ( LOG ) TDLog.v( "Cavway comm: Failure: disconnect and close GATT ...");
     // notifyStatus( ConnectionState.CONN_DISCONNECTED ); // this will be called by disconnected
     clearPending();
     closeDevice( false );
@@ -635,7 +655,7 @@ public class CavwayComm extends TopoDroidComm
   @Override
   public void notifyStatus( int status )
   {
-    if ( LOG ) TDLog.v("XBLE notify status " + status + " skip " + mSkipNotify );
+    if ( LOG ) TDLog.v("Cavway comm: notify status " + status + " skip " + mSkipNotify );
     if ( mSkipNotify ) return;
     mApp.notifyListerStatus( mLister, status );
   }
@@ -652,19 +672,19 @@ public class CavwayComm extends TopoDroidComm
     BluetoothGattCharacteristic chrt = null;
     for ( int repeat = 3; repeat > 0; --repeat ) {
       if ( (chrt = mCallback.getWriteChrt( srvUuid, chrtUuid )) != null ) break;
-      if ( LOG ) TDLog.v("XBLE could not get write chrt ... repeat " + repeat );
+      if ( LOG ) TDLog.v("Cavway comm: could not get write chrt ... repeat " + repeat );
       TDUtil.slowDown( 101 ); // 300
     }
     if ( chrt == null ) {
-      TDLog.t("XBLE comm enlist write: null write chrt");
+      TDLog.t("Cavway comm: enlist write: null write chrt");
       return false;
     }
     //Chrt.getPermission() always returns 0, I don't know why. Siwei Tian deleted
     // if ( ! BleUtils.isChrtWrite( chrt ) ) {
-    //   TDLog.t("XLE comm enlist write: cannot write chrt");
+    //   TDLog.t("Cavway comm enlist write: cannot write chrt");
     //   return false;
     // }
-    // TDLog.v( "XBLE comm: enlist chrt write " + chrtUuid.toString() );
+    // TDLog.v( "Cavway comm comm: enlist chrt write " + chrtUuid.toString() );
     if ( addHeader ) {
       byte[] framebytes = new byte[bytes.length + 8];
       framebytes[0] = 'd';
@@ -689,12 +709,12 @@ public class CavwayComm extends TopoDroidComm
   }
 
   /** get DistoX-BLE hw/fw info, and display that on the Info dialog
-   * @param info     XBLE info dialog
+   * @param info     Cavway info dialog
    */
   public void getCavwayInfo( CavwayInfoDialog info )
   {
     if ( info == null ) return;
-    // TDLog.v("XBLE comm get XBLE info");
+    // TDLog.v("Cavway comm get Cavway info");
     if ( readMemory( CavwayDetails.FIRMWARE_ADDRESS, 4 ) != null ) { // ?? there was not 4
       // info.SetVal( mPacketType, ((DistoXBLEProtocol)mProtocol).mFirmVer);
       info.SetVal( CavwayProtocol.PACKET_INFO_FIRMWARE, ((CavwayProtocol)mProtocol).mFirmVer);
@@ -723,14 +743,14 @@ public class CavwayComm extends TopoDroidComm
     // Thread laserThread = new Thread() {
     //   @Override public void run() {
         if ( ! tryConnectDevice( address, lister, 0 ) ) {
-          TDLog.t("XBLE set laser - failed connect device");
+          TDLog.t("Cavway comm set laser - failed connect device");
           closeDevice( true );
           mSkipNotify = false;
           return false; 
         }
         // mNrReadPackets = 0;
         // mPacketToRead = to_read; // set the number of packet to read
-        // TDLog.v("XBLE set laser: " + what + " packet " + to_read + " close BT " + closeBT );
+        // TDLog.v("Cavway comm set laser: " + what + " packet " + to_read + " close BT " + closeBT );
         switch ( what ) {
           case DistoX.DISTOX_OFF:
             sendCommand( (byte)CavwayConst.DISTOX_OFF );
@@ -754,22 +774,22 @@ public class CavwayComm extends TopoDroidComm
             sendCommand( (byte)CavwayConst.CALIB_ON );
             break;
         }
-        if ( LOG ) TDLog.v("XBLE set laser - slow down after send command");
+        if ( LOG ) TDLog.v("Cavway comm set laser - slow down after send command");
         TDUtil.slowDown(601);
         if ( closeBT ) {
           // synchronized ( mNewDataFlag ) {
           //   try {
-          //     if ( LOG ) TDLog.v("XBLE to read " + to_read + " read " + mNrReadPackets );
+          //     if ( LOG ) TDLog.v("Cavway comm to read " + to_read + " read " + mNrReadPackets );
           //     while ( 2 * to_read > mNrReadPackets ) mNewDataFlag.wait( 500 ); // 0.5 seconds
           //   } catch ( InterruptedException e ) { 
-          //     if ( LOG ) TDLog.v("XBLE interrupted setXBLELaser");
+          //     if ( LOG ) TDLog.v("Cavway comm interrupted setXBLELaser");
           //     // e.printStackTrace();
           //   }
           // }
-          if ( LOG ) TDLog.v("XBLE set laser - wait 2 sec before closing device");
+          if ( LOG ) TDLog.v("Cavway comm set laser - wait 2 sec before closing device");
           TDUtil.slowDown( 2001 );
           // syncWait(2000, "laser close device");
-          // TDLog.v("XBLE laser close device");
+          // TDLog.v("Cavway comm laser close device");
           closeDevice( true );
           mSkipNotify = false;
         }
@@ -799,7 +819,7 @@ public class CavwayComm extends TopoDroidComm
   @Override
   public byte[] readMemory( String address, int addr )
   {
-    TDLog.t("XBLE readMemory( String address, int addr ) not implemented");
+    TDLog.t("Cavway comm readMemory( String address, int addr ) not implemented");
     return null;
   }
 
@@ -810,7 +830,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public byte[] readMemory( int addr )
   {
-    // TDLog.v( String.format("XBLE read memory 0x%08x", addr) );
+    // TDLog.v( String.format("Cavway comm read memory 0x%08x", addr) );
     byte[] cmd = new byte[3];
     cmd[0] = MemoryOctet.BYTE_PACKET_REPLY; // 0x38;
     cmd[1] = (byte)(addr & 0xFF);
@@ -824,7 +844,7 @@ public class CavwayComm extends TopoDroidComm
     //     mNewDataFlag.wait( 2000 ); // 2 seconds
     //     // here if the thread gets notified
     //     long millis = System.currentTimeMillis() - start;
-    //     if ( LOG ) TDLog.v("XBLE read-memory waited " + millis + " msec, packet type " + mPacketType );
+    //     if ( LOG ) TDLog.v("Cavway comm read-memory waited " + millis + " msec, packet type " + mPacketType );
     //   } catch ( InterruptedException e ) { 
     //     e.printStackTrace();
     //   }
@@ -844,7 +864,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public byte[] readMemory( int addr, int len )
   {
-    // TDLog.v("XBLE read memory " + addr + " " + len  );
+    // TDLog.v("Cavway comm read memory " + addr + " " + len  );
     if ( len < 0 || len > 124 ) return null;
     byte[] cmd = new byte[4];
     cmd[0] = 0x3d;
@@ -860,7 +880,7 @@ public class CavwayComm extends TopoDroidComm
     //     mNewDataFlag.wait( 2000 );
     //     // here if the thread gets notified
     //     long millis = System.currentTimeMillis() - start;
-    //     if ( LOG ) TDLog.v("XBLE read-memory (len " + len + ") waited " + millis + " msec, packet type " + mPacketType );
+    //     if ( LOG ) TDLog.v("Cavway comm read-memory (len " + len + ") waited " + millis + " msec, packet type " + mPacketType );
     //   } catch ( InterruptedException e ) {
     //     e.printStackTrace();
     //   }
@@ -882,7 +902,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public boolean writeMemory( int addr, byte[] data )
   {
-    // TDLog.v("XBLE write memory " + addr + " bytes " + data.length );
+    // TDLog.v("Cavway comm write memory " + addr + " bytes " + data.length );
     if ( data.length < 4 ) return false;
     byte[] cmd = new byte[7];
     cmd[0] = MemoryOctet.BYTE_PACKET_REQST; // 0x39;
@@ -900,9 +920,9 @@ public class CavwayComm extends TopoDroidComm
     //     long start = System.currentTimeMillis();
     //     mNewDataFlag.wait(2000);
     //     long millis = System.currentTimeMillis() - start;
-    //     if ( LOG ) TDLog.v("XBLE write-memory (len 4) waited " + millis + " msec, packet type " + mPacketType );
+    //     if ( LOG ) TDLog.v("Cavway comm write-memory (len 4) waited " + millis + " msec, packet type " + mPacketType );
     //   } catch ( InterruptedException e ) {
-    //     // TDLog.v( "XBLE interrupted" );
+    //     // TDLog.v( "Cavway comm interrupted" );
     //     // e.printStackTrace();
     //   }
     // }
@@ -922,7 +942,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public boolean writeMemory( int addr, byte[] data, int len)
   {
-    // TDLog.v("XBLE write memory " + addr + " bytes " + data.length + " len " + len);
+    // TDLog.v("Cavway comm write memory " + addr + " bytes " + data.length + " len " + len);
     if ( data.length < len ) return false;
     if ( len < 0 || len > 124 ) return false;
     byte[] cmd = new byte[len+4];
@@ -940,7 +960,7 @@ public class CavwayComm extends TopoDroidComm
     //     long start = System.currentTimeMillis();
     //     mNewDataFlag.wait(2000);
     //     long millis = System.currentTimeMillis() - start;
-    //     if ( LOG ) TDLog.v("XBLE write-memory (len 4) waited " + millis + " msec, packet type " + mPacketType );
+    //     if ( LOG ) TDLog.v("Cavway comm write-memory (len 4) waited " + millis + " msec, packet type " + mPacketType );
     //   } catch ( InterruptedException e ) {
     //     e.printStackTrace();
     //   }
@@ -961,14 +981,14 @@ public class CavwayComm extends TopoDroidComm
    */
   public int readXBLEMemory( String address, int start, int end, ArrayList< MemoryOctet > data, IMemoryDialog dialog )
   { 
-    TDLog.t("XBLE read XBLE memory ...");
+    TDLog.t("Cavway comm read Cavway memory ...");
     if ( ! tryConnectDevice( address, null, 0 ) ) return -1;
     Handler handler = new Handler( Looper.getMainLooper() );
     int cnt = 0; // number of memory location that have been read
     for ( int k = start; k < end; ++k ) {
       MemoryOctet result = new MemoryOctet( k );
       int addr = index2addrXBLE( k );
-      // XBLE can read memory in one shot
+      // Cavway BLE can read memory in one shot
       byte[] res_buf = readMemory( addr, BYTE_PER_OCTET );
       if ( res_buf == null || res_buf.length != BYTE_PER_OCTET ) {
         if ( LOG ) TDLog.v("Cavway fail read memory - index " + k );
@@ -1008,7 +1028,7 @@ public class CavwayComm extends TopoDroidComm
   @Override
   public boolean toggleCalibMode( String address, int type )
   {
-    // TDLog.v("XBLE toggle calib");
+    // TDLog.v("Cavway comm toggle calib");
     boolean ret = false;
     if ( ! tryConnectDevice( address, null, 0 ) ) return false;
     ret = setCalibMode( 2 );  //convert cali mode
@@ -1051,7 +1071,7 @@ public class CavwayComm extends TopoDroidComm
   @Override
   public int downloadData( String address, ListerHandler lister, int data_type, int timeout ) // FIXME_LISTER
   {
-    if ( LOG ) TDLog.v("XBLE comm batch download " + address );
+    if ( LOG ) TDLog.v("Cavway comm batch download " + address );
     // mConnectionMode = 0;
     mDataType = data_type;
     if ( ! tryConnectDevice( address, lister, 0 ) ) return -1; 
@@ -1078,17 +1098,17 @@ public class CavwayComm extends TopoDroidComm
         //   if ( mPacketType == DistoXBLEProtocol.PACKET_MEASURE_DATA ) {
         //     mPacketType = DistoXBLEProtocol.PACKET_NONE; // reset
         //     ret++; // increment counter
-        //     if ( LOG ) TDLog.v("XBLE got packet " + ret );
+        //     if ( LOG ) TDLog.v("Cavway comm got packet " + ret );
         //   } else {
-        //     if ( LOG ) TDLog.v("XBLE no packet " );
+        //     if ( LOG ) TDLog.v("Cavway comm no packet " );
         //     break;
         //   }
         // } catch (InterruptedException e) {
-        //   if ( LOG ) TDLog.v("XBLE interrupted");
+        //   if ( LOG ) TDLog.v("Cavway comm interrupted");
         //   // e.printStackTrace();
         // }
         // long millis = System.currentTimeMillis() - start;
-        // TDLog.v("XBLE download one data took " + millis + " msec" );
+        // TDLog.v("Cavway comm download one data took " + millis + " msec" );
       }
     }
     disconnectDevice();
@@ -1131,7 +1151,7 @@ public class CavwayComm extends TopoDroidComm
   @Override
   public boolean readCoeff( String address, byte[] coeff, boolean second )
   {
-    // TDLog.v("XBLE comm read coeff " + address );
+    // TDLog.v("Cavway comm read coeff " + address );
     if ( coeff == null ) return false;
     int  len  = coeff.length;
     if ( len > 52 ) len = 52; // FIXME force max length of calib coeffs
@@ -1157,7 +1177,7 @@ public class CavwayComm extends TopoDroidComm
   @Override
   public boolean writeCoeff( String address, byte[] coeff, boolean second )
   {
-    // TDLog.v("XBLE comm write coeff " + address );
+    // TDLog.v("Cavway comm write coeff " + address );
     if ( coeff == null ) return false;
     int  len  = coeff.length;
     if( ! tryConnectDevice( address, null, 0 )) return false;
@@ -1202,7 +1222,7 @@ public class CavwayComm extends TopoDroidComm
   {
     final boolean DRY_RUN = false; // DEBUG
 
-    TDLog.v( "XBLE upload firmware " + file.getPath() );
+    TDLog.v( "Cavway comm upload firmware " + file.getPath() );
     // boolean is_log_file = TDLog.isStreamFile();
     // if ( ! is_log_file ) TDLog.setLogStream( TDLog.LOG_FILE ); // set log to file if necessary
     // int ret = 0;
@@ -1225,7 +1245,7 @@ public class CavwayComm extends TopoDroidComm
         try {
           // File fp = new File( filepath );
           if ( ! tryConnectDevice( address, null, 0 ) ) {
-            TDLog.t("XBLE fw upload - failed connect");
+            TDLog.t("Cavway comm fw upload - failed connect");
             ok = false; // return 0;
           }
 
@@ -1238,10 +1258,10 @@ public class CavwayComm extends TopoDroidComm
               int crc16 = calCRC16( buf, 256 );
               //for (int k = 0; k < 256; ++k) buf[k] = (byte) 0xff;  //for simulating the bug
               if (nr <= 0) { // EOF ?
-                TDLog.v("XBLE fw upload: file read " + nr + " - break");
+                TDLog.v("Cavway comm fw upload: file read " + nr + " - break");
                 break;
               }
-              TDLog.v("XBLE fw upload: addr " + addr + " count " + cnt + " crc16 " + crc16 );
+              TDLog.v("Cavway comm fw upload: addr " + addr + " count " + cnt + " crc16 " + crc16 );
               //if(addr < 8) continue;
               int flashaddr = addr + 8;
               cnt += nr;
@@ -1280,7 +1300,7 @@ public class CavwayComm extends TopoDroidComm
                   //     long start = System.currentTimeMillis();
                   //     mNewDataFlag.wait(5000); // allow long wait for firmware
                   //     long millis = System.currentTimeMillis() - start;
-                  //     TDLog.v("XBLE write firmware block waited " + millis + " msec" );
+                  //     TDLog.v("Cavway comm write firmware block waited " + millis + " msec" );
                   //   } catch (InterruptedException e) {
                   //     e.printStackTrace();
                   //   }
@@ -1292,11 +1312,11 @@ public class CavwayComm extends TopoDroidComm
                   int ret_crc16 = ((CavwayProtocol) mProtocol).mCheckCRC;
                   int ret_code  = ((CavwayProtocol) mProtocol).mFwOpReturnCode;
                   if ( ret_crc16 != crc16 || ret_code != 0 ) {
-                    TDLog.v( "XBLE fw upload: fail at " + cnt + " buf[0]: " + buf[0] + " reply addr " + addr + " code " + ret_code + " CRC " + ret_crc16 );
+                    TDLog.v( "Cavway comm fw upload: fail at " + cnt + " buf[0]: " + buf[0] + " reply addr " + addr + " code " + ret_code + " CRC " + ret_crc16 );
                     // ok = false; // without repeat-for uncomment these
                     // break;
                   } else {
-                    String msg1 = String.format( mContext.getResources().getString( R.string.firmware_uploaded ), "XBLE", cnt );
+                    String msg1 = String.format( mContext.getResources().getString( R.string.firmware_uploaded ), "Cavway", cnt );
                     int cnt1 = cnt;
                     TDLog.v( msg1 );
                     if ( progress != null ) {
@@ -1310,30 +1330,30 @@ public class CavwayComm extends TopoDroidComm
                     repeat = 0; // then the for-loop breaks with repeat = -1 (ie. success)
                   }
                 } else {
-                  TDLog.t( "XBLE fw upload: fail at " + cnt + " repeat " + repeat + " packet " + mPacketType );
+                  TDLog.t( "Cavway comm fw upload: fail at " + cnt + " repeat " + repeat + " packet " + mPacketType );
                   // ok = false; // without repeat-for uncomment these two lines
                   // break;
                 }
               }
               if ( repeat == 0 ) {
-                TDLog.t( "XBLE fw upload: fail after 3 repeats at " + cnt );
+                TDLog.t( "Cavway comm fw upload: fail after 3 repeats at " + cnt );
                 ok = false;
                 break;
               }
             }
             fis.close();
           } catch ( EOFException e ) { // OK
-            TDLog.v("XBLE fw update: EOF " + e.getMessage());
+            TDLog.v("Cavway comm fw update: EOF " + e.getMessage());
           } catch ( FileNotFoundException e ) {
-            TDLog.t( "XBLE fw update: Not Found error " + e.getMessage() );
+            TDLog.t( "Cavway comm fw update: Not Found error " + e.getMessage() );
             ok = false;
           }
         } catch ( IOException e ) {
-          TDLog.t( "XBLE fw update: IO error " + e.getMessage() );
+          TDLog.t( "Cavway comm fw update: IO error " + e.getMessage() );
           ok = false;
         }
         closeDevice( false );     //close ble here
-        msg = "XBLE Firmware update: result is " + (ok? "OK" : "FAIL") + " count " + cnt;
+        msg = "Cavway comm Firmware update: result is " + (ok? "OK" : "FAIL") + " count " + cnt;
         TDLog.v( msg );
         int ret = ( ok ? cnt : -cnt );
         TDLog.v( "Dialog Firmware upload result: written " + ret + " bytes of " + len );
@@ -1363,7 +1383,7 @@ public class CavwayComm extends TopoDroidComm
    */
   private byte[] readFirmwareBlock(int addr)
   {
-    TDLog.v("XBLE fw read block at addr " + addr );
+    TDLog.v("Cavway comm fw read block at addr " + addr );
     try {
       for (int repeat = 3; repeat > 0; --repeat ) {
         byte[] req_buf = new byte[3]; // request buffer
@@ -1378,7 +1398,7 @@ public class CavwayComm extends TopoDroidComm
         //     long start = System.currentTimeMillis();
         //     mNewDataFlag.wait(5000); // allow long wait for firmware
         //     long millis = System.currentTimeMillis() - start;
-        //     TDLog.v("XBLE read firmware block waited " + millis + " msec" );
+        //     TDLog.v("Cavway comm read firmware block waited " + millis + " msec" );
         //   } catch (InterruptedException e) {
         //     e.printStackTrace();
         //   }
@@ -1387,17 +1407,17 @@ public class CavwayComm extends TopoDroidComm
           byte[] ret_buf = ((CavwayProtocol) mProtocol).mFlashBytes; // return buffer
           int crc16 = calCRC16( ret_buf, 256 );
           if ( crc16 == ((CavwayProtocol) mProtocol).mCheckCRC ) {
-            TDLog.t("XBLE read fw (" + repeat +") OK");
+            TDLog.t("Cavway comm read fw (" + repeat +") OK");
             return ret_buf; // success
           }
-          TDLog.t("XBLE read fw (" + repeat +") CRC-16 mismatch: got " + crc16 + " expected " + ((CavwayProtocol) mProtocol).mCheckCRC );
+          TDLog.t("Cavway comm read fw (" + repeat +") CRC-16 mismatch: got " + crc16 + " expected " + ((CavwayProtocol) mProtocol).mCheckCRC );
         } else {
-          TDLog.t("XBLE read fw (" + repeat +") bad packet type " + mPacketType );
+          TDLog.t("Cavway comm read fw (" + repeat +") bad packet type " + mPacketType );
         }
       }
-      TDLog.t("XBLE read fw: repeatedly failed packet addr " + addr );
+      TDLog.t("Cavway comm read fw: repeatedly failed packet addr " + addr );
     } catch (Exception e) {
-      TDLog.t("XBLE error " + e.getMessage() );
+      TDLog.t("Cavway comm error " + e.getMessage() );
     }
     return null;
   }
@@ -1408,7 +1428,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public void dumpFirmware( String address, File file, TDProgress progress )
   {
-    TDLog.v( "XBLE fw dump: output filepath " + file.getPath() );
+    TDLog.v( "Cavway comm fw dump: output filepath " + file.getPath() );
     Resources res   = mContext.getResources();
     Handler handler = new Handler();
 
@@ -1428,7 +1448,7 @@ public class CavwayComm extends TopoDroidComm
               for ( int addr = 8; ; addr++ ) {
                 buf = readFirmwareBlock(addr);
                 if ( buf == null || buf.length < 256 ) {
-                  TDLog.t("XBLE fw read - failed at addr " + addr + " cnt " + cnt );
+                  TDLog.t("Cavway comm fw read - failed at addr " + addr + " cnt " + cnt );
                   ok = false;
                   break;
                 }
@@ -1439,7 +1459,7 @@ public class CavwayComm extends TopoDroidComm
                   if ( buf[k] != (byte)0xff ) break;
                 }
                 if ( k == 256 ) break;
-                String msg1 = String.format( mContext.getResources().getString( R.string.firmware_downloaded ), "XBLE", cnt );
+                String msg1 = String.format( mContext.getResources().getString( R.string.firmware_downloaded ), "Cavway", cnt );
                 int cnt1 = cnt;
                 TDLog.v( msg1 );
                 if ( progress != null ) {
@@ -1505,7 +1525,7 @@ public class CavwayComm extends TopoDroidComm
     //     long start = System.currentTimeMillis();
     //     mNewDataFlag.wait(5000); // allow long wait for firmware
     //     long millis = System.currentTimeMillis() - start;
-    //     if ( LOG ) TDLog.v("XBLE read firmware signature waited " + millis + " msec" );
+    //     if ( LOG ) TDLog.v("Cavway comm read firmware signature waited " + millis + " msec" );
     //   } catch (InterruptedException e) {
     //     e.printStackTrace();
     //   }
@@ -1526,16 +1546,16 @@ public class CavwayComm extends TopoDroidComm
    */
   private boolean syncWait( long msec, String msg )
   {
-    // TDLog.v("XBLE sync wait " + msec );
+    // TDLog.v("Cavway comm sync wait " + msec );
     synchronized ( mNewDataFlag ) {
       try {
         long start = System.currentTimeMillis();
         mNewDataFlag.wait( msec );
         long millis = System.currentTimeMillis() - start;
-        if ( LOG ) TDLog.v("XBLE " + msg + " msec " + millis );
+        if ( LOG ) TDLog.v("Cavway comm " + msg + " msec " + millis );
         return true;
       } catch ( InterruptedException e ) {
-        if ( LOG ) TDLog.v( "XBLE interrupted wait " + msg );
+        if ( LOG ) TDLog.v( "Cavway comm interrupted wait " + msg );
         // e.printStackTrace();
         return false;
       }

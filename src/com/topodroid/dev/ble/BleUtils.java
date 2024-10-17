@@ -96,6 +96,7 @@ public class BleUtils
     for ( byte b : bytes ) sb.append( (int)b ).append(" ");
     return sb.toString();
   }
+  */
   
   public static String bytesToHexString( byte[] bytes )
   {
@@ -103,7 +104,6 @@ public class BleUtils
     for ( int k=0; k<bytes.length; ++k ) sb.append( String.format(" %02x", bytes[k] ) );
     return sb.toString();
   }
-  */
 
   /** @return string presentation of a byte array
    * @param bytes  byte array

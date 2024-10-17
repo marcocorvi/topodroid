@@ -2564,13 +2564,15 @@ public class DataHelper extends DataSetObservable
 
   // used in selectAllPhotosShot
   private static final String qjPhotosShot  =
-    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code, p.reftype from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and p.status=? and p.reftype=1";
+    "select p.id, s.id, p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code, p.reftype from photos as p join shots as s on p.shotId=s.id where p.surveyId=? and s.surveyId=? and s.status=? and p.reftype=1";
+  // 20241018 was p.status
   //  "select p.id, COALESCE(s.id, -1), p.title, s.fStation, s.tStation, p.date, p.comment, p.camera, p.code from photos as p left join shots as s on p.shotId=s.id where p.surveyId=? and (s.surveyId=? OR p.shotId=-1) and p.status=? ";
   // private static String qShotPhoto    = "select id, shotId, title, date, comment from photos where surveyId=? AND shotId=? ";
 
   // used in selectAllPhotosPlot
   private static final String qjPhotosPlot  =
-    "select p.id, q.id, p.title, q.name, p.date, p.comment, p.camera, p.code, p.reftype from photos as p join plots as q on p.shotId=q.id where p.surveyId=? and q.surveyId=? and p.status=? and p.reftype=2";
+    "select p.id, q.id, p.title, q.name, p.date, p.comment, p.camera, p.code, p.reftype from photos as p join plots as q on p.shotId=q.id where p.surveyId=? and q.surveyId=? and q.status=? and p.reftype=2";
+  // 20241018 was p.status
 
   // used in selectAllPhotoAtShot
   private static final String qjShotPhotos  =
@@ -2578,7 +2580,8 @@ public class DataHelper extends DataSetObservable
 
   // used in selectAllPhotoXSection
   private static final String qjPhotosXSection  =
-    "select p.id, x.id, p.title, x.name, p.date, p.comment, p.camera, p.code, p.reftype from photos as p join plots as x on p.shotId=x.id where p.surveyId=? AND x.surveyId=? AND p.status=? AND p.reftype=3";
+    "select p.id, x.id, p.title, x.name, p.date, p.comment, p.camera, p.code, p.reftype from photos as p join plots as x on p.shotId=x.id where p.surveyId=? AND x.surveyId=? AND x.status=? AND p.reftype=3";
+  // 20241018 was p.status
 
   // // used in countAllShotPhotos
   // private static final String cntShotPhotos      =
@@ -2998,9 +3001,9 @@ public class DataHelper extends DataSetObservable
 
   /** @return the photos at plots of a survey
    * @param sid      survey ID
-   * @param status   photo status
+   * @param status   plot status [20241018 was photo status]
    */
-  List< PhotoInfo > selectAllPhotosPlot( long sid, long status )
+  private List< PhotoInfo > selectAllPhotosPlot( long sid, long status )
   {
     List< PhotoInfo > list = new ArrayList<>();
     if ( myDB == null ) return list;
@@ -3027,9 +3030,9 @@ public class DataHelper extends DataSetObservable
 
   /** @return the photos at xsections of a survey
    * @param sid      survey ID
-   * @param status   photo status
+   * @param status   xsection status [20241018 was photo status]
    */
-  List< PhotoInfo > selectAllPhotosXSection( long sid, long status )
+  private List< PhotoInfo > selectAllPhotosXSection( long sid, long status )
   {
     List< PhotoInfo > list = new ArrayList<>();
     if ( myDB == null ) return list;
@@ -3056,9 +3059,9 @@ public class DataHelper extends DataSetObservable
 
   /** @return the photos at shots of a survey
    * @param sid      survey ID
-   * @param status   photo status
+   * @param status   shot status [20241018 was photo status]
    */
-  List< PhotoInfo > selectAllPhotosShot( long sid, long status )
+  private List< PhotoInfo > selectAllPhotosShot( long sid, long status )
   {
     List< PhotoInfo > list = new ArrayList<>();
     if ( myDB == null ) return list;
@@ -3086,7 +3089,7 @@ public class DataHelper extends DataSetObservable
 
   /** @return the photos of a survey
    * @param sid      survey ID
-   * @param status   photo status
+   * @param status   ref-item status [20241018 was photo status]
    */
   List< PhotoInfo > selectAllPhotos( long sid, long status )
   {

@@ -29,6 +29,7 @@ import android.content.Context;
 
 public class CavwayProtocol extends TopoDroidProtocol
 {
+  private final static boolean LOG = true;
   private final static int DATA_LEN = 64;
 
   private final CavwayComm mComm;
@@ -90,6 +91,7 @@ public class CavwayProtocol extends TopoDroidProtocol
   public CavwayProtocol(Context ctx, TopoDroidApp app, ListerHandler lister, Device device, CavwayComm comm )
   {
     super( device, ctx );
+    if ( LOG ) TDLog.v("Cavway proto cstr");
     mLister = lister;
     mComm   = comm;
     mRepliedData = new byte[4];
@@ -100,11 +102,17 @@ public class CavwayProtocol extends TopoDroidProtocol
 
   public int handleCavwayPacket(byte [] packetdata)
   {
+    if ( LOG ) {
+      StringBuilder sb = new StringBuilder();
+      for ( byte b : packetdata ) sb.append( String.format(" %02x", b ) );
+      TDLog.v("Cavway proto parse packet - length " + packetdata.length + sb.toString() );
+    }
+
     byte flag = packetdata[1];   //leg, err flag
     double d =  (packetdata[2] << 8) + MemoryOctet.toInt( packetdata[4], packetdata[3] );
-    double b = MemoryOctet.toInt( packetdata[6], packetdata[5] );   //AZM
+    double b = MemoryOctet.toInt( packetdata[6], packetdata[5] );  //AZM
     double c = MemoryOctet.toInt( packetdata[8], packetdata[7] );  //INCL
-    double r = MemoryOctet.toInt( packetdata[10], packetdata[9] );  //ROLL
+    double r = MemoryOctet.toInt( packetdata[10], packetdata[9] ); //ROLL
 
     mTime = MemoryOctet.toLong(packetdata[20],packetdata[19],packetdata[18],packetdata[17]);
     //mTime = ((long)packetdata[20] << 24 | (long)packetdata[19] << 16 | (long)packetdata[18] << 8 | (long)packetdata[17]);
@@ -141,72 +149,67 @@ public class CavwayProtocol extends TopoDroidProtocol
       errorbytes[i] = packetdata[45 + i];
     mComment = parseErrInfo(errorbytes);
 
-    if(packetdata[0] == 0x01)
-      return DataType.PACKET_DATA;
-    else if(packetdata[0] == 0x02)
-      return DataType.PACKET_G;   //definite a new identifier? PACKET_G not suitable
-    else return PACKET_NONE;
+    return ( packetdata[0] == 0x01 )? DataType.PACKET_DATA 
+         : ( packetdata[0] == 0x02 )? DataType.PACKET_G    //definite a new identifier? PACKET_G not suitable
+         : PACKET_NONE;
   }
 
   @SuppressLint("DefaultLocale")
   private String parseErrInfo(byte[] errbytes)
   {
-    String res = "";
-    //string error_type = "";
-    if (errbytes[0] == 0xFF)
-    {
-      res = "No error";
-      return res;
-    }
-    int err_cnt = 0;
-    if (((errbytes[0] >> 7) & 0x1) == 0x00)  //absG error
-    {
-      res += "absG error:";
-      res += " absG1:" + String.format("%.4f", MemoryOctet.toInt(errbytes[4 * err_cnt + 2] ,errbytes[4 * err_cnt + 1]) / ABSSCALE);
-      res += " ";
-      res += " absG2:" + String.format("%.4f", MemoryOctet.toInt(errbytes[4 * err_cnt + 4] ,errbytes[4 * err_cnt + 3]) / ABSSCALE);
-      res += " ";
-      err_cnt++;
-      if (err_cnt == 2) return res;
-    }
-    if (((errbytes[0] >> 6) & 0x1) == 0x00)  //absM error
-    {
-      res += "absM error:";
-      res += " absM1:" + String.format("%.4f", MemoryOctet.toInt(errbytes[4 * err_cnt + 2] ,errbytes[4 * err_cnt + 1]) / ABSSCALE);
-      res += " ";
-      res += " absM2:" + String.format("%.4f", MemoryOctet.toInt(errbytes[4 * err_cnt + 4] ,errbytes[4 * err_cnt + 3]) / ABSSCALE);
-      res += " ";
-      err_cnt++;
-      if (err_cnt == 2) return res;
+    if ( LOG ) {
+      StringBuilder sb = new StringBuilder();
+      for ( byte b : errbytes ) sb.append( String.format(" %02x", b ) );
+      TDLog.v("Cavway proto parse error info - length " + errbytes.length + sb.toString() );
     }
 
-    if (((errbytes[0] >> 5) & 0x1) == 0x00)  //dip error
-    {
+    //string error_type = "";
+    if ( errbytes[0] == 0xFF ) {
+      return "No error";
+    }
+    StringBuilder res = new StringBuilder();
+    int err_cnt = 0;
+    if ( ( (errbytes[0] >> 7) & 0x1 ) == 0x00 ) { //absG error
+      if ( err_cnt == 0 ) res.append( "Error. " );
+      res.append( "G: " );
+      res.append( String.format("%.4f ", MemoryOctet.toInt(errbytes[4 * err_cnt + 2] ,errbytes[4 * err_cnt + 1]) / ABSSCALE) );
+      res.append( String.format("%.4f ", MemoryOctet.toInt(errbytes[4 * err_cnt + 4] ,errbytes[4 * err_cnt + 3]) / ABSSCALE) );
+      err_cnt++;
+      // if (err_cnt == 2) return res.toString();
+    }
+    if ( ( (errbytes[0] >> 6) & 0x1) == 0x00 ) {  //absM error
+      if ( err_cnt == 0 ) res.append( "Error. " );
+      res.append( "M: " );
+      res.append( String.format("%.4f ", MemoryOctet.toInt(errbytes[4 * err_cnt + 2] ,errbytes[4 * err_cnt + 1]) / ABSSCALE) );
+      res.append( String.format("%.4f ", MemoryOctet.toInt(errbytes[4 * err_cnt + 4] ,errbytes[4 * err_cnt + 3]) / ABSSCALE) );
+      err_cnt++;
+      if (err_cnt == 2) return res.toString();
+    }
+
+    if ( ( (errbytes[0] >> 5) & 0x1 ) == 0x00 ){  //dip error
+      if ( err_cnt == 0 ) res.append( "Error. " );
       float ftmp;
-      res += "dip error:";
+      res.append( "Dip: ");
       ftmp = MemoryOctet.toInt(errbytes[4 * err_cnt + 2],errbytes[4 * err_cnt + 1]) * ANGLESCALE;
       if(ftmp > 180) ftmp -= 360f;      //The 2 bytes should be negative here
-      res += " err1:" + String.format("%.2f",ftmp);
-      res += " ";
+      res.append( String.format("%.2f ",ftmp) );
       ftmp = MemoryOctet.toInt(errbytes[4 * err_cnt + 4],errbytes[4 * err_cnt + 3]) * ANGLESCALE;
       if(ftmp > 180) ftmp -= 360f;      //The 2 bytes should be negative here
-      res += " err2:" + String.format("%.2f",ftmp);
-      res += " ";
+      res.append( String.format("%.2f ", ftmp) );
       err_cnt++;
-      if (err_cnt == 2) return res;
+      if (err_cnt == 2) return res.toString();
     }
 
-    if (((errbytes[0] >> 4) & 0x1) == 0x00)  //angle error
-    {
+    if ( ( (errbytes[0] >> 4) & 0x1 ) == 0x00 ) { //angle error
+      if ( err_cnt == 0 ) res.append( "Error. " );
       float ftmp;
-      res += "angle error:";
+      res.append( "Angle: ");
       ftmp = MemoryOctet.toInt(errbytes[4 * err_cnt + 2],errbytes[4 * err_cnt + 1]) * ANGLESCALE;
-      res += String.format("%.2f",ftmp);
-      res += " ";
+      res.append( String.format("%.2f ",ftmp) );
       err_cnt++;
-      if (err_cnt == 2) return res;
+      // if (err_cnt == 2) return res.toString();
     }
-    return res;
+    return res.toString();
   }
 
   /** process a data array
@@ -221,8 +224,9 @@ public class CavwayProtocol extends TopoDroidProtocol
    */
   public int packetProcess( byte[] databuf )
   {
+    if ( LOG ) TDLog.v("Cavway proto handle packet length " + databuf.length );
     if ( databuf.length == 0 ) {
-      TDLog.e("Cavway proto 0-length data");
+      TDLog.e("Cavway proto handle packet: 0-length data");
       return PACKET_NONE;
     }
     if ( (databuf[0] == MemoryOctet.BYTE_PACKET_DATA || databuf[0] == MemoryOctet.BYTE_PACKET_G ) && databuf.length == DATA_LEN ) { // shot / calib data
@@ -241,50 +245,54 @@ public class CavwayProtocol extends TopoDroidProtocol
           }
         }
       } else {
-        TDLog.t("Cavway not downloading");
+        TDLog.t("Cavway proto not downloading ???");
         return PACKET_NONE;
       }
     } else { // command packet
       byte command = databuf[0];
       if ( command == MemoryOctet.BYTE_PACKET_3D || command == MemoryOctet.BYTE_PACKET_3E ) { // 0x3d or 0x3e
+        if ( LOG ) TDLog.v("Cavway proto handle packet command " + command );
         int addr = (databuf[2] << 8 | (databuf[1] & 0xff)) & 0xFFFF;
         int len = databuf[3];
         mRepliedData = new byte[len];
-        TDLog.v("Cavway command packet " + command + " length " + len );
+        if ( LOG ) TDLog.v("Cavway command packet " + command + " length " + len );
         for (int i = 0; i < len; i++)
           mRepliedData[i] = databuf[i + 4];
-        if (addr == CavwayDetails.FIRMWARE_ADDRESS) {
+        if ( addr == CavwayDetails.FIRMWARE_ADDRESS ) {
           mFirmVer = Integer.toString(databuf[4]) + "." + Integer.toString(databuf[5]) + "." + Integer.toString(databuf[6]);
-          TDLog.v("Cavway fw " + mFirmVer );
+          if ( LOG )TDLog.v("Cavway proto fw v. " + mFirmVer );
           return PACKET_INFO_FIRMWARE;
-        } else if (addr == CavwayDetails.HARDWARE_ADDRESS) {
+        } else if ( addr == CavwayDetails.HARDWARE_ADDRESS ) {
           float HardVer = ((float) databuf[4]) / 10;
           mHardVer = Float.toString(HardVer);
+          if ( LOG ) TDLog.v("Cavway proto hw v. " + mHardVer );
           return PACKET_INFO_HARDWARE;
         } else if ( command == MemoryOctet.BYTE_PACKET_3D ) { // 0x3d
+          if ( LOG ) TDLog.v("Cavway proto reply (3D)");
           return PACKET_REPLY;
         } else if ( command == MemoryOctet.BYTE_PACKET_3E ) { // 0x3e
+          if ( LOG ) TDLog.v("Cavway proto write reply (3E)");
           return PACKET_WRITE_REPLY;
         // } else {
         //   return PACKET_ERROR;
         }
       } else if ( command == MemoryOctet.BYTE_PACKET_HW_CODE ) { // 0x3c: signature: hardware ver. - 0x3d 0x3e only works in App mode not in the bootloader mode.
         // 0x3a 0x3b 0x3c are commands work in bootloader mode
-        // TDLog.v("Cavway command packet " + command + " (signature) length " + databuf.length );
+        if ( LOG ) TDLog.v("Cavway proto HW code (3C) (signature) length " + databuf.length );
         if ( databuf.length == 3 ) { 
           mRepliedData[0] = databuf[1];
           mRepliedData[1] = databuf[2];
           return PACKET_SIGNATURE;
         }
       } else if ( databuf[0] == MemoryOctet.BYTE_PACKET_FW_WRITE ) { // 0x3b
-        // TDLog.v("Cavway command packet " + command + " (checksum) length " + databuf.length );
+        if ( LOG ) TDLog.v("Cavway proto FW write (3B) (checksum) length " + databuf.length );
         if ( databuf.length == 6 ) {
           mFwOpReturnCode = databuf[3];
           mCheckCRC = ((databuf[5] << 8) | (databuf[4] & 0xff)) & 0xffff;
           return PACKET_FLASH_CHECKSUM;
         }
       } else if ( command == MemoryOctet.BYTE_PACKET_FW_READ && (databuf.length == 131 || databuf.length == 133)) {   // 0x3a: 3 headers + 128 payloadsda
-        // TDLog.v("Cavway command packet " + command + " (firmware) length " + databuf.length );
+        if ( LOG) TDLog.v("Cavway proto FW read (3B) databuffer length " + databuf.length );
         if ( databuf[2] == 0x00 ) {        // firmware first packet (MTU=247)
           for ( int i=3; i<131; i++) mFlashBytes[i-3] = databuf[i]; // databuf is copied from offset 3
           return PACKET_FLASH_BYTES_1;

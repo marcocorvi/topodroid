@@ -34,11 +34,11 @@ public class BleOpRequestMtu extends BleOperation
   @Override 
   public void execute()
   {
-    // TDLog.v( "BleOp exec request MTU");
     if ( mPipe == null ) { 
       TDLog.e("BleOp request MTU: ERROR null pipe" );
       return;
     }
+    TDLog.v( "BleOp exec request MTU");
     mPipe.requestMtu( mMtu );
   }
 }

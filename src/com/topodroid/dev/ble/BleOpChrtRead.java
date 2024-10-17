@@ -36,11 +36,11 @@ public class BleOpChrtRead extends BleOperation
   @Override 
   public void execute()
   {
-    // TDLog.v( "BleOp exec read on chrt " + mChrtUuid.toString() );
     if ( mPipe == null ) { 
       TDLog.e("BleOp chrt read: ERROR null pipe" );
       return;
     }
+    TDLog.v( "BleOp exec read on chrt " + mChrtUuid.toString() );
     mPipe.readChrt( mSrvUuid, mChrtUuid );
   }
 }

@@ -27,11 +27,11 @@ public class BleOpDisconnect extends BleOperation
   @Override 
   public void execute()
   {
-    // TDLog.v( "BleOp exec disconnect");
     if ( mPipe == null ) { 
       TDLog.e("BleOp disconnect error: null pipe" );
       return;
     }
+    TDLog.v( "BleOp exec disconnect");
     // if ( mPipe != null ) // always true
     mPipe.disconnectGatt();
   }
