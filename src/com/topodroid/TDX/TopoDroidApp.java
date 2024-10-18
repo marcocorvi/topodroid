@@ -1052,6 +1052,7 @@ public class TopoDroidApp extends Application
    */
   static  boolean initEnvironmentSecond( )
   {
+    TDLog.v("App init env [2] already done " + done_init_env_second );
     if ( done_init_env_second ) return true;
     // TDLog.v("App Init Env [2]");
     done_init_env_second = true;
@@ -1084,7 +1085,8 @@ public class TopoDroidApp extends Application
     TDInstance.cbd = TDPath.getCurrentBaseDir();
 
     // TDLog.Profile("TDApp paths");
-    TDPath.setTdPaths( TDInstance.cwd /*, TDInstance.cbd */ );
+    boolean created = TDPath.setTdPaths( TDInstance.cwd /*, TDInstance.cbd */ );
+    TDLog.v("TD app: env init-2 cwd created " + created );
     return true;
   }
 
@@ -1141,6 +1143,7 @@ public class TopoDroidApp extends Application
    */
   void initEnvironmentFirst(  ) // TDPrefHelper prefHlp 
   {
+    TDLog.v("App init env [1] already done " + done_init_env_first );
     if ( done_init_env_first ) return;
     // TDLog.v("App Init Env [1]");
     done_init_env_first = true;
@@ -1253,7 +1256,7 @@ public class TopoDroidApp extends Application
   public static void setCWD( String cwd /* , String cbd */ )
   {
     if ( TDString.isNullOrEmpty( cwd ) ) cwd = TDInstance.cwd;
-    // TDLog.v( "App set CWD " + cwd /* + " CBD " + cbd */ );
+    TDLog.v( "App set CWD " + cwd /* + " CBD " + cbd */ );
 
     if ( cwd.equals( TDInstance.cwd ) ) return;
     // TDInstance.cbd = cbd;
@@ -1261,8 +1264,10 @@ public class TopoDroidApp extends Application
     // TDLog.Log( TDLog.LOG_PATH, "App set cwd <" + cwd + /* "> cbd <" + cbd + */ ">");
     mData.closeDatabase();
 
-    TDPath.setTdPaths( TDInstance.cwd /*, TDInstance.cbd */ );
-    mData.openDatabase( TDInstance.context );
+    boolean created_cwd = TDPath.setTdPaths( TDInstance.cwd /*, TDInstance.cbd */ );
+    boolean created_db  = mData.openSurveyDatabase( TDInstance.context );
+    TDLog.v("TD app: cwd created " + created_cwd + " db created " + created_db );
+    if ( created_db ) done_loaded_palette = false; // 20241018 force reloading palette
 
     if ( mMainActivity != null ) mMainActivity.setTheTitle( );
   }

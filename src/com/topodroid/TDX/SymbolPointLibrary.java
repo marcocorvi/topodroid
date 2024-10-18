@@ -151,7 +151,7 @@ public class SymbolPointLibrary extends SymbolLibrary
   private void loadSystemPoints( Resources res )
   {
     SymbolPoint symbol;
-    // TDLog.v(  "Symbol Point Library::loadSystemPoints()" );
+    // TDLog.v(  "Symbol Point Library: load system points" );
 
     mPointUserIndex = mSymbols.size(); // 0 = no-text, no-value. thname   group fname
     // String user = res.getString( R.string.p_user );
@@ -174,6 +174,10 @@ public class SymbolPointLibrary extends SymbolLibrary
     addSymbol( symbol );
 
     // TDLog.v("PointLibrary user " + mPointUserIndex + " label " + mPointLabelIndex + " section " + mPointSectionIndex );
+    if ( TopoDroidApp.mData != null ) {
+      TopoDroidApp.mData.setSymbolEnabled( "p_" +  USER, true );
+      TopoDroidApp.mData.setSymbolEnabled( "p_" + LABEL, true );
+    }
   }
 
   /** load the user points
@@ -221,12 +225,13 @@ public class SymbolPointLibrary extends SymbolLibrary
             enable = true;
 	  } else if ( TopoDroidApp.mData != null ) {
             if ( ! TopoDroidApp.mData.hasSymbolName( name ) ) {
+              enable = false;
               for ( int k=0; k<DefaultPoints.length; ++k ) { 
                 if ( DefaultPoints[k].equals( thname ) ) { enable = true; break; }
               }
-              // TopoDroidApp.mData.setSymbolEnabled( name, enable ); // CONFIG_ENABLE
-            // } else {
-            //   enable = TopoDroidApp.mData.getSymbolEnabled( name );
+              TopoDroidApp.mData.setSymbolEnabled( name, enable ); // CONFIG_ENABLE
+            } else {
+              enable = TopoDroidApp.mData.getSymbolEnabled( name );
             }
 	  }
           symbol.setEnabled( enable );

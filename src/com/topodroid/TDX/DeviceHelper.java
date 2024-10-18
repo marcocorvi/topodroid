@@ -101,7 +101,7 @@ public class DeviceHelper extends DataSetObservable
   {
     mContext = context;
     // mListeners = listeners; // IF_COSURVEY
-    openDatabase();
+    openDeviceDatabase();
   }
 
   /** close the database
@@ -115,7 +115,7 @@ public class DeviceHelper extends DataSetObservable
 
   /** open the "device10.sqlite" database
    */
-  private void openDatabase()
+  private void openDeviceDatabase()
   {
     String database_name = TDFile.getDeviceDatabase().getAbsolutePath();
     // TDLog.v( "Device DB <" + database_name + ">");
@@ -910,36 +910,36 @@ public class DeviceHelper extends DataSetObservable
   // ----------------------------------------------------------------------
   // symbols
 
-  /** set a symbol enabled flag
-   * @param name    symbol name
-   * @param enabled new enabled flag
-   */
-  void setSymbolEnabled( String name, boolean enabled ) { setValue( name, enabled? TDString.ONE : TDString.ZERO ); }
+  // /** set a symbol enabled flag
+  //  * @param name    symbol name
+  //  * @param enabled new enabled flag
+  //  */
+  // void setSymbolEnabled( String name, boolean enabled ) { setValue( name, enabled? TDString.ONE : TDString.ZERO ); }
 
-  /** @return true is a symbol is enabled
-   * @param name  symbol name
-   */
-  boolean isSymbolEnabled( String name )
-  { 
-    if ( myDB == null ) {
-      TDLog.e( ERROR_NULL_DB + "is symbol enabled" );
-      return true;
-    }
-    String enabled = getValue( name );
-    if ( enabled != null ) {
-      return enabled.equals(TDString.ONE);
-    }
-    if ( myDB != null ) {
-      ContentValues cv = new ContentValues();
-      cv.put( "key",     name );
-      cv.put( "value",   TDString.ONE );     // symbols are enabled by default
-      try {
-        myDB.insert( CONFIG_TABLE, null, cv );
-      } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-      } catch (SQLiteException e ) { logError( "symbol enable " + name, e ); }
-    }
-    return true;
-  }
+  // /** @return true is a symbol is enabled
+  //  * @param name  symbol name
+  //  */
+  // boolean isSymbolEnabled( String name )
+  // { 
+  //   if ( myDB == null ) {
+  //     TDLog.e( ERROR_NULL_DB + "is symbol enabled" );
+  //     return true;
+  //   }
+  //   String enabled = getValue( name );
+  //   if ( enabled != null ) {
+  //     return enabled.equals(TDString.ONE);
+  //   }
+  //   if ( myDB != null ) {
+  //     ContentValues cv = new ContentValues();
+  //     cv.put( "key",     name );
+  //     cv.put( "value",   TDString.ONE );     // symbols are enabled by default
+  //     try {
+  //       myDB.insert( CONFIG_TABLE, null, cv );
+  //     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+  //     } catch (SQLiteException e ) { logError( "symbol enable " + name, e ); }
+  //   }
+  //   return true;
+  // }
 
   // ----------------------------------------------------------------------
   /* Set the current survey/calib name.

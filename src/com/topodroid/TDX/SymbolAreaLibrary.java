@@ -122,6 +122,10 @@ public class SymbolAreaLibrary extends SymbolLibrary
     // String water = res.getString( R.string.p_water );
     symbol = new SymbolArea( res.getString( R.string.tha_water ), WATER, null, WATER, 0x663366ff, null, TileMode.REPEAT, TileMode.REPEAT, true, DrawingLevel.LEVEL_WATER, Symbol.W2D_DETAIL_SHP );
     addSymbol( symbol );
+    if ( TopoDroidApp.mData != null ) {
+      TopoDroidApp.mData.setSymbolEnabled( "a_" +  USER, true );
+      TopoDroidApp.mData.setSymbolEnabled( "a_" + WATER, true );
+    }
   }
 
   void loadUserAreas()
@@ -154,9 +158,9 @@ public class SymbolAreaLibrary extends SymbolLibrary
               for ( int k=0; k<DefaultAreas.length; ++k ) { 
                 if ( DefaultAreas[k].equals( thname ) ) { enable = true; break; }
               }
-              // TopoDroidApp.mData.setSymbolEnabled( name, enable ); // CONFIG_ENABLE
-            // } else {
-            //   enable = TopoDroidApp.mData.getSymbolEnabled( name );
+              TopoDroidApp.mData.setSymbolEnabled( name, enable ); // CONFIG_ENABLE
+            } else {
+              enable = TopoDroidApp.mData.getSymbolEnabled( name );
             }
           }
           symbol.setEnabled( enable );

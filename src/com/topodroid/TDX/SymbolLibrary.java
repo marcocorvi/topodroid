@@ -331,6 +331,7 @@ public class SymbolLibrary
   void makeConfigList()
   {
     if ( TopoDroidApp.mData == null ) return;
+    TDLog.v("Symbol Lib " + mPrefix + ": make config list - symbols " + mSymbols.size() );
     for ( Symbol symbol : mSymbols ) {
       symbol.setConfigEnabled( TopoDroidApp.mData.getSymbolEnabled( mPrefix + symbol.getThName() ) );
       symbol.setEnabledConfig();
@@ -341,7 +342,7 @@ public class SymbolLibrary
   protected void makeConfigEnabledList( )
   {
     if ( TopoDroidApp.mData == null ) return;
-    TDLog.v("makeConfigEnabledList");
+    TDLog.v("Symbol Lib " + mPrefix + ": make config enabled list - symbols " + mSymbols.size() );
     for ( Symbol symbol : mSymbols ) {
       // TopoDroidApp.mData.setSymbolEnabled( mPrefix + symbol.getThName(), symbol.isEnabled() ); // CONFIG_ENABLE
       symbol.setConfigEnabled( ); 
@@ -366,7 +367,7 @@ public class SymbolLibrary
    */
   void makeEnabledListFromStrings( TreeSet<String> symbols, boolean clear )
   {
-    TDLog.v("makeEnabledListFromStrings - palette");
+    TDLog.v("Symbol lib " + mPrefix + ": make enabled list from palette - palette " + symbols.size() );  
     if ( clear ) {
       for ( Symbol symbol : mSymbols ) {
         // TDLog.v("symbol clear " + symbol.getThName() );
@@ -389,7 +390,7 @@ public class SymbolLibrary
 
   void makeEnabledListFromConfig( boolean log )
   {
-    TDLog.v("makeEnabledListFromConfig");
+    TDLog.v("Symbol lib " + mPrefix + ": make enabled list from config" );
     // for ( Symbol symbol : mSymbols ) symbol.setEnabled( false );
     for ( Symbol symbol : mSymbols ) {
       // boolean enabled = TopoDroidApp.mData.getSymbolEnabled( mPrefix + symbol.getThName() );

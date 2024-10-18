@@ -98,6 +98,11 @@ public class SymbolLineLibrary extends SymbolLibrary
     addSymbol( symbol );
 
     // mSymbolNr = mSymbols.size();
+    if ( TopoDroidApp.mData != null ) {
+      TopoDroidApp.mData.setSymbolEnabled( "l_" +    USER, true );
+      TopoDroidApp.mData.setSymbolEnabled( "l_" +    WALL, true );
+      TopoDroidApp.mData.setSymbolEnabled( "l_" + SECTION, true );
+    }
   }
 
   void loadUserLines()
@@ -133,9 +138,9 @@ public class SymbolLineLibrary extends SymbolLibrary
               for ( int k=0; k<DefaultLines.length; ++k ) { 
                 if ( DefaultLines[k].equals( thname ) ) { enable = true; break; }
               }
-              // TopoDroidApp.mData.setSymbolEnabled( name, enable ); // CONFIG_ENABLE
-            // } else {
-            //   enable = TopoDroidApp.mData.getSymbolEnabled( name );
+              TopoDroidApp.mData.setSymbolEnabled( name, enable ); // CONFIG_ENABLE
+            } else {
+              enable = TopoDroidApp.mData.getSymbolEnabled( name );
             }
           }
           symbol.setEnabled( enable );

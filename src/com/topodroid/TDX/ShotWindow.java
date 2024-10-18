@@ -402,7 +402,7 @@ public class ShotWindow extends Activity
       mSurveyAccuracy = new SurveyAccuracy( mMyBlocks ); 
       // if ( mMyBlocks.size() > 4 ) SurveyAccuracy.setBlocks( mMyBlocks );
 
-      mMyPhotos = mApp_mData.selectAllPhotos( TDInstance.sid, TDStatus.NORMAL );
+      mMyPhotos = mApp_mData.selectAllPhotosShot( TDInstance.sid, TDStatus.NORMAL );
       updateShotList( mMyBlocks, mMyPhotos );
       
       setTheTitle( );
@@ -1479,7 +1479,7 @@ public class ShotWindow extends Activity
       mDataAdapter.show_ids = ( vals.length > 3 ) && vals[3].equals( TDString.ONE );
       mFlagLatest = ( vals.length > 4 ) && vals[4].equals( TDString.ONE );
     } else {
-      TDLog.e("no saved data");
+      TDLog.e("Shot Window: no saved data");
     }
   }
     

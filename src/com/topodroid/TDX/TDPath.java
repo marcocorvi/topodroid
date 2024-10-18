@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDString;
+import com.topodroid.utils.CWDfolder;
 
 // import android.provider.DocumentsContract;
 
@@ -242,9 +243,11 @@ public class TDPath
  
   /** set the Current Work Directory
    * @param name   current work directory name, eg, "TopoDroid"
+   * @return true if the folder as been created
    * FIXME FIXME FIXME allow cwd change in private folder
+   * @note used only by TopoDroidApp
    */
-  static void setTdPaths( String name /*, String base */ )
+  static boolean setTdPaths( String name /*, String base */ )
   {
     // TDLog.v( "set paths [4]: " + name );
     // if ( TDandroid.PRIVATE_STORAGE ) { // FIXME this was enabled 20230118
@@ -255,7 +258,8 @@ public class TDPath
     //   setSurveyPaths( null );
     //   return;
     // }
-    if ( name == null || ! name.toLowerCase( Locale.getDefault() ).startsWith( "topodroid" ) ) return;
+    if ( name == null /* || ! CWDfolder.checkTopoDroid( name ) */ ) return false;
+    boolean ret = false;
     File dir = null; // 20230118 (8 lines)
     if ( TDandroid.PRIVATE_STORAGE ) { 
       dir = TDFile.getPrivateDir( name ); // PATH_CB_DIR + "/" + name 
@@ -266,7 +270,7 @@ public class TDPath
     }
     // TDLog.v( "set paths [4]: " + name + ". Dir " + dir.getPath()  );
     try {
-      if ( dir.exists() || dir.mkdirs() ) {
+      if ( dir.exists() || (ret = dir.mkdirs()) ) {
         // TDInstance.takePersistentPermissions( Uri.fromFile( dir ) ); // FIXME_PERSISTENT
 	if ( dir.isDirectory() && dir.canWrite() ) {
 	  ROOT_CW_DIR   = TDandroid.PRIVATE_STORAGE ? name : PATH_CB_DIR + "/" + name;
@@ -285,6 +289,7 @@ public class TDPath
     } catch ( SecurityException e ) { 
       TDLog.e("PATH ext storage security error " + e.getMessage() );
     }
+    return ret;
   }
 
   /** create survey folder, if it does not exist, and subfolders
@@ -653,10 +658,10 @@ public class TDPath
 
   // ---------------------------------------------------------------------------------------
 
-  /** get the list of "topodroid" folders (null if no such folder exists)
+  /** get the list of TopoDroid folders (null if no such folder exists)
    * @param basename   base folder
-   * @return array of dirnames that begin with "topodroid"
-   * @note used only by CWDActivity to list "topodroid" dirs
+   * @return array of dirnames that are not empty
+   * @note used only by CWDActivity to list TopoDroid dirs
    */
   static String[] getTopoDroidFiles( String basename ) // DistoX-SAF
   {
@@ -664,7 +669,7 @@ public class TDPath
     File[] files = dir.listFiles( new FileFilter() {
       public boolean accept( File pathname ) { 
 	if ( ! pathname.isDirectory() ) return false;
-	return ( pathname.getName().toLowerCase( Locale.getDefault() ).startsWith( "topodroid" ) );
+	return ( CWDfolder.isNameOk( pathname.getName() ) );
       }
     } );
     if ( files == null || files.length == 0 ) {

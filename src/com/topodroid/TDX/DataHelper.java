@@ -203,7 +203,7 @@ public class DataHelper extends DataSetObservable
     // TDLog.v("DB cstr");
     // mApp     = app;
     // mListeners = listeners; // IF_COSURVEY
-    this.openDatabase( context );
+    this.openSurveyDatabase( context );
   }
 
   // /** cstr MOVE_TO_6
@@ -227,34 +227,35 @@ public class DataHelper extends DataSetObservable
 
   /** open or create the default database
    * @param context context
+   * @return true if the database has been created
    *
    * open the database, if successful check if it needs to be updated
    * otherwise create the database
    */
-  synchronized void openDatabase( Context context )
+  synchronized boolean openSurveyDatabase( Context context )
   {
     String db_name = TDPath.getDatabase(); // DistoX-SAF
     if ( myDB != null ) {
       TDLog.v( "DB open: app already has database " + db_name );
-      return;
+      return false;
     }
     try {
       // TDLog.v("DB ... try to open RW " + db_name);
       myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE );
       if ( myDB != null ) {
         checkUpgrade();
-        return;
+        return false;
       }
     } catch ( SQLiteException e ) {
       // if it OK to fail
-      TDLog.e( "ERROR DB " + db_name + " open RW: " + e.getMessage() );
+      TDLog.e( "Fail open DB R/W: " + e.getMessage() );
     }
     
     try {
-      // TDLog.v("DB ... try to open RW+CREATE " + db_name );
+      TDLog.v("DB ... try to open RW+CREATE " + db_name );
       myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.CREATE_IF_NECESSARY );
       if ( myDB != null ) {
-        // TDLog.v( "DB opened: create tables");
+        TDLog.v( "DB opened: create tables");
         DistoXOpenHelper.createTables( myDB );
         myDB.setVersion( TDVersion.DATABASE_VERSION );
       } else {
@@ -264,6 +265,7 @@ public class DataHelper extends DataSetObservable
       TDLog.e( "ERROR DB " + db_name + " open/create: " + e.getMessage() );
       myDB = null;
     }
+    return (myDB != null); // at this point if myDB has been created if it is not null
   }
 
   /** check if the database need upgrading - in case upgrade it
@@ -3023,7 +3025,7 @@ public class DataHelper extends DataSetObservable
                  ) );
       } while (cursor.moveToNext());
     }
-    TDLog.v( "select All Photos Plot list size " + list.size() );
+    // TDLog.v( "select All Photos Plot list size " + list.size() );
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return list;
   }
@@ -3052,7 +3054,7 @@ public class DataHelper extends DataSetObservable
                  ) );
       } while (cursor.moveToNext());
     }
-    TDLog.v( "select All Photos XSection list size " + list.size() );
+    // TDLog.v( "select All Photos XSection list size " + list.size() );
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return list;
   }
@@ -3060,8 +3062,9 @@ public class DataHelper extends DataSetObservable
   /** @return the photos at shots of a survey
    * @param sid      survey ID
    * @param status   shot status [20241018 was photo status]
+   * @note used also by the ShotWindow
    */
-  private List< PhotoInfo > selectAllPhotosShot( long sid, long status )
+  List< PhotoInfo > selectAllPhotosShot( long sid, long status )
   {
     List< PhotoInfo > list = new ArrayList<>();
     if ( myDB == null ) return list;
@@ -3082,7 +3085,7 @@ public class DataHelper extends DataSetObservable
                  ) );
       } while (cursor.moveToNext());
     }
-    TDLog.v(  "select All Photos Shot list size " + list.size() );
+    // TDLog.v(  "select All Photos Shot list size " + list.size() );
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return list;
   }
@@ -3093,6 +3096,7 @@ public class DataHelper extends DataSetObservable
    */
   List< PhotoInfo > selectAllPhotos( long sid, long status )
   {
+    TDLog.v("DB select all photos");
     List< PhotoInfo > list = new ArrayList<>();
     if ( myDB != null ) {
       list.addAll( selectAllPhotosShot( sid, status ) );
