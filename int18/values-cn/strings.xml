@@ -634,7 +634,7 @@
     <string name="shot_name">测射 %1$s</string>
     <!-- UNUSED string name="shot_length">length</string -->
     <string name="shot_note">注释</string>
-    <string name="shot_reverse">反测</string>
+    <!-- UNUSED string name="shot_reverse">反测</string -->
     <string name="shot_to">到</string>
 
     <string name="station">测点</string>

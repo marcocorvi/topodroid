@@ -584,7 +584,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="shot_name">Messung %1$s</string>
   <!-- UNUSED string name="shot_length">Länge</string -->
   <string name="shot_note">Notizen</string>
-  <string name="shot_reverse">Richtung umkehren</string>
+  <!-- UNUSED string name="shot_reverse">Richtung umkehren</string -->
   <string name="shot_to">bis</string>
   <string name="station">Messpunkt</string>
   <string name="station_ask">Messpunkt in Skizze anlegen?</string>

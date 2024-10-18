@@ -632,7 +632,7 @@
     <string name="shot_name">Замер %1$s</string>
     <!-- UNUSED string name="shot_length">длина</string -->
     <string name="shot_note">заметки</string>
-    <string name="shot_reverse">развернуть</string>
+    <!-- UNUSED string name="shot_reverse">развернуть</string -->
     <string name="shot_to">№ НА</string>
 
     <string name="station">пикет</string>

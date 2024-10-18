@@ -28,7 +28,7 @@
       android:orientation="horizontal"
       >
       <Button android:id="@+id/button_EW"
-        style="@style/button_default"
+        style="@style/label_default"
         android:layout_weight="20"
 	android:text="@string/east"
 	android:layout_marginEnd="@dimen/marginh"
@@ -51,7 +51,7 @@
       android:orientation="horizontal"
       >
       <Button android:id="@+id/button_NS"
-        style="@style/button_default"
+        style="@style/label_default"
         android:layout_weight="20"
 	android:text="@string/north"
 	android:layout_marginEnd="@dimen/marginh"

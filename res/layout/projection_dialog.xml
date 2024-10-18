@@ -66,7 +66,7 @@
           android:layout_width="0dp"
           android:layout_weight="20"
           android:layout_marginEnd="@dimen/marginh"
-          style="@style/button_default"
+          style="@style/label_default"
           android:text="@string/dash"
         />
         <EditText android:id="@+id/textform"
@@ -82,7 +82,7 @@
           android:layout_width="0dp"
           android:layout_weight="20"
           android:layout_marginEnd="@dimen/marginh"
-          style="@style/button_default"
+          style="@style/label_default"
           android:text="@string/plus"
         />
         <Button android:id="@+id/btn_ok"

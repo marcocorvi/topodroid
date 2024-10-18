@@ -641,7 +641,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="shot_name">Измерване %1$s</string>
     <!-- UNUSED string name="shot_length">дължина</string -->
     <string name="shot_note">забележка</string>
-    <string name="shot_reverse">обръщане</string>
+    <!-- UNUSED string name="shot_reverse">обръщане</string -->
     <string name="shot_to">до</string>
 
     <string name="station">репер</string>

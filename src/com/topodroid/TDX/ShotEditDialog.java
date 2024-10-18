@@ -525,7 +525,9 @@ class ShotEditDialog extends MyDialog
     mCBlegNext.setOnClickListener( this );
     mCBallSplay.setOnClickListener( this );
 
-    mButtonReverse = (Button)  findViewById(R.id.shot_reverse );
+    LinearLayout mLayoutReverse = (LinearLayout) findViewById(R.id.layout_reverse );
+    mButtonReverse = new MyButton( mContext, this, size, R.drawable.iz_swap );
+    mLayoutReverse.addView( mButtonReverse );
 
     mRBleft   = (CheckBox) findViewById(R.id.left );
     mRBvert   = (CheckBox) findViewById(R.id.vert );
@@ -572,7 +574,7 @@ class ShotEditDialog extends MyDialog
     }
     mButtonBack.setOnClickListener( this );
 
-    mButtonReverse.setOnClickListener( this );
+    // mButtonReverse.setOnClickListener( this );
 
     mRBleft.setOnClickListener( this );
     mRBvert.setOnClickListener( this );

@@ -637,7 +637,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="shot_name">Mérés %1$s</string>
     <!-- UNUSED string name="shot_length">hossz</string -->
     <string name="shot_note">megjegyzés</string>
-    <string name="shot_reverse">visszamérés</string>
+    <!-- UNUSED string name="shot_reverse">visszamérés</string -->
     <string name="shot_to">hová</string>
 
     <string name="station">mérési pont</string>

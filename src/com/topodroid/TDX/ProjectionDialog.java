@@ -529,7 +529,14 @@ class ProjectionDialog extends MyDialog
   private void setAzimuth( int a, boolean edit_text )
   {
     mAzimuth = a;
-    if ( mAzimuth < 0 || mAzimuth >= 360 ) { mAzimuth = 0; edit_text = true; }
+    while ( mAzimuth < 0 ) {
+       mAzimuth += 360;
+       edit_text = true; 
+    }
+    while ( mAzimuth >= 360 ) { 
+      mAzimuth -= 360;
+      edit_text = true; 
+    }
     mETazimuthChanged = ! edit_text;
     computeReferences(); // this calls setTheTitle
     mSeekBar.setProgress( ( mAzimuth < 180 )? 200 + mAzimuth : mAzimuth - 160 );

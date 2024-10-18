@@ -633,7 +633,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="shot_name">Visée %1$s</string>
     <!-- UNUSED string name="shot_length">longueur</string -->
     <string name="shot_note">Note</string>
-    <string name="shot_reverse">Inverse</string>
+    <!-- UNUSED string name="shot_reverse">Inverse</string -->
     <string name="shot_to">À ou VERS</string>
 
     <string name="station">Station</string>

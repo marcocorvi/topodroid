@@ -21,7 +21,7 @@
   <string name="gpx" translatable="false">GPX</string>
   <!-- string name="geojason" translatable="false">GeoJSOM</string -->
   <string name="shapefile" translatable="false">Shapefile</string>
-  <string name="jean_botazzi" translatable="false">Jean Botazzi</string>
+  <string name="jean_botazzi" translatable="false">J. Botazzi</string>
 
   <string name="epsg" translatable="false">EPSG</string>
 
@@ -62,6 +62,7 @@
   <string name="arrow_right" translatable="false">&#x21a6;</string>
   <string name="arrow_up" translatable="false">&#x21a5;</string>
   <string name="arrow_down" translatable="false">&#x21a7;</string>
+  <!-- UNUSED string name="double_arrow" translatable="false">&#x21d4;</string -->
   <string name="input_length" translatable="false">&#x2190;&#x2192;</string>
   <string name="input_depth" translatable="false">&#x21d3;</string>
   <string name="input_azimuth" translatable="false">&#x2191;N</string>

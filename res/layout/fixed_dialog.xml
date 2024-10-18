@@ -208,12 +208,12 @@
       style="@style/button_default"
       android:layout_marginEnd="@dimen/marginh"
       android:text="@string/button_clear_convert"
-      />
+      /> <!-- label_default -->
     <Button android:id="@+id/fix_convert"
       style="@style/button_default"
       android:layout_marginEnd="@dimen/marginh"
       android:text="@string/button_convert"
-      />
+      /> <!-- label_default -->
     <TextView android:id="@+id/fix_crs" 
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 

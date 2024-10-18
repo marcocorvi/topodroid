@@ -594,7 +594,7 @@ no campo abaixo e aperte o botão.
   <string name="shot_name">Medida %1$s</string>
   <!-- UNUSED string name="shot_length">comprimento</string -->
   <string name="shot_note">comentário</string>
-  <string name="shot_reverse">inverter</string>
+  <!-- UNUSED string name="shot_reverse">inverter</string -->
   <string name="shot_to">Para</string>
   <string name="station">Base referência</string>
   <string name="station_ask">Inserir base no arquivo th2 exportado?</string>

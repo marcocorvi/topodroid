@@ -637,7 +637,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="shot_name">Toma %1$s</string>
     <!-- UNUSED string name="shot_length">Longitud de la toma</string -->
     <string name="shot_note">Nota de toma</string>
-    <string name="shot_reverse">Toma Inversa</string>
+    <!-- UNUSED string name="shot_reverse">Toma Inversa</string -->
     <string name="shot_to">Toma hasta</string>
 
     <string name="station">Estación</string>

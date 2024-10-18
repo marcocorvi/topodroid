@@ -630,7 +630,7 @@
     <string name="shot_name">Battuta %1$s</string>
     <!-- UNUSED string name="shot_length">lunghezza</string -->
     <string name="shot_note">nota</string>
-    <string name="shot_reverse">inverso</string>
+    <!-- UNUSED string name="shot_reverse">inverso</string -->
     <string name="shot_to">a</string>
 
     <string name="station">caposaldo</string>

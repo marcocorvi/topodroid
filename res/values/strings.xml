@@ -651,7 +651,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="shot_name">Shot %1$s</string>
     <!-- UNUSED string name="shot_length">length</string -->
     <string name="shot_note">note</string>
-    <string name="shot_reverse">reverse</string>
+    <!-- UNUSED string name="shot_reverse">reverse</string -->
     <string name="shot_to">to</string>
 
     <string name="station" copyable="fr">station</string>

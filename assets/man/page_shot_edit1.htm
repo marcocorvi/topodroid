@@ -11,18 +11,18 @@ It displays
  for downloaded shots. DistoX backshots are marked with '*'</li>
 <li>differences of acceleration, magnetic field, and magnetic dip from the respective average values. Only for DistoX2 shots</li>
 <li>date and time of the shot</li>
-<li><b>stations</b></li>
+<li><b>stations</b> and
+<ul>
 <li><b>left arrow</b>: load previous leg</li>
-<li><b>reverse</b>: swap stations</li>
+<li><b>reverse</b>i button: swap stations</li>
 <li><b>right arrow</b>: load next leg</li>
+</ul>
+</li>
 <li>shot <b>comment</b></li>
 <li>profile <b>extend</b>: "left", "vertical", "right". The "extend" is "unset" if none is checked</li>
 </ul><br><p>
 
-For BRIC shots the date and time are the values downloaded with the shot data from the device.
-For other devices and for manually entered shots they are the time of download/insertion.<br><p> 
-
-Buttons:
+Properties buttons:
 <ul>
 <li><img src="btn_duplicate.png" width="36" border="1" > "duplicate" flag [A]</li>
 <li><img src="btn_surface.png" width="36" border="1" > "surface" flag [A]</li>
@@ -34,12 +34,19 @@ Buttons:
 <li><img src="btn_splays_no.png" width="36" border="1" > apply the station change to all splays in the group of the splay shot.</li>
 <li><img src="btn_plan_profile.png" width="36" border="1" > hide the splay in either the plan, or the profile view, or both (splay only) [A]</li>
 <li><img src="btn_xsplay.png" width="36" border="1" > clear (or set) splay class for this splay, and possibly the previous splays [A]</li>
-<li><b>OK</b>: save the changes and close the dialog</li>
-<li><b>Save</b>: save the changes without closing the dialog</li>
-<li><b>More/Less</b>: show/hide additional actions [A]</li>
+</ul>
+
+Action buttons:
+<ul>
 <li><b>Cancel</b>: close the dialog without saving</li>
+<li><b>More/Less</b>: show/hide additional actions [A]</li>
+<li><b>Save</b>: save the changes without closing the dialog</li>
+<li><b>OK</b>: save the changes and close the dialog</li>
 </ul>
 <br><p>
+
+For BRIC shots the date and time are the values downloaded with the shot data from the device.
+For other devices and for manually entered shots they are the time of download/insertion.<br><p> 
 
 The shot flags, "duplicate", "surface" and "commented", are mutually exclusive.
 The survey data info take into account these flags.
