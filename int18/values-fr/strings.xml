@@ -1175,6 +1175,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="export_suffix_hint">suffixe</string>
     <string name="export_roundtrip">Aller-retour</string>
     <string name="export_share">Partager</string>
+    <!-- TODO string name="export_overwrite">Overwrite</string -->
     <!-- UNUSED string name="export_scale_png">Resolution</string -->
     <string name="export_scale_th">Echelle 1 :</string>
     <string name="export_spacing_th">Espacement des points</string>

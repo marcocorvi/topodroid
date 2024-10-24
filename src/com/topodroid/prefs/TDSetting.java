@@ -254,6 +254,7 @@ public class TDSetting
   public static boolean mZipWithSymbols       = false;  // whether to add/load symbols to/from archive
   public static boolean mZipShare             = false;  // whether to share exported zip
   public static boolean mZipShareCategory     = false;  // DISTOX_ZIP_SHARE_CATEGORY
+  public static boolean mZipOverwrite         = true;   // whether to overwrite exported zip
 
   // ------------ THERION
   public static final float THERION_SCALE = 196.8503937f; // 200 * 39.3700787402 / 40;

@@ -403,7 +403,7 @@ public class Archiver
    * @param uri   output URI (if null the default output zipfile is used)
    * @return true if successful
    */
-  boolean archive( TopoDroidApp app, Uri uri )
+  boolean archiveSurvey( TopoDroidApp app, Uri uri )
   {
     if ( TDInstance.sid < 0 ) return false;
     DataHelper app_data = TopoDroidApp.mData;
@@ -420,7 +420,15 @@ public class Archiver
     try {
       String pathname;
       if ( uri == null ) {
-        mZipname = TDPath.getSurveyZipFile( survey );
+        if ( TDSetting.mZipOverwrite ) {
+          mZipname = TDPath.getSurveyZipFile( survey );
+        } else {
+          int k = 0;
+          do {
+            ++ k;
+            mZipname = TDPath.getSurveyZipFile( String.format("%s.%d", survey, k) );
+          } while ( TDPath.existPath( mZipname ) );
+        }
         TDPath.checkPath( mZipname );
         zos = new ZipOutputStream( new BufferedOutputStream( TDFile.getFileOutputStream( mZipname ) ) );
       } else {

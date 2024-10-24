@@ -1181,6 +1181,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="export_suffix_hint">utótag</string>
     <string name="export_roundtrip">Roundtrip</string><!--Roundtrip-->
     <string name="export_share">Megosztás</string>
+    <!-- TODO string name="export_overwrite">Overwrite</string -->
     <!-- UNUSED string name="export_scale_png">Felbontás</string -->
     <string name="export_scale_th">Skála 1 :</string>
     <string name="export_spacing_th">Pont távolság</string>

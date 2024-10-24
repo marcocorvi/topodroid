@@ -33,6 +33,7 @@ class ExportZipTask extends AsyncTask< Void, Void, Boolean >
    * @param app       application
    * @param uri       zip output URI (or null to use default zipfile)
    * @note if uri is null the zip is exported in the default path (topodroid/zip/survey.zip)
+   *       currently (v. 6.3.0) uri is always null
    */
   ExportZipTask( Context context, TopoDroidApp app, Uri uri )
   {
@@ -44,7 +45,7 @@ class ExportZipTask extends AsyncTask< Void, Void, Boolean >
   boolean doInForeground( )
   {
     mArchiver = new Archiver( );
-    boolean ret = mArchiver.archive( mApp, mUri );
+    boolean ret = mArchiver.archiveSurvey( mApp, mUri );
     onPostExecute( ret );
     return ret;
   }
@@ -58,7 +59,7 @@ class ExportZipTask extends AsyncTask< Void, Void, Boolean >
     // TopoDroidApp.doExportDataSync( TDSetting.mExportShotsFormat );
     TDLog.v("export zip task exec ...");
     mArchiver = new Archiver( );
-    return mArchiver.archive( mApp, mUri );
+    return mArchiver.archiveSurvey( mApp, mUri );
   }
 
   // @Override

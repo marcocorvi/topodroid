@@ -1175,6 +1175,7 @@
     <string name="export_suffix_hint">后缀</string>
     <string name="export_roundtrip">往返</string>
     <string name="export_share">分享到其他App</string>
+    <!-- TODO string name="export_overwrite">Overwrite</string -->
     <!-- UNUSED string name="export_scale_png">分辨率</string -->
     <string name="export_scale_th">比例 1 :</string>
     <string name="export_spacing_th">点间距</string>

@@ -1090,6 +1090,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="export_suffix_hint">Suffix</string>
   <string name="export_roundtrip">Rundschluss</string>
   <string name="export_share">Share</string>
+    <!-- TODO string name="export_overwrite">Overwrite</string -->
   <!-- UNUSED string name="export_scale_png">Auflösung</string -->
   <string name="export_scale_th">Massstab 1 :</string>
   <string name="export_spacing_th">Punktabstand</string>

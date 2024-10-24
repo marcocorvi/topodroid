@@ -1172,6 +1172,7 @@
     <string name="export_suffix_hint">суффикс</string>
     <string name="export_roundtrip">Roundtrip</string>
     <string name="export_share">Поделиться</string>
+    <!-- TODO string name="export_overwrite">Overwrite</string -->
     <!-- UNUSED string name="export_scale_png">Разрешение</string -->
     <string name="export_scale_th">Масштаб 1 :</string>
     <string name="export_spacing_th">Расстояние между точками</string>

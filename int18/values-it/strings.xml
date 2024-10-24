@@ -1171,6 +1171,7 @@
     <string name="export_suffix_hint">suffisso</string>
     <string name="export_roundtrip">Round-trip</string>
     <string name="export_share">Condividi</string>
+    <!-- TODO string name="export_overwrite">Overwrite</string -->
     <!-- UNUSED string name="export_scale_png">Risoluzione</string -->
     <string name="export_scale_th">Scala 1 :</string>
     <string name="export_spacing_th">Spazio fra punti Therion</string>

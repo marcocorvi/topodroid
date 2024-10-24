@@ -354,6 +354,7 @@ public class ExportDialogShot extends MyDialog
         {
           // TDSetting.mZipWithSymbols = ((CheckBox) findViewById( R.id.zip_symbols )).isChecked();
           TDSetting.mZipShare = ((CheckBox) findViewById( R.id.zip_share )).isChecked();
+          TDSetting.mZipOverwrite = ((CheckBox) findViewById( R.id.zip_overwrite )).isChecked();
         }
         break;
       case TDConst.SURVEY_POS_COMPASS: // Compass
@@ -465,6 +466,7 @@ public class ExportDialogShot extends MyDialog
   private void initOptions()
   {
     ((CheckBox) findViewById( R.id.zip_share )).setChecked( TDSetting.mZipShare );
+    ((CheckBox) findViewById( R.id.zip_overwrite )).setChecked( TDSetting.mZipOverwrite );
 
     // ((CheckBox) findViewById( R.id.compass_prefix )).setChecked( TDSetting.mExportStationsPrefix );
     ((CheckBox) findViewById( R.id.compass_splays )).setChecked( TDSetting.mCompassSplays );

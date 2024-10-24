@@ -367,6 +367,15 @@ public class TDPath
     checkPath( TDFile.getTopoDroidFile( pathname ) ); // DistoX-SAF
   }
 
+  /** @return true if a file exists
+   * @param pathname   file pathname
+   */ 
+  public static boolean existPath( String pathname )
+  {
+    if ( pathname == null ) return false;
+    return existPath( TDFile.getTopoDroidFile( pathname ) ); // DistoX-SAF
+  }
+
   // ------------------------------------------------------------------
 
   /** @return array of tdconfig files full pathnames
@@ -965,6 +974,15 @@ public class TDPath
     if ( ! fpp.mkdirs() ) {
       TDLog.e("check path: failed mkdirs " + fpp.getPath() );
     }
+  }
+
+  /** @return true if a file exists
+   * @param fp   file 
+   */ 
+  private static boolean existPath( File fp )
+  {
+    if ( fp == null ) return false;
+    return fp.exists();
   }
 
   /** compose a file pathname: directory/name extension

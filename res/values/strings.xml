@@ -1196,6 +1196,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="export_suffix_hint">suffix</string>
     <string name="export_roundtrip" copyable="all">Round-trip</string>
     <string name="export_share">Share</string>
+    <string name="export_overwrite">Overwrite</string>
     <!-- UNUSED string name="export_scale_png">Resolution</string -->
     <string name="export_scale_th">Scale 1 :</string>
     <string name="export_spacing_th">Point spacing</string>

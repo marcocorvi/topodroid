@@ -24,6 +24,11 @@
     android:layout_marginTop="@dimen/marginvbig"
     android:layout_marginBottom="@dimen/marginvbig"
     >
+    <CheckBox android:id="@+id/zip_overwrite"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_overwrite"
+      />
     <CheckBox android:id="@+id/zip_share"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"

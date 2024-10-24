@@ -1184,6 +1184,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="export_suffix_hint">наставка</string>
     <string name="export_roundtrip">Отиване и връщане</string>
     <string name="export_share">Сподели</string>
+    <!-- TODO string name="export_overwrite">Overwrite</string -->
     <!-- UNUSED string name="export_scale_png">Resolution</string -->
     <string name="export_scale_th">Мащаб 1 :</string>
     <string name="export_spacing_th">Разстояние между точките</string>
