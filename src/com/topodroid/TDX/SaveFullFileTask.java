@@ -74,7 +74,7 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
 
   protected String doInBackground(Void... arg0)
   {
-    // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
+    // synchronized( TDPath.mTdrLock ) // FIXME-THREAD_SAFE
     // File temp = null;
     // try {
     //   temp = File.createTempFile( "tmp", null, TDFile.getFile( mDirname ) );

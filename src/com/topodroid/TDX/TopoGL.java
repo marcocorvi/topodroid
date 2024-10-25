@@ -1485,6 +1485,7 @@ public class TopoGL extends Activity
       String path = TDPath.getTdconfigDir() + "/" + pathname + ".tdconfig";
       TDLog.v("TopoGL input stream from tdconfig " + pathname + " path " + path );
       Toast.makeText( this, String.format( getResources().getString( R.string.reading_file ), path ), Toast.LENGTH_SHORT ).show();
+      // synchronized( TDPath.mTdrLock ) // FIXME-THREAD_SAFE ?
       try {
         // final InputStream is = new FileInputStream( path );
         InputStream is = TDFile.getTopoDroidFileInputStream( path );

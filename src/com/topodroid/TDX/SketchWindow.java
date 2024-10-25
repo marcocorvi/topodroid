@@ -657,6 +657,7 @@ public class SketchWindow extends ItemDrawer
     int version = 0;
     String name = "";
     DataInputStream dis = null;
+    // synchronized( TDPath.mTdrLock ) // FIXME-THREAD_SAFE ?
     try {
       dis = TDFile.getTopoDroidFileInputStream( filename );
       while ( ( what = dis.read() ) != 'E' ) {

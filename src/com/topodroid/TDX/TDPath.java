@@ -91,7 +91,6 @@ public class TDPath
   static String getSymbolAreaDirname()  { return DIR_AREA; }  // "symbol/area"
 
   // LOCKS --------------------------------------------------------
-  // final static Object mTherionLock   = new Object(); // FIXME-THREAD_SAFE
   final static Object mXSectionsLock = new Object();
   final static Object mSelectionLock = new Object();
   final static Object mCommandsLock  = new Object();
@@ -100,6 +99,7 @@ public class TDPath
   final static Object mGridsLock     = new Object();
   // final static Object mFixedsLock    = new Object();
   // final static Object mSelectedLock  = new Object();
+  final static Object mTdrLock       = new Object(); // FIXME-THREAD_SAFE synchronize tdr file save / open
 
   // PATHS ------------------------------------------------------------
 

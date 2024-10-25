@@ -145,7 +145,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
     // boolean do_binary = (TDSetting.mBinaryTh2 && mSuffix != PlotSave.EXPORT ); // TDR BINARY
 
     // TDLog.v( "save plot file task bkgr start");
-    // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
+    // synchronized( TDPath.mTdrLock ) // FIXME-THREAD_SAFE
     // TDLog.v( "save scrap files " + mFullName + " suffix " + mSuffix );
 
     if ( mManager == null && mPaths == null ) return false;
@@ -277,10 +277,11 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       assert( mInfo != null );
       String filename = TDPath.getTdrFileWithExt( mFullName ) + TDPath.BCK_SUFFIX;
 
-      // TDLog.v( "rotate backups " + filename + " rotate " + mRotate );
-      if ( mRotate > 0 ) {
-        TDPath.rotateBackups( filename, mRotate ); // does not do anything if mRotate <= 0
-      }
+      // moved below
+      // // TDLog.v( "rotate backups " + filename + " rotate " + mRotate );
+      // if ( mRotate > 0 ) {
+      //   TDPath.rotateBackups( filename, mRotate ); // does not do anything if mRotate <= 0
+      // }
 
       long now  = System.currentTimeMillis();
       TDFile.clearExternalTempDir( 600000 ); // clean the cache ten minutes before now
@@ -312,13 +313,19 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         return false;
       } else {
         // TDLog.v( "save binary completed. file " + mFullName );
+        // TDLog.v( "rotate backups " + filename + " rotate " + mRotate );
+        synchronized( TDPath.mTdrLock ) { // FIXME-THREAD_SAFE
+          if ( mRotate > 0 ) {
+            TDPath.rotateBackups( filename, mRotate ); // does not do anything if mRotate <= 0
+          }
 
-        String filename1 = TDPath.getTdrFileWithExt( mFullName );
-        if ( ! TDFile.renameTopoDroidFile( filename1, filename1 + TDPath.BCK_SUFFIX ) ) {
-          // TDLog.v("failed rename old " + filename1 + TDPath.BCK_SUFFIX );
-        }
-        if ( ! TDFile.renameExternalTempFile( tempname1, filename1 ) ) {
-          TDLog.e("failed rename itempfile to " + filename1 );
+          String filename1 = TDPath.getTdrFileWithExt( mFullName );
+          if ( ! TDFile.renameTopoDroidFile( filename1, filename1 + TDPath.BCK_SUFFIX ) ) {
+            // TDLog.v("failed rename old " + filename1 + TDPath.BCK_SUFFIX );
+          }
+          if ( ! TDFile.renameExternalTempFile( tempname1, filename1 ) ) {
+            TDLog.e("failed rename itempfile to " + filename1 );
+          }
         }
         return true;
       }

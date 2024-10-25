@@ -87,7 +87,7 @@ public class DrawingIO
   //   //                      + " 7: " + BrushManager.mOrientation[7] );
 
   //   // TDLog.v( "drawing I/O load therion " + filename );
-  //   // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
+  //   synchronized( TDPath.mTdrLock ) // FIXME-THREAD_SAFE
   //   {
   //     try {
   //       TDLog.Log( TDLog.LOG_IO, "load plot from Therion file " + filename );
@@ -709,8 +709,7 @@ public class DrawingIO
       if ( pos > 0 ) survey_name = survey_name.substring(0, pos);
     // }
     // TDLog.v( "drawing I/O load stream " + filename );
-    // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
-    {
+    synchronized ( TDPath.mTdrLock ) { // FIXME-THREAD_SAFE
       try {
         // FileInputStream fis = TDFile.getFileInputStream( filename );
         // BufferedInputStream bfis = new BufferedInputStream( fis );
@@ -867,8 +866,7 @@ public class DrawingIO
 
     // TDLog.Log( TDLog.LOG_IO, "load outline tdr file " + filename );
     // TLog.v("drawing I/O load outline stream " + filename + " name " + ((name == null)? "null" : name) );
-    // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
-    {
+    synchronized( TDPath.mTdrLock ) { // FIXME-THREAD_SAFE
       try {
         // File file = TDFile.getTopoDroidFile( filename );
         // FileInputStream fis = new FileInputStream( file );
@@ -2052,7 +2050,7 @@ public class DrawingIO
     // String areas  = "";
     String th_str;
 
-    // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
+    // synchronized( TDPath.mTdrLock ) // FIXME-THREAD_SAFE
     {
       // try {
         // TDLog.Log( TDLog.LOG_IO, "tdr to Therion. file " + file.getPath() );
@@ -2232,7 +2230,7 @@ public class DrawingIO
 
     ArrayList< DrawingPath > paths = new ArrayList<>();
 
-    // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
+    // synchronized( TDPath.mTdrLock ) // FIXME-THREAD_SAFE
     {
       try {
         // TDLog.v( "export cSurvey. survey " + survey + " X-section file " + filename );
