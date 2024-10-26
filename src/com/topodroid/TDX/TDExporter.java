@@ -1555,7 +1555,7 @@ public class TDExporter
           // BufferedWriter bcw = TDFile.getMSwriter( "thconfig", surveyname + ".thconfig", "text/thconfig" );
           BufferedWriter bcw = new BufferedWriter( new FileWriter( thconfig ) );
           PrintWriter pcw = new PrintWriter( bcw );
-          pcw.format("encoding uft-8\n");
+          pcw.format("encoding utf-8\n");
           pcw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
           pcw.format("source \"./%s.th\"\n\n", info.name );
           pcw.format("layout topodroid\n");
