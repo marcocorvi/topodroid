@@ -23,6 +23,7 @@ import com.topodroid.dev.DataType;
 import com.topodroid.dev.TopoDroidProtocol;
 // import com.topodroid.dev.distox.DistoX;
 import com.topodroid.dev.distox.IMemoryDialog;
+import com.topodroid.TDX.TDInstance;
 
 // import java.lang.ref.WeakReference;
 
@@ -226,7 +227,7 @@ public class DistoXProtocol extends TopoDroidProtocol
       if ( no_timeout ) {
         available = 8;
       } else { // do timeout
-        if ( TDSetting.mZ6Workaround ) {
+        if ( TDSetting.mZ6Workaround || ( TDInstance.deviceType() == Device.DISTO_A3 ) ) {
           available = getAvailable( 200, 2*max_timeout, data_type );
         } else {
           // while ( ( available = mIn.available() ) == 0 && timeout < max_timeout )

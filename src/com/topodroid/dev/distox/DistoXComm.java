@@ -682,7 +682,7 @@ public class DistoXComm extends TopoDroidComm
     TDLog.v( "DistoX comm: download data: ready");
     int ret = -1; // failure
     if ( connectSocket( address, data_type ) ) {
-      // TDLog.v("DistoX comm: notify connected" );
+      TDLog.v("DistoX comm: notify connected" );
       notifyStatus( lister, ConnectionState.CONN_CONNECTED );
       DistoXProtocol protocol = (DistoXProtocol)mProtocol;
       if ( TDSetting.mHeadTail ) {
@@ -693,18 +693,19 @@ public class DistoXComm extends TopoDroidComm
         TDLog.v( "download data HT: A3 " + a3 + " to-read " + to_read );
         if ( to_read == 0 ) {
           ret = to_read;
-	    } else if ( to_read < 0 ) {
-	      int error_code = /* (protocol == null)? DistoX.DISTOX_ERR_PROTOCOL : */ // protocol always not null
-                           protocol.getErrorCode();
-	      if ( error_code < 0 ) {
+        } else if ( to_read < 0 ) {
+          int error_code = /* (protocol == null)? DistoX.DISTOX_ERR_PROTOCOL : */ // protocol always not null
+            protocol.getErrorCode();
+          if ( error_code < 0 ) {
             ret = error_code;
-	      } else { // read with timeout
+          } else { 
+            TDLog.v("read with timeout " + timeout );
             startCommThread( -1, lister, data_type, timeout );
             while ( mCommThread != null ) {
               TDUtil.slowDown( 100 );
             }
             ret = getNrReadPackets();
-	  }
+          }
         } else {
           // FIXME asyncTask ?
           // resetNtReadPackets(); // done in CommThread cstr 
@@ -726,14 +727,15 @@ public class DistoXComm extends TopoDroidComm
 	  // }
         }
       } else {
+        TDLog.v("data download whithout HeadTail - timeout " + timeout );
         startCommThread( -1, lister, data_type, timeout );
         while ( mCommThread != null ) {
           TDLog.v( "download wait" );
           TDUtil.slowDown( 100 );
         }
-        TDLog.v( "download done" );
         // cancelCommThread(); // called by closeSocket() which is called by destroySocket()
         ret = getNrReadPackets();
+        TDLog.v( "download done - nr. read packets " + ret );
       }
     } else {
       TDLog.e( "download data: fail to connect socket");

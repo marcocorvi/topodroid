@@ -14,7 +14,7 @@ package com.topodroid.dev;
 import com.topodroid.dev.distox.DistoX;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.utils.TDUtil;
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.TDX.ListerHandler;
 
 // import android.os.Handler;
@@ -77,7 +77,7 @@ public class CommThread extends Thread
         // TDLog.v( "RF comm loop: read " + mComm.getNrReadPackets() + " to-read " + toRead );
         
         int res = mComm.readingPacket( (toRead >= 0), mDataType );
-        // TDLog.v( "RF comm read_packet returns " + res );
+        TDLog.v( "RF comm read_packet returns " + res );
         if ( res == DataType.PACKET_NONE ) {
           if ( toRead == -1 ) {
             doWork = false;
