@@ -1100,7 +1100,7 @@ no campo abaixo e aperte o botão.
   <string name="export_suffix_hint">sufixo</string>
   <string name="export_roundtrip">Circuito</string>
   <string name="export_share">Compartilhar</string>
-    <!-- TODO string name="export_overwrite">Overwrite</string -->
+  <string name="export_overwrite">Sobreescrever</string>
   <!-- UNUSED string name="export_scale_png">Resolução</string -->
   <string name="export_scale_th">Escala 1 :</string>
   <string name="export_spacing_th">Espaçamento pontos</string>
