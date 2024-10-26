@@ -3315,10 +3315,16 @@ public class TDExporter
           lrud = computeLRUD( item, list, (! shot.forward) ); // not forward ==> at TO -- forward: at FROM
           // write block ... TODO
           // series point topo code L A C L R U D comment
+          float b = leg.bearing();
+          float c = leg.clino();
+          if ( ! shot.forward ) {
+            c = -c;
+            if ( b >= 180 ) { b -= 180; } else { b += 180; }
+          }
           if ( TDSetting.TRobotJB ) {
-            pw.format( Locale.US, "%6d\t%d\t1\t1\t%.2f\t%.1f\t%.1f\t%.2f\t%.2f\t%.2f\t%.2f", ts, pt, leg.length(), leg.bearing(), leg.clino(), lrud.l, lrud.r, lrud.u, lrud.d );
+            pw.format( Locale.US, "%6d\t%d\t1\t1\t%.2f\t%.1f\t%.1f\t%.2f\t%.2f\t%.2f\t%.2f", ts, pt, leg.length(), b, c, lrud.l, lrud.r, lrud.u, lrud.d );
           } else {
-            pw.format( Locale.US, "%6d\t%d\t1\t1\t1\t%.2f\t%.1f\t%.1f\t%.2f\t%.2f\t%.2f\t%.2f", ts, pt, leg.length(), leg.bearing(), leg.clino(), lrud.l, lrud.r, lrud.u, lrud.d );
+            pw.format( Locale.US, "%6d\t%d\t1\t1\t1\t%.2f\t%.1f\t%.1f\t%.2f\t%.2f\t%.2f\t%.2f", ts, pt, leg.length(), b, c, lrud.l, lrud.r, lrud.u, lrud.d );
           }
           if ( item.mComment != null ) {
             pw.format( "\t%s", item.mComment );
