@@ -1530,6 +1530,33 @@ public class TDExporter
     return item_stretch;
   }
 
+  /** count spaces in a string
+   * @param str   input string
+   * @return number of spaces
+   */
+  static int countSpaces(String str) {
+    int spaceCount = 0;
+    for (int i = 0; i < str.length(); i++) {
+      if (str.charAt(i) == ' ') {
+        spaceCount++;
+      }
+    }
+    return spaceCount;
+  }
+
+  /** replace the last space with a slash
+   * @param str   input string
+   * @return output string
+   */
+  static String replaceLastSpaceWithSlash(String str) {
+    int lastSpaceIndex = str.lastIndexOf(' ');
+    if (lastSpaceIndex != -1) {
+      return str.substring(0, lastSpaceIndex) + "/" + str.substring(lastSpaceIndex + 1);
+    } else {
+      return str; // No space found, return original string
+    }
+  }
+
   /** export survey data in Therion format (.th)
    * @param bw      output writer
    * @param sid     survey ID
@@ -1653,29 +1680,20 @@ public class TDExporter
       }
       pw.format("    date %s \n", info.date );
       if ( info.team != null && info.team.length() > 0 ) {
-        if ( embed_thconfig ) { 
-          String[] names = info.team.replaceAll(",", " ").replaceAll(";", " ").replaceAll("\\s+", " ").split(" ");
-          int len = names.length;
-          int k = 0;
-          while ( k<len ) {
-            pw.format("    team \"");
-            String name = names[k];
-            int kk = k;
-            while ( k < len-1 && ( name.length() == 1 || name.endsWith(".") ) ) {
-              pw.format("%s", name );
-              if ( name.length() == 1 ) pw.format(".");
-              ++k;
-              name = names[k];
-            } 
-            if ( k > kk ) {
-              pw.format(" %s\"\n", name );
-            } else {
-              pw.format("%s\"\n", name );
-            }
-            ++k;
+        String[] names = info.team.replaceAll("[;|\\/]", ",").replaceAll("\\s+", " ").split(",");
+        int len = names.length;
+        int k = 0;
+        while ( k<len ) {
+          String name = names[k].trim();
+          if ( name.length() == 0 ) {
+            continue;
           }
-        } else {
-          pw.format("    # team %s \n", info.team );
+          int spaceCount = countSpaces(name);
+          if (spaceCount > 1) {
+            name = replaceLastSpaceWithSlash(name);
+          }
+          pw.format("    team \"%s\"\n", name);
+          ++k;
         }
       }
 
@@ -2078,7 +2096,19 @@ public class TDExporter
 
       pw.format("*begin %s ", info.name );      writeSurvexEOL(pw);
       pw.format("  *date %s ", info.date );     writeSurvexEOL(pw);
-      pw.format("  *team \"%s\" ", info.team ); writeSurvexEOL(pw);
+      if ( info.team != null && info.team.length() > 0 ) {
+        String[] names = info.team.replaceAll("[;|\\/]", ",").replaceAll("\\s+", " ").split(",");
+        int len = names.length;
+        int k = 0;
+        while ( k<len ) {
+          String name = names[k].trim();
+          if ( name.length() == 0 ) {
+            continue;
+          }
+          pw.format("  *team \"%s\" ", name);  writeSurvexEOL(pw);
+          ++k;
+        }
+      }
       writeSurvexLine(pw, "  *units tape " + uls );
       writeSurvexLine(pw, "  *units compass " + uas );
       writeSurvexLine(pw, "  *units clino " + uas );
