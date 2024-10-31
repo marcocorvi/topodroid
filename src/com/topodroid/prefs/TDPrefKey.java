@@ -401,7 +401,7 @@ public class TDPrefKey
   public static String[] EXPORT_ENABLE = { // ZIP always enabled
     "EXPORT_DATA_COMPASS",    // 0
     "EXPORT_DATA_CSURVEY",
-    "EXPORT_DATA_GHTOPO",
+    // "EXPORT_DATA_GHTOPO",
     // "EXPORT_DATA_GROTTOLF",
     // "EXPORT_DATA_POCKETTOPO",
     "EXPORT_DATA_POLYGON",    // 3
@@ -424,7 +424,7 @@ public class TDPrefKey
   public static int[] EXPORT_ENABLEtitle = {
     R.string.compass,
     R.string.csurvey,
-    R.string.ghtopo,
+    // R.string.ghtopo,
     // R.string.grottolf,
     // R.string.pockettopo,
     R.string.polygon,
@@ -450,7 +450,7 @@ public class TDPrefKey
   public static String[] EXPORT_ENABLEdef = {
     TRUE,
     FALSE,
-    FALSE,
+    // FALSE,
     // FALSE,
     // FALSE,
     FALSE,

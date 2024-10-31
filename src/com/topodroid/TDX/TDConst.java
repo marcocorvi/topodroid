@@ -40,7 +40,7 @@ public class TDConst
   public static final int SURVEY_FORMAT_PLG = 16; // Polygon   CaveFile
   public static final int SURVEY_FORMAT_CAV = 17; // Topo      CavFile
   public static final int SURVEY_FORMAT_GRT = 18; // Grottolf
-  public static final int SURVEY_FORMAT_GTX = 19; // GHTopo    GtxFile
+  // public static final int SURVEY_FORMAT_GTX = 19; // GHTopo    GtxFile
   public static final int SURVEY_FORMAT_SUR = 20; // WinKarst  SurFile
   public static final int SURVEY_FORMAT_TRB = 21; // TopoRobot TrbFile
   // public static final int SURVEY_FORMAT_JSON = 22; // GeoJSON  JsonFile
@@ -241,7 +241,7 @@ public class TDConst
   public static boolean[] mSurveyExportEnable = { true, // "ZIP", 
     true,  // "Compass",   // 1
     false, // "cSurvey",
-    false, // "GHTopo",
+    // false, // "GHTopo",
     // false, // "Grottolf",
     // false, // "PocketTopo", // 5
     false, // "Polygon",    //  4
@@ -300,7 +300,7 @@ public class TDConst
   public static final String[] mSurveyExportTypes = { "ZIP", 
     "Compass",   // 1
     "cSurvey",
-    "GHTopo",
+    // "GHTopo",
     // "Grottolf",
     // "PocketTopo", // 5
     "Polygon",    //  4
@@ -323,7 +323,7 @@ public class TDConst
   public static final String[] mSurveyExportTypesNoGeo = { "ZIP", 
     "Compass",
     "cSurvey",
-    "GHTopo",
+    // "GHTopo",
     // "Grottolf",
     // "PocketTopo",
     "Polygon",
@@ -347,7 +347,7 @@ public class TDConst
     SURVEY_FORMAT_ZIP,
     SURVEY_FORMAT_DAT,
     SURVEY_FORMAT_CSX,
-    SURVEY_FORMAT_GTX,
+    // SURVEY_FORMAT_GTX,
     // SURVEY_FORMAT_GRT,
     // SURVEY_FORMAT_TOP,
     SURVEY_FORMAT_PLG,

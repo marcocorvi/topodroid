@@ -3,7 +3,7 @@
   <string name="topodroid" translatable="false">TopoDroid</string>
   <string name="compass" translatable="false">Compass</string>
   <string name="csurvey" translatable="false">cSurvey</string>
-  <string name="ghtopo" translatable="false">GHTopo</string>
+  <!-- UNUSED string name="ghtopo" translatable="false">GHTopo</string -->
   <!-- string name="grottolf" translatable="false">GrottoLF</string -->
   <string name="pockettopo" translatable="false">PocketTopo</string>
   <string name="polygon" translatable="false">Polygon</string>

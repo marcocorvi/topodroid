@@ -931,20 +931,20 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     return new TDPref[ ] {
       makeCbx( cat, key[ 0], tit[ 0], -1, B, def[ 0], ctx, hlp ), // compass
       makeCbx( cat, key[ 1], tit[ 1], -1, B, def[ 1], ctx, hlp ), // csurvey
-      makeCbx( cat, key[ 2], tit[ 2], -1, B, def[ 2], ctx, hlp ), // ghtopo
-      makeCbx( cat, key[ 3], tit[ 3], -1, B, def[ 3], ctx, hlp ), // polygon
-      makeCbx( cat, key[ 4], tit[ 4], -1, B, def[ 4], ctx, hlp ), // survex
-      makeCbx( cat, key[ 5], tit[ 5], -1, B, def[ 5], ctx, hlp ), // therion
-      makeCbx( cat, key[ 6], tit[ 6], -1, B, def[ 6], ctx, hlp ), // topo
-      makeCbx( cat, key[ 7], tit[ 7], -1, B, def[ 7], ctx, hlp ), // toporobot
-      makeCbx( cat, key[ 8], tit[ 8], -1, B, def[ 8], ctx, hlp ), // visualtopo
-      makeCbx( cat, key[ 9], tit[ 9], -1, B, def[ 9], ctx, hlp ), 
-      makeCbx( cat, key[10], tit[10], -1, B, def[10], ctx, hlp ), // winkarst
-      makeCbx( cat, key[11], tit[11], -1, B, def[11], ctx, hlp ), // csv
-      makeCbx( cat, key[12], tit[12], -1, B, def[12], ctx, hlp ), // dxf
-      makeCbx( cat, key[13], tit[13], -1, B, def[13], ctx, hlp ), // kml
-      makeCbx( cat, key[14], tit[14], -1, B, def[14], ctx, hlp ),
-      makeCbx( cat, key[15], tit[15], -1, B, def[15], ctx, hlp ), // shapefile
+      // makeCbx( cat, key[ 2], tit[ 2], -1, B, def[ 2], ctx, hlp ), // ghtopo
+      makeCbx( cat, key[ 2], tit[ 2], -1, B, def[ 2], ctx, hlp ), // polygon
+      makeCbx( cat, key[ 3], tit[ 3], -1, B, def[ 3], ctx, hlp ), // survex
+      makeCbx( cat, key[ 4], tit[ 4], -1, B, def[ 4], ctx, hlp ), // therion
+      makeCbx( cat, key[ 5], tit[ 5], -1, B, def[ 5], ctx, hlp ), // topo
+      makeCbx( cat, key[ 6], tit[ 6], -1, B, def[ 6], ctx, hlp ), // toporobot
+      makeCbx( cat, key[ 7], tit[ 7], -1, B, def[ 7], ctx, hlp ), // visualtopo
+      makeCbx( cat, key[ 8], tit[ 8], -1, B, def[ 8], ctx, hlp ), // walls
+      makeCbx( cat, key[ 9], tit[ 9], -1, B, def[ 9], ctx, hlp ), // winkarst
+      makeCbx( cat, key[10], tit[10], -1, B, def[10], ctx, hlp ), // csv
+      makeCbx( cat, key[11], tit[11], -1, B, def[11], ctx, hlp ), // dxf
+      makeCbx( cat, key[12], tit[12], -1, B, def[12], ctx, hlp ), // kml
+      makeCbx( cat, key[13], tit[13], -1, B, def[13], ctx, hlp ), // gpx
+      makeCbx( cat, key[14], tit[14], -1, B, def[14], ctx, hlp ), // shapefile
     };
   }
 

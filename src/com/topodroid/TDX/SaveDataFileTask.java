@@ -165,13 +165,13 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
           //   // TDToast.make( "WARNING Grottolf export is untested" );
           //   ret = TDExporter.exportSurveyAsGrt( bw, mSid, mData, mInfo, mSurvey );
           //   break;
-          case TDConst.SURVEY_FORMAT_GTX: // GHTopo
-            // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getGtxFileWithExt( mSurvey ) ) );
-            bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
-            pathname = mSurvey + TDPath.GTX;
-            // TDToast.make( "WARNING GHTopo export is untested" );
-            ret = TDExporter.exportSurveyAsGtx( bw, mSid, mData, mInfo, mSurvey );
-            break;
+          // case TDConst.SURVEY_FORMAT_GTX: // GHTopo
+          //   // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getGtxFileWithExt( mSurvey ) ) );
+          //   bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+          //   pathname = mSurvey + TDPath.GTX;
+          //   // TDToast.make( "WARNING GHTopo export is untested" );
+          //   ret = TDExporter.exportSurveyAsGtx( bw, mSid, mData, mInfo, mSurvey );
+          //   break;
           case TDConst.SURVEY_FORMAT_KML: // KML
             // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getKmlFileWithExt( mSurvey ) ) );
             bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
