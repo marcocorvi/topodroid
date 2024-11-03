@@ -40,6 +40,7 @@ class ParserDEM extends DEMsurface
   String mFilename; // DEM filename
   protected double xunit; // X factor, either 1 [m] or R*PI/180 [dec.degree]
   protected double yunit;
+  protected boolean xhflip, yvflip;    //HB reverse order
 
   protected InputStreamReader mIsr = null;
   protected BufferedReader mBr = null;
