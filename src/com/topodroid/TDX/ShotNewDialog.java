@@ -313,13 +313,20 @@ class ShotNewDialog extends MyDialog
 
   /** reset UI data
    * @param from    FROM station
+   * @param to      TO station
    * @note TO station is obtained by incrementing FROM station
    */
-  private void resetData( String from )
+  private void resetData( String from, String to )
   {
-    String to = DistoXStationName.incrementName( from, mApp.getStationNames() );
-    mETfrom.setText( from );
-    mETto.setText(to);
+    if ( StationPolicy.isSurveyForward() ) {
+      mETfrom.setText( to );
+      String new_to = DistoXStationName.incrementName( to, mApp.getStationNames() );
+      mETto.setText( new_to );
+    } else {
+      mETto.setText( from );
+      String new_from = DistoXStationName.incrementName( from, mApp.getStationNames() );
+      mETfrom.setText( new_from );
+    }
     mETdistance.setText("");
     mETbearing.setText("");
     mETclino.setText("");
@@ -632,7 +639,7 @@ class ShotNewDialog extends MyDialog
             TDLog.e( "IO exception " + e.getMessage() );
           }
         }
-        resetData( shot_to );
+        resetData( shot_from, shot_to );
         if ( mLister !=  null ) {
           // TDLog.v("new shot - lister refresh display" );
           mLister.refreshDisplay( 1, false );
