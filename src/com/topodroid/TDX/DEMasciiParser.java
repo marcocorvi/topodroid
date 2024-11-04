@@ -128,16 +128,16 @@ class DEMasciiParser extends ParserDEM
           String[] vals = TDString.splitOnSpaces( line );
           if ( vals.length < xoff + mNr1 ) throw new DemException("invalid row");
           if ( yvflip ) { //HB reverse order
-            if (xhflip) {
-              for (int ii = 0; ii < mNr1; ++ii)
-                mZ[ ((mNr2 - 1 - j) * mNr1) + mNr1 - 1 - ii] = Float.parseFloat(vals[xoff + ii]);
+            if ( xhflip ) {
+              for ( int ii = 0; ii < mNr1; ++ii )
+                mZ[ ((mNr2 - 1 - j) * mNr1) + mNr1 - 1 - ii ] = Float.parseFloat( vals[ xoff + ii ] );
             } else {
-              for (int ii = 0; ii < mNr1; ++ii)
-                mZ[(mNr2 - 1 - j)  * mNr1 + ii] = Float.parseFloat(vals[xoff + ii]);
+              for ( int ii = 0; ii < mNr1; ++ii )
+                mZ[ (mNr2 - 1 - j)  * mNr1 + ii ] = Float.parseFloat( vals[ xoff + ii ] );
             }
           } else {
-            if (xhflip) {
-              for (int ii = 0; ii < mNr1; ++ii)
+            if ( xhflip ) {
+              for ( int ii = 0; ii < mNr1; ++ii )
                 mZ[j * mNr1 + mNr1 - 1 - ii] = Float.parseFloat(vals[xoff + ii]);
             } else {
               for (int ii = 0; ii < mNr1; ++ii)
@@ -150,6 +150,7 @@ class DEMasciiParser extends ParserDEM
 //            for ( int ii=0; ii<mNr1; ++ii ) mZ[j*mNr1 + ii] = Float.parseFloat( vals[xoff+ii] );
 //          }
 //        }
+        }
       }
     } catch ( IOException e1 ) {
       TDLog.e("DEM ascii IO error " + e1.getMessage() );
