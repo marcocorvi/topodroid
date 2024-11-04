@@ -127,12 +127,29 @@ class DEMasciiParser extends ParserDEM
           String line = mBr.readLine();
           String[] vals = TDString.splitOnSpaces( line );
           if ( vals.length < xoff + mNr1 ) throw new DemException("invalid row");
-          if ( flip_horz ) {
-            for ( int ii=0; ii<mNr1; ++ii ) mZ[j*mNr1 + mNr1-1-ii] = Float.parseFloat( vals[xoff+ii] );
+          if ( yvflip ) { //HB reverse order
+            if (xhflip) {
+              for (int ii = 0; ii < mNr1; ++ii)
+                mZ[ ((mNr2 - 1 - j) * mNr1) + mNr1 - 1 - ii] = Float.parseFloat(vals[xoff + ii]);
+            } else {
+              for (int ii = 0; ii < mNr1; ++ii)
+                mZ[(mNr2 - 1 - j)  * mNr1 + ii] = Float.parseFloat(vals[xoff + ii]);
+            }
           } else {
-            for ( int ii=0; ii<mNr1; ++ii ) mZ[j*mNr1 + ii] = Float.parseFloat( vals[xoff+ii] );
+            if (xhflip) {
+              for (int ii = 0; ii < mNr1; ++ii)
+                mZ[j * mNr1 + mNr1 - 1 - ii] = Float.parseFloat(vals[xoff + ii]);
+            } else {
+              for (int ii = 0; ii < mNr1; ++ii)
+                mZ[j * mNr1 + ii] = Float.parseFloat(vals[xoff + ii]);
+            }
           }
-        }
+//          if ( flip_horz ) {
+//            for ( int ii=0; ii<mNr1; ++ii ) mZ[j*mNr1 + mNr1-1-ii] = Float.parseFloat( vals[xoff+ii] );
+//          } else {
+//            for ( int ii=0; ii<mNr1; ++ii ) mZ[j*mNr1 + ii] = Float.parseFloat( vals[xoff+ii] );
+//          }
+//        }
       }
     } catch ( IOException e1 ) {
       TDLog.e("DEM ascii IO error " + e1.getMessage() );
@@ -170,15 +187,20 @@ class DEMasciiParser extends ParserDEM
       // FileReader fr = new FileReader( filename );
       // FileReader fr = TDFile.getFileReader( filename );
       // BufferedReader mBr = new BufferedReader( mIsr );
+      xhflip = false; //HB default value
+      yvflip = false; //HB
+
       String line = mBr.readLine();
       String[] vals = TDString.splitOnSpaces( line );
       if ( vals.length <= 1 ) return false;
       cols = Integer.parseInt( vals[1] ); // number cols
+      if ( cols < 0 ) { cols *= -1; xhflip = true;} //HB neg number = reverse order
 
       line = mBr.readLine();
       vals = TDString.splitOnSpaces( line );
       if ( vals.length <= 1 ) return false;
       rows = Integer.parseInt( vals[1] ); // number rows
+      if ( rows < 0 ) { rows *= -1; yvflip = true;} //HB neg number = reverse order
 
       line = mBr.readLine();
       vals = TDString.splitOnSpaces( line );

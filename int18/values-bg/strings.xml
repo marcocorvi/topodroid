@@ -274,7 +274,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="bad_manifest_sql">Неуспешно: SQL грешка</string>
     <string name="bad_manifest_number">Неуспешно: грешен номер</string>
     <string name="bad_manifest_manifest">Неуспешно: грешен манифест</string>
-    <!-- TODO string name="bad_manifest_file">Failed: open manifest</string -->
+    <string name="bad_manifest_file">Неуспешно: отваряне на манифест</string>
     <string name="bad_manifest_missing">Неуспешно: липсващ манифест</string>
     <string name="bad_manifest_error">Неуспешно: грешка при четене</string>
     <string name="bad_manifest_other">Неуспешно: неочаквана грешкаr</string>
@@ -458,7 +458,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="menu_close">ЗАТВАРЯНЕ</string>
     <!-- UNUSED string name="menu_clear">ИЗЧИСТИ</string -->
     <string name="menu_color">ИЗЧИСТВАНЕ НА ЦВЯТ</string>
-    <!-- TODO string name="menu_cwd">WORK FOLDER</string -->
+    <string name="menu_cwd">РАБОТНА ПАПКА</string>
     <string name="menu_delete">ИЗТРИВАНЕ</string>
     <string name="menu_detach">ПРЕКЪСВАНЕ НА ВРЪЗКАТА</string>
     <!-- UNUSED string name="menu_display">ДИСПЛЕЙ</string -->
@@ -626,7 +626,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="insufficient_data">недостатъчни данни от сензора</string -->
     <string name="sensor_no_readings">Няма показания на сензора</string>
     <string name="sensor_failure">Грешка на сензора: %1$d</string>
-    <!-- TODO string name="sensor_shot">Shot %1$d: %2$s</string -->
+    <string name="sensor_shot">Замерване %1$d: %2$s</string>
 
     <!-- UNUSED string name="shot_clino">наклон</string -->
     <!-- UNUSED string name="shot_compass">компас</string -->
@@ -839,8 +839,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_next">Следващ</string>
     <string name="button_prev">Предишен</string>
     <string name="button_new">Нов отрязък</string>
-    <!-- TODO string name="button_rename"  >Rename</string -->
-    <!-- TODO string name="button_prefix"  >Prefix</string -->
+    <string name="button_rename">Преименувай</string>
+    <string name="button_prefix">Представка</string>
     <string name="button_skip">Пропусни</string>
     <string name="button_done">Готово</string>
     <string name="button_lrud">+ ляво/дясно/горе/долу</string>
@@ -872,7 +872,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_search">Търсене</string>
     <string name="button_merge">Обединяване</string>
     <string name="button_saved">Запазени репери</string>
-    <!-- TODO string name="button_scrap"     >Outlines</string -->
+    <string name="button_scrap">Очертания</string>
     <string name="button_split">Раздели</string>
     <string name="button_station">Център на</string>
     <string name="button_store">Магазин</string>
@@ -979,7 +979,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="hint_text">текст</string>
     <string name="hint_options">опции</string>
     <string name="hint_name">име</string>
-    <!-- TODO string name="hint_prefix">prefix</string -->
+    <string name="hint_prefix">представка</string>
     <string name="hint_from">от</string>
     <string name="hint_to">до</string>
     <string name="hint_azimuth">азимут</string>
@@ -1043,7 +1043,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="help_close_app">Затваряне на приложението</string>
     <string name="help_coeff">Показване на коефициентите за калибриране</string>
     <string name="help_color">Изчистване на цветовете</string>
-    <!-- TODO string name="help_cwd">Current work folder</string -->
+    <string name="help_cwd">Настояща работна папка</string>
     <string name="help_join">Обединение на линии</string>
     <!-- UNUSED string name="help_continue">Continue drawing a line</string -->
     <!-- UNUSED string name="help_contour">Contour editing</string -->
@@ -1184,7 +1184,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="export_suffix_hint">наставка</string>
     <string name="export_roundtrip">Отиване и връщане</string>
     <string name="export_share">Сподели</string>
-    <!-- TODO string name="export_overwrite">Overwrite</string -->
+    <string name="export_overwrite">Презапис</string>
     <!-- UNUSED string name="export_scale_png">Resolution</string -->
     <string name="export_scale_th">Мащаб 1 :</string>
     <string name="export_spacing_th">Разстояние между точките</string>
@@ -1334,7 +1334,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_shift">Отместване</string>
     <string name="title_shot_delete">Изтриване на измерването \?</string>
     <string name="title_sensor_edit">Сензор</string>
-    <!-- TODO string name="title_sensor_list">Sensor data</string -->
+    <string name="title_sensor_list">Данни от сензор</string>
     <string name="title_split">Разделяне на скицата</string>
 
     <string name="title_stats">Статистика за скицата</string>
@@ -1481,8 +1481,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_survex_splay_summary">Добави репер ДО към странични измервания в Survex</string>
   <string name="pref_survex_lrud_title">Ляво/дясно/горе/долу в Survex/Therion</string>
   <string name="pref_survex_lrud_summary">Добави ляво/дясно/горе/долу в експорта в Survex/Therion</string>
-  <!-- TODO string name="pref_survex_epsg_title">EPSG "cs out"</string -->
-  <!-- TODO string name="pref_survex_epsg_summary">EPSG number for Survex "cs out"</string -->
+  <string name="pref_survex_epsg_title">EPSG "cs out"</string>
+  <string name="pref_survex_epsg_summary">EPSG номер за Survex "cs out"</string>
   <string name="pref_svg_program_title">SVG program</string>
   <string name="pref_svg_program_summary">Насочи програмата SVG</string>
   <string name="pref_svg_grid_title">Решетка</string>
@@ -1776,8 +1776,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_plot_split_summary">Активирай разделяне и обединяване на скици</string>
   <string name="pref_stylus_size_title">Рисуване само с писалка</string>
   <string name="pref_stylus_size_summary">Максимален размер на писалката [pxl, 0: игнориране]</string>
-  <!-- TODO string name="pref_line_ends_title">Line-end cut</string -->
-  <!-- TODO string name="pref_line_ends_summary">Number of line-points to drop from the ends [0]</string -->
+  <string name="pref_line_ends_title">Изрязване в края на линията</string>
+  <string name="pref_line_ends_summary">Брой линии-точки за пускане от краищата [0]</string>
   <string name="pref_fixed_thickness_title">Дебелина на линиите в картировката</string>
   <string name="pref_fixed_thickness_summary">Дебелина на линиите в картировката</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->
@@ -2053,7 +2053,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="cmenu_ico">3D ДИАГРАМА НА РОЗАТА</string>
     <string name="cmenu_rose">ДИАГРАМА НА РОЗАТА</string>
     <string name="cmenu_wall">СТЕНИ</string>
-    <!-- TODO string name="cmenu_search">SEARCH</string -->
+    <string name="cmenu_search">ТЪРСЕНЕ</string>
     <!-- UNUSED string name="cmenu_sketch">SKETCHES</string -->
     <!-- UNUSED string name="cmenu_fractal" translatable="false">FRACTAL DIM.</string -->
 
