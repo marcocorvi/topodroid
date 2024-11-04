@@ -2076,7 +2076,16 @@ public class TDExporter
 
       pw.format("*begin %s ", info.name );      writeSurvexEOL(pw);
       pw.format("  *date %s ", info.date );     writeSurvexEOL(pw);
-      pw.format("  *team \"%s\" ", info.team ); writeSurvexEOL(pw);
+      if ( TDSetting.mTeamNames == 0 ) {
+        pw.format("  *team \"%s\" ", info.team ); writeSurvexEOL(pw);
+      } else {
+        String[] names = info.team.replaceAll("\\s+", " ")
+                                  .replaceAll(",", ";")  // therion/survex names can be separated by comma or semicolon
+                                  .split(";");
+        for ( String name : names ) {
+          pw.format("  *team \"%s\" ", name ); writeSurvexEOL(pw);
+        }
+      }
       writeSurvexLine(pw, "  *units tape " + uls );
       writeSurvexLine(pw, "  *units compass " + uas );
       writeSurvexLine(pw, "  *units clino " + uas );
