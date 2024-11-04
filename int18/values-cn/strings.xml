@@ -1661,6 +1661,8 @@
 
   <string name="pref_team_title">团队</string>
   <string name="pref_team_summary">默认测量团队</string>
+  <!-- TODO string name="pref_team_names_title">Team names</string -->
+  <!-- TODO string name="pref_team_names_summary">Therion team names</string -->
 
   <string name="pref_ethr_title">测线垂直临界角度</string>
   <string name="pref_ethr_summary">该值决定在延展剖面图中测线的绘制方向</string>

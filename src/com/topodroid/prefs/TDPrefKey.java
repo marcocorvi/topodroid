@@ -111,23 +111,25 @@ public class TDPrefKey
 
   static String[] SURVEY = { // [12] 
     "DISTOX_TEAM",              // 0 * // default team
-    "DISTOX_SURVEY_STATION",    // 1   // DISTOX_SURVEY_STATIONS must not be used
+    "DISTOX_TEAM_DIALOG",       // 1 * // team dialog
+    "DISTOX_SURVEY_STATION",    // 2   // DISTOX_SURVEY_STATIONS must not be used
     "DISTOX_STATION_NAMES", // station names: 0 alphanumeric, 1 numbers
-    "DISTOX_INIT_STATION",      // 3 * // default initial station name
+    "DISTOX_INIT_STATION",      // 4 * // default initial station name
     "DISTOX_THUMBNAIL",                // size of photo thumbnails
     "DISTOX_EDITABLE_STATIONS",
     "DISTOX_FIXED_ORIGIN",
-    "DISTOX_SHARED_XSECTIONS",  // 7 // whether at-station X-sections are shared among plots
+    "DISTOX_SHARED_XSECTIONS",  // 8 // whether at-station X-sections are shared among plots
     // "DISTOX_DATA_BACKUP",       // export data when shot window is closed
-    "DISTOX_SHOT_UNITS_SCREEN", // 9  FORWARD
-    "DISTOX_SHOT_DATA_SCREEN",  //    FORWARD
-    "DISTOX_LOCATION_SCREEN",   //    FORWARD
-    "DISTOX_ACCURACY_SCREEN",   // 12 FORWARD
+    "DISTOX_SHOT_UNITS_SCREEN", // 10  FORWARD
+    "DISTOX_SHOT_DATA_SCREEN",  //     FORWARD
+    "DISTOX_LOCATION_SCREEN",   //     FORWARD
+    "DISTOX_ACCURACY_SCREEN",   // 13  FORWARD
     null
   };
 
   static int[] SURVEYtitle = {
-    R.string.pref_team_title,           
+    R.string.pref_team_title,
+    R.string.pref_team_names_title,
     R.string.pref_survey_stations_title,
     R.string.pref_station_names_title,
     R.string.pref_init_station_title,
@@ -144,6 +146,7 @@ public class TDPrefKey
 
   static int[] SURVEYdesc = {
     R.string.pref_team_summary,  
+    R.string.pref_team_names_summary,
     R.string.pref_survey_stations_summary,
     R.string.pref_station_names_summary,
     R.string.pref_init_station_summary,
@@ -160,6 +163,7 @@ public class TDPrefKey
 
   public static String[] SURVEYdef = {
     "",
+    TDString.ZERO,
     TDString.ONE,
     "alpha",
     TDString.ZERO,

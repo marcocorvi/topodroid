@@ -17,7 +17,8 @@ import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 
-//import java.util.List;
+import java.util.List;
+import java.util.ArrayList;
 
 // import android.app.Activity;
 // import android.app.Dialog;
@@ -32,6 +33,8 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.widget.CheckBox;
 
+import android.text.InputType;
+
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
 // import android.view.ViewGroup.LayoutParams;
@@ -42,6 +45,7 @@ import android.view.View.OnFocusChangeListener;
 class SurveyNewDialog extends MyDialog
                       implements View.OnClickListener
                       , View.OnLongClickListener
+                      , ITeamText
 {
   // private final static String EMPTY = "";
 
@@ -125,6 +129,10 @@ class SurveyNewDialog extends MyDialog
     if ( TDSetting.mDefaultTeam.length() > 0 ) {
       mEditTeam.setText( TDSetting.mDefaultTeam );
     }
+    if ( TDSetting.mTeamNames > 1 ) {
+      mEditTeam.setInputType( InputType.TYPE_NULL );
+      mEditTeam.setOnClickListener( this );
+    }
 
     mEditDate.setText( TDUtil.currentDate() );
 
@@ -143,47 +151,68 @@ class SurveyNewDialog extends MyDialog
     CutNPaste.makePopup( mContext, (EditText)v );
     return true;
   }
+
+  public void setTeamText( String team )
+  {
+    if ( team != null ) {
+      mEditTeam.setText( team );
+    }
+  }
    
   @Override
   public void onClick(View view)
   {
     CutNPaste.dismissPopup();
-    Button b = (Button)view;
+    if ( view instanceof EditText ) {
+      ArrayList< String > names = new ArrayList< String >();
+      CharSequence chars = mEditTeam.getText();
+      if ( chars != null ) {
+        String[] tmp = chars.toString().split(";");
+        for ( String t : tmp ) {
+          t.trim();
+          if ( t.length() > 0 ) names.add( t );
+        }
+      }
+      (new TeamDialog( mContext, this, names )).show();
+      return;
+    } else if ( view instanceof Button ) {
+      Button b = (Button)view;
 
-    if ( b == mBTback ) {
+      if ( b == mBTback ) {
+        dismiss();
+      }
+      if ( b == mEditDate ) {
+        String date = mEditDate.getText().toString();
+        int y = TDUtil.dateParseYear( date );
+        int m = TDUtil.dateParseMonth( date );
+        int d = TDUtil.dateParseDay( date );
+        new DatePickerDialog( mContext, mDateListener, y, m, d ).show();
+        return;
+      }
+
+      // if ( mEditName.getText() == null ) return;
+      String name = mEditName.getText().toString();
+      if ( /* name == null || */ name.length() == 0 ) { // ALWAYS false
+        mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
+        return;
+      }
+      name = TDUtil.noSpaces( name ); // FIXME FORCE NAMES WITHOUT UNACCEPTABLE CHARACTERS
+      if ( ! saveSurvey( name ) ) {
+        return;
+      }
+
+      // TDLog.Log( TDLog.LOG_INPUT, "SurveyDialog onClick() " + item.toString() );
+      if ( b == mBTsave ) {
+        // TDLog.v( "new survey save ");
+        dismiss();
+        mParent.updateDisplay( );
+      } else if ( b == mBTopen ) {
+        // TDLog.v( "new survey open ");
+        dismiss();
+        mParent.doOpenSurvey( name );
+      }
       dismiss();
     }
-    if ( b == mEditDate ) {
-      String date = mEditDate.getText().toString();
-      int y = TDUtil.dateParseYear( date );
-      int m = TDUtil.dateParseMonth( date );
-      int d = TDUtil.dateParseDay( date );
-      new DatePickerDialog( mContext, mDateListener, y, m, d ).show();
-      return;
-    }
-
-    // if ( mEditName.getText() == null ) return;
-    String name = mEditName.getText().toString();
-    if ( /* name == null || */ name.length() == 0 ) { // ALWAYS false
-      mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
-      return;
-    }
-    name = TDUtil.noSpaces( name ); // FIXME FORCE NAMES WITHOUT UNACCEPTABLE CHARACTERS
-    if ( ! saveSurvey( name ) ) {
-      return;
-    }
-
-    // TDLog.Log( TDLog.LOG_INPUT, "SurveyDialog onClick() " + item.toString() );
-    if ( b == mBTsave ) {
-      // TDLog.v( "new survey save ");
-      dismiss();
-      mParent.updateDisplay( );
-    } else if ( b == mBTopen ) {
-      // TDLog.v( "new survey open ");
-      dismiss();
-      mParent.doOpenSurvey( name );
-    }
-    dismiss();
   }
 
   // ---------------------------------------------------------------

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--suppress CheckTagEmptyBody -->
 <resources>
+  <!-- TODO string-array name="teamNames">
+     <item name="plain">Text plain</item>
+     <item name="separated">Text separated</item>
+     <item name="dialog">Dialog</item>
+  </string-array -->
+
   <string-array name="bricMode">
     <item name="prim_only">só principais</item>
     <item name="all">todos</item>

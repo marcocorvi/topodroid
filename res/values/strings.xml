@@ -1356,6 +1356,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="title_survey_new">New survey</string>
     <string name="title_survey_export">Export survey</string>
     <string name="title_survey_rename">Rename survey</string>
+    <string name="title_team_dialog">Team names</string>
     <string name="title_plot_rename">Rename sketch</string>
     <string name="title_plot_zoomfit">Zoom fit / Orientation</string>
     <string name="title_calib_export">Export calibration</string>
@@ -1689,6 +1690,8 @@ There are other settings for the presentation of the sketches (icon size, label 
 
   <string name="pref_team_title">Team</string>
   <string name="pref_team_summary">Default surveying team</string>
+  <string name="pref_team_names_title">Team names</string>
+  <string name="pref_team_names_summary">Therion team names</string>
 
   <string name="pref_ethr_title">Shot vertical-extend threshold</string>
   <string name="pref_ethr_summary">Azimuth orthogonal to the reference with vertical extend</string>

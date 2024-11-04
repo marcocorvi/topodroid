@@ -1653,26 +1653,24 @@ public class TDExporter
       }
       pw.format("    date %s \n", info.date );
       if ( info.team != null && info.team.length() > 0 ) {
-        if ( embed_thconfig ) { 
-          String[] names = info.team.replaceAll(",", " ").replaceAll(";", " ").replaceAll("\\s+", " ").split(" ");
-          int len = names.length;
-          int k = 0;
-          while ( k<len ) {
+        // if ( embed_thconfig ) 
+        if ( TDSetting.mTeamNames > 0 ) { 
+          String[] names = info.team.replaceAll("\\s+", " ")
+                                    .replaceAll(",", ";")  // therion names can be separated by comma or semicolon
+                                    .split(";");
+          for ( String name : names ) {
             pw.format("    team \"");
-            String name = names[k];
-            int kk = k;
-            while ( k < len-1 && ( name.length() == 1 || name.endsWith(".") ) ) {
-              pw.format("%s", name );
-              if ( name.length() == 1 ) pw.format(".");
-              ++k;
-              name = names[k];
-            } 
-            if ( k > kk ) {
-              pw.format(" %s\"\n", name );
-            } else {
-              pw.format("%s\"\n", name );
+            int sep0 = name.indexOf(' ');
+            if ( sep0 > 0 ) {
+              int sep1 = name.indexOf(' ', sep0+1 );
+              if ( sep1 > 0 ) { // multispace name
+                String first_name = name.substring(0, sep0);
+                pw.format( "%s\\ ", first_name );
+                name = name.substring( sep0+1 );
+              }
             }
-            ++k;
+            // zero or one space, or the rest of the name
+            pw.format("%s\"\n", name);
           }
         } else {
           pw.format("    # team %s \n", info.team );

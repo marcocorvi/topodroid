@@ -1661,6 +1661,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
 
   <string name="pref_team_title">Екип</string>
   <string name="pref_team_summary">Картировачен екип по подразбиране</string>
+  <!-- TODO string name="pref_team_names_title">Team names</string -->
+  <!-- TODO string name="pref_team_names_summary">Therion team names</string -->
 
   <string name="pref_ethr_title">Ограничение на вертикално разширено измерване</string>
   <string name="pref_ethr_summary">Азимут, ортогонален към референция с вертикално разширение</string>

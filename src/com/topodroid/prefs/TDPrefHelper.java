@@ -14,9 +14,12 @@ package com.topodroid.prefs;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDandroid;
 
+import com.topodroid.utils.TDLog;
+
 import android.preference.PreferenceManager;
 import android.content.SharedPreferences;
 import android.content.Context;
+
 
 public class TDPrefHelper
 {
@@ -38,7 +41,10 @@ public class TDPrefHelper
    * @param name      preference name
    * @param def_value preference default value
    */
-  public String getString( String name, String def_value )    { return mPrefs.getString( name, def_value ); }
+  public String getString( String name, String def_value )
+  {
+    return mPrefs.getString( name, def_value );
+  }
 
   /** @return the value of a boolean preference, or the provided default value
    * @param name      preference name
@@ -55,7 +61,7 @@ public class TDPrefHelper
    */
   public static void update( String name, String value )
   {
-    // TDLog.v( "TDPrefHelper set pref " + name + " " + value );
+    TDLog.v( "TDPrefHelper set pref " + name + " " + value );
     SharedPreferences.Editor editor = TDInstance.getPrefs().edit();
     editor.putString( name, value );
     TDandroid.applyEditor( editor );
@@ -69,7 +75,7 @@ public class TDPrefHelper
    */
   public static void update( String name1, String value1, String name2, String value2 )
   {
-    // TDLog.v( "TDPrefHelper set pref " + name1 + " " + value1 + "   " + name2 + " " + value2 );
+    TDLog.v( "TDPrefHelper set pref " + name1 + " " + value1 + "   " + name2 + " " + value2 );
     SharedPreferences.Editor editor = TDInstance.getPrefs().edit();
     editor.putString( name1, value1 );
     editor.putString( name2, value2 );
@@ -86,7 +92,7 @@ public class TDPrefHelper
    */
   public static void update( String name1, String value1, String name2, String value2, String name3, String value3 )
   {
-    // TDLog.v( "TDPrefHelper set pref " + name1 + " " + value1 + "   " + name2 + " " + value2 + "   " + name3 + " " + value3 );
+    TDLog.v( "TDPrefHelper set pref " + name1 + " " + value1 + "   " + name2 + " " + value2 + "   " + name3 + " " + value3 );
     SharedPreferences.Editor editor = TDInstance.getPrefs().edit();
     editor.putString( name1, value1 );
     editor.putString( name2, value2 );
@@ -111,7 +117,7 @@ public class TDPrefHelper
    */
   public static void update( String name, boolean value )
   {
-    // TDLog.v( "TDPrefHelper set b-pref " + name + " " + value );
+    TDLog.v( "TDPrefHelper set b-pref " + name + " " + value );
     SharedPreferences.Editor editor = TDInstance.getPrefs().edit();
     editor.putBoolean( name, value );
     TDandroid.applyEditor( editor );
@@ -123,7 +129,7 @@ public class TDPrefHelper
    */
   public static void update( String name, long value )
   {
-    // TDLog.v( "TDPrefHelper set l-pref " + name + " " + value );
+    TDLog.v( "TDPrefHelper set l-pref " + name + " " + value );
     SharedPreferences.Editor editor = TDInstance.getPrefs().edit();
     editor.putLong( name, value );
     TDandroid.applyEditor( editor );

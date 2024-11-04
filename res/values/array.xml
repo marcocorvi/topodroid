@@ -2,6 +2,17 @@
 
 <!--suppress CheckTagEmptyBody -->
 <resources>
+  <string-array name="teamNames">
+     <item name="plain">Text plain</item>
+     <item name="separated">Text separated</item>
+     <item name="dialog">Dialog</item>
+  </string-array>
+  <string-array name="teamNamesValue" translatable="false">
+     <item name="plain">0</item>
+     <item name="separated">1</item>
+     <item name="dialog">2</item>
+  </string-array>
+
   <string-array name="bricMode">
      <item name="prim_only">Prim. only</item>
      <!-- item name="sequence">Sequence</item -->

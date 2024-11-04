@@ -31,8 +31,8 @@ import com.topodroid.calib.CalibCheckDialog;
 
 import java.util.Locale;
 import java.util.List;
+import java.util.ArrayList;
 // import java.util.Calendar;
-// import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -67,6 +67,8 @@ import android.view.KeyEvent;
 // import android.view.ViewGroup;
 // import android.view.LayoutInflater;
 
+import android.text.InputType;
+
 // import android.graphics.Bitmap;
 // import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -76,6 +78,7 @@ import android.net.Uri;
 
 public class SurveyWindow extends Activity
                             implements IExporter
+                            , ITeamText
                             , OnItemClickListener
                             , View.OnClickListener
 {
@@ -221,6 +224,10 @@ public class SurveyWindow extends Activity
     } else {
       mEditTeam.setHint( R.string.team );
     }
+    if ( TDSetting.mTeamNames > 1 ) {
+      mEditTeam.setInputType( InputType.TYPE_NULL );
+      mEditTeam.setOnClickListener( this );
+    } 
     setDeclination( info.declination );
 
     mTVxsections.setText( (mXSections == SurveyInfo.XSECTION_SHARED)? R.string.xsections_shared : R.string.xsections_private );
@@ -375,6 +382,13 @@ public class SurveyWindow extends Activity
   }
 
   // ------------------------------------------
+
+  public void setTeamText( String team ) 
+  {
+    if ( team != null ) {
+      mEditTeam.setText( team );
+    }
+  }
    
   @Override
   public void onClick(View view)
@@ -383,43 +397,57 @@ public class SurveyWindow extends Activity
       closeMenu();
       return;
     }
-    Button b = (Button)view;
-
-    if ( b == mMenuImage ) {
-      if ( mMenu.getVisibility() == View.VISIBLE ) {
-        mMenu.setVisibility( View.GONE );
-        onMenu = false;
-      } else {
-        mMenu.setVisibility( View.VISIBLE );
-        onMenu = true;
+    if ( view instanceof EditText ) {
+      ArrayList< String > names = new ArrayList< String >();
+      CharSequence chars = mEditTeam.getText();
+      if ( chars != null ) {
+        String[] tmp = chars.toString().split(";");
+        for ( String t : tmp ) {
+          t.trim();
+          if ( t.length() > 0 ) names.add( t );
+        }
       }
+      (new TeamDialog( this, this, names )).show();
       return;
-    } else if ( b == mEditDate ) {
-      String date = mEditDate.getText().toString();
-      int y = TDUtil.dateParseYear( date );
-      int m = TDUtil.dateParseMonth( date );
-      int d = TDUtil.dateParseDay( date );
-      new DatePickerDialog( mActivity, mDateListener, y, m, d ).show();
-      saveSurvey( false );
-      return;
-    }
+    } else if ( view instanceof Button ) {
+      Button b = (Button)view;
 
-    int k = 0;
-    if ( k < mNrButton1 && b == mButton1[k++] ) {  // NOTES
-      doNotes();
-    } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // INFO STATISTICS
-      new SurveyStatDialog( mActivity, mApp_mData.getSurveyStat( TDInstance.sid ) ).show();
-    } else if ( TDLevel.overNormal ) {
-      if ( k < mNrButton1 && b == mButton1[k++] ) {  // 3D
-        do3D();
-      } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // GPS LOCATION
-        mActivity.startActivity( new Intent( mActivity, FixedActivity.class ) );
-        // FIXME update declination
-      } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // PHOTO CAMERA
-        // mActivity.startActivity( new Intent( mActivity, PhotoActivity.class ) );
-        (new PhotoListDialog( this, mApp_mData )).show();
-      } else if ( TDSetting.mWithSensors && k < mNrButton1 && b == mButton1[k++] ) {  // SENSORS DATA
-        mActivity.startActivity( new Intent( mActivity, SensorListActivity.class ) );
+      if ( b == mMenuImage ) {
+        if ( mMenu.getVisibility() == View.VISIBLE ) {
+          mMenu.setVisibility( View.GONE );
+          onMenu = false;
+        } else {
+          mMenu.setVisibility( View.VISIBLE );
+          onMenu = true;
+        }
+        return;
+      } else if ( b == mEditDate ) {
+        String date = mEditDate.getText().toString();
+        int y = TDUtil.dateParseYear( date );
+        int m = TDUtil.dateParseMonth( date );
+        int d = TDUtil.dateParseDay( date );
+        new DatePickerDialog( mActivity, mDateListener, y, m, d ).show();
+        saveSurvey( false );
+        return;
+      }
+
+      int k = 0;
+      if ( k < mNrButton1 && b == mButton1[k++] ) {  // NOTES
+        doNotes();
+      } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // INFO STATISTICS
+        new SurveyStatDialog( mActivity, mApp_mData.getSurveyStat( TDInstance.sid ) ).show();
+      } else if ( TDLevel.overNormal ) {
+        if ( k < mNrButton1 && b == mButton1[k++] ) {  // 3D
+          do3D();
+        } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // GPS LOCATION
+          mActivity.startActivity( new Intent( mActivity, FixedActivity.class ) );
+          // FIXME update declination
+        } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // PHOTO CAMERA
+          // mActivity.startActivity( new Intent( mActivity, PhotoActivity.class ) );
+          (new PhotoListDialog( this, mApp_mData )).show();
+        } else if ( TDSetting.mWithSensors && k < mNrButton1 && b == mButton1[k++] ) {  // SENSORS DATA
+          mActivity.startActivity( new Intent( mActivity, SensorListActivity.class ) );
+        }
       }
     }
   }

@@ -79,6 +79,8 @@ public class TDSetting
   private static int FLAG_LEVEL  = FLAG_BUTTON | FLAG_MENU;
   private static int mMainFlag = 0xff; // Main Window flag
 
+  private static final int POLICY_INDEX = 2; // index of station-policy in SURVEY settings
+
   public static boolean mWithDebug = false;
 
   /** reset MainWindow flag
@@ -196,6 +198,7 @@ public class TDSetting
 
   // ------------ MAIN
   public static String  mDefaultTeam = "";
+  public static int mTeamNames = 0; // whether to use therion team naming (separate with ';'): 0 text plain, 1 comma separated, 2: dialog
 
   public static final int MIN_SIZE_BUTTONS = 32; // minimum size of buttons
   public static final int MIN_SIZE_TEXT    = 12;
@@ -749,13 +752,18 @@ public class TDSetting
   private static int tryInt( SharedPreferences prefs, String key, String def_value )
   {
     int i = 0;
-    // TDLog.v( "PREF " + key + ": " + def_value + " = " + prefs.getString( key, def_value ) );
+    // if ( key.equals("DISTOX_TEAM_DIALOG" ) ) {
+    //   TDLog.v( "try int TEAM DIALOG " + key + ": default " + def_value + " value " + prefs.getString( key, def_value ) );
+    // }
     try { i = Integer.parseInt( prefs.getString( key, def_value ) ); }
     catch( NumberFormatException e ) { 
       TDLog.e("Integer Format Error. Key " + key + " " + e.getMessage() );
       i = Integer.parseInt(def_value);
       setPreference( prefs, key, def_value );
     }
+    // if ( key.equals("DISTOX_TEAM_DIALOG" ) ) {
+    //   TDLog.v( "try int TEAM DIALOG " + key + ": return " + i );
+    // }
     return i;
   }
 
@@ -790,10 +798,16 @@ public class TDSetting
     if ( val == null ) { 
       i = Integer.parseInt(def_value);
       TDPrefHelper.update( key, def_value );
+      // if ( key.equals("DISTOX_TEAM_DIALOG" ) ) {
+      //   TDLog.v("TEAM DIALOG: null value - update " + key + ": " + def_value );
+      // }
     } else {
       try {
         i = Integer.parseInt( val );
         TDPrefHelper.update( key, val );
+        // if ( key.equals("DISTOX_TEAM_DIALOG" ) ) {
+        //   TDLog.v("TEAM DIALOG: update " + key + ": " + val );
+        // }
       } catch( NumberFormatException e ) { 
         TDLog.e("Integer Format Error. Key " + key + " " + e.getMessage() );
         i = Integer.parseInt(def_value);
@@ -983,8 +997,8 @@ public class TDSetting
     String[] keySurvey = TDPrefKey.SURVEY;
     String[] defSurvey = TDPrefKey.SURVEYdef;
     mDefaultTeam = prefs.getString( keySurvey[0], defSurvey[0] );               // DISTOX_TEAM
-    mInitStation = prefs.getString( keySurvey[3], defSurvey[3] ).replaceAll("\\s+", "");  // DISTOX_INIT_STATION 
-    if ( mInitStation.length() == 0 ) mInitStation = defSurvey[3];
+    mInitStation = prefs.getString( keySurvey[4], defSurvey[4] ).replaceAll("\\s+", "");  // DISTOX_INIT_STATION 
+    if ( mInitStation.length() == 0 ) mInitStation = defSurvey[4];
     DistoXStationName.setInitialStation( mInitStation );
 
     String[] keyData = TDPrefKey.DATA;
@@ -1007,12 +1021,15 @@ public class TDSetting
 
     String[] keySurvey = TDPrefKey.SURVEY;
     String[] defSurvey = TDPrefKey.SURVEYdef;
-    parseStationPolicy( pref_hlp, prefs.getString( keySurvey[1], defSurvey[1] ) ); // DISTOX_SURVEY_STATION
-    mStationNames = (prefs.getString(    keySurvey[2],      defSurvey[2] ).equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
-    mThumbSize    = tryInt(   prefs,     keySurvey[4],      defSurvey[4] );       // DISTOX_THUMBNAIL
-    mEditableStations = prefs.getBoolean(keySurvey[5], bool(defSurvey[5]) ); // DISTOX_EDITABLE_STATIONS
-    mFixedOrigin  = prefs.getBoolean(    keySurvey[6], bool(defSurvey[6]) ); // DISTOX_FIXED_ORIGIN
-    mSharedXSections = prefs.getBoolean( keySurvey[7], bool(defSurvey[7]) ); // DISTOX_SHARED_XSECTIONS
+    // int old = mTeamNames;
+    mTeamNames    = tryInt(   prefs,     keySurvey[1],      defSurvey[1] );       // DISTOX_TEAM_DIALOG
+    // TDLog.v("SETTING load secondary TEAM DIALOG " + old + " -> " + mTeamNames + " default " + defSurvey[1] );
+    parseStationPolicy( pref_hlp, prefs.getString( keySurvey[2], defSurvey[2] ) ); // DISTOX_SURVEY_STATION
+    mStationNames = (prefs.getString(    keySurvey[3],      defSurvey[3] ).equals("number"))? 1 : 0; // DISTOX_STATION_NAMES
+    mThumbSize    = tryInt(   prefs,     keySurvey[5],      defSurvey[5] );       // DISTOX_THUMBNAIL
+    mEditableStations = prefs.getBoolean(keySurvey[6], bool(defSurvey[6]) ); // DISTOX_EDITABLE_STATIONS
+    mFixedOrigin  = prefs.getBoolean(    keySurvey[7], bool(defSurvey[7]) ); // DISTOX_FIXED_ORIGIN
+    mSharedXSections = prefs.getBoolean( keySurvey[8], bool(defSurvey[8]) ); // DISTOX_SHARED_XSECTIONS
     // mDataBackup   = prefs.getBoolean(    keySurvey[8], bool(defSurvey[8]) ); // DISTOX_DATA_BACKUP
     // TDLog.v("SETTING load survey done");
 
@@ -1463,7 +1480,7 @@ public class TDSetting
    */
   public static String updatePreference( TDPrefHelper hlp, int cat, String k, String v )
   {
-    // TDLog.v("update pref " + k + " val " + v );
+    TDLog.v("SETTINGS update pref " + k + " val " + v );
     switch ( cat ) {
       case TDPrefCat.PREF_CATEGORY_ALL:    return updatePrefMain( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_SURVEY: return updatePrefSurvey( hlp, k, v );
@@ -1562,31 +1579,34 @@ public class TDSetting
   //        otherwise returns null
   private static String updatePrefSurvey( TDPrefHelper hlp, String k, String v )
   {
-    // TDLog.v("update pref survey: " + k );
+    // TDLog.v("SETTINGS update pref survey: " + k );
     String[] key = TDPrefKey.SURVEY;
     String[] def = TDPrefKey.SURVEYdef;
     String ret = null;
     if ( k.equals( key[ 0 ] ) ) {        // DISTOX_TEAM (arbitrary)
       mDefaultTeam = tryStringValue( hlp, k, v, def[0] );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SURVEY_STATION (choice)
-      parseStationPolicy( hlp, tryStringValue( hlp, k, v, def[1] ) );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_STATION_NAMES (choice)
-      mStationNames = (tryStringValue( hlp, k, v, def[2]).equals("number"))? 1 : 0;
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_INIT_STATION 
-      mInitStation = tryStringValue( hlp, k, v, def[3] ).replaceAll("\\s+", "");
-      if ( mInitStation.length() == 0 ) mInitStation = def[3];
+    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_TEAM_DIALOG (bool)
+      mTeamNames = tryIntValue( hlp, k, v, def[1] ); 
+      // TDLog.v("SETTINGS TEAM Names " + mTeamNames );
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SURVEY_STATION (choice)
+      parseStationPolicy( hlp, tryStringValue( hlp, k, v, def[2] ) );
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_STATION_NAMES (choice)
+      mStationNames = (tryStringValue( hlp, k, v, def[3]).equals("number"))? 1 : 0;
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_INIT_STATION 
+      mInitStation = tryStringValue( hlp, k, v, def[4] ).replaceAll("\\s+", "");
+      if ( mInitStation.length() == 0 ) mInitStation = def[4];
       DistoXStationName.setInitialStation( mInitStation );
       if ( ! mInitStation.equals( v ) ) { ret = mInitStation; }
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_THUMBNAIL
-      mThumbSize = tryIntValue( hlp, k, v, def[4] ); 
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_THUMBNAIL
+      mThumbSize = tryIntValue( hlp, k, v, def[5] ); 
       if ( mThumbSize < 80 )       { mThumbSize = 80;  ret = Integer.toString( mThumbSize ); }
       else if ( mThumbSize > 400 ) { mThumbSize = 400; ret = Integer.toString( mThumbSize ); }
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_EDITABLE_STATIONS (bool)
-      mEditableStations = tryBooleanValue( hlp, k, v, bool(def[5]) );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_FIXED_ORIGIN (bool)
-      mFixedOrigin = tryBooleanValue( hlp, k, v, bool(def[6]) );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SHARED_XSECTIONS (bool)
-      mSharedXSections  = tryBooleanValue( hlp, k, v, bool(def[7]) );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_EDITABLE_STATIONS (bool)
+      mEditableStations = tryBooleanValue( hlp, k, v, bool(def[6]) );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_FIXED_ORIGIN (bool)
+      mFixedOrigin = tryBooleanValue( hlp, k, v, bool(def[7]) );
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_SHARED_XSECTIONS (bool)
+      mSharedXSections  = tryBooleanValue( hlp, k, v, bool(def[8]) );
     // } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_DATA_BACKUP (bool)
     //   mDataBackup = tryBooleanValue( hlp, k, v, bool(def[8]) );
     } else {
@@ -3028,12 +3048,12 @@ public class TDSetting
     if ( level == TDLevel.mLevel ) return;
 
     if ( StationPolicy.policyDowngrade( level ) ) {
-      setPreference( prefs, TDPrefKey.SURVEY[1], TDString.ONE );
+      setPreference( prefs, TDPrefKey.SURVEY[POLICY_INDEX], TDString.ONE );
     }
     TDLevel.setLevel( TDInstance.context, level );
     int policy = StationPolicy.policyUpgrade( level );
     if ( policy > 0 ) {
-      setPreference( prefs, TDPrefKey.SURVEY[1], Integer.toString( policy ) );
+      setPreference( prefs, TDPrefKey.SURVEY[POLICY_INDEX], Integer.toString( policy ) );
     }
     // if ( ! TDLevel.overExpert ) {
     //   mMagAnomaly = false; // magnetic anomaly compensation requires level overExpert
@@ -3054,11 +3074,11 @@ public class TDSetting
     }
     if ( ! setStationPolicy( policy ) ) {
       // TDLog.v("preference is reset to the last saved policy " + StationPolicy.savedPolicy() );
-      TDPrefHelper.update( TDPrefKey.SURVEY[1], Integer.toString( StationPolicy.savedPolicy() ) );
+      TDPrefHelper.update( TDPrefKey.SURVEY[POLICY_INDEX], Integer.toString( StationPolicy.savedPolicy() ) );
       if ( TDPrefActivity.mPrefActivitySurvey != null ) TDPrefActivity.mPrefActivitySurvey.reloadPreferences(); // FIXME_PREF
     } else {
       // TDLog.v("preference is set to the policy " + policy );
-      TDPrefHelper.update( TDPrefKey.SURVEY[1], Integer.toString( policy ) );
+      TDPrefHelper.update( TDPrefKey.SURVEY[POLICY_INDEX], Integer.toString( policy ) );
     }
     // if ( ! mBacksightShot ) clearMagAnomaly( hlp.getSharedPrefs() );
     // TDLog.v("PARSE Policy " + policy + " saved " + StationPolicy.savedPolicy() );
@@ -3087,7 +3107,7 @@ public class TDSetting
 
   private static void setLocale( String locale, boolean load_symbols )
   {
-    TDLog.v("SETTING set locale <" + locale + ">" );
+    // TDLog.v("SETTING set locale <" + locale + ">" );
     TDLocale.setTheLocale( locale );
     Resources res = TDInstance.getResources();
     if ( load_symbols ) {
@@ -3116,7 +3136,7 @@ public class TDSetting
    */
   public static boolean setPreference( SharedPreferences sp, String name, String value )
   {
-    // TDLog.v("Setting set pref " + name + " " + value );
+    TDLog.v("SETTING set pref " + name + " " + value );
     Editor editor = sp.edit();
     editor.putString( name, value );
     return TDandroid.applyEditor( editor );
@@ -3130,7 +3150,7 @@ public class TDSetting
    */
   private static boolean setPreference( SharedPreferences sp, String name, boolean value )
   {
-    // TDLog.v("Setting set b-pref " + name + " " + value );
+    TDLog.v("SETTING set b-pref " + name + " " + value );
     Editor editor = sp.edit();
     editor.putBoolean( name, value );
     return TDandroid.applyEditor( editor );
@@ -3144,16 +3164,24 @@ public class TDSetting
    */
   public static boolean setPreference( SharedPreferences sp, String name, long value )
   {
-    // TDLog.v("Setting set l-pref " + name + " " + value );
+    TDLog.v("SETTING set l-pref " + name + " " + value );
     Editor editor = sp.edit();
     editor.putLong( name, value );
     return TDandroid.applyEditor( editor );
   }
 
-  private static void setPreference( Editor editor, String name, String value )  { editor.putString( name, value ); }
+  private static void setPreference( Editor editor, String name, String value )  
+  {
+    TDLog.v("SETTING set s-pref " + name + " " + value );
+    editor.putString( name, value );
+  }
   private static void setPreference( Editor editor, String name, boolean value ) { editor.putBoolean( name, value ); }
   // private static void setPreference( Editor editor, String name, long value )    { editor.putLong( name, value ); }
-  private static void setPreference( Editor editor, String name, int value )     { editor.putString( name, Integer.toString(value) ); }
+  private static void setPreference( Editor editor, String name, int value )
+  {
+    TDLog.v("SETTING set i-pref " + name + " " + value );
+    editor.putString( name, Integer.toString(value) );
+  }
   private static void setPreference( Editor editor, String name, float value )   { editor.putString( name, Float.toString(value) ); }
 
   /** commit the changes that are in the editor
@@ -3267,7 +3295,7 @@ public class TDSetting
       pw.printf(Locale.US, "Calib shot download %c, raw data %d \n", tf(mCalibShotDownload), mRawCData );
       pw.printf(Locale.US, "Min_Algo alpha %.1f, beta %.1f, gamma %.1f, delta %.1f \n", mAlgoMinAlpha, mAlgoMinBeta, mAlgoMinGamma, mAlgoMinDelta );
 
-      pw.printf(Locale.US, "Default Team \"%s\"\n", mDefaultTeam);
+      pw.printf(Locale.US, "Default Team \"%s\" names %d\n", mDefaultTeam, mTeamNames );
       pw.printf(Locale.US, "Midline check: attached %c, extend %c\n", tf(mCheckAttached), tf(mCheckExtend) );
       pw.printf(Locale.US, "Location: units %d, CRS \"%s\" NegAlt. %c FineLoc %d GeoApp %d EditAlt. %c\n", mUnitLocation, mCRS, tf(mNegAltitude), mFineLocation, mGeoImportApp, tf(mEditableHGeo) );
       pw.printf(Locale.US, "Shots: vthr %.1f, hthr %.1f \n", mVThreshold, mHThreshold );
@@ -3742,7 +3770,11 @@ public class TDSetting
           if ( all ) {
             if ( vals.length > 2 ) {
               mDefaultTeam = getQuotedString( line ); setPreference( editor, "DISTOX_TEAM", mDefaultTeam );
-              // TDLog.v("Setting team <" + mDefaultTeam + ">" );
+              int pos = line.lastIndexOf( "\" names " );
+              if ( pos + 8 < line.length() ) try { // "... names %c" 
+                String extra = line.substring( pos+8 );
+                mTeamNames = Integer.parseInt( extra ); setPreference( editor, "DISTOX_TEAM_DIALOG",   mTeamNames );
+              } catch ( NumberFormatException e ) {  }
             }
           }
           continue;

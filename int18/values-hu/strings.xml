@@ -1668,6 +1668,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
 
   <string name="pref_team_title">Csoport</string>
   <string name="pref_team_summary">Alapértelmezett felmérő csoport</string>
+  <!-- TODO string name="pref_team_names_title">Team names</string -->
+  <!-- TODO string name="pref_team_names_summary">Therion team names</string -->
     
   <string name="pref_ethr_title">Sünök függőleges küszöbe</string>
   <string name="pref_ethr_summary">szögtartomány 90 fok körül a függőleges kiterítéshez [fok]</string>

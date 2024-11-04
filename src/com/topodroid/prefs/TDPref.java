@@ -269,11 +269,13 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    */
   void commitValueString()
   {
-    // TDLog.v( "Pref [*] " + name + " value " + value + " commit " + commit );
+    // if ( name.equals("DISTOX_TEAM_DIALOG") ) {
+    //   TDLog.v( "Pref commit [*] <" + name + "> value " + value + " commit " + commit );
+    // }
     if ( commit && mEdittext != null ) {
       String val = mEdittext.getText().toString();
       if ( ! value.equals( val ) ) {
-        setValue( val );
+        setValue( val /*, name.equals("DISTOX_TEAM_DIALOG") */ );
         String text = TDSetting.updatePreference( helper, category, name, value );
         // TDLog.v( "Pref [commitValueString] " + name + " value " + val + " text " + text );
 	if ( text != null ) {
@@ -586,14 +588,21 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   private static TDPref makeLst( int cat, String nm, int tit, int sum, int lvl, String def_val, int opts, int vals, Context ctx, TDPrefHelper hlp )
   { 
     String val = hlp.getString( nm, def_val ); // options ... the selected value
+    // boolean team_dialog = false;
+    // if ( nm.equals("DISTOX_TEAM_DIALOG" ) ) {
+    //   team_dialog = true;
+    //   TDLog.v( "Pref make list [1] <" + nm + "> helper get <" + val + "> default <" + def_val + ">" );
+    // }
     String[] options = ctx.getResources().getStringArray( opts );
     String[] values  = ctx.getResources().getStringArray( vals );
     // String opt = getOptionFromValue( val, options, values );
     TDPref ret = new TDPref( cat, nm, LIST, tit, sum, lvl, OPTIONS, val, def_val, ctx, hlp );
     ret.options = options;
     ret.values  = values;
-    int idx = ret.makeLstIndex( );
-    // TDLog.v( "Pref make list [1] " + nm + " val <" + val + "> index " + idx );
+    int idx = ret.makeLstIndex( /* team_dialog */ );
+    // if ( team_dialog ) {
+    //   TDLog.v( "Pref make list [1] <" + nm + "> val <" + val + "> default <" + def_val + "> index " + idx );
+    // }
     return ret;
   }
 
@@ -618,7 +627,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     TDPref ret = new TDPref( cat, nm, LIST, tit, sum, lvl, OPTIONS, val, values[0], ctx, hlp );
     ret.options = options;
     ret.values  = values;
-    int idx = ret.makeLstIndex( );
+    int idx = ret.makeLstIndex( /* nm.equals("DISTOX_TEAM_DIALOG") */ );
     // TDLog.v( "Pref make list [2] " + nm + " val <" + val + "> index " + idx );
     return ret;
   }
@@ -627,9 +636,13 @@ public class TDPref implements AdapterView.OnItemSelectedListener
 
   /** @return the list index equal to the "value"
    */
-  private int makeLstIndex( )
+  private int makeLstIndex( /* boolean debug */ )
   {
-    // TDLog.v( "Pref make list index: val <" + value + "> opts size " + options.length );
+    // if ( debug ) {
+    //   StringBuilder sb = new StringBuilder();
+    //   for ( String opt : options ) sb.append(" <").append( opt ).append(">");
+    //   TDLog.v( "Pref make list index: val <" + value + "> opts size " + options.length + ":" + sb.toString() );
+    // }
     if ( value == null || value.length() == 0 ) {
       for ( int k=0; k< values.length; ++k ) { 
         if ( values[k].length() == 0 ) {
@@ -671,11 +684,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   /** set the preference value
    * @param val  new value
    */
-  public void setValue( String val )
+  public void setValue( String val /*, boolean debug */ )
   {
     value = val;
     if ( pref_type == OPTIONS ) {
-      makeLstIndex();
+      makeLstIndex( /* debug */ );
     } else {
       try {
 	if ( pref_type == INTEGER ) {
@@ -770,20 +783,22 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     int[] tit = TDPrefKey.SURVEYtitle;
     int[] dsc = TDPrefKey.SURVEYdesc;
     String[] def = TDPrefKey.SURVEYdef;
+    // TDLog.v("pref SURVEY TEAM DIALOG: " + key[1] + " default " + def[1] + " setting " + TDSetting.mTeamNames );
     return new TDPref[ ] {
       makeEdt( cat, key[ 0], tit[ 0], dsc[0], B, def[0], STRING, ctx, hlp ),
-      makeLst( cat, key[ 1], tit[ 1], dsc[1], B, def[1], R.array.surveyStations, R.array.surveyStationsValue, ctx, hlp ),
-      makeLst( cat, key[ 2], tit[ 2], dsc[2], B, def[2], R.array.stationNames, R.array.stationNamesValue, ctx, hlp ),
-      makeEdt( cat, key[ 3], tit[ 3], dsc[3], B, def[3], STRING, ctx, hlp ),
-      makeEdt( cat, key[ 4], tit[ 4], dsc[4], A, def[4], INTEGER, ctx, hlp ),
-      makeCbx( cat, key[ 5], tit[ 5], dsc[5], E, def[5], ctx, hlp ),
-      makeCbx( cat, key[ 6], tit[ 6], dsc[6], B, def[6], ctx, hlp ),
+      makeLst( cat, key[ 1], tit[ 1], dsc[1], E, def[1], R.array.teamNames, R.array.teamNamesValue, ctx, hlp ),
+      makeLst( cat, key[ 2], tit[ 2], dsc[2], B, def[2], R.array.surveyStations, R.array.surveyStationsValue, ctx, hlp ),
+      makeLst( cat, key[ 3], tit[ 3], dsc[3], B, def[3], R.array.stationNames, R.array.stationNamesValue, ctx, hlp ),
+      makeEdt( cat, key[ 4], tit[ 4], dsc[4], B, def[4], STRING, ctx, hlp ),
+      makeEdt( cat, key[ 5], tit[ 5], dsc[5], A, def[5], INTEGER, ctx, hlp ),
+      makeCbx( cat, key[ 6], tit[ 6], dsc[6], E, def[6], ctx, hlp ),
       makeCbx( cat, key[ 7], tit[ 7], dsc[7], B, def[7], ctx, hlp ),
+      makeCbx( cat, key[ 8], tit[ 8], dsc[8], B, def[8], ctx, hlp ),
       // makeCbx( cat, key[ 8], tit[ 8], dsc[8], B, def[8], ctx, hlp ),
-      makeFwd( cat, key[ 8], tit[ 8],         B,         ctx, hlp ),
       makeFwd( cat, key[ 9], tit[ 9],         B,         ctx, hlp ),
-      makeFwd( cat, key[10], tit[10],         N,         ctx, hlp ),
-      makeFwd( cat, key[11], tit[11],         A,         ctx, hlp )
+      makeFwd( cat, key[10], tit[10],         B,         ctx, hlp ),
+      makeFwd( cat, key[11], tit[11],         N,         ctx, hlp ),
+      makeFwd( cat, key[12], tit[12],         A,         ctx, hlp )
     };
   }
 
@@ -1670,7 +1685,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc    = TDPrefKey.GEEKdesc;
     String[] def = TDPrefKey.GEEKdef;
     if ( TDLevel.isDebugBuild( ) ) {
-      TDLog.v("Length " + key.length + " " + tit.length + " " + dsc.length + " " + def.length );
+      // TDLog.v("Length " + key.length + " " + tit.length + " " + dsc.length + " " + def.length );
       return new TDPref[ ] {
         makeCbx( cat, key[0], tit[0], dsc[0],  A, def[0],  ctx, hlp ), // SINGLE_BACK
         makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // PALETTES

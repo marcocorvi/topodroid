@@ -1543,6 +1543,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_azimuth_manual_summary">Azimut des Seitenrisses wählbar</string>
   <string name="pref_team_title">Vermessungsteam</string>
   <string name="pref_team_summary">Standard-Messteam</string>
+  <!-- TODO string name="pref_team_names_title">Team names</string -->
+  <!-- TODO string name="pref_team_names_summary">Therion team names</string -->
   <string name="pref_ethr_title">Vertikale Hilfszüge</string>
   <string name="pref_ethr_summary">Toleranz um 90° wo Hilfszüge als vertikal angesehen werden; Standardwert: 10</string>
   <string name="pref_vthr_title">Vertikale Messzüge</string>

@@ -1655,6 +1655,8 @@
 
   <string name="pref_team_title">Squadra</string>
   <string name="pref_team_summary">Squadra di topografia</string>
+  <!-- TODO string name="pref_team_names_title">Team names</string -->
+  <!-- TODO string name="pref_team_names_summary">Therion team names</string -->
 
   <string name="pref_ethr_title">Angolo vert. extend</string>
   <string name="pref_ethr_summary">Angolo di vert. extend per splay</string>
