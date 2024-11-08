@@ -29,9 +29,21 @@ public class ExportGeo
   private double s_radius, e_radius;
   private Cave3DStation zero;
 
+  double mConv = 0; 
+
   public boolean hasGeo = false;
 
   double getE( Vector3D st ) { return hasGeo? lng + (st.x - zero.x) * e_radius : st.x; }
+
+  /** get E coord without convergence
+   * @param st station
+   */
+  double getENC( Vector3D st )
+  { 
+    if ( ! hasGeo ) return st.x;
+    double x = (st.x - zero.x) / (1 + st.y * mConv );
+    return lng + x * e_radius;
+  }
 
   double getN( Vector3D st ) { return hasGeo? lat + (st.y - zero.y) * s_radius : st.y; }
 
@@ -74,6 +86,7 @@ public class ExportGeo
     // altitude is assumed wgs84
     lat = origin.latitude;
     lng = origin.longitude;
+    mConv = Geodetic.meridianConvergenceFactor( origin.latitude );
     double h_ell = origin.a_ellip;
     h_geo = origin.z; // KML uses Geoid altitude (unless altitudeMode is set)
     // TDLog.v( "KML origin " + lat + " N " + lng + " E " + h_geo );

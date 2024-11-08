@@ -6173,7 +6173,7 @@ public class DataHelper extends DataSetObservable
          // TDLog.v("dump FIXED");
          do { // values in the order of the fields of the table
            pw.format(Locale.US,
-             "INSERT into %s values( %d, %d, \"%s\", %.7f, %.7f, %.2f, %.2f \"%s\", %d, %d, \"%s\", %.7f, %.7f, %.1f, %d, %d, %.4f, %.1f, %.1f, %.6f );\n",
+             "INSERT into %s values( %d, %d, \"%s\", %.7f, %.7f, %.2f, %.2f, \"%s\", %d, %d, \"%s\", %.7f, %.7f, %.1f, %d, %d, %.4f, %.1f, %.1f, %.6f, %.6f );\n",
              FIXED_TABLE,
              sid,
              cursor.getLong(0),
@@ -6189,12 +6189,13 @@ public class DataHelper extends DataSetObservable
              cursor.getDouble(10), // cs longitude
              cursor.getDouble(11), // cs latitude
              cursor.getDouble(12), // cs altitude
-             cursor.getLong(8),    // source_type
+             cursor.getLong(8),    // source_type: source is written twice
              cursor.getLong(13),   // cs decimals
              cursor.getDouble(14), // cs convergence
              cursor.getDouble(15), // accuracy
              cursor.getDouble(16), // accuracy_v
-             cursor.getDouble(17)  // meters to units
+             cursor.getDouble(17), // meters to units
+             cursor.getDouble(18)  // meters to v-units
            );
          } while (cursor.moveToNext());
        }
@@ -6519,8 +6520,11 @@ public class DataHelper extends DataSetObservable
                  cs_lng = scanline1.doubleValue( 0.0 );
                  cs_lat = scanline1.doubleValue( 0.0 );
                  cs_h_geo = scanline1.doubleValue( 0.0 );
+	         long source_type = ( db_version > 27 )? scanline1.longValue( 0 ) : 0; // source_type
 	         if ( db_version > 34 ) cs_n_dec = scanline1.longValue( 8 ); // nr. of decimals
-	         if ( db_version > 46 ) conv = scanline1.doubleValue( 0.0 ); // nr. of decimals
+
+	         if ( db_version > 46 ) conv = scanline1.doubleValue( 0.0 ); // convergence
+                 TDLog.v("CS " + cs + " lng " + cs_lng + " lat " + cs_lat + " source_type " + source_type + " conv " + conv );
 	         if ( db_version > 47 ) {
                    accur   = scanline1.doubleValue( -1 );
                    accur_v = scanline1.doubleValue( -1 );

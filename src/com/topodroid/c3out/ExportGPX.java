@@ -80,7 +80,7 @@ public class ExportGPX extends ExportGeo
     double minlon = Double.MAX_VALUE;
     double maxlon = Double.MIN_VALUE;
     for ( Cave3DStation st : stations ) {
-      double e = getE( st );
+      double e = getENC( st );
       double n = getN( st );
       if ( e < minlon ) minlon = e;
       if ( e > maxlon ) maxlon = e;
@@ -121,7 +121,7 @@ public class ExportGPX extends ExportGeo
           // pw.format(Locale.US, "<Folder>\n");
           // pw.format(Locale.US, "  <name>stations</name>\n" );
           for ( Cave3DStation st : stations ) {
-            double e = getE( st );
+            double e = getENC( st );
             double n = getN( st );
             double z = getZ( st );
             pw.format(Locale.US, "  <wpt lat=\"%.7f\" lon=\"%.7f\">\n", e, n );
@@ -147,12 +147,12 @@ public class ExportGPX extends ExportGeo
           } else if ( last != sf ) {
             pw.format(Locale.US, "    </trkseg>\n");
             pw.format(Locale.US, "    <trkseg>\n");
-            double ef = getE( sf );
+            double ef = getENC( sf );
             double nf = getN( sf );
             double zf = getZ( sf );
             pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.1f</ele></trkpt>\n", ef, nf, zf ); 
           }
-          double et = getE( st );
+          double et = getENC( st );
           double nt = getN( st );
           double zt = getZ( st );
           // pw.format(Locale.US, "    <name>%s-%s</name>\n", sf.getFullName(), st.getFullName() );
@@ -169,10 +169,10 @@ public class ExportGPX extends ExportGeo
             Cave3DStation sf = sp.from_station;
             if ( sf == null ) continue;
             Vector3D v = sf.sum( sp.toVector3D() );
-            double ef = getE( sf );
+            double ef = getENC( sf );
             double nf = getN( sf );
             double zf = getZ( sf );
-            double et = getE( v );
+            double et = getENC( v );
             double nt = getN( v );
             double zt = getZ( v );
             pw.format(Locale.US, "    <trkseg>\n");

@@ -442,6 +442,15 @@ public class DBlock
     return ( Math.abs( mStretch ) > 0.01f );
   }
 
+  /** clear the block extend and stretch
+   * @note called only by ShotWindow
+   */
+  void clearExtendAndStretch()
+  {
+    mStretch = ExtendType.STRETCH_NONE;
+    mExtend  = ExtendType.EXTEND_IGNORE;
+  }
+
   // ----------------------------------------------------------------
   // RECENT and MULTIBAD
 

@@ -261,13 +261,16 @@ public class TDConst
     false, // "Shapefile",
   };
 
+  final static int NR_EXPORT_DATA        = 16;
+  final static int NR_EXPORT_DATA_NO_GEO = 13;
+
   /** @return the array of enabled export types
    * @param with_geo  whether to include geo-types
    */
   public static String[] surveyExportTypes( boolean with_geo )
   {
     int nr = 0;
-    int kk = with_geo? 17 : 14;
+    int kk = with_geo? NR_EXPORT_DATA : NR_EXPORT_DATA_NO_GEO;
     for ( int k = 0; k < kk; ++k ) if ( mSurveyExportEnable[k] ) ++ nr;
     String[] ret = new String[nr];
     int n = 0;

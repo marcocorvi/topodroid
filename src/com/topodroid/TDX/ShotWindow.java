@@ -142,6 +142,7 @@ public class ShotWindow extends Activity
                       };
 
   private static final int[] izonsF = {
+                        R.drawable.iz_ignore,     // extend ignore
                         R.drawable.iz_left,       // extend LEFT
                         R.drawable.iz_flip,       // extend flip
                         R.drawable.iz_right,      // extend RIGHT
@@ -153,8 +154,8 @@ public class ShotWindow extends Activity
                         R.drawable.iz_clear       // cancel
 			// R.drawable.iz_empty // EMPTY
                       };
-  private static final int BTN_MULTISHOT = 3; // index of iz_highlight
-  private static final int BTN_COPY      = 5; // index of iz_copy
+  private static final int BTN_MULTISHOT = 4; // index of iz_highlight
+  private static final int BTN_COPY      = 6; // index of iz_copy
 
   private static final int[] menus = { // menu labels
                         R.string.menu_close,
@@ -271,7 +272,7 @@ public class ShotWindow extends Activity
   // ConnHandler mHandler;
 
   private Button[] mButtonF;
-  private int mNrButtonF = 7; // 8;
+  private int mNrButtonF = 8;
 
   // private Button mButtonHelp;
   private MyHorizontalListView mListView;
@@ -1668,6 +1669,14 @@ public class ShotWindow extends Activity
           updateDisplay();
 	}
 
+      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // IGNORE
+        for ( DBlock blk : mDataAdapter.mSelect ) {
+          blk.clearExtendAndStretch();
+          mApp_mData.updateShotExtend( blk.mId, TDInstance.sid, blk.getIntExtend(), blk.getStretch() );
+        }
+        mDataAdapter.updateSelectBlocksView();
+        clearMultiSelect( );
+        // updateDisplay(); // REPLACED
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // LEFT reset stretch
         for ( DBlock blk : mDataAdapter.mSelect ) {
           blk.setExtend( ExtendType.EXTEND_LEFT, ExtendType.STRETCH_NONE );
