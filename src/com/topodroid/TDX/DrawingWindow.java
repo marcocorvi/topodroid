@@ -7376,7 +7376,7 @@ public class DrawingWindow extends ItemDrawer
                 } else {
                   TDToast.makeWarn( R.string.no_feature_audio );
                 }
-              } else if ( BrushManager.isPointSection( point.mPointType ) ) {
+              } else if ( BrushManager.isPointSection( point.mPointType ) ) { // open x-section sketch
                 new DrawingPointSectionDialog( mActivity, this, point ).show();
               } else {
                 new DrawingPointDialog( mActivity, this, point ).show();
@@ -7417,7 +7417,13 @@ public class DrawingWindow extends ItemDrawer
         clearSelected();
       } else if ( k3 < mNrButton3 && b == mButton3[k3++] ) { // ITEM/POINT EDITING: move, split, remove, etc.
         // TDLog.v( "Button3[5] hasPointActions " + hasPointActions );
-        if ( hasPointActions ) {
+        SelectionPoint sp = mDrawingSurface.hotItem();
+        DrawingPath item = ( sp != null )? sp.mItem : null;
+        DrawingPointPath point = ( item != null && item instanceof DrawingPointPath )? (DrawingPointPath) item : null;
+        if ( point != null && BrushManager.isPointSection( point.mPointType ) ) { // open x-section sketch
+          String xsection_name = TDUtil.replacePrefix( TDInstance.survey, point.getOption(TDString.OPTION_SCRAP) ); 
+          openXSectionDraw( xsection_name ); 
+        } else if ( hasPointActions ) {
           makePopupEdit( b, dismiss );
         // } else {
           // SelectionPoint sp = mDrawingSurface.hotItem();
