@@ -62,7 +62,7 @@ public class ExportGPX extends ExportGeo
     boolean ret = true;
     if ( data == null ) return false; // always false
 
-    if ( ! getGeolocalizedData( data, 0.0f, 1.0f ) ) { // FIXME declination 0.0f
+    if ( ! getGeolocalizedData( data, 0.0f, false ) ) { // FIXME declination 0.0f
       TDLog.e( "GPX no geolocalized station");
       return false;
     }
@@ -81,7 +81,7 @@ public class ExportGPX extends ExportGeo
     double maxlon = Double.MIN_VALUE;
     for ( Cave3DStation st : stations ) {
       double e = getENC( st );
-      double n = getN( st );
+      double n = getNNC( st );
       if ( e < minlon ) minlon = e;
       if ( e > maxlon ) maxlon = e;
       if ( n < minlat ) minlat = n;
@@ -122,7 +122,7 @@ public class ExportGPX extends ExportGeo
           // pw.format(Locale.US, "  <name>stations</name>\n" );
           for ( Cave3DStation st : stations ) {
             double e = getENC( st );
-            double n = getN( st );
+            double n = getNNC( st );
             double z = getZ( st );
             pw.format(Locale.US, "  <wpt lat=\"%.7f\" lon=\"%.7f\">\n", e, n );
             pw.format(Locale.US, "    <ele>%.0f</ele>\n", z );
@@ -148,12 +148,12 @@ public class ExportGPX extends ExportGeo
             pw.format(Locale.US, "    </trkseg>\n");
             pw.format(Locale.US, "    <trkseg>\n");
             double ef = getENC( sf );
-            double nf = getN( sf );
+            double nf = getNNC( sf );
             double zf = getZ( sf );
             pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.1f</ele></trkpt>\n", ef, nf, zf ); 
           }
           double et = getENC( st );
-          double nt = getN( st );
+          double nt = getNNC( st );
           double zt = getZ( st );
           // pw.format(Locale.US, "    <name>%s-%s</name>\n", sf.getFullName(), st.getFullName() );
           pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.1f</ele></trkpt>\n", et, nt, zt ); 
@@ -170,10 +170,10 @@ public class ExportGPX extends ExportGeo
             if ( sf == null ) continue;
             Vector3D v = sf.sum( sp.toVector3D() );
             double ef = getENC( sf );
-            double nf = getN( sf );
+            double nf = getNNC( sf );
             double zf = getZ( sf );
             double et = getENC( v );
-            double nt = getN( v );
+            double nt = getNNC( v );
             double zt = getZ( v );
             pw.format(Locale.US, "    <trkseg>\n");
             pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.1f</ele></trkpt>\n", ef, nf, zf ); 

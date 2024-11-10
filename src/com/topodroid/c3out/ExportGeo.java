@@ -33,6 +33,9 @@ public class ExportGeo
 
   public boolean hasGeo = false;
 
+  /** get E coord 
+   * @param st station
+   */
   double getE( Vector3D st ) { return hasGeo? lng + (st.x - zero.x) * e_radius : st.x; }
 
   /** get E coord without convergence
@@ -49,24 +52,37 @@ public class ExportGeo
   double getENC( Vector3D st )
   { 
     if ( ! hasGeo ) return st.x;
-    double x = (st.x - zero.x) + (st.y - zero.y)  * mConv;
-    double ret = lng + x * e_radius;
-    // double ret1 = lng + (st.x - zero.x) * e_radius;
-    // double n = getN( st );
-    // TDLog.v("ENC ret " + (ret-9.1319)*10000 + " ret1 " + (ret1-9.1319)*10000 + " N " + (n-44.3612)*10000 );
-    return ret;
+    double x = (st.x - zero.x) + (st.y - zero.y) * mConv;
+    return lng + x * e_radius;
   }
 
+  /** get N coord 
+   * @param st station
+   */
   double getN( Vector3D st ) { return hasGeo? lat + (st.y - zero.y) * s_radius : st.y; }
 
+  /** get N coord without convergence
+   * @param st station
+   */
+  double getNNC( Vector3D st ) 
+  { 
+    if ( ! hasGeo ) return st.y;
+    double y = (st.y - zero.y) - (st.x - zero.x) * mConv;
+    return lat + y * s_radius;
+  }
+
+  /** get Z coord 
+   * @param st station
+   */
   double getZ( Vector3D st ) { return hasGeo? h_geo + (st.z - zero.z) : st.z; }
 
   /** ???
    * @param data        data parser
    * @param decl        magnetic declination (unused)
-   * @param h_geo_factor ??? (unused)
+   * @param use_conv    whether to apply meridian convergence
+   * @note always called with use_conv=false
    */
-  boolean getGeolocalizedData( TglParser data, double decl, double h_geo_factor )
+  protected boolean getGeolocalizedData( TglParser data, double decl, boolean use_conv )
   {
     // TDLog.v( "KML get geo-localized data. Declination " + decl );
     List< Cave3DFix > fixes = data.getFixes();
@@ -98,7 +114,7 @@ public class ExportGeo
     // altitude is assumed wgs84
     lat = origin.latitude;
     lng = origin.longitude;
-    mConv = Geodetic.meridianConvergenceFactor( origin.latitude );
+    mConv = use_conv ? Geodetic.meridianConvergenceFactor( origin.latitude ) : 0.0;
     double h_ell = origin.a_ellip;
     h_geo = origin.z; // KML uses Geoid altitude (unless altitudeMode is set)
     // TDLog.v( "KML origin " + lat + " N " + lng + " E " + h_geo );

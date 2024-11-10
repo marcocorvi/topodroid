@@ -91,7 +91,7 @@ public class CavwayProtocol extends TopoDroidProtocol
   public CavwayProtocol(Context ctx, TopoDroidApp app, ListerHandler lister, Device device, CavwayComm comm )
   {
     super( device, ctx );
-    if ( LOG ) TDLog.v("Cavway proto cstr");
+    // if ( LOG ) TDLog.v("Cavway proto cstr");
     mLister = lister;
     mComm   = comm;
     mRepliedData = new byte[4];
@@ -105,7 +105,7 @@ public class CavwayProtocol extends TopoDroidProtocol
     if ( LOG ) {
       StringBuilder sb = new StringBuilder();
       for ( byte b : packetdata ) sb.append( String.format(" %02x", b ) );
-      TDLog.v("Cavway proto parse packet - length " + packetdata.length + sb.toString() );
+      TDLog.v("CAVWAY PROTO packet " + packetdata.length + ": " + sb.toString() );
     }
 
     byte flag = packetdata[1];   //leg, err flag

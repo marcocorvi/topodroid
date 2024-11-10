@@ -148,7 +148,7 @@
     <item name="none">nenhum</item>
     <item name="therion">Therion</item>
     <item name="csurvey">cSurvey</item>
-    <item name="tunnel">Tunnel</item>
+    <!-- item name="tunnel">Tunnel</item -->
     <item name="xtherion">xtherion</item>
     <item name="dxf">DXF</item>
     <item name="svg">SVG</item>
@@ -160,7 +160,7 @@
     <item name="none">nenhum</item>
     <item name="therion">Therion</item>
     <item name="csurvey">cSurvey</item>
-    <item name="tunnel">Tunnel</item>
+    <!-- item name="tunnel">Tunnel</item -->
     <item name="xtherion">xtherion</item>
     <item name="dxf">DXF</item>
     <item name="svg">SVG</item>

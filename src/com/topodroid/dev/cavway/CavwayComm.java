@@ -70,7 +70,7 @@ public class CavwayComm extends TopoDroidComm
                            implements BleComm 
 {
   private final static boolean LOG = true;
-  private final static boolean USE_MTU = false;
+  private final static boolean USE_MTU = false; // max MTU 250
 
   final static int DATA_PRIM = 1;   // same as Bric DATA_PRIM
   final static int DATA_QUIT = -1;  // same as Bric 
@@ -127,24 +127,24 @@ public class CavwayComm extends TopoDroidComm
   private void startConsumerThread()
   {
     if ( mConsumer != null ) {
-      TDLog.e("Cavway comm start consumer thread with non-null consumer");
+      TDLog.e("CONSUMER THREAD start with non-null consumer");
       return;
     }
     mConsumer = new Thread() { // this is the thread that consumes data on the queue
       @Override public void run() {
         //mThreadConsumerWorking = true;
-        if ( LOG ) TDLog.v("Cavway comm consumer thread start");
+        if ( LOG ) TDLog.v("CONSUMER THREAD start");
         while ( true ) {
-          if ( LOG ) TDLog.v( "Cavway comm: Queue size " + mQueue.size );
+          if ( LOG ) TDLog.v( "CONSUMER THREAD: Queue size " + mQueue.size );
           BleBuffer buffer = mQueue.get();
           if ( buffer == null ) continue;
           if ( buffer.type == DATA_PRIM ) {
             if ( buffer.data == null) {
-              TDLog.t( "Cavway comm: consumer thread - buffer with null data");
+              TDLog.t( "CONSUMER THREAD: buffer with null data");
               continue;
             }
             // ++mNrReadPackets; this is incremented once for DATA and once for VECTOR by TopoDroidComm
-            if ( LOG ) TDLog.v( "Cavway comm: consumer thread - buffer read " + mNrReadPackets );
+            if ( LOG ) TDLog.v( "CONSUMER THREAD: buffer read " + mNrReadPackets );
             int res = ((CavwayProtocol)mProtocol).packetProcess( buffer.data );
             if ( res == CavwayProtocol.PACKET_FLASH_BYTES_1 ) continue;   // first-half of firmware block received
             synchronized (mNewDataFlag) {
@@ -153,12 +153,12 @@ public class CavwayComm extends TopoDroidComm
               mNewDataFlag.notifyAll(); // wake sleeping threads
             }
           } else if ( buffer.type == DATA_QUIT ) {
-            if ( LOG ) TDLog.v( "Cavway comm: consumer thread - buffer QUIT");
+            if ( LOG ) TDLog.v( "CONSUMER THREAD - buffer QUIT");
             break;
           }
           TDUtil.slowDown(500);
         }
-        if ( LOG ) TDLog.v( "Cavway comm: consumer thread exit");
+        if ( LOG ) TDLog.v( "CONSUMER THREAD exit");
       }
     };
     mConsumer.start();
@@ -226,9 +226,9 @@ public class CavwayComm extends TopoDroidComm
     // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
     // clearPending();
 
-    if ( LOG ) TDLog.v( "Cavway comm connect cavway: enqueue connect" );
+    // if ( LOG ) TDLog.v( "Cavway comm connect cavway: enqueue connect" );
     int ret = enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
-    if ( LOG ) TDLog.v( "Cavway comm connect cavway ... " + ret);
+    // if ( LOG ) TDLog.v( "Cavway comm connect cavway ... " + ret);
     clearPending();
     return true;
   }
@@ -243,7 +243,7 @@ public class CavwayComm extends TopoDroidComm
     mContext = ctx;
     mCallback.connectGatt( mContext, bt_device );
     // setupNotifications(); // FIXME_Cavway
-    if ( LOG ) TDLog.v( "Cavway comm after connect GATT: bond state " + bt_device.getBondState() );
+    // if ( LOG ) TDLog.v( "Cavway comm after connect GATT: bond state " + bt_device.getBondState() );
   }
 
   /** connect to the remote Cavway device
@@ -256,7 +256,7 @@ public class CavwayComm extends TopoDroidComm
   @Override
   public boolean connectDevice(String address, ListerHandler lister, int data_type, int timeout ) // FIXME XBLE_DATA_TYPE ?
   {
-    if ( LOG ) TDLog.v( "Cavway comm connect Device");
+    // if ( LOG ) TDLog.v( "Cavway comm connect Device");
     mAddress       = address; // saved
     mNrReadPackets = 0;
     mDataType      = data_type;
@@ -289,7 +289,7 @@ public class CavwayComm extends TopoDroidComm
 
   public void disconnectGatt()  // called from BleOpDisconnect
   {
-    if ( LOG ) TDLog.v( "Cavway comm disconnect GATT: close GATT => status DISCONNECTED");
+    // if ( LOG ) TDLog.v( "Cavway comm disconnect GATT: close GATT => status DISCONNECTED");
     notifyStatus( ConnectionState.CONN_DISCONNECTED );
     mCallback.closeGatt();
   }
@@ -312,7 +312,7 @@ public class CavwayComm extends TopoDroidComm
       //mThreadConsumerWorking = false;
       mBTConnected = false;
       notifyStatus( ConnectionState.CONN_DISCONNECTED ); // not necessary
-      TDLog.v( "Cavway comm close device: enqueue disconnect => status ISCONNECTED");
+      // TDLog.v( "Cavway comm close device: enqueue disconnect => status ISCONNECTED");
       int ret = enqueueOp( new BleOpDisconnect( mContext, this ) ); // exec disconnectGatt
       doNextOp();
       // TDLog.v( "Cavway comm: close Device - disconnect ... ops " + ret );
@@ -344,9 +344,9 @@ public class CavwayComm extends TopoDroidComm
   {
     if ( LOG ) {
       if ( mRemoteBtDevice != null ) {
-        TDLog.v( "Cavway comm enqueue " + op.name() + " bond state " + mRemoteBtDevice.getBondState() );
+        // TDLog.v( "Cavway comm enqueue " + op.name() + " bond state " + mRemoteBtDevice.getBondState() );
       } else {
-        TDLog.v( "Cavway comm enqueue " + op.name() );
+        TDLog.v( "Cavway comm enqueue " + op.name() + " null remote" );
       }
     }
     mOps.add( op );
@@ -395,7 +395,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public void readedRemoteRssi( int rssi )
   {
-    if ( LOG ) TDLog.v("Cavway comm readed remote RSSI");
+    // if ( LOG ) TDLog.v("Cavway comm readed remote RSSI");
     clearPending();
   }
 
@@ -424,6 +424,7 @@ public class CavwayComm extends TopoDroidComm
   public void readedChrt( String uuid_str, byte[] bytes )
   {
     if ( LOG ) TDLog.v( "Cavway comm: readed chrt " + bytes.length );
+    mQueue.put( DATA_PRIM, bytes );
   }
 
   /** notified that bytes have been written to the write characteristics
@@ -432,7 +433,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public void writtenChrt( String uuid_str, byte[] bytes )
   {
-    if ( LOG ) TDLog.v( "Cavway comm: written chrt " + bytes.length );
+    // if ( LOG ) TDLog.v( "Cavway comm: written chrt " + bytes.length );
     clearPending();
   }
 
@@ -477,7 +478,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public void completedReliableWrite()
   {
-    if ( LOG ) TDLog.v( "Cavway comm: completed reliable write" );
+    // if ( LOG ) TDLog.v( "Cavway comm: completed reliable write" );
   }
 
   /** read a characteristics
@@ -501,7 +502,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public boolean writeChrt( UUID srvUuid, UUID chrtUuid, byte[] bytes )
   {
-    if ( LOG ) TDLog.v( "Cavway comm: write chrt " + chrtUuid.toString() );
+    // if ( LOG ) TDLog.v( "Cavway comm: write chrt " + chrtUuid.toString() );
     return mCallback.writeChrt( srvUuid, chrtUuid, bytes );
   }
 
@@ -517,9 +518,9 @@ public class CavwayComm extends TopoDroidComm
    */
   public int servicesDiscovered( BluetoothGatt gatt )
   {
-    if ( LOG ) TDLog.v( "Cavway comm services discovered");
+    // if ( LOG ) TDLog.v( "Cavway comm services discovered");
     if ( USE_MTU ) {
-      enqueueOp( new BleOpRequestMtu( mContext, this, 400 ) ); // exec requestMtu
+      enqueueOp( new BleOpRequestMtu( mContext, this, 250 ) ); // exec requestMtu
     } else {
       enqueueOp( new BleOpNotify( mContext, this, CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_READ_UUID, true ) );
     }

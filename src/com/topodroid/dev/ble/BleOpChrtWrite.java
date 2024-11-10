@@ -46,6 +46,6 @@ public class BleOpChrtWrite extends BleOperation
     // TDLog.v( "BleOp exec chrt write " );
     boolean ret = 
       mPipe.writeChrt( mSrvUuid, mChrtUuid, bytes );
-    TDLog.v( "BleOp exec chrt write: ret " + ret );
+    // TDLog.v( "BleOp exec chrt write: ret " + ret );
   }
 }

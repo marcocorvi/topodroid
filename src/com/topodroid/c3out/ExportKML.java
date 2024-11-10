@@ -61,7 +61,7 @@ public class ExportKML extends ExportGeo
     if ( data == null ) return false; // always false
 
     TDLog.v( "KML export splays " + do_splays + " walls " + do_walls + " stations " + do_station );
-    if ( ! getGeolocalizedData( data, 0.0f, 1.0f ) ) { // FIXME declination 0.0f
+    if ( ! getGeolocalizedData( data, 0.0f, false ) ) { // FIXME declination 0.0f
       TDLog.e( "KML no geolocalized station");
       return false;
     }
@@ -168,7 +168,7 @@ public class ExportKML extends ExportGeo
           // pw.format(Locale.US, "  <MultiGeometry>\n");
           for ( Cave3DStation st : stations ) {
             double e = getENC( st );
-            double n = getN( st );
+            double n = getNNC( st );
             double z = getZ( st );
             pw.format(Locale.US, "<Placemark>\n");
             pw.format(Locale.US, "  <name>%s</name>\n", st.getFullName() );
@@ -196,10 +196,10 @@ public class ExportKML extends ExportGeo
           Cave3DStation st = sh.to_station;
           if ( sf == null || st == null ) continue;
           double ef = getENC( sf );
-          double nf = getN( sf );
+          double nf = getNNC( sf );
           double zf = getZ( sf );
           double et = getENC( st );
-          double nt = getN( st );
+          double nt = getNNC( st );
           double zt = getZ( st );
           pw.format(Locale.US, "    <LineString id=\"%s-%s\"> <coordinates>\n", sf.getFullName(), st.getFullName() );
           // pw.format(Locale.US, "      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
@@ -222,10 +222,10 @@ public class ExportKML extends ExportGeo
             if ( sf == null ) continue;
             Vector3D v = sf.sum( sp.toVector3D() );
             double ef = getENC( sf );
-            double nf = getN( sf );
+            double nf = getNNC( sf );
             double zf = getZ( sf );
             double et = getENC( v );
-            double nt = getN( v );
+            double nt = getNNC( v );
             double zt = getZ( v );
             pw.format(Locale.US, "    <LineString> <coordinates>\n" );
             // pw.format(Locale.US, "      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
@@ -249,13 +249,13 @@ public class ExportKML extends ExportGeo
         pw.format(Locale.US, "  <MultiGeometry>\n");
         for ( CWFacet facet : mFacets ) {
           double e1 = getENC( facet.v1 );
-          double n1 = getN( facet.v1 );
+          double n1 = getNNC( facet.v1 );
           double z1 = getZ( facet.v1 );
           double e2 = getENC( facet.v2 );
-          double n2 = getN( facet.v2 );
+          double n2 = getNNC( facet.v2 );
           double z2 = getZ( facet.v2 );
           double e3 = getENC( facet.v3 );
-          double n3 = getN( facet.v3 );
+          double n3 = getNNC( facet.v3 );
           double z3 = getZ( facet.v3 );
           pw.format(Locale.US, "    <Polygon>\n");
           pw.format(Locale.US, "      <outerBoundaryIs> <LinearRing> <coordinates>\n");
@@ -269,14 +269,14 @@ public class ExportKML extends ExportGeo
         if ( mTriangles != null ) {
           for ( Triangle3D t : mTriangles ) {
             double e0 = getENC( t.vertex[t.size-1] );
-            double n0 = getN( t.vertex[t.size-1] );
+            double n0 = getNNC( t.vertex[t.size-1] );
             double z0 = getZ( t.vertex[t.size-1] );
             pw.format(Locale.US, "    <Polygon>\n");
             pw.format(Locale.US, "      <outerBoundaryIs> <LinearRing> <coordinates>\n");
             pw.format(Locale.US, "             %.8f,%.8f,%.3f\n", e0,n0,z0); // last point
             for ( int k = 0; k < t.size; ++k ) {
               double e1 = getENC( t.vertex[k] );
-              double n1 = getN( t.vertex[k] );
+              double n1 = getNNC( t.vertex[k] );
               double z1 = getZ( t.vertex[k] );
               pw.format(Locale.US, "             %.8f,%.8f,%.3f\n", e1,n1,z1);
             }
@@ -294,13 +294,13 @@ public class ExportKML extends ExportGeo
         pw.format(Locale.US, "  <MultiGeometry>\n");
         for ( CWFacet facet : mFacets ) {
           double e1 = getENC( facet.v1 );
-          double n1 = getN( facet.v1 );
+          double n1 = getNNC( facet.v1 );
           double z1 = getZ( facet.v1 );
           double e2 = getENC( facet.v2 );
-          double n2 = getN( facet.v2 );
+          double n2 = getNNC( facet.v2 );
           double z2 = getZ( facet.v2 );
           double e3 = getENC( facet.v3 );
-          double n3 = getN( facet.v3 );
+          double n3 = getNNC( facet.v3 );
           double z3 = getZ( facet.v3 );
           pw.format(Locale.US, "    <LineString> <coordinates>\n");
           pw.format(Locale.US, "             %.8f,%.8f,%.3f %.8f,%.8f,%.3f", e1,n1,z1, e2,n2,z2 );
@@ -315,11 +315,11 @@ public class ExportKML extends ExportGeo
         if ( mTriangles != null ) {
           for ( Triangle3D t : mTriangles ) {
             double e0 = getENC( t.vertex[t.size-1] );
-            double n0 = getN( t.vertex[t.size-1] );
+            double n0 = getNNC( t.vertex[t.size-1] );
             double z0 = getZ( t.vertex[t.size-1] );
             for ( int k = 0; k < t.size; ++k ) { // border (e0,n0,z0) set at last point
               double e1 = getENC( t.vertex[k] );
-              double n1 = getN( t.vertex[k] );
+              double n1 = getNNC( t.vertex[k] );
               double z1 = getZ( t.vertex[k] );
               pw.format(Locale.US, "    <LineString> <coordinates>\n");
               pw.format(Locale.US, "             %.8f,%.8f,%.3f %.8f,%.8f,%.3f", e0,n0,z0, e1,n1,z1 );

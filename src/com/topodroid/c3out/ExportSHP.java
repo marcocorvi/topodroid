@@ -157,7 +157,7 @@ public class ExportSHP
     boolean ret = false;
     try {
       ShpPointz shp = new ShpPointz( filepath + "/station", "station",  files );
-      shp.getGeolocalizedData( parser, 0, 0 );
+      shp.getGeolocalizedData( parser, 0, false );
       // shp.setYYMMDD( info.date );
       ret = shp.writeStations( stations );
     } catch ( IOException e ) {
@@ -173,7 +173,7 @@ public class ExportSHP
     boolean ret = false;
     try {
       ShpPolylinez shp = new ShpPolylinez( filepath + "/" + name, name, files );
-      shp.getGeolocalizedData( parser, 0, 0 );
+      shp.getGeolocalizedData( parser, 0, false );
       // shp.setYYMMDD( info.date );
       ret = shp.writeShots( shots, name );
     } catch ( IOException e ) {
@@ -189,7 +189,7 @@ public class ExportSHP
     boolean ret = false;
     try {
       ShpPolygonz shp = new ShpPolygonz( filepath + "/facet", "facet", files );
-      shp.getGeolocalizedData( parser, 0, 0 );
+      shp.getGeolocalizedData( parser, 0, false );
       // shp.setYYMMDD( info.date );
       ret = shp.writeFacets( facets );
     } catch ( IOException e ) {

@@ -405,7 +405,7 @@ class ShpObject extends ExportGeo
   protected void initBBox( Vector3D v )
   {
     xmin = xmax = getENC(v);
-    ymin = ymax = getN(v);
+    ymin = ymax = getNNC(v);
     zmin = zmax = getZ(v);
   }
 
@@ -422,7 +422,7 @@ class ShpObject extends ExportGeo
   {
     if ( v == null ) return;
     double x = getENC(v);
-    double y = getN(v);
+    double y = getNNC(v);
     double z = getZ(v);
     if ( x < xmin ) { xmin = x; } else if ( x > xmax ) { xmax = x; }
     if ( y < ymin ) { ymin = y; } else if ( y > ymax ) { ymax = y; }
@@ -534,9 +534,9 @@ class ShpPointz extends ShpObject
       writeShpRecordHeader( cnt, shpRecLen );
       shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
       shpBuffer.putInt( mShpType );
-      TDLog.v( "SHP POINTZ " + cnt + " offset " + offset + ": " + pt.x + " " + pt.y + " " + pt.z + " ENZ " + getENC(pt) + " " + getN(pt) + " " + getZ(pt) );
+      TDLog.v( "SHP POINTZ " + cnt + " offset " + offset + ": " + pt.x + " " + pt.y + " " + pt.z + " ENZ " + getENC(pt) + " " + getNNC(pt) + " " + getZ(pt) );
       shpBuffer.putDouble( getENC( pt ) );
-      shpBuffer.putDouble( getN( pt ) );
+      shpBuffer.putDouble( getNNC( pt ) );
       shpBuffer.putDouble( getZ( pt ) );
       shpBuffer.putDouble( 0.0 );
 
@@ -654,7 +654,7 @@ class ShpPolylinez extends ShpObject
     shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
     shpBuffer.putInt( mShpType );
     double x1 = getENC( p1 ); double x2 = getENC( p2 ); if ( x1 > x2 ) { x1=x2; x2=getENC(p1); }
-    double y1 = getN( p1 ); double y2 = getN( p2 ); if ( y1 > y2 ) { y1=y2; y2=getN(p1); }
+    double y1 = getNNC( p1 ); double y2 = getNNC( p2 ); if ( y1 > y2 ) { y1=y2; y2=getNNC(p1); }
     double z1 = getZ( p1 ); double z2 = getZ( p2 ); if ( z1 > z2 ) { z1=z2; z2=getZ(p1); }
     shpBuffer.putDouble( x1 );
     shpBuffer.putDouble( y1 );
@@ -664,9 +664,9 @@ class ShpPolylinez extends ShpObject
     shpBuffer.putInt( 2 ); // two points: total number of points
     shpBuffer.putInt( 0 ); // part 0 starts with point 0 (and ends with point 1)
     shpBuffer.putDouble( getENC( p1 ) );
-    shpBuffer.putDouble( getN( p1 ) );
+    shpBuffer.putDouble( getNNC( p1 ) );
     shpBuffer.putDouble( getENC( p2 ) );
-    shpBuffer.putDouble( getN( p2 ) );
+    shpBuffer.putDouble( getNNC( p2 ) );
     shpBuffer.putDouble( z1 );
     shpBuffer.putDouble( z2 );
     shpBuffer.putDouble( getZ( p1 ) );
@@ -841,7 +841,7 @@ class ShpPolygonz extends ShpObject
     shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
     shpBuffer.putInt( mShpType );
     double x1 = getENC( p1 ); double x2 = getENC( p2 ); double x3 = getENC( p3 ); if ( x1 > x2 ) { x1=x2; x2=getENC(p1); } if ( x1 > x3 ) { x1 = x3; } else if ( x2 < x3 ) { x2 = x3; }
-    double y1 = getN( p1 ); double y2 = getN( p2 ); double y3 = getN( p3 ); if ( y1 > y2 ) { y1=y2; y2=getN(p1); } if ( y1 > y3 ) { y1 = y3; } else if ( y2 < y3 ) { y2 = y3; }
+    double y1 = getNNC( p1 ); double y2 = getNNC( p2 ); double y3 = getNNC( p3 ); if ( y1 > y2 ) { y1=y2; y2=getNNC(p1); } if ( y1 > y3 ) { y1 = y3; } else if ( y2 < y3 ) { y2 = y3; }
     double z1 = getZ( p1 ); double z2 = getZ( p2 ); double z3 = getZ( p3 ); if ( z1 > z2 ) { z1=z2; z2=getZ(p1); } if ( z1 > z3 ) { z1 = z3; } else if ( z2 < z3 ) { z2 = z3; }
     shpBuffer.putDouble( x1 );
     shpBuffer.putDouble( y1 );
@@ -851,13 +851,13 @@ class ShpPolygonz extends ShpObject
     shpBuffer.putInt( 4 ); // four points: total number of points: last must coincide with first
     shpBuffer.putInt( 0 ); // part 0 starts with point 0 (and ends with point 2)
     shpBuffer.putDouble( getENC(p1) );
-    shpBuffer.putDouble( getN(p1) );
+    shpBuffer.putDouble( getNNC(p1) );
     shpBuffer.putDouble( getENC(p2) );
-    shpBuffer.putDouble( getN(p2) );
+    shpBuffer.putDouble( getNNC(p2) );
     shpBuffer.putDouble( getENC(p3) );
-    shpBuffer.putDouble( getN(p3) );
+    shpBuffer.putDouble( getNNC(p3) );
     shpBuffer.putDouble( getENC(p1) );
-    shpBuffer.putDouble( getN(p1) );
+    shpBuffer.putDouble( getNNC(p1) );
     shpBuffer.putDouble( z1 );
     shpBuffer.putDouble( z2 );
     shpBuffer.putDouble( getZ(p1) );
@@ -983,7 +983,7 @@ class ShpPolygonz extends ShpObject
     shpBuffer.putInt( mShpType );
 
     double x1 = getENC( p1 ); double x2 = getENC( p2 ); double x3 = getENC( p3 ); if ( x1 > x2 ) { x1=x2; x2=getENC(p1); } if ( x1 > x3 ) { x1 = x3; } else if ( x2 < x3 ) { x2 = x3; }
-    double y1 = getN( p1 ); double y2 = getN( p2 ); double y3 = getN( p3 ); if ( y1 > y2 ) { y1=y2; y2=getN(p1); } if ( y1 > y3 ) { y1 = y3; } else if ( y2 < y3 ) { y2 = y3; }
+    double y1 = getNNC( p1 ); double y2 = getNNC( p2 ); double y3 = getNNC( p3 ); if ( y1 > y2 ) { y1=y2; y2=getNNC(p1); } if ( y1 > y3 ) { y1 = y3; } else if ( y2 < y3 ) { y2 = y3; }
     double z1 = getZ( p1 ); double z2 = getZ( p2 ); double z3 = getZ( p3 ); if ( z1 > z2 ) { z1=z2; z2=getZ(p1); } if ( z1 > z3 ) { z1 = z3; } else if ( z2 < z3 ) { z2 = z3; }
     shpBuffer.putDouble( x1 );
     shpBuffer.putDouble( y1 );
@@ -993,13 +993,13 @@ class ShpPolygonz extends ShpObject
     shpBuffer.putInt( 4 ); // four points: total number of points - last = first
     shpBuffer.putInt( 0 ); // part 0 starts with point 0 (and ends with point 1)
     shpBuffer.putDouble( getENC(p1) );
-    shpBuffer.putDouble( getN(p1) );
+    shpBuffer.putDouble( getNNC(p1) );
     shpBuffer.putDouble( getENC(p2) );
-    shpBuffer.putDouble( getN(p2) );
+    shpBuffer.putDouble( getNNC(p2) );
     shpBuffer.putDouble( getENC(p3) );
-    shpBuffer.putDouble( getN(p3) );
+    shpBuffer.putDouble( getNNC(p3) );
     shpBuffer.putDouble( getENC(p1) );
-    shpBuffer.putDouble( getN(p1) );
+    shpBuffer.putDouble( getNNC(p1) );
     shpBuffer.putDouble( z1 );
     shpBuffer.putDouble( z2 );
     shpBuffer.putDouble( getZ(p1) );
