@@ -220,22 +220,22 @@ public class TDConst
   public final static int SURVEY_POS_ZIP       = 0;
   public final static int SURVEY_POS_COMPASS   =  1;
   public final static int SURVEY_POS_CSURVEY   =  2;
-  public final static int SURVEY_POS_GHTOPO    =  3;
-  public final static int SURVEY_POS_POLYGON   =  4;
-  public final static int SURVEY_POS_SURVEX    =  5;
-  public final static int SURVEY_POS_THERION   =  6;
-  public final static int SURVEY_POS_TOPO      =  7;
-  public final static int SURVEY_POS_TOPOROBOT =  8;
-  public final static int SURVEY_POS_VTOPO     =  9;
-  public final static int SURVEY_POS_VTOPOX    = -9;
-  public final static int SURVEY_POS_WALLS     = 10;
-  public final static int SURVEY_POS_WINKARST  = 11;
-  public final static int SURVEY_POS_CSV       = 12;
-  public final static int SURVEY_POS_DXF       = 13;
-  public final static int SURVEY_POS_KML       = 14;
-  public final static int SURVEY_POS_GPX       = 15;
-  // public final static int SURVEY_POS_GEOJSON   = 16;
-  public final static int SURVEY_POS_SHAPEFILE = 16;
+  // public final static int SURVEY_POS_GHTOPO    =  3;
+  public final static int SURVEY_POS_POLYGON   =  3;
+  public final static int SURVEY_POS_SURVEX    =  4;
+  public final static int SURVEY_POS_THERION   =  5;
+  public final static int SURVEY_POS_TOPO      =  6;
+  public final static int SURVEY_POS_TOPOROBOT =  7;
+  public final static int SURVEY_POS_VTOPO     =  8;
+  public final static int SURVEY_POS_VTOPOX    =  9;
+  public final static int SURVEY_POS_WALLS     = -9;
+  public final static int SURVEY_POS_WINKARST  = 10;
+  public final static int SURVEY_POS_CSV       = 11;
+  public final static int SURVEY_POS_DXF       = 12;
+  public final static int SURVEY_POS_KML       = 13;
+  public final static int SURVEY_POS_GPX       = 14;
+  // public final static int SURVEY_POS_GEOJSON  = 16;
+  public final static int SURVEY_POS_SHAPEFILE = 15;
 
 
   public static boolean[] mSurveyExportEnable = { true, // "ZIP", 
@@ -381,7 +381,7 @@ public class TDConst
       case SURVEY_POS_ZIP:       return survey + TDPath.ZIP;
       case SURVEY_POS_COMPASS:   return survey + TDPath.DAT;
       case SURVEY_POS_CSURVEY:   return survey + TDPath.CSX;
-      case SURVEY_POS_GHTOPO:    return survey + TDPath.GTX;
+      // case SURVEY_POS_GHTOPO:    return survey + TDPath.GTX;
       // case SURVEY_POS_GROTTOLF: return survey + ".grt";
       // case SURVEY_POS_PTOPO:    return survey + TDPath.TOP;
       case SURVEY_POS_POLYGON:   return survey + TDPath.CAVE;

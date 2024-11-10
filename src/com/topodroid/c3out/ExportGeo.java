@@ -37,12 +37,24 @@ public class ExportGeo
 
   /** get E coord without convergence
    * @param st station
+   *
+   *    E=x+Dy*C
+   *              x=0  
+   *           :  /       Dy*C > 0
+   *       x<0 : /  x>0
+   *           :/
+   *   --------0----------------
+   *          /:   Dy*C < 0
    */
   double getENC( Vector3D st )
   { 
     if ( ! hasGeo ) return st.x;
-    double x = (st.x - zero.x) / (1 + st.y * mConv );
-    return lng + x * e_radius;
+    double x = (st.x - zero.x) + (st.y - zero.y)  * mConv;
+    double ret = lng + x * e_radius;
+    // double ret1 = lng + (st.x - zero.x) * e_radius;
+    // double n = getN( st );
+    // TDLog.v("ENC ret " + (ret-9.1319)*10000 + " ret1 " + (ret1-9.1319)*10000 + " N " + (n-44.3612)*10000 );
+    return ret;
   }
 
   double getN( Vector3D st ) { return hasGeo? lat + (st.y - zero.y) * s_radius : st.y; }

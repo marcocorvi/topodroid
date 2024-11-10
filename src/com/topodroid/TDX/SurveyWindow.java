@@ -611,7 +611,7 @@ public class SurveyWindow extends Activity
    */
   public void doExport( String type, String filename, String prefix, long first, boolean second )
   {
-    // TDLog.v( "SURVEY do export - name " + filename );
+    TDLog.v( "SURVEY do export - name " + filename );
     if ( ! saveSurvey( false ) ) {
       TDLog.e( "SURVEY do export - name " + filename + " : save survey failed" );
       return;
