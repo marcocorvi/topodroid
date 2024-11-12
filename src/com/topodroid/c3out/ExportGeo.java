@@ -12,6 +12,7 @@
 package com.topodroid.c3out;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDMath;
 import com.topodroid.TDX.TglParser;
 import com.topodroid.TDX.Vector3D;
 import com.topodroid.TDX.Cave3DStation;
@@ -29,7 +30,9 @@ public class ExportGeo
   private double s_radius, e_radius;
   private Cave3DStation zero;
 
-  double mConv = 0; 
+  // double mConv    = 0; 
+  double mCosConv = 1;
+  double mSinConv = 0;
 
   public boolean hasGeo = false;
 
@@ -48,12 +51,21 @@ public class ExportGeo
    *           :/
    *   --------0----------------
    *          /:   Dy*C < 0
+   *
+   * This is the inverse of Cave3DFix::lngToEast where
+   *    East = x_0 + (lng - lng_0) * E_radius * ( 1 + north * conv )
+   * 
+   * Shots azimuth are added declination (true North) and subtracted convergence
+   * Now they must be rotated by the convergence
+   *     X => X * cos(conv) + Y * sin(conv)
+   *     Y => Y * cos(conv) - X * sin(conv)
    */
   double getENC( Vector3D st )
   { 
     if ( ! hasGeo ) return st.x;
-    double x = (st.x - zero.x) + (st.y - zero.y) * mConv;
-    return lng + x * e_radius;
+    double x = (st.x - zero.x); // east
+    double y = (st.y - zero.y); // north
+    return lng + ( x * mCosConv + y * mSinConv ) * e_radius;
   }
 
   /** get N coord 
@@ -63,12 +75,15 @@ public class ExportGeo
 
   /** get N coord without convergence
    * @param st station
+   * This is the inverse ov Cave3DFix::latToNorth which is
+   *     North = y_0 + ( lat - lat_0 ) * S_radius
    */
   double getNNC( Vector3D st ) 
   { 
     if ( ! hasGeo ) return st.y;
-    double y = (st.y - zero.y) - (st.x - zero.x) * mConv;
-    return lat + y * s_radius;
+    double x = (st.x - zero.x); // east
+    double y = (st.y - zero.y); // north
+    return lat + ( y * mCosConv - x * mSinConv ) * s_radius;
   }
 
   /** get Z coord 
@@ -79,10 +94,8 @@ public class ExportGeo
   /** ???
    * @param data        data parser
    * @param decl        magnetic declination (unused)
-   * @param use_conv    whether to apply meridian convergence
-   * @note always called with use_conv=false
    */
-  protected boolean getGeolocalizedData( TglParser data, double decl, boolean use_conv )
+  protected boolean getGeolocalizedData( TglParser data, double decl )
   {
     // TDLog.v( "KML get geo-localized data. Declination " + decl );
     List< Cave3DFix > fixes = data.getFixes();
@@ -114,10 +127,12 @@ public class ExportGeo
     // altitude is assumed wgs84
     lat = origin.latitude;
     lng = origin.longitude;
-    mConv = use_conv ? Geodetic.meridianConvergenceFactor( origin.latitude ) : 0.0;
+    // mConv = Geodetic.meridianConvergenceFactor( origin.latitude );
+    mCosConv = TDMath.cosDd( origin.mConvergence );
+    mSinConv = TDMath.sinDd( origin.mConvergence );
     double h_ell = origin.a_ellip;
     h_geo = origin.z; // KML uses Geoid altitude (unless altitudeMode is set)
-    // TDLog.v( "KML origin " + lat + " N " + lng + " E " + h_geo );
+    TDLog.v( "Geo origin " + lat + " N " + lng + " E " + h_geo + " conv " + origin.mConvergence );
 
     s_radius = 1.0 / Geodetic.meridianRadiusExact( lat, h_ell );
     e_radius = 1.0 / Geodetic.parallelRadiusExact( lat, h_ell );

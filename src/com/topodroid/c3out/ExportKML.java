@@ -61,7 +61,7 @@ public class ExportKML extends ExportGeo
     if ( data == null ) return false; // always false
 
     TDLog.v( "KML export splays " + do_splays + " walls " + do_walls + " stations " + do_station );
-    if ( ! getGeolocalizedData( data, 0.0f, false ) ) { // FIXME declination 0.0f
+    if ( ! getGeolocalizedData( data, 0.0 ) ) { // FIXME declination 0.0
       TDLog.e( "KML no geolocalized station");
       return false;
     }

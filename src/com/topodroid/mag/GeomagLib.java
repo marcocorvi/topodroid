@@ -229,8 +229,8 @@ class GeomagLib
   private MagUTMParams MAG_GetTransverseMercator(MagGeodetic geodetic )
   {
     /*   Get the map projection  parameters */
-    double Lambda = TDMath.DEG2RAD * geodetic.lambda;
-    double Phi    = TDMath.DEG2RAD * geodetic.phi;
+    double Lambda = TDMath.DEG2RAD * geodetic.lambda; // longitude
+    double Phi    = TDMath.DEG2RAD * geodetic.phi;    // latitude
 
     MagUTMParams utm0 = MAG_GetUTMParameters( Phi, Lambda );
     if ( utm0 == null ) return null; // out of UTM range

@@ -114,11 +114,16 @@ public class TglParser
   // Cave3DStation mCenterStation = null;
   protected Cave3DStation mStartStation = null;
   protected Cave3DFix mOrigin = null; // coordinates of the origin station
+  // protected double mConvergence = 0;
 
   public Cave3DFix getOrigin() { return mOrigin; }
   boolean hasOrigin() { return mOrigin != null; }
   public boolean isWGS84() { return mOrigin != null && mOrigin.isWGS84(); }
   boolean hasWGS84() { return mOrigin != null && mOrigin.hasWGS84(); }
+
+  // /** @return the meridian convergence (at the origin)
+  //  */
+  // double getConvergence() { return mConvergence; }
 
   /** @return the S-N radius (meridian local radius) multiplied by PI/180
    * @note used for the DEM Y-unit

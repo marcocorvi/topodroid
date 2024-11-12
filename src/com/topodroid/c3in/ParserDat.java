@@ -305,7 +305,7 @@ public class ParserDat extends TglParser
       }
       if ( station != null ) {
         // TDLog.v( "DAT add fix station " +  station + survey );
-	fixes.add( new Cave3DFix( station+survey, x, y, z, cs, 1, 1 ) ); // no WGS84 - FIXME M_TO_UNITS
+	fixes.add( new Cave3DFix( station+survey, x, y, z, cs, 1, 1, 0.0 ) ); // no WGS84 - FIXME M_TO_UNITS - zero convergence
       }
     } catch ( IOException e ) {
       TDLog.e( "DAT I/O error " + e.getMessage() );
@@ -379,7 +379,7 @@ public class ParserDat extends TglParser
     if ( fixes.size() == 0 ) {
       // TDLog.v( "shots " + t_shots.size() + " fixes " + fixes.size() );
       Cave3DShot sh = t_shots.get( 0 );
-      fixes.add( new Cave3DFix( sh.from, 0.0f, 0.0f, 0.0f, null, 1, 1 ) ); // no WGS84 - M_TO_UNITS = 1
+      fixes.add( new Cave3DFix( sh.from, 0.0f, 0.0f, 0.0f, null, 1, 1, 0.0 ) ); // no WGS84 - M_TO_UNITS = 1 - zero convergence
     }
  
     int mLoopCnt = 0;

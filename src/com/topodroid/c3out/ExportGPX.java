@@ -62,7 +62,7 @@ public class ExportGPX extends ExportGeo
     boolean ret = true;
     if ( data == null ) return false; // always false
 
-    if ( ! getGeolocalizedData( data, 0.0f, false ) ) { // FIXME declination 0.0f
+    if ( ! getGeolocalizedData( data, 0.0 ) ) { // FIXME declination 0.0
       TDLog.e( "GPX no geolocalized station");
       return false;
     }
