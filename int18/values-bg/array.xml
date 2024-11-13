@@ -5,12 +5,12 @@
      <item name="plain">Обикновен текст</item>
      <item name="separated">Текстът е разделен</item>
      <item name="dialog">Диалог</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="bricMode">
      <item name="prim_only">Прим. само</item>
      <item name="all">Цялата информация</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="geoImportApp">
      <item name="none">без</item>
@@ -19,7 +19,7 @@
      <item name="gps_position">GPS позиция</item>
      <item name="gps_test">GPS тест</item>
      <item name="gps_logger">GPS регистратор</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="orientation">
      <item name="unspecified">неуточнено</item>
