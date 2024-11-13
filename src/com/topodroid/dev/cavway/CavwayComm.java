@@ -42,7 +42,7 @@ import com.topodroid.dev.ble.BleUtils;
 import com.topodroid.dev.distox.DistoX;
 import com.topodroid.dev.distox.IMemoryDialog;
 import com.topodroid.packetX.MemoryOctet;
-// import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.TDSetting;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.TDProgress;
@@ -58,6 +58,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
+// import java.util.Timer;
+// import java.util.TimerTask;
 
 import java.util.ArrayList;
 
@@ -94,6 +96,8 @@ public class CavwayComm extends TopoDroidComm
   private int mDataType;
   private int mPacketType;  // type of the last incoming packet that has been read
 
+  // private Timer mTimer;
+
   // private int mPacketToRead = 0; // number of packet to read with laser-commands
   Thread mConsumer = null;
 
@@ -121,6 +125,41 @@ public class CavwayComm extends TopoDroidComm
     if ( LOG ) TDLog.v( "Cavway comm cstr: addr " + address );
     // mOps = new ConcurrentLinkedQueue<BleOperation>();
     // clearPending();
+  }
+
+  // class CavwayTimerTask extends TimerTask
+  // {
+  //   private CavwayComm mComm;
+  //   
+  //   CavwayTimerTask( CavwayComm comm ) { mComm = comm; }
+
+  //   public void run()
+  //   {
+  //     TDLog.v("Timer Task reconnect device");
+  //     mComm.closeDevice( true );
+  //     mComm.connectDevice( mAddress, mLister, mDataType, mTimeout );
+  //   }
+  // }
+
+  private void resetTimer()
+  {
+    // if ( ! TDSetting.isConnectionModeContinuous() ) return;
+    // TDLog.v("Timer reset ");
+    // if ( mTimer != null ) {
+    //   mTimer.cancel();
+    //   mTimer.purge();
+    // }
+    // mTimer = new Timer();
+    // mTimer.schedule( new CavwayTimerTask( this ), 5000 );
+  }
+
+  private void stopTimer()
+  {
+    // if ( mTimer == null ) return;
+    // TDLog.v("Timer stop ");
+    // mTimer.cancel();
+    // mTimer.purge();
+    // mTimer = null;
   }
 
 
@@ -265,6 +304,7 @@ public class CavwayComm extends TopoDroidComm
     return connectCavwayDevice( TDInstance.getDeviceA(), lister /*, data_type */ );
   }
 
+
   // ----------------- DISCONNECT -------------------------------
 
   /** notified that the device has disconnected
@@ -300,6 +340,7 @@ public class CavwayComm extends TopoDroidComm
   public boolean disconnectDevice()
   {
     if ( LOG ) TDLog.v( "Cavway comm disconnect device: close - connected " + mBTConnected );
+    stopTimer();
     return closeDevice( false );
   }
 
@@ -410,6 +451,7 @@ public class CavwayComm extends TopoDroidComm
       if ( LOG ) TDLog.v( "Cavway comm: changed read chrt" );
       // TODO set buffer type according to the read value[]
       mQueue.put( DATA_PRIM, chrt.getValue() );
+      resetTimer();
     } else if ( uuid_str.equals( CavwayConst.CAVWAY_CHRT_WRITE_UUID_STR ) ) {
       if ( LOG ) TDLog.v( "Cavway comm: changed write chrt" );
     } else {
@@ -425,6 +467,7 @@ public class CavwayComm extends TopoDroidComm
   {
     if ( LOG ) TDLog.v( "Cavway comm: readed chrt " + bytes.length );
     mQueue.put( DATA_PRIM, bytes );
+    resetTimer();
   }
 
   /** notified that bytes have been written to the write characteristics
@@ -526,6 +569,7 @@ public class CavwayComm extends TopoDroidComm
     }
     doNextOp();
 
+
     // 20221026 MOVED TO enablePNotify -- 202211XX
     // mBTConnected  = true;
     // notifyStatus( ConnectionState.CONN_CONNECTED );
@@ -549,6 +593,7 @@ public class CavwayComm extends TopoDroidComm
       // 202211XX
       mBTConnected  = true;
       notifyStatus( ConnectionState.CONN_CONNECTED );
+      resetTimer();
       // TODO write a resend-interrupt to the DistoXBLE
     }
     return ret;
