@@ -110,6 +110,7 @@ The dialog to export the survey data presents only the format that are enabled i
 The following export formats are no longer supported:
 <ul>
 <li><a href="">Grottolf</a></li>
+<li><a href="">GHTopo</a></li>
 <li><a href="">PocketTopo</a></li>
 <li><a href="">PLT file (OziExplorer)</a></li>
 <li><a href="">GeoJSON</a></li>
@@ -152,7 +153,7 @@ Settings:<ul style="margin-top=0">
 <li><u>line termination</u> can be either Linux or Windows</li>
 <li><u>named TO station</u> for splay shots (the TO name is the FROM station with a letter appended)</li>
 <li>add <u>LRUD</u> to export</li>
-<li>"cs out" <u>EPSG</u> number</li>
+<li>Survex "cs out" <u>EPSG</u> number</li>
 </ul><p>
 
 <b id="therion">Therion</b> (.th)<br>
@@ -160,10 +161,9 @@ Survey data are exported in <i>Therion</i> format, using the data "normal" form.
 The TopoDroid survey name is used for the Therion cave name, with underscore '_' replaced by space.<br>
 Data units follow the user options.<br><p>
 
-The team names are listed but the command is commented.<br>
-The TopoDroid team string is split into the Therion <i>team</i> commands: team persons must be listed
-with the lastname possibly preceded by the firstname initial(s). For example
-the team string "A.W. Smith, B. Ford" becomes <i>team "A.W. Smith"</i> and <i>team "B. Ford"</i>.<br><p>
+The TopoDroid team string is listed commented, by dafeult.<br>
+If the "Therion team" setting is set, the TopoDroid team is parsed
+and split into the Therion <i>team</i> commands.<br><p>
 
 Station comments and marks (fixed, painted) precede the centerline data.<br>
 X-splays are exported with station "-" (dash), the others with station "." (dot).<br>

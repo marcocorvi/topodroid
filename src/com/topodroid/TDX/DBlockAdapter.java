@@ -47,7 +47,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   // private Context mContext;
   private final ShotWindow mParent;
   // ArrayList< DBlock > mItems;
-  ArrayList< DBlock > mSelect;
+  private ArrayList< DBlock > mSelect;
   boolean show_ids;  //!< whether to show data ids
   private final LayoutInflater mLayoutInflater;
   private final boolean diving;
@@ -66,6 +66,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   DBlockAdapter( Context ctx, ShotWindow parent, int id, ArrayList< DBlock > items )
   {
     super( ctx, id );
+    TDLog.v( "DBlock Adapter cstr");
     // mContext = ctx;
     mParent  = parent;
     // mItems   = items;
@@ -270,7 +271,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   /** remove a block from the multiselection set
    * @param pos   block position
    */
-  private void removeItem(int pos) {
+  private void removeItem(int pos)
+  {
     DBlock b = (DBlock)( getItem( pos ) );
     if ( ! b.mMultiSelected ) return;
     mSelect.remove( b );
@@ -281,7 +283,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   /** add a block to the multiselection set
    * @param pos   block position
    */
-  private void addItem(int pos) {
+  private void addItem(int pos)
+  {
     DBlock b = (DBlock) getItem(pos);
     if (b.mMultiSelected) return;
     mSelect.add(b);
@@ -293,10 +296,15 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
    */
   int getMultiSelectSize() { return mSelect.size(); }
 
+  /** @return the list of the items on selection
+   */
+  List<DBlock> getMultiSelect() { return mSelect; }
+
   /** clear the multiselection
    */
   void clearMultiSelect() 
   { 
+    TDLog.v("clear multiselect");
     DBlock blk = lastMultiselectedBlock;
     clearLastMultiselected();
     for ( DBlock b : mSelect ) {
@@ -321,12 +329,13 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   /** remove all items from the list, and reset the state variables
    */
   @Override
-  public void clear() {
+  public void clear()
+  {
     super.clear();
+    TDLog.v("DBlockAdapter :: CLEAR");
     clearLastMultiselected();
     mSelect.clear();
     mSearch.reset( null, false );
-    // TDLog.v("DBlockAdapter :: CLEAR");
   }
 
   /** clear the search-result

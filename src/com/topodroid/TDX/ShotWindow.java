@@ -334,7 +334,7 @@ public class ShotWindow extends Activity
     if ( ! TDLevel.overNormal ) return;
     int btn = BTN_AZIMUTH - boff; // button index
     if ( btn >= mNrButton1 ) return;
-    TDLog.v( "set Ref Azimuth button, manual: " + TDSetting.mAzimuthManual + " fixed: " + TDAzimuth.mFixedExtend + " azimuth: " + TDAzimuth.mRefAzimuth );
+    // TDLog.v( "set Ref Azimuth button, manual: " + TDSetting.mAzimuthManual + " fixed: " + TDAzimuth.mFixedExtend + " azimuth: " + TDAzimuth.mRefAzimuth );
 
     // The ref azimuth can be fixed either by the setting or by the choice in the azimuth dialog 
     if ( ( ! TDSetting.mAzimuthManual ) && TDAzimuth.mFixedExtend == 0 ) { // FIXME FIXED_EXTEND 20240603 the mFixedExtend test was commented
@@ -396,7 +396,7 @@ public class ShotWindow extends Activity
    */
   void updateDisplay( )
   {
-    // TDLog.v("SHOT update display");
+    TDLog.v("SHOT update display");
     // highlightBlocks( null );
     if ( mApp_mData != null && TDInstance.sid >= 0 ) {
       mMyBlocks = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.NORMAL );
@@ -404,7 +404,9 @@ public class ShotWindow extends Activity
       // if ( mMyBlocks.size() > 4 ) SurveyAccuracy.setBlocks( mMyBlocks );
 
       mMyPhotos = mApp_mData.selectAllPhotosShot( TDInstance.sid, TDStatus.NORMAL );
-      updateShotList( mMyBlocks, mMyPhotos );
+      if ( ! mDataAdapter.isMultiSelect() ) { // FIXME 2024-11-15 check if causes errors
+        updateShotList( mMyBlocks, mMyPhotos );
+      }
       
       setTheTitle( );
     } else {
@@ -1180,6 +1182,7 @@ public class ShotWindow extends Activity
         break;
     }
     setRefAzimuthButton( );
+    TDLog.v("Multiselect [2] " + onMultiselect + " " + mDataAdapter.getMultiSelectSize() );
   }
 
   // ---------------------------------------------------------------
@@ -1406,6 +1409,7 @@ public class ShotWindow extends Activity
       setConnectionStatus( mDataDownloader.getStatus() );
     }
     setRefAzimuthButton( );
+    TDLog.v("Multiselect [3] " + onMultiselect + " " + mDataAdapter.getMultiSelectSize() );
   }
 
   /** @return the name (ILister interface)
@@ -1576,6 +1580,7 @@ public class ShotWindow extends Activity
     if ( CutNPaste.dismissPopupBT() ) return;
 
     mDataAdapter.clearSearch();
+    TDLog.v("Multiselect [1] " + onMultiselect + " " + mDataAdapter.getMultiSelectSize() );
 
     Button b = (Button)view;
     if ( b == mMenuImage ) {
@@ -1585,6 +1590,7 @@ public class ShotWindow extends Activity
       } else {
         mMenu.setVisibility( View.VISIBLE );
         onMenu = true;
+        // if ( onMultiselect ) clearMultiSelect();
       }
       return;
     }
@@ -1669,57 +1675,59 @@ public class ShotWindow extends Activity
           updateDisplay();
 	}
 
-      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // IGNORE
-        for ( DBlock blk : mDataAdapter.mSelect ) {
-          blk.clearExtendAndStretch();
-          mApp_mData.updateShotExtend( blk.mId, TDInstance.sid, blk.getIntExtend(), blk.getStretch() );
-        }
-        mDataAdapter.updateSelectBlocksView();
-        clearMultiSelect( );
-        // updateDisplay(); // REPLACED
-      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // LEFT reset stretch
-        for ( DBlock blk : mDataAdapter.mSelect ) {
-          blk.setExtend( ExtendType.EXTEND_LEFT, ExtendType.STRETCH_NONE );
-          mApp_mData.updateShotExtend( blk.mId, TDInstance.sid, ExtendType.EXTEND_LEFT, ExtendType.STRETCH_NONE );
-        }
-        mDataAdapter.updateSelectBlocksView();
-        clearMultiSelect( );
-        // updateDisplay(); // REPLACED
-      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // FLIP
-        for ( DBlock blk : mDataAdapter.mSelect ) {
-          if ( blk.flipExtendAndStretch() ) {
+      } else if ( mDataAdapter.getMultiSelectSize() > 0 ) {
+        if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // IGNORE
+          for ( DBlock blk : mDataAdapter.getMultiSelect() ) {
+            blk.clearExtendAndStretch();
             mApp_mData.updateShotExtend( blk.mId, TDInstance.sid, blk.getIntExtend(), blk.getStretch() );
           }
+          mDataAdapter.updateSelectBlocksView();
+          clearMultiSelect( );
+          // updateDisplay(); // REPLACED
+        } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // LEFT reset stretch
+          for ( DBlock blk : mDataAdapter.getMultiSelect() ) {
+            blk.setExtend( ExtendType.EXTEND_LEFT, ExtendType.STRETCH_NONE );
+            mApp_mData.updateShotExtend( blk.mId, TDInstance.sid, ExtendType.EXTEND_LEFT, ExtendType.STRETCH_NONE );
+          }
+          mDataAdapter.updateSelectBlocksView();
+          clearMultiSelect( );
+          // updateDisplay(); // REPLACED
+        } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // FLIP
+          for ( DBlock blk : mDataAdapter.getMultiSelect() ) {
+            if ( blk.flipExtendAndStretch() ) {
+              mApp_mData.updateShotExtend( blk.mId, TDInstance.sid, blk.getIntExtend(), blk.getStretch() );
+            }
+          }
+          mDataAdapter.updateSelectBlocksView();
+          clearMultiSelect( );
+          // updateDisplay(); // REPLACED
+        } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // RIGHT reset stretch
+          for ( DBlock blk : mDataAdapter.getMultiSelect() ) {
+            blk.setExtend( ExtendType.EXTEND_RIGHT, ExtendType.STRETCH_NONE );
+            mApp_mData.updateShotExtend( blk.mId, TDInstance.sid, ExtendType.EXTEND_RIGHT, ExtendType.STRETCH_NONE );
+          }
+          mDataAdapter.updateSelectBlocksView();
+          clearMultiSelect( );
+          // updateDisplay(); REPLACED
+        } else if ( TDLevel.overExpert && kf < mNrButtonF && b == mButtonF[kf++] ) { // MULTISHOT
+          // ( blks == null || blks.size() == 0 ) cannot happen // TDUtil.isEmpty(blks)
+          (new MultishotDialog( mActivity, this, mDataAdapter.getMultiSelect() )).show();
+        //   highlightBlocks( mDataAdapter.getMultiSelect() );
+        //   // clearMultiSelect( );
+        //   // updateDisplay();
+        // } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // RENUMBER SELECTED SHOTS
+        //   renumberBlocks( mDataAdapter.getMultiSelect() );
+        //   clearMultiSelect( );
+        //   mList.invalidate();
+        // } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // BEDDING
+        //   computeBedding( mDataAdapter.getMultiSelect() );
+        } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // DELETE - CUT
+          askMultiDelete();
+        } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // COPY
+          doMultiCopy();
+        } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // CANCEL
+          clearMultiSelect( );
         }
-        mDataAdapter.updateSelectBlocksView();
-        clearMultiSelect( );
-        // updateDisplay(); // REPLACED
-      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // RIGHT reset stretch
-        for ( DBlock blk : mDataAdapter.mSelect ) {
-          blk.setExtend( ExtendType.EXTEND_RIGHT, ExtendType.STRETCH_NONE );
-          mApp_mData.updateShotExtend( blk.mId, TDInstance.sid, ExtendType.EXTEND_RIGHT, ExtendType.STRETCH_NONE );
-        }
-        mDataAdapter.updateSelectBlocksView();
-        clearMultiSelect( );
-        // updateDisplay(); REPLACED
-      } else if ( TDLevel.overExpert && kf < mNrButtonF && b == mButtonF[kf++] ) { // MULTISHOT
-        // ( blks == null || blks.size() == 0 ) cannot happen // TDUtil.isEmpty(blks)
-        (new MultishotDialog( mActivity, this, mDataAdapter.mSelect )).show();
-      //   highlightBlocks( mDataAdapter.mSelect );
-      //   // clearMultiSelect( );
-      //   // updateDisplay();
-      // } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // RENUMBER SELECTED SHOTS
-      //   renumberBlocks( mDataAdapter.mSelect );
-      //   clearMultiSelect( );
-      //   mList.invalidate();
-      // } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // BEDDING
-      //   computeBedding( mDataAdapter.mSelect );
-      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // DELETE - CUT
-        askMultiDelete();
-      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // COPY
-        doMultiCopy();
-      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // CANCEL
-        clearMultiSelect( );
       }
     }
   }
@@ -1789,7 +1797,7 @@ public class ShotWindow extends Activity
    */
   private void askMultiDelete()
   {
-    String sts = checkXSections( mDataAdapter.mSelect, null, null ); // TODO list of xsection stations
+    String sts = checkXSections( mDataAdapter.getMultiSelect(), null, null ); // TODO list of xsection stations
     boolean safe = (sts == null);
     Resources res = getResources();
     TopoDroidAlertDialog.makeAlert( mActivity, res, res.getString( safe? R.string.shots_delete : R.string.shots_delete_unsafe ),
@@ -1814,7 +1822,7 @@ public class ShotWindow extends Activity
   void doMultiDelete()
   {
     if ( TDLevel.overAdvanced ) mDBlockBuffer.clear();
-    for ( DBlock blk : mDataAdapter.mSelect ) {
+    for ( DBlock blk : mDataAdapter.getMultiSelect() ) {
       if ( TDLevel.overAdvanced ) mDBlockBuffer.add( blk );
       long id = blk.mId;
       mApp_mData.deleteShot( id, TDInstance.sid, TDStatus.DELETED );
@@ -1852,7 +1860,7 @@ public class ShotWindow extends Activity
   {
     if ( TDLevel.overAdvanced ) {
       mDBlockBuffer.clear();
-      for ( DBlock blk : mDataAdapter.mSelect ) {
+      for ( DBlock blk : mDataAdapter.getMultiSelect() ) {
         mDBlockBuffer.add( blk );
         if ( /* blk != null && */ blk.isMainLeg() ) { // == DBlock.BLOCK_MAIN_LEG 
           if ( mFlagLeg ) {
