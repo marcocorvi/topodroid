@@ -144,6 +144,10 @@ public class ExportGPX extends ExportGeo
           if ( sf == null || st == null ) continue;
           if ( last == null ) {
             pw.format(Locale.US, "    <trkseg>\n");
+            double ef = getENC( sf );
+            double nf = getNNC( sf );
+            double zf = getZ( sf );
+            pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.1f</ele></trkpt>\n", ef, nf, zf ); 
           } else if ( last != sf ) {
             pw.format(Locale.US, "    </trkseg>\n");
             pw.format(Locale.US, "    <trkseg>\n");
