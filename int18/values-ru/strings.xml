@@ -1659,7 +1659,7 @@
   <string name="pref_team_title">Группа топосъёмки</string>
   <string name="pref_team_summary">Имена членов группы топосъёмки, которые будут автоматически испрользованы при создании новой съёмки.</string>
   <!-- TODO string name="pref_team_names_title">Team names</string -->
-  <!-- TODO string name="pref_team_names_summary">Therion team names</string -->
+  <!-- TODO string name="pref_team_names_summary">Therion/Survex team names</string -->
 
   <string name="pref_ethr_title">Порог угла вертикальности замеров</string>
   <string name="pref_ethr_summary">Максимальный угол от вертикали для вертикальной развертки замера на разрезе [град]</string>
