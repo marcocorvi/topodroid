@@ -1652,7 +1652,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_team_title">Équipe spéleo</string>
     <string name="pref_team_summary">Noms des spéléos topographes de l\'équipe</string>
   <!-- TODO string name="pref_team_names_title">Team names</string -->
-  <!-- TODO string name="pref_team_names_summary">Therion team names</string -->
+  <!-- TODO string name="pref_team_names_summary">Therion/Survex team names</string -->
 
     <string name="pref_ethr_title">Seuil vertical vis. lat.</string>
     <string name="pref_ethr_summary">Seuil d\'angle aux alentours des 90 deg pour définir l\'extension verticale des visées de cheminement</string>

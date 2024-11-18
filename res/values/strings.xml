@@ -1693,7 +1693,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_team_title">Team</string>
   <string name="pref_team_summary">Default surveying team</string>
   <string name="pref_team_names_title">Team names</string>
-  <string name="pref_team_names_summary">Therion team names</string>
+  <string name="pref_team_names_summary">Therion/Survex team names</string>
 
   <string name="pref_ethr_title">Shot vertical-extend threshold</string>
   <string name="pref_ethr_summary">Azimuth orthogonal to the reference with vertical extend</string>

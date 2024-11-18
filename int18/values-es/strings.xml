@@ -1668,7 +1668,7 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_team_title">Equipo</string>
   <string name="pref_team_summary">Equipo de topógrafos por defecto</string>
   <!-- TODO string name="pref_team_names_title">Team names</string -->
-  <!-- TODO string name="pref_team_names_summary">Therion team names</string -->
+  <!-- TODO string name="pref_team_names_summary">Therion/Survex team names</string -->
 
   <string name="pref_ethr_title">Precisión toma lateral</string>
   <string name="pref_ethr_summary">Ampliar límites de la toma lateral</string>

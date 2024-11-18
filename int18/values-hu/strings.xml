@@ -282,8 +282,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="head_tail_store_failed">Nem sikerült eltárolni a DistoX memória indexét</string>
     <!-- UNUSED string name="pairing_failed">Párosítás sikertelen</string -->
 
-    <string name="datamode_normal">Normál adat-móde</string>
-    <string name="datamode_diving">Búvár adat-móde</string>
+    <string name="datamode_normal">Normál adat-mód</string>
+    <string name="datamode_diving">Búvár adat-mód</string>
     <string name="illegal_data_value">Helytelen adat érték</string>
 
     <string name="geocode_title">Geomorfológiaqi kód</string>
@@ -1669,7 +1669,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_team_title">Csoport</string>
   <string name="pref_team_summary">Alapértelmezett felmérő csoport</string>
   <string name="pref_team_names_title">Csapat nevek</string>
-  <string name="pref_team_names_summary">Therion csapat nevek</string>
+  <string name="pref_team_names_summary">Therion/Survex csapat nevek</string>
     
   <string name="pref_ethr_title">Sünök függőleges küszöbe</string>
   <string name="pref_ethr_summary">szögtartomány 90 fok körül a függőleges kiterítéshez [fok]</string>
