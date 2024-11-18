@@ -1172,7 +1172,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="export_maps">Les cartes avant les données</string>
     <string name="export_prefix">Préfixe de la cavité inclus dans les noms de stations</string>
     <string name="export_prefix_hint">préfixe</string>
-    <string name="export_suffix_hint">suffixe</string>
+    <!-- UNUSED string name="export_suffix_hint">suffixe</string -->
     <string name="export_roundtrip">Aller-retour</string>
     <string name="export_share">Partager</string>
     <!-- TODO string name="export_overwrite">Overwrite</string -->

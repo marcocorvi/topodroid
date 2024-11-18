@@ -693,6 +693,7 @@ public class TDPath
 
   // NOTA BENE extensions include the dot, eg, ".th"
   // static final String[] IMPORT_EXT        = { TH, TOP, DAT, TRO, CSN, SVX, SRV, TRB };
+  static final String[] DRAW_EDIT = { TH2, TDR };
   static final String[] IMPORT_EXT_STREAM = { TOP, ZIP };
   static final String[] IMPORT_EXT_READER = { TH, DAT, TRO, TROX, CSN, SVX, SRV, TRB, TH2, CSV }; // TH2EDIT added TH2
 
@@ -700,6 +701,8 @@ public class TDPath
   // { 
   //   return getFiles( PATH_IMPORT, IMPORT_EXT );
   // }
+
+  static String checkDrawEditType( String ext ) { return checkType( ext, DRAW_EDIT ); }
 
   static String checkImportTypeStream( String ext ) { return checkType( ext, IMPORT_EXT_STREAM ); }
 

@@ -1172,7 +1172,7 @@
     <string name="export_maps">地图在数据之前</string>
     <string name="export_prefix">测量点名称里的洞穴前缀</string>
     <string name="export_prefix_hint">前缀</string>
-    <string name="export_suffix_hint">后缀</string>
+    <!-- UNUSED string name="export_suffix_hint">后缀</string -->
     <string name="export_roundtrip">往返</string>
     <string name="export_share">分享到其他App</string>
     <!-- TODO string name="export_overwrite">Overwrite</string -->

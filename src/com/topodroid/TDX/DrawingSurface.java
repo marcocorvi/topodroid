@@ -45,6 +45,8 @@ import java.util.List;
 import java.util.HashMap;
 
 import java.io.PrintWriter;
+import java.io.FileInputStream;
+import java.io.DataInputStream;
 
 // import java.util.Timer;
 // import java.util.TimerTask;
@@ -1223,6 +1225,34 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
         }
       } else {
         // TDLog.v( "file " + tdr1 + " does not exist:  make enabled list from config");
+        BrushManager.makeEnabledListFromConfig();
+        ItemDrawer.resetRecentSymbols();
+      }
+    }
+    return ret;
+  }
+
+  /** load a sketch from file input stream
+   * @param fis            file input stream
+   * @param fullname       sketch fullname (= survey-plot)
+   * @note called only by DrawingWindow THEDIT
+   */
+  boolean modeloadFileStream( FileInputStream fis, String fullname )
+  {
+    boolean ret = false;
+    SymbolsPalette localPalette = BrushManager.preparePalette();
+    // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
+    if ( fis != null ) {
+      DataInputStream dis = new DataInputStream( fis );
+      // TDLog.v( "file " + tdr1 + " exists: loading ... " + fullname );
+      String filename = fullname;
+      String survey_name = "survey";
+      String plot_name   = "plot";
+      ret = DrawingIO.doLoadDataInputStream( this, dis, 0, 0, survey_name, filename, localPalette, null, true, plot_name );
+      if ( ret ) {
+        BrushManager.makeEnabledListFromPalette( localPalette, false ); // ENABLED_LIST false: do not reset symbols "enabled"
+      } else {
+        TDLog.e( "file " + fullname + " failed to load" );
         BrushManager.makeEnabledListFromConfig();
         ItemDrawer.resetRecentSymbols();
       }

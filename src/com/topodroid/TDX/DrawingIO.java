@@ -678,11 +678,7 @@ public class DrawingIO
 				   String plotName )
   {
     // TDLog.v( "load data stream file " + filename + " plot name " + ( (plotName == null)? "null" : plotName ) );
-    int version = 0;
-    boolean in_scrap = false;
-    int scrap_index = 0;
     BrushManager.resetPointOrientations();
-    DrawingPath path; // = null;
     // int project_dir = 0;
     // float north_x1, north_y1, north_x2, north_y2;
 
@@ -709,13 +705,36 @@ public class DrawingIO
       if ( pos > 0 ) survey_name = survey_name.substring(0, pos);
     // }
     // TDLog.v( "drawing I/O load stream " + filename );
+    try {
+      DataInputStream dis = TDFile.getTopoDroidFileInputStream( filename );
+      if ( dis == null ) return false;
+      return doLoadDataInputStream( surface, dis, dx, dy, survey_name, filename, localPalette, bbox, complete, plotName );
+    } catch (IOException e ) {
+      // TODO
+    }
+    return false;
+  }
+
+  
+  static boolean doLoadDataInputStream( DrawingSurface surface,
+                                   DataInputStream dis, 
+                                   float dx, float dy,
+                                   String survey_name,
+                                   String filename,
+                                   SymbolsPalette localPalette,
+                                   RectF bbox,
+				   boolean complete,
+				   String plotName )
+  {
     synchronized ( TDPath.mTdrLock ) { // FIXME-THREAD_SAFE
       try {
+        int version = 0;
+        boolean in_scrap = false;
+        int scrap_index = 0;
+        DrawingPath path; // = null;
         // FileInputStream fis = TDFile.getFileInputStream( filename );
         // BufferedInputStream bfis = new BufferedInputStream( fis );
         // DataInputStream dis = new DataInputStream( bfis );
-        DataInputStream dis = TDFile.getTopoDroidFileInputStream( filename );
-        if ( dis == null ) return false;
 
         boolean todo = true;
         while ( todo ) {
@@ -817,7 +836,11 @@ public class DrawingIO
               break;
             default:
               todo = false;
-              TDLog.e( "ERROR " + filename + " bad input (1) " + what );
+              if ( filename != null ) {
+                TDLog.e( "ERROR " + filename + " bad input (1) " + what );
+              } else {
+                TDLog.e( "ERROR bad input (1) " + what );
+              }
               break;
           } 
           if ( path != null && in_scrap ) {

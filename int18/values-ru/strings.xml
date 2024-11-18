@@ -1169,7 +1169,7 @@
     <string name="export_maps">Блок map до данных съёмки</string>
     <string name="export_prefix">Добавлять префикс к номерам пикетов</string>
     <string name="export_prefix_hint">префикс</string>
-    <string name="export_suffix_hint">суффикс</string>
+    <!-- UNUSED string name="export_suffix_hint">суффикс</string -->
     <string name="export_roundtrip">Roundtrip</string>
     <string name="export_share">Поделиться</string>
     <!-- TODO string name="export_overwrite">Overwrite</string -->

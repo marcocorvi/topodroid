@@ -1168,7 +1168,7 @@
     <string name="export_maps">Mappa prima dei dati</string>
     <string name="export_prefix">Prefisso grotta nei nomi capisaldi</string>
     <string name="export_prefix_hint">prefisso</string>
-    <string name="export_suffix_hint">suffisso</string>
+    <!-- UNUSED string name="export_suffix_hint">suffisso</string -->
     <string name="export_roundtrip">Round-trip</string>
     <string name="export_share">Condividi</string>
     <!-- TODO string name="export_overwrite">Overwrite</string -->

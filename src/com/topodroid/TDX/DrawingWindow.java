@@ -59,6 +59,7 @@ import com.topodroid.io.th.DrawingTh; // TH2EDIT
 import java.io.File;
 import java.io.FileReader; // TH2EDIT
 import java.io.FileWriter; // TH2EDIT
+import java.io.FileInputStream; // TH2EDIT
 // import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.IOException;
@@ -9307,9 +9308,12 @@ public class DrawingWindow extends ItemDrawer
       case TDRequest.REQUEST_GET_IMPORT: // TH2EDIT handle a th2 import
         // TDLog.v("DRAW Import");
         if ( resCode == Activity.RESULT_OK ) {
+          if ( ! TDLevel.overExpert ) {
+            finish();
+          }
           Uri uri = intent.getData();   // import uri
           String filename = uri.getLastPathSegment();
-          // TDLog.v( "DRAW URI to import: " + uri.toString() + " filename <" + filename + ">" );
+          TDLog.v( "DRAW URI to import: " + uri.toString() + " filename <" + filename + ">" );
           // int ros = filename.indexOf(":"); // drop the "content" header
           // if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
           int qos_1 = filename.lastIndexOf("/") + 1;
@@ -9318,37 +9322,38 @@ public class DrawingWindow extends ItemDrawer
           String ext = (pos >= 0 )? mFullName3.substring( pos ).toLowerCase( Locale.getDefault() ) : ""; // extension with leading '.'
           mName3 = (pos > 0 )? mFullName3.substring( 0, pos ) : mFullName3;
           // TDLog.v( "DRAW import fullname " + mFullName3 );
-          String type = TDPath.checkImportTypeReader( ext );
+          String type = TDPath.checkDrawEditType( ext );
           if ( type != null ) {
-            // TDLog.v( "DRAW import reader type " + type + " filename " + mFullName3 );
-            if ( type.equals(".th2") ) { // N.B. type is extension with '.'
-              if ( TDLevel.overExpert ) {
-                mDrawingSurface.clearDrawing();
-                if ( ! importReader( uri ) ) {
-                  TDLog.e("DRAW import failed " + mFullName3 );
-                  finish();
-                }
-              } else {
-                // TDLog.v("DRAW not tester level");
-                finish();
+            TDLog.v( "DRAW import reader type <" + type + "> filename " + mFullName3 );
+            if ( type.equals(".th2") || type.equals(".tdr") ) { // N.B. type is extension with '.'
+              mDrawingSurface.clearDrawing();
+              if ( ! importReader( uri, type ) ) {
+                TDLog.e("DRAW import failed " + mFullName3 );
+                // finish();
               }
             } else {
-              // TDLog.e("DRAW import unsupported " + ext);
+              TDLog.e("DRAW import unsupported " + ext);
               TDToast.makeBad( String.format( getResources().getString( R.string.unsupported_extension ), ext ) );
-              finish();
+              // finish();
             }
           // } else if ( (type = TDPath.checkImportTypeStream( ext ) ) != null ) {
           //   // TDLog.v( "import stream type " + type + " name " + name );
           //   // importStream( uri, name, type );
+          } else {
+            TDToast.makeBad( String.format( getResources().getString( R.string.unsupported_extension ), ext ) );
+            // finish();
           }
         } else {
           TDLog.e("DRAW import canceled");
-          finish();
+          // finish();
         }
         break;
       case TDRequest.REQUEST_GET_EXPORT: // TH2EDIT handle a th2 export
         // TDLog.v("DRAW export fullname " + mFullName3 );
         if ( resCode == Activity.RESULT_OK ) {
+          if ( TDLevel.overExpert ) {
+            finish();
+          }
           Uri uri = intent.getData();   // import uri
           String filename = uri.getLastPathSegment();
           // TDLog.v( "DRAW URI to export: " + uri.toString() + " filename <" + filename + ">" );
@@ -9359,29 +9364,27 @@ public class DrawingWindow extends ItemDrawer
           // int qos_1 = filename.lastIndexOf("/") + 1;
           // String name = (pos > qos_1 )? filename.substring( qos_1, pos ) : filename.substring( qos_1 );
           // TDLog.v( "DRAW export ext " + ext );
-          String type = TDPath.checkImportTypeReader( ext );
+          String type = TDPath.checkDrawEditType( ext );
           if ( type != null ) {
             // TDLog.v( "DRAW export reader type " + type + " filename " + filename );
             if ( type.equals(".th2") ) { // N.B. type is extension with '.'
-              if ( TDLevel.overExpert ) {
-                // String pathname = (new File( uri )).getAbsolutePath();
-                exportWriter( uri );
-              } else {
-                // TDLog.v("DRAW not tester level");
-                finish();
-              }
+              // String pathname = (new File( uri )).getAbsolutePath();
+              exportWriter( uri );
             } else {
               // TDLog.e("DRAW export unsupported extension " + ext);
               TDToast.makeBad( String.format( getResources().getString( R.string.unsupported_extension ), ext ) );
-              finish();
+              // finish();
             }
           // } else if ( (type = TDPath.checkImportTypeStream( ext ) ) != null ) {
           //   // TDLog.v( "import stream type " + type + " name " + name );
           //   // importStream( uri, name, type );
+          } else {
+            TDToast.makeBad( String.format( getResources().getString( R.string.unsupported_extension ), ext ) );
+            // finish();
           }
         } else {
           TDLog.e("DRAW export canceled");
-          finish();
+          // finish();
         }
         break;
     }
@@ -9389,17 +9392,23 @@ public class DrawingWindow extends ItemDrawer
 
   // TH2EDIT
   /** read a th2 file
-   * @param uri   th2 file URI
+   * @param uri   sketch file URI
+   * @param type  file type, either ".th2" or ".tdr"
    * @return true if success
    */
-  private boolean importReader( Uri uri )
+  private boolean importReader( Uri uri, String type )
   {
     // mTh2Edit = true;
     // TDLog.v("DRAW import reader load th2 file " + mName3 + " type " + mType );
     ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
     if ( pfd != null ) {
-      FileReader fr = TDsafUri.docFileReader( pfd );
-      return DrawingTh.doLoadTherion( mDrawingSurface, fr, 0, 0 );
+      if ( type.equals(".th2") ) {
+        FileReader fr = TDsafUri.docFileReader( pfd );
+        return DrawingTh.doLoadTherion( mDrawingSurface, fr, 0, 0 );
+      } else if ( type.equals(".tdr") ) {
+        FileInputStream fis = TDsafUri.docFileInputStream( pfd );
+        mDrawingSurface.modeloadFileStream( fis, "TODO" );
+      }
     } else {
       TDLog.e("DRAW null fd");
     }

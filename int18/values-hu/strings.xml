@@ -1178,7 +1178,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="export_maps">Térkép az adatok előtt</string>
     <string name="export_prefix">Barlangnév-előtag a pont neveknél</string>
     <string name="export_prefix_hint">előtag</string>
-    <string name="export_suffix_hint">utótag</string>
+    <!-- UNUSED string name="export_suffix_hint">utótag</string -->
     <string name="export_roundtrip">Roundtrip</string><!--Roundtrip-->
     <string name="export_share">Megosztás</string>
     <string name="export_overwrite">Felülír</string>

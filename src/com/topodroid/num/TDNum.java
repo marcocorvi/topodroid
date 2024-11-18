@@ -46,6 +46,9 @@ public class TDNum
   public TDNum( List< DBlock > data, String start, String view, String hide, float decl, String loop_fmt, boolean midline_only )
   {
     // TDLog.v( "data reduction: decl " + decl + " start " + start );
+    for ( DBlock b : data ) {
+      TDLog.v("NUM data: " + b.mFrom + "-" + b.mTo + " L " + b.mLength + " B " + b.mBearing + " C " + b.mClino + " D " + b.mDepth  );
+    }
     mDecl = decl;
     surveyExtend   = true;
     nrCompensatedLoops = 0;
@@ -935,20 +938,34 @@ public class TDNum
       HashMap< String, Float > depths = new HashMap< String, Float >();
       for ( DBlock blk : data ) { // prepare stations depths
 	if ( blk.mFrom != null && blk.mFrom.length() > 0 && blk.mTo != null && blk.mTo.length() > 0 ) {
-          // TDLog.v( blk.mFrom + " depth " + blk.mDepth );
-          // depths.putIfAbsent( blk.mFrom, new Float( blk.mDepth ) );
-          if ( ! depths.containsKey(blk.mFrom) ) depths.put( blk.mFrom, Float.valueOf( blk.mDepth ) );
+          if ( depths.isEmpty() ) {
+            depths.put( blk.mFrom, 0.0f );
+            // TDLog.v("NUM depth of " + blk.mFrom + " = 0 " ); 
+            depths.put( blk.mTo, Float.valueOf( blk.mDepth ) );
+            // TDLog.v("NUM depth of " + blk.mTo + " = " + blk.mDepth );
+          } else {
+            // TDLog.v( blk.mFrom + " depth " + blk.mDepth );
+            // depths.putIfAbsent( blk.mFrom, new Float( blk.mDepth ) );
+            if ( ! depths.containsKey(blk.mTo) ) { 
+              depths.put( blk.mTo, Float.valueOf( blk.mDepth ) );
+              // TDLog.v("NUM depth of " + blk.mTo + " = " + blk.mDepth );
+            }
+          }
         }
       }
       // boolean depth_error = false;
       // String error = TDString.EMPTY;
       for ( DBlock blk : data ) { // set dblock clino
-	if ( blk.mTo != null && blk.mTo.length() > 0 && depths.containsKey( blk.mTo ) ) {
+	if ( blk.mFrom != null && blk.mFrom.length() > 0 && depths.containsKey( blk.mFrom ) 
+	  && blk.mTo != null && blk.mTo.length() > 0 && depths.containsKey( blk.mTo ) ) {
+          float fdepth = depths.get( blk.mFrom ).floatValue(); // FIXME may null pointer
           float tdepth = depths.get( blk.mTo ).floatValue(); // FIXME may null pointer
-	  if ( ! blk.makeClino( tdepth ) ) {
+	  if ( ! blk.makeClino( fdepth, tdepth ) ) {
 	    // depth_error = true;
-	    TDLog.e("Failed make clino: " +  blk.mFrom + "-" + blk.mTo + " (" + tdepth + ") " );
-	  }
+	    TDLog.e("Failed make clino: " +  blk.mFrom + "-" + blk.mTo + " (" + fdepth + " " + tdepth + ") " );
+	  // } else {
+            // TDLog.v("NUM make clino " + blk.mFrom + "-" + blk.mTo + " = " + blk.mClino );
+          }
         }
       }
       // if ( depth_error ) {

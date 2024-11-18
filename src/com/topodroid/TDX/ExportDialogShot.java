@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 
@@ -339,7 +340,7 @@ public class ExportDialogShot extends MyDialog
     if ( prefix == null ) {
       mExportPrefix = null;
     } else {
-      mExportPrefix = prefix.toString().trim();
+      mExportPrefix = TDString.noSpace( prefix.toString().trim() );
       if ( mExportPrefix.length() == 0 ) mExportPrefix = null;
     }
   }
@@ -416,9 +417,11 @@ public class ExportDialogShot extends MyDialog
           } else {
             TDSetting.mVTopoTrox = ((CheckBox) findViewById( R.id.vtopo_trox )).isChecked();
           }
-          TDSetting.mVTopoSplays = ((CheckBox) findViewById( R.id.vtopo_splays )).isChecked();
+          TDSetting.mVTopoSplays     = ((CheckBox) findViewById( R.id.vtopo_splays )).isChecked();
           TDSetting.mVTopoLrudAtFrom = ((CheckBox) findViewById( R.id.vtopo_lrud )).isChecked();
-          setExportPrefix( ((EditText) findViewById( R.id.vtopo_suffix )).getText() );
+          TDSetting.mVTopoFaverjon   = ((CheckBox) findViewById( R.id.vtopo_faverjon )).isChecked();
+          setExportPrefix( ((EditText) findViewById( R.id.vtopo_series )).getText() );
+          
         }
         break;
       case TDConst.SURVEY_POS_WALLS: // Walls
@@ -488,6 +491,7 @@ public class ExportDialogShot extends MyDialog
     }
     ((CheckBox) findViewById( R.id.vtopo_splays )).setChecked( TDSetting.mVTopoSplays );
     ((CheckBox) findViewById( R.id.vtopo_lrud )).setChecked( TDSetting.mVTopoLrudAtFrom );
+    ((CheckBox) findViewById( R.id.vtopo_faverjon )).setChecked( TDSetting.mVTopoFaverjon );
 
     ((CheckBox) findViewById( R.id.walls_splays )).setChecked( TDSetting.mWallsSplays );
 
@@ -506,6 +510,10 @@ public class ExportDialogShot extends MyDialog
     ((EditText) findViewById( R.id.trobot_index )).setHint("-1");
 
     ((CheckBox) findViewById( R.id.jean_botazzi )).setChecked( TDSetting.TRobotJB );
+
+    if ( TDSetting.mExportPrefix != null ) {
+      ((EditText)findViewById( R.id.vtopo_series )).setText( TDSetting.mExportPrefix );
+    }
   }
 
 

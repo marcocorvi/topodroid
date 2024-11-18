@@ -1173,7 +1173,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="export_maps">Mapa antes de datos</string>
     <string name="export_prefix">Prefijo de cueva en nombres de destino</string>
     <string name="export_prefix_hint">prefijo</string>
-    <string name="export_suffix_hint">sufijo</string>
+    <!-- UNUSED string name="export_suffix_hint">sufijo</string -->
     <string name="export_roundtrip">Ida y vuelta </string>
     <string name="export_share">Share</string>
     <!-- TODO string name="export_overwrite">Overwrite</string -->

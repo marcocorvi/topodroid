@@ -1186,6 +1186,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="export_dxf_version" copyable="fr">Version</string>
     <string name="export_georeference">Georeference</string>
     <string name="export_grid">Grid</string>
+    <string name="export_faverjon" translatable="false">Faverjon</string>
     <string name="export_layers">Scrap layers</string>
     <string name="export_linedir">Line direction</string>
     <string name="export_lrud" copyable="all">LRUD</string>
@@ -1193,7 +1194,8 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="export_maps">Maps before data</string>
     <string name="export_prefix">Cave-prefix in station names</string>
     <string name="export_prefix_hint">prefix</string>
-    <string name="export_suffix_hint">suffix</string>
+    <!-- UNUSED string name="export_suffix_hint">suffix</string -->
+    <string name="export_series_hint">series</string>
     <string name="export_roundtrip" copyable="all">Round-trip</string>
     <string name="export_share">Share</string>
     <string name="export_overwrite">Overwrite</string>

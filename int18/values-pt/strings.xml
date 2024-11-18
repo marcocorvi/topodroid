@@ -1097,7 +1097,7 @@ no campo abaixo e aperte o botão.
   <string name="export_maps">Mapas antes dos dados</string>
   <string name="export_prefix">Prefixo da caverna nos nomes das bases</string>
   <string name="export_prefix_hint">prefixo</string>
-  <string name="export_suffix_hint">sufixo</string>
+  <!-- UNUSED string name="export_suffix_hint">sufixo</string -->
   <string name="export_roundtrip">Circuito</string>
   <string name="export_share">Compartilhar</string>
   <string name="export_overwrite">Sobreescrever</string>

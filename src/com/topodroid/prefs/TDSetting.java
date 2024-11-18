@@ -254,6 +254,7 @@ public class TDSetting
   // public static final boolean mExportUri = true;
 
   public static boolean mExportStationsPrefix = false;  // whether to prepend cave name to station in cSurvey/compass export
+  public static String  mExportPrefix         = null;   // export prefix - only for the current run
   public static boolean mZipWithSymbols       = false;  // whether to add/load symbols to/from archive
   public static boolean mZipShare             = false;  // whether to share exported zip
   public static boolean mZipShareCategory     = false;  // DISTOX_ZIP_SHARE_CATEGORY
@@ -281,9 +282,10 @@ public class TDSetting
   public static boolean TRobotJB = false;  // Jean Botazzi TopoRobot
 
   // ------------ VTOPO
-  public static boolean mVTopoSplays = true;    // whether to add splays to VisualTopo export
+  public static boolean mVTopoSplays     = true;    // whether to add splays to VisualTopo export
   public static boolean mVTopoLrudAtFrom = false; 
-  public static boolean mVTopoTrox   = false; 
+  public static boolean mVTopoTrox       = false; 
+  public static boolean mVTopoFaverjon   = false;
   // public static boolean mTherionPath = false; // whether to add surveypath to stations on import // NOT YET A SETTING
 
   // ------------- PDF

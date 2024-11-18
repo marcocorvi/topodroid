@@ -1181,7 +1181,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="export_maps">Карти преди данните</string>
     <string name="export_prefix">Представка с името на пещерата в наименованието на реперите</string>
     <string name="export_prefix_hint">представка</string>
-    <string name="export_suffix_hint">наставка</string>
+    <!-- UNUSED string name="export_suffix_hint">наставка</string -->
     <string name="export_roundtrip">Отиване и връщане</string>
     <string name="export_share">Сподели</string>
     <string name="export_overwrite">Презапис</string>

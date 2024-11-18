@@ -630,9 +630,14 @@ public class DBlock
     // mAddress   = null;
   }
 
-  public boolean makeClino( float tdepth )
+  /** compute clino from stations depths
+   * @param fdepth  depth of FROM station
+   * @param tdepth  depth of TO station
+   * @return true if the difference between stations depths is less or equal to the length
+   */
+  public boolean makeClino( float fdepth, float tdepth )
   {
-    float v = mDepth - tdepth;
+    float v = fdepth - tdepth;
     mClino = TDMath.asind( v / mLength ); // nan if |v| > mLength
     return ( Math.abs(v) <= mLength );
   }
