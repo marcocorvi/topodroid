@@ -596,7 +596,7 @@
     <!-- UNUSED string name="convert_tdr2th2">Перезаписать абрисы в формате th2 ?</string -->
     <string name="section_area">Площадь сечения: %1$.1f</string>
     <string name="section_name">Комментарий сечения</string>
-    <string name="scrap_outline">Контуры другого абриса</string>
+    <!-- UNUSED string name="scrap_outline">Контуры другого абриса</string -->
     <string name="scrap_string">Абрис скрап: %1$d / %2$d</string>
     <string name="section_point_not_allowed">точка сечения недопустима</string>
     <string name="section_line_not_allowed">точка сечения недопустима</string>
@@ -1255,7 +1255,7 @@
     <string name="title_move">Перемещение</string>
     <string name="title_note">Заметки</string>
     <string name="title_packet_dialog">Пакеты</string>
-    <string name="title_photo">Фото/Измерения</string>
+    <!-- UNUSED string name="title_photo">Фото/Измерения</string -->
     <string name="title_photo_comment">Описание Фото</string>
     <string name="title_photo_list">Фото</string>
     <string name="title_photo_view">Фото</string>

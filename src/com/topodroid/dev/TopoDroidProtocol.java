@@ -24,7 +24,7 @@ import com.topodroid.dev.distox.IMemoryDialog;
 
 import java.util.UUID;
 import java.util.List;
-// import java.util.Locale;
+import java.util.Locale;
 // import java.lang.reflect.Field;
 
 // import android.os.CountDownTimer;
@@ -227,7 +227,7 @@ public class TopoDroidProtocol
           if ( mGX > TDUtil.ZERO ) mGX = mGX - TDUtil.NEG;
           if ( mGY > TDUtil.ZERO ) mGY = mGY - TDUtil.NEG;
           if ( mGZ > TDUtil.ZERO ) mGZ = mGZ - TDUtil.NEG;
-          TDLog.v( "Proto packet G " + String.format(" %d %d %d", mGX, mGY, mGZ ) );
+          TDLog.v( "Proto packet G " + String.format(Locale.US, " %d %d %d", mGX, mGY, mGZ ) );
           return DataType.PACKET_G;
         }
         break;
@@ -239,7 +239,7 @@ public class TopoDroidProtocol
           if ( mMX > TDUtil.ZERO ) mMX = mMX - TDUtil.NEG;
           if ( mMY > TDUtil.ZERO ) mMY = mMY - TDUtil.NEG;
           if ( mMZ > TDUtil.ZERO ) mMZ = mMZ - TDUtil.NEG;
-          TDLog.v( "Proto packet M " + String.format(" %d %d %d", mMX, mMY, mMZ ) );
+          TDLog.v( "Proto packet M " + String.format(Locale.US, " %d %d %d", mMX, mMY, mMZ ) );
           return DataType.PACKET_M;
         }
         break;

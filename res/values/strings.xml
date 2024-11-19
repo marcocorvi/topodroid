@@ -615,7 +615,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="convert_tdr2th2">Overwrite th2 sketch files ?</string -->
     <string name="section_area">Section area: %1$.1f</string>
     <string name="section_name">section comment</string>
-    <string name="scrap_outline">Sketch outline</string>
+    <!-- UNUSED string name="scrap_outline">Sketch outline</string -->
     <string name="scrap_string">Sketch scrap: %1$d / %2$d</string>
     <string name="section_point_not_allowed">section point not allowed</string>
     <string name="section_line_not_allowed">section line not allowed</string>
@@ -1281,7 +1281,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="title_move">Moving</string>
     <string name="title_note">Survey notes</string>
     <string name="title_packet_dialog">Packets</string>
-    <string name="title_photo">More shot edit</string>
+    <!-- UNUSED string name="title_photo">More shot edit</string -->
     <string name="title_photo_comment">Photo info</string>
     <string name="title_photo_list" copyable="fr">Photos</string>
     <string name="title_photo_view" copyable="fr">Photo</string>

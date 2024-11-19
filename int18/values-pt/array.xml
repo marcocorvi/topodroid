@@ -125,7 +125,7 @@
   </string-array>
   <!-- shot default export -->
   <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
-  <string-array name="exportShots">
+  <!-- FIXME inconsistent number string-array name="exportShots">
     <item name="none">nenhum</item>
     <item name="therion">Therion</item>
     <item name="compass">Compass</item>
@@ -142,7 +142,7 @@
     <item name="winkarst">Winkarst</item>
     <item name="csv">CSV</item>
     <item name="dxf">DXF</item>
-  </string-array>
+  </string-array -->
   <!-- plot default export -->
   <string-array name="exportPlot">
     <item name="none">nenhum</item>

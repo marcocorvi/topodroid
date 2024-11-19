@@ -550,7 +550,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="convert_tdr2th2">th2 Skizzen überschreiben?</string -->
   <string name="section_area">Fläche: %1$.1f</string>
   <string name="section_name">Profil Kommentar</string>
-  <string name="scrap_outline">Skizzenumriss</string>
+  <!-- UNUSED string name="scrap_outline">Skizzenumriss</string -->
   <string name="scrap_string">Teilskizze: %1$d / %2$d</string>
   <string name="section_point_not_allowed">Profilpunkt nicht erlaubt</string>
   <string name="section_line_not_allowed">Profillinie nicht erlaubt</string>
@@ -1169,7 +1169,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="title_move">Verschieben</string>
   <string name="title_note">Notizen</string>
   <string name="title_packet_dialog">Datenpakete</string>
-  <string name="title_photo">Foto/Messungen</string>
+  <!-- UNUSED string name="title_photo">Foto/Messungen</string -->
   <string name="title_photo_comment">Foto Kommentar</string>
   <string name="title_photo_list">Fotos</string>
   <string name="title_photo_view">Foto</string>

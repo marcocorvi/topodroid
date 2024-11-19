@@ -601,7 +601,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="convert_tdr2th2">¿Sobrescribir archivos de dibujo Th2?</string -->
     <string name="section_area">Sección de área: %1$.1f</string>
     <string name="section_name">comentario de la sección</string>
-    <string name="scrap_outline">Contornos de otros croquis</string>
+    <!-- UNUSED string name="scrap_outline">Contornos de otros croquis</string -->
     <string name="scrap_string">Diseño descartado: %1$d / %2$d</string>
     <string name="section_point_not_allowed">Punto de sección no permitido</string>
     <string name="section_line_not_allowed">Línea de sección no permitida</string>
@@ -1259,7 +1259,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_move">Mover</string>
     <string name="title_note">Notas</string>
     <string name="title_packet_dialog">Paquetes</string>
-    <string name="title_photo">Foto/Medidas</string>
+    <!-- UNUSED string name="title_photo">Foto/Medidas</string -->
     <string name="title_photo_comment">Comentario Foto</string>
     <string name="title_photo_list">Fotos</string>
     <string name="title_photo_view">Foto</string>

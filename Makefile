@@ -93,7 +93,7 @@ less:
 	$(ANT) debug 2>&1 | less
 
 lint:
-	../../../cmdline-tools/latest/bin/lint --ignore IconLocation . > lint.out
+	../../../cmdline-tools/latest/bin/lint --ignore IconLocation --ignore ObsoleteLayoutParam . > lint.out
 
 strings:
 	@ for i in $(LANGS); do echo "$$i" `grep \"$$i\" lint.out | wc -l`; done

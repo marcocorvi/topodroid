@@ -160,9 +160,9 @@ class ParserTopoRobot extends ImportParser
       nr_point    = Integer.parseInt( token[9] );
     }
 
-    String getStation() { return String.format("%d.%d", from_series, from_point ); }
+    String getStation() { return String.format(Locale.US, "%d.%d", from_series, from_point ); }
 
-    public String toNameString() { return String.format("   %3d    -2   1   1   1 %s", series, name ); }
+    public String toNameString() { return String.format(Locale.US, "   %3d    -2   1   1   1 %s", series, name ); }
 
     public String toString() 
     {
@@ -420,7 +420,7 @@ class ParserTopoRobot extends ImportParser
             } else {
               if ( sequence != null ) {
                 if ( is_comment ) {
-                  ParserShot shot = getShot( String.format("%d.%d", series, point ) );
+                  ParserShot shot = getShot( String.format(Locale.US, "%d.%d", series, point ) );
                   if ( shot != null ) {
                     shot.comment = comment;
                   } else {
@@ -456,7 +456,7 @@ class ParserTopoRobot extends ImportParser
                         }
                         first_from = null;
                       }
-                      String station = String.format("%d.%d", series, point );
+                      String station = String.format(Locale.US, "%d.%d", series, point );
                       extend = ( azimuth < 90 || azimuth > 270 )? 1 : -1;
                       if  ( sequence_comment != null ) {
                         shots.add( new ParserShot( from, station, length, azimuth, clino, 0.0f, extend, LegType.NORMAL, false, false, false, sequence_comment ) );

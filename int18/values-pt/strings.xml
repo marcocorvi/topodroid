@@ -560,7 +560,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="convert_tdr2th2">Sobrescrever arquivos de croqui th2?</string -->
   <string name="section_area">Área do corte: %1$.1f</string>
   <string name="section_name">comentário sobre corte</string>
-  <string name="scrap_outline">Contorno</string>
+  <!-- UNUSED string name="scrap_outline">Contorno</string -->
   <string name="scrap_string">Trecho do croqui: %1$d / %2$d</string>
   <string name="section_point_not_allowed">ponto tipo corte não permitido</string>
   <string name="section_line_not_allowed">linha tipo corte não permitida</string>
@@ -1179,7 +1179,7 @@ no campo abaixo e aperte o botão.
   <string name="title_move">Mover</string>
   <string name="title_note">Comentários da topo</string>
   <string name="title_packet_dialog">Log pacotes</string>
-  <string name="title_photo">Foto/Medições</string>
+  <!-- UNUSED string name="title_photo">Foto/Medições</string -->
   <string name="title_photo_comment">Dados da foto</string>
   <string name="title_photo_list">Fotos</string>
   <string name="title_photo_view">Foto</string>

@@ -601,7 +601,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="convert_tdr2th2">Felülírja a th2 vázlat fájlokat?</string -->
     <string name="section_area">A keresztszelvény területe: %1$.1f</string>
     <string name="section_name">metszet megjegyzés</string>
-    <string name="scrap_outline">Körvonal vázlat létrehozása</string>
+    <!-- UNUSED string name="scrap_outline">Körvonal vázlat létrehozása</string -->
     <string name="scrap_string">Vázlat szint: %1$d / %2$d</string>
     <string name="section_point_not_allowed">metszet pont nem engedélyezett</string>
     <string name="section_line_not_allowed">metszet vonal nem engedélyezett</string>
@@ -1264,7 +1264,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="title_move">Mozgatás</string>
     <string name="title_note">Felmérési jegyzetek</string>
     <string name="title_packet_dialog">Csomagok</string>
-    <string name="title_photo">További mérés változtatások</string>
+    <!-- UNUSED string name="title_photo">További mérés változtatások</string -->
     <string name="title_photo_comment">Fénykép megjegyzés</string>
     <string name="title_photo_list">Fotók</string>
 	<string name="title_photo_view">Fénykép</string>

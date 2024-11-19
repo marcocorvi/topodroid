@@ -594,7 +594,7 @@
     <!-- UNUSED string name="convert_tdr2th2">Sovrascrivo il file del disegno th2 ?</string -->
     <string name="section_area">Area della sezione: %1$.1f</string>
     <string name="section_name">Nota sezione</string>
-    <string name="scrap_outline">Contorno del disegno</string>
+    <!-- UNUSED string name="scrap_outline">Contorno del disegno</string -->
     <string name="scrap_string">Disegno scartato: %1$d / %2$d</string>
     <string name="section_point_not_allowed">Punto sezione non permesso</string>
     <string name="section_line_not_allowed">Linea sezione non permessa</string>
@@ -1254,7 +1254,7 @@
     <string name="title_move">Sposta</string>
     <string name="title_note">Annotazioni</string>
     <string name="title_packet_dialog">Pacchetti</string>
-    <string name="title_photo">Foto/Misurazione</string>
+    <!-- UNUSED string name="title_photo">Foto/Misurazione</string -->
     <string name="title_photo_comment">Commento foto</string>
     <string name="title_photo_list">Foto</string>
     <string name="title_photo_view">Foto</string>

@@ -25,7 +25,7 @@ public class CWDfolder
     if ( name == null )       return NAME_EMPTY;
     if ( name.length() == 0 ) return NAME_EMPTY;
     if ( name.contains("/") ) return NAME_BAD;
-    if ( name.toLowerCase().equals("tmp") ) return NAME_TMP;
+    if ( name.toLowerCase(Locale.getDefault()).equals("tmp") ) return NAME_TMP;
     return NAME_OK;
   }
 
