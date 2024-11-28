@@ -343,7 +343,6 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="error_no_section_in_section">Metszetben metszet nem megengedett</string>
     <string name="error_profile_slant_section">Döntött ketesztmetszet nem engedélyezett oldalnézetben</string>
     <string name="error_team_required">Csapat szükséges</string>
-
 	
     <!-- UNUSED string name="error_dir_exists">A konyvtár már létezik</string -->
     <!-- UNUSED string name="error_nick_required">Keresztnetszet név szükséges</string -->
@@ -1813,7 +1812,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_th2_xvi_summary">Xvi kép berakása th2-be</string>
   <string name="pref_autoStations_title">Mérési pontok</string>
   <string name="pref_autoStations_summary">Automatikusan hozzáadja a mérési pontokat a th2/png fájlokhoz</string>
-  <string name="pref_auto_xsections_title">Autómatikus kereszszelvény</string>
+  <string name="pref_auto_xsections_title">Autómatikus keresztszelvény</string>
   <string name="pref_auto_xsections_summary">Kereszmetszet hozzáadás autómatikusan mentés/exportálásnál [csx/svg/dxf/xvi]</string>
   <string name="pref_saved_stations_title">Mentett pont</string>
   <string name="pref_saved_stations_summary">Mentett pont narancs színű</string>

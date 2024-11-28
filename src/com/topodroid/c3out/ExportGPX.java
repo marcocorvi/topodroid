@@ -124,7 +124,7 @@ public class ExportGPX extends ExportGeo
             double e = getENC( st );
             double n = getNNC( st );
             double z = getZ( st );
-            pw.format(Locale.US, "  <wpt lat=\"%.7f\" lon=\"%.7f\">\n", e, n );
+            pw.format(Locale.US, "  <wpt lon=\"%.7f\" lat=\"%.7f\">\n", e, n );
             pw.format(Locale.US, "    <ele>%.0f</ele>\n", z );
             pw.format(Locale.US, "    <name>%s</name>\n", st.getFullName() );
             pw.format(Locale.US, "    <desc></desc>\n");
