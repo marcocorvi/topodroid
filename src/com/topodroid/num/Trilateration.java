@@ -24,6 +24,8 @@ class Trilateration
   private double error;
   private int iter;
 
+  private final static int ITER_MAX = 100;
+
   /** @return a point
    * @param n   point name
    */
@@ -33,9 +35,13 @@ class Trilateration
     return null;
   }
 
+  /** @return the trilateration error
+   */
   double getError() { return error; }
 
-  int getIterations() { return iter; }
+  /** @return the number of iterations
+   */
+  int getIterations() { return ( iter >= ITER_MAX )? -1 : iter; }
 
   /** cstr
    * @param cl  cluster
@@ -57,12 +63,13 @@ class Trilateration
     // initialize points
     initialize();
     // and minimize
-    error = minimize1( 0.01, 0.10, 100 );
+    error = minimize1( 0.01, 0.10, ITER_MAX );
   }
 
   private void initialize()
   {
-    double d, a;
+    double d; // distance
+    double a; // angle [rads]
     boolean repeat = true;
     legs.get(0).pi.used = true;
     while ( repeat ) {
@@ -77,14 +84,14 @@ class Trilateration
             pj.used = true;
             pj.x = pi.x + d * Math.sin( a );
             pj.y = pi.y + d * Math.cos( a );
-            // TDLog.v("TRI point " + pi.name + " -> " + pj.name + " x " + pj.x + " y " + pj.y + " angle [deg] " + leg.a );
+            TDLog.v("TRI init " + pi.name + " --> " + pj.name + " x " + pj.x + " y " + pj.y + " angle [deg] " + leg.a );
             leg.used = true;
             repeat = true;
           } else if ( pj.used && ! pi.used ) {
             pi.used = true;
             pi.x = pj.x - d * Math.sin( a );
             pi.y = pj.y - d * Math.cos( a );
-            // TDLog.v("TRI point " + pj.name + " -> " + pi.name + " x " + pi.x + " y " + pi.y + " angle [deg] " + leg.a );
+            TDLog.v("TRI init " + pj.name + " --> " + pi.name + " x " + pi.x + " y " + pi.y + " angle [deg] " + leg.a );
             leg.used = true;
             repeat = true;
           }

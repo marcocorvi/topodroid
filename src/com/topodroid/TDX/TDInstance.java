@@ -31,6 +31,8 @@ import android.bluetooth.BluetoothAdapter;
 // import android.net.Uri;
 // import androidx.documentfile.provider.DocumentFile;
 
+import java.util.Locale;
+
 // static class (singleton) with instance data
 // SIWEI_TIAN changed on Jun 2022
 public class TDInstance
@@ -322,15 +324,23 @@ public class TDInstance
     return String.format( context.getResources().getString( r ), arg );
   }
 
-  /** @return string formatted with a resource
+  /** @return string formatted with int using a resource
    * @param r   resource index
    * @param arg integer argument
    */
   public static String formatString( int r, int arg ) 
   {
-    return String.format( context.getResources().getString( r ), arg );
+    return String.format( Locale.US, context.getResources().getString( r ), arg );
   }
 
+  /** @return string formatted with float using a resource
+   * @param r   resource index
+   * @param arg float argument
+   */
+  public static String formatString( int r, float arg ) 
+  {
+    return String.format( Locale.US, context.getResources().getString( r ), arg );
+  }
   /** @return the application shared preferences
    */
   public static SharedPreferences getPrefs() { return PreferenceManager.getDefaultSharedPreferences( context ); }

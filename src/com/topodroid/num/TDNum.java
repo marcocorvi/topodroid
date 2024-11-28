@@ -21,13 +21,15 @@ import com.topodroid.TDX.DBlock;
 import com.topodroid.TDX.StationPolicy;
 import com.topodroid.TDX.SurveyInfo;
 import com.topodroid.TDX.TDandroid;
+import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.R;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 import java.util.Comparator;
-// import java.util.Locale;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class TDNum
 {
@@ -46,9 +48,9 @@ public class TDNum
   public TDNum( List< DBlock > data, String start, String view, String hide, float decl, String loop_fmt, boolean midline_only )
   {
     // TDLog.v( "data reduction: decl " + decl + " start " + start );
-    for ( DBlock b : data ) {
-      TDLog.v("NUM data: " + b.mFrom + "-" + b.mTo + " L " + b.mLength + " B " + b.mBearing + " C " + b.mClino + " D " + b.mDepth  );
-    }
+    // for ( DBlock b : data ) {
+    //   TDLog.v("NUM data: " + b.mFrom + "-" + b.mTo + " L " + b.mLength + " B " + b.mBearing + " C " + b.mClino + " D " + b.mDepth  );
+    // }
     mDecl = decl;
     surveyExtend   = true;
     nrCompensatedLoops = 0;
@@ -2065,6 +2067,7 @@ public class TDNum
         cl.addTmpShot( sh );
         cl.addStation( sh.from );
         cl.addStation( sh.to );
+        // TDLog.v("TRI cluster start " + sh.from + " " + sh.to + " [" + String.format(Locale.US, "%.2f", sh.length() ) + "]" );
         // recursively populate the cluster
         boolean repeat2 = true;
         while ( repeat2 ) {
@@ -2076,35 +2079,42 @@ public class TDNum
             if ( cl.containsStation( sh1.from ) ) {
               if ( cl.containsStation( sh1.to ) ) {
                 cl.addTmpShot( sh1 );
+                // TDLog.v("TRI cluster finish " + sh1.from + " " + sh1.to );
               } else {
+                // TDLog.v("TRI cluster check have " + sh1.from + " missing " + sh1.to + " [" + String.format(Locale.US, "%.2f", sh1.length() ) + "]" );
                 boolean added = false;
                 for ( int n2 = n1+1; n2 < ns; ++n2 ) {
                   TriShot sh2 = shots.get(n2);
                   if ( sh2.cluster != null ) continue;
                   if ( ( sh1.to.equals( sh2.from ) && cl.containsStation( sh2.to ) ) ||
                        ( sh1.to.equals( sh2.to ) && cl.containsStation( sh2.from ) ) ) {
+                    // TDLog.v("TRI cluster add (2) " + sh2.from + " " + sh2.to + " [" + String.format(Locale.US, "%.2f", sh2.length() ) + "]" );
                     cl.addTmpShot( sh2 );
                     added = true;
                   }
                 }
                 if ( added ) {
+                  // TDLog.v("TRI cluster add (1) " + sh1.from + " " + sh1.to );
                   cl.addStation( sh1.to );
                   cl.addTmpShot( sh1 );
                   repeat2 = true;
                 }
               }
             } else if ( cl.containsStation( sh1.to ) ) {
+              // TDLog.v("TRI cluster check missing " + sh1.from + " have " + sh1.to + " [" + String.format(Locale.US, "%.2f", sh1.length() ) + "]" );
               boolean added = false;
               for ( int n2 = n1+1; n2 < ns; ++n2 ) {
                 TriShot sh2 = shots.get(n2);
                 if ( sh2.cluster != null ) continue;
                 if ( ( sh1.from.equals( sh2.from ) && cl.containsStation( sh2.to ) ) ||
                      ( sh1.from.equals( sh2.to ) && cl.containsStation( sh2.from ) ) ) {
+                  // TDLog.v("TRI cluster add (2) " + sh2.from + " " + sh2.to + " [" + String.format(Locale.US, "%.2f", sh2.length() ) + "]" );
                   cl.addTmpShot( sh2 );
                   added = true;
                 }
               }
               if ( added ) {
+                // TDLog.v("TRI cluster add (1) " + sh1.from + " " + sh1.to + " [" + String.format(Locale.US, "%.2f", sh1.length() ) + "]" );
                 cl.addStation( sh1.from );
                 cl.addTmpShot( sh1 );
                 repeat2 = true;
@@ -2114,6 +2124,7 @@ public class TDNum
           for ( TriShot sh1 : shots ) { // shots (should not be needed)
             if ( sh1.cluster != null ) continue;
             if ( cl.containsStation( sh1.from ) && cl.containsStation( sh1.to ) ) {
+              // TDLog.v("TRI cluster add (final) " + sh1.from + " " + sh1.to + " [" + String.format(Locale.US, "%.2f", sh1.length() ) + "]" );
               cl.addTmpShot( sh1 );
             }
           }
@@ -2121,22 +2132,42 @@ public class TDNum
       }
     }
     // apply trilateration with recursive minimization
+    double err = 0.0;
+    boolean success = false;
+    for ( TriCluster cl : clusters ) {
+      // cl.dump();
+      if ( cl.nrStations() > 2 ) {
+        success = true;
+        break;
+      }
+    }
     for ( TriCluster cl : clusters ) {
       if ( cl.nrStations() > 2 ) {
         Trilateration trilateration = new Trilateration( cl );
+        // TDLog.v("TRI trilateration iterations " + trilateration.getIterations() + " error " + trilateration.getError() );
         // use trilateration.points and legs
-        for ( TriLeg leg : trilateration.legs ) {
-          TriPoint p1 = leg.pi;
-          TriPoint p2 = leg.pj;
-          // compute azimuth (p2-p1)
-          double dx = p2.x - p1.x; // east
-          double dy = p2.y - p1.y; // north
-          double a = Math.atan2( dx, dy ) * 180 / Math.PI;
-          if ( a < 0 ) a += 360;
-          // TDLog.v("TRI leg " + p1.name + " " + p2.name + " angle " + a );
-          leg.shot.mAvgLeg.mDecl = (float)(a - leg.a); // per shot declination
+        if ( trilateration.getIterations() < 0 ) {
+          TDToast.makeWarn( R.string.trilateration_failed );
+          success = false;
+          break;
+        } else { 
+          err += trilateration.getError();
+          for ( TriLeg leg : trilateration.legs ) {
+            TriPoint p1 = leg.pi;
+            TriPoint p2 = leg.pj;
+            // compute azimuth (p2-p1)
+            double dx = p2.x - p1.x; // east
+            double dy = p2.y - p1.y; // north
+            double a = Math.atan2( dx, dy ) * 180 / Math.PI;
+            if ( a < 0 ) a += 360;
+            // TDLog.v("TRI leg " + p1.name + " " + p2.name + " angle " + a );
+            leg.shot.mAvgLeg.mDecl = (float)(a - leg.a); // per shot declination
+          }
         }
       }
+    }
+    if ( success ) {
+      TDToast.make( TDInstance.formatString( R.string.trilateration_error, (float)err ) );
     }
   }
 
