@@ -716,6 +716,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="screenshot_saved">Copie d\'écran enregistrée %1$s</string>
     <string name="screenshot_failed">Échec de la capture d\'écran</string>
     <string name="start_index">Index de visée initiale</string>
+    <!-- TODO string name="trilateration_failed">Failed trilateration</string -->
+    <!-- TODO string name="trilateration_error">Trilateration error %1$.2f</string -->
     
     <string name="survey_info">Information sur le relevé</string>
     <string name="stat_dates">De %1$s jusqu\'à %2$s</string>

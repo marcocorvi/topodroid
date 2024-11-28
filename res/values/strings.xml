@@ -379,8 +379,8 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="reversed">reversed</string -->
     <string name="options" copyable="fr">options</string>
     <string name="outline">outline</string>
-    <string name="out">out</string>
-    <string name="in" copyable="it">in</string>
+    <string name="out" copyable="all">out</string>
+    <string name="in"  copyable="all">in</string>
     <!-- UNUSED string name="none">none</string -->
     <!-- UNUSED string name="barrier_add">Hide following shots</string -->
     <string name="hide_from">Hide from</string>
@@ -891,8 +891,8 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="button_station"   >Center at</string>
     <string name="button_store"     >Store</string>
     <string name="button_swap"      >Swap</string>
-    <string name="button_start"     >Start</string>
-    <string name="button_stop"      >Stop</string>
+    <string name="button_start" copyable="all">Start</string>
+    <string name="button_stop"  copyable="all">Stop</string>
     <string name="button_upload"    >Upload</string>
     <string name="button_download"  >Download</string>
     <string name="button_view"      >View</string>
