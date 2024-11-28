@@ -719,8 +719,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="screenshot_saved">Mentett képernyőkép %1$s</string>
     <string name="screenshot_failed">Sikertelen képernyőkép készítés</string>
     <string name="start_index">Kezdő mérés (Start-shot) index</string>
-    <!-- TODO string name="trilateration_failed">Failed trilateration</string -->
-    <!-- TODO string name="trilateration_error">Trilateration error %1$.2f</string -->
+    <string name="trilateration_failed">Sikertelen háromszögelés</string>
+    <string name="trilateration_error">Háromszögelési hiba %1$.2f</string>
 
 	
     <string name="survey_info">Felmérés információ</string>
