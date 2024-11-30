@@ -2061,6 +2061,8 @@ public class TDNum
   /**
    * Correct temporary shots using length based trilateration
    * @param shots
+   * @param mirroredStations List of stations that should be mirrored as the automatic algorithm can't know to 
+   *                        which side of the initial triangle leg the new station should be placed.
    */
   private void makeTrilateration2( List< TriShot > shots, ArrayList< String > mirroredStations )
   {
