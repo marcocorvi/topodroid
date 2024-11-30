@@ -24,6 +24,7 @@ public class TDMath
   static final public float M_PI8 = M_PI/8;        // Math.PI/8
   static final public float RAD2DEG = (180.0f/M_PI);
   static final public float DEG2RAD = (M_PI/180.0f);
+  static final public double epsilonD = 0.000001d;
 
   static public float abs( float x )   { return Math.abs(x); }
   static public float cos( float x )   { return (float)Math.cos( x ); }
@@ -50,6 +51,14 @@ public class TDMath
   static public float atan2F(  double y, double x ) { return (float)Math.atan2( y, x ); }
   static public float atan2Fd( double y, double x ) { return (float)( RAD2DEG * Math.atan2( y, x ) ); }
   static public float sqrtF( double x )   { return (float)Math.sqrt( x ); }
+
+  /**
+   * Compares two double precision floating point numbers for equality within a default epsilon to account for floating point errors.
+   * @param d1 first double number
+   * @param d2 second double number
+   * @return 
+   */
+  static public boolean isEqual( double d1, double d2 ) { return Math.abs(d1 - d2) < epsilonD; }
 
   /** @return the difference between two angles [degrees]
    * @param a1   first angle [deg.]

@@ -24,6 +24,7 @@ import java.util.ArrayList;
 class TriShot
 {
   boolean used;
+  boolean adjusted;
   String from;
   String to;
   int extend;
@@ -39,6 +40,7 @@ class TriShot
   ArrayList< DBlock > blocks;
   AverageLeg mAvgLeg;
   TriCluster cluster;
+  Tri2Triangle triangle;
 
   // void dump( )
   // {
@@ -56,6 +58,7 @@ class TriShot
   TriShot( DBlock blk, String f, String t, int e, float s, int r )
   { 
     used = false;
+    adjusted = false;
     from = f;
     to   = t;
     extend  = e;
@@ -71,6 +74,7 @@ class TriShot
     mAvgLeg = new AverageLeg( 0.0f ); // temporary shot do not consider declination
     mAvgLeg.set( blk );
     cluster = null;
+    triangle = null;
   }
 
   /** @return the shot length
@@ -194,4 +198,8 @@ class TriShot
   //   //   // TDLog.v( b.mLength + " " + b.mBearing + " " + b.mClino );
   //   // }
   // }
+
+  String name( ) {
+		return from.compareTo(to) < 0 ? from + '|' + to : to + '|' + from;
+	}
 }

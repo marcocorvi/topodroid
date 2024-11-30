@@ -934,6 +934,19 @@ public class TDNum
    */
   private boolean computeNum( List< DBlock > data, String start, String path_fmt, boolean midline_only )
   {
+    return computeNum(data, start, path_fmt, midline_only, new ArrayList<String>());
+  }
+
+  /** survey data reduction 
+   * @param data   shot list
+   * @param start  start station
+   * @param path_fmt path report format
+   * @param midline_only  whether to reduce only the midline (no compensation)
+   * @param mirroredStations list of mirrored stations, used only on makeTrilateration2()
+   * @return true if all shots are attached
+   */
+  private boolean computeNum(List<DBlock> data, String start, String path_fmt, boolean midline_only, ArrayList<String> mirroredStations) 
+  {
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) { // preprocess: convert diving-mode data to normal form
       HashMap< String, Float > depths = new HashMap< String, Float >();
       for ( DBlock blk : data ) { // prepare stations depths
@@ -996,7 +1009,8 @@ public class TDNum
     // TDLog.Log( TDLog.LOG_NUM, "data " + data.size() + " shots " + tmp_shots.size() + " splays " + tmp_splays.size() );
 
     if ( ! midline_only && TDSetting.mLoopClosure == TDSetting.LOOP_TRIANGLES ) {
-      makeTrilateration( tmp_shots );
+      // makeTrilateration( tmp_shots );
+      makeTrilateration2( tmp_shots, mirroredStations );
     }
 
     // ---------------------------------- SIBLINGS and BACKSIGHT -------------------------------
@@ -2040,6 +2054,32 @@ public class TDNum
           v += alpha[ y*bs + x ] * cy.cv;
         }
         bx.compensateError( -e, -s, -v );
+      }
+    }
+  }
+
+  /**
+   * Correct temporary shots using length based trilateration
+   * @param shots
+   */
+  private void makeTrilateration2( List< TriShot > shots, ArrayList< String > mirroredStations )
+  {
+    for ( TriShot sh : shots ) sh.triangle = null;
+    int ns = shots.size();
+    for (int n1 = 0; n1 < ns; ++n1) {
+      TriShot sh1 = shots.get(n1);
+      if (sh1.triangle != null) continue;
+      Tri2Triangle tr = new Tri2Triangle(sh1, mirroredStations);
+      for (int n2 = n1+1; n2 < ns; ++n2) {
+        TriShot sh2 = shots.get(n2);
+        if (sh2.triangle != null) continue;
+        if (tr.addSimilarShot(sh2)) {
+          continue;
+        }
+        tr.addShot(sh2);
+      }
+      if (tr.nrShots() == 3) {
+        tr.adjust();
       }
     }
   }
