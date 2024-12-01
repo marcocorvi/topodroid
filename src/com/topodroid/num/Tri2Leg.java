@@ -11,20 +11,35 @@ class Tri2Leg
   String to;
   private String name;
   boolean isOrdered;
-  boolean isInverted;
+  boolean isAdjusted;
   TriShot shot;
 
-  Tri2Leg( TriShot sh)
+  Tri2Leg( TriShot sh )
   {
     length = sh.length();
     azimuth = sh.bearing();
     clino = sh.clino();
     from = sh.from;
     to = sh.to;
-    name = from.compareTo(to) < 0 ? from + "|" + to : to + "|" + from;
+    name = sh.name();
     isOrdered = false;
+    isAdjusted = false;
     shot = sh;
   }
+
+  Tri2Leg( double l, double a, double c, String f, String t )
+  {
+    length = l;
+    azimuth = a;
+    clino = c;
+    from = f;
+    to = t;
+    name = TriShot.name( f, t );
+    isOrdered = false;
+    isAdjusted = false;
+    shot = null;
+  }
+
 
   String name() { return name; }
 
@@ -35,7 +50,6 @@ class Tri2Leg
     String tmp = from;
     from = to;
     to = tmp;
-    isInverted = ! isInverted;
   }
 
   boolean containsStation( String s )

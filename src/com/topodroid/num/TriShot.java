@@ -19,12 +19,12 @@ import com.topodroid.TDX.SurveyInfo;
 
 import java.util.ArrayList;
 // import java.util.List;
+import java.util.UUID;
 
 
 class TriShot
 {
   boolean used;
-  boolean adjusted;
   String from;
   String to;
   int extend;
@@ -40,7 +40,7 @@ class TriShot
   ArrayList< DBlock > blocks;
   AverageLeg mAvgLeg;
   TriCluster cluster;
-  Tri2Triangle triangle;
+  UUID triangle;
 
   // void dump( )
   // {
@@ -58,7 +58,6 @@ class TriShot
   TriShot( DBlock blk, String f, String t, int e, float s, int r )
   { 
     used = false;
-    adjusted = false;
     from = f;
     to   = t;
     extend  = e;
@@ -199,7 +198,11 @@ class TriShot
   //   // }
   // }
 
-  String name( ) {
-		return from.compareTo(to) < 0 ? from + '|' + to : to + '|' + from;
+  String name() {
+    return TriShot.name( from, to );
 	}
+
+  static String name( String from, String to ) {
+    return from.compareTo(to) < 0 ? from + '|' + to : to + '|' + from;
+  }
 }
