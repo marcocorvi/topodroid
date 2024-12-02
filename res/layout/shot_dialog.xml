@@ -108,6 +108,7 @@
       android:layout_weight="25"
       android:layout_gravity="center"
       android:gravity="center"
+      android:orientation="horizontal"
     />
     <EditText android:id="@id/shot_to" 
       style="@style/edit_text"

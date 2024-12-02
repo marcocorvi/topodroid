@@ -384,7 +384,7 @@ public class TDUtil
   {
     GregorianCalendar calendar = new GregorianCalendar();
     calendar.setTimeInMillis( millis );
-    return String.format("%04d-%02d-%02d", calendar.get( Calendar.YEAR ), 1+calendar.get( Calendar.MONTH ), calendar.get( Calendar.DAY_OF_MONTH ) );
+    return String.format(Locale.US, "%04d-%02d-%02d", calendar.get( Calendar.YEAR ), 1+calendar.get( Calendar.MONTH ), calendar.get( Calendar.DAY_OF_MONTH ) );
   }
 
   /** @return the date-time from a timestamp
@@ -394,7 +394,7 @@ public class TDUtil
   {
     GregorianCalendar calendar = new GregorianCalendar();
     calendar.setTimeInMillis( time * 1000L );
-    return String.format("%04d-%02d-%02d %02d:%02d:%02d", calendar.get( Calendar.YEAR ), 1+calendar.get( Calendar.MONTH ), calendar.get( Calendar.DAY_OF_MONTH ),
+    return String.format(Locale.US, "%04d-%02d-%02d %02d:%02d:%02d", calendar.get( Calendar.YEAR ), 1+calendar.get( Calendar.MONTH ), calendar.get( Calendar.DAY_OF_MONTH ),
       calendar.get( Calendar.HOUR_OF_DAY ), calendar.get( Calendar.MINUTE ), (int)(calendar.get( Calendar.SECOND )) );
   }
 

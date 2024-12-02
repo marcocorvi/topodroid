@@ -48,7 +48,7 @@ import java.util.zip.ZipFile;
 // import java.nio.charsets.StandardCharsets; // API-19
 
 import java.util.List;
-// import java.util.Locale;
+import java.util.Locale;
 // import java.util.ArrayList;
 
 // import android.content.Context;
@@ -426,7 +426,7 @@ public class Archiver
           int k = 0;
           do {
             ++ k;
-            mZipname = TDPath.getSurveyZipFile( String.format("%s.%d", survey, k) );
+            mZipname = TDPath.getSurveyZipFile( String.format(Locale.US, "%s.%d", survey, k) );
           } while ( TDPath.existPath( mZipname ) );
         }
         TDPath.checkPath( mZipname );
@@ -873,7 +873,7 @@ public class Archiver
       // int nr_entry = 0;
       while ( ( ze = zin.getNextEntry() ) != null ) {  // NOTE getNextEntry() throws ZipException if zip file entry name contains '..' or starts with '/'
         TDLog.v( "ZIP get OK manifest: zentry name <" + ze.getName() + ">" );
-        if ( ze.getName().toLowerCase().equals( "manifest" ) ) {
+        if ( ze.getName().toLowerCase( Locale.getDefault() ).equals( "manifest" ) ) {
           missing = false;
           // String pathname = TDPath.getManifestFile( );
           // TDLog.v( "OK manifest: pathname " + pathname + " entry \"" + ze.getName() + "\"");

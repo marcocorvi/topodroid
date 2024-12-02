@@ -126,22 +126,26 @@
   <!-- shot default export -->
   <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
   <string-array name="exportShots">
-    <item name="none">nenhum</item>
-    <item name="therion">Therion</item>
-    <item name="compass">Compass</item>
-    <item name="csurvey">cSurvey</item>
-    <item name="ghtopo">GHTopo</item>
-    <item name="grottolf">Grottolf</item>
-    <item name="pockettopo">PocketTopo</item>
-    <item name="polygon">Polygon</item>
-    <item name="survex">Survex</item>
-    <item name="topo">Topo</item>
-    <item name="toporobot">TopoRobot</item>
-    <item name="visualtopo">VisualTopo</item>
-    <item name="walls">Walls</item>
-    <item name="winkarst">Winkarst</item>
-    <item name="csv">CSV</item>
-    <item name="dxf">DXF</item>
+     <item name="none">nenhum</item>
+     <item name="therion">Therion</item>
+     <item name="compass">Compass</item>
+     <item name="csurvey">cSurvey</item>
+     <!-- UNUSED item name="ghtopo">GHTopo</item -->
+     <!-- UNUSED item name="grottolf">Grottolf</item -->
+     <!-- UNUSED item name="pockettopo">PocketTopo</item -->
+     <item name="polygon">Polygon</item>
+     <item name="survex">Survex</item>
+     <item name="topo">Topo</item>
+     <item name="toporobot">TopoRobot</item>
+     <item name="visualtopo">VisualTopo</item>
+     <item name="walls">Walls</item>
+     <item name="winkarst">Winkarst</item>
+     <item name="csv">CSV</item>
+     <item name="dxf">DXF</item>
+     <!-- item name="kml">KML</item -->
+     <!-- item name="track">Track file</item -->
+     <!-- item name="json">GeoJSON</item -->
+     <!-- item name="shp">Shapefile</item -->
   </string-array>
   <!-- plot default export -->
   <string-array name="exportPlot">

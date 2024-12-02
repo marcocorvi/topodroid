@@ -598,7 +598,7 @@
     <!-- UNUSED string name="convert_tdr2th2">Overwrite th2 sketch files ?</string -->
     <string name="section_area">截面区域: %1$.1f</string>
     <string name="section_name">截面注释</string>
-    <string name="scrap_outline">草图轮廓</string>
+    <!-- UNUSED string name="scrap_outline">草图轮廓</string -->
     <string name="scrap_string">草图层: %1$d / %2$d</string>
     <string name="section_point_not_allowed">截面点不被允许</string>
     <string name="section_line_not_allowed">截面线不被允许</string>
@@ -715,6 +715,8 @@
     <string name="screenshot_saved">截屏已保存 %1$s</string>
     <string name="screenshot_failed">截屏失败</string>
     <string name="start_index">开始-测射 指数</string>
+    <!-- TODO string name="trilateration_failed">Failed trilateration</string -->
+    <!-- TODO string name="trilateration_error">Trilateration error %1$.2f</string -->
 
 
     <string name="survey_info">测量信息</string>
@@ -1258,7 +1260,7 @@
     <string name="title_move">移动</string>
     <string name="title_note">测量记录</string>
     <string name="title_packet_dialog">数据包</string>
-    <string name="title_photo">更多测线编辑</string>
+    <!-- UNUSED string name="title_photo">更多测线编辑</string -->
     <string name="title_photo_comment">照片注释</string>
     <string name="title_photo_list">照片</string>
     <string name="title_photo_view">照片</string>

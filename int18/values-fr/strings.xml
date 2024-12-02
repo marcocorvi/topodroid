@@ -598,7 +598,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="convert_tdr2th2">Écraser le fichier th2 ?</string -->
     <string name="section_area">Zone section : %1$.1f</string>
     <string name="section_name">Commentaires section</string>
-    <string name="scrap_outline">Contour croquis</string>
+    <!-- UNUSED string name="scrap_outline">Contour croquis</string -->
     <string name="scrap_string">Scrap du croquis %1$d / %2$d</string>
     <string name="section_point_not_allowed">Point de section non autorisé</string>
     <string name="section_line_not_allowed">Ligne de section non autorisée</string>
@@ -716,6 +716,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="screenshot_saved">Copie d\'écran enregistrée %1$s</string>
     <string name="screenshot_failed">Échec de la capture d\'écran</string>
     <string name="start_index">Index de visée initiale</string>
+    <!-- TODO string name="trilateration_failed">Failed trilateration</string -->
+    <!-- TODO string name="trilateration_error">Trilateration error %1$.2f</string -->
     
     <string name="survey_info">Information sur le relevé</string>
     <string name="stat_dates">De %1$s jusqu\'à %2$s</string>
@@ -1258,7 +1260,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="title_move">Déplacement</string>
     <string name="title_note">Notes du relevé</string>
     <string name="title_packet_dialog">Paquets de données</string>
-    <string name="title_photo">Photo/Mesures</string>
+    <!-- UNUSED string name="title_photo">Photo/Mesures</string -->
     <string name="title_photo_comment">Commentaire photo</string>
     <string name="title_photo_list">Photos</string>
     <string name="title_photo_view">Photo</string>

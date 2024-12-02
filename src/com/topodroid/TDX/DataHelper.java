@@ -638,8 +638,10 @@ public class DataHelper extends DataSetObservable
             Integer cnt = (Integer) cnts.get( address );
             if ( cnt == null ) {
               cnts.put( address, new Integer(1) );
+              // cnts.put( address, 1 ); // suggested by lint Integer.valueOf( 1 )
             } else {
               cnts.put( address, new Integer( cnt.intValue() + 1 ) );
+              // cnts.put( address, cnt.intValue() + 1 ); // suggested by lint Integer.valueOf( ... )
             }
           }
         } while ( cursor.moveToNext() );

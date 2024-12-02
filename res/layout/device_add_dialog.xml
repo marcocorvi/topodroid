@@ -37,7 +37,8 @@
       android:layout_height="wrap_content" 
       android:singleLine="true"
       android:inputType="number"
-      android:hint="0000"
+      android:hint="@string/four_zero"
+      android:autofillHints="no"
     />
   </LinearLayout>
   <LinearLayout 
@@ -62,6 +63,7 @@
       android:singleLine="true"
       android:inputType="text"
       android:hint="@string/nickname"
+      android:autofillHints="no"
     />
   </LinearLayout>
 

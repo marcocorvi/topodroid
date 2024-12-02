@@ -34,6 +34,7 @@ import java.io.DataOutputStream;
 
 // import java.util.UUID;
 import java.util.List;
+import java.util.Locale;
 
 import android.content.Context;
 
@@ -527,7 +528,7 @@ public class DistoXProtocol extends TopoDroidProtocol
         // checkDataType( buffer[0], data_type );
 
         TDLog.v( "write calibration " +
-          String.format("%d (addr %04x) %02x %02x %02x %02x %02x %02x %02x %02x", (k-4), addr, buffer[0], buffer[1], buffer[2],
+          String.format(Locale.US, "%d (addr %04x) %02x %02x %02x %02x %02x %02x %02x %02x", (k-4), addr, buffer[0], buffer[1], buffer[2],
           buffer[3], buffer[4], buffer[5], buffer[6], buffer[7] ) );
         if ( buffer[0] != MemoryOctet.BYTE_PACKET_REPLY ) { return false; } // 0x38
         if ( buffer[1] != (byte)( addr & 0xff ) ) { return false; }

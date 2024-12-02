@@ -74,11 +74,13 @@
     <string name="memoryA3">DistoX A3</string>
     <string name="memoryX310">DistoX X310</string>
     <string name="memoryXBLE">DistoX-BLE</string>
+    <string name="memoryCavway">Cavway</string>
     <!-- UNUSED string name="memory_data">Dati DistoX</string -->
 
     <string name="thp_user">utente</string>
     <string name="thp_label">testo</string>
     <string name="thp_section">sezione</string>
+    <string name="thp_picture">foto</string>
     <string name="thp_station">caposaldo</string>
     <!-- UNUSED string name="thp_danger">pericolo</string -->
     <string name="thl_user">utente</string>
@@ -92,6 +94,7 @@
     <string name="station_not_found">Caposaldo non trovato</string>
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <string name="shot_not_found">Trovato nessun tiro</string>
+    <string name="shot_not_saved">Tiro non salvato</string>
     <string name="bad_sibling">Battuta con dissimili</string>
     <string name="bad_station">Caposaldo non corretto: %1$s</string>
     <string name="bad_station_name">Nome caposaldo non permesso</string>
@@ -159,6 +162,8 @@
     <string name="calib_reset">Resetta calibrazione sul DistoX?</string>
     <string name="calib_min_error">Minimo errore</string>
     <string name="magn_dip">Dip Magnetica &#8230;</string>
+    <string name="auto_calib">Auto-calibrazione</string>
+    <string name="autocalib_not_supported">Richiesto calcolo calibrazione</string>
 
     <string name="algorithm">Algoritmo:</string>
     <string name="auto">auto</string>
@@ -223,8 +228,9 @@
     <string name="regroup">Non riaggruppare</string>
     <!-- UNUSED string name="few_plots">Troppo pochi disegni</string -->
     <string name="few_calibs">Calibrazioni non sufficienti</string>
-    <string name="getting_info">Scaricando info dal DistoX&#8230;</string>
-    <string name="gettingble_info">Scaricando info dal DistoX-BLE &#8230;</string>
+    <string name="getting_info">Scaricando info DistoX&#8230;</string>
+    <string name="gettingble_info">Scaricando info DistoX-BLE &#8230;</string>
+    <string name="gettingCavway_info">Scaricando info Cavway &#8230;</string>
 
     <string name="calib_import_title">Importa calibrazione</string>
     <string name="import_title">Importazione file</string>
@@ -474,6 +480,7 @@
     <string name="menu_options">OPZIONI</string>
     <string name="menu_overview">PANORAMICA</string>
     <string name="menu_packets">PACCHETTI</string>
+    <string name="menu_calib_auto">AUTO-CALIBR.</string>
     <!-- UNUSED string name="menu_pair">ASSOCIA</string -->
     <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">FOTO</string>
@@ -522,6 +529,8 @@
     <string name="popup_delete">Cancella</string>
     <string name="popup_decimate">Decima</string>
     <string name="popup_join">Unisci</string>
+    <string name="popup_store">Salva</string>
+    <string name="popup_restore">Riprendi</string>
 
     <string name="popup_erase_all">Cancella tutto</string>
     <string name="popup_erase_point">Cancella punti</string>
@@ -594,7 +603,7 @@
     <!-- UNUSED string name="convert_tdr2th2">Sovrascrivo il file del disegno th2 ?</string -->
     <string name="section_area">Area della sezione: %1$.1f</string>
     <string name="section_name">Nota sezione</string>
-    <string name="scrap_outline">Contorno del disegno</string>
+    <!-- UNUSED string name="scrap_outline">Contorno del disegno</string -->
     <string name="scrap_string">Disegno scartato: %1$d / %2$d</string>
     <string name="section_point_not_allowed">Punto sezione non permesso</string>
     <string name="section_line_not_allowed">Linea sezione non permessa</string>
@@ -712,6 +721,8 @@
     <string name="screenshot_saved">Salvato screenshot %1$s</string>
     <string name="screenshot_failed">Errore: Creazione screenshot</string>
     <string name="start_index">Indice di inizio tiro</string>
+    <string name="trilateration_failed">Trilateratione fallita</string>
+    <string name="trilateration_error">Trilateratione: errore %1$.2f</string>
 
     <string name="survey_info">Info rilievo</string>
     <string name="stat_dates">Da %1$s a %2$s</string>
@@ -864,8 +875,8 @@
     <string name="button_station"   >Centra</string>
     <string name="button_store"     >Scrivi    </string>
     <string name="button_swap"      >Scambia   </string>
-    <!-- UNUSED string name="button_start"     >Start</string -->
-    <!-- UNUSED string name="button_stop"      >Stop</string -->
+    <string name="button_start"     >Start</string>
+    <string name="button_stop"      >Stop</string>
     <string name="button_upload"    >Upload   </string>
     <string name="button_download"  >Scarica</string>
     <string name="button_view"      >Visualizza      </string>
@@ -1169,9 +1180,10 @@
     <string name="export_prefix">Prefisso grotta nei nomi capisaldi</string>
     <string name="export_prefix_hint">prefisso</string>
     <!-- UNUSED string name="export_suffix_hint">suffisso</string -->
-    <string name="export_roundtrip">Round-trip</string>
+    <string name="export_series_hint">serie</string>
+    <string name="export_roundtrip" copyable="all">Round-trip</string>
     <string name="export_share">Condividi</string>
-    <!-- TODO string name="export_overwrite">Overwrite</string -->
+    <string name="export_overwrite">Sovrascrivi</string>
     <!-- UNUSED string name="export_scale_png">Risoluzione</string -->
     <string name="export_scale_th">Scala 1 :</string>
     <string name="export_spacing_th">Spazio fra punti Therion</string>
@@ -1254,7 +1266,7 @@
     <string name="title_move">Sposta</string>
     <string name="title_note">Annotazioni</string>
     <string name="title_packet_dialog">Pacchetti</string>
-    <string name="title_photo">Foto/Misurazione</string>
+    <!-- UNUSED string name="title_photo">Foto/Misurazione</string -->
     <string name="title_photo_comment">Commento foto</string>
     <string name="title_photo_list">Foto</string>
     <string name="title_photo_view">Foto</string>
@@ -1335,6 +1347,7 @@
     <string name="title_survey_new">Nuovo rilievo</string>
     <string name="title_survey_export">Esporta rilievo come </string>
     <string name="title_survey_rename">Renomina rilievo</string>
+    <string name="title_team_dialog">Nomi squadra topo</string>
     <string name="title_plot_rename">Rinomina disegno</string>
     <string name="title_plot_zoomfit">Adatta Zoom / Orientamento</string>
     <string name="title_calib_export">Esporta calibrazione come </string>
@@ -1570,6 +1583,8 @@
   <string name="pref_bric_mode_summary">Modo BRIC operativo</string>
   <string name="pref_bric_zero_length_title">Tiro zero BRIC</string>
   <string name="pref_bric_zero_length_summary">Registra tiro BRIC a lunghezza zero</string>
+  <string name="pref_bric_index_is_id_title">ID = indice tiro BRIC</string>
+  <string name="pref_bric_index_is_id_summary">Usare l\'indice BRIC del tiro com ID</string>
   <string name="pref_sap5_bit16_bug_title">SAP5: anomalia bit-16</string>
   <string name="pref_sap5_bit16_bug_summary">SAP5: ripara anomalia bit-16</string>
 
@@ -1655,8 +1670,8 @@
 
   <string name="pref_team_title">Squadra</string>
   <string name="pref_team_summary">Squadra di topografia</string>
-  <!-- TODO string name="pref_team_names_title">Team names</string -->
-  <!-- TODO string name="pref_team_names_summary">Therion/Survex team names</string -->
+  <string name="pref_team_names_title">Nomi squadra topo</string>
+  <string name="pref_team_names_summary">Comando \"team\" Therion/Survex</string>
 
   <string name="pref_ethr_title">Angolo vert. extend</string>
   <string name="pref_ethr_summary">Angolo di vert. extend per splay</string>

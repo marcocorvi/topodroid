@@ -605,7 +605,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="convert_tdr2th2">Презаписване на th2 скицата ?</string -->
     <string name="section_area">Площ на сечение: %1$.1f</string>
     <string name="section_name">коментар за сечението</string>
-    <string name="scrap_outline">Контур на скица</string>
+    <!-- UNUSED string name="scrap_outline">Контур на скица</string -->
     <string name="scrap_string">Отрязък от скица: %1$d / %2$d</string>
     <string name="section_point_not_allowed">точката в сечението не е разрешена</string>
     <string name="section_line_not_allowed">линията в сечението не е разрешена</string>
@@ -724,6 +724,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="screenshot_saved">Запазена екранна снимка %1$s</string>
     <string name="screenshot_failed">Неуспешно заснемане на екранна снимка</string>
     <string name="start_index">Индекс на начално измерване</string>
+    <string name="trilateration_failed">Неуспешна трилатерация</string>
+    <string name="trilateration_error">Грешка при трилатерация %1$.2f</string>
 
     <string name="survey_info">Информация за картировката</string>
     <string name="stat_dates">От  %1$s до %2$s</string>
@@ -1267,7 +1269,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_move">Преместване</string>
     <string name="title_note">Бележки от картировката</string>
     <string name="title_packet_dialog">Пакети</string>
-    <string name="title_photo">Редактирай още измервания</string>
+    <!-- UNUSED string name="title_photo">Редактирай още измервания</string -->
     <string name="title_photo_comment">Данни за снимката</string>
     <string name="title_photo_list">Снимки</string>
     <string name="title_photo_view">Снимка</string>
