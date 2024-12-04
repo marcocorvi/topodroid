@@ -1,5 +1,6 @@
 package com.topodroid.num;
 
+import com.topodroid.utils.TDMath;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -7,24 +8,21 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.UUID;
 
-// import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDMath;
-
 public class Triangulation 
 {
-	private List< TriShot > shots;
-	private HashMap< String, Tri2Leg > legs;
-	private ArrayList< String > mirroredStations;
-	private HashMap< String, Tri2Station > adjustedStations;
-	private HashMap< String, Tri2StationAxle > axles;
-	private HashMap< String, TriS2tationStatus > stationStatus;
+	final private List< TriShot > shots;
+	final private HashMap< String, Tri2Leg > legs;
+	final private ArrayList< String > mirroredStations;
+	final private HashMap< String, Tri2Station > adjustedStations;
+	final private HashMap< String, Tri2StationAxle > axles;
+	final private HashMap< String, TriS2tationStatus > stationStatus;
 
-	private HashMap< String, TriShot > triangleShots;
-	private HashMap< String, ArrayList< TriShot > > triangleSimilarShots;
-	private ArrayList< Tri2Leg > triangleLegs;
-	private HashMap< String, Tri2Leg > triangleLegsMap;
-	private HashSet< String > triangleStations;
-	private HashSet< String > triangleUnadjustedStations;
+	final private HashMap< String, TriShot > triangleShots;
+	final private HashMap< String, ArrayList< TriShot > > triangleSimilarShots;
+	final private ArrayList< Tri2Leg > triangleLegs;
+	final private HashMap< String, Tri2Leg > triangleLegsMap;
+	final private HashSet< String > triangleStations;
+	final private HashSet< String > triangleUnadjustedStations;
 	private UUID triangleUUID;
 
 	Triangulation(List< TriShot > shs, ArrayList< String > mrSt) { 
@@ -35,12 +33,12 @@ public class Triangulation
 		axles = new HashMap<>();
 		stationStatus = new HashMap<>();
 
-		triangleShots = new HashMap< String, TriShot >();
-		triangleSimilarShots = new HashMap< String, ArrayList< TriShot > >();
-		triangleLegs = new ArrayList< Tri2Leg >();
+		triangleShots = new HashMap<  >();
+		triangleSimilarShots = new HashMap<  >();
+		triangleLegs = new ArrayList<  >();
 		triangleLegsMap = new HashMap<>();
-		triangleStations = new HashSet< String >();
-		triangleUnadjustedStations = new HashSet<String>();
+		triangleStations = new HashSet<  >();
+		triangleUnadjustedStations = new HashSet<  >();
 	}
 
 	HashMap< String, Tri2StationAxle > getStationAxles() {
@@ -65,7 +63,7 @@ public class Triangulation
 		String name = sh.name();
 		if (! triangleShots.containsKey(name)) return false;
 
-		if (! triangleSimilarShots.containsKey(name)) triangleSimilarShots.put(name, new ArrayList< TriShot >());
+		if (! triangleSimilarShots.containsKey(name)) triangleSimilarShots.put(name, new ArrayList<  >());
 		ArrayList< TriShot > list = triangleSimilarShots.get(name);
 		list.add(sh);
 		sh.triangle = triangleUUID;
@@ -78,6 +76,10 @@ public class Triangulation
 		if (adjustedStations.containsKey(sh.from)) count++;
 		if (adjustedStations.containsKey(sh.to)) count++;
 		return count;
+	}
+	
+	private void getPreadjustedLeg() {
+		
 	}
 
 	void triangulate() 
@@ -115,10 +117,12 @@ public class Triangulation
 						break;
 					}
 				}
-				if (! addedSecondShot) {
+				if (!addedSecondShot) {
 					resetTriangle();
 					continue;
 				}
+
+				// getPreadjustedLeg();
 
 				// Getting third shot of the triangle (optional).
 				for (int n3 = n2+1; n3 < ns; ++n3) {
@@ -189,14 +193,16 @@ public class Triangulation
 				}
 			}
 			else {
-				if (nrStations == 0) {
-					if ((! adjustedStations.containsKey(from)) && (! adjustedStations.containsKey(to))) return false;
-				}
-				else if (nrStations == 2) {
-					if ((! triangleStations.contains(from)) && (! triangleStations.contains(to))) return false;
-				}
-				else if (nrStations == 3) {
-					if ((! triangleStations.contains(from)) || (! triangleStations.contains(to))) return false;
+				switch (nrStations) {
+					case 0 -> {
+                                if ((! adjustedStations.containsKey(from)) && (! adjustedStations.containsKey(to))) return false;
+                                }
+					case 2 -> {
+                                if ((! triangleStations.contains(from)) && (! triangleStations.contains(to))) return false;
+                                }
+					case 3 -> {
+                                if ((! triangleStations.contains(from)) || (! triangleStations.contains(to))) return false;
+                                }
 				}
 			}
 		}
@@ -268,7 +274,6 @@ public class Triangulation
 				if (! l.to.equals(firstStation)) throw new RuntimeException("Tri2Triangle.orderLegs: invalid final leg");
 				l.isOrdered = true;
 				orderedLegs.add(l);
-				lastStation = l.to;
 				break;
 			}
 		}
