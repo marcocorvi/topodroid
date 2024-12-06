@@ -26,6 +26,11 @@ public class ImportData
   public boolean mTherionPath; // Therion survey path
 
   private boolean mDiving;
+  public int mCsv;      // CSV type
+
+  public static int CSV_NONE   = 0;
+  public static int CSV_BRIC   = 1;
+  public static int CSV_CAVWAY = 2;
 
   /** cstr
    */
@@ -42,6 +47,7 @@ public class ImportData
       mDiving = false;
     }
     mTherionPath = false;
+    mCsv = CSV_NONE;
   }
 
   /** set diving mode

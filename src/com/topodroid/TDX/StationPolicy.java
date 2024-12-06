@@ -40,14 +40,16 @@ public class StationPolicy
   static int     mSurveyStations  = SURVEY_STATION_FOREWARD;
   private static int mSavedPolicy = SURVEY_STATION_ZERO;
 
-  static boolean isSurveyForward()     { return (mSurveyStations%2) == SURVEY_STATION_FOREWARD; }
-  static boolean isSurveyBackward()    { return mSurveyStations>0 && (mSurveyStations%2) == SURVEY_STATION_ZERO; }
-  static boolean isSurveyBackward1()   { return mSurveyStations == SURVEY_STATION_BACKWARD; }
+  public static boolean isSurveyForward()     { return (mSurveyStations%2) == SURVEY_STATION_FOREWARD; }
+  public static boolean isSurveyBackward()    { return mSurveyStations>0 && (mSurveyStations%2) == SURVEY_STATION_ZERO; }
+  public static boolean isSurveyBackward1()   { return mSurveyStations == SURVEY_STATION_BACKWARD; }
   // the check on the level should not be necessary
   public static boolean doMagAnomaly() { return mMagAnomaly && TDLevel.overAdvanced; }
   public static boolean doTopoRobot()  { return mTRobotShot && TDLevel.overExpert; }
   public static boolean doTripod()     { return mTripodShot && TDLevel.overNormal; }
   public static boolean doBacksight()  { return mBacksightShot; }
+
+  public static boolean isShotAfterSplays() { return mShotAfterSplays; }
 
   public static int savedPolicy() { return mSavedPolicy; }
 

@@ -59,6 +59,7 @@ public class ImportDialogShot extends MyDialog
   private LinearLayout mLayoutVTopo;
   // private LinearLayout mLayoutVTopoX;
   private LinearLayout mLayoutPTopo;
+  private LinearLayout mLayoutWalls;
   private LinearLayout mLayoutTRobot;
   private LinearLayout mLayoutCsv;
 
@@ -69,6 +70,8 @@ public class ImportDialogShot extends MyDialog
   private CheckBox mCBlrudDat;
   private CheckBox mCBlegDat;
   private CheckBox mCBtherionPath; // Therion survey path
+  private CheckBox mCsvBric;
+  private CheckBox mCsvCavway;
 
   private ImportData mImportData;
 
@@ -103,6 +106,7 @@ public class ImportDialogShot extends MyDialog
     mLayoutTherion = (LinearLayout) findViewById( R.id.layout_therion );
     mLayoutVTopo   = (LinearLayout) findViewById( R.id.layout_vtopo );
     // mLayoutVTopoX  = (LinearLayout) findViewById( R.id.layout_vtopox );
+    mLayoutWalls   = (LinearLayout) findViewById( R.id.layout_walls );
     mLayoutPTopo   = (LinearLayout) findViewById( R.id.layout_pockettopo );
     mLayoutTRobot  = (LinearLayout) findViewById( R.id.layout_toporobot );
     mLayoutCsv     = (LinearLayout) findViewById( R.id.layout_csv );
@@ -142,9 +146,17 @@ public class ImportDialogShot extends MyDialog
   public void onClick(View v) 
   {
     // TDLog.v( "Selected " + mSelected + " pos " + mSelectedPos );
+    if ( v.getId() == R.id.csv_bric ) { 
+      mCsvCavway.setChecked( false ); 
+      return;
+    } 
+    if ( v.getId() == R.id.csv_cavway ) { 
+      mCsvBric.setChecked( false );
+      return;
+    }
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
-      setOptions();
+      if ( ! setOptions() ) return;
       mParent.doImport( mSelected, mImportData );
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
@@ -173,13 +185,14 @@ public class ImportDialogShot extends MyDialog
       case 4: mLayoutTherion.setVisibility( View.VISIBLE );    break;
       case 5: mLayoutVTopo.setVisibility( View.VISIBLE );      break;
       // case x: mLayoutVTopoX.setVisibility( View.VISIBLE );  break;
-      case 6: mLayoutPTopo.setVisibility( View.VISIBLE );      break;
-      case 7: mLayoutTRobot.setVisibility( View.VISIBLE );      break;
-      case 8: mLayoutCsv.setVisibility( View.VISIBLE );      break;
+      case 6: mLayoutWalls.setVisibility( View.VISIBLE );      break;
+      case 7: mLayoutPTopo.setVisibility( View.VISIBLE );      break;
+      case 8: mLayoutTRobot.setVisibility( View.VISIBLE );      break;
+      case 9: mLayoutCsv.setVisibility( View.VISIBLE );      break;
     }
   }
 
-  private void setOptions()
+  private boolean setOptions()
   {
     // TDLog.v("set options - pos " + mSelectedPos );
     switch ( mSelectedPos ) {
@@ -212,13 +225,24 @@ public class ImportDialogShot extends MyDialog
           mImportData.mTrox = mCBtroxTro.isChecked();
         }
         break;
-      case 6: // PTopo
+      case 6: // Walls
         break;
-      case 7: // TRobot
+      case 7: // PTopo
         break;
+      case 8: // TRobot
+        break;
+      case 9: // CSV
+        {
+          mImportData.mCsv = ( mCsvBric.isChecked() )? ImportData.CSV_BRIC : ( mCsvCavway.isChecked() )? ImportData.CSV_CAVWAY : ImportData.CSV_NONE;
+          if ( mImportData.mCsv == ImportData.CSV_NONE ) {
+            TDToast.makeWarn( R.string.warning_no_csv_type );
+            return false;
+          }
+        }
       default:
         break;
     }
+    return true;
   }
 
   private void initOptions()
@@ -245,6 +269,13 @@ public class ImportDialogShot extends MyDialog
     if ( ! TDLevel.overExpert ) {
       mCBtherionPath.setVisibility( View.GONE );
     }
+
+    mCsvBric = (CheckBox) findViewById( R.id.csv_bric );
+    mCsvCavway = (CheckBox) findViewById( R.id.csv_cavway );
+    mCsvBric.setChecked( mImportData.mCsv == ImportData.CSV_BRIC );
+    mCsvCavway.setChecked( mImportData.mCsv == ImportData.CSV_CAVWAY );
+    mCsvBric.setOnClickListener( this );
+    mCsvCavway.setOnClickListener( this );
   }
 
 }

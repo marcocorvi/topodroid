@@ -106,6 +106,15 @@
       />
   </LinearLayout>
 
+  <LinearLayout android:id="@+id/layout_walls"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    >
+  </LinearLayout>
+
   <LinearLayout android:id="@+id/layout_pockettopo"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
@@ -131,6 +140,16 @@
     android:layout_marginTop="@dimen/marginvbig"
     android:layout_marginBottom="@dimen/marginvbig"
     >
+    <CheckBox android:id="@+id/csv_bric"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" 
+      android:text="@string/import_bric"
+      />
+    <CheckBox android:id="@+id/csv_cavway"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" 
+      android:text="@string/import_cavway"
+      />
   </LinearLayout>
 
   <LinearLayout android:id="@+id/help"

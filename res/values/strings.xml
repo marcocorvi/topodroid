@@ -265,6 +265,8 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="import_zip_ok">ZIP file imported</string>
     <string name="import_zip_newer">Imported zip from more recent version</string>
     <!-- UNUSED string name="import_zip_wait">Imported zip file may take long. Please wait &#8230;</string -->
+    <string name="import_bric" translatable="false">BRIC</string>
+    <string name="import_cavway" translatable="false">Cavway</string>
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
     <string name="GPS_position_none">No GPS position data</string>
     <string name="GPX_record_none">No GPX point record</string>
@@ -2305,6 +2307,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="warning_empty_cwd">Warning: empty base path</string -->
     <!-- UNUSED string name="warning_no_parent">Warning: cannot go to parent folder</string -->
     <string name="warning_nogrant_camera">Camera permission has not been granted</string>
+    <string name="warning_no_csv_type">CSV type not specified</string>
     <string name="no_permissions">The app cannot run without the required permissions</string>
 
     <string name="done_fractals" translatable="false">Done fractals dims</string>

@@ -417,6 +417,11 @@ public class TDSetting
   public static boolean isConnectionModeMulti()      { return mConnectionMode == CONN_MODE_MULTI; }
   // public static boolean isConnectionModeDouble() { return mConnectionMode == CONN_MODE_DOUBLE; }
 
+  public static String getConnectionMode() { return (mConnectionMode == CONN_MODE_BATCH)? "batch"
+                                                  : (mConnectionMode == CONN_MODE_CONTINUOUS)? "continuous" 
+                                                  : (mConnectionMode == CONN_MODE_MULTI)? "multi" : "unknown"; 
+                                           }
+
   public static boolean mZ6Workaround  = false; // was true - hardcoded false
   public static boolean mUnnamedDevice = false; // BT_NONAME
 

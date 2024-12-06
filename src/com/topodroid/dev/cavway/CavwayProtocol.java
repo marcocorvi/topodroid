@@ -29,7 +29,8 @@ import android.content.Context;
 
 public class CavwayProtocol extends TopoDroidProtocol
 {
-  private final static boolean LOG = true;
+  private final static String TAG = "CAVWAY PROTO ";
+  private final static boolean LOG = false;
   private final static int DATA_LEN = 64;
 
   private final CavwayComm mComm;
@@ -91,7 +92,7 @@ public class CavwayProtocol extends TopoDroidProtocol
   public CavwayProtocol(Context ctx, TopoDroidApp app, ListerHandler lister, Device device, CavwayComm comm )
   {
     super( device, ctx );
-    // if ( LOG ) TDLog.v("Cavway proto cstr");
+    // if ( LOG ) TDLog.v( TAG + "cstr");
     mLister = lister;
     mComm   = comm;
     mRepliedData = new byte[4];
@@ -102,11 +103,11 @@ public class CavwayProtocol extends TopoDroidProtocol
 
   public int handleCavwayPacket(byte [] packetdata)
   {
-    if ( LOG ) {
-      StringBuilder sb = new StringBuilder();
-      for ( byte b : packetdata ) sb.append( String.format(" %02x", b ) );
-      TDLog.v("CAVWAY PROTO packet " + packetdata.length + ": " + sb.toString() );
-    }
+    // if ( LOG ) {
+    //   StringBuilder sb = new StringBuilder();
+    //   for ( byte b : packetdata ) sb.append( String.format(" %02x", b ) );
+    //   TDLog.v( TAG + "packet " + packetdata.length + ": " + sb.toString() );
+    // }
 
     byte flag = packetdata[1];   //leg, err flag
     double d =  (packetdata[2] << 8) + MemoryOctet.toInt( packetdata[4], packetdata[3] );
@@ -157,11 +158,11 @@ public class CavwayProtocol extends TopoDroidProtocol
   @SuppressLint("DefaultLocale")
   private String parseErrInfo(byte[] errbytes)
   {
-    if ( LOG ) {
-      StringBuilder sb = new StringBuilder();
-      for ( byte b : errbytes ) sb.append( String.format(" %02x", b ) );
-      TDLog.v("Cavway proto parse error info - length " + errbytes.length + sb.toString() );
-    }
+    // if ( LOG ) {
+    //   StringBuilder sb = new StringBuilder();
+    //   for ( byte b : errbytes ) sb.append( String.format(" %02x", b ) );
+    //   TDLog.v( TAG + "parse error info - length " + errbytes.length + sb.toString() );
+    // }
 
     //string error_type = "";
     if ( errbytes[0] == 0xFF ) {
@@ -224,9 +225,9 @@ public class CavwayProtocol extends TopoDroidProtocol
    */
   public int packetProcess( byte[] databuf )
   {
-    if ( LOG ) TDLog.v("Cavway proto handle packet length " + databuf.length );
+    // if ( LOG ) TDLog.v( TAG + "handle packet length " + databuf.length );
     if ( databuf.length == 0 ) {
-      TDLog.e("Cavway proto handle packet: 0-length data");
+      TDLog.e( TAG + "handle packet: 0-length data");
       return PACKET_NONE;
     }
     if ( (databuf[0] == MemoryOctet.BYTE_PACKET_DATA || databuf[0] == MemoryOctet.BYTE_PACKET_G ) && databuf.length == DATA_LEN ) { // shot / calib data
@@ -245,54 +246,54 @@ public class CavwayProtocol extends TopoDroidProtocol
           }
         }
       } else {
-        TDLog.t("Cavway proto not downloading ???");
+        TDLog.t( TAG + "not downloading ???");
         return PACKET_NONE;
       }
     } else { // command packet
       byte command = databuf[0];
       if ( command == MemoryOctet.BYTE_PACKET_3D || command == MemoryOctet.BYTE_PACKET_3E ) { // 0x3d or 0x3e
-        if ( LOG ) TDLog.v("Cavway proto handle packet command " + command );
+        if ( LOG ) TDLog.v( TAG + "handle packet command " + command );
         int addr = (databuf[2] << 8 | (databuf[1] & 0xff)) & 0xFFFF;
         int len = databuf[3];
         mRepliedData = new byte[len];
-        if ( LOG ) TDLog.v("Cavway command packet " + command + " length " + len );
+        if ( LOG ) TDLog.v( TAG + "command packet " + command + " length " + len );
         for (int i = 0; i < len; i++)
           mRepliedData[i] = databuf[i + 4];
         if ( addr == CavwayDetails.FIRMWARE_ADDRESS ) {
           mFirmVer = Integer.toString(databuf[4]) + "." + Integer.toString(databuf[5]) + "." + Integer.toString(databuf[6]);
-          if ( LOG )TDLog.v("Cavway proto fw v. " + mFirmVer );
+          if ( LOG )TDLog.v( TAG + "fw v. " + mFirmVer );
           return PACKET_INFO_FIRMWARE;
         } else if ( addr == CavwayDetails.HARDWARE_ADDRESS ) {
           float HardVer = ((float) databuf[4]) / 10;
           mHardVer = Float.toString(HardVer);
-          if ( LOG ) TDLog.v("Cavway proto hw v. " + mHardVer );
+          if ( LOG ) TDLog.v( TAG + "hw v. " + mHardVer );
           return PACKET_INFO_HARDWARE;
         } else if ( command == MemoryOctet.BYTE_PACKET_3D ) { // 0x3d
-          if ( LOG ) TDLog.v("Cavway proto reply (3D)");
+          if ( LOG ) TDLog.v( TAG + "reply (3D)");
           return PACKET_REPLY;
         } else if ( command == MemoryOctet.BYTE_PACKET_3E ) { // 0x3e
-          if ( LOG ) TDLog.v("Cavway proto write reply (3E)");
+          if ( LOG ) TDLog.v( TAG + "write reply (3E)");
           return PACKET_WRITE_REPLY;
         // } else {
         //   return PACKET_ERROR;
         }
       } else if ( command == MemoryOctet.BYTE_PACKET_HW_CODE ) { // 0x3c: signature: hardware ver. - 0x3d 0x3e only works in App mode not in the bootloader mode.
         // 0x3a 0x3b 0x3c are commands work in bootloader mode
-        if ( LOG ) TDLog.v("Cavway proto HW code (3C) (signature) length " + databuf.length );
+        if ( LOG ) TDLog.v( TAG + "hw code (3C) (signature) length " + databuf.length );
         if ( databuf.length == 3 ) { 
           mRepliedData[0] = databuf[1];
           mRepliedData[1] = databuf[2];
           return PACKET_SIGNATURE;
         }
       } else if ( databuf[0] == MemoryOctet.BYTE_PACKET_FW_WRITE ) { // 0x3b
-        if ( LOG ) TDLog.v("Cavway proto FW write (3B) (checksum) length " + databuf.length );
+        if ( LOG ) TDLog.v( TAG + "fw write (3B) (checksum) length " + databuf.length );
         if ( databuf.length == 6 ) {
           mFwOpReturnCode = databuf[3];
           mCheckCRC = ((databuf[5] << 8) | (databuf[4] & 0xff)) & 0xffff;
           return PACKET_FLASH_CHECKSUM;
         }
       } else if ( command == MemoryOctet.BYTE_PACKET_FW_READ && (databuf.length == 131 || databuf.length == 133)) {   // 0x3a: 3 headers + 128 payloadsda
-        if ( LOG) TDLog.v("Cavway proto FW read (3B) databuffer length " + databuf.length );
+        if ( LOG) TDLog.v( TAG + "fw read (3B) databuffer length " + databuf.length );
         if ( databuf[2] == 0x00 ) {        // firmware first packet (MTU=247)
           for ( int i=3; i<131; i++) mFlashBytes[i-3] = databuf[i]; // databuf is copied from offset 3
           return PACKET_FLASH_BYTES_1;
