@@ -242,40 +242,31 @@ public class DrawingSvg extends DrawingSvgBase
               case DrawingPath.DRAWING_PATH_POINT:
                   final DrawingPointPath point = (DrawingPointPath)path;
                   if ( BrushManager.isPointSection( point.mPointType ) ) {
-                      xsectionsPoints.add(point);
+                      xsectionsPoints.add( point );
                   }
                   else {
                     final String pointName = point.getFullThName();
-                    if (points.containsKey(pointName)) {
-                        points.get(pointName).add(point);
-                    } else {
-                        ArrayList< DrawingPointPath > pointList = new ArrayList<>();
-                        pointList.add(point);
-                        points.put(pointName, pointList);
-                    } 
+                    if ( ! points.containsKey( pointName ) ) {
+                        points.put( pointName, new ArrayList< DrawingPointPath >() );
+                    }
+                    points.get( pointName ).add( point );
                   }
                   break;
               case DrawingPath.DRAWING_PATH_LINE:
                   final DrawingLinePath line = (DrawingLinePath)path;
                   final String lineName = line.getFullThName();
-                  if (lines.containsKey(lineName)) {
-                      lines.get(lineName).add(line);
-                  } else {
-                      ArrayList< DrawingLinePath > lineList = new ArrayList<>();
-                      lineList.add(line);
-                      lines.put(lineName, lineList);
+                  if ( ! lines.containsKey( lineName ) ) {
+                      lines.put( lineName, new ArrayList< DrawingLinePath >() );
                   }
+                  lines.get( lineName ).add( line );
                   break;
               case DrawingPath.DRAWING_PATH_AREA:
                   final DrawingAreaPath area = (DrawingAreaPath)path;
                   final String areaName = area.getFullThName();
-                  if (areas.containsKey(areaName)) {
-                      areas.get(areaName).add(area);
-                  } else {
-                      ArrayList< DrawingAreaPath > areaList = new ArrayList<>();
-                      areaList.add(area);
-                      areas.put(areaName, areaList);
+                  if ( ! areas.containsKey( areaName ) ) {
+                    areas.put( areaName, new ArrayList< DrawingAreaPath >() );
                   }
+                  areas.get( areaName ).add( area );
                   break;
             }
           }
