@@ -245,28 +245,28 @@ public class DrawingSvg extends DrawingSvgBase
                       xsectionsPoints.add( point );
                   }
                   else {
-                    final String pointName = point.getFullThName();
-                    if ( ! points.containsKey( pointName ) ) {
-                        points.put( pointName, new ArrayList< DrawingPointPath >() );
+                    final String pointTypeName = point.getFullThName();
+                    if ( ! points.containsKey( pointTypeName ) ) {
+                        points.put( pointTypeName, new ArrayList< DrawingPointPath >() );
                     }
-                    points.get( pointName ).add( point );
+                    points.get( pointTypeName ).add( point );
                   }
                   break;
               case DrawingPath.DRAWING_PATH_LINE:
                   final DrawingLinePath line = (DrawingLinePath)path;
-                  final String lineName = line.getFullThName();
-                  if ( ! lines.containsKey( lineName ) ) {
-                      lines.put( lineName, new ArrayList< DrawingLinePath >() );
+                  final String lineTypeName = line.getFullThName();
+                  if ( ! lines.containsKey( lineTypeName ) ) {
+                      lines.put( lineTypeName, new ArrayList< DrawingLinePath >() );
                   }
-                  lines.get( lineName ).add( line );
+                  lines.get( lineTypeName ).add( line );
                   break;
               case DrawingPath.DRAWING_PATH_AREA:
                   final DrawingAreaPath area = (DrawingAreaPath)path;
-                  final String areaName = area.getFullThName();
-                  if ( ! areas.containsKey( areaName ) ) {
-                    areas.put( areaName, new ArrayList< DrawingAreaPath >() );
+                  final String areaTypeName = area.getFullThName();
+                  if ( ! areas.containsKey( areaTypeName ) ) {
+                    areas.put( areaTypeName, new ArrayList< DrawingAreaPath >() );
                   }
-                  areas.get( areaName ).add( area );
+                  areas.get( areaTypeName ).add( area );
                   break;
             }
           }
@@ -333,7 +333,7 @@ public class DrawingSvg extends DrawingSvgBase
             Collections.reverse( pointTypes );
             for ( String pointTypeName : pointTypes ) {
               final ArrayList< DrawingPointPath > pointList = points.get(pointTypeName);
-              out.write("<g id=\"" + pointTypeName + "\">\n");
+              out.write("<g id=\"point-" + pointTypeName + "\">\n");
               final String color_str = pathToColor( pointList.get(0) );
               for (DrawingPointPath point : pointList) {
                 final StringWriter sw53 = new StringWriter();
@@ -353,7 +353,7 @@ public class DrawingSvg extends DrawingSvgBase
             Collections.sort( lineTypes, String.CASE_INSENSITIVE_ORDER );
             Collections.reverse( lineTypes );
             for ( String lineTypeName : lineTypes ) {
-              out.write("<g id=\"" + lineTypeName + "\">\n");
+              out.write("<g id=\"line-" + lineTypeName + "\">\n");
               final ArrayList< DrawingLinePath > lineList = lines.get(lineTypeName);
               final String color_str = pathToColor( lineList.get(0) );
               for (DrawingLinePath line : lineList) {
@@ -374,7 +374,7 @@ public class DrawingSvg extends DrawingSvgBase
             Collections.sort( areaTypes, String.CASE_INSENSITIVE_ORDER );
             Collections.reverse( areaTypes );
             for ( String areaTypeName : areaTypes ) {
-              out.write("<g id=\"" + areaTypeName + "\">\n");
+              out.write("<g id=\"area-" + areaTypeName + "\">\n");
               final ArrayList< DrawingAreaPath > areaList = areas.get(areaTypeName);
               final String color_str = pathToColor( areaList.get(0) );
               for (DrawingAreaPath area : areaList) {
