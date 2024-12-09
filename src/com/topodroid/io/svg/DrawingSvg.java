@@ -398,29 +398,29 @@ public class DrawingSvg extends DrawingSvgBase
           out.flush();
         }
 
-        // TDLog.v( "SVG stations " + plot.getStations().size() );
-        out.write("<g id=\"stations\">\n");
-        if ( TDSetting.mAutoStations ) {
-          for ( DrawingStationName name : plot.getStations() ) { // auto-stations
-            StringWriter sw61 = new StringWriter();
-            PrintWriter pw61  = new PrintWriter(sw61);
-            toSvg( pw61, name, xoff, yoff );
-            out.write( sw61.getBuffer().toString() );
-          }
-        } else {
-          for (DrawingStationUser st_path : plot.getUserStations()) { // user-chosen
-            StringWriter sw62 = new StringWriter();
-            PrintWriter pw62 = new PrintWriter(sw62);
-            toSvg(pw62, st_path, xoff, yoff);
-            out.write(sw62.getBuffer().toString());
-            out.flush();
-            out.write(end_grp); // stations
-          }
-        }
-
         out.write( end_grp ); // scrap_
         out.flush();
       }
+
+      // TDLog.v( "SVG stations " + plot.getStations().size() );
+      out.write("<g id=\"stations\">\n");
+      if ( TDSetting.mAutoStations ) {
+        for ( DrawingStationName name : plot.getStations() ) { // auto-stations
+          StringWriter sw61 = new StringWriter();
+          PrintWriter pw61  = new PrintWriter(sw61);
+          toSvg( pw61, name, xoff, yoff );
+          out.write( sw61.getBuffer().toString() );
+        }
+      } else {
+        for (DrawingStationUser st_path : plot.getUserStations()) { // user-chosen
+          StringWriter sw62 = new StringWriter();
+          PrintWriter pw62 = new PrintWriter(sw62);
+          toSvg(pw62, st_path, xoff, yoff);
+          out.write(sw62.getBuffer().toString());
+          out.flush();
+        }
+      }
+      out.write(end_grp); // stations
 
       // out.write( end_grp ); // canvas
       out.write( end_svg );
