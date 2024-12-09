@@ -125,7 +125,7 @@ public class ExportGPX extends ExportGeo
             double n = getNNC( st );
             double z = getZ( st );
             pw.format(Locale.US, "  <wpt lon=\"%.7f\" lat=\"%.7f\">\n", e, n );
-            pw.format(Locale.US, "    <ele>%.0f</ele>\n", z );
+            pw.format(Locale.US, "    <ele>%.2f</ele>\n", z );
             pw.format(Locale.US, "    <name>%s</name>\n", st.getFullName() );
             pw.format(Locale.US, "    <desc></desc>\n");
             pw.format(Locale.US, "  </wpt>\n");
@@ -147,20 +147,20 @@ public class ExportGPX extends ExportGeo
             double ef = getENC( sf );
             double nf = getNNC( sf );
             double zf = getZ( sf );
-            pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.1f</ele></trkpt>\n", ef, nf, zf ); 
+            pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.2f</ele></trkpt>\n", ef, nf, zf ); 
           } else if ( last != sf ) {
             pw.format(Locale.US, "    </trkseg>\n");
             pw.format(Locale.US, "    <trkseg>\n");
             double ef = getENC( sf );
             double nf = getNNC( sf );
             double zf = getZ( sf );
-            pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.1f</ele></trkpt>\n", ef, nf, zf ); 
+            pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.2f</ele></trkpt>\n", ef, nf, zf ); 
           }
           double et = getENC( st );
           double nt = getNNC( st );
           double zt = getZ( st );
           // pw.format(Locale.US, "    <name>%s-%s</name>\n", sf.getFullName(), st.getFullName() );
-          pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.1f</ele></trkpt>\n", et, nt, zt ); 
+          pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.2f</ele></trkpt>\n", et, nt, zt ); 
           last = st;
         }
         if ( last != null ) {
@@ -180,8 +180,8 @@ public class ExportGPX extends ExportGeo
             double nt = getNNC( v );
             double zt = getZ( v );
             pw.format(Locale.US, "    <trkseg>\n");
-            pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.1f</ele></trkpt>\n", ef, nf, zf ); 
-            pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.1f</ele></trkpt>\n", et, nt, zt ); 
+            pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.2f</ele></trkpt>\n", ef, nf, zf ); 
+            pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.2f</ele></trkpt>\n", et, nt, zt ); 
             pw.format(Locale.US, "    </trkseg>\n");
           }
         }
