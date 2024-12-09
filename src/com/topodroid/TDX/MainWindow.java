@@ -34,6 +34,7 @@ import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.dev.DeviceUtil;
 import com.topodroid.inport.ImportData;
 import com.topodroid.inport.ImportBricCsvTask;
+import com.topodroid.inport.ImportCavwayCsvTask;
 import com.topodroid.inport.ImportCompassTask;
 import com.topodroid.inport.ImportVisualTopoTask;
 import com.topodroid.inport.ImportTherionTask;
@@ -615,7 +616,14 @@ public class MainWindow extends Activity
       new ImportCaveSniperTask( this, pfd ).execute( name ); 
     } else if ( type.equals( TDPath.CSV ) ) {
       setTitleImport();
-      new ImportBricCsvTask( this, pfd ).execute( name ); 
+      if ( data.mCsv == ImportData.CSV_BRIC ) {
+        new ImportBricCsvTask( this, pfd ).execute( name ); 
+      } else if ( data.mCsv == ImportData.CSV_CAVWAY ) {
+        new ImportCavwayCsvTask( this, pfd ).execute( name ); 
+      } else { // sould not occur
+        TDLog.e( "no CSV type specified" );
+        // TDToast.makeWarn( R.string.warning_no_csv_type );
+      }
     // } else {
     //   setTheTitle( );
     }

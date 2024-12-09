@@ -199,7 +199,7 @@ public class TDInstance
    */
   static boolean isContinuousMode() 
   {
-    if ( isDeviceXBLE() ) { // SIWEI
+    if ( isDeviceXBLE() || isDeviceCavway() ) { // SIWEI
       return TDSetting.isConnectionModeContinuous();
     }
     return TDSetting.isConnectionModeContinuous() || isDeviceBLE();

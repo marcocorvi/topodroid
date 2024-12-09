@@ -7071,7 +7071,7 @@ public class DrawingWindow extends ItemDrawer
             (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
           }
         } else {
-          mDataDownloader.toggleDownload();
+          mDataDownloader.toggleDownloading();
           setConnectionStatus( mDataDownloader.getStatus() );
           mDataDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_SHOT );
         }
@@ -7448,7 +7448,7 @@ public class DrawingWindow extends ItemDrawer
           (new ShotNewDialog( mActivity, mApp, this, last_blk, -1L )).show();
           // (new ShotNewDialog( mActivity, mApp, this, null, -1L )).show();
         } else {
-          mDataDownloader.toggleDownload();
+          mDataDownloader.toggleDownloading();
           // setConnectionStatus( mDataDownloader.getStatus() ); // FIXME DistoXDOWN was not commented
           mDataDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_SHOT );
         }

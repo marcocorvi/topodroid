@@ -933,14 +933,25 @@ public class TopoDroidApp extends Application
     return /* mGMdownload || */ mDataDownloader.isDownloading(); 
   }
 
+  /** stop data download
+   * @param lister  data lister
+   */
+  public void stopDownloading( ListerHandler lister )
+  {
+    mDataDownloader.setDownloading( false );
+    mDataDownloader.stopDownloadData( lister );
+    if ( lister != null ) {
+      lister.setConnectionStatus( mDataDownloader.getStatus() );
+      // mDataDownloader.notifyConnectionStatus( lister, ConnectionState.CONN_DISCONNECTED );
+    }
+  }
+
   /** reset the bluetooth
    * @param lister  data lister
    */
   private void doBluetoothReset( ILister lister )
   {
-    mDataDownloader.setDownload( false );
-    mDataDownloader.stopDownloadData( new ListerHandler(lister) );
-    lister.setConnectionStatus( mDataDownloader.getStatus() );
+    stopDownloading( new ListerHandler(lister) );
     this.resetComm();
     TDToast.make(R.string.bt_reset );
   }

@@ -449,14 +449,14 @@ public class AutoCalibDialog extends MyDialog
     Button b = (Button)view;
     if ( b == mBTstart ) {
       if ( ! mDownloading ) {
-        mDownloading = mApp.mDataDownloader.toggleDownload();
+        mDownloading = mApp.mDataDownloader.toggleDownloading();
         // TDLog.v("AutoCalib START: downloading " + mDownloading );
         ListerHandler handler = new ListerHandler( this ); // FIXME_LISTER
         mApp.mDataDownloader.doDataDownload( handler, DataType.DATA_CALIB );
         mBTstart.setText( R.string.button_stop );
         mBTwrite.setEnabled( false );
       } else {
-        mDownloading = mApp.mDataDownloader.toggleDownload();
+        mDownloading = mApp.mDataDownloader.toggleDownloading();
         mApp.mDataDownloader.stopDownloadData( new ListerHandler( this ) );
         // TDLog.v("AutoCalib STOP: downloading " + mDownloading );
         mBTstart.setText( R.string.button_start );
@@ -483,7 +483,7 @@ public class AutoCalibDialog extends MyDialog
   public void onBackPressed()
   {
     if ( mDownloading ) {
-      mDownloading = mApp.mDataDownloader.toggleDownload();
+      mDownloading = mApp.mDataDownloader.toggleDownloading();
       mApp.mDataDownloader.stopDownloadData( new ListerHandler( this ) );
       TDLog.v("AutoCalib BACK: downloading " + mDownloading );
       if ( mPw != null ) {

@@ -129,7 +129,7 @@ public class TDConst
     "Walls",
     "PocketTopo",
     "TopoRobot",
-    "BRIC csv"
+    "CSV"
   };
 
   private static final int[] mSurveyImportIndex = {

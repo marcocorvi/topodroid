@@ -130,7 +130,7 @@ class DeviceSelectDialog extends MyDialog
 
     mApp.setDevicePrimary( address, model, name, null ); // FIXME BLEX only BT devices
     mLister.setTheTitle();
-    mDownloader.toggleDownload();
+    mDownloader.toggleDownloading();
     mLister.setConnectionStatus( mDownloader.getStatus() );
     mDownloader.doDataDownload( mApp.mListerSet, DataType.DATA_ALL );
   }

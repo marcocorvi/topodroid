@@ -95,8 +95,7 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
         mLister.refreshDisplay( r, true );  // true: toast a message
         unlock();
       }
-      app.mDataDownloader.setDownload( false );
-      app.mDataDownloader.notifyConnectionStatus( mLister, ConnectionState.CONN_DISCONNECTED );
+      app.stopDownloading( mLister );
     }
   }
 

@@ -713,8 +713,8 @@
     <string name="screenshot_saved">Сохранен скриншот %1$s</string>
     <string name="screenshot_failed">Не удалось сделать снимок экрана</string>
     <string name="start_index">Индекс стартового замера</string>
-    <!-- TODO string name="trilateration_failed">Failed trilateration</string -->
-    <!-- TODO string name="trilateration_error">Trilateration error %1$.2f</string -->
+    <string name="trilateration_failed">Ошибка трилатерации</string>
+    <string name="trilateration_error">Ошибка трилатерации %1$.2f</string>
 
     <string name="survey_info">Статистика съёмки</string>
     <string name="stat_dates">С %1$s по %2$s</string>
@@ -1174,7 +1174,7 @@
     <!-- UNUSED string name="export_suffix_hint">суффикс</string -->
     <string name="export_roundtrip">Roundtrip</string>
     <string name="export_share">Поделиться</string>
-    <!-- TODO string name="export_overwrite">Overwrite</string -->
+    <string name="export_overwrite">Перезаписать</string>
     <!-- UNUSED string name="export_scale_png">Разрешение</string -->
     <string name="export_scale_th">Масштаб 1 :</string>
     <string name="export_spacing_th">Расстояние между точками</string>
@@ -1660,8 +1660,8 @@
 
   <string name="pref_team_title">Группа топосъёмки</string>
   <string name="pref_team_summary">Имена членов группы топосъёмки, которые будут автоматически испрользованы при создании новой съёмки.</string>
-  <!-- TODO string name="pref_team_names_title">Team names</string -->
-  <!-- TODO string name="pref_team_names_summary">Therion/Survex team names</string -->
+  <string name="pref_team_names_title">Имена членов группы топосъёмки</string>
+  <string name="pref_team_names_summary">Therion/Survex имена членов группы топосъёмки</string>
 
   <string name="pref_ethr_title">Порог угла вертикальности замеров</string>
   <string name="pref_ethr_summary">Максимальный угол от вертикали для вертикальной развертки замера на разрезе [град]</string>
