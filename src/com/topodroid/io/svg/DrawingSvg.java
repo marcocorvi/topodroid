@@ -76,6 +76,7 @@ public class DrawingSvg extends DrawingSvgBase
     final HashMap< String, ArrayList< DrawingPointPath > > points = new HashMap<>();
     final HashMap< String, ArrayList< DrawingLinePath > > lines  = new HashMap<>();
     final HashMap< String, ArrayList< DrawingAreaPath > > areas  = new HashMap<>();
+    final ArrayList< XSection > xsections = new ArrayList<>();
 
     try {
       // if ( TDSetting.mSvgInHtml ) out.write("<!DOCTYPE html>\n<html>\n<body>\n");
@@ -120,315 +121,307 @@ public class DrawingSvg extends DrawingSvgBase
       //     out.write( pt.getDxf() );
       //   }
       // }
-      
-      {
-        // 20230318 this was inside the next if ( PlotType.isSketch2D( type ) )
-        if ( TDSetting.mSvgGrid ) {
-          writeGrid( out, plot, xoff, yoff, xmin, ymin, xmax, ymax );
+
+      if ( TDSetting.mSvgGrid ) {
+        writeGrid( out, plot, xoff, yoff, xmin, ymin, xmax, ymax );
+      }
+
+      // centerline data
+      if ( PlotType.isSketch2D( type ) ) {
+
+        // FIXME OK PROFILE
+
+        // TDLog.v( "SVG legs " + plot.getLegs().size() );
+        out.write("<g id=\"legs\" style=\"fill:none;stroke-opacity:0.6;stroke:red\" >\n");
+        for ( DrawingPath sh : plot.getLegs() ) {
+          DBlock blk = sh.mBlock;
+          if ( blk == null ) continue;
+
+          StringWriter sw4 = new StringWriter();
+          PrintWriter pw4  = new PrintWriter(sw4);
+          pw4.format(Locale.US, "  <path stroke-width=\"%.2f\" stroke=\"black\" d=\"", TDSetting.mSvgShotStroke );
+          // // if ( sh.mType == DrawingPath.DRAWING_PATH_FIXED ) {
+          //   NumStation f = num.getStation( blk.mFrom );
+          //   NumStation t = num.getStation( blk.mTo );
+
+          //   if ( type == PlotType.PLOT_PLAN ) {
+          //     float x  = xoff + DrawingUtil.toSceneX( f.e, f.s );
+          //     float y  = yoff + DrawingUtil.toSceneY( f.e, f.s );
+          //     float x1 = xoff + DrawingUtil.toSceneX( t.e, t.s );
+          //     float y1 = yoff + DrawingUtil.toSceneY( t.e, t.s );
+          //     pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x1, y1 );
+          //   } else if ( PlotType.isProfile( type ) ) { // FIXME OK PROFILE
+          //     float x  = xoff + DrawingUtil.toSceneX( f.h, f.v );
+          //     float y  = yoff + DrawingUtil.toSceneY( f.h, f.v );
+          //     float x1 = xoff + DrawingUtil.toSceneX( t.h, t.v );
+          //     float y1 = yoff + DrawingUtil.toSceneY( t.h, t.v );
+          //     pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x1, y1 );
+          //   }
+          // // }
+          printSegmentWithClose( pw4, xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
+          pw4.format("\n");
+          out.write( sw4.getBuffer().toString() );
+          out.flush();
         }
+        out.write( end_grp ); // legs
 
-        // centerline data
-        if ( PlotType.isSketch2D( type ) ) { 
-            
-          // FIXME OK PROFILE
-
-          // TDLog.v( "SVG legs " + plot.getLegs().size() );
-          out.write("<g id=\"legs\" style=\"fill:none;stroke-opacity:0.6;stroke:red\" >\n");
-          for ( DrawingPath sh : plot.getLegs() ) {
-            DBlock blk = sh.mBlock;
-            if ( blk == null ) continue;
-
-            StringWriter sw4 = new StringWriter();
-            PrintWriter pw4  = new PrintWriter(sw4);
-            pw4.format(Locale.US, "  <path stroke-width=\"%.2f\" stroke=\"black\" d=\"", TDSetting.mSvgShotStroke );
-            // // if ( sh.mType == DrawingPath.DRAWING_PATH_FIXED ) {
-            //   NumStation f = num.getStation( blk.mFrom );
-            //   NumStation t = num.getStation( blk.mTo );
- 
-            //   if ( type == PlotType.PLOT_PLAN ) {
-            //     float x  = xoff + DrawingUtil.toSceneX( f.e, f.s ); 
-            //     float y  = yoff + DrawingUtil.toSceneY( f.e, f.s );
-            //     float x1 = xoff + DrawingUtil.toSceneX( t.e, t.s );
-            //     float y1 = yoff + DrawingUtil.toSceneY( t.e, t.s );
-            //     pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x1, y1 );
-            //   } else if ( PlotType.isProfile( type ) ) { // FIXME OK PROFILE
-            //     float x  = xoff + DrawingUtil.toSceneX( f.h, f.v );
-            //     float y  = yoff + DrawingUtil.toSceneY( f.h, f.v );
-            //     float x1 = xoff + DrawingUtil.toSceneX( t.h, t.v );
-            //     float y1 = yoff + DrawingUtil.toSceneY( t.h, t.v );
-            //     pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", x, y, x1, y1 );
-            //   }
-            // // }
-            printSegmentWithClose( pw4, xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
-            pw4.format("\n");
-            out.write( sw4.getBuffer().toString() );
-            out.flush();
-          }
-          out.write( end_grp ); // legs
-
-          // TDLog.v( "SVG splays " + plot.getSplays().size() );
-          if ( TDSetting.mSvgSplays ) {
-            ArrayList< DrawingPath > normal = new ArrayList<>();
-            if ( TDSetting.mSplayClasses ) {
-              // split splays in classes
-              ArrayList< DrawingPath > horiz  = new ArrayList<>();
-              ArrayList< DrawingPath > vert   = new ArrayList<>();
-              ArrayList< DrawingPath > x_sect = new ArrayList<>();
-              for ( DrawingPath sh : plot.getSplays() ) {
-                DBlock blk = sh.mBlock;
-                if ( blk == null ) continue;
-                if ( blk.isHSplay() ) {
-                  horiz.add( sh );
-                } else if ( blk.isVSplay() ) {
-                  vert.add( sh );
-                } else if ( blk.isXSplay() ) {
-                  x_sect.add( sh );
-                } else {
-                  normal.add( sh );
-                }
-              }
-              writeSplays( out, normal, "splays",   "grey",           xoff, yoff );
-              writeSplays( out, horiz,  "h-splays", "lightseagreen",  xoff, yoff );
-              writeSplays( out, vert,   "v-splays", "lightsteelblue", xoff, yoff );
-              writeSplays( out, x_sect, "x-splays", "lightseablue",   xoff, yoff );
-            } else {
-              for ( DrawingPath sh : plot.getSplays() ) {
-                DBlock blk = sh.mBlock;
-                if ( blk == null ) continue;
+        // TDLog.v( "SVG splays " + plot.getSplays().size() );
+        if ( TDSetting.mSvgSplays ) {
+          ArrayList< DrawingPath > normal = new ArrayList<>();
+          if ( TDSetting.mSplayClasses ) {
+            // split splays in classes
+            ArrayList< DrawingPath > horiz  = new ArrayList<>();
+            ArrayList< DrawingPath > vert   = new ArrayList<>();
+            ArrayList< DrawingPath > x_sect = new ArrayList<>();
+            for ( DrawingPath sh : plot.getSplays() ) {
+              DBlock blk = sh.mBlock;
+              if ( blk == null ) continue;
+              if ( blk.isHSplay() ) {
+                horiz.add( sh );
+              } else if ( blk.isVSplay() ) {
+                vert.add( sh );
+              } else if ( blk.isXSplay() ) {
+                x_sect.add( sh );
+              } else {
                 normal.add( sh );
               }
-              TDLog.v("SVG splays " + normal.size() );
-              writeSplays( out, normal, "splays", "grey", xoff, yoff );
             }
-	  }
-        }
-
-        if ( TDSetting.mSvgLineDirection ) {
-          // TDLog.v( "SVG line direction");
-          StringWriter swD = new StringWriter();
-          PrintWriter pwD  = new PrintWriter(swD);
-          pwD.format("<marker id=\"dir\" viewBox=\"0 0 10 30\"  orient=\"auto\"");
-          pwD.format(" markerUnits=\"strokeWidth\" markerWidth=\"4\" refX=\"0\" refY=\"30\"");
-          pwD.format(Locale.US, " markerHeight=\"30\" stroke=\"#cccc3a\" stroke-width=\"%.2f\" fill=\"none\" >\n", TDSetting.mSvgLineDirStroke );
-          pwD.format("  <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"30\" />\n" );
-          pwD.format("</marker>\n");
-          pwD.format("<marker id=\"rev\" viewBox=\"0 0 10 30\"  orient=\"auto\"");
-          pwD.format(" markerUnits=\"strokeWidth\" markerWidth=\"4\" refX=\"0\" refY=\"0\"");
-          pwD.format(Locale.US, " markerHeight=\"30\" stroke=\"#cccc3a\" stroke-width=\"%.2f\" fill=\"none\" >\n", TDSetting.mSvgLineDirStroke );
-          pwD.format("  <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"30\" />\n" );
-          pwD.format("</marker>\n");
-          out.write( swD.getBuffer().toString() );
-          out.flush();
-        }
-
-	ArrayList< XSection > xsections = new ArrayList<>();
-
-        // TDLog.v( "SVG scraps " + plot.getScraps().size() );
-        for ( Scrap scrap : plot.getScraps() ) {
-          ArrayList< DrawingPath > paths = new ArrayList<>();
-          scrap.addCommandsToList( paths );
-
-          stations.clear();
-          xsectionsPoints.clear();
-          points.clear();
-          lines.clear();
-          areas.clear();
-          
-          for ( DrawingPath path : paths ) {
-            switch ( path.mType ) {
-              case DrawingPath.DRAWING_PATH_STATION:
-                stations.add((DrawingStationUser)path);
-                break;
-              case DrawingPath.DRAWING_PATH_POINT:
-                  DrawingPointPath point = (DrawingPointPath)path;
-                  if ( BrushManager.isPointSection( point.mPointType ) ) {
-                      xsectionsPoints.add( point );
-                  }
-                  else {
-                    String pointName = point.getFullThName();
-                    if ( ! points.containsKey( pointName ) ) {
-                        points.put( pointName, new ArrayList< DrawingPointPath >() );
-                    }
-                    points.get( pointName ).add( point );
-                  }
-                  break;
-              case DrawingPath.DRAWING_PATH_LINE:
-                  DrawingLinePath line = (DrawingLinePath)path;
-                  String lineName = line.getFullThName();
-                  if ( ! lines.containsKey( lineName ) ) {
-                      lines.put( lineName, new ArrayList< DrawingLinePath >() );
-                  }
-                  lines.get( lineName ).add( line );
-                  break;
-              case DrawingPath.DRAWING_PATH_AREA:
-                  DrawingAreaPath area = (DrawingAreaPath)path;
-                  String areaName = area.getFullThName();
-                  if ( ! areas.containsKey( areaName ) ) {
-                    areas.put( areaName, new ArrayList< DrawingAreaPath >() );
-                  }
-                  areas.get( areaName ).add( area );
-                  break;
+            writeSplays( out, normal, "splays",   "grey",           xoff, yoff );
+            writeSplays( out, horiz,  "h-splays", "lightseagreen",  xoff, yoff );
+            writeSplays( out, vert,   "v-splays", "lightsteelblue", xoff, yoff );
+            writeSplays( out, x_sect, "x-splays", "lightseablue",   xoff, yoff );
+          } else {
+            for ( DrawingPath sh : plot.getSplays() ) {
+              DBlock blk = sh.mBlock;
+              if ( blk == null ) continue;
+              normal.add( sh );
             }
-          }
-
-          out.write( "<g id=\"scrap_" + scrap.mScrapIdx + "\">\n" );
-
-          // TDLog.v( "SVG paths " + paths.size() + " points" );
-          if ( ! stations.isEmpty() ) {
-            out.write("<g id=\"stations-points\">\n");
-            for ( DrawingStationUser st_path : stations ) {
-              StringWriter sw51 = new StringWriter();
-              PrintWriter pw51  = new PrintWriter(sw51);
-              toSvg( pw51, st_path, xoff, yoff );
-              out.write( sw51.getBuffer().toString() );
-            }
-            out.write( end_grp ); // stations
-            out.flush();
-          }
-          if ( ! xsectionsPoints.isEmpty() ) {
-            out.write("<g id=\"xsections-points\">\n");
-            for (DrawingPointPath point : xsectionsPoints) {
-              float xx = point.cx;
-              float yy = point.cy;
-              if ( TDSetting.mAutoXSections ) {
-                // FIXME GET_OPTION
-                XSection xsection = null;
-                String scrapname = TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) );
-
-                if ( scrapname != null ) {
-                  String scrapfile = scrapname + ".tdr";
-
-                  // TODO open file survey-xx#.tdr and convert it to svg
-                  // tdrToSvg( pw5, scrapfile, xx, yy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
-                  // xsection = new XSection( scrapfile, xx, yy );
-                  xsection = new XSection( scrapfile, xx-DrawingUtil.CENTER_X, yy-DrawingUtil.CENTER_Y );
-                  xsections.add( xsection );
-                }
-                IDrawingLink link = point.mLink; // FIXME Link could be stored in the XSection and written with it
-                if ( link != null && xsection != null ) {
-                  float x1 = (xoff + xx) * TDSetting.mToSvg;
-                  float y1 = (yoff + yy) * TDSetting.mToSvg;
-                  float x2 = (xoff + link.getLinkX() ) * TDSetting.mToSvg;
-                  float y2 = (yoff + link.getLinkY() ) * TDSetting.mToSvg;
-                  StringWriter sw520 = new StringWriter();
-                  PrintWriter pw520  = new PrintWriter(sw520);
-                  pw520.format(Locale.US, "  <line x1=\"%f\" y1=\"%f\" x2=\"%f\" y2=\"%f\"", x1, y1, x2, y2 );
-                  pw520.format(Locale.US, " class=\"link\" style=\"fill:none;stroke:brown;stroke-width:%.2f\" />\n", TDSetting.mSvgShotStroke );
-                    out.write( sw520.getBuffer().toString() );
-                }
-              } else {
-                StringWriter sw52 = new StringWriter();
-                PrintWriter pw52  = new PrintWriter(sw52);
-                printPointWithCXCY( pw52, "<circle", xoff+xx, yoff+yy );
-                pw52.format(Locale.US, " r=\"%d\" ", RADIUS );
-                pw52.format(Locale.US, " style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
-                out.write( sw52.getBuffer().toString() );
-             }
-            }
-            out.write( end_grp ); // xsections
-            out.flush();
-          }
-          if ( ! points.isEmpty() ) {
-            out.write("<g id=\"points\">\n");
-            ArrayList < String > pointTypes = new ArrayList<>( points.keySet() );
-            Collections.sort( pointTypes, String.CASE_INSENSITIVE_ORDER );
-            Collections.reverse( pointTypes );
-            for ( String pointTypeName : pointTypes ) {
-              ArrayList< DrawingPointPath > pointList = points.get(pointTypeName);
-              out.write("<g id=\"" + pointTypeName + "\">\n");
-              String color_str = pathToColor( pointList.get(0) );
-              for ( DrawingPointPath point : pointList ) {
-                StringWriter sw53 = new StringWriter();
-                PrintWriter pw53  = new PrintWriter(sw53);
-                toSvg( pw53, point, color_str, xoff, yoff );
-                out.write( sw53.getBuffer().toString() );
-              }
-              out.write( end_grp ); // pointTypeName
-            }
-            out.write( end_grp ); // points
-            out.flush();
-          }
-
-          if ( ! lines.isEmpty() ) {
-            out.write("<g id=\"lines\">\n");
-            ArrayList < String > lineTypes = new ArrayList<>( lines.keySet() );
-            Collections.sort( lineTypes, String.CASE_INSENSITIVE_ORDER );
-            Collections.reverse( lineTypes );
-            for ( String lineTypeName : lineTypes ) {
-              out.write("<g id=\"" + lineTypeName + "\">\n");
-              ArrayList< DrawingLinePath > lineList = lines.get(lineTypeName);
-              String color_str = pathToColor( lineList.get(0) );
-              for ( DrawingLinePath line : lineList ) {
-                StringWriter sw54 = new StringWriter();
-                PrintWriter pw54  = new PrintWriter(sw54);
-                toSvg( pw54, line, color_str, xoff, yoff );
-                out.write( sw54.getBuffer().toString() );
-              }
-              out.write( end_grp ); // lineTypeName
-            }
-            out.write( end_grp ); // lines
-            out.flush();
-          }
-
-          if ( ! areas.isEmpty() ) {
-            out.write("<g id=\"areas\">\n");
-            ArrayList < String > areaTypes = new ArrayList<>( areas.keySet() );
-            Collections.sort( areaTypes, String.CASE_INSENSITIVE_ORDER );
-            Collections.reverse( areaTypes );
-            for ( String areaTypeName : areaTypes ) {
-              out.write("<g id=\"" + areaTypeName + "\">\n");
-              ArrayList< DrawingAreaPath > areaList = areas.get(areaTypeName);
-              String color_str = pathToColor( areaList.get(0) );
-              for ( DrawingAreaPath area : areaList ) {
-                StringWriter sw55 = new StringWriter();
-                PrintWriter pw55  = new PrintWriter(sw55);
-                toSvg( pw55, area, color_str, xoff, yoff );
-                out.write( sw55.getBuffer().toString() );
-              }
-              out.write( end_grp ); // areaTypeName
-            }
-            out.write( end_grp ); // areas
-            out.flush();
-          }
-          out.write( end_grp ); // scrap_
-          out.flush();
-        }
-
-        // TDLog.v( "SVG xsections " + xsections.size() );
-        out.write("<g id=\"xsections\">\n");
-        for ( XSection xsection : xsections ) {
-          // TDLog.v( "SVG xsection " + xsection.mFilename + " " + xsection.mX + " " + xsection.mY );
-          StringWriter sw7 = new StringWriter();
-          PrintWriter pw7  = new PrintWriter(sw7);
-          pw7.format("<g id=\"%s\">\n", xsection.mFilename );
-          // tdrToSvg( pw7, xsection.mFilename, xsection.mX, xsection.mY, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
-          tdrToSvg( pw7, xsection.mFilename, xsection.mX, xsection.mY, xoff, yoff );
-          pw7.format( end_grp );
-          out.write( sw7.getBuffer().toString() );
-          out.flush();
-        }
-        out.write( end_grp ); // xsections
-
-        // TDLog.v( "SVG stations " + plot.getStations().size() );
-        out.write("<g id=\"stations\">\n");
-        if ( TDSetting.mAutoStations ) {
-          for ( DrawingStationName name : plot.getStations() ) { // auto-stations
-            StringWriter sw61 = new StringWriter();
-            PrintWriter pw61  = new PrintWriter(sw61);
-            toSvg( pw61, name, xoff, yoff );
-            out.write( sw61.getBuffer().toString() );
-          }
-        } else {
-          for ( DrawingStationUser st_path : plot.getUserStations() ) { // user-chosen
-            StringWriter sw62 = new StringWriter();
-            PrintWriter pw62  = new PrintWriter(sw62);
-            toSvg( pw62, st_path, xoff, yoff );
-            out.write( sw62.getBuffer().toString() );
+            TDLog.v("SVG splays " + normal.size() );
+            writeSplays( out, normal, "splays", "grey", xoff, yoff );
           }
         }
-        out.flush();
-        out.write( end_grp ); // stations
       }
+
+      if ( TDSetting.mSvgLineDirection ) {
+        // TDLog.v( "SVG line direction");
+        StringWriter swD = new StringWriter();
+        PrintWriter pwD  = new PrintWriter(swD);
+        pwD.format("<marker id=\"dir\" viewBox=\"0 0 10 30\"  orient=\"auto\"");
+        pwD.format(" markerUnits=\"strokeWidth\" markerWidth=\"4\" refX=\"0\" refY=\"30\"");
+        pwD.format(Locale.US, " markerHeight=\"30\" stroke=\"#cccc3a\" stroke-width=\"%.2f\" fill=\"none\" >\n", TDSetting.mSvgLineDirStroke );
+        pwD.format("  <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"30\" />\n" );
+        pwD.format("</marker>\n");
+        pwD.format("<marker id=\"rev\" viewBox=\"0 0 10 30\"  orient=\"auto\"");
+        pwD.format(" markerUnits=\"strokeWidth\" markerWidth=\"4\" refX=\"0\" refY=\"0\"");
+        pwD.format(Locale.US, " markerHeight=\"30\" stroke=\"#cccc3a\" stroke-width=\"%.2f\" fill=\"none\" >\n", TDSetting.mSvgLineDirStroke );
+        pwD.format("  <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"30\" />\n" );
+        pwD.format("</marker>\n");
+        out.write( swD.getBuffer().toString() );
+        out.flush();
+      }
+
+      // TDLog.v( "SVG scraps " + plot.getScraps().size() );
+      for ( Scrap scrap : plot.getScraps() ) {
+        final ArrayList< DrawingPath > paths = new ArrayList<>();
+        scrap.addCommandsToList( paths );
+
+        xsectionsPoints.clear();
+        points.clear();
+        lines.clear();
+        areas.clear();
+
+        for ( DrawingPath path : paths ) {
+          switch ( path.mType ) {
+            case DrawingPath.DRAWING_PATH_POINT:
+              DrawingPointPath point = (DrawingPointPath)path;
+              if ( BrushManager.isPointSection( point.mPointType ) ) {
+                  xsectionsPoints.add( point );
+              }
+              else {
+                final String pointTypeName = point.getFullThName();
+                if ( ! points.containsKey( pointTypeName ) ) {
+                    points.put( pointTypeName, new ArrayList< DrawingPointPath >() );
+                }
+                points.get( pointTypeName ).add( point );
+              }
+              break;
+            case DrawingPath.DRAWING_PATH_LINE:
+              final DrawingLinePath line = (DrawingLinePath)path;
+              final String lineTypeName = line.getFullThName();
+              if ( ! lines.containsKey( lineTypeName ) ) {
+                  lines.put( lineTypeName, new ArrayList< DrawingLinePath >() );
+              }
+              lines.get( lineTypeName ).add( line );
+              break;
+            case DrawingPath.DRAWING_PATH_AREA:
+              final DrawingAreaPath area = (DrawingAreaPath)path;
+              final String areaTypeName = area.getFullThName();
+              if ( ! areas.containsKey( areaTypeName ) ) {
+                areas.put( areaTypeName, new ArrayList< DrawingAreaPath >() );
+              }
+              areas.get( areaTypeName ).add( area );
+              break;
+          }
+        }
+
+        final int scrapId = scrap.mScrapIdx;
+        out.write( "<g id=\"scrap_" + scrapId + "\">\n" );
+
+        // TDLog.v( "SVG paths " + paths.size() + " points" );
+        if ( ! points.isEmpty() ) {
+          out.write("<g id=\"points\">\n");
+          ArrayList < String > pointTypes = new ArrayList<>( points.keySet() );
+          Collections.sort( pointTypes, String.CASE_INSENSITIVE_ORDER );
+          Collections.reverse( pointTypes );
+          for ( String pointTypeName : pointTypes ) {
+            final ArrayList< DrawingPointPath > pointList = points.get(pointTypeName);
+            out.write("<g id=\"point_" + pointTypeName + "\">\n");
+            final String color_str = pathToColor( pointList.get(0) );
+            for (DrawingPointPath point : pointList) {
+              final StringWriter sw53 = new StringWriter();
+              final PrintWriter pw53  = new PrintWriter(sw53);
+              toSvg( pw53, point, color_str, xoff, yoff );
+              out.write( sw53.getBuffer().toString() );
+            }
+            out.write( end_grp ); // point_
+          }
+          out.write( end_grp ); // points
+          out.flush();
+        }
+
+        if ( ! lines.isEmpty() ) {
+          out.write("<g id=\"lines\">\n");
+          ArrayList < String > lineTypes = new ArrayList<>( lines.keySet() );
+          Collections.sort( lineTypes, String.CASE_INSENSITIVE_ORDER );
+          Collections.reverse( lineTypes );
+          for ( String lineTypeName : lineTypes ) {
+            out.write("<g id=\"line_" + lineTypeName + "\">\n");
+            final ArrayList< DrawingLinePath > lineList = lines.get(lineTypeName);
+            final String color_str = pathToColor( lineList.get(0) );
+            for (DrawingLinePath line : lineList) {
+              final StringWriter sw54 = new StringWriter();
+              final PrintWriter pw54  = new PrintWriter(sw54);
+              toSvg( pw54, line, color_str, xoff, yoff );
+              out.write( sw54.getBuffer().toString() );
+            }
+            out.write( end_grp ); // line_
+          }
+          out.write( end_grp ); // lines
+          out.flush();
+        }
+
+        if ( ! areas.isEmpty() ) {
+          out.write("<g id=\"areas\">\n");
+          ArrayList < String > areaTypes = new ArrayList<>( areas.keySet() );
+          Collections.sort( areaTypes, String.CASE_INSENSITIVE_ORDER );
+          Collections.reverse( areaTypes );
+          for ( String areaTypeName : areaTypes ) {
+            out.write("<g id=\"area_" + areaTypeName + "\">\n");
+            final ArrayList< DrawingAreaPath > areaList = areas.get(areaTypeName);
+            final String color_str = pathToColor( areaList.get(0) );
+            for (DrawingAreaPath area : areaList) {
+              final StringWriter sw55 = new StringWriter();
+              final PrintWriter pw55  = new PrintWriter(sw55);
+              toSvg( pw55, area, color_str, xoff, yoff );
+              out.write( sw55.getBuffer().toString() );
+            }
+            out.write( end_grp ); // area_
+          }
+          out.write( end_grp ); // areas
+          out.flush();
+        }
+
+        if ( ! xsectionsPoints.isEmpty() ) {
+          out.write("<g id=\"xsections_" + scrapId + "\">\n");
+          out.write("<g id=\"xsection_links\">\n");
+          for (DrawingPointPath point : xsectionsPoints) {
+            final float xx = point.cx;
+            final float yy = point.cy;
+            if ( TDSetting.mAutoXSections ) {
+              // FIXME GET_OPTION
+              final String scrapname = TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) );
+              XSection xsection = null;
+              if ( scrapname != null ) {
+                final String scrapfile = scrapname + ".tdr";
+                // TODO open file survey-xx#.tdr and convert it to svg
+                // tdrToSvg( pw5, scrapfile, xx, yy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+                // xsection = new XSection( scrapfile, xx, yy );
+                xsection = new XSection( scrapfile, xx-DrawingUtil.CENTER_X, yy-DrawingUtil.CENTER_Y );
+                xsections.add( xsection );
+              }
+              IDrawingLink link = point.mLink; // FIXME Link could be stored in the XSection and written with it
+              if ( link != null && xsection != null ) {
+                final float x1 = (xoff + xx) * TDSetting.mToSvg;
+                final float y1 = (yoff + yy) * TDSetting.mToSvg;
+                final float x2 = (xoff + link.getLinkX() ) * TDSetting.mToSvg;
+                final float y2 = (yoff + link.getLinkY() ) * TDSetting.mToSvg;
+                final StringWriter sw52 = new StringWriter();
+                final PrintWriter pw52  = new PrintWriter(sw52);
+                pw52.format(Locale.US, "  <line x1=\"%f\" y1=\"%f\" x2=\"%f\" y2=\"%f\"", x1, y1, x2, y2 );
+                pw52.format(Locale.US, " class=\"link\" style=\"fill:none;stroke:brown;stroke-width:%.2f\" />\n", TDSetting.mSvgShotStroke );
+                out.write( sw52.getBuffer().toString() );
+              }
+            } else {
+              final StringWriter sw52 = new StringWriter();
+              final PrintWriter pw52  = new PrintWriter(sw52);
+              printPointWithCXCY( pw52, "<circle", xoff+xx, yoff+yy );
+              pw52.format(Locale.US, " r=\"%d\" ", RADIUS );
+              pw52.format(Locale.US, " style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
+              out.write( sw52.getBuffer().toString() );
+            }
+          }
+          out.write( end_grp ); // xsection_links
+          out.flush();
+        }
+
+        if ( ! xsections.isEmpty() ) {
+          // TDLog.v( "SVG xsections " + xsections.size() );
+          out.write("<g id=\"xsection_scraps_" + scrapId + "\">\n");
+          for (XSection xsection : xsections) {
+            // TDLog.v( "SVG xsection " + xsection.mFilename + " " + xsection.mX + " " + xsection.mY );
+            StringWriter sw7 = new StringWriter();
+            PrintWriter pw7 = new PrintWriter(sw7);
+            pw7.format("<g id=\"xsection_%s\">\n", xsection.mFilename);
+            // tdrToSvg( pw7, xsection.mFilename, xsection.mX, xsection.mY, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+            tdrToSvg(pw7, xsection.mFilename, xsection.mX, xsection.mY, xoff, yoff);
+            pw7.format(end_grp);
+            out.write(sw7.getBuffer().toString());
+            out.flush();
+          }
+          out.write(end_grp); // xsection_scraps_
+          out.flush();
+        }
+
+        if ( ! xsectionsPoints.isEmpty() ) {
+          out.write(end_grp); // xsections_
+          out.flush();
+        }
+
+        out.write( end_grp ); // scrap_
+        out.flush();
+      }
+
+      // TDLog.v( "SVG stations " + plot.getStations().size() );
+      out.write("<g id=\"stations\">\n");
+      if ( TDSetting.mAutoStations ) {
+        for ( DrawingStationName name : plot.getStations() ) { // auto-stations
+          StringWriter sw61 = new StringWriter();
+          PrintWriter pw61  = new PrintWriter(sw61);
+          toSvg( pw61, name, xoff, yoff );
+          out.write( sw61.getBuffer().toString() );
+          out.flush();
+        }
+      } else {
+        for (DrawingStationUser st_path : plot.getUserStations()) { // user-chosen
+          StringWriter sw62 = new StringWriter();
+          PrintWriter pw62 = new PrintWriter(sw62);
+          toSvg(pw62, st_path, xoff, yoff);
+          out.write(sw62.getBuffer().toString());
+          out.flush();
+        }
+      }
+      out.write(end_grp); // stations
+
       // out.write( end_grp ); // canvas
       out.write( end_svg );
 
@@ -446,10 +439,11 @@ public class DrawingSvg extends DrawingSvgBase
     try {
       out.write("<g id=\"" + group + "\"\n" );
       out.write("  style=\"fill:none;stroke-opacity:0.4;stroke:" + color + "\" >\n");
+      int count = 1;
       for ( DrawingPath sh : splays ) {
         StringWriter sw41x = new StringWriter();
         PrintWriter pw41x  = new PrintWriter(sw41x);
-        pw41x.format(Locale.US, "  <path stroke-width=\"%.2f\" stroke=\"%s\" d=\"", TDSetting.mSvgShotStroke, color );
+        pw41x.format(Locale.US, "  <path stroke-width=\"%.2f\" stroke=\"%s\" id=\"splay_%s_%d\" d=\"", TDSetting.mSvgShotStroke, color, group, count++ );
         printSegmentWithClose( pw41x, xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
         pw41x.format("\n");
         out.write( sw41x.getBuffer().toString() );

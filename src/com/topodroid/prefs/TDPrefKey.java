@@ -738,6 +738,7 @@ public class TDPrefKey
     "DISTOX_SVG_GRID",        // whether to export grid in SVG 
     "DISTOX_SVG_LINE_DIR",    // whether to add line orientation ticks in SVG export
     "DISTOX_SVG_SPLAYS",
+    "DISTOX_SVG_GROUPS",      // whether to group items by the type in SVG export
     // "DISTOX_SVG_IN_HTML",  // whether to export SVG embedded in HTML
     "DISTOX_SVG_POINT_STROKE",
     "DISTOX_SVG_LABEL_STROKE", 
@@ -755,6 +756,7 @@ public class TDPrefKey
     R.string.pref_svg_grid_title,
     R.string.pref_svg_line_dir_title,
     R.string.pref_svg_splays_title,
+    R.string.pref_svg_groups_title,
     // R.string.pref_svg_in_html_title,
     R.string.pref_svg_pointstroke_title,
     R.string.pref_svg_labelstroke_title,
@@ -772,6 +774,7 @@ public class TDPrefKey
     R.string.pref_svg_grid_summary,
     R.string.pref_svg_line_dir_summary,
     R.string.pref_svg_splays_summary,
+    R.string.pref_svg_groups_summary,
     // R.string.pref_svg_in_html_summary,
     R.string.pref_svg_pointstroke_summary,
     R.string.pref_svg_labelstroke_summary,
@@ -788,6 +791,7 @@ public class TDPrefKey
     FALSE,
     FALSE,
     FALSE,
+    TRUE,
     TRUE,
     // FALSE,
     "0.5",

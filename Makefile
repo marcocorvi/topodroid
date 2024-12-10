@@ -157,8 +157,9 @@ SRC = \
   ./symbols-git/*/*/* \
   ./howto/* \
   ./utils/* \
-  ./unused/idea/* \
-  ./unused/TopoDroid-icon/* \
+  ./save/idea/* \
+  ./save/tdx-icon-0/* \
+  ./save/tdx-icon-1/* \
   ./src/com/topodroid/c3db/*.java \
   ./src/com/topodroid/c3in/*.java \
   ./src/com/topodroid/c3out/*.java \

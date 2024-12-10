@@ -32,6 +32,7 @@ import com.topodroid.TDX.TDExporter;
 import com.topodroid.TDX.Scrap;
 import com.topodroid.TDX.DBlock;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -52,7 +53,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
    */
   private boolean isRoundTrip( DrawingPath path, int rt )
   {
-    switch ( path.mType ):
+    switch ( path.mType ) {
       case DrawingPath.DRAWING_PATH_LINE:
         return BrushManager.isLineRoundTrip( (DrawingLinePath)path, rt );
       case DrawingPath.DRAWING_PATH_POINT:
@@ -108,6 +109,17 @@ public class DrawingSvgWalls extends DrawingSvgBase
       PrintWriter pw5  = new PrintWriter(sw5);
       toSvg( pw5, area, pathToColor(path), xoff, yoff );
       out.write( sw5.getBuffer().toString() );
+    }
+  }
+
+  private void writePaths(BufferedWriter out, List<DrawingPath> paths, float xoff, float yoff, int rt ) throws IOException
+  {
+    if ( TDSetting.mSvgGroups ) {
+      // TODO
+    } else {
+      for ( DrawingPath path : paths ) {
+        writePath( out, path, xoff, yoff, rt );
+      }
     }
   }
 
@@ -230,9 +242,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
         ArrayList<DrawingPath> paths = new ArrayList<>();
         scrap.addCommandsToList( paths );
         out.write( "        <g id=\"scrap_" + scrap.mScrapIdx + "\">\n" );
-        for ( DrawingPath path : paths ) {
-          writePath( out, path, xoff, yoff, Symbol.W2D_DETAIL_SHP );
-        }
+        writePaths( out, paths, xoff, yoff, Symbol.W2D_DETAIL_SHP );
         out.write( "        " + end_grp ); // scrap_
       }
       out.write( "      " + end_grp ); // group_detail_shp
@@ -243,9 +253,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
         ArrayList<DrawingPath> paths = new ArrayList<>();
         scrap.addCommandsToList( paths );
         out.write( "        <g id=\"scrap_" + scrap.mScrapIdx + "\">\n" );
-        for ( DrawingPath path : paths ) {
-          writePath( out, path, xoff, yoff, Symbol.W2D_DETAIL_SYM );
-        }
+        writePaths( out, paths, xoff, yoff, Symbol.W2D_DETAIL_SYM );
         out.write( "        " + end_grp ); // scrap_
       }
       out.flush();
@@ -269,9 +277,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
         ArrayList<DrawingPath> paths = new ArrayList<>();
         scrap.addCommandsToList( paths );
         out.write( "        <g id=\"scrap_" + scrap.mScrapIdx + "\">\n" );
-        for ( DrawingPath path : paths ) {
-          writePath( out, path, xoff, yoff, Symbol.W2D_WALLS_SHP );
-        }
+        writePaths( out, paths, xoff, yoff, Symbol.W2D_WALLS_SHP );
         out.write( "        " + end_grp ); // scrap_
       }
       out.write( "      " + end_grp ); // group_walls_shp
@@ -282,9 +288,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
         ArrayList<DrawingPath> paths = new ArrayList<>();
         scrap.addCommandsToList( paths );
         out.write( "        <g id=\"scrap_" + scrap.mScrapIdx + "\">\n" );
-        for ( DrawingPath path : paths ) {
-          writePath( out, path, xoff, yoff, Symbol.W2D_WALLS_SYM );
-        }
+        writePaths( out, paths, xoff, yoff, Symbol.W2D_WALLS_SYM );
         out.write( "        " + end_grp ); // scrap_
       }
       out.write( "      " + end_grp ); // group_walls_sym
