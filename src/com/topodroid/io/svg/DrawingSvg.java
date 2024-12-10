@@ -410,6 +410,7 @@ public class DrawingSvg extends DrawingSvgBase
           PrintWriter pw61  = new PrintWriter(sw61);
           toSvg( pw61, name, xoff, yoff );
           out.write( sw61.getBuffer().toString() );
+          out.flush();
         }
       } else {
         for (DrawingStationUser st_path : plot.getUserStations()) { // user-chosen
