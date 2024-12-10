@@ -294,7 +294,7 @@ public class DrawingSvgBase
   static protected void toSvg( PrintWriter pw, DrawingStationName st, float xoff, float yoff )
   {
     // pw.format("<text font-size=\"20\" font-family=\"sans-serif\" fill=\"violet\" stroke=\"none\" text-anchor=\"middle\"");
-    pw.format("<text font-size=\"%d\" fill=\"violet\" stroke=\"none\" text-anchor=\"middle\" id =\"%s\"", TDSetting.mSvgStationSize, st.getName() );
+    pw.format("<text font-size=\"%d\" fill=\"violet\" stroke=\"none\" text-anchor=\"middle\" name=\"%s\"", TDSetting.mSvgStationSize, st.getName() );
     printPointWithXY( pw, "", xoff+st.cx, yoff+st.cy );
     pw.format(">%s</text>\n", st.getName() );
   }
@@ -302,7 +302,7 @@ public class DrawingSvgBase
   static protected void toSvg( PrintWriter pw, DrawingStationUser sp, float xoff, float yoff )
   {
     // pw.format("<text font-size=\"20\" font-family=\"sans-serif\" fill=\"black\" stroke=\"none\" text-anchor=\"middle\"");
-    pw.format("<text font-size=\"%d\" fill=\"black\" stroke=\"none\" text-anchor=\"middle\" id=\"point-%s\"", TDSetting.mSvgStationSize, sp.name() );
+    pw.format("<text font-size=\"%d\" fill=\"black\" stroke=\"none\" text-anchor=\"middle\" name=\"point-%s\"", TDSetting.mSvgStationSize, sp.name() );
     printPointWithXY( pw, "", xoff+sp.cx, yoff+sp.cy );
     pw.format(">%s</text>\n", sp.name() );
   }

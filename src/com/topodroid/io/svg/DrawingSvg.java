@@ -39,13 +39,13 @@ import com.topodroid.TDX.DBlock;
 import java.util.Locale;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
 import android.graphics.RectF;
-import java.util.HashMap;
 
 public class DrawingSvg extends DrawingSvgBase
 {
@@ -225,7 +225,7 @@ public class DrawingSvg extends DrawingSvgBase
 
         // TDLog.v( "SVG scraps " + plot.getScraps().size() );
         for ( Scrap scrap : plot.getScraps() ) {
-          final ArrayList< DrawingPath > paths = new ArrayList<>();
+          ArrayList< DrawingPath > paths = new ArrayList<>();
           scrap.addCommandsToList( paths );
 
           stations.clear();
@@ -240,12 +240,12 @@ public class DrawingSvg extends DrawingSvgBase
                 stations.add((DrawingStationUser)path);
                 break;
               case DrawingPath.DRAWING_PATH_POINT:
-                  final DrawingPointPath point = (DrawingPointPath)path;
+                  DrawingPointPath point = (DrawingPointPath)path;
                   if ( BrushManager.isPointSection( point.mPointType ) ) {
                       xsectionsPoints.add( point );
                   }
                   else {
-                    final String pointName = point.getFullThName();
+                    String pointName = point.getFullThName();
                     if ( ! points.containsKey( pointName ) ) {
                         points.put( pointName, new ArrayList< DrawingPointPath >() );
                     }
@@ -253,16 +253,16 @@ public class DrawingSvg extends DrawingSvgBase
                   }
                   break;
               case DrawingPath.DRAWING_PATH_LINE:
-                  final DrawingLinePath line = (DrawingLinePath)path;
-                  final String lineName = line.getFullThName();
+                  DrawingLinePath line = (DrawingLinePath)path;
+                  String lineName = line.getFullThName();
                   if ( ! lines.containsKey( lineName ) ) {
                       lines.put( lineName, new ArrayList< DrawingLinePath >() );
                   }
                   lines.get( lineName ).add( line );
                   break;
               case DrawingPath.DRAWING_PATH_AREA:
-                  final DrawingAreaPath area = (DrawingAreaPath)path;
-                  final String areaName = area.getFullThName();
+                  DrawingAreaPath area = (DrawingAreaPath)path;
+                  String areaName = area.getFullThName();
                   if ( ! areas.containsKey( areaName ) ) {
                     areas.put( areaName, new ArrayList< DrawingAreaPath >() );
                   }
@@ -276,9 +276,9 @@ public class DrawingSvg extends DrawingSvgBase
           // TDLog.v( "SVG paths " + paths.size() + " points" );
           if ( ! stations.isEmpty() ) {
             out.write("<g id=\"stations-points\">\n");
-            for (DrawingStationUser st_path : stations) {
-              final StringWriter sw51 = new StringWriter();
-              final PrintWriter pw51  = new PrintWriter(sw51);
+            for ( DrawingStationUser st_path : stations ) {
+              StringWriter sw51 = new StringWriter();
+              PrintWriter pw51  = new PrintWriter(sw51);
               toSvg( pw51, st_path, xoff, yoff );
               out.write( sw51.getBuffer().toString() );
             }
@@ -288,14 +288,15 @@ public class DrawingSvg extends DrawingSvgBase
           if ( ! xsectionsPoints.isEmpty() ) {
             out.write("<g id=\"xsections-points\">\n");
             for (DrawingPointPath point : xsectionsPoints) {
-              final float xx = point.cx;
-              final float yy = point.cy;
+              float xx = point.cx;
+              float yy = point.cy;
               if ( TDSetting.mAutoXSections ) {
                 // FIXME GET_OPTION
-                final String scrapname = TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) );
                 XSection xsection = null;
+                String scrapname = TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) );
+
                 if ( scrapname != null ) {
-                  final String scrapfile = scrapname + ".tdr";
+                  String scrapfile = scrapname + ".tdr";
 
                   // TODO open file survey-xx#.tdr and convert it to svg
                   // tdrToSvg( pw5, scrapfile, xx, yy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
@@ -305,18 +306,19 @@ public class DrawingSvg extends DrawingSvgBase
                 }
                 IDrawingLink link = point.mLink; // FIXME Link could be stored in the XSection and written with it
                 if ( link != null && xsection != null ) {
-                  final float x1 = (xoff + xx) * TDSetting.mToSvg;
-                  final float y1 = (yoff + yy) * TDSetting.mToSvg;
-                  final float x2 = (xoff + link.getLinkX() ) * TDSetting.mToSvg;
-                  final float y2 = (yoff + link.getLinkY() ) * TDSetting.mToSvg;
-                  final StringWriter sw52 = new StringWriter();
-                  final PrintWriter pw52  = new PrintWriter(sw52);
-                  pw52.format(Locale.US, "  <line x1=\"%f\" y1=\"%f\" x2=\"%f\" y2=\"%f\"", x1, y1, x2, y2 );
-                  pw52.format(Locale.US, " class=\"link\" style=\"fill:none;stroke:brown;stroke-width:%.2f\" />\n", TDSetting.mSvgShotStroke );
+                  float x1 = (xoff + xx) * TDSetting.mToSvg;
+                  float y1 = (yoff + yy) * TDSetting.mToSvg;
+                  float x2 = (xoff + link.getLinkX() ) * TDSetting.mToSvg;
+                  float y2 = (yoff + link.getLinkY() ) * TDSetting.mToSvg;
+                  StringWriter sw520 = new StringWriter();
+                  PrintWriter pw520  = new PrintWriter(sw520);
+                  pw520.format(Locale.US, "  <line x1=\"%f\" y1=\"%f\" x2=\"%f\" y2=\"%f\"", x1, y1, x2, y2 );
+                  pw520.format(Locale.US, " class=\"link\" style=\"fill:none;stroke:brown;stroke-width:%.2f\" />\n", TDSetting.mSvgShotStroke );
+                    out.write( sw520.getBuffer().toString() );
                 }
               } else {
-                final StringWriter sw52 = new StringWriter();
-                final PrintWriter pw52  = new PrintWriter(sw52);
+                StringWriter sw52 = new StringWriter();
+                PrintWriter pw52  = new PrintWriter(sw52);
                 printPointWithCXCY( pw52, "<circle", xoff+xx, yoff+yy );
                 pw52.format(Locale.US, " r=\"%d\" ", RADIUS );
                 pw52.format(Locale.US, " style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
@@ -332,12 +334,12 @@ public class DrawingSvg extends DrawingSvgBase
             Collections.sort( pointTypes, String.CASE_INSENSITIVE_ORDER );
             Collections.reverse( pointTypes );
             for ( String pointTypeName : pointTypes ) {
-              final ArrayList< DrawingPointPath > pointList = points.get(pointTypeName);
+              ArrayList< DrawingPointPath > pointList = points.get(pointTypeName);
               out.write("<g id=\"" + pointTypeName + "\">\n");
-              final String color_str = pathToColor( pointList.get(0) );
-              for (DrawingPointPath point : pointList) {
-                final StringWriter sw53 = new StringWriter();
-                final PrintWriter pw53  = new PrintWriter(sw53);
+              String color_str = pathToColor( pointList.get(0) );
+              for ( DrawingPointPath point : pointList ) {
+                StringWriter sw53 = new StringWriter();
+                PrintWriter pw53  = new PrintWriter(sw53);
                 toSvg( pw53, point, color_str, xoff, yoff );
                 out.write( sw53.getBuffer().toString() );
               }
@@ -354,11 +356,11 @@ public class DrawingSvg extends DrawingSvgBase
             Collections.reverse( lineTypes );
             for ( String lineTypeName : lineTypes ) {
               out.write("<g id=\"" + lineTypeName + "\">\n");
-              final ArrayList< DrawingLinePath > lineList = lines.get(lineTypeName);
-              final String color_str = pathToColor( lineList.get(0) );
-              for (DrawingLinePath line : lineList) {
-                final StringWriter sw54 = new StringWriter();
-                final PrintWriter pw54  = new PrintWriter(sw54);
+              ArrayList< DrawingLinePath > lineList = lines.get(lineTypeName);
+              String color_str = pathToColor( lineList.get(0) );
+              for ( DrawingLinePath line : lineList ) {
+                StringWriter sw54 = new StringWriter();
+                PrintWriter pw54  = new PrintWriter(sw54);
                 toSvg( pw54, line, color_str, xoff, yoff );
                 out.write( sw54.getBuffer().toString() );
               }
@@ -375,11 +377,11 @@ public class DrawingSvg extends DrawingSvgBase
             Collections.reverse( areaTypes );
             for ( String areaTypeName : areaTypes ) {
               out.write("<g id=\"" + areaTypeName + "\">\n");
-              final ArrayList< DrawingAreaPath > areaList = areas.get(areaTypeName);
-              final String color_str = pathToColor( areaList.get(0) );
-              for (DrawingAreaPath area : areaList) {
-                final StringWriter sw55 = new StringWriter();
-                final PrintWriter pw55  = new PrintWriter(sw55);
+              ArrayList< DrawingAreaPath > areaList = areas.get(areaTypeName);
+              String color_str = pathToColor( areaList.get(0) );
+              for ( DrawingAreaPath area : areaList ) {
+                StringWriter sw55 = new StringWriter();
+                PrintWriter pw55  = new PrintWriter(sw55);
                 toSvg( pw55, area, color_str, xoff, yoff );
                 out.write( sw55.getBuffer().toString() );
               }

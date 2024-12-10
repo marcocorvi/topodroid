@@ -46,18 +46,43 @@ import android.graphics.RectF;
 public class DrawingSvgWalls extends DrawingSvgBase
 {
 
+  /** @return true if a drawing item has a given round-trip index
+   * @param path drawing item
+   * @param rt   round-trip index
+   */
+  private boolean isRoundTrip( DrawingPath path, int rt )
+  {
+    switch ( path.mType ):
+      case DrawingPath.DRAWING_PATH_LINE:
+        return BrushManager.isLineRoundTrip( (DrawingLinePath)path, rt );
+      case DrawingPath.DRAWING_PATH_POINT:
+        return BrushManager.isPointRoundTrip( (DrawingPointPath)path, rt );
+      case DrawingPath.DRAWING_PATH_AREA:
+        return BrushManager.isAreaRoundTrip( (DrawingAreaPath)path, rt );
+    }
+    return false;
+  }
+
+  /** 
+   * @param out     output writer
+   * @param path    drawing item
+   * @param xoff    X offset
+   * @param yoff    Y offset
+   * @param rt      round-trip index
+   */
   private void writePath( BufferedWriter out, DrawingPath path, float xoff, float yoff, int rt ) throws IOException
   {
+    if ( ! isRoundTrip( path, rt ) ) return;
     if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
       DrawingLinePath line = (DrawingLinePath)path;
-      if ( ! BrushManager.isLineRoundTrip( line, rt ) ) return;
+      // if ( ! BrushManager.isLineRoundTrip( line, rt ) ) return;
       StringWriter sw5w = new StringWriter();
       PrintWriter pw5w  = new PrintWriter(sw5w);
       toSvg( pw5w, line, pathToColor(path), xoff, yoff );
       out.write( sw5w.getBuffer().toString() );
     } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
       DrawingPointPath point = (DrawingPointPath)path;
-      if ( ! BrushManager.isPointRoundTrip( point, rt ) ) return;
+      // if ( ! BrushManager.isPointRoundTrip( point, rt ) ) return;
       if ( BrushManager.isPointLabel( point.mPointType ) ) return;
       if ( BrushManager.isPointSection( point.mPointType ) ) {
         if ( TDSetting.mAutoStations ) return;
@@ -78,7 +103,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
       }
     } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
       DrawingAreaPath area = (DrawingAreaPath)path;
-      if ( ! BrushManager.isAreaRoundTrip( area, rt ) ) return;
+      // if ( ! BrushManager.isAreaRoundTrip( area, rt ) ) return;
       StringWriter sw5 = new StringWriter();
       PrintWriter pw5  = new PrintWriter(sw5);
       toSvg( pw5, area, pathToColor(path), xoff, yoff );

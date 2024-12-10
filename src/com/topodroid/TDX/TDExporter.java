@@ -1211,7 +1211,7 @@ public class TDExporter
           }
         }
       }
-      pw.format(Locale.US, "<bounds minlat=\"%.6f\" maxlat=\".6f\" minlon=\"%.6f\" maxlon=\"%.6f\" />\n", minlat, maxlat, minlon, maxlon );
+      pw.format(Locale.US, "<bounds minlat=\"%.6f\" maxlat=\"%.6f\" minlon=\"%.6f\" maxlon=\"%.6f\" />\n", minlat, maxlat, minlon, maxlon );
 
       for ( TDNum num : nums ) {
         List< NumStation > stations = num.getStations();
