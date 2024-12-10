@@ -1134,8 +1134,8 @@ public class TDExporter
 
   static private void printTrkpt( PrintWriter pw, NumStation st )
   {
-    pw.format(Locale.US, "    <trkpt lat=\"%.6f\" lon=\"%.6f\">\n", st.s, st.e );
-    pw.format(Locale.US, "      <geoidheight>%.1f</geoidheight>\n", st.v );
+    pw.format(Locale.US, "    <trkpt lat=\"%.7f\" lon=\"%.7f\">\n", st.s, st.e );
+    pw.format(Locale.US, "      <geoidheight>%.2f</geoidheight>\n", st.v );
     pw.format(Locale.US, "      <name>%s</name>\n", st.name );
     pw.format(Locale.US, "    </trkpt>\n" );
   }
@@ -1143,8 +1143,8 @@ public class TDExporter
   static private void printWpt( PrintWriter pw, NumStation st )
   {
     // double e = st.e; if ( e > 180 ) e -= 360;
-    pw.format(Locale.US, "<wpt lat=\"%.6f\" lon=\"%.6f\">\n", st.s, st.e );
-    pw.format(Locale.US, "  <geoidheight>%.1f</geoidheight>\n", st.v );
+    pw.format(Locale.US, "<wpt lat=\"%.7f\" lon=\"%.7f\">\n", st.s, st.e );
+    pw.format(Locale.US, "  <geoidheight>%.2f</geoidheight>\n", st.v );
     pw.format(Locale.US, "  <name>%s</name>\n", st.name );
     pw.format(Locale.US, "</wpt>\n");
   }
@@ -1211,7 +1211,7 @@ public class TDExporter
           }
         }
       }
-      pw.format(Locale.US, "<bounds minlat=\"%.6f\" maxlat=\".6f\" minlon=\"%.6f\" maxlon=\"%.6f\" />\n", minlat, maxlat, minlon, maxlon );
+      pw.format(Locale.US, "<bounds minlat=\"%.7f\" maxlat=\"%.7f\" minlon=\"%.7f\" maxlon=\"%.7f\" />\n", minlat, maxlat, minlon, maxlon );
 
       for ( TDNum num : nums ) {
         List< NumStation > stations = num.getStations();
@@ -4256,14 +4256,14 @@ public class TDExporter
         for ( FixedInfo fix : fixed ) {
           pw.format("#Fix %s", fix.name );
           if ( fix.lng >= 0 ) {
-            pw.format(Locale.US, " E%.6f", fix.lng );
+            pw.format(Locale.US, " E%.7f", fix.lng );
           } else {
-            pw.format(Locale.US, " W%.6f", - fix.lng );
+            pw.format(Locale.US, " W%.7f", - fix.lng );
           }
           if ( fix.lat >= 0 ) {
-            pw.format(Locale.US, " N%.6f", fix.lat );
+            pw.format(Locale.US, " N%.7f", fix.lat );
           } else {
-            pw.format(Locale.US, " S%.6f", - fix.lat );
+            pw.format(Locale.US, " S%.7f", - fix.lat );
           }
           pw.format(Locale.US, " %.0f", fix.h_geo );
           if ( fix.comment != null && fix.comment.length() > 0 ) pw.format(" /%s", fix.comment );
@@ -4522,7 +4522,7 @@ public class TDExporter
         for ( FixedInfo fix : fixed ) {
           ents.add( fix.name );
           pw.format(";\t#point\tPoint%s\t", fix.name );
-          pw.format(Locale.US, "%.6f\t%.6f\t%.0f%s", fix.lng, fix.lat, fix.h_geo, eol );
+          pw.format(Locale.US, "%.7f\t%.7f\t%.0f%s", fix.lng, fix.lat, fix.h_geo, eol );
           break;
         }
       }
@@ -4705,7 +4705,7 @@ public class TDExporter
         for ( FixedInfo fix : fixed ) {
           pw.format("Fix point: %s", fix.name );
           printPolygonEOL( pw );
-          pw.format(Locale.US, "%.6f\t%.6f\t%.0f\t0\t0\t0\t0", fix.lng, fix.lat, fix.h_geo );
+          pw.format(Locale.US, "%.7f\t%.7f\t%.0f\t0\t0\t0\t0", fix.lng, fix.lat, fix.h_geo );
           printPolygonEOL( pw );
           break;
         }
