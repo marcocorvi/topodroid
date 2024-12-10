@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Stack;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Locale;
 
 public class TDNum
 {
@@ -2073,7 +2072,7 @@ public class TDNum
 
     // Info to help interface for user to mirror a station around the fixed triangle side.
     HashMap< String, Tri2StationAxle > axles = tr.getStationAxles();
-    HashMap< String, TriS2tationStatus > stationStatus = tr.getStationStatus();
+    HashMap< String, Tri2StationStatus > stationStatus = tr.getStationStatus();
   }
 
   // -------------------------------------------------------------

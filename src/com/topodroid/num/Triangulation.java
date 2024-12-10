@@ -15,7 +15,7 @@ public class Triangulation
 	final private ArrayList< String > mirroredStations;
 	final private HashMap< String, Tri2Station > adjustedStations;
 	final private HashMap< String, Tri2StationAxle > axles;
-	final private HashMap< String, TriS2tationStatus > stationStatus;
+	final private HashMap< String, Tri2StationStatus > stationStatus;
 
 	final private HashMap< String, TriShot > triangleShots;
 	final private HashMap< String, ArrayList< TriShot > > triangleSimilarShots;
@@ -33,19 +33,19 @@ public class Triangulation
 		axles = new HashMap<>();
 		stationStatus = new HashMap<>();
 
-		triangleShots = new HashMap<  >();
-		triangleSimilarShots = new HashMap<  >();
-		triangleLegs = new ArrayList<  >();
+		triangleShots = new HashMap<>();
+		triangleSimilarShots = new HashMap<>();
+		triangleLegs = new ArrayList<>();
 		triangleLegsMap = new HashMap<>();
-		triangleStations = new HashSet<  >();
-		triangleUnadjustedStations = new HashSet<  >();
+		triangleStations = new HashSet<>();
+		triangleUnadjustedStations = new HashSet<>();
 	}
 
 	HashMap< String, Tri2StationAxle > getStationAxles() {
 		return axles;
 	}
 
-	HashMap< String, TriS2tationStatus > getStationStatus() {
+	HashMap< String, Tri2StationStatus > getStationStatus() {
 		return stationStatus;
 	}
 
@@ -158,7 +158,7 @@ public class Triangulation
 
 	private void markAsUnadjusted(String stationName) {
 		if (! stationStatus.containsKey(stationName)) {
-			stationStatus.put(stationName, TriS2tationStatus.UNADJUSTED);
+			stationStatus.put(stationName, Tri2StationStatus.UNADJUSTED);
 		}
 	}
 	
@@ -194,15 +194,15 @@ public class Triangulation
 			}
 			else {
 				switch (nrStations) {
-					case 0 -> {
-                                if ((! adjustedStations.containsKey(from)) && (! adjustedStations.containsKey(to))) return false;
-                                }
-					case 2 -> {
-                                if ((! triangleStations.contains(from)) && (! triangleStations.contains(to))) return false;
-                                }
-					case 3 -> {
-                                if ((! triangleStations.contains(from)) || (! triangleStations.contains(to))) return false;
-                                }
+					case 0:
+						if ((! adjustedStations.containsKey(from)) && (! adjustedStations.containsKey(to))) return false;
+						break;
+					case 2:
+						if ((! triangleStations.contains(from)) && (! triangleStations.contains(to))) return false;
+						break;
+					case 3:
+						if ((! triangleStations.contains(from)) || (! triangleStations.contains(to))) return false;
+						break;
 				}
 			}
 		}
@@ -418,7 +418,7 @@ public class Triangulation
 		if (adjustedStations.isEmpty()) {
 			Tri2Point origin = new Tri2Point(0d, 0d, 0d);
 			adjustedStations.put(firstFromName, new Tri2Station(firstFromName, origin));
-			stationStatus.put(firstFromName, TriS2tationStatus.REFERENCE);
+			stationStatus.put(firstFromName, Tri2StationStatus.REFERENCE);
 			isReference = true;
 		}
 		Tri2Point pFrom = adjustedStations.get(firstFromName).point;
@@ -445,11 +445,11 @@ public class Triangulation
 				adjustedStations.put(toName, new Tri2Station(toName, pTo));
 				pFrom = pTo;
 				if (isReference) {
-					stationStatus.put(toName, TriS2tationStatus.REFERENCE);
+					stationStatus.put(toName, Tri2StationStatus.REFERENCE);
 					isReference = false;
 				}
 				else {
-					stationStatus.put(toName, TriS2tationStatus.ADJUSTED);
+					stationStatus.put(toName, Tri2StationStatus.ADJUSTED);
 					Tri2StationAxle axle = new Tri2StationAxle(
 						toName,
 						leg0.name(),

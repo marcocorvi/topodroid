@@ -1,6 +1,6 @@
 package com.topodroid.num;
 
-public enum TriS2tationStatus {
+public enum Tri2StationStatus {
   REFERENCE,
   ADJUSTED,
   UNADJUSTED;
