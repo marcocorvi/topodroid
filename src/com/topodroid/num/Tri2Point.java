@@ -1,6 +1,6 @@
 package com.topodroid.num;
 
-public class Tri2Point {
+class Tri2Point {
   double x;
   double y;
   double z;

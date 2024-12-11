@@ -18,7 +18,6 @@ public class Triangulation
 	final private HashMap< String, Tri2StationStatus > stationStatus;
 
 	final private HashMap< String, TriShot > triangleShots;
-	final private HashMap< String, ArrayList< TriShot > > triangleSimilarShots;
 	final private ArrayList< Tri2Leg > triangleLegs;
 	final private HashMap< String, Tri2Leg > triangleLegsMap;
 	final private HashSet< String > triangleStations;
@@ -34,7 +33,6 @@ public class Triangulation
 		stationStatus = new HashMap<>();
 
 		triangleShots = new HashMap<>();
-		triangleSimilarShots = new HashMap<>();
 		triangleLegs = new ArrayList<>();
 		triangleLegsMap = new HashMap<>();
 		triangleStations = new HashSet<>();
@@ -51,24 +49,11 @@ public class Triangulation
 
 	private void resetTriangle() {
 		triangleShots.clear();
-		triangleSimilarShots.clear();
 		triangleLegs.clear();
 		triangleLegsMap.clear();
 		triangleStations.clear();
 		triangleUnadjustedStations.clear();
 		triangleUUID = null;
-	}
-
-	private boolean addTriangleSimilarShot( TriShot sh ) {
-		String name = sh.name();
-		if (! triangleShots.containsKey(name)) return false;
-
-		if (! triangleSimilarShots.containsKey(name)) triangleSimilarShots.put(name, new ArrayList<  >());
-		ArrayList< TriShot > list = triangleSimilarShots.get(name);
-		list.add(sh);
-		sh.triangle = triangleUUID;
-
-		return true;
 	}
 
 	private int countAdjustedStations(TriShot sh) {
@@ -124,13 +109,14 @@ public class Triangulation
 
 				// getPreadjustedLeg();
 
-				// Getting third shot of the triangle (optional).
+				// Getting third shot of the triangle if necessary because if there already are 2 adjusted
+				// stations in the triangle, there is no need for a third shot..
 				for (int n3 = n2+1; n3 < ns; ++n3) {
+					if ( adjustedStations.size() == 2 ) break;
+					if ( adjustedStations.isEmpty() && ( triangleLegs.size() == 3 ) ) break;
 					TriShot sh3 = shots.get(n3);
 					if (sh3.triangle != null) continue;
-					if (!addTriangleSimilarShot(sh3)) {
-						addTriangleShot(sh3);
-					}
+					addTriangleShot(sh3);
 				}
 
 				if(adjust()) {
@@ -139,11 +125,6 @@ public class Triangulation
 				else {
 					for (TriShot sh: triangleShots.values()) {
 						sh.triangle = null;
-					}
-					for (ArrayList<TriShot> ar: triangleSimilarShots.values()) {
-						for (TriShot sh: ar) {
-							sh.triangle = null;
-						}
 					}
 				}
 				resetTriangle();
@@ -428,12 +409,6 @@ public class Triangulation
 			if (triangleShots.containsKey(legName)) {
 				TriShot sh = triangleShots.get(legName);
 				updateShot(sh, leg);
-				if (triangleSimilarShots.containsKey(legName)) {
-					ArrayList< TriShot > similarShotsList = triangleSimilarShots.get(legName);
-					for (TriShot similarSh : similarShotsList) {
-						updateShot(similarSh, leg);
-					}
-				}
 			}
 
 			String toName = leg.to;
@@ -453,8 +428,7 @@ public class Triangulation
 					Tri2StationAxle axle = new Tri2StationAxle(
 						toName,
 						leg0.name(),
-						triangleShots,
-						triangleSimilarShots
+						triangleShots
 					);
 					axles.put(toName, axle);
 				}

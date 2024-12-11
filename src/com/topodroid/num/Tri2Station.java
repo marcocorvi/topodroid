@@ -1,6 +1,6 @@
 package com.topodroid.num;
 
-public class Tri2Station {
+class Tri2Station {
   Tri2Point point;
   String name;
 

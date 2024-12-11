@@ -7,12 +7,10 @@ public class Tri2StationAxle {
   String name;
   String axleName;
   HashMap< String, TriShot > shots;
-  HashMap< String, ArrayList< TriShot > > similarShots;
 
-  Tri2StationAxle( String n, String a, HashMap< String, TriShot > shs, HashMap< String, ArrayList< TriShot > > sss ) {
+  Tri2StationAxle( String n, String a, HashMap< String, TriShot > shs ) {
     name = n;
     axleName = a;
     shots = shs;
-    similarShots = sss;
   }
 }
