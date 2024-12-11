@@ -1492,6 +1492,8 @@
   <string name="pref_svg_roundtrip_summary">Экспорт SVG подготовленных для Round-trip</string>
   <string name="pref_svg_splays_title">Сплеи в SVG</string>
   <string name="pref_svg_splays_summary">Включить боковые замеры при экспорте в SVG</string>
+  <!-- TODO string name="pref_svg_groups_title">Type groups</string -->
+  <!-- TODO string name="pref_svg_groups_summary">Group items by type in SVG export</string -->
   <!-- UNUSED string name="pref_svg_in_html_title">SVG в HTML</string -->
   <!-- UNUSED string name="pref_svg_in_html_summary">Встроить экспорт SVG в HTML страницу</string -->
   <string name="pref_svg_pointstroke_title">Размер точек в SVG</string>

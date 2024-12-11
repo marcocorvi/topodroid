@@ -307,7 +307,7 @@ public class TDSetting
   // public static boolean mSvgInHtml     = false;
   public static boolean mSvgLineDirection = false;
   public static boolean mSvgSplays        = true;
-  public static boolean mSvgGroups      = true;  // whether to group items by the type in SVG export
+  public static boolean mSvgGroups      = false;  // whether to group items by the type in SVG export
   public static float mSvgPointStroke   = 0.1f;
   public static float mSvgLabelStroke   = 0.3f;   // stroke-width
   public static float mSvgLineStroke    = 0.5f;

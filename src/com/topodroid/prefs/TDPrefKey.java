@@ -792,7 +792,7 @@ public class TDPrefKey
     FALSE,
     FALSE,
     TRUE,
-    TRUE,
+    FALSE,
     // FALSE,
     "0.5",
     "1.5",

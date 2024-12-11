@@ -115,7 +115,10 @@ public class DrawingSvgWalls extends DrawingSvgBase
   private void writePaths(BufferedWriter out, List<DrawingPath> paths, float xoff, float yoff, int rt ) throws IOException
   {
     if ( TDSetting.mSvgGroups ) {
-      // TODO
+      // TODO replace this loop with the proper group-loops
+      for ( DrawingPath path : paths ) {
+        writePath( out, path, xoff, yoff, rt );
+      }
     } else {
       for ( DrawingPath path : paths ) {
         writePath( out, path, xoff, yoff, rt );
