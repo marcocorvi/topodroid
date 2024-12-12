@@ -5681,8 +5681,8 @@ public class DataHelper extends DataSetObservable
     Cursor cursor = myDB.query(
       TRI_MIRRORED_STATIONS_TABLE,
       new String[] { "name" },
-      WHERE_SID_ID,
-      new String[] { Long.toString(sid) },
+      WHERE_SID_NAME,
+      new String[] { Long.toString(sid), station },
       null,
       null,
       null
