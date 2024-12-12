@@ -293,15 +293,23 @@ public class DrawingSvgBase
 
   static protected void toSvg( PrintWriter pw, DrawingStationName st, float xoff, float yoff )
   {
-    toSvg( pw, st.getName(), "violet", xoff + st.cx, yoff + st.cy);
+    // // pw.format("<text font-size=\"20\" font-family=\"sans-serif\" fill=\"violet\" stroke=\"none\" text-anchor=\"middle\"");
+    // pw.format("<text font-size=\"%d\" fill=\"violet\" stroke=\"none\" text-anchor=\"middle\" name=\"%s\"", TDSetting.mSvgStationSize, st.getName() );
+    // printPointWithXY( pw, "", xoff+st.cx, yoff+st.cy );
+    // pw.format(">%s</text>\n", st.getName() );
+    toSvgStation( pw, st.getName(), "violet", xoff + st.cx, yoff + st.cy);
   }
 
   static protected void toSvg( PrintWriter pw, DrawingStationUser sp, float xoff, float yoff )
   {
-    toSvg( pw, sp.name(), "black", xoff+sp.cx, yoff+sp.cy);
+    // // pw.format("<text font-size=\"20\" font-family=\"sans-serif\" fill=\"black\" stroke=\"none\" text-anchor=\"middle\"");
+    // pw.format("<text font-size=\"%d\" fill=\"black\" stroke=\"none\" text-anchor=\"middle\" name=\"point-%s\"", TDSetting.mSvgStationSize, sp.name() );
+    // printPointWithXY( pw, "", xoff+sp.cx, yoff+sp.cy );
+    // pw.format(">%s</text>\n", sp.name() );
+    toSvgStation( pw, sp.name(), "black", xoff+sp.cx, yoff+sp.cy);
   }
 
-  static protected void toSvg( PrintWriter pw, String name, String color, float x, float y )
+  static private void toSvgStation( PrintWriter pw, String name, String color, float x, float y )
   {
     pw.format("<g id=\"station_%s\">\n", name);
     pw.format("<text font-size=\"%d\" fill=\"%s\" stroke=\"none\" text-anchor=\"middle\" id=\"%s\"", TDSetting.mSvgStationSize, color, name );
