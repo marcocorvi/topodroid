@@ -51,6 +51,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteDiskIOException;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -70,6 +71,7 @@ public class DataHelper extends DataSetObservable
   private static final String PHOTO_TABLE  = "photos";
   private static final String SENSOR_TABLE = "sensors";
   private static final String AUDIO_TABLE  = "audios";
+  private static final String TRI_MIRRORED_STATIONS_TABLE  = "tri_mirrored_stations";
 
   private final static String WHERE_ID          = "id=?";
   private final static String WHERE_SID         = "surveyId=?";
@@ -1276,6 +1278,7 @@ public class DataHelper extends DataSetObservable
       myDB.beginTransaction();
       myDB.delete( PHOTO_TABLE,   WHERE_SID, clause );
       myDB.delete( AUDIO_TABLE,   WHERE_SID, clause );
+      myDB.delete( TRI_MIRRORED_STATIONS_TABLE, WHERE_SID, clause );
       myDB.delete( PLOT_TABLE,    WHERE_SID, clause );
       myDB.delete( FIXED_TABLE,   WHERE_SID, clause );
       myDB.delete( SHOT_TABLE,    WHERE_SID, clause );
@@ -5641,6 +5644,64 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
+  /**
+   * @return a HashSet with all stations that should be mirrored in triangulation loop closure.
+   */
+  public HashSet< String > getTriMirroredStations( long sid )
+  {
+    HashSet< String > ret = new HashSet< String >();
+    if ( myDB == null ) return ret;
+    Cursor cursor = myDB.query(
+        TRI_MIRRORED_STATIONS_TABLE,
+        new String[] { "name" },
+        WHERE_SID_ID,
+        new String[] { Long.toString( sid ) },
+        null,
+        null,
+        null
+    );
+    if ( cursor != null ) {
+      if ( cursor.moveToFirst() ) {
+        do {
+          ret.add( cursor.getString(0) );
+        } while (cursor.moveToNext());
+      }
+      if ( !cursor.isClosed() ) cursor.close();
+    }
+    return ret;
+  }
+
+  /** toggle the mirrored status of a station. Relevant to triangulation loop closure.
+   * @param sid      survey ID
+   * @param station  station name
+   */
+  public void toggleMirroredStation( long sid, String station )
+  {
+    if ( myDB == null ) return;
+    Cursor cursor = myDB.query(
+      TRI_MIRRORED_STATIONS_TABLE,
+      new String[] { "name" },
+      WHERE_SID_ID,
+      new String[] { Long.toString(sid) },
+      null,
+      null,
+      null
+    );
+    if ( cursor.moveToFirst() ) {
+      myDB.delete(
+        TRI_MIRRORED_STATIONS_TABLE,
+        "surveyId=? and name=?",
+        new String[] { Long.toString(sid), station }
+      );
+    } else {
+      ContentValues cv = new ContentValues();
+      cv.put( "surveyId", sid );
+      cv.put( "name", station );
+      doInsert( TRI_MIRRORED_STATIONS_TABLE, cv, "insert mirrored station" );
+    }
+    if ( !cursor.isClosed() ) cursor.close();
+  }
+
   /** set the current survey
    * @param name     survey name
    * @param datamode survey data-mode
@@ -7183,6 +7244,13 @@ public class DataHelper extends DataSetObservable
             +   " reftype INTEGER default 0 " //  reference item_type: 0 undefined, 1 shots, 2 plots
             +   ")"
           );
+
+         db.execSQL(
+           create_table + TRI_MIRRORED_STATIONS_TABLE
+             + " ( surveyId INTEGER, "
+             +   " name TEXT " // 'surveyId' and 'name' together are the PRIMARY KEY
+             + ")"
+         );
 
           // db.execSQL(
           //     " CREATE TRIGGER fk_insert_shot BEFORE "

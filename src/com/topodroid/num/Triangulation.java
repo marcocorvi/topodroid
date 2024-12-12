@@ -1,5 +1,7 @@
 package com.topodroid.num;
 
+import com.topodroid.TDX.TDInstance;
+import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.utils.TDMath;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,10 +26,10 @@ public class Triangulation
 	final private HashSet< String > triangleUnadjustedStations;
 	private UUID triangleUUID;
 
-	Triangulation(List< TriShot > shs, HashSet< String > mrSt) {
+	Triangulation(List< TriShot > shs) {
 		shots = shs;
 		legs = new HashMap<>();
-		mirroredStations = mrSt;
+		mirroredStations = TopoDroidApp.mData.getTriMirroredStations(TDInstance.sid);
 		adjustedStations = new HashMap<>();
 		axles = new HashMap<>();
 		stationStatus = new HashMap<>();
@@ -61,10 +63,6 @@ public class Triangulation
 		if (adjustedStations.containsKey(sh.from)) count++;
 		if (adjustedStations.containsKey(sh.to)) count++;
 		return count;
-	}
-	
-	private void getPreadjustedLeg() {
-		
 	}
 
 	void triangulate() 

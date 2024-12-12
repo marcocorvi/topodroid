@@ -2070,14 +2070,11 @@ public class TDNum
 
   /**
    * Correct temporary shots using length based trilateration
-   * @param shots
-   * @param mirroredStations List of stations that should be mirrored as the automatic algorithm can't know to 
-   *                        which side of the initial triangle leg the new station should be placed.
+   * @param shots temporary shot list
    */
   private void makeTriangulation( List< TriShot > shots )
   {
-    HashSet< String > mirroredStations = new HashSet<  >();
-    Triangulation tr = new Triangulation(shots, mirroredStations);
+    Triangulation tr = new Triangulation( shots );
     tr.triangulate();
 
     // Info to help interface for user to mirror a station around the fixed triangle side.
