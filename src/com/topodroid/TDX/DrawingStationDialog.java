@@ -14,6 +14,8 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.num.Tri2StationAxle;
+import com.topodroid.num.Tri2StationStatus;
 import com.topodroid.utils.TDMath;
 // import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
@@ -35,6 +37,8 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+
+import androidx.cardview.widget.CardView;
 
 class DrawingStationDialog extends MyDialog
                            implements View.OnClickListener
@@ -66,6 +70,11 @@ class DrawingStationDialog extends MyDialog
     private Button mBtnCancel;
     private Button mBtnGeoCode;
 
+    private TextView mTriangulationTitle;
+    private TextView mTriangulationReference;
+    private TextView mTriangulationUnadjusted;
+    private Button mTriangulationMirrorUnmirror;
+
     private final DrawingWindow mParent;
     private final DrawingStationName mStation; // num station point
     private final DrawingStationUser mPath;
@@ -80,15 +89,17 @@ class DrawingStationDialog extends MyDialog
     private float mClino;
     private String mGeoCode = "";
     private List< DBlock > mBlk;
+    private Tri2StationStatus mTriStatus;
+    private Tri2StationAxle mTriAxle;
 
     // cannot use disabled compass, otherwise there is no way to choose x-section at junction station
     // private boolean sensorCheck; // whether android sensor is enabled
     private boolean mSensors;    // whether use compass or delete x-section
 
-    DrawingStationDialog( Context context, DrawingWindow parent, TopoDroidApp app,
-                          DrawingStationName station, DrawingStationUser path,
-                          boolean is_barrier, boolean is_hidden, // boolean global_xsections,
-                          List< DBlock > blk )
+    DrawingStationDialog(Context context, DrawingWindow parent, TopoDroidApp app,
+                         DrawingStationName station, DrawingStationUser path,
+                         boolean is_barrier, boolean is_hidden, // boolean global_xsections,
+                         List< DBlock > blk, Tri2StationStatus triStatus, Tri2StationAxle triAxle )
     {
       super( context, null, R.string.DrawingStationDialog ); // null app
       mParent   = parent;
@@ -101,6 +112,8 @@ class DrawingStationDialog extends MyDialog
       // mGlobalXSections = global_xsections;
       mBlk       = blk;
       // sensorCheck = TDSetting.mWithAzimuth && TDLevel.overNormal;
+      mTriStatus = triStatus;
+      mTriAxle   = triAxle;
     }
 
     @Override
@@ -334,6 +347,38 @@ class DrawingStationDialog extends MyDialog
         }
       } else {
         mBtnGeoCode.setVisibility( View.GONE );
+      }
+
+      mTriangulationTitle = findViewById( R.id.triangulation_title );
+      mTriangulationReference = findViewById( R.id.triangulation_reference );
+      mTriangulationUnadjusted = findViewById( R.id.triangulation_unadjusted );
+      mTriangulationMirrorUnmirror = findViewById( R.id.btn_triangulation_mirror_unmirror );
+      if ( mTriStatus == null ) {
+        mTriangulationTitle.setVisibility( View.GONE );
+        mTriangulationReference.setVisibility( View.GONE );
+        mTriangulationUnadjusted.setVisibility( View.GONE );
+        mTriangulationMirrorUnmirror.setVisibility( View.GONE );
+      } else {
+        mTriangulationTitle.setVisibility( View.VISIBLE );
+        switch (mTriStatus) {
+          case REFERENCE:
+            mTriangulationReference.setVisibility( View.VISIBLE );
+            mTriangulationUnadjusted.setVisibility( View.GONE );
+            mTriangulationMirrorUnmirror.setVisibility( View.GONE );
+            break;
+          case UNADJUSTED:
+            mTriangulationReference.setVisibility( View.GONE );
+            mTriangulationUnadjusted.setVisibility( View.VISIBLE );
+            mTriangulationMirrorUnmirror.setVisibility( View.GONE );
+            break;
+          case ADJUSTED:
+            mTriangulationReference.setVisibility( View.GONE );
+            mTriangulationUnadjusted.setVisibility( View.GONE );
+            mTriangulationMirrorUnmirror.setVisibility( View.VISIBLE );
+
+            mTriangulationMirrorUnmirror.setOnClickListener( this );
+            break;
+        }
       }
     }
 

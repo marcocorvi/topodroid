@@ -358,6 +358,8 @@ public class TDNum
   private ArrayList< NumNode >    mNodes;
   private ArrayList< DBlock >     mUnattachedShots;
   private ArrayList< NumCycle >   mBadLoops;
+  private HashMap< String, Tri2StationStatus > mTriStationsStatus;
+  private HashMap< String, Tri2StationAxle > mTriStationsAxles;
 
   public String getOriginStation() { return (mStartStation == null)? null : mStartStation.name; }
   public NumStation getOrigin()    { return mStartStation; }
@@ -579,6 +581,26 @@ public class TDNum
   {
     NumStation st = getStation( name );
     return ( st != null && st.hidden() );
+  }
+
+  /**
+   * Returns the stations triangulation status: refernce, adjusted or unadjusted.
+   * @param name station name
+   * @return station triangulation status
+   */
+  public Tri2StationStatus getStationTriStatus( String name )
+  {
+    return mTriStationsStatus.get( name );
+  }
+
+  /**
+   * Return the station triangulation axle info, i.e., around with leg the station can be mirrored.
+   * @param name station name
+   * @return station triangulation axle info
+   */
+  public Tri2StationAxle getStationTriAxle( String name )
+  {
+    return mTriStationsAxles.get( name );
   }
 
   /** @return true if the station is barrier
@@ -935,19 +957,6 @@ public class TDNum
    * @return true if all shots are attached
    */
   private boolean computeNum( List< DBlock > data, String start, String path_fmt, boolean midline_only )
-  {
-    return computeNum(data, start, path_fmt, midline_only, new ArrayList<String>());
-  }
-
-  /** survey data reduction 
-   * @param data   shot list
-   * @param start  start station
-   * @param path_fmt path report format
-   * @param midline_only  whether to reduce only the midline (no compensation)
-   * @param mirroredStations list of mirrored stations, used only on makeTrilateration2()
-   * @return true if all shots are attached
-   */
-  private boolean computeNum(List<DBlock> data, String start, String path_fmt, boolean midline_only, ArrayList<String> mirroredStations) 
   {
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) { // preprocess: convert diving-mode data to normal form
       HashMap< String, Float > depths = new HashMap< String, Float >();
@@ -2078,8 +2087,8 @@ public class TDNum
     tr.triangulate();
 
     // Info to help interface for user to mirror a station around the fixed triangle side.
-    HashMap< String, Tri2StationAxle > axles = tr.getStationAxles();
-    HashMap< String, Tri2StationStatus > stationStatus = tr.getStationStatus();
+    mTriStationsAxles = tr.getStationAxles();
+    mTriStationsStatus = tr.getStationStatus();
   }
 
   // -------------------------------------------------------------

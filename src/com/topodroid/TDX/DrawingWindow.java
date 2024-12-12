@@ -11,6 +11,8 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.num.Tri2StationAxle;
+import com.topodroid.num.Tri2StationStatus;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
@@ -7355,8 +7357,17 @@ public class DrawingWindow extends ItemDrawer
               DrawingStationUser path = mDrawingSurface.getStationPath( st.getName() );
               boolean barrier = mNum.isBarrier( st.getName() );
               boolean hidden  = mNum.isHidden( st.getName() );
+              Tri2StationStatus triStatus;
+              Tri2StationAxle triAxle;
+              if ( TDLevel.overExpert && ( TDSetting.mLoopClosure == TDSetting.LOOP_TRIANGULATION ) ) {
+                triStatus = mNum.getStationTriStatus( st.getName() );
+                triAxle = mNum.getStationTriAxle( st.getName() );
+              } else {
+                triStatus = null;
+                triAxle = null;
+              }
               List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, st.getName(), true ); // select "independent" legs
-              new DrawingStationDialog( mActivity, this, mApp, st, path, barrier, hidden, /* TDInstance.xsections, */ legs ).show();
+              new DrawingStationDialog( mActivity, this, mApp, st, path, barrier, hidden, /* TDInstance.xsections, */ legs, triStatus, triAxle ).show();
             } else if ( item instanceof DrawingPointPath ) {
               DrawingPointPath point = (DrawingPointPath)(item);
               // TDLog.v( "edit point type " + point.mPointType );

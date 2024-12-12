@@ -2416,5 +2416,9 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="help_color_3d">Colors</string>
     <string name="help_frame_3d">Frame</string>
 
-   
+    <string name="triangulation_triangulated_station">Triangulation: </string>
+    <string name="button_triangulation_mirror_station">Mirror</string>
+    <string name="button_triangulation_unmirror_station">Unmirror</string>
+    <string name="triangulation_reference_station">Reference station</string>
+    <string name="triangulation_non_adjusted_station">Unadjusted station</string>
 </resources>

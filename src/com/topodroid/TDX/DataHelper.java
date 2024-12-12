@@ -278,7 +278,7 @@ public class DataHelper extends DataSetObservable
     int newVersion = TDVersion.DATABASE_VERSION;
     boolean need_upgrade = myDB.needUpgrade( TDVersion.DATABASE_VERSION ); 
     // TDLog.v( "DB: version " + oldVersion + " -> " + newVersion + " upgrade: " + need_upgrade );
-    if ( oldVersion < newVersion ) {
+    if ( need_upgrade ) {
       // TDLog.v( "DB updating tables ...");
       DistoXOpenHelper.updateTables( myDB, oldVersion, newVersion );
       myDB.setVersion( TDVersion.DATABASE_VERSION );
@@ -5654,7 +5654,7 @@ public class DataHelper extends DataSetObservable
     Cursor cursor = myDB.query(
         TRI_MIRRORED_STATIONS_TABLE,
         new String[] { "name" },
-        WHERE_SID_ID,
+        WHERE_SID,
         new String[] { Long.toString( sid ) },
         null,
         null,
@@ -5675,7 +5675,7 @@ public class DataHelper extends DataSetObservable
    * @param sid      survey ID
    * @param station  station name
    */
-  public void toggleMirroredStation( long sid, String station )
+  public void toggleTriMirroredStation( long sid, String station )
   {
     if ( myDB == null ) return;
     Cursor cursor = myDB.query(
@@ -7245,13 +7245,6 @@ public class DataHelper extends DataSetObservable
             +   ")"
           );
 
-         db.execSQL(
-           create_table + TRI_MIRRORED_STATIONS_TABLE
-             + " ( surveyId INTEGER, "
-             +   " name TEXT " // 'surveyId' and 'name' together are the PRIMARY KEY
-             + ")"
-         );
-
           // db.execSQL(
           //     " CREATE TRIGGER fk_insert_shot BEFORE "
           //   + " INSERT on " + SHOT_TABLE 
@@ -7428,7 +7421,14 @@ public class DataHelper extends DataSetObservable
              if ( !columnExists( db, "sensors", "reftype" ) ) {
                db.execSQL( "ALTER TABLE sensors ADD COLUMN reftype INTEGER default 0" );
              }
-             case 55:
+           case 55:
+             db.execSQL(
+                 create_table + TRI_MIRRORED_STATIONS_TABLE
+                     + " ( surveyId INTEGER, "
+                     +   " name TEXT " // 'surveyId' and 'name' together are the PRIMARY KEY
+                     + ")"
+             );
+           case 56:
              // TDLog.v( "current version " + oldVersion );
            default:
              break;
