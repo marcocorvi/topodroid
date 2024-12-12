@@ -25,6 +25,7 @@ import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Stack;
 import java.util.Comparator;
@@ -1009,9 +1010,17 @@ public class TDNum
     initShots( data, tmp_shots, tmp_splays, ! midline_only );
     // TDLog.Log( TDLog.LOG_NUM, "data " + data.size() + " shots " + tmp_shots.size() + " splays " + tmp_splays.size() );
 
-    if ( ! midline_only && TDSetting.mLoopClosure == TDSetting.LOOP_TRIANGLES ) {
-      // makeTrilateration( tmp_shots );
-      makeTriangulation( tmp_shots, mirroredStations );
+    if ( ! midline_only &&
+        ( ( TDSetting.mLoopClosure == TDSetting.LOOP_TRILATERATION ) ||
+            ( TDSetting.mLoopClosure == TDSetting.LOOP_TRIANGULATION ) ) ) {
+      switch (TDSetting.mLoopClosure) {
+        case TDSetting.LOOP_TRILATERATION:
+          makeTrilateration( tmp_shots );
+          break;
+        case TDSetting.LOOP_TRIANGULATION:
+          makeTriangulation( tmp_shots );
+          break;
+      }
     }
 
     // ---------------------------------- SIBLINGS and BACKSIGHT -------------------------------
@@ -2065,8 +2074,9 @@ public class TDNum
    * @param mirroredStations List of stations that should be mirrored as the automatic algorithm can't know to 
    *                        which side of the initial triangle leg the new station should be placed.
    */
-  private void makeTriangulation( List< TriShot > shots, ArrayList< String > mirroredStations )
+  private void makeTriangulation( List< TriShot > shots )
   {
+    HashSet< String > mirroredStations = new HashSet<  >();
     Triangulation tr = new Triangulation(shots, mirroredStations);
     tr.triangulate();
 

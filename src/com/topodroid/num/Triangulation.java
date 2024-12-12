@@ -12,7 +12,7 @@ public class Triangulation
 {
 	final private List< TriShot > shots;
 	final private HashMap< String, Tri2Leg > legs;
-	final private ArrayList< String > mirroredStations;
+	final private HashSet< String > mirroredStations;
 	final private HashMap< String, Tri2Station > adjustedStations;
 	final private HashMap< String, Tri2StationAxle > axles;
 	final private HashMap< String, Tri2StationStatus > stationStatus;
@@ -24,7 +24,7 @@ public class Triangulation
 	final private HashSet< String > triangleUnadjustedStations;
 	private UUID triangleUUID;
 
-	Triangulation(List< TriShot > shs, ArrayList< String > mrSt) { 
+	Triangulation(List< TriShot > shs, HashSet< String > mrSt) {
 		shots = shs;
 		legs = new HashMap<>();
 		mirroredStations = mrSt;

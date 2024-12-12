@@ -157,14 +157,16 @@
      <item name="normal">Normal</item>
      <item name="weighted">Weighted</item>
      <item name="selective">Selective</item>
-     <item name="triangles">Triangles</item>
+     <item name="trilateration">Trilateration</item>
+     <item name="triangulation">Triangulation</item>
   </string-array>
   <string-array name="loopClosureValue" translatable="false">
      <item name="none">0</item>
      <item name="normal">1</item>
      <item name="weighted">4</item>
      <item name="selective">5</item>
-     <item name="triangles">3</item>
+     <item name="trilateration">3</item>
+     <item name="triangulation">6</item>
   </string-array>
 
   <string-array name="survexEol">
