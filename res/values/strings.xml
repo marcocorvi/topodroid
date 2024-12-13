@@ -2421,5 +2421,5 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="button_triangulation_unmirror_station">Unmirror</string>
     <string name="triangulation_axle">around %s leg</string>
     <string name="triangulation_reference_station">Reference station</string>
-    <string name="triangulation_non_adjusted_station">Unadjusted station</string>
+    <string name="triangulation_unadjusted_station">Unadjusted station</string>
 </resources>

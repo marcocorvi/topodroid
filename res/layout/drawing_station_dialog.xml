@@ -206,20 +206,6 @@
           android:paddingRight="4dp"
           />
 
-      <TextView
-          android:id="@+id/triangulation_reference"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/triangulation_reference_station"
-          />
-
-      <TextView
-          android:id="@+id/triangulation_unadjusted"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/triangulation_non_adjusted_station"
-          />
-
       <Button
           android:id="@+id/btn_triangulation_mirror_unmirror"
           style="@style/button_default"

@@ -38,8 +38,6 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import androidx.cardview.widget.CardView;
-
 class DrawingStationDialog extends MyDialog
                            implements View.OnClickListener
                            , IBearingAndClino
@@ -71,10 +69,8 @@ class DrawingStationDialog extends MyDialog
     private Button mBtnGeoCode;
 
     private TextView mTriangulationTitle;
-    private TextView mTriangulationReference;
-    private TextView mTriangulationUnadjusted;
-    private Button mTriangulationMirrorUnmirror;
-    private TextView mTriangulationAxle;
+    private Button mTriangulationButton;
+    private TextView mTriangulationText;
 
     private final DrawingWindow mParent;
     private final DrawingStationName mStation; // num station point
@@ -353,43 +349,35 @@ class DrawingStationDialog extends MyDialog
       }
 
       mTriangulationTitle = findViewById( R.id.triangulation_title );
-      mTriangulationReference = findViewById( R.id.triangulation_reference );
-      mTriangulationUnadjusted = findViewById( R.id.triangulation_unadjusted );
-      mTriangulationMirrorUnmirror = findViewById( R.id.btn_triangulation_mirror_unmirror );
-      mTriangulationAxle = findViewById( R.id.triangulation_axle );
+      mTriangulationButton = findViewById( R.id.btn_triangulation_mirror_unmirror );
+      mTriangulationText = findViewById( R.id.triangulation_axle );
       if ( mTriStatus == null ) {
         mTriangulationTitle.setVisibility( View.GONE );
-        mTriangulationReference.setVisibility( View.GONE );
-        mTriangulationUnadjusted.setVisibility( View.GONE );
-        mTriangulationMirrorUnmirror.setVisibility( View.GONE );
-        mTriangulationAxle.setVisibility( View.GONE );
+        mTriangulationButton.setVisibility( View.GONE );
+        mTriangulationText.setVisibility( View.GONE );
       } else {
         mTriangulationTitle.setVisibility( View.VISIBLE );
         switch (mTriStatus) {
           case REFERENCE:
-            mTriangulationReference.setVisibility( View.VISIBLE );
-            mTriangulationUnadjusted.setVisibility( View.GONE );
-            mTriangulationMirrorUnmirror.setVisibility( View.GONE );
-            mTriangulationAxle.setVisibility( View.GONE );
+            mTriangulationText.setText( mContext.getResources().getString( R.string.triangulation_reference_station ) );
+            mTriangulationButton.setVisibility( View.VISIBLE );
+            mTriangulationText.setVisibility( View.GONE );
             break;
           case UNADJUSTED:
-            mTriangulationReference.setVisibility( View.GONE );
-            mTriangulationUnadjusted.setVisibility( View.VISIBLE );
-            mTriangulationMirrorUnmirror.setVisibility( View.GONE );
-            mTriangulationAxle.setVisibility( View.GONE );
+            mTriangulationText.setText( mContext.getResources().getString( R.string.triangulation_unadjusted_station) );
+            mTriangulationButton.setVisibility( View.VISIBLE );
+            mTriangulationText.setVisibility( View.GONE );
             break;
           case ADJUSTED:
-            mTriangulationReference.setVisibility( View.GONE );
-            mTriangulationUnadjusted.setVisibility( View.GONE );
             String mirrorButton = ( mTriMirrored )?
                 mContext.getResources().getString( R.string.button_triangulation_unmirror_station ) :
                 mContext.getResources().getString( R.string.button_triangulation_mirror_station );
-            mTriangulationMirrorUnmirror.setText( mirrorButton );
-            mTriangulationAxle.setText( String.format( mContext.getResources().getString( R.string.triangulation_axle ), mTriAxle.getAxleName() ) );
-            mTriangulationMirrorUnmirror.setVisibility( View.VISIBLE );
-            mTriangulationAxle.setVisibility( View.VISIBLE );
+            mTriangulationButton.setText( mirrorButton );
+            mTriangulationText.setText( String.format( mContext.getResources().getString( R.string.triangulation_axle ), mTriAxle.getAxleName() ) );
+            mTriangulationButton.setVisibility( View.VISIBLE );
+            mTriangulationText.setVisibility( View.VISIBLE );
 
-            mTriangulationMirrorUnmirror.setOnClickListener( this );
+            mTriangulationButton.setOnClickListener( this );
             break;
         }
       }
@@ -476,7 +464,7 @@ class DrawingStationDialog extends MyDialog
         mBearing = TDMath.add180( mBearing );
         mClino = -mClino;
         mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, mCBhorizontal.isChecked(), nick);
-      } else if ( b == mTriangulationMirrorUnmirror ) {
+      } else if ( b == mTriangulationButton) {
         mParent.toggleTriMirror( mStationName );
       }
       dismiss();
