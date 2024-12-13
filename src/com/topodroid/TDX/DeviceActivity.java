@@ -339,7 +339,7 @@ public class DeviceActivity extends Activity
           mApp_mDData.updateDeviceModel( device.getAddress(), Device.NAME_SAP5 + "0000" );
           device.mType = model;
         } else if ( Device.isSap6( model ) ) { // FIXME_SAP6
-          TDLog.v("SAP6 set device model: addr " + device.getAddress() + " type " + model );
+          // TDLog.v("SAP6 set device model: addr " + device.getAddress() + " type " + model );
           mApp_mDData.updateDeviceModel( device.getAddress(), Device.NAME_SAP6 + "0000" );
           device.mType = model;
         } else if ( Device.isBric4( model ) ) {
@@ -537,7 +537,7 @@ public class DeviceActivity extends Activity
               dev = mApp_mDData.getDevice( addr );
             } else if ( Device.isSap( bt_name ) ) { // FIXME SHETLAND FIXME_SAP6
               // if ( TDLevel.overExpert ) {
-                TDLog.v("SAP shetland device name " + bt_name + " --> name " + name );
+                // TDLog.v("SAP shetland device name " + bt_name + " --> name " + name );
                 mApp_mDData.insertDevice( addr, bt_name, name, null );
                 dev = mApp_mDData.getDevice( addr );
               // }
@@ -833,7 +833,7 @@ public class DeviceActivity extends Activity
    */ 
   public void addDevice( String address, String bt_name, String nickname )
   {
-    TDLog.v( "add device: " + address + " " + bt_name + " " + nickname );
+    // TDLog.v( "add device: " + address + " " + bt_name + " " + nickname );
     Device device = mApp_mDData.getDevice( address );
     if ( device != null ) {
       TDToast.makeWarn( R.string.device_already_present );
@@ -876,6 +876,7 @@ public class DeviceActivity extends Activity
   public void onStart()
   {
     super.onStart();
+    // TDLog.v("Device Activity on Start " );
     TDLocale.resetTheLocale();
     setMenuAdapter( getResources() );
     closeMenu();
@@ -885,7 +886,7 @@ public class DeviceActivity extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
-    // TDLog.Debug("device activity on resume" );
+    // TDLog.v("Device Activity on Resume " );
     registerReceiver( mPairReceiver, new IntentFilter( DeviceUtil.ACTION_BOND_STATE_CHANGED ) );
     if ( mApp == null ) mApp = (TopoDroidApp) getApplication();
     if ( mApp_mDData == null ) mApp_mDData = TopoDroidApp.mDData;
@@ -1308,7 +1309,7 @@ public class DeviceActivity extends Activity
   {
     int mustOpen = 0;
     mApp.setCalibFromName( name );
-    TDLog.v("set calib " + (( name == null )? "NEW" : name ) );
+    // TDLog.v("set calib " + (( name == null )? "NEW" : name ) );
     Intent calibIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, CalibActivity.class );
     calibIntent.putExtra( TDTag.TOPODROID_SURVEY, mustOpen ); // FIXME not handled yet
     startActivity( calibIntent );

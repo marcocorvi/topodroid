@@ -526,6 +526,7 @@ public class OverviewWindow extends ItemDrawer
   protected synchronized void onResume()
   {
     super.onResume();
+    // TDLog.v( "Overview Activity on Resume " );
     doResume();
   }
 
@@ -545,6 +546,7 @@ public class OverviewWindow extends ItemDrawer
   public void onStart() 
   {
     super.onStart();
+    // TDLog.v( "Overview Activity on Start " );
     TDLocale.resetTheLocale();
     setMenuAdapter( getResources() );
     closeMenu();

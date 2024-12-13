@@ -1117,7 +1117,7 @@ public class ShotWindow extends Activity
   public void insertPhoto( )
   {
     // FIXME TITLE has to go
-    TDLog.v( TAG + "insert Photo type SHOT id " + mMediaManager.getPhotoId() );
+    // TDLog.v( TAG + "insert Photo type SHOT id " + mMediaManager.getPhotoId() );
     mApp_mData.insertPhotoRecord( TDInstance.sid, mMediaManager.getPhotoId(), mMediaManager.getItemId(), "", TDUtil.currentDateTime(),
       mMediaManager.getComment(), mMediaManager.getCamera(), mMediaManager.getCode(), PhotoInfo.TYPE_SHOT );
     // FIXME NOTIFY ? no
@@ -1352,6 +1352,7 @@ public class ShotWindow extends Activity
   public void onStart() 
   {
     super.onStart();
+    TDLog.v( "Shot Activity on Start " );
     // Debug.startMethodTracing( "distox" );
     // TDLog.v( TAG + "on Start() " );
     TDLocale.resetTheLocale();
@@ -1377,7 +1378,7 @@ public class ShotWindow extends Activity
   {
     // Debug.stopMethodTracing( );
     super.onStop();
-    // TDLog.v( TAG + "on Stop()" );
+    TDLog.v( "Shot activity on Stop" );
     // // if ( TDSetting.mDataBackup && TDSetting.mExportShotsFormat >= 0 ) TopoDroidApp.doExportDataAsync( TDInstance.context, TDSetting.mExportShotsFormat, false );
   }
 
@@ -1385,7 +1386,7 @@ public class ShotWindow extends Activity
   public synchronized void onPause() 
   {
     super.onPause();
-    // TDLog.v( TAG + "on Pause()" );
+    TDLog.v( "Shot activity on Pause" );
     // saveInstanceToData();
 
     // mApp.unregisterConnListener( mHandler );
@@ -1397,7 +1398,7 @@ public class ShotWindow extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
-    // TDLog.v( TAG + "onResume()" );
+    TDLog.v( "Shot Activity on Resume " );
     // FIXME NOTIFY register ILister
     // if ( mApp.mComm != null ) { mApp.mComm.resume(); }
     // TDLog.v( TAG + "on Resume()" );
@@ -1412,7 +1413,7 @@ public class ShotWindow extends Activity
       setConnectionStatus( mDataDownloader.getStatus() );
     }
     setRefAzimuthButton( );
-    TDLog.v( TAG + "Multiselect [3] " + onMultiselect + " " + mDataAdapter.getMultiSelectSize() );
+    // TDLog.v( TAG + "Multiselect [3] " + onMultiselect + " " + mDataAdapter.getMultiSelectSize() );
   }
 
   /** @return the name (ILister interface)

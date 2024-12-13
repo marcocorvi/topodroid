@@ -1118,6 +1118,7 @@ public class MainWindow extends Activity
   public void onStart()
   {
     super.onStart();
+    TDLog.v( "Main Activity on Start " );
     // restoreInstanceFromFile();
     // TDLog.v( "MAIN on Start: check BT " + do_check_bt + " enabled " + DeviceUtil.isAdapterEnabled() );
     if ( ! TDandroid.canManageExternalStorage( this ) ) {
@@ -1237,7 +1238,7 @@ public class MainWindow extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
-    // TDLog.v("MAIN on Resume");
+    TDLog.v( "Main Activity on Resume " );
     // resetButtonBar();  // 6.0.33
     // setMenuAdapter();
     // closeMenu();
@@ -1302,7 +1303,7 @@ public class MainWindow extends Activity
   protected synchronized void onPause() 
   { 
     super.onPause();
-    // TDLog.v("MAIN on Pause");
+    TDLog.v("Main Activity on Pause");
     // TDLog.Log( TDLog.LOG_MAIN, "onPause " );
     mApp.suspendComm();
   }
@@ -1311,7 +1312,7 @@ public class MainWindow extends Activity
   public void onStop()
   {
     super.onStop();
-    // TDLog.v("MAIN on Stop");
+    TDLog.v("Main Activity on Stop");
     // if ( TopoDroidApp.isTracing ) {
     //   Debug.stopMethodTracing();
     // }

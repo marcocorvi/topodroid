@@ -12,7 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDMath;
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDLocale;
@@ -331,6 +331,7 @@ public class PlotReloadWindow extends ItemDrawer
   protected synchronized void onResume()
   {
     super.onResume();
+    TDLog.v( "Plot Activity on Resume " );
     doResume();
   }
 
@@ -345,6 +346,7 @@ public class PlotReloadWindow extends ItemDrawer
   protected synchronized void onStart()
   {
     super.onStart();
+    TDLog.v( "Plot Activity on Start " );
     TDLocale.resetTheLocale();
     setMenuAdapter( getResources() );
     closeMenu();

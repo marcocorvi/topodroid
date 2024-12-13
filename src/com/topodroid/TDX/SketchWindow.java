@@ -1456,6 +1456,7 @@ public class SketchWindow extends ItemDrawer
   protected synchronized void onResume()
   {
     super.onResume();
+    TDLog.v("Sketch Activity on Resume " );
     doResume();
     // TDLog.TimeEnd( "drawing activity ready" );
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on resume done");
@@ -1478,7 +1479,7 @@ public class SketchWindow extends ItemDrawer
   protected synchronized void onStart()
   {
     super.onStart();
-    // TDLog.v("Drawing Activity on Start " );
+    TDLog.v("Sketch Activity on Start " );
     TDLocale.resetTheLocale();
     loadRecentSymbols( mApp_mData );
     setBtnRecentAll(); 
