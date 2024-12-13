@@ -360,6 +360,7 @@ public class TDNum
   private ArrayList< NumCycle >   mBadLoops;
   private HashMap< String, Tri2StationStatus > mTriStationsStatus;
   private HashMap< String, Tri2StationAxle > mTriStationsAxles;
+  private HashSet< String > mTriStationsMirrored;
 
   public String getOriginStation() { return (mStartStation == null)? null : mStartStation.name; }
   public NumStation getOrigin()    { return mStartStation; }
@@ -601,6 +602,11 @@ public class TDNum
   public Tri2StationAxle getStationTriAxle( String name )
   {
     return mTriStationsAxles.get( name );
+  }
+
+  public boolean getStationTriIsMirrored( String name )
+  {
+    return mTriStationsMirrored.contains( name );
   }
 
   /** @return true if the station is barrier
@@ -2089,6 +2095,7 @@ public class TDNum
     // Info to help interface for user to mirror a station around the fixed triangle side.
     mTriStationsAxles = tr.getStationAxles();
     mTriStationsStatus = tr.getStationStatus();
+    mTriStationsMirrored = tr.getMirroredStations();
   }
 
   // -------------------------------------------------------------

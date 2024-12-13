@@ -225,6 +225,13 @@
           style="@style/button_default"
           android:text="@string/button_triangulation_mirror_station"
           />
+
+      <TextView
+          android:id="@+id/triangulation_axle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/triangulation_axle"
+          />
     </LinearLayout>
 
     <LinearLayout android:id="@+id/help"

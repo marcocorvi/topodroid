@@ -13,4 +13,16 @@ public class Tri2StationAxle {
     axleName = a;
     shots = shs;
   }
+
+  public String getName() {
+    return name;
+  }
+
+  public String getAxleName() {
+    return axleName;
+  }
+
+  public HashMap< String, TriShot > getShots() {
+    return shots;
+  }
 }

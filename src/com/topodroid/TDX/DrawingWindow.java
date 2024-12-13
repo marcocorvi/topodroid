@@ -6004,6 +6004,16 @@ public class DrawingWindow extends ItemDrawer
     return null;
   }
 
+  /**
+   *  Toggles mirrored status of provided station. Relevant only for TRIANGULATION loop closure.
+   * @param stn station name
+   */
+  void toggleTriMirror( String stn )
+  {
+    mApp_mData.toggleTriMirroredStation( TDInstance.sid, stn );
+    updateDisplay();
+  }
+
   /** open a station xsection - at station B where A--B--C
    * @param st_name   station name 
    * @param type      type of the parent plot where the x-section is defined
@@ -7359,15 +7369,18 @@ public class DrawingWindow extends ItemDrawer
               boolean hidden  = mNum.isHidden( st.getName() );
               Tri2StationStatus triStatus;
               Tri2StationAxle triAxle;
+              boolean isTriMirrored;
               if ( TDLevel.overExpert && ( TDSetting.mLoopClosure == TDSetting.LOOP_TRIANGULATION ) ) {
                 triStatus = mNum.getStationTriStatus( st.getName() );
                 triAxle = mNum.getStationTriAxle( st.getName() );
+                isTriMirrored = mNum.getStationTriIsMirrored( st.getName() );
               } else {
                 triStatus = null;
                 triAxle = null;
+                isTriMirrored = false;
               }
               List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, st.getName(), true ); // select "independent" legs
-              new DrawingStationDialog( mActivity, this, mApp, st, path, barrier, hidden, /* TDInstance.xsections, */ legs, triStatus, triAxle ).show();
+              new DrawingStationDialog( mActivity, this, mApp, st, path, barrier, hidden, /* TDInstance.xsections, */ legs, triStatus, triAxle, isTriMirrored ).show();
             } else if ( item instanceof DrawingPointPath ) {
               DrawingPointPath point = (DrawingPointPath)(item);
               // TDLog.v( "edit point type " + point.mPointType );

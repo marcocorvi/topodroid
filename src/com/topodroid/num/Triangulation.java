@@ -49,6 +49,8 @@ public class Triangulation
 		return stationStatus;
 	}
 
+	HashSet< String > getMirroredStations() { return mirroredStations; }
+
 	private void resetTriangle() {
 		triangleShots.clear();
 		triangleLegs.clear();
