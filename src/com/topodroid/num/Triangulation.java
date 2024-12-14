@@ -112,7 +112,7 @@ public class Triangulation
 				// Getting third shot of the triangle if necessary because if there already are 2 adjusted
 				// stations in the triangle, there is no need for a third shot..
 				for (int n3 = n2+1; n3 < ns; ++n3) {
-					if ( adjustedStations.size() == 2 ) break;
+					if ( adjustedStations.size() >= 2 ) break;
 					if ( adjustedStations.isEmpty() && ( triangleLegs.size() == 3 ) ) break;
 					TriShot sh3 = shots.get(n3);
 					if (sh3.triangle != null) continue;
@@ -189,7 +189,7 @@ public class Triangulation
 		}
 
 		String name = sh.name();
-		if (triangleShots.containsKey(name)) throw new RuntimeException("Tri2Triangle.addShot: shot already exists (THIS SHOULD NEVER HAPPEN!)");
+		if (triangleShots.containsKey(name)) return false;
 
 		sh.triangle = triangleUUID;
 		triangleShots.put(name, sh);
@@ -446,26 +446,27 @@ public class Triangulation
 	}
 
 	private Tri2Point calculatePoint(Tri2Point from, double length, double azimuth, double clino) {
-		double x = from.x + length * TDMath.sinDd(azimuth) * TDMath.cosDd(clino);
-		double y = from.y + length * TDMath.cosDd(azimuth) * TDMath.cosDd(clino);
+		double cosClino = TDMath.cosDd(clino);
+		double x = from.x + length * TDMath.sinDd(azimuth) * cosClino;
+		double y = from.y + length * TDMath.cosDd(azimuth) * cosClino;
 		double z = from.z + length * TDMath.sinDd(clino);
 
 		return new Tri2Point(x, y, z);
 	}
 
 	private void updateShot( TriShot sh, Tri2Leg leg ) {
-		// Only setting the per shot declination azimuth of the shot to match the  azimuth of the leg.
-		// double newAzimuth = (leg.from.equals(sh.from)) ? leg.azimuth : TDMath.add180(leg.azimuth);
-		// double shotDeclination = newAzimuth - sh.bearing();
-		// sh.mAvgLeg.mDecl = (float)shotDeclination; // per shot declination
+		// Only setting the per shot declination azimuth of the shot to match the azimuth of the leg.
+		double newAzimuth = (leg.from.equals(sh.from)) ? leg.azimuth : TDMath.add180(leg.azimuth);
+		double shotDeclination = newAzimuth - sh.bearing();
+		sh.mAvgLeg.mDecl = (float)shotDeclination; // per shot declination
 
 		// Setting both azimuth and clino.
-		if (leg.from.equals(sh.from)) {
-			sh.mAvgLeg.set((float)leg.length, (float)leg.azimuth, (float)leg.clino);
-		}
-		else {
-			sh.mAvgLeg.set((float)leg.length, (float)TDMath.add180(leg.azimuth), (float)(-leg.clino));
-		}
+//		if (leg.from.equals(sh.from)) {
+// 		sh.mAvgLeg.set((float)leg.length, (float)leg.azimuth, (float)leg.clino);
+//		}
+//		else {
+//			sh.mAvgLeg.set((float)leg.length, (float)TDMath.add180(leg.azimuth), (float)(-leg.clino));
+//		}
 	}
 
 	private double getClino(double length, double heightAdjust) {
