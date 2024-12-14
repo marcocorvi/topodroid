@@ -822,7 +822,7 @@ public class TopoDroidApp extends Application
     // mData.compileStatements(); // this method is now empty (and commented)
 
     PtCmapActivity.setMap( prefHlp.getString( "DISTOX_PT_CMAP", null ) );
-    TDLog.v( "PCmap set map done");
+    // TDLog.v( "PCmap set map done");
 
     TDSetting.loadSecondaryPreferences( prefHlp );
     TDLog.v( "load secondary done");

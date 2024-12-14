@@ -262,6 +262,7 @@ public class CalibActivity extends Activity
   public void onStart() 
   {
     super.onStart();
+    // TDLog.v("Calib Activity on Start " );
     TDLocale.resetTheLocale();
     setMenuAdapter( getResources() );
     closeMenu();

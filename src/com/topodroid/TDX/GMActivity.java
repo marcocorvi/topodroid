@@ -1326,6 +1326,7 @@ public class GMActivity extends Activity
   public void onStart()
   {
     super.onStart();
+    // TDLog.v("GM Activity on Start " );
     // setBTMenus( DeviceUtil.isAdapterEnabled() );
     TDLocale.resetTheLocale();
     setMenuAdapter( getResources() );
@@ -1337,6 +1338,7 @@ public class GMActivity extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
+    // TDLog.v("GM Activity on Resume " );
     // if ( mApp.mComm != null ) { mApp.mComm.resume(); }
     // TDLog.v( "on resume ");
     updateDisplay( );

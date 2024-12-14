@@ -338,6 +338,7 @@ public class SurveyWindow extends Activity
   public void onStart() 
   {
     super.onStart();
+    TDLog.v("Survey Activity on Start " );
     mWarnTeam = true;
     TDLocale.resetTheLocale();
     setMenuAdapter( getResources() );
@@ -358,6 +359,7 @@ public class SurveyWindow extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
+    TDLog.v("Survey Activity on Resume " );
     int nrPhoto = 0;
     mApp_mData = TopoDroidApp.mData;
     if ( mApp_mData != null ) {
@@ -453,8 +455,16 @@ public class SurveyWindow extends Activity
   }
 
   @Override
+  public void onPause()
+  {
+    TDLog.v("Survey Activity on Pause " );
+    super.onPause();
+  }
+
+  @Override
   public void onStop()
   {
+    TDLog.v("Survey Activity on Stop " );
     saveSurvey( false );
     super.onStop();
   }

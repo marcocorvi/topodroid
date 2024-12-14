@@ -293,11 +293,10 @@ public class DrawingSvg extends DrawingSvgBase
           for ( String pointTypeName : pointTypes ) {
             ArrayList< DrawingPointPath > pointList = points.get(pointTypeName);
             if ( TDSetting.mSvgGroups ) out.write("<g id=\"point_" + pointTypeName + "\">\n");
-            String color_str = pathToColor( pointList.get(0) );
             for (DrawingPointPath point : pointList) {
               StringWriter sw53 = new StringWriter();
               PrintWriter pw53  = new PrintWriter(sw53);
-              toSvg( pw53, point, color_str, xoff, yoff );
+              toSvg( pw53, point, pathToColor(point), xoff, yoff );
               out.write( sw53.getBuffer().toString() );
             }
             if ( TDSetting.mSvgGroups ) out.write( end_grp ); // point_
@@ -314,11 +313,10 @@ public class DrawingSvg extends DrawingSvgBase
           for ( String lineTypeName : lineTypes ) {
             if ( TDSetting.mSvgGroups ) out.write("<g id=\"line_" + lineTypeName + "\">\n");
             ArrayList< DrawingLinePath > lineList = lines.get(lineTypeName);
-            String color_str = pathToColor( lineList.get(0) );
             for (DrawingLinePath line : lineList) {
               StringWriter sw54 = new StringWriter();
               PrintWriter pw54  = new PrintWriter(sw54);
-              toSvg( pw54, line, color_str, xoff, yoff );
+              toSvg( pw54, line, pathToColor(line), xoff, yoff );
               out.write( sw54.getBuffer().toString() );
             }
             if ( TDSetting.mSvgGroups ) out.write( end_grp ); // line_
@@ -335,11 +333,10 @@ public class DrawingSvg extends DrawingSvgBase
           for ( String areaTypeName : areaTypes ) {
             if ( TDSetting.mSvgGroups ) out.write("<g id=\"area_" + areaTypeName + "\">\n");
             ArrayList< DrawingAreaPath > areaList = areas.get(areaTypeName);
-            String color_str = pathToColor( areaList.get(0) );
             for (DrawingAreaPath area : areaList) {
               StringWriter sw55 = new StringWriter();
               PrintWriter pw55  = new PrintWriter(sw55);
-              toSvg( pw55, area, color_str, xoff, yoff );
+              toSvg( pw55, area, pathToColor(area), xoff, yoff );
               out.write( sw55.getBuffer().toString() );
             }
             if ( TDSetting.mSvgGroups ) out.write( end_grp ); // area_

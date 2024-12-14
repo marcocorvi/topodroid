@@ -3070,6 +3070,7 @@ public class DrawingWindow extends ItemDrawer
   protected synchronized void onResume()
   {
     super.onResume();
+    TDLog.v( "Drawing Activity on Resume " );
     // TDLog.v( "Drawing Activity onResume " + ((mDataDownloader!=null)?"with DataDownloader":"") );
     doResume();
     if ( mDataDownloader != null ) {
@@ -3085,7 +3086,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   protected synchronized void onPause() 
   { 
-    // TDLog.v( "Drawing Activity onPause " );
+    TDLog.v( "Drawing Activity onPause " );
     doPause();
     super.onPause();
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on pause done");
@@ -3097,7 +3098,7 @@ public class DrawingWindow extends ItemDrawer
   protected synchronized void onStart()
   {
     super.onStart();
-    // TDLog.v("Drawing Activity on Start " );
+    TDLog.v("Drawing Activity on Start " );
     TDLocale.resetTheLocale();
     loadRecentSymbols( mApp_mData );
     mOutlinePlot1 = null;
@@ -3114,7 +3115,7 @@ public class DrawingWindow extends ItemDrawer
   protected synchronized void onStop()
   {
     super.onStop();
-    // TDLog.v("Drawing Activity onStop ");
+    TDLog.v("Drawing Activity onStop ");
     saveRecentSymbols( mApp_mData );
     // doStop();
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on stop done");
