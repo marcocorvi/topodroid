@@ -935,7 +935,7 @@ public class TDSetting
       case 4: sz = BTN_SIZE_LARGE;  break;
       case 2: sz = BTN_SIZE_HUGE;   break;
     }
-    // TDLog.v("SETTING set button size " + size + " mSizeButtons " + mSizeButtons + " sz " + sz );
+    TDLog.v("SETTING set button size-index " + size + " size: current " + mSizeButtons + " new " + sz );
     mSizeBtns = size;
     if ( sz != mSizeButtons ) {
       mSizeButtons = (int)( sz * TopoDroidApp.getDisplayDensity() * 0.86f );
