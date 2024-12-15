@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Stack;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Locale;
 
 public class TDNum
 {
@@ -2168,7 +2167,7 @@ public class TDNum
       }
     }
     if ( success ) {
-      TDToast.make( TDInstance.formatString( R.string.trilateration_error, (float)err ) );
+      TDToast.make( TDInstance.formatString( R.string.trilateration_succeeded, (float)err ) );
     }
   }
 
