@@ -2186,8 +2186,8 @@ public class TDNum
     // apply trilateration with recursive minimization
     double err = 0.0;
     boolean success = false;
+    // TDLog.v("TRI nr clusters " + clusters.size() );
     for ( TriCluster cl : clusters ) {
-      // cl.dump();
       if ( cl.nrStations() > 2 ) {
         success = true;
         break;
@@ -2195,6 +2195,7 @@ public class TDNum
     }
     for ( TriCluster cl : clusters ) {
       if ( cl.nrStations() > 2 ) {
+        // cl.dump();
         Trilateration trilateration = new Trilateration( cl );
         // TDLog.v("TRI trilateration iterations " + trilateration.getIterations() + " error " + trilateration.getError() );
         // use trilateration.points and legs

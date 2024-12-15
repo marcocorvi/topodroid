@@ -64,14 +64,14 @@ class TriCluster
 
   // /** log debug
   //  */
-  // void dump()
-  // {
-  //   StringBuilder sb1 = new StringBuilder();
-  //   for ( String s : stations ) sb1.append(s).append(" ");
-  //   TDLog.v("TRI cluster: " + stations.size() + " stations: " + sb1.toString() ); 
-  //   StringBuilder sb2 = new StringBuilder();
-  //   for ( TriShot t : shots ) sb2.append(t.from).append("-").append(t.to).append(" [").append( String.format(Locale.US,"%.2f",t.length()) ).append("] ");
-  //   TDLog.v("             " + shots.size() + " shots: " + sb2.toString() ); 
-  // }
+  void dump()
+  {
+    StringBuilder sb1 = new StringBuilder();
+    for ( String s : stations ) sb1.append(s).append(" ");
+    TDLog.v("TRI cluster: " + stations.size() + " stations: " + sb1.toString() ); 
+    StringBuilder sb2 = new StringBuilder();
+    for ( TriShot t : shots ) sb2.append(t.from).append("-").append(t.to).append(" [").append( String.format(Locale.US,"%.2f",t.length()) ).append("] ");
+    TDLog.v("             " + shots.size() + " shots: " + sb2.toString() ); 
+  }
 }
 
