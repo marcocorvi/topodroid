@@ -7371,7 +7371,7 @@ public class DrawingWindow extends ItemDrawer
               Tri2StationStatus triStatus;
               Tri2StationAxle triAxle;
               boolean isTriMirrored;
-              if ( TDLevel.overExpert && ( TDSetting.mLoopClosure == TDSetting.LOOP_TRIANGULATION ) ) {
+              if ( TDLevel.overExpert && ( TDInstance.calculated_azimuths != 0 ) ) {
                 triStatus = mNum.getStationTriStatus( st.getName() );
                 triAxle = mNum.getStationTriAxle( st.getName() );
                 isTriMirrored = mNum.getStationTriIsMirrored( st.getName() );

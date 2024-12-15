@@ -512,7 +512,6 @@ public class TDSetting
   public static final int LOOP_TRILATERATION = 3;
   public static final int LOOP_WEIGHTED      = 4;
   public static final int LOOP_SELECTIVE     = 5;
-  public static final int LOOP_TRIANGULATION = 6;
   public static int mLoopClosure = LOOP_NONE;      // loop closure: 0 none, 1 normal, 3 triangles
   public static float mLoopThr = 1.0f; // selective compensation threshold [%]
   
@@ -865,7 +864,7 @@ public class TDSetting
     mLoopClosure = loop_closure;
     if ( mLoopClosure == LOOP_CYCLES || mLoopClosure == LOOP_WEIGHTED ) {
       if ( ! TDLevel.overAdvanced ) mLoopClosure = LOOP_NONE;
-    } else if ( mLoopClosure == LOOP_TRILATERATION || mLoopClosure == LOOP_SELECTIVE  || mLoopClosure == LOOP_TRIANGULATION ) {
+    } else if ( mLoopClosure == LOOP_TRILATERATION || mLoopClosure == LOOP_SELECTIVE ) {
       if ( ! TDLevel.overExpert ) mLoopClosure = LOOP_NONE;
     }
   }

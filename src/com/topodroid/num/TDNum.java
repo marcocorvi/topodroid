@@ -1025,17 +1025,12 @@ public class TDNum
     initShots( data, tmp_shots, tmp_splays, ! midline_only );
     // TDLog.Log( TDLog.LOG_NUM, "data " + data.size() + " shots " + tmp_shots.size() + " splays " + tmp_splays.size() );
 
-    if ( ! midline_only &&
-        ( ( TDSetting.mLoopClosure == TDSetting.LOOP_TRILATERATION ) ||
-            ( TDSetting.mLoopClosure == TDSetting.LOOP_TRIANGULATION ) ) ) {
-      switch (TDSetting.mLoopClosure) {
-        case TDSetting.LOOP_TRILATERATION:
-          makeTrilateration( tmp_shots );
-          break;
-        case TDSetting.LOOP_TRIANGULATION:
-          makeTriangulation( tmp_shots );
-          break;
-      }
+    if ( TDInstance.calculated_azimuths != 0 ) {
+      makeTriangulation( tmp_shots );
+    }
+
+    if ( ! midline_only && ( TDSetting.mLoopClosure == TDSetting.LOOP_TRILATERATION ) ) {
+      makeTrilateration( tmp_shots );
     }
 
     // ---------------------------------- SIBLINGS and BACKSIGHT -------------------------------

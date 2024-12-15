@@ -25,6 +25,9 @@ public class SurveyInfo
   public final static int DATAMODE_NORMAL  = 0;
   public final static int DATAMODE_DIVING  = 1;
 
+  public final static int CALCULATED_AZIMUTHS_FALSE = 0;
+  public final static int CALCULATED_AZIMUTHS_TRUE = 1;
+
   public final static int SURVEY_EXTEND_NORMAL  = 90;
   public final static int SURVEY_EXTEND_LEFT    = -1000;
   public final static int SURVEY_EXTEND_RIGHT   =  1000;
@@ -42,6 +45,7 @@ public class SurveyInfo
   int xsections;       // 0: shared, 1: private
   int datamode;        // normal or diving
   int mExtend;         // survey extend
+  int mCalculatedAzimuths; // boolean indicating if azimuths in this survey should be trigonometricaly calculated
 
   SurveyInfo copy() 
   {
@@ -56,6 +60,7 @@ public class SurveyInfo
     ret.xsections   = xsections;
     ret.datamode    = datamode;
     ret.mExtend     = mExtend;
+    ret.mCalculatedAzimuths = mCalculatedAzimuths;
     return ret;
   }
 

@@ -1008,9 +1008,10 @@ public class DataHelper extends DataSetObservable
    * @param comment      survey comment
    * @param init_station initial station
    * @param xsections     xsection mode (private or shared)
+   * @param calculated_azimuths  should the azimuths be calculated (overwriting the measured ones)
    */
   private ContentValues makeSurveyInfoCcontentValues( String date, String team, double decl, String comment,
-                                String init_station, int xsections ) // datamode cannot be updated
+                                String init_station, int xsections, int calculated_azimuths ) // datamode cannot be updated
   {
     ContentValues cv = new ContentValues();
     cv.put( "day", date );
@@ -1019,6 +1020,7 @@ public class DataHelper extends DataSetObservable
     cv.put( "comment", ((comment != null)? comment : TDString.EMPTY ) );
     cv.put( "init_station", ((init_station != null)? init_station : TDString.ZERO ) );
     cv.put( "xsections", xsections );
+    cv.put( "calculated_azimuths", calculated_azimuths );
     return cv;
   }
 
@@ -1029,13 +1031,14 @@ public class DataHelper extends DataSetObservable
    * @param comment      survey comment
    * @param init_station initial station
    * @param xsections     xsection mode (private or shared)
+   * @param calculated_azimuths  should the azimuths be calculated (overwriting the measured ones)
    */
   void updateSurveyInfo( long sid, String date, String team, double decl, String comment,
-                         String init_station, int xsections )
+                         String init_station, int xsections, int calculated_azimuths )
                          // FIXME int extend
   {
     // TDLog.v("DB update survey, init station <" + init_station + ">" );
-    ContentValues cv = makeSurveyInfoCcontentValues( date, team, decl, comment, init_station, xsections );
+    ContentValues cv = makeSurveyInfoCcontentValues( date, team, decl, comment, init_station, xsections, calculated_azimuths );
     try {
       myDB.beginTransaction();
       myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(sid) } );
@@ -1260,6 +1263,13 @@ public class DataHelper extends DataSetObservable
     ContentValues cv = new ContentValues();
     cv.put( "declination", decl );
     return doUpdateSurvey( id, cv, "survey decl" );
+  }
+
+  public boolean updateSurveyCalculatedAzimuths( long id, boolean cal_azi )  // 202007
+  {
+    ContentValues cv = new ContentValues();
+    cv.put( "calculated_azimuths", cal_azi ? 1 : 0 );
+    return doUpdateSurvey( id, cv, "survey cal_azi" );
   }
 
   // -----------------------------------------------------------------------
@@ -4583,7 +4593,7 @@ public class DataHelper extends DataSetObservable
     SurveyInfo info = null;
     if ( myDB == null ) return null;
     Cursor cursor = myDB.query( SURVEY_TABLE,
-                               new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections", "datamode", "extend" }, // columns
+                               new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections", "datamode", "extend", "calculated_azimuths" }, // columns
                                WHERE_ID, new String[] { Long.toString(sid) },
                                null, null, "name" );
     if (cursor.moveToFirst()) {
@@ -4598,6 +4608,7 @@ public class DataHelper extends DataSetObservable
       info.xsections = (int)cursor.getLong( 6 );
       info.datamode  = (int)cursor.getLong( 7 );
       info.mExtend   = (int)cursor.getLong( 8 );
+      info.mCalculatedAzimuths = (int)cursor.getLong( 9 );
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return info;
@@ -6371,13 +6382,16 @@ public class DataHelper extends DataSetObservable
                                            : SurveyInfo.DATAMODE_NORMAL;
 	 int extend_ref = ( db_version > 38)? (int)( scanline0.longValue( SurveyInfo.SURVEY_EXTEND_NORMAL ) )
                                             : SurveyInfo.SURVEY_EXTEND_NORMAL;
+   int calculated_azimuths = ( db_version > 54 )?
+       (int)( scanline0.longValue( SurveyInfo.CALCULATED_AZIMUTHS_FALSE ) ) :
+       SurveyInfo.CALCULATED_AZIMUTHS_FALSE;
 
          sid = setSurvey( name, datamode );
 
          try {
            myDB.beginTransaction();
            // success &= updateSurveyInfo( sid, date, team, decl, comment, init_station, xsections, false );
-           ContentValues cv = makeSurveyInfoCcontentValues( date, team, decl, comment, init_station, xsections );
+           ContentValues cv = makeSurveyInfoCcontentValues( date, team, decl, comment, init_station, xsections, calculated_azimuths );
            myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(sid) } );
            // TDLog.v( "DB updateSurveyInfo: " + success );
 
@@ -6896,9 +6910,34 @@ public class DataHelper extends DataSetObservable
       info.xsections = (int)cursor.getLong( 7 );
       info.datamode  = (int)cursor.getLong( 8 );
       info.mExtend   = (int)cursor.getLong( 9 );
+      info.mCalculatedAzimuths = (int)cursor.getLong (10 );
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return info;
+  }
+
+  /**
+   * Returns the "calculated_azimuths" status of the survey.
+   * @param sid survey ID
+   * @return "calculated_azimuths" status of the survey
+   */
+  public int getSurveyCalculatedAzimuths ( long sid )
+  {
+    int ret = 0;
+    if ( myDB == null ) return 0;
+    Cursor cursor = myDB.query( SURVEY_TABLE,
+        new String[] { "calculated_azimuths" },
+        WHERE_ID,
+        new String[] { Long.toString(sid) },
+        null,
+        null,
+        null
+    ); // order by
+    if (cursor.moveToFirst()) {
+      ret = cursor.getInt( 0 );
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return ret;
   }
 
   public List< DBlock > getSurveyReducedData( long sid ) { return selectAllLegShotsReduced( sid, 0 ); }
@@ -7422,6 +7461,7 @@ public class DataHelper extends DataSetObservable
                db.execSQL( "ALTER TABLE sensors ADD COLUMN reftype INTEGER default 0" );
              }
            case 55:
+             db.execSQL( "ALTER TABLE surveys ADD COLUMN calculated_azimuths INTEGER default 0" );
              db.execSQL(
                  create_table + TRI_MIRRORED_STATIONS_TABLE
                      + " ( surveyId INTEGER, "

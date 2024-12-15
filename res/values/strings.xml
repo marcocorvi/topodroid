@@ -2422,4 +2422,6 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="triangulation_axle">around %s leg</string>
     <string name="triangulation_reference_station">Reference station</string>
     <string name="triangulation_unadjusted_station">Unadjusted station</string>
+    <string name="triangulation_calculated_azimuths">Calculated azimuths</string>
+    <string name="triangulation_regular_azimuths">Regular measured azimuths</string>
 </resources>
