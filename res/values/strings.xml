@@ -738,6 +738,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="screenshot_failed">Failed taking screenshot</string>
     <string name="start_index">Start-shot index</string>
     <string name="trilateration_failed">Failed trilateration</string>
+    <!-- UNUSED string name="trilateration_error">Trilateration error %1$.2f</string -->
     <string name="trilateration_succeeded">Trilateration succeeded: remaining error %1$.2f</string>
 
     <string name="survey_info">Survey info</string>

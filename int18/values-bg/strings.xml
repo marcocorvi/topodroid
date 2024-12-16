@@ -725,7 +725,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="screenshot_failed">Неуспешно заснемане на екранна снимка</string>
     <string name="start_index">Индекс на начално измерване</string>
     <string name="trilateration_failed">Неуспешна трилатерация</string>
-    <!-- UNUSED string name="trilateration_succeeded">Грешка при трилатерация %1$.2f</string -->
+    <!-- UNUSED string name="trilateration_error">Грешка при трилатерация %1$.2f</string -->
     <!-- TODO string name="trilateration_succeeded">Trilateration succeeded: remaining error %1$.2f</string -->
 
     <string name="survey_info">Информация за картировката</string>
