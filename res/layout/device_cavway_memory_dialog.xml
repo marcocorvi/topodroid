@@ -23,18 +23,11 @@
       android:text="@string/button_dump"
     />
 
-    <EditText android:id="@+id/et_dumpfrom" 
+    <EditText android:id="@+id/et_number" 
       style="@style/edit_number_light"
       android:layout_marginTop="@dimen/margintiny"
       android:layout_width="100dp"
-      android:hint="@string/zero"
-      android:importantForAutofill="no"
-    />
-    <EditText android:id="@+id/et_dumpto" 
-      style="@style/edit_number_light"
-      android:layout_marginTop="@dimen/margintiny"
-      android:layout_width="100dp"
-      android:hint="@string/x310_max"
+      android:hint="@string/one"
       android:importantForAutofill="no"
     />
   </LinearLayout>

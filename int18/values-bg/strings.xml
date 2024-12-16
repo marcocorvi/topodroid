@@ -329,6 +329,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="error_clino_required">Необходим наклон</string>
     <string name="error_comment_required">Необходим коментар</string>
     <string name="error_begin_required">Необходим начален адрес</string>
+    <!-- TODO string name="error_number_required">Data number required</string -->
     <string name="error_declination_number">Деклинацията трябва да е число</string>
     <string name="error_end_required">Необходим краен адрес</string>
     <string name="error_fixes_nocs">Фиксирани точки без CS %1$s:\n%2$s</string>

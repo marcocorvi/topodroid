@@ -28,11 +28,11 @@ public class CavwayDetails
   // final static int mHeadTailAddress = 0xe008;
   public static final byte[] HeadTail = { 0x38, 0x08, (byte)0xe0 }; // address 0xe008
 
-  public static boolean boundHeadTail( int[] ht )
+  public static int boundNumber( int nr )
   {
-    if ( ht[0] < 0 ) ht[0] = 0;
-    if ( ht[1] > MAX_INDEX_XBLE ) ht[1] = MAX_INDEX_XBLE;
-    return ( ht[0] < ht[1] );
+    if ( nr < 0 ) return 0;
+    if ( nr > 2048 ) return 2048;
+    return nr;
   }
 
   // returns two 16-bit values

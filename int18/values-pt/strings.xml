@@ -304,6 +304,7 @@ no campo abaixo e aperte o botão.
   <string name="error_clino_required">Inclinação exigida</string>
   <string name="error_comment_required">Comentário exigido</string>
   <string name="error_begin_required">Endereço inicial exigido</string>
+  <string name="error_number_required">Númeração do dado exigida</string>
   <string name="error_declination_number">A declinação deve ser um número</string>
   <string name="error_end_required">Endereço final exigido</string>
   <string name="error_fixes_nocs">Ponto fixo sem CS %1$s:\n%2$s</string>
