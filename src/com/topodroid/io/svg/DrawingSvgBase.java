@@ -86,6 +86,9 @@ public class DrawingSvgBase
 
   protected static final String end_grp = "</g>\n";
   protected static final String end_svg = "</svg>\n";
+
+  protected static final String group_mode_open  = " inkscape:groupmode=\"layer\" i:layer=\"yes\" >\n";
+  protected static final String group_mode_close = " inkscape:groupmode=\"layer\" i:layer=\"yes\" />\n";
   
   protected class XSection
   {

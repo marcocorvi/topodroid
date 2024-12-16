@@ -424,9 +424,6 @@ public class DrawingSvgWalls extends DrawingSvgBase
   }
 
   // ------------------------------------------------------------------------------------
-  private static final String group_mode_open  = " inkscape:groupmode=\"layer\" i:layer=\"yes\" >\n";
-  private static final String group_mode_close = " inkscape:groupmode=\"layer\" i:layer=\"yes\" />\n";
-
   private static final String xml_header = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n";
   private static final String walls_header = "<?walls updated=\"no\" merged-content=\"no\" adjustable=\"no\"?>\n";
   private static final String compass_header = "<?compass inkscape-compatible=\"yes\"?>\n";

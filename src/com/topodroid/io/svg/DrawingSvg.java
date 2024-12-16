@@ -133,7 +133,7 @@ public class DrawingSvg extends DrawingSvgBase
         // FIXME OK PROFILE
 
         // TDLog.v( "SVG legs " + plot.getLegs().size() );
-        out.write("<g id=\"legs\" style=\"fill:none;stroke-opacity:0.6;stroke:red\" >\n");
+        out.write("<g id=\"legs\" style=\"fill:none;stroke-opacity:0.6;stroke:red\"" + group_mode_open);
         for ( DrawingPath sh : plot.getLegs() ) {
           DBlock blk = sh.mBlock;
           if ( blk == null ) continue;
@@ -282,17 +282,17 @@ public class DrawingSvg extends DrawingSvgBase
         }
 
         int scrapId = scrap.mScrapIdx;
-        out.write( "<g id=\"scrap_" + scrapId + "\">\n" );
+        out.write( "<g id=\"scrap_" + scrapId + "\"" + group_mode_open );
 
         // TDLog.v( "SVG paths " + paths.size() + " points" );
         if ( ! points.isEmpty() ) {
-          out.write("<g id=\"points\">\n");
+          out.write("<g id=\"points\"" + group_mode_open);
           ArrayList < String > pointTypes = new ArrayList<>( points.keySet() );
           Collections.sort( pointTypes, String.CASE_INSENSITIVE_ORDER );
           Collections.reverse( pointTypes );
           for ( String pointTypeName : pointTypes ) {
             ArrayList< DrawingPointPath > pointList = points.get(pointTypeName);
-            if ( TDSetting.mSvgGroups ) out.write("<g id=\"point_" + pointTypeName + "\">\n");
+            if ( TDSetting.mSvgGroups ) out.write("<g id=\"point_" + pointTypeName + "\"" + group_mode_open);
             for (DrawingPointPath point : pointList) {
               StringWriter sw53 = new StringWriter();
               PrintWriter pw53  = new PrintWriter(sw53);
@@ -306,12 +306,12 @@ public class DrawingSvg extends DrawingSvgBase
         }
 
         if ( ! lines.isEmpty() ) {
-          out.write("<g id=\"lines\">\n");
+          out.write("<g id=\"lines\"" + group_mode_open);
           ArrayList < String > lineTypes = new ArrayList<>( lines.keySet() );
           Collections.sort( lineTypes, String.CASE_INSENSITIVE_ORDER );
           Collections.reverse( lineTypes );
           for ( String lineTypeName : lineTypes ) {
-            if ( TDSetting.mSvgGroups ) out.write("<g id=\"line_" + lineTypeName + "\">\n");
+            if ( TDSetting.mSvgGroups ) out.write("<g id=\"line_" + lineTypeName + "\"" + group_mode_open );
             ArrayList< DrawingLinePath > lineList = lines.get(lineTypeName);
             for (DrawingLinePath line : lineList) {
               StringWriter sw54 = new StringWriter();
@@ -326,12 +326,12 @@ public class DrawingSvg extends DrawingSvgBase
         }
 
         if ( ! areas.isEmpty() ) {
-          out.write("<g id=\"areas\">\n");
+          out.write("<g id=\"areas\"" + group_mode_open);
           ArrayList < String > areaTypes = new ArrayList<>( areas.keySet() );
           Collections.sort( areaTypes, String.CASE_INSENSITIVE_ORDER );
           Collections.reverse( areaTypes );
           for ( String areaTypeName : areaTypes ) {
-            if ( TDSetting.mSvgGroups ) out.write("<g id=\"area_" + areaTypeName + "\">\n");
+            if ( TDSetting.mSvgGroups ) out.write("<g id=\"area_" + areaTypeName + "\"" + group_mode_open);
             ArrayList< DrawingAreaPath > areaList = areas.get(areaTypeName);
             for (DrawingAreaPath area : areaList) {
               StringWriter sw55 = new StringWriter();
@@ -346,8 +346,8 @@ public class DrawingSvg extends DrawingSvgBase
         }
 
         if ( ! xsectionsPoints.isEmpty() ) {
-          out.write("<g id=\"xsections_" + scrapId + "\">\n");
-          out.write("<g id=\"xsection_links\">\n");
+          out.write("<g id=\"xsections_" + scrapId + "\"" + group_mode_open);
+          out.write("<g id=\"xsection_links\"" + group_mode_open);
           for (DrawingPointPath point : xsectionsPoints) {
             float xx = point.cx;
             float yy = point.cy;
@@ -390,12 +390,12 @@ public class DrawingSvg extends DrawingSvgBase
 
         if ( ! xsections.isEmpty() ) {
           // TDLog.v( "SVG xsections " + xsections.size() );
-          out.write("<g id=\"xsection_scraps_" + scrapId + "\">\n");
+          out.write("<g id=\"xsection_scraps_" + scrapId + "\"" + group_mode_open);
           for (XSection xsection : xsections) {
             // TDLog.v( "SVG xsection " + xsection.mFilename + " " + xsection.mX + " " + xsection.mY );
             StringWriter sw7 = new StringWriter();
             PrintWriter pw7 = new PrintWriter(sw7);
-            pw7.format("<g id=\"xsection_%s\">\n", xsection.mFilename);
+            pw7.format("<g id=\"xsection_%s\"" + group_mode_open, xsection.mFilename);
             // tdrToSvg( pw7, xsection.mFilename, xsection.mX, xsection.mY, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
             tdrToSvg(pw7, xsection.mFilename, xsection.mX, xsection.mY, xoff, yoff);
             pw7.format(end_grp);
@@ -416,7 +416,7 @@ public class DrawingSvg extends DrawingSvgBase
       }
 
       // TDLog.v( "SVG stations " + plot.getStations().size() );
-      out.write("<g id=\"stations\">\n");
+      out.write("<g id=\"stations\"" + group_mode_open);
       if ( TDSetting.mAutoStations ) {
         for ( DrawingStationName name : plot.getStations() ) { // auto-stations
           StringWriter sw61 = new StringWriter();
@@ -452,7 +452,7 @@ public class DrawingSvg extends DrawingSvgBase
     if ( splays.size() == 0 ) return;
     try {
       out.write("<g id=\"" + group + "\"\n" );
-      out.write("  style=\"fill:none;stroke-opacity:0.4;stroke:" + color + "\" >\n");
+      out.write("  style=\"fill:none;stroke-opacity:0.4;stroke:" + color + "\"" + group_mode_open);
       int count = 1;
       for ( DrawingPath sh : splays ) {
         StringWriter sw41x = new StringWriter();
