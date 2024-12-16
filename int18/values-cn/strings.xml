@@ -716,7 +716,7 @@
     <string name="screenshot_failed">截屏失败</string>
     <string name="start_index">开始-测射 指数</string>
     <!-- TODO string name="trilateration_failed">Failed trilateration</string -->
-    <!-- TODO string name="trilateration_error">Trilateration error %1$.2f</string -->
+    <!-- TODO string name="trilateration_succeeded">Trilateration succeeded: remaining error %1$.2f</string -->
 
 
     <string name="survey_info">测量信息</string>

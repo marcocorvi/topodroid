@@ -720,7 +720,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="screenshot_failed">Sikertelen képernyőkép készítés</string>
     <string name="start_index">Kezdő mérés (Start-shot) index</string>
     <string name="trilateration_failed">Sikertelen ívmetszés</string>
-    <string name="trilateration_error">Ívmetszési hiba %1$.2f</string>
+    <!-- UNUSED string name="trilateration_error">Ívmetszési hiba %1$.2f</string -->
+    <string name="trilateration_succeeded">Ívmetszési sikeresség: %1$.2f</string>
 
 	
     <string name="survey_info">Felmérés információ</string>

@@ -2215,7 +2215,7 @@ public class TDNum
       }
     }
     if ( success ) {
-      TDToast.make( TDInstance.formatString( R.string.trilateration_error, (float)err ) );
+      TDToast.make( TDInstance.formatString( R.string.trilateration_succeeded, (float)err ) );
     }
   }
 
