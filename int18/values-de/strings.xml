@@ -662,8 +662,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="screenshot_saved">Screenshot gespeichert: %1$s</string>
   <string name="screenshot_failed">Screenshot fehlgeschlagen</string>
   <string name="start_index">Index der ersten Vermessung</string>
-    <!-- TODO string name="trilateration_failed">Failed trilateration</string -->
-    <!-- TODO string name="trilateration_error">Trilateration error %1$.2f</string -->
+  <!-- TODO string name="trilateration_failed">Failed trilateration</string -->
+  <!-- TODO string name="trilateration_succeeded">Trilateration succeeded: remaining error %1$.2f</string -->
 
   <string name="survey_info">Vermessungsinfo</string>
   <string name="stat_dates">Von %1$s nach %2$s</string>

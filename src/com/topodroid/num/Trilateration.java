@@ -128,6 +128,7 @@ class Trilateration
   //   return error;
   // }
 
+  // TODO why not an outer for on legs?
   private double computeError1( int n_pts )
   {
     double error = 0;
