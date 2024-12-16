@@ -68,10 +68,12 @@ no campo abaixo e aperte o botão.
   <string name="memoryA3">Memória DistoX A3</string>
   <string name="memoryX310">Memória DistoX X310</string>
   <string name="memoryXBLE">Memória DistoX-BLE</string>
+  <string name="memoryCavway">Memória Cavway</string>
   <!-- UNUSED string name="memory_data">Dados DistoX</string -->
   <string name="thp_user">usuário</string>
   <string name="thp_label">rótulo</string>
   <string name="thp_section">corte</string>
+  <string name="thp_picture">foto</string>
   <string name="thp_station">base</string>
   <!-- UNUSED string name="thp_danger">perigo</string -->
   <string name="thl_user">usuário</string>
@@ -145,11 +147,11 @@ no campo abaixo e aperte o botão.
   <string name="calib_precision">Precisão</string>
   <string name="calib_iter">Iterações: %1$d</string>
   <string name="calib_dip">Inclinação mag.: %1$.1f °</string>
-  <string name="calib_roll">Mergulho mag. (rotação): %1$.2f &#xb0;</string>
+  <string name="calib_roll">Mergulho mag. (rotação): %1$.2f °</string>
   <string name="calib_reset">Reiniciar a calibração da DistoX?</string>
   <string name="calib_min_error">Erro mínimo</string>
   <string name="magn_dip">Inclinação mag. …</string>
-  <string name="auto_calib">Auto Calib</string>
+  <string name="auto_calib" copyable="pt">Auto Calib</string>
   <string name="autocalib_not_supported">Cálculo obrigatório de calibração</string>
   <string name="algorithm">Algoritmo:</string>
   <string name="auto">auto</string>
@@ -213,6 +215,7 @@ no campo abaixo e aperte o botão.
   <string name="few_calibs">Quantidade de calibrações insuficiente</string>
   <string name="getting_info">Obtendo info DistoX …</string>
   <string name="gettingble_info">Obtendo info DistoX-BLE …</string>
+  <string name="gettingCavway_info">Obtendo info da Cavway …</string>
   <string name="calib_import_title">Importar calibração</string>
   <string name="import_title">Importar topo</string>
   <!-- UNUSED string name="export_data_title">Exportar dados</string -->
@@ -448,7 +451,7 @@ no campo abaixo e aperte o botão.
   <string name="menu_options">CONFIGURAÇÕES</string>
   <string name="menu_overview">VISÃO GERAL</string>
   <string name="menu_packets">LOG PACOTES</string>
-  <string name="menu_calib_auto">AUTO-CALIB</string>
+  <string name="menu_calib_auto" copyable="pt">AUTO-CALIB</string>
   <!-- UNUSED string name="menu_pair">PAREAR</string -->
   <string name="menu_palette">PALETA</string>
   <string name="menu_photo">FOTO</string>
@@ -495,6 +498,8 @@ no campo abaixo e aperte o botão.
   <string name="popup_delete">Apagar</string>
   <string name="popup_decimate">Simplificar</string>
   <string name="popup_join">Unir</string>
+  <string name="popup_store">Arquivar</string>
+  <string name="popup_restore">Resgatar</string>
   <string name="popup_erase_all">Tudo</string>
   <string name="popup_erase_point">Pontos</string>
   <string name="popup_erase_line">Linhas</string>
@@ -672,6 +677,7 @@ no campo abaixo e aperte o botão.
   <string name="screenshot_failed">Falha ao capturar tela</string>
   <string name="start_index">Índice da visada inicial</string>
   <string name="trilateration_failed">Trilateração falhou</string>
+  <!-- UNUSED string name="trilateration_error">Trilateration error %1$.2f</string -->
   <string name="trilateration_succeeded">Trilateração finalizada com sucesso: erro residual %1$.2f</string>
   <string name="survey_info">Estatísticas da topo</string>
   <string name="stat_dates">De %1$s até %2$s</string>
@@ -889,7 +895,6 @@ no campo abaixo e aperte o botão.
   <string name="hint_bt_code">Código do dispositivo</string>
   <string name="bt_alias_missing">ID BT faltando</string>
   <string name="bt_code_missing">Código do dispositivo faltando</string>
-
   <string name="hint_cellsize">tamanho célula</string>
   <string name="hint_cwd">pasta de trabalho</string>
   <string name="hint_distance">distância</string>
@@ -1100,6 +1105,7 @@ no campo abaixo e aperte o botão.
   <string name="export_prefix">Prefixo da caverna nos nomes das bases</string>
   <string name="export_prefix_hint">prefixo</string>
   <!-- UNUSED string name="export_suffix_hint">sufixo</string -->
+  <string name="export_series_hint">séries</string>
   <string name="export_roundtrip">Circuito</string>
   <string name="export_share">Compartilhar</string>
   <string name="export_overwrite">Sobreescrever</string>
@@ -1112,9 +1118,10 @@ no campo abaixo e aperte o botão.
   <string name="export_surface">Superfície</string>
   <string name="export_swap_lr">Inverter E/D</string>
   <string name="export_trox">Formato Trox</string>
-  <string name="export_walls">Walls</string>
+  <string name="export_walls">Paredes</string>
   <string name="export_xvi">Images XVI</string>
   <string name="export_with_xsections">Incluir cortes</string>
+  <string name="export_grouped">Agrupar elementos em camadas por tipos</string>
   <string name="export_with_reference">Incluir referência XY</string>
   <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
   <!-- UNUSED string name="export_station_stroke">Station stroke</string -->
@@ -1253,6 +1260,7 @@ no campo abaixo e aperte o botão.
   <string name="title_survey_new">Nova topo</string>
   <string name="title_survey_export">Exportar topo</string>
   <string name="title_survey_rename">Renomear topo</string>
+  <string name="title_team_dialog">Nomes integrantes equipe</string>
   <string name="title_plot_rename">Renomear croqui</string>
   <string name="title_plot_zoomfit">Zoom / Orientação</string>
   <string name="title_calib_export">Exportar calibração</string>
@@ -2060,7 +2068,7 @@ no campo abaixo e aperte o botão.
   <string name="view_south">Sul</string>
   <!-- UNUSED string name="view_point">Ponto de vista</string -->
   <string name="view_zoom">Zoom 1</string>
-  <string name="walls_title">WALLS</string>
+  <string name="walls_title">PAREDES</string>
   <string name="walls_convexhull">Casco Convexo</string>
   <string name="walls_hull">Casco</string>
   <string name="walls_bubble">Bolha</string>
@@ -2097,6 +2105,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="warning_empty_cwd">Warning: empty base path</string -->
   <!-- UNUSED string name="warning_no_parent">Alerta: impossível acessar diretório pai</string -->
   <string name="warning_nogrant_camera">Permissão câmera não consedida</string>
+  <string name="warning_no_csv_type">Tipo de CSV não definido</string>
   <string name="no_permissions">O app não pode funcionar sem as permissões necessárias</string>
   <string name="done_convexhull">Paredes dos planos convexos prontas</string>
   <string name="fail_convexhull">Falha nas paredes dos planos convexos</string>
