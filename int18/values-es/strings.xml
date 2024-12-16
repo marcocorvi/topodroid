@@ -328,6 +328,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="error_clino_required">Introducir Clino</string>
     <string name="error_comment_required">Introducir comentario</string>
     <string name="error_begin_required">Introducir dirección de inicio</string>
+    <!-- TODO string name="error_number_required">Data number required</string -->
     <string name="error_declination_number">La declinación debe ser un número</string>
     <string name="error_end_required">Introducir dirección final</string>
     <string name="error_fixes_nocs">Fijar puntos sin CS %1$s:\n%2$s</string>

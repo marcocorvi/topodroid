@@ -321,6 +321,7 @@
     <string name="error_clino_required">Требуется угол</string>
     <string name="error_comment_required">Требуется комментарий</string>
     <string name="error_begin_required">Требуется начальный адрес</string>
+    <!-- TODO string name="error_number_required">Data number required</string -->
     <string name="error_declination_number">Наклон должен быть задан числом</string>
     <string name="error_end_required">Требуется конечный адрес</string>
     <string name="error_fixes_nocs">Геопривязанные точки без указания CS %1$s:\n%2$s</string>

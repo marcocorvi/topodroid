@@ -321,6 +321,7 @@
     <string name="error_clino_required">输入倾角</string>
     <string name="error_comment_required">需要写入注释</string>
     <string name="error_begin_required">输入起点</string>
+    <!-- TODO string name="error_number_required">Data number required</string -->
     <string name="error_declination_number">磁偏角必须是数字</string>
     <string name="error_end_required">输入终点</string>
     <string name="error_fixes_nocs">固定点无 CS %1$s:\n%2$s</string>

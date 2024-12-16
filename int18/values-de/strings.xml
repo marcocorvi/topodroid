@@ -292,6 +292,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="error_clino_required">Neigung erforderlich</string>
   <string name="error_comment_required">Kommentar erforderlich</string>
   <string name="error_begin_required">Startaddresse erforderlich</string>
+    <!-- TODO string name="error_number_required">Data number required</string -->
   <string name="error_declination_number">Deklination muss eine Zahl sein</string>
   <string name="error_end_required">Letzte Adresse erforderlich</string>
   <string name="error_fixes_nocs">Fixpunkte ohne Koordinatensystem %1$s:\n%2$s</string>

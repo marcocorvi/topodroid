@@ -41,7 +41,7 @@ import com.topodroid.dev.ble.BleQueue;
 import com.topodroid.dev.ble.BleUtils;
 import com.topodroid.dev.distox.DistoX;
 import com.topodroid.dev.distox.IMemoryDialog;
-import com.topodroid.packetX.MemoryOctet;
+import com.topodroid.packetX.CavwayData;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
@@ -77,6 +77,8 @@ public class CavwayComm extends TopoDroidComm
 
   final static int DATA_PRIM = 1;   // same as Bric DATA_PRIM
   final static int DATA_QUIT = -1;  // same as Bric 
+
+  private static final int BYTE_PER_DATA  = CavwayData.SIZE;
 
   private ConcurrentLinkedQueue< BleOperation > mOps;
   private Context mContext;
@@ -452,9 +454,14 @@ public class CavwayComm extends TopoDroidComm
       if ( LOG ) TDLog.v( TAG + "changed read chrt" );
       // TODO set buffer type according to the read value[]
       mQueue.put( DATA_PRIM, chrt.getValue() );
+      TDLog.v( TAG + "changed read chrt " + byteArray2String( chrt.getValue() ) );
+      CavwayData cw = new CavwayData( 0 );
+      System.arraycopy( chrt.getValue(), 0, cw.data, 0, 64 );
+      TDLog.v( TAG + cw.toString() );
       resetTimer();
     } else if ( uuid_str.equals( CavwayConst.CAVWAY_CHRT_WRITE_UUID_STR ) ) {
-      if ( LOG ) TDLog.v( TAG + "changed write chrt" );
+      if ( LOG ) TDLog.v( TAG + "changed write chrt");
+      TDLog.v( TAG + "changed write chrt " + byteArray2String( chrt.getValue() ) );
     } else {
       TDLog.t( TAG + "changed unknown chrt" );
     }
@@ -877,9 +884,9 @@ public class CavwayComm extends TopoDroidComm
    */
   public byte[] readMemory( int addr )
   {
-    // TDLog.v( String.format( TAG + "read memory 0x%08x", addr) );
+    TDLog.v( String.format( TAG + "read memory %d ", addr) );
     byte[] cmd = new byte[3];
-    cmd[0] = MemoryOctet.BYTE_PACKET_REPLY; // 0x38;
+    cmd[0] = CavwayData.BYTE_PACKET_REPLY; // 0x38;
     cmd[1] = (byte)(addr & 0xFF);
     cmd[2] = (byte)((addr >> 8) & 0xFF);
     mPacketType = CavwayProtocol.PACKET_NONE;
@@ -897,6 +904,8 @@ public class CavwayComm extends TopoDroidComm
     //   }
     // }
     if ( (mPacketType & CavwayProtocol.PACKET_REPLY) == CavwayProtocol.PACKET_REPLY ) {
+      int length = ((CavwayProtocol) mProtocol).mRepliedData.length;
+      TDLog.v( TAG + " READ meomry expected got length " + length );
       return ( (CavwayProtocol) mProtocol).mRepliedData;
     } else {
       TDLog.t( TAG + "read memory: no reply");
@@ -911,7 +920,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public byte[] readMemory( int addr, int len )
   {
-    // TDLog.v( TAG + "read memory " + addr + " " + len  );
+    TDLog.v( TAG + "read memory " + addr + " " + len  );
     if ( len < 0 || len > 124 ) return null;
     byte[] cmd = new byte[4];
     cmd[0] = 0x3d;
@@ -934,7 +943,10 @@ public class CavwayComm extends TopoDroidComm
     // }
     if ( (mPacketType & CavwayProtocol.PACKET_REPLY) == CavwayProtocol.PACKET_REPLY ) {
       int length = ((CavwayProtocol) mProtocol).mRepliedData.length;
-      if ( length != len ) return null;
+      if ( length != len ) {
+        TDLog.v( TAG + " READ meomry expected length " + len + " got " + length );
+        return null;
+      }
       byte[] replydata = new byte[len];
       System.arraycopy( ((CavwayProtocol) mProtocol).mRepliedData, 0, replydata, 0, len );
       return replydata;
@@ -952,7 +964,7 @@ public class CavwayComm extends TopoDroidComm
     // TDLog.v( TAG + "write memory " + addr + " bytes " + data.length );
     if ( data.length < 4 ) return false;
     byte[] cmd = new byte[7];
-    cmd[0] = MemoryOctet.BYTE_PACKET_REQST; // 0x39;
+    cmd[0] = CavwayData.BYTE_PACKET_REQST; // 0x39;
     cmd[1] = (byte)(addr & 0xFF);
     cmd[2] = (byte)((addr >> 8) & 0xFF);
     cmd[3] = data[0];
@@ -1021,28 +1033,28 @@ public class CavwayComm extends TopoDroidComm
 
   /** read the Cavway memory
    * @param address   device address
-   * @param start     from index
-   * @param end       to index
+   * @param number    number of data to read
    * @param data      array of octets to be filled by the memory-read
    * @return number of octets that have been read (-1 on error)
    */
-  public int readXBLEMemory( String address, int start, int end, ArrayList< MemoryOctet > data, IMemoryDialog dialog )
+  public int readCavwayMemory( String address, int number, ArrayList< CavwayData > data, CavwayMemoryDialog dialog )
   { 
-    TDLog.t( TAG + "read Cavway memory ...");
+    TDLog.t( TAG + "read Cavway memory ... " + number);
     if ( ! tryConnectDevice( address, null, 0 ) ) return -1;
     Handler handler = new Handler( Looper.getMainLooper() );
     int cnt = 0; // number of memory location that have been read
-    for ( int k = start; k < end; ++k ) {
-      MemoryOctet result = new MemoryOctet( k );
-      int addr = index2addrXBLE( k );
+    for ( int k = 0; k < number; ++k ) {
+      CavwayData result = new CavwayData( k );
+      int addr = k; // index2addrCavway( k );
       // Cavway BLE can read memory in one shot
-      byte[] res_buf = readMemory( addr, BYTE_PER_OCTET );
-      if ( res_buf == null || res_buf.length != BYTE_PER_OCTET ) {
+      // byte[] res_buf = readMemory( addr, BYTE_PER_DATA );
+      byte[] res_buf = readMemory( addr );
+      if ( res_buf == null || res_buf.length != BYTE_PER_DATA ) {
         if ( LOG ) TDLog.v( TAG + "fail read memory - index " + k );
         break;
       } else {
         if ( LOG ) TDLog.v( TAG + "read memory - index " + k );
-        System.arraycopy( res_buf, 0, result.data, 0, BYTE_PER_OCTET );
+        System.arraycopy( res_buf, 0, result.data, 0, BYTE_PER_DATA );
         data.add( result );
         ++ cnt;
         if ( dialog != null ) {
@@ -1057,7 +1069,7 @@ public class CavwayComm extends TopoDroidComm
     }
     disconnectDevice();
     if ( dialog != null ) {
-      int k1 = start;
+      int k1 = number;
       handler.post( new Runnable() {
         public void run() {
           dialog.setIndex( k1 );
@@ -1285,7 +1297,7 @@ public class CavwayComm extends TopoDroidComm
         int cnt = 0;
         String msg;
         byte[] buf = new byte[259];
-        buf[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte)0x3b;
+        buf[0] = CavwayData.BYTE_PACKET_FW_WRITE; // (byte)0x3b;
         buf[1] = (byte)0;
         buf[2] = (byte)0;
 
@@ -1316,7 +1328,7 @@ public class CavwayComm extends TopoDroidComm
               int repeat = 3; // THIS IS A repeat TEST
               for ( ; repeat > 0; -- repeat ) { // repeat-for: exit with repeat == 0 (error) or -1 (success)
                 byte[] separated_buf1 = new byte[131]; // 131 = 3 (cmd, addr, index) + 128 (payload) // 20230118 corrected "separated"
-                separated_buf1[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte) 0x3b;
+                separated_buf1[0] = CavwayData.BYTE_PACKET_FW_WRITE; // (byte) 0x3b;
                 separated_buf1[1] = (byte) (flashaddr & 0xff);
                 separated_buf1[2] = 0; //packet index
                 System.arraycopy(buf, 0, separated_buf1, 3, 128);
@@ -1327,7 +1339,7 @@ public class CavwayComm extends TopoDroidComm
                 }
 
                 byte[] separated_buf2 = new byte[133]; // 20230118 corrected "separated"
-                separated_buf2[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte) 0x3b;
+                separated_buf2[0] = CavwayData.BYTE_PACKET_FW_WRITE; // (byte) 0x3b;
                 separated_buf2[1] = (byte) (flashaddr & 0xff);
                 separated_buf2[2] = 1;
                 System.arraycopy(buf, 128, separated_buf2, 3, 128);
@@ -1434,7 +1446,7 @@ public class CavwayComm extends TopoDroidComm
     try {
       for (int repeat = 3; repeat > 0; --repeat ) {
         byte[] req_buf = new byte[3]; // request buffer
-        req_buf[0] = MemoryOctet.BYTE_PACKET_FW_READ; // (byte)0x3a;
+        req_buf[0] = CavwayData.BYTE_PACKET_FW_READ; // (byte)0x3a;
         req_buf[1] = (byte)( addr & 0xff );
         req_buf[2] = 0; // not necessary
         enlistWrite(CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, req_buf, true);
@@ -1609,35 +1621,6 @@ public class CavwayComm extends TopoDroidComm
     }
   }
 
-  // these are the same as for X310 because the memory layout is the same
-  private static final int DATA_PER_BLOCK = 56;
-  private static final int BYTE_PER_DATA  = 18;
-  private static final int BYTE_PER_OCTET = MemoryOctet.SIZE;
-
-  private static int index2addrXBLE( int index )
-  {
-    if ( index < 0 ) index = 0;
-    if ( index > 1792 ) index = 1792;
-    int addr = 0;
-    while ( index >= DATA_PER_BLOCK ) {
-      index -= DATA_PER_BLOCK;
-      addr += 0x400;
-    }
-    addr += BYTE_PER_DATA * index;
-    return addr;
-  }
-
-  private static int addr2indexXBLE( int addr )
-  {
-    int index = 0;
-    addr = addr - ( addr % 8 );
-    while ( addr >= 0x400 ) {
-      addr -= 0x400;
-      index += DATA_PER_BLOCK;
-    }
-    index += (int)(addr/BYTE_PER_DATA);
-    return index;
-  }
 
   /** request a new MTU
    * @param mtu   new value
@@ -1657,6 +1640,13 @@ public class CavwayComm extends TopoDroidComm
       return -1;
     }
     return bt_dev.getBondState();
+  }
+
+  private String byteArray2String( byte[] b )
+  {
+    StringBuilder sb = new StringBuilder();
+    for (int k=0; k < b.length; ++k ) sb.append( String.format("%02x ", b[k] ) );
+    return sb.toString();
   }
 }
 

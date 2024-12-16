@@ -189,6 +189,10 @@ class Trilateration
 
   // 20241214 the param delta is not used, a new delta is computed from the length of the legs
   // 
+  // @param eps      epsilon error for one point
+  // @param delta    not used
+  // @param iter_max maximum number of iterations
+  //
   // Error Fct = Sum | d(pi,pj) - leg.d |
   private double minimize1( double eps, double delta, int iter_max )
   {

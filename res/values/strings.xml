@@ -338,6 +338,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="error_clino_required">Clino required</string>
     <string name="error_comment_required">Comment required</string>
     <string name="error_begin_required">Start address required</string>
+    <string name="error_number_required">Data number required</string>
     <string name="error_declination_number">Declination must be a number</string>
     <string name="error_end_required">Final address required</string>
     <string name="error_fixes_nocs">Fix points without CS %1$s:\n%2$s</string>

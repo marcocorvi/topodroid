@@ -11,6 +11,7 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.dev.cavway.CavwayMemoryDialog;
 import com.topodroid.dev.cavway.CavwayInfoDialog;
 import com.topodroid.dev.cavway.CavwayInfoReadTask;
 import com.topodroid.dev.distox_ble.DistoXBLEInfoDialog; // SIWEI
@@ -40,6 +41,7 @@ import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.packetX.PacketDialog;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.DeviceUtil;
+import com.topodroid.dev.cavway.MemoryCavwayTask;
 import com.topodroid.dev.distox.MemoryReadTask;
 import com.topodroid.dev.distox.IMemoryDialog;
 import com.topodroid.dev.distox2.DeviceX310MemoryDialog;
@@ -816,6 +818,8 @@ public class DeviceActivity extends Activity
           (new BricMemoryDialog( this, this, getResources() ) ).show();
         } else if ( currDeviceA().mType == Device.DISTO_XBLE ) { // SIWEI
           new DistoXBLEMemoryDialog(this,this).show();
+        } else if ( currDeviceA().mType == Device.DISTO_CAVWAYX1 ) {
+          new CavwayMemoryDialog(this,this).show();
         } else if ( currDeviceA().mType == Device.DISTO_SAP5 || currDeviceA().mType == Device.DISTO_SAP6 ) {
           TDToast.makeBad( R.string.unsupported_device_type );
         } else {
@@ -1015,6 +1019,16 @@ public class DeviceActivity extends Activity
   public void readXBLEMemory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
   {
     ( new MemoryReadTask( mApp, dialog, Device.DISTO_XBLE, currDeviceA().getAddress(), head_tail, dumpfile ) ).execute();
+  }
+
+  /** read Cavway X1 memory
+   * @param dialog     memory display dialog
+   * @param number     number of data to read
+   * @param dumpfile   filename to dump
+   */
+  public void readCavwayX1Memory( CavwayMemoryDialog dialog, int number, String dumpfile )
+  {
+    ( new MemoryCavwayTask( mApp, dialog, Device.DISTO_CAVWAYX1, currDeviceA().getAddress(), number, dumpfile ) ).execute();
   }
  
   /** read A3 memory

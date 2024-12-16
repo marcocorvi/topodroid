@@ -326,6 +326,7 @@
     <string name="error_clino_required">Inclinazione mancante</string>
     <string name="error_comment_required">Commento mancante</string>
     <string name="error_begin_required">Indirizzo iniziale mancante</string>
+    <!-- TODO string name="error_number_required">Data number required</string -->
     <string name="error_declination_number">La declinazione deve esser un numero</string>
     <string name="error_end_required">Indirizzo finale mancante</string>
     <string name="error_fixes_nocs">Punti fissi senza Sistema Coordinate %1$s:\n%2$s</string>
