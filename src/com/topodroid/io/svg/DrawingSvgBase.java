@@ -59,6 +59,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Set;
 
 /* Inkscape units
  * - The root element can have width and height with units, which with the proper view-box
@@ -98,9 +99,9 @@ public class DrawingSvgBase
 
   final ArrayList< DrawingStationUser > stations = new ArrayList<>();
   final ArrayList< DrawingPointPath > xsectionsPoints = new ArrayList<>();
-  final HashMap< String, ArrayList< DrawingPointPath > > points = new HashMap<>();
-  final HashMap< String, ArrayList< DrawingLinePath > > lines  = new HashMap<>();
-  final HashMap< String, ArrayList< DrawingAreaPath > > areas  = new HashMap<>();
+  final HashMap< String, ArrayList< DrawingPath > > points = new HashMap<>();
+  final HashMap< String, ArrayList< DrawingPath > > lines  = new HashMap<>();
+  final HashMap< String, ArrayList< DrawingPath > > areas  = new HashMap<>();
   final ArrayList< XSection > xsections = new ArrayList<>();
   
   protected class XSection
@@ -506,7 +507,12 @@ public class DrawingSvgBase
     }
   }
 
-  protected void writeScrapContent( BufferedWriter out, ArrayList< DrawingPath > paths, int scrapId, float xoff, float yoff, boolean includeXSections )
+  /**
+   * Aggregates points, lines and areas in groups by their types.
+   * @param paths paths to be classified
+   * @param writeXSectionsContents whether xsections should be included in the output
+   */
+  protected void separatePathsInGroups(ArrayList< DrawingPath > paths, boolean writeXSectionsContents)
   {
     xsectionsPoints.clear();
     points.clear();
@@ -517,12 +523,12 @@ public class DrawingSvgBase
       switch ( path.mType ) {
         case DrawingPath.DRAWING_PATH_POINT:
           DrawingPointPath point = (DrawingPointPath)path;
-          if ( includeXSections && BrushManager.isPointSection( point.mPointType ) ) {
-            xsectionsPoints.add( point );
+          if ( BrushManager.isPointSection( point.mPointType ) ) {
+            if ( writeXSectionsContents ) xsectionsPoints.add( point );
           } else {
             String pointTypeName = TDSetting.mSvgGroups ? point.getFullThName() : ALL;
             if ( ! points.containsKey( pointTypeName ) ) {
-              points.put( pointTypeName, new ArrayList< DrawingPointPath >() );
+              points.put( pointTypeName, new ArrayList< DrawingPath >() );
             }
             points.get( pointTypeName ).add( point );
           }
@@ -531,7 +537,7 @@ public class DrawingSvgBase
           DrawingLinePath line = (DrawingLinePath)path;
           String lineTypeName = TDSetting.mSvgGroups ? line.getFullThName() : ALL;
           if ( ! lines.containsKey( lineTypeName ) ) {
-            lines.put( lineTypeName, new ArrayList< DrawingLinePath >() );
+            lines.put( lineTypeName, new ArrayList< DrawingPath >() );
           }
           lines.get( lineTypeName ).add( line );
           break;
@@ -539,24 +545,50 @@ public class DrawingSvgBase
           DrawingAreaPath area = (DrawingAreaPath)path;
           String areaTypeName = TDSetting.mSvgGroups ? area.getFullThName() : ALL;
           if ( ! areas.containsKey( areaTypeName ) ) {
-            areas.put( areaTypeName, new ArrayList< DrawingAreaPath >() );
+            areas.put( areaTypeName, new ArrayList< DrawingPath >() );
           }
           areas.get( areaTypeName ).add( area );
           break;
       }
     }
+  }
+
+  /**
+   * Orders the types of symbols in reverse alphabetical order.
+   * @param types a set with the types that should be ordered
+   * @return ArrayList<String> with the ordered types
+   */
+  protected ArrayList< String > orderSymbolTypes(Set< String > types)
+  {
+    ArrayList< String > orderedTypes = new ArrayList<>( types );
+    Collections.sort( orderedTypes, String.CASE_INSENSITIVE_ORDER );
+    Collections.reverse( orderedTypes );
+    return orderedTypes;
+  }
+
+  /**
+   * Writes the content of a scrap to the BufferedWriter provided.
+   * @param out BufferedWriter to write the content to
+   * @param paths paths to be written
+   * @param scrapId scrap id
+   * @param xoff X offset
+   * @param yoff Y offset
+   * @param writeXSectionsContents whether xsections should be included in the output
+   */
+  protected void writeScrapContent( BufferedWriter out, ArrayList< DrawingPath > paths, int scrapId, float xoff, float yoff, boolean writeXSectionsContents )
+  {
+    separatePathsInGroups(paths, writeXSectionsContents);
 
     try {
       // TDLog.v( "SVG paths " + paths.size() + " points" );
       if ( ! points.isEmpty() ) {
         out.write("<g id=\"points\"" + group_mode_open);
-        ArrayList < String > pointTypes = new ArrayList<>( points.keySet() );
-        Collections.sort( pointTypes, String.CASE_INSENSITIVE_ORDER );
-        Collections.reverse( pointTypes );
+        ArrayList < String > pointTypes = orderSymbolTypes( points.keySet() );
         for ( String pointTypeName : pointTypes ) {
-          ArrayList< DrawingPointPath > pointList = points.get(pointTypeName);
+          ArrayList< DrawingPath > pointList = points.get(pointTypeName);
           if ( TDSetting.mSvgGroups ) out.write("<g id=\"point_" + pointTypeName + "\"" + group_mode_open);
-          for (DrawingPointPath point : pointList) {
+          for (DrawingPath item : pointList) {
+            DrawingPointPath point = (DrawingPointPath)item;
             StringWriter sw53 = new StringWriter();
             PrintWriter pw53  = new PrintWriter(sw53);
             toSvg( pw53, point, pathToColor(point), xoff, yoff );
@@ -570,13 +602,12 @@ public class DrawingSvgBase
 
       if ( ! lines.isEmpty() ) {
         out.write("<g id=\"lines\"" + group_mode_open);
-        ArrayList < String > lineTypes = new ArrayList<>( lines.keySet() );
-        Collections.sort( lineTypes, String.CASE_INSENSITIVE_ORDER );
-        Collections.reverse( lineTypes );
+        ArrayList < String > lineTypes = orderSymbolTypes( lines.keySet() );
         for ( String lineTypeName : lineTypes ) {
           if ( TDSetting.mSvgGroups ) out.write("<g id=\"line_" + lineTypeName + "\"" + group_mode_open );
-          ArrayList< DrawingLinePath > lineList = lines.get(lineTypeName);
-          for (DrawingLinePath line : lineList) {
+          ArrayList< DrawingPath > lineList = lines.get(lineTypeName);
+          for (DrawingPath item : lineList) {
+            DrawingLinePath line = (DrawingLinePath)item;
             StringWriter sw54 = new StringWriter();
             PrintWriter pw54  = new PrintWriter(sw54);
             toSvg( pw54, line, pathToColor(line), xoff, yoff );
@@ -590,13 +621,12 @@ public class DrawingSvgBase
 
       if ( ! areas.isEmpty() ) {
         out.write("<g id=\"areas\"" + group_mode_open);
-        ArrayList < String > areaTypes = new ArrayList<>( areas.keySet() );
-        Collections.sort( areaTypes, String.CASE_INSENSITIVE_ORDER );
-        Collections.reverse( areaTypes );
+        ArrayList < String > areaTypes = orderSymbolTypes( areas.keySet() );
         for ( String areaTypeName : areaTypes ) {
           if ( TDSetting.mSvgGroups ) out.write("<g id=\"area_" + areaTypeName + "\"" + group_mode_open);
-          ArrayList< DrawingAreaPath > areaList = areas.get(areaTypeName);
-          for (DrawingAreaPath area : areaList) {
+          ArrayList< DrawingPath > areaList = areas.get(areaTypeName);
+          for (DrawingPath item : areaList) {
+            DrawingAreaPath area = (DrawingAreaPath)item;
             StringWriter sw55 = new StringWriter();
             PrintWriter pw55  = new PrintWriter(sw55);
             toSvg( pw55, area, pathToColor(area), xoff, yoff );
