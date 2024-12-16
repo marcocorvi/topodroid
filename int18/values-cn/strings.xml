@@ -1190,6 +1190,7 @@
     <string name="export_walls">洞壁</string>
     <string name="export_xvi">Xvi 图像</string>
     <string name="export_with_xsections">包含 X-断面</string>
+    <!-- TODO string name="export_grouped">Group elements in layers by type</string -->
     <string name="export_with_reference">包含 XY 参考</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->

@@ -1197,6 +1197,7 @@
     <string name="export_walls">Pareti</string>
     <string name="export_xvi">Immagini Xvi</string>
     <string name="export_with_xsections">Includere X-section</string>
+    <!-- TODO string name="export_grouped">Group elements in layers by type</string -->
     <string name="export_with_reference">Includere riferimenti XY</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
