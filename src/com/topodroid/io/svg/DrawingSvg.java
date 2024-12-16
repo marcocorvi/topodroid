@@ -220,7 +220,7 @@ public class DrawingSvg extends DrawingSvgBase
         out.write( "<g id=\"scrap_" + scrapId + "\"" + group_mode_open );
         scrap.addCommandsToList( paths );
 
-        writeScrapContent( out, paths, scrapId, xoff, yoff, TDSetting.mAutoXSections );
+        writeScrapContent( out, paths, String.valueOf(scrapId), xoff, yoff, TDSetting.mAutoXSections );
 
         out.write( end_grp ); // scrap_
         out.flush();

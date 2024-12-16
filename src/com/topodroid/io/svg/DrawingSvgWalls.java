@@ -32,7 +32,6 @@ import com.topodroid.TDX.TDExporter;
 import com.topodroid.TDX.Scrap;
 import com.topodroid.TDX.DBlock;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -142,10 +141,10 @@ public class DrawingSvgWalls extends DrawingSvgBase
   private void writePaths(BufferedWriter out, ArrayList<DrawingPath> paths, float xoff, float yoff, int rt ) throws IOException
   {
     if ( TDSetting.mSvgGroups ) {
-      separatePathsInGroups( paths, false);
-      writeGroupedPaths( out, points, "points", xoff, yoff, rt );
-      writeGroupedPaths( out, lines, "lines", xoff, yoff, rt );
-      writeGroupedPaths( out, areas, "areas", xoff, yoff, rt );
+      SvgGroupedPaths gps = separatePathsInGroups( paths, false);
+      writeGroupedPaths( out, gps.points, "points", xoff, yoff, rt );
+      writeGroupedPaths( out, gps.lines, "lines", xoff, yoff, rt );
+      writeGroupedPaths( out, gps.areas, "areas", xoff, yoff, rt );
     } else {
       for ( DrawingPath path : paths ) {
         writePath( out, path, xoff, yoff, rt );
@@ -292,9 +291,12 @@ public class DrawingSvgWalls extends DrawingSvgBase
           StringWriter sw7 = new StringWriter();
           PrintWriter pw7  = new PrintWriter(sw7);
           pw7.format("<g id=\"%s\">\n", xsection.mFilename );
-          tdrToSvg( pw7, xsection.mFilename, xsection.mX, xsection.mY, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+          out.write( sw7.getBuffer().toString() );
+          out.flush();
+          writeXSectionToSvg( out, xsection.mFilename, xsection.mFilename, xsection.mX, xsection.mY, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
           pw7.format("</g>\n");
           out.write( sw7.getBuffer().toString() );
+          out.flush();
         }
       }
       out.write( "      " + end_grp ); // group_detail_sym
