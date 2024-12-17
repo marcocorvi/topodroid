@@ -141,7 +141,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
   private void writePaths(BufferedWriter out, ArrayList<DrawingPath> paths, float xoff, float yoff, int rt ) throws IOException
   {
     if ( TDSetting.mSvgGroups ) {
-      SvgGroupedPaths gps = separatePathsInGroups( paths, false);
+      SvgGroupedPaths gps = separatePathsInGroups( paths);
       writeGroupedPaths( out, gps.points, "points", xoff, yoff, rt );
       writeGroupedPaths( out, gps.lines, "lines", xoff, yoff, rt );
       writeGroupedPaths( out, gps.areas, "areas", xoff, yoff, rt );
