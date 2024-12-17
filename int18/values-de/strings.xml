@@ -1106,6 +1106,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="export_walls">Wände</string>
   <string name="export_xvi">Xvi Bilder</string>
   <string name="export_with_xsections">Inklusive Profile</string>
+  <!-- TODO string name="export_grouped">Group elements in layers by type</string -->
   <string name="export_with_reference">Inklusive XY-Referenz</string>
   <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
   <!-- UNUSED string name="export_station_stroke">Station stroke</string -->

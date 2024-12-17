@@ -1201,6 +1201,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="export_walls">Стени</string>
     <string name="export_xvi">Изображения Xvi</string>
     <string name="export_with_xsections">Включи сечения</string>
+    <!-- TODO string name="export_grouped">Group elements in layers by type</string -->
     <string name="export_with_reference">Включи препратка по XY</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->

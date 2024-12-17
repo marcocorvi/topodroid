@@ -715,7 +715,7 @@
     <string name="screenshot_failed">Не удалось сделать снимок экрана</string>
     <string name="start_index">Индекс стартового замера</string>
     <string name="trilateration_failed">Ошибка трилатерации</string>
-    <!-- UNUSED string name="trilateration_succeeded">Ошибка трилатерации %1$.2f</string -->
+    <!-- UNUSED string name="trilateration_error">Ошибка трилатерации %1$.2f</string -->
   <!-- TODO string name="trilateration_succeeded">Trilateration succeeded: remaining error %1$.2f</string -->
 
     <string name="survey_info">Статистика съёмки</string>
@@ -1189,6 +1189,7 @@
     <string name="export_walls">Стены</string>
     <string name="export_xvi">Xvi изображение</string>
     <string name="export_with_xsections">Экспортировать поперечные сечения</string>
+    <!-- TODO string name="export_grouped">Group elements in layers by type</string -->
     <string name="export_with_reference">Включить XY точки отсчета</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->

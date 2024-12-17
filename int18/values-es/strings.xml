@@ -1192,6 +1192,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="export_walls">Paredes</string>
     <string name="export_xvi">Imágenes Xvi</string>
     <string name="export_with_xsections">Incluir X-sección</string>
+    <!-- TODO string name="export_grouped">Group elements in layers by type</string -->
     <string name="export_with_reference">Incluir referencias XY</string>
 
     <!-- UNUSED string name="export_linedir_stroke"> Trazo de dirección de línea</string -->

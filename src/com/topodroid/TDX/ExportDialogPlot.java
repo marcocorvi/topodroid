@@ -314,6 +314,7 @@ public class ExportDialogPlot extends MyDialog
           TDSetting.mSvgLineDirection   = ((CheckBox) findViewById( R.id.svg_linedir )).isChecked();
           TDSetting.mSvgSplays     = ((CheckBox) findViewById( R.id.svg_splays )).isChecked();
           TDSetting.mAutoXSections = ((CheckBox) findViewById( R.id.svg_xsections )).isChecked();
+          TDSetting.mSvgGroups = ((CheckBox) findViewById( R.id.svg_groups)).isChecked();
           if ( mParentType == PARENT_DRAWING ) {
             mBothViews = ((CheckBox) findViewById( R.id.svg_bothviews )).isChecked();
           }
@@ -391,6 +392,7 @@ public class ExportDialogPlot extends MyDialog
     ((CheckBox) findViewById( R.id.svg_linedir )).setChecked( TDSetting.mSvgLineDirection );
     ((CheckBox) findViewById( R.id.svg_splays )).setChecked( TDSetting.mSvgSplays );
     ((CheckBox) findViewById( R.id.svg_xsections )).setChecked( TDSetting.mAutoXSections );
+    ((CheckBox) findViewById( R.id.svg_groups)).setChecked( TDSetting.mSvgGroups );
     ((EditText) findViewById( R.id.svg_scale )).setText( String.format( Locale.US, "%d", TDSetting.mTherionScale ) );
     
     ((CheckBox) findViewById( R.id.shp_georeference )).setChecked( TDSetting.mShpGeoref );

@@ -118,6 +118,11 @@
       android:layout_height="wrap_content"
       android:text="@string/export_bothviews"
       />
+    <CheckBox android:id="@+id/svg_groups"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/export_grouped"
+        />
     <LinearLayout android:id="@+id/layout_svg_scale"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"

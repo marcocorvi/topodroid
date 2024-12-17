@@ -1191,6 +1191,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="export_walls">Parois</string>
     <string name="export_xvi">Images Xvi</string>
     <string name="export_with_xsections">Inclure les sections transverses</string>
+    <!-- TODO string name="export_grouped">Group elements in layers by type</string -->
     <string name="export_with_reference">Inclure les références XY</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->

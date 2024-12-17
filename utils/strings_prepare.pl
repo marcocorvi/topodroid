@@ -15,6 +15,9 @@
 use strict;
 use warnings;
 use feature 'signatures';
+use feature 'unicode_strings';
+use utf8;
+use open ':std', ':encoding(UTF-8)';
 
 use constant {
   PREFIX => '    ',
@@ -74,6 +77,8 @@ if (! -e $en_filename) {
   die "\nError:
   EN_ORIGINAL_FILE doesn't exist.\n\n";
 }
+
+# Read the English XML file
 my $en_dom = eval {
     XML::LibXML->load_xml(location => $en_filename, {no_blanks => 1});
 };
@@ -136,4 +141,4 @@ for my $element ($en_dom->documentElement()->childNodes()) {
   }
 }
 
-$en_dom->toFile($new_filename, 2);
+write_updated_xml_file($new_filename, $en_dom);
