@@ -406,10 +406,6 @@ public class Triangulation
 		for (Tri2Leg leg : orlg) {
 			String legName = leg.name();
 			addLeg(leg);
-			if (triangleShots.containsKey(legName)) {
-				TriShot sh = triangleShots.get(legName);
-				updateShot(sh, leg);
-			}
 
 			String toName = leg.to;
 			if (adjustedStations.containsKey(toName)) {
@@ -433,6 +429,11 @@ public class Triangulation
 					axles.put(toName, axle);
 				}
 			}
+
+			if (triangleShots.containsKey(legName)) {
+				TriShot sh = triangleShots.get(legName);
+				updateShot(sh, leg);
+			}
 		}
 
 		return true;
@@ -455,7 +456,7 @@ public class Triangulation
 	}
 
 	private void updateShot( TriShot sh, Tri2Leg leg ) {
-		// Only setting the per shot declination azimuth of the shot to match the azimuth of the leg.
+		// Setting the per shot declination azimuth of the shot to match the azimuth of the leg.
 		double newAzimuth = (leg.from.equals(sh.from)) ? leg.azimuth : TDMath.add180(leg.azimuth);
 		double shotDeclination = newAzimuth - sh.bearing();
 		sh.mAvgLeg.mDecl = (float)shotDeclination; // per shot declination

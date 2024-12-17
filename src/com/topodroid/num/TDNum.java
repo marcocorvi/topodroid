@@ -1058,13 +1058,13 @@ public class TDNum
           ts1.sibling = ts2;
           ts1 = ts2;
           ts2.backshot = 1;
-	  ++ nrSiblings;
+          ++ nrSiblings;
         } else if ( from.equals( ts2.to ) && to.equals( ts2.from ) ) { 
           // TDLog.v( "chain a negative sibling " + from + " " + to );
           ts1.sibling = ts2;
           ts1 = ts2;
           ts2.backshot = -1;
-	  ++ nrSiblings;
+          ++ nrSiblings;
         }
       }
 
@@ -1150,7 +1150,7 @@ public class TDNum
             sf.addAzimuth( ts.b(), a_ext );
             if ( st != null ) { // loop-closure -: need the loop length to compute the fractional closure error
               // do close loop also on duplicate shots
-	      if ( path_fmt != null ) {
+              if ( path_fmt != null ) {
                 ArrayList< NumShot > shots = getShortestPathShots( sf, st );
                 ArrayList< NumShortpath > paths = new ArrayList<>();
                 mStations.initShortestPath( paths, 1000000.0f );
@@ -1163,7 +1163,7 @@ public class TDNum
                 addShotToStations( sh, sf, st );
               }
               // float length = ts.d();
-	      // if ( i_ext == 0 ) length = TDMath.sqrt( length*length - ts.h()*ts.h() );
+              // if ( i_ext == 0 ) length = TDMath.sqrt( length*length - ts.h()*ts.h() );
               addToStats( ts.duplicate, ts.surface, ts.d(), ((i_ext == 0)? Math.abs(ts.v()) : ts.d()), ts.h() );
               ts.used = true;
               repeat = true;
