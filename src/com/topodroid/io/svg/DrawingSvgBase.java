@@ -467,25 +467,31 @@ public class DrawingSvgBase
           case 'T':
             path = DrawingLabelPath.loadDataStream( version, dis, dx, dy );
             if ( path != null) {
-              paths.add( path );
-            } else {
-              toSvg(pw, (DrawingLabelPath) path, pathToColor(path), xoff, yoff);
+              if (TDSetting.mSvgGroups) {
+                paths.add(path);
+              } else {
+                toSvg(pw, (DrawingLabelPath) path, pathToColor(path), xoff, yoff);
+              }
             }
             break;
           case 'L':
             path = DrawingLinePath.loadDataStream( version, dis, dx, dy /*, null */ );
             if ( path != null) {
-              paths.add( path );
-            } else {
-              toSvg(pw, (DrawingLinePath) path, pathToColor(path), xoff, yoff);
+              if (TDSetting.mSvgGroups) {
+                paths.add(path);
+              } else {
+                toSvg(pw, (DrawingLinePath) path, pathToColor(path), xoff, yoff);
+              }
             }
             break;
           case 'A':
             path = DrawingAreaPath.loadDataStream( version, dis, dx, dy /*, null */ );
             if ( path != null) {
-              paths.add( path );
-            } else {
-              toSvg(pw, (DrawingAreaPath) path, pathToColor(path), xoff, yoff);
+              if (TDSetting.mSvgGroups) {
+                paths.add(path);
+              } else {
+                toSvg(pw, (DrawingAreaPath) path, pathToColor(path), xoff, yoff);
+              }
             }
             break;
           case 'J':
@@ -530,10 +536,9 @@ public class DrawingSvgBase
   /**
    * Aggregates points, lines and areas in groups by their types.
    * @param paths paths to be classified
-   * @param writeXSectionsContents whether xsections should be included in the output
    * @returns SvgGroupedPaths with the paths separated in groups
    */
-  protected SvgGroupedPaths separatePathsInGroups(ArrayList< DrawingPath > paths, boolean writeXSectionsContents)
+  protected SvgGroupedPaths separatePathsInGroups(ArrayList< DrawingPath > paths)
   {
     SvgGroupedPaths groupedPaths = new SvgGroupedPaths();
 
@@ -542,7 +547,7 @@ public class DrawingSvgBase
         case DrawingPath.DRAWING_PATH_POINT:
           DrawingPointPath point = (DrawingPointPath)path;
           if ( BrushManager.isPointSection( point.mPointType ) ) {
-            if ( writeXSectionsContents ) groupedPaths.xsectionsPoints.add( point );
+            groupedPaths.xsectionsPoints.add( point );
           } else {
             String pointTypeName = TDSetting.mSvgGroups ? point.getFullThName() : ALL;
             if ( ! groupedPaths.points.containsKey( pointTypeName ) ) {
@@ -596,7 +601,7 @@ public class DrawingSvgBase
    */
   protected void writeScrapContent( BufferedWriter out, ArrayList< DrawingPath > paths, String scrapId, float xoff, float yoff, boolean writeXSectionsContents )
   {
-    SvgGroupedPaths gps = separatePathsInGroups(paths, writeXSectionsContents);
+    SvgGroupedPaths gps = separatePathsInGroups(paths);
     final ArrayList< XSection > xsections = new ArrayList<>();
 
     try {
@@ -667,7 +672,7 @@ public class DrawingSvgBase
             // FIXME GET_OPTION
             String scrapname = TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) );
             XSection xsection = null;
-            if ( scrapname != null ) {
+            if ( writeXSectionsContents && ( scrapname != null ) ) {
               String scrapfile = scrapname + ".tdr";
               xsection = new XSection( scrapfile, xx- DrawingUtil.CENTER_X, yy-DrawingUtil.CENTER_Y );
               xsections.add( xsection );
