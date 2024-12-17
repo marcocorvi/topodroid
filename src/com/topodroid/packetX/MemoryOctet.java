@@ -19,13 +19,12 @@ import java.io.PrintWriter;
 import java.util.Locale;
 import com.topodroid.utils.TDUtil;
 
-public class MemoryOctet
+public class MemoryOctet extends MemoryData
 {
-  private int index; // memory index
+  // memory index
   // A3:   index = address/8
   // X310: index = 56*(address/1024) + (address%1024)/18
 
-  public byte[] data;
   public static final byte BIT_BACKSIGHT2 = 0x20;
   public static final byte BIT_BACKSIGHT  = 0x40; // backsight bit of vector packet
 
@@ -47,60 +46,9 @@ public class MemoryOctet
 
   // ------------------------------------------------------------
 
-  private static double toDistance( byte b0, byte b1, byte b2 )
-  {
-    int dhh = (int)( b0 & 0x40 );
-    double d =  dhh * 1024.0 + toInt( b2, b1 );
-    if ( d < 99999 ) {
-      return d / 1000.0;
-    }
-    return 100 + (d-100000) / 100.0;
-  }
-
-  private static double toAzimuth( byte b1, byte b2 ) // b1 low, b2 high
-  {
-    int b = toInt( b2, b1 );
-    return b * 180.0 / 32768.0; // 180/0x8000;
-  }
-
-  private static double toClino( byte b1, byte b2 ) // b1 low, b2 high
-  {
-    int c = toInt( b2, b1 );
-    double cc = c * 90.0  / 16384.0; // 90/0x4000;
-    if ( c >= 32768 ) { cc = (65536 - c) * (-90.0) / 16384.0; }
-    return cc;
-  }
-
-  public static int toInt( byte b ) 
-  {
-    int ret = (int)(b & 0xff);
-    if ( ret < 0 ) ret += 256; // always false
-    return ret;
-  }
-
-  public static int toInt( byte bh, byte bl )
-  {
-    int h = (int)(bh & 0xff);   // high
-    if ( h < 0 ) h += 256; // always false
-    int l = (int)(bl & 0xff);   // low
-    if ( l < 0 ) l += 256; // always false
-    return (h * 256 + l);
-  }
-
-  public static long toLong( byte b3, byte b2, byte b1, byte b0 )
-  {
-    long l3 = (long)(b3 & 0xff);   // high
-    long l2 = (long)(b2 & 0xff);   // low
-    long l1 = (long)(b1 & 0xff);
-    long l0 = (long)(b0 & 0xff);
-    return (l3 << 24 | l2 << 16 | l1 << 8 | l0);
-  }
-  // ------------------------------------------------------------
-
   public MemoryOctet( int idx )
   {
-    index = idx;
-    data  = new byte[SIZE];
+    super( idx, SIZE );
   }
 
   public void printHexString( PrintWriter pw )

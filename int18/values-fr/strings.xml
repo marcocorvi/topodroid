@@ -322,6 +322,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="error_clino_required">Pente nécessaire</string>
     <string name="error_comment_required">Commentaire nécessaire</string>
     <string name="error_begin_required">Adresse de début nécessaire</string>
+    <!-- TODO string name="error_number_required">Data number required</string -->
     <string name="error_declination_number">La déclinaison doit être un nombre</string>
     <string name="error_end_required">Adresse de fin nécessaire</string>
     <string name="error_fixes_nocs">Points fixes sans CS %1$s:\n%2$s</string>
@@ -1190,6 +1191,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="export_walls">Parois</string>
     <string name="export_xvi">Images Xvi</string>
     <string name="export_with_xsections">Inclure les sections transverses</string>
+    <!-- TODO string name="export_grouped">Group elements in layers by type</string -->
     <string name="export_with_reference">Inclure les références XY</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->

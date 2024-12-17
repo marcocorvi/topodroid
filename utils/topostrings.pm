@@ -16,6 +16,7 @@ use strict;
 use warnings;
 
 use feature 'signatures';
+use feature 'unicode_strings';
 
 use builtin qw(
   trim
@@ -37,6 +38,7 @@ our @EXPORT = qw(
   parse_comment_tag
   replace_with_comment_content_with_new_tag
   replace_with_tagged_version
+  write_updated_xml_file
 );
 
 sub get_comment_content_without_tag($element) {
@@ -327,6 +329,13 @@ sub analyze_xml_file ($filename, $dom, $names_ref) {
     print "'$filename' has problems. Please fix them and retry.\n";
     exit 1;
   }
+}
+
+# Function to write the updated XML file
+sub write_updated_xml_file ($filename, $dom) {
+  open my $fh, '>', $filename or die "Cannot open file $filename: $!";
+  print $fh $dom->toString(1);
+  close $fh;
 }
 
 1;

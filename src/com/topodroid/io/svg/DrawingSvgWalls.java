@@ -32,7 +32,6 @@ import com.topodroid.TDX.TDExporter;
 import com.topodroid.TDX.Scrap;
 import com.topodroid.TDX.DBlock;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -112,13 +111,40 @@ public class DrawingSvgWalls extends DrawingSvgBase
     }
   }
 
-  private void writePaths(BufferedWriter out, List<DrawingPath> paths, float xoff, float yoff, int rt ) throws IOException
+  private void writeGroupedPaths( BufferedWriter out, HashMap< String, ArrayList< DrawingPath > > paths, String superType, float xoff, float yoff, int rt ) throws IOException
+  {
+    if ( ! paths.isEmpty() ) {
+      out.write("<g id=\"" + superType + "\"" + group_mode_open);
+      ArrayList<String> types = orderSymbolTypes(paths.keySet());
+      for (String typeName : types) {
+        ArrayList<DrawingPath> list = paths.get(typeName);
+        out.write("<g id=\"" + superType + "_" + typeName + "\"" + group_mode_open);
+        for (DrawingPath path : list) {
+          writePath(out, path, xoff, yoff, rt);
+        }
+        out.write( end_grp ); // superType_
+      }
+      out.write( end_grp ); // superType
+      out.flush();
+    }
+  }
+
+  /**
+   * Writes provided paths to out.
+   * @param out  output writer
+   * @param paths list of paths to be drawn
+   * @param xoff X offset
+   * @param yoff Y offset
+   * @param rt  round-trip index
+   * @throws IOException
+   */
+  private void writePaths(BufferedWriter out, ArrayList<DrawingPath> paths, float xoff, float yoff, int rt ) throws IOException
   {
     if ( TDSetting.mSvgGroups ) {
-      // TODO replace this loop with the proper group-loops
-      for ( DrawingPath path : paths ) {
-        writePath( out, path, xoff, yoff, rt );
-      }
+      SvgGroupedPaths gps = separatePathsInGroups( paths);
+      writeGroupedPaths( out, gps.points, "points", xoff, yoff, rt );
+      writeGroupedPaths( out, gps.lines, "lines", xoff, yoff, rt );
+      writeGroupedPaths( out, gps.areas, "areas", xoff, yoff, rt );
     } else {
       for ( DrawingPath path : paths ) {
         writePath( out, path, xoff, yoff, rt );
@@ -265,9 +291,12 @@ public class DrawingSvgWalls extends DrawingSvgBase
           StringWriter sw7 = new StringWriter();
           PrintWriter pw7  = new PrintWriter(sw7);
           pw7.format("<g id=\"%s\">\n", xsection.mFilename );
-          tdrToSvg( pw7, xsection.mFilename, xsection.mX, xsection.mY, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+          out.write( sw7.getBuffer().toString() );
+          out.flush();
+          writeXSectionToSvg( out, xsection.mFilename, xsection.mFilename, xsection.mX, xsection.mY, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
           pw7.format("</g>\n");
           out.write( sw7.getBuffer().toString() );
+          out.flush();
         }
       }
       out.write( "      " + end_grp ); // group_detail_sym
@@ -424,9 +453,6 @@ public class DrawingSvgWalls extends DrawingSvgBase
   }
 
   // ------------------------------------------------------------------------------------
-  private static final String group_mode_open  = " inkscape:groupmode=\"layer\" i:layer=\"yes\" >\n";
-  private static final String group_mode_close = " inkscape:groupmode=\"layer\" i:layer=\"yes\" />\n";
-
   private static final String xml_header = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n";
   private static final String walls_header = "<?walls updated=\"no\" merged-content=\"no\" adjustable=\"no\"?>\n";
   private static final String compass_header = "<?compass inkscape-compatible=\"yes\"?>\n";

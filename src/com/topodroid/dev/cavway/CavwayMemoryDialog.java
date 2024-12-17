@@ -12,10 +12,10 @@
 package com.topodroid.dev.cavway;
 
 import com.topodroid.ui.MyDialog;
-import com.topodroid.packetX.MemoryOctet;
+import com.topodroid.packetX.CavwayData;
 import com.topodroid.TDX.DeviceActivity;
 import com.topodroid.TDX.R;
-import com.topodroid.dev.distox.IMemoryDialog;
+// import com.topodroid.dev.distox.IMemoryDialog;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -33,13 +33,12 @@ import android.widget.ArrayAdapter;
 
 public class CavwayMemoryDialog extends MyDialog
         implements View.OnClickListener
-                 , IMemoryDialog
+                 // , IMemoryDialog
 {
   // private Button mBtnDump;
   // private Button mBtnBack;
 
-  private EditText mETdumpfrom;
-  private EditText mETdumpto;
+  private EditText mETnumber;
   private EditText mETdumpfile;
 
   // List< MemoryOctet> mMemory;
@@ -64,8 +63,7 @@ public class CavwayMemoryDialog extends MyDialog
     super.onCreate( bundle );
     initLayout( R.layout.device_cavway_memory_dialog, R.string.memoryCavway );
 
-    mETdumpfrom  = (EditText) findViewById( R.id.et_dumpfrom );
-    mETdumpto    = (EditText) findViewById( R.id.et_dumpto );
+    mETnumber    = (EditText) findViewById( R.id.et_number );
     mETdumpfile  = (EditText) findViewById( R.id.et_dumpfile );
 
     Button btnDump = (Button) findViewById(R.id.button_dump );
@@ -84,10 +82,10 @@ public class CavwayMemoryDialog extends MyDialog
     // setText( mTVshead, mTVstail, ht );
   }
 
-  public void updateList( ArrayList< MemoryOctet > memory )
+  public void updateList( ArrayList< CavwayData > memory )
   {
     mArrayAdapter.clear();
-    for ( MemoryOctet m : memory ) mArrayAdapter.add( m.toString() );
+    for ( CavwayData m : memory ) mArrayAdapter.add( m.toString() );
     mList.invalidate();
   }
 
@@ -95,53 +93,39 @@ public class CavwayMemoryDialog extends MyDialog
   @Override
   public void onClick( View view )
   {
-    int[] ht = new int[2];
-    String from, to, error;
+    int nr = 0;
+    String number, error;
     if ( view.getId() == R.id.button_dump ) {
-      from = mETdumpfrom.getText().toString();
-      to   = mETdumpto.getText().toString();
-      if ( /* from == null || */ from.length() == 0 ) {
-        error = mParent.getResources().getString( R.string.error_begin_required );
-        mETdumpfrom.setError( error );
-        return;
-      }
-      if ( /* to == null || */ to.length() == 0 ) {
-        error = mParent.getResources().getString( R.string.error_end_required );
-        mETdumpto.setError( error );
+      number = mETnumber.getText().toString();
+      if ( /* number == null || */ number.length() == 0 ) {
+        error = mParent.getResources().getString( R.string.error_number_required );
+        mETnumber.setError( error );
         return;
       }
       try {
-        ht[0] = Integer.parseInt( from );
+        nr = Integer.parseInt( number );
       } catch ( NumberFormatException e ) {
         error = mParent.getResources().getString( R.string.error_invalid_number );
-        mETdumpfrom.setError( error );
+        mETnumber.setError( error );
         return;
       }
-      try {
-        ht[1] = Integer.parseInt( to );
-      } catch ( NumberFormatException e ) {
-        error = mParent.getResources().getString( R.string.error_invalid_number );
-        mETdumpto.setError( error );
-        return;
-      }
-      if ( CavwayDetails.boundHeadTail( ht ) ) {
-        String file = null;
-        if ( mETdumpfile.getText() != null ) file = mETdumpfile.getText().toString();
-        mParent.readXBLEMemory( this, ht, file );
-      }
+      nr = CavwayDetails.boundNumber( nr );
+      String file = null;
+      if ( mETdumpfile.getText() != null ) file = mETdumpfile.getText().toString();
+      mParent.readCavwayX1Memory( this, nr, file );
       // } else if ( view.getId() == R.id.button_cancel ) {
       //   dismiss();
       //   break;
     }
   }
 
-  /** set the value in the FROM field
+  /** set the value in the NUMBER (ie, FROM) field
    * @param index   value
-   * @note implements IMemoryDialog
+   * @note same as in IMemoryDialog
    */
   public void setIndex( int index ) 
   {
-    mETdumpfrom.setText( String.format( Locale.US, "%d", index ) );
+    mETnumber.setText( String.format( Locale.US, "%d", index ) );
   }
 
 }

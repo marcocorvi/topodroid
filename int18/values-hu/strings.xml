@@ -323,6 +323,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="error_clino_required">Lejtszög szükséges</string>
     <string name="error_comment_required">Megjegyzés szükséges</string>
     <string name="error_begin_required">Kezdő hivatkozás szükséges</string>
+    <string name="error_number_required">Szám adat szükséges</string> <!-- ? -->
     <string name="error_declination_number">A deklinációt számként kell megadni</string>
     <string name="error_end_required">Vépont szükséges</string>
     <string name="error_fixes_nocs">Fix pont CS nélkül %1$s:\n%2$s</string>
@@ -1196,6 +1197,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="export_walls">Falak</string>
     <string name="export_xvi">Xvi képek</string>
     <string name="export_with_xsections">Metszetekkel együtt</string>
+    <string name="export_grouped">Elemek csoportosítása rétegekre típus szerint</string>
     <string name="export_with_reference">XY skála</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Vonal irány stroke</string -->

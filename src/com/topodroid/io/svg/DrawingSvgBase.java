@@ -11,6 +11,8 @@
  */
 package com.topodroid.io.svg;
 
+import com.topodroid.TDX.DrawingUtil;
+import com.topodroid.TDX.IDrawingLink;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
@@ -41,6 +43,7 @@ import com.topodroid.TDX.SymbolLibrary;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.ICanvasCommand;
 
+import java.util.Collections;
 import java.util.Locale;
 import java.util.List;
 import java.util.ArrayList;
@@ -55,6 +58,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Set;
 
 /* Inkscape units
  * - The root element can have width and height with units, which with the proper view-box
@@ -86,6 +90,11 @@ public class DrawingSvgBase
 
   protected static final String end_grp = "</g>\n";
   protected static final String end_svg = "</svg>\n";
+
+  protected static final String group_mode_open  = " inkscape:groupmode=\"layer\" i:layer=\"yes\" >\n";
+  protected static final String group_mode_close = " inkscape:groupmode=\"layer\" i:layer=\"yes\" />\n";
+
+  private final static String ALL = "all";
   
   protected class XSection
   {
@@ -415,17 +424,20 @@ public class DrawingSvgBase
   }
 
   /** draw a xsection tdr
-   * @param pw   output writer
+   * @param out         output writer
    * @param scrapfile   tdr file
    * @param dx          delta X applied when the trd items are read from the file
    * @param dy          delta Y
    * @param xoff        X offset applied when the items are drawn to the SVG output
    * @param yoff        Y offset
    */
-  static protected void tdrToSvg( PrintWriter pw, String scrapfile, float dx, float dy, float xoff, float yoff )
+  protected void writeXSectionToSvg(BufferedWriter out, String scrapfile, String scrapId, float dx, float dy, float xoff, float yoff )
   {
+    ArrayList < DrawingPath > paths = new ArrayList<>();
     try {
       // TDLog.Log( TDLog.LOG_IO, "trd to svg. scrap file " + scrapfile );
+      StringWriter sw = new StringWriter();
+      PrintWriter pw = new PrintWriter(sw);
       FileInputStream fis = TDFile.getFileInputStream( TDPath.getTdrFile( scrapfile ) );
       BufferedInputStream b_fis = new BufferedInputStream( fis );
       DataInputStream dis = new DataInputStream( b_fis );
@@ -444,19 +456,43 @@ public class DrawingSvgBase
             break;
           case 'P':
             path = DrawingPointPath.loadDataStream( version, dis, dx, dy /*, null */ );
-            if ( path != null) toSvg( pw, (DrawingPointPath)path, pathToColor(path), xoff, yoff );
+            if ( path != null) {
+              if (TDSetting.mSvgGroups) {
+                paths.add( path );
+              } else {
+                toSvg(pw, (DrawingPointPath) path, pathToColor(path), xoff, yoff);
+              }
+            }
             break;
           case 'T':
             path = DrawingLabelPath.loadDataStream( version, dis, dx, dy );
-            if ( path != null) toSvg( pw, (DrawingLabelPath)path, pathToColor(path), xoff, yoff );
+            if ( path != null) {
+              if (TDSetting.mSvgGroups) {
+                paths.add(path);
+              } else {
+                toSvg(pw, (DrawingLabelPath) path, pathToColor(path), xoff, yoff);
+              }
+            }
             break;
           case 'L':
             path = DrawingLinePath.loadDataStream( version, dis, dx, dy /*, null */ );
-            if ( path != null) toSvg( pw, (DrawingLinePath)path, pathToColor(path), xoff, yoff );
+            if ( path != null) {
+              if (TDSetting.mSvgGroups) {
+                paths.add(path);
+              } else {
+                toSvg(pw, (DrawingLinePath) path, pathToColor(path), xoff, yoff);
+              }
+            }
             break;
           case 'A':
             path = DrawingAreaPath.loadDataStream( version, dis, dx, dy /*, null */ );
-            if ( path != null) toSvg( pw, (DrawingAreaPath)path, pathToColor(path), xoff, yoff );
+            if ( path != null) {
+              if (TDSetting.mSvgGroups) {
+                paths.add(path);
+              } else {
+                toSvg(pw, (DrawingAreaPath) path, pathToColor(path), xoff, yoff);
+              }
+            }
             break;
           case 'J':
             /* path = */ DrawingSpecialPath.loadDataStream( version, dis, dx, dy );
@@ -479,14 +515,215 @@ public class DrawingSvgBase
           case 'F':
             done = true;
             break;
-	  default:
-	    TDLog.e("TDR2SVG Error. unexpected code=" + what );
-	    return;
+          default:
+            TDLog.e("TDR2SVG Error. unexpected code=" + what );
+            return;
         }
+      }
+      if ( ! TDSetting.mSvgGroups ) {
+        out.write( sw.getBuffer().toString() );
+        out.flush();
       }
     } catch ( FileNotFoundException e ) { // this is OK
     } catch ( IOException e ) {
       e.printStackTrace();
+    }
+    if (TDSetting.mSvgGroups) {
+      writeScrapContent(out, paths, scrapId, xoff, yoff, false);
+    }
+  }
+
+  /**
+   * Aggregates points, lines and areas in groups by their types.
+   * @param paths paths to be classified
+   * @returns SvgGroupedPaths with the paths separated in groups
+   */
+  protected SvgGroupedPaths separatePathsInGroups(ArrayList< DrawingPath > paths)
+  {
+    SvgGroupedPaths groupedPaths = new SvgGroupedPaths();
+
+    for ( DrawingPath path : paths ) {
+      switch ( path.mType ) {
+        case DrawingPath.DRAWING_PATH_POINT:
+          DrawingPointPath point = (DrawingPointPath)path;
+          if ( BrushManager.isPointSection( point.mPointType ) ) {
+            groupedPaths.xsectionsPoints.add( point );
+          } else {
+            String pointTypeName = TDSetting.mSvgGroups ? point.getFullThName() : ALL;
+            if ( ! groupedPaths.points.containsKey( pointTypeName ) ) {
+              groupedPaths.points.put( pointTypeName, new ArrayList< DrawingPath >() );
+            }
+            groupedPaths.points.get( pointTypeName ).add( point );
+          }
+          break;
+        case DrawingPath.DRAWING_PATH_LINE:
+          DrawingLinePath line = (DrawingLinePath)path;
+          String lineTypeName = TDSetting.mSvgGroups ? line.getFullThName() : ALL;
+          if ( ! groupedPaths.lines.containsKey( lineTypeName ) ) {
+            groupedPaths.lines.put( lineTypeName, new ArrayList< DrawingPath >() );
+          }
+          groupedPaths.lines.get( lineTypeName ).add( line );
+          break;
+        case DrawingPath.DRAWING_PATH_AREA:
+          DrawingAreaPath area = (DrawingAreaPath)path;
+          String areaTypeName = TDSetting.mSvgGroups ? area.getFullThName() : ALL;
+          if ( ! groupedPaths.areas.containsKey( areaTypeName ) ) {
+            groupedPaths.areas.put( areaTypeName, new ArrayList< DrawingPath >() );
+          }
+          groupedPaths.areas.get( areaTypeName ).add( area );
+          break;
+      }
+    }
+    return groupedPaths;
+  }
+
+  /**
+   * Orders the types of symbols in reverse alphabetical order.
+   * @param types a set with the types that should be ordered
+   * @return ArrayList<String> with the ordered types
+   */
+  protected ArrayList< String > orderSymbolTypes(Set< String > types)
+  {
+    ArrayList< String > orderedTypes = new ArrayList<>( types );
+    Collections.sort( orderedTypes, String.CASE_INSENSITIVE_ORDER );
+    Collections.reverse( orderedTypes );
+    return orderedTypes;
+  }
+
+  /**
+   * Writes the content of a scrap to the BufferedWriter provided.
+   * @param out BufferedWriter to write the content to
+   * @param paths paths to be written
+   * @param scrapId scrap id
+   * @param xoff X offset
+   * @param yoff Y offset
+   * @param writeXSectionsContents whether xsections should be included in the output
+   */
+  protected void writeScrapContent( BufferedWriter out, ArrayList< DrawingPath > paths, String scrapId, float xoff, float yoff, boolean writeXSectionsContents )
+  {
+    SvgGroupedPaths gps = separatePathsInGroups(paths);
+    final ArrayList< XSection > xsections = new ArrayList<>();
+
+    try {
+      // TDLog.v( "SVG paths " + paths.size() + " points" );
+      if ( ! gps.points.isEmpty() ) {
+        out.write("<g id=\"points_" + scrapId + "\"" + group_mode_open);
+        ArrayList < String > pointTypes = orderSymbolTypes( gps.points.keySet() );
+        for ( String pointTypeName : pointTypes ) {
+          ArrayList< DrawingPath > pointList = gps.points.get(pointTypeName);
+          if ( TDSetting.mSvgGroups ) out.write("<g id=\"points_" + pointTypeName + "_" + scrapId + "\"" + group_mode_open);
+          for (DrawingPath item : pointList) {
+            DrawingPointPath point = (DrawingPointPath)item;
+            StringWriter sw53 = new StringWriter();
+            PrintWriter pw53  = new PrintWriter(sw53);
+            toSvg( pw53, point, pathToColor(point), xoff, yoff );
+            out.write( sw53.getBuffer().toString() );
+          }
+          if ( TDSetting.mSvgGroups ) out.write( end_grp ); // point_
+        }
+        out.write( end_grp ); // points
+        out.flush();
+      }
+
+      if ( ! gps.lines.isEmpty() ) {
+        out.write("<g id=\"lines_" + scrapId + "\"" + group_mode_open);
+        ArrayList < String > lineTypes = orderSymbolTypes( gps.lines.keySet() );
+        for ( String lineTypeName : lineTypes ) {
+          if ( TDSetting.mSvgGroups ) out.write("<g id=\"lines_" + lineTypeName + "_" + scrapId + "\"" + group_mode_open );
+          ArrayList< DrawingPath > lineList = gps.lines.get(lineTypeName);
+          for (DrawingPath item : lineList) {
+            DrawingLinePath line = (DrawingLinePath)item;
+            StringWriter sw54 = new StringWriter();
+            PrintWriter pw54  = new PrintWriter(sw54);
+            toSvg( pw54, line, pathToColor(line), xoff, yoff );
+            out.write( sw54.getBuffer().toString() );
+          }
+          if ( TDSetting.mSvgGroups ) out.write( end_grp ); // line_
+        }
+        out.write( end_grp ); // lines
+        out.flush();
+      }
+
+      if ( ! gps.areas.isEmpty() ) {
+        out.write("<g id=\"areas_" + scrapId + "\"" + group_mode_open);
+        ArrayList < String > areaTypes = orderSymbolTypes( gps.areas.keySet() );
+        for ( String areaTypeName : areaTypes ) {
+          if ( TDSetting.mSvgGroups ) out.write("<g id=\"areas_" + areaTypeName + "_" + scrapId + "\"" + group_mode_open);
+          ArrayList< DrawingPath > areaList = gps.areas.get(areaTypeName);
+          for (DrawingPath item : areaList) {
+            DrawingAreaPath area = (DrawingAreaPath)item;
+            StringWriter sw55 = new StringWriter();
+            PrintWriter pw55  = new PrintWriter(sw55);
+            toSvg( pw55, area, pathToColor(area), xoff, yoff );
+            out.write( sw55.getBuffer().toString() );
+          }
+          if ( TDSetting.mSvgGroups ) out.write( end_grp ); // area_
+        }
+        out.write( end_grp ); // areas
+        out.flush();
+      }
+
+      if ( ! gps.xsectionsPoints.isEmpty() ) {
+        out.write("<g id=\"xsection_links_" + scrapId + "\"" + group_mode_open);
+        for (DrawingPointPath point : gps.xsectionsPoints) {
+          float xx = point.cx;
+          float yy = point.cy;
+          if ( TDSetting.mAutoXSections ) {
+            // FIXME GET_OPTION
+            String scrapname = TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) );
+            XSection xsection = null;
+            if ( writeXSectionsContents && ( scrapname != null ) ) {
+              String scrapfile = scrapname + ".tdr";
+              xsection = new XSection( scrapfile, xx- DrawingUtil.CENTER_X, yy-DrawingUtil.CENTER_Y );
+              xsections.add( xsection );
+            }
+            IDrawingLink link = point.mLink; // FIXME Link could be stored in the XSection and written with it
+            if ( link != null && xsection != null ) {
+              float x1 = (xoff + xx) * TDSetting.mToSvg;
+              float y1 = (yoff + yy) * TDSetting.mToSvg;
+              float x2 = (xoff + link.getLinkX() ) * TDSetting.mToSvg;
+              float y2 = (yoff + link.getLinkY() ) * TDSetting.mToSvg;
+              StringWriter sw52 = new StringWriter();
+              PrintWriter pw52  = new PrintWriter(sw52);
+              pw52.format(Locale.US, "  <line x1=\"%f\" y1=\"%f\" x2=\"%f\" y2=\"%f\"", x1, y1, x2, y2 );
+              pw52.format(Locale.US, " class=\"link\" style=\"fill:none;stroke:brown;stroke-width:%.2f\" />\n", TDSetting.mSvgShotStroke );
+              out.write( sw52.getBuffer().toString() );
+            }
+          } else {
+            final StringWriter sw52 = new StringWriter();
+            final PrintWriter pw52  = new PrintWriter(sw52);
+            printPointWithCXCY( pw52, "<circle", xoff+xx, yoff+yy );
+            pw52.format(Locale.US, " r=\"%d\" ", RADIUS );
+            pw52.format(Locale.US, " style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
+            out.write( sw52.getBuffer().toString() );
+          }
+        }
+        out.write( end_grp ); // xsection_links
+        out.flush();
+      }
+
+      if ( ! xsections.isEmpty() ) {
+        // TDLog.v( "SVG xsections " + xsections.size() );
+        out.write("<g id=\"xsection_scraps\"" + group_mode_open);
+        for (XSection xsection : xsections) {
+          // TDLog.v( "SVG xsection " + xsection.mFilename + " " + xsection.mX + " " + xsection.mY );
+          StringWriter sw7 = new StringWriter();
+          PrintWriter pw7 = new PrintWriter(sw7);
+          pw7.format("<g id=\"xsection_%s\"" + group_mode_open, xsection.mFilename);
+          out.write(sw7.getBuffer().toString());
+          out.flush();
+          writeXSectionToSvg(out, xsection.mFilename, xsection.mFilename, xsection.mX, xsection.mY, xoff, yoff);
+          StringWriter sw8 = new StringWriter();
+          PrintWriter pw8 = new PrintWriter(sw8);
+          pw8.format(end_grp);
+          out.write(sw8.getBuffer().toString());
+          out.flush();
+        }
+        out.write(end_grp); // xsection_scraps
+        out.flush();
+      }
+    } catch ( IOException e ) {
+      TDLog.e( "SVG io-exception " + e.getMessage() );
     }
   }
 

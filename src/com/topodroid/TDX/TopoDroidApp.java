@@ -33,6 +33,7 @@ import com.topodroid.ui.TDProgress;
 import com.topodroid.prefs.TDPrefHelper;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.packetX.MemoryOctet;
+import com.topodroid.packetX.CavwayData;
 import com.topodroid.dev.Device;
 // import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.TopoDroidComm;
@@ -47,6 +48,7 @@ import com.topodroid.dev.sap.SapComm;
 import com.topodroid.dev.bric.BricComm;
 import com.topodroid.dev.bric.BricInfoDialog;
 import com.topodroid.dev.PairingRequest;
+import com.topodroid.dev.cavway.CavwayMemoryDialog;
 import com.topodroid.common.LegType;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.PlotType;
@@ -1407,6 +1409,20 @@ public class TopoDroidApp extends Application
       return ret;
     } else {
       TDLog.e("read XBLE memory: not XBLE comm");
+    }
+    return -1;
+  }
+
+  public int readCavwayX1Memory( String address, int number, ArrayList< CavwayData > memory, CavwayMemoryDialog dialog )
+  {
+    if ( mComm == null || isCommConnected() ) return -1;
+    if ( mComm instanceof CavwayComm) {
+      CavwayComm comm = (CavwayComm)mComm;
+      int ret = comm.readCavwayMemory( address, number, memory, dialog );
+      resetComm();
+      return ret;
+    } else {
+      TDLog.e("read Cavway memory: not Cavway comm");
     }
     return -1;
   }
