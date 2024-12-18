@@ -855,11 +855,13 @@ public class TDNum
     DBlock blk = ts.getFirstBlock();
     // TDLog.v( "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() + " E " + blk.getIntExtend() + " S " + blk.getStretch() );
     // NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly, decl ); // FIXME DIRECTION
-    NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), direction, anomaly, decl );
-    ArrayList< DBlock > blks = ts.getBlocks();
-    for ( int k = 1; k < blks.size(); ++k ) {
-      sh.addBlock( blks.get(k) );
-    }
+
+    NumShot sh = new NumShot( sf, st, ts, direction, anomaly, decl );
+    // NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), direction, anomaly, decl );
+    // ArrayList< DBlock > blks = ts.getBlocks();
+    // for ( int k = 1; k < blks.size(); ++k ) {
+    //   sh.addBlock( blks.get(k) );
+    // }
     return sh;
   }
 
@@ -996,9 +998,13 @@ public class TDNum
     initShots( data, tmp_shots, tmp_splays, ! midline_only );
     // TDLog.Log( TDLog.LOG_NUM, "data " + data.size() + " shots " + tmp_shots.size() + " splays " + tmp_splays.size() );
 
+    // for ( TriShot tsh : tmp_shots ) tsh.dump();
+
     if ( ! midline_only && TDSetting.mLoopClosure == TDSetting.LOOP_TRIANGLES ) {
       makeTrilateration( tmp_shots );
     }
+
+    // for ( TriShot tsh : tmp_shots ) tsh.dump();
 
     // ---------------------------------- SIBLINGS and BACKSIGHT -------------------------------
     for ( TriShot tsh : tmp_shots ) { // clear backshot, sibling, and multibad
@@ -1087,6 +1093,7 @@ public class TDNum
     // addToStat( mStartStation ); // useless
     mStartStation.setHasExtend( true );
     mStations.addStation( mStartStation );
+    // TDLog.v("NUM start station " + start );
 
     // two-pass data reduction
     // first-pass all shots with regular extends
@@ -1109,6 +1116,7 @@ public class TDNum
           // try to see if any temp-shot station is on the list of stations
           NumStation sf = getStation( ts.from );
           NumStation st = getStation( ts.to );
+          // TDLog.v("NUM shot " + sf + " " + st + " bearing " + ts.b() );
 
           int  i_ext = DBlock.getIntExtend( ts.extend ); // integer extend
           float f_ext = DBlock.getReducedExtend( ts.extend, ts.stretch ); // float extend - used for station coords
@@ -1125,7 +1133,8 @@ public class TDNum
               }
               if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
                 addOpenLoopShot( sf, ts, i_ext, a_ext, f_ext, anomaly ); // keep loop open: new station( id=ts.to, from=sf, ... )
-              } else { // TDLog.v( "close loop at " + sf.name + " " + st.name );
+              } else { 
+                // TDLog.v( "close loop at " + sf.name + " " + st.name + " anomaly " + sf.mAnomaly + " decl " + mDecl );
                 NumShot sh = makeShotFromTmp( sf, st, ts, 0, sf.mAnomaly, mDecl ); 
                 addShotToStations( sh, sf, st );
               }
@@ -1137,6 +1146,7 @@ public class TDNum
             }
             else // st null || st isBarrier
             { // forward shot: from --> to
+              // TDLog.v("add forward shot " + sf + " " + ts.to + " anomaly " + anomaly );
               addForwardShot( sf, ts, i_ext, a_ext, f_ext, anomaly );
               ts.used = true;
               repeat = true;
@@ -1250,6 +1260,7 @@ public class TDNum
     float bearing = ts.b() - sf.mAnomaly;
     boolean has_coords = (i_ext <= 1);
     NumStation st = new NumStation( ts.to, sf, ts.d(), bearing + mDecl, ts.c(), f_ext, has_coords /*, ts.getReductionType() */ ); // 20200503 added mDecl
+    // TDLog.v("forward shot " + sf + " " + st + " bearing " + bearing + " decl " + mDecl );
     addToStat( st, ts.getReductionType() );
     if ( ! mStations.addStation( st ) ) mClosureStations.add( st );
 
@@ -1259,6 +1270,7 @@ public class TDNum
     addToStats( ts.duplicate, ts.surface, ts.d(), ((i_ext == 0)? Math.abs(ts.v()) : ts.d()), ts.h(), st.v );
 
     NumShot sh = makeShotFromTmp( sf, st, ts, 1, sf.mAnomaly, mDecl );
+    // TDLog.v("shot " + sh.from + " " + sh.to + " len " + sh.length() + " azi " + sh.bearing() );
     addShotToStations( sh, st, sf );
   }
 

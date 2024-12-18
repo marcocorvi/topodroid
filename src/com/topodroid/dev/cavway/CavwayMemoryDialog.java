@@ -89,6 +89,15 @@ public class CavwayMemoryDialog extends MyDialog
     mList.invalidate();
   }
 
+  public void appendToList( CavwayData data )
+  {
+    if ( data != null ) {
+      mArrayAdapter.add( data.toString() );
+      mList.invalidate();
+    }
+  }
+
+
 
   @Override
   public void onClick( View view )

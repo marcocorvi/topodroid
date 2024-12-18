@@ -12,6 +12,7 @@
 package com.topodroid.num;
 
 import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.AverageLeg;
 import com.topodroid.TDX.DBlock;
@@ -40,9 +41,14 @@ class TriShot
   AverageLeg mAvgLeg;
   TriCluster cluster;
 
-  // void dump( )
+  // void dump()
   // {
-  //   TDLog.v( from + "-" + to + " " + (used?"u":"-") + (duplicate?"d":"-") + (surface?"s":"-") + (commented?"c ":"- ") + backshot + " blks " + blocks.size() );
+  //   DBlock b = blocks.get(0);
+  //   
+  //   TDLog.v( from + "-" + to + 
+  //     String.format( " blk %6.2f %6.2f  leg %6.2f %6.2f  decl %6.2f", 
+  //       b.mLength, b.mBearing, mAvgLeg.length(), mAvgLeg.bearing(), mAvgLeg.mDecl )
+  //   );
   // }
 
   /** cstr

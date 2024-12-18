@@ -107,6 +107,28 @@ public class NumShot
     firstBlock = blk;
   }
 
+  NumShot( NumStation f, NumStation t, TriShot ts, int dir, float anomaly, float decl )
+  {
+    from = f;
+    to   = t;
+    // block = blk;
+    // mIgnoreExtend = ( blk.getIntExtend() == DBlock.EXTEND_IGNORE);
+    mIgnoreExtend = !( f.hasExtend() && t.hasExtend() );
+    mUsed = false;
+    mDirection = dir;
+    mBranchDir = 0;
+    branch = null;
+    // mLength  = blk.mLength;
+    // mBearing = blk.mBearing;
+    // mClino   = blk.mClino;
+    // mExtend  = blk.getIntExtend();
+    blocks  = ts.getBlocks();
+    mAvgLeg = ts.mAvgLeg;
+    mAvgLeg.mDecl = decl; // not sure this is necessary
+    firstBlock = ts.getFirstBlock();
+    mAnomaly = anomaly;
+  }
+
   void addBlock( DBlock blk )
   {
     int n = blocks.size();

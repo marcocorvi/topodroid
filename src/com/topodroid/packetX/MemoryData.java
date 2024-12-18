@@ -66,6 +66,17 @@ public class MemoryData
     return (h * 256 + l);
   }
 
+  public static int toSignedInt( byte bh, byte bl )
+  {
+    int h = (int)(bh & 0xff);   // high
+    if ( h < 0 ) h += 256; // always false
+    int l = (int)(bl & 0xff);   // low
+    if ( l < 0 ) l += 256; // always false
+    h = (h * 256 + l);
+    if ( h >= 32768 ) h = 65536 - h;
+    return h;
+  }
+
   public static long toLong( byte b3, byte b2, byte b1, byte b0 )
   {
     long l3 = (long)(b3 & 0xff);   // high
@@ -74,6 +85,7 @@ public class MemoryData
     long l0 = (long)(b0 & 0xff);
     return (l3 << 24 | l2 << 16 | l1 << 8 | l0);
   }
+
   // ------------------------------------------------------------
 
   public MemoryData( int idx, int size )

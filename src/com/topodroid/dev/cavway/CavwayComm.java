@@ -95,6 +95,7 @@ public class CavwayComm extends TopoDroidComm
   //private boolean mWriteInitialized = false;
   private boolean mReconnect = false;
   private boolean mSkipNotify = false;
+  private boolean mReadingMemory = false;
 
   private int mDataType;
   private int mPacketType;  // type of the last incoming packet that has been read
@@ -223,6 +224,10 @@ public class CavwayComm extends TopoDroidComm
     if ( LOG ) TDLog.v( TAG + "is downloading - skip " + mSkipNotify );
     return mApp.isDownloading() || mSkipNotify;
   }
+
+  boolean isReadingMemory() { return mReadingMemory; }
+
+  // void clearReadingMemory() { mReadingMemory = false; }
 
   /* terminate the consumer thread - put a "quit" buffer on the queue
    * @note this method has still to be used
@@ -456,7 +461,7 @@ public class CavwayComm extends TopoDroidComm
       mQueue.put( DATA_PRIM, chrt.getValue() );
       TDLog.v( TAG + "changed read chrt " + byteArray2String( chrt.getValue() ) );
       CavwayData cw = new CavwayData( 0 );
-      System.arraycopy( chrt.getValue(), 0, cw.data, 0, 64 );
+      cw.setData( chrt.getValue() );
       TDLog.v( TAG + cw.toString() );
       resetTimer();
     } else if ( uuid_str.equals( CavwayConst.CAVWAY_CHRT_WRITE_UUID_STR ) ) {
@@ -877,42 +882,6 @@ public class CavwayComm extends TopoDroidComm
     return null;
   }
 
-  /** 0x38: read 4 bytes from memory synchronously
-   * @param addr memory address
-   * @return array of read bytes, or null on failure
-   * @note the thread waits up to 2 seconds for the reply - reading from memory takes about 1 sec
-   */
-  public byte[] readMemory( int addr )
-  {
-    TDLog.v( String.format( TAG + "read memory %d ", addr) );
-    byte[] cmd = new byte[3];
-    cmd[0] = CavwayData.BYTE_PACKET_REPLY; // 0x38;
-    cmd[1] = (byte)(addr & 0xFF);
-    cmd[2] = (byte)((addr >> 8) & 0xFF);
-    mPacketType = CavwayProtocol.PACKET_NONE;
-    enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true );
-    syncWait( 2000, "read memory" );
-    // synchronized ( mNewDataFlag ) {
-    //   try {
-    //     long start = System.currentTimeMillis();
-    //     mNewDataFlag.wait( 2000 ); // 2 seconds
-    //     // here if the thread gets notified
-    //     long millis = System.currentTimeMillis() - start;
-    //     if ( LOG ) TDLog.v( TAG + "read-memory waited " + millis + " msec, packet type " + mPacketType );
-    //   } catch ( InterruptedException e ) { 
-    //     e.printStackTrace();
-    //   }
-    // }
-    if ( (mPacketType & CavwayProtocol.PACKET_REPLY) == CavwayProtocol.PACKET_REPLY ) {
-      int length = ((CavwayProtocol) mProtocol).mRepliedData.length;
-      TDLog.v( TAG + " READ meomry expected got length " + length );
-      return ( (CavwayProtocol) mProtocol).mRepliedData;
-    } else {
-      TDLog.t( TAG + "read memory: no reply");
-    }
-    return null;
-  }
-
   /** read bytes from memory, synchronously
    * @param addr memory address
    * @param len  number of bytes to read (between 0 and 124)
@@ -1031,6 +1000,96 @@ public class CavwayComm extends TopoDroidComm
     return false;
   }
 
+  /** 0x38: start reading one data from cavway memory
+   * @param addr memory address
+   * @note when this is entered mReadingMemory is false
+   */
+  public void readOneMemory( int addr )
+  {
+    TDLog.v( TAG + "read memory " + addr + " set READING flag" );
+    syncSetReadingMemory();
+    byte[] cmd = new byte[3];
+    cmd[0] = CavwayData.BYTE_PACKET_REPLY; // 0x38;
+    cmd[1] = (byte)(addr & 0xFF);
+    cmd[2] = (byte)((addr >> 8) & 0xFF);
+    mPacketType = CavwayProtocol.PACKET_NONE;
+    enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true );
+    // if ( (mPacketType & CavwayProtocol.PACKET_REPLY) == CavwayProtocol.PACKET_REPLY ) {
+    //   int length = ((CavwayProtocol) mProtocol).mRepliedData.length;
+    //   TDLog.v( TAG + " READ meomry expected got length " + length );
+    //   return ( (CavwayProtocol) mProtocol).mRepliedData;
+    // } else {
+    //   TDLog.t( TAG + "read memory: no reply");
+    // }
+  }
+
+  boolean handleOneMemory( byte[] res_buf )
+  {
+    boolean ret = false;
+    if ( res_buf == null || res_buf.length != BYTE_PER_DATA ) {
+      TDLog.v( TAG + "fail read memory - index " + mMemoryIndex );
+      syncClearReadingMemory();
+    } else {
+      final CavwayData result = new CavwayData( mMemoryIndex );
+      result.setData( res_buf );
+      TDLog.v( TAG + "handle memory - index " + mMemoryIndex );
+      if ( mMemory != null ) {
+        mMemory.add( result );
+      }
+      if ( mMemoryDialog != null ) {
+        int k1 = mMemoryIndex;
+        (new Handler( Looper.getMainLooper() )).post( new Runnable() {
+          public void run() {
+            mMemoryDialog.setIndex( k1 );
+            mMemoryDialog.appendToList( result );
+            syncClearReadingMemory();
+          }
+        } );
+      } else {
+        syncClearReadingMemory();
+      }
+      ret = true;
+    }
+    return ret;
+  }
+
+  /** set reading-flag to false and notify waiting threads
+   */
+  void syncClearReadingMemory()
+  {
+    synchronized (mNewDataFlag) {
+      TDLog.v( TAG + "clear READING flag");
+      mReadingMemory = false;
+      mNewDataFlag.notifyAll();
+    }
+  }
+
+  /** set reading-flag to true
+   */
+  void syncSetReadingMemory()
+  {
+    synchronized (mNewDataFlag) {
+      TDLog.v( TAG + "set READING flag");
+      mReadingMemory = true;
+      // mNewDataFlag.notifyAll(); // nobody waits on flag == false
+    }
+  }
+
+  /** wait while reading-flag is true
+   */
+  void syncWaitOnReadingMemory( )
+  {
+    synchronized (mNewDataFlag) {
+      while ( mReadingMemory ) {
+        syncWait( 2000, "waiting to read mmory" );
+      }
+    }
+  }
+
+  private ArrayList< CavwayData > mMemory = null;
+  private CavwayMemoryDialog mMemoryDialog = null;
+  private int mMemoryIndex = 0;
+
   /** read the Cavway memory
    * @param address   device address
    * @param number    number of data to read
@@ -1041,41 +1100,16 @@ public class CavwayComm extends TopoDroidComm
   { 
     TDLog.t( TAG + "read Cavway memory ... " + number);
     if ( ! tryConnectDevice( address, null, 0 ) ) return -1;
-    Handler handler = new Handler( Looper.getMainLooper() );
     int cnt = 0; // number of memory location that have been read
-    for ( int k = 0; k < number; ++k ) {
-      CavwayData result = new CavwayData( k );
-      int addr = k; // index2addrCavway( k );
-      // Cavway BLE can read memory in one shot
-      // byte[] res_buf = readMemory( addr, BYTE_PER_DATA );
-      byte[] res_buf = readMemory( addr );
-      if ( res_buf == null || res_buf.length != BYTE_PER_DATA ) {
-        if ( LOG ) TDLog.v( TAG + "fail read memory - index " + k );
-        break;
-      } else {
-        if ( LOG ) TDLog.v( TAG + "read memory - index " + k );
-        System.arraycopy( res_buf, 0, result.data, 0, BYTE_PER_DATA );
-        data.add( result );
-        ++ cnt;
-        if ( dialog != null ) {
-          int k1 = k;
-          handler.post( new Runnable() {
-            public void run() {
-              dialog.setIndex( k1 );
-            }
-          } );
-        }
-      }
+    for ( mMemoryIndex = 0; mMemoryIndex < number; ++mMemoryIndex ) {
+      syncWaitOnReadingMemory();
+      readOneMemory( mMemoryIndex );
+      ++ cnt;
     }
+    syncWaitOnReadingMemory();
     disconnectDevice();
-    if ( dialog != null ) {
-      int k1 = number;
-      handler.post( new Runnable() {
-        public void run() {
-          dialog.setIndex( k1 );
-        }
-      } );
-    }
+    mMemoryDialog = null;
+    mMemory = null;
     return cnt;
   }
 
@@ -1247,356 +1281,348 @@ public class CavwayComm extends TopoDroidComm
     return ret;
   }
 
-  /**
-   * calculate CRC-16 (polynomial 1 + x^2 + x^15 + (x^16))
-   *
-   * @param bytes  array of bytes containing the data
-   * @param length length of the data (in the array, starting at index 0)
-   * @return crc of the byte array
-   */
-  private int calCRC16( byte[] bytes, int length )
-  {
-    int CRC = 0x0000ffff;
-    int POLYNOMIAL = 0x0000a001;
-    for ( int i = 0; i < length; i++) {
-      CRC ^= ((int) bytes[i] & 0x000000ff);
-      for ( int j = 0; j < 8; j++) {
-        if ((CRC & 0x00000001) != 0) {
-          CRC >>= 1;
-          CRC ^= POLYNOMIAL;
-        } else {
-          CRC >>= 1;
-        }
-      }
-    }
-    return CRC;
-  }
+  // /**
+  //  * calculate CRC-16 (polynomial 1 + x^2 + x^15 + (x^16))
+  //  *
+  //  * @param bytes  array of bytes containing the data
+  //  * @param length length of the data (in the array, starting at index 0)
+  //  * @return crc of the byte array
+  //  */
+  // private int calCRC16( byte[] bytes, int length )
+  // {
+  //   int CRC = 0x0000ffff;
+  //   int POLYNOMIAL = 0x0000a001;
+  //   for ( int i = 0; i < length; i++) {
+  //     CRC ^= ((int) bytes[i] & 0x000000ff);
+  //     for ( int j = 0; j < 8; j++) {
+  //       if ((CRC & 0x00000001) != 0) {
+  //         CRC >>= 1;
+  //         CRC ^= POLYNOMIAL;
+  //       } else {
+  //         CRC >>= 1;
+  //       }
+  //     }
+  //   }
+  //   return CRC;
+  // }
 
-  /** upload a firmware to the device
-   * @param address   device address
-   * @param file      firmware file
-   * @param progress  progress dialog
-   */
-  public void uploadFirmware( String address, File file, TDProgress progress )
-  {
-    final boolean DRY_RUN = false; // DEBUG
+  // /** upload a firmware to the device
+  //  * @param address   device address
+  //  * @param file      firmware file
+  //  * @param progress  progress dialog
+  //  */
+  // public void uploadFirmware( String address, File file, TDProgress progress )
+  // {
+  //   final boolean DRY_RUN = false; // DEBUG
+  //   TDLog.v( TAG + "upload firmware " + file.getPath() );
+  //   // boolean is_log_file = TDLog.isStreamFile();
+  //   // if ( ! is_log_file ) TDLog.setLogStream( TDLog.LOG_FILE ); // set log to file if necessary
+  //   // int ret = 0;
+  //   long len        = file.length();
+  //   String filename = file.getName();
+  //   Resources res   = mContext.getResources();
+  //   Handler handler = new Handler();
+  //   new Thread( new Runnable() {
+  //     public void run() {
+  //       boolean ok = true;
+  //       int cnt = 0;
+  //       String msg;
+  //       byte[] buf = new byte[259];
+  //       buf[0] = CavwayData.BYTE_PACKET_FW_WRITE; // (byte)0x3b;
+  //       buf[1] = (byte)0;
+  //       buf[2] = (byte)0;
+  //       try {
+  //         // File fp = new File( filepath );
+  //         if ( ! tryConnectDevice( address, null, 0 ) ) {
+  //           TDLog.t( TAG + "fw upload - failed connect");
+  //           ok = false; // return 0;
+  //         }
+  //         FileInputStream fis = new FileInputStream(file);
+  //         DataInputStream dis = new DataInputStream(fis);
+  //         try{
+  //           for ( int addr = 0; ok /* && addr < end_addr */ ; /*++addr*/) {
+  //             for (int k = 0; k < 256; ++k) buf[k] = (byte) 0xff;
+  //             int nr = dis.read( buf, 0, 256 );
+  //             int crc16 = calCRC16( buf, 256 );
+  //             //for (int k = 0; k < 256; ++k) buf[k] = (byte) 0xff;  //for simulating the bug
+  //             if (nr <= 0) { // EOF ?
+  //               TDLog.v( TAG + "fw upload: file read " + nr + " - break");
+  //               break;
+  //             }
+  //             TDLog.v( TAG + "fw upload: addr " + addr + " count " + cnt + " crc16 " + crc16 );
+  //             //if(addr < 8) continue;
+  //             int flashaddr = addr + 8;
+  //             cnt += nr;
+  //             addr++;
+  //             int repeat = 3; // THIS IS A repeat TEST
+  //             for ( ; repeat > 0; -- repeat ) { // repeat-for: exit with repeat == 0 (error) or -1 (success)
+  //               byte[] separated_buf1 = new byte[131]; // 131 = 3 (cmd, addr, index) + 128 (payload) // 20230118 corrected "separated"
+  //               separated_buf1[0] = CavwayData.BYTE_PACKET_FW_WRITE; // (byte) 0x3b;
+  //               separated_buf1[1] = (byte) (flashaddr & 0xff);
+  //               separated_buf1[2] = 0; //packet index
+  //               System.arraycopy(buf, 0, separated_buf1, 3, 128);
+  //               if ( DRY_RUN ) {
+  //                 TDUtil.slowDown( 103 );
+  //               } else {
+  //                 enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, separated_buf1, true);
+  //               }
+  //               byte[] separated_buf2 = new byte[133]; // 20230118 corrected "separated"
+  //               separated_buf2[0] = CavwayData.BYTE_PACKET_FW_WRITE; // (byte) 0x3b;
+  //               separated_buf2[1] = (byte) (flashaddr & 0xff);
+  //               separated_buf2[2] = 1;
+  //               System.arraycopy(buf, 128, separated_buf2, 3, 128);
+  //               separated_buf2[131] = (byte) (crc16 & 0x00FF);
+  //               separated_buf2[132] = (byte) ((crc16 >> 8) & 0x00FF);
+  //               if ( DRY_RUN ) {
+  //                 TDUtil.slowDown( 104 );
+  //                 mPacketType = CavwayProtocol.PACKET_FLASH_CHECKSUM;
+  //                 ((CavwayProtocol) mProtocol).mCheckCRC = crc16;
+  //               } else {
+  //                 enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, separated_buf2, true);
+  //                 //TDUtil.yieldDown(1000);
+  //                 mPacketType = CavwayProtocol.PACKET_NONE;
+  //                 syncWait( 5000, "write firmware block" );
+  //                 // synchronized ( mNewDataFlag ) {
+  //                 //   try {
+  //                 //     long start = System.currentTimeMillis();
+  //                 //     mNewDataFlag.wait(5000); // allow long wait for firmware
+  //                 //     long millis = System.currentTimeMillis() - start;
+  //                 //     TDLog.v( TAG + "write firmware block waited " + millis + " msec" );
+  //                 //   } catch (InterruptedException e) {
+  //                 //     e.printStackTrace();
+  //                 //   }
+  //                 // }
+  //               }
+  //               if ( mPacketType == CavwayProtocol.PACKET_FLASH_CHECKSUM ) {
+  //                 //int checksum = 0;
+  //                 //for (int i = 0; i < 256; i++) checksum += (buf[i] & 0xff);
+  //                 int ret_crc16 = ((CavwayProtocol) mProtocol).mCheckCRC;
+  //                 int ret_code  = ((CavwayProtocol) mProtocol).mFwOpReturnCode;
+  //                 if ( ret_crc16 != crc16 || ret_code != 0 ) {
+  //                   TDLog.v( TAG + "fw upload: fail at " + cnt + " buf[0]: " + buf[0] + " reply addr " + addr + " code " + ret_code + " CRC " + ret_crc16 );
+  //                   // ok = false; // without repeat-for uncomment these
+  //                   // break;
+  //                 } else {
+  //                   String msg1 = String.format( mContext.getResources().getString( R.string.firmware_uploaded ), "Cavway", cnt );
+  //                   int cnt1 = cnt;
+  //                   TDLog.v( msg1 );
+  //                   if ( progress != null ) {
+  //                     handler.post( new Runnable() {
+  //                       public void run() {
+  //                         progress.setProgress( cnt1 );
+  //                         progress.setText( msg1 );
+  //                       }
+  //                     } );
+  //                   }
+  //                   repeat = 0; // then the for-loop breaks with repeat = -1 (ie. success)
+  //                 }
+  //               } else {
+  //                 TDLog.t( TAG + "fw upload: fail at " + cnt + " repeat " + repeat + " packet " + mPacketType );
+  //                 // ok = false; // without repeat-for uncomment these two lines
+  //                 // break;
+  //               }
+  //             }
+  //             if ( repeat == 0 ) {
+  //               TDLog.t( TAG + "fw upload: fail after 3 repeats at " + cnt );
+  //               ok = false;
+  //               break;
+  //             }
+  //           }
+  //           fis.close();
+  //         } catch ( EOFException e ) { // OK
+  //           TDLog.v( TAG + "fw update: EOF " + e.getMessage());
+  //         } catch ( FileNotFoundException e ) {
+  //           TDLog.t( TAG + "fw update: Not Found error " + e.getMessage() );
+  //           ok = false;
+  //         }
+  //       } catch ( IOException e ) {
+  //         TDLog.t( TAG + "fw update: IO error " + e.getMessage() );
+  //         ok = false;
+  //       }
+  //       closeDevice( false );     //close ble here
+  //       msg = TAG + "Firmware update: result is " + (ok? "OK" : "FAIL") + " count " + cnt;
+  //       TDLog.v( msg );
+  //       int ret = ( ok ? cnt : -cnt );
+  //       TDLog.v( "Dialog Firmware upload result: written " + ret + " bytes of " + len );
+  //       boolean ok2 = ok;
+  //       String msg2 = ( ret > 0 )? String.format( res.getString(R.string.firmware_file_uploaded), filename, ret, len )
+  //                                : res.getString(R.string.firmware_file_upload_fail);
+  //       if ( progress != null ) {
+  //         handler.post( new Runnable() {
+  //           public void run() {
+  //             progress.setDone( ok2, msg2  );
+  //           }
+  //         } );
+  //       } else { // run on UI thread
+  //         handler.post( new Runnable() { 
+  //           public void run () { TDToast.makeLong( msg2 ); }
+  //         } );
+  //       }
+  //     }
+  //   } ).start();
+  //   // if ( ! is_log_file ) TDLog.setLogStream( TDLog.LOG_SYSLOG ); // reset log stream if necessary
+  // }
 
-    TDLog.v( TAG + "upload firmware " + file.getPath() );
-    // boolean is_log_file = TDLog.isStreamFile();
-    // if ( ! is_log_file ) TDLog.setLogStream( TDLog.LOG_FILE ); // set log to file if necessary
-    // int ret = 0;
+  // /** read a 256-byte firmware block
+  //  * @param addr   block address
+  //  * @return 256-byte array, block of firmware
+  //  */
+  // private byte[] readFirmwareBlock(int addr)
+  // {
+  //   TDLog.v( TAG + "fw read block at addr " + addr );
+  //   try {
+  //     for (int repeat = 3; repeat > 0; --repeat ) {
+  //       byte[] req_buf = new byte[3]; // request buffer
+  //       req_buf[0] = CavwayData.BYTE_PACKET_FW_READ; // (byte)0x3a;
+  //       req_buf[1] = (byte)( addr & 0xff );
+  //       req_buf[2] = 0; // not necessary
+  //       enlistWrite(CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, req_buf, true);
+  //       mPacketType = CavwayProtocol.PACKET_NONE;
+  //       syncWait( 5000, "read firmware block" );
+  //       // synchronized (mNewDataFlag) {
+  //       //   try {
+  //       //     long start = System.currentTimeMillis();
+  //       //     mNewDataFlag.wait(5000); // allow long wait for firmware
+  //       //     long millis = System.currentTimeMillis() - start;
+  //       //     TDLog.v( TAG + "read firmware block waited " + millis + " msec" );
+  //       //   } catch (InterruptedException e) {
+  //       //     e.printStackTrace();
+  //       //   }
+  //       // }
+  //       if ( mPacketType == CavwayProtocol.PACKET_FLASH_BYTES_2 ) {
+  //         byte[] ret_buf = ((CavwayProtocol) mProtocol).mFlashBytes; // return buffer
+  //         int crc16 = calCRC16( ret_buf, 256 );
+  //         if ( crc16 == ((CavwayProtocol) mProtocol).mCheckCRC ) {
+  //           TDLog.t( TAG + "read fw (" + repeat +") OK");
+  //           return ret_buf; // success
+  //         }
+  //         TDLog.t( TAG + "read fw (" + repeat +") CRC-16 mismatch: got " + crc16 + " expected " + ((CavwayProtocol) mProtocol).mCheckCRC );
+  //       } else {
+  //         TDLog.t( TAG + "read fw (" + repeat +") bad packet type " + mPacketType );
+  //       }
+  //     }
+  //     TDLog.t( TAG + "read fw: repeatedly failed packet addr " + addr );
+  //   } catch (Exception e) {
+  //     TDLog.t( TAG + "error " + e.getMessage() );
+  //   }
+  //   return null;
+  // }
 
-    long len        = file.length();
-    String filename = file.getName();
-    Resources res   = mContext.getResources();
-    Handler handler = new Handler();
+  // /** read the firmware from the device and save it to file
+  //  * @param address   device address (passed to tryConnect)
+  //  * @param file      output file
+  //  */
+  // public void dumpFirmware( String address, File file, TDProgress progress )
+  // {
+  //   TDLog.v( TAG + "fw dump: output filepath " + file.getPath() );
+  //   Resources res   = mContext.getResources();
+  //   Handler handler = new Handler();
+  //   new Thread( new Runnable() {
+  //     public void run() {
+  //       String filename = file.getName();
+  //       byte[] buf = new byte[256];
+  //       boolean ok = true;
+  //       int cnt = 0;
+  //       try {
+  //         // TDPath.checkPath( filepath );
+  //         // File fp = new File( filepath );
+  //         FileOutputStream fos = new FileOutputStream(file);
+  //         DataOutputStream dos = new DataOutputStream(fos);
+  //         if ( tryConnectDevice( address, null, 0 ) ) {
+  //           try {
+  //             for ( int addr = 8; ; addr++ ) {
+  //               buf = readFirmwareBlock(addr);
+  //               if ( buf == null || buf.length < 256 ) {
+  //                 TDLog.t( TAG + "fw read - failed at addr " + addr + " cnt " + cnt );
+  //                 ok = false;
+  //                 break;
+  //               }
+  //               dos.write( buf, 0, 256 );
+  //               cnt += 256;
+  //               int k = 0; // check if the block is fully 0xFF
+  //               for ( ; k<256; ++k ) {
+  //                 if ( buf[k] != (byte)0xff ) break;
+  //               }
+  //               if ( k == 256 ) break;
+  //               String msg1 = String.format( mContext.getResources().getString( R.string.firmware_downloaded ), "Cavway", cnt );
+  //               int cnt1 = cnt;
+  //               TDLog.v( msg1 );
+  //               if ( progress != null ) {
+  //                 handler.post( new Runnable() {
+  //                   public void run() {
+  //                     progress.setProgress( cnt1 );
+  //                     progress.setText( msg1 );
+  //                   }
+  //                 } );
+  //               }
+  //             }
+  //             fos.close();
+  //           } catch (EOFException e) {
+  //             //OK
+  //           } catch (IOException e) {
+  //             ok = false;
+  //           } finally {
+  //             closeDevice( false );
+  //           }
+  //         } else {
+  //           ok = false;
+  //         }
+  //       } catch ( FileNotFoundException e ) {
+  //         ok = false;
+  //       }
+  //       String msg = "Cavway Firmware dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt;
+  //       TDLog.v( msg );
+  //       int ret = ( ok ? cnt : -cnt );
+  //       boolean ok2 = ok;
+  //       String msg2 = ( ret > 0 )? String.format( res.getString(R.string.firmware_file_downloaded), filename, ret )
+  //                                : res.getString(R.string.firmware_file_download_fail);
+  //       if ( progress != null ) {
+  //         handler.post( new Runnable() {
+  //           public void run() {
+  //             progress.setDone( ok2, msg2  );
+  //           }
+  //         } );
+  //       } else { // run on UI thread
+  //         handler.post( new Runnable() { 
+  //           public void run () { TDToast.makeLong( msg2 ); }
+  //         } );
+  //       }
+  //     }
+  //   } ).start();
+  //   // if ( ! is_log_file ) TDLog.setLogStream( TDLog.LOG_SYSLOG ); // reset log stream if necessary
+  // }
 
-    new Thread( new Runnable() {
-      public void run() {
-        boolean ok = true;
-        int cnt = 0;
-        String msg;
-        byte[] buf = new byte[259];
-        buf[0] = CavwayData.BYTE_PACKET_FW_WRITE; // (byte)0x3b;
-        buf[1] = (byte)0;
-        buf[2] = (byte)0;
-
-        try {
-          // File fp = new File( filepath );
-          if ( ! tryConnectDevice( address, null, 0 ) ) {
-            TDLog.t( TAG + "fw upload - failed connect");
-            ok = false; // return 0;
-          }
-
-          FileInputStream fis = new FileInputStream(file);
-          DataInputStream dis = new DataInputStream(fis);
-          try{
-            for ( int addr = 0; ok /* && addr < end_addr */ ; /*++addr*/) {
-              for (int k = 0; k < 256; ++k) buf[k] = (byte) 0xff;
-              int nr = dis.read( buf, 0, 256 );
-              int crc16 = calCRC16( buf, 256 );
-              //for (int k = 0; k < 256; ++k) buf[k] = (byte) 0xff;  //for simulating the bug
-              if (nr <= 0) { // EOF ?
-                TDLog.v( TAG + "fw upload: file read " + nr + " - break");
-                break;
-              }
-              TDLog.v( TAG + "fw upload: addr " + addr + " count " + cnt + " crc16 " + crc16 );
-              //if(addr < 8) continue;
-              int flashaddr = addr + 8;
-              cnt += nr;
-              addr++;
-              int repeat = 3; // THIS IS A repeat TEST
-              for ( ; repeat > 0; -- repeat ) { // repeat-for: exit with repeat == 0 (error) or -1 (success)
-                byte[] separated_buf1 = new byte[131]; // 131 = 3 (cmd, addr, index) + 128 (payload) // 20230118 corrected "separated"
-                separated_buf1[0] = CavwayData.BYTE_PACKET_FW_WRITE; // (byte) 0x3b;
-                separated_buf1[1] = (byte) (flashaddr & 0xff);
-                separated_buf1[2] = 0; //packet index
-                System.arraycopy(buf, 0, separated_buf1, 3, 128);
-                if ( DRY_RUN ) {
-                  TDUtil.slowDown( 103 );
-                } else {
-                  enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, separated_buf1, true);
-                }
-
-                byte[] separated_buf2 = new byte[133]; // 20230118 corrected "separated"
-                separated_buf2[0] = CavwayData.BYTE_PACKET_FW_WRITE; // (byte) 0x3b;
-                separated_buf2[1] = (byte) (flashaddr & 0xff);
-                separated_buf2[2] = 1;
-                System.arraycopy(buf, 128, separated_buf2, 3, 128);
-                separated_buf2[131] = (byte) (crc16 & 0x00FF);
-                separated_buf2[132] = (byte) ((crc16 >> 8) & 0x00FF);
-                if ( DRY_RUN ) {
-                  TDUtil.slowDown( 104 );
-                  mPacketType = CavwayProtocol.PACKET_FLASH_CHECKSUM;
-                  ((CavwayProtocol) mProtocol).mCheckCRC = crc16;
-                } else {
-                  enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, separated_buf2, true);
-                  //TDUtil.yieldDown(1000);
-                  mPacketType = CavwayProtocol.PACKET_NONE;
-                  syncWait( 5000, "write firmware block" );
-                  // synchronized ( mNewDataFlag ) {
-                  //   try {
-                  //     long start = System.currentTimeMillis();
-                  //     mNewDataFlag.wait(5000); // allow long wait for firmware
-                  //     long millis = System.currentTimeMillis() - start;
-                  //     TDLog.v( TAG + "write firmware block waited " + millis + " msec" );
-                  //   } catch (InterruptedException e) {
-                  //     e.printStackTrace();
-                  //   }
-                  // }
-                }
-                if ( mPacketType == CavwayProtocol.PACKET_FLASH_CHECKSUM ) {
-                  //int checksum = 0;
-                  //for (int i = 0; i < 256; i++) checksum += (buf[i] & 0xff);
-                  int ret_crc16 = ((CavwayProtocol) mProtocol).mCheckCRC;
-                  int ret_code  = ((CavwayProtocol) mProtocol).mFwOpReturnCode;
-                  if ( ret_crc16 != crc16 || ret_code != 0 ) {
-                    TDLog.v( TAG + "fw upload: fail at " + cnt + " buf[0]: " + buf[0] + " reply addr " + addr + " code " + ret_code + " CRC " + ret_crc16 );
-                    // ok = false; // without repeat-for uncomment these
-                    // break;
-                  } else {
-                    String msg1 = String.format( mContext.getResources().getString( R.string.firmware_uploaded ), "Cavway", cnt );
-                    int cnt1 = cnt;
-                    TDLog.v( msg1 );
-                    if ( progress != null ) {
-                      handler.post( new Runnable() {
-                        public void run() {
-                          progress.setProgress( cnt1 );
-                          progress.setText( msg1 );
-                        }
-                      } );
-                    }
-                    repeat = 0; // then the for-loop breaks with repeat = -1 (ie. success)
-                  }
-                } else {
-                  TDLog.t( TAG + "fw upload: fail at " + cnt + " repeat " + repeat + " packet " + mPacketType );
-                  // ok = false; // without repeat-for uncomment these two lines
-                  // break;
-                }
-              }
-              if ( repeat == 0 ) {
-                TDLog.t( TAG + "fw upload: fail after 3 repeats at " + cnt );
-                ok = false;
-                break;
-              }
-            }
-            fis.close();
-          } catch ( EOFException e ) { // OK
-            TDLog.v( TAG + "fw update: EOF " + e.getMessage());
-          } catch ( FileNotFoundException e ) {
-            TDLog.t( TAG + "fw update: Not Found error " + e.getMessage() );
-            ok = false;
-          }
-        } catch ( IOException e ) {
-          TDLog.t( TAG + "fw update: IO error " + e.getMessage() );
-          ok = false;
-        }
-        closeDevice( false );     //close ble here
-        msg = TAG + "Firmware update: result is " + (ok? "OK" : "FAIL") + " count " + cnt;
-        TDLog.v( msg );
-        int ret = ( ok ? cnt : -cnt );
-        TDLog.v( "Dialog Firmware upload result: written " + ret + " bytes of " + len );
-
-        boolean ok2 = ok;
-        String msg2 = ( ret > 0 )? String.format( res.getString(R.string.firmware_file_uploaded), filename, ret, len )
-                                 : res.getString(R.string.firmware_file_upload_fail);
-        if ( progress != null ) {
-          handler.post( new Runnable() {
-            public void run() {
-              progress.setDone( ok2, msg2  );
-            }
-          } );
-        } else { // run on UI thread
-          handler.post( new Runnable() { 
-            public void run () { TDToast.makeLong( msg2 ); }
-          } );
-        }
-      }
-    } ).start();
-    // if ( ! is_log_file ) TDLog.setLogStream( TDLog.LOG_SYSLOG ); // reset log stream if necessary
-  }
-
-  /** read a 256-byte firmware block
-   * @param addr   block address
-   * @return 256-byte array, block of firmware
-   */
-  private byte[] readFirmwareBlock(int addr)
-  {
-    TDLog.v( TAG + "fw read block at addr " + addr );
-    try {
-      for (int repeat = 3; repeat > 0; --repeat ) {
-        byte[] req_buf = new byte[3]; // request buffer
-        req_buf[0] = CavwayData.BYTE_PACKET_FW_READ; // (byte)0x3a;
-        req_buf[1] = (byte)( addr & 0xff );
-        req_buf[2] = 0; // not necessary
-        enlistWrite(CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, req_buf, true);
-        mPacketType = CavwayProtocol.PACKET_NONE;
-        syncWait( 5000, "read firmware block" );
-        // synchronized (mNewDataFlag) {
-        //   try {
-        //     long start = System.currentTimeMillis();
-        //     mNewDataFlag.wait(5000); // allow long wait for firmware
-        //     long millis = System.currentTimeMillis() - start;
-        //     TDLog.v( TAG + "read firmware block waited " + millis + " msec" );
-        //   } catch (InterruptedException e) {
-        //     e.printStackTrace();
-        //   }
-        // }
-        if ( mPacketType == CavwayProtocol.PACKET_FLASH_BYTES_2 ) {
-          byte[] ret_buf = ((CavwayProtocol) mProtocol).mFlashBytes; // return buffer
-          int crc16 = calCRC16( ret_buf, 256 );
-          if ( crc16 == ((CavwayProtocol) mProtocol).mCheckCRC ) {
-            TDLog.t( TAG + "read fw (" + repeat +") OK");
-            return ret_buf; // success
-          }
-          TDLog.t( TAG + "read fw (" + repeat +") CRC-16 mismatch: got " + crc16 + " expected " + ((CavwayProtocol) mProtocol).mCheckCRC );
-        } else {
-          TDLog.t( TAG + "read fw (" + repeat +") bad packet type " + mPacketType );
-        }
-      }
-      TDLog.t( TAG + "read fw: repeatedly failed packet addr " + addr );
-    } catch (Exception e) {
-      TDLog.t( TAG + "error " + e.getMessage() );
-    }
-    return null;
-  }
-
-  /** read the firmware from the device and save it to file
-   * @param address   device address (passed to tryConnect)
-   * @param file      output file
-   */
-  public void dumpFirmware( String address, File file, TDProgress progress )
-  {
-    TDLog.v( TAG + "fw dump: output filepath " + file.getPath() );
-    Resources res   = mContext.getResources();
-    Handler handler = new Handler();
-
-    new Thread( new Runnable() {
-      public void run() {
-        String filename = file.getName();
-        byte[] buf = new byte[256];
-        boolean ok = true;
-        int cnt = 0;
-        try {
-          // TDPath.checkPath( filepath );
-          // File fp = new File( filepath );
-          FileOutputStream fos = new FileOutputStream(file);
-          DataOutputStream dos = new DataOutputStream(fos);
-          if ( tryConnectDevice( address, null, 0 ) ) {
-            try {
-              for ( int addr = 8; ; addr++ ) {
-                buf = readFirmwareBlock(addr);
-                if ( buf == null || buf.length < 256 ) {
-                  TDLog.t( TAG + "fw read - failed at addr " + addr + " cnt " + cnt );
-                  ok = false;
-                  break;
-                }
-                dos.write( buf, 0, 256 );
-                cnt += 256;
-                int k = 0; // check if the block is fully 0xFF
-                for ( ; k<256; ++k ) {
-                  if ( buf[k] != (byte)0xff ) break;
-                }
-                if ( k == 256 ) break;
-                String msg1 = String.format( mContext.getResources().getString( R.string.firmware_downloaded ), "Cavway", cnt );
-                int cnt1 = cnt;
-                TDLog.v( msg1 );
-                if ( progress != null ) {
-                  handler.post( new Runnable() {
-                    public void run() {
-                      progress.setProgress( cnt1 );
-                      progress.setText( msg1 );
-                    }
-                  } );
-                }
-              }
-              fos.close();
-            } catch (EOFException e) {
-              //OK
-            } catch (IOException e) {
-              ok = false;
-            } finally {
-              closeDevice( false );
-            }
-          } else {
-            ok = false;
-          }
-        } catch ( FileNotFoundException e ) {
-          ok = false;
-        }
-        String msg = "Cavway Firmware dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt;
-        TDLog.v( msg );
-        int ret = ( ok ? cnt : -cnt );
-        boolean ok2 = ok;
-        String msg2 = ( ret > 0 )? String.format( res.getString(R.string.firmware_file_downloaded), filename, ret )
-                                 : res.getString(R.string.firmware_file_download_fail);
-        if ( progress != null ) {
-          handler.post( new Runnable() {
-            public void run() {
-              progress.setDone( ok2, msg2  );
-            }
-          } );
-        } else { // run on UI thread
-          handler.post( new Runnable() { 
-            public void run () { TDToast.makeLong( msg2 ); }
-          } );
-        }
-      }
-    } ).start();
-    // if ( ! is_log_file ) TDLog.setLogStream( TDLog.LOG_SYSLOG ); // reset log stream if necessary
-  }
-
-  /** 0x3c: read the hardware code
-   * @param address device address
-   * @param hw      (unused)
-   * @return 2-byte hw code
-   */
-  public byte[] readFirmwareSignature( String address, int hw ) 
-  {
-    if ( ! tryConnectDevice( address, null, 0 ) ) return null;
-    byte[] buf = new byte[1];
-    buf[0] = (byte)0x3c;
-    enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, buf, true);
-    mPacketType = CavwayProtocol.PACKET_NONE;
-    syncWait( 5000, "read firmware signature" );
-    // synchronized (mNewDataFlag) {
-    //   try {
-    //     long start = System.currentTimeMillis();
-    //     mNewDataFlag.wait(5000); // allow long wait for firmware
-    //     long millis = System.currentTimeMillis() - start;
-    //     if ( LOG ) TDLog.v( TAG + "read firmware signature waited " + millis + " msec" );
-    //   } catch (InterruptedException e) {
-    //     e.printStackTrace();
-    //   }
-    // }
-    boolean bisSuccess = false;
-    if ( mPacketType == CavwayProtocol.PACKET_SIGNATURE ) {
-      buf = ((CavwayProtocol) mProtocol).mRepliedData;
-      bisSuccess = true;
-    }
-    closeDevice( false );
-    return (bisSuccess)?  buf : null;
-  }
+  // /** 0x3c: read the hardware code
+  //  * @param address device address
+  //  * @param hw      (unused)
+  //  * @return 2-byte hw code
+  //  */
+  // public byte[] readFirmwareSignature( String address, int hw ) 
+  // {
+  //   if ( ! tryConnectDevice( address, null, 0 ) ) return null;
+  //   byte[] buf = new byte[1];
+  //   buf[0] = (byte)0x3c;
+  //   enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, buf, true);
+  //   mPacketType = CavwayProtocol.PACKET_NONE;
+  //   syncWait( 5000, "read firmware signature" );
+  //   // synchronized (mNewDataFlag) {
+  //   //   try {
+  //   //     long start = System.currentTimeMillis();
+  //   //     mNewDataFlag.wait(5000); // allow long wait for firmware
+  //   //     long millis = System.currentTimeMillis() - start;
+  //   //     if ( LOG ) TDLog.v( TAG + "read firmware signature waited " + millis + " msec" );
+  //   //   } catch (InterruptedException e) {
+  //   //     e.printStackTrace();
+  //   //   }
+  //   // }
+  //   boolean bisSuccess = false;
+  //   if ( mPacketType == CavwayProtocol.PACKET_SIGNATURE ) {
+  //     buf = ((CavwayProtocol) mProtocol).mRepliedData;
+  //     bisSuccess = true;
+  //   }
+  //   closeDevice( false );
+  //   return (bisSuccess)?  buf : null;
+  // }
 
   /** synchronized wait
    * @param msec  wait timeout [msec]

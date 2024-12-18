@@ -63,7 +63,7 @@ class Trilateration
     // initialize points
     initialize();
     // and minimize
-    error = minimize1( 0.01, 0.10, ITER_MAX );
+    error = minimize1( 0.01, ITER_MAX );
   }
 
   private void initialize()
@@ -191,22 +191,22 @@ class Trilateration
   // 20241214 the param delta is not used, a new delta is computed from the length of the legs
   // 
   // @param eps      epsilon error for one point
-  // @param delta    not used
   // @param iter_max maximum number of iterations
   //
   // Error Fct = Sum | d(pi,pj) - leg.d |
-  private double minimize1( double eps, double delta, int iter_max )
+  private double minimize1( double eps, int iter_max )
   {
     int n_pts = points.size();
     eps *= n_pts; // 1 mm per point
     double d = 0.0;
     for ( TriLeg l : legs ) d += l.d;
-    delta = d/n_pts * 0.01;
-    TDLog.v("TRI delta " + delta );
+    double delta = d/n_pts * 0.01;
+    // TDLog.v("TRI delta " + delta );
+    delta = 0.10;
     double err0 = computeError1( n_pts );
-    // TDLog.v( "initial error " + err0 );
+    TDLog.v( "initial error " + err0 );
     Point2D[] dp = new Point2D[ n_pts ]; // gradient of points (x,y)
-    // for ( TriPoint p : points ) TDLog.v("TRI p " + p.name + " x " + p.x + " y " + p.y );
+    for ( TriPoint p : points ) TDLog.v("TRI p " + p.name + " x " + p.x + " y " + p.y );
     for ( iter =0 ; iter < iter_max; ++ iter ) {
       // TDLog.v("TRI iter " + iter );
       for ( int i=0; i<n_pts; ++i ) {
@@ -253,8 +253,8 @@ class Trilateration
       // for ( TriPoint p : points ) TDLog.v("TRI " + iter + " p " + p.name + " x " + p.x + " y " + p.y );
       if ( err0 < eps || delta < 0.000001 ) break;
     }
-    // TDLog.v( "minimize error " + err0 + " iter " + iter + " final delta " + delta );
-    // for ( TriPoint p : points ) TDLog.v("TRI p " + p.name + " x " + p.x + " y " + p.y );
+    TDLog.v( "minimize error " + err0 + " iter " + iter + " final delta " + delta );
+    for ( TriPoint p : points ) TDLog.v("TRI p " + p.name + " x " + p.x + " y " + p.y );
     return err0;
   }
 
