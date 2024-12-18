@@ -1,5 +1,6 @@
 package com.topodroid.num;
 
+import com.topodroid.TDX.DBlock;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.utils.TDMath;
@@ -459,10 +460,24 @@ public class Triangulation
 	}
 
 	private void updateShot( TriShot sh, Tri2Leg leg ) {
+		// Setting the azimuth of the blocks of the shot to match the azimuth of the leg.
+		float newAzimuth;
+		if (leg.from.equals(sh.from)) {
+			newAzimuth = (float)TDMath.in360(leg.azimuth);
+			sh.mAvgLeg.set(sh.mAvgLeg.length(), newAzimuth, sh.mAvgLeg.clino());
+		} else {
+			newAzimuth = (float)TDMath.in360(TDMath.add180(leg.azimuth));
+			sh.mAvgLeg.set(sh.mAvgLeg.length(), newAzimuth, -(sh.mAvgLeg.clino()));
+		}
+		for (DBlock blk : sh.getBlocks()) {
+			if (TDMath.isEqual(blk.mBearing, newAzimuth, TDMath.measurementEpsilonD)) continue;
+			TopoDroidApp.mData.updateShotBearing(blk.mId, TDInstance.sid, newAzimuth);
+		}
+
 		// Setting the per shot declination azimuth of the shot to match the azimuth of the leg.
-		double newAzimuth = (leg.from.equals(sh.from)) ? leg.azimuth : TDMath.add180(leg.azimuth);
-		double shotDeclination = newAzimuth - sh.bearing();
-		sh.mAvgLeg.mDecl = (float)shotDeclination; // per shot declination
+//		double newAzimuth = TDMath.in360((leg.from.equals(sh.from)) ? leg.azimuth : TDMath.add180(leg.azimuth));
+//		double shotDeclination = newAzimuth - sh.bearing();
+//		sh.mAvgLeg.mDecl = (float)shotDeclination; // per shot declination
 
 		// Setting both azimuth and clino.
 //		if (leg.from.equals(sh.from)) {
