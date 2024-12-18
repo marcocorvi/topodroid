@@ -967,7 +967,7 @@ public class TDNum
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) { // preprocess: convert diving-mode data to normal form
       HashMap< String, Float > depths = new HashMap< String, Float >();
       for ( DBlock blk : data ) { // prepare stations depths
-	if ( blk.mFrom != null && blk.mFrom.length() > 0 && blk.mTo != null && blk.mTo.length() > 0 ) {
+        if ( blk.mFrom != null && blk.mFrom.length() > 0 && blk.mTo != null && blk.mTo.length() > 0 ) {
           if ( depths.isEmpty() ) {
             depths.put( blk.mFrom, 0.0f );
             // TDLog.v("NUM depth of " + blk.mFrom + " = 0 " ); 
@@ -986,14 +986,14 @@ public class TDNum
       // boolean depth_error = false;
       // String error = TDString.EMPTY;
       for ( DBlock blk : data ) { // set dblock clino
-	if ( blk.mFrom != null && blk.mFrom.length() > 0 && depths.containsKey( blk.mFrom ) 
-	  && blk.mTo != null && blk.mTo.length() > 0 && depths.containsKey( blk.mTo ) ) {
+        if ( blk.mFrom != null && blk.mFrom.length() > 0 && depths.containsKey( blk.mFrom )
+            && blk.mTo != null && blk.mTo.length() > 0 && depths.containsKey( blk.mTo ) ) {
           float fdepth = depths.get( blk.mFrom ).floatValue(); // FIXME may null pointer
           float tdepth = depths.get( blk.mTo ).floatValue(); // FIXME may null pointer
-	  if ( ! blk.makeClino( fdepth, tdepth ) ) {
-	    // depth_error = true;
-	    TDLog.e("Failed make clino: " +  blk.mFrom + "-" + blk.mTo + " (" + fdepth + " " + tdepth + ") " );
-	  // } else {
+          if ( ! blk.makeClino( fdepth, tdepth ) ) {
+            // depth_error = true;
+            TDLog.e("Failed make clino: " +  blk.mFrom + "-" + blk.mTo + " (" + fdepth + " " + tdepth + ") " );
+            // } else {
             // TDLog.v("NUM make clino " + blk.mFrom + "-" + blk.mTo + " = " + blk.mClino );
           }
         }
@@ -1068,7 +1068,7 @@ public class TDNum
         }
       }
 
-      if ( ts0.sibling != null ) { 
+      if ( ts0.sibling != null ) {
         // TDLog.v( "check sibling shots agreement " + ts0.from + " " + ts0.to );
         float dmax = 0.0f;
         float cc = TDMath.cosd( blk0.mClino );
@@ -1286,7 +1286,7 @@ public class TDNum
     addToStat( st, ts.getReductionType() );
     if ( ! mStations.addStation( st ) ) mClosureStations.add( st );
 
-    st.addAzimuth( (ts.b()+180)%360, -a_ext );
+    st.addAzimuth( TDMath.in360( TDMath.add180( ts.b() ) ), -a_ext );
     st.mAnomaly = anomaly + sf.mAnomaly;
     updateBBox( st );
     addToStats( ts.duplicate, ts.surface, ts.d(), ((i_ext == 0)? Math.abs(ts.v()) : ts.d()), ts.h(), st.v );
@@ -1305,7 +1305,7 @@ public class TDNum
    */
   private void addReversedShot( NumStation st, TriShot ts, int i_ext, float a_ext, float f_ext, float anomaly )
   {
-    st.addAzimuth( (ts.b()+180)%360, -a_ext );
+    st.addAzimuth( TDMath.in360( TDMath.add180( ts.b() ) ), -a_ext );
     float bearing = ts.b() - st.mAnomaly;
     boolean has_coords = (i_ext <= 1);
     NumStation sf = new NumStation( ts.from, st, - ts.d(), bearing + mDecl, ts.c(), f_ext, has_coords /*, ts.getReductionType() */ ); // 20200503 added mDecl
@@ -1340,7 +1340,7 @@ public class TDNum
     // addToStat( st1, ts.getReductionType() ); // FIXME should do this ?
     if ( ! mStations.addStation( st1 ) ) mClosureStations.add( st1 );
 
-    st1.addAzimuth( (ts.b()+180)%360, -a_ext );
+    st1.addAzimuth( TDMath.in360( TDMath.add180( ts.b() ) ), -a_ext );
     st1.mAnomaly = anomaly + sf.mAnomaly;
     updateBBox( st1 );
     st1.mDuplicate = true;
