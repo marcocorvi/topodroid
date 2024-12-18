@@ -884,7 +884,7 @@ public class TDNum
     DBlock blk = ts.getFirstBlock();
     // TDLog.v( "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() + " E " + blk.getIntExtend() + " S " + blk.getStretch() );
     // NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly, decl ); // FIXME DIRECTION
-    NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), direction, anomaly, decl );
+    NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), direction, anomaly, decl + ts.mAvgLeg.mDecl );
     ArrayList< DBlock > blks = ts.getBlocks();
     for ( int k = 1; k < blks.size(); ++k ) {
       sh.addBlock( blks.get(k) );
@@ -900,7 +900,7 @@ public class TDNum
     DBlock blk = ts.getFirstBlock();
     // TDLog.v( "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() + " E " + blk.getIntExtend() + " S " + blk.getStretch() );
     // NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly, decl ); // FIXME DIRECTION
-    NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), direction, anomaly, decl );
+    NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), direction, anomaly, decl + ts.mAvgLeg.mDecl );
     ArrayList< DBlock > blks = ts.getBlocks();
     for ( int k = 1; k < blks.size(); ++k ) {
       sh.addBlock( blks.get(k) );
