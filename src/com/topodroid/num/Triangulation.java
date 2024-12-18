@@ -381,9 +381,12 @@ public class Triangulation
 		// The user sets which stations are mirrored, so we need to adjust the azimuths accordingly. There is no way to
 		// know which stations should be mirrored automatically.
 		// A mirrored station results in a triangle mirrored around its first leg.
-		if (mirroredStations.contains(leg1.to)) angles[2] = - angles[2];
-		double azimuth1 = TDMath.in360(TDMath.add180(azimuth0) - angles[2]);
-		double azimuth2 = TDMath.in360(TDMath.add180(azimuth1) - angles[0]);
+		if (mirroredStations.contains(leg1.to)) {
+			angles[0] = -angles[0];
+			angles[2] = -angles[2];
+		}
+		double azimuth1 = TDMath.in360(TDMath.add180(azimuth0) + angles[2]);
+		double azimuth2 = TDMath.in360(TDMath.add180(azimuth1) + angles[0]);
 
 		// Debug azimuth
 		// TDLog.v("Tri2Triangle.adjust (original): leg0.azimuth = " + leg0.azimuth + ", leg1.azimuth = " + leg1.azimuth + ", leg2.azimuth = " + leg2.azimuth);
