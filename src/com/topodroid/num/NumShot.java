@@ -84,7 +84,7 @@ public class NumShot
    */
   public boolean isBadLoop() { return mBadLoop; }
 
-  NumShot( NumStation f, NumStation t, DBlock blk, int dir, float anomaly, float decl )
+  NumShot( NumStation f, NumStation t, TriShot ts, int dir, float anomaly, float decl )
   {
     from = f;
     to   = t;
@@ -95,16 +95,15 @@ public class NumShot
     mDirection = dir;
     mBranchDir = 0;
     branch = null;
-    blocks = new ArrayList<>();
-    blocks.add( blk );
+    blocks = ts.getBlocks();
     // mLength  = blk.mLength;
     // mBearing = blk.mBearing;
     // mClino   = blk.mClino;
-    mAvgLeg  = new AverageLeg( decl );
-    mAvgLeg.set( blk );
+    mAvgLeg  = ts.mAvgLeg;
+    mAvgLeg.mDecl += decl;
     mAnomaly = anomaly;
     // mExtend  = blk.getIntExtend();
-    firstBlock = blk;
+    firstBlock = blocks.get(0);
   }
 
   void addBlock( DBlock blk )
