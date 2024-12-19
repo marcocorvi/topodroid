@@ -1040,6 +1040,7 @@ public class CavwayComm extends TopoDroidComm
         int k1 = mMemoryIndex;
         (new Handler( Looper.getMainLooper() )).post( new Runnable() {
           public void run() {
+            TDLog.v( TAG + "handle memory run " + k1 );
             mMemoryDialog.setIndex( k1 );
             mMemoryDialog.appendToList( result );
             syncClearReadingMemory();

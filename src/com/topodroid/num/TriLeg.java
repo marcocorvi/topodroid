@@ -15,9 +15,9 @@ package com.topodroid.num;
 
 class TriLeg
 {
-  TriShot shot;
-  double d; // horizontal distance [m]
-  double a; // angle [degrees]
+  TriShot shot; // reference shot
+  double d;     // horizontal distance [m]
+  double a;     // angle [degrees] trilateration bearing
   boolean used; // work flag
   TriPoint pi;  // FROM point of the shot
   TriPoint pj;  // TO point of the shot
@@ -36,4 +36,5 @@ class TriLeg
     pi = p1;
     pj = p2;
   }
+
 }

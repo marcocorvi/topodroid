@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class TDNum
 {
@@ -873,11 +874,13 @@ public class TDNum
     DBlock blk = ts.getFirstBlock();
     // TDLog.v( "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() + " E " + blk.getIntExtend() + " S " + blk.getStretch() );
     // NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly, decl ); // FIXME DIRECTION
-    NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), direction, anomaly, decl );
-    ArrayList< DBlock > blks = ts.getBlocks();
-    for ( int k = 1; k < blks.size(); ++k ) {
-      sh.addBlock( blks.get(k) );
-    }
+
+    NumShot sh = new NumShot( sf, st, ts, direction, anomaly, decl );
+    // NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), direction, anomaly, decl );
+    // ArrayList< DBlock > blks = ts.getBlocks();
+    // for ( int k = 1; k < blks.size(); ++k ) {
+    //   sh.addBlock( blks.get(k) );
+    // }
     return sh;
   }
 
@@ -2143,43 +2146,49 @@ public class TDNum
       }
     }
     // apply trilateration with recursive minimization
+    int nr_triangle = 0;
+    int nr_success  = 0;
+    int nr_fail     = 0;
     double err = 0.0;
-    boolean success = false;
     // TDLog.v("TRI nr clusters " + clusters.size() );
     for ( TriCluster cl : clusters ) {
       if ( cl.nrStations() > 2 ) {
-        success = true;
+        ++nr_triangle;
         break;
       }
     }
-    for ( TriCluster cl : clusters ) {
-      if ( cl.nrStations() > 2 ) {
-        // cl.dump();
-        Trilateration trilateration = new Trilateration( cl );
-        // TDLog.v("TRI trilateration iterations " + trilateration.getIterations() + " error " + trilateration.getError() );
-        // use trilateration.points and legs
-        if ( trilateration.getIterations() < 0 ) {
-          TDToast.makeWarn( R.string.trilateration_failed );
-          success = false;
-          break;
-        } else { 
-          err += trilateration.getError();
-          for ( TriLeg leg : trilateration.legs ) {
-            TriPoint p1 = leg.pi;
-            TriPoint p2 = leg.pj;
-            // compute azimuth (p2-p1)
-            double dx = p2.x - p1.x; // east
-            double dy = p2.y - p1.y; // north
-            double a = Math.atan2( dx, dy ) * 180 / Math.PI;
-            if ( a < 0 ) a += 360;
-            // TDLog.v("TRI leg " + p1.name + " " + p2.name + " angle " + a );
-            leg.shot.mAvgLeg.mDecl = (float)(a - leg.a); // per shot declination
+    if ( nr_triangle == 0 ) {
+      TDLog.v("NUM trilateration without triangles");
+    } else {
+      for ( TriCluster cl : clusters ) {
+        if ( cl.nrStations() > 2 ) {
+          // cl.dump();
+          Trilateration trilateration = new Trilateration( cl );
+          // TODO check all conditions a trilateration can fail
+          double e = trilateration.getError();
+          int iter = trilateration.getIterations();
+          int nr_l = trilateration.getNrLegs();
+          float max_angle = trilateration.maxAngle();
+          TDLog.v("TRI error " + e + " iter " + iter + " legs " + nr_l + " pts " + trilateration.getNrPoints() + " max_angle " + max_angle );
+          if ( iter < 0 || max_angle > 10 ) {
+            ++ nr_fail;
+          } else {
+            ++ nr_success;
+            err += e;
+            TDLog.v("TRI apply");
+            trilateration.apply();
           }
         }
       }
     }
-    if ( success ) {
-      TDToast.make( TDInstance.formatString( R.string.trilateration_succeeded, (float)err ) );
+    if ( nr_fail > 0 ) {
+      if ( nr_success > 0 ) {
+        TDToast.makeWarn( String.format( Locale.US, TDInstance.getResourceString(R.string.trilateration_failure), nr_fail, (nr_fail+nr_success) ) ); 
+      } else {
+        TDToast.makeWarn( R.string.trilateration_failed );
+      }
+    } else if ( nr_success > 0 ) {
+      TDToast.make( String.format( Locale.US, TDInstance.getResourceString(R.string.trilateration_success), nr_success ) );
     }
   }
 
