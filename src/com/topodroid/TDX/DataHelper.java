@@ -2585,6 +2585,8 @@ public class DataHelper extends DataSetObservable
 
   private static final String qPhotosAll    = "select id, shotId, status, title, date, comment, camera, code, reftype from photos where surveyId=? ";
 
+  private static final String qTriMirrorStationAll    = "SELECT name FROM tri_mirrored_stations WHERE surveyId=? ";
+
   private static final String qjPhoto       = "select id, shotId from photos where surveyId=? and id=? and reftype=?";
 
   private static final String qjCountPhoto  = "select count() from photos where surveyId=? and status=?";
@@ -6055,14 +6057,14 @@ public class DataHelper extends DataSetObservable
        FileWriter fw = TDFile.getFileWriter( filename ); // DistoX-SAF
        PrintWriter pw = new PrintWriter( fw );
        Cursor cursor = myDB.query( SURVEY_TABLE, 
-                            new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections", "datamode", "extend" },
+                            new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections", "datamode", "extend", "calculated_azimuths" },
                             "id=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
          // TDLog.v("dump SURVEY");
          do {
            pw.format(Locale.US,
-                     "INSERT into %s values( %d, \"%s\", \"%s\", \"%s\", %.4f, \"%s\", \"%s\", %d, %d, %d );\n",
+                     "INSERT into %s values( %d, \"%s\", \"%s\", \"%s\", %.4f, \"%s\", \"%s\", %d, %d, %d, %d );\n",
                      SURVEY_TABLE,
                      sid,
                      TDString.escape( cursor.getString(0) ),
@@ -6073,7 +6075,8 @@ public class DataHelper extends DataSetObservable
                      TDString.escape( cursor.getString(5) ),     // init_station
                      (int)cursor.getLong(6),  // xstation
                      (int)cursor.getLong(7),  // datamode
-                     (int)cursor.getLong(8)   // extend
+                     (int)cursor.getLong(8),  // extend
+                     (int)cursor.getLong(9)   // calculated_azimuths
            );
          } while (cursor.moveToNext());
        }
@@ -6121,6 +6124,20 @@ public class DataHelper extends DataSetObservable
                      cursor.getLong(6),
                      TDString.escape( cursor.getString(7) ), // code
                      cursor.getLong(8)                       // reftype: reference item type
+           );
+         } while (cursor.moveToNext());
+       }
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+
+       cursor = myDB.rawQuery( qTriMirrorStationAll, new String[] { Long.toString(sid) } );
+       if (cursor.moveToFirst()) {
+         // TDLog.v("dump PHOTO");
+         do {
+           pw.format(Locale.US,
+               "INSERT INTO %s VALUES( %d, \"%s\" );\n",
+               TRI_MIRRORED_STATIONS_TABLE,
+               sid,
+               TDString.escape( cursor.getString(0) )    // station
            );
          } while (cursor.moveToNext());
        }
@@ -6378,7 +6395,7 @@ public class DataHelper extends DataSetObservable
        // pos = v.indexOf( '(' ) + 1;
        // len = v.lastIndexOf( ')' );
        // scanline0.skipSpaces( );
-       if ( table.equals(SURVEY_TABLE) ) { 
+       if ( table.equals(SURVEY_TABLE) ) {
          long skip_sid = scanline0.longValue( -1 );
          name          = TDString.unescape( scanline0.stringValue( ) );
          date          = TDString.unescape( scanline0.stringValue( ) );
@@ -6388,13 +6405,13 @@ public class DataHelper extends DataSetObservable
          String init_station = ( db_version > 22)? TDString.unescape( scanline0.stringValue( ) ) : "0";
          int xsections = ( db_version > 29)? (int)( scanline0.longValue( SurveyInfo.XSECTION_SHARED ) )
                                            : SurveyInfo.XSECTION_SHARED; // old at-station x-sections were "shared"
-	 int datamode  = ( db_version > 36)? (int)( scanline0.longValue( SurveyInfo.DATAMODE_NORMAL ) )
+         int datamode  = ( db_version > 36)? (int)( scanline0.longValue( SurveyInfo.DATAMODE_NORMAL ) )
                                            : SurveyInfo.DATAMODE_NORMAL;
-	 int extend_ref = ( db_version > 38)? (int)( scanline0.longValue( SurveyInfo.SURVEY_EXTEND_NORMAL ) )
+         int extend_ref = ( db_version > 38)? (int)( scanline0.longValue( SurveyInfo.SURVEY_EXTEND_NORMAL ) )
                                             : SurveyInfo.SURVEY_EXTEND_NORMAL;
-   int calculated_azimuths = ( db_version > 54 )?
-       (int)( scanline0.longValue( SurveyInfo.CALCULATED_AZIMUTHS_FALSE ) ) :
-       SurveyInfo.CALCULATED_AZIMUTHS_FALSE;
+         int calculated_azimuths = ( db_version > 54 )?
+           (int)( scanline0.longValue( SurveyInfo.CALCULATED_AZIMUTHS_FALSE ) ) :
+           SurveyInfo.CALCULATED_AZIMUTHS_FALSE;
 
          sid = setSurvey( name, datamode );
 
