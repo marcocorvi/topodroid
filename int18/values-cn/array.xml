@@ -88,7 +88,8 @@
      <item name="normal">标准</item>
      <item name="weighted">Weighted</item>
      <item name="selective">可选</item>
-     <item name="triangles">三角</item>
+     <!-- UNUSED item name="triangles">三角</item -->
+      <!-- TODO item name="trilateration">Trilateration</item -->
   </string-array>
   
 

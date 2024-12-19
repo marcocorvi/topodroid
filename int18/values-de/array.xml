@@ -84,7 +84,8 @@
      <item name="normal">Normal</item>
      <item name="weighted">Gewichtet</item>
      <item name="selective">Selektiv</item>
-     <item name="triangles">Dreiecke</item>
+     <!-- UNUSED item name="triangles">Dreiecke</item -->
+      <!-- TODO item name="trilateration">Trilateration</item -->
   </string-array>
 
   <!-- UNUSED string-array name="wallsType">
