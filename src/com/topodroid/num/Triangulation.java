@@ -317,7 +317,7 @@ public class Triangulation
 			azimuth = (dx > 0) ? 0d : 180d;
 		}
 		else {
-			azimuth = TDMath.in360(TDMath.atan2DdTranslatedToTD(dy, dx));
+			azimuth = TDMath.atan2DdTranslatedToTD(dy, dx);
 		}
 
 		double clino = (TDMath.isEqual(length, 0d, TDMath.measurementEpsilonD)) ? 0d : TDMath.asinDd(dz / length);

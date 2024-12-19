@@ -54,7 +54,15 @@ public class TDMath
    * @param x the horizontal parameter for atan2
    * @return the azimuth in TopoDroid direction
    */
-  static public double atan2DdTranslatedToTD( double y, double x ) { return add90(-atan2Dd( y, x )); }
+  static public double atan2DdTranslatedToTD( double y, double x ) {
+    double azimuth = -atan2Dd( y, x ) + 90d;
+    if (azimuth < 0d) {
+      azimuth += 360d;
+    } else if (azimuth >= 360d) {
+      azimuth -= 360d;
+    }
+    return azimuth;
+  }
   static public double acosD( double x )   { return Math.acos( x ); }
   static public double acosDd( double x )  { return RAD2DEG * Math.acos( x ); }
   static public double asinDd( double x )  { return RAD2DEG * Math.asin( x ); }
@@ -125,16 +133,6 @@ public class TDMath
    * @param a  angle [deg.]
    */
   static public float add90( float a )
-  {
-    a += 90;
-    if ( a >= 360 ) a -= 360;
-    return a;
-  }
-
-  /** @return angle + 90 mod(360)
-   * @param a  angle [deg.]
-   */
-  static public double add90( double a )
   {
     a += 90;
     if ( a >= 360 ) a -= 360;
