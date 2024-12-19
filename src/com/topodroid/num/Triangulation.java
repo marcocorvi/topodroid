@@ -464,10 +464,10 @@ public class Triangulation
 		float newAzimuth;
 		if (leg.from.equals(sh.from)) {
 			newAzimuth = (float)TDMath.in360(leg.azimuth);
-			sh.mAvgLeg.set(sh.mAvgLeg.length(), newAzimuth, sh.mAvgLeg.clino());
+			sh.mAvgLeg.set(sh.mAvgLeg.length(), newAzimuth, (float)leg.clino);
 		} else {
 			newAzimuth = (float)TDMath.in360(TDMath.add180(leg.azimuth));
-			sh.mAvgLeg.set(sh.mAvgLeg.length(), newAzimuth, -(sh.mAvgLeg.clino()));
+			sh.mAvgLeg.set(sh.mAvgLeg.length(), newAzimuth, -((float)leg.clino));
 		}
 		for (DBlock blk : sh.getBlocks()) {
 			if (TDMath.isEqual(blk.mBearing, newAzimuth, TDMath.measurementEpsilon)) continue;
