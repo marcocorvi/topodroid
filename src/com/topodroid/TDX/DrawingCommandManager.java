@@ -1842,13 +1842,13 @@ public class DrawingCommandManager
         } else {
           if ( splays ) { // draw all splays except the splays-off
             for ( DrawingSplayPath path : mSplaysStack ) {
-	      if ( ! station_splay.isStationOFF( path ) ) path.draw( canvas, mm, scale, bbox, ! mDisplayPoints );
-	    }
+              if ( ! station_splay.isStationOFF( path ) ) path.draw( canvas, mm, scale, bbox, ! mDisplayPoints );
+            }
           } else if ( latest || station_splay.hasSplaysON() ) { // draw the splays-on and/or the latest
             for ( DrawingSplayPath path : mSplaysStack ) {
               if ( station_splay.isStationON( path ) || path.isBlockRecent() ) path.draw( canvas, mm, scale, bbox, ! mDisplayPoints );
-	    }
-	  }
+            }
+          }
         }
       // } else {
       //   TDLog.v("empty splay stack");

@@ -470,7 +470,7 @@ public class Triangulation
 			sh.mAvgLeg.set(sh.mAvgLeg.length(), newAzimuth, -(sh.mAvgLeg.clino()));
 		}
 		for (DBlock blk : sh.getBlocks()) {
-			if (TDMath.isEqual(blk.mBearing, newAzimuth, TDMath.measurementEpsilonD)) continue;
+			if (TDMath.isEqual(blk.mBearing, newAzimuth, TDMath.measurementEpsilon)) continue;
 			TopoDroidApp.mData.updateShotBearing(blk.mId, TDInstance.sid, newAzimuth);
 		}
 

@@ -1347,16 +1347,12 @@ public class DataHelper extends DataSetObservable
 
   public void updateShotBearing( long id, long sid, float b )
   {
-    ContentValues cv = new ContentValues();
-    cv.put( "bearing", b );
-    try {
-      myDB.beginTransaction();
-      myDB.update( SHOT_TABLE, cv, WHERE_SID_ID, new String[]{ Long.toString(sid),  Long.toString(id)} );
-      myDB.setTransactionSuccessful();
-    } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
-    } catch ( SQLiteException e1 )       { logError("shot bearing", e1 );
-    } catch ( IllegalStateException e2 ) { logError("shot bearing", e2 );
-    } finally { myDB.endTransaction(); }
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter( sw );
+    pw.format( Locale.US,
+        "UPDATE shots SET bearing=%.4f WHERE surveyId=%d AND id=%d",
+        b, sid, id );
+    doExecShotSQL( id, sw );
   }
 
   int updateShotNameAndData( long id, long sid, String fStation, String tStation,
