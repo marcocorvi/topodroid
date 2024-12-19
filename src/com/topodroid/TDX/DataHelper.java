@@ -1350,7 +1350,7 @@ public class DataHelper extends DataSetObservable
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
     pw.format( Locale.US,
-        "UPDATE shots SET bearing=%.4f WHERE surveyId=%d AND id=%d",
+        "UPDATE shots SET bearing=%.2f WHERE surveyId=%d AND id=%d",
         b, sid, id );
     doExecShotSQL( id, sw );
   }
