@@ -678,8 +678,10 @@ no campo abaixo e aperte o botão.
   <string name="screenshot_failed">Falha ao capturar tela</string>
   <string name="start_index">Índice da visada inicial</string>
   <string name="trilateration_failed">Trilateração falhou</string>
+  <!-- TODO string name="trilateration_failure">Trilateration failed %1$d / %2$d </string -->
   <!-- UNUSED string name="trilateration_error">Trilateration error %1$.2f</string -->
-  <string name="trilateration_succeeded">Trilateração finalizada com sucesso: erro residual %1$.2f</string>
+  <!-- UNUSED string name="trilateration_succeeded">Trilateração finalizada com sucesso: erro residual %1$.2f</string -->
+  <!-- TODO string name="trilateration_success">Trilateration success: %1$d clusters</string -->
   <string name="survey_info">Estatísticas da topo</string>
   <string name="stat_dates">De %1$s até %2$s</string>
   <string name="stat_devices">Dispositivos - %1$d: %2$s</string>

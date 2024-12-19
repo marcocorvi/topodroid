@@ -741,7 +741,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="trilateration_failed">Trilateration failed completely</string>
     <string name="trilateration_failure">Trilateration failed %1$d / %2$d </string>
     <!-- UNUSED string name="trilateration_error">Trilateration error %1$.2f</string -->
-    <string name="trilateration_succeeded">Trilateration succeeded: remaining error %1$.2f</string>
+    <!-- UNUSED string name="trilateration_succeeded">Trilateration succeeded: remaining error %1$.2f</string -->
     <string name="trilateration_success">Trilateration success: %1$d clusters</string>
 
     <string name="survey_info">Survey info</string>
