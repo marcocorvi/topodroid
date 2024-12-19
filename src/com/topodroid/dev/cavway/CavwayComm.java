@@ -1006,7 +1006,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public void readOneMemory( int addr )
   {
-    TDLog.v( TAG + "read memory " + addr + " set READING flag" );
+    TDLog.v( TAG + "read one memory. index " + addr + " set READING flag" );
     syncSetReadingMemory();
     byte[] cmd = new byte[3];
     cmd[0] = CavwayData.BYTE_PACKET_REPLY; // 0x38;
@@ -1027,26 +1027,29 @@ public class CavwayComm extends TopoDroidComm
   {
     boolean ret = false;
     if ( res_buf == null || res_buf.length != BYTE_PER_DATA ) {
-      TDLog.v( TAG + "fail read memory - index " + mMemoryIndex );
+      TDLog.v( TAG + "handle memory: FAILURE - index " + mMemoryIndex );
       syncClearReadingMemory();
     } else {
+      TDLog.v( TAG + "handle memory - index " + mMemoryIndex );
       final CavwayData result = new CavwayData( mMemoryIndex );
       result.setData( res_buf );
-      TDLog.v( TAG + "handle memory - index " + mMemoryIndex );
       if ( mMemory != null ) {
+        TDLog.v( TAG + "  add to MEMORY" );
         mMemory.add( result );
       }
       if ( mMemoryDialog != null ) {
-        int k1 = mMemoryIndex;
+        final int k1 = mMemoryIndex;
         (new Handler( Looper.getMainLooper() )).post( new Runnable() {
           public void run() {
             TDLog.v( TAG + "handle memory run " + k1 );
             mMemoryDialog.setIndex( k1 );
             mMemoryDialog.appendToList( result );
+            TDLog.v( TAG + "handle memory: clear FLAG");
             syncClearReadingMemory();
           }
         } );
       } else {
+        TDLog.v( TAG + "handle memory: null MEMORY dialog - clear FLAG");
         syncClearReadingMemory();
       }
       ret = true;
@@ -1082,7 +1085,7 @@ public class CavwayComm extends TopoDroidComm
   {
     synchronized (mNewDataFlag) {
       while ( mReadingMemory ) {
-        syncWait( 2000, "waiting to read mmory" );
+        syncWait( 1000, "waiting to read mmory" );
       }
     }
   }
@@ -1101,14 +1104,20 @@ public class CavwayComm extends TopoDroidComm
   { 
     TDLog.t( TAG + "read Cavway memory ... " + number);
     if ( ! tryConnectDevice( address, null, 0 ) ) return -1;
+    TDLog.t( TAG + "  set MEMORY and dialog");
+    mMemory       = data;
+    mMemoryDialog = dialog;
     int cnt = 0; // number of memory location that have been read
-    for ( mMemoryIndex = 0; mMemoryIndex < number; ++mMemoryIndex ) {
+    for ( int idx = 0; idx < number; ++idx ) {
+      TDLog.v( TAG + "set memory index " + idx );
+      mMemoryIndex = idx;
+      readOneMemory( idx );
       syncWaitOnReadingMemory();
-      readOneMemory( mMemoryIndex );
       ++ cnt;
     }
-    syncWaitOnReadingMemory();
+    // syncWaitOnReadingMemory();
     disconnectDevice();
+    TDLog.t( TAG + "  clear MEMORY and dialog");
     mMemoryDialog = null;
     mMemory = null;
     return cnt;

@@ -13,6 +13,7 @@ package com.topodroid.packetX;
 
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.utils.TDLog;
 
 import java.io.StringWriter;
 import java.io.PrintWriter;
@@ -67,6 +68,7 @@ public class CavwayData extends MemoryData
   {
     System.arraycopy( b, 0, data, 0, SIZE );
     setType( b );
+    TDLog.v("CVWY data set data - type " + mType + String.format(" %02x %02x", b[0], b[1]) );
   }
 
   private void setType( byte[] b )
@@ -74,9 +76,11 @@ public class CavwayData extends MemoryData
     if ( b[0] == (byte)0xff ) {
       mType = INVALID;
     } else {
-      if ( (b[1] & (byte)0x80) == 0 ) { // 0x7f
+      // if ( (b[1] & (byte)0x80) == 0 ) { // 0x7f
+      if ( b[1] == (byte)0xef ) {
         mType = LEG; 
-      } else if ( (b[1] & (byte)0x01) == 0 ) { // 0xfe
+      // } else if ( (b[1] & (byte)0x01) == 0 ) { // 0xfe
+      } else if ( b[1] == (byte)0xfe ) { // 0xfe
         mType = CALI; 
       } else { // 0xff
         mType = SHOT;
@@ -163,7 +167,7 @@ public class CavwayData extends MemoryData
         String tt = toTime( data );
         double dip1 = toDip1( data );
         double dip2 = toDip2( data );
-        pw.format("%c %s %.2f %.2f %.2f %.2f %.2f %.2f", ((mType == LEG)? 'L' : ' '), dd, bb, cc, rr, dip1, dip2 );
+        pw.format("%c %.2f %.2f %.2f %.2f %.2f %.2f", ((mType == LEG)? 'L' : ' '), dd, bb, cc, rr, dip1, dip2 );
         break;
       // case INVALID:
       default:
