@@ -45,7 +45,7 @@ class Tri2Leg
 
   public void invert()
   {
-    azimuth = TDMath.add180( azimuth );
+    azimuth = TDMath.in360(TDMath.add180(azimuth));
     clino = -clino;
     String tmp = from;
     from = to;

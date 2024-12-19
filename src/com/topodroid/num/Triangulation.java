@@ -112,9 +112,9 @@ public class Triangulation
 
 				// Getting third shot of the triangle if necessary because if there already are 2 adjusted
 				// stations in the triangle, there is no need for a third shot..
-				for (int n3 = n2+1; n3 < ns; ++n3) {
-					if ( adjustedStations.size() >= 2 ) break;
-					if ( adjustedStations.isEmpty() && ( triangleLegs.size() == 3 ) ) break;
+				for (int n3 = n2 + 1; n3 < ns; ++n3) {
+					if (adjustedStations.size() >= 2) break;
+					if (adjustedStations.isEmpty() && (triangleLegs.size() == 3)) break;
 					TriShot sh3 = shots.get(n3);
 					if (sh3.triangle != null) continue;
 					addTriangleShot(sh3);
@@ -303,10 +303,22 @@ public class Triangulation
 		double dy = y2 - y1;
 		double dz = z2 - z1;
 
-		double length = Math.sqrt(dx * dx + dy * dy + dz * dz);
+		double length = Math.sqrt((dx * dx) + (dy * dy) + (dz * dz));
 
-		double azimuth = (TDMath.isEqual(dx, 0d, TDMath.measurementEpsilonD) && TDMath.isEqual(dy, 0d, TDMath.measurementEpsilonD)) ? 
-			0d : TDMath.in360(TDMath.atan2Dd(dy, dx));
+		double azimuth;
+
+		if (TDMath.isEqual(dx, 0d, TDMath.measurementEpsilonD) && TDMath.isEqual(dy, 0d, TDMath.measurementEpsilonD)) {
+			azimuth = 0d;
+		}
+		else if (TDMath.isEqual(dx, 0d, TDMath.measurementEpsilonD)) {
+			azimuth = (dy > 0) ? 90d : 270d;
+		}
+		else if (TDMath.isEqual(dy, 0d, TDMath.measurementEpsilonD)) {
+			azimuth = (dx > 0) ? 0d : 180d;
+		}
+		else {
+			azimuth = TDMath.in360(TDMath.atan2DdTranslatedToTD(dy, dx));
+		}
 
 		double clino = (TDMath.isEqual(length, 0d, TDMath.measurementEpsilonD)) ? 0d : TDMath.asinDd(dz / length);
 
@@ -321,7 +333,7 @@ public class Triangulation
 			ArrayList< String > stationsArray = new ArrayList<>(triangleStations);
 			if (! calculateLeg(stationsArray.get(0), stationsArray.get(1))) {
 				if (! calculateLeg(stationsArray.get(1), stationsArray.get(2))) {
-					if (! calculateLeg(stationsArray.get(0), stationsArray.get(2))) {
+					if (! calculateLeg(stationsArray.get(2), stationsArray.get(0))) {
 						return false;
 					}
 				}
@@ -401,7 +413,7 @@ public class Triangulation
 		String firstFromName = firstLeg.from;
 		boolean isReference = false;
 		if (adjustedStations.isEmpty()) {
-			Tri2Point origin = new Tri2Point(0d, 0d, 0d);
+			Tri2Point origin = new Tri2Point(firstFromName, 0d, 0d, 0d);
 			adjustedStations.put(firstFromName, new Tri2Station(firstFromName, origin));
 			stationStatus.put(firstFromName, Tri2StationStatus.REFERENCE);
 			isReference = true;
@@ -416,7 +428,7 @@ public class Triangulation
 				pFrom = adjustedStations.get(toName).point;
 			}
 			else {
-				Tri2Point pTo = calculatePoint(pFrom, leg.length, leg.azimuth, leg.clino);
+				Tri2Point pTo = calculatePoint(pFrom, toName, leg.length, leg.azimuth, leg.clino);
 				adjustedStations.put(toName, new Tri2Station(toName, pTo));
 				pFrom = pTo;
 				if (isReference) {
@@ -450,13 +462,13 @@ public class Triangulation
 		leg.isAdjusted = true;
 	}
 
-	private Tri2Point calculatePoint(Tri2Point from, double length, double azimuth, double clino) {
+	private Tri2Point calculatePoint(Tri2Point from, String name, double length, double azimuth, double clino) {
 		double cosClino = TDMath.cosDd(clino);
 		double x = from.x + length * TDMath.sinDd(azimuth) * cosClino;
 		double y = from.y + length * TDMath.cosDd(azimuth) * cosClino;
 		double z = from.z + length * TDMath.sinDd(clino);
 
-		return new Tri2Point(x, y, z);
+		return new Tri2Point(name, x, y, z);
 	}
 
 	private void updateShot( TriShot sh, Tri2Leg leg ) {

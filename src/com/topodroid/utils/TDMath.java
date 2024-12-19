@@ -45,6 +45,16 @@ public class TDMath
   static public double sinDd( double xd ) { return Math.sin( xd * DEG2RAD ); }
   static public double atan2D(  double y, double x ) { return Math.atan2( y, x ); }
   static public double atan2Dd( double y, double x ) { return RAD2DEG * Math.atan2( y, x ); }
+
+  /**
+   * Converts atan2Dd to TopoDroid direction.
+   * For Math.atan2 the 0 angle is on the right and increases counterclockwise.
+   * For TopoDroid the 0 angle is on the top and increases clockwise, i.e., the North (0°) is up, East (90°) is right, South (180°) is down, West (270°) is left, i.e., the azimuth.
+   * @param y the vertical parameter for atan2
+   * @param x the horizontal parameter for atan2
+   * @return the azimuth in TopoDroid direction
+   */
+  static public double atan2DdTranslatedToTD( double y, double x ) { return add90(-atan2Dd( y, x )); }
   static public double acosD( double x )   { return Math.acos( x ); }
   static public double acosDd( double x )  { return RAD2DEG * Math.acos( x ); }
   static public double asinDd( double x )  { return RAD2DEG * Math.asin( x ); }
@@ -115,6 +125,16 @@ public class TDMath
    * @param a  angle [deg.]
    */
   static public float add90( float a )
+  {
+    a += 90;
+    if ( a >= 360 ) a -= 360;
+    return a;
+  }
+
+  /** @return angle + 90 mod(360)
+   * @param a  angle [deg.]
+   */
+  static public double add90( double a )
   {
     a += 90;
     if ( a >= 360 ) a -= 360;
