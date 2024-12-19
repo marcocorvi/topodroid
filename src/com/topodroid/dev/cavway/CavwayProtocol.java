@@ -230,6 +230,7 @@ public class CavwayProtocol extends TopoDroidProtocol
       TDLog.e( TAG + "handle packet: 0-length data");
       return PACKET_NONE;
     }
+    TDLog.v( TAG + " byte[0] " + String.format("%02x", databuf[0] ) );
     if ( (databuf[0] == MemoryOctet.BYTE_PACKET_DATA || databuf[0] == MemoryOctet.BYTE_PACKET_G ) && databuf.length == DATA_LEN ) { // shot / calib data
       if ( mComm.isDownloading() ) {
         for ( int kk=0; kk<DATA_LEN; ++kk ) {
@@ -245,6 +246,9 @@ public class CavwayProtocol extends TopoDroidProtocol
             }
           }
         }
+      } else if ( mComm.isReadingMemory() ) {
+        TDLog.v( TAG + "handle memory read");
+        mComm.handleOneMemory( mPacketBytes );
       } else {
         TDLog.t( TAG + "not downloading ???");
         return PACKET_NONE;

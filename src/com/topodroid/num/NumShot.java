@@ -84,6 +84,29 @@ public class NumShot
    */
   public boolean isBadLoop() { return mBadLoop; }
 
+  // NumShot( NumStation f, NumStation t, DBlock blk, int dir, float anomaly, float decl )
+  // {
+  //   from = f;
+  //   to   = t;
+  //   // block = blk;
+  //   // mIgnoreExtend = ( blk.getIntExtend() == DBlock.EXTEND_IGNORE);
+  //   mIgnoreExtend = !( f.hasExtend() && t.hasExtend() );
+  //   mUsed = false;
+  //   mDirection = dir;
+  //   mBranchDir = 0;
+  //   branch = null;
+  //   blocks = new ArrayList<>();
+  //   blocks.add( blk );
+  //   // mLength  = blk.mLength;
+  //   // mBearing = blk.mBearing;
+  //   // mClino   = blk.mClino;
+  //   mAvgLeg  = new AverageLeg( decl );
+  //   mAvgLeg.set( blk );
+  //   mAnomaly = anomaly;
+  //   // mExtend  = blk.getIntExtend();
+  //   firstBlock = blk;
+  // }
+
   NumShot( NumStation f, NumStation t, TriShot ts, int dir, float anomaly, float decl )
   {
     from = f;
@@ -95,15 +118,16 @@ public class NumShot
     mDirection = dir;
     mBranchDir = 0;
     branch = null;
-    blocks = ts.getBlocks();
     // mLength  = blk.mLength;
     // mBearing = blk.mBearing;
     // mClino   = blk.mClino;
-    mAvgLeg  = ts.mAvgLeg;
-    mAvgLeg.mDecl += decl;
-    mAnomaly = anomaly;
     // mExtend  = blk.getIntExtend();
-    firstBlock = blocks.get(0);
+    blocks  = ts.getBlocks();
+    mAvgLeg = ts.mAvgLeg;
+    mAvgLeg.mDecl += decl; // necessary: trilateration correction is stored in TriShot ave_leg.decl
+                           // see TDNum::makeTrilateration
+    firstBlock = ts.getFirstBlock();
+    mAnomaly = anomaly;
   }
 
   void addBlock( DBlock blk )

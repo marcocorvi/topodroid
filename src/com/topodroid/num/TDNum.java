@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class TDNum
 {
@@ -1025,6 +1026,8 @@ public class TDNum
       makeTrilateration( tmp_shots );
     }
 
+    // for ( TriShot tsh : tmp_shots ) tsh.dump();
+
     // ---------------------------------- SIBLINGS and BACKSIGHT -------------------------------
     for ( TriShot tsh : tmp_shots ) { // clear backshot, sibling, and multibad
       tsh.backshot = 0;    
@@ -1112,6 +1115,7 @@ public class TDNum
     // addToStat( mStartStation ); // useless
     mStartStation.setHasExtend( true );
     mStations.addStation( mStartStation );
+    // TDLog.v("NUM start station " + start );
 
     // two-pass data reduction
     // first-pass all shots with regular extends
@@ -1134,6 +1138,7 @@ public class TDNum
           // try to see if any temp-shot station is on the list of stations
           NumStation sf = getStation( ts.from );
           NumStation st = getStation( ts.to );
+          // TDLog.v("NUM shot " + sf + " " + st + " bearing " + ts.b() );
 
           int  i_ext = DBlock.getIntExtend( ts.extend ); // integer extend
           float f_ext = DBlock.getReducedExtend( ts.extend, ts.stretch ); // float extend - used for station coords
@@ -1150,7 +1155,8 @@ public class TDNum
               }
               if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
                 addOpenLoopShot( sf, ts, i_ext, a_ext, f_ext, anomaly ); // keep loop open: new station( id=ts.to, from=sf, ... )
-              } else { // TDLog.v( "close loop at " + sf.name + " " + st.name );
+              } else { 
+                // TDLog.v( "close loop at " + sf.name + " " + st.name + " anomaly " + sf.mAnomaly + " decl " + mDecl );
                 NumShot sh = makeShotFromTmp( sf, st, ts, 0, sf.mAnomaly, mDecl ); 
                 addShotToStations( sh, sf, st );
               }
@@ -1162,6 +1168,7 @@ public class TDNum
             }
             else // st null || st isBarrier
             { // forward shot: from --> to
+              // TDLog.v("add forward shot " + sf + " " + ts.to + " anomaly " + anomaly );
               addForwardShot( sf, ts, i_ext, a_ext, f_ext, anomaly );
               ts.used = true;
               repeat = true;
@@ -1275,6 +1282,7 @@ public class TDNum
     float bearing = ts.b() - sf.mAnomaly;
     boolean has_coords = (i_ext <= 1);
     NumStation st = new NumStation( ts.to, sf, ts.d(), bearing + mDecl, ts.c(), f_ext, has_coords /*, ts.getReductionType() */ ); // 20200503 added mDecl
+    // TDLog.v("forward shot " + sf + " " + st + " bearing " + bearing + " decl " + mDecl );
     addToStat( st, ts.getReductionType() );
     if ( ! mStations.addStation( st ) ) mClosureStations.add( st );
 
@@ -1284,6 +1292,7 @@ public class TDNum
     addToStats( ts.duplicate, ts.surface, ts.d(), ((i_ext == 0)? Math.abs(ts.v()) : ts.d()), ts.h(), st.v );
 
     NumShot sh = makeShotFromTmp( sf, st, ts, 1, sf.mAnomaly, mDecl );
+    // TDLog.v("shot " + sh.from + " " + sh.to + " len " + sh.length() + " azi " + sh.bearing() );
     addShotToStations( sh, st, sf );
   }
 
@@ -2171,43 +2180,49 @@ public class TDNum
       }
     }
     // apply trilateration with recursive minimization
+    int nr_triangle = 0;
+    int nr_success  = 0;
+    int nr_fail     = 0;
     double err = 0.0;
-    boolean success = false;
     // TDLog.v("TRI nr clusters " + clusters.size() );
     for ( TriCluster cl : clusters ) {
       if ( cl.nrStations() > 2 ) {
-        success = true;
+        ++nr_triangle;
         break;
       }
     }
-    for ( TriCluster cl : clusters ) {
-      if ( cl.nrStations() > 2 ) {
-        // cl.dump();
-        Trilateration trilateration = new Trilateration( cl );
-        // TDLog.v("TRI trilateration iterations " + trilateration.getIterations() + " error " + trilateration.getError() );
-        // use trilateration.points and legs
-        if ( trilateration.getIterations() < 0 ) {
-          TDToast.makeWarn( R.string.trilateration_failed );
-          success = false;
-          break;
-        } else { 
-          err += trilateration.getError();
-          for ( TriLeg leg : trilateration.legs ) {
-            TriPoint p1 = leg.pi;
-            TriPoint p2 = leg.pj;
-            // compute azimuth (p2-p1)
-            double dx = p2.x - p1.x; // east
-            double dy = p2.y - p1.y; // north
-            double a = Math.atan2( dx, dy ) * 180 / Math.PI;
-            if ( a < 0 ) a += 360;
-            // TDLog.v("TRI leg " + p1.name + " " + p2.name + " angle " + a );
-            leg.shot.mAvgLeg.mDecl = (float)(a - leg.a); // per shot declination
+    if ( nr_triangle == 0 ) {
+      TDLog.v("NUM trilateration without triangles");
+    } else {
+      for ( TriCluster cl : clusters ) {
+        if ( cl.nrStations() > 2 ) {
+          // cl.dump();
+          Trilateration trilateration = new Trilateration( cl );
+          // TODO check all conditions a trilateration can fail
+          double e = trilateration.getError();
+          int iter = trilateration.getIterations();
+          int nr_l = trilateration.getNrLegs();
+          float max_angle = trilateration.maxAngle();
+          TDLog.v("TRI error " + e + " iter " + iter + " legs " + nr_l + " pts " + trilateration.getNrPoints() + " max_angle " + max_angle );
+          if ( iter < 0 || max_angle > 10 ) {
+            ++ nr_fail;
+          } else {
+            ++ nr_success;
+            err += e;
+            TDLog.v("TRI apply");
+            trilateration.apply();
           }
         }
       }
     }
-    if ( success ) {
-      TDToast.make( TDInstance.formatString( R.string.trilateration_succeeded, (float)err ) );
+    if ( nr_fail > 0 ) {
+      if ( nr_success > 0 ) {
+        TDToast.makeWarn( String.format( Locale.US, TDInstance.getResourceString(R.string.trilateration_failure), nr_fail, (nr_fail+nr_success) ) ); 
+      } else {
+        TDToast.makeWarn( R.string.trilateration_failed );
+      }
+    } else if ( nr_success > 0 ) {
+      TDToast.make( String.format( Locale.US, TDInstance.getResourceString(R.string.trilateration_success), nr_success ) );
     }
   }
 

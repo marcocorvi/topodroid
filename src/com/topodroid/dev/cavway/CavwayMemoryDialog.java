@@ -11,6 +11,7 @@
  */
 package com.topodroid.dev.cavway;
 
+import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.packetX.CavwayData;
 import com.topodroid.TDX.DeviceActivity;
@@ -88,6 +89,16 @@ public class CavwayMemoryDialog extends MyDialog
     for ( CavwayData m : memory ) mArrayAdapter.add( m.toString() );
     mList.invalidate();
   }
+
+  public void appendToList( CavwayData data )
+  {
+    if ( data != null ) {
+      TDLog.v("CAVWAY memory aappend " + data.toString() );
+      mArrayAdapter.add( data.toString() );
+      mList.invalidate();
+    }
+  }
+
 
 
   @Override
