@@ -55,7 +55,7 @@ public class TDMath
    * @return the azimuth in TopoDroid direction
    */
   static public double atan2DdTranslatedToTD( double y, double x ) {
-    double azimuth = -atan2Dd( y, x ) + 90d;
+    double azimuth = 90d - atan2Dd( y, x );
     if (azimuth < 0d) {
       azimuth += 360d;
     } else if (azimuth >= 360d) {
