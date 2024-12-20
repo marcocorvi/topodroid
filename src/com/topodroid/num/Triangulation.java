@@ -308,13 +308,7 @@ public class Triangulation
 		double azimuth;
 
 		if (TDMath.isEqual(dx, 0d, TDMath.measurementEpsilonD) && TDMath.isEqual(dy, 0d, TDMath.measurementEpsilonD)) {
-			azimuth = 0d;
-		}
-		else if (TDMath.isEqual(dx, 0d, TDMath.measurementEpsilonD)) {
-			azimuth = (dy > 0) ? 90d : 270d;
-		}
-		else if (TDMath.isEqual(dy, 0d, TDMath.measurementEpsilonD)) {
-			azimuth = (dx > 0) ? 0d : 180d;
+			azimuth = 0d; // TODO In reality the azimuth is undefined in this case. What to do?
 		}
 		else {
 			azimuth = TDMath.atan2DdTranslatedToTD(dy, dx);
