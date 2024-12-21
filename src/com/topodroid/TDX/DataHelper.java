@@ -6432,11 +6432,11 @@ public class DataHelper extends DataSetObservable
              v = vals[3];
              Scanline scanline1 = new Scanline( v, v.indexOf('(')+1, v.lastIndexOf(')') );
              skip_sid = scanline1.longValue( -1 ); // skip survey ID
-             id = scanline1.longValue( -1 );
+             id = table.equals(TRI_MIRRORED_STATIONS_TABLE )? -1 : scanline1.longValue( -1 );
              // TDLog.v("DB table " + table + " id " + id + " v " + v );
 
              if ( table.equals(AUDIO_TABLE) ) // ---------------- FIXME_AUDIO
-	     {
+             {
                itemid = scanline1.longValue( -1 );
                if ( itemid >= 0 && id >= 0 ) {
                  date    = TDString.unescape( scanline1.stringValue( ) );
@@ -6447,8 +6447,8 @@ public class DataHelper extends DataSetObservable
                }
 
              }
-	     else if ( table.equals(SENSOR_TABLE) ) // ------------ FIXME_SENSORS
-	     {
+             else if ( table.equals(SENSOR_TABLE) ) // ------------ FIXME_SENSORS
+             {
                itemid  = scanline1.longValue( -1 );
                if ( itemid >= 0 && id >= 0 ) {
                  status  = scanline1.longValue( 0 );
@@ -6463,7 +6463,7 @@ public class DataHelper extends DataSetObservable
                  // TDLog.Log( TDLog.LOG_DB, "load from file photo " + sid + " " + id + " " + title + " " + name );
                }
              }
-	     else if ( table.equals(PHOTO_TABLE) ) // --------------- FIXME_PHOTO
+             else if ( table.equals(PHOTO_TABLE) ) // --------------- FIXME_PHOTO
              {
                itemid  = scanline1.longValue( -1 );
                if ( itemid >= 0 && id >= 0 ) {
@@ -6478,8 +6478,14 @@ public class DataHelper extends DataSetObservable
                  // TDLog.Log( TDLog.LOG_DB, "load from file photo " + sid + " " + id + " " + title + " " + name );
                }
              }
-	     else if ( table.equals(PLOT_TABLE) ) // ---------- PLOTS
-	     {
+             else if ( table.equals(TRI_MIRRORED_STATIONS_TABLE) ) // --------------- TRI_MIRROR_STATIONS
+             {
+               name    = TDString.unescape( scanline1.stringValue( ) );
+               cv = makeTriMirroredStationsContentValues( sid, name );
+               myDB.insert( TRI_MIRRORED_STATIONS_TABLE, null, cv );
+             }
+             else if ( table.equals(PLOT_TABLE) ) // ---------- PLOTS
+             {
                name         = TDString.unescape( scanline1.stringValue( ) );
                long plot_type = scanline1.longValue( -1 ); if ( db_version <= 20 ) if ( plot_type == 3 ) plot_type = 5;
                status       = scanline1.longValue( 0 );
@@ -6492,8 +6498,8 @@ public class DataHelper extends DataSetObservable
                double clino = ( db_version > 20 )? scanline1.doubleValue( 0.0 ) : 0.0;
                String hide  = ( db_version > 24 )? TDString.unescape( scanline1.stringValue( ) ) : TDString.EMPTY;
                String nick  = ( db_version > 30 )? TDString.unescape( scanline1.stringValue( ) ) : TDString.EMPTY;
-	       int orientation = (db_version > 32 )? (int)(scanline1.longValue( 0 )) : 0; // default PlotInfo.ORIENTATION_PORTRAIT
-	       int maxscrap = (db_version > 41 )? (int)(scanline1.longValue( 0 )) : 0; // default 0
+               int orientation = (db_version > 32 )? (int)(scanline1.longValue( 0 )) : 0; // default PlotInfo.ORIENTATION_PORTRAIT
+               int maxscrap = (db_version > 41 )? (int)(scanline1.longValue( 0 )) : 0; // default 0
                double intercept = (db_version > 42)? scanline1.doubleValue( 0.5 ) : 0;
                double center_x = (db_version > 44)? scanline1.doubleValue( 0.0 ) : 0;
                double center_y = (db_version > 44)? scanline1.doubleValue( 0.0 ) : 0;
@@ -6649,20 +6655,20 @@ public class DataHelper extends DataSetObservable
              } 
 	     else if ( table.equals(STATION_TABLE) )
 	     {
-               // N.B. ONLY IF db_version > 19
-               // TDLog.e( "v <" + v + ">" );
-               // TDLog.Log( TDLog.LOG_DB, "load from file station " + sid + " " + name + " " + comment + " " + flag  );
-               name    = TDString.unescape( scanline1.stringValue( ) );
-               comment = TDString.unescape( scanline1.stringValue( ) );
-               long flag = ( db_version > 25 )? scanline1.longValue( 0 ) : 0;
-               String presentation = name;
-               String code = "";
-               if ( db_version > 45 ) presentation = TDString.unescape( scanline1.stringValue( ) );
-               if ( db_version > 52 ) code = TDString.unescape( scanline1.stringValue( ) );
-               // success &= insertStation( sid, name, comment, flag );
-               cv = makeStationContentValues( sid, name, comment, flag, presentation, code );
-               myDB.insert( STATION_TABLE, null, cv ); 
-             }
+         // N.B. ONLY IF db_version > 19
+         // TDLog.e( "v <" + v + ">" );
+         // TDLog.Log( TDLog.LOG_DB, "load from file station " + sid + " " + name + " " + comment + " " + flag  );
+         name    = TDString.unescape( scanline1.stringValue( ) );
+         comment = TDString.unescape( scanline1.stringValue( ) );
+         long flag = ( db_version > 25 )? scanline1.longValue( 0 ) : 0;
+         String presentation = name;
+         String code = "";
+         if ( db_version > 45 ) presentation = TDString.unescape( scanline1.stringValue( ) );
+         if ( db_version > 52 ) code = TDString.unescape( scanline1.stringValue( ) );
+         // success &= insertStation( sid, name, comment, flag );
+         cv = makeStationContentValues( sid, name, comment, flag, presentation, code );
+         myDB.insert( STATION_TABLE, null, cv );
+       }
            }
            myDB.setTransactionSuccessful();
 	   success = true;
@@ -6692,6 +6698,20 @@ public class DataHelper extends DataSetObservable
     cv.put( "flag",      flag );
     cv.put( "presentation", presentation );
     cv.put( "code",      (code == null)? "" : code );
+    return cv;
+  }
+
+  /**
+   * Creates a ContentValues object for a tri_mirrored_stations table entry
+   * @param sid survey ID
+   * @param name station name
+   * @return ContentValues object
+   */
+  private ContentValues makeTriMirroredStationsContentValues( long sid, String name )
+  {
+    ContentValues cv = new ContentValues();
+    cv.put( "surveyId",  sid );
+    cv.put( "name",      name );
     return cv;
   }
 
