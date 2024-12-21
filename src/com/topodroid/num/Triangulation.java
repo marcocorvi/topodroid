@@ -104,6 +104,9 @@ public class Triangulation
 					}
 				}
 				if (!addedSecondShot) {
+					for (TriShot sh: triangleShots.values()) {
+						sh.triangle = null;
+					}
 					resetTriangle();
 					continue;
 				}
