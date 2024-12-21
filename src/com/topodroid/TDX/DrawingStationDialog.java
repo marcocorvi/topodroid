@@ -69,7 +69,7 @@ class DrawingStationDialog extends MyDialog
     private Button mBtnGeoCode;
 
     private TextView mTriangulationTitle;
-    private Button mTriangulationButton;
+    private Button mTriangulationMirrorButton;
     private TextView mTriangulationText;
 
     private final DrawingWindow mParent;
@@ -180,8 +180,8 @@ class DrawingStationDialog extends MyDialog
         mLabel.setVisibility( View.GONE );
         mCbSplaysOn.setOnClickListener( this );
         mCbSplaysOff.setOnClickListener( this );
-	mCbSplaysOn.setChecked( mParent.isStationSplaysOn( mStationName ) );
-	mCbSplaysOff.setChecked( mParent.isStationSplaysOff( mStationName ) );
+        mCbSplaysOn.setChecked( mParent.isStationSplaysOn( mStationName ) );
+        mCbSplaysOff.setChecked( mParent.isStationSplaysOff( mStationName ) );
 
         mETnick.setVisibility( View.GONE );
         mBtnXSection.setVisibility( View.GONE );
@@ -207,8 +207,8 @@ class DrawingStationDialog extends MyDialog
         }
         mCbSplaysOn.setOnClickListener( this );
         mCbSplaysOff.setOnClickListener( this );
-	mCbSplaysOn.setChecked( mParent.isStationSplaysOn( mStationName ) );
-	mCbSplaysOff.setChecked( mParent.isStationSplaysOff( mStationName ) );
+        mCbSplaysOn.setChecked( mParent.isStationSplaysOn( mStationName ) );
+        mCbSplaysOff.setChecked( mParent.isStationSplaysOff( mStationName ) );
     
         if ( TDLevel.overNormal ) {
           mBtnXDelete.setOnClickListener( this );
@@ -349,35 +349,35 @@ class DrawingStationDialog extends MyDialog
       }
 
       mTriangulationTitle = findViewById( R.id.triangulation_title );
-      mTriangulationButton = findViewById( R.id.btn_triangulation_mirror_unmirror );
+      mTriangulationMirrorButton = findViewById( R.id.btn_triangulation_mirror_unmirror );
       mTriangulationText = findViewById( R.id.triangulation_axle );
       if ( mTriStatus == null ) {
         mTriangulationTitle.setVisibility( View.GONE );
-        mTriangulationButton.setVisibility( View.GONE );
+        mTriangulationMirrorButton.setVisibility( View.GONE );
         mTriangulationText.setVisibility( View.GONE );
       } else {
         mTriangulationTitle.setVisibility( View.VISIBLE );
         switch (mTriStatus) {
           case REFERENCE:
             mTriangulationText.setText( mContext.getResources().getString( R.string.triangulation_reference_station ) );
-            mTriangulationButton.setVisibility( View.VISIBLE );
-            mTriangulationText.setVisibility( View.GONE );
+            mTriangulationMirrorButton.setVisibility( View.GONE );
+            mTriangulationText.setVisibility( View.VISIBLE );
             break;
           case UNADJUSTED:
             mTriangulationText.setText( mContext.getResources().getString( R.string.triangulation_unadjusted_station) );
-            mTriangulationButton.setVisibility( View.VISIBLE );
-            mTriangulationText.setVisibility( View.GONE );
+            mTriangulationMirrorButton.setVisibility( View.GONE );
+            mTriangulationText.setVisibility( View.VISIBLE );
             break;
           case ADJUSTED:
             String mirrorButton = ( mTriMirrored )?
                 mContext.getResources().getString( R.string.button_triangulation_unmirror_station ) :
                 mContext.getResources().getString( R.string.button_triangulation_mirror_station );
-            mTriangulationButton.setText( mirrorButton );
+            mTriangulationMirrorButton.setText( mirrorButton );
             mTriangulationText.setText( String.format( mContext.getResources().getString( R.string.triangulation_axle ), mTriAxle.getAxleName() ) );
-            mTriangulationButton.setVisibility( View.VISIBLE );
+            mTriangulationMirrorButton.setVisibility( View.VISIBLE );
             mTriangulationText.setVisibility( View.VISIBLE );
 
-            mTriangulationButton.setOnClickListener( this );
+            mTriangulationMirrorButton.setOnClickListener( this );
             break;
         }
       }
@@ -464,7 +464,7 @@ class DrawingStationDialog extends MyDialog
         mBearing = TDMath.add180( mBearing );
         mClino = -mClino;
         mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, mCBhorizontal.isChecked(), nick);
-      } else if ( b == mTriangulationButton) {
+      } else if ( b == mTriangulationMirrorButton) {
         mParent.toggleTriMirror( mStationName );
       }
       dismiss();
