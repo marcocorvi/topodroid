@@ -1008,10 +1008,11 @@ public class CavwayComm extends TopoDroidComm
   {
     TDLog.v( TAG + "read one memory. index " + addr + " set READING flag" );
     syncSetReadingMemory();
-    byte[] cmd = new byte[3];
-    cmd[0] = CavwayData.BYTE_PACKET_REPLY; // 0x38;
+    byte[] cmd = new byte[4];
+    cmd[0] = 0x3d; // command 0x3d is used for data reading
     cmd[1] = (byte)(addr & 0xFF);
     cmd[2] = (byte)((addr >> 8) & 0xFF);
+    cmd[3] = 64;         //one data frame, 64 bytes
     mPacketType = CavwayProtocol.PACKET_NONE;
     enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true );
     // if ( (mPacketType & CavwayProtocol.PACKET_REPLY) == CavwayProtocol.PACKET_REPLY ) {
