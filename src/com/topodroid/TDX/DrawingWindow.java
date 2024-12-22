@@ -7004,7 +7004,7 @@ public class DrawingWindow extends ItemDrawer
       setTheTitle();
     } 
 
-    /** set the plot as of type 2
+    /** set the plot as of type 1
      * @param params   whether to update XY-zoom values by the plot
      * @param compute ...
      * called by setPlotType, switchPlotType and doRecover
@@ -8495,7 +8495,7 @@ public class DrawingWindow extends ItemDrawer
           Resources res = getResources();
           String msg = String.format( res.getString( R.string.section_area ), area );
           TopoDroidAlertDialog.makeAlert( mActivity, res, msg, R.string.button_ok, -1, null, null );
-	} else {
+        } else {
           if ( mNum != null ) {
             float azimuth = -1;
             float oblique = 0;
@@ -8506,8 +8506,8 @@ public class DrawingWindow extends ItemDrawer
             new DrawingStatDialog( mActivity, mNum, mPlot1.start, azimuth, oblique, mApp_mData.getSurveyStat( TDInstance.sid ) ).show();
           } else {
             TDToast.makeBad( R.string.no_data_reduction );
-	  }
-	}
+          }
+        }
       } else if ( TDLevel.overNormal && p++ == pos ) { // RECOVER RELOAD - OPEN
         if ( mTh2Edit ) { // TH2EDIT API_19
           selectFromProvider( TDConst.SURVEY_FORMAT_TH2, TDRequest.REQUEST_GET_IMPORT, Intent.ACTION_OPEN_DOCUMENT );
@@ -8533,11 +8533,11 @@ public class DrawingWindow extends ItemDrawer
           startActivityForResult( intent, TDRequest.PLOT_RELOAD );
         }
       } else if ( TDLevel.overNormal && p++ == pos ) { // ZOOM-FIT / ORIENTATION
-	if ( TDLevel.overExpert ) {
+        if ( TDLevel.overExpert ) {
           ( new PlotZoomFitDialog( mActivity, this, mTh2Edit ) ).show(); // TH2EDIT added last param
-	} else {
-	  doZoomFit();
-	}
+        } else {
+          doZoomFit();
+        }
       } else if ( TDLevel.overAdvanced && (! mTh2Edit) && PlotType.isSketch2D( mType ) && p++ == pos ) { // TH2EDIT RENAME - DELETE - SPLIT - OUTLINE - MERGE
         //   askDelete();
         (new PlotRenameDialog( mActivity, this )).show();
