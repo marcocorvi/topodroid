@@ -17,24 +17,25 @@
     android:layout_marginBottom="@dimen/margintiny"
   />
 
-  <LinearLayout 
-    android:layout_width="match_parent" 
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/marginsmall"
-    android:orientation="horizontal" 
-    >
-    <Button android:id="@+id/btn_ok_comment"
-      style="@style/button_default"
-      android:layout_marginEnd="@dimen/marginh"
-      android:text="@string/button_save"
-    />
-    <EditText android:id="@+id/comment"
+  <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="wrap_content" 
-      android:inputType="text"
-      android:hint="@string/comment"
-      android:importantForAutofill="no"
-    />
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/marginsmall"
+      android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/btn_ok_comment"
+        style="@style/button_default"
+        android:layout_marginEnd="@dimen/marginh"
+        android:text="@string/button_save" />
+
+    <EditText
+        android:id="@+id/comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/comment"
+        android:importantForAutofill="no"
+        android:inputType="text" />
   </LinearLayout>
 
   <LinearLayout tools:ignore="ButtonOrder"
@@ -187,6 +188,38 @@
         style="@style/button_default"
         android:text="@string/button_delete"
       />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/marginv"
+        android:padding="4dp"
+        >
+
+      <TextView
+          android:id="@+id/triangulation_title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/triangulation_triangulated_station"
+          android:textStyle="bold"
+          android:paddingRight="4dp"
+          />
+
+      <Button
+          android:id="@+id/btn_triangulation_mirror_unmirror"
+          style="@style/button_default"
+          android:text="@string/button_triangulation_mirror_station"
+          android:paddingRight="4dp"
+          />
+
+      <TextView
+          android:id="@+id/triangulation_axle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/triangulation_axle"
+          />
     </LinearLayout>
 
     <LinearLayout android:id="@+id/help"

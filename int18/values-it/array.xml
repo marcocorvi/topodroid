@@ -83,7 +83,8 @@
      <item name="normal">Normale</item>
      <item name="weighted">Pesata</item>
      <item name="selective">Selettiva</item>
-     <item name="triangles">Triangoli</item>
+     <!-- UNUSED item name="triangles">Triangoli</item -->
+      <!-- TODO item name="trilateration">Trilateration</item -->
   </string-array>
 
 

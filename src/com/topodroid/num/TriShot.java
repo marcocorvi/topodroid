@@ -20,6 +20,7 @@ import com.topodroid.TDX.SurveyInfo;
 
 import java.util.ArrayList;
 // import java.util.List;
+import java.util.UUID;
 
 
 class TriShot
@@ -40,6 +41,7 @@ class TriShot
   ArrayList< DBlock > blocks;
   AverageLeg mAvgLeg;
   TriCluster cluster;
+  UUID triangle;
 
   // void dump()
   // {
@@ -77,6 +79,7 @@ class TriShot
     mAvgLeg = new AverageLeg( 0.0f ); // temporary shot do not consider declination
     mAvgLeg.set( blk );
     cluster = null;
+    triangle = null;
   }
 
   /** @return the shot length
@@ -200,4 +203,12 @@ class TriShot
   //   //   // TDLog.v( b.mLength + " " + b.mBearing + " " + b.mClino );
   //   // }
   // }
+
+  String name() {
+    return TriShot.name( from, to );
+	}
+
+  static String name( String from, String to ) {
+    return from.compareTo(to) < 0 ? from + '|' + to : to + '|' + from;
+  }
 }

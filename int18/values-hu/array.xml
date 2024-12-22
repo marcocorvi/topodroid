@@ -85,7 +85,8 @@
      <item name="normal">normál</item>
      <item name="weighted">súlyozott</item>
      <item name="selective">szelektív</item>
-     <item name="triangles">háromszögek</item>
+     <!-- UNUSED item name="triangles">háromszögek</item -->
+      <!-- TODO item name="trilateration">Trilateration</item -->
   </string-array>
 
   <string-array name="survexEol">
