@@ -2157,13 +2157,13 @@ public class TDNum
           int iter = trilateration.getIterations();
           int nr_l = trilateration.getNrLegs();
           float max_angle = trilateration.maxAngle();
-          TDLog.v("TRI error " + e + " iter " + iter + " legs " + nr_l + " pts " + trilateration.getNrPoints() + " max_angle " + max_angle );
-          if ( iter < 0 || max_angle > 10 ) {
+          // TDLog.v("TRI error " + e + " iter " + iter + " legs " + nr_l + " pts " + trilateration.getNrPoints() + " max_angle " + max_angle );
+          if ( iter < 0 || max_angle > 10 ) { // FIXME 10 is a trilateration parameters
             ++ nr_fail;
           } else {
             ++ nr_success;
             err += e;
-            TDLog.v("TRI apply");
+            // TDLog.v("TRI apply");
             trilateration.apply();
           }
         }

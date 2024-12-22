@@ -77,7 +77,7 @@ class Trilateration
     // initialize points
     initialize();
     // and minimize
-    error = minimize1( 0.01, ITER_MAX );
+    error = minimize1( 0.01, ITER_MAX ); // FIXME 0.01 and ITER_MAX are trilateration parameters
   }
 
   private void initialize()
@@ -157,7 +157,7 @@ class Trilateration
   // TODO why not an outer for on legs? because the error depends on the number of points
   private double computeError1( int n_pts )
   {
-    TDLog.v("Error nr pts " + n_pts );
+    // TDLog.v("Error nr pts " + n_pts );
     double err = 0;
     // for ( int i=0; i<n_pts; ++i ) {
     //   TriPoint pi = points.get(i);
@@ -231,12 +231,12 @@ class Trilateration
     eps *= n_pts; // 1 mm per point
     double d = 0.0;
     for ( TriLeg l : legs ) d += l.d;
-    double delta = d/n_pts * 0.10;
-    TDLog.v("TRI delta " + delta + " n pts " + n_pts );
+    double delta = d/n_pts * 0.02;  // FIXME 0.02 parameter
+    // TDLog.v("TRI delta " + delta + " n pts " + n_pts );
     double err0 = computeError1( n_pts );
     Point2D[] dp = new Point2D[ n_pts ]; // gradient of points (x,y)
-    TDLog.v( "initial error " + err0 );
-    for ( TriPoint p : points ) TDLog.v("TRI p " + p.name + " x " + p.x + " y " + p.y );
+    // TDLog.v( "initial error " + err0 );
+    // for ( TriPoint p : points ) TDLog.v("TRI p " + p.name + " x " + p.x + " y " + p.y );
 
     for ( iter =0 ; iter < iter_max; ++ iter ) {
       // TDLog.v("TRI iter " + iter );
@@ -284,11 +284,13 @@ class Trilateration
       // for ( TriPoint p : points ) TDLog.v("TRI " + iter + " p " + p.name + " x " + p.x + " y " + p.y );
       if ( err0 < eps || delta < 0.000001 ) break;
     }
-    TDLog.v( "minimize error " + err0 + " iter " + iter + " final delta " + delta );
-    for ( TriPoint p : points ) TDLog.v("TRI p " + p.name + " x " + p.x + " y " + p.y );
+    // TDLog.v( "minimize error " + err0 + " iter " + iter + " final delta " + delta );
+    // for ( TriPoint p : points ) TDLog.v("TRI p " + p.name + " x " + p.x + " y " + p.y );
     return err0;
   }
 
+  // FIXME this and the next method could be replaced by a method the computes the leg decl and return te max
+  //       and a method that clears the leg decl 
   /** @return the maximum of the corrections [degrees]
    */
   float maxAngle()
@@ -302,7 +304,7 @@ class Trilateration
       double dy = p2.y - p1.y; // north
       double a = Math.atan2( dx, dy ) * 180 / Math.PI;
       if ( a < 0 ) a += 360;
-      TDLog.v("TRI leg " + p1.name + " " + p2.name + " angle " + a );
+      // TDLog.v("TRI leg " + p1.name + " " + p2.name + " angle " + a );
       // leg.a is the shot bearing
       // a is the trilateraion bearing
       // setting decl(ave_leg) = trilat_bearing - shot_bearing means that the trilat_bearing is used
@@ -326,7 +328,7 @@ class Trilateration
       double dy = p2.y - p1.y; // north
       double a = Math.atan2( dx, dy ) * 180 / Math.PI;
       if ( a < 0 ) a += 360;
-      TDLog.v("TRI leg " + p1.name + " " + p2.name + " angle " + a );
+      // TDLog.v("TRI leg " + p1.name + " " + p2.name + " angle " + a );
       // leg.a is the shot bearing
       // a is the trilateraion bearing
       // setting decl(ave_leg) = trilat_bearing - shot_bearing means that the trilat_bearing is used
