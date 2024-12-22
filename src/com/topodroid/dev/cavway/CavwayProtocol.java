@@ -274,6 +274,8 @@ public class CavwayProtocol extends TopoDroidProtocol
           return PACKET_INFO_HARDWARE;
         } else if ( command == MemoryOctet.BYTE_PACKET_3D ) { // 0x3d
           if ( LOG ) TDLog.v( TAG + "reply (3D)");
+          if(addr < 0x8000 && len == 64)  //dump memory
+            handleCavwayPacket(mRepliedData);
           return PACKET_REPLY;
         } else if ( command == MemoryOctet.BYTE_PACKET_3E ) { // 0x3e
           if ( LOG ) TDLog.v( TAG + "write reply (3E)");
