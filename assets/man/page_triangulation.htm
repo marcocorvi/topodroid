@@ -98,6 +98,12 @@
       It is recommended that the user checks, and corrects if necessary, the mirroring status of each new triangle BEFORE starting to draw any part of a sketch using the new station as reference.
     </p>
 
+    <p>
+      When mirroring/unmirroring a station it is possible that, if there already are other stations adjusted using the station being mirrored/unmirrored as reference, they will become unadjusted.
+      This can happen if the new position of the mirrored/unmirrored station makes it impossible to solve the triangles that were previously solved.
+      In this case the user will be presented a dialog box informing the situation, listing the stations that were previously adjusted and got unadjusted so the user can decide to cancel or go on with the mirror/unmirror operation.
+    </p>
+
     <h2>Algorithm</h2>
 
     <p>
@@ -127,8 +133,12 @@
       </li>
       <li>Always check (and correct if necessary) the mirroring status of each new station BEFORE using it as an actual reference in your sketch.</li>
       <li>
-        You should not create splays in triangulated surveys as you compass isn't realiable (that's the reason you are using a triangulated ssurvey in the first time, right?).
+        You should not create splays in triangulated surveys as you compass isn't reliable (that's the reason you are using a triangulated survey in the first time, right?).
         All measurements that would normally be done with a splay should, in a triangulated survey, be done with a new station (which should be connected to 2 previous stations).
+      </li>
+      <li>
+        If you want to measure the position of a station for the second time using other previously existing stations as references (maybe to check the position of the first station), use a different name for the second measurement.
+        For example: if the first station was called 8, name the new measurement station as 8x so the triangulation algorithm will adjust this new station independently of the first one.
       </li>
     </ul>
 
