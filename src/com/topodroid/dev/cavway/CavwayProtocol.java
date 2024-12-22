@@ -230,7 +230,7 @@ public class CavwayProtocol extends TopoDroidProtocol
       TDLog.e( TAG + "handle packet: 0-length data");
       return PACKET_NONE;
     }
-    TDLog.v( TAG + " byte[0] " + String.format("%02x", databuf[0] ) );
+    // TDLog.v( TAG + " byte[0] " + String.format("%02x", databuf[0] ) );
     if ( (databuf[0] == MemoryOctet.BYTE_PACKET_DATA || databuf[0] == MemoryOctet.BYTE_PACKET_G ) && databuf.length == DATA_LEN ) { // shot / calib data
       if ( mComm.isDownloading() ) {
         for ( int kk=0; kk<DATA_LEN; ++kk ) {
@@ -246,9 +246,9 @@ public class CavwayProtocol extends TopoDroidProtocol
             }
           }
         }
-      } else if ( mComm.isReadingMemory() ) {
-        TDLog.v( TAG + "handle memory read");
-        mComm.handleOneMemory( mPacketBytes );
+      // } else if ( mComm.isReadingMemory() ) {
+      //   TDLog.v( TAG + "handle memory read");
+      //   mComm.handleOneMemory( mPacketBytes );
       } else {
         TDLog.t( TAG + "not downloading ???");
         return PACKET_NONE;
@@ -274,43 +274,51 @@ public class CavwayProtocol extends TopoDroidProtocol
           return PACKET_INFO_HARDWARE;
         } else if ( command == MemoryOctet.BYTE_PACKET_3D ) { // 0x3d
           if ( LOG ) TDLog.v( TAG + "reply (3D)");
-          if(addr < 0x8000 && len == 64)  //dump memory
-            handleCavwayPacket(mRepliedData);
+          if ( mComm.isReadingMemory() ) {
+            TDLog.v( TAG + "handle memory read");
+            System.arraycopy( databuf, 4, mPacketBytes, 0, DATA_LEN );
+            mComm.handleOneMemory( mPacketBytes );
+          } 
+          // if(addr < 0x8000 && len == 64)  //dump memory
+          //   handleCavwayPacket(mRepliedData);
           return PACKET_REPLY;
         } else if ( command == MemoryOctet.BYTE_PACKET_3E ) { // 0x3e
-          if ( LOG ) TDLog.v( TAG + "write reply (3E)");
+          // if ( LOG ) TDLog.v( TAG + "write reply (3E)");
+          TDLog.v( TAG + "write reply (3E)");
           return PACKET_WRITE_REPLY;
         // } else {
         //   return PACKET_ERROR;
         }
-      } else if ( command == MemoryOctet.BYTE_PACKET_HW_CODE ) { // 0x3c: signature: hardware ver. - 0x3d 0x3e only works in App mode not in the bootloader mode.
-        // 0x3a 0x3b 0x3c are commands work in bootloader mode
-        if ( LOG ) TDLog.v( TAG + "hw code (3C) (signature) length " + databuf.length );
-        if ( databuf.length == 3 ) { 
-          mRepliedData[0] = databuf[1];
-          mRepliedData[1] = databuf[2];
-          return PACKET_SIGNATURE;
-        }
-      } else if ( databuf[0] == MemoryOctet.BYTE_PACKET_FW_WRITE ) { // 0x3b
-        if ( LOG ) TDLog.v( TAG + "fw write (3B) (checksum) length " + databuf.length );
-        if ( databuf.length == 6 ) {
-          mFwOpReturnCode = databuf[3];
-          mCheckCRC = ((databuf[5] << 8) | (databuf[4] & 0xff)) & 0xffff;
-          return PACKET_FLASH_CHECKSUM;
-        }
-      } else if ( command == MemoryOctet.BYTE_PACKET_FW_READ && (databuf.length == 131 || databuf.length == 133)) {   // 0x3a: 3 headers + 128 payloadsda
-        if ( LOG) TDLog.v( TAG + "fw read (3B) databuffer length " + databuf.length );
-        if ( databuf[2] == 0x00 ) {        // firmware first packet (MTU=247)
-          for ( int i=3; i<131; i++) mFlashBytes[i-3] = databuf[i]; // databuf is copied from offset 3
-          return PACKET_FLASH_BYTES_1;
-        } else if ( databuf[2] == 0x01 && databuf.length == 133) {   // firmware second packet, with 2 bytes CRC at the end
-          for ( int i=3; i<131; i++) mFlashBytes[i+128-3] = databuf[i];
-          mCheckCRC = ((databuf[132] << 8) | (databuf[131] & 0xff)) & 0xffff;
-          return PACKET_FLASH_BYTES_2;
-        // } else {
-        //   // TDLog.t("Cavway ...");
-        //   return PACKET_ERROR;
-        }
+      // } else if ( command == MemoryOctet.BYTE_PACKET_HW_CODE ) { // 0x3c: signature: hardware ver. - 0x3d 0x3e only works in App mode not in the bootloader mode.
+      //   // 0x3a 0x3b 0x3c are commands work in bootloader mode
+      //   if ( LOG ) TDLog.v( TAG + "hw code (3C) (signature) length " + databuf.length );
+      //   if ( databuf.length == 3 ) { 
+      //     mRepliedData[0] = databuf[1];
+      //     mRepliedData[1] = databuf[2];
+      //     return PACKET_SIGNATURE;
+      //   }
+      // } else if ( databuf[0] == MemoryOctet.BYTE_PACKET_FW_WRITE ) { // 0x3b
+      //   if ( LOG ) TDLog.v( TAG + "fw write (3B) (checksum) length " + databuf.length );
+      //   if ( databuf.length == 6 ) {
+      //     mFwOpReturnCode = databuf[3];
+      //     mCheckCRC = ((databuf[5] << 8) | (databuf[4] & 0xff)) & 0xffff;
+      //     return PACKET_FLASH_CHECKSUM;
+      //   }
+      // } else if ( command == MemoryOctet.BYTE_PACKET_FW_READ && (databuf.length == 131 || databuf.length == 133)) {   // 0x3a: 3 headers + 128 payloadsda
+      //   if ( LOG) TDLog.v( TAG + "fw read (3B) databuffer length " + databuf.length );
+      //   if ( databuf[2] == 0x00 ) {        // firmware first packet (MTU=247)
+      //     for ( int i=3; i<131; i++) mFlashBytes[i-3] = databuf[i]; // databuf is copied from offset 3
+      //     return PACKET_FLASH_BYTES_1;
+      //   } else if ( databuf[2] == 0x01 && databuf.length == 133) {   // firmware second packet, with 2 bytes CRC at the end
+      //     for ( int i=3; i<131; i++) mFlashBytes[i+128-3] = databuf[i];
+      //     mCheckCRC = ((databuf[132] << 8) | (databuf[131] & 0xff)) & 0xffff;
+      //     return PACKET_FLASH_BYTES_2;
+      //   // } else {
+      //   //   // TDLog.t("Cavway ...");
+      //   //   return PACKET_ERROR;
+      //   }
+      } else {
+        TDLog.v( TAG + "handle packet - command " + command );
       }
     }
     return PACKET_ERROR;
