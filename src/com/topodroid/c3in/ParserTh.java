@@ -216,6 +216,7 @@ public class ParserTh extends TglParser
    */
   private String makeName( String in, String path )
   {
+    // TDLog.v("TH make name " + in + " " + path );
     int index = in.indexOf('@');
     if ( index > 0 ) {
       // 20240910 
@@ -450,7 +451,7 @@ public class ParserTh extends TglParser
         }
         if ( line.length() > 0 ) {
           String[] vals = TDString.splitOnStrings( line ); // splitLine( line );
-          // TDLog.v( "[" + vals.length + "] >>" + line + "<<" );
+          // TDLog.v( "[" + vals.length + "] >>" + line + "<< IN " + in_survey + "/" + in_centerline + "/" + in_map + "/" + in_surface );
           // for (int j=0; j<vals.length; ++j ) TDLog.v( "    " + vals[j] );
 
           if ( vals.length > 0 ) {
@@ -773,6 +774,8 @@ public class ParserTh extends TglParser
                   // TDLog.v( "TH DB " + db_path );
                   if ( (new File(db_path)).exists() ) { // DB FILE
                     mData = new DataHelper( mApp, db_path, TDVersion.DATABASE_VERSION );
+                  } else {
+                    TDLog.e("TH inexistent database " + db_path );
                   }
                 }
                 int res = readSurvey( filename, path, use_survey_declination, survey_declination, color, pw );
@@ -791,7 +794,7 @@ public class ParserTh extends TglParser
                   if ( idx < vals.length ) {
 		    String to = makeName( vals[idx], path );
                     shots.add( new Cave3DShot( from, to, 0.0f, 0.0f, 0.0f, 0, 0, mColor ) );
-                    // TDLog.v( "Th parser, equate shot" + from + " " + to );
+                    TDLog.v( "Th parser, equate shot" + from + " " + to );
                   }
                 }
               }
@@ -899,7 +902,7 @@ public class ParserTh extends TglParser
   private void processShots()
   {
     if ( shots.size() == 0 ) return;
-    // TDLog.v( "Th shots " + shots.size() + " fixes " + fixes.size() );
+    // TDLog.v( "Th shots " + shots.size() + " stations " + stations.size() + " fixes " + fixes.size() );
     ArrayList< Cave3DFix > ok_fixes = new ArrayList<>(); // array of fixed stations that are in the survey
 
     int bad_fixes = 0;
@@ -928,7 +931,7 @@ public class ParserTh extends TglParser
  
     int mLoopCnt = 0;
     Cave3DFix fix0 = ok_fixes.get( 0 );
-    TDLog.v( "Th Process Shots. Fix " + fix0.getFullName() + " " + fix0.x + " " + fix0.y + " " + fix0.z );
+    // TDLog.v( "Th Process Shots. Fix " + fix0.getFullName() + " " + fix0.x + " " + fix0.y + " " + fix0.z );
 
     mCaveLength = 0.0f;
     mSurfaceLength = 0.0f;
@@ -967,13 +970,21 @@ public class ParserTh extends TglParser
           for ( Cave3DStation s : stations ) {
             if ( s.hasName( sh.from ) ) {
               sf = s;
-              if (  sh.from_station == null ) sh.from_station = s;
-              else if ( sh.from_station != s ) TDLog.e( "Th shot " + sh.from + " " + sh.to + " from-station mismatch ");
+              if (  sh.from_station == null ) {
+                sh.from_station = s;
+                // TDLog.v( "TH shot found from " + sh.from + " to " + sh.to );
+              } else if ( sh.from_station != s ) {
+                TDLog.e( "Th shot " + sh.from + " " + sh.to + " from-station mismatch ");
+              }
             } 
             if ( s.hasName( sh.to ) )   {
               st = s;
-              if (  sh.to_station == null ) sh.to_station = s;
-              else if ( sh.to_station != s ) TDLog.e( "Th shot " + sh.from + " " + sh.to + " to-station mismatch ");
+              if (  sh.to_station == null ) {
+                sh.to_station = s;
+                // TDLog.v( "TH shot found to " + sh.to + " from "  + sh.from );
+              } else if ( sh.to_station != s ) {
+                TDLog.e( "Th shot " + sh.from + " " + sh.to + " to-station mismatch ");
+              }
             }
             if ( sf != null && st != null ) break;
           }
@@ -994,6 +1005,7 @@ public class ParserTh extends TglParser
             sh.to_station = s;
             repeat = true; // unnecessary
           } else if ( sf != null && st == null ) {
+            // TDLog.v( "TH shot found from " + sh.from + " no station to "  + sh.to );
             // TDLog.v( "Th using forward shot " + sh.from + " " + sh.to + " : " + sf.getFullName() + " null" );
             Cave3DStation s = sh.getStationFromStation( sf );
             stations.add( s );
@@ -1008,6 +1020,7 @@ public class ParserTh extends TglParser
             }
             repeat = true;
           } else if ( sf == null && st != null ) {
+            // TDLog.v( "TH shot found to " + sh.to + " no station from "  + sh.from );
             // TDLog.v( "Th using backward shot " + sh.from + " " + sh.to + " : null " + st.getFullName() );
             Cave3DStation s = sh.getStationFromStation( st );
             stations.add( s );
@@ -1028,7 +1041,14 @@ public class ParserTh extends TglParser
       }
       // TDLog.v( "Th after " + fix.getFullName() + " used shot " + used_cnt + " loops " + mLoopCnt );
     } // for ( Cave3DFix fix : ok_fixes )
-    // TDLog.v( "Th used shot " + used_cnt + " loops " + mLoopCnt + " total shots " + shots.size() );
+    TDLog.v( "Th used shot " + used_cnt + " loops " + mLoopCnt + " total shots " + shots.size() );
+    // for ( Cave3DStation st : stations ) {
+    //   TDLog.v("Th station " + st.getFullName() );
+    // }
+    // for ( Cave3DShot sh : shots ) {
+    //   if ( sh.isUsed() ) continue; // go to next sh
+    //   TDLog.v( "Th unused shot " + sh.from + " " + sh.to );
+    // }
     // StringBuilder sb = new StringBuilder();
     // for ( Cave3DStation st : stations ) {
     //   sb.append(" "); sb.append( st.name );
