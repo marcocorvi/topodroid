@@ -73,7 +73,7 @@ public class MemoryData
     int l = (int)(bl & 0xff);   // low
     if ( l < 0 ) l += 256; // always false
     h = (h * 256 + l);
-    if ( h >= 32768 ) h = 65536 - h;
+    if ( h >= 32768 ) h = h - 65536;
     return h;
   }
 

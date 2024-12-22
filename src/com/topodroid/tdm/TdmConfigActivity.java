@@ -471,7 +471,7 @@ public class TdmConfigActivity extends Activity
       (new TdmInfoDialog( this, (TopoDroidApp)getApplication(), mTdmConfig)).show();
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // EQUATES
       (new TdmEquatesDialog( this, mTdmConfig, null )).show();
-    } else if ( TDLevel.overNormal && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // 3D
+    } else if ( TDLevel.overNormal && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // 3D VIEWER
       if ( mTdmConfig.writeTdmConfig( true ) ) {
         try {
           TDLog.v( "Cave3D of " + mTdmConfig.getFilepath() );

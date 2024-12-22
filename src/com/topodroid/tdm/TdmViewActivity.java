@@ -12,6 +12,7 @@
 package com.topodroid.tdm;
 
 import com.topodroid.utils.TDLocale;
+import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
@@ -264,6 +265,13 @@ public class TdmViewActivity extends Activity
       }
       // TdmConfig config = mApp.mConfig;
       ArrayList< TdmEquate > equates = TdmConfigActivity.mTdmConfig.getEquates();
+
+      for ( TdmSurvey sr : surveys ) {
+        TDLog.v("VIEW survey >" + sr.getFullName() + "<" );
+      }
+      for ( TdmEquate eq : equates ) {
+        TDLog.v("VIEW equate >" + eq.stationsString() + "<");
+      }
 
       // TDLog.v( "TdmView nr. surveys " + surveys.size() + " equates " + equates.size() );
 
@@ -578,7 +586,7 @@ public class TdmViewActivity extends Activity
 
       String st = mDrawingSurface.selectedStationName() + "@" + mDrawingSurface.selectedCommandName();
       int len = st.length();
-      while ( len > 0 && st.charAt( len - 1 ) == '.' ) -- len;
+      // while ( len > 0 && st.charAt( len - 1 ) == '.' ) -- len; // 2024-12-22 dropped
       final String st1 = st.substring(0,len);
       if ( mDrawingSurface.getSurveyAt( x, y, mSelectedCommand ) ) {
         // TdmViewCommand cmd2 = mDrawingSurface.selectedCommand();

@@ -364,6 +364,7 @@ class TdmConfig extends TdmFile
       pw.format("    load \"%s\" -color %d\n", path, (input.getColor() & 0xffffff) );
     }
     for ( TdmEquate equate : mEquates ) {
+      TDLog.v("EQUATE >" + equate.stationsString() + "<" );
       pw.format("    equate");
       for ( String st : equate.mStations ) pw.format(" \"%s\"", st );
       pw.format("\n");

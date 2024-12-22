@@ -459,10 +459,10 @@ public class CavwayComm extends TopoDroidComm
       if ( LOG ) TDLog.v( TAG + "changed read chrt" );
       // TODO set buffer type according to the read value[]
       mQueue.put( DATA_PRIM, chrt.getValue() );
-      TDLog.v( TAG + "changed read chrt " + byteArray2String( chrt.getValue() ) );
+      // TDLog.v( TAG + "changed read chrt " + byteArray2String( chrt.getValue() ) );
       CavwayData cw = new CavwayData( 0 );
       cw.setData( chrt.getValue() );
-      TDLog.v( TAG + cw.toString() );
+      // TDLog.v( TAG + cw.toString() );
       resetTimer();
     } else if ( uuid_str.equals( CavwayConst.CAVWAY_CHRT_WRITE_UUID_STR ) ) {
       if ( LOG ) TDLog.v( TAG + "changed write chrt");
@@ -1006,7 +1006,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public void readOneMemory( int addr )
   {
-    TDLog.v( TAG + "read one memory. index " + addr + " set READING flag" );
+    // TDLog.v( TAG + "read one memory. index " + addr + " set READING flag" );
     syncSetReadingMemory();
     byte[] cmd = new byte[4];
     cmd[0] = 0x3d; // command 0x3d is used for data reading
@@ -1028,24 +1028,24 @@ public class CavwayComm extends TopoDroidComm
   {
     boolean ret = false;
     if ( res_buf == null || res_buf.length != BYTE_PER_DATA ) {
-      TDLog.v( TAG + "handle memory: FAILURE - index " + mMemoryIndex );
+      TDLog.e( TAG + "handle memory: FAILURE - index " + mMemoryIndex );
       syncClearReadingMemory();
     } else {
-      TDLog.v( TAG + "handle memory - index " + mMemoryIndex );
+      // TDLog.v( TAG + "handle memory - index " + mMemoryIndex );
       final CavwayData result = new CavwayData( mMemoryIndex );
       result.setData( res_buf );
       if ( mMemory != null ) {
-        TDLog.v( TAG + "  add to MEMORY" );
+        // TDLog.v( TAG + "  add to MEMORY" );
         mMemory.add( result );
       }
       if ( mMemoryDialog != null ) {
-        final int k1 = mMemoryIndex;
+        final int k1 = mMemoryIndex + 1;
         (new Handler( Looper.getMainLooper() )).post( new Runnable() {
           public void run() {
-            TDLog.v( TAG + "handle memory run " + k1 );
+            // TDLog.v( TAG + "handle memory run " + k1 );
             mMemoryDialog.setIndex( k1 );
             mMemoryDialog.appendToList( result );
-            TDLog.v( TAG + "handle memory: clear FLAG");
+            // TDLog.v( TAG + "handle memory: clear FLAG");
             syncClearReadingMemory();
           }
         } );
@@ -1063,7 +1063,7 @@ public class CavwayComm extends TopoDroidComm
   void syncClearReadingMemory()
   {
     synchronized (mNewDataFlag) {
-      TDLog.v( TAG + "clear READING flag");
+      // TDLog.v( TAG + "clear READING flag");
       mReadingMemory = false;
       mNewDataFlag.notifyAll();
     }
@@ -1074,7 +1074,7 @@ public class CavwayComm extends TopoDroidComm
   void syncSetReadingMemory()
   {
     synchronized (mNewDataFlag) {
-      TDLog.v( TAG + "set READING flag");
+      // TDLog.v( TAG + "set READING flag");
       mReadingMemory = true;
       // mNewDataFlag.notifyAll(); // nobody waits on flag == false
     }
@@ -1110,7 +1110,7 @@ public class CavwayComm extends TopoDroidComm
     mMemoryDialog = dialog;
     int cnt = 0; // number of memory location that have been read
     for ( int idx = 0; idx < number; ++idx ) {
-      TDLog.v( TAG + "set memory index " + idx );
+      // TDLog.v( TAG + "set memory index " + idx );
       mMemoryIndex = idx;
       readOneMemory( idx );
       syncWaitOnReadingMemory();
