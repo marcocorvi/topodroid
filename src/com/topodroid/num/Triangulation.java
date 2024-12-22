@@ -385,6 +385,7 @@ public class Triangulation
 
 		// Adjusting azimuth
 		double[] angles = calculateAngles(leg0.lengthH(), leg1.lengthH(), leg2.lengthH());
+		if (Double.isNaN(angles[0]) || Double.isNaN(angles[1]) || Double.isNaN(angles[2])) return false;
 		// The azimuth of the first shot/leg is never adjusted: it is the reference used to calculate the azimuths of the 
 		// other 2 shots/legs.
 		double azimuth0 = TDMath.in360(leg0.azimuth);
