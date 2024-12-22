@@ -31,7 +31,6 @@ import com.topodroid.num.NumShot;
 import com.topodroid.num.NumSplay;
 // import com.topodroid.mag.Geodetic;
 import com.topodroid.math.TDVector;
-import com.topodroid.math.Point2D;
 // import com.topodroid.math.BezierCurve;
 // import com.topodroid.math.BezierInterpolator;
 // import com.topodroid.dln.DLNWall;
@@ -66,6 +65,7 @@ import java.io.FileInputStream; // TH2EDIT
 import java.io.OutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -147,6 +147,7 @@ public class DrawingWindow extends ItemDrawer
                                     // , IJoinClickHandler
                                     , IPhotoInserter
                                     , IAudioInserter
+                                    , TriangulationMirrorUnadjustedStationsDialogListener
 {
   public static final int ZOOM_TRANSLATION_1 = -50; // was -42
   // public static final int ZOOM_TRANSLATION_3 = -200;
@@ -6007,12 +6008,49 @@ public class DrawingWindow extends ItemDrawer
 
   /**
    *  Toggles mirrored status of provided station. Relevant only for TRIANGULATION loop closure.
-   * @param stn station name
+   * @param station station name
+   * @param is_mirror true if the station is mirrored, false otherwise
    */
-  void toggleTriMirror( String stn )
+  void toggleTriMirror( String station, boolean is_mirror )
   {
-    mApp_mData.toggleTriMirroredStation( TDInstance.sid, stn );
+    mApp_mData.toggleTriMirroredStation( TDInstance.sid, station );
+    HashMap<String, Tri2StationStatus> triStatusPre = mNum.getAllStationsTriStatus();
     updateDisplay();
+    HashMap<String, Tri2StationStatus> triStatusPos = mNum.getAllStationsTriStatus();
+    ArrayList<String> unadjusted_stations = getNewlyUnadjustedStations(triStatusPre, triStatusPos);
+    if (!unadjusted_stations.isEmpty()) {
+      new TriangulationMirrorUnadjustedStationsDialog(
+          mActivity,
+          this,
+          mApp,
+          this,
+          station,
+          is_mirror,
+          unadjusted_stations
+      ).show();
+    }
+  }
+
+  /**
+   * Looks for stations that were adjusted and aren't anymore. Relevant only for TRIANGULATION loop closure.
+   * @param pre stations tri status list before the last station mirroring
+   * @param pos stations tri status list after the last station mirroring
+   * @return list of stations that were adjusted and aren't anymore
+   */
+  ArrayList<String> getNewlyUnadjustedStations(HashMap<String, Tri2StationStatus> pre, HashMap<String, Tri2StationStatus> pos)
+  {
+    ArrayList<String> unadjusted = new ArrayList<String>();
+    for (String station : pos.keySet())
+    {
+      if (pre.containsKey(station) &&
+          (pre.get(station) == Tri2StationStatus.ADJUSTED) &&
+          (pos.get(station) != Tri2StationStatus.ADJUSTED)
+      )
+      {
+        unadjusted.add(station);
+      }
+    }
+    return unadjusted;
   }
 
   /** open a station xsection - at station B where A--B--C
@@ -10108,6 +10146,12 @@ public class DrawingWindow extends ItemDrawer
     mRecentDimX  = Float.parseFloat( getResources().getString( R.string.dimxl ) );
     mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimyl ) );
     setBtnRecentAll( );
+  }
+
+  public void onTriangulationMirrorUnadjustedStationsDialogClosed(String buttonPressed, String station, boolean isMirror) {
+    if (buttonPressed.equals("Cancel")) {
+      toggleTriMirror( station, isMirror );
+    }
   }
 
   // private void AlertMissingSymbols()

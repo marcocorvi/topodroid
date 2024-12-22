@@ -2424,9 +2424,14 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="triangulation_triangulated_station">Triangulation: </string>
     <string name="button_triangulation_mirror_station">Mirror</string>
     <string name="button_triangulation_unmirror_station">Unmirror</string>
-    <string name="triangulation_axle">around %s leg</string>
+    <string name="triangulation_axle">around %1$s leg</string>
     <string name="triangulation_reference_station">Reference station</string>
     <string name="triangulation_unadjusted_station">Unadjusted station</string>
     <string name="triangulation_calculated_azimuths">Trigonometrically calculated azimuths (triangulation)</string>
     <string name="triangulation_regular_azimuths">Regular measured azimuths</string>
+    <string name="triangulation_unadjusted_stations_title">Unadjusted stations</string>
+    <string name="triangulation_unadjusted_stations_explanation">The following stations were adjusted before %1$s station %2$s but aren\'t after it:</string>
+    <string name="triangulation_keep_mirroring">Continue %1$s station %2$s?</string>
+    <string name="triangulation_mirroring">mirroring</string>
+    <string name="triangulation_unmirroring">unmirroing</string>
 </resources>

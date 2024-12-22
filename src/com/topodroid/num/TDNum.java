@@ -596,6 +596,14 @@ public class TDNum
   }
 
   /**
+   * Returns all stations triangulation status: reference, adjusted or unadjusted.
+   * @return all stations triangulation status
+   */
+  public HashMap<String, Tri2StationStatus> getAllStationsTriStatus() {
+    return mTriStationsStatus;
+  }
+
+  /**
    * Return the station triangulation axle info, i.e., around with leg the station can be mirrored.
    * @param name station name
    * @return station triangulation axle info

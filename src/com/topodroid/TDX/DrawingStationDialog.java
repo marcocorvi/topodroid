@@ -369,12 +369,13 @@ class DrawingStationDialog extends MyDialog
             mTriangulationText.setVisibility( View.VISIBLE );
             break;
           case ADJUSTED:
-            String mirrorButton = ( mTriMirrored )?
-                mContext.getResources().getString( R.string.button_triangulation_unmirror_station ) :
-                mContext.getResources().getString( R.string.button_triangulation_mirror_station );
-            mTriangulationMirrorButton.setText( mirrorButton );
+            String mirrorButtonText = mContext.getResources().getString( mTriMirrored ?
+                R.string.button_triangulation_unmirror_station :
+                R.string.button_triangulation_mirror_station
+            );
             mTriangulationText.setText( String.format( mContext.getResources().getString( R.string.triangulation_axle ), mTriAxle.getAxleName() ) );
             mTriangulationMirrorButton.setVisibility( View.VISIBLE );
+            mTriangulationMirrorButton.setText( mirrorButtonText );
             mTriangulationText.setVisibility( View.VISIBLE );
 
             mTriangulationMirrorButton.setOnClickListener( this );
@@ -426,10 +427,10 @@ class DrawingStationDialog extends MyDialog
       } else if ( b == mBtnHidden ) {
         mParent.toggleStationHidden( mStationName, mIsHidden );
       } else if ( b == mCbSplaysOn ) {
-	mCbSplaysOff.setChecked( false );
+        mCbSplaysOff.setChecked( false );
         mParent.toggleStationSplays( mStationName, mCbSplaysOn.isChecked(), false );
       } else if ( b == mCbSplaysOff ) {
-	mCbSplaysOn.setChecked( false );
+        mCbSplaysOn.setChecked( false );
         mParent.toggleStationSplays( mStationName, false, mCbSplaysOff.isChecked() );
 
       } else if ( b == mBtnXSection ) {
@@ -465,7 +466,7 @@ class DrawingStationDialog extends MyDialog
         mClino = -mClino;
         mParent.openXSection( mStation, mStationName, mParent.getPlotType(), mBearing, mClino, mCBhorizontal.isChecked(), nick);
       } else if ( b == mTriangulationMirrorButton) {
-        mParent.toggleTriMirror( mStationName );
+        mParent.toggleTriMirror( mStationName, mTriMirrored );
       }
       dismiss();
     }

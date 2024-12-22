@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        style="@style/base_padding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView android:id="@+id/triangulation_unadjusted_stations_explanation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/triangulation_unadjusted_stations_explanation"
+            />
+
+        <TextView android:id="@+id/unadjusted_stations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/unadjusted_stations_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView android:id="@+id/triangulation_keep_mirroring"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/triangulation_keep_mirroring"
+            />
+
+        <LinearLayout android:id="@+id/help"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/marginv"
+            >
+            <Button android:id="@+id/button_help"
+                style="@style/button_empty"
+                android:text="@string/button_help"
+                />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                >
+                <Button android:id="@+id/button_cancel"
+                    style="@style/button_default"
+                    android:text="@string/button_cancel"
+                    android:layout_gravity="start"
+                    />
+                <Button android:id="@+id/button_ok"
+                    style="@style/button_default"
+                    android:text="@string/button_ok"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
