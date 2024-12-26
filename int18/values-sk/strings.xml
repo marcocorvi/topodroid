@@ -1,11 +1,3 @@
-THIS TRANSLATION IS TOO INCOMPLETE
-In order to bring it back in the app you need to:
-  [1] translate all the untranslated strings
-  [2] copy the missing strings from the English strings.xml file and translate them
-  [3] send an email informing that the translation is ready for inclusion
-Translation with more than 20 lint errors are not accepted.
-Translation with more than 70 lint errors are dropped from the app.
-Neprekladať čo má v originály translatable - vymazať riadky kľudne
 <?xml version="1.0" encoding="utf-8"?>
 <!-- TODO PLEASE, DO NOT FORGET TO REMOVE THE ENDING OF COMMENTS WHEN YOU TRANSLATE A STRING -->
 <resources>
@@ -753,7 +745,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="stat_component">Mapovanie rozdelené na celky %1$d</string>
     <string name="stat_depth">Hĺbka %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Opakované zámery (počet-dĺžka) %1$d # %2$d %3$.1f %4$s</string>
-    <string name="stat_leg" tools:ignore="PluralsCandidate">Hlavné zámery (počet-dĺžka-dĺžka v pôdoryse) %1$d Length %2$.1f %3$.1f H-dĺžka %4$.1f %5$s</string>
+    <string name="stat_leg">Hlavné zámery (počet-dĺžka-dĺžka v pôdoryse) %1$d Length %2$.1f %3$.1f H-dĺžka %4$.1f %5$s</string>
     <string name="stat_length">Dĺžka %1$.1f %2$s</string>
     <string name="stat_extlen">3D dĺžka %1$.1f %2$s</string>
     <string name="stat_projlen">Dĺžka pôdorysu %1$.1f %2$s</string>
@@ -816,7 +808,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">Nastaviť službu GPS?</string>
     <string name="ask_backups_clear">Vymazať zálohy Nákresov?</string>
-    <string name="ask_manual_update" tools:ignore="PluralsCandidate">Aktualizovať Preklad používateľskej príručky?\nSúčašná v. %1$d Inštalovaná v. %2$d</string>
+    <string name="ask_manual_update">Aktualizovať Preklad používateľskej príručky?\nSúčašná v. %1$d Inštalovaná v. %2$d</string>
 
     <string name="button_add"       >Pridať       </string>
     <string name="button_apply"     >Aplikovať</string>
@@ -1449,7 +1441,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
   <string name="pref_import_datamode_summary">Výber Datamódu pre import meraní</string>
 
   <string name="pref_therion_config_title">Therion konfigurácia</string>
-  <string name="pref_therion_config_summary">Vloží Therion config príkazy/string>
+  <string name="pref_therion_config_summary">Vloží Therion config príkazy</string>
   <string name="pref_therion_maps_title">Therion mapy ako prvé</string>
   <string name="pref_therion_maps_summary">Therion mapy pred dátami</string>
   <string name="pref_extra_buttons_title">Úroveň príkazov</string>
@@ -1924,69 +1916,14 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
   <!-- UNUSED string name="pref_walls_concave_summary">Maximálna konkávnosť [percent]</string -->
   <!-- UNUSED string name="pref_walls_xstep_title">Správa priestoru - maximum</string -->
   <!-- UNUSED string name="pref_walls_xstep_summary">Maximálna vzdialenosť bodov na kreslenie stien [m]</string -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <string name="pref_3d_sketch_title">3D modelovanie</string>
   <string name="pref_3d_sketch_summary">Povolí 3D modelovanie (debug build only)</string>
   <string name="pref_sketch_splay_buffer_title">Buffer pomocných zámer</string>
   <string name="pref_sketch_splay_buffer_summary">Buffer pomocných zámer pri reze [m]</string>
 <!-- LOG STRINGS MUST NOT BE TRANSLATED (they are used to communicate with developers to solve problems)
-<!-- UNUSED NO_LOGS
+<!- - UNUSED NO_LOGS
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-DO NOT REMOVE THIS LINE -->
+DO NOT REMOVE THIS LINE - ->
   <!- - UNUSED string name="pref_log_sync" translatable="false">Co-surveying</string - ->
 -->
   <!-- UNUSED string name="line_bezier">Bezier</string -->
