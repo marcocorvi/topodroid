@@ -13,11 +13,11 @@
      <item name="view">Podľa Pohľadu</item>
   </string-array>
 
-  <!-- TODO string-array name="splayColors">
-     <item name="none">none</item>
-     <item name="all">all</item>
-     <item name="palette">palette</item>
-  </string-arrayi -->
+  <string-array name="splayColors">
+     <item name="none">Žiadna</item>
+     <item name="all">Všetko</item>
+     <item name="palette">Paleta</item>
+  </string-arrayi>
 
   <string-array name="feedbackMode">
      <item name="none">Žiadna</item>
@@ -288,10 +288,10 @@
      <item name="cut">Strih</item>
   </string-array>
 
-  <!-- TODO string-array name="splayUse">
-     <item name="skip">Skip</item>
-     <item name="normal">Normal</item>
-     <item name="xsection">X-Section</item>
-  </string-array -->
+  <string-array name="splayUse">
+     <item name="skip">Preskočiť</item>
+     <item name="normal">Normálne</item>
+     <item name="xsection">Priečny rez</item>
+  </string-array>
 
 </resources>
