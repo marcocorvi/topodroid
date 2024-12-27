@@ -226,7 +226,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="few_data">Nedostatok údajov</string>
     <string name="few_iter">Zlyhanie: príliš veľa opakovaní</string>
     <string name="few_groups">Nedostatok dát na zoradenie do skupín</string>
-    <string name="found_groups">Nájdených %1$d skupín</string>
+    <!-- UNUSED string name="found_groups" tools:ignore="PluralsCandidate">Found %1$d groups</string -->
     <string name="regroup">Žiadne preskupenie</string>
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">Nedostatočné množstvo kalibrácií</string>
@@ -394,9 +394,9 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="splays">Pomocné zámery</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
-    <string name="fmt_latitude">Zemepisná šírka %1$s</string>
-    <string name="fmt_longitude">Zemepisná dĺžka %1$s</string>
-    <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
+    <string name="fmt_latitude_dd_dms">Zemepisná šírka: %1$s [%2$s]</string>
+    <string name="fmt_longitude_dd_dms">Zemepisná dĺžka: %1$s [%2$s]</string>
+    <!-- UNUSED string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string --> 
     
     <string name="fixed">Fixný príznak</string>
     <string name="painted">Iný príznak</string>
@@ -415,13 +415,13 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="no_calib">Žiadna kalibrácia</string>
     <string name="no_calib_check">Bez kalibrácie - Kontrolných meraní kalibrácie</string>
     <string name="no_calibration">Nie je vybratá žiadna kalibrácia</string>
-    <string name="no_capture_app">Žiadna aplikácia pre fotenie</string>
+    <!-- UNUSED string name="no_capture_app">No image capture app</string -->
     <string name="no_cave3d">Cave3D nie je nainštalovaná</string>
     <string name="no_data_reduction">Žiadna redukcia dát</string>
     <string name="no_db">Žiadna databáza</string>
     <string name="no_device_address">Zariadenie nie je vybraté</string>
     <string name="no_device_window">Počas sťahovania nie je k dispozícii okno zariadenia</string>
-    <string name="no_device_found">Zariadenie sa nenašlo</string>
+    <!-- UNUSED string name="no_device_found">Found no device</string -->
     <string name="no_feature_audio">Audio nie je podporované</string>
     <string name="no_feature_pdf">PDF nepodporované</string>
     <string name="no_gms">Kalibrácia nemá žiade dáta \nPoužite tlačidlo Stiahnuť</string>
@@ -431,7 +431,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="no_leg_intersection">Čiara priečneho rezu nepretína žiadnu hlavnú zámeru</string>
     <string name="no_location_data">Žiadne dáta o pozícii</string>
     <string name="no_native_lib">Chýba natívna knižnica</string>
-    <string name="no_paired_device">Ziadne spárované zariadenie DistoX \nSpustite skenovanie a spárujete DistoX.</string>
+    <!-- UNUSED string name="no_paired_device">No paired device.\nScan and pair a DistoX</string -->
     <string name="no_photos">Mapovanie je bez fotografie</string>
     <string name="no_plots">Mapovanie je bez nákresu /Použite tlačidlo Pridať na vytvorenie</string>
     <string name="no_profile_overview">Celkový pohľad pre Priemet je nepodporovaný</string>
@@ -481,13 +481,13 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="menu_switch">PREPNÚŤ/ZATVORIŤ</string>
     <string name="menu_help">POMOC</string>
     <!-- UNUSED string name="menu_join_survey">CO-SURVEY</string -->
-    <string name="menu_logs">ZÁZNAM PROGRAMU</string>
+    <!-- UNUSED string name="menu_logs">LOGS</string -->
     <string name="menu_manual_calibration">KALIBRÁCIA</string>
     <string name="menu_options">NASTAVENIA</string>
     <string name="menu_overview">CELKOVÝ POHĽAD</string>
     <string name="menu_packets">PAKETY</string>
     <string name="menu_calib_auto">AUTO-KALIB</string>
-    <string name="menu_pair">SPÁROVAŤ</string>
+    <!-- UNUSED string name="menu_pair">PAIR</string -->
     <string name="menu_palette">PALETA</string> 
     <string name="menu_photo">FOTO</string>
     <string name="menu_sections">SEKCIE</string>
@@ -551,14 +551,14 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="popup_select_shot">Vybrať zámery</string>
     <string name="popup_select_station">Vybrať staničenia</string>
 
-    <string name="popup_cont_none">Žiadne</string>
-    <string name="popup_cont_start">Počiatočný bod</string>
-    <string name="popup_cont_end">Koncový bod</string>
-    <string name="popup_cont_both">Obidva body</string>
-    <string name="popup_cont_continue">Pokračovanie</string>
+    <!-- UNUSED string name="popup_cont_none">None</string -->
+    <!-- UNUSED string name="popup_cont_start">Start point</string -->
+    <!-- UNUSED string name="popup_cont_end">End point</string -->
+    <!-- UNUSED string name="popup_cont_both">Both points</string -->
+    <!-- UNUSED string name="popup_cont_continue" copyable="fr">Continue</string -->
     
-    <string name="connection_error">Chyba spojenia</string>
-    <string name="connecting">Spojenie &#8230;</string>
+    <!-- UNUSED string name="connection_error">Connection error</string -->
+    <!-- UNUSED string name="connecting">Connecting &#8230;</string -->
     <!-- UNUSED string name="connected_none">Not connected</string -->
     <!-- UNUSED string name="connected_already">Already connected</string -->
 
@@ -646,7 +646,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="shot_name">Zámera %1$s</string>
     <!-- UNUSED string name="shot_length">length</string -->
     <string name="shot_note">Poznámka</string>
-    <string name="shot_reverse">Vymeniť body</string>
+    <!-- UNUSED string name="shot_reverse">reverse</string -->
     <string name="shot_to">Na</string>
 
     <string name="station">Meračský bod</string>
@@ -664,7 +664,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="survey_split">Rozdeliť Mapovanie ?</string>
     <string name="survey_not_attached">VAROVANIE: Nepripojené merania</string>
     <string name="survey_not_extend">VAROVANIE: Nenastavená Smerová orientácia</string>
-    <string name="survey_not_attached_extend">VAROVANIE: Nepripojené merania a Nenastavená Smerová orientácia</string>
+    <!-- UNUSED string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string -->
     <string name="survey_no_data_reduction">VAROVANIE: Žiadna redukcia dát</string>
     <string name="survey_not_saved">VAROVANIE: Informácie o mapovaní neuložené</string>
     <string name="survey_bad_siblings">VAROVANIE: nesprávne opakované zámery: %1$s</string>
@@ -745,12 +745,12 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="stat_component">Mapovanie rozdelené na celky %1$d</string>
     <string name="stat_depth">Hĺbka %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Opakované zámery (počet-dĺžka) %1$d # %2$d %3$.1f %4$s</string>
-    <string name="stat_leg">Hlavné zámery (počet-dĺžka-dĺžka v pôdoryse) %1$d Length %2$.1f %3$.1f H-dĺžka %4$.1f %5$s</string>
+    <string name="stat_leg" tools:ignore="PluralsCandidate">Hlavné zámery (počet-dĺžka-dĺžka v pôdoryse) %1$d Length %2$.1f %3$.1f H-dĺžka %4$.1f %5$s</string>
     <string name="stat_length">Dĺžka %1$.1f %2$s</string>
     <string name="stat_extlen">3D dĺžka %1$.1f %2$s</string>
     <string name="stat_projlen">Dĺžka pôdorysu %1$.1f %2$s</string>
     <string name="stat_cycle">Spätné zámery a Uzavreté ťahy %1$d</string>
-    <string name="stat_loop">Uzavreté ťahy %1$d</string>
+    <string name="stat_loop">Uzavreté ťahy %1$d [%2$d %3$d]</string>
     <string name="stat_origin">Počiatočný bod: %1$s</string>
     <string name="stat_azimuth">Azimut Priemetu: %1$.1f</string>
     <!-- UNUSED string name="stat_shot">Merania %1$d,   Opakované %2$d,   Povrchové %3$d</string -->
@@ -786,7 +786,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="fmt_extended">%1$s: Rozvinutý rez</string>
     <string name="fmt_profile">%1$s: Priemet</string>
 
-    <string name="extended_profile">Zaškrtnuté=Rozvinutý rez Nezaškrtnuté=Priemet</string>
+    <!-- UNUSED string name="extended_profile">Extended profile</string -->
     <string name="projected_profile">Priemet</string>
     <!-- UNUSED string name="x_section">X-SECTION</string -->
     <!-- UNUSED string name="v_section">V-SECTION</string -->
@@ -807,15 +807,15 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <!-- UNUSED string name="ask_reset">Reset DistoX memory?</string -->
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">Nastaviť službu GPS?</string>
-    <string name="ask_backups_clear">Vymazať zálohy Nákresov?</string>
-    <string name="ask_manual_update">Aktualizovať Preklad používateľskej príručky?\nSúčašná v. %1$d Inštalovaná v. %2$d</string>
+    <!-- UNUSED string name="ask_backups_clear">Delete sketch backups?</string -->
+    <string name="ask_manual_update" tools:ignore="PluralsCandidate">Aktualizovať Preklad používateľskej príručky?\nSúčašná v. %1$d Inštalovaná v. %2$d</string>
 
     <string name="button_add"       >Pridať       </string>
     <string name="button_apply"     >Aplikovať</string>
     <string name="button_back"      >Späť </string>
     <string name="button_cancel"    >Zrušiť   </string>
     <string name="button_geocode"   >GeoCode</string>
-    <string name="button_change"    >Zmena   </string>
+    <!-- UNUSED string name="button_change"    >Change</string -->
     <string name="button_clipboard" >Schránka </string>
     <string name="button_close"     >Zavrieť    </string>
     <!-- UNUSED string name="button_create"    >Vytvoriť     </string -->
@@ -1049,7 +1049,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="help_measure_undo">Späť</string>
     
     <string name="help_audio">Zoznam Audio nahrávok</string>
-    <string name="help_backups">Vymazať zálohy Nákresov</string>
+    <!-- UNUSED string name="help_backups">Delete sketch backups</string -->
     <string name="help_calib_check">Kalibrácia - Kontrolné merania</string>
     <string name="help_close">Zavrieť okno</string>
     <string name="help_close_app">Zavrieť aplikáciu</string>
@@ -1282,7 +1282,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="title_move">Režim Posunu</string>
     <string name="title_note">Poznámky</string>
     <string name="title_packet_dialog">Pakety</string>
-    <string name="title_photo">Rozšírené možnosti</string>
+    <!-- UNUSED string name="title_photo">More shot edit</string -->
     <string name="title_photo_comment">Foto poznámka</string>
     <string name="title_photo_list">Fotografie</string>
     <string name="title_photo_view">Fotografia</string>
@@ -1441,7 +1441,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
   <string name="pref_import_datamode_summary">Výber Datamódu pre import meraní</string>
 
   <string name="pref_therion_config_title">Therion konfigurácia</string>
-  <string name="pref_therion_config_summary">Vloží Therion config príkazy</string>
+  <string name="pref_therion_config_summary">Vloží Therion config príkazy/string>
   <string name="pref_therion_maps_title">Therion mapy ako prvé</string>
   <string name="pref_therion_maps_summary">Therion mapy pred dátami</string>
   <string name="pref_extra_buttons_title">Úroveň príkazov</string>
@@ -1916,14 +1916,17 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
   <!-- UNUSED string name="pref_walls_concave_summary">Maximálna konkávnosť [percent]</string -->
   <!-- UNUSED string name="pref_walls_xstep_title">Správa priestoru - maximum</string -->
   <!-- UNUSED string name="pref_walls_xstep_summary">Maximálna vzdialenosť bodov na kreslenie stien [m]</string -->
+
+
   <string name="pref_3d_sketch_title">3D modelovanie</string>
   <string name="pref_3d_sketch_summary">Povolí 3D modelovanie (debug build only)</string>
   <string name="pref_sketch_splay_buffer_title">Buffer pomocných zámer</string>
   <string name="pref_sketch_splay_buffer_summary">Buffer pomocných zámer pri reze [m]</string>
 <!-- LOG STRINGS MUST NOT BE TRANSLATED (they are used to communicate with developers to solve problems)
-<!- - UNUSED NO_LOGS
+<!-- UNUSED NO_LOGS
 
-DO NOT REMOVE THIS LINE - ->
+
+DO NOT REMOVE THIS LINE -->
   <!- - UNUSED string name="pref_log_sync" translatable="false">Co-surveying</string - ->
 -->
   <!-- UNUSED string name="line_bezier">Bezier</string -->
@@ -2097,7 +2100,7 @@ PREČÍTAJTE SI NAJSKÔR PRÍRUČKU PRED POKUSOM O UPLOAD FIRMWARU
     <string name="info_surface_value">%1$.1f m</string>
     <string name="info_depth_value">%1$.1f m</string>
     <!-- TRYME string name="info_volume_value_tryme">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
-    <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
+    <string name="info_volume_value" copyable="all">%1$.0f m³</string>
     <string name="info_east_value">W %1$.1f E %2$.1f</string>
     <string name="info_north_value">S %1$.1f N %2$.1f</string>
     <string name="info_z_value">%1$.1f  %2$.1f</string>
@@ -2204,7 +2207,7 @@ PREČÍTAJTE SI NAJSKÔR PRÍRUČKU PRED POKUSOM O UPLOAD FIRMWARU
     <string name="view_north">Severu</string>
     <string name="view_west">Západu</string>
     <string name="view_south">Juhu</string>
-    <string name="view_point">Pohľad z</string>
+    <!-- UNUSED string name="view_point">Viewpoint</string -->
     <string name="view_zoom">Zoom 1</string>
 
     <string name="walls_title">STENY</string>
@@ -2254,7 +2257,7 @@ PREČÍTAJTE SI NAJSKÔR PRÍRUČKU PRED POKUSOM O UPLOAD FIRMWARU
     <string name="warning_no_csv_type">CSV typ nešpecifikovaný</string>
     <string name="no_permissions">Aplikácia nemôže bežať bez požadovaných povolení</string>
 
-    <string name="done_fractals">Dokončené fraktály</string>
+
     <string name="done_convexhull">Dokončené convex-hull walls</string>
     <string name="fail_convexhull">Zlyhanie - convex-hull walls</string>
     <string name="done_powercrust">Dokončené powercrust walls</string>
