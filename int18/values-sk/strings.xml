@@ -231,8 +231,8 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">Nedostatočné množstvo kalibrácií</string>
     <string name="getting_info">DistoX informácie &#8230;</string>
-
-
+    <string name="gettingble_info">Získavam DistoX-BLE info &#8230;</string>
+    <string name="gettingCavway_info">Získavam Cavway info &#8230;</string>
 
     <string name="calib_import_title">Import kalibrácie</string>
     <string name="import_title">Import mapovania</string>
