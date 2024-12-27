@@ -1790,8 +1790,8 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
   <string name="pref_line_thickness_summary">Výber hrúbky nakreslenej čiary</string>
   <string name="pref_line_units_title">Mierka Čiary</string>
   <string name="pref_line_units_summary">Výber mierky hrúbky nakreslenej Čiary</string>
-  <string name="pref_line_close_title">Close closed lines</string>
-  <string name="pref_line_close_summary">Close lines of closed type</string>
+  <string name="pref_line_close_title">Zavrieť uzavreté Čiary</string>
+  <string name="pref_line_close_summary">Zavriet Čiary, ktoré sú typu - uzavreté</string>
   <string name="pref_linesnap_title">Prichytávanie na Čiary/Oblasti</string>
   <string name="pref_linesnap_summary">Povolí prichytávanie na Čiary/Oblasti</string>
   <string name="pref_linecurve_title">Vyhladiť/Vyrovnať segmenty</string>
