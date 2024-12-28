@@ -398,6 +398,16 @@ public class TDUtil
       calendar.get( Calendar.HOUR_OF_DAY ), calendar.get( Calendar.MINUTE ), (int)(calendar.get( Calendar.SECOND )) );
   }
 
+  /** @return the date from a timestamp
+   * @param time  timestamp [s]
+   */
+  public static String timestampToDate( long time )
+  {
+    GregorianCalendar calendar = new GregorianCalendar();
+    calendar.setTimeInMillis( time * 1000L );
+    return String.format(Locale.US, "%04d-%02d-%02d", calendar.get( Calendar.YEAR ), 1+calendar.get( Calendar.MONTH ), calendar.get( Calendar.DAY_OF_MONTH ) );
+  }
+
   /** @return the current year
    */
   public static int year()  { return (new GregorianCalendar()).get( Calendar.YEAR ); }

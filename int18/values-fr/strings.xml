@@ -94,6 +94,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <!-- TODO REPEATED string name="station_not_found">Station introuvable</string -->
     <string name="shot_not_found">Visée non trouvée</string>
+    <!-- TODO string name="shot_not_saved">Shot not saved</string -->
     <string name="bad_sibling">Mauvaise visée parente</string>
     <string name="bad_station">Mauvaise station: %1$s</string>
     <string name="bad_station_name">Nom de station non conforme</string>
@@ -527,6 +528,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="popup_delete">Supprimer</string>
     <string name="popup_decimate">Réduire</string>
     <string name="popup_join">Joindre</string>
+    <!-- TODO string name="popup_store">Store</string -->
+    <!-- TODO string name="popup_restore">Restore</string -->
 
     <string name="popup_erase_all">Tout suppr.</string>
     <string name="popup_erase_point">Suppr. points</string>
@@ -1179,6 +1182,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="export_prefix">Préfixe de la cavité inclus dans les noms de stations</string>
     <string name="export_prefix_hint">préfixe</string>
     <!-- UNUSED string name="export_suffix_hint">suffixe</string -->
+    <!-- TODO string name="export_series_hint">series</string -->
     <string name="export_roundtrip">Aller-retour</string>
     <string name="export_share">Partager</string>
     <!-- TODO string name="export_overwrite">Overwrite</string -->
@@ -2202,6 +2206,7 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <!-- UNUSED string name="warning_empty_cwd">Warning: empty base path</string -->
     <!-- UNUSED string name="warning_no_parent">Attention : impossible d\'accéder au dossier parent</string -->
     <string name="warning_nogrant_camera">L\'autorisation caméra n\'a pas été accordée</string>
+    <!-- TODO string name="warning_no_csv_type">CSV type not specified</string -->
     <string name="no_permissions">L\'application ne peut pas fonctionner sans les autorisations requises.</string>
     
     <string name="done_convexhull">Parois enveloppe convexe terminées</string>

@@ -534,6 +534,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="popup_delete">Изтриване</string>
     <string name="popup_decimate">Унищожи</string>
     <string name="popup_join">Присъединяване</string>
+    <!-- TODO string name="popup_store">Store</string -->
+    <!-- TODO string name="popup_restore">Restore</string -->
 
     <string name="popup_erase_all">Изтрий всичко</string>
     <string name="popup_erase_point">Изтрий точки</string>
@@ -1188,6 +1190,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="export_prefix">Представка с името на пещерата в наименованието на реперите</string>
     <string name="export_prefix_hint">представка</string>
     <!-- UNUSED string name="export_suffix_hint">наставка</string -->
+    <!-- TODO string name="export_series_hint">series</string -->
     <string name="export_roundtrip">Отиване и връщане</string>
     <string name="export_share">Сподели</string>
     <string name="export_overwrite">Презапис</string>
@@ -2245,6 +2248,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="warning_empty_cwd">Warning: empty base path</string -->
     <!-- UNUSED string name="warning_no_parent">Warning: cannot go to parent folder</string -->
     <string name="warning_nogrant_camera">Няма разрешение за използване на камерата</string>
+    <!-- TODO string name="warning_no_csv_type">CSV type not specified</string -->
     <string name="no_permissions">Приложението не може да работи без необходимите разрешения</string>
 
     <string name="done_convexhull">Стените на изпъкналото тяло са готови</string>

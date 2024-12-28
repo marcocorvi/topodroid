@@ -91,6 +91,7 @@
     <string name="station_not_found">Пикет не обнаружен</string>
     <string name="station_coords">E %1$.2f N %2$.2f Высота %3$.2f</string>
     <string name="shot_not_found">Замеры не найдены</string>
+    <!-- TODO string name="shot_not_saved">Shot not saved</string -->
     <string name="bad_sibling">Плохой замер в группе</string>
     <string name="bad_station">Плохой пикет: %1$s</string>
     <string name="bad_station_name">Недопустимый номер пикета</string>
@@ -526,6 +527,8 @@
     <string name="popup_delete">Удалить</string>
     <string name="popup_decimate">Проредить</string>
     <string name="popup_join">Соединить</string>
+    <!-- TODO string name="popup_store">Store</string -->
+    <!-- TODO string name="popup_restore">Restore</string -->
 
     <string name="popup_erase_all">Стереть все</string>
     <string name="popup_erase_point">Стереть точки</string>
@@ -1176,6 +1179,7 @@
     <string name="export_prefix">Добавлять префикс к номерам пикетов</string>
     <string name="export_prefix_hint">префикс</string>
     <!-- UNUSED string name="export_suffix_hint">суффикс</string -->
+    <!-- TODO string name="export_series_hint">series</string -->
     <string name="export_roundtrip">Roundtrip</string>
     <string name="export_share">Поделиться</string>
     <string name="export_overwrite">Перезаписать</string>
@@ -1581,6 +1585,8 @@
   <string name="pref_bric_mode_summary">Режим работы BRIC</string>
   <string name="pref_bric_zero_length_title">Нулевой замер BRIC</string>
   <string name="pref_bric_zero_length_summary">Записать замер нулевой длины BRIC</string>
+  <!-- TODO string name="pref_bric_index_is_id_title">BRIC index is ID</string -->
+  <!-- TODO string name="pref_bric_index_is_id_summary">Use BRIC index as shot ID</string -->
   <string name="pref_sap5_bit16_bug_title">SAP5 bit-16 баг</string>
   <string name="pref_sap5_bit16_bug_summary">Обход бага в bit-16 SAP5</string>
 
@@ -2247,6 +2253,7 @@
     <!-- UNUSED string name="warning_empty_cwd">Внимание: не задан рабочий каталог</string -->
     <!-- UNUSED string name="warning_no_parent">Внимание: невозможно перейти на каталог выше</string -->
     <string name="warning_nogrant_camera">Разрешение камеры не было предоставлено</string>
+    <!-- TODO string name="warning_no_csv_type">CSV type not specified</string -->
     <string name="no_permissions">Приложение не может работать без необходимых разрешений</string>
 
     <!-- UNUSED string name="done_fractals">Завершено fractals dims</string -->

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- TODO PLEASE, DO NOT FORGET TO REMOVE THE ENDING OF COMMENTS WHEN YOU TRANSLATE A STRING -->
-<resources>
+<resources
+xmlns:tools="http://schemas.android.com/tools"
+>
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Nie je možné získať používateľský manuál</string>
     <string name="user_man_ok">Preklad používateľského manuálu bol nainštalovaný</string>
@@ -1441,7 +1443,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
   <string name="pref_import_datamode_summary">Výber Datamódu pre import meraní</string>
 
   <string name="pref_therion_config_title">Therion konfigurácia</string>
-  <string name="pref_therion_config_summary">Vloží Therion config príkazy/string>
+  <string name="pref_therion_config_summary">Vloží Therion config príkazyi</string>
   <string name="pref_therion_maps_title">Therion mapy ako prvé</string>
   <string name="pref_therion_maps_summary">Therion mapy pred dátami</string>
   <string name="pref_extra_buttons_title">Úroveň príkazov</string>
@@ -1923,10 +1925,10 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
   <string name="pref_sketch_splay_buffer_title">Buffer pomocných zámer</string>
   <string name="pref_sketch_splay_buffer_summary">Buffer pomocných zámer pri reze [m]</string>
 <!-- LOG STRINGS MUST NOT BE TRANSLATED (they are used to communicate with developers to solve problems)
-<!-- UNUSED NO_LOGS
+<!- - UNUSED NO_LOGS
 
 
-DO NOT REMOVE THIS LINE -->
+DO NOT REMOVE THIS LINE - ->
   <!- - UNUSED string name="pref_log_sync" translatable="false">Co-surveying</string - ->
 -->
   <!-- UNUSED string name="line_bezier">Bezier</string -->

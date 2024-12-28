@@ -2266,6 +2266,7 @@
     <!-- UNUSED string name="warning_no_cwd">Attenzione: folder di base non esistente</string -->
     <!-- UNUSED string name="warning_no_parent">Attenzione: non possibile salire di folder</string -->
     <string name="warning_nogrant_camera">Permesso utilizzo fotocamera non concesso</string>
+    <!-- TODO string name="warning_no_csv_type">CSV type not specified</string -->
     <string name="no_permissions">L\'app non puó funzionare senza i permessi richiesti</string>
 
     <!-- UNUSED string name="done_fractals">Dimensione frattale calcolata</string -->

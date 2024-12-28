@@ -1248,7 +1248,7 @@ public class CavwayComm extends TopoDroidComm
 
   /** read the calibration coeff from the device
    * @param address   device address
-   * @param coeff     array of 52 calibration coeffs (filled by the read)
+   * @param coeff     array of 96 calibration coeffs (filled by the read)
    * @param second    whether second sensor set
    * @return true if success
    */
@@ -1258,23 +1258,22 @@ public class CavwayComm extends TopoDroidComm
     // TDLog.v( TAG + "read coeff " + address );
     if ( coeff == null ) return false;
     int  len  = coeff.length;
-    if ( len > 52 ) len = 52; // FIXME force max length of calib coeffs
+    if ( len > 96 ) len = 96; // FIXME force max length of calib coeffs
     if ( ! tryConnectDevice( address, null, 0 ) ) return false;
     int addr = 0x8010; // FIXME the addr for the second set
     byte[] buff = new byte[4];
     int k = 0;
-    byte[] coeff_tmp = readMemory( addr, 52 ); // 20230118 local var "coeff_tmp"
+    byte[] coeff_tmp = readMemory( addr, 96 ); // 20230118 local var "coeff_tmp"
     disconnectDevice();
-    if ( coeff_tmp == null || coeff_tmp.length != 52 ) return false;
-    //coeff = Arrays.copyOf( coeff_tmp, 52 );  // calling this functions causes a problem: all the params shown in dialog are zero.
-    //calling the following is ok. I don't know why. both the 2 functions can copy the right value to coeff[]
-    for(int i = 0;i < 52;i++) coeff[i] = coeff_tmp[i];
+    if ( coeff_tmp == null || coeff_tmp.length != 96 ) return false;
+    System.arraycopy( coeff_tmp, 0, coeff, 0, 96 );
+    // for(int i = 0;i < 96;i++) coeff[i] = coeff_tmp[i];
     return true;
   }
 
   /** write the calibration coeff to the device
    * @param address   device address
-   * @param coeff     array of 52 calibration coeffs
+   * @param coeff     array of 96 calibration coeffs
    * @param second    whether second sensor set
    * @return true if success
    */
@@ -1287,7 +1286,7 @@ public class CavwayComm extends TopoDroidComm
     if( ! tryConnectDevice( address, null, 0 )) return false;
     int k = 0;
     int addr = 0x8010; // FIXME the addr for the second set
-    boolean ret = writeMemory(addr, coeff, 52);
+    boolean ret = writeMemory(addr, coeff, 96);
     disconnectDevice();
     return ret;
   }

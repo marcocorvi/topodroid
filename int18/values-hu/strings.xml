@@ -92,6 +92,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="station_not_found">Mérési pont nem található</string>
     <string name="station_coords">K %1$.2f É %2$.2f Z %3$.2f</string>
     <string name="shot_not_found">Mérés nem található</string>
+    <!-- TODO string name="shot_not_saved">Shot not saved</string -->
     <string name="bad_sibling">Rossz mérés ismétlés</string>
     <string name="bad_station">Hibás mérési pont: %1$s</string>
     <string name="bad_station_name">Illegális mérési pont név</string>
@@ -529,6 +530,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="popup_delete">Töröl</string>
     <string name="popup_decimate">Tizedel</string>
     <string name="popup_join">Kapcsol</string>
+    <!-- TODO string name="popup_store">Store</string -->
+    <!-- TODO string name="popup_restore">Restore</string -->
 
     <string name="popup_erase_all">Minden törlése</string>
     <string name="popup_erase_point">Pontok törlése</string>
@@ -1184,6 +1187,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="export_prefix">Barlangnév-előtag a pont neveknél</string>
     <string name="export_prefix_hint">előtag</string>
     <!-- UNUSED string name="export_suffix_hint">utótag</string -->
+    <!-- TODO string name="export_series_hint">series</string -->
     <string name="export_roundtrip">Roundtrip</string><!--Roundtrip-->
     <string name="export_share">Megosztás</string>
     <string name="export_overwrite">Felülír</string>
@@ -1591,6 +1595,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_bric_mode_summary">BRIC működési mód</string>
   <string name="pref_bric_zero_length_title">BRIC nulla mérés</string>
   <string name="pref_bric_zero_length_summary">BRIC nulla-hossz mérés rögzítése</string>
+  <!-- TODO string name="pref_bric_index_is_id_title">BRIC index is ID</string -->
+  <!-- TODO string name="pref_bric_index_is_id_summary">Use BRIC index as shot ID</string -->
   <string name="pref_sap5_bit16_bug_title">SAP5 bit-16 hiba</string>
   <string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 hiba megkerülése</string>
 
@@ -2269,6 +2275,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="warning_empty_cwd">Figyelem: üres alap könyvtár</string -->
     <!-- UNUSED string name="warning_no_parent">Figyelem: nem tud felsőbb könyvtárba lépni</string -->
     <string name="warning_nogrant_camera">A kamera engedély nincs megadva</string>
+    <!-- TODO string name="warning_no_csv_type">CSV type not specified</string -->
     <string name="no_permissions">Az alkalmazás nem tud futni szükséges hozzáférések nélkül</string>
 
     <!-- UNUSED string name="done_fractals">Kész fraktál dimenziók</string -->

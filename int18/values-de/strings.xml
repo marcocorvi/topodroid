@@ -76,6 +76,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="station_not_found">Messpunkt nicht gefunden</string>
   <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
   <string name="shot_not_found">Keine Messung gefunden</string>
+    <!-- TODO string name="shot_not_saved">Shot not saved</string -->
   <string name="bad_sibling">Messzug weicht stark ab</string>
   <string name="bad_station">Ungültiger Messpunkt: %1$s</string>
   <string name="bad_station_name">Ungültiger Messpunktname</string>
@@ -486,6 +487,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="popup_delete">Löschen</string>
   <string name="popup_decimate">Dezimieren</string>
   <string name="popup_join">Verbinden</string>
+    <!-- TODO string name="popup_store">Store</string -->
+    <!-- TODO string name="popup_restore">Restore</string -->
   <string name="popup_erase_all">Alles löschen</string>
   <string name="popup_erase_point">Punkte löschen</string>
   <string name="popup_erase_line">Linien löschen</string>
@@ -1094,6 +1097,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="export_prefix">Name der Vermessung in Messpunkten</string>
   <string name="export_prefix_hint">Prefix</string>
   <!-- UNUSED string name="export_suffix_hint">Suffix</string -->
+    <!-- TODO string name="export_series_hint">series</string -->
   <string name="export_roundtrip">Rundschluss</string>
   <string name="export_share">Share</string>
     <!-- TODO string name="export_overwrite">Overwrite</string -->
@@ -1473,6 +1477,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_bric_mode_summary">BRIC Operationsmodus</string>
   <string name="pref_bric_zero_length_title">BRIC Nullmessungen</string>
   <string name="pref_bric_zero_length_summary">Speichere BRIC Messungen ohne Länge</string>
+  <!-- TODO string name="pref_bric_index_is_id_title">BRIC index is ID</string -->
+  <!-- TODO string name="pref_bric_index_is_id_summary">Use BRIC index as shot ID</string -->
   <string name="pref_sap5_bit16_bug_title">SAP5 bit-16 Bug</string>
   <string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 Bug Workaround</string>
   <string name="pref_plot_screen_title">Skizze</string>
@@ -2081,6 +2087,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="warning_empty_cwd">Warning: empty base path</string -->
   <!-- UNUSED string name="warning_no_parent">Warning: cannot go to parent folder</string -->
   <string name="warning_nogrant_camera">Keine Berechtigung für die Kamera erteilt</string>
+    <!-- TODO string name="warning_no_csv_type">CSV type not specified</string -->
   <string name="no_permissions">Die App kann ohne die benötigten Berechtigungen nicht laufen</string>
   <string name="done_convexhull">Wände: Konvexe Hülle berechnet</string>
   <string name="fail_convexhull">Wände: Konvexe Hülle konnte nicht berechnet werden</string>

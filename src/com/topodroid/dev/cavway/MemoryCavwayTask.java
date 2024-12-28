@@ -49,6 +49,14 @@ public class MemoryCavwayTask extends AsyncTask<Void, Integer, Integer>
   private String mDumpfile = null;
   private ArrayList< CavwayData > mMemory;
 
+  /** cstr
+   * @param app     app
+   * @param dialog  memory dialog
+   * @param type    ...
+   * @param address device address
+   * @param ht      number of data to retrieve
+   * @param dumpfile file to save memory data
+   */
   public MemoryCavwayTask( TopoDroidApp app, CavwayMemoryDialog dialog, int type, String address, int ht, String dumpfile )
   {
     mApp      = new WeakReference<TopoDroidApp>( app );
@@ -90,6 +98,12 @@ public class MemoryCavwayTask extends AsyncTask<Void, Integer, Integer>
     }
   }
 
+  /** store the memory data to a file 
+   * @param dumpfile filename
+   * @param memory   array of Cavway memory data
+   * @note memory dumpfiles are in the app private folder "dump"
+   * the memory data are stored as hexstring followed by a human readable form
+   */
   private void writeMemoryDumpToFile( String dumpfile, ArrayList< CavwayData > memory )
   {
     if ( dumpfile == null ) return;
@@ -104,8 +118,14 @@ public class MemoryCavwayTask extends AsyncTask<Void, Integer, Integer>
       FileWriter fw = new FileWriter( file );
       PrintWriter pw = new PrintWriter( fw );
       for ( CavwayData m : memory ) {
-        m.printHexString( pw );
-        pw.format(" " + m.toString() + "\n");
+        // m.printHexString( pw );
+        pw.format(m.toString());
+        int t = m.getType();
+        if ( m.hasError() ) {
+          pw.format(" ");
+          pw.format( m.parseErrInfo() );
+        }
+        pw.format( "\n" );
       }
       fw.flush();
       fw.close();
