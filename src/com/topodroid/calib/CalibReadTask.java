@@ -48,11 +48,11 @@ public class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
 
   public CalibReadTask( ICoeffDisplayer parent, TopoDroidApp app, int parent_type, boolean two_sensors ) // TWO_SENSORS
   {
+    int len = ( two_sensors ? 104 : 52 );
     // mContext = new WeakReference<Context>( context );
     mParent = new WeakReference<ICoeffDisplayer>( parent );
     mApp    = new WeakReference<>( app );
-    coeff   = new byte[52]; // always read 52 bytes
-    coeff2  = new byte[52]; // second set of coeffs
+    coeff   = new byte[len]; 
     mParentType = parent_type;
     mTwoSensors = two_sensors;
     // comp_name = "ComponentInfo{com.topodroid.TDX/com.topodroid.DistoX." + act_name + "}";
@@ -61,9 +61,9 @@ public class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
   @Override
   protected Boolean doInBackground(Void... v)
   {
+    TDLog.v("Calib Read Task");
     if ( mApp.get() == null ) return false;
-    boolean ret = mApp.get().readCalibCoeff( coeff, false );
-    if ( mTwoSensors ) ret &= mApp.get().readCalibCoeff( coeff2, true );
+    boolean ret = mApp.get().readCalibCoeff( coeff, mTwoSensors );
     return ret;
   }
 

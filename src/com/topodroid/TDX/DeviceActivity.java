@@ -707,7 +707,8 @@ public class DeviceActivity extends Activity
       TDandroid.setButtonBackground( mButton1[IDX_TOGGLE], mBMtoggle ); // this should already be enableButtons()
       TDandroid.setButtonBackground( mButton1[IDX_CALIB], mBMcalib );
       if ( TDLevel.overNormal ) {
-        TDandroid.setButtonBackground( mButton1[IDX_READ], mBMread_no );
+        TDandroid.setButtonBackground( mButton1[IDX_READ], mBMread );
+        // TDandroid.setButtonBackground( mButton1[IDX_READ], mBMread_no );
       }
     } else if ( TDInstance.isDeviceBric() ) {
       mButton1[IDX_INFO].setVisibility( View.VISIBLE );

@@ -1305,6 +1305,7 @@ public class TopoDroidApp extends Application
     } else if ( ! mComm.writeCoeff( TDInstance.deviceAddress(), coeff, second ) ) {
       TDToast.makeBad( R.string.write_failed );
     } else {
+      // write OK: read coeff back and check they were written correctly
       int len = coeff.length;
       byte[] coeff2 = new byte[ len ];
       if ( ! mComm.readCoeff( TDInstance.deviceAddress(), coeff2, second ) ) {
@@ -1330,6 +1331,7 @@ public class TopoDroidApp extends Application
 
   /** read the calibration coefficients from the DistoX
    * @param coeff    calibration coefficients [output]
+   * @param second   second sensor set (? not used)
    * @return true if successful
    * @note called by CalibReadTask.onPostExecute
    */

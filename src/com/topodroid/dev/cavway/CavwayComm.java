@@ -1265,9 +1265,13 @@ public class CavwayComm extends TopoDroidComm
 
   /** read the calibration coeff from the device
    * @param address   device address
-   * @param coeff     array of 96 calibration coeffs (filled by the read)
-   * @param second    whether second sensor set
+   * @param coeff     array of CavwayDetails.NR_COEFF calibration coeffs (filled by the read)
+   * @param second    whether device has second sensor set (not used)
    * @return true if success
+   * 
+   * Cavway has 48 2-byte coeffiients stored as
+   * BG1 BM1 AG1x AG1y AG1z AM1x AM1y AM1z
+   * BG2 BM2 AG2x AG2y AG2z AM2x AM2y AM2z
    */
   @Override
   public boolean readCoeff( String address, byte[] coeff, boolean second )
@@ -1275,22 +1279,26 @@ public class CavwayComm extends TopoDroidComm
     // TDLog.v( TAG + "read coeff " + address );
     if ( coeff == null ) return false;
     int  len  = coeff.length;
-    if ( len > 96 ) len = 96; // FIXME force max length of calib coeffs
+    if ( len > CavwayDetails.NR_COEFF ) len = CavwayDetails.NR_COEFF; // FIXME force max length of calib coeffs
     if ( ! tryConnectDevice( address, null, 0 ) ) return false;
-    int addr = 0x8010; // FIXME the addr for the second set
-    byte[] buff = new byte[4];
-    int k = 0;
-    byte[] coeff_tmp = readMemory( addr, 96 ); // 20230118 local var "coeff_tmp"
+    byte[] coeff_tmp = readMemory( CavwayDetails.COEFF_ADDRESS, CavwayDetails.NR_COEFF ); // 20230118 local var "coeff_tmp"
     disconnectDevice();
-    if ( coeff_tmp == null || coeff_tmp.length != 96 ) return false;
-    System.arraycopy( coeff_tmp, 0, coeff, 0, 96 );
-    // for(int i = 0;i < 96;i++) coeff[i] = coeff_tmp[i];
+    if ( coeff_tmp == null ) {
+      TDLog.v("read null coeff");
+      return false;
+    }
+    if ( coeff_tmp.length != CavwayDetails.NR_COEFF ) {
+      TDLog.v("read " + coeff_tmp.length + " coeff instead of " + CavwayDetails.NR_COEFF );
+      return false;
+    }
+    System.arraycopy( coeff_tmp, 0, coeff, 0, CavwayDetails.NR_COEFF );
+    // for(int i = 0;i < CavwayDetails.NR_COEFF;i++) coeff[i] = coeff_tmp[i];
     return true;
   }
 
   /** write the calibration coeff to the device
    * @param address   device address
-   * @param coeff     array of 96 calibration coeffs
+   * @param coeff     array of CavwayDetails.NR_COEFF calibration coeffs
    * @param second    whether second sensor set
    * @return true if success
    */
@@ -1303,7 +1311,7 @@ public class CavwayComm extends TopoDroidComm
     if( ! tryConnectDevice( address, null, 0 )) return false;
     int k = 0;
     int addr = 0x8010; // FIXME the addr for the second set
-    boolean ret = writeMemory(addr, coeff, 96);
+    boolean ret = writeMemory(addr, coeff, CavwayDetails.NR_COEFF);
     disconnectDevice();
     return ret;
   }
