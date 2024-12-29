@@ -2088,6 +2088,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="warning_no_parent">Warning: cannot go to parent folder</string -->
   <string name="warning_nogrant_camera">Keine Berechtigung für die Kamera erteilt</string>
     <!-- TODO string name="warning_no_csv_type">CSV type not specified</string -->
+    <!-- TODO string name="warning_cavway_info">Failed to get Cavway info</string -->
   <string name="no_permissions">Die App kann ohne die benötigten Berechtigungen nicht laufen</string>
   <string name="done_convexhull">Wände: Konvexe Hülle berechnet</string>
   <string name="fail_convexhull">Wände: Konvexe Hülle konnte nicht berechnet werden</string>

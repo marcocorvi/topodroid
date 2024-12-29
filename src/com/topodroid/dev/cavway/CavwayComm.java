@@ -700,7 +700,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public void failure( int status, String extra, String what )
   {
-    if ( LOG ) TDLog.v( TAG + "Failure: disconnect and close GATT ...");
+    if ( LOG ) TDLog.v( TAG + "Failure (" + status + "): disconnect and close GATT ...");
     // notifyStatus( ConnectionState.CONN_DISCONNECTED ); // this will be called by disconnected
     clearPending();
     closeDevice( false );
@@ -769,19 +769,25 @@ public class CavwayComm extends TopoDroidComm
 
   /** get DistoX-BLE hw/fw info, and display that on the Info dialog
    * @param info     Cavway info dialog
+   * @return true on full success
    */
-  public void getCavwayInfo( CavwayInfoDialog info )
+  public boolean getCavwayInfo( CavwayInfoDialog info )
   {
-    if ( info == null ) return;
+    if ( info == null ) return false;
     // TDLog.v( TAG + "get Cavway info");
     if ( readMemory( CavwayDetails.FIRMWARE_ADDRESS, 4 ) != null ) { // ?? there was not 4
       // info.SetVal( mPacketType, ((DistoXBLEProtocol)mProtocol).mFirmVer);
       info.SetVal( CavwayProtocol.PACKET_INFO_FIRMWARE, ((CavwayProtocol)mProtocol).mFirmVer);
+    } else {
+      return false;
     }
     if ( readMemory( CavwayDetails.HARDWARE_ADDRESS, 4 ) != null ) {
       // info.SetVal( mPacketType, ((DistoXBLEProtocol)mProtocol).mHardVer);
       info.SetVal( CavwayProtocol.PACKET_INFO_HARDWARE, ((CavwayProtocol)mProtocol).mHardVer);
+    } else {
+      return false;
     }
+    return true;
   }
 
   // --------------------------------------------------------
@@ -871,8 +877,7 @@ public class CavwayComm extends TopoDroidComm
     if ( ! isConnected() ) return false;
     if ( cmd == 0 ) return false;
     // TDLog.v( String.format( TAG + "send cmd 0x%02x", cmd ) );
-    enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, new byte[] {(byte)cmd}, true);
-    return true;
+    return enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, new byte[] {(byte)cmd}, true);
   }
 
   @Override
@@ -897,7 +902,10 @@ public class CavwayComm extends TopoDroidComm
     cmd[2] = (byte)((addr >> 8) & 0xFF);
     cmd[3] = (byte)(len);
     mPacketType = CavwayProtocol.PACKET_NONE;
-    enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true );
+    if ( ! enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true ) ) {
+      // TDLog.v( "COMM failed enlist memory-write [1]" );
+      return null;
+    }
     syncWait( 2000, "read memory" );
     // synchronized ( mNewDataFlag ) {
     //   try {
@@ -941,7 +949,10 @@ public class CavwayComm extends TopoDroidComm
     cmd[5] = data[2];
     cmd[6] = data[3];
     mPacketType = CavwayProtocol.PACKET_NONE;
-    enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true );
+    if ( ! enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true ) ) {
+      // TDLog.v( "COMM failed enlist memory-write [2]" );
+      return false;
+    }
     syncWait( 2000, "write memory" );
     // synchronized ( mNewDataFlag ) {
     //   try {
@@ -981,7 +992,10 @@ public class CavwayComm extends TopoDroidComm
     for(int i = 0;i < len;i++)
       cmd[i+4] = data[i];
     mPacketType = CavwayProtocol.PACKET_NONE;
-    enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true );
+    if ( ! enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true ) ) {
+      // TDLog.v( "COMM failed enlist memory-write [3]" );
+      return false;
+    }
     syncWait( 2000, "write memory" );
     // synchronized ( mNewDataFlag ) {
     //   try {
@@ -1002,9 +1016,10 @@ public class CavwayComm extends TopoDroidComm
 
   /** 0x38: start reading one data from cavway memory
    * @param addr memory address
+   * @return true if success
    * @note when this is entered mReadingMemory is false
    */
-  public void readOneMemory( int addr )
+  public boolean readOneMemory( int addr )
   {
     // TDLog.v( TAG + "read one memory. index " + addr + " set READING flag" );
     syncSetReadingMemory();
@@ -1014,7 +1029,7 @@ public class CavwayComm extends TopoDroidComm
     cmd[2] = (byte)((addr >> 8) & 0xFF);
     cmd[3] = 64;         //one data frame, 64 bytes
     mPacketType = CavwayProtocol.PACKET_NONE;
-    enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true );
+    return enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true );
     // if ( (mPacketType & CavwayProtocol.PACKET_REPLY) == CavwayProtocol.PACKET_REPLY ) {
     //   int length = ((CavwayProtocol) mProtocol).mRepliedData.length;
     //   TDLog.v( TAG + " READ meomry expected got length " + length );
@@ -1112,7 +1127,9 @@ public class CavwayComm extends TopoDroidComm
     for ( int idx = 0; idx < number; ++idx ) {
       // TDLog.v( TAG + "set memory index " + idx );
       mMemoryIndex = idx;
-      readOneMemory( idx );
+      if ( ! readOneMemory( idx ) ) { // write failure
+        break;
+      }
       syncWaitOnReadingMemory();
       ++ cnt;
     }

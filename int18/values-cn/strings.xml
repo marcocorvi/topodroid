@@ -2265,6 +2265,7 @@
     <!-- UNUSED string name="warning_no_parent">警告: 无法转到父文件夹</string -->
     <string name="warning_nogrant_camera">相机权限没有被允许</string>
     <!-- TODO string name="warning_no_csv_type">CSV type not specified</string -->
+    <!-- TODO string name="warning_cavway_info">Failed to get Cavway info</string -->
     <string name="no_permissions">没有所需权限，应用程序无法运行</string>
 
     <!-- UNUSED string name="done_fractals">完成分形会变暗</string -->

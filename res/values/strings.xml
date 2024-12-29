@@ -2315,6 +2315,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="warning_no_parent">Warning: cannot go to parent folder</string -->
     <string name="warning_nogrant_camera">Camera permission has not been granted</string>
     <string name="warning_no_csv_type">CSV type not specified</string>
+    <string name="warning_cavway_info">Failed to get Cavway info</string>
     <string name="no_permissions">The app cannot run without the required permissions</string>
 
     <string name="done_fractals" translatable="false">Done fractals dims</string>

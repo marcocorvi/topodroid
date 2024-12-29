@@ -2257,6 +2257,7 @@ PREČÍTAJTE SI NAJSKÔR PRÍRUČKU PRED POKUSOM O UPLOAD FIRMWARU
     <!-- UNUSED string name="warning_no_parent">Warning: cannot go to parent folder</string -->
     <string name="warning_nogrant_camera">Chýba povolenie pre používanie Fotoaparátu</string>
     <string name="warning_no_csv_type">CSV typ nešpecifikovaný</string>
+    <!-- TODO string name="warning_cavway_info">Failed to get Cavway info</string -->
     <string name="no_permissions">Aplikácia nemôže bežať bez požadovaných povolení</string>
 
 
