@@ -908,7 +908,11 @@ no campo abaixo e aperte o botão.
   <string name="hint_textsize">tamanho texto</string>
   <string name="hint_units">unidades símbolos</string>
   <string name="hint_value">valor</string>
+
   <string name="calib_measurement_id">Medida %1$d</string>
+  <string name="calib_measurement_error">Erro %1$.4f</string>
+  <string name="calib_measurement_group">Grupo: </string>
+
   <string name="hint_notes">observações</string>
   <string name="hint_label">Texto do rótulo</string>
   <string name="hint_comment">comentário</string>

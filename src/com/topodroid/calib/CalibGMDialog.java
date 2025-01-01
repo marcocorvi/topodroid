@@ -94,7 +94,7 @@ public class CalibGMDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
 
-    initLayout( R.layout.calib_gm_dialog, String.format( mContext.getResources().getString( R.string.calib_measurement_id), mBlk.mId ) );
+    initLayout( R.layout.calib_gm_dialog, String.format(Locale.US,  mContext.getResources().getString( R.string.calib_measurement_id), mBlk.mId ) );
 
     EditText eT_bearing = (EditText) findViewById( R.id.gm_bearing );
     EditText eT_clino   = (EditText) findViewById( R.id.gm_clino   );
@@ -138,7 +138,7 @@ public class CalibGMDialog extends MyDialog
     eT_bearing.setText( String.format(Locale.US, "%.1f", mBlk.mBearing ) );
     eT_clino.setText( String.format(Locale.US, "%.1f", mBlk.mClino ) );
     eT_roll.setText( String.format(Locale.US, "%.1f", mBlk.mRoll ) );
-    tV_error.setText( String.format(Locale.US, "%.4f", mBlk.mError ) );
+    tV_error.setText( String.format(Locale.US, mContext.getResources().getString( R.string.calib_measurement_error), mBlk.mError ) );
 
     mET_name.setText( String.format(Locale.US, "%d", mBlk.mGroup ) );
 
