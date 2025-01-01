@@ -972,6 +972,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="hint_units">taille des symboles</string>
     <string name="hint_value">valeur</string>
 
+    <!-- TODO string name="calib_measurement_id">Shot %1$d</string -->
+
     <string name="hint_notes">notes</string>
     <string name="hint_label">étiquette</string>
     <string name="hint_comment">commentaire</string>

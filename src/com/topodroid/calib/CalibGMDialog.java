@@ -94,7 +94,7 @@ public class CalibGMDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
 
-    initLayout( R.layout.calib_gm_dialog, null );
+    initLayout( R.layout.calib_gm_dialog, String.format( mContext.getResources().getString( R.string.calib_measurement_id), mBlk.mId ) );
 
     EditText eT_bearing = (EditText) findViewById( R.id.gm_bearing );
     EditText eT_clino   = (EditText) findViewById( R.id.gm_clino   );
