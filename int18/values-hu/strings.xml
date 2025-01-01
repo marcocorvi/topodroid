@@ -978,8 +978,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="hint_value">érték</string>
 
     <string name="calib_measurement_id">Mérés %1$d</string>
-  <!-- TODO string name="calib_measurement_error">Error %1$.4f</string -->
-  <!-- TODO string name="calib_measurement_group">Group: </string -->
+    <string name="calib_measurement_error">Hiba %1$.4f</string>
+    <string name="calib_measurement_group">Csoport: </string>
 
     <string name="hint_notes">jegyzetek</string>
     <string name="hint_label">címke</string>
