@@ -84,7 +84,8 @@
      <item name="normal">Нормално</item>
      <item name="weighted">Спряно</item>
      <item name="selective">Селективно</item>
-     <item name="triangles">Триангулация</item>
+     <!-- UNUSED item name="triangles">Триангулация</item -->
+     <!-- TODO item name="trilateration">Trilateration</item -->
   </string-array>
   
   <!-- UNUSED string-array name="wallsType">
