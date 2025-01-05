@@ -71,6 +71,10 @@ public class CavwayData extends MemoryData
     TDLog.v("CVWY data set data - type " + mType + String.format(" %02x %02x", b[0], b[1]) );
   }
 
+  public byte[] getData() { return data; }
+
+  public byte getData( int k ) { return data[k]; }
+
   public int getType() { return mType; }
 
   private void setType( byte[] b )
@@ -97,10 +101,17 @@ public class CavwayData extends MemoryData
     return ( dhh * 1024.0 + toInt( b[4], b[3] ) )/1000.0;
   }
 
+  public double getAzimuth() { return toAzimuth( data ); }
+  public double getClino()   { return toClino( data ); }
+  public double getRoll()    { return toRoll( data ); }
+
   public double toAzimuth( byte[] b ) { return toInt( b[ 6], b[ 5] ) * ANGLE_SCALE; }
   // public double toAzimuth( byte[] b ) { return toAzimuth( b[5], b[6] ); }
 
-  public double toClino( byte[] b ) { return toInt( b[ 8], b[ 7] ) * ANGLE_SCALE; }
+  public double toClino( byte[] b ) // 20250105 changed as for CavwayProtocol
+  { 
+    return  toSignedInt( b[ 8], b[ 7] ) * ANGLE_SCALE;
+  }
   // public double toClino( byte[] b ) { return toClino( b[7], b[8] ); }
 
   public double toRoll( byte[] b )  { return - toInt( b[10], b[ 9] ) * ANGLE_SCALE; }

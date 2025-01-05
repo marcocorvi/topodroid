@@ -280,7 +280,7 @@ public class DeviceHelper extends DataSetObservable
     // // return 0;
   }
   
-  public void updateGMsecond( long gid, long cid, long gx, long gy, long gz, long mx, long my, long mz )
+  public void updateGMsecond( long cid, long gmid, long gx, long gy, long gz, long mx, long my, long mz )
   {
     if ( myDB == null ) {
       TDLog.e( ERROR_NULL_DB + "update GM second");
@@ -293,7 +293,7 @@ public class DeviceHelper extends DataSetObservable
     cv.put( "mxt", mx );
     cv.put( "myt", my );
     cv.put( "mzt", mz );
-    doUpdate( "gms", cv, WHERE_CID_ID, new String[] { Long.toString(cid), Long.toString(gid) }, "GM secod" );
+    doUpdate( "gms", cv, WHERE_CID_ID, new String[] { Long.toString(cid), Long.toString(gmid) }, "GM secod" );
   }
 
   /** insert a calibration data
