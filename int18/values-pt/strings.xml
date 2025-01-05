@@ -908,6 +908,11 @@ no campo abaixo e aperte o botão.
   <string name="hint_textsize">tamanho texto</string>
   <string name="hint_units">unidades símbolos</string>
   <string name="hint_value">valor</string>
+
+  <string name="calib_measurement_id">Medida %1$d</string>
+  <string name="calib_measurement_error">Erro %1$.4f</string>
+  <string name="calib_measurement_group">Grupo: </string>
+
   <string name="hint_notes">observações</string>
   <string name="hint_label">Texto do rótulo</string>
   <string name="hint_comment">comentário</string>
@@ -2109,7 +2114,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="warning_no_parent">Alerta: impossível acessar diretório pai</string -->
   <string name="warning_nogrant_camera">Permissão câmera não consedida</string>
   <string name="warning_no_csv_type">Tipo de CSV não definido</string>
-    <!-- TODO string name="warning_cavway_info">Failed to get Cavway info</string -->
+  <string name="warning_cavway_info">Falha ao obter informações sobre Cavway</string>
   <string name="no_permissions">O app não pode funcionar sem as permissões necessárias</string>
   <string name="done_convexhull">Paredes dos planos convexos prontas</string>
   <string name="fail_convexhull">Falha nas paredes dos planos convexos</string>

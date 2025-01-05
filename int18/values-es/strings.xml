@@ -974,6 +974,10 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="hint_units">Tamaño del símbolo</string>
     <string name="hint_value">Valor</string>
 
+    <!-- TODO string name="calib_measurement_id">Shot %1$d</string -->
+    <!-- TODO string name="calib_measurement_error">Error %1$.4f</string -->
+    <!-- TODO string name="calib_measurement_group">Group: </string -->
+
     <string name="hint_notes">Nota</string>
     <string name="hint_label">Etiqueta</string>
     <string name="hint_comment">Comentario</string>

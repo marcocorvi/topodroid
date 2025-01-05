@@ -970,6 +970,10 @@
     <string name="hint_units">единицы символов</string>
     <string name="hint_value">значение</string>
 
+   <string name="calib_measurement_id">Замер %1$d</string>
+   <string name="calib_measurement_error">Ошибка %1$.4f</string>
+   <string name="calib_measurement_group">Группа: </string>
+
     <string name="hint_notes">примечания</string>
     <string name="hint_label">подпись</string>
     <string name="hint_comment">коментарий</string>

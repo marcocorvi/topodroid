@@ -992,6 +992,10 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="hint_units">symbol units</string>
     <string name="hint_value">value</string>
 
+    <string name="calib_measurement_id">Shot %1$d</string>
+    <string name="calib_measurement_error">Error %1$.4f</string>
+    <string name="calib_measurement_group">Group: </string>
+
     <string name="hint_notes">notes</string>
     <string name="hint_label">label</string>
     <string name="hint_comment">comment</string>
