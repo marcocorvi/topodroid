@@ -329,7 +329,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="error_clino_required">Необходим наклон</string>
     <string name="error_comment_required">Необходим коментар</string>
     <string name="error_begin_required">Необходим начален адрес</string>
-    <!-- TODO string name="error_number_required">Data number required</string -->
+    <string name="error_number_required">Изисква се номер на данните</string>
     <string name="error_declination_number">Деклинацията трябва да е число</string>
     <string name="error_end_required">Необходим краен адрес</string>
     <string name="error_fixes_nocs">Фиксирани точки без CS %1$s:\n%2$s</string>
@@ -534,8 +534,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="popup_delete">Изтриване</string>
     <string name="popup_decimate">Унищожи</string>
     <string name="popup_join">Присъединяване</string>
-    <!-- TODO string name="popup_store">Store</string -->
-    <!-- TODO string name="popup_restore">Restore</string -->
+    <string name="popup_store">Запази</string>
+    <string name="popup_restore">Възстанови</string>
 
     <string name="popup_erase_all">Изтрий всичко</string>
     <string name="popup_erase_point">Изтрий точки</string>
@@ -728,10 +728,10 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="screenshot_failed">Неуспешно заснемане на екранна снимка</string>
     <string name="start_index">Индекс на начално измерване</string>
     <string name="trilateration_failed">Неуспешна трилатерация</string>
-    <!-- TODO string name="trilateration_failure">Trilateration failed %1$d / %2$d </string -->
+    <string name="trilateration_failure">Неуспешна трилатерация %1$d / %2$d </string>
     <!-- UNUSED string name="trilateration_error">Грешка при трилатерация %1$.2f</string -->
     <!-- UNUSED string name="trilateration_succeeded">Trilateration succeeded: remaining error %1$.2f</string -->
-    <!-- TODO string name="trilateration_success">Trilateration success: %1$d clusters</string -->
+    <string name="trilateration_success">Успешна трилатерация: %1$d клъстери</string>
 
     <string name="survey_info">Информация за картировката</string>
     <string name="stat_dates">От  %1$s до %2$s</string>
@@ -883,7 +883,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="button_scrap">Очертания</string>
     <string name="button_split">Раздели</string>
     <string name="button_station">Център на</string>
-    <string name="button_store">Магазин</string>
+    <string name="button_store">Запази</string>
     <string name="button_swap">Размени</string>
     <string name="button_start">Начало</string>
     <string name="button_stop">Спри</string>
@@ -980,9 +980,9 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="hint_units">символни единици</string>
     <string name="hint_value">стойност</string>
 
-    <!-- TODO string name="calib_measurement_id">Shot %1$d</string -->
-    <!-- TODO string name="calib_measurement_error">Error %1$.4f</string -->
-    <!-- TODO string name="calib_measurement_group">Group: </string -->
+    <string name="calib_measurement_id">Измерване %1$d</string>
+    <string name="calib_measurement_error">Грешка %1$.4f</string>
+    <string name="calib_measurement_group">Група: </string>
 
     <string name="hint_notes">забележки</string>
     <string name="hint_label">етикет</string>
@@ -1194,7 +1194,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="export_prefix">Представка с името на пещерата в наименованието на реперите</string>
     <string name="export_prefix_hint">представка</string>
     <!-- UNUSED string name="export_suffix_hint">наставка</string -->
-    <!-- TODO string name="export_series_hint">series</string -->
+    <string name="export_series_hint">поредица</string>
     <string name="export_roundtrip">Отиване и връщане</string>
     <string name="export_share">Сподели</string>
     <string name="export_overwrite">Презапис</string>
@@ -1210,7 +1210,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="export_walls">Стени</string>
     <string name="export_xvi">Изображения Xvi</string>
     <string name="export_with_xsections">Включи сечения</string>
-    <!-- TODO string name="export_grouped">Group elements in layers by type</string -->
+    <string name="export_grouped">Групирай елементите в слоеве по тип</string>
     <string name="export_with_reference">Включи препратка по XY</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
@@ -1505,8 +1505,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_svg_roundtrip_summary">Отиване и връщане в готовност за експорт в SVG</string>
   <string name="pref_svg_splays_title">Странични измервания в SVG</string>
   <string name="pref_svg_splays_summary">Включи странични измервания в експорта в SVG</string>
-  <!-- TODO string name="pref_svg_groups_title">Type groups</string -->
-  <!-- TODO string name="pref_svg_groups_summary">Group items by type in SVG export</string -->
+  <string name="pref_svg_groups_title">Тип групи</string>
+  <string name="pref_svg_groups_summary">Групирай елементи по тип в експорта в SVG </string>
   <!-- UNUSED string name="pref_svg_in_html_title">SVG in HTML</string -->
   <!-- UNUSED string name="pref_svg_in_html_summary">Embed SVG export in HTML</string -->
   <string name="pref_svg_pointstroke_title">Дебелина на химикалката</string>
@@ -2252,8 +2252,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="warning_empty_cwd">Warning: empty base path</string -->
     <!-- UNUSED string name="warning_no_parent">Warning: cannot go to parent folder</string -->
     <string name="warning_nogrant_camera">Няма разрешение за използване на камерата</string>
-    <!-- TODO string name="warning_no_csv_type">CSV type not specified</string -->
-    <!-- TODO string name="warning_cavway_info">Failed to get Cavway info</string -->
+    <string name="warning_no_csv_type">CSV не е посочен</string>
+    <string name="warning_cavway_info">Неуспешно получаване на информация за Cavway</string>
     <string name="no_permissions">Приложението не може да работи без необходимите разрешения</string>
 
     <string name="done_convexhull">Стените на изпъкналото тяло са готови</string>
