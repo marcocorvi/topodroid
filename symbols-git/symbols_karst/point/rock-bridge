@@ -1,6 +1,7 @@
 encoding utf-8
 symbol point
 name rock-bridge
+name-bg скален_мост
 name-de Felsbrücke
 name-es puente
 name-fr pont_rocheux
