@@ -229,7 +229,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="external_prompt">Enter measurement</string -->
     <string name="splay_at_to">LRUD at TO station</string>
     <string name="lrud" copyable="it pt sk">LRUD</string>
-    <string name="strike_dip">Strike %1$.0f Dip %2$.0f</string>
+    <string name="strike_dip">Dip direction %1$.0f inclination %2$.0f</string>
 
     <string name="few_data">Too few calibration data</string>
     <string name="few_iter">Failed: too many iterations\nCheck your data</string>

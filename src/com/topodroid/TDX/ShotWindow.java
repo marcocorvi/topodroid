@@ -2447,6 +2447,12 @@ public class ShotWindow extends Activity
    *  The strike iangle is measured from the north.
    *  Therefore strike can be positive (east) or negative (west).
    *     tan( strike ) = Nx / Ny
+   * 
+   *  The dip-direction is the direction of the projection of the dip on the horizontal plane.
+   *  The strike/dip info is equivalent to dip-direction/dip.
+   *  For vertical plane dip-direction is the normal to the plane (or its opposite);
+   *  similarly strike can be one of the two orientation of the horizontal line in the plane.
+   *  For horizontal plane dip-direction is undefined as well as strike.
    */
   String computeBedding( List< DBlock > blks ) // BEDDING
   {
@@ -2479,11 +2485,11 @@ public class ShotWindow extends Activity
         st = b0.mTo;
         if ( st != null && st.length() > 0 ) {
           for ( DBlock b : blks ) {
-            if ( st.equals( b.mTo ) ) {
-              float h =   b.mLength * TDMath.cosd(b.mClino);
-              float z = - b.mLength * TDMath.sind(b.mClino);       // vertical upwards (+ ?)
+            if ( st.equals( b.mTo ) ) { // use negative length
+              float h = - b.mLength * TDMath.cosd(b.mClino);
+              float z = - b.mLength * TDMath.sind(b.mClino); // vertical upwards 
               float y =   h * TDMath.cosd(b.mBearing); // north
-              float x = - h * TDMath.sind(b.mBearing); // east (+ ?)
+              float x =   h * TDMath.sind(b.mBearing); // east 
               xx += x * x;
               xy += x * y;
               xz += x * z;
@@ -2516,10 +2522,12 @@ public class ShotWindow extends Activity
         // TDVector dip = n1.cross( stk ); // dip
         // float astk = TDMath.atan2d( stk.x, stk.y ); // TDMath.atan2d( -n1.y, n1.x );
         // float adip = TDMath.acosd( dip.z ); // TDMath.asind( n1.z );
-        float astk = TDMath.atan2d( n1.y, n1.x );
-        float adip = 90 - TDMath.asind( n1.z );
 
-        strike_dip = String.format( strike_fmt, astk, adip );
+        float astk = TDMath.atan2d( n1.x, n1.y ); // dip-direction: Y=North, X=East
+        if ( astk < 0 ) astk += 360;
+        float adip = 90 - TDMath.asind( n1.z );   // dip inclination
+
+        strike_dip = String.format( Locale.US, strike_fmt, astk, adip );
         // TDToast.make( strike_dip );
         if ( b0.mComment != null && b0.mComment.length() > 0 ) {
 	  if ( b0.mComment.matches( ".*" + strike_regex + ".*" ) ) {

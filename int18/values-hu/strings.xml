@@ -217,7 +217,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="external_prompt">Mérés beírása</string -->
     <string name="splay_at_to">BJFL a következő pontnál</string>
     <string name="lrud">BJFL</string>
-    <string name="strike_dip">Strike %1$.0f Dip %2$.0f</string>
+    <!-- TODO string name="strike_dip">Dip direction %1$.0f inclination %2$.0f</string -->
       <!-- mi ez? -->
     <string name="few_data">Nincs elegendő adat</string>
     <string name="few_iter">Iteráció nem sikerült</string>
