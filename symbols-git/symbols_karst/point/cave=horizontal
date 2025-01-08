@@ -1,6 +1,7 @@
 encoding utf-8
 symbol point
 name cave_horizontal
+name-bg хоризонтална_пещера
 name-de Horizontale_Höhle
 name-es cueva
 name-fr cavité_horizontale
