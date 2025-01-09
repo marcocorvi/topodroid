@@ -1,6 +1,7 @@
 encoding utf-8
 symbol point
 name spring_vertical
+name-bg вертикален_извор
 name-de Vertikale_Quelle
 name-es manatial_vertical
 name-fr arrivée_d'eau_verticale_(chute)

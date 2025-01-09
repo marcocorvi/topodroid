@@ -1,6 +1,7 @@
 encoding utf-8
 symbol point
 name rock-shelter
+name-bg скален_заслон
 name-de Unterstand
 name-es abrigo
 name-fr abri_sous_roche

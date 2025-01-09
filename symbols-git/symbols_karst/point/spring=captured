@@ -1,6 +1,7 @@
 encoding utf-8
 symbol point
 name spring_captured
+name-bg каптаж
 name-de Quellfassung
 name-es manatial_confinado
 name-fr source_captée
