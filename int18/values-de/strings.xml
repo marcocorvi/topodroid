@@ -194,7 +194,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="external_prompt">Vermessung</string -->
   <string name="splay_at_to">LRUD bei Ziel-Messpunkt</string>
   <string name="lrud">LRUD</string>
-  <! CHANGED string name="strike_dip">Streichen %1$.0f Fallen %2$.0f</string -->
+  <!-- CHANGED string name="strike_dip">Streichen %1$.0f Fallen %2$.0f</string -->
     <!-- TODO string name="strike_dip">Dip direction %1$.0f inclination %2$.0f</string -->
   <string name="few_data">Nicht genügend Daten</string>
   <string name="few_iter">Nicht genügend Wiederholungen</string>

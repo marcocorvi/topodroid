@@ -24,7 +24,8 @@ import com.topodroid.help.UserManualActivity;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.calib.CalibInfo;
-import com.topodroid.calib.CalibAlgo;
+// import com.topodroid.calib.CalibAlgo;
+import com.topodroid.calib.CalibTransform;
 import com.topodroid.calib.CalibResult;
 import com.topodroid.calib.CalibCoeffDialog;
 
@@ -314,7 +315,7 @@ public class CalibActivity extends Activity
       saveCalibAlgo();
       doOpen();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) { // COEFF
-      showCoeffs();
+      showCoeffs( );
     // } else if ( k < mNrButton1 && b == mButton1[k++] ) {
     //   askDelete();
     }
@@ -322,24 +323,19 @@ public class CalibActivity extends Activity
 
   /** open a dialog showing the calibration coefficients
    */
-  private void showCoeffs()
+  private void showCoeffs( )
   {
     String coeff_str = TopoDroidApp.mDData.selectCalibCoeff( TDInstance.cid );
     if ( coeff_str != null ) {
-      byte[] coeff1 = CalibAlgo.stringToCoeff( coeff_str, false ); // TWO_SENSORS
-      byte[] coeff2 = CalibAlgo.stringToCoeff( coeff_str, true );
-      TDMatrix mG = new TDMatrix();
-      TDMatrix mM = new TDMatrix();
-      TDVector vG = new TDVector();
-      TDVector vM = new TDVector();
-      TDVector nL = new TDVector();
-      CalibAlgo.coeffToG( coeff1, vG, mG ); // FIXME using first sensor set to compute G-M vector/matrix for display 
-      CalibAlgo.coeffToM( coeff1, vM, mM );
-      CalibAlgo.coeffToNL( coeff1, nL );
-   
+      byte[] coeff1 = CalibTransform.stringToCoeff( coeff_str, 1 ); // TWO_SENSORS
+      byte[] coeff2 = CalibTransform.stringToCoeff( coeff_str, 2 ); // TWO_SENSORS
+      int len = (coeff2 != null)? 104 : 52;
+      byte[] coeff = new byte[ len ];
+      System.arraycopy(coeff1, 0, coeff, 0, 52 );
+      if ( coeff2 != null ) System.arraycopy( coeff2, 0, coeff, 52, 52 );
       CalibResult res = new CalibResult();
-      TopoDroidApp.mDData.selectCalibError( TDInstance.cid, res );
-      (new CalibCoeffDialog( this, null, vG, mG, vM, mM, nL, null, res.delta_bh, res.error, res.stddev, res.max_error, res.iterations, res.dip, res.roll, coeff1, coeff2 /*, false */ )).show();
+      TopoDroidApp.mDData.selectCalibResult( TDInstance.cid, res ); // FIXME this returns the firts-set error TWO_SENSORS
+      (new CalibCoeffDialog( this, null, null, coeff, res.delta_bh, res.error, res.stddev, res.max_error, res.iterations, res.dip, res.roll /*, false */ )).show();
     } else {
       TDToast.make( R.string.calib_no_coeff );
     }

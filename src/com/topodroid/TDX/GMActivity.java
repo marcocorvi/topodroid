@@ -87,6 +87,8 @@ public class GMActivity extends Activity
 {
   private TopoDroidApp mApp;
   private DeviceHelper mApp_mDData;
+  private TDVector mBG1, mBM1, mNL1, mBG2, mBM2, mNL2;
+  private TDMatrix mAG1, mAM1, mAG2, mAM2;
 
   public static boolean mGMActivityVisible = false;
 
@@ -313,8 +315,13 @@ public class GMActivity extends Activity
       float roll    = mCalibration.Roll();
       byte[] coeff  = mCalibration.GetCoeff(); // TWO_SENSORS this is 52 byte long
 
+      // TWO_SENSORS 
+      // so far errors and other results are the "average/max" of the two calibrations 
+      // calib coeffs are stored in a string which contains both sets if there are two sets
       if ( mTwoSensors ) {
         mCalibration2.rollDifference();  // FIXME ROLL_DIFFERENCE
+
+        // TWO_SENSORS calib data errors are the average of the errors on the two sensor-sets
         float[] errors2 = mCalibration2.Errors();
         for ( int k = 0; k < list.size(); ++k ) errors[k] = ( errors[k] + errors2[k] ) / 2;
         // TODO could use discrepancies ?
@@ -336,11 +343,13 @@ public class GMActivity extends Activity
         // cb.setError( errors[k] );
       }
 
+      // FIXME TWO_SENSORS should keep separated the two calibs results
+      //                   this means seven new columnsto the calibs table
       mApp_mDData.updateCalibError( cid, deltaBH, delta, delta2, maxErr, dip, roll, iter );
 
       // DEBUG:
       // Calibration.logCoeff( coeff );
-      // coeff = Calibration.stringToCoeff( mApp.mDData.selectCalibCoeff( cid ) );
+      // coeff = Calibration.stringToCoeff( mApp.mDData.selectCalibCoeff( cid ), 1 ); // ???
       // Calibration.logCoeff( coeff );
     }
     // TDLog.v( "iteration " + iter );
@@ -375,15 +384,15 @@ public class GMActivity extends Activity
     CalibAlgo calib1 = null;
     switch ( algo ) {
       case CalibInfo.ALGO_NON_LINEAR:
-        calib1 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr, false ), true ); // TODO TWO_SENSORS
+        calib1 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr, 1 ), true ); // TODO TWO_SENSORS
         break;
       // case CalibInfo.ALGO_MINIMUM:
       //   if ( TDLevel.overTester ) {
-      //     calib1 = new CalibAlgoMin( CalibAlgo.stringToCoeff( coeffStr ), false );
+      //     calib1 = new CalibAlgoMin( CalibAlgo.stringToCoeff( coeffStr, 1 ), false );
       //     break;
       //   }
       default:
-        calib1 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr, false ), false );
+        calib1 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr, 1 ), false );
     }
     // TDLog.v( "Calib-1 algo " + algo );
     // calib1.dump();
@@ -394,15 +403,15 @@ public class GMActivity extends Activity
     CalibAlgo calib0 = null;
     switch ( algo ) {
       case CalibInfo.ALGO_NON_LINEAR:
-        calib0 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr, false ), true );
+        calib0 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr, 1 ), true );
         break;
       // case CalibInfo.ALGO_MINIMUM:
       //   if ( TDLevel.overTester ) {
-      //     calib0 = new CalibAlgoMin( CalibAlgo.stringToCoeff( coeffStr ), false );
+      //     calib0 = new CalibAlgoMin( CalibAlgo.stringToCoeff( coeffStr, 1 ), false );
       //     break;
       //   }
       default:
-        calib0 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr, false ), false );
+        calib0 = new CalibAlgoBH( CalibAlgo.stringToCoeff( coeffStr, 1 ), false );
     }
     // TDLog.v( "Calib-0 algo " + algo );
     // calib0.dump();
@@ -540,25 +549,26 @@ public class GMActivity extends Activity
           }
           // enableWrite( ! saturated );
           enableWrite( true );
-          TDVector bg = mCalibration.GetBG();
-          TDMatrix ag = mCalibration.GetAG();
-          TDVector bm = mCalibration.GetBM();
-          TDMatrix am = mCalibration.GetAM();
-          TDVector nL = mCalibration.GetNL();
+          byte[]  coeffs = null;
           byte[]  coeff1 = mCalibration.GetCoeff();
           float[] errors = mCalibration.Errors();
 
-          byte[] coeff2 = null; // TWO_SENSORS
-          if ( mTwoSensors ) {
-            coeff2 = mCalibration2.GetCoeff();
-            float[] errors2 = mCalibration.Errors();
+          if ( mCalibration2 != null ) {
+            byte[] coeff2 = mCalibration2.GetCoeff();
+            coeffs = new byte[104];
+            System.arraycopy( coeff1, 0, coeffs, 0, 52 );
+            System.arraycopy( coeff2, 0, coeffs, 52, 52 );
+            float[] errors2 = mCalibration2.Errors();
             for ( int k = 0; k < errors.length; ++k ) errors[k] = ( errors[k] + errors2[k] )/2;
-          } 
+          } else {
+            coeffs = new byte[52];
+            System.arraycopy( coeff1, 0, coeffs, 0, 52 );
+          }
 
-          (new CalibCoeffDialog( this, this, bg, ag, bm, am, nL, errors,
+          (new CalibCoeffDialog( this, this, errors, coeffs,
                                  mCalibration.DeltaBH(), mCalibration.Delta(), mCalibration.Delta2(), mCalibration.MaxError(), 
-                                 result, mCalibration.Dip(), mCalibration.Roll(), // FIXME ROLL_DIFFERENCE
-                                 coeff1, coeff2 /* , saturated */ ) ).show();
+                                 result, mCalibration.Dip(), mCalibration.Roll() // FIXME ROLL_DIFFERENCE
+                                 /* , saturated */ ) ).show();
         } else if ( result == 0 ) {
           TDToast.makeBad( R.string.few_iter );
           return;
@@ -998,16 +1008,12 @@ public class GMActivity extends Activity
    */
   public boolean isActivityFinishing() { return this.isFinishing(); }
 
-  /** display the calibration coefficients
-   * @param bg    G offset coeff
-   * @param ag    G matrix coeff
-   * @param bm    M offset coeff
-   * @param am    M matrix coeff
-   * @param nL    non-linear coefficients
+  /** display calibration coeffs
+   * @param coeffs ...
    */
-  public void displayCoeff( TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nL )
-  { // TWO_SENSORS null coeff1 null coeff2
-    (new CalibCoeffDialog( this, null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0.0f, 0, 0.0f, 0.0f, null, null /*, false */ ) ).show();
+  public void displayCoeff( byte[] coeffs )
+  { // TWO_SENSORS null coeff 
+    (new CalibCoeffDialog( this, coeffs ) ).show();
   }
 
   /** enable or disable the buttons

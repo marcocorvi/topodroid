@@ -22,7 +22,7 @@ import com.topodroid.dev.DataType;
 // import com.topodroid.TDX.TDInstance;
 // import com.topodroid.TDX.TopoDroidApp;
 // import com.topodroid.TDX.R;
-import com.topodroid.calib.ICoeffDisplayer;
+// import com.topodroid.calib.ICoeffDisplayer;
 import com.topodroid.calib.CalibAlgo;
 import com.topodroid.calib.CalibTransform;
 import com.topodroid.calib.CBlock;
@@ -381,7 +381,7 @@ public class AutoCalibDialog extends MyDialog
       mB = new GMVector( mCalib.GetBG(), mCalib.GetBM() );
       mA = new GMMatrix( mCalib.GetAG(), mCalib.GetAM() );
       // mNL = mCalib.GetNL();
-      displayCoeffs();
+      displayTheCoeffs();
 
       // TDLog.v("read coeffs");
       mBTstart.setOnClickListener( this );
@@ -422,7 +422,7 @@ public class AutoCalibDialog extends MyDialog
 
   /** update the display of coeffs
    */
-  private void displayCoeffs()
+  private void displayTheCoeffs()
   {
     TDVector mBG = mB.g;
     TDVector mBM = mB.m;
@@ -496,7 +496,7 @@ public class AutoCalibDialog extends MyDialog
     super.onBackPressed();
   }
 
-  // public void displayCoeff( TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nl )
+  // public void displayCoeff( TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nl, TDVector bg2, TDMatrix ag2, TDVector bm2, TDMatrix am2, TDVector nl2 )
   // {
   //   TDLog.v("set coeffs");
   //   mBG = bg;
@@ -525,7 +525,7 @@ public class AutoCalibDialog extends MyDialog
   public void update( long gx, long gy, long gz, long mx, long my, long mz )
   {
     updateDipM2G2( gx, gy, gz, mx, my, mz );
-    displayCoeffs();
+    displayTheCoeffs();
   }
 
   /** compute the average dip, M2 and G2 of the calibration data
