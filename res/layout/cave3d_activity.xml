@@ -99,16 +99,23 @@
       <Button android:id="@+id/fix_station"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="5dp"
-        android:paddingEnd="5dp"
+        android:paddingStart="3dp"
+        android:paddingEnd="3dp"
         android:background="@drawable/iz_station_off"
         />
       <Button android:id="@+id/measure_station"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="5dp"
-        android:paddingEnd="10dp"
+        android:paddingStart="3dp"
+        android:paddingEnd="3dp"
         android:background="@drawable/iz_ruler_off"
+        />
+      <Button android:id="@+id/close_station"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="3dp"
+        android:paddingEnd="8dp"
+        android:background="@drawable/iz_clear_green"
         />
     </LinearLayout>
   </LinearLayout>
