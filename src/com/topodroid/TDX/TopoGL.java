@@ -398,7 +398,7 @@ public class TopoGL extends Activity
     mCloseStation.setOnClickListener( this );
 
     mLayoutStation.setVisibility( View.GONE );
-    mLayoutStation.setOnLongClickListener( this );
+    // mLayoutStation.setOnLongClickListener( this ); // 20250113 replaced with "close" button
     
     // setWallButton( mRenderer.wall_mode );
 
@@ -1099,10 +1099,10 @@ public class TopoGL extends Activity
     //   centerAtCurrentStation();
     //   return true;
     // }
-    if ( v.getId() == R.id.layout_station ) {
-      closeCurrentStation();
-      return true;
-    }
+    // if ( v.getId() == R.id.layout_station ) { // 20250113 replaced with "close" button
+    //   closeCurrentStation();
+    //   return true;
+    // }
 
     Button b = (Button) v;
     if ( b == mButton1[ BTN_PROJECT ] ) {
