@@ -206,7 +206,7 @@ no campo abaixo e aperte o botão.
   <string name="splay_at_to">Dados EDTC na base PARA</string>
   <string name="lrud">EDTC</string>
   <!-- CHANGED string name="strike_dip">Direção %1$.0f — Mergulho %2$.0f</string -->
-    <!-- TODO string name="strike_dip">Dip direction %1$.0f inclination %2$.0f</string -->
+  <string name="strike_dip">Mergulho: direção %1$.0f — inclinação %2$.0f</string>
   <string name="few_data">Não há dados suficientes</string>
   <string name="few_iter">Falha: excesso de iterações</string>
   <string name="few_groups">Não há dados suficientes para os grupos</string>
