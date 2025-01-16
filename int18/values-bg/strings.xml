@@ -222,7 +222,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="external_prompt">Въвеждане на измервания</string -->
     <string name="splay_at_to">Ляво/дясно/горе/долу при репер ДО</string>
     <string name="lrud">Ляво/дясно/горе/долу</string>
-    <!-- TODO string name="strike_dip">Dip direction %1$.0f inclination %2$.0f</string -->
+    <string name="strike_dip">Посока на наклона %1$.0f инклинация %2$.0f</string>
 
     <string name="few_data">Няма достатъчно данни за калибрация</string>
     <string name="few_iter">ГРЕШКА: прекалено много итерации \nПроверете данните</string>
