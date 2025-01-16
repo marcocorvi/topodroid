@@ -186,8 +186,8 @@ public class TopoDroidApp extends Application
   static String mClipboardText = null; // text clipboard
 
   public static float mScaleFactor   = 1.0f; // DisplayHeight / 320 * density, eg, 2040/320*3.0 = 19.15...
-  public static float mDisplayWidth  = 200f;
-  public static float mDisplayHeight = 320f;
+  public static float mDisplayWidth  = 200f; // TDInstance.context.getResources().getDisplayMetrics().widthPixels; // 200f;
+  public static float mDisplayHeight = 320f; // TDInstance.context.getResources().getDisplayMetrics().heightPixels; // 320f;
   public static float mBorderRight      = 4096;
   public static float mBorderLeft       = 0;
   public static float mBorderInnerRight = 4096;
@@ -974,7 +974,7 @@ public class TopoDroidApp extends Application
     mBorderBottom     = (int)( (dm.heightPixels * 7) / 8 ) + DrawingWindow.ZOOM_TRANSLATION_1;
     mDisplayWidth  = dm.widthPixels;
     mDisplayHeight = dm.heightPixels;
-    // TDLog.v("ConfigChange set display params " + mDisplayWidth + " " + mDisplayHeight + " landscape " + landscape + " dim " + dim );
+    TDLog.v("ConfigChange set display params " + mDisplayWidth + " " + mDisplayHeight + " density " + density + " dim " + dim );
   }
 
   @Override

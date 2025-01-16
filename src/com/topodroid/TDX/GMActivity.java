@@ -294,7 +294,7 @@ public class GMActivity extends Activity
     // TDLog.v("Calib Data " + list.size() + " ok " + ng );
 
     int iter = mCalibration.Calibrate();
-    // TDLog.v("Calib Iter " + iter );
+    TDLog.v("Calib-1 Iter " + iter );
 
     if ( mTwoSensors && iter > 0 && iter < TDSetting.mCalibMaxIt ) {
       mCalibration2 = new CalibAlgoBH( 0, false );
@@ -302,6 +302,7 @@ public class GMActivity extends Activity
       for ( CBlock item : list ) mCalibration2.AddValues( item, true );
       int iter2 = mCalibration2.Calibrate();
       if ( iter2 > iter ) iter = iter2;
+      TDLog.v("Calib-2 Iter " + iter2 );
     }
 
     if ( iter > 0 && iter < TDSetting.mCalibMaxIt ) {
@@ -314,6 +315,11 @@ public class GMActivity extends Activity
       float dip     = mCalibration.Dip();
       float roll    = mCalibration.Roll();
       byte[] coeff  = mCalibration.GetCoeff(); // TWO_SENSORS this is 52 byte long
+
+      TDLog.v("Calib delta  " + delta + " " + mCalibration2.Delta() );
+      TDLog.v("Calib stddev " + delta2 + " " + mCalibration2.Delta2() );
+      TDLog.v("Calib maxerr " + maxErr + " " + mCalibration2.MaxError() );
+      TDLog.v("Calib dip    " + dip + " " + mCalibration2.Dip() );
 
       // TWO_SENSORS 
       // so far errors and other results are the "average/max" of the two calibrations 

@@ -11,7 +11,13 @@
     android:layout_marginEnd="10dp"
   />
 
-  <CheckBox android:id="@+id/cb_survey"
+  <Button android:id="@+id/cb_show"
+    android:layout_width="20dp"
+    android:layout_height="20dp"
+    android:layout_marginEnd="10dp"
+  />
+
+  <TextView android:id="@+id/cb_text"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/padding"

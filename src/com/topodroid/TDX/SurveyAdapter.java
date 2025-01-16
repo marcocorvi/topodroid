@@ -14,22 +14,30 @@ package com.topodroid.TDX;
 // import com.topodroid.utils.TDLog;
 
 import com.topodroid.ui.MyColorPicker;
+import com.topodroid.ui.MyButton;;
 
 import android.content.Context;
 
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
+// import android.widget.CheckBox;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.AdapterView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
 
+import android.graphics.drawable.BitmapDrawable;
+
 import java.util.List;
 
 class SurveyAdapter extends ArrayAdapter< Cave3DSurvey >
 {
+  // TODO button size = TopoDroidApp.widthPixels / 40 instead of 27
+  static BitmapDrawable mEyeOn  = null;
+  static BitmapDrawable mEyeOff = null;
+
   private Context mContext;
   private final TopoGL mParent;
   List< Cave3DSurvey > mItems;
@@ -38,6 +46,10 @@ class SurveyAdapter extends ArrayAdapter< Cave3DSurvey >
   SurveyAdapter( Context ctx, TopoGL parent, int res_id, List< Cave3DSurvey > items )
   {
     super( ctx, res_id, items );
+    if ( mEyeOn == null ) {
+      mEyeOn  = MyButton.getButtonBackground( TDInstance.context, (int)(TopoDroidApp.mDisplayWidth/40), R.drawable.eye_on );
+      mEyeOff = MyButton.getButtonBackground( TDInstance.context, (int)(TopoDroidApp.mDisplayWidth/40), R.drawable.eye_off );
+    }
     mContext = ctx;
     mParent  = parent;
     mItems   = items;
@@ -55,16 +67,18 @@ class SurveyAdapter extends ArrayAdapter< Cave3DSurvey >
   { 
     int      pos;
     Cave3DSurvey mSurvey;   // used to make sure blocks do not hold ref to a view, that does not belong to them REVISE_RECENT
-    CheckBox cbShow;
+    Button   cbShow;
     Button   colorBtn;
+    TextView cbText;
 
-    ViewHolder( CheckBox show, Button color )
+    ViewHolder( Button show, Button color, TextView text )
     {
       pos      = 0;
       mSurvey  = null; 
       cbShow   = show;
       cbShow.setOnClickListener( this );
       colorBtn = color;
+      cbText   = text;
     }
 
     // IColorChanged
@@ -74,12 +88,17 @@ class SurveyAdapter extends ArrayAdapter< Cave3DSurvey >
       colorBtn.setBackgroundColor( color );
     }
 
+    private void setCbShow( boolean checked )
+    {
+      cbShow.setBackground( (checked ? mEyeOn : mEyeOff) );
+    }
+
     @Override
     public void onClick( View v )
     {
       if ( mSurvey == null ) return;
-      if ( v.getId() == R.id.cb_survey ) {
-        mSurvey.visible = cbShow.isChecked();
+      if ( v.getId() == R.id.cb_show ) {
+        setCbShow( mSurvey.switchVisible() );
       } else if ( v.getId() == R.id.btn_color ){
         (new MyColorPicker( mContext, this, mSurvey.getTmpColor() )).show();
       }
@@ -90,8 +109,8 @@ class SurveyAdapter extends ArrayAdapter< Cave3DSurvey >
       // TDLog.v("holder set survey " + b.mName + " pos " + p );
       mSurvey = b;
       pos     = p;
-      cbShow.setChecked( b.visible );
-      cbShow.setText( b.name );
+      setCbShow( b.visible );
+      cbText.setText( b.name );
       colorBtn.setBackgroundColor( b.getTmpColor() );
     }
   }
@@ -105,8 +124,9 @@ class SurveyAdapter extends ArrayAdapter< Cave3DSurvey >
     if ( convertView == null ) {
       convertView = mLayoutInflater.inflate( R.layout.survey_color_row, parent, false );
       holder = new ViewHolder( 
-        (CheckBox)convertView.findViewById( R.id.cb_survey ),
-        (Button)convertView.findViewById( R.id.btn_color )
+        (Button)convertView.findViewById( R.id.cb_show ),
+        (Button)convertView.findViewById( R.id.btn_color ),
+        (TextView)convertView.findViewById( R.id.cb_text )
       );
       // holder.colorBtn = (Button) convertView.findViewById( R.id.btn_color );
       convertView.setTag( holder );
@@ -114,7 +134,7 @@ class SurveyAdapter extends ArrayAdapter< Cave3DSurvey >
       holder = (ViewHolder) convertView.getTag();
     }
     holder.setSurvey( b, pos );
-    holder.colorBtn.setBackgroundColor( b.getTmpColor() );
+    // holder.colorBtn.setBackgroundColor( b.getTmpColor() );
     holder.colorBtn.setOnClickListener( holder );
     // b.mView = convertView;
     return convertView;
