@@ -113,6 +113,13 @@
         android:layout_height="wrap_content"
         android:gravity="end"
         >
+        <Button android:id="@+id/button_coeff_second"
+          android:layout_gravity="start"
+          style="@style/button_default"
+          android:text="@string/swap"
+          android:paddingStart="15dp"
+          android:paddingEnd="15dp"
+        />
         <Button android:id="@+id/button_coeff_back"
           android:layout_gravity="start"
           style="@style/button_default"
@@ -122,11 +129,6 @@
           style="@style/button_default"
           android:text="@string/button_write"
           android:textColor="@color/textdelete"
-        />
-        <Button android:id="@+id/button_coeff_second"
-          android:layout_gravity="start"
-          style="@style/button_default"
-          android:text="@string/arrow_right"
         />
       </LinearLayout>
     </LinearLayout>

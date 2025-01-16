@@ -216,10 +216,10 @@ public class GMActivity extends Activity
    */
   public int getAlgo() { return mAlgo; }
 
-  /** set whether there is a second set of sensors
-   * @param b    whether there is a second set of sensors
-   */
-  public void setSecondSensors( boolean b ) { mTwoSensors = b; }
+  // /** set whether there is a second set of sensors
+  //  * @param b    whether there is a second set of sensors
+  //  */
+  // public void setSecondSensors( boolean b ) { mTwoSensors = b; }
 
   /** set the calibration algorithm
    * @param algo   index of the calibration algorithm
@@ -294,7 +294,7 @@ public class GMActivity extends Activity
     // TDLog.v("Calib Data " + list.size() + " ok " + ng );
 
     int iter = mCalibration.Calibrate();
-    TDLog.v("Calib-1 Iter " + iter );
+    // TDLog.v("Calib-1 Iter " + iter + " Two-sensors " + mTwoSensors );
 
     if ( mTwoSensors && iter > 0 && iter < TDSetting.mCalibMaxIt ) {
       mCalibration2 = new CalibAlgoBH( 0, false );
@@ -302,7 +302,7 @@ public class GMActivity extends Activity
       for ( CBlock item : list ) mCalibration2.AddValues( item, true );
       int iter2 = mCalibration2.Calibrate();
       if ( iter2 > iter ) iter = iter2;
-      TDLog.v("Calib-2 Iter " + iter2 );
+      // TDLog.v("Calib-2 Iter " + iter2 );
     }
 
     if ( iter > 0 && iter < TDSetting.mCalibMaxIt ) {
@@ -316,15 +316,14 @@ public class GMActivity extends Activity
       float roll    = mCalibration.Roll();
       byte[] coeff  = mCalibration.GetCoeff(); // TWO_SENSORS this is 52 byte long
 
-      TDLog.v("Calib delta  " + delta + " " + mCalibration2.Delta() );
-      TDLog.v("Calib stddev " + delta2 + " " + mCalibration2.Delta2() );
-      TDLog.v("Calib maxerr " + maxErr + " " + mCalibration2.MaxError() );
-      TDLog.v("Calib dip    " + dip + " " + mCalibration2.Dip() );
-
       // TWO_SENSORS 
       // so far errors and other results are the "average/max" of the two calibrations 
       // calib coeffs are stored in a string which contains both sets if there are two sets
-      if ( mTwoSensors ) {
+      if ( mTwoSensors && mCalibration2 != null ) {
+        // TDLog.v("Calib delta  " + delta + " " + mCalibration2.Delta() );
+        // TDLog.v("Calib stddev " + delta2 + " " + mCalibration2.Delta2() );
+        // TDLog.v("Calib maxerr " + maxErr + " " + mCalibration2.MaxError() );
+        // TDLog.v("Calib dip    " + dip + " " + mCalibration2.Dip() );
         mCalibration2.rollDifference();  // FIXME ROLL_DIFFERENCE
 
         // TWO_SENSORS calib data errors are the average of the errors on the two sensor-sets
@@ -341,6 +340,10 @@ public class GMActivity extends Activity
         roll = ( roll + mCalibration2.Roll() )/2;
         mApp_mDData.updateCalibCoeff( cid, CalibAlgo.coeffToString( coeff, coeff2 ) );
       } else {
+        // TDLog.v("Calib delta  " + delta );
+        // TDLog.v("Calib stddev " + delta2 );
+        // TDLog.v("Calib maxerr " + maxErr );
+        // TDLog.v("Calib dip    " + dip );
         mApp_mDData.updateCalibCoeff( cid, CalibAlgo.coeffToString( coeff, null ) );
       }
       for ( int k = 0; k < list.size(); ++k ) {
@@ -544,7 +547,7 @@ public class GMActivity extends Activity
     switch ( job ) {
       case CalibComputer.CALIB_COMPUTE_CALIB:
         resetTitle( );
-        // TDLog.v( "compute result " + result );
+        // TDLog.v( "handle compute result " + result );
         if ( result >= TDSetting.mCalibMaxIt ) {
           TDToast.makeBad( R.string.few_iter );
           return;
@@ -917,6 +920,7 @@ public class GMActivity extends Activity
     setContentView(R.layout.gm_activity);
     mApp = (TopoDroidApp) getApplication();
     mApp_mDData = TopoDroidApp.mDData;
+    mTwoSensors = TDInstance.isDeviceTwoSensors();
 
     mDataAdapter  = new CBlockAdapter( this, this, R.layout.cblock_row, new ArrayList< CBlock >() );
 

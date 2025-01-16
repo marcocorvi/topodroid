@@ -1239,6 +1239,7 @@
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Distribuzione dati calibrazione</string>
     <string name="title_coeff">Calibrazione</string>
+    <string name="title_coeff_two">Calibrazione [sensori %1$d]</string>
     <string name="title_color_picker">Prendi un colore</string>
     <!-- NO string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->

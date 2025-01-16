@@ -1258,6 +1258,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Calibration data distribution</string>
     <string name="title_coeff">Calibration coefficients</string>
+    <string name="title_coeff_two">Calibration coefficients [%1$d]</string>
     <string name="title_color_picker">Pick a color</string>
     <!-- UNUSED string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->

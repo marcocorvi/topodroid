@@ -1150,6 +1150,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="title_check">Calibration-check</string -->
   <string name="title_coverage">Kalibrierungsdaten</string>
   <string name="title_coeff">Kalibrierungs-Koeffizienten</string>
+    <!-- TODO string name="title_coeff_two">Calibration coefficients [%1$d]</string -->
   <string name="title_color_picker">Farbe wählen</string>
   <!-- UNUSED string name="title_contour">Konturen</string -->
   <!-- UNUSED string name="title_coord">Gib die Punkt-Koordinaten ein:</string -->
