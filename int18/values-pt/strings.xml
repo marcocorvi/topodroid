@@ -1161,7 +1161,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="title_check">Calibration-check</string -->
   <string name="title_coverage">Distribuição dos dados de calibração</string>
   <string name="title_coeff">Coeficientes de calibração</string>
-    <!-- TODO string name="title_coeff_two">Calibration coefficients [%1$d]</string -->
+  <string name="title_coeff_two">Coeficientes de calibração [%1$d]</string>
   <string name="title_color_picker">Escolha uma cor</string>
   <!-- UNUSED string name="title_contour">Contorno</string -->
   <!-- UNUSED string name="title_coord">Inserir as coordenadas do ponto:</string -->
