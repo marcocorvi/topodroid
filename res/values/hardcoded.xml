@@ -70,6 +70,7 @@
   <string name="less_than" translatable="false">&lt;</string>
   <string name="greater_than" translatable="false">&gt;</string>
   <string name="proj4" translatable="false">Proj4</string>
+  <string name="swap" translatable="false">&lt;-&gt;</string>
 
   <string name="level_b" translatable="false">B</string>
   <string name="level_f" translatable="false">F</string>

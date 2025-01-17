@@ -14,6 +14,8 @@ package com.topodroid.tdm;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.ui.MyColorPicker;
+// import com.topodroid.ui.MyButton;
+// import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.R;
 
 import java.util.ArrayList;
@@ -31,8 +33,13 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
 
+// import android.graphics.drawable.BitmapDrawable;
+
 class TdmInputAdapter extends ArrayAdapter< TdmInput >
 {
+  // static final BitmapDrawable mEyeOn  = MyButton.getButtonBackground( TDInstance.context, 20, R.drawable.eye_on );
+  // static final BitmapDrawable mEyeOff = MyButton.getButtonBackground( TDInstance.context, 20, R.drawable.eye_off );
+
   // private ArrayList< TdmInput > mItems;
   private TdmConfig mConfig;
   private Context mContext;
@@ -116,16 +123,28 @@ class TdmInputAdapter extends ArrayAdapter< TdmInput >
   private class ViewHolder implements OnClickListener
                       , MyColorPicker.IColorChanged
   { 
+    Button   colorBtn;
+    // Button   viewBox;
     CheckBox checkBox;
     TextView textView;
-    Button   colorBtn;
     TdmInput mInput;
+
+    // private void set3dView( boolean checked )
+    // {
+    //   viewBox.setBackground( ( checked ? mEyeOn : mEyeOff ) );
+    // }
 
     @Override
     public void onClick( View v ) 
     {
-      TDLog.v("HOLDER TODO color picker");
-      (new MyColorPicker( mContext, this, mInput.getColor() )).show();
+      if ( v.getId() == R.id.tdinput_checked ) {
+        checkBox.setChecked( mInput.switchChecked() );
+      // } else if ( v.getId() == R.id.tdinput_view ) {
+      //   set3dView( mInput.switch3dView() );
+      } else if ( v.getId() == R.id.tdinput_color ) {
+        // TDLog.v("HOLDER TODO color picker");
+        (new MyColorPicker( mContext, this, mInput.getColor() )).show();
+      }
     }
 
     // IColorChanged
@@ -148,6 +167,7 @@ class TdmInputAdapter extends ArrayAdapter< TdmInput >
       convertView = mLayoutInflater.inflate( R.layout.tdinput_adapter, null ); // parent crashes app
       holder = new ViewHolder();
       holder.checkBox = (CheckBox) convertView.findViewById( R.id.tdinput_checked );
+      // holder.viewBox  = (Button) convertView.findViewById( R.id.tdinput_view );
       holder.textView = (TextView) convertView.findViewById( R.id.tdinput_name );
       holder.textView.setTextSize( TDSetting.mTextSize );
       holder.colorBtn = (Button) convertView.findViewById( R.id.tdinput_color );
@@ -155,8 +175,10 @@ class TdmInputAdapter extends ArrayAdapter< TdmInput >
     } else {
       holder = (ViewHolder) convertView.getTag();
     }
-    holder.checkBox.setOnClickListener( b );
+    holder.checkBox.setOnClickListener( holder );
     holder.checkBox.setChecked( b.isChecked() );
+    // holder.viewBox.setOnClickListener( holder );
+    // holder.set3dView( b.is3dView() );
     holder.textView.setText( b.getSurveyName() );
     holder.colorBtn.setBackgroundColor( b.getColor() );
     holder.colorBtn.setOnClickListener( holder );

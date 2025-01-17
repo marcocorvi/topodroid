@@ -71,6 +71,12 @@ public class CavwayData extends MemoryData
     TDLog.v("CVWY data set data - type " + mType + String.format(" %02x %02x", b[0], b[1]) );
   }
 
+  public byte[] getData() { return data; }
+
+  public byte getData( int k ) { return data[k]; }
+
+  public int getType() { return mType; }
+
   private void setType( byte[] b )
   {
     if ( b[0] == (byte)0xff ) {
@@ -95,10 +101,17 @@ public class CavwayData extends MemoryData
     return ( dhh * 1024.0 + toInt( b[4], b[3] ) )/1000.0;
   }
 
+  public double getAzimuth() { return toAzimuth( data ); }
+  public double getClino()   { return toClino( data ); }
+  public double getRoll()    { return toRoll( data ); }
+
   public double toAzimuth( byte[] b ) { return toInt( b[ 6], b[ 5] ) * ANGLE_SCALE; }
   // public double toAzimuth( byte[] b ) { return toAzimuth( b[5], b[6] ); }
 
-  public double toClino( byte[] b ) { return toInt( b[ 8], b[ 7] ) * ANGLE_SCALE; }
+  public double toClino( byte[] b ) // 20250105 changed as for CavwayProtocol
+  { 
+    return  toSignedInt( b[ 8], b[ 7] ) * ANGLE_SCALE;
+  }
   // public double toClino( byte[] b ) { return toClino( b[7], b[8] ); }
 
   public double toRoll( byte[] b )  { return - toInt( b[10], b[ 9] ) * ANGLE_SCALE; }
@@ -121,6 +134,13 @@ public class CavwayData extends MemoryData
     long seconds = toLong( b[20], b[19], b[18], b[17] );
     return TDUtil.timestampToDateTime( seconds );
   }
+
+  public String toDate( byte[] b ) 
+  { 
+    long seconds = toLong( b[20], b[19], b[18], b[17] );
+    return TDUtil.timestampToDate( seconds );
+  }
+
 
   public static int toRawG1x( byte[] b ) { return toSignedInt( b[22], b[21] ); }
   public static int toRawG1y( byte[] b ) { return toSignedInt( b[24], b[23] ); }
@@ -152,7 +172,8 @@ public class CavwayData extends MemoryData
     // boolean hot  = (int)( data[0] & 0x80 ) == 0x80; // test hot bit
     switch ( mType ) {
       case CALI:
-        pw.format("C %d %d %d %d %d %d %d %d %d %d %d %d", 
+        pw.format("C %s %d %d %d %d %d %d %d %d %d %d %d %d", 
+          toDate( data ),
           toRawG1x( data ), toRawG1y( data ), toRawG1z( data ),
           toRawM1x( data ), toRawM1y( data ), toRawM1z( data ),
           toRawG2x( data ), toRawG2y( data ), toRawG2z( data ),
@@ -164,10 +185,11 @@ public class CavwayData extends MemoryData
         double bb = toAzimuth( data );
         double cc = toClino( data );
         double rr = toRoll( data );
-        String tt = toTime( data );
+        // String tt = toTime( data );
+        String tt = toDate( data );
         double dip1 = toDip1( data );
         double dip2 = toDip2( data );
-        pw.format("%c %.2f %.2f %.2f %.2f %.2f %.2f", ((mType == LEG)? 'L' : ' '), dd, bb, cc, rr, dip1, dip2 );
+        pw.format("%c%c %s %.2f %.2f %.2f %.2f %.2f %.2f", ((mType == LEG)? 'L' : ' '), (hasError()? 'E' : ' '), tt, dd, bb, cc, rr, dip1, dip2 );
         break;
       // case INVALID:
       default:
@@ -177,7 +199,9 @@ public class CavwayData extends MemoryData
     return sw.getBuffer().toString();
   }
 
-  private String parseErrInfo( )
+  public boolean hasError() { return data[IDX_ERR] !=  (byte)(0xFF); }
+
+  public String parseErrInfo( )
   {
     byte[] errbytes = new byte[9];
     System.arraycopy( data, IDX_ERR, errbytes, 0, 9 );

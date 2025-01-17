@@ -700,7 +700,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public void failure( int status, String extra, String what )
   {
-    if ( LOG ) TDLog.v( TAG + "Failure: disconnect and close GATT ...");
+    if ( LOG ) TDLog.v( TAG + "Failure (" + status + "): disconnect and close GATT ...");
     // notifyStatus( ConnectionState.CONN_DISCONNECTED ); // this will be called by disconnected
     clearPending();
     closeDevice( false );
@@ -769,19 +769,25 @@ public class CavwayComm extends TopoDroidComm
 
   /** get DistoX-BLE hw/fw info, and display that on the Info dialog
    * @param info     Cavway info dialog
+   * @return true on full success
    */
-  public void getCavwayInfo( CavwayInfoDialog info )
+  public boolean getCavwayInfo( CavwayInfoDialog info )
   {
-    if ( info == null ) return;
+    if ( info == null ) return false;
     // TDLog.v( TAG + "get Cavway info");
     if ( readMemory( CavwayDetails.FIRMWARE_ADDRESS, 4 ) != null ) { // ?? there was not 4
       // info.SetVal( mPacketType, ((DistoXBLEProtocol)mProtocol).mFirmVer);
       info.SetVal( CavwayProtocol.PACKET_INFO_FIRMWARE, ((CavwayProtocol)mProtocol).mFirmVer);
+    } else {
+      return false;
     }
     if ( readMemory( CavwayDetails.HARDWARE_ADDRESS, 4 ) != null ) {
       // info.SetVal( mPacketType, ((DistoXBLEProtocol)mProtocol).mHardVer);
       info.SetVal( CavwayProtocol.PACKET_INFO_HARDWARE, ((CavwayProtocol)mProtocol).mHardVer);
+    } else {
+      return false;
     }
+    return true;
   }
 
   // --------------------------------------------------------
@@ -871,8 +877,7 @@ public class CavwayComm extends TopoDroidComm
     if ( ! isConnected() ) return false;
     if ( cmd == 0 ) return false;
     // TDLog.v( String.format( TAG + "send cmd 0x%02x", cmd ) );
-    enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, new byte[] {(byte)cmd}, true);
-    return true;
+    return enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, new byte[] {(byte)cmd}, true);
   }
 
   @Override
@@ -897,7 +902,10 @@ public class CavwayComm extends TopoDroidComm
     cmd[2] = (byte)((addr >> 8) & 0xFF);
     cmd[3] = (byte)(len);
     mPacketType = CavwayProtocol.PACKET_NONE;
-    enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true );
+    if ( ! enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true ) ) {
+      // TDLog.v( "COMM failed enlist memory-write [1]" );
+      return null;
+    }
     syncWait( 2000, "read memory" );
     // synchronized ( mNewDataFlag ) {
     //   try {
@@ -941,7 +949,10 @@ public class CavwayComm extends TopoDroidComm
     cmd[5] = data[2];
     cmd[6] = data[3];
     mPacketType = CavwayProtocol.PACKET_NONE;
-    enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true );
+    if ( ! enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true ) ) {
+      // TDLog.v( "COMM failed enlist memory-write [2]" );
+      return false;
+    }
     syncWait( 2000, "write memory" );
     // synchronized ( mNewDataFlag ) {
     //   try {
@@ -981,7 +992,10 @@ public class CavwayComm extends TopoDroidComm
     for(int i = 0;i < len;i++)
       cmd[i+4] = data[i];
     mPacketType = CavwayProtocol.PACKET_NONE;
-    enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true );
+    if ( ! enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true ) ) {
+      // TDLog.v( "COMM failed enlist memory-write [3]" );
+      return false;
+    }
     syncWait( 2000, "write memory" );
     // synchronized ( mNewDataFlag ) {
     //   try {
@@ -1002,9 +1016,10 @@ public class CavwayComm extends TopoDroidComm
 
   /** 0x38: start reading one data from cavway memory
    * @param addr memory address
+   * @return true if success
    * @note when this is entered mReadingMemory is false
    */
-  public void readOneMemory( int addr )
+  public boolean readOneMemory( int addr )
   {
     // TDLog.v( TAG + "read one memory. index " + addr + " set READING flag" );
     syncSetReadingMemory();
@@ -1014,7 +1029,7 @@ public class CavwayComm extends TopoDroidComm
     cmd[2] = (byte)((addr >> 8) & 0xFF);
     cmd[3] = 64;         //one data frame, 64 bytes
     mPacketType = CavwayProtocol.PACKET_NONE;
-    enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true );
+    return enlistWrite( CavwayConst.CAVWAY_SERVICE_UUID, CavwayConst.CAVWAY_CHRT_WRITE_UUID, cmd, true );
     // if ( (mPacketType & CavwayProtocol.PACKET_REPLY) == CavwayProtocol.PACKET_REPLY ) {
     //   int length = ((CavwayProtocol) mProtocol).mRepliedData.length;
     //   TDLog.v( TAG + " READ meomry expected got length " + length );
@@ -1112,7 +1127,9 @@ public class CavwayComm extends TopoDroidComm
     for ( int idx = 0; idx < number; ++idx ) {
       // TDLog.v( TAG + "set memory index " + idx );
       mMemoryIndex = idx;
-      readOneMemory( idx );
+      if ( ! readOneMemory( idx ) ) { // write failure
+        break;
+      }
       syncWaitOnReadingMemory();
       ++ cnt;
     }
@@ -1248,9 +1265,13 @@ public class CavwayComm extends TopoDroidComm
 
   /** read the calibration coeff from the device
    * @param address   device address
-   * @param coeff     array of 52 calibration coeffs (filled by the read)
-   * @param second    whether second sensor set
+   * @param coeff     array of CavwayDetails.NR_COEFF calibration coeffs (filled by the read)
+   * @param second    whether device has second sensor set (not used)
    * @return true if success
+   * 
+   * Cavway has 48 2-byte coeffiients stored as
+   * BG1 BM1 AG1x AG1y AG1z AM1x AM1y AM1z
+   * BG2 BM2 AG2x AG2y AG2z AM2x AM2y AM2z
    */
   @Override
   public boolean readCoeff( String address, byte[] coeff, boolean second )
@@ -1258,23 +1279,26 @@ public class CavwayComm extends TopoDroidComm
     // TDLog.v( TAG + "read coeff " + address );
     if ( coeff == null ) return false;
     int  len  = coeff.length;
-    if ( len > 52 ) len = 52; // FIXME force max length of calib coeffs
+    if ( len > CavwayDetails.NR_COEFF ) len = CavwayDetails.NR_COEFF; // FIXME force max length of calib coeffs
     if ( ! tryConnectDevice( address, null, 0 ) ) return false;
-    int addr = 0x8010; // FIXME the addr for the second set
-    byte[] buff = new byte[4];
-    int k = 0;
-    byte[] coeff_tmp = readMemory( addr, 52 ); // 20230118 local var "coeff_tmp"
+    byte[] coeff_tmp = readMemory( CavwayDetails.COEFF_ADDRESS, CavwayDetails.NR_COEFF ); // 20230118 local var "coeff_tmp"
     disconnectDevice();
-    if ( coeff_tmp == null || coeff_tmp.length != 52 ) return false;
-    //coeff = Arrays.copyOf( coeff_tmp, 52 );  // calling this functions causes a problem: all the params shown in dialog are zero.
-    //calling the following is ok. I don't know why. both the 2 functions can copy the right value to coeff[]
-    for(int i = 0;i < 52;i++) coeff[i] = coeff_tmp[i];
+    if ( coeff_tmp == null ) {
+      TDLog.v("read null coeff");
+      return false;
+    }
+    if ( coeff_tmp.length != CavwayDetails.NR_COEFF ) {
+      TDLog.v("read " + coeff_tmp.length + " coeff instead of " + CavwayDetails.NR_COEFF );
+      return false;
+    }
+    System.arraycopy( coeff_tmp, 0, coeff, 0, CavwayDetails.NR_COEFF );
+    // for(int i = 0;i < CavwayDetails.NR_COEFF;i++) coeff[i] = coeff_tmp[i];
     return true;
   }
 
   /** write the calibration coeff to the device
    * @param address   device address
-   * @param coeff     array of 52 calibration coeffs
+   * @param coeff     array of CavwayDetails.NR_COEFF calibration coeffs
    * @param second    whether second sensor set
    * @return true if success
    */
@@ -1287,7 +1311,7 @@ public class CavwayComm extends TopoDroidComm
     if( ! tryConnectDevice( address, null, 0 )) return false;
     int k = 0;
     int addr = 0x8010; // FIXME the addr for the second set
-    boolean ret = writeMemory(addr, coeff, 52);
+    boolean ret = writeMemory(addr, coeff, CavwayDetails.NR_COEFF);
     disconnectDevice();
     return ret;
   }

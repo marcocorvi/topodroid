@@ -98,6 +98,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="station_not_found">Estación no encontrada</string>
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <string name="shot_not_found">No se encontró ninguna toma</string>
+    <!-- TODO string name="shot_not_saved">Shot not saved</string -->
     <string name="bad_sibling">Toma incorrecta</string>
     <string name="bad_station">Estación incorrecta: %1$s</string>
     <string name="bad_station_name">Nombre de la estación no admitida</string>
@@ -222,7 +223,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="external_prompt">Introducir medición</string -->
     <string name="splay_at_to">LRUD en el punto de llegada</string>
     <string name="lrud">LRUD</string>
-    <string name="strike_dip">Tomas %1$.0f incluidas %2$.0f</string>
+    <!-- CHANGED string name="strike_dip">Tomas %1$.0f incluidas %2$.0f</string -->
+    <!-- TODO string name="strike_dip">Dip direction %1$.0f inclination %2$.0f</string -->
 
     <string name="few_data">No hay suficientes datos</string>
     <string name="few_iter">Interacción fallida</string>
@@ -532,6 +534,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="popup_delete">Cancelar</string>
     <string name="popup_decimate">Diezmar</string>
     <string name="popup_join">Unirse</string>
+    <!-- TODO string name="popup_store">Store</string -->
+    <!-- TODO string name="popup_restore">Restore</string -->
     <string name="popup_erase_all">Borrar Todo</string>
     <string name="popup_erase_point">Borrar puntos</string>
     <string name="popup_erase_line">Borrar líneas</string>
@@ -971,6 +975,10 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="hint_units">Tamaño del símbolo</string>
     <string name="hint_value">Valor</string>
 
+    <!-- TODO string name="calib_measurement_id">Shot %1$d</string -->
+    <!-- TODO string name="calib_measurement_error">Error %1$.4f</string -->
+    <!-- TODO string name="calib_measurement_group">Group: </string -->
+
     <string name="hint_notes">Nota</string>
     <string name="hint_label">Etiqueta</string>
     <string name="hint_comment">Comentario</string>
@@ -1180,6 +1188,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="export_prefix">Prefijo de cueva en nombres de destino</string>
     <string name="export_prefix_hint">prefijo</string>
     <!-- UNUSED string name="export_suffix_hint">sufijo</string -->
+    <!-- TODO string name="export_series_hint">series</string -->
     <string name="export_roundtrip">Ida y vuelta </string>
     <string name="export_share">Share</string>
     <!-- TODO string name="export_overwrite">Overwrite</string -->
@@ -1230,6 +1239,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Distibución datos Calibración</string>
     <string name="title_coeff">Coeficiente Calibración</string>
+    <!-- TODO string name="title_coeff_two">Calibration coefficients [%1$d]</string -->
     <string name="title_color_picker">Elige un color</string>
     <!-- UNUSED string name="title_contour">Contorno</string -->
     <!-- UNUSED string name="title_coord">Introduzca las coordenadas del punto:</string -->
@@ -1588,6 +1598,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_bric_mode_summary">Modo operativo BRIC</string>
   <string name="pref_bric_zero_length_title">Toma cero BRIC </string>
   <string name="pref_bric_zero_length_summary">Grabar toma BRIC de longitud cero</string>
+  <!-- TODO string name="pref_bric_index_is_id_title">BRIC index is ID</string -->
+  <!-- TODO string name="pref_bric_index_is_id_summary">Use BRIC index as shot ID</string -->
   <string name="pref_sap5_bit16_bug_title">SAP5: anomalia bit-16</string>
   <string name="pref_sap5_bit16_bug_summary">SAP5: reparar anomalía bit-16</string>
   <string name="pref_plot_screen_title">Ajustes de pantalla de croquis</string>
@@ -2292,6 +2304,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="warning_no_parent">Advertencia: no es posible subir una carpeta</string -->
 	  
     <string name="warning_nogrant_camera">No se ha concedido el permiso de la cámara</string>
+    <!-- TODO string name="warning_no_csv_type">CSV type not specified</string -->
+    <!-- TODO string name="warning_cavway_info">Failed to get Cavway info</string -->
     <string name="no_permissions">La aplicación no puede ejecutarse sin los permisos requeridos</string>
 
     <!-- UNUSED string name="done_fractals">Tamaño de fractal calculado</string -->

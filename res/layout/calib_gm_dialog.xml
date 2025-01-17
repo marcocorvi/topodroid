@@ -47,23 +47,37 @@
   <TextView android:id="@+id/gm_error"
     android:layout_below="@id/layout1"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" 
+    android:layout_height="wrap_content"
     android:textSize="@dimen/textsizebig"
     android:layout_marginTop="@dimen/margintiny"
   />
-   					  
-  <EditText android:id="@+id/gm_name" 
-    style="@style/edit_number"
-    android:layout_below="@id/gm_error"
-    android:maxLines="1" 
-    android:layout_width="match_parent"
-    android:layout_marginTop="@dimen/margintiny"
-    android:hint="@string/hint_name"
-    android:importantForAutofill="no"
-  />
+
+  <LinearLayout android:id="@+id/layout_group"
+      android:layout_below="@id/gm_error"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:layout_marginTop="@dimen/margintiny"
+      >
+    <TextView android:id="@+id/gm_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/textsizebig"
+        android:layout_marginTop="@dimen/margintiny"
+        android:text="@string/calib_measurement_group"
+        />
+    <EditText android:id="@+id/gm_name"
+      style="@style/edit_number"
+      android:maxLines="1"
+      android:layout_width="wrap_content"
+      android:layout_marginTop="@dimen/margintiny"
+      android:hint="@string/hint_name"
+      android:importantForAutofill="no"
+    />
+  </LinearLayout>
    		
   <LinearLayout android:id="@+id/layout2"
-    android:layout_below="@id/gm_name"
+    android:layout_below="@id/layout_group"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal" 

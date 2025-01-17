@@ -1,6 +1,7 @@
 encoding utf-8
 symbol point
 name spring_horizontal
+name-bg хоризонтален_извор
 name-de Horizontale_Quelle
 name-es manatial_horizontal
 name-fr arrivée_d'eau_horizontale_(source)

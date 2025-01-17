@@ -47,54 +47,94 @@ public class CalibCoeffDialog extends MyDialog
   private Bitmap mBitmap = null;
 
   private Button mButtonWrite;
+  private Button mButtonSecond;
   // private Button mButtonBack;
+  private boolean mSecondState = false; // dialog start with first coeff 
 
-  private final String bg0;
-  private final String agx;
-  private final String agy;
-  private final String agz;
-  private final String bm0;
-  private final String amx;
-  private final String amy;
-  private final String amz;
-  private final String nlx;
-  private final String delta0;
-  private final String delta02;
-  private final String error0;
-  private final String iter0;
-  private final String dip0;
-  private final String roll0; // FIXME ROLL_DIFFERENCE
-  private final byte[] mCoeff1;
-  private final byte[] mCoeff2; // TWO_SENSORS
-  private final float mDelta;
+  private String delta0;
+  private String delta02;
+  private String error0;
+  private String iter0;
+  private String dip0;
+  private String roll0; // FIXME ROLL_DIFFERENCE
+  private final byte[] mCoeff; // caibration coeffs, 52 or 104 bytes
+  private final float[] mErrors;
+  private float   mDelta;
+  private boolean mTwoSensors = false;
+  private boolean mWithResult = false;
   // private boolean mSaturated;
 
+  private TDVector mBG1, mBM1, mNL1, mBG2, mBM2, mNL2;
+  private TDMatrix mAG1, mAM1, mAG2, mAM2;
+
+  private TextView textBG;
+  private TextView textAGx;
+  private TextView textAGy;
+  private TextView textAGz;
+  private TextView textBM;
+  private TextView textAMx;
+  private TextView textAMy;
+  private TextView textAMz;
+  private TextView textNL;
+
   // TWO_SENSORS coeff2 is null if there is only one sensor set
-  public CalibCoeffDialog( Context context, GMActivity parent,
-                    TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nl, float[] errors,
-                    float delta_bh, float delta, float delta2, float error, long iter, float dip, float roll, byte[] coeff, byte[] coeff2 /*, boolean saturated */ )
+  /** cstr
+   * @param context    context
+   * @param coeffs     coefficients byte array 
+   */
+  public CalibCoeffDialog( Context context, byte[] coeffs )
+  {
+    super( context, null, R.string.CalibCoeffDialog ); // null app
+    mParent = null;
+    mCoeff  = null;
+    mErrors = null;
+    mWithResult = false;
+    makeVectorsAndMatricex( coeffs );
+
+    // mSaturated = saturated;
+  }
+
+ /** cstr
+   * @param context    context
+   * @param parent     parent G-M activity
+   * @param errors     calib data residual errors [radians]
+   * @param coeff      calibration coefficients, 52 bytes for one sensor-pair, 104 bytes for two sensor pairs
+   * @param delta_bh   B. Heeb delta
+   * @param delta      average error [degrees]
+   * @param delta2     error std-dev [degrees]
+   * @param error      max error [degrees]
+   * @param iter       number of iterations
+   * @param dip        M dip (topodroid dip)
+   * @param roll       roll ???
+   */
+  public CalibCoeffDialog( Context context, GMActivity parent, float[] errors, byte[] coeff,
+                    float delta_bh, float delta, float delta2, float error, long iter, float dip, float roll /*, boolean saturated */ )
   {
     super( context, null, R.string.CalibCoeffDialog ); // null app
     mParent = new WeakReference<GMActivity>( parent );
-    mCoeff1 = coeff;
-    mCoeff2 = coeff2;
+    mCoeff  = coeff;
+    mErrors = errors;
+    mWithResult = true;
+    makeVectorsAndMatricex( coeff );
 
-    bg0 = String.format(Locale.US, "bG   %8.4f %8.4f %8.4f", bg.x, bg.y, bg.z );
-    agx = String.format(Locale.US, "aGx  %8.4f %8.4f %8.4f", ag.x.x, ag.x.y, ag.x.z );
-    agy = String.format(Locale.US, "aGy  %8.4f %8.4f %8.4f", ag.y.x, ag.y.y, ag.y.z );
-    agz = String.format(Locale.US, "aGz  %8.4f %8.4f %8.4f", ag.z.x, ag.z.y, ag.z.z );
+    setResult( delta_bh, delta, delta2, error, iter, dip, roll );
 
-    bm0 = String.format(Locale.US, "bM   %8.4f %8.4f %8.4f", bm.x, bm.y, bm.z );
-    amx = String.format(Locale.US, "aMx  %8.4f %8.4f %8.4f", am.x.x, am.x.y, am.x.z );
-    amy = String.format(Locale.US, "aMy  %8.4f %8.4f %8.4f", am.y.x, am.y.y, am.y.z );
-    amz = String.format(Locale.US, "aMz  %8.4f %8.4f %8.4f", am.z.x, am.z.y, am.z.z );
-
-    if ( nl != null ) {
-      nlx = String.format(Locale.US, "nL   %8.4f %8.4f %8.4f", nl.x, nl.y, nl.z );
-    } else {
-      nlx = TDString.EMPTY; // new String(TDString.EMPTY);
+    if ( errors != null ) {
+      mBitmap = makeHistogramBitmap( errors, WIDTH, HEIGHT, 20, 5, TDColor.BLUE );
     }
-
+  }
+ 
+  /** set the strings for the result text fields
+   * @param delta_bh   B. Heeb delta
+   * @param delta      average error [degrees]
+   * @param delta2     error std-dev [degrees]
+   * @param error      max error [degrees]
+   * @param iter       number of iterations
+   * @param dip        M dip (topodroid dip)
+   * @param roll       roll ???
+   */
+  private void setResult( float delta_bh, float delta, float delta2, float error, long iter, float dip, float roll )
+  {
     mDelta = delta;
     delta0  = String.format( mContext.getResources().getString( R.string.calib_error ), delta, delta_bh );
     delta02 = String.format( mContext.getResources().getString( R.string.calib_stddev ), delta2 );
@@ -102,21 +142,18 @@ public class CalibCoeffDialog extends MyDialog
     iter0   = String.format( mContext.getResources().getString( R.string.calib_iter ), iter );
     dip0    = String.format( mContext.getResources().getString( R.string.calib_dip ), dip );
     roll0   = String.format( mContext.getResources().getString( R.string.calib_roll ), roll );
-
-    if ( errors != null ) {
-      mBitmap = makeHistogramBitmap( errors, WIDTH, HEIGHT, 20, 5, TDColor.BLUE );
-    }
-    // mSaturated = saturated;
   }
+   
 
   /** create a bitmap with the histogram of the errors
-   * @param error  errors
+   * @param error  errors [radians]
    * @param width  bitmap width
    * @param height bitmap height
    * @param bin    histogram bin
    * @param step   histogram step (?)
    * @param col    ???
    * @return histogram bitmap
+   * @note used also by CalibCheckDialog
    */
   static Bitmap makeHistogramBitmap( float[] error, int width, int height, int bin, int step, int col )
   {
@@ -194,17 +231,15 @@ public class CalibCoeffDialog extends MyDialog
 
     initLayout( R.layout.calib_coeff_dialog, R.string.title_coeff );
 
-    TextView textBG  = (TextView) findViewById(R.id.coeff_bg);
-    TextView textAGx = (TextView) findViewById(R.id.coeff_agx);
-    TextView textAGy = (TextView) findViewById(R.id.coeff_agy);
-    TextView textAGz = (TextView) findViewById(R.id.coeff_agz);
-
-    TextView textBM  = (TextView) findViewById(R.id.coeff_bm);
-    TextView textAMx = (TextView) findViewById(R.id.coeff_amx);
-    TextView textAMy = (TextView) findViewById(R.id.coeff_amy);
-    TextView textAMz = (TextView) findViewById(R.id.coeff_amz);
-
-    TextView textNL = (TextView) findViewById(R.id.coeff_nl);
+    textBG  = (TextView) findViewById(R.id.coeff_bg);
+    textAGx = (TextView) findViewById(R.id.coeff_agx);
+    textAGy = (TextView) findViewById(R.id.coeff_agy);
+    textAGz = (TextView) findViewById(R.id.coeff_agz);
+    textBM  = (TextView) findViewById(R.id.coeff_bm);
+    textAMx = (TextView) findViewById(R.id.coeff_amx);
+    textAMy = (TextView) findViewById(R.id.coeff_amy);
+    textAMz = (TextView) findViewById(R.id.coeff_amz);
+    textNL = (TextView) findViewById(R.id.coeff_nl);
 
     ImageView image        = (ImageView) findViewById( R.id.histogram );
     TextView textDelta    = (TextView) findViewById(R.id.coeff_delta);
@@ -213,42 +248,50 @@ public class CalibCoeffDialog extends MyDialog
     TextView textIter     = (TextView) findViewById(R.id.coeff_iter);
     TextView textDip      = (TextView) findViewById(R.id.coeff_dip);
     TextView textRoll     = (TextView) findViewById(R.id.coeff_roll);
-    mButtonWrite  = (Button) findViewById( R.id.button_coeff_write );
+    mButtonWrite   = (Button) findViewById( R.id.button_coeff_write );
+    mButtonSecond  = (Button) findViewById( R.id.button_coeff_second );
     Button button_back  = (Button) findViewById( R.id.button_coeff_back );
     button_back.setOnClickListener( this );
 
-    textBG.setText( bg0 );
-    textAGx.setText( agx );
-    textAGy.setText( agy );
-    textAGz.setText( agz );
-    textBM.setText( bm0 );
-    textAMx.setText( amx );
-    textAMy.setText( amy );
-    textNL.setText( nlx );
-    textAMz.setText( amz );
+    setCoeff( mBG1, mAG1, mBM1, mAM1, mNL1, 1 );
+
     if ( mBitmap != null ) {
       image.setImageBitmap( mBitmap );
+    } else {
+      image.setVisibility( View.GONE );
+    }
+
+    if ( mWithResult ) {
       textDelta.setText( delta0 );
       textDelta2.setText( delta02 );
       textMaxError.setText( error0 );
       textIter.setText( iter0 );
       textDip.setText( dip0 );
       textRoll.setText( roll0 ); // FIXME ROLL_DIFFERENCE
-      mButtonWrite.setOnClickListener( this );
-      // if ( mSaturated ) {
-      //   mButtonWrite.setEnabled( false );
-      // } else {
-        mButtonWrite.setEnabled( mCoeff1 != null );
-      // }
     } else {
-      image.setVisibility( View.GONE );
       textDelta.setVisibility( View.GONE );
       textDelta2.setVisibility( View.GONE );
       textMaxError.setVisibility( View.GONE );
       textIter.setVisibility( View.GONE );
       textDip.setVisibility( View.GONE );
       textRoll.setVisibility( View.GONE ); // FIXME ROLL_DIFFERENCE
+    }
+
+    if ( mParent != null ) {
+      mButtonWrite.setOnClickListener( this );
+      // if ( mSaturated ) {
+      //   mButtonWrite.setEnabled( false );
+      // } else {
+        mButtonWrite.setEnabled( mCoeff != null );
+      // }
+    } else {
       mButtonWrite.setVisibility( View.GONE );
+    }
+
+    if ( mTwoSensors ) {
+      mButtonSecond.setOnClickListener( this );
+    } else {
+      mButtonSecond.setVisibility( View.GONE );
     }
   }
 
@@ -257,15 +300,105 @@ public class CalibCoeffDialog extends MyDialog
   {
     int id = v.getId();
     if ( id == R.id.button_coeff_write ) { 
-      GMActivity parent = mParent.get();
-      if ( parent != null ) {
-        if ( mCoeff2 != null ) parent.uploadCoefficients( mDelta, mCoeff2, true, null, true ); // TWO_SENSORS
-        if ( mCoeff1 != null ) parent.uploadCoefficients( mDelta, mCoeff1, true, mButtonWrite, false );
+      if ( mTwoSensors ) {
+        // TODO uploadCoefficients for TWO_SENSORS
       } else {
-        TDLog.e("Calib Coeff Dialog null parent");
+        GMActivity parent = mParent.get();
+        if ( parent != null ) {
+          if ( mCoeff != null ) parent.uploadCoefficients( mDelta, mCoeff, true, mButtonWrite, false );
+        } else {
+          TDLog.e("Calib Coeff Dialog null parent");
+        }
+      }
+    } else if ( id == R.id.button_coeff_second ) {
+      if ( mTwoSensors ) {
+        if ( mSecondState ) {
+          mSecondState = false;
+          // mButtonSecond.setText(  R.string.arrow_right );
+          setCoeff( mBG1, mAG1, mBM1, mAM1, mNL1, 1 );
+        } else {
+          mSecondState = true;
+          // mButtonSecond.setText(  R.string.arrow_left );
+          setCoeff( mBG2, mAG2, mBM2, mAM2, mNL2, 2 );
+        }
       }
     } else { // id == R.id.coeff_back
       dismiss();
+    }
+  }
+
+  /** set the display of the coeffs
+   * @param bg   G vector
+   * @param ag   G matrix
+   * @param bm   M vector
+   * @param am   M matrix
+   * @param nl   non-linear vector
+   * @param nr   sensp-set number
+   */
+  private void setCoeff( TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nl, int nr )
+  {
+    textBG.setText( String.format(Locale.US, "bG   %8.4f %8.4f %8.4f", bg.x, bg.y, bg.z ) );
+    textAGx.setText( String.format(Locale.US, "aGx  %8.4f %8.4f %8.4f", ag.x.x, ag.x.y, ag.x.z ) );
+    textAGy.setText( String.format(Locale.US, "aGy  %8.4f %8.4f %8.4f", ag.y.x, ag.y.y, ag.y.z ) );
+    textAGz.setText( String.format(Locale.US, "aGz  %8.4f %8.4f %8.4f", ag.z.x, ag.z.y, ag.z.z ) );
+
+    textBM.setText( String.format(Locale.US, "bM   %8.4f %8.4f %8.4f", bm.x, bm.y, bm.z ) );
+    textAMx.setText( String.format(Locale.US, "aMx  %8.4f %8.4f %8.4f", am.x.x, am.x.y, am.x.z ) );
+    textAMy.setText( String.format(Locale.US, "aMy  %8.4f %8.4f %8.4f", am.y.x, am.y.y, am.y.z ) );
+    textAMz.setText( String.format(Locale.US, "aMz  %8.4f %8.4f %8.4f", am.z.x, am.z.y, am.z.z ) );
+
+    if ( nl != null ) {
+      textNL.setText( String.format(Locale.US, "nL   %8.4f %8.4f %8.4f", nl.x, nl.y, nl.z ) );
+    } else {
+      textNL.setText( TDString.EMPTY ); // new String(TDString.EMPTY);
+    }
+    if ( mTwoSensors ) {
+      setTitle( String.format( mContext.getResources().getString( R.string.title_coeff_two ), nr ) );
+    }
+  }
+
+  // private void dumpCoeffs( byte[] c )
+  // {
+  //   TDLog.v("Coeff length " + c.length );
+  //   for ( int k=0; k<48-7; k+=8 ) {
+  //     TDLog.v("C " + k + ": " + String.format("%02X %02X %02X %02X %02X %02X %02X %02X", c[k+0], c[k+1], c[k+2], c[k+3], c[k+4], c[k+5], c[k+6], c[k+7] ) );
+  //   }
+  //   if ( c.length == 104 ) {
+  //     for ( int k=52; k<104-7; k+=8 ) {
+  //       TDLog.v("C " + k + ": " + String.format("%02X %02X %02X %02X %02X %02X %02X %02X", c[k+0], c[k+1], c[k+2], c[k+3], c[k+4], c[k+5], c[k+6], c[k+7] ) );
+  //     }
+  //   }
+  // }
+
+  private void makeVectorsAndMatricex( byte[] coeff )
+  {
+    // TDLog.v("Calib Coeff Dialog: size " + coeff.length );
+    // dumpCoeffs( coeff );
+
+    // mTwoSensors = (coeff.length == 104);
+    mAG1 = new TDMatrix(); // cannot move these to CalibCoeffDialog cstr because the dialog is used also without coeffs
+    mAM1 = new TDMatrix();
+    mBG1 = new TDVector();
+    mBM1 = new TDVector();
+    mNL1 = new TDVector();
+    CalibAlgo.coeffToG( coeff, mBG1, mAG1 ); // FIXME using first sensor set to compute G-M vector/matrix for display 
+    CalibAlgo.coeffToM( coeff, mBM1, mAM1 );
+    CalibAlgo.coeffToNL( coeff, mNL1 );
+    if ( coeff.length == 104) {
+      mTwoSensors = true;
+      mAG2 = new TDMatrix(); // cannot move these to CalibCoeffDialog cstr because the dialog is used also without coeffs
+      mAM2 = new TDMatrix();
+      mBG2 = new TDVector();
+      mBM2 = new TDVector();
+      mNL2 = new TDVector();
+      byte[] coeff2 = new byte[52];
+      System.arraycopy( coeff, 52, coeff2, 0, 52 );
+      // dumpCoeffs( coeff2 );
+      CalibAlgo.coeffToG( coeff2, mBG2, mAG2 ); // FIXME using first sensor set to compute G-M vector/matrix for display 
+      CalibAlgo.coeffToM( coeff2, mBM2, mAM2 );
+      CalibAlgo.coeffToNL( coeff2, mNL2 );
+    } else {
+      mTwoSensors = false;
     }
   }
 

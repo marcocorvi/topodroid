@@ -37,8 +37,7 @@ public class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
   public static final int PARENT_GM     = 2;
   // public static final int PARENT_AUTO   = 3; // AUTO-CALIB
 
-  private byte[]   coeff;
-  private byte[]   coeff2;
+  private byte[]   mCoeff;
   private final WeakReference<TopoDroidApp> mApp; // FIXME LEAK
   // private final WeakReference<Context> mContext;  // FIXME LEAK
   private final WeakReference< ICoeffDisplayer > mParent;
@@ -48,11 +47,11 @@ public class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
 
   public CalibReadTask( ICoeffDisplayer parent, TopoDroidApp app, int parent_type, boolean two_sensors ) // TWO_SENSORS
   {
+    int len = ( two_sensors ? 104 : 52 );
     // mContext = new WeakReference<Context>( context );
     mParent = new WeakReference<ICoeffDisplayer>( parent );
     mApp    = new WeakReference<>( app );
-    coeff   = new byte[52]; // always read 52 bytes
-    coeff2  = new byte[52]; // second set of coeffs
+    mCoeff  = new byte[len]; 
     mParentType = parent_type;
     mTwoSensors = two_sensors;
     // comp_name = "ComponentInfo{com.topodroid.TDX/com.topodroid.DistoX." + act_name + "}";
@@ -61,9 +60,9 @@ public class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
   @Override
   protected Boolean doInBackground(Void... v)
   {
+    TDLog.v("Calib Read Task");
     if ( mApp.get() == null ) return false;
-    boolean ret = mApp.get().readCalibCoeff( coeff, false );
-    if ( mTwoSensors ) ret &= mApp.get().readCalibCoeff( coeff2, true );
+    boolean ret = mApp.get().readCalibCoeff( mCoeff, mTwoSensors );
     return ret;
   }
 
@@ -86,25 +85,20 @@ public class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
 
     if ( result ) {
       String[] items = new String[8];
-      TDVector bg = new TDVector();
-      TDMatrix ag = new TDMatrix();
-      TDVector bm = new TDVector();
-      TDMatrix am = new TDMatrix();
-      TDVector nL = new TDVector();
-      CalibAlgo.coeffToG( coeff, bg, ag );
-      CalibAlgo.coeffToM( coeff, bm, am );
-      CalibAlgo.coeffToNL( coeff, nL );
+
+      // TODO TWO_SENSORS if twoSensors must store somewhere also the second sensor-set coeffs
+      //                  maybe inside the ICoeffDisplayer ...
 
       switch ( mParentType ) {
         case PARENT_DEVICE:
           if ( DeviceActivity.mDeviceActivityVisible && mParent.get() != null && !mParent.get().isActivityFinishing() ) {
-            mParent.get().displayCoeff( bg, ag, bm, am, nL );
+            mParent.get().displayCoeff( mCoeff );
             // (new CalibCoeffDialog( mContext.get(), null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
           }
           break;
         case PARENT_GM:
           if ( GMActivity.mGMActivityVisible && mParent.get() != null && !mParent.get().isActivityFinishing() ) {
-            mParent.get().displayCoeff( bg, ag, bm, am, nL );
+            mParent.get().displayCoeff( mCoeff );
             // (new CalibCoeffDialog( mContext.get(), null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
           }
           break;

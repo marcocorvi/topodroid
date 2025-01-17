@@ -388,16 +388,16 @@ public class CalibTransform
    * @param cs     string presentation of the coefficients
    * @param second whether to return the second sensor set, or null
    */
-  public static byte[] stringToCoeff( String cs, boolean second ) // TWO_SENOSRS
+  public static byte[] stringToCoeff( String cs, int set_nr ) // TWO_SENOSRS
   {
-    if ( second && cs == null ) return null;
+    if ( set_nr == 2 && cs == null ) return null;
     byte[] coeff = new byte[ COEFF_DIM ]; // N.B. return 52 calib coeff
     coeff[48] = coeff[49] = coeff[50] = coeff[51] = (byte)(0xff); // default values
     if ( cs == null ) {
       for ( int k=0; k<48; ++k ) coeff[k] = (byte)(0);
     } else {
       int kk = cs.length(); // COEFF_DIM or COEFF_DIM2
-      if ( second ) {
+      if ( set_nr == 2 ) {
         if ( kk < COEFF_DIM2 ) return null;
         for ( int k=COEFF_DIM; k<COEFF_DIM2; ++k ) coeff[k] = (byte)( cs.charAt(k) );
       } else {

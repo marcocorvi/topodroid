@@ -94,6 +94,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <!-- TODO REPEATED string name="station_not_found">Station introuvable</string -->
     <string name="shot_not_found">Visée non trouvée</string>
+    <!-- TODO string name="shot_not_saved">Shot not saved</string -->
     <string name="bad_sibling">Mauvaise visée parente</string>
     <string name="bad_station">Mauvaise station: %1$s</string>
     <string name="bad_station_name">Nom de station non conforme</string>
@@ -216,7 +217,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="external_prompt">Saisir mesure</string -->
     <string name="splay_at_to">GDHB à la station VERS</string>
     <string name="lrud">GDHB (LRUD)</string>
-    <string name="strike_dip">Azimut %1$.0f Pendage %2$.0f</string>
+    <!-- CHANGED string name="strike_dip">Azimut %1$.0f Pendage %2$.0f</string -->
+    <!-- TODO string name="strike_dip">Dip direction %1$.0f inclination %2$.0f</string -->
 
     <string name="few_data">Pas assez de données</string>
     <string name="few_iter">Échec de l\'itération</string>
@@ -527,6 +529,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="popup_delete">Supprimer</string>
     <string name="popup_decimate">Réduire</string>
     <string name="popup_join">Joindre</string>
+    <!-- TODO string name="popup_store">Store</string -->
+    <!-- TODO string name="popup_restore">Restore</string -->
 
     <string name="popup_erase_all">Tout suppr.</string>
     <string name="popup_erase_point">Suppr. points</string>
@@ -969,6 +973,10 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="hint_units">taille des symboles</string>
     <string name="hint_value">valeur</string>
 
+    <!-- TODO string name="calib_measurement_id">Shot %1$d</string -->
+    <!-- TODO string name="calib_measurement_error">Error %1$.4f</string -->
+    <!-- TODO string name="calib_measurement_group">Group: </string -->
+
     <string name="hint_notes">notes</string>
     <string name="hint_label">étiquette</string>
     <string name="hint_comment">commentaire</string>
@@ -1179,6 +1187,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="export_prefix">Préfixe de la cavité inclus dans les noms de stations</string>
     <string name="export_prefix_hint">préfixe</string>
     <!-- UNUSED string name="export_suffix_hint">suffixe</string -->
+    <!-- TODO string name="export_series_hint">series</string -->
     <string name="export_roundtrip">Aller-retour</string>
     <string name="export_share">Partager</string>
     <!-- TODO string name="export_overwrite">Overwrite</string -->
@@ -1229,6 +1238,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Distributions des données d\'étalonnage</string>
     <string name="title_coeff">Coefficients d\'étalonnage</string>
+    <!-- TODO string name="title_coeff_two">Calibration coefficients [%1$d]</string -->
     <string name="title_color_picker">Choisir une couleur</string>
     <!-- UNUSED string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Entrer les Coordonnées du point</string -->
@@ -2202,6 +2212,8 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <!-- UNUSED string name="warning_empty_cwd">Warning: empty base path</string -->
     <!-- UNUSED string name="warning_no_parent">Attention : impossible d\'accéder au dossier parent</string -->
     <string name="warning_nogrant_camera">L\'autorisation caméra n\'a pas été accordée</string>
+    <!-- TODO string name="warning_no_csv_type">CSV type not specified</string -->
+    <!-- TODO string name="warning_cavway_info">Failed to get Cavway info</string -->
     <string name="no_permissions">L\'application ne peut pas fonctionner sans les autorisations requises.</string>
     
     <string name="done_convexhull">Parois enveloppe convexe terminées</string>

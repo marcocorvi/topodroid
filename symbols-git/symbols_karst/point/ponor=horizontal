@@ -1,6 +1,7 @@
 encoding utf-8
 symbol point
 name ponor_horizontal
+name-bg хоризонтален_понор
 name-de Horizontaler_Ponor
 name-es ponor_horizontal
 name-fr ponor_horizontal

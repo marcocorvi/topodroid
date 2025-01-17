@@ -91,6 +91,7 @@
     <string name="station_not_found">Пикет не обнаружен</string>
     <string name="station_coords">E %1$.2f N %2$.2f Высота %3$.2f</string>
     <string name="shot_not_found">Замеры не найдены</string>
+    <string name="shot_not_saved">Замер не сохранен</string>
     <string name="bad_sibling">Плохой замер в группе</string>
     <string name="bad_station">Плохой пикет: %1$s</string>
     <string name="bad_station_name">Недопустимый номер пикета</string>
@@ -215,7 +216,8 @@
     <!-- UNUSED string name="external_prompt">Ввод измерения</string -->
     <string name="splay_at_to">Л:П:В:Н на следующем пикете</string>
     <string name="lrud">ЛПВН</string>
-    <string name="strike_dip">Простирание %1$.0f Падение %2$.0f</string>
+    <!-- CHANGED string name="strike_dip">Простирание %1$.0f Падение %2$.0f</string -->
+    <!-- TODO string name="strike_dip">Dip direction %1$.0f inclination %2$.0f</string -->
 
     <string name="few_data">Недостаточно данных</string>
     <string name="few_iter">Ошибка: Слишком много итераций\nПроверьте данные калибровки</string>
@@ -526,6 +528,8 @@
     <string name="popup_delete">Удалить</string>
     <string name="popup_decimate">Проредить</string>
     <string name="popup_join">Соединить</string>
+    <string name="popup_store">Сохранить</string>
+    <string name="popup_restore">Восстановить</string>
 
     <string name="popup_erase_all">Стереть все</string>
     <string name="popup_erase_point">Стереть точки</string>
@@ -715,10 +719,10 @@
     <string name="screenshot_failed">Не удалось сделать снимок экрана</string>
     <string name="start_index">Индекс стартового замера</string>
     <string name="trilateration_failed">Ошибка трилатерации</string>
-    <!-- TODO string name="trilateration_failure">Trilateration failed %1$d / %2$d </string -->
+    <string name="trilateration_failure">Трилатерация не удалась %1$d / %2$d </string>
     <!-- UNUSED string name="trilateration_error">Ошибка трилатерации %1$.2f</string -->
     <!-- UNUSED string name="trilateration_succeeded">Трилатерация выполнена: оставшаяся ошибка %1$.2f</string -->
-    <!-- TODO string name="trilateration_success">Trilateration success: %1$d clusters</string -->
+    <string name="trilateration_success">Трилатерация удалась: %1$d кластеров</string>
 
     <string name="survey_info">Статистика съёмки</string>
     <string name="stat_dates">С %1$s по %2$s</string>
@@ -967,6 +971,10 @@
     <string name="hint_units">единицы символов</string>
     <string name="hint_value">значение</string>
 
+   <string name="calib_measurement_id">Замер %1$d</string>
+   <string name="calib_measurement_error">Ошибка %1$.4f</string>
+   <string name="calib_measurement_group">Группа: </string>
+
     <string name="hint_notes">примечания</string>
     <string name="hint_label">подпись</string>
     <string name="hint_comment">коментарий</string>
@@ -1176,6 +1184,7 @@
     <string name="export_prefix">Добавлять префикс к номерам пикетов</string>
     <string name="export_prefix_hint">префикс</string>
     <!-- UNUSED string name="export_suffix_hint">суффикс</string -->
+    <string name="export_series_hint">группа</string>
     <string name="export_roundtrip">Roundtrip</string>
     <string name="export_share">Поделиться</string>
     <string name="export_overwrite">Перезаписать</string>
@@ -1226,6 +1235,7 @@
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Калибровка и распределение данных</string>
     <string name="title_coeff">Калибровочные коэффициенты</string>
+    <!-- TODO string name="title_coeff_two">Calibration coefficients [%1$d]</string -->
     <string name="title_color_picker">Выбрать цвет</string>
     <!-- UNUSED string name="title_contour">Контур</string -->
     <!-- UNUSED string name="title_coord">Введите координаты точки:</string -->
@@ -1581,6 +1591,8 @@
   <string name="pref_bric_mode_summary">Режим работы BRIC</string>
   <string name="pref_bric_zero_length_title">Нулевой замер BRIC</string>
   <string name="pref_bric_zero_length_summary">Записать замер нулевой длины BRIC</string>
+  <string name="pref_bric_index_is_id_title">BRIC индекс как ID</string>
+  <string name="pref_bric_index_is_id_summary">Использовать индекс BRIC как ID замеров</string>
   <string name="pref_sap5_bit16_bug_title">SAP5 bit-16 баг</string>
   <string name="pref_sap5_bit16_bug_summary">Обход бага в bit-16 SAP5</string>
 
@@ -2247,6 +2259,8 @@
     <!-- UNUSED string name="warning_empty_cwd">Внимание: не задан рабочий каталог</string -->
     <!-- UNUSED string name="warning_no_parent">Внимание: невозможно перейти на каталог выше</string -->
     <string name="warning_nogrant_camera">Разрешение камеры не было предоставлено</string>
+    <string name="warning_no_csv_type">CSV тип не указан</string>
+    <string name="warning_cavway_info">Не удалось считать информацию о Cavway</string>
     <string name="no_permissions">Приложение не может работать без необходимых разрешений</string>
 
     <!-- UNUSED string name="done_fractals">Завершено fractals dims</string -->

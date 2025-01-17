@@ -18,6 +18,7 @@ import com.topodroid.dev.DataType;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.TopoDroidProtocol;
 import com.topodroid.packetX.MemoryOctet;
+import com.topodroid.packetX.CavwayData;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
 
@@ -31,7 +32,6 @@ public class CavwayProtocol extends TopoDroidProtocol
 {
   private final static String TAG = "CAVWAY PROTO ";
   private final static boolean LOG = false;
-  private final static int DATA_LEN = 64;
 
   private final CavwayComm mComm;
   private final ListerHandler mLister;
@@ -54,10 +54,13 @@ public class CavwayProtocol extends TopoDroidProtocol
 
   public static final int PACKET_MEASURE_DATA   = 0x20;
   // public static final int PACKET_SHOT_DATA   = 0x21; // PACKET_MEASURE_DATA | 0x01
-  // public static final int PACKET_CALIB_DATA  = 0x22; // PACKET_MEASURE_DATA | 0x02
+  public static final int PACKET_CALIB_DATA  = 0x22; // PACKET_MEASURE_DATA | 0x02
 
   public static final int PACKET_NONE           = 0;
   public static final int PACKET_ERROR          = 0x80;
+
+  public long mG2X, mG2Y, mG2Z;
+  public long mM2X, mM2Y, mM2Z;
 
   public String mFirmVer;
   public String mHardVer;
@@ -97,12 +100,15 @@ public class CavwayProtocol extends TopoDroidProtocol
     mComm   = comm;
     mRepliedData = new byte[4];
     mFlashBytes  = new byte[256];
-    mPacketBytes = new byte[DATA_LEN];
-    for ( int k=0; k<DATA_LEN; ++k ) mPacketBytes[k] = (byte)0xa5;
+    mPacketBytes = new byte[ CavwayData.SIZE ];
+    for ( int k=0; k< CavwayData.SIZE ; ++k ) mPacketBytes[k] = (byte)0xa5;
   }
 
+  // public int handleCavwayPacket( CavwayData packet )
   public int handleCavwayPacket(byte [] packetdata)
   {
+    // byte[] packetdata = packet.getData();
+
     // if ( LOG ) {
     //   StringBuilder sb = new StringBuilder();
     //   for ( byte b : packetdata ) sb.append( String.format(" %02x", b ) );
@@ -144,6 +150,20 @@ public class CavwayProtocol extends TopoDroidProtocol
     if ( mMX > TDUtil.ZERO ) mMX = mMX - TDUtil.NEG;
     if ( mMY > TDUtil.ZERO ) mMY = mMY - TDUtil.NEG;
     if ( mMZ > TDUtil.ZERO ) mMZ = mMZ - TDUtil.NEG;
+
+    mG2X = MemoryOctet.toInt( packetdata[34], packetdata[33] );
+    mG2Y = MemoryOctet.toInt( packetdata[36], packetdata[35] );
+    mG2Z = MemoryOctet.toInt( packetdata[38], packetdata[37] );
+    if ( mG2X > TDUtil.ZERO ) mG2X = mG2X - TDUtil.NEG;
+    if ( mG2Y > TDUtil.ZERO ) mG2Y = mG2Y - TDUtil.NEG;
+    if ( mG2Z > TDUtil.ZERO ) mG2Z = mG2Z - TDUtil.NEG;
+
+    mM2X = MemoryOctet.toInt( packetdata[40], packetdata[39] );
+    mM2Y = MemoryOctet.toInt( packetdata[42], packetdata[41] );
+    mM2Z = MemoryOctet.toInt( packetdata[44], packetdata[43] );
+    if ( mM2X > TDUtil.ZERO ) mM2X = mM2X - TDUtil.NEG;
+    if ( mM2Y > TDUtil.ZERO ) mM2Y = mM2Y - TDUtil.NEG;
+    if ( mM2Z > TDUtil.ZERO ) mM2Z = mM2Z - TDUtil.NEG;
 
     byte[] errorbytes = new byte[9];
     for (int i = 0; i < 9; i++)
@@ -221,7 +241,8 @@ public class CavwayProtocol extends TopoDroidProtocol
    *        offset  0 is command: it can be 0x3a 0x3b 0x3c 0x3d 0x3e
    *        offsets 1,2 contain address (0x3d 0x3e), reply (0x3c)
    *        offset  3 payload length (0x3d 0x3e)
-   * @return packet type
+   * @return packet type 
+   * @note the returned packet type is used to set CavwayComm.mPacketType, but so far this is not much used
    */
   public int packetProcess( byte[] databuf )
   {
@@ -231,16 +252,27 @@ public class CavwayProtocol extends TopoDroidProtocol
       return PACKET_NONE;
     }
     // TDLog.v( TAG + " byte[0] " + String.format("%02x", databuf[0] ) );
-    if ( (databuf[0] == MemoryOctet.BYTE_PACKET_DATA || databuf[0] == MemoryOctet.BYTE_PACKET_G ) && databuf.length == DATA_LEN ) { // shot / calib data
+    if ( (databuf[0] == MemoryOctet.BYTE_PACKET_DATA || databuf[0] == MemoryOctet.BYTE_PACKET_G ) && databuf.length ==  CavwayData.SIZE  ) { // shot / calib data
       if ( mComm.isDownloading() ) {
-        for ( int kk=0; kk<DATA_LEN; ++kk ) {
+        for ( int kk=0; kk< CavwayData.SIZE ; ++kk ) {
           if ( mPacketBytes[kk] != databuf[kk] ) { // new packet data: send ack depends on handling packets
-            System.arraycopy( databuf, 0, mPacketBytes, 0, DATA_LEN );
+            // CavwayData packet = new CavwayData( 0 );
+            // packet.setDate( packetdata );
+            // int res = handleCavwayPacket( packet );
+            System.arraycopy( databuf, 0, mPacketBytes, 0,  CavwayData.SIZE  );
             int res = handleCavwayPacket(mPacketBytes);
             if ( res != PACKET_NONE) {
+              // mComm.sendCommand( packet.getData(1) | 0x55);
               mComm.sendCommand(mPacketBytes[1] | 0x55);
-              mComm.handleCavwayPacket(res, mLister, 0, mComment);
-              return PACKET_MEASURE_DATA; // with ( PACKET_MEASURE_DATA | databuf[0]) shots would be distinguished from calib
+              if ( res == DataType.PACKET_DATA ) {
+                mComm.handleCavwayPacket(res, mLister, 0, mComment);
+                return PACKET_MEASURE_DATA; // with ( PACKET_MEASURE_DATA | databuf[0]) shots would be distinguished from calib
+              } else if (  res == DataType.PACKET_G ) {
+                mComm.handleCavwayPacket(res, mLister, 0, mComment);
+                return PACKET_CALIB_DATA; 
+              } else {
+                return PACKET_ERROR;
+              }
             } else {
               return PACKET_ERROR; // break for loop
             }
@@ -276,7 +308,7 @@ public class CavwayProtocol extends TopoDroidProtocol
           if ( LOG ) TDLog.v( TAG + "reply (3D)");
           if ( mComm.isReadingMemory() ) {
             TDLog.v( TAG + "handle memory read");
-            System.arraycopy( databuf, 4, mPacketBytes, 0, DATA_LEN );
+            System.arraycopy( databuf, 4, mPacketBytes, 0,  CavwayData.SIZE  );
             mComm.handleOneMemory( mPacketBytes );
           } 
           // if(addr < 0x8000 && len == 64)  //dump memory

@@ -92,6 +92,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="station_not_found">Mérési pont nem található</string>
     <string name="station_coords">K %1$.2f É %2$.2f Z %3$.2f</string>
     <string name="shot_not_found">Mérés nem található</string>
+    <string name="shot_not_saved">Mérés nincs elmentve</string>
     <string name="bad_sibling">Rossz mérés ismétlés</string>
     <string name="bad_station">Hibás mérési pont: %1$s</string>
     <string name="bad_station_name">Illegális mérési pont név</string>
@@ -216,7 +217,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="external_prompt">Mérés beírása</string -->
     <string name="splay_at_to">BJFL a következő pontnál</string>
     <string name="lrud">BJFL</string>
-    <string name="strike_dip">Strike %1$.0f Dip %2$.0f</string>
+    <string name="strike_dip">Dip irány %1$.0f inklináció %2$.0f</string>
       <!-- mi ez? -->
     <string name="few_data">Nincs elegendő adat</string>
     <string name="few_iter">Iteráció nem sikerült</string>
@@ -529,6 +530,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="popup_delete">Töröl</string>
     <string name="popup_decimate">Tizedel</string>
     <string name="popup_join">Kapcsol</string>
+    <string name="popup_store">Mentés</string>
+    <string name="popup_restore">Visszaállítás</string>
 
     <string name="popup_erase_all">Minden törlése</string>
     <string name="popup_erase_point">Pontok törlése</string>
@@ -974,6 +977,10 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="hint_units">szimbólum egység</string>
     <string name="hint_value">érték</string>
 
+    <string name="calib_measurement_id">Mérés %1$d</string>
+    <string name="calib_measurement_error">Hiba %1$.4f</string>
+    <string name="calib_measurement_group">Csoport: </string>
+
     <string name="hint_notes">jegyzetek</string>
     <string name="hint_label">címke</string>
     <string name="hint_comment">megjegyzés</string>
@@ -1184,6 +1191,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="export_prefix">Barlangnév-előtag a pont neveknél</string>
     <string name="export_prefix_hint">előtag</string>
     <!-- UNUSED string name="export_suffix_hint">utótag</string -->
+    <string name="export_series_hint">sorozatok</string>
     <string name="export_roundtrip">Roundtrip</string><!--Roundtrip-->
     <string name="export_share">Megosztás</string>
     <string name="export_overwrite">Felülír</string>
@@ -1234,6 +1242,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="title_check">Kalibrációs ellenőrzés</string -->
     <string name="title_coverage">Kalibrációs adatok eloszlása</string>
     <string name="title_coeff">Kalibrációs együtthatók</string>
+    <string name="title_coeff_two">Kalibrációs együtthatók [%1$d]</string>
     <string name="title_color_picker">Válassz színt</string>
     <!-- UNUSED string name="title_contour">Körvonal</string -->
     <!-- UNUSED string name="title_coord">Ird be a pont koordinátáit:</string -->
@@ -1591,6 +1600,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_bric_mode_summary">BRIC működési mód</string>
   <string name="pref_bric_zero_length_title">BRIC nulla mérés</string>
   <string name="pref_bric_zero_length_summary">BRIC nulla-hossz mérés rögzítése</string>
+  <string name="pref_bric_index_is_id_title">BRIC index az ID</string>
+  <string name="pref_bric_index_is_id_summary">Használja a BRIC indexet mérés ID-nek</string>
   <string name="pref_sap5_bit16_bug_title">SAP5 bit-16 hiba</string>
   <string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 hiba megkerülése</string>
 
@@ -2269,6 +2280,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="warning_empty_cwd">Figyelem: üres alap könyvtár</string -->
     <!-- UNUSED string name="warning_no_parent">Figyelem: nem tud felsőbb könyvtárba lépni</string -->
     <string name="warning_nogrant_camera">A kamera engedély nincs megadva</string>
+    <string name="warning_no_csv_type">CSV típus nincs meghatározva</string>
+    <string name="warning_cavway_info">Cavway info lekérés sikertelen</string>
     <string name="no_permissions">Az alkalmazás nem tud futni szükséges hozzáférések nélkül</string>
 
     <!-- UNUSED string name="done_fractals">Kész fraktál dimenziók</string -->

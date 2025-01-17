@@ -69,7 +69,7 @@ public class CalibGMDialog extends MyDialog
   private Button   mButtonDelete;
   private MyCheckBox mCB_regroup = null;
   private MyStateBox mSB_regroup = null;
-  private TextView   mTV_regroup = null;
+  // private TextView   mTV_regroup = null;
   private Button   mButtonCancel;
 
   private MyKeyboard mKeyboard = null;
@@ -94,7 +94,7 @@ public class CalibGMDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
 
-    initLayout( R.layout.calib_gm_dialog, null );
+    initLayout( R.layout.calib_gm_dialog, String.format(Locale.US,  mContext.getResources().getString( R.string.calib_measurement_id), mBlk.mId ) );
 
     EditText eT_bearing = (EditText) findViewById( R.id.gm_bearing );
     EditText eT_clino   = (EditText) findViewById( R.id.gm_clino   );
@@ -115,13 +115,13 @@ public class CalibGMDialog extends MyDialog
     layout2.addView( mButtonDelete, lp );
 
     if ( TDLevel.overExpert ) {
-      mSB_regroup = new MyStateBox( mContext, R.drawable.iz_numbers_no, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_ok );
+      mSB_regroup = new MyStateBox( mContext, R.drawable.iz_numbers_no, R.drawable.iz_numbers_td, R.drawable.iz_numbers_pt );
       mSB_regroup.setState( 0 );
       mSB_regroup.setOnClickListener( this );
       layout2.addView( mSB_regroup, lp );
-      mTV_regroup = new TextView( mContext );
-      mTV_regroup.setText( R.string.regroup );
-      layout2.addView( mTV_regroup, lp );
+      // mTV_regroup = new TextView( mContext );
+      // mTV_regroup.setText( R.string.regroup );
+      // layout2.addView( mTV_regroup, lp );
     } else {
       mCB_regroup    = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no );
       mCB_regroup.setState( false );
@@ -138,7 +138,7 @@ public class CalibGMDialog extends MyDialog
     eT_bearing.setText( String.format(Locale.US, "%.1f", mBlk.mBearing ) );
     eT_clino.setText( String.format(Locale.US, "%.1f", mBlk.mClino ) );
     eT_roll.setText( String.format(Locale.US, "%.1f", mBlk.mRoll ) );
-    tV_error.setText( String.format(Locale.US, "%.4f", mBlk.mError ) );
+    tV_error.setText( String.format(Locale.US, mContext.getResources().getString( R.string.calib_measurement_error), mBlk.mError ) );
 
     mET_name.setText( String.format(Locale.US, "%d", mBlk.mGroup ) );
 
@@ -204,9 +204,9 @@ public class CalibGMDialog extends MyDialog
       /* nothing */
     } else if ( TDLevel.overExpert && b == mSB_regroup ) {
       switch ( mSB_regroup.getState() ) {
-        case 0: mSB_regroup.setState(1); mTV_regroup.setText(R.string.topodroid); break;
-        case 1: mSB_regroup.setState(2); mTV_regroup.setText(R.string.pockettopo); break;
-        case 2: mSB_regroup.setState(0); mTV_regroup.setText(R.string.regroup); break;
+        case 0: mSB_regroup.setState(1); break; // mTV_regroup.setText(R.string.topodroid); break;
+        case 1: mSB_regroup.setState(2); break; // mTV_regroup.setText(R.string.pockettopo); break;
+        case 2: mSB_regroup.setState(0); break; // mTV_regroup.setText(R.string.regroup); break;
       }
       return;
     }

@@ -83,13 +83,17 @@ public class CalibExport
       }
   
       CalibResult res = new CalibResult();
-      data.selectCalibError( cid, res );
-      pw.format(Locale.US, "# error %.2f stddev %.2f max %.2f delta %.2f iter %d\n",
-        res.error, res.stddev, res.max_error, res.delta_bh, res.iterations );
+      data.selectCalibResult( cid, res );
+      pw.format(Locale.US, "# error %.2f stddev %.2f max %.2f delta %.2f iter %d\n", res.error, res.stddev, res.max_error, res.delta_bh, res.iterations );
+      // FIXME TWO_SENOSRS errors are not recorded separatedly
+      // if ( two_sensors ) {
+      //   data.selectCalibError( cid, res, true );
+      //   pw.format(Locale.US, "# error %.2f stddev %.2f max %.2f delta %.2f iter %d\n", res.error, res.stddev, res.max_error, res.delta_bh, res.iterations );
+      // }
 
       String coeff_str = data.selectCalibCoeff( cid );
       if ( coeff_str != null ) {
-        byte[] coeff1 = CalibAlgo.stringToCoeff( coeff_str, false );
+        byte[] coeff1 = CalibAlgo.stringToCoeff( coeff_str, 1 ); // 1: first set
         TDMatrix mG = new TDMatrix();
         TDMatrix mM = new TDMatrix();
         TDVector vG = new TDVector();
@@ -108,7 +112,7 @@ public class CalibExport
         pw.format(Locale.US, "#    %.4f %.4f %.4f\n", mM.z.x, mM.z.y, mM.z.z );
         pw.format(Locale.US, "# NL %.4f %.4f %.4f\n", nL.x,   nL.y,   nL.z );
         if ( two_sensors ) { // TWO_SENSORS
-          byte[] coeff2 = CalibAlgo.stringToCoeff( coeff_str, true );
+          byte[] coeff2 = CalibAlgo.stringToCoeff( coeff_str, 2 ); // 2: second set
           if ( coeff2 != null ) {
             CalibAlgo.coeffToG( coeff2, vG, mG );
             CalibAlgo.coeffToM( coeff2, vM, mM );

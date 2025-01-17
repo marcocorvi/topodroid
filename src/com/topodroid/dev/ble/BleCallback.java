@@ -96,13 +96,13 @@ public class BleCallback extends BluetoothGattCallback
       mComm.readedChrt( uuid_str, chrt.getValue() );
     } else if ( status == BluetoothGatt.GATT_READ_NOT_PERMITTED ) {
       if ( LOG ) TDLog.v("BLE callback on char read NOT PERMITTED - perms " + BleUtils.isChrtRead( chrt ) + " " + chrt.getPermissions() );
-      mComm.error( status, chrt.getUuid().toString(), "onCharacteristicRead" );
+      mComm.error( status, chrt.getUuid().toString(), "onCharacteristicRead GATT" );
     } else if ( status == BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION ) {
       if ( LOG ) TDLog.v("BLE callback on char read insufficient auth.");
-      mComm.failure( status, chrt.getUuid().toString(), "onCharacteristicRead" );
+      mComm.failure( status, chrt.getUuid().toString(), "onCharacteristicRead AUTH" );
     } else {
       if ( LOG ) TDLog.v("BLE callback on char read generic error");
-      mComm.error( status, chrt.getUuid().toString(), "onCharacteristicRead" );
+      mComm.error( status, chrt.getUuid().toString(), "onCharacteristicRead FAIL" );
     }
   }
 
@@ -118,13 +118,13 @@ public class BleCallback extends BluetoothGattCallback
     if ( isSuccess( status, "onCharacteristicWrite" ) ) {
       String uuid_str = chrt.getUuid().toString();
       mComm.writtenChrt( uuid_str, chrt.getValue() );
-    } else if ( status == BluetoothGatt.GATT_INVALID_ATTRIBUTE_LENGTH || status == BluetoothGatt.GATT_WRITE_NOT_PERMITTED ) {
-      mComm.error( status, chrt.getUuid().toString(), "onCharacteristicWrite" );
-    } else if ( status == BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION ) {
+    } else if ( status == BluetoothGatt.GATT_INVALID_ATTRIBUTE_LENGTH || status == BluetoothGatt.GATT_WRITE_NOT_PERMITTED ) { // 13 or 3
+      mComm.error( status, chrt.getUuid().toString(), "onCharacteristicWrite GATT" );
+    } else if ( status == BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION ) { // 5
       if ( LOG ) TDLog.v("BLE callback on char write insufficient auth.");
-      mComm.failure( status, chrt.getUuid().toString(), "onCharacteristicWrite" );
+      mComm.failure( status, chrt.getUuid().toString(), "onCharacteristicWrite AUTH" );
     } else {
-      mComm.failure( status, chrt.getUuid().toString(), "onCharacteristicWrite" );
+      mComm.failure( status, chrt.getUuid().toString(), "onCharacteristicWrite FAIL" );
     }
   }
   

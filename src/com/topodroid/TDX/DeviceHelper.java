@@ -280,7 +280,7 @@ public class DeviceHelper extends DataSetObservable
     // // return 0;
   }
   
-  public void updateGMsecond( long gid, long cid, long gx, long gy, long gz, long mx, long my, long mz )
+  public void updateGMsecond( long cid, long gmid, long gx, long gy, long gz, long mx, long my, long mz )
   {
     if ( myDB == null ) {
       TDLog.e( ERROR_NULL_DB + "update GM second");
@@ -293,7 +293,7 @@ public class DeviceHelper extends DataSetObservable
     cv.put( "mxt", mx );
     cv.put( "myt", my );
     cv.put( "mzt", mz );
-    doUpdate( "gms", cv, WHERE_CID_ID, new String[] { Long.toString(cid), Long.toString(gid) }, "GM secod" );
+    doUpdate( "gms", cv, WHERE_CID_ID, new String[] { Long.toString(cid), Long.toString(gmid) }, "GM secod" );
   }
 
   /** insert a calibration data
@@ -450,12 +450,12 @@ public class DeviceHelper extends DataSetObservable
         block.setError( (float)( cursor.getDouble(8) ) );
         block.setStatus( cursor.getLong(9) );
         block.setDataSecond( 
-                cursor.getLong(10),
-                cursor.getLong(11),
-                cursor.getLong(12),
-                cursor.getLong(13),
-                cursor.getLong(14),
-                cursor.getLong(15) );
+          cursor.getLong(10),
+          cursor.getLong(11),
+          cursor.getLong(12),
+          cursor.getLong(13),
+          cursor.getLong(14),
+          cursor.getLong(15) );
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
@@ -552,7 +552,7 @@ public class DeviceHelper extends DataSetObservable
    * @param cid     calibration ID
    * @param res     calibration result (output)
    */
-  public void selectCalibError( long cid, CalibResult res )
+  public void selectCalibResult( long cid, CalibResult res ) // TWO_SENSORS
   {
     if ( myDB == null ) {
       TDLog.e( ERROR_NULL_DB + "select calib error");
@@ -583,7 +583,7 @@ public class DeviceHelper extends DataSetObservable
           str = cursor.getString(6);                               // FIXME ROLL_DIFFERENCE
           if ( str != null ) res.roll = Float.parseFloat( str );
         } catch ( NumberFormatException e ) {
-          TDLog.e( "selectCalibError parse Float error: calib ID " + cid );
+          TDLog.e( "select calib result: parse Float error, calib ID " + cid );
         }
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );

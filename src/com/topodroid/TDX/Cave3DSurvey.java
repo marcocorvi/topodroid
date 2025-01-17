@@ -62,6 +62,15 @@ public class Cave3DSurvey
    */
   public int getColor() { return color; }
 
+  /** switch the "visible" flag
+   * @return the new value of the flag
+   */
+  public boolean switchVisible() 
+  {
+    visible = ! visible;
+    return visible;
+  }
+
   /** set the survey color
    * @param col color
    * @note used by parser tdconfig

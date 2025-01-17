@@ -92,6 +92,7 @@
     <string name="station_not_found">未发现测点</string>
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <string name="shot_not_found">未发现测线数据</string>
+    <!-- TODO string name="shot_not_saved">Shot not saved</string -->
     <string name="bad_sibling">坏的测量簇</string>
     <string name="bad_station">坏的站点: %1$s</string>
     <string name="bad_station_name">不合规的站点名</string>
@@ -215,7 +216,8 @@
     <!-- UNUSED string name="external_prompt">Enter measurement</string -->
     <string name="splay_at_to">测点的上下左右值</string>
     <string name="lrud">左右上下</string>
-    <string name="strike_dip">敲击 %1$.0f Dip %2$.0f</string>
+    <!-- CHANGED string name="strike_dip">敲击 %1$.0f Dip %2$.0f</string -->
+    <!-- TODO string name="strike_dip">Dip direction %1$.0f inclination %2$.0f</string -->
 
     <string name="few_data">数据不足</string>
     <string name="few_iter">失败:迭代太多</string>
@@ -527,6 +529,8 @@
     <string name="popup_delete">删除</string>
     <string name="popup_decimate">抽取</string>
     <string name="popup_join">结合</string>
+    <!-- TODO string name="popup_store">Store</string -->
+    <!-- TODO string name="popup_restore">Restore</string -->
 
     <string name="popup_erase_all">擦除全部</string>
     <string name="popup_erase_point">擦除点</string>
@@ -969,6 +973,10 @@
     <string name="hint_units">符号单元</string>
     <string name="hint_value">值</string>
 
+    <!-- TODO string name="calib_measurement_id">Shot %1$d</string -->
+    <!-- TODO string name="calib_measurement_error">Error %1$.4f</string -->
+    <!-- TODO string name="calib_measurement_group">Group: </string -->
+
     <string name="hint_notes">注释</string>
     <string name="hint_label">标签</string>
     <string name="hint_comment">评论</string>
@@ -1179,6 +1187,7 @@
     <string name="export_prefix">测量点名称里的洞穴前缀</string>
     <string name="export_prefix_hint">前缀</string>
     <!-- UNUSED string name="export_suffix_hint">后缀</string -->
+    <!-- TODO string name="export_series_hint">series</string -->
     <string name="export_roundtrip">往返</string>
     <string name="export_share">分享到其他App</string>
     <!-- TODO string name="export_overwrite">Overwrite</string -->
@@ -1229,6 +1238,7 @@
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">校准数据分布</string>
     <string name="title_coeff">校准系数</string>
+    <!-- TODO string name="title_coeff_two">Calibration coefficients [%1$d]</string -->
     <string name="title_color_picker">选择一个颜色</string>
     <!-- UNUSED string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
@@ -1585,6 +1595,8 @@
   <string name="pref_bric_mode_summary">BRIC 操作模式</string>
   <string name="pref_bric_zero_length_title">BRIC 零点测射</string>
   <string name="pref_bric_zero_length_summary">记录BRIC 零长度测射</string>
+  <!-- TODO string name="pref_bric_index_is_id_title">BRIC index is ID</string -->
+  <!-- TODO string name="pref_bric_index_is_id_summary">Use BRIC index as shot ID</string -->
   <string name="pref_sap5_bit16_bug_title">SAP5 bit-16 bug</string>
   <string name="pref_sap5_bit16_bug_summary">SAP5 bit-16 bug解决方案</string>
 
@@ -2258,6 +2270,8 @@
     <!-- UNUSED string name="warning_empty_cwd">警告: 空基本路径</string -->
     <!-- UNUSED string name="warning_no_parent">警告: 无法转到父文件夹</string -->
     <string name="warning_nogrant_camera">相机权限没有被允许</string>
+    <!-- TODO string name="warning_no_csv_type">CSV type not specified</string -->
+    <!-- TODO string name="warning_cavway_info">Failed to get Cavway info</string -->
     <string name="no_permissions">没有所需权限，应用程序无法运行</string>
 
     <!-- UNUSED string name="done_fractals">完成分形会变暗</string -->

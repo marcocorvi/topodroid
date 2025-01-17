@@ -11,9 +11,11 @@
  */
 package com.topodroid.dev.cavway;
 
-import android.os.AsyncTask;
-
 import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.R;
+
+import android.os.AsyncTask;
 
 import java.lang.ref.WeakReference;
 
@@ -49,7 +51,11 @@ public class CavwayInfoReadTask extends AsyncTask<Void, Integer, Boolean>
   @Override
   protected void onPostExecute( Boolean result )
   {
-    mDialog.get().updateHwFw();
+    if ( result ) {
+      mDialog.get().updateHwFw();
+    } else {
+      TDToast.makeWarn( R.string.warning_cavway_info );
+    }
   }
 
 }

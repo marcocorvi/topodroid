@@ -11,55 +11,25 @@
  */
 package com.topodroid.dev.cavway;
 
+import com.topodroid.math.TDVector;
+import com.topodroid.math.TDMatrix;;
+import com.topodroid.utils.TDUtil;
+
+
 public class CavwayDetails
 {
   static final int MAX_INDEX_XBLE = 1064;
 
-  // address of status word in DistoX2 memory
-  /*final static int[] STATUS_ADDRESS = {
-          0xc006, 0xc006, 0xc006, 0xc034, 0xc044, 0xc044, 0xc044,
-  };*/
-
+  public final static int COEFF_ADDRESS    = 0x9128; // FIXME put the correct address
   public final static int FIRMWARE_ADDRESS = 0xe000;
   public final static int HARDWARE_ADDRESS = 0xe004;
   //public final static int STATUS_ADDRESS   = 0xC044;
-
-  // head-tail command
-  // final static int mHeadTailAddress = 0xe008;
-  public static final byte[] HeadTail = { 0x38, 0x08, (byte)0xe0 }; // address 0xe008
 
   public static int boundNumber( int nr )
   {
     if ( nr < 0 ) return 0;
     if ( nr > 2048 ) return 2048;
     return nr;
-  }
-
-  // returns two 16-bit values
-  // first value  = head segment index
-  // second value = tail packet index
-  // data is added in segment but removed in packets
-  // segment to address: block  = segment / 56
-  //                     offset = segment % 56
-  //                     address = block * 1024 + offset * 18
-  // packet to address:  segment = packet / 2
-  //                     packet_nr = packet % 2
-
-  static private int segmentToAddress( int segment ) { return ( segment / 56 ) * 1024 + ( segment % 56 ) * 18; }
-
-  static int packetToAddress( int packet ) { return segmentToAddress( packet/2 ); }
-
-  static int packetToNumber( int packet ) { return packet % 2; }
-
-  static int index2addr( int index )
-  {
-    int addr = 0;
-    while ( index >= 56 ) {
-      index -= 56;
-      addr += 0x400;
-    }
-    addr += 18 * index;
-    return addr;
   }
 
   // status word (high bits in the next byte)
@@ -81,5 +51,53 @@ public class CavwayDetails
 
   static boolean isCalibMode( byte b ) { return ( ( b & CALIB_BIT ) == CALIB_BIT ); }
   static boolean isNotCalibMode( byte b ) { return ( ( b & CALIB_BIT ) == 0 ); }
+
+  final static int NR_COEFF = 128; // byte-length of the array of calib coeffs
+
+  private static int getCoeff( byte[] coeff, int pos )
+  {
+    return ( (int)(coeff[pos+1]) << 8 ) | (int)(coeff[pos]);
+  }
+
+  // the coefficients are
+  //  0: bG.x*Fv aG.x.x*FM aG.x.y*FM aG.x.z*fM 
+  //  8: bG.y*FV ag.y.x*FM ...
+  // 16: bG.z*FV ...
+  // 24: bM.x*FV aM.x.x*FM aM.x.y*FM ...
+  // 32  bM.y*FV ...
+  // 40: bM.z*FV ...
+  // the second set is at offset 64
+ 
+  /** @param off   sensosr-set offset (0 or 64)
+   */
+  static void parseCoeff( byte[] coeff, int off, TDVector bg, TDVector bm, TDMatrix ag, TDMatrix am )
+  {
+    float FV = TDUtil.FV;
+    float FM = TDUtil.FM;
+    bg.x   = getCoeff( coeff, off+ 0 ) / FV;
+    ag.x.x = getCoeff( coeff, off+ 2 ) / FM;
+    ag.x.y = getCoeff( coeff, off+ 4 ) / FM;
+    ag.x.z = getCoeff( coeff, off+ 6 ) / FM;
+    bg.y   = getCoeff( coeff, off+ 8 ) / FV;
+    ag.y.x = getCoeff( coeff, off+10 ) / FM;
+    ag.y.y = getCoeff( coeff, off+12 ) / FM;
+    ag.y.z = getCoeff( coeff, off+14 ) / FM;
+    bg.z   = getCoeff( coeff, off+16 ) / FV;
+    ag.z.x = getCoeff( coeff, off+18 ) / FM;
+    ag.z.y = getCoeff( coeff, off+20 ) / FM;
+    ag.z.z = getCoeff( coeff, off+22 ) / FM;
+    bm.x   = getCoeff( coeff, off+24 ) / FV;
+    am.x.x = getCoeff( coeff, off+26 ) / FM;
+    am.x.y = getCoeff( coeff, off+28 ) / FM;
+    am.x.z = getCoeff( coeff, off+30 ) / FM;
+    bm.y   = getCoeff( coeff, off+32 ) / FV;
+    am.y.x = getCoeff( coeff, off+34 ) / FM;
+    am.y.y = getCoeff( coeff, off+36 ) / FM;
+    am.y.z = getCoeff( coeff, off+38 ) / FM;
+    bm.z   = getCoeff( coeff, off+40 ) / FV;
+    am.z.x = getCoeff( coeff, off+42 ) / FM;
+    am.z.y = getCoeff( coeff, off+44 ) / FM;
+    am.z.z = getCoeff( coeff, off+46 ) / FM;
+  }
 
 }

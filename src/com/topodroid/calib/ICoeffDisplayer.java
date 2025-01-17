@@ -11,12 +11,15 @@
  */
 package com.topodroid.calib;
 
-import com.topodroid.math.TDMatrix;
-import com.topodroid.math.TDVector;
+// import com.topodroid.math.TDMatrix;
+// import com.topodroid.math.TDVector;
 
 public interface ICoeffDisplayer
 {
-  void displayCoeff( TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nL );
+  void displayCoeff( byte[] coeffs );
+
   void enableButtons( boolean b );
   boolean isActivityFinishing();
+
+  // void setCoeff( CalibCoeffDialog dialog, boolean second );
 }

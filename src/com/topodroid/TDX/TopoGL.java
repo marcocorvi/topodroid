@@ -233,6 +233,7 @@ public class TopoGL extends Activity
   private BitmapDrawable mBMmeasureOff;
   private BitmapDrawable mBMfixOn;
   private BitmapDrawable mBMfixOff;
+  private BitmapDrawable mBMclose;
 
   static int mCheckPerms = -1;
 
@@ -270,6 +271,7 @@ public class TopoGL extends Activity
   private Button mCurrentCoords;
   Button mMeasureStation;
   Button mFixStation;
+  Button mCloseStation;
   boolean isMeasuring = false;
   boolean isFixed = false;
 
@@ -390,11 +392,13 @@ public class TopoGL extends Activity
 
     mMeasureStation = (Button) findViewById( R.id.measure_station );
     mFixStation = (Button) findViewById( R.id.fix_station );
+    mCloseStation = (Button) findViewById( R.id.close_station );
     mMeasureStation.setOnClickListener( this );
     mFixStation.setOnClickListener( this );
+    mCloseStation.setOnClickListener( this );
 
     mLayoutStation.setVisibility( View.GONE );
-    mLayoutStation.setOnLongClickListener( this );
+    // mLayoutStation.setOnLongClickListener( this ); // 20250113 replaced with "close" button
     
     // setWallButton( mRenderer.wall_mode );
 
@@ -1074,6 +1078,7 @@ public class TopoGL extends Activity
       mBMmeasureOff = MyButton.getButtonBackground( this, size, R.drawable.iz_ruler_off );
       mBMfixOn      = MyButton.getButtonBackground( this, size, R.drawable.iz_station_on );
       mBMfixOff     = MyButton.getButtonBackground( this, size, R.drawable.iz_station_off );
+      mBMclose      = MyButton.getButtonBackground( this, size, R.drawable.iz_clear_green );
     }
     return size;
   }
@@ -1094,10 +1099,10 @@ public class TopoGL extends Activity
     //   centerAtCurrentStation();
     //   return true;
     // }
-    if ( v.getId() == R.id.layout_station ) {
-      closeCurrentStation();
-      return true;
-    }
+    // if ( v.getId() == R.id.layout_station ) { // 20250113 replaced with "close" button
+    //   closeCurrentStation();
+    //   return true;
+    // }
 
     Button b = (Button) v;
     if ( b == mButton1[ BTN_PROJECT ] ) {
@@ -1301,6 +1306,7 @@ public class TopoGL extends Activity
     isFixed = false;
     mMeasureStation.setBackground( mBMmeasureOff );
     mFixStation.setBackground( mBMfixOff );
+    mCloseStation.setBackground( mBMclose );
   }
  
   /** hide the selected station
@@ -1410,6 +1416,8 @@ public class TopoGL extends Activity
         mFixStation.setBackground( mBMfixOff );
         isFixed = false;
       }
+    } else if ( b0 == mCloseStation ) {
+      closeCurrentStation();
     }
   }
 

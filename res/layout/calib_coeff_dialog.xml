@@ -9,8 +9,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     >
-   					  
-
     <TextView android:id="@+id/coeff_bg"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="wrap_content"
@@ -115,6 +113,13 @@
         android:layout_height="wrap_content"
         android:gravity="end"
         >
+        <Button android:id="@+id/button_coeff_second"
+          android:layout_gravity="start"
+          style="@style/button_default"
+          android:text="@string/swap"
+          android:paddingStart="15dp"
+          android:paddingEnd="15dp"
+        />
         <Button android:id="@+id/button_coeff_back"
           android:layout_gravity="start"
           style="@style/button_default"

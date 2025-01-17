@@ -18,7 +18,7 @@
     <!-- UNUSED string name="desc_points">Points</string -->
     <!-- UNUSED string name="desc_lines">Lines</string -->
     <!-- UNUSED string name="desc_areas">Areas</string -->
-    <string name="desc_menu" copyable="fr it pt">Menu</string>
+    <string name="desc_menu" copyable="fr it pt sk">Menu</string>
 
   <string name="r_title">Android-13+ WARNING</string>
   <!-- UNUSED string name="r_dialog_1">
@@ -34,8 +34,8 @@ With Android-13 TopoDroid must store surveys in the app private folder under "An
   <string name="r_quit">QUIT</string>
 
     <string name="app_name" translatable="false">TopoDroid-X</string>
-    <string name="tdm_title" copyable="bg fr hu ru">TopoDroid Manager</string>
-    <string name="tdm_config_project" copyable="bg fr ru">project.tdconfig</string>
+    <string name="tdm_title" copyable="all">TopoDroid Manager</string>
+    <string name="tdm_config_project" copyable="all">project.tdconfig</string>
     <string name="double_back">Click BACK again to exit</string>
 
     <string name="new_survey_label">New survey</string>
@@ -228,8 +228,8 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="extend_vert">Vert</string>
     <!-- UNUSED string name="external_prompt">Enter measurement</string -->
     <string name="splay_at_to">LRUD at TO station</string>
-    <string name="lrud" copyable="it pt">LRUD</string>
-    <string name="strike_dip">Strike %1$.0f Dip %2$.0f</string>
+    <string name="lrud" copyable="it pt sk">LRUD</string>
+    <string name="strike_dip">Dip direction %1$.0f inclination %2$.0f</string>
 
     <string name="few_data">Too few calibration data</string>
     <string name="few_iter">Failed: too many iterations\nCheck your data</string>
@@ -310,7 +310,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="label_text">Enter the label text</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
     <!-- UNUSED string name="h_ellipsoid">H ellipsoid </string -->
-    <string name="h_geoid">H geoid </string>
+    <string name="h_geoid" copyable="sk">H geoid </string>
     <string name="latitude" copyable="pt">Latitude </string>
     <string name="longitude" copyable="pt">Longitude </string>
     <!-- UNUSED string name="h_ellipsoid_hint">H ellipsoid [m]</string -->
@@ -460,7 +460,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="menu_3d" copyable="all">3D</string>
     <string name="menu_about">ABOUT</string>
     <string name="menu_area" copyable="it">AREA</string>
-    <string name="menu_audio" copyable="fr it">AUDIO</string>
+    <string name="menu_audio" copyable="fr it sk">AUDIO</string>
     <!-- UNUSED string name="menu_attach">CONNECT</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
@@ -479,7 +479,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="menu_device_add">ADD UNNAMED</string> <!-- KEEP -->
     <string name="menu_export">EXPORT</string>
     <string name="menu_firmware" copyable="all">FIRMWARE</string>
-    <string name="menu_geopoint_app">GNSS APP</string>
+    <string name="menu_geopoint_app" copyable="all">GNSS APP</string>
     <string name="menu_recover">RECOVER</string>
     <string name="menu_recover_paste">RECOVER/PASTE</string>
     <string name="menu_reload">RELOAD</string>
@@ -822,7 +822,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="button_apply"     >Apply</string>
     <string name="button_back"      >Back</string>
     <string name="button_cancel"    >Cancel</string>
-    <string name="button_geocode"   >GeoCode</string>
+    <string name="button_geocode" copyable="all">GeoCode</string>
     <!-- UNUSED string name="button_change"    >Change</string -->
     <string name="button_clipboard" >Clipboard</string>
     <string name="button_close"     >Close</string>
@@ -947,7 +947,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="popup_do_leg">Leg shots</string>
     <string name="popup_do_gm_data">Calib. shot</string>
     <string name="popup_do_gm_group">Calib. group</string>
-    <string name="popup_do_laser" copyable="fr it pt">Laser</string>
+    <string name="popup_do_laser" copyable="fr it pt sk">Laser</string>
     <string name="popup_do_scan">Scan</string>
     <string name="popup_do_shot">Shot</string>
     <string name="popup_do_clear">Clear</string>
@@ -976,7 +976,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
     <string name="bt_alias_title">Bluetooth aliases</string>
-    <string name="hint_bt_alias">BT alias</string>
+    <string name="hint_bt_alias" copyable="sk">BT alias</string>
     <string name="hint_bt_code">Device code</string>
     <string name="bt_alias_missing">BT alias missing</string>
     <string name="bt_code_missing">Device code missing</string>
@@ -991,6 +991,10 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="hint_textsize">text size</string>
     <string name="hint_units">symbol units</string>
     <string name="hint_value">value</string>
+
+    <string name="calib_measurement_id">Shot %1$d</string>
+    <string name="calib_measurement_error">Error %1$.4f</string>
+    <string name="calib_measurement_group">Group: </string>
 
     <string name="hint_notes">notes</string>
     <string name="hint_label">label</string>
@@ -1254,6 +1258,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Calibration data distribution</string>
     <string name="title_coeff">Calibration coefficients</string>
+    <string name="title_coeff_two">Calibration coefficients [%1$d]</string>
     <string name="title_color_picker">Pick a color</string>
     <!-- UNUSED string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
@@ -1375,7 +1380,7 @@ There are other settings for the presentation of the sketches (icon size, label 
 
     <string name="title_import_shot">Survey import</string>
     <string name="title_import_gps">GPS point import</string>
-    <string name="title_import_th2">Therion th2 file</string>
+    <string name="title_import_th2" copyable="all">Therion th2 file</string>
     <string name="title_infos">Surveys geo-points</string>
     <string name="title_graph_paper">Graph paper 1:100 scale</string>
     <string name="graph_paper_scale">Adjust the line to be 5 cm long</string>
@@ -1600,7 +1605,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <!-- UNUSED string name="pref_z6_workaround_summary">Z6 workaround data-download</string -->
   <string name="pref_firmware_sanity_title">Firmware check</string>
   <string name="pref_firmware_sanity_summary">Enforce firmware sanity checks</string>
-  <string name="pref_crs_title" copyable="bg cn fr it pt">C R S </string>
+  <string name="pref_crs_title" copyable="all">C R S </string>
   <string name="pref_crs_summary">CRS name, as in Proj4</string>
   <string name="pref_neg_altitude_title">Neg. altitudes</string>
   <string name="pref_neg_altitude_summary">Allow negative altitudes</string>
@@ -1618,7 +1623,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_bric_zero_length_summary">Record BRIC zero-length shot</string>
   <string name="pref_bric_index_is_id_title">BRIC index is ID</string>
   <string name="pref_bric_index_is_id_summary">Use BRIC index as shot ID</string>
-  <string name="pref_sap5_bit16_bug_title" copyable="bg">SAP5 bit-16 bug</string>
+  <string name="pref_sap5_bit16_bug_title" copyable="all">SAP5 bit-16 bug</string>
   <string name="pref_sap5_bit16_bug_summary" copyable="bg">SAP5 bit-16 bug workaround</string>
 
   <string name="pref_plot_screen_title">SKETCH</string>
@@ -1726,7 +1731,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <!-- UNUSED string name="pref_bitmap_bgcolor_summary">Background color of PNG image of sketches</string -->
   <string name="pref_acad_version_title">DXF version</string>
   <string name="pref_acad_version_summary">DXF version</string>
-  <string name="pref_acad_spline_title" copyable="bg">DXF splines</string>
+  <string name="pref_acad_spline_title" copyable="all">DXF splines</string>
   <string name="pref_acad_spline_summary">DXF interpolated cubics</string>
   <string name="pref_acad_layer_title">Scrap layers</string>
   <string name="pref_acad_layer_summary">DXF layers by scraps</string>
@@ -2117,7 +2122,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="cmenu_files">Surveys</string -->
     <!-- UNUSED string name="cmenu_frame">Frame</string -->
     <!-- UNUSED string name="cmenu_color">Color</string -->
-    <string name="cmenu_info" copyable="fr it pt">INFO</string>
+    <string name="cmenu_info" copyable="fr it pt sk">INFO</string>
     <string name="cmenu_ico">3D-ROSE DIAGRAM</string>
     <string name="cmenu_rose">ROSE DIAGRAM</string>
     <string name="cmenu_wall">WALLS</string>
@@ -2315,6 +2320,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="warning_no_parent">Warning: cannot go to parent folder</string -->
     <string name="warning_nogrant_camera">Camera permission has not been granted</string>
     <string name="warning_no_csv_type">CSV type not specified</string>
+    <string name="warning_cavway_info">Failed to get Cavway info</string>
     <string name="no_permissions">The app cannot run without the required permissions</string>
 
     <string name="done_fractals" translatable="false">Done fractals dims</string>
@@ -2407,7 +2413,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="help_reset_3d">Reset 3D view</string>
     <string name="help_viewpoint_3d">3D viewpoint</string>
     <string name="help_alpha_3d" copyable="all">D.E.M.</string>
-    <string name="help_wall_3d">3D model</string>
+    <string name="help_wall_3d" copyable="sk">3D model</string>
     <!-- UNUSED string name="help_temperature">Temperature</string -->
     <string name="help_sketch_3d" copyable="all">3D sketch lifting</string>
     <!-- UNUSED string name="help_fractal" translatable="false">Fractal analysis</string -->

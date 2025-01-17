@@ -656,10 +656,16 @@ public class DeviceActivity extends Activity
   // @Implements
   public boolean isActivityFinishing() { return this.isFinishing(); }
 
+
+  /** display calibration coeffs
+   * @param coeffs ...
+   */
   // @Implements
-  public void displayCoeff( TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nL )
+  public void displayCoeff( byte[] coeffs )
   { // null coeff, null coeff2
-    (new CalibCoeffDialog( this, null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0.0f, 0, 0.0f, 0.0f, null, null /*, false */ ) ).show();
+    // FIXME TWO_SENSORS if the device is two-sensors 
+    if ( currDeviceA() == null ) return;
+    (new CalibCoeffDialog( this, coeffs ) ).show();
   }
 
   // @Implements
@@ -707,7 +713,8 @@ public class DeviceActivity extends Activity
       TDandroid.setButtonBackground( mButton1[IDX_TOGGLE], mBMtoggle ); // this should already be enableButtons()
       TDandroid.setButtonBackground( mButton1[IDX_CALIB], mBMcalib );
       if ( TDLevel.overNormal ) {
-        TDandroid.setButtonBackground( mButton1[IDX_READ], mBMread_no );
+        TDandroid.setButtonBackground( mButton1[IDX_READ], mBMread );
+        // TDandroid.setButtonBackground( mButton1[IDX_READ], mBMread_no );
       }
     } else if ( TDInstance.isDeviceBric() ) {
       mButton1[IDX_INFO].setVisibility( View.VISIBLE );
