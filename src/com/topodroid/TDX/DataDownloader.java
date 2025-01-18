@@ -16,6 +16,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.DeviceUtil;
+import com.topodroid.dev.DataType;
 
 // import java.util.ArrayList;
 
@@ -244,7 +245,9 @@ public class DataDownloader
    */
   private void tryDownloadData( ListerHandler lister, int data_type )
   {
-    TDInstance.secondLastShotId = TopoDroidApp.lastShotId( ); // FIXME-LATEST
+    // if ( data_type != DataType.DATA_CALIB ) { // 20250118 not neceessary ? this is done by TopoDroidApp in downloadDataBatch
+    //   TDInstance.secondLastShotId = TopoDroidApp.lastShotId( ); // FIXME-LATEST
+    // }
     if ( TDInstance.getDeviceA() != null && DeviceUtil.isAdapterEnabled() ) {
       notifyConnectionStatus( lister, ConnectionState.CONN_WAITING );
       if ( LOG ) TDLog.v( TAG + "try download data() - type " + data_type );

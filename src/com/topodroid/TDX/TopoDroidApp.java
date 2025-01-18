@@ -1859,12 +1859,14 @@ public class TopoDroidApp extends Application
    */
   int downloadDataBatch( ListerHandler lister, int data_type ) // FIXME_LISTER
   {
-    // TDLog.v( "APP: batch download");
-    TDInstance.secondLastShotId = lastShotId(); // if data_type == CALIB this can be skipped
+    // TDLog.v( "APP: batch download, data type " + data_type );
     int ret = 0;
     if ( mComm == null || TDInstance.getDeviceA() == null ) {
       TDLog.e( "Comm or Device null ");
     } else {
+      if ( data_type != DataType.DATA_CALIB ) { // 20250118 moved inside the block
+        TDInstance.secondLastShotId = lastShotId();
+      }
       // TDLog.v( "APP: batch download, device " + TDInstance.deviceAddress() + " " + TDInstance.getDeviceA().getAddress() + " comm " + mComm.toString() );
       int timeout = 10; // 10 seconds
       ret = mComm.downloadData( TDInstance.getDeviceA().getAddress(), lister, data_type, timeout );

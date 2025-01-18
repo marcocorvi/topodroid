@@ -303,7 +303,7 @@ public class CavwayComm extends TopoDroidComm
   @Override
   public boolean connectDevice(String address, ListerHandler lister, int data_type, int timeout ) // FIXME XBLE_DATA_TYPE ?
   {
-    if ( LOG ) TDLog.v( TAG + "\"connect Device\"");
+    if ( LOG ) TDLog.v( TAG + "\"connect Device\" data type " + data_type );
     mAddress       = address; // saved
     mNrReadPackets = 0;
     mDataType      = data_type;
@@ -1192,7 +1192,7 @@ public class CavwayComm extends TopoDroidComm
   @Override
   public int downloadData( String address, ListerHandler lister, int data_type, int timeout ) // FIXME_LISTER
   {
-    if ( LOG ) TDLog.v( TAG + "batch download " + address );
+    if ( LOG ) TDLog.v( TAG + "cavway batch download, address " + address + " data_type " + data_type );
     // mConnectionMode = 0;
     mDataType = data_type;
     if ( ! tryConnectDevice( address, lister, 0 ) ) return -1; 
@@ -1205,11 +1205,11 @@ public class CavwayComm extends TopoDroidComm
     synchronized ( mNewDataFlag ) {
       while( true ) {
         if ( syncWait( 2000, "data download" ) ) {
-          if ( mPacketType == CavwayProtocol.PACKET_MEASURE_DATA ) {
+          if ( mPacketType == CavwayProtocol.PACKET_MEASURE_DATA || mPacketType == CavwayProtocol.PACKET_CALIB_DATA ) {
             mPacketType = CavwayProtocol.PACKET_NONE; // reset
-            if ( LOG ) TDLog.v( TAG + "got packet " + mNrReadPackets );
+            if ( LOG ) TDLog.v( TAG + "got packet type " + mPacketType + " nr packets " + mNrReadPackets );
           } else {
-            if ( LOG ) TDLog.v( TAG + "no packet " );
+            if ( LOG ) TDLog.v( TAG + "no packet, packet type " + mPacketType );
             break;
           }
         }
