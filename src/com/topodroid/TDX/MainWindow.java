@@ -1449,7 +1449,7 @@ public class MainWindow extends Activity
     }
   }
 
-  /** import data from a file
+  /** IMPORT: import data from a file
    * @param intent   import intent
    * @return filename or null if fail
    */

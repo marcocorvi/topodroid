@@ -11,26 +11,27 @@ The name of the file must not contain a colon ':'.<br><p>
 
 The dialog displays the list of supported import file formats, besides "zip" archives:
 <ul>
-<li>Compass (dat)</li>
-<li>Survex (svx)</li>
-<li>Therion. Only data (th)</li>
-<li>VisualTopo (tro and trox)</li>
-<li>Walls (srv)</li>
-<li>TopoRobot</li>
-<li>PocketTopo, including sketches (top)</li>
-<li>CaveSniper (csn)</li>
-<li>BRIC csv (csv)</li>
+<li>Compass ".dat"</li>
+<li>Survex ".svx"</li>
+<li>Therion. Only data ".th"</li>
+<li>VisualTopo ".tro" and ".trox)"</li>
+<li>Walls ".srv"</li>
+<li>TopoRobot ".text"</li>
+<li>PocketTopo, including sketches ".top"</li>
+<li>CaveSniper ".csn"</li>
+<li>BRIC and Cavway csv ".csv"</li>
 </ul><br>
 
 For some formats it is possible to customize the import through a few flags.<br>
 
 A file import fails if a survey with the same name is already in TopoDroid.<br><p>
-The import file is selected with the system content provider.<br><p>
+The import file is selected with the system content provider.<br>
+File import fails if the file extension is not one those listed above<br><p>
 
 On import from file, LRUD values are converted to x-splays (shown in green).<br><p>
 
 
-<b>Compass import</b><br>
+<b>Compass import</b> ".dat"<br>
 <ul>
 <li><i>LRUD</i> if enabled LRUD values are imported and converted to splay shots</li>
 <li><i>Leg first</i> if enabled LRUD splays are placed after the leg</li>
@@ -39,7 +40,7 @@ On import from file, LRUD values are converted to x-splays (shown in green).<br>
 
 TopoDroid converts imported compass survey from <i>normal</i> datamode to <i>diving</i> datamode [T], if the relative setting is enabled [G].<br><p>
 
-<b>Survex import</b><br>
+<b>Survex import</b> ".svx"<br>
 <u>Survex syntax is partially supported</u>.<br>
 
 Only the data modes "normal", "topofil" and "passage" are handled to some extent.
@@ -50,7 +51,7 @@ TopoDroid has only single survey sessions. Therefore, data of multi-session file
 single session.
 <br><p>
 
-<b>Therion import</b><br>
+<b>Therion import</b> ".th"<br>
 <u>Therion syntax is partially supported</u>.<br>
 
 Only Therion survey files with data in "normal" datamode are importable.<br>
@@ -60,7 +61,7 @@ If the station short-names have no clash the file can be imported with "short-na
 Otherwise it must be imported with full names, ie station names qualified by the survey path.<br>
 TopoDroid does not import Therion scraps.<br><p>
 
-<b>VisualTopo import</b><br>
+<b>VisualTopo import</b> ".tro" and ".trox"<br>
 <u>VisualTopo syntax is partially supported</u>.<br>
 
 VisualTopo (tro, trox) import options:
@@ -72,27 +73,29 @@ VisualTopo (tro, trox) import options:
 TopoDroid can import also VisualTopo surveys with <i>Prof</i> instead of <i>Clino</i> in "trox" format.
 The data are stored in <i>diving</i> datamode.<br><p>
 
-<b>Walls import</b><br>
+<b>Walls import</b> ".srv"<br>
 <u>Walls syntax is partially supported</u>.<br>
 
 Importing data from a Walls file can result in disconnected survey.<br><p>
 
-<b>TopoRobot import</b><br>
+<b>TopoRobot import</b> ".text"<br>
 TopoRobot import is very experimental.<br><p>
 
-<b>PocketTopo import</b><br>
+<b>PocketTopo import</b> ".top"<br>
 TopoDroid imports both the survey data and the sketches.
 This import maps PocketTopo colors to TopoDroid drawing tools (points and lines).
 The mapping can be modified through a setting.<br><p>
 
-<b>CaveSniper import</b><br>
+<b>CaveSniper import</b> ".csn"<br>
 <br><p>
 
-<b>BRIC csv file</b><br>
-BRIC csv import is experimental.<br>
+<b>BRIC and Cavway csv import</b> ".csv"<br>
+BRIC and Cavway csv import is experimental.<br>
 
 Survey data imported from BRIC csv files contains only distance, azimuth, and inclination.<br>
 The survey data must be edited after importing to add the other information.<br><p>
+
+Survey data can be imported from Cavway csv files ceated with the CavwayAssistant program<br><p>
 
 <!--
 <b>N.B.</b>
