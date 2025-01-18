@@ -1245,7 +1245,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="title_check">Calibration-check</string -->
     <string name="title_coverage">Разпределение на данни за калибрирането</string>
     <string name="title_coeff">Коефициенти за калибриране</string>
-    <!-- TODO string name="title_coeff_two">Calibration coefficients [%1$d]</string -->
+    <string name="title_coeff_two">Коефициенти на калибриране [%1$d]</string>
     <string name="title_color_picker">Избери цвят</string>
     <!-- UNUSED string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
