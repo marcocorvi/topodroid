@@ -189,7 +189,8 @@ public class GlNames extends GlShape
 
   final static int COORDS_PER_VISIBILITY = 1;
   final static int OFFSET_VISIBILITY     = 0;
-  final static int STRIDE_VISIBILITY     = 4; // Float.BYTES * COORDS_PER_VISIBILITY;
+  final static int STRIDE_VISIBILITY_2   = 4;  // Float.BYTES * COORDS_PER_VISIBILITY;
+  final static int STRIDE_VISIBILITY_1   = 24;   // Float.BYTES * COORDS_PER_VISIBILITY;
 
   int offsetHighlight = 0;
 
@@ -237,7 +238,7 @@ public class GlNames extends GlShape
       // TDLog.v("NAMES uses DataBuffer " + increment );
       mDataBuffer = DataBuffer.createFloatBuffer( 3 * NN * increment );
       dataBuffer  = mDataBuffer.asFloat();
-      mVisibilityBuffer = DataBuffer.createFloatBuffer( NN * increment );
+      mVisibilityBuffer = DataBuffer.createFloatBuffer( 6 * NN * increment );
       visibilityBuffer = mVisibilityBuffer.asFloat();
     }
   }
@@ -296,7 +297,7 @@ public class GlNames extends GlShape
       dataBuffer  = mDataBuffer.asFloat();
     }
     if ( mVisibilityBuffer != null ) {
-      mVisibilityBuffer.addFloat( 1.0f );
+      for ( int k=0; k<6; ++k ) mVisibilityBuffer.addFloat( 1.0f );
       visibilityBuffer = mVisibilityBuffer.asFloat();
     }
   }
@@ -439,12 +440,12 @@ public class GlNames extends GlShape
       GlName name = mNames.get( i );
       if ( name.survey >= 0 && name.survey < visible.length ) {
         if ( visible[ name.survey ] ) {
-          visibilityBuffer.put( k, 1.0f ); k += 1;
+          for ( int j=0; j<6; ++j ) { visibilityBuffer.put( k, 1.0f ); ++k; }
         } else {
-          visibilityBuffer.put( k, 0.0f ); k += 1;
+          for ( int j=0; j<6; ++j ) { visibilityBuffer.put( k, 0.0f ); ++k; }
         }
       } else {
-        k += 1;
+        k += 6;
       }
     }
   }
@@ -458,9 +459,10 @@ public class GlNames extends GlShape
       GL.setAttributePointer( mADelta,    nameBuffer, OFFSET_DELTA,  COORDS_PER_DELTA,  STRIDE_TEXEL );
       GL.setAttributePointer( mATexCoord, nameBuffer, OFFSET_TEXEL,  COORDS_PER_TEXEL,  STRIDE_TEXEL );
     }
-    // if ( visibilityBuffer != null ) {
-    //   GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY );
-    // }
+    if ( visibilityBuffer != null ) {
+      // FIXME THIS DOES NOT WORK
+      GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY_2 );
+    }
     if ( GlRenderer.projectionMode == GlRenderer.PROJ_PERSPECTIVE ) {
       GL.setUniform( mUTextSize, mTextSizeP );
     } else {
@@ -484,7 +486,7 @@ public class GlNames extends GlShape
       GL.setAttributePointer( mADeltaHL,    nameBuffer, OFFSET_DELTA,  COORDS_PER_DELTA,  STRIDE_TEXEL );
     }
     if ( visibilityBuffer != null ) {
-      GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY );
+      GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY_1 );
     }
     if ( GlRenderer.projectionMode == GlRenderer.PROJ_PERSPECTIVE ) {
       GL.setUniform( mUTextSizeHL, mTextSizeP );
@@ -502,7 +504,7 @@ public class GlNames extends GlShape
       GL.setAttributePointer( mpAPosition, dataBuffer, OFFSET_VERTEX, COORDS_PER_VERTEX, STRIDE_VERTEX*6 ); // one vertex every 6
     }
     if ( visibilityBuffer != null ) {
-      GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY );
+      GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY_1 );
     }
     GL.setUniform( mpUPointSize, mPointSize );
     GL.setUniform( mpUColor, color[0], color[1], color[2], color[3] );
@@ -515,7 +517,7 @@ public class GlNames extends GlShape
       GL.setAttributePointer( mpAPositionHL, dataBuffer, OFFSET_VERTEX, COORDS_PER_VERTEX, STRIDE_VERTEX*6 ); // one vertex every 6
     }
     if ( visibilityBuffer != null ) {
-      GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY );
+      GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY_1 );
     }
     GL.setUniform( mpUPointSizeHL, mPointSize4 );
     // GL.setUniform( mpUColorHL, 1.0f, 0.0f, 0.0f, 1.0f );
@@ -535,7 +537,7 @@ public class GlNames extends GlShape
   // FEEDBACK
 
   /** check if ican highlight a station 
-   * @param idx       sttaion index
+   * @param idx       station index
    * @param highlight whether to mark the station highlight
    * @return fullname of highlighted station or null
    */ 
@@ -546,9 +548,14 @@ public class GlNames extends GlShape
       if ( highlight ) setHighlight( -1 );
       return null;
     }
-    if ( highlight ) setHighlight( idx );
-    GlName name = mNames.get( idx );
-    return name.fullname;
+    if ( highlight ) {
+      if ( visibilityBuffer == null || visibilityBuffer.get(6*idx) > 0.0f) {
+        setHighlight( idx );
+        GlName name = mNames.get( idx );
+        return name.fullname;
+      }
+    }
+    return null;
   }
 
   /** check if a station in close to the point (x,y) on the display
@@ -629,8 +636,8 @@ public class GlNames extends GlShape
   private void initVisibilityBuffer()
   {
     // if ( visibilityBuffer == null ) {
-      visibilityBuffer = DataBuffer.getFloatBuffer( nameCount );
-      for ( int i=0; i<nameCount; ++ i) {
+      visibilityBuffer = DataBuffer.getFloatBuffer( 6 * nameCount );
+      for ( int i=0; i< 6 * nameCount; ++ i) {
         visibilityBuffer.put( i, 1.0f);
       }
     // }
@@ -819,7 +826,7 @@ public class GlNames extends GlShape
   {
     mAPosition  = GL.getAttribute( program, GL.aPosition );
     mADelta     = GL.getAttribute( program, GL.aDelta );
-    // mAVisible   = GL.getAttribute( program, GL.aVisible );
+    mAVisible   = GL.getAttribute( program, GL.aVisible );
     mATexCoord  = GL.getAttribute( program, GL.aTexCoord );
     mUTextSize  = GL.getUniform(   program, GL.uTextSize );
     mUTexUnit   = GL.getUniform(   program, GL.uTexUnit );
