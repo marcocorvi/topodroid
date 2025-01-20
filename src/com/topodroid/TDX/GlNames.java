@@ -46,6 +46,8 @@ public class GlNames extends GlShape
   private static int stationMode = STATION_NONE;     // show_stations;
 
   private DataBuffer mDataBuffer = null;
+  private DataBuffer mVisibilityBuffer = null;
+  private FloatBuffer visibilityBuffer = null;
 
   /** reset the stations display-mode
    */
@@ -110,9 +112,17 @@ public class GlNames extends GlShape
     Vector3D pos; // XYZ OpenGL
     String   name;
     String   fullname;
+    int      survey;   // survey index in Parser survey list
     boolean  highlight;
 
-    GlName( double x, double y, double z, String n, String fn ) { pos = new Vector3D(x,y,z); name = n; fullname = fn; highlight = false; }
+    GlName( double x, double y, double z, int s, String n, String fn )
+    {
+      pos = new Vector3D(x,y,z);
+      survey = s;
+      name = n;
+      fullname = fn;
+      highlight = false;
+    }
 
     boolean startsWith( String prefix ) { return fullname.startsWith( prefix ); }
   }
@@ -177,6 +187,10 @@ public class GlNames extends GlShape
   final static int OFFSET_TEXEL      = 2;  // COORDS_PER_DELTA;
   final static int STRIDE_TEXEL      = 16; // Float.BYTES * (COORDS_PER_DELTA + COORDS_PER_TEXEL);
 
+  final static int COORDS_PER_VISIBILITY = 1;
+  final static int OFFSET_VISIBILITY     = 0;
+  final static int STRIDE_VISIBILITY     = 4; // Float.BYTES * COORDS_PER_VISIBILITY;
+
   int offsetHighlight = 0;
 
   private FloatBuffer nameBuffer = null; // textures
@@ -223,6 +237,8 @@ public class GlNames extends GlShape
       // TDLog.v("NAMES uses DataBuffer " + increment );
       mDataBuffer = DataBuffer.createFloatBuffer( 3 * NN * increment );
       dataBuffer  = mDataBuffer.asFloat();
+      mVisibilityBuffer = DataBuffer.createFloatBuffer( NN * increment );
+      visibilityBuffer = mVisibilityBuffer.asFloat();
     }
   }
 
@@ -233,40 +249,42 @@ public class GlNames extends GlShape
 
   /** add a name
    * @param pos      name position: (x,y,z) in world becomes (x-xmed, z-ymed, -y-zmed)
+   * @param survey   survey index
    * @param name     short name
    * @param fullname complete name
    * @param xmed     center X coord (in OpenGL)
    * @param ymed     center Y coord
    * @param zmed     center Z coord
    */
-  void addName( Vector3D pos, String name, String fullname, double xmed, double ymed, double zmed )
+  void addName( Vector3D pos, int survey, String name, String fullname, double xmed, double ymed, double zmed )
   {
     if ( mIncremental ) {
       Vector3D p = new Vector3D( pos.x-xmed, pos.z-ymed, -pos.y-zmed );
-      addName( p, name, fullname );
+      addName( p, survey, name, fullname );
     } else {
       // mNames.add( name );
       // mPos.add( new Vector3D( pos.x, pos.z, -pos.y) );
-      mNames.add( new GlName( pos.x-xmed, pos.z-ymed, -pos.y-zmed, name, fullname ) );
+      mNames.add( new GlName( pos.x-xmed, pos.z-ymed, -pos.y-zmed, survey, name, fullname ) );
     }
   }
 
   // FIXME INCREMENTAL BLUETOOTH_COORDS
-  // void addBluetoothName( Vector3D pos, String name, String fullname )
+  // void addBluetoothName( Vector3D pos, int survey, String name, String fullname )
   // {
   //   // TDLog.v("NAMES add BT name " + name );
   //   Vector3D p = ParserBluetooth.bluetoothToVector( pos );
-  //   addName( p, name, fullname );
+  //   addName( p, survey, name, fullname );
   // }
 
   /** add a name
    * @param p        name position: (x,y,z) in OpenGL
+   * @param survey   survey index
    * @param name     short name
    * @param fullname complete name
    */
-  private void addName( Vector3D p, String name, String fullname )
+  private void addName( Vector3D p, int survey, String name, String fullname )
   {
-    mNames.add( new GlName( p.x, p.y, p.z, name, fullname ) );
+    mNames.add( new GlName( p.x, p.y, p.z, survey, name, fullname ) );
     if ( mDataBuffer != null ) {
       float[] val = new float[ 3 * NN ];
       for (int j=0; j<NN; ++j ) {
@@ -276,6 +294,10 @@ public class GlNames extends GlShape
       }
       mDataBuffer.addFloats( val );
       dataBuffer  = mDataBuffer.asFloat();
+    }
+    if ( mVisibilityBuffer != null ) {
+      mVisibilityBuffer.addFloat( 1.0f );
+      visibilityBuffer = mVisibilityBuffer.asFloat();
     }
   }
     
@@ -341,6 +363,7 @@ public class GlNames extends GlShape
       initBuffer();
     } else {
       initTextureBuffer();
+      initVisibilityBuffer();
     }
   }
       
@@ -403,6 +426,28 @@ public class GlNames extends GlShape
 
     // unbindData();
   }
+  
+  /** toggle the display of the line segments
+   * @param visible   array of visibility flags
+   * @note hide/show is achieved using color alpha (0 hide, 1 show)
+   */
+  void hideOrShow( boolean[] visible )
+  {
+    // TDLog.v("Name hide/show " + nameCount + " vis " + visible.length );
+    int k = 0; // index in the visibility buffer
+    for ( int i = 0; i<nameCount; ++i ) {
+      GlName name = mNames.get( i );
+      if ( name.survey >= 0 && name.survey < visible.length ) {
+        if ( visible[ name.survey ] ) {
+          visibilityBuffer.put( k, 1.0f ); k += 1;
+        } else {
+          visibilityBuffer.put( k, 0.0f ); k += 1;
+        }
+      } else {
+        k += 1;
+      }
+    }
+  }
 
   private void bindData( float[] mvpMatrix )
   {
@@ -413,6 +458,9 @@ public class GlNames extends GlShape
       GL.setAttributePointer( mADelta,    nameBuffer, OFFSET_DELTA,  COORDS_PER_DELTA,  STRIDE_TEXEL );
       GL.setAttributePointer( mATexCoord, nameBuffer, OFFSET_TEXEL,  COORDS_PER_TEXEL,  STRIDE_TEXEL );
     }
+    // if ( visibilityBuffer != null ) {
+    //   GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY );
+    // }
     if ( GlRenderer.projectionMode == GlRenderer.PROJ_PERSPECTIVE ) {
       GL.setUniform( mUTextSize, mTextSizeP );
     } else {
@@ -435,6 +483,9 @@ public class GlNames extends GlShape
     if ( nameBuffer != null ) {
       GL.setAttributePointer( mADeltaHL,    nameBuffer, OFFSET_DELTA,  COORDS_PER_DELTA,  STRIDE_TEXEL );
     }
+    if ( visibilityBuffer != null ) {
+      GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY );
+    }
     if ( GlRenderer.projectionMode == GlRenderer.PROJ_PERSPECTIVE ) {
       GL.setUniform( mUTextSizeHL, mTextSizeP );
     } else {
@@ -450,6 +501,9 @@ public class GlNames extends GlShape
     if ( dataBuffer != null ) {
       GL.setAttributePointer( mpAPosition, dataBuffer, OFFSET_VERTEX, COORDS_PER_VERTEX, STRIDE_VERTEX*6 ); // one vertex every 6
     }
+    if ( visibilityBuffer != null ) {
+      GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY );
+    }
     GL.setUniform( mpUPointSize, mPointSize );
     GL.setUniform( mpUColor, color[0], color[1], color[2], color[3] );
     GL.setUniformMatrix( mpUMVPMatrix, mvpMatrix );
@@ -459,6 +513,9 @@ public class GlNames extends GlShape
   {
     if ( dataBuffer != null ) {
       GL.setAttributePointer( mpAPositionHL, dataBuffer, OFFSET_VERTEX, COORDS_PER_VERTEX, STRIDE_VERTEX*6 ); // one vertex every 6
+    }
+    if ( visibilityBuffer != null ) {
+      GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY );
     }
     GL.setUniform( mpUPointSizeHL, mPointSize4 );
     // GL.setUniform( mpUColorHL, 1.0f, 0.0f, 0.0f, 1.0f );
@@ -566,6 +623,17 @@ public class GlNames extends GlShape
       dataBuffer.put( data6 );
     }
     initTextureBuffer();
+    initVisibilityBuffer();
+  }
+
+  private void initVisibilityBuffer()
+  {
+    // if ( visibilityBuffer == null ) {
+      visibilityBuffer = DataBuffer.getFloatBuffer( nameCount );
+      for ( int i=0; i<nameCount; ++ i) {
+        visibilityBuffer.put( i, 1.0f);
+      }
+    // }
   }
 
   // ------------------------------------------------------------------------------
@@ -700,6 +768,7 @@ public class GlNames extends GlShape
 
   private static int mUMVPMatrix;
   private static int mAPosition;
+  private static int mAVisible;
   private static int mADelta;
   private static int mUTextSize;
   private static int mATexCoord;
@@ -741,6 +810,7 @@ public class GlNames extends GlShape
   {
     mpAPosition  = GL.getAttribute( program, GL.aPosition );
     mpUPointSize = GL.getUniform(   program, GL.uPointSize );
+    mAVisible    = GL.getAttribute( program, GL.aVisible );
     mpUColor     = GL.getUniform(   program, GL.uColor );
     mpUMVPMatrix = GL.getUniform(   program, GL.uMVPMatrix );
   }
@@ -749,6 +819,7 @@ public class GlNames extends GlShape
   {
     mAPosition  = GL.getAttribute( program, GL.aPosition );
     mADelta     = GL.getAttribute( program, GL.aDelta );
+    // mAVisible   = GL.getAttribute( program, GL.aVisible );
     mATexCoord  = GL.getAttribute( program, GL.aTexCoord );
     mUTextSize  = GL.getUniform(   program, GL.uTextSize );
     mUTexUnit   = GL.getUniform(   program, GL.uTexUnit );
@@ -759,6 +830,7 @@ public class GlNames extends GlShape
   {
     mpAPositionHL  = GL.getAttribute( program, GL.aPosition );
     mpUPointSizeHL = GL.getUniform(   program, GL.uPointSize );
+    mAVisible      = GL.getAttribute( program, GL.aVisible );
     mpUColorHL     = GL.getUniform(   program, GL.uColor );
     mpUMVPMatrixHL = GL.getUniform(   program, GL.uMVPMatrix );
   }
@@ -768,6 +840,7 @@ public class GlNames extends GlShape
   {
     mAPositionHL  = GL.getAttribute( program, GL.aPosition );
     mADeltaHL     = GL.getAttribute( program, GL.aDelta );
+    mAVisible     = GL.getAttribute( program, GL.aVisible );
     mUTextSizeHL  = GL.getUniform(   program, GL.uTextSize );
     mUColorHL     = GL.getUniform(   program, GL.uColor );
     mUMVPMatrixHL = GL.getUniform(   program, GL.uMVPMatrix );

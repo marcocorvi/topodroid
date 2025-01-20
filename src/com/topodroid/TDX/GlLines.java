@@ -479,6 +479,7 @@ public class GlLines extends GlShape
   
   /** toggle the display of the line segments
    * @param visible   array of visibility flags
+   * @note hide/show is achieved using color alpha (0 hide, 1 show)
    */
   void hideOrShow( boolean[] visible )
   {

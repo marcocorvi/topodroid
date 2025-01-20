@@ -1226,7 +1226,7 @@ public class TglParser
           for ( int k=0; k<nr; ++k ) {
             Cave3DStation st = Cave3DStation.deserialize( dis, version );
             stations.add( st );
-            Cave3DSurvey survey = getSurveyFromId( st.mSid );
+            Cave3DSurvey survey = getSurveyFromId( st.getSurveyId() );
             survey.addStation( st );
           }
           break;

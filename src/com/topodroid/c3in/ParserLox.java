@@ -91,7 +91,7 @@ public class ParserLox extends TglParser
       String name = (survey != null)? st.Name() + "@" + survey.getName() : st.Name();
       // String name = null;
       // for ( LoxSurvey s : lox_surveys ) if ( s.id == st.sid ) { name = s.name; break; } // no need to get the survey name
-      Cave3DStation station = new Cave3DStation( name, st.x, st.y, st.z, st.Id(), st.Survey(), st.Flag(), st.Comment() );
+      Cave3DStation station = new Cave3DStation( name, st.x, st.y, st.z, st.Id(), survey.number, st.Survey(), st.Flag(), st.Comment() );
       // Log.v("TopoGL", "station " + st.name + " " + st.x + " " + st.y + " " + st.z );
       stations.add( station );
       // Cave3DSurvey survey = getSurvey( st.sid );

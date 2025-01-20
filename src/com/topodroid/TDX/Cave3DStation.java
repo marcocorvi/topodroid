@@ -28,7 +28,8 @@ public class Cave3DStation extends Vector3D
   int vertex;     // index of vertex (coords) in the array of vertices 
                   // to get the coords use 3*vertex+0, 3*vertex+1, 3*vertex+2
   int mId;
-  int mSid;       // survey id
+  private int mSurveyId;  // survey id
+  private int mSurveyNr;  // survey number
   Cave3DSurvey mSurvey;
 
   // double e, n, z;  // north east, vertical (upwards) : e=x, n=y, z=z
@@ -50,17 +51,19 @@ public class Cave3DStation extends Vector3D
   // -------------------------------------------------------------------------
   /** serialize the 3D station
    * @param dos   output stream
+   * FIXME 2025-01-19 added survey_number (THIS BREAK BACKWARD COMPATIBILITY BECAUSE THERE IS NO VERSIONING)
    */
   void serialize( DataOutputStream dos ) throws IOException
   {
     dos.writeInt( mId );
-    dos.writeInt( mSid );
+    dos.writeInt( mSurveyId );
+    dos.writeInt( mSurveyNr );
     dos.writeUTF( full_name );
     dos.writeInt( flag );
     dos.writeDouble( x );
     dos.writeDouble( y );
     dos.writeDouble( z );
-    // TDLog.v("ser. station " + mId + " " + mSid + " <" + full_name + "> " + x + " " + y + " " + z );
+    // TDLog.v("ser. station " + mId + " " + mSurveyId + " <" + full_name + "> " + x + " " + y + " " + z );
   }
 
   /** serialize a 3D station
@@ -72,13 +75,14 @@ public class Cave3DStation extends Vector3D
   {
     int id  = dis.readInt();
     int sid = dis.readInt();
+    int snr = dis.readInt();
     String full_name  = dis.readUTF();
     int flag = dis.readInt();
     double x = dis.readDouble();
     double y = dis.readDouble();
     double z = dis.readDouble();
     // TDLog.v("deserialized station " + id + " " + sid + " <" + full_name + "> " + x + " " + y + " " + z );
-    return new Cave3DStation( full_name, x, y, z, id, sid, flag, "" );
+    return new Cave3DStation( full_name, x, y, z, id, sid, snr, flag, "" );
   }
 
   // -------------------------------------------------------------------------
@@ -92,7 +96,7 @@ public class Cave3DStation extends Vector3D
   public Cave3DStation( String nm, double e0, double n0, double z0 )
   {
     super( e0, n0, z0 );
-    init( nm, -1, -1, null, FLAG_NONE, null );
+    init( nm, -1, -1, 0, null, FLAG_NONE, null );
   }
 
   /** cstr
@@ -106,8 +110,9 @@ public class Cave3DStation extends Vector3D
   {
     super( e0, n0, z0 );
     int sid = ( survey == null )? -1 : survey.mId;
+    int snr = ( survey == null )? -1 : survey.number;
     // TDLog.v("3D station " + nm + " survey " + (( survey == null )? "none" : survey.getName() ) );
-    init ( nm, -1, sid, survey, FLAG_NONE, null );
+    init ( nm, -1, sid, snr, survey, FLAG_NONE, null );
   }
 
   // Cave3DStation( String nm, double e0, double n0, double z0, Cave3DSurvey survey, int fl, String cmt )
@@ -123,12 +128,13 @@ public class Cave3DStation extends Vector3D
    * @param z0   vertical
    * @param id   leg id
    * @param sid  survey id
+   * @param snr  survey number
    * @param cmt  comment
    */
-  public Cave3DStation( String nm, double e0, double n0, double z0, int id, int sid, int fl, String cmt )
+  public Cave3DStation( String nm, double e0, double n0, double z0, int id, int sid, int snr, int fl, String cmt )
   {
     super( e0, n0, z0 );
-    init( nm, id, sid, null, fl, cmt );
+    init( nm, id, sid, snr, null, fl, cmt );
   }
 
   /** set the station survey
@@ -136,8 +142,14 @@ public class Cave3DStation extends Vector3D
    */
   void setSurvey( Cave3DSurvey survey )
   {
-    mSurvey = survey;
-    mSid    = survey.mId;
+    mSurvey   = survey;
+    if ( survey != null ) {
+      mSurveyId = survey.mId;
+      mSurveyNr = survey.number;
+    } else {
+      mSurveyId = -1;
+      mSurveyNr = 0;
+    }
   }
 
   /** @return true if the station has the specified name
@@ -156,6 +168,14 @@ public class Cave3DStation extends Vector3D
   /** @return station survey
    */
   public String  getSurvey()    { return survey_name; }
+
+  /** @return the survey index (number)
+   */
+  int getSurveyNr() { return mSurveyNr; }
+
+  /** @return the survey ID
+   */
+  int getSurveyId() { return mSurveyId; }
 
   /** set the station flag
    * @param fl   flag
@@ -212,12 +232,13 @@ public class Cave3DStation extends Vector3D
   // double distance3D( Cave3DStation p ) this is Vector3D::distance3D()
 
   // ---------------------- CSTR
-  private void init( String nm, int id, int sid, Cave3DSurvey survey, int fl, String cmt )
+  private void init( String nm, int id, int sid, int snr, Cave3DSurvey survey, int fl, String cmt )
   {
     setName( nm );
-    mId     = id;
-    mSid    = sid;
-    mSurvey = survey;
+    mId       = id;
+    mSurvey   = survey;
+    mSurveyId = sid;
+    mSurveyNr = snr;
     flag    = fl;
     comment = cmt;
     pathlength = Float.MAX_VALUE;

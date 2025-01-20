@@ -20,6 +20,7 @@ import java.nio.ShortBuffer;
 
 class DataBuffer
 {
+  public final static int BYTE  = 1;
   public final static int SHORT = 2;
   public final static int FLOAT = 4;
 
@@ -54,6 +55,9 @@ class DataBuffer
    * @param cap      capacity
    */
   static DataBuffer createShortBuffer( int cap ) { return createDataBuffer( SHORT, cap, cap ); }
+
+  static DataBuffer createByteBuffer( int cap, int delta ) { return createDataBuffer( BYTE, cap, delta ); }
+  static DataBuffer createByteBuffer( int cap ) { return createDataBuffer( BYTE, cap, cap ); }
 
   /** #return the underlying buffer as bytes
    */
@@ -150,6 +154,34 @@ class DataBuffer
     return null;
   }
 
+  /** @return a short data buffer of given size
+   * @param count   number of shorts in the buffer
+   */ 
+  static ShortBuffer getShortBuffer( int count )
+  {
+    try {
+      DataBuffer db = new DataBuffer( SHORT, count * 2, count * 2 ); // 2 bytes / short
+      return db.mData.asShortBuffer();
+    } catch ( OutOfMemoryError e ) {
+      TDLog.e("Out of memory [0]");
+    }
+    return null;
+  }
+
+  // /** @return a byte data buffer of given size
+  //  * @param count   number of bytes in the buffer
+  //  */ 
+  // static ByteBuffer getByteBuffer( int count )
+  // {
+  //   try {
+  //     DataBuffer db = new DataBuffer( BYTE, count * 1, count * 1 ); // 1 bytes / byte
+  //     return db.mData.asyteBuffer();
+  //   } catch ( OutOfMemoryError e ) {
+  //     TDLog.e("Out of memory [0]");
+  //   }
+  //   return null;
+  // }
+
   // ----------------------------------------------------------------
 
   /** create a data buffer
@@ -192,7 +224,7 @@ class DataBuffer
   {
     mCapacity = cap;
     mDelta    = delta;
-    mPos    = 0;
+    mPos      = 0;
     mType     = type;
     mData = ByteBuffer.allocateDirect( mCapacity );
     mData.order( ByteOrder.nativeOrder() );

@@ -43,6 +43,7 @@ class GL
   final static String aDColor    = "aDColor";
   final static String aTexCoord  = "aTexCoord";
   final static String aDelta     = "aDelta";
+  final static String aVisible   = "aVisible";
 
   final static String uColorMode = "uColorMode";
   final static String uColor     = "uColor";

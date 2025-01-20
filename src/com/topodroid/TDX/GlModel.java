@@ -352,6 +352,7 @@ public class GlModel
       // glLegsD.hideOrShow( visible );
       // glLegsC.hideOrShow( visible );
       glLegs.hideOrShow( visible );
+      glNames.hideOrShow( visible );
     }
   }
 
@@ -1028,10 +1029,11 @@ public class GlModel
     // splays.logMinMax();
 
     for ( Cave3DStation st : parser.getStations() ) {
+      int survey_nr = st.getSurveyNr();
       String name = st.getShortName();
       if ( name != null && name.length() > 0 && ( ! name.equals("-") ) && ( ! name.equals(".") ) ) {
         // TDLog.v("Model name add " + st.short_name + " " + st.name );
-        names.addName( st, st.getShortName(), st.getFullName(), mXmed, mYmed, mZmed );
+        names.addName( st, survey_nr, st.getShortName(), st.getFullName(), mXmed, mYmed, mZmed );
       }
     }
     // names.logMinMax();
