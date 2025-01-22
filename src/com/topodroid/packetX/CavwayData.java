@@ -68,7 +68,7 @@ public class CavwayData extends MemoryData
   {
     System.arraycopy( b, 0, data, 0, SIZE );
     setType( b );
-    TDLog.v("CVWY data set data - type " + mType + String.format(" %02x %02x", b[0], b[1]) );
+    // TDLog.v("CVWY data set data - type " + mType + String.format(" %02x %02x", b[0], b[1]) );
   }
 
   public byte[] getData() { return data; }
@@ -240,6 +240,17 @@ public class CavwayData extends MemoryData
     return sb.toString();
   }      
 
+
+  // DEBUG
+  // public void dumpHexString()
+  // {
+  //   for ( int k = 0; k+16 <= SIZE; k += 16 ) {
+  //     StringBuilder sb = new StringBuilder();
+  //     sb.append( "   " );
+  //     for ( int h=0; h<16; ++h ) sb.append( String.format("%02x", data[k+h] ) );
+  //     TDLog.v( sb.toString() );
+  //   }
+  // }
    
     
 

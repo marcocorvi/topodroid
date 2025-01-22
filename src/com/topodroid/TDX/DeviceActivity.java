@@ -810,7 +810,7 @@ public class DeviceActivity extends Activity
         TDToast.makeBad( R.string.no_device_address );
       } else {
         enableButtons( false );
-        new CalibReadTask( this, mApp, CalibReadTask.PARENT_DEVICE, false ).execute(); // TODO TWO_SENSORS
+        new CalibReadTask( this, mApp, CalibReadTask.PARENT_DEVICE, TDInstance.isDeviceTwoSensors() ).execute();
       }
 
     } else if ( k < mNrButton1 &&  b == mButton1[k++] ) { // DISTOX MEMORY TDLevel.overAdvanced

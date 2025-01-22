@@ -60,7 +60,7 @@ public class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
   @Override
   protected Boolean doInBackground(Void... v)
   {
-    TDLog.v("Calib Read Task");
+    TDLog.v("Calib Read Task - two sensors " + mTwoSensors + " coeff length " + mCoeff.length );
     if ( mApp.get() == null ) return false;
     boolean ret = mApp.get().readCalibCoeff( mCoeff, mTwoSensors );
     return ret;

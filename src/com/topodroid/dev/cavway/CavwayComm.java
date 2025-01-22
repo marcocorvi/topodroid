@@ -78,6 +78,10 @@ public class CavwayComm extends TopoDroidComm
   final static int DATA_PRIM = 1;   // same as Bric DATA_PRIM
   final static int DATA_QUIT = -1;  // same as Bric 
 
+  private final static int READ_NONE   = 0;
+  private final static int READ_MEMORY = 1;
+  // private final static int READ_COEFFS = 2;
+
   private static final int BYTE_PER_DATA  = CavwayData.SIZE;
 
   private ConcurrentLinkedQueue< BleOperation > mOps;
@@ -95,7 +99,7 @@ public class CavwayComm extends TopoDroidComm
   //private boolean mWriteInitialized = false;
   private boolean mReconnect = false;
   private boolean mSkipNotify = false;
-  private boolean mReadingMemory = false;
+  private int mReadingMemory = READ_NONE; // 0 none; 1 memory; 2 coeffs
 
   private int mDataType;
   private int mPacketType;  // type of the last incoming packet that has been read
@@ -225,9 +229,13 @@ public class CavwayComm extends TopoDroidComm
     return mApp.isDownloading() || mSkipNotify;
   }
 
-  boolean isReadingMemory() { return mReadingMemory; }
+  /** @return true if the communication is reading from memory
+   */
+  boolean isReadingMemory() { return mReadingMemory == READ_MEMORY; }
 
-  // void clearReadingMemory() { mReadingMemory = false; }
+  // boolean isReadingCoeffs() { return mReadingMemory == READ_COEFFS; }
+
+  // void clearReadingMemory() { mReadingMemory = READ_NONE; }
 
   /* terminate the consumer thread - put a "quit" buffer on the queue
    * @note this method has still to be used
@@ -466,7 +474,7 @@ public class CavwayComm extends TopoDroidComm
       resetTimer();
     } else if ( uuid_str.equals( CavwayConst.CAVWAY_CHRT_WRITE_UUID_STR ) ) {
       if ( LOG ) TDLog.v( TAG + "changed write chrt");
-      TDLog.v( TAG + "changed write chrt " + byteArray2String( chrt.getValue() ) );
+      // TDLog.v( TAG + "changed write chrt " + byteArray2String( chrt.getValue() ) );
     } else {
       TDLog.t( TAG + "changed unknown chrt" );
     }
@@ -894,7 +902,7 @@ public class CavwayComm extends TopoDroidComm
    */
   public byte[] readMemory( int addr, int len )
   {
-    TDLog.v( TAG + "read memory " + addr + " " + len  );
+    // TDLog.v( TAG + "read memory " + addr + " " + len  );
     if ( len < 0 || len > 124 ) return null;
     byte[] cmd = new byte[4];
     cmd[0] = 0x3d;
@@ -1016,13 +1024,14 @@ public class CavwayComm extends TopoDroidComm
 
   /** 0x38: start reading one data from cavway memory
    * @param addr memory address
+   * @param what what type of memory is read: data, coeff
    * @return true if success
-   * @note when this is entered mReadingMemory is false
+   * @note when this is entered mReadingMemory is READ_NONE
    */
-  public boolean readOneMemory( int addr )
+  private boolean readOneMemory( int addr, int what )
   {
     // TDLog.v( TAG + "read one memory. index " + addr + " set READING flag" );
-    syncSetReadingMemory();
+    syncSetReadingMemory( what );
     byte[] cmd = new byte[4];
     cmd[0] = 0x3d; // command 0x3d is used for data reading
     cmd[1] = (byte)(addr & 0xFF);
@@ -1039,6 +1048,10 @@ public class CavwayComm extends TopoDroidComm
     // }
   }
 
+  /** handle the reading of one memory data
+   * @param res_buf  buffer result of the reading
+   * @return true if success
+   */
   boolean handleOneMemory( byte[] res_buf )
   {
     boolean ret = false;
@@ -1046,27 +1059,38 @@ public class CavwayComm extends TopoDroidComm
       TDLog.e( TAG + "handle memory: FAILURE - index " + mMemoryIndex );
       syncClearReadingMemory();
     } else {
-      // TDLog.v( TAG + "handle memory - index " + mMemoryIndex );
-      final CavwayData result = new CavwayData( mMemoryIndex );
-      result.setData( res_buf );
-      if ( mMemory != null ) {
-        // TDLog.v( TAG + "  add to MEMORY" );
-        mMemory.add( result );
-      }
-      if ( mMemoryDialog != null ) {
-        final int k1 = mMemoryIndex + 1;
-        (new Handler( Looper.getMainLooper() )).post( new Runnable() {
-          public void run() {
-            // TDLog.v( TAG + "handle memory run " + k1 );
-            mMemoryDialog.setIndex( k1 );
-            mMemoryDialog.appendToList( result );
-            // TDLog.v( TAG + "handle memory: clear FLAG");
-            syncClearReadingMemory();
-          }
-        } );
-      } else {
-        TDLog.v( TAG + "handle memory: null MEMORY dialog - clear FLAG");
-        syncClearReadingMemory();
+      // TDLog.v( TAG + "handle memory: result size " + res_buf.length );
+      if ( mReadingMemory == READ_MEMORY ) {
+        // TDLog.v( TAG + "handle memory - index " + mMemoryIndex );
+        final CavwayData result = new CavwayData( mMemoryIndex );
+        result.setData( res_buf );
+        if ( mMemory != null ) {
+          // TDLog.v( TAG + "  add to MEMORY" );
+          mMemory.add( result );
+        }
+        if ( mMemoryDialog != null ) {
+          final int k1 = mMemoryIndex + 1;
+          (new Handler( Looper.getMainLooper() )).post( new Runnable() {
+            public void run() {
+              // TDLog.v( TAG + "handle memory run " + k1 );
+              mMemoryDialog.setIndex( k1 );
+              mMemoryDialog.appendToList( result );
+              // TDLog.v( TAG + "handle memory: clear FLAG");
+              syncClearReadingMemory();
+            }
+          } );
+        } else {
+          TDLog.v( TAG + "handle memory: null MEMORY dialog - clear FLAG");
+          syncClearReadingMemory();
+        }
+      // } else if (mReadingMemory == READ_COEFFS ) { // calib coeffs
+      //   // TDLog.v( TAG + "handle memory coeff: ");
+      //   final CavwayData result = new CavwayData( -1 );
+      //   result.setData( res_buf );
+      //   if ( mMemory != null ) {
+      //     mMemory.add( result );
+      //   }
+      //   syncClearReadingMemory();
       }
       ret = true;
     }
@@ -1079,18 +1103,20 @@ public class CavwayComm extends TopoDroidComm
   {
     synchronized (mNewDataFlag) {
       // TDLog.v( TAG + "clear READING flag");
-      mReadingMemory = false;
+      mReadingMemory = READ_NONE;
       mNewDataFlag.notifyAll();
     }
   }
 
   /** set reading-flag to true
+   * @param what what memory is read
    */
-  void syncSetReadingMemory()
+  void syncSetReadingMemory( int what )
   {
+    // if ( what == READ_NONE ) return;
     synchronized (mNewDataFlag) {
       // TDLog.v( TAG + "set READING flag");
-      mReadingMemory = true;
+      mReadingMemory = what;
       // mNewDataFlag.notifyAll(); // nobody waits on flag == false
     }
   }
@@ -1100,12 +1126,13 @@ public class CavwayComm extends TopoDroidComm
   void syncWaitOnReadingMemory( )
   {
     synchronized (mNewDataFlag) {
-      while ( mReadingMemory ) {
+      while ( mReadingMemory > READ_NONE ) {
         syncWait( 1000, "waiting to read mmory" );
       }
     }
   }
 
+  // memory reading struct and pointers
   private ArrayList< CavwayData > mMemory = null;
   private CavwayMemoryDialog mMemoryDialog = null;
   private int mMemoryIndex = 0;
@@ -1127,7 +1154,7 @@ public class CavwayComm extends TopoDroidComm
     for ( int idx = 0; idx < number; ++idx ) {
       // TDLog.v( TAG + "set memory index " + idx );
       mMemoryIndex = idx;
-      if ( ! readOneMemory( idx ) ) { // write failure
+      if ( ! readOneMemory( idx, READ_MEMORY ) ) { // write failure
         break;
       }
       syncWaitOnReadingMemory();
@@ -1265,7 +1292,7 @@ public class CavwayComm extends TopoDroidComm
 
   /** read the calibration coeff from the device
    * @param address   device address
-   * @param coeff     array of CavwayDetails.NR_COEFF calibration coeffs (filled by the read)
+   * @param coeff     array of CavwayDetails.COEFF_SIZE calibration coeffs (filled by the read)
    * @param second    whether device has second sensor set (not used)
    * @return true if success
    * 
@@ -1279,26 +1306,38 @@ public class CavwayComm extends TopoDroidComm
     // TDLog.v( TAG + "read coeff " + address );
     if ( coeff == null ) return false;
     int  len  = coeff.length;
-    if ( len > CavwayDetails.NR_COEFF ) len = CavwayDetails.NR_COEFF; // FIXME force max length of calib coeffs
+    if ( len > CavwayDetails.COEFF_SIZE ) len = CavwayDetails.COEFF_SIZE; // FIXME force max length of calib coeffs
     if ( ! tryConnectDevice( address, null, 0 ) ) return false;
-    byte[] coeff_tmp = readMemory( CavwayDetails.COEFF_ADDRESS, CavwayDetails.NR_COEFF ); // 20230118 local var "coeff_tmp"
+
+    boolean ret = true;
+    // mMemory = new ArrayList< CavwayData >();
+    for ( int k = 0; k < 2; ++ k ) {
+      int addr = CavwayDetails.COEFF_ADDRESS + k * 64;
+      // TDLog.t( TAG + "read Cavway memory ... " + addr );
+      // syncSetReadingMemory( READ_COEFFS ); // TODO use syncSet-syncWait ???
+      byte[] coeff_tmp = readMemory( addr, 64 /* CavwayDetails.COEFF_SIZE */ );
+      // CavwayData result = new CavwayData( -1 );
+      // result.setData( coeff_tmp );
+      // // result.dumpHexString();
+      // mMemory.add( result );
+      // // syncWaitOnReadingMemory();
+      if ( coeff_tmp.length >= 52 ) {
+        // TDLog.v("memory size " + mMemory.size() + " copying coeff-set " + k );
+        System.arraycopy( coeff_tmp, 0, coeff, k*52, 52 /* CavwayDetails.COEFF_LEN */ );
+      } else {
+        TDLog.v("coeff length " +  coeff_tmp.length + " too short" );
+        ret = false;
+        break;
+      }
+    }
     disconnectDevice();
-    if ( coeff_tmp == null ) {
-      TDLog.v("read null coeff");
-      return false;
-    }
-    if ( coeff_tmp.length != CavwayDetails.NR_COEFF ) {
-      TDLog.v("read " + coeff_tmp.length + " coeff instead of " + CavwayDetails.NR_COEFF );
-      return false;
-    }
-    System.arraycopy( coeff_tmp, 0, coeff, 0, CavwayDetails.NR_COEFF );
-    // for(int i = 0;i < CavwayDetails.NR_COEFF;i++) coeff[i] = coeff_tmp[i];
-    return true;
+    // mMemory = null;
+    return ret;
   }
 
   /** write the calibration coeff to the device
    * @param address   device address
-   * @param coeff     array of CavwayDetails.NR_COEFF calibration coeffs
+   * @param coeff     array of CavwayDetails.COEFF_SIZE calibration coeffs
    * @param second    whether second sensor set
    * @return true if success
    */
@@ -1311,7 +1350,7 @@ public class CavwayComm extends TopoDroidComm
     if( ! tryConnectDevice( address, null, 0 )) return false;
     int k = 0;
     int addr = 0x8010; // FIXME the addr for the second set
-    boolean ret = writeMemory(addr, coeff, CavwayDetails.NR_COEFF);
+    boolean ret = writeMemory(addr, coeff, CavwayDetails.COEFF_SIZE);
     disconnectDevice();
     return ret;
   }
@@ -1703,12 +1742,14 @@ public class CavwayComm extends TopoDroidComm
     return bt_dev.getBondState();
   }
 
-  private String byteArray2String( byte[] b )
-  {
-    StringBuilder sb = new StringBuilder();
-    for (int k=0; k < b.length; ++k ) sb.append( String.format("%02x ", b[k] ) );
-    return sb.toString();
-  }
+  // /** debug 
+  //  */
+  // private String byteArray2String( byte[] b )
+  // {
+  //   StringBuilder sb = new StringBuilder();
+  //   for (int k=0; k < b.length; ++k ) sb.append( String.format("%02x ", b[k] ) );
+  //   return sb.toString();
+  // }
 }
 
 

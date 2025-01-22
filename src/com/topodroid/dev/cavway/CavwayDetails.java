@@ -20,10 +20,20 @@ public class CavwayDetails
 {
   static final int MAX_INDEX_XBLE = 1064;
 
-  public final static int COEFF_ADDRESS    = 0x9128; // FIXME put the correct address
+  public final static int COEFF_ADDRESS    = 0x9080; // FIXME put the correct address
   public final static int FIRMWARE_ADDRESS = 0xe000;
   public final static int HARDWARE_ADDRESS = 0xe004;
   //public final static int STATUS_ADDRESS   = 0xC044;
+
+  /** the coeffs are stored in 128 bytes stating at position 0x9080
+   * the coeffs of the first set are at offset 0
+   * the coeffs of the second set are at offset 64
+   */
+  final static int COEFF_SIZE = 128; // size of coeff buffer
+  final static int COEFF_OFF1 =   0; // offset of first coeffs
+  final static int COEFF_OFF2 =  64; // offset of second coeffs
+  final static int COEFF_LEN  =  52; // length of each coeffs
+  
 
   public static int boundNumber( int nr )
   {
@@ -52,7 +62,6 @@ public class CavwayDetails
   static boolean isCalibMode( byte b ) { return ( ( b & CALIB_BIT ) == CALIB_BIT ); }
   static boolean isNotCalibMode( byte b ) { return ( ( b & CALIB_BIT ) == 0 ); }
 
-  final static int NR_COEFF = 128; // byte-length of the array of calib coeffs
 
   private static int getCoeff( byte[] coeff, int pos )
   {

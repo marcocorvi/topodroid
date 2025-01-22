@@ -1207,7 +1207,7 @@ public class GMActivity extends Activity
 
     } else if ( TDLevel.overNormal && b == mButton1[BTN_READ] ) { // READ
       enableButtons( false );
-      new CalibReadTask( this, mApp, CalibReadTask.PARENT_GM, false ).execute(); // TODO TWO_SENSORS
+      new CalibReadTask( this, mApp, CalibReadTask.PARENT_GM, TDInstance.isDeviceTwoSensors() ).execute(); // TODO TWO_SENSORS
 
     } else if (TDLevel.overNormal &&  b == mButton1[BTN_WRITE] ) { // WRITE
       // if ( mEnableWrite ) {

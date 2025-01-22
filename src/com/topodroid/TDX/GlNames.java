@@ -536,26 +536,27 @@ public class GlNames extends GlShape
   // ---------------------------------------------------------------
   // FEEDBACK
 
-  /** check if ican highlight a station 
+  /** check if i can highlight a station 
    * @param idx       station index
    * @param highlight whether to mark the station highlight
    * @return fullname of highlighted station or null
+   * @note this is used also to get a station name for measuring
    */ 
   private String checkName( int idx, boolean highlight )
   {
-    // TDLog.v(sb.toString() + " min " + name + " " + dmin );
-    if ( idx < 0 ) {
+    // TDLog.v("GL check name: idx " + idx + " highlight " + highlight );
+    if ( idx < 0 ) { 
       if ( highlight ) setHighlight( -1 );
       return null;
     }
-    if ( highlight ) {
-      if ( visibilityBuffer == null || visibilityBuffer.get(6*idx) > 0.0f) {
-        setHighlight( idx );
-        GlName name = mNames.get( idx );
-        return name.fullname;
-      }
+    if ( visibilityBuffer == null || visibilityBuffer.get(6*idx) < 0.5f) {
+      return null;
     }
-    return null;
+    if ( highlight ) {
+      setHighlight( idx );
+    }
+    GlName name = mNames.get( idx );
+    return name.fullname;
   }
 
   /** check if a station in close to the point (x,y) on the display
