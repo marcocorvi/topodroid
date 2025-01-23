@@ -314,7 +314,7 @@ public class GMActivity extends Activity
       float maxErr  = mCalibration.MaxError();
       float dip     = mCalibration.Dip();
       float roll    = mCalibration.Roll();
-      byte[] coeff  = mCalibration.GetCoeff(); // TWO_SENSORS this is 52 byte long
+      byte[] coeff  = mCalibration.GetCoeff(); // TWO_SENSORS this is 52 bytes, for the first sensor-set
 
       // TWO_SENSORS 
       // so far errors and other results are the "average/max" of the two calibrations 
@@ -330,8 +330,7 @@ public class GMActivity extends Activity
         float[] errors2 = mCalibration2.Errors();
         for ( int k = 0; k < list.size(); ++k ) errors[k] = ( errors[k] + errors2[k] ) / 2;
         // TODO could use discrepancies ?
-        // TODO update coeff of second calibration in the DB and residual errors
-        byte[] coeff2 = mCalibration2.GetCoeff();
+        byte[] coeff2 = mCalibration2.GetCoeff(); // 52 bytes for the second sensor-set
         if ( mCalibration2.DeltaBH() > deltaBH ) deltaBH = mCalibration2.DeltaBH();
         if ( mCalibration2.Delta()   > delta   ) delta   = mCalibration2.Delta();
         if ( mCalibration2.Delta2()  > delta2  ) delta2  = mCalibration2.Delta2();
@@ -352,7 +351,7 @@ public class GMActivity extends Activity
         // cb.setError( errors[k] );
       }
 
-      // FIXME TWO_SENSORS should keep separated the two calibs results
+      // FIXME TWO_SENSORS should keep separated the two calibs results ?
       //                   this means seven new columnsto the calibs table
       mApp_mDData.updateCalibError( cid, deltaBH, delta, delta2, maxErr, dip, roll, iter );
 
@@ -369,6 +368,7 @@ public class GMActivity extends Activity
    * @param name   name of the other calibration
    * *-0 vars are computed on list0 using calib1, ie, the other calib on the data of this calib
    * *-1 vars are computed on list1 using calib0, iw, this calib on the data of the other calib
+   * FIXME this must be upgraded to TWO_SENSORS
    */
   public void validateCalibration( String name )
   {
@@ -1019,10 +1019,10 @@ public class GMActivity extends Activity
   public boolean isActivityFinishing() { return this.isFinishing(); }
 
   /** display calibration coeffs
-   * @param coeffs ...
+   * @param coeffs   calibration coeff array (either 52 or 104 bytes)
    */
   public void displayCoeff( byte[] coeffs )
-  { // TWO_SENSORS null coeff 
+  { 
     (new CalibCoeffDialog( this, coeffs ) ).show();
   }
 
@@ -1207,7 +1207,7 @@ public class GMActivity extends Activity
 
     } else if ( TDLevel.overNormal && b == mButton1[BTN_READ] ) { // READ
       enableButtons( false );
-      new CalibReadTask( this, mApp, CalibReadTask.PARENT_GM, TDInstance.isDeviceTwoSensors() ).execute(); // TODO TWO_SENSORS
+      new CalibReadTask( this, mApp, CalibReadTask.PARENT_GM, TDInstance.isDeviceTwoSensors() ).execute(); 
 
     } else if (TDLevel.overNormal &&  b == mButton1[BTN_WRITE] ) { // WRITE
       // if ( mEnableWrite ) {
@@ -1223,11 +1223,13 @@ public class GMActivity extends Activity
             float delta = mCalibration.Delta();
             if ( mTwoSensors ) {
               if ( mCalibration2.Delta() > delta ) delta = mCalibration2.Delta();
-              uploadCoefficients( delta, coeff, true, b, false );
+              byte[] coeff12 = new byte[104];
+              System.arraycopy( coeff, 0, coeff12, 0, 52 );
               coeff = mCalibration2.GetCoeff();
-              uploadCoefficients( 0, coeff, true, b, true );
+              System.arraycopy( coeff, 0, coeff12, 52, 52 );
+              uploadCoefficients( delta, coeff, true, b ); // 20250123 simplified 
             } else {
-              uploadCoefficients( delta, coeff, true, b, false );
+              uploadCoefficients( delta, coeff, true, b );
             }
             resetTitle( );
           }
@@ -1264,14 +1266,14 @@ public class GMActivity extends Activity
     }
   }
 
+  // 20250123 TWO_SENSORS simplified with a single call to mApp.uploadCalibCoeff
   /** upload the calibration coeffs
    * @param delta   maximum calibration data angle error
    * @param coeff   calibration coefficients
    * @param mode    ...
    * @param b       ...
-   * @param second  whether second sensor set
    */
-  public void uploadCoefficients( float delta, final byte[] coeff, final boolean mode, final Button b, final boolean second )
+  public void uploadCoefficients( float delta, final byte[] coeff, final boolean mode, final Button b )
   {
     String warning = null;
     // if ( warning == null ) { // check coverage
@@ -1288,11 +1290,11 @@ public class GMActivity extends Activity
       TopoDroidAlertDialog.makeAlert( this, getResources(), warning,
         new DialogInterface.OnClickListener() {
           @Override public void onClick( DialogInterface d, int btn ) {
-            mApp.uploadCalibCoeff( coeff, mode, b, second ); // TWO_SENSORS
+            mApp.uploadCalibCoeff( coeff, mode, b );
           }
         } );
     } else {
-      mApp.uploadCalibCoeff( coeff, mode, b, second );
+      mApp.uploadCalibCoeff( coeff, mode, b );
     }
   }
 

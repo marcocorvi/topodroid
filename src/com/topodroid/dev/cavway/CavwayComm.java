@@ -1283,7 +1283,6 @@ public class CavwayComm extends TopoDroidComm
   /** read the calibration coeff from the device
    * @param address   device address
    * @param coeff     array of CavwayDetails.COEFF_SIZE calibration coeffs (filled by the read)
-   * @param second    whether device has second sensor set (not used)
    * @return true if success
    * 
    * Cavway has 48 2-byte coeffiients stored as
@@ -1291,26 +1290,17 @@ public class CavwayComm extends TopoDroidComm
    * BG2 BM2 AG2x AG2y AG2z AM2x AM2y AM2z
    */
   @Override
-  public boolean readCoeff( String address, byte[] coeff, boolean second )
+  public boolean readCoeff( String address, byte[] coeff ) // 20250123 dropped second
   {
     // TDLog.v( TAG + "read coeff " + address );
     if ( coeff == null ) return false;
     int  len  = coeff.length;
     if ( len > CavwayDetails.COEFF_SIZE ) len = CavwayDetails.COEFF_SIZE; // FIXME force max length of calib coeffs
     if ( ! tryConnectDevice( address, null, 0 ) ) return false;
-
     boolean ret = true;
-    // mMemory = new ArrayList< CavwayData >();
     for ( int k = 0; k < 2; ++ k ) {
       int addr = CavwayDetails.COEFF_ADDRESS + k * 64;
-      // TDLog.t( TAG + "read Cavway memory ... " + addr );
-      // syncSetReadingMemory( READ_COEFFS ); // TODO use syncSet-syncWait ???
       byte[] coeff_tmp = readMemory( addr, 64 /* CavwayDetails.COEFF_SIZE */ );
-      // CavwayData result = new CavwayData( -1 );
-      // result.setData( coeff_tmp );
-      // // result.dumpHexString();
-      // mMemory.add( result );
-      // // syncWaitOnReadingMemory();
       if ( coeff_tmp.length >= 52 ) {
         // TDLog.v("memory size " + mMemory.size() + " copying coeff-set " + k );
         System.arraycopy( coeff_tmp, 0, coeff, k*52, 52 /* CavwayDetails.COEFF_LEN */ );
@@ -1328,19 +1318,26 @@ public class CavwayComm extends TopoDroidComm
   /** write the calibration coeff to the device
    * @param address   device address
    * @param coeff     array of CavwayDetails.COEFF_SIZE calibration coeffs
-   * @param second    whether second sensor set
    * @return true if success
    */
   @Override
-  public boolean writeCoeff( String address, byte[] coeff, boolean second )
+  public boolean writeCoeff( String address, byte[] coeff ) // 20250123 dropped second
   {
     // TDLog.v( TAG + "write coeff " + address );
     if ( coeff == null ) return false;
     int  len  = coeff.length;
+    if ( len != 104 ) return false;
     if( ! tryConnectDevice( address, null, 0 )) return false;
-    int k = 0;
-    int addr = 0x8010; // FIXME the addr for the second set
-    boolean ret = writeMemory(addr, coeff, CavwayDetails.COEFF_SIZE);
+    boolean ret = true;
+    for ( int k = 0; k < 2; ++k ) {
+      byte[] buf = new byte[64];
+      for ( int j=52; j<64; ++j ) buf[j] = 0;
+      System.arraycopy( coeff, 0+k*52, buf, 0, 52 );
+      if ( ! writeMemory( 0x9080 + k * 64, buf, 64 /* CavwayDetails.COEFF_SIZE */ ) ) {
+        ret = false;
+        break;
+      }
+    }
     disconnectDevice();
     return ret;
   }

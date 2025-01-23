@@ -1274,25 +1274,26 @@ public class DeviceActivity extends Activity
       byte low  = (byte)( one & 0xff );
       byte high = (byte)((one >> 8) & 0xff );
       byte zeroNL = CalibAlgo.floatToByteNL( 0 );
-      byte[] coeff = new byte[52];
-      for ( int k=0; k<52; ++k ) coeff[k] = (byte)0x00;
-      coeff[ 2] = low;
-      coeff[ 3] = high;
-      coeff[12] = low;
-      coeff[13] = high;
-      coeff[22] = low;
-      coeff[23] = high;
-      coeff[26] = low;
-      coeff[27] = high;
-      coeff[36] = low;
-      coeff[37] = high;
-      coeff[46] = low;
-      coeff[47] = high;
-      coeff[48] = zeroNL;
-      coeff[49] = zeroNL;
-      coeff[50] = zeroNL;
-      coeff[51] = zeroNL;
-      mApp.uploadCalibCoeff( coeff, false, b, false ); // TODO TWO_SENSORS
+      int len = TDInstance.isDeviceTwoSensors() ? 104 : 52; // 20250123 updated for TWO_SENOSRS
+      byte[] coeff = new byte[ len ];
+      for ( int k=0; k < len ; ++k ) coeff[k] = (byte)0x00;
+      coeff[ 2] = low;    coeff[ 3] = high;
+      coeff[12] = low;    coeff[13] = high;
+      coeff[22] = low;    coeff[23] = high;
+      coeff[26] = low;    coeff[27] = high;
+      coeff[36] = low;    coeff[37] = high;
+      coeff[46] = low;    coeff[47] = high;
+      coeff[48] = zeroNL; coeff[49] = zeroNL; coeff[50] = zeroNL; coeff[51] = zeroNL;
+      if ( len > 52 ) {
+        coeff[52+ 2] = low;    coeff[52+ 3] = high;
+        coeff[52+12] = low;    coeff[52+13] = high;
+        coeff[52+22] = low;    coeff[52+23] = high;
+        coeff[52+26] = low;    coeff[52+27] = high;
+        coeff[52+36] = low;    coeff[52+37] = high;
+        coeff[52+46] = low;    coeff[52+47] = high;
+        coeff[52+48] = zeroNL; coeff[52+49] = zeroNL; coeff[52+50] = zeroNL; coeff[52+51] = zeroNL;
+      }
+      mApp.uploadCalibCoeff( coeff, false, b ); 
     }
   }
 

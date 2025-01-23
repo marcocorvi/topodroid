@@ -1291,10 +1291,9 @@ public class TopoDroidApp extends Application
    * @param coeff    calibration coefficients
    * @param check    whether to check that the calibration matches the device 
    * @param b        "write" button - to update its state at the end
-   * @param second   whether second sensor set
    * @note called by GMActivity and by CalibCoeffDialog and DeviceActivity (to reset coeffs)
    */
-  public void uploadCalibCoeff( byte[] coeff, boolean check, Button b, boolean second )
+  public void uploadCalibCoeff( byte[] coeff, boolean check, Button b ) // 20250123 dropped second
   {
     // TODO this writeCoeff should be run in an AsyncTask
     if ( b != null ) b.setEnabled( false );
@@ -1302,13 +1301,13 @@ public class TopoDroidApp extends Application
       TDToast.makeBad( R.string.no_device_address );
     } else if ( check && ! checkCalibrationDeviceMatch() ) {
       TDToast.makeBad( R.string.calib_device_mismatch );
-    } else if ( ! mComm.writeCoeff( TDInstance.deviceAddress(), coeff, second ) ) {
+    } else if ( ! mComm.writeCoeff( TDInstance.deviceAddress(), coeff ) ) {
       TDToast.makeBad( R.string.write_failed );
     } else {
       // write OK: read coeff back and check they were written correctly
       int len = coeff.length;
       byte[] coeff2 = new byte[ len ];
-      if ( ! mComm.readCoeff( TDInstance.deviceAddress(), coeff2, second ) ) {
+      if ( ! mComm.readCoeff( TDInstance.deviceAddress(), coeff2 ) ) {
         TDToast.makeBad( R.string.read_failed );
       } else {
         boolean success = true;
@@ -1330,18 +1329,17 @@ public class TopoDroidApp extends Application
   }
 
   /** read the calibration coefficients from the DistoX
-   * @param coeff    calibration coefficients [output]
-   * @param second   second sensor set (? not used)
+   * @param coeff    calibration coefficients [filled in output]
    * @return true if successful
    * @note called by CalibReadTask.onPostExecute
    */
-  public boolean readCalibCoeff( byte[] coeff, boolean second )
+  public boolean readCalibCoeff( byte[] coeff ) // 20250123 droped second
   {
     if ( mComm == null || TDInstance.getDeviceA() == null ) {
       TDLog.e("No comm or no device");
       return false;
     }
-    boolean ret = mComm.readCoeff( TDInstance.deviceAddress(), coeff, second );
+    boolean ret = mComm.readCoeff( TDInstance.deviceAddress(), coeff );
     resetComm();
     return ret;
   }

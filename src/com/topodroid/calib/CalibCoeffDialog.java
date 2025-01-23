@@ -57,7 +57,7 @@ public class CalibCoeffDialog extends MyDialog
   private String iter0;
   private String dip0;
   private String roll0; // FIXME ROLL_DIFFERENCE
-  private final byte[] mCoeff; // caibration coeffs, 52 or 104 bytes
+  private final byte[]  mCoeff; // caibration coeffs, 52 or 104 bytes
   private final float[] mErrors;
   private float   mDelta;
   private boolean mTwoSensors = false;
@@ -77,16 +77,15 @@ public class CalibCoeffDialog extends MyDialog
   private TextView textAMz;
   private TextView textNL;
 
-  // TWO_SENSORS coeff2 is null if there is only one sensor set
   /** cstr
    * @param context    context
-   * @param coeffs     coefficients byte array 
+   * @param coeffs     coefficients byte array, either 52 bytes or 104 bytes
    */
   public CalibCoeffDialog( Context context, byte[] coeffs )
   {
     super( context, null, R.string.CalibCoeffDialog ); // null app
     mParent = null;
-    mCoeff  = null;
+    mCoeff  = null; // prevent dialog from coeff-upload
     mErrors = null;
     mWithResult = false;
     makeVectorsAndMatricex( coeffs );
@@ -305,7 +304,7 @@ public class CalibCoeffDialog extends MyDialog
       } else {
         GMActivity parent = mParent.get();
         if ( parent != null ) {
-          if ( mCoeff != null ) parent.uploadCoefficients( mDelta, mCoeff, true, mButtonWrite, false );
+          if ( mCoeff != null ) parent.uploadCoefficients( mDelta, mCoeff, true, mButtonWrite ); // 20250123 dropped false (second)
         } else {
           TDLog.e("Calib Coeff Dialog null parent");
         }

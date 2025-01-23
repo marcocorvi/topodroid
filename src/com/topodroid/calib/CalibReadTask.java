@@ -62,7 +62,7 @@ public class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
   {
     TDLog.v("Calib Read Task - two sensors " + mTwoSensors + " coeff length " + mCoeff.length );
     if ( mApp.get() == null ) return false;
-    boolean ret = mApp.get().readCalibCoeff( mCoeff, mTwoSensors );
+    boolean ret = mApp.get().readCalibCoeff( mCoeff ); // 20250123 dropped mTwoSensors
     return ret;
   }
 

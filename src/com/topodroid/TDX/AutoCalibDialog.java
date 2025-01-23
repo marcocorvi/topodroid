@@ -286,8 +286,10 @@ public class AutoCalibDialog extends MyDialog
 
   // private final GMActivity   mParent;
   private final TopoDroidApp mApp;
-  private CalibTransform     mParentCalib;
+  private CalibTransform     mParentCalib; // FIXME TWO_SENSORS CalibTransform is single-set
   private CalibTransform     mCalib;
+
+  private int mCoeffLen; // 20250123 TWO_SENSORS
 
   private GMVector mB;
   private GMMatrix mA;
@@ -357,36 +359,43 @@ public class AutoCalibDialog extends MyDialog
     // mBTstop  = (Button) findViewById( R.id.button_stop  );
     mBTback  = (Button) findViewById( R.id.button_close );
 
-    byte[] coeff0 = new byte[ 52 ];
-    if ( ! mApp.readCalibCoeff( coeff0, false ) ) { // TWO_SENOSRS
+    mCoeffLen = TDInstance.isDeviceTwoSensors() ? 104 : 52; // 20250123 TWO_SENSORS
+    byte[] coeff0 = new byte[ mCoeffLen ];
+    if ( ! mApp.readCalibCoeff( coeff0 ) ) { 
       TDLog.v("Error: could not read coeffs");
       mBTstart.setVisibility( View.GONE );
       mBTwrite.setVisibility( View.GONE );
       // mBTstop.setVisibility( View.GONE );
     } else {
       byte[] coeff = mParentCalib.GetCoeff();
-      int diffs = 0;
-      for ( int k = 0; k < 52; ++ k ) {
-        if ( coeff[k] != coeff0[k] ) {
-          diffs ++;
-          TDLog.v("coeff " + k + " differ " + coeff[k] + " " + coeff0[k] );
+      if ( coeff.length != mCoeffLen ) { // 20250123 added test
+        TDLog.e("Auto Calib coeff length mismatch: " + coeff.length + " expected " + mCoeffLen );
+        dismiss();
+      } else {
+        int diffs = 0;
+        for ( int k = 0; k < mCoeffLen; ++ k ) {
+          if ( coeff[k] != coeff0[k] ) {
+            diffs ++;
+            TDLog.v("coeff " + k + " differ " + coeff[k] + " " + coeff0[k] );
+          }
         }
+        if ( diffs > 0 ) {
+          TDToast.make( "Diff nr " + diffs );
+        }
+
+        mCalib = new CalibTransform( coeff0, false ); // false = linear
+        // FIXME TWO_SENSORS TODO CalibTransofrm for the second-set
+
+        mB = new GMVector( mCalib.GetBG(), mCalib.GetBM() );
+        mA = new GMMatrix( mCalib.GetAG(), mCalib.GetAM() );
+        // mNL = mCalib.GetNL();
+        displayTheCoeffs();
+
+        // TDLog.v("read coeffs");
+        mBTstart.setOnClickListener( this );
+        mBTwrite.setOnClickListener( this );
+        // mBTstop.setOnClickListener( this );
       }
-      if ( diffs > 0 ) {
-        TDToast.make( "Diff nr " + diffs );
-      }
-
-      mCalib = new CalibTransform( coeff0, false );
-
-      mB = new GMVector( mCalib.GetBG(), mCalib.GetBM() );
-      mA = new GMMatrix( mCalib.GetAG(), mCalib.GetAM() );
-      // mNL = mCalib.GetNL();
-      displayTheCoeffs();
-
-      // TDLog.v("read coeffs");
-      mBTstart.setOnClickListener( this );
-      mBTwrite.setOnClickListener( this );
-      // mBTstop.setOnClickListener( this );
     }
 
     mBTback.setOnClickListener( this );
