@@ -109,7 +109,7 @@ public class CavwayComm extends TopoDroidComm
   // private int mPacketToRead = 0; // number of packet to read with laser-commands
   Thread mConsumer = null;
 
-  final Object mNewDataFlag = new Object();
+  // final Object mNewDataFlag = new Object();
   private BleQueue mQueue;
 
   boolean mThreadConsumerWorking = false;
@@ -1005,16 +1005,6 @@ public class CavwayComm extends TopoDroidComm
       return false;
     }
     syncWait( 2000, "write memory" );
-    // synchronized ( mNewDataFlag ) {
-    //   try {
-    //     long start = System.currentTimeMillis();
-    //     mNewDataFlag.wait(2000);
-    //     long millis = System.currentTimeMillis() - start;
-    //     if ( LOG ) TDLog.v( TAG + "write-memory (len 4) waited " + millis + " msec, packet type " + mPacketType );
-    //   } catch ( InterruptedException e ) {
-    //     e.printStackTrace();
-    //   }
-    // }
     if ( (mPacketType & CavwayProtocol.PACKET_REPLY) == CavwayProtocol.PACKET_REPLY ) {
       byte[] repliedbytes = ((CavwayProtocol) mProtocol).mRepliedData;
       return Arrays.equals(data,repliedbytes);
@@ -1698,28 +1688,28 @@ public class CavwayComm extends TopoDroidComm
   //   return (bisSuccess)?  buf : null;
   // }
 
-  /** synchronized wait
-   * @param msec  wait timeout [msec]
-   * @param msg   log message
-   * @return true if ok, false if interrupted
-   */
-  private boolean syncWait( long msec, String msg )
-  {
-    // TDLog.v( TAG + "sync wait " + msec );
-    synchronized ( mNewDataFlag ) {
-      try {
-        long start = System.currentTimeMillis();
-        mNewDataFlag.wait( msec );
-        long millis = System.currentTimeMillis() - start;
-        if ( LOG ) TDLog.v( TAG + "" + msg + " msec " + millis );
-        return true;
-      } catch ( InterruptedException e ) {
-        if ( LOG ) TDLog.v( TAG + "interrupted wait " + msg );
-        // e.printStackTrace();
-        return false;
-      }
-    }
-  }
+  // /** synchronized wait
+  //  * @param msec  wait timeout [msec]
+  //  * @param msg   log message
+  //  * @return true if ok, false if interrupted
+  //  */
+  // private boolean syncWait( long msec, String msg )
+  // {
+  //   // TDLog.v( TAG + "sync wait " + msec );
+  //   synchronized ( mNewDataFlag ) {
+  //     try {
+  //       long start = System.currentTimeMillis();
+  //       mNewDataFlag.wait( msec );
+  //       long millis = System.currentTimeMillis() - start;
+  //       if ( LOG ) TDLog.v( TAG + "" + msg + " msec " + millis );
+  //       return true;
+  //     } catch ( InterruptedException e ) {
+  //       if ( LOG ) TDLog.v( TAG + "interrupted wait " + msg );
+  //       // e.printStackTrace();
+  //       return false;
+  //     }
+  //   }
+  // }
 
 
   /** request a new MTU

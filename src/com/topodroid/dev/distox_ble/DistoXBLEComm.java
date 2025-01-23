@@ -97,7 +97,7 @@ public class DistoXBLEComm extends TopoDroidComm
   // private int mPacketToRead = 0; // number of packet to read with laser-commands
   Thread mConsumer = null;
 
-  final Object mNewDataFlag = new Object();
+  // final Object mNewDataFlag = new Object();
   private BleQueue mQueue;
 
   boolean mThreadConsumerWorking = false;
@@ -1536,28 +1536,28 @@ public class DistoXBLEComm extends TopoDroidComm
     return (bisSuccess)?  buf : null;
   }
 
-  /** synchronized wait
-   * @param msec  wait timeout [msec]
-   * @param msg   log message
-   * @return true if ok, false if interrupted
-   */
-  private boolean syncWait( long msec, String msg )
-  {
-    // TDLog.v("XBLE sync wait " + msec );
-    synchronized ( mNewDataFlag ) {
-      try {
-        long start = System.currentTimeMillis();
-        mNewDataFlag.wait( msec );
-        long millis = System.currentTimeMillis() - start;
-        if ( LOG ) TDLog.v("XBLE " + msg + " msec " + millis );
-        return true;
-      } catch ( InterruptedException e ) {
-        if ( LOG ) TDLog.v( "XBLE interrupted wait " + msg );
-        // e.printStackTrace();
-        return false;
-      }
-    }
-  }
+  // /** synchronized wait
+  //  * @param msec  wait timeout [msec]
+  //  * @param msg   log message
+  //  * @return true if ok, false if interrupted
+  //  */
+  // private boolean syncWait( long msec, String msg )
+  // {
+  //   // TDLog.v("XBLE sync wait " + msec );
+  //   synchronized ( mNewDataFlag ) {
+  //     try {
+  //       long start = System.currentTimeMillis();
+  //       mNewDataFlag.wait( msec );
+  //       long millis = System.currentTimeMillis() - start;
+  //       if ( LOG ) TDLog.v("XBLE " + msg + " msec " + millis );
+  //       return true;
+  //     } catch ( InterruptedException e ) {
+  //       if ( LOG ) TDLog.v( "XBLE interrupted wait " + msg );
+  //       // e.printStackTrace();
+  //       return false;
+  //     }
+  //   }
+  // }
 
   // these are the same as for X310 because the memory layout is the same
   private static final int DATA_PER_BLOCK = 56;

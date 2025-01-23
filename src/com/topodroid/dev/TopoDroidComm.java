@@ -591,4 +591,32 @@ public class TopoDroidComm
     mApp.notifyListerStatus( lister, status );
   }
 
+  // -------------------------------------------------
+  // SYNC
+
+  protected static final Object mNewDataFlag = new Object();
+
+  /** synchronized wait
+   * @param msec  wait timeout [msec]
+   * @param msg   log message
+   * @return true if ok, false if interrupted
+   */
+  protected boolean syncWait( long msec, String msg )
+  {
+    // TDLog.v( TAG + "sync wait " + msec );
+    synchronized ( mNewDataFlag ) {
+      try {
+        long start = System.currentTimeMillis();
+        mNewDataFlag.wait( msec );
+        long millis = System.currentTimeMillis() - start;
+        // TDLog.v( "SyncWait " + msg + " msec " + millis );
+        return true;
+      } catch ( InterruptedException e ) {
+        TDLog.v( "SyncWait interrupted wait is also OK: " + msg );
+        // e.printStackTrace();
+        return false;
+      }
+    }
+  }
+
 }
