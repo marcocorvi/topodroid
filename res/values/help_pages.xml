@@ -137,6 +137,7 @@
   <string name="TdmSourcesDialog" translatable="false">page_tdm_sources.htm</string>
   <string name="TdmInfoDialog" translatable="false">page_tdm_info.htm</string>
   <!-- string name="TdmViewEquatesDialog" translatable="false">page_view_equates.htm</string -->
+  <string name="TriangulationMirrorUnadjustedStationsDialog" translatable="false">page_triangulation_mirror_unadjusted_stations.htm</string>
   <string name="ExportDialogTdm" translatable="false">page_tdm_export.htm</string>
 
   <string name="DialogIco" translatable="false">page_3d_ico.htm</string>

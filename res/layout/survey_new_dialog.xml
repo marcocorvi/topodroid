@@ -87,6 +87,14 @@
       android:text="@string/datamode_diving"
     />
 
+    <CheckBox android:id="@+id/survey_calculated_azimuths"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:ems="25"
+        android:layout_height="wrap_content"
+        android:text="@string/triangulation_calculated_azimuths"
+        />
+
   </LinearLayout>
   </ScrollView>
 

@@ -59,6 +59,7 @@ class SurveyNewDialog extends MyDialog
   private EditText mEditComment;
   private CheckBox mCBxsections;
   private CheckBox mCBdatamode;
+  private CheckBox mCBCalculatedAzimuths;
 
   private MyDateSetListener mDateListener;
 
@@ -107,6 +108,8 @@ class SurveyNewDialog extends MyDialog
     mCBxsections.setChecked( TDSetting.mSharedXSections );
     mCBdatamode  = (CheckBox) findViewById(R.id.survey_datamode);
     if ( ! ( TDLevel.overExpert && TDSetting.mDivingMode ) ) mCBdatamode.setVisibility( View.GONE );
+    mCBCalculatedAzimuths = (CheckBox) findViewById(R.id.survey_calculated_azimuths);
+    if ( ! TDLevel.overExpert) mCBCalculatedAzimuths.setVisibility( View.GONE );
 
     mEditDecl.setOnFocusChangeListener( new OnFocusChangeListener() {
       @Override
@@ -273,13 +276,15 @@ class SurveyNewDialog extends MyDialog
     int datamode  = SurveyInfo.DATAMODE_NORMAL;
     if ( TDLevel.overExpert && TDSetting.mDivingMode && mCBdatamode.isChecked() ) datamode = SurveyInfo.DATAMODE_DIVING;
 
+    int calculated_azimuths = TDLevel.overExpert ? ( mCBCalculatedAzimuths.isChecked() ? 1 : 0 ) : 0;
+
     long sid = mApp.setSurveyFromName( name, datamode, true ); // save survey name: tell app to set it into the database
     if ( sid <= 0 ) {
       TDLog.e( "Failed to set survey name in DB");
       return false;
     }
     // Note TDInstance.sid == sid
-    TopoDroidApp.mData.updateSurveyInfo( TDInstance.sid, date, team, decl, comment, init_station, xsections );
+    TopoDroidApp.mData.updateSurveyInfo( TDInstance.sid, date, team, decl, comment, init_station, xsections, calculated_azimuths );
 
     if ( mOldSid >= 0L && mOldId >= 0L ) {  // SPLIT_SURVEY
       TopoDroidApp.mData.transferShots( TDInstance.sid, mOldSid, mOldId );

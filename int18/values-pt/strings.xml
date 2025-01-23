@@ -2216,4 +2216,18 @@ no campo abaixo e aperte o botão.
   <string name="help_surface_3d">Terreno</string>
   <string name="help_color_3d">Cores</string>
   <string name="help_frame_3d">Estrutura</string>
+
+  <string name="triangulation_triangulated_station">Triangulação: </string>
+  <string name="button_triangulation_mirror_station">Espelhar</string>
+  <string name="button_triangulation_unmirror_station">Desespelhar</string>
+  <string name="triangulation_axle">em torno da visada %1$s</string>
+  <string name="triangulation_reference_station">Base de referência</string>
+  <string name="triangulation_unadjusted_station">Base sem ajuste</string>
+  <string name="triangulation_calculated_azimuths">Azimutes calculados trigonometricamente (triangulação)</string>
+  <string name="triangulation_regular_azimuths">Azimutes medidos</string>
+  <string name="triangulation_unadjusted_stations_title">Bases sem ajuste</string>
+  <string name="triangulation_unadjusted_stations_explanation">As bases listadas abaixo haviam sido ajustadas antes de %1$s a base %2$s mas perderam o ajuste após:</string>
+  <string name="triangulation_keep_mirroring">continuar a %1$s base %2$s?</string>
+  <string name="triangulation_mirroring">espelhar</string>
+  <string name="triangulation_unmirroring">desespelhar</string>
 </resources>

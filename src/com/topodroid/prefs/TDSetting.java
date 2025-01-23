@@ -29,7 +29,6 @@ import com.topodroid.TDX.TDAzimuth;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.BrushManager;
-import com.topodroid.TDX.DrawingWindow;
 import com.topodroid.TDX.DistoXStationName;
 import com.topodroid.TDX.StationPolicy;
 import com.topodroid.TDX.SurveyInfo;
@@ -508,11 +507,11 @@ public class TDSetting
   // public static boolean mSplayAsDot    = false;    // draw splays as dots
 
   // ----------- LOOP CLOSURE
-  public static final int LOOP_NONE       = 0; // coincide with values in array.xml
-  public static final int LOOP_CYCLES     = 1;
-  public static final int LOOP_TRIANGLES  = 3;
-  public static final int LOOP_WEIGHTED   = 4;
-  public static final int LOOP_SELECTIVE  = 5;
+  public static final int LOOP_NONE          = 0; // coincide with values in array.xml
+  public static final int LOOP_CYCLES        = 1;
+  public static final int LOOP_TRILATERATION = 3;
+  public static final int LOOP_WEIGHTED      = 4;
+  public static final int LOOP_SELECTIVE     = 5;
   public static int mLoopClosure = LOOP_NONE;      // loop closure: 0 none, 1 normal, 3 triangles
   public static float mLoopThr = 1.0f; // selective compensation threshold [%]
   
@@ -865,7 +864,7 @@ public class TDSetting
     mLoopClosure = loop_closure;
     if ( mLoopClosure == LOOP_CYCLES || mLoopClosure == LOOP_WEIGHTED ) {
       if ( ! TDLevel.overAdvanced ) mLoopClosure = LOOP_NONE;
-    } else if ( mLoopClosure == LOOP_TRIANGLES || mLoopClosure == LOOP_SELECTIVE ) {
+    } else if ( mLoopClosure == LOOP_TRILATERATION || mLoopClosure == LOOP_SELECTIVE ) {
       if ( ! TDLevel.overExpert ) mLoopClosure = LOOP_NONE;
     }
   }

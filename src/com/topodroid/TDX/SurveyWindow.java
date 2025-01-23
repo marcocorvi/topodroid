@@ -15,7 +15,6 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
 // import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDStatus;
-import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDUtil;
 // import com.topodroid.utils.TDVersion;
@@ -72,8 +71,6 @@ import android.text.InputType;
 // import android.graphics.Bitmap;
 // import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-
-import android.net.Uri;
 // import android.net.Uri.Builder;
 
 public class SurveyWindow extends Activity
@@ -141,6 +138,7 @@ public class SurveyWindow extends Activity
   private EditText mEditComment;
   private TextView mTVxsections;
   private TextView mTVdatamode;
+  private TextView mTVCalculatedAzimuths;
 
   private MyDateSetListener mDateListener;
 
@@ -154,6 +152,7 @@ public class SurveyWindow extends Activity
   private String mInitStation = null;
   private int mXSections;
   private int mDatamode;
+  private int mCalculatedAzimuths;
 
   private TopoDroidApp mApp;
   private DataHelper   mApp_mData;
@@ -211,6 +210,7 @@ public class SurveyWindow extends Activity
     mInitStation = info.initStation;
     mXSections   = info.xsections;
     mDatamode    = info.datamode;
+    mCalculatedAzimuths = info.mCalculatedAzimuths;
     // mExtend      = info.getExtend(); // info.mExtend; // FIXME NOT USED
 
     mEditDate.setText( info.date );
@@ -235,6 +235,14 @@ public class SurveyWindow extends Activity
       mTVdatamode.setText( (mDatamode == SurveyInfo.DATAMODE_NORMAL)? R.string.datamode_normal : R.string.datamode_diving );
     } else {
       mTVdatamode.setVisibility( View.GONE );
+    }
+    if ( TDLevel.overExpert ) {
+      mTVCalculatedAzimuths.setText((mCalculatedAzimuths == SurveyInfo.CALCULATED_AZIMUTHS_FALSE) ?
+          R.string.triangulation_regular_azimuths :
+          R.string.triangulation_calculated_azimuths
+      );
+    } else {
+      mTVCalculatedAzimuths.setVisibility( View.GONE );
     }
     return true;
   }
@@ -275,6 +283,7 @@ public class SurveyWindow extends Activity
     mEditComment = (EditText) findViewById(R.id.survey_comment);
     mTVxsections = (TextView) findViewById(R.id.survey_xsections);
     mTVdatamode  = (TextView) findViewById(R.id.survey_datamode);
+    mTVCalculatedAzimuths = (TextView) findViewById( R.id.survey_calculated_azimuths );
 
     mEditDecl.setOnFocusChangeListener( new OnFocusChangeListener() {
       @Override
@@ -606,7 +615,7 @@ public class SurveyWindow extends Activity
     /* if ( comment != null ) */ { comment = comment.trim(); } // else { comment = ""; }
 
     // TDLog.v( "UPDATE survey id " + TDInstance.sid + " team " + team + " date " + date + " comment " + comment );
-    mApp_mData.updateSurveyInfo( TDInstance.sid, date, team, decl, comment, mInitStation, mXSections );
+    mApp_mData.updateSurveyInfo( TDInstance.sid, date, team, decl, comment, mInitStation, mXSections, mCalculatedAzimuths );
     mWarnTeam = true;
     return true;
   }
