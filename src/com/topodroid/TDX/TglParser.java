@@ -75,8 +75,8 @@ public class TglParser
     WALL_MAX = (TDLevel.overTester? 6 : 3);
   }
 
-  public static final int SPLAY_USE_SKIP     = 0;
-  public static final int SPLAY_USE_NORMAL   = 1;
+  public static final int SPLAY_USE_SKIP     = 0; // skip splays parsing source files
+  public static final int SPLAY_USE_NORMAL   = 1; // use splay
   public static final int SPLAY_USE_XSECTION = 2;
   public static int mSplayUse = SPLAY_USE_NORMAL;
 

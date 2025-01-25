@@ -1553,36 +1553,37 @@ public class TopoGL extends Activity
   //   startActivityForResult( openFileIntent, REQUEST_OPEN_FILE );
   // }
 
-  /** set the WALL button - this method is empty - unused
-   * @param wall_mode    walls mode
-   */
-  private void setWallButton( int wall_mode )
-  {
-    switch ( wall_mode ) {
-      case TglParser.WALL_NONE:
-        TDToast.make( "wall mode NONE" );
-        // mButton1[BTN_WALL].setBackgroundDrawable( mBMnone );
-        break;
-      case TglParser.WALL_CW:
-        TDToast.make( "wall mode CONVEX_HULL" );
-        // mButton1[BTN_WALL].setBackgroundDrawable( mBMconvex );
-        break;
-      case TglParser.WALL_POWERCRUST:
-        TDToast.make( "wall mode POWERCRUST" );
-        // mButton1[BTN_WALL].setBackgroundDrawable( mBMpowercrust );
-        break;
-      case TglParser.WALL_DELAUNAY:
-        TDToast.make( "wall mode DELAUNAY" );
-        // mButton1[BTN_WALL].setBackgroundDrawable( mBMdelaunay );
-        break;
-      case TglParser.WALL_HULL:
-        TDToast.make( "wall mode HULL" );
-        // mButton1[BTN_WALL].setBackgroundDrawable( mBMhull );
-        break;
-      default:
-        TDToast.make( "wall mode NONE" );
-    }
-  }
+  // FIXME UNUSED
+  // /** set the WALL button - this method is empty - unused
+  //  * @param wall_mode    walls mode
+  //  */
+  // private void setWallButton( int wall_mode )
+  // {
+  //   switch ( wall_mode ) {
+  //     case TglParser.WALL_NONE:
+  //       TDToast.make( "wall mode NONE" );
+  //       // mButton1[BTN_WALL].setBackgroundDrawable( mBMnone );
+  //       break;
+  //     case TglParser.WALL_CW:
+  //       TDToast.make( "wall mode CONVEX_HULL" );
+  //       // mButton1[BTN_WALL].setBackgroundDrawable( mBMconvex );
+  //       break;
+  //     case TglParser.WALL_POWERCRUST:
+  //       TDToast.make( "wall mode POWERCRUST" );
+  //       // mButton1[BTN_WALL].setBackgroundDrawable( mBMpowercrust );
+  //       break;
+  //     case TglParser.WALL_DELAUNAY:
+  //       TDToast.make( "wall mode DELAUNAY" );
+  //       // mButton1[BTN_WALL].setBackgroundDrawable( mBMdelaunay );
+  //       break;
+  //     case TglParser.WALL_HULL:
+  //       TDToast.make( "wall mode HULL" );
+  //       // mButton1[BTN_WALL].setBackgroundDrawable( mBMhull );
+  //       break;
+  //     default:
+  //       TDToast.make( "wall mode NONE" );
+  //   }
+  // }
 
   // ------- NO-C3D ------------------------------ SKETCH
   // /** open a sketch file (in Cave3D format)

@@ -1300,12 +1300,12 @@ public class CavwayComm extends TopoDroidComm
     boolean ret = true;
     for ( int k = 0; k < 2; ++ k ) {
       int addr = CavwayDetails.COEFF_ADDRESS + k * 64;
-      byte[] coeff_tmp = readMemory( addr, 64 /* CavwayDetails.COEFF_SIZE */ );
-      if ( coeff_tmp.length >= 52 ) {
+      byte[] coeff_tmp = readMemory( addr, 64 /* CavwayDetails.COEFF_SIZE */ ); // FIXME it can fail 
+      if ( coeff_tmp != null && coeff_tmp.length >= 52 ) {
         // TDLog.v("memory size " + mMemory.size() + " copying coeff-set " + k );
         System.arraycopy( coeff_tmp, 0, coeff, k*52, 52 /* CavwayDetails.COEFF_LEN */ );
       } else {
-        TDLog.v("coeff length " +  coeff_tmp.length + " too short" );
+        TDLog.v("coeff " + k + " length " +  coeff_tmp.length + " too short" );
         ret = false;
         break;
       }
