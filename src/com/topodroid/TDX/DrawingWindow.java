@@ -499,7 +499,7 @@ public class DrawingWindow extends ItemDrawer
   // private static BezierInterpolator mBezierInterpolator = new BezierInterpolator();
   private DrawingSurface  mDrawingSurface;
   private DrawingLinePath mCurrentLinePath;
-  private DrawingLinePath mLastLinePath = null;
+  // private DrawingLinePath mLastLinePath = null;
   private DrawingAreaPath mCurrentAreaPath = null;
   // private DrawingPath mFixedDrawingPath;
   // private Paint mCurrentPaint;
@@ -1443,8 +1443,7 @@ public class DrawingWindow extends ItemDrawer
 
   void switchExistingPlot( String plot_name, long plot_type ) // context of current SID
   {
-    // TDLog.v("switchExistingPlot " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    mLastLinePath = null;
+    // mLastLinePath = null;
     doSaveTdr( );
   }
 
@@ -1680,11 +1679,8 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v( "PLOT compute references() zoom " + zoom + " landscape " + mLandscape );
     if ( ! PlotType.isSketch2D( type ) ) return false;
     if ( num == null ) return false;
-
-    mLastLinePath = null;
-
+    // mLastLinePath = null;
     // float xoff = 0; float yoff = 0;
-
     float cosp = 0;
     float sinp = 0;
 
@@ -2657,7 +2653,7 @@ public class DrawingWindow extends ItemDrawer
 
     if ( mMoveTo != null && mMoveTo.length() == 0 ) mMoveTo = null; // test for Xiaomi redmi note
     mSectionName  = null; // resetStatus
-    mLastLinePath = null;
+    // mLastLinePath = null;
     mShiftDrawing = false;
     mJoinLine = JOIN_NONE; // TDSetting.mJoinLine;
     // mJoinArea = JOIN_NONE; // TDSetting.mJoinArea; // FIXME TDSetting.mJoinArea;
@@ -2824,7 +2820,7 @@ public class DrawingWindow extends ItemDrawer
   private void resetStatus()
   {
     mSectionName  = null; 
-    mLastLinePath = null;
+    // mLastLinePath = null;
     mShiftDrawing = false;
     mJoinLine = JOIN_NONE; // TDSetting.mJoinLine;
     // mJoinArea = JOIN_NONE; // TDSetting.mJoinArea; // FIXME TDSetting.mJoinArea;
@@ -3028,7 +3024,7 @@ public class DrawingWindow extends ItemDrawer
       mClino   = 0;
       mMoveTo  = null;
       mSectionName  = null; // resetStatus
-      mLastLinePath = null;
+      // mLastLinePath = null;
       mShiftDrawing = false;
       mJoinLine = JOIN_NONE; // TDSetting.mJoinLine;
       // mJoinArea = JOIN_NONE; // TDSetting.mJoinArea; // FIXME TDSetting.mJoinArea;
@@ -3145,7 +3141,7 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v("restore drawing display mode");
     String mode = mApp_mData.getValue( "DISTOX_PLOT_MODE" );
     DrawingCommandManager.setDisplayMode( DisplayMode.parseString( mode ) );
-    mLastLinePath = null; // necessary ??? these two were at the end
+    // mLastLinePath = null; // necessary ??? these two were at the end
     switchZoomCtrl( TDSetting.mZoomCtrl );
 
     if ( ! mTh2Edit ) { // TH2EDIT
@@ -3157,7 +3153,6 @@ public class DrawingWindow extends ItemDrawer
       setPlotType( mType, PARAMS_YES );
     }
     mDrawingSurface.setDrawing( true );
-    // TDLog.v("doResume " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     // TDLog.v( "do Resume. offset " + mOffset.x + " " + mOffset.y + " zoom " + mZoom );
   }
 
@@ -3247,8 +3242,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void doRestart( )
   {
-    // TDLog.v("doRestart " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    mLastLinePath = null;
+    // mLastLinePath = null;
     List< DBlock > list = getXSectionShots( mType, mFrom, mTo );
     if ( list != null && list.size() > 0 ) {
       if ( PlotType.isMultilegSection( mType, mTo ) ) {
@@ -3280,9 +3274,7 @@ public class DrawingWindow extends ItemDrawer
       finish();
       return;
     }
-
-    // TDLog.v( "do start " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null); // not needed - guaranteed by callers
+    // assert( mLastLinePath == null); // not needed - guaranteed by callers
     mIntersectionT = tt;
     // TDLog.Log( TDLog.LOG_PLOT, "do Start() " + mName1 + " " + mName2 );
 
@@ -3387,8 +3379,7 @@ public class DrawingWindow extends ItemDrawer
   private void makeSinglelegSectionReferences( List< DBlock > list, float tt )
   {
 
-    assert( mLastLinePath == null); // not needed - guaranteed by callers
-
+    // assert( mLastLinePath == null); // not needed - guaranteed by callers
     mDrawingSurface.newReferences( DrawingSurface.DRAWING_SECTION, (int)mType );
     // TDLog.v( "section list " + list.size() + " tt " + tt + " azimuth " + mAzimuth + " clino " + mClino );
     // 2023-01-31 use survey declination for PLOT_H_SECTION
@@ -3569,10 +3560,8 @@ public class DrawingWindow extends ItemDrawer
    */
   private void makeMultilegSectionReferences( List< DBlock > list, Vector3D center )
   {
-
-    assert( mLastLinePath == null); // not needed - guaranteed by callers
+    // assert( mLastLinePath == null); // not needed - guaranteed by callers
     // TDLog.v("PLOT multileg make section reference " + mAzimuth + " " + mClino + " list " + list.size() );
-
     mDrawingSurface.newReferences( DrawingSurface.DRAWING_SECTION, (int)mType );
     DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface ); // FIXME_SK moved out
     mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)mType, 0 );
@@ -3683,9 +3672,7 @@ public class DrawingWindow extends ItemDrawer
   private boolean loadFiles( long type, List< DBlock > list )
   {
     // TDLog.v( "load files - type " + type );
-    assert( mLastLinePath == null ); // guaranteed when called
-    // TDLog.v( "load files()" );
-    
+    // assert( mLastLinePath == null ); // guaranteed when called
     // String filename1  = null;
     String filename1b = null;
     // String filename2  = null;
@@ -3793,8 +3780,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void setPlotType( long type, boolean params )
   {
-    // TDLog.v("setPlotType " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     if ( PlotType.isProfile( type ) ) {
       setPlotType2( COMPUTE_NO, params );
     } else if ( type == PlotType.PLOT_PLAN ) { 
@@ -3808,7 +3794,6 @@ public class DrawingWindow extends ItemDrawer
    */
   private void updateReference()
   {
-    // TDLog.v("updateReference " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     // mLastLinePath = null; // should not be necessary
     // TDLog.v( "update Reference()" );
     if ( mType == PlotType.PLOT_PLAN ) {
@@ -3839,8 +3824,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void resetReference( PlotInfo plot, boolean params )
   {
-    // TDLog.v("resetReference " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    mLastLinePath = null;
+    // mLastLinePath = null;
     if ( params && plot != null ) { // TH2EDIT no "&& plot != null"
       mOffset.x = plot.xoffset; 
       mOffset.y = plot.yoffset; 
@@ -3879,8 +3863,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void doSelectAt( float x, float y, float size )
   {
-    // TDLog.v("doSelectAt " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     if ( mLandscape ) { float t=x; x=-y; y=t; }
     // TDLog.v( "select at: edit-range " + mDoEditRange + " mode " + mMode + " At " + x + " " + y );
     if ( mMode == MODE_EDIT ) {
@@ -4019,8 +4002,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void recomputeProfileReference()
   {
-    // TDLog.v("recomputeProfileReference " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     if ( mType == PlotType.PLOT_EXTENDED ) { 
       List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
       mMultiBad = new ArrayList< StringPair >();
@@ -4054,8 +4036,7 @@ public class DrawingWindow extends ItemDrawer
   private void deletePoint( DrawingPointPath point )
   {
     if ( point == null ) return;
-    // TDLog.v("deletePoint " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     mDrawingSurface.deletePath( point ); 
     // TDLog.v( "delete point type " + point.mPointType );
     if ( point instanceof DrawingPhotoPath ) { 
@@ -4081,8 +4062,7 @@ public class DrawingWindow extends ItemDrawer
   private void splitLine( DrawingLinePath line, LinePoint point )
   {
     mDrawingSurface.splitLine( line, point );
-    // TDLog.v("splitLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     modified();
   }
 
@@ -4120,8 +4100,7 @@ public class DrawingWindow extends ItemDrawer
     } else {
       mDrawingSurface.deletePath( line );
     }
-    // TDLog.v("deleteLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     modified();
   }
 
@@ -4157,8 +4136,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void sharpenLine( DrawingLinePath line )
   {
-    // TDLog.v("sharpenLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     mDrawingSurface.sharpenPointLine( line );
     modified();
   }
@@ -4169,8 +4147,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void reduceLine( DrawingLinePath line, int decimation )
   {
-    // TDLog.v("reduceLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     mDrawingSurface.reducePointLine( line, decimation );
     modified();
   }
@@ -4180,8 +4157,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void rockLine( DrawingLinePath line )
   {
-    // TDLog.v("rockLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     mDrawingSurface.rockPointLine( line );
     modified();
   }
@@ -4191,8 +4167,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void closeLine( DrawingLinePath line )
   {
-    // TDLog.v("closeLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     mDrawingSurface.closePointLine( line );
     modified();
   }
@@ -4203,8 +4178,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void reduceArea( DrawingAreaPath area, int decimation )
   {
-    // TDLog.v("reduceArea " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     mDrawingSurface.reducePointLine( area, decimation );
     modified();
   }
@@ -4214,8 +4188,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void deleteArea( DrawingAreaPath area )
   {
-    // TDLog.v("deleteArea " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     mDrawingSurface.deletePath( area );
     modified();
   }
@@ -4411,20 +4384,20 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  /** add a line to the drawing
-   * @param lp1  line to add
-   */
-  private void addLine( DrawingLinePath lp1 )
-  {
-    lp1.computeUnitNormal();
-    if ( mSymbol == SymbolType.LINE && TDSetting.mLineClose && BrushManager.isLineClosed( mCurrentLine ) ) {
-      // mCurrentLine == lp1.mLineType 
-      lp1.setClosed( true );
-      lp1.closePath();
-    }
-    mDrawingSurface.addDrawingPath( lp1 );
-    mLastLinePath = lp1;
-  }
+  // /** add a line to the drawing
+  //  * @param lp1  line to add
+  //  */
+  // private void addLine( DrawingLinePath lp1 )
+  // {
+  //   lp1.computeUnitNormal();
+  //   if ( mSymbol == SymbolType.LINE && TDSetting.mLineClose && BrushManager.isLineClosed( mCurrentLine ) ) {
+  //     // mCurrentLine == lp1.mLineType 
+  //     lp1.setClosed( true );
+  //     lp1.closePath();
+  //   }
+  //   mDrawingSurface.addDrawingPath( lp1 );
+  //   mLastLinePath = lp1;
+  // }
 
   /** try to join two areas
    * @param ap1    is the area (being drawn) 
@@ -4552,8 +4525,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void startErasing( float xs, float ys, float xc, float yc )
   {
-    // TDLog.v("startErasing " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     // TDLog.v( "Erase at " + xs + " " + ys );
     if ( mTouchMode == MODE_MOVE ) {
       mEraseCommand =  new EraseCommand();
@@ -4728,13 +4700,20 @@ public class DrawingWindow extends ItemDrawer
             /*{{ IF DEF_FILTER_NO_START*/
               // TDLog.v("Using DEF FILTER START");
               if ( mSymbol == SymbolType.LINE && BrushManager.isLineSection( mCurrentLine ) ) { // if ( BrushManager.isLineSection(  mCurrentLinePath.mLineType ) )
-                mLastLinePath = null;
+                // mLastLinePath = null;
                 doSectionLine( mCurrentLinePath );
                 mCurrentLinePath = null;
               } else {
                 boolean add = true;
                 if ( mSymbol == SymbolType.LINE ) {
-                  if ( ! tryAndJoinLine( mCurrentLinePath, mCurrentLinePath ) ) {
+                  if ( TDSetting.mLineClose && BrushManager.isLineClosed( mCurrentLine ) ) {
+                    DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine, mDrawingSurface.scrapIndex() );
+                    lp1.setOptions( BrushManager.getLineDefaultOptions( mCurrentLine ) );
+                    lp1.setClosed( true );
+                    lp1.closePath();
+                    mDrawingSurface.addDrawingPath( lp1 );
+                    // mLastLinePath = lp1;
+                  } else if ( ! tryAndJoinLine( mCurrentLinePath, mCurrentLinePath ) ) {
                     // TODO this is useful for STYLUS-ONLY, it might be better to skip for complex line modes
                     if ( /* TDSetting.mStylusOnly && */ TDSetting.mLineEnds > 0 ) mCurrentLinePath.dropEndPoints( TDSetting.mLineEnds );
 
@@ -4767,14 +4746,8 @@ public class DrawingWindow extends ItemDrawer
                     if ( add && lp1 != null && lp1.size() > 1 ) {
                       // TDLog.v("line nr points " + lp1.size() );
                       lp1.computeUnitNormal();
-                      if ( mSymbol == SymbolType.LINE && BrushManager.isLineClosed( mCurrentLine ) ) {
-                        // mCurrentLine == lp1.mLineType 
-                        // TDLog.v("line close");
-                        lp1.setClosed( true );
-                        lp1.closePath();
-                      }
                       mDrawingSurface.addDrawingPath( lp1 );
-                      mLastLinePath = lp1;
+                      // mLastLinePath = lp1;
                     }
                   }
                   mCurrentLinePath = null;
@@ -4797,7 +4770,7 @@ public class DrawingWindow extends ItemDrawer
                     }
                   }
                   mCurrentAreaPath = null;
-                  mLastLinePath = null;
+                  // mLastLinePath = null;
                 }
               }
             /*{{ END DEF FILTER_START */
@@ -4964,7 +4937,7 @@ public class DrawingWindow extends ItemDrawer
         }
         else
         { // SymbolType.POINT
-          mLastLinePath = null;
+          // mLastLinePath = null;
           if ( (! mPointerDown) && (!HBXP_PointDown)) { // HBXP
             float radius = ( ( BrushManager.isPointOrientable( mCurrentPoint ) )? 6 : 2 ) * TDSetting.mPointingRadius;
 	    float shift = Math.abs( x_shift ) + Math.abs( y_shift );
@@ -5273,7 +5246,7 @@ public class DrawingWindow extends ItemDrawer
           // HBXP copy and modification from onTouchUp
           if (true) // HBXP geek settings enable FIXME drop test
           { // SymbolType.POINT
-            mLastLinePath = null;
+            // mLastLinePath = null;
             if ( ! mPointerDown ) {
               float angle = 0;
               float radius = ( ( BrushManager.isPointOrientable( mCurrentPoint ) )? 6 : 2 ) * TDSetting.mPointingRadius;
@@ -5505,7 +5478,6 @@ public class DrawingWindow extends ItemDrawer
    */
   private void doSectionLine( DrawingLinePath currentLine )
   {
-    // TDLog.v("do Section Line " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     // assert( mLastLinePath == null ); // obvious
     currentLine.addOption("-direction both");
     currentLine.makeStraight( );
@@ -5732,8 +5704,7 @@ public class DrawingWindow extends ItemDrawer
    */
   public void addLabel( String label, float x, float y, int level )
   {
-    // TDLog.v("addLabel " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     if ( label != null && label.length() > 0 ) {
       if ( mLandscape ) { float t=x; x=-y; y=t; }
       DrawingLabelPath label_path = new DrawingLabelPath( label, x, y, mPointScale, null, mDrawingSurface.scrapIndex() );
@@ -5774,7 +5745,6 @@ public class DrawingWindow extends ItemDrawer
 
   // public void insertPhoto( Bitmap bitmap )
   // {
-  //   // TDLog.v("insert photo " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
   //   assert( mLastLinePath == null );
   //   if ( mMediaManager.savePhotoFile( bitmap, 90 ) ) { // compression = 90
   //     // // FIXME TITLE has to go
@@ -5854,8 +5824,7 @@ public class DrawingWindow extends ItemDrawer
    */
   public void addPhotoPoint( long pid, String comment, float size, float x, float y, int camera, String code )
   {
-    // TDLog.v("addPhoto " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     if ( mLandscape ) {
       mMediaManager.setPoint( -y, x );
     } else {
@@ -5876,7 +5845,7 @@ public class DrawingWindow extends ItemDrawer
   private void addAudioPoint( long pid, float x, float y )
   {
     // TDLog.v("add Audio Point " + x + " " + y );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     // mMediaComment = ""; // audio point do not have comment
     if ( ! audioCheck ) {
       TDToast.makeWarn( R.string.no_feature_audio );
@@ -5900,8 +5869,7 @@ public class DrawingWindow extends ItemDrawer
    */
   public void deletedAudio( long audio_id )
   {
-    // TDLog.v("deleteAudio " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     DrawingAudioPath audio = mDrawingSurface.getAudioPoint( audio_id );
     deletePoint( audio ); // if audio == null doesn't do anything
   }
@@ -5947,8 +5915,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void deleteXSection( DrawingStationName st, String name, long type ) 
   {
-    // TDLog.v("delete X-Section " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     long xtype = -1;
     String xs_id = null; // xsection_id eg, xs-2 (xsection at station 2)
     if ( type == PlotType.PLOT_PLAN ) {
@@ -5977,8 +5944,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void deleteSectionPoint( String xs_id )
   {
-    // TDLog.v("deleteSectionPoint " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     if ( xs_id == null ) return;
     String scrap_name = TDInstance.survey + "-" + xs_id;
     mDrawingSurface.deleteSectionPoint( scrap_name );   // this section-point delete cannot be undone
@@ -6018,8 +5984,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void openXSection( DrawingStationName st, String st_name, long type, float azimuth, float clino, boolean horiz, String nick )
   {
-    // TDLog.v("open XSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     // TDLog.v( "PLOT open XSection nick <" + nick + "> st_name <" + st_name + "> plot " + mName );
     // TDLog.v( "PLOT open xsection - current line " + mCurrentLine );
     // parent plot name = mName
@@ -6238,8 +6203,7 @@ public class DrawingWindow extends ItemDrawer
    */
   public void addStationPoint( DrawingStationName st )
   {
-    // TDLog.v("addStationPoint " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     DrawingStationUser path = new DrawingStationUser( st, PointScale.SCALE_M, mDrawingSurface.scrapIndex() );
     mDrawingSurface.addDrawingStationUser( path );
     modified();
@@ -6251,8 +6215,7 @@ public class DrawingWindow extends ItemDrawer
      */
     public void removeStationPoint( DrawingStationName st, DrawingStationUser path )
     {
-      // TDLog.v("removeStationPoint " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      assert( mLastLinePath == null);
+      // assert( mLastLinePath == null);
       mDrawingSurface.removeDrawingStationUser( path );
       modified();
     }
@@ -6324,8 +6287,7 @@ public class DrawingWindow extends ItemDrawer
       }
 
       mMode = mode;
-      // TDLog.v("setMode " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      mLastLinePath = null;
+      // mLastLinePath = null;
       switch ( mMode ) {
         case MODE_MOVE:
           clearHotPath( View.INVISIBLE );
@@ -6895,7 +6857,7 @@ public class DrawingWindow extends ItemDrawer
     private void switchPlotType()
     {
       // TDLog.v( "switch plot type ");
-      mLastLinePath = null; // necessary
+      // mLastLinePath = null; // necessary
       if ( mModified ) doSaveTdr( ); // this sets Modified = false after spawning the saving task
       updateReference();
       if ( mType == PlotType.PLOT_PLAN ) {
@@ -6911,7 +6873,7 @@ public class DrawingWindow extends ItemDrawer
      */
     private void setPlotType3( boolean params )
     {
-      assert( mLastLinePath == null);
+      // assert( mLastLinePath == null);
       if ( mPlot3 == null ) {
         TDLog.e( "set plot xsection: null plot" );
         return;
@@ -6933,7 +6895,7 @@ public class DrawingWindow extends ItemDrawer
      */
     private void setPlotType2( boolean compute, boolean params )
     {
-      assert( mLastLinePath == null);
+      // assert( mLastLinePath == null);
       if ( mPlot2 == null ) return;
       // TDLog.v( "PLOT set type 2 mType " + mType );
       mPid  = mPid2;
@@ -6961,7 +6923,7 @@ public class DrawingWindow extends ItemDrawer
      */
     private void setPlotType1( boolean compute, boolean params )
     {
-      assert( mLastLinePath == null);
+      // assert( mLastLinePath == null);
       if ( mPlot1 == null ) return;
       // TDLog.v( "PLOT set type 1 mType " + mType );
       mPid  = mPid1;
@@ -6998,8 +6960,7 @@ public class DrawingWindow extends ItemDrawer
      */
     public void flipProfile( boolean flip_shots )
     {
-      // TDLog.v("flipProfile " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      assert( mLastLinePath == null );
+      // assert( mLastLinePath == null );
       mDrawingSurface.flipProfile( mZoom );
       if ( flip_shots ) {
         DBlock blk;
@@ -7189,7 +7150,6 @@ public class DrawingWindow extends ItemDrawer
    */
   private void clearSelected()
   {
-    // TDLog.v("clearSelected " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     // assert( mLastLinePath == null ); // not needed
     mHasSelected = false;
     mDrawingSurface.clearSelected();
@@ -7251,12 +7211,12 @@ public class DrawingWindow extends ItemDrawer
         // }
         // redoBtn.setEnabled( true );
         // canRedo = true;/
-        mLastLinePath = null;
+        // mLastLinePath = null;
         modified();
       } else if ( k2 < mNrButton2 && b == mButton2[k2++] ) { // REDO
         if ( mDrawingSurface.hasMoreRedo() ) {
           mDrawingSurface.redo();
-          mLastLinePath = null;
+          // mLastLinePath = null;
         }
       } else if ( k2 < mNrButton2 && b == mButton2[k2++] ) { // TOOLS
         // if ( ! TDSetting.mTripleToolbar ) {
@@ -7284,12 +7244,12 @@ public class DrawingWindow extends ItemDrawer
         // }
         // redoBtn.setEnabled( true );
         // canRedo = true;/
-        mLastLinePath = null;
+        // mLastLinePath = null;
         modified();
       } else if ( k5 < mNrButton5 && b == mButton5[k5++] ) { // REDO same as in mButton2[]
         if ( mDrawingSurface.hasMoreRedo() ) {
           mDrawingSurface.redo();
-          mLastLinePath = null;
+          // mLastLinePath = null;
         }
       } else if ( k5 < mNrButton5 && b == mButton5[k5++] ) { // ERASE MODE
         makePopupFilter( b, Drawing.mEraseModes, 4, Drawing.CODE_ERASE, dismiss ); // pull-down menu to select erase mode
@@ -7575,8 +7535,7 @@ public class DrawingWindow extends ItemDrawer
     // mCurrentLine = BrushManager.getLineWallIndex();
     // if ( ! BrushManager.isLineEnabled( SymbolLibrary.WALL ) ) mCurrentLine = 0;
 
-    // TDLog.v("prepare XSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
     setTheTitle();
 
     if ( id == null || id.length() == 0 ) return -1;
@@ -8223,7 +8182,6 @@ public class DrawingWindow extends ItemDrawer
   private void recomputeReferences( TDNum num, float zoom )
   {
     if ( num == null ) return;
-    // TDLog.v("recomputeReferences " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     // mLastLinePath = null; // not needed
 
     if ( mType == (int)PlotType.PLOT_PLAN ) {
@@ -8642,7 +8600,7 @@ public class DrawingWindow extends ItemDrawer
 
   void doRecover( String filename, long type )
   {
-    mLastLinePath = null; // absolutely necessary
+    // mLastLinePath = null; // absolutely necessary
     float x = mOffset.x;
     float y = mOffset.y;
     float z = mZoom;
@@ -9542,8 +9500,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void addScrap( PlotInfo plot )
   {
-    // TDLog.v("addScrap " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
 
     mDrawingSurface.clearScrapOutline();
     if ( mNum == null || plot == null ) {
@@ -9594,8 +9551,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void setXSectionOutline( String name, boolean on_off, float x, float y )
   { 
-    // TDLog.v("setXSectionOutline " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
+    // assert( mLastLinePath == null );
 
     mDrawingSurface.clearXSectionOutline( name );
     // TDLog.v("XSECTION set " + name + " on/off " + on_off + " " + x + " " + y );
@@ -9618,8 +9574,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void splitPlot( String name, String station, boolean remove ) 
   {
-    // TDLog.v("splitPlot " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    mLastLinePath = null; // absolutely necessary
+    // mLastLinePath = null; // absolutely necessary
 
     // TDLog.v("split plot " + name + " station " + station );
     // get the DrawingStation of station
@@ -9647,9 +9602,7 @@ public class DrawingWindow extends ItemDrawer
   void mergeOutlineScrap()
   {
     // merge is called in MOVE mode
-    // TDLog.v("mergeOutlineScrap " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    assert( mLastLinePath == null );
-
+    // assert( mLastLinePath == null );
     if ( mType == PlotType.PLOT_PLAN ) {
       if ( mOutlinePlot1 == null ) return;
       mDrawingSurface.clearScrapOutline();
@@ -9671,7 +9624,6 @@ public class DrawingWindow extends ItemDrawer
   private void doMergePlot( PlotInfo plt )
   {
     // assert( mLastLinePath == null); // obvious
-
     if ( plt.type != mType ) return;
     NumStation st1 = mNum.getStation( plt.start );
     NumStation st0 = mNum.getOrigin(); // start-station has always coords (0,0)
@@ -9710,8 +9662,7 @@ public class DrawingWindow extends ItemDrawer
       TDToast.makeWarn( R.string.split_nothing );
       return;
     }
-    mLastLinePath = null;
-
+    // mLastLinePath = null;
     boolean extended = (mPlot2.type == PlotType.PLOT_EXTENDED);
     int azimuth = (int)mPlot2.azimuth; 
     int oblique = (int)mPlot2.clino;
