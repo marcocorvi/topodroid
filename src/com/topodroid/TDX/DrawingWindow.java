@@ -4154,6 +4154,7 @@ public class DrawingWindow extends ItemDrawer
 
   /** make a line "rocky"
    * @param line   drawing line item to "rock"
+   * @note called from drawing line dialog
    */
   void rockLine( DrawingLinePath line )
   {

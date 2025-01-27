@@ -579,6 +579,7 @@ public class Scrap
 
   /** redraw a point-line path more "rocky"
    * @param line   point-line path
+   * @note called by drawing manager rockPointLine
    */
   void rockPointLine( DrawingPointLinePath line ) 
   {

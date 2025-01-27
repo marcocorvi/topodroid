@@ -236,7 +236,7 @@ public class TopoDroidApp extends Application
    */
   public void notifyListerStatus( ListerHandler lister, final int status )
   { 
-    // TDLog.v( "App: notify status " + status );
+    // TDLog.v( "TDApp: notify status " + status );
     if ( lister == null ) return;
     if ( mMainActivity == null ) return;
     mMainActivity.runOnUiThread( new Runnable() { 
@@ -645,8 +645,8 @@ public class TopoDroidApp extends Application
 
   public void disconnectRemoteDevice( boolean force )
   {
-    // TDLog.v( "App: disconnect remote device. force " + force );
-    // TDLog.Log( TDLog.LOG_COMM, "App disconnect RemoteDevice listers " + mListerSet.size() + " force " + force );
+    // TDLog.v( "TDApp: disconnect remote device. force " + force );
+    // TDLog.Log( TDLog.LOG_COMM, "TDApp disconnect RemoteDevice listers " + mListerSet.size() + " force " + force );
     if ( force || mListerSet.size() == 0 ) {
       if ( mComm != null && mComm.isConnected() ) {
         mComm.disconnectRemoteDevice( ); // FIXME BLE5 to check
@@ -679,7 +679,7 @@ public class TopoDroidApp extends Application
   // @param data_type data type ...
   public boolean connectDevice( ListerHandler lister, String address, int data_type, int timeout ) 
   {
-    // TDLog.v( "App: connect address " + address + " comm is " + ((mComm==null)? "null" : "non-null") );
+    // TDLog.v( "TDApp: connect address " + address + " comm is " + ((mComm==null)? "null" : "non-null") );
     // return mComm != null && mComm.connectDevice( address, mListerSet, data_type, timeout ); // FIXME_LISTER
     if ( lister == null ) lister = mListerSet;
     return mComm != null && mComm.connectDevice( address, lister, data_type, timeout ); // FIXME_LISTER
@@ -687,14 +687,14 @@ public class TopoDroidApp extends Application
 
   public boolean disconnectComm()
   {
-    // TDLog.v( "App: disconnect. comm is " + ((mComm==null)? "null" : "non-null") );
+    // TDLog.v( "TDApp: disconnect. comm is " + ((mComm==null)? "null" : "non-null") );
     return ( mComm == null ) || mComm.disconnectDevice();
   }
 
   public void notifyConnectionState( int state )
   {
     // TODO
-    TDLog.e( "App: notify conn state " + state + " >>>>> TODO" );
+    TDLog.e( "TDApp: notify conn state " + state + " >>>>> TODO" );
   }
   // end FIXME_COMM
 
@@ -848,28 +848,28 @@ public class TopoDroidApp extends Application
     //   mComm = new VirtualDistoXComm( this, mVirtualDistoX );
     // } else {
       if ( TDInstance.isDeviceX310() ) {
-        // TDLog.v( "App: create DistoX2 comm");
+        // TDLog.v( "TDApp: create DistoX2 comm");
         mComm = new DistoX310Comm( this );
       } else if ( TDInstance.isDeviceA3() ) {
-        // TDLog.v( "App: create DistoX1 comm");
+        // TDLog.v( "TDApp: create DistoX1 comm");
         mComm = new DistoXA3Comm( this );
       } else if ( TDInstance.isDeviceSap() ) {
         String address = TDInstance.deviceAddress();
         BluetoothDevice bt_device = TDInstance.getBleDevice();
-        // TDLog.v( "App: create SAP comm");
+        // TDLog.v( "TDApp: create SAP comm");
         mComm = new SapComm( this, address, bt_device );
       } else if ( TDInstance.isDeviceBric() ) {
         String address = TDInstance.deviceAddress();
         BluetoothDevice bt_device = TDInstance.getBleDevice();
-        // TDLog.v( "App: create BRIC comm");
+        // TDLog.v( "TDApp: create BRIC comm");
         mComm = new BricComm( this, this, address, bt_device );
       // } else if ( TDInstance.isDeviceBlex() ) {
       //   address = TDInstance.deviceAddress();
       //   BluetoothDevice bt_device = TDInstance.getBleDevice();
-      //   // TDLog.v( "App: create ble comm. address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
+      //   // TDLog.v( "TDApp: create ble comm. address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
       //   mComm = new BleComm( this, address, bt_device );
       } else if (TDInstance.isDeviceXBLE()){ // SIWEI_TIAN changed on Jun 2022
-        // TDLog.v( "App: create DistoX-BLE comm");
+        // TDLog.v( "TDApp: create DistoX-BLE comm");
         String address = TDInstance.deviceAddress();
         BluetoothDevice bt_device = TDInstance.getBleDevice();
         mComm = new DistoXBLEComm( this,this, address, bt_device );
@@ -984,6 +984,7 @@ public class TopoDroidApp extends Application
 
     thisApp = this;
     TDInstance.setContext( getApplicationContext() );
+    TDLog.v("TDApp on create");
 
     // MODE_WORLD_WRITEABLE and MODE_WORLD_READABLE are no longer supported
     // SQLiteDatabase dbase = openOrCreateDatabase("DISTOX14", 0, null );
@@ -1057,88 +1058,6 @@ public class TopoDroidApp extends Application
     // mManual = getResources().getString( R.string.topodroid_man );
 
     // TDLog.v( "W " + mDisplayWidth + " H " + mDisplayHeight + " D " + density );
-
-  }
-
-  /** second step of environment initialization: CWD and paths
-   * @return true if successful - can fail if cannot open the database
-   */
-  static  boolean initEnvironmentSecond( )
-  {
-    TDLog.v("App init env [2] already done " + done_init_env_second );
-    if ( done_init_env_second ) return true;
-    // TDLog.v("App Init Env [2]");
-    done_init_env_second = true;
-    // TDLog.v("APP init env. second " );
-
-    String version = mDData.getValue( "version" );
-    // TDLog.v("PATH " + "version " + version + " " + TDVersion.string() );
-    // TDLog.v( "DData version <" + version + "> TDversion <" + TDVersion.string() + ">" );
-    if ( version == null || ( ! version.equals( TDVersion.string() ) ) ) {
-      mDData.setValue( "version",  TDVersion.string()  );
-      // FIXME INSTALL_SYMBOL installSymbols( false ); // this updates symbol_version in the database
-      String symbol_version = mDData.getValue( "symbol_version" );
-      if ( symbol_version == null ) {
-        // TDLog.v("PATH " + "symbol version " + symbol_version );
-        installSymbols( true );
-      }
-      String firmware_version = mDData.getValue( "firmware_version" );
-      TDLog.v("APP current firmware version " + firmware_version );
-      if ( firmware_version == null || ( ! firmware_version.equals( TDVersion.FIRMWARE_VERSION ) ) ) {
-        installFirmware( false ); // false = do not overwrite
-      }
-      // installUserManual( );
-      mCheckManualTranslation = true;
-    }
-
-    TDPrefHelper prefHlp = new TDPrefHelper( thisApp );
-
-    // TDLog.Profile("TDApp cwd");
-    TDInstance.cwd = prefHlp.getString( "DISTOX_CWD", "TopoDroid" );
-    TDInstance.cbd = TDPath.getCurrentBaseDir();
-
-    // TDLog.Profile("TDApp paths");
-    boolean created = TDPath.setTdPaths( TDInstance.cwd /*, TDInstance.cbd */ );
-    TDLog.v("TD app: env init-2 cwd created " + created );
-    return true;
-  }
-
-  static boolean initEnvironmentThird()
-  {
-    TDLog.v("App init env [3] loaded palette " + done_loaded_palette );
-    // TDLog.Profile("TDApp DB"); 
-    // ***** DATABASE MUST COME BEFORE PREFERENCES
-    // if ( ! with_dialog_r ) {
-      // TDLog.v( "Open TopoDroid Database");
-      mData = new DataHelper( thisApp ); 
-    // }
-    if ( ! done_loaded_palette ) {
-      if ( mData.hasDB() ) {
-        Thread loader = new Thread() {
-          @Override
-          public void run() {
-            TDLog.v("App loading palette");
-            Resources res = TDInstance.getResources();
-            // BrushManager.reloadPointLibrary( TDInstance.context, res ); // reload symbols
-            // BrushManager.reloadLineLibrary( res );
-            // BrushManager.reloadAreaLibrary( res );
-            // BrushManager.setHasSymbolLibraries( true );
-            BrushManager.loadAllLibraries( TDInstance.context, res );
-            BrushManager.doMakePaths( );
-            MainWindow.enablePaletteButton();
-            done_loaded_palette = true;
-          }
-        };
-        loader.setPriority( Thread.MIN_PRIORITY );
-        loader.start();
-      } else {
-        TDLog.e("App init env [3] database not opened");
-      }
-    } else {
-      BrushManager.initAllIndices();
-    }
-    // mStationName = new StationName();
-    return mData.hasDB();
   }
 
   // init env requires the device database, which requires having the permissions
@@ -1146,7 +1065,6 @@ public class TopoDroidApp extends Application
   static boolean done_init_env_first  = false;
   static boolean done_init_env_second = false;
   static boolean done_loaded_palette  = false;
-
 
   /** initialize the environment, first step
    *  - device DB helper, 
@@ -1156,16 +1074,16 @@ public class TopoDroidApp extends Application
    */
   void initEnvironmentFirst(  ) // TDPrefHelper prefHlp 
   {
-    TDLog.v("App init env [1] already done " + done_init_env_first );
+    TDLog.v("TDApp init env [1] already done " + done_init_env_first );
     if ( done_init_env_first ) return;
-    // TDLog.v("App Init Env [1]");
+    // TDLog.v("TDApp Init Env [1]");
     done_init_env_first = true;
 
     // TDLog.v( "APP init env. first " );
     TDPrefHelper prefHlp = new TDPrefHelper( this );
     mDData = new DeviceHelper( thisApp );
-    // TDLog.Profile("TDApp prefs");
     // LOADING THE SETTINGS IS RATHER EXPENSIVE !!!
+    TDLog.v("TDApp load primary prefs");
     TDSetting.loadPrimaryPreferences( TDInstance.getResources(),  prefHlp );
 
     thisApp.mDataDownloader = new DataDownloader( thisApp, thisApp );
@@ -1230,6 +1148,88 @@ public class TopoDroidApp extends Application
     }
   }
 
+  /** second step of environment initialization: CWD and paths
+   * @return true if successful - can fail if cannot open the database
+   */
+  static  boolean initEnvironmentSecond( )
+  {
+    TDLog.v("TDApp init env [2] already done " + done_init_env_second );
+    if ( done_init_env_second ) return true;
+    // TDLog.v("TDApp Init Env [2]");
+    done_init_env_second = true;
+    // TDLog.v("APP init env. second " );
+
+    String version = mDData.getValue( "version" );
+    // TDLog.v("PATH " + "version " + version + " " + TDVersion.string() );
+    // TDLog.v( "DData version <" + version + "> TDversion <" + TDVersion.string() + ">" );
+    if ( version == null || ( ! version.equals( TDVersion.string() ) ) ) {
+      mDData.setValue( "version",  TDVersion.string()  );
+      // FIXME INSTALL_SYMBOL installSymbols( false ); // this updates symbol_version in the database
+      String symbol_version = mDData.getValue( "symbol_version" );
+      if ( symbol_version == null ) {
+        // TDLog.v("PATH " + "symbol version " + symbol_version );
+        installSymbols( true );
+      }
+      String firmware_version = mDData.getValue( "firmware_version" );
+      TDLog.v("APP current firmware version " + firmware_version );
+      if ( firmware_version == null || ( ! firmware_version.equals( TDVersion.FIRMWARE_VERSION ) ) ) {
+        installFirmware( false ); // false = do not overwrite
+      }
+      // installUserManual( );
+      mCheckManualTranslation = true;
+    }
+
+    TDPrefHelper prefHlp = new TDPrefHelper( thisApp );
+
+    // TDLog.Profile("TDApp cwd");
+    TDInstance.cwd = prefHlp.getString( "DISTOX_CWD", "TopoDroid" );
+    TDInstance.cbd = TDPath.getCurrentBaseDir();
+
+    // TDLog.Profile("TDApp paths");
+    boolean created = TDPath.setTdPaths( TDInstance.cwd /*, TDInstance.cbd */ );
+    TDLog.v("TD app: env init-2 cwd created " + created );
+    return true;
+  }
+
+  static boolean initEnvironmentThird()
+  {
+    TDLog.v("TDApp init env [3] loaded palette " + done_loaded_palette );
+    // TDLog.Profile("TDApp DB"); 
+    // ***** DATABASE MUST COME BEFORE PREFERENCES
+    // if ( ! with_dialog_r ) {
+      // TDLog.v( "Open TopoDroid Database");
+      mData = new DataHelper( thisApp ); 
+    // }
+    if ( ! done_loaded_palette ) {
+      if ( mData.hasDB() ) {
+        Thread loader = new Thread() {
+          @Override
+          public void run() {
+            TDLog.v("TDApp loading palette");
+            Resources res = TDInstance.getResources();
+            // BrushManager.reloadPointLibrary( TDInstance.context, res ); // reload symbols
+            // BrushManager.reloadLineLibrary( res );
+            // BrushManager.reloadAreaLibrary( res );
+            // BrushManager.setHasSymbolLibraries( true );
+            BrushManager.loadAllLibraries( TDInstance.context, res );
+            BrushManager.doMakePaths( );
+            MainWindow.enablePaletteButton();
+            done_loaded_palette = true;
+          }
+        };
+        loader.setPriority( Thread.MIN_PRIORITY );
+        loader.start();
+      } else {
+        TDLog.e("TDApp init env [3] database not opened");
+      }
+    } else {
+      BrushManager.initAllIndices();
+    }
+    // mStationName = new StationName();
+    return mData.hasDB();
+  }
+
+
   /** attach base context
    * @param ctx   context
    */
@@ -1269,12 +1269,12 @@ public class TopoDroidApp extends Application
   public static void setCWD( String cwd /* , String cbd */ )
   {
     if ( TDString.isNullOrEmpty( cwd ) ) cwd = TDInstance.cwd;
-    TDLog.v( "App set CWD " + cwd /* + " CBD " + cbd */ );
+    TDLog.v( "TDApp set CWD " + cwd /* + " CBD " + cbd */ );
 
     if ( cwd.equals( TDInstance.cwd ) ) return;
     // TDInstance.cbd = cbd;
     TDInstance.cwd = cwd;
-    // TDLog.Log( TDLog.LOG_PATH, "App set cwd <" + cwd + /* "> cbd <" + cbd + */ ">");
+    // TDLog.Log( TDLog.LOG_PATH, "TDApp set cwd <" + cwd + /* "> cbd <" + cbd + */ ">");
     mData.closeDatabase();
 
     boolean created_cwd = TDPath.setTdPaths( TDInstance.cwd /*, TDInstance.cbd */ );
@@ -2673,7 +2673,7 @@ public class TopoDroidApp extends Application
   { 
     // boolean ret = false;
     if ( mComm != null && mComm instanceof BricComm ) {
-      // TDLog.v( "App: send bric command " + cmd );
+      // TDLog.v( "TDApp: send bric command " + cmd );
       mComm.sendCommand( cmd );
       // TDToast( R.string.bric_command_fail ); // should never happen to fail
     // } else {

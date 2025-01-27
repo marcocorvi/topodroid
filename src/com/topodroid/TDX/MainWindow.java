@@ -1326,7 +1326,7 @@ public class MainWindow extends Activity
     if ( doubleBackHandler != null ) {
       doubleBackHandler.removeCallbacks( doubleBackRunnable );
     }
-    // TDLog.v( "MAIN on Destroy " );
+    TDLog.v( "MAIN on Destroy " );
     // FIXME if ( mApp.mComm != null ) { mApp.mComm.interrupt(); }
     // FIXME BT_RECEIVER mApp.resetCommBTReceiver();
     // saveInstanceToData();

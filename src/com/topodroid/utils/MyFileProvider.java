@@ -61,6 +61,7 @@ public class MyFileProvider extends ContentProvider
 
   private static final File DEVICE_ROOT = new File("/");
 
+  private static final String TAG_PATHS          = "paths";               // device root "/"
   private static final String TAG_ROOT_PATH      = "root-path";           // device root "/"
   private static final String TAG_FILES_PATH     = "files-path";          // context.getFilesDir()
   private static final String TAG_CACHE_PATH     = "cache-path";          // context.getCacheDir()
@@ -242,7 +243,7 @@ public class MyFileProvider extends ContentProvider
    */
   private static MyPathStrategy getPathStrategy( Context context, String authority )
   {
-    // TDLog.v("Get path strategy for authority " + authority );
+    TDLog.v("File Provider: get path strategy for authority " + authority );
     MyPathStrategy strat;
     synchronized ( sCache ) {
       strat = sCache.get( authority );
@@ -278,7 +279,7 @@ public class MyFileProvider extends ContentProvider
         final String tag  = in.getName();
         final String name = in.getAttributeValue( null, ATTR_NAME );
         String path       = in.getAttributeValue( null, ATTR_PATH );
-        // TDLog.v("XML tag " + tag + " name " + name + " path " + path );
+        // TDLog.v("File Provider: XML tag " + tag + " name " + name + " path " + path );
         File target = null;
         if ( TAG_ROOT_PATH.equals( tag ) ) {
           target = DEVICE_ROOT;
@@ -298,8 +299,11 @@ public class MyFileProvider extends ContentProvider
         // } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && TAG_EXTERNAL_MEDIA.equals( tag ) ) {
         //   File[] externalMediaDirs = context.getExternalMediaDirs();
         //   if ( externalMediaDirs.length > 0 ) target = externalMediaDirs[0];
+        } else if ( TAG_PATHS.equals( tag ) ) {
+          TDLog.v("File Provider Path Strategy: TODO tag \"paths\" using external storage"); 
+          target = Environment.getExternalStorageDirectory();
         } else {
-          TDLog.e("Path Strategy unsupported tag " + tag );
+          TDLog.e("File Provider Path Strategy: unsupported tag " + tag );
         }
         if ( target != null ) {
           strat.addRoot( name, buildPath( target, path ) );
@@ -321,7 +325,7 @@ public class MyFileProvider extends ContentProvider
      */
     MyPathStrategy( String authority )
     {
-      // TDLog.v("My PathStrategy authority " + authority );
+      // TDLog.v("File Provider My PathStrategy authority " + authority );
       mAuthority = authority;
     }
 
@@ -354,7 +358,7 @@ public class MyFileProvider extends ContentProvider
       Map.Entry< String, File > mostSpecific = null;
       for ( Map.Entry< String, File > root : mRoots.entrySet() ) {
         final String root_path = root.getValue().getPath();
-        TDLog.v("Check root " + root_path + " for path " + path );
+        TDLog.v("File Provider check root " + root_path + " for path " + path );
         if ( path.startsWith( root_path ) && ( mostSpecific == null || root_path.length() > mostSpecific.getValue().getPath().length() ) ) {
           mostSpecific = root;
         }
@@ -369,11 +373,11 @@ public class MyFileProvider extends ContentProvider
       } else {
         path = path.substring( root_path.length() + 1);
       }
-      TDLog.v("Using root " + root_path + " got path " + path );
+      TDLog.v("File Provider using root " + root_path + " got path " + path );
 
       // Encode the tag and path separately
       path = Uri.encode( mostSpecific.getKey() ) + '/' + Uri.encode( path, "/" );
-      TDLog.v("encoded path " + path );
+      TDLog.v("File Provider encoded path " + path );
       return new Uri.Builder().scheme("content").authority( mAuthority ).encodedPath( path ).build();
     }
 
@@ -383,7 +387,7 @@ public class MyFileProvider extends ContentProvider
       final int splitIndex = encoded_path.indexOf('/', 1);
       final String tag     = Uri.decode( encoded_path.substring(1, splitIndex) );
       String path          = Uri.decode( encoded_path.substring(splitIndex + 1));
-      TDLog.v("URI encoded path " + path + " decoded " + path + " tag " + tag );
+      TDLog.v("File Provider URI encoded path " + path + " decoded " + path + " tag " + tag );
 
       final File root = mRoots.get(tag);
       if (root == null) throw new IllegalArgumentException("Unable to find configured root for " + uri);
@@ -393,7 +397,7 @@ public class MyFileProvider extends ContentProvider
       } catch (IOException e) {
         throw new IllegalArgumentException("Failed to resolve canonical path for " + file);
       }
-      TDLog.v("FILE " + file.getPath() + " root " + root.getPath() );
+      TDLog.v("File Provider FILE " + file.getPath() + " root " + root.getPath() );
       if ( ! file.getPath().startsWith( root.getPath() ) ) {
         throw new SecurityException("Resolved path jumped beyond configured root");
       }

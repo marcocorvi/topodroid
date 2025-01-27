@@ -394,6 +394,7 @@ public class DrawingPointLinePath extends DrawingPath
   }
 
   /** make the path "rock"-like
+   * @note called by Scrap rockPointLine
    */
   void makeRock()
   {

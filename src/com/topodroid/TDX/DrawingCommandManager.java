@@ -1214,6 +1214,7 @@ public class DrawingCommandManager
 
   /** make a line rock-like, in the current scrap
    * @param line   line
+   * @note called by drawing surface, forward to scrap
    */
   void rockPointLine( DrawingPointLinePath line ) { mCurrentScrap.rockPointLine( line ); }
 

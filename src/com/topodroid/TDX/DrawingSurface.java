@@ -483,6 +483,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
 
   /** make a line rock-like, in the current manager
    * @param line   line
+   * @note called by drawing window, forward to comman manager
    */
   void rockPointLine( DrawingPointLinePath line ) { commandManager.rockPointLine( line ); }
 
