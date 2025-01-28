@@ -7348,10 +7348,10 @@ public class DrawingWindow extends ItemDrawer
             } else if ( item instanceof DrawingLinePath ) {
               DrawingLinePath line = (DrawingLinePath)(item);
               if ( BrushManager.isLineSection( line.mLineType ) ) {
-                // TDLog.v( "edit section line " ); // default azimuth = 0 clino = 0
                 // cross-section exists already
                 boolean h_section = PlotType.isProfile( mType ); // not really necessary
                 String id = line.getOption( "-id" );
+                // TDLog.v( "edit section line, id <" + id + ">" ); // default azimuth = 0 clino = 0
                 if ( id != null ) {
                   new DrawingLineSectionDialog( mActivity, this, h_section, true, id, line, null, null, 0, 0, -1, null ).show();
                 } else {

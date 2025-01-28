@@ -92,8 +92,12 @@ public class MyFileProvider extends ContentProvider
   {
     super.attachInfo( context, info );
     // Sanity check our security
-    if ( info.exported ) throw new SecurityException("Provider must not be exported");
-    if ( ! info.grantUriPermissions ) throw new SecurityException("Provider must grant uri permissions");
+    if ( info.exported ) {
+      throw new SecurityException("File Provider: provider must not be exported");
+    }
+    if ( ! info.grantUriPermissions ) {
+      throw new SecurityException("File Provider: must grant uri permissions");
+    }
     mStrategy = getPathStrategy(context, info.authority);
   }
 
@@ -199,7 +203,7 @@ public class MyFileProvider extends ContentProvider
   @Override
   public Uri insert( Uri uri, ContentValues values )
   {
-    throw new UnsupportedOperationException("No external inserts");
+    throw new UnsupportedOperationException("File Provider: No external inserts");
   }
 
   /** throws by default 
@@ -207,7 +211,7 @@ public class MyFileProvider extends ContentProvider
   @Override
   public int update( Uri uri, ContentValues values, String selection, String[] selectionArgs ) 
   {
-    throw new UnsupportedOperationException("No external updates");
+    throw new UnsupportedOperationException("File Provider: No external updates");
   }
 
   /** delete the uri-file
@@ -251,9 +255,9 @@ public class MyFileProvider extends ContentProvider
         try {
           strat = parsePathStrategy( context, authority );
         } catch ( IOException e ) {
-          throw new IllegalArgumentException( "Failed to parse " + META_DATA_FILE_PROVIDER_PATHS + " meta-data", e);
+          throw new IllegalArgumentException( "File Provider: parse IO error " + META_DATA_FILE_PROVIDER_PATHS + " meta-data", e);
         } catch ( XmlPullParserException e ) {
-          throw new IllegalArgumentException( "Failed to parse " + META_DATA_FILE_PROVIDER_PATHS + " meta-data", e);
+          throw new IllegalArgumentException( "File Provider: parse XML error " + META_DATA_FILE_PROVIDER_PATHS + " meta-data", e);
         }
         sCache.put( authority, strat );
       }
@@ -271,15 +275,17 @@ public class MyFileProvider extends ContentProvider
     final ProviderInfo info = context.getPackageManager().resolveContentProvider( authority, PackageManager.GET_META_DATA );
     final XmlResourceParser in = info.loadXmlMetaData( context.getPackageManager(), META_DATA_FILE_PROVIDER_PATHS );
     if ( in == null ) {
-        throw new IllegalArgumentException( "Missing " + META_DATA_FILE_PROVIDER_PATHS + " meta-data");
+      throw new IllegalArgumentException( "File Provider: Missing neta-data " + META_DATA_FILE_PROVIDER_PATHS );
     }
     int type;
     while ( (type = in.next()) != END_DOCUMENT ) {
       if ( type == START_TAG ) {
         final String tag  = in.getName();
         final String name = in.getAttributeValue( null, ATTR_NAME );
-        String path       = in.getAttributeValue( null, ATTR_PATH );
-        // TDLog.v("File Provider: XML tag " + tag + " name " + name + " path " + path );
+        if ( TextUtils.isEmpty( name ) ) {
+          TDLog.e("File Provider EMPTY name for tag " + tag );
+          continue;
+        }
         File target = null;
         if ( TAG_ROOT_PATH.equals( tag ) ) {
           target = DEVICE_ROOT;
@@ -300,13 +306,18 @@ public class MyFileProvider extends ContentProvider
         //   File[] externalMediaDirs = context.getExternalMediaDirs();
         //   if ( externalMediaDirs.length > 0 ) target = externalMediaDirs[0];
         } else if ( TAG_PATHS.equals( tag ) ) {
-          TDLog.v("File Provider Path Strategy: TODO tag \"paths\" using external storage"); 
-          target = Environment.getExternalStorageDirectory();
+          TDLog.v("File Provider Path Strategy: TODO tag \"paths\" - no root added"); 
+          // target = Environment.getExternalStorageDirectory(); 
         } else {
           TDLog.e("File Provider Path Strategy: unsupported tag " + tag );
         }
         if ( target != null ) {
-          strat.addRoot( name, buildPath( target, path ) );
+          String path = in.getAttributeValue( null, ATTR_PATH );
+          if ( TextUtils.isEmpty( path ) ) {
+            strat.addRoot( name, target );
+          } else { 
+            strat.addRoot( name, buildPath( target, path ) );
+          }
         }
       }
     }
@@ -336,14 +347,14 @@ public class MyFileProvider extends ContentProvider
     void addRoot( String name, File root )
     {
       if ( TextUtils.isEmpty( name ) ) {
-        throw new IllegalArgumentException("Name must not be empty");
+        throw new IllegalArgumentException("File Provider: name must not be empty");
       }
       try { // Resolve to canonical path to keep path checking fast
         root = root.getCanonicalFile();
+        mRoots.put( name, root );
       } catch ( IOException e ) {
-        throw new IllegalArgumentException( "Failed to resolve canonical path for " + root, e);
+        throw new IllegalArgumentException( "File Provider: failed canonical path for root " + root, e);
       }
-      mRoots.put( name, root );
     }
 
     public Uri getUriForFile( File file )
@@ -352,7 +363,7 @@ public class MyFileProvider extends ContentProvider
       try {
         path = file.getCanonicalPath();
       } catch (IOException e) {
-        throw new IllegalArgumentException("Failed to resolve canonical path for " + file);
+        throw new IllegalArgumentException("File Provider: failed canonical path for file " + file);
       }
       // Find the most-specific root path
       Map.Entry< String, File > mostSpecific = null;
@@ -364,7 +375,7 @@ public class MyFileProvider extends ContentProvider
         }
       }
       if ( mostSpecific == null ) {
-        throw new IllegalArgumentException( "Failed to find configured root that contains " + path);
+        throw new IllegalArgumentException( "File Provider: failed find root for path " + path);
       }
       // Start at first char of path under root
       final String root_path = mostSpecific.getValue().getPath();
@@ -390,16 +401,18 @@ public class MyFileProvider extends ContentProvider
       TDLog.v("File Provider URI encoded path " + path + " decoded " + path + " tag " + tag );
 
       final File root = mRoots.get(tag);
-      if (root == null) throw new IllegalArgumentException("Unable to find configured root for " + uri);
+      if (root == null) {
+        throw new IllegalArgumentException("File Provider: failed find root for URI " + uri);
+      }
       File file = new File(root, path);
       try {
         file = file.getCanonicalFile();
       } catch (IOException e) {
-        throw new IllegalArgumentException("Failed to resolve canonical path for " + file);
+        throw new IllegalArgumentException("File Provider: failed to resolve canonical path for " + file);
       }
       TDLog.v("File Provider FILE " + file.getPath() + " root " + root.getPath() );
       if ( ! file.getPath().startsWith( root.getPath() ) ) {
-        throw new SecurityException("Resolved path jumped beyond configured root");
+        throw new SecurityException("File Provider: resolved path jumped beyond root");
       }
       return file;
     }
@@ -425,7 +438,7 @@ public class MyFileProvider extends ContentProvider
     } else if ("rwt".equals(mode)) {
       modeBits = ParcelFileDescriptor.MODE_READ_WRITE | ParcelFileDescriptor.MODE_CREATE | ParcelFileDescriptor.MODE_TRUNCATE;
     } else {
-      throw new IllegalArgumentException("Invalid mode: " + mode);
+      throw new IllegalArgumentException("File Provider: invalid mode " + mode);
     }
     return modeBits;
   }

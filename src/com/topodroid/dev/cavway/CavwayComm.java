@@ -1323,7 +1323,7 @@ public class CavwayComm extends TopoDroidComm
   @Override
   public boolean writeCoeff( String address, byte[] coeff ) // 20250123 dropped second
   {
-    // TDLog.v( TAG + "write coeff " + address );
+    TDLog.v( TAG + "write coeff " + address );
     if ( coeff == null ) return false;
     int  len  = coeff.length;
     if ( len != 104 ) return false;
@@ -1334,9 +1334,11 @@ public class CavwayComm extends TopoDroidComm
       for ( int j=52; j<64; ++j ) buf[j] = 0;
       System.arraycopy( coeff, 0+k*52, buf, 0, 52 );
       if ( ! writeMemory( 0x9080 + k * 64, buf, 64 /* CavwayDetails.COEFF_SIZE */ ) ) {
+        TDLog.e( TAG + "fail write coeff set " + k );
         ret = false;
         break;
       }
+      TDLog.e( TAG + "OK write coeff set " + k );
     }
     disconnectDevice();
     return ret;

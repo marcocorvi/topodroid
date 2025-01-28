@@ -107,7 +107,7 @@ public class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
         //   break;
       }
     } else {
-      TDToast.makeBad( R.string.read_failed );
+      TDToast.makeWarn( R.string.read_failed );
     }
   }
 }

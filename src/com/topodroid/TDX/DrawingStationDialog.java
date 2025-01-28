@@ -208,8 +208,8 @@ class DrawingStationDialog extends MyDialog
             boolean cb = false; // no checkboxes
             if ( leg_size == 1 ) {
               DBlock leg0 = mBlk.get(0);
-              direct  = leg0.mFrom + ">" + leg0.mTo;
-              inverse = leg0.mTo   + ">" + leg0.mFrom;
+              direct  = String.format( mContext.getResources().getString(R.string.arrow_from_to), leg0.mFrom, leg0.mTo );
+              inverse = String.format( mContext.getResources().getString(R.string.arrow_from_to), leg0.mTo,   leg0.mFrom );
               cb = true;
               mBearing = leg0.mBearing; 
               mClino   = leg0.mClino; // later reset to 0 if PLAN
@@ -245,8 +245,8 @@ class DrawingStationDialog extends MyDialog
               }
               mClino = ( c0 + c1 ) / 2; // later reset to 0 if PLAN
 
-              direct = from + ">" + to; // skip mStationName in the middle
-              inverse = to + ">" + from;
+              direct  = String.format( mContext.getResources().getString(R.string.arrow_from_to), from, to); // skip mStationName in the middle
+              inverse = String.format( mContext.getResources().getString(R.string.arrow_from_to), to, from); 
               cb = true;
             }
             if ( mParent.getPlotType() == PlotType.PLOT_PLAN ) {

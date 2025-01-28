@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.ui.MyCheckBox;
 import com.topodroid.ui.MyDialog;
@@ -123,6 +123,7 @@ class DrawingLineSectionDialog extends MyDialog
         mHSection = (mPlotInfo.type == PlotType.PLOT_H_SECTION);
         mTT       = mPlotInfo.intercept;
         if ( mTT > 1.0 ) mCenter = mPlotInfo.center;
+        // TDLog.v("Section Line: start <" + mFrom + "> view <" + mTo + "> azimuth " + mAzimuth + " clino " + mClino ); 
       }
     }
     canTakePhoto = ( mTT <= 1.0 ) && TDandroid.checkCamera( context );
@@ -138,6 +139,9 @@ class DrawingLineSectionDialog extends MyDialog
     if ( mFrom != null && mTo != null ) {
       initLayout( R.layout.drawing_line_section_dialog,
         String.format( mParent.getResources().getString( R.string.title_draw_line ), mLine.getThName( ) ) + " " + mFrom + " " + mTo );
+    } else if ( mFrom != null ) {
+      initLayout( R.layout.drawing_line_section_dialog, 
+        String.format( mParent.getResources().getString( R.string.title_draw_line ), mLine.getThName( ) ) + " " + mFrom );
     } else {
       initLayout( R.layout.drawing_line_section_dialog, 
         String.format( mParent.getResources().getString( R.string.title_draw_line_no_stations ), mLine.getThName( ) ) );

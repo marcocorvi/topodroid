@@ -62,6 +62,8 @@
   <string name="arrow_right" translatable="false">&#x21a6;</string>
   <string name="arrow_up" translatable="false">&#x21a5;</string>
   <string name="arrow_down" translatable="false">&#x21a7;</string>
+  <!-- string name="arrow_from_to" translatable="false">%1$s&#x21a6;%2$s</string -->
+  <string name="arrow_from_to" translatable="false">%1$s -&gt; %2$s</string>
   <!-- UNUSED string name="double_arrow" translatable="false">&#x21d4;</string -->
   <string name="input_length" translatable="false">&#x2190;&#x2192;</string>
   <string name="input_depth" translatable="false">&#x21d3;</string>
