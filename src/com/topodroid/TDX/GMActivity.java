@@ -1218,6 +1218,7 @@ public class GMActivity extends Activity
           if ( coeff == null ) {
             TDToast.makeBad( R.string.no_calibration );
           } else {
+            // TDLog.v("GM write calib: two-sensors " + mTwoSensors );
             setTitle( R.string.calib_write_coeffs );
             setTitleColor( TDColor.CONNECTED );
             float delta = mCalibration.Delta();
@@ -1227,7 +1228,7 @@ public class GMActivity extends Activity
               System.arraycopy( coeff, 0, coeff12, 0, 52 );
               coeff = mCalibration2.GetCoeff();
               System.arraycopy( coeff, 0, coeff12, 52, 52 );
-              uploadCoefficients( delta, coeff, true, b ); // 20250123 simplified 
+              uploadCoefficients( delta, coeff12, true, b ); // 20250123 simplified 
             } else {
               uploadCoefficients( delta, coeff, true, b );
             }
@@ -1275,6 +1276,7 @@ public class GMActivity extends Activity
    */
   public void uploadCoefficients( float delta, final byte[] coeff, final boolean mode, final Button b )
   {
+    // TDLog.v("GM upload coeff, length " + coeff.length );
     String warning = null;
     // if ( warning == null ) { // check coverage
       List< CBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, false ); // include: normal status (0) but no negative-grp (false)

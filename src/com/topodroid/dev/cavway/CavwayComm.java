@@ -929,7 +929,7 @@ public class CavwayComm extends TopoDroidComm
     if ( (mPacketType & CavwayProtocol.PACKET_REPLY) == CavwayProtocol.PACKET_REPLY ) {
       int length = ((CavwayProtocol) mProtocol).mRepliedData.length;
       if ( length != len ) {
-        TDLog.v( TAG + " READ meomry expected length " + len + " got " + length );
+        TDLog.e( TAG + " READ meomry expected length " + len + " got " + length );
         return null;
       }
       byte[] replydata = new byte[len];
@@ -1070,7 +1070,7 @@ public class CavwayComm extends TopoDroidComm
             }
           } );
         } else {
-          TDLog.v( TAG + "handle memory: null MEMORY dialog - clear FLAG");
+          // TDLog.v( TAG + "handle memory: null MEMORY dialog - clear FLAG");
           syncClearReadingMemory();
         }
       // } else if (mReadingMemory == READ_COEFFS ) { // calib coeffs
@@ -1305,7 +1305,7 @@ public class CavwayComm extends TopoDroidComm
         // TDLog.v("memory size " + mMemory.size() + " copying coeff-set " + k );
         System.arraycopy( coeff_tmp, 0, coeff, k*52, 52 /* CavwayDetails.COEFF_LEN */ );
       } else {
-        TDLog.v("coeff " + k + " length " +  coeff_tmp.length + " too short" );
+        TDLog.e("coeff " + k + " length " +  coeff_tmp.length + " too short" );
         ret = false;
         break;
       }
@@ -1323,11 +1323,17 @@ public class CavwayComm extends TopoDroidComm
   @Override
   public boolean writeCoeff( String address, byte[] coeff ) // 20250123 dropped second
   {
-    TDLog.v( TAG + "write coeff " + address );
-    if ( coeff == null ) return false;
+    if ( coeff == null ) {
+      // TDLog.v( TAG + "write coeff: null coeff" );
+      return false;
+    }
     int  len  = coeff.length;
+    // TDLog.v( TAG + "write coeff: length " + len );
     if ( len != 104 ) return false;
-    if( ! tryConnectDevice( address, null, 0 )) return false;
+    if( ! tryConnectDevice( address, null, 0 )) {
+      // TDLog.v( TAG + "write coeff: failed connect address " + address );
+      return false;
+    }
     boolean ret = true;
     for ( int k = 0; k < 2; ++k ) {
       byte[] buf = new byte[64];
@@ -1338,7 +1344,7 @@ public class CavwayComm extends TopoDroidComm
         ret = false;
         break;
       }
-      TDLog.e( TAG + "OK write coeff set " + k );
+      // TDLog.v( TAG + "OK write coeff set " + k );
     }
     disconnectDevice();
     return ret;

@@ -299,15 +299,11 @@ public class CalibCoeffDialog extends MyDialog
   {
     int id = v.getId();
     if ( id == R.id.button_coeff_write ) { 
-      if ( mTwoSensors ) {
-        // TODO uploadCoefficients for TWO_SENSORS
+      GMActivity parent = mParent.get();
+      if ( parent != null ) {
+        if ( mCoeff != null ) parent.uploadCoefficients( mDelta, mCoeff, true, mButtonWrite ); // 20250123 dropped false (second)
       } else {
-        GMActivity parent = mParent.get();
-        if ( parent != null ) {
-          if ( mCoeff != null ) parent.uploadCoefficients( mDelta, mCoeff, true, mButtonWrite ); // 20250123 dropped false (second)
-        } else {
-          TDLog.e("Calib Coeff Dialog null parent");
-        }
+        TDLog.e("Calib Coeff Dialog null parent");
       }
     } else if ( id == R.id.button_coeff_second ) {
       if ( mTwoSensors ) {
