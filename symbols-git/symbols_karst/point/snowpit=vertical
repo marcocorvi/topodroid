@@ -15,10 +15,15 @@ group cave
 orientation no
 color 0xffffff
 path
-  moveTo 0 8
-  lineTo 7 -4
-  lineTo -7 -4
-  lineTo 0 8
-  addCircle 0 0 2
+  moveTo 0 7
+  lineTo 6 -3
+  lineTo -6 -3
+  lineTo 0 7
+  moveTo 0 2
+  lineTo 0 -2
+  moveTo 1.5 1
+  lineTo -1.5 -1
+  moveTo -1.5 1
+  lineTo 1.5 -1
 endpath
 endsymbol

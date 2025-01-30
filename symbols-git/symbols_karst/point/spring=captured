@@ -14,6 +14,7 @@ th_name spring:captured
 group spring
 orientation no
 color 0x3399ff
+style fill
 path
   moveTo -5 5
   lineTo 5 5
