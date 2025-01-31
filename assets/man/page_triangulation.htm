@@ -1,0 +1,149 @@
+<html>
+  <body>
+    <h1>Triangulated</h1>
+
+    <p>
+      Triangulated is a type of survey where the measured azimuths are discarded and substituted by trigonometrically calculated ones.
+    </p>
+
+    <p>
+      It is intended to be used in non-uniform magnetic environments like iron ore caves (or your house).
+      Both the lengths and the inclinations measured by your equipment are used and kept.
+      The measured azimuths are substituted by the ones calculated by the software.
+      This means that <b>after calculation, your original azimuths are lost</b>.
+    </p>
+
+    <p>
+      Triangulation is enabled by clicking on the <i>Trigonometrically calculated azimuths</i> survey creation option checkbox.
+    </p>
+
+    <p>
+      It is a creation time option.
+      It can only be enabled when creating a new survey.
+      It cannot be disabled once the survey is created.
+    </p>
+
+    <p>
+      The survey should be made of a net (or a ladder) of triangles.
+      Therefore you:
+    </p>
+
+    <ol>
+      <li>measure 0-1, 1-2, and 0-2;</li>
+      <li>check (and correct if necessary) the mirroring status of station 2;</li>
+      <li>make any drawings based on stations 0, 1 and 2;</li>
+      <li>measure two of the followings legs: 0-3, 1-3 and 2-3 (which can be measured as backshots if preferred, i.e. 3-0, 3-1 and 3-2);</li>
+      <li>check mirroring status of station 3;</li>
+      <li>make any drawings based on station 3;</li>
+      <li>and so on.</li>
+    </ol>
+
+    <p>Each new station should be connected to 2 previous ones.
+      The actual calculation of the azimuths is done when entering the drawing window.
+    </p>
+
+    <h2>Stations</h2>
+
+    <p>
+      In triangulated surveys, on the <i>Edit shot</i> dialog box available in the <i>Drawing</i> window in <i>Edit</i> mode, you can see the triangulation status of each station.
+    </p>
+
+    <p>
+      There are 4 possible status for stations in a triangulated survey:
+    </p>
+
+    <ol>
+      <li>
+        <i>Unprocessed</i>: for stations included in the survey before (re)entering the drawing window.
+        You will never actually see a station in this status, as the calculation of the azimuths is done when entering the drawing window where you can see the station status.
+      </li>
+      <li><i>Reference</i>: only the 2 stations of the first leg of the first triangle keeps it's original azimuth as it will be used as reference for all other triangulated legs.</li>
+      <li>
+        <i>Adjusted</i>: for all other stations that form triangles, i.e., that have already been calculated.
+        The azimuth of their legs is calculated by trigonometry using the lengths and inclinations measured by the device.
+        The original measured azimuths are discarded.
+      </li>
+      <li>
+        <i>Unadjusted</i>: for stations on legs that don't form a triangle.
+        You should not see any unadjusted stations.
+      </li>
+    </ol>
+
+    <h2>Mirroring stations</h2>
+
+    <p>
+      When using the Law of Cosines to calculate the azimuths of the 2 new legs of a triangle, there are 2 possible solutions that will be called here clockwise and counter-clockwise.
+    </p>
+
+    <figure>
+      <img src="triangulation_clockwise.png" alt="Mirroring stations: clockwise triangle (unmirrored)" />
+      <figcaption><i>Figure 1: Mirroring stations - clockwise triangle (unmirrored)</i></figcaption>
+    </figure>
+
+    <figure>
+      <img src="triangulation_counter-clockwise.png" alt="Mirroring stations: counter-clockwise triangle (mirrored)" />
+      <figcaption><i>Figure 2: Mirroring stations - counter-clockwise triangle (mirrored)</i></figcaption>
+    </figure>
+
+    <p>
+      On the above example the first, clockwise triangle, is the option automatically chosen by the software.
+      If the correct version is the second one, you can change it by selecting station 2, opening the <i>Edit shot</i> dialog box and clicking on the <i>Mirror</i> button.
+      You will get the second, counter-clockwise triangle.
+      To get back to the original version, just reopen the <i>Edit shot</i> dialog box and click on the <i>Unmirror</i> button.
+    </p>
+
+    <p>
+      It is impossible for the software to guess the correct version of the triangle from the arbitrary azimuths obtained from the measuring device.
+      The user must choose the correct version.
+      It is recommended that the user checks, and corrects if necessary, the mirroring status of each new triangle BEFORE starting to draw any part of a sketch using the new station as reference.
+    </p>
+
+    <p>
+      When mirroring/unmirroring a station it is possible that, if there already are other stations adjusted using the station being mirrored/unmirrored as reference, they will become unadjusted.
+      This can happen if the new position of the mirrored/unmirrored station makes it impossible to solve the triangles that were previously solved.
+      In this case the user will be presented a dialog box informing the situation, listing the stations that were previously adjusted and got unadjusted so the user can decide to cancel or go on with the mirror/unmirror operation.
+    </p>
+
+    <h2>Algorithm</h2>
+
+    <p>
+      The triangulation algorithm carries out trigonometric calculations to determine the azimuths of both legs used to define a new station therefore properly positioning it.
+      It is based on the Law of Cosines.
+    </p>
+
+    <p>
+      It uses the 2 previously existing stations as references to calculate the azimuths of the legs connected to the new station.
+    </p>
+
+    <p>
+      Or, for the very first triangle, it uses the measured azimuth of the first measured leg.
+    </p>
+
+    <p>
+      It should be suitable for large surveys but it has only been tested on small test cases.
+    </p>
+
+    <h2>General notes</h2>
+
+    <ul>
+      <li>Don't create shots between 2 previously existing stations.</li>
+      <li>
+        Don't use vertical (or quasi-vertical) legs as reference legs for a new triangle as the azimuth of a vertical leg is undefined and the azimuth of the reference leg is essential for calculating the azimuths of the 2 new legs of each triangle.
+        In practical terms, don't use as reference stations for a new station 2 stations that are vertically aligned.
+      </li>
+      <li>Always check (and correct if necessary) the mirroring status of each new station BEFORE using it as an actual reference in your sketch.</li>
+      <li>
+        You should not create splays in triangulated surveys as you compass isn't reliable (that's the reason you are using a triangulated survey in the first time, right?).
+        All measurements that would normally be done with a splay should, in a triangulated survey, be done with a new station (which should be connected to 2 previous stations).
+      </li>
+      <li>
+        If you want to measure the position of a station for the second time using other previously existing stations as references (maybe to check the position of the first station), use a different name for the second measurement.
+        For example: if the first station was called 8, name the new measurement station as 8x so the triangulation algorithm will adjust this new station independently of the first one.
+      </li>
+    </ul>
+
+    <p>
+      If you follow these instruction properly, you won't see any unadjusted azimuths.
+    </p>
+  </body>
+</html>

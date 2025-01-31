@@ -25,6 +25,7 @@ import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Stack;
 import java.util.Comparator;
@@ -358,6 +359,9 @@ public class TDNum
   private ArrayList< NumNode >    mNodes;
   private ArrayList< DBlock >     mUnattachedShots;
   private ArrayList< NumCycle >   mBadLoops;
+  private HashMap< String, Tri2StationStatus > mTriStationsStatus;
+  private HashMap< String, Tri2StationAxle > mTriStationsAxles;
+  private HashSet< String > mTriStationsMirrored;
 
   public String getOriginStation() { return (mStartStation == null)? null : mStartStation.name; }
   public NumStation getOrigin()    { return mStartStation; }
@@ -579,6 +583,39 @@ public class TDNum
   {
     NumStation st = getStation( name );
     return ( st != null && st.hidden() );
+  }
+
+  /**
+   * Returns the stations triangulation status: refernce, adjusted or unadjusted.
+   * @param name station name
+   * @return station triangulation status
+   */
+  public Tri2StationStatus getStationTriStatus( String name )
+  {
+    return mTriStationsStatus.get( name );
+  }
+
+  /**
+   * Returns all stations triangulation status: reference, adjusted or unadjusted.
+   * @return all stations triangulation status
+   */
+  public HashMap<String, Tri2StationStatus> getAllStationsTriStatus() {
+    return mTriStationsStatus;
+  }
+
+  /**
+   * Return the station triangulation axle info, i.e., around with leg the station can be mirrored.
+   * @param name station name
+   * @return station triangulation axle info
+   */
+  public Tri2StationAxle getStationTriAxle( String name )
+  {
+    return mTriStationsAxles.get( name );
+  }
+
+  public boolean getStationTriIsMirrored( String name )
+  {
+    return mTriStationsMirrored.contains( name );
   }
 
   /** @return true if the station is barrier
@@ -931,7 +968,7 @@ public class TDNum
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) { // preprocess: convert diving-mode data to normal form
       HashMap< String, Float > depths = new HashMap< String, Float >();
       for ( DBlock blk : data ) { // prepare stations depths
-	if ( blk.mFrom != null && blk.mFrom.length() > 0 && blk.mTo != null && blk.mTo.length() > 0 ) {
+        if ( blk.mFrom != null && blk.mFrom.length() > 0 && blk.mTo != null && blk.mTo.length() > 0 ) {
           if ( depths.isEmpty() ) {
             depths.put( blk.mFrom, 0.0f );
             // TDLog.v("NUM depth of " + blk.mFrom + " = 0 " ); 
@@ -950,14 +987,14 @@ public class TDNum
       // boolean depth_error = false;
       // String error = TDString.EMPTY;
       for ( DBlock blk : data ) { // set dblock clino
-	if ( blk.mFrom != null && blk.mFrom.length() > 0 && depths.containsKey( blk.mFrom ) 
-	  && blk.mTo != null && blk.mTo.length() > 0 && depths.containsKey( blk.mTo ) ) {
+        if ( blk.mFrom != null && blk.mFrom.length() > 0 && depths.containsKey( blk.mFrom )
+            && blk.mTo != null && blk.mTo.length() > 0 && depths.containsKey( blk.mTo ) ) {
           float fdepth = depths.get( blk.mFrom ).floatValue(); // FIXME may null pointer
           float tdepth = depths.get( blk.mTo ).floatValue(); // FIXME may null pointer
-	  if ( ! blk.makeClino( fdepth, tdepth ) ) {
-	    // depth_error = true;
-	    TDLog.e("Failed make clino: " +  blk.mFrom + "-" + blk.mTo + " (" + fdepth + " " + tdepth + ") " );
-	  // } else {
+          if ( ! blk.makeClino( fdepth, tdepth ) ) {
+            // depth_error = true;
+            TDLog.e("Failed make clino: " +  blk.mFrom + "-" + blk.mTo + " (" + fdepth + " " + tdepth + ") " );
+            // } else {
             // TDLog.v("NUM make clino " + blk.mFrom + "-" + blk.mTo + " = " + blk.mClino );
           }
         }
@@ -989,9 +1026,11 @@ public class TDNum
     initShots( data, tmp_shots, tmp_splays, ! midline_only );
     // TDLog.Log( TDLog.LOG_NUM, "data " + data.size() + " shots " + tmp_shots.size() + " splays " + tmp_splays.size() );
 
-    // for ( TriShot tsh : tmp_shots ) tsh.dump();
+    if ( TDInstance.calculated_azimuths != 0 ) {
+      makeTriangulation( tmp_shots );
+    }
 
-    if ( ! midline_only && TDSetting.mLoopClosure == TDSetting.LOOP_TRIANGLES ) {
+    if ( ! midline_only && ( TDSetting.mLoopClosure == TDSetting.LOOP_TRILATERATION ) ) {
       makeTrilateration( tmp_shots );
     }
 
@@ -1022,17 +1061,17 @@ public class TDNum
           ts1.sibling = ts2;
           ts1 = ts2;
           ts2.backshot = 1;
-	  ++ nrSiblings;
+          ++ nrSiblings;
         } else if ( from.equals( ts2.to ) && to.equals( ts2.from ) ) { 
           // TDLog.v( "chain a negative sibling " + from + " " + to );
           ts1.sibling = ts2;
           ts1 = ts2;
           ts2.backshot = -1;
-	  ++ nrSiblings;
+          ++ nrSiblings;
         }
       }
 
-      if ( ts0.sibling != null ) { 
+      if ( ts0.sibling != null ) {
         // TDLog.v( "check sibling shots agreement " + ts0.from + " " + ts0.to );
         float dmax = 0.0f;
         float cc = TDMath.cosd( blk0.mClino );
@@ -1116,7 +1155,7 @@ public class TDNum
             sf.addAzimuth( ts.b(), a_ext );
             if ( st != null ) { // loop-closure -: need the loop length to compute the fractional closure error
               // do close loop also on duplicate shots
-	      if ( path_fmt != null ) {
+              if ( path_fmt != null ) {
                 ArrayList< NumShot > shots = getShortestPathShots( sf, st );
                 ArrayList< NumShortpath > paths = new ArrayList<>();
                 mStations.initShortestPath( paths, 1000000.0f );
@@ -1130,7 +1169,7 @@ public class TDNum
                 addShotToStations( sh, sf, st );
               }
               // float length = ts.d();
-	      // if ( i_ext == 0 ) length = TDMath.sqrt( length*length - ts.h()*ts.h() );
+              // if ( i_ext == 0 ) length = TDMath.sqrt( length*length - ts.h()*ts.h() );
               addToStats( ts.duplicate, ts.surface, ts.d(), ((i_ext == 0)? Math.abs(ts.v()) : ts.d()), ts.h() );
               ts.used = true;
               repeat = true;
@@ -1255,7 +1294,7 @@ public class TDNum
     addToStat( st, ts.getReductionType() );
     if ( ! mStations.addStation( st ) ) mClosureStations.add( st );
 
-    st.addAzimuth( (ts.b()+180)%360, -a_ext );
+    st.addAzimuth( TDMath.in360( TDMath.add180( ts.b() ) ), -a_ext );
     st.mAnomaly = anomaly + sf.mAnomaly;
     updateBBox( st );
     addToStats( ts.duplicate, ts.surface, ts.d(), ((i_ext == 0)? Math.abs(ts.v()) : ts.d()), ts.h(), st.v );
@@ -1275,7 +1314,7 @@ public class TDNum
    */
   private void addReversedShot( NumStation st, TriShot ts, int i_ext, float a_ext, float f_ext, float anomaly )
   {
-    st.addAzimuth( (ts.b()+180)%360, -a_ext );
+    st.addAzimuth( TDMath.in360( TDMath.add180( ts.b() ) ), -a_ext );
     float bearing = ts.b() - st.mAnomaly;
     boolean has_coords = (i_ext <= 1);
     NumStation sf = new NumStation( ts.from, st, - ts.d(), bearing + mDecl, ts.c(), f_ext, has_coords /*, ts.getReductionType() */ ); // 20200503 added mDecl
@@ -1310,7 +1349,7 @@ public class TDNum
     // addToStat( st1, ts.getReductionType() ); // FIXME should do this ?
     if ( ! mStations.addStation( st1 ) ) mClosureStations.add( st1 );
 
-    st1.addAzimuth( (ts.b()+180)%360, -a_ext );
+    st1.addAzimuth( TDMath.in360( TDMath.add180( ts.b() ) ), -a_ext );
     st1.mAnomaly = anomaly + sf.mAnomaly;
     updateBBox( st1 );
     st1.mDuplicate = true;
@@ -2046,6 +2085,21 @@ public class TDNum
         bx.compensateError( -e, -s, -v );
       }
     }
+  }
+
+  /**
+   * Correct temporary shots using length based trilateration
+   * @param shots temporary shot list
+   */
+  private void makeTriangulation( List< TriShot > shots )
+  {
+    Triangulation tr = new Triangulation( shots );
+    tr.triangulate();
+
+    // Info to help interface for user to mirror a station around the fixed triangle side.
+    mTriStationsAxles = tr.getStationAxles();
+    mTriStationsStatus = tr.getStationStatus();
+    mTriStationsMirrored = tr.getMirroredStations();
   }
 
   // -------------------------------------------------------------

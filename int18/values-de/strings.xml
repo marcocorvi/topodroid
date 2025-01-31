@@ -2185,4 +2185,18 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="help_surface_3d">Terrain</string>
   <string name="help_color_3d">Farben</string>
   <string name="help_frame_3d">Rahmen</string>
+
+  <!-- TODO string name="triangulation_triangulated_station">Triangulation: </string -->
+  <!-- TODO string name="button_triangulation_mirror_station">Mirror</string -->
+  <!-- TODO string name="button_triangulation_unmirror_station">Unmirror</string -->
+  <!-- TODO string name="triangulation_axle">around %1$s leg</string -->
+  <!-- TODO string name="triangulation_reference_station">Reference station</string -->
+  <!-- TODO string name="triangulation_unadjusted_station">Unadjusted station</string -->
+  <!-- TODO string name="triangulation_calculated_azimuths">Trigonometrically calculated azimuths (triangulation)</string -->
+  <!-- TODO string name="triangulation_regular_azimuths">Regular measured azimuths</string -->
+  <!-- TODO string name="triangulation_unadjusted_stations_title">Unadjusted stations</string -->
+  <!-- TODO string name="triangulation_unadjusted_stations_explanation">The following stations were adjusted before %1$s station %2$s but aren\'t after it:</string -->
+  <!-- TODO string name="triangulation_keep_mirroring">Continue %1$s station %2$s?</string -->
+  <!-- TODO string name="triangulation_mirroring">mirroring</string -->
+  <!-- TODO string name="triangulation_unmirroring">unmirroing</string -->
 </resources>

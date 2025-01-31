@@ -1616,6 +1616,7 @@ public class TopoDroidApp extends Application
 	TDInstance.datamode = mData.getSurveyDataMode( TDInstance.sid );
 	// TDLog.v( "set survey from name: <" + name + "> datamode " + datamode + " " + TDInstance.datamode );
         TDInstance.secondLastShotId = lastShotId();
+        TDInstance.calculated_azimuths = mData.getSurveyCalculatedAzimuths( TDInstance.sid );
         // restoreFixed();
 	if ( update ) updateWindows();
         TDInstance.xsections = ( SurveyInfo.XSECTION_SHARED == mData.getSurveyXSectionsMode( TDInstance.sid ) );

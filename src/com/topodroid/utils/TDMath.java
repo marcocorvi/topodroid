@@ -24,6 +24,8 @@ public class TDMath
   static final public float M_PI8 = M_PI/8;        // Math.PI/8
   static final public float RAD2DEG = (180.0f/M_PI);
   static final public float DEG2RAD = (M_PI/180.0f);
+  static final public float measurementEpsilon = 0.01f;
+  static final public double measurementEpsilonD = 0.01d;
 
   static public float abs( float x )   { return Math.abs(x); }
   static public float cos( float x )   { return (float)Math.cos( x ); }
@@ -43,6 +45,24 @@ public class TDMath
   static public double sinDd( double xd ) { return Math.sin( xd * DEG2RAD ); }
   static public double atan2D(  double y, double x ) { return Math.atan2( y, x ); }
   static public double atan2Dd( double y, double x ) { return RAD2DEG * Math.atan2( y, x ); }
+
+  /**
+   * Converts atan2Dd to TopoDroid direction.
+   * For Math.atan2 the 0 angle is on the right and increases counterclockwise.
+   * For TopoDroid the 0 angle is on the top and increases clockwise, i.e., the North (0°) is up, East (90°) is right, South (180°) is down, West (270°) is left, i.e., the azimuth.
+   * @param y the vertical parameter for atan2
+   * @param x the horizontal parameter for atan2
+   * @return the azimuth in TopoDroid direction
+   */
+  static public double atan2DdTranslatedToTD( double y, double x ) {
+    double azimuth = 90d - atan2Dd( y, x );
+    if (azimuth < 0d) {
+      azimuth += 360d;
+    } else if (azimuth >= 360d) {
+      azimuth -= 360d;
+    }
+    return azimuth;
+  }
   static public double acosD( double x )   { return Math.acos( x ); }
   static public double acosDd( double x )  { return RAD2DEG * Math.acos( x ); }
   static public double asinDd( double x )  { return RAD2DEG * Math.asin( x ); }
@@ -50,6 +70,24 @@ public class TDMath
   static public float atan2F(  double y, double x ) { return (float)Math.atan2( y, x ); }
   static public float atan2Fd( double y, double x ) { return (float)( RAD2DEG * Math.atan2( y, x ) ); }
   static public float sqrtF( double x )   { return (float)Math.sqrt( x ); }
+
+    /**
+   * Compares two double precision floating point numbers for equality within a provided epsilon to account for floating point errors.
+   * @param d1 first double number
+   * @param d2 second double number
+   * @param e  epsilon
+   * @return boolean
+   */
+  static public boolean isEqual( double d1, double d2, double e ) { return Math.abs(d1 - d2) < e; }
+
+  /**
+   * Compares two single precision floating point numbers for equality within a default epsilon to account for floating point errors.
+   * @param d1 first float number
+   * @param d2 second float number
+   * @param e  epsilon
+   * @return boolean
+   */
+  static public boolean isEqual( float d1, float d2, float e ) { return Math.abs(d1 - d2) < e; }
 
   /** @return the difference between two angles [degrees]
    * @param a1   first angle [deg.]

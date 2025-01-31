@@ -300,7 +300,8 @@ public class TDConst
     return -1;
   }
 
-  public static final String[] mSurveyExportTypes = { "ZIP", 
+  public static final String[] mSurveyExportTypes = {
+    "ZIP",
     "Compass",   // 1
     "cSurvey",
     // "GHTopo",
@@ -323,7 +324,8 @@ public class TDConst
     "Shapefile",  // 16
   };
 
-  public static final String[] mSurveyExportTypesNoGeo = { "ZIP", 
+  public static final String[] mSurveyExportTypesNoGeo = {
+    "ZIP",
     "Compass",
     "cSurvey",
     // "GHTopo",

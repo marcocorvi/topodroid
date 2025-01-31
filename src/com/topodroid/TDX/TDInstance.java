@@ -50,6 +50,7 @@ public class TDInstance
 
   static boolean xsections = false; // current value of mSharedSections
   public static int     datamode = 0;      // current value of survey datamode
+  public static int     calculated_azimuths = 0;
   // FIXME static int    extend = 90;  // current value of survey extend
 
   private static Device  deviceA = null;

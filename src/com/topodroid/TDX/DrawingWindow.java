@@ -11,6 +11,8 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.num.Tri2StationAxle;
+import com.topodroid.num.Tri2StationStatus;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
@@ -29,7 +31,6 @@ import com.topodroid.num.NumShot;
 import com.topodroid.num.NumSplay;
 // import com.topodroid.mag.Geodetic;
 import com.topodroid.math.TDVector;
-import com.topodroid.math.Point2D;
 // import com.topodroid.math.BezierCurve;
 // import com.topodroid.math.BezierInterpolator;
 // import com.topodroid.dln.DLNWall;
@@ -64,6 +65,7 @@ import java.io.FileInputStream; // TH2EDIT
 import java.io.OutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -145,6 +147,7 @@ public class DrawingWindow extends ItemDrawer
                                     // , IJoinClickHandler
                                     , IPhotoInserter
                                     , IAudioInserter
+                                    , TriangulationMirrorUnadjustedStationsDialogListener
 {
   public static final int ZOOM_TRANSLATION_1 = -50; // was -42
   // public static final int ZOOM_TRANSLATION_3 = -200;
@@ -5970,6 +5973,53 @@ public class DrawingWindow extends ItemDrawer
     return null;
   }
 
+  /**
+   *  Toggles mirrored status of provided station. Relevant only for TRIANGULATION loop closure.
+   * @param station station name
+   * @param is_mirror true if the station is mirrored, false otherwise
+   */
+  void toggleTriMirror( String station, boolean is_mirror )
+  {
+    mApp_mData.toggleTriMirroredStation( TDInstance.sid, station );
+    HashMap<String, Tri2StationStatus> triStatusPre = mNum.getAllStationsTriStatus();
+    updateDisplay();
+    HashMap<String, Tri2StationStatus> triStatusPos = mNum.getAllStationsTriStatus();
+    ArrayList<String> unadjusted_stations = getNewlyUnadjustedStations(triStatusPre, triStatusPos);
+    if (!unadjusted_stations.isEmpty()) {
+      new TriangulationMirrorUnadjustedStationsDialog(
+          mActivity,
+          this,
+          mApp,
+          this,
+          station,
+          is_mirror,
+          unadjusted_stations
+      ).show();
+    }
+  }
+
+  /**
+   * Looks for stations that were adjusted and aren't anymore. Relevant only for TRIANGULATION loop closure.
+   * @param pre stations tri status list before the last station mirroring
+   * @param pos stations tri status list after the last station mirroring
+   * @return list of stations that were adjusted and aren't anymore
+   */
+  ArrayList<String> getNewlyUnadjustedStations(HashMap<String, Tri2StationStatus> pre, HashMap<String, Tri2StationStatus> pos)
+  {
+    ArrayList<String> unadjusted = new ArrayList<String>();
+    for (String station : pos.keySet())
+    {
+      if (pre.containsKey(station) &&
+          (pre.get(station) == Tri2StationStatus.ADJUSTED) &&
+          (pos.get(station) != Tri2StationStatus.ADJUSTED)
+      )
+      {
+        unadjusted.add(station);
+      }
+    }
+    return unadjusted;
+  }
+
   /** open a station xsection - at station B where A--B--C
    * @param st_name   station name 
    * @param type      type of the parent plot where the x-section is defined
@@ -6917,7 +6967,7 @@ public class DrawingWindow extends ItemDrawer
       setTheTitle();
     } 
 
-    /** set the plot as of type 2
+    /** set the plot as of type 1
      * @param params   whether to update XY-zoom values by the plot
      * @param compute ...
      * called by setPlotType, switchPlotType and doRecover
@@ -7317,8 +7367,20 @@ public class DrawingWindow extends ItemDrawer
               DrawingStationUser path = mDrawingSurface.getStationPath( st.getName() );
               boolean barrier = mNum.isBarrier( st.getName() );
               boolean hidden  = mNum.isHidden( st.getName() );
+              Tri2StationStatus triStatus;
+              Tri2StationAxle triAxle;
+              boolean isTriMirrored;
+              if ( TDLevel.overExpert && ( TDInstance.calculated_azimuths != 0 ) ) {
+                triStatus = mNum.getStationTriStatus( st.getName() );
+                triAxle = mNum.getStationTriAxle( st.getName() );
+                isTriMirrored = mNum.getStationTriIsMirrored( st.getName() );
+              } else {
+                triStatus = null;
+                triAxle = null;
+                isTriMirrored = false;
+              }
               List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, st.getName(), true ); // select "independent" legs
-              new DrawingStationDialog( mActivity, this, mApp, st, path, barrier, hidden, /* TDInstance.xsections, */ legs ).show();
+              new DrawingStationDialog( mActivity, this, mApp, st, path, barrier, hidden, /* TDInstance.xsections, */ legs, triStatus, triAxle, isTriMirrored ).show();
             } else if ( item instanceof DrawingPointPath ) {
               DrawingPointPath point = (DrawingPointPath)(item);
               // TDLog.v( "edit point type " + point.mPointType );
@@ -8392,7 +8454,7 @@ public class DrawingWindow extends ItemDrawer
           Resources res = getResources();
           String msg = String.format( res.getString( R.string.section_area ), area );
           TopoDroidAlertDialog.makeAlert( mActivity, res, msg, R.string.button_ok, -1, null, null );
-	} else {
+        } else {
           if ( mNum != null ) {
             float azimuth = -1;
             float oblique = 0;
@@ -8403,8 +8465,8 @@ public class DrawingWindow extends ItemDrawer
             new DrawingStatDialog( mActivity, mNum, mPlot1.start, azimuth, oblique, mApp_mData.getSurveyStat( TDInstance.sid ) ).show();
           } else {
             TDToast.makeBad( R.string.no_data_reduction );
-	  }
-	}
+          }
+        }
       } else if ( TDLevel.overNormal && p++ == pos ) { // RECOVER RELOAD - OPEN
         if ( mTh2Edit ) { // TH2EDIT API_19
           selectFromProvider( TDConst.SURVEY_FORMAT_TH2, TDRequest.REQUEST_GET_IMPORT, Intent.ACTION_OPEN_DOCUMENT );
@@ -8430,11 +8492,11 @@ public class DrawingWindow extends ItemDrawer
           startActivityForResult( intent, TDRequest.PLOT_RELOAD );
         }
       } else if ( TDLevel.overNormal && p++ == pos ) { // ZOOM-FIT / ORIENTATION
-	if ( TDLevel.overExpert ) {
+        if ( TDLevel.overExpert ) {
           ( new PlotZoomFitDialog( mActivity, this, mTh2Edit ) ).show(); // TH2EDIT added last param
-	} else {
-	  doZoomFit();
-	}
+        } else {
+          doZoomFit();
+        }
       } else if ( TDLevel.overAdvanced && (! mTh2Edit) && PlotType.isSketch2D( mType ) && p++ == pos ) { // TH2EDIT RENAME - DELETE - SPLIT - OUTLINE - MERGE
         //   askDelete();
         (new PlotRenameDialog( mActivity, this )).show();
@@ -10036,6 +10098,12 @@ public class DrawingWindow extends ItemDrawer
     mRecentDimX  = Float.parseFloat( getResources().getString( R.string.dimxl ) );
     mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimyl ) );
     setBtnRecentAll( );
+  }
+
+  public void onTriangulationMirrorUnadjustedStationsDialogClosed(String buttonPressed, String station, boolean isMirror) {
+    if (buttonPressed.equals("Cancel")) {
+      toggleTriMirror( station, isMirror );
+    }
   }
 
   // private void AlertMissingSymbols()

@@ -51,6 +51,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteDiskIOException;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -70,6 +71,7 @@ public class DataHelper extends DataSetObservable
   private static final String PHOTO_TABLE  = "photos";
   private static final String SENSOR_TABLE = "sensors";
   private static final String AUDIO_TABLE  = "audios";
+  private static final String TRI_MIRRORED_STATIONS_TABLE  = "tri_mirrored_stations";
 
   private final static String WHERE_ID          = "id=?";
   private final static String WHERE_SID         = "surveyId=?";
@@ -276,7 +278,7 @@ public class DataHelper extends DataSetObservable
     int newVersion = TDVersion.DATABASE_VERSION;
     boolean need_upgrade = myDB.needUpgrade( TDVersion.DATABASE_VERSION ); 
     // TDLog.v( "DB: version " + oldVersion + " -> " + newVersion + " upgrade: " + need_upgrade );
-    if ( oldVersion < newVersion ) {
+    if ( need_upgrade ) {
       // TDLog.v( "DB updating tables ...");
       DistoXOpenHelper.updateTables( myDB, oldVersion, newVersion );
       myDB.setVersion( TDVersion.DATABASE_VERSION );
@@ -1006,9 +1008,10 @@ public class DataHelper extends DataSetObservable
    * @param comment      survey comment
    * @param init_station initial station
    * @param xsections     xsection mode (private or shared)
+   * @param calculated_azimuths  should the azimuths be calculated (overwriting the measured ones)
    */
   private ContentValues makeSurveyInfoCcontentValues( String date, String team, double decl, String comment,
-                                String init_station, int xsections ) // datamode cannot be updated
+                                String init_station, int xsections, int calculated_azimuths ) // datamode cannot be updated
   {
     ContentValues cv = new ContentValues();
     cv.put( "day", date );
@@ -1017,6 +1020,7 @@ public class DataHelper extends DataSetObservable
     cv.put( "comment", ((comment != null)? comment : TDString.EMPTY ) );
     cv.put( "init_station", ((init_station != null)? init_station : TDString.ZERO ) );
     cv.put( "xsections", xsections );
+    cv.put( "calculated_azimuths", calculated_azimuths );
     return cv;
   }
 
@@ -1027,13 +1031,14 @@ public class DataHelper extends DataSetObservable
    * @param comment      survey comment
    * @param init_station initial station
    * @param xsections     xsection mode (private or shared)
+   * @param calculated_azimuths  should the azimuths be calculated (overwriting the measured ones)
    */
   void updateSurveyInfo( long sid, String date, String team, double decl, String comment,
-                         String init_station, int xsections )
+                         String init_station, int xsections, int calculated_azimuths )
                          // FIXME int extend
   {
     // TDLog.v("DB update survey, init station <" + init_station + ">" );
-    ContentValues cv = makeSurveyInfoCcontentValues( date, team, decl, comment, init_station, xsections );
+    ContentValues cv = makeSurveyInfoCcontentValues( date, team, decl, comment, init_station, xsections, calculated_azimuths );
     try {
       myDB.beginTransaction();
       myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(sid) } );
@@ -1260,6 +1265,13 @@ public class DataHelper extends DataSetObservable
     return doUpdateSurvey( id, cv, "survey decl" );
   }
 
+  public boolean updateSurveyCalculatedAzimuths( long id, boolean cal_azi )  // 202007
+  {
+    ContentValues cv = new ContentValues();
+    cv.put( "calculated_azimuths", cal_azi ? 1 : 0 );
+    return doUpdateSurvey( id, cv, "survey cal_azi" );
+  }
+
   // -----------------------------------------------------------------------
   // SURVEY delete
 
@@ -1276,6 +1288,7 @@ public class DataHelper extends DataSetObservable
       myDB.beginTransaction();
       myDB.delete( PHOTO_TABLE,   WHERE_SID, clause );
       myDB.delete( AUDIO_TABLE,   WHERE_SID, clause );
+      myDB.delete( TRI_MIRRORED_STATIONS_TABLE, WHERE_SID, clause );
       myDB.delete( PLOT_TABLE,    WHERE_SID, clause );
       myDB.delete( FIXED_TABLE,   WHERE_SID, clause );
       myDB.delete( SHOT_TABLE,    WHERE_SID, clause );
@@ -1329,6 +1342,16 @@ public class DataHelper extends DataSetObservable
     pw.format( Locale.US,
                "UPDATE shots SET distance=%.6f, bearing=%.4f, clino=%.4f WHERE surveyId=%d AND id=%d",
                d, b, p, sid, id );
+    doExecShotSQL( id, sw );
+  }
+
+  public void updateShotBearing( long id, long sid, float b )
+  {
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter( sw );
+    pw.format( Locale.US,
+        "UPDATE shots SET bearing=%.2f WHERE surveyId=%d AND id=%d",
+        b, sid, id );
     doExecShotSQL( id, sw );
   }
 
@@ -2561,6 +2584,8 @@ public class DataHelper extends DataSetObservable
   private static final String qAudiosByReftype = "select id, shotId, date from audios where surveyId=? and reftype=?";
 
   private static final String qPhotosAll    = "select id, shotId, status, title, date, comment, camera, code, reftype from photos where surveyId=? ";
+
+  private static final String qTriMirrorStationAll    = "SELECT name FROM tri_mirrored_stations WHERE surveyId=? ";
 
   private static final String qjPhoto       = "select id, shotId from photos where surveyId=? and id=? and reftype=?";
 
@@ -4580,7 +4605,7 @@ public class DataHelper extends DataSetObservable
     SurveyInfo info = null;
     if ( myDB == null ) return null;
     Cursor cursor = myDB.query( SURVEY_TABLE,
-                               new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections", "datamode", "extend" }, // columns
+                               new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections", "datamode", "extend", "calculated_azimuths" }, // columns
                                WHERE_ID, new String[] { Long.toString(sid) },
                                null, null, "name" );
     if (cursor.moveToFirst()) {
@@ -4595,6 +4620,7 @@ public class DataHelper extends DataSetObservable
       info.xsections = (int)cursor.getLong( 6 );
       info.datamode  = (int)cursor.getLong( 7 );
       info.mExtend   = (int)cursor.getLong( 8 );
+      info.mCalculatedAzimuths = (int)cursor.getLong( 9 );
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return info;
@@ -5641,6 +5667,64 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
+  /**
+   * @return a HashSet with all stations that should be mirrored in triangulation loop closure.
+   */
+  public HashSet< String > getTriMirroredStations( long sid )
+  {
+    HashSet< String > ret = new HashSet< String >();
+    if ( myDB == null ) return ret;
+    Cursor cursor = myDB.query(
+        TRI_MIRRORED_STATIONS_TABLE,
+        new String[] { "name" },
+        WHERE_SID,
+        new String[] { Long.toString( sid ) },
+        null,
+        null,
+        null
+    );
+    if ( cursor != null ) {
+      if ( cursor.moveToFirst() ) {
+        do {
+          ret.add( cursor.getString(0) );
+        } while (cursor.moveToNext());
+      }
+      if ( !cursor.isClosed() ) cursor.close();
+    }
+    return ret;
+  }
+
+  /** toggle the mirrored status of a station. Relevant to triangulation loop closure.
+   * @param sid      survey ID
+   * @param station  station name
+   */
+  public void toggleTriMirroredStation( long sid, String station )
+  {
+    if ( myDB == null ) return;
+    Cursor cursor = myDB.query(
+      TRI_MIRRORED_STATIONS_TABLE,
+      new String[] { "name" },
+      WHERE_SID_NAME,
+      new String[] { Long.toString(sid), station },
+      null,
+      null,
+      null
+    );
+    if ( cursor.moveToFirst() ) {
+      myDB.delete(
+        TRI_MIRRORED_STATIONS_TABLE,
+        "surveyId=? and name=?",
+        new String[] { Long.toString(sid), station }
+      );
+    } else {
+      ContentValues cv = new ContentValues();
+      cv.put( "surveyId", sid );
+      cv.put( "name", station );
+      doInsert( TRI_MIRRORED_STATIONS_TABLE, cv, "insert mirrored station" );
+    }
+    if ( !cursor.isClosed() ) cursor.close();
+  }
+
   /** set the current survey
    * @param name     survey name
    * @param datamode survey data-mode
@@ -5973,14 +6057,14 @@ public class DataHelper extends DataSetObservable
        FileWriter fw = TDFile.getFileWriter( filename ); // DistoX-SAF
        PrintWriter pw = new PrintWriter( fw );
        Cursor cursor = myDB.query( SURVEY_TABLE, 
-                            new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections", "datamode", "extend" },
+                            new String[] { "name", "day", "team", "declination", "comment", "init_station", "xsections", "datamode", "extend", "calculated_azimuths" },
                             "id=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
          // TDLog.v("dump SURVEY");
          do {
            pw.format(Locale.US,
-                     "INSERT into %s values( %d, \"%s\", \"%s\", \"%s\", %.4f, \"%s\", \"%s\", %d, %d, %d );\n",
+                     "INSERT into %s values( %d, \"%s\", \"%s\", \"%s\", %.4f, \"%s\", \"%s\", %d, %d, %d, %d );\n",
                      SURVEY_TABLE,
                      sid,
                      TDString.escape( cursor.getString(0) ),
@@ -5991,7 +6075,8 @@ public class DataHelper extends DataSetObservable
                      TDString.escape( cursor.getString(5) ),     // init_station
                      (int)cursor.getLong(6),  // xstation
                      (int)cursor.getLong(7),  // datamode
-                     (int)cursor.getLong(8)   // extend
+                     (int)cursor.getLong(8),  // extend
+                     (int)cursor.getLong(9)   // calculated_azimuths
            );
          } while (cursor.moveToNext());
        }
@@ -6039,6 +6124,20 @@ public class DataHelper extends DataSetObservable
                      cursor.getLong(6),
                      TDString.escape( cursor.getString(7) ), // code
                      cursor.getLong(8)                       // reftype: reference item type
+           );
+         } while (cursor.moveToNext());
+       }
+       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+
+       cursor = myDB.rawQuery( qTriMirrorStationAll, new String[] { Long.toString(sid) } );
+       if (cursor.moveToFirst()) {
+         // TDLog.v("dump PHOTO");
+         do {
+           pw.format(Locale.US,
+               "INSERT INTO %s VALUES( %d, \"%s\" );\n",
+               TRI_MIRRORED_STATIONS_TABLE,
+               sid,
+               TDString.escape( cursor.getString(0) )    // station
            );
          } while (cursor.moveToNext());
        }
@@ -6296,7 +6395,7 @@ public class DataHelper extends DataSetObservable
        // pos = v.indexOf( '(' ) + 1;
        // len = v.lastIndexOf( ')' );
        // scanline0.skipSpaces( );
-       if ( table.equals(SURVEY_TABLE) ) { 
+       if ( table.equals(SURVEY_TABLE) ) {
          long skip_sid = scanline0.longValue( -1 );
          name          = TDString.unescape( scanline0.stringValue( ) );
          date          = TDString.unescape( scanline0.stringValue( ) );
@@ -6306,17 +6405,20 @@ public class DataHelper extends DataSetObservable
          String init_station = ( db_version > 22)? TDString.unescape( scanline0.stringValue( ) ) : "0";
          int xsections = ( db_version > 29)? (int)( scanline0.longValue( SurveyInfo.XSECTION_SHARED ) )
                                            : SurveyInfo.XSECTION_SHARED; // old at-station x-sections were "shared"
-	 int datamode  = ( db_version > 36)? (int)( scanline0.longValue( SurveyInfo.DATAMODE_NORMAL ) )
+         int datamode  = ( db_version > 36)? (int)( scanline0.longValue( SurveyInfo.DATAMODE_NORMAL ) )
                                            : SurveyInfo.DATAMODE_NORMAL;
-	 int extend_ref = ( db_version > 38)? (int)( scanline0.longValue( SurveyInfo.SURVEY_EXTEND_NORMAL ) )
+         int extend_ref = ( db_version > 38)? (int)( scanline0.longValue( SurveyInfo.SURVEY_EXTEND_NORMAL ) )
                                             : SurveyInfo.SURVEY_EXTEND_NORMAL;
+         int calculated_azimuths = ( db_version > 54 )?
+           (int)( scanline0.longValue( SurveyInfo.CALCULATED_AZIMUTHS_FALSE ) ) :
+           SurveyInfo.CALCULATED_AZIMUTHS_FALSE;
 
          sid = setSurvey( name, datamode );
 
          try {
            myDB.beginTransaction();
            // success &= updateSurveyInfo( sid, date, team, decl, comment, init_station, xsections, false );
-           ContentValues cv = makeSurveyInfoCcontentValues( date, team, decl, comment, init_station, xsections );
+           ContentValues cv = makeSurveyInfoCcontentValues( date, team, decl, comment, init_station, xsections, calculated_azimuths );
            myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(sid) } );
            // TDLog.v( "DB updateSurveyInfo: " + success );
 
@@ -6330,11 +6432,11 @@ public class DataHelper extends DataSetObservable
              v = vals[3];
              Scanline scanline1 = new Scanline( v, v.indexOf('(')+1, v.lastIndexOf(')') );
              skip_sid = scanline1.longValue( -1 ); // skip survey ID
-             id = scanline1.longValue( -1 );
+             id = table.equals(TRI_MIRRORED_STATIONS_TABLE )? -1 : scanline1.longValue( -1 );
              // TDLog.v("DB table " + table + " id " + id + " v " + v );
 
              if ( table.equals(AUDIO_TABLE) ) // ---------------- FIXME_AUDIO
-	     {
+             {
                itemid = scanline1.longValue( -1 );
                if ( itemid >= 0 && id >= 0 ) {
                  date    = TDString.unescape( scanline1.stringValue( ) );
@@ -6345,8 +6447,8 @@ public class DataHelper extends DataSetObservable
                }
 
              }
-	     else if ( table.equals(SENSOR_TABLE) ) // ------------ FIXME_SENSORS
-	     {
+             else if ( table.equals(SENSOR_TABLE) ) // ------------ FIXME_SENSORS
+             {
                itemid  = scanline1.longValue( -1 );
                if ( itemid >= 0 && id >= 0 ) {
                  status  = scanline1.longValue( 0 );
@@ -6361,7 +6463,7 @@ public class DataHelper extends DataSetObservable
                  // TDLog.Log( TDLog.LOG_DB, "load from file photo " + sid + " " + id + " " + title + " " + name );
                }
              }
-	     else if ( table.equals(PHOTO_TABLE) ) // --------------- FIXME_PHOTO
+             else if ( table.equals(PHOTO_TABLE) ) // --------------- FIXME_PHOTO
              {
                itemid  = scanline1.longValue( -1 );
                if ( itemid >= 0 && id >= 0 ) {
@@ -6376,8 +6478,14 @@ public class DataHelper extends DataSetObservable
                  // TDLog.Log( TDLog.LOG_DB, "load from file photo " + sid + " " + id + " " + title + " " + name );
                }
              }
-	     else if ( table.equals(PLOT_TABLE) ) // ---------- PLOTS
-	     {
+             else if ( table.equals(TRI_MIRRORED_STATIONS_TABLE) ) // --------------- TRI_MIRROR_STATIONS
+             {
+               name    = TDString.unescape( scanline1.stringValue( ) );
+               cv = makeTriMirroredStationsContentValues( sid, name );
+               myDB.insert( TRI_MIRRORED_STATIONS_TABLE, null, cv );
+             }
+             else if ( table.equals(PLOT_TABLE) ) // ---------- PLOTS
+             {
                name         = TDString.unescape( scanline1.stringValue( ) );
                long plot_type = scanline1.longValue( -1 ); if ( db_version <= 20 ) if ( plot_type == 3 ) plot_type = 5;
                status       = scanline1.longValue( 0 );
@@ -6390,8 +6498,8 @@ public class DataHelper extends DataSetObservable
                double clino = ( db_version > 20 )? scanline1.doubleValue( 0.0 ) : 0.0;
                String hide  = ( db_version > 24 )? TDString.unescape( scanline1.stringValue( ) ) : TDString.EMPTY;
                String nick  = ( db_version > 30 )? TDString.unescape( scanline1.stringValue( ) ) : TDString.EMPTY;
-	       int orientation = (db_version > 32 )? (int)(scanline1.longValue( 0 )) : 0; // default PlotInfo.ORIENTATION_PORTRAIT
-	       int maxscrap = (db_version > 41 )? (int)(scanline1.longValue( 0 )) : 0; // default 0
+               int orientation = (db_version > 32 )? (int)(scanline1.longValue( 0 )) : 0; // default PlotInfo.ORIENTATION_PORTRAIT
+               int maxscrap = (db_version > 41 )? (int)(scanline1.longValue( 0 )) : 0; // default 0
                double intercept = (db_version > 42)? scanline1.doubleValue( 0.5 ) : 0;
                double center_x = (db_version > 44)? scanline1.doubleValue( 0.0 ) : 0;
                double center_y = (db_version > 44)? scanline1.doubleValue( 0.0 ) : 0;
@@ -6547,20 +6655,20 @@ public class DataHelper extends DataSetObservable
              } 
 	     else if ( table.equals(STATION_TABLE) )
 	     {
-               // N.B. ONLY IF db_version > 19
-               // TDLog.e( "v <" + v + ">" );
-               // TDLog.Log( TDLog.LOG_DB, "load from file station " + sid + " " + name + " " + comment + " " + flag  );
-               name    = TDString.unescape( scanline1.stringValue( ) );
-               comment = TDString.unescape( scanline1.stringValue( ) );
-               long flag = ( db_version > 25 )? scanline1.longValue( 0 ) : 0;
-               String presentation = name;
-               String code = "";
-               if ( db_version > 45 ) presentation = TDString.unescape( scanline1.stringValue( ) );
-               if ( db_version > 52 ) code = TDString.unescape( scanline1.stringValue( ) );
-               // success &= insertStation( sid, name, comment, flag );
-               cv = makeStationContentValues( sid, name, comment, flag, presentation, code );
-               myDB.insert( STATION_TABLE, null, cv ); 
-             }
+         // N.B. ONLY IF db_version > 19
+         // TDLog.e( "v <" + v + ">" );
+         // TDLog.Log( TDLog.LOG_DB, "load from file station " + sid + " " + name + " " + comment + " " + flag  );
+         name    = TDString.unescape( scanline1.stringValue( ) );
+         comment = TDString.unescape( scanline1.stringValue( ) );
+         long flag = ( db_version > 25 )? scanline1.longValue( 0 ) : 0;
+         String presentation = name;
+         String code = "";
+         if ( db_version > 45 ) presentation = TDString.unescape( scanline1.stringValue( ) );
+         if ( db_version > 52 ) code = TDString.unescape( scanline1.stringValue( ) );
+         // success &= insertStation( sid, name, comment, flag );
+         cv = makeStationContentValues( sid, name, comment, flag, presentation, code );
+         myDB.insert( STATION_TABLE, null, cv );
+       }
            }
            myDB.setTransactionSuccessful();
 	   success = true;
@@ -6590,6 +6698,20 @@ public class DataHelper extends DataSetObservable
     cv.put( "flag",      flag );
     cv.put( "presentation", presentation );
     cv.put( "code",      (code == null)? "" : code );
+    return cv;
+  }
+
+  /**
+   * Creates a ContentValues object for a tri_mirrored_stations table entry
+   * @param sid survey ID
+   * @param name station name
+   * @return ContentValues object
+   */
+  private ContentValues makeTriMirroredStationsContentValues( long sid, String name )
+  {
+    ContentValues cv = new ContentValues();
+    cv.put( "surveyId",  sid );
+    cv.put( "name",      name );
     return cv;
   }
 
@@ -6835,9 +6957,34 @@ public class DataHelper extends DataSetObservable
       info.xsections = (int)cursor.getLong( 7 );
       info.datamode  = (int)cursor.getLong( 8 );
       info.mExtend   = (int)cursor.getLong( 9 );
+      info.mCalculatedAzimuths = (int)cursor.getLong (10 );
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return info;
+  }
+
+  /**
+   * Returns the "calculated_azimuths" status of the survey.
+   * @param sid survey ID
+   * @return "calculated_azimuths" status of the survey
+   */
+  public int getSurveyCalculatedAzimuths ( long sid )
+  {
+    int ret = 0;
+    if ( myDB == null ) return 0;
+    Cursor cursor = myDB.query( SURVEY_TABLE,
+        new String[] { "calculated_azimuths" },
+        WHERE_ID,
+        new String[] { Long.toString(sid) },
+        null,
+        null,
+        null
+    ); // order by
+    if (cursor.moveToFirst()) {
+      ret = cursor.getInt( 0 );
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return ret;
   }
 
   public List< DBlock > getSurveyReducedData( long sid ) { return selectAllLegShotsReduced( sid, 0 ); }
@@ -7360,7 +7507,15 @@ public class DataHelper extends DataSetObservable
              if ( !columnExists( db, "sensors", "reftype" ) ) {
                db.execSQL( "ALTER TABLE sensors ADD COLUMN reftype INTEGER default 0" );
              }
-             case 55:
+           case 55:
+             db.execSQL( "ALTER TABLE surveys ADD COLUMN calculated_azimuths INTEGER default 0" );
+             db.execSQL(
+                 create_table + TRI_MIRRORED_STATIONS_TABLE
+                     + " ( surveyId INTEGER, "
+                     +   " name TEXT " // 'surveyId' and 'name' together are the PRIMARY KEY
+                     + ")"
+             );
+           case 56:
              // TDLog.v( "current version " + oldVersion );
            default:
              break;
