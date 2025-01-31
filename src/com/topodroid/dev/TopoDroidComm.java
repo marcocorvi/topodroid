@@ -484,28 +484,28 @@ public class TopoDroidComm
   /** toggle DistoX calibration mode
    * @param address   device address
    * @param type      ???
-   * @return ???
+   * @return true if success - must override: this return failure
    */
   public boolean toggleCalibMode( String address, int type ) { return false; }
 
   /** write DistoX calibration coeffs
    * @param address   device address
    * @param coeff     calib coeff array
-   * @return ???
+   * @return true if success - must override: this return failure
    */
-  public boolean writeCoeff( String address, byte[] coeff ) { return false; } // 20250123 dropped second
+  public boolean writeCoeff( String address, byte[] coeff ) { return false; }
 
   /** read DistoX calibration coeffs
    * @param address   device address
    * @param coeff     calib coeff array
-   * @return ???
+   * @return true if success - must override: this return failure
    */
-  public boolean readCoeff( String address, byte[] coeff ) { return false; } // 20250123 dropped second
+  public boolean readCoeff( String address, byte[] coeff ) { return false; }
 
   /** read DistoX (??? bytes) memory
    * @param address   device address
    * @param addr      memory address
-   * @return array of read bytes
+   * @return array of read bytes - must override: this return null
    */
   public byte[] readMemory( String address, int addr ) 
   {
@@ -601,7 +601,7 @@ public class TopoDroidComm
    * @param msg   log message
    * @return true if ok, false if interrupted
    */
-  protected boolean syncWait( long msec, String msg )
+  protected static boolean syncWait( long msec, String msg )
   {
     // TDLog.v( TAG + "sync wait " + msec );
     synchronized ( mNewDataFlag ) {
@@ -612,11 +612,18 @@ public class TopoDroidComm
         // TDLog.v( "SyncWait " + msg + " msec " + millis );
         return true;
       } catch ( InterruptedException e ) {
-        TDLog.v( "SyncWait interrupted wait is also OK: " + msg );
+        TDLog.v( "SyncWait interrupted wait: " + msg );
         // e.printStackTrace();
         return false;
       }
     }
   }
+
+  // protected static void notifyWait()
+  // {
+  //   synchronized ( mNewDataFlag ) {
+  //     mNewDataFlag.notifyAll(); // wake sleeping threads
+  //   }
+  // }
 
 }

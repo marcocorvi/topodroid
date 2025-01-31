@@ -1339,7 +1339,7 @@ public class CavwayComm extends TopoDroidComm
       byte[] buf = new byte[64];
       for ( int j=52; j<64; ++j ) buf[j] = 0;
       System.arraycopy( coeff, 0+k*52, buf, 0, 52 );
-      if ( ! writeMemory( 0x9080 + k * 64, buf, 64 /* CavwayDetails.COEFF_SIZE */ ) ) {
+      if ( ! writeMemory( CavwayDetails.COEFF_ADDRESS + k * 64, buf, 64 /* CavwayDetails.COEFF_SIZE */ ) ) {
         TDLog.e( TAG + "fail write coeff set " + k );
         ret = false;
         break;

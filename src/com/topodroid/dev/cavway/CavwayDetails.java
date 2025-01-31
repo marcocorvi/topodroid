@@ -20,7 +20,7 @@ public class CavwayDetails
 {
   static final int MAX_INDEX_XBLE = 1064;
 
-  public final static int COEFF_ADDRESS    = 0x9080; // FIXME put the correct address
+  public final static int COEFF_ADDRESS    = 0x9080;
   public final static int FIRMWARE_ADDRESS = 0xe000;
   public final static int HARDWARE_ADDRESS = 0xe004;
   //public final static int STATUS_ADDRESS   = 0xC044;
