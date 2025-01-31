@@ -1305,7 +1305,11 @@ public class CavwayComm extends TopoDroidComm
         // TDLog.v("memory size " + mMemory.size() + " copying coeff-set " + k );
         System.arraycopy( coeff_tmp, 0, coeff, k*52, 52 /* CavwayDetails.COEFF_LEN */ );
       } else {
-        TDLog.e("coeff " + k + " length " +  coeff_tmp.length + " too short" );
+        if ( coeff_tmp == null ) {
+          TDLog.e("null coeff " + k );
+        } else {
+          TDLog.e("coeff " + k + " length " +  coeff_tmp.length + " too short" );
+        }
         ret = false;
         break;
       }

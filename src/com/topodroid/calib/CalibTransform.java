@@ -390,21 +390,20 @@ public class CalibTransform
    */
   public static byte[] stringToCoeff( String cs, int set_nr ) // TWO_SENOSRS
   {
-    if ( set_nr == 2 && cs == null ) return null;
-    byte[] coeff = new byte[ COEFF_DIM ]; // N.B. return 52 calib coeff
-    coeff[48] = coeff[49] = coeff[50] = coeff[51] = (byte)(0xff); // default values
+    int len = 0;
     if ( cs == null ) {
-      for ( int k=0; k<48; ++k ) coeff[k] = (byte)(0);
+      len = ( set_nr == 2 )? COEFF_DIM2 : COEFF_DIM;
     } else {
-      int kk = cs.length(); // COEFF_DIM or COEFF_DIM2
-      if ( set_nr == 2 ) {
-        if ( kk < COEFF_DIM2 ) return null;
-        for ( int k=COEFF_DIM; k<COEFF_DIM2; ++k ) coeff[k] = (byte)( cs.charAt(k) );
-      } else {
-        if ( kk > COEFF_DIM ) kk = COEFF_DIM;
-        for ( int k=0; k<kk; ++k ) coeff[k] = (byte)( cs.charAt(k) );
-      }
-      // TDLog.v( "string to coeff " + coeff[48] + " " + coeff[49] + " " + coeff[50] + " " + coeff[51] );
+      len = cs.length(); // COEFF_DIM or COEFF_DIM2
+    }
+    if ( len != COEFF_DIM && len != COEFF_DIM2 ) return null;
+    byte[] coeff = new byte[ len ];
+    for ( int k = 0; k < len; ++k ) coeff[k] = (byte)(0);
+    coeff[48] = coeff[49] = coeff[50] = coeff[51] = (byte)(0xff); // default values
+    for ( int k = 0; k < COEFF_DIM; ++k ) coeff[k] = (byte)( cs.charAt(k) );
+    if ( len == COEFF_DIM2 ) {
+      coeff[100] = coeff[101] = coeff[102] = coeff[103] = (byte)(0xff);
+      for ( int k = COEFF_DIM; k < COEFF_DIM2; ++k ) coeff[k] = (byte)( cs.charAt(k) );
     }
     return coeff;
   }
