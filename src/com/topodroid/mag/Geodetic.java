@@ -73,8 +73,8 @@ public class Geodetic
     double s = Math.sin( a_lat );
     double W = Math.sqrt( 1 - EARTH_E2 * s * s );
     // RADIUS_WE = EARTH_A / W; // principal radius of curvature in the prime vertical plane (N)
-    double RADIUS_NS = EARTH_A * EARTH_1E2 / ( W * W * W ); // ! W3 meridian radius of curvature (M)
-    //double RADIUS_NS = (EARTH_A * EARTH_1E2 / ( W * W * W )) + h_ellip; //ellipsoidic altitude
+    //double RADIUS_NS = EARTH_A * EARTH_1E2 / ( W * W * W ); // ! W3 meridian radius of curvature (M)
+    double RADIUS_NS = (EARTH_A * EARTH_1E2 / ( W * W * W )) + h_ellip; //ellipsoidic altitude
     return (RADIUS_NS * Math.PI / 180.0);
   }
 
@@ -87,8 +87,8 @@ public class Geodetic
     double a_lat = Math.abs( latitude ) * Math.PI / 180.0; // radian
     double s = Math.sin( a_lat );
     double W = Math.sqrt( 1 - EARTH_E2 * s * s );
-    double RADIUS_WE = EARTH_A / W; // principal radius of curvature in the prime vertical plane (N) 
-    //double RADIUS_WE = (EARTH_A / W) + h_ellip; // ellipsoid altitude
+    //double RADIUS_WE = EARTH_A / W; // principal radius of curvature in the prime vertical plane (N) 
+    double RADIUS_WE = (EARTH_A / W) + h_ellip; // ellipsoid altitude
     // RADIUS_NS = EARTH_A * EARTH_1E2 / ( W * W * W );    
     return (RADIUS_WE * Math.cos( a_lat ) * Math.PI / 180.0);
   }
