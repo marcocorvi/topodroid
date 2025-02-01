@@ -178,7 +178,7 @@ public class TopoGL extends Activity
   //   final float d = (float)( data.getDouble( BLOCK_D ) );
   //   final float b = (float)( data.getDouble( BLOCK_B ) );
   //   final float c = (float)( data.getDouble( BLOCK_C ) );
-  //   // Toast.makeText( app, String.format(Locale.US, "Data %d: %.2f %.2f %.2f", t, d, b, c ), Toast.LENGTH_LONG ).show();
+  //   // TDToast.make( String.format(Locale.US, "Data %d: %.2f %.2f %.2f", t, d, b, c ) );
   //   // add data to the bluetooth parser
   //   app.handleRegularData( d, b, c );
   // }
@@ -331,7 +331,7 @@ public class TopoGL extends Activity
         }
       // } else {
       //   TDLog.e("failed version check " + mVersionCheck );
-      //   Toast.makeText( this, R.string.no_permissions, Toast.LENGTH_SHORT ).show();
+      //   TDToast.make( R.string.no_permissions ).show();
       // }
     } else {
       if ( mFileDialog ) {
@@ -339,7 +339,7 @@ public class TopoGL extends Activity
         // (new DialogOpenFile( this, this )).show();
         // // openFile();
       } else {
-        Toast.makeText( this, R.string.no_permissions, Toast.LENGTH_LONG ).show();
+        TDToast.makeLong( R.string.no_permissions );
         TDLog.e("PERM finishing activity ... perms " + mCheckPerms );
         // if ( perms_dialog != null ) perms_dialog.dismiss();
         finish();
@@ -426,7 +426,7 @@ public class TopoGL extends Activity
       //   mVersionCheck = 0;
       // }
       // if ( mVersionCheck < -1 ) {
-      //   Toast.makeText( this, R.string.bad_topodroid, Toast.LENGTH_LONG ).show();
+      //   TDToast.makeLong( R.string.bad_topodroid );
       // } else {
         // the uri string is the absolute basepath
         // String uri_str = extras.getString( "BASE_URI" );
@@ -768,7 +768,7 @@ public class TopoGL extends Activity
           (new ExportDialogModel( this, this, mParser, TDConst.mModelExportTypesNoGeo, R.string.export_model_title)).show();
         }
       } else {
-        Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
+        TDToast.makeBad( R.string.no_model );
       }
     // FIXME BLUETOOTH  MENU
     // } else if ( mWithBluetooth && hasBluetoothName() && (p++ == pos) ) { // BLUETOOTH SURVEY
@@ -779,25 +779,25 @@ public class TopoGL extends Activity
       if ( mParser != null ) {
         new DialogInfo(this, mParser, mRenderer).show();
       } else {
-        Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
+        TDToast.makeBad( R.string.no_model );
       }
     // } else if ( p++ == pos ) { // SURVEYS
     //   if ( mParser != null ) {
     //     new DialogSurveys(this, mParser, mRenderer).show();
     //   } else {
-    //     Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
+    //     TDToast.makeBad( R.string.no_model );
     //   }
     } else if ( p++ == pos ) { // ICO
       if ( mParser != null ) {
         new DialogIco(this, mParser).show();
       } else {
-        Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
+        TDToast.makeBad( R.string.no_model );
       }
     } else if ( p++ == pos ) { // ROSE
       if ( mParser != null ) {
         new DialogRose(this, mParser).show();
       } else {
-        Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
+        TDToast.makeBad( R.string.no_model );
       }
     } else if ( p++ == pos ) { // RESET
       GlModel.resetModes();
@@ -809,39 +809,39 @@ public class TopoGL extends Activity
       if ( mParser != null ) {
         if ( mRenderer != null ) new DialogView( this, this, mRenderer ).show();
       } else {
-        Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
+        TDToast.makeBad( R.string.no_model );
       }
     } else if ( p++ == pos ) { // SURFACE ALPHA
       if ( mParser != null ) {
         if ( onDEMloading ) {
-          Toast.makeText( this, R.string.dem_loading, Toast.LENGTH_SHORT ).show();
+          TDToast.make( R.string.dem_loading );
         } else {
           new DialogSurface( this, this ).show();
         }
       } else {
-        Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
+        TDToast.makeBad( R.string.no_model );
       }
     } else if ( p++ == pos ) { // DO_WALLS
       if ( mParser != null ) {
         new DialogWalls( this, this, mParser ).show();
       } else {
-        Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
+        TDToast.makeBad( R.string.no_model );
       }
     // } else if ( mHasC3d && p++ == pos ) { // SKETCH // NO_C3D
     //   if ( mParser != null ) {
     //     if ( doSketches ) {
     //       if ( mRenderer != null ) new DialogSketches( this, this, mRenderer ).show(); // C3D
     //     } else {
-    //       Toast.makeText( this, R.string.no_topodroid_model, Toast.LENGTH_SHORT ).show();
+    //       TDToast.makeBad( R.string.no_topodroid_model );
     //     }
     //   } else {
-    //     Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
+    //     TDToast.makeBad( R.string.no_model );
     //   }
     // } else if ( mHasTemperature && p++ == pos ) { // TEMPERATURE
     //   if ( mParser != null ) {
     //     selectTemperatureFile();
     //   } else {
-    //     Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
+    //     TDToast.makeBad( R.string.no_model );
     //   }
     // } else if ( mHasFractal && p++ == pos ) { // FRACTAL
     //   new DialogFractal( this, mParser ).show();
@@ -849,7 +849,7 @@ public class TopoGL extends Activity
       if ( mParser != null ) {
         (new HighlightDialog( this, this )).show();
       } else {
-        Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
+        TDToast.makeBad( R.string.no_model );
       }
     } else if ( p++ == pos ) { // OPTIONS
       Intent intent = new Intent( this, com.topodroid.prefs.TDPrefActivity.class );
@@ -1328,7 +1328,7 @@ public class TopoGL extends Activity
   {
     boolean res = false;
     if ( mRenderer != null ) res = mRenderer.setCenter();
-    // Toast.makeText( this, res ? R.string.center_set : R.string.center_clear, Toast.LENGTH_SHORT ).show();
+    // TDToast.make( res ? R.string.center_set : R.string.center_clear );
     GlNames.setHLcolorG( res ? 0.5f : 0.0f );
     return res;
   }
@@ -1493,34 +1493,40 @@ public class TopoGL extends Activity
       // String path = Cave3DFile.THCONFIG_PATH + "/" + pathname + ".tdconfig";
       String path = TDPath.getTdconfigDir() + "/" + pathname + ".tdconfig";
       TDLog.v("TopoGL input stream from tdconfig " + pathname + " path " + path );
-      Toast.makeText( this, String.format( getResources().getString( R.string.reading_file ), path ), Toast.LENGTH_SHORT ).show();
       // synchronized( TDPath.mTdrLock ) // FIXME-THREAD_SAFE ?
       try {
         // final InputStream is = new FileInputStream( path );
+        TDLog.v("GL get input stream of path " + path );
         InputStream is = TDFile.getTopoDroidFileInputStream( path );
-        // if ( asynch ) {
-        //   (new AsyncTask<Void, Void, Boolean>() {
-        //     @Override public Boolean doInBackground(Void ... v ) {
-        //       // TDLog.v("exec init rendering in background ... ");
-        //       return initRendering2( is, path, pathname );
-        //     }
-        //     @Override public void onPostExecute( Boolean b )
-        //     {
-        //       if ( b ) {
-        //         mFilename = path;
-        //         CWConvexHull.resetCounters();
-        //         if ( mRenderer != null ) mRenderer.setParser( mParser, true );
-        //       }
-        //     }
-        //   } ).execute();
-        //   return false;
-        // } else { // synchronous
+        if ( is == null ) {
+          TDToast.makeBad( R.string.no_file );
+          return false;
+        } else {
+          TDToast.make( String.format( getResources().getString( R.string.reading_file ), path ) );
+          // if ( asynch ) {
+          //   (new AsyncTask<Void, Void, Boolean>() {
+          //     @Override public Boolean doInBackground(Void ... v ) {
+          //       // TDLog.v("exec init rendering in background ... ");
+          //       return initRendering2( is, path, pathname );
+          //     }
+          //     @Override public void onPostExecute( Boolean b )
+          //     {
+          //       if ( b ) {
+          //         mFilename = path;
+          //         CWConvexHull.resetCounters();
+          //         if ( mRenderer != null ) mRenderer.setParser( mParser, true );
+          //       }
+          //     }
+          //   } ).execute();
+          //   return false;
+          // } else { // synchronous
           if ( initRendering2( is, path, mSurveyName ) ) {
             mFilename = path;
             CWConvexHull.resetCounters();
             if ( mRenderer != null ) mRenderer.setParser( mParser, true );
           }
-        // }
+          // }
+        }
         return ( mFilename != null );
       } catch ( FileNotFoundException e ) {
         TDLog.e("file not found: " + e.getMessage() );
@@ -2762,10 +2768,10 @@ public class TopoGL extends Activity
     if ( hasBluetoothName() ) {
       switch ( mBluetoothState ) {
         case BLUETOOTH_DOWN:
-          Toast.makeText( this, R.string.bt_not_started, Toast.LENGTH_SHORT ).show();
+          TDToast.makeBad( R.string.bt_not_started );
           break;
         case BLUETOOTH_OFF:
-          Toast.makeText( this, R.string.bt_no_survey, Toast.LENGTH_SHORT ).show();
+          TDToast.makeBad( R.string.bt_no_survey );
           // startBluetooth();
           // setBluetoothState( (mBluetoothComm == null)? BLUETOOTH_OFF : BLUETOOTH_ON );
           break;
@@ -2796,7 +2802,7 @@ public class TopoGL extends Activity
           break;
       }
     } else {
-      Toast.makeText( this, R.string.bt_no_comm, Toast.LENGTH_SHORT ).show();
+      TDToast.makeBad( R.string.bt_no_comm );
       // if ( mBluetoothState == BLUETOOTH_OFF ) {
       //   // TDLog.v("start BT ...");
       //   boolean ret = startBluetooth();
@@ -2812,7 +2818,7 @@ public class TopoGL extends Activity
     if ( hasBluetoothComm() ) {
       switch ( mBluetoothState ) {
         case BLUETOOTH_DOWN:
-          Toast.makeText( this, R.string.bt_not_started, Toast.LENGTH_SHORT ).show();
+          TDToast.makeBad( R.string.bt_not_started );
           break;
         case BLUETOOTH_OFF:
           shutdownBluetooth( true );
@@ -2844,7 +2850,7 @@ public class TopoGL extends Activity
     } else {
       switch ( mBluetoothState ) {
         case BLUETOOTH_DOWN:
-          Toast.makeText( this, R.string.bt_no_comm, Toast.LENGTH_SHORT ).show();
+          TDToast.makeBad( R.string.bt_no_comm );
           break;
         case BLUETOOTH_OFF:
           shutdownBluetooth( true );
@@ -2897,7 +2903,7 @@ public class TopoGL extends Activity
     mBtSurvey = bt_survey;
     setSurveyName( mBtSurvey.getNickname() );
     if ( ! startBluetooth() ) {
-      Toast.makeText( this, R.string.bt_no_comm, Toast.LENGTH_SHORT ).show();
+      TDToast.makeBad( R.string.bt_no_comm );
       return;
     }
     setBluetoothState( (mBluetoothComm == null)? BLUETOOTH_OFF : BLUETOOTH_ON );

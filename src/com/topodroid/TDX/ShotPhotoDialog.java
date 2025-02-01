@@ -41,7 +41,7 @@ class ShotPhotoDialog extends MyDialog
 
   private EditText mETcomment;     // photo comment
   private Button   mButtonOK;
-  private Button   mBtnGeoCode;       // geomorphology coding
+  private Button   mBtnGeoCode;    // geomorphology coding
   private CheckBox mCamera;        // whether to use camera or camera2
   private long     mSid;           // shot id
   private String   mName;          // shot name
