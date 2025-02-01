@@ -501,12 +501,14 @@ public class TdmConfigActivity extends Activity
   public void doExport( String type, String surveyname, String prefix, long first, boolean second )
   {
     String filename = null;
+    int pos = surveyname.lastIndexOf('.');
+    String name = ( pos > 0 )? surveyname.substring( 0, pos ) : surveyname;
     int index = -1;
     if ( type.equals("Therion") ) {
-      filename = surveyname + ".thconfig";
+      filename = name + ".thconfig";
       index = TDConst.SURVEY_FORMAT_TH;
     } else if ( type.equals("Survex") ) {
-      filename = surveyname + ".svx";
+      filename = name + ".svx";
       index = TDConst.SURVEY_FORMAT_SVX;
     }
     if ( filename != null ) {
