@@ -14,12 +14,19 @@ package com.topodroid.prefs;
 import com.topodroid.utils.TDString;
 import com.topodroid.TDX.R;
 
-public class TDPrefKey
+class TDPrefKey
 {
-  public static final String FALSE = "false";
-  public static final String TRUE  = "true";
+  static final String FALSE = "false";
+  static final String TRUE  = "true";
 
-  public static String[] MAIN = { // [14]
+  static final int B = 0; // activity levels
+  static final int N = 1;
+  static final int A = 2;
+  static final int E = 3;
+  static final int T = 4;
+  static final int D = 5;
+
+  static String[] MAIN = { // [14]
     // "DISTOX_CWD",           // CWD must be the last of primary preferences
     "DISTOX_TEXT_SIZE",     // size of text [pt]
     "DISTOX_SIZE_BUTTONS",  // size of buttons (S, N, M, L, XL)
@@ -85,7 +92,7 @@ public class TDPrefKey
     -1
   };
 
-  public static String[] MAINdef = {
+  static String[] MAINdef = {
      // "TopoDroid",
      TDString.TWENTY, // TEXT_SIZE
      TDString.ONE,    // BUTTON_SIZE
@@ -105,6 +112,26 @@ public class TDPrefKey
      "",
      "",
      null
+  };
+
+  static int[] MAINlvl = {
+     B, // TEXT_SIZE
+     B, // BUTTON_SIZE
+     B, // SYMBOL_SIZE
+     // ,           // CUSTOM KEYBOARD
+     // ,            // NO CURSOR
+     A, // USER MANUAL
+     N, // LOCALE
+     T, // SCREEN ORIENTATION
+     // , // IF_COSURVEY
+     B,
+     B,
+     B,
+     B,
+     N,
+     // 
+     A,
+     E,
   };
 
   // ----------------------------------------------------------------------------------------------------
@@ -161,7 +188,7 @@ public class TDPrefKey
     -1 
   };
 
-  public static String[] SURVEYdef = {
+  static String[] SURVEYdef = {
     "",
     TDString.ZERO,
     TDString.ONE,
@@ -177,9 +204,25 @@ public class TDPrefKey
     "",
     ""
   };
+
+  static int[] SURVEYlvl = {
+    B,
+    E,
+    B,
+    B,
+    B,
+    A,
+    E,
+    B,
+    B,
+    B,
+    B,
+    N,
+    A,
+  };
   // ------------------------------------------------------------------------------
 
-  public static String[] PLOT = { // [12]
+  static String[] PLOT = { // [12]
     // "DISTOX_PICKER_TYPE",    // 0 // tool picker: most-recent, list, grid, triple-grid
     // "DISTOX_TRIPLE_TOOLBAR",
     // "DISTOX_RECENT_NR",           // number of most recent items (item picker)
@@ -236,7 +279,7 @@ public class TDPrefKey
     -1
   };
 
-  public static String[] PLOTdef = {
+  static String[] PLOTdef = {
     // TDString.ONE, 
     // FALSE,
     // TDString.FOUR, 
@@ -255,8 +298,21 @@ public class TDPrefKey
     null
   };
 
+  static int[] PLOTlvl = {
+    B,
+    B,
+    // X,
+    T,
+    A,
+    A,
+    T,
+    B,
+    N,
+    B,
+  };
+
   // ------------------------------------------------------------------------------
-  public static String[] CALIB = { // [11]
+  static String[] CALIB = { // [11]
     "DISTOX_GROUP_BY",       // 0 // calib data grouping policy
     "DISTOX_GROUP_DISTANCE",      // calib data grouping by the distance threshold
     "DISTOX_CALIB_EPS",           // calib computation param EPS
@@ -314,7 +370,7 @@ public class TDPrefKey
     R.string.pref_auto_cal_delta_summary,
   };
 
-  public static String[] CALIBdef = {
+  static String[] CALIBdef = {
     TDString.ONE, // TDString.TWO = GROUP_BY_ONLY_16
     "40",
     "0.000001",
@@ -333,8 +389,25 @@ public class TDPrefKey
     "0.04",
   };
 
+  static int[] CALIBlvl = {
+    A,
+    A,
+    B,
+    B,
+    A,
+    A,
+    D,
+    D,
+    D,
+    D,
+    D,
+    D,
+    D,
+    D,
+  };
+
   // ------------------------------------------------------------------------------
-  public static String[] DEVICE = { // [13]
+  static String[] DEVICE = { // [13]
     // "DISTOX_DEVICE", // N.B. indexKeyDeviceName - USED by TopoDroidApp to store the device
     // "DISTOX_DEVICE_TYPE",
     "DISTOX_BLUETOOTH",       // 0 * // whether to check bluetooth on start
@@ -385,7 +458,7 @@ public class TDPrefKey
     -1
   };
 
-  public static String[] DEVICEdef = {
+  static String[] DEVICEdef = {
     // TDString.EMPTY,
     // TDString.ONE,
     TDString.ONE,
@@ -401,8 +474,18 @@ public class TDPrefKey
     TDString.EMPTY
   };
 
+  static int[] DEVICElvl = {
+    N,
+    B,
+    B,
+    B,
+    A,
+    E,
+    B,
+  };
+
   // ==============================================================================
-  public static String[] EXPORT_ENABLE = { // ZIP always enabled
+  static String[] EXPORT_ENABLE = { // ZIP always enabled
     "EXPORT_DATA_COMPASS",    // 0
     "EXPORT_DATA_CSURVEY",
     // "EXPORT_DATA_GHTOPO",
@@ -425,7 +508,7 @@ public class TDPrefKey
     "EXPORT_DATA_SHAPEFILE"   // 15
   };
 
-  public static int[] EXPORT_ENABLEtitle = {
+  static int[] EXPORT_ENABLEtitle = {
     R.string.compass,
     R.string.csurvey,
     // R.string.ghtopo,
@@ -448,10 +531,10 @@ public class TDPrefKey
     R.string.shapefile,
   };
 
-  // public static int[] EXPORT_ENABLEdesc = {
+  // static int[] EXPORT_ENABLEdesc = {
   // };
 
-  public static String[] EXPORT_ENABLEdef = {
+  static String[] EXPORT_ENABLEdef = {
     TRUE,
     FALSE,
     // FALSE,
@@ -473,10 +556,28 @@ public class TDPrefKey
     // FALSE,
     FALSE,
   };
+  static int[] EXPORT_ENABLElvl = {
+    B,
+    B,
+    // B,
+    B,
+    B,
+    B,
+    B,
+    B,
+    B,
+    B,
+    B,
+    B,
+    B,
+    B,
+    B,
+    B,
+  };
 
 
   // ===================================================================
-  public static String[] EXPORT = { // [16] [32]
+  static String[] EXPORT = { // [16] [32]
     "DISTOX_EXPORT_SHOTS",    // 0 // default data export format
     "DISTOX_EXPORT_PLOT",          // default plot export format
     "DISTOX_AUTO_PLOT_EXPORT", // format to export plots to "out" folder automatically
@@ -552,7 +653,7 @@ public class TDPrefKey
     -1,
   };
 
-  public static String[] EXPORTdef = {
+  static String[] EXPORTdef = {
     "-1",
     "-1",
     "-1",
@@ -578,8 +679,31 @@ public class TDPrefKey
     null
   };
 
+  static int[] EXPORTlvl = {
+    B,
+    B,
+    N,
+    A,
+    A,
+    A,
+    E,
+    B,
+    N,
+    N,
+    N,
+    N,
+    N,
+    N,
+    N,
+    N,
+    N,
+    N,
+    N,
+    N,
+    N,
+  };
   // ------------------------------------------------------------------------------
-  public static String[] EXPORT_import = { // [3]
+  static String[] EXPORT_import = { // [3]
     "DISTOX_PT_CMAP",         // 0
     "DISTOX_SPLAY_EXTEND",    // whether to set L/R extend to LRUD splay shots (Compass, VTopo import)
   };
@@ -591,13 +715,17 @@ public class TDPrefKey
     R.string.pref_pt_color_map_summary,
     R.string.pref_LRExtend_summary,
   };
-  public static String[] EXPORT_importdef = { 
+  static String[] EXPORT_importdef = { 
     TDString.EMPTY,
     TRUE,
   };
+  static int[] EXPORT_importlvl = {
+    B,
+    A,
+  };
 
   // EXPORT CSV -------------------------------------------------------------------
-  public static String[] EXPORT_CSX = { // [1]
+  static String[] EXPORT_CSX = { // [1]
     "DISTOX_STATION_PREFIX"        // whether to add cave-name prefix to stations (cSurvey/Compass export)
   };
   static int[] EXPORT_CSXtitle = { // [1]
@@ -608,13 +736,16 @@ public class TDPrefKey
     R.string.pref_station_prefix_summary,
     -1
   };
-  public static String[] EXPORT_CSXdef = { // [1]
+  static String[] EXPORT_CSXdef = { // [1]
     FALSE,
     null
   };
+  static int[] EXPORT_CSXlvl = {
+    N,
+  };
 
   // EXPORT GPX -----------------
-  public static String[] EXPORT_GPX = { // [1]
+  static String[] EXPORT_GPX = { // [1]
     "DISTOX_GPX_SINGLE_TRACK"        // whether to export project surveys as a single track
   };
   static int[] EXPORT_GPXtitle = { // [1]
@@ -625,13 +756,16 @@ public class TDPrefKey
     R.string.pref_gpx_single_track_summary,
     -1
   };
-  public static String[] EXPORT_GPXdef = { // [1]
+  static String[] EXPORT_GPXdef = { // [1]
     TRUE,
     null
   };
+  static int[] EXPORT_GPXlvl = {
+    N,
+  };
 
   // EXPORT CSV -----------------
-  public static String[] EXPORT_CSV = { // [1]
+  static String[] EXPORT_CSV = { // [1]
     "DISTOX_CSV_RAW",
     "DISTOX_CSV_SEP",   // separator: 0 comma, 1 pipe, 2 tab
     "DISTOX_SURVEX_EOL"
@@ -648,16 +782,20 @@ public class TDPrefKey
     R.string.pref_csv_eol_summary,
     -1
   };
-  public static String[] EXPORT_CSVdef = { // [1]
+  static String[] EXPORT_CSVdef = { // [1]
     FALSE,
     TDString.ZERO, // "|" ???
     "lf",
     null
   };
-
+  static int[] EXPORT_CSVlvl = {
+    N,
+    A,
+    N,
+  };
 
   // EXPORT SVX SURVEX ----------
-  public static String[] EXPORT_SVX = { // [8]
+  static String[] EXPORT_SVX = { // [8]
     "DISTOX_SURVEX_EOL",            // survex end of line [either Linux or Windows]
     "DISTOX_SURVEX_SPLAY",    // 6  // whether to name endpoint of splays in Survex export
     "DISTOX_SURVEX_LRUD",           // whether to add LRUD to Survex export
@@ -677,16 +815,22 @@ public class TDPrefKey
     R.string.pref_survex_epsg_summary,
     -1
   };
-  public static String[] EXPORT_SVXdef = {
+  static String[] EXPORT_SVXdef = {
     "lf",
     FALSE,
     FALSE,
     TDString.ZERO,
     null
   };
+  static int[] EXPORT_SVXlvl = {
+    N,
+    A,
+    A,
+    A,
+  };
 
   // EXPORT TH THERION ----------
-  public static String[] EXPORT_TH = { // [8]
+  static String[] EXPORT_TH = { // [8]
     "DISTOX_THERION_CONFIG",   // whether to write survey.thconfig file
     "DISTOX_THERION_MAPS",     // whether to put map commands before centerline in therion
     // "DISTOX_AUTO_STATIONS",    // whether to add stations to therion th2 exports
@@ -720,7 +864,7 @@ public class TDPrefKey
     R.string.pref_th2_xvi_summary,
     -1
   };
-  public static String[] EXPORT_THdef = {
+  static String[] EXPORT_THdef = {
     FALSE,
     FALSE,
     // TRUE,
@@ -731,9 +875,17 @@ public class TDPrefKey
     "100",
     FALSE
   };
+  static int[] EXPORT_THlvl = {
+    A,
+    A,
+    A,
+    A,
+    E,
+    E,
+  };
 
   // EXPORT SVG -----------------
-  public static String[] EXPORT_SVG = { // [8]
+  static String[] EXPORT_SVG = { // [8]
     "DISTOX_SVG_ROUNDTRIP",   // whether to export SVG in round-trip format
     "DISTOX_SVG_GRID",        // whether to export grid in SVG 
     "DISTOX_SVG_LINE_DIR",    // whether to add line orientation ticks in SVG export
@@ -787,7 +939,7 @@ public class TDPrefKey
     R.string.pref_svg_program_summary,
     -1
   };
-  public static String[] EXPORT_SVGdef = {
+  static String[] EXPORT_SVGdef = {
     FALSE,
     FALSE,
     FALSE,
@@ -804,9 +956,26 @@ public class TDPrefKey
     "48",
     TDString.ONE, // Illustrator
   };
+  static int[] EXPORT_SVGlvl = {
+    T,
+    E,
+    E,
+    N,
+    N,
+    // X,
+    A,
+    A,
+    A,
+    A,
+    A,
+    A,
+    A,
+    A,
+    N,
+  };
 
   // EXPORT DAT COMPASS ---------
-  public static String[] EXPORT_DAT = {
+  static String[] EXPORT_DAT = {
     "DISTOX_STATION_PREFIX",       // whether to add cave-name prefix to stations (cSurvey/Compass export)
     "DISTOX_COMPASS_SPLAYS",       // whether to add splays to Compass dat export
     "DISTOX_SWAP_LR",               // whether to swap Left-Right in Compass export
@@ -821,14 +990,19 @@ public class TDPrefKey
     R.string.pref_compass_splays_summary,
     R.string.pref_swapLR_summary,
   };
-  public static String[] EXPORT_DATdef = {
+  static String[] EXPORT_DATdef = {
     FALSE,   // 8 COMPASS
     TRUE,
     FALSE,
   };
+  static int[] EXPORT_DATlvl = {
+    B,
+    A,
+    N,
+  };
 
   // EXPORT SRV WALLS -----------
-  public static String[] EXPORT_SRV = {
+  static String[] EXPORT_SRV = {
     "DISTOX_WALLS_SPLAYS",       // whether to use splays for Walls srv export
   };
   static int[] EXPORT_SRVtitle = {
@@ -837,12 +1011,15 @@ public class TDPrefKey
   static int[] EXPORT_SRVdesc = {
     R.string.pref_walls_splays_summary,
   };
-  public static String[] EXPORT_SRVdef = {
+  static String[] EXPORT_SRVdef = {
     TRUE,
+  };
+  static int[] EXPORT_SRVlvl = {
+    B,
   };
 
   // EXPORT TRO VISUALTOPO  -------
-  public static String[] EXPORT_TRO = {
+  static String[] EXPORT_TRO = {
     "DISTOX_VTOPO_SPLAYS",       // whether to add splays to VisualTopo tro export
     "DISTOX_VTOPO_LRUD",         // whether VisualTopo LRUD are at-from 
     "DISTOX_VTOPO_TROX",         // whether to write trox format
@@ -857,14 +1034,19 @@ public class TDPrefKey
     R.string.pref_vtopo_lrud_summary,
     R.string.pref_vtopo_trox_summary,
   };
-  public static String[] EXPORT_TROdef = {
+  static String[] EXPORT_TROdef = {
     TRUE,
     FALSE,
     FALSE,
   };
+  static int[] EXPORT_TROlvl = {
+    A,
+    N,
+    B,
+  };
 
   // EXPORT KML -------------------
-  public static String[] EXPORT_KML = {
+  static String[] EXPORT_KML = {
     "DISTOX_KML_STATIONS",     // 26 // whether to add station points to KML export
     "DISTOX_KML_SPLAYS"              // whether to add splay lines to KML export
   };
@@ -876,14 +1058,18 @@ public class TDPrefKey
     R.string.pref_kml_stations_summary,
     R.string.pref_kml_splays_summary
   };
-  public static String[] EXPORT_KMLdef = {
+  static String[] EXPORT_KMLdef = {
     TRUE,
     FALSE
+  };
+  static int[] EXPORT_KMLlvl = {
+    N,
+    E,
   };
 
   // ------------------------------------------------------------------------------
   /* NO_PNG
-  public static String[] EXPORT_PNG = {
+  static String[] EXPORT_PNG = {
     "DISTOX_BITMAP_SCALE",           // default bitmap scale PNG
     "DISTOX_BITMAP_BGCOLOR",   // 21 29 // bitmap background color [RGB]
     "DISTOX_SVG_GRID",
@@ -906,7 +1092,7 @@ public class TDPrefKey
     // R.string.pref_autoStations_summary,
     -1
   };
-  public static String[] EXPORT_PNGdef = {
+  static String[] EXPORT_PNGdef = {
     "1.5",
     "0 0 0",
     FALSE,
@@ -917,7 +1103,7 @@ public class TDPrefKey
   */
 
   // EXPORT DXF -------------------
-  public static String[] EXPORT_DXF = {
+  static String[] EXPORT_DXF = {
     // "DISTOX_DXF_SCALE",     // default DXF scale (export)
     "DISTOX_DXF_BLOCKS",       // whether to export point items as Blocks in DXF export
     "DISTOX_ACAD_VERSION",     // 23 31 
@@ -946,7 +1132,7 @@ public class TDPrefKey
     // R.string.pref_autoStations_summary,
     -1
   };
-  public static String[] EXPORT_DXFdef = {
+  static String[] EXPORT_DXFdef = {
     // "1.0",
     TRUE,
     "9",
@@ -956,9 +1142,18 @@ public class TDPrefKey
     // TRUE,
     null
   };
+  static int[] EXPORT_DXFlvl = {
+    // X
+    N,
+    E,
+    T,
+    A,
+    T,
+    // N
+  };
 
   // EXPORT SHP SHAPFILE ----------
-  public static String[] EXPORT_SHP = {
+  static String[] EXPORT_SHP = {
     "DISTOX_SHP_GEOREF",             // whether to export plan-sketch georeferenced
   };
   static int[] EXPORT_SHPtitle = {
@@ -967,12 +1162,15 @@ public class TDPrefKey
   static int[] EXPORT_SHPdesc = {
     R.string.pref_shp_georef_summary,
   };
-  public static String[] EXPORT_SHPdef = {
+  static String[] EXPORT_SHPdef = {
     FALSE,
+  };
+  static int[] EXPORT_SHPlvl = {
+    T,
   };
 
   // ==============================================================================
-  public static String[] DATA = { // [9]
+  static String[] DATA = { // [9]
     "DISTOX_CLOSE_DISTANCE",  // 0 // tolerance among leg shots [%]
     "DISTOX_MAX_SHOT_LENGTH",      // maximum length of a shot data
     "DISTOX_MIN_LEG_LENGTH",       // minimum length of a shot data
@@ -991,7 +1189,6 @@ public class TDPrefKey
     // "DISTOX_RECENT_SHOT",     // highlight recent shots
     null
   };
-
 
   static int[] DATAtitle = {
     R.string.pref_leg_title,
@@ -1034,8 +1231,7 @@ public class TDPrefKey
     // R.string.pref_recent_shot_summary,
     -1
   };
-
-  public static String[] DATAdef = {
+  static String[] DATAdef = {
     "0.05",
     TDString.FIFTY,
     TDString.ZERO,
@@ -1055,9 +1251,23 @@ public class TDPrefKey
     // FALSE,
     null
   };
+  static int[] DATAlvl = {
+    B,
+    B,
+    B,
+    E,
+    N,
+    N,
+    A,
+    A,
+    A,
+    N,
+    // T,
+    // T,
+  };
 
   // ------------------------------------------------------------------------------
-  public static String[] UNITS = { // [3]
+  static String[] UNITS = { // [3]
     "DISTOX_UNIT_LENGTH",   // units of lengths [m, y, ft]
     "DISTOX_UNIT_ANGLE",    // units of angles [deg, grad]
     "DISTOX_UNIT_GRID",     // plot grid unit [m, y, 2ft]
@@ -1071,22 +1281,26 @@ public class TDPrefKey
     R.string.pref_unit_grid_title,
     R.string.pref_unit_measure_title,
   };
-
   static int[] UNITSdesc = {
     R.string.pref_unit_length_summary,
     R.string.pref_unit_angle_summary,
     R.string.pref_unit_grid_summary,
     R.string.pref_unit_measure_summary,
   };
-
-  public static String[] UNITSdef = {
+  static String[] UNITSdef = {
     "meters",
     "degrees",
     "1.0",
     "-1.0",  // neg.: use grid cell
   };
+  static int[] UNITSlvl = {
+    B,
+    B,
+    B,
+    B,
+  };
 
-  public static int[] UNITSarr = {
+  static int[] UNITSarr = {
     R.array.unitLength,
     R.array.unitAngle,
     R.array.unitGrid,
@@ -1101,7 +1315,7 @@ public class TDPrefKey
   };
 
   // ------------------------------------------------------------------------------
-  public static String[] ACCURACY = { // [3]
+  static String[] ACCURACY = { // [3]
     "DISTOX_ACCEL_PERCENT", // shot quality G threshold [%]
     "DISTOX_MAG_PERCENT",   // shot quality M threshold [%]
     "DISTOX_DIP_THR",       // shot quality dip threshold [deg]
@@ -1115,24 +1329,28 @@ public class TDPrefKey
     R.string.pref_dip_thr_title,
     R.string.pref_sibling_thr_title,
   };
-
   static int[] ACCURACYdesc = {
     R.string.pref_accel_thr_summary,
     R.string.pref_mag_thr_summary,
     R.string.pref_dip_thr_summary,
     R.string.pref_sibling_thr_summary,
   };
-
-  public static String[] ACCURACYdef = {
+  static String[] ACCURACYdef = {
     "1.0",
     "1.0",
     "2.0",
     "5.0"
   };
+  static int[] ACCURACYlvl = {
+    A,
+    A,
+    A,
+    A,
+  };
 
 
   // ------------------------------------------------------------------------------
-  public static String[] LOCATION = { // [2]
+  static String[] LOCATION = { // [2]
     "DISTOX_UNIT_LOCATION", // units of location [ddmmss dec.deg]
     "DISTOX_CRS",           // default C.R.S.
     "DISTOX_NEG_ALTITUDE",  // allow negative altitudes
@@ -1159,8 +1377,7 @@ public class TDPrefKey
     R.string.pref_fine_location_summary,
     R.string.pref_geoimport_app_summary
   };
-
-  public static String[] LOCATIONdef = {
+  static String[] LOCATIONdef = {
     "ddmmss",
     "Long-Lat",
     FALSE,
@@ -1168,9 +1385,17 @@ public class TDPrefKey
     "60",
     "0", // TDString.ZERO
   };
+  static int[] LOCATIONlvl = {
+    N, 
+    A,
+    T,
+    T,
+    E,
+    N,
+  };
 
   // ------------------------------------------------------------------------------
-  public static String[] SCREEN = { // [13]
+  static String[] SCREEN = { // [13]
     "DISTOX_FIXED_THICKNESS", // 0 // thickness of fixed lines
     "DISTOX_STATION_SIZE",         // size of station names [pt]
     "DISTOX_DOT_RADIUS",           // radius of green dots
@@ -1217,8 +1442,7 @@ public class TDPrefKey
     // R.string.pref_hthr_summary,
     -1
   };
-
-  public static String[] SCREENdef = {
+  static String[] SCREENdef = {
     TDString.ONE,
     TDString.TWENTY,
     TDString.FIVE, 
@@ -1235,10 +1459,20 @@ public class TDPrefKey
     // "70",
     null
   };
+  static int[] SCREENlvl = {
+    B,
+    B,
+    N,
+    B,
+    B,
+    E,
+    E,
+    T,
+  };
 
 
   // ------------------------------------------------------------------------------
-  public static String[] LINE = { // [11]
+  static String[] LINE = { // [11]
     "DISTOX_LINE_THICKNESS",  // 0 // thickness of normal lines (walls are twice)
     "DISTOX_LINE_UNITS",           // line units
     "DISTOX_LINE_STYLE",           // line style: 0 bezier, 1 fine, 2 normal, 3 coarse
@@ -1286,7 +1520,7 @@ public class TDPrefKey
     -1
   };
 
-  public static String[] LINEdef = {
+  static String[] LINEdef = {
     TDString.ONE,
     "1.4",
     TDString.TWO,
@@ -1301,9 +1535,22 @@ public class TDPrefKey
     // "45",
     null
   };
+  static int[] LINElvl = {
+    N,
+    N,
+    N,
+    N,
+    N,
+    A,
+    A,
+    A,
+    // E,
+    N,
+    N,
+  };
 
   // ------------------------------------------------------------------------------
-  public static String[] POINT = { // [3]
+  static String[] POINT = { // [3]
     "DISTOX_UNSCALED_POINTS", // 0 // whether drawing point items should stay unscaled when zooming
     "DISTOX_DRAWING_UNIT",    // 1 // plot unit
     "DISTOX_LABEL_SIZE",      // 2 // size of labels [pt]
@@ -1317,25 +1564,29 @@ public class TDPrefKey
     R.string.pref_label_size_title,
     R.string.pref_scalable_label_title
   };
-
   static int[] POINTdesc = {
     R.string.pref_unscaled_points_summary,
     R.string.pref_drawing_unit_summary,
     R.string.pref_label_size_summary,
     R.string.pref_scalable_label_summary
   };
-
-  public static String[] POINTdef = {
+  static String[] POINTdef = {
     FALSE,
     "1.2",
     TDString.TWENTYFOUR,
     FALSE
   };
+  static int[] POINTlvl = {
+    N,
+    B,
+    B,
+    N,
+  };
 
 
   // ------------------------------------------------------------------------------
   // AUTOWALLS
-  // public static String[] WALLS = { // [6]
+  // static String[] WALLS = { // [6]
   //   "DISTOX_WALLS_TYPE",         // 
   //   "DISTOX_WALLS_PLAN_THR",     // clino threshold for splays to contribute to walls in plan view
   //   "DISTOX_WALLS_EXTENDED_THR", // clino threshold for splays to contribute to walls in profile view
@@ -1363,7 +1614,7 @@ public class TDPrefKey
   //   R.string.pref_walls_xstep_summary
   // };
 
-  // public static String[] WALLSdef = {
+  // static String[] WALLSdef = {
   //   TDString.ZERO,
   //   "70",
   //   "45",
@@ -1373,7 +1624,7 @@ public class TDPrefKey
   // };
 
   // ------------------------------------------------------------------------------
-  public static String[] DRAW = { // [13]
+  static String[] DRAW = { // [13]
     "DISTOX_UNSCALED_POINTS", // 0  // whether drawing point items should stay unscaled when zooming
     "DISTOX_DRAWING_UNIT",    // 1  // plot unit
     "DISTOX_LABEL_SIZE",      // 2  // size of labels [pt]
@@ -1424,8 +1675,7 @@ public class TDPrefKey
     // R.string.pref_linecorner_summary
     -1
   };
-
-  public static String[] DRAWdef = {
+  static String[] DRAWdef = {
     FALSE,
     "1.2",
     TDString.TWENTYFOUR,
@@ -1442,9 +1692,25 @@ public class TDPrefKey
     // "20.0"
     null
   };
+  static int[] DRAWlvl = {
+    N,
+    B,
+    B,
+    N,
+    N,
+    N,
+    N,
+    A,
+    A,
+    // E,
+    N,
+    // A,
+    // N,
+    // N,
+  };
 
   // ------------------------------------------------------------------------------
-  public static String[] ERASE = { // [3]
+  static String[] ERASE = { // [3]
     "DISTOX_CLOSENESS", // 0 // "select" radius // "select" radius // "select" radius
     "DISTOX_ERASENESS",      // "erase" radius // "erase" radius
     "DISTOX_POINTING",  // 2 // "size" of a "point touch" (max distance between down and up)
@@ -1456,52 +1722,57 @@ public class TDPrefKey
     R.string.pref_eraseness_title,
     R.string.pref_pointing_title
   };
-
   static int[] ERASEdesc = {
     R.string.pref_closeness_message,
     R.string.pref_eraseness_message,
     R.string.pref_pointing_message
   };
-
-  public static String[] ERASEdef = {
+  static String[] ERASEdef = {
     TDString.TWENTYFOUR,
     "36",
     TDString.TWENTYFOUR
   };
+  static int[] ERASElvl = {
+    B,
+    B,
+    E,
+  };
 
   // ------------------------------------------------------------------------------
-  public static String[] EDIT = { // [4]
+  static String[] EDIT = { // [4]
     "DISTOX_DOT_RADIUS", // 0 // radius of green dots
     "DISTOX_CLOSENESS",  // 1 // "select" radius // "select" radius // "select" radius
     "DISTOX_MIN_SHIFT",       // maximum amount for a shift (to avoid jumps)
     "DISTOX_POINTING",   // 3 // "size" of a "point touch" (max distance between down and up)
     null
   };
-
   static int[] EDITtitle = {
     R.string.pref_dot_radius_title,
     R.string.pref_closeness_title,
     R.string.pref_min_shift_title,
     R.string.pref_pointing_title
   };
-
   static int[] EDITdesc = {
     R.string.pref_dot_radius_message,
     R.string.pref_closeness_message,
     R.string.pref_min_shift_message,
     R.string.pref_pointing_message
   };
-
-  public static String[] EDITdef = {
+  static String[] EDITdef = {
     TDString.FIVE,
     TDString.TWENTYFOUR,
     TDString.SIXTY,
     TDString.TWENTYFOUR
   };
-
+  static int[] EDITlvl = {
+    N,
+    B,
+    E,
+    E,
+  };
 
   // ------------------------------------------------------------------------------
-  public static String[] GEEKLINE = {
+  static String[] GEEKLINE = {
     "DISTOX_REDUCE_ANGLE",    // "rock" reducing lines: maximal angle
     "DISTOX_LINE_ACCURACY",   // Bezier interpolator param:
     "DISTOX_LINE_CORNER",     // Bezier interpolator param:
@@ -1545,8 +1816,7 @@ public class TDPrefKey
     // R.string.pref_composite_actions_summary,
     -1
   };
-
-  public static String[] GEEKLINEdef = {
+  static String[] GEEKLINEdef = {
     "45",
     "1.0",
     "20.0",
@@ -1560,8 +1830,22 @@ public class TDPrefKey
     // FALSE,
     null
   };
+  static int[] GEEKLINElvl = {
+    T,
+    T,
+    T,
+    E,
+    E,
+    E,
+    A,
+    A,
+    A,
+    T,
+    // T,
+  };
 
-  public static String[] GEEKSHOT = {
+
+  static String[] GEEKSHOT = {
     "DISTOX_DIVING_MODE",     // enable diving mode
     "DISTOX_BACKSIGHT_SPLAY", // whether first splay is backsight check
     "DISTOX_RECENT_SHOT",     // highlight recent shots
@@ -1632,8 +1916,7 @@ public class TDPrefKey
     // R.string.pref_tdmanager_summary,
     -1
   };
-
-  public static String[] GEEKSHOTdef = {
+  static String[] GEEKSHOTdef = {
     FALSE,
     FALSE,
     FALSE,
@@ -1656,8 +1939,30 @@ public class TDPrefKey
     // FALSE,
     null
   };
+  static int[] GEEKSHOTlvl = {
+    T,
+    T,
+    T,
+    T,
+    T,
+    T,
+    T,
+    A,
+    E,
+    E,
+    // T,
+    // A,
+    // A,
+    A,
+    E,
+    E,
+    T,
+    T,
+    T,
+    // T,
+  };
 
-  public static String[] GEEKPLOT = {
+  static String[] GEEKPLOT = {
     "DISTOX_PLOT_SHIFT",      // plot shift and scale
     "DISTOX_PLOT_SPLIT",      // plot split and merge
     "DISTOX_STYLUS_SIZE",     // size of stylus (0: no stylus)
@@ -1716,8 +2021,7 @@ public class TDPrefKey
     R.string.pref_line_ends_summary,
     -1
   };
-
-  public static String[] GEEKPLOTdef = {
+  static String[] GEEKPLOTdef = {
     FALSE,
     FALSE,
     TDString.ZERO,
@@ -1736,8 +2040,26 @@ public class TDPrefKey
     TDString.ZERO,
     null
   };
+  static int[] GEEKPLOTlvl = {
+    T,
+    T,
+    T,
+    // T
+    A,
+    A,
+    // T
+    // T
+    T,
+    T,
+    T,
+    T,
+    T,
+    T,
+    T,
+    T,
+  };
 
-  public static String[] GEEKsplay = {
+  static String[] GEEKsplay = {
     "DISTOX_SPLAY_CLASSES",   // splay classes
     "DISTOX_DISCRETE_COLORS", // splay color: 0 no, 1 yes, 2 discrete - was DISTOX_SPLAY_COLOR
     // "DISTOX_SPLAY_AS_DOT", // plot splays as dots
@@ -1751,7 +2073,7 @@ public class TDPrefKey
     "DISTOX_SPLAY_LATEST_COLOR",    // color for latest splay 
   };
 
-  public static int[] GEEKsplaytitle = {
+  static int[] GEEKsplaytitle = {
     R.string.pref_splay_classes_title,
     R.string.pref_splay_color_title,
     // R.string.pref_splay_as_dot_title,
@@ -1765,7 +2087,7 @@ public class TDPrefKey
     R.string.pref_splay_latest_color_title,
   };
 
-  public static int[] GEEKsplaydesc = {
+  static int[] GEEKsplaydesc = {
     R.string.pref_splay_classes_summary,
     R.string.pref_splay_color_summary,
     // R.string.pref_splay_as_dot_summary,
@@ -1778,8 +2100,7 @@ public class TDPrefKey
     R.string.pref_splay_dot_color_summary,
     R.string.pref_splay_latest_color_summary,
   };
-
-  public static String[] GEEKsplaydef = {
+  static String[] GEEKsplaydef = {
     FALSE,
     TDString.ZERO,
     // FALSE,
@@ -1792,9 +2113,23 @@ public class TDPrefKey
     "7190271", 
     "6737151", // "0xff66ccff", // TDColor.SPLAY_LATEST
   };
+  static int[] GEEKsplaylvl = {
+    E,
+    // T,
+    T,
+    // T,
+    A,
+    T,
+    T,
+    T,
+    T,
+    T,
+    T,
+    T,
+  };
 
   // ----------------------------------- 3D ----------------------------------
-  public static String[] CAVE3D = {
+  static String[] CAVE3D = {
     "CAVE3D_NEG_CLINO",
     // "CAVE3D_BLUETOOTH_DEVICE",
     "CAVE3D_STATION_POINTS",
@@ -1809,7 +2144,7 @@ public class TDPrefKey
     "DISTOX_WALLS3D_PREF",
   };
 
-  public static int[] CAVE3Dtitle = {
+  static int[] CAVE3Dtitle = {
     R.string.cpref_neg_clino_title,
     // R.string.cpref_bluetooth_title,
     R.string.cpref_station_points_title,
@@ -1824,7 +2159,7 @@ public class TDPrefKey
     R.string.cpref_walls3d,
   };
 
-  public static int[] CAVE3Ddesc = {
+  static int[] CAVE3Ddesc = {
     R.string.cpref_neg_clino_summary,
     // R.string.cpref_bluetooth_summary,
     R.string.cpref_station_points_summary,
@@ -1838,8 +2173,7 @@ public class TDPrefKey
     -1,
     -1,
   };
-
-  public static String[] CAVE3Ddef = {
+  static String[] CAVE3Ddef = {
     FALSE,
     // ?,
     FALSE,
@@ -1854,32 +2188,49 @@ public class TDPrefKey
     "",
     null,
   };
+  static int[] CAVE3Dlvl = {
+    N,
+    // ?,
+    N,
+    A,
+    A,
+    A,
+    N,
+    N,
+    N,
+    A,
+    N,
+    A,
+  };
 
-  public static String[] DEM3D = { // category DEM3D
+  static String[] DEM3D = { // category DEM3D
     "CAVE3D_DEM_BUFFER",
     "CAVE3D_DEM_MAXSIZE",
     "CAVE3D_DEM_REDUCE",
   };
-
-  public static int[] DEM3Dtitle = {
+  static int[] DEM3Dtitle = {
     R.string.cpref_dem_buffer_title,
     R.string.cpref_dem_maxsize_title,
     R.string.cpref_dem_reduce_title,
   };
-
-  public static int[] DEM3Ddesc = {
+  static int[] DEM3Ddesc = {
     R.string.cpref_dem_buffer_summary,
     R.string.cpref_dem_maxsize_summary,
     R.string.cpref_dem_reduce_summary,
   };
-
-  public static String[] DEM3Ddef = {
+  static String[] DEM3Ddef = {
     "200",
     "400",
     "1"
   };
+  static int[] DEM3Dlvl = {
+    N,
+    N,
+    N,
+  };
 
-  public static String[] WALLS3D = { // category WALLS3D
+
+  static String[] WALLS3D = { // category WALLS3D
     "CAVE3D_SPLAY_USE",
     "CAVE3D_ALL_SPLAY",
     "CAVE3D_SPLAY_PROJ",
@@ -1889,8 +2240,7 @@ public class TDPrefKey
     "CAVE3D_SPLIT_STRETCH",
     "CAVE3D_POWERCRUST_DELTA"
   };
-
-  public static int[] WALLS3Dtitle = {
+  static int[] WALLS3Dtitle = {
     R.string.cpref_splay_use_title,
     R.string.cpref_all_splay_title,
     R.string.cpref_splay_proj_title,
@@ -1900,8 +2250,7 @@ public class TDPrefKey
     R.string.cpref_split_stretch_title,
     R.string.cpref_powercrust_delta_title,
   };
-
-  public static int[] WALLS3Ddesc = {
+  static int[] WALLS3Ddesc = {
     R.string.cpref_splay_use_summary,
     R.string.cpref_all_splay_summary,
     R.string.cpref_splay_proj_summary,
@@ -1911,8 +2260,7 @@ public class TDPrefKey
     R.string.cpref_split_stretch_summary,
     R.string.cpref_powercrust_delta_summary,
   };
-
-  public static String[] WALLS3Ddef = {
+  static String[] WALLS3Ddef = {
     "1",
     TRUE,
     FALSE,
@@ -1922,10 +2270,20 @@ public class TDPrefKey
     "0.1",
     "0.1",
   };
+  static int[] WALLS3Dlvl = {
+    N,
+    N,
+    N,
+    N,
+    N,
+    N,
+    N,
+    N,
+  };
 
   // ------------------------------------------------------------------------
 
-  public static String[] GEEK = {
+  static String[] GEEK = {
     "DISTOX_SINGLE_BACK",    
     "DISTOX_PALETTES",
     // "DISTOX_BACKUPS_CLEAR", // CLEAR_BACKUPS
@@ -1985,7 +2343,7 @@ public class TDPrefKey
     -1
   };
 
-  public static String[] GEEKdef = {
+  static String[] GEEKdef = {
     FALSE,
     FALSE,
     // FALSE, // CLEAR_BACKUPS
@@ -2004,9 +2362,27 @@ public class TDPrefKey
     FALSE,
     null
   };
+  static int[] GEEKlvl = {
+    A,
+    T,
+    // T,
+    T,
+    T,
+    T,
+    T,
+    A,
+    T,
+    A,
+    A,
+    // T,  
+    A,
+    T,
+    D,
+    T,
+  };
 
   // -------------------------------------------------------------------------------
-  public static String[] GEEKIMPORT = {
+  static String[] GEEKIMPORT = {
     "DISTOX_ZIP_WITH_SYMBOLS",
     "DISTOX_IMPORT_DATAMODE",
     "DISTOX_AUTO_XSECTIONS",  // automatically add xsections on export/save
@@ -2041,7 +2417,7 @@ public class TDPrefKey
     -1
   };
 
-  public static String[] GEEKIMPORTdef = {
+  static String[] GEEKIMPORTdef = {
     FALSE,
     TDString.ZERO, // SurveyInfo.DATAMODE_NORMAL
     TRUE,
@@ -2053,8 +2429,19 @@ public class TDPrefKey
     null
   };
 
+  static int[] GEEKIMPORTlvl = {
+    T,
+    T,
+    T,
+    T,
+    T,
+    T,
+    //
+    //
+  };
+
   // -------------------------------------------------------------------------------
-  public static String[] GEEKDEVICE = {
+  static String[] GEEKDEVICE = {
     "DISTOX_BT_ALIAS",         // open dialog for BT aliases
     "DISTOX_UNNAMED_DEVICE",   // 7 whether to show the menu to enter te name of a UNNAMED device
     "DISTOX_SOCKET_DELAY",         // delay before a socket-connection attempt
@@ -2104,8 +2491,7 @@ public class TDPrefKey
     R.string.pref_sap5_bit16_bug_summary,
     -1
   };
-
-  public static String[] GEEKDEVICEdef = {
+  static String[] GEEKDEVICEdef = {
     null,
     FALSE, // BT_NONAME
     TDString.ZERO,
@@ -2121,34 +2507,50 @@ public class TDPrefKey
     TRUE,
     null
   };
+  static int[] GEEKDEVICElvl = {
+    T,
+    T,
+    E,
+    T,
+    A,
+    A,
+    A,
+    A,
+    T,
+    T,
+    N,
+    T,
+    T,
+  };
 
   // ------------------------------------------------------------------------------
-  public static String[] SKETCH = { // [3] 
+  static String[] SKETCH = { // [3] 
     "DISTOX_3D_SKETCH",
     "DISTOX_SKETCH_SPLAY_BUFFER",
     null
   };
-
   static int[] SKETCHtitle = {
     R.string.pref_3d_sketch_title,
     R.string.pref_sketch_splay_buffer_title
   };
-
   static int[] SKETCHdesc = {
     R.string.pref_3d_sketch_summary,
     R.string.pref_sketch_splay_buffer_summary
   };
-
-  public static String[] SKETCHdef = {
+  static String[] SKETCHdef = {
     FALSE,
     TDString.TWO,
     null
+  };
+  static int[] SKETCHlvl = {
+    D,
+    D,
   };
 
   // ------------------------------------------------------------------------------
   // NO_LOGS
 
-  // public static String[] LOG = {
+  // static String[] LOG = {
   //   "DISTOX_LOG_STREAM", // 0
   //   "DISTOX_LOG_APPEND",
   //   "DISTOX_LOG_DEBUG",

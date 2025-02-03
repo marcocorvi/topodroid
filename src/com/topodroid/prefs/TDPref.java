@@ -42,7 +42,7 @@ import android.text.TextWatcher;
 import android.text.Editable;
 // import android.text.method.KeyListener;
 
-public class TDPref implements AdapterView.OnItemSelectedListener
+class TDPref implements AdapterView.OnItemSelectedListener
                       , View.OnClickListener
 		      , View.OnFocusChangeListener
 		      , TextWatcher
@@ -684,7 +684,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   /** set the preference value
    * @param val  new value
    */
-  public void setValue( String val /*, boolean debug */ )
+  void setValue( String val /*, boolean debug */ )
   {
     value = val;
     if ( pref_type == OPTIONS ) {
@@ -707,7 +707,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   /** set the "button" preference value
    * @param val  new value
    */
-  public void setButtonValue( String val )
+  void setButtonValue( String val )
   {
     if ( mView != null ) {
       TextView tv = (TextView) mView.findViewById( R.id.value );
@@ -718,56 +718,50 @@ public class TDPref implements AdapterView.OnItemSelectedListener
 
   /** @return the preference integer value
    */
-  public int intValue()         { return ( pref_type == INTEGER || pref_type == OPTIONS )? i_value : 0; }
+  int intValue()         { return ( pref_type == INTEGER || pref_type == OPTIONS )? i_value : 0; }
 
   /** @return the preference float value
    */
-  public float floatValue()     { return ( pref_type == FLOAT )? f_value : 0; }
+  float floatValue()     { return ( pref_type == FLOAT )? f_value : 0; }
 
   /** @return the preference string value
    */
-  public String stringValue()   { return value; }
+  String stringValue()   { return value; }
 
   /** @return the preference boolean value
    */
-  public boolean booleanValue() { return ( pref_type == BOOLEAN )&& b_value; }
+  boolean booleanValue() { return ( pref_type == BOOLEAN )&& b_value; }
 
   // -----------------------------------------------
-  static final int B = 0; // activity levels
-  static final int N = 1;
-  static final int A = 2;
-  static final int E = 3;
-  static final int T = 4;
-  static final int D = 5;
-
   /** construct the general "main" preferences array
    * @param ctx   context
    * @param hlp   shared preferences helper
    * @return array of main preferences
    */
-  public static TDPref[] makeMainPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeMainPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_ALL;
     String[] key = TDPrefKey.MAIN;
     int[] tit = TDPrefKey.MAINtitle;
     int[] dsc = TDPrefKey.MAINdesc;
     String[] def = TDPrefKey.MAINdef;
+    int[] lvl = TDPrefKey.MAINlvl;
     return new TDPref[ ] {
       // makeBtn( cat, key[ 0], tit[ 0], dsc[ 0], N, def[ 0], ctx, hlp ), // DISTOX_CWD
-      makeEdt( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0], INTEGER, ctx, hlp ),
-      makeLst( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], R.array.sizeButtons, R.array.sizeButtonsValue, ctx, hlp ),
-      makeLst( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2], R.array.extraButtons, R.array.extraButtonsValue, ctx, hlp ),
-      makeLst( cat, key[ 3], tit[ 3], dsc[ 3], A, def[ 3], R.array.localUserMan, R.array.localUserManValue, ctx, hlp ),
-      makeLst( cat, key[ 4], tit[ 4], dsc[ 4], N, def[ 4], R.array.locale, R.array.localeValue, ctx, hlp ),
-      makeLst( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5], R.array.orientation, R.array.orientationValue, ctx, hlp ),
-      // makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], D, def[ 8], ctx, hlp ), // IF_COSURVEY
-      makeFwd( cat, key[ 6], tit[ 6],          B,          ctx, hlp ),    // IMPORT EXPORT
-      makeFwd( cat, key[ 7], tit[ 7],          B,          ctx, hlp ),    // SURVEY DATA
-      makeFwd( cat, key[ 8], tit[ 8],          B,          ctx, hlp ),    // SKETCHING
-      makeFwd( cat, key[ 9], tit[ 9],          B,          ctx, hlp ),    // DEVICES
-      makeFwd( cat, key[10], tit[10],          N,          ctx, hlp ),    // CAVE3D
-      makeFwd( cat, key[11], tit[11],          A,          ctx, hlp ),    // GEEK
-      makeFwd( cat, key[12], tit[12],          E,          ctx, hlp ),    // EXPORT SETTINGS
+      makeEdt( cat, key[ 0], tit[ 0], dsc[ 0], lvl[ 0], def[ 0], INTEGER, ctx, hlp ),
+      makeLst( cat, key[ 1], tit[ 1], dsc[ 1], lvl[ 1], def[ 1], R.array.sizeButtons, R.array.sizeButtonsValue, ctx, hlp ),
+      makeLst( cat, key[ 2], tit[ 2], dsc[ 2], lvl[ 2], def[ 2], R.array.extraButtons, R.array.extraButtonsValue, ctx, hlp ),
+      makeLst( cat, key[ 3], tit[ 3], dsc[ 3], lvl[ 3], def[ 3], R.array.localUserMan, R.array.localUserManValue, ctx, hlp ),
+      makeLst( cat, key[ 4], tit[ 4], dsc[ 4], lvl[ 4], def[ 4], R.array.locale, R.array.localeValue, ctx, hlp ),
+      makeLst( cat, key[ 5], tit[ 5], dsc[ 5], lvl[ 5], def[ 5], R.array.orientation, R.array.orientationValue, ctx, hlp ),
+      // makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], lvl[8], def[ 8], ctx, hlp ), // IF_COSURVEY
+      makeFwd( cat, key[ 6], tit[ 6],          lvl[ 6],          ctx, hlp ),    // IMPORT EXPORT
+      makeFwd( cat, key[ 7], tit[ 7],          lvl[ 7],          ctx, hlp ),    // SURVEY DATA
+      makeFwd( cat, key[ 8], tit[ 8],          lvl[ 8],          ctx, hlp ),    // SKETCHING
+      makeFwd( cat, key[ 9], tit[ 9],          lvl[ 9],          ctx, hlp ),    // DEVICES
+      makeFwd( cat, key[10], tit[10],          lvl[10],          ctx, hlp ),    // CAVE3D
+      makeFwd( cat, key[11], tit[11],          lvl[11],          ctx, hlp ),    // GEEK
+      makeFwd( cat, key[12], tit[12],          lvl[12],          ctx, hlp ),    // EXPORT SETTINGS
     };
   }
 
@@ -776,29 +770,30 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "survey" preferences
    */
-  public static TDPref[] makeSurveyPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeSurveyPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_SURVEY;
     String[] key = TDPrefKey.SURVEY;
     int[] tit = TDPrefKey.SURVEYtitle;
     int[] dsc = TDPrefKey.SURVEYdesc;
     String[] def = TDPrefKey.SURVEYdef;
+    int[] lvl = TDPrefKey.SURVEYlvl;
     // TDLog.v("pref SURVEY TEAM DIALOG: " + key[1] + " default " + def[1] + " setting " + TDSetting.mTeamNames );
     return new TDPref[ ] {
-      makeEdt( cat, key[ 0], tit[ 0], dsc[0], B, def[0], STRING, ctx, hlp ),
-      makeLst( cat, key[ 1], tit[ 1], dsc[1], E, def[1], R.array.teamNames, R.array.teamNamesValue, ctx, hlp ),
-      makeLst( cat, key[ 2], tit[ 2], dsc[2], B, def[2], R.array.surveyStations, R.array.surveyStationsValue, ctx, hlp ),
-      makeLst( cat, key[ 3], tit[ 3], dsc[3], B, def[3], R.array.stationNames, R.array.stationNamesValue, ctx, hlp ),
-      makeEdt( cat, key[ 4], tit[ 4], dsc[4], B, def[4], STRING, ctx, hlp ),
-      makeEdt( cat, key[ 5], tit[ 5], dsc[5], A, def[5], INTEGER, ctx, hlp ),
-      makeCbx( cat, key[ 6], tit[ 6], dsc[6], E, def[6], ctx, hlp ),
-      makeCbx( cat, key[ 7], tit[ 7], dsc[7], B, def[7], ctx, hlp ),
-      makeCbx( cat, key[ 8], tit[ 8], dsc[8], B, def[8], ctx, hlp ),
-      // makeCbx( cat, key[ 8], tit[ 8], dsc[8], B, def[8], ctx, hlp ),
-      makeFwd( cat, key[ 9], tit[ 9],         B,         ctx, hlp ),
-      makeFwd( cat, key[10], tit[10],         B,         ctx, hlp ),
-      makeFwd( cat, key[11], tit[11],         N,         ctx, hlp ),
-      makeFwd( cat, key[12], tit[12],         A,         ctx, hlp )
+      makeEdt( cat, key[ 0], tit[ 0], dsc[0], lvl[0], def[0], STRING, ctx, hlp ),
+      makeLst( cat, key[ 1], tit[ 1], dsc[1], lvl[1], def[1], R.array.teamNames, R.array.teamNamesValue, ctx, hlp ),
+      makeLst( cat, key[ 2], tit[ 2], dsc[2], lvl[2], def[2], R.array.surveyStations, R.array.surveyStationsValue, ctx, hlp ),
+      makeLst( cat, key[ 3], tit[ 3], dsc[3], lvl[3], def[3], R.array.stationNames, R.array.stationNamesValue, ctx, hlp ),
+      makeEdt( cat, key[ 4], tit[ 4], dsc[4], lvl[4], def[4], STRING, ctx, hlp ),
+      makeEdt( cat, key[ 5], tit[ 5], dsc[5], lvl[5], def[5], INTEGER, ctx, hlp ),
+      makeCbx( cat, key[ 6], tit[ 6], dsc[6], lvl[6], def[6], ctx, hlp ),
+      makeCbx( cat, key[ 7], tit[ 7], dsc[7], lvl[7], def[7], ctx, hlp ),
+      makeCbx( cat, key[ 8], tit[ 8], dsc[8], lvl[8], def[8], ctx, hlp ),
+      // makeCbx( cat, key[ 8], tit[ 8], dsc[8], lvl[8], def[8], ctx, hlp ),
+      makeFwd( cat, key[ 9], tit[ 9],         lvl[ 9],         ctx, hlp ),
+      makeFwd( cat, key[10], tit[10],         lvl[10],         ctx, hlp ),
+      makeFwd( cat, key[11], tit[11],         lvl[11],         ctx, hlp ),
+      makeFwd( cat, key[12], tit[12],         lvl[12],         ctx, hlp )
     };
   }
 
@@ -807,28 +802,29 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "plot" preferences
    */
-  public static TDPref[] makePlotPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makePlotPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_PLOT;
     String[] key = TDPrefKey.PLOT;
     int[] tit = TDPrefKey.PLOTtitle;
     int[] dsc = TDPrefKey.PLOTdesc;
     String[] def = TDPrefKey.PLOTdef;
+    int[] lvl = TDPrefKey.PLOTlvl;
     return new TDPref[ ] {
-      // makeLst( cat, key[ 0], tit[ 0], dsc[0], B, def[0], R.array.pickerType, R.array.pickerTypeValue, ctx, hlp ),
-      // makeCbx( cat, key[ 1], tit[ 1], dsc[1], B, def[1], ctx, hlp ),
-      // makeLst( cat, key[ 1], tit[ 1], dsc[1], N, def[1], R.array.recentNr, R.array.recentNr, ctx, hlp ),
-      makeCbx( cat, key[ 0], tit[ 0], dsc[0], B, def[0], ctx, hlp ),
-      makeLst( cat, key[ 1], tit[ 1], dsc[1], B, def[1], R.array.zoomCtrl, R.array.zoomCtrlValue, ctx, hlp ),
-      // makeLst( cat, key[  ], tit[  ], dsc[ ], X, def[ ], R.array.sectionStations, R.array.sectionStationsValue, ctx, hlp ),
-      makeEdt( cat, key[ 2], tit[ 2], dsc[2], T, def[2], FLOAT,   ctx, hlp ), // X-SECTION H-THRESHOLD
-      makeCbx( cat, key[ 3], tit[ 3], dsc[3], A, def[3], ctx, hlp ), // CHECK-MIDLINE
-      makeCbx( cat, key[ 4], tit[ 4], dsc[4], A, def[4], ctx, hlp ), // CHECK-EXTEND
-      makeEdt( cat, key[ 5], tit[ 5], dsc[5], T, def[5], FLOAT, ctx, hlp ), // DISTOX_TOOLBAR_SIZE
-      makeFwd( cat, key[ 6], tit[ 6],         B,         ctx, hlp ),
-      makeFwd( cat, key[ 7], tit[ 7],         N,         ctx, hlp ),
-      makeFwd( cat, key[ 8], tit[ 8],         B,         ctx, hlp )
-      // makeFwd( cat, key[11], tit[11],         T,         ctx, hlp ), // PLOT_WALLS
+      // makeLst( cat, key[ 0], tit[ 0], dsc[0], lvl[0], def[0], R.array.pickerType, R.array.pickerTypeValue, ctx, hlp ),
+      // makeCbx( cat, key[ 1], tit[ 1], dsc[1], lvl[1], def[1], ctx, hlp ),
+      // makeLst( cat, key[ 1], tit[ 1], dsc[1], lvl[1], def[1], R.array.recentNr, R.array.recentNr, ctx, hlp ),
+      makeCbx( cat, key[ 0], tit[ 0], dsc[0], lvl[ 0], def[0], ctx, hlp ),
+      makeLst( cat, key[ 1], tit[ 1], dsc[1], lvl[ 1], def[1], R.array.zoomCtrl, R.array.zoomCtrlValue, ctx, hlp ),
+      // makeLst( cat, key[  ], tit[  ], dsc[ ], lvl[ ], def[ ], R.array.sectionStations, R.array.sectionStationsValue, ctx, hlp ),
+      makeEdt( cat, key[ 2], tit[ 2], dsc[2], lvl[ 2], def[2], FLOAT,   ctx, hlp ), // X-SECTION H-THRESHOLD
+      makeCbx( cat, key[ 3], tit[ 3], dsc[3], lvl[ 3], def[3], ctx, hlp ), // CHECK-MIDLINE
+      makeCbx( cat, key[ 4], tit[ 4], dsc[4], lvl[ 4], def[4], ctx, hlp ), // CHECK-EXTEND
+      makeEdt( cat, key[ 5], tit[ 5], dsc[5], lvl[ 5], def[5], FLOAT, ctx, hlp ), // DISTOX_TOOLBAR_SIZE
+      makeFwd( cat, key[ 6], tit[ 6],         lvl[ 6],         ctx, hlp ),
+      makeFwd( cat, key[ 7], tit[ 7],         lvl[ 7],         ctx, hlp ),
+      makeFwd( cat, key[ 8], tit[ 8],         lvl[ 8],         ctx, hlp )
+      // makeFwd( cat, key[11], tit[11],         lvl[11],         ctx, hlp ), // PLOT_WALLS
     };
   }
 
@@ -837,30 +833,31 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "calibration" preferences
    */
-  public static TDPref[] makeCalibPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeCalibPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_CALIB;
     String[] key = TDPrefKey.CALIB;
     int[] tit = TDPrefKey.CALIBtitle;
     int[] dsc = TDPrefKey.CALIBdesc;
     String[] def = TDPrefKey.CALIBdef;
+    int[] lvl = TDPrefKey.CALIBlvl;
     return new TDPref[ ] {
-      makeLst( cat, key[ 0], tit[ 0], dsc[ 0], A, def[ 0], R.array.groupBy, R.array.groupByValue, ctx, hlp ),
-      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], A, def[ 1], FLOAT, ctx, hlp ),
-      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2], FLOAT, ctx, hlp ),
-      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], B, def[ 3], INTEGER, ctx, hlp ),
-      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], A, def[ 4], ctx, hlp ),
+      makeLst( cat, key[ 0], tit[ 0], dsc[ 0], lvl[ 0], def[ 0], R.array.groupBy, R.array.groupByValue, ctx, hlp ),
+      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], lvl[ 1], def[ 1], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], lvl[ 2], def[ 2], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], lvl[ 3], def[ 3], INTEGER, ctx, hlp ),
+      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], lvl[ 4], def[ 4], ctx, hlp ),
     // r[ ] = makeCbx( cat, key[  ], tit[  ], dsc[  ], X, def[  ], ctx, hlp );
-      makeLst( cat, key[ 5], tit[ 5], dsc[ 5], A, def[ 5], R.array.rawCData, R.array.rawCDataValue, ctx, hlp ),
+      makeLst( cat, key[ 5], tit[ 5], dsc[ 5], lvl[ 5], def[ 5], R.array.rawCData, R.array.rawCDataValue, ctx, hlp ),
       // makeLst( cat, key[ 6], tit[ 6], dsc[ 6], E, def[ 6], R.array.calibAlgo, R.array.calibAlgoValue, ctx, hlp ),
-      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], D, def[ 6], FLOAT, ctx, hlp ),
-      makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], D, def[ 7], FLOAT, ctx, hlp ),
-      makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], D, def[ 8], FLOAT, ctx, hlp ),
-      makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], D, def[ 9], FLOAT, ctx, hlp ),
-      makeEdt( cat, key[10], tit[10], dsc[10], D, def[10], FLOAT, ctx, hlp ), // AUTO_CAL
-      makeEdt( cat, key[11], tit[11], dsc[11], D, def[11], FLOAT, ctx, hlp ),
-      makeEdt( cat, key[12], tit[12], dsc[12], D, def[12], FLOAT, ctx, hlp ),
-      makeEdt( cat, key[13], tit[13], dsc[13], D, def[13], FLOAT, ctx, hlp )
+      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], lvl[ 6], def[ 6], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], lvl[ 7], def[ 7], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], lvl[ 8], def[ 8], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], lvl[ 9], def[ 9], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[10], tit[10], dsc[10], lvl[10], def[10], FLOAT, ctx, hlp ), // AUTO_CAL
+      makeEdt( cat, key[11], tit[11], dsc[11], lvl[11], def[11], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[12], tit[12], dsc[12], lvl[12], def[12], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[13], tit[13], dsc[13], lvl[13], def[13], FLOAT, ctx, hlp )
     };
   }
 
@@ -869,27 +866,28 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "device" preferences
    */
-  public static TDPref[] makeDevicePrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeDevicePrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_DEVICE;
     String[] key = TDPrefKey.DEVICE;
     int[] tit = TDPrefKey.DEVICEtitle;
     int[] dsc = TDPrefKey.DEVICEdesc;
     String[] def = TDPrefKey.DEVICEdef;
+    int[] lvl = TDPrefKey.DEVICElvl;
     
     return new TDPref[ ] {
-      // makeEdt( cat, key[  ], tit[  ], dsc[  ], X, def[  ], STRING,  ctx, hlp ),
-      // makeLst( cat, key[  ], tit[  ], dsc[  ], X, def[  ], R.array.deviceType, R.array.deviceTypeValue, ctx, hlp ),
-      makeLst( cat, key[ 0], tit[ 0], dsc[ 0], N, def[ 0], R.array.deviceBT, R.array.deviceBTValue, ctx, hlp ),
-      makeLst( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], R.array.connMode, R.array.connModeValue, ctx, hlp ),
-      // makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2],          ctx, hlp ),
-      makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2],          ctx, hlp ),
-      makeLst( cat, key[ 3], tit[ 3], dsc[ 3], B, def[ 3], R.array.sockType, R.array.sockTypeValue, ctx, hlp ),
-      // makeEdt( cat, key[  ], tit[  ], dsc[  ], X, def[  ], INTEGER, ctx, hlp ),
-      // makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], N, def[ 4],          ctx, hlp ),
-      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], A, def[ 4],          ctx, hlp ),
-      makeLst( cat, key[ 5], tit[ 5], dsc[ 5], E, def[ 5], R.array.feedbackMode, R.array.feedbackModeValue, ctx, hlp ),
-      makeFwd( cat, key[ 6], tit[ 6],          B,                   ctx, hlp )
+      // makeEdt( cat, key[  ], tit[  ], dsc[  ], lvl[], def[  ], STRING,  ctx, hlp ),
+      // makeLst( cat, key[  ], tit[  ], dsc[  ], lvl[], def[  ], R.array.deviceType, R.array.deviceTypeValue, ctx, hlp ),
+      makeLst( cat, key[ 0], tit[ 0], dsc[ 0], lvl[ 0], def[ 0], R.array.deviceBT, R.array.deviceBTValue, ctx, hlp ),
+      makeLst( cat, key[ 1], tit[ 1], dsc[ 1], lvl[ 1], def[ 1], R.array.connMode, R.array.connModeValue, ctx, hlp ),
+      // makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], lvl[], def[ 2],          ctx, hlp ),
+      makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], lvl[ 2], def[ 2],          ctx, hlp ),
+      makeLst( cat, key[ 3], tit[ 3], dsc[ 3], lvl[ 3], def[ 3], R.array.sockType, R.array.sockTypeValue, ctx, hlp ),
+      // makeEdt( cat, key[  ], tit[  ], dsc[  ], lvl[], def[  ], INTEGER, ctx, hlp ),
+      // makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], lvl[], def[ 4],          ctx, hlp ),
+      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], lvl[ 4], def[ 4],          ctx, hlp ),
+      makeLst( cat, key[ 5], tit[ 5], dsc[ 5], lvl[ 5], def[ 5], R.array.feedbackMode, R.array.feedbackModeValue, ctx, hlp ),
+      makeFwd( cat, key[ 6], tit[ 6],          lvl[ 6],                   ctx, hlp )
     };
   }
 
@@ -898,36 +896,37 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "export" preferences
    */
-  public static TDPref[] makeExportPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeExportPrefs( Context ctx, TDPrefHelper hlp )
   {
-    int cat = TDPrefCat.PREF_CATEGORY_EXPORT;
+    int cat      = TDPrefCat.PREF_CATEGORY_EXPORT;
     String[] key = TDPrefKey.EXPORT;
-    int[] tit = TDPrefKey.EXPORTtitle;
-    int[] dsc = TDPrefKey.EXPORTdesc;
+    int[] tit    = TDPrefKey.EXPORTtitle;
+    int[] dsc    = TDPrefKey.EXPORTdesc;
     String[] def = TDPrefKey.EXPORTdef;
+    int[] lvl    = TDPrefKey.EXPORTlvl;
     return new TDPref[ ] {
-      makeLst( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0], R.array.exportShots, R.array.exportShotsValue, ctx, hlp ),
-      makeLst( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], R.array.exportPlot, R.array.exportPlotValue, ctx, hlp ),
-      makeLst( cat, key[ 2], tit[ 2], dsc[ 2], N, def[ 2], R.array.exportPlotAuto, R.array.exportPlotAutoValue, ctx, hlp ), // DISTOX_AUTO_PLOT_EXPORT
-      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], A, def[ 3], FLOAT,  ctx, hlp ),
-      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], A, def[ 4], FLOAT,  ctx, hlp ),
-      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], A, def[ 5], FLOAT,  ctx, hlp ),
-      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], E, def[ 6], FLOAT,  ctx, hlp ),
-      makeFwd( cat, key[ 7], tit[ 7],          B,                  ctx, hlp ), // ENABLE
-      makeFwd( cat, key[ 8], tit[ 8],          N,                  ctx, hlp ), // IMPORT
-      makeFwd( cat, key[ 9], tit[ 9],          N,                  ctx, hlp ), // survex
-      makeFwd( cat, key[10], tit[10],          N,                  ctx, hlp ), // therion
-      makeFwd( cat, key[11], tit[11],          N,                  ctx, hlp ), // csurvey
-      makeFwd( cat, key[12], tit[12],          N,                  ctx, hlp ), // compass
-      makeFwd( cat, key[13], tit[13],          N,                  ctx, hlp ), // visualtopo
-      makeFwd( cat, key[14], tit[14],          N,                  ctx, hlp ), // walls
-      makeFwd( cat, key[15], tit[15],          N,                  ctx, hlp ), // svg
-      makeFwd( cat, key[16], tit[16],          N,                  ctx, hlp ), // shapefile
-      // makeFwd( cat, key[16], tit[16],          N,                  ctx, hlp ), // png NO_PNG
-      makeFwd( cat, key[17], tit[17],          N,                  ctx, hlp ), // dxf
-      makeFwd( cat, key[18], tit[18],          N,                  ctx, hlp ), // kml
-      makeFwd( cat, key[19], tit[19],          N,                  ctx, hlp ), // gpx
-      makeFwd( cat, key[20], tit[20],          N,                  ctx, hlp )  // cvs
+      makeLst( cat, key[ 0], tit[ 0], dsc[ 0], lvl[ 0], def[ 0], R.array.exportShots, R.array.exportShotsValue, ctx, hlp ),
+      makeLst( cat, key[ 1], tit[ 1], dsc[ 1], lvl[ 1], def[ 1], R.array.exportPlot, R.array.exportPlotValue, ctx, hlp ),
+      makeLst( cat, key[ 2], tit[ 2], dsc[ 2], lvl[ 2], def[ 2], R.array.exportPlotAuto, R.array.exportPlotAutoValue, ctx, hlp ), // DISTOX_AUTO_PLOT_EXPORT
+      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], lvl[ 3], def[ 3], FLOAT,  ctx, hlp ),
+      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], lvl[ 4], def[ 4], FLOAT,  ctx, hlp ),
+      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], lvl[ 5], def[ 5], FLOAT,  ctx, hlp ),
+      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], lvl[ 6], def[ 6], FLOAT,  ctx, hlp ),
+      makeFwd( cat, key[ 7], tit[ 7],          lvl[ 7],                  ctx, hlp ), // ENABLE
+      makeFwd( cat, key[ 8], tit[ 8],          lvl[ 8],                  ctx, hlp ), // IMPORT
+      makeFwd( cat, key[ 9], tit[ 9],          lvl[ 9],                  ctx, hlp ), // survex
+      makeFwd( cat, key[10], tit[10],          lvl[10],                  ctx, hlp ), // therion
+      makeFwd( cat, key[11], tit[11],          lvl[11],                  ctx, hlp ), // csurvey
+      makeFwd( cat, key[12], tit[12],          lvl[12],                  ctx, hlp ), // compass
+      makeFwd( cat, key[13], tit[13],          lvl[13],                  ctx, hlp ), // visualtopo
+      makeFwd( cat, key[14], tit[14],          lvl[14],                  ctx, hlp ), // walls
+      makeFwd( cat, key[15], tit[15],          lvl[15],                  ctx, hlp ), // svg
+      makeFwd( cat, key[16], tit[16],          lvl[16],                  ctx, hlp ), // shapefile
+      // makeFwd( cat, key[16], tit[16],       lvl[  ],                  ctx, hlp ), // png NO_PNG
+      makeFwd( cat, key[17], tit[17],          lvl[17],                  ctx, hlp ), // dxf
+      makeFwd( cat, key[18], tit[18],          lvl[18],                  ctx, hlp ), // kml
+      makeFwd( cat, key[19], tit[19],          lvl[19],                  ctx, hlp ), // gpx
+      makeFwd( cat, key[20], tit[20],          lvl[20],                  ctx, hlp )  // cvs
     };
   }
 
@@ -936,30 +935,31 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "export" preferences
    */
-  public static TDPref[] makeExportEnablePrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeExportEnablePrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_EXPORT_ENABLE;
     String[] key = TDPrefKey.EXPORT_ENABLE;
     int[] tit = TDPrefKey.EXPORT_ENABLEtitle;
     // int[] dsc = TDPrefKey.EXPORT_ENABLEdesc;
     String[] def = TDPrefKey.EXPORT_ENABLEdef;
+    int[] lvl = TDPrefKey.EXPORT_ENABLElvl;
     return new TDPref[ ] {
-      makeCbx( cat, key[ 0], tit[ 0], -1, B, def[ 0], ctx, hlp ), // compass
-      makeCbx( cat, key[ 1], tit[ 1], -1, B, def[ 1], ctx, hlp ), // csurvey
-      // makeCbx( cat, key[ 2], tit[ 2], -1, B, def[ 2], ctx, hlp ), // ghtopo
-      makeCbx( cat, key[ 2], tit[ 2], -1, B, def[ 2], ctx, hlp ), // polygon
-      makeCbx( cat, key[ 3], tit[ 3], -1, B, def[ 3], ctx, hlp ), // survex
-      makeCbx( cat, key[ 4], tit[ 4], -1, B, def[ 4], ctx, hlp ), // therion
-      makeCbx( cat, key[ 5], tit[ 5], -1, B, def[ 5], ctx, hlp ), // topo
-      makeCbx( cat, key[ 6], tit[ 6], -1, B, def[ 6], ctx, hlp ), // toporobot
-      makeCbx( cat, key[ 7], tit[ 7], -1, B, def[ 7], ctx, hlp ), // visualtopo
-      makeCbx( cat, key[ 8], tit[ 8], -1, B, def[ 8], ctx, hlp ), // walls
-      makeCbx( cat, key[ 9], tit[ 9], -1, B, def[ 9], ctx, hlp ), // winkarst
-      makeCbx( cat, key[10], tit[10], -1, B, def[10], ctx, hlp ), // csv
-      makeCbx( cat, key[11], tit[11], -1, B, def[11], ctx, hlp ), // dxf
-      makeCbx( cat, key[12], tit[12], -1, B, def[12], ctx, hlp ), // kml
-      makeCbx( cat, key[13], tit[13], -1, B, def[13], ctx, hlp ), // gpx
-      makeCbx( cat, key[14], tit[14], -1, B, def[14], ctx, hlp ), // shapefile
+      makeCbx( cat, key[ 0], tit[ 0], -1, lvl[ 0], def[ 0], ctx, hlp ), // compass
+      makeCbx( cat, key[ 1], tit[ 1], -1, lvl[ 1], def[ 1], ctx, hlp ), // csurvey
+      // makeCbx( cat, key[ 2], tit[ 2], -1, lvl[  ], def[ 2], ctx, hlp ), // ghtopo
+      makeCbx( cat, key[ 2], tit[ 2], -1, lvl[ 2], def[ 2], ctx, hlp ), // polygon
+      makeCbx( cat, key[ 3], tit[ 3], -1, lvl[ 3], def[ 3], ctx, hlp ), // survex
+      makeCbx( cat, key[ 4], tit[ 4], -1, lvl[ 4], def[ 4], ctx, hlp ), // therion
+      makeCbx( cat, key[ 5], tit[ 5], -1, lvl[ 5], def[ 5], ctx, hlp ), // topo
+      makeCbx( cat, key[ 6], tit[ 6], -1, lvl[ 6], def[ 6], ctx, hlp ), // toporobot
+      makeCbx( cat, key[ 7], tit[ 7], -1, lvl[ 7], def[ 7], ctx, hlp ), // visualtopo
+      makeCbx( cat, key[ 8], tit[ 8], -1, lvl[ 8], def[ 8], ctx, hlp ), // walls
+      makeCbx( cat, key[ 9], tit[ 9], -1, lvl[ 9], def[ 9], ctx, hlp ), // winkarst
+      makeCbx( cat, key[10], tit[10], -1, lvl[10], def[10], ctx, hlp ), // csv
+      makeCbx( cat, key[11], tit[11], -1, lvl[11], def[11], ctx, hlp ), // dxf
+      makeCbx( cat, key[12], tit[12], -1, lvl[12], def[12], ctx, hlp ), // kml
+      makeCbx( cat, key[13], tit[13], -1, lvl[13], def[13], ctx, hlp ), // gpx
+      makeCbx( cat, key[14], tit[14], -1, lvl[14], def[14], ctx, hlp ), // shapefile
     };
   }
 
@@ -968,16 +968,17 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "import" preferences
    */
-  public static TDPref[] makeImportPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeImportPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_IMPORT;
     String[] key = TDPrefKey.EXPORT_import;
     int[] tit = TDPrefKey.EXPORT_importtitle;
     int[] dsc = TDPrefKey.EXPORT_importdesc;
     String[] def = TDPrefKey.EXPORT_importdef;
+    int[] lvl = TDPrefKey.EXPORT_importlvl;
     return new TDPref[ ] {
-      makeBtn( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0],         ctx, hlp ),
-      makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], A, def[ 1],         ctx, hlp )
+      makeBtn( cat, key[ 0], tit[ 0], dsc[ 0], lvl[ 0], def[ 0],         ctx, hlp ),
+      makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], lvl[ 1], def[ 1],         ctx, hlp )
     };
   }
 
@@ -986,22 +987,23 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "geek import" preferences
    */
-  public static TDPref[] makeGeekImportPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeGeekImportPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_GEEK_IMPORT;
     String[] key = TDPrefKey.GEEKIMPORT;
     int[] tit = TDPrefKey.GEEKIMPORTtitle;
     int[] dsc = TDPrefKey.GEEKIMPORTdesc;
     String[] def = TDPrefKey.GEEKIMPORTdef;
+    int[] lvl = TDPrefKey.GEEKIMPORTlvl;
     return new TDPref[ ] {
-      makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], T, def[ 0],         ctx, hlp ),
-      makeLst( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1], R.array.importDatamode, R.array.importDatamodeValue, ctx, hlp ),
-      makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2],         ctx, hlp ), // DISTOX_AUTO_XSECTIONS
-      makeCbx( cat, key[ 3], tit[ 3], dsc[ 3], T, def[ 3],         ctx, hlp ), // DISTOX_AUTO_STATIONS
-      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4],         ctx, hlp ), // DISTOX_LRUD_COUNT
-      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5],         ctx, hlp ), // DISTOX_ZIP_SHARE_CATEGORY
-      // makeLst( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4], R.array.exportPlotAuto, R.array.exportPlotAutoValue, ctx, hlp ), // DISTOX_AUTO_PLOT_EXPORT
-      // makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2],         ctx, hlp ),
+      makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], lvl[ 0], def[ 0],         ctx, hlp ),
+      makeLst( cat, key[ 1], tit[ 1], dsc[ 1], lvl[ 1], def[ 1], R.array.importDatamode, R.array.importDatamodeValue, ctx, hlp ),
+      makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], lvl[ 2], def[ 2],         ctx, hlp ), // DISTOX_AUTO_XSECTIONS
+      makeCbx( cat, key[ 3], tit[ 3], dsc[ 3], lvl[ 3], def[ 3],         ctx, hlp ), // DISTOX_AUTO_STATIONS
+      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], lvl[ 4], def[ 4],         ctx, hlp ), // DISTOX_LRUD_COUNT
+      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], lvl[ 5], def[ 5],         ctx, hlp ), // DISTOX_ZIP_SHARE_CATEGORY
+      // makeLst( cat, key[ 4], tit[ 4], dsc[ 4], lvl[ ], def[ 4], R.array.exportPlotAuto, R.array.exportPlotAutoValue, ctx, hlp ), // DISTOX_AUTO_PLOT_EXPORT
+      // makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], lvl[ ], def[ 2],         ctx, hlp ),
     };
   }
 
@@ -1010,15 +1012,16 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "shapefile" preferences
    */
-  public static TDPref[] makeShpPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeShpPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_SHP;
     String[] key = TDPrefKey.EXPORT_SHP;
     int[] tit = TDPrefKey.EXPORT_SHPtitle;
     int[] dsc = TDPrefKey.EXPORT_SHPdesc;
     String[] def = TDPrefKey.EXPORT_SHPdef;
+    int[] lvl = TDPrefKey.EXPORT_SHPlvl;
     return new TDPref[ ] {
-      makeCbx( cat, key[0], tit[0], dsc[0], T, def[0],         ctx, hlp )
+      makeCbx( cat, key[0], tit[0], dsc[0], lvl[0], def[0],         ctx, hlp )
     };
   }
 
@@ -1027,18 +1030,19 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "Survex" preferences
    */
-  public static TDPref[] makeSvxPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeSvxPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_SVX;
     String[] key = TDPrefKey.EXPORT_SVX;
     int[] tit = TDPrefKey.EXPORT_SVXtitle;
     int[] dsc = TDPrefKey.EXPORT_SVXdesc;
     String[] def = TDPrefKey.EXPORT_SVXdef;
+    int[] lvl = TDPrefKey.EXPORT_SVXlvl;
     return new TDPref[ ] {
-      makeLst( cat, key[0], tit[0], dsc[0], N, def[0], R.array.survexEol, R.array.survexEolValue, ctx, hlp ),
-      makeCbx( cat, key[1], tit[1], dsc[1], A, def[1],          ctx, hlp ),
-      makeCbx( cat, key[2], tit[2], dsc[2], A, def[2],          ctx, hlp ),
-      makeEdt( cat, key[3], tit[3], dsc[3], A, def[3], INTEGER, ctx, hlp )
+      makeLst( cat, key[0], tit[0], dsc[0], lvl[0], def[0], R.array.survexEol, R.array.survexEolValue, ctx, hlp ),
+      makeCbx( cat, key[1], tit[1], dsc[1], lvl[1], def[1],          ctx, hlp ),
+      makeCbx( cat, key[2], tit[2], dsc[2], lvl[2], def[2],          ctx, hlp ),
+      makeEdt( cat, key[3], tit[3], dsc[3], lvl[3], def[3], INTEGER, ctx, hlp )
     };
   }
 
@@ -1047,23 +1051,24 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "Therion" preferences
    */
-  public static TDPref[] makeThPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeThPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_TH;
     String[] key = TDPrefKey.EXPORT_TH;
     int[] tit = TDPrefKey.EXPORT_THtitle;
     int[] dsc = TDPrefKey.EXPORT_THdesc;
     String[] def = TDPrefKey.EXPORT_THdef;
+    int[] lvl = TDPrefKey.EXPORT_THlvl;
     return new TDPref[ ] {
-      makeCbx( cat, key[0], tit[0], dsc[0], A, def[0], ctx, hlp ),
-      makeCbx( cat, key[1], tit[1], dsc[1], A, def[1], ctx, hlp ),
-      // makeCbx( cat, key[2], tit[2], dsc[2], N, def[2], ctx, hlp ), // DISTOX_AUTO_STATIONS
-      // makeCbx( cat, key[ ], tit[ ], dsc[ ], X, def[ ], ctx, hlp ),
-      makeCbx( cat, key[2], tit[2], dsc[2], A, def[2], ctx, hlp ),
-      makeCbx( cat, key[3], tit[3], dsc[3], A, def[3], ctx, hlp ),
-      // makeCbx( cat, key[4], tit[4], dsc[4], A, def[4], ctx, hlp ),
-      makeEdt( cat, key[4], tit[4], dsc[4], E, def[4], INTEGER,  ctx, hlp ),
-      makeCbx( cat, key[5], tit[5], dsc[5], E, def[5], ctx, hlp )
+      makeCbx( cat, key[0], tit[0], dsc[0], lvl[0], def[0], ctx, hlp ),
+      makeCbx( cat, key[1], tit[1], dsc[1], lvl[1], def[1], ctx, hlp ),
+      // makeCbx( cat, key[2], tit[2], dsc[2], lvl[ ], def[2], ctx, hlp ), // DISTOX_AUTO_STATIONS
+      // makeCbx( cat, key[ ], tit[ ], dsc[ ], lvl[ ], def[ ], ctx, hlp ),
+      makeCbx( cat, key[2], tit[2], dsc[2], lvl[2] , def[2], ctx, hlp ),
+      makeCbx( cat, key[3], tit[3], dsc[3], lvl[3], def[3], ctx, hlp ),
+      // makeCbx( cat, key[4], tit[4], dsc[4], lvl[ ], def[4], ctx, hlp ),
+      makeEdt( cat, key[4], tit[4], dsc[4], lvl[4], def[4], INTEGER,  ctx, hlp ),
+      makeCbx( cat, key[5], tit[5], dsc[5], lvl[5], def[5], ctx, hlp )
     };
   }
 
@@ -1072,17 +1077,18 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "Compass" preferences
    */
-  public static TDPref[] makeDatPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeDatPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_DAT;
     String[] key = TDPrefKey.EXPORT_DAT;
     int[] tit = TDPrefKey.EXPORT_DATtitle;
     int[] dsc = TDPrefKey.EXPORT_DATdesc;
     String[] def = TDPrefKey.EXPORT_DATdef;
+    int[] lvl = TDPrefKey.EXPORT_DATlvl;
     return new TDPref[ ] {
-      makeCbx( cat, key[0], tit[0], dsc[0], B, def[0], ctx, hlp ),
-      makeCbx( cat, key[1], tit[1], dsc[1], A, def[1], ctx, hlp ),
-      makeCbx( cat, key[2], tit[2], dsc[2], N, def[2], ctx, hlp )
+      makeCbx( cat, key[0], tit[0], dsc[0], lvl[0], def[0], ctx, hlp ),
+      makeCbx( cat, key[1], tit[1], dsc[1], lvl[1], def[1], ctx, hlp ),
+      makeCbx( cat, key[2], tit[2], dsc[2], lvl[2], def[2], ctx, hlp )
     };
   }
 
@@ -1091,15 +1097,16 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "Walls" preferences
    */
-  public static TDPref[] makeSrvPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeSrvPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_SRV;
     String[] key = TDPrefKey.EXPORT_SRV;
     int[] tit = TDPrefKey.EXPORT_SRVtitle;
     int[] dsc = TDPrefKey.EXPORT_SRVdesc;
     String[] def = TDPrefKey.EXPORT_SRVdef;
+    int[] lvl = TDPrefKey.EXPORT_SRVlvl;
     return new TDPref[ ] {
-      makeCbx( cat, key[0], tit[0], dsc[0], B, def[0], ctx, hlp ),
+      makeCbx( cat, key[0], tit[0], dsc[0], lvl[0], def[0], ctx, hlp ),
     };
   }
 
@@ -1108,17 +1115,18 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "VisualTopo" preferences
    */
-  public static TDPref[] makeTroPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeTroPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_TRO;
     String[] key = TDPrefKey.EXPORT_TRO;
     int[] tit = TDPrefKey.EXPORT_TROtitle;
     int[] dsc = TDPrefKey.EXPORT_TROdesc;
     String[] def = TDPrefKey.EXPORT_TROdef;
+    int[] lvl = TDPrefKey.EXPORT_TROlvl;
     return new TDPref[ ] {
-      makeCbx( cat, key[0], tit[0], dsc[0], A, def[0], ctx, hlp ),
-      makeCbx( cat, key[1], tit[1], dsc[1], N, def[1], ctx, hlp ),
-      makeCbx( cat, key[2], tit[2], dsc[2], B, def[2], ctx, hlp ) // DISTOX_VTOPO_TROX
+      makeCbx( cat, key[0], tit[0], dsc[0], lvl[0], def[0], ctx, hlp ),
+      makeCbx( cat, key[1], tit[1], dsc[1], lvl[1], def[1], ctx, hlp ),
+      makeCbx( cat, key[2], tit[2], dsc[2], lvl[2], def[2], ctx, hlp ) // DISTOX_VTOPO_TROX
     };
   }
 
@@ -1127,29 +1135,30 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "SVG" preferences
    */
-  public static TDPref[] makeSvgPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeSvgPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_SVG;
     String[] key = TDPrefKey.EXPORT_SVG;
     int[] tit = TDPrefKey.EXPORT_SVGtitle;
     int[] dsc = TDPrefKey.EXPORT_SVGdesc;
     String[] def = TDPrefKey.EXPORT_SVGdef;
+    int[] lvl = TDPrefKey.EXPORT_SVGlvl;
     return new TDPref[ ] {
-      makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], T,  def[ 0],         ctx, hlp ),
-      makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], E,  def[ 1],         ctx, hlp ),
-      makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], E,  def[ 2],         ctx, hlp ),
-      makeCbx( cat, key[ 3], tit[ 3], dsc[ 3], N,  def[ 3],         ctx, hlp ),
-      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], N,  def[ 4],         ctx, hlp ),
-      // makeCbx( cat, key[ ], tit[ ], dsc[ ], X, def[ ],         ctx, hlp ),
-      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], A,  def[ 5], FLOAT,  ctx, hlp ),
-      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], A,  def[ 6], FLOAT,  ctx, hlp ),
-      makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], A,  def[ 7], FLOAT,  ctx, hlp ),
-      makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], A,  def[ 8], FLOAT,  ctx, hlp ),
-      makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], A,  def[ 9], FLOAT,  ctx, hlp ),
-      makeEdt( cat, key[10], tit[10], dsc[10], A,  def[10], FLOAT,  ctx, hlp ),
-      makeEdt( cat, key[11], tit[11], dsc[11], A,  def[11], INTEGER,  ctx, hlp ),
-      makeEdt( cat, key[12], tit[12], dsc[12], A,  def[12], INTEGER,  ctx, hlp ),
-      makeLst( cat, key[13], tit[13], dsc[13], N,  def[13], R.array.svgProgram, R.array.svgProgramValue, ctx, hlp )  // DISTOX_SVG_PROGRAM
+      makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], lvl[ 0],  def[ 0],         ctx, hlp ),
+      makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], lvl[ 1],  def[ 1],         ctx, hlp ),
+      makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], lvl[ 2],  def[ 2],         ctx, hlp ),
+      makeCbx( cat, key[ 3], tit[ 3], dsc[ 3], lvl[ 3],  def[ 3],         ctx, hlp ),
+      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], lvl[ 4],  def[ 4],         ctx, hlp ),
+      // makeCbx( cat, key[ ], tit[ ], dsc[ ], lvl[  ],  def[  ],         ctx, hlp ),
+      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], lvl[ 5],  def[ 5], FLOAT,  ctx, hlp ),
+      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], lvl[ 6],  def[ 6], FLOAT,  ctx, hlp ),
+      makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], lvl[ 7],  def[ 7], FLOAT,  ctx, hlp ),
+      makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], lvl[ 8],  def[ 8], FLOAT,  ctx, hlp ),
+      makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], lvl[ 9],  def[ 9], FLOAT,  ctx, hlp ),
+      makeEdt( cat, key[10], tit[10], dsc[10], lvl[10],  def[10], FLOAT,  ctx, hlp ),
+      makeEdt( cat, key[11], tit[11], dsc[11], lvl[11],  def[11], INTEGER,  ctx, hlp ),
+      makeEdt( cat, key[12], tit[12], dsc[12], lvl[12],  def[12], INTEGER,  ctx, hlp ),
+      makeLst( cat, key[13], tit[13], dsc[13], lvl[13],  def[13], R.array.svgProgram, R.array.svgProgramValue, ctx, hlp )  // DISTOX_SVG_PROGRAM
     };
   }
 
@@ -1158,21 +1167,22 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "DXF" preferences
    */
-  public static TDPref[] makeDxfPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeDxfPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_DXF;
     String[] key = TDPrefKey.EXPORT_DXF;
     int[] tit = TDPrefKey.EXPORT_DXFtitle;
     int[] dsc = TDPrefKey.EXPORT_DXFdesc;
     String[] def = TDPrefKey.EXPORT_DXFdef;
+    int[] lvl = TDPrefKey.EXPORT_DXFlvl;
     return new TDPref[ ] {
-      // makeEdt( cat, key[ ]  tit[ ], dsc[ ], X, def[ ], FLOAT,  ctx, hlp ),
-      makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],         ctx, hlp ),
-      makeLst( cat, key[1], tit[1], dsc[1], E, def[1], R.array.acadVersion, R.array.acadVersionValue, ctx, hlp ),
-      makeCbx( cat, key[2], tit[2], dsc[2], T, def[2],         ctx, hlp ),  // DISTOX_ACAD_SPLINE
-      makeCbx( cat, key[3], tit[3], dsc[3], A, def[3],         ctx, hlp ),  // DISTOX_DXF_REFERENCE
-      makeCbx( cat, key[4], tit[4], dsc[4], T, def[4],         ctx, hlp )   // DISTOX_ACAD_LAYER
-      // makeCbx( cat, key[4], tit[4], dsc[4], N, def[4],         ctx, hlp )   // DISTOX_AUTO_STATIONS
+      // makeEdt( cat, key[ ]  tit[ ], dsc[ ], lvl[ ], def[ ], FLOAT,  ctx, hlp ),
+      makeCbx( cat, key[0], tit[0], dsc[0], lvl[0], def[0],         ctx, hlp ),
+      makeLst( cat, key[1], tit[1], dsc[1], lvl[1], def[1], R.array.acadVersion, R.array.acadVersionValue, ctx, hlp ),
+      makeCbx( cat, key[2], tit[2], dsc[2], lvl[2], def[2],         ctx, hlp ),  // DISTOX_ACAD_SPLINE
+      makeCbx( cat, key[3], tit[3], dsc[3], lvl[3], def[3],         ctx, hlp ),  // DISTOX_DXF_REFERENCE
+      makeCbx( cat, key[4], tit[4], dsc[4], lvl[4], def[4],         ctx, hlp )   // DISTOX_ACAD_LAYER
+      // makeCbx( cat, key[4], tit[4], dsc[4], lvl[ ], def[4],         ctx, hlp )   // DISTOX_AUTO_STATIONS
     };
   }
 
@@ -1182,7 +1192,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   //  * @param hlp   shared preferences helper
   //  * @return array of "PNG image" preferences
   //  */
-  // public static TDPref[] makePngPrefs( Context ctx, TDPrefHelper hlp )
+  // static TDPref[] makePngPrefs( Context ctx, TDPrefHelper hlp )
   // {
   //   int cat = TDPrefCat.PREF_CATEGORY_PNG;
   //   String[] key = TDPrefKey.EXPORT_PNG;
@@ -1203,16 +1213,17 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "KML" preferences
    */
-  public static TDPref[] makeKmlPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeKmlPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_KML;
     String[] key = TDPrefKey.EXPORT_KML;
     int[] tit = TDPrefKey.EXPORT_KMLtitle;
     int[] dsc = TDPrefKey.EXPORT_KMLdesc;
     String[] def = TDPrefKey.EXPORT_KMLdef;
+    int[] lvl = TDPrefKey.EXPORT_KMLlvl;
     return new TDPref[ ] {
-      makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],         ctx, hlp ),
-      makeCbx( cat, key[1], tit[1], dsc[1], E, def[1],         ctx, hlp )
+      makeCbx( cat, key[0], tit[0], dsc[0], lvl[0], def[0],         ctx, hlp ),
+      makeCbx( cat, key[1], tit[1], dsc[1], lvl[1], def[1],         ctx, hlp )
     };
   }
 
@@ -1221,15 +1232,16 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "cSurvey" preferences
    */
-  public static TDPref[] makeCsxPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeCsxPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_CSX;
     String[] key = TDPrefKey.EXPORT_CSX;
     int[] tit = TDPrefKey.EXPORT_CSXtitle;
     int[] dsc = TDPrefKey.EXPORT_CSXdesc;
     String[] def = TDPrefKey.EXPORT_CSXdef;
+    int[] lvl = TDPrefKey.EXPORT_CSXlvl;
     return new TDPref[ ] {
-      makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],         ctx, hlp ) // DISTOX_STATION_PREFIX
+      makeCbx( cat, key[0], tit[0], dsc[0], lvl[0], def[0],         ctx, hlp ) // DISTOX_STATION_PREFIX
     };
   }
 
@@ -1238,15 +1250,16 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "GPX" preferences
    */
-  public static TDPref[] makeGpxPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeGpxPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_GPX;
     String[] key = TDPrefKey.EXPORT_GPX;
     int[] tit = TDPrefKey.EXPORT_GPXtitle;
     int[] dsc = TDPrefKey.EXPORT_GPXdesc;
     String[] def = TDPrefKey.EXPORT_GPXdef;
+    int[] lvl = TDPrefKey.EXPORT_GPXlvl;
     return new TDPref[ ] {
-      makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],         ctx, hlp ) // DISTOX_GPX_SINGLE_TRACK
+      makeCbx( cat, key[0], tit[0], dsc[0], lvl[0], def[0],         ctx, hlp ) // DISTOX_GPX_SINGLE_TRACK
     };
   }
 
@@ -1255,17 +1268,18 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "CVS" preferences
    */
-  public static TDPref[] makeCsvPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeCsvPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_CSV;
     String[] key = TDPrefKey.EXPORT_CSV;
     int[] tit = TDPrefKey.EXPORT_CSVtitle;
     int[] dsc = TDPrefKey.EXPORT_CSVdesc;
     String[] def = TDPrefKey.EXPORT_CSVdef;
+    int[] lvl = TDPrefKey.EXPORT_CSVlvl;
     return new TDPref[ ] {
-      makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],         ctx, hlp ), // DISTOX_CSV_RAW
-      makeLst( cat, key[1], tit[1], dsc[1], A, def[1], R.array.csvSeparator, R.array.csvSeparatorValue, ctx, hlp ), // DISTOX_CSV_SEP
-      makeLst( cat, key[2], tit[2], dsc[2], N, def[2], R.array.survexEol, R.array.survexEolValue, ctx, hlp ) // DISTOX_SURVEX_EOL
+      makeCbx( cat, key[0], tit[0], dsc[0], lvl[0], def[0],         ctx, hlp ), // DISTOX_CSV_RAW
+      makeLst( cat, key[1], tit[1], dsc[1], lvl[1], def[1], R.array.csvSeparator, R.array.csvSeparatorValue, ctx, hlp ), // DISTOX_CSV_SEP
+      makeLst( cat, key[2], tit[2], dsc[2], lvl[2], def[2], R.array.survexEol, R.array.survexEolValue, ctx, hlp ) // DISTOX_SURVEX_EOL
     };
   }
 
@@ -1274,26 +1288,27 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "shot data" preferences
    */
-  public static TDPref[] makeShotPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeShotPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_SHOT_DATA;
     String[] key = TDPrefKey.DATA;
     int[] tit = TDPrefKey.DATAtitle;
     int[] dsc = TDPrefKey.DATAdesc;
     String[] def = TDPrefKey.DATAdef;
+    int[] lvl = TDPrefKey.DATAlvl;
     return new TDPref[ ] {
-      makeEdt( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0], FLOAT,   ctx, hlp ), // CLOSE_DISTANCE
-      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], FLOAT,   ctx, hlp ), // MAX_SHOT_LENGTH
-      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2], FLOAT,   ctx, hlp ), // MIN_LEG_LENGTH
-      makeLst( cat, key[ 3], tit[ 3], dsc[ 3], E, def[ 3], R.array.legShots, R.array.legShotsValue, ctx, hlp ),
-      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], N, def[ 4], FLOAT,   ctx, hlp ), // EXTEND_THRS
-      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], N, def[ 5], FLOAT,   ctx, hlp ),
-      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6],          ctx, hlp ), // AZIMUTH_MANUAL
-      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          ctx, hlp ), // PREV_NEXT
-      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8],          ctx, hlp ), // BACKSIGHT
-      makeLst( cat, key[ 9], tit[ 9], dsc[ 9], N, def[ 9], R.array.feedbackMode, R.array.feedbackModeValue, ctx, hlp ) // DISTOX_LEG_FEEDBACK
-      // makeEdt( cat, key[10], tit[10], dsc[10], T, def[10], INTEGER, ctx, hlp ), // TIMER
-      // makeEdt( cat, key[11], tit[11], dsc[11], T, def[11], INTEGER, ctx, hlp ), // VOLUME
+      makeEdt( cat, key[ 0], tit[ 0], dsc[ 0], lvl[ 0], def[ 0], FLOAT,   ctx, hlp ), // CLOSE_DISTANCE
+      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], lvl[ 1], def[ 1], FLOAT,   ctx, hlp ), // MAX_SHOT_LENGTH
+      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], lvl[ 2], def[ 2], FLOAT,   ctx, hlp ), // MIN_LEG_LENGTH
+      makeLst( cat, key[ 3], tit[ 3], dsc[ 3], lvl[ 3], def[ 3], R.array.legShots, R.array.legShotsValue, ctx, hlp ),
+      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], lvl[ 4], def[ 4], FLOAT,   ctx, hlp ), // EXTEND_THRS
+      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], lvl[ 5], def[ 5], FLOAT,   ctx, hlp ),
+      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], lvl[ 6], def[ 6],          ctx, hlp ), // AZIMUTH_MANUAL
+      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], lvl[ 7], def[ 7],          ctx, hlp ), // PREV_NEXT
+      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], lvl[ 8], def[ 8],          ctx, hlp ), // BACKSIGHT
+      makeLst( cat, key[ 9], tit[ 9], dsc[ 9], lvl[ 9], def[ 9], R.array.feedbackMode, R.array.feedbackModeValue, ctx, hlp ) // DISTOX_LEG_FEEDBACK
+      // makeEdt( cat, key[10], tit[10], dsc[10], lvl[  ], def[10], INTEGER, ctx, hlp ), // TIMER
+      // makeEdt( cat, key[11], tit[11], dsc[11], lvl[  ], def[11], INTEGER, ctx, hlp ), // VOLUME
     };
   }
 
@@ -1302,7 +1317,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "units" preferences
    */
-  public static TDPref[] makeUnitsPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeUnitsPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_SHOT_UNITS;
     String[] key = TDPrefKey.UNITS;
@@ -1311,11 +1326,12 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     String[] def = TDPrefKey.UNITSdef;
     int[] arr = TDPrefKey.UNITSarr;
     int[] val = TDPrefKey.UNITSval;
+    int[] lvl = TDPrefKey.UNITSlvl;
     return new TDPref[ ] {
-      makeLst( cat, key[0], tit[0], dsc[0], B, def[0], arr[0], val[0], ctx, hlp ), // LENGTH
-      makeLst( cat, key[1], tit[1], dsc[1], B, def[1], arr[1], val[1], ctx, hlp ), // ANGLE
-      makeLst( cat, key[2], tit[2], dsc[2], B, def[2], arr[2], val[2], ctx, hlp ), // GRID
-      makeLst( cat, key[3], tit[3], dsc[3], B, def[3], arr[3], val[3], ctx, hlp )  // MEASURE
+      makeLst( cat, key[0], tit[0], dsc[0], lvl[0], def[0], arr[0], val[0], ctx, hlp ), // LENGTH
+      makeLst( cat, key[1], tit[1], dsc[1], lvl[1], def[1], arr[1], val[1], ctx, hlp ), // ANGLE
+      makeLst( cat, key[2], tit[2], dsc[2], lvl[2], def[2], arr[2], val[2], ctx, hlp ), // GRID
+      makeLst( cat, key[3], tit[3], dsc[3], lvl[3], def[3], arr[3], val[3], ctx, hlp )  // MEASURE
     };
   }
 
@@ -1324,18 +1340,19 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "accuracy" preferences
    */
-  public static TDPref[] makeAccuracyPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeAccuracyPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_ACCURACY;
     String[] key = TDPrefKey.ACCURACY;
     int[] tit = TDPrefKey.ACCURACYtitle;
     int[] dsc = TDPrefKey.ACCURACYdesc;
     String[] def = TDPrefKey.ACCURACYdef;
+    int[] lvl = TDPrefKey.ACCURACYlvl;
     return new TDPref[ ] {
-      makeEdt( cat, key[0], tit[0], dsc[0], A, def[0], FLOAT, ctx, hlp ),
-      makeEdt( cat, key[1], tit[1], dsc[1], A, def[1], FLOAT, ctx, hlp ),
-      makeEdt( cat, key[2], tit[2], dsc[2], A, def[2], FLOAT, ctx, hlp ),
-      makeEdt( cat, key[3], tit[3], dsc[3], A, def[3], FLOAT, ctx, hlp )
+      makeEdt( cat, key[0], tit[0], dsc[0], lvl[0], def[0], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[1], tit[1], dsc[1], lvl[1], def[1], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[2], tit[2], dsc[2], lvl[2], def[2], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[3], tit[3], dsc[3], lvl[3], def[3], FLOAT, ctx, hlp )
     };
   }
 
@@ -1344,20 +1361,21 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "location" preferences
    */
-  public static TDPref[] makeLocationPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeLocationPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_LOCATION;
     String[] key = TDPrefKey.LOCATION;
     int[] tit = TDPrefKey.LOCATIONtitle;
     int[] dsc = TDPrefKey.LOCATIONdesc;
     String[] def = TDPrefKey.LOCATIONdef;
+    int[] lvl = TDPrefKey.LOCATIONlvl;
     return new TDPref[ ] {
-      makeLst( cat, key[0], tit[0], dsc[0], N, def[0], R.array.unitLocation, R.array.unitLocationValue, ctx, hlp ),
-      makeEdt( cat, key[1], tit[1], dsc[1], A, def[1], STRING, ctx, hlp ),
-      makeCbx( cat, key[2], tit[2], dsc[2], T, def[2],         ctx, hlp ),
-      makeCbx( cat, key[3], tit[3], dsc[3], T, def[3],         ctx, hlp ),
-      makeEdt( cat, key[4], tit[4], dsc[4], E, def[4], INTEGER, ctx, hlp ),
-      makeLst( cat, key[5], tit[5], dsc[5], N, def[5], R.array.geoImportApp, R.array.geoImportAppValue, ctx, hlp )
+      makeLst( cat, key[0], tit[0], dsc[0], lvl[0], def[0], R.array.unitLocation, R.array.unitLocationValue, ctx, hlp ),
+      makeEdt( cat, key[1], tit[1], dsc[1], lvl[1], def[1], STRING, ctx, hlp ),
+      makeCbx( cat, key[2], tit[2], dsc[2], lvl[2], def[2],         ctx, hlp ),
+      makeCbx( cat, key[3], tit[3], dsc[3], lvl[3], def[3],         ctx, hlp ),
+      makeEdt( cat, key[4], tit[4], dsc[4], lvl[4], def[4], INTEGER, ctx, hlp ),
+      makeLst( cat, key[5], tit[5], dsc[5], lvl[5], def[5], R.array.geoImportApp, R.array.geoImportAppValue, ctx, hlp )
     };
   }
 
@@ -1366,22 +1384,23 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "sketch display" preferences
    */
-  public static TDPref[] makeScreenPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeScreenPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_PLOT_SCREEN;
     String[] key = TDPrefKey.SCREEN;
     int[] tit = TDPrefKey.SCREENtitle;
     int[] dsc = TDPrefKey.SCREENdesc;
     String[] def = TDPrefKey.SCREENdef;
+    int[] lvl = TDPrefKey.SCREENlvl;
     return new TDPref[ ] {
-      makeEdt( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0], FLOAT,   ctx, hlp ),
-      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], FLOAT,   ctx, hlp ),
-      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], N, def[ 2], FLOAT,   ctx, hlp ),
-      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], B, def[ 3], INTEGER, ctx, hlp ),
-      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], B, def[ 4], INTEGER, ctx, hlp ),
-      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], E, def[ 5], INTEGER, ctx, hlp ),
-      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], E, def[ 6], INTEGER, ctx, hlp ),
-      makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], T, def[ 7], INTEGER, ctx, hlp )  // SPLAY ALPHA
+      makeEdt( cat, key[ 0], tit[ 0], dsc[ 0], lvl[ 0], def[ 0], FLOAT,   ctx, hlp ),
+      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], lvl[ 1], def[ 1], FLOAT,   ctx, hlp ),
+      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], lvl[ 2], def[ 2], FLOAT,   ctx, hlp ),
+      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], lvl[ 3], def[ 3], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], lvl[ 4], def[ 4], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], lvl[ 5], def[ 5], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], lvl[ 6], def[ 6], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], lvl[ 7], def[ 7], INTEGER, ctx, hlp )  // SPLAY ALPHA
     };
   }
 
@@ -1390,25 +1409,26 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "line items" preferences
    */
-  public static TDPref[] makeLinePrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeLinePrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_TOOL_LINE;
     String[] key = TDPrefKey.LINE;
     int[] tit    = TDPrefKey.LINEtitle;
     int[] dsc    = TDPrefKey.LINEdesc;
     String[] def = TDPrefKey.LINEdef;
+    int[] lvl = TDPrefKey.LINElvl;
     return new TDPref[ ] {
-      makeEdt( cat, key[ 0], tit[ 0], dsc[ 0], N, def[ 0], FLOAT,   ctx, hlp ),
-      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], N, def[ 1], FLOAT,   ctx, hlp ),
-      makeLst( cat, key[ 2], tit[ 2], dsc[ 2], N, def[ 2], R.array.lineStyle, R.array.lineStyleValue, ctx, hlp ),
-      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], N, def[ 3], INTEGER, ctx, hlp ),
-      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], N, def[ 4],          ctx, hlp ),
-      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], A, def[ 5], INTEGER, ctx, hlp ), // DISTOX_SLOPE_LSIDE
-      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6], FLOAT,   ctx, hlp ),
-      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          ctx, hlp ),
-      // makeLst( cat, key[ 7], tit[ 7], dsc[ 7], E, def[ 7], R.array.lineContinue, R.array.lineContinueValue, ctx, hlp ),
-      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], N, def[ 8],          ctx, hlp ), // WITH CONTINUE LINE
-      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], N, def[ 9],          ctx, hlp ),
+      makeEdt( cat, key[ 0], tit[ 0], dsc[ 0], lvl[ 0], def[ 0], FLOAT,   ctx, hlp ),
+      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], lvl[ 1], def[ 1], FLOAT,   ctx, hlp ),
+      makeLst( cat, key[ 2], tit[ 2], dsc[ 2], lvl[ 2], def[ 2], R.array.lineStyle, R.array.lineStyleValue, ctx, hlp ),
+      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], lvl[ 3], def[ 3], INTEGER, ctx, hlp ),
+      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], lvl[ 4], def[ 4],          ctx, hlp ),
+      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], lvl[ 5], def[ 5], INTEGER, ctx, hlp ), // DISTOX_SLOPE_LSIDE
+      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], lvl[ 6], def[ 6], FLOAT,   ctx, hlp ),
+      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], lvl[ 7], def[ 7],          ctx, hlp ),
+      // makeLst( cat, key[ 7], tit[ 7], dsc[ 7], lvl[  ], def[ 7], R.array.lineContinue, R.array.lineContinueValue, ctx, hlp ),
+      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], lvl[ 8], def[ 8],          ctx, hlp ), // WITH CONTINUE LINE
+      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], lvl[ 9], def[ 9],          ctx, hlp ),
     };
   }
 
@@ -1417,23 +1437,24 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "point items" preferences
    */
-  public static TDPref[] makePointPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makePointPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_TOOL_POINT;
     String[] key = TDPrefKey.POINT;
     int[] tit    = TDPrefKey.POINTtitle;
     int[] dsc    = TDPrefKey.POINTdesc;
     String[] def = TDPrefKey.POINTdef;
+    int[] lvl    = TDPrefKey.POINTlvl;
     return new TDPref[ ] {
-      makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],        ctx, hlp ),
-      makeEdt( cat, key[1], tit[1], dsc[1], B, def[1], FLOAT, ctx, hlp ),
-      makeEdt( cat, key[2], tit[2], dsc[2], B, def[2], FLOAT, ctx, hlp ),
-      makeCbx( cat, key[3], tit[3], dsc[3], N, def[3],        ctx, hlp )
+      makeCbx( cat, key[0], tit[0], dsc[0], lvl[0], def[0],        ctx, hlp ),
+      makeEdt( cat, key[1], tit[1], dsc[1], lvl[1], def[1], FLOAT, ctx, hlp ),
+      makeEdt( cat, key[2], tit[2], dsc[2], lvl[2], def[2], FLOAT, ctx, hlp ),
+      makeCbx( cat, key[3], tit[3], dsc[3], lvl[3], def[3],        ctx, hlp )
     };
   }
 
   // AUTOWALLS
-  // public static TDPref[] makeWallsPrefs( Context ctx, TDPrefHelper hlp )
+  // static TDPref[] makeWallsPrefs( Context ctx, TDPrefHelper hlp )
   // {
   //   int cat = TDPrefCat.PREF_PLOT_WALLS;
   //   String[] key = TDPrefKey.WALLS;
@@ -1455,28 +1476,29 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "sketch drawing" preferences
    */
-  public static TDPref[] makeDrawPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeDrawPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_PLOT_DRAW;
     String[] key = TDPrefKey.DRAW;
     int[] tit    = TDPrefKey.DRAWtitle;
     int[] dsc    = TDPrefKey.DRAWdesc;
     String[] def = TDPrefKey.DRAWdef;
+    int[] lvl    = TDPrefKey.DRAWlvl;
     return new TDPref[ ] {
-      makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], N, def[ 0],          ctx, hlp ), // DISTOX_UNSCALED_POINTS  point
-      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], FLOAT,   ctx, hlp ), // DISTOX_DRAWING_UNITS
-      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2], FLOAT,   ctx, hlp ), // DISTOX_LABEL_SIZE
-      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], N, def[ 3], FLOAT,   ctx, hlp ), // DISTOX_LINE_THICKNESS line
-      makeLst( cat, key[ 4], tit[ 4], dsc[ 4], N, def[ 4], R.array.lineStyle, R.array.lineStyleValue, ctx, hlp ),
-      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], N, def[ 5],          ctx, hlp ), // DISTOX_LINE_CLOSE
-      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], N, def[ 6], INTEGER, ctx, hlp ), // DISTOX_LINE_SEGMENT
-      makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7], FLOAT,   ctx, hlp ), // DISTOX_ARROW_LENGTH
-      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8],          ctx, hlp ), // DISTOX_AUTO_SECTION_PT
-      // makeLst( cat, key[ 8], tit[ 8], dsc[ 8], E, def[ 8], R.array.lineContinue, R.array.lineContinueValue, ctx, hlp ),
-      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], N, def[ 9],          ctx, hlp ), // DISTOX_AREA_BORDER
-      // makeEdt( cat, key[10], tit[10], dsc[10], A, def[10], FLOAT,   ctx, hlp ),
-      // makeEdt( cat, key[11], tit[11], dsc[11], N, def[11], FLOAT,   ctx, hlp ),
-      // makeEdt( cat, key[12], tit[12], dsc[12], N, def[12], FLOAT,   ctx, hlp ) 
+      makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], lvl[ 0], def[ 0],          ctx, hlp ), // DISTOX_UNSCALED_POINTS  point
+      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], lvl[ 1], def[ 1], FLOAT,   ctx, hlp ), // DISTOX_DRAWING_UNITS
+      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], lvl[ 2], def[ 2], FLOAT,   ctx, hlp ), // DISTOX_LABEL_SIZE
+      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], lvl[ 3], def[ 3], FLOAT,   ctx, hlp ), // DISTOX_LINE_THICKNESS line
+      makeLst( cat, key[ 4], tit[ 4], dsc[ 4], lvl[ 4], def[ 4], R.array.lineStyle, R.array.lineStyleValue, ctx, hlp ),
+      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], lvl[ 5], def[ 5],          ctx, hlp ), // DISTOX_LINE_CLOSE
+      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], lvl[ 6], def[ 6], INTEGER, ctx, hlp ), // DISTOX_LINE_SEGMENT
+      makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], lvl[ 7], def[ 7], FLOAT,   ctx, hlp ), // DISTOX_ARROW_LENGTH
+      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], lvl[ 8], def[ 8],          ctx, hlp ), // DISTOX_AUTO_SECTION_PT
+      // makeLst( cat, key[ 8], tit[ 8], dsc[ 8], lvl[  ], def[ 8], R.array.lineContinue, R.array.lineContinueValue, ctx, hlp ),
+      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], lvl[ 9], def[ 9],          ctx, hlp ), // DISTOX_AREA_BORDER
+      // makeEdt( cat, key[10], tit[10], dsc[10], lvl[  ], def[10], FLOAT,   ctx, hlp ),
+      // makeEdt( cat, key[11], tit[11], dsc[11], lvl[  ], def[11], FLOAT,   ctx, hlp ),
+      // makeEdt( cat, key[12], tit[12], dsc[12], lvl[  ], def[12], FLOAT,   ctx, hlp ) 
     };
   }
 
@@ -1485,17 +1507,18 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "sketch erasing" preferences
    */
-  public static TDPref[] makeErasePrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeErasePrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_PLOT_ERASE;
     String[] key = TDPrefKey.ERASE;
     int[] tit    = TDPrefKey.ERASEtitle;
     int[] dsc    = TDPrefKey.ERASEdesc;
     String[] def = TDPrefKey.ERASEdef;
+    int[] lvl    = TDPrefKey.ERASElvl;
     return new TDPref[ ] {
-      makeEdt( cat, key[0], tit[0], dsc[0], B, def[0], INTEGER, ctx, hlp ),
-      makeEdt( cat, key[1], tit[1], dsc[1], B, def[1], INTEGER, ctx, hlp ),
-      makeEdt( cat, key[2], tit[2], dsc[2], E, def[2], INTEGER, ctx, hlp )
+      makeEdt( cat, key[0], tit[0], dsc[0], lvl[0], def[0], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[1], tit[1], dsc[1], lvl[1], def[1], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[2], tit[2], dsc[2], lvl[2], def[2], INTEGER, ctx, hlp )
     };
   }
 
@@ -1504,18 +1527,19 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "sketch editing" preferences
    */
-  public static TDPref[] makeEditPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeEditPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_PLOT_EDIT;
     String[] key = TDPrefKey.EDIT;
     int[] tit    = TDPrefKey.EDITtitle;
     int[] dsc    = TDPrefKey.EDITdesc;
     String[] def = TDPrefKey.EDITdef;
+    int[] lvl    = TDPrefKey.EDITlvl;
     return new TDPref[ ] {
-      makeEdt( cat, key[0], tit[0], dsc[0], N, def[0], FLOAT,   ctx, hlp ),
-      makeEdt( cat, key[1], tit[1], dsc[1], B, def[1], INTEGER, ctx, hlp ),
-      makeEdt( cat, key[2], tit[2], dsc[2], E, def[2], INTEGER, ctx, hlp ),
-      makeEdt( cat, key[3], tit[3], dsc[3], E, def[3], INTEGER, ctx, hlp )
+      makeEdt( cat, key[0], tit[0], dsc[0], lvl[0], def[0], FLOAT,   ctx, hlp ),
+      makeEdt( cat, key[1], tit[1], dsc[1], lvl[1], def[1], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[2], tit[2], dsc[2], lvl[2], def[2], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[3], tit[3], dsc[3], lvl[3], def[3], INTEGER, ctx, hlp )
     };
   }
 
@@ -1525,27 +1549,28 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "geek device" preferences
    */
-  public static TDPref[] makeGeekDevicePrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeGeekDevicePrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_GEEK_DEVICE;
     String[] key = TDPrefKey.GEEKDEVICE;
     int[] tit    = TDPrefKey.GEEKDEVICEtitle;
     int[] dsc    = TDPrefKey.GEEKDEVICEdesc;
     String[] def = TDPrefKey.GEEKDEVICEdef;
+    int[] lvl    = TDPrefKey.GEEKDEVICElvl;
     return new TDPref[ ] {
-      makeBtn( cat, key[ 0], tit[ 0], dsc[ 0], T, def[ 0], ctx, hlp ),          // BT ALIAS
-      makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1],          ctx, hlp ), // BT_NONAME (change next line too)
-      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], E, def[ 2], INTEGER, ctx, hlp ),
-      makeCbx( cat, key[ 3], tit[ 3], dsc[ 3], T, def[ 3],          ctx, hlp ), // SECOND DISTOX
-      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], A, def[ 4], INTEGER, ctx, hlp ),
-      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], A, def[ 5], INTEGER, ctx, hlp ),
-      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6], INTEGER, ctx, hlp ),
-      makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7], INTEGER, ctx, hlp ),
-      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], T, def[ 8],          ctx, hlp ), // FIRMWARE SANITY
-      makeLst( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9], R.array.bricMode, R.array.bricModeValue, ctx, hlp ), // DISTOX_BRIC_MODE
-      makeCbx( cat, key[10], tit[10], dsc[10], N, def[10],          ctx, hlp ), // DISTOX_BRIC_ZERO_LENGTH
-      makeCbx( cat, key[11], tit[11], dsc[11], T, def[11],          ctx, hlp ), // DISTOX_CBRIC_INDEX_IS_ID
-      makeCbx( cat, key[12], tit[12], dsc[12], T, def[12],          ctx, hlp ), // DISTOX_SAP5_BIT16_BUG
+      makeBtn( cat, key[ 0], tit[ 0], dsc[ 0], lvl[ 0], def[ 0], ctx, hlp ),          // BT ALIAS
+      makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], lvl[ 1], def[ 1],          ctx, hlp ), // BT_NONAME (change next line too)
+      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], lvl[ 2], def[ 2], INTEGER, ctx, hlp ),
+      makeCbx( cat, key[ 3], tit[ 3], dsc[ 3], lvl[ 3], def[ 3],          ctx, hlp ), // SECOND DISTOX
+      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], lvl[ 4], def[ 4], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], lvl[ 5], def[ 5], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], lvl[ 6], def[ 6], INTEGER, ctx, hlp ),
+      makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], lvl[ 7], def[ 7], INTEGER, ctx, hlp ),
+      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], lvl[ 8], def[ 8],          ctx, hlp ), // FIRMWARE SANITY
+      makeLst( cat, key[ 9], tit[ 9], dsc[ 9], lvl[ 9], def[ 9], R.array.bricMode, R.array.bricModeValue, ctx, hlp ), // DISTOX_BRIC_MODE
+      makeCbx( cat, key[10], tit[10], dsc[10], lvl[10], def[10],          ctx, hlp ), // DISTOX_BRIC_ZERO_LENGTH
+      makeCbx( cat, key[11], tit[11], dsc[11], lvl[11], def[11],          ctx, hlp ), // DISTOX_CBRIC_INDEX_IS_ID
+      makeCbx( cat, key[12], tit[12], dsc[12], lvl[12], def[12],          ctx, hlp ), // DISTOX_SAP5_BIT16_BUG
     };
   }
 
@@ -1554,25 +1579,26 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "geek line item" preferences
    */
-  public static TDPref[] makeGeekLinePrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeGeekLinePrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_GEEK_LINE;
     String[] key = TDPrefKey.GEEKLINE;
     int[] tit    = TDPrefKey.GEEKLINEtitle;
     int[] dsc    = TDPrefKey.GEEKLINEdesc;
     String[] def = TDPrefKey.GEEKLINEdef;
+    int[] lvl    = TDPrefKey.GEEKLINElvl;
     return new TDPref[ ] {
-      makeEdt( cat, key[ 0], tit[ 0], dsc[ 0], T, def[ 0], FLOAT,   ctx, hlp ), // REDUCE ANGLE
-      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1], FLOAT,   ctx, hlp ), // BEZIER ACCURACY
-      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], FLOAT,   ctx, hlp ), //        CORNER
-      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], E, def[ 3], FLOAT,   ctx, hlp ), // WEED DISTANCE
-      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], E, def[ 4], FLOAT,   ctx, hlp ), //      LENGTH
-      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], E, def[ 5], FLOAT,   ctx, hlp ), //      BUFFER
-      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6],          ctx, hlp ), // SNAP
-      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          ctx, hlp ), // CURVE
-      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8],          ctx, hlp ), // STRAIGHT
-      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9],          ctx, hlp ), // PATH MULTISELECT
-      // makeCbx( cat, key[10], tit[10], dsc[10], T, def[10],          ctx, hlp ), // COMPOSITE ACTIONS
+      makeEdt( cat, key[ 0], tit[ 0], dsc[ 0], lvl[ 0], def[ 0], FLOAT,   ctx, hlp ), // REDUCE ANGLE
+      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], lvl[ 1], def[ 1], FLOAT,   ctx, hlp ), // BEZIER ACCURACY
+      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], lvl[ 2], def[ 2], FLOAT,   ctx, hlp ), //        CORNER
+      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], lvl[ 3], def[ 3], FLOAT,   ctx, hlp ), // WEED DISTANCE
+      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], lvl[ 4], def[ 4], FLOAT,   ctx, hlp ), //      LENGTH
+      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], lvl[ 5], def[ 5], FLOAT,   ctx, hlp ), //      BUFFER
+      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], lvl[ 6], def[ 6],          ctx, hlp ), // SNAP
+      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], lvl[ 7], def[ 7],          ctx, hlp ), // CURVE
+      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], lvl[ 8], def[ 8],          ctx, hlp ), // STRAIGHT
+      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], lvl[ 9], def[ 9],          ctx, hlp ), // PATH MULTISELECT
+      // makeCbx( cat, key[10], tit[10], dsc[10], lvl[  ], def[10],          ctx, hlp ), // COMPOSITE ACTIONS
     };
   }
 
@@ -1581,34 +1607,35 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "geek shot data" preferences
    */
-  public static TDPref[] makeGeekShotPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeGeekShotPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_GEEK_SHOT;
     String[] key = TDPrefKey.GEEKSHOT;
     int[] tit    = TDPrefKey.GEEKSHOTtitle;
     int[] dsc    = TDPrefKey.GEEKSHOTdesc;
     String[] def = TDPrefKey.GEEKSHOTdef;
+    int[] lvl    = TDPrefKey.GEEKSHOTlvl;
     return new TDPref[ ] {
-      makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], T, def[ 0],          ctx, hlp ), // DIVING_MODE
-      makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1],          ctx, hlp ), // BACKSIGHT_SPLAY
-      makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2],          ctx, hlp ), // RECENT_SHOT
-      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], T, def[ 3], INTEGER, ctx, hlp ), // RECENT TIMEOUT
-      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4],          ctx, hlp ), // EXTEND FRACTIONAL
-      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5],          ctx, hlp ), // BACKSHOT
-      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6],          ctx, hlp ), // BEDDING PLANE
-      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          ctx, hlp ), // WITH SENSORS
-      makeLst( cat, key[ 8], tit[ 8], dsc[ 8], E, def[ 8], R.array.loopClosure, R.array.loopClosureValue, ctx, hlp ),
-      makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], E, def[ 9], FLOAT,   ctx, hlp ), // LOOP THR
-      // makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9], FLOAT,   ctx, hlp ), // DIST/ANGLE TOLERANCE
-      // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp )  // SPLAYS AT ACTIVE STATION
-      // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], A, def[ 9],          ctx, hlp )  // WITH RENAME
-      makeCbx( cat, key[10], tit[10], dsc[10], A, def[10],          ctx, hlp ),// WITH ANDROID AZIMUTH
-      makeEdt( cat, key[11], tit[11], dsc[11], E, def[11], INTEGER, ctx, hlp ), // TIMER
-      makeEdt( cat, key[12], tit[12], dsc[12], E, def[12], INTEGER, ctx, hlp ), // VOLUME
-      makeCbx( cat, key[13], tit[13], dsc[13], T, def[13],          ctx, hlp ), // BLUNDER SHOT
-      makeCbx( cat, key[14], tit[14], dsc[14], T, def[14],          ctx, hlp ), // SPLAY STATION
-      makeCbx( cat, key[15], tit[15], dsc[15], T, def[15],          ctx, hlp ), // SPLAY GROUP
-      // makeCbx( cat, key[13], tit[13], dsc[13], T, def[13],          ctx, hlp )  // TDMANAGER
+      makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], lvl[ 0], def[ 0],          ctx, hlp ), // DIVING_MODE
+      makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], lvl[ 1], def[ 1],          ctx, hlp ), // BACKSIGHT_SPLAY
+      makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], lvl[ 2], def[ 2],          ctx, hlp ), // RECENT_SHOT
+      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], lvl[ 3], def[ 3], INTEGER, ctx, hlp ), // RECENT TIMEOUT
+      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], lvl[ 4], def[ 4],          ctx, hlp ), // EXTEND FRACTIONAL
+      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], lvl[ 5], def[ 5],          ctx, hlp ), // BACKSHOT
+      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], lvl[ 6], def[ 6],          ctx, hlp ), // BEDDING PLANE
+      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], lvl[ 7], def[ 7],          ctx, hlp ), // WITH SENSORS
+      makeLst( cat, key[ 8], tit[ 8], dsc[ 8], lvl[ 8], def[ 8], R.array.loopClosure, R.array.loopClosureValue, ctx, hlp ),
+      makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], lvl[ 9], def[ 9], FLOAT,   ctx, hlp ), // LOOP THR
+      // makeEdt( cat, key[ 9], tit[ 9], dsc[ 9], lvl[  ], def[ 9], FLOAT,   ctx, hlp ), // DIST/ANGLE TOLERANCE
+      // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], lvl[  ], def[ 9],          ctx, hlp )  // SPLAYS AT ACTIVE STATION
+      // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], lvl[  ], def[ 9],          ctx, hlp )  // WITH RENAME
+      makeCbx( cat, key[10], tit[10], dsc[10], lvl[10], def[10],          ctx, hlp ),// WITH ANDROID AZIMUTH
+      makeEdt( cat, key[11], tit[11], dsc[11], lvl[11], def[11], INTEGER, ctx, hlp ), // TIMER
+      makeEdt( cat, key[12], tit[12], dsc[12], lvl[12], def[12], INTEGER, ctx, hlp ), // VOLUME
+      makeCbx( cat, key[13], tit[13], dsc[13], lvl[13], def[13],          ctx, hlp ), // BLUNDER SHOT
+      makeCbx( cat, key[14], tit[14], dsc[14], lvl[14], def[14],          ctx, hlp ), // SPLAY STATION
+      makeCbx( cat, key[15], tit[15], dsc[15], lvl[15], def[15],          ctx, hlp ), // SPLAY GROUP
+      // makeCbx( cat, key[13], tit[13], dsc[13], lvl[  ], def[13],          ctx, hlp )  // TDMANAGER
     };
   }
 
@@ -1617,30 +1644,31 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "geek sketch" preferences
    */
-  public static TDPref[] makeGeekPlotPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeGeekPlotPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_GEEK_PLOT;
     String[] key = TDPrefKey.GEEKPLOT;
     int[] tit    = TDPrefKey.GEEKPLOTtitle;
     int[] dsc    = TDPrefKey.GEEKPLOTdesc;
     String[] def = TDPrefKey.GEEKPLOTdef;
+    int[] lvl    = TDPrefKey.GEEKPLOTlvl;
     return new TDPref[ ] {
-      makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], T, def[ 0],          ctx, hlp ), // PLOT_SHIFT
-      makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1],          ctx, hlp ), // PLOT_SPLIT_MERGE
-      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], FLOAT,   ctx, hlp ), // STYLUS_SIZE // STYLUS_MM
-      // makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], INTEGER, ctx, hlp ), // STYLUS_SIZE
-      makeLst( cat, key[ 3], tit[ 3], dsc[ 3], A, def[ 3], R.array.backupNumber, R.array.backupNumberValue, ctx, hlp ),
-      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], A, def[ 4], INTEGER, ctx, hlp ), // BACKUP_INTERVAL
-      // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9],          ctx, hlp ), // BACKUPS_CLEAR
-      // makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5],          ctx, hlp ), // AUTO_XSECTIONS on export/save
-      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5],          ctx, hlp ), // SAVED_STATIONS
-      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6],          ctx, hlp ), // ALWAYS_UPDATE
-      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], T, def[ 7],          ctx, hlp ), // FULL_AFFINE
-      makeLst( cat, key[ 8], tit[ 8], dsc[ 8], T, def[ 8], R.array.canvasLevels, R.array.canvasLevelsValue, ctx, hlp ),  // WITH LEVELS
-      makeBtn( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9], ctx, hlp ), // GRAPH_PAPER_SCALE
-      makeCbx( cat, key[10], tit[10], dsc[10], T, def[10],          ctx, hlp ), // SLANT_XSECTION
-      makeEdt( cat, key[11], tit[11], dsc[11], T, def[11], INTEGER, ctx, hlp ), // OBLIQUE_MAX
-      makeEdt( cat, key[12], tit[12], dsc[12], T, def[12], INTEGER, ctx, hlp ), // LINE ENDS (POINTS)
+      makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], lvl[ 0], def[ 0],          ctx, hlp ), // PLOT_SHIFT
+      makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], lvl[ 1], def[ 1],          ctx, hlp ), // PLOT_SPLIT_MERGE
+      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], lvl[ 2], def[ 2], FLOAT,   ctx, hlp ), // STYLUS_SIZE // STYLUS_MM
+      // makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], lvl[  ], def[ 2], INTEGER, ctx, hlp ), // STYLUS_SIZE
+      makeLst( cat, key[ 3], tit[ 3], dsc[ 3], lvl[ 3], def[ 3], R.array.backupNumber, R.array.backupNumberValue, ctx, hlp ),
+      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], lvl[ 4], def[ 4], INTEGER, ctx, hlp ), // BACKUP_INTERVAL
+      // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], lvl[  ], def[ 9],          ctx, hlp ), // BACKUPS_CLEAR
+      // makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], lvl[  ], def[ 5],          ctx, hlp ), // AUTO_XSECTIONS on export/save
+      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], lvl[ 5], def[ 5],          ctx, hlp ), // SAVED_STATIONS
+      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], lvl[ 6], def[ 6],          ctx, hlp ), // ALWAYS_UPDATE
+      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], lvl[ 7], def[ 7],          ctx, hlp ), // FULL_AFFINE
+      makeLst( cat, key[ 8], tit[ 8], dsc[ 8], lvl[ 8], def[ 8], R.array.canvasLevels, R.array.canvasLevelsValue, ctx, hlp ),  // WITH LEVELS
+      makeBtn( cat, key[ 9], tit[ 9], dsc[ 9], lvl[ 9], def[ 9], ctx, hlp ), // GRAPH_PAPER_SCALE
+      makeCbx( cat, key[10], tit[10], dsc[10], lvl[10], def[10],          ctx, hlp ), // SLANT_XSECTION
+      makeEdt( cat, key[11], tit[11], dsc[11], lvl[11], def[11], INTEGER, ctx, hlp ), // OBLIQUE_MAX
+      makeEdt( cat, key[12], tit[12], dsc[12], lvl[12], def[12], INTEGER, ctx, hlp ), // LINE ENDS (POINTS)
     };
   }
 
@@ -1649,26 +1677,27 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "geek splays" preferences
    */
-  public static TDPref[] makeGeekSplayPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeGeekSplayPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_GEEK_SPLAY;
     String[] key = TDPrefKey.GEEKsplay;
     int[] tit    = TDPrefKey.GEEKsplaytitle;
     int[] dsc    = TDPrefKey.GEEKsplaydesc;
     String[] def = TDPrefKey.GEEKsplaydef;
+    int[] lvl    = TDPrefKey.GEEKsplaylvl;
     return new TDPref[ ] {
-      makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], E, def[ 0],          ctx, hlp ), // SPLAY CLASSES
-      // makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1],          ctx, hlp ), // SPLAY COLOR
-      makeLst( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1], R.array.splayColors, R.array.splayColorsValue,   ctx, hlp ), // DISCRETE COLORS
-      // makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2],          ctx, hlp ), // SPLAY AS DOT
-      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], A, def[ 2], INTEGER, ctx, hlp ), // MAX CLINO SPLAY-PLAN
-      makeLst( cat, key[ 3], tit[ 3], dsc[ 3], T, def[ 3], R.array.splayDash, R.array.splayDashValue,       ctx, hlp ), // DASH COHERENCE
-      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4], FLOAT,   ctx, hlp ), // DASH PLAN
-      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5], FLOAT,   ctx, hlp ), // DASH PROFILE
-      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6], FLOAT,   ctx, hlp ), // DASH X-SECTION
-      makeColor( cat, key[ 7], tit[ 7], dsc[ 7], T, def[ 7],        ctx, hlp ), // DASH COLOR SPLAY 
-      makeColor( cat, key[ 8], tit[ 8], dsc[ 8], T, def[ 8],        ctx, hlp ), // DOT COLOR SPLAY 
-      makeColor( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9],        ctx, hlp ), // LATEST COLOR SPLAY 
+      makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], lvl[ 0], def[ 0],          ctx, hlp ), // SPLAY CLASSES
+      // makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], lvl[ 1], def[ 1],          ctx, hlp ), // SPLAY COLOR
+      makeLst( cat, key[ 1], tit[ 1], dsc[ 1], lvl[ 1], def[ 1], R.array.splayColors, R.array.splayColorsValue,   ctx, hlp ), // DISCRETE COLORS
+      // makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], lvl[ 2], def[ 2],          ctx, hlp ), // SPLAY AS DOT
+      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], lvl[ 2], def[ 2], INTEGER, ctx, hlp ), // MAX CLINO SPLAY-PLAN
+      makeLst( cat, key[ 3], tit[ 3], dsc[ 3], lvl[ 3], def[ 3], R.array.splayDash, R.array.splayDashValue,       ctx, hlp ), // DASH COHERENCE
+      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], lvl[ 4], def[ 4], FLOAT,   ctx, hlp ), // DASH PLAN
+      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], lvl[ 5], def[ 5], FLOAT,   ctx, hlp ), // DASH PROFILE
+      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], lvl[ 6], def[ 6], FLOAT,   ctx, hlp ), // DASH X-SECTION
+      makeColor( cat, key[ 7], tit[ 7], dsc[ 7], lvl[ 7], def[ 7],        ctx, hlp ), // DASH COLOR SPLAY 
+      makeColor( cat, key[ 8], tit[ 8], dsc[ 8], lvl[ 8], def[ 8],        ctx, hlp ), // DOT COLOR SPLAY 
+      makeColor( cat, key[ 9], tit[ 9], dsc[ 9], lvl[ 9], def[ 9],        ctx, hlp ), // LATEST COLOR SPLAY 
     };
   }
 
@@ -1677,7 +1706,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "geek main" preferences
    */
-  public static TDPref[] makeGeekPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeGeekPrefs( Context ctx, TDPrefHelper hlp )
   {
     // TDLog.v("make Geek Prefs");
     int cat = TDPrefCat.PREF_CATEGORY_GEEK;
@@ -1685,43 +1714,44 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     int[] tit    = TDPrefKey.GEEKtitle;
     int[] dsc    = TDPrefKey.GEEKdesc;
     String[] def = TDPrefKey.GEEKdef;
+    int[] lvl    = TDPrefKey.GEEKlvl;
     if ( TDLevel.isDebugBuild( ) ) {
       // TDLog.v("Length " + key.length + " " + tit.length + " " + dsc.length + " " + def.length );
       return new TDPref[ ] {
-        makeCbx( cat, key[0], tit[0], dsc[0],  A, def[0],  ctx, hlp ), // SINGLE_BACK
-        makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // PALETTES
-        // makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // BACKUP CLEAR - CLEAR_BACKUPS
-        makeCbx( cat, key[2], tit[2], dsc[2],  T, def[2],  ctx, hlp ), // KEYBOARD
-        makeCbx( cat, key[3], tit[3], dsc[3],  T, def[3],  ctx, hlp ), // CURSOR
-        makeCbx( cat, key[4], tit[4], dsc[4],  T, def[4],  ctx, hlp ), // PACKET LOGGER
-        makeCbx( cat, key[5], tit[5], dsc[5],  T, def[5],  ctx, hlp ), // TH2EDIT
-        makeFwd( cat, key[6], tit[6],          A,          ctx, hlp ), // GEEK_SHOT
-        makeFwd( cat, key[7], tit[7],          T,          ctx, hlp ), // GEEK_SPLAY
-        makeFwd( cat, key[8], tit[8],          A,          ctx, hlp ), // GEEK_PLOT
-        makeFwd( cat, key[9], tit[9],          A,          ctx, hlp ), // GEEK_LINE
-        // makeFwd( cat, key[7], tit[7],          T,          ctx, hlp ), // PLOT_WALLS AUTOWALLS
-        makeFwd( cat, key[10], tit[10],        A,          ctx, hlp ), // GEEK_DEVICE
-        makeFwd( cat, key[11], tit[11],        T,          ctx, hlp ), // GEEK_IMPORT
-        makeFwd( cat, key[12], tit[12],        D,          ctx, hlp ), // SKETCH // FIXME_SKETCH_3D FIXME_FIXME
-        makeSpecial( cat, key[13], tit[13], dsc[13],  T, def[13],  ctx, hlp ), // WITH DEBUG
+        makeCbx( cat, key[0], tit[0], dsc[0],  lvl[0], def[0],  ctx, hlp ), // SINGLE_BACK
+        makeCbx( cat, key[1], tit[1], dsc[1],  lvl[1], def[1],  ctx, hlp ), // PALETTES
+        // makeCbx( cat, key[1], tit[1], dsc[1],  lvl[1], def[1],  ctx, hlp ), // BACKUP CLEAR - CLEAR_BACKUPS
+        makeCbx( cat, key[2], tit[2], dsc[2],  lvl[2], def[2],  ctx, hlp ), // KEYBOARD
+        makeCbx( cat, key[3], tit[3], dsc[3],  lvl[3], def[3],  ctx, hlp ), // CURSOR
+        makeCbx( cat, key[4], tit[4], dsc[4],  lvl[4], def[4],  ctx, hlp ), // PACKET LOGGER
+        makeCbx( cat, key[5], tit[5], dsc[5],  lvl[5], def[5],  ctx, hlp ), // TH2EDIT
+        makeFwd( cat, key[6], tit[6],          lvl[6],          ctx, hlp ), // GEEK_SHOT
+        makeFwd( cat, key[7], tit[7],          lvl[7],          ctx, hlp ), // GEEK_SPLAY
+        makeFwd( cat, key[8], tit[8],          lvl[8],          ctx, hlp ), // GEEK_PLOT
+        makeFwd( cat, key[9], tit[9],          lvl[9],          ctx, hlp ), // GEEK_LINE
+        // makeFwd( cat, key[7], tit[7],       lvl[ ],          ctx, hlp ), // PLOT_WALLS AUTOWALLS
+        makeFwd( cat, key[10], tit[10],        lvl[10],          ctx, hlp ), // GEEK_DEVICE
+        makeFwd( cat, key[11], tit[11],        lvl[11],          ctx, hlp ), // GEEK_IMPORT
+        makeFwd( cat, key[12], tit[12],        lvl[12],          ctx, hlp ), // SKETCH // FIXME_SKETCH_3D FIXME_FIXME
+        makeSpecial( cat, key[13], tit[13], dsc[13],  lvl[13], def[13],  ctx, hlp ), // WITH DEBUG
       };
     } else {
       return new TDPref[ ] {
-        makeCbx( cat, key[0], tit[0], dsc[0],  A, def[0],  ctx, hlp ), // SINGLE_BACK
-        makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // PALETTES
-        // makeCbx( cat, key[1], tit[1], dsc[1],  T, def[1],  ctx, hlp ), // BACKUP CLEAR - CLEAR_BACKUPS
-        makeCbx( cat, key[2], tit[2], dsc[2],  T, def[2],  ctx, hlp ), // KEUBOARD
-        makeCbx( cat, key[3], tit[3], dsc[3],  T, def[3],  ctx, hlp ), // CURSOR
-        makeCbx( cat, key[3], tit[4], dsc[4],  T, def[4],  ctx, hlp ), // PACKET LOGGER
-        makeCbx( cat, key[5], tit[5], dsc[5],  T, def[5],  ctx, hlp ), // TH2EDIT
-        makeFwd( cat, key[6], tit[6],          A,          ctx, hlp ), // GEEK_SHOT
-        makeFwd( cat, key[7], tit[7],          T,          ctx, hlp ), // GEEK_SPLAY
-        makeFwd( cat, key[8], tit[8],          A,          ctx, hlp ), // GEEK_PLOT
-        makeFwd( cat, key[9], tit[9],          A,          ctx, hlp ), // GEEK_LINE
-        // makeFwd( cat, key[7], tit[7],          T,          ctx, hlp ), // PLOT_WALLS AUTOWALLS
-        makeFwd( cat, key[10], tit[10],        A,          ctx, hlp ), // GEEK_DEVICE
-        makeFwd( cat, key[11], tit[11],        T,          ctx, hlp ), // GEEK_IMPORT
-        makeFwd( cat, key[12], tit[12],        D,          ctx, hlp ), // SKETCH // FIXME_SKETCH_3D FIXME_FIXME
+        makeCbx( cat, key[0], tit[0], dsc[0],  lvl[0], def[0],  ctx, hlp ), // SINGLE_BACK
+        makeCbx( cat, key[1], tit[1], dsc[1],  lvl[1], def[1],  ctx, hlp ), // PALETTES
+        // makeCbx( cat, key[1], tit[1], dsc[1],  lvl[1], def[1],  ctx, hlp ), // BACKUP CLEAR - CLEAR_BACKUPS
+        makeCbx( cat, key[2], tit[2], dsc[2],  lvl[2], def[2],  ctx, hlp ), // KEUBOARD
+        makeCbx( cat, key[3], tit[3], dsc[3],  lvl[3], def[3],  ctx, hlp ), // CURSOR
+        makeCbx( cat, key[3], tit[4], dsc[4],  lvl[4], def[4],  ctx, hlp ), // PACKET LOGGER
+        makeCbx( cat, key[5], tit[5], dsc[5],  lvl[5], def[5],  ctx, hlp ), // TH2EDIT
+        makeFwd( cat, key[6], tit[6],          lvl[6],          ctx, hlp ), // GEEK_SHOT
+        makeFwd( cat, key[7], tit[7],          lvl[7],          ctx, hlp ), // GEEK_SPLAY
+        makeFwd( cat, key[8], tit[8],          lvl[8],          ctx, hlp ), // GEEK_PLOT
+        makeFwd( cat, key[9], tit[9],          lvl[9],          ctx, hlp ), // GEEK_LINE
+        // makeFwd( cat, key[7], tit[7],       lvl[ ],          ctx, hlp ), // PLOT_WALLS AUTOWALLS
+        makeFwd( cat, key[10], tit[10],        lvl[10],          ctx, hlp ), // GEEK_DEVICE
+        makeFwd( cat, key[11], tit[11],        lvl[11],          ctx, hlp ), // GEEK_IMPORT
+        makeFwd( cat, key[12], tit[12],        lvl[12],          ctx, hlp ), // SKETCH // FIXME_SKETCH_3D FIXME_FIXME
       };
     }
   }
@@ -1731,7 +1761,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "3D viewer" preferences
    */
-  public static TDPref[] makeCave3DPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeCave3DPrefs( Context ctx, TDPrefHelper hlp )
   {
     // TDLog.v("make Cave3D Prefs");
     int cat = TDPrefCat.PREF_CATEGORY_CAVE3D;
@@ -1739,19 +1769,20 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     int[] tit    = TDPrefKey.CAVE3Dtitle;
     int[] dsc    = TDPrefKey.CAVE3Ddesc;
     String[] def = TDPrefKey.CAVE3Ddef;
+    int[] lvl    = TDPrefKey.CAVE3Dlvl;
     return new TDPref[ ] {
-      makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],  ctx, hlp ), // NEG-CLINO
+      makeCbx( cat, key[0], tit[0], dsc[0], lvl[0], def[0],  ctx, hlp ), // NEG-CLINO
       // BT DEVICE
-      makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], N, def[ 1],            ctx, hlp ), // STATION-POINT SUMMARY
-      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], A, def[ 2], INTEGER,   ctx, hlp ), // STATION POINT SIZE
-      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], A, def[ 3], INTEGER,   ctx, hlp ), // STATION TEXT SIZE
-      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], A, def[ 4], FLOAT,     ctx, hlp ), // SELECT RADIUS
-      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], N, def[ 5],            ctx, hlp ), // MEASURE DIALOG
-      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], N, def[ 6],            ctx, hlp ), // STATION TOAST 
-      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], N, def[ 7],            ctx, hlp ), // GRID ABOVE
-      makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8], INTEGER,   ctx, hlp ), // GRID SIZE
-      makeFwd( cat, key[ 9], tit[ 9],          N,                     ctx, hlp ), // DEM3D
-      makeFwd( cat, key[10], tit[10],          A,                     ctx, hlp )  // WALLS3D
+      makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], lvl[ 1], def[ 1],            ctx, hlp ), // STATION-POINT SUMMARY
+      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], lvl[ 2], def[ 2], INTEGER,   ctx, hlp ), // STATION POINT SIZE
+      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], lvl[ 3], def[ 3], INTEGER,   ctx, hlp ), // STATION TEXT SIZE
+      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], lvl[ 4], def[ 4], FLOAT,     ctx, hlp ), // SELECT RADIUS
+      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], lvl[ 5], def[ 5],            ctx, hlp ), // MEASURE DIALOG
+      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], lvl[ 6], def[ 6],            ctx, hlp ), // STATION TOAST 
+      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], lvl[ 7], def[ 7],            ctx, hlp ), // GRID ABOVE
+      makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], lvl[ 8], def[ 8], INTEGER,   ctx, hlp ), // GRID SIZE
+      makeFwd( cat, key[ 9], tit[ 9],          lvl[ 9],                     ctx, hlp ), // DEM3D
+      makeFwd( cat, key[10], tit[10],          lvl[10],                     ctx, hlp )  // WALLS3D
     };
   }
 
@@ -1760,7 +1791,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "3D DEM" preferences
    */
-  public static TDPref[] makeDem3DPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeDem3DPrefs( Context ctx, TDPrefHelper hlp )
   {
     // TDLog.v("make Cave3D Prefs");
     int cat = TDPrefCat.PREF_DEM3D;
@@ -1768,10 +1799,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     int[] tit    = TDPrefKey.DEM3Dtitle;
     int[] dsc    = TDPrefKey.DEM3Ddesc;
     String[] def = TDPrefKey.DEM3Ddef;
+    int[] lvl    = TDPrefKey.DEM3Dlvl;
     return new TDPref[ ] {
-      makeEdt( cat, key[0], tit[0], dsc[0], N, def[0], FLOAT,   ctx, hlp ), // CAVE3D_DEM_BUFFER
-      makeEdt( cat, key[1], tit[1], dsc[1], N, def[1], INTEGER, ctx, hlp ), // CAVE3D_DEM_MAXSIZE
-      makeLst( cat, key[2], tit[2], dsc[2], N, def[2], R.array.demReduce, R.array.demReduceValue,  ctx, hlp ) // CAVE3D_DEM_REDUCE
+      makeEdt( cat, key[0], tit[0], dsc[0], lvl[0], def[0], FLOAT,   ctx, hlp ), // CAVE3D_DEM_BUFFER
+      makeEdt( cat, key[1], tit[1], dsc[1], lvl[1], def[1], INTEGER, ctx, hlp ), // CAVE3D_DEM_MAXSIZE
+      makeLst( cat, key[2], tit[2], dsc[2], lvl[2], def[2], R.array.demReduce, R.array.demReduceValue,  ctx, hlp ) // CAVE3D_DEM_REDUCE
     };
   }
 
@@ -1780,7 +1812,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param hlp   shared preferences helper
    * @return array of "3D walls" preferences
    */
-  public static TDPref[] makeWalls3DPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeWalls3DPrefs( Context ctx, TDPrefHelper hlp )
   {
     // TDLog.v("make Cave3D Prefs");
     int cat = TDPrefCat.PREF_WALLS3D;
@@ -1788,28 +1820,30 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     int[] tit    = TDPrefKey.WALLS3Dtitle;
     int[] dsc    = TDPrefKey.WALLS3Ddesc;
     String[] def = TDPrefKey.WALLS3Ddef;
+    int[] lvl    = TDPrefKey.WALLS3Dlvl;
     return new TDPref[ ] {
-      makeLst( cat, key[0], tit[0], dsc[0], N, def[0], R.array.splayUse, R.array.splayUseValue,       ctx, hlp ), // CAVE3D_SPLAY_USE
-      makeCbx( cat, key[1], tit[1], dsc[1], N, def[1],          ctx, hlp ), // CAVE3D_ALL_SPLAY
-      makeCbx( cat, key[2], tit[2], dsc[2], N, def[2],          ctx, hlp ), // CAVE3D_SPLAY_PROJ
-      makeEdt( cat, key[3], tit[3], dsc[3], N, def[3], FLOAT,   ctx, hlp ), // CAVE3D_SPLAY_THR
-      makeCbx( cat, key[4], tit[4], dsc[4], N, def[4],          ctx, hlp ), // CAVE3D_SPLIT_TRIANGLES
-      makeEdt( cat, key[5], tit[5], dsc[5], N, def[5], FLOAT,   ctx, hlp ), // CAVE3D_SPLIT_RANDOM
-      makeEdt( cat, key[6], tit[6], dsc[6], N, def[6], FLOAT,   ctx, hlp ), // CAVE3D_SPLIT_STRETCH
-      makeEdt( cat, key[7], tit[7], dsc[7], N, def[7], FLOAT,   ctx, hlp ), // CAVE3D_POWERCRUST_DELTA
+      makeLst( cat, key[0], tit[0], dsc[0], lvl[0], def[0], R.array.splayUse, R.array.splayUseValue,       ctx, hlp ), // CAVE3D_SPLAY_USE
+      makeCbx( cat, key[1], tit[1], dsc[1], lvl[1], def[1],          ctx, hlp ), // CAVE3D_ALL_SPLAY
+      makeCbx( cat, key[2], tit[2], dsc[2], lvl[2], def[2],          ctx, hlp ), // CAVE3D_SPLAY_PROJ
+      makeEdt( cat, key[3], tit[3], dsc[3], lvl[3], def[3], FLOAT,   ctx, hlp ), // CAVE3D_SPLAY_THR
+      makeCbx( cat, key[4], tit[4], dsc[4], lvl[4], def[4],          ctx, hlp ), // CAVE3D_SPLIT_TRIANGLES
+      makeEdt( cat, key[5], tit[5], dsc[5], lvl[5], def[5], FLOAT,   ctx, hlp ), // CAVE3D_SPLIT_RANDOM
+      makeEdt( cat, key[6], tit[6], dsc[6], lvl[6], def[6], FLOAT,   ctx, hlp ), // CAVE3D_SPLIT_STRETCH
+      makeEdt( cat, key[7], tit[7], dsc[7], lvl[7], def[7], FLOAT,   ctx, hlp ), // CAVE3D_POWERCRUST_DELTA
     };
   }
 
-  public static TDPref[] makeSketchPrefs( Context ctx, TDPrefHelper hlp )
+  static TDPref[] makeSketchPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_GEEK_SKETCH;
     String[] key = TDPrefKey.SKETCH;
     int[] tit    = TDPrefKey.SKETCHtitle;
     int[] dsc    = TDPrefKey.SKETCHdesc;
     String[] def = TDPrefKey.SKETCHdef;
+    int[] lvl    = TDPrefKey.SKETCHlvl;
     return new TDPref[ ] {
-      makeCbx( cat, key[0], tit[0], dsc[0], D, def[0],          ctx, hlp ), // DISTOX_3D_SKETCH
-      makeEdt( cat, key[1], tit[1], dsc[1], D, def[1], FLOAT,   ctx, hlp ),
+      makeCbx( cat, key[0], tit[0], dsc[0], lvl[0], def[0],          ctx, hlp ), // DISTOX_3D_SKETCH
+      makeEdt( cat, key[1], tit[1], dsc[1], lvl[1], def[1], FLOAT,   ctx, hlp ),
     };
   }
 
@@ -1819,7 +1853,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   //  * @param hlp   shared preferences helper
   //  * @return array of "logging" preferences
   //  */
-  // public static TDPref[] makeLogPrefs( Context ctx, TDPrefHelper hlp )
+  // static TDPref[] makeLogPrefs( Context ctx, TDPrefHelper hlp )
   // {
   //   int cat = TDPrefCat.PREF_CATEGORY_LOG;
   //   String[] key = TDPrefKey.LOG;
