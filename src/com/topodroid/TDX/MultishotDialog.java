@@ -19,7 +19,7 @@ import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.LegType;
 
-import java.util.regex.Pattern;
+// import java.util.regex.Pattern;
 import java.util.List;
 
 import android.os.Bundle;
@@ -48,7 +48,7 @@ class MultishotDialog extends MyDialog
   private boolean mColoring = false;
   private int mBedding  = 0;
 
-  private Pattern mPattern; // name pattern
+  // private Pattern mPattern; // name pattern
 
   // private TextView mTVdata;
 

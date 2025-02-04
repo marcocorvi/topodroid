@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.prefs.TDSetting;
 
 // import java.util.LinkedList;
 // import java.util.ListIterator;
@@ -560,6 +561,7 @@ class Selection
    */
   private void bucketSelectAt(float x,float y,float radius,int mode,SelectionSet sel,boolean legs,boolean splays,boolean stations, DrawingStationSplay station_splay )
   {
+    // TDLog.v( "bucket select [2] at " + x + " " + y + " R " + radius + " buckets " + mBuckets.size() );
     // TDLog.v( "bucket select at " + x + " " + y + " R " + radius + " buckets " + mBuckets.size() );
     if ( mode == Drawing.FILTER_ALL ) {
       for ( SelectionBucket bucket : mBuckets ) {
@@ -583,7 +585,7 @@ class Selection
 	    } else if ( type == DrawingPath.DRAWING_PATH_POINT
 	             || type == DrawingPath.DRAWING_PATH_LINE 
 	             || type == DrawingPath.DRAWING_PATH_AREA ) {
-              if ( ! DrawingLevel.isLevelVisible( sp.mItem ) ) continue;
+              if ( ! DrawingLevel.isLevelVisibleOrAnyLevelNoVisible( sp.mItem ) ) continue;
             }
               
             if ( sp.distance( x, y ) < radius ) {
@@ -626,7 +628,7 @@ class Selection
       for ( SelectionBucket bucket : mBuckets ) {
         if ( bucket.contains( x, y, radius, radius ) ) {
           for ( SelectionPoint sp : bucket.mPoints ) {
-            if ( sp.type() == type && DrawingLevel.isLevelVisible( sp.mItem ) ) {
+            if ( sp.type() == type && DrawingLevel.isLevelVisibleOrAnyLevelNoVisible( sp.mItem ) ) {
               if ( sp.distance( x, y ) < radius ) sel.addPoint( sp );
             }
           }
@@ -641,9 +643,11 @@ class Selection
    * @param y      Y coord
    * @param radius selection radius
    * @param type   selectable items type
+   * @note used for multiselection
    */
   void selectAt( SelectionSet sel, float x, float y, float radius, int type )
   {
+    // TDLog.v("Selection select [1] at " + x + " " + y );
     bucketSelectAt( x, y, radius, type, sel );
   }
 
@@ -656,17 +660,30 @@ class Selection
    */
   private void bucketSelectAt(float x,float y,float radius,int type, SelectionSet sel )
   {
-    // TDLog.v( "bucket select at " + x + " " + y + " R " + radius + " buckets " + mBuckets.size() );
-    for ( SelectionBucket bucket : mBuckets ) {
-      if ( bucket.contains( x, y, radius, radius ) ) {
-        for ( SelectionPoint sp : bucket.mPoints ) {
-          if ( sp.type() == type && DrawingLevel.isLevelVisible( sp.mItem ) && sp.distance( x, y ) < radius ) {
-            // TDLog.v( "pt " + sp.mPoint.x + " " + sp.mPoint.y + " dist " + sp.getDistance() );
-            sel.addPoint( sp );
+    // TDLog.v( "bucket select [1] at " + x + " " + y + " R " + radius + " buckets " + mBuckets.size() );
+    if ( TDSetting.mWithLevels == 0 ) { // treat no-levels case by itself
+      for ( SelectionBucket bucket : mBuckets ) {
+        if ( bucket.contains( x, y, radius, radius ) ) {
+          for ( SelectionPoint sp : bucket.mPoints ) {
+            if ( sp.type() == type && sp.distance( x, y ) < radius ) {
+              // TDLog.v( "pt " + sp.mPoint.x + " " + sp.mPoint.y + " dist " + sp.getDistance() );
+              sel.addPoint( sp );
+            }
           }
         }
-      }
-    } 
+      } 
+    } else {
+      for ( SelectionBucket bucket : mBuckets ) {
+        if ( bucket.contains( x, y, radius, radius ) ) {
+          for ( SelectionPoint sp : bucket.mPoints ) {
+            if ( sp.type() == type && DrawingLevel.isLevelVisible( sp.mItem ) && sp.distance( x, y ) < radius ) {
+              // TDLog.v( "pt " + sp.mPoint.x + " " + sp.mPoint.y + " dist " + sp.getDistance() );
+              sel.addPoint( sp );
+            }
+          }
+        }
+      } 
+    }
   }
   
   /** select by type
@@ -682,6 +699,7 @@ class Selection
    */
   void selectAt( SelectionSet sel, float x, float y, float radius, int mode, boolean legs, boolean splays, boolean stations, DrawingStationSplay station_splay )
   {
+    // TDLog.v("Selection select [2] at " + x + " " + y );
     bucketSelectAt( x, y, radius, mode, sel, legs, splays, stations, station_splay );
   }
 

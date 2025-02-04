@@ -2054,7 +2054,7 @@ public class DrawingCommandManager
     boolean splays = (mDisplayMode & DisplayMode.DISPLAY_SPLAY ) != 0;
     // boolean latest = (mDisplayMode & DisplayMode.DISPLAY_LATEST ) != 0;
     boolean stations = (mDisplayMode & DisplayMode.DISPLAY_STATION ) != 0;
-    // TDLog.v( "Select: getItemAt " + x + " " + y + " mode " + mode );
+    // TDLog.v( "DCM get items at " + x + " " + y + " mode " + mode );
     return mCurrentScrap.getItemsAt( x, y, radius, mode, legs, splays, stations, station_splay, mSelectionFixed ); // FIXME-HIDE
   }
     

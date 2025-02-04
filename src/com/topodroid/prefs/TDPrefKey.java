@@ -12,7 +12,13 @@
 package com.topodroid.prefs;
 
 import com.topodroid.utils.TDString;
+import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.R;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 class TDPrefKey
 {
@@ -2628,5 +2634,75 @@ class TDPrefKey
   //    R.string.pref_log_zip,     
   //    // R.string.pref_log_sync
   // };
+
+  // array of title arrays.
+  // the order must match the list of categories in TDPrefcat
+  private final static int[][] mSections = {
+    MAINtitle,
+    SURVEYtitle,
+    PLOTtitle,
+    CALIBtitle,
+    DEVICEtitle,
+    SKETCHtitle,
+    EXPORTtitle,
+    null, // IMPORTtitle,
+    CAVE3Dtitle,
+    null,
+    EXPORT_SVXtitle,
+    EXPORT_THtitle,
+    EXPORT_DATtitle,
+    EXPORT_CSXtitle,
+    EXPORT_TROtitle,
+    EXPORT_SVGtitle,
+    EXPORT_SHPtitle,
+    EXPORT_DXFtitle,
+    EXPORT_GPXtitle,
+    EXPORT_KMLtitle,
+    EXPORT_CSVtitle,
+    EXPORT_SRVtitle,
+    DATAtitle,
+    UNITStitle,
+    ACCURACYtitle,
+    LOCATIONtitle,
+    SCREENtitle,
+    LINEtitle,
+    POINTtitle,
+    DRAWtitle,
+    ERASEtitle,
+    EDITtitle,
+    DEM3Dtitle,
+    WALLS3Dtitle,
+    GEEKtitle,
+    GEEKSHOTtitle,
+    GEEKsplaytitle,
+    GEEKPLOTtitle,
+    GEEKLINEtitle,
+    GEEKDEVICEtitle,
+    GEEKIMPORTtitle,
+    null // GEEKSKETCHtitle
+  };
+
+  /** @return the list of TDPrefCat categpries that match a givem key
+   * @param key   input key
+   */
+  static List<Integer> match( String key )
+  {
+    ArrayList< Integer > res = new ArrayList<>();
+    Pattern p = Pattern.compile( key );
+    int cat = 0;
+    for ( int[] section : mSections ) {
+      if ( section != null ) {
+        for ( int r : section ) {
+          Matcher m = p.matcher( TDInstance.getResourceString( r ) );
+          if ( m.matches() ) {
+            res.add( cat ); // add matching category
+            break;
+          }
+        }
+      }
+      ++ cat;
+    }
+    return res;
+  }
 
 }

@@ -9455,7 +9455,7 @@ public class DrawingWindow extends ItemDrawer
   void scrapNew() 
   { 
     int scrap_idx = mDrawingSurface.newScrapIndex( false ); // TH2EDIT no false param
-    TDLog.v("new scrap index " + scrap_idx );
+    // TDLog.v("new scrap index " + scrap_idx );
     mApp_mData.updatePlotMaxScrap( mSid, mPid, scrap_idx );
   }
 

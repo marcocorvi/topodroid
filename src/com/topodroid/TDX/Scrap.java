@@ -253,6 +253,7 @@ public class Scrap
 			   Selection selection_fixed // FIXME-HIDE
                          )
   {
+    // TDLog.v("Scrap get items at " + x + " " + y );
     // synchronized ( TDPath.mSelectedLock ) {
     synchronized ( TDPath.mSelectionLock ) {
       mSelected.clear();
@@ -267,6 +268,11 @@ public class Scrap
     return mSelected;
   }
 
+  /** select a visible item and add to the multiselection
+   * @param x   X coordinate
+   * @param y   Y coordinate
+   * @param radius radius of selection [pxl]
+   */
   void addItemAt( float x, float y, float radius )
   {
     synchronized ( TDPath.mSelectionLock ) {
@@ -3185,33 +3191,47 @@ public class Scrap
       for ( SelectionBucket bucket: mSelection.mBuckets ) {
         if ( bucket.intersects( bbox ) && bucket.mPoints != null ) { // SAFETY CHECK
           for ( SelectionPoint pt : bucket.mPoints ) { 
-            int type = pt.type();
-            if ( type == DrawingPath.DRAWING_PATH_POINT ) {
-              if ( ! spoints || ! DrawingLevel.isLevelVisible( pt.mItem ) ) continue;
-            } else if ( type == DrawingPath.DRAWING_PATH_LINE ) {
-              if ( ! slines || ! DrawingLevel.isLevelVisible( pt.mItem ) ) continue;
-            } else if ( type == DrawingPath.DRAWING_PATH_AREA ) {
-              if ( ! sareas || ! DrawingLevel.isLevelVisible( pt.mItem ) ) continue;
-            } else if ( ! DrawingPath.isDrawingType( type ) ) { // FIXME-HIDE should not happen
-              continue;
-            } 
-            // else if ( type == DrawingPath.DRAWING_PATH_FIXED ) {
-            //   // TDLog.v("HIDE scrap display fixed 2");
-            //   if ( ! legs_sshots ) continue;
-            // } else if ( type == DrawingPath.DRAWING_PATH_NAME ) {
-            //   // TDLog.v("HIDE scrap display station name 2");
-            //   if ( ! (sstations) ) continue;
-            // // else if ( type == DrawingPath.DRAWING_PATH_SPLAY && ! (splays && sshots) )
-            // } else if ( type == DrawingPath.DRAWING_PATH_SPLAY ) {
-            //   // TDLog.v("HIDE scrap display splay 2");
-            //   // FIXME_LATEST latest splays
-            //   if ( splays ) {
-            //     if ( station_splay.isStationOFF( pt.mItem ) ) continue;
-            //   } else {
-            //     if ( ! station_splay.isStationON( pt.mItem ) ) continue;
-            //   }
-            // } 
-            TDGreenDot.draw( canvas, matrix, pt, dot_radius );
+            if ( ! isMultiselection && DrawingLevel.isAnyLevelNotVisible( pt.mItem ) ) {
+              int type = pt.type();
+              if ( type == DrawingPath.DRAWING_PATH_POINT ) {
+                if ( ! spoints ) continue;
+              } else if ( type == DrawingPath.DRAWING_PATH_LINE ) {
+                if ( ! slines ) continue;
+              } else if ( type == DrawingPath.DRAWING_PATH_AREA ) {
+                if ( ! sareas ) continue;
+              } else if ( ! DrawingPath.isDrawingType( type ) ) { // FIXME-HIDE should not happen
+                continue;
+              } 
+              TDGreenDot.draw( canvas, matrix, pt, dot_radius );
+            } else {
+              int type = pt.type();
+              if ( type == DrawingPath.DRAWING_PATH_POINT ) {
+                if ( ! spoints || ! DrawingLevel.isLevelVisible( pt.mItem ) ) continue;
+              } else if ( type == DrawingPath.DRAWING_PATH_LINE ) {
+                if ( ! slines || ! DrawingLevel.isLevelVisible( pt.mItem ) ) continue;
+              } else if ( type == DrawingPath.DRAWING_PATH_AREA ) {
+                if ( ! sareas || ! DrawingLevel.isLevelVisible( pt.mItem ) ) continue;
+              } else if ( ! DrawingPath.isDrawingType( type ) ) { // FIXME-HIDE should not happen
+                continue;
+              } 
+              // else if ( type == DrawingPath.DRAWING_PATH_FIXED ) {
+              //   // TDLog.v("HIDE scrap display fixed 2");
+              //   if ( ! legs_sshots ) continue;
+              // } else if ( type == DrawingPath.DRAWING_PATH_NAME ) {
+              //   // TDLog.v("HIDE scrap display station name 2");
+              //   if ( ! (sstations) ) continue;
+              // // else if ( type == DrawingPath.DRAWING_PATH_SPLAY && ! (splays && sshots) )
+              // } else if ( type == DrawingPath.DRAWING_PATH_SPLAY ) {
+              //   // TDLog.v("HIDE scrap display splay 2");
+              //   // FIXME_LATEST latest splays
+              //   if ( splays ) {
+              //     if ( station_splay.isStationOFF( pt.mItem ) ) continue;
+              //   } else {
+              //     if ( ! station_splay.isStationON( pt.mItem ) ) continue;
+              //   }
+              // } 
+              TDGreenDot.draw( canvas, matrix, pt, dot_radius );
+            }
           }
         }
       }

@@ -13,6 +13,7 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 
 class DrawingLevel
@@ -50,6 +51,8 @@ class DrawingLevel
    */
   static boolean isVisible( int level ) { return (level & mDisplayLevel ) != 0; }
 
+  static boolean isAnyNoVisible( int level ) { return (level & LEVEL_ANY) == 0; }
+
   /** @return true is the drawing path is visible according to the display level
    * @param path   drawing path
    */
@@ -69,6 +72,48 @@ class DrawingLevel
     }
     // TDSetting.mWithLevels == 2
     return isVisible( path.mLevel ); 
+  }
+
+  /** @return true if the path is not visible at any level
+   * @param path   drawing item
+   * @note this is used in the canvas draw loop
+   */
+  static boolean isAnyLevelNotVisible( DrawingPath path )
+  {
+    // TDLog.v("DrawingLevel any_no_visible " + isAnyNoVisible( path.mLevel ) );
+    if ( TDSetting.mWithLevels == 0 || path == null ) return false;
+    if ( TDSetting.mWithLevels == 1 ) {
+      int level = 0xff;
+      if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
+        level = BrushManager.getPointLevel( ((DrawingPointPath)path).mPointType );
+      } else if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
+        level = BrushManager.getLineLevel( ((DrawingLinePath)path).mLineType );
+      } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
+        level = BrushManager.getAreaLevel( ((DrawingAreaPath)path).mAreaType );
+      }
+      return isAnyNoVisible( level );
+    }
+    // TDSetting.mWithLevels == 2
+    return isAnyNoVisible( path.mLevel );
+  }
+
+  static  boolean isLevelVisibleOrAnyLevelNoVisible( DrawingPath path )
+  {
+    // TDLog.v("DrawingLevel visible " + isVisible( path.mLevel ) + " any_no_visible " + isAnyNoVisible( path.mLevel ) );
+    if ( TDSetting.mWithLevels == 0 || path == null ) return true; // visibility is filtered only if path is non-null
+    if ( TDSetting.mWithLevels == 1 ) {
+      int level = 0xff;
+      if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
+        level = BrushManager.getPointLevel( ((DrawingPointPath)path).mPointType );
+      } else if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
+        level = BrushManager.getLineLevel( ((DrawingLinePath)path).mLineType );
+      } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
+        level = BrushManager.getAreaLevel( ((DrawingAreaPath)path).mAreaType );
+      }
+      return isAnyNoVisible( level ) || isVisible( level ); 
+    }
+    // TDSetting.mWithLevels == 2
+    return isAnyNoVisible( path.mLevel ) || isVisible( path.mLevel );
   }
 }
 

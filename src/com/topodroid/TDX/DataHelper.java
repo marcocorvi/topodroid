@@ -416,8 +416,12 @@ public class DataHelper extends DataSetObservable
   // private static String qSurveysStat3 = "select fStation, clino from shots where surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ";
   // private static String qSurveysStat4 =
   //   "select flag, distance, fStation, tStation, clino, extend from shots where surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ";
-  private static final String qSurveysStat5 = " select count() from shots where surveyId=? AND status=0 AND flag=0 AND fStation!=\"\" AND tStation=\"\" ";
-  private static final String qSurveysStat6 = " select min( millis ), max( millis ) from shots where surveyId=? AND status=0 AND flag=0 ";
+
+  /** count of shots with non-empty FROM and empty TO amd NORMAL status */
+  private static final String qSurveysStat5 = " select count() from shots where surveyId=? AND status=0 AND fStation!=\"\" AND tStation=\"\" ";
+
+  /** min and max times of survey shots with NORMAL status */
+  private static final String qSurveysStat6 = " select min( millis ), max( millis ) from shots where surveyId=? AND status=0 ";
 
   /** @return the name of the survey initial station
    * @param sid   survey ID
@@ -867,6 +871,7 @@ public class DataHelper extends DataSetObservable
       stat.countSplay = (int)( cursor.getLong(0) );
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    // TDLog.v("DB splay count " + stat.countSplay );
 
     cursor = myDB.rawQuery( qSurveysStat6, args );
     if (cursor.moveToFirst()) {
