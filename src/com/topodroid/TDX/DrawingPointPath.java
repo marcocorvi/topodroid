@@ -205,6 +205,7 @@ public class DrawingPointPath extends DrawingPath
       if ( type < 0 ) {
         // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.addPointFilename( name ); 
         type = 0;
+        options = (options != null)? options + " -symbol " + name : "-symbol " + name;
       }
       // FIXME SECTION_RENAME
       // if ( BrushManager.isPointSection( type ) ) {

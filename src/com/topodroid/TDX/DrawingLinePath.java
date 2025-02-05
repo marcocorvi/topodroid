@@ -123,6 +123,7 @@ public class DrawingLinePath extends DrawingPointLinePath
       if ( type < 0 ) {
         // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.addLineFilename( thname );
         type = 0;
+        options = (options != null)? options + " -symbol " + thname : "-symbol " + thname;
       }
 
       DrawingLinePath ret = new DrawingLinePath( type, scrap );

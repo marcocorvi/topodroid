@@ -165,6 +165,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
     int scrap = 0;
     String thname, prefix;
     String group = null;
+    String options = null;
     try {
       thname = dis.readUTF();
       if ( version >= 401147 ) group = dis.readUTF();
@@ -185,9 +186,11 @@ public class DrawingAreaPath extends DrawingPointLinePath
       if ( type < 0 ) {
         // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.addAreaFilename( thname );
         type = 0;
+        options = "-symbol " + thname;
       }
 
       DrawingAreaPath ret = new DrawingAreaPath( type, cnt, prefix, visible, scrap );
+      ret.addOption( options ); // does nothing is options is null
       ret.mLevel       = level;
       ret.mOrientation = orientation;
       // setPathPaint( BrushManager.getAreaPaint( mAreaType ) );
