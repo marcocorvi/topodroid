@@ -446,7 +446,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="no_proj4">Proj4 not installed</string>
     <string name="no_sensors">Survey has no measurement</string>
     <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
-    <string name="no_search_result">No search_result.</string>
+    <string name="no_search_result">No search result.</string>
     <string name="no_survey">No survey selected.</string>
     <string name="no_symbols">No symbol palette.</string>
     <!-- UNUSED string name="no_thmanager">ThManager not installed</string -->
@@ -1264,6 +1264,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Saved stations</string>
     <string name="title_search">Station/Leg search</string>
+    <string name="title_pref_search">Settings search</string>
     <string name="title_gm_search">Calib data search</string>
     <string name="title_dangling">Unattached shots</string>
     <string name="title_device">DistoX devices</string>
@@ -1312,6 +1313,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="title_scraps_outline">Sketch outlines</string>
     <!-- UNUSED string name="title_select">Select</string -->
     <string name="select_size" translatable="false">  &lt;&lt; %1$d &gt;&gt;</string>
+    <string name="setting" >setting</string>
 
     <string name="title_settings_main">TopoDroid main settings</string>
     <string name="title_settings_export">TopoDroid import/export settings</string>

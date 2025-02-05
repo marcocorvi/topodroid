@@ -41,6 +41,7 @@ import android.view.LayoutInflater;
 /**
  */
 public class TDPrefActivity extends Activity 
+                            implements View.OnLongClickListener
 {
   static TDPrefActivity mPrefActivityAll = null;
   static TDPrefActivity mPrefActivitySurvey = null;
@@ -157,6 +158,20 @@ public class TDPrefActivity extends Activity
     (new ExportDialogSettings( this, this, prefs, R.string.title_export_settings ) ).show();
   }
 
+  public boolean onLongClick( View v ) 
+  {
+    ( new TDPrefSearchDialog( this, this )).show();
+    return true;
+  }
+
+  boolean loadCategory( int cat )
+  {
+    mPrefCategory = cat;
+    if ( ! loadPreferences() ) return false;
+    setTheTitle();
+    return true;
+  }
+
   /** load the preferences
    */
   private boolean loadPreferences( )
@@ -164,6 +179,7 @@ public class TDPrefActivity extends Activity
     setContentView( R.layout.pref_activity );
     LinearLayout layout = (LinearLayout) findViewById( R.id.layout );
     LayoutInflater li = (LayoutInflater)getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+    layout.setOnLongClickListener( this );
 
     mPrefs = null;
     // Resources res = getResources();

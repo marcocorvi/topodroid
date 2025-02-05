@@ -61,7 +61,7 @@ public class GlNames extends GlShape
   static void toggleStations() 
   { 
     stationMode = (stationMode + 1)%STATION_MAX; 
-    TDLog.v("GL NAMES station mode " + stationMode + " station_points " + GlModel.mStationPoints ); 
+    // TDLog.v("GL NAMES station mode " + stationMode + " station_points " + GlModel.mStationPoints ); 
     if ( stationMode == STATION_LEG ) {
       if ( ! ( TDLevel.overTester && TDSetting.m3Dsketch ) ) { stationMode = (stationMode + 1)%STATION_MAX; }
       else { TDLog.v("GL NAMES Station LEG"); }
@@ -176,7 +176,7 @@ public class GlNames extends GlShape
     if ( size <= 1 ) return;
     mTextSizeP = size / 20.0f; 
     mTextSizeO = size / 40.0f;  // half size
-    TDLog.v("GL NAMES text size " + mTextSizeP + " " + mTextSizeO );
+    // TDLog.v("GL NAMES text size " + mTextSizeP + " " + mTextSizeO );
   }
 
   final static int COORDS_PER_VERTEX = 3;
@@ -361,7 +361,7 @@ public class GlNames extends GlShape
   void initData( )
   {
     nameCount = mNames.size();
-    TDLog.v("GL NAMES init data " + nameCount );
+    // TDLog.v("GL NAMES init data " + nameCount );
     if ( TDUtil.isEmpty(mNames) ) return;
     // FIXME INCREMENTAL : was initBuffer( Names )
     if ( mDataBuffer == null ) {
@@ -401,7 +401,7 @@ public class GlNames extends GlShape
         if ( mTexId < 0 ) {
           GLES20.glActiveTexture( GLES20.GL_TEXTURE0 );
           mTexId = GL.bindTextTexture( mBitmap );
-          TDLog.v("bound texture Id " + mTexId );
+          // TDLog.v("bound texture Id " + mTexId );
         }
         // mBitmap.recycle(); // do not clean up, but keep the bitmap
         // mBitmap = null;
@@ -628,7 +628,7 @@ public class GlNames extends GlShape
   // FIXME INCREMENTAL private void initBuffer( ArrayList< GlName > names )
   private void initBuffer( )
   {
-    TDLog.v("GL NAMES init buffer " + nameCount );
+    // TDLog.v("GL NAMES init buffer " + nameCount );
     // ---------- BASE POINT
     float[] data6 = new float[ nameCount * 3 * NN ]; // 3 float, XYZ, per vertex
     for ( int i=0; i<nameCount; ++ i) {
@@ -651,7 +651,7 @@ public class GlNames extends GlShape
 
   private void initVisibilityBuffer()
   {
-    TDLog.v("GL NAMES init visibility buffer");
+    // TDLog.v("GL NAMES init visibility buffer");
     // if ( visibilityBuffer == null ) {
       visibilityBuffer = DataBuffer.getFloatBuffer( 6 * nameCount );
       for ( int i=0; i< 6 * nameCount; ++ i) {

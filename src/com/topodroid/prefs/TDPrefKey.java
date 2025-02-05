@@ -12,6 +12,7 @@
 package com.topodroid.prefs;
 
 import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDLog;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.R;
 
@@ -2638,48 +2639,48 @@ class TDPrefKey
   // array of title arrays.
   // the order must match the list of categories in TDPrefcat
   private final static int[][] mSections = {
-    MAINtitle,
-    SURVEYtitle,
-    PLOTtitle,
-    CALIBtitle,
-    DEVICEtitle,
-    SKETCHtitle,
-    EXPORTtitle,
-    null, // IMPORTtitle,
-    CAVE3Dtitle,
+    MAINdesc,
+    SURVEYdesc,
+    PLOTdesc,
+    CALIBdesc,
+    DEVICEdesc,
+    SKETCHdesc,
+    EXPORTdesc,
+    null, // IMPORTdesc,
+    CAVE3Ddesc,
     null,
-    EXPORT_SVXtitle,
-    EXPORT_THtitle,
-    EXPORT_DATtitle,
-    EXPORT_CSXtitle,
-    EXPORT_TROtitle,
-    EXPORT_SVGtitle,
-    EXPORT_SHPtitle,
-    EXPORT_DXFtitle,
-    EXPORT_GPXtitle,
-    EXPORT_KMLtitle,
-    EXPORT_CSVtitle,
-    EXPORT_SRVtitle,
-    DATAtitle,
-    UNITStitle,
-    ACCURACYtitle,
-    LOCATIONtitle,
-    SCREENtitle,
-    LINEtitle,
-    POINTtitle,
-    DRAWtitle,
-    ERASEtitle,
-    EDITtitle,
-    DEM3Dtitle,
-    WALLS3Dtitle,
-    GEEKtitle,
-    GEEKSHOTtitle,
-    GEEKsplaytitle,
-    GEEKPLOTtitle,
-    GEEKLINEtitle,
-    GEEKDEVICEtitle,
-    GEEKIMPORTtitle,
-    null // GEEKSKETCHtitle
+    EXPORT_SVXdesc,
+    EXPORT_THdesc,
+    EXPORT_DATdesc,
+    EXPORT_CSXdesc,
+    EXPORT_TROdesc,
+    EXPORT_SVGdesc,
+    EXPORT_SHPdesc,
+    EXPORT_DXFdesc,
+    EXPORT_GPXdesc,
+    EXPORT_KMLdesc,
+    EXPORT_CSVdesc,
+    EXPORT_SRVdesc,
+    DATAdesc,
+    UNITSdesc,
+    ACCURACYdesc,
+    LOCATIONdesc,
+    SCREENdesc,
+    LINEdesc,
+    POINTdesc,
+    DRAWdesc,
+    ERASEdesc,
+    EDITdesc,
+    DEM3Ddesc,
+    WALLS3Ddesc,
+    GEEKdesc,
+    GEEKSHOTdesc,
+    GEEKsplaydesc,
+    GEEKPLOTdesc,
+    GEEKLINEdesc,
+    GEEKDEVICEdesc,
+    GEEKIMPORTdesc,
+    null // GEEKSKETCHdesc
   };
 
   /** @return the list of TDPrefCat categpries that match a givem key
@@ -2688,20 +2689,31 @@ class TDPrefKey
   static List<Integer> match( String key )
   {
     ArrayList< Integer > res = new ArrayList<>();
-    Pattern p = Pattern.compile( key );
+    // key = key.replaceAll( "*", "\\*" );
+    Pattern p = Pattern.compile( key.toUpperCase() );
     int cat = 0;
     for ( int[] section : mSections ) {
       if ( section != null ) {
+        // TDLog.v("check category " + cat + " titles " + section.length );
         for ( int r : section ) {
-          Matcher m = p.matcher( TDInstance.getResourceString( r ) );
-          if ( m.matches() ) {
+          if ( r < 0 ) break;
+          Matcher m = p.matcher( TDInstance.getResourceString( r ).toUpperCase() );
+          if ( m.find() ) {
+            // TDLog.v("matched category " + cat + " titles " + section.length );
             res.add( cat ); // add matching category
             break;
+          } else {
+            // TDLog.v("not matched " + str );
           }
         }
       }
       ++ cat;
     }
+    // TDLog.v("found " + res.size() + " matches");
+    // for ( Integer i : res ) {
+    //   cat = i.intValue();
+    //   TDLog.v("match " + cat + " " + TDInstance.getResourceString( TDPrefCat.mTitleRes[ cat ] ) );
+    // }
     return res;
   }
 
