@@ -1255,6 +1255,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Uložené meračské body</string>
     <string name="title_search">Staničenia/Hľadanie zámer</string>
+    <!-- TODO string name="title_pref_search">Settings search</string -->
     <string name="title_gm_search">Hľadanie kalibračných dát</string>
     <string name="title_dangling">Nepripojené zámery</string>
     <string name="title_device">DistoX</string>
@@ -1302,7 +1303,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="title_scraps">Nákresy</string>
     <string name="title_scraps_outline">Nákres obrysu</string>
     <!-- UNUSED string name="title_select">Select</string -->
-
+    <!-- TODO string name="setting" >setting</string -->
 
     <string name="title_settings_main">TopoDroid Hlavné nastavenia</string>
     <string name="title_settings_export">TopoDroid Import/Export nastavenia</string>

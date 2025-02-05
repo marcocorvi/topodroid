@@ -1241,6 +1241,7 @@
     <!-- UNUSED string name="title_coord">Введите координаты точки:</string -->
     <string name="title_current_station">Сохраненные пикеты</string>
     <string name="title_search">Поиск пикетов/замеров</string>
+    <!-- TODO string name="title_pref_search">Settings search</string -->
     <string name="title_gm_search">Поиск данных калибровки</string>
     <string name="title_dangling">Неприсоединенные замеры</string>
     <string name="title_device">Устройства DistoX</string>
@@ -1288,6 +1289,7 @@
     <string name="title_scraps">Абрисы в съёмке</string>
     <string name="title_scraps_outline">Контуры абриса</string>
     <!-- UNUSED string name="title_select">Выбрать</string -->
+    <!-- TODO string name="setting" >setting</string -->
 
     <string name="title_settings_main">TopoDroid Основные настройки</string>
     <string name="title_settings_export">TopoDroid настройки импорта/экспорта</string>

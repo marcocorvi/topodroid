@@ -1251,6 +1251,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Запазени репери</string>
     <string name="title_search">Търси репер/отсечка</string>
+    <!-- TODO string name="title_pref_search">Settings search</string -->
     <string name="title_gm_search">Търси данни за калибрация</string>
     <string name="title_dangling">Неприкрепени измервания</string>
     <string name="title_device">Устройство DistoX</string>
@@ -1298,6 +1299,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="title_scraps">Скици в картировката</string>
     <string name="title_scraps_outline">Контури на скицата</string>
     <!-- UNUSED string name="title_select">Select</string -->
+    <!-- TODO string name="setting" >setting</string -->
 
     <string name="title_settings_main">Основни настройки на TopoDroid</string>
     <string name="title_settings_export">Настройки за импортиране/експортиране на TopoDroid</string>

@@ -1244,6 +1244,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <!-- UNUSED string name="title_coord">Entrer les Coordonnées du point</string -->
     <string name="title_current_station">Stations sauvegardées</string>
     <string name="title_search">Recherche Station/cheminement</string>
+    <!-- TODO string name="title_pref_search">Settings search</string -->
     <string name="title_gm_search">Recherche des données d\'étalonnage</string>
     <string name="title_dangling">Visée non reliée</string>
     <string name="title_device">Périphériques DistoX</string>
@@ -1291,6 +1292,7 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="title_scraps">Croquis du relevé</string>
     <string name="title_scraps_outline">Contours croquis</string>
     <!-- UNUSED string name="title_select">Sélectionner</string -->
+    <!-- TODO string name="setting" >setting</string -->
 
     <string name="title_settings_main">Paramètres principaux de TopoDroid</string>
     <string name="title_settings_export">Paramètres d\'importation / exportation de TopoDroid</string>

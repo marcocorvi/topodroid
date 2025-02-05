@@ -1167,6 +1167,7 @@ no campo abaixo e aperte o botão.
   <!-- UNUSED string name="title_coord">Inserir as coordenadas do ponto:</string -->
   <string name="title_current_station">Bases gravadas</string>
   <string name="title_search">Pesquisa bases e medidas</string>
+    <!-- TODO string name="title_pref_search">Settings search</string -->
   <string name="title_gm_search">Pesquisa dados calibração</string>
   <string name="title_dangling">Medidas desconectadas</string>
   <string name="title_device">Dispositivos DistoX</string>
@@ -1214,6 +1215,7 @@ no campo abaixo e aperte o botão.
   <string name="title_scraps">Croquis</string>
   <string name="title_scraps_outline">Contorno desenhos</string>
   <!-- UNUSED string name="title_select">Selecionar</string -->
+    <!-- TODO string name="setting" >setting</string -->
   <string name="title_settings_main">Config principais</string>
   <string name="title_settings_export">Config importação/exportação</string>
   <string name="title_settings_export_enable">Config habilitar export dados</string>

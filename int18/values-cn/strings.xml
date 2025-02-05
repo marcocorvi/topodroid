@@ -1244,6 +1244,7 @@
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">保存测点</string>
     <string name="title_search">站点/主线 查找</string>
+    <!-- TODO string name="title_pref_search">Settings search</string -->
     <string name="title_gm_search">校准数据搜索</string>
     <string name="title_dangling">独立测线</string>
     <string name="title_device">DistoX设备</string>
@@ -1291,6 +1292,7 @@
     <string name="title_scraps">绘制草图</string>
     <string name="title_scraps_outline">草图轮廓</string>
     <!-- UNUSED string name="title_select">Select</string -->
+    <!-- TODO string name="setting" >setting</string -->
 
     <string name="title_settings_main">TopoDroid主设置</string>
     <string name="title_settings_export">TopoDroid输入/输出</string>

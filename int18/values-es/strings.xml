@@ -1245,6 +1245,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- UNUSED string name="title_coord">Introduzca las coordenadas del punto:</string -->
     <string name="title_current_station">Última estación guardada</string>
     <string name="title_search">Búsqueda de estación/toma</string>
+    <!-- TODO string name="title_pref_search">Settings search</string -->
     <string name="title_gm_search">Calib data search</string>
     <string name="title_dangling">Tomas no adjuntadas</string>
     <string name="title_device">Dispositivo DistoX</string>
@@ -1292,6 +1293,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="title_scraps">Dibujo</string>
     <string name="title_scraps_outline">Esquema del dibujo</string>
     <!-- UNUSED string name="title_select">Seleccionar</string -->
+    <!-- TODO string name="setting" >setting</string -->
 
     <string name="title_settings_main">Configuración principal de TopoDroid</string>
     <string name="title_settings_export">Configuración de importación / exportación de TopoDroid</string>

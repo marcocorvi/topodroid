@@ -1156,6 +1156,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <!-- UNUSED string name="title_coord">Gib die Punkt-Koordinaten ein:</string -->
   <string name="title_current_station">Gespeicherte Messpunkte</string>
   <string name="title_search">Messstation/-züge suchen</string>
+    <!-- TODO string name="title_pref_search">Settings search</string -->
   <string name="title_gm_search">Kalibrationsdatensuche</string>
   <string name="title_dangling">Unverbundene Messungen</string>
   <string name="title_device">DistoX Geräte</string>
@@ -1203,6 +1204,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="title_scraps">Skizzen</string>
   <string name="title_scraps_outline">Skizzenumriss</string>
   <!-- UNUSED string name="title_select">Auswählen</string -->
+    <!-- TODO string name="setting" >setting</string -->
   <string name="title_settings_main">TopoDroid Einstellungen</string>
   <string name="title_settings_export">Import/Export Einstellungen</string>
   <string name="title_settings_export_enable">Datenexport Aktivierung</string>
