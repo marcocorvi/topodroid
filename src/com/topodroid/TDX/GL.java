@@ -403,7 +403,7 @@ class GL
     if ( texId[0] == 0 ) {
       return 0;
     }
-    // TDLog.v("GL bind bitmap target " + target + " texIT " + texId[0] );
+    TDLog.v("GL bind bitmap target " + target + " texIT " + texId[0] );
     GLES20.glBindTexture(   target, texId[0] );
     GLES20.glTexParameteri( target, GLES20.GL_TEXTURE_WRAP_S, wrap );
     GLES20.glTexParameteri( target, GLES20.GL_TEXTURE_WRAP_T, wrap );

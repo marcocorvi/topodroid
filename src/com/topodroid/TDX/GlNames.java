@@ -61,9 +61,10 @@ public class GlNames extends GlShape
   static void toggleStations() 
   { 
     stationMode = (stationMode + 1)%STATION_MAX; 
+    TDLog.v("GL NAMES station mode " + stationMode + " station_points " + GlModel.mStationPoints ); 
     if ( stationMode == STATION_LEG ) {
       if ( ! ( TDLevel.overTester && TDSetting.m3Dsketch ) ) { stationMode = (stationMode + 1)%STATION_MAX; }
-      else { TDLog.v("Station LEG"); }
+      else { TDLog.v("GL NAMES Station LEG"); }
     }
     if ( GlModel.mStationPoints && ((stationMode % 2) == 1) ) stationMode = (stationMode + 1)%STATION_MAX; 
     // if ( ! hasNames() ) stationMode = STATION_NONE;
@@ -175,6 +176,7 @@ public class GlNames extends GlShape
     if ( size <= 1 ) return;
     mTextSizeP = size / 20.0f; 
     mTextSizeO = size / 40.0f;  // half size
+    TDLog.v("GL NAMES text size " + mTextSizeP + " " + mTextSizeO );
   }
 
   final static int COORDS_PER_VERTEX = 3;
@@ -189,8 +191,8 @@ public class GlNames extends GlShape
 
   final static int COORDS_PER_VISIBILITY = 1;
   final static int OFFSET_VISIBILITY     = 0;
-  final static int STRIDE_VISIBILITY_2   = 4;  // Float.BYTES * COORDS_PER_VISIBILITY;
-  final static int STRIDE_VISIBILITY_1   = 24;   // Float.BYTES * COORDS_PER_VISIBILITY;
+  final static int STRIDE_VISIBILITY_1   = 4;  // Float.BYTES * COORDS_PER_VISIBILITY;
+  final static int STRIDE_VISIBILITY_6   = 24;   // Float.BYTES * COORDS_PER_VISIBILITY;
 
   int offsetHighlight = 0;
 
@@ -259,6 +261,7 @@ public class GlNames extends GlShape
    */
   void addName( Vector3D pos, int survey, String name, String fullname, double xmed, double ymed, double zmed )
   {
+    // TDLog.v("GL NAMES 1-add " + fullname );
     if ( mIncremental ) {
       Vector3D p = new Vector3D( pos.x-xmed, pos.z-ymed, -pos.y-zmed );
       addName( p, survey, name, fullname );
@@ -285,6 +288,7 @@ public class GlNames extends GlShape
    */
   private void addName( Vector3D p, int survey, String name, String fullname )
   {
+    // TDLog.v("GL NAMES 2-add " + fullname );
     mNames.add( new GlName( p.x, p.y, p.z, survey, name, fullname ) );
     if ( mDataBuffer != null ) {
       float[] val = new float[ 3 * NN ];
@@ -357,7 +361,7 @@ public class GlNames extends GlShape
   void initData( )
   {
     nameCount = mNames.size();
-    // TDLog.v("NAMES init data " + nameCount );
+    TDLog.v("GL NAMES init data " + nameCount );
     if ( TDUtil.isEmpty(mNames) ) return;
     // FIXME INCREMENTAL : was initBuffer( Names )
     if ( mDataBuffer == null ) {
@@ -387,17 +391,22 @@ public class GlNames extends GlShape
    */
   void draw( float[] mvpMatrix )
   {
-    if ( stationMode == STATION_NONE || TDUtil.isEmpty(mNames) ) return;
+    if ( stationMode == STATION_NONE || TDUtil.isEmpty(mNames) ) {
+      // TDLog.v("GL NAMES nothing to draw"); 
+      return;
+    }
     if ( showStationNames() ) {
       // ------- BIND TEXT BITMAP
       if ( mBitmap != null ) {
         if ( mTexId < 0 ) {
           GLES20.glActiveTexture( GLES20.GL_TEXTURE0 );
           mTexId = GL.bindTextTexture( mBitmap );
-          // TDLog.v("bound texture Id " + mTexId );
+          TDLog.v("bound texture Id " + mTexId );
         }
         // mBitmap.recycle(); // do not clean up, but keep the bitmap
         // mBitmap = null;
+      } else {
+        // TDLog.e("GL NAMES null bitmap");
       }
       GL.useProgram( mProgram );
       bindData( mvpMatrix ); 
@@ -434,6 +443,7 @@ public class GlNames extends GlShape
    */
   void hideOrShow( boolean[] visible )
   {
+    if ( visibilityBuffer == null ) return;
     // TDLog.v("Name hide/show " + nameCount + " vis " + visible.length );
     int k = 0; // index in the visibility buffer
     for ( int i = 0; i<nameCount; ++i ) {
@@ -459,9 +469,11 @@ public class GlNames extends GlShape
       GL.setAttributePointer( mADelta,    nameBuffer, OFFSET_DELTA,  COORDS_PER_DELTA,  STRIDE_TEXEL );
       GL.setAttributePointer( mATexCoord, nameBuffer, OFFSET_TEXEL,  COORDS_PER_TEXEL,  STRIDE_TEXEL );
     }
-    if ( visibilityBuffer != null ) {
-      // FIXME THIS DOES NOT WORK
-      GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY_2 );
+    if ( TDandroid.ABOVE_API_28 ) {
+      TDLog.v("GL NAMES bind data ABOVE API 28");
+      if ( visibilityBuffer != null ) {
+        GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY_1 );
+      }
     }
     if ( GlRenderer.projectionMode == GlRenderer.PROJ_PERSPECTIVE ) {
       GL.setUniform( mUTextSize, mTextSizeP );
@@ -485,8 +497,11 @@ public class GlNames extends GlShape
     if ( nameBuffer != null ) {
       GL.setAttributePointer( mADeltaHL,    nameBuffer, OFFSET_DELTA,  COORDS_PER_DELTA,  STRIDE_TEXEL );
     }
-    if ( visibilityBuffer != null ) {
-      GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY_1 );
+    if ( TDandroid.ABOVE_API_28 ) {
+      TDLog.v("GL NAMES bind data HL ABOVE API 28");
+      if ( visibilityBuffer != null ) {
+        GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY_1 );
+      }
     }
     if ( GlRenderer.projectionMode == GlRenderer.PROJ_PERSPECTIVE ) {
       GL.setUniform( mUTextSizeHL, mTextSizeP );
@@ -504,7 +519,7 @@ public class GlNames extends GlShape
       GL.setAttributePointer( mpAPosition, dataBuffer, OFFSET_VERTEX, COORDS_PER_VERTEX, STRIDE_VERTEX*6 ); // one vertex every 6
     }
     if ( visibilityBuffer != null ) {
-      GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY_1 );
+      GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY_6 );
     }
     GL.setUniform( mpUPointSize, mPointSize );
     GL.setUniform( mpUColor, color[0], color[1], color[2], color[3] );
@@ -517,7 +532,7 @@ public class GlNames extends GlShape
       GL.setAttributePointer( mpAPositionHL, dataBuffer, OFFSET_VERTEX, COORDS_PER_VERTEX, STRIDE_VERTEX*6 ); // one vertex every 6
     }
     if ( visibilityBuffer != null ) {
-      GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY_1 );
+      GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY_6 );
     }
     GL.setUniform( mpUPointSizeHL, mPointSize4 );
     // GL.setUniform( mpUColorHL, 1.0f, 0.0f, 0.0f, 1.0f );
@@ -613,7 +628,7 @@ public class GlNames extends GlShape
   // FIXME INCREMENTAL private void initBuffer( ArrayList< GlName > names )
   private void initBuffer( )
   {
-    // TDLog.v("NAMES init buffer " + nameCount );
+    TDLog.v("GL NAMES init buffer " + nameCount );
     // ---------- BASE POINT
     float[] data6 = new float[ nameCount * 3 * NN ]; // 3 float, XYZ, per vertex
     for ( int i=0; i<nameCount; ++ i) {
@@ -636,6 +651,7 @@ public class GlNames extends GlShape
 
   private void initVisibilityBuffer()
   {
+    TDLog.v("GL NAMES init visibility buffer");
     // if ( visibilityBuffer == null ) {
       visibilityBuffer = DataBuffer.getFloatBuffer( 6 * nameCount );
       for ( int i=0; i< 6 * nameCount; ++ i) {
@@ -756,6 +772,9 @@ public class GlNames extends GlShape
       }
     }
     mBitmap = bitmap0;
+    if ( mBitmap == null ) {
+      TDLog.e("GL NAMES bitmap is null");
+    }
     unbindTexture(); // FIXME TODO ?
   }
 
@@ -803,14 +822,21 @@ public class GlNames extends GlShape
 
   static void initGL( Context ctx ) 
   {
-    mProgram = GL.makeProgram( ctx, R.raw.name_vertex, R.raw.name_fragment );
+    if ( TDandroid.ABOVE_API_28 ) {
+      mProgram = GL.makeProgram( ctx, R.raw.name_vertex, R.raw.name_fragment );
+      mProgramPos = GL.makeProgram( ctx, R.raw.name_pos_vertex, R.raw.name_pos_fragment );
+      mProgramHL  = GL.makeProgram( ctx, R.raw.name_hl_vertex, R.raw.name_hl_fragment );
+      mProgramPosHL  = GL.makeProgram( ctx, R.raw.name_pos_hl_vertex, R.raw.name_pos_hl_fragment );
+    } else {
+      mProgram = GL.makeProgram( ctx, R.raw.name_vertex_eight, R.raw.name_fragment_eight );
+      mProgramPos = GL.makeProgram( ctx, R.raw.name_pos_vertex, R.raw.name_pos_fragment );
+      mProgramHL  = GL.makeProgram( ctx, R.raw.name_hl_vertex_eight, R.raw.name_hl_fragment_eight );
+      mProgramPosHL  = GL.makeProgram( ctx, R.raw.name_pos_hl_vertex, R.raw.name_pos_hl_fragment );
+    }
     setLocations( mProgram );
-    mProgramPos = GL.makeProgram( ctx, R.raw.name_pos_vertex, R.raw.name_pos_fragment );
     setLocationsPos( mProgramPos );
-    mProgramHL  = GL.makeProgram( ctx, R.raw.name_hl_vertex, R.raw.name_hl_fragment );
     setLocationsHL( mProgramHL );
     // mProgramPosHL  = GL.makeProgram( ctx, R.raw.name_pos_hl_vertex, R.raw.name_pos_hl_fragment, R.raw.name_pos_hl_geometry );
-    mProgramPosHL  = GL.makeProgram( ctx, R.raw.name_pos_hl_vertex, R.raw.name_pos_hl_fragment );
     setLocationsPosHL( mProgramPosHL );
   }
 
@@ -827,7 +853,9 @@ public class GlNames extends GlShape
   {
     mAPosition  = GL.getAttribute( program, GL.aPosition );
     mADelta     = GL.getAttribute( program, GL.aDelta );
-    mAVisible   = GL.getAttribute( program, GL.aVisible );
+    if ( TDandroid.ABOVE_API_28 ) {
+      mAVisible   = GL.getAttribute( program, GL.aVisible );
+    }
     mATexCoord  = GL.getAttribute( program, GL.aTexCoord );
     mUTextSize  = GL.getUniform(   program, GL.uTextSize );
     mUTexUnit   = GL.getUniform(   program, GL.uTexUnit );
@@ -848,7 +876,9 @@ public class GlNames extends GlShape
   {
     mAPositionHL  = GL.getAttribute( program, GL.aPosition );
     mADeltaHL     = GL.getAttribute( program, GL.aDelta );
-    mAVisible     = GL.getAttribute( program, GL.aVisible );
+    if ( TDandroid.ABOVE_API_28 ) {
+      mAVisible     = GL.getAttribute( program, GL.aVisible );
+    }
     mUTextSizeHL  = GL.getUniform(   program, GL.uTextSize );
     mUColorHL     = GL.getUniform(   program, GL.uColor );
     mUMVPMatrixHL = GL.getUniform(   program, GL.uMVPMatrix );

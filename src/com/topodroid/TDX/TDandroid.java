@@ -65,6 +65,7 @@ public class TDandroid
   final static public boolean ABOVE_API_23 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.M ); 
   final static public boolean ABOVE_API_24 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.N ); // Android-6 Nougat
   final static public boolean ABOVE_API_26 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.O ); // Android-8 Oreo
+  final static public boolean ABOVE_API_28 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.P ); // 
   final static public boolean ABOVE_API_29 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.Q ); // Android-10
 
   // final static public boolean AT_LEAST_API_15 = ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWITCH_MR1 );

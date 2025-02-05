@@ -3,9 +3,9 @@
 precision mediump float;
 
 uniform sampler2D uTexUnit;
-// uniform float uAlpha;
 
 varying vec2 vTexture;
+// uniform float uAlpha;
 varying float vAlpha;
 
 void main()
