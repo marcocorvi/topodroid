@@ -11,6 +11,7 @@
  */
 package com.topodroid.ui;
 
+import com.topodroid.utils.TDLog;
 import com.topodroid.TDX.TDandroid;
 
 import android.content.Context;
@@ -96,6 +97,11 @@ public class MyCheckBox extends CompoundButton
   @Override
   public boolean isChecked() { return mState; }
 
+  // /** set the checked state 
+  //  * @param state   new checked state
+  //  */
+  // @Override
+  // public void setChecked( boolean state ) { setState( state ); } // NOT GOOD
   
   /** @return new state of the checkbox after toggling ON-OFF
    */
@@ -113,6 +119,7 @@ public class MyCheckBox extends CompoundButton
     mState = state;
     TDandroid.setButtonBackground( this, MyButton.getButtonBackground( mContext, mContext.getResources(), (mState ? mIdOn : mIdOff) ) );
   }
+
 
 }
 

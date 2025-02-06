@@ -396,6 +396,21 @@ public class GlNames extends GlShape
       return;
     }
     if ( showStationNames() ) {
+      
+      //   Bitmap bitmap = BitmapFactory.decodeStream( is );
+      //   byte[] buffer = new byte[ bitmap.getWidth() * bitmap.getHeight() );
+      //   ... fill buffer with pixels values
+      //   ByteBuffer alphaBuffer = ByteBuffer.allocateDirect( bitmap.getWidth() * bitmap.getHeight() );
+      //   alphaBuffer.put( buffer ).position( 0 );
+      //   GLES20.glGenTextures( 1, textureId, 0 );
+      //   GLES20.glBindTexture( GLES20.GL_TEXTURE_2D, textureId[0] )
+      //                        target               level  intern_format width              height             border    format      type                     buffer
+      //   GLES20.glTexImage2D( GLES20.GL_TEXTURE_2D, 0, GLES20.GL_ALPHA, bitmap.getWidth(), bitmap.gertHeight(), 0, GLES20.GL_ALPHA, GLES20.GL_UNSYGNED_BYTE, alphaBuffer );
+      //   GLES20.glTexParamateri( GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR );
+      //   GLES20.glTexParamateri( GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR );
+      //   GLES20.glTexParamateri( GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE );
+      //   GLES20.glTexParamateri( GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE );
+      // return textureId[0];
       // ------- BIND TEXT BITMAP
       if ( mBitmap != null ) {
         if ( mTexId < 0 ) {
@@ -693,7 +708,8 @@ public class GlNames extends GlShape
       DIMX *= 2;
       DIMY *= 2;
       // TDLog.v("DIM " + DIMX + " names " + nameCount );
-      bitmap0 = Bitmap.createBitmap( DIMX, DIMY, Bitmap.Config.ARGB_8888); // Create an empty, mutable bitmap
+      bitmap0 = Bitmap.createBitmap( DIMX, DIMY, Bitmap.Config.ARGB_8888); // Create an empty, mutable bitmap, 4-Byte/pixel
+              // could use ALPHA_8: 1-Byte/pixel, and draw only alpha ?
       if ( bitmap0 == null ) {
         TDLog.e("NAMES null bitmap");
         break;
@@ -750,7 +766,11 @@ public class GlNames extends GlShape
         float y2 = dy * w1;
         // TDLog.v("NAMES " + name + " S " + s1 + " " + s2 + " T " + t1 + " " + t2 + " X2 " + x2 + " Y2 " + y2 );
 
-        int off = i*4 * NN;
+        int off = i*4 * NN; // 6 points for each name; (X,Y,S,T): (X,Y) canvas position, (S,T) texture position; two triangles
+                            // (-x2,-y2) -- (x2,-y2)      (s1,t1) -- (s2,t1)
+                            //     |     \  B   |            |    \     |
+                            //     |   A  \     |    =>      |     \    |
+                            // (-x2, y2) -- (x2, y2)      (s1,t2) -- (s2,t2)
         pos[off  ] =-x2; pos[off+1] =-y2; pos[off+2] = s1; pos[off+3] = t1; off += 4;
         pos[off  ] =-x2; pos[off+1] = y2; pos[off+2] = s1; pos[off+3] = t2; off += 4;
         pos[off  ] = x2; pos[off+1] = y2; pos[off+2] = s2; pos[off+3] = t2; off += 4;

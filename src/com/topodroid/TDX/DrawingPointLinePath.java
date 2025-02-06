@@ -261,6 +261,7 @@ public class DrawingPointLinePath extends DrawingPath
    */
   public void setClosed( boolean closed )  // TH2EDIT package
   { 
+    // TDLog.v("PointLine close " + mClosed + " set " + closed );
     if ( closed != mClosed ) {
       mClosed = closed; 
       retracePath();
@@ -646,6 +647,7 @@ public class DrawingPointLinePath extends DrawingPath
    */
   void retracePath()
   {
+    // TDLog.v("PointLine retrace path: closed " + mClosed );
     // int size = mPoints.size();
     // if ( size == 0 ) return;
     // mPath = new Path();

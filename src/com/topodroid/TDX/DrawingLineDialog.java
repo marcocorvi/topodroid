@@ -125,13 +125,6 @@ class DrawingLineDialog extends MyDialog
     mBtnOutlineIn   = (CheckBox) findViewById( R.id.line_outline_in );
     // mBtnOutlineNone = (RadioButton) findViewById( R.id.line_outline_none );
 
-    if ( mLine.mOutline == DrawingLinePath.OUTLINE_OUT ) {
-      mBtnOutlineOut.setChecked( true );
-    } else if ( mLine.mOutline == DrawingLinePath.OUTLINE_IN ) {
-      mBtnOutlineIn.setChecked( true );
-    // } else if ( mLine.mOutline == DrawingLinePath.OUTLINE_NONE ) {
-    //   mBtnOutlineNone.setChecked( true );
-    }
 
     // mReversed = (CheckBox) findViewById( R.id.line_reversed );
 
@@ -150,9 +143,6 @@ class DrawingLineDialog extends MyDialog
     // mBtnReduce = new MyCheckBox( mContext, size, R.drawable.iz_reduce_ok,  R.drawable.iz_reduce_no  );
     mBtnReduce = new MyStateBox( mContext, R.drawable.iz_reduce_no,  R.drawable.iz_reduce_ok, R.drawable.iz_reduce_ok2 );
     mBtnClose  = new MyCheckBox( mContext, size, R.drawable.iz_close_ok, R.drawable.iz_close_no );
-    mReversed.setChecked( mLine.isReversed() );
-    // mBtnClose.setChecked( mLine.isPathClosed() );
-    mBtnClose.setChecked( mLine.isClosed() );
 
     LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 0, 10, 20, 10 );
 
@@ -178,6 +168,19 @@ class DrawingLineDialog extends MyDialog
       LinearLayout ll = (LinearLayout) findViewById( R.id.layer_layout );
       ll.setVisibility( View.GONE );
     }
+
+    if ( mLine.mOutline == DrawingLinePath.OUTLINE_OUT ) {
+      mBtnOutlineOut.setChecked( true );
+    } else if ( mLine.mOutline == DrawingLinePath.OUTLINE_IN ) {
+      mBtnOutlineIn.setChecked( true );
+    // } else if ( mLine.mOutline == DrawingLinePath.OUTLINE_NONE ) {
+    //   mBtnOutlineNone.setChecked( true );
+    }
+    mReversed.setState( mLine.isReversed() );
+    mBtnClose.setState( mLine.isClosed() );
+    // mBtnClose.setChecked( mLine.isPathClosed() );
+    // TDLog.v("LineDialog is closed " +  mLine.isClosed() + " button " + mBtnClose.isChecked() );
+
   }
 
   private void setEditTextLSide()
@@ -303,6 +306,7 @@ class DrawingLineDialog extends MyDialog
         mParent.rockLine( mLine );
       }
 
+      // TDLog.v("LineDialog closed " +  mBtnClose.isChecked() );
       mLine.setClosed( mBtnClose.isChecked() );
 
       if ( TDSetting.mWithLevels  > 0 ) setLevel();

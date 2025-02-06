@@ -238,7 +238,7 @@ class DrawingShotDialog extends MyDialog
       mRBcmtd.setOnClickListener( this );
       if ( TDLevel.overAdvanced && mBlock.isOtherSplay() ) {
         mCBxSplay = new MyCheckBox( mContext, size, R.drawable.iz_xsplays_ok, R.drawable.iz_ysplays_no );
-        mCBxSplay.setChecked( false );
+        mCBxSplay.setChecked( false ); // ??? setState( false );
         layout3.addView( mCBxSplay, lp );
         mCBxSplay.setOnClickListener( this );
       }
@@ -332,11 +332,11 @@ class DrawingShotDialog extends MyDialog
       //   mRBsurvey.setChecked( true );
       if ( TDLevel.overNormal ) {
         if ( mBlock.isDuplicate() ) {
-          mRBdup.setChecked( true );
+          mRBdup.setState( true );
         } else if ( mBlock.isSurface() ) {
-          mRBsurf.setChecked( true );
+          mRBsurf.setState( true );
         } else if ( mBlock.isCommented() ) { // FIXME_COMMENTED
-          mRBcmtd.setChecked( true );
+          mRBcmtd.setState( true );
         // } else if ( mBlock.isBackshot() ) {
         //   mRBbackshot.setChecked( true );
         }

@@ -165,6 +165,7 @@ public class DrawingLinePath extends DrawingPointLinePath
           ret.addPointNoPath( x0, y0 );
         }
       }
+      // TDLog.v("Line read: closed " + closed + " (" + ret.isClosed() + ")" );
       ret.setClosed( closed );
       if ( closed ) {
         ret.closePath();
