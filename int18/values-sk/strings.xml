@@ -975,6 +975,7 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
     <string name="hint_bt_code">Kód zariadenia</string>
     <string name="bt_alias_missing">Chýba BT alias</string>
     <string name="bt_code_missing">Chýba kód zariadenia</string>
+    <!-- TODO string name="bt_alias_delete">Remove bluetooth alias?</string -->
 
     <string name="hint_cellsize">Veľkosť bunky</string>
     <string name="hint_cwd">Pracovný adresár</string>

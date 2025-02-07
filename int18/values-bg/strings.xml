@@ -968,6 +968,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="hint_bt_code">Код на устройството</string>
     <string name="bt_alias_missing">Липсва псевдоним на BT</string>
     <string name="bt_code_missing">Липсва код на устройството</string>
+    <!-- TODO string name="bt_alias_delete">Remove bluetooth alias?</string -->
 
     <string name="hint_cellsize">размер на клетка</string>
     <string name="hint_cwd">работна папка</string>

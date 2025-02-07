@@ -965,6 +965,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="hint_bt_code">Műszer kód</string>
     <string name="bt_alias_missing">BT alias hiányzik</string>
     <string name="bt_code_missing">Műszer kód hiányzik</string>
+    <!-- TODO string name="bt_alias_delete">Remove bluetooth alias?</string -->
 
     <string name="hint_cellsize">cella méret</string>
     <string name="hint_cwd">munka könyvtár</string>

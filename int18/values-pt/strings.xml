@@ -899,6 +899,7 @@ no campo abaixo e aperte o botão.
   <string name="hint_bt_code">Código do dispositivo</string>
   <string name="bt_alias_missing">ID BT faltando</string>
   <string name="bt_code_missing">Código do dispositivo faltando</string>
+    <!-- TODO string name="bt_alias_delete">Remove bluetooth alias?</string -->
   <string name="hint_cellsize">tamanho célula</string>
   <string name="hint_cwd">pasta de trabalho</string>
   <string name="hint_distance">distância</string>

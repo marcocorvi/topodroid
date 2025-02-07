@@ -959,6 +959,7 @@
     <string name="hint_bt_code">Код устройства</string>
     <string name="bt_alias_missing">BT псевдоним отсутствует</string>
     <string name="bt_code_missing">>Код устройства отсутствует</string>
+    <!-- TODO string name="bt_alias_delete">Remove bluetooth alias?</string -->
 
     <string name="hint_cellsize">размер ячейки</string>
     <string name="hint_cwd">рабочая папка</string>

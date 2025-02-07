@@ -25,6 +25,7 @@ import android.os.Bundle;
 // import android.content.Intent;
 // import android.content.res.Resources;
 // import android.content.res.Configuration;
+import android.content.DialogInterface;
 
 import android.widget.Spinner;
 import android.widget.EditText;
@@ -158,9 +159,15 @@ public class BtAliasActivity extends Activity
       return;
     }
     String item = ((TextView) view).getText().toString();
-    int idx = item.indexOf(" : ");
-    removeAlias( item.substring( 0, idx ) );
-    updateDisplay();
+    final int idx = item.indexOf(" : ");
+    TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.bt_alias_delete, 
+      new DialogInterface.OnClickListener() {
+        public void onClick( DialogInterface dialog, int btn ) {
+          removeAlias( item.substring( 0, idx ) );
+          updateDisplay();
+        }
+      }
+    );
   }
   
   @Override

@@ -961,6 +961,7 @@
     <string name="hint_bt_code">设备代码</string>
     <string name="bt_alias_missing">BT 别名丢失</string>
     <string name="bt_code_missing">设备代码丢失</string>
+    <!-- TODO string name="bt_alias_delete">Remove bluetooth alias?</string -->
 
     <string name="hint_cellsize">栅格尺寸</string>
     <string name="hint_cwd">工作文件夹</string>

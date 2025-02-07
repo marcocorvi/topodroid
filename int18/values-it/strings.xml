@@ -963,6 +963,7 @@
     <string name="hint_bt_code">Codice Device</string>
     <string name="bt_alias_missing">Alias BT mancante</string>
     <string name="bt_code_missing">Codice Device mancante</string>
+    <!-- TODO string name="bt_alias_delete">Remove bluetooth alias?</string -->
 
     <string name="hint_cellsize">lato cella</string>
     <string name="hint_cwd">folder di lavoro</string>

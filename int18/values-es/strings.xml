@@ -963,6 +963,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- TODO string name="hint_bt_code">Device code</string -->
     <!-- TODO string name="bt_alias_missing">BT alias missing</string -->
     <!-- TODO string name="bt_code_missing">Device code missing</string -->
+    <!-- TODO string name="bt_alias_delete">Remove bluetooth alias?</string -->
 
     <string name="hint_cellsize">Lado de la celda</string>
     <string name="hint_cwd">Carpeta de trabajo</string>

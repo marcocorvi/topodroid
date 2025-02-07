@@ -980,6 +980,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="hint_bt_code">Device code</string>
     <string name="bt_alias_missing">BT alias missing</string>
     <string name="bt_code_missing">Device code missing</string>
+    <string name="bt_alias_delete">Remove bluetooth alias?</string>
 
     <string name="hint_cellsize">cell size</string>
     <string name="hint_cwd">work folder</string>

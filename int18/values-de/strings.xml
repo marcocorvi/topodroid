@@ -888,6 +888,7 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="hint_bt_code">Gerätecode</string>
   <string name="bt_alias_missing">BT Name fehlt</string>
   <string name="bt_code_missing">Gerätecode fehlt</string>
+    <!-- TODO string name="bt_alias_delete">Remove bluetooth alias?</string -->
 
   <string name="hint_cellsize">Zellengröße</string>
   <string name="hint_cwd">Arbeitsverzeichnis</string>
