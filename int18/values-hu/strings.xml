@@ -1248,7 +1248,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <!-- UNUSED string name="title_coord">Ird be a pont koordinátáit:</string -->
     <string name="title_current_station">Elmentett mérési pontok</string>
     <string name="title_search">Pont/Mérés keresés</string>
-    <!-- TODO string name="title_pref_search">Settings search</string -->
+    <string name="title_pref_search">Beállítások keresése</string>
     <string name="title_gm_search">Kalibrációs adat keresés</string>
     <string name="title_dangling">Csatolatlan mérés</string>
     <string name="title_device">DistoX-ek</string>
@@ -1296,7 +1296,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="title_scraps">Felmérés vázlatok</string>
     <string name="title_scraps_outline">Körvonal felvázolása</string>
     <!-- UNUSED string name="title_select">Kiválaszt</string -->
-    <!-- TODO string name="setting" >setting</string -->
+    <string name="setting" >beállítás</string>
 
     <string name="title_settings_main">TopoDroid fő beállítások</string>
     <string name="title_settings_export">TopoDroid import/export beállítások</string>
