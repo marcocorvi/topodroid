@@ -194,6 +194,10 @@ public class GMActivity extends Activity
   private BitmapDrawable mBMbluetooth;
   private BitmapDrawable mBMbluetooth_no;
 
+  private float mDeltaDirAve = 0;
+  private float mDeltaDirStd = 0;
+  private float mDeltaDirMax = 0;
+
   /** set the window title (empty method)
    */
   public void setTheTitle() { }
@@ -206,6 +210,10 @@ public class GMActivity extends Activity
   // forward survey name to DeviceHelper
 
   // -------------------------------------------------------------
+
+  public float getDeltaDirAve() { return mDeltaDirAve; }
+  public float getDeltaDirStd() { return mDeltaDirStd; }
+  public float getDeltaDirMax() { return mDeltaDirMax; }
 
   // /** @return the calibration transform
   //  */
@@ -338,6 +346,26 @@ public class GMActivity extends Activity
         dip  = ( dip + mCalibration2.Dip() )/2;
         roll = ( roll + mCalibration2.Roll() )/2;
         mApp_mDData.updateCalibCoeff( cid, CalibAlgo.coeffToString( coeff, coeff2 ) );
+        // compare the two calibrations on the data
+        int nk = mCalibration.getDataNumber();
+        assert( nk == mCalibration2.getDataNumber() );
+        float a1 = 0;
+        float a2 = 0;
+        float am = 0;
+        for ( int k = 0; k < nk; ++ k ) {
+          TDVector v1 = mCalibration.getDirection( k ); 
+          TDVector v2 = mCalibration2.getDirection( k ); 
+          float a  = TDMath.acosd( TDVector.dot_product( v1, v2 ) );
+          a1 += a;
+          a2 += a * a;
+          if ( a > am ) am = a;
+        }
+        a1 /= nk;
+        a2 = TDMath.sqrt(a2/nk - a1*a1);
+        TDLog.v("Delta orientation average " + a1 + " stddev " + a2 + " max " + am );
+        mDeltaDirAve = a1;
+        mDeltaDirStd = a2;
+        mDeltaDirMax = am;
       } else {
         // TDLog.v("Calib delta  " + delta );
         // TDLog.v("Calib stddev " + delta2 );

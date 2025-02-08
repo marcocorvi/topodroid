@@ -164,6 +164,7 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="calib_roll">Разлика: %1$.2f °</string>
     <string name="calib_reset">Нулиране на DistoX калибрацията \?</string>
     <string name="calib_min_error">Минимална грешка</string>
+    <!-- TODO string name="calib_delta_dir">Dir. diff.: %1$.2f ± %2$.2f (max %3$.2f)</string -->
     <string name="magn_dip">Магнитна точност …</string>
     <string name="auto_calib">Автоматична калибрация</string>
     <string name="autocalib_not_supported">Изисква се изчисление на калибрирането</string>

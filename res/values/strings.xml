@@ -171,6 +171,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="calib_roll">Roll diff.: %1$.2f &#xb0;</string>
     <string name="calib_reset">Reset DistoX calibration ?</string>
     <string name="calib_min_error">Minimum error</string>
+    <string name="calib_delta_dir">Dir. diff.: %1$.2f ± %2$.2f (max %3$.2f)</string>
     <string name="magn_dip">Magn. dip &#8230;</string>
     <string name="auto_calib" copyable="pt">Auto Calib</string>
     <string name="autocalib_not_supported">Required calibration computation</string>

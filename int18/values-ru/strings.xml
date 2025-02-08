@@ -158,6 +158,7 @@
     <string name="calib_roll">Разница разворота.: %1$.2f &#xb0;</string>
     <string name="calib_reset">Сбросить калибровку DistoX ?</string>
     <string name="calib_min_error">Минимальная ошибка</string>
+    <!-- TODO string name="calib_delta_dir">Dir. diff.: %1$.2f ± %2$.2f (max %3$.2f)</string -->
     <string name="magn_dip">Магн. наклон &#8230;</string>
     <string name="auto_calib">Авто калибровка</string>
     <string name="autocalib_not_supported">Необходимый расчет калибровки</string>

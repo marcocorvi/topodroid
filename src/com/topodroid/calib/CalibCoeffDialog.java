@@ -39,7 +39,7 @@ import android.graphics.Bitmap;
 public class CalibCoeffDialog extends MyDialog
                        implements View.OnClickListener
 {
-  private final WeakReference<GMActivity> mParent; 
+  private final WeakReference<GMActivity> mParent;
 
   private static final int WIDTH  = 200;
   private static final int HEIGHT = 100;
@@ -57,6 +57,7 @@ public class CalibCoeffDialog extends MyDialog
   private String iter0;
   private String dip0;
   private String roll0; // FIXME ROLL_DIFFERENCE
+  private String deltaDir = null;
   private final byte[]  mCoeff; // caibration coeffs, 52 or 104 bytes
   private final float[] mErrors;
   private float   mDelta;
@@ -141,6 +142,22 @@ public class CalibCoeffDialog extends MyDialog
     iter0   = String.format( mContext.getResources().getString( R.string.calib_iter ), iter );
     dip0    = String.format( mContext.getResources().getString( R.string.calib_dip ), dip );
     roll0   = String.format( mContext.getResources().getString( R.string.calib_roll ), roll );
+  }
+
+  /** make the text string for the stat of the device direction differences
+   * @return false if the parent is null, or there are no differences 
+   */
+  private boolean setDeltaDir()
+  {
+    if ( mParent == null || mParent.get() == null ) return false;
+    float a1 = mParent.get().getDeltaDirAve();
+    float a2 = mParent.get().getDeltaDirStd();
+    float am = mParent.get().getDeltaDirMax();
+    if ( am > 0 ) {
+      deltaDir = String.format( mContext.getResources().getString( R.string.calib_delta_dir ), a1, a2, am );
+      return true;
+    }
+    return false;
   }
    
 
@@ -238,7 +255,7 @@ public class CalibCoeffDialog extends MyDialog
     textAMx = (TextView) findViewById(R.id.coeff_amx);
     textAMy = (TextView) findViewById(R.id.coeff_amy);
     textAMz = (TextView) findViewById(R.id.coeff_amz);
-    textNL = (TextView) findViewById(R.id.coeff_nl);
+    textNL  = (TextView) findViewById(R.id.coeff_nl);
 
     ImageView image        = (ImageView) findViewById( R.id.histogram );
     TextView textDelta    = (TextView) findViewById(R.id.coeff_delta);
@@ -247,6 +264,7 @@ public class CalibCoeffDialog extends MyDialog
     TextView textIter     = (TextView) findViewById(R.id.coeff_iter);
     TextView textDip      = (TextView) findViewById(R.id.coeff_dip);
     TextView textRoll     = (TextView) findViewById(R.id.coeff_roll);
+    TextView textDir      = (TextView) findViewById(R.id.coeff_delta_dir);
     mButtonWrite   = (Button) findViewById( R.id.button_coeff_write );
     mButtonSecond  = (Button) findViewById( R.id.button_coeff_second );
     Button button_back  = (Button) findViewById( R.id.button_coeff_back );
@@ -267,6 +285,11 @@ public class CalibCoeffDialog extends MyDialog
       textIter.setText( iter0 );
       textDip.setText( dip0 );
       textRoll.setText( roll0 ); // FIXME ROLL_DIFFERENCE
+      if ( ! setDeltaDir() ) {
+        textDir.setVisibility( View.GONE );
+      } else {
+        textDir.setText( deltaDir );
+      }
     } else {
       textDelta.setVisibility( View.GONE );
       textDelta2.setVisibility( View.GONE );
@@ -274,9 +297,10 @@ public class CalibCoeffDialog extends MyDialog
       textIter.setVisibility( View.GONE );
       textDip.setVisibility( View.GONE );
       textRoll.setVisibility( View.GONE ); // FIXME ROLL_DIFFERENCE
+      textDir.setVisibility( View.GONE );
     }
 
-    if ( mParent != null ) {
+    if ( mParent != null && mParent.get() != null ) {
       mButtonWrite.setOnClickListener( this );
       // if ( mSaturated ) {
       //   mButtonWrite.setEnabled( false );
@@ -299,11 +323,15 @@ public class CalibCoeffDialog extends MyDialog
   {
     int id = v.getId();
     if ( id == R.id.button_coeff_write ) { 
-      GMActivity parent = mParent.get();
-      if ( parent != null ) {
-        if ( mCoeff != null ) parent.uploadCoefficients( mDelta, mCoeff, true, mButtonWrite ); // 20250123 dropped false (second)
+      if ( mParent != null ) {
+        GMActivity parent = mParent.get();
+        if ( parent != null ) {
+          if ( mCoeff != null ) parent.uploadCoefficients( mDelta, mCoeff, true, mButtonWrite ); // 20250123 dropped false (second)
+        } else {
+          TDLog.e("Calib Coeff Dialog null parent");
+        }
       } else {
-        TDLog.e("Calib Coeff Dialog null parent");
+        TDLog.e("Calib Coeff Dialog null parent ref");
       }
     } else if ( id == R.id.button_coeff_second ) {
       if ( mTwoSensors ) {

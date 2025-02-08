@@ -165,6 +165,7 @@ debe ajustarlos a sus necesidades./n/n </string>
     <!-- TODO string name="calib_roll">Roll diff.: %1$.2f &#xb0;</string -->
     <string name="calib_reset">¿Quiere restablecer la calibración DistoX?</string>
     <string name="calib_min_error">Mínimo error</string>
+    <!-- TODO string name="calib_delta_dir">Dir. diff.: %1$.2f ± %2$.2f (max %3$.2f)</string -->
     <string name="magn_dip">Dip Magnetica: &#8230;</string>
     <string name="auto_calib">Auto Calibración</string>
     <string name="autocalib_not_supported">Cálculo de calibración requerido</string>

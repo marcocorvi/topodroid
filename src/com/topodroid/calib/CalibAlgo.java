@@ -77,6 +77,10 @@ public class CalibAlgo extends CalibTransform
     if ( N > 0 ) Reset( N );
   }
 
+  /** @return the number of calibration data
+   */
+  public int getDataNumber() { return num; }
+
   float computeRoll( TDVector v0, TDVector v )
   {
     float s = v0.y * v.z - v0.z * v.y;
@@ -120,7 +124,21 @@ public class CalibAlgo extends CalibTransform
     // TDLog.v("Max roll difference " + max + " average " + roll );
     // return roll;
   }
-    
+
+  /** @return the device direction is in the frame (North, East, Down) at the k-th calibration data
+   * @param k    callib data index
+   */
+  public TDVector getDirection( int k )
+  {
+    assert ( k >= 0 && k < num );
+    TDVector down = getTransformedG( g[k] );
+    TDVector mag  = getTransformedM( m[k] );
+    down.normalize();
+    TDVector east = TDVector.cross_product( down, mag );
+    east.normalize();
+    TDVector north = TDVector.cross_product( east, down );
+    return new TDVector( north.x, east.x, down.x );
+  }
 
   // void setAlgorithm( boolean nonLinear ) { mNonLinear = nonLinear; }
 
