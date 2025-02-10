@@ -93,6 +93,13 @@ public class TdManagerActivity extends Activity
   public void onCreate( Bundle savedInstanceState )
   {
     super.onCreate( savedInstanceState );
+
+    getWindow().getDecorView().setSystemUiVisibility( 0
+      | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+      | View.SYSTEM_UI_FLAG_FULLSCREEN                // remove the appbar
+      | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION        // as soos as it is shown it does not go away
+    );
+
     setContentView(R.layout.tdmanager_activity);
     // getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 

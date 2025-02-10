@@ -749,6 +749,16 @@ public class MainWindow extends Activity
     super.onCreate( savedInstanceState );
     // TDLog.v("MAIN on Create");
 
+    getWindow().getDecorView().setSystemUiVisibility( 0
+      | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+      | View.SYSTEM_UI_FLAG_FULLSCREEN                // remove the appbar
+      | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION        // as soos as it is shown it does not go away
+      // | View.SYSTEM_UI_FLAG_IMMERSIVE
+      // | View.SYSTEM_UI_FLAG_LAYOUT_STABLE           // remove to have the layout appear under the appbar
+      // | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+      // | View.SYSTEM_UI_FLAG_LOW_PROFILE
+    );
+
     TDandroid.setScreenOrientation( this );
 
     // TDLog.Profile("TDActivity onCreate");

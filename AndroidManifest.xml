@@ -139,7 +139,7 @@
           <!-- android:debuggable="false" -->
 
         <activity android:name=".MainWindow"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="true"
           >
@@ -163,64 +163,64 @@
         </activity>
 
         <activity android:name=".FixedActivity"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
         />
 
         <activity android:name=".PlotReloadWindow" tools:ignore="Instantiatable"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
         />
 
         <activity android:name=".GMActivity"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
         />
 
         <activity android:name=".CalibActivity"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
         />
 
         <activity android:name=".SurveyWindow"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
         />
 
         <activity android:name=".ShotWindow"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
         />
           <!-- android:screenOrientation="fullSensor" -->
 
         <activity android:name=".SensorActivity"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:windowSoftInputMode="stateHidden|adjustResize"
           android:exported="false"
         />
 
         <activity android:name=".DeviceActivity"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
         />
 
         <!-- activity android:name=".DeviceList"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
         / -->
 
         <!-- MUST LIST WINDOWS -->
         <!-- activity android:name=".ItemDrawer"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
           >
@@ -231,7 +231,7 @@
         </activity -->
 
         <activity android:name=".DrawingWindow" tools:ignore="Instantiatable"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="true"
           >
@@ -242,7 +242,7 @@
         </activity>
 
         <activity android:name=".OverviewWindow" tools:ignore="Instantiatable"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="true"
           >
@@ -253,7 +253,7 @@
         </activity>
 
         <activity android:name=".SketchWindow" tools:ignore="Instantiatable"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="true"
           >
@@ -264,7 +264,7 @@
         </activity>
 
         <activity android:name="com.topodroid.help.UserManualActivity"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="true"
           >
@@ -275,7 +275,7 @@
         </activity>
 
 	<activity android:name="com.topodroid.prefs.TDPrefActivity"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:windowSoftInputMode="stateHidden"
           android:configChanges="orientation|screenSize"
           android:exported="false"
@@ -284,7 +284,7 @@
         </activity>
 
         <activity android:name=".CWDActivity"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
           >
@@ -292,7 +292,7 @@
         </activity>
 
         <activity android:name=".BtAliasActivity"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
           >
@@ -300,7 +300,7 @@
         </activity>
 
         <activity android:name=".PtCmapActivity"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
           >
@@ -308,7 +308,7 @@
         </activity>
 
         <activity android:name=".GraphPaperScaleActivity"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
           >
@@ -316,23 +316,23 @@
         </activity>
 
         <activity android:name=".SensorListActivity"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
         />
 
         <activity android:name="com.topodroid.tdm.TdManagerActivity"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
         />
         <activity android:name="com.topodroid.tdm.TdmConfigActivity"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
         />
         <activity android:name="com.topodroid.tdm.TdmViewActivity"
-	  android:theme="@style/Theme.FullScreen"
+	  android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
         />
@@ -362,7 +362,7 @@
         </service -->
 
       <activity android:name=".TopoGL"
-          android:theme="@style/Theme.FullScreen"
+          android:theme="@style/Theme.NoFullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
         ><!--

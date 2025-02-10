@@ -125,7 +125,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="bric_ble" copyable="all">BLE %1$s</string>
     <string name="bric_fw" copyable="pt">Firmware %1$s</string>
     <string name="bric_hw" copyable="pt">Hardware %1$s</string>
-    <string name="bric_battery">Battery %1$d %%</string>
+    <string name="bric_battery">Battery %1$d &#x37;</string>
     <string name="bric_battery_wait">Battery &#8230;</string>
     <string name="bric_reset_time">Reset time</string>
     <string name="bric_clear_memory">Clear memory</string>
@@ -171,8 +171,8 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="calib_roll">Roll diff.: %1$.2f &#xb0;</string>
     <string name="calib_reset">Reset DistoX calibration ?</string>
     <string name="calib_min_error">Minimum error</string>
-    <string name="calib_delta_dir">Dir. diff.: %1$.2f ± %2$.2f (max %3$.2f)</string>
-    <string name="magn_dip">Magn. dip &#8230;</string>
+    <string name="calib_delta_dir">Dir. diff.: %1$.2f ± %2$.2f &#xb0; (max %3$.2f &#xb0;)</string>
+    <string name="magn_dip">Magn. dip &#xb0;</string>
     <string name="auto_calib" copyable="pt">Auto Calib</string>
     <string name="autocalib_not_supported">Required calibration computation</string>
     
@@ -456,7 +456,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="no_undelete_paste">No item to recover/paste</string>
     <string name="format_measure_plan" copyable="all">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
     <string name="format_measure_profile" copyable="all">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
-    <string name="format_closure" translatable="false">%1$s-%2$s: [%3$d] %4$.1f/%5$.1f (%6$.1f %7$.1f) %8$.1f %% (%9$.1f\u00b0)</string>
+    <string name="format_closure" translatable="false">%1$s-%2$s: [%3$d] %4$.1f/%5$.1f (%6$.1f %7$.1f) %8$.1f &#x37; (%9$.1f\u00b0)</string>
 
     <string name="menu_3d" copyable="all">3D</string>
     <string name="menu_about">ABOUT</string>
@@ -685,22 +685,22 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="toporobot_warning">TopoRobot policy requires tester level !</string>
     <string name="anomaly_warning">Magnetic anomaly compensation requires expert level !</string>
     <string name="tripod_warning">Tripod policy requires advanced level !</string>
-    <string name="coverage_warning">Angle coverage below %1$d %%\nWrite coefficients?</string>
+    <string name="coverage_warning">Angle coverage below %1$d &#x37;\nWrite coefficients?</string>
     <string name="delta_warning">Average error above %1$.1f\u00b0\nWrite coefficients?</string>
     <!-- UNUSED string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
     
 
-    <string name="cover_data">Raw data distribution: %1$.2f %%</string>
-    <string name="cover_calib">Calibrated data distribution: %1$.2f %%</string>
-    <string name="cover_g">G distribution: %1$.2f %%</string>
-    <string name="cover_m">M distribution: %1$.2f %%</string>
-    <string name="cover_r">Roll distribution: %1$.2f %%</string>
+    <string name="cover_data">Raw data distribution: %1$.2f &#x37;</string>
+    <string name="cover_calib">Calibrated data distribution: %1$.2f &#x37;</string>
+    <string name="cover_g">G distribution: %1$.2f &#x37;</string>
+    <string name="cover_m">M distribution: %1$.2f &#x37;</string>
+    <string name="cover_r">Roll distribution: %1$.2f &#x37;</string>
 
     <string name="accuracy_low">Low accuracy. Calibration needed</string>
     <string name="accuracy_medium">Low accuracy</string>
     <!-- UNUSED string name="accuracy_high">Good accuracy</string -->
     <string name="accuracy_unreliable">Unreliable sensors</string>
-    <string name="accuracy_amd" translatable="false">A %1$.1f %% M %2$.1f %% D %3$.1f &#xb0;</string>
+    <string name="accuracy_amd" translatable="false">A %1$.1f &#x37; M %2$.1f &#x37; D %3$.1f &#xb0;</string>
 
     <string name="empty_clipboard">Empty clipboard</string>
     <string name="cannot_rename">Cannot rename survey</string>
@@ -748,9 +748,9 @@ There are other settings for the presentation of the sketches (icon size, label 
     <string name="survey_info">Survey info</string>
     <string name="stat_dates">From %1$s to %2$s</string>
     <string name="stat_devices">Devices %1$d: %2$s</string>
-    <string name="stat_stddev_m">M stddev %1$.1f %%</string>
-    <string name="stat_stddev_g">G stddev %1$.1f %%</string>
-    <string name="stat_stddev_dip">Dip stddev %1$.1f deg. (average %2$.1f deg.)</string>
+    <string name="stat_stddev_m">M stddev %1$.1f &#x37;</string>
+    <string name="stat_stddev_g">G stddev %1$.1f &#x37;</string>
+    <string name="stat_stddev_dip">Dip stddev %1$.1f &#xb0; (average %2$.1f &#xb0;)</string>
     <string name="stat_component">Components %1$d</string>
     <string name="stat_depth">Sketch denivelation %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Duplicate shots %1$d # %2$d %3$.1f %4$s</string>
@@ -771,7 +771,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="stat_surface_z">Surface denivelation %1$.1f %2$.1f %3$s</string -->
     <string name="stat_survey_z">Cave denivelation %1$.1f %2$.1f %3$s</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]</string>
-    <string name="stat_angle_error">Angle errors %1$.2f ± %2$.2f</string>
+    <string name="stat_angle_error">Angle errors %1$.2f ± %2$.2f &#xb0;</string>
     <string name="shot_title">SHOT %1$s - %2$s</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f</string>
     <string name="survey_split_move_title">Survey split/move</string>
@@ -1685,13 +1685,13 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_survey_stations_title">Stations policy</string>
   <string name="pref_survey_stations_summary">Stations automatic naming policy</string>
   <string name="pref_accel_thr_title">Acceleration tolerance</string>
-  <string name="pref_accel_thr_summary">Percent tolerance for the shots acceleration [&#37;]</string>
+  <string name="pref_accel_thr_summary">Percent tolerance for the shots acceleration [&#x37;]</string>
   <string name="pref_mag_thr_title">Magnetic field tolerance</string>
-  <string name="pref_mag_thr_summary">Percent tolerance for the shots magnetic field [&#37;]</string>
+  <string name="pref_mag_thr_summary">Percent tolerance for the shots magnetic field [&#x37;]</string>
   <string name="pref_dip_thr_title">Magnetic dip tolerance</string>
-  <string name="pref_dip_thr_summary">Tolerance over the shots magnetic dip [deg]</string>
+  <string name="pref_dip_thr_summary">Tolerance over the shots magnetic dip [g]</string>
   <string name="pref_sibling_thr_title">Sibling threshold</string>
-  <string name="pref_sibling_thr_summary">Threshold for sibling shots [&#37;]</string>
+  <string name="pref_sibling_thr_summary">Threshold for sibling shots [&#x37;]</string>
 
   <string name="pref_leg_title">Leg tolerance</string>
   <string name="pref_leg_summary">Tolerance among the shots of a leg</string>
@@ -1930,7 +1930,7 @@ There are other settings for the presentation of the sketches (icon size, label 
   <!-- UNUSED string name="pref_walls_xclose_title">Separation</string -->
   <!-- UNUSED string name="pref_walls_xclose_summary">Minimum separation of wall points along the shot [m]</string -->
   <!-- UNUSED string name="pref_walls_concave_title">Concavity</string -->
-  <!-- UNUSED string name="pref_walls_concave_summary">Maximum concavity [&#37;]</string -->
+  <!-- UNUSED string name="pref_walls_concave_summary">Maximum concavity [&#x37;]</string -->
   <!-- UNUSED string name="pref_walls_xstep_title">Step</string -->
   <!-- UNUSED string name="pref_walls_xstep_summary">Separation of points along the wall [m]</string -->
 

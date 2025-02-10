@@ -118,6 +118,12 @@ public class PtCmapActivity extends Activity
   {
     super.onCreate( b );
 
+    getWindow().getDecorView().setSystemUiVisibility( 0
+      | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+      | View.SYSTEM_UI_FLAG_FULLSCREEN                // remove the appbar
+      | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION        // as soos as it is shown it does not go away
+    );
+
     TDandroid.setScreenOrientation( this );
 
     setContentView(R.layout.pt_cmap_activity);

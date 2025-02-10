@@ -11,13 +11,18 @@ It is used in three different situations:
 <li>The <i>Compute</i> button of the <u>Calibration Data window</u> displays the computed coefficients</li>
 </ul>
 
-In the last case the dialog displays also an histogram of the residual errors of the calibration data,
-the average error (and the "delta" of the original algorithm), the standard deviation of the error distribution,
-the maximum error, the number of iterations taken by the calibration computation,
-the average angle between magnetic field and vertical, and the average difference between the roll angles computed
-using G vectors of the data in each group and using M vectors.<br>
-For double-sensor calibrations there are also the statistics (avergae, std-dev, and max) of the differences of
-the device directions between the two sensors.<br><p>
+In the last case the dialog displays also 
+<ul>
+<li>an histogram of the residual errors of the calibration data,</li>
+<li>the average error [degrees]</li>
+<li>the "delta" of the original algorithm</li>
+<li>the standard deviation of the error distribution [degrees]</li>
+<li>the maximum error [degrees],</li>
+<li>the number of iterations taken by the calibration computation,</li>
+<li>the average angle between magnetic field and vertical [degrees]</li>
+<li>the average difference between the roll angles computed using G vectors of the data in each group and using M vectors [degrees]</li>
+<li>only for double-sensor devices the statistics (avergae, std-dev, and max [degrees]) of the differences of the device directions between the two sensors.</li>
+</ul><br><p>
 
 Assuming that the azimuth-clino error distribution is normal, the standard deviation of the errors should be slightly over half the average value.<br><p>
 
@@ -32,7 +37,7 @@ It gives an estimate of the calibration accuracy (precision of the instrument):
 
 The dialog displays also the magnetic dip [degrees] computed by the calibration algorithm.<br><p>
 
-This dialog has a button to <b>write</b> the coefficients to the DistoX.<br>
+After a computation of the calibration coefficients, the dialog has a button to <b>write</b> the coefficients to the DistoX.<br>
 A warning is given if the data direction distribution is below 95%, or the calibration average error is above 0.5&deg;.
 <br><p>
 
