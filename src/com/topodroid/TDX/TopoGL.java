@@ -3062,7 +3062,7 @@ public class TopoGL extends Activity
   //   selectFile( REQUEST_TEMPERATURE_FILE,  false, -1, R.string.select_temp_file, null );
   // }
 
-  /** export file selection
+  /** export file selection: send a request to select a file, on success return the model is exported
    * @param export   export data-struct
    */
   void selectExportFile( ExportData export )

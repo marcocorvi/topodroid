@@ -56,6 +56,14 @@ public class ExportGPX extends ExportGeo
      mFacets.add( new CWFacet( v1, v2, v3 ) );
   }
 
+  /** export the model in GPX format
+   * @param osw    output buffer writer
+   * @param data   model data
+   * @param do_splays  whether to include splays
+   * @param do_walls   whether to include walls
+   * @param do_station whether to include stations
+   * @return true on success
+   */
   public boolean exportASCII( BufferedWriter osw, TglParser data, boolean do_splays, boolean do_walls, boolean do_station )
   {
     String name = data.getName();
@@ -67,7 +75,6 @@ public class ExportGPX extends ExportGeo
       return false;
     }
     boolean single_track = TDSetting.mGPXSingleTrack;
-    TDLog.v( "GPX export splays " + do_splays + " stations " + do_station + " single track " + single_track );
 
     // TODO use survey colors
     List< Cave3DSurvey > surveys  = data.getSurveys();
@@ -75,6 +82,7 @@ public class ExportGPX extends ExportGeo
     List< Cave3DStation> stations = data.getStations();
     // List< Cave3DShot>    shots    = data.getShots();
     // List< Cave3DShot>    splays   = data.getSplays();
+    // TDLog.v( "GPX export splays " + do_splays + " stations " + do_station + " single track " + single_track + " surveys " + surveys.size() + " stations " + stations.size() );
     double minlat = Double.MAX_VALUE;
     double maxlat = Double.MIN_VALUE;
     double minlon = Double.MAX_VALUE;
@@ -104,90 +112,110 @@ public class ExportGPX extends ExportGeo
       pw.format(Locale.US, "    <width>thin</width>\n");
       pw.format(Locale.US, "  </extensions>\n");
 
-      if ( single_track ) pw.format(Locale.US, "<trk>\n");
-    
-      for ( Cave3DSurvey survey : surveys ) {
-        String survey_name = survey.getName();
-        // int    sid  = survey.getId();
-        if ( ! single_track ) {
+      if ( do_station ) { // waypoints are out of tracks
+       for ( Cave3DSurvey survey : surveys ) {
+          stations = survey.getStations();
+          // pw.format(Locale.US, "<Folder>\n");
+          // pw.format(Locale.US, "  <name>stations</name>\n" );
+          for ( Cave3DStation st : stations ) {
+            printWayPoint( pw, st );
+          }
+          // pw.format(Locale.US, "</Folder>\n");
+        }
+      }
+
+      if ( ! single_track ) {
+        for ( Cave3DSurvey survey : surveys ) {
+          String survey_name = survey.getName();
+          // int    sid  = survey.getId();
           pw.format(Locale.US, "<trk>\n");
           pw.format(Locale.US, "  <name>%s</name>\n", survey_name );
           // pw.format(Locale.US, "  <extensions>\n"); // ineffective in OsmAnd
           // pw.format(Locale.US, "    <color>#%06x</color>\n", (0x00ffffff & survey.getColor() ) );
           // pw.format(Locale.US, "  </extensions>\n");
-        }
-        if ( do_station ) {
-          stations = survey.getStations();
-          // pw.format(Locale.US, "<Folder>\n");
-          // pw.format(Locale.US, "  <name>stations</name>\n" );
-          for ( Cave3DStation st : stations ) {
-            double e = getENC( st );
-            double n = getNNC( st );
-            double z = getZ( st );
-            pw.format(Locale.US, "  <wpt lon=\"%.7f\" lat=\"%.7f\">\n", e, n );
-            pw.format(Locale.US, "    <ele>%.2f</ele>\n", z );
-            pw.format(Locale.US, "    <name>%s</name>\n", st.getFullName() );
-            pw.format(Locale.US, "    <desc></desc>\n");
-            pw.format(Locale.US, "  </wpt>\n");
-          }
-          // pw.format(Locale.US, "</Folder>\n");
-        // } else {
-        //   TDLog.v("3D GPX no stations ");
-        }
 
-        List< Cave3DShot > survey_shots = survey.getShots();
-        Cave3DStation last = null;
-        for ( Cave3DShot sh : survey_shots ) {
-          // if ( sh.mSurveyId != sid ) continue;
-          Cave3DStation sf = sh.from_station;
-          Cave3DStation st = sh.to_station;
-          if ( sf == null || st == null ) continue;
-          if ( last == null ) {
-            pw.format(Locale.US, "    <trkseg>\n");
-            double ef = getENC( sf );
-            double nf = getNNC( sf );
-            double zf = getZ( sf );
-            pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.2f</ele></trkpt>\n", ef, nf, zf ); 
-          } else if ( last != sf ) {
-            pw.format(Locale.US, "    </trkseg>\n");
-            pw.format(Locale.US, "    <trkseg>\n");
-            double ef = getENC( sf );
-            double nf = getNNC( sf );
-            double zf = getZ( sf );
-            pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.2f</ele></trkpt>\n", ef, nf, zf ); 
+          List< Cave3DShot > survey_shots = survey.getShots();
+          Cave3DStation last = null;
+          for ( Cave3DShot sh : survey_shots ) {
+            // if ( sh.mSurveyId != sid ) continue;
+            Cave3DStation sf = sh.from_station;
+            Cave3DStation st = sh.to_station;
+            if ( sf == null || st == null ) continue;
+            if ( last == null ) {
+              pw.format(Locale.US, "    <trkseg>\n");
+              printTrackPoint( pw, sf );
+            } else if ( last != sf ) {
+              pw.format(Locale.US, "    </trkseg>\n");
+              pw.format(Locale.US, "    <trkseg>\n");
+              printTrackPoint( pw, sf );
+            }
+            printTrackPoint( pw, st );
+            last = st;
           }
-          double et = getENC( st );
-          double nt = getNNC( st );
-          double zt = getZ( st );
-          // pw.format(Locale.US, "    <name>%s-%s</name>\n", sf.getFullName(), st.getFullName() );
-          pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.2f</ele></trkpt>\n", et, nt, zt ); 
-          last = st;
+          if ( last != null ) {
+            pw.format(Locale.US, "    </trkseg>\n");
+          }
+
+          if ( do_splays ) {
+            List< Cave3DShot > splays = survey.getSplays();
+            for ( Cave3DShot sp : splays ) {
+              Cave3DStation sf = sp.from_station;
+              if ( sf == null ) continue;
+              Vector3D v = sf.sum( sp.toVector3D() );
+              pw.format(Locale.US, "    <trkseg>\n");
+              printTrackPoint( pw, sf );
+              printTrackPoint( pw, v );
+              pw.format(Locale.US, "    </trkseg>\n");
+            }
+          }
+          pw.format(Locale.US, "</trk>\n");
         }
-        if ( last != null ) {
-          pw.format(Locale.US, "    </trkseg>\n");
+      } else { // single track
+        // pw.format(Locale.US, "<trk>\n");
+        // pw.format(Locale.US, "  <name>%s</name>\n", name );
+
+        pw.format(Locale.US, "<trk>\n");
+        pw.format(Locale.US, "  <name>%s</name>\n", name );
+        for ( Cave3DSurvey survey : surveys ) {
+          List< Cave3DShot > survey_shots = survey.getShots();
+          Cave3DStation last = null;
+          for ( Cave3DShot sh : survey_shots ) {
+            // if ( sh.mSurveyId != sid ) continue;
+            Cave3DStation sf = sh.from_station;
+            Cave3DStation st = sh.to_station;
+            if ( sf == null || st == null ) continue;
+            if ( last == null ) {
+              pw.format(Locale.US, "    <trkseg>\n");
+              printTrackPoint( pw, sf );
+            } else if ( last != sf ) {
+              pw.format(Locale.US, "    </trkseg>\n");
+              pw.format(Locale.US, "    <trkseg>\n");
+              printTrackPoint( pw, sf );
+            }
+            printTrackPoint( pw, st );
+            last = st;
+          }
+          if ( last != null ) {
+            pw.format(Locale.US, "    </trkseg>\n");
+          }
         }
 
         if ( do_splays ) {
-          List< Cave3DShot > splays = survey.getSplays();
-          for ( Cave3DShot sp : splays ) {
-            Cave3DStation sf = sp.from_station;
-            if ( sf == null ) continue;
-            Vector3D v = sf.sum( sp.toVector3D() );
-            double ef = getENC( sf );
-            double nf = getNNC( sf );
-            double zf = getZ( sf );
-            double et = getENC( v );
-            double nt = getNNC( v );
-            double zt = getZ( v );
-            pw.format(Locale.US, "    <trkseg>\n");
-            pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.2f</ele></trkpt>\n", ef, nf, zf ); 
-            pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.2f</ele></trkpt>\n", et, nt, zt ); 
-            pw.format(Locale.US, "    </trkseg>\n");
+          for ( Cave3DSurvey survey : surveys ) {
+            List< Cave3DShot > splays = survey.getSplays();
+            for ( Cave3DShot sp : splays ) {
+              Cave3DStation sf = sp.from_station;
+              if ( sf == null ) continue;
+              Vector3D v = sf.sum( sp.toVector3D() );
+              pw.format(Locale.US, "    <trkseg>\n");
+              printTrackPoint( pw, sf );
+              printTrackPoint( pw, v );
+              pw.format(Locale.US, "    </trkseg>\n");
+            }
           }
         }
-        if ( ! single_track ) pw.format(Locale.US, "</trk>\n");
+        pw.format(Locale.US, "</trk>\n");
       }
-      if ( single_track ) pw.format(Locale.US, "</trk>\n");
       pw.format(Locale.US, "</gpx>\n");
       osw.flush();
       osw.close();
@@ -198,5 +226,27 @@ public class ExportGPX extends ExportGeo
     }
   }
 
+  private void printWayPoint( PrintWriter pw, Cave3DStation st )
+  {
+    double e = getENC( st );
+    double n = getNNC( st );
+    double z = getZ( st );
+    pw.format(Locale.US, "  <wpt lon=\"%.7f\" lat=\"%.7f\">\n", e, n );
+    pw.format(Locale.US, "    <ele>%.2f</ele>\n", z );
+    pw.format(Locale.US, "    <name><![CDATA[%s]]></name>\n", st.getFullName() );
+    pw.format(Locale.US, "    <desc></desc>\n");
+    pw.format(Locale.US, "    <sym>Dot</sym>\n");
+    // pw.format(Locale.US, "    <type></type>\n");
+    // pw.format(Locale.US, "    <time></time>\n");
+    pw.format(Locale.US, "  </wpt>\n");
+  }
+
+  private void printTrackPoint( PrintWriter pw, Vector3D sf )
+  {
+    double ef = getENC( sf );
+    double nf = getNNC( sf );
+    double zf = getZ( sf );
+    pw.format(Locale.US, "      <trkpt lon=\"%.7f\" lat=\"%.7f\"><ele>%.2f</ele></trkpt>\n", ef, nf, zf ); 
+  }
 }
 

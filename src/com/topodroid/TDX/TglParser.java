@@ -760,6 +760,12 @@ public class TglParser
     return ret;
   }
 
+  /** export the model in an ascii format
+   * @param type   export format type
+   * @param osw    output buffer writer
+   * @param export export info
+   * @return true on success
+   */
   public boolean exportModelAscii( int type, BufferedWriter osw, ExportData export ) // , boolean overwrite )
   { 
     boolean ret = false;
