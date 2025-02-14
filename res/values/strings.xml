@@ -2372,7 +2372,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="cpref_grid_above_summary">Grid on the top instead of bottom [n]</string>
     <string name="cpref_grid_extent_title">Grid extent</string>
     <string name="cpref_grid_extent_summary">Grid extent around the survey plan-view</string>
-    <string name="cpref_names_visibility_title">Names visibility</string>
+    <string name="cpref_names_visibility_title">Visible names</string>
     <string name="cpref_names_visibility_summary">Station names always visible</string>
     <string name="cpref_neg_clino_title">Below-horizon views</string>
     <string name="cpref_neg_clino_summary">Allow below-horizon viewpoints [n]</string>
