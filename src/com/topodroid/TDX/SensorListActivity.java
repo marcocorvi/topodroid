@@ -16,6 +16,7 @@ import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.help.UserManualActivity;
+import com.topodroid.prefs.TDSetting;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -113,11 +114,7 @@ public class SensorListActivity extends Activity
   {
     super.onCreate( savedInstanceState );
 
-    getWindow().getDecorView().setSystemUiVisibility( 0
-      | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-      | View.SYSTEM_UI_FLAG_FULLSCREEN                // remove the appbar
-      | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION        // as soos as it is shown it does not go away
-    );
+    getWindow().getDecorView().setSystemUiVisibility( TDSetting.mUiVisibility );
 
     TDandroid.setScreenOrientation( this );
 

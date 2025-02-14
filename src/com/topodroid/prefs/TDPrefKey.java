@@ -2147,6 +2147,7 @@ class TDPrefKey
     "CAVE3D_STATION_TOAST",
     "CAVE3D_GRID_ABOVE",
     "CAVE3D_GRID_EXTENT",
+    "DISTOX_NAMES_VISIBILITY",
     "DISTOX_DEM3D_PREF",      // FORWARD
     "DISTOX_WALLS3D_PREF",
   };
@@ -2162,6 +2163,7 @@ class TDPrefKey
     R.string.cpref_station_toast_title,
     R.string.cpref_grid_above_title,
     R.string.cpref_grid_extent_title,
+    R.string.cpref_names_visibility_title,
     R.string.cpref_dem3d,
     R.string.cpref_walls3d,
   };
@@ -2177,6 +2179,7 @@ class TDPrefKey
     R.string.cpref_station_toast_summary,
     R.string.cpref_grid_above_summary,
     R.string.cpref_grid_extent_summary,
+    R.string.cpref_names_visibility_summary,
     -1,
     -1,
   };
@@ -2191,6 +2194,7 @@ class TDPrefKey
     FALSE,
     FALSE,
     "10",
+    "2", // 0: off, 1: on, 2: android
     "",
     "",
     null,
@@ -2206,6 +2210,7 @@ class TDPrefKey
     N,
     N,
     A,
+    N,
     N,
     A,
   };
@@ -2292,6 +2297,7 @@ class TDPrefKey
 
   static String[] GEEK = {
     "DISTOX_SINGLE_BACK",    
+    "DISTOX_HIDE_NAVBAR",
     "DISTOX_PALETTES",
     // "DISTOX_BACKUPS_CLEAR", // CLEAR_BACKUPS
     "DISTOX_MKEYBOARD",     // whether to use TopoDroid keypads
@@ -2312,6 +2318,7 @@ class TDPrefKey
 
   static int[] GEEKtitle = {
     R.string.pref_single_back_title,
+    R.string.pref_hide_navbar_title,
     R.string.pref_palettes_title,
     // R.string.pref_backups_clear_title, // CLEAR_BACKUPS
     R.string.pref_mkeyboard_title,        // 2 MKEYBOARD
@@ -2332,6 +2339,7 @@ class TDPrefKey
 
   static int[] GEEKdesc = {
     R.string.pref_single_back_summary,
+    R.string.pref_hide_navbar_summary,
     R.string.pref_palettes_summary,
     // R.string.pref_backups_clear_summary, // CLEAR_BACKUPS
     R.string.pref_mkeyboard_summary,
@@ -2353,6 +2361,7 @@ class TDPrefKey
   static String[] GEEKdef = {
     FALSE,
     FALSE,
+    FALSE,
     // FALSE, // CLEAR_BACKUPS
     FALSE,           // CUSTOM KEYBOARD
     TRUE,            // NO CURSOR
@@ -2371,6 +2380,7 @@ class TDPrefKey
   };
   static int[] GEEKlvl = {
     A,
+    N,
     T,
     // T,
     T,

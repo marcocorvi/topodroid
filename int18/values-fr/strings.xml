@@ -1404,6 +1404,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_orientation_summary">Orientation de l\'écran de l\'application</string>
     <string name="pref_single_back_title">Simple retour arrière</string>
     <string name="pref_single_back_summary">Fermer la fenêtre avec un seul retour arrière</string>
+  <!-- TODO string name="pref_hide_navbar_title">Navigation bar</string -->
+  <!-- TODO string name="pref_hide_navbar_summary">Hidden. Shown sliding up</string -->
 
     <string name="pref_raw_data_title">Données brutes</string>
     <string name="pref_raw_data_summary">Afficher les données brutes</string>
@@ -2262,6 +2264,8 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <string name="cpref_grid_above_summary">Placer la grille dans la partie supérieure</string>
     <string name="cpref_grid_extent_title">Étendue grille</string>
     <string name="cpref_grid_extent_summary">Étendue de la grille autour du plan du relevé</string>
+    <!-- TODO string name="cpref_names_visibility_title">Names visibility</string -->
+    <!-- TODO string name="cpref_names_visibility_summary">Station names always visible</string -->
     <string name="cpref_neg_clino_title">Vue sous horizon</string>
     <string name="cpref_neg_clino_summary">Permettre point de vue sous l\'horizon</string>
     <string name="cpref_dem_buffer_title">Tampon MNE</string>

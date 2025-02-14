@@ -15,7 +15,7 @@ import com.topodroid.utils.CWDfolder;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDTag;
 // import com.topodroid.utils.TDFile;
-// import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.TDSetting;
 import com.topodroid.help.UserManualActivity;
 
 // import java.io.File;
@@ -186,11 +186,7 @@ public class CWDActivity extends Activity
   {
     super.onCreate( b );
 
-    getWindow().getDecorView().setSystemUiVisibility( 0
-      | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-      | View.SYSTEM_UI_FLAG_FULLSCREEN                // remove the appbar
-      | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION        // as soos as it is shown it does not go away
-    );
+    getWindow().getDecorView().setSystemUiVisibility( TDSetting.mUiVisibility );
 
     TDandroid.setScreenOrientation( this );
 

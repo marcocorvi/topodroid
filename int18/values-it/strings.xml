@@ -1420,6 +1420,8 @@
   <string name="pref_orientation_summary">Orientazione display</string>
   <string name="pref_single_back_title">Indietro singolo</string>
   <string name="pref_single_back_summary">Chiudi window con indietro singolo</string>
+  <!-- TODO string name="pref_hide_navbar_title">Navigation bar</string -->
+  <!-- TODO string name="pref_hide_navbar_summary">Hidden. Shown sliding up</string -->
 
   <string name="pref_raw_data_title">Dati grezzi</string>
   <string name="pref_raw_data_summary">Mostra dati grezzi</string>
@@ -2324,6 +2326,8 @@
     <string name="cpref_grid_above_summary">Griglia superiore</string>
     <string name="cpref_grid_extent_title">Estensione griglia</string>
     <string name="cpref_grid_extent_summary">Estensione griglia attorno al rilievo</string>
+    <!-- TODO string name="cpref_names_visibility_title">Names visibility</string -->
+    <!-- TODO string name="cpref_names_visibility_summary">Station names always visible</string -->
     <string name="cpref_neg_clino_title">Viste sotto l\'orizzonte</string>
     <string name="cpref_neg_clino_summary">Permette punti di vista sotto l\'orizzonte</string>
     <string name="cpref_dem_buffer_title">buffer del DEM</string>

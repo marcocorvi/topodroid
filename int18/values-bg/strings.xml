@@ -1411,6 +1411,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
   <string name="pref_orientation_summary">Ориентация на екрана на приложението</string>
   <string name="pref_single_back_title">Единично докосване</string>
   <string name="pref_single_back_summary">Затвори прозорците с единично докосване</string>
+  <!-- TODO string name="pref_hide_navbar_title">Navigation bar</string -->
+  <!-- TODO string name="pref_hide_navbar_summary">Hidden. Shown sliding up</string -->
 
   <string name="pref_raw_data_title">Необработени данни</string>
   <string name="pref_raw_data_summary">Покажи необработени данни за калибриране</string>
@@ -2303,6 +2305,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="cpref_grid_above_summary">Решетката е отгоре вместо отдолу [n]</string>
     <string name="cpref_grid_extent_title">Разширение на решетката</string>
     <string name="cpref_grid_extent_summary">Разширение на решетката отвъд плана на картировката</string>
+    <!-- TODO string name="cpref_names_visibility_title">Names visibility</string -->
+    <!-- TODO string name="cpref_names_visibility_summary">Station names always visible</string -->
     <string name="cpref_neg_clino_title">Изгледи под хоризонта</string>
     <string name="cpref_neg_clino_summary">Разреши гледни точки под хоризонта [n]</string>
     <string name="cpref_dem_buffer_title">Буфер за дигитален модел на височините</string>

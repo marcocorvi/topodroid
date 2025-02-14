@@ -362,11 +362,7 @@ public class TopoGL extends Activity
   {
     super.onCreate(savedInstanceState);
 
-    getWindow().getDecorView().setSystemUiVisibility( 0
-      | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-      | View.SYSTEM_UI_FLAG_FULLSCREEN                // remove the appbar
-      | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION        // as soos as it is shown it does not go away
-    );
+    getWindow().getDecorView().setSystemUiVisibility( TDSetting.mUiVisibility );
 
     // TDLog.v("on create: Not Android 10 " + NOT_ANDROID_10 + " 11 " + NOT_ANDROID_11 );
     // TDLog.v("on create");

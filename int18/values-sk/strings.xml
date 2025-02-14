@@ -1429,6 +1429,8 @@ Existujú aj ďalšie dodatočné nastavenia, ktoré sa dajú nastaviť hocikedy
   <string name="pref_orientation_summary">Orientácia obrazovky aplikácie</string>
   <string name="pref_single_back_title">Tlačidlo Späť - jedno stlačenie</string>
   <string name="pref_single_back_summary">Zatvorí okno stlačením tlačidla Späť len jeden krát (namiesto dvojkliku)</string>
+  <!-- TODO string name="pref_hide_navbar_title">Navigation bar</string -->
+  <!-- TODO string name="pref_hide_navbar_summary">Hidden. Shown sliding up</string -->
 
   <string name="pref_raw_data_title">Surové dáta</string>
   <string name="pref_raw_data_summary">Výber typu zobrazenia surových (nespracovaných) dát</string>
@@ -2308,6 +2310,8 @@ PREČÍTAJTE SI NAJSKÔR PRÍRUČKU PRED POKUSOM O UPLOAD FIRMWARU
     <string name="cpref_grid_above_summary">Zaškrtnuté = mriežka hore</string>
     <string name="cpref_grid_extent_title">Mriežka - rozsah</string>
     <string name="cpref_grid_extent_summary">Rozsah mriežky okolo Mapovania</string>
+    <!-- TODO string name="cpref_names_visibility_title">Names visibility</string -->
+    <!-- TODO string name="cpref_names_visibility_summary">Station names always visible</string -->
     <string name="cpref_neg_clino_title">Pohľady spod horizontu</string>
     <string name="cpref_neg_clino_summary">Dovoliť pohľady aj spod horizontu  [n]</string>
     <string name="cpref_dem_buffer_title">DEM buffer</string>

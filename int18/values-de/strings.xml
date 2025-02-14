@@ -1308,6 +1308,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="pref_orientation_summary">Bildschirmausrichtung fixieren oder automatisch</string>
   <string name="pref_single_back_title">Dialoge mit einfachem Zurück schliessen</string>
   <string name="pref_single_back_summary">Schliesst Dialoge mit einem einzelnen Click auf Zurück</string>
+  <!-- TODO string name="pref_hide_navbar_title">Navigation bar</string -->
+  <!-- TODO string name="pref_hide_navbar_summary">Hidden. Shown sliding up</string -->
   <string name="pref_raw_data_title">Rohdaten anzeigen</string>
   <string name="pref_raw_data_summary">Rohdaten anzeigen</string>
   <string name="pref_calib_shot_download_title">Daten herunterladen</string>
@@ -2140,6 +2142,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="cpref_grid_above_summary">Gitternetz oben statt unten anzeigen [n]</string>
   <string name="cpref_grid_extent_title">Umrahmung</string>
   <string name="cpref_grid_extent_summary">Umrahmung um den Plan anzeigen</string>
+    <!-- TODO string name="cpref_names_visibility_title">Names visibility</string -->
+    <!-- TODO string name="cpref_names_visibility_summary">Station names always visible</string -->
   <string name="cpref_neg_clino_title">Ansicht unterhalb Horizont</string>
   <string name="cpref_neg_clino_summary">Erlaube Ansichten von unterhalb des Horizonts [n]</string>
   <string name="cpref_dem_buffer_title">DEM Puffer</string>

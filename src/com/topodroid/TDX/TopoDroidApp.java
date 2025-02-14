@@ -446,6 +446,17 @@ public class TopoDroidApp extends Application
       }
     } );
   }
+
+  public static void resetUiVisibility()
+  {
+    if ( mMainActivity == null ) return;
+    mMainActivity.runOnUiThread( new Runnable() { 
+      public void run () {
+        mMainActivity.resetUiVisibility();
+      }
+    } ); 
+  }
+
    
   /** set the screen orientation
    */

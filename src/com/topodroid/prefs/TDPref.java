@@ -1719,21 +1719,22 @@ class TDPref implements AdapterView.OnItemSelectedListener
       // TDLog.v("Length " + key.length + " " + tit.length + " " + dsc.length + " " + def.length );
       return new TDPref[ ] {
         makeCbx( cat, key[0], tit[0], dsc[0],  lvl[0], def[0],  ctx, hlp ), // SINGLE_BACK
-        makeCbx( cat, key[1], tit[1], dsc[1],  lvl[1], def[1],  ctx, hlp ), // PALETTES
+        makeCbx( cat, key[1], tit[1], dsc[1],  lvl[1], def[1],  ctx, hlp ), // NAV_BAR
+        makeCbx( cat, key[2], tit[2], dsc[2],  lvl[2], def[2],  ctx, hlp ), // PALETTES
         // makeCbx( cat, key[1], tit[1], dsc[1],  lvl[1], def[1],  ctx, hlp ), // BACKUP CLEAR - CLEAR_BACKUPS
-        makeCbx( cat, key[2], tit[2], dsc[2],  lvl[2], def[2],  ctx, hlp ), // KEYBOARD
-        makeCbx( cat, key[3], tit[3], dsc[3],  lvl[3], def[3],  ctx, hlp ), // CURSOR
-        makeCbx( cat, key[4], tit[4], dsc[4],  lvl[4], def[4],  ctx, hlp ), // PACKET LOGGER
-        makeCbx( cat, key[5], tit[5], dsc[5],  lvl[5], def[5],  ctx, hlp ), // TH2EDIT
-        makeFwd( cat, key[6], tit[6],          lvl[6],          ctx, hlp ), // GEEK_SHOT
-        makeFwd( cat, key[7], tit[7],          lvl[7],          ctx, hlp ), // GEEK_SPLAY
-        makeFwd( cat, key[8], tit[8],          lvl[8],          ctx, hlp ), // GEEK_PLOT
-        makeFwd( cat, key[9], tit[9],          lvl[9],          ctx, hlp ), // GEEK_LINE
+        makeCbx( cat, key[3], tit[3], dsc[3],  lvl[3], def[3],  ctx, hlp ), // KEYBOARD
+        makeCbx( cat, key[4], tit[4], dsc[4],  lvl[4], def[4],  ctx, hlp ), // CURSOR
+        makeCbx( cat, key[5], tit[5], dsc[5],  lvl[5], def[5],  ctx, hlp ), // PACKET LOGGER
+        makeCbx( cat, key[6], tit[6], dsc[6],  lvl[6], def[6],  ctx, hlp ), // TH2EDIT
+        makeFwd( cat, key[7], tit[7],          lvl[7],          ctx, hlp ), // GEEK_SHOT
+        makeFwd( cat, key[8], tit[8],          lvl[8],          ctx, hlp ), // GEEK_SPLAY
+        makeFwd( cat, key[9], tit[9],          lvl[9],          ctx, hlp ), // GEEK_PLOT
+        makeFwd( cat, key[10], tit[10],          lvl[10],          ctx, hlp ), // GEEK_LINE
         // makeFwd( cat, key[7], tit[7],       lvl[ ],          ctx, hlp ), // PLOT_WALLS AUTOWALLS
-        makeFwd( cat, key[10], tit[10],        lvl[10],          ctx, hlp ), // GEEK_DEVICE
-        makeFwd( cat, key[11], tit[11],        lvl[11],          ctx, hlp ), // GEEK_IMPORT
-        makeFwd( cat, key[12], tit[12],        lvl[12],          ctx, hlp ), // SKETCH // FIXME_SKETCH_3D FIXME_FIXME
-        makeSpecial( cat, key[13], tit[13], dsc[13],  lvl[13], def[13],  ctx, hlp ), // WITH DEBUG
+        makeFwd( cat, key[11], tit[11],        lvl[11],          ctx, hlp ), // GEEK_DEVICE
+        makeFwd( cat, key[12], tit[12],        lvl[12],          ctx, hlp ), // GEEK_IMPORT
+        makeFwd( cat, key[13], tit[13],        lvl[13],          ctx, hlp ), // SKETCH // FIXME_SKETCH_3D FIXME_FIXME
+        makeSpecial( cat, key[14], tit[14], dsc[14],  lvl[14], def[14],  ctx, hlp ), // WITH DEBUG
       };
     } else {
       return new TDPref[ ] {
@@ -1781,8 +1782,9 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], lvl[ 6], def[ 6],            ctx, hlp ), // STATION TOAST 
       makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], lvl[ 7], def[ 7],            ctx, hlp ), // GRID ABOVE
       makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], lvl[ 8], def[ 8], INTEGER,   ctx, hlp ), // GRID SIZE
-      makeFwd( cat, key[ 9], tit[ 9],          lvl[ 9],                     ctx, hlp ), // DEM3D
-      makeFwd( cat, key[10], tit[10],          lvl[10],                     ctx, hlp )  // WALLS3D
+      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], lvl[ 9], def[ 7],            ctx, hlp ), // NAMES VISIBILITY
+      makeFwd( cat, key[10], tit[10],          lvl[10],                     ctx, hlp ), // DEM3D
+      makeFwd( cat, key[11], tit[11],          lvl[11],                     ctx, hlp )  // WALLS3D
     };
   }
 

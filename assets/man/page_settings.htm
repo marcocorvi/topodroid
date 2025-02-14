@@ -361,6 +361,7 @@
   <li><i>Station dialog</i>: show station dialog instead of box [no].</li>
   <li><i>Top grid</i>: grid over instead of below model [no].</li>
   <li><i>Grid extent</i> [10 cells]</li>
+  <li><i>Visible names</i>: whether station name are always visible even when the survey is hidden (above Android 9) [no]</li>
 </ul>
 
 <hr style="height:1px;background-color:black;">
@@ -409,12 +410,13 @@
 
 <h2 id="custom_main">Custom main</h2>
 <ul>
-  <li><i>Single back</i>: closes windows with single back</li>
-  <li><i>Palettes</i>: additional palettes menu</li>
-  <li><i>Keyboard</i>. Enable <a href="page_keypad.htm">custom keyboards</a> instead of Android default keyboard.</li>
-  <li><i>No keyboard cursor</i></li>
-  <li><i>Packets log</i></li>
-  <li><i>Sketch editing</i>: Therion th2 editing</li>
+  <li><i>Single back</i>: whether to close windows with single back [no]</li>
+  <li><i>Navigation bar</i>: whether navigation bar is hidden and it is shown with a slide-up [no]</li>
+  <li><i>Palettes</i>: additional palettes menu [no]</li>
+  <li><i>Keyboard</i>. Enable <a href="page_keypad.htm">custom keyboards</a> instead of Android default keyboard [no]</li>
+  <li><i>No keyboard cursor</i> [yes]</li>
+  <li><i>Packets log</i> [no]</li>
+  <li><i>Sketch editing</i>: Therion th2 editing [no]</li>
   <!-- li>Developer mode</li -->
 </ul>
 
@@ -444,7 +446,7 @@
 
 <h3 id="custom_splay_data">Custom Splay data</h3>
 <ul>
-  <li>Splay classes</li>
+  <li>Splay classes [no]</li>
   <li>Splay coloring: none, color-picker, color-palette [none]</li>
   <li>Splay plan-view threshold. [80&deg;]</li>
   <li>Splay dash-mode: none, by azimuth, by clino, by the view. [none]</li>
@@ -460,18 +462,18 @@
 
 <h3 id="custom_sketching">Custom Sketching</h3>
 <ul>
-  <li><i>Sketch shift/scale</i></li>
-  <li><i>Sketch split/merge</i> (split, copy, outlines, merge)</li>
+  <li><i>Sketch shift/scale</i> [no]</li>
+  <li><i>Sketch split/merge</i> (split, copy, outlines, merge) [no]</li>
   <li><i>Stylus only drawing</i>: stylus maximum size for stylus X hand touch in pixels. Zero means ignore [0]</li>
   <li><i>Backup number</i>: number of sketch file backups [5]</li>
   <li><i>Backup interval</i>: minimum interval between backups [60 s]</li>
-  <li><i>Saved station</i>: enable saved station coloring</li>
-  <li><i>Legs-only refresh</i>: only update midline on new legs</li>
-  <li><i>Affine transform</i>: enable full affine sketch transforms</li>
+  <li><i>Saved station</i>: enable saved station coloring [no]</li>
+  <li><i>Legs-only refresh</i>: only update midline on new legs [no]</li>
+  <li><i>Affine transform</i>: enable full affine sketch transforms [no]</li>
   <li><i>Layers</i>: enable canvas layers [no]</li>
   <li><i>Graph paper scale</i></li>
-  <li><i>Oblique projected</i>: maximum oblique projected angle</li>
-  <li><i>Slant x-sections</i></li>
+  <li><i>Slant x-sections</i> [no]</li>
+  <li><i>Oblique projected</i>: maximum oblique projected angle [0&deg;]</li>
   <li><i>Line ends-cut</i>: number of points to drop from the line ends when tracing stylus-only [0]</li> 
 </ul>
 
@@ -497,16 +499,18 @@
 <h3 id="custom_devices">Custom Devices</h3>
 <ul>
   <li><i>BT aliases</i>: manually set BT aliases for measurement devices.</li>
-  <li><i>Connection delay</i></li>
-  <li><i>Two-DistoX survey</i>: enable surveys with two DistoXs</li>
-  <li><i>Data pause</i>: pause after data download.</li>
-  <li><i>Data ready wait delay</i>: waiting delay for data to be ready.</li>
-  <li><i>Laser pause</i></li>
-  <li><i>Shot pause</i></li>
-  <li><i>Firmware check</i>: firmware sanity check.</li>
-  <li><i>BRIC mode</i>: BRIC data download mode. {Prim. only, All info}</li>
-  <li><i>BRIC zero shot</i>: whether to record BRIC zero-length shots.</li>
-  <li><i>SAP5 bit-16 bug</i></li>
+  <li><i>unnamed devices</i> [no] </li>
+  <li><i>Connection delay</i> [0 sec]</li>
+  <li><i>Two-DistoX survey</i>: enable surveys with two DistoXs [no]</li>
+  <li><i>Data pause</i>: pause after data download [250 msec]</li>
+  <li><i>Data ready wait delay</i>: waiting delay for data to be ready [500 msec]</li>
+  <li><i>Laser pause</i> [2000 msec]</li>
+  <li><i>Shot pause</i> [2000 msec]</li>
+  <li><i>Firmware check</i>: firmware sanity check [yes]</li>
+  <li><i>BRIC mode</i>: BRIC data download mode. {Prim. only, All info} [all]</li>
+  <li><i>BRIC zero shot</i>: whether to record BRIC zero-length shots [no]</li>
+  <li><i>BRIC index</i>: whether to use BRIC index as shot ID [no] </li>
+  <li><i>SAP5 bit-16 bug</i> [yes]</li>
 </ul>
 
 <hr style="height:1px;background-color:black;">

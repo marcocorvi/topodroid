@@ -1420,6 +1420,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_orientation_summary">App képernyő irány</string>
   <string name="pref_single_back_title">Egy vissza</string>
   <string name="pref_single_back_summary">Ablak bezárása egy vissza gombbal</string>
+  <!-- TODO string name="pref_hide_navbar_title">Navigation bar</string -->
+  <!-- TODO string name="pref_hide_navbar_summary">Hidden. Shown sliding up</string -->
 
   <string name="pref_raw_data_title">Nyers adat</string>
   <string name="pref_raw_data_summary">Mutassa a nyers adatot</string>
@@ -2331,6 +2333,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="cpref_grid_above_summary">Felső rács alsó helyett [n]</string>
     <string name="cpref_grid_extent_title">Háló kiterjedés</string>
     <string name="cpref_grid_extent_summary">Rács kiterjedése az alaprajz körül</string>
+    <!-- TODO string name="cpref_names_visibility_title">Names visibility</string -->
+    <!-- TODO string name="cpref_names_visibility_summary">Station names always visible</string -->
     <string name="cpref_neg_clino_title">Horizont alatti nézet</string>
     <string name="cpref_neg_clino_summary">A horizont alatti nézőpontok engedélyezése [n]</string>
     <string name="cpref_dem_buffer_title">DEM puffer</string>

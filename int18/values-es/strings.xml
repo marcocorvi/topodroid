@@ -1419,6 +1419,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_orientation_summary">Orientación Pantalla App </string>
   <!-- TODO string name="pref_single_back_title">Single back</string -->
   <!-- TODO string name="pref_single_back_summary">Close windows with single back</string -->
+  <!-- TODO string name="pref_hide_navbar_title">Navigation bar</string -->
+  <!-- TODO string name="pref_hide_navbar_summary">Hidden. Shown sliding up</string -->
 
   <string name="pref_raw_data_title">Datos sin procesar</string>
   <string name="pref_raw_data_summary">Mostrar datos sin procesar</string>
@@ -2362,6 +2364,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="cpref_grid_above_summary">Situar la cuadrícula en la parte superior</string>
     <string name="cpref_grid_extent_title">Extensión de cuadrícula</string>
     <string name="cpref_grid_extent_summary">Extensión de cuadrícula alrededor del relieve</string>
+    <!-- TODO string name="cpref_names_visibility_title">Names visibility</string -->
+    <!-- TODO string name="cpref_names_visibility_summary">Station names always visible</string -->
     <string name="cpref_neg_clino_title">Vista por debajo del horizonte</string>
     <string name="cpref_neg_clino_summary">Permitir punto de vista por debajo del horizonte</string>
     <string name="cpref_dem_buffer_title">buffer del DEM</string>

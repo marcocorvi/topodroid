@@ -1319,6 +1319,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_orientation_summary">Orientação da tela do aplicativo</string>
   <string name="pref_single_back_title">\u0022Voltar\u0022 único</string>
   <string name="pref_single_back_summary">fechar janelas com um único clique no botão \u0022Voltar\u0022 do dispositivo Android</string>
+  <!-- TODO string name="pref_hide_navbar_title">Navigation bar</string -->
+  <!-- TODO string name="pref_hide_navbar_summary">Hidden. Shown sliding up</string -->
   <string name="pref_raw_data_title">Dado bruto</string>
   <string name="pref_raw_data_summary">Exibir dados brutos</string>
   <string name="pref_calib_shot_download_title">Download dado remoto</string>
@@ -2161,6 +2163,8 @@ no campo abaixo e aperte o botão.
   <string name="cpref_grid_above_summary">Apresentar grade sobre o modelo</string>
   <string name="cpref_grid_extent_title">Extensão grade</string>
   <string name="cpref_grid_extent_summary">Tamanho da extensão da grade ao redor da planta baixa</string>
+    <!-- TODO string name="cpref_names_visibility_title">Names visibility</string -->
+    <!-- TODO string name="cpref_names_visibility_summary">Station names always visible</string -->
   <string name="cpref_neg_clino_title">Visão abaixo horizonte</string>
   <string name="cpref_neg_clino_summary">Permitir pontos de vista abaixo do horizonte</string>
   <string name="cpref_dem_buffer_title">Buffer DEM</string>

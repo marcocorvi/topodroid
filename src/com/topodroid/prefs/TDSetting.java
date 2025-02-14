@@ -58,6 +58,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import android.view.View;
+
 public class TDSetting
 {
   public static final int FEEDBACK_NONE = 0;
@@ -576,6 +578,8 @@ public class TDSetting
   // public static int mPickerType = PICKER_LIST;
   // public static int mRecentNr     = 4;        // nr. most recent symbols
   public static boolean mSingleBack = false; // with single back
+  // public static boolean mHideNavBar = false; // hide nav_bar
+  public static int     mUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
   public static boolean mPalettes = false;   // extra tools palettes
   // public static boolean mCompositeActions = false;
   public static boolean mWithLineJoin = false;  // with line join
@@ -963,6 +967,22 @@ public class TDSetting
 
   private static boolean bool( String bol) { return bol.equals("true"); }
 
+  private static void setHideNavBar( boolean hide_navbar )
+  {
+    // mHideNavBar = hide_navbar;
+    mUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                  | View.SYSTEM_UI_FLAG_FULLSCREEN;                // remove the appbar
+    if ( hide_navbar ) mUiVisibility |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+    // | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+    // | View.SYSTEM_UI_FLAG_FULLSCREEN                // remove the appbar
+    // | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION        // as soos as it is shown it does not go away
+    // | View.SYSTEM_UI_FLAG_IMMERSIVE
+    // | View.SYSTEM_UI_FLAG_LAYOUT_STABLE           // remove to have the layout appear under the appbar
+    // | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+    // | View.SYSTEM_UI_FLAG_LOW_PROFILE
+    TopoDroidApp.resetUiVisibility();
+  }
+
   // ---------------------------------------------------------------------------------
   //
   public static void loadPrimaryPreferences( /* TopoDroidApp my_app, */ Resources res, TDPrefHelper pref_hlp )
@@ -982,13 +1002,14 @@ public class TDSetting
     String[] keyGeek = TDPrefKey.GEEK;
     String[] defGeek = TDPrefKey.GEEKdef;
     mSingleBack = prefs.getBoolean( keyGeek[0], bool(defGeek[0]) ); // DISTOX_SINGLE_BACK
-    setPalettes(  prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ) ); // DISTOX_PALETTES
+    setHideNavBar( prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ) ); // DISTOX_HIDE_NAVBAR
+    setPalettes(  prefs.getBoolean( keyGeek[2], bool(defGeek[2]) ) ); // DISTOX_PALETTES
     // setBackupsClear( prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ) ); // DISTOX_BACKUPS_CLEAR CLEAR_BACKUPS
-    mKeyboard = prefs.getBoolean( keyGeek[2], bool(defGeek[2]) ); // DISTOX_MKEYBOARD
-    mNoCursor = prefs.getBoolean( keyGeek[3], bool(defGeek[3]) ); // DISTOX_NO_CURSOR
-    mPacketLog = prefs.getBoolean( keyGeek[4], bool(defGeek[4]) ); // DISTOX_PACKET_LOGGER
-    mTh2Edit   = prefs.getBoolean( keyGeek[5], bool(defGeek[5]) ); // DISTOX_TH2_EDIT
-    mWithDebug = TDLevel.isDebugBuild() ? prefs.getBoolean( keyGeek[13], bool(defGeek[13]) ) : false; // DISTOX_WITH_DEBUG
+    mKeyboard = prefs.getBoolean( keyGeek[3], bool(defGeek[3]) ); // DISTOX_MKEYBOARD
+    mNoCursor = prefs.getBoolean( keyGeek[4], bool(defGeek[4]) ); // DISTOX_NO_CURSOR
+    mPacketLog = prefs.getBoolean( keyGeek[5], bool(defGeek[5]) ); // DISTOX_PACKET_LOGGER
+    mTh2Edit   = prefs.getBoolean( keyGeek[6], bool(defGeek[6]) ); // DISTOX_TH2_EDIT
+    mWithDebug = TDLevel.isDebugBuild() ? prefs.getBoolean( keyGeek[14], bool(defGeek[14]) ) : false; // DISTOX_WITH_DEBUG
 
     // String[] keyGPlot = TDPrefKey.GEEKPLOT;
     // String[] defGPlot = TDPrefKey.GEEKPLOTdef;
@@ -1119,6 +1140,7 @@ public class TDSetting
     TopoGL.mStationDialog   = prefs.getBoolean( keyCave3D[6], bool(defCave3D[6]) );
     GlModel.mGridAbove      = prefs.getBoolean( keyCave3D[7], bool(defCave3D[7]) );
     GlModel.mGridExtent     = tryInt(   prefs,  keyCave3D[8], defCave3D[8] );
+    GlNames.mNamesVisible   =  prefs.getBoolean( keyCave3D[9], bool(defCave3D[9]) );
 
     String[] keyDem3D = TDPrefKey.DEM3D;
     String[] defDem3D = TDPrefKey.DEM3Ddef;
@@ -1784,6 +1806,8 @@ public class TDSetting
     } else if ( k.equals( key[8] ) ) { // CAVE3D_GRID_EXTENT
       int extent = tryIntValue( hlp, k, v, def[8] ); 
       if ( extent > 1 && extent < 100 ) GlModel.mGridExtent = extent;
+    } else if ( k.equals( key[9] ) ) { // CAVE3D_NAMES_VISIBILITY
+      GlNames.mNamesVisible = tryBooleanValue( hlp, k, v, bool(def[9]) ); 
     } else {
       TDLog.e("missing Cave3D key: " + k );
     }
@@ -1863,21 +1887,23 @@ public class TDSetting
     String[] def = TDPrefKey.GEEKdef;
     if ( k.equals( key[0] ) ) {
       mSingleBack = tryBooleanValue( hlp, k, v, bool(def[0]) ); // DISTOX_SINGLE_BACK
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_PALETTES
+    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_HIDE_NAVBAR
+      setHideNavBar( tryBooleanValue( hlp, k, v, bool(def[1]) ) );
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_PALETTES
       setPalettes( tryBooleanValue( hlp, k, v, bool(def[1]) ) );
     // } else if ( k.equals( key[1] ) ) { // CLEAR_BACKUPS
     //   setBackupsClear( tryBooleanValue( hlp, k, v, bool(def[1]) ) ); // DISTOX_BACKUPS_CLEAR
-    } else if ( k.equals( key[ 2 ] ) ) {           // DISTOX_MKEYBOARD (bool)
-      mKeyboard = tryBooleanValue( hlp, k, v, bool(def[2]) );
-    } else if ( k.equals( key[ 3 ] ) ) {           // DISTOX_NO_CURSOR(bool)
-      mNoCursor = tryBooleanValue( hlp, k, v, bool(def[3]) );
-    } else if ( k.equals( key[4] ) ) {
-      mPacketLog = tryBooleanValue( hlp, k, v, bool(def[4]) ); // DISTOX_PACKET_LOGGER
-    } else if ( k.equals( key[5] ) ) {
-      mTh2Edit = tryBooleanValue( hlp, k, v, bool(def[5]) ); // DISTOX_TH2_EDIT
+    } else if ( k.equals( key[ 3 ] ) ) {           // DISTOX_MKEYBOARD (bool)
+      mKeyboard = tryBooleanValue( hlp, k, v, bool(def[3]) );
+    } else if ( k.equals( key[ 4 ] ) ) {           // DISTOX_NO_CURSOR(bool)
+      mNoCursor = tryBooleanValue( hlp, k, v, bool(def[4]) );
+    } else if ( k.equals( key[ 5 ] ) ) {
+      mPacketLog = tryBooleanValue( hlp, k, v, bool(def[5]) ); // DISTOX_PACKET_LOGGER
+    } else if ( k.equals( key[ 6 ] ) ) {
+      mTh2Edit = tryBooleanValue( hlp, k, v, bool(def[6]) ); // DISTOX_TH2_EDIT
       mMainFlag |= FLAG_BUTTON;
-    } else if ( TDLevel.isDebugBuild() && k.equals( key[13] ) ) {
-      mWithDebug =  tryBooleanValue( hlp, k, v, bool(def[13]) ); // DISTOX_WITH_DEBUG
+    } else if ( TDLevel.isDebugBuild() && k.equals( key[14] ) ) {
+      mWithDebug =  tryBooleanValue( hlp, k, v, bool(def[14]) ); // DISTOX_WITH_DEBUG
       TDLevel.setLevelWithDebug( mWithDebug );
     } else {
       TDLog.e("missing GEEK key: " + k );

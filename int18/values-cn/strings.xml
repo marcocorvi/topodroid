@@ -1417,6 +1417,8 @@
   <string name="pref_orientation_summary">软件屏幕适应</string>
   <string name="pref_single_back_title">单次操作返回</string>
   <string name="pref_single_back_summary">单次操作返回关闭窗口</string>
+  <!-- TODO string name="pref_hide_navbar_title">Navigation bar</string -->
+  <!-- TODO string name="pref_hide_navbar_summary">Hidden. Shown sliding up</string -->
 
   <string name="pref_raw_data_title">原始数据</string>
   <string name="pref_raw_data_summary">显示原始测量数据</string>
@@ -2321,6 +2323,8 @@
     <string name="cpref_grid_above_summary">顶部网格替代底部网格 [n]</string>
     <string name="cpref_grid_extent_title">网格范围</string>
     <string name="cpref_grid_extent_summary">网格范围围绕测量平面图视图</string>
+    <!-- TODO string name="cpref_names_visibility_title">Names visibility</string -->
+    <!-- TODO string name="cpref_names_visibility_summary">Station names always visible</string -->
     <string name="cpref_neg_clino_title">地平线以下视图</string>
     <string name="cpref_neg_clino_summary">允许低于地平线的视点 [n]</string>
     <string name="cpref_dem_buffer_title">DEM 缓存</string>

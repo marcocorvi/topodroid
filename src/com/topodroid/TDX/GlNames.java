@@ -45,6 +45,8 @@ public class GlNames extends GlShape
 
   private static int stationMode = STATION_NONE;     // show_stations;
 
+  public static boolean mNamesVisible = false;
+
   private DataBuffer mDataBuffer = null;
   private DataBuffer mVisibilityBuffer = null;
   private FloatBuffer visibilityBuffer = null;
@@ -484,7 +486,7 @@ public class GlNames extends GlShape
       GL.setAttributePointer( mADelta,    nameBuffer, OFFSET_DELTA,  COORDS_PER_DELTA,  STRIDE_TEXEL );
       GL.setAttributePointer( mATexCoord, nameBuffer, OFFSET_TEXEL,  COORDS_PER_TEXEL,  STRIDE_TEXEL );
     }
-    if ( TDandroid.ABOVE_API_28 ) {
+    if ( ! mNamesVisible && TDandroid.ABOVE_API_28 ) {
       TDLog.v("GL NAMES bind data ABOVE API 28");
       if ( visibilityBuffer != null ) {
         GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY_1 );
@@ -512,7 +514,7 @@ public class GlNames extends GlShape
     if ( nameBuffer != null ) {
       GL.setAttributePointer( mADeltaHL,    nameBuffer, OFFSET_DELTA,  COORDS_PER_DELTA,  STRIDE_TEXEL );
     }
-    if ( TDandroid.ABOVE_API_28 ) {
+    if ( ! mNamesVisible && TDandroid.ABOVE_API_28 ) {
       TDLog.v("GL NAMES bind data HL ABOVE API 28");
       if ( visibilityBuffer != null ) {
         GL.setAttributePointer( mAVisible, visibilityBuffer, OFFSET_VISIBILITY, COORDS_PER_VISIBILITY, STRIDE_VISIBILITY_1 );
@@ -842,7 +844,7 @@ public class GlNames extends GlShape
 
   static void initGL( Context ctx ) 
   {
-    if ( TDandroid.ABOVE_API_28 ) {
+    if ( ! mNamesVisible && TDandroid.ABOVE_API_28 ) {
       mProgram = GL.makeProgram( ctx, R.raw.name_vertex, R.raw.name_fragment );
       mProgramPos = GL.makeProgram( ctx, R.raw.name_pos_vertex, R.raw.name_pos_fragment );
       mProgramHL  = GL.makeProgram( ctx, R.raw.name_hl_vertex, R.raw.name_hl_fragment );
@@ -873,7 +875,7 @@ public class GlNames extends GlShape
   {
     mAPosition  = GL.getAttribute( program, GL.aPosition );
     mADelta     = GL.getAttribute( program, GL.aDelta );
-    if ( TDandroid.ABOVE_API_28 ) {
+    if ( ! mNamesVisible && TDandroid.ABOVE_API_28 ) {
       mAVisible   = GL.getAttribute( program, GL.aVisible );
     }
     mATexCoord  = GL.getAttribute( program, GL.aTexCoord );
@@ -896,7 +898,7 @@ public class GlNames extends GlShape
   {
     mAPositionHL  = GL.getAttribute( program, GL.aPosition );
     mADeltaHL     = GL.getAttribute( program, GL.aDelta );
-    if ( TDandroid.ABOVE_API_28 ) {
+    if ( ! mNamesVisible && TDandroid.ABOVE_API_28 ) {
       mAVisible     = GL.getAttribute( program, GL.aVisible );
     }
     mUTextSizeHL  = GL.getUniform(   program, GL.uTextSize );
