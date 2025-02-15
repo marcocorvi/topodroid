@@ -1420,8 +1420,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
   <string name="pref_orientation_summary">App képernyő irány</string>
   <string name="pref_single_back_title">Egy vissza</string>
   <string name="pref_single_back_summary">Ablak bezárása egy vissza gombbal</string>
-  <!-- TODO string name="pref_hide_navbar_title">Navigation bar</string -->
-  <!-- TODO string name="pref_hide_navbar_summary">Hidden. Shown sliding up</string -->
+  <string name="pref_hide_navbar_title">Navigációs sáv</string>
+  <string name="pref_hide_navbar_summary">Rejtett. Felfelé csúsztatva látható</string>
 
   <string name="pref_raw_data_title">Nyers adat</string>
   <string name="pref_raw_data_summary">Mutassa a nyers adatot</string>
