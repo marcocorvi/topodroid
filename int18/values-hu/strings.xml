@@ -2333,7 +2333,7 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="cpref_grid_above_summary">Felső rács alsó helyett [n]</string>
     <string name="cpref_grid_extent_title">Háló kiterjedés</string>
     <string name="cpref_grid_extent_summary">Rács kiterjedése az alaprajz körül</string>
-    <string name="cpref_names_visibility_title">Nevek láthatósága</string>
+    <string name="cpref_names_visibility_title">Látható nevek</string>
     <string name="cpref_names_visibility_summary">Pont nevek mindig láthatók</string>
     <string name="cpref_neg_clino_title">Horizont alatti nézet</string>
     <string name="cpref_neg_clino_summary">A horizont alatti nézőpontok engedélyezése [n]</string>
