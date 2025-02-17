@@ -128,11 +128,11 @@ The <b>draw</b> mode has, besides the green buttons:
 <li><img src="btn_redo.png"  width="36" border="1"> <i>redo</i> puts the removed item back in the sketch, one at a time. The list of removed items is emptied when you draw something new. Point-wise editing actions may also affect the list of redo.</li>
 <li><img src="btn_tools.png" width="36" border="1"> Drawing <i>tools</i> switcher.</li>
 <li><img src="btn_splay_display_mode.png" width="36" border="1"> <i>splay</i> display mode: as segment or a point.</li>
-<li><img src="btn_cont.png"  width="36" border="1"> Line <i>join</i> (only for line and if enabled)</li>
+<li><img src="btn_cont.png"  width="36" border="1"> Line <i>join</i> (only for line)</li>
 </ul><br><p>
 The icon of the <i>tools</i> button reflects the current type of drawing tools: points, lines, or areas.<br>
-The line <i>join</i> is shown only for lines when the retracing is not active. If active a new line started and/or ended close to lines of the same group is joined to them.<br>
-The "Line-join" has no effect on lines that cannot be joined (eg. "section" line).<br><p>
+The line <i>join</i> is shown only for lines. When line-joining is active a new line started and/or ended close to lines of the same group is joined to them.<br>
+The "Line-join" has no effect on lines that cannot be joined (eg. "section" line or closed lines).<br><p>
 
 The <b>erase</b> mode has, besides the green buttons:
 <ul style="margin-top=0">
@@ -297,12 +297,14 @@ If you export the drawing in dxf with DXF version 6 do not use splines because t
 <h4>Retracing</h4>
 If the path-tracing style is not complex (Bezier or weeding), line and areas can be drawn in "retracing" mode.
 <br>
-A long tap on the <i>tools</i> button turns retracing on/off.
+A long tap on the <i>tools</i> button turns retracing on/off.<br>
 When retrace drawing is active the line/area in the respective <i>tool</i> button is white.<br>
-The retraced portion of a line/area is not transformed (Bezier spline, weeding, decimation, etc.).<br><p>
+Line retracing and line joining are mutually exclusive.<br>
+Lines of type "section" and of closed line types cannot be retraced.
+<br><p>
 
-To retrace a portion of a line, trace a line that starts and or ends close to the line.
-Lines of type "section" cannot be retraced.
+To retrace a portion of a line, trace a line that starts and or ends close to the line.<br>
+The retraced portion of a line/area is not transformed (Bezier spline, weeding, decimation, etc.).
 <br><p>
 
 Areas can be "retraced" by tracing a line that starts and ends close to the border af the area.
