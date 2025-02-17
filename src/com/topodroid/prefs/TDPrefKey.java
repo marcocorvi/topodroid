@@ -1489,7 +1489,7 @@ class TDPrefKey
     "DISTOX_ARROW_LENGTH",    // 3 // length of the tick at the first line-point (when applicable)
     "DISTOX_AUTO_SECTION_PT",      // whether to add section point when tracing a section line
     // "DISTOX_LINE_CONTINUE",   // 6 // default line continuation set
-    "DISTOX_WITH_CONTINUE_LINE", 
+    // "DISTOX_WITH_CONTINUE_LINE", 
     "DISTOX_AREA_BORDER",          // area border visibility
     // "DISTOX_REDUCE_ANGLE",         // "rock" reducing lines: maximal angle
     null
@@ -1505,7 +1505,7 @@ class TDPrefKey
     R.string.pref_arrow_length_title,
     R.string.pref_auto_section_pt_title,
     // R.string.pref_linecontinue_title,
-    R.string.pref_with_continue_line_title,
+    // R.string.pref_with_continue_line_title,
     R.string.pref_area_border_title,
     // R.string.pref_reduce_angle_title, 
     -1
@@ -1521,7 +1521,7 @@ class TDPrefKey
     R.string.pref_arrow_length_message,
     R.string.pref_auto_section_pt_summary,
     // R.string.pref_linecontinue_summary,
-    R.string.pref_with_continue_line_summary,
+    // R.string.pref_with_continue_line_summary,
     R.string.pref_area_border_summary,
     // R.string.pref_reduce_angle_summary,
     -1
@@ -1537,7 +1537,7 @@ class TDPrefKey
     "8",
     TRUE,
     // TDString.ZERO,
-    FALSE,
+    // FALSE,
     TRUE,
     // "45",
     null
@@ -1552,7 +1552,7 @@ class TDPrefKey
     A,
     A,
     // E,
-    N,
+    // N,
     N,
   };
 

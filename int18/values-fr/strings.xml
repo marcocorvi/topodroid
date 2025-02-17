@@ -1783,8 +1783,8 @@ D\'autres paramètres concernent la présentation dans la fenêtre de croquis (t
     <string name="pref_path_multiselect_summary">Active le chemin de multisélection</string>
     <!-- UNUSED string name="pref_composite_actions_title">Actions multiples</string -->
     <!-- UNUSED string name="pref_composite_actions_summary">Permettre des appuis longs sur les lignes et les zones.</string -->
-    <string name="pref_with_continue_line_title">Jonction lignes</string>
-    <string name="pref_with_continue_line_summary">Activer la jonction de lignes</string>
+    <!-- UNUSED string name="pref_with_continue_line_title">Jonction lignes</string -->
+    <!-- UNUSED string name="pref_with_continue_line_summary">Activer la jonction de lignes</string -->
     <string name="pref_plane_interpolation_title">Interpolation de plan</string>
     <string name="pref_plane_interpolation_summary">Active l\'interpolation de plan</string>
     <string name="pref_plot_split_title">Croquis fractionner / fusionner</string>

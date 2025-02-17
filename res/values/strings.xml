@@ -1128,7 +1128,7 @@ There are other settings for the presentation of the sketches (icon size, label 
     <!-- UNUSED string name="help_trash">Delete sketch</string -->
     <string name="help_undo">Undo last drawing action</string>
     <string name="help_redo">Redo last drawing action</string>
-    <string name="help_symbol_plot">Select the active drawing tool</string>
+    <string name="help_symbol_plot">Select the drawing toolset</string>
     <string name="help_delete_item">Delete sketch item</string>
     <string name="help_section_type">Sketch section type</string>
     <string name="help_section_item">Sketch section item</string>
@@ -1821,8 +1821,8 @@ There are other settings for the presentation of the sketches (icon size, label 
   <string name="pref_path_multiselect_summary">Enable path multiselection action</string>
   <!-- UNUSED string name="pref_composite_actions_title">Composite actions</string -->
   <!-- UNUSED string name="pref_composite_actions_summary">Enable line/area long-tap actions</string -->
-  <string name="pref_with_continue_line_title">Line join</string>
-  <string name="pref_with_continue_line_summary">Enable line join</string>
+  <!-- UNUSED string name="pref_with_continue_line_title">Line join</string -->
+  <!-- UNUSED string name="pref_with_continue_line_summary">Enable line join</string -->
   <string name="pref_plane_interpolation_title">Plane fitting</string>
   <string name="pref_plane_interpolation_summary">Enable plane fitting of splays</string>
   <string name="pref_plot_split_title">Sketch split/merge</string>

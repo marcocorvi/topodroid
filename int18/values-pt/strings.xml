@@ -1688,8 +1688,8 @@ no campo abaixo e aperte o botão.
   <string name="pref_path_multiselect_summary">Disponibilizar opção de seleção/edição de vários objetos do mesmo tipo (área ou linha) dentre as opões do botão "Ações compostas"</string>
   <!-- UNUSED string name="pref_composite_actions_title">Ações compostas</string -->
   <!-- UNUSED string name="pref_composite_actions_summary">Habilitar ações de \u0022clique longo\u0022 para linhas e áreas</string -->
-  <string name="pref_with_continue_line_title">Unir linha</string>
-  <string name="pref_with_continue_line_summary">Habilitar opção para unir linha</string>
+  <!-- UNUSED string name="pref_with_continue_line_title">Unir linha</string -->
+  <!-- UNUSED string name="pref_with_continue_line_summary">Habilitar opção para unir linha</string -->
   <string name="pref_plane_interpolation_title">Interpolar plano</string>
   <string name="pref_plane_interpolation_summary">Habilitar função de interpolação de plano que contém visadas (direção e mergulho)</string>
   <string name="pref_plot_split_title">Dividir/unir croqui</string>

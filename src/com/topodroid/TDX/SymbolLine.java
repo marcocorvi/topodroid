@@ -62,6 +62,7 @@ class SymbolLine extends Symbol
     init( name, color, 1 );
     makeLinePath();
     mLevel = level;
+    // TDLog.v("LINE-1 " + th_name + " group " + group );
   }
 
   // no effect
@@ -71,6 +72,7 @@ class SymbolLine extends Symbol
     init( name, color, width );
     makeLinePath();
     mLevel = level;
+    // TDLog.v("LINE-2 " + th_name + " group " + group );
   }
 
   SymbolLine( String name, String th_name, String group, String fname, int color, float width, PathEffect effect_dir, PathEffect effect_rev, int level, int rt )

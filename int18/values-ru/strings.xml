@@ -1792,8 +1792,8 @@
   <string name="pref_path_multiselect_summary">Одновременный выбор нескольких линий</string>
   <!-- UNUSED string name="pref_composite_actions_title">Комбинированные действия</string -->
   <!-- UNUSED string name="pref_composite_actions_summary">Включить действия по длительному тапу для линий и областей</string -->
-  <string name="pref_with_continue_line_title">Соединять линии</string>
-  <string name="pref_with_continue_line_summary">Включить соединиение линий</string>
+  <!-- UNUSED string name="pref_with_continue_line_title">Соединять линии</string -->
+  <!-- UNUSED string name="pref_with_continue_line_summary">Включить соединиение линий</string -->
   <string name="pref_plane_interpolation_title">Плоская интерполяция</string>
   <string name="pref_plane_interpolation_summary">Выполнить простую интерполяцию</string>
   <string name="pref_plot_split_title">Разделить/Склеить абрис</string>

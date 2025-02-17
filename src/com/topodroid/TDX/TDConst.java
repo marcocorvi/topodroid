@@ -227,8 +227,8 @@ public class TDConst
   public final static int SURVEY_POS_TOPO      =  6;
   public final static int SURVEY_POS_TOPOROBOT =  7;
   public final static int SURVEY_POS_VTOPO     =  8;
-  public final static int SURVEY_POS_VTOPOX    =  9;
-  public final static int SURVEY_POS_WALLS     = -9;
+  public final static int SURVEY_POS_VTOPOX    = -8;
+  public final static int SURVEY_POS_WALLS     =  9;
   public final static int SURVEY_POS_WINKARST  = 10;
   public final static int SURVEY_POS_CSV       = 11;
   public final static int SURVEY_POS_DXF       = 12;

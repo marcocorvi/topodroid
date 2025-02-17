@@ -272,6 +272,12 @@ public class BrushManager
   static boolean isLineWall( int idx )      { return mLineLib != null && idx == mLineLib.mLineWallIndex; }
   static boolean isLineWallGroup( int idx ) { return mLineLib != null && mLineLib.isWall( idx ); }
   static boolean isLineSlope( int idx )     { return mLineLib != null && idx == mLineLib.mLineSlopeIndex; }
+
+  /** check if the line type is joinable
+   * @param idx  line type index
+   */
+  static boolean isLineJoinable( int idx )  { return mLineLib != null && idx != mLineLib.mLineSectionIndex && ! mLineLib.isClosed( idx ); }
+
   static int getLineSectionIndex()          { return (mLineLib == null)? 2 : mLineLib.mLineSectionIndex; }
   static int getLineWallIndex()             { return (mLineLib == null)? 1 : mLineLib.mLineWallIndex; }
   static int getLineSlopeIndex()            { return (mLineLib == null)? -1 : mLineLib.mLineSlopeIndex; }

@@ -588,23 +588,119 @@ public class DrawingWindow extends ItemDrawer
   static final int MODE_ROTATE = 7; // selected point rotate
   static final int MODE_SPLIT = 8;  // split the plot
 
-  // // 2023-03-10 DROPPED - 2023-09-23 REINSTATED
-  // line join-continue
-  private static final int JOIN_SKIP  = -2; // skip button and variable update
-  private static final int JOIN_OFF   = -1; // continue off
-  public  static final int JOIN_NONE  = 0;  // no continue
-  // private static final int JOIN_START = 1;  // continue: join to existing line
-  // private static final int JOIN_END   = 2;  // continue: join to existing line
-  private static final int JOIN_BOTH  = 3;  // continue: join to existing line
-  // private static final int JOIN_CONTINUE  = 4;  // continue: continue existing line
-  // static final private int CONT_MAX   = 5;
-
   private int mMode         = MODE_MOVE; // MODE_NONE;
   private int mTouchMode    = MODE_MOVE;
-  private int mJoinLine = JOIN_NONE;
-  private int mJoinArea = JOIN_NONE;
-  private boolean mRetraceLine = false;
-  private boolean mRetraceArea = false;
+
+  private class DrawingState
+  {
+    // private static final int JOIN_SKIP  = -2; // skip button and variable update
+    public static final int JOIN_OFF   = -1; // continue off
+    public static final int JOIN_NONE  = 0;  // no continue
+    // private static final int JOIN_START = 1;  // continue: join to existing line
+    // private static final int JOIN_END   = 2;  // continue: join to existing line
+    public static final int JOIN_BOTH  = 3;  // continue: join to existing line
+    // private static final int JOIN_CONTINUE  = 4;  // continue: continue existing line
+    // static final private int CONT_MAX   = 5;
+
+    private int mJoinLine     = JOIN_NONE;
+    // private int mJoinSave     = JOIN_NONE;
+    // private int mJoinArea     = JOIN_NONE;
+    private boolean mRetraceLine    = false;
+    private boolean mRetraceArea    = false;
+    private boolean mCanRetraceLine = true;
+    private boolean mCanRetraceArea = true;
+    private boolean mCanJoinLine    = true;
+
+    // void debug( String msg )
+    // {
+    //   TDLog.v("DS " + msg + " R " + mRetraceLine + "/" + mRetraceArea + " [" + mCanRetraceLine + "] J " + mJoinLine + " [" + mCanJoinLine );
+    // }
+
+    void reset()
+    {
+      mJoinLine = TDLevel.overBasic ? JOIN_NONE : JOIN_OFF; 
+      // mJoinArea = JOIN_NONE;
+      mRetraceLine = false;
+      mRetraceArea = false;
+      mCanRetraceLine = true;
+      mCanRetraceArea = true;
+      mCanJoinLine    = true;
+      // debug("reset");
+    }
+
+    boolean isJoinLine()  { return mCanJoinLine && mJoinLine > 0; }
+    boolean hasJoinLine() { return mCanJoinLine && mJoinLine >= 0; }
+    // boolean isJoinLineOff(); { return mJoinLine == JOIN_OFF;  }
+    boolean isJoinLineNone() { return mJoinLine == JOIN_NONE; }
+    boolean isJoinLineBoth() { return mJoinLine == JOIN_BOTH; }
+
+    void setCanJoinLine( int line )
+    {
+      if ( line < 0 ) return;
+      mCanJoinLine = BrushManager.isLineJoinable( line );
+      // if ( mCanJoinLine ) {
+      //   // mJoinLine = mJoinSave;
+      // } else {
+      //   TDLog.v("line " + line + " cannot be joined ");
+      // }
+    }
+
+    // boolean canJoinLine(){ return mCanJoinLine; }
+
+    // void setJoinLineOff()  { mJoinLine = JOIN_OFF;  }
+    // void setJoinLineNone() { mJoinLine = JOIN_NONE; }
+    // void setJoinLineCont() { mJoinLine = JOIN_BOTH; }
+
+    void setJoinLine( int join ) 
+    { 
+      assert( join >= 0 );
+      if ( mJoinLine != JOIN_OFF ) {
+        // mJoinSave = mJoinLine;
+      }
+      if ( mCanJoinLine ) {
+        mJoinLine = join;
+      } else if ( mJoinLine != JOIN_OFF ) {
+        mJoinLine = JOIN_OFF;
+      }
+    }
+
+    // void toggleJoinLine()
+    // {
+    //   if ( mJoinLine == JOIN_NONE ) {
+    //     setJoinLine( JOIN_BOTH );
+    //   } else if ( mJoinLine == JOIN_BOTH ) {
+    //     setJoinLine( JOIN_NONE );
+    //   }
+    // }
+
+    void setRetraceLine( boolean retrace ) { mRetraceLine = retrace; }
+    void setRetraceArea( boolean retrace ) { mRetraceArea = retrace; }
+
+    boolean isRetraceLine() { return mRetraceLine; }
+    boolean isRetraceArea() { return mRetraceArea; }
+
+    void setCanRetraceLine() 
+    {
+      if ( TDLevel.overTester || ! TDSetting.isLineStyleComplex() ) {
+        mCanRetraceLine = ( mJoinLine <= 0 ); // 20250216
+      } else {
+        mCanRetraceLine = false;
+      }
+    }
+    void setCanRetraceArea()
+    {
+      mCanRetraceArea = ( TDLevel.overTester || ! TDSetting.isLineStyleComplex() );
+    }
+
+    boolean canRetraceLine() { return mCanRetraceLine; }
+    boolean canRetraceArea() { return mCanRetraceArea; }
+
+    void switchRetraceLine() { mRetraceLine = ! mRetraceLine; }
+    void switchRetraceArea() { mRetraceArea = ! mRetraceArea; }
+  };
+
+  private DrawingState mDrawingState = new DrawingState();
+
   // private float mDownX;
   // private float mDownY;
   private float mSaveX;
@@ -1260,8 +1356,8 @@ public class DrawingWindow extends ItemDrawer
       return;
     }
     super.pointSelected( k, update_recent );
-    setButtonJoinPoint();
-    // setButtonJoin();
+    setButtonJoin();
+    setButtonTool();
   }
 
   /** select a line symbol
@@ -1276,21 +1372,12 @@ public class DrawingWindow extends ItemDrawer
       return;
     }
     super.lineSelected( k, update_recent );
-    // setButtonJoin();
-    if ( TDLevel.overNormal ) { // 2023-03-10 DROPPED 2023-09-23 REINSTATED
-      if ( BrushManager.getLineGroup( mCurrentLine ) == null ) {
-        setButtonJoinLine( JOIN_OFF, false ); 
-      //   TDLog.v("line selected: mCurrentLine " + mCurrentLine + " --> NONE ");
-      } else {
-        setButtonJoinLine( mJoinLine, true ); // was JOIN_NONE
-        // TDLog.v("line selected: mCurrentLine " + mCurrentLine + " --> BOTH ");
-      }
-    } else { // not necessary
-      if ( BTN_JOIN2 < mNrButton2 ) {
-        mButton2[ BTN_JOIN2 ].setVisibility( View.GONE );
-        // TDLog.v("line selected: BTN_JOIN hide");
-      }
-    }
+    if ( ! TDLevel.overNormal ) return; // 2023-03-10 DROPPED 2023-09-23 REINSTATED
+    mDrawingState.setCanJoinLine( mCurrentLine );
+    // mDrawingState.setJoinLine( mDrawingState.getJoinLine() );
+    setButtonJoin();
+    setButtonTool();
+    // mDrawingState.debug("line select");
   }
 
   /** select a area symbol
@@ -1301,20 +1388,9 @@ public class DrawingWindow extends ItemDrawer
   public void areaSelected( int k, boolean update_recent )
   {
     super.areaSelected( k, update_recent );
-    // setButtonJoin();
-    // if ( TDLevel.overExpert ) { // 2023-03-10 DROPPED 2023-09-23 REINSTATED
-    //   if ( BrushManager.hasArea( mCurrentArea ) ) {
-    //     setButtonJoinArea( mJoinArea );
-    //   } else {
-    //     setButtonJoinArea( JOIN_OFF );
-    //   }
-    //   mButton2[ BTN_JOIN2 ].setVisibility( View.VISIBLE );
-    // } else {
-      if ( BTN_JOIN2 < mNrButton2 ) {
-        mButton2[ BTN_JOIN2 ].setVisibility( View.GONE );
-        // TDLog.v("area selected: BTN_JOIN hide");
-      }
-    // }
+    setButtonJoin();
+    setButtonTool();
+    // mDrawingState.debug("area select");
   }
 
   /** called by Drawing Shot Dialog to change shot color
@@ -1977,175 +2053,86 @@ public class DrawingWindow extends ItemDrawer
   /** set the button "continue"
    * @param join_line    type of line-join
    * @note must be called only if TDLevel.overNormal
+   * @note called only by toggleButtonContinue
    */
-  private void setButtonJoinLine( int join_line, boolean update )
+  private void setJoinLine( int join_line )
   {
-    if ( TDSetting.mWithLineJoin && BTN_JOIN2 < mNrButton2 ) {
+    if ( ! TDLevel.overNormal ) return; // should not be necessary
+    if ( BTN_JOIN2 < mNrButton2 ) { 
       if ( mSymbol == SymbolType.LINE ) {
-        if ( mRetraceLine ) {
-          mButton2[ BTN_JOIN2 ].setVisibility( View.GONE );
-          // TDLog.v("set Button Join Line BTN_JOIN hide");
-        } else if ( TDLevel.overBasic ) {
-          if ( update ) { // join_line == JOIN_OFF
-            mJoinLine = join_line;
-            if ( mJoinLine > JOIN_NONE ) mJoinLine = JOIN_BOTH; 
-          }
-          mButton2[ BTN_JOIN2 ].setVisibility( View.VISIBLE );
-          switch ( join_line ) {
-            case JOIN_NONE:
-              setButton2( BTN_JOIN2, mBMcont_none  );
-              // TDLog.v("set Button Join Line BTN_JOIN show NONE");
-              break;
-            // // 2023-03-10 DROPPED 2023-09-23 REINSTATED
-            // case JOIN_START:
-            //   setButton2( BTN_JOIN2, mBMcont_start  );
-            //   break;
-            // case JOIN_END:
-            //   setButton2( BTN_JOIN2, mBMcont_end   );
-            //   break;
-            case JOIN_BOTH:
-              setButton2( BTN_JOIN2, mBMcont_both  );
-              // TDLog.v("set Button Join Line BTN_JOIN show BOTH");
-              break;
-            // case JOIN_CONTINUE:
-            //   setButton2( BTN_JOIN2, mBMcont_continue  );
-            //   break;
-            case JOIN_OFF:
-              setButton2( BTN_JOIN2, mBMcont_off  );
-              // mButton2[ BTN_JOIN2 ].setVisibility( View.GONE );
-              // TDLog.v("set Button Join Line BTN_JOIN show GONE");
-          }
-        } else {
-          mButton2[ BTN_JOIN2 ].setVisibility( View.GONE );
-          // TDLog.v("set Button Join Line BTN_JOIN hide 2");
+        if ( ! mDrawingState.isRetraceLine() ) {
+          mDrawingState.setJoinLine( join_line );
         }
+        mDrawingState.setCanRetraceLine();
       } else {
-        // mJoinLine = JOIN_OFF;
-        mButton2[ BTN_JOIN2 ].setVisibility( View.GONE );
-        // TDLog.v("set Button Join Line BTN_JOIN hide OFF");
+        mDrawingState.setCanRetraceArea();
       }
+      setButtonJoin( );
+      setButtonTool();
     }
   }
 
-  private void setButtonJoinArea( int continue_area )
-  {
-    if ( TDSetting.mWithLineJoin && BTN_JOIN2 < mNrButton2 ) {
-      // if ( TDLevel.overExpert ) {
-      //   mJoinArea = continue_area;
-      //   if ( mJoinLine > JOIN_NONE ) mJoinLine = JOIN_CONTINUE;
-      //   if ( mSymbol == SymbolType.AREA ) {
-      //     mButton2[ BTN_JOIN2 ].setVisibility( View.VISIBLE );
-      //     setButton2( BTN_JOIN2, ( mJoinArea == JOIN_NONE )? mBMcont_none : mBMcont_continue );
-      //   } else {
-      //     mButton2[ BTN_JOIN2 ].setVisibility( View.GONE );
-      //   }
-      // } else {
-      //   mJoinArea = JOIN_OFF;
-        mButton2[ BTN_JOIN2 ].setVisibility( View.GONE );
-        // TDLog.v("setButtonJoinArea BTN_JOIN hide OFF");
-      // }
-    }
-  }
-
-  private void setButtonJoinPoint( )
+  /** set the JOIN button (2) according to the drawing style
+   *  The drawing style consists of:
+   *    mSymbol        symbol type
+   *    mRetraceLine   whether retracing a line
+   *    mRetraceArea   whether retracing an area
+   *    mJoinLine      whether joining line
+   */  
+  private void setButtonJoin( )
   {
     if ( BTN_JOIN2 < mNrButton2 ) {
-      // if ( TDLevel.overExpert ) {
-      //   mButton2[ BTN_JOIN2 ].setVisibility( View.VISIBLE );
-      //   setButton2( BTN_JOIN2, mBMcont_off );
-      // } else {
+      if ( mSymbol != SymbolType.LINE ) {
         mButton2[ BTN_JOIN2 ].setVisibility( View.GONE );
-        // TDLog.v("setButtonJoinPoint BTN_JOIN hide OFF");
-      // }
+      } else {
+        if ( ! mDrawingState.hasJoinLine() ) {
+          setButton2( BTN_JOIN2, mBMcont_off );
+        } else if ( mDrawingState.isJoinLine() ) {
+          setButton2( BTN_JOIN2, mBMcont_both );
+        } else {
+         setButton2( BTN_JOIN2, mBMcont_none );
+        }
+        mButton2[ BTN_JOIN2 ].setVisibility( View.VISIBLE );
+      }
+    }
+    // mDrawingState.debug("BTN JOIN");
+  }
+
+  /** set the TOOL button (2)
+   */
+  private void setButtonTool()
+  {
+    if ( mSymbol == SymbolType.POINT ) {
+      setButton2( BTN_TOOL, mBMtoolsPoint );
+    } else if ( mSymbol == SymbolType.LINE ) {
+      setButton2( BTN_TOOL, mDrawingState.isRetraceLine() ? mBMtoolsLineCont : mBMtoolsLine );
+    } else if ( mSymbol == SymbolType.AREA ) {
+      setButton2( BTN_TOOL, mDrawingState.isRetraceArea() ? mBMtoolsAreaCont : mBMtoolsArea );
     }
   }
 
-  // 2023-03-23 DROPPED
-  // /** set button "continue" 
-  //  * @param join_mode    type of join
-  //  * @param code         unused
-  //  * @note called by JoinClickListener
-  //  */
-  // public void setButtonJoinMode( int join_mode, int code )
-  // {
-  //   if ( TDLevel.overNormal ) {
-  //     if ( mSymbol == SymbolType.AREA ) {
-  //       setButtonJoinArea( join_mode );
-  //     } else if ( mSymbol == SymbolType.LINE ) {
-  //       setButtonJoinLine( join_mode );
-  //     } else {
-  //       setButtonJoinPoint( );
-  //     }
-  //   }
-  //   dismissPopupJoin();
-  // }
  
-  // /** update the button "continue"
-  //  */
-  // private void setButtonJoin()
-  // {
-  //   if ( TDLevel.overNormal ) {
-  //     if ( TDLevel.overExpert ) {
-  //       mButton2[ BTN_JOIN2 ].setVisibility( View.VISIBLE );
-  //       switch ( mSymbol ) {
-  //         case SymbolType.LINE:
-  //           setButton2( BTN_JOIN2, (mJoinLine == JOIN_CONTINUE)? mBMcont_continue : mBMcont_none );
-  //           break;
-  //         case SymbolType.AREA:
-  //           setButton2( BTN_JOIN2, (mJoinArea == JOIN_CONTINUE)? mBMcont_continue : mBMcont_none );
-  //           break;
-  //         default:
-  //           setButton2( BTN_JOIN2, mBMcont_off );
-  //           break;
-  //       }
-  //     } else {
-  //       mButton2[ BTN_JOIN2 ].setVisibility( View.GONE );
-  //     }
-  //   }
-  // }
-
   /** toggle the continue flag and update the button
    */
   private void toggleButtonContinue()
   {
-    if ( TDLevel.overNormal ) {
-      if ( /* TDLevel.overExpert */ ! mRetraceLine ) {
-        switch ( mSymbol ) {
-          case SymbolType.LINE:
-            if ( mJoinLine == JOIN_NONE ) {
-              if ( BrushManager.getLineGroup( mCurrentLine ) != null ) {
-                // mJoinLine = JOIN_BOTH; // was JOIN_CONTINUE;
-                setButtonJoinLine( JOIN_BOTH, true );
-              }
-            } else if ( mJoinLine == JOIN_BOTH ) {
-              // mJoinLine = JOIN_NONE;
-              setButtonJoinLine( JOIN_NONE, true );
-            }
-            // TDLog.v("Toggle Button Continue: line " + mJoinLine );
-            break;
-          // case SymbolType.AREA:
-          //   if ( mJoinArea == JOIN_NONE ) {
-          //     mJoinArea = JOIN_CONTINUE;
-          //   } else if ( mJoinArea == JOIN_CONTINUE ) {
-          //     mJoinArea = JOIN_NONE;
-          //   }
-          //   TDLog.v("Toggle Button Continue: area " + mJoinArea );
-          //   break;
-          default:
-            /* nothing */
-            break;
-        }
-      }
+    if ( ! TDLevel.overNormal ) return;
+    if ( mSymbol != SymbolType.LINE ) return;
+    if ( mDrawingState.isRetraceLine() ) return;
+    if ( mDrawingState.isJoinLineNone() ) {
+      setJoinLine( DrawingState.JOIN_BOTH );
+    } else if ( mDrawingState.isJoinLineBoth() ) {
+      setJoinLine( DrawingState.JOIN_NONE );
     }
-    // setButtonJoin();
+    // mDrawingState.debug("tog JOIN");
+    // setButtonJoin(); // already in setJoinLine
   }
 
   // /** reset the continue flags to false
   //  */
   // public void resetContinue()
   // {
-  //   mJoinLine = false;
-  //   mJoinArea = false;
+  //   mDrawingState.reset();
   //   switch ( mSymbol ) {
   //     case SymbolType.LINE: setButton2( BTN_TOOL, mBMtoolsLine ); break;
   //     case SymbolType.AREA: setButton2( BTN_TOOL, mBMtoolsArea ); break;
@@ -2154,22 +2141,25 @@ public class DrawingWindow extends ItemDrawer
 
   /** toggle the continue flag of the current symbol
    */
-  private void toggleRetrace()
+  private boolean toggleButtonRetrace()
   { 
-    switch ( mSymbol ) {
-      case SymbolType.LINE:
-        mRetraceLine = ! mRetraceLine;
-        setButton2( BTN_TOOL, mRetraceLine? mBMtoolsLineCont : mBMtoolsLine );
-        setButtonJoinLine( mJoinLine, true );
-        // TDLog.v("Toggle RETRACE: mRetraceLine -> " + mRetraceLine );
-        break; 
-      case SymbolType.AREA:
-        mRetraceArea = ! mRetraceArea;
-        setButton2( BTN_TOOL, mRetraceArea? mBMtoolsAreaCont : mBMtoolsArea );
-        // setButtonJoinArea( mJoinArea ); // not necessary
-        // TDLog.v("Toggle RETRACE: mRetraceArea -> " + mRetraceArea );
-        break; 
+    if ( mSymbol == SymbolType.LINE ) {
+      if ( mDrawingState.canRetraceLine() ) {
+        mDrawingState.switchRetraceLine();
+        // setJoinLine( mJoinLine ); 
+        setButtonJoin();
+        setButtonTool();
+        // mDrawingState.debug("tog RETRACE");
+        return true;
+      }
+    } else if ( mSymbol == SymbolType.AREA ) {
+      mDrawingState.switchRetraceArea();
+      setButtonJoin();
+      setButtonTool();
+      // mDrawingState.debug("tog RETRACE");
+      return true; 
     }
+    return false;
   }
 
   /** set button "filter"
@@ -2328,10 +2318,10 @@ public class DrawingWindow extends ItemDrawer
   {
    
     Resources res = getResources();
-    if ( ! TDSetting.mWithLineJoin && ! mTh2Edit ) {
-      // TDLog.v("not with line join");
-      mNrButton2 --;
-    }
+    // if ( ! TDSetting.mWithLineJoin && ! mTh2Edit ) { // 20250216
+    //   TDLog.v("not with line join");
+    //   mNrButton2 --;
+    // }
 
     // TDLog.v("Make Buttons 1: " + mNrButton1 + " 2: " + mNrButton2 + " 3: " + mNrButton3 + " 5: " + mNrButton5 );
 
@@ -2389,13 +2379,13 @@ public class DrawingWindow extends ItemDrawer
     mButton2[ mNrButton2 ] = mButton1[ mNrButton1 ];
 
     // 2023-03-10 DROPPED 2023-09-23 REINSTATED
-    if ( TDSetting.mWithLineJoin ) {
+    // if ( TDSetting.mWithLineJoin ) { // 20250216
       // mBMcont_continue  = MyButton.getButtonBackground( this, res, izons[IC_JOIN_CONTINUE] );
       // mBMcont_start = MyButton.getButtonBackground( this, res, izons[IC_JOIN_START] );
       // mBMcont_end   = MyButton.getButtonBackground( this, res, izons[IC_JOIN_END] );
       mBMcont_both  = MyButton.getButtonBackground( this, res, izons[IC_JOIN_BOTH] );
       mBMcont_off   = MyButton.getButtonBackground( this, res, izons[IC_JOIN_OFF] );
-    }
+    // }
 
     mBMdelete_off    = MyButton.getButtonBackground( this, res, izons[IC_DELETE_OFF] );
     mBMdelete_on     = MyButton.getButtonBackground( this, res, izons[IC_DELETE_ON] );
@@ -2657,10 +2647,7 @@ public class DrawingWindow extends ItemDrawer
     mSectionName  = null; // resetStatus
     // mLastLinePath = null;
     mShiftDrawing = false;
-    mJoinLine = JOIN_NONE; // TDSetting.mJoinLine;
-    // mJoinArea = JOIN_NONE; // TDSetting.mJoinArea; // FIXME TDSetting.mJoinArea;
-    mRetraceLine = false; 
-    mRetraceArea = false;
+    mDrawingState.reset();
     resetModified();
 
     // if ( PlotType.isLegSection( mType ) ) { 
@@ -2824,10 +2811,7 @@ public class DrawingWindow extends ItemDrawer
     mSectionName  = null; 
     // mLastLinePath = null;
     mShiftDrawing = false;
-    mJoinLine = JOIN_NONE; // TDSetting.mJoinLine;
-    // mJoinArea = JOIN_NONE; // TDSetting.mJoinArea; // FIXME TDSetting.mJoinArea;
-    mRetraceLine = false;
-    mRetraceArea = false;
+    mDrawingState.reset();
     resetModified();
     setMode( MODE_MOVE ); // this setTheTitle() as well, and clearHotPath( INVISIBLE )
     mTouchMode    = MODE_MOVE;
@@ -2932,7 +2916,7 @@ public class DrawingWindow extends ItemDrawer
     mApp.mSplayMode = mode;
     switch ( mode ) {
       case 0: 
-        TDLog.v("hide splays at FROM and at TO");
+        // TDLog.v("hide splays at FROM and at TO");
         setButton1( BTN_PLAN, (mApp.mShowSectionSplays? mBMsplayNone : mBMsplayNoneBlack) );
         if ( PlotType.isMultilegSection( mType, mTo ) ) {
           for ( String from : mFroms ) mDrawingSurface.hideStationSplays( from );
@@ -2943,7 +2927,7 @@ public class DrawingWindow extends ItemDrawer
         }
         break;
       case 1: 
-        TDLog.v("hide splays at FROM show splays at TO");
+        // TDLog.v("hide splays at FROM show splays at TO");
         setButton1( BTN_PLAN, (mApp.mShowSectionSplays? mBMsplayFront : mBMsplayFrontBlack) );
         if ( PlotType.isMultilegSection( mType, mTo ) ) {
           for ( String from : mFroms ) mDrawingSurface.hideStationSplays( from );
@@ -2954,7 +2938,7 @@ public class DrawingWindow extends ItemDrawer
         }
         break;
       case 2: 
-        TDLog.v("show splays at FROM and at TO");
+        // TDLog.v("show splays at FROM and at TO");
         setButton1( BTN_PLAN, (mApp.mShowSectionSplays? mBMsplayBoth : mBMsplayBothBlack) );
         if ( PlotType.isMultilegSection( mType, mTo ) ) {
           for ( String from : mFroms ) mDrawingSurface.showStationSplays( from );
@@ -2965,7 +2949,7 @@ public class DrawingWindow extends ItemDrawer
         }
         break;
       case 3: 
-        TDLog.v("show splays at FROM, hide splays at TO");
+        // TDLog.v("show splays at FROM, hide splays at TO");
         setButton1( BTN_PLAN, (mApp.mShowSectionSplays? mBMsplayBack : mBMsplayBackBlack) );
         if ( PlotType.isMultilegSection( mType, mTo ) ) {
           for ( String from : mFroms ) mDrawingSurface.showStationSplays( from );
@@ -3028,10 +3012,7 @@ public class DrawingWindow extends ItemDrawer
       mSectionName  = null; // resetStatus
       // mLastLinePath = null;
       mShiftDrawing = false;
-      mJoinLine = JOIN_NONE; // TDSetting.mJoinLine;
-      // mJoinArea = JOIN_NONE; // TDSetting.mJoinArea; // FIXME TDSetting.mJoinArea;
-      mRetraceLine = false;
-      mRetraceArea = false;
+      mDrawingState.reset();
       resetModified();
 
       doStart( true, -1, null );
@@ -3284,25 +3265,10 @@ public class DrawingWindow extends ItemDrawer
     // mCurrentLine  = ( BrushManager.isLineEnabled( SymbolLibrary.WALL ) )?  1 : 0;
     // mCurrentArea  = ( BrushManager.isAreaEnabled( SymbolLibrary.WATER ) )?  1 : 0;
 
-    // mJoinLine = JOIN_NONE; // TDSetting.mJoinLine; // do not reset
-    // mJoinArea = TDSetting.mJoinArea;
+    // mDrawingState.reset();
 
-    // 2023-03-10 DROPPED 2023-09-23 REINSTATED
-    if ( TDLevel.overNormal ) {
-      if ( mSymbol == SymbolType.AREA ) {
-        setButtonJoinArea( mJoinArea );
-      } else if ( mSymbol == SymbolType.LINE ) {
-        setButtonJoinLine( mJoinLine, true );
-      } else {
-        setButtonJoinPoint( );
-      }
-    } else { // not neceessary
-      if ( BTN_JOIN2 < mNrButton2 ) {
-        mButton2[ BTN_JOIN2 ].setVisibility( View.GONE );
-        // TDLog.v("do start: BTN_JOIN hide");
-      }
-    }
-    // setButtonJoin();
+    setButtonJoin();
+    setButtonTool();
 
     boolean is_section = PlotType.isAnySection( mType );
     List< DBlock > list = is_section ?  getXSectionShots( mType, mFrom, mTo ) : mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
@@ -4409,7 +4375,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private boolean tryAndJoinArea( DrawingAreaPath ap1, DrawingAreaPath ap2 )
   {
-    if ( ! mRetraceArea ) return false;
+    if ( ! mDrawingState.isRetraceArea() ) return false;
     if ( ! TDLevel.overTester && TDSetting.isLineStyleComplex() ) return false; // FIXME ONLY DEBUG
     if ( ap1 == null ) return false;
     if ( ap2 == null ) return false;
@@ -4425,8 +4391,8 @@ public class DrawingWindow extends ItemDrawer
    */
   private boolean tryAndJoinLine( DrawingLinePath lp1, DrawingLinePath lp2 )
   {
-    if ( mRetraceLine ) return tryAndRetraceLine( lp1, lp2 );
-    if ( TDSetting.mWithLineJoin && mJoinLine > JOIN_NONE ) {
+    if ( mDrawingState.isRetraceLine() ) return tryAndRetraceLine( lp1, lp2 );
+    if ( mDrawingState.isJoinLine() ) {
       // if ( tryAndContinueLine( lp1, lp2 ) ) {
       //   addLine( lp1 );
       // }
@@ -4438,7 +4404,7 @@ public class DrawingWindow extends ItemDrawer
 
   private boolean tryAndRetraceLine( DrawingLinePath lp1, DrawingLinePath lp2 )
   {
-    // if ( ! mRetraceLine ) return false;
+    // if ( ! mDrawingState.isRetraceLine() ) return false;
     if ( ! TDLevel.overTester && TDSetting.isLineStyleComplex() ) return false; // FIXME ONLY DEBUG
     if ( lp1 == null ) return false;
     if ( lp2 == null ) return false;
@@ -4457,64 +4423,30 @@ public class DrawingWindow extends ItemDrawer
    */
   private boolean tryAndContinueLine( DrawingLinePath lp1, DrawingLinePath lp2 )
   {
-    // if ( mJoinLine <= JOIN_NONE ) return true;
     if ( lp1 == null ) return false;
     if ( lp2 == null ) return true;
-    // if ( mJoinLine == JOIN_CONTINUE ) {
-    //   // TDLog.v( "Try to continue " + lp1.toString() + " " + lp2.toString() );
-    //   if ( mLastLinePath != null
-    //        && mCurrentLine == mLastLinePath.mLineType 
-    //        && mDrawingSurface.modifyLine( mLastLinePath, lp2, mZoom, mSelectSize ) ) {
-    //     // TDLog.v( "Try to join  LP2 " + lp2.toDebugString() + " FALSE" );
-    //     return false;
-    //   }
-    //   DrawingLinePath line = null;
-    //   line = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
-    //   if ( line != null && mCurrentLine == line.mLineType ) { // continue line with the current line
-    //     // TDLog.v( "Try to join  LP2 " + lp2.toDebugString() + " add to " + line.toDebugString() );
-    //     mDrawingSurface.addLineToLine( lp2, line );
-    //     return false;
-    //   }
-    // // } else if ( mJoinLine == JOIN_CONTINUE_END ) {
-    // //   DrawingLinePath line = null;
-    // //   line = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
-    // //   if ( line != null && mCurrentLine == line.mLineType ) { // continue line with the current line
-    // //     lp2.reversePath();
-    // //     mDrawingSurface.addLineToLine( lp2, line );
-    // //     return false;
-    // //   }
-    // } else {
-    //   DrawingLinePath line1 = null;
-    //   DrawingLinePath line2 = null;
-    //   if ( mJoinLine == JOIN_START || mJoinLine == JOIN_BOTH ) {
-    //     line1 = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
-    //   }
-    //   if ( mJoinLine == JOIN_END || mJoinLine == JOIN_BOTH ) {
-    //     line2 = mDrawingSurface.getLineToContinue( lp2.mLast, mCurrentLine, mZoom, mSelectSize );
-    //   }
-      DrawingLinePath line1 = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
-      DrawingLinePath line2 = mDrawingSurface.getLineToContinue( lp2.mLast, mCurrentLine, mZoom, mSelectSize );
-      if ( line1 != null ) {
-        float d1 = line1.mFirst.distance( lp1.mFirst );
-        float d2 = line1.mLast.distance( lp1.mFirst );
-        if ( d1 < d2 ) {
-          // line.reversePath();
-          lp1.moveFirstTo( line1.mFirst.x, line1.mFirst.y );
-        } else {
-          lp1.moveFirstTo( line1.mLast.x, line1.mLast.y );
-        }
+    DrawingLinePath line1 = mDrawingSurface.getLineToContinue( lp2.mFirst, mCurrentLine, mZoom, mSelectSize );
+    DrawingLinePath line2 = mDrawingSurface.getLineToContinue( lp2.mLast, mCurrentLine, mZoom, mSelectSize );
+    if ( line1 != null ) {
+      float d1 = line1.mFirst.distance( lp1.mFirst );
+      float d2 = line1.mLast.distance( lp1.mFirst );
+      if ( d1 < d2 ) {
+        // line.reversePath();
+        lp1.moveFirstTo( line1.mFirst.x, line1.mFirst.y );
+      } else {
+        lp1.moveFirstTo( line1.mLast.x, line1.mLast.y );
       }
-      if ( line2 != null ) {
-        float d1 = line2.mFirst.distance( lp1.mLast );
-        float d2 = line2.mLast.distance( lp1.mLast );
-        if ( d1 < d2 ) {
-          // line.reversePath();
-          lp1.moveLastTo( line2.mFirst.x, line2.mFirst.y );
-        } else {
-          lp1.moveLastTo( line2.mLast.x, line2.mLast.y );
-        }
+    }
+    if ( line2 != null ) {
+      float d1 = line2.mFirst.distance( lp1.mLast );
+      float d2 = line2.mLast.distance( lp1.mLast );
+      if ( d1 < d2 ) {
+        // line.reversePath();
+        lp1.moveLastTo( line2.mFirst.x, line2.mFirst.y );
+      } else {
+        lp1.moveLastTo( line2.mLast.x, line2.mLast.y );
       }
-    // }
+    }
     // TDLog.v( "Try to join  LP2 " + lp2.toDebugString() + " TRUE" );
     return true;
   }
@@ -7062,14 +6994,7 @@ public class DrawingWindow extends ItemDrawer
         updateSplays( mApp.mSplayMode );
       }
     } else if ( BTN_TOOL < mNrButton2 && b == mButton2[ BTN_TOOL ] /* && ! TDSetting.mTripleToolbar */ ) {
-      // mRecentToolsForward = ! mRecentToolsForward;
-      // rotateRecentToolset();
-
-      // this does not prevent a change of line-stype when retracing-mode is enabled
-      // however retracing has no effect if line-style is complex, except DEBUG 
-      if ( TDLevel.overTester || ( ! TDSetting.isLineStyleComplex() && ! TDSetting.mWithLineJoin ) ) {
-        toggleRetrace();
-      } else {
+      if ( ! toggleButtonRetrace() ) {
         onClick( view ); // execute rotateRecentToolset();
       }
 
@@ -7230,12 +7155,7 @@ public class DrawingWindow extends ItemDrawer
       } else if ( ( ! mTh2Edit) && k2 < mNrButton2 && b == mButton2[k2++] ) { // SPLAYS TH2EDIT
         toggleSplayMode();
       } else if ( TDLevel.overNormal && k2 < mNrButton2 && b == mButton2[k2++] ) { //  CONT continuation popup menu
-        if ( ( mSymbol == SymbolType.LINE && ! mRetraceLine /* && BrushManager.getLineGroup( mCurrentLine ) != null */ )
-          // || ( mSymbol == SymbolType.AREA /* && BrushManager.hasArea( mCurrentArea ) */ ) 
-          ) {
-          // makePopupJoin( b, Drawing.mJoinModes, 5, 0, dismiss ); // 2023-03-10 DROPPED
-          toggleButtonContinue(); // 2023-09-23 REINSTATED
-        }
+        toggleButtonContinue(); 
       }
 
     } else if ( mMode == MODE_ERASE ) {
@@ -9275,7 +9195,7 @@ public class DrawingWindow extends ItemDrawer
           }
           Uri uri = intent.getData();   // import uri
           String filename = uri.getLastPathSegment();
-          TDLog.v( "DRAW URI to import: " + uri.toString() + " filename <" + filename + ">" );
+          // TDLog.v( "DRAW URI to import: " + uri.toString() + " filename <" + filename + ">" );
           // int ros = filename.indexOf(":"); // drop the "content" header
           // if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
           int qos_1 = filename.lastIndexOf("/") + 1;
@@ -9286,7 +9206,7 @@ public class DrawingWindow extends ItemDrawer
           // TDLog.v( "DRAW import fullname " + mFullName3 );
           String type = TDPath.checkDrawEditType( ext );
           if ( type != null ) {
-            TDLog.v( "DRAW import reader type <" + type + "> filename " + mFullName3 );
+            // TDLog.v( "DRAW import reader type <" + type + "> filename " + mFullName3 );
             if ( type.equals(".th2") || type.equals(".tdr") ) { // N.B. type is extension with '.'
               mDrawingSurface.clearDrawing();
               if ( ! importReader( uri, type ) ) {
@@ -9688,36 +9608,20 @@ public class DrawingWindow extends ItemDrawer
   void rotateRecentToolset( )
   { 
     // TDLog.v("rotate recent toolset");
-    // if ( mRecentToolsForward ) {
-      if ( mRecentTools == mRecentPoint ) {
-        mRecentTools = mRecentLine;
-        mRecentDimX  = 
-        mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimxp ) );
-      } else if ( mRecentTools == mRecentLine ) {
-        mRecentTools = mRecentArea;
-        mRecentDimX  = Float.parseFloat( getResources().getString( R.string.dimxl ) );
-        mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimyl ) );
-      } else if ( mRecentTools == mRecentArea ) {
-        mRecentTools = mRecentPoint;
-        // mRecentDimX  = Float.parseFloat( getResources().getString( R.string.dimxl ) );
-        // mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimyl ) );
-      }
-    // } else {
-    //   if ( mRecentTools == mRecentPoint ) {
-    //     mRecentTools = mRecentArea;
-    //     // mRecentDimX  = Float.parseFloat( getResources().getString( R.string.dimxl ) );
-    //     // mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimyl ) );
-    //   } else if ( mRecentTools == mRecentLine ) {
-    //     mRecentTools = mRecentPoint;
-    //     mRecentDimX  = Float.parseFloat( getResources().getString( R.string.dimxl ) );
-    //     mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimyl ) );
-    //   } else if ( mRecentTools == mRecentArea ) {
-    //     mRecentTools = mRecentLine;
-    //     mRecentDimX  = 
-    //     mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimxp ) );
-    //   }
-    // }
-    // setBtnRecent( Symbol.??? );
+    // mDrawingState.debug("rotate");
+    if ( mRecentTools == mRecentPoint ) {
+      mRecentTools = mRecentLine;
+      mRecentDimX  = 
+      mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimxp ) );
+    } else if ( mRecentTools == mRecentLine ) {
+      mRecentTools = mRecentArea;
+      mRecentDimX  = Float.parseFloat( getResources().getString( R.string.dimxl ) );
+      mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimyl ) );
+    } else if ( mRecentTools == mRecentArea ) {
+      mRecentTools = mRecentPoint;
+      // mRecentDimX  = Float.parseFloat( getResources().getString( R.string.dimxl ) );
+      // mRecentDimY  = Float.parseFloat( getResources().getString( R.string.dimyl ) );
+    }
     setToolsToolbars();
   }
 
@@ -9726,48 +9630,41 @@ public class DrawingWindow extends ItemDrawer
    */
   private void setToolsToolbars()
   {
-    // TDLog.v("set tools toolbars - visible ");
-    // TDLog.v("set Tools Toolbar - triple: " + TDSetting.mTripleToolbar );
-    // if ( TDSetting.mTripleToolbar ) {
-    //   ZOOM_TRANSLATION = ZOOM_TRANSLATION_3;
-    //   mZoomView.setTranslationY( ZOOM_TRANSLATION );
-    //   mLayoutToolsP.setVisibility( View.VISIBLE );
-    //   mLayoutToolsL.setVisibility( View.VISIBLE );
-    //   mLayoutToolsA.setVisibility( View.VISIBLE );
-    // } else {
-      int k = -1;
-      // ZOOM_TRANSLATION = ZOOM_TRANSLATION_1;
-      mZoomView.setTranslationY( ZOOM_TRANSLATION );
-      if ( mRecentTools == mRecentPoint ) {
-        mLayoutToolsP.setVisibility( View.VISIBLE );
-        mLayoutToolsL.setVisibility( View.GONE );
-        mLayoutToolsA.setVisibility( View.GONE );
-        mLayoutScale.setVisibility( View.GONE );
-        k = getCurrentPointIndex();
-        pointSelected( mCurrentPoint, false );
-        setHighlight( SymbolType.POINT, k );
-        setButton2( BTN_TOOL, mBMtoolsPoint );
-      } else if ( mRecentTools == mRecentLine ) {
-        mLayoutToolsP.setVisibility( View.GONE );
-        mLayoutToolsL.setVisibility( View.VISIBLE );
-        mLayoutToolsA.setVisibility( View.GONE );
-        mLayoutScale.setVisibility( View.GONE );
-        k = getCurrentLineIndex();
-        // TDLog.v("Set tools toolbars: Current line index " + k );
-        lineSelected( mCurrentLine, false );
-        setHighlight( SymbolType.LINE, k );
-        setButton2( BTN_TOOL, mRetraceLine? mBMtoolsLineCont : mBMtoolsLine );
-      } else {
-        mLayoutToolsP.setVisibility( View.GONE );
-        mLayoutToolsL.setVisibility( View.GONE );
-        mLayoutToolsA.setVisibility( View.VISIBLE );
-        mLayoutScale.setVisibility( View.GONE );
-        k = getCurrentAreaIndex();
-        areaSelected( mCurrentArea, false );
-        setHighlight( SymbolType.AREA, k );
-        setButton2( BTN_TOOL, mRetraceArea? mBMtoolsAreaCont : mBMtoolsArea );
-      }
-    // }
+    // TDLog.v("set tools toolbars - visible P " + mCurrentPoint + " L " + mCurrentLine + " A " + mCurrentArea );
+    int k = -1;
+    // ZOOM_TRANSLATION = ZOOM_TRANSLATION_1;
+    mZoomView.setTranslationY( ZOOM_TRANSLATION );
+    if ( mRecentTools == mRecentPoint ) {
+      mLayoutToolsP.setVisibility( View.VISIBLE );
+      mLayoutToolsL.setVisibility( View.GONE );
+      mLayoutToolsA.setVisibility( View.GONE );
+      mLayoutScale.setVisibility( View.GONE );
+      k = getCurrentPointIndex();
+      // TDLog.v("Set tools toolbars: Current point index " + k );
+      pointSelected( mCurrentPoint, false );
+      setHighlight( SymbolType.POINT, k );
+      setButton2( BTN_TOOL, mBMtoolsPoint );
+    } else if ( mRecentTools == mRecentLine ) {
+      mLayoutToolsP.setVisibility( View.GONE );
+      mLayoutToolsL.setVisibility( View.VISIBLE );
+      mLayoutToolsA.setVisibility( View.GONE );
+      mLayoutScale.setVisibility( View.GONE );
+      k = getCurrentLineIndex();
+      // TDLog.v("Set tools toolbars: Current line index " + k );
+      lineSelected( mCurrentLine, false );
+      setHighlight( SymbolType.LINE, k );
+      setButton2( BTN_TOOL, mDrawingState.isRetraceLine() ? mBMtoolsLineCont : mBMtoolsLine );
+    } else {
+      mLayoutToolsP.setVisibility( View.GONE );
+      mLayoutToolsL.setVisibility( View.GONE );
+      mLayoutToolsA.setVisibility( View.VISIBLE );
+      mLayoutScale.setVisibility( View.GONE );
+      k = getCurrentAreaIndex();
+      // TDLog.v("Set tools toolbars: Current area index " + k );
+      areaSelected( mCurrentArea, false );
+      setHighlight( SymbolType.AREA, k );
+      setButton2( BTN_TOOL, mDrawingState.isRetraceArea() ? mBMtoolsAreaCont : mBMtoolsArea );
+    }
     mLayoutTools.invalidate();
   }
 
@@ -10007,7 +9904,7 @@ public class DrawingWindow extends ItemDrawer
     int current = BrushManager.getLineIndex( mRecentLine[k] );
     if ( current < 0 ) return false;
     if ( forbidLineSection( current ) ) return false;
-    // TDLog.v("AGE set line " + k + " update " + update_recent + " current " + current );
+    // TDLog.v("set line " + k + " update " + update_recent + " current " + current );
     mCurrentLine = current;
     lineSelected( current, update_recent );
     updateAge( k, mRecentLineAge );

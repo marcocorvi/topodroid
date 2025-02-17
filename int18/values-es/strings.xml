@@ -1807,8 +1807,8 @@ debe ajustarlos a sus necesidades./n/n </string>
   <string name="pref_path_multiselect_summary">Acción de multiselección de ruta</string>
   <!-- UNUSED string name="pref_composite_actions_title">Acciones compuestas</string -->
   <!-- UNUSED string name="pref_composite_actions_summary">Habilitar acciones de toque prolongado por línea/área</string -->
-  <string name="pref_with_continue_line_title">unión de línea</string>
-  <string name="pref_with_continue_line_summary">Habilitar unión de línea</string>
+  <!-- UNUSED string name="pref_with_continue_line_title">unión de línea</string -->
+  <!-- UNUSED string name="pref_with_continue_line_summary">Habilitar unión de línea</string -->
   <string name="pref_plane_interpolation_title">Interpolación plana</string>
   <string name="pref_plane_interpolation_summary">Acción de interpolación plana</string>
   <string name="pref_plot_split_title">Dibujar dividir/fusionar</string>

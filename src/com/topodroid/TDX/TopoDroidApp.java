@@ -3234,7 +3234,7 @@ public class TopoDroidApp extends Application
    */
   boolean doExportDataAsync( Context context, ExportInfo export_info, boolean toast )
   {
-    TDLog.v( "APP async-export - index " + export_info.index );
+    // TDLog.v( "APP async-export - index " + export_info.index + " name " + export_info.name );
     if ( export_info.index < 0 ) return false; // extra safety
     if ( export_info.index == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
       while ( ! TopoDroidApp.mEnableZip ) Thread.yield();
@@ -3246,8 +3246,8 @@ public class TopoDroidApp extends Application
       String filename = export_info.name;
       SurveyInfo survey_info = getSurveyInfo( );
       if ( survey_info == null ) return false;
-      // TDLog.v( "APP async-export survey " + TDInstance.survey + " Index " + export_info.index );
       String format = context.getResources().getString(R.string.saved_file_1);
+      // TDLog.v( "APP async-export survey " + TDInstance.survey + " Index " + export_info.index + " format " + format + " filename " + filename );
       Uri uri = Uri.fromFile( new File( TDPath.getOutFile( filename ) ) );
       if ( uri != null ) {
         // TDLog.v("EXPORT " + filename + " info " + export_info.index + " " + export_info.name );

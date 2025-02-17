@@ -202,8 +202,8 @@ public class ExportDialogShot extends MyDialog
   {
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
-      // TDLog.v("Survey format selected " + mSelected + " " + TDConst.mSurveyExportIndex[ mSelectedPos ] );
       if ( ! setOptions() ) return;
+      // TDLog.v("Survey format selected " + mSelected + " " + TDConst.mSurveyExportIndex[ mSelectedPos ] + " export name " + mExportName );
       int selected_pos = ( mSelectedPos == TDConst.SURVEY_POS_VTOPO && TDSetting.mVTopoTrox )? -mSelectedPos : mSelectedPos;
       if ( mExportName != null ) {
         mParent.doExport( mSelected, mExportName, mExportPrefix, mExportFirst, false ); // second = false

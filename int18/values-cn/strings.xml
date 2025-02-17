@@ -1795,8 +1795,8 @@
   <string name="pref_path_multiselect_summary">启用路径的多个选项操作</string>
   <!-- UNUSED string name="pref_composite_actions_title">合并操作</string -->
   <!-- UNUSED string name="pref_composite_actions_summary">启用 线/面 长按操作</string -->
-  <string name="pref_with_continue_line_title">线加入</string>
-  <string name="pref_with_continue_line_summary">允许线加入</string>
+  <!-- UNUSED string name="pref_with_continue_line_title">线加入</string -->
+  <!-- UNUSED string name="pref_with_continue_line_summary">允许线加入</string -->
   <string name="pref_plane_interpolation_title">平面插值</string>
   <string name="pref_plane_interpolation_summary">启用平面插值操作</string>
   <string name="pref_plot_split_title">草图分割/合并</string>

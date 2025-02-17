@@ -1427,8 +1427,8 @@ class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], lvl[ 6], def[ 6], FLOAT,   ctx, hlp ),
       makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], lvl[ 7], def[ 7],          ctx, hlp ),
       // makeLst( cat, key[ 7], tit[ 7], dsc[ 7], lvl[  ], def[ 7], R.array.lineContinue, R.array.lineContinueValue, ctx, hlp ),
-      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], lvl[ 8], def[ 8],          ctx, hlp ), // WITH CONTINUE LINE
-      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], lvl[ 9], def[ 9],          ctx, hlp ),
+      // makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], lvl[ 8], def[ 8],          ctx, hlp ), // WITH CONTINUE LINE
+      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], lvl[ 8], def[ 8],          ctx, hlp ),
     };
   }
 

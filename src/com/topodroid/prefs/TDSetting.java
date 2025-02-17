@@ -582,7 +582,7 @@ public class TDSetting
   public static int     mUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
   public static boolean mPalettes = false;   // extra tools palettes
   // public static boolean mCompositeActions = false;
-  public static boolean mWithLineJoin = false;  // with line join
+  // public static boolean mWithLineJoin = false;  // with line join
   public static boolean mLegOnlyUpdate = false; // whether to update display of drawing window at every shot (not just at legs)
   public static boolean mFullAffine = false; // whether to do full affine transform or shift+scale only
   // public static boolean mLegProjection = true; // leg inclined-projection
@@ -1477,8 +1477,8 @@ public class TDSetting
     mArrowLength   = tryFloat( prefs,  keyLine[6],      defLine[6] );   // DISTOX_ARROW_LENGTH
     mAutoSectionPt = prefs.getBoolean( keyLine[7], bool(defLine[7]) );  // DISTOX_AUTO_SECTION_PT
     // mContinueLine  = tryInt(   prefs,  keyLine[7],      defLine[7] );   // DISTOX_LINE_CONTINUE
-    mWithLineJoin  = prefs.getBoolean( keyLine[8], bool(defLine[8]) );  // DISTOX_WITH_CONTINUE_LINE
-    mAreaBorder    = prefs.getBoolean( keyLine[9], bool(defLine[9]) );  // DISTOX_AREA_BORDER
+    // mWithLineJoin  = prefs.getBoolean( keyLine[8], bool(defLine[8]) );  // DISTOX_WITH_CONTINUE_LINE
+    mAreaBorder    = prefs.getBoolean( keyLine[8], bool(defLine[8]) );  // DISTOX_AREA_BORDER
 
     String[] keyPoint = TDPrefKey.POINT;
     String[] defPoint = TDPrefKey.POINTdef;
@@ -2728,10 +2728,10 @@ public class TDSetting
       mAutoSectionPt = tryBooleanValue( hlp, k, v, bool(def[7]) );
     // } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_LINE_CONTINUE (choice)
     //   mContinueLine  = tryIntValue( hlp, k, v, def[7] );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_WITH_CONTINUE_LINE (bool)
-      mWithLineJoin = tryBooleanValue(  hlp, k, v, bool(def[8]) );
-    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_AREA_BORDER (bool)
-      mAreaBorder = tryBooleanValue( hlp, k, v, bool(def[9]) );
+    // } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_WITH_CONTINUE_LINE (bool)
+    //   mWithLineJoin = tryBooleanValue(  hlp, k, v, bool(def[8]) );
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_AREA_BORDER (bool)
+      mAreaBorder = tryBooleanValue( hlp, k, v, bool(def[8]) );
     } else {
       TDLog.e("missing LINE key: " + k );
     }
