@@ -158,7 +158,7 @@
     <string name="calib_roll">Разница разворота.: %1$.2f &#xb0;</string>
     <string name="calib_reset">Сбросить калибровку DistoX ?</string>
     <string name="calib_min_error">Минимальная ошибка</string>
-    <!-- TODO string name="calib_delta_dir">Dir. diff.: %1$.2f ± %2$.2f (max %3$.2f)</string -->
+    <string name="calib_delta_dir">Разн. напр.: %1$.2f ± %2$.2f (max %3$.2f)</string>
     <string name="magn_dip">Магн. наклон &#8230;</string>
     <string name="auto_calib">Авто калибровка</string>
     <string name="autocalib_not_supported">Необходимый расчет калибровки</string>
@@ -960,7 +960,7 @@
     <string name="hint_bt_code">Код устройства</string>
     <string name="bt_alias_missing">BT псевдоним отсутствует</string>
     <string name="bt_code_missing">>Код устройства отсутствует</string>
-    <!-- TODO string name="bt_alias_delete">Remove bluetooth alias?</string -->
+    <string name="bt_alias_delete">Удалить псевдоним Bluetooth?</string>
 
     <string name="hint_cellsize">размер ячейки</string>
     <string name="hint_cwd">рабочая папка</string>
@@ -1243,7 +1243,7 @@
     <!-- UNUSED string name="title_coord">Введите координаты точки:</string -->
     <string name="title_current_station">Сохраненные пикеты</string>
     <string name="title_search">Поиск пикетов/замеров</string>
-    <!-- TODO string name="title_pref_search">Settings search</string -->
+    <string name="title_pref_search">Поиск настроек</string>
     <string name="title_gm_search">Поиск данных калибровки</string>
     <string name="title_dangling">Неприсоединенные замеры</string>
     <string name="title_device">Устройства DistoX</string>
@@ -1291,7 +1291,7 @@
     <string name="title_scraps">Абрисы в съёмке</string>
     <string name="title_scraps_outline">Контуры абриса</string>
     <!-- UNUSED string name="title_select">Выбрать</string -->
-    <!-- TODO string name="setting" >setting</string -->
+    <string name="setting" >настройка</string>
 
     <string name="title_settings_main">TopoDroid Основные настройки</string>
     <string name="title_settings_export">TopoDroid настройки импорта/экспорта</string>
@@ -1415,8 +1415,8 @@
   <string name="pref_orientation_summary">Настройки ориентации экрана приложения</string>
   <string name="pref_single_back_title">Однократное назад</string>
   <string name="pref_single_back_summary">Закрыть окна однократным нажатием кнопки назад</string>
-  <!-- TODO string name="pref_hide_navbar_title">Navigation bar</string -->
-  <!-- TODO string name="pref_hide_navbar_summary">Hidden. Shown sliding up</string -->
+  <string name="pref_hide_navbar_title">Панель навигации</string>
+  <string name="pref_hide_navbar_summary">Скрыта. Показать жестом вверх</string>
 
   <string name="pref_raw_data_title">Сырые данные</string>
   <string name="pref_raw_data_summary">Показывать сырые данные калибровочных измерений</string>
@@ -2314,8 +2314,8 @@
     <string name="cpref_grid_above_summary">Сетка сверху</string>
     <string name="cpref_grid_extent_title">Размер сетки</string>
     <string name="cpref_grid_extent_summary">Размер поля сетки вокруг съёмки</string>
-    <!-- TODO string name="cpref_names_visibility_title">Names visibility</string -->
-    <!-- TODO string name="cpref_names_visibility_summary">Station names always visible</string -->
+    <string name="cpref_names_visibility_title">Видимость пикетов</string>
+    <string name="cpref_names_visibility_summary">Номера пикетов всегда видны</string>
     <string name="cpref_neg_clino_title">Обзор снизу вверх</string>
     <string name="cpref_neg_clino_summary">Разрешить точки обзора ниже горизонта</string>
     <string name="cpref_dem_buffer_title">Буфер DEM</string>
