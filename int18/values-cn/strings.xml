@@ -2333,6 +2333,8 @@
     <string name="cpref_dem_maxsize_summary">最大单元格数 [400]</string>
     <string name="cpref_dem_reduce_title">DEM 减少</string>
     <string name="cpref_dem_reduce_summary">DEM减少模式 [shrink]</string>
+    <!-- TODO string name="cpref_texture_root_title">Texture root</string -->
+    <!-- TODO string name="cpref_texture_root_summary">Texture root pathname [/sdcard/]</string -->
     <string name="cpref_all_splay_title">所有的侧射线</string>
     <string name="cpref_all_splay_summary">是否将所有的侧射线用于洞壁 [y]</string>
     <string name="cpref_splay_use_title">侧射线使用</string>

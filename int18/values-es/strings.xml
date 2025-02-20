@@ -2375,6 +2375,8 @@ debe ajustarlos a sus necesidades./n/n </string>
     <string name="cpref_dem_maxsize_summary">Número máximo de celdas [400]</string>
     <string name="cpref_dem_reduce_title">Reducir DEM</string>
     <string name="cpref_dem_reduce_summary">Método de reducción DEM [shrink] </string>
+    <!-- TODO string name="cpref_texture_root_title">Texture root</string -->
+    <!-- TODO string name="cpref_texture_root_summary">Texture root pathname [/sdcard/]</string -->
   
     <string name="cpref_all_splay_title">Todas las tomas radiales</string>
     <string name="cpref_all_splay_summary">Todas las tomas radiales para paredes</string>

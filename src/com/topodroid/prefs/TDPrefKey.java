@@ -2219,23 +2219,28 @@ class TDPrefKey
     "CAVE3D_DEM_BUFFER",
     "CAVE3D_DEM_MAXSIZE",
     "CAVE3D_DEM_REDUCE",
+    "CAVE3D_TEXTURE_ROOT",
   };
   static int[] DEM3Dtitle = {
     R.string.cpref_dem_buffer_title,
     R.string.cpref_dem_maxsize_title,
     R.string.cpref_dem_reduce_title,
+    R.string.cpref_texture_root_title,
   };
   static int[] DEM3Ddesc = {
     R.string.cpref_dem_buffer_summary,
     R.string.cpref_dem_maxsize_summary,
     R.string.cpref_dem_reduce_summary,
+    R.string.cpref_texture_root_summary,
   };
   static String[] DEM3Ddef = {
     "200",
     "400",
-    "1"
+    "1",
+    "/sdcard/",
   };
   static int[] DEM3Dlvl = {
+    N,
     N,
     N,
     N,

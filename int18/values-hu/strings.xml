@@ -2343,6 +2343,8 @@ Android-13 esetén a TopoDroidnak az alkalmazás privát mappájában kell táro
     <string name="cpref_dem_maxsize_summary">Cellák maximális száma [400]</string>
     <string name="cpref_dem_reduce_title">DEM redukálás</string>
     <string name="cpref_dem_reduce_summary">DEM redukálás mód [ritkítás]</string>
+    <!-- TODO string name="cpref_texture_root_title">Texture root</string -->
+    <!-- TODO string name="cpref_texture_root_summary">Texture root pathname [/sdcard/]</string -->
     <string name="cpref_all_splay_title">Minden sün</string>
     <string name="cpref_all_splay_summary">Függetlenül attól, hogy a falakat használja-e [i]</string>
     <string name="cpref_splay_use_title">Sün használat</string>

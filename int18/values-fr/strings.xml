@@ -2274,6 +2274,8 @@ LISEZ L\'AIDE AVANT DE TENTER DE TÉLÉCHARGER UN MICROLOGICIEL
     <string name="cpref_dem_maxsize_summary">Nombre maximum de cellules [400]</string>
     <string name="cpref_dem_reduce_title">Réduction MNE</string>
     <string name="cpref_dem_reduce_summary">Mode de réduction du MNE [shrink]</string>
+    <!-- TODO string name="cpref_texture_root_title">Texture root</string -->
+    <!-- TODO string name="cpref_texture_root_summary">Texture root pathname [/sdcard/]</string -->
     <string name="cpref_all_splay_title">Toutes visées latérales</string> 
     <string name="cpref_all_splay_summary">Toutes visées latérales pour parois</string>
     <string name="cpref_splay_use_title">Usage visées latérales</string>

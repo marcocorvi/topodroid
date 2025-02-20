@@ -2315,6 +2315,8 @@ On Android-11+ storage access must be granted to TopoDroid.\nYou can do this wit
     <string name="cpref_dem_maxsize_summary">Максимален брой клетки [400]</string>
     <string name="cpref_dem_reduce_title">Намаляване на дигиталния модел на височините</string>
     <string name="cpref_dem_reduce_summary">Режим на намаляване на дигиталния модел на височините [свиване]</string>
+    <!-- TODO string name="cpref_texture_root_title">Texture root</string -->
+    <!-- TODO string name="cpref_texture_root_summary">Texture root pathname [/sdcard/]</string -->
     <string name="cpref_all_splay_title">Всички странични измервания</string>
     <string name="cpref_all_splay_summary">Да се използват ли всички странични измервания за стените [y]</string>
     <string name="cpref_splay_use_title">Използване на странични измервания</string>

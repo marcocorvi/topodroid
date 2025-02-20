@@ -2152,6 +2152,8 @@ Mit Android 13, TopoDroid muss seine Vermessungen und Daten im privaten Ordner u
   <string name="cpref_dem_maxsize_summary">Maximale Anzahl Zellen [400]</string>
   <string name="cpref_dem_reduce_title">DEM Reduktion</string>
   <string name="cpref_dem_reduce_summary">DEM Reduktionsmodus [Reduzieren]</string>
+    <!-- TODO string name="cpref_texture_root_title">Texture root</string -->
+    <!-- TODO string name="cpref_texture_root_summary">Texture root pathname [/sdcard/]</string -->
   <string name="cpref_all_splay_title">Alle Hilfszüge</string>
   <string name="cpref_all_splay_summary">Alle Hilfszüge verwenden für das Wandmodell [y]</string>
   <string name="cpref_splay_use_title">Verwendung Hilfszüge</string>

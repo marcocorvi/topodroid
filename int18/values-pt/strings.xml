@@ -2173,6 +2173,8 @@ no campo abaixo e aperte o botão.
   <string name="cpref_dem_maxsize_summary">Tamanho máximo da superfície DEM em cada direção</string>
   <string name="cpref_dem_reduce_title">Redução DEM</string>
   <string name="cpref_dem_reduce_summary">Modo de redução DEM</string>
+    <!-- TODO string name="cpref_texture_root_title">Texture root</string -->
+    <!-- TODO string name="cpref_texture_root_summary">Texture root pathname [/sdcard/]</string -->
   <string name="cpref_all_splay_title">Todas aux</string>
   <string name="cpref_all_splay_summary">Usar todas as medidas auxiliares na modelagem de paredes</string>
   <string name="cpref_splay_use_title">Uso aux</string>

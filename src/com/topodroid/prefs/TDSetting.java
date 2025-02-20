@@ -1147,6 +1147,7 @@ public class TDSetting
     TopoGL.mDEMbuffer   = tryFloat( prefs, keyDem3D[0], defDem3D[0] );
     TopoGL.mDEMmaxsize  = tryInt(   prefs, keyDem3D[1], defDem3D[1] );
     TopoGL.mDEMreduce   = tryInt(   prefs, keyDem3D[2], defDem3D[2] );
+    TopoGL.mTextureRoot = prefs.getString( keyDem3D[3], defDem3D[3] );
 
     String[] keyWalls3D = TDPrefKey.WALLS3D;
     String[] defWalls3D = TDPrefKey.WALLS3Ddef;
@@ -1831,6 +1832,13 @@ public class TDSetting
       int reduce = tryIntValue( hlp, k, v, def[2] ); 
       if ( reduce == 1 ) TopoGL.mDEMreduce = TopoGL.DEM_SHRINK;
       else               TopoGL.mDEMreduce = TopoGL.DEM_CUT;
+    } else if ( k.equals( key[3] ) ) {
+      if ( v == null || v.isEmpty() ) {
+        TopoGL.mTextureRoot = def[3];
+      } else {
+        TopoGL.mTextureRoot = v;
+      }
+      hlp.update( k, TopoGL.mTextureRoot );
     } else {
       TDLog.e("missing DEM-3D key: " + k );
     }

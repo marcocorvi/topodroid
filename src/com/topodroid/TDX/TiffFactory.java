@@ -1,4 +1,4 @@
-/** @file Archiver.java
+/** @file TiffFactory.java
  *
  * @author marco corvi
  * @date may 2020

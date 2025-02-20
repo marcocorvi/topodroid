@@ -54,7 +54,7 @@ import com.topodroid.ui.MyHorizontalButtonView;
 
 // import java.io.StringWriter;
 // import java.io.PrintWriter;
-// import java.io.File;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 // import java.io.FileInputStream;
@@ -1731,14 +1731,16 @@ public class TopoGL extends Activity
     String pathname = uri.getPath();
     String filename = uri.getLastPathSegment();
     // TDLog.v("Texture Path " + pathname + " file " + filename );
-    // TDLog.v("texture " + pathname + " bbox " + bounds.left + " " + bounds.bottom + "  " + bounds.right + " " + bounds.top );
+    // get the model tie-point (upper left corner), the width-height, and the pixel scale
+    
+    TDLog.v("texture " + pathname + " bbox " + bounds.left + " " + bounds.bottom + "  " + bounds.right + " " + bounds.top );
     ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
     InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
 
     mTextureName = filename;
     if ( filename.toLowerCase( Locale.getDefault() ).endsWith( ".osm" ) ) {
       loadTextureOSM( isr, pathname, bounds );
-    } else {
+    } else if ( filename.toLowerCase( Locale.getDefault() ).endsWith( ".tif" ) || filename.toLowerCase( Locale.getDefault() ).endsWith( ".tiff" )) {
       loadTextureGeotiff( isr, pathname, bounds );
     }
   }
@@ -1750,21 +1752,27 @@ public class TopoGL extends Activity
    */
   private void loadTextureGeotiff( final InputStreamReader isr, final String pathname, final RectF bounds )
   {
+    TDToast.makeLong("TIFF " + pathname );
+    String filepath = pathname.replaceFirst(".*:", mTextureRoot ); // new File( file ).getAbsolutePath();
     (new AsyncTask<String, Void, Integer>() {
       Bitmap bitmap = null;
 
       // @return: 0 ok, 1 fail, 2 no-lib
       public Integer doInBackground( String ... files ) {
         String file = files[0];
+        // String filepath = file.replaceFirst(".*:", mTextureRoot ); // new File( file ).getAbsolutePath();
+        // TDLog.v("texture [1] " + pathname );
         try { 
-          bitmap = (Bitmap)( TiffFactory.getBitmap( pathname, bounds.left, bounds.bottom, bounds.right, bounds.top ) );
+          bitmap = (Bitmap)( TiffFactory.getBitmap( filepath, bounds.left, bounds.bottom, bounds.right, bounds.top ) );
         } catch ( java.lang.UnsatisfiedLinkError e ) {
           TDLog.e( e.getMessage() );
           return 1; 
         }
-        // if ( bitmap != null ) {
-        //   // TDLog.v("texture " + file + " size " + bitmap.getWidth() + " " + bitmap.getHeight() );
-        // }
+        if ( bitmap != null ) {
+          TDLog.v("texture [2] " + filepath + " size " + bitmap.getWidth() + " " + bitmap.getHeight() );
+        } else {
+          TDLog.v("texture [3] " + filepath + " null bitmap ");
+        }
 
         return (bitmap != null)? 0 : 2;
       }
@@ -1934,6 +1942,7 @@ public class TopoGL extends Activity
   public static float mDEMbuffer  = 200;
   public static int   mDEMmaxsize = 400;
   public static int   mDEMreduce  = DEM_SHRINK;
+  public static String mTextureRoot = "/sdcard/";
   // static boolean mWallConvexHull = false;
   // static boolean mWallPowercrust = false;
   // static boolean mWallDelaunay   = false;

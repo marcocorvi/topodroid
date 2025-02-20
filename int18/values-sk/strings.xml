@@ -2320,6 +2320,8 @@ PREČÍTAJTE SI NAJSKÔR PRÍRUČKU PRED POKUSOM O UPLOAD FIRMWARU
     <string name="cpref_dem_maxsize_summary">Maximálny počet buniek [400]</string>
     <string name="cpref_dem_reduce_title">DEM redukcia</string>
     <string name="cpref_dem_reduce_summary">DEM v redukčnom móde [shrink]</string>
+    <!-- TODO string name="cpref_texture_root_title">Texture root</string -->
+    <!-- TODO string name="cpref_texture_root_summary">Texture root pathname [/sdcard/]</string -->
     <string name="cpref_all_splay_title">Všetky pomocné zámery</string>
     <string name="cpref_all_splay_summary">Použiť všetky pomocné zámery pre zobrazenie stien [y]</string>
     <string name="cpref_splay_use_title">Použitie pomocných zámer</string>

@@ -2325,6 +2325,8 @@
     <string name="cpref_dem_maxsize_summary">Максимальное число ячеек сетки [400]</string>
     <string name="cpref_dem_reduce_title">Уменьшение DEM</string>
     <string name="cpref_dem_reduce_summary">режим уменьшения DEM [сократить]</string>
+    <!-- TODO string name="cpref_texture_root_title">Texture root</string -->
+    <!-- TODO string name="cpref_texture_root_summary">Texture root pathname [/sdcard/]</string -->
   
     <string name="cpref_all_splay_title">Все сплеи</string>
     <string name="cpref_all_splay_summary">Все сплеи для стен</string>

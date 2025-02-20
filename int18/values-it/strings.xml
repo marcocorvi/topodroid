@@ -2337,6 +2337,8 @@
     <string name="cpref_dem_maxsize_summary">Numero massimo di celle [400]</string>
     <string name="cpref_dem_reduce_title">Riduci DEM</string>
     <string name="cpref_dem_reduce_summary">Metodo riduzione DEM [shrink]</string>
+    <!-- TODO string name="cpref_texture_root_title">Texture root</string -->
+    <!-- TODO string name="cpref_texture_root_summary">Texture root pathname [/sdcard/]</string -->
   
     <string name="cpref_all_splay_title">Splay per pareti</string>
     <string name="cpref_all_splay_summary">Usa tutti gli splay per le pareti</string>

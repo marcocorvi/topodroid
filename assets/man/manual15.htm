@@ -86,6 +86,7 @@ A few buttons have long-tap actions:
     <li><i>DEM buffer</i>: Extent of surface model around the survey on loading the surface model from a DEM file.</li>
     <li><i>DEM max size</i>: maximum size of surface DEM in each direction [400 cells].</li>
     <li><i>DEM reduction</i>: how to reduce the DEM if too large (subsample or clip) [subsample].</li>
+    <li><i>texture root</i>: filesystem pathname of the storage folder ["/sdcard/"].</li>
     </ul>
   </li>
   <li><u>Wall Model</u> (some settings apply to specific wall models):
@@ -227,6 +228,10 @@ is read in and portion area is extracted.]<br>
 The OSM texture (WGS84) can be loaded only for surveys and cave projects opened from TopoDroid.
 The texture displays the OSM lines.
 <br><p>
+
+<b>Note</b>. Texture GeoTiff file are read by native code, thus the storage pathname (ususlly ending with ':') needs to be
+replaced by the filesystem pathname (usually "/sdcard/"): if this is not properly specified the GeoTiff texture 
+fails to load. The GeoTiff filename with "storage" prefix is shown is a toast message.<br><p>
 
 It is possible to visualize a point (yellow dot) on the surface by entering the East/North coordinates in the CRS of the model.<br>
 

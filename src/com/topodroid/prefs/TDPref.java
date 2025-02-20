@@ -1805,7 +1805,8 @@ class TDPref implements AdapterView.OnItemSelectedListener
     return new TDPref[ ] {
       makeEdt( cat, key[0], tit[0], dsc[0], lvl[0], def[0], FLOAT,   ctx, hlp ), // CAVE3D_DEM_BUFFER
       makeEdt( cat, key[1], tit[1], dsc[1], lvl[1], def[1], INTEGER, ctx, hlp ), // CAVE3D_DEM_MAXSIZE
-      makeLst( cat, key[2], tit[2], dsc[2], lvl[2], def[2], R.array.demReduce, R.array.demReduceValue,  ctx, hlp ) // CAVE3D_DEM_REDUCE
+      makeLst( cat, key[2], tit[2], dsc[2], lvl[2], def[2], R.array.demReduce, R.array.demReduceValue,  ctx, hlp ),// CAVE3D_DEM_REDUCE
+      makeEdt( cat, key[3], tit[3], dsc[3], lvl[3], def[3], STRING,  ctx, hlp )  // CAVE3D_TEXTURE_ROOT
     };
   }
 
