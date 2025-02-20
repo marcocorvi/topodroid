@@ -40,7 +40,7 @@
          API-34 = Android 14 
     -->
     <uses-sdk
-       android:minSdkVersion="18"
+       android:minSdkVersion="21"
        android:targetSdkVersion="35"
        tools:ignore="GradleOverrides,OldTargetApi"
     />
